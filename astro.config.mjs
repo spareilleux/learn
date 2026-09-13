@@ -22,13 +22,21 @@ export default defineConfig({
 			sidebar: [
 				{ label: 'Method', translations: { fr: 'Méthode' }, slug: 'method' },
 				{
-					label: 'WSL containers',
-					items: [{ autogenerate: { directory: 'wsl-containers' } }],
-				},
-				{
-					label: 'Rust for C#/Java developers',
-					translations: { fr: 'Rust pour développeurs C#/Java' },
-					items: [{ autogenerate: { directory: 'rust-for-csharp-java' } }],
+					label: 'Software Engineering',
+					translations: { fr: 'Génie logiciel' },
+					items: [
+						{
+							label: 'WSL containers',
+							collapsed: true,
+							items: [{ autogenerate: { directory: 'wsl-containers' } }],
+						},
+						{
+							label: 'Rust for C#/Java developers',
+							translations: { fr: 'Rust pour développeurs C#/Java' },
+							collapsed: true,
+							items: [{ autogenerate: { directory: 'rust-for-csharp-java' } }],
+						},
+					],
 				},
 				{
 					label: 'Streeling University',
