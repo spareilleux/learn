@@ -25,9 +25,9 @@ enum Result<T, E> {
 
 | Situation | C# | Java | Rust |
 |---|---|---|---|
-| A value may be absent | `null`, `int?`, nullable reference types (warnings) | `null`, `Optional<T>` | `Option<T>` |
-| An operation may fail | exceptions (unchecked) | checked and unchecked exceptions | `Result<T, E>` |
-| A bug, unrecoverable | `Environment.FailFast`, unhandled exception | `Error`, unhandled exception | `panic!` |
+| A value may be absent | `null`, [`int?`](https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/nullable-value-types), [nullable reference types](https://learn.microsoft.com/dotnet/csharp/fundamentals/null-safety/nullable-reference-types) (warnings) | `null`, [`Optional<T>`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html) | `Option<T>` |
+| An operation may fail | [exceptions](https://learn.microsoft.com/dotnet/csharp/fundamentals/exceptions/) (unchecked) | [checked and unchecked exceptions](https://docs.oracle.com/javase/tutorial/essential/exceptions/runtime.html) | `Result<T, E>` |
+| A bug, unrecoverable | [`Environment.FailFast`](https://learn.microsoft.com/dotnet/api/system.environment.failfast), unhandled exception | [`Error`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Error.html), unhandled exception | [`panic!`](https://doc.rust-lang.org/std/macro.panic.html) |
 
 Because absence and failure are part of the **type**, you cannot forget them.
 
@@ -61,11 +61,11 @@ error[E0369]: cannot add `{integer}` to `Option<i32>`
     |                 Option<i32>
 ```
 
-In C#, the equivalent `NullReferenceException` would happen at runtime.
+In C#, the equivalent [`NullReferenceException`](https://learn.microsoft.com/dotnet/api/system.nullreferenceexception) would happen at runtime.
 
 ### Combinators
 
-Instead of nested `if (x != null)`, chain methods — they read like `?.` and `??`:
+Instead of nested `if (x != null)`, chain methods — they read like [`?.`](https://learn.microsoft.com/dotnet/csharp/language-reference/operators/member-access-operators#null-conditional-operators--and-) and [`??`](https://learn.microsoft.com/dotnet/csharp/language-reference/operators/null-coalescing-operator):
 
 ```rust
 let name_len = find_user(&users, 2).map(|u| u.name.len()).unwrap_or(0);
@@ -181,8 +181,8 @@ Err("`port` is not a number: invalid digit found in string")
 Ok(3000)
 ```
 
-- `ok_or` turns an `Option` into a `Result`; `map_err` converts one error type into another — like catching and wrapping an exception.
-- `Display` is the message for users, `Debug` the details for developers.
+- [`ok_or`](https://doc.rust-lang.org/std/option/enum.Option.html#method.ok_or) turns an `Option` into a `Result`; [`map_err`](https://doc.rust-lang.org/std/result/enum.Result.html#method.map_err) converts one error type into another — like catching and wrapping an exception.
+- [`Display`](https://doc.rust-lang.org/std/fmt/trait.Display.html) is the message for users, [`Debug`](https://doc.rust-lang.org/std/fmt/trait.Debug.html) the details for developers.
 - In real projects, the [`thiserror`](https://crates.io/crates/thiserror) crate generates this boilerplate for libraries, and [`anyhow`](https://crates.io/crates/anyhow) offers a catch-all error type for applications.
 
 ### `main` can return a `Result`
@@ -195,7 +195,7 @@ fn main() -> Result<(), Box<dyn Error>> {
 }
 ```
 
-`Box<dyn Error>` accepts any error type, so `?` works with different errors in the same function. If `main` returns `Err`, Rust prints it with its **`Debug`** format and exits with code 1:
+[`Box<dyn Error>`](https://doc.rust-lang.org/std/error/trait.Error.html) accepts any error type, so `?` works with different errors in the same function. If `main` returns `Err`, Rust prints it with its **`Debug`** format and exits with code 1:
 
 ```text
 Error: Missing("port")
@@ -203,7 +203,7 @@ Error: Missing("port")
 
 ## When to panic
 
-`unwrap()` and `expect("…")` extract the value or **panic**:
+[`unwrap()`](https://doc.rust-lang.org/std/result/enum.Result.html#method.unwrap) and [`expect("…")`](https://doc.rust-lang.org/std/result/enum.Result.html#method.expect) extract the value or **panic**:
 
 ```rust
 let port: u16 = "http".parse().expect("PORT must be a number");
@@ -227,7 +227,7 @@ A panic is not a `try/catch` mechanism: treat it as a bug report.
 - `Option<T>` replaces `null`; `Result<T, E>` replaces exceptions; both are ordinary enums.
 - The compiler refuses to use an `Option<T>` as a `T`, and warns when a `Result` is ignored.
 - `?` propagates `None`/`Err` to the caller — explicit, but as short as an exception.
-- Model errors with enums, convert them with `map_err`/`From`, and keep `panic!` for bugs.
+- Model errors with enums, convert them with `map_err`/[`From`](https://doc.rust-lang.org/std/convert/trait.From.html), and keep `panic!` for bugs.
 
 ## Exercises
 
@@ -297,4 +297,4 @@ assert_eq!(parse_point("3,z"), Err(String::from("bad y: invalid digit found in s
 - [The Book, ch. 9 — Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)
 - [`Option` — standard library](https://doc.rust-lang.org/std/option/enum.Option.html)
 - [`Result` — standard library](https://doc.rust-lang.org/std/result/enum.Result.html)
-- [The `?` operator — Rust Reference](https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator)
+- [The `?` operator — Rust Reference](https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-try-propagation-expression)

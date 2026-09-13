@@ -42,7 +42,7 @@ impl Shape for Square {
 | Rust | C# | Java |
 |---|---|---|
 | `trait Shape { … }` | `interface IShape { … }` | `interface Shape { … }` |
-| méthode par défaut dans le trait | méthode d'interface par défaut (C# 8) | méthode `default` (Java 8) |
+| méthode par défaut dans le trait | [méthode d'interface par défaut](https://learn.microsoft.com/dotnet/csharp/advanced-topics/interface-implementation/default-interface-methods-versions) (C# 8) | [méthode `default`](https://docs.oracle.com/javase/tutorial/java/IandI/defaultmethods.html) (Java 8) |
 | `impl Shape for Circle { … }` — un bloc séparé | `class Circle : IShape` | `class Circle implements Shape` |
 | pas d'héritage entre structs | héritage de classes | héritage de classes |
 
@@ -63,7 +63,7 @@ error[E0046]: not all trait items implemented, missing: `area`
 
 ## Génériques avec contraintes de trait
 
-Une fonction générique doit indiquer quels traits son paramètre de type implémente — l'équivalent de `where T : IShape` ou de `<T extends Shape>` :
+Une fonction générique doit indiquer quels traits son paramètre de type implémente — l'équivalent de [`where T : IShape`](https://learn.microsoft.com/dotnet/csharp/programming-guide/generics/constraints-on-type-parameters) ou de [`<T extends Shape>`](https://docs.oracle.com/javase/tutorial/java/generics/bounded.html) :
 
 ```rust
 fn total_area<T: Shape>(shapes: &[T]) -> f64 {
@@ -114,9 +114,9 @@ pear apple fig (max pear)
 
 ## Dispatch statique contre dispatch dynamique
 
-`total_area::<Circle>` et `total_area::<Square>` sont compilées comme **deux fonctions distinctes**, chacune appelant `area` directement et pouvant être inlinée. C'est ce qu'on appelle la **monomorphisation** (monomorphization).
+`total_area::<Circle>` et `total_area::<Square>` sont compilées comme **deux fonctions distinctes**, chacune appelant `area` directement et pouvant être inlinée. C'est ce qu'on appelle la [**monomorphisation**](https://doc.rust-lang.org/book/ch10-01-syntax.html#performance-of-code-using-generics) (monomorphization).
 
-Quand vous avez besoin d'une collection de types *différents*, utilisez un **objet trait** (trait object), `dyn Shape`, derrière un pointeur comme `Box` ou `&` :
+Quand vous avez besoin d'une collection de types *différents*, utilisez un [**objet trait**](https://doc.rust-lang.org/reference/types/trait-object.html) (trait object), `dyn Shape`, derrière un pointeur comme [`Box`](https://doc.rust-lang.org/std/boxed/struct.Box.html) ou `&` :
 
 ```rust
 fn largest(shapes: &[Box<dyn Shape>]) -> Option<&dyn Shape> {
@@ -136,25 +136,25 @@ let mixed: Vec<Box<dyn Shape>> = vec![Box::new(Circle { radius: 1.5 }), Box::new
 | Types mélangés dans un même `Vec` | non | oui |
 | Coût | nul à l'exécution, binaire plus gros | un appel indirect, comme un appel d'interface |
 | Analogie C# | génériques sur des `struct` (spécialisés par le JIT) | appel via `IShape` |
-| Analogie Java | — (les génériques sont effacés en casts) | appel via `Shape` |
+| Analogie Java | — (les génériques sont [effacés](https://docs.oracle.com/javase/tutorial/java/generics/erasure.html) en casts) | appel via `Shape` |
 
 Par défaut, utilisez les génériques ; recourez à `dyn Trait` quand vous avez vraiment besoin de valeurs hétérogènes ou voulez masquer le type concret. Tous les traits ne peuvent pas être utilisés avec `dyn` : un trait qui a des méthodes génériques, par exemple, n'est pas *dyn-compatible* (anciennement appelé « object-safe »).
 
 ## Les traits standard que vous implémentez
 
-Une grande partie de ce que C# place dans `System.Object` ou dans les opérateurs est un trait en Rust :
+Une grande partie de ce que C# place dans [`System.Object`](https://learn.microsoft.com/dotnet/api/system.object) ou dans les opérateurs est un trait en Rust :
 
 | Trait Rust | C# | Java | Habituellement |
 |---|---|---|---|
-| `Debug` | affichage dans le débogueur | — | `#[derive(Debug)]` |
-| `Display` | `ToString()` | `toString()` | implémenté à la main |
-| `Clone` | `ICloneable` | `clone()` | dérivé |
+| `Debug` | affichage dans le débogueur | — | [`#[derive(Debug)]`](https://doc.rust-lang.org/reference/attributes/derive.html) |
+| [`Display`](https://doc.rust-lang.org/std/fmt/trait.Display.html) | `ToString()` | `toString()` | implémenté à la main |
+| `Clone` | [`ICloneable`](https://learn.microsoft.com/dotnet/api/system.icloneable) | `clone()` | dérivé |
 | `PartialEq` / `Eq` | `Equals` / `==` | `equals` | dérivé |
 | `Hash` | `GetHashCode` | `hashCode` | dérivé |
-| `PartialOrd` / `Ord` | `IComparable<T>` | `Comparable<T>` | dérivé |
+| [`PartialOrd`](https://doc.rust-lang.org/std/cmp/trait.PartialOrd.html) / `Ord` | [`IComparable<T>`](https://learn.microsoft.com/dotnet/api/system.icomparable-1) | [`Comparable<T>`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Comparable.html) | dérivé |
 | `Default` | constructeur sans paramètre | constructeur sans argument | dérivé |
-| `From` / `Into` | opérateurs de conversion | fabrique statique | implémenté à la main |
-| `Add`, `Mul`, … | `operator +` | — | implémenté à la main |
+| [`From`](https://doc.rust-lang.org/std/convert/trait.From.html) / `Into` | opérateurs de conversion | fabrique statique | implémenté à la main |
+| `Add`, `Mul`, … | [`operator +`](https://learn.microsoft.com/dotnet/csharp/language-reference/operators/operator-overloading) | — | implémenté à la main |
 
 ```rust
 #[derive(Debug, Default, PartialEq)]
@@ -182,7 +182,7 @@ println!("{body} / {also} / default {}", Celsius::default());
 
 ## Les méthodes d'extension, à la manière de Rust
 
-En C#, une méthode d'extension ajoute `Shout()` à `string`. En Rust, vous définissez un trait et l'implémentez pour le type existant :
+En C#, une [méthode d'extension](https://learn.microsoft.com/dotnet/csharp/programming-guide/classes-and-structs/extension-methods) ajoute `Shout()` à `string`. En Rust, vous définissez un trait et l'implémentez pour le type existant :
 
 ```rust
 trait Shout {
@@ -227,7 +227,7 @@ Cela garantit que deux crates ne peuvent jamais fournir des implémentations con
 ## À retenir
 
 - Les traits sont des interfaces avec des méthodes par défaut, implémentées dans des blocs `impl` séparés.
-- Le code générique doit déclarer ce dont il a besoin avec des contraintes (`T: Shape`, `impl Shape`, `where`).
+- Le code générique doit déclarer ce dont il a besoin avec des contraintes (`T: Shape`, [`impl Shape`](https://doc.rust-lang.org/reference/types/impl-trait.html), `where`).
 - Les génériques sont résolus à la compilation ; `dyn Trait` offre du polymorphisme à l'exécution quand vous avez besoin de types mélangés.
 - `Display`, `Clone`, `PartialEq`, `Default`, `From` remplacent `ToString`, `ICloneable`, `Equals`, les constructeurs et les conversions.
 - Implémenter un trait pour un type existant remplace les méthodes d'extension, dans les limites de la règle de l'orphelin.

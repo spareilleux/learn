@@ -15,7 +15,7 @@ let mut counter: u32 = 0;   // explicitly mutable
 counter += 1;
 ```
 
-In C# terms, every `let` is like a local you can never reassign; in Java, like `final var`. You opt **into** mutability with `mut`:
+In C# terms, every `let` is like a local you can never reassign; in Java, like [`final var`](https://openjdk.org/jeps/286). You opt **into** mutability with `mut`:
 
 ```rust
 let count = 0;
@@ -38,7 +38,7 @@ help: consider making this binding mutable
 ```
 
 :::tip[Read the whole error]
-Rust errors usually contain the fix (`help: consider making this binding mutable`). Get into the habit of reading them to the end — and `rustc --explain E0384` gives a full explanation.
+Rust errors usually contain the fix (`help: consider making this binding mutable`). Get into the habit of reading them to the end — and [`rustc --explain E0384`](https://doc.rust-lang.org/rustc/command-line-arguments.html#--explain-provide-a-detailed-explanation-of-an-error-message) gives a full explanation.
 :::
 
 ## Shadowing
@@ -51,7 +51,7 @@ let input: i32 = input.trim().parse().expect("not a number");
 println!("input + 1 = {}", input + 1); // input + 1 = 8
 ```
 
-This is not mutation: the first `input` (a `&str`) still exists, it is just hidden. C# and Java forbid redeclaring a local in the same scope.
+This is not mutation: the first `input` (a [`&str`](https://doc.rust-lang.org/std/primitive.str.html)) still exists, it is just hidden. C# and Java forbid redeclaring a local in the same scope.
 
 ## Scalar types
 
@@ -61,11 +61,11 @@ This is not mutation: the first `input` (a `&str`) still exists, it is just hidd
 | `i16` / `u16` | `short` / `ushort` | `short` / — | |
 | `i32` / `u32` | `int` / `uint` | `int` / — | `i32` is the default integer |
 | `i64` / `u64` | `long` / `ulong` | `long` / — | |
-| `i128` / `u128` | `Int128` / `UInt128` | — | |
-| `isize` / `usize` | `nint` / `nuint` | — | pointer-sized; used for indexes and lengths |
+| `i128` / `u128` | [`Int128`](https://learn.microsoft.com/dotnet/api/system.int128) / `UInt128` | — | |
+| `isize` / `usize` | [`nint` / `nuint`](https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/integral-numeric-types#native-sized-integers) | — | pointer-sized; used for indexes and lengths |
 | `f32` / `f64` | `float` / `double` | `float` / `double` | `f64` is the default float |
 | `bool` | `bool` | `boolean` | |
-| `char` | `Rune` | `int` code point | **4 bytes**, a Unicode scalar value — *not* a UTF-16 unit like C#/Java `char` |
+| `char` | [`Rune`](https://learn.microsoft.com/dotnet/api/system.text.rune) | `int` code point | **4 bytes**, a Unicode scalar value — *not* a UTF-16 unit like C#/Java `char` |
 
 ```rust
 let note = '♪';
@@ -91,7 +91,7 @@ error[E0308]: mismatched types
   |                         ^^^ expected `i32`, found `i64`
 ```
 
-Convert explicitly with `as` (or `i64::from(small)`, which only exists for lossless conversions):
+Convert explicitly with [`as`](https://doc.rust-lang.org/reference/expressions/operator-expr.html#type-cast-expressions) (or [`i64::from(small)`](https://doc.rust-lang.org/std/convert/trait.From.html), which only exists for lossless conversions):
 
 ```rust
 let total = small as i64 + big; // 30
@@ -101,7 +101,7 @@ let total = small as i64 + big; // 30
 
 | | C# | Java | Rust debug build | Rust release build |
 |---|---|---|---|---|
-| `255u8 + 1` | wraps (unless `checked`) | wraps | **panics** | wraps |
+| `255u8 + 1` | wraps (unless [`checked`](https://learn.microsoft.com/dotnet/csharp/language-reference/statements/checked-and-unchecked)) | wraps | **[panics](https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html)** | wraps |
 
 In a debug build, Rust stops the program:
 
@@ -128,7 +128,7 @@ println!("x = {x}, y = {y}, first prime = {}, count = {}", primes[0], primes.len
 // x = 1.5, y = -2, first prime = 2, count = 5
 ```
 
-A growable list is `Vec<T>` (like `List<T>` / `ArrayList<T>`) — lesson 8 covers collections.
+A growable list is [`Vec<T>`](https://doc.rust-lang.org/std/vec/struct.Vec.html) (like [`List<T>`](https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1) / [`ArrayList<T>`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/ArrayList.html)) — lesson 8 covers collections.
 
 ## Everything is an expression
 
@@ -157,7 +157,7 @@ fn square(x: i32) -> i32 {
 ```
 
 :::caution[The semicolon matters]
-Writing `x * x;` turns the expression into a statement: the function then returns `()` (the unit type, Rust's `void`) and the compiler complains about a type mismatch.
+Writing `x * x;` turns the expression into a statement: the function then returns [`()`](https://doc.rust-lang.org/std/primitive.unit.html) (the unit type, Rust's `void`) and the compiler complains about a type mismatch.
 :::
 
 ## Loops
@@ -231,7 +231,7 @@ The trailing semicolon turns `x * 2` into a statement, so the body evaluates to 
 <details>
 <summary>Solution</summary>
 
-In a debug build the program panics with `attempt to add with overflow`. In a release build it wraps to `0`. If wrapping is what you want, write `b = b.wrapping_add(1);`; if you want to detect it, use `b.checked_add(1)`, which returns an `Option<u8>`.
+In a debug build the program panics with `attempt to add with overflow`. In a release build it wraps to `0`. If wrapping is what you want, write `b = b.wrapping_add(1);`; if you want to detect it, use [`b.checked_add(1)`](https://doc.rust-lang.org/std/primitive.u8.html#method.checked_add), which returns an [`Option<u8>`](https://doc.rust-lang.org/std/option/enum.Option.html).
 
 </details>
 

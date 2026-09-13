@@ -39,13 +39,13 @@ impl Account {
 
 | Rust | C# | Java |
 |---|---|---|
-| `struct` + `impl` | `class` / `record` | `class` / `record` |
+| `struct` + `impl` | `class` / [`record`](https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/record) | `class` / [`record`](https://docs.oracle.com/en/java/javase/25/language/records.html) |
 | `fn new(…) -> Self` (a convention) | constructor | constructor |
 | `fn balance(&self)` | instance method | instance method |
 | `fn deposit(&mut self, …)` | method that mutates `this` | method that mutates `this` |
 | `fn close(self)` | — (no equivalent) | — |
 | `fn new(…)` without `self` | `static` method | `static` method |
-| `#[derive(Debug, Clone, PartialEq)]` | what a `record` generates: `ToString`, copy, value equality | what a `record` generates |
+| [`#[derive(Debug, Clone, PartialEq)]`](https://doc.rust-lang.org/reference/attributes/derive.html) | what a `record` generates: `ToString`, copy, value equality | what a `record` generates |
 
 - There are **no constructors**: `Account::new` is an ordinary associated function that returns `Self`. Several "constructors" are just several functions (`new`, `with_capacity`, `from_str`…).
 - The receiver says what the method does to the value: read (`&self`), modify (`&mut self`) or **consume** (`self`) — after `account.close()`, `account` is moved and cannot be used, which is how Rust models "this object is finished".
@@ -74,7 +74,7 @@ error[E0063]: missing field `balance_cents` in initializer of `Account`
   |                   ^^^^^^^ missing `balance_cents`
 ```
 
-**Struct update syntax** copies the remaining fields from another value, like a C# `with` expression:
+**Struct update syntax** copies the remaining fields from another value, like a C# [`with` expression](https://learn.microsoft.com/dotnet/csharp/language-reference/operators/with-expression):
 
 ```rust
 let other = Account { owner: "Grace".into(), ..copy };
@@ -83,7 +83,7 @@ println!("{} has {} cents", other.owner, other.balance_cents);   // Grace has 12
 
 ## Tuple structs and newtypes
 
-A struct can have unnamed fields. With a single field, it creates a distinct type around an existing one — a **newtype**:
+A struct can have unnamed fields. With a single field, it creates a distinct type around an existing one — a **[newtype](https://doc.rust-lang.org/rust-by-example/generics/new_types.html)**:
 
 ```rust
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd)]
@@ -98,7 +98,7 @@ A function taking `Meters` will not accept a raw `f64` or a `Feet(f64)`. It cost
 
 ## Enums carry data
 
-C# enums are named integers; Java enums are a fixed set of objects that all share the same fields. A Rust `enum` is a **tagged union**: each variant can hold *different* data.
+[C# enums](https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/enum) are named integers; [Java enums](https://dev.java/learn/classes-objects/enums/) are a fixed set of objects that all share the same fields. A Rust `enum` is a **tagged union**: each variant can hold *different* data.
 
 ```rust
 enum Shape {
@@ -164,9 +164,9 @@ note: `Shape` defined here
 
 | When a case is missing | Result |
 |---|---|
-| C# `switch` expression | warning CS8509, then `SwitchExpressionException` at runtime |
-| Java 21 `switch` over a sealed interface | compile error |
-| Rust `match` | compile error `E0004` |
+| C# [`switch` expression](https://learn.microsoft.com/dotnet/csharp/language-reference/operators/switch-expression) | warning [CS8509](https://learn.microsoft.com/dotnet/csharp/language-reference/compiler-messages/pattern-matching-warnings#pattern-completeness-and-redundancy), then [`SwitchExpressionException`](https://learn.microsoft.com/dotnet/api/system.runtime.compilerservices.switchexpressionexception) at runtime |
+| Java 21 [`switch`](https://openjdk.org/jeps/441) over a [sealed interface](https://docs.oracle.com/en/java/javase/25/language/sealed-classes-and-interfaces.html) | compile error |
+| Rust `match` | compile error [`E0004`](https://doc.rust-lang.org/error_codes/E0004.html) |
 
 This is what makes enums so useful for refactoring: add a variant, and the compiler lists every place that must handle it.
 
@@ -190,7 +190,7 @@ say "hi"
 quit
 ```
 
-Ranges, guards (`if`) and the catch-all `_`:
+Ranges, [guards](https://doc.rust-lang.org/reference/expressions/match-expr.html#match-guards) (`if`) and the catch-all `_`:
 
 ```rust
 fn describe(temperature: i32) -> &'static str {
@@ -207,7 +207,7 @@ Arms are tried **in order**, so put the specific ones first — the same rule as
 
 ## `if let` and `let … else`
 
-When only one pattern matters, `if let` avoids a full `match`:
+When only one pattern matters, [`if let`](https://doc.rust-lang.org/book/ch06-03-if-let.html) avoids a full `match`:
 
 ```rust
 if let Some(Shape::Circle { radius }) = shapes.first() {
@@ -215,7 +215,7 @@ if let Some(Shape::Circle { radius }) = shapes.first() {
 }
 ```
 
-`let … else` binds a pattern or leaves the current block — perfect for guard clauses:
+[`let … else`](https://doc.rust-lang.org/rust-by-example/flow_control/let_else.html) binds a pattern or leaves the current block — perfect for guard clauses:
 
 ```rust
 fn parse_port(text: &str) -> u16 {

@@ -9,7 +9,7 @@ Full example: [`examples/l09_lifetimes.rs`](https://github.com/spareilleux/learn
 
 ## The problem a garbage collector hides
 
-In C# or Java, a reference keeps its object alive: as long as you can reach it, the garbage collector will not free it. A "dangling reference" simply cannot happen.
+In C# or Java, a reference keeps its object alive: as long as you can reach it, the [garbage collector](https://learn.microsoft.com/dotnet/standard/garbage-collection/fundamentals) will not free it. A ["dangling reference"](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html#dangling-references) simply cannot happen.
 
 Rust has no garbage collector. A value is freed when its owner goes out of scope ([lesson 3](../03-ownership-and-moves/)), so the compiler must prove that no reference is still in use at that point:
 
@@ -74,7 +74,7 @@ fn longest<'a>(a: &'a str, b: &'a str) -> &'a str {
 }
 ```
 
-Read `<'a>` like a generic parameter (it is declared in the same place as `<T>`): *"for some lifetime `'a` during which both `a` and `b` are valid, the result is valid for `'a` too"*. In practice `'a` becomes the **shorter** of the two, so the caller cannot keep the result longer than either input:
+Read `<'a>` like a [generic parameter](https://doc.rust-lang.org/reference/items/generics.html) (it is declared in the same place as `<T>`): *"for some lifetime `'a` during which both `a` and `b` are valid, the result is valid for `'a` too"*. In practice `'a` becomes the **shorter** of the two, so the caller cannot keep the result longer than either input:
 
 ```rust
 let title = String::from("Rust for C# developers");
@@ -143,7 +143,7 @@ error[E0515]: cannot return reference to local variable `upper`
   |     ^^^^^^ returns a reference to data owned by the current function
 ```
 
-The fix is the one from lesson 4: return the owned `String`.
+The fix is the one from lesson 4: return the owned [`String`](https://doc.rust-lang.org/std/string/struct.String.html).
 
 ## Structs that borrow
 
@@ -201,7 +201,7 @@ error[E0597]: `novel` does not live long enough
    |                    ------------ borrow later used here
 ```
 
-The C# closest equivalent is a `ref struct` such as `Span<T>`: it may point into someone else's memory, so the compiler restricts where it can go. In Rust, any struct can be like that.
+The C# closest equivalent is a [`ref struct`](https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/ref-struct) such as [`Span<T>`](https://learn.microsoft.com/dotnet/api/system.span-1): it may point into someone else's memory, so the compiler restricts where it can go. In Rust, any struct can be like that.
 
 ### The lifetime in a method signature matters
 
@@ -268,7 +268,7 @@ error[E0597]: `name` does not live long enough
 note: requirement that the value outlives `'static` introduced here
 ```
 
-Moving the `String` itself into the closure fixes it. `T: 'static` does **not** mean "lives forever": it means "contains no borrowed data that could expire" — an owned `String` qualifies. Threads are [lesson 12](../12-threads-and-concurrency/).
+Moving the `String` itself into the closure fixes it. [`T: 'static`](https://doc.rust-lang.org/reference/trait-bounds.html#lifetime-bounds) does **not** mean "lives forever": it means "contains no borrowed data that could expire" — an owned `String` qualifies. Threads are [lesson 12](../12-threads-and-concurrency/).
 
 ## When lifetimes get in the way: own the data
 
@@ -276,10 +276,10 @@ Coming from C#, the reflex is to store references everywhere. In Rust, a struct 
 
 | Situation | Use |
 |---|---|
-| Function parameters you only read | `&str`, `&[T]`, `&T` |
+| Function parameters you only read | [`&str`](https://doc.rust-lang.org/std/primitive.str.html), [`&[T]`](https://doc.rust-lang.org/std/primitive.slice.html), `&T` |
 | Short-lived views over data someone else owns (parsers, iterators, excerpts) | a struct with `'a` |
 | Data a struct keeps for a long time | owned `String`, `Vec<T>`, `T` |
-| Data shared by several owners | `Rc`/`Arc` — [lesson 11](../11-smart-pointers/) |
+| Data shared by several owners | [`Rc`](https://doc.rust-lang.org/std/rc/struct.Rc.html)/[`Arc`](https://doc.rust-lang.org/std/sync/struct.Arc.html) — [lesson 11](../11-smart-pointers/) |
 
 Cloning a few strings to avoid a lifetime parameter is a perfectly good trade-off.
 
@@ -343,7 +343,7 @@ let hits = {
 assert_eq!(hits, [Highlight { line: "I like Rust", column: 7 }, Highlight { line: "Rust again", column: 0 }]);
 ```
 
-The results borrow `text` only, so `word` gets its own (elided) lifetime. Writing `word: &'a str` would compile the function but reject this call with `E0597`: the compiler would then assume the highlights might point into `query`.
+The results borrow `text` only, so `word` gets its own (elided) lifetime. Writing `word: &'a str` would compile the function but reject this call with [`E0597`](https://doc.rust-lang.org/error_codes/E0597.html): the compiler would then assume the highlights might point into `query`.
 
 </details>
 

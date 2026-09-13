@@ -42,7 +42,7 @@ impl Shape for Square {
 | Rust | C# | Java |
 |---|---|---|
 | `trait Shape { … }` | `interface IShape { … }` | `interface Shape { … }` |
-| default method in the trait | default interface method (C# 8) | `default` method (Java 8) |
+| default method in the trait | [default interface method](https://learn.microsoft.com/dotnet/csharp/advanced-topics/interface-implementation/default-interface-methods-versions) (C# 8) | [`default` method](https://docs.oracle.com/javase/tutorial/java/IandI/defaultmethods.html) (Java 8) |
 | `impl Shape for Circle { … }` — a separate block | `class Circle : IShape` | `class Circle implements Shape` |
 | no inheritance between structs | class inheritance | class inheritance |
 
@@ -63,7 +63,7 @@ error[E0046]: not all trait items implemented, missing: `area`
 
 ## Generics with trait bounds
 
-A generic function must say which traits its type parameter implements — the equivalent of `where T : IShape` or `<T extends Shape>`:
+A generic function must say which traits its type parameter implements — the equivalent of [`where T : IShape`](https://learn.microsoft.com/dotnet/csharp/programming-guide/generics/constraints-on-type-parameters) or [`<T extends Shape>`](https://docs.oracle.com/javase/tutorial/java/generics/bounded.html):
 
 ```rust
 fn total_area<T: Shape>(shapes: &[T]) -> f64 {
@@ -114,9 +114,9 @@ pear apple fig (max pear)
 
 ## Static vs dynamic dispatch
 
-`total_area::<Circle>` and `total_area::<Square>` are compiled as **two separate functions**, each calling `area` directly and eligible for inlining. This is called **monomorphization**.
+`total_area::<Circle>` and `total_area::<Square>` are compiled as **two separate functions**, each calling `area` directly and eligible for inlining. This is called [**monomorphization**](https://doc.rust-lang.org/book/ch10-01-syntax.html#performance-of-code-using-generics).
 
-When you need a collection of *different* types, use a **trait object**, `dyn Shape`, behind a pointer such as `Box` or `&`:
+When you need a collection of *different* types, use a [**trait object**](https://doc.rust-lang.org/reference/types/trait-object.html), `dyn Shape`, behind a pointer such as [`Box`](https://doc.rust-lang.org/std/boxed/struct.Box.html) or `&`:
 
 ```rust
 fn largest(shapes: &[Box<dyn Shape>]) -> Option<&dyn Shape> {
@@ -136,25 +136,25 @@ let mixed: Vec<Box<dyn Shape>> = vec![Box::new(Circle { radius: 1.5 }), Box::new
 | Mixed types in one `Vec` | no | yes |
 | Cost | none at runtime, larger binary | one indirect call, like an interface call |
 | C# analogy | generics over `struct`s (specialised by the JIT) | calling through `IShape` |
-| Java analogy | — (generics are erased to casts) | calling through `Shape` |
+| Java analogy | — (generics are [erased](https://docs.oracle.com/javase/tutorial/java/generics/erasure.html) to casts) | calling through `Shape` |
 
 Default to generics; reach for `dyn Trait` when you truly need heterogeneous values or want to hide the concrete type. Not every trait can be used as `dyn`: a trait with generic methods, for example, is not *dyn-compatible* (formerly called "object-safe").
 
 ## Standard traits you implement
 
-Much of what C# puts in `System.Object` or in operators is a trait in Rust:
+Much of what C# puts in [`System.Object`](https://learn.microsoft.com/dotnet/api/system.object) or in operators is a trait in Rust:
 
 | Rust trait | C# | Java | Usually |
 |---|---|---|---|
-| `Debug` | debugger display | — | `#[derive(Debug)]` |
-| `Display` | `ToString()` | `toString()` | implemented by hand |
-| `Clone` | `ICloneable` | `clone()` | derived |
+| `Debug` | debugger display | — | [`#[derive(Debug)]`](https://doc.rust-lang.org/reference/attributes/derive.html) |
+| [`Display`](https://doc.rust-lang.org/std/fmt/trait.Display.html) | `ToString()` | `toString()` | implemented by hand |
+| `Clone` | [`ICloneable`](https://learn.microsoft.com/dotnet/api/system.icloneable) | `clone()` | derived |
 | `PartialEq` / `Eq` | `Equals` / `==` | `equals` | derived |
 | `Hash` | `GetHashCode` | `hashCode` | derived |
-| `PartialOrd` / `Ord` | `IComparable<T>` | `Comparable<T>` | derived |
+| [`PartialOrd`](https://doc.rust-lang.org/std/cmp/trait.PartialOrd.html) / `Ord` | [`IComparable<T>`](https://learn.microsoft.com/dotnet/api/system.icomparable-1) | [`Comparable<T>`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Comparable.html) | derived |
 | `Default` | parameterless constructor | no-arg constructor | derived |
-| `From` / `Into` | conversion operators | static factory | implemented by hand |
-| `Add`, `Mul`, … | `operator +` | — | implemented by hand |
+| [`From`](https://doc.rust-lang.org/std/convert/trait.From.html) / `Into` | conversion operators | static factory | implemented by hand |
+| `Add`, `Mul`, … | [`operator +`](https://learn.microsoft.com/dotnet/csharp/language-reference/operators/operator-overloading) | — | implemented by hand |
 
 ```rust
 #[derive(Debug, Default, PartialEq)]
@@ -182,7 +182,7 @@ println!("{body} / {also} / default {}", Celsius::default());
 
 ## Extension methods, Rust style
 
-In C#, an extension method adds `Shout()` to `string`. In Rust, you define a trait and implement it for the existing type:
+In C#, an [extension method](https://learn.microsoft.com/dotnet/csharp/programming-guide/classes-and-structs/extension-methods) adds `Shout()` to `string`. In Rust, you define a trait and implement it for the existing type:
 
 ```rust
 trait Shout {
@@ -227,7 +227,7 @@ This guarantees two crates can never provide conflicting implementations. The st
 ## Key takeaways
 
 - Traits are interfaces with default methods, implemented in separate `impl` blocks.
-- Generic code must declare what it needs with bounds (`T: Shape`, `impl Shape`, `where`).
+- Generic code must declare what it needs with bounds (`T: Shape`, [`impl Shape`](https://doc.rust-lang.org/reference/types/impl-trait.html), `where`).
 - Generics are resolved at compile time; `dyn Trait` gives runtime polymorphism when you need mixed types.
 - `Display`, `Clone`, `PartialEq`, `Default`, `From` replace `ToString`, `ICloneable`, `Equals`, constructors and conversions.
 - Implementing a trait for an existing type replaces extension methods, within the orphan rule.

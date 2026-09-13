@@ -11,13 +11,13 @@ Full example: [`examples/l08_collections_iterators.rs`](https://github.com/spare
 
 | Rust (`std::collections`) | C# | Java |
 |---|---|---|
-| `Vec<T>` | `List<T>` | `ArrayList<T>` |
-| `VecDeque<T>` | `Queue<T>` / `LinkedList<T>` | `ArrayDeque<T>` |
-| `HashMap<K, V>` | `Dictionary<K, V>` | `HashMap<K, V>` |
-| `BTreeMap<K, V>` | `SortedDictionary<K, V>` | `TreeMap<K, V>` |
-| `HashSet<T>` | `HashSet<T>` | `HashSet<T>` |
-| `BTreeSet<T>` | `SortedSet<T>` | `TreeSet<T>` |
-| `BinaryHeap<T>` | `PriorityQueue<T, P>` | `PriorityQueue<T>` |
+| [`Vec<T>`](https://doc.rust-lang.org/std/vec/struct.Vec.html) | `List<T>` | `ArrayList<T>` |
+| [`VecDeque<T>`](https://doc.rust-lang.org/std/collections/struct.VecDeque.html) | `Queue<T>` / `LinkedList<T>` | `ArrayDeque<T>` |
+| [`HashMap<K, V>`](https://doc.rust-lang.org/std/collections/struct.HashMap.html) | `Dictionary<K, V>` | `HashMap<K, V>` |
+| [`BTreeMap<K, V>`](https://doc.rust-lang.org/std/collections/struct.BTreeMap.html) | `SortedDictionary<K, V>` | `TreeMap<K, V>` |
+| [`HashSet<T>`](https://doc.rust-lang.org/std/collections/struct.HashSet.html) | `HashSet<T>` | `HashSet<T>` |
+| [`BTreeSet<T>`](https://doc.rust-lang.org/std/collections/struct.BTreeSet.html) | `SortedSet<T>` | `TreeSet<T>` |
+| [`BinaryHeap<T>`](https://doc.rust-lang.org/std/collections/struct.BinaryHeap.html) | `PriorityQueue<T, P>` | `PriorityQueue<T>` |
 
 `Vec` and `String` are in scope everywhere; the others need a `use std::collections::…`.
 
@@ -38,7 +38,7 @@ let big_orders: Vec<&str> = orders
 // big orders: ["mouse", "monitor"]
 ```
 
-| Rust | C# LINQ | Java Streams |
+| Rust | C# [LINQ](https://learn.microsoft.com/dotnet/csharp/linq/) | [Java Streams](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/stream/package-summary.html) |
 |---|---|---|
 | `.iter()` | (the `IEnumerable` itself) | `.stream()` |
 | `.filter(\|x\| …)` | `.Where(x => …)` | `.filter(x -> …)` |
@@ -72,7 +72,7 @@ revenue 562, any monitor true, all positive true, first mouse buyer Some("grace"
 
 ## Iterators are lazy
 
-Like LINQ's deferred execution and Java's intermediate operations, nothing runs until something **consumes** the iterator (`collect`, `sum`, `for`, `count`…). The compiler warns when you forget:
+Like LINQ's [deferred execution](https://learn.microsoft.com/dotnet/standard/linq/deferred-execution-lazy-evaluation) and Java's intermediate operations, nothing runs until something **consumes** the iterator (`collect`, `sum`, `for`, `count`…). The compiler warns when you forget:
 
 ```rust
 numbers.iter().map(|n| println!("{n}"));
@@ -94,7 +94,7 @@ This laziness also lets iterators be infinite: see the Fibonacci example below.
 
 ## `collect` needs to know the target type
 
-`collect` can build a `Vec`, a `HashSet`, a `String`, a `HashMap`… so you must say which one:
+[`collect`](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.collect) can build a `Vec`, a `HashSet`, a `String`, a `HashMap`… so you must say which one:
 
 ```rust
 let evens = (1..10).filter(|n| n % 2 == 0).collect();
@@ -157,7 +157,7 @@ help: consider iterating over a slice of the `Vec<f64>`'s content to avoid movin
 
 ## Grouping with `HashMap::entry`
 
-There is no `GroupBy` in the standard library; the `entry` API makes it a one-liner — like `CollectionsMarshal.GetValueRefOrAddDefault` in C# or `merge` in Java:
+There is no `GroupBy` in the standard library; the [`entry`](https://doc.rust-lang.org/std/collections/struct.HashMap.html#method.entry) API makes it a one-liner — like [`CollectionsMarshal.GetValueRefOrAddDefault`](https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.collectionsmarshal.getvaluereforadddefault) in C# or [`merge`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Map.html#merge(K,V,java.util.function.BiFunction)) in Java:
 
 ```rust
 let mut spend: HashMap<&str, f64> = HashMap::new();
@@ -170,7 +170,7 @@ let sorted: BTreeMap<_, _> = spend.iter().collect();
 
 ## Sorting, and why floats are special
 
-`sort` needs a **total order** (`Ord`). Floating-point numbers only have a partial one, because `NaN` is not comparable to anything:
+`sort` needs a **total order** ([`Ord`](https://doc.rust-lang.org/std/cmp/trait.Ord.html)). Floating-point numbers only have a partial one, because `NaN` is not comparable to anything:
 
 ```rust
 let mut prices = vec![19.99, 5.0, 12.5];
@@ -217,11 +217,11 @@ println!("{}", make_title(1));   // report #1
 | | C# | Java | Rust |
 |---|---|---|---|
 | Captures | variables (hoisted into a closure class) | effectively-final variables | by reference, mutable reference, or by value (`move`) |
-| Function types | `Func<>`, `Action<>` | `Function`, `Consumer`, … | the traits `Fn`, `FnMut`, `FnOnce` |
+| Function types | `Func<>`, `Action<>` | `Function`, `Consumer`, … | the traits [`Fn`](https://doc.rust-lang.org/std/ops/trait.Fn.html), [`FnMut`](https://doc.rust-lang.org/std/ops/trait.FnMut.html), [`FnOnce`](https://doc.rust-lang.org/std/ops/trait.FnOnce.html) |
 
 ## Writing your own iterator
 
-Implement one method, `next`, and every adapter above becomes available — the counterpart of `IEnumerable<T>` with `yield return`:
+Implement one method, `next`, and every adapter above becomes available — the counterpart of [`IEnumerable<T>`](https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1) with [`yield return`](https://learn.microsoft.com/dotnet/csharp/language-reference/statements/yield):
 
 ```rust
 struct Fibonacci {
@@ -244,7 +244,7 @@ let fibs: Vec<u64> = Fibonacci { current: 0, next: 1 }.take_while(|&n| n < 100).
 // fibonacci < 100: [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
 ```
 
-`type Item = u64;` is an **associated type**: each iterator decides what it yields.
+`type Item = u64;` is an [**associated type**](https://doc.rust-lang.org/reference/items/associated-items.html#associated-types): each iterator decides what it yields.
 
 ## Slices bonus: `windows` and `chunks`
 

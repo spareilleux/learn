@@ -19,9 +19,9 @@ sidebar:
 - [x] Leçon 10 — Modules, crates et workspaces
 - [x] Leçon 11 — `Box`, `Rc`, `Arc`, `RefCell`
 - [x] Leçon 12 — Threads, `Send`/`Sync`, `Mutex`, rayon
-- [ ] Leçon 13 — `async` et tokio
-- [ ] Leçon 14 — Tests, docs, clippy, fmt
-- [ ] Leçon 15 — Macros, `unsafe` et FFI
+- [x] Leçon 13 — `async` et tokio
+- [x] Leçon 14 — Tests, docs, clippy, fmt
+- [x] Leçon 15 — Macros, `unsafe` et FFI
 
 ## 2026-09-13 — Leçons 1 à 4
 
@@ -69,6 +69,27 @@ Chaque solution d'exercice est désormais aussi un doctest : 41 doctests au tota
 - Écrire `&str` au lieu de `&'a str` comme type de retour d'une méthode compile sans problème — l'erreur n'apparaît qu'au site d'appel, quand on essaie de garder deux tokens (`E0499`). L'élision a choisi la durée de vie de `&mut self`.
 - Un enum récursif sans `Box` donne `E0391` (un cycle dans la requête « needs drop » du compilateur) en plus de `E0072`.
 - rayon sur cette machine (Core Ultra 9 285K, 24 cœurs) : compter les nombres premiers inférieurs à 5 000 000 est passé de ~775 ms à ~41 ms, environ 18×.
+
+## 2026-09-13 — Leçons 13 à 15, et trois systèmes d'exploitation
+
+Le cœur du cours est terminé. Le code a désormais tokio en dev-dependency, deux petites crates de plus (`l14-testing`, et `l15-ffi` avec un client .NET 10), et la CI exécute tout sous **Windows, Ubuntu et macOS**. Le programme C# appelle la bibliothèque Rust avec succès sur les trois.
+
+**Ce que j'ai d'abord mal fait :**
+
+- Le test FFI de la leçon 15 affirmait `pricing_sum([19.99, 5.0, 12.5]) == 37.49`. La vraie somme en `f64` vaut `37.489999999999995` ; C# n'avait affiché `37.49` qu'à cause de son format `F2`.
+- Un commentaire XML du `.csproj` contenait `--release` : MSBuild refuse de charger un projet dont un commentaire contient `--`.
+- J'avais écrit que `[LibraryImport]` marshale par défaut un `bool` comme un `BOOL` de 4 octets. Il n'a en fait aucun comportement par défaut : le build échoue avec `SYSLIB1051` tant qu'on n'ajoute pas `[MarshalAs]`. C'était le comportement de `[DllImport]`.
+- `cargo fmt --check --manifest-path …` fonctionnait sur ma machine (Cargo 1.94) mais échouait sur les runners de CI (Cargo 1.98.1) avec `Failed to find targets`. La CI lance désormais `cargo fmt --check` depuis le dossier de chaque crate.
+- `missing_docs = "warn"` dans `[lints]` s'applique aussi aux tests d'intégration : chaque fichier de `tests/` est sa propre crate et a besoin d'une ligne `//!`.
+- Un doctest de la leçon 13 affirmait que trois attentes concurrentes se terminent en moins de 290 ms. C'est vrai sur ma machine, mais une assertion de durée donne un test instable (flaky) sur des runners de CI partagés ; le test ne vérifie donc plus que les résultats.
+
+**Surprises :**
+
+- En Rust asynchrone, un `.await` oublié signifie que le code **ne s'exécute jamais** — l'inverse de C#, où la tâche démarre quand même.
+- L'erreur « future cannot be sent between threads safely » n'a pas de code `E` : elle vient de la contrainte `Send` de `tokio::spawn`, pas du langage.
+- L'édition 2024 exige `unsafe extern "C"` et `#[unsafe(no_mangle)]` ; une bonne partie des supports FFI plus anciens ne compile plus tels quels.
+- `cargo fmt` n'avait jamais été lancé sur ce cours : 30 différences de formatage dans les exemples de douze leçons.
+- Hello world en mode release : environ 130 Ko sous Windows, 430–460 Ko sous Linux et macOS (runners de CI, Cargo 1.98.1).
 
 ## Questions ouvertes
 

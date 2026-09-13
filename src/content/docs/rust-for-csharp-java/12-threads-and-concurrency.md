@@ -27,9 +27,9 @@ println!("total name length: {}", handle.join().unwrap());   // 8
 
 | Rust | C# | Java |
 |---|---|---|
-| `thread::spawn(closure)` | `new Thread(...).Start()` / `Task.Run` | `new Thread(...).start()` |
+| [`thread::spawn(closure)`](https://doc.rust-lang.org/std/thread/fn.spawn.html) | `new Thread(...).Start()` / [`Task.Run`](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task.run) | `new Thread(...).start()` |
 | `handle.join()` returns the closure's result | `thread.Join()` (no result) / `await task` | `thread.join()` (no result) / `future.get()` |
-| `join()` returns `Err` if the thread panicked | exception rethrown by `Task` | `ExecutionException` |
+| `join()` returns `Err` if the thread panicked | exception rethrown by `Task` | [`ExecutionException`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/ExecutionException.html) |
 
 The new thread may outlive the function that started it, so it cannot borrow that function's locals ([lesson 9](../09-lifetimes/), `'static`). Forgetting `move` gives a very direct error:
 
@@ -59,7 +59,7 @@ help: to force the closure to take ownership of `names` (and any other reference
 
 ## Scoped threads: borrowing is allowed
 
-`thread::scope` guarantees that every thread spawned inside it is joined before `scope` returns, so those threads **can** borrow local data:
+[`thread::scope`](https://doc.rust-lang.org/std/thread/fn.scope.html) guarantees that every thread spawned inside it is joined before `scope` returns, so those threads **can** borrow local data:
 
 ```rust
 let data: Vec<u64> = (1..=1_000).collect();
@@ -107,8 +107,8 @@ The C# equivalent — `count++` from two tasks — compiles and silently loses i
 
 Two marker traits, implemented automatically by the compiler, decide what may cross a thread boundary:
 
-- **`Send`**: a value of this type can be **moved** to another thread.
-- **`Sync`**: a value can be **shared** by reference between threads (`T` is `Sync` when `&T` is `Send`).
+- **[`Send`](https://doc.rust-lang.org/std/marker/trait.Send.html)**: a value of this type can be **moved** to another thread.
+- **[`Sync`](https://doc.rust-lang.org/std/marker/trait.Sync.html)**: a value can be **shared** by reference between threads (`T` is `Sync` when `&T` is `Send`).
 
 Almost every type is both. The exceptions are the single-thread tools from [lesson 11](../11-smart-pointers/):
 
@@ -118,7 +118,7 @@ Almost every type is both. The exceptions are the single-thread tools from [less
 | `Rc<T>` | no | no | non-atomic reference count |
 | `Arc<T>` (with `T: Send + Sync`) | yes | yes | atomic count |
 | `Cell<T>`, `RefCell<T>` | yes | **no** | unsynchronised interior mutability |
-| `Mutex<T>` (with `T: Send`) | yes | yes | access is synchronised |
+| [`Mutex<T>`](https://doc.rust-lang.org/std/sync/struct.Mutex.html) (with `T: Send`) | yes | yes | access is synchronised |
 
 `thread::spawn` requires its closure to be `Send`, so everything it captures must be too. Sharing a `RefCell` through an `Arc` fails — and the compiler suggests the thread-safe alternative:
 
@@ -146,7 +146,7 @@ C# and Java have no such distinction: thread safety is a comment in the document
 
 ## Shared state: `Arc<Mutex<T>>`
 
-A C# `lock (obj) { … }` protects code; nothing stops another method from touching the list without locking. A Rust `Mutex<T>` **owns** the data, and the only way to reach it is `lock()`:
+A C# [`lock (obj) { … }`](https://learn.microsoft.com/dotnet/csharp/language-reference/statements/lock) protects code; nothing stops another method from touching the list without locking. A Rust `Mutex<T>` **owns** the data, and the only way to reach it is `lock()`:
 
 ```rust
 let count = std::sync::Mutex::new(0);
@@ -182,11 +182,11 @@ for worker in workers {
 // squares: [(1, 1), (2, 4), (3, 9), (4, 16)]   (after sorting)
 ```
 
-- `lock()` returns a **guard** (`MutexGuard`) that derefs to the data. The lock is released when the guard is dropped — no `finally`, no forgotten `unlock()` as with Java's `ReentrantLock`.
-- `lock()` returns a `Result`: if a thread **panicked** while holding the lock, the mutex is *poisoned* and later `lock()` calls return `Err`. `.unwrap()` propagates that panic, which is usually what you want.
+- `lock()` returns a **guard** ([`MutexGuard`](https://doc.rust-lang.org/std/sync/struct.MutexGuard.html)) that derefs to the data. The lock is released when the guard is dropped — no `finally`, no forgotten `unlock()` as with Java's [`ReentrantLock`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/locks/ReentrantLock.html).
+- `lock()` returns a `Result`: if a thread **panicked** while holding the lock, the mutex is [*poisoned*](https://doc.rust-lang.org/std/sync/struct.Mutex.html#poisoning) and later `lock()` calls return `Err`. `.unwrap()` propagates that panic, which is usually what you want.
 - Keep the guard's scope short. Holding it across a slow call blocks everyone else — and two threads taking two locks in opposite order still deadlock.
 
-`RwLock<T>` allows many readers or one writer, like `ReaderWriterLockSlim` or `ReentrantReadWriteLock`:
+[`RwLock<T>`](https://doc.rust-lang.org/std/sync/struct.RwLock.html) allows many readers or one writer, like [`ReaderWriterLockSlim`](https://learn.microsoft.com/dotnet/api/system.threading.readerwriterlockslim) or [`ReentrantReadWriteLock`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/locks/ReentrantReadWriteLock.html):
 
 ```rust
 let settings = RwLock::new(HashMap::from([("mode", "fast")]));
@@ -217,7 +217,7 @@ thread::scope(|s| {
 // hits: 8000
 ```
 
-`fetch_add` is `Interlocked.Increment` / `AtomicInteger.getAndAdd`. The `Ordering` argument describes the memory-ordering guarantee you need; for an independent counter `Relaxed` is enough (the *Rust Atomics and Locks* book, linked below, explains the others). Note that the scoped threads borrow `hits` without an `Arc`: an atomic is `Sync`.
+`fetch_add` is [`Interlocked.Increment`](https://learn.microsoft.com/dotnet/api/system.threading.interlocked.increment) / [`AtomicInteger.getAndAdd`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/atomic/AtomicInteger.html#getAndAdd(int)). The [`Ordering`](https://doc.rust-lang.org/std/sync/atomic/enum.Ordering.html) argument describes the memory-ordering guarantee you need; for an independent counter `Relaxed` is enough (the *Rust Atomics and Locks* book, linked below, explains the others). Note that the scoped threads borrow `hits` without an `Arc`: an atomic is `Sync`.
 
 ## Channels: share by communicating
 
@@ -238,11 +238,11 @@ let messages: Vec<String> = receiver.iter().collect();
 // ["worker 0 done", "worker 1 done", "worker 2 done"]   (after sorting)
 ```
 
-`mpsc` means *multiple producer, single consumer*. The C# equivalent is `System.Threading.Channels.Channel<T>` or `BlockingCollection<T>`; in Java, a `BlockingQueue`. The receiver's iterator ends when every `Sender` has been dropped — forgetting `drop(sender)` is the classic hang.
+[`mpsc`](https://doc.rust-lang.org/std/sync/mpsc/index.html) means *multiple producer, single consumer*. The C# equivalent is [`System.Threading.Channels.Channel<T>`](https://learn.microsoft.com/dotnet/api/system.threading.channels.channel-1) or [`BlockingCollection<T>`](https://learn.microsoft.com/dotnet/api/system.collections.concurrent.blockingcollection-1); in Java, a [`BlockingQueue`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/BlockingQueue.html). The receiver's iterator ends when every `Sender` has been dropped — forgetting `drop(sender)` is the classic hang.
 
 ## Data parallelism with rayon
 
-For "do this to every element, on all cores", don't manage threads yourself. The [rayon](https://docs.rs/rayon) crate turns an iterator chain into a parallel one — the equivalent of PLINQ's `AsParallel()` or Java's `parallelStream()`:
+For "do this to every element, on all cores", don't manage threads yourself. The [rayon](https://docs.rs/rayon) crate turns an iterator chain into a parallel one — the equivalent of [PLINQ](https://learn.microsoft.com/dotnet/standard/parallel-programming/introduction-to-plinq)'s [`AsParallel()`](https://learn.microsoft.com/dotnet/api/system.linq.parallelenumerable.asparallel) or Java's [`parallelStream()`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Collection.html#parallelStream()):
 
 ```toml
 [dependencies]
@@ -273,7 +273,7 @@ let lengths: Vec<usize> = words.par_iter().map(|w| w.len()).collect();   // orde
 | `.iter_mut()` | `.par_iter_mut()` |
 | `.sort()` | `.par_sort()` |
 
-rayon runs the work on a pool with one thread per core and splits it with *work stealing*, like the .NET thread pool and Java's `ForkJoinPool`. Its closures must be `Fn` (no mutation of captured variables) and `Send + Sync`, so the data race from earlier cannot sneak back in:
+rayon runs the work on a pool with one thread per core and splits it with *work stealing*, like the [.NET thread pool](https://learn.microsoft.com/dotnet/standard/threading/the-managed-thread-pool) and Java's [`ForkJoinPool`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/ForkJoinPool.html). Its closures must be [`Fn`](https://doc.rust-lang.org/std/ops/trait.Fn.html) (no mutation of captured variables) and `Send + Sync`, so the data race from earlier cannot sneak back in:
 
 ```rust
 let mut seen = 0;
@@ -292,7 +292,7 @@ error[E0594]: cannot assign to `seen`, as it is a captured variable in a `Fn` cl
   |                                                          in this closure
 ```
 
-Use `.count()`, or an `AtomicUsize`, instead.
+Use `.count()`, or an [`AtomicUsize`](https://doc.rust-lang.org/std/sync/atomic/type.AtomicUsize.html), instead.
 
 On my machine (Intel Core Ultra 9 285K, 24 cores, release build), counting the primes below 5,000,000 took **about 775 ms** sequentially and **about 41 ms** with `into_par_iter()` — see exercise 3.
 
@@ -381,7 +381,7 @@ Each thread works on its own map with no locking, and sends it once when done. W
 
 </details>
 
-3. Count the primes below 5,000,000 with `is_prime` from this lesson, sequentially and with rayon, and time both with `std::time::Instant` in a **release** build (`cargo run --release`). Check that both counts are equal. How close to "number of cores ×" is the speed-up?
+3. Count the primes below 5,000,000 with `is_prime` from this lesson, sequentially and with rayon, and time both with [`std::time::Instant`](https://doc.rust-lang.org/std/time/struct.Instant.html) in a **release** build (`cargo run --release`). Check that both counts are equal. How close to "number of cores ×" is the speed-up?
 
 <details>
 <summary>Solution</summary>

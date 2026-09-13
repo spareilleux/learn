@@ -17,7 +17,7 @@ Je veux lire et modifier ce code avec assurance au lieu de deviner, et comprendr
 
 ## À qui s'adresse ce cours
 
-Vous êtes à l'aise avec C# ou Java : classes, interfaces, génériques, exceptions, collections, LINQ ou Streams, `async`/`await` ou `CompletableFuture`.
+Vous êtes à l'aise avec C# ou Java : classes, interfaces, génériques, exceptions, collections, [LINQ](https://learn.microsoft.com/dotnet/csharp/linq/) ou [Streams](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/stream/package-summary.html), `async`/`await` ou `CompletableFuture`.
 Vous n'avez jamais écrit de Rust. Chaque leçon part du concept que vous connaissez déjà et montre où Rust est d'accord, où il diffère, et pourquoi.
 
 ## À la fin de ce cours, je saurai
@@ -34,11 +34,11 @@ Vous n'avez jamais écrit de Rust. Chaque leçon part du concept que vous connai
 
 | # | Leçon | Vous connaissez déjà |
 |---|---|---|
-| 1 | [Chaîne d'outils et Cargo](01-toolchain-and-cargo/) | CLI `dotnet`, NuGet, Maven/Gradle |
+| 1 | [Chaîne d'outils et Cargo](01-toolchain-and-cargo/) | [CLI `dotnet`](https://learn.microsoft.com/dotnet/core/tools/), [NuGet](https://www.nuget.org/), [Maven](https://maven.apache.org/)/[Gradle](https://gradle.org/) |
 | 2 | [Types, mutabilité et expressions](02-types-mutability-expressions/) | `var`, `final`/`readonly`, `int`/`long`, ternaires |
-| 3 | [Possession et déplacements](03-ownership-and-moves/) | le ramasse-miettes, `IDisposable`, try-with-resources |
-| 4 | [Emprunts et chaînes](04-borrowing-and-strings/) | références, `string`/`String`, `StringBuilder` |
-| 5 | [Structs, enums et pattern matching](05-structs-enums-match/) | classes, records, hiérarchies scellées, `switch` |
+| 3 | [Possession et déplacements](03-ownership-and-moves/) | le ramasse-miettes, [`IDisposable`](https://learn.microsoft.com/dotnet/api/system.idisposable), [try-with-resources](https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html) |
+| 4 | [Emprunts et chaînes](04-borrowing-and-strings/) | références, `string`/`String`, [`StringBuilder`](https://learn.microsoft.com/dotnet/api/system.text.stringbuilder) |
+| 5 | [Structs, enums et pattern matching](05-structs-enums-match/) | classes, [records](https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/record), [hiérarchies scellées](https://docs.oracle.com/en/java/javase/25/language/sealed-classes-and-interfaces.html), `switch` |
 | 6 | [`Option`, `Result` et `?`](06-option-result/) | `null`, exceptions |
 | 7 | [Traits et génériques](07-traits-and-generics/) | interfaces, génériques |
 | 8 | [Collections et itérateurs](08-collections-and-iterators/) | LINQ, Streams |
@@ -46,9 +46,9 @@ Vous n'avez jamais écrit de Rust. Chaque leçon part du concept que vous connai
 | 10 | [Modules, crates et workspaces](10-modules-crates-workspaces/) | namespaces/packages, projets, solutions |
 | 11 | [`Box`, `Rc`, `Arc`, `RefCell`](11-smart-pointers/) | références, objets partagés |
 | 12 | [Threads, `Send`/`Sync`, `Mutex`, rayon](12-threads-and-concurrency/) | `Thread`, `lock`/`synchronized`, `Parallel.For` |
-| 13 | `async` et tokio *(à venir)* | `async`/`await`, `CompletableFuture` |
-| 14 | Tests, docs, clippy, fmt | xUnit/JUnit, docs XML/Javadoc, analyseurs |
-| 15 | Macros, `unsafe` et FFI (aperçu) | générateurs de source, P/Invoke, JNI |
+| 13 | [`async` et tokio](13-async-and-tokio/) | `async`/`await`, `CompletableFuture` |
+| 14 | [Tests, docs, clippy, fmt](14-tests-docs-tooling/) | [xUnit](https://xunit.net/)/[JUnit](https://junit.org/), docs XML/[Javadoc](https://docs.oracle.com/en/java/javase/25/javadoc/), analyseurs |
+| 15 | [Macros, `unsafe` et FFI](15-macros-unsafe-ffi/) (aperçu) | [générateurs de source](https://learn.microsoft.com/dotnet/csharp/roslyn-sdk/source-generators-overview), [P/Invoke](https://learn.microsoft.com/dotnet/standard/native-interop/pinvoke), [JNI](https://docs.oracle.com/en/java/javase/25/docs/specs/jni/index.html) |
 
 Un cours de suite, **Rust en pratique : IX et cie**, applique chacune de ces idées à du vrai code dans IX, hari et mes autres dépôts Rust.
 

@@ -10,7 +10,7 @@ Learning in public — courses written as I learn, in English and French.
 
 | Area | Course | Status |
 |---|---|---|
-| Software Engineering › Languages & frameworks | [Rust for C#/Java developers](src/content/docs/rust-for-csharp-java/) | lessons 1–12 of 15 |
+| Software Engineering › Languages & frameworks | [Rust for C#/Java developers](src/content/docs/rust-for-csharp-java/) | complete (15 lessons) |
 | Software Engineering › Infrastructure & tooling | [WSL containers](src/content/docs/wsl-containers/) | in progress |
 | Other | [Streeling University](src/content/docs/streeling/) | 31 imported modules, journal started |
 

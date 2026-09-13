@@ -11,7 +11,7 @@ Exemple complet : [`examples/l03_ownership.rs`](https://github.com/spareilleux/l
 
 En C# et en Java, les objets vivent sur le tas et plusieurs variables peuvent pointer vers le même objet. Personne ne le « possède » : le **ramasse-miettes** (garbage collector) le libère à un moment donné après la disparition de la dernière référence.
 
-C'est pratique, mais cela coûte un runtime, des pauses et de la marge mémoire — et cela ne gère que la mémoire : les fichiers, les sockets et les verrous ont toujours besoin de `using` / `IDisposable` ou de try-with-resources.
+C'est pratique, mais cela coûte un runtime, des pauses et de la marge mémoire — et cela ne gère que la mémoire : les fichiers, les sockets et les verrous ont toujours besoin de [`using`](https://learn.microsoft.com/dotnet/csharp/language-reference/statements/using) / [`IDisposable`](https://learn.microsoft.com/dotnet/api/system.idisposable) ou de [try-with-resources](https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html).
 
 Rust n'a pas de GC. À la place, le compilateur impose des règles de **possession (ownership)** et insère lui-même le code de nettoyage, à la compilation.
 
@@ -63,7 +63,7 @@ let c = b.clone();
 println!("b = {b}, c = {c}");   // b = hello, c = hello
 ```
 
-`clone()` duplique les données du tas. C'est toujours visible dans le code, donc les copies coûteuses ne se produisent jamais par accident.
+[`clone()`](https://doc.rust-lang.org/std/clone/trait.Clone.html) duplique les données du tas. C'est toujours visible dans le code, donc les copies coûteuses ne se produisent jamais par accident.
 
 ## Les types `Copy`
 
@@ -75,17 +75,17 @@ let y = x;
 println!("x = {x}, y = {y}");   // x = 5, y = 5
 ```
 
-Les entiers, les flottants, `bool`, `char`, ainsi que les tuples et tableaux de ceux-ci sont `Copy`. C'est proche des types valeur de C# (`struct`) — mais en Rust, *vos propres* structs sont déplacées par défaut et ne deviennent `Copy` que si vous le demandez avec `#[derive(Clone, Copy)]`.
+Les entiers, les flottants, `bool`, `char`, ainsi que les tuples et tableaux de ceux-ci sont `Copy`. C'est proche des types valeur de C# ([`struct`](https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/struct)) — mais en Rust, *vos propres* structs sont déplacées par défaut et ne deviennent `Copy` que si vous le demandez avec [`#[derive(Clone, Copy)]`](https://doc.rust-lang.org/book/appendix-03-derivable-traits.html).
 
 | | C# | Java | Rust |
 |---|---|---|---|
 | `b = a` avec un objet sur le tas | les deux référencent le même objet | les deux référencent le même objet | **déplacement** : `a` inutilisable |
 | `b = a` avec un `int` | copie | copie | copie (type `Copy`) |
-| copie profonde explicite | `ICloneable`, constructeur de copie | `clone()`, constructeur de copie | `.clone()` |
+| copie profonde explicite | [`ICloneable`](https://learn.microsoft.com/dotnet/api/system.icloneable), constructeur de copie | [`clone()`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#clone()), constructeur de copie | `.clone()` |
 
 ## Les fonctions prennent aussi possession
 
-Passer un `String` par valeur le déplace dans la fonction :
+Passer un [`String`](https://doc.rust-lang.org/std/string/struct.String.html) par valeur le déplace dans la fonction :
 
 ```rust
 fn take(s: String) -> usize {
@@ -160,10 +160,10 @@ dropping first.tmp
 | | C# | Java | Rust |
 |---|---|---|---|
 | Mémoire | GC, non déterministe | GC, non déterministe | libérée à la fin de la portée du propriétaire |
-| Fichiers, sockets, verrous | `using` + `IDisposable` | try-with-resources + `AutoCloseable` | le même `Drop`, automatiquement |
-| Oubli du nettoyage | fuite jusqu'au finaliseur (peut-être) | fuite jusqu'au finaliseur (peut-être) | le nettoyage s'exécute automatiquement ; une fuite exige un `std::mem::forget` explicite ou un cycle de références (leçon 11) |
+| Fichiers, sockets, verrous | `using` + `IDisposable` | try-with-resources + [`AutoCloseable`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/AutoCloseable.html) | le même `Drop`, automatiquement |
+| Oubli du nettoyage | fuite jusqu'au [finaliseur](https://learn.microsoft.com/dotnet/csharp/programming-guide/classes-and-structs/finalizers) (peut-être) | fuite jusqu'au finaliseur (peut-être) | le nettoyage s'exécute automatiquement ; une fuite exige un [`std::mem::forget`](https://doc.rust-lang.org/std/mem/fn.forget.html) explicite ou un cycle de références (leçon 11) |
 
-Ce motif — acquérir dans un constructeur, libérer dans `Drop` — est la façon dont fonctionnent `File`, `MutexGuard` et les connexions réseau en Rust. Il n'y a pas de mot-clé `using`, car chaque portée se comporte déjà comme tel.
+Ce motif — acquérir dans un constructeur, libérer dans `Drop` — est la façon dont fonctionnent [`File`](https://doc.rust-lang.org/std/fs/struct.File.html), [`MutexGuard`](https://doc.rust-lang.org/std/sync/struct.MutexGuard.html) et les connexions réseau en Rust. Il n'y a pas de mot-clé `using`, car chaque portée se comporte déjà comme tel.
 
 ## À retenir
 
@@ -236,7 +236,7 @@ println!("done");
 <details>
 <summary>Solution</summary>
 
-`b` d'abord (explicitement, via `std::mem::drop`, avant l'affichage de `done`), puis à la fin de la portée `c`, puis `a` — ordre inverse de déclaration pour les valeurs encore possédées.
+`b` d'abord (explicitement, via [`std::mem::drop`](https://doc.rust-lang.org/std/mem/fn.drop.html), avant l'affichage de `done`), puis à la fin de la portée `c`, puis `a` — ordre inverse de déclaration pour les valeurs encore possédées.
 
 </details>
 

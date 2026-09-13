@@ -41,7 +41,7 @@ shout(&mut message);
 println!("{message}");   // HELLO!
 ```
 
-L'appelant écrit `&mut` au point d'appel — comme le mot-clé `ref` de C#, la mutation est visible là où elle se produit. Java n'a pas d'équivalent : toute méthode qui détient une référence peut modifier l'objet.
+L'appelant écrit `&mut` au point d'appel — comme le [mot-clé `ref`](https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/ref) de C#, la mutation est visible là où elle se produit. Java n'a pas d'équivalent : toute méthode qui détient une référence peut modifier l'objet.
 
 ## La règle : partagé XOR mutable
 
@@ -66,7 +66,7 @@ error[E0502]: cannot borrow `names` as mutable because it is also borrowed as im
   |                ----- immutable borrow later used here
 ```
 
-Ce n'est pas de la pédanterie. `push` peut réallouer le buffer du vecteur, ce qui laisserait `first` pointer vers de la mémoire libérée. En C#/Java, le GC maintient l'ancien objet en vie, donc ce bug précis ne provoque pas de plantage — mais la *même règle* attrape un bug que vous connaissez bien.
+Ce n'est pas de la pédanterie. [`push`](https://doc.rust-lang.org/std/vec/struct.Vec.html#method.push) peut réallouer le buffer du vecteur, ce qui laisserait `first` pointer vers de la mémoire libérée. En C#/Java, le GC maintient l'ancien objet en vie, donc ce bug précis ne provoque pas de plantage — mais la *même règle* attrape un bug que vous connaissez bien.
 
 ## Vous avez déjà rencontré ce bug
 
@@ -141,7 +141,7 @@ help: instead, you are more likely to want to return an owned value
 1 + fn longest_line() -> String {
 ```
 
-`text` est libéré au retour de la fonction, donc une référence vers son contenu serait pendante. Renvoyez plutôt un `String` possédé. (Les durées de vie — la syntaxe `'a` que mentionne l'erreur — ont leur propre leçon, la 9.)
+`text` est libéré au retour de la fonction, donc une référence vers son contenu serait pendante. Renvoyez plutôt un [`String`](https://doc.rust-lang.org/std/string/struct.String.html) possédé. (Les durées de vie — la syntaxe `'a` que mentionne l'erreur — ont leur propre leçon, la 9.)
 
 ## Slices
 
@@ -154,7 +154,7 @@ let top_two = &scores[..2];      // &[i32]
 println!("top two: {top_two:?}");  // top two: [90, 72]
 ```
 
-Pensez à `Span<T>` / `ReadOnlySpan<T>` en C#, ou à `List.subList` en Java — mais vérifiée à la compilation, de sorte qu'elle ne peut jamais survivre au vecteur.
+Pensez à [`Span<T>`](https://learn.microsoft.com/dotnet/api/system.span-1) / [`ReadOnlySpan<T>`](https://learn.microsoft.com/dotnet/api/system.readonlyspan-1) en C#, ou à [`List.subList`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/List.html#subList(int,int)) en Java — mais vérifiée à la compilation, de sorte qu'elle ne peut jamais survivre au vecteur.
 
 ## `String` contre `&str`
 
@@ -165,10 +165,10 @@ C'est la pierre d'achoppement la plus fréquente, et les slices l'expliquent :
 | Ce que c'est | un buffer UTF-8 possédé et extensible | une slice empruntée de texte UTF-8 |
 | Où vivent les octets | sur le tas, possédés par cette valeur | n'importe où : un `String`, le binaire (littéraux), … |
 | Peut grandir | oui (`push_str`, `push`) | non |
-| Analogie C# | un `StringBuilder` que vous possédez | `ReadOnlySpan<char>` / un `string` que vous ne possédez pas |
+| Analogie C# | un [`StringBuilder`](https://learn.microsoft.com/dotnet/api/system.text.stringbuilder) que vous possédez | `ReadOnlySpan<char>` / un [`string`](https://learn.microsoft.com/dotnet/api/system.string) que vous ne possédez pas |
 | Usage typique | champs de structs, valeurs de retour | paramètres de fonctions |
 
-- Les littéraux de chaîne comme `"hello"` sont des `&str` (`&'static str` : ils vivent dans le binaire).
+- Les littéraux de chaîne comme `"hello"` sont des [`&str`](https://doc.rust-lang.org/std/primitive.str.html) (`&'static str` : ils vivent dans le binaire).
 - `&String` se convertit automatiquement en `&str`, donc **les paramètres devraient généralement être des `&str`** — ils acceptent alors les deux :
 
 ```rust
@@ -182,7 +182,7 @@ println!("first word: {}", first_word(&title));      // first word: the
 
 ## Les chaînes sont de l'UTF-8, pas des tableaux de caractères
 
-En C# et en Java, `s[0]` / `s.charAt(0)` renvoie une unité UTF-16. Rust refuse d'indexer une chaîne par position :
+En C# et en Java, `s[0]` / [`s.charAt(0)`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html#charAt(int)) renvoie une unité UTF-16. Rust refuse d'indexer une chaîne par position :
 
 ```rust
 let word = String::from("cafe");
@@ -225,14 +225,14 @@ for (i, s) in ["alpha", "beta"].iter().enumerate() {
 println!("{}", log.trim_end());   // 0:alpha 1:beta
 ```
 
-`format!` fonctionne comme `string.Format` / `String.format` (et comme l'interpolation C# avec `{name}` à l'intérieur du littéral).
+[`format!`](https://doc.rust-lang.org/std/macro.format.html) fonctionne comme [`string.Format`](https://learn.microsoft.com/dotnet/api/system.string.format) / [`String.format`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html#format(java.lang.String,java.lang.Object...)) (et comme l'[interpolation](https://learn.microsoft.com/dotnet/csharp/language-reference/tokens/interpolated) C# avec `{name}` à l'intérieur du littéral).
 
 ## À retenir
 
 - `&T` emprunte en lecture, `&mut T` emprunte en écriture ; le propriétaire conserve la possession.
 - Plusieurs emprunts partagés **ou** un seul emprunt mutable — la règle qui attrape aussi « collection modifiée pendant l'itération » à la compilation.
 - Les références ne peuvent jamais être pendantes ; renvoyez des valeurs possédées quand les données sont créées dans une fonction.
-- Prenez des `&str` en paramètre, stockez des `String` dans les structs ; les chaînes sont en UTF-8, donc itérez avec `.chars()` au lieu d'indexer.
+- Prenez des `&str` en paramètre, stockez des `String` dans les structs ; les chaînes sont en UTF-8, donc itérez avec [`.chars()`](https://doc.rust-lang.org/std/primitive.str.html#method.chars) au lieu d'indexer.
 
 ## Exercices
 

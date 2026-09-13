@@ -27,9 +27,9 @@ println!("total name length: {}", handle.join().unwrap());   // 8
 
 | Rust | C# | Java |
 |---|---|---|
-| `thread::spawn(closure)` | `new Thread(...).Start()` / `Task.Run` | `new Thread(...).start()` |
+| [`thread::spawn(closure)`](https://doc.rust-lang.org/std/thread/fn.spawn.html) | `new Thread(...).Start()` / [`Task.Run`](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task.run) | `new Thread(...).start()` |
 | `handle.join()` renvoie le résultat de la closure | `thread.Join()` (pas de résultat) / `await task` | `thread.join()` (pas de résultat) / `future.get()` |
-| `join()` renvoie `Err` si le thread a paniqué | exception relancée par `Task` | `ExecutionException` |
+| `join()` renvoie `Err` si le thread a paniqué | exception relancée par `Task` | [`ExecutionException`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/ExecutionException.html) |
 
 Le nouveau thread peut survivre à la fonction qui l'a démarré, il ne peut donc pas emprunter les variables locales de cette fonction ([leçon 9](../09-lifetimes/), `'static`). Oublier `move` donne une erreur très directe :
 
@@ -59,7 +59,7 @@ help: to force the closure to take ownership of `names` (and any other reference
 
 ## Threads à portée : l'emprunt est autorisé
 
-`thread::scope` garantit que chaque thread lancé à l'intérieur est joint avant que `scope` ne rende la main, si bien que ces threads à portée (scoped threads) **peuvent** emprunter des données locales :
+[`thread::scope`](https://doc.rust-lang.org/std/thread/fn.scope.html) garantit que chaque thread lancé à l'intérieur est joint avant que `scope` ne rende la main, si bien que ces threads à portée (scoped threads) **peuvent** emprunter des données locales :
 
 ```rust
 let data: Vec<u64> = (1..=1_000).collect();
@@ -107,8 +107,8 @@ L'équivalent C# — `count++` depuis deux tâches — compile et perd des incr�
 
 Deux traits marqueurs, implémentés automatiquement par le compilateur, décident de ce qui peut franchir la frontière d'un thread :
 
-- **`Send`** : une valeur de ce type peut être **déplacée** vers un autre thread.
-- **`Sync`** : une valeur peut être **partagée** par référence entre threads (`T` est `Sync` quand `&T` est `Send`).
+- **[`Send`](https://doc.rust-lang.org/std/marker/trait.Send.html)** : une valeur de ce type peut être **déplacée** vers un autre thread.
+- **[`Sync`](https://doc.rust-lang.org/std/marker/trait.Sync.html)** : une valeur peut être **partagée** par référence entre threads (`T` est `Sync` quand `&T` est `Send`).
 
 Presque tous les types sont les deux. Les exceptions sont les outils mono-thread de la [leçon 11](../11-smart-pointers/) :
 
@@ -118,7 +118,7 @@ Presque tous les types sont les deux. Les exceptions sont les outils mono-thread
 | `Rc<T>` | non | non | compteur de références non atomique |
 | `Arc<T>` (avec `T: Send + Sync`) | oui | oui | compteur atomique |
 | `Cell<T>`, `RefCell<T>` | oui | **non** | mutabilité intérieure non synchronisée |
-| `Mutex<T>` (avec `T: Send`) | oui | oui | l'accès est synchronisé |
+| [`Mutex<T>`](https://doc.rust-lang.org/std/sync/struct.Mutex.html) (avec `T: Send`) | oui | oui | l'accès est synchronisé |
 
 `thread::spawn` exige que sa closure soit `Send`, donc tout ce qu'elle capture doit l'être aussi. Partager un `RefCell` à travers un `Arc` échoue — et le compilateur suggère l'alternative thread-safe :
 
@@ -146,7 +146,7 @@ C# et Java ne font pas cette distinction : la sûreté vis-à-vis des threads es
 
 ## État partagé : `Arc<Mutex<T>>`
 
-Un `lock (obj) { … }` C# protège du code ; rien n'empêche une autre méthode de toucher la liste sans verrouiller. Un `Mutex<T>` Rust **possède** les données, et le seul moyen de les atteindre est `lock()` :
+Un [`lock (obj) { … }`](https://learn.microsoft.com/dotnet/csharp/language-reference/statements/lock) C# protège du code ; rien n'empêche une autre méthode de toucher la liste sans verrouiller. Un `Mutex<T>` Rust **possède** les données, et le seul moyen de les atteindre est `lock()` :
 
 ```rust
 let count = std::sync::Mutex::new(0);
@@ -182,11 +182,11 @@ for worker in workers {
 // squares: [(1, 1), (2, 4), (3, 9), (4, 16)]   (après tri)
 ```
 
-- `lock()` renvoie une **garde** (guard, `MutexGuard`) qui se déréférence vers les données. Le verrou est relâché quand la garde est détruite — pas de `finally`, pas d'`unlock()` oublié comme avec le `ReentrantLock` de Java.
-- `lock()` renvoie un `Result` : si un thread a **paniqué** en détenant le verrou, le mutex est *empoisonné* (poisoned) et les appels ultérieurs à `lock()` renvoient `Err`. `.unwrap()` propage cette panique, ce qui est généralement ce que l'on veut.
+- `lock()` renvoie une **garde** (guard, [`MutexGuard`](https://doc.rust-lang.org/std/sync/struct.MutexGuard.html)) qui se déréférence vers les données. Le verrou est relâché quand la garde est détruite — pas de `finally`, pas d'`unlock()` oublié comme avec le [`ReentrantLock`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/locks/ReentrantLock.html) de Java.
+- `lock()` renvoie un `Result` : si un thread a **paniqué** en détenant le verrou, le mutex est [*empoisonné*](https://doc.rust-lang.org/std/sync/struct.Mutex.html#poisoning) (poisoned) et les appels ultérieurs à `lock()` renvoient `Err`. `.unwrap()` propage cette panique, ce qui est généralement ce que l'on veut.
 - Gardez la portée de la garde courte. La conserver pendant un appel lent bloque tous les autres — et deux threads qui prennent deux verrous dans l'ordre inverse aboutissent toujours à un interblocage.
 
-`RwLock<T>` autorise plusieurs lecteurs ou un seul rédacteur, comme `ReaderWriterLockSlim` ou `ReentrantReadWriteLock` :
+[`RwLock<T>`](https://doc.rust-lang.org/std/sync/struct.RwLock.html) autorise plusieurs lecteurs ou un seul rédacteur, comme [`ReaderWriterLockSlim`](https://learn.microsoft.com/dotnet/api/system.threading.readerwriterlockslim) ou [`ReentrantReadWriteLock`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/locks/ReentrantReadWriteLock.html) :
 
 ```rust
 let settings = RwLock::new(HashMap::from([("mode", "fast")]));
@@ -217,7 +217,7 @@ thread::scope(|s| {
 // hits: 8000
 ```
 
-`fetch_add` correspond à `Interlocked.Increment` / `AtomicInteger.getAndAdd`. L'argument `Ordering` décrit la garantie d'ordonnancement mémoire dont vous avez besoin ; pour un compteur indépendant, `Relaxed` suffit (le livre *Rust Atomics and Locks*, en lien plus bas, explique les autres). Notez que les threads à portée empruntent `hits` sans `Arc` : un atomique est `Sync`.
+`fetch_add` correspond à [`Interlocked.Increment`](https://learn.microsoft.com/dotnet/api/system.threading.interlocked.increment) / [`AtomicInteger.getAndAdd`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/atomic/AtomicInteger.html#getAndAdd(int)). L'argument [`Ordering`](https://doc.rust-lang.org/std/sync/atomic/enum.Ordering.html) décrit la garantie d'ordonnancement mémoire dont vous avez besoin ; pour un compteur indépendant, `Relaxed` suffit (le livre *Rust Atomics and Locks*, en lien plus bas, explique les autres). Notez que les threads à portée empruntent `hits` sans `Arc` : un atomique est `Sync`.
 
 ## Canaux : partager en communiquant
 
@@ -238,11 +238,11 @@ let messages: Vec<String> = receiver.iter().collect();
 // ["worker 0 done", "worker 1 done", "worker 2 done"]   (après tri)
 ```
 
-`mpsc` signifie *multiple producer, single consumer* (plusieurs producteurs, un seul consommateur). L'équivalent C# est `System.Threading.Channels.Channel<T>` ou `BlockingCollection<T>` ; en Java, une `BlockingQueue`. L'itérateur du récepteur se termine quand tous les `Sender` ont été détruits — oublier `drop(sender)` est le blocage classique.
+[`mpsc`](https://doc.rust-lang.org/std/sync/mpsc/index.html) signifie *multiple producer, single consumer* (plusieurs producteurs, un seul consommateur). L'équivalent C# est [`System.Threading.Channels.Channel<T>`](https://learn.microsoft.com/dotnet/api/system.threading.channels.channel-1) ou [`BlockingCollection<T>`](https://learn.microsoft.com/dotnet/api/system.collections.concurrent.blockingcollection-1) ; en Java, une [`BlockingQueue`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/BlockingQueue.html). L'itérateur du récepteur se termine quand tous les `Sender` ont été détruits — oublier `drop(sender)` est le blocage classique.
 
 ## Parallélisme de données avec rayon
 
-Pour « faire ceci sur chaque élément, sur tous les cœurs », ne gérez pas les threads vous-même. La crate [rayon](https://docs.rs/rayon) transforme une chaîne d'itérateurs en chaîne parallèle — l'équivalent de l'`AsParallel()` de PLINQ ou du `parallelStream()` de Java :
+Pour « faire ceci sur chaque élément, sur tous les cœurs », ne gérez pas les threads vous-même. La crate [rayon](https://docs.rs/rayon) transforme une chaîne d'itérateurs en chaîne parallèle — l'équivalent de [PLINQ](https://learn.microsoft.com/dotnet/standard/parallel-programming/introduction-to-plinq) et de son [`AsParallel()`](https://learn.microsoft.com/dotnet/api/system.linq.parallelenumerable.asparallel), ou du [`parallelStream()`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Collection.html#parallelStream()) de Java :
 
 ```toml
 [dependencies]
@@ -273,7 +273,7 @@ let lengths: Vec<usize> = words.par_iter().map(|w| w.len()).collect();   // l'or
 | `.iter_mut()` | `.par_iter_mut()` |
 | `.sort()` | `.par_sort()` |
 
-rayon exécute le travail sur un pool comptant un thread par cœur et le répartit par vol de tâches (*work stealing*), comme le pool de threads .NET et le `ForkJoinPool` de Java. Ses closures doivent être `Fn` (pas de modification des variables capturées) et `Send + Sync`, si bien que la data race de tout à l'heure ne peut pas revenir en douce :
+rayon exécute le travail sur un pool comptant un thread par cœur et le répartit par vol de tâches (*work stealing*), comme le [pool de threads .NET](https://learn.microsoft.com/dotnet/standard/threading/the-managed-thread-pool) et le [`ForkJoinPool`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/ForkJoinPool.html) de Java. Ses closures doivent être [`Fn`](https://doc.rust-lang.org/std/ops/trait.Fn.html) (pas de modification des variables capturées) et `Send + Sync`, si bien que la data race de tout à l'heure ne peut pas revenir en douce :
 
 ```rust
 let mut seen = 0;
@@ -292,7 +292,7 @@ error[E0594]: cannot assign to `seen`, as it is a captured variable in a `Fn` cl
   |                                                          in this closure
 ```
 
-Utilisez plutôt `.count()`, ou un `AtomicUsize`.
+Utilisez plutôt `.count()`, ou un [`AtomicUsize`](https://doc.rust-lang.org/std/sync/atomic/type.AtomicUsize.html).
 
 Sur ma machine (Intel Core Ultra 9 285K, 24 cœurs, build release), compter les nombres premiers inférieurs à 5 000 000 a pris **environ 775 ms** en séquentiel et **environ 41 ms** avec `into_par_iter()` — voir l'exercice 3.
 
@@ -381,7 +381,7 @@ Chaque thread travaille sur sa propre map sans aucun verrou, et l'envoie une seu
 
 </details>
 
-3. Comptez les nombres premiers inférieurs à 5 000 000 avec `is_prime` de cette leçon, en séquentiel et avec rayon, et chronométrez les deux avec `std::time::Instant` dans un build **release** (`cargo run --release`). Vérifiez que les deux comptes sont égaux. À quel point l'accélération approche-t-elle « nombre de cœurs × » ?
+3. Comptez les nombres premiers inférieurs à 5 000 000 avec `is_prime` de cette leçon, en séquentiel et avec rayon, et chronométrez les deux avec [`std::time::Instant`](https://doc.rust-lang.org/std/time/struct.Instant.html) dans un build **release** (`cargo run --release`). Vérifiez que les deux comptes sont égaux. À quel point l'accélération approche-t-elle « nombre de cœurs × » ?
 
 <details>
 <summary>Solution</summary>

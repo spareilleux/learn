@@ -11,7 +11,7 @@ Full example: [`examples/l03_ownership.rs`](https://github.com/spareilleux/learn
 
 In C# and Java, objects live on the heap and many variables can point to the same object. Nobody "owns" it: the **garbage collector** frees it at some point after the last reference disappears.
 
-That is convenient, but it costs a runtime, pauses, and memory headroom — and it only manages memory: files, sockets and locks still need `using` / `IDisposable` or try-with-resources.
+That is convenient, but it costs a runtime, pauses, and memory headroom — and it only manages memory: files, sockets and locks still need [`using`](https://learn.microsoft.com/dotnet/csharp/language-reference/statements/using) / [`IDisposable`](https://learn.microsoft.com/dotnet/api/system.idisposable) or [try-with-resources](https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html).
 
 Rust has no GC. Instead, the compiler enforces **ownership** rules and inserts the cleanup code itself, at compile time.
 
@@ -63,7 +63,7 @@ let c = b.clone();
 println!("b = {b}, c = {c}");   // b = hello, c = hello
 ```
 
-`clone()` duplicates the heap data. It is always visible in the code, so expensive copies never happen by accident.
+[`clone()`](https://doc.rust-lang.org/std/clone/trait.Clone.html) duplicates the heap data. It is always visible in the code, so expensive copies never happen by accident.
 
 ## `Copy` types
 
@@ -75,17 +75,17 @@ let y = x;
 println!("x = {x}, y = {y}");   // x = 5, y = 5
 ```
 
-Integers, floats, `bool`, `char`, and tuples/arrays of those are `Copy`. This is close to C# value types (`struct`) — but in Rust *your own* structs are moved by default and only become `Copy` if you opt in with `#[derive(Clone, Copy)]`.
+Integers, floats, `bool`, `char`, and tuples/arrays of those are `Copy`. This is close to C# value types ([`struct`](https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/struct)) — but in Rust *your own* structs are moved by default and only become `Copy` if you opt in with [`#[derive(Clone, Copy)]`](https://doc.rust-lang.org/book/appendix-03-derivable-traits.html).
 
 | | C# | Java | Rust |
 |---|---|---|---|
 | `b = a` with a heap object | both reference the same object | both reference the same object | **move**: `a` unusable |
 | `b = a` with an `int` | copy | copy | copy (`Copy` type) |
-| explicit deep copy | `ICloneable`, copy constructor | `clone()`, copy constructor | `.clone()` |
+| explicit deep copy | [`ICloneable`](https://learn.microsoft.com/dotnet/api/system.icloneable), copy constructor | [`clone()`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#clone()), copy constructor | `.clone()` |
 
 ## Functions take ownership too
 
-Passing a `String` by value moves it into the function:
+Passing a [`String`](https://doc.rust-lang.org/std/string/struct.String.html) by value moves it into the function:
 
 ```rust
 fn take(s: String) -> usize {
@@ -160,10 +160,10 @@ dropping first.tmp
 | | C# | Java | Rust |
 |---|---|---|---|
 | Memory | GC, non-deterministic | GC, non-deterministic | freed at end of owner's scope |
-| Files, sockets, locks | `using` + `IDisposable` | try-with-resources + `AutoCloseable` | the same `Drop`, automatically |
-| Forgetting to clean up | leak until finalizer (maybe) | leak until finalizer (maybe) | cleanup runs automatically; a leak needs an explicit `std::mem::forget` or a reference cycle (lesson 11) |
+| Files, sockets, locks | `using` + `IDisposable` | try-with-resources + [`AutoCloseable`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/AutoCloseable.html) | the same `Drop`, automatically |
+| Forgetting to clean up | leak until [finalizer](https://learn.microsoft.com/dotnet/csharp/programming-guide/classes-and-structs/finalizers) (maybe) | leak until finalizer (maybe) | cleanup runs automatically; a leak needs an explicit [`std::mem::forget`](https://doc.rust-lang.org/std/mem/fn.forget.html) or a reference cycle (lesson 11) |
 
-This pattern — acquire in a constructor, release in `Drop` — is how `File`, `MutexGuard` and network connections work in Rust. There is no `using` keyword because every scope already behaves like one.
+This pattern — acquire in a constructor, release in `Drop` — is how [`File`](https://doc.rust-lang.org/std/fs/struct.File.html), [`MutexGuard`](https://doc.rust-lang.org/std/sync/struct.MutexGuard.html) and network connections work in Rust. There is no `using` keyword because every scope already behaves like one.
 
 ## Key takeaways
 
@@ -236,7 +236,7 @@ println!("done");
 <details>
 <summary>Solution</summary>
 
-`b` first (explicitly, via `std::mem::drop`, before `done` is printed), then at the end of the scope `c`, then `a` — reverse declaration order for the values still owned.
+`b` first (explicitly, via [`std::mem::drop`](https://doc.rust-lang.org/std/mem/fn.drop.html), before `done` is printed), then at the end of the scope `c`, then `a` — reverse declaration order for the values still owned.
 
 </details>
 

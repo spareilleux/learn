@@ -9,7 +9,7 @@ Exemple complet : [`examples/l09_lifetimes.rs`](https://github.com/spareilleux/l
 
 ## Le problème que cache un ramasse-miettes
 
-En C# ou en Java, une référence maintient son objet en vie : tant que vous pouvez l'atteindre, le ramasse-miettes ne le libère pas. Une « référence pendante » ne peut tout simplement pas exister.
+En C# ou en Java, une référence maintient son objet en vie : tant que vous pouvez l'atteindre, le [ramasse-miettes](https://learn.microsoft.com/dotnet/standard/garbage-collection/fundamentals) ne le libère pas. Une [« référence pendante »](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html#dangling-references) ne peut tout simplement pas exister.
 
 Rust n'a pas de ramasse-miettes. Une valeur est libérée quand son propriétaire sort de la portée ([leçon 3](../03-ownership-and-moves/)), donc le compilateur doit prouver qu'aucune référence n'est encore utilisée à ce moment-là :
 
@@ -74,7 +74,7 @@ fn longest<'a>(a: &'a str, b: &'a str) -> &'a str {
 }
 ```
 
-Lisez `<'a>` comme un paramètre générique (il est déclaré au même endroit que `<T>`) : *« pour une certaine durée de vie `'a` pendant laquelle `a` et `b` sont tous deux valides, le résultat est lui aussi valide pendant `'a` »*. En pratique, `'a` devient la **plus courte** des deux, si bien que l'appelant ne peut pas garder le résultat plus longtemps que l'une ou l'autre des entrées :
+Lisez `<'a>` comme un [paramètre générique](https://doc.rust-lang.org/reference/items/generics.html) (il est déclaré au même endroit que `<T>`) : *« pour une certaine durée de vie `'a` pendant laquelle `a` et `b` sont tous deux valides, le résultat est lui aussi valide pendant `'a` »*. En pratique, `'a` devient la **plus courte** des deux, si bien que l'appelant ne peut pas garder le résultat plus longtemps que l'une ou l'autre des entrées :
 
 ```rust
 let title = String::from("Rust for C# developers");
@@ -143,7 +143,7 @@ error[E0515]: cannot return reference to local variable `upper`
   |     ^^^^^^ returns a reference to data owned by the current function
 ```
 
-La correction est celle de la leçon 4 : renvoyer la `String` possédée.
+La correction est celle de la leçon 4 : renvoyer la [`String`](https://doc.rust-lang.org/std/string/struct.String.html) possédée.
 
 ## Des structs qui empruntent
 
@@ -201,7 +201,7 @@ error[E0597]: `novel` does not live long enough
    |                    ------------ borrow later used here
 ```
 
-L'équivalent C# le plus proche est une `ref struct` comme `Span<T>` : elle peut pointer dans la mémoire de quelqu'un d'autre, donc le compilateur restreint les endroits où elle peut aller. En Rust, n'importe quelle struct peut être ainsi.
+L'équivalent C# le plus proche est une [`ref struct`](https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/ref-struct) comme [`Span<T>`](https://learn.microsoft.com/dotnet/api/system.span-1) : elle peut pointer dans la mémoire de quelqu'un d'autre, donc le compilateur restreint les endroits où elle peut aller. En Rust, n'importe quelle struct peut être ainsi.
 
 ### La durée de vie dans une signature de méthode compte
 
@@ -268,7 +268,7 @@ error[E0597]: `name` does not live long enough
 note: requirement that the value outlives `'static` introduced here
 ```
 
-Déplacer la `String` elle-même dans la closure corrige le problème. `T: 'static` ne signifie **pas** « vit pour toujours » : cela signifie « ne contient aucune donnée empruntée susceptible d'expirer » — une `String` possédée remplit la condition. Les threads sont l'objet de la [leçon 12](../12-threads-and-concurrency/).
+Déplacer la `String` elle-même dans la closure corrige le problème. [`T: 'static`](https://doc.rust-lang.org/reference/trait-bounds.html#lifetime-bounds) ne signifie **pas** « vit pour toujours » : cela signifie « ne contient aucune donnée empruntée susceptible d'expirer » — une `String` possédée remplit la condition. Les threads sont l'objet de la [leçon 12](../12-threads-and-concurrency/).
 
 ## Quand les durées de vie gênent : possédez les données
 
@@ -276,10 +276,10 @@ En venant de C#, le réflexe est de stocker des références partout. En Rust, u
 
 | Situation | Utilisez |
 |---|---|
-| Paramètres de fonction que vous ne faites que lire | `&str`, `&[T]`, `&T` |
+| Paramètres de fonction que vous ne faites que lire | [`&str`](https://doc.rust-lang.org/std/primitive.str.html), [`&[T]`](https://doc.rust-lang.org/std/primitive.slice.html), `&T` |
 | Vues éphémères sur des données que possède quelqu'un d'autre (parsers, itérateurs, extraits) | une struct avec `'a` |
 | Données qu'une struct garde longtemps | `String`, `Vec<T>`, `T` possédés |
-| Données partagées par plusieurs propriétaires | `Rc`/`Arc` — [leçon 11](../11-smart-pointers/) |
+| Données partagées par plusieurs propriétaires | [`Rc`](https://doc.rust-lang.org/std/rc/struct.Rc.html)/[`Arc`](https://doc.rust-lang.org/std/sync/struct.Arc.html) — [leçon 11](../11-smart-pointers/) |
 
 Cloner quelques chaînes pour éviter un paramètre de durée de vie est un compromis parfaitement acceptable.
 
@@ -343,7 +343,7 @@ let hits = {
 assert_eq!(hits, [Highlight { line: "I like Rust", column: 7 }, Highlight { line: "Rust again", column: 0 }]);
 ```
 
-Les résultats n'empruntent que `text`, donc `word` reçoit sa propre durée de vie (élidée). Écrire `word: &'a str` ferait compiler la fonction mais rejetterait cet appel avec `E0597` : le compilateur supposerait alors que les résultats pourraient pointer dans `query`.
+Les résultats n'empruntent que `text`, donc `word` reçoit sa propre durée de vie (élidée). Écrire `word: &'a str` ferait compiler la fonction mais rejetterait cet appel avec [`E0597`](https://doc.rust-lang.org/error_codes/E0597.html) : le compilateur supposerait alors que les résultats pourraient pointer dans `query`.
 
 </details>
 

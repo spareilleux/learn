@@ -15,7 +15,7 @@ let mut counter: u32 = 0;   // explicitement mutable
 counter += 1;
 ```
 
-En termes C#, chaque `let` est comme une variable locale qu'on ne peut jamais réaffecter ; en Java, comme `final var`. On **choisit** la mutabilité avec `mut` :
+En termes C#, chaque `let` est comme une variable locale qu'on ne peut jamais réaffecter ; en Java, comme [`final var`](https://openjdk.org/jeps/286). On **choisit** la mutabilité avec `mut` :
 
 ```rust
 let count = 0;
@@ -38,7 +38,7 @@ help: consider making this binding mutable
 ```
 
 :::tip[Lisez l'erreur en entier]
-Les erreurs de Rust contiennent généralement la correction (`help: consider making this binding mutable`). Prenez l'habitude de les lire jusqu'au bout — et `rustc --explain E0384` en donne une explication complète.
+Les erreurs de Rust contiennent généralement la correction (`help: consider making this binding mutable`). Prenez l'habitude de les lire jusqu'au bout — et [`rustc --explain E0384`](https://doc.rust-lang.org/rustc/command-line-arguments.html#--explain-provide-a-detailed-explanation-of-an-error-message) en donne une explication complète.
 :::
 
 ## Masquage (shadowing)
@@ -51,7 +51,7 @@ let input: i32 = input.trim().parse().expect("not a number");
 println!("input + 1 = {}", input + 1); // input + 1 = 8
 ```
 
-Ce n'est pas une mutation : le premier `input` (un `&str`) existe toujours, il est simplement masqué. C# et Java interdisent de redéclarer une variable locale dans la même portée.
+Ce n'est pas une mutation : le premier `input` (un [`&str`](https://doc.rust-lang.org/std/primitive.str.html)) existe toujours, il est simplement masqué. C# et Java interdisent de redéclarer une variable locale dans la même portée.
 
 ## Types scalaires
 
@@ -61,11 +61,11 @@ Ce n'est pas une mutation : le premier `input` (un `&str`) existe toujours, il e
 | `i16` / `u16` | `short` / `ushort` | `short` / — | |
 | `i32` / `u32` | `int` / `uint` | `int` / — | `i32` est l'entier par défaut |
 | `i64` / `u64` | `long` / `ulong` | `long` / — | |
-| `i128` / `u128` | `Int128` / `UInt128` | — | |
-| `isize` / `usize` | `nint` / `nuint` | — | de la taille d'un pointeur ; utilisés pour les index et les longueurs |
+| `i128` / `u128` | [`Int128`](https://learn.microsoft.com/dotnet/api/system.int128) / `UInt128` | — | |
+| `isize` / `usize` | [`nint` / `nuint`](https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/integral-numeric-types#native-sized-integers) | — | de la taille d'un pointeur ; utilisés pour les index et les longueurs |
 | `f32` / `f64` | `float` / `double` | `float` / `double` | `f64` est le flottant par défaut |
 | `bool` | `bool` | `boolean` | |
-| `char` | `Rune` | point de code `int` | **4 octets**, une valeur scalaire Unicode — *pas* une unité UTF-16 comme le `char` de C#/Java |
+| `char` | [`Rune`](https://learn.microsoft.com/dotnet/api/system.text.rune) | point de code `int` | **4 octets**, une valeur scalaire Unicode — *pas* une unité UTF-16 comme le `char` de C#/Java |
 
 ```rust
 let note = '♪';
@@ -91,7 +91,7 @@ error[E0308]: mismatched types
   |                         ^^^ expected `i32`, found `i64`
 ```
 
-Convertissez explicitement avec `as` (ou `i64::from(small)`, qui n'existe que pour les conversions sans perte) :
+Convertissez explicitement avec [`as`](https://doc.rust-lang.org/reference/expressions/operator-expr.html#type-cast-expressions) (ou [`i64::from(small)`](https://doc.rust-lang.org/std/convert/trait.From.html), qui n'existe que pour les conversions sans perte) :
 
 ```rust
 let total = small as i64 + big; // 30
@@ -101,7 +101,7 @@ let total = small as i64 + big; // 30
 
 | | C# | Java | Rust, build debug | Rust, build release |
 |---|---|---|---|---|
-| `255u8 + 1` | reboucle (sauf avec `checked`) | reboucle | **panique** | reboucle |
+| `255u8 + 1` | reboucle (sauf avec [`checked`](https://learn.microsoft.com/dotnet/csharp/language-reference/statements/checked-and-unchecked)) | reboucle | **[panique](https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html)** | reboucle |
 
 Dans un build debug, Rust arrête le programme :
 
@@ -128,7 +128,7 @@ println!("x = {x}, y = {y}, first prime = {}, count = {}", primes[0], primes.len
 // x = 1.5, y = -2, first prime = 2, count = 5
 ```
 
-Une liste extensible est un `Vec<T>` (comme `List<T>` / `ArrayList<T>`) — la leçon 8 traite des collections.
+Une liste extensible est un [`Vec<T>`](https://doc.rust-lang.org/std/vec/struct.Vec.html) (comme [`List<T>`](https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1) / [`ArrayList<T>`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/ArrayList.html)) — la leçon 8 traite des collections.
 
 ## Tout est expression
 
@@ -157,7 +157,7 @@ fn square(x: i32) -> i32 {
 ```
 
 :::caution[Le point-virgule compte]
-Écrire `x * x;` transforme l'expression en instruction : la fonction renvoie alors `()` (le type unité, le `void` de Rust) et le compilateur signale une incompatibilité de types.
+Écrire `x * x;` transforme l'expression en instruction : la fonction renvoie alors [`()`](https://doc.rust-lang.org/std/primitive.unit.html) (le type unité, le `void` de Rust) et le compilateur signale une incompatibilité de types.
 :::
 
 ## Boucles
@@ -231,7 +231,7 @@ Le point-virgule final transforme `x * 2` en instruction, si bien que le corps s
 <details>
 <summary>Solution</summary>
 
-Dans un build debug, le programme panique avec `attempt to add with overflow`. Dans un build release, la valeur reboucle à `0`. Si c'est le rebouclage que vous voulez, écrivez `b = b.wrapping_add(1);` ; si vous voulez le détecter, utilisez `b.checked_add(1)`, qui renvoie un `Option<u8>`.
+Dans un build debug, le programme panique avec `attempt to add with overflow`. Dans un build release, la valeur reboucle à `0`. Si c'est le rebouclage que vous voulez, écrivez `b = b.wrapping_add(1);` ; si vous voulez le détecter, utilisez [`b.checked_add(1)`](https://doc.rust-lang.org/std/primitive.u8.html#method.checked_add), qui renvoie un [`Option<u8>`](https://doc.rust-lang.org/std/option/enum.Option.html).
 
 </details>
 

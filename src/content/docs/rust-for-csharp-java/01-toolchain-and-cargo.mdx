@@ -1,38 +1,79 @@
 ---
 title: 1. Toolchain and Cargo
-description: rustup, cargo and crates.io, mapped to the dotnet CLI, NuGet and Maven.
+description: rustup, cargo and crates.io, mapped to the dotnet CLI, NuGet and Maven — on Windows, Linux/WSL and macOS.
 sidebar:
   order: 1
 ---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 ## The three tools
 
 | Rust | Role | C# | Java |
 |---|---|---|---|
-| `rustup` | installs and updates toolchains | .NET SDK installer / `global.json` | SDKMAN!, JDK installers |
-| `cargo` | build, run, test, add dependencies | `dotnet` CLI | Maven / Gradle |
-| crates.io | public package registry | NuGet | Maven Central |
-| `rustc` | the compiler (Cargo calls it for you) | Roslyn (`csc`) | `javac` |
+| `rustup` | installs and updates toolchains | .NET SDK installer / [`global.json`](https://learn.microsoft.com/dotnet/core/tools/global-json) | [SDKMAN!](https://sdkman.io/), JDK installers |
+| `cargo` | build, run, test, add dependencies | [`dotnet` CLI](https://learn.microsoft.com/dotnet/core/tools/) | [Maven](https://maven.apache.org/) / [Gradle](https://gradle.org/) |
+| [crates.io](https://crates.io/) | public package registry | [NuGet](https://www.nuget.org/) | [Maven Central](https://central.sonatype.com/) |
+| `rustc` | the compiler (Cargo calls it for you) | [Roslyn](https://learn.microsoft.com/dotnet/csharp/roslyn-sdk/) (`csc`) | [`javac`](https://docs.oracle.com/en/java/javase/25/docs/specs/man/javac.html) |
 
-Install from [rustup.rs](https://rustup.rs). On Windows the default toolchain targets MSVC, so you also need the **Visual Studio C++ Build Tools** (the linker).
+## Installing
+
+Rust is installed with [rustup](https://rustup.rs) on every OS. Rust uses the platform's **linker**, so each OS also needs its native C build tools.
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
 
 ```powershell
+winget install Rustlang.Rustup
+```
+
+Or download `rustup-init.exe` from [rustup.rs](https://rustup.rs). The default toolchain targets MSVC, so you also need the **[Visual Studio C++ Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/)** (the linker); `rustup-init` offers to install them if they are missing. Open a new terminal afterwards so `cargo` is on the `PATH`.
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```bash
+sudo apt install build-essential        # the C linker (Debian/Ubuntu; use your distro's package otherwise)
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+. "$HOME/.cargo/env"                    # or open a new shell
+```
+
+**On WSL**, install Rust *inside* the Linux distribution, not through the Windows installer, and keep your projects in the Linux file system (`~/src/...`), not under `/mnt/c`: builds are much faster there. [VS Code](https://code.visualstudio.com/docs/remote/wsl) and [RustRover](https://www.jetbrains.com/rust/) can open a WSL folder directly.
+
+</TabItem>
+<TabItem label="macOS">
+
+```bash
+xcode-select --install                  # the Apple command-line tools, which include the linker
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+. "$HOME/.cargo/env"                    # or open a new terminal
+```
+
+</TabItem>
+</Tabs>
+
+Then, on any OS:
+
+```bash
 rustc --version   # rustc 1.94.0 (4a4ef493e 2026-03-02)
 cargo --version   # cargo 1.94.0 (85eff7c80 2026-01-15)
 rustup update     # upgrade to the latest stable
 ```
 
 :::note[No runtime to install]
-Rust compiles to a native executable. There is no CLR or JVM to ship: the release build of "Hello, world!" is a single ~130 KB `.exe` on Windows.
+Rust compiles to a native executable. There is no CLR or JVM to ship: the release build of "Hello, world!" is a single file: about 130 KB as a Windows `.exe`, and about 430–460 KB on macOS and Linux (measured by the course's CI).
 :::
 
 ## Creating a project
 
-```powershell
+```bash
 cargo new hello
 cd hello
 cargo run
 ```
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
 
 ```text
     Creating binary (application) `hello` package
@@ -41,6 +82,35 @@ cargo run
      Running `target\debug\hello.exe`
 Hello, world!
 ```
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```text
+    Creating binary (application) `hello` package
+note: see more `Cargo.toml` keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+   Compiling hello v0.1.0 (…/hello)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.55s
+     Running `target/debug/hello`
+Hello, world!
+```
+
+</TabItem>
+<TabItem label="macOS">
+
+```text
+    Creating binary (application) `hello` package
+note: see more `Cargo.toml` keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+   Compiling hello v0.1.0 (…/hello)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 3.89s
+     Running `target/debug/hello`
+Hello, world!
+```
+
+</TabItem>
+</Tabs>
+
+The Linux and macOS outputs come from the course's CI runners, which use a newer Cargo that adds the `note:` line.
 
 `cargo new` also runs `git init` and writes a `.gitignore`. The layout:
 
@@ -70,7 +140,11 @@ fn main() {
 ```
 
 - `println!` ends with `!` because it is a **macro**, not a function (it checks the format string at compile time).
-- The **edition** (`2024`) is like `<LangVersion>` or `--release`: it opts into language changes without breaking older crates, which keep compiling with their own edition.
+- The **edition** (`2024`) is like [`<LangVersion>`](https://learn.microsoft.com/dotnet/csharp/language-reference/configure-language-version) or [`--release`](https://openjdk.org/jeps/247): it opts into language changes without breaking older crates, which keep compiling with their own edition.
+
+:::note[Outputs in this course]
+Compiler errors and program outputs in the lessons were captured on Windows. On Linux and macOS they are identical except for paths: `/` instead of `\`, and no `.exe` or `.dll` extension. Every example is also built and run on Linux and macOS by the course's CI.
+:::
 
 ## Everyday commands
 
@@ -84,17 +158,17 @@ fn main() {
 | Run | `cargo run` | `dotnet run` | `mvn exec:java` |
 | Test | `cargo test` | `dotnet test` | `mvn test` |
 | Add dependency | `cargo add rand` | `dotnet add package` | edit `pom.xml` |
-| Format | `cargo fmt` | `dotnet format` | Spotless plugin |
-| Lint | `cargo clippy` | Roslyn analyzers | Error Prone, SpotBugs |
-| API docs | `cargo doc --open` | XML docs + DocFX | `javadoc` |
+| Format | `cargo fmt` | [`dotnet format`](https://learn.microsoft.com/dotnet/core/tools/dotnet-format) | [Spotless](https://github.com/diffplug/spotless) plugin |
+| Lint | [`cargo clippy`](https://doc.rust-lang.org/clippy/) | [Roslyn analyzers](https://learn.microsoft.com/dotnet/fundamentals/code-analysis/overview) | [Error Prone](https://errorprone.info/), [SpotBugs](https://spotbugs.github.io/) |
+| API docs | `cargo doc --open` | [XML docs](https://learn.microsoft.com/dotnet/csharp/language-reference/xmldoc/) + [DocFX](https://dotnet.github.io/docfx/) | [`javadoc`](https://docs.oracle.com/en/java/javase/25/javadoc/) |
 
 :::tip[Use `cargo check` constantly]
-`cargo check` runs the whole type and borrow checker but skips code generation. It is much faster than a build, and it is what your editor (rust-analyzer) does on every keystroke.
+`cargo check` runs the whole type and borrow checker but skips code generation. It is much faster than a build, and it is what your editor ([rust-analyzer](https://rust-analyzer.github.io/)) does on every keystroke.
 :::
 
 ## Dependencies
 
-```powershell
+```bash
 cargo add rand
 ```
 
@@ -103,22 +177,26 @@ cargo add rand
 rand = "0.10.2"
 ```
 
-- `"0.10.2"` means **compatible with 0.10.2** (SemVer caret), not "exactly 0.10.2".
-- The exact resolved versions are written to `Cargo.lock` — like `packages.lock.json` or a Gradle lockfile. Commit it for applications.
+- `"0.10.2"` means **compatible with 0.10.2** ([SemVer caret](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html#caret-requirements)), not "exactly 0.10.2".
+- The exact resolved versions are written to [`Cargo.lock`](https://doc.rust-lang.org/cargo/guide/cargo-toml-vs-cargo-lock.html) — like [`packages.lock.json`](https://learn.microsoft.com/nuget/consume-packages/package-references-in-project-files#locking-dependencies) or a [Gradle lockfile](https://docs.gradle.org/current/userguide/dependency_locking.html). Commit it for applications.
 - Debug and release builds land in `target/debug` and `target/release` (like `bin/Debug` and `bin/Release`).
 
 ## Key takeaways
 
 - `rustup` manages compilers, `cargo` does everything else, crates.io hosts packages.
+- Each OS needs its native linker: Visual Studio Build Tools, `build-essential`, or the [Xcode command-line tools](https://developer.apple.com/documentation/xcode/installing-the-command-line-tools/).
 - `Cargo.toml` + `Cargo.lock` ≈ `.csproj` + lockfile / `pom.xml`.
 - `cargo check` for fast feedback, `cargo build --release` for optimized binaries.
 
 ## Exercises
 
-1. Create a project called `dice`, add the `rand` crate, and find in `Cargo.lock` which version was actually resolved.
+1. Create a project called `dice`, add the [`rand`](https://docs.rs/rand) crate, and find in `Cargo.lock` which version was actually resolved.
 
 <details>
 <summary>Solution</summary>
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
 
 ```powershell
 cargo new dice
@@ -127,6 +205,31 @@ cargo add rand
 cargo build
 Select-String -Path Cargo.lock -Pattern 'name = "rand"' -Context 0,1
 ```
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```bash
+cargo new dice
+cd dice
+cargo add rand
+cargo build
+grep -A1 'name = "rand"' Cargo.lock
+```
+
+</TabItem>
+<TabItem label="macOS">
+
+```bash
+cargo new dice
+cd dice
+cargo add rand
+cargo build
+grep -A1 'name = "rand"' Cargo.lock
+```
+
+</TabItem>
+</Tabs>
 
 `Cargo.toml` holds the requirement you asked for; `Cargo.lock` holds the exact version (and every transitive dependency) that was chosen.
 
@@ -144,5 +247,7 @@ Select-String -Path Cargo.lock -Pattern 'name = "rand"' -Context 0,1
 ## Sources
 
 - [The Book, ch. 1 — Getting Started](https://doc.rust-lang.org/book/ch01-00-getting-started.html)
+- [rustup — Installation and other installation methods](https://rust-lang.github.io/rustup/installation/index.html)
 - [The Cargo Book — Specifying dependencies](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html)
 - [The Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
+- [Microsoft — Rust development environment on WSL](https://learn.microsoft.com/windows/dev-environment/rust/setup)

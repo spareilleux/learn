@@ -1,6 +1,6 @@
 ## Course conventions
 
-- English is the source language (root locale, `src/content/docs/`); French mirrors it under `src/content/docs/fr/` with identical file names. Slugs (file names) are in English.
+- English is the source language (root locale, `src/content/docs/`); French mirrors it under `src/content/docs/fr/` with identical file names. Slugs (file names) are in English. Translate prose and the comments inside code blocks; code, commands and compiler or program output stay identical to the English page, and so do the link URLs.
 - Each course folder: `index.md` (mission, prerequisites, plan, resources), numbered lessons `01-…md` with exercises and collapsible `<details>` solutions, and a dated `journal.md`.
 - Order pages with `sidebar.order`; register each course as a collapsed `autogenerate` group in `astro.config.mjs`, nested under its area and sub-area groups, and list it under the same headings on both home pages. *Software Engineering* / *Génie logiciel* has three sub-areas: *Languages & frameworks* / *Langages et frameworks*, *Infrastructure & tooling* / *Infrastructure et outillage*, *AI-assisted development* / *Développement assisté par IA*. Add a sub-area group only when its first course exists; keep the nesting at two levels.
 - Mark anything not yet tested on the author's machine as *à vérifier* / *to verify*, and cite primary sources.

@@ -41,7 +41,7 @@ shout(&mut message);
 println!("{message}");   // HELLO!
 ```
 
-The caller writes `&mut` at the call site — like C#'s `ref` keyword, the mutation is visible where it happens. Java has no equivalent: any method holding a reference can mutate the object.
+The caller writes `&mut` at the call site — like C#'s [`ref` keyword](https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/ref), the mutation is visible where it happens. Java has no equivalent: any method holding a reference can mutate the object.
 
 ## The rule: shared XOR mutable
 
@@ -66,7 +66,7 @@ error[E0502]: cannot borrow `names` as mutable because it is also borrowed as im
   |                ----- immutable borrow later used here
 ```
 
-This is not pedantry. `push` may reallocate the vector's buffer, which would leave `first` pointing into freed memory. In C#/Java the GC keeps the old object alive, so this particular bug does not crash — but the *same rule* catches a bug you know well.
+This is not pedantry. [`push`](https://doc.rust-lang.org/std/vec/struct.Vec.html#method.push) may reallocate the vector's buffer, which would leave `first` pointing into freed memory. In C#/Java the GC keeps the old object alive, so this particular bug does not crash — but the *same rule* catches a bug you know well.
 
 ## You have met this bug before
 
@@ -141,7 +141,7 @@ help: instead, you are more likely to want to return an owned value
 1 + fn longest_line() -> String {
 ```
 
-`text` is dropped when the function returns, so a reference into it would dangle. Return an owned `String` instead. (Lifetimes — the `'a` syntax the error mentions — get their own lesson, 9.)
+`text` is dropped when the function returns, so a reference into it would dangle. Return an owned [`String`](https://doc.rust-lang.org/std/string/struct.String.html) instead. (Lifetimes — the `'a` syntax the error mentions — get their own lesson, 9.)
 
 ## Slices
 
@@ -154,7 +154,7 @@ let top_two = &scores[..2];      // &[i32]
 println!("top two: {top_two:?}");  // top two: [90, 72]
 ```
 
-Think `Span<T>` / `ReadOnlySpan<T>` in C#, or `List.subList` in Java — but checked at compile time so it can never outlive the vector.
+Think [`Span<T>`](https://learn.microsoft.com/dotnet/api/system.span-1) / [`ReadOnlySpan<T>`](https://learn.microsoft.com/dotnet/api/system.readonlyspan-1) in C#, or [`List.subList`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/List.html#subList(int,int)) in Java — but checked at compile time so it can never outlive the vector.
 
 ## `String` vs `&str`
 
@@ -165,10 +165,10 @@ This is the most common stumbling block, and slices explain it:
 | What it is | an owned, growable UTF-8 buffer | a borrowed slice of UTF-8 text |
 | Where the bytes live | heap, owned by this value | anywhere: a `String`, the binary (literals), … |
 | Can grow | yes (`push_str`, `push`) | no |
-| C# analogy | `StringBuilder` that you own | `ReadOnlySpan<char>` / a `string` you don't own |
+| C# analogy | [`StringBuilder`](https://learn.microsoft.com/dotnet/api/system.text.stringbuilder) that you own | `ReadOnlySpan<char>` / a [`string`](https://learn.microsoft.com/dotnet/api/system.string) you don't own |
 | Typical use | struct fields, return values | function parameters |
 
-- String literals like `"hello"` are `&str` (`&'static str`: they live in the binary).
+- String literals like `"hello"` are [`&str`](https://doc.rust-lang.org/std/primitive.str.html) (`&'static str`: they live in the binary).
 - `&String` converts to `&str` automatically, so **parameters should usually be `&str`** — they then accept both:
 
 ```rust
@@ -182,7 +182,7 @@ println!("first word: {}", first_word(&title));      // first word: the
 
 ## Strings are UTF-8, not arrays of chars
 
-In C# and Java, `s[0]` / `s.charAt(0)` returns a UTF-16 unit. Rust refuses to index a string by position:
+In C# and Java, `s[0]` / [`s.charAt(0)`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html#charAt(int)) returns a UTF-16 unit. Rust refuses to index a string by position:
 
 ```rust
 let word = String::from("cafe");
@@ -225,14 +225,14 @@ for (i, s) in ["alpha", "beta"].iter().enumerate() {
 println!("{}", log.trim_end());   // 0:alpha 1:beta
 ```
 
-`format!` works like `string.Format` / `String.format` (and like C# interpolation with `{name}` inside the literal).
+[`format!`](https://doc.rust-lang.org/std/macro.format.html) works like [`string.Format`](https://learn.microsoft.com/dotnet/api/system.string.format) / [`String.format`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html#format(java.lang.String,java.lang.Object...)) (and like C# [interpolation](https://learn.microsoft.com/dotnet/csharp/language-reference/tokens/interpolated) with `{name}` inside the literal).
 
 ## Key takeaways
 
 - `&T` borrows for reading, `&mut T` borrows for writing; the owner keeps ownership.
 - Many shared borrows **or** one mutable borrow — the rule that also catches "collection modified during iteration" at compile time.
 - References can never dangle; return owned values when the data is created inside a function.
-- Take `&str` in parameters, store `String` in structs; strings are UTF-8, so iterate with `.chars()` instead of indexing.
+- Take `&str` in parameters, store `String` in structs; strings are UTF-8, so iterate with [`.chars()`](https://doc.rust-lang.org/std/primitive.str.html#method.chars) instead of indexing.
 
 ## Exercises
 

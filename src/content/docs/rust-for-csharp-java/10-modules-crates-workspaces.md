@@ -12,11 +12,11 @@ Workspace: [`l10-workspace/`](https://github.com/spareilleux/learn/tree/main/cod
 
 | Rust | C# | Java |
 |---|---|---|
-| **module** (`mod`) | namespace | package |
-| **crate** — one compilation unit, a library or an executable | assembly (`.dll` / `.exe`) | JAR |
-| **package** — a `Cargo.toml` building one or more crates | project (`.csproj`) | Maven/Gradle module |
-| **workspace** — several packages built together | solution (`.sln`) | multi-module build (parent POM) |
-| [crates.io](https://crates.io) | NuGet | Maven Central |
+| **module** (`mod`) | [namespace](https://learn.microsoft.com/dotnet/csharp/fundamentals/program-structure/namespaces) | [package](https://docs.oracle.com/javase/tutorial/java/package/packages.html) |
+| **crate** — one compilation unit, a library or an executable | [assembly](https://learn.microsoft.com/dotnet/standard/assembly/) (`.dll` / `.exe`) | [JAR](https://docs.oracle.com/javase/tutorial/deployment/jar/) |
+| **package** — a [`Cargo.toml`](https://doc.rust-lang.org/cargo/reference/manifest.html) building one or more crates | [project (`.csproj`)](https://learn.microsoft.com/dotnet/core/project-sdk/overview) | [Maven](https://maven.apache.org/)/[Gradle](https://gradle.org/) module |
+| **workspace** — several packages built together | [solution (`.sln`)](https://learn.microsoft.com/visualstudio/ide/solutions-and-projects-in-visual-studio) | [multi-module build (parent POM)](https://maven.apache.org/guides/mini/guide-multiple-modules.html) |
+| [crates.io](https://crates.io) | [NuGet](https://www.nuget.org/) | [Maven Central](https://central.sonatype.com/) |
 
 Two differences stand out. A C# namespace is just a naming prefix and any file can add to it; a Rust module is a real **scope** with its own privacy, and the module tree is declared explicitly. And in C#, every `.cs` file in the project folder is compiled; in Rust, a file is compiled only if some module declares it.
 
@@ -61,7 +61,7 @@ Everything is **private by default**. A private item is visible in the module th
 |---|---|---|---|
 | *(nothing)* | this module and its children | `private` | `private` |
 | `pub(super)` | the parent module too | — | — |
-| `pub(crate)` | the whole crate | `internal` | package-private (roughly) |
+| `pub(crate)` | the whole crate | [`internal`](https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/internal) | [package-private](https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html) (roughly) |
 | `pub` | everywhere the parent module is visible | `public` | `public` |
 
 There is no `protected`: Rust has no inheritance between structs.
@@ -133,7 +133,7 @@ unit square: 1
 
 | Path start | Means | Like |
 |---|---|---|
-| `crate::` | the root of the current crate | `global::` in C# |
+| `crate::` | the root of the current crate | [`global::`](https://learn.microsoft.com/dotnet/csharp/language-reference/operators/namespace-alias-qualifier) in C# |
 | `super::` | the parent module | `..` in a file path |
 | `self::` | the current module | `.` |
 | a crate name (`std::`, `geometry::`) | an external crate | an assembly's root namespace |
@@ -153,7 +153,7 @@ help: consider importing this struct
   |
 ```
 
-`pub use` **re-exports** a name so that callers see a simpler path than your internal layout — the library in the next section uses it.
+[`pub use`](https://doc.rust-lang.org/reference/items/use-declarations.html#use-visibility) **re-exports** a name so that callers see a simpler path than your internal layout — the library in the next section uses it.
 
 ## Modules in files
 
@@ -170,7 +170,7 @@ The file contains the body only — no `mod shapes { }` wrapper. A `.rs` file th
 
 A package can contain one **library crate** (`src/lib.rs`) and any number of **binary crates** (`src/main.rs`, `src/bin/*.rs`). The course code itself is a library with doctests plus `examples/`, which Cargo builds as extra binaries.
 
-Dependencies go in `Cargo.toml`, or are added with `cargo add`:
+Dependencies go in `Cargo.toml`, or are added with [`cargo add`](https://doc.rust-lang.org/cargo/commands/cargo-add.html):
 
 ```toml
 [dependencies]
@@ -180,13 +180,13 @@ geometry = { path = "../geometry" }             # a local crate
 
 | Cargo | .NET | Maven/Gradle |
 |---|---|---|
-| `serde = "1.0"` means `>=1.0.0, <2.0.0` (caret, SemVer-compatible updates) | `Version="1.0"` means `>=1.0` | `1.0` is a soft requirement that conflict resolution may override; ranges are written `[1.0,2.0)` |
-| `Cargo.lock` pins exact versions | `packages.lock.json` | lock files / dependency locking |
-| `cargo tree` | `dotnet list package --include-transitive` | `mvn dependency:tree` |
+| `serde = "1.0"` means `>=1.0.0, <2.0.0` (caret, [SemVer](https://semver.org/)-compatible updates) | [`Version="1.0"`](https://learn.microsoft.com/nuget/concepts/package-versioning#version-ranges) means `>=1.0` | `1.0` is a [soft requirement](https://maven.apache.org/pom.html#Dependency_Version_Requirement_Specification) that conflict resolution may override; ranges are written `[1.0,2.0)` |
+| [`Cargo.lock`](https://doc.rust-lang.org/cargo/guide/cargo-toml-vs-cargo-lock.html) pins exact versions | [`packages.lock.json`](https://learn.microsoft.com/nuget/consume-packages/package-references-in-project-files#locking-dependencies) | lock files / [dependency locking](https://docs.gradle.org/current/userguide/dependency_locking.html) |
+| [`cargo tree`](https://doc.rust-lang.org/cargo/commands/cargo-tree.html) | [`dotnet list package --include-transitive`](https://learn.microsoft.com/dotnet/core/tools/dotnet-package-list) | [`mvn dependency:tree`](https://maven.apache.org/plugins/maven-dependency-plugin/tree-mojo.html) |
 
 ### Features: compile-time options
 
-A crate can declare **features** that turn optional code on. Features are additive switches checked with `#[cfg]`, closer to C# `#if` symbols than to runtime configuration:
+A crate can declare **features** that turn optional code on. Features are additive switches checked with [`#[cfg]`](https://doc.rust-lang.org/reference/conditional-compilation.html), closer to C# [`#if`](https://learn.microsoft.com/dotnet/csharp/language-reference/preprocessor-directives#conditional-compilation) symbols than to runtime configuration:
 
 ```toml
 # geometry/Cargo.toml
@@ -266,7 +266,7 @@ publish.workspace = true
 geometry = { workspace = true, features = ["display"] }
 ```
 
-`[workspace.dependencies]` plays the role of .NET *Central Package Management* (`Directory.Packages.props`) or a Maven `<dependencyManagement>` section: versions are declared once, members only say `workspace = true`.
+`[workspace.dependencies]` plays the role of .NET [*Central Package Management*](https://learn.microsoft.com/nuget/consume-packages/central-package-management) (`Directory.Packages.props`) or a Maven [`<dependencyManagement>`](https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#Dependency_Management) section: versions are declared once, members only say `workspace = true`.
 
 ```rust
 // geometry/src/lib.rs
@@ -324,7 +324,7 @@ Everyday commands, run from the workspace root:
 | Command | Does |
 |---|---|
 | `cargo build` | builds every member |
-| `cargo run -p app` | runs one package, like `dotnet run --project app` |
+| `cargo run -p app` | runs one package, like [`dotnet run --project app`](https://learn.microsoft.com/dotnet/core/tools/dotnet-run) |
 | `cargo test --workspace` | tests every member |
 | `cargo tree` | shows the dependency graph |
 

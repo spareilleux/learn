@@ -11,13 +11,13 @@ Exemple complet : [`examples/l08_collections_iterators.rs`](https://github.com/s
 
 | Rust (`std::collections`) | C# | Java |
 |---|---|---|
-| `Vec<T>` | `List<T>` | `ArrayList<T>` |
-| `VecDeque<T>` | `Queue<T>` / `LinkedList<T>` | `ArrayDeque<T>` |
-| `HashMap<K, V>` | `Dictionary<K, V>` | `HashMap<K, V>` |
-| `BTreeMap<K, V>` | `SortedDictionary<K, V>` | `TreeMap<K, V>` |
-| `HashSet<T>` | `HashSet<T>` | `HashSet<T>` |
-| `BTreeSet<T>` | `SortedSet<T>` | `TreeSet<T>` |
-| `BinaryHeap<T>` | `PriorityQueue<T, P>` | `PriorityQueue<T>` |
+| [`Vec<T>`](https://doc.rust-lang.org/std/vec/struct.Vec.html) | `List<T>` | `ArrayList<T>` |
+| [`VecDeque<T>`](https://doc.rust-lang.org/std/collections/struct.VecDeque.html) | `Queue<T>` / `LinkedList<T>` | `ArrayDeque<T>` |
+| [`HashMap<K, V>`](https://doc.rust-lang.org/std/collections/struct.HashMap.html) | `Dictionary<K, V>` | `HashMap<K, V>` |
+| [`BTreeMap<K, V>`](https://doc.rust-lang.org/std/collections/struct.BTreeMap.html) | `SortedDictionary<K, V>` | `TreeMap<K, V>` |
+| [`HashSet<T>`](https://doc.rust-lang.org/std/collections/struct.HashSet.html) | `HashSet<T>` | `HashSet<T>` |
+| [`BTreeSet<T>`](https://doc.rust-lang.org/std/collections/struct.BTreeSet.html) | `SortedSet<T>` | `TreeSet<T>` |
+| [`BinaryHeap<T>`](https://doc.rust-lang.org/std/collections/struct.BinaryHeap.html) | `PriorityQueue<T, P>` | `PriorityQueue<T>` |
 
 `Vec` et `String` sont disponibles partout ; les autres nécessitent un `use std::collections::…`.
 
@@ -38,7 +38,7 @@ let big_orders: Vec<&str> = orders
 // big orders: ["mouse", "monitor"]
 ```
 
-| Rust | C# LINQ | Java Streams |
+| Rust | C# [LINQ](https://learn.microsoft.com/dotnet/csharp/linq/) | [Streams Java](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/stream/package-summary.html) |
 |---|---|---|
 | `.iter()` | (l'`IEnumerable` lui-même) | `.stream()` |
 | `.filter(\|x\| …)` | `.Where(x => …)` | `.filter(x -> …)` |
@@ -72,7 +72,7 @@ revenue 562, any monitor true, all positive true, first mouse buyer Some("grace"
 
 ## Les itérateurs sont paresseux
 
-Comme l'exécution différée de LINQ et les opérations intermédiaires de Java, rien ne s'exécute tant que quelque chose ne **consomme** pas l'itérateur (`collect`, `sum`, `for`, `count`…). Le compilateur vous avertit si vous l'oubliez :
+Comme l'[exécution différée](https://learn.microsoft.com/dotnet/standard/linq/deferred-execution-lazy-evaluation) de LINQ et les opérations intermédiaires de Java, rien ne s'exécute tant que quelque chose ne **consomme** pas l'itérateur (`collect`, `sum`, `for`, `count`…). Le compilateur vous avertit si vous l'oubliez :
 
 ```rust
 numbers.iter().map(|n| println!("{n}"));
@@ -94,7 +94,7 @@ Cette paresse permet aussi aux itérateurs d'être infinis : voir l'exemple de F
 
 ## `collect` doit connaître le type cible
 
-`collect` peut construire un `Vec`, un `HashSet`, un `String`, un `HashMap`… vous devez donc indiquer lequel :
+[`collect`](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.collect) peut construire un `Vec`, un `HashSet`, un `String`, un `HashMap`… vous devez donc indiquer lequel :
 
 ```rust
 let evens = (1..10).filter(|n| n % 2 == 0).collect();
@@ -157,7 +157,7 @@ help: consider iterating over a slice of the `Vec<f64>`'s content to avoid movin
 
 ## Regrouper avec `HashMap::entry`
 
-Il n'y a pas de `GroupBy` dans la bibliothèque standard ; l'API `entry` en fait une ligne — comme `CollectionsMarshal.GetValueRefOrAddDefault` en C# ou `merge` en Java :
+Il n'y a pas de `GroupBy` dans la bibliothèque standard ; l'API [`entry`](https://doc.rust-lang.org/std/collections/struct.HashMap.html#method.entry) en fait une ligne — comme [`CollectionsMarshal.GetValueRefOrAddDefault`](https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.collectionsmarshal.getvaluereforadddefault) en C# ou [`merge`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Map.html#merge(K,V,java.util.function.BiFunction)) en Java :
 
 ```rust
 let mut spend: HashMap<&str, f64> = HashMap::new();
@@ -170,7 +170,7 @@ let sorted: BTreeMap<_, _> = spend.iter().collect();
 
 ## Le tri, et pourquoi les flottants sont particuliers
 
-`sort` exige un **ordre total** (`Ord`). Les nombres à virgule flottante n'ont qu'un ordre partiel, car `NaN` n'est comparable à rien :
+`sort` exige un **ordre total** ([`Ord`](https://doc.rust-lang.org/std/cmp/trait.Ord.html)). Les nombres à virgule flottante n'ont qu'un ordre partiel, car `NaN` n'est comparable à rien :
 
 ```rust
 let mut prices = vec![19.99, 5.0, 12.5];
@@ -217,11 +217,11 @@ println!("{}", make_title(1));   // report #1
 | | C# | Java | Rust |
 |---|---|---|---|
 | Captures | variables (remontées dans une classe de closure) | variables effectivement finales | par référence, par référence mutable, ou par valeur (`move`) |
-| Types de fonctions | `Func<>`, `Action<>` | `Function`, `Consumer`, … | les traits `Fn`, `FnMut`, `FnOnce` |
+| Types de fonctions | `Func<>`, `Action<>` | `Function`, `Consumer`, … | les traits [`Fn`](https://doc.rust-lang.org/std/ops/trait.Fn.html), [`FnMut`](https://doc.rust-lang.org/std/ops/trait.FnMut.html), [`FnOnce`](https://doc.rust-lang.org/std/ops/trait.FnOnce.html) |
 
 ## Écrire votre propre itérateur
 
-Implémentez une seule méthode, `next`, et tous les adaptateurs ci-dessus deviennent disponibles — l'équivalent d'`IEnumerable<T>` avec `yield return` :
+Implémentez une seule méthode, `next`, et tous les adaptateurs ci-dessus deviennent disponibles — l'équivalent d'[`IEnumerable<T>`](https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1) avec [`yield return`](https://learn.microsoft.com/dotnet/csharp/language-reference/statements/yield) :
 
 ```rust
 struct Fibonacci {
@@ -244,7 +244,7 @@ let fibs: Vec<u64> = Fibonacci { current: 0, next: 1 }.take_while(|&n| n < 100).
 // fibonacci < 100: [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
 ```
 
-`type Item = u64;` est un **type associé** : chaque itérateur décide de ce qu'il produit.
+`type Item = u64;` est un [**type associé**](https://doc.rust-lang.org/reference/items/associated-items.html#associated-types) : chaque itérateur décide de ce qu'il produit.
 
 ## Bonus sur les slices : `windows` et `chunks`
 

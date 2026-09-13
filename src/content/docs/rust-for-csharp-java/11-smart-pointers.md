@@ -15,14 +15,14 @@ Rust splits that bundle into separate, opt-in pieces:
 
 | You need | Rust | Cost |
 |---|---|---|
-| a value on the heap with **one** owner | `Box<T>` | one allocation |
-| **several owners** of a value, one thread | `Rc<T>` | a reference count |
-| several owners across **threads** | `Arc<T>` | an atomic reference count |
-| to **mutate** something that is shared | `RefCell<T>` (one thread), `Mutex<T>` (threads) | a borrow check at runtime |
+| a value on the heap with **one** owner | [`Box<T>`](https://doc.rust-lang.org/std/boxed/struct.Box.html) | one allocation |
+| **several owners** of a value, one thread | [`Rc<T>`](https://doc.rust-lang.org/std/rc/struct.Rc.html) | a reference count |
+| several owners across **threads** | [`Arc<T>`](https://doc.rust-lang.org/std/sync/struct.Arc.html) | an atomic reference count |
+| to **mutate** something that is shared | [`RefCell<T>`](https://doc.rust-lang.org/std/cell/struct.RefCell.html) (one thread), [`Mutex<T>`](https://doc.rust-lang.org/std/sync/struct.Mutex.html) (threads) | a borrow check at runtime |
 
 A C# class reference is roughly `Rc<RefCell<T>>` (or `Arc<Mutex<T>>` when threads are involved). Rust makes you ask for each capability, and most code needs none of them.
 
-They are called *smart pointers* because they own their data and implement `Deref` — `.` calls methods on the value inside — and `Drop` — cleanup happens automatically.
+They are called *smart pointers* because they own their data and implement [`Deref`](https://doc.rust-lang.org/std/ops/trait.Deref.html) — `.` calls methods on the value inside — and [`Drop`](https://doc.rust-lang.org/std/ops/trait.Drop.html) — cleanup happens automatically.
 
 ## `Box<T>`: one owner, on the heap
 
@@ -152,7 +152,7 @@ thread 'main' (…) panicked at p11_refcell.rs:6:9:
 RefCell already borrowed
 ```
 
-`try_borrow` and `try_borrow_mut` return a `Result` instead of panicking:
+[`try_borrow`](https://doc.rust-lang.org/std/cell/struct.RefCell.html#method.try_borrow) and [`try_borrow_mut`](https://doc.rust-lang.org/std/cell/struct.RefCell.html#method.try_borrow_mut) return a `Result` instead of panicking:
 
 ```rust
 let reading = account.borrow();
@@ -160,10 +160,10 @@ account.try_borrow_mut().is_err()    // true: refused while `reading` is alive
 ```
 
 :::caution[You trade a compile error for a possible crash]
-`RefCell` is the right tool when the compiler cannot see that your access pattern is safe — a shared cache, an observer list, a graph. Keep each `borrow_mut()` as short as possible (don't hold one across a call that might borrow again), and prefer plain ownership and `&mut` when they work. It is the runtime version of C#'s `InvalidOperationException: Collection was modified`.
+`RefCell` is the right tool when the compiler cannot see that your access pattern is safe — a shared cache, an observer list, a graph. Keep each `borrow_mut()` as short as possible (don't hold one across a call that might borrow again), and prefer plain ownership and `&mut` when they work. It is the runtime version of C#'s [`InvalidOperationException: Collection was modified`](https://learn.microsoft.com/dotnet/api/system.invalidoperationexception).
 :::
 
-For `Copy` values such as counters and flags, `Cell<T>` is simpler: it never lends a reference, it just gets and sets.
+For `Copy` values such as counters and flags, [`Cell<T>`](https://doc.rust-lang.org/std/cell/struct.Cell.html) is simpler: it never lends a reference, it just gets and sets.
 
 ```rust
 use std::cell::Cell;
@@ -198,7 +198,7 @@ end of scope: nothing dropped
 
 The `drop` messages never appear: the memory leaked. This is *memory-safe* — no dangling pointer — but still a bug.
 
-The fix is a **`Weak<T>`** pointer for one direction of the link. A `Weak` does not keep the value alive; `upgrade()` returns `Some(Rc<T>)` if the value still exists and `None` otherwise — like C#'s `WeakReference<T>.TryGetTarget` or Java's `WeakReference.get()`. The usual design: parents own their children (`Rc`), children point back to their parent (`Weak`).
+The fix is a **[`Weak<T>`](https://doc.rust-lang.org/std/rc/struct.Weak.html)** pointer for one direction of the link. A `Weak` does not keep the value alive; [`upgrade()`](https://doc.rust-lang.org/std/rc/struct.Weak.html#method.upgrade) returns `Some(Rc<T>)` if the value still exists and `None` otherwise — like C#'s [`WeakReference<T>.TryGetTarget`](https://learn.microsoft.com/dotnet/api/system.weakreference-1.trygettarget) or Java's [`WeakReference.get()`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/ref/WeakReference.html). The usual design: parents own their children (`Rc`), children point back to their parent (`Weak`).
 
 ```rust
 struct TreeNode {
@@ -256,7 +256,7 @@ let sum = std::thread::spawn(move || for_thread.iter().sum::<i32>()).join().unwr
 // sum computed on another thread: 6, strong count back to 1
 ```
 
-Why not always use `Arc`? Atomic operations cost more, and `Rc` documents that a value stays on one thread. The thread-safe partner of `RefCell` is `Mutex` or `RwLock` — [lesson 12](../12-threads-and-concurrency/).
+Why not always use `Arc`? Atomic operations cost more, and `Rc` documents that a value stays on one thread. The thread-safe partner of `RefCell` is `Mutex` or [`RwLock`](https://doc.rust-lang.org/std/sync/struct.RwLock.html) — [lesson 12](../12-threads-and-concurrency/).
 
 ## Choosing
 
@@ -276,7 +276,7 @@ Why not always use `Arc`? Atomic operations cost more, and `Rc` documents that a
 - `Rc<T>` and `Arc<T>` count owners and free the value when the last one goes; `Rc::clone` copies a pointer, not the data.
 - `RefCell<T>` moves the borrow check to runtime: violations panic instead of failing to compile.
 - Reference counting leaks cycles; break them with `Weak<T>`.
-- `Rc` is not `Send`; use `Arc` across threads.
+- `Rc` is not [`Send`](https://doc.rust-lang.org/std/marker/trait.Send.html); use `Arc` across threads.
 
 ## Exercises
 

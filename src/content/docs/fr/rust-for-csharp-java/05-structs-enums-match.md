@@ -39,13 +39,13 @@ impl Account {
 
 | Rust | C# | Java |
 |---|---|---|
-| `struct` + `impl` | `class` / `record` | `class` / `record` |
+| `struct` + `impl` | `class` / [`record`](https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/record) | `class` / [`record`](https://docs.oracle.com/en/java/javase/25/language/records.html) |
 | `fn new(…) -> Self` (une convention) | constructeur | constructeur |
 | `fn balance(&self)` | méthode d'instance | méthode d'instance |
 | `fn deposit(&mut self, …)` | méthode qui modifie `this` | méthode qui modifie `this` |
 | `fn close(self)` | — (pas d'équivalent) | — |
 | `fn new(…)` sans `self` | méthode `static` | méthode `static` |
-| `#[derive(Debug, Clone, PartialEq)]` | ce que génère un `record` : `ToString`, copie, égalité de valeur | ce que génère un `record` |
+| [`#[derive(Debug, Clone, PartialEq)]`](https://doc.rust-lang.org/reference/attributes/derive.html) | ce que génère un `record` : `ToString`, copie, égalité de valeur | ce que génère un `record` |
 
 - Il n'y a **pas de constructeurs** : `Account::new` est une fonction associée ordinaire qui renvoie `Self`. Plusieurs « constructeurs » ne sont que plusieurs fonctions (`new`, `with_capacity`, `from_str`…).
 - Le receveur indique ce que la méthode fait de la valeur : la lire (`&self`), la modifier (`&mut self`) ou la **consommer** (`self`) — après `account.close()`, `account` est déplacé et ne peut plus être utilisé, et c'est ainsi que Rust modélise « cet objet est terminé ».
@@ -74,7 +74,7 @@ error[E0063]: missing field `balance_cents` in initializer of `Account`
   |                   ^^^^^^^ missing `balance_cents`
 ```
 
-La **syntaxe de mise à jour de struct** (struct update syntax) copie les champs restants depuis une autre valeur, comme une expression `with` en C# :
+La **syntaxe de mise à jour de struct** (struct update syntax) copie les champs restants depuis une autre valeur, comme une [expression `with`](https://learn.microsoft.com/dotnet/csharp/language-reference/operators/with-expression) en C# :
 
 ```rust
 let other = Account { owner: "Grace".into(), ..copy };
@@ -83,7 +83,7 @@ println!("{} has {} cents", other.owner, other.balance_cents);   // Grace has 12
 
 ## Tuple structs et newtypes
 
-Une struct peut avoir des champs sans nom. Avec un seul champ, elle crée un type distinct autour d'un type existant — un **newtype** :
+Une struct peut avoir des champs sans nom. Avec un seul champ, elle crée un type distinct autour d'un type existant — un **[newtype](https://doc.rust-lang.org/rust-by-example/generics/new_types.html)** :
 
 ```rust
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd)]
@@ -98,7 +98,7 @@ Une fonction qui prend un `Meters` n'acceptera ni un `f64` brut ni un `Feet(f64)
 
 ## Les enums portent des données
 
-Les enums C# sont des entiers nommés ; les enums Java sont un ensemble fixe d'objets qui partagent tous les mêmes champs. Une `enum` Rust est une **union étiquetée** (tagged union) : chaque variante peut contenir des données *différentes*.
+Les [enums C#](https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/enum) sont des entiers nommés ; les [enums Java](https://dev.java/learn/classes-objects/enums/) sont un ensemble fixe d'objets qui partagent tous les mêmes champs. Une `enum` Rust est une **union étiquetée** (tagged union) : chaque variante peut contenir des données *différentes*.
 
 ```rust
 enum Shape {
@@ -164,9 +164,9 @@ note: `Shape` defined here
 
 | Quand un cas manque | Résultat |
 |---|---|
-| expression `switch` en C# | avertissement CS8509, puis `SwitchExpressionException` à l'exécution |
-| `switch` Java 21 sur une interface scellée | erreur de compilation |
-| `match` en Rust | erreur de compilation `E0004` |
+| [expression `switch`](https://learn.microsoft.com/dotnet/csharp/language-reference/operators/switch-expression) en C# | avertissement [CS8509](https://learn.microsoft.com/dotnet/csharp/language-reference/compiler-messages/pattern-matching-warnings#pattern-completeness-and-redundancy), puis [`SwitchExpressionException`](https://learn.microsoft.com/dotnet/api/system.runtime.compilerservices.switchexpressionexception) à l'exécution |
+| [`switch`](https://openjdk.org/jeps/441) Java 21 sur une [interface scellée](https://docs.oracle.com/en/java/javase/25/language/sealed-classes-and-interfaces.html) | erreur de compilation |
+| `match` en Rust | erreur de compilation [`E0004`](https://doc.rust-lang.org/error_codes/E0004.html) |
 
 C'est ce qui rend les enums si utiles pour le refactoring : ajoutez une variante, et le compilateur liste chaque endroit qui doit la gérer.
 
@@ -190,7 +190,7 @@ say "hi"
 quit
 ```
 
-Intervalles, gardes (`if`) et le motif fourre-tout `_` :
+Intervalles, [gardes](https://doc.rust-lang.org/reference/expressions/match-expr.html#match-guards) (`if`) et le motif fourre-tout `_` :
 
 ```rust
 fn describe(temperature: i32) -> &'static str {
@@ -207,7 +207,7 @@ Les branches sont essayées **dans l'ordre**, donc placez les plus spécifiques 
 
 ## `if let` et `let … else`
 
-Quand un seul motif compte, `if let` évite un `match` complet :
+Quand un seul motif compte, [`if let`](https://doc.rust-lang.org/book/ch06-03-if-let.html) évite un `match` complet :
 
 ```rust
 if let Some(Shape::Circle { radius }) = shapes.first() {
@@ -215,7 +215,7 @@ if let Some(Shape::Circle { radius }) = shapes.first() {
 }
 ```
 
-`let … else` lie un motif ou quitte le bloc courant — parfait pour les clauses de garde :
+[`let … else`](https://doc.rust-lang.org/rust-by-example/flow_control/let_else.html) lie un motif ou quitte le bloc courant — parfait pour les clauses de garde :
 
 ```rust
 fn parse_port(text: &str) -> u16 {

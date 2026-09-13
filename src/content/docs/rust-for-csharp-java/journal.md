@@ -19,9 +19,9 @@ sidebar:
 - [x] Lesson 10 — Modules, crates and workspaces
 - [x] Lesson 11 — `Box`, `Rc`, `Arc`, `RefCell`
 - [x] Lesson 12 — Threads, `Send`/`Sync`, `Mutex`, rayon
-- [ ] Lesson 13 — `async` and tokio
-- [ ] Lesson 14 — Tests, docs, clippy, fmt
-- [ ] Lesson 15 — Macros, `unsafe` and FFI
+- [x] Lesson 13 — `async` and tokio
+- [x] Lesson 14 — Tests, docs, clippy, fmt
+- [x] Lesson 15 — Macros, `unsafe` and FFI
 
 ## 2026-09-13 — Lessons 1 to 4
 
@@ -69,6 +69,27 @@ Every exercise solution is now a doctest too: 41 doctests in total (compile-fail
 - Writing `&str` instead of `&'a str` as a method's return type compiles fine — the error only appears at the call site, when you try to hold two tokens (`E0499`). Elision picked `&mut self`'s lifetime.
 - A recursive enum without `Box` gives `E0391` (a cycle in the compiler's "needs drop" query) in addition to `E0072`.
 - rayon on this machine (Core Ultra 9 285K, 24 cores): counting primes below 5,000,000 went from ~775 ms to ~41 ms, about 18×.
+
+## 2026-09-13 — Lessons 13 to 15, and three operating systems
+
+The core course is complete. The code now has tokio as a dev-dependency, two more small crates (`l14-testing`, and `l15-ffi` with a .NET 10 client), and CI runs everything on **Windows, Ubuntu and macOS**. The C# program calls the Rust library successfully on all three.
+
+**Things I got wrong first:**
+
+- The lesson 15 FFI test asserted `pricing_sum([19.99, 5.0, 12.5]) == 37.49`. The real `f64` sum is `37.489999999999995`; C# had printed `37.49` only because of its `F2` format.
+- An XML comment in the `.csproj` contained `--release`: MSBuild refuses to load a project whose comment contains `--`.
+- I wrote that `[LibraryImport]` marshals `bool` as a 4-byte `BOOL` by default. It has no default at all: the build fails with `SYSLIB1051` until you add `[MarshalAs]`. That was `[DllImport]`'s behaviour.
+- `cargo fmt --check --manifest-path …` worked on my machine (Cargo 1.94) but failed on the CI runners (Cargo 1.98.1) with `Failed to find targets`. CI now runs `cargo fmt --check` from each crate's folder.
+- `missing_docs = "warn"` in `[lints]` also applies to integration tests: each file in `tests/` is its own crate and needs a `//!` line.
+- A lesson 13 doctest asserted that three concurrent sleeps finish within 290 ms. That is true on my machine but a timing assertion is a flaky test on shared CI runners, so the test now checks only the results.
+
+**Surprises:**
+
+- In async Rust, a forgotten `.await` means the code **never runs** — the opposite of C#, where the task starts anyway.
+- The "future cannot be sent between threads safely" error has no `E` code: it comes from the `Send` bound on `tokio::spawn`, not from the language.
+- Edition 2024 requires `unsafe extern "C"` and `#[unsafe(no_mangle)]`; much older FFI material no longer compiles as written.
+- `cargo fmt` had never been run on this course: 30 formatting differences in twelve lessons of examples.
+- Hello world in release mode: about 130 KB on Windows, 430–460 KB on Linux and macOS (CI runners, Cargo 1.98.1).
 
 ## Open questions
 

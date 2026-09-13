@@ -15,14 +15,14 @@ Rust sépare ce lot en éléments distincts, à demander explicitement :
 
 | Vous avez besoin de | Rust | Coût |
 |---|---|---|
-| une valeur sur le tas avec **un seul** propriétaire | `Box<T>` | une allocation |
-| **plusieurs propriétaires** d'une valeur, un seul thread | `Rc<T>` | un compteur de références |
-| plusieurs propriétaires sur plusieurs **threads** | `Arc<T>` | un compteur de références atomique |
-| **modifier** quelque chose de partagé | `RefCell<T>` (un thread), `Mutex<T>` (threads) | une vérification d'emprunt à l'exécution |
+| une valeur sur le tas avec **un seul** propriétaire | [`Box<T>`](https://doc.rust-lang.org/std/boxed/struct.Box.html) | une allocation |
+| **plusieurs propriétaires** d'une valeur, un seul thread | [`Rc<T>`](https://doc.rust-lang.org/std/rc/struct.Rc.html) | un compteur de références |
+| plusieurs propriétaires sur plusieurs **threads** | [`Arc<T>`](https://doc.rust-lang.org/std/sync/struct.Arc.html) | un compteur de références atomique |
+| **modifier** quelque chose de partagé | [`RefCell<T>`](https://doc.rust-lang.org/std/cell/struct.RefCell.html) (un thread), [`Mutex<T>`](https://doc.rust-lang.org/std/sync/struct.Mutex.html) (threads) | une vérification d'emprunt à l'exécution |
 
 Une référence de classe C# correspond à peu près à `Rc<RefCell<T>>` (ou à `Arc<Mutex<T>>` quand des threads sont en jeu). Rust vous fait demander chaque capacité, et la plupart du code n'en a besoin d'aucune.
 
-On les appelle *pointeurs intelligents* (smart pointers) parce qu'ils possèdent leurs données et implémentent `Deref` — `.` appelle les méthodes de la valeur contenue — et `Drop` — le nettoyage se fait automatiquement.
+On les appelle *pointeurs intelligents* (smart pointers) parce qu'ils possèdent leurs données et implémentent [`Deref`](https://doc.rust-lang.org/std/ops/trait.Deref.html) — `.` appelle les méthodes de la valeur contenue — et [`Drop`](https://doc.rust-lang.org/std/ops/trait.Drop.html) — le nettoyage se fait automatiquement.
 
 ## `Box<T>` : un seul propriétaire, sur le tas
 
@@ -152,7 +152,7 @@ thread 'main' (…) panicked at p11_refcell.rs:6:9:
 RefCell already borrowed
 ```
 
-`try_borrow` et `try_borrow_mut` renvoient un `Result` au lieu de paniquer :
+[`try_borrow`](https://doc.rust-lang.org/std/cell/struct.RefCell.html#method.try_borrow) et [`try_borrow_mut`](https://doc.rust-lang.org/std/cell/struct.RefCell.html#method.try_borrow_mut) renvoient un `Result` au lieu de paniquer :
 
 ```rust
 let reading = account.borrow();
@@ -160,10 +160,10 @@ account.try_borrow_mut().is_err()    // true : refusé tant que `reading` est vi
 ```
 
 :::caution[Vous échangez une erreur de compilation contre un plantage possible]
-`RefCell` est le bon outil quand le compilateur ne peut pas voir que votre schéma d'accès est sûr — un cache partagé, une liste d'observateurs, un graphe. Gardez chaque `borrow_mut()` aussi court que possible (ne le conservez pas pendant un appel qui pourrait emprunter à nouveau), et préférez la possession simple et `&mut` quand ils suffisent. C'est la version à l'exécution de l'`InvalidOperationException: Collection was modified` de C#.
+`RefCell` est le bon outil quand le compilateur ne peut pas voir que votre schéma d'accès est sûr — un cache partagé, une liste d'observateurs, un graphe. Gardez chaque `borrow_mut()` aussi court que possible (ne le conservez pas pendant un appel qui pourrait emprunter à nouveau), et préférez la possession simple et `&mut` quand ils suffisent. C'est la version à l'exécution de l'[`InvalidOperationException: Collection was modified`](https://learn.microsoft.com/dotnet/api/system.invalidoperationexception) de C#.
 :::
 
-Pour les valeurs `Copy` comme les compteurs et les indicateurs, `Cell<T>` est plus simple : elle ne prête jamais de référence, elle se contente de lire et d'écrire la valeur.
+Pour les valeurs `Copy` comme les compteurs et les indicateurs, [`Cell<T>`](https://doc.rust-lang.org/std/cell/struct.Cell.html) est plus simple : elle ne prête jamais de référence, elle se contente de lire et d'écrire la valeur.
 
 ```rust
 use std::cell::Cell;
@@ -198,7 +198,7 @@ end of scope: nothing dropped
 
 Les messages `drop` n'apparaissent jamais : la mémoire a fui. C'est *sûr pour la mémoire* — pas de pointeur pendant — mais c'est tout de même un bug.
 
-La solution est un pointeur **`Weak<T>`** pour l'un des deux sens du lien. Un `Weak` ne maintient pas la valeur en vie ; `upgrade()` renvoie `Some(Rc<T>)` si la valeur existe encore et `None` sinon — comme `WeakReference<T>.TryGetTarget` en C# ou `WeakReference.get()` en Java. La conception habituelle : les parents possèdent leurs enfants (`Rc`), les enfants pointent vers leur parent (`Weak`).
+La solution est un pointeur **[`Weak<T>`](https://doc.rust-lang.org/std/rc/struct.Weak.html)** pour l'un des deux sens du lien. Un `Weak` ne maintient pas la valeur en vie ; [`upgrade()`](https://doc.rust-lang.org/std/rc/struct.Weak.html#method.upgrade) renvoie `Some(Rc<T>)` si la valeur existe encore et `None` sinon — comme [`WeakReference<T>.TryGetTarget`](https://learn.microsoft.com/dotnet/api/system.weakreference-1.trygettarget) en C# ou [`WeakReference.get()`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/ref/WeakReference.html) en Java. La conception habituelle : les parents possèdent leurs enfants (`Rc`), les enfants pointent vers leur parent (`Weak`).
 
 ```rust
 struct TreeNode {
@@ -256,7 +256,7 @@ let sum = std::thread::spawn(move || for_thread.iter().sum::<i32>()).join().unwr
 // sum computed on another thread: 6, strong count back to 1
 ```
 
-Pourquoi ne pas toujours utiliser `Arc` ? Les opérations atomiques coûtent plus cher, et `Rc` documente qu'une valeur reste sur un seul thread. Le partenaire thread-safe de `RefCell` est `Mutex` ou `RwLock` — [leçon 12](../12-threads-and-concurrency/).
+Pourquoi ne pas toujours utiliser `Arc` ? Les opérations atomiques coûtent plus cher, et `Rc` documente qu'une valeur reste sur un seul thread. Le partenaire thread-safe de `RefCell` est `Mutex` ou [`RwLock`](https://doc.rust-lang.org/std/sync/struct.RwLock.html) — [leçon 12](../12-threads-and-concurrency/).
 
 ## Choisir
 
@@ -276,7 +276,7 @@ Pourquoi ne pas toujours utiliser `Arc` ? Les opérations atomiques coûtent plu
 - `Rc<T>` et `Arc<T>` comptent les propriétaires et libèrent la valeur quand le dernier disparaît ; `Rc::clone` copie un pointeur, pas les données.
 - `RefCell<T>` déplace la vérification des emprunts à l'exécution : les violations paniquent au lieu d'empêcher la compilation.
 - Le comptage de références fait fuir les cycles ; cassez-les avec `Weak<T>`.
-- `Rc` n'est pas `Send` ; utilisez `Arc` entre threads.
+- `Rc` n'est pas [`Send`](https://doc.rust-lang.org/std/marker/trait.Send.html) ; utilisez `Arc` entre threads.
 
 ## Exercices
 
