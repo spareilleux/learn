@@ -15,7 +15,7 @@ sidebar:
 - [x] Run an existing service (qdrant) with `wslc`
 - [x] Test Compose
 - [x] Check whether Docker and `wslc` images are shared
-- [ ] Small C# program with `Microsoft.WSL.Containers`
+- [x] Small C# program with `Microsoft.WSL.Containers`
 
 ## 2026-09-12 — Taking stock
 
@@ -635,9 +635,101 @@ After `wslc-down.ps1`: no container, only the default `bridge`/`host`/`none` net
 
 **Conclusion:** for a small stack, a `wslc` script reproduces what Compose does (network, volumes, DNS names, start order). What it doesn't give: no reading of `compose.yaml`, no `depends_on` with `condition: service_healthy`, no diff-based `up` that only recreates what changed, no `logs -f` over all services. For real Compose projects, Docker Desktop (or Podman) remains the tool.
 
+## 2026-09-13 — A C# program with `Microsoft.WSL.Containers`
+
+Goal: drive a container from a Windows application, without `wslc.exe`. The code is in [`code/wsl-containers/wslc-host`](https://github.com/spareilleux/learn/tree/main/code/wsl-containers/wslc-host); lesson 5 shows it.
+
+### The documented snippet doesn't compile
+
+Pasting the Microsoft Learn snippet into a project that references `Microsoft.WSL.Containers` 2.9.9 gives five errors:
+
+```text
+error CS0103: The name 'ComponentFlags' does not exist in the current context
+error CS0117: 'SessionSettings' does not contain a definition for 'MemoryMB'
+error CS0117: 'ProcessSettings' does not contain a definition for 'CmdLine'
+error CS0103: The name 'DeleteContainerFlags' does not exist in the current context
+error CS1705: Assembly 'wslcsdkcs' with identity 'wslcsdkcs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null' uses 'Microsoft.Windows.SDK.NET, Version=10.0.26100.79, Culture=neutral, PublicKeyToken=31bf3856ad364e35' which has a higher version than referenced assembly 'Microsoft.Windows.SDK.NET' with identity 'Microsoft.Windows.SDK.NET, Version=10.0.19041.38, Culture=neutral, PublicKeyToken=31bf3856ad364e35'
+```
+
+The real names come from reading the public types of `wslcsdkcs.dll` with `MetadataLoadContext`:
+
+| Microsoft Learn | Package 2.9.9 |
+|---|---|
+| `ComponentFlags GetMissingComponents()` | `IReadOnlyList<Component> GetMissingComponents()` (`VirtualMachinePlatform`, `WslPackage`, `SdkNeedsUpdate`) |
+| `SessionSettings.MemoryMB` | `SessionSettings.MemorySizeInMB` |
+| `ProcessSettings.CmdLine` | `ProcessSettings.CommandLine` (`IList<string>`) |
+| `DeleteContainerFlags.None` | `DeleteContainerOption.None` / `Force` |
+
+### `CS1705`: the Windows SDK version
+
+The package declares `net8.0-windows10.0.19041.0`, but its `wslcsdkcs.dll` is compiled against `Microsoft.Windows.SDK.NET` 10.0.26100.79. Moving to `net10.0-windows10.0.26100.0` isn't enough (the SDK picks projection 10.0.26100.38, same error); the version has to be forced. `10.0.26100.79` doesn't exist on nuget.org (`NU1102`, nearest: `10.0.26100.80`):
+
+```xml
+<TargetFramework>net10.0-windows10.0.26100.0</TargetFramework>
+<WindowsSdkPackageVersion>10.0.26100.80</WindowsSdkPackageVersion>
+<RuntimeIdentifier>win-x64</RuntimeIdentifier>
+```
+
+### First run
+
+```text
+WSL container service 2.9.11
+Session started, storage in C:\Users\spare\AppData\Local\WslcHost
+Image alpine:latest (8 MB)
+Hello from 3.24.1 on 6.18.40.1-microsoft-standard-WSL2
+Container b27dd2f80927 exited with code 0
+```
+
+7 s in total, including the alpine pull into a new, empty session. The container sees the session's limits: `nproc` → `2`, `free -m` → `1907` MB total for `MemorySizeInMB = 2048`.
+
+### Where the application's session shows up
+
+While a 20-second container runs:
+
+```text
+> wslc system session list
+ID   Creator PID   Display Name
+6    350476        wslc-cli-admin-spare
+8    275812        wslc-cli-spare
+16   110952        wslc-host
+> Get-Process vmmem*
+vmmemCmZygote     0
+vmmemWSL       3307
+vmmemwslc-host  510
+> wslc --session wslc-host container list
+CONTAINER ID   IMAGE           COMMAND                  CREATED         STATUS         PORTS   NAMES
+2e75803c92a9   alpine:latest   "/bin/sh -c 'echo st…"   4 seconds ago   Up 3 seconds           wslc-host-hello
+```
+
+- The session is a regular `wslc` session: same `vmmem<session>` VM, visible and drivable from the CLI with `--session`.
+- Its disk is where the application chose, `%LocalAppData%\WslcHost\storage.vhdx` (67 MB after the pull), not under `%LocalAppData%\wslc\sessions`. Its limits come from `SessionSettings`, not from `settings.yaml` (8 CPUs there, 2 seen by the container).
+- After `session.Terminate()`, the session and its `vmmem` disappear right away, without the CLI's 30 s idle delay.
+
+### Trap: a failed `Start` leaves the container behind
+
+A run launched from Git Bash with `/bin/sh` as an argument: MSYS converts the path to `C:/Program Files/Git/usr/bin/sh`, and `container.Start()` throws:
+
+```text
+Unhandled exception. System.ArgumentException: The parameter is incorrect.
+
+failed to create task for container: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: error during container init: exec: "C:/Program Files/Git/usr/bin/sh": stat C:/Program Files/Git/usr/bin/sh: no such file or directory: unknown
+```
+
+The next run fails on `CreateContainer`:
+
+```text
+Unhandled exception. System.Runtime.InteropServices.COMException (0x800700B7): Cannot create a file when that file already exists.
+
+Conflict. The container name "/wslc-host-hello" is already in use by container "176a59b772bebfb974a8404150407157d49cc279cbe2f66c2d6e2788f9bfbadc". You have to remove (or rename) that container to be able to reuse that name.
+```
+
+The container survives the process in `storage.vhdx`. Two fixes in the program: `Delete(DeleteContainerOption.Force)` in a `finally`, and on startup `OpenContainer` + `Delete` of a leftover (`COMException` if there is none). Verified: leftover removed (`Removed leftover container wslc-host-hello`), then a command that doesn't exist (`/nope`) no longer leaves anything behind.
+
+**Conclusion:** the API works and is fast, but in preview its documentation lags behind the package: names, SDK version. Compile first, read the types if in doubt. On GitHub Actions the Windows runners have no WSL containers service: CI only compiles the program.
 ## Open questions
 
 - ~~Where does `wslc` store its images and containers?~~ In `%LocalAppData%\wslc\sessions\<session>\storage.vhdx`, one virtual disk per session. It grows with images and doesn't shrink on its own (see above).
 - ~~Can the memory and CPU of the VM used by `wslc` be limited?~~ Yes: `cpuCount` and `memorySize` in `settings.yaml`, then terminate the session (see above).
 - ~~Can `wslc` and Docker Desktop publish ports without conflict?~~ They can publish the same port without **any error**, which is the problem: `127.0.0.1` reaches `wslc`, `localhost` reaches Docker (see above).
 - ~~How do you compact a session's `storage.vhdx`?~~ Terminate the session, then `Optimize-VHD -Mode Full` as administrator: 3995 MB → 2789 MB (see above).
+- Does the MSBuild `WslcImage` integration (building an image to a `.tar` during `dotnet build`) work? *To verify.*

@@ -41,49 +41,91 @@ A Windows application can create its own Linux containers. The objects follow th
 | `Container` | start, stop, inspect, delete; launch processes |
 | `Process` | read `stdout`/`stderr`, write to `stdin`, send signals |
 
-```powershell
-dotnet add package Microsoft.WSL.Containers
+The [`Microsoft.WSL.Containers`](https://www.nuget.org/packages/Microsoft.WSL.Containers) package 2.9.9 is a [C#/WinRT](https://learn.microsoft.com/windows/apps/develop/platform/csharp-winrt/) projection compiled against the Windows 10.0.26100 SDK, with a native DLL for x64 and arm64 only. The project must say so, otherwise the build fails with `CS1705`:
+
+```xml
+<PropertyGroup>
+  <OutputType>Exe</OutputType>
+  <TargetFramework>net10.0-windows10.0.26100.0</TargetFramework>
+  <WindowsSdkPackageVersion>10.0.26100.80</WindowsSdkPackageVersion>
+  <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+</PropertyGroup>
+<ItemGroup>
+  <PackageReference Include="Microsoft.WSL.Containers" Version="2.9.9" />
+</ItemGroup>
 ```
 
 ```csharp
 using System.Text;
 using Microsoft.WSL.Containers;
 
-if (WslcService.GetMissingComponents() != ComponentFlags.None)
+var missing = WslcService.GetMissingComponents();
+if (missing.Count > 0)
 {
-    Console.WriteLine("Missing WSL components: run wsl --install");
-    return;
+    Console.WriteLine($"Missing WSL components: {string.Join(", ", missing)} (run wsl --install)");
+    return 1;
 }
+var version = WslcService.GetVersion();
+Console.WriteLine($"WSL container service {version.Major}.{version.Minor}.{version.Revision}");
 
-var session = new Session(new SessionSettings("MyApp", @"C:\WslcData")
+// The session keeps its images and containers in its own storage.vhdx.
+var storage = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "WslcHost");
+using var session = new Session(new SessionSettings("wslc-host", storage)
 {
-    CpuCount = 4,
-    MemoryMB = 4096
+    CpuCount = 2,
+    MemorySizeInMB = 2048
 });
 session.Start();
+Console.WriteLine($"Session started, storage in {storage}");
 
 await session.PullImageAsync(new PullImageOptions("docker.io/library/alpine:latest"));
+foreach (var image in session.GetImages())
+    Console.WriteLine($"Image {image.Name} ({image.Size / 1024 / 1024} MB)");
 
-var container = session.CreateContainer(new ContainerSettings("alpine:latest")
+using var container = session.CreateContainer(new ContainerSettings("alpine:latest")
 {
-    Name = "hello-container",
+    Name = "wslc-host-hello",
     InitProcess = new ProcessSettings
     {
-        CmdLine = new[] { "/bin/echo", "Hello from WSL Container!" },
+        CommandLine = ["/bin/sh", "-c", "echo Hello from $(cat /etc/alpine-release) on $(uname -r)"],
         OutputMode = ProcessOutputMode.Event
     }
 });
 
-container.InitProcess.OutputReceived += data => Console.Write(Encoding.UTF8.GetString(data));
-container.Start();
+try
+{
+    var exited = new TaskCompletionSource<int>();
+    container.InitProcess.OutputReceived += data => Console.Write(Encoding.UTF8.GetString(data));
+    container.InitProcess.Exited += code => exited.TrySetResult(code);
+    container.Start();
 
-// Cleanup
-container.Stop(Signal.SIGTERM, TimeSpan.FromSeconds(10));
-container.Delete(DeleteContainerFlags.None);
-session.Terminate();
+    var exitCode = await exited.Task.WaitAsync(TimeSpan.FromMinutes(2));
+    Console.WriteLine($"Container {container.Id[..12]} exited with code {exitCode}");
+    return exitCode;
+}
+finally
+{
+    // Without this, a failed Start leaves the container in storage.vhdx and blocks its name.
+    container.Delete(DeleteContainerOption.Force);
+    session.Terminate();
+}
 ```
 
-Source: [WSL container — Microsoft Learn](https://learn.microsoft.com/windows/wsl/wsl-container). Full samples: [aka.ms/wslc-samples](https://aka.ms/wslc-samples).
+```text
+WSL container service 2.9.11
+Session started, storage in C:\Users\spare\AppData\Local\WslcHost
+Image alpine:latest (8 MB)
+Hello from 3.24.1 on 6.18.40.1-microsoft-standard-WSL2
+Container 2b900903f6c8 exited with code 0
+```
+
+The full program, which also removes a container left by a crashed run, is in [`code/wsl-containers/wslc-host`](https://github.com/spareilleux/learn/tree/main/code/wsl-containers/wslc-host).
+
+:::caution[The Microsoft Learn snippets don't compile against 2.9.9]
+The page uses `ComponentFlags`, `MemoryMB`, `CmdLine` and `DeleteContainerFlags`. In package 2.9.9 they are `IReadOnlyList<Component>`, `MemorySizeInMB`, `CommandLine` and `DeleteContainerOption`. Details in the [journal](../journal/).
+:::
+
+Sources: [WSL container — Microsoft Learn](https://learn.microsoft.com/windows/wsl/wsl-container), [API reference](https://wsl.dev/api-reference/). Full samples: [aka.ms/wslc-samples](https://aka.ms/wslc-samples).
 
 ## Key takeaways
 

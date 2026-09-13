@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <!-- wslcsdkcs.dll 2.9.9 is compiled against Microsoft.Windows.SDK.NET 10.0.26100.79:
+         an older Windows TFM or projection fails with CS1705. -->
+    <TargetFramework>net10.0-windows10.0.26100.0</TargetFramework>
+    <WindowsSdkPackageVersion>10.0.26100.80</WindowsSdkPackageVersion>
+    <!-- The package ships wslcsdk.dll for x64 and arm64 only. -->
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.WSL.Containers" Version="2.9.9" />
+  </ItemGroup>
+
+</Project>

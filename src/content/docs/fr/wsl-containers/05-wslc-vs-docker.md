@@ -41,49 +41,91 @@ Une application Windows peut créer ses propres conteneurs Linux. Les objets sui
 | `Container` | démarrer, arrêter, inspecter, supprimer ; lancer des processus |
 | `Process` | lire `stdout`/`stderr`, écrire sur `stdin`, envoyer des signaux |
 
-```powershell
-dotnet add package Microsoft.WSL.Containers
+Le paquet [`Microsoft.WSL.Containers`](https://www.nuget.org/packages/Microsoft.WSL.Containers) 2.9.9 est une projection [C#/WinRT](https://learn.microsoft.com/windows/apps/develop/platform/csharp-winrt/) compilée contre le SDK Windows 10.0.26100, avec une DLL native pour x64 et arm64 seulement. Le projet doit l'indiquer, sinon la compilation échoue avec `CS1705` :
+
+```xml
+<PropertyGroup>
+  <OutputType>Exe</OutputType>
+  <TargetFramework>net10.0-windows10.0.26100.0</TargetFramework>
+  <WindowsSdkPackageVersion>10.0.26100.80</WindowsSdkPackageVersion>
+  <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+</PropertyGroup>
+<ItemGroup>
+  <PackageReference Include="Microsoft.WSL.Containers" Version="2.9.9" />
+</ItemGroup>
 ```
 
 ```csharp
 using System.Text;
 using Microsoft.WSL.Containers;
 
-if (WslcService.GetMissingComponents() != ComponentFlags.None)
+var missing = WslcService.GetMissingComponents();
+if (missing.Count > 0)
 {
-    Console.WriteLine("Composants WSL manquants : lancer wsl --install");
-    return;
+    Console.WriteLine($"Missing WSL components: {string.Join(", ", missing)} (run wsl --install)");
+    return 1;
 }
+var version = WslcService.GetVersion();
+Console.WriteLine($"WSL container service {version.Major}.{version.Minor}.{version.Revision}");
 
-var session = new Session(new SessionSettings("MonApp", @"C:\WslcData")
+// La session garde ses images et conteneurs dans son propre storage.vhdx.
+var storage = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "WslcHost");
+using var session = new Session(new SessionSettings("wslc-host", storage)
 {
-    CpuCount = 4,
-    MemoryMB = 4096
+    CpuCount = 2,
+    MemorySizeInMB = 2048
 });
 session.Start();
+Console.WriteLine($"Session started, storage in {storage}");
 
 await session.PullImageAsync(new PullImageOptions("docker.io/library/alpine:latest"));
+foreach (var image in session.GetImages())
+    Console.WriteLine($"Image {image.Name} ({image.Size / 1024 / 1024} MB)");
 
-var container = session.CreateContainer(new ContainerSettings("alpine:latest")
+using var container = session.CreateContainer(new ContainerSettings("alpine:latest")
 {
-    Name = "hello-container",
+    Name = "wslc-host-hello",
     InitProcess = new ProcessSettings
     {
-        CmdLine = new[] { "/bin/echo", "Hello from WSL Container!" },
+        CommandLine = ["/bin/sh", "-c", "echo Hello from $(cat /etc/alpine-release) on $(uname -r)"],
         OutputMode = ProcessOutputMode.Event
     }
 });
 
-container.InitProcess.OutputReceived += data => Console.Write(Encoding.UTF8.GetString(data));
-container.Start();
+try
+{
+    var exited = new TaskCompletionSource<int>();
+    container.InitProcess.OutputReceived += data => Console.Write(Encoding.UTF8.GetString(data));
+    container.InitProcess.Exited += code => exited.TrySetResult(code);
+    container.Start();
 
-// Nettoyage
-container.Stop(Signal.SIGTERM, TimeSpan.FromSeconds(10));
-container.Delete(DeleteContainerFlags.None);
-session.Terminate();
+    var exitCode = await exited.Task.WaitAsync(TimeSpan.FromMinutes(2));
+    Console.WriteLine($"Container {container.Id[..12]} exited with code {exitCode}");
+    return exitCode;
+}
+finally
+{
+    // Sans cela, un Start en échec laisse le conteneur dans storage.vhdx et bloque son nom.
+    container.Delete(DeleteContainerOption.Force);
+    session.Terminate();
+}
 ```
 
-Source : [WSL container — Microsoft Learn](https://learn.microsoft.com/windows/wsl/wsl-container). Exemples complets : [aka.ms/wslc-samples](https://aka.ms/wslc-samples).
+```text
+WSL container service 2.9.11
+Session started, storage in C:\Users\spare\AppData\Local\WslcHost
+Image alpine:latest (8 MB)
+Hello from 3.24.1 on 6.18.40.1-microsoft-standard-WSL2
+Container 2b900903f6c8 exited with code 0
+```
+
+Le programme complet, qui supprime aussi un conteneur laissé par une exécution plantée, est dans [`code/wsl-containers/wslc-host`](https://github.com/spareilleux/learn/tree/main/code/wsl-containers/wslc-host).
+
+:::caution[Les extraits de Microsoft Learn ne compilent pas avec la 2.9.9]
+La page utilise `ComponentFlags`, `MemoryMB`, `CmdLine` et `DeleteContainerFlags`. Dans le paquet 2.9.9, ce sont `IReadOnlyList<Component>`, `MemorySizeInMB`, `CommandLine` et `DeleteContainerOption`. Détails dans le [journal](../journal/).
+:::
+
+Sources : [WSL container — Microsoft Learn](https://learn.microsoft.com/windows/wsl/wsl-container), [référence de l'API](https://wsl.dev/api-reference/). Exemples complets : [aka.ms/wslc-samples](https://aka.ms/wslc-samples).
 
 ## À retenir
 
