@@ -1,0 +1,31 @@
+name: Rust course examples
+
+on:
+  push:
+    branches: [main]
+    paths: ['code/**', '.github/workflows/rust-examples.yml']
+  pull_request:
+    paths: ['code/**', '.github/workflows/rust-examples.yml']
+  workflow_dispatch:
+
+jobs:
+  rust-for-csharp-java:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: code/rust-for-csharp-java
+    steps:
+      - uses: actions/checkout@v7
+      - name: Toolchain
+        run: rustup show active-toolchain && cargo --version
+      - name: Compile-fail doctests
+        run: cargo test --doc
+      # Stable rustdoc only checks that compile_fail snippets fail; nightly also checks the E0xxx code.
+      - name: Compile-fail error codes (nightly)
+        run: |
+          rustup toolchain install nightly --profile minimal
+          cargo +nightly test --doc
+      - name: Clippy
+        run: cargo clippy --examples -- -D warnings
+      - name: Run examples
+        run: for ex in examples/*.rs; do cargo run --quiet --example "$(basename "$ex" .rs)"; done
