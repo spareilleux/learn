@@ -26,15 +26,27 @@ export default defineConfig({
 					translations: { fr: 'Génie logiciel' },
 					items: [
 						{
-							label: 'WSL containers',
-							collapsed: true,
-							items: [{ autogenerate: { directory: 'wsl-containers' } }],
+							label: 'Languages & frameworks',
+							translations: { fr: 'Langages et frameworks' },
+							items: [
+								{
+									label: 'Rust for C#/Java developers',
+									translations: { fr: 'Rust pour développeurs C#/Java' },
+									collapsed: true,
+									items: [{ autogenerate: { directory: 'rust-for-csharp-java' } }],
+								},
+							],
 						},
 						{
-							label: 'Rust for C#/Java developers',
-							translations: { fr: 'Rust pour développeurs C#/Java' },
-							collapsed: true,
-							items: [{ autogenerate: { directory: 'rust-for-csharp-java' } }],
+							label: 'Infrastructure & tooling',
+							translations: { fr: 'Infrastructure et outillage' },
+							items: [
+								{
+									label: 'WSL containers',
+									collapsed: true,
+									items: [{ autogenerate: { directory: 'wsl-containers' } }],
+								},
+							],
 						},
 					],
 				},
