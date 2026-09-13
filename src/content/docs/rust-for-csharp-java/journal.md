@@ -82,6 +82,7 @@ The core course is complete. The code now has tokio as a dev-dependency, two mor
 - `cargo fmt --check --manifest-path …` worked on my machine (Cargo 1.94) but failed on the CI runners (Cargo 1.98.1) with `Failed to find targets`. CI now runs `cargo fmt --check` from each crate's folder.
 - `missing_docs = "warn"` in `[lints]` also applies to integration tests: each file in `tests/` is its own crate and needs a `//!` line.
 - A lesson 13 doctest asserted that three concurrent sleeps finish within 290 ms. That is true on my machine but a timing assertion is a flaky test on shared CI runners, so the test now checks only the results.
+- Even without a timing assertion, a delay is still a race: on a busy macOS runner, a 200 ms attempt "succeeded" despite a 50 ms `timeout` (when the runtime wakes up after both deadlines, `timeout` polls the future first, and it is already ready). Exercise 2's slow attempts now last 5 seconds; the test stays fast because they are abandoned after 50 ms.
 
 **Surprises:**
 

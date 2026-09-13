@@ -332,11 +332,11 @@ async fn fetch_with_retry(delays: &[u64], per_try: Duration) -> Result<u32, Stri
 }
 
 let per_try = Duration::from_millis(50);
-assert_eq!(fetch_with_retry(&[200, 200, 10], per_try).await, Ok(42));
-assert_eq!(fetch_with_retry(&[200, 200], per_try).await, Err("gave up after 2 attempts".to_string()));
+assert_eq!(fetch_with_retry(&[5_000, 5_000, 10], per_try).await, Ok(42));
+assert_eq!(fetch_with_retry(&[5_000, 5_000], per_try).await, Err("gave up after 2 attempts".to_string()));
 ```
 
-Chaque tentative expirée est détruite, si bien que les `sleep` de 200 ms ne se terminent jamais et ne coûtent plus rien ensuite. Aucun jeton à faire passer à travers `fetch_price`.
+Chaque tentative expirée est détruite, si bien que les `sleep` de 5 secondes ne se terminent jamais et ne coûtent plus rien ensuite. Aucun jeton à faire passer à travers `fetch_price`.
 
 </details>
 

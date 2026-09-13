@@ -82,6 +82,7 @@ Le cœur du cours est terminé. Le code a désormais tokio en dev-dependency, de
 - `cargo fmt --check --manifest-path …` fonctionnait sur ma machine (Cargo 1.94) mais échouait sur les runners de CI (Cargo 1.98.1) avec `Failed to find targets`. La CI lance désormais `cargo fmt --check` depuis le dossier de chaque crate.
 - `missing_docs = "warn"` dans `[lints]` s'applique aussi aux tests d'intégration : chaque fichier de `tests/` est sa propre crate et a besoin d'une ligne `//!`.
 - Un doctest de la leçon 13 affirmait que trois attentes concurrentes se terminent en moins de 290 ms. C'est vrai sur ma machine, mais une assertion de durée donne un test instable (flaky) sur des runners de CI partagés ; le test ne vérifie donc plus que les résultats.
+- Même sans assertion de durée, un délai reste une course : sur un runner macOS chargé, une tentative de 200 ms a « réussi » malgré un `timeout` de 50 ms (quand le runtime se réveille après les deux échéances, `timeout` interroge d'abord le future, déjà prêt). Les tentatives lentes de l'exercice 2 durent maintenant 5 secondes : le test reste rapide, car elles sont abandonnées après 50 ms.
 
 **Surprises :**
 

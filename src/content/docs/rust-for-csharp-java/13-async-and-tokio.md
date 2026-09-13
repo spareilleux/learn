@@ -332,11 +332,11 @@ async fn fetch_with_retry(delays: &[u64], per_try: Duration) -> Result<u32, Stri
 }
 
 let per_try = Duration::from_millis(50);
-assert_eq!(fetch_with_retry(&[200, 200, 10], per_try).await, Ok(42));
-assert_eq!(fetch_with_retry(&[200, 200], per_try).await, Err("gave up after 2 attempts".to_string()));
+assert_eq!(fetch_with_retry(&[5_000, 5_000, 10], per_try).await, Ok(42));
+assert_eq!(fetch_with_retry(&[5_000, 5_000], per_try).await, Err("gave up after 2 attempts".to_string()));
 ```
 
-Each timed-out attempt is dropped, so the 200 ms sleeps never finish and cost nothing afterwards. There is no token to thread through `fetch_price`.
+Each timed-out attempt is dropped, so the 5-second sleeps never finish and cost nothing afterwards. There is no token to thread through `fetch_price`.
 
 </details>
 

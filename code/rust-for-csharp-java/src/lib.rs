@@ -1090,8 +1090,8 @@ pub mod lesson12 {}
 /// #[tokio::main]
 /// async fn main() {
 ///     let per_try = Duration::from_millis(50);
-///     assert_eq!(fetch_with_retry(&[200, 200, 10], per_try).await, Ok(42));
-///     assert_eq!(fetch_with_retry(&[200, 200], per_try).await, Err("gave up after 2 attempts".to_string()));
+///     assert_eq!(fetch_with_retry(&[5_000, 5_000, 10], per_try).await, Ok(42));
+///     assert_eq!(fetch_with_retry(&[5_000, 5_000], per_try).await, Err("gave up after 2 attempts".to_string()));
 /// }
 /// ```
 ///
