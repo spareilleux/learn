@@ -235,7 +235,7 @@ wslc --session wslc-cli-spare system session terminate
 
 (`wslc system session terminate wslc-cli-spare`, avec le nom en argument, échoue : `Found a positional argument when none was expected`.)
 
-Après le test, les réglages ont été remis à `default` : 4 Go est trop juste pour la suite du cours (qdrant).
+4 Go est trop juste pour la suite du cours (qdrant). Réglage retenu sur cette machine, vu l'incident mémoire du 2026-09-12 : `cpuCount: 8`, `memorySize: 16GB` → `nproc=8`, RAM 15996 Mo, swap 16384 Mo.
 
 *À vérifier :* si la session admin (`wslc-cli-admin-<utilisateur>`) lit le même `settings.yaml`, et combien de mémoire la VM prend réellement côté Windows (Gestionnaire des tâches, `vmmem`).
 
