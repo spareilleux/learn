@@ -199,8 +199,48 @@ Sur le disque, chaque session a ses propres disques virtuels :
 
 Nettoyage : `wslc volume remove sesstest-vol`, `wslc network remove sesstest-net`.
 
+## 2026-09-13 — Limiter le CPU et la mémoire d'une session `wslc`
+
+`wslc settings` crée `%LocalAppData%\wslc\settings.yaml` au premier lancement (tous les réglages commentés) et l'ouvre dans l'éditeur par défaut. La partie utile :
+
+```yaml
+session:
+  # Number of virtual CPUs allocated to the session (e.g. 4 default: all available CPUs)
+  # cpuCount: default
+
+  # Memory limit for the session (e.g. 2GB default: half of available memory)
+  # memorySize: default
+```
+
+Le même fichier contient aussi `maxStorageSize` (1 To par défaut), `storagePath` (où est créé `wslc\sessions\<session>\storage.vhdx`), `defaultBindingAddress` (`127.0.0.1` par défaut pour `-p`), `hostLoopback` (`host.wslc.internal`) et `idleTimeout` (30 s). Source : le fichier généré, <https://aka.ms/wslc-settings>. L'équivalent côté API est `SessionSettings.CpuCount` / `MemoryMB` ([Microsoft Learn](https://learn.microsoft.com/windows/wsl/wsl-container)).
+
+**Mesure.** Machine : 24 CPU logiques, 63,7 Go de RAM.
+
+```powershell
+wslc run --rm alpine sh -c "echo nproc=`$(nproc); free -m"
+```
+
+| Réglages | `nproc` | RAM (`free -m`) | Swap |
+|---|---|---|---|
+| par défaut | 24 | 31946 Mo | 32617 Mo |
+| `cpuCount: 4`, `memorySize: 4GB` | 4 | 3919 Mo | 4096 Mo |
+
+Le swap suit `memorySize`.
+
+**Piège : le changement ne s'applique pas à une session en cours.** La première mesure après modification du fichier affichait toujours 24 CPU. Il faut terminer la session ; la commande `wslc` suivante en démarre une nouvelle avec les nouveaux réglages :
+
+```powershell
+wslc --session wslc-cli-spare system session terminate
+```
+
+(`wslc system session terminate wslc-cli-spare`, avec le nom en argument, échoue : `Found a positional argument when none was expected`.)
+
+Après le test, les réglages ont été remis à `default` : 4 Go est trop juste pour la suite du cours (qdrant).
+
+*À vérifier :* si la session admin (`wslc-cli-admin-<utilisateur>`) lit le même `settings.yaml`, et combien de mémoire la VM prend réellement côté Windows (Gestionnaire des tâches, `vmmem`).
+
 ## Questions ouvertes
 
 - ~~Où `wslc` stocke-t-il ses images et conteneurs ?~~ Dans `%LocalAppData%\wslc\sessions\<session>\storage.vhdx`, un disque virtuel par session (voir ci-dessus). ~580 Mo pour une session presque vide : *à vérifier* si ce fichier grossit avec les images et diminue après un `prune`.
-- Peut-on limiter la mémoire et le CPU de la VM utilisée par `wslc` ?
+- ~~Peut-on limiter la mémoire et le CPU de la VM utilisée par `wslc` ?~~ Oui : `cpuCount` et `memorySize` dans `settings.yaml`, puis terminer la session (voir ci-dessus).
 - `wslc` et Docker Desktop peuvent-ils publier des ports sans conflit ?
