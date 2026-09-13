@@ -101,7 +101,7 @@ This message shows that your installation appears to be working correctly.
 
 `wslc info` shows a settings file at `%LocalAppData%\wslc\settings.yaml` and a session named `wslc-cli-<user>`. `wslc images` lists only `hello-world` (10.1 kB).
 
-**Still to do:** restart Docker Desktop and Podman and check that Docker Desktop 4.61 still works with WSL 2.9.11. (Docker Desktop: OK, see "Remaining open questions" below. Podman: not restarted yet.)
+**Still to do:** restart Docker Desktop and Podman and check that Docker Desktop 4.61 still works with WSL 2.9.11. (Docker Desktop: OK, see "Remaining open questions" below. Podman 5.8.3: `podman machine start` OK, `podman run --rm quay.io/podman/hello` OK; it warns that the default Docker API pipe is already taken by Docker Desktop and exposes its own, `npipe:////./pipe/podman-machine-default`.)
 
 ## 2026-09-13 — Reproducing hello-world by hand: two traps
 
