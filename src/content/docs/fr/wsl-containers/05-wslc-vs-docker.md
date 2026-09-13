@@ -18,7 +18,10 @@ sidebar:
 
 :::caution[À vérifier]
 - **Compose** : des retours de la préversion signalent un support limité. Je ne l'ai pas encore testé.
-- **Images partagées ?** `wslc` semble avoir son propre stockage : les images téléchargées par Docker ne seraient pas visibles. À confirmer avec `wslc image list` après un `docker pull`.
+:::
+
+:::note[Vérifié : les images ne sont pas partagées]
+Après `docker pull busybox`, `wslc image list` ne l'affiche pas : chaque outil a son propre stock (`docker_data.vhdx` pour Docker, un `storage.vhdx` par session `wslc`). Une image utilisée par les deux est téléchargée deux fois, et le même tag `latest` peut même désigner deux versions différentes (qdrant 1.16.3 dans Docker, 1.19.1 dans `wslc`). Détails dans le [journal](../journal/).
 :::
 
 ## Quand choisir quoi
@@ -90,17 +93,20 @@ Source : [WSL container — Microsoft Learn](https://learn.microsoft.com/windows
 
 ## Exercice
 
-Choisis un service que tu lances aujourd'hui avec Docker (par exemple `qdrant` ou `mongodb`) et fais-le tourner avec `wslc`. Note dans le [journal](../journal/) ce qui diffère.
+Choisis un service que tu lances aujourd'hui avec Docker (par exemple [qdrant](https://qdrant.tech/) ou [MongoDB](https://www.mongodb.com/)) et fais-le tourner avec `wslc`. Note dans le [journal](../journal/) ce qui diffère.
 
 <details>
 <summary>Piste</summary>
 
+Si Docker publie déjà qdrant sur 6333, choisis **un autre port Windows** : `wslc` prendrait 6333 sans aucune erreur et enlèverait discrètement `127.0.0.1:6333` au conteneur Docker.
+
 ```powershell
-wslc run -d --rm -p 6333:6333 --name qdrant qdrant/qdrant
-curl localhost:6333
+wslc volume create qdrant-data
+wslc run -d --name qdrant -p 16333:6333 -v qdrant-data:/qdrant/storage qdrant/qdrant
+curl.exe http://127.0.0.1:16333/
 wslc container stop qdrant
 ```
 
-Points à observer : l'image est-elle retéléchargée ? Le port entre-t-il en conflit avec le conteneur Docker existant ? Quelle mémoire consomme la VM ?
+Points à observer : l'image est-elle retéléchargée ? Est-ce la même version que le `latest` de Docker ? Quelle mémoire consomme la VM ? Que journalise qdrant si tu montes un dossier Windows au lieu d'un volume ? Réponses dans le [journal](../journal/).
 
 </details>

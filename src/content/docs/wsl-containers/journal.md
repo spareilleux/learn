@@ -10,9 +10,9 @@ sidebar:
 - [x] Understand what WSL containers is and which version it requires
 - [x] Install WSL ≥ 2.9.3 (pre-release)
 - [x] `wslc run --rm hello-world`
-- [ ] Lesson 3: containers, ports, `exec`
-- [ ] Lesson 4: building an image
-- [ ] Run an existing service (qdrant) with `wslc`
+- [x] Lesson 3: containers, ports, `exec`
+- [x] Lesson 4: building an image
+- [x] Run an existing service (qdrant) with `wslc`
 - [ ] Test Compose
 - [x] Check whether Docker and `wslc` images are shared
 - [ ] Small C# program with `Microsoft.WSL.Containers`
@@ -386,6 +386,127 @@ after: 2,789 MB
 - The session VM must be stopped: otherwise the VHDX is in use.
 - The file remains larger than the space used inside (2.8 GB vs 1.9 GB): only fully free blocks are reclaimed.
 - `fstrim` isn't available in the session VM: `wslc system session run fstrim -v /` → `Failed to launch command fstrim. Errno = 2`.
+
+## 2026-09-13 — Lessons 3 and 4 done
+
+- **Lesson 3** (containers, ports, `exec`): practiced throughout the entries above — `nginx` published with `-p`, `exec`, `container list --all`, and the port conflict with Docker Desktop.
+- **Lesson 4** (building an image): rewritten with a C# API and a Spring Boot WebFlux API, built and run with `wslc`; every output in the lesson is real.
+
+## 2026-09-13 — Running qdrant with `wslc`
+
+### Before starting: a qdrant is already running in Docker
+
+```text
+> docker ps
+ga-qdrant  qdrant/qdrant:latest  Up About an hour (healthy)  0.0.0.0:6333-6334->6333-6334/tcp, [::]:6333-6334->6333-6334/tcp
+```
+
+Publishing `wslc` on 6333 too would start **without any error** and silently take over `127.0.0.1:6333` from the application that uses `ga-qdrant` (see the port conflict above). So the `wslc` qdrant is published on **16333/16334**.
+
+### Pull: same tag, different version
+
+```powershell
+wslc pull qdrant/qdrant    # 21 s, 198 MB
+```
+
+The Docker image was already there, but `wslc` downloads it again (separate stores). And `latest` isn't the same version on both sides:
+
+```text
+> curl.exe http://127.0.0.1:16333/     # wslc
+{"title":"qdrant - vector search engine","version":"1.19.1","commit":"6ab21cac18ebb6f4ae29102c7f8f5cc11affd5de"}
+> curl.exe http://127.0.0.1:6333/      # Docker (ga-qdrant, pulled on 2025-12-19)
+{"title":"qdrant - vector search engine","version":"1.16.3","commit":"bd49f45a8a2d4e4774cac50fa29507c4e8375af2"}
+```
+
+**Lesson:** `latest` means "whatever was latest when *this* tool pulled it". Pin a version (`qdrant/qdrant:v1.19.1`) when two environments must match.
+
+### Run with a volume
+
+```powershell
+wslc volume create qdrant-data
+wslc run -d --name qdrant -p 16333:6333 -p 16334:6334 -v qdrant-data:/qdrant/storage qdrant/qdrant
+curl.exe http://127.0.0.1:16333/readyz    # all shards are ready (after 1 s)
+```
+
+```text
+CONTAINER ID   IMAGE           COMMAND             CREATED         STATUS        PORTS                                                  NAMES
+da52872e3246   qdrant/qdrant   "./entrypoint.sh"   5 seconds ago   Up 1 second   127.0.0.1:16333->6333/tcp, 127.0.0.1:16334->6334/tcp   qdrant
+```
+
+Trap: the log says `Access web UI at http://localhost:6333/dashboard`. That's the port **inside** the container. From Windows, the dashboard is at `http://127.0.0.1:16333/dashboard` — and `localhost:6333` would open the Docker one.
+
+A collection, three points and a query (bodies in JSON files, to avoid PowerShell quoting issues):
+
+```powershell
+curl.exe -X PUT http://127.0.0.1:16333/collections/journal -H "Content-Type: application/json" --data-binary "@coll.json"
+curl.exe -X PUT "http://127.0.0.1:16333/collections/journal/points?wait=true" -H "Content-Type: application/json" --data-binary "@points.json"
+curl.exe -X POST http://127.0.0.1:16333/collections/journal/points/query -H "Content-Type: application/json" --data-binary "@query.json"
+```
+
+```text
+coll.json    {"vectors":{"size":4,"distance":"Cosine"}}
+points.json  {"points":[{"id":1,"vector":[0.9,0.1,0.1,0.1],"payload":{"note":"wslc sessions"}},{"id":2,"vector":[0.1,0.9,0.1,0.1],"payload":{"note":"ports and localhost"}},{"id":3,"vector":[0.1,0.1,0.9,0.1],"payload":{"note":"storage.vhdx"}}]}
+query.json   {"query":[0.2,0.8,0.1,0.1],"limit":2,"with_payload":true}
+```
+
+```text
+{"result":true,"status":"ok","time":0.24333272}
+{"result":{"operation_id":1,"status":"completed"},"status":"ok","time":0.003567116}
+{"result":{"points":[{"id":2,"version":1,"score":0.99111706,"payload":{"note":"ports and localhost"}},{"id":1,"version":1,"score":0.3651484,"payload":{"note":"wslc sessions"}}]},"status":"ok","time":0.00189502}
+```
+
+### Persistence: delete the container, keep the data
+
+```powershell
+wslc container stop qdrant
+wslc container remove qdrant
+wslc run -d --name qdrant -p 16333:6333 -p 16334:6334 -v qdrant-data:/qdrant/storage qdrant/qdrant
+curl.exe http://127.0.0.1:16333/collections
+curl.exe -X POST http://127.0.0.1:16333/collections/journal/points/count -H "Content-Type: application/json" -d "{}"
+```
+
+```text
+{"result":{"collections":[{"name":"journal"}]},"status":"ok","time":8.866e-6}
+{"result":{"count":3},"status":"ok","time":0.007211133}
+```
+
+The collection and its 3 points survive, because they live in the volume. `wslc volume inspect qdrant-data` shows `"Driver": "guest"` and a mountpoint inside the session VM (`/var/lib/docker/volumes/qdrant-data/_data`), so in the session's `storage.vhdx`.
+
+### Don't mount a Windows folder for qdrant storage
+
+```powershell
+wslc run -d --name qdrant-bind -p 16335:6333 -v "C:\...\qdrant-bind:/qdrant/storage" qdrant/qdrant
+wslc exec qdrant-bind sh -c "mount | grep /qdrant/storage"
+```
+
+```text
+drvfs on /qdrant/storage type virtiofs (rw,relatime)
+```
+
+qdrant still starts and writes its files into the Windows folder, but logs an error:
+
+```text
+ERROR qdrant: Filesystem check failed for storage path ./storage. Details: FUSE filesystems may cause data corruption due to caching issues
+```
+
+**Lesson:** for a database, use a `wslc` **volume** (inside the VM), not a bind mount of a Windows folder.
+
+### Resources
+
+```text
+> wslc stats qdrant
+CONTAINER ID   NAME     CPU %   MEM USAGE / LIMIT     MEM %   NET I/O           BLOCK I/O        PIDS
+da52872e3246   qdrant   0.16%   47.21MiB / 15.62GiB   0.30%   10.1kB / 5.77kB   8.19kB / 184kB   35
+> docker stats ga-qdrant --no-stream --format "CPU {{.CPUPerc}}  MEM {{.MemUsage}}"
+CPU 0.41%  MEM 367.8MiB / 31.2GiB
+```
+
+- The limit shown is the VM's: **15.62 GiB** for `wslc` (the `memorySize: 16GB` setting), **31.2 GiB** for Docker Desktop (half of the RAM by default).
+- 47 MiB for 3 points against 368 MiB for `ga-qdrant`: not comparable, `ga-qdrant` holds real data.
+- On the Windows side, the `vmmemwslc-cli-spare` VM was at 1160 MB (about 0.9 GB idle, measured earlier).
+- qdrant logs `starting 7 workers`: it sees the 8 CPUs allowed by `cpuCount: 8`.
+
+Cleanup: `wslc container stop qdrant qdrant-bind`, `wslc container remove qdrant qdrant-bind`, `wslc volume remove qdrant-data`. `ga-qdrant` was never touched.
 
 ## Open questions
 

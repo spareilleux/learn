@@ -10,9 +10,9 @@ sidebar:
 - [x] Comprendre ce qu'est WSL containers et quelle version il exige
 - [x] Installer WSL ≥ 2.9.3 (pre-release)
 - [x] `wslc run --rm hello-world`
-- [ ] Leçon 3 : conteneurs, ports, `exec`
-- [ ] Leçon 4 : construire une image
-- [ ] Faire tourner un service existant (qdrant) avec `wslc`
+- [x] Leçon 3 : conteneurs, ports, `exec`
+- [x] Leçon 4 : construire une image
+- [x] Faire tourner un service existant (qdrant) avec `wslc`
 - [ ] Tester Compose
 - [x] Vérifier si les images Docker et `wslc` sont partagées
 - [ ] Petit programme C# avec `Microsoft.WSL.Containers`
@@ -386,6 +386,127 @@ after: 2,789 MB
 - La VM de la session doit être arrêtée : sinon le VHDX est en cours d'utilisation.
 - Le fichier reste plus gros que l'espace utilisé à l'intérieur (2,8 Go contre 1,9 Go) : seuls les blocs entièrement libres sont récupérés.
 - `fstrim` n'est pas disponible dans la VM de session : `wslc system session run fstrim -v /` → `Failed to launch command fstrim. Errno = 2`.
+
+## 2026-09-13 — Leçons 3 et 4 faites
+
+- **Leçon 3** (conteneurs, ports, `exec`) : pratiquée tout au long des entrées ci-dessus — `nginx` publié avec `-p`, `exec`, `container list --all`, et le conflit de ports avec Docker Desktop.
+- **Leçon 4** (construire une image) : réécrite avec une API C# et une API Spring Boot WebFlux, construites et lancées avec `wslc` ; toutes les sorties de la leçon sont réelles.
+
+## 2026-09-13 — Faire tourner qdrant avec `wslc`
+
+### Avant de commencer : un qdrant tourne déjà dans Docker
+
+```text
+> docker ps
+ga-qdrant  qdrant/qdrant:latest  Up About an hour (healthy)  0.0.0.0:6333-6334->6333-6334/tcp, [::]:6333-6334->6333-6334/tcp
+```
+
+Publier `wslc` aussi sur 6333 démarrerait **sans aucune erreur** et prendrait discrètement `127.0.0.1:6333` à l'application qui utilise `ga-qdrant` (voir le conflit de ports plus haut). Le qdrant `wslc` est donc publié sur **16333/16334**.
+
+### Téléchargement : même tag, version différente
+
+```powershell
+wslc pull qdrant/qdrant    # 21 s, 198 Mo
+```
+
+L'image Docker était déjà là, mais `wslc` la retélécharge (stocks séparés). Et `latest` n'est pas la même version des deux côtés :
+
+```text
+> curl.exe http://127.0.0.1:16333/     # wslc
+{"title":"qdrant - vector search engine","version":"1.19.1","commit":"6ab21cac18ebb6f4ae29102c7f8f5cc11affd5de"}
+> curl.exe http://127.0.0.1:6333/      # Docker (ga-qdrant, tirée le 2025-12-19)
+{"title":"qdrant - vector search engine","version":"1.16.3","commit":"bd49f45a8a2d4e4774cac50fa29507c4e8375af2"}
+```
+
+**Leçon :** `latest` veut dire « la plus récente au moment où *cet* outil l'a tirée ». Épingler une version (`qdrant/qdrant:v1.19.1`) quand deux environnements doivent correspondre.
+
+### Lancer avec un volume
+
+```powershell
+wslc volume create qdrant-data
+wslc run -d --name qdrant -p 16333:6333 -p 16334:6334 -v qdrant-data:/qdrant/storage qdrant/qdrant
+curl.exe http://127.0.0.1:16333/readyz    # all shards are ready (après 1 s)
+```
+
+```text
+CONTAINER ID   IMAGE           COMMAND             CREATED         STATUS        PORTS                                                  NAMES
+da52872e3246   qdrant/qdrant   "./entrypoint.sh"   5 seconds ago   Up 1 second   127.0.0.1:16333->6333/tcp, 127.0.0.1:16334->6334/tcp   qdrant
+```
+
+Piège : le log indique `Access web UI at http://localhost:6333/dashboard`. C'est le port **dans** le conteneur. Depuis Windows, le tableau de bord est à `http://127.0.0.1:16333/dashboard` — et `localhost:6333` ouvrirait celui de Docker.
+
+Une collection, trois points et une requête (corps dans des fichiers JSON, pour éviter les problèmes de guillemets de PowerShell) :
+
+```powershell
+curl.exe -X PUT http://127.0.0.1:16333/collections/journal -H "Content-Type: application/json" --data-binary "@coll.json"
+curl.exe -X PUT "http://127.0.0.1:16333/collections/journal/points?wait=true" -H "Content-Type: application/json" --data-binary "@points.json"
+curl.exe -X POST http://127.0.0.1:16333/collections/journal/points/query -H "Content-Type: application/json" --data-binary "@query.json"
+```
+
+```text
+coll.json    {"vectors":{"size":4,"distance":"Cosine"}}
+points.json  {"points":[{"id":1,"vector":[0.9,0.1,0.1,0.1],"payload":{"note":"wslc sessions"}},{"id":2,"vector":[0.1,0.9,0.1,0.1],"payload":{"note":"ports and localhost"}},{"id":3,"vector":[0.1,0.1,0.9,0.1],"payload":{"note":"storage.vhdx"}}]}
+query.json   {"query":[0.2,0.8,0.1,0.1],"limit":2,"with_payload":true}
+```
+
+```text
+{"result":true,"status":"ok","time":0.24333272}
+{"result":{"operation_id":1,"status":"completed"},"status":"ok","time":0.003567116}
+{"result":{"points":[{"id":2,"version":1,"score":0.99111706,"payload":{"note":"ports and localhost"}},{"id":1,"version":1,"score":0.3651484,"payload":{"note":"wslc sessions"}}]},"status":"ok","time":0.00189502}
+```
+
+### Persistance : supprimer le conteneur, garder les données
+
+```powershell
+wslc container stop qdrant
+wslc container remove qdrant
+wslc run -d --name qdrant -p 16333:6333 -p 16334:6334 -v qdrant-data:/qdrant/storage qdrant/qdrant
+curl.exe http://127.0.0.1:16333/collections
+curl.exe -X POST http://127.0.0.1:16333/collections/journal/points/count -H "Content-Type: application/json" -d "{}"
+```
+
+```text
+{"result":{"collections":[{"name":"journal"}]},"status":"ok","time":8.866e-6}
+{"result":{"count":3},"status":"ok","time":0.007211133}
+```
+
+La collection et ses 3 points survivent, parce qu'ils vivent dans le volume. `wslc volume inspect qdrant-data` montre `"Driver": "guest"` et un point de montage dans la VM de la session (`/var/lib/docker/volumes/qdrant-data/_data`), donc dans le `storage.vhdx` de la session.
+
+### Ne pas monter un dossier Windows pour le stockage de qdrant
+
+```powershell
+wslc run -d --name qdrant-bind -p 16335:6333 -v "C:\...\qdrant-bind:/qdrant/storage" qdrant/qdrant
+wslc exec qdrant-bind sh -c "mount | grep /qdrant/storage"
+```
+
+```text
+drvfs on /qdrant/storage type virtiofs (rw,relatime)
+```
+
+qdrant démarre quand même et écrit ses fichiers dans le dossier Windows, mais journalise une erreur :
+
+```text
+ERROR qdrant: Filesystem check failed for storage path ./storage. Details: FUSE filesystems may cause data corruption due to caching issues
+```
+
+**Leçon :** pour une base de données, utiliser un **volume** `wslc` (dans la VM), pas un montage d'un dossier Windows.
+
+### Ressources
+
+```text
+> wslc stats qdrant
+CONTAINER ID   NAME     CPU %   MEM USAGE / LIMIT     MEM %   NET I/O           BLOCK I/O        PIDS
+da52872e3246   qdrant   0.16%   47.21MiB / 15.62GiB   0.30%   10.1kB / 5.77kB   8.19kB / 184kB   35
+> docker stats ga-qdrant --no-stream --format "CPU {{.CPUPerc}}  MEM {{.MemUsage}}"
+CPU 0.41%  MEM 367.8MiB / 31.2GiB
+```
+
+- La limite affichée est celle de la VM : **15,62 Gio** pour `wslc` (le réglage `memorySize: 16GB`), **31,2 Gio** pour Docker Desktop (la moitié de la RAM par défaut).
+- 47 Mio pour 3 points contre 368 Mio pour `ga-qdrant` : pas comparable, `ga-qdrant` contient de vraies données.
+- Côté Windows, la VM `vmmemwslc-cli-spare` était à 1160 Mo (environ 0,9 Go à vide, mesuré plus tôt).
+- qdrant journalise `starting 7 workers` : il voit les 8 CPU autorisés par `cpuCount: 8`.
+
+Nettoyage : `wslc container stop qdrant qdrant-bind`, `wslc container remove qdrant qdrant-bind`, `wslc volume remove qdrant-data`. `ga-qdrant` n'a jamais été touché.
 
 ## Questions ouvertes
 

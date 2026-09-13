@@ -18,7 +18,10 @@ sidebar:
 
 :::caution[To verify]
 - **Compose**: preview feedback reports limited support. I haven't tested it yet.
-- **Shared images?** `wslc` seems to have its own storage: images pulled by Docker would not be visible. To confirm with `wslc image list` after a `docker pull`.
+:::
+
+:::note[Verified: images are not shared]
+After `docker pull busybox`, `wslc image list` doesn't show it: each tool has its own store (`docker_data.vhdx` for Docker, one `storage.vhdx` per `wslc` session). An image used by both is downloaded twice, and the same `latest` tag can even point to two different versions (qdrant 1.16.3 in Docker, 1.19.1 in `wslc`). Details in the [journal](../journal/).
 :::
 
 ## When to choose what
@@ -90,17 +93,20 @@ Source: [WSL container — Microsoft Learn](https://learn.microsoft.com/windows/
 
 ## Exercise
 
-Pick a service you currently run with Docker (for example `qdrant` or `mongodb`) and run it with `wslc`. Note in the [journal](../journal/) what differs.
+Pick a service you currently run with Docker (for example [qdrant](https://qdrant.tech/) or [MongoDB](https://www.mongodb.com/)) and run it with `wslc`. Note in the [journal](../journal/) what differs.
 
 <details>
 <summary>Hint</summary>
 
+If Docker already publishes qdrant on 6333, pick **another Windows port**: `wslc` would bind 6333 without any error and silently take `127.0.0.1:6333` away from the Docker container.
+
 ```powershell
-wslc run -d --rm -p 6333:6333 --name qdrant qdrant/qdrant
-curl localhost:6333
+wslc volume create qdrant-data
+wslc run -d --name qdrant -p 16333:6333 -v qdrant-data:/qdrant/storage qdrant/qdrant
+curl.exe http://127.0.0.1:16333/
 wslc container stop qdrant
 ```
 
-Things to observe: is the image downloaded again? Does the port conflict with the existing Docker container? How much memory does the VM use?
+Things to observe: is the image downloaded again? Is it the same version as Docker's `latest`? How much memory does the VM use? What does qdrant log if you mount a Windows folder instead of a volume? Answers in the [journal](../journal/).
 
 </details>
