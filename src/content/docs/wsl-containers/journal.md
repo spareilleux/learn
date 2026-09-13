@@ -147,10 +147,60 @@ ID   Creator PID   Display Name
 
 **Lesson:** `wslc` does not need elevation. Always use a non-elevated terminal, otherwise images and containers end up in a separate session.
 
-*To verify:* whether volumes and networks are also separated per session, and the full proof (delete the image in the non-elevated session, check that it is still listed in the admin session).
+### Verification: what is separated, and who can see what
+
+Non-elevated terminal: create a volume and a network, then delete the image.
+
+```powershell
+wslc volume create sesstest-vol
+wslc network create sesstest-net
+wslc image remove hello-world
+wslc images    # empty
+```
+
+Administrator terminal:
+
+```text
+> wslc image list
+hello-world   latest   e2ac70e7319a   5 months ago   10.1kB
+> wslc volume list
+DRIVER   VOLUME NAME
+> wslc network list
+d9c6879f7df3   bridge    bridge    local
+0dd65e6d15ec   host      host      local
+34ad73ecd806   none      null      local
+```
+
+- The image deleted in the non-elevated session **is still there** in the admin session.
+- The volume and network created in the non-elevated session **don't appear** in the admin session. Even the default `bridge`/`host`/`none` networks have different IDs: each session runs its own engine.
+
+The global option `--session` goes **before** the subcommand (`wslc --session <name> image list`; after it: `Option name was not recognized`). Access is asymmetric:
+
+```text
+# non-elevated → admin session
+> wslc --session wslc-cli-admin-spare image list
+The requested operation requires elevation.
+Error code: ERROR_ELEVATION_REQUIRED
+
+# administrator → non-elevated session: works
+> wslc --session wslc-cli-spare volume list
+DRIVER   VOLUME NAME
+guest    sesstest-vol
+```
+
+On disk, each session has its own virtual disks:
+
+```text
+%LocalAppData%\wslc\sessions\wslc-cli-spare\storage.vhdx         ~587 MB
+%LocalAppData%\wslc\sessions\wslc-cli-spare\swap.vhdx            36 MB
+%LocalAppData%\wslc\sessions\wslc-cli-admin-spare\storage.vhdx   ~577 MB
+%LocalAppData%\wslc\sessions\wslc-cli-admin-spare\swap.vhdx      36 MB
+```
+
+Cleanup: `wslc volume remove sesstest-vol`, `wslc network remove sesstest-net`.
 
 ## Open questions
 
-- Where does `wslc` store its images and containers? *Partial answer:* in a per-session store (`wslc-cli-<user>` vs `wslc-cli-admin-<user>`); the location on disk is still unknown.
+- ~~Where does `wslc` store its images and containers?~~ In `%LocalAppData%\wslc\sessions\<session>\storage.vhdx`, one virtual disk per session (see above). ~580 MB for a session holding almost nothing: *to verify* whether this file grows with images and shrinks after `prune`.
 - Can the memory and CPU of the VM used by `wslc` be limited?
 - Can `wslc` and Docker Desktop publish ports without conflict?
