@@ -103,8 +103,54 @@ This message shows that your installation appears to be working correctly.
 
 **Still to do:** restart Docker Desktop and Podman and check that Docker Desktop 4.61 still works with WSL 2.9.11 (*to verify*).
 
+## 2026-09-13 — Reproducing hello-world by hand: two traps
+
+### Trap 1: `wslc` "not recognized" in a new tab
+
+```text
+PS C:\Users\spare\source\repos> Get-Command wslc
+Get-Command : The term 'wslc' is not recognized as the name of a cmdlet, function, script file, or operable program.
+```
+
+`wslc.exe` was installed and `C:\Program Files\WSL\` was on the machine `PATH`, but a program receives a *copy* of the environment variables when it starts. Windows Terminal had been running since 2026-09-11, before the update, and the new tab inherited its old `PATH`.
+
+Fixes, from quickest to most durable:
+
+```powershell
+# Reload PATH in the current PowerShell (this terminal only)
+$env:Path = [Environment]::GetEnvironmentVariable('Path','Machine') + ';' + [Environment]::GetEnvironmentVariable('Path','User')
+```
+
+- or call the full path: `& "C:\Program Files\WSL\wslc.exe" --version`;
+- or close **every** Windows Terminal window (no `WindowsTerminal.exe` left) and restart it, or start a terminal from `Win + R`.
+
+In `cmd.exe`, the equivalent of `Get-Command` is `where wslc`.
+
+### Trap 2: an administrator terminal doesn't see the same images
+
+In a fresh `cmd.exe` (opened in `C:\Windows\System32`, a sign of an elevated terminal), `wslc run --rm hello-world` downloaded the image **again**, even though it had already been pulled from a non-elevated terminal:
+
+```text
+Image 'hello-world' not found, pulling
+```
+
+`wslc info` explains why:
+
+```text
+Sessions: 2
+ID   Creator PID   Display Name
+1    144356        wslc-cli-spare
+2    394856        wslc-cli-admin-spare
+```
+
+`wslc` creates one session per user **and per privilege level**: `wslc-cli-<user>` without elevation, `wslc-cli-admin-<user>` as administrator. The image pulled in one session was not found in the other.
+
+**Lesson:** `wslc` does not need elevation. Always use a non-elevated terminal, otherwise images and containers end up in a separate session.
+
+*To verify:* whether volumes and networks are also separated per session, and the full proof (delete the image in the non-elevated session, check that it is still listed in the admin session).
+
 ## Open questions
 
-- Where does `wslc` store its images and containers?
+- Where does `wslc` store its images and containers? *Partial answer:* in a per-session store (`wslc-cli-<user>` vs `wslc-cli-admin-<user>`); the location on disk is still unknown.
 - Can the memory and CPU of the VM used by `wslc` be limited?
 - Can `wslc` and Docker Desktop publish ports without conflict?
