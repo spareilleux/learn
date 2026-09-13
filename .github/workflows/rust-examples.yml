@@ -35,10 +35,9 @@ jobs:
           ls -l target/release
       - name: Formatting
         run: |
-          cargo fmt --check
-          cargo fmt --check --manifest-path l10-workspace/Cargo.toml
-          cargo fmt --check --manifest-path l14-testing/Cargo.toml
-          cargo fmt --check --manifest-path l15-ffi/Cargo.toml
+          for dir in . l10-workspace l14-testing l15-ffi; do
+            (cd "$dir" && cargo fmt --check)
+          done
       - name: Compile-fail doctests
         run: cargo test --doc
       # Stable rustdoc only checks that compile_fail snippets fail; nightly also checks the E0xxx code.
