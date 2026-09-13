@@ -36,7 +36,7 @@ Je veux savoir s'il peut remplacer — ou compléter — Docker Desktop pour mon
 1. [Concepts](01-concepts/) — conteneurs, WSL 2, et où se place `wslc`.
 2. [Installation](02-installation/) — passer en pre-release, vérifier, dépanner.
 3. [Premiers conteneurs](03-first-containers/) — `run`, ports, `exec`, `stop`.
-4. [Construire une image](04-build-an-image/) — `Containerfile`, `build`, logs, nettoyage.
+4. [Construire une image](04-build-an-image/) — une API C# et une API Spring Boot WebFlux : `Containerfile` multi-étapes, `build`, logs, nettoyage.
 5. [wslc ou Docker Desktop ?](05-wslc-vs-docker/) — comparaison et API pour applications Windows.
 6. [Journal](journal/) — mes essais, erreurs et points à vérifier.
 

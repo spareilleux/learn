@@ -1,0 +1,40 @@
+name: WSL containers examples
+
+on:
+  push:
+    branches: [main]
+    paths: ['code/wsl-containers/**', '.github/workflows/wsl-containers-examples.yml']
+  pull_request:
+    paths: ['code/wsl-containers/**', '.github/workflows/wsl-containers-examples.yml']
+  workflow_dispatch:
+
+# wslc only runs on Windows; the Containerfiles use the same syntax, so CI builds them with Docker.
+jobs:
+  lesson-04:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        app: [csharp-api, java-reactor-api]
+    defaults:
+      run:
+        working-directory: code/wsl-containers/${{ matrix.app }}
+    steps:
+      - uses: actions/checkout@v7
+      - name: Build
+        run: docker build -f Containerfile -t ${{ matrix.app }} .
+      - name: Run
+        run: docker run -d --rm -p 8080:8080 --name app ${{ matrix.app }}
+      - name: GET /
+        run: |
+          for i in $(seq 1 30); do curl -sf http://localhost:8080/ > out.json && break; sleep 1; done
+          cat out.json
+          grep -q '"app":"${{ matrix.app }}"' out.json
+      - name: GET /ticks
+        run: |
+          curl -sN http://localhost:8080/ticks | tee ticks.txt
+          test "$(grep -c '^data:' ticks.txt)" -eq 3
+      - name: Runs as non-root
+        run: test "$(docker exec app id -u)" != "0"
+      - name: Logs
+        if: always()
+        run: docker logs app || true

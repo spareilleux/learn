@@ -1,0 +1,21 @@
+# --- Stage 1: build with Maven and the full JDK ---
+FROM maven:3.9-eclipse-temurin-25 AS build
+WORKDIR /src
+
+# Download dependencies first: this layer stays cached as long as pom.xml doesn't change
+COPY pom.xml .
+RUN mvn -q dependency:go-offline
+
+COPY src ./src
+RUN mvn -q package
+
+# --- Stage 2: run with the JRE only ---
+FROM eclipse-temurin:25-jre
+WORKDIR /app
+COPY --from=build /src/target/app.jar app.jar
+
+# Non-root user provided by the Ubuntu base image
+USER ubuntu
+EXPOSE 8080
+# Netty loads a native library: allow it explicitly (Java 24+ warns otherwise)
+ENTRYPOINT ["java", "--enable-native-access=ALL-UNNAMED", "-jar", "app.jar"]

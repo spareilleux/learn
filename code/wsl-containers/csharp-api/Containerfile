@@ -1,0 +1,20 @@
+# --- Stage 1: build with the full SDK (compiler, NuGet) ---
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+WORKDIR /src
+
+# Restore first: this layer stays cached as long as the .csproj doesn't change
+COPY CsharpApi.csproj .
+RUN dotnet restore
+
+COPY . .
+RUN dotnet publish -c Release -o /app --no-restore
+
+# --- Stage 2: run with the ASP.NET Core runtime only ---
+FROM mcr.microsoft.com/dotnet/aspnet:10.0
+WORKDIR /app
+COPY --from=build /app .
+
+# Non-root user provided by the .NET images
+USER $APP_UID
+EXPOSE 8080
+ENTRYPOINT ["dotnet", "CsharpApi.dll"]

@@ -36,7 +36,7 @@ I want to know whether it can replace — or complement — Docker Desktop for m
 1. [Concepts](01-concepts/) — containers, WSL 2, and where `wslc` fits.
 2. [Installation](02-installation/) — switch to pre-release, verify, troubleshoot.
 3. [First containers](03-first-containers/) — `run`, ports, `exec`, `stop`.
-4. [Building an image](04-build-an-image/) — `Containerfile`, `build`, logs, cleanup.
+4. [Building an image](04-build-an-image/) — a C# API and a Spring Boot WebFlux API: multi-stage `Containerfile`, `build`, logs, cleanup.
 5. [wslc or Docker Desktop?](05-wslc-vs-docker/) — comparison and API for Windows applications.
 6. [Journal](journal/) — my attempts, errors and items to verify.
 
