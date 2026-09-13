@@ -14,7 +14,7 @@ sidebar:
 - [ ] Lesson 4: building an image
 - [ ] Run an existing service (qdrant) with `wslc`
 - [ ] Test Compose
-- [ ] Check whether Docker and `wslc` images are shared
+- [x] Check whether Docker and `wslc` images are shared
 - [ ] Small C# program with `Microsoft.WSL.Containers`
 
 ## 2026-09-12 — Taking stock
@@ -101,7 +101,7 @@ This message shows that your installation appears to be working correctly.
 
 `wslc info` shows a settings file at `%LocalAppData%\wslc\settings.yaml` and a session named `wslc-cli-<user>`. `wslc images` lists only `hello-world` (10.1 kB).
 
-**Still to do:** restart Docker Desktop and Podman and check that Docker Desktop 4.61 still works with WSL 2.9.11 (*to verify*).
+**Still to do:** restart Docker Desktop and Podman and check that Docker Desktop 4.61 still works with WSL 2.9.11. (Docker Desktop: OK, see "Remaining open questions" below. Podman: not restarted yet.)
 
 ## 2026-09-13 — Reproducing hello-world by hand: two traps
 
@@ -262,17 +262,108 @@ wslc run -d --name memtest alpine sh -c 'apk add -q stress-ng && stress-ng --vm 
 | idle session (admin, nothing running) | `vmmemwslc-cli-admin-spare` | 921 MB | 970 MB |
 | 6 GB held in the container | `vmmemwslc-cli-spare` | 7069 MB | 7083 MB |
 | 10 s after `container stop` + `remove` | `vmmemwslc-cli-spare` | 2776 MB | 7084 MB |
-| ~2 min later | `vmmemwslc-cli-spare` | 902 MB | 1902 MB |
+| a moment later | `vmmemwslc-cli-spare` | 902 MB | 1902 MB |
 
 - An idle session VM costs about **0.9 GB**.
 - The memory used by the container shows up almost entirely on the Windows side (~6 GB + the base VM).
-- After the container stops, the memory is **not given back immediately**: it decreases over a few minutes.
+- After the container stops, the memory is **not given back immediately**: it decreases progressively.
 - `memorySize` is a ceiling, not a reservation: the VM only takes what it uses.
 
-Between two snapshots, the admin session VM had disappeared (nothing running in it): consistent with `idleTimeout` (30 s). *To verify:* the exact moment an idle VM is torn down — the non-elevated VM was still there ~2 min after its last container.
+Between two snapshots, the admin session VM had disappeared (nothing running in it): consistent with `idleTimeout` (30 s) — measured below.
+
+## 2026-09-13 — Remaining open questions
+
+### When is an idle VM torn down?
+
+Run one container, then watch the VM process **without running any `wslc` command** (a `wslc` command wakes the session up):
+
+```powershell
+wslc run --rm alpine true
+# then, every 5 s:
+Get-Process -Name 'vmmemwslc-cli-spare' -ErrorAction SilentlyContinue
+```
+
+```text
+    0s  VM running: True
+   35s  VM running: False
+```
+
+The VM stops **30 to 35 s** after the last command (5 s polling): that's `idleTimeout: 30`. The session stays listed by `wslc system session list`; only the VM is torn down, and the next command starts it again.
+
+### Docker Desktop with WSL 2.9.11
+
+`docker desktop start` answered `Docker Desktop is already running` while no Docker Desktop process existed, and `docker desktop status` answered `Could not retrieve status`. Launching `C:\Program Files\Docker\Docker\Docker Desktop.exe` directly worked: engine 29.2.1 ready after ~130 s, `docker run --rm hello-world` OK. **Docker Desktop 4.61 works with WSL 2.9.11.**
+
+### Are Docker and `wslc` images shared?
+
+No. After `docker pull busybox`:
+
+```text
+> docker images            > wslc images
+postgres:16-alpine          alpine   latest
+busybox:latest
+hello-world:latest
+node:18-alpine
+```
+
+Each tool has its own store (`docker_data.vhdx` ≈ 50 GB for Docker, `storage.vhdx` per session for `wslc`). An image used by both is downloaded twice.
+
+### Can `wslc` and Docker Desktop publish the same port?
+
+Test: `nginx` in `wslc`, `httpd` (Apache, "It works!") in Docker, so the answer tells which one responds.
+
+```powershell
+wslc run -d --name webwslc -p 8080:80 nginx
+docker run -d --name webdocker -p 8080:80 httpd
+curl.exe http://127.0.0.1:8080/   # nginx  → wslc
+curl.exe http://localhost:8080/   # It works! → Docker
+```
+
+**Both start without any error: the conflict is silent.** Windows accepts both listeners because they don't bind exactly the same address:
+
+```text
+TCP  0.0.0.0:8080     LISTENING  com.docker.backend
+TCP  [::]:8080        LISTENING  com.docker.backend
+TCP  127.0.0.1:8080   LISTENING  dllhost      ← wslc
+TCP  [::1]:8080       LISTENING  wslrelay
+```
+
+`127.0.0.1` goes to `wslc` (the more specific address wins), while `localhost` resolves to `::1` first and ends up on Docker. Same result in every variant tried:
+
+| Variant | Errors | `127.0.0.1` | `localhost` |
+|---|---|---|---|
+| `wslc` first, then Docker (8080) | none | wslc | Docker |
+| Docker first, then `wslc` (8081) | none | wslc | Docker |
+| Docker, then `wslc -p 0.0.0.0:8082:80` | none | wslc | Docker |
+| `wslc -p 0.0.0.0:8083:80`, then Docker | none | wslc | Docker |
+
+**Lesson:** don't publish the same port from both tools. Nothing warns you, and the answer depends on whether the client uses `127.0.0.1` or `localhost`.
+
+### Does `storage.vhdx` grow and shrink?
+
+Size of `%LocalAppData%\wslc\sessions\wslc-cli-spare\storage.vhdx`:
+
+| Step | File size |
+|---|---|
+| start (`alpine`, `nginx`) | 814 MB |
+| `wslc pull mcr.microsoft.com/dotnet/sdk:9.0` (869 MB) | 1070 MB |
+| `wslc image remove` of that image | 1070 MB |
+| `wslc image prune --all` ("Total reclaimed space: 178.5MB", nothing left) | 1070 MB |
+| `system session terminate` | 1070 MB |
+| pull `dotnet/sdk:9.0` again | 1070 MB |
+| + `dotnet/aspnet:9.0` (224 MB) + `eclipse-temurin:21-jdk` (491 MB) | 1550 MB |
+
+- The file **grows** when images are added, and **never shrinks** by itself: neither `image remove`, nor `prune`, nor terminating the session gives space back to Windows.
+- Space freed inside is **reused**: pulling the SDK again didn't make the file grow.
+- The growth is less than the displayed image size (`SIZE` is the uncompressed size, and freed space is reused), so the file size is not a reliable image counter.
+
+Trap: in `wslc image prune`, `-f` means `--filter`, not `--force`; `--force` doesn't exist (`wslc image prune --all` doesn't ask for confirmation).
+
+*To verify:* how to compact `storage.vhdx` (for example `Optimize-VHD` with the VM stopped).
 
 ## Open questions
 
-- ~~Where does `wslc` store its images and containers?~~ In `%LocalAppData%\wslc\sessions\<session>\storage.vhdx`, one virtual disk per session (see above). ~580 MB for a session holding almost nothing: *to verify* whether this file grows with images and shrinks after `prune`.
+- ~~Where does `wslc` store its images and containers?~~ In `%LocalAppData%\wslc\sessions\<session>\storage.vhdx`, one virtual disk per session. It grows with images and doesn't shrink on its own (see above).
 - ~~Can the memory and CPU of the VM used by `wslc` be limited?~~ Yes: `cpuCount` and `memorySize` in `settings.yaml`, then terminate the session (see above).
-- Can `wslc` and Docker Desktop publish ports without conflict?
+- ~~Can `wslc` and Docker Desktop publish ports without conflict?~~ They can publish the same port without **any error**, which is the problem: `127.0.0.1` reaches `wslc`, `localhost` reaches Docker (see above).
+- How do you compact a session's `storage.vhdx`?
