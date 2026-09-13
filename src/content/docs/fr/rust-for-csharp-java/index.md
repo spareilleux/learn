@@ -38,11 +38,11 @@ Vous n'avez jamais écrit de Rust. Chaque leçon part du concept que vous connai
 | 2 | [Types, mutabilité et expressions](02-types-mutability-expressions/) | `var`, `final`/`readonly`, `int`/`long`, ternaires |
 | 3 | [Possession et déplacements](03-ownership-and-moves/) | le ramasse-miettes, `IDisposable`, try-with-resources |
 | 4 | [Emprunts et chaînes](04-borrowing-and-strings/) | références, `string`/`String`, `StringBuilder` |
-| 5 | Structs, enums et pattern matching *(à venir)* | classes, records, hiérarchies scellées, `switch` |
-| 6 | `Option`, `Result` et `?` | `null`, exceptions |
-| 7 | Traits et génériques | interfaces, génériques |
-| 8 | Collections et itérateurs | LINQ, Streams |
-| 9 | Durées de vie (lifetimes) | — |
+| 5 | [Structs, enums et pattern matching](05-structs-enums-match/) | classes, records, hiérarchies scellées, `switch` |
+| 6 | [`Option`, `Result` et `?`](06-option-result/) | `null`, exceptions |
+| 7 | [Traits et génériques](07-traits-and-generics/) | interfaces, génériques |
+| 8 | [Collections et itérateurs](08-collections-and-iterators/) | LINQ, Streams |
+| 9 | Durées de vie (lifetimes) *(à venir)* | — |
 | 10 | Modules, crates et workspaces | namespaces/packages, projets, solutions |
 | 11 | `Box`, `Rc`, `Arc`, `RefCell` | références, objets partagés |
 | 12 | Threads, `Send`/`Sync`, `Mutex`, rayon | `Thread`, `lock`/`synchronized`, `Parallel.For` |

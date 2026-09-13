@@ -38,11 +38,11 @@ You have never written Rust. Each lesson starts from the concept you already kno
 | 2 | [Types, mutability and expressions](02-types-mutability-expressions/) | `var`, `final`/`readonly`, `int`/`long`, ternaries |
 | 3 | [Ownership and moves](03-ownership-and-moves/) | the garbage collector, `IDisposable`, try-with-resources |
 | 4 | [Borrowing and strings](04-borrowing-and-strings/) | references, `string`/`String`, `StringBuilder` |
-| 5 | Structs, enums and pattern matching *(coming next)* | classes, records, sealed hierarchies, `switch` |
-| 6 | `Option`, `Result` and `?` | `null`, exceptions |
-| 7 | Traits and generics | interfaces, generics |
-| 8 | Collections and iterators | LINQ, Streams |
-| 9 | Lifetimes | — |
+| 5 | [Structs, enums and pattern matching](05-structs-enums-match/) | classes, records, sealed hierarchies, `switch` |
+| 6 | [`Option`, `Result` and `?`](06-option-result/) | `null`, exceptions |
+| 7 | [Traits and generics](07-traits-and-generics/) | interfaces, generics |
+| 8 | [Collections and iterators](08-collections-and-iterators/) | LINQ, Streams |
+| 9 | Lifetimes *(coming next)* | — |
 | 10 | Modules, crates and workspaces | namespaces/packages, projects, solutions |
 | 11 | `Box`, `Rc`, `Arc`, `RefCell` | references, shared objects |
 | 12 | Threads, `Send`/`Sync`, `Mutex`, rayon | `Thread`, `lock`/`synchronized`, `Parallel.For` |

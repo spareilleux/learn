@@ -11,7 +11,7 @@ Learning in public — courses written as I learn, in English and French.
 | Course | Status |
 |---|---|
 | [WSL containers](src/content/docs/wsl-containers/) | in progress |
-| [Rust for C#/Java developers](src/content/docs/rust-for-csharp-java/) | lessons 1–4 of 15 |
+| [Rust for C#/Java developers](src/content/docs/rust-for-csharp-java/) | lessons 1–8 of 15 |
 | [Streeling University](src/content/docs/streeling/) | 31 imported modules, journal started |
 
 Streeling modules are imported from [GuitarAlchemist/Demerzel](https://github.com/GuitarAlchemist/Demerzel) with `npm run sync:streeling` (pin a revision with `-- --ref <sha>`); the imported commit is recorded in `streeling.lock.json`.
