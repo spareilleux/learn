@@ -20,3 +20,16 @@
 		--sl-content-width: 66rem;
 	}
 }
+
+/*
+ * Starlight renders Markdown tables as scrollable blocks sized to their content,
+ * so a page that opens with a short table looks narrower than its neighbours.
+ * From 72rem (where the table of contents appears) tables span the whole column;
+ * phones and tablets keep Starlight's horizontal scrolling.
+ */
+@media (min-width: 72rem) {
+	.sl-markdown-content table:not(:where(.not-content *)) {
+		display: table;
+		width: 100%;
+	}
+}
