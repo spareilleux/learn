@@ -22,6 +22,7 @@ export default defineConfig({
 			customCss: ['./src/styles/custom.css'],
 			sidebar: [
 				{ label: 'Method', translations: { fr: 'Méthode' }, slug: 'method' },
+				{ label: 'Artifacts', translations: { fr: 'Artefacts' }, slug: 'artifacts' },
 				{
 					label: 'Software Engineering',
 					translations: { fr: 'Génie logiciel' },
