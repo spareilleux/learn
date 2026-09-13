@@ -1,0 +1,30 @@
+## Course conventions
+
+- English is the source language (root locale, `src/content/docs/`); French mirrors it under `src/content/docs/fr/` with identical file names. Slugs (file names) are in English.
+- Each course folder: `index.md` (mission, prerequisites, plan, resources), numbered lessons `01-…md` with exercises and collapsible `<details>` solutions, and a dated `journal.md`.
+- Order pages with `sidebar.order`; register each course as an `autogenerate` group in `astro.config.mjs`.
+- Mark anything not yet tested on the author's machine as *à vérifier* / *to verify*, and cite primary sources.
+- The site is served under `base: '/learn'`: use relative links in Markdown (e.g. `../journal/`), never root-absolute `/…` links.
+
+## Development
+
+When starting the dev server, use background mode:
+
+```
+astro dev --background
+```
+
+Manage the background server with `astro dev stop`, `astro dev status`, and `astro dev logs`.
+
+## Documentation
+
+Full documentation: https://docs.astro.build
+
+Consult these guides before working on related tasks:
+
+- [Adding pages, dynamic routes, or middleware](https://docs.astro.build/en/guides/routing/)
+- [Working with Astro components](https://docs.astro.build/en/basics/astro-components/)
+- [Using React, Vue, Svelte, or other framework components](https://docs.astro.build/en/guides/framework-components/)
+- [Adding or managing content](https://docs.astro.build/en/guides/content-collections/)
+- [Adding styles or using Tailwind](https://docs.astro.build/en/guides/styling/)
+- [Supporting multiple languages](https://docs.astro.build/en/guides/internationalization/)

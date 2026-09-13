@@ -1,0 +1,45 @@
+---
+title: learn
+description: Apprendre en public — cours rédigés au fil de mon propre apprentissage.
+template: splash
+hero:
+  tagline: Des cours écrits en apprenant, publiés tels quels — avec les erreurs, les impasses et ce qui a fini par marcher.
+  actions:
+    - text: Commencer par WSL containers
+      link: wsl-containers/
+      icon: right-arrow
+    - text: Comment ces cours sont construits
+      link: method/
+      icon: open-book
+      variant: minimal
+---
+
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+## Pourquoi ce site
+
+J'écris ces cours d'abord pour moi : expliquer un sujet est le meilleur moyen de vérifier qu'on l'a compris.
+Ils sont publics pour que d'autres puissent en profiter — et me corriger.
+
+<CardGrid>
+	<Card title="Mission" icon="rocket">
+		Chaque cours commence par *pourquoi* j'apprends ce sujet et ce que je veux savoir faire à la fin.
+	</Card>
+	<Card title="Leçons" icon="document">
+		Des leçons courtes, avec des commandes réelles et des exercices corrigés.
+	</Card>
+	<Card title="Journal" icon="pencil">
+		Les notes de progression : ce que j'ai essayé, ce qui a cassé, ce qui reste à vérifier.
+	</Card>
+	<Card title="Sources" icon="external">
+		Chaque affirmation importante renvoie vers une source primaire (docs officielles, dépôts).
+	</Card>
+</CardGrid>
+
+## Cours
+
+<LinkCard
+	title="WSL containers"
+	description="Faire tourner des conteneurs Linux sur Windows avec wslc.exe, sans Docker Desktop."
+	href="wsl-containers/"
+/>
