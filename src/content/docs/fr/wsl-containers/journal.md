@@ -359,11 +359,37 @@ Taille de `%LocalAppData%\wslc\sessions\wslc-cli-spare\storage.vhdx` :
 
 Piège : dans `wslc image prune`, `-f` veut dire `--filter`, pas `--force` ; `--force` n'existe pas (`wslc image prune --all` ne demande pas de confirmation).
 
-*À vérifier :* comment compacter `storage.vhdx` (par exemple `Optimize-VHD`, VM arrêtée).
+### Compacter `storage.vhdx`
+
+Après les builds de la leçon 4, le fichier atteignait **3995 Mo**, alors que `df` dans la session n'indiquait que **1,9 Go** utilisés. Étapes :
+
+```powershell
+# 1. Stop the session VM (non-elevated) and check it's gone
+wslc --session wslc-cli-spare system session terminate
+Get-Process -Name 'vmmemwslc-cli-spare' -ErrorAction SilentlyContinue   # nothing
+
+# 2. Administrator PowerShell (Hyper-V module): back up, then compact
+$f = "$env:LOCALAPPDATA\wslc\sessions\wslc-cli-spare\storage.vhdx"
+Copy-Item $f "$f.bak"
+Optimize-VHD -Path $f -Mode Full
+```
+
+```text
+before: 3,995 MB
+Optimize-VHD -Mode Full: OK in 10s
+after: 2,789 MB
+```
+
+**1,2 Go rendus à Windows en 10 secondes.** Vérifier avant de supprimer la sauvegarde : `wslc image list` liste toujours `csharp-api`, `java-reactor-api` et `alpine`, et les deux API répondent toujours après `wslc run`.
+
+- `Optimize-VHD` exige un terminal **administrateur** et le module PowerShell **Hyper-V** (présent ici).
+- La VM de la session doit être arrêtée : sinon le VHDX est en cours d'utilisation.
+- Le fichier reste plus gros que l'espace utilisé à l'intérieur (2,8 Go contre 1,9 Go) : seuls les blocs entièrement libres sont récupérés.
+- `fstrim` n'est pas disponible dans la VM de session : `wslc system session run fstrim -v /` → `Failed to launch command fstrim. Errno = 2`.
 
 ## Questions ouvertes
 
 - ~~Où `wslc` stocke-t-il ses images et conteneurs ?~~ Dans `%LocalAppData%\wslc\sessions\<session>\storage.vhdx`, un disque virtuel par session. Il grossit avec les images et ne rétrécit pas tout seul (voir ci-dessus).
 - ~~Peut-on limiter la mémoire et le CPU de la VM utilisée par `wslc` ?~~ Oui : `cpuCount` et `memorySize` dans `settings.yaml`, puis terminer la session (voir ci-dessus).
 - ~~`wslc` et Docker Desktop peuvent-ils publier des ports sans conflit ?~~ Ils peuvent publier le même port **sans aucune erreur**, et c'est bien le problème : `127.0.0.1` atteint `wslc`, `localhost` atteint Docker (voir ci-dessus).
-- Comment compacter le `storage.vhdx` d'une session ?
+- ~~Comment compacter le `storage.vhdx` d'une session ?~~ Terminer la session, puis `Optimize-VHD -Mode Full` en administrateur : 3995 Mo → 2789 Mo (voir ci-dessus).

@@ -359,11 +359,37 @@ Size of `%LocalAppData%\wslc\sessions\wslc-cli-spare\storage.vhdx`:
 
 Trap: in `wslc image prune`, `-f` means `--filter`, not `--force`; `--force` doesn't exist (`wslc image prune --all` doesn't ask for confirmation).
 
-*To verify:* how to compact `storage.vhdx` (for example `Optimize-VHD` with the VM stopped).
+### Compacting `storage.vhdx`
+
+After the lesson 4 builds, the file had grown to **3995 MB**, while `df` inside the session showed only **1.9 GB** used. Steps:
+
+```powershell
+# 1. Stop the session VM (non-elevated) and check it's gone
+wslc --session wslc-cli-spare system session terminate
+Get-Process -Name 'vmmemwslc-cli-spare' -ErrorAction SilentlyContinue   # nothing
+
+# 2. Administrator PowerShell (Hyper-V module): back up, then compact
+$f = "$env:LOCALAPPDATA\wslc\sessions\wslc-cli-spare\storage.vhdx"
+Copy-Item $f "$f.bak"
+Optimize-VHD -Path $f -Mode Full
+```
+
+```text
+before: 3,995 MB
+Optimize-VHD -Mode Full: OK in 10s
+after: 2,789 MB
+```
+
+**1.2 GB given back to Windows in 10 seconds.** Check before deleting the backup: `wslc image list` still lists `csharp-api`, `java-reactor-api` and `alpine`, and both APIs still answer after `wslc run`.
+
+- `Optimize-VHD` needs an **administrator** terminal and the **Hyper-V** PowerShell module (present here).
+- The session VM must be stopped: otherwise the VHDX is in use.
+- The file remains larger than the space used inside (2.8 GB vs 1.9 GB): only fully free blocks are reclaimed.
+- `fstrim` isn't available in the session VM: `wslc system session run fstrim -v /` → `Failed to launch command fstrim. Errno = 2`.
 
 ## Open questions
 
 - ~~Where does `wslc` store its images and containers?~~ In `%LocalAppData%\wslc\sessions\<session>\storage.vhdx`, one virtual disk per session. It grows with images and doesn't shrink on its own (see above).
 - ~~Can the memory and CPU of the VM used by `wslc` be limited?~~ Yes: `cpuCount` and `memorySize` in `settings.yaml`, then terminate the session (see above).
 - ~~Can `wslc` and Docker Desktop publish ports without conflict?~~ They can publish the same port without **any error**, which is the problem: `127.0.0.1` reaches `wslc`, `localhost` reaches Docker (see above).
-- How do you compact a session's `storage.vhdx`?
+- ~~How do you compact a session's `storage.vhdx`?~~ Terminate the session, then `Optimize-VHD -Mode Full` as administrator: 3995 MB → 2789 MB (see above).
