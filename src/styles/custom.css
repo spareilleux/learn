@@ -1,0 +1,22 @@
+/*
+ * Wider reading column on large screens only.
+ * Starlight's default is 45rem, which wraps tables and compiler output early on course pages.
+ * Phones and tablets keep Starlight's defaults: the overrides start at 90rem (1440px).
+ */
+@media (min-width: 90rem) {
+	:root {
+		--sl-content-width: 52rem;
+	}
+}
+
+@media (min-width: 105rem) {
+	:root {
+		--sl-content-width: 60rem;
+	}
+}
+
+@media (min-width: 120rem) {
+	:root {
+		--sl-content-width: 66rem;
+	}
+}

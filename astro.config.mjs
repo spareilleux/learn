@@ -19,6 +19,7 @@ export default defineConfig({
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/spareilleux/learn' }],
 			editLink: { baseUrl: 'https://github.com/spareilleux/learn/edit/main/' },
 			lastUpdated: true,
+			customCss: ['./src/styles/custom.css'],
 			sidebar: [
 				{ label: 'Method', translations: { fr: 'Méthode' }, slug: 'method' },
 				{
