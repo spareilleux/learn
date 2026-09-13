@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import streelingSidebar from './src/streeling-sidebar.json';
 
 // https://astro.build/config
 export default defineConfig({
@@ -23,6 +24,11 @@ export default defineConfig({
 				{
 					label: 'WSL containers',
 					items: [{ autogenerate: { directory: 'wsl-containers' } }],
+				},
+				{
+					label: 'Streeling University',
+					collapsed: true,
+					items: streelingSidebar,
 				},
 			],
 		}),
