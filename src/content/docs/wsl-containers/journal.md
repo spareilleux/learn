@@ -237,7 +237,39 @@ wslc --session wslc-cli-spare system session terminate
 
 4 GB is too tight for the rest of the course (qdrant). Setting kept on this machine, given the memory incident of 2026-09-12: `cpuCount: 8`, `memorySize: 16GB` → `nproc=8`, RAM 15996 MB, swap 16384 MB.
 
-*To verify:* whether the admin session (`wslc-cli-admin-<user>`) reads the same `settings.yaml`, and how much memory the VM really takes on the Windows side (Task Manager, `vmmem`).
+### Verification: admin session and Windows-side memory
+
+**The admin session reads the same file.** In an administrator terminal, `wslc info` shows the same `Settings file: C:\Users\spare\AppData\Local\wslc\settings.yaml`. After terminating the admin session:
+
+```text
+> wslc --session wslc-cli-admin-spare system session terminate
+> wslc run --rm alpine sh -c 'echo nproc=$(nproc); free -m'
+nproc=8
+Mem:          15996 ...
+Swap:         16384 ...
+```
+
+**On the Windows side, each session VM is a process named `vmmem<session>`** (`vmmemwslc-cli-spare`, `vmmemwslc-cli-admin-spare`); `hcsdiag list` (administrator) shows it as a `Running` VM named after the session. Its memory figures are only readable from an elevated terminal.
+
+Test: a container that holds 6 GB for two minutes, in the non-elevated session.
+
+```powershell
+wslc run -d --name memtest alpine sh -c 'apk add -q stress-ng && stress-ng --vm 1 --vm-bytes 6G --vm-hang 0 --timeout 120s'
+```
+
+| Moment | VM process | Working set | Private memory |
+|---|---|---|---|
+| idle session (admin, nothing running) | `vmmemwslc-cli-admin-spare` | 921 MB | 970 MB |
+| 6 GB held in the container | `vmmemwslc-cli-spare` | 7069 MB | 7083 MB |
+| 10 s after `container stop` + `remove` | `vmmemwslc-cli-spare` | 2776 MB | 7084 MB |
+| ~2 min later | `vmmemwslc-cli-spare` | 902 MB | 1902 MB |
+
+- An idle session VM costs about **0.9 GB**.
+- The memory used by the container shows up almost entirely on the Windows side (~6 GB + the base VM).
+- After the container stops, the memory is **not given back immediately**: it decreases over a few minutes.
+- `memorySize` is a ceiling, not a reservation: the VM only takes what it uses.
+
+Between two snapshots, the admin session VM had disappeared (nothing running in it): consistent with `idleTimeout` (30 s). *To verify:* the exact moment an idle VM is torn down — the non-elevated VM was still there ~2 min after its last container.
 
 ## Open questions
 

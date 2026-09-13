@@ -237,7 +237,39 @@ wslc --session wslc-cli-spare system session terminate
 
 4 Go est trop juste pour la suite du cours (qdrant). Réglage retenu sur cette machine, vu l'incident mémoire du 2026-09-12 : `cpuCount: 8`, `memorySize: 16GB` → `nproc=8`, RAM 15996 Mo, swap 16384 Mo.
 
-*À vérifier :* si la session admin (`wslc-cli-admin-<utilisateur>`) lit le même `settings.yaml`, et combien de mémoire la VM prend réellement côté Windows (Gestionnaire des tâches, `vmmem`).
+### Vérification : session admin et mémoire côté Windows
+
+**La session admin lit le même fichier.** Dans un terminal administrateur, `wslc info` affiche le même `Settings file: C:\Users\spare\AppData\Local\wslc\settings.yaml`. Après avoir terminé la session admin :
+
+```text
+> wslc --session wslc-cli-admin-spare system session terminate
+> wslc run --rm alpine sh -c 'echo nproc=$(nproc); free -m'
+nproc=8
+Mem:          15996 ...
+Swap:         16384 ...
+```
+
+**Côté Windows, chaque VM de session est un processus nommé `vmmem<session>`** (`vmmemwslc-cli-spare`, `vmmemwslc-cli-admin-spare`) ; `hcsdiag list` (administrateur) la montre comme une VM `Running` portant le nom de la session. Ses chiffres mémoire ne sont lisibles que depuis un terminal élevé.
+
+Test : un conteneur qui occupe 6 Go pendant deux minutes, dans la session non élevée.
+
+```powershell
+wslc run -d --name memtest alpine sh -c 'apk add -q stress-ng && stress-ng --vm 1 --vm-bytes 6G --vm-hang 0 --timeout 120s'
+```
+
+| Moment | Processus VM | Working set | Mémoire privée |
+|---|---|---|---|
+| session inactive (admin, rien ne tourne) | `vmmemwslc-cli-admin-spare` | 921 Mo | 970 Mo |
+| 6 Go occupés dans le conteneur | `vmmemwslc-cli-spare` | 7069 Mo | 7083 Mo |
+| 10 s après `container stop` + `remove` | `vmmemwslc-cli-spare` | 2776 Mo | 7084 Mo |
+| ~2 min plus tard | `vmmemwslc-cli-spare` | 902 Mo | 1902 Mo |
+
+- Une VM de session inactive coûte environ **0,9 Go**.
+- La mémoire utilisée par le conteneur se retrouve presque entièrement côté Windows (~6 Go + la VM de base).
+- Après l'arrêt du conteneur, la mémoire n'est **pas rendue tout de suite** : elle redescend en quelques minutes.
+- `memorySize` est un plafond, pas une réservation : la VM ne prend que ce qu'elle utilise.
+
+Entre deux relevés, la VM de la session admin avait disparu (rien n'y tournait) : cohérent avec `idleTimeout` (30 s). *À vérifier :* le moment exact où une VM inactive est arrêtée — la VM non élevée était encore là ~2 min après son dernier conteneur.
 
 ## Questions ouvertes
 
