@@ -14,10 +14,10 @@ sidebar:
 | CLI | close to Docker | `docker` |
 | API for Windows applications | yes — NuGet `Microsoft.WSL.Containers` | Docker Engine API (HTTP) |
 | Enterprise management | Microsoft Defender for Endpoint, Intune | Docker Business |
-| Ecosystem (Compose, Kubernetes, extensions, GUI) | *to verify* — more limited in preview | complete |
+| Ecosystem (Compose, Kubernetes, extensions, GUI) | no `compose` command in 2.9.11; Kubernetes, extensions, GUI *to verify* | complete |
 
-:::caution[To verify]
-- **Compose**: preview feedback reports limited support. I haven't tested it yet.
+:::note[Verified: no Compose in `wslc` 2.9.11]
+`wslc compose` → `Unrecognized command: 'compose'`, and the session's Docker engine can't be reached by `docker compose`. A small stack can be reproduced with a script (`network create`, `volume create`, `run --network --network-alias`); the tested translation of a `compose.yaml` is in the [journal](../journal/).
 :::
 
 :::note[Verified: images are not shared]

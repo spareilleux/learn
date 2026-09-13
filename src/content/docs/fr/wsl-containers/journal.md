@@ -13,7 +13,7 @@ sidebar:
 - [x] Leçon 3 : conteneurs, ports, `exec`
 - [x] Leçon 4 : construire une image
 - [x] Faire tourner un service existant (qdrant) avec `wslc`
-- [ ] Tester Compose
+- [x] Tester Compose
 - [x] Vérifier si les images Docker et `wslc` sont partagées
 - [ ] Petit programme C# avec `Microsoft.WSL.Containers`
 
@@ -507,6 +507,133 @@ CPU 0.41%  MEM 367.8MiB / 31.2GiB
 - qdrant journalise `starting 7 workers` : il voit les 8 CPU autorisés par `cpuCount: 8`.
 
 Nettoyage : `wslc container stop qdrant qdrant-bind`, `wslc container remove qdrant qdrant-bind`, `wslc volume remove qdrant-data`. `ga-qdrant` n'a jamais été touché.
+
+## 2026-09-13 — Compose avec `wslc`
+
+### Pas de commande `compose`
+
+```text
+> wslc compose --help
+Unrecognized command: 'compose'
+```
+
+`wslc --help` ne liste aucun équivalent de Compose, et le [tutoriel officiel](https://learn.microsoft.com/windows/wsl/tutorials/wsl-containers) n'en parle pas. `wslc` 2.9.11 **ne prend pas en charge Compose**.
+
+### Impasse : brancher `docker compose` sur le moteur de la session
+
+La VM de session fait bien tourner un moteur Docker :
+
+```text
+> wslc system session run ps -eo pid,args
+  131 /usr/bin/containerd --address /run/containerd/containerd.sock --root /var/lib/docker/containerd/daemon --state /run/docker/containerd/daemon
+  132 /usr/bin/dockerd --containerd /run/containerd/containerd.sock
+> wslc system session run ls -la /var/run/docker.sock
+srw-rw---- 1 root docker 0 Sep 13 18:47 /var/run/docker.sock
+```
+
+Mais rien ne l'expose à Windows (aucun canal nommé `wslc`), le client `docker` de la VM échoue (`wslc system session run docker version` → `The handle is invalid. Error code: ERROR_INVALID_HANDLE`), et on ne peut pas le monter dans un conteneur `docker:cli` (qui contient Compose v5.5.1) :
+
+```powershell
+wslc run --rm -e DOCKER_HOST=unix:///var/run/docker.sock -v /var/run/docker.sock:/var/run/docker.sock docker:cli docker ps
+```
+
+```text
+Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?
+```
+
+Pourquoi : la source de `-v` est un chemin **Windows**. `/var/run/docker.sock` est devenu `C:\var\run\docker.sock`, monté en `virtiofs` :
+
+```text
+drvfs on /run/docker.sock type virtiofs (rw,relatime)
+```
+
+**Piège :** `wslc` **crée** la source d'un montage si elle n'existe pas. Ce test a laissé un dossier vide `C:\var\run\docker.sock\` sous Windows (supprimé ensuite). `--mount type=bind,source=/var/run/docker.sock,...` est refusé : `The bind source path must be absolute.`
+
+### Ce que Compose apporte vraiment, fait à la main
+
+`docker compose config` sur un fichier à deux services montre ce que Compose ajoute implicitement : un réseau par projet, des volumes nommés, et les noms de service comme noms DNS. Sur un réseau créé avec `wslc network create`, les noms se résolvent bien :
+
+```text
+> wslc run --rm --network demo alpine wget -qO- http://qdrant:6333/
+{"title":"qdrant - vector search engine","version":"1.19.1","commit":"6ab21cac18ebb6f4ae29102c7f8f5cc11affd5de"}
+> wslc run --rm --network demo alpine wget -qO- http://vectors:6333/readyz      # --network-alias vectors
+all shards are ready
+> wslc run --rm alpine wget -qO- -T 5 http://qdrant:6333/                      # réseau par défaut
+wget: bad address 'qdrant:6333'
+```
+
+Le `compose.yaml` (validé avec `docker compose -p wslcdemo config`) :
+
+```yaml
+services:
+  qdrant:
+    image: qdrant/qdrant:v1.19.1
+    ports:
+      - "127.0.0.1:16333:6333"
+    volumes:
+      - qdrant-data:/qdrant/storage
+
+  seed:
+    image: curlimages/curl:8.16.0
+    depends_on:
+      - qdrant
+    command: >
+      --silent --show-error --retry 10 --retry-connrefused --retry-delay 1
+      -X PUT http://qdrant:6333/collections/demo
+      -H "Content-Type: application/json"
+      -d '{"vectors":{"size":4,"distance":"Cosine"}}'
+
+volumes:
+  qdrant-data:
+```
+
+Sa traduction en `wslc`, `wslc-up.ps1` :
+
+```powershell
+# Équivalent de `docker compose -p wslcdemo up -d` pour compose.yaml, avec wslc
+$project = 'wslcdemo'
+
+# Ce que Compose crée implicitement : un réseau par projet, des volumes nommés
+wslc network create "${project}_default"
+wslc volume create "${project}_qdrant-data"
+
+# service qdrant (le nom du service devient un alias DNS sur le réseau du projet)
+wslc run -d --name "$project-qdrant-1" --network "${project}_default" --network-alias qdrant `
+    -p 127.0.0.1:16333:6333 -v "${project}_qdrant-data:/qdrant/storage" qdrant/qdrant:v1.19.1
+
+# service seed (depends_on ne fait qu'ordonner le démarrage : curl réessaie jusqu'à ce que qdrant réponde)
+wslc run --name "$project-seed-1" --network "${project}_default" --network-alias seed `
+    curlimages/curl:8.16.0 --silent --show-error --retry 10 --retry-connrefused --retry-delay 1 `
+    -X PUT http://qdrant:6333/collections/demo -H 'Content-Type: application/json' `
+    -d '{"vectors":{"size":4,"distance":"Cosine"}}'
+```
+
+Et `wslc-down.ps1` :
+
+```powershell
+# Équivalent de `docker compose -p wslcdemo down --volumes`
+$project = 'wslcdemo'
+wslc container stop "$project-qdrant-1"
+wslc container remove "$project-qdrant-1" "$project-seed-1"
+wslc network remove "${project}_default"
+wslc volume remove "${project}_qdrant-data"
+```
+
+Résultat de `wslc-up.ps1` :
+
+```text
+CONTAINER ID   IMAGE                  COMMAND                  CREATED         STATUS                              PORTS                       NAMES
+28be34e431f5   curlimages/curl:8.1…   "/entrypoint.sh --si…"   1 second ago    Exited (0) Less than a second ago                               wslcdemo-seed-1
+c1f82d52d6ca   qdrant/qdrant:v1.19…   "./entrypoint.sh"        2 seconds ago   Up 1 second                         127.0.0.1:16333->6333/tcp   wslcdemo-qdrant-1
+> wslc logs wslcdemo-seed-1
+{"result":true,"status":"ok","time":0.409039704}
+> curl.exe http://127.0.0.1:16333/collections
+{"result":{"collections":[{"name":"demo"}]},"status":"ok","time":0.00004439}
+```
+
+Après `wslc-down.ps1` : aucun conteneur, seulement les réseaux par défaut `bridge`/`host`/`none`, aucun volume.
+
+**Conclusion :** pour une petite pile, un script `wslc` reproduit ce que fait Compose (réseau, volumes, noms DNS, ordre de démarrage). Ce qu'il n'apporte pas : aucune lecture de `compose.yaml`, pas de `depends_on` avec `condition: service_healthy`, pas de `up` différentiel qui ne recrée que ce qui a changé, pas de `logs -f` sur tous les services. Pour de vrais projets Compose, Docker Desktop (ou Podman) reste l'outil.
 
 ## Questions ouvertes
 
