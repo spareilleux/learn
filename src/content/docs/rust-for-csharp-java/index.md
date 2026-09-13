@@ -42,11 +42,11 @@ You have never written Rust. Each lesson starts from the concept you already kno
 | 6 | [`Option`, `Result` and `?`](06-option-result/) | `null`, exceptions |
 | 7 | [Traits and generics](07-traits-and-generics/) | interfaces, generics |
 | 8 | [Collections and iterators](08-collections-and-iterators/) | LINQ, Streams |
-| 9 | Lifetimes *(coming next)* | — |
-| 10 | Modules, crates and workspaces | namespaces/packages, projects, solutions |
-| 11 | `Box`, `Rc`, `Arc`, `RefCell` | references, shared objects |
-| 12 | Threads, `Send`/`Sync`, `Mutex`, rayon | `Thread`, `lock`/`synchronized`, `Parallel.For` |
-| 13 | `async` and tokio | `async`/`await`, `CompletableFuture` |
+| 9 | [Lifetimes](09-lifetimes/) | — |
+| 10 | [Modules, crates and workspaces](10-modules-crates-workspaces/) | namespaces/packages, projects, solutions |
+| 11 | [`Box`, `Rc`, `Arc`, `RefCell`](11-smart-pointers/) | references, shared objects |
+| 12 | [Threads, `Send`/`Sync`, `Mutex`, rayon](12-threads-and-concurrency/) | `Thread`, `lock`/`synchronized`, `Parallel.For` |
+| 13 | `async` and tokio *(coming next)* | `async`/`await`, `CompletableFuture` |
 | 14 | Tests, docs, clippy, fmt | xUnit/JUnit, XML docs/Javadoc, analyzers |
 | 15 | Macros, `unsafe` and FFI (overview) | source generators, P/Invoke, JNI |
 

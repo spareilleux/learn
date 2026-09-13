@@ -467,3 +467,530 @@ pub mod lesson07 {}
 /// assert_eq!(text.join(" "), "3... 2... 1...");
 /// ```
 pub mod lesson08 {}
+
+/// Lesson 9 — a reference cannot outlive its value (E0597).
+///
+/// ```compile_fail,E0597
+/// let r;
+/// {
+///     let s = String::from("hello");
+///     r = &s;
+/// }
+/// println!("{r}");
+/// ```
+///
+/// Lesson 9 — two input references: the compiler cannot guess the output lifetime (E0106).
+///
+/// ```compile_fail,E0106
+/// fn longest(a: &str, b: &str) -> &str {
+///     if a.len() >= b.len() { a } else { b }
+/// }
+/// ```
+///
+/// Lesson 9 — the result of `longest` cannot outlive the shorter input (E0597).
+///
+/// ```compile_fail,E0597
+/// fn longest<'a>(a: &'a str, b: &'a str) -> &'a str {
+///     if a.len() >= b.len() { a } else { b }
+/// }
+/// let title = String::from("Rust for C# developers");
+/// let winner;
+/// {
+///     let subtitle = String::from("ownership");
+///     winner = longest(&title, &subtitle);
+/// }
+/// println!("{winner}");
+/// ```
+///
+/// Lesson 9 — a struct field that is a reference needs a lifetime (E0106).
+///
+/// ```compile_fail,E0106
+/// struct Excerpt {
+///     text: &str,
+/// }
+/// ```
+///
+/// Lesson 9 — a struct cannot outlive the data it borrows (E0597).
+///
+/// ```compile_fail,E0597
+/// struct Excerpt<'a> {
+///     text: &'a str,
+/// }
+/// let excerpt;
+/// {
+///     let novel = String::from("Call me Ishmael. Some years ago...");
+///     excerpt = Excerpt { text: novel.split('.').next().unwrap() };
+/// }
+/// println!("{}", excerpt.text);
+/// ```
+///
+/// Lesson 9 — no reference to a local variable can escape (E0515).
+///
+/// ```compile_fail,E0515
+/// fn shout(word: &str) -> &str {
+///     let upper = word.to_uppercase();
+///     &upper
+/// }
+/// ```
+///
+/// Lesson 9 — `thread::spawn` needs `'static` data (E0597).
+///
+/// ```compile_fail,E0597
+/// let name = String::from("worker");
+/// let label: &str = &name;
+/// let handle = std::thread::spawn(move || println!("{label}"));
+/// handle.join().unwrap();
+/// ```
+///
+/// Exercise 1 — elision and an explicit lifetime.
+///
+/// ```
+/// fn longest_line(text: &str) -> &str {
+///     text.lines().max_by_key(|line| line.len()).unwrap_or("")
+/// }
+/// fn pick<'a>(first: &'a str, second: &'a str, use_first: bool) -> &'a str {
+///     if use_first { first } else { second }
+/// }
+/// let poem = String::from("short\na much longer line\nmid");
+/// assert_eq!(longest_line(&poem), "a much longer line");
+/// assert_eq!(pick("left", "right", false), "right");
+/// ```
+///
+/// Exercise 2 — results borrow the text, not the query.
+///
+/// ```
+/// #[derive(Debug, PartialEq)]
+/// struct Highlight<'a> {
+///     line: &'a str,
+///     column: usize,
+/// }
+/// fn find_highlights<'a>(text: &'a str, word: &str) -> Vec<Highlight<'a>> {
+///     text.lines()
+///         .filter_map(|line| line.find(word).map(|column| Highlight { line, column }))
+///         .collect()
+/// }
+/// let text = String::from("I like Rust\nC# too\nRust again");
+/// let hits = {
+///     let query = String::from("Rust");   // dropped at the end of this block
+///     find_highlights(&text, &query)
+/// };
+/// assert_eq!(hits, [Highlight { line: "I like Rust", column: 7 }, Highlight { line: "Rust again", column: 0 }]);
+/// ```
+///
+/// Exercise 2 — tying the query to `'a` as well makes the same call fail (E0597).
+///
+/// ```compile_fail,E0597
+/// struct Highlight<'a> {
+///     line: &'a str,
+///     column: usize,
+/// }
+/// fn find_highlights<'a>(text: &'a str, word: &'a str) -> Vec<Highlight<'a>> {
+///     text.lines()
+///         .filter_map(|line| line.find(word).map(|column| Highlight { line, column }))
+///         .collect()
+/// }
+/// let text = String::from("I like Rust\nC# too\nRust again");
+/// let hits = {
+///     let query = String::from("Rust");
+///     find_highlights(&text, &query)
+/// };
+/// println!("{}", hits.len());
+/// ```
+///
+/// Exercise 3 — elision ties the token to `&mut self` (E0499).
+///
+/// ```compile_fail,E0499
+/// struct Parser<'a> {
+///     input: &'a str,
+///     pos: usize,
+/// }
+/// impl<'a> Parser<'a> {
+///     fn next_token(&mut self) -> Option<&str> {
+///         let start = self.pos;
+///         self.pos = self.input.len();
+///         Some(&self.input[start..])
+///     }
+/// }
+/// let line = String::from("let x = 42");
+/// let mut parser = Parser { input: &line, pos: 0 };
+/// let first = parser.next_token();
+/// let second = parser.next_token();
+/// println!("{first:?} {second:?}");
+/// ```
+///
+/// Exercise 3 — returning `&'a str` ties the token to the input instead.
+///
+/// ```
+/// struct Parser<'a> {
+///     input: &'a str,
+///     pos: usize,
+/// }
+/// impl<'a> Parser<'a> {
+///     fn next_token(&mut self) -> Option<&'a str> {
+///         let start = self.pos;
+///         self.pos = self.input.len();
+///         Some(&self.input[start..])
+///     }
+/// }
+/// let line = String::from("let x = 42");
+/// let mut parser = Parser { input: &line, pos: 0 };
+/// let first = parser.next_token();
+/// let second = parser.next_token();
+/// assert_eq!(first, Some("let x = 42"));
+/// assert_eq!(second, Some(""));
+/// ```
+pub mod lesson09 {}
+
+/// Lesson 10 — items are private to their module by default (E0603).
+///
+/// ```compile_fail,E0603
+/// mod billing {
+///     pub fn invoice_total(amounts: &[f64]) -> f64 {
+///         amounts.iter().sum::<f64>() + tax(0.0)
+///     }
+///     fn tax(amount: f64) -> f64 {
+///         amount * 0.15
+///     }
+/// }
+/// println!("{}", billing::tax(100.0));
+/// ```
+///
+/// Lesson 10 — a `pub` struct can still have private fields (E0451).
+///
+/// ```compile_fail,E0451
+/// mod shapes {
+///     pub struct Rect {
+///         width: f64,
+///         height: f64,
+///     }
+///     impl Rect {
+///         pub fn area(&self) -> f64 {
+///             self.width * self.height
+///         }
+///     }
+/// }
+/// let r = shapes::Rect { width: 2.0, height: 3.0 };
+/// println!("{}", r.area());
+/// ```
+///
+/// Lesson 10 — reading a private field (E0616).
+///
+/// ```compile_fail,E0616
+/// mod shapes {
+///     pub struct Rect {
+///         width: f64,
+///     }
+///     impl Rect {
+///         pub fn new(width: f64) -> Self {
+///             Rect { width }
+///         }
+///     }
+/// }
+/// let r = shapes::Rect::new(1.0);
+/// println!("{}", r.width);
+/// ```
+///
+/// Lesson 10 — a name must be brought into scope with `use` (E0422).
+///
+/// ```compile_fail,E0422
+/// mod shapes {
+///     pub struct Rect {
+///         pub width: f64,
+///     }
+/// }
+/// let r = Rect { width: 2.0 };
+/// ```
+///
+/// Exercise 1 — a tuple struct with a private field has a private constructor (E0603).
+///
+/// ```compile_fail,E0603
+/// mod temperature {
+///     #[derive(Debug)]
+///     pub struct Celsius(f64);
+/// }
+/// let t = temperature::Celsius(-500.0);
+/// ```
+///
+/// Exercise 1 — a validating constructor.
+///
+/// ```
+/// mod temperature {
+///     #[derive(Debug, PartialEq)]
+///     pub struct Celsius(f64);
+///
+///     impl Celsius {
+///         pub const ABSOLUTE_ZERO: f64 = -273.15;
+///
+///         pub fn new(value: f64) -> Option<Celsius> {
+///             (value >= Self::ABSOLUTE_ZERO).then_some(Celsius(value))
+///         }
+///
+///         pub fn value(&self) -> f64 {
+///             self.0
+///         }
+///     }
+/// }
+/// use temperature::Celsius;
+/// assert_eq!(Celsius::new(-500.0), None);
+/// assert_eq!(Celsius::new(21.5).map(|c| c.value()), Some(21.5));
+/// ```
+pub mod lesson10 {}
+
+/// Lesson 11 — a recursive type needs indirection (E0072).
+///
+/// ```compile_fail,E0072
+/// enum Expr {
+///     Num(f64),
+///     Add(Expr, Expr),
+/// }
+/// ```
+///
+/// Lesson 11 — `Rc` gives shared, read-only access (E0596).
+///
+/// ```compile_fail,E0596
+/// use std::rc::Rc;
+/// let shared = Rc::new(vec![1, 2]);
+/// let other = Rc::clone(&shared);
+/// other.push(3);
+/// ```
+///
+/// Lesson 11 — `RefCell` enforces the borrow rules at runtime.
+///
+/// ```should_panic
+/// use std::cell::RefCell;
+/// let log = RefCell::new(Vec::new());
+/// let reader = log.borrow();
+/// log.borrow_mut().push("boom");
+/// println!("{}", reader.len());
+/// ```
+///
+/// Lesson 11 — an `Rc` cycle is never freed.
+///
+/// ```
+/// use std::cell::RefCell;
+/// use std::rc::Rc;
+/// struct Node {
+///     next: RefCell<Option<Rc<Node>>>,
+/// }
+/// let a = Rc::new(Node { next: RefCell::new(None) });
+/// let b = Rc::new(Node { next: RefCell::new(Some(Rc::clone(&a))) });
+/// *a.next.borrow_mut() = Some(Rc::clone(&b));
+/// let weak_a = Rc::downgrade(&a);
+/// drop(a);
+/// drop(b);
+/// assert!(weak_a.upgrade().is_some(), "still alive: the cycle leaks");
+/// ```
+///
+/// Exercise 1 — a boxed expression tree with negation and printing.
+///
+/// ```
+/// enum Expr {
+///     Num(f64),
+///     Neg(Box<Expr>),
+///     Add(Box<Expr>, Box<Expr>),
+///     Mul(Box<Expr>, Box<Expr>),
+/// }
+/// use Expr::*;
+/// fn eval(e: &Expr) -> f64 {
+///     match e {
+///         Num(n) => *n,
+///         Neg(a) => -eval(a),
+///         Add(a, b) => eval(a) + eval(b),
+///         Mul(a, b) => eval(a) * eval(b),
+///     }
+/// }
+/// fn show(e: &Expr) -> String {
+///     match e {
+///         Num(n) => n.to_string(),
+///         Neg(a) => format!("-{}", show(a)),
+///         Add(a, b) => format!("({} + {})", show(a), show(b)),
+///         Mul(a, b) => format!("({} * {})", show(a), show(b)),
+///     }
+/// }
+/// let e = Mul(Box::new(Add(Box::new(Num(2.0)), Box::new(Num(3.0)))), Box::new(Neg(Box::new(Num(4.0)))));
+/// assert_eq!(show(&e), "((2 + 3) * -4)");
+/// assert_eq!(eval(&e), -20.0);
+/// ```
+///
+/// Exercise 2 — two components writing to one shared log.
+///
+/// ```
+/// use std::cell::RefCell;
+/// use std::rc::Rc;
+/// type Log = Rc<RefCell<Vec<String>>>;
+/// struct Cart {
+///     log: Log,
+/// }
+/// struct Payment {
+///     log: Log,
+/// }
+/// impl Cart {
+///     fn add(&self, item: &str) {
+///         self.log.borrow_mut().push(format!("cart: added {item}"));
+///     }
+/// }
+/// impl Payment {
+///     fn pay(&self, amount: u32) {
+///         self.log.borrow_mut().push(format!("payment: {amount}"));
+///     }
+/// }
+/// let log: Log = Rc::new(RefCell::new(Vec::new()));
+/// let cart = Cart { log: Rc::clone(&log) };
+/// let payment = Payment { log: Rc::clone(&log) };
+/// cart.add("book");
+/// payment.pay(40);
+/// assert_eq!(*log.borrow(), ["cart: added book", "payment: 40"]);
+/// ```
+///
+/// Exercise 2 — pushing while iterating over the same `RefCell` panics.
+///
+/// ```should_panic
+/// use std::cell::RefCell;
+/// use std::rc::Rc;
+/// let lines = Rc::new(RefCell::new(vec![String::from("start")]));
+/// for line in lines.borrow().iter() {
+///     lines.borrow_mut().push(format!("seen {line}"));
+/// }
+/// ```
+///
+/// Exercise 3 — a `Weak` back-link breaks the cycle.
+///
+/// ```
+/// use std::cell::RefCell;
+/// use std::rc::{Rc, Weak};
+/// struct Node {
+///     next: RefCell<Option<Rc<Node>>>,
+///     prev: RefCell<Weak<Node>>,
+/// }
+/// let a = Rc::new(Node { next: RefCell::new(None), prev: RefCell::new(Weak::new()) });
+/// let b = Rc::new(Node { next: RefCell::new(None), prev: RefCell::new(Weak::new()) });
+/// *a.next.borrow_mut() = Some(Rc::clone(&b));
+/// *b.prev.borrow_mut() = Rc::downgrade(&a);
+/// assert_eq!((Rc::strong_count(&a), Rc::strong_count(&b)), (1, 2));
+/// let weak_b = Rc::downgrade(&b);
+/// drop(b);
+/// drop(a);
+/// assert!(weak_b.upgrade().is_none(), "both nodes were freed");
+/// ```
+///
+/// Lesson 11 — `Rc` is not `Send` (E0277).
+///
+/// ```compile_fail,E0277
+/// use std::rc::Rc;
+/// let config = Rc::new(String::from("prod"));
+/// let copy = Rc::clone(&config);
+/// let handle = std::thread::spawn(move || println!("{copy}"));
+/// handle.join().unwrap();
+/// ```
+pub mod lesson11 {}
+
+/// Lesson 12 — a spawned thread cannot borrow local variables (E0373).
+///
+/// ```compile_fail,E0373
+/// let names = vec!["ada", "grace"];
+/// let handle = std::thread::spawn(|| {
+///     println!("{names:?}");
+/// });
+/// handle.join().unwrap();
+/// ```
+///
+/// Lesson 12 — two threads mutating the same variable: a data race, rejected (E0499).
+///
+/// ```compile_fail,E0499
+/// let mut count = 0;
+/// std::thread::scope(|s| {
+///     s.spawn(|| count += 1);
+///     s.spawn(|| count += 1);
+/// });
+/// println!("{count}");
+/// ```
+///
+/// Lesson 12 — `RefCell` is not `Sync` (E0277).
+///
+/// ```compile_fail,E0277
+/// use std::cell::RefCell;
+/// use std::sync::Arc;
+/// let total = Arc::new(RefCell::new(0));
+/// let t = Arc::clone(&total);
+/// std::thread::spawn(move || *t.borrow_mut() += 1).join().unwrap();
+/// ```
+///
+/// Lesson 12 — the data inside a `Mutex` is only reachable through `lock()` (E0614).
+///
+/// ```compile_fail,E0614
+/// let count = std::sync::Mutex::new(0);
+/// *count += 1;
+/// ```
+///
+/// Lesson 12 — rayon closures are `Fn`: no mutation of captured variables (E0594).
+///
+/// ```compile_fail,E0594
+/// use rayon::prelude::*;
+/// let mut seen = 0;
+/// let doubled: Vec<i32> = (1..100).into_par_iter().map(|n| { seen += 1; n * 2 }).collect();
+/// ```
+///
+/// Exercise 1 — parallel sum with scoped threads.
+///
+/// ```
+/// fn parallel_sum(data: &[u64], threads: usize) -> u64 {
+///     let chunk_size = data.len().div_ceil(threads.max(1)).max(1);
+///     std::thread::scope(|s| {
+///         let handles: Vec<_> = data.chunks(chunk_size).map(|chunk| s.spawn(move || chunk.iter().sum::<u64>())).collect();
+///         handles.into_iter().map(|h| h.join().unwrap()).sum()
+///     })
+/// }
+/// let data: Vec<u64> = (1..=10_001).collect();
+/// assert_eq!(parallel_sum(&data, 4), 50_015_001);
+/// assert_eq!(parallel_sum(&data, 64), 50_015_001);
+/// assert_eq!(parallel_sum(&[], 4), 0);
+/// ```
+///
+/// Exercise 2 — workers count words locally and send their maps through a channel.
+///
+/// ```
+/// use std::collections::HashMap;
+/// use std::sync::mpsc;
+/// fn count_words(texts: &[&str]) -> HashMap<String, usize> {
+///     let (sender, receiver) = mpsc::channel();
+///     std::thread::scope(|s| {
+///         for &text in texts {
+///             let sender = sender.clone();
+///             s.spawn(move || {
+///                 let mut local = HashMap::new();
+///                 for word in text.split_whitespace() {
+///                     *local.entry(word.to_lowercase()).or_insert(0) += 1;
+///                 }
+///                 sender.send(local).unwrap();
+///             });
+///         }
+///     });
+///     drop(sender);
+///     let mut total = HashMap::new();
+///     for local in receiver {
+///         for (word, n) in local {
+///             *total.entry(word).or_insert(0) += n;
+///         }
+///     }
+///     total
+/// }
+/// let counts = count_words(&["the cat", "The dog", "a cat and THE end"]);
+/// assert_eq!(counts["the"], 3);
+/// assert_eq!(counts["cat"], 2);
+/// assert_eq!(counts.len(), 6);
+/// ```
+///
+/// Exercise 3 — the same count with rayon.
+///
+/// ```
+/// use rayon::prelude::*;
+/// fn is_prime(n: u64) -> bool {
+///     n >= 2 && (2..).take_while(|d| d * d <= n).all(|d| !n.is_multiple_of(d))
+/// }
+/// let limit = 100_000u64;
+/// let sequential = (1..limit).filter(|&n| is_prime(n)).count();
+/// let parallel = (1..limit).into_par_iter().filter(|&n| is_prime(n)).count();
+/// assert_eq!(sequential, 9_592);
+/// assert_eq!(parallel, sequential);
+/// ```
+pub mod lesson12 {}

@@ -42,11 +42,11 @@ Vous n'avez jamais écrit de Rust. Chaque leçon part du concept que vous connai
 | 6 | [`Option`, `Result` et `?`](06-option-result/) | `null`, exceptions |
 | 7 | [Traits et génériques](07-traits-and-generics/) | interfaces, génériques |
 | 8 | [Collections et itérateurs](08-collections-and-iterators/) | LINQ, Streams |
-| 9 | Durées de vie (lifetimes) *(à venir)* | — |
-| 10 | Modules, crates et workspaces | namespaces/packages, projets, solutions |
-| 11 | `Box`, `Rc`, `Arc`, `RefCell` | références, objets partagés |
-| 12 | Threads, `Send`/`Sync`, `Mutex`, rayon | `Thread`, `lock`/`synchronized`, `Parallel.For` |
-| 13 | `async` et tokio | `async`/`await`, `CompletableFuture` |
+| 9 | [Durées de vie (lifetimes)](09-lifetimes/) | — |
+| 10 | [Modules, crates et workspaces](10-modules-crates-workspaces/) | namespaces/packages, projets, solutions |
+| 11 | [`Box`, `Rc`, `Arc`, `RefCell`](11-smart-pointers/) | références, objets partagés |
+| 12 | [Threads, `Send`/`Sync`, `Mutex`, rayon](12-threads-and-concurrency/) | `Thread`, `lock`/`synchronized`, `Parallel.For` |
+| 13 | `async` et tokio *(à venir)* | `async`/`await`, `CompletableFuture` |
 | 14 | Tests, docs, clippy, fmt | xUnit/JUnit, docs XML/Javadoc, analyseurs |
 | 15 | Macros, `unsafe` et FFI (aperçu) | générateurs de source, P/Invoke, JNI |
 

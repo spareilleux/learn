@@ -15,10 +15,10 @@ sidebar:
 - [x] Leçon 6 — `Option`, `Result` et `?`
 - [x] Leçon 7 — Traits et génériques
 - [x] Leçon 8 — Collections et itérateurs
-- [ ] Leçon 9 — Durées de vie (lifetimes)
-- [ ] Leçon 10 — Modules, crates et workspaces
-- [ ] Leçon 11 — `Box`, `Rc`, `Arc`, `RefCell`
-- [ ] Leçon 12 — Threads, `Send`/`Sync`, `Mutex`, rayon
+- [x] Leçon 9 — Durées de vie (lifetimes)
+- [x] Leçon 10 — Modules, crates et workspaces
+- [x] Leçon 11 — `Box`, `Rc`, `Arc`, `RefCell`
+- [x] Leçon 12 — Threads, `Send`/`Sync`, `Mutex`, rayon
 - [ ] Leçon 13 — `async` et tokio
 - [ ] Leçon 14 — Tests, docs, clippy, fmt
 - [ ] Leçon 15 — Macros, `unsafe` et FFI
@@ -52,6 +52,23 @@ Chaque solution d'exercice est désormais aussi un doctest : 41 doctests au tota
 - Quand `main` renvoie `Err`, Rust affiche l'erreur avec son format `Debug` (`Error: Missing("port")`), et non `Display`, puis se termine avec le code 1.
 - `Vec<f64>::sort()` ne compile pas du tout (`f64` n'est pas `Ord`), là où C# et Java trient les doubles en silence.
 - Le message `E0004` pour une nouvelle variante d'enum nomme exactement le motif manquant (`&Payment::Crypto { .. } not covered`) — mieux que tous les avertissements d'analyseur C# que je connais.
+
+## 2026-09-13 — Leçons 9 à 12
+
+76 doctests désormais (stable et nightly), plus un vrai workspace de deux crates pour la leçon 10 (`code/rust-for-csharp-java/l10-workspace`) que la CI teste, analyse (lint) et exécute. La crate du cours a gagné sa première dépendance : `rayon`, en dev-dependency.
+
+**Ce que j'ai d'abord mal fait :**
+
+- Dans l'exemple de la leçon 9, j'utilisais `drop(parser)` pour montrer que les tokens survivent au parser. Clippy l'a refusé (`drop_non_drop`) : appeler `drop` sur un type sans implémentation de `Drop` ne sert à rien. Une fonction `tokenize` dont le parser local meurt à la fin fait mieux la démonstration.
+- Clippy m'a aussi appris `u64::is_multiple_of` (`manual_is_multiple_of`) au lieu de `n % d != 0`.
+- Je pensais qu'un `map` rayon qui modifie un compteur capturé échouerait avec une erreur `Send`/`Sync`. Il échoue plus tôt : les closures de rayon sont `Fn`, donc c'est `E0594: cannot assign to a captured variable in a Fn closure`.
+
+**Surprises :**
+
+- Le message de panique de `RefCell` en 1.94 est simplement `RefCell already borrowed` ; des supports plus anciens citent `already borrowed: BorrowMutError`.
+- Écrire `&str` au lieu de `&'a str` comme type de retour d'une méthode compile sans problème — l'erreur n'apparaît qu'au site d'appel, quand on essaie de garder deux tokens (`E0499`). L'élision a choisi la durée de vie de `&mut self`.
+- Un enum récursif sans `Box` donne `E0391` (un cycle dans la requête « needs drop » du compilateur) en plus de `E0072`.
+- rayon sur cette machine (Core Ultra 9 285K, 24 cœurs) : compter les nombres premiers inférieurs à 5 000 000 est passé de ~775 ms à ~41 ms, environ 18×.
 
 ## Questions ouvertes
 

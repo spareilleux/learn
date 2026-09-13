@@ -29,3 +29,9 @@ jobs:
         run: cargo clippy --examples -- -D warnings
       - name: Run examples
         run: for ex in examples/*.rs; do cargo run --quiet --example "$(basename "$ex" .rs)"; done
+      - name: Lesson 10 workspace
+        working-directory: code/rust-for-csharp-java/l10-workspace
+        run: |
+          cargo test --workspace
+          cargo clippy --workspace --all-targets -- -D warnings
+          cargo run --quiet -p app

@@ -15,10 +15,10 @@ sidebar:
 - [x] Lesson 6 — `Option`, `Result` and `?`
 - [x] Lesson 7 — Traits and generics
 - [x] Lesson 8 — Collections and iterators
-- [ ] Lesson 9 — Lifetimes
-- [ ] Lesson 10 — Modules, crates and workspaces
-- [ ] Lesson 11 — `Box`, `Rc`, `Arc`, `RefCell`
-- [ ] Lesson 12 — Threads, `Send`/`Sync`, `Mutex`, rayon
+- [x] Lesson 9 — Lifetimes
+- [x] Lesson 10 — Modules, crates and workspaces
+- [x] Lesson 11 — `Box`, `Rc`, `Arc`, `RefCell`
+- [x] Lesson 12 — Threads, `Send`/`Sync`, `Mutex`, rayon
 - [ ] Lesson 13 — `async` and tokio
 - [ ] Lesson 14 — Tests, docs, clippy, fmt
 - [ ] Lesson 15 — Macros, `unsafe` and FFI
@@ -52,6 +52,23 @@ Every exercise solution is now a doctest too: 41 doctests in total (compile-fail
 - When `main` returns `Err`, Rust prints the error with its `Debug` format (`Error: Missing("port")`), not `Display`, and exits with code 1.
 - `Vec<f64>::sort()` does not compile at all (`f64` is not `Ord`), where C# and Java sort doubles silently.
 - The `E0004` message for a new enum variant names the exact missing pattern (`&Payment::Crypto { .. } not covered`) — better than any C# analyzer warning I know.
+
+## 2026-09-13 — Lessons 9 to 12
+
+76 doctests now (stable and nightly), plus a real two-crate workspace for lesson 10 (`code/rust-for-csharp-java/l10-workspace`) that CI tests, lints and runs. The course crate gained its first dependency: `rayon`, as a dev-dependency.
+
+**Things I got wrong first:**
+
+- In the lesson 9 example I used `drop(parser)` to show that the tokens outlive the parser. Clippy refused it (`drop_non_drop`): dropping a type with no `Drop` impl does nothing useful. A `tokenize` function whose local parser dies at the end makes the same point better.
+- Clippy also taught me `u64::is_multiple_of` (`manual_is_multiple_of`) instead of `n % d != 0`.
+- I assumed a rayon `map` that mutates a captured counter would fail with a `Send`/`Sync` error. It fails earlier: rayon's closures are `Fn`, so it is `E0594: cannot assign to a captured variable in a Fn closure`.
+
+**Surprises:**
+
+- The `RefCell` panic message on 1.94 is just `RefCell already borrowed`; older material quotes `already borrowed: BorrowMutError`.
+- Writing `&str` instead of `&'a str` as a method's return type compiles fine — the error only appears at the call site, when you try to hold two tokens (`E0499`). Elision picked `&mut self`'s lifetime.
+- A recursive enum without `Box` gives `E0391` (a cycle in the compiler's "needs drop" query) in addition to `E0072`.
+- rayon on this machine (Core Ultra 9 285K, 24 cores): counting primes below 5,000,000 went from ~775 ms to ~41 ms, about 18×.
 
 ## Open questions
 
