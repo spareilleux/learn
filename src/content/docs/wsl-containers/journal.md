@@ -8,8 +8,8 @@ sidebar:
 ## Progress
 
 - [x] Understand what WSL containers is and which version it requires
-- [ ] Install WSL ≥ 2.9.3 (pre-release)
-- [ ] `wslc run --rm hello-world`
+- [x] Install WSL ≥ 2.9.3 (pre-release)
+- [x] `wslc run --rm hello-world`
 - [ ] Lesson 3: containers, ports, `exec`
 - [ ] Lesson 4: building an image
 - [ ] Run an existing service (qdrant) with `wslc`
@@ -50,6 +50,58 @@ Product: Windows Subsystem for Linux -- Installation failed.   (status 1603)
 
 **Lesson:** don't rely on the absence of an error message; check the version afterwards. The WSL service was held by Docker Desktop, Podman and several `wsl.exe` processes.
 Planned fix: stop everything, `wsl --shutdown`, `Stop-Service WSLService` as administrator, then rerun the update. → detailed in [lesson 2](../02-installation/).
+
+## 2026-09-13 — Second attempt: WSL 2.9.11 installed
+
+Applied the planned fix. From a normal (non-elevated) terminal:
+
+```powershell
+docker desktop stop
+podman machine stop
+wsl --shutdown
+wsl -l -v   # podman-machine-default and docker-desktop: Stopped
+```
+
+Then, in an **administrator** PowerShell:
+
+```powershell
+wsl --shutdown
+Get-Process wsl, wslhost, wslrelay -ErrorAction SilentlyContinue | Stop-Process -Force
+Stop-Service WSLService -Force
+wsl --update --pre-release
+wsl --version
+```
+
+```text
+WSLService: Stopped
+Updating Windows Subsystem for Linux to version: 2.9.11.
+WSL version: 2.9.11.0
+Kernel version: 6.18.40.1-1
+WSLg version: 1.0.79
+```
+
+This time the service really was stopped before the installer ran, and the version changed. `wslc.exe` is installed in `C:\Program Files\WSL\`, which is already on the machine `PATH` — but terminals opened before the update don't see it: open a new one (or call the full path).
+
+```powershell
+wslc --version   # wslc 2.9.11.0
+wslc run --rm hello-world
+```
+
+```text
+Image 'hello-world' not found, pulling
+latest: Pulling from library/hello-world
+...
+Status: Downloaded newer image for hello-world:latest
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+```
+
+**Don't be fooled:** "Hello from Docker!" is just the text baked into the `hello-world` image. Docker Desktop was stopped the whole time; the container ran under `wslc`.
+
+`wslc info` shows a settings file at `%LocalAppData%\wslc\settings.yaml` and a session named `wslc-cli-<user>`. `wslc images` lists only `hello-world` (10.1 kB).
+
+**Still to do:** restart Docker Desktop and Podman and check that Docker Desktop 4.61 still works with WSL 2.9.11 (*to verify*).
 
 ## Open questions
 
