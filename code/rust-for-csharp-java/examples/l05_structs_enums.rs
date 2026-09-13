@@ -10,7 +10,10 @@ struct Account {
 impl Account {
     // Associated function: the conventional "constructor"
     fn new(owner: &str) -> Self {
-        Self { owner: owner.to_string(), balance_cents: 0 }
+        Self {
+            owner: owner.to_string(),
+            balance_cents: 0,
+        }
     }
 
     // &self: read-only method
@@ -94,10 +97,17 @@ fn main() {
     account.deposit(1_250);
     let copy = account.clone();
     println!("{account:?}");
-    println!("balance = {:.2}, equal to copy: {}", account.balance(), account == copy);
+    println!(
+        "balance = {:.2}, equal to copy: {}",
+        account.balance(),
+        account == copy
+    );
 
     // Struct update syntax: like a C# `with` expression
-    let other = Account { owner: "Grace".into(), ..copy };
+    let other = Account {
+        owner: "Grace".into(),
+        ..copy
+    };
     println!("{} has {} cents", other.owner, other.balance_cents);
 
     let final_cents = account.close();
@@ -109,7 +119,10 @@ fn main() {
 
     let shapes = [
         Shape::Circle { radius: 1.0 },
-        Shape::Rectangle { width: 3.0, height: 4.0 },
+        Shape::Rectangle {
+            width: 3.0,
+            height: 4.0,
+        },
         Shape::Triangle(3.0, 4.0, 5.0),
     ];
     for shape in &shapes {

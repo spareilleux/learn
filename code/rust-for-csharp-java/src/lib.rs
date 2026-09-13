@@ -994,3 +994,295 @@ pub mod lesson11 {}
 /// assert_eq!(parallel, sequential);
 /// ```
 pub mod lesson12 {}
+
+/// Lesson 13 — `.await` only works inside `async` code (E0728).
+///
+/// ```compile_fail,E0728
+/// async fn fetch_price() -> u32 {
+///     42
+/// }
+/// fn main() {
+///     let price = fetch_price().await;
+/// }
+/// ```
+///
+/// Lesson 13 — calling an async function returns a future, not the value (E0308).
+///
+/// ```compile_fail,E0308
+/// async fn fetch_price() -> u32 {
+///     42
+/// }
+/// async fn total() -> u32 {
+///     let price: u32 = fetch_price();
+///     price * 2
+/// }
+/// ```
+///
+/// Lesson 13 — `main` cannot be `async` without a runtime (E0752).
+///
+/// ```compile_fail,E0752
+/// async fn main() {
+///     println!("hello");
+/// }
+/// ```
+///
+/// Lesson 13 — an `Rc` held across `.await` makes the task non-`Send`.
+///
+/// ```compile_fail
+/// use std::rc::Rc;
+/// use tokio::time::{sleep, Duration};
+/// #[tokio::main]
+/// async fn main() {
+///     let handle = tokio::spawn(async {
+///         let counter = Rc::new(0);
+///         sleep(Duration::from_millis(10)).await;
+///         println!("{counter}");
+///     });
+///     handle.await.unwrap();
+/// }
+/// ```
+///
+/// Exercise 1 — concurrent fetches, results in input order.
+///
+/// ```
+/// use std::time::Duration;
+/// use tokio::time::sleep;
+/// async fn fetch_price(item: String, delay_ms: u64) -> u32 {
+///     sleep(Duration::from_millis(delay_ms)).await;
+///     item.len() as u32 * 10
+/// }
+/// async fn fetch_all(items: &[(&str, u64)]) -> Vec<u32> {
+///     let handles: Vec<_> = items
+///         .iter()
+///         .map(|&(item, delay)| tokio::spawn(fetch_price(item.to_string(), delay)))
+///         .collect();
+///     let mut prices = Vec::with_capacity(handles.len());
+///     for handle in handles {
+///         prices.push(handle.await.unwrap());
+///     }
+///     prices
+/// }
+/// #[tokio::main]
+/// async fn main() {
+///     let prices = fetch_all(&[("slow", 150), ("fast", 10), ("medium", 80)]).await;
+///     assert_eq!(prices, [40, 40, 60]);
+/// }
+/// ```
+///
+/// Exercise 2 — retry with a per-attempt timeout.
+///
+/// ```
+/// use std::time::Duration;
+/// use tokio::time::{sleep, timeout};
+/// async fn fetch_price(delay_ms: u64) -> u32 {
+///     sleep(Duration::from_millis(delay_ms)).await;
+///     42
+/// }
+/// async fn fetch_with_retry(delays: &[u64], per_try: Duration) -> Result<u32, String> {
+///     for (attempt, &delay) in delays.iter().enumerate() {
+///         match timeout(per_try, fetch_price(delay)).await {
+///             Ok(price) => return Ok(price),
+///             Err(_) => println!("attempt {} timed out", attempt + 1),
+///         }
+///     }
+///     Err(format!("gave up after {} attempts", delays.len()))
+/// }
+/// #[tokio::main]
+/// async fn main() {
+///     let per_try = Duration::from_millis(50);
+///     assert_eq!(fetch_with_retry(&[200, 200, 10], per_try).await, Ok(42));
+///     assert_eq!(fetch_with_retry(&[200, 200], per_try).await, Err("gave up after 2 attempts".to_string()));
+/// }
+/// ```
+///
+/// Exercise 3 — a `std::sync::MutexGuard` held across `.await` is not `Send`.
+///
+/// ```compile_fail
+/// use std::sync::{Arc, Mutex};
+/// use tokio::time::{sleep, Duration};
+/// #[tokio::main]
+/// async fn main() {
+///     let hits = Arc::new(Mutex::new(0));
+///     let h = Arc::clone(&hits);
+///     tokio::spawn(async move {
+///         let mut guard = h.lock().unwrap();
+///         sleep(Duration::from_millis(10)).await;
+///         *guard += 1;
+///     })
+///     .await
+///     .unwrap();
+/// }
+/// ```
+///
+/// Exercise 3 — fix 1: release the std guard before awaiting.
+///
+/// ```
+/// use std::sync::{Arc, Mutex};
+/// use tokio::time::{sleep, Duration};
+/// #[tokio::main]
+/// async fn main() {
+///     let hits = Arc::new(Mutex::new(0));
+///     let h = Arc::clone(&hits);
+///     tokio::spawn(async move {
+///         sleep(Duration::from_millis(10)).await;
+///         *h.lock().unwrap() += 1;
+///     })
+///     .await
+///     .unwrap();
+///     assert_eq!(*hits.lock().unwrap(), 1);
+/// }
+/// ```
+///
+/// Exercise 3 — fix 2: an async mutex whose guard is `Send`.
+///
+/// ```
+/// use std::sync::Arc;
+/// use tokio::sync::Mutex;
+/// use tokio::time::{sleep, Duration};
+/// #[tokio::main]
+/// async fn main() {
+///     let hits = Arc::new(Mutex::new(0));
+///     let h = Arc::clone(&hits);
+///     tokio::spawn(async move {
+///         let mut guard = h.lock().await;
+///         sleep(Duration::from_millis(10)).await;
+///         *guard += 1;
+///     })
+///     .await
+///     .unwrap();
+///     assert_eq!(*hits.lock().await, 1);
+/// }
+/// ```
+pub mod lesson13 {}
+
+/// Lesson 14, exercises 1 and 2 — a documented, tested parser.
+///
+/// ```
+/// fn parse_percent(text: &str) -> Result<u8, String> {
+///     let digits = text
+///         .trim()
+///         .strip_suffix('%')
+///         .ok_or_else(|| format!("`{text}` does not end with %"))?;
+///     let value: u8 = digits
+///         .parse()
+///         .map_err(|e| format!("`{digits}` is not a number: {e}"))?;
+///     if value > 100 {
+///         return Err(format!("{value}% is above 100%"));
+///     }
+///     Ok(value)
+/// }
+/// assert_eq!(parse_percent("0%"), Ok(0));
+/// assert_eq!(parse_percent(" 15% "), Ok(15));
+/// assert_eq!(parse_percent("100%"), Ok(100));
+/// assert_eq!(parse_percent("150%"), Err("150% is above 100%".to_string()));
+/// assert!(parse_percent("15").is_err());
+/// assert!(parse_percent("abc%").unwrap_err().contains("not a number"));
+/// assert!(parse_percent("300%").unwrap_err().contains("not a number"));
+/// ```
+pub mod lesson14 {}
+
+/// Lesson 15 — dereferencing a raw pointer requires `unsafe` (E0133).
+///
+/// ```compile_fail,E0133
+/// let x = 42;
+/// let ptr = &x as *const i32;
+/// println!("{}", *ptr);
+/// ```
+///
+/// Lesson 15 — calling an `unsafe` function requires `unsafe` (E0133).
+///
+/// ```compile_fail,E0133
+/// unsafe extern "C" {
+///     fn abs(input: i32) -> i32;
+/// }
+/// println!("{}", abs(-3));
+/// ```
+///
+/// Lesson 15 — edition 2024: `extern` blocks must be marked `unsafe`.
+///
+/// ```compile_fail,edition2024
+/// extern "C" {
+///     fn abs(input: i32) -> i32;
+/// }
+/// fn main() {}
+/// ```
+///
+/// Lesson 15 — edition 2024: `no_mangle` is an unsafe attribute.
+///
+/// ```compile_fail,edition2024
+/// #[no_mangle]
+/// pub extern "C" fn add_vat(cents: u64) -> u64 {
+///     cents * 120 / 100
+/// }
+/// fn main() {}
+/// ```
+///
+/// Lesson 15 — format strings are checked at compile time.
+///
+/// ```compile_fail
+/// let name = "Ada";
+/// println!("{} is {} years old", name);
+/// ```
+///
+/// Lesson 15 — a macro invocation must match one of its rules.
+///
+/// ```compile_fail
+/// macro_rules! square {
+///     ($x:expr) => {
+///         $x * $x
+///     };
+/// }
+/// println!("{}", square!());
+/// ```
+///
+/// Lesson 15 — two mutable borrows of one slice, rejected by the borrow checker (E0499).
+///
+/// ```compile_fail,E0499
+/// fn split_first_rest(values: &mut [i32]) -> Option<(&mut i32, &mut [i32])> {
+///     if values.is_empty() {
+///         return None;
+///     }
+///     Some((&mut values[0], &mut values[1..]))
+/// }
+/// ```
+///
+/// Exercise 1 — a macro with repetition.
+///
+/// ```
+/// macro_rules! strings {
+///     ($($s:expr),* $(,)?) => {
+///         vec![$($s.to_string()),*]
+///     };
+/// }
+/// let names: Vec<String> = strings!["Ada", "Grace", 42];
+/// assert_eq!(names, ["Ada", "Grace", "42"]);
+/// let empty: Vec<String> = strings![];
+/// assert!(empty.is_empty());
+/// ```
+///
+/// Exercise 2 — the same split without `unsafe`, using the standard library.
+///
+/// ```
+/// fn split_first_rest(values: &mut [i32]) -> Option<(&mut i32, &mut [i32])> {
+///     values.split_first_mut()
+/// }
+/// fn split_first_rest_at(values: &mut [i32]) -> Option<(&mut i32, &mut [i32])> {
+///     if values.is_empty() {
+///         return None;
+///     }
+///     let (head, rest) = values.split_at_mut(1);
+///     Some((&mut head[0], rest))
+/// }
+/// let mut scores = [10, 20, 30];
+/// if let Some((first, rest)) = split_first_rest(&mut scores) {
+///     *first += 1;
+///     rest[0] *= 2;
+/// }
+/// if let Some((first, rest)) = split_first_rest_at(&mut scores) {
+///     *first += 1;
+///     rest[1] *= 2;
+/// }
+/// assert_eq!(scores, [12, 40, 60]);
+/// assert!(split_first_rest(&mut []).is_none());
+/// ```
+pub mod lesson15 {}

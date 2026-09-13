@@ -35,7 +35,12 @@ fn main() {
 
     // Strings are UTF-8: iterate chars or bytes, slice on byte boundaries
     let word = "café";
-    println!("{} bytes, {} chars, first 3 bytes: {}", word.len(), word.chars().count(), &word[..3]);
+    println!(
+        "{} bytes, {} chars, first 3 bytes: {}",
+        word.len(),
+        word.chars().count(),
+        &word[..3]
+    );
 
     // Modify while iterating: collect first, then mutate
     let mut numbers = vec![1, 2, 3];

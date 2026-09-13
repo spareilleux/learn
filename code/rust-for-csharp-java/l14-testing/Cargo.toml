@@ -1,0 +1,12 @@
+[package]
+name = "pricing"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+# Lint levels for the whole package, instead of #![deny] attributes in every file
+[lints.rust]
+missing_docs = "warn"
+
+[lints.clippy]
+unwrap_used = "warn"

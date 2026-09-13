@@ -18,17 +18,29 @@ fn main() {
 
     // Checked and wrapping arithmetic are explicit
     let max = u8::MAX;
-    println!("checked: {:?}, wrapping: {}", max.checked_add(1), max.wrapping_add(1));
+    println!(
+        "checked: {:?}, wrapping: {}",
+        max.checked_add(1),
+        max.wrapping_add(1)
+    );
 
     // char is a Unicode scalar value (4 bytes), not a UTF-16 code unit
     let note = '♪';
-    println!("{note} is {} bytes in UTF-8, size_of::<char>() = {}", note.len_utf8(), std::mem::size_of::<char>());
+    println!(
+        "{note} is {} bytes in UTF-8, size_of::<char>() = {}",
+        note.len_utf8(),
+        std::mem::size_of::<char>()
+    );
 
     // Tuples and arrays
     let point: (f64, f64) = (1.5, -2.0);
     let (x, y) = point;
     let primes = [2, 3, 5, 7, 11];
-    println!("x = {x}, y = {y}, first prime = {}, count = {}", primes[0], primes.len());
+    println!(
+        "x = {x}, y = {y}, first prime = {}, count = {}",
+        primes[0],
+        primes.len()
+    );
 
     // if is an expression: no ternary operator needed
     let parity = if answer % 2 == 0 { "even" } else { "odd" };

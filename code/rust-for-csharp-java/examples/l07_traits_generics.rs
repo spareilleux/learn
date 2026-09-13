@@ -101,7 +101,10 @@ fn main() {
     println!("total circle area = {:.2}", total_area(&circles));
     println!("{}", describe(&Square { side: 3.0 }));
 
-    let mixed: Vec<Box<dyn Shape>> = vec![Box::new(Circle { radius: 1.5 }), Box::new(Square { side: 2.0 })];
+    let mixed: Vec<Box<dyn Shape>> = vec![
+        Box::new(Circle { radius: 1.5 }),
+        Box::new(Square { side: 2.0 }),
+    ];
     if let Some(big) = largest(&mixed) {
         println!("largest: {} ({:.2})", big.name(), big.area());
     }

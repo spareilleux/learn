@@ -6,7 +6,10 @@ use std::sync::{Arc, Mutex, RwLock};
 use std::thread;
 
 fn is_prime(n: u64) -> bool {
-    n >= 2 && (2..).take_while(|d| d * d <= n).all(|d| !n.is_multiple_of(d))
+    n >= 2
+        && (2..)
+            .take_while(|d| d * d <= n)
+            .all(|d| !n.is_multiple_of(d))
 }
 
 fn main() {
@@ -18,10 +21,16 @@ fn main() {
     // 2. scoped threads may borrow local data: they are joined before `scope` returns
     let data: Vec<u64> = (1..=1_000).collect();
     let chunk_sums: Vec<u64> = thread::scope(|s| {
-        let handles: Vec<_> = data.chunks(250).map(|chunk| s.spawn(move || chunk.iter().sum::<u64>())).collect();
+        let handles: Vec<_> = data
+            .chunks(250)
+            .map(|chunk| s.spawn(move || chunk.iter().sum::<u64>()))
+            .collect();
         handles.into_iter().map(|h| h.join().unwrap()).collect()
     });
-    println!("chunk sums: {chunk_sums:?}, total {}", chunk_sums.iter().sum::<u64>());
+    println!(
+        "chunk sums: {chunk_sums:?}, total {}",
+        chunk_sums.iter().sum::<u64>()
+    );
 
     // 3. Arc<Mutex<T>>: shared mutable state, one writer at a time
     let results = Arc::new(Mutex::new(Vec::new()));
@@ -79,7 +88,10 @@ fn main() {
 
     // 7. rayon: data parallelism, like PLINQ's AsParallel() or Java's parallelStream()
     let sequential = (1..200_000u64).filter(|&n| is_prime(n)).count();
-    let parallel = (1..200_000u64).into_par_iter().filter(|&n| is_prime(n)).count();
+    let parallel = (1..200_000u64)
+        .into_par_iter()
+        .filter(|&n| is_prime(n))
+        .count();
     println!("primes below 200000: {sequential} sequential, {parallel} parallel");
 
     let mut words = vec!["pear", "fig", "apple", "kiwi"];

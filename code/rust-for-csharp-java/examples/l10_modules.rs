@@ -30,7 +30,10 @@ mod shapes {
 
     impl Rect {
         pub fn new(width: f64, height: f64) -> Self {
-            Rect { width: width.max(0.0), height: height.max(0.0) }
+            Rect {
+                width: width.max(0.0),
+                height: height.max(0.0),
+            }
         }
 
         pub fn area(&self) -> f64 {

@@ -10,18 +10,40 @@ on:
 
 jobs:
   rust-for-csharp-java:
-    runs-on: ubuntu-latest
+    name: rust-for-csharp-java (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
     defaults:
       run:
+        shell: bash
         working-directory: code/rust-for-csharp-java
     steps:
       - uses: actions/checkout@v7
       - name: Toolchain
         run: rustup show active-toolchain && cargo --version
+      # Lesson 1 shows these outputs for each OS
+      - name: Hello world (lesson 1 outputs)
+        working-directory: ${{ runner.temp }}
+        run: |
+          cargo new hello
+          cd hello
+          cargo run
+          cargo build --release
+          ls -l target/release
+      - name: Formatting
+        run: |
+          cargo fmt --check
+          cargo fmt --check --manifest-path l10-workspace/Cargo.toml
+          cargo fmt --check --manifest-path l14-testing/Cargo.toml
+          cargo fmt --check --manifest-path l15-ffi/Cargo.toml
       - name: Compile-fail doctests
         run: cargo test --doc
       # Stable rustdoc only checks that compile_fail snippets fail; nightly also checks the E0xxx code.
       - name: Compile-fail error codes (nightly)
+        if: runner.os == 'Linux'
         run: |
           rustup toolchain install nightly --profile minimal
           cargo +nightly test --doc
@@ -35,3 +57,23 @@ jobs:
           cargo test --workspace
           cargo clippy --workspace --all-targets -- -D warnings
           cargo run --quiet -p app
+      - name: Lesson 14 crate
+        working-directory: code/rust-for-csharp-java/l14-testing
+        env:
+          RUSTDOCFLAGS: -D warnings
+        run: |
+          cargo clippy --all-targets -- -D warnings
+          cargo test
+          cargo test -- --ignored
+          cargo doc --no-deps
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: '10.0.x'
+      - name: Lesson 15 FFI (Rust library called from C#)
+        working-directory: code/rust-for-csharp-java/l15-ffi
+        run: |
+          cargo clippy --all-targets -- -D warnings
+          cargo test
+          cargo build --release
+          ls target/release | grep pricing_ffi
+          dotnet run --project dotnet

@@ -39,11 +39,17 @@ fn main() {
     println!("{greeting}");
 
     // Deterministic destruction, in reverse declaration order
-    let _first = TempFile { name: "first.tmp".into() };
+    let _first = TempFile {
+        name: "first.tmp".into(),
+    };
     {
-        let _inner = TempFile { name: "inner.tmp".into() };
+        let _inner = TempFile {
+            name: "inner.tmp".into(),
+        };
         println!("leaving inner scope");
     }
-    let _second = TempFile { name: "second.tmp".into() };
+    let _second = TempFile {
+        name: "second.tmp".into(),
+    };
     println!("end of main");
 }

@@ -16,7 +16,10 @@ pub struct Rect {
 
 impl Rect {
     pub fn new(width: f64, height: f64) -> Self {
-        Rect { width: non_negative(width), height: non_negative(height) }
+        Rect {
+            width: non_negative(width),
+            height: non_negative(height),
+        }
     }
 }
 

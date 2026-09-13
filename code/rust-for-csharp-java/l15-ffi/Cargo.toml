@@ -1,0 +1,9 @@
+[package]
+name = "pricing_ffi"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[lib]
+# cdylib: a native .dll / .so / .dylib with a C ABI; rlib: so `cargo test` can link it
+crate-type = ["cdylib", "rlib"]

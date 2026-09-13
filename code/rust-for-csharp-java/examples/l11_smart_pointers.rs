@@ -50,18 +50,36 @@ impl Drop for TreeNode {
 fn main() {
     // (2 + 3) * 4
     let expr = Expr::Mul(
-        Box::new(Expr::Add(Box::new(Expr::Num(2.0)), Box::new(Expr::Num(3.0)))),
+        Box::new(Expr::Add(
+            Box::new(Expr::Num(2.0)),
+            Box::new(Expr::Num(3.0)),
+        )),
         Box::new(Expr::Num(4.0)),
     );
     println!("{expr:?} = {}", eval(&expr));
 
     let config = Rc::new(Config { env: "prod".into() });
-    let api = Service { name: "api", config: Rc::clone(&config) };
-    let worker = Service { name: "worker", config: Rc::clone(&config) };
-    println!("{} and {} share env {:?}, strong count = {}", api.name, worker.name, config.env, Rc::strong_count(&config));
+    let api = Service {
+        name: "api",
+        config: Rc::clone(&config),
+    };
+    let worker = Service {
+        name: "worker",
+        config: Rc::clone(&config),
+    };
+    println!(
+        "{} and {} share env {:?}, strong count = {}",
+        api.name,
+        worker.name,
+        config.env,
+        Rc::strong_count(&config)
+    );
     println!("{}", api.config.env == worker.config.env);
     drop(api);
-    println!("after dropping api: strong count = {}", Rc::strong_count(&config));
+    println!(
+        "after dropping api: strong count = {}",
+        Rc::strong_count(&config)
+    );
 
     let account = Rc::new(RefCell::new(Account { balance: 100 }));
     let alice = Rc::clone(&account);
@@ -72,9 +90,23 @@ fn main() {
 
     // The borrow rules still apply, checked at runtime
     let reading = account.borrow();
-    println!("try_borrow_mut while reading: {}", if account.try_borrow_mut().is_err() { "refused" } else { "allowed" });
+    println!(
+        "try_borrow_mut while reading: {}",
+        if account.try_borrow_mut().is_err() {
+            "refused"
+        } else {
+            "allowed"
+        }
+    );
     drop(reading);
-    println!("try_borrow_mut after: {}", if account.try_borrow_mut().is_err() { "refused" } else { "allowed" });
+    println!(
+        "try_borrow_mut after: {}",
+        if account.try_borrow_mut().is_err() {
+            "refused"
+        } else {
+            "allowed"
+        }
+    );
 
     // Cell: interior mutability for Copy values, no borrowing at all
     let hits = Cell::new(0);
@@ -84,20 +116,40 @@ fn main() {
     println!("hits: {}", hits.get());
 
     {
-        let root = Rc::new(TreeNode { name: "root".into(), parent: RefCell::new(Weak::new()), children: RefCell::new(vec![]) });
-        let leaf = Rc::new(TreeNode { name: "leaf".into(), parent: RefCell::new(Weak::new()), children: RefCell::new(vec![]) });
+        let root = Rc::new(TreeNode {
+            name: "root".into(),
+            parent: RefCell::new(Weak::new()),
+            children: RefCell::new(vec![]),
+        });
+        let leaf = Rc::new(TreeNode {
+            name: "leaf".into(),
+            parent: RefCell::new(Weak::new()),
+            children: RefCell::new(vec![]),
+        });
         *leaf.parent.borrow_mut() = Rc::downgrade(&root);
         root.children.borrow_mut().push(Rc::clone(&leaf));
 
         let parent_name = leaf.parent.borrow().upgrade().map(|p| p.name.clone());
-        println!("leaf's parent: {parent_name:?}, children of root: {}", root.children.borrow().len());
-        println!("root strong = {}, weak = {}", Rc::strong_count(&root), Rc::weak_count(&root));
+        println!(
+            "leaf's parent: {parent_name:?}, children of root: {}",
+            root.children.borrow().len()
+        );
+        println!(
+            "root strong = {}, weak = {}",
+            Rc::strong_count(&root),
+            Rc::weak_count(&root)
+        );
     }
     println!("tree scope ended");
 
     // Arc: the thread-safe Rc (lesson 12)
     let shared = Arc::new(vec![1, 2, 3]);
     let for_thread = Arc::clone(&shared);
-    let sum = std::thread::spawn(move || for_thread.iter().sum::<i32>()).join().unwrap();
-    println!("sum computed on another thread: {sum}, strong count back to {}", Arc::strong_count(&shared));
+    let sum = std::thread::spawn(move || for_thread.iter().sum::<i32>())
+        .join()
+        .unwrap();
+    println!(
+        "sum computed on another thread: {sum}, strong count back to {}",
+        Arc::strong_count(&shared)
+    );
 }

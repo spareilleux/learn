@@ -32,14 +32,19 @@ fn sum_csv(line: &str) -> Result<i32, ParseIntError> {
 #[derive(Debug)]
 enum ConfigError {
     Missing(&'static str),
-    BadNumber { key: &'static str, source: ParseIntError },
+    BadNumber {
+        key: &'static str,
+        source: ParseIntError,
+    },
 }
 
 impl fmt::Display for ConfigError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
             ConfigError::Missing(key) => write!(f, "missing key `{key}`"),
-            ConfigError::BadNumber { key, source } => write!(f, "`{key}` is not a number: {source}"),
+            ConfigError::BadNumber { key, source } => {
+                write!(f, "`{key}` is not a number: {source}")
+            }
         }
     }
 }
@@ -48,14 +53,29 @@ impl Error for ConfigError {}
 
 fn read_port(config: &HashMap<&str, &str>) -> Result<u16, ConfigError> {
     let raw = config.get("port").ok_or(ConfigError::Missing("port"))?;
-    raw.parse::<u16>().map_err(|source| ConfigError::BadNumber { key: "port", source })
+    raw.parse::<u16>().map_err(|source| ConfigError::BadNumber {
+        key: "port",
+        source,
+    })
 }
 
 // main can return a Result: an Err is printed and the exit code is 1
 fn main() -> Result<(), Box<dyn Error>> {
     let mut users = HashMap::new();
-    users.insert(1, User { name: "Grace".into(), manager_id: None });
-    users.insert(2, User { name: "Ada".into(), manager_id: Some(1) });
+    users.insert(
+        1,
+        User {
+            name: "Grace".into(),
+            manager_id: None,
+        },
+    );
+    users.insert(
+        2,
+        User {
+            name: "Ada".into(),
+            manager_id: Some(1),
+        },
+    );
 
     println!("manager of 2: {:?}", manager_name(&users, 2));
     println!("manager of 1: {:?}", manager_name(&users, 1));

@@ -80,8 +80,14 @@ fn main() {
     println!("prefix: {}", prefix_of(&title, "Rust"));
 
     let novel = String::from("Call me Ishmael. Some years ago, never mind how long precisely...");
-    let excerpt = Excerpt { text: novel.split('.').next().unwrap_or("") };
-    println!("excerpt: {:?} ({} words)", excerpt.text, excerpt.word_count());
+    let excerpt = Excerpt {
+        text: novel.split('.').next().unwrap_or(""),
+    };
+    println!(
+        "excerpt: {:?} ({} words)",
+        excerpt.text,
+        excerpt.word_count()
+    );
 
     let line = String::from("let x = 42");
     println!("tokens: {:?}", tokenize(&line));
