@@ -1,0 +1,91 @@
+---
+title: Journal
+description: Dated progress notes for the Java course — attempts, surprises, practical cases in my repositories, and items to verify.
+sidebar:
+  order: 99
+---
+
+## Progress
+
+- [x] Lesson 1 — The JDK and build tools
+- [x] Lesson 2 — Types, equality and operators
+- [x] Lesson 3 — Classes, records and enums
+- [x] Lesson 4 — Generics and type erasure
+- [ ] Lesson 5 — Exceptions, `null` and `Optional`
+- [ ] Lesson 6 — Lambdas and functional interfaces
+- [ ] Lesson 7 — Collections and Streams
+- [ ] Lesson 8 — Pattern matching
+- [ ] Lesson 9 — Concurrency and virtual threads
+- [ ] Lesson 10 — Maven and Gradle in depth
+- [ ] Lesson 11 — Testing
+- [ ] Lesson 12 — The standard library you reach for
+- [ ] Lesson 13 — The JVM at run time
+- [ ] Lesson 14 — Annotations, reflection and modules
+
+## 2026-09-13 — Lessons 1 to 4
+
+- Toolchain on my machine: OpenJDK `25+36`, Maven 3.9.16, Gradle 9.7.1, and the .NET 10 SDK for the C# side. CI uses Eclipse Temurin 25 on Windows, Ubuntu and macOS.
+- The course code lives in [`code/java-for-csharp`](https://github.com/spareilleux/learn/tree/main/code/java-for-csharp):
+  - every example's output is compared with the lesson by a JUnit test;
+  - every rejected snippet is compiled through the [`javax.tools`](https://docs.oracle.com/en/java/javase/25/docs/api/java.compiler/javax/tools/package-summary.html) API and must produce the javac diagnostic key the lesson quotes (for example `compiler.err.not.exhaustive`) — the Java counterpart of Rust's `E0xxx` codes;
+  - exercise solutions are tests;
+  - a small .NET 10 program prints the C# side of each comparison.
+
+**Surprises coming from C#:**
+
+- `Integer a = 128, b = 128; a == b` is `false`, but with 127 it is `true`. The cache range −128 to 127 is not an implementation detail: the JLS requires it.
+- `java -jar` on a freshly built Maven JAR fails with `no main manifest attribute`. Nothing in `dotnet build` prepares you for an artefact that doesn't know its own entry point.
+- A C# `enum` accepts `(Size)42`; a Java enum cannot hold a value it doesn't declare. Java enums are much closer to a sealed set of singleton objects.
+- javac error messages are sometimes indirect: creating an inner class from a static method reports `non-static variable this cannot be referenced from a static context`.
+
+**Things I got wrong first:**
+
+- In a code comment I called `final var` "like a C# readonly local". C# has no readonly locals. The comment now says so.
+- I expected `javac -XDrawDiagnostics` and the compiler API to report the same diagnostic key. They don't always: for adding to a `List<? extends Number>`, the command line reports `compiler.err.cant.apply.symbols` while the API reports the simplified `compiler.err.prob.found.req`. The tests use the API, so the lessons quote what the API sees.
+- Several lessons first showed an excerpt of a rejected snippet next to an error message whose line number referred to the whole file. The lessons now show the complete file.
+- The `‰` sign in an example printed as `�` in the Windows console. The example now writes "per mille".
+
+## Practical cases in my repositories
+
+Each case applies a lesson to a public repository, at a pinned commit.
+
+### GuitarAlchemist/ga — the JetBrains plugin build (lesson 1)
+
+[`jetbrains-plugin/`](https://github.com/GuitarAlchemist/ga/tree/5560b883/jetbrains-plugin) at `ga@5560b883` is a Gradle Kotlin DSL project (the plugin itself is written in Kotlin). I copied it and tried to build it on this machine.
+
+- **The wrapper is incomplete.** Only `gradle/wrapper/gradle-wrapper.properties` is committed. `gradlew`, `gradlew.bat` and `gradle-wrapper.jar` are missing, so `./gradlew` does not exist and every contributor needs a matching Gradle installed. `gradle wrapper` regenerates the three files, and they should be committed.
+- **Gradle 8.5 cannot run on JDK 25.** With the pinned Gradle 8.5 and JDK 25, `gradle help` fails with a one-word message:
+
+  ```text
+  * What went wrong:
+  25
+  ```
+
+  The stack trace shows `java.lang.IllegalArgumentException: 25` thrown while Gradle compiles the Kotlin build script: that Gradle version's embedded Kotlin compiler doesn't know Java 25. The fix is either a JDK that Gradle 8.5 supports or a newer Gradle; the [Gradle compatibility matrix](https://docs.gradle.org/current/userguide/compatibility.html) lists which Gradle version runs on which Java.
+- **Upgrading Gradle alone is not enough.** With Gradle 9.7.1 the build gets further and fails in the legacy `org.jetbrains.intellij` 1.16.1 plugin:
+
+  ```text
+  class org.jetbrains.intellij.MemoizedProvider overrides final method org.gradle.api.internal.provider.AbstractMinimalProvider.toString()Ljava/lang/String;
+  ```
+
+  That plugin was replaced by the [IntelliJ Platform Gradle Plugin 2.x](https://plugins.jetbrains.com/docs/intellij/tools-intellij-platform-gradle-plugin.html), which uses a different DSL. Migrating is a real change, not a version bump.
+- **Gradle's cache directory is committed.** Twelve files under `jetbrains-plugin/.gradle/` (lock files, checksums, `last-build.bin`) are in the repository, the Gradle equivalent of committing `obj/`. It belongs in `.gitignore`.
+- **Java target without a toolchain.** The script sets `sourceCompatibility = "17"` on each `JavaCompile` task instead of a `java { toolchain { … } }` block, so the JDK used depends on the machine that runs Gradle — exactly the variability lesson 1's toolchain note describes.
+
+Next step, *to verify*: generate the wrapper, migrate to the 2.x plugin, and check that the plugin still loads in a current IntelliJ IDEA.
+
+### spareilleux/learn — the Spring Boot example of the WSL course (lesson 1, exercise 2)
+
+[`code/wsl-containers/java-reactor-api`](https://github.com/spareilleux/learn/tree/main/code/wsl-containers/java-reactor-api) has no `maven-jar-plugin` configuration, yet `java -jar target/app.jar` works. Building it shows why:
+
+```text
+Main-Class: org.springframework.boot.loader.launch.JarLauncher
+Start-Class: dev.learn.reactorapi.JavaReactorApiApplication
+```
+
+The `spring-boot-maven-plugin` repackages the JAR: the manifest's `Main-Class` is Spring Boot's launcher, which reads `Start-Class` and loads the 62 dependency JARs nested under `BOOT-INF/lib/` (35 MB in total). It answers both halves of exercise 2 — the missing entry point and the missing dependencies. The `<parent>` element (`spring-boot-starter-parent`) is also why the POM has no plugin or dependency versions: it plays the role of `Directory.Packages.props` and the SDK's defaults. Lesson 10 comes back to it.
+
+## Open questions
+
+- Is Maven 4 worth teaching yet, given that most projects still use 3.9? *To verify*: its release status.
+- How do IntelliJ IDEA's inspections compare with javac's `-Xlint:all` for the traps in lessons 2 and 3?

@@ -1,0 +1,61 @@
+name: Java course examples
+
+on:
+  push:
+    branches: [main]
+    paths: ['code/java-for-csharp/**', '.github/workflows/java-examples.yml']
+  pull_request:
+    paths: ['code/java-for-csharp/**', '.github/workflows/java-examples.yml']
+  workflow_dispatch:
+
+jobs:
+  java-for-csharp:
+    name: java-for-csharp (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+        working-directory: code/java-for-csharp
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '25'
+          cache: maven
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: '10.0.x'
+      - name: Toolchain
+        run: java --version && mvn --version && dotnet --version
+      # Lesson 1 runs these commands on each OS
+      - name: Lesson 1 commands
+        working-directory: code/java-for-csharp/l01
+        run: |
+          java Hello.java
+          javac -d out Greeter.java
+          java -cp out Greeter Ada
+          java Greeter.java Grace
+          cd hello-maven
+          mvn -B -q package
+          java -cp target/classes com.example.App
+          if java -jar target/hello-1.0-SNAPSHOT.jar; then
+            echo "expected java -jar to fail without a Main-Class manifest entry" >&2
+            exit 1
+          fi
+      - name: Examples and compile-fail snippets
+        run: mvn -B verify
+      - name: C# side of each comparison
+        working-directory: code/java-for-csharp/csharp
+        run: |
+          dotnet build -nologo -v quiet
+          for expected in expected/*.txt; do
+            lesson=$(basename "$expected" .txt)
+            echo "== $lesson"
+            dotnet run --no-build -- "$lesson" > "$RUNNER_TEMP/$lesson.txt"
+            diff --strip-trailing-cr "$expected" "$RUNNER_TEMP/$lesson.txt"
+          done

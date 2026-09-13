@@ -37,6 +37,12 @@ export default defineConfig({
 									collapsed: true,
 									items: [{ autogenerate: { directory: 'rust-for-csharp-java' } }],
 								},
+								{
+									label: 'Java for C# developers',
+									translations: { fr: 'Java pour développeurs C#' },
+									collapsed: true,
+									items: [{ autogenerate: { directory: 'java-for-csharp' } }],
+								},
 							],
 						},
 						{

@@ -1,0 +1,401 @@
+---
+title: 1. The JDK and build tools
+description: The JDK, java, javac and JShell, then Maven and Gradle — mapped to the .NET SDK, the dotnet CLI and NuGet, on Windows, Linux/WSL and macOS.
+sidebar:
+  order: 1
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Full example: [`code/java-for-csharp/l01`](https://github.com/spareilleux/learn/tree/main/code/java-for-csharp/l01) — every command below runs in CI on the three OSes.
+
+## The pieces
+
+| .NET | Java | Role |
+|---|---|---|
+| .NET SDK | [JDK](https://dev.java/learn/getting-started/) (Java Development Kit) | compiler, runtime and tools in one install |
+| CLR | [JVM](https://docs.oracle.com/javase/specs/jvms/se25/html/index.html) ([HotSpot](https://openjdk.org/groups/hotspot/)) | runs the compiled code, JIT-compiles it, collects garbage |
+| IL in a `.dll` | bytecode in `.class` files, zipped into a [`.jar`](https://dev.java/learn/jvm/tools/core/jar/) | the compiled output |
+| Roslyn (`csc`) | [`javac`](https://docs.oracle.com/en/java/javase/25/docs/specs/man/javac.html) | the compiler |
+| `dotnet run app.cs` | [`java Hello.java`](https://openjdk.org/jeps/458) | run a source file without a project |
+| C# REPL | [JShell](https://docs.oracle.com/en/java/javase/25/jshell/introduction-jshell.html) | try an expression interactively |
+| `dotnet` CLI + `.csproj` | [Maven](https://maven.apache.org/) (`pom.xml`) or [Gradle](https://gradle.org/) (`build.gradle.kts`) | build, test, package, resolve dependencies |
+| [NuGet](https://www.nuget.org/) | [Maven Central](https://central.sonatype.com/) | public package repository |
+
+The big difference: **the JDK has no project system**. `dotnet build` understands `.csproj`; `javac` only understands source files. Dependencies, tests and packaging come from a separate build tool, and Maven and Gradle are both common.
+
+## Versions and distributions
+
+A new Java version ships every six months, and every fourth one is a long-term support (LTS) release: [Java 21](https://openjdk.org/projects/jdk/21/) in 2023, [Java 25](https://openjdk.org/projects/jdk/25/) in September 2025. It is the same rhythm as .NET's yearly releases with an LTS every other year. The language version follows the JDK: there is no `<LangVersion>`, you pick a JDK and a target with `--release`.
+
+OpenJDK is open source and several vendors build it: [Eclipse Temurin](https://adoptium.net/), the [Microsoft Build of OpenJDK](https://learn.microsoft.com/java/openjdk/overview), [Amazon Corretto](https://aws.amazon.com/corretto/), Oracle's builds. They run the same code; they differ in support terms and update schedules. This course's CI uses Temurin; my machine runs Oracle's OpenJDK 25 build.
+
+## Installing a JDK
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+```powershell
+winget install Microsoft.OpenJDK.25
+```
+
+Open a new terminal so that `java` is on the `PATH`.
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```bash
+sudo apt install openjdk-25-jdk      # Ubuntu 24.04 and later
+```
+
+Or, for any distribution and to switch between versions, [SDKMAN!](https://sdkman.io/):
+
+```bash
+curl -s "https://get.sdkman.io" | bash
+sdk install java 25.0.4-tem
+```
+
+</TabItem>
+<TabItem label="macOS">
+
+```bash
+brew install openjdk@25
+sudo ln -sfn "$(brew --prefix)/opt/openjdk@25/libexec/openjdk.jdk" /Library/Java/JavaVirtualMachines/openjdk-25.jdk
+```
+
+The formula is *keg-only*: the second line registers it so that `/usr/bin/java` finds it. SDKMAN! (see the Linux tab) works on macOS too.
+
+</TabItem>
+</Tabs>
+
+```text
+$ java --version
+openjdk 25 2025-09-16
+OpenJDK Runtime Environment (build 25+36-3489)
+OpenJDK 64-Bit Server VM (build 25+36-3489, mixed mode, sharing)
+```
+
+## Running a single file
+
+Since Java 25, a source file can be as short as a C# top-level program ([JEP 512, compact source files](https://openjdk.org/jeps/512)):
+
+```java
+// Hello.java
+void main() {
+    IO.println("Hello, world!");
+}
+```
+
+```text
+$ java Hello.java
+Hello, world!
+```
+
+`java Hello.java` compiles the file in memory and runs it; nothing is written to disk. A compact source file also imports the whole `java.base` module automatically, so `List`, `Map` or `Files` need no `import`.
+
+The classic form, which you will see in every existing codebase, declares a class with a `public static void main(String[] args)` method:
+
+```java
+// Greeter.java
+public class Greeter {
+    public static void main(String[] args) {
+        System.out.println("Hello, " + (args.length > 0 ? args[0] : "world") + "!");
+    }
+}
+```
+
+Compiling and running are two steps with the JDK tools: `javac` writes `.class` files, and `java` runs a class found on the **class path** (`-cp`), the JVM's equivalent of probing for assemblies.
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+```powershell
+javac -d out Greeter.java     # writes out\Greeter.class
+java -cp out Greeter Ada
+```
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```bash
+javac -d out Greeter.java     # writes out/Greeter.class
+java -cp out Greeter Ada
+```
+
+</TabItem>
+<TabItem label="macOS">
+
+```bash
+javac -d out Greeter.java     # writes out/Greeter.class
+java -cp out Greeter Ada
+```
+
+</TabItem>
+</Tabs>
+
+```text
+Hello, Ada!
+```
+
+A compile error when running a source file stops before anything runs:
+
+```java
+// Oops.java
+void main() {
+    int count = "three";
+}
+```
+
+```text
+$ java Oops.java
+Oops.java:2: error: incompatible types: String cannot be converted to int
+    int count = "three";
+                ^
+1 error
+error: compilation failed
+```
+
+:::tip[Keep JShell open]
+`jshell` evaluates declarations and expressions one at a time, and prints each result with a name you can reuse:
+
+```text
+jshell> int x = 21 * 2;
+x ==> 42
+
+jshell> "abc".toUpperCase()
+$2 ==> "ABC"
+```
+:::
+
+## A Maven project
+
+Maven is built on convention: put the code where it expects it and a very short `pom.xml` is enough.
+
+```text
+hello-maven/
+├── pom.xml                         ← like the .csproj
+└── src/
+    ├── main/java/com/example/App.java
+    └── test/java/                  ← tests live beside, not in another project
+```
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.example</groupId>
+  <artifactId>hello</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
+  <properties>
+    <maven.compiler.release>25</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+</project>
+```
+
+- `groupId:artifactId:version` (the **coordinates**) identify the project, like a NuGet package ID and version. `groupId` is usually a reversed domain name.
+- `-SNAPSHOT` marks a version still in development, roughly a prerelease suffix.
+- `maven.compiler.release` is the Java version to compile for, like `<TargetFramework>`.
+- The package name `com.example` must match the folder `com/example`. In C#, namespaces and folders are independent; in Java, the compiler and class loader rely on the match.
+
+```text
+$ mvn package
+...
+[INFO] --- compiler:3.15.0:compile (default-compile) @ hello ---
+[INFO] Compiling 1 source file with javac [debug release 25] to target\classes
+...
+[INFO] --- surefire:3.5.4:test (default-test) @ hello ---
+[INFO] No tests to run.
+[INFO]
+[INFO] --- jar:3.5.0:jar (default-jar) @ hello ---
+[INFO] Building jar: …\hello\target\hello-1.0-SNAPSHOT.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+```
+
+`mvn package` runs a **lifecycle**: each phase includes all the previous ones, and plugins do the work (`compiler`, `surefire` for tests, `jar`). The first build downloads those plugins into `~/.m2/repository`, Maven's equivalent of the NuGet global packages folder.
+
+| Task | dotnet | Maven | Gradle |
+|---|---|---|---|
+| Compile | `dotnet build` | `mvn compile` | `gradle build` (or `classes`) |
+| Run the tests | `dotnet test` | `mvn test` | `gradle test` |
+| Produce the artefact | `dotnet publish` | `mvn package` | `gradle jar` |
+| Clean | `dotnet clean` | `mvn clean` | `gradle clean` |
+| Install locally for other projects | local NuGet feed | `mvn install` | `gradle publishToMavenLocal` (with the `maven-publish` plugin) |
+| Add a dependency | `dotnet add package` | edit `pom.xml` | edit `build.gradle.kts` |
+
+The JAR holds the compiled classes but does not say which one to start:
+
+```text
+$ java -cp target/classes com.example.App
+Hello from Maven!
+$ java -jar target/hello-1.0-SNAPSHOT.jar
+no main manifest attribute, in target\hello-1.0-SNAPSHOT.jar
+```
+
+A JAR is not an `.exe`: unless its manifest names a `Main-Class`, `java -jar` has nothing to run. Exercise 2 fixes that.
+
+## A Gradle project
+
+`gradle init` generates a project with a **wrapper**: `gradlew` scripts that download the exact Gradle version the project needs, so contributors don't install Gradle themselves (Maven has the same idea with the [Maven Wrapper](https://maven.apache.org/tools/wrapper/)).
+
+```text
+hello-gradle/
+├── settings.gradle.kts        ← like a .sln: lists the projects
+├── gradle/libs.versions.toml  ← version catalog: dependency versions in one place
+├── gradlew, gradlew.bat       ← the wrapper
+└── app/
+    ├── build.gradle.kts       ← the build script, in Kotlin
+    └── src/main/java/com/example/App.java
+```
+
+```kotlin
+// app/build.gradle.kts (generated by Gradle 9.7.1, comments removed)
+plugins {
+    application
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation(libs.junit.jupiter)
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    implementation(libs.guava)
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+}
+
+application {
+    mainClass = "com.example.App"
+}
+```
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+```powershell
+.\gradlew run
+```
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```bash
+./gradlew run
+```
+
+</TabItem>
+<TabItem label="macOS">
+
+```bash
+./gradlew run
+```
+
+</TabItem>
+</Tabs>
+
+```text
+> Task :app:run
+Hello World!
+
+BUILD SUCCESSFUL in 2s
+```
+
+Gradle build scripts are code, which makes them powerful and harder to read; Maven's XML is declarative and verbose. Spring's getting-started guides offer both. This course uses Maven: its conventions carry over to almost every Java project you will open.
+
+:::note[Which Java does Gradle use?]
+The `toolchain` block asks for Java 25 *whatever JDK runs Gradle*: Gradle looks for a matching JDK on the machine, and downloads one through the foojay plugin that `gradle init` adds to `settings.gradle.kts`. By default Maven compiles with the JDK that runs Maven and only passes `release` to it. Both are closer to `global.json` plus `<TargetFramework>` than to anything in `javac` itself.
+:::
+
+## Key takeaways
+
+- The JDK gives you `java`, `javac`, `jar` and `jshell`; the project model comes from Maven or Gradle.
+- `java File.java` runs a single file; since Java 25 it can be a compact `void main()` file.
+- Packages must match folders, and `src/main/java` / `src/test/java` is the layout every tool expects.
+- A JAR needs a `Main-Class` manifest entry before `java -jar` can run it.
+
+## Exercises
+
+1. Without compiling it first, run `Greeter.java` with your name as argument. What does the JDK do that makes this possible?
+
+<details>
+<summary>Solution</summary>
+
+```text
+$ java Greeter.java Grace
+Hello, Grace!
+```
+
+The launcher's source-file mode ([JEP 330](https://openjdk.org/jeps/330), extended to several files by [JEP 458](https://openjdk.org/jeps/458)) compiles the file in memory, then runs the first top-level class's `main` method with the remaining arguments. No `.class` file is written.
+
+</details>
+
+2. Make `java -jar target/hello-1.0-SNAPSHOT.jar` work.
+
+<details>
+<summary>Solution</summary>
+
+Configure the JAR plugin to write a `Main-Class` entry in the manifest:
+
+```xml
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.5.0</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <mainClass>com.example.App</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+```
+
+```text
+$ mvn -q package
+$ java -jar target/hello-1.0-SNAPSHOT.jar
+Hello from Maven!
+```
+
+The generated `META-INF/MANIFEST.MF` now contains `Main-Class: com.example.App`. If the application had dependencies, they would still be missing from the class path: that is what "fat JAR" plugins (or Spring Boot's own packaging) solve.
+
+</details>
+
+3. In JShell, compute `-7 % 3` and `Math.floorMod(-7, 3)`. Which one matches C#'s `%`?
+
+<details>
+<summary>Solution</summary>
+
+```text
+jshell> -7 % 3
+$1 ==> -1
+
+jshell> Math.floorMod(-7, 3)
+$2 ==> 2
+```
+
+`%` is a remainder that takes the sign of the dividend in both languages, so `-7 % 3` is `-1` in C# as well. `Math.floorMod` is the mathematical modulo, always in `[0, 3)` for a positive divisor.
+
+</details>
+
+## Sources
+
+- [JEP 512 — Compact source files and instance main methods](https://openjdk.org/jeps/512)
+- [The `java` launcher](https://docs.oracle.com/en/java/javase/25/docs/specs/man/java.html) and [`javac`](https://docs.oracle.com/en/java/javase/25/docs/specs/man/javac.html) reference pages
+- [Maven — Introduction to the build lifecycle](https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html)
+- [Gradle — Building Java & JVM projects](https://docs.gradle.org/current/userguide/building_java_projects.html)
+- [Gradle — Toolchains for JVM projects](https://docs.gradle.org/current/userguide/toolchains.html)
