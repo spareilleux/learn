@@ -5,12 +5,12 @@ sidebar:
   order: 4
 ---
 
-Cette leçon empaquette deux petites API web dans des images — l'une en **C#** (API minimale ASP.NET Core), l'autre en **Java** (Spring Boot WebFlux, bâti sur Reactor) — et les lance avec `wslc`. Les deux font la même chose, ce qui permet de comparer les deux écosystèmes étape par étape.
+Cette leçon empaquette deux petites API web dans des images — l'une en **C#** ([API minimale ASP.NET Core](https://learn.microsoft.com/aspnet/core/fundamentals/minimal-apis/overview)), l'autre en **Java** ([Spring Boot](https://spring.io/projects/spring-boot) [WebFlux](https://docs.spring.io/spring-framework/reference/web/webflux.html), bâti sur [Reactor](https://projectreactor.io/)) — et les lance avec `wslc`. Les deux font la même chose, ce qui permet de comparer les deux écosystèmes étape par étape.
 
 Le code complet se trouve dans le dépôt : [`code/wsl-containers`](https://github.com/spareilleux/learn/tree/main/code/wsl-containers). Tout ce qui suit a été exécuté avec `wslc` 2.9.11 ; les sorties sont réelles.
 
 :::tip[Pas de SDK nécessaire sous Windows]
-La compilation se fait **dans** le conteneur de construction. Tu n'as besoin ni de .NET, ni d'un JDK, ni de Maven installés sous Windows pour suivre cette leçon — seulement de `wslc`.
+La compilation se fait **dans** le conteneur de construction. Tu n'as besoin ni de [.NET](https://dotnet.microsoft.com/), ni d'un JDK (comme [Eclipse Temurin](https://adoptium.net/temurin/releases/)), ni de [Maven](https://maven.apache.org/) installés sous Windows pour suivre cette leçon — seulement de `wslc`.
 :::
 
 ## Les deux applications
@@ -25,7 +25,7 @@ Chaque API expose deux points de terminaison sur le port 8080 :
 | Framework | API minimale ASP.NET Core 10 | Spring Boot 4.1 WebFlux |
 | Valeur unique | objet anonyme renvoyé par la lambda | `Mono<Info>` |
 | Flux | `IAsyncEnumerable<int>` + `TypedResults.ServerSentEvents` | `Flux<Long>` + `text/event-stream` |
-| Serveur web | Kestrel | Netty |
+| Serveur web | [Kestrel](https://learn.microsoft.com/aspnet/core/fundamentals/servers/kestrel) | [Netty](https://netty.io/) |
 | Port par défaut dans un conteneur | 8080 | 8080 |
 
 **C#** — `csharp-api/Program.cs` :
@@ -84,23 +84,23 @@ Un `Containerfile` (même syntaxe qu'un `Dockerfile`) décrit comment construire
 **C#** — `csharp-api/Containerfile` :
 
 ```dockerfile
-# --- Stage 1: build with the full SDK (compiler, NuGet) ---
+# --- Étape 1 : construire avec le SDK complet (compilateur, NuGet) ---
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 
-# Restore first: this layer stays cached as long as the .csproj doesn't change
+# Restaurer d'abord : cette couche reste en cache tant que le .csproj ne change pas
 COPY CsharpApi.csproj .
 RUN dotnet restore
 
 COPY . .
 RUN dotnet publish -c Release -o /app --no-restore
 
-# --- Stage 2: run with the ASP.NET Core runtime only ---
+# --- Étape 2 : exécuter avec le seul runtime ASP.NET Core ---
 FROM mcr.microsoft.com/dotnet/aspnet:10.0
 WORKDIR /app
 COPY --from=build /app .
 
-# Non-root user provided by the .NET images
+# Utilisateur non root fourni par les images .NET
 USER $APP_UID
 EXPOSE 8080
 ENTRYPOINT ["dotnet", "CsharpApi.dll"]
@@ -109,26 +109,26 @@ ENTRYPOINT ["dotnet", "CsharpApi.dll"]
 **Java** — `java-reactor-api/Containerfile` :
 
 ```dockerfile
-# --- Stage 1: build with Maven and the full JDK ---
+# --- Étape 1 : construire avec Maven et le JDK complet ---
 FROM maven:3.9-eclipse-temurin-25 AS build
 WORKDIR /src
 
-# Download dependencies first: this layer stays cached as long as pom.xml doesn't change
+# Télécharger d'abord les dépendances : cette couche reste en cache tant que pom.xml ne change pas
 COPY pom.xml .
 RUN mvn -q dependency:go-offline
 
 COPY src ./src
 RUN mvn -q package
 
-# --- Stage 2: run with the JRE only ---
+# --- Étape 2 : exécuter avec le seul JRE ---
 FROM eclipse-temurin:25-jre
 WORKDIR /app
 COPY --from=build /src/target/app.jar app.jar
 
-# Non-root user provided by the Ubuntu base image
+# Utilisateur non root fourni par l'image de base Ubuntu
 USER ubuntu
 EXPOSE 8080
-# Netty loads a native library: allow it explicitly (Java 24+ warns otherwise)
+# Netty charge une bibliothèque native : l'autoriser explicitement (sinon Java 24+ affiche un avertissement)
 ENTRYPOINT ["java", "--enable-native-access=ALL-UNNAMED", "-jar", "app.jar"]
 ```
 
@@ -149,10 +149,10 @@ Les mêmes étapes, côte à côte :
 
 | Étape | C# | Java |
 |---|---|---|
-| Image de construction | `dotnet/sdk:10.0` | `maven:3.9-eclipse-temurin-25` |
-| Dépendances | `dotnet restore` | `mvn dependency:go-offline` |
+| Image de construction | [`dotnet/sdk:10.0`](https://hub.docker.com/r/microsoft/dotnet-sdk) | [`maven:3.9-eclipse-temurin-25`](https://hub.docker.com/_/maven) |
+| Dépendances | `dotnet restore` ([NuGet](https://www.nuget.org/)) | `mvn dependency:go-offline` |
 | Compilation et empaquetage | `dotnet publish` → dossier de DLL | `mvn package` → un jar exécutable |
-| Image d'exécution | `dotnet/aspnet:10.0` | `eclipse-temurin:25-jre` |
+| Image d'exécution | [`dotnet/aspnet:10.0`](https://hub.docker.com/r/microsoft/dotnet-aspnet) | [`eclipse-temurin:25-jre`](https://hub.docker.com/_/eclipse-temurin) |
 | Utilisateur non root | `USER $APP_UID` (`app`, uid 1654) | `USER ubuntu` (uid 1000) |
 
 :::note[Pourquoi copier le `.csproj` / `pom.xml` en premier ?]
@@ -208,11 +208,11 @@ wslc container list
 
 ```text
 CONTAINER ID   IMAGE              COMMAND                  CREATED         STATUS         PORTS                      NAMES
-05f66e037cd7   java-reactor-api   "java --enable-nativ…"   6 seconds ago   Up 6 seconds   127.0.0.1:8081->8080/tcp   java
-70f326d7417d   csharp-api         "dotnet CsharpApi.dll"   7 seconds ago   Up 6 seconds   127.0.0.1:5000->8080/tcp   csharp
+b8acbb234fb1   java-reactor-api   "java --enable-nativ…"   8 seconds ago   Up 7 seconds   127.0.0.1:8081->8080/tcp   java
+8bdcda0c3927   csharp-api         "dotnet CsharpApi.dll"   8 seconds ago   Up 7 seconds   127.0.0.1:5000->8080/tcp   csharp
 ```
 
-`wslc` publie sur `127.0.0.1` par défaut, utilise donc cette adresse :
+`wslc` publie sur `127.0.0.1` par défaut, utilise donc cette adresse avec [curl](https://curl.se/) (`curl.exe` est fourni avec Windows) :
 
 ```powershell
 curl.exe http://127.0.0.1:5000/
@@ -220,8 +220,8 @@ curl.exe http://127.0.0.1:8081/
 ```
 
 ```text
-{"app":"csharp-api","runtime":".NET 10.0.12","os":"Ubuntu 24.04.5 LTS","machine":"d7edc26a9abe"}
-{"app":"java-reactor-api","runtime":"Java 25.0.4+7-LTS","os":"Linux 6.18.40.1-microsoft-standard-WSL2","machine":"c5fbd8e50515"}
+{"app":"csharp-api","runtime":".NET 10.0.12","os":"Ubuntu 24.04.5 LTS","machine":"8bdcda0c3927"}
+{"app":"java-reactor-api","runtime":"Java 25.0.4+7-LTS","os":"Linux 6.18.40.1-microsoft-standard-WSL2","machine":"b8acbb234fb1"}
 ```
 
 :::caution[`localhost` n'est pas toujours `127.0.0.1`]
@@ -254,7 +254,7 @@ wslc exec java id
 ```
 
 ```text
-Linux d7edc26a9abe 6.18.40.1-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Fri Jul 31 22:12:15 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+Linux 8bdcda0c3927 6.18.40.1-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Fri Jul 31 22:12:15 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
 uid=1654(app) gid=1654(app) groups=1654(app)
 uid=1000(ubuntu) gid=1000(ubuntu) groups=1000(ubuntu),4(adm),20(dialout),24(cdrom),25(floppy),27(sudo),29(audio),30(dip),44(video),46(plugdev)
 ```
@@ -290,9 +290,9 @@ wslc container stop csharp java
 ## Diagnostiquer
 
 ```powershell
-wslc container list --all        # includes stopped containers, with their exit code
-wslc container logs <container>  # what the application printed
-wslc container inspect <container>  # effective configuration: command, env, ports, exit code
+wslc container list --all        # inclut les conteneurs arrêtés, avec leur code de sortie
+wslc container logs <conteneur>  # ce que l'application a affiché
+wslc container inspect <conteneur>  # configuration effective : commande, env, ports, code de sortie
 wslc image inspect <image>
 ```
 
@@ -309,9 +309,9 @@ java-reactor-api   latest   3a731cbc7d15   4 minutes ago   387MB
 ```
 
 ```powershell
-wslc container prune       # removes stopped containers
-wslc image prune           # removes dangling images (the <none> ones)
-wslc image prune --all     # removes all images not used by a container (no confirmation)
+wslc container prune       # supprime les conteneurs arrêtés
+wslc image prune           # supprime les images orphelines (les <none>)
+wslc image prune --all     # supprime toutes les images non utilisées par un conteneur (sans confirmation)
 ```
 
 :::caution

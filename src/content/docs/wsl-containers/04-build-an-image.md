@@ -5,12 +5,12 @@ sidebar:
   order: 4
 ---
 
-This lesson packages two small web APIs into images — one in **C#** (ASP.NET Core minimal API), one in **Java** (Spring Boot WebFlux, built on Reactor) — and runs them with `wslc`. Both do the same thing, so you can compare the two ecosystems step by step.
+This lesson packages two small web APIs into images — one in **C#** ([ASP.NET Core minimal API](https://learn.microsoft.com/aspnet/core/fundamentals/minimal-apis/overview)), one in **Java** ([Spring Boot](https://spring.io/projects/spring-boot) [WebFlux](https://docs.spring.io/spring-framework/reference/web/webflux.html), built on [Reactor](https://projectreactor.io/)) — and runs them with `wslc`. Both do the same thing, so you can compare the two ecosystems step by step.
 
 The full code is in the repository: [`code/wsl-containers`](https://github.com/spareilleux/learn/tree/main/code/wsl-containers). Everything below was run with `wslc` 2.9.11; the outputs are real.
 
 :::tip[No SDK needed on Windows]
-The compilation happens **inside** the build container. You don't need .NET, a JDK or Maven installed on Windows to follow this lesson — only `wslc`.
+The compilation happens **inside** the build container. You don't need [.NET](https://dotnet.microsoft.com/), a JDK (such as [Eclipse Temurin](https://adoptium.net/temurin/releases/)) or [Maven](https://maven.apache.org/) installed on Windows to follow this lesson — only `wslc`.
 :::
 
 ## The two applications
@@ -25,7 +25,7 @@ Each API exposes two endpoints on port 8080:
 | Framework | ASP.NET Core 10 minimal API | Spring Boot 4.1 WebFlux |
 | Single value | anonymous object returned by the lambda | `Mono<Info>` |
 | Stream | `IAsyncEnumerable<int>` + `TypedResults.ServerSentEvents` | `Flux<Long>` + `text/event-stream` |
-| Web server | Kestrel | Netty |
+| Web server | [Kestrel](https://learn.microsoft.com/aspnet/core/fundamentals/servers/kestrel) | [Netty](https://netty.io/) |
 | Default port in a container | 8080 | 8080 |
 
 **C#** — `csharp-api/Program.cs`:
@@ -149,10 +149,10 @@ The same steps, side by side:
 
 | Step | C# | Java |
 |---|---|---|
-| Build image | `dotnet/sdk:10.0` | `maven:3.9-eclipse-temurin-25` |
-| Dependencies | `dotnet restore` | `mvn dependency:go-offline` |
+| Build image | [`dotnet/sdk:10.0`](https://hub.docker.com/r/microsoft/dotnet-sdk) | [`maven:3.9-eclipse-temurin-25`](https://hub.docker.com/_/maven) |
+| Dependencies | `dotnet restore` ([NuGet](https://www.nuget.org/)) | `mvn dependency:go-offline` |
 | Compile and package | `dotnet publish` → folder of DLLs | `mvn package` → one executable jar |
-| Runtime image | `dotnet/aspnet:10.0` | `eclipse-temurin:25-jre` |
+| Runtime image | [`dotnet/aspnet:10.0`](https://hub.docker.com/r/microsoft/dotnet-aspnet) | [`eclipse-temurin:25-jre`](https://hub.docker.com/_/eclipse-temurin) |
 | Non-root user | `USER $APP_UID` (`app`, uid 1654) | `USER ubuntu` (uid 1000) |
 
 :::note[Why copy the `.csproj` / `pom.xml` first?]
@@ -208,11 +208,11 @@ wslc container list
 
 ```text
 CONTAINER ID   IMAGE              COMMAND                  CREATED         STATUS         PORTS                      NAMES
-05f66e037cd7   java-reactor-api   "java --enable-nativ…"   6 seconds ago   Up 6 seconds   127.0.0.1:8081->8080/tcp   java
-70f326d7417d   csharp-api         "dotnet CsharpApi.dll"   7 seconds ago   Up 6 seconds   127.0.0.1:5000->8080/tcp   csharp
+b8acbb234fb1   java-reactor-api   "java --enable-nativ…"   8 seconds ago   Up 7 seconds   127.0.0.1:8081->8080/tcp   java
+8bdcda0c3927   csharp-api         "dotnet CsharpApi.dll"   8 seconds ago   Up 7 seconds   127.0.0.1:5000->8080/tcp   csharp
 ```
 
-`wslc` publishes on `127.0.0.1` by default, so use that address:
+`wslc` publishes on `127.0.0.1` by default, so use that address with [curl](https://curl.se/) (`curl.exe` ships with Windows):
 
 ```powershell
 curl.exe http://127.0.0.1:5000/
@@ -220,8 +220,8 @@ curl.exe http://127.0.0.1:8081/
 ```
 
 ```text
-{"app":"csharp-api","runtime":".NET 10.0.12","os":"Ubuntu 24.04.5 LTS","machine":"d7edc26a9abe"}
-{"app":"java-reactor-api","runtime":"Java 25.0.4+7-LTS","os":"Linux 6.18.40.1-microsoft-standard-WSL2","machine":"c5fbd8e50515"}
+{"app":"csharp-api","runtime":".NET 10.0.12","os":"Ubuntu 24.04.5 LTS","machine":"8bdcda0c3927"}
+{"app":"java-reactor-api","runtime":"Java 25.0.4+7-LTS","os":"Linux 6.18.40.1-microsoft-standard-WSL2","machine":"b8acbb234fb1"}
 ```
 
 :::caution[`localhost` isn't always `127.0.0.1`]
@@ -254,7 +254,7 @@ wslc exec java id
 ```
 
 ```text
-Linux d7edc26a9abe 6.18.40.1-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Fri Jul 31 22:12:15 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+Linux 8bdcda0c3927 6.18.40.1-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Fri Jul 31 22:12:15 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
 uid=1654(app) gid=1654(app) groups=1654(app)
 uid=1000(ubuntu) gid=1000(ubuntu) groups=1000(ubuntu),4(adm),20(dialout),24(cdrom),25(floppy),27(sudo),29(audio),30(dip),44(video),46(plugdev)
 ```

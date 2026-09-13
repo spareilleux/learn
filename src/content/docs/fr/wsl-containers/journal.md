@@ -364,11 +364,11 @@ Piège : dans `wslc image prune`, `-f` veut dire `--filter`, pas `--force` ; `--
 Après les builds de la leçon 4, le fichier atteignait **3995 Mo**, alors que `df` dans la session n'indiquait que **1,9 Go** utilisés. Étapes :
 
 ```powershell
-# 1. Stop the session VM (non-elevated) and check it's gone
+# 1. Arrêter la VM de la session (sans élévation) et vérifier qu'elle a disparu
 wslc --session wslc-cli-spare system session terminate
-Get-Process -Name 'vmmemwslc-cli-spare' -ErrorAction SilentlyContinue   # nothing
+Get-Process -Name 'vmmemwslc-cli-spare' -ErrorAction SilentlyContinue   # rien
 
-# 2. Administrator PowerShell (Hyper-V module): back up, then compact
+# 2. PowerShell administrateur (module Hyper-V) : sauvegarder, puis compacter
 $f = "$env:LOCALAPPDATA\wslc\sessions\wslc-cli-spare\storage.vhdx"
 Copy-Item $f "$f.bak"
 Optimize-VHD -Path $f -Mode Full
