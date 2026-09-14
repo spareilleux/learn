@@ -1,0 +1,7 @@
+e04_strict_map_index.v:8:15: error: `@[strict_map_index]` requires handling missing map keys with `or {}` or `if value := map[key] {}`
+    6 |         'en': 117
+    7 |     }
+    8 |     println(pages['de'])
+      |                  ~~~~~~
+    9 | }
+exit 1

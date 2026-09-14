@@ -1,0 +1,8 @@
+e03_unhandled_result.v:4:19: error: strconv.atoi() returns `!int`, so it should have either an `or {}` block, or `!` at the end
+    2 | 
+    3 | fn main() {
+    4 |     lines := strconv.atoi('474')
+      |                      ~~~~~~~~~~~
+    5 |     println(lines)
+    6 | }
+exit 1

@@ -1,0 +1,13 @@
+e03_option_in_expression.v:14:10: error: Option type `string` cannot be called directly, you should unwrap it first
+   12 | fn main() {
+   13 |     name := find_course('rust')
+   14 |     println(name.to_upper())
+      |             ~~~~
+   15 | }
+e03_option_in_expression.v:14:2: error: `println` can not print void expressions
+   12 | fn main() {
+   13 |     name := find_course('rust')
+   14 |     println(name.to_upper())
+      |     ~~~~~~~~~~~~~~~~~~~~~~~~
+   15 | }
+exit 1

@@ -1,0 +1,8 @@
+e02_immutable_field.v:8:4: error: field `lines` of struct `Page` is immutable
+    6 | fn main() {
+    7 |     mut p := Page{'Mission', 80}
+    8 |     p.lines = 81
+      |       ~~~~~
+    9 |     println(p)
+   10 | }
+exit 1

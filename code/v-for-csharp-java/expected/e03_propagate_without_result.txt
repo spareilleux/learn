@@ -1,0 +1,15 @@
+e03_propagate_without_result.v:4:28: error: to propagate the Result call, `parse_lines` must return a Result
+    2 | 
+    3 | fn parse_lines(field string) int {
+    4 |     return strconv.atoi(field)!
+      |                               ^
+    5 | }
+    6 |
+Details: e03_propagate_without_result.v:3:30: details: prepend ! before the declaration of the return type of `parse_lines`
+    1 | import strconv
+    2 | 
+    3 | fn parse_lines(field string) int {
+      |                              ~~~
+    4 |     return strconv.atoi(field)!
+    5 | }
+exit 1

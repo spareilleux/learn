@@ -1,0 +1,8 @@
+e04_map_copy.v:5:10: error: cannot copy map: call `move` or `clone` method (or use a reference)
+    3 |         'ladybugdb': 'lesson 8'
+    4 |     }
+    5 |     next := status
+      |             ~~~~~~
+    6 |     status['ladybugdb'] = 'done'
+    7 |     println(next)
+exit 1

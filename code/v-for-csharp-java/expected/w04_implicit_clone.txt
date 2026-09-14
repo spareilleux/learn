@@ -1,0 +1,17 @@
+w04_implicit_clone.v:3:16: notice: an implicit clone of the slice was done here
+    1 | fn main() {
+    2 |     mut lines := [474, 341, 326]
+    3 |     first := lines[..2]
+      |                   ~~~~~
+    4 |     lines[0] = 0
+    5 |     println('${lines} ${first}')
+Details: w04_implicit_clone.v:3:16: details: To silence this notice, use either an explicit `a[..].clone()`,
+or use an explicit `unsafe{ a[..] }`, if you do not want a copy of the slice.
+    1 | fn main() {
+    2 |     mut lines := [474, 341, 326]
+    3 |     first := lines[..2]
+      |                   ~~~~~
+    4 |     lines[0] = 0
+    5 |     println('${lines} ${first}')
+[0, 341, 326] [474, 341]
+exit 0

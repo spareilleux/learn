@@ -1,0 +1,8 @@
+e02_immutable.v:3:2: error: `done` is immutable, declare it with `mut` to make it mutable
+    1 | fn main() {
+    2 |     done := 0
+    3 |     done = 2
+      |     ~~~~
+    4 |     println(done)
+    5 | }
+exit 1

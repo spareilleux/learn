@@ -1,0 +1,8 @@
+e02_shadowing.v:4:3: error: redefinition of `total`
+    2 |     total := 10
+    3 |     if total > 5 {
+    4 |         total := 20
+      |         ~~~~~
+    5 |         println(total)
+    6 |     }
+exit 1

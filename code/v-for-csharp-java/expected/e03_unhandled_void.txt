@@ -1,0 +1,8 @@
+e03_unhandled_void.v:4:5: error: os.write_file() returns `!void`, so it should have either an `or {}` block, or `!` at the end
+    2 | 
+    3 | fn main() {
+    4 |     os.write_file('journal.md', '## 2026-09-14')
+      |        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    5 |     println('saved')
+    6 | }
+exit 1

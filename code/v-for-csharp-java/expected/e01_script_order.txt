@@ -1,0 +1,15 @@
+e01_script_order.v:5:1: notice: script mode started here
+    3 | }
+    4 | 
+    5 | println(greeting('C#'))
+      | ~~~~~~~
+    6 | 
+    7 | fn farewell(name string) string {
+e01_script_order.v:7:4: error: all definitions must occur before code in script mode
+    5 | println(greeting('C#'))
+    6 | 
+    7 | fn farewell(name string) string {
+      |    ~~~~~~~~
+    8 |     return 'Bye, ${name}!'
+    9 | }
+exit 1

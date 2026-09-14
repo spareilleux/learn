@@ -1,0 +1,29 @@
+e04_sort_capture.v:7:15: error: can not access external variable `lines`
+    5 |     }
+    6 |     mut courses := lines.keys()
+    7 |     courses.sort(lines[a] > lines[b])
+      |                  ~~~~~
+    8 |     println(courses)
+    9 | }
+e04_sort_capture.v:7:10: error: `.sort()` can only use `a` or `b` as argument, e.g. `arr.sort(a < b)`
+    5 |     }
+    6 |     mut courses := lines.keys()
+    7 |     courses.sort(lines[a] > lines[b])
+      |             ~~~~~~~~~~~~~~~~~~~~~~~~~
+    8 |     println(courses)
+    9 | }
+e04_sort_capture.v:7:20: error: invalid key: expected `string`, not `&string`; did you mean `lines[*a]`?
+    5 |     }
+    6 |     mut courses := lines.keys()
+    7 |     courses.sort(lines[a] > lines[b])
+      |                       ~~~
+    8 |     println(courses)
+    9 | }
+e04_sort_capture.v:7:31: error: invalid key: expected `string`, not `&string`; did you mean `lines[*b]`?
+    5 |     }
+    6 |     mut courses := lines.keys()
+    7 |     courses.sort(lines[a] > lines[b])
+      |                                  ~~~
+    8 |     println(courses)
+    9 | }
+exit 1

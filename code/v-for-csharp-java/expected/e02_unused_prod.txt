@@ -1,0 +1,8 @@
+e02_unused_prod.v:3:2: error: unused variable: `count`
+    1 | // flags: -prod
+    2 | fn main() {
+    3 |     count := 3
+      |     ~~~~~
+    4 |     println('done')
+    5 | }
+exit 1

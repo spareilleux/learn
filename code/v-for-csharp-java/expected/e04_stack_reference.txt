@@ -1,0 +1,8 @@
+e04_stack_reference.v:11:11: error: `p` cannot be assigned outside `unsafe` blocks as it might refer to an object stored on stack. Consider declaring `Page` as `@[heap]`.
+    9 | 
+   10 | fn (mut h History) visit(p &Page) {
+   11 |     h.last = p
+      |              ^
+   12 | }
+   13 |
+exit 1

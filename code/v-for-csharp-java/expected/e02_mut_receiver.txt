@@ -1,0 +1,8 @@
+e02_mut_receiver.v:12:2: error: `p` is immutable, declare it with `mut` to make it mutable
+   10 | fn main() {
+   11 |     p := Progress{}
+   12 |     p.complete()
+      |     ^
+   13 |     println(p.done)
+   14 | }
+exit 1

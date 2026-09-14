@@ -1,0 +1,7 @@
+e02_string_plus_int.v:3:10: error: infix expr: cannot use `int` (right expression) as `string`
+    1 | fn main() {
+    2 |     lessons := 4
+    3 |     println('lessons: ' + lessons)
+      |             ~~~~~~~~~~~~~~~~~~~~~
+    4 | }
+exit 1

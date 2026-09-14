@@ -1,0 +1,8 @@
+e02_required_field.v:7:7: error: field `Page.url` must be initialized
+    5 | 
+    6 | fn main() {
+    7 |     p := Page{
+      |          ~~~~~
+    8 |         title: 'Mission'
+    9 |     }
+exit 1

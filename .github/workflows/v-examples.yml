@@ -1,0 +1,61 @@
+# V course: run every example on three OSes and compare its output, check the compiler messages of the
+# rejected snippets and the first line of the panics, and print what depends on the OS (lesson 1 builds, lesson 4 memory)
+name: V course examples
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['code/v-for-csharp-java/**', '.github/workflows/v-examples.yml']
+  pull_request:
+    paths: ['code/v-for-csharp-java/**', '.github/workflows/v-examples.yml']
+
+permissions:
+  contents: read
+
+env:
+  V_VERSION: 0.5.2
+
+jobs:
+  v:
+    name: v (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            asset: v_linux.zip
+          - os: windows-latest
+            asset: v_windows.zip
+          - os: macos-latest
+            asset: v_macos_arm64.zip
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install V from the GitHub release
+        env:
+          ASSET: ${{ matrix.asset }}
+        run: |
+          curl -fsSL -o "$RUNNER_TEMP/$ASSET" "https://github.com/vlang/v/releases/download/$V_VERSION/$ASSET"
+          unzip -q "$RUNNER_TEMP/$ASSET" -d "$RUNNER_TEMP"
+          echo "$RUNNER_TEMP/v" >> "$GITHUB_PATH"
+      - name: v version and v doctor
+        run: |
+          v version
+          v doctor
+      # Lesson 1 shows these for each OS: a new project, the C compiler of each build and the size of the executables
+      - name: Lesson 1 builds, for information
+        working-directory: ${{ runner.temp }}
+        run: |
+          printf 'Greets people\n\n\n' | v new hello
+          cd hello
+          cat v.mod
+          v run .
+          v -showcc -o hello-dev . 2>&1 | grep 'C compiler cmd' || true
+          v -showcc -prod -o hello-prod . 2>&1 | grep 'C compiler cmd' || true
+          ls -l
+      - name: Examples, compiler messages and panics
+        run: bash code/v-for-csharp-java/check.sh

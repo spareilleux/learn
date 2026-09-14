@@ -1,0 +1,22 @@
+e04_mut_alias.v:3:14: notice: left-side of assignment expects a mutable reference, but variable `lines` is immutable, declare it with `mut` to make it mutable or clone it
+    1 | fn main() {
+    2 |     lines := [474, 341, 326]
+    3 |     mut copy := lines
+      |                 ~~~~~
+    4 |     copy[0] = 0
+    5 |     println(copy)
+e04_mut_alias.v:3:11: error: use `mut array2 := array1.clone()` instead of `mut array2 := array1` (or use `unsafe`)
+    1 | fn main() {
+    2 |     lines := [474, 341, 326]
+    3 |     mut copy := lines
+      |              ~~
+    4 |     copy[0] = 0
+    5 |     println(copy)
+e04_mut_alias.v:4:2: error: `copy` aliases mutable data from an immutable value, clone it first (or use `unsafe`)
+    2 |     lines := [474, 341, 326]
+    3 |     mut copy := lines
+    4 |     copy[0] = 0
+      |     ~~~~
+    5 |     println(copy)
+    6 | }
+exit 1
