@@ -86,6 +86,17 @@ export default defineConfig({
 								},
 							],
 						},
+						{
+							label: 'AI-assisted development',
+							translations: { fr: 'Développement assisté par IA', es: 'Desarrollo asistido por IA' },
+							items: [
+								{
+									label: 'Agentic coding with Claude Code and Codex',
+									collapsed: true,
+									items: [{ autogenerate: { directory: 'agentic-coding' } }],
+								},
+							],
+						},
 					],
 				},
 				{
