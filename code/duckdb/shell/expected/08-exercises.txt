@@ -1,0 +1,10 @@
+== Exercise 1: three statements in one -c argument, the last one failing
+Constraint Error: Duplicate key "name: builds" violates primary key constraint.
+exit code 1
+rows
+2
+== Exercise 1: the same statements in an explicit transaction
+Constraint Error: PRIMARY KEY or UNIQUE constraint violation: duplicate key "builds"
+exit code 1
+rows
+0
