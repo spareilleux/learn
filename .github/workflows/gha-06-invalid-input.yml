@@ -1,0 +1,13 @@
+# GitHub Actions course, lesson 6, exercise 3: an input the reusable workflow doesn't declare (expected to be rejected)
+name: "GHA 06: undeclared input"
+
+on:
+  push:
+    branches: [gha-06-invalid]
+
+jobs:
+  test:
+    uses: ./.github/workflows/gha-06-dotnet-test.yml
+    with:
+      os: ubuntu-latest
+      configuration: Release
