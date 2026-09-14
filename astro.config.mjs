@@ -72,6 +72,11 @@ export default defineConfig({
 									collapsed: true,
 									items: [{ autogenerate: { directory: 'duckdb' } }],
 								},
+								{
+									label: 'LadybugDB',
+									collapsed: true,
+									items: [{ autogenerate: { directory: 'ladybugdb' } }],
+								},
 							],
 						},
 					],

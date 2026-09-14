@@ -1,0 +1,481 @@
+---
+title: 1. A first graph
+description: Install the LadybugDB CLI, declare node and relationship tables, create and match a few nodes with Cypher, read the errors the schema produces, and delete nodes that still have relationships.
+sidebar:
+  order: 1
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Installing the CLI
+
+[LadybugDB](https://ladybugdb.com/) is a library that runs inside the process that uses it. The [LadybugDB CLI](https://docs.ladybugdb.com/client-apis/cli/), `lbug`, is one such process: a single executable. This course uses it until lesson 5, and pins version 0.20.4, the one every output was captured with.
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+```powershell
+curl.exe -L -O https://github.com/LadybugDB/ladybug/releases/download/v0.20.4/lbug_cli-windows-x86_64.zip
+Expand-Archive lbug_cli-windows-x86_64.zip -DestinationPath lbug
+.\lbug\lbug.exe --version
+```
+
+The zip file holds only `lbug.exe` (14.8 MB). Add its folder to the `PATH` to type `lbug` from anywhere. The [installation page](https://docs.ladybugdb.com/installation/) uses `releases/latest/download/` instead of a version number: always the newest release.
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```bash
+curl -L -O https://github.com/LadybugDB/ladybug/releases/download/v0.20.4/lbug_cli-linux-x86_64.tar.gz
+mkdir -p ~/.local/bin
+tar -xzf lbug_cli-linux-x86_64.tar.gz -C ~/.local/bin
+~/.local/bin/lbug --version
+```
+
+Add `~/.local/bin` to the `PATH` if your shell profile doesn't already, to type `lbug` from anywhere. This is what the [CI of this course](https://github.com/spareilleux/learn/blob/main/.github/workflows/ladybugdb-examples.yml) does on `ubuntu-latest`, into another folder. There is also `lbug_cli-linux-aarch64.tar.gz` for ARM machines. The installation page suggests `curl -s https://install.ladybugdb.com | bash`, which installs the latest release, whatever its version (*to verify*: not run for this course).
+
+</TabItem>
+<TabItem label="macOS">
+
+```bash
+curl -L -O https://github.com/LadybugDB/ladybug/releases/download/v0.20.4/lbug_cli-osx-arm64.tar.gz
+mkdir -p ~/.local/bin
+tar -xzf lbug_cli-osx-arm64.tar.gz -C ~/.local/bin
+~/.local/bin/lbug --version
+```
+
+The CI of this course does the same on `macos-latest` (Apple silicon); Intel Macs need `lbug_cli-osx-x86_64.tar.gz`. With [Homebrew](https://formulae.brew.sh/formula/ladybug), `brew install ladybug` installs the formula's current version, 0.20.4 in September 2026 (*to verify*: not run for this course).
+
+</TabItem>
+</Tabs>
+
+```text
+Lbug 0.20.4
+```
+
+## The data
+
+Clone this site's repository and go to the course folder, where the relative paths of every query in this course work:
+
+```bash
+git clone https://github.com/spareilleux/learn.git
+cd learn/code/ladybugdb
+```
+
+This lesson doesn't read any file yet: it builds a graph of three DuckDB lessons by hand. Lesson 2 loads the whole site.
+
+## A first session
+
+Start the CLI with `lbug` and no argument:
+
+```text
+Opening the database under in-memory mode.
+Enter ":help" for usage hints.
+```
+
+Then type a query, which ends with a semicolon like SQL:
+
+```cypher
+RETURN 1 + 1 AS two;
+```
+
+```text
+┌───────┐
+│ two   │
+│ INT64 │
+├───────┤
+│ 2     │
+└───────┘
+(1 tuple)
+(1 column)
+Time: 8.61ms (compiling), 0.72ms (executing)
+```
+
+The output format is `box`, the CLI's default, with the type of each column under its name. The outputs in the rest of the course leave out the last three lines, the query statistics. `:quit` exits; `:help` lists the other commands, which start with a colon and aren't Cypher.
+
+The database lives in memory and disappears with the CLI. Lesson 8 comes back to database files; for now, the tables are recreated by each script.
+
+## The schema comes first
+
+In [Neo4j](https://neo4j.com/docs/cypher-manual/current/introduction/), a node gets its label and properties when you create it. LadybugDB, like SQL, wants the tables first ([`CREATE NODE TABLE`, `CREATE REL TABLE`](https://docs.ladybugdb.com/cypher/data-definition/create-table/)). The first statements of [`cypher/01-first-graph.cypher`](https://github.com/spareilleux/learn/blob/711d62a/code/ladybugdb/cypher/01-first-graph.cypher#L5-L8):
+
+```cypher
+CREATE NODE TABLE Course(slug STRING PRIMARY KEY, title STRING);
+CREATE NODE TABLE Lesson(url STRING PRIMARY KEY, number INT64, title STRING);
+CREATE REL TABLE HAS_LESSON(FROM Course TO Lesson);
+CREATE REL TABLE LINKS_TO(FROM Lesson TO Lesson);
+```
+
+```text
+┌────────────────────────────────┐
+│ result                         │
+│ STRING                         │
+├────────────────────────────────┤
+│ Table Course has been created. │
+└────────────────────────────────┘
+```
+
+(and the same message for the other three tables)
+
+A **node table** is a table with a primary key, which LadybugDB requires. A **relationship table** is the junction table you would write in SQL, `HAS_LESSON(course_slug, lesson_url)` with two foreign keys, except that you never name the keys: `FROM Course TO Lesson` is enough, and each relationship points to the two nodes themselves. A relationship table can have its own columns too (lesson 2 gives `LINKS_TO` an `anchor`).
+
+The names follow the usual Cypher conventions: `PascalCase` for node tables, `UPPER_SNAKE_CASE` for relationship tables. LadybugDB doesn't enforce them.
+
+## Nodes and relationships
+
+[`CREATE`](https://docs.ladybugdb.com/cypher/data-manipulation-clauses/create/) takes a pattern. A node is written in parentheses, with its table after a colon and its properties in braces ([lines 11-18](https://github.com/spareilleux/learn/blob/711d62a/code/ladybugdb/cypher/01-first-graph.cypher#L11-L18)):
+
+```cypher
+CREATE (:Course {slug: 'duckdb', title: 'DuckDB'});
+CREATE (:Lesson {url: '/duckdb/01-first-queries/', number: 1, title: 'First queries'}),
+       (:Lesson {url: '/duckdb/02-friendly-sql/', number: 2, title: 'Friendly SQL'}),
+       (:Lesson {url: '/duckdb/03-nested-data/', number: 3, title: 'Nested data'});
+
+MATCH (c:Course {slug: 'duckdb'}), (l:Lesson) CREATE (c)-[:HAS_LESSON]->(l);
+MATCH (a:Lesson {number: 2}), (b:Lesson {number: 1}) CREATE (a)-[:LINKS_TO]->(b);
+```
+
+A relationship connects two existing nodes, so the last two statements first find them with `MATCH`, then create the arrow between the variables `c` and `l`. `(c:Course {slug: 'duckdb'}), (l:Lesson)` is a cross join: one course times three lessons, three `HAS_LESSON` relationships. The arrow gives the direction: lesson 2 links to lesson 1.
+
+These statements return no rows, so the CLI prints nothing but the statistics.
+
+## Patterns
+
+[`MATCH`](https://docs.ladybugdb.com/cypher/query-clauses/match/) finds every place in the graph where a pattern fits, and `RETURN` is the `SELECT` ([lines 21-26](https://github.com/spareilleux/learn/blob/711d62a/code/ladybugdb/cypher/01-first-graph.cypher#L21-L26)):
+
+```cypher
+MATCH (c:Course)-[:HAS_LESSON]->(l:Lesson)
+RETURN c.title, l.number, l.title
+ORDER BY l.number;
+
+MATCH (a:Lesson)-[:LINKS_TO]->(b:Lesson)
+RETURN a.title AS from_lesson, b.title AS to_lesson;
+```
+
+```text
+┌─────────┬──────────┬───────────────┐
+│ c.title │ l.number │ l.title       │
+│ STRING  │ INT64    │ STRING        │
+├─────────┼──────────┼───────────────┤
+│ DuckDB  │ 1        │ First queries │
+│ DuckDB  │ 2        │ Friendly SQL  │
+│ DuckDB  │ 3        │ Nested data   │
+└─────────┴──────────┴───────────────┘
+┌──────────────┬───────────────┐
+│ from_lesson  │ to_lesson     │
+│ STRING       │ STRING        │
+├──────────────┼───────────────┤
+│ Friendly SQL │ First queries │
+└──────────────┴───────────────┘
+```
+
+The same query in SQL, with the junction table: `SELECT c.title, l.number, l.title FROM Course c JOIN HAS_LESSON h ON h.course_slug = c.slug JOIN Lesson l ON l.url = h.lesson_url ORDER BY l.number`. The pattern says the same thing without the join conditions.
+
+The lessons that no lesson links to need a pattern that *doesn't* exist, an [`EXISTS` subquery](https://docs.ladybugdb.com/cypher/subquery/) ([lines 29-32](https://github.com/spareilleux/learn/blob/711d62a/code/ladybugdb/cypher/01-first-graph.cypher#L29-L32)):
+
+```cypher
+MATCH (l:Lesson)
+WHERE NOT EXISTS { MATCH (l)<-[:LINKS_TO]-(:Lesson) }
+RETURN l.title
+ORDER BY l.title;
+```
+
+```text
+┌──────────────┐
+│ l.title      │
+│ STRING       │
+├──────────────┤
+│ Friendly SQL │
+│ Nested data  │
+└──────────────┘
+```
+
+The arrow can point either way in a pattern: `(l)<-[:LINKS_TO]-(:Lesson)` is a link *to* `l`. "First queries" is the only lesson with an incoming link.
+
+## The schema is enforced
+
+Three mistakes ([lines 35-37](https://github.com/spareilleux/learn/blob/711d62a/code/ladybugdb/cypher/01-first-graph.cypher#L35-L37)): a duplicate key, a property the table doesn't have, a node without its key.
+
+```cypher
+CREATE (:Lesson {url: '/duckdb/01-first-queries/', number: 1, title: 'Again'});
+CREATE (:Lesson {url: '/duckdb/04-files/', minutes: 30});
+CREATE (:Lesson {number: 4});
+```
+
+```text
+Error: Runtime exception: Found duplicated primary key value /duckdb/01-first-queries/, which violates the uniqueness constraint of the primary key column.
+Error: Binder exception: Cannot find property minutes for .
+Error: Binder exception: Create node  expects primary key url as input.
+```
+
+A **Binder exception** means the query parsed, but a name or a property doesn't fit the schema: the statement is rejected before it runs. A **Runtime exception** happens while it runs, here when the primary key index finds the value. The empty names in the last two messages ("for .", "node  expects") are the variable the node doesn't have: the messages are built with it ([`bind_property_expression.cpp`](https://github.com/LadybugDB/ladybug/blob/v0.20.4/src/binder/bind_expression/bind_property_expression.cpp#L169), [`bind_updating_clause.cpp`](https://github.com/LadybugDB/ladybug/blob/v0.20.4/src/binder/bind/bind_updating_clause.cpp#L174)). With `CREATE (l:Lesson {number: 4})`, the message says `Create node l expects…`.
+
+## `MERGE`: create or update
+
+[`MERGE`](https://docs.ladybugdb.com/cypher/data-manipulation-clauses/merge/) matches a pattern, or creates it if nothing matches. `ON CREATE SET` and `ON MATCH SET` say what to do in each case, like the `WHEN NOT MATCHED` and `WHEN MATCHED` branches of SQL Server's `MERGE` ([lines 40-41](https://github.com/spareilleux/learn/blob/711d62a/code/ladybugdb/cypher/01-first-graph.cypher#L40-L41)):
+
+```cypher
+MERGE (l:Lesson {url: '/duckdb/04-files/'}) ON CREATE SET l.number = 4, l.title = 'Files' RETURN l.*;
+MERGE (l:Lesson {url: '/duckdb/04-files/'}) ON MATCH SET l.title = 'Files: CSV and Parquet' RETURN l.*;
+```
+
+```text
+┌───────────────────┬──────────┬─────────┐
+│ l.url             │ l.number │ l.title │
+│ STRING            │ INT64    │ STRING  │
+├───────────────────┼──────────┼─────────┤
+│ /duckdb/04-files/ │ 4        │ Files   │
+└───────────────────┴──────────┴─────────┘
+┌───────────────────┬──────────┬────────────────────────┐
+│ l.url             │ l.number │ l.title                │
+│ STRING            │ INT64    │ STRING                 │
+├───────────────────┼──────────┼────────────────────────┤
+│ /duckdb/04-files/ │ 4        │ Files: CSV and Parquet │
+└───────────────────┴──────────┴────────────────────────┘
+```
+
+`l.*` expands to every property of the node.
+
+`MERGE` matches the *whole* pattern, not only the key. Two ways to get it wrong ([lines 44-45](https://github.com/spareilleux/learn/blob/711d62a/code/ladybugdb/cypher/01-first-graph.cypher#L44-L45)):
+
+```cypher
+MERGE (l:Lesson {number: 4}) RETURN l.*;
+MERGE (l:Lesson {url: '/duckdb/04-files/', number: 5}) RETURN l.*;
+```
+
+```text
+Error: Binder exception: Create node l expects primary key url as input.
+Error: Runtime exception: Found duplicated primary key value /duckdb/04-files/, which violates the uniqueness constraint of the primary key column.
+```
+
+The first pattern has no key, so `MERGE` couldn't create the node if nothing matched: the binder rejects it, even though lesson 4 exists. The second pattern has the key, but lesson 4 has `number` 4, not 5: nothing matches, `MERGE` tries to create a second `/duckdb/04-files/`, and the primary key refuses. Put the key alone in the pattern, and the other properties in `ON CREATE SET` or `ON MATCH SET`.
+
+## What the database contains
+
+The `SHOW …` commands of Neo4j are functions in LadybugDB, called with [`CALL`](https://docs.ladybugdb.com/cypher/query-clauses/call/) ([lines 48-51](https://github.com/spareilleux/learn/blob/711d62a/code/ladybugdb/cypher/01-first-graph.cypher#L48-L51), without the `:schema` of line 50):
+
+```cypher
+CALL show_tables() RETURN name, type ORDER BY name;
+CALL table_info('Lesson') RETURN *;
+MATCH (n) RETURN label(n) AS table_name, count(*) AS nodes ORDER BY table_name;
+```
+
+```text
+┌────────────┬────────┐
+│ name       │ type   │
+│ STRING     │ STRING │
+├────────────┼────────┤
+│ Course     │ NODE   │
+│ HAS_LESSON │ REL    │
+│ LINKS_TO   │ REL    │
+│ Lesson     │ NODE   │
+└────────────┴────────┘
+┌─────────────┬────────┬────────┬────────────────────┬─────────────┐
+│ property id │ name   │ type   │ default expression │ primary key │
+│ INT32       │ STRING │ STRING │ STRING             │ BOOL        │
+├─────────────┼────────┼────────┼────────────────────┼─────────────┤
+│ 0           │ url    │ STRING │ NULL               │ True        │
+│ 1           │ number │ INT64  │ NULL               │ False       │
+│ 2           │ title  │ STRING │ NULL               │ False       │
+└─────────────┴────────┴────────┴────────────────────┴─────────────┘
+┌────────────┬───────┐
+│ table_name │ nodes │
+│ STRING     │ INT64 │
+├────────────┼───────┤
+│ Course     │ 1     │
+│ Lesson     │ 4     │
+└────────────┴───────┘
+```
+
+`(n)` without a table matches the nodes of every node table. [`label(n)`](https://docs.ladybugdb.com/cypher/expressions/node-rel-functions/) returns the table of each one, and `count(*)` groups by the other `RETURN` columns: Cypher has no `GROUP BY`.
+
+The CLI command `:schema`, on [line 50](https://github.com/spareilleux/learn/blob/711d62a/code/ladybugdb/cypher/01-first-graph.cypher#L50) of the same script, prints the schema as the statements that would recreate it:
+
+```text
+CREATE NODE TABLE `Course` (`slug` STRING,`title` STRING, PRIMARY KEY(`slug`));
+CREATE NODE TABLE `Lesson` (`url` STRING,`number` INT64,`title` STRING, PRIMARY KEY(`url`));
+CREATE REL TABLE `HAS_LESSON` (FROM `Course` TO `Lesson`, MANY_MANY);
+CREATE REL TABLE `LINKS_TO` (FROM `Lesson` TO `Lesson`, MANY_MANY);
+```
+
+`MANY_MANY` is the default multiplicity of a relationship table: a course can have many lessons, and a lesson could belong to many courses. `ONE_MANY`, `MANY_ONE` and `ONE_ONE` restrict it ([`CREATE REL TABLE`](https://docs.ladybugdb.com/cypher/data-definition/create-table/)).
+
+## Deleting
+
+A node with relationships can't be deleted alone ([`DELETE`](https://docs.ladybugdb.com/cypher/data-manipulation-clauses/delete/), [lines 54-57](https://github.com/spareilleux/learn/blob/711d62a/code/ladybugdb/cypher/01-first-graph.cypher#L54-L57)):
+
+```cypher
+MATCH (l:Lesson {number: 3}) DELETE l;
+MATCH (l:Lesson {number: 3}) DETACH DELETE l;
+MATCH (l:Lesson) RETURN count(*) AS lessons;
+MATCH ()-[r]->() RETURN label(r) AS table_name, count(*) AS relationships ORDER BY table_name;
+```
+
+```text
+Error: Runtime exception: Node(nodeOffset: 2) has connected edges in table HAS_LESSON in the bwd direction, which cannot be deleted. Please delete the edges first or try DETACH DELETE.
+┌─────────┐
+│ lessons │
+│ INT64   │
+├─────────┤
+│ 3       │
+└─────────┘
+┌────────────┬───────────────┐
+│ table_name │ relationships │
+│ STRING     │ INT64         │
+├────────────┼───────────────┤
+│ HAS_LESSON │ 2             │
+│ LINKS_TO   │ 1             │
+└────────────┴───────────────┘
+```
+
+Like a foreign key without `ON DELETE CASCADE`: the course still points to lesson 3. "bwd direction" means the relationship arrives at the node (backward); `nodeOffset: 2` is the node's position in its table, the third lesson created. `DETACH DELETE` removes the node and its relationships, so `HAS_LESSON` goes from 3 to 2.
+
+Lesson 3 was chosen on purpose. Lesson 1 has two kinds of relationships, `HAS_LESSON` from the course and `LINKS_TO` from lesson 2, and the error names only the first table LadybugDB checks: `HAS_LESSON` on Windows and macOS, `LINKS_TO` on Linux, in the CI of this course. The [code](https://github.com/LadybugDB/ladybug/blob/v0.20.4/src/processor/operator/persistent/delete_executor.cpp#L33-L42) stops at the first relationship table that has one.
+
+## Scripts and CSV output: how this course is tested
+
+The CLI also reads queries from standard input. [`check.sh`](https://github.com/spareilleux/learn/blob/main/code/ladybugdb/check.sh) runs each script of `cypher/` with three options, `--no_progress_bar`, `--no_stats` and `--mode csv`, and compares the output with the file of the same name in `cypher/expected/`:
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+```powershell
+Get-Content cypher/01-first-graph.cypher | lbug --no_progress_bar --no_stats --mode csv
+```
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```bash
+lbug --no_progress_bar --no_stats --mode csv < cypher/01-first-graph.cypher
+```
+
+</TabItem>
+<TabItem label="macOS">
+
+```bash
+lbug --no_progress_bar --no_stats --mode csv < cypher/01-first-graph.cypher
+```
+
+</TabItem>
+</Tabs>
+
+```text
+result
+Table Course has been created.
+…
+c.title,l.number,l.title
+DuckDB,1,First queries
+DuckDB,2,Friendly SQL
+DuckDB,3,Nested data
+…
+Error: Runtime exception: Found duplicated primary key value /duckdb/01-first-queries/, which violates the uniqueness constraint of the primary key column.
+```
+
+Three things to know about this mode:
+
+- **Errors go to standard output, and the exit code stays 0.** The CLI [prints the message](https://github.com/LadybugDB/ladybug/blob/v0.20.4/tools/shell/embedded_shell.cpp#L608-L611) and moves on to the next statement. A script can't rely on `$?` or `$LASTEXITCODE` to detect a failed query; the compared output can, which is why the expected files contain the errors.
+- **Without `--no_progress_bar`, the output contains terminal escape codes**, the progress bar the CLI [turns on unless you pass the flag](https://github.com/LadybugDB/ladybug/blob/v0.20.4/tools/shell/shell_runner.cpp#L248), even when the output isn't a terminal.
+- **A statement that returns nothing prints an empty line** in CSV mode, and nothing in box mode.
+
+On a GitHub runner, for each of the three operating systems: `ok   01-first-graph`.
+
+## Key takeaways
+
+- LadybugDB is a library that runs in your process; the `lbug` CLI is one executable and needs no server.
+- Tables come first: node tables with a primary key, relationship tables `FROM` one node table `TO` another.
+- `CREATE` creates a pattern, `MATCH` finds one, `MERGE` does either; a relationship is created between nodes that a `MATCH` found.
+- A pattern replaces the joins; `NOT EXISTS { MATCH … }` finds what isn't connected.
+- Errors name their kind (`Binder`, `Runtime`), but the CLI's exit code is 0 even when a query fails.
+
+## Exercises
+
+The solutions are in [`cypher/01-exercises.cypher`](https://github.com/spareilleux/learn/blob/main/code/ladybugdb/cypher/01-exercises.cypher), checked by CI like the lesson. They start from the same schema, with lessons 1 and 2 and their `HAS_LESSON` relationships.
+
+1. Write one statement that adds lesson 5, `/duckdb/05-csharp/` "DuckDB from C#", *and* connects it to the course. Run it twice: how many lessons does the course have?
+
+<details>
+<summary>Solution</summary>
+
+From [`01-exercises.cypher`, lines 16-19](https://github.com/spareilleux/learn/blob/711d62a/code/ladybugdb/cypher/01-exercises.cypher#L16-L19):
+
+```cypher
+MATCH (c:Course {slug: 'duckdb'})
+MERGE (l:Lesson {url: '/duckdb/05-csharp/'}) ON CREATE SET l.number = 5, l.title = 'DuckDB from C#'
+MERGE (c)-[:HAS_LESSON]->(l);
+MATCH (c:Course)-[:HAS_LESSON]->(l:Lesson) RETURN c.slug, count(*) AS lessons;
+```
+
+```text
+┌────────┬─────────┐
+│ c.slug │ lessons │
+│ STRING │ INT64   │
+├────────┼─────────┤
+│ duckdb │ 3       │
+└────────┴─────────┘
+```
+
+Three, even after two runs. The first `MERGE` finds the lesson by its key the second time; the second `MERGE` finds the relationship between `c` and `l` and creates nothing. A statement can chain clauses: `MATCH`, then `MERGE`, then `MERGE`, each one working on the rows of the previous one.
+
+</details>
+
+2. What happens if you create a `LINKS_TO` relationship from lesson 2 to a lesson 9 that doesn't exist?
+
+<details>
+<summary>Solution</summary>
+
+From [`01-exercises.cypher`, lines 22-23](https://github.com/spareilleux/learn/blob/711d62a/code/ladybugdb/cypher/01-exercises.cypher#L22-L23):
+
+```cypher
+MATCH (a:Lesson {number: 2}), (b:Lesson {number: 9}) CREATE (a)-[:LINKS_TO]->(b);
+MATCH ()-[r:LINKS_TO]->() RETURN count(*) AS links;
+```
+
+```text
+┌───────┐
+│ links │
+│ INT64 │
+├───────┤
+│ 0     │
+└───────┘
+```
+
+Nothing, and no error. `MATCH` finds no lesson 9, so the cross join has no row, and `CREATE` runs zero times. It's the `INSERT … SELECT` of SQL whose `SELECT` returns nothing. Count what you created when it matters, or use `MERGE` on the nodes if they must exist.
+
+</details>
+
+3. After exercise 1, run `CREATE (c)-[:HAS_LESSON]->(l)` between the course and lesson 5. Does the primary key of `Lesson` prevent a second relationship?
+
+<details>
+<summary>Solution</summary>
+
+From [`01-exercises.cypher`, lines 26-27](https://github.com/spareilleux/learn/blob/711d62a/code/ladybugdb/cypher/01-exercises.cypher#L26-L27):
+
+```cypher
+MATCH (c:Course {slug: 'duckdb'}), (l:Lesson {number: 5}) CREATE (c)-[:HAS_LESSON]->(l);
+MATCH (c:Course)-[:HAS_LESSON]->(l:Lesson) RETURN l.number, count(*) AS links ORDER BY l.number;
+```
+
+```text
+┌──────────┬───────┐
+│ l.number │ links │
+│ INT64    │ INT64 │
+├──────────┼───────┤
+│ 1        │ 1     │
+│ 2        │ 1     │
+│ 5        │ 2     │
+└──────────┴───────┘
+```
+
+No. Primary keys are on nodes; relationships have none, and two identical relationships between the same nodes are allowed. It's a junction table without a unique constraint on its two columns. `MERGE` is the way to avoid duplicates.
+
+</details>
+
+## Sources
+
+- [LadybugDB CLI](https://docs.ladybugdb.com/client-apis/cli/) and [installation](https://docs.ladybugdb.com/installation/)
+- [`CREATE NODE TABLE` and `CREATE REL TABLE`](https://docs.ladybugdb.com/cypher/data-definition/create-table/)
+- [`CREATE`](https://docs.ladybugdb.com/cypher/data-manipulation-clauses/create/), [`MERGE`](https://docs.ladybugdb.com/cypher/data-manipulation-clauses/merge/) and [`DELETE`](https://docs.ladybugdb.com/cypher/data-manipulation-clauses/delete/)
+- [`MATCH`](https://docs.ladybugdb.com/cypher/query-clauses/match/), [subqueries](https://docs.ladybugdb.com/cypher/subquery/) and [`CALL`](https://docs.ladybugdb.com/cypher/query-clauses/call/)
+- [Differences between LadybugDB and Neo4j](https://docs.ladybugdb.com/cypher/difference/)
+- LadybugDB 0.20.4 source: [error messages](https://github.com/LadybugDB/ladybug/blob/v0.20.4/src/common/exception/message.cpp), [delete checks](https://github.com/LadybugDB/ladybug/blob/v0.20.4/src/processor/operator/persistent/delete_executor.cpp), [CLI](https://github.com/LadybugDB/ladybug/tree/v0.20.4/tools/shell)
