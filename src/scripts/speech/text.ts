@@ -62,7 +62,7 @@ export function pageSections(): HTMLElement[] {
 }
 
 // Sentences, long ones cut at commas then spaces, short ones merged up to MAX_SENTENCE characters
-function sentences(text: string): [number, number][] {
+export function sentences(text: string): [number, number][] {
 	const pieces: [number, number][] = [];
 	let start = 0;
 	const ends = [...text.matchAll(/(?<=[.!?;:…])\s+/g)].map((m) => [m.index!, m.index! + m[0].length]);
