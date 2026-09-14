@@ -1,0 +1,97 @@
+
+== 1. Open a database
+LadybugDB 0.20.4, storage version 47
+
+== 2. Create and load
+Table Project has been created.
+Table Package has been created.
+Table REFERENCES has been created.
+Table USES has been created.
+111 tuples have been copied to the Project table.
+isSuccess: false, Copy exception: Unable to find primary key value Experiments/React/reactapp1.client/reactapp1.client.esproj.
+265 tuples have been copied to the REFERENCES table.
+1 warnings encountered during copy. Use 'CALL show_warnings() RETURN *' to view the actual warnings. Query ID: 6
+136 tuples have been copied to the Package table.
+478 tuples have been copied to the USES table.
+
+== 3. Read rows
+core.name STRING, referenced_by INT64: 3 rows
+GA.Domain.Core       57 (java.lang.Long)
+GA.Domain.Services   48 (java.lang.Long)
+GA.Core              32 (java.lang.Long)
+kept rows: [GA.Core, GA.Core, GA.Core]
+after resetIterator: GA.Domain.Core
+
+== 4. Parameters
+GaApi depends on 20 projects
+GaCli depends on 7 projects
+GaMcpServer depends on 13 projects
+GA.Domain.Core depends on 2 projects
+Integer 2: 42 projects
+String 2: 42 projects
+BigDecimal 2.5: 42 projects
+Double 2.5: 42 projects
+{nom=5} after {n=2.5}: 42 projects
+IllegalArgumentException: Parameter 'n' is null; use Value.createNull() to bind SQL NULL.
+{nom=5}, new statement: Parameter n not found.
+prepare COPY FROM $file: false, Binder exception: Cannot find parameter file. This should not happen.
+IllegalArgumentException: Parameter 't' has unsupported type java.time.LocalDateTime. Accepted types: Value, Boolean, Byte, Short, Integer, Long, BigInteger, Float, Double, BigDecimal, String, InternalID, UUID, LocalDate, Instant, Duration
+
+== 5. Nodes, relationships and paths
+Project (InternalID): {path=Apps/ga-server/GaApi/GaApi.csproj, name=GaApi, language=C#, sdk=Microsoft.NET.Sdk.Web, frameworks=net10.0, in_solution=true}
+first relationship: REFERENCES, starts at GaApi: true
+3 relationships: GaApi -> GA.Business.AI -> GA.Data.MongoDB -> GA.Business.Assets
+3 relationships: GaApi -> GA.Business.ML -> GA.Data.MongoDB -> GA.Business.Assets
+
+== 6. Lists, structs and maps
+Microsoft.Extensions.Hosting: 10.0.0, 10.0.5, 9.0.0, 9.0.10, 9.0.4 (12 projects)
+MongoDB.Driver: 2.29.0, 2.30.0, 3.2.0, 3.2.1, 3.5.0 (14 projects)
+Microsoft.Extensions.DependencyInjection: 10.0.0, 10.0.2, 9.0.0, 9.0.10 (12 projects)
+RuntimeException: Type of value is not supported in value_get_value
+RuntimeException: Type of value is not supported in value_get_value
+LbugMap: projects = 12
+DISTINCT first: MongoDB.Driver, 5 versions, 0 projects
+
+== 7. Rows as records
+Project[name=FloorManager, path=Apps/FloorManager/FloorManager.csproj, language=C#]
+Project[name=GaChatbot, path=Apps/GaChatbot/GaChatbot.csproj, language=C#]
+Project[name=InteractiveTutorial, path=Apps/InteractiveTutorial/InteractiveTutorial.csproj, language=C#]
+38 projects are not in AllProjects.slnx
+
+== 8. Dates and times
+instant   TIMESTAMP    Instant 2026-09-14T13:30:00Z
+literal   TIMESTAMP    Instant 2026-09-14T09:30:00Z
+tz        TIMESTAMP_TZ Instant 2026-09-14T13:30:00Z
+day       DATE         LocalDate 2026-09-14
+duration  INTERVAL     Duration PT1H30M
+month     INTERVAL     Duration PT768H
+
+== 9. Errors, several statements, timeouts
+Binder exception: Table Projet does not exist.
+RuntimeException: Binder exception: Table Projet does not exist.
+Binder exception: Cannot find property nam for p.
+RuntimeException: Binder exception: Cannot find property nam for p.
+Runtime exception: Found duplicated primary key value Common/GA.Core/GA.Core.csproj, which violates the uniqueness constraint of the primary key column.
+RuntimeException: Runtime exception: Found duplicated primary key value Common/GA.Core/GA.Core.csproj, which violates the uniqueness constraint of the primary key column.
+projects = 111
+packages = 136
+timeout of 1 ms: Interrupted.
+no timeout: 7793 walks
+
+== Exercise 1. Rows that outlive the iterator
+[[AllProjects.AppHost, C#], [AllProjects.ServiceDefaults, C#], [FloorManager, C#]]
+
+== Exercise 2. Parameters checked
+parameters: [name]
+GA.Core: 85 dependents
+IllegalArgumentException: expected parameters [name], got [nom]
+IllegalArgumentException: expected parameters [name], got []
+
+== Exercise 3. Conflicts in every package
+Microsoft.Extensions.DependencyInjection: 5 projects
+Microsoft.Extensions.Configuration: 4 projects
+MongoDB.Driver: 4 projects
+Microsoft.Extensions.Logging.Abstractions: 3 projects
+Microsoft.Extensions.AI: 1 projects
+Microsoft.ML.Tokenizers: 1 projects
+NUnit3TestAdapter: 1 projects
