@@ -1,0 +1,36 @@
+== dates
+in Paris: 2026-09-13T14:00:00.0000000+02:00
+a month after January 31: 2026-02-28
+ArgumentOutOfRangeException: Year, Month, and Day parameters describe an un-representable DateTime.
+AddDays(1): 2026-03-29T12:00:00.0000000+01:00, in Paris: 2026-03-29T13:00:00.0000000+02:00
+ArgumentException: The supplied DateTime represents an invalid time.  For example, when the clock is adjusted forward, any time in the period that is skipped is invalid. (Parameter 'dateTime')
+02:30 on October 25: offset 01:00:00
+DateTime.Parse("...Z").Kind: Local
+YYYY: YYYY-12-31
+== decimals
+(decimal)0.1: 0.1
+10.50m + 0.5m = 11.00
+1.10m * 3 = 3.30
+2.0m == 2.00m: True, Equals: True
+HashSet count: 1
+1m / 3m: 0.3333333333333333333333333333
+Math.Round(2.345m, 2): 2.34, AwayFromZero: 2.35
+Math.Round(2.5): 2, Math.Round(-2.5): -2
+OverflowException: Value was either too large or too small for a Decimal.
+== files and text
+ReadAllLines: [pen, pad, ink]
+lines starting with p: 2
+FileNotFoundException: missing.txt
+CreateDirectory: no exception
+Delete: IOException
+ReadAllText: [U+0041, U+FFFD, U+0042]
+France: 1234,50
+Invariant: 1234.50
+Turkish lower case has a dotless i: True
+== http
+default timeout: 00:01:40
+GET /old: 200 moved here from /new
+GET /missing: 404
+GetStringAsync: HttpRequestException: Response status code does not indicate success: 404 (Not Found).
+TaskCanceledException (TimeoutException): The request was canceled due to the configured HttpClient.Timeout of 0.1 seconds elapsing.
+GET /old without redirects: 302, Location: /new

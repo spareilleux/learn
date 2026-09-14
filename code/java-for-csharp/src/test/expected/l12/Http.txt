@@ -1,0 +1,6 @@
+follows redirects: NEVER, connect timeout: Optional.empty
+GET /old: 302, Location: /new
+client version: HTTP_2, response version: HTTP_1_1
+GET /missing: 404
+HttpTimeoutException: request timed out
+GET /old, following redirects: 200 moved here from /new
