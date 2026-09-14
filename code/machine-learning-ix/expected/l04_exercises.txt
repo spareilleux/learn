@@ -1,0 +1,24 @@
+== exercise 1
+raw: silhouette 0.5814, clusters (rows) against ["ubuntu", "windows", "macos"]:
+[[118, 0, 6],
+ [1, 34, 0],
+ [2, 0, 25]]
+standardized: silhouette 0.4997, clusters (rows) against ["ubuntu", "windows", "macos"]:
+[[120, 0, 9],
+ [1, 0, 22],
+ [0, 34, 0]]
+
+== exercise 2
+ 3 Deploy to GitHub Pages (ubuntu)
+ 3 GHA 02: build and test (macos)
+ 1 GHA 02: build and test (ubuntu)
+ 1 GHA 02: build and test (windows)
+ 1 GHA 05: caches and artifacts (ubuntu)
+ 2 GHA 05: caches and artifacts (windows)
+ 2 GHA 10: custom actions (macos)
+ 2 Java course examples (macos)
+ 3 Java course examples (windows)
+ 9 Rust course examples (macos)
+ 2 Rust course examples (windows)
+mean queue_s: noise 6.97, clustered 3.69
+exit 0

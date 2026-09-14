@@ -1,0 +1,10 @@
+== exercise 1
+all 65 builds: seconds = 0.053333 * pages + 8.0049
+without 95a3830 (289 pages, 48 s): slope changes by 0.007328
+without b0803c9 (283 pages, 29 s): slope changes by 0.001631
+without b96934a (283 pages, 18 s): slope changes by 0.001408
+
+== exercise 2
+learning rate 0.01: SGD 866 iterations (loss 16.315161), Momentum(0.9) 270 iterations (loss 16.315161)
+learning rate 0.1: SGD 80 iterations (loss 16.315161), Momentum(0.9) 284 iterations (loss 16.315161)
+exit 0
