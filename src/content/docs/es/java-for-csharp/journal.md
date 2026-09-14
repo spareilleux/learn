@@ -15,12 +15,31 @@ sidebar:
 - [x] Lección 6 — Lambdas e interfaces funcionales
 - [x] Lección 7 — Colecciones y Streams
 - [x] Lección 8 — Pattern matching
-- [ ] Lección 9 — Concurrencia e hilos virtuales
+- [x] Lección 9 — Concurrencia e hilos virtuales
 - [ ] Lección 10 — Maven y Gradle a fondo
 - [ ] Lección 11 — Pruebas
 - [ ] Lección 12 — La biblioteca estándar del día a día
 - [ ] Lección 13 — La JVM en tiempo de ejecución
 - [ ] Lección 14 — Anotaciones, reflexión y módulos
+
+## 2026-09-13 — Lección 9
+
+- El proyecto tiene ahora 113 pruebas: 63 fragmentos rechazados, 26 salidas de ejemplos y 24 soluciones de ejercicios. Los ejemplos de la lección 9 arrancan más de 14.000 hilos virtuales (10.000 tareas que duermen y 4.600 tareas cortas), y el `ExamplesTest` completo sigue ejecutándose en menos de 3 segundos en mi máquina.
+- Los ejemplos concurrentes necesitan una salida determinista para poder probarse. Cada uno imprime solo resultados que no dependen de la planificación: totales, listas recolectadas y el orden que imponen los latches.
+
+**Sorpresas viniendo de C#:**
+
+- `CompletableFuture.cancel(true)` no interrumpe la tarea: el Javadoc dice que el argumento «has no effect in this implementation». El future indica que está cancelado mientras su tarea sigue ejecutándose.
+- Un `value++` con carrera desde 1.000 tareas de 1.000 incrementos imprimió 76.422, luego 855.000 y luego 803.000. La primera ejecución perdió más del 90 % de las actualizaciones, probablemente antes de que el JIT compilara el bucle: *por verificar*.
+- Sincronizar sobre un `Integer` compila. La única señal de problema es una advertencia de lint, en una categoría que Java 25 llama `[identity]`.
+- `ScopedValue` no llega a las tareas de un executor normal; solo lo heredan los hilos bifurcados por `StructuredTaskScope`, que sigue en preview. `AsyncLocal` fluye a todas partes.
+
+**Lo que hice mal al principio:**
+
+- El primer ejemplo `Futures` cancelaba una tarea de cinco segundos con `CompletableFuture.cancel(true)`, y el ejemplo tardaba cinco segundos: el `close()` del executor esperaba a la tarea que nunca se interrumpió. Eso pasó a formar parte de la lección, con una tarea de un segundo.
+- La línea «interrupted» del worker y la línea «cancelled» de `main` las imprimían dos hilos distintos, así que su orden era una carrera. Un segundo latch lo arregla.
+- En el lado C#, primero leí un `ThreadLocal` dentro de `Task.Run` después de un `await`. La continuación se ejecuta en un hilo del pool, y `Task.Run` podía reutilizar ese mismo hilo, así que la salida no estaba garantizada. La comparación usa ahora un `Thread` dedicado.
+- Primero comprobé qué hilo ejecutaba un stream paralelo de un solo elemento. Eso dependía de un detalle de implementación; el ejemplo registra ahora todos los hilos que participan en uno grande.
 
 ## 2026-09-13 — Lecciones 5 a 8
 

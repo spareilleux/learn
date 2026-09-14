@@ -15,12 +15,31 @@ sidebar:
 - [x] Leçon 6 — Lambdas et interfaces fonctionnelles
 - [x] Leçon 7 — Collections et Streams
 - [x] Leçon 8 — Pattern matching
-- [ ] Leçon 9 — Concurrence et threads virtuels
+- [x] Leçon 9 — Concurrence et threads virtuels
 - [ ] Leçon 10 — Maven et Gradle en profondeur
 - [ ] Leçon 11 — Tests
 - [ ] Leçon 12 — La bibliothèque standard du quotidien
 - [ ] Leçon 13 — La JVM à l'exécution
 - [ ] Leçon 14 — Annotations, réflexion et modules
+
+## 2026-09-13 — Leçon 9
+
+- Le projet compte désormais 113 tests : 63 extraits rejetés, 26 sorties d'exemples et 24 solutions d'exercices. Les exemples de la leçon 9 démarrent plus de 14 000 threads virtuels (10 000 tâches qui dorment et 4 600 tâches courtes), et l'ensemble d'`ExamplesTest` s'exécute toujours en moins de 3 secondes sur ma machine.
+- Pour être testés, les exemples concurrents ont besoin d'une sortie déterministe. Chacun n'affiche que des résultats qui ne dépendent pas de l'ordonnancement : des totaux, des listes collectées, et l'ordre qu'imposent les latches.
+
+**Surprises en venant de C# :**
+
+- `CompletableFuture.cancel(true)` n'interrompt pas la tâche : la Javadoc indique que l'argument « has no effect in this implementation ». Le future se déclare annulé alors que sa tâche continue de s'exécuter.
+- Un `value++` non protégé, depuis 1 000 tâches de 1 000 incréments, a affiché 76 422, puis 855 000, puis 803 000. La première exécution a perdu plus de 90 % des mises à jour, sans doute avant que le JIT ne compile la boucle : *à vérifier*.
+- Synchroniser sur un `Integer` compile. Le seul signe de problème est un avertissement de lint, dans une catégorie que Java 25 nomme `[identity]`.
+- `ScopedValue` n'atteint pas les tâches d'un executor ordinaire ; seuls les threads créés (forked) par `StructuredTaskScope`, encore en préversion, en héritent. `AsyncLocal` se propage partout.
+
+**Ce que j'ai d'abord mal fait :**
+
+- Le premier exemple `Futures` annulait une tâche de cinq secondes avec `CompletableFuture.cancel(true)`, et l'exemple prenait cinq secondes : le `close()` de l'executor attendait la tâche qui n'avait jamais été interrompue. C'est devenu une partie de la leçon, avec une tâche d'une seconde.
+- La ligne « interrupted » du worker et la ligne « cancelled » de `main` étaient affichées par deux threads : leur ordre relevait donc d'une situation de compétition (race). Un second latch règle le problème.
+- Côté C#, je lisais d'abord un `ThreadLocal` dans `Task.Run` après un `await`. La continuation s'exécute sur un thread du pool, et `Task.Run` pouvait réutiliser ce même thread : la sortie n'était donc pas garantie. La comparaison utilise désormais un `Thread` dédié.
+- J'ai d'abord vérifié quel thread exécutait un stream parallèle d'un seul élément. Cela reposait sur un détail d'implémentation ; l'exemple enregistre désormais chaque thread qui participe à un stream volumineux.
 
 ## 2026-09-13 — Leçons 5 à 8
 

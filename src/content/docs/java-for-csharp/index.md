@@ -43,8 +43,8 @@ You write C# comfortably: classes, interfaces, generics, LINQ, `async`/`await`, 
 | 6 | [Lambdas and functional interfaces](06-lambdas-and-functional-interfaces/) | delegates, `Func`/`Action`, events |
 | 7 | [Collections and Streams](07-collections-and-streams/) | `List<T>`, `Dictionary`, LINQ |
 | 8 | [Pattern matching](08-pattern-matching/) | `switch` expressions, `is` patterns, records |
-| 9 | Concurrency and virtual threads *(coming next)* | `Task`, `async`/`await`, `lock`, `Parallel` |
-| 10 | Maven and Gradle in depth | NuGet, Central Package Management, solutions |
+| 9 | [Concurrency and virtual threads](09-concurrency-and-virtual-threads/) | `Task`, `async`/`await`, `lock`, `Parallel` |
+| 10 | Maven and Gradle in depth *(coming next)* | NuGet, Central Package Management, solutions |
 | 11 | Testing | xUnit, Moq, FluentAssertions |
 | 12 | The standard library you reach for | `DateTime`, `decimal`, `HttpClient`, `System.IO` |
 | 13 | The JVM at run time | the CLR, GC settings, `dotnet-counters`, Native AOT |

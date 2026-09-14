@@ -15,12 +15,31 @@ sidebar:
 - [x] Lesson 6 — Lambdas and functional interfaces
 - [x] Lesson 7 — Collections and Streams
 - [x] Lesson 8 — Pattern matching
-- [ ] Lesson 9 — Concurrency and virtual threads
+- [x] Lesson 9 — Concurrency and virtual threads
 - [ ] Lesson 10 — Maven and Gradle in depth
 - [ ] Lesson 11 — Testing
 - [ ] Lesson 12 — The standard library you reach for
 - [ ] Lesson 13 — The JVM at run time
 - [ ] Lesson 14 — Annotations, reflection and modules
+
+## 2026-09-13 — Lesson 9
+
+- The project now has 113 tests: 63 rejected snippets, 26 example outputs and 24 exercise solutions. Lesson 9's examples start more than 14,000 virtual threads (10,000 sleeping tasks and 4,600 short ones), and the whole `ExamplesTest` still runs in under 3 seconds on my machine.
+- Concurrent examples need deterministic output to be tested. Each one prints only results that don't depend on scheduling: totals, collected lists, and the order that latches enforce.
+
+**Surprises coming from C#:**
+
+- `CompletableFuture.cancel(true)` doesn't interrupt the task: the Javadoc says the argument "has no effect in this implementation". The future reports cancelled while its task keeps running.
+- A racy `value++` from 1,000 tasks of 1,000 increments printed 76,422, then 855,000, then 803,000. The first run lost more than 90% of the updates, presumably before the JIT compiled the loop: *to verify*.
+- Synchronizing on an `Integer` compiles. The only sign of trouble is a lint warning, in a category that Java 25 calls `[identity]`.
+- `ScopedValue` doesn't reach tasks in an ordinary executor; only threads forked by `StructuredTaskScope`, still a preview, inherit it. `AsyncLocal` flows everywhere.
+
+**Things I got wrong first:**
+
+- The first `Futures` example cancelled a five-second task with `CompletableFuture.cancel(true)`, and the example took five seconds: the executor's `close()` was waiting for the task that was never interrupted. That became part of the lesson, with a one-second task.
+- The worker's "interrupted" line and `main`'s "cancelled" line were printed by two threads, so their order was a race. A second latch fixes it.
+- On the C# side, I first read a `ThreadLocal` inside `Task.Run` after an `await`. The continuation runs on a pool thread, and `Task.Run` could reuse that same thread, so the output wasn't guaranteed. The comparison now uses a dedicated `Thread`.
+- I first checked which thread ran a single-element parallel stream. That relied on an implementation detail; the example now records every thread that takes part in a large one.
 
 ## 2026-09-13 — Lessons 5 to 8
 
