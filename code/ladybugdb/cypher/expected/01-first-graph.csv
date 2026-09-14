@@ -38,9 +38,10 @@ property id,name,type,default expression,primary key
 table_name,nodes
 Course,1
 Lesson,4
-Error: Runtime exception: Node(nodeOffset: 0) has connected edges in table HAS_LESSON in the bwd direction, which cannot be deleted. Please delete the edges first or try DETACH DELETE.
+Error: Runtime exception: Node(nodeOffset: 2) has connected edges in table HAS_LESSON in the bwd direction, which cannot be deleted. Please delete the edges first or try DETACH DELETE.
 
 lessons
 3
 table_name,relationships
 HAS_LESSON,2
+LINKS_TO,1

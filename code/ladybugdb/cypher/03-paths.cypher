@@ -30,11 +30,15 @@ MATCH (a:Page {url: '/github-actions/'})-[e:LINKS_TO*1..4]->(b:Page {url: '/gith
 RETURN length(e) AS links, count(*) AS walks
 ORDER BY links;
 
-// Walks may repeat pages; TRAIL forbids repeating a link, ACYCLIC forbids repeating a page
+// Walks may repeat links and pages; TRAIL forbids repeating a link
 MATCH (a:Page {url: '/github-actions/'})-[e:LINKS_TO* TRAIL 1..4]->(b:Page {url: '/github-actions/07-security/'})
 RETURN length(e) AS links, count(*) AS trails
 ORDER BY links;
-MATCH (a:Page {url: '/github-actions/'})-[e:LINKS_TO* ACYCLIC 1..4]->(b:Page {url: '/github-actions/07-security/'})
+
+// is_acyclic(p) keeps the paths that never repeat a page, both ends included
+// (ACYCLIC in the pattern returns different, wrong counts on Windows and on Linux/macOS in 0.20.4: see the journal)
+MATCH p = (a:Page {url: '/github-actions/'})-[e:LINKS_TO*1..4]->(b:Page {url: '/github-actions/07-security/'})
+WHERE is_acyclic(p)
 RETURN length(e) AS links, count(*) AS acyclic_paths
 ORDER BY links;
 

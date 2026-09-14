@@ -46,7 +46,7 @@ CALL table_info('Lesson') RETURN *;
 MATCH (n) RETURN label(n) AS table_name, count(*) AS nodes ORDER BY table_name;
 
 // Deleting: a node with relationships needs DETACH DELETE
-MATCH (l:Lesson {number: 1}) DELETE l;
-MATCH (l:Lesson {number: 1}) DETACH DELETE l;
+MATCH (l:Lesson {number: 3}) DELETE l;
+MATCH (l:Lesson {number: 3}) DETACH DELETE l;
 MATCH (l:Lesson) RETURN count(*) AS lessons;
 MATCH ()-[r]->() RETURN label(r) AS table_name, count(*) AS relationships ORDER BY table_name;
