@@ -1,0 +1,19 @@
+# What .codex/config.toml would hold at the root of a trusted project: the MCP server of lesson 4 and the hook of lesson 3
+
+[mcp_servers.learn]
+command = "dotnet"
+args = ["code/agentic-coding/mcp/LearnMcp/bin/Release/net10.0/LearnMcp.dll", "--docs", "src/content/docs"]
+startup_timeout_sec = 30
+default_tools_approval_mode = "approve"
+
+[[hooks.PreToolUse]]
+matcher = "^Bash$"
+
+[[hooks.PreToolUse.hooks]]
+type = "command"
+# Hooks run from the session's working directory: resolve the path from the root of the Git repository
+command = "dotnet run \"$(git rev-parse --show-toplevel)/code/agentic-coding/hooks/guard-git-push.cs\""
+# On Windows, Codex runs hook commands with cmd.exe /C, which doesn't understand $(...)
+command_windows = "dotnet run code/agentic-coding/hooks/guard-git-push.cs"
+timeout = 120
+statusMessage = "Checking git push options"

@@ -1,0 +1,42 @@
+server: LearnMcp, protocol 2026-07-28
+== tools/list
+course_outline: Lists the pages of a course of the learn site, in sidebar order: one line per page, file name and title.
+  input schema: {"type":"object","properties":{"course":{"description":"Course folder under src/content/docs, for example duckdb or ladybugdb","type":"string"}},"required":["course"]}
+scale_notes: Spells the seven notes of a diatonic scale, one letter per degree: 'F major' gives Bb, not A#.
+  input schema: {"type":"object","properties":{"root":{"description":"Root note: a letter A to G, optionally followed by # or b, for example C, F# or Bb","type":"string"},"mode":{"description":"major, minor, or a mode name: ionian, dorian, phrygian, lydian, mixolydian, aeolian, locrian","type":"string","default":"major"}},"required":["root"]}
+== tools/call
+scale_notes {"root":"F"}
+  isError: False
+  ["F","G","A","Bb","C","D","E"]
+scale_notes {"root":"F#","mode":"minor"}
+  isError: False
+  ["F#","G#","A","B","C#","D","E"]
+scale_notes {"root":"Eb","mode":"dorian"}
+  isError: False
+  ["Eb","F","Gb","Ab","Bb","C","Db"]
+scale_notes {"root":"H"}
+  isError: True
+  An error occurred invoking 'scale_notes': 'H' is not a note: use a letter A to G, optionally followed by # or b.
+scale_notes {"root":"G#","mode":"locrian"}
+  isError: False
+  ["G#","A","B","C#","D","E","F#"]
+scale_notes {"root":"C","mode":"blues"}
+  isError: True
+  An error occurred invoking 'scale_notes': Unknown mode 'blues'. Use major, minor or one of: ionian, dorian, phrygian, lydian, mixolydian, aeolian, locrian.
+course_outline {"course":"duckdb"}
+  isError: False
+  index.md: DuckDB — Mission
+  01-first-queries.mdx: 1. First queries
+  02-friendly-sql.md: 2. Friendly SQL
+  03-nested-data.md: 3. Nested data
+  04-files.mdx: 4. Files
+  05-csharp.md: 5. DuckDB from C#
+  06-java.mdx: 6. DuckDB from Java
+  07-performance.md: 7. Performance
+  08-persistence.mdx: 8. Persistence, transactions and concurrency
+  journal.md: Journal
+course_outline {"course":"../.."}
+  isError: True
+  An error occurred invoking 'course_outline': '../..' is not a course folder name.
+does_not_exist {}
+  McpProtocolException: Request failed (remote): Unknown tool: 'does_not_exist'

@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "learn": {
+      "type": "stdio",
+      "command": "dotnet",
+      "args": [
+        "code/agentic-coding/mcp/LearnMcp/bin/Release/net10.0/LearnMcp.dll",
+        "--docs",
+        "src/content/docs"
+      ]
+    }
+  }
+}

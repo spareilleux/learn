@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "mcp__learn__scale_notes",
+      "mcp__learn__course_outline"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "dotnet run \"${CLAUDE_PROJECT_DIR}/code/agentic-coding/hooks/guard-git-push.cs\"",
+            "timeout": 120
+          }
+        ]
+      }
+    ]
+  }
+}

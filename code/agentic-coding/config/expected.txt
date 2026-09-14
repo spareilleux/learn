@@ -1,0 +1,18 @@
+ok   claude .mcp.json: server learn is stdio with a command
+ok   claude .mcp.json: learn: code/agentic-coding/mcp/LearnMcp/bin/Release/net10.0/LearnMcp.dll exists
+ok   claude .mcp.json: learn: src/content/docs exists
+ok   claude settings.json: allow rule mcp__learn__scale_notes
+ok   claude settings.json: allow rule mcp__learn__course_outline
+ok   claude settings.json: deny rule Read(./.env)
+ok   claude settings.json: deny rule Read(./.env.*)
+ok   claude settings.json: PreToolUse Bash|PowerShell is a command hook
+ok   claude settings.json: PreToolUse: code/agentic-coding/hooks/guard-git-push.cs exists
+ok   codex config.toml: mcp_servers.learn has a command
+ok   codex config.toml: learn: code/agentic-coding/mcp/LearnMcp/bin/Release/net10.0/LearnMcp.dll exists
+ok   codex config.toml: learn: src/content/docs exists
+ok   codex config.toml: PreToolUse ^Bash$ has command and command_windows
+ok   codex config.toml: PreToolUse: code/agentic-coding/hooks/guard-git-push.cs exists
+ok   codex config.toml: PreToolUse (Windows): code/agentic-coding/hooks/guard-git-push.cs exists
+ok   skill journal-status: name matches the folder
+ok   skill journal-status: has a description
+ok   skill journal-status: 13 lines, under 500

@@ -1,0 +1,10 @@
+--> {"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{},"clientInfo":{"name":"by-hand","version":"1.0"}}}
+<-- {"result":{"protocolVersion":"2025-11-25","capabilities":{"logging":{},"tools":{"listChanged":true}},"serverInfo":{"name":"LearnMcp","version":"1.0.0.0"}},"id":1,"jsonrpc":"2.0"}
+--> {"jsonrpc":"2.0","method":"notifications/initialized"}
+--> {"jsonrpc":"2.0","id":2,"method":"tools/list"}
+<-- {"result":{"tools":[{"name":"course_outline","description":"Lists the pages of a course of the learn site, in sidebar order: one line per page, file name and title.","inputSchema":{"type":"object","properties":{"course":{"description":"Course folder under src/content/docs, for example duckdb or ladybugdb","type":"string"}},"required":["course"]},"annotations":{"readOnlyHint":true}},{"name":"scale_notes","description":"Spells the seven notes of a diatonic scale, one letter per degree: \u0027F major\u0027 gives Bb, not A#.","inputSchema":{"type":"object","properties":{"root":{"description":"Root note: a letter A to G, optionally followed by # or b, for example C, F# or Bb","type":"string"},"mode":{"description":"major, minor, or a mode name: ionian, dorian, phrygian, lydian, mixolydian, aeolian, locrian","type":"string","default":"major"}},"required":["root"]},"annotations":{"idempotentHint":true,"readOnlyHint":true}}]},"id":2,"jsonrpc":"2.0"}
+--> {"jsonrpc":"2.0","id":3,"method":"tools/call","params":{"name":"scale_notes","arguments":{"root":"F","mode":"major"}}}
+<-- {"result":{"content":[{"type":"text","text":"[\u0022F\u0022,\u0022G\u0022,\u0022A\u0022,\u0022Bb\u0022,\u0022C\u0022,\u0022D\u0022,\u0022E\u0022]"}]},"id":3,"jsonrpc":"2.0"}
+--> {"jsonrpc":"2.0","id":4,"method":"tools/call","params":{"name":"scale_notes","arguments":{"root":"H"}}}
+<-- {"result":{"content":[{"type":"text","text":"An error occurred invoking \u0027scale_notes\u0027: \u0027H\u0027 is not a note: use a letter A to G, optionally followed by # or b."}],"isError":true},"id":4,"jsonrpc":"2.0"}
+exit code: 0

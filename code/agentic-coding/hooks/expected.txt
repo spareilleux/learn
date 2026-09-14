@@ -1,0 +1,24 @@
+01-status: exit 0
+02-delete-branch: exit 2
+Blocked by guard-git-push: `git push --delete origin old-branch` uses --delete. Ask the user to run it.
+03-force-short: exit 2
+Blocked by guard-git-push: `git push -f origin main` uses -f. Ask the user to run it.
+04-force-with-lease: exit 2
+Blocked by guard-git-push: `git push --force-with-lease origin main` uses --force-with-lease. Ask the user to run it.
+05-plus-refspec: exit 2
+Blocked by guard-git-push: `git push origin +main` force-pushes the refspec +main. Ask the user to run it.
+06-colon-refspec: exit 2
+Blocked by guard-git-push: `git push origin :old-branch` deletes the remote ref old-branch. Ask the user to run it.
+07-chained: exit 2
+Blocked by guard-git-push: `git push origin --delete old-branch` uses --delete. Ask the user to run it.
+08-quoted-text: exit 0
+09-here-document: exit 0
+10-bash-c: exit 2
+Blocked by guard-git-push: `bash -c git push --force origin main` uses --force. Ask the user to run it.
+11-git-dash-C: exit 2
+Blocked by guard-git-push: `git -C ../other push --mirror` uses --mirror. Ask the user to run it.
+12-plain-push: exit 0
+13-powershell-tool: exit 2
+Blocked by guard-git-push: `git push origin --delete old-branch` uses --delete. Ask the user to run it.
+14-not-json: exit 1
+guard-git-push: stdin is not JSON
