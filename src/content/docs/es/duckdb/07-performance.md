@@ -20,7 +20,7 @@ Escribe unos 1,5 GB en `out/`: un archivo CSV de 1 GB y varios archivos Parquet.
 
 ## Una tabla más grande
 
-315 jobs no bastan para medir nada. El script repite cada step de cada job, desplazando las marcas de tiempo un día por copia:
+315 jobs no bastan para medir nada. El script repite cada step de cada job, desplazando las marcas de tiempo un día por copia ([líneas 7-11](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/07-performance.sql#L7-L11)):
 
 ```sql
 CREATE TABLE steps AS
@@ -43,7 +43,7 @@ SELECT count(*) AS steps, min(started_at) AS first_step, max(started_at) AS last
 
 ## Leer un plan
 
-[`EXPLAIN`](https://duckdb.org/docs/current/guides/meta/explain) muestra el plan físico sin ejecutar la consulta. Aquí, una consulta sobre el archivo JSON:
+[`EXPLAIN`](https://duckdb.org/docs/current/guides/meta/explain) muestra el plan físico sin ejecutar la consulta. Aquí, una consulta sobre el archivo JSON ([línea 18](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/07-performance.sql#L18)):
 
 ```sql
 EXPLAIN SELECT conclusion, count(*) FROM 'data/jobs.json' GROUP BY ALL;
@@ -95,6 +95,8 @@ La línea en la que fijarse es `Projections: conclusion`. Los jobs tienen 11 cam
 
 El script escribe los steps dos veces: `out/steps.parquet` en orden de inserción, `out/steps-sorted.parquet` ordenado por hora de inicio.
 
+De [`sql/07-performance.sql`, líneas 14-25](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/07-performance.sql#L14-L25):
+
 ```sql
 COPY steps TO 'out/steps.parquet';
 COPY (FROM steps ORDER BY started_at) TO 'out/steps-sorted.parquet';
@@ -128,7 +130,7 @@ GROUP BY ALL;
 
 Tres columnas de siete, y una sección `Filters:`: la cláusula `WHERE` se trasladó al escaneo. Eso es el **filter pushdown**, el filtro empujado hasta la lectura, y en Parquet hace más que ahorrarse un operador de filtro.
 
-Un [archivo Parquet](https://parquet.apache.org/docs/file-format/) se divide en **row groups**; DuckDB escribe uno cada 122.880 filas. Para cada columna de cada row group, el pie del archivo guarda el valor mínimo y el máximo. Antes de leer un row group, el escaneo compara el filtro con esas estadísticas y se salta el row group si ninguna fila puede coincidir. [`parquet_metadata`](https://duckdb.org/docs/current/data/parquet/metadata) las muestra:
+Un [archivo Parquet](https://parquet.apache.org/docs/file-format/) se divide en **row groups**; DuckDB escribe uno cada 122.880 filas. Para cada columna de cada row group, el pie del archivo guarda el valor mínimo y el máximo. Antes de leer un row group, el escaneo compara el filtro con esas estadísticas y se salta el row group si ninguna fila puede coincidir. [`parquet_metadata`](https://duckdb.org/docs/current/data/parquet/metadata) las muestra ([líneas 28-33](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/07-performance.sql#L28-L33)):
 
 ```sql
 SELECT replace(file_name, '\', '/') AS file, count(*) AS row_groups, sum(row_group_num_rows) AS rows,
@@ -196,7 +198,7 @@ El writer de Parquet usa varios hilos, y los tamaños variaron unos cientos de k
 
 ## Poda de particiones
 
-La lección 4 decía que un filtro sobre una columna de partición se salta archivos enteros. `EXPLAIN` lo muestra sin ejecutar nada:
+La lección 4 decía que un filtro sobre una columna de partición se salta archivos enteros. `EXPLAIN` lo muestra sin ejecutar nada ([línea 41](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/07-performance.sql#L41)):
 
 ```sql
 EXPLAIN SELECT count(*) FROM read_parquet('out/jobs-by-os/*/*.parquet') WHERE os = 'windows-latest';
@@ -222,7 +224,7 @@ Los `File Filters` se deciden solo a partir de los nombres de carpeta: los otros
 
 ## Tabla, Parquet o CSV
 
-El mismo agregado, el step más lento en promedio, sobre los 11 millones de steps almacenados de tres formas, con todos los hilos:
+El mismo agregado, el step más lento en promedio, sobre los 11 millones de steps almacenados de tres formas, con todos los hilos ([`timings/07-performance.sql`, línea 19](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/timings/07-performance.sql#L19)):
 
 ```sql
 SELECT os, name, avg(completed_at - started_at) AS took FROM steps GROUP BY ALL ORDER BY took DESC LIMIT 1;
@@ -251,7 +253,7 @@ DuckDB ejecuta una consulta en tantos hilos como núcleos tiene la máquina: el 
 
 ## Un archivo Parquet remoto
 
-La lección 4 leía Parquet por HTTPS y afirmaba que DuckDB solo descarga lo que necesita. El [log HTTP](https://duckdb.org/docs/current/operations_manual/logging/overview) lo demuestra, sobre enero de 2024 de los [viajes de taxi de Nueva York](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page), un archivo de 49.961.641 bytes:
+La lección 4 leía Parquet por HTTPS y afirmaba que DuckDB solo descarga lo que necesita. El [log HTTP](https://duckdb.org/docs/current/operations_manual/logging/overview) lo demuestra, sobre enero de 2024 de los [viajes de taxi de Nueva York](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page), un archivo de 49.961.641 bytes ([`timings/07-performance.sql`, líneas 46-49](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/timings/07-performance.sql#L46-L49)):
 
 ```sql
 CALL enable_logging('HTTP', storage = 'memory');
@@ -282,7 +284,7 @@ En una red, la disposición de las columnas importa más que en un disco: `SELEC
 
 ## Memoria y volcado a disco
 
-Por defecto, DuckDB puede usar el 80 % de la RAM (`memory_limit`). Cuando una ordenación, una combinación, un `GROUP BY` o una función de ventana necesita más, la [guía de ajuste](https://duckdb.org/docs/current/guides/performance/how_to_tune_workloads) dice que vuelca a archivos temporales, en `temp_directory`: `.tmp` junto al proceso para una base de datos en memoria, `<file>.tmp` junto a un archivo de base de datos. El script de tiempos ordena los 11 millones de steps del archivo Parquet con dos límites:
+Por defecto, DuckDB puede usar el 80 % de la RAM (`memory_limit`). Cuando una ordenación, una combinación, un `GROUP BY` o una función de ventana necesita más, la [guía de ajuste](https://duckdb.org/docs/current/guides/performance/how_to_tune_workloads) dice que vuelca a archivos temporales, en `temp_directory`: `.tmp` junto al proceso para una base de datos en memoria, `<file>.tmp` junto a un archivo de base de datos. El script de tiempos ordena los 11 millones de steps del archivo Parquet con dos límites ([`timings/07-performance.sql`, líneas 59-64](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/timings/07-performance.sql#L59-L64)):
 
 ```sql
 SET temp_directory = 'out/tmp';
@@ -341,6 +343,8 @@ Las soluciones están en [`sql/07-exercises.sql`](https://github.com/spareilleux
 
 1. Cuatro formas de quedarse con los steps del 2030-01-01, sobre el archivo ordenado. ¿Cuáles pueden saltarse row groups? ¿Te lo dice `EXPLAIN`?
 
+De [`timings/07-performance.sql`, líneas 34-37](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/timings/07-performance.sql#L34-L37):
+
 ```sql
 WHERE started_at >= '2030-01-01' AND started_at < '2030-01-02'
 WHERE started_at::DATE = '2030-01-01'
@@ -378,7 +382,7 @@ Los tiempos coinciden. Las cuatro devuelven 2.204 steps; con un hilo, el rango, 
 <details>
 <summary>Solución</summary>
 
-Escribe el tercer archivo y luego compara el filtro con las estadísticas de `os`:
+Escribe el tercer archivo y luego compara el filtro con las estadísticas de `os` ([`sql/07-exercises.sql`, líneas 16-22](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/07-exercises.sql#L16-L22)):
 
 ```sql
 COPY (FROM steps ORDER BY os, started_at) TO 'out/steps-by-os.parquet';
@@ -409,6 +413,8 @@ Ordenar por hora ayuda a los filtros por hora y a nada más. Un archivo solo pue
 
 <details>
 <summary>Solución</summary>
+
+De [`sql/07-exercises.sql`, líneas 25-29](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/07-exercises.sql#L25-L29):
 
 ```sql
 SELECT row_group_id, max(row_group_num_rows) AS rows, sum(total_compressed_size) AS all_columns,

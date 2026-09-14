@@ -106,6 +106,8 @@ Un nom de fichier entre apostrophes est une table. DuckDB a vu l'extension `.jso
 
 La première requête de [`sql/01-first-queries.sql`](https://github.com/spareilleux/learn/blob/main/code/duckdb/sql/01-first-queries.sql) : quels workflows s'exécutent le plus, et à quelle fréquence ils échouent.
 
+Extrait de [`sql/01-first-queries.sql`, lignes 2-6](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/01-first-queries.sql#L2-L6) :
+
 ```sql
 SELECT workflowName, count(*) AS runs, count(*) FILTER (conclusion = 'failure') AS failures
 FROM 'data/runs.json'
@@ -208,7 +210,7 @@ Les horodatages du fichier se terminent par `Z` (UTC). DuckDB les a lus comme `T
 
 ## Garder les lignes : une table
 
-Chaque requête ci-dessus a relu et réanalysé le fichier JSON. Pour ne le lire qu'une fois, stocke les lignes dans une table ([`CREATE TABLE … AS`](https://duckdb.org/docs/current/sql/statements/create_table), le `SELECT INTO` de SQL Server) :
+Chaque requête ci-dessus a relu et réanalysé le fichier JSON. Pour ne le lire qu'une fois, stocke les lignes dans une table ([`CREATE TABLE … AS`](https://duckdb.org/docs/current/sql/statements/create_table), le `SELECT INTO` de SQL Server) ([`sql/01-first-queries.sql`, lignes 8-13](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/01-first-queries.sql#L8-L13)) :
 
 ```sql
 CREATE TABLE runs AS SELECT * FROM 'data/runs.json';
@@ -392,6 +394,8 @@ Les solutions sont dans [`sql/01-exercises.sql`](https://github.com/spareilleux/
 <details>
 <summary>Solution</summary>
 
+Extrait de [`sql/01-exercises.sql`, lignes 3-5](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/01-exercises.sql#L3-L5) :
+
 ```sql
 SELECT count(*) AS failed_manual_runs
 FROM 'data/runs.json'
@@ -416,6 +420,8 @@ Le même nombre que la ligne `workflow_dispatch` / `failure` du tableau ci-dessu
 <details>
 <summary>Solution</summary>
 
+Extrait de [`sql/01-exercises.sql`, lignes 8-9](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/01-exercises.sql#L8-L9) :
+
 ```sql
 SELECT count(DISTINCT workflowName) AS workflows, count(DISTINCT headSha) AS commits
 FROM 'data/runs.json';
@@ -438,6 +444,8 @@ FROM 'data/runs.json';
 
 <details>
 <summary>Solution</summary>
+
+Extrait de [`sql/01-exercises.sql`, lignes 12-17](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/01-exercises.sql#L12-L17) :
 
 ```sql
 SELECT workflowname, count(*) AS runs

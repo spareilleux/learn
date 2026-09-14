@@ -106,6 +106,8 @@ A file name in quotes is a table. DuckDB saw the `.json` extension, read the fil
 
 The first query of [`sql/01-first-queries.sql`](https://github.com/spareilleux/learn/blob/main/code/duckdb/sql/01-first-queries.sql): which workflows run most, and how often they fail.
 
+From [`sql/01-first-queries.sql`, lines 2-6](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/01-first-queries.sql#L2-L6):
+
 ```sql
 SELECT workflowName, count(*) AS runs, count(*) FILTER (conclusion = 'failure') AS failures
 FROM 'data/runs.json'
@@ -208,7 +210,7 @@ The timestamps in the file end with `Z` (UTC). DuckDB read them as `TIMESTAMP`, 
 
 ## Keeping the rows: a table
 
-Each query above read and parsed the JSON file again. To read it once, store the rows in a table ([`CREATE TABLE … AS`](https://duckdb.org/docs/current/sql/statements/create_table), the `SELECT INTO` of SQL Server):
+Each query above read and parsed the JSON file again. To read it once, store the rows in a table ([`CREATE TABLE … AS`](https://duckdb.org/docs/current/sql/statements/create_table), the `SELECT INTO` of SQL Server) ([`sql/01-first-queries.sql`, lines 8-13](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/01-first-queries.sql#L8-L13)):
 
 ```sql
 CREATE TABLE runs AS SELECT * FROM 'data/runs.json';
@@ -392,6 +394,8 @@ The solutions are in [`sql/01-exercises.sql`](https://github.com/spareilleux/lea
 <details>
 <summary>Solution</summary>
 
+From [`sql/01-exercises.sql`, lines 3-5](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/01-exercises.sql#L3-L5):
+
 ```sql
 SELECT count(*) AS failed_manual_runs
 FROM 'data/runs.json'
@@ -416,6 +420,8 @@ The same number as the `workflow_dispatch` / `failure` row of the table above.
 <details>
 <summary>Solution</summary>
 
+From [`sql/01-exercises.sql`, lines 8-9](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/01-exercises.sql#L8-L9):
+
 ```sql
 SELECT count(DISTINCT workflowName) AS workflows, count(DISTINCT headSha) AS commits
 FROM 'data/runs.json';
@@ -438,6 +444,8 @@ FROM 'data/runs.json';
 
 <details>
 <summary>Solution</summary>
+
+From [`sql/01-exercises.sql`, lines 12-17](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/01-exercises.sql#L12-L17):
 
 ```sql
 SELECT workflowname, count(*) AS runs

@@ -11,6 +11,8 @@ El mismo programa que en la [lección 5](../05-csharp/), en Java, con el [driver
 
 ## El proyecto
 
+De [`java/pom.xml`, líneas 20-26](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/java/pom.xml#L20-L26):
+
 ```xml
   <dependencies>
     <dependency>
@@ -40,10 +42,14 @@ mvn -q -f java/pom.xml compile exec:java -Dexec.args=check
 
 ## Una consulta con un conjunto de resultados
 
+De [`java/src/main/java/ci/CiQueries.java`, línea 21](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/java/src/main/java/ci/CiQueries.java#L21):
+
 ```java
         // Una base de datos en memoria, como la CLI iniciada sin nombre de archivo
         try (Connection connection = DriverManager.getConnection("jdbc:duckdb:")) {
 ```
+
+De [`java/src/main/java/ci/CiQueries.java`, líneas 33-44](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/java/src/main/java/ci/CiQueries.java#L33-L44):
 
 ```java
         try (var statement = connection.createStatement();
@@ -72,6 +78,8 @@ Java course examples       7 runs  0 failures
 `jdbc:duckdb:` sin nada después de los dos puntos es una base de datos en memoria; `jdbc:duckdb:ci.duckdb` abre un archivo. La salida es la misma que la del programa en C#, carácter por carácter, salvo el título de la sección.
 
 ## Parámetros
+
+De [`java/src/main/java/ci/CiQueries.java`, líneas 47-56](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/java/src/main/java/ci/CiQueries.java#L47-L56):
 
 ```java
         try (var ps = connection.prepareStatement(
@@ -130,6 +138,8 @@ Lado a lado con la lección 5:
 
 ## Arrays y structs
 
+De [`java/src/main/java/ci/CiQueries.java`, líneas 80-91](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/java/src/main/java/ci/CiQueries.java#L80-L91):
+
 ```java
         try (var statement = connection.createStatement();
              var rs = statement.executeQuery("SELECT labels, steps FROM 'data/jobs.json' WHERE id = 104004920113")) {
@@ -156,6 +166,8 @@ step 3: Install, build, and upload site, success, started_at is a java.sql.Times
 En este terreno, JDBC es anterior a los genéricos: [`Array.getArray()`](https://docs.oracle.com/en/java/javase/25/docs/api/java.sql/java/sql/Array.html) devuelve un `Object` que hay que castear, y un struct es un [`java.sql.Struct`](https://docs.oracle.com/en/java/javase/25/docs/api/java.sql/java/sql/Struct.html) cuyo método estándar `getAttributes()` solo da los valores por posición. El `DuckDBStruct.getMap()` del driver añade los nombres, a costa de un cast a una clase del driver. No hay mapeo a un record ni a una clase: esa es la tarea de una biblioteca como `JdbcTemplate` de Spring o jOOQ, *no probadas en este curso*.
 
 ## Errores: un statement que se cierra solo
+
+De [`java/src/main/java/ci/CiQueries.java`, líneas 94-109](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/java/src/main/java/ci/CiQueries.java#L94-L109):
 
 ```java
         try (var statement = connection.createStatement()) {
@@ -234,7 +246,7 @@ Cargar una biblioteca nativa es un «método restringido» desde la [JEP 472](ht
 
 ## Carga masiva
 
-El modo `timings` carga un millón de filas con el appender del driver, y luego 10.000 filas con un batch y con sentencias `INSERT` individuales, dentro de una transacción:
+El modo `timings` carga un millón de filas con el appender del driver, y luego 10.000 filas con un batch y con sentencias `INSERT` individuales, dentro de una transacción ([líneas 120-127](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/java/src/main/java/ci/CiQueries.java#L120-L127)):
 
 ```java
         try (var appender = connection.unwrap(DuckDBConnection.class).createAppender(DuckDBConnection.DEFAULT_SCHEMA, "numbers")) {

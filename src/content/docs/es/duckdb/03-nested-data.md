@@ -54,6 +54,8 @@ El lector de JSON convirtió los arrays en tipos [`LIST`](https://duckdb.org/doc
 
 ## Leer listas y structs
 
+De [`sql/03-nested-data.sql`, líneas 6-9](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/03-nested-data.sql#L6-L9):
+
 ```sql
 SELECT name, labels, labels[1] AS os, labels[0] AS index_zero, len(steps) AS steps, steps[1].name AS first_step
 FROM jobs
@@ -79,6 +81,8 @@ LIMIT 3;
 ## `unnest`: una fila por elemento
 
 [`unnest`](https://duckdb.org/docs/current/sql/query_syntax/unnest) convierte una lista en filas. Colocado en la cláusula `FROM` después de la tabla, se ejecuta una vez por job, con acceso a las columnas de ese job: el `CROSS APPLY OPENJSON(...)` de SQL Server, o `SelectMany` en LINQ.
+
+De [`sql/03-nested-data.sql`, líneas 12-15](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/03-nested-data.sql#L12-L15):
 
 ```sql
 SELECT j.name AS job, s.number, s.name AS step, s.completed_at - s.started_at AS took
@@ -107,6 +111,8 @@ ORDER BY s.number;
 
 El mismo patrón que con datos planos, una vez desplegada la lista. Las marcas de tiempo de los jobs dan una duración mejor que los campos de las ejecuciones de la lección 2, y una más: el tiempo que se pasa **esperando** un runner, de `created_at` a `started_at`.
 
+De [`sql/03-nested-data.sql`, líneas 18-22](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/03-nested-data.sql#L18-L22):
+
 ```sql
 SELECT labels[1] AS os, count(*) AS jobs,
        avg(started_at - created_at) AS avg_wait, avg(completed_at - started_at) AS avg_run
@@ -130,7 +136,7 @@ Los runners de macOS tardan más del doble en arrancar; los jobs de Windows dura
 
 ## Lambdas: trabajar con una lista sin desplegarla
 
-¿Qué steps fallan más? Cada job guarda sus steps fallidos en su propia lista; [`list_filter`](https://duckdb.org/docs/current/sql/functions/list) conserva los elementos para los que una [lambda](https://duckdb.org/docs/current/sql/functions/lambda) es verdadera, antes de que `unnest` convierta lo que queda en filas:
+¿Qué steps fallan más? Cada job guarda sus steps fallidos en su propia lista; [`list_filter`](https://duckdb.org/docs/current/sql/functions/list) conserva los elementos para los que una [lambda](https://duckdb.org/docs/current/sql/functions/lambda) es verdadera, antes de que `unnest` convierta lo que queda en filas ([líneas 25-31](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/03-nested-data.sql#L25-L31)):
 
 ```sql
 SELECT f.name AS failed_step, count(*) AS failures, list(DISTINCT r.workflowName ORDER BY r.workflowName) AS workflows
@@ -170,7 +176,7 @@ For more information, see https://duckdb.org/docs/stable/sql/functions/lambda.ht
 
 ## `ANTI JOIN`: filas sin coincidencia
 
-125 ejecuciones en `runs.json`, pero `count(DISTINCT run_id)` en `jobs` da 121. ¿Qué ejecuciones no tienen ningún job? `NOT EXISTS` funciona, y también el [`ANTI JOIN`](https://duckdb.org/docs/current/sql/query_syntax/from) de DuckDB, que se lee como lo que hace:
+125 ejecuciones en `runs.json`, pero `count(DISTINCT run_id)` en `jobs` da 121. ¿Qué ejecuciones no tienen ningún job? `NOT EXISTS` funciona, y también el [`ANTI JOIN`](https://duckdb.org/docs/current/sql/query_syntax/from) de DuckDB, que se lee como lo que hace ([líneas 34-37](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/03-nested-data.sql#L34-L37)):
 
 ```sql
 SELECT r.workflowName, r.event, r.conclusion, r.createdAt
@@ -195,7 +201,7 @@ Las cuatro están en el [diario del curso de GitHub Actions](../../github-action
 
 ## Construir valores anidados
 
-La dirección contraria: agrupar filas en una lista de structs, con un literal de struct `{'key': value}`:
+La dirección contraria: agrupar filas en una lista de structs, con un literal de struct `{'key': value}` ([líneas 40-43](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/03-nested-data.sql#L40-L43)):
 
 ```sql
 SELECT run_id, list({'job': name, 'conclusion': conclusion} ORDER BY name) AS jobs
@@ -233,6 +239,8 @@ Las soluciones están en [`sql/03-exercises.sql`](https://github.com/spareilleux
 <details>
 <summary>Solución</summary>
 
+De [`sql/03-exercises.sql`, líneas 6-10](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/03-exercises.sql#L6-L10):
+
 ```sql
 SELECT r.workflowName, j.name AS job, j.conclusion, j.runner_name, j.runner_name IS NULL AS runner_is_null
 FROM jobs j
@@ -262,7 +270,7 @@ Tres jobs omitidos (skipped), que nunca obtuvieron un runner: `NULL`. Y un job `
 <details>
 <summary>Solución</summary>
 
-En la salida de la CLI, las dos columnas se llaman `name`. Referenciarlas desde una consulta externa muestra los nombres reales:
+En la salida de la CLI, las dos columnas se llaman `name`. Referenciarlas desde una consulta externa muestra los nombres reales ([`sql/03-exercises.sql`, líneas 13-16](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/03-exercises.sql#L13-L16)):
 
 ```sql
 SELECT name, name_1, conclusion
@@ -290,6 +298,8 @@ La [regla de deduplicación](https://duckdb.org/docs/current/sql/dialect/keyword
 
 <details>
 <summary>Solución</summary>
+
+De [`sql/03-exercises.sql`, líneas 19-25](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/03-exercises.sql#L19-L25):
 
 ```sql
 SELECT j.labels[1] AS os, j.name AS job, s.name AS step, s.completed_at - s.started_at AS took

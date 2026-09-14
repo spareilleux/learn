@@ -9,6 +9,8 @@ La CLI ejecuta DuckDB en su propio proceso. Desde C#, DuckDB se ejecuta **en tu 
 
 ## El proyecto
 
+De [`csharp/CiQueries/CiQueries.csproj`, líneas 10-13](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/csharp/CiQueries/CiQueries.csproj#L10-L13):
+
 ```xml
 <ItemGroup>
   <PackageReference Include="Dapper" Version="2.1.86" />
@@ -28,12 +30,16 @@ Un build normal copia la biblioteca nativa de los cinco runtimes: `win-x64` (37 
 
 ## Una consulta con un data reader
 
+De [`csharp/CiQueries/Program.cs`, líneas 11-13](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/csharp/CiQueries/Program.cs#L11-L13):
+
 ```csharp
 // Una base de datos en memoria, como la CLI iniciada sin nombre de archivo
 using var connection = new DuckDBConnection("Data Source=:memory:");
 connection.Open();
 Console.WriteLine($"DuckDB {connection.ServerVersion}");
 ```
+
+De [`csharp/CiQueries/Program.cs`, líneas 22-36](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/csharp/CiQueries/Program.cs#L22-L36):
 
 ```csharp
 using (var command = connection.CreateCommand())
@@ -74,7 +80,7 @@ Unhandled exception. DuckDB.NET.Data.DuckDBException (0x80004005): IO Error: No 
 
 ## Parámetros
 
-DuckDB [acepta tres sintaxis](https://duckdb.net/docs/basic-usage.html): `?`, `$1` y `$name`. Con `DuckDBParameter`, el nombre va sin el `$`:
+DuckDB [acepta tres sintaxis](https://duckdb.net/docs/basic-usage.html): `?`, `$1` y `$name`. Con `DuckDBParameter`, el nombre va sin el `$` ([líneas 39-46](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/csharp/CiQueries/Program.cs#L39-L46)):
 
 ```csharp
 using (var command = connection.CreateCommand())
@@ -95,6 +101,8 @@ Rust course failures: 3
 Incluso el nombre de archivo es un parámetro: `read_json($path)`, mientras que `OPENROWSET(BULK …)` de SQL Server solo acepta un literal y te empuja a construir la cadena SQL. Una ruta que viene de un usuario sigue necesitando una comprobación antes de llegar a `read_json`, ya que DuckDB puede leer cualquier archivo al que tenga acceso el proceso.
 
 ## Los tipos de DuckDB como tipos .NET
+
+De [`csharp/CiQueries/Program.cs`, líneas 49-69](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/csharp/CiQueries/Program.cs#L49-L69):
 
 ```csharp
 using (var command = connection.CreateCommand())
@@ -143,6 +151,8 @@ took: 00:00:39
 
 ## Listas y structs
 
+De [`csharp/CiQueries/Program.cs`, líneas 72-88](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/csharp/CiQueries/Program.cs#L72-L88):
+
 ```csharp
 using (var command = connection.CreateCommand())
 {
@@ -162,6 +172,8 @@ using (var command = connection.CreateCommand())
     }
 }
 ```
+
+De [`csharp/CiQueries/Program.cs`, líneas 174-182](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/csharp/CiQueries/Program.cs#L174-L182):
 
 ```csharp
 // DuckDB.NET asigna los campos de un struct a las propiedades con setter del mismo nombre, sin distinguir mayúsculas de minúsculas
@@ -191,6 +203,8 @@ step 3: Install, build, and upload site, success, 48 s, StartedAt = 0001-01-01 0
 
 ## Errores
 
+De [`csharp/CiQueries/Program.cs`, líneas 91-103](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/csharp/CiQueries/Program.cs#L91-L103):
+
 ```csharp
 using (var command = connection.CreateCommand())
 {
@@ -217,7 +231,7 @@ Un solo tipo de excepción, `DuckDBException`, con el mismo mensaje que la CLI, 
 
 ## Dapper
 
-[Dapper](https://github.com/DapperLib/Dapper) extiende cualquier `DbConnection`, así que funciona con `DuckDBConnection` sin adaptador:
+[Dapper](https://github.com/DapperLib/Dapper) extiende cualquier `DbConnection`, así que funciona con `DuckDBConnection` sin adaptador ([líneas 106-118](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/csharp/CiQueries/Program.cs#L106-L118)):
 
 ```csharp
 var failures = connection.Query<RunSummary>(
@@ -235,6 +249,8 @@ foreach (var run in failures)
 }
 ```
 
+De [`csharp/CiQueries/Program.cs`, línea 171](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/csharp/CiQueries/Program.cs#L171):
+
 ```csharp
 // Dapper asigna las columnas a los parámetros del constructor, sin distinguir mayúsculas de minúsculas
 record RunSummary(long DatabaseId, string WorkflowName, DateTime CreatedAt, TimeSpan Took);
@@ -251,7 +267,7 @@ Las propiedades del objeto anónimo se convierten en los parámetros `$conclusio
 
 ## Carga masiva: el appender
 
-Cargar filas con un `INSERT` por fila es lento en cualquier base de datos. DuckDB.NET expone el [appender](https://duckdb.org/docs/current/data/appender) de DuckDB, que escribe las filas directamente en el almacenamiento de una tabla:
+Cargar filas con un `INSERT` por fila es lento en cualquier base de datos. DuckDB.NET expone el [appender](https://duckdb.org/docs/current/data/appender) de DuckDB, que escribe las filas directamente en el almacenamiento de una tabla ([líneas 138-146](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/csharp/CiQueries/Program.cs#L138-L146)):
 
 ```csharp
     const int appended = 1_000_000;

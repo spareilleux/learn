@@ -9,6 +9,8 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 So far, DuckDB read one JSON file at a time. This lesson writes and reads the other formats, and many files at once. The queries are in [`sql/04-files.sql`](https://github.com/spareilleux/learn/blob/main/code/duckdb/sql/04-files.sql). They write into `out/`, a folder that [`check.sh`](https://github.com/spareilleux/learn/blob/main/code/duckdb/check.sh) creates and Git ignores; create it by hand before running them yourself.
 
+From [`sql/04-files.sql`, lines 3-4](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/04-files.sql#L3-L4):
+
 ```sql
 CREATE TABLE runs AS FROM 'data/runs.json';
 CREATE TABLE jobs AS FROM 'data/jobs.json';
@@ -17,6 +19,8 @@ CREATE TABLE jobs AS FROM 'data/jobs.json';
 ## CSV: what the sniffer guesses
 
 CSV has no types, no standard delimiter and no standard date format. To have a hard case, the script writes the runs the way a spreadsheet with French settings saves them: semicolons, day before month.
+
+From [`sql/04-files.sql`, lines 7-8](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/04-files.sql#L7-L8):
 
 ```sql
 COPY (SELECT databaseId, workflowName, conclusion, createdAt FROM runs ORDER BY createdAt)
@@ -29,7 +33,7 @@ databaseId;workflowName;conclusion;createdAt
 34767508304;Deploy to GitHub Pages;success;13/09/2026 16:05
 ```
 
-When DuckDB reads a CSV file, the [CSV sniffer](https://duckdb.org/docs/current/data/csv/auto_detection) reads a sample and guesses the dialect and the types. `sniff_csv` shows the guess without reading the file:
+When DuckDB reads a CSV file, the [CSV sniffer](https://duckdb.org/docs/current/data/csv/auto_detection) reads a sample and guesses the dialect and the types. `sniff_csv` shows the guess without reading the file ([lines 11-12](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/04-files.sql#L11-L12)):
 
 ```sql
 SELECT Delimiter, HasHeader, c.name, c.type
@@ -56,7 +60,7 @@ The delimiter, the header and the integer column are right. `createdAt` is `VARC
 FROM read_csv('out/runs-fr.csv', auto_detect=false, delim=';', quote='', escape='', new_line='\n', skip=0, comment='', header=true, columns={'databaseId': 'BIGINT', 'workflowName': 'VARCHAR', 'conclusion': 'VARCHAR', 'createdAt': 'VARCHAR'});
 ```
 
-The fix here is to give [`read_csv`](https://duckdb.org/docs/current/data/csv/overview) the format:
+The fix here is to give [`read_csv`](https://duckdb.org/docs/current/data/csv/overview) the format ([lines 15-16](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/04-files.sql#L15-L16)):
 
 ```sql
 SELECT typeof(min(createdAt)) AS type, min(createdAt) AS first_run, max(createdAt) AS last_run
@@ -84,13 +88,13 @@ For a file that comes back every day, the SQL Server habit of a format file appl
 
 ## Parquet: types and columns
 
-[Parquet](https://parquet.apache.org/) stores a table by column, compressed, with the schema. The JSON jobs file is 526,328 bytes; as Parquet, it's 37,270 bytes, 14 times smaller:
+[Parquet](https://parquet.apache.org/) stores a table by column, compressed, with the schema. The JSON jobs file is 526,328 bytes; as Parquet, it's 37,270 bytes, 14 times smaller ([line 19](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/04-files.sql#L19)):
 
 ```sql
 COPY jobs TO 'out/jobs.parquet';
 ```
 
-`parquet_metadata` shows what's inside, one row per column chunk:
+`parquet_metadata` shows what's inside, one row per column chunk ([lines 20-22](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/04-files.sql#L20-L22)):
 
 ```sql
 SELECT path_in_schema, type, num_values, compression
@@ -130,7 +134,7 @@ The script first compared `total_compressed_size` too. It passed on Linux and Wi
 
 ## Many files: partitions and globs
 
-`PARTITION_BY` writes one folder per value, named `column=value`, the layout known as [Hive partitioning](https://duckdb.org/docs/current/data/partitioning/partitioned_writes):
+`PARTITION_BY` writes one folder per value, named `column=value`, the layout known as [Hive partitioning](https://duckdb.org/docs/current/data/partitioning/partitioned_writes) ([line 25](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/04-files.sql#L25)):
 
 ```sql
 COPY (SELECT *, labels[1] AS os FROM jobs) TO 'out/jobs-by-os' (FORMAT parquet, PARTITION_BY (os), OVERWRITE);
@@ -151,7 +155,7 @@ Without `OVERWRITE`, a second run of the script fails, unlike `COPY` to a single
 IO Error: Directory "out/jobs-by-os" is not empty! Enable OVERWRITE option to overwrite files
 ```
 
-A glob reads all the files as one table. The `os` column isn't stored in the files: DuckDB sees the `key=value` folder names and [adds the column back](https://duckdb.org/docs/current/data/partitioning/hive_partitioning). `filename = true` adds the path of each row's file:
+A glob reads all the files as one table. The `os` column isn't stored in the files: DuckDB sees the `key=value` folder names and [adds the column back](https://duckdb.org/docs/current/data/partitioning/hive_partitioning). `filename = true` adds the path of each row's file ([lines 28-31](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/04-files.sql#L28-L31)):
 
 ```sql
 SELECT replace(filename, '\', '/') AS file, os, count(*) AS jobs
@@ -201,7 +205,7 @@ The glob pattern itself, `'out/jobs-by-os/*/*.parquet'`, works with forward slas
 
 ## Files over HTTPS
 
-A URL is a file name like any other. The copy of `runs.json` on GitHub:
+A URL is a file name like any other. The copy of `runs.json` on GitHub ([lines 34-35](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/04-files.sql#L34-L35)):
 
 ```sql
 SELECT count(*) AS runs, max(createdAt) AS last_run
@@ -270,6 +274,8 @@ The solutions are in [`sql/04-exercises.sql`](https://github.com/spareilleux/lea
 <details>
 <summary>Solution</summary>
 
+From [`sql/04-exercises.sql`, lines 10-12](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/04-exercises.sql#L10-L12):
+
 ```sql
 SELECT count(*) AS runs, count(*) FILTER (c.createdAt <> r.createdAt) AS different_timestamps
 FROM read_csv('out/runs-fr.csv', timestampformat = '%d/%m/%Y %H:%M') c
@@ -293,6 +299,8 @@ All of them: `%H:%M` has no seconds, and none of the 125 runs started at `:00` s
 
 <details>
 <summary>Solution</summary>
+
+From [`sql/04-exercises.sql`, lines 15-18](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/04-exercises.sql#L15-L18):
 
 ```sql
 SELECT os, count(*) AS jobs, count(*) FILTER (conclusion = 'failure') AS failed
@@ -325,6 +333,8 @@ According to the [documentation](https://duckdb.org/docs/current/data/partitioni
 
 <details>
 <summary>Solution</summary>
+
+From [`sql/04-exercises.sql`, lines 21-25](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/04-exercises.sql#L21-L25):
 
 ```sql
 SELECT replace(filename, '\', '/') AS file, count(*) AS rows,

@@ -23,7 +23,7 @@ Dans le script, `run` est la CLI DuckDB en mode CSV suivie de son code de sortie
 
 ## Un fichier de base de données
 
-Donne un nom de fichier à la CLI, et les tables vont dans ce fichier :
+Donne un nom de fichier à la CLI, et les tables vont dans ce fichier ([lignes 49-51](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/shell/08-persistence.sh#L49-L51)) :
 
 ```bash
 run $db -c "CREATE TABLE runs AS FROM 'data/runs.json'; CREATE TABLE jobs AS FROM 'data/jobs.json';"
@@ -42,7 +42,7 @@ exit code 0
 
 Un seul fichier, `out/ci.duckdb`, pour toutes les tables, comme un fichier SQLite plutôt qu'un `.mdf` SQL Server. [`pragma_database_size`](https://duckdb.org/docs/current/configuration/pragmas) montre son organisation : des blocs de 262 144 octets (256 KiB), trois ici, plus 12 288 octets avant le premier bloc. Le fichier grandit par blocs entiers.
 
-Dans un programme, [`ATTACH`](https://duckdb.org/docs/current/sql/statements/attach) ouvre un fichier de base de données à côté de la base en mémoire, et une requête peut joindre des tables des deux. `ATTACH` choisit aussi le format de stockage :
+Dans un programme, [`ATTACH`](https://duckdb.org/docs/current/sql/statements/attach) ouvre un fichier de base de données à côté de la base en mémoire, et une requête peut joindre des tables des deux. `ATTACH` choisit aussi le format de stockage ([ligne 52](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/shell/08-persistence.sh#L52)) :
 
 ```bash
 run -c "ATTACH '$db' AS ci; ATTACH 'out/ci-v150.duckdb' AS v150 (STORAGE_VERSION 'v1.5.0'); SELECT database_name, tags FROM duckdb_databases() WHERE NOT internal ORDER BY ALL;"
@@ -67,7 +67,7 @@ La suite de ce message dit encore que le format de stockage n'est pas encore sta
 
 ## Le journal d'écriture anticipée
 
-Une modification validée n'est pas écrite tout de suite dans les blocs. DuckDB l'ajoute à un journal d'écriture anticipée (write-ahead log), un second fichier qui porte le nom de la base suivi de `.wal`, et la reporte dans le fichier de base de données lors d'un **checkpoint** : quand le journal atteint 16 MiB (`checkpoint_threshold`), sur [`CHECKPOINT`](https://duckdb.org/docs/current/sql/statements/checkpoint), et à la fermeture de la base. Le script désactive le checkpoint à la fermeture pour voir le journal :
+Une modification validée n'est pas écrite tout de suite dans les blocs. DuckDB l'ajoute à un journal d'écriture anticipée (write-ahead log), un second fichier qui porte le nom de la base suivi de `.wal`, et la reporte dans le fichier de base de données lors d'un **checkpoint** : quand le journal atteint 16 MiB (`checkpoint_threshold`), sur [`CHECKPOINT`](https://duckdb.org/docs/current/sql/statements/checkpoint), et à la fermeture de la base. Le script désactive le checkpoint à la fermeture pour voir le journal ([lignes 55-58](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/shell/08-persistence.sh#L55-L58)) :
 
 ```bash
 run $db -c "PRAGMA disable_checkpoint_on_shutdown; CREATE TABLE steps AS SELECT j.id AS job_id, s.* FROM jobs j, unnest(j.steps) AS t(s);"
@@ -94,6 +94,8 @@ La conséquence pour les sauvegardes : une copie de `ci.duckdb` seul peut manque
 
 ## Blocs libres et compaction
 
+Extrait de [`shell/08-persistence.sh`, lignes 61-64](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/shell/08-persistence.sh#L61-L64) :
+
 ```bash
 run $db -c "SELECT total_blocks, used_blocks, free_blocks FROM pragma_database_size();"
 run $db -c "DROP TABLE jobs; CHECKPOINT; SELECT total_blocks, used_blocks, free_blocks FROM pragma_database_size();"
@@ -118,7 +120,7 @@ Supprimer `jobs` a libéré un bloc au milieu du fichier : DuckDB le réutilise 
 
 ## Transactions
 
-Chaque instruction s'exécute dans sa propre transaction, sauf si tu en ouvres une avec `BEGIN` :
+Chaque instruction s'exécute dans sa propre transaction, sauf si tu en ouvres une avec `BEGIN` ([lignes 68-79](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/shell/08-persistence.sh#L68-L79)) :
 
 ```sql
 BEGIN;
@@ -162,6 +164,8 @@ La [page sur les transactions](https://duckdb.org/docs/current/sql/statements/tr
 
 ## Contraintes et upserts
 
+Extrait de [`shell/08-persistence.sh`, lignes 84-90](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/shell/08-persistence.sh#L84-L90) :
+
 ```sql
 CREATE TABLE counters (name VARCHAR PRIMARY KEY, n INTEGER);
 INSERT INTO counters VALUES ('builds', 0), ('deploys', 0);
@@ -187,7 +191,7 @@ Là où SQL Server a `MERGE`, DuckDB a [`INSERT … ON CONFLICT`](https://duckdb
 
 ## Deux connexions dans un processus
 
-Deux appels à `DriverManager.getConnection` avec le même nom de fichier partagent une seule base de données : la seconde connexion voit la table créée par la première. Chaque connexion a sa propre transaction :
+Deux appels à `DriverManager.getConnection` avec le même nom de fichier partagent une seule base de données : la seconde connexion voit la table créée par la première. Chaque connexion a sa propre transaction ([`java/src/main/java/ci/Transactions.java`, lignes 21-35](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/java/src/main/java/ci/Transactions.java#L21-L35)) :
 
 ```java
 execute(a, "a", "CREATE TABLE counters (name VARCHAR PRIMARY KEY, n INTEGER)");
@@ -248,6 +252,8 @@ Le pilote C# encapsule le même moteur, donc le comportement devrait être le m�
 
 Dans un processus, de nombreuses connexions. Entre processus, la règle est plus simple : le script garde la base ouverte dans un processus CLI en arrière-plan, puis en lance un second.
 
+Extrait de [`shell/08-persistence.sh`, lignes 94-96](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/shell/08-persistence.sh#L94-L96) :
+
 ```bash
 hold_open writer $db
 run_os_error $db -c "SELECT count(*) FROM runs;"
@@ -285,7 +291,7 @@ IO Error: Could not set lock on file "/Users/runner/work/learn/learn/code/duckdb
 
 Les trois nomment le processus qui détient le fichier, ce qui aide quand une CLI oubliée ou un IDE le garde ouvert. L'onglet Linux / WSL vient du runner Ubuntu, pas de WSL.
 
-Des processus qui ouvrent le fichier en lecture seule, avec `-readonly` dans la CLI, peuvent le partager :
+Des processus qui ouvrent le fichier en lecture seule, avec `-readonly` dans la CLI, peuvent le partager ([lignes 103-106](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/shell/08-persistence.sh#L103-L106)) :
 
 ```bash
 hold_open reader -readonly $db
@@ -321,6 +327,8 @@ Un fichier DuckDB a donc soit **un seul processus qui lit et écrit**, avec auta
 ## Exercices
 
 1. La CLI DuckDB exécute trois instructions dans un seul argument `-c` ; la troisième viole la clé primaire. Combien de lignes restent ? Et avec `BEGIN;` et `COMMIT;` autour ?
+
+Extrait de [`shell/08-exercises.sh`, ligne 10](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/shell/08-exercises.sh#L10) :
 
 ```bash
 duckdb -csv $db -c "INSERT INTO counters VALUES ('builds', 1); INSERT INTO counters VALUES ('tests', 1); INSERT INTO counters VALUES ('builds', 2);"

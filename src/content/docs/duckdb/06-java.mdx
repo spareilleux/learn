@@ -11,6 +11,8 @@ The same program as [lesson 5](../05-csharp/), in Java, with the [DuckDB JDBC dr
 
 ## The project
 
+From [`java/pom.xml`, lines 20-26](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/java/pom.xml#L20-L26):
+
 ```xml
   <dependencies>
     <dependency>
@@ -40,10 +42,14 @@ mvn -q -f java/pom.xml compile exec:java -Dexec.args=check
 
 ## A query with a result set
 
+From [`java/src/main/java/ci/CiQueries.java`, line 21](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/java/src/main/java/ci/CiQueries.java#L21):
+
 ```java
         // An in-memory database, like the CLI started without a file name
         try (Connection connection = DriverManager.getConnection("jdbc:duckdb:")) {
 ```
+
+From [`java/src/main/java/ci/CiQueries.java`, lines 33-44](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/java/src/main/java/ci/CiQueries.java#L33-L44):
 
 ```java
         try (var statement = connection.createStatement();
@@ -72,6 +78,8 @@ Java course examples       7 runs  0 failures
 `jdbc:duckdb:` with nothing after the colon is an in-memory database; `jdbc:duckdb:ci.duckdb` opens a file. The output is the same as the C# program's, character for character, apart from the section title.
 
 ## Parameters
+
+From [`java/src/main/java/ci/CiQueries.java`, lines 47-56](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/java/src/main/java/ci/CiQueries.java#L47-L56):
 
 ```java
         try (var ps = connection.prepareStatement(
@@ -130,6 +138,8 @@ Side by side with lesson 5:
 
 ## Arrays and structs
 
+From [`java/src/main/java/ci/CiQueries.java`, lines 80-91](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/java/src/main/java/ci/CiQueries.java#L80-L91):
+
 ```java
         try (var statement = connection.createStatement();
              var rs = statement.executeQuery("SELECT labels, steps FROM 'data/jobs.json' WHERE id = 104004920113")) {
@@ -156,6 +166,8 @@ step 3: Install, build, and upload site, success, started_at is a java.sql.Times
 JDBC predates generics in this area: [`Array.getArray()`](https://docs.oracle.com/en/java/javase/25/docs/api/java.sql/java/sql/Array.html) returns an `Object` to cast, and a struct is a [`java.sql.Struct`](https://docs.oracle.com/en/java/javase/25/docs/api/java.sql/java/sql/Struct.html) whose standard `getAttributes()` gives the values by position only. The driver's `DuckDBStruct.getMap()` adds the names, at the price of a cast to a driver class. There's no mapping to a record or a class: that's the job of a library like Spring's `JdbcTemplate` or jOOQ, *not tried in this course*.
 
 ## Errors: a statement that closes itself
+
+From [`java/src/main/java/ci/CiQueries.java`, lines 94-109](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/java/src/main/java/ci/CiQueries.java#L94-L109):
 
 ```java
         try (var statement = connection.createStatement()) {
@@ -234,7 +246,7 @@ Loading a native library is a "restricted method" since [JEP 472](https://openjd
 
 ## Bulk loading
 
-The `timings` mode loads a million rows with the driver's appender, then 10,000 rows with a batch and with single `INSERT` statements, in a transaction:
+The `timings` mode loads a million rows with the driver's appender, then 10,000 rows with a batch and with single `INSERT` statements, in a transaction ([lines 120-127](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/java/src/main/java/ci/CiQueries.java#L120-L127)):
 
 ```java
         try (var appender = connection.unwrap(DuckDBConnection.class).createAppender(DuckDBConnection.DEFAULT_SCHEMA, "numbers")) {

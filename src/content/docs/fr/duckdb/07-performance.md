@@ -20,7 +20,7 @@ Il écrit environ 1,5 Go dans `out/` : un fichier CSV de 1 Go et plusieurs fichi
 
 ## Une table plus grande
 
-315 jobs ne suffisent pas pour mesurer quoi que ce soit. Le script répète chaque step de chaque job, en décalant les horodatages d'un jour par copie :
+315 jobs ne suffisent pas pour mesurer quoi que ce soit. Le script répète chaque step de chaque job, en décalant les horodatages d'un jour par copie ([lignes 7-11](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/07-performance.sql#L7-L11)) :
 
 ```sql
 CREATE TABLE steps AS
@@ -43,7 +43,7 @@ SELECT count(*) AS steps, min(started_at) AS first_step, max(started_at) AS last
 
 ## Lire un plan
 
-[`EXPLAIN`](https://duckdb.org/docs/current/guides/meta/explain) montre le plan physique sans exécuter la requête. Ici, une requête sur le fichier JSON :
+[`EXPLAIN`](https://duckdb.org/docs/current/guides/meta/explain) montre le plan physique sans exécuter la requête. Ici, une requête sur le fichier JSON ([ligne 18](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/07-performance.sql#L18)) :
 
 ```sql
 EXPLAIN SELECT conclusion, count(*) FROM 'data/jobs.json' GROUP BY ALL;
@@ -95,6 +95,8 @@ La ligne à remarquer est `Projections: conclusion`. Les jobs ont 11 champs, don
 
 Le script écrit les steps deux fois : `out/steps.parquet` dans l'ordre d'insertion, `out/steps-sorted.parquet` trié par heure de début.
 
+Extrait de [`sql/07-performance.sql`, lignes 14-25](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/07-performance.sql#L14-L25) :
+
 ```sql
 COPY steps TO 'out/steps.parquet';
 COPY (FROM steps ORDER BY started_at) TO 'out/steps-sorted.parquet';
@@ -128,7 +130,7 @@ GROUP BY ALL;
 
 Trois colonnes sur sept, et une section `Filters:` : la clause `WHERE` est passée dans le parcours. C'est le **filter pushdown**, le filtre poussé jusque dans la lecture, et sur Parquet il fait plus qu'économiser un opérateur de filtre.
 
-Un [fichier Parquet](https://parquet.apache.org/docs/file-format/) est découpé en **row groups** ; DuckDB en écrit un toutes les 122 880 lignes. Pour chaque colonne de chaque row group, le pied du fichier stocke la valeur minimale et la valeur maximale. Avant de lire un row group, le parcours compare le filtre à ces statistiques, et saute le row group si aucune ligne ne peut correspondre. [`parquet_metadata`](https://duckdb.org/docs/current/data/parquet/metadata) les montre :
+Un [fichier Parquet](https://parquet.apache.org/docs/file-format/) est découpé en **row groups** ; DuckDB en écrit un toutes les 122 880 lignes. Pour chaque colonne de chaque row group, le pied du fichier stocke la valeur minimale et la valeur maximale. Avant de lire un row group, le parcours compare le filtre à ces statistiques, et saute le row group si aucune ligne ne peut correspondre. [`parquet_metadata`](https://duckdb.org/docs/current/data/parquet/metadata) les montre ([lignes 28-33](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/07-performance.sql#L28-L33)) :
 
 ```sql
 SELECT replace(file_name, '\', '/') AS file, count(*) AS row_groups, sum(row_group_num_rows) AS rows,
@@ -196,7 +198,7 @@ Le writer Parquet utilise plusieurs threads, et les tailles ont varié de quelqu
 
 ## Élagage des partitions
 
-La leçon 4 disait qu'un filtre sur une colonne de partition saute des fichiers entiers. `EXPLAIN` le montre sans rien exécuter :
+La leçon 4 disait qu'un filtre sur une colonne de partition saute des fichiers entiers. `EXPLAIN` le montre sans rien exécuter ([ligne 41](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/07-performance.sql#L41)) :
 
 ```sql
 EXPLAIN SELECT count(*) FROM read_parquet('out/jobs-by-os/*/*.parquet') WHERE os = 'windows-latest';
@@ -222,7 +224,7 @@ Les `File Filters` sont décidés à partir des seuls noms de dossiers : les deu
 
 ## Table, Parquet ou CSV
 
-Le même agrégat, le step le plus lent en moyenne, sur les 11 millions de steps stockés de trois façons, avec tous les threads :
+Le même agrégat, le step le plus lent en moyenne, sur les 11 millions de steps stockés de trois façons, avec tous les threads ([`timings/07-performance.sql`, ligne 19](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/timings/07-performance.sql#L19)) :
 
 ```sql
 SELECT os, name, avg(completed_at - started_at) AS took FROM steps GROUP BY ALL ORDER BY took DESC LIMIT 1;
@@ -251,7 +253,7 @@ DuckDB exécute une requête sur autant de threads que la machine a de cœurs : 
 
 ## Un fichier Parquet distant
 
-La leçon 4 lisait du Parquet via HTTPS et affirmait que DuckDB ne télécharge que ce dont il a besoin. Le [log HTTP](https://duckdb.org/docs/current/operations_manual/logging/overview) le prouve, sur janvier 2024 des [courses de taxi de New York](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page), un fichier de 49 961 641 octets :
+La leçon 4 lisait du Parquet via HTTPS et affirmait que DuckDB ne télécharge que ce dont il a besoin. Le [log HTTP](https://duckdb.org/docs/current/operations_manual/logging/overview) le prouve, sur janvier 2024 des [courses de taxi de New York](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page), un fichier de 49 961 641 octets ([`timings/07-performance.sql`, lignes 46-49](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/timings/07-performance.sql#L46-L49)) :
 
 ```sql
 CALL enable_logging('HTTP', storage = 'memory');
@@ -282,7 +284,7 @@ Sur un réseau, la disposition des colonnes compte plus que sur un disque : `SEL
 
 ## Mémoire et débordement sur disque
 
-Par défaut, DuckDB peut utiliser 80 % de la RAM (`memory_limit`). Quand un tri, une jointure, un `GROUP BY` ou une fonction de fenêtrage a besoin de plus, le [guide de réglage](https://duckdb.org/docs/current/guides/performance/how_to_tune_workloads) dit qu'il déborde dans des fichiers temporaires, dans `temp_directory` : `.tmp` à côté du processus pour une base de données en mémoire, `<file>.tmp` à côté d'un fichier de base de données. Le script de mesure trie les 11 millions de steps du fichier Parquet sous deux limites :
+Par défaut, DuckDB peut utiliser 80 % de la RAM (`memory_limit`). Quand un tri, une jointure, un `GROUP BY` ou une fonction de fenêtrage a besoin de plus, le [guide de réglage](https://duckdb.org/docs/current/guides/performance/how_to_tune_workloads) dit qu'il déborde dans des fichiers temporaires, dans `temp_directory` : `.tmp` à côté du processus pour une base de données en mémoire, `<file>.tmp` à côté d'un fichier de base de données. Le script de mesure trie les 11 millions de steps du fichier Parquet sous deux limites ([`timings/07-performance.sql`, lignes 59-64](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/timings/07-performance.sql#L59-L64)) :
 
 ```sql
 SET temp_directory = 'out/tmp';
@@ -341,6 +343,8 @@ Les solutions sont dans [`sql/07-exercises.sql`](https://github.com/spareilleux/
 
 1. Quatre façons de garder les steps du 2030-01-01, sur le fichier trié. Lesquelles peuvent sauter des row groups ? `EXPLAIN` te le dit-il ?
 
+Extrait de [`timings/07-performance.sql`, lignes 34-37](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/timings/07-performance.sql#L34-L37) :
+
 ```sql
 WHERE started_at >= '2030-01-01' AND started_at < '2030-01-02'
 WHERE started_at::DATE = '2030-01-01'
@@ -378,7 +382,7 @@ Les temps concordent. Les quatre renvoient 2 204 steps ; avec un thread, l'inter
 <details>
 <summary>Solution</summary>
 
-Écris le troisième fichier, puis compare le filtre aux statistiques de `os` :
+Écris le troisième fichier, puis compare le filtre aux statistiques de `os` ([`sql/07-exercises.sql`, lignes 16-22](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/07-exercises.sql#L16-L22)) :
 
 ```sql
 COPY (FROM steps ORDER BY os, started_at) TO 'out/steps-by-os.parquet';
@@ -409,6 +413,8 @@ Trier par heure aide les filtres sur l'heure et rien d'autre. Un fichier ne peut
 
 <details>
 <summary>Solution</summary>
+
+Extrait de [`sql/07-exercises.sql`, lignes 25-29](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/07-exercises.sql#L25-L29) :
 
 ```sql
 SELECT row_group_id, max(row_group_num_rows) AS rows, sum(total_compressed_size) AS all_columns,

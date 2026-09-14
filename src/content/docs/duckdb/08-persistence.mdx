@@ -23,7 +23,7 @@ In the script, `run` is the DuckDB CLI in CSV mode followed by its exit code, an
 
 ## A database file
 
-Give the CLI a file name, and the tables go into that file:
+Give the CLI a file name, and the tables go into that file ([lines 49-51](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/shell/08-persistence.sh#L49-L51)):
 
 ```bash
 run $db -c "CREATE TABLE runs AS FROM 'data/runs.json'; CREATE TABLE jobs AS FROM 'data/jobs.json';"
@@ -42,7 +42,7 @@ exit code 0
 
 One file, `out/ci.duckdb`, for all the tables, like an SQLite file rather than a SQL Server `.mdf`. [`pragma_database_size`](https://duckdb.org/docs/current/configuration/pragmas) shows how it's organized: blocks of 262,144 bytes (256 KiB), three of them here, plus 12,288 bytes before the first block. The file grows by whole blocks.
 
-In a program, [`ATTACH`](https://duckdb.org/docs/current/sql/statements/attach) opens a database file next to the in-memory database, and a query can join tables from both. `ATTACH` also chooses the storage format:
+In a program, [`ATTACH`](https://duckdb.org/docs/current/sql/statements/attach) opens a database file next to the in-memory database, and a query can join tables from both. `ATTACH` also chooses the storage format ([line 52](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/shell/08-persistence.sh#L52)):
 
 ```bash
 run -c "ATTACH '$db' AS ci; ATTACH 'out/ci-v150.duckdb' AS v150 (STORAGE_VERSION 'v1.5.0'); SELECT database_name, tags FROM duckdb_databases() WHERE NOT internal ORDER BY ALL;"
@@ -67,7 +67,7 @@ The rest of that message still says that the storage format isn't stable yet and
 
 ## The write-ahead log
 
-A committed change isn't written into the blocks right away. DuckDB appends it to a write-ahead log, a second file named after the database with `.wal` added, and moves it into the database file at a **checkpoint**: when the log reaches 16 MiB (`checkpoint_threshold`), on [`CHECKPOINT`](https://duckdb.org/docs/current/sql/statements/checkpoint), and when the database is closed. The script turns off the checkpoint on close to see the log:
+A committed change isn't written into the blocks right away. DuckDB appends it to a write-ahead log, a second file named after the database with `.wal` added, and moves it into the database file at a **checkpoint**: when the log reaches 16 MiB (`checkpoint_threshold`), on [`CHECKPOINT`](https://duckdb.org/docs/current/sql/statements/checkpoint), and when the database is closed. The script turns off the checkpoint on close to see the log ([lines 55-58](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/shell/08-persistence.sh#L55-L58)):
 
 ```bash
 run $db -c "PRAGMA disable_checkpoint_on_shutdown; CREATE TABLE steps AS SELECT j.id AS job_id, s.* FROM jobs j, unnest(j.steps) AS t(s);"
@@ -94,6 +94,8 @@ The consequence for backups: a copy of `ci.duckdb` alone can miss committed data
 
 ## Free blocks and compaction
 
+From [`shell/08-persistence.sh`, lines 61-64](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/shell/08-persistence.sh#L61-L64):
+
 ```bash
 run $db -c "SELECT total_blocks, used_blocks, free_blocks FROM pragma_database_size();"
 run $db -c "DROP TABLE jobs; CHECKPOINT; SELECT total_blocks, used_blocks, free_blocks FROM pragma_database_size();"
@@ -118,7 +120,7 @@ Dropping `jobs` freed a block in the middle of the file: DuckDB reuses it for th
 
 ## Transactions
 
-Each statement runs in its own transaction, unless you open one with `BEGIN`:
+Each statement runs in its own transaction, unless you open one with `BEGIN` ([lines 68-79](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/shell/08-persistence.sh#L68-L79)):
 
 ```sql
 BEGIN;
@@ -162,6 +164,8 @@ The [transactions page](https://duckdb.org/docs/current/sql/statements/transacti
 
 ## Constraints and upserts
 
+From [`shell/08-persistence.sh`, lines 84-90](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/shell/08-persistence.sh#L84-L90):
+
 ```sql
 CREATE TABLE counters (name VARCHAR PRIMARY KEY, n INTEGER);
 INSERT INTO counters VALUES ('builds', 0), ('deploys', 0);
@@ -187,7 +191,7 @@ Where SQL Server has `MERGE`, DuckDB has [`INSERT … ON CONFLICT`](https://duck
 
 ## Two connections in one process
 
-Two `DriverManager.getConnection` calls with the same file name share one database: the second connection sees the table the first one created. Each connection has its own transaction:
+Two `DriverManager.getConnection` calls with the same file name share one database: the second connection sees the table the first one created. Each connection has its own transaction ([`java/src/main/java/ci/Transactions.java`, lines 21-35](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/java/src/main/java/ci/Transactions.java#L21-L35)):
 
 ```java
 execute(a, "a", "CREATE TABLE counters (name VARCHAR PRIMARY KEY, n INTEGER)");
@@ -248,6 +252,8 @@ The C# driver wraps the same engine, so the behaviour should be the same with Du
 
 Within a process, many connections. Between processes, the rule is simpler: the script keeps the database open in a background CLI process, then starts a second one.
 
+From [`shell/08-persistence.sh`, lines 94-96](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/shell/08-persistence.sh#L94-L96):
+
 ```bash
 hold_open writer $db
 run_os_error $db -c "SELECT count(*) FROM runs;"
@@ -285,7 +291,7 @@ IO Error: Could not set lock on file "/Users/runner/work/learn/learn/code/duckdb
 
 All three name the process that holds the file, which helps when a forgotten CLI or an IDE keeps it open. The Linux / WSL tab comes from the Ubuntu runner, not from WSL.
 
-Processes that open the file read-only, with `-readonly` in the CLI, can share it:
+Processes that open the file read-only, with `-readonly` in the CLI, can share it ([lines 103-106](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/shell/08-persistence.sh#L103-L106)):
 
 ```bash
 hold_open reader -readonly $db
@@ -321,6 +327,8 @@ So a DuckDB file has either **one process that reads and writes**, with as many 
 ## Exercises
 
 1. The DuckDB CLI runs three statements in one `-c` argument; the third one violates the primary key. How many rows are left? And with `BEGIN;` and `COMMIT;` around them?
+
+From [`shell/08-exercises.sh`, line 10](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/shell/08-exercises.sh#L10):
 
 ```bash
 duckdb -csv $db -c "INSERT INTO counters VALUES ('builds', 1); INSERT INTO counters VALUES ('tests', 1); INSERT INTO counters VALUES ('builds', 2);"

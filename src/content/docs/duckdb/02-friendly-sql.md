@@ -5,7 +5,7 @@ sidebar:
   order: 2
 ---
 
-Every query of this lesson is in [`sql/02-friendly-sql.sql`](https://github.com/spareilleux/learn/blob/main/code/duckdb/sql/02-friendly-sql.sql), run from `code/duckdb` like in [lesson 1](../01-first-queries/). The script starts by loading the runs into a table:
+Every query of this lesson is in [`sql/02-friendly-sql.sql`](https://github.com/spareilleux/learn/blob/main/code/duckdb/sql/02-friendly-sql.sql), run from `code/duckdb` like in [lesson 1](../01-first-queries/). The script starts by loading the runs into a table ([line 2](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/02-friendly-sql.sql#L2)):
 
 ```sql
 CREATE TABLE runs AS FROM 'data/runs.json';
@@ -13,7 +13,7 @@ CREATE TABLE runs AS FROM 'data/runs.json';
 
 ## Durations: timestamps and intervals
 
-Subtracting two `TIMESTAMP` values gives an [`INTERVAL`](https://duckdb.org/docs/current/sql/functions/interval), which `avg` and `max` accept:
+Subtracting two `TIMESTAMP` values gives an [`INTERVAL`](https://duckdb.org/docs/current/sql/functions/interval), which `avg` and `max` accept ([lines 5-9](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/02-friendly-sql.sql#L5-L9)):
 
 ```sql
 SELECT workflowName, count(*) AS runs, avg(updatedAt - startedAt) AS avg_took, max(updatedAt - startedAt) AS max_took
@@ -53,6 +53,8 @@ Convert to seconds first with `epoch(interval)` or `date_diff('second', startedA
 
 ### Truncating: runs per hour
 
+From [`sql/02-friendly-sql.sql`, lines 12-16](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/02-friendly-sql.sql#L12-L16):
+
 ```sql
 SELECT date_trunc('hour', createdAt) AS hour, count(*) AS runs
 FROM runs
@@ -78,7 +80,7 @@ LIMIT 5;
 
 ## Time zones
 
-GitHub writes `2026-09-13T15:53:16Z`: UTC. DuckDB read it as a [`TIMESTAMP`](https://duckdb.org/docs/current/sql/data_types/timestamp), a date and time with no zone, like `datetime2` in SQL Server. `TIMESTAMP WITH TIME ZONE` (`TIMESTAMPTZ`) is an instant, like `DateTimeOffset` in C# or `Instant` in Java, **displayed in the session's time zone**. `AT TIME ZONE 'UTC'` says what zone a `TIMESTAMP` was in, and turns it into a `TIMESTAMPTZ`:
+GitHub writes `2026-09-13T15:53:16Z`: UTC. DuckDB read it as a [`TIMESTAMP`](https://duckdb.org/docs/current/sql/data_types/timestamp), a date and time with no zone, like `datetime2` in SQL Server. `TIMESTAMP WITH TIME ZONE` (`TIMESTAMPTZ`) is an instant, like `DateTimeOffset` in C# or `Instant` in Java, **displayed in the session's time zone**. `AT TIME ZONE 'UTC'` says what zone a `TIMESTAMP` was in, and turns it into a `TIMESTAMPTZ` ([lines 19-23](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/02-friendly-sql.sql#L19-L23)):
 
 ```sql
 SET TimeZone = 'Europe/Paris';
@@ -101,7 +103,7 @@ Without the `SET`, the CLI uses the operating system's time zone. That's why the
 
 ## Window functions
 
-[Window functions](https://duckdb.org/docs/current/sql/functions/window_functions) work as in SQL Server and PostgreSQL. The `WINDOW` clause names a window once, for several functions:
+[Window functions](https://duckdb.org/docs/current/sql/functions/window_functions) work as in SQL Server and PostgreSQL. The `WINDOW` clause names a window once, for several functions ([lines 26-33](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/02-friendly-sql.sql#L26-L33)):
 
 ```sql
 SELECT createdAt, conclusion,
@@ -135,7 +137,7 @@ The story of the Rust course's CI is readable in the gaps: a failure at 17:40, a
 
 ## `QUALIFY`: filtering on a window function
 
-Which workflows are red right now, that is, whose **last** run didn't succeed? In SQL Server, a window function can't appear in `WHERE`, so this takes a subquery or a CTE. [`QUALIFY`](https://duckdb.org/docs/current/sql/query_syntax/qualify) is a `WHERE` evaluated after the window functions:
+Which workflows are red right now, that is, whose **last** run didn't succeed? In SQL Server, a window function can't appear in `WHERE`, so this takes a subquery or a CTE. [`QUALIFY`](https://duckdb.org/docs/current/sql/query_syntax/qualify) is a `WHERE` evaluated after the window functions ([lines 36-40](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/02-friendly-sql.sql#L36-L40)):
 
 ```sql
 SELECT workflowName, conclusion, createdAt
@@ -164,7 +166,7 @@ The two conditions can't move to `WHERE`: `conclusion <> 'success'` in `WHERE` w
 
 ## `PIVOT`
 
-[`PIVOT`](https://duckdb.org/docs/current/sql/statements/pivot) turns the values of a column into columns. Unlike [SQL Server's `PIVOT`](https://learn.microsoft.com/sql/t-sql/queries/from-using-pivot-and-unpivot), it doesn't need the list of values:
+[`PIVOT`](https://duckdb.org/docs/current/sql/statements/pivot) turns the values of a column into columns. Unlike [SQL Server's `PIVOT`](https://learn.microsoft.com/sql/t-sql/queries/from-using-pivot-and-unpivot), it doesn't need the list of values ([lines 43-47](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/02-friendly-sql.sql#L43-L47)):
 
 ```sql
 PIVOT (FROM runs WHERE workflowName IN ('Deploy to GitHub Pages', 'Rust course examples', 'Java course examples', 'GHA 03: triggers'))
@@ -190,6 +192,8 @@ ORDER BY workflowName;
 - Without `ORDER BY`, the order of the rows isn't defined. A first try of `PIVOT runs ON event USING count(*) GROUP BY conclusion` returned `success`, `cancelled`, `startup_failure`, `failure`, in no useful order. The course scripts always end with `ORDER BY`, or their output couldn't be compared.
 
 ## Shortcuts for columns
+
+From [`sql/02-friendly-sql.sql`, lines 50-54](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/02-friendly-sql.sql#L50-L54):
 
 ```sql
 SELECT headSha[1:7] AS sha, min(COLUMNS('.*At'))
@@ -232,6 +236,8 @@ The solutions are in [`sql/02-exercises.sql`](https://github.com/spareilleux/lea
 <details>
 <summary>Solution</summary>
 
+From [`sql/02-exercises.sql`, lines 5-9](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/02-exercises.sql#L5-L9):
+
 ```sql
 SELECT createdAt::DATE AS day, count(*) AS runs,
        round(100 * count(*) FILTER (conclusion <> 'success') / count(*), 1) AS not_green_pct
@@ -258,6 +264,8 @@ The second day is the one of the GitHub Actions course and its failing exercises
 
 <details>
 <summary>Solution</summary>
+
+From [`sql/02-exercises.sql`, lines 12-18](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/02-exercises.sql#L12-L18):
 
 ```sql
 SELECT workflowName, createdAt AS failed_at,
@@ -303,6 +311,8 @@ ORDER BY red_for DESC NULLS FIRST, workflowName, failed_at;
 
 <details>
 <summary>Solution</summary>
+
+From [`sql/02-exercises.sql`, lines 21-25](https://github.com/spareilleux/learn/blob/93f6f82/code/duckdb/sql/02-exercises.sql#L21-L25):
 
 ```sql
 SELECT workflowName, arg_max(conclusion, createdAt) AS last_conclusion
