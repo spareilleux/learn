@@ -168,6 +168,8 @@ Writing `x * x;` turns the expression into a statement: the function then return
 
 ## Loops
 
+From [`examples/l02_types.rs`, lines 58-71](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l02_types.rs#L58-L71):
+
 ```rust
 // loop + break with a value
 let mut n = 1;

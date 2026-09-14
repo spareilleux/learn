@@ -168,6 +168,8 @@ fn square(x: i32) -> i32 {
 
 ## Boucles
 
+Extrait de [`examples/l02_types.rs`, lignes 58-71](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l02_types.rs#L58-L71) :
+
 ```rust
 // loop + break avec une valeur
 let mut n = 1;

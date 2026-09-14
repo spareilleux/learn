@@ -168,6 +168,8 @@ Escribir `x * x;` convierte la expresión en una sentencia: la función devuelve
 
 ## Bucles
 
+De [`examples/l02_types.rs`, líneas 58-71](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l02_types.rs#L58-L71):
+
 ```rust
 // loop + break con un valor
 let mut n = 1;

@@ -153,7 +153,7 @@ help: consider adding return type
 
 ## Your own error types
 
-An error is any type; an `enum` lists the ways an operation can fail:
+An error is any type; an `enum` lists the ways an operation can fail ([lines 32-60](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l06_option_result.rs#L32-L60)):
 
 ```rust
 #[derive(Debug)]

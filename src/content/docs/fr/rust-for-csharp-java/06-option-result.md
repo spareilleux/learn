@@ -153,7 +153,7 @@ help: consider adding return type
 
 ## Vos propres types d'erreur
 
-Une erreur peut être de n'importe quel type ; une `enum` énumère les façons dont une opération peut échouer :
+Une erreur peut être de n'importe quel type ; une `enum` énumère les façons dont une opération peut échouer ([lignes 32-60](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l06_option_result.rs#L32-L60)) :
 
 ```rust
 #[derive(Debug)]
