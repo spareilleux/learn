@@ -1,0 +1,29 @@
+Delimiter,HasHeader,name,type
+;,true,databaseId,BIGINT
+;,true,workflowName,VARCHAR
+;,true,conclusion,VARCHAR
+;,true,createdAt,VARCHAR
+type,first_run,last_run
+TIMESTAMP,2026-09-13 15:53:00,2026-09-14 14:01:00
+path_in_schema,type,compression,total_compressed_size
+id,INT64,SNAPPY,1651
+run_id,INT64,SNAPPY,942
+name,BYTE_ARRAY,SNAPPY,1235
+status,BYTE_ARRAY,SNAPPY,59
+conclusion,BYTE_ARRAY,SNAPPY,152
+created_at,INT64,SNAPPY,1222
+started_at,INT64,SNAPPY,1579
+completed_at,INT64,SNAPPY,1948
+runner_name,BYTE_ARRAY,SNAPPY,1589
+"labels, list, element",BYTE_ARRAY,SNAPPY,165
+"steps, list, element, number",INT64,SNAPPY,1103
+"steps, list, element, name",BYTE_ARRAY,SNAPPY,5551
+"steps, list, element, conclusion",BYTE_ARRAY,SNAPPY,618
+"steps, list, element, started_at",INT64,SNAPPY,8864
+"steps, list, element, completed_at",INT64,SNAPPY,8346
+file,os,jobs
+out/jobs-by-os/os=macos-latest/data_0.parquet,macos-latest,34
+out/jobs-by-os/os=ubuntu-latest/data_0.parquet,ubuntu-latest,246
+out/jobs-by-os/os=windows-latest/data_0.parquet,windows-latest,35
+runs,last_run
+125,2026-09-14 14:01:09

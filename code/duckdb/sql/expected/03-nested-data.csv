@@ -1,0 +1,28 @@
+name,labels,os,index_zero,steps,first_step
+build,[ubuntu-latest],ubuntu-latest,NULL,6,Set up job
+deploy,[ubuntu-latest],ubuntu-latest,NULL,3,Set up job
+build,[ubuntu-latest],ubuntu-latest,NULL,6,Set up job
+job,number,step,took
+build,1,Set up job,00:00:04
+build,2,Checkout,00:00:02
+build,3,"Install, build, and upload site",00:00:48
+build,5,"Post Install, build, and upload site",00:00:00
+build,6,Post Checkout,00:00:01
+build,7,Complete job,00:00:00
+os,jobs,avg_wait,avg_run
+macos-latest,34,00:00:08.470596,00:00:55.67649
+ubuntu-latest,246,00:00:03.5,00:00:21.43097
+windows-latest,35,00:00:03.4,00:01:36.71431
+failed_step,failures,workflows
+Formatting,6,[Rust course examples]
+Run actions/setup-dotnet@v6,3,"['GHA 05: exercise checks']"
+Run exit 3,3,"['GHA 09: debugging', 'GHA 09: exercise checks']"
+Run ./.github/actions/hello-container,2,"['GHA 10: custom actions', 'GHA 10: exercise checks']"
+Compile-fail doctests,1,[Rust course examples]
+workflowName,event,conclusion,createdAt
+GHA 03: triggers,push,failure,2026-09-14 12:45:24
+GHA 03: triggers,push,failure,2026-09-14 12:45:38
+GHA 03: triggers,workflow_dispatch,cancelled,2026-09-14 12:47:19
+GHA 06: undeclared input,push,startup_failure,2026-09-14 13:24:30
+run_id,jobs
+34852035176,"[{'job': commonjs, 'conclusion': failure}, {'job': container-on-windows, 'conclusion': failure}, {'job': inputs, 'conclusion': success}]"

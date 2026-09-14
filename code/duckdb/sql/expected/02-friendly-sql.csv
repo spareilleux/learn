@@ -1,0 +1,41 @@
+workflowName,runs,avg_took,max_took
+Java course examples,7,00:03:18.857148,00:04:48
+Rust course examples,18,00:01:32.888904,00:02:33
+Deploy to GitHub Pages,65,00:00:47.230784,00:02:29
+GHA 03: triggers,5,00:00:33.4,00:01:25
+GHA 07: security,4,00:00:10.25,00:00:11
+hour,runs
+2026-09-13 15:00:00,1
+2026-09-13 16:00:00,10
+2026-09-13 17:00:00,16
+2026-09-13 18:00:00,7
+2026-09-13 19:00:00,9
+createdAt,created_utc,hour_in_paris
+2026-09-13 15:53:16,2026-09-13 17:53:16+02,17
+createdAt,conclusion,previous,since_previous
+2026-09-13 16:20:06,success,NULL,NULL
+2026-09-13 16:21:09,success,success,00:01:03
+2026-09-13 16:45:55,success,success,00:24:46
+2026-09-13 17:13:25,success,success,00:27:30
+2026-09-13 17:40:34,failure,success,00:27:09
+2026-09-13 17:41:56,failure,failure,00:01:22
+2026-09-13 17:42:49,success,failure,00:00:53
+2026-09-13 19:09:08,failure,success,01:26:19
+2026-09-13 19:12:56,success,failure,00:03:48
+workflowName,conclusion,createdAt
+GHA 04: data between steps and jobs,failure,2026-09-14 12:47:40
+GHA 04: exercise checks,failure,2026-09-14 13:05:23
+GHA 05: exercise checks,failure,2026-09-14 13:18:20
+GHA 06: exercise checks,failure,2026-09-14 13:24:13
+GHA 06: undeclared input,startup_failure,2026-09-14 13:24:30
+GHA 09: debugging,cancelled,2026-09-14 13:40:10
+GHA 10: exercise checks,failure,2026-09-14 13:53:12
+workflowName,cancelled,failure,success
+Deploy to GitHub Pages,0,2,63
+GHA 03: triggers,2,2,1
+Java course examples,0,0,7
+Rust course examples,0,3,15
+sha,createdAt,startedAt,updatedAt
+04c8770,2026-09-13 17:52:33,2026-09-13 17:52:33,2026-09-13 17:53:19
+1adf60f,2026-09-13 16:50:10,2026-09-13 16:50:10,2026-09-13 16:50:43
+1de721b,2026-09-14 12:46:38,2026-09-14 12:46:38,2026-09-14 12:47:29

@@ -1,0 +1,13 @@
+workflowName,job,conclusion,runner_name,runner_is_null
+GHA 04: data between steps and jobs,consume,skipped,NULL,true
+Deploy to GitHub Pages,deploy,failure,,false
+GHA 09: exercise checks,job-timeout,skipped,NULL,true
+GHA 09: exercise checks,step-timeout,skipped,NULL,true
+name,name_1,conclusion
+build,Set up job,success
+build,Checkout,success
+build,"Install, build, and upload site",success
+os,job,step,took
+macos-latest,dotnet (macos-latest),Run actions/setup-dotnet@v6,00:00:11
+ubuntu-latest,java (ubuntu-latest),Run mvn -B verify,00:00:11
+windows-latest,dotnet (windows-latest),Run actions/setup-dotnet@v6,00:00:31

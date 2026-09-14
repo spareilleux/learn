@@ -3,6 +3,7 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 duckdb --version
+mkdir -p out
 status=0
 for script in sql/*.sql; do
   name=$(basename "$script" .sql)
