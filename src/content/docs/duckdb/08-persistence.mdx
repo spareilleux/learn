@@ -260,7 +260,7 @@ run_os_error $db -c "SELECT count(*) FROM runs;"
 run_os_error -readonly $db -c "SELECT count(*) FROM runs;"
 ```
 
-Both attempts fail, even the read-only one, and even though the first process isn't writing anything. The message depends on the operating system, so the script compares only the error type and the exit code, and prints the full message on the error output. From the CI logs and my machine:
+Both attempts fail, even the read-only one, and even though the first process isn't writing anything. The message depends on the operating system, so the script compares only the error type and the exit code, and prints the full message on the error output. From the CI logs and my machine ([`local_file_system.cpp`: Windows](https://github.com/duckdb/duckdb/blob/v1.5.5/src/common/local_file_system.cpp#L958-L1020), [Linux, macOS](https://github.com/duckdb/duckdb/blob/v1.5.5/src/common/local_file_system.cpp#L398-L453)):
 
 <Tabs syncKey="os">
 <TabItem label="Windows">

@@ -149,7 +149,7 @@ out/jobs-by-os/
 └── os=windows-latest/data_0.parquet   10,409 bytes
 ```
 
-Without `OVERWRITE`, a second run of the script fails, unlike `COPY` to a single file, which replaces it without a word:
+Without `OVERWRITE`, a second run of the script fails, unlike `COPY` to a single file, which replaces it without a word ([`physical_copy_to_file.cpp`](https://github.com/duckdb/duckdb/blob/v1.5.5/src/execution/operator/persistent/physical_copy_to_file.cpp#L436-L443)):
 
 ```text
 IO Error: Directory "out/jobs-by-os" is not empty! Enable OVERWRITE option to overwrite files
