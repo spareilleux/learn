@@ -18,9 +18,27 @@ sidebar:
 - [x] Lesson 9 — Concurrency and virtual threads
 - [x] Lesson 10 — Maven and Gradle in depth
 - [x] Lesson 11 — Testing
-- [ ] Lesson 12 — The standard library you reach for
+- [x] Lesson 12 — The standard library you reach for
 - [ ] Lesson 13 — The JVM at run time
 - [ ] Lesson 14 — Annotations, reflection and modules
+
+## 2026-09-13 — Lesson 12
+
+- Lesson 12's examples, their C# counterparts and three compile-fail snippets run in CI on Windows, Linux and macOS; the main project now has 123 tests. Every HTTP call goes to a local server, the JDK's `HttpServer` on the Java side and `HttpListener` on the C# side, so the output doesn't depend on the network.
+- The C# project had `InvariantGlobalization` enabled. Lesson 12 needs IANA time zones and named cultures, so ICU is now on, and `Program.cs` sets the current culture to the invariant culture. The outputs of lessons 2 to 9 didn't change.
+
+**Surprises coming from C#:**
+
+- Java's `HttpClient` doesn't follow redirects and has no request timeout unless you set them. Porting .NET code gets you a 302 with an empty body, or a call that can wait forever.
+- For a local time that happens twice, `ZonedDateTime` picks the summer-time offset and `TimeZoneInfo.GetUtcOffset` the standard one: one hour apart.
+- `YYYY` in a Java date pattern printed 2027 for December 31, 2026 with `Locale.US`, and 2026 with `Locale.FRANCE`.
+- `Files.readString` throws on invalid UTF-8, where `File.ReadAllText` replaces the byte.
+- A first probe printed `héllo` read from a UTF-8 file as `h�llo` in Git Bash on Windows, while the file itself was correct. JEP 400 leaves `System.out` on the console's encoding; *to verify*: which encoding Java picked in that terminal.
+
+**Things I got wrong first:**
+
+- The first C# probe ran with `InvariantGlobalization` on. `FindSystemTimeZoneById("Europe/Paris")` threw `TimeZoneNotFoundException` on Windows, and `new CultureInfo("fr-FR")` threw "Only the invariant culture is supported in globalization-invariant mode."
+- The first Java probe formatted numbers with the default locale, which is `en_CA` on my machine and something else on CI runners. The examples now pass a `Locale` everywhere the output depends on one.
 
 ## 2026-09-13 — Lesson 11
 

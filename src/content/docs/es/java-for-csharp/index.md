@@ -46,8 +46,8 @@ Escribes C# con soltura: clases, interfaces, genéricos, LINQ, `async`/`await`, 
 | 9 | [Concurrencia e hilos virtuales](09-concurrency-and-virtual-threads/) | `Task`, `async`/`await`, `lock`, `Parallel` |
 | 10 | [Maven y Gradle a fondo](10-maven-and-gradle-in-depth/) | NuGet, Central Package Management, soluciones |
 | 11 | [Pruebas](11-testing/) | xUnit, Moq, FluentAssertions |
-| 12 | La biblioteca estándar del día a día *(próximamente)* | `DateTime`, `decimal`, `HttpClient`, `System.IO` |
-| 13 | La JVM en tiempo de ejecución | el CLR, ajustes del GC, `dotnet-counters`, Native AOT |
+| 12 | [La biblioteca estándar del día a día](12-standard-library/) | `DateTime`, `decimal`, `HttpClient`, `System.IO` |
+| 13 | La JVM en tiempo de ejecución *(próximamente)* | el CLR, ajustes del GC, `dotnet-counters`, Native AOT |
 | 14 | Anotaciones, reflexión y módulos | atributos, generadores de código fuente, ensamblados |
 
 [Diario](journal/) — lo que probé, lo que me sorprendió, lo que aún me queda por verificar.

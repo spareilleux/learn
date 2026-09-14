@@ -18,9 +18,27 @@ sidebar:
 - [x] Lección 9 — Concurrencia e hilos virtuales
 - [x] Lección 10 — Maven y Gradle a fondo
 - [x] Lección 11 — Pruebas
-- [ ] Lección 12 — La biblioteca estándar del día a día
+- [x] Lección 12 — La biblioteca estándar del día a día
 - [ ] Lección 13 — La JVM en tiempo de ejecución
 - [ ] Lección 14 — Anotaciones, reflexión y módulos
+
+## 2026-09-13 — Lección 12
+
+- Los ejemplos de la lección 12, sus equivalentes en C# y tres fragmentos que no compilan se ejecutan en CI en Windows, Linux y macOS; el proyecto principal tiene ahora 123 pruebas. Todas las llamadas HTTP van a un servidor local, el `HttpServer` del JDK en el lado Java y `HttpListener` en el lado C#, así que la salida no depende de la red.
+- El proyecto C# tenía `InvariantGlobalization` activado. La lección 12 necesita las zonas horarias IANA y culturas con nombre, así que ICU está ahora activado, y `Program.cs` fija la cultura actual en la cultura invariable. Las salidas de las lecciones 2 a 9 no cambiaron.
+
+**Sorpresas viniendo de C#:**
+
+- El `HttpClient` de Java no sigue las redirecciones ni tiene timeout de petición salvo que se configuren. Al portar código .NET se obtiene un 302 con el cuerpo vacío, o una llamada que puede esperar para siempre.
+- Para una hora local que ocurre dos veces, `ZonedDateTime` elige el desfase del horario de verano y `TimeZoneInfo.GetUtcOffset` el estándar: una hora de diferencia.
+- `YYYY` en un patrón de fecha de Java imprimió 2027 para el 31 de diciembre de 2026 con `Locale.US`, y 2026 con `Locale.FRANCE`.
+- `Files.readString` lanza una excepción ante UTF-8 inválido, donde `File.ReadAllText` sustituye el byte.
+- Un primer programa de prueba imprimió `héllo`, leído de un archivo UTF-8, como `h�llo` en Git Bash en Windows, aunque el archivo era correcto. JEP 400 deja `System.out` con la codificación de la consola; *por verificar*: qué codificación eligió Java en ese terminal.
+
+**Lo que hice mal al principio:**
+
+- El primer programa de prueba en C# se ejecutó con `InvariantGlobalization` activado. `FindSystemTimeZoneById("Europe/Paris")` lanzó `TimeZoneNotFoundException` en Windows, y `new CultureInfo("fr-FR")` lanzó «Only the invariant culture is supported in globalization-invariant mode.»
+- El primer programa de prueba en Java formateaba los números con la configuración regional por defecto, que es `en_CA` en mi máquina y otra distinta en los runners de CI. Los ejemplos pasan ahora un `Locale` allí donde la salida depende de uno.
 
 ## 2026-09-13 — Lección 11
 

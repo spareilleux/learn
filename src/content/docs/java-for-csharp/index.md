@@ -46,8 +46,8 @@ You write C# comfortably: classes, interfaces, generics, LINQ, `async`/`await`, 
 | 9 | [Concurrency and virtual threads](09-concurrency-and-virtual-threads/) | `Task`, `async`/`await`, `lock`, `Parallel` |
 | 10 | [Maven and Gradle in depth](10-maven-and-gradle-in-depth/) | NuGet, Central Package Management, solutions |
 | 11 | [Testing](11-testing/) | xUnit, Moq, FluentAssertions |
-| 12 | The standard library you reach for *(coming next)* | `DateTime`, `decimal`, `HttpClient`, `System.IO` |
-| 13 | The JVM at run time | the CLR, GC settings, `dotnet-counters`, Native AOT |
+| 12 | [The standard library you reach for](12-standard-library/) | `DateTime`, `decimal`, `HttpClient`, `System.IO` |
+| 13 | The JVM at run time *(coming next)* | the CLR, GC settings, `dotnet-counters`, Native AOT |
 | 14 | Annotations, reflection and modules | attributes, source generators, assemblies |
 
 [Journal](journal/) — what I tried, what surprised me, what I still need to verify.
