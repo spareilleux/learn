@@ -177,6 +177,47 @@ using (var result = connection.Query("MATCH (p:Project) RETURN count(*); MATCH (
 connection.Query("CREATE (:Package {name: 'Test.A'}); CREATE (:Package {name: 'Test.B'})").Dispose();
 Console.WriteLine($"packages created by two statements: {string.Join(", ", Query("MATCH (k:Package) WHERE k.name STARTS WITH 'Test.' RETURN k.name ORDER BY k.name", row => row[0]))}");
 
+Section("Exercise 1. Dependents");
+using (var dependents = connection.Prepare("""
+    MATCH (d:Project)-[:REFERENCES*1..10]->(:Project {name: $name})
+    RETURN DISTINCT d.name
+    ORDER BY d.name
+    """))
+{
+    foreach (var name in new[] { "GA.Business.Assets", "GA.Data.MongoDB", "GaApi" })
+    {
+        var names = Dependents(dependents, name);
+        Console.WriteLine($"{name}: {names.Count} dependents{(names.Count > 0 ? $", from {names[0]} to {names[^1]}" : "")}");
+    }
+}
+
+Section("Exercise 2. Major versions in conflict");
+using (var conflicts = connection.Prepare("""
+    MATCH (a:Project)-[ua:USES]->(k:Package {name: $package}), (a)-[:REFERENCES*1..10]->(b:Project)-[ub:USES]->(k)
+    WHERE split_part(ua.version, '.', 1) <> split_part(ub.version, '.', 1)
+    RETURN DISTINCT a.name, ua.version, b.name, ub.version
+    ORDER BY a.name, b.name
+    """))
+{
+    foreach (var package in new[] { "MongoDB.Driver", "Microsoft.ML.Tokenizers" })
+    {
+        using var result = conflicts.Bind("package", package).Execute();
+        foreach (var row in result.Rows())
+        {
+            Console.WriteLine($"{package}: {row[0]} {row[1]}, but {row[2]} {row[3]}");
+        }
+    }
+}
+
+Section("Exercise 3. Casts");
+using (var result = connection.Query("MATCH (p:Project) RETURN count(*)"))
+{
+    var count = result.Rows().Single()[0];
+    Try(() => Console.WriteLine((int)count!));
+    Console.WriteLine((int)(long)count!);
+    Console.WriteLine(Convert.ToInt32(count));
+}
+
 if (mode == "timings")
 {
     Section("Timings (not compared)");
@@ -212,6 +253,12 @@ IEnumerable<T> Query<T>(string cypher, Func<object?[], T> map)
     {
         yield return map(row);
     }
+}
+
+static List<string> Dependents(PreparedStatement statement, string name)
+{
+    using var result = statement.Bind("name", name).Execute();
+    return result.Rows().Select(row => (string)row[0]!).ToList();
 }
 
 static void Try(Action action)

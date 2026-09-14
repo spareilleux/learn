@@ -62,3 +62,21 @@ LadybugQueryException: Binder exception: Cannot find property nam for p.
 LadybugQueryException: Runtime exception: Found duplicated primary key value Common/GA.Core/GA.Core.csproj, which violates the uniqueness constraint of the primary key column.
 two statements, one result: COUNT_STAR() = 111
 packages created by two statements: Test.A, Test.B
+
+== Exercise 1. Dependents
+GA.Business.Assets: 31 dependents, from AllProjects.AppHost to VectorSearchBenchmark
+GA.Data.MongoDB: 29 dependents, from AllProjects.AppHost to VectorSearchBenchmark
+GaApi: 4 dependents, from AllProjects.AppHost to VectorSearchBenchmark
+
+== Exercise 2. Major versions in conflict
+MongoDB.Driver: GA.Analytics.Service 3.2.0, but GA.Data.MongoDB 2.30.0
+MongoDB.Driver: GA.BSP.Service 3.2.0, but GA.Data.MongoDB 2.30.0
+MongoDB.Driver: GA.DocumentProcessing.Service 3.2.0, but GA.Data.MongoDB 2.30.0
+MongoDB.Driver: GaApi 3.5.0, but GA.Data.MongoDB 2.30.0
+Microsoft.ML.Tokenizers: GaApi 1.0.2, but GA.Business.ML 2.0.0
+Microsoft.ML.Tokenizers: GaApi 1.0.2, but GA.Domain.Services 2.0.0
+
+== Exercise 3. Casts
+InvalidCastException: Unable to cast object of type 'System.Int64' to type 'System.Int32'.
+111
+111
