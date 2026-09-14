@@ -1,0 +1,58 @@
+# GitHub Actions course, lesson 9: reading a failing run, debug logging, re-runs, timeouts
+name: "GHA 09: debugging"
+
+on:
+  workflow_dispatch:
+    inputs:
+      fail:
+        description: Make the test step fail
+        type: boolean
+        default: true
+  push:
+    branches: [main]
+    paths: ['.github/workflows/gha-09-debug.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  noisy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Groups, debug and notice messages
+        run: |
+          echo "::group::Environment of the step"
+          echo "RUNNER_OS=$RUNNER_OS RUNNER_ARCH=$RUNNER_ARCH"
+          echo "RUNNER_DEBUG='${RUNNER_DEBUG:-}'"
+          echo "::endgroup::"
+          echo "::debug::only visible when step debug logging is on"
+          echo "::notice title=Lesson 9::a notice annotation"
+      - name: Trace the commands with set -x
+        run: |
+          set -x
+          version=$(date -u +%Y.%m.%d)
+          test -n "$version"
+      - name: Tests (fail on demand, attempt ${{ github.run_attempt }})
+        run: |
+          if [ "${{ inputs.fail }}" = "true" ] && [ "${{ github.run_attempt }}" = "1" ]; then
+            echo "::error title=Flaky test::failed on attempt ${{ github.run_attempt }}"
+            exit 1
+          fi
+          echo "tests passed on attempt ${{ github.run_attempt }}"
+
+  independent:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "this job doesn't depend on noisy"
+
+  allowed-to-fail:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - run: exit 3
+
+  timeout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
+      - run: sleep 90
