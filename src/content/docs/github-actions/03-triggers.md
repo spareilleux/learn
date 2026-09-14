@@ -15,7 +15,7 @@ The `on:` key lists the events that start a run. The ones you use every day:
 | `pull_request` | a pull request is opened, updated (`synchronize`) or reopened | `pr:` |
 | `workflow_dispatch` | someone clicks *Run workflow*, or runs `gh workflow run` | manual run with `parameters:` |
 | `schedule` | a cron expression matches | `schedules:` |
-| `workflow_call` | another workflow calls this one (lesson 6) | templates |
+| `workflow_call` | another workflow calls this one ([lesson 6](../06-reuse/)) | templates |
 
 [`.github/workflows/gha-03-triggers.yml`](https://github.com/spareilleux/learn/blob/main/.github/workflows/gha-03-triggers.yml) combines four of them:
 

@@ -15,7 +15,7 @@ La clé `on:` liste les événements qui démarrent une exécution. Ceux que tu 
 | `pull_request` | une pull request est ouverte, mise à jour (`synchronize`) ou rouverte | `pr:` |
 | `workflow_dispatch` | quelqu'un clique sur *Run workflow*, ou lance `gh workflow run` | exécution manuelle avec `parameters:` |
 | `schedule` | une expression cron correspond | `schedules:` |
-| `workflow_call` | un autre workflow appelle celui-ci (leçon 6) | templates |
+| `workflow_call` | un autre workflow appelle celui-ci ([leçon 6](../06-reuse/)) | templates |
 
 [`.github/workflows/gha-03-triggers.yml`](https://github.com/spareilleux/learn/blob/main/.github/workflows/gha-03-triggers.yml) en combine quatre :
 

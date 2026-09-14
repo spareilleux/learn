@@ -13,7 +13,7 @@ sidebar:
 - [x] Lección 3: disparadores, filtros, inputs, concurrencia
 - [x] Lección 4: expresiones, contextos, salidas, condiciones
 - [x] Lección 5: cachés y artefactos (caché de NuGet con `packages.lock.json`, `actions/cache`, artefactos entre jobs)
-- [ ] Lección 6: workflows reutilizables y actions compuestas
+- [x] Lección 6: workflows reutilizables y acciones compuestas
 - [ ] Lección 7: seguridad — permisos, secretos, fijación de versiones, OIDC
 - [ ] Lección 8: desplegar en GitHub Pages
 - [ ] Lección 9: depurar ejecuciones
@@ -61,6 +61,14 @@ El sitio se quedó en la versión anterior hasta el push siguiente. Corrección 
 - Salida `cache-hit` de `actions/cache`: vacía sin acierto, `false` con una coincidencia de `restore-keys`, `true` con un acierto exacto.
 - Dos jobs de matrix que suben un artefacto llamado `os`: el README anuncia errores de conflicto; en tres ejecuciones de tres, las dos subidas tuvieron éxito y la ejecución tenía dos artefactos llamados `os`. `download-artifact` y `gh run download --name os` devolvieron ambos el de Ubuntu, sin aviso.
 - Caducidad de los artefactos: 7 días con `retention-days: 7`, si no, 90 días (`gh api repos/spareilleux/learn/actions/permissions/artifact-and-log-retention` → `{"days":90,"maximum_allowed_days":90}`).
+
+## 2026-09-14 — Lección 6: la reutilización, y una rama para un workflow no válido
+
+- La acción compuesta `dotnet-restore` restauró la caché de NuGet guardada por `gha-05`: misma clave y misma ruta, otro workflow. Las cachés pertenecen al repositorio y a la rama.
+- En el workflow llamado: `github.workflow` es el nombre del llamador, `job.workflow_ref` apunta a `gha-06-dotnet-test.yml`, el `env` a nivel de workflow del llamador está vacío.
+- Matrix de dos llamadas a un workflow reutilizable: la salida `tested-on` fue `Windows`, el job que terminó el último.
+- `run:` de acción compuesta sin `shell:`: `Required property is missing: shell`, solo cuando un job ejecuta la acción.
+- Input no declarado: `startup_failure`, ningún job, y `gh run view` no muestra el motivo (la página de la ejecución, sí). Probado desde una rama temporal `gha-06-invalid` para que `main` nunca contuviera un workflow no válido. El borrado de la rama remota lo bloqueó un hook de seguridad local: sigue ahí, hay que borrarla a mano.
 
 ## Preguntas abiertas
 

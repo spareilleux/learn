@@ -13,7 +13,7 @@ sidebar:
 - [x] Leçon 3 : déclencheurs, filtres, inputs, concurrence
 - [x] Leçon 4 : expressions, contextes, outputs, conditions
 - [x] Leçon 5 : caches et artefacts (cache NuGet avec `packages.lock.json`, `actions/cache`, artefacts entre jobs)
-- [ ] Leçon 6 : workflows réutilisables et actions composites
+- [x] Leçon 6 : workflows réutilisables et actions composites
 - [ ] Leçon 7 : sécurité — permissions, secrets, épinglage, OIDC
 - [ ] Leçon 8 : déployer sur GitHub Pages
 - [ ] Leçon 9 : déboguer les exécutions
@@ -61,6 +61,14 @@ Le site est resté sur la version précédente jusqu'au push suivant. Correction
 - Output `cache-hit` d'`actions/cache` : vide quand aucun cache n'est trouvé, `false` sur une correspondance `restore-keys`, `true` quand la clé exacte est trouvée.
 - Deux jobs de matrix qui envoient un artefact nommé `os` : le README annonce des erreurs de conflit ; trois exécutions sur trois, les deux envois ont réussi et l'exécution avait deux artefacts nommés `os`. `download-artifact` et `gh run download --name os` ont tous deux renvoyé celui d'Ubuntu, sans avertissement.
 - Expiration des artefacts : 7 jours avec `retention-days: 7`, sinon 90 jours (`gh api repos/spareilleux/learn/actions/permissions/artifact-and-log-retention` → `{"days":90,"maximum_allowed_days":90}`).
+
+## 2026-09-14 — Leçon 6 : la réutilisation, et une branche pour un workflow invalide
+
+- L'action composite `dotnet-restore` a restauré le cache NuGet enregistré par `gha-05` : même clé et même chemin, un autre workflow. Les caches appartiennent au dépôt et à la branche.
+- Dans le workflow appelé : `github.workflow` est le nom de l'appelant, `job.workflow_ref` pointe vers `gha-06-dotnet-test.yml`, l'`env` de niveau workflow de l'appelant est vide.
+- Matrix de deux appels de workflow réutilisable : l'output `tested-on` valait `Windows`, le job qui a fini en dernier.
+- `run:` d'action composite sans `shell:` : `Required property is missing: shell`, seulement quand un job exécute l'action.
+- Input non déclaré : `startup_failure`, aucun job, et `gh run view` n'affiche pas la raison (la page de l'exécution, si). Testé depuis une branche temporaire `gha-06-invalid` pour que `main` ne porte jamais de workflow invalide. La suppression de la branche distante a été bloquée par un hook de sécurité local : elle est toujours là, à supprimer à la main.
 
 ## Questions ouvertes
 

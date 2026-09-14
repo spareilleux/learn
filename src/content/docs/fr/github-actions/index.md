@@ -38,7 +38,7 @@ Tu sais compiler et tester un projet .NET ou Java en ligne de commande (`dotnet 
 | 3 | [Déclencheurs, filtres et concurrence](03-triggers/) | `trigger`, `pr`, `schedules`, paramètres |
 | 4 | [Expressions, contextes et outputs](04-expressions-and-outputs/) | `$[ ]`, variables, variables de sortie, `condition` |
 | 5 | [Caches et artefacts](05-caches-and-artifacts/) | `Cache@2`, `PublishPipelineArtifact@1` |
-| 6 | Workflows réutilisables et actions composites *(à venir)* | templates |
+| 6 | [Workflows réutilisables et actions composites](06-reuse/) | templates de step, de job et de stage |
 | 7 | Sécurité : permissions, secrets, OIDC *(à venir)* | connexions de service |
 | 8 | Déployer sur GitHub Pages *(à venir)* | environnements, approbations |
 | 9 | Déboguer les exécutions *(à venir)* | logs de diagnostic |

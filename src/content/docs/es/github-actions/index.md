@@ -38,7 +38,7 @@ Sabes compilar y probar un proyecto .NET o Java desde la línea de comandos (`do
 | 3 | [Disparadores, filtros y concurrencia](03-triggers/) | `trigger`, `pr`, `schedules`, parámetros |
 | 4 | [Expresiones, contextos y salidas](04-expressions-and-outputs/) | `$[ ]`, variables, variables de salida, `condition` |
 | 5 | [Cachés y artefactos](05-caches-and-artifacts/) | `Cache@2`, `PublishPipelineArtifact@1` |
-| 6 | Workflows reutilizables y actions compuestas *(próximamente)* | plantillas |
+| 6 | [Workflows reutilizables y acciones compuestas](06-reuse/) | plantillas de step, de job y de stage |
 | 7 | Seguridad: permisos, secretos, OIDC *(próximamente)* | conexiones de servicio |
 | 8 | Desplegar en GitHub Pages *(próximamente)* | entornos, aprobaciones |
 | 9 | Depurar ejecuciones *(próximamente)* | logs de diagnóstico |

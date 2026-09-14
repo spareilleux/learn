@@ -13,7 +13,7 @@ sidebar:
 - [x] Lesson 3: triggers, filters, inputs, concurrency
 - [x] Lesson 4: expressions, contexts, outputs, conditions
 - [x] Lesson 5: caches and artifacts (NuGet cache with `packages.lock.json`, `actions/cache`, artifacts between jobs)
-- [ ] Lesson 6: reusable workflows and composite actions
+- [x] Lesson 6: reusable workflows and composite actions
 - [ ] Lesson 7: security — permissions, secrets, pinning, OIDC
 - [ ] Lesson 8: deploying to GitHub Pages
 - [ ] Lesson 9: debugging runs
@@ -61,6 +61,14 @@ The site stayed on the previous version until the next push. Fix in `deploy.yml`
 - `actions/cache` output `cache-hit`: empty on a miss, `false` on a `restore-keys` match, `true` on an exact hit.
 - Two matrix jobs uploading an artifact named `os`: the README announces conflict errors; three runs out of three, both uploads succeeded and the run had two artifacts named `os`. `download-artifact` and `gh run download --name os` both returned the Ubuntu one, without warning.
 - Artifact expiry: 7 days with `retention-days: 7`, otherwise 90 days (`gh api repos/spareilleux/learn/actions/permissions/artifact-and-log-retention` → `{"days":90,"maximum_allowed_days":90}`).
+
+## 2026-09-14 — Lesson 6: reuse, and a branch for an invalid workflow
+
+- The composite action `dotnet-restore` restored the NuGet cache saved by `gha-05`: same key and path, another workflow. Caches belong to the repository and branch.
+- In the called workflow: `github.workflow` is the caller's name, `job.workflow_ref` points to `gha-06-dotnet-test.yml`, the caller's workflow-level `env` is empty.
+- Matrix of two reusable workflow calls: the output `tested-on` was `Windows`, the job that finished last.
+- Composite `run:` without `shell:`: `Required property is missing: shell`, only when a job runs the action.
+- Undeclared input: `startup_failure`, no job, and `gh run view` doesn't show the reason (the run page does). Tested from a temporary branch `gha-06-invalid` so that `main` never carried an invalid workflow. Deleting the remote branch was blocked by a local safety hook: it's still there, to delete by hand.
 
 ## Open questions
 
