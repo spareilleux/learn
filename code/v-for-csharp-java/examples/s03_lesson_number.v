@@ -17,7 +17,8 @@ fn total_lines(fields []string) !int {
 }
 
 fn main() {
-	for title in ['8. Persistence, transactions and concurrency', 'Mission', 'v2. Draft', '12. Cross-compilation'] {
+	for title in ['8. Persistence, transactions and concurrency', 'Mission', 'v2. Draft',
+		'12. Cross-compilation'] {
 		if n := lesson_number(title) {
 			println('${n}: ${title}')
 		} else {
