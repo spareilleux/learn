@@ -280,7 +280,7 @@ La descarga eligió uno de ellos sin ningún aviso — el de Ubuntu, tanto en el
 <details>
 <summary>Solución</summary>
 
-Falla en el step `setup-dotnet`, después de instalar el SDK:
+Falla en el step `setup-dotnet`, después de instalar el SDK ([`setup-dotnet/src/cache-restore.ts`](https://github.com/actions/setup-dotnet/blob/a98b56852c35b8e3190ac28c8c2271da59106c68/src/cache-restore.ts#L38-L47)):
 
 ```text
 ##[error]Dependencies lock file is not found in /home/runner/work/learn/learn. Supported file patterns: packages.lock.json

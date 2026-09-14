@@ -86,7 +86,7 @@ try {
 }
 ```
 
-- The runner passes each input as an environment variable: "converts input names to uppercase letters and replaces spaces with `_` characters". Hyphens stay: `max-length` becomes `INPUT_MAX-LENGTH`, a name bash can't read as `$INPUT_MAX-LENGTH` but Node can.
+- The runner passes each input as an environment variable: "converts input names to uppercase letters and replaces spaces with `_` characters" ([`Runner.Worker/Handlers/Handler.cs`](https://github.com/actions/runner/blob/v2.337.0/src/Runner.Worker/Handlers/Handler.cs#L181-L187)). Hyphens stay: `max-length` becomes `INPUT_MAX-LENGTH`, a name bash can't read as `$INPUT_MAX-LENGTH` but Node can.
 - Outputs use the same `$GITHUB_OUTPUT` file as `run:` steps ([lesson 4](../04-expressions-and-outputs/)); errors use the same `::error::` workflow command.
 - Most real actions use the [`@actions/core`](https://github.com/actions/toolkit/tree/main/packages/core) package for this (`core.getInput`, `core.setOutput`, `core.setFailed`), and then must commit `node_modules` or a bundled `dist/index.js`: the runner doesn't run `npm install`. Without dependencies, there's nothing to bundle.
 

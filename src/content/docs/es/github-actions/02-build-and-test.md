@@ -165,7 +165,7 @@ En Windows, `run:` usa PowerShell 7 por defecto. `dotnet test` y `mvn -B verify`
 
 ## La caché, medida
 
-La primera ejecución no encontró caché de Maven y guardó una; una segunda ejecución (iniciada con `gh workflow run gha-02-build.yml`) la restauró:
+La primera ejecución no encontró caché de Maven y guardó una; una segunda ejecución (iniciada con `gh workflow run gha-02-build.yml`) la restauró ([`setup-java/src/cache.ts`](https://github.com/actions/setup-java/blob/de7274f081f381c8f8158605e0321c36c376e2e6/src/cache.ts#L260-L275)):
 
 ```text
 maven cache is not found

@@ -86,7 +86,7 @@ try {
 }
 ```
 
-- El runner pasa cada input como variable de entorno: «convierte los nombres de los inputs a letras mayúsculas y reemplaza los espacios por caracteres `_`». Los guiones se quedan: `max-length` pasa a ser `INPUT_MAX-LENGTH`, un nombre que bash no puede leer como `$INPUT_MAX-LENGTH`, pero Node sí.
+- El runner pasa cada input como variable de entorno: «convierte los nombres de los inputs a letras mayúsculas y reemplaza los espacios por caracteres `_`» ([`Runner.Worker/Handlers/Handler.cs`](https://github.com/actions/runner/blob/v2.337.0/src/Runner.Worker/Handlers/Handler.cs#L181-L187)). Los guiones se quedan: `max-length` pasa a ser `INPUT_MAX-LENGTH`, un nombre que bash no puede leer como `$INPUT_MAX-LENGTH`, pero Node sí.
 - Las salidas usan el mismo archivo `$GITHUB_OUTPUT` que los steps `run:` ([lección 4](../04-expressions-and-outputs/)); los errores, el mismo comando de workflow `::error::`.
 - La mayoría de las acciones reales usan para esto el paquete [`@actions/core`](https://github.com/actions/toolkit/tree/main/packages/core) (`core.getInput`, `core.setOutput`, `core.setFailed`), y entonces deben incluir en el commit `node_modules` o un bundle `dist/index.js`: el runner no ejecuta `npm install`. Sin dependencias, no hay nada que empaquetar.
 

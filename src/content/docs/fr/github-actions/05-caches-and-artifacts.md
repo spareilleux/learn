@@ -280,7 +280,7 @@ Le téléchargement a pris l'un des deux sans le moindre avertissement — celui
 <details>
 <summary>Solution</summary>
 
-Il échoue dans le step `setup-dotnet`, après avoir installé le SDK :
+Il échoue dans le step `setup-dotnet`, après avoir installé le SDK ([`setup-dotnet/src/cache-restore.ts`](https://github.com/actions/setup-dotnet/blob/a98b56852c35b8e3190ac28c8c2271da59106c68/src/cache-restore.ts#L38-L47)) :
 
 ```text
 ##[error]Dependencies lock file is not found in /home/runner/work/learn/learn. Supported file patterns: packages.lock.json
