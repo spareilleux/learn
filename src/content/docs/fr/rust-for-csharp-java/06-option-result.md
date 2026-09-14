@@ -9,7 +9,7 @@ Exemple complet : [`examples/l06_option_result.rs`](https://github.com/spareille
 
 ## Deux choses que Rust n'a pas
 
-Rust n'a **pas de `null`** et **pas d'exceptions**. Les deux sont remplacés par deux enums de la bibliothèque standard — construites exactement comme celles de la [leçon 5](../05-structs-enums-match/) :
+Rust n'a **pas de `null`** et **pas d'exceptions**. Les deux sont remplacés par deux enums de la bibliothèque standard — construites exactement comme celles de la [leçon 5](../05-structs-enums-match/) ([`core/src/option.rs`](https://github.com/rust-lang/rust/blob/1.94.0/library/core/src/option.rs#L600-L609), [`core/src/result.rs`](https://github.com/rust-lang/rust/blob/1.94.0/library/core/src/result.rs#L557-L567)) :
 
 ```rust
 enum Option<T> {

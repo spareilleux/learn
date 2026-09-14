@@ -40,7 +40,7 @@ println!("square!(1 + 2) = {}", square!(1 + 2));   // 9
 
 `$x:expr` captura una expresión completa y la mantiene agrupada, así que `square!(1 + 2)` es `(1 + 2) * (1 + 2)` = 9. Un `#define SQUARE(x) x * x` de C daría `1 + 2 * 1 + 2` = 5. Las macros de Rust trabajan sobre el árbol sintáctico, no sobre el texto.
 
-La repetición, `$( … ),*`, maneja listas — así está escrito `vec!` ([líneas 11-17](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l15_macros_unsafe.rs#L11-L17), [64-67](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l15_macros_unsafe.rs#L64-L67)):
+La repetición, `$( … ),*`, maneja listas — así está escrito `vec!` ([líneas 11-17](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l15_macros_unsafe.rs#L11-L17), [64-67](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l15_macros_unsafe.rs#L64-L67), [`alloc/src/macros.rs`](https://github.com/rust-lang/rust/blob/1.94.0/library/alloc/src/macros.rs#L42-L57)):
 
 ```rust
 macro_rules! hashmap {

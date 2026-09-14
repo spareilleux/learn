@@ -138,7 +138,7 @@ println!("{:?}", account.borrow());  // borrow() -> Ref<Account>, like &
 // Account { balance: 75 }
 ```
 
-Break the rule and the program **panics** ([`src/lib.rs`, lines 761-764](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L761-L764)):
+Break the rule and the program **panics** ([`src/lib.rs`, lines 761-764](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L761-L764), [`core/src/cell.rs`](https://github.com/rust-lang/rust/blob/1.94.0/library/core/src/cell.rs#L885-L895)):
 
 ```rust
 let log = RefCell::new(Vec::new());
