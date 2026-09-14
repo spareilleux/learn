@@ -17,7 +17,7 @@ sidebar:
 - [x] Lesson 5: LadybugDB from C#
 - [x] Lesson 6: LadybugDB from Java
 - [x] Lesson 7: graph algorithms and full-text search
-- [ ] Lesson 8: persistence, transactions and concurrency
+- [x] Lesson 8: persistence, transactions and concurrency
 
 ## 2026-09-14 — The data
 
@@ -102,6 +102,21 @@ CALL page_rank('G1') RETURN node.id, rank;
 - PageRank ranks sum to 0.3534 on the ga graph: the 25 projects without an outgoing reference don't pass their rank on. Exercise 1 recomputes two ranks with `(1 - 0.85) / N + 0.85 × Σ rank / out_degree`, to four decimals.
 - `RETURN n + sum(x)`, with `n` from `WITH count(*) AS n`, fails with `Cannot evaluate expression with type AGGREGATE_FUNCTION.`; `RETURN n, n + sum(x)` works, and so does `RETURN 2 * sum(x)`.
 - FTS: the English stemmer matches *queries* for *query* and *Persistance* for *persistant*; the French stemmer doesn't match *Persistence*. Case is folded, accents aren't (`donnees` finds nothing). The default stop words are English whatever the stemmer. After a `CREATE`, the index includes the new node and the other scores change. `DROP_FTS_INDEX` reports `Table 3_titles_fr_terms has been dropped.`, an internal table.
+
+## 2026-09-14 — Lesson 8: transactions, files and processes
+
+- An error inside a manual transaction rolls the whole transaction back and ends it, without a message saying so: runtime errors (a duplicate key), binder errors, catalog errors, a `BEGIN` inside a transaction and `CHECKPOINT` inside a transaction all do it. The statements that follow run in auto-commit; `ROLLBACK` and `COMMIT` then fail with `No active transaction`. The only exception found: a write inside `BEGIN TRANSACTION READ ONLY` fails, and the transaction stays open. The [transactions page](https://docs.ladybugdb.com/cypher/transaction/) promises that nothing of a failed transaction persists, and doesn't say that the statements after the error run on their own.
+- A second write transaction is refused at once, `Cannot start a new write transaction in the system. Only one write transaction at a time is allowed in the system.`, even when it touches other nodes; there's no waiting and no timeout. A refused auto-commit statement leaves the connection usable.
+- Java, **a refused `BEGIN TRANSACTION` breaks the connection**: the next query throws `RuntimeException: Unknown Error` on Windows, and crashes the JVM with `SIGSEGV` on Linux (`CatalogSet::traverseVersionChainsForTransactionNoLock`) and macOS (`CatalogSet::containsEntry`), exit code 134. A `BEGIN` that succeeds repairs the connection on Windows; a retried `BEGIN` doesn't crash on any of the three runners (exercise 2: 153, 155 and 24 refusals). Minimal reproduction, an in-memory `Database` and two connections: `first` runs `BEGIN TRANSACTION`, `second` runs `BEGIN TRANSACTION` (refused), `first` runs `COMMIT`, `second` runs any `MATCH`. The C# package and the other bindings weren't tested.
+- The files: `.wal` appears at the first commit and disappears at the checkpoint when the database closes; no `.wal` for an uncommitted transaction. `kill -9` after a commit leaves the `.wal`, replayed by the next open; `kill -9` inside a transaction loses the transaction. Closing a Java `Database` with an open transaction rolls it back.
+- A second read-write process fails with `Could not set lock on file`, followed by `(Error: 33)` on Windows and `(Error: Resource temporarily unavailable)` on Linux. The POSIX code closes the file descriptor before `F_GETLK`, so its `Lock is held by PID` message can't appear ([`local_file_system.cpp`, lines 147-172](https://github.com/LadybugDB/ladybug/blob/v0.20.4/src/common/file_system/local_file_system.cpp#L147-L172)).
+- **A read-only database takes no lock** ([`storage_manager.cpp`, lines 87-91](https://github.com/LadybugDB/ladybug/blob/v0.20.4/src/storage/storage_manager.cpp#L87-L91)). A read-only process opens a file a writer holds on Linux and macOS, and sees the writer's committed changes from the `.wal`; not on Windows, where the writer's `LockFileEx` makes the read fail with `Error 33`. A writer opens, writes and checkpoints a file a read-only process holds, on the three OSes, and the reader keeps answering from the old state. The [concurrency page](https://docs.ladybugdb.com/concurrency/) says this combination isn't allowed.
+- In one Java process, a second read-write `Database`, or a read-only one, on a file a read-write `Database` holds: refused on Windows, opened on Linux and macOS (`fcntl` locks belong to the process).
+- `new Database(path)` throws `java.lang.Exception`, a checked exception it doesn't declare ([`lbug_java.cpp`, lines 618-636](https://github.com/LadybugDB/ladybug-java/blob/f2fb39f/src/jni/lbug_java.cpp#L618-L636)).
+- `EXPORT DATABASE` in CSV writes the macros into `schema.cypher`; the [migration page](https://docs.ladybugdb.com/migrate/) lists a `macro.cypher` file that isn't created. The CSV headers are prefixed with `a.`. The order of the options in `copy.cypher` differs between Windows and Linux or macOS. `IMPORT DATABASE` into a non-empty database fails with `Project already exists in catalog.`
+- 0.20.4 opened read-only leaves a 0.19.1 file as it is; opened read-write, it upgrades it from storage version 43 to 47 without a message, and the 0.19.1 CLI then says `Database file version: 47, Current build storage version: 43`.
+- CI: the first run failed on the three `cypher` jobs, because `files.sh`, run under `set -e`, returned the exit code of the last 0.19.1 CLI; `check.sh` now ignores it and compares the output. The `java` jobs on Linux and macOS crashed at the refused `BEGIN`, now in a mode of its own. The second run failed on macOS only: `ls` sorted `Project.csv` after `copy.cypher`; the script sorts with `LC_ALL=C`.
+- With its output redirected to a file, the CLI writes nothing until it exits: `files.sh` waits for the `.wal` file, or a fixed time, rather than for a line of output.
 
 ## 2026-09-14 — Bugs found in 0.20.4
 
@@ -254,3 +269,6 @@ Expected 13:30 for the first two as well: `COPY` and `LOAD FROM` convert the sam
 - The C# program on `linux-arm64` and `osx-x64`, and the Java program on `linux_arm64`: the CI runners are `linux-x64`, `win-x64` and `osx-arm64`.
 - Whether `CREATE_FTS_INDEX` also crashes the 0.20.4 CLI on the Windows runner: the CI runs lesson 7 with 0.19.1 only.
 - Whether the two isolated projects of `Common`, `GA.Business.DSL.SourceGen` and `GA.Business.Core.Generated`, are used in ga some other way than a `ProjectReference`.
+- Whether a read-only process that stays open while a writer checkpoints returns wrong data, and not only old data, when it reads pages it hadn't cached (lesson 8).
+- On Linux and macOS, whether closing the second `Database` of a process releases the `fcntl` lock of the first one, as closing any descriptor of a file releases the process's locks on it, and lets another process open the file read-write.
+- Whether a refused `BEGIN` also breaks a connection of the C# package and of the other bindings.

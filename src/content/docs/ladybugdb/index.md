@@ -7,7 +7,7 @@ sidebar:
 ---
 
 :::note[How this course is tested]
-Every query in this course is in [`code/ladybugdb/cypher`](https://github.com/spareilleux/learn/tree/main/code/ladybugdb/cypher), next to its expected output. [`.github/workflows/ladybugdb-examples.yml`](https://github.com/spareilleux/learn/blob/main/.github/workflows/ladybugdb-examples.yml) runs them all with the LadybugDB CLI on Linux, Windows and macOS and compares the results, and does the same with the C# program of lesson 5 and the Java program of lesson 6. The outputs in the lessons were captured with LadybugDB 0.20.4 in September 2026, with the 0.19.1 CLI for the extensions of lesson 7, with the `LadybugDB` NuGet package 0.19.1 for C#, and with the `com.ladybugdb:lbug` Maven package 0.20.4 for Java.
+Every query in this course is in [`code/ladybugdb/cypher`](https://github.com/spareilleux/learn/tree/main/code/ladybugdb/cypher), next to its expected output. [`.github/workflows/ladybugdb-examples.yml`](https://github.com/spareilleux/learn/blob/main/.github/workflows/ladybugdb-examples.yml) runs them all with the LadybugDB CLI on Linux, Windows and macOS and compares the results, and does the same with the C# program of lesson 5, the Java programs of lessons 6 and 8, and the script of lesson 8 that starts and kills CLI processes on a database file. The outputs in the lessons were captured with LadybugDB 0.20.4 in September 2026, with the 0.19.1 CLI for the extensions of lesson 7, with the `LadybugDB` NuGet package 0.19.1 for C#, and with the `com.ladybugdb:lbug` Maven package 0.20.4 for Java.
 :::
 
 ## Why I'm learning this
@@ -67,7 +67,7 @@ Lessons 5 and 6 query another repository: the .NET projects of [GuitarAlchemist/
 | 5 | [LadybugDB from C#](05-csharp/) | ADO.NET |
 | 6 | [LadybugDB from Java](06-java/) | JDBC |
 | 7 | [Graph algorithms and full-text search](07-algorithms/) | full-text indexes, `CONTAINSTABLE` |
-| 8 | Persistence, transactions and concurrency (coming next) | isolation, locks |
+| 8 | [Persistence, transactions and concurrency](08-persistence/) | isolation, locks, the transaction log |
 | — | [Journal](journal/) | |
 
 ## Resources
