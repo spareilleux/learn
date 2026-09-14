@@ -1,4 +1,4 @@
-# DuckDB course: run the SQL of every lesson with the DuckDB CLI on three OSes and compare the output
+# DuckDB course: run the SQL of every lesson with the DuckDB CLI, and the C# and Java programs, on three OSes and compare the output
 name: DuckDB course examples
 
 on:
@@ -42,3 +42,20 @@ jobs:
           unzip -q duckdb.zip -d "$RUNNER_TEMP/duckdb"
           echo "$RUNNER_TEMP/duckdb" >> "$GITHUB_PATH"
       - run: bash code/duckdb/check.sh
+
+  csharp:
+    name: csharp (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: code/duckdb/csharp/global.json
+      - run: bash code/duckdb/csharp/check.sh

@@ -1,0 +1,39 @@
+DuckDB v1.5.5
+
+== 1. A query with a data reader
+Deploy to GitHub Pages    65 runs  2 failures
+Rust course examples      18 runs  3 failures
+Java course examples       7 runs  0 failures
+
+== 2. Parameters
+Rust course failures: 3
+
+== 3. DuckDB types as .NET types
+workflowName Varchar      System.String
+databaseId   BigInt       System.Int64
+createdAt    Timestamp    System.DateTime
+day          Date         System.DateOnly
+took         Interval     System.TimeSpan
+created_utc  TimestampTz  System.DateTime
+total        HugeInt      System.Numerics.BigInteger
+pair         List         System.Collections.Generic.List`1[System.String]
+info         Struct       System.Collections.Generic.Dictionary`2[System.String,System.Object]
+created_utc as DateTime: 2026-09-13 15:53:16, Kind = Unspecified
+created_utc as DateTimeOffset: 2026-09-13 15:53:16 +00:00
+took: 00:00:39
+
+== 4. Lists and structs
+labels: ubuntu-latest
+first step as a dictionary: number=1, name=Set up job, conclusion=success, started_at=2026-09-14 14:01:15, completed_at=2026-09-14 14:01:19
+step 1: Set up job, success, 4 s, StartedAt = 0001-01-01 00:00:00
+step 2: Checkout, success, 2 s, StartedAt = 0001-01-01 00:00:00
+step 3: Install, build, and upload site, success, 48 s, StartedAt = 0001-01-01 00:00:00
+
+== 5. Errors
+DuckDBException, ErrorType = Invalid
+Binder Error: Referenced column "workflow_name" not found in FROM clause!
+
+== 6. Dapper
+34772306529 Rust course examples     2026-09-13 17:40:34 00:00:40
+34772373891 Rust course examples     2026-09-13 17:41:56 00:00:31
+34776807003 Rust course examples     2026-09-13 19:09:08 00:01:55
