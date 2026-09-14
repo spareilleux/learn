@@ -97,7 +97,8 @@ for f in compiler_bugs/*.v; do
 done
 
 # Lesson 8: v test on a project, without the timings, the order of the files and the absolute paths
-(cd l08-testing && v test .) > out/l08_test.raw.txt 2>&1
+# v test hides the OK lines when CI or GITHUB_JOB is set, unless VTEST_HIDE_OK=0
+(cd l08-testing && VTEST_HIDE_OK=0 v test .) > out/l08_test.raw.txt 2>&1
 code=$?
 {
   grep -E '^(OK|FAIL)' out/l08_test.raw.txt | sed -E 's/^(OK|FAIL) .* [^ ]*l08-testing\//\1 /' | sort
