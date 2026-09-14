@@ -15,7 +15,7 @@ sidebar:
 - [x] Lesson 4: Git history and CI runs as a graph
 - [x] Data: the .NET projects of GuitarAlchemist/ga at commit `a26a7893`
 - [x] Lesson 5: LadybugDB from C#
-- [ ] Lesson 6: LadybugDB from Java
+- [x] Lesson 6: LadybugDB from Java
 - [ ] Lesson 7: graph algorithms and full-text search
 - [ ] Lesson 8: persistence, transactions and concurrency
 
@@ -66,6 +66,19 @@ sidebar:
 - First CI push: the C# job failed on the three OSes. The internal ID of `GaApi` was `0:11` on Windows and `0:47` on Linux and macOS, from the same CSV; `SHORTEST` chose a path through `GA.Business.ML` on my machine and through `GA.Business.AI` on the runners, among two of the same length; and the CLI on the Linux runner printed `Warning: failed to create directory: /home/runner/.lbdb/` when opening a file read-only. The program now compares IDs instead of printing them and lists the `ALL SHORTEST` paths sorted; `check.sh` filters the warning.
 - The 0.20.4 CLI, opening a 0.19.1 database file read-write, rewrites it to storage version 47 without a message; the 0.19.1 package then fails with `Failed to open Ladybug database at '…'`, without the reason. `--read_only` leaves the file readable by both.
 - The binding doesn't expose `lbug_query_result_has_next_query_result`, `lbug_connection_interrupt` or `lbug_connection_set_query_timeout` of the C API: a `Query` with several statements returns the first result only, and a long query can't be stopped from C#.
+
+## 2026-09-14 — Lesson 6: the Java package
+
+- `com.ladybugdb:lbug` 0.20.4 on Maven Central: one jar of 29,339,834 bytes with the native library for `linux_amd64`, `linux_arm64`, `osx_arm64` and `windows_amd64`, no `osx_amd64`. It pulls 13 more jars, 7 MB: `kotlin-stdlib` 2.3.20, Apache Arrow 18.2.0, Jackson, FlatBuffers, commons-codec and SLF4J.
+- The sources jar matches the [`ladybug-java`](https://github.com/LadybugDB/ladybug-java) repository at `f2fb39f`, the submodule commit of LadybugDB v0.20.4. The sources live in a `com/lbugdb` folder, but the package is `com.ladybugdb`.
+- The [Java page of the documentation](https://docs.ladybugdb.com/client-apis/java/) still shows `throws ObjectRefDestroyedException`; 0.20.4 throws `RuntimeException` with messages such as `Connection has been destroyed.`
+- A failed query returns a result with `isSuccess()` false; `getNext()` on it throws `RuntimeException` with the same message.
+- A `PreparedStatement` keeps the values of its last execution: `execute(statement, Map.of("nom", 5))` after `Map.of("n", 2.5)` runs with `n = 2.5` and no error. On a new statement, the same map fails with `Parameter n not found.`
+- `Value.getValue()` throws `Type of value is not supported in value_get_value` for `LIST` and `MAP`, and doesn't handle `STRUCT`, `NODE`, `REL` or `RECURSIVE_REL` either; the `LbugList`, `LbugStruct`, `LbugMap` and `Value…Util` classes read them.
+- `interval('1 month 2 days')` comes back as `PT768H`: the JNI code converts the interval to seconds with 30-day months.
+- `setQueryTimeout(1)` stops the walks of lesson 3 with `Interrupted.`, and `getNextQueryResult()` reads the second statement of a query: both missing from the .NET package.
+- The native library is copied to a new temporary file at each JVM start, and `deleteOnExit` can't delete a loaded DLL on Windows: 13 copies, 190 MB, in `%TEMP%` after the runs of this lesson on my machine, 3 copies on the Windows runner after three runs, none on the Linux and macOS runners.
+- The first CI push of the Java job passed on the three OSes: lesson 5 had already made the output independent of internal IDs and of the path `SHORTEST` chooses.
 
 ## 2026-09-14 — Bugs found in 0.20.4
 
@@ -215,4 +228,4 @@ Expected 13:30 for the first two as well: `COPY` and `LOAD FROM` convert the sam
 - The minimal reproductions were run on Windows only. The course scripts that show bugs 1, 2, 4 and 5 on the site data give the same output on the three CI runners.
 - Whether these bugs are already fixed on LadybugDB's main branch, after 0.20.4.
 - Whether the major version conflicts of lesson 5's exercise 2 (`MongoDB.Driver` 2 and 3, `Microsoft.ML.Tokenizers` 1 and 2) break ga at run time: I haven't built or run ga.
-- The C# program on `linux-arm64` and `osx-x64`: the CI runners are `linux-x64`, `win-x64` and `osx-arm64`.
+- The C# program on `linux-arm64` and `osx-x64`, and the Java program on `linux_arm64`: the CI runners are `linux-x64`, `win-x64` and `osx-arm64`.

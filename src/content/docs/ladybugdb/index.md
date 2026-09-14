@@ -7,7 +7,7 @@ sidebar:
 ---
 
 :::note[How this course is tested]
-Every query in this course is in [`code/ladybugdb/cypher`](https://github.com/spareilleux/learn/tree/main/code/ladybugdb/cypher), next to its expected output. [`.github/workflows/ladybugdb-examples.yml`](https://github.com/spareilleux/learn/blob/main/.github/workflows/ladybugdb-examples.yml) runs them all with the LadybugDB CLI on Linux, Windows and macOS and compares the results, and does the same with the C# program of lesson 5. The outputs in the lessons were captured with LadybugDB 0.20.4 in September 2026, and with the `LadybugDB` NuGet package 0.19.1 for C#.
+Every query in this course is in [`code/ladybugdb/cypher`](https://github.com/spareilleux/learn/tree/main/code/ladybugdb/cypher), next to its expected output. [`.github/workflows/ladybugdb-examples.yml`](https://github.com/spareilleux/learn/blob/main/.github/workflows/ladybugdb-examples.yml) runs them all with the LadybugDB CLI on Linux, Windows and macOS and compares the results, and does the same with the C# program of lesson 5 and the Java program of lesson 6. The outputs in the lessons were captured with LadybugDB 0.20.4 in September 2026, with the `LadybugDB` NuGet package 0.19.1 for C#, and with the `com.ladybugdb:lbug` Maven package 0.20.4 for Java.
 :::
 
 ## Why I'm learning this
@@ -65,7 +65,7 @@ Lessons 5 and 6 query another repository: the .NET projects of [GuitarAlchemist/
 | 3 | [Paths: variable length and shortest paths](03-paths/) | recursive CTEs |
 | 4 | [Git history and CI runs as a graph](04-git-history/) | self-joins, junction tables |
 | 5 | [LadybugDB from C#](05-csharp/) | ADO.NET |
-| 6 | LadybugDB from Java (coming next) | JDBC |
+| 6 | [LadybugDB from Java](06-java/) | JDBC |
 | 7 | Graph algorithms and full-text search (coming next) | |
 | 8 | Persistence, transactions and concurrency (coming next) | isolation, locks |
 | — | [Journal](journal/) | |
