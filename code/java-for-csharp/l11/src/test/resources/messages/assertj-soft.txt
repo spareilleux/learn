@@ -1,0 +1,10 @@
+org.assertj.core.error.AssertJMultipleFailuresError: 
+Multiple Failures (2 failures)
+-- failure 1 --
+expected: "grace"
+ but was: "ada"
+at FailureMessagesTest.lambda$assertjSoftAssertions$1(FailureMessagesTest.java:66)
+-- failure 2 --
+expected: 300L
+ but was: 250L
+at FailureMessagesTest.lambda$assertjSoftAssertions$1(FailureMessagesTest.java:67)

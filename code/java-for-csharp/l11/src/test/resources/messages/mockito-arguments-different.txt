@@ -1,0 +1,7 @@
+org.mockito.exceptions.verification.opentest4j.ArgumentsAreDifferent: 
+Argument(s) are different! Wanted:
+paymentGateway.charge("ada", 300L);
+-> at shop.FailureMessagesTest.lambda$mockitoWrongArguments$0(FailureMessagesTest.java:75)
+Actual invocations have different arguments at position [1]:
+paymentGateway.charge("ada", 250L);
+-> at shop.FailureMessagesTest.mockitoWrongArguments(FailureMessagesTest.java:74)

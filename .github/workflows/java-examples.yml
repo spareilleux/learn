@@ -64,3 +64,8 @@ jobs:
         run: |
           bash l10/check.sh "$RUNNER_TEMP/l10"
           diff -r --strip-trailing-cr l10/expected "$RUNNER_TEMP/l10"
+      # Lesson 11 runs a test suite with JUnit, AssertJ and Mockito, then NullAway, and compares what the lesson quotes
+      - name: Lesson 11 tests
+        run: |
+          bash l11/check.sh "$RUNNER_TEMP/l11"
+          diff -r --strip-trailing-cr l11/expected "$RUNNER_TEMP/l11"
