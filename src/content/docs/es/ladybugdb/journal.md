@@ -1,6 +1,6 @@
 ---
 title: Diario
-description: Notas de progreso fechadas — datos, ejecuciones de CI, bugs encontrados en LadybugDB 0.20.4 y puntos por verificar.
+description: Notas de progreso fechadas — datos, ejecuciones de CI, bugs encontrados en LadybugDB 0.20.4 y en el paquete NuGet 0.19.1, y puntos por verificar.
 sidebar:
   order: 99
 ---
@@ -13,9 +13,10 @@ sidebar:
 - [x] Lección 2: cargar archivos
 - [x] Lección 3: caminos
 - [x] Lección 4: el historial de Git y las ejecuciones de CI como grafo
-- [ ] Lección 5: LadybugDB desde C#
-- [ ] Lección 6: LadybugDB desde Java
-- [ ] Lección 7: algoritmos de grafos y búsqueda de texto completo
+- [x] Datos: los proyectos .NET de GuitarAlchemist/ga en el commit `a26a7893`
+- [x] Lección 5: LadybugDB desde C#
+- [x] Lección 6: LadybugDB desde Java
+- [x] Lección 7: algoritmos de grafos y búsqueda de texto completo
 - [ ] Lección 8: persistencia, transacciones y concurrencia
 
 ## 2026-09-14 — Los datos
@@ -55,9 +56,56 @@ sidebar:
 - El límite superior de un patrón de longitud variable está limitado a 30 ([`client_config.h`, línea 32](https://github.com/LadybugDB/ladybug/blob/v0.20.4/src/include/main/client_config.h#L32)) hasta un `CALL var_length_extend_max_depth = …`; un patrón que necesita más no devuelve nada, sin error.
 - Los recuentos de caminos de 4 enlaces de la lección 3 se comprobaron dos veces fuera de LadybugDB: un script de Python sobre `links.csv` (recorridos 1, 5, 12, 29; senderos 26; acíclicos 1, 5, 9, 10), y una CTE recursiva en DuckDB (recorridos 1, 5, 12, 29), que la CI ejecuta.
 
+## 2026-09-14 — Lección 5: los datos de ga y el paquete de C#
+
+- [`data/ga/extract.py`](https://github.com/spareilleux/learn/blob/main/code/ladybugdb/data/ga/extract.py) solo necesita los archivos de proyecto: un clon con `--filter=blob:none` y un sparse checkout de `*.csproj`, `*.fsproj` y `*.slnx` descarga los archivos de proyecto de ga sin el resto de su contenido. Omite las copias que hay en las carpetas `.claude`.
+- 111 proyectos, 266 referencias de proyecto, 478 referencias de paquete, 136 paquetes. Una referencia apunta a `reactapp1.client.esproj`, un proyecto JavaScript que la extracción no conserva: la lección carga las referencias con `IGNORE_ERRORS`.
+- La columna `version` es lo que dice cada archivo de proyecto. El `Directory.Build.props` de ga sobrescribe 14 paquetes con `PackageReference Update`, y la extracción no lo aplica; las consultas de la lección evitan esos paquetes.
+- Dos proyectos se llaman `GaApi.Tests`, en `Tests/Apps/GaApi.Tests` y `Tests/GaApi.Tests`; el segundo no está en `AllProjects.slnx`. En total, 38 proyectos no están en él.
+- NuGet: `LadybugDB` tiene tres versiones, `0.17.0-alpha.1`, `0.18.2` y `0.19.1`; la 0.19.1 incluye el motor 0.19.1, versión de almacenamiento 43. El binding no es ADO.NET y no tiene página en docs.ladybugdb.com: leí su código fuente en el commit [`0f58f1a`](https://github.com/LadybugDB/ladybug-dotnet/tree/0f58f1a).
+- Primer push de CI: el job de C# falló en los tres sistemas operativos. El ID interno de `GaApi` era `0:11` en Windows y `0:47` en Linux y macOS, a partir del mismo CSV; `SHORTEST` eligió un camino que pasaba por `GA.Business.ML` en mi máquina y por `GA.Business.AI` en los runners, entre dos de la misma longitud; y la CLI del runner de Linux imprimía `Warning: failed to create directory: /home/runner/.lbdb/` al abrir un archivo en solo lectura. Ahora el programa compara los IDs en lugar de imprimirlos y lista los caminos `ALL SHORTEST` ordenados; `check.sh` filtra la advertencia.
+- La CLI 0.20.4, al abrir en lectura-escritura un archivo de base de datos 0.19.1, lo reescribe a la versión de almacenamiento 47 sin ningún mensaje; después, el paquete 0.19.1 falla con `Failed to open Ladybug database at '…'`, sin la causa. `--read_only` deja el archivo legible por ambos.
+- El binding no expone `lbug_query_result_has_next_query_result`, `lbug_connection_interrupt` ni `lbug_connection_set_query_timeout` de la API de C: un `Query` con varias sentencias solo devuelve el primer resultado, y una consulta larga no se puede detener desde C#.
+
+## 2026-09-14 — Lección 6: el paquete de Java
+
+- `com.ladybugdb:lbug` 0.20.4 en Maven Central: un único jar de 29.339.834 bytes con la biblioteca nativa para `linux_amd64`, `linux_arm64`, `osx_arm64` y `windows_amd64`, sin `osx_amd64`. Arrastra 13 jars más, 7 MB: `kotlin-stdlib` 2.3.20, Apache Arrow 18.2.0, Jackson, FlatBuffers, commons-codec y SLF4J.
+- El jar de fuentes coincide con el repositorio [`ladybug-java`](https://github.com/LadybugDB/ladybug-java) en `f2fb39f`, el commit del submódulo de LadybugDB v0.20.4. Las fuentes están en una carpeta `com/lbugdb`, pero el paquete es `com.ladybugdb`.
+- La [página de Java de la documentación](https://docs.ladybugdb.com/client-apis/java/) todavía muestra `throws ObjectRefDestroyedException`; la 0.20.4 lanza `RuntimeException` con mensajes como `Connection has been destroyed.`
+- Una consulta fallida devuelve un resultado con `isSuccess()` a false; `getNext()` sobre él lanza `RuntimeException` con el mismo mensaje.
+- Un `PreparedStatement` conserva los valores de su última ejecución: `execute(statement, Map.of("nom", 5))` después de `Map.of("n", 2.5)` se ejecuta con `n = 2.5` y sin error. Sobre una sentencia nueva, el mismo mapa falla con `Parameter n not found.`
+- `Value.getValue()` lanza `Type of value is not supported in value_get_value` para `LIST` y `MAP`, y tampoco maneja `STRUCT`, `NODE`, `REL` ni `RECURSIVE_REL`; las clases `LbugList`, `LbugStruct`, `LbugMap` y `Value…Util` los leen.
+- `interval('1 month 2 days')` vuelve como `PT768H`: el código JNI convierte el intervalo a segundos con meses de 30 días.
+- `setQueryTimeout(1)` detiene los recorridos de la lección 3 con `Interrupted.`, y `getNextQueryResult()` lee la segunda sentencia de una consulta: ambos faltan en el paquete .NET.
+- La biblioteca nativa se copia a un nuevo archivo temporal en cada arranque de la JVM, y `deleteOnExit` no puede borrar una DLL cargada en Windows: 13 copias, 190 MB, en `%TEMP%` tras las ejecuciones de esta lección en mi máquina, 3 copias en el runner de Windows tras tres ejecuciones, ninguna en los runners de Linux y macOS.
+- El primer push de CI del job de Java pasó en los tres sistemas operativos: la lección 5 ya había hecho la salida independiente de los IDs internos y del camino que elige `SHORTEST`.
+
+## 2026-09-14 — Lección 7: extensiones, algoritmos y búsqueda de texto completo
+
+- Con la CLI 0.20.4, `INSTALL algo` descarga la build para 0.20.0, y `LOAD algo` falla en los tres runners de la CI: `libnetworkit.so: cannot open shared object file` en Linux, `Library not loaded: @rpath/libnetworkit.dylib` en macOS, con rutas de la propia máquina de build de LadybugDB en el mensaje, y `The specified module could not be found.` en Windows. El [issue #857](https://github.com/LadybugDB/ladybug/issues/857) está abierto.
+- `LOAD fts` funciona con 0.20.4 en los tres runners, pero en mi máquina Windows la CLI termina con `0xC0000409`, sin imprimir nada, en el primer `CREATE_FTS_INDEX`, incluso sobre una tabla de una sola fila. En Linux (WSL), el mismo script funciona con 0.20.4.
+- La CLI 0.19.1 descarga las builds para 0.19.0; `algo` y `fts` se cargan y dan la misma salida en Windows, Linux y macOS. La CI la instala como `lbug19`; `check.sh` imprime el resultado de `LOAD algo` y `LOAD fts` con 0.20.4 en cada ejecución, sin compararlo.
+- La CLI de Windows, 0.19.1 y 0.20.4, importa `libssl-3-x64.dll` y `libcrypto-3-x64.dll`, que no están en el archivo zip; con solo `C:\Windows\System32` en el `PATH`, termina con `0xC0000135`. Git for Windows proporciona ambas DLL. La lección 1 ya lo indica.
+- `project_graph_cypher` no está en la documentación. Crea un grafo de tipo `CYPHER`, y `page_rank` y `weakly_connected_components` sobre él fallan con `Binder exception: AA`: [`gds.cpp`, línea 72](https://github.com/LadybugDB/ladybug/blob/v0.19.1/src/function/gds/gds.cpp#L72), todavía presente en 0.20.4. El test del motor para esta función solo crea el grafo. Reproducción mínima, con 0.19.1 en Windows:
+
+```cypher
+LOAD algo;
+CREATE NODE TABLE P(id INT64 PRIMARY KEY, age INT64);
+CREATE REL TABLE E(FROM P TO P);
+CREATE (:P {id: 1, age: 5}), (:P {id: 2, age: 20}), (:P {id: 3, age: 7});
+MATCH (a:P {id: 1}), (b:P {id: 3}) CREATE (a)-[:E]->(b);
+CALL project_graph_cypher('G1', 'MATCH (n:P) WHERE n.age < 10 RETURN n');
+CALL page_rank('G1') RETURN node.id, rank;
+```
+
+- Louvain sobre el grafo de ga: 5 comunidades de tamaños `[27,20,17,14,14]` en un proceso de la CLI, `[25,20,18,18,11]` en los dos siguientes, con `CALL threads = 1`; tres llamadas en un mismo proceso dan los mismos tamaños. Los nodos sin ninguna relación reciben `louvain_id` -1.
+- Los rangos de PageRank suman 0,3534 sobre el grafo de ga: los 25 proyectos sin referencia saliente no transmiten su rango. El ejercicio 1 recalcula dos rangos con `(1 - 0.85) / N + 0.85 × Σ rank / out_degree`, con cuatro decimales.
+- `RETURN n + sum(x)`, con `n` procedente de `WITH count(*) AS n`, falla con `Cannot evaluate expression with type AGGREGATE_FUNCTION.`; `RETURN n, n + sum(x)` funciona, y también `RETURN 2 * sum(x)`.
+- FTS: el stemmer inglés hace coincidir *queries* con *query* y *Persistance* con *persistant*; el stemmer francés no hace coincidir *Persistence*. Las mayúsculas se ignoran, los acentos no (`donnees` no encuentra nada). Las stop words por defecto son inglesas sea cual sea el stemmer. Tras un `CREATE`, el índice incluye el nuevo nodo y las demás puntuaciones cambian. `DROP_FTS_INDEX` informa `Table 3_titles_fr_terms has been dropped.`, una tabla interna.
+
 ## 2026-09-14 — Bugs encontrados en la 0.20.4
 
-Cinco bugs silenciosos: ningún error, un resultado incorrecto. Ninguno tenía un issue en el [tracker de LadybugDB](https://github.com/LadybugDB/ladybug/issues) cuando busqué el 2026-09-14; no los he reportado. Cada reproducción de abajo se ejecuta en una base de datos en memoria vacía (`lbug -m csv < repro.cypher`) y solo se ejecutó en Windows, salvo que se indique lo contrario.
+Seis bugs silenciosos: ningún error, un resultado incorrecto. Ninguno tenía un issue en el [tracker de LadybugDB](https://github.com/LadybugDB/ladybug/issues) cuando busqué el 2026-09-14; no los he reportado. Cada reproducción de abajo se ejecuta en una base de datos en memoria vacía (`lbug -m csv < repro.cypher`) y solo se ejecutó en Windows, salvo que se indique lo contrario.
 
 ### 1. `COPY` desde una subconsulta JSON con `MATCH` conecta los nodos equivocados
 
@@ -104,6 +152,8 @@ y,5,1
 ```
 
 Los mismos agregados, en el otro orden, dan los totales correctos.
+
+La lección 5 encontró una forma más general, también en el motor 0.19.1 del paquete NuGet: con una clave de agrupación, un agregado después de un agregado `DISTINCT` en la misma proyección es incorrecto. `RETURN k.name, collect(DISTINCT u.version) AS versions, count(*) AS projects` da 0 proyectos para `MongoDB.Driver` en lugar de 14.
 
 ### 3. `ACYCLIC` conserva caminos que repiten un nodo
 
@@ -182,8 +232,25 @@ parents,cs
 
 La subconsulta devuelve 0 para el nodo 1, pero la consulta agrupada no tiene fila `0,1`. `OPTIONAL MATCH` con `count(…)` da los dos grupos (lección 4).
 
+### 6. `timestamp()` y `CAST(… AS TIMESTAMP)` ignoran el desfase
+
+```cypher
+RETURN timestamp('2026-09-14T09:30:00-04:00') AS f, CAST('2026-09-14T09:30:00-04:00' AS TIMESTAMP) AS c, CAST('2026-09-14T09:30:00-04:00' AS TIMESTAMP_TZ) AS tz;
+```
+
+```text
+f,c,tz
+2026-09-14 09:30:00,2026-09-14 09:30:00,2026-09-14 13:30:00+00
+```
+
+Esperaba 13:30 también para los dos primeros: `COPY` y `LOAD FROM` convierten el mismo texto de un archivo CSV a 13:30 UTC (lección 4). El desfase se descarta sin aplicarse. `timestamp(…)` en el paquete C# 0.19.1 también devuelve 09:30 (lección 5).
+
 ## Por verificar
 
 - El script de instalación (`curl -s https://install.ladybugdb.com | bash`) y `brew install ladybug`: no se ejecutaron para este curso.
 - Las reproducciones mínimas solo se ejecutaron en Windows. Los scripts del curso que muestran los bugs 1, 2, 4 y 5 sobre los datos del sitio dan la misma salida en los tres runners de la CI.
 - Si estos bugs ya están corregidos en la rama principal de LadybugDB, después de la 0.20.4.
+- Si los conflictos de versión mayor del ejercicio 2 de la lección 5 (`MongoDB.Driver` 2 y 3, `Microsoft.ML.Tokenizers` 1 y 2) rompen ga en tiempo de ejecución: no he compilado ni ejecutado ga.
+- El programa C# en `linux-arm64` y `osx-x64`, y el programa Java en `linux_arm64`: los runners de la CI son `linux-x64`, `win-x64` y `osx-arm64`.
+- Si `CREATE_FTS_INDEX` también hace fallar la CLI 0.20.4 en el runner de Windows: la CI ejecuta la lección 7 solo con 0.19.1.
+- Si los dos proyectos aislados de `Common`, `GA.Business.DSL.SourceGen` y `GA.Business.Core.Generated`, se usan en ga de alguna otra forma que un `ProjectReference`.

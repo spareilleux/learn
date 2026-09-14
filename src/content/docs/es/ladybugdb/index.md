@@ -1,13 +1,13 @@
 ---
 title: LadybugDB — Misión
-description: Aprender LadybugDB, la base de datos de grafos embebida que continúa Kuzu, consultando con Cypher los enlaces entre las páginas de este sitio, su historial de Git y sus ejecuciones de CI — desde la línea de comandos, y luego desde C# y Java.
+description: Aprender LadybugDB, la base de datos de grafos embebida que continúa Kuzu, consultando con Cypher los enlaces entre las páginas de este sitio, su historial de Git, sus ejecuciones de CI y los proyectos de una solución .NET — desde la línea de comandos, y luego desde C# y Java.
 sidebar:
   label: Misión
   order: 0
 ---
 
 :::note[Cómo se prueba este curso]
-Cada consulta de este curso está en [`code/ladybugdb/cypher`](https://github.com/spareilleux/learn/tree/main/code/ladybugdb/cypher), junto a su salida esperada. [`.github/workflows/ladybugdb-examples.yml`](https://github.com/spareilleux/learn/blob/main/.github/workflows/ladybugdb-examples.yml) las ejecuta todas con la CLI de LadybugDB en Linux, Windows y macOS y compara los resultados. Las salidas de las lecciones se capturaron con LadybugDB 0.20.4 en septiembre de 2026.
+Cada consulta de este curso está en [`code/ladybugdb/cypher`](https://github.com/spareilleux/learn/tree/main/code/ladybugdb/cypher), junto a su salida esperada. [`.github/workflows/ladybugdb-examples.yml`](https://github.com/spareilleux/learn/blob/main/.github/workflows/ladybugdb-examples.yml) las ejecuta todas con la CLI de LadybugDB en Linux, Windows y macOS y compara los resultados, y hace lo mismo con el programa C# de la lección 5 y el programa Java de la lección 6. Las salidas de las lecciones se capturaron con LadybugDB 0.20.4 en septiembre de 2026, con la CLI 0.19.1 para las extensiones de la lección 7, con el paquete NuGet `LadybugDB` 0.19.1 para C#, y con el paquete Maven `com.ladybugdb:lbug` 0.20.4 para Java.
 :::
 
 ## Por qué estoy aprendiendo esto
@@ -46,6 +46,8 @@ LadybugDB se llamaba [antes Kuzu](https://github.com/LadybugDB/ladybug#readme). 
 
 La lección 4 añade las 125 ejecuciones de CI de [`code/duckdb/data/runs.json`](https://github.com/spareilleux/learn/blob/main/code/duckdb/data/runs.json), la instantánea que consulta el curso de DuckDB.
 
+Las lecciones 5 y 6 consultan otro repositorio: los proyectos .NET de [GuitarAlchemist/ga](https://github.com/GuitarAlchemist/ga) en el commit [`a26a7893`](https://github.com/GuitarAlchemist/ga/commit/a26a7893), extraídos por [`code/ladybugdb/data/ga/extract.py`](https://github.com/spareilleux/learn/blob/main/code/ladybugdb/data/ga/extract.py): 111 proyectos, 266 referencias de proyecto y 478 referencias de paquete.
+
 ## Al final de este curso, sabré
 
 - modelar datos como tablas de nodos y tablas de relaciones, y consultarlos con patrones de Cypher;
@@ -62,9 +64,9 @@ La lección 4 añade las 125 ejecuciones de CI de [`code/duckdb/data/runs.json`]
 | 2 | [Cargar archivos: `LOAD FROM`, `COPY`, advertencias](02-loading/) | `OPENROWSET`, `BULK INSERT` |
 | 3 | [Caminos: longitud variable y caminos más cortos](03-paths/) | CTE recursivas |
 | 4 | [El historial de Git y las ejecuciones de CI como grafo](04-git-history/) | self-joins, tablas intermedias |
-| 5 | LadybugDB desde C# (próximamente) | ADO.NET |
-| 6 | LadybugDB desde Java (próximamente) | JDBC |
-| 7 | Algoritmos de grafos y búsqueda de texto completo (próximamente) | |
+| 5 | [LadybugDB desde C#](05-csharp/) | ADO.NET |
+| 6 | [LadybugDB desde Java](06-java/) | JDBC |
+| 7 | [Algoritmos de grafos y búsqueda de texto completo](07-algorithms/) | índices de texto completo, `CONTAINSTABLE` |
 | 8 | Persistencia, transacciones y concurrencia (próximamente) | aislamiento, bloqueos |
 | — | [Diario](journal/) | |
 

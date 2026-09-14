@@ -1,0 +1,662 @@
+---
+title: 7. Algoritmos de grafos y búsqueda de texto completo
+description: Las extensiones algo y fts sobre el grafo de proyectos de GuitarAlchemist/ga y sobre este sitio — componentes, PageRank, k-core, Louvain, grafos proyectados, búsqueda BM25 con stemmers y stop words — y por qué esta lección usa la CLI 0.19.1.
+sidebar:
+  order: 7
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Las lecciones 1 a 6 hacían preguntas cuya respuesta es un patrón: este proyecto referencia a aquel, esta página enlaza a aquella. Esta lección hace preguntas sobre el grafo entero: qué proyectos forman ciclos, cuáles están aislados, cuáles importan más. Y busca en texto, los títulos de las páginas del sitio y los asuntos de los commits de la lección 4, con un índice que entiende de palabras.
+
+| | SQL Server | Neo4j | LadybugDB |
+|---|---|---|---|
+| Algoritmos de grafos | ninguno; SQL Graph solo tiene `SHORTEST_PATH` | [Graph Data Science](https://neo4j.com/docs/graph-data-science/current/), una biblioteca aparte | la [extensión `algo`](https://docs.ladybugdb.com/extensions/algo/) |
+| Búsqueda de texto completo | [índices de texto completo](https://learn.microsoft.com/sql/relational-databases/search/full-text-search), `CONTAINSTABLE` | índices de texto completo, sobre Lucene | la [extensión `fts`](https://docs.ladybugdb.com/extensions/full-text-search/), BM25 |
+
+Todas las consultas están en [`cypher/07-algorithms.cypher`](https://github.com/spareilleux/learn/blob/main/code/ladybugdb/cypher/07-algorithms.cypher), y la CI compara su salida con [`cypher/expected/07-algorithms.csv`](https://github.com/spareilleux/learn/blob/main/code/ladybugdb/cypher/expected/07-algorithms.csv) en los tres sistemas operativos, como los scripts de las lecciones 1 a 4. Con una diferencia: **esta lección usa la CLI 0.19.1**.
+
+## Qué CLI
+
+`algo` y `fts` son [extensiones](https://docs.ladybugdb.com/extensions/), como `json` en la lección 2: `INSTALL` las descarga una vez, `LOAD` las carga en cada sesión. Con la CLI 0.20.4, la CI imprime esto en el runner de Linux:
+
+```text
+Extension: algo installed from the repo: https://extension.ladybugdb.com/.
+Error: IO exception: Failed to load library: /home/runner/.lbdb/extension/0.20.0/linux_amd64/algo/libalgo.lbug_extension which is needed by extension: algo.
+Error: libnetworkit.so: cannot open shared object file: No such file or directory.
+Extension: fts installed from the repo: https://extension.ladybugdb.com/.
+Extension: fts has been loaded.
+```
+
+Las CLI 0.20.x descargan las extensiones compiladas para 0.20.0, y `algo` necesita una biblioteca que no se publica con ella: `libnetworkit.dylib` en el runner de macOS, una DLL que el error no nombra en Windows. El problema está [abierto en el tracker de LadybugDB](https://github.com/LadybugDB/ladybug/issues/857). `fts` se carga en los tres runners, pero en mi máquina Windows la CLI 0.20.4 se detiene en el primer `CREATE_FTS_INDEX`, sin mensaje, con el código de salida `0xC0000409`. Dos issues cerrados describen la misma familia de problemas: [extensiones de otra versión](https://github.com/LadybugDB/ladybug/issues/903) y [dependencias de Windows de `fts` que faltan](https://github.com/LadybugDB/ladybug/issues/942).
+
+La CLI 0.19.1 descarga las extensiones compiladas para 0.19.0, y ambas se cargan y funcionan en Windows, Linux y macOS. El curso la instala junto a la 0.20.4 con otro nombre, `lbug19`:
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+```powershell
+curl.exe -L -o lbug19.zip https://github.com/LadybugDB/ladybug/releases/download/v0.19.1/lbug_cli-windows-x86_64.zip
+Expand-Archive lbug19.zip -DestinationPath lbug19
+Rename-Item lbug19\lbug.exe lbug19.exe
+.\lbug19\lbug19.exe --version
+```
+
+`lbug.exe`, en la 0.19.1 como en la 0.20.4, necesita `libssl-3-x64.dll` y `libcrypto-3-x64.dll`, que no están en el archivo zip. Sin ellas, termina con el código `0xC0000135` y ningún mensaje. En mi máquina, vienen de Git for Windows, `C:\Program Files\Git\mingw64\bin`, cuando esa carpeta está en el `PATH`; Git Bash la pone ahí.
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```bash
+curl -L -o lbug19.tar.gz https://github.com/LadybugDB/ladybug/releases/download/v0.19.1/lbug_cli-linux-x86_64.tar.gz
+mkdir -p /tmp/lbug19 && tar -xzf lbug19.tar.gz -C /tmp/lbug19
+mv /tmp/lbug19/lbug ~/.local/bin/lbug19
+lbug19 --version
+```
+
+</TabItem>
+<TabItem label="macOS">
+
+```bash
+curl -L -o lbug19.tar.gz https://github.com/LadybugDB/ladybug/releases/download/v0.19.1/lbug_cli-osx-arm64.tar.gz
+mkdir -p /tmp/lbug19 && tar -xzf lbug19.tar.gz -C /tmp/lbug19
+mv /tmp/lbug19/lbug ~/.local/bin/lbug19
+lbug19 --version
+```
+
+</TabItem>
+</Tabs>
+
+```text
+Lbug 0.19.1
+```
+
+Luego, una vez, desde `code/ladybugdb`:
+
+```bash
+printf 'INSTALL algo;\nINSTALL fts;\n' | lbug19
+lbug19 < cypher/07-algorithms.cypher
+```
+
+Las extensiones de cada versión van a su propia carpeta, `~/.lbdb/extension/0.19.0/` y `~/.lbdb/extension/0.20.0/`: las dos CLI no se pisan. [`check.sh`](https://github.com/spareilleux/learn/blob/main/code/ladybugdb/check.sh) ejecuta con `lbug19` los scripts que lo piden en su cabecera, e imprime, sin compararlo, lo que hacen `LOAD algo` y `LOAD fts` con la CLI actual: el día que carguen, el log de la CI lo mostrará.
+
+## Grafos proyectados
+
+Los algoritmos no se ejecutan sobre tablas sino sobre un *grafo proyectado*: un nombre para un conjunto de tablas de nodos y de relaciones, que la conexión conserva hasta cerrarse ([líneas 8-15](https://github.com/spareilleux/learn/blob/0147f10/code/ladybugdb/cypher/07-algorithms.cypher#L8-L15)):
+
+```cypher
+CREATE NODE TABLE Project(path STRING PRIMARY KEY, name STRING, language STRING, sdk STRING, frameworks STRING, in_solution BOOLEAN);
+CREATE REL TABLE REFERENCES(FROM Project TO Project);
+COPY Project FROM 'data/ga/projects.csv' (HEADER = true);
+COPY REFERENCES FROM 'data/ga/project_refs.csv' (HEADER = true, IGNORE_ERRORS = true);
+
+CALL project_graph('Deps', ['Project'], ['REFERENCES']);
+CALL show_projected_graphs() RETURN *;
+```
+
+```text
+┌────────┬────────┐
+│ name   │ type   │
+│ STRING │ STRING │
+├────────┼────────┤
+│ Deps   │ NATIVE │
+└────────┴────────┘
+```
+
+Los mismos 111 proyectos y 265 referencias que en la lección 5; la 266.ª apunta a un proyecto JavaScript, que no está en `projects.csv`, y va a las advertencias. No se copia nada: la [documentación](https://docs.ladybugdb.com/extensions/algo/) dice que el algoritmo lee las tablas del disco cuando se ejecuta. Cada algoritmo es una función de tabla, llamada con `CALL`, que devuelve una fila por nodo.
+
+## Componentes: ciclos e islas
+
+Una compilación solo puede ordenar los proyectos si ninguna referencia da la vuelta en círculo. Las *componentes fuertemente conexas* son los grupos de nodos que se alcanzan todos entre sí ([líneas 18-21](https://github.com/spareilleux/learn/blob/0147f10/code/ladybugdb/cypher/07-algorithms.cypher#L18-L21)):
+
+```cypher
+CALL strongly_connected_components('Deps')
+WITH group_id, count(*) AS projects
+RETURN projects, count(*) AS components
+ORDER BY projects DESC;
+```
+
+```text
+┌──────────┬────────────┐
+│ projects │ components │
+│ INT64    │ INT64      │
+├──────────┼────────────┤
+│ 1        │ 111        │
+└──────────┴────────────┘
+```
+
+111 componentes de un proyecto: ningún ciclo, como exige MSBuild. Las *componentes débilmente conexas* ignoran la dirección: dos proyectos están en la misma cuando una cadena de referencias los conecta, en cualquier dirección ([líneas 24-27](https://github.com/spareilleux/learn/blob/0147f10/code/ladybugdb/cypher/07-algorithms.cypher#L24-L27)):
+
+```text
+┌──────────┬────────────┐
+│ projects │ components │
+│ INT64    │ INT64      │
+├──────────┼────────────┤
+│ 92       │ 1          │
+│ 1        │ 19         │
+└──────────┴────────────┘
+```
+
+Un continente de 92 proyectos, y 19 islas. Los valores de `group_id` dependen de los offsets internos de los nodos, así que las consultas agrupan por ellos pero nunca los imprimen. ¿Qué proyectos son las islas ([líneas 30-35](https://github.com/spareilleux/learn/blob/0147f10/code/ladybugdb/cypher/07-algorithms.cypher#L30-L35))?
+
+```cypher
+CALL weakly_connected_components('Deps')
+WITH group_id, collect(node) AS members
+WHERE size(members) = 1
+UNWIND members AS p
+RETURN p.path AS path, p.in_solution AS in_solution
+ORDER BY p.path;
+```
+
+```text
+┌──────────────────────────────────────────────────────────────────────────────────────────────┬─────────────┐
+│ path                                                                                         │ in_solution │
+│ STRING                                                                                       │ BOOL        │
+├──────────────────────────────────────────────────────────────────────────────────────────────┼─────────────┤
+│ Apps/ScenesService/ScenesService.csproj                                                      │ False       │
+│ Apps/demerzel-bridge/DemerzelBridge/DemerzelBridge.csproj                                    │ False       │
+│ Apps/ga-server/GaApi/CUDA/VectorOperations.csproj                                            │ True        │
+│ ChordSystemTest/ChordSystemTest.csproj                                                       │ True        │
+│ Common/GA.Business.Core.Generated/GA.Business.Core.Generated.fsproj                          │ True        │
+│ Common/GA.Business.DSL.SourceGen/GA.Business.DSL.SourceGen.csproj                            │ True        │
+│ Demos/Advanced/BSPDemo/BSPDemo.csproj                                                        │ True        │
+│ Experiments/MyFirstMCP/MyFirstMCP.csproj                                                     │ True        │
+│ Experiments/React/ReactApp1.Server/ReactApp1.Server.csproj                                   │ True        │
+│ GA.Business.Querying/GA.Business.Querying.csproj                                             │ False       │
+│ GuitarChordProgressionMCTS/GuitarChordProgressionMCTS.csproj                                 │ True        │
+│ Tests/Common/GA.Business.Core.Graphiti.Tests/GA.Business.Core.Graphiti.Tests.csproj          │ False       │
+│ Tests/FloorManager.Tests.Playwright/FloorManager.Tests.Playwright.csproj                     │ False       │
+│ Tests/GuitarAlchemistChatbot.Tests.Playwright/GuitarAlchemistChatbot.Tests.Playwright.csproj │ False       │
+│ Tools/EmbeddingGenerator/EmbeddingGenerator.csproj                                           │ True        │
+│ Tools/LocalEmbedding/LocalEmbedding.csproj                                                   │ True        │
+│ Tools/MongoImporter/MongoImporter.csproj                                                     │ True        │
+│ Tools/MongoVerify/MongoVerify.csproj                                                         │ True        │
+│ Tools/QualityLens/QualityLens.csproj                                                         │ True        │
+└──────────────────────────────────────────────────────────────────────────────────────────────┴─────────────┘
+```
+
+Que haya herramientas, demos y experimentos aislados es de esperar. `ReactApp1.Server` tiene una referencia, al proyecto JavaScript que el `COPY` omitió. Seis islas tampoco están en `AllProjects.slnx`: nada las compila salvo que alguien las abra. Y dos proyectos de `Common`, un generador de código fuente y un proyecto F# de código generado, a los que ningún proyecto referencia: `extract.py` lee todos los elementos `ProjectReference`, sean cuales sean sus atributos, así que una referencia como analizador habría aparecido. Si no se usan o se referencian de otra forma está *por verificar* en ga. El alias `p.path AS path` importa: sin él, la cabecera CSV de la columna es `STRUCT_EXTRACT(p,path)`.
+
+## PageRank
+
+Un proyecto es importante cuando lo referencian proyectos importantes ([líneas 38-42](https://github.com/spareilleux/learn/blob/0147f10/code/ladybugdb/cypher/07-algorithms.cypher#L38-L42)):
+
+```cypher
+CALL page_rank('Deps')
+WITH node, rank
+RETURN node.name, round(rank, 4) AS rank, COUNT { MATCH (:Project)-[:REFERENCES]->(node) } AS referenced_by
+ORDER BY rank DESC, node.name
+LIMIT 6;
+```
+
+```text
+┌────────────────────┬──────────┬───────────────┐
+│ node.name          │ rank     │ referenced_by │
+│ STRING             │ DOUBLE   │ INT64         │
+├────────────────────┼──────────┼───────────────┤
+│ GA.Domain.Core     │ 0.047700 │ 57            │
+│ GA.Core            │ 0.044100 │ 32            │
+│ GA.Business.Config │ 0.030600 │ 16            │
+│ GA.Domain.Services │ 0.024300 │ 48            │
+│ GA.Business.DSL    │ 0.011800 │ 14            │
+│ GA.Business.ML     │ 0.010900 │ 21            │
+└────────────────────┴──────────┴───────────────┘
+```
+
+La clasificación no es el número de referencias: `GA.Core`, referenciado 32 veces, queda por encima de `GA.Domain.Services`, referenciado 48 veces. El ejercicio 1 averigua por qué. [`page_rank`](https://docs.ladybugdb.com/extensions/algo/pagerank/) acepta argumentos opcionales, `dampingFactor := 0.85` y `maxIterations := 20` por defecto. El rango se redondea antes de ordenar: el `DOUBLE` completo podría diferir en sus últimos dígitos de una máquina a otra, y la salida CSV se compara en tres.
+
+## k-core
+
+El *k-core* de un grafo es la mayor parte en la que cada nodo tiene al menos *k* vecinos dentro de esa parte; [`k_core_decomposition`](https://docs.ladybugdb.com/extensions/algo/kcore/) da a cada nodo el mayor *k* al que pertenece, contando las referencias en ambas direcciones ([líneas 45-52](https://github.com/spareilleux/learn/blob/0147f10/code/ladybugdb/cypher/07-algorithms.cypher#L45-L52)):
+
+```text
+┌──────────┬──────────┐
+│ k_degree │ projects │
+│ INT64    │ INT64    │
+├──────────┼──────────┤
+│ 6        │ 15       │
+│ 5        │ 11       │
+│ 4        │ 12       │
+│ 3        │ 14       │
+│ 2        │ 15       │
+│ 1        │ 25       │
+│ 0        │ 19       │
+└──────────┴──────────┘
+┌────────────────────────────────┐
+│ node.name                      │
+│ STRING                         │
+├────────────────────────────────┤
+│ GA.Business.AI                 │
+│ GA.Business.Config             │
+│ GA.Business.Core.Orchestration │
+│ GA.Business.Core.Tests         │
+│ GA.Business.DSL                │
+│ GA.Business.ML                 │
+│ GA.Core                        │
+│ GA.Data.MongoDB                │
+│ GA.Domain.Core                 │
+│ GA.Domain.Services             │
+│ GaApi                          │
+│ GaCLI                          │
+│ GaChatbot                      │
+│ GaChatbotCli                   │
+│ GaMcpServer                    │
+└────────────────────────────────┘
+```
+
+Los 15 proyectos del 6-core son el centro densamente conectado de ga: las bibliotecas de dominio y de negocio, y las aplicaciones que usan la mayoría de ellas, `GaApi`, `GaCLI`, el chatbot y el servidor MCP. Los 19 proyectos de grado 0 son las 19 islas de las componentes débilmente conexas.
+
+## Louvain, y un resultado que cambia
+
+[Louvain](https://docs.ladybugdb.com/extensions/algo/louvain/) agrupa los nodos en comunidades, más conectadas por dentro que con el resto, ignorando la dirección ([líneas 56-58](https://github.com/spareilleux/learn/blob/0147f10/code/ladybugdb/cypher/07-algorithms.cypher#L56-L58)):
+
+```cypher
+CALL louvain('Deps')
+WITH louvain_id, count(*) AS projects
+RETURN count(*) AS groups, sum(CASE WHEN louvain_id = -1 THEN projects ELSE 0 END) AS without_community;
+```
+
+```text
+┌────────┬───────────────────┐
+│ groups │ without_community │
+│ INT64  │ INT128            │
+├────────┼───────────────────┤
+│ 6      │ 19                │
+└────────┴───────────────────┘
+```
+
+Cinco comunidades, y las 19 islas con `louvain_id` -1. La consulta solo imprime eso, porque los tamaños de las comunidades cambian de una ejecución de la CLI a la siguiente: `[27,20,17,14,14]` en un proceso, `[25,20,18,18,11]` en los dos siguientes, en mi máquina, incluso después de `CALL threads = 1`. Dentro de un proceso, tres llamadas dieron los mismos tamaños. Un resultado que cambia no puede ir en una salida esperada; para publicar comunidades, ejecuta Louvain una vez, guarda `louvain_id` en una propiedad y consulta la propiedad.
+
+`sum` de un `INT64` devuelve un `INT128`, visible en la cabecera de la salida box.
+
+## Proyecciones filtradas, y una que no funciona
+
+Sin los proyectos de pruebas: la documentación de algo describe una proyección con un predicado por tabla, `n` para los nodos y `r` para las relaciones ([líneas 64-69](https://github.com/spareilleux/learn/blob/0147f10/code/ladybugdb/cypher/07-algorithms.cypher#L64-L69)):
+
+```cypher
+CALL project_graph('NoTestsFiltered', {'Project': 'NOT n.path STARTS WITH "Tests/"'}, ['REFERENCES']);
+CALL page_rank('NoTestsFiltered')
+WITH node, rank
+RETURN node.name, round(rank, 4) AS rank
+ORDER BY rank DESC, node.name
+LIMIT 3;
+```
+
+```text
+┌────────────────────┬──────────┐
+│ node.name          │ rank     │
+│ STRING             │ DOUBLE   │
+├────────────────────┼──────────┤
+│ GA.Domain.Core     │ 0.047700 │
+│ GA.Core            │ 0.044500 │
+│ GA.Business.Config │ 0.031000 │
+└────────────────────┴──────────┘
+```
+
+Los 17 proyectos de pruebas referencian las bibliotecas, pero aportan poco rango: una sola referencia apunta a un proyecto de pruebas. El motor tiene otra función, `project_graph_cypher`, que define la proyección con una consulta Cypher, y que la documentación no menciona. Crea el grafo, pero los algoritmos lo rechazan ([líneas 61-62](https://github.com/spareilleux/learn/blob/0147f10/code/ladybugdb/cypher/07-algorithms.cypher#L61-L62)):
+
+```cypher
+CALL project_graph_cypher('NoTests', 'MATCH (a:Project)-[r:REFERENCES]->(b:Project) WHERE NOT a.path STARTS WITH \'Tests/\' RETURN a, r, b');
+CALL page_rank('NoTests') RETURN count(*);
+```
+
+```text
+Error: Binder exception: AA
+```
+
+`AA` es el mensaje entero: [`gds.cpp`, línea 72](https://github.com/LadybugDB/ladybug/blob/v0.19.1/src/function/gds/gds.cpp#L72), lo lanza cuando un algoritmo enlaza un grafo proyectado cuyo tipo no es `NATIVE`, en la 0.19.1 y todavía en la 0.20.4; las componentes débilmente conexas fallan de la misma forma. `show_projected_graphs()` lista `NoTests` con el tipo `CYPHER`; `drop_projected_graph` elimina ambos.
+
+## Búsqueda de texto completo: índices
+
+La segunda extensión. Las páginas del sitio y los commits de la lección 4, y cuatro índices ([líneas 75-84](https://github.com/spareilleux/learn/blob/0147f10/code/ladybugdb/cypher/07-algorithms.cypher#L75-L84)):
+
+```cypher
+CREATE NODE TABLE Page(url STRING PRIMARY KEY, locale STRING, course STRING, title STRING, lines INT64);
+COPY Page FROM 'data/pages.csv' (HEADER = true);
+CREATE NODE TABLE Commit(sha STRING PRIMARY KEY, committed_at TIMESTAMP, subject STRING);
+COPY Commit FROM 'data/commits.csv' (HEADER = true, QUOTE = '"');
+
+CALL CREATE_FTS_INDEX('Page', 'titles', ['title']);
+CALL CREATE_FTS_INDEX('Page', 'titles_exact', ['title'], stemmer := 'none');
+CALL CREATE_FTS_INDEX('Page', 'titles_fr', ['title'], stemmer := 'french');
+CALL CREATE_FTS_INDEX('Commit', 'subjects', ['subject']);
+CALL show_indexes() RETURN table_name, index_name, index_type, index_definition;
+```
+
+```text
+┌────────────┬──────────────┬────────────┬─────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ table_name │ index_name   │ index_type │ index_definition                                                                                        │
+│ STRING     │ STRING       │ STRING     │ STRING                                                                                                  │
+├────────────┼──────────────┼────────────┼─────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ Page       │ titles       │ FTS        │ CALL CREATE_FTS_INDEX('Page', 'titles', ['title'], stemmer := 'english', stopWords := 'default');       │
+│ Page       │ titles_exact │ FTS        │ CALL CREATE_FTS_INDEX('Page', 'titles_exact', ['title'], stemmer := 'none', stopWords := 'default');    │
+│ Page       │ titles_fr    │ FTS        │ CALL CREATE_FTS_INDEX('Page', 'titles_fr', ['title'], stemmer := 'french', stopWords := 'default');     │
+│ Commit     │ subjects     │ FTS        │ CALL CREATE_FTS_INDEX('Commit', 'subjects', ['subject'], stemmer := 'english', stopWords := 'default'); │
+│ Project    │ _PK          │ HASH       │                                                                                                         │
+│ Page       │ _PK          │ HASH       │                                                                                                         │
+│ Commit     │ _PK          │ HASH       │                                                                                                         │
+└────────────┴──────────────┴────────────┴─────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+`show_indexes()` reescribe cada índice como la llamada que lo crea, con los valores predeterminados rellenados: el stemmer inglés y las stop words predeterminadas. Cada clave primaria tiene su índice hash. Un índice FTS trabaja sobre las propiedades `STRING` de una tabla de nodos, varias a la vez si las enumeras; una tabla puede tener varios índices, con nombres distintos.
+
+## Consultas, stemmers y stop words
+
+`QUERY_FTS_INDEX` devuelve los nodos que coinciden y su puntuación [BM25](https://en.wikipedia.org/wiki/Okapi_BM25) ([líneas 87-92](https://github.com/spareilleux/learn/blob/0147f10/code/ladybugdb/cypher/07-algorithms.cypher#L87-L92)):
+
+```cypher
+CALL QUERY_FTS_INDEX('Page', 'titles', 'query')
+RETURN node.url, node.title, round(score, 4) AS score
+ORDER BY score DESC, node.url;
+CALL QUERY_FTS_INDEX('Page', 'titles_exact', 'query') RETURN count(*) AS pages;
+CALL QUERY_FTS_INDEX('Page', 'titles_exact', 'queries') RETURN count(*) AS pages;
+```
+
+```text
+┌───────────────────────────┬──────────────────┬──────────┐
+│ node.url                  │ node.title       │ score    │
+│ STRING                    │ STRING           │ DOUBLE   │
+├───────────────────────────┼──────────────────┼──────────┤
+│ /duckdb/01-first-queries/ │ 1. First queries │ 3.244500 │
+└───────────────────────────┴──────────────────┴──────────┘
+```
+
+El stemmer reduce `query` y `queries` a la misma raíz, en el índice y en la búsqueda. Sin stemmer, `query` encuentra 0 páginas y `queries` 1. El título francés de esa página, `1. Premières requêtes`, no tiene ninguna de las dos palabras.
+
+El idioma del stemmer cambia las raíces ([líneas 95-100](https://github.com/spareilleux/learn/blob/0147f10/code/ladybugdb/cypher/07-algorithms.cypher#L95-L100)):
+
+```cypher
+CALL QUERY_FTS_INDEX('Page', 'titles', 'persistant')
+RETURN node.url, node.title
+ORDER BY node.url;
+CALL QUERY_FTS_INDEX('Page', 'titles_fr', 'persistant')
+RETURN node.url, node.title
+ORDER BY node.url;
+```
+
+```text
+┌────────────────────────────┬──────────────────────────────────────────────┐
+│ node.url                   │ node.title                                   │
+│ STRING                     │ STRING                                       │
+├────────────────────────────┼──────────────────────────────────────────────┤
+│ /duckdb/08-persistence/    │ 8. Persistence, transactions and concurrency │
+│ /fr/duckdb/08-persistence/ │ 8. Persistance, transactions et concurrence  │
+└────────────────────────────┴──────────────────────────────────────────────┘
+┌────────────────────────────┬─────────────────────────────────────────────┐
+│ node.url                   │ node.title                                  │
+│ STRING                     │ STRING                                      │
+├────────────────────────────┼─────────────────────────────────────────────┤
+│ /fr/duckdb/08-persistence/ │ 8. Persistance, transactions et concurrence │
+└────────────────────────────┴─────────────────────────────────────────────┘
+```
+
+El stemmer inglés lleva *persistant*, *Persistence* y *Persistance* a la misma raíz; el francés deja *Persistence* aparte. Ninguno encuentra el español *Persistencia*. Un sitio en tres idiomas necesitaría un índice por idioma, sobre una propiedad por idioma, o un `WHERE node.locale = …` después de la búsqueda.
+
+Luego mayúsculas, acentos y stop words ([líneas 103-107](https://github.com/spareilleux/learn/blob/0147f10/code/ladybugdb/cypher/07-algorithms.cypher#L103-L107)):
+
+```cypher
+CALL QUERY_FTS_INDEX('Page', 'titles', 'DONNÉES') RETURN count(*) AS pages;
+CALL QUERY_FTS_INDEX('Page', 'titles', 'donnees') RETURN count(*) AS pages;
+CALL QUERY_FTS_INDEX('Page', 'titles', 'the') RETURN count(*) AS pages;
+CALL QUERY_FTS_INDEX('Page', 'titles_fr', 'de') RETURN count(*) AS pages;
+```
+
+2, 0, 0 y 32 páginas. `DONNÉES` encuentra *Données imbriquées* y *Visualisation de données*: las mayúsculas no importan. `donnees` no encuentra nada: los acentos no se normalizan. `the` es una stop word, excluida del índice. Pero las stop words predeterminadas son inglesas sea cual sea el stemmer: `de` se indexa en el índice francés, y 32 títulos la tienen. `CREATE_FTS_INDEX` acepta `stopWords :=` con el nombre de una tabla de nodos, o de un archivo CSV o Parquet, de una columna de palabras.
+
+## Cualquier palabra, todas las palabras, y un índice que sigue a la tabla
+
+Por defecto, una búsqueda con dos palabras devuelve los nodos que tienen *cualquiera* de ellas; `conjunctive := true` las exige todas ([líneas 110-114](https://github.com/spareilleux/learn/blob/0147f10/code/ladybugdb/cypher/07-algorithms.cypher#L110-L114)):
+
+```cypher
+CALL QUERY_FTS_INDEX('Commit', 'subjects', 'lesson exercises')
+RETURN count(*) AS any_word;
+CALL QUERY_FTS_INDEX('Commit', 'subjects', 'lesson exercises', conjunctive := true)
+RETURN substring(node.sha, 1, 7) AS sha, node.subject, round(score, 4) AS score
+ORDER BY score DESC, sha;
+```
+
+```text
+┌──────────┐
+│ any_word │
+│ INT64    │
+├──────────┤
+│ 46       │
+└──────────┘
+┌─────────┬──────────────────────────────────────────────────────────────────────────────────────┬──────────┐
+│ sha     │ node.subject                                                                         │ score    │
+│ STRING  │ STRING                                                                               │ DOUBLE   │
+├─────────┼──────────────────────────────────────────────────────────────────────────────────────┼──────────┤
+│ 742c967 │ DuckDB course: SQL and expected output for lessons 1-4 and their exercises           │ 1.340800 │
+│ 86e34d9 │ DuckDB course: lesson 7 exercises, lesson 8 persistence script and Java transactions │ 1.288500 │
+│ 75a1258 │ Rust lesson 13: make the retry exercise immune to slow CI runners                    │ 1.134100 │
+└─────────┴──────────────────────────────────────────────────────────────────────────────────────┴──────────┘
+```
+
+46 de los 74 commits tienen *lesson* o *exercise* en alguna forma: *lessons* y *exercise* cuentan, gracias al stemmer. Solo tres tienen ambas. `86e34d9` tiene *lesson* dos veces, pero su asunto es más largo que el de `742c967`: BM25 favorece los textos cortos.
+
+El índice sigue a la tabla. Un commit nuevo, y luego la misma búsqueda ([líneas 117-120](https://github.com/spareilleux/learn/blob/0147f10/code/ladybugdb/cypher/07-algorithms.cypher#L117-L120)):
+
+```cypher
+CREATE (:Commit {sha: '0000000', committed_at: timestamp('2026-09-14 20:00:00'), subject: 'LadybugDB course: lesson 7 exercises'});
+CALL QUERY_FTS_INDEX('Commit', 'subjects', 'lesson exercises', conjunctive := true)
+RETURN substring(node.sha, 1, 7) AS sha, round(score, 4) AS score
+ORDER BY score DESC, sha;
+```
+
+```text
+┌─────────┬──────────┐
+│ sha     │ score    │
+│ STRING  │ DOUBLE   │
+├─────────┼──────────┤
+│ 0000000 │ 1.567200 │
+│ 742c967 │ 1.280200 │
+│ 86e34d9 │ 1.232200 │
+│ 75a1258 │ 1.082000 │
+└─────────┴──────────┘
+```
+
+El nuevo asunto, el más corto, queda primero, y los otros tres pierden puntos: las palabras están ahora en más documentos, así que distinguen menos unos documentos de otros. Una puntuación solo significa algo dentro de una búsqueda, en un momento dado.
+
+## Una búsqueda dentro de una consulta de grafo
+
+El nodo que devuelve una búsqueda es un nodo como cualquier otro: un patrón puede continuar desde él. Los archivos modificados con más frecuencia por los commits sobre ejercicios ([líneas 123-132](https://github.com/spareilleux/learn/blob/0147f10/code/ladybugdb/cypher/07-algorithms.cypher#L123-L132)):
+
+```cypher
+CREATE NODE TABLE File(path STRING PRIMARY KEY);
+CREATE REL TABLE CHANGED(FROM Commit TO File);
+COPY File FROM (LOAD FROM 'data/changes.csv' (HEADER = true) RETURN DISTINCT file);
+COPY CHANGED FROM 'data/changes.csv' (HEADER = true);
+CALL QUERY_FTS_INDEX('Commit', 'subjects', 'exercises')
+WITH node AS c
+MATCH (c)-[:CHANGED]->(f:File)
+RETURN f.path, count(*) AS commits
+ORDER BY commits DESC, f.path
+LIMIT 5;
+```
+
+```text
+┌────────────────────────────────────────┬─────────┐
+│ f.path                                 │ commits │
+│ STRING                                 │ INT64   │
+├────────────────────────────────────────┼─────────┤
+│ code/duckdb/check.sh                   │ 2       │
+│ .github/workflows/gha-02-exercises.yml │ 1       │
+│ .github/workflows/gha-04-exercises.yml │ 1       │
+│ .github/workflows/gha-05-exercises.yml │ 1       │
+│ .github/workflows/gha-09-exercises.yml │ 1       │
+└────────────────────────────────────────┴─────────┘
+```
+
+En SQL Server, la misma consulta combina `CONTAINSTABLE` con las tablas de commits y de archivos. `CALL … WITH node AS c` es aquí el join.
+
+Para terminar, `DROP_FTS_INDEX` ([líneas 134-135](https://github.com/spareilleux/learn/blob/0147f10/code/ladybugdb/cypher/07-algorithms.cypher#L134-L135)):
+
+```text
+┌───────────────────────────────────────────┐
+│ result                                    │
+│ STRING                                    │
+├───────────────────────────────────────────┤
+│ Table 3_titles_fr_terms has been dropped. │
+└───────────────────────────────────────────┘
+Error: Binder exception: Table Page doesn't have an index with name titles_fr.
+```
+
+El mensaje muestra cómo se almacena el índice: en tablas internas cuyo nombre lleva el ID de la tabla y el índice, aquí `3_titles_fr_terms`, y que se eliminan con él.
+
+## Puntos clave
+
+- `algo` y `fts` son extensiones: `INSTALL` una vez, `LOAD` en cada sesión. Con la 0.20.4, `algo` no se carga en ninguno de los tres runners de la CI, y crear un índice `fts` hace fallar la CLI en mi máquina Windows; la CLI 0.19.1 ejecuta ambas.
+- Los algoritmos se ejecutan sobre un grafo proyectado con nombre, que la conexión conserva; una proyección puede filtrar sus tablas de nodos y de relaciones. Los algoritmos rechazan una proyección definida por una consulta Cypher, con `Binder exception: AA`.
+- Las componentes fuertemente conexas encuentran ciclos, las débilmente conexas encuentran islas; `group_id` depende de offsets internos.
+- PageRank no es un recuento de referencias: una referencia desde un nodo importante con pocas referencias pesa más.
+- Las comunidades de Louvain cambian de un proceso a otro: guárdalas antes de publicarlas.
+- Un índice FTS es BM25 con un stemmer, inglés por defecto, y stop words inglesas sea cual sea el stemmer. Las mayúsculas se normalizan, los acentos no.
+- Las puntuaciones dependen de la tabla entera y cambian cuando cambia. Una búsqueda devuelve nodos, y un patrón de grafo puede continuar desde ellos.
+
+## Ejercicios
+
+Las soluciones están en [`cypher/07-exercises.cypher`](https://github.com/spareilleux/learn/blob/main/code/ladybugdb/cypher/07-exercises.cypher), y su salida en `cypher/expected/07-exercises.csv`: la CI las comprueba con el resto.
+
+1. `GA.Core` está referenciado por 32 proyectos, `GA.Domain.Services` por 48, y sin embargo `GA.Core` tiene un rango mayor. Vuelve a calcular ambos rangos a partir de los rangos de los proyectos que los referencian, con la fórmula de PageRank: `(1 - d) / N + d × Σ rank(a) / out_degree(a)`, con `d = 0.85` y `N` el número de proyectos.
+
+<details>
+<summary>Solución</summary>
+
+[Líneas 13-29](https://github.com/spareilleux/learn/blob/0147f10/code/ladybugdb/cypher/07-exercises.cypher#L13-L29):
+
+```cypher
+ALTER TABLE Project ADD rank DOUBLE;
+CALL page_rank('Deps') WITH node, rank SET node.rank = rank RETURN count(*) AS ranked;
+MATCH (a:Project)-[:REFERENCES]->(b:Project {name: 'GA.Core'})
+RETURN a.name, round(a.rank, 4) AS rank, COUNT { MATCH (a)-[:REFERENCES]->(:Project) } AS out_degree
+ORDER BY rank DESC, a.name
+LIMIT 3;
+MATCH (p:Project)
+WITH count(*) AS n
+MATCH (a:Project)-[:REFERENCES]->(b:Project)
+WHERE b.name IN ['GA.Core', 'GA.Domain.Services']
+WITH n, b, a, COUNT { MATCH (a)-[:REFERENCES]->(:Project) } AS out_degree
+// n + sum(...) en una sola expresión falla cuando n no se devuelve también por sí solo: primero la suma, el cálculo en la cláusula siguiente
+WITH n, b, count(*) AS referenced_by, sum(a.rank / out_degree) AS received
+RETURN b.name, referenced_by, round(b.rank, 4) AS rank, round((1 - 0.85) / n + 0.85 * received, 4) AS recomputed
+ORDER BY rank DESC;
+MATCH (p:Project)
+RETURN round(sum(p.rank), 4) AS total, round(min(p.rank), 6) AS lowest;
+```
+
+```text
+┌────────────────────┬──────────┬────────────┐
+│ a.name             │ rank     │ out_degree │
+│ STRING             │ DOUBLE   │ INT64      │
+├────────────────────┼──────────┼────────────┤
+│ GA.Domain.Core     │ 0.047700 │ 2          │
+│ GA.Domain.Services │ 0.024300 │ 5          │
+│ GA.Business.DSL    │ 0.011800 │ 3          │
+└────────────────────┴──────────┴────────────┘
+┌────────────────────┬───────────────┬──────────┬────────────┐
+│ b.name             │ referenced_by │ rank     │ recomputed │
+│ STRING             │ INT64         │ DOUBLE   │ DOUBLE     │
+├────────────────────┼───────────────┼──────────┼────────────┤
+│ GA.Core            │ 32            │ 0.044100 │ 0.044100   │
+│ GA.Domain.Services │ 48            │ 0.024300 │ 0.024300   │
+└────────────────────┴───────────────┴──────────┴────────────┘
+┌──────────┬──────────┐
+│ total    │ lowest   │
+│ DOUBLE   │ DOUBLE   │
+├──────────┼──────────┤
+│ 0.353400 │ 0.001351 │
+└──────────┴──────────┘
+```
+
+`GA.Domain.Core`, el primer proyecto, solo referencia dos proyectos, y `GA.Core` es uno de ellos: la mitad del rango más alto, por 0,85, va a `GA.Core`. De los 48 proyectos que referencian `GA.Domain.Services`, a 29 no los referencia nadie: aplicaciones, demos y pruebas con el rango mínimo, repartido entre todas sus referencias. La fórmula devuelve ambos rangos con cuatro decimales.
+
+`CALL … WITH node, rank SET node.rank = rank` guarda el resultado del algoritmo en la tabla: las consultas posteriores leen el rango de cualquier proyecto, no solo del nodo que devuelve el algoritmo. El total, 0,3534 en lugar de 1, muestra que el rango de los 25 proyectos que no referencian nada, como `GA.Core`, no se redistribuye: compara rangos dentro de un grafo, no entre grafos. El rango más bajo, 0,001351, es `(1 - 0.85) / 111`, el rango de un proyecto al que nadie referencia.
+
+`(1 - 0.85) / n + 0.85 * sum(…)` en el `RETURN` falla con `Cannot evaluate expression with type AGGREGATE_FUNCTION.` cuando `n` viene de un `WITH` anterior y no es también una columna por sí sola, una clave de agrupación. De ahí el segundo `WITH`.
+
+</details>
+
+2. Ejecuta PageRank solo sobre las páginas en inglés del sitio, con los enlaces entre ellas, y muestra las seis primeras páginas con el número de enlaces que cada una recibe de páginas en inglés. Una página tiene un rango alto con solo dos enlaces: ¿qué páginas enlazan a ella?
+
+<details>
+<summary>Solución</summary>
+
+[Líneas 36-46](https://github.com/spareilleux/learn/blob/0147f10/code/ladybugdb/cypher/07-exercises.cypher#L36-L46), después de cargar `Page` y `LINKS_TO` como en la lección 2:
+
+```cypher
+CALL project_graph('Site', {'Page': 'n.locale = "en"'}, ['LINKS_TO']);
+CALL page_rank('Site')
+WITH node, rank
+RETURN node.url, round(rank, 4) AS rank, COUNT { MATCH (:Page {locale: 'en'})-[:LINKS_TO]->(node) } AS linked_from
+ORDER BY rank DESC, node.url
+LIMIT 6;
+MATCH (a:Page)-[:LINKS_TO]->(:Page {url: '/wsl-containers/02-installation/'})
+WHERE a.locale = 'en'
+RETURN a.url, COUNT { MATCH (:Page {locale: 'en'})-[:LINKS_TO]->(a) } AS linked_from
+ORDER BY a.url;
+```
+
+```text
+┌───────────────────────────────────────────┬──────────┬─────────────┐
+│ node.url                                  │ rank     │ linked_from │
+│ STRING                                    │ DOUBLE   │ INT64       │
+├───────────────────────────────────────────┼──────────┼─────────────┤
+│ /streeling/journal/                       │ 0.170300 │ 32          │
+│ /github-actions/05-caches-and-artifacts/  │ 0.024200 │ 6           │
+│ /github-actions/01-first-workflow/        │ 0.020000 │ 6           │
+│ /wsl-containers/journal/                  │ 0.019400 │ 13          │
+│ /streeling/music/mus-001-what-is-a-chord/ │ 0.018600 │ 8           │
+│ /wsl-containers/02-installation/          │ 0.018000 │ 2           │
+└───────────────────────────────────────────┴──────────┴─────────────┘
+┌──────────────────────────┬─────────────┐
+│ a.url                    │ linked_from │
+│ STRING                   │ INT64       │
+├──────────────────────────┼─────────────┤
+│ /wsl-containers/         │ 1           │
+│ /wsl-containers/journal/ │ 13          │
+└──────────────────────────┴─────────────┘
+```
+
+El diario de Streeling se lleva la mayor parte del rango: 32 de las 54 páginas de Streeling en inglés, generadas desde Demerzel, enlazan a él, en el sitio tal como estaba en el commit `cbcbb42`. La página de instalación de WSL recibe dos enlaces, pero uno viene del diario de WSL, a su vez enlazado desde 13 páginas. El predicado de nodos conserva las 117 páginas en inglés: `page_rank` devuelve 117 filas. El predicado es una cadena, así que la cadena Cypher de dentro lleva comillas dobles.
+
+</details>
+
+3. Con el índice `titles`, encuentra las páginas en inglés cuyo título menciona Java, y ordénalas por el número de enlaces que reciben.
+
+<details>
+<summary>Solución</summary>
+
+[Líneas 49-54](https://github.com/spareilleux/learn/blob/0147f10/code/ladybugdb/cypher/07-exercises.cypher#L49-L54):
+
+```cypher
+CALL CREATE_FTS_INDEX('Page', 'titles', ['title']);
+CALL QUERY_FTS_INDEX('Page', 'titles', 'java')
+WITH node AS p
+WHERE p.locale = 'en'
+RETURN p.url, p.title, COUNT { MATCH (:Page)-[:LINKS_TO]->(p) } AS linked_from
+ORDER BY linked_from DESC, p.url;
+```
+
+```text
+┌────────────────────────────────────┬───────────────────────────────────────┬─────────────┐
+│ node.url                           │ node.title                            │ linked_from │
+│ STRING                             │ STRING                                │ INT64       │
+├────────────────────────────────────┼───────────────────────────────────────┼─────────────┤
+│ /github-actions/02-build-and-test/ │ 2. Build and test .NET and Java       │ 3           │
+│ /java-for-csharp/                  │ Java for C# developers — Mission      │ 2           │
+│ /duckdb/06-java/                   │ 6. DuckDB from Java                   │ 1           │
+│ /rust-for-csharp-java/             │ Rust for C#/Java developers — Mission │ 1           │
+└────────────────────────────────────┴───────────────────────────────────────┴─────────────┘
+```
+
+El tokenizador corta `C#/Java` en la barra, así que el curso de Rust coincide. Las lecciones del curso de Java no: sus títulos, como *1. The JDK and build tools*, no dicen Java. Cuatro títulos en francés y cuatro en español también contienen *Java*; el `WHERE` después de la búsqueda conserva los ingleses. `TOP := k` limitaría la búsqueda a las *k* mejores puntuaciones, pero la documentación advierte que no las ordena.
+
+</details>
+
+## Fuentes
+
+- [Extensiones](https://docs.ladybugdb.com/extensions/), la [extensión algo](https://docs.ladybugdb.com/extensions/algo/) y sus páginas sobre [PageRank](https://docs.ladybugdb.com/extensions/algo/pagerank/), la [descomposición k-core](https://docs.ladybugdb.com/extensions/algo/kcore/), [Louvain](https://docs.ladybugdb.com/extensions/algo/louvain/) y las componentes [fuertemente](https://docs.ladybugdb.com/extensions/algo/scc/) y [débilmente](https://docs.ladybugdb.com/extensions/algo/wcc/) conexas
+- La [extensión de búsqueda de texto completo](https://docs.ladybugdb.com/extensions/full-text-search/)
+- Issues de LadybugDB [#857](https://github.com/LadybugDB/ladybug/issues/857), [#903](https://github.com/LadybugDB/ladybug/issues/903) y [#942](https://github.com/LadybugDB/ladybug/issues/942), y [`gds.cpp` en la 0.19.1](https://github.com/LadybugDB/ladybug/blob/v0.19.1/src/function/gds/gds.cpp#L67-L75)
+- [Okapi BM25](https://en.wikipedia.org/wiki/Okapi_BM25), y la [búsqueda de texto completo en SQL Server](https://learn.microsoft.com/sql/relational-databases/search/full-text-search)
+- [Neo4j Graph Data Science](https://neo4j.com/docs/graph-data-science/current/)
