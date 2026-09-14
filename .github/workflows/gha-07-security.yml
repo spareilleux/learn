@@ -16,26 +16,26 @@ permissions:
   contents: read
 
 jobs:
-  token-read-contents:
+  token-without-issues-write:
     runs-on: ubuntu-latest
     steps:
-      - name: List runs with contents:read only
+      - name: Create a label with an empty name, token without issues:write
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh run list --repo "$GITHUB_REPOSITORY" --limit 1 || echo "gh exit code: $?"
+          gh api --method POST "repos/$GITHUB_REPOSITORY/labels" -f name= || echo "gh exit code: $?"
 
-  token-read-actions:
+  token-with-issues-write:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      actions: read
+      issues: write
     steps:
-      - name: List runs with actions:read
+      - name: Create a label with an empty name, token with issues:write
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh run list --repo "$GITHUB_REPOSITORY" --limit 1 --json workflowName,status --jq '.[0]'
+          gh api --method POST "repos/$GITHUB_REPOSITORY/labels" -f name= || echo "gh exit code: $?"
 
   masking:
     runs-on: ubuntu-latest
