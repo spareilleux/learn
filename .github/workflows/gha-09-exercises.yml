@@ -3,6 +3,12 @@ name: "GHA 09: exercise checks"
 
 on:
   workflow_dispatch:
+    inputs:
+      check:
+        description: Which exercise to check
+        type: choice
+        options: [timeouts, continue-on-error]
+        default: timeouts
 
 permissions:
   contents: read
@@ -10,6 +16,7 @@ permissions:
 jobs:
   # Exercise: when exactly is a job with timeout-minutes: 1 cancelled?
   job-timeout:
+    if: inputs.check == 'timeouts'
     runs-on: ubuntu-latest
     timeout-minutes: 1
     steps:
@@ -19,6 +26,7 @@ jobs:
 
   # Exercise: a timeout on one step only
   step-timeout:
+    if: inputs.check == 'timeouts'
     runs-on: ubuntu-latest
     steps:
       - timeout-minutes: 1
@@ -27,3 +35,18 @@ jobs:
           sleep 300
       - if: always()
         run: date -u +%T
+
+  # Exercise: the only failing job has continue-on-error
+  allowed-to-fail:
+    if: inputs.check == 'continue-on-error'
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - run: exit 3
+
+  after:
+    if: inputs.check == 'continue-on-error'
+    needs: allowed-to-fail
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "needs.allowed-to-fail.result=${{ needs.allowed-to-fail.result }}"
