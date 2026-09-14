@@ -846,6 +846,26 @@ Le téléchargement de l'image fonctionne quand même (c'est la session qui le f
 
   Mêmes capacités (le jeu par défaut de Docker), cgroups en lecture seule, mêmes 15 entrées dans `/dev` : dans une session non administrateur, `Privileged` n'a aucun effet visible en 2.9.11.
 
+  Même test **en administrateur** (UAC, session limitée à 1 CPU et 1 Go, une vérification de plus : `mount -t tmpfs none /mnt`) :
+
+  ```text
+  elevated: True
+  --- Privileged=False  HostConfig={"Memory":0,"NanoCpus":0,"NetworkMode":"none","Ulimits":[]}
+  cgroup /sys/fs/cgroup cgroup2 ro,nosuid,nodev,noexec,relatime 0 0
+  CapEff:	00000000a80425fb
+  dev=15
+  mount: permission denied (are you root?)
+  mount denied
+  --- Privileged=True  HostConfig={"Memory":0,"NanoCpus":0,"NetworkMode":"none","Ulimits":[]}
+  cgroup /sys/fs/cgroup cgroup2 ro,nosuid,nodev,noexec,relatime 0 0
+  CapEff:	00000000a80425fb
+  dev=15
+  mount: permission denied (are you root?)
+  mount denied
+  ```
+
+  Aucune différence non plus, et `Inspect()` ne mentionne même pas de champ `Privileged`. Le drapeau existe pourtant dans l'en-tête C (`WSLC_CONTAINER_FLAG_PRIVILEGED = 0x00000004` dans `wslcsdk.h`) : déclaré, mais pas appliqué en 2.9.11. k3s n'a pas été retenté.
+
 ### Extensions et interface graphique : aucune
 
 - `wslc --help` liste `container`, `image`, `network`, `registry`, `settings`, `system`, `volume` et les raccourcis façon Docker : aucun mécanisme d'extension.
@@ -861,4 +881,4 @@ Le téléchargement de l'image fonctionne quand même (c'est la session qui le f
 - ~~`wslc` et Docker Desktop peuvent-ils publier des ports sans conflit ?~~ Ils peuvent publier le même port **sans aucune erreur**, et c'est bien le problème : `127.0.0.1` atteint `wslc`, `localhost` atteint Docker (voir ci-dessus).
 - ~~Comment compacter le `storage.vhdx` d'une session ?~~ Terminer la session, puis `Optimize-VHD -Mode Full` en administrateur : 3995 Mo → 2789 Mo (voir ci-dessus).
 - ~~L'intégration MSBuild `WslcImage` (construire une image en `.tar` pendant `dotnet build`) fonctionne-t-elle ?~~ Oui, de façon incrémentale ; le `.tar` se charge avec `LoadImageAsync`, pas `ImportImageAsync` (voir ci-dessus).
-- `ContainerSettings.Privileged` a-t-il un effet dans une session administrateur ? *À vérifier* (aucun effet dans une session normale).
+- ~~`ContainerSettings.Privileged` a-t-il un effet dans une session administrateur ?~~ Non : mêmes capacités, cgroups en lecture seule et `mount` refusé, en administrateur aussi (voir ci-dessus).

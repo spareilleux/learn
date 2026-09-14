@@ -846,6 +846,26 @@ The pull itself works without it (it's done by the session, not by the container
 
   Same capabilities (Docker's default set), cgroups read-only, same 15 entries in `/dev`: in a non-administrator session, `Privileged` has no visible effect in 2.9.11.
 
+  Same test **as administrator** (UAC, session limited to 1 CPU and 1 GB, one more check: `mount -t tmpfs none /mnt`):
+
+  ```text
+  elevated: True
+  --- Privileged=False  HostConfig={"Memory":0,"NanoCpus":0,"NetworkMode":"none","Ulimits":[]}
+  cgroup /sys/fs/cgroup cgroup2 ro,nosuid,nodev,noexec,relatime 0 0
+  CapEff:	00000000a80425fb
+  dev=15
+  mount: permission denied (are you root?)
+  mount denied
+  --- Privileged=True  HostConfig={"Memory":0,"NanoCpus":0,"NetworkMode":"none","Ulimits":[]}
+  cgroup /sys/fs/cgroup cgroup2 ro,nosuid,nodev,noexec,relatime 0 0
+  CapEff:	00000000a80425fb
+  dev=15
+  mount: permission denied (are you root?)
+  mount denied
+  ```
+
+  No difference either, and `Inspect()` doesn't even report a `Privileged` field. Yet the flag exists in the C header (`WSLC_CONTAINER_FLAG_PRIVILEGED = 0x00000004` in `wslcsdk.h`): declared, but not applied in 2.9.11. k3s wasn't retried.
+
 ### Extensions and GUI: none
 
 - `wslc --help` lists `container`, `image`, `network`, `registry`, `settings`, `system`, `volume` and the Docker-style shortcuts: no extension mechanism.
@@ -861,4 +881,4 @@ The pull itself works without it (it's done by the session, not by the container
 - ~~Can `wslc` and Docker Desktop publish ports without conflict?~~ They can publish the same port without **any error**, which is the problem: `127.0.0.1` reaches `wslc`, `localhost` reaches Docker (see above).
 - ~~How do you compact a session's `storage.vhdx`?~~ Terminate the session, then `Optimize-VHD -Mode Full` as administrator: 3995 MB → 2789 MB (see above).
 - ~~Does the MSBuild `WslcImage` integration (building an image to a `.tar` during `dotnet build`) work?~~ Yes, incrementally; the `.tar` is loaded with `LoadImageAsync`, not `ImportImageAsync` (see above).
-- Does `ContainerSettings.Privileged` take effect in an administrator session? *To verify* (no effect in a normal session).
+- ~~Does `ContainerSettings.Privileged` take effect in an administrator session?~~ No: same capabilities, read-only cgroups and `mount` denied, as administrator too (see above).
