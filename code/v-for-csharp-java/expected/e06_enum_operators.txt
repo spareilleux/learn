@@ -1,0 +1,14 @@
+e06_enum_operators.v:8:9: error: only `==` and `!=` are defined on `enum`, use an explicit cast to `int` if needed
+    6 | fn main() {
+    7 |     sdk := Sdk.library
+    8 |     if sdk < Sdk.web {
+      |            ^
+    9 |         println('library')
+   10 |     }
+e06_enum_operators.v:11:10: error: infix expr: cannot use `int literal` (right expression) as `Sdk`
+    9 |         println('library')
+   10 |     }
+   11 |     println(sdk + 1)
+      |             ~~~~~~~
+   12 | }
+exit 1

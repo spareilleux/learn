@@ -1,0 +1,8 @@
+e07_shared_without_lock.v:7:2: error: `usage` is `shared` and needs explicit lock for `v.ast.SelectorExpr`
+    5 | 
+    6 | fn count(shared usage Usage, package string) {
+    7 |     usage.by_package[package]++
+      |     ~~~~~
+    8 | }
+    9 |
+exit 1

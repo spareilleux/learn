@@ -1,0 +1,17 @@
+e05_mut_receiver.v:15:7: error: `Counter` incorrectly implements method `add` of interface `Tally`: expected `Tally` which is immutable, not `mut &Counter`
+   13 | 
+   14 | fn main() {
+   15 |     t := Tally(Counter{})
+      |          ~~~~~~~~~~~~~~~~
+   16 |     t.add('Aspire.Hosting.AppHost')
+   17 | }
+Details: main.Tally has `fn add(x main.Tally, key string)`
+         main.Counter has `fn add(mut c main.Counter, _ string)`
+e05_mut_receiver.v:15:7: error: `Counter` does not implement interface `Tally`, cannot cast `Counter` to interface `Tally`
+   13 | 
+   14 | fn main() {
+   15 |     t := Tally(Counter{})
+      |          ~~~~~~~~~~~~~~~~
+   16 |     t.add('Aspire.Hosting.AppHost')
+   17 | }
+exit 1

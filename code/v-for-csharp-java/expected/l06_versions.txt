@@ -1,0 +1,31 @@
+9.5.1: release 9.5.1, stable: true, type: Release
+1.0.0-beta.24164.1: prerelease beta.24164.1 of 1.0.0, stable: false, type: Prerelease
+8.*-*: floating 8.*-*, stable: false, type: Floating
+1.x: strconv.atoi: parsing "x": invalid radix 10 character
+ModelContextProtocol 0.* in DemerzelBridge
+Microsoft.AspNetCore.SpaProxy 8.*-* in ReactApp1.Server
+Microsoft.KernelMemory.Core 0.91.241101.1 has 4 parts, in GaCLI
+{'Release': 443, 'Prerelease': 33, 'Floating': 2}
+beta.1
+GaCli (1)
+  GA.Business.DSL (3)
+    GA.Core
+    GA.Domain.Core (2)
+      GA.Business.Config
+      GA.Core
+    GA.Domain.Services (5)
+      GA.Business.Config
+      GA.Business.Core (1)
+        GA.Domain.Core (2)
+          GA.Business.Config
+          GA.Core
+      GA.Core
+      GA.Domain.Core (2)
+        GA.Business.Config
+        GA.Core
+      GA.Domain.Repositories (1)
+        GA.Domain.Core (2)
+          GA.Business.Config
+          GA.Core
+20 nodes
+exit 0

@@ -1,0 +1,8 @@
+e07_spawn_mut_value.v:7:23: error: function in `spawn` statement cannot contain mutable non-reference arguments
+    5 | fn main() {
+    6 |     mut by_package := map[string]int{}
+    7 |     h := spawn count(mut by_package, 'Spectre.Console')
+      |                          ~~~~~~~~~~
+    8 |     h.wait()
+    9 |     println(by_package)
+exit 1

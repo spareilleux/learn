@@ -1,0 +1,35 @@
+module deps
+    Package versions, as written in the project files of GuitarAlchemist/ga.
+
+fn parse_version(s string) !Version
+    parse_version reads a version, or returns an error when a part isn't a number.
+fn Graph.parse(lines []string) !Graph
+    Graph.parse reads the lines of project_refs.csv, header included.
+type Version = Floating | Prerelease | Release
+    Version is one of the three forms.
+fn (v Version) is_stable() bool
+    is_stable tells whether a version is a release.
+struct Floating {
+pub:
+	pattern string
+}
+    Floating is a version with a wildcard, such as 8.*-*, that NuGet resolves at restore time.
+struct Graph {
+mut:
+	refs map[string][]string
+}
+    Graph holds the project references, from a project to the projects it references.
+fn (g Graph) reachable(from string) []string
+    reachable returns the projects that a project references, directly or not, sorted.
+struct Prerelease {
+pub:
+	release Release
+	label   string
+}
+    Prerelease is a release followed by a label, such as 1.0.0-beta.1.
+struct Release {
+pub:
+	parts []int
+}
+    Release is a version made of numbers only, such as 9.5.1.
+exit 0

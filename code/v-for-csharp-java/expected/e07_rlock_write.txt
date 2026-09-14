@@ -1,0 +1,15 @@
+e07_rlock_write.v:9:3: error: usage has an `rlock` but needs a `lock`
+    7 |     shared usage := Usage{}
+    8 |     rlock usage {
+    9 |         usage.by_package['Spectre.Console']++
+      |         ~~~~~
+   10 |     }
+   11 | }
+e07_rlock_write.v:9:3: error: `usage` is `shared` and needs explicit lock for `v.ast.SelectorExpr`
+    7 |     shared usage := Usage{}
+    8 |     rlock usage {
+    9 |         usage.by_package['Spectre.Console']++
+      |         ~~~~~
+   10 |     }
+   11 | }
+exit 1

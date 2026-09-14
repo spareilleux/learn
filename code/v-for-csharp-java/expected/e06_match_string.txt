@@ -1,0 +1,7 @@
+e06_match_string.v:2:9: error: match must be exhaustive (add `else {}` at the end)
+    1 | fn sdk_kind(name string) string {
+    2 |     return match name {
+      |            ~~~~~~~~~~~~
+    3 |         'Microsoft.NET.Sdk' { 'library' }
+    4 |         'Microsoft.NET.Sdk.Web' { 'web' }
+exit 1

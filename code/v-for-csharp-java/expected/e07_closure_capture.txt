@@ -1,0 +1,29 @@
+e07_closure_capture.v:2:2: warning: unused variable: `project`
+    1 | fn main() {
+    2 |     project := 'Apps/GaCli/GaCli.fsproj'
+      |     ~~~~~~~
+    3 |     h := spawn fn () {
+    4 |         println(project)
+e07_closure_capture.v:4:11: error: `project` must be explicitly listed as inherited variable to be used inside a closure
+    2 |     project := 'Apps/GaCli/GaCli.fsproj'
+    3 |     h := spawn fn () {
+    4 |         println(project)
+      |                 ~~~~~~~
+    5 |     }()
+    6 |     h.wait()
+Details: use `fn [project] () {` instead of `fn () {`
+e07_closure_capture.v:4:3: error: `println` can not print void expressions
+    2 |     project := 'Apps/GaCli/GaCli.fsproj'
+    3 |     h := spawn fn () {
+    4 |         println(project)
+      |         ~~~~~~~~~~~~~~~~
+    5 |     }()
+    6 |     h.wait()
+e07_closure_capture.v:4:11: error: undefined ident: `project`
+    2 |     project := 'Apps/GaCli/GaCli.fsproj'
+    3 |     h := spawn fn () {
+    4 |         println(project)
+      |                 ~~~~~~~
+    5 |     }()
+    6 |     h.wait()
+exit 1

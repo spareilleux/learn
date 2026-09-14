@@ -1,0 +1,8 @@
+e05_generic_operator.v:9:6: error: cannot use `>` as `<=` operator method is not defined
+    7 |     mut best := items[0]
+    8 |     for x in items[1..] {
+    9 |         if x > best {
+      |            ~~~~~~~~
+   10 |             best = x
+   11 |         }
+exit 1

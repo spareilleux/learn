@@ -1,0 +1,10 @@
+module main
+
+// Counts the references of a project
+pub fn count(refs []string) int {
+    return refs.len
+}
+
+fn main() {
+	println(count( ['GA.Core','GA.Domain.Core'] ))
+}

@@ -1,0 +1,25 @@
+testsuite_begin
+failing_test.v:14: fn test_values
+   > assert parts == [9, 5, 1]
+     Left value (len: 6): `[9, 5]`
+    Right value (len: 9): `[9, 5, 1]`
+
+failing_test.v:20: fn test_message
+   > assert s.split('.').len == 3, 'version ${s}'
+     Left value (len: 1): `2`
+    Right value (len: 1): `3`
+        Message: version 9.5
+
+failing_test.v:25: fn test_propagated_error failed propagation with error: strconv.atoi: parsing "n/a": invalid radix 10 character
+   25 | 	lines := strconv.atoi('n/a')!
+failing_test.v:32: fn test_continues
+    assert !s.contains('*'), s
+        Message: 0.*
+
+failing_test.v:32: fn test_continues
+    assert !s.contains('*'), s
+        Message: 8.*-*
+
+printed: assert_continues goes on after a failure
+testsuite_end
+exit 1

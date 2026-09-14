@@ -1,0 +1,8 @@
+e06_match_variant.v:16:9: error: match must be exhaustive (add match branches for: `Floating` or `else {}` at the end)
+   14 | 
+   15 | fn describe(v Version) string {
+   16 |     return match v {
+      |            ~~~~~~~~~
+   17 |         Release { 'release' }
+   18 |         Prerelease { 'prerelease ${v.label}' }
+exit 1

@@ -1,0 +1,7 @@
+e05_infer.v:6:10: error: could not infer generic type `T` in call to `parse`
+    4 | 
+    5 | fn main() {
+    6 |     println(parse('111'))
+      |             ~~~~~~~~~~~~
+    7 | }
+exit 1

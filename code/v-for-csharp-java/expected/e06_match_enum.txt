@@ -1,0 +1,8 @@
+e06_match_enum.v:8:9: error: match must be exhaustive (add match branches for: `.worker` or `else {}` at the end)
+    6 | 
+    7 | fn default_port(sdk Sdk) int {
+    8 |     return match sdk {
+      |            ~~~~~~~~~~~
+    9 |         .library { 0 }
+   10 |         .web { 8080 }
+exit 1

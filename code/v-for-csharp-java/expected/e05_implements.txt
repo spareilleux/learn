@@ -1,0 +1,8 @@
+e05_implements.v:6:1: error: `Package` doesn't implement method `kind` of interface `Named`
+    4 | }
+    5 | 
+    6 | struct Package implements Named {
+      | ~~~~~~~~~~~~~~
+    7 |     name    string
+    8 |     version string
+exit 1

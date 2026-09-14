@@ -1,0 +1,11 @@
+project AllProjects.AppHost
+  [project] AllProjects.AppHost
+  sdk: Microsoft.NET.Sdk
+package Aspire.Dashboard.Sdk.win-x64
+  [package] Aspire.Dashboard.Sdk.win-x64
+language F#
+  [language] F#
+package references: 478, distinct packages: 136
+copied: counter.n = 0, copied.total() = 1
+reference: shared_counter.n = 1
+exit 0

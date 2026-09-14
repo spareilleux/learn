@@ -1,0 +1,7 @@
+e05_missing_method.v:16:19: error: `Package` doesn't implement method `kind` of interface `Named`
+   14 | 
+   15 | fn main() {
+   16 |     println(describe(Package{'Aspire.Hosting.AppHost', '9.5.1'}))
+      |                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   17 | }
+exit 1
