@@ -19,6 +19,17 @@ jobs:
           name: os
           path: os.txt
 
+  same-name-download:
+    needs: same-name
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: os
+          path: os
+      - run: cat os/os.txt
+
   # Exercise 2: the NuGet cache without any lock file
   no-lock-file:
     runs-on: ubuntu-latest
