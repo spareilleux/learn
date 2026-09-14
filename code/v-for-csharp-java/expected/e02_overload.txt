@@ -1,0 +1,14 @@
+builder error: redefinition of function `describe`
+e02_overload.v:1:1: conflicting declaration: fn describe(lines int) string
+    1 | fn describe(lines int) string {
+      | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    2 |     return '${lines} lines'
+    3 | }
+e02_overload.v:5:1: conflicting declaration: fn describe(title string) string
+    3 | }
+    4 | 
+    5 | fn describe(title string) string {
+      | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    6 |     return 'title: ${title}'
+    7 | }
+exit 1
