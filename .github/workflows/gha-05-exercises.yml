@@ -1,0 +1,48 @@
+# GitHub Actions course, lesson 5: checks for the exercises (manual runs only)
+name: "GHA 05: exercise checks"
+
+on:
+  workflow_dispatch:
+
+jobs:
+  # Exercise 1: every matrix job uploads an artifact with the same name
+  same-name:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - run: echo "${{ matrix.os }}" > os.txt
+      - uses: actions/upload-artifact@v7
+        with:
+          name: os
+          path: os.txt
+
+  # Exercise 2: the NuGet cache without any lock file
+  no-lock-file:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: 10.0.x
+          cache: true
+
+  # Exercise 3: restore-keys with a key that changes on every run
+  restore-keys:
+    runs-on: ubuntu-latest
+    steps:
+      - id: cache
+        uses: actions/cache@v6
+        with:
+          path: counter
+          key: gha-05-counter-${{ github.run_id }}
+          restore-keys: |
+            gha-05-counter-
+      - run: |
+          echo "cache-hit='${{ steps.cache.outputs.cache-hit }}'"
+          previous=$(cat counter/value 2>/dev/null || echo 0)
+          mkdir -p counter
+          echo $((previous + 1)) > counter/value
+          echo "counter is now $(cat counter/value)"

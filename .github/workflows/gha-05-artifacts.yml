@@ -1,0 +1,94 @@
+# GitHub Actions course, lesson 5: dependency caches, actions/cache, build artifacts between jobs
+name: "GHA 05: caches and artifacts"
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/gha-05-artifacts.yml', 'code/github-actions/dotnet/**']
+
+jobs:
+  test:
+    name: test (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    env:
+      NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
+    defaults:
+      run:
+        working-directory: code/github-actions/dotnet
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: code/github-actions/dotnet/global.json
+          cache: true
+          cache-dependency-path: code/github-actions/dotnet/*/packages.lock.json
+      - run: dotnet restore --locked-mode
+      - run: dotnet test --no-restore --report-xunit-junit --report-xunit-junit-filename slugs.junit.xml --results-directory TestResults
+      - name: Upload the test report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: test-results-${{ matrix.os }}
+          path: code/github-actions/dotnet/TestResults/
+          retention-days: 7
+
+  pack:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: code/github-actions/dotnet
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: code/github-actions/dotnet/global.json
+      - run: dotnet pack Slugs/Slugs.csproj --configuration Release --output dist -p:Version=1.0.${{ github.run_number }}
+      - uses: actions/upload-artifact@v7
+        with:
+          name: package
+          path: code/github-actions/dotnet/dist/*.nupkg
+          if-no-files-found: error
+
+  cache-demo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Restore the cache
+        id: cache
+        uses: actions/cache@v6
+        with:
+          path: expensive
+          key: gha-05-expensive-${{ runner.os }}-v1
+      - name: Show the cache-hit output
+        run: echo "cache-hit='${{ steps.cache.outputs.cache-hit }}'"
+      - name: Produce the files only on a miss
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p expensive
+          date -u +%FT%TZ > expensive/created-at.txt
+          echo "produced"
+      - run: cat expensive/created-at.txt
+
+  report:
+    needs: [test, pack]
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: test-results-*
+          path: results
+      - uses: actions/download-artifact@v8
+        with:
+          name: package
+          path: package
+      - run: find results package -type f | sort
+      - name: Tests per OS
+        run: |
+          for f in results/*/slugs.junit.xml; do
+            echo "$(dirname "$f"): $(grep -o 'tests="[0-9]*" failures="[0-9]*"' "$f" | head -1)"
+          done
