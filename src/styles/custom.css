@@ -33,3 +33,16 @@
 		width: 100%;
 	}
 }
+
+/*
+ * Collapsed left sidebar (button in src/components/SiteTitle.astro), from 50rem where Starlight shows the sidebar.
+ * The content takes the freed space; phones and tablets keep Starlight's menu.
+ */
+@media (min-width: 50rem) {
+	:root[data-sidebar-collapsed][data-has-sidebar] {
+		--sl-content-inline-start: 0rem;
+	}
+	:root[data-sidebar-collapsed] .sidebar-pane {
+		display: none;
+	}
+}

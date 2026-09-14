@@ -21,6 +21,12 @@ export default defineConfig({
 			editLink: { baseUrl: 'https://github.com/spareilleux/learn/edit/main/' },
 			lastUpdated: true,
 			customCss: ['./src/styles/custom.css'],
+			components: {
+				// Narration player (pre-generated audio) or browser speech fallback under the title
+				PageTitle: './src/components/PageTitle.astro',
+				// Button that hides or shows the left sidebar on wide screens
+				SiteTitle: './src/components/SiteTitle.astro',
+			},
 			sidebar: [
 				{ label: 'Method', translations: { fr: 'Méthode', es: 'Método' }, slug: 'method' },
 				{ label: 'Artifacts', translations: { fr: 'Artefacts', es: 'Artefactos' }, slug: 'artifacts' },

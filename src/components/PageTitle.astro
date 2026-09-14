@@ -1,0 +1,261 @@
+---
+// Starlight PageTitle override: the default title, then a narration player.
+// Pages listed in src/data/audio-manifest.json (written by scripts/tts/generate.py) get an <audio> player;
+// other pages get a "Listen" button that reads the page with the browser's Web Speech API.
+import Default from '@astrojs/starlight/components/PageTitle.astro';
+
+type AudioEntry = { src: string; duration: number; hash: string; engine: string; voice: string };
+const manifests = import.meta.glob<Record<string, AudioEntry>>('../data/audio-manifest.json', {
+	eager: true,
+	import: 'default',
+});
+const manifest = Object.values(manifests)[0] ?? {};
+
+const route = Astro.locals.starlightRoute;
+const contentLocale = route.entryMeta.locale; // undefined for the English root locale
+const lang = route.entryMeta.lang;
+const slug = route.locale && route.id.startsWith(`${route.locale}/`) ? route.id.slice(route.locale.length + 1) : route.id;
+const audio = route.isFallback ? undefined : manifest[`${contentLocale ?? 'en'}/${slug}`];
+const splash = route.entry.data.template === 'splash' || Boolean(route.entry.data.hero);
+
+const fr = lang.startsWith('fr');
+const es = lang.startsWith('es');
+const t = fr
+	? { listenPage: 'Écouter cette page', synthetic: 'voix de synthèse', listen: 'Écouter', pause: 'Pause', resume: 'Reprendre', stop: 'Arrêter', browser: 'Lecture par la synthèse vocale du navigateur' }
+	: es
+		? { listenPage: 'Escuchar esta página', synthetic: 'voz sintética', listen: 'Escuchar', pause: 'Pausa', resume: 'Reanudar', stop: 'Detener', browser: 'Leído en voz alta por la síntesis de voz de tu navegador' }
+		: { listenPage: 'Listen to this page', synthetic: 'synthetic voice', listen: 'Listen', pause: 'Pause', resume: 'Resume', stop: 'Stop', browser: 'Read aloud by your browser’s speech synthesis' };
+
+let durationText = '';
+let durationIso = '';
+if (audio) {
+	const s = Math.round(audio.duration);
+	durationText = s < 60 ? `${s} s` : `${Math.round(s / 60)} min`;
+	durationIso = `PT${Math.floor(s / 60)}M${s % 60}S`;
+}
+---
+
+<Default />
+
+{
+	!splash && audio && (
+		<div class="page-audio">
+			<p class="page-audio__label" id="page-audio-label">
+				<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+					<path d="M12 3a9 9 0 0 0-9 9v5a3 3 0 0 0 3 3h1a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1H5a7 7 0 0 1 14 0h-2a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h1a3 3 0 0 0 3-3v-5a9 9 0 0 0-9-9Z" />
+				</svg>
+				{t.listenPage}{' '}
+				<span class="page-audio__meta">
+					(<time datetime={durationIso}>{durationText}</time>, {t.synthetic})
+				</span>
+			</p>
+			<audio controls preload="none" src={audio.src} aria-labelledby="page-audio-label">
+				<a href={audio.src}>{t.listenPage}</a>
+			</audio>
+		</div>
+	)
+}
+
+{
+	!splash && !audio && (
+		<page-speech class="page-speech" data-lang={fr ? 'fr-FR' : es ? 'es-ES' : lang === 'en' ? 'en-US' : lang} data-listen={t.listen} data-pause={t.pause} data-resume={t.resume} hidden>
+			<button type="button" class="page-speech__play" aria-describedby="page-speech-hint">
+				<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+					<path d="M3 10v4a1 1 0 0 0 1 1h3l4 4V5L7 9H4a1 1 0 0 0-1 1Zm13.5 2A4.5 4.5 0 0 0 14 8v8a4.47 4.47 0 0 0 2.5-4ZM14 3.23v2.06a7 7 0 0 1 0 13.42v2.06a9 9 0 0 0 0-17.54Z" />
+				</svg>
+				<span class="page-speech__text">{t.listen}</span>
+			</button>
+			<button type="button" class="page-speech__stop" hidden>
+				<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="5" y="5" width="14" height="14" rx="2" /></svg>
+				{t.stop}
+			</button>
+			<span class="page-speech__hint" id="page-speech-hint">{t.browser}</span>
+		</page-speech>
+	)
+}
+
+<script>
+	const BLOCKS = 'h1, h2, h3, h4, h5, h6, p, li, dt, dd, blockquote, figcaption';
+	const SKIP = 'pre, .expressive-code, table, details, script, style, .sl-anchor-link, [role="tablist"], [hidden], .sr-only';
+	const MAX_UTTERANCE = 180; // Chrome cuts utterances after ~15 s
+
+	function pageText(): string[] {
+		const parts: string[] = [];
+		const title = document.querySelector('main h1');
+		if (title?.textContent) parts.push(title.textContent);
+		const content = document.querySelector('main .sl-markdown-content');
+		if (!content) return parts;
+		for (const el of content.querySelectorAll<HTMLElement>(BLOCKS)) {
+			if (el.closest(SKIP)) continue;
+			// blocks that contain other blocks are read through their children
+			const copy = el.cloneNode(true) as HTMLElement;
+			copy.querySelectorAll(`${BLOCKS}, ${SKIP}, ul, ol`).forEach((n) => n.remove());
+			const text = copy.textContent?.replace(/\s+/g, ' ').trim();
+			if (text) parts.push(/[.!?:;…]$/.test(text) ? text : `${text}.`);
+		}
+		return parts;
+	}
+
+	function utterances(parts: string[]): string[] {
+		const out: string[] = [];
+		for (const part of parts) {
+			let cur = '';
+			for (const sentence of part.split(/(?<=[.!?;:…])\s+/)) {
+				// very long sentences are cut at commas, then spaces
+				const pieces = sentence.length <= MAX_UTTERANCE ? [sentence] : sentence.match(new RegExp(`.{1,${MAX_UTTERANCE}}(?:[,\\s]|$)`, 'g')) ?? [sentence];
+				for (const piece of pieces) {
+					if (cur && cur.length + piece.length + 1 > MAX_UTTERANCE) {
+						out.push(cur);
+						cur = piece.trim();
+					} else cur = `${cur} ${piece}`.trim();
+				}
+			}
+			if (cur) out.push(cur);
+		}
+		return out;
+	}
+
+	class PageSpeech extends HTMLElement {
+		#queue: string[] = [];
+		#index = 0;
+		#state: 'idle' | 'playing' | 'paused' = 'idle';
+		#voice: SpeechSynthesisVoice | undefined;
+		#utterance: SpeechSynthesisUtterance | undefined;
+
+		connectedCallback() {
+			if (!('speechSynthesis' in window) || typeof SpeechSynthesisUtterance === 'undefined') return;
+			speechSynthesis.cancel();
+			this.hidden = false;
+			this.#pickVoice();
+			speechSynthesis.addEventListener('voiceschanged', () => this.#pickVoice());
+			this.querySelector('.page-speech__play')!.addEventListener('click', () => this.#toggle());
+			this.querySelector('.page-speech__stop')!.addEventListener('click', () => this.#stop());
+			window.addEventListener('pagehide', () => speechSynthesis.cancel());
+		}
+
+		#pickVoice() {
+			const lang = (this.dataset.lang ?? 'en').toLowerCase();
+			const base = lang.split('-')[0];
+			const voices = speechSynthesis.getVoices().filter((v) => v.lang.toLowerCase().replace('_', '-').startsWith(base));
+			const score = (v: SpeechSynthesisVoice) =>
+				(v.lang.toLowerCase() === lang ? 1 : 0) + (/natural|neural|online|google|premium|enhanced/i.test(v.name) ? 2 : 0) + (v.default ? 0.5 : 0);
+			this.#voice = voices.sort((a, b) => score(b) - score(a))[0];
+		}
+
+		#toggle() {
+			if (this.#state === 'playing') {
+				// cancel + restart the sentence: more reliable than pause()/resume() across browsers
+				this.#state = 'paused';
+				this.#utterance = undefined;
+				speechSynthesis.cancel();
+			} else {
+				if (this.#state === 'idle') {
+					this.#queue = utterances(pageText());
+					this.#index = 0;
+				}
+				this.#state = 'playing';
+				this.#speak();
+			}
+			this.#render();
+		}
+
+		#stop() {
+			this.#state = 'idle';
+			this.#utterance = undefined;
+			speechSynthesis.cancel();
+			this.#render();
+		}
+
+		#speak() {
+			if (this.#state !== 'playing') return;
+			if (this.#index >= this.#queue.length) return this.#stop();
+			const u = new SpeechSynthesisUtterance(this.#queue[this.#index]);
+			u.lang = this.dataset.lang ?? 'en';
+			if (this.#voice) u.voice = this.#voice;
+			u.rate = 1;
+			const next = () => {
+				if (this.#utterance !== u) return; // cancelled
+				this.#index++;
+				this.#speak();
+			};
+			u.addEventListener('end', next);
+			u.addEventListener('error', (e) => (e.error === 'interrupted' || e.error === 'canceled' ? undefined : next()));
+			this.#utterance = u;
+			speechSynthesis.speak(u);
+		}
+
+		#render() {
+			const play = this.querySelector<HTMLButtonElement>('.page-speech__play')!;
+			const label = { idle: this.dataset.listen, playing: this.dataset.pause, paused: this.dataset.resume }[this.#state];
+			play.querySelector('.page-speech__text')!.textContent = label ?? '';
+			play.setAttribute('aria-pressed', String(this.#state === 'playing'));
+			this.querySelector<HTMLButtonElement>('.page-speech__stop')!.hidden = this.#state === 'idle';
+		}
+	}
+
+	customElements.define('page-speech', PageSpeech);
+</script>
+
+<style>
+	.page-audio,
+	.page-speech {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.5rem 0.75rem;
+		margin-top: 1rem;
+		font-size: var(--sl-text-sm);
+		color: var(--sl-color-gray-2);
+	}
+	.page-speech[hidden],
+	.page-speech button[hidden] {
+		display: none;
+	}
+	.page-audio__label {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		margin: 0;
+		font-weight: 600;
+		color: var(--sl-color-white);
+	}
+	.page-audio__meta {
+		font-weight: 400;
+		color: var(--sl-color-gray-3);
+	}
+	.page-audio audio {
+		flex: 1 1 18rem;
+		min-width: 0;
+		max-width: 32rem;
+		width: 100%;
+		height: 2.5rem;
+	}
+	.page-speech button {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		min-height: 2.25rem;
+		padding: 0.25rem 0.85rem;
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: 999rem;
+		background: var(--sl-color-gray-6);
+		color: var(--sl-color-white);
+		font: inherit;
+		cursor: pointer;
+	}
+	.page-speech button:hover {
+		border-color: var(--sl-color-accent);
+	}
+	.page-speech button:focus-visible {
+		outline: 2px solid var(--sl-color-accent);
+		outline-offset: 2px;
+	}
+	.page-speech button[aria-pressed='true'] {
+		border-color: var(--sl-color-accent);
+		background: var(--sl-color-accent-low);
+	}
+	.page-speech__hint {
+		color: var(--sl-color-gray-3);
+		font-size: var(--sl-text-xs);
+	}
+</style>
