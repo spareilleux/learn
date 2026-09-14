@@ -10,6 +10,12 @@ permissions:
   pages: write
   id-token: write
 
+# Two pushes in a row would start two Pages deployments, and the second one fails with
+# "Deployment request failed ... due to in progress deployment". Queue them instead.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
