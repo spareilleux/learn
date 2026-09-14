@@ -1,0 +1,32 @@
+# GitHub Actions course, lesson 2: checks behind the exercise solutions (manual runs only)
+name: "GHA 02: exercise checks"
+
+on:
+  workflow_dispatch:
+
+jobs:
+  windows-bash:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - run: echo "bash $BASH_VERSION, options $-"
+
+  java:
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        java: ['22']
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        working-directory: code/github-actions/java
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: ${{ matrix.java }}
+      - name: Build with Java 22 (expected to fail)
+        run: mvn -B verify || echo "BUILD FAILED AS EXPECTED"
