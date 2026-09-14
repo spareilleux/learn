@@ -1,0 +1,38 @@
+# GitHub Actions course, lesson 10: checks for the exercises (manual runs only)
+name: "GHA 10: exercise checks"
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  # Exercise 1: a required input that isn't passed, and an input that doesn't exist
+  inputs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/slugify
+        continue-on-error: true
+        with:
+          txt: Hello
+      - uses: ./.github/actions/slugify
+        with:
+          text: Hello
+
+  # Exercise 2: the container action on Windows
+  container-on-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/hello-container
+
+  # Exercise 3: require() in a repository whose package.json says "type": "module"
+  commonjs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/exercise-commonjs
+        with:
+          text: Hello

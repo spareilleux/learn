@@ -1,0 +1,19 @@
+# GitHub Actions course, lesson 10: a JavaScript action without dependencies
+name: Slugify
+description: Turns a title into a URL slug, like the sample code of lesson 2.
+
+inputs:
+  text:
+    description: The text to turn into a slug
+    required: true
+  max-length:
+    description: Maximum length of the slug, 0 for no limit
+    default: '0'
+
+outputs:
+  slug:
+    description: The slug
+
+runs:
+  using: node24
+  main: index.js

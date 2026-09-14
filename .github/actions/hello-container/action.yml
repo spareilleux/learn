@@ -1,0 +1,14 @@
+# GitHub Actions course, lesson 10: a container action (Linux runners only)
+name: Hello from a container
+description: Prints the operating system of the container it runs in.
+
+inputs:
+  who:
+    description: Who to greet
+    default: world
+
+runs:
+  using: docker
+  image: Dockerfile
+  args:
+    - ${{ inputs.who }}

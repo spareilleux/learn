@@ -1,0 +1,39 @@
+# GitHub Actions course, lesson 10: using the JavaScript action and the container action of this repository
+name: "GHA 10: custom actions"
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/gha-10-action.yml', '.github/actions/slugify/**', '.github/actions/hello-container/**']
+
+permissions:
+  contents: read
+
+jobs:
+  javascript:
+    name: javascript (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v7
+      - id: slug
+        uses: ./.github/actions/slugify
+        with:
+          text: GitHub Actions course, lesson 10 — Wörld!
+          max-length: 30
+      - shell: bash
+        run: echo "slug output = ${{ steps.slug.outputs.slug }}"
+
+  container:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - id: hello
+        uses: ./.github/actions/hello-container
+        with:
+          who: Grace
+      - run: echo "greeting output = ${{ steps.hello.outputs.greeting }}"
