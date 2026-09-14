@@ -37,7 +37,7 @@ Sabes compilar y probar un proyecto .NET o Java desde la línea de comandos (`do
 | 2 | [Compilar y probar .NET y Java](02-build-and-test/) | `strategy: matrix`, `UseDotNet@2`, `Cache@2` |
 | 3 | [Disparadores, filtros y concurrencia](03-triggers/) | `trigger`, `pr`, `schedules`, parámetros |
 | 4 | [Expresiones, contextos y salidas](04-expressions-and-outputs/) | `$[ ]`, variables, variables de salida, `condition` |
-| 5 | Artefactos y caché *(próximamente)* | `PublishPipelineArtifact@1` |
+| 5 | [Cachés y artefactos](05-caches-and-artifacts/) | `Cache@2`, `PublishPipelineArtifact@1` |
 | 6 | Workflows reutilizables y actions compuestas *(próximamente)* | plantillas |
 | 7 | Seguridad: permisos, secretos, OIDC *(próximamente)* | conexiones de servicio |
 | 8 | Desplegar en GitHub Pages *(próximamente)* | entornos, aprobaciones |

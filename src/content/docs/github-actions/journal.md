@@ -12,7 +12,7 @@ sidebar:
 - [x] Lesson 2: matrix build on three OSes, setup-dotnet, setup-java, Maven cache
 - [x] Lesson 3: triggers, filters, inputs, concurrency
 - [x] Lesson 4: expressions, contexts, outputs, conditions
-- [ ] Lesson 5: artifacts and caching (NuGet cache with `packages.lock.json`)
+- [x] Lesson 5: caches and artifacts (NuGet cache with `packages.lock.json`, `actions/cache`, artifacts between jobs)
 - [ ] Lesson 6: reusable workflows and composite actions
 - [ ] Lesson 7: security — permissions, secrets, pinning, OIDC
 - [ ] Lesson 8: deploying to GitHub Pages
@@ -54,8 +54,16 @@ The site stayed on the previous version until the next push. Fix in `deploy.yml`
 - `GITHUB_TOKEN` default permissions on this repository: `Contents: read`, `Metadata: read`, `Packages: read`. The token was 377 characters long.
 - Concurrency with `cancel-in-progress: true`: push run cancelled by a manual run 41 s later, itself cancelled 10 s later by another one before its job started.
 
+## 2026-09-14 — Lesson 5: a cache that saves nothing, an artifact conflict that doesn't happen
+
+- `setup-dotnet` `cache: true` without any `packages.lock.json`: `Dependencies lock file is not found in /home/runner/work/learn/learn`. Added `RestorePackagesWithLockFile` in `Directory.Build.props`, committed the two lock files, `dotnet restore --locked-mode` in CI.
+- NuGet cache, miss → hit: restore step 3 s → 1 s (Ubuntu, macOS), 5 s → 4 s (Windows), for a 54 MB cache per OS. The download of the cache costs about what it saves on a project with three test packages. Kept for the lesson and for the lock files.
+- `actions/cache` output `cache-hit`: empty on a miss, `false` on a `restore-keys` match, `true` on an exact hit.
+- Two matrix jobs uploading an artifact named `os`: the README announces conflict errors; three runs out of three, both uploads succeeded and the run had two artifacts named `os`. `download-artifact` and `gh run download --name os` both returned the Ubuntu one, without warning.
+- Artifact expiry: 7 days with `retention-days: 7`, otherwise 90 days (`gh api repos/spareilleux/learn/actions/permissions/artifact-and-log-retention` → `{"days":90,"maximum_allowed_days":90}`).
+
 ## Open questions
 
 - Does the `schedule` trigger of `gha-03` (Mondays 06:17 UTC) run on time? *To verify on 2026-09-21.*
-- `setup-dotnet` `cache: true`: does it require `packages.lock.json`, and what does it save on Windows? *To verify in lesson 5.*
+- Which artifact does `download-artifact` pick when two share a name, and is it stable? *To verify.*
 - What exactly does a pull request page show for a required check skipped by `paths`? *To verify.*

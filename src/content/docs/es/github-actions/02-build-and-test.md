@@ -184,7 +184,7 @@ Cache hit occurred on the primary key setup-java-Linux-x64-maven-4b450ab7781caae
 | dotnet (windows-latest) | 60 s | 57 s |
 | dotnet (macos-latest) | 20 s | 22 s |
 
-Los jobs de .NET no se aceleraron: todavía nada guarda en caché los paquetes NuGet. `setup-dotnet` tiene una opción `cache: true` basada en archivos `packages.lock.json` — *por verificar en la lección 5*. La clave contiene el sistema operativo (`Linux-x64`, `Windows-x64`, `macOS-arm64`): cada sistema operativo tiene su propia caché. Y `macos-latest` es una máquina **arm64**.
+Los jobs de .NET no se aceleraron: todavía nada guarda en caché los paquetes NuGet. `setup-dotnet` tiene una opción `cache: true` basada en archivos `packages.lock.json`, medida en la [lección 5](../05-caches-and-artifacts/). La clave contiene el sistema operativo (`Linux-x64`, `Windows-x64`, `macOS-arm64`): cada sistema operativo tiene su propia caché. Y `macos-latest` es una máquina **arm64**.
 
 ## Puntos clave
 

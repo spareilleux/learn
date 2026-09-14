@@ -21,7 +21,7 @@ Un **workflow** es un archivo YAML en `.github/workflows/`. Un **evento** (un pu
 Dos consecuencias de «cada job recibe una máquina nueva» sorprenden a quien viene de Jenkins:
 
 - al empezar un job no hay nada en el disco, **ni siquiera tu código**: tienes que hacer el checkout explícitamente;
-- los archivos no pasan de un job al siguiente: los jobs comparten datos mediante salidas (lección 4) o artefactos (lección 5).
+- los archivos no pasan de un job al siguiente: los jobs comparten datos mediante salidas (lección 4) o artefactos ([lección 5](../05-caches-and-artifacts/)).
 
 ## El workflow útil más pequeño
 

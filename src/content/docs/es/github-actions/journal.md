@@ -12,7 +12,7 @@ sidebar:
 - [x] Lección 2: build con matrix en tres sistemas operativos, setup-dotnet, setup-java, caché de Maven
 - [x] Lección 3: disparadores, filtros, inputs, concurrencia
 - [x] Lección 4: expresiones, contextos, salidas, condiciones
-- [ ] Lección 5: artefactos y caché (caché de NuGet con `packages.lock.json`)
+- [x] Lección 5: cachés y artefactos (caché de NuGet con `packages.lock.json`, `actions/cache`, artefactos entre jobs)
 - [ ] Lección 6: workflows reutilizables y actions compuestas
 - [ ] Lección 7: seguridad — permisos, secretos, fijación de versiones, OIDC
 - [ ] Lección 8: desplegar en GitHub Pages
@@ -54,8 +54,16 @@ El sitio se quedó en la versión anterior hasta el push siguiente. Corrección 
 - Permisos por defecto de `GITHUB_TOKEN` en este repositorio: `Contents: read`, `Metadata: read`, `Packages: read`. El token tenía 377 caracteres.
 - Concurrencia con `cancel-in-progress: true`: la ejecución del push fue cancelada por una ejecución manual 41 s después, cancelada a su vez 10 s más tarde por otra antes de que arrancara su job.
 
+## 2026-09-14 — Lección 5: una caché que no ahorra nada, un conflicto de artefactos que no ocurre
+
+- `setup-dotnet` `cache: true` sin ningún `packages.lock.json`: `Dependencies lock file is not found in /home/runner/work/learn/learn`. Se añadió `RestorePackagesWithLockFile` en `Directory.Build.props`, se hizo commit de los dos archivos de bloqueo, `dotnet restore --locked-mode` en la CI.
+- Caché de NuGet, sin caché → acierto: step de restauración 3 s → 1 s (Ubuntu, macOS), 5 s → 4 s (Windows), para una caché de 54 MB por sistema operativo. La descarga de la caché cuesta más o menos lo que ahorra en un proyecto con tres paquetes de prueba. Se mantiene por la lección y por los archivos de bloqueo.
+- Salida `cache-hit` de `actions/cache`: vacía sin acierto, `false` con una coincidencia de `restore-keys`, `true` con un acierto exacto.
+- Dos jobs de matrix que suben un artefacto llamado `os`: el README anuncia errores de conflicto; en tres ejecuciones de tres, las dos subidas tuvieron éxito y la ejecución tenía dos artefactos llamados `os`. `download-artifact` y `gh run download --name os` devolvieron ambos el de Ubuntu, sin aviso.
+- Caducidad de los artefactos: 7 días con `retention-days: 7`, si no, 90 días (`gh api repos/spareilleux/learn/actions/permissions/artifact-and-log-retention` → `{"days":90,"maximum_allowed_days":90}`).
+
 ## Preguntas abiertas
 
 - ¿El disparador `schedule` de `gha-03` (lunes 06:17 UTC) se ejecuta a su hora? *Por verificar el 2026-09-21.*
-- `setup-dotnet` `cache: true`: ¿requiere `packages.lock.json`, y qué ahorra en Windows? *Por verificar en la lección 5.*
+- ¿Qué artefacto elige `download-artifact` cuando dos comparten nombre, y es estable? *Por verificar.*
 - ¿Qué muestra exactamente la página de un pull request para un check obligatorio omitido por `paths`? *Por verificar.*

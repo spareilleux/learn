@@ -37,7 +37,7 @@ You know how to build and test a .NET or Java project from the command line (`do
 | 2 | [Build and test .NET and Java](02-build-and-test/) | `strategy: matrix`, `UseDotNet@2`, `Cache@2` |
 | 3 | [Triggers, filters and concurrency](03-triggers/) | `trigger`, `pr`, `schedules`, parameters |
 | 4 | [Expressions, contexts and outputs](04-expressions-and-outputs/) | `$[ ]`, variables, output variables, `condition` |
-| 5 | Artifacts and caching *(coming)* | `PublishPipelineArtifact@1` |
+| 5 | [Caches and artifacts](05-caches-and-artifacts/) | `Cache@2`, `PublishPipelineArtifact@1` |
 | 6 | Reusable workflows and composite actions *(coming)* | templates |
 | 7 | Security: permissions, secrets, OIDC *(coming)* | service connections |
 | 8 | Deploying to GitHub Pages *(coming)* | environments, approvals |
