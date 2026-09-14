@@ -9,6 +9,8 @@ Ejemplo completo: [`examples/l07_traits_generics.rs`](https://github.com/spareil
 
 ## Un trait es una interfaz
 
+De [`examples/l07_traits_generics.rs`, líneas 4-35](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l07_traits_generics.rs#L4-L35):
+
 ```rust
 trait Shape {
     fn area(&self) -> f64;
@@ -63,7 +65,7 @@ error[E0046]: not all trait items implemented, missing: `area`
 
 ## Genéricos con restricciones de trait
 
-Una función genérica debe decir qué traits implementa su parámetro de tipo — el equivalente de [`where T : IShape`](https://learn.microsoft.com/dotnet/csharp/programming-guide/generics/constraints-on-type-parameters) o de [`<T extends Shape>`](https://docs.oracle.com/javase/tutorial/java/generics/bounded.html):
+Una función genérica debe decir qué traits implementa su parámetro de tipo — el equivalente de [`where T : IShape`](https://learn.microsoft.com/dotnet/csharp/programming-guide/generics/constraints-on-type-parameters) o de [`<T extends Shape>`](https://docs.oracle.com/javase/tutorial/java/generics/bounded.html) ([líneas 38-40](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l07_traits_generics.rs#L38-L40), [100-101](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l07_traits_generics.rs#L100-L101)):
 
 ```rust
 fn total_area<T: Shape>(shapes: &[T]) -> f64 {
@@ -90,7 +92,7 @@ help: the following trait defines an item `area`, perhaps you need to restrict t
   |                +++++++
 ```
 
-Otras dos formas de escribir la misma idea:
+Otras dos formas de escribir la misma idea ([líneas 43-45](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l07_traits_generics.rs#L43-L45), [56-68](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l07_traits_generics.rs#L56-L68)):
 
 ```rust
 // `impl Trait` en posición de argumento: atajo para un parámetro genérico
@@ -116,7 +118,7 @@ pear apple fig (max pear)
 
 `total_area::<Circle>` y `total_area::<Square>` se compilan como **dos funciones distintas**, cada una de las cuales llama directamente a `area` y puede insertarse en línea (inlining). Esto se llama [**monomorfización**](https://doc.rust-lang.org/book/ch10-01-syntax.html#performance-of-code-using-generics) (monomorphization).
 
-Cuando necesitas una colección de tipos *distintos*, usa un [**objeto trait**](https://doc.rust-lang.org/reference/types/trait-object.html) (trait object), `dyn Shape`, detrás de un puntero como [`Box`](https://doc.rust-lang.org/std/boxed/struct.Box.html) o `&`:
+Cuando necesitas una colección de tipos *distintos*, usa un [**objeto trait**](https://doc.rust-lang.org/reference/types/trait-object.html) (trait object), `dyn Shape`, detrás de un puntero como [`Box`](https://doc.rust-lang.org/std/boxed/struct.Box.html) o `&` ([líneas 48-53](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l07_traits_generics.rs#L48-L53), [104-107](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l07_traits_generics.rs#L104-L107)):
 
 ```rust
 fn largest(shapes: &[Box<dyn Shape>]) -> Option<&dyn Shape> {
@@ -156,6 +158,8 @@ Gran parte de lo que C# pone en [`System.Object`](https://learn.microsoft.com/do
 | [`From`](https://doc.rust-lang.org/std/convert/trait.From.html) / `Into` | operadores de conversión | fábrica estática | implementado a mano |
 | `Add`, `Mul`, … | [`operator +`](https://learn.microsoft.com/dotnet/csharp/language-reference/operators/operator-overloading) | — | implementado a mano |
 
+De [`examples/l07_traits_generics.rs`, líneas 71-86](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l07_traits_generics.rs#L71-L86), [115-117](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l07_traits_generics.rs#L115-L117):
+
 ```rust
 #[derive(Debug, Default, PartialEq)]
 struct Celsius(f64);
@@ -182,7 +186,7 @@ println!("{body} / {also} / default {}", Celsius::default());
 
 ## Métodos de extensión, al estilo de Rust
 
-En C#, un [método de extensión](https://learn.microsoft.com/dotnet/csharp/programming-guide/classes-and-structs/extension-methods) añade `Shout()` a `string`. En Rust, defines un trait y lo implementas para el tipo existente:
+En C#, un [método de extensión](https://learn.microsoft.com/dotnet/csharp/programming-guide/classes-and-structs/extension-methods) añade `Shout()` a `string`. En Rust, defines un trait y lo implementas para el tipo existente ([líneas 89-97](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l07_traits_generics.rs#L89-L97), [119](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l07_traits_generics.rs#L119)):
 
 ```rust
 trait Shout {
@@ -239,6 +243,8 @@ Esto garantiza que dos crates nunca puedan proporcionar implementaciones en conf
 <details>
 <summary>Solución</summary>
 
+De [`src/lib.rs`, líneas 346-364](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L346-L364):
+
 ```rust
 trait Priced {
     fn price(&self) -> f64;
@@ -280,6 +286,8 @@ Se usa `total_cmp` porque `f64` no tiene un orden total (`NaN`), así que `min_b
 <details>
 <summary>Solución</summary>
 
+De [`src/lib.rs`, líneas 351-370](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L351-L370):
+
 ```rust
 struct Coffee {
     size_ml: u32,
@@ -302,7 +310,7 @@ let basket: Vec<Box<dyn Priced>> = vec![
 assert_eq!(total(&basket), 42.5);
 ```
 
-Un `&[T]` genérico exige que todos los elementos sean del *mismo* tipo concreto `T`. Un `Vec<Box<dyn Priced>>` contiene tipos distintos detrás de un mismo objeto trait, que es justo para lo que sirve el despacho dinámico. Para reutilizar `cheapest` con la cesta, `T` tendría que ser `Box<dyn Priced>` — lo cual funciona en cuanto reenvías el trait a la caja:
+Un `&[T]` genérico exige que todos los elementos sean del *mismo* tipo concreto `T`. Un `Vec<Box<dyn Priced>>` contiene tipos distintos detrás de un mismo objeto trait, que es justo para lo que sirve el despacho dinámico. Para reutilizar `cheapest` con la cesta, `T` tendría que ser `Box<dyn Priced>` — lo cual funciona en cuanto reenvías el trait a la caja ([`src/lib.rs`, líneas 372-375](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L372-L375)):
 
 ```rust
 impl Priced for Box<dyn Priced> {
@@ -321,6 +329,8 @@ assert_eq!(cheapest_item, Some(2.5));
 
 <details>
 <summary>Solución</summary>
+
+De [`src/lib.rs`, líneas 381-389](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L381-L389):
 
 ```rust
 use std::fmt;

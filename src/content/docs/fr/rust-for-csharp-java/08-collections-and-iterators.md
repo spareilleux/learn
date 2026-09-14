@@ -27,7 +27,7 @@ Itérer sur un `HashMap` produit les entrées dans un ordre non spécifié, qui 
 
 ## LINQ et Streams, traduits
 
-L'exemple travaille sur une liste de commandes :
+L'exemple travaille sur une liste de commandes ([lignes 57-61](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l08_collections_iterators.rs#L57-L61)) :
 
 ```rust
 let big_orders: Vec<&str> = orders
@@ -56,6 +56,8 @@ let big_orders: Vec<&str> = orders
 | `.min_by_key(…)` / `.max_by_key(…)` | `.MinBy(…)` / `.MaxBy(…)` | `.min(comparator)` |
 | collecter dans un `HashSet` | `.Distinct()` | `.distinct()` |
 | `vec.sort_by_key(…)` (sur le `Vec`) | `.OrderBy(…)` | `.sorted(comparator)` |
+
+Extrait de [`examples/l08_collections_iterators.rs`, lignes 65-74](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l08_collections_iterators.rs#L65-L74) :
 
 ```rust
 let revenue: f64 = orders.iter().map(|o| o.quantity as f64 * o.unit_price).sum();
@@ -94,7 +96,7 @@ Cette paresse permet aussi aux itérateurs d'être infinis : voir l'exemple de F
 
 ## `collect` doit connaître le type cible
 
-[`collect`](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.collect) peut construire un `Vec`, un `HashSet`, un `String`, un `HashMap`… vous devez donc indiquer lequel :
+[`collect`](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.collect) peut construire un `Vec`, un `HashSet`, un `String`, un `HashMap`… vous devez donc indiquer lequel ([`src/lib.rs`, ligne 396](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L396)) :
 
 ```rust
 let evens = (1..10).filter(|n| n % 2 == 0).collect();
@@ -127,6 +129,8 @@ La possession (leçons 3 et 4) se manifeste dans la façon d'itérer :
 | `v.iter_mut()` ou `for x in &mut v` | `&mut T` | modifiée sur place |
 | `v.into_iter()` ou `for x in v` | `T` | **déplacée**, plus utilisable |
 
+Extrait de [`examples/l08_collections_iterators.rs`, lignes 113-117](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l08_collections_iterators.rs#L113-L117) :
+
 ```rust
 let mut prices = vec![10.0, 20.0, 30.0];
 for p in prices.iter_mut() {
@@ -157,7 +161,7 @@ help: consider iterating over a slice of the `Vec<f64>`'s content to avoid movin
 
 ## Regrouper avec `HashMap::entry`
 
-Il n'y a pas de `GroupBy` dans la bibliothèque standard ; l'API [`entry`](https://doc.rust-lang.org/std/collections/struct.HashMap.html#method.entry) en fait une ligne — comme [`CollectionsMarshal.GetValueRefOrAddDefault`](https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.collectionsmarshal.getvaluereforadddefault) en C# ou [`merge`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Map.html#merge(K,V,java.util.function.BiFunction)) en Java :
+Il n'y a pas de `GroupBy` dans la bibliothèque standard ; l'API [`entry`](https://doc.rust-lang.org/std/collections/struct.HashMap.html#method.entry) en fait une ligne — comme [`CollectionsMarshal.GetValueRefOrAddDefault`](https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.collectionsmarshal.getvaluereforadddefault) en C# ou [`merge`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Map.html#merge(K,V,java.util.function.BiFunction)) en Java ([lignes 80-85](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l08_collections_iterators.rs#L80-L85)) :
 
 ```rust
 let mut spend: HashMap<&str, f64> = HashMap::new();
@@ -170,7 +174,7 @@ let sorted: BTreeMap<_, _> = spend.iter().collect();
 
 ## Le tri, et pourquoi les flottants sont particuliers
 
-`sort` exige un **ordre total** ([`Ord`](https://doc.rust-lang.org/std/cmp/trait.Ord.html)). Les nombres à virgule flottante n'ont qu'un ordre partiel, car `NaN` n'est comparable à rien :
+`sort` exige un **ordre total** ([`Ord`](https://doc.rust-lang.org/std/cmp/trait.Ord.html)). Les nombres à virgule flottante n'ont qu'un ordre partiel, car `NaN` n'est comparable à rien ([`src/lib.rs`, lignes 412-413](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L412-L413)) :
 
 ```rust
 let mut prices = vec![19.99, 5.0, 12.5];
@@ -185,7 +189,7 @@ error[E0277]: the trait bound `{float}: Ord` is not satisfied
     |            ^^^^ the trait `Ord` is not implemented for `{float}`
 ```
 
-C# et Java trient les doubles sans broncher et placent `NaN` selon leur propre convention. En Rust, choisissez explicitement :
+C# et Java trient les doubles sans broncher et placent `NaN` selon leur propre convention. En Rust, choisissez explicitement ([`src/lib.rs`, lignes 419-420](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L419-L420)) :
 
 ```rust
 let mut prices: Vec<f64> = vec![19.99, 5.0, 12.5];
@@ -198,7 +202,7 @@ Sans elle, les littéraux sont encore un « flottant quelconque » non détermin
 
 ## Closures
 
-Les closures Rust (`|args| body`) sont les lambdas de C# et de Java. Elles capturent les variables de la portée englobante — par référence par défaut :
+Les closures Rust (`|args| body`) sont les lambdas de C# et de Java. Elles capturent les variables de la portée englobante — par référence par défaut ([lignes 121-126](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l08_collections_iterators.rs#L121-L126)) :
 
 ```rust
 let threshold = 50.0;
@@ -206,7 +210,7 @@ let is_expensive = |o: &Order| o.unit_price * o.quantity as f64 > threshold;
 println!("expensive orders: {}", orders.iter().filter(|o| is_expensive(o)).count());   // 2
 ```
 
-`move` fait prendre à la closure la possession de ce qu'elle capture — obligatoire quand la closure survit à la portée courante, par exemple dans un thread (leçon 12) :
+`move` fait prendre à la closure la possession de ce qu'elle capture — obligatoire quand la closure survit à la portée courante, par exemple dans un thread (leçon 12) ([lignes 128-130](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l08_collections_iterators.rs#L128-L130)) :
 
 ```rust
 let label = String::from("report");
@@ -221,7 +225,7 @@ println!("{}", make_title(1));   // report #1
 
 ## Écrire votre propre itérateur
 
-Implémentez une seule méthode, `next`, et tous les adaptateurs ci-dessus deviennent disponibles — l'équivalent d'[`IEnumerable<T>`](https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1) avec [`yield return`](https://learn.microsoft.com/dotnet/csharp/language-reference/statements/yield) :
+Implémentez une seule méthode, `next`, et tous les adaptateurs ci-dessus deviennent disponibles — l'équivalent d'[`IEnumerable<T>`](https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1) avec [`yield return`](https://learn.microsoft.com/dotnet/csharp/language-reference/statements/yield) ([lignes 12-26](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l08_collections_iterators.rs#L12-L26), [133-138](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l08_collections_iterators.rs#L133-L138)) :
 
 ```rust
 struct Fibonacci {
@@ -247,6 +251,8 @@ let fibs: Vec<u64> = Fibonacci { current: 0, next: 1 }.take_while(|&n| n < 100).
 `type Item = u64;` est un [**type associé**](https://doc.rust-lang.org/reference/items/associated-items.html#associated-types) : chaque itérateur décide de ce qu'il produit.
 
 ## Bonus sur les slices : `windows` et `chunks`
+
+Extrait de [`examples/l08_collections_iterators.rs`, lignes 142-144](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l08_collections_iterators.rs#L142-L144) :
 
 ```rust
 let readings = [3, 5, 4, 8, 9];
@@ -275,6 +281,8 @@ var result = words.Where(w => w.Length > 3)
 <details>
 <summary>Solution</summary>
 
+Extrait de [`src/lib.rs`, lignes 434-437](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L434-L437) :
+
 ```rust
 let words = ["tree", "sky", "apple", "rust", "go"];
 let mut result: Vec<String> = words
@@ -294,6 +302,8 @@ Le tri est une méthode de `Vec` (il trie sur place), pas un adaptateur d'itéra
 
 <details>
 <summary>Solution</summary>
+
+Extrait de [`src/lib.rs`, lignes 443-453](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L443-L453) :
 
 ```rust
 use std::collections::BTreeMap;
@@ -319,6 +329,8 @@ assert_eq!(counts.keys().collect::<Vec<_>>(), ["and", "cat", "hat", "the"]);
 
 <details>
 <summary>Solution</summary>
+
+Extrait de [`src/lib.rs`, lignes 459-467](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L459-L467) :
 
 ```rust
 struct Countdown(u32);

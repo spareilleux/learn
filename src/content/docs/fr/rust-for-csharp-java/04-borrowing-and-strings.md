@@ -11,6 +11,8 @@ Exemple complet : [`examples/l04_borrowing.rs`](https://github.com/spareilleux/l
 
 La [leçon 3](../03-ownership-and-moves/) s'est terminée sur une fonction qui « volait » son argument. La plupart du temps, on veut seulement *consulter* une valeur : passez une **référence** avec `&`.
 
+Extrait de [`examples/l04_borrowing.rs`, lignes 1-3](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l04_borrowing.rs#L1-L3), [16-19](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l04_borrowing.rs#L16-L19) :
+
 ```rust
 fn word_count(text: &str) -> usize {
     text.split_whitespace().count()
@@ -30,6 +32,8 @@ Une référence **emprunte** la valeur : le propriétaire conserve la possession
 | Référence partagée | `&T` | autant qu'on veut | non |
 | Référence mutable | `&mut T` | exactement une, et aucune partagée | oui |
 
+Extrait de [`examples/l04_borrowing.rs`, lignes 5-8](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l04_borrowing.rs#L5-L8), [22-24](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l04_borrowing.rs#L22-L24) :
+
 ```rust
 fn shout(text: &mut String) {
     text.make_ascii_uppercase();
@@ -46,6 +50,8 @@ L'appelant écrit `&mut` au point d'appel — comme le [mot-clé `ref`](https://
 ## La règle : partagé XOR mutable
 
 À tout moment, on peut avoir **soit** plusieurs lecteurs, **soit** un seul écrivain — jamais les deux. Le compilateur le vérifie ; c'est ce qu'on appelle le **borrow checker** (vérificateur d'emprunts).
+
+Extrait de [`src/lib.rs`, lignes 134-137](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L134-L137) :
 
 ```rust
 let mut names = vec![String::from("Ada")];
@@ -84,7 +90,7 @@ foreach (var n in numbers) {
 }
 ```
 
-En Rust, il ne passe pas le compilateur :
+En Rust, il ne passe pas le compilateur ([`src/lib.rs`, lignes 143-146](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L143-L146)) :
 
 ```rust
 let mut numbers = vec![1, 2, 3];
@@ -106,7 +112,7 @@ error[E0502]: cannot borrow `numbers` as mutable because it is also borrowed as 
   |         ^^^^^^^^^^^^^^^^^^^ mutable borrow occurs here
 ```
 
-La correction est la même qu'en C#/Java — finir de lire, puis écrire :
+La correction est la même qu'en C#/Java — finir de lire, puis écrire ([lignes 46-49](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l04_borrowing.rs#L46-L49)) :
 
 ```rust
 let mut numbers = vec![1, 2, 3];
@@ -117,7 +123,7 @@ println!("{numbers:?}");   // [1, 2, 3, 2, 4, 6]
 
 ## Pas de références pendantes
 
-Une référence ne peut jamais survivre à ce vers quoi elle pointe :
+Une référence ne peut jamais survivre à ce vers quoi elle pointe ([`src/lib.rs`, lignes 152-155](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L152-L155)) :
 
 ```rust
 fn longest_line() -> &str {
@@ -145,7 +151,7 @@ help: instead, you are more likely to want to return an owned value
 
 ## Slices
 
-Une **slice** emprunte une portion contiguë d'une collection sans la copier :
+Une **slice** emprunte une portion contiguë d'une collection sans la copier ([lignes 31-34](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l04_borrowing.rs#L31-L34)) :
 
 ```rust
 let mut scores = vec![90, 72, 85];
@@ -169,7 +175,7 @@ C'est la pierre d'achoppement la plus fréquente, et les slices l'expliquent :
 | Usage typique | champs de structs, valeurs de retour | paramètres de fonctions |
 
 - Les littéraux de chaîne comme `"hello"` sont des [`&str`](https://doc.rust-lang.org/std/primitive.str.html) (`&'static str` : ils vivent dans le binaire).
-- `&String` se convertit automatiquement en `&str`, donc **les paramètres devraient généralement être des `&str`** — ils acceptent alors les deux :
+- `&String` se convertit automatiquement en `&str`, donc **les paramètres devraient généralement être des `&str`** — ils acceptent alors les deux ([lignes 10-12](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l04_borrowing.rs#L10-L12), [27-28](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l04_borrowing.rs#L27-L28)) :
 
 ```rust
 fn first_word(text: &str) -> &str {
@@ -182,7 +188,7 @@ println!("first word: {}", first_word(&title));      // first word: the
 
 ## Les chaînes sont de l'UTF-8, pas des tableaux de caractères
 
-En C# et en Java, `s[0]` / [`s.charAt(0)`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html#charAt(int)) renvoie une unité UTF-16. Rust refuse d'indexer une chaîne par position :
+En C# et en Java, `s[0]` / [`s.charAt(0)`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html#charAt(int)) renvoie une unité UTF-16. Rust refuse d'indexer une chaîne par position ([`src/lib.rs`, lignes 161-162](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L161-L162)) :
 
 ```rust
 let word = String::from("cafe");
@@ -200,7 +206,7 @@ error[E0277]: the type `str` cannot be indexed by `{integer}`
   = note: you can use `.chars().nth()` or `.bytes().nth()`
 ```
 
-Comme les caractères occupent de 1 à 4 octets en UTF-8, « le n-ième caractère » est un parcours en O(n), et Rust rend cela explicite :
+Comme les caractères occupent de 1 à 4 octets en UTF-8, « le n-ième caractère » est un parcours en O(n), et Rust rend cela explicite ([lignes 37-43](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l04_borrowing.rs#L37-L43)) :
 
 ```rust
 let word = "café";
@@ -216,6 +222,8 @@ byte index 4 is not a char boundary; it is inside 'é' (bytes 3..5) of `café`
 ```
 
 ## Construire des chaînes
+
+Extrait de [`examples/l04_borrowing.rs`, lignes 52-56](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l04_borrowing.rs#L52-L56) :
 
 ```rust
 let mut log = String::new();
@@ -250,6 +258,8 @@ if is_shouting(msg) { println!("{msg} is shouting"); }
 <details>
 <summary>Solution</summary>
 
+Extrait de [`src/lib.rs`, lignes 168-174](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L168-L174) :
+
 ```rust
 fn is_shouting(text: &str) -> bool {
     text.chars().any(|c| c.is_alphabetic()) && text == text.to_uppercase()
@@ -283,6 +293,8 @@ En C#, `first` contient une référence vers l'objet chaîne, que le GC maintien
 
 <details>
 <summary>Solution</summary>
+
+Extrait de [`src/lib.rs`, lignes 189-197](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L189-L197) :
 
 ```rust
 fn initials(full_name: &str) -> String {

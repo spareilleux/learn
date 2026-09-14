@@ -26,6 +26,8 @@ Usas macros desde la lección 1: `println!`, `vec!`, `assert_eq!`, `#[derive(Deb
 
 Una macro `macro_rules!` es un `match` sobre la **sintaxis**: cada regla tiene un patrón y una expansión.
 
+De [`examples/l15_macros_unsafe.rs`, líneas 4-8](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l15_macros_unsafe.rs#L4-L8), [62](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l15_macros_unsafe.rs#L62):
+
 ```rust
 macro_rules! square {
     ($x:expr) => {
@@ -38,7 +40,7 @@ println!("square!(1 + 2) = {}", square!(1 + 2));   // 9
 
 `$x:expr` captura una expresión completa y la mantiene agrupada, así que `square!(1 + 2)` es `(1 + 2) * (1 + 2)` = 9. Un `#define SQUARE(x) x * x` de C daría `1 + 2 * 1 + 2` = 5. Las macros de Rust trabajan sobre el árbol sintáctico, no sobre el texto.
 
-La repetición, `$( … ),*`, maneja listas — así está escrito `vec!`:
+La repetición, `$( … ),*`, maneja listas — así está escrito `vec!` ([líneas 11-17](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l15_macros_unsafe.rs#L11-L17), [64-67](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l15_macros_unsafe.rs#L64-L67)):
 
 ```rust
 macro_rules! hashmap {
@@ -55,7 +57,7 @@ let ages = hashmap! {
 };
 ```
 
-Las reglas se prueban en orden y pueden ser recursivas; las macros también pueden generar elementos como structs:
+Las reglas se prueban en orden y pueden ser recursivas; las macros también pueden generar elementos como structs ([líneas 20-37](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l15_macros_unsafe.rs#L20-L37)):
 
 ```rust
 macro_rules! max_of {
@@ -138,7 +140,7 @@ Un bloque `unsafe` desbloquea exactamente cinco operaciones adicionales:
 4. implementar un trait `unsafe` (como `Send` o `Sync` a mano);
 5. acceder a los campos de una `union`.
 
-Todo lo demás sigue aplicándose dentro de `unsafe`: el borrow checker, la comprobación de tipos, la comprobación de límites en los slices. Crear un puntero crudo es seguro; solo usarlo no lo es:
+Todo lo demás sigue aplicándose dentro de `unsafe`: el borrow checker, la comprobación de tipos, la comprobación de límites en los slices. Crear un puntero crudo es seguro; solo usarlo no lo es ([`src/lib.rs`, líneas 1187-1189](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L1187-L1189)):
 
 ```rust
 let x = 42;
@@ -160,7 +162,7 @@ C# tiene la misma idea — la [palabra clave `unsafe`, los punteros](https://lea
 
 ### Abstracciones seguras sobre código unsafe
 
-El patrón estándar es un pequeño núcleo `unsafe` envuelto en una **función segura** que comprueba ella misma cada condición. Devolver referencias mutables al primer elemento y al resto de un slice parece inofensivo, pero el borrow checker no puede ver que las dos partes no se solapan:
+El patrón estándar es un pequeño núcleo `unsafe` envuelto en una **función segura** que comprueba ella misma cada condición. Devolver referencias mutables al primer elemento y al resto de un slice parece inofensivo, pero el borrow checker no puede ver que las dos partes no se solapan ([`src/lib.rs`, líneas 1241-1246](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L1241-L1246)):
 
 ```rust
 fn split_first_rest(values: &mut [i32]) -> Option<(&mut i32, &mut [i32])> {
@@ -186,7 +188,7 @@ error[E0499]: cannot borrow `*values` as mutable more than once at a time
   |     returning this value requires that `values[_]` is borrowed for `'1`
 ```
 
-Con punteros crudos, y un comentario `SAFETY` que explica por qué se cumplen los invariantes:
+Con punteros crudos, y un comentario `SAFETY` que explica por qué se cumplen los invariantes ([líneas 40-54](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l15_macros_unsafe.rs#L40-L54)):
 
 ```rust
 fn split_first_rest(values: &mut [i32]) -> Option<(&mut i32, &mut [i32])> {
@@ -234,6 +236,8 @@ La **FFI** (*foreign function interface*, interfaz de funciones externas) pasa p
 
 ### Llamar a C desde Rust
 
+De [`examples/l15_macros_unsafe.rs`, líneas 57-59](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l15_macros_unsafe.rs#L57-L59), [94](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l15_macros_unsafe.rs#L94):
+
 ```rust
 unsafe extern "C" {
     fn abs(input: i32) -> i32;
@@ -261,13 +265,15 @@ Para bibliotecas C reales, la herramienta [`bindgen`](https://github.com/rust-la
 
 Es la dirección inversa, y la más útil para un desarrollador C#: escribir en Rust una pieza crítica para el rendimiento o compartida, y llamarla desde .NET con [P/Invoke](https://learn.microsoft.com/dotnet/standard/native-interop/pinvoke). La carpeta [`l15-ffi`](https://github.com/spareilleux/learn/tree/main/code/rust-for-csharp-java/l15-ffi) contiene los dos lados.
 
-**Lado Rust** — una biblioteca compilada como biblioteca dinámica nativa:
+**Lado Rust** — una biblioteca compilada como biblioteca dinámica nativa ([`l15-ffi/Cargo.toml`, líneas 7-9](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/l15-ffi/Cargo.toml#L7-L9)):
 
 ```toml
 [lib]
 # cdylib: una .dll / .so / .dylib nativa con ABI de C; rlib: para que `cargo test` pueda enlazarla
 crate-type = ["cdylib", "rlib"]
 ```
+
+De [`l15-ffi/src/lib.rs`, líneas 3-54](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/l15-ffi/src/lib.rs#L3-L54):
 
 ```rust
 use std::ffi::{CStr, CString, c_char};
@@ -329,6 +335,8 @@ pub unsafe extern "C" fn pricing_free_string(label: *mut c_char) {
 - **Quien asigna, libera.** Una cadena asignada por Rust debe volver a Rust (`pricing_free_string`), nunca a [`Marshal.FreeHGlobal`](https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.marshal.freehglobal).
 
 **Lado C#** — [`[LibraryImport]`](https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.libraryimportattribute), el sucesor de [`[DllImport]`](https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.dllimportattribute) basado en generación de código fuente:
+
+[`l15-ffi/dotnet/Program.cs`](https://github.com/spareilleux/learn/blob/main/code/rust-for-csharp-java/l15-ffi/dotnet/Program.cs):
 
 ```csharp
 using System.Runtime.InteropServices;
@@ -431,6 +439,8 @@ Escribir los dos lados a mano no escala. Hay herramientas que los generan: [`cbi
 <details>
 <summary>Solución</summary>
 
+De [`src/lib.rs`, líneas 1252-1260](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L1252-L1260):
+
 ```rust
 macro_rules! strings {
     ($($s:expr),* $(,)?) => {
@@ -452,6 +462,8 @@ assert!(empty.is_empty());
 
 <details>
 <summary>Solución</summary>
+
+De [`src/lib.rs`, líneas 1266-1286](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L1266-L1286):
 
 ```rust
 fn split_first_rest(values: &mut [i32]) -> Option<(&mut i32, &mut [i32])> {

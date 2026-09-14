@@ -22,6 +22,8 @@ Destacan dos diferencias. Un namespace de C# es solo un prefijo de nombres y cua
 
 ## Módulos y privacidad
 
+De [`examples/l10_modules.rs`, líneas 2-23](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l10_modules.rs#L2-L23):
+
 ```rust
 mod billing {
     pub fn invoice_total(amounts: &[f64]) -> f64 {
@@ -68,7 +70,7 @@ No existe `protected`: Rust no tiene herencia entre structs.
 
 ### Los campos de un struct son privados por separado
 
-`pub struct` hace público el **tipo**, no sus campos. Así es como Rust garantiza invariantes — el equivalente de una clase con campos privados y un constructor:
+`pub struct` hace público el **tipo**, no sus campos. Así es como Rust garantiza invariantes — el equivalente de una clase con campos privados y un constructor ([líneas 25-42](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l10_modules.rs#L25-L42)):
 
 ```rust
 mod shapes {
@@ -104,6 +106,8 @@ error[E0451]: fields `width` and `height` of struct `Rect` are private
 Leer `r.width` desde fuera falla de la misma manera (`E0616: field width of struct Rect is private`). El código externo tiene que pasar por `Rect::new`, que recorta los tamaños negativos a cero. Las variantes de un `pub enum`, en cambio, son siempre públicas.
 
 ## Rutas y `use`
+
+De [`examples/l10_modules.rs`, líneas 17-22](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l10_modules.rs#L17-L22), [51-53](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l10_modules.rs#L51-L53), [66](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l10_modules.rs#L66):
 
 ```rust
 use billing::discounts::with_discount;       // trae una función al ámbito
@@ -186,7 +190,7 @@ geometry = { path = "../geometry" }             # un crate local
 
 ### Features: opciones en tiempo de compilación
 
-Un crate puede declarar **features** que activan código opcional. Las features son interruptores aditivos que se comprueban con [`#[cfg]`](https://doc.rust-lang.org/reference/conditional-compilation.html), más cercanos a los símbolos [`#if`](https://learn.microsoft.com/dotnet/csharp/language-reference/preprocessor-directives#conditional-compilation) de C# que a una configuración en tiempo de ejecución:
+Un crate puede declarar **features** que activan código opcional. Las features son interruptores aditivos que se comprueban con [`#[cfg]`](https://doc.rust-lang.org/reference/conditional-compilation.html), más cercanos a los símbolos [`#if`](https://learn.microsoft.com/dotnet/csharp/language-reference/preprocessor-directives#conditional-compilation) de C# que a una configuración en tiempo de ejecución ([`l10-workspace/geometry/Cargo.toml`, líneas 7-9](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/l10-workspace/geometry/Cargo.toml#L7-L9)):
 
 ```toml
 # geometry/Cargo.toml
@@ -194,6 +198,8 @@ Un crate puede declarar **features** que activan código opcional. Las features 
 default = []
 display = []
 ```
+
+De [`l10-workspace/geometry/src/shapes.rs`, líneas 39-44](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/l10-workspace/geometry/src/shapes.rs#L39-L44):
 
 ```rust
 // geometry/src/shapes.rs — solo se compila cuando un dependiente activa `display`
@@ -238,6 +244,8 @@ l10-workspace/
     └── src/main.rs
 ```
 
+[`l10-workspace/Cargo.toml`](https://github.com/spareilleux/learn/blob/main/code/rust-for-csharp-java/l10-workspace/Cargo.toml):
+
 ```toml
 # l10-workspace/Cargo.toml
 [workspace]
@@ -254,6 +262,8 @@ publish = false
 geometry = { path = "geometry" }
 ```
 
+[`l10-workspace/app/Cargo.toml`](https://github.com/spareilleux/learn/blob/main/code/rust-for-csharp-java/l10-workspace/app/Cargo.toml):
+
 ```toml
 # l10-workspace/app/Cargo.toml
 [package]
@@ -268,6 +278,8 @@ geometry = { workspace = true, features = ["display"] }
 
 `[workspace.dependencies]` cumple el papel del [*Central Package Management*](https://learn.microsoft.com/nuget/consume-packages/central-package-management) de .NET (`Directory.Packages.props`) o de una sección [`<dependencyManagement>`](https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#Dependency_Management) de Maven: las versiones se declaran una sola vez y los miembros solo dicen `workspace = true`.
 
+De [`l10-workspace/geometry/src/lib.rs`, líneas 3-7](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/l10-workspace/geometry/src/lib.rs#L3-L7):
+
 ```rust
 // geometry/src/lib.rs
 mod shapes;          // módulo privado, cargado desde src/shapes.rs
@@ -275,6 +287,8 @@ pub mod units;       // módulo público, cargado desde src/units.rs
 
 pub use shapes::{Circle, Rect, Shape};
 ```
+
+[`l10-workspace/app/src/main.rs`](https://github.com/spareilleux/learn/blob/main/code/rust-for-csharp-java/l10-workspace/app/src/main.rs):
 
 ```rust
 // app/src/main.rs
@@ -352,6 +366,8 @@ app v0.1.0 (…\l10-workspace\app)
 
 <details>
 <summary>Solución</summary>
+
+De [`src/lib.rs`, líneas 717-735](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L717-L735):
 
 ```rust
 mod temperature {

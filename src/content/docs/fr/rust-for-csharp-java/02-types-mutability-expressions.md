@@ -9,13 +9,15 @@ Exemple complet : [`examples/l02_types.rs`](https://github.com/spareilleux/learn
 
 ## Immuable par défaut
 
+Extrait de [`examples/l02_types.rs`, lignes 3-5](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l02_types.rs#L3-L5) :
+
 ```rust
 let answer = 42;            // inféré en i32, ne peut pas changer
 let mut counter: u32 = 0;   // explicitement mutable
 counter += 1;
 ```
 
-En termes C#, chaque `let` est comme une variable locale qu'on ne peut jamais réaffecter ; en Java, comme [`final var`](https://openjdk.org/jeps/286). On **choisit** la mutabilité avec `mut` :
+En termes C#, chaque `let` est comme une variable locale qu'on ne peut jamais réaffecter ; en Java, comme [`final var`](https://openjdk.org/jeps/286). On **choisit** la mutabilité avec `mut` ([`src/lib.rs`, lignes 10-11](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L10-L11)) :
 
 ```rust
 let count = 0;
@@ -43,7 +45,7 @@ Les erreurs de Rust contiennent généralement la correction (`help: consider ma
 
 ## Masquage (shadowing)
 
-On peut déclarer une nouvelle variable portant le même nom, même avec un type différent. Pratique pour « analyser puis remplacer » :
+On peut déclarer une nouvelle variable portant le même nom, même avec un type différent. Pratique pour « analyser puis remplacer » ([lignes 9-11](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l02_types.rs#L9-L11)) :
 
 ```rust
 let input = "  7 ";
@@ -67,6 +69,8 @@ Ce n'est pas une mutation : le premier `input` (un [`&str`](https://doc.rust-lan
 | `bool` | `bool` | `boolean` | |
 | `char` | [`Rune`](https://learn.microsoft.com/dotnet/api/system.text.rune) | point de code `int` | **4 octets**, une valeur scalaire Unicode — *pas* une unité UTF-16 comme le `char` de C#/Java |
 
+Extrait de [`examples/l02_types.rs`, lignes 28-33](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l02_types.rs#L28-L33) :
+
 ```rust
 let note = '♪';
 println!("{note} is {} bytes in UTF-8, size_of::<char>() = {}", note.len_utf8(), std::mem::size_of::<char>());
@@ -75,7 +79,7 @@ println!("{note} is {} bytes in UTF-8, size_of::<char>() = {}", note.len_utf8(),
 
 ## Aucune conversion implicite
 
-C# et Java élargissent silencieusement un `int` en `long`. Rust ne convertit jamais les nombres à votre place :
+C# et Java élargissent silencieusement un `int` en `long`. Rust ne convertit jamais les nombres à votre place ([`src/lib.rs`, lignes 18-20](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L18-L20)) :
 
 ```rust
 let small: i32 = 10;
@@ -91,7 +95,7 @@ error[E0308]: mismatched types
   |                         ^^^ expected `i32`, found `i64`
 ```
 
-Convertissez explicitement avec [`as`](https://doc.rust-lang.org/reference/expressions/operator-expr.html#type-cast-expressions) (ou [`i64::from(small)`](https://doc.rust-lang.org/std/convert/trait.From.html), qui n'existe que pour les conversions sans perte) :
+Convertissez explicitement avec [`as`](https://doc.rust-lang.org/reference/expressions/operator-expr.html#type-cast-expressions) (ou [`i64::from(small)`](https://doc.rust-lang.org/std/convert/trait.From.html), qui n'existe que pour les conversions sans perte) ([ligne 16](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l02_types.rs#L16)) :
 
 ```rust
 let total = small as i64 + big; // 30
@@ -110,7 +114,7 @@ thread 'main' panicked at e_overflow.rs:3:16:
 attempt to add with overflow
 ```
 
-Quand le rebouclage ou l'échec est le comportement voulu, dites-le explicitement :
+Quand le rebouclage ou l'échec est le comportement voulu, dites-le explicitement ([lignes 20-25](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l02_types.rs#L20-L25)) :
 
 ```rust
 let max = u8::MAX;
@@ -119,6 +123,8 @@ println!("checked: {:?}, wrapping: {}", max.checked_add(1), max.wrapping_add(1))
 ```
 
 ## Tuples et tableaux
+
+Extrait de [`examples/l02_types.rs`, lignes 36-43](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l02_types.rs#L36-L43) :
 
 ```rust
 let point: (f64, f64) = (1.5, -2.0);
@@ -132,13 +138,13 @@ Une liste extensible est un [`Vec<T>`](https://doc.rust-lang.org/std/vec/struct.
 
 ## Tout est expression
 
-`if` renvoie une valeur, il n'y a donc pas d'opérateur ternaire :
+`if` renvoie une valeur, il n'y a donc pas d'opérateur ternaire ([ligne 46](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l02_types.rs#L46)) :
 
 ```rust
 let parity = if answer % 2 == 0 { "even" } else { "odd" };
 ```
 
-Un bloc `{ … }` s'évalue à sa dernière expression — **sans** point-virgule :
+Un bloc `{ … }` s'évalue à sa dernière expression — **sans** point-virgule ([lignes 50-54](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l02_types.rs#L50-L54)) :
 
 ```rust
 let area = {
@@ -148,7 +154,7 @@ let area = {
 };
 ```
 
-Les fonctions fonctionnent de la même manière ; `return` n'est nécessaire que pour les sorties anticipées :
+Les fonctions fonctionnent de la même manière ; `return` n'est nécessaire que pour les sorties anticipées ([lignes 78-80](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l02_types.rs#L78-L80)) :
 
 ```rust
 fn square(x: i32) -> i32 {
@@ -195,6 +201,8 @@ Il n'y a pas de `for (int i = 0; i < n; i++)` à la C : utilisez un intervalle. 
 <details>
 <summary>Solution</summary>
 
+Extrait de [`src/lib.rs`, lignes 26-34](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L26-L34) :
+
 ```rust
 fn clamp_percent(value: i32) -> u8 {
     if value < 0 {
@@ -212,6 +220,8 @@ Le `as u8` est sûr ici, car on sait que la valeur est comprise dans `0..=100`. 
 </details>
 
 2. Pourquoi cette fonction ne compile-t-elle pas, et quelle est la correction d'un seul caractère ?
+
+Extrait de [`src/lib.rs`, lignes 44-46](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L44-L46) :
 
 ```rust
 fn double(x: i32) -> i32 {

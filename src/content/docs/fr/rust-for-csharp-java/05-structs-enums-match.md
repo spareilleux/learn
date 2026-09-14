@@ -11,6 +11,8 @@ Exemple complet : [`examples/l05_structs_enums.rs`](https://github.com/spareille
 
 Une classe C# ou Java regroupe champs, constructeurs et méthodes dans un seul bloc. Rust les sépare : une `struct` déclare les données, un ou plusieurs blocs `impl` ajoutent les fonctions.
 
+Extrait de [`examples/l05_structs_enums.rs`, lignes 4-33](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l05_structs_enums.rs#L4-L33) :
+
 ```rust
 #[derive(Debug, Clone, PartialEq)]
 struct Account {
@@ -51,6 +53,8 @@ impl Account {
 - Le receveur indique ce que la méthode fait de la valeur : la lire (`&self`), la modifier (`&mut self`) ou la **consommer** (`self`) — après `account.close()`, `account` est déplacé et ne peut plus être utilisé, et c'est ainsi que Rust modélise « cet objet est terminé ».
 - Il n'y a **pas d'héritage** entre structs. Le comportement partagé va dans les traits ([leçon 7](../07-traits-and-generics/)).
 
+Extrait de [`examples/l05_structs_enums.rs`, lignes 96-104](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l05_structs_enums.rs#L96-L104) :
+
 ```rust
 let mut account = Account::new("Ada");
 account.deposit(1_250);
@@ -74,7 +78,7 @@ error[E0063]: missing field `balance_cents` in initializer of `Account`
   |                   ^^^^^^^ missing `balance_cents`
 ```
 
-La **syntaxe de mise à jour de struct** (struct update syntax) copie les champs restants depuis une autre valeur, comme une [expression `with`](https://learn.microsoft.com/dotnet/csharp/language-reference/operators/with-expression) en C# :
+La **syntaxe de mise à jour de struct** (struct update syntax) copie les champs restants depuis une autre valeur, comme une [expression `with`](https://learn.microsoft.com/dotnet/csharp/language-reference/operators/with-expression) en C# ([lignes 107-111](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l05_structs_enums.rs#L107-L111)) :
 
 ```rust
 let other = Account { owner: "Grace".into(), ..copy };
@@ -83,7 +87,7 @@ println!("{} has {} cents", other.owner, other.balance_cents);   // Grace has 12
 
 ## Tuple structs et newtypes
 
-Une struct peut avoir des champs sans nom. Avec un seul champ, elle crée un type distinct autour d'un type existant — un **[newtype](https://doc.rust-lang.org/rust-by-example/generics/new_types.html)** :
+Une struct peut avoir des champs sans nom. Avec un seul champ, elle crée un type distinct autour d'un type existant — un **[newtype](https://doc.rust-lang.org/rust-by-example/generics/new_types.html)** ([lignes 36-37](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l05_structs_enums.rs#L36-L37), [116-118](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l05_structs_enums.rs#L116-L118)) :
 
 ```rust
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd)]
@@ -99,6 +103,8 @@ Une fonction qui prend un `Meters` n'acceptera ni un `f64` brut ni un `Feet(f64)
 ## Les enums portent des données
 
 Les [enums C#](https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/enum) sont des entiers nommés ; les [enums Java](https://dev.java/learn/classes-objects/enums/) sont un ensemble fixe d'objets qui partagent tous les mêmes champs. Une `enum` Rust est une **union étiquetée** (tagged union) : chaque variante peut contenir des données *différentes*.
+
+Extrait de [`examples/l05_structs_enums.rs`, lignes 41-45](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l05_structs_enums.rs#L41-L45) :
 
 ```rust
 enum Shape {
@@ -127,6 +133,8 @@ record Triangle(double a, double b, double c) implements Shape {}
 ```
 
 ## `match` est exhaustif
+
+Extrait de [`examples/l05_structs_enums.rs`, lignes 47-59](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l05_structs_enums.rs#L47-L59) :
 
 ```rust
 impl Shape {
@@ -172,7 +180,7 @@ C'est ce qui rend les enums si utiles pour le refactoring : ajoutez une variante
 
 ## Motifs
 
-Le **filtrage par motif** (pattern matching) déstructure les valeurs, et les motifs peuvent être affinés :
+Le **filtrage par motif** (pattern matching) déstructure les valeurs, et les motifs peuvent être affinés ([lignes 139-144](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l05_structs_enums.rs#L139-L144)) :
 
 ```rust
 match command {
@@ -190,7 +198,7 @@ say "hi"
 quit
 ```
 
-Intervalles, [gardes](https://doc.rust-lang.org/reference/expressions/match-expr.html#match-guards) (`if`) et le motif fourre-tout `_` :
+Intervalles, [gardes](https://doc.rust-lang.org/reference/expressions/match-expr.html#match-guards) (`if`) et le motif fourre-tout `_` ([lignes 77-85](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l05_structs_enums.rs#L77-L85)) :
 
 ```rust
 fn describe(temperature: i32) -> &'static str {
@@ -215,7 +223,7 @@ if let Some(Shape::Circle { radius }) = shapes.first() {
 }
 ```
 
-[`let … else`](https://doc.rust-lang.org/rust-by-example/flow_control/let_else.html) lie un motif ou quitte le bloc courant — parfait pour les clauses de garde :
+[`let … else`](https://doc.rust-lang.org/rust-by-example/flow_control/let_else.html) lie un motif ou quitte le bloc courant — parfait pour les clauses de garde ([lignes 87-93](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l05_structs_enums.rs#L87-L93)) :
 
 ```rust
 fn parse_port(text: &str) -> u16 {
@@ -250,6 +258,8 @@ record Cash : Payment;
 <details>
 <summary>Solution</summary>
 
+Extrait de [`src/lib.rs`, lignes 223-230](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L223-L230) :
+
 ```rust
 enum Payment {
     Card { last4: String },
@@ -281,6 +291,8 @@ fn describe(payment: &Payment) -> String {
 
 <details>
 <summary>Solution</summary>
+
+Extrait de [`src/lib.rs`, lignes 249-259](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L249-L259) :
 
 ```rust
 #[derive(Debug, Clone, Copy, PartialEq)]

@@ -33,6 +33,8 @@ Como la ausencia y el fallo forman parte del **tipo**, no puedes olvidarlos.
 
 ## `Option<T>`
 
+De [`examples/l06_option_result.rs`, líneas 11-13](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l06_option_result.rs#L11-L13), [88-91](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l06_option_result.rs#L88-L91):
+
 ```rust
 fn find_user(users: &HashMap<u32, User>, id: u32) -> Option<&User> {
     users.get(&id)
@@ -44,7 +46,7 @@ match find_user(&users, 3) {
 }
 ```
 
-Un `Option<i32>` no es un `i32`, así que no puedes usarlo por accidente:
+Un `Option<i32>` no es un `i32`, así que no puedes usarlo por accidente ([`src/lib.rs`, líneas 266-267](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L266-L267)):
 
 ```rust
 let maybe: Option<i32> = Some(1);
@@ -65,7 +67,7 @@ En C#, la [`NullReferenceException`](https://learn.microsoft.com/dotnet/api/syst
 
 ### Combinadores
 
-En lugar de `if (x != null)` anidados, encadena métodos — se leen como [`?.`](https://learn.microsoft.com/dotnet/csharp/language-reference/operators/member-access-operators#null-conditional-operators--and-) y [`??`](https://learn.microsoft.com/dotnet/csharp/language-reference/operators/null-coalescing-operator):
+En lugar de `if (x != null)` anidados, encadena métodos — se leen como [`?.`](https://learn.microsoft.com/dotnet/csharp/language-reference/operators/member-access-operators#null-conditional-operators--and-) y [`??`](https://learn.microsoft.com/dotnet/csharp/language-reference/operators/null-coalescing-operator) ([línea 85](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l06_option_result.rs#L85)):
 
 ```rust
 let name_len = find_user(&users, 2).map(|u| u.name.len()).unwrap_or(0);
@@ -82,7 +84,7 @@ let name_len = find_user(&users, 2).map(|u| u.name.len()).unwrap_or(0);
 
 ## `Result<T, E>`
 
-Una función que puede fallar lo dice en su firma — algo parecido a una excepción comprobada de Java, pero como valor de retorno:
+Una función que puede fallar lo dice en su firma — algo parecido a una excepción comprobada de Java, pero como valor de retorno ([líneas 23-29](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l06_option_result.rs#L23-L29), [93-94](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l06_option_result.rs#L93-L94)):
 
 ```rust
 fn sum_csv(line: &str) -> Result<i32, ParseIntError> {
@@ -112,6 +114,8 @@ warning: unused `Result` that must be used
 ## El operador `?`
 
 `?` significa: *si es `Ok`/`Some`, extrae el valor; si no, devuelve inmediatamente el `Err`/`None` desde la función actual.* Es el equivalente explícito y visible de dejar que una excepción se propague.
+
+De [`examples/l06_option_result.rs`, líneas 16-20](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l06_option_result.rs#L16-L20):
 
 ```rust
 fn manager_name(users: &HashMap<u32, User>, id: u32) -> Option<&str> {
@@ -187,6 +191,8 @@ Ok(3000)
 
 ### `main` puede devolver un `Result`
 
+De [`examples/l06_option_result.rs`, líneas 63](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l06_option_result.rs#L63), [108-111](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l06_option_result.rs#L108-L111):
+
 ```rust
 fn main() -> Result<(), Box<dyn Error>> {
     let port = read_port(&config)?;   // ConfigError se convierte en Box<dyn Error>
@@ -243,6 +249,8 @@ var age = FindAge(ages, "Ada") ?? -1;
 <details>
 <summary>Solución</summary>
 
+De [`src/lib.rs`, líneas 281-287](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L281-L287):
+
 ```rust
 use std::collections::HashMap;
 
@@ -264,6 +272,8 @@ assert_eq!(find_age(&ages, "Bob"), None);
 
 <details>
 <summary>Solución</summary>
+
+De [`src/lib.rs`, líneas 293-301](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L293-L301):
 
 ```rust
 fn parse_point(text: &str) -> Result<(i32, i32), String> {

@@ -9,6 +9,8 @@ Exemple complet : [`examples/l07_traits_generics.rs`](https://github.com/spareil
 
 ## Un trait est une interface
 
+Extrait de [`examples/l07_traits_generics.rs`, lignes 4-35](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l07_traits_generics.rs#L4-L35) :
+
 ```rust
 trait Shape {
     fn area(&self) -> f64;
@@ -63,7 +65,7 @@ error[E0046]: not all trait items implemented, missing: `area`
 
 ## Génériques avec contraintes de trait
 
-Une fonction générique doit indiquer quels traits son paramètre de type implémente — l'équivalent de [`where T : IShape`](https://learn.microsoft.com/dotnet/csharp/programming-guide/generics/constraints-on-type-parameters) ou de [`<T extends Shape>`](https://docs.oracle.com/javase/tutorial/java/generics/bounded.html) :
+Une fonction générique doit indiquer quels traits son paramètre de type implémente — l'équivalent de [`where T : IShape`](https://learn.microsoft.com/dotnet/csharp/programming-guide/generics/constraints-on-type-parameters) ou de [`<T extends Shape>`](https://docs.oracle.com/javase/tutorial/java/generics/bounded.html) ([lignes 38-40](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l07_traits_generics.rs#L38-L40), [100-101](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l07_traits_generics.rs#L100-L101)) :
 
 ```rust
 fn total_area<T: Shape>(shapes: &[T]) -> f64 {
@@ -90,7 +92,7 @@ help: the following trait defines an item `area`, perhaps you need to restrict t
   |                +++++++
 ```
 
-Deux autres écritures de la même idée :
+Deux autres écritures de la même idée ([lignes 43-45](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l07_traits_generics.rs#L43-L45), [56-68](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l07_traits_generics.rs#L56-L68)) :
 
 ```rust
 // `impl Trait` en position d'argument : raccourci pour un paramètre générique
@@ -116,7 +118,7 @@ pear apple fig (max pear)
 
 `total_area::<Circle>` et `total_area::<Square>` sont compilées comme **deux fonctions distinctes**, chacune appelant `area` directement et pouvant être inlinée. C'est ce qu'on appelle la [**monomorphisation**](https://doc.rust-lang.org/book/ch10-01-syntax.html#performance-of-code-using-generics) (monomorphization).
 
-Quand vous avez besoin d'une collection de types *différents*, utilisez un [**objet trait**](https://doc.rust-lang.org/reference/types/trait-object.html) (trait object), `dyn Shape`, derrière un pointeur comme [`Box`](https://doc.rust-lang.org/std/boxed/struct.Box.html) ou `&` :
+Quand vous avez besoin d'une collection de types *différents*, utilisez un [**objet trait**](https://doc.rust-lang.org/reference/types/trait-object.html) (trait object), `dyn Shape`, derrière un pointeur comme [`Box`](https://doc.rust-lang.org/std/boxed/struct.Box.html) ou `&` ([lignes 48-53](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l07_traits_generics.rs#L48-L53), [104-107](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l07_traits_generics.rs#L104-L107)) :
 
 ```rust
 fn largest(shapes: &[Box<dyn Shape>]) -> Option<&dyn Shape> {
@@ -156,6 +158,8 @@ Une grande partie de ce que C# place dans [`System.Object`](https://learn.micros
 | [`From`](https://doc.rust-lang.org/std/convert/trait.From.html) / `Into` | opérateurs de conversion | fabrique statique | implémenté à la main |
 | `Add`, `Mul`, … | [`operator +`](https://learn.microsoft.com/dotnet/csharp/language-reference/operators/operator-overloading) | — | implémenté à la main |
 
+Extrait de [`examples/l07_traits_generics.rs`, lignes 71-86](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l07_traits_generics.rs#L71-L86), [115-117](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l07_traits_generics.rs#L115-L117) :
+
 ```rust
 #[derive(Debug, Default, PartialEq)]
 struct Celsius(f64);
@@ -182,7 +186,7 @@ println!("{body} / {also} / default {}", Celsius::default());
 
 ## Les méthodes d'extension, à la manière de Rust
 
-En C#, une [méthode d'extension](https://learn.microsoft.com/dotnet/csharp/programming-guide/classes-and-structs/extension-methods) ajoute `Shout()` à `string`. En Rust, vous définissez un trait et l'implémentez pour le type existant :
+En C#, une [méthode d'extension](https://learn.microsoft.com/dotnet/csharp/programming-guide/classes-and-structs/extension-methods) ajoute `Shout()` à `string`. En Rust, vous définissez un trait et l'implémentez pour le type existant ([lignes 89-97](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l07_traits_generics.rs#L89-L97), [119](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l07_traits_generics.rs#L119)) :
 
 ```rust
 trait Shout {
@@ -239,6 +243,8 @@ Cela garantit que deux crates ne peuvent jamais fournir des implémentations con
 <details>
 <summary>Solution</summary>
 
+Extrait de [`src/lib.rs`, lignes 346-364](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L346-L364) :
+
 ```rust
 trait Priced {
     fn price(&self) -> f64;
@@ -280,6 +286,8 @@ On utilise `total_cmp` parce que `f64` n'a pas d'ordre total (`NaN`), donc `min_
 <details>
 <summary>Solution</summary>
 
+Extrait de [`src/lib.rs`, lignes 351-370](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L351-L370) :
+
 ```rust
 struct Coffee {
     size_ml: u32,
@@ -302,7 +310,7 @@ let basket: Vec<Box<dyn Priced>> = vec![
 assert_eq!(total(&basket), 42.5);
 ```
 
-Un `&[T]` générique exige que chaque élément soit du *même* type concret `T`. Un `Vec<Box<dyn Priced>>` contient des types différents derrière un même objet trait, ce qui est exactement la raison d'être du dispatch dynamique. Pour réutiliser `cheapest` sur le panier, `T` devrait être `Box<dyn Priced>` — ce qui fonctionne dès que l'on transmet le trait à la box :
+Un `&[T]` générique exige que chaque élément soit du *même* type concret `T`. Un `Vec<Box<dyn Priced>>` contient des types différents derrière un même objet trait, ce qui est exactement la raison d'être du dispatch dynamique. Pour réutiliser `cheapest` sur le panier, `T` devrait être `Box<dyn Priced>` — ce qui fonctionne dès que l'on transmet le trait à la box ([`src/lib.rs`, lignes 372-375](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L372-L375)) :
 
 ```rust
 impl Priced for Box<dyn Priced> {
@@ -321,6 +329,8 @@ assert_eq!(cheapest_item, Some(2.5));
 
 <details>
 <summary>Solution</summary>
+
+Extrait de [`src/lib.rs`, lignes 381-389](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L381-L389) :
 
 ```rust
 use std::fmt;

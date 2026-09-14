@@ -23,7 +23,7 @@ Because there is one of each, every Rust project looks the same to a newcomer: `
 
 ## Unit tests
 
-Unit tests live **in the same file** as the code, in a child module compiled only for tests:
+Unit tests live **in the same file** as the code, in a child module compiled only for tests ([`l14-testing/src/lib.rs`, lines 108-169](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/l14-testing/src/lib.rs#L108-L169)):
 
 ```rust
 // Unit tests: a child module, so it can reach private items
@@ -135,7 +135,7 @@ Parallel execution means tests must not share mutable global state, such as a fi
 
 ## Integration tests
 
-Files in a `tests/` folder next to `src/` are **integration tests**. Each file is compiled as a separate crate that depends on your library, so it can only use the public API — like a separate `Pricing.Tests` project that references the assembly without [`InternalsVisibleTo`](https://learn.microsoft.com/dotnet/api/system.runtime.compilerservices.internalsvisibletoattribute):
+Files in a `tests/` folder next to `src/` are **integration tests**. Each file is compiled as a separate crate that depends on your library, so it can only use the public API — like a separate `Pricing.Tests` project that references the assembly without [`InternalsVisibleTo`](https://learn.microsoft.com/dotnet/api/system.runtime.compilerservices.internalsvisibletoattribute) ([`l14-testing/tests/checkout.rs`, lines 3-13](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/l14-testing/tests/checkout.rs#L3-L13)):
 
 ```rust
 // tests/checkout.rs
@@ -158,7 +158,7 @@ No `#[cfg(test)]` is needed there: the whole folder only exists for tests. Integ
 
 ## Documentation and doc tests
 
-`///` documents the next item, `//!` documents the enclosing module or crate. The content is Markdown:
+`///` documents the next item, `//!` documents the enclosing module or crate. The content is Markdown ([`l14-testing/src/lib.rs`, line 67](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/l14-testing/src/lib.rs#L67)):
 
 ````rust
 /// Adds `quantity` items at `unit_cents` each.
@@ -247,7 +247,7 @@ Many suggestions can be applied automatically with `cargo clippy --fix`. Lints a
 
 ### Configuring lints
 
-Lint levels for a whole package go in `Cargo.toml` — the equivalent of severities in `.editorconfig`:
+Lint levels for a whole package go in `Cargo.toml` — the equivalent of severities in `.editorconfig` ([`l14-testing/Cargo.toml`, lines 8-12](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/l14-testing/Cargo.toml#L8-L12)):
 
 ```toml
 # Lint levels for the whole package, instead of #![deny] attributes in every file
@@ -300,7 +300,7 @@ The course code went through twelve lessons without `cargo fmt`. Running `cargo 
 
 ## Putting it in CI
 
-The course's own workflow, [`.github/workflows/rust-examples.yml`](https://github.com/spareilleux/learn/blob/main/.github/workflows/rust-examples.yml), is a typical Rust pipeline (excerpt):
+The course's own workflow, [`.github/workflows/rust-examples.yml`](https://github.com/spareilleux/learn/blob/main/.github/workflows/rust-examples.yml), is a typical Rust pipeline (excerpt) ([lines 36-67](https://github.com/spareilleux/learn/blob/93f6f82/.github/workflows/rust-examples.yml#L36-L67)):
 
 ```yaml
 - name: Formatting

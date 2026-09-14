@@ -9,7 +9,7 @@ Ejemplo completo: [`examples/l13_async.rs`](https://github.com/spareilleux/learn
 
 ## Las mismas palabras clave, otra maquinaria
 
-La sintaxis te resultará familiar:
+La sintaxis te resultará familiar ([líneas 8-11](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l13_async.rs#L8-L11)):
 
 ```rust
 async fn fetch_price(item: &str, delay_ms: u64) -> u32 {
@@ -31,6 +31,8 @@ Hay tres cosas que difieren radicalmente de C#:
 ## Los futures son perezosos
 
 Una `async fn` devuelve un **future**: un valor que describe un trabajo que todavía no ha empezado.
+
+De [`examples/l13_async.rs`, líneas 28-34](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l13_async.rs#L28-L34):
 
 ```rust
 let future = async {
@@ -114,6 +116,8 @@ error[E0752]: `main` function is not allowed to be `async`
 tokio = { version = "1", features = ["rt-multi-thread", "macros", "time", "sync"] }
 ```
 
+De [`examples/l13_async.rs`, líneas 25-31](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l13_async.rs#L25-L31):
+
 ```rust
 #[tokio::main]              // construye un runtime multihilo y ejecuta main en él
 async fn main() {
@@ -125,7 +129,7 @@ async fn main() {
 
 ## Concurrencia: `join!`, `spawn`, `JoinSet`
 
-Esperar un future tras otro es **secuencial**:
+Esperar un future tras otro es **secuencial** ([líneas 38-48](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l13_async.rs#L38-L48)):
 
 ```rust
 let a = fetch_price("book", 100).await;
@@ -152,14 +156,14 @@ Aquí se nota la pereza: en C#, `var t1 = FetchAsync(); var t2 = FetchAsync(); a
 | [`Channel<T>`](https://learn.microsoft.com/dotnet/api/system.threading.channels.channel-1) | [`BlockingQueue`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/BlockingQueue.html) | [`tokio::sync::mpsc`](https://docs.rs/tokio/latest/tokio/sync/mpsc/index.html) |
 | [`SemaphoreSlim.WaitAsync`](https://learn.microsoft.com/dotnet/api/system.threading.semaphoreslim.waitasync) | [`Semaphore`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/Semaphore.html) | [`tokio::sync::Semaphore`](https://docs.rs/tokio/latest/tokio/sync/struct.Semaphore.html) |
 
-`join!` ejecuta sus futures de forma concurrente **dentro de la tarea actual**. `tokio::spawn` entrega un future al runtime como **tarea** independiente, que puede ejecutarse en otro hilo, y devuelve un [`JoinHandle`](https://docs.rs/tokio/latest/tokio/task/struct.JoinHandle.html):
+`join!` ejecuta sus futures de forma concurrente **dentro de la tarea actual**. `tokio::spawn` entrega un future al runtime como **tarea** independiente, que puede ejecutarse en otro hilo, y devuelve un [`JoinHandle`](https://docs.rs/tokio/latest/tokio/task/struct.JoinHandle.html) ([líneas 52-53](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l13_async.rs#L52-L53)):
 
 ```rust
 let handle = tokio::spawn(async { fetch_price("keyboard", 50).await });
 println!("spawned task returned {}", handle.await.unwrap());   // 80
 ```
 
-`JoinSet` recoge los resultados en orden de finalización:
+`JoinSet` recoge los resultados en orden de finalización ([líneas 56-63](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l13_async.rs#L56-L63)):
 
 ```rust
 let mut set = JoinSet::new();
@@ -180,7 +184,7 @@ while let Some(result) = set.join_next().await {
 
 ## Cancelar es liberar
 
-C# pasa un [`CancellationToken`](https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken) a través de cada llamada. En Rust, un future que se **libera** (drop) simplemente se detiene en su `.await` actual y nunca se reanuda. [`timeout`](https://docs.rs/tokio/latest/tokio/time/fn.timeout.html) y `select!` se basan en eso:
+C# pasa un [`CancellationToken`](https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken) a través de cada llamada. En Rust, un future que se **libera** (drop) simplemente se detiene en su `.await` actual y nunca se reanuda. [`timeout`](https://docs.rs/tokio/latest/tokio/time/fn.timeout.html) y `select!` se basan en eso ([líneas 66-73](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l13_async.rs#L66-L73)):
 
 ```rust
 match timeout(Duration::from_millis(50), fetch_price("late", 200)).await {
@@ -205,7 +209,7 @@ Una tarea lanzada con spawn sigue ejecutándose después de que se libere su `Jo
 
 ## `Send` a través de `.await`
 
-El runtime multihilo puede mover una tarea a otro hilo en cualquier `.await`. Por eso `tokio::spawn` exige que el future sea `Send` — y un future contiene cada variable local que vive a través de un `.await`. Vuelve el problema de `Rc` de la lección 12:
+El runtime multihilo puede mover una tarea a otro hilo en cualquier `.await`. Por eso `tokio::spawn` exige que el future sea `Send` — y un future contiene cada variable local que vive a través de un `.await`. Vuelve el problema de `Rc` de la lección 12 ([`src/lib.rs`, líneas 1036-1040](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L1036-L1040)):
 
 ```rust
 let handle = tokio::spawn(async {
@@ -255,6 +259,8 @@ Para secciones críticas cortas sin ningún `.await` dentro, el `Mutex` estánda
 
 Un hilo de trabajo async ejecuta muchas tareas y cambia de una a otra en cada `.await`. El código que bloquea sin esperar — [`std::thread::sleep`](https://doc.rust-lang.org/std/thread/fn.sleep.html), la E/S síncrona de archivos o de red, un cálculo largo — congela todas las tareas de ese hilo. El equivalente en C# es llamar a [`.Result`](https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1.result) o hacer trabajo de CPU en un hilo de interfaz o de ASP.NET.
 
+De [`examples/l13_async.rs`, líneas 109-111](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l13_async.rs#L109-L111):
+
 ```rust
 let primes = tokio::task::spawn_blocking(|| (1..100_000u64).filter(|&n| is_prime(n)).count())
     .await
@@ -283,6 +289,8 @@ Los [*hilos virtuales*](https://docs.oracle.com/en/java/javase/25/core/virtual-t
 
 <details>
 <summary>Solución</summary>
+
+De [`src/lib.rs`, líneas 1050-1068](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L1050-L1068):
 
 ```rust
 async fn fetch_price(item: String, delay_ms: u64) -> u32 {
@@ -314,6 +322,8 @@ Todas las tareas empiezan al lanzarse, así que el total es el retardo más larg
 
 <details>
 <summary>Solución</summary>
+
+De [`src/lib.rs`, líneas 1077-1094](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L1077-L1094):
 
 ```rust
 async fn fetch_price(delay_ms: u64) -> u32 {
@@ -378,7 +388,7 @@ note: future is not `Send` as this value is used across an await
 <details>
 <summary>Solución</summary>
 
-**Solución 1** — no mantengas la guarda a través del `.await`. Bloquea solo para la actualización:
+**Solución 1** — no mantengas la guarda a través del `.await`. Bloquea solo para la actualización ([`src/lib.rs`, líneas 1126-1129](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L1126-L1129)):
 
 ```rust
 tokio::spawn(async move {

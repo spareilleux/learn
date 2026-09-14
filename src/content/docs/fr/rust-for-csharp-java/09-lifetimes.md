@@ -11,7 +11,7 @@ Exemple complet : [`examples/l09_lifetimes.rs`](https://github.com/spareilleux/l
 
 En C# ou en Java, une référence maintient son objet en vie : tant que vous pouvez l'atteindre, le [ramasse-miettes](https://learn.microsoft.com/dotnet/standard/garbage-collection/fundamentals) ne le libère pas. Une [« référence pendante »](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html#dangling-references) ne peut tout simplement pas exister.
 
-Rust n'a pas de ramasse-miettes. Une valeur est libérée quand son propriétaire sort de la portée ([leçon 3](../03-ownership-and-moves/)), donc le compilateur doit prouver qu'aucune référence n'est encore utilisée à ce moment-là :
+Rust n'a pas de ramasse-miettes. Une valeur est libérée quand son propriétaire sort de la portée ([leçon 3](../03-ownership-and-moves/)), donc le compilateur doit prouver qu'aucune référence n'est encore utilisée à ce moment-là ([`src/lib.rs`, lignes 474-479](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L474-L479)) :
 
 ```rust
 let r;
@@ -46,6 +46,8 @@ Une annotation de durée de vie est une *description* que le compilateur vérifi
 
 De quelle entrée le résultat est-il emprunté ?
 
+Extrait de [`src/lib.rs`, lignes 485-487](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L485-L487) :
+
 ```rust
 fn longest(a: &str, b: &str) -> &str {
     if a.len() >= b.len() { a } else { b }
@@ -66,7 +68,7 @@ help: consider introducing a named lifetime parameter
   |           ++++     ++          ++          ++
 ```
 
-Le compilateur vérifie chaque fonction sur sa **seule signature**, jamais sur son corps — de la même façon qu'un appelant C# ne voit que la déclaration d'une méthode. La signature doit donc le dire :
+Le compilateur vérifie chaque fonction sur sa **seule signature**, jamais sur son corps — de la même façon qu'un appelant C# ne voit que la déclaration d'une méthode. La signature doit donc le dire ([lignes 2-4](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l09_lifetimes.rs#L2-L4)) :
 
 ```rust
 fn longest<'a>(a: &'a str, b: &'a str) -> &'a str {
@@ -74,7 +76,7 @@ fn longest<'a>(a: &'a str, b: &'a str) -> &'a str {
 }
 ```
 
-Lisez `<'a>` comme un [paramètre générique](https://doc.rust-lang.org/reference/items/generics.html) (il est déclaré au même endroit que `<T>`) : *« pour une certaine durée de vie `'a` pendant laquelle `a` et `b` sont tous deux valides, le résultat est lui aussi valide pendant `'a` »*. En pratique, `'a` devient la **plus courte** des deux, si bien que l'appelant ne peut pas garder le résultat plus longtemps que l'une ou l'autre des entrées :
+Lisez `<'a>` comme un [paramètre générique](https://doc.rust-lang.org/reference/items/generics.html) (il est déclaré au même endroit que `<T>`) : *« pour une certaine durée de vie `'a` pendant laquelle `a` et `b` sont tous deux valides, le résultat est lui aussi valide pendant `'a` »*. En pratique, `'a` devient la **plus courte** des deux, si bien que l'appelant ne peut pas garder le résultat plus longtemps que l'une ou l'autre des entrées ([`src/lib.rs`, lignes 496-502](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L496-L502)) :
 
 ```rust
 let title = String::from("Rust for C# developers");
@@ -102,7 +104,7 @@ error[E0597]: `subtitle` does not live long enough
 
 À l'exécution, `title` est la chaîne la plus longue, donc cela fonctionnerait par hasard — mais la signature ne promet rien sur celle qui est renvoyée, et le compilateur vous tient à la signature.
 
-N'annotez que ce que le résultat emprunte réellement. Ici, le résultat vient de `a` seul, donc `len_from` n'a besoin d'aucune durée de vie et peut être n'importe quoi d'éphémère :
+N'annotez que ce que le résultat emprunte réellement. Ici, le résultat vient de `a` seul, donc `len_from` n'a besoin d'aucune durée de vie et peut être n'importe quoi d'éphémère ([lignes 12-14](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l09_lifetimes.rs#L12-L14)) :
 
 ```rust
 fn prefix_of<'a>(a: &'a str, len_from: &str) -> &'a str {
@@ -118,6 +120,8 @@ La plupart des fonctions ne mentionnent jamais de durée de vie, parce que trois
 2. S'il y a exactement **une** durée de vie en entrée, elle est utilisée pour toutes les références en sortie.
 3. Si l'un des paramètres est `&self` ou `&mut self`, c'est **sa** durée de vie qui est utilisée pour les sorties.
 
+Extrait de [`examples/l09_lifetimes.rs`, lignes 7-9](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l09_lifetimes.rs#L7-L9) :
+
 ```rust
 fn first_word(text: &str) -> &str {     // règle 2 : le résultat emprunte `text`
     text.split_whitespace().next().unwrap_or("")
@@ -126,7 +130,7 @@ fn first_word(text: &str) -> &str {     // règle 2 : le résultat emprunte `tex
 
 `longest` avait besoin d'une annotation parce qu'elle a deux entrées et pas de `self` : aucune règle ne s'applique.
 
-L'élision ne fait jamais compiler un programme incorrect. Quand les règles produisent une durée de vie qui ne convient pas, vous obtenez quand même une erreur — et renvoyer une référence vers une variable locale est toujours une erreur, quelle que soit l'annotation :
+L'élision ne fait jamais compiler un programme incorrect. Quand les règles produisent une durée de vie qui ne convient pas, vous obtenez quand même une erreur — et renvoyer une référence vers une variable locale est toujours une erreur, quelle que soit l'annotation ([`src/lib.rs`, lignes 530-533](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L530-L533)) :
 
 ```rust
 fn shout(word: &str) -> &str {
@@ -147,7 +151,7 @@ La correction est celle de la leçon 4 : renvoyer la [`String`](https://doc.rust
 
 ## Des structs qui empruntent
 
-Une struct qui contient une référence doit déclarer la durée de vie, exactement comme un paramètre de type générique :
+Une struct qui contient une référence doit déclarer la durée de vie, exactement comme un paramètre de type générique ([`src/lib.rs`, lignes 508-510](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L508-L510)) :
 
 ```rust
 struct Excerpt {
@@ -168,6 +172,8 @@ help: consider introducing a named lifetime parameter
 2 ~     text: &'a str,
   |
 ```
+
+Extrait de [`examples/l09_lifetimes.rs`, lignes 17-25](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l09_lifetimes.rs#L17-L25), [82-85](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l09_lifetimes.rs#L82-L85) :
 
 ```rust
 struct Excerpt<'a> {
@@ -205,7 +211,7 @@ L'équivalent C# le plus proche est une [`ref struct`](https://learn.microsoft.c
 
 ### La durée de vie dans une signature de méthode compte
 
-Un tokenizer qui renvoie des slices de son entrée :
+Un tokenizer qui renvoie des slices de son entrée ([lignes 28-59](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l09_lifetimes.rs#L28-L59)) :
 
 ```rust
 struct Parser<'a> {
@@ -234,7 +240,7 @@ Le type de retour indique `&'a str` : un token emprunte le **texte d'entrée**, 
 
 ## `'static`
 
-`'static` est la durée de vie des données valides pendant toute l'exécution du programme. Les littéraux de chaîne sont stockés dans le binaire, ils l'ont donc :
+`'static` est la durée de vie des données valides pendant toute l'exécution du programme. Les littéraux de chaîne sont stockés dans le binaire, ils l'ont donc ([lignes 62-64](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l09_lifetimes.rs#L62-L64)) :
 
 ```rust
 fn default_greeting() -> &'static str {
@@ -243,6 +249,8 @@ fn default_greeting() -> &'static str {
 ```
 
 Vous rencontrerez surtout `'static` comme **contrainte** (bound), par exemple sur `std::thread::spawn` : un nouveau thread peut survivre à la fonction qui l'a démarré, il ne peut donc pas emprunter les variables locales de cette fonction.
+
+Extrait de [`src/lib.rs`, lignes 539-542](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L539-L542) :
 
 ```rust
 let name = String::from("worker");
@@ -299,6 +307,8 @@ Cloner quelques chaînes pour éviter un paramètre de durée de vie est un comp
 <details>
 <summary>Solution</summary>
 
+Extrait de [`src/lib.rs`, lignes 548-556](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L548-L556) :
+
 ```rust
 fn longest_line(text: &str) -> &str {
     text.lines().max_by_key(|line| line.len()).unwrap_or("")
@@ -321,6 +331,8 @@ assert_eq!(pick("left", "right", false), "right");
 
 <details>
 <summary>Solution</summary>
+
+Extrait de [`src/lib.rs`, lignes 562-577](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L562-L577) :
 
 ```rust
 #[derive(Debug, PartialEq)]
@@ -348,6 +360,8 @@ Les résultats n'empruntent que `text`, donc `word` reçoit sa propre durée de 
 </details>
 
 3. Cette version du tokenizer compile, mais `main` non. Expliquez l'erreur et corrigez-la en modifiant une seule ligne.
+
+Extrait de [`src/lib.rs`, lignes 607-618](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L607-L618) :
 
 ```rust
 impl<'a> Parser<'a> {
@@ -381,6 +395,8 @@ error[E0499]: cannot borrow `parser` as mutable more than once at a time
 <summary>Solution</summary>
 
 Avec `Option<&str>`, la règle d'élision 3 donne au résultat la durée de vie de `&mut self`. Tant que `first` est vivant, `parser` reste emprunté mutablement, donc le second appel est rejeté. Le token pointe en réalité dans l'entrée : dites-le.
+
+Extrait de [`examples/l09_lifetimes.rs`, ligne 38](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l09_lifetimes.rs#L38) :
 
 ```rust
 fn next_token(&mut self) -> Option<&'a str> {

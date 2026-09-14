@@ -9,13 +9,15 @@ Full example: [`examples/l02_types.rs`](https://github.com/spareilleux/learn/blo
 
 ## Immutable by default
 
+From [`examples/l02_types.rs`, lines 3-5](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l02_types.rs#L3-L5):
+
 ```rust
 let answer = 42;            // inferred as i32, cannot change
 let mut counter: u32 = 0;   // explicitly mutable
 counter += 1;
 ```
 
-In C# terms, every `let` is like a local you can never reassign; in Java, like [`final var`](https://openjdk.org/jeps/286). You opt **into** mutability with `mut`:
+In C# terms, every `let` is like a local you can never reassign; in Java, like [`final var`](https://openjdk.org/jeps/286). You opt **into** mutability with `mut` ([`src/lib.rs`, lines 10-11](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L10-L11)):
 
 ```rust
 let count = 0;
@@ -43,7 +45,7 @@ Rust errors usually contain the fix (`help: consider making this binding mutable
 
 ## Shadowing
 
-You can declare a new variable with the same name, even with a different type. Handy for "parse and replace":
+You can declare a new variable with the same name, even with a different type. Handy for "parse and replace" ([lines 9-11](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l02_types.rs#L9-L11)):
 
 ```rust
 let input = "  7 ";
@@ -67,6 +69,8 @@ This is not mutation: the first `input` (a [`&str`](https://doc.rust-lang.org/st
 | `bool` | `bool` | `boolean` | |
 | `char` | [`Rune`](https://learn.microsoft.com/dotnet/api/system.text.rune) | `int` code point | **4 bytes**, a Unicode scalar value — *not* a UTF-16 unit like C#/Java `char` |
 
+From [`examples/l02_types.rs`, lines 28-33](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l02_types.rs#L28-L33):
+
 ```rust
 let note = '♪';
 println!("{note} is {} bytes in UTF-8, size_of::<char>() = {}", note.len_utf8(), std::mem::size_of::<char>());
@@ -75,7 +79,7 @@ println!("{note} is {} bytes in UTF-8, size_of::<char>() = {}", note.len_utf8(),
 
 ## No implicit conversions
 
-C# and Java silently widen an `int` to a `long`. Rust never converts numbers for you:
+C# and Java silently widen an `int` to a `long`. Rust never converts numbers for you ([`src/lib.rs`, lines 18-20](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L18-L20)):
 
 ```rust
 let small: i32 = 10;
@@ -91,7 +95,7 @@ error[E0308]: mismatched types
   |                         ^^^ expected `i32`, found `i64`
 ```
 
-Convert explicitly with [`as`](https://doc.rust-lang.org/reference/expressions/operator-expr.html#type-cast-expressions) (or [`i64::from(small)`](https://doc.rust-lang.org/std/convert/trait.From.html), which only exists for lossless conversions):
+Convert explicitly with [`as`](https://doc.rust-lang.org/reference/expressions/operator-expr.html#type-cast-expressions) (or [`i64::from(small)`](https://doc.rust-lang.org/std/convert/trait.From.html), which only exists for lossless conversions) ([line 16](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l02_types.rs#L16)):
 
 ```rust
 let total = small as i64 + big; // 30
@@ -110,7 +114,7 @@ thread 'main' panicked at e_overflow.rs:3:16:
 attempt to add with overflow
 ```
 
-When wrapping or failure is the intended behaviour, say so explicitly:
+When wrapping or failure is the intended behaviour, say so explicitly ([lines 20-25](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l02_types.rs#L20-L25)):
 
 ```rust
 let max = u8::MAX;
@@ -119,6 +123,8 @@ println!("checked: {:?}, wrapping: {}", max.checked_add(1), max.wrapping_add(1))
 ```
 
 ## Tuples and arrays
+
+From [`examples/l02_types.rs`, lines 36-43](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l02_types.rs#L36-L43):
 
 ```rust
 let point: (f64, f64) = (1.5, -2.0);
@@ -132,13 +138,13 @@ A growable list is [`Vec<T>`](https://doc.rust-lang.org/std/vec/struct.Vec.html)
 
 ## Everything is an expression
 
-`if` returns a value, so there is no ternary operator:
+`if` returns a value, so there is no ternary operator ([line 46](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l02_types.rs#L46)):
 
 ```rust
 let parity = if answer % 2 == 0 { "even" } else { "odd" };
 ```
 
-A block `{ … }` evaluates to its last expression — **without** a semicolon:
+A block `{ … }` evaluates to its last expression — **without** a semicolon ([lines 50-54](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l02_types.rs#L50-L54)):
 
 ```rust
 let area = {
@@ -148,7 +154,7 @@ let area = {
 };
 ```
 
-Functions work the same way; `return` is only needed for early exits:
+Functions work the same way; `return` is only needed for early exits ([lines 78-80](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l02_types.rs#L78-L80)):
 
 ```rust
 fn square(x: i32) -> i32 {
@@ -195,6 +201,8 @@ There is no C-style `for (int i = 0; i < n; i++)`: use a range. `while condition
 <details>
 <summary>Solution</summary>
 
+From [`src/lib.rs`, lines 26-34](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L26-L34):
+
 ```rust
 fn clamp_percent(value: i32) -> u8 {
     if value < 0 {
@@ -212,6 +220,8 @@ The `as u8` is safe here because the value is known to be within `0..=100`. Rust
 </details>
 
 2. Why does this function fail to compile, and what is the one-character fix?
+
+From [`src/lib.rs`, lines 44-46](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L44-L46):
 
 ```rust
 fn double(x: i32) -> i32 {

@@ -11,6 +11,8 @@ Ejemplo completo: [`examples/l05_structs_enums.rs`](https://github.com/spareille
 
 Una clase de C# o Java agrupa campos, constructores y métodos en un solo bloque. Rust los separa: un `struct` declara los datos, y uno o varios bloques `impl` añaden las funciones.
 
+De [`examples/l05_structs_enums.rs`, líneas 4-33](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l05_structs_enums.rs#L4-L33):
+
 ```rust
 #[derive(Debug, Clone, PartialEq)]
 struct Account {
@@ -51,6 +53,8 @@ impl Account {
 - El receptor indica qué hace el método con el valor: leerlo (`&self`), modificarlo (`&mut self`) o **consumirlo** (`self`) — después de `account.close()`, `account` se ha movido y no se puede usar, que es como Rust modela «este objeto ha terminado».
 - **No hay herencia** entre structs. El comportamiento compartido va en los traits ([lección 7](../07-traits-and-generics/)).
 
+De [`examples/l05_structs_enums.rs`, líneas 96-104](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l05_structs_enums.rs#L96-L104):
+
 ```rust
 let mut account = Account::new("Ada");
 account.deposit(1_250);
@@ -74,7 +78,7 @@ error[E0063]: missing field `balance_cents` in initializer of `Account`
   |                   ^^^^^^^ missing `balance_cents`
 ```
 
-La **sintaxis de actualización de structs** (struct update syntax) copia los campos restantes de otro valor, como una [expresión `with`](https://learn.microsoft.com/dotnet/csharp/language-reference/operators/with-expression) de C#:
+La **sintaxis de actualización de structs** (struct update syntax) copia los campos restantes de otro valor, como una [expresión `with`](https://learn.microsoft.com/dotnet/csharp/language-reference/operators/with-expression) de C# ([líneas 107-111](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l05_structs_enums.rs#L107-L111)):
 
 ```rust
 let other = Account { owner: "Grace".into(), ..copy };
@@ -83,7 +87,7 @@ println!("{} has {} cents", other.owner, other.balance_cents);   // Grace has 12
 
 ## Tuple structs y newtypes
 
-Un struct puede tener campos sin nombre. Con un único campo, crea un tipo distinto alrededor de uno existente — un **[newtype](https://doc.rust-lang.org/rust-by-example/generics/new_types.html)**:
+Un struct puede tener campos sin nombre. Con un único campo, crea un tipo distinto alrededor de uno existente — un **[newtype](https://doc.rust-lang.org/rust-by-example/generics/new_types.html)** ([líneas 36-37](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l05_structs_enums.rs#L36-L37), [116-118](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l05_structs_enums.rs#L116-L118)):
 
 ```rust
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd)]
@@ -99,6 +103,8 @@ Una función que recibe `Meters` no aceptará un `f64` sin más ni un `Feet(f64)
 ## Los enums llevan datos
 
 Los [enums de C#](https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/enum) son enteros con nombre; los [enums de Java](https://dev.java/learn/classes-objects/enums/) son un conjunto fijo de objetos que comparten todos los mismos campos. Un `enum` de Rust es una **unión etiquetada** (tagged union): cada variante puede contener datos *diferentes*.
+
+De [`examples/l05_structs_enums.rs`, líneas 41-45](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l05_structs_enums.rs#L41-L45):
 
 ```rust
 enum Shape {
@@ -127,6 +133,8 @@ record Triangle(double a, double b, double c) implements Shape {}
 ```
 
 ## `match` es exhaustivo
+
+De [`examples/l05_structs_enums.rs`, líneas 47-59](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l05_structs_enums.rs#L47-L59):
 
 ```rust
 impl Shape {
@@ -172,7 +180,7 @@ Esto es lo que hace que los enums sean tan útiles para refactorizar: añade una
 
 ## Patrones
 
-Los patrones desestructuran valores y se pueden refinar:
+Los patrones desestructuran valores y se pueden refinar ([líneas 139-144](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l05_structs_enums.rs#L139-L144)):
 
 ```rust
 match command {
@@ -190,7 +198,7 @@ say "hi"
 quit
 ```
 
-Rangos, [guardas](https://doc.rust-lang.org/reference/expressions/match-expr.html#match-guards) (`if`) y el comodín `_`:
+Rangos, [guardas](https://doc.rust-lang.org/reference/expressions/match-expr.html#match-guards) (`if`) y el comodín `_` ([líneas 77-85](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l05_structs_enums.rs#L77-L85)):
 
 ```rust
 fn describe(temperature: i32) -> &'static str {
@@ -215,7 +223,7 @@ if let Some(Shape::Circle { radius }) = shapes.first() {
 }
 ```
 
-[`let … else`](https://doc.rust-lang.org/rust-by-example/flow_control/let_else.html) enlaza un patrón o sale del bloque actual — perfecto para las cláusulas de guarda:
+[`let … else`](https://doc.rust-lang.org/rust-by-example/flow_control/let_else.html) enlaza un patrón o sale del bloque actual — perfecto para las cláusulas de guarda ([líneas 87-93](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l05_structs_enums.rs#L87-L93)):
 
 ```rust
 fn parse_port(text: &str) -> u16 {
@@ -250,6 +258,8 @@ record Cash : Payment;
 <details>
 <summary>Solución</summary>
 
+De [`src/lib.rs`, líneas 223-230](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L223-L230):
+
 ```rust
 enum Payment {
     Card { last4: String },
@@ -281,6 +291,8 @@ fn describe(payment: &Payment) -> String {
 
 <details>
 <summary>Solución</summary>
+
+De [`src/lib.rs`, líneas 249-259](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L249-L259):
 
 ```rust
 #[derive(Debug, Clone, Copy, PartialEq)]

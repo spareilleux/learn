@@ -9,6 +9,8 @@ Full example: [`examples/l07_traits_generics.rs`](https://github.com/spareilleux
 
 ## A trait is an interface
 
+From [`examples/l07_traits_generics.rs`, lines 4-35](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l07_traits_generics.rs#L4-L35):
+
 ```rust
 trait Shape {
     fn area(&self) -> f64;
@@ -63,7 +65,7 @@ error[E0046]: not all trait items implemented, missing: `area`
 
 ## Generics with trait bounds
 
-A generic function must say which traits its type parameter implements — the equivalent of [`where T : IShape`](https://learn.microsoft.com/dotnet/csharp/programming-guide/generics/constraints-on-type-parameters) or [`<T extends Shape>`](https://docs.oracle.com/javase/tutorial/java/generics/bounded.html):
+A generic function must say which traits its type parameter implements — the equivalent of [`where T : IShape`](https://learn.microsoft.com/dotnet/csharp/programming-guide/generics/constraints-on-type-parameters) or [`<T extends Shape>`](https://docs.oracle.com/javase/tutorial/java/generics/bounded.html) ([lines 38-40](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l07_traits_generics.rs#L38-L40), [100-101](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l07_traits_generics.rs#L100-L101)):
 
 ```rust
 fn total_area<T: Shape>(shapes: &[T]) -> f64 {
@@ -90,7 +92,7 @@ help: the following trait defines an item `area`, perhaps you need to restrict t
   |                +++++++
 ```
 
-Two other spellings of the same idea:
+Two other spellings of the same idea ([lines 43-45](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l07_traits_generics.rs#L43-L45), [56-68](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l07_traits_generics.rs#L56-L68)):
 
 ```rust
 // `impl Trait` in argument position: shorthand for a generic parameter
@@ -116,7 +118,7 @@ pear apple fig (max pear)
 
 `total_area::<Circle>` and `total_area::<Square>` are compiled as **two separate functions**, each calling `area` directly and eligible for inlining. This is called [**monomorphization**](https://doc.rust-lang.org/book/ch10-01-syntax.html#performance-of-code-using-generics).
 
-When you need a collection of *different* types, use a [**trait object**](https://doc.rust-lang.org/reference/types/trait-object.html), `dyn Shape`, behind a pointer such as [`Box`](https://doc.rust-lang.org/std/boxed/struct.Box.html) or `&`:
+When you need a collection of *different* types, use a [**trait object**](https://doc.rust-lang.org/reference/types/trait-object.html), `dyn Shape`, behind a pointer such as [`Box`](https://doc.rust-lang.org/std/boxed/struct.Box.html) or `&` ([lines 48-53](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l07_traits_generics.rs#L48-L53), [104-107](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l07_traits_generics.rs#L104-L107)):
 
 ```rust
 fn largest(shapes: &[Box<dyn Shape>]) -> Option<&dyn Shape> {
@@ -156,6 +158,8 @@ Much of what C# puts in [`System.Object`](https://learn.microsoft.com/dotnet/api
 | [`From`](https://doc.rust-lang.org/std/convert/trait.From.html) / `Into` | conversion operators | static factory | implemented by hand |
 | `Add`, `Mul`, … | [`operator +`](https://learn.microsoft.com/dotnet/csharp/language-reference/operators/operator-overloading) | — | implemented by hand |
 
+From [`examples/l07_traits_generics.rs`, lines 71-86](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l07_traits_generics.rs#L71-L86), [115-117](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l07_traits_generics.rs#L115-L117):
+
 ```rust
 #[derive(Debug, Default, PartialEq)]
 struct Celsius(f64);
@@ -182,7 +186,7 @@ println!("{body} / {also} / default {}", Celsius::default());
 
 ## Extension methods, Rust style
 
-In C#, an [extension method](https://learn.microsoft.com/dotnet/csharp/programming-guide/classes-and-structs/extension-methods) adds `Shout()` to `string`. In Rust, you define a trait and implement it for the existing type:
+In C#, an [extension method](https://learn.microsoft.com/dotnet/csharp/programming-guide/classes-and-structs/extension-methods) adds `Shout()` to `string`. In Rust, you define a trait and implement it for the existing type ([lines 89-97](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l07_traits_generics.rs#L89-L97), [119](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l07_traits_generics.rs#L119)):
 
 ```rust
 trait Shout {
@@ -239,6 +243,8 @@ This guarantees two crates can never provide conflicting implementations. The st
 <details>
 <summary>Solution</summary>
 
+From [`src/lib.rs`, lines 346-364](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L346-L364):
+
 ```rust
 trait Priced {
     fn price(&self) -> f64;
@@ -280,6 +286,8 @@ assert_eq!(books[0].price_with_tax(0.25), 50.0);
 <details>
 <summary>Solution</summary>
 
+From [`src/lib.rs`, lines 351-370](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L351-L370):
+
 ```rust
 struct Coffee {
     size_ml: u32,
@@ -302,7 +310,7 @@ let basket: Vec<Box<dyn Priced>> = vec![
 assert_eq!(total(&basket), 42.5);
 ```
 
-A generic `&[T]` needs every element to be the *same* concrete type `T`. A `Vec<Box<dyn Priced>>` holds different types behind one trait object, which is exactly what dynamic dispatch is for. To reuse `cheapest` on the basket, `T` would have to be `Box<dyn Priced>` — which works once you forward the trait to the box:
+A generic `&[T]` needs every element to be the *same* concrete type `T`. A `Vec<Box<dyn Priced>>` holds different types behind one trait object, which is exactly what dynamic dispatch is for. To reuse `cheapest` on the basket, `T` would have to be `Box<dyn Priced>` — which works once you forward the trait to the box ([`src/lib.rs`, lines 372-375](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L372-L375)):
 
 ```rust
 impl Priced for Box<dyn Priced> {
@@ -321,6 +329,8 @@ assert_eq!(cheapest_item, Some(2.5));
 
 <details>
 <summary>Solution</summary>
+
+From [`src/lib.rs`, lines 381-389](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L381-L389):
 
 ```rust
 use std::fmt;

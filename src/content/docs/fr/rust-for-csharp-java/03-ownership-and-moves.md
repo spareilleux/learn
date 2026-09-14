@@ -23,13 +23,15 @@ Rust n'a pas de GC. À la place, le compilateur impose des règles de **possessi
 
 ## Déplacements (moves)
 
+Extrait de [`examples/l03_ownership.rs`, lignes 21-23](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l03_ownership.rs#L21-L23) :
+
 ```rust
 let a = String::from("hello");
 let b = a;             // la propriété du buffer sur le tas passe à b
 println!("b = {b}");   // b = hello
 ```
 
-En C#, `var b = a;` copie une *référence* : `a` et `b` pointent désormais vers la même chaîne, et les deux restent utilisables. En Rust, `a` a **disparu** :
+En C#, `var b = a;` copie une *référence* : `a` et `b` pointent désormais vers la même chaîne, et les deux restent utilisables. En Rust, `a` a **disparu** ([`src/lib.rs`, lignes 61-63](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L61-L63)) :
 
 ```rust
 let a = String::from("hello");
@@ -58,6 +60,8 @@ Pourquoi ? Si `a` et `b` possédaient tous deux le buffer, tous deux le libérer
 
 ## `clone` — une copie profonde explicite
 
+Extrait de [`examples/l03_ownership.rs`, lignes 26-27](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l03_ownership.rs#L26-L27) :
+
 ```rust
 let c = b.clone();
 println!("b = {b}, c = {c}");   // b = hello, c = hello
@@ -67,7 +71,7 @@ println!("b = {b}, c = {c}");   // b = hello, c = hello
 
 ## Les types `Copy`
 
-Les petites valeurs qui vivent entièrement sur la pile sont **copiées** au lieu d'être déplacées :
+Les petites valeurs qui vivent entièrement sur la pile sont **copiées** au lieu d'être déplacées ([lignes 30-32](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l03_ownership.rs#L30-L32)) :
 
 ```rust
 let x = 5;
@@ -85,7 +89,7 @@ Les entiers, les flottants, `bool`, `char`, ainsi que les tuples et tableaux de 
 
 ## Les fonctions prennent aussi possession
 
-Passer un [`String`](https://doc.rust-lang.org/std/string/struct.String.html) par valeur le déplace dans la fonction :
+Passer un [`String`](https://doc.rust-lang.org/std/string/struct.String.html) par valeur le déplace dans la fonction ([`src/lib.rs`, lignes 69-75](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L69-L75)) :
 
 ```rust
 fn take(s: String) -> usize {
@@ -113,7 +117,7 @@ note: consider changing this parameter type in function `take` to borrow instead
 
 Le compilateur indique déjà la vraie correction : *emprunter* au lieu de prendre possession. C'est le sujet de la [leçon 4](../04-borrowing-and-strings/).
 
-Renvoyer une valeur rend la possession à l'appelant :
+Renvoyer une valeur rend la possession à l'appelant ([lignes 15-17](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l03_ownership.rs#L15-L17), [38](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l03_ownership.rs#L38)) :
 
 ```rust
 fn make_greeting(name: &str) -> String {
@@ -125,7 +129,7 @@ let greeting = make_greeting("Ferris");   // greeting possède le nouveau String
 
 ## `Drop` — un nettoyage déterministe
 
-Quand un propriétaire sort de sa portée, Rust appelle `drop`, dans l'ordre **inverse** de déclaration. Vous pouvez vous y brancher en implémentant le trait `Drop` :
+Quand un propriétaire sort de sa portée, Rust appelle `drop`, dans l'ordre **inverse** de déclaration. Vous pouvez vous y brancher en implémentant le trait `Drop` ([lignes 1-9](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l03_ownership.rs#L1-L9), [19](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l03_ownership.rs#L19), [42-55](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l03_ownership.rs#L42-L55)) :
 
 ```rust
 struct TempFile {
@@ -209,7 +213,7 @@ static int countVowels(String text) { /* … */ }
 <details>
 <summary>Solution</summary>
 
-Prenez une slice de chaîne empruntée au lieu d'un `String` possédé, afin que l'appelant conserve la possession (expliqué dans la leçon 4) :
+Prenez une slice de chaîne empruntée au lieu d'un `String` possédé, afin que l'appelant conserve la possession (expliqué dans la leçon 4) ([`src/lib.rs`, lignes 99-104](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L99-L104)) :
 
 ```rust
 fn count_vowels(text: &str) -> usize {

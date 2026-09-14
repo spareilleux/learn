@@ -23,13 +23,15 @@ Rust has no GC. Instead, the compiler enforces **ownership** rules and inserts t
 
 ## Moves
 
+From [`examples/l03_ownership.rs`, lines 21-23](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l03_ownership.rs#L21-L23):
+
 ```rust
 let a = String::from("hello");
 let b = a;             // ownership of the heap buffer moves to b
 println!("b = {b}");   // b = hello
 ```
 
-In C#, `var b = a;` copies a *reference*: `a` and `b` now point to the same string, and both remain usable. In Rust, `a` is **gone**:
+In C#, `var b = a;` copies a *reference*: `a` and `b` now point to the same string, and both remain usable. In Rust, `a` is **gone** ([`src/lib.rs`, lines 61-63](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L61-L63)):
 
 ```rust
 let a = String::from("hello");
@@ -58,6 +60,8 @@ Why? If both `a` and `b` owned the buffer, both would free it at the end of the 
 
 ## `clone` — an explicit deep copy
 
+From [`examples/l03_ownership.rs`, lines 26-27](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l03_ownership.rs#L26-L27):
+
 ```rust
 let c = b.clone();
 println!("b = {b}, c = {c}");   // b = hello, c = hello
@@ -67,7 +71,7 @@ println!("b = {b}, c = {c}");   // b = hello, c = hello
 
 ## `Copy` types
 
-Small values that live entirely on the stack are **copied** instead of moved:
+Small values that live entirely on the stack are **copied** instead of moved ([lines 30-32](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l03_ownership.rs#L30-L32)):
 
 ```rust
 let x = 5;
@@ -85,7 +89,7 @@ Integers, floats, `bool`, `char`, and tuples/arrays of those are `Copy`. This is
 
 ## Functions take ownership too
 
-Passing a [`String`](https://doc.rust-lang.org/std/string/struct.String.html) by value moves it into the function:
+Passing a [`String`](https://doc.rust-lang.org/std/string/struct.String.html) by value moves it into the function ([`src/lib.rs`, lines 69-75](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L69-L75)):
 
 ```rust
 fn take(s: String) -> usize {
@@ -113,7 +117,7 @@ note: consider changing this parameter type in function `take` to borrow instead
 
 The compiler already points at the real fix: *borrow* instead of taking ownership. That is the topic of [lesson 4](../04-borrowing-and-strings/).
 
-Returning a value moves ownership back out to the caller:
+Returning a value moves ownership back out to the caller ([lines 15-17](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l03_ownership.rs#L15-L17), [38](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l03_ownership.rs#L38)):
 
 ```rust
 fn make_greeting(name: &str) -> String {
@@ -125,7 +129,7 @@ let greeting = make_greeting("Ferris");   // greeting owns the new String
 
 ## `Drop` — deterministic cleanup
 
-When an owner goes out of scope, Rust calls `drop`, in **reverse** order of declaration. You can hook into it by implementing the `Drop` trait:
+When an owner goes out of scope, Rust calls `drop`, in **reverse** order of declaration. You can hook into it by implementing the `Drop` trait ([lines 1-9](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l03_ownership.rs#L1-L9), [19](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l03_ownership.rs#L19), [42-55](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l03_ownership.rs#L42-L55)):
 
 ```rust
 struct TempFile {
@@ -209,7 +213,7 @@ static int countVowels(String text) { /* … */ }
 <details>
 <summary>Solution</summary>
 
-Take a borrowed string slice instead of an owned `String`, so the caller keeps ownership (explained in lesson 4):
+Take a borrowed string slice instead of an owned `String`, so the caller keeps ownership (explained in lesson 4) ([`src/lib.rs`, lines 99-104](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L99-L104)):
 
 ```rust
 fn count_vowels(text: &str) -> usize {

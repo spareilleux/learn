@@ -26,6 +26,8 @@ You have used macros since lesson 1: `println!`, `vec!`, `assert_eq!`, `#[derive
 
 A `macro_rules!` macro is a `match` on **syntax**: each rule has a pattern and an expansion.
 
+From [`examples/l15_macros_unsafe.rs`, lines 4-8](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l15_macros_unsafe.rs#L4-L8), [62](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l15_macros_unsafe.rs#L62):
+
 ```rust
 macro_rules! square {
     ($x:expr) => {
@@ -38,7 +40,7 @@ println!("square!(1 + 2) = {}", square!(1 + 2));   // 9
 
 `$x:expr` matches a whole expression and keeps it grouped, so `square!(1 + 2)` is `(1 + 2) * (1 + 2)` = 9. A C `#define SQUARE(x) x * x` would give `1 + 2 * 1 + 2` = 5. Rust macros work on the syntax tree, not on text.
 
-Repetition, `$( … ),*`, handles lists — this is how `vec!` is written:
+Repetition, `$( … ),*`, handles lists — this is how `vec!` is written ([lines 11-17](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l15_macros_unsafe.rs#L11-L17), [64-67](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l15_macros_unsafe.rs#L64-L67)):
 
 ```rust
 macro_rules! hashmap {
@@ -55,7 +57,7 @@ let ages = hashmap! {
 };
 ```
 
-Rules are tried in order and can recurse; macros can also generate items such as structs:
+Rules are tried in order and can recurse; macros can also generate items such as structs ([lines 20-37](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l15_macros_unsafe.rs#L20-L37)):
 
 ```rust
 macro_rules! max_of {
@@ -138,7 +140,7 @@ An `unsafe` block unlocks exactly five extra operations:
 4. implement an `unsafe` trait (such as `Send` or `Sync` by hand);
 5. access the fields of a `union`.
 
-Everything else still applies inside `unsafe`: the borrow checker, type checking, bounds checks on slices. Creating a raw pointer is safe; only using it is not:
+Everything else still applies inside `unsafe`: the borrow checker, type checking, bounds checks on slices. Creating a raw pointer is safe; only using it is not ([`src/lib.rs`, lines 1187-1189](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L1187-L1189)):
 
 ```rust
 let x = 42;
@@ -160,7 +162,7 @@ C# has the same idea — the [`unsafe` keyword, pointers](https://learn.microsof
 
 ### Safe abstractions over unsafe code
 
-The standard pattern is a small `unsafe` core wrapped in a **safe function** that checks every condition itself. Returning mutable references to the first element and to the rest of a slice looks harmless, but the borrow checker cannot see that the two parts do not overlap:
+The standard pattern is a small `unsafe` core wrapped in a **safe function** that checks every condition itself. Returning mutable references to the first element and to the rest of a slice looks harmless, but the borrow checker cannot see that the two parts do not overlap ([`src/lib.rs`, lines 1241-1246](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L1241-L1246)):
 
 ```rust
 fn split_first_rest(values: &mut [i32]) -> Option<(&mut i32, &mut [i32])> {
@@ -186,7 +188,7 @@ error[E0499]: cannot borrow `*values` as mutable more than once at a time
   |     returning this value requires that `values[_]` is borrowed for `'1`
 ```
 
-With raw pointers, and a `SAFETY` comment explaining why the invariants hold:
+With raw pointers, and a `SAFETY` comment explaining why the invariants hold ([lines 40-54](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l15_macros_unsafe.rs#L40-L54)):
 
 ```rust
 fn split_first_rest(values: &mut [i32]) -> Option<(&mut i32, &mut [i32])> {
@@ -234,6 +236,8 @@ Every public `unsafe fn` should document its contract in a `# Safety` section (l
 
 ### Calling C from Rust
 
+From [`examples/l15_macros_unsafe.rs`, lines 57-59](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l15_macros_unsafe.rs#L57-L59), [94](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l15_macros_unsafe.rs#L94):
+
 ```rust
 unsafe extern "C" {
     fn abs(input: i32) -> i32;
@@ -261,13 +265,15 @@ For real C libraries, the [`bindgen`](https://github.com/rust-lang/rust-bindgen)
 
 This is the reverse, and the most useful direction for a C# developer: write a performance-critical or shared piece in Rust, and call it from .NET with [P/Invoke](https://learn.microsoft.com/dotnet/standard/native-interop/pinvoke). The [`l15-ffi`](https://github.com/spareilleux/learn/tree/main/code/rust-for-csharp-java/l15-ffi) folder contains both sides.
 
-**Rust side** — a library compiled as a native dynamic library:
+**Rust side** — a library compiled as a native dynamic library ([`l15-ffi/Cargo.toml`, lines 7-9](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/l15-ffi/Cargo.toml#L7-L9)):
 
 ```toml
 [lib]
 # cdylib: a native .dll / .so / .dylib with a C ABI; rlib: so `cargo test` can link it
 crate-type = ["cdylib", "rlib"]
 ```
+
+From [`l15-ffi/src/lib.rs`, lines 3-54](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/l15-ffi/src/lib.rs#L3-L54):
 
 ```rust
 use std::ffi::{CStr, CString, c_char};
@@ -329,6 +335,8 @@ pub unsafe extern "C" fn pricing_free_string(label: *mut c_char) {
 - **Whoever allocates, frees.** A string allocated by Rust must go back to Rust (`pricing_free_string`), never to [`Marshal.FreeHGlobal`](https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.marshal.freehglobal).
 
 **C# side** — [`[LibraryImport]`](https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.libraryimportattribute), the source-generated successor of [`[DllImport]`](https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.dllimportattribute):
+
+[`l15-ffi/dotnet/Program.cs`](https://github.com/spareilleux/learn/blob/main/code/rust-for-csharp-java/l15-ffi/dotnet/Program.cs):
 
 ```csharp
 using System.Runtime.InteropServices;
@@ -431,6 +439,8 @@ Hand-writing both sides does not scale. Tools generate them: [`cbindgen`](https:
 <details>
 <summary>Solution</summary>
 
+From [`src/lib.rs`, lines 1252-1260](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L1252-L1260):
+
 ```rust
 macro_rules! strings {
     ($($s:expr),* $(,)?) => {
@@ -452,6 +462,8 @@ assert!(empty.is_empty());
 
 <details>
 <summary>Solution</summary>
+
+From [`src/lib.rs`, lines 1266-1286](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L1266-L1286):
 
 ```rust
 fn split_first_rest(values: &mut [i32]) -> Option<(&mut i32, &mut [i32])> {

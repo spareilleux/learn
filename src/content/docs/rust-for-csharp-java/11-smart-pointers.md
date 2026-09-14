@@ -28,7 +28,7 @@ They are called *smart pointers* because they own their data and implement [`Der
 
 `Box::new(value)` moves the value to the heap; the `Box` itself is a pointer-sized owner. When the box goes out of scope, the heap memory is freed.
 
-You already met `Box<dyn Trait>` in [lesson 7](../07-traits-and-generics/). The other classic use is a **recursive type**. In C#, `class Expr { Expr Left; }` is fine because `Left` is a reference. In Rust, an enum stores its fields inline, so a type containing itself would be infinitely large:
+You already met `Box<dyn Trait>` in [lesson 7](../07-traits-and-generics/). The other classic use is a **recursive type**. In C#, `class Expr { Expr Left; }` is fine because `Left` is a reference. In Rust, an enum stores its fields inline, so a type containing itself would be infinitely large ([`src/lib.rs`, lines 742-745](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L742-L745)):
 
 ```rust
 enum Expr {
@@ -53,7 +53,7 @@ help: insert some indirection (e.g., a `Box`, `Rc`, or `&`) to break the cycle
   |         ++++    +
 ```
 
-A `Box` has a fixed size, whatever it points to:
+A `Box` has a fixed size, whatever it points to ([lines 6-19](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l11_smart_pointers.rs#L6-L19), [52-58](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l11_smart_pointers.rs#L52-L58)):
 
 ```rust
 #[derive(Debug)]
@@ -100,7 +100,7 @@ println!("strong count = {}", Rc::strong_count(&config));   // 2
 
 `Rc::clone` does **not** copy the `Config`: it increments a counter and returns another pointer to the same value. When the last `Rc` is dropped, the counter reaches zero and the value is freed — deterministic, unlike a garbage collector. The convention of writing `Rc::clone(&x)` rather than `x.clone()` makes the cheap pointer copy visible in code review.
 
-Shared means **read-only**. Two owners mutating the same value is precisely what the borrow rules forbid:
+Shared means **read-only**. Two owners mutating the same value is precisely what the borrow rules forbid ([`src/lib.rs`, lines 752-754](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L752-L754)):
 
 ```rust
 let shared = Rc::new(vec![1, 2]);
@@ -138,7 +138,7 @@ println!("{:?}", account.borrow());  // borrow() -> Ref<Account>, like &
 // Account { balance: 75 }
 ```
 
-Break the rule and the program **panics**:
+Break the rule and the program **panics** ([`src/lib.rs`, lines 761-764](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L761-L764)):
 
 ```rust
 let log = RefCell::new(Vec::new());
@@ -152,7 +152,7 @@ thread 'main' (…) panicked at p11_refcell.rs:6:9:
 RefCell already borrowed
 ```
 
-[`try_borrow`](https://doc.rust-lang.org/std/cell/struct.RefCell.html#method.try_borrow) and [`try_borrow_mut`](https://doc.rust-lang.org/std/cell/struct.RefCell.html#method.try_borrow_mut) return a `Result` instead of panicking:
+[`try_borrow`](https://doc.rust-lang.org/std/cell/struct.RefCell.html#method.try_borrow) and [`try_borrow_mut`](https://doc.rust-lang.org/std/cell/struct.RefCell.html#method.try_borrow_mut) return a `Result` instead of panicking ([lines 92-95](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l11_smart_pointers.rs#L92-L95)):
 
 ```rust
 let reading = account.borrow();
@@ -200,6 +200,8 @@ The `drop` messages never appear: the memory leaked. This is *memory-safe* — n
 
 The fix is a **[`Weak<T>`](https://doc.rust-lang.org/std/rc/struct.Weak.html)** pointer for one direction of the link. A `Weak` does not keep the value alive; [`upgrade()`](https://doc.rust-lang.org/std/rc/struct.Weak.html#method.upgrade) returns `Some(Rc<T>)` if the value still exists and `None` otherwise — like C#'s [`WeakReference<T>.TryGetTarget`](https://learn.microsoft.com/dotnet/api/system.weakreference-1.trygettarget) or Java's [`WeakReference.get()`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/ref/WeakReference.html). The usual design: parents own their children (`Rc`), children point back to their parent (`Weak`).
 
+From [`examples/l11_smart_pointers.rs`, lines 38-42](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l11_smart_pointers.rs#L38-L42), [130-132](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l11_smart_pointers.rs#L130-L132):
+
 ```rust
 struct TreeNode {
     name: String,
@@ -223,7 +225,7 @@ tree scope ended
 
 ## `Arc<T>`: `Rc` for threads
 
-`Rc` updates its counter without synchronisation, so the compiler refuses to send it to another thread:
+`Rc` updates its counter without synchronisation, so the compiler refuses to send it to another thread ([`src/lib.rs`, lines 880-882](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L880-L882)):
 
 ```rust
 let config = Rc::new(String::from("prod"));
@@ -245,7 +247,7 @@ error[E0277]: `Rc<String>` cannot be sent between threads safely
     = help: within `{closure@e11_rc_thread.rs:7:32: 7:39}`, the trait `Send` is not implemented for `Rc<String>`
 ```
 
-`Arc` (*atomically reference counted*) has the same API with a thread-safe counter:
+`Arc` (*atomically reference counted*) has the same API with a thread-safe counter ([lines 3](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l11_smart_pointers.rs#L3), [146-150](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l11_smart_pointers.rs#L146-L150)):
 
 ```rust
 use std::sync::Arc;
@@ -285,6 +287,8 @@ Why not always use `Arc`? Atomic operations cost more, and `Rc` documents that a
 <details>
 <summary>Solution</summary>
 
+From [`src/lib.rs`, lines 787-812](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L787-L812):
+
 ```rust
 enum Expr {
     Num(f64),
@@ -322,7 +326,7 @@ assert_eq!(eval(&e), -20.0);
 
 </details>
 
-2. A `Cart` and a `Payment` must both append lines to the same log. Model it with `type Log = Rc<RefCell<Vec<String>>>`. Then predict what this does:
+2. A `Cart` and a `Payment` must both append lines to the same log. Model it with `type Log = Rc<RefCell<Vec<String>>>`. Then predict what this does ([`src/lib.rs`, lines 850-853](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L850-L853)):
 
 ```rust
 let lines = Rc::new(RefCell::new(vec![String::from("start")]));
@@ -333,6 +337,8 @@ for line in lines.borrow().iter() {
 
 <details>
 <summary>Solution</summary>
+
+From [`src/lib.rs`, lines 818-842](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L818-L842):
 
 ```rust
 use std::cell::RefCell;
@@ -374,7 +380,7 @@ The loop compiles but **panics** with `RefCell already borrowed`: the iterator h
 <details>
 <summary>Solution</summary>
 
-Keep `next` as a strong link and make the backward link `Weak`:
+Keep `next` as a strong link and make the backward link `Weak` ([`src/lib.rs`, lines 859-873](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L859-L873)):
 
 ```rust
 use std::cell::RefCell;

@@ -28,7 +28,7 @@ On les appelle *pointeurs intelligents* (smart pointers) parce qu'ils possèdent
 
 `Box::new(value)` déplace la valeur sur le tas ; la `Box` elle-même est un propriétaire de la taille d'un pointeur. Quand la box sort de la portée, la mémoire sur le tas est libérée.
 
-Vous avez déjà rencontré `Box<dyn Trait>` dans la [leçon 7](../07-traits-and-generics/). L'autre usage classique est un **type récursif**. En C#, `class Expr { Expr Left; }` ne pose pas de problème, car `Left` est une référence. En Rust, un enum stocke ses champs en ligne, donc un type qui se contient lui-même serait infiniment grand :
+Vous avez déjà rencontré `Box<dyn Trait>` dans la [leçon 7](../07-traits-and-generics/). L'autre usage classique est un **type récursif**. En C#, `class Expr { Expr Left; }` ne pose pas de problème, car `Left` est une référence. En Rust, un enum stocke ses champs en ligne, donc un type qui se contient lui-même serait infiniment grand ([`src/lib.rs`, lignes 742-745](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L742-L745)) :
 
 ```rust
 enum Expr {
@@ -53,7 +53,7 @@ help: insert some indirection (e.g., a `Box`, `Rc`, or `&`) to break the cycle
   |         ++++    +
 ```
 
-Une `Box` a une taille fixe, quoi qu'elle pointe :
+Une `Box` a une taille fixe, quoi qu'elle pointe ([lignes 6-19](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l11_smart_pointers.rs#L6-L19), [52-58](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l11_smart_pointers.rs#L52-L58)) :
 
 ```rust
 #[derive(Debug)]
@@ -100,7 +100,7 @@ println!("strong count = {}", Rc::strong_count(&config));   // 2
 
 `Rc::clone` ne copie **pas** la `Config` : il incrémente un compteur et renvoie un autre pointeur vers la même valeur. Quand le dernier `Rc` est détruit, le compteur atteint zéro et la valeur est libérée — de manière déterministe, contrairement à un ramasse-miettes. La convention d'écrire `Rc::clone(&x)` plutôt que `x.clone()` rend visible en revue de code cette copie de pointeur bon marché.
 
-Partagé signifie **en lecture seule**. Deux propriétaires qui modifient la même valeur, c'est précisément ce qu'interdisent les règles d'emprunt :
+Partagé signifie **en lecture seule**. Deux propriétaires qui modifient la même valeur, c'est précisément ce qu'interdisent les règles d'emprunt ([`src/lib.rs`, lignes 752-754](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L752-L754)) :
 
 ```rust
 let shared = Rc::new(vec![1, 2]);
@@ -138,7 +138,7 @@ println!("{:?}", account.borrow());  // borrow() -> Ref<Account>, comme &
 // Account { balance: 75 }
 ```
 
-Enfreignez la règle et le programme **panique** :
+Enfreignez la règle et le programme **panique** ([`src/lib.rs`, lignes 761-764](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L761-L764)) :
 
 ```rust
 let log = RefCell::new(Vec::new());
@@ -152,7 +152,7 @@ thread 'main' (…) panicked at p11_refcell.rs:6:9:
 RefCell already borrowed
 ```
 
-[`try_borrow`](https://doc.rust-lang.org/std/cell/struct.RefCell.html#method.try_borrow) et [`try_borrow_mut`](https://doc.rust-lang.org/std/cell/struct.RefCell.html#method.try_borrow_mut) renvoient un `Result` au lieu de paniquer :
+[`try_borrow`](https://doc.rust-lang.org/std/cell/struct.RefCell.html#method.try_borrow) et [`try_borrow_mut`](https://doc.rust-lang.org/std/cell/struct.RefCell.html#method.try_borrow_mut) renvoient un `Result` au lieu de paniquer ([lignes 92-95](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l11_smart_pointers.rs#L92-L95)) :
 
 ```rust
 let reading = account.borrow();
@@ -200,6 +200,8 @@ Les messages `drop` n'apparaissent jamais : la mémoire a fui. C'est *sûr pour 
 
 La solution est un pointeur **[`Weak<T>`](https://doc.rust-lang.org/std/rc/struct.Weak.html)** pour l'un des deux sens du lien. Un `Weak` ne maintient pas la valeur en vie ; [`upgrade()`](https://doc.rust-lang.org/std/rc/struct.Weak.html#method.upgrade) renvoie `Some(Rc<T>)` si la valeur existe encore et `None` sinon — comme [`WeakReference<T>.TryGetTarget`](https://learn.microsoft.com/dotnet/api/system.weakreference-1.trygettarget) en C# ou [`WeakReference.get()`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/ref/WeakReference.html) en Java. La conception habituelle : les parents possèdent leurs enfants (`Rc`), les enfants pointent vers leur parent (`Weak`).
 
+Extrait de [`examples/l11_smart_pointers.rs`, lignes 38-42](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l11_smart_pointers.rs#L38-L42), [130-132](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l11_smart_pointers.rs#L130-L132) :
+
 ```rust
 struct TreeNode {
     name: String,
@@ -223,7 +225,7 @@ tree scope ended
 
 ## `Arc<T>` : `Rc` pour les threads
 
-`Rc` met à jour son compteur sans synchronisation, donc le compilateur refuse de l'envoyer vers un autre thread :
+`Rc` met à jour son compteur sans synchronisation, donc le compilateur refuse de l'envoyer vers un autre thread ([`src/lib.rs`, lignes 880-882](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L880-L882)) :
 
 ```rust
 let config = Rc::new(String::from("prod"));
@@ -245,7 +247,7 @@ error[E0277]: `Rc<String>` cannot be sent between threads safely
     = help: within `{closure@e11_rc_thread.rs:7:32: 7:39}`, the trait `Send` is not implemented for `Rc<String>`
 ```
 
-`Arc` (*atomically reference counted*, à comptage de références atomique) offre la même API avec un compteur thread-safe :
+`Arc` (*atomically reference counted*, à comptage de références atomique) offre la même API avec un compteur thread-safe ([lignes 3](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l11_smart_pointers.rs#L3), [146-150](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l11_smart_pointers.rs#L146-L150)) :
 
 ```rust
 use std::sync::Arc;
@@ -285,6 +287,8 @@ Pourquoi ne pas toujours utiliser `Arc` ? Les opérations atomiques coûtent plu
 <details>
 <summary>Solution</summary>
 
+Extrait de [`src/lib.rs`, lignes 787-812](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L787-L812) :
+
 ```rust
 enum Expr {
     Num(f64),
@@ -322,7 +326,7 @@ assert_eq!(eval(&e), -20.0);
 
 </details>
 
-2. Un `Cart` et un `Payment` doivent tous deux ajouter des lignes au même journal. Modélisez-le avec `type Log = Rc<RefCell<Vec<String>>>`. Puis prédisez ce que fait ce code :
+2. Un `Cart` et un `Payment` doivent tous deux ajouter des lignes au même journal. Modélisez-le avec `type Log = Rc<RefCell<Vec<String>>>`. Puis prédisez ce que fait ce code ([`src/lib.rs`, lignes 850-853](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L850-L853)) :
 
 ```rust
 let lines = Rc::new(RefCell::new(vec![String::from("start")]));
@@ -333,6 +337,8 @@ for line in lines.borrow().iter() {
 
 <details>
 <summary>Solution</summary>
+
+Extrait de [`src/lib.rs`, lignes 818-842](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L818-L842) :
 
 ```rust
 use std::cell::RefCell;
@@ -374,7 +380,7 @@ La boucle compile mais **panique** avec `RefCell already borrowed` : l'itérateu
 <details>
 <summary>Solution</summary>
 
-Gardez `next` comme lien fort et rendez le lien arrière `Weak` :
+Gardez `next` comme lien fort et rendez le lien arrière `Weak` ([`src/lib.rs`, lignes 859-873](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L859-L873)) :
 
 ```rust
 use std::cell::RefCell;

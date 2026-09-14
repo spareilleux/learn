@@ -17,6 +17,8 @@ Ce que Rust n'empêche **pas** : les interblocages (deadlocks), les situations d
 
 ## `thread::spawn`
 
+Extrait de [`examples/l12_threads.rs`, lignes 6](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l12_threads.rs#L6), [17-19](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l12_threads.rs#L17-L19) :
+
 ```rust
 use std::thread;
 
@@ -31,7 +33,7 @@ println!("total name length: {}", handle.join().unwrap());   // 8
 | `handle.join()` renvoie le résultat de la closure | `thread.Join()` (pas de résultat) / `await task` | `thread.join()` (pas de résultat) / `future.get()` |
 | `join()` renvoie `Err` si le thread a paniqué | exception relancée par `Task` | [`ExecutionException`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/ExecutionException.html) |
 
-Le nouveau thread peut survivre à la fonction qui l'a démarré, il ne peut donc pas emprunter les variables locales de cette fonction ([leçon 9](../09-lifetimes/), `'static`). Oublier `move` donne une erreur très directe :
+Le nouveau thread peut survivre à la fonction qui l'a démarré, il ne peut donc pas emprunter les variables locales de cette fonction ([leçon 9](../09-lifetimes/), `'static`). Oublier `move` donne une erreur très directe ([`src/lib.rs`, lignes 890-894](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L890-L894)) :
 
 ```rust
 let names = vec!["ada", "grace"];
@@ -59,7 +61,7 @@ help: to force the closure to take ownership of `names` (and any other reference
 
 ## Threads à portée : l'emprunt est autorisé
 
-[`thread::scope`](https://doc.rust-lang.org/std/thread/fn.scope.html) garantit que chaque thread lancé à l'intérieur est joint avant que `scope` ne rende la main, si bien que ces threads à portée (scoped threads) **peuvent** emprunter des données locales :
+[`thread::scope`](https://doc.rust-lang.org/std/thread/fn.scope.html) garantit que chaque thread lancé à l'intérieur est joint avant que `scope` ne rende la main, si bien que ces threads à portée (scoped threads) **peuvent** emprunter des données locales ([lignes 22-29](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l12_threads.rs#L22-L29)) :
 
 ```rust
 let data: Vec<u64> = (1..=1_000).collect();
@@ -73,7 +75,7 @@ let chunk_sums: Vec<u64> = thread::scope(|s| {
 // chunk sums: [31375, 93875, 156375, 218875], total 500500
 ```
 
-L'emprunt suit toujours les règles habituelles. Deux threads qui modifient le même compteur, c'est une data race, et cela ne compile pas :
+L'emprunt suit toujours les règles habituelles. Deux threads qui modifient le même compteur, c'est une data race, et cela ne compile pas ([`src/lib.rs`, lignes 900-904](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L900-L904)) :
 
 ```rust
 let mut count = 0;
@@ -120,7 +122,7 @@ Presque tous les types sont les deux. Les exceptions sont les outils mono-thread
 | `Cell<T>`, `RefCell<T>` | oui | **non** | mutabilité intérieure non synchronisée |
 | [`Mutex<T>`](https://doc.rust-lang.org/std/sync/struct.Mutex.html) (avec `T: Send`) | oui | oui | l'accès est synchronisé |
 
-`thread::spawn` exige que sa closure soit `Send`, donc tout ce qu'elle capture doit l'être aussi. Partager un `RefCell` à travers un `Arc` échoue — et le compilateur suggère l'alternative thread-safe :
+`thread::spawn` exige que sa closure soit `Send`, donc tout ce qu'elle capture doit l'être aussi. Partager un `RefCell` à travers un `Arc` échoue — et le compilateur suggère l'alternative thread-safe ([`src/lib.rs`, lignes 913-915](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L913-L915)) :
 
 ```rust
 let total = Arc::new(RefCell::new(0));
@@ -146,7 +148,7 @@ C# et Java ne font pas cette distinction : la sûreté vis-à-vis des threads es
 
 ## État partagé : `Arc<Mutex<T>>`
 
-Un [`lock (obj) { … }`](https://learn.microsoft.com/dotnet/csharp/language-reference/statements/lock) C# protège du code ; rien n'empêche une autre méthode de toucher la liste sans verrouiller. Un `Mutex<T>` Rust **possède** les données, et le seul moyen de les atteindre est `lock()` :
+Un [`lock (obj) { … }`](https://learn.microsoft.com/dotnet/csharp/language-reference/statements/lock) C# protège du code ; rien n'empêche une autre méthode de toucher la liste sans verrouiller. Un `Mutex<T>` Rust **possède** les données, et le seul moyen de les atteindre est `lock()` ([`src/lib.rs`, ligne 921](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L921)) :
 
 ```rust
 let count = std::sync::Mutex::new(0);
@@ -186,7 +188,7 @@ for worker in workers {
 - `lock()` renvoie un `Result` : si un thread a **paniqué** en détenant le verrou, le mutex est [*empoisonné*](https://doc.rust-lang.org/std/sync/struct.Mutex.html#poisoning) (poisoned) et les appels ultérieurs à `lock()` renvoient `Err`. `.unwrap()` propage cette panique, ce qui est généralement ce que l'on veut.
 - Gardez la portée de la garde courte. La conserver pendant un appel lent bloque tous les autres — et deux threads qui prennent deux verrous dans l'ordre inverse aboutissent toujours à un interblocage.
 
-[`RwLock<T>`](https://doc.rust-lang.org/std/sync/struct.RwLock.html) autorise plusieurs lecteurs ou un seul rédacteur, comme [`ReaderWriterLockSlim`](https://learn.microsoft.com/dotnet/api/system.threading.readerwriterlockslim) ou [`ReentrantReadWriteLock`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/locks/ReentrantReadWriteLock.html) :
+[`RwLock<T>`](https://doc.rust-lang.org/std/sync/struct.RwLock.html) autorise plusieurs lecteurs ou un seul rédacteur, comme [`ReaderWriterLockSlim`](https://learn.microsoft.com/dotnet/api/system.threading.readerwriterlockslim) ou [`ReentrantReadWriteLock`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/locks/ReentrantReadWriteLock.html) ([lignes 80-86](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l12_threads.rs#L80-L86)) :
 
 ```rust
 let settings = RwLock::new(HashMap::from([("mode", "fast")]));
@@ -199,7 +201,7 @@ settings.write().unwrap().insert("mode", "safe");
 
 ## Atomiques
 
-Pour un compteur ou un indicateur, un verrou est disproportionné :
+Pour un compteur ou un indicateur, un verrou est disproportionné ([lignes 3](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l12_threads.rs#L3), [54-63](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l12_threads.rs#L54-L63)) :
 
 ```rust
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -221,7 +223,7 @@ thread::scope(|s| {
 
 ## Canaux : partager en communiquant
 
-Au lieu de partager des données, les threads peuvent s'envoyer des valeurs. Envoyer **déplace** la valeur, donc l'émetteur ne peut plus y toucher ensuite :
+Au lieu de partager des données, les threads peuvent s'envoyer des valeurs. Envoyer **déplace** la valeur, donc l'émetteur ne peut plus y toucher ensuite ([lignes 4](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l12_threads.rs#L4), [67-76](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l12_threads.rs#L67-L76)) :
 
 ```rust
 use std::sync::mpsc;
@@ -249,6 +251,8 @@ Pour « faire ceci sur chaque élément, sur tous les cœurs », ne gérez pas l
 rayon = "1"
 ```
 
+Extrait de [`examples/l12_threads.rs`, lignes 1-13](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l12_threads.rs#L1-L13), [90-99](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l12_threads.rs#L90-L99) :
+
 ```rust
 use rayon::prelude::*;
 
@@ -273,7 +277,7 @@ let lengths: Vec<usize> = words.par_iter().map(|w| w.len()).collect();   // l'or
 | `.iter_mut()` | `.par_iter_mut()` |
 | `.sort()` | `.par_sort()` |
 
-rayon exécute le travail sur un pool comptant un thread par cœur et le répartit par vol de tâches (*work stealing*), comme le [pool de threads .NET](https://learn.microsoft.com/dotnet/standard/threading/the-managed-thread-pool) et le [`ForkJoinPool`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/ForkJoinPool.html) de Java. Ses closures doivent être [`Fn`](https://doc.rust-lang.org/std/ops/trait.Fn.html) (pas de modification des variables capturées) et `Send + Sync`, si bien que la data race de tout à l'heure ne peut pas revenir en douce :
+rayon exécute le travail sur un pool comptant un thread par cœur et le répartit par vol de tâches (*work stealing*), comme le [pool de threads .NET](https://learn.microsoft.com/dotnet/standard/threading/the-managed-thread-pool) et le [`ForkJoinPool`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/ForkJoinPool.html) de Java. Ses closures doivent être [`Fn`](https://doc.rust-lang.org/std/ops/trait.Fn.html) (pas de modification des variables capturées) et `Send + Sync`, si bien que la data race de tout à l'heure ne peut pas revenir en douce ([`src/lib.rs`, lignes 929-930](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L929-L930)) :
 
 ```rust
 let mut seen = 0;
@@ -315,6 +319,8 @@ Les threads (et rayon) servent au travail **limité par le CPU** (CPU-bound) : c
 <details>
 <summary>Solution</summary>
 
+Extrait de [`src/lib.rs`, lignes 936-946](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L936-L946) :
+
 ```rust
 fn parallel_sum(data: &[u64], threads: usize) -> u64 {
     let chunk_size = data.len().div_ceil(threads.max(1)).max(1);
@@ -341,6 +347,8 @@ assert_eq!(parallel_sum(&[], 4), 0);
 
 <details>
 <summary>Solution</summary>
+
+Extrait de [`src/lib.rs`, lignes 952-980](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L952-L980) :
 
 ```rust
 use std::collections::HashMap;

@@ -33,6 +33,8 @@ Comme l'absence et l'échec font partie du **type**, vous ne pouvez pas les oubl
 
 ## `Option<T>`
 
+Extrait de [`examples/l06_option_result.rs`, lignes 11-13](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l06_option_result.rs#L11-L13), [88-91](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l06_option_result.rs#L88-L91) :
+
 ```rust
 fn find_user(users: &HashMap<u32, User>, id: u32) -> Option<&User> {
     users.get(&id)
@@ -44,7 +46,7 @@ match find_user(&users, 3) {
 }
 ```
 
-Un `Option<i32>` n'est pas un `i32`, donc vous ne pouvez pas l'utiliser par accident :
+Un `Option<i32>` n'est pas un `i32`, donc vous ne pouvez pas l'utiliser par accident ([`src/lib.rs`, lignes 266-267](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L266-L267)) :
 
 ```rust
 let maybe: Option<i32> = Some(1);
@@ -65,7 +67,7 @@ En C#, la [`NullReferenceException`](https://learn.microsoft.com/dotnet/api/syst
 
 ### Combinateurs
 
-Au lieu de `if (x != null)` imbriqués, enchaînez des méthodes — elles se lisent comme [`?.`](https://learn.microsoft.com/dotnet/csharp/language-reference/operators/member-access-operators#null-conditional-operators--and-) et [`??`](https://learn.microsoft.com/dotnet/csharp/language-reference/operators/null-coalescing-operator) :
+Au lieu de `if (x != null)` imbriqués, enchaînez des méthodes — elles se lisent comme [`?.`](https://learn.microsoft.com/dotnet/csharp/language-reference/operators/member-access-operators#null-conditional-operators--and-) et [`??`](https://learn.microsoft.com/dotnet/csharp/language-reference/operators/null-coalescing-operator) ([ligne 85](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l06_option_result.rs#L85)) :
 
 ```rust
 let name_len = find_user(&users, 2).map(|u| u.name.len()).unwrap_or(0);
@@ -82,7 +84,7 @@ let name_len = find_user(&users, 2).map(|u| u.name.len()).unwrap_or(0);
 
 ## `Result<T, E>`
 
-Une fonction qui peut échouer le dit dans sa signature — un peu comme une exception vérifiée en Java, mais sous forme de valeur de retour :
+Une fonction qui peut échouer le dit dans sa signature — un peu comme une exception vérifiée en Java, mais sous forme de valeur de retour ([lignes 23-29](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l06_option_result.rs#L23-L29), [93-94](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l06_option_result.rs#L93-L94)) :
 
 ```rust
 fn sum_csv(line: &str) -> Result<i32, ParseIntError> {
@@ -112,6 +114,8 @@ warning: unused `Result` that must be used
 ## L'opérateur `?`
 
 `?` signifie : *si c'est `Ok`/`Some`, extraire la valeur ; sinon, renvoyer immédiatement le `Err`/`None` depuis la fonction courante.* C'est l'équivalent explicite et visible de la propagation d'une exception.
+
+Extrait de [`examples/l06_option_result.rs`, lignes 16-20](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l06_option_result.rs#L16-L20) :
 
 ```rust
 fn manager_name(users: &HashMap<u32, User>, id: u32) -> Option<&str> {
@@ -187,6 +191,8 @@ Ok(3000)
 
 ### `main` peut renvoyer un `Result`
 
+Extrait de [`examples/l06_option_result.rs`, lignes 63](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l06_option_result.rs#L63), [108-111](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l06_option_result.rs#L108-L111) :
+
 ```rust
 fn main() -> Result<(), Box<dyn Error>> {
     let port = read_port(&config)?;   // ConfigError se convertit en Box<dyn Error>
@@ -243,6 +249,8 @@ var age = FindAge(ages, "Ada") ?? -1;
 <details>
 <summary>Solution</summary>
 
+Extrait de [`src/lib.rs`, lignes 281-287](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L281-L287) :
+
 ```rust
 use std::collections::HashMap;
 
@@ -264,6 +272,8 @@ assert_eq!(find_age(&ages, "Bob"), None);
 
 <details>
 <summary>Solution</summary>
+
+Extrait de [`src/lib.rs`, lignes 293-301](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L293-L301) :
 
 ```rust
 fn parse_point(text: &str) -> Result<(i32, i32), String> {

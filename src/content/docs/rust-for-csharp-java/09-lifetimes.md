@@ -11,7 +11,7 @@ Full example: [`examples/l09_lifetimes.rs`](https://github.com/spareilleux/learn
 
 In C# or Java, a reference keeps its object alive: as long as you can reach it, the [garbage collector](https://learn.microsoft.com/dotnet/standard/garbage-collection/fundamentals) will not free it. A ["dangling reference"](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html#dangling-references) simply cannot happen.
 
-Rust has no garbage collector. A value is freed when its owner goes out of scope ([lesson 3](../03-ownership-and-moves/)), so the compiler must prove that no reference is still in use at that point:
+Rust has no garbage collector. A value is freed when its owner goes out of scope ([lesson 3](../03-ownership-and-moves/)), so the compiler must prove that no reference is still in use at that point ([`src/lib.rs`, lines 474-479](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L474-L479)):
 
 ```rust
 let r;
@@ -46,6 +46,8 @@ A lifetime annotation is a *description* the compiler checks, not an instruction
 
 Which input does the result borrow from?
 
+From [`src/lib.rs`, lines 485-487](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L485-L487):
+
 ```rust
 fn longest(a: &str, b: &str) -> &str {
     if a.len() >= b.len() { a } else { b }
@@ -66,7 +68,7 @@ help: consider introducing a named lifetime parameter
   |           ++++     ++          ++          ++
 ```
 
-The compiler checks each function on its **signature alone**, never on its body — the same way a C# caller only sees a method's declaration. So the signature has to say it:
+The compiler checks each function on its **signature alone**, never on its body — the same way a C# caller only sees a method's declaration. So the signature has to say it ([lines 2-4](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l09_lifetimes.rs#L2-L4)):
 
 ```rust
 fn longest<'a>(a: &'a str, b: &'a str) -> &'a str {
@@ -74,7 +76,7 @@ fn longest<'a>(a: &'a str, b: &'a str) -> &'a str {
 }
 ```
 
-Read `<'a>` like a [generic parameter](https://doc.rust-lang.org/reference/items/generics.html) (it is declared in the same place as `<T>`): *"for some lifetime `'a` during which both `a` and `b` are valid, the result is valid for `'a` too"*. In practice `'a` becomes the **shorter** of the two, so the caller cannot keep the result longer than either input:
+Read `<'a>` like a [generic parameter](https://doc.rust-lang.org/reference/items/generics.html) (it is declared in the same place as `<T>`): *"for some lifetime `'a` during which both `a` and `b` are valid, the result is valid for `'a` too"*. In practice `'a` becomes the **shorter** of the two, so the caller cannot keep the result longer than either input ([`src/lib.rs`, lines 496-502](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L496-L502)):
 
 ```rust
 let title = String::from("Rust for C# developers");
@@ -102,7 +104,7 @@ error[E0597]: `subtitle` does not live long enough
 
 At runtime `title` is the longest string, so this would happen to work — but the signature promises nothing about which one is returned, and the compiler holds you to the signature.
 
-Only annotate what the result actually borrows. Here the result comes from `a` alone, so `len_from` needs no lifetime and can be anything short-lived:
+Only annotate what the result actually borrows. Here the result comes from `a` alone, so `len_from` needs no lifetime and can be anything short-lived ([lines 12-14](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l09_lifetimes.rs#L12-L14)):
 
 ```rust
 fn prefix_of<'a>(a: &'a str, len_from: &str) -> &'a str {
@@ -118,6 +120,8 @@ Most functions never mention a lifetime because three **elision rules** fill the
 2. If there is exactly **one** input lifetime, it is used for every output reference.
 3. If one of the parameters is `&self` or `&mut self`, **its** lifetime is used for the outputs.
 
+From [`examples/l09_lifetimes.rs`, lines 7-9](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l09_lifetimes.rs#L7-L9):
+
 ```rust
 fn first_word(text: &str) -> &str {     // rule 2: the result borrows `text`
     text.split_whitespace().next().unwrap_or("")
@@ -126,7 +130,7 @@ fn first_word(text: &str) -> &str {     // rule 2: the result borrows `text`
 
 `longest` needed an annotation because it has two inputs and no `self`: no rule applies.
 
-Elision never makes a wrong program compile. When the rules produce a lifetime that does not fit, you still get an error — and returning a reference to a local variable is always an error, whatever you annotate:
+Elision never makes a wrong program compile. When the rules produce a lifetime that does not fit, you still get an error — and returning a reference to a local variable is always an error, whatever you annotate ([`src/lib.rs`, lines 530-533](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L530-L533)):
 
 ```rust
 fn shout(word: &str) -> &str {
@@ -147,7 +151,7 @@ The fix is the one from lesson 4: return the owned [`String`](https://doc.rust-l
 
 ## Structs that borrow
 
-A struct that holds a reference must declare the lifetime, just like a generic type parameter:
+A struct that holds a reference must declare the lifetime, just like a generic type parameter ([`src/lib.rs`, lines 508-510](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L508-L510)):
 
 ```rust
 struct Excerpt {
@@ -168,6 +172,8 @@ help: consider introducing a named lifetime parameter
 2 ~     text: &'a str,
   |
 ```
+
+From [`examples/l09_lifetimes.rs`, lines 17-25](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l09_lifetimes.rs#L17-L25), [82-85](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l09_lifetimes.rs#L82-L85):
 
 ```rust
 struct Excerpt<'a> {
@@ -205,7 +211,7 @@ The C# closest equivalent is a [`ref struct`](https://learn.microsoft.com/dotnet
 
 ### The lifetime in a method signature matters
 
-A tokenizer that returns slices of its input:
+A tokenizer that returns slices of its input ([lines 28-59](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l09_lifetimes.rs#L28-L59)):
 
 ```rust
 struct Parser<'a> {
@@ -234,7 +240,7 @@ The return type says `&'a str`: a token borrows the **input text**, not the pars
 
 ## `'static`
 
-`'static` is the lifetime of data that is valid for the whole run of the program. String literals are stored in the binary, so they have it:
+`'static` is the lifetime of data that is valid for the whole run of the program. String literals are stored in the binary, so they have it ([lines 62-64](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l09_lifetimes.rs#L62-L64)):
 
 ```rust
 fn default_greeting() -> &'static str {
@@ -243,6 +249,8 @@ fn default_greeting() -> &'static str {
 ```
 
 You will mostly meet `'static` as a **bound**, for example on `std::thread::spawn`: a new thread may outlive the function that started it, so it cannot borrow that function's locals.
+
+From [`src/lib.rs`, lines 539-542](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L539-L542):
 
 ```rust
 let name = String::from("worker");
@@ -299,6 +307,8 @@ Cloning a few strings to avoid a lifetime parameter is a perfectly good trade-of
 <details>
 <summary>Solution</summary>
 
+From [`src/lib.rs`, lines 548-556](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L548-L556):
+
 ```rust
 fn longest_line(text: &str) -> &str {
     text.lines().max_by_key(|line| line.len()).unwrap_or("")
@@ -321,6 +331,8 @@ assert_eq!(pick("left", "right", false), "right");
 
 <details>
 <summary>Solution</summary>
+
+From [`src/lib.rs`, lines 562-577](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L562-L577):
 
 ```rust
 #[derive(Debug, PartialEq)]
@@ -348,6 +360,8 @@ The results borrow `text` only, so `word` gets its own (elided) lifetime. Writin
 </details>
 
 3. This version of the tokenizer compiles, but `main` does not. Explain the error and fix it by changing one line.
+
+From [`src/lib.rs`, lines 607-618](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L607-L618):
 
 ```rust
 impl<'a> Parser<'a> {
@@ -380,7 +394,7 @@ error[E0499]: cannot borrow `parser` as mutable more than once at a time
 <details>
 <summary>Solution</summary>
 
-With `Option<&str>`, elision rule 3 gives the result the lifetime of `&mut self`. As long as `first` is alive, `parser` stays mutably borrowed, so the second call is rejected. The token really points into the input, so say so:
+With `Option<&str>`, elision rule 3 gives the result the lifetime of `&mut self`. As long as `first` is alive, `parser` stays mutably borrowed, so the second call is rejected. The token really points into the input, so say so ([line 38](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l09_lifetimes.rs#L38)):
 
 ```rust
 fn next_token(&mut self) -> Option<&'a str> {

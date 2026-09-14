@@ -27,7 +27,7 @@ Iterating a `HashMap` yields entries in an unspecified order that can change bet
 
 ## LINQ and Streams, translated
 
-The example works on a list of orders:
+The example works on a list of orders ([lines 57-61](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l08_collections_iterators.rs#L57-L61)):
 
 ```rust
 let big_orders: Vec<&str> = orders
@@ -56,6 +56,8 @@ let big_orders: Vec<&str> = orders
 | `.min_by_key(…)` / `.max_by_key(…)` | `.MinBy(…)` / `.MaxBy(…)` | `.min(comparator)` |
 | collect into `HashSet` | `.Distinct()` | `.distinct()` |
 | `vec.sort_by_key(…)` (on the `Vec`) | `.OrderBy(…)` | `.sorted(comparator)` |
+
+From [`examples/l08_collections_iterators.rs`, lines 65-74](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l08_collections_iterators.rs#L65-L74):
 
 ```rust
 let revenue: f64 = orders.iter().map(|o| o.quantity as f64 * o.unit_price).sum();
@@ -94,7 +96,7 @@ This laziness also lets iterators be infinite: see the Fibonacci example below.
 
 ## `collect` needs to know the target type
 
-[`collect`](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.collect) can build a `Vec`, a `HashSet`, a `String`, a `HashMap`… so you must say which one:
+[`collect`](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.collect) can build a `Vec`, a `HashSet`, a `String`, a `HashMap`… so you must say which one ([`src/lib.rs`, line 396](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L396)):
 
 ```rust
 let evens = (1..10).filter(|n| n % 2 == 0).collect();
@@ -127,6 +129,8 @@ Ownership (lessons 3 and 4) shows up in how you iterate:
 | `v.iter_mut()` or `for x in &mut v` | `&mut T` | modified in place |
 | `v.into_iter()` or `for x in v` | `T` | **moved**, no longer usable |
 
+From [`examples/l08_collections_iterators.rs`, lines 113-117](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l08_collections_iterators.rs#L113-L117):
+
 ```rust
 let mut prices = vec![10.0, 20.0, 30.0];
 for p in prices.iter_mut() {
@@ -157,7 +161,7 @@ help: consider iterating over a slice of the `Vec<f64>`'s content to avoid movin
 
 ## Grouping with `HashMap::entry`
 
-There is no `GroupBy` in the standard library; the [`entry`](https://doc.rust-lang.org/std/collections/struct.HashMap.html#method.entry) API makes it a one-liner — like [`CollectionsMarshal.GetValueRefOrAddDefault`](https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.collectionsmarshal.getvaluereforadddefault) in C# or [`merge`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Map.html#merge(K,V,java.util.function.BiFunction)) in Java:
+There is no `GroupBy` in the standard library; the [`entry`](https://doc.rust-lang.org/std/collections/struct.HashMap.html#method.entry) API makes it a one-liner — like [`CollectionsMarshal.GetValueRefOrAddDefault`](https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.collectionsmarshal.getvaluereforadddefault) in C# or [`merge`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Map.html#merge(K,V,java.util.function.BiFunction)) in Java ([lines 80-85](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l08_collections_iterators.rs#L80-L85)):
 
 ```rust
 let mut spend: HashMap<&str, f64> = HashMap::new();
@@ -170,7 +174,7 @@ let sorted: BTreeMap<_, _> = spend.iter().collect();
 
 ## Sorting, and why floats are special
 
-`sort` needs a **total order** ([`Ord`](https://doc.rust-lang.org/std/cmp/trait.Ord.html)). Floating-point numbers only have a partial one, because `NaN` is not comparable to anything:
+`sort` needs a **total order** ([`Ord`](https://doc.rust-lang.org/std/cmp/trait.Ord.html)). Floating-point numbers only have a partial one, because `NaN` is not comparable to anything ([`src/lib.rs`, lines 412-413](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L412-L413)):
 
 ```rust
 let mut prices = vec![19.99, 5.0, 12.5];
@@ -185,7 +189,7 @@ error[E0277]: the trait bound `{float}: Ord` is not satisfied
     |            ^^^^ the trait `Ord` is not implemented for `{float}`
 ```
 
-C# and Java sort doubles without complaint and place `NaN` according to their own convention. In Rust, choose explicitly:
+C# and Java sort doubles without complaint and place `NaN` according to their own convention. In Rust, choose explicitly ([`src/lib.rs`, lines 419-420](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L419-L420)):
 
 ```rust
 let mut prices: Vec<f64> = vec![19.99, 5.0, 12.5];
@@ -198,7 +202,7 @@ Without it, the literals are still an undecided "some float" (`{float}`) when th
 
 ## Closures
 
-Rust closures (`|args| body`) are C# lambdas and Java lambdas. They capture variables from the surrounding scope — by reference by default:
+Rust closures (`|args| body`) are C# lambdas and Java lambdas. They capture variables from the surrounding scope — by reference by default ([lines 121-126](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l08_collections_iterators.rs#L121-L126)):
 
 ```rust
 let threshold = 50.0;
@@ -206,7 +210,7 @@ let is_expensive = |o: &Order| o.unit_price * o.quantity as f64 > threshold;
 println!("expensive orders: {}", orders.iter().filter(|o| is_expensive(o)).count());   // 2
 ```
 
-`move` makes the closure take ownership of what it captures — required when the closure outlives the current scope, for example in a thread (lesson 12):
+`move` makes the closure take ownership of what it captures — required when the closure outlives the current scope, for example in a thread (lesson 12) ([lines 128-130](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l08_collections_iterators.rs#L128-L130)):
 
 ```rust
 let label = String::from("report");
@@ -221,7 +225,7 @@ println!("{}", make_title(1));   // report #1
 
 ## Writing your own iterator
 
-Implement one method, `next`, and every adapter above becomes available — the counterpart of [`IEnumerable<T>`](https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1) with [`yield return`](https://learn.microsoft.com/dotnet/csharp/language-reference/statements/yield):
+Implement one method, `next`, and every adapter above becomes available — the counterpart of [`IEnumerable<T>`](https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1) with [`yield return`](https://learn.microsoft.com/dotnet/csharp/language-reference/statements/yield) ([lines 12-26](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l08_collections_iterators.rs#L12-L26), [133-138](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l08_collections_iterators.rs#L133-L138)):
 
 ```rust
 struct Fibonacci {
@@ -247,6 +251,8 @@ let fibs: Vec<u64> = Fibonacci { current: 0, next: 1 }.take_while(|&n| n < 100).
 `type Item = u64;` is an [**associated type**](https://doc.rust-lang.org/reference/items/associated-items.html#associated-types): each iterator decides what it yields.
 
 ## Slices bonus: `windows` and `chunks`
+
+From [`examples/l08_collections_iterators.rs`, lines 142-144](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l08_collections_iterators.rs#L142-L144):
 
 ```rust
 let readings = [3, 5, 4, 8, 9];
@@ -275,6 +281,8 @@ var result = words.Where(w => w.Length > 3)
 <details>
 <summary>Solution</summary>
 
+From [`src/lib.rs`, lines 434-437](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L434-L437):
+
 ```rust
 let words = ["tree", "sky", "apple", "rust", "go"];
 let mut result: Vec<String> = words
@@ -294,6 +302,8 @@ Sorting is a method on `Vec` (it sorts in place), not an iterator adapter, so co
 
 <details>
 <summary>Solution</summary>
+
+From [`src/lib.rs`, lines 443-453](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L443-L453):
 
 ```rust
 use std::collections::BTreeMap;
@@ -319,6 +329,8 @@ assert_eq!(counts.keys().collect::<Vec<_>>(), ["and", "cat", "hat", "the"]);
 
 <details>
 <summary>Solution</summary>
+
+From [`src/lib.rs`, lines 459-467](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/src/lib.rs#L459-L467):
 
 ```rust
 struct Countdown(u32);
