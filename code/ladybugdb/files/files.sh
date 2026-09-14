@@ -13,7 +13,8 @@ q() {
   lbug --no_progress_bar --no_stats --mode csv "$@" 2>&1 | tr -d '\r' |
     sed -E 's#[^ ]*[/\\]out[/\\]files[/\\]#out/files/#g; s/ \(Error: [^)]*\)//; s/ handle: [0-9]+//'
 }
-files() { echo "files: $(cd "$D" && ls -1 | grep -v '\.txt$' | tr '\n' ' ')"; }
+# File names in byte order: macOS sorts them without regard to case
+files() { echo "files: $(cd "$D" && ls -1 | grep -v '\.txt$' | LC_ALL=C sort | tr '\n' ' ')"; }
 # Waits for a file to exist, for at most 30 seconds.
 # The CLI writes its output to a file only when it exits: its output can't tell that a query has run.
 wait_for() {
@@ -91,7 +92,7 @@ tr -d '\r' < "$D/reader.txt"
 echo "== 7. EXPORT DATABASE and IMPORT DATABASE"
 echo "CREATE MACRO major(version) AS split_part(version, '.', 1);" | q "$D/ga.lbdb"
 echo "EXPORT DATABASE '$D/export' (format = 'csv', header = true);" | q "$D/ga.lbdb"
-echo "export: $(cd "$D/export" && ls -1 | tr '\n' ' ')"
+echo "export: $(cd "$D/export" && ls -1 | LC_ALL=C sort | tr '\n' ' ')"
 tr -d '\r' < "$D/export/schema.cypher"
 # The order of the COPY options changes from one OS to the next
 tr -d '\r' < "$D/export/copy.cypher" | sed 's/^/# /'
