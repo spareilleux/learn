@@ -2,8 +2,9 @@
 // read by the page's voice or by an English voice (inline code and English terms), with the page range of each word.
 import { englishRanges, sayCode, sayEnglish, type Segment } from './english';
 
-const BLOCKS = 'h1, h2, h3, h4, h5, h6, p, li, dt, dd, blockquote, figcaption';
-export const SKIP = 'pre, .expressive-code, table, details, script, style, .sl-anchor-link, .speech-from-here, [role="tablist"], [hidden], .sr-only';
+const BLOCKS = 'h1, h2, h3, h4, h5, h6, p, li, dt, dd, blockquote, figcaption, summary';
+// exercise solutions (<details>) are read too: the player opens them
+export const SKIP = 'pre, .expressive-code, table, script, style, .sl-anchor-link, .speech-from-here, [role="tablist"], [hidden], .sr-only';
 const NESTED = `${BLOCKS}, ${SKIP}, ul, ol`;
 const MAX_SENTENCE = 180; // Chrome cuts utterances after ~15 s
 
@@ -115,16 +116,17 @@ function runs(block: Block, from: number, to: number, englishPage: boolean): Run
 	return out;
 }
 
-export function parts(blocks: Block[], englishPage: boolean): Part[] {
+// switchVoice false: the page's voice reads everything (code and English terms still said the English way), with no pause between voices
+export function parts(blocks: Block[], englishPage: boolean, switchVoice = true): Part[] {
 	const out: Part[] = [];
 	for (const block of blocks) {
 		for (const [from, to] of sentences(block.text)) {
 			const groups: { english: boolean; runs: Run[] }[] = [];
 			for (const run of runs(block, from, to, englishPage)) {
-				const english = run.kind !== 'page';
+				const english = englishPage || (switchVoice && run.kind !== 'page');
 				const last = groups[groups.length - 1];
 				const wordless = !/[\p{L}\p{N}]/u.test(block.text.slice(run.from, run.to));
-				if (last && (last.english === english || (wordless && run.kind === 'page'))) last.runs.push(run);
+				if (last && (last.english === english || (wordless && !english))) last.runs.push(run);
 				else groups.push({ english, runs: [run] });
 			}
 			for (const group of groups) {
