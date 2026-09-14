@@ -59,3 +59,8 @@ jobs:
             dotnet run --no-build -- "$lesson" > "$RUNNER_TEMP/$lesson.txt"
             diff --strip-trailing-cr "$expected" "$RUNNER_TEMP/$lesson.txt"
           done
+      # Lesson 10 builds a Maven, a Gradle and a NuGet project and compares what the lesson quotes
+      - name: Lesson 10 builds
+        run: |
+          bash l10/check.sh "$RUNNER_TEMP/l10"
+          diff -r --strip-trailing-cr l10/expected "$RUNNER_TEMP/l10"

@@ -1,0 +1,9 @@
+Leak.java:3: error: package core does not exist
+import core.Titles;
+           ^
+Leak.java:8: error: cannot find symbol
+        System.out.println(Titles.withoutArticle("the pragmatic programmer"));
+                           ^
+  symbol:   variable Titles
+  location: class Leak
+2 errors

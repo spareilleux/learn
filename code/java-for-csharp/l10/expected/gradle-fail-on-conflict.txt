@@ -1,0 +1,8 @@
+* What went wrong:
+Execution failed for task ':app:run' (registered by plugin 'org.gradle.application').
+> Could not resolve all files for configuration ':app:runtimeClasspath'.
+   > Could not resolve org.apache.commons:commons-lang3:3.14.0.
+     Required by:
+         project ':app' > org.apache.commons:commons-text:1.12.0
+      > Conflict found for module 'org.apache.commons:commons-lang3': between versions 3.20.0 and 3.14.0
+> There is 1 more failure with an identical cause.

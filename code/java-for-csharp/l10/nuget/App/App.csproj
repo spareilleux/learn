@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Microsoft.Extensions.Logging 8.0.0 depends on Microsoft.Extensions.DependencyInjection.Abstractions >= 8.0.0 -->
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
+    <ProjectReference Include="..\Lib\Lib.csproj" />
+  </ItemGroup>
+
+  <!-- dotnet restore -p:Downgrade=true: a direct reference below what Core needs -->
+  <ItemGroup Condition="'$(Downgrade)' == 'true'">
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
+  </ItemGroup>
+
+</Project>

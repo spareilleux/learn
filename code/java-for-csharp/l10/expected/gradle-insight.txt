@@ -1,0 +1,13 @@
+   Selection reasons:
+      - By conflict resolution: between versions 3.20.0 and 3.14.0
+
+org.apache.commons:commons-lang3:3.20.0
+\--- project ':core'
+     \--- project ':lib'
+          \--- runtimeClasspath
+
+org.apache.commons:commons-lang3:3.14.0 -> 3.20.0
+\--- org.apache.commons:commons-text:1.12.0
+     \--- runtimeClasspath
+
+A web-based, searchable dependency report is available by adding the --scan option.

@@ -1,0 +1,15 @@
+
+------------------------------------------------------------
+Project ':app'
+------------------------------------------------------------
+
+runtimeClasspath - Runtime classpath of source set 'main'.
++--- org.apache.commons:commons-text:1.12.0
+|    \--- org.apache.commons:commons-lang3:3.14.0 -> 3.20.0
+\--- project ':lib'
+     \--- project ':core'
+          \--- org.apache.commons:commons-lang3:3.20.0
+
+(*) - Indicates repeated occurrences of a transitive dependency subtree. Gradle expands transitive dependency subtrees only once per project; repeat occurrences only display the root of the subtree, followed by this annotation.
+
+A web-based, searchable dependency report is available by adding the --scan option.
