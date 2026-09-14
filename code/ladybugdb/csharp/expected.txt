@@ -33,9 +33,10 @@ LadybugQueryException: Parameter name not found.
 LadybugQueryException: Binder exception: Cannot find parameter file. This should not happen.
 
 == 5. Nodes, relationships and paths
-Project 0:11: path=Apps/ga-server/GaApi/GaApi.csproj, name=GaApi, language=C#, sdk=Microsoft.NET.Sdk.Web, frameworks=net10.0, in_solution=True
+Project (InternalId): path=Apps/ga-server/GaApi/GaApi.csproj, name=GaApi, language=C#, sdk=Microsoft.NET.Sdk.Web, frameworks=net10.0, in_solution=True
+3 relationships: GaApi -> GA.Business.AI -> GA.Data.MongoDB -> GA.Business.Assets
 3 relationships: GaApi -> GA.Business.ML -> GA.Data.MongoDB -> GA.Business.Assets
-first relationship: REFERENCES 0:11 -> 0:38
+first relationship: REFERENCES, starts at GaApi: True
 
 == 6. Lists and structs
 Microsoft.Extensions.Hosting: 10.0.0, 10.0.5, 9.0.0, 9.0.10, 9.0.4 (12 projects)

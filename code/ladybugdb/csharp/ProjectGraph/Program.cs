@@ -84,16 +84,23 @@ Try(() => connection.Execute("COPY Package FROM $file (HEADER = true)", new Dict
 
 Section("5. Nodes, relationships and paths");
 using (var result = connection.Query("""
-    MATCH path = (app:Project {name: 'GaApi'})-[:REFERENCES* SHORTEST 1..10]->(assets:Project {name: 'GA.Business.Assets'})
+    MATCH path = (app:Project {name: 'GaApi'})-[:REFERENCES* ALL SHORTEST 1..10]->(assets:Project {name: 'GA.Business.Assets'})
     RETURN app, path
     """))
 {
-    var row = result.Rows().Single();
-    var app = (Node)row[0]!;
-    Console.WriteLine($"{app.Label} {app.Id}: {string.Join(", ", app.Properties.Select(p => $"{p.Key}={p.Value}"))}");
-    var path = (RecursiveRel)row[1]!;
-    Console.WriteLine($"{path.Rels.Count} relationships: {string.Join(" -> ", path.Nodes.Select(n => n.Properties["name"]))}");
-    Console.WriteLine($"first relationship: {path.Rels[0].Label} {path.Rels[0].Source} -> {path.Rels[0].Destination}");
+    var rows = result.Rows().ToList();
+    var app = (Node)rows[0][0]!;
+    // The internal ID (table:offset) depends on the load, which differs between runs and machines: print its type only
+    Console.WriteLine($"{app.Label} ({app.Id.GetType().Name}): {string.Join(", ", app.Properties.Select(p => $"{p.Key}={p.Value}"))}");
+    // Several shortest paths, in no particular order: sort them before printing
+    foreach (var path in rows.Select(row => (RecursiveRel)row[1]!)
+                             .Select(path => $"{path.Rels.Count} relationships: {string.Join(" -> ", path.Nodes.Select(n => n.Properties["name"]))}")
+                             .Order())
+    {
+        Console.WriteLine(path);
+    }
+    var first = ((RecursiveRel)rows[0][1]!).Rels[0];
+    Console.WriteLine($"first relationship: {first.Label}, starts at GaApi: {first.Source == app.Id}");
 }
 
 Section("6. Lists and structs");

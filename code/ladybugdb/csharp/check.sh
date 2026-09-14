@@ -21,7 +21,8 @@ query="MATCH (p:Project) RETURN p.name;"
   echo "-- the CLI, read-write"
   echo "$query" | lbug --no_progress_bar --no_stats --mode csv out/net/ga.lbdb
   run open out/net/ga.lbdb
-} > out/net/files.txt 2>&1
+} 2>&1 | grep -v '^Warning: failed to create directory' > out/net/files.txt
+# (the CLI on Linux warns when it cannot create its history directory, ~/.lbdb, which the comparison ignores)
 if diff --strip-trailing-cr csharp/expected-files.txt out/net/files.txt; then
   echo "ok   csharp/files"
 else
