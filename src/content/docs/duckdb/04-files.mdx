@@ -1,0 +1,358 @@
+---
+title: 4. Files
+description: The CSV sniffer and its silent fallbacks, Parquet and its column chunks, one folder per partition, globs over many files, and files over HTTPS.
+sidebar:
+  order: 4
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+So far, DuckDB read one JSON file at a time. This lesson writes and reads the other formats, and many files at once. The queries are in [`sql/04-files.sql`](https://github.com/spareilleux/learn/blob/main/code/duckdb/sql/04-files.sql). They write into `out/`, a folder that [`check.sh`](https://github.com/spareilleux/learn/blob/main/code/duckdb/check.sh) creates and Git ignores; create it by hand before running them yourself.
+
+```sql
+CREATE TABLE runs AS FROM 'data/runs.json';
+CREATE TABLE jobs AS FROM 'data/jobs.json';
+```
+
+## CSV: what the sniffer guesses
+
+CSV has no types, no standard delimiter and no standard date format. To have a hard case, the script writes the runs the way a spreadsheet with French settings saves them: semicolons, day before month.
+
+```sql
+COPY (SELECT databaseId, workflowName, conclusion, createdAt FROM runs ORDER BY createdAt)
+TO 'out/runs-fr.csv' (DELIMITER ';', TIMESTAMPFORMAT '%d/%m/%Y %H:%M');
+```
+
+```text
+databaseId;workflowName;conclusion;createdAt
+34766934801;Deploy to GitHub Pages;success;13/09/2026 15:53
+34767508304;Deploy to GitHub Pages;success;13/09/2026 16:05
+```
+
+When DuckDB reads a CSV file, the [CSV sniffer](https://duckdb.org/docs/current/data/csv/auto_detection) reads a sample and guesses the dialect and the types. `sniff_csv` shows the guess without reading the file:
+
+```sql
+SELECT Delimiter, HasHeader, c.name, c.type
+FROM sniff_csv('out/runs-fr.csv'), unnest(Columns) AS t(c);
+```
+
+```text
+┌───────────┬───────────┬──────────────┬─────────┐
+│ Delimiter │ HasHeader │     name     │  type   │
+│  varchar  │  boolean  │   varchar    │ varchar │
+├───────────┼───────────┼──────────────┼─────────┤
+│ ;         │ true      │ databaseId   │ BIGINT  │
+│ ;         │ true      │ workflowName │ VARCHAR │
+│ ;         │ true      │ conclusion   │ VARCHAR │
+│ ;         │ true      │ createdAt    │ VARCHAR │
+└───────────┴───────────┴──────────────┴─────────┘
+```
+
+The delimiter, the header and the integer column are right. `createdAt` is `VARCHAR`: `13/09/2026` isn't a date format the sniffer tries. **This isn't an error.** The file loads, and every date comparison on that column is now a string comparison: `min(createdAt)` returns `'13/09/2026 15:53'`, which would sort `01/10` before `30/09` as soon as the data spans two months.
+
+`sniff_csv` also returns, in its `Prompt` column, the `read_csv` call that reproduces its guess, a starting point to fix by hand:
+
+```text
+FROM read_csv('out/runs-fr.csv', auto_detect=false, delim=';', quote='', escape='', new_line='\n', skip=0, comment='', header=true, columns={'databaseId': 'BIGINT', 'workflowName': 'VARCHAR', 'conclusion': 'VARCHAR', 'createdAt': 'VARCHAR'});
+```
+
+The fix here is to give [`read_csv`](https://duckdb.org/docs/current/data/csv/overview) the format:
+
+```sql
+SELECT typeof(min(createdAt)) AS type, min(createdAt) AS first_run, max(createdAt) AS last_run
+FROM read_csv('out/runs-fr.csv', timestampformat = '%d/%m/%Y %H:%M');
+```
+
+```text
+┌───────────┬─────────────────────┬─────────────────────┐
+│   type    │      first_run      │      last_run       │
+│  varchar  │      timestamp      │      timestamp      │
+├───────────┼─────────────────────┼─────────────────────┤
+│ TIMESTAMP │ 2026-09-13 15:53:00 │ 2026-09-14 14:01:00 │
+└───────────┴─────────────────────┴─────────────────────┘
+```
+
+A wrong format fails the same silent way: with `timestampformat = '%m/%d/%Y %H:%M'` (month first), the column is `VARCHAR` again, with no message. To turn a wrong guess into an error, state the type as well, with `types = {'createdAt': 'TIMESTAMP'}`:
+
+```text
+Conversion Error: CSV Error on Line: 2
+Original Line: 34766934801;Deploy to GitHub Pages;success;13/09/2026 15:53
+Error when converting column "createdAt". Could not convert string "13/09/2026 15:53" to 'TIMESTAMP'
+```
+
+For a file that comes back every day, the SQL Server habit of a format file applies: write the `read_csv` call with `columns` or `types` once, and don't let the sniffer decide again each time.
+
+## Parquet: types and columns
+
+[Parquet](https://parquet.apache.org/) stores a table by column, compressed, with the schema. The JSON jobs file is 526,328 bytes; as Parquet, it's 37,270 bytes, 14 times smaller:
+
+```sql
+COPY jobs TO 'out/jobs.parquet';
+```
+
+`parquet_metadata` shows what's inside, one row per column chunk:
+
+```sql
+SELECT path_in_schema, type, num_values, compression
+FROM parquet_metadata('out/jobs.parquet')
+ORDER BY column_id;
+```
+
+```text
+┌────────────────────────────────────┬────────────┬────────────┬─────────────┐
+│           path_in_schema           │    type    │ num_values │ compression │
+│              varchar               │  varchar   │   int64    │   varchar   │
+├────────────────────────────────────┼────────────┼────────────┼─────────────┤
+│ id                                 │ INT64      │        315 │ SNAPPY      │
+│ run_id                             │ INT64      │        315 │ SNAPPY      │
+│ name                               │ BYTE_ARRAY │        315 │ SNAPPY      │
+│ status                             │ BYTE_ARRAY │        315 │ SNAPPY      │
+│ conclusion                         │ BYTE_ARRAY │        315 │ SNAPPY      │
+│ created_at                         │ INT64      │        315 │ SNAPPY      │
+│ started_at                         │ INT64      │        315 │ SNAPPY      │
+│ completed_at                       │ INT64      │        315 │ SNAPPY      │
+│ runner_name                        │ BYTE_ARRAY │        315 │ SNAPPY      │
+│ labels, list, element              │ BYTE_ARRAY │        315 │ SNAPPY      │
+│ steps, list, element, number       │ INT64      │       2208 │ SNAPPY      │
+│ steps, list, element, name         │ BYTE_ARRAY │       2208 │ SNAPPY      │
+│ steps, list, element, conclusion   │ BYTE_ARRAY │       2208 │ SNAPPY      │
+│ steps, list, element, started_at   │ INT64      │       2208 │ SNAPPY      │
+│ steps, list, element, completed_at │ INT64      │       2208 │ SNAPPY      │
+└────────────────────────────────────┴────────────┴────────────┴─────────────┘
+```
+
+- Each field of the step struct is a column of its own. A query on step names reads the `steps, list, element, name` chunk and skips the timestamps: that's what "columnar" buys, and lesson 7 measures it.
+- Timestamps are `INT64`: a number of microseconds, with the logical type in the schema. Strings are `BYTE_ARRAY`.
+- 2,208 values for 2,204 steps: the 4 jobs with an empty `steps` list of lesson 3 still take one entry each, to record that the list is empty.
+- The compression is [Snappy](https://github.com/google/snappy) by default; `COPY … (FORMAT parquet, COMPRESSION zstd)` selects another, and brings this file down to 24,243 bytes.
+
+The script first compared `total_compressed_size` too. It passed on Linux and Windows, and failed on the macOS runner, an arm64 machine, where 8 of the 15 column chunks came out a few bytes different: `id` 1,652 bytes instead of 1,651, `name` 1,240 instead of 1,235, the step start times 8,862 instead of 8,864. Same data, same DuckDB version, different bytes. The checked output now keeps only what doesn't depend on the compressor.
+
+## Many files: partitions and globs
+
+`PARTITION_BY` writes one folder per value, named `column=value`, the layout known as [Hive partitioning](https://duckdb.org/docs/current/data/partitioning/partitioned_writes):
+
+```sql
+COPY (SELECT *, labels[1] AS os FROM jobs) TO 'out/jobs-by-os' (FORMAT parquet, PARTITION_BY (os), OVERWRITE);
+```
+
+Sizes on Windows:
+
+```text
+out/jobs-by-os/
+├── os=macos-latest/data_0.parquet      9,651 bytes
+├── os=ubuntu-latest/data_0.parquet    27,631 bytes
+└── os=windows-latest/data_0.parquet   10,409 bytes
+```
+
+Without `OVERWRITE`, a second run of the script fails, unlike `COPY` to a single file, which replaces it without a word:
+
+```text
+IO Error: Directory "out/jobs-by-os" is not empty! Enable OVERWRITE option to overwrite files
+```
+
+A glob reads all the files as one table. The `os` column isn't stored in the files: DuckDB sees the `key=value` folder names and [adds the column back](https://duckdb.org/docs/current/data/partitioning/hive_partitioning). `filename = true` adds the path of each row's file:
+
+```sql
+SELECT replace(filename, '\', '/') AS file, os, count(*) AS jobs
+FROM read_parquet('out/jobs-by-os/*/*.parquet', filename = true)
+GROUP BY ALL
+ORDER BY file;
+```
+
+```text
+┌─────────────────────────────────────────────────┬────────────────┬───────┐
+│                      file                       │       os       │ jobs  │
+│                     varchar                     │    varchar     │ int64 │
+├─────────────────────────────────────────────────┼────────────────┼───────┤
+│ out/jobs-by-os/os=macos-latest/data_0.parquet   │ macos-latest   │    34 │
+│ out/jobs-by-os/os=ubuntu-latest/data_0.parquet  │ ubuntu-latest  │   246 │
+│ out/jobs-by-os/os=windows-latest/data_0.parquet │ windows-latest │    35 │
+└─────────────────────────────────────────────────┴────────────────┴───────┘
+```
+
+The `replace` is there for the CI: file paths use the operating system's separator.
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+```text
+out\jobs-by-os\os=macos-latest\data_0.parquet
+```
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```text
+out/jobs-by-os/os=macos-latest/data_0.parquet
+```
+
+</TabItem>
+<TabItem label="macOS">
+
+```text
+out/jobs-by-os/os=macos-latest/data_0.parquet
+```
+
+</TabItem>
+</Tabs>
+
+The glob pattern itself, `'out/jobs-by-os/*/*.parquet'`, works with forward slashes everywhere, Windows included.
+
+## Files over HTTPS
+
+A URL is a file name like any other. The copy of `runs.json` on GitHub:
+
+```sql
+SELECT count(*) AS runs, max(createdAt) AS last_run
+FROM 'https://raw.githubusercontent.com/spareilleux/learn/main/code/duckdb/data/runs.json';
+```
+
+```text
+┌───────┬─────────────────────┐
+│ runs  │      last_run       │
+│ int64 │      timestamp      │
+├───────┼─────────────────────┤
+│   125 │ 2026-09-14 14:01:09 │
+└───────┴─────────────────────┘
+```
+
+HTTP support is an [extension](https://duckdb.org/docs/current/extensions/overview), [`httpfs`](https://duckdb.org/docs/current/core_extensions/httpfs/overview), not built into the CLI. With the default settings `autoinstall_known_extensions` and `autoload_known_extensions`, the first query that needs it downloads it, and later ones load it. It lands in the user's profile:
+
+```sql
+SELECT extension_name, install_path FROM duckdb_extensions() WHERE extension_name = 'httpfs';
+```
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+```text
+C:\Users\<you>\.duckdb\extensions\v1.5.5\windows_amd64\httpfs.duckdb_extension
+```
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```text
+~/.duckdb/extensions/v1.5.5/linux_amd64/httpfs.duckdb_extension
+```
+
+*To verify*: the path on Linux, deduced from the Windows one.
+
+</TabItem>
+<TabItem label="macOS">
+
+```text
+~/.duckdb/extensions/v1.5.5/osx_arm64/httpfs.duckdb_extension
+```
+
+*To verify*: the path on macOS, deduced from the Windows one.
+
+</TabItem>
+</Tabs>
+
+The CI of this course downloads it on each run, on each operating system, without any configuration. A machine without Internet access can't download it: run `INSTALL httpfs` ahead of time where the network is available. For Parquet over HTTP, DuckDB reads only the parts of the file it needs, with range requests; *to verify* in lesson 7.
+
+## Key takeaways
+
+- The CSV sniffer falls back to `VARCHAR` without a message; check with `sniff_csv` or `DESCRIBE`, and state the types of files you read regularly.
+- Parquet keeps types and stores each column separately, nested fields included; it's the format to keep data in.
+- `PARTITION_BY` writes `key=value` folders, a glob reads them back with the key as a column.
+- File names in results use the OS separator; glob patterns accept `/` everywhere.
+- `https://` paths need `httpfs`, which the CLI installs on first use.
+
+## Exercises
+
+The solutions are in [`sql/04-exercises.sql`](https://github.com/spareilleux/learn/blob/main/code/duckdb/sql/04-exercises.sql), which writes the same files as the lesson so it runs on its own.
+
+1. The spreadsheet format of `out/runs-fr.csv` lost information. Join the file back to `runs` and count the runs whose `createdAt` changed.
+
+<details>
+<summary>Solution</summary>
+
+```sql
+SELECT count(*) AS runs, count(*) FILTER (c.createdAt <> r.createdAt) AS different_timestamps
+FROM read_csv('out/runs-fr.csv', timestampformat = '%d/%m/%Y %H:%M') c
+JOIN runs r USING (databaseId);
+```
+
+```text
+┌───────┬──────────────────────┐
+│ runs  │ different_timestamps │
+│ int64 │        int64         │
+├───────┼──────────────────────┤
+│   125 │                  125 │
+└───────┴──────────────────────┘
+```
+
+All of them: `%H:%M` has no seconds, and none of the 125 runs started at `:00` seconds. The first run is `15:53:00` in the file and `15:53:16` in the JSON. A round trip through a spreadsheet format loses whatever the format can't write, silently again. `JOIN … USING (databaseId)` is the short form of `ON c.databaseId = r.databaseId` when both sides use the same name.
+
+</details>
+
+2. Count the Windows jobs and their failures, from the partitioned folder.
+
+<details>
+<summary>Solution</summary>
+
+```sql
+SELECT os, count(*) AS jobs, count(*) FILTER (conclusion = 'failure') AS failed
+FROM read_parquet('out/jobs-by-os/*/*.parquet')
+WHERE os = 'windows-latest'
+GROUP BY ALL;
+```
+
+```text
+┌────────────────┬───────┬────────┐
+│       os       │ jobs  │ failed │
+│    varchar     │ int64 │ int64  │
+├────────────────┼───────┼────────┤
+│ windows-latest │    35 │      3 │
+└────────────────┴───────┴────────┘
+```
+
+The `os` column exists without `hive_partitioning = true`: DuckDB detected the folder layout. With `hive_partitioning = false`, it's gone:
+
+```text
+Binder Error: Referenced column "os" not found in FROM clause!
+Candidate bindings: "steps", "status", "conclusion", "started_at", "completed_at"
+```
+
+According to the [documentation](https://duckdb.org/docs/current/data/partitioning/hive_partitioning), a filter on a partition column skips the files of the other folders entirely: only `os=windows-latest` is opened. Lesson 7 checks it in the query plan.
+
+</details>
+
+3. `FROM 'data/*.json'` reads both JSON files of the course, which don't have the same fields. What does it return?
+
+<details>
+<summary>Solution</summary>
+
+```sql
+SELECT replace(filename, '\', '/') AS file, count(*) AS rows,
+       count(databaseId) AS with_databaseId, count(run_id) AS with_run_id, count(conclusion) AS with_conclusion
+FROM read_json('data/*.json', filename = true)
+GROUP BY ALL
+ORDER BY file;
+```
+
+```text
+┌────────────────┬───────┬─────────────────┬─────────────┬─────────────────┐
+│      file      │ rows  │ with_databaseId │ with_run_id │ with_conclusion │
+│    varchar     │ int64 │      int64      │    int64    │      int64      │
+├────────────────┼───────┼─────────────────┼─────────────┼─────────────────┤
+│ data/jobs.json │   315 │               0 │         315 │             315 │
+│ data/runs.json │   125 │             125 │           0 │             125 │
+└────────────────┴───────┴─────────────────┴─────────────┴─────────────────┘
+```
+
+No error: 440 rows and 20 columns, the union of both schemas. The fields of runs are `NULL` in the rows of jobs, and the other way around, and the fields both files have, `status` and `conclusion`, are merged into one column. Useful for files that gained a field over time; a trap when a glob catches a file it wasn't meant to. `count(column)` counts the non-`NULL` values, which is how the query tells the two schemas apart.
+
+</details>
+
+## Sources
+
+- [CSV import](https://duckdb.org/docs/current/data/csv/overview) and [CSV auto-detection](https://duckdb.org/docs/current/data/csv/auto_detection)
+- [Parquet files](https://duckdb.org/docs/current/data/parquet/overview) and [Parquet metadata](https://duckdb.org/docs/current/data/parquet/metadata)
+- [Partitioned writes](https://duckdb.org/docs/current/data/partitioning/partitioned_writes) and [Hive partitioning](https://duckdb.org/docs/current/data/partitioning/hive_partitioning)
+- [Reading multiple files](https://duckdb.org/docs/current/data/multiple_files/overview)
+- [Extensions](https://duckdb.org/docs/current/extensions/overview) and [`httpfs`](https://duckdb.org/docs/current/core_extensions/httpfs/overview)
+- [Apache Parquet](https://parquet.apache.org/)

@@ -61,6 +61,11 @@ export default defineConfig({
 									collapsed: true,
 									items: [{ autogenerate: { directory: 'github-actions' } }],
 								},
+								{
+									label: 'DuckDB',
+									collapsed: true,
+									items: [{ autogenerate: { directory: 'duckdb' } }],
+								},
 							],
 						},
 					],

@@ -1,0 +1,474 @@
+---
+title: 1. Premières requêtes
+description: Installer la CLI de DuckDB, interroger un fichier JSON en SQL sans le charger, lire les erreurs de DuckDB, garder les données dans une table et dans un fichier de base de données, et écrire du CSV et du Parquet.
+sidebar:
+  order: 1
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Installer la CLI
+
+[DuckDB](https://duckdb.org/) est une bibliothèque : elle s'exécute dans le processus qui l'utilise, comme SQLite. La [CLI de DuckDB](https://duckdb.org/docs/current/clients/cli/overview) est l'un de ces processus, un exécutable unique sans dépendances. C'est le moyen le plus rapide de commencer, et celui qu'utilise ce cours jusqu'à la leçon 5.
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+```powershell
+winget install DuckDB.cli
+```
+
+Ouvre ensuite un nouveau terminal pour que `duckdb` soit dans le `PATH`. La [CI de ce cours](https://github.com/spareilleux/learn/blob/main/.github/workflows/duckdb-examples.yml) télécharge plutôt `duckdb_cli-windows-amd64.zip` depuis les [releases GitHub](https://github.com/duckdb/duckdb/releases), pour épingler la version : il suffit de décompresser l'exécutable.
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```bash
+curl https://install.duckdb.org | sh
+```
+
+Le script installe le binaire dans `~/.duckdb/cli/<version>/`, fait pointer `~/.duckdb/cli/latest` vers lui, et affiche la ligne à ajouter au profil de ton shell :
+
+```bash
+export PATH="$HOME/.duckdb/cli/latest":$PATH
+```
+
+Si `~/.local/bin` existe, il y crée aussi un lien `duckdb`. Sur un runner GitHub : `Successfully installed DuckDB 1.5.5 to /home/runner/.duckdb/cli/1.5.5/duckdb`. Définis `DUCKDB_VERSION=1.5.5` avant `sh` pour épingler la version.
+
+</TabItem>
+<TabItem label="macOS">
+
+```bash
+brew install duckdb
+```
+
+Ou le même script que sous Linux, celui qu'utilise la CI de ce cours sur `macos-latest` :
+
+```bash
+curl https://install.duckdb.org | sh
+```
+
+</TabItem>
+</Tabs>
+
+```bash
+duckdb --version
+```
+
+```text
+v1.5.5 (Variegata) d8cdaa33fd
+```
+
+## Les données
+
+Clone le dépôt de ce site et va dans le dossier du cours, là où fonctionnent les chemins relatifs de toutes les requêtes de ce cours :
+
+```bash
+git clone https://github.com/spareilleux/learn.git
+cd learn/code/duckdb
+```
+
+`data/runs.json` est un unique tableau JSON de 125 objets, un par exécution GitHub Actions de ce dépôt :
+
+```json
+[{"attempt":1,"conclusion":"success","createdAt":"2026-09-14T14:01:09Z","databaseId":34852867099,"event":"push","headBranch":"main","headSha":"95a3830ebbcfa3f0addbc1eba8335a20cc2c41f2","startedAt":"2026-09-14T14:01:09Z","status":"completed","updatedAt":"2026-09-14T14:03:38Z","workflowName":"Deploy to GitHub Pages"}, …
+```
+
+## Une requête sur un fichier
+
+Lance la CLI avec `duckdb` : elle répond avec sa version et `Enter ".help" for usage hints.`, et ouvre une base de données en mémoire. Ensuite, sans rien créer :
+
+```sql
+DESCRIBE FROM 'data/runs.json';
+```
+
+```text
+┌────────────────────────┐
+│     data/runs.json     │
+│                        │
+│ attempt      bigint    │
+│ conclusion   varchar   │
+│ createdAt    timestamp │
+│ databaseId   bigint    │
+│ event        varchar   │
+│ headBranch   varchar   │
+│ headSha      varchar   │
+│ startedAt    timestamp │
+│ status       varchar   │
+│ updatedAt    timestamp │
+│ workflowName varchar   │
+└────────────────────────┘
+```
+
+Un nom de fichier entre apostrophes est une table. DuckDB a vu l'extension `.json`, a lu le fichier, et a déduit un type pour chaque champ : `bigint` pour les nombres, `timestamp` pour les chaînes ISO 8601, `varchar` pour le reste. Dans SQL Server, ce qui s'en rapproche le plus est [`OPENROWSET(BULK …)`](https://learn.microsoft.com/sql/t-sql/functions/openrowset-bulk-transact-sql) avec `OPENJSON` et une clause `WITH` explicite qui liste les colonnes et leurs types.
+
+`DESCRIBE FROM 'data/runs.json'` est aussi un premier aperçu du [Friendly SQL](https://duckdb.org/docs/current/sql/dialect/friendly_sql) de DuckDB : `FROM` peut venir en premier, et une requête avec seulement `FROM` signifie `SELECT *`.
+
+La première requête de [`sql/01-first-queries.sql`](https://github.com/spareilleux/learn/blob/main/code/duckdb/sql/01-first-queries.sql) : quels workflows s'exécutent le plus, et à quelle fréquence ils échouent.
+
+```sql
+SELECT workflowName, count(*) AS runs, count(*) FILTER (conclusion = 'failure') AS failures
+FROM 'data/runs.json'
+GROUP BY ALL
+ORDER BY runs DESC, workflowName
+LIMIT 5;
+```
+
+```text
+┌────────────────────────┬───────┬──────────┐
+│      workflowName      │ runs  │ failures │
+│        varchar         │ int64 │  int64   │
+├────────────────────────┼───────┼──────────┤
+│ Deploy to GitHub Pages │    65 │        2 │
+│ Rust course examples   │    18 │        3 │
+│ Java course examples   │     7 │        0 │
+│ GHA 03: triggers       │     5 │        2 │
+│ GHA 07: security       │     4 │        0 │
+└────────────────────────┴───────┴──────────┘
+```
+
+Deux extensions au SQL que tu connais :
+
+- [`GROUP BY ALL`](https://duckdb.org/docs/current/sql/query_syntax/groupby) regroupe par toutes les colonnes du `SELECT` qui ne sont pas des agrégats. Fini de recopier la liste des colonnes dans `GROUP BY`.
+- [`FILTER`](https://duckdb.org/docs/current/sql/query_syntax/filter) restreint un seul agrégat. En SQL Server, on écrirait `sum(CASE WHEN conclusion = 'failure' THEN 1 ELSE 0 END)`. `FILTER` fait partie du SQL standard, et PostgreSQL l'a aussi.
+
+`LIMIT`, c'est `TOP` placé à la fin de la requête. Le format de sortie est `duckbox`, celui de la CLI par défaut : les types des colonnes sous leurs noms, et les nombres alignés à droite.
+
+## Lire les erreurs
+
+Une habitude de PostgreSQL, les noms de colonnes en `snake_case` :
+
+```sql
+SELECT workflow_name FROM 'data/runs.json';
+```
+
+```text
+Binder Error: Referenced column "workflow_name" not found in FROM clause!
+Candidate bindings: "workflowName", "conclusion"
+
+LINE 1: SELECT workflow_name FROM 'data/runs.json';
+               ^
+```
+
+Une **Binder Error** signifie que le SQL a été analysé, mais qu'un nom ne se résout pas. DuckDB propose les noms les plus proches et indique la position. Une table qui n'existe pas encore donne une **Catalog Error** :
+
+```sql
+FROM runs;
+```
+
+```text
+Catalog Error: Table with name runs does not exist!
+Did you mean "duckdb_constraints"?
+
+LINE 1: FROM runs;
+             ^
+```
+
+La suggestion est le nom le plus proche parmi les vues système : une supposition, pas un indice que quelque chose ne va pas avec `duckdb_constraints`.
+
+## Premier regard sur les données : `SUMMARIZE`
+
+[`SUMMARIZE`](https://duckdb.org/docs/current/guides/meta/summarize) calcule des statistiques pour chaque colonne. Il renvoie 12 colonnes, trop pour la largeur de cette page ; comme son résultat est une table comme une autre, une requête peut en choisir quelques-unes :
+
+```sql
+SELECT column_name, column_type, min, max, approx_unique, null_percentage
+FROM (SUMMARIZE FROM 'data/runs.json');
+```
+
+```text
+┌──────────────┬─────────────┬──────────────────────────────────────────┬──────────────────────────────────────────┬───────────────┬─────────────────┐
+│ column_name  │ column_type │                   min                    │                   max                    │ approx_unique │ null_percentage │
+│   varchar    │   varchar   │                 varchar                  │                 varchar                  │     int64     │  decimal(9,2)   │
+├──────────────┼─────────────┼──────────────────────────────────────────┼──────────────────────────────────────────┼───────────────┼─────────────────┤
+│ attempt      │ BIGINT      │ 1                                        │ 3                                        │             2 │            0.00 │
+│ conclusion   │ VARCHAR     │ cancelled                                │ success                                  │             4 │            0.00 │
+│ createdAt    │ TIMESTAMP   │ 2026-09-13 15:53:16                      │ 2026-09-14 14:01:09                      │            93 │            0.00 │
+│ databaseId   │ BIGINT      │ 34766934801                              │ 34852867099                              │           131 │            0.00 │
+│ event        │ VARCHAR     │ push                                     │ workflow_dispatch                        │             2 │            0.00 │
+│ headBranch   │ VARCHAR     │ gha-06-invalid                           │ main                                     │             2 │            0.00 │
+│ headSha      │ VARCHAR     │ 04c8770830c5666ca1e9bb8a4711065edfb351b4 │ fd52d46d1d2940e5dee33790e4a2873056f074f3 │            59 │            0.00 │
+│ startedAt    │ TIMESTAMP   │ 2026-09-13 15:53:16                      │ 2026-09-14 14:01:09                      │            94 │            0.00 │
+│ status       │ VARCHAR     │ completed                                │ completed                                │             1 │            0.00 │
+│ updatedAt    │ TIMESTAMP   │ 2026-09-13 15:53:55                      │ 2026-09-14 14:03:38                      │           122 │            0.00 │
+│ workflowName │ VARCHAR     │ Deploy to GitHub Pages                   │ WSL containers examples                  │            17 │            0.00 │
+└──────────────┴─────────────┴──────────────────────────────────────────┴──────────────────────────────────────────┴───────────────┴─────────────────┘
+  11 rows                                                                                                                                  6 columns
+```
+
+Ce que cela dit en quelques secondes :
+
+- 125 lignes et aucun `NULL` nulle part : l'instantané ne contient que des exécutions terminées (`status` n'a qu'une valeur).
+- L'historique couvre moins d'une journée : du 2026-09-13 15:53 au 2026-09-14 14:01.
+- `attempt` monte jusqu'à 3 : au moins une exécution a été relancée deux fois.
+- `headBranch` a deux valeurs : `main`, et la branche d'une expérience du cours GitHub Actions.
+- **`approx_unique` est une estimation.** `databaseId`, l'identifiant de l'exécution, est unique, et pourtant 131 dépasse les 125 lignes. Il repose sur [HyperLogLog](https://duckdb.org/docs/current/sql/functions/aggregates), qui sacrifie l'exactitude pour une mémoire constante. L'exercice 2 trouve les nombres exacts.
+- `min` et `max` sont en `varchar` pour toutes les colonnes, afin de tenir dans une seule colonne de résultat : le `max` de `attempt` est la chaîne `'3'`.
+
+Les horodatages du fichier se terminent par `Z` (UTC). DuckDB les a lus comme `TIMESTAMP`, sans fuseau horaire : les valeurs sont les heures UTC, et rien dans le type ne le dit. La leçon 2 y revient.
+
+## Garder les lignes : une table
+
+Chaque requête ci-dessus a relu et réanalysé le fichier JSON. Pour ne le lire qu'une fois, stocke les lignes dans une table ([`CREATE TABLE … AS`](https://duckdb.org/docs/current/sql/statements/create_table), le `SELECT INTO` de SQL Server) :
+
+```sql
+CREATE TABLE runs AS SELECT * FROM 'data/runs.json';
+
+SELECT event, conclusion, count(*) AS runs
+FROM runs
+GROUP BY ALL
+ORDER BY event, conclusion;
+```
+
+```text
+┌───────────────────┬─────────────────┬───────┐
+│       event       │   conclusion    │ runs  │
+│      varchar      │     varchar     │ int64 │
+├───────────────────┼─────────────────┼───────┤
+│ push              │ cancelled       │     2 │
+│ push              │ failure         │     7 │
+│ push              │ startup_failure │     1 │
+│ push              │ success         │    96 │
+│ workflow_dispatch │ cancelled       │     2 │
+│ workflow_dispatch │ failure         │     9 │
+│ workflow_dispatch │ success         │     8 │
+└───────────────────┴─────────────────┴───────┘
+```
+
+Les exécutions manuelles (`workflow_dispatch`) ont échoué 9 fois sur 19 ; les push, 7 fois sur 106. Cela correspond à la façon dont le cours GitHub Actions a été écrit : les workflows d'exercice, lancés à la main, étaient conçus pour échouer.
+
+La table vit dans la base de données en mémoire, et disparaît quand on quitte la CLI.
+
+## Garder la base de données : un fichier
+
+Le nom du fichier est le premier argument de `duckdb`. Le fichier est créé s'il n'existe pas :
+
+```bash
+mkdir out
+duckdb out/ci.duckdb
+```
+
+```sql
+CREATE TABLE runs AS FROM 'data/runs.json';
+.quit
+```
+
+Relance-la avec le même fichier, et la table est toujours là :
+
+```bash
+duckdb out/ci.duckdb
+```
+
+```sql
+SELECT count(*) FROM runs;
+SELECT database_name, path FROM duckdb_databases() WHERE NOT internal;
+```
+
+```text
+┌──────────────┐
+│ count_star() │
+│    int64     │
+├──────────────┤
+│          125 │
+└──────────────┘
+┌───────────────┬─────────────────────────────────────────────────────────────┐
+│ database_name │                            path                             │
+│    varchar    │                           varchar                           │
+├───────────────┼─────────────────────────────────────────────────────────────┤
+│ ci            │ C:\Users\spare\source\repos\learn\code\duckdb\out\ci.duckdb │
+└───────────────┴─────────────────────────────────────────────────────────────┘
+```
+
+La base de données porte le nom du fichier. L'extension `.duckdb` est une convention ; DuckDB ne l'exige pas.
+
+## Écrire des fichiers : `COPY`
+
+[`COPY … TO`](https://duckdb.org/docs/current/sql/statements/copy) écrit une table ou le résultat d'une requête dans un fichier, et choisit le format d'après l'extension :
+
+```sql
+COPY runs TO 'out/runs.csv';
+COPY runs TO 'out/runs.parquet';
+```
+
+Les tailles, pour les mêmes 125 lignes :
+
+| Fichier | Octets |
+|---|---|
+| `data/runs.json` | 39 705 |
+| `out/runs.csv` | 21 058 |
+| `out/runs.parquet` | 8 553 |
+| `out/ci.duckdb` | 536 576 |
+
+[Parquet](https://duckdb.org/docs/current/data/parquet/overview) est un format de fichier compressé, en colonnes et typé, et celui que la leçon 4 recommande pour les données que tu conserves. Le fichier `.duckdb` est le plus gros. Un fichier de base de données vide fait 12 288 octets d'en-têtes ; les données sont stockées dans des blocs de 262 144 octets (`block_size` dans `PRAGMA database_size`), et celui-ci en a deux : 12 288 + 2 × 262 144 = 536 576. Le format est fait pour des millions de lignes, pas pour 125.
+
+`COPY` ne crée pas les dossiers. Sans le `mkdir out` ci-dessus :
+
+```text
+IO Error: Cannot open file "out/runs.parquet": The system cannot find the path specified.
+```
+
+La seconde moitié de ce message est le texte de l'erreur système de Windows.
+
+## Deux réglages de la CLI
+
+Les commandes à point (dot commands) configurent la CLI elle-même. Ce n'est pas du SQL, et elles ne prennent pas de point-virgule ([liste](https://duckdb.org/docs/current/clients/cli/dot_commands)) :
+
+```sql
+.timer on
+SELECT count(*) FROM 'out/runs.parquet';
+```
+
+```text
+┌──────────────┐
+│ count_star() │
+│    int64     │
+├──────────────┤
+│          125 │
+└──────────────┘
+Run Time (s): real 0.001 user 0.000000 sys 0.000000
+```
+
+Sur 125 lignes, chaque requête prend environ une milliseconde : le chronomètre ne devient intéressant qu'à la leçon 7. `.mode` change le [format de sortie](https://duckdb.org/docs/current/clients/cli/output_formats) ; `.mode line` affiche un champ par ligne, pratique pour les lignes larges :
+
+```sql
+.mode line
+FROM 'data/runs.json' LIMIT 1;
+```
+
+```text
+     attempt = 1
+  conclusion = success
+   createdAt = 2026-09-14 14:01:09
+  databaseId = 34852867099
+       event = push
+  headBranch = main
+     headSha = 95a3830ebbcfa3f0addbc1eba8335a20cc2c41f2
+   startedAt = 2026-09-14 14:01:09
+      status = completed
+   updatedAt = 2026-09-14 14:03:38
+workflowName = Deploy to GitHub Pages
+```
+
+## Scripts et sortie CSV : comment ce cours est testé
+
+La CLI lit aussi du SQL sur l'entrée standard, et `-csv` passe la sortie en CSV. [`check.sh`](https://github.com/spareilleux/learn/blob/main/code/duckdb/check.sh) exécute ainsi chaque script de `sql/` et compare le résultat avec le fichier du même nom dans `sql/expected/` :
+
+```bash
+duckdb -csv < sql/01-first-queries.sql
+```
+
+```text
+workflowName,runs,failures
+Deploy to GitHub Pages,65,2
+Rust course examples,18,3
+Java course examples,7,0
+GHA 03: triggers,5,2
+GHA 07: security,4,0
+event,conclusion,runs
+push,cancelled,2
+push,failure,7
+push,startup_failure,1
+push,success,96
+workflow_dispatch,cancelled,2
+workflow_dispatch,failure,9
+workflow_dispatch,success,8
+```
+
+Sur un runner GitHub, pour chacun des trois systèmes d'exploitation : `ok   01-first-queries`. [`-c`](https://duckdb.org/docs/current/clients/cli/arguments) exécute une seule commande puis quitte, pour les commandes d'une ligne dans un terminal : `duckdb -c "FROM 'data/runs.json' LIMIT 3"`.
+
+## À retenir
+
+- DuckDB est une bibliothèque qui s'exécute dans ton processus ; la CLI est un exécutable unique, et n'a besoin d'aucun serveur.
+- Un nom de fichier entre apostrophes est une table : DuckDB déduit le format de l'extension et les types du contenu.
+- `DESCRIBE` et `SUMMARIZE` sont les deux premières commandes à lancer sur des données inconnues ; `approx_unique` est une estimation.
+- Une table reste en mémoire, sauf si la CLI a été lancée avec un fichier de base de données ; `COPY … TO` écrit du CSV, du JSON ou du Parquet.
+- Les erreurs annoncent leur type (`Binder`, `Catalog`, `IO`) et proposent les noms les plus proches.
+
+## Exercices
+
+Les solutions sont dans [`sql/01-exercises.sql`](https://github.com/spareilleux/learn/blob/main/code/duckdb/sql/01-exercises.sql), vérifiées par la CI comme la leçon.
+
+1. Combien d'exécutions manuelles (`workflow_dispatch`) ont échoué ?
+
+<details>
+<summary>Solution</summary>
+
+```sql
+SELECT count(*) AS failed_manual_runs
+FROM 'data/runs.json'
+WHERE event = 'workflow_dispatch' AND conclusion = 'failure';
+```
+
+```text
+┌────────────────────┐
+│ failed_manual_runs │
+│       int64        │
+├────────────────────┤
+│                  9 │
+└────────────────────┘
+```
+
+Le même nombre que la ligne `workflow_dispatch` / `failure` du tableau ci-dessus.
+
+</details>
+
+2. `SUMMARIZE` estime 17 noms de workflow distincts et 59 commits distincts. Quels sont les nombres exacts ?
+
+<details>
+<summary>Solution</summary>
+
+```sql
+SELECT count(DISTINCT workflowName) AS workflows, count(DISTINCT headSha) AS commits
+FROM 'data/runs.json';
+```
+
+```text
+┌───────────┬─────────┐
+│ workflows │ commits │
+│   int64   │  int64  │
+├───────────┼─────────┤
+│        21 │      65 │
+└───────────┴─────────┘
+```
+
+21 et 65 : l'estimation était trop basse d'environ 10 % dans les deux cas, et trop haute de 5 % sur les identifiants d'exécution. `count(DISTINCT …)` est exact mais doit retenir chaque valeur rencontrée ; `approx_count_distinct(…)` donne le même genre d'estimation que `SUMMARIZE`, en mémoire constante. Sur 125 lignes, prends la version exacte.
+
+</details>
+
+3. La Binder Error ci-dessus proposait `workflowName`. Est-ce que `workflowname`, tout en minuscules, fonctionnerait ? Et comment s'appellerait la colonne dans le résultat ?
+
+<details>
+<summary>Solution</summary>
+
+```sql
+SELECT workflowname, count(*) AS runs
+FROM 'data/runs.json'
+WHERE workflowname LIKE 'GHA 0%'
+GROUP BY ALL
+ORDER BY workflowname
+LIMIT 3;
+```
+
+```text
+┌─────────────────────────┬───────┐
+│      workflowName       │ runs  │
+│         varchar         │ int64 │
+├─────────────────────────┼───────┤
+│ GHA 01: hello           │     1 │
+│ GHA 02: build and test  │     3 │
+│ GHA 02: exercise checks │     1 │
+└─────────────────────────┴───────┘
+```
+
+Oui. [Les identifiants sont insensibles à la casse](https://duckdb.org/docs/current/sql/dialect/keywords_and_identifiers) dans DuckDB, « de manière similaire à PostgreSQL », et ils le restent entre guillemets doubles, contrairement à PostgreSQL, où `"workflowName"` et `workflowname` sont deux noms différents. La comparaison ne porte que sur l'ASCII : pour elle, `é` et `É` sont des lettres différentes. DuckDB conserve la casse du nom tel qu'il a été défini, donc la colonne du résultat s'appelle `workflowName`, et non comme dans la requête. `workflow_name` a échoué parce que le tiret bas en fait un autre nom, pas à cause de la casse.
+
+</details>
+
+## Sources
+
+- [Vue d'ensemble de la CLI de DuckDB](https://duckdb.org/docs/current/clients/cli/overview), [arguments](https://duckdb.org/docs/current/clients/cli/arguments), [commandes à point](https://duckdb.org/docs/current/clients/cli/dot_commands) et [formats de sortie](https://duckdb.org/docs/current/clients/cli/output_formats)
+- [Installation](https://duckdb.org/install/)
+- [Charger du JSON](https://duckdb.org/docs/current/data/json/overview)
+- [`DESCRIBE`](https://duckdb.org/docs/current/guides/meta/describe) et [`SUMMARIZE`](https://duckdb.org/docs/current/guides/meta/summarize)
+- [`COPY`](https://duckdb.org/docs/current/sql/statements/copy)
+- [Friendly SQL](https://duckdb.org/docs/current/sql/dialect/friendly_sql)
+- [Mots-clés et identifiants](https://duckdb.org/docs/current/sql/dialect/keywords_and_identifiers)
