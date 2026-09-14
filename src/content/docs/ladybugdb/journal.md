@@ -16,7 +16,7 @@ sidebar:
 - [x] Data: the .NET projects of GuitarAlchemist/ga at commit `a26a7893`
 - [x] Lesson 5: LadybugDB from C#
 - [x] Lesson 6: LadybugDB from Java
-- [ ] Lesson 7: graph algorithms and full-text search
+- [x] Lesson 7: graph algorithms and full-text search
 - [ ] Lesson 8: persistence, transactions and concurrency
 
 ## 2026-09-14 — The data
@@ -79,6 +79,29 @@ sidebar:
 - `setQueryTimeout(1)` stops the walks of lesson 3 with `Interrupted.`, and `getNextQueryResult()` reads the second statement of a query: both missing from the .NET package.
 - The native library is copied to a new temporary file at each JVM start, and `deleteOnExit` can't delete a loaded DLL on Windows: 13 copies, 190 MB, in `%TEMP%` after the runs of this lesson on my machine, 3 copies on the Windows runner after three runs, none on the Linux and macOS runners.
 - The first CI push of the Java job passed on the three OSes: lesson 5 had already made the output independent of internal IDs and of the path `SHORTEST` chooses.
+
+## 2026-09-14 — Lesson 7: extensions, algorithms and full-text search
+
+- With the 0.20.4 CLI, `INSTALL algo` downloads the build for 0.20.0, and `LOAD algo` fails on the three CI runners: `libnetworkit.so: cannot open shared object file` on Linux, `Library not loaded: @rpath/libnetworkit.dylib` on macOS, with paths of LadybugDB's own build machine in the message, and `The specified module could not be found.` on Windows. [Issue #857](https://github.com/LadybugDB/ladybug/issues/857) is open.
+- `LOAD fts` works with 0.20.4 on the three runners, but on my Windows machine the CLI exits with `0xC0000409`, without printing anything, at the first `CREATE_FTS_INDEX`, even on a table of one row. On Linux (WSL), the same script works with 0.20.4.
+- The 0.19.1 CLI downloads the builds for 0.19.0; `algo` and `fts` load and give the same output on Windows, Linux and macOS. The CI installs it as `lbug19`; `check.sh` prints the result of `LOAD algo` and `LOAD fts` with 0.20.4 at each run, without comparing it.
+- The Windows CLI, 0.19.1 and 0.20.4, imports `libssl-3-x64.dll` and `libcrypto-3-x64.dll`, not in the zip file; with only `C:\Windows\System32` in the `PATH`, it exits with `0xC0000135`. Git for Windows provides both DLLs. Lesson 1 now says so.
+- `project_graph_cypher` isn't in the documentation. It creates a graph of type `CYPHER`, and `page_rank` and `weakly_connected_components` on it fail with `Binder exception: AA`: [`gds.cpp`, line 72](https://github.com/LadybugDB/ladybug/blob/v0.19.1/src/function/gds/gds.cpp#L72), still there in 0.20.4. The engine's test of the function only creates the graph. Minimal reproduction, with 0.19.1 on Windows:
+
+```cypher
+LOAD algo;
+CREATE NODE TABLE P(id INT64 PRIMARY KEY, age INT64);
+CREATE REL TABLE E(FROM P TO P);
+CREATE (:P {id: 1, age: 5}), (:P {id: 2, age: 20}), (:P {id: 3, age: 7});
+MATCH (a:P {id: 1}), (b:P {id: 3}) CREATE (a)-[:E]->(b);
+CALL project_graph_cypher('G1', 'MATCH (n:P) WHERE n.age < 10 RETURN n');
+CALL page_rank('G1') RETURN node.id, rank;
+```
+
+- Louvain on the ga graph: 5 communities of sizes `[27,20,17,14,14]` in one CLI process, `[25,20,18,18,11]` in the next two, with `CALL threads = 1`; three calls in one process give the same sizes. Nodes without any relationship get `louvain_id` -1.
+- PageRank ranks sum to 0.3534 on the ga graph: the 25 projects without an outgoing reference don't pass their rank on. Exercise 1 recomputes two ranks with `(1 - 0.85) / N + 0.85 × Σ rank / out_degree`, to four decimals.
+- `RETURN n + sum(x)`, with `n` from `WITH count(*) AS n`, fails with `Cannot evaluate expression with type AGGREGATE_FUNCTION.`; `RETURN n, n + sum(x)` works, and so does `RETURN 2 * sum(x)`.
+- FTS: the English stemmer matches *queries* for *query* and *Persistance* for *persistant*; the French stemmer doesn't match *Persistence*. Case is folded, accents aren't (`donnees` finds nothing). The default stop words are English whatever the stemmer. After a `CREATE`, the index includes the new node and the other scores change. `DROP_FTS_INDEX` reports `Table 3_titles_fr_terms has been dropped.`, an internal table.
 
 ## 2026-09-14 — Bugs found in 0.20.4
 
@@ -229,3 +252,5 @@ Expected 13:30 for the first two as well: `COPY` and `LOAD FROM` convert the sam
 - Whether these bugs are already fixed on LadybugDB's main branch, after 0.20.4.
 - Whether the major version conflicts of lesson 5's exercise 2 (`MongoDB.Driver` 2 and 3, `Microsoft.ML.Tokenizers` 1 and 2) break ga at run time: I haven't built or run ga.
 - The C# program on `linux-arm64` and `osx-x64`, and the Java program on `linux_arm64`: the CI runners are `linux-x64`, `win-x64` and `osx-arm64`.
+- Whether `CREATE_FTS_INDEX` also crashes the 0.20.4 CLI on the Windows runner: the CI runs lesson 7 with 0.19.1 only.
+- Whether the two isolated projects of `Common`, `GA.Business.DSL.SourceGen` and `GA.Business.Core.Generated`, are used in ga some other way than a `ProjectReference`.
