@@ -89,6 +89,17 @@ export default defineConfig({
 					],
 				},
 				{
+					label: 'Machine Learning',
+					translations: { fr: 'Apprentissage automatique', es: 'Aprendizaje automático' },
+					items: [
+						{
+							label: 'Machine learning, as applied in IX',
+							collapsed: true,
+							items: [{ autogenerate: { directory: 'machine-learning-ix' } }],
+						},
+					],
+				},
+				{
 					label: 'Streeling University',
 					collapsed: true,
 					items: streelingSidebar,
