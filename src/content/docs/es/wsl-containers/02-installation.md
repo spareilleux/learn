@@ -22,21 +22,38 @@ wsl --update --pre-release
 ```
 
 :::caution[La actualización detiene WSL]
-Todas las distribuciones WSL se detienen durante la actualización, incluidas las de Docker Desktop y Podman. Guarda antes lo que se esté ejecutando en tus contenedores.
+Todas las distribuciones WSL se detienen durante la actualización, incluidas las de [Docker Desktop](https://docs.docker.com/desktop/) y [Podman](https://podman.io/). Guarda antes lo que se esté ejecutando en tus contenedores.
 :::
 
 ## Verificar
 
 ```powershell
 wsl --version        # debería mostrar 2.9.3 o posterior
-wslc version         # confirma que la CLI está disponible
+wslc --version       # confirma que la CLI está disponible (wslc version también funciona)
 wslc run --rm hello-world
 ```
 
-La última prueba descarga la imagen `hello-world` si hace falta y muestra un mensaje de bienvenida.
+```text
+WSL version: 2.9.11.0
+Kernel version: 6.18.40.1-1
+...
+wslc 2.9.11.0
+Image 'hello-world' not found, pulling
+...
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+```
 
-:::tip
-Si no se encuentra `wslc` justo después de la actualización, abre una terminal **nueva**: la antigua no tiene el `PATH` actualizado.
+La última prueba descarga la imagen `hello-world` y muestra su mensaje de bienvenida. «Hello from Docker!» es solo el texto incluido en la imagen: Docker Desktop no interviene, el contenedor se ejecuta con `wslc`.
+
+:::caution[`wslc` no se reconoce]
+`wslc.exe` se instala en `C:\Program Files\WSL\`, que está en el `PATH` de la máquina, pero un programa recibe una copia del entorno al arrancar. Una pestaña nueva de un [Windows Terminal](https://learn.microsoft.com/windows/terminal/) iniciado **antes** de la actualización hereda el `PATH` antiguo. Cierra todas las ventanas de Windows Terminal, o recarga el `PATH` en el PowerShell actual:
+
+```powershell
+$env:Path = [Environment]::GetEnvironmentVariable('Path','Machine') + ';' + [Environment]::GetEnvironmentVariable('Path','User')
+```
+
+Lo mismo ocurre con un IDE abierto antes de la actualización: MSBuild falla entonces con `WSLC0001` (ver la [lección 5](../05-wslc-vs-docker/)).
 :::
 
 ## Solución de problemas: la instalación falla (error 1921 / 1603)
@@ -59,12 +76,20 @@ Get-WinEvent -FilterHashtable @{LogName='Application'; ProviderName='MsiInstalle
 
 **Causa** — el instalador MSI necesita detener el servicio `WSLService`, pero hay procesos que lo mantienen ocupado: Docker Desktop, Podman, terminales WSL abiertas…
 
-**Corrección** — en una terminal de **administrador**:
+**Corrección** — la secuencia que me funcionó. Primero, desde una terminal normal:
 
 ```powershell
-Get-Process "Docker Desktop","com.docker.backend" -ErrorAction SilentlyContinue | Stop-Process -Force
+docker desktop stop
 podman machine stop
 wsl --shutdown
+wsl -l -v   # todas las distros deben estar en Stopped
+```
+
+Después, en una terminal de **administrador**:
+
+```powershell
+wsl --shutdown
+Get-Process wsl, wslhost, wslrelay -ErrorAction SilentlyContinue | Stop-Process -Force
 Stop-Service WSLService -Force
 wsl --update --pre-release
 wsl --version
@@ -83,7 +108,13 @@ Para salir de la pre-release, reinstala una versión estable: `wsl --update` (si
 <details>
 <summary>Solución</summary>
 
-Vuelve a ejecutar `wsl --version` y compara la versión. En caso de duda, lee los eventos `MsiInstaller`: el evento **1033** da el estado final (`0` = éxito, `1603` = fallo) y el evento **11708** indica «Installation failed».
+Vuelve a ejecutar `wsl --version` y compara la versión. En caso de duda, lee los eventos `MsiInstaller`: el evento **1033** da el estado final (`0` = éxito, `1603` = fallo), el evento **11707** indica «Installation completed successfully» y el evento **11708**, «Installation failed». Después de mi intento exitoso:
+
+```text
+TimeCreated               Id Message
+2026-09-13 12:25:19 PM  1033 Windows Installer installed the product. Product Name: Windows Subsystem for Linux. Product Version: 2.9.11.0. ...
+2026-09-13 12:25:19 PM 11707 Product: Windows Subsystem for Linux -- Installation completed successfully.
+```
 
 </details>
 
@@ -95,3 +126,9 @@ Vuelve a ejecutar `wsl --version` y compara la versión. En caso de duda, lee lo
 Docker Desktop ejecuta su propia distro WSL, que mantiene activo el servicio `WSLService`. El instalador no puede reemplazar los archivos de un servicio que no puede detener.
 
 </details>
+
+## Fuentes
+
+- [WSL container — Microsoft Learn](https://learn.microsoft.com/windows/wsl/wsl-container)
+- [Notas de la versión de WSL — GitHub](https://github.com/microsoft/WSL/releases)
+- [Registro de eventos — Windows Installer](https://learn.microsoft.com/windows/win32/msi/event-logging)

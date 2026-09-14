@@ -8,7 +8,7 @@ sidebar:
 ## Un conteneur, en une phrase
 
 Un **conteneur** emballe une application avec tout ce dont elle a besoin (bibliothèques, runtime, configuration) pour qu'elle s'exécute de la même façon partout.
-On le lance à partir d'une **image**, un modèle en lecture seule que l'on télécharge depuis un registre (Docker Hub, par exemple) ou que l'on construit soi-même.
+On le lance à partir d'une **image**, un modèle en lecture seule que l'on télécharge depuis un registre ([Docker Hub](https://hub.docker.com/), par exemple) ou que l'on construit soi-même.
 
 | Terme | Analogie | Exemple |
 |---|---|---|
@@ -20,14 +20,14 @@ On le lance à partir d'une **image**, un modèle en lecture seule que l'on tél
 ## Pourquoi il faut Linux
 
 Les conteneurs Linux partagent le **noyau Linux** de la machine hôte. Windows n'en a pas : il faut donc une machine virtuelle Linux quelque part.
-C'est exactement ce que fournit **WSL 2** : une VM légère, gérée par Windows, avec un vrai noyau Linux.
+C'est exactement ce que fournit **[WSL 2](https://learn.microsoft.com/windows/wsl/about)** : une VM légère, gérée par Windows, avec un vrai noyau Linux.
 
 ## Trois façons d'avoir des conteneurs Linux sur Windows
 
 | Approche | Qui gère la VM Linux | Outil |
 |---|---|---|
-| Docker Desktop | Docker, via sa propre distro WSL `docker-desktop` | `docker` |
-| Podman | Podman, via sa distro WSL `podman-machine-default` | `podman` |
+| [Docker Desktop](https://docs.docker.com/desktop/) | Docker, via sa propre distro WSL `docker-desktop` | `docker` |
+| [Podman](https://podman.io/) | Podman, via sa distro WSL `podman-machine-default` | `podman` |
 | **WSL containers** | **WSL lui-même**, sans produit tiers | `wslc` |
 
 La nouveauté : avec WSL containers, **le moteur de conteneurs fait partie de WSL**. Il n'y a rien d'autre à installer, et `wslc.exe` est livré avec WSL.
@@ -35,7 +35,7 @@ La nouveauté : avec WSL containers, **le moteur de conteneurs fait partie de WS
 ## Les deux composants
 
 1. **La CLI `wslc.exe`** — pour construire, lancer et inspecter des conteneurs depuis un terminal. Elle reprend les habitudes de la CLI Docker.
-2. **L'API WSL container** — un paquet NuGet (`Microsoft.WSL.Containers`) qui permet à une **application Windows** d'utiliser des conteneurs Linux dans sa propre logique (C#, et C++/WinRT en préversion).
+2. **L'API WSL container** — un paquet NuGet ([`Microsoft.WSL.Containers`](https://www.nuget.org/packages/Microsoft.WSL.Containers)) qui permet à une **application Windows** d'utiliser des conteneurs Linux dans sa propre logique (C#, et C++/WinRT en préversion).
 
 ## À retenir
 
@@ -54,7 +54,14 @@ La nouveauté : avec WSL containers, **le moteur de conteneurs fait partie de WS
 wsl -l -v
 ```
 
-Sur ma machine : `docker-desktop` (Docker Desktop) et `podman-machine-default` (Podman). Ce sont des distros « techniques » gérées par ces outils, pas des distros à utiliser directement.
+```text
+  NAME                      STATE           VERSION
+* podman-machine-default    Stopped         2
+  Ubuntu                    Stopped         2
+  docker-desktop            Stopped         2
+```
+
+Sur ma machine : `docker-desktop` (Docker Desktop) et `podman-machine-default` (Podman). Ce sont des distros « techniques » gérées par ces outils, pas des distros à utiliser directement ; `Ubuntu` est une distro ordinaire. `wslc` n'en ajoute aucune : ses sessions n'apparaissent pas dans `wsl -l -v`.
 
 </details>
 
@@ -66,3 +73,8 @@ Sur ma machine : `docker-desktop` (Docker Desktop) et `podman-machine-default` (
 Une image Linux contient des binaires qui font des appels système **Linux**. Un conteneur ne virtualise pas le noyau : il partage celui de l'hôte. Il faut donc un noyau Linux, fourni ici par la VM de WSL 2.
 
 </details>
+
+## Sources
+
+- [Qu'est-ce que WSL ? — Microsoft Learn](https://learn.microsoft.com/windows/wsl/about)
+- [WSL container — Microsoft Learn](https://learn.microsoft.com/windows/wsl/wsl-container)

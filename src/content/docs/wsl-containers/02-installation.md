@@ -22,21 +22,38 @@ wsl --update --pre-release
 ```
 
 :::caution[The update stops WSL]
-All WSL distributions stop during the update — including those of Docker Desktop and Podman. Save whatever is running in your containers first.
+All WSL distributions stop during the update — including those of [Docker Desktop](https://docs.docker.com/desktop/) and [Podman](https://podman.io/). Save whatever is running in your containers first.
 :::
 
 ## Verifying
 
 ```powershell
 wsl --version        # should show 2.9.3 or later
-wslc version         # confirms the CLI is available
+wslc --version       # confirms the CLI is available (wslc version works too)
 wslc run --rm hello-world
 ```
 
-The last test downloads the `hello-world` image if needed and prints a welcome message.
+```text
+WSL version: 2.9.11.0
+Kernel version: 6.18.40.1-1
+...
+wslc 2.9.11.0
+Image 'hello-world' not found, pulling
+...
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+```
 
-:::tip
-If `wslc` can't be found right after the update, open a **new** terminal: the old one doesn't have the updated `PATH`.
+The last test downloads the `hello-world` image and prints its welcome message. "Hello from Docker!" is just the text baked into the image: Docker Desktop plays no part, the container runs under `wslc`.
+
+:::caution[`wslc` is not recognized]
+`wslc.exe` is installed in `C:\Program Files\WSL\`, which is on the machine `PATH`, but a program receives a copy of the environment when it starts. A new tab of a [Windows Terminal](https://learn.microsoft.com/windows/terminal/) started **before** the update inherits the old `PATH`. Close every Windows Terminal window, or reload the `PATH` in the current PowerShell:
+
+```powershell
+$env:Path = [Environment]::GetEnvironmentVariable('Path','Machine') + ';' + [Environment]::GetEnvironmentVariable('Path','User')
+```
+
+The same applies to an IDE opened before the update: MSBuild then fails with `WSLC0001` (see [lesson 5](../05-wslc-vs-docker/)).
 :::
 
 ## Troubleshooting: the installation fails (error 1921 / 1603)
@@ -59,12 +76,20 @@ Get-WinEvent -FilterHashtable @{LogName='Application'; ProviderName='MsiInstalle
 
 **Cause** — the MSI installer needs to stop the `WSLService` service, but processes keep it busy: Docker Desktop, Podman, open WSL terminals…
 
-**Fix** — in an **administrator** terminal:
+**Fix** — the sequence that worked for me. First, from a normal terminal:
 
 ```powershell
-Get-Process "Docker Desktop","com.docker.backend" -ErrorAction SilentlyContinue | Stop-Process -Force
+docker desktop stop
 podman machine stop
 wsl --shutdown
+wsl -l -v   # every distro must be Stopped
+```
+
+Then, in an **administrator** terminal:
+
+```powershell
+wsl --shutdown
+Get-Process wsl, wslhost, wslrelay -ErrorAction SilentlyContinue | Stop-Process -Force
 Stop-Service WSLService -Force
 wsl --update --pre-release
 wsl --version
@@ -83,7 +108,13 @@ To leave the pre-release, reinstall a stable version: `wsl --update` (without `-
 <details>
 <summary>Solution</summary>
 
-Run `wsl --version` again and compare the version. If in doubt, read the `MsiInstaller` events: event **1033** gives the final status (`0` = success, `1603` = failure) and event **11708** reports "Installation failed".
+Run `wsl --version` again and compare the version. If in doubt, read the `MsiInstaller` events: event **1033** gives the final status (`0` = success, `1603` = failure), event **11707** reports "Installation completed successfully" and event **11708** "Installation failed". After my successful attempt:
+
+```text
+TimeCreated               Id Message
+2026-09-13 12:25:19 PM  1033 Windows Installer installed the product. Product Name: Windows Subsystem for Linux. Product Version: 2.9.11.0. ...
+2026-09-13 12:25:19 PM 11707 Product: Windows Subsystem for Linux -- Installation completed successfully.
+```
 
 </details>
 
@@ -95,3 +126,9 @@ Run `wsl --version` again and compare the version. If in doubt, read the `MsiIns
 Docker Desktop runs its own WSL distro, which keeps the `WSLService` service active. The installer can't replace the files of a service it can't stop.
 
 </details>
+
+## Sources
+
+- [WSL container — Microsoft Learn](https://learn.microsoft.com/windows/wsl/wsl-container)
+- [WSL release notes — GitHub](https://github.com/microsoft/WSL/releases)
+- [Event logging — Windows Installer](https://learn.microsoft.com/windows/win32/msi/event-logging)
