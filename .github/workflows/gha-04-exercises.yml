@@ -1,0 +1,36 @@
+# GitHub Actions course, lesson 4: checks behind the exercise solutions (manual runs only)
+name: "GHA 04: exercise checks"
+
+on:
+  workflow_dispatch:
+
+jobs:
+  produce:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.value }}
+      never: ${{ steps.never.outputs.value }}
+    steps:
+      - id: version
+        run: echo "value=1.0.${{ github.run_number }}" >> "$GITHUB_OUTPUT"
+      - name: GITHUB_ENV in the same step
+        run: |
+          echo "BUILD_LABEL=build-1" >> "$GITHUB_ENV"
+          echo "now: $BUILD_LABEL"
+      - name: Next step
+        run: |
+          echo "next: $BUILD_LABEL"
+      - name: Fail
+        run: exit 1
+      - id: never
+        run: echo "value=set" >> "$GITHUB_OUTPUT"
+
+  consume:
+    needs: produce
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "produce result: ${{ needs.produce.result }}"
+          echo "version: '${{ needs.produce.outputs.version }}'"
+          echo "never:   '${{ needs.produce.outputs.never }}'"
