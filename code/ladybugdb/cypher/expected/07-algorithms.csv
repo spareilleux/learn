@@ -1,0 +1,157 @@
+result
+Extension: algo has been loaded.
+result
+Extension: fts has been loaded.
+result
+Table Project has been created.
+result
+Table REFERENCES has been created.
+result,skipped_duplicate_pk_count,skipped_duplicate_pks
+111 tuples have been copied to the Project table.,0,[]
+result
+265 tuples have been copied to the REFERENCES table.
+1 warnings encountered during copy. Use 'CALL show_warnings() RETURN *' to view the actual warnings. Query ID: 5
+
+name,type
+Deps,NATIVE
+projects,components
+1,111
+projects,components
+92,1
+1,19
+path,in_solution
+Apps/ScenesService/ScenesService.csproj,False
+Apps/demerzel-bridge/DemerzelBridge/DemerzelBridge.csproj,False
+Apps/ga-server/GaApi/CUDA/VectorOperations.csproj,True
+ChordSystemTest/ChordSystemTest.csproj,True
+Common/GA.Business.Core.Generated/GA.Business.Core.Generated.fsproj,True
+Common/GA.Business.DSL.SourceGen/GA.Business.DSL.SourceGen.csproj,True
+Demos/Advanced/BSPDemo/BSPDemo.csproj,True
+Experiments/MyFirstMCP/MyFirstMCP.csproj,True
+Experiments/React/ReactApp1.Server/ReactApp1.Server.csproj,True
+GA.Business.Querying/GA.Business.Querying.csproj,False
+GuitarChordProgressionMCTS/GuitarChordProgressionMCTS.csproj,True
+Tests/Common/GA.Business.Core.Graphiti.Tests/GA.Business.Core.Graphiti.Tests.csproj,False
+Tests/FloorManager.Tests.Playwright/FloorManager.Tests.Playwright.csproj,False
+Tests/GuitarAlchemistChatbot.Tests.Playwright/GuitarAlchemistChatbot.Tests.Playwright.csproj,False
+Tools/EmbeddingGenerator/EmbeddingGenerator.csproj,True
+Tools/LocalEmbedding/LocalEmbedding.csproj,True
+Tools/MongoImporter/MongoImporter.csproj,True
+Tools/MongoVerify/MongoVerify.csproj,True
+Tools/QualityLens/QualityLens.csproj,True
+node.name,rank,referenced_by
+GA.Domain.Core,0.047700,57
+GA.Core,0.044100,32
+GA.Business.Config,0.030600,16
+GA.Domain.Services,0.024300,48
+GA.Business.DSL,0.011800,14
+GA.Business.ML,0.010900,21
+k_degree,projects
+6,15
+5,11
+4,12
+3,14
+2,15
+1,25
+0,19
+node.name
+GA.Business.AI
+GA.Business.Config
+GA.Business.Core.Orchestration
+GA.Business.Core.Tests
+GA.Business.DSL
+GA.Business.ML
+GA.Core
+GA.Data.MongoDB
+GA.Domain.Core
+GA.Domain.Services
+GaApi
+GaCLI
+GaChatbot
+GaChatbotCli
+GaMcpServer
+groups,without_community
+6,19
+
+Error: Binder exception: AA
+
+node.name,rank
+GA.Domain.Core,0.047700
+GA.Core,0.044500
+GA.Business.Config,0.031000
+name,type
+Deps,NATIVE
+NoTests,CYPHER
+NoTestsFiltered,NATIVE
+
+
+result
+Table Page has been created.
+result,skipped_duplicate_pk_count,skipped_duplicate_pks
+319 tuples have been copied to the Page table.,0,[]
+result
+Table Commit has been created.
+result,skipped_duplicate_pk_count,skipped_duplicate_pks
+74 tuples have been copied to the Commit table.,0,[]
+result
+Index titles has been created.
+result
+Index titles_exact has been created.
+result
+Index titles_fr has been created.
+result
+Index subjects has been created.
+table_name,index_name,index_type,index_definition
+Page,titles,FTS,"CALL CREATE_FTS_INDEX('Page', 'titles', ['title'], stemmer := 'english', stopWords := 'default');"
+Page,titles_exact,FTS,"CALL CREATE_FTS_INDEX('Page', 'titles_exact', ['title'], stemmer := 'none', stopWords := 'default');"
+Page,titles_fr,FTS,"CALL CREATE_FTS_INDEX('Page', 'titles_fr', ['title'], stemmer := 'french', stopWords := 'default');"
+Commit,subjects,FTS,"CALL CREATE_FTS_INDEX('Commit', 'subjects', ['subject'], stemmer := 'english', stopWords := 'default');"
+Project,_PK,HASH,""
+Page,_PK,HASH,""
+Commit,_PK,HASH,""
+node.url,node.title,score
+/duckdb/01-first-queries/,1. First queries,3.244500
+pages
+0
+pages
+1
+node.url,node.title
+/duckdb/08-persistence/,"8. Persistence, transactions and concurrency"
+/fr/duckdb/08-persistence/,"8. Persistance, transactions et concurrence"
+node.url,node.title
+/fr/duckdb/08-persistence/,"8. Persistance, transactions et concurrence"
+pages
+2
+pages
+0
+pages
+0
+any_word
+46
+sha,node.subject,score
+742c967,DuckDB course: SQL and expected output for lessons 1-4 and their exercises,1.340800
+86e34d9,"DuckDB course: lesson 7 exercises, lesson 8 persistence script and Java transactions",1.288500
+75a1258,Rust lesson 13: make the retry exercise immune to slow CI runners,1.134100
+
+sha,score
+0000000,1.567200
+742c967,1.280200
+86e34d9,1.232200
+75a1258,1.082000
+result
+Table File has been created.
+result
+Table CHANGED has been created.
+result,skipped_duplicate_pk_count,skipped_duplicate_pks
+710 tuples have been copied to the File table.,0,[]
+result
+1019 tuples have been copied to the CHANGED table.
+f.path,commits
+code/duckdb/check.sh,2
+.github/workflows/gha-02-exercises.yml,1
+.github/workflows/gha-04-exercises.yml,1
+.github/workflows/gha-05-exercises.yml,1
+.github/workflows/gha-09-exercises.yml,1
+result
+Table 3_titles_fr_terms has been dropped.
+Error: Binder exception: Table Page doesn't have an index with name titles_fr.

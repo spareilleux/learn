@@ -7,10 +7,27 @@ lbug --version
 mkdir -p out
 # Extensions are downloaded once per machine; the scripts only LOAD them
 echo "INSTALL json;" | lbug --no_progress_bar --no_stats --mode csv
+# The algo and fts extensions load with the 0.19.1 CLI only, installed as lbug19: the scripts that say so in their header use it
+if command -v lbug19 > /dev/null; then
+  lbug19 --version
+  printf 'INSTALL algo;\nINSTALL fts;\n' | lbug19 --no_progress_bar --no_stats --mode csv
+  # Not compared: shows whether the extensions published for the current CLI load yet
+  echo "--- algo and fts with $(lbug --version), for information"
+  printf 'INSTALL algo;\nLOAD algo;\nINSTALL fts;\nLOAD fts;\n' | lbug --no_progress_bar --no_stats --mode csv 2>&1 || true
+  echo "---"
+fi
 status=0
 for script in cypher/*.cypher; do
   name=$(basename "$script" .cypher)
-  if lbug --no_progress_bar --no_stats --mode csv < "$script" | diff --strip-trailing-cr "cypher/expected/$name.csv" -; then
+  cli=lbug
+  if head -3 "$script" | grep -q 'lbug19'; then
+    cli=lbug19
+    if ! command -v lbug19 > /dev/null; then
+      echo "skip $name: lbug19 not found"
+      continue
+    fi
+  fi
+  if $cli --no_progress_bar --no_stats --mode csv < "$script" | diff --strip-trailing-cr "cypher/expected/$name.csv" -; then
     echo "ok   $name"
   else
     echo "FAIL $name"

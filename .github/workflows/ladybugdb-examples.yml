@@ -1,4 +1,5 @@
-# LadybugDB course: run the Cypher of every lesson with the LadybugDB CLI on three OSes and compare the output,
+# LadybugDB course: run the Cypher of every lesson with the LadybugDB CLI on three OSes and compare the output
+# (lesson 7 with the 0.19.1 CLI, whose algo and fts extensions load),
 # the C# program of lesson 5 with the NuGet package, the Java program of lesson 6 with the Maven package,
 # and the SQL cross-checks with the DuckDB CLI
 name: LadybugDB course examples
@@ -16,6 +17,7 @@ permissions:
 
 env:
   LBUG_VERSION: 0.20.4
+  LBUG19_VERSION: 0.19.1
   DUCKDB_VERSION: 1.5.5
 
 jobs:
@@ -52,6 +54,18 @@ jobs:
           esac
           ls -R "$RUNNER_TEMP/lbug"
           echo "$RUNNER_TEMP/lbug" >> "$GITHUB_PATH"
+      - name: Install the LadybugDB 0.19.1 CLI as lbug19, for the algo and fts extensions of lesson 7
+        env:
+          ASSET: ${{ matrix.asset }}
+        run: |
+          curl -fsSL -o "$RUNNER_TEMP/19-$ASSET" "https://github.com/LadybugDB/ladybug/releases/download/v$LBUG19_VERSION/$ASSET"
+          mkdir -p "$RUNNER_TEMP/lbug19"
+          case "$ASSET" in
+            *.zip) unzip -q "$RUNNER_TEMP/19-$ASSET" -d "$RUNNER_TEMP/lbug19" && mv "$RUNNER_TEMP/lbug19/lbug.exe" "$RUNNER_TEMP/lbug19/lbug19.exe" ;;
+            *) tar -xzf "$RUNNER_TEMP/19-$ASSET" -C "$RUNNER_TEMP/lbug19" && mv "$RUNNER_TEMP/lbug19/lbug" "$RUNNER_TEMP/lbug19/lbug19" ;;
+          esac
+          ls -R "$RUNNER_TEMP/lbug19"
+          echo "$RUNNER_TEMP/lbug19" >> "$GITHUB_PATH"
       - name: Install the DuckDB CLI, for the SQL cross-checks
         env:
           ASSET: ${{ matrix.duckdb }}

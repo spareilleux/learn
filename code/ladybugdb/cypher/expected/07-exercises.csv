@@ -1,0 +1,54 @@
+result
+Extension: algo has been loaded.
+result
+Extension: fts has been loaded.
+result
+Table Project has been created.
+result
+Table REFERENCES has been created.
+result,skipped_duplicate_pk_count,skipped_duplicate_pks
+111 tuples have been copied to the Project table.,0,[]
+result
+265 tuples have been copied to the REFERENCES table.
+1 warnings encountered during copy. Use 'CALL show_warnings() RETURN *' to view the actual warnings. Query ID: 5
+
+result
+Property rank added to table Project.
+ranked
+111
+a.name,rank,out_degree
+GA.Domain.Core,0.047700,2
+GA.Domain.Services,0.024300,5
+GA.Business.DSL,0.011800,3
+b.name,referenced_by,rank,recomputed
+GA.Core,32,0.044100,0.044100
+GA.Domain.Services,48,0.024300,0.024300
+total,lowest
+0.353400,0.001351
+result
+Table Page has been created.
+result
+Table LINKS_TO has been created.
+result,skipped_duplicate_pk_count,skipped_duplicate_pks
+319 tuples have been copied to the Page table.,0,[]
+result
+648 tuples have been copied to the LINKS_TO table.
+64 warnings encountered during copy. Use 'CALL show_warnings() RETURN *' to view the actual warnings. Query ID: 15
+
+node.url,rank,linked_from
+/streeling/journal/,0.170300,32
+/github-actions/05-caches-and-artifacts/,0.024200,6
+/github-actions/01-first-workflow/,0.020000,6
+/wsl-containers/journal/,0.019400,13
+/streeling/music/mus-001-what-is-a-chord/,0.018600,8
+/wsl-containers/02-installation/,0.018000,2
+a.url,linked_from
+/wsl-containers/,1
+/wsl-containers/journal/,13
+result
+Index titles has been created.
+node.url,node.title,linked_from
+/github-actions/02-build-and-test/,2. Build and test .NET and Java,3
+/java-for-csharp/,Java for C# developers — Mission,2
+/duckdb/06-java/,6. DuckDB from Java,1
+/rust-for-csharp-java/,Rust for C#/Java developers — Mission,1
