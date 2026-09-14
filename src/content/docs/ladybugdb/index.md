@@ -1,13 +1,13 @@
 ---
 title: LadybugDB — Mission
-description: Learn LadybugDB, the embedded graph database that continues Kuzu, by querying the links between this site's pages, its Git history and its CI runs with Cypher — from the command line, then from C# and Java.
+description: Learn LadybugDB, the embedded graph database that continues Kuzu, by querying the links between this site's pages, its Git history, its CI runs and the projects of a .NET solution with Cypher — from the command line, then from C# and Java.
 sidebar:
   label: Mission
   order: 0
 ---
 
 :::note[How this course is tested]
-Every query in this course is in [`code/ladybugdb/cypher`](https://github.com/spareilleux/learn/tree/main/code/ladybugdb/cypher), next to its expected output. [`.github/workflows/ladybugdb-examples.yml`](https://github.com/spareilleux/learn/blob/main/.github/workflows/ladybugdb-examples.yml) runs them all with the LadybugDB CLI on Linux, Windows and macOS and compares the results. The outputs in the lessons were captured with LadybugDB 0.20.4 in September 2026.
+Every query in this course is in [`code/ladybugdb/cypher`](https://github.com/spareilleux/learn/tree/main/code/ladybugdb/cypher), next to its expected output. [`.github/workflows/ladybugdb-examples.yml`](https://github.com/spareilleux/learn/blob/main/.github/workflows/ladybugdb-examples.yml) runs them all with the LadybugDB CLI on Linux, Windows and macOS and compares the results, and does the same with the C# program of lesson 5. The outputs in the lessons were captured with LadybugDB 0.20.4 in September 2026, and with the `LadybugDB` NuGet package 0.19.1 for C#.
 :::
 
 ## Why I'm learning this
@@ -46,6 +46,8 @@ LadybugDB was [formerly known as Kuzu](https://github.com/LadybugDB/ladybug#read
 
 Lesson 4 adds the 125 CI runs of [`code/duckdb/data/runs.json`](https://github.com/spareilleux/learn/blob/main/code/duckdb/data/runs.json), the snapshot the DuckDB course queries.
 
+Lessons 5 and 6 query another repository: the .NET projects of [GuitarAlchemist/ga](https://github.com/GuitarAlchemist/ga) at commit [`a26a7893`](https://github.com/GuitarAlchemist/ga/commit/a26a7893), extracted by [`code/ladybugdb/data/ga/extract.py`](https://github.com/spareilleux/learn/blob/main/code/ladybugdb/data/ga/extract.py): 111 projects, 266 project references and 478 package references.
+
 ## By the end of this course, I will be able to
 
 - model data as node tables and relationship tables, and query it with Cypher patterns;
@@ -62,7 +64,7 @@ Lesson 4 adds the 125 CI runs of [`code/duckdb/data/runs.json`](https://github.c
 | 2 | [Loading files: `LOAD FROM`, `COPY`, warnings](02-loading/) | `OPENROWSET`, `BULK INSERT` |
 | 3 | [Paths: variable length and shortest paths](03-paths/) | recursive CTEs |
 | 4 | [Git history and CI runs as a graph](04-git-history/) | self-joins, junction tables |
-| 5 | LadybugDB from C# (coming next) | ADO.NET |
+| 5 | [LadybugDB from C#](05-csharp/) | ADO.NET |
 | 6 | LadybugDB from Java (coming next) | JDBC |
 | 7 | Graph algorithms and full-text search (coming next) | |
 | 8 | Persistence, transactions and concurrency (coming next) | isolation, locks |

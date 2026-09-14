@@ -1,6 +1,6 @@
 ---
 title: Journal
-description: Dated progress notes — data, CI runs, bugs found in LadybugDB 0.20.4 and items to verify.
+description: Dated progress notes — data, CI runs, bugs found in LadybugDB 0.20.4 and in the 0.19.1 NuGet package, and items to verify.
 sidebar:
   order: 99
 ---
@@ -13,7 +13,8 @@ sidebar:
 - [x] Lesson 2: loading files
 - [x] Lesson 3: paths
 - [x] Lesson 4: Git history and CI runs as a graph
-- [ ] Lesson 5: LadybugDB from C#
+- [x] Data: the .NET projects of GuitarAlchemist/ga at commit `a26a7893`
+- [x] Lesson 5: LadybugDB from C#
 - [ ] Lesson 6: LadybugDB from Java
 - [ ] Lesson 7: graph algorithms and full-text search
 - [ ] Lesson 8: persistence, transactions and concurrency
@@ -55,9 +56,20 @@ sidebar:
 - The upper bound of a variable-length pattern is limited to 30 ([`client_config.h`, line 32](https://github.com/LadybugDB/ladybug/blob/v0.20.4/src/include/main/client_config.h#L32)) until `CALL var_length_extend_max_depth = …`; a pattern that needs more returns nothing, without an error.
 - The 4-link path counts of lesson 3 were checked twice outside LadybugDB: a Python script over `links.csv` (walks 1, 5, 12, 29; trails 26; acyclic 1, 5, 9, 10), and a recursive CTE in DuckDB (walks 1, 5, 12, 29), which the CI runs.
 
+## 2026-09-14 — Lesson 5: the ga data and the C# package
+
+- [`data/ga/extract.py`](https://github.com/spareilleux/learn/blob/main/code/ladybugdb/data/ga/extract.py) needs only the project files: a clone with `--filter=blob:none` and a sparse checkout of `*.csproj`, `*.fsproj` and `*.slnx` downloads the project files of ga without the rest of its content. It skips the copies under `.claude` folders.
+- 111 projects, 266 project references, 478 package references, 136 packages. One reference goes to `reactapp1.client.esproj`, a JavaScript project the extraction doesn't keep: the lesson loads the references with `IGNORE_ERRORS`.
+- The `version` column is what each project file says. ga's `Directory.Build.props` overrides 14 packages with `PackageReference Update`, and the extraction doesn't apply them; the lesson's queries avoid those packages.
+- Two projects are named `GaApi.Tests`, in `Tests/Apps/GaApi.Tests` and `Tests/GaApi.Tests`; the second isn't in `AllProjects.slnx`. 38 projects in all aren't in it.
+- NuGet: `LadybugDB` has three versions, `0.17.0-alpha.1`, `0.18.2` and `0.19.1`; 0.19.1 embeds the 0.19.1 engine, storage version 43. The binding isn't ADO.NET and has no page on docs.ladybugdb.com: I read its source at commit [`0f58f1a`](https://github.com/LadybugDB/ladybug-dotnet/tree/0f58f1a).
+- First CI push: the C# job failed on the three OSes. The internal ID of `GaApi` was `0:11` on Windows and `0:47` on Linux and macOS, from the same CSV; `SHORTEST` chose a path through `GA.Business.ML` on my machine and through `GA.Business.AI` on the runners, among two of the same length; and the CLI on the Linux runner printed `Warning: failed to create directory: /home/runner/.lbdb/` when opening a file read-only. The program now compares IDs instead of printing them and lists the `ALL SHORTEST` paths sorted; `check.sh` filters the warning.
+- The 0.20.4 CLI, opening a 0.19.1 database file read-write, rewrites it to storage version 47 without a message; the 0.19.1 package then fails with `Failed to open Ladybug database at '…'`, without the reason. `--read_only` leaves the file readable by both.
+- The binding doesn't expose `lbug_query_result_has_next_query_result`, `lbug_connection_interrupt` or `lbug_connection_set_query_timeout` of the C API: a `Query` with several statements returns the first result only, and a long query can't be stopped from C#.
+
 ## 2026-09-14 — Bugs found in 0.20.4
 
-Five silent bugs: no error, a wrong result. None had an issue on [LadybugDB's tracker](https://github.com/LadybugDB/ladybug/issues) when I searched on 2026-09-14; I haven't reported them. Each reproduction below runs in an empty in-memory database (`lbug -m csv < repro.cypher`) and was run on Windows only, unless noted.
+Six silent bugs: no error, a wrong result. None had an issue on [LadybugDB's tracker](https://github.com/LadybugDB/ladybug/issues) when I searched on 2026-09-14; I haven't reported them. Each reproduction below runs in an empty in-memory database (`lbug -m csv < repro.cypher`) and was run on Windows only, unless noted.
 
 ### 1. `COPY` from a JSON subquery with `MATCH` connects the wrong nodes
 
@@ -104,6 +116,8 @@ y,5,1
 ```
 
 The same aggregates, in the other order, give the right totals.
+
+Lesson 5 found a more general form, in the 0.19.1 engine of the NuGet package too: with a grouping key, an aggregate after a `DISTINCT` aggregate in the same projection is wrong. `RETURN k.name, collect(DISTINCT u.version) AS versions, count(*) AS projects` gives 0 projects for `MongoDB.Driver` instead of 14.
 
 ### 3. `ACYCLIC` keeps paths that repeat a node
 
@@ -182,8 +196,23 @@ parents,cs
 
 The subquery returns 0 for node 1, but the grouped query has no `0,1` row. `OPTIONAL MATCH` with `count(…)` gives both groups (lesson 4).
 
+### 6. `timestamp()` and `CAST(… AS TIMESTAMP)` ignore the offset
+
+```cypher
+RETURN timestamp('2026-09-14T09:30:00-04:00') AS f, CAST('2026-09-14T09:30:00-04:00' AS TIMESTAMP) AS c, CAST('2026-09-14T09:30:00-04:00' AS TIMESTAMP_TZ) AS tz;
+```
+
+```text
+f,c,tz
+2026-09-14 09:30:00,2026-09-14 09:30:00,2026-09-14 13:30:00+00
+```
+
+Expected 13:30 for the first two as well: `COPY` and `LOAD FROM` convert the same text in a CSV file to 13:30 UTC (lesson 4). The offset is dropped without being applied. `timestamp(…)` in the C# package 0.19.1 returns 09:30 too (lesson 5).
+
 ## To verify
 
 - The install script (`curl -s https://install.ladybugdb.com | bash`) and `brew install ladybug`: not run for this course.
 - The minimal reproductions were run on Windows only. The course scripts that show bugs 1, 2, 4 and 5 on the site data give the same output on the three CI runners.
 - Whether these bugs are already fixed on LadybugDB's main branch, after 0.20.4.
+- Whether the major version conflicts of lesson 5's exercise 2 (`MongoDB.Driver` 2 and 3, `Microsoft.ML.Tokenizers` 1 and 2) break ga at run time: I haven't built or run ga.
+- The C# program on `linux-arm64` and `osx-x64`: the CI runners are `linux-x64`, `win-x64` and `osx-arm64`.
