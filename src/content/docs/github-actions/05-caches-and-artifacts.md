@@ -22,7 +22,7 @@ Every job starts on a fresh machine ([lesson 1](../01-first-workflow/)). GitHub 
 
 [Lesson 2](../02-build-and-test/) measured it: the Maven cache of `setup-java` saved 6 to 15 seconds per job, while the .NET jobs cached nothing. `setup-dotnet` has a `cache: true` input, but its README says the cache key is the hash of `packages.lock.json` files, and "if lock file does not exist, this action throws error". The sample project had none.
 
-A [NuGet lock file](https://learn.microsoft.com/nuget/consume-packages/package-references-in-project-files#locking-dependencies) records the exact version and content hash of every package, direct or transitive — the equivalent of `package-lock.json` for npm. One property in a [`Directory.Build.props`](https://learn.microsoft.com/visualstudio/msbuild/customize-by-directory) next to the solution turns it on for every project:
+A [NuGet lock file](https://learn.microsoft.com/nuget/consume-packages/package-references-in-project-files#locking-dependencies) records the exact version and content hash of every package, direct or transitive — the equivalent of `package-lock.json` for npm. One property in a [`Directory.Build.props`](https://learn.microsoft.com/visualstudio/msbuild/customize-by-directory) next to the solution turns it on for every project ([`dotnet/Directory.Build.props`](https://github.com/spareilleux/learn/blob/main/code/github-actions/dotnet/Directory.Build.props)):
 
 ```xml
 <Project>

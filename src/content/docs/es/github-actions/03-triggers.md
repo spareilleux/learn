@@ -156,7 +156,7 @@ El workflow de despliegue de este sitio no tenía grupo de concurrencia. Dos pus
 ##[error]HttpError: Deployment request failed for cb69dca950b667b876d8d32cfe778a24b6320c59 due to in progress deployment. Please cancel 61e7e4235b7bc138f2f35cd7f61195bdaed4b019 first or wait for it to complete.
 ```
 
-Cancelar un despliegue a medias es peor que esperar, así que la corrección [los encola](https://github.com/spareilleux/learn/blob/main/.github/workflows/deploy.yml):
+Cancelar un despliegue a medias es peor que esperar, así que la corrección [los encola](https://github.com/spareilleux/learn/blob/93f6f82/.github/workflows/deploy.yml#L15-L17):
 
 ```yaml
 concurrency:

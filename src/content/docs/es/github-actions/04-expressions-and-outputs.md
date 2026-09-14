@@ -230,6 +230,8 @@ El runner lee `$GITHUB_ENV` **entre** steps: la variable existe a partir del ste
 <details>
 <summary>Solución</summary>
 
+De [`.github/workflows/gha-04-exercises.yml`, líneas 28-30](https://github.com/spareilleux/learn/blob/93f6f82/.github/workflows/gha-04-exercises.yml#L28-L30):
+
 ```yaml
   consume:
     needs: produce

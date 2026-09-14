@@ -16,7 +16,7 @@ Un workflow ejecuta código — el tuyo y el de las actions — con un token que
 | ¿La action que ejecuto es la que revisé? | fijación a un SHA de commit | versiones de las tareas |
 | ¿Cómo llego a una nube sin una contraseña guardada? | OpenID Connect (`id-token: write`) | conexiones de servicio con federación de identidades de carga de trabajo |
 
-Todo lo que sigue viene de [`.github/workflows/gha-07-security.yml`](https://github.com/spareilleux/learn/blob/main/.github/workflows/gha-07-security.yml). Sus primeras líneas:
+Todo lo que sigue viene de [`.github/workflows/gha-07-security.yml`](https://github.com/spareilleux/learn/blob/main/.github/workflows/gha-07-security.yml). Sus primeras líneas ([líneas 15-16](https://github.com/spareilleux/learn/blob/93f6f82/.github/workflows/gha-07-security.yml#L15-L16)):
 
 ```yaml
 permissions:
@@ -27,7 +27,7 @@ permissions:
 
 Cada job recibe un `GITHUB_TOKEN`, válido solo para ese job. Sus permisos por defecto dependen de una configuración del repositorio (o de la organización); el step *Set up job* de cada ejecución de la [lección 1](../01-first-workflow/) los listó para este repositorio: `Contents: read`, `Metadata: read`, `Packages: read`. No dependas de esa configuración: declara lo que el workflow necesita, como arriba, y añade más por job.
 
-Dos jobs llaman a la misma API — crear una etiqueta con un nombre **vacío**, para que no se pueda crear nada —, uno sin `issues: write` y otro con él:
+Dos jobs llaman a la misma API — crear una etiqueta con un nombre **vacío**, para que no se pueda crear nada —, uno sin `issues: write` y otro con él ([líneas 28-38](https://github.com/spareilleux/learn/blob/93f6f82/.github/workflows/gha-07-security.yml#L28-L38)):
 
 ```yaml
   token-with-issues-write:
@@ -84,7 +84,7 @@ Y los forks: «Con la excepción de `GITHUB_TOKEN`, los secretos no se pasan al 
 
 ## La inyección de script, de verdad
 
-La [lección 4](../04-expressions-and-outputs/) explicó por qué `${{ }}` no debe pegar texto que no es de confianza en un script. Esto es lo que ocurre en un runner. El job `injection`:
+La [lección 4](../04-expressions-and-outputs/) explicó por qué `${{ }}` no debe pegar texto que no es de confianza en un script. Esto es lo que ocurre en un runner. El job `injection` ([líneas 84-94](https://github.com/spareilleux/learn/blob/93f6f82/.github/workflows/gha-07-security.yml#L84-L94)):
 
 ```yaml
   injection:
@@ -128,6 +128,8 @@ gh api repos/actions/checkout/commits/v7 --jq .sha
 3d3c42e5aac5ba805825da76410c181273ba90b1
 ```
 
+De [`.github/workflows/gha-07-security.yml`, líneas 53-57](https://github.com/spareilleux/learn/blob/93f6f82/.github/workflows/gha-07-security.yml#L53-L57):
+
 ```yaml
   pinned:
     runs-on: ubuntu-latest
@@ -144,7 +146,7 @@ El step *Set up job* de una ejecución sin fijar también registra el SHA que re
 
 ## OpenID Connect en lugar de secretos de la nube
 
-Para desplegar en Azure, AWS o Google Cloud, la forma antigua guarda una clave de larga duración como secreto. Con [OIDC](https://docs.github.com/actions/concepts/security/openid-connect), el job pide a GitHub un token firmado que describe **quién** es, y la nube lo cambia por credenciales de corta duración si su política de confianza coincide. El job necesita un solo permiso:
+Para desplegar en Azure, AWS o Google Cloud, la forma antigua guarda una clave de larga duración como secreto. Con [OIDC](https://docs.github.com/actions/concepts/security/openid-connect), el job pide a GitHub un token firmado que describe **quién** es, y la nube lo cambia por credenciales de corta duración si su política de confianza coincide. El job necesita un solo permiso ([líneas 59-63](https://github.com/spareilleux/learn/blob/93f6f82/.github/workflows/gha-07-security.yml#L59-L63)):
 
 ```yaml
   oidc:

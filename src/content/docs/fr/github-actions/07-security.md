@@ -16,7 +16,7 @@ Un workflow exécute du code — le tien et celui des actions — avec un token 
 | L'action que j'exécute est-elle celle que j'ai relue ? | épinglage sur un SHA de commit | versions des tâches |
 | Comment atteindre un cloud sans mot de passe stocké ? | OpenID Connect (`id-token: write`) | connexions de service par fédération d'identité de charge de travail |
 
-Tout ce qui suit vient de [`.github/workflows/gha-07-security.yml`](https://github.com/spareilleux/learn/blob/main/.github/workflows/gha-07-security.yml). Ses premières lignes :
+Tout ce qui suit vient de [`.github/workflows/gha-07-security.yml`](https://github.com/spareilleux/learn/blob/main/.github/workflows/gha-07-security.yml). Ses premières lignes ([lignes 15-16](https://github.com/spareilleux/learn/blob/93f6f82/.github/workflows/gha-07-security.yml#L15-L16)) :
 
 ```yaml
 permissions:
@@ -27,7 +27,7 @@ permissions:
 
 Chaque job reçoit un `GITHUB_TOKEN`, valable pour ce job seulement. Ses permissions par défaut dépendent d'un paramètre du dépôt (ou de l'organisation) ; le step *Set up job* de chaque exécution de la [leçon 1](../01-first-workflow/) les a listées pour ce dépôt : `Contents: read`, `Metadata: read`, `Packages: read`. Ne compte pas sur ce paramètre : déclare ce dont le workflow a besoin, comme ci-dessus, et ajoute le reste par job.
 
-Deux jobs appellent la même API — créer une étiquette au nom **vide**, pour que rien ne puisse être créé — l'un sans `issues: write`, l'autre avec :
+Deux jobs appellent la même API — créer une étiquette au nom **vide**, pour que rien ne puisse être créé — l'un sans `issues: write`, l'autre avec ([lignes 28-38](https://github.com/spareilleux/learn/blob/93f6f82/.github/workflows/gha-07-security.yml#L28-L38)) :
 
 ```yaml
   token-with-issues-write:
@@ -84,7 +84,7 @@ Et les forks : « À l'exception du `GITHUB_TOKEN`, les secrets ne sont pas tran
 
 ## L'injection de script, pour de vrai
 
-La [leçon 4](../04-expressions-and-outputs/) a expliqué pourquoi `${{ }}` ne doit pas coller de texte non fiable dans un script. Voici ce que ça donne sur un runner. Le job `injection` :
+La [leçon 4](../04-expressions-and-outputs/) a expliqué pourquoi `${{ }}` ne doit pas coller de texte non fiable dans un script. Voici ce que ça donne sur un runner. Le job `injection` ([lignes 84-94](https://github.com/spareilleux/learn/blob/93f6f82/.github/workflows/gha-07-security.yml#L84-L94)) :
 
 ```yaml
   injection:
@@ -128,6 +128,8 @@ gh api repos/actions/checkout/commits/v7 --jq .sha
 3d3c42e5aac5ba805825da76410c181273ba90b1
 ```
 
+Extrait de [`.github/workflows/gha-07-security.yml`, lignes 53-57](https://github.com/spareilleux/learn/blob/93f6f82/.github/workflows/gha-07-security.yml#L53-L57) :
+
 ```yaml
   pinned:
     runs-on: ubuntu-latest
@@ -144,7 +146,7 @@ Le step *Set up job* d'une exécution non épinglée journalise aussi le SHA qu'
 
 ## OpenID Connect au lieu de secrets cloud
 
-Pour déployer sur Azure, AWS ou Google Cloud, l'ancienne méthode stocke une clé à longue durée de vie dans un secret. Avec [OIDC](https://docs.github.com/actions/concepts/security/openid-connect), le job demande à GitHub un token signé qui décrit **qui** il est, et le cloud l'échange contre des identifiants à courte durée de vie si sa politique de confiance correspond. Le job a besoin d'une seule permission :
+Pour déployer sur Azure, AWS ou Google Cloud, l'ancienne méthode stocke une clé à longue durée de vie dans un secret. Avec [OIDC](https://docs.github.com/actions/concepts/security/openid-connect), le job demande à GitHub un token signé qui décrit **qui** il est, et le cloud l'échange contre des identifiants à courte durée de vie si sa politique de confiance correspond. Le job a besoin d'une seule permission ([lignes 59-63](https://github.com/spareilleux/learn/blob/93f6f82/.github/workflows/gha-07-security.yml#L59-L63)) :
 
 ```yaml
   oidc:

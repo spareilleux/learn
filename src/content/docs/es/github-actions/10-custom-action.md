@@ -104,6 +104,8 @@ Los mismos tres casos que las pruebas de .NET y Java dieron `hello-world`, `gith
 
 ### Usarla
 
+De [`.github/workflows/gha-10-action.yml`, líneas 23-29](https://github.com/spareilleux/learn/blob/93f6f82/.github/workflows/gha-10-action.yml#L23-L29):
+
 ```yaml
       - id: slug
         uses: ./.github/actions/slugify
@@ -129,6 +131,8 @@ El mismo resultado en todas partes, y el step de la acción tardó menos de un s
 
 [`.github/actions/hello-container`](https://github.com/spareilleux/learn/tree/main/.github/actions/hello-container) tiene tres archivos:
 
+[`.github/actions/hello-container/action.yml`](https://github.com/spareilleux/learn/blob/main/.github/actions/hello-container/action.yml):
+
 ```yaml
 # GitHub Actions course, lesson 10: a container action (Linux runners only)
 name: Hello from a container
@@ -146,12 +150,16 @@ runs:
     - ${{ inputs.who }}
 ```
 
+[`.github/actions/hello-container/Dockerfile`](https://github.com/spareilleux/learn/blob/main/.github/actions/hello-container/Dockerfile):
+
 ```dockerfile
 # GitHub Actions course, lesson 10: the image of the container action, built on the runner at every run
 FROM alpine:3.22
 COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 ```
+
+[`.github/actions/hello-container/entrypoint.sh`](https://github.com/spareilleux/learn/blob/main/.github/actions/hello-container/entrypoint.sh):
 
 ```sh
 #!/bin/sh

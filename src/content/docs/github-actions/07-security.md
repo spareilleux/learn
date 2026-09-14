@@ -16,7 +16,7 @@ A workflow runs code — yours and the actions' — with a token that can act on
 | Is the action I run the one I reviewed? | pinning to a commit SHA | task versions |
 | How do I reach a cloud without a stored password? | OpenID Connect (`id-token: write`) | workload identity federation service connections |
 
-Everything below comes from [`.github/workflows/gha-07-security.yml`](https://github.com/spareilleux/learn/blob/main/.github/workflows/gha-07-security.yml). Its first lines:
+Everything below comes from [`.github/workflows/gha-07-security.yml`](https://github.com/spareilleux/learn/blob/main/.github/workflows/gha-07-security.yml). Its first lines ([lines 15-16](https://github.com/spareilleux/learn/blob/93f6f82/.github/workflows/gha-07-security.yml#L15-L16)):
 
 ```yaml
 permissions:
@@ -27,7 +27,7 @@ permissions:
 
 Every job gets a `GITHUB_TOKEN`, valid for the job only. Its default permissions depend on a repository (or organization) setting; the *Set up job* step of every run of [lesson 1](../01-first-workflow/) listed them for this repository: `Contents: read`, `Metadata: read`, `Packages: read`. Don't rely on the setting: declare what the workflow needs, as above, and add more per job.
 
-Two jobs call the same API — create a label with an **empty** name, so that nothing can be created — one without and one with `issues: write`:
+Two jobs call the same API — create a label with an **empty** name, so that nothing can be created — one without and one with `issues: write` ([lines 28-38](https://github.com/spareilleux/learn/blob/93f6f82/.github/workflows/gha-07-security.yml#L28-L38)):
 
 ```yaml
   token-with-issues-write:
@@ -84,7 +84,7 @@ And forks: "With the exception of `GITHUB_TOKEN`, secrets are not passed to the 
 
 ## Script injection, for real
 
-[Lesson 4](../04-expressions-and-outputs/) explained why `${{ }}` must not paste untrusted text into a script. Here it is on a runner. The `injection` job:
+[Lesson 4](../04-expressions-and-outputs/) explained why `${{ }}` must not paste untrusted text into a script. Here it is on a runner. The `injection` job ([lines 84-94](https://github.com/spareilleux/learn/blob/93f6f82/.github/workflows/gha-07-security.yml#L84-L94)):
 
 ```yaml
   injection:
@@ -128,6 +128,8 @@ gh api repos/actions/checkout/commits/v7 --jq .sha
 3d3c42e5aac5ba805825da76410c181273ba90b1
 ```
 
+From [`.github/workflows/gha-07-security.yml`, lines 53-57](https://github.com/spareilleux/learn/blob/93f6f82/.github/workflows/gha-07-security.yml#L53-L57):
+
 ```yaml
   pinned:
     runs-on: ubuntu-latest
@@ -144,7 +146,7 @@ The *Set up job* step of an unpinned run also logs the SHA it resolved — `Down
 
 ## OpenID Connect instead of cloud secrets
 
-To deploy to Azure, AWS or Google Cloud, the old way stores a long-lived key as a secret. With [OIDC](https://docs.github.com/actions/concepts/security/openid-connect), the job asks GitHub for a signed token describing **who** it is, and the cloud exchanges it for short-lived credentials if its trust policy matches. The job needs one permission:
+To deploy to Azure, AWS or Google Cloud, the old way stores a long-lived key as a secret. With [OIDC](https://docs.github.com/actions/concepts/security/openid-connect), the job asks GitHub for a signed token describing **who** it is, and the cloud exchanges it for short-lived credentials if its trust policy matches. The job needs one permission ([lines 59-63](https://github.com/spareilleux/learn/blob/93f6f82/.github/workflows/gha-07-security.yml#L59-L63)):
 
 ```yaml
   oidc:

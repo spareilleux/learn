@@ -16,6 +16,8 @@ sidebar:
 | Commande | `dotnet test` | `mvn -B verify` |
 | SDK fixé par | `global.json` | `maven.compiler.release` dans `pom.xml` |
 
+Extrait de [`dotnet/Slugs.Tests/SlugTests.cs`, lignes 8-14](https://github.com/spareilleux/learn/blob/93f6f82/code/github-actions/dotnet/Slugs.Tests/SlugTests.cs#L8-L14) :
+
 ```csharp
 [Theory]
 [InlineData("Hello, Wörld!", "hello-world")]
@@ -36,7 +38,7 @@ Avec `xunit.v3` 4.0.1, le premier `dotnet test` a échoué avant d'exécuter quo
 error : Testing with VSTest target is no longer supported by Microsoft.Testing.Platform on .NET 10 SDK and later. If you use dotnet test, you should opt-in to the new dotnet test experience. For more information, see https://aka.ms/dotnet-test-mtp-error
 ```
 
-xUnit v3 s'exécute sur [Microsoft.Testing.Platform](https://learn.microsoft.com/dotnet/core/testing/microsoft-testing-platform-intro), et le SDK .NET 10 veut que tu actives explicitement le nouveau `dotnet test`, dans `global.json` :
+xUnit v3 s'exécute sur [Microsoft.Testing.Platform](https://learn.microsoft.com/dotnet/core/testing/microsoft-testing-platform-intro), et le SDK .NET 10 veut que tu actives explicitement le nouveau `dotnet test`, dans `global.json` ([`dotnet/global.json`](https://github.com/spareilleux/learn/blob/main/code/github-actions/dotnet/global.json)) :
 
 ```json
 {

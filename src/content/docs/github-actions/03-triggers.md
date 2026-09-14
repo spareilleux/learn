@@ -156,7 +156,7 @@ This site's deployment workflow had no concurrency group. Two pushes 14 seconds 
 ##[error]HttpError: Deployment request failed for cb69dca950b667b876d8d32cfe778a24b6320c59 due to in progress deployment. Please cancel 61e7e4235b7bc138f2f35cd7f61195bdaed4b019 first or wait for it to complete.
 ```
 
-Cancelling a deployment halfway is worse than waiting, so the fix [queues them](https://github.com/spareilleux/learn/blob/main/.github/workflows/deploy.yml):
+Cancelling a deployment halfway is worse than waiting, so the fix [queues them](https://github.com/spareilleux/learn/blob/93f6f82/.github/workflows/deploy.yml#L15-L17):
 
 ```yaml
 concurrency:
