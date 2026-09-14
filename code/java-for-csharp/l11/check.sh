@@ -20,7 +20,11 @@ mvn -B clean verify > "$out/verify.log" 2>&1 || { cat "$out/verify.log"; exit 1;
 grep '^\[INFO\] Tests run: [0-9]*, Failures: 0, Errors: 0, Skipped: 0$' "$out/verify.log" | tidy > "$out/tests-run.txt"
 cat target/surefire-reports/TEST-*.xml | grep -o '<testcase name="[^"]*"' | sed -e 's/^<testcase name="//' -e 's/"$//' -e 's/&quot;/"/g' \
   | LC_ALL=C sort | tidy > "$out/test-names.txt"
+grep '^OpenJDK 64-Bit Server VM warning: Option AllowRedefinitionToAddDeleteMethods' "$out/verify.log" | awk '!seen[$0]++' | tidy > "$out/blockhound-flag.txt"
 rm "$out/verify.log"
+
+# BlockHound's agent without -XX:+AllowRedefinitionToAddDeleteMethods: the test JVM stops before running a test.
+mvn -B test -Pblockhound-no-flag 2>&1 | sed -n '/The instrumentation have failed/,/BlockHound\/issues/p' | tidy > "$out/blockhound-no-flag.txt"
 
 # Without the agent, Mockito attaches itself and the JVM warns about it.
 mvn -B test -Pself-attach 2>&1 \

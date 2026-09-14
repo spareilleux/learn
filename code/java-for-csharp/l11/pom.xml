@@ -12,6 +12,7 @@
     <maven.compiler.release>25</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <mockitoAgent>-javaagent:${org.mockito:mockito-core:jar}</mockitoAgent>
+    <blockHoundAgent>-javaagent:${io.projectreactor.tools:blockhound:jar} -XX:+AllowRedefinitionToAddDeleteMethods</blockHoundAgent>
   </properties>
 
   <dependencyManagement>
@@ -55,6 +56,18 @@
       <artifactId>mockito-junit-jupiter</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>io.projectreactor</groupId>
+      <artifactId>reactor-core</artifactId>
+      <version>3.8.7</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.projectreactor.tools</groupId>
+      <artifactId>blockhound</artifactId>
+      <version>1.0.17.RELEASE</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <build>
@@ -63,7 +76,7 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.15.0</version>
       </plugin>
-      <!-- Sets the property org.mockito:mockito-core:jar to the path of Mockito's JAR -->
+      <!-- Sets properties such as org.mockito:mockito-core:jar to the path of each dependency's JAR -->
       <plugin>
         <artifactId>maven-dependency-plugin</artifactId>
         <version>3.11.0</version>
@@ -75,12 +88,12 @@
           </execution>
         </executions>
       </plugin>
-      <!-- Loads Mockito as a Java agent when the test JVM starts, instead of attaching it at run time -->
+      <!-- Loads Mockito and BlockHound as Java agents when the test JVM starts, instead of attaching them at run time -->
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.6.0</version>
         <configuration>
-          <argLine>${mockitoAgent}</argLine>
+          <argLine>${mockitoAgent} ${blockHoundAgent}</argLine>
           <!-- Report @DisplayName and parameterized test names instead of method names -->
           <statelessTestsetReporter implementation="org.apache.maven.plugin.surefire.extensions.junit5.JUnit5Xml30StatelessReporter">
             <usePhrasedTestCaseMethodName>true</usePhrasedTestCaseMethodName>
@@ -96,6 +109,13 @@
       <id>self-attach</id>
       <properties>
         <mockitoAgent></mockitoAgent>
+      </properties>
+    </profile>
+    <!-- mvn test -Pblockhound-no-flag: BlockHound's agent without the JVM flag it needs, so the test JVM fails to start -->
+    <profile>
+      <id>blockhound-no-flag</id>
+      <properties>
+        <blockHoundAgent>-javaagent:${io.projectreactor.tools:blockhound:jar}</blockHoundAgent>
       </properties>
     </profile>
     <!-- mvn compile -Pnullaway: Error Prone with NullAway checks the code, including a deliberately wrong class -->
