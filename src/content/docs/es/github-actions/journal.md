@@ -16,7 +16,7 @@ sidebar:
 - [x] Lección 6: workflows reutilizables y acciones compuestas
 - [x] Lección 7: seguridad — permisos, secretos, fijación de versiones, OIDC
 - [x] Lección 8: desplegar en GitHub Pages
-- [ ] Lección 9: depurar ejecuciones
+- [x] Lección 9: depurar ejecuciones
 - [ ] Lección 10: escribir tu propia action
 
 ## 2026-09-14 — Primero en local: dos trampas de xUnit v3
@@ -85,9 +85,18 @@ El sitio se quedó en la versión anterior hasta el push siguiente. Corrección 
 - `gh workflow run deploy.yml --ref gha-06-invalid`: el build se ejecutó, el job de despliegue fue rechazado (`Branch "gha-06-invalid" is not allowed to deploy to github-pages due to environment protection rules`), el sitio publicado no cambió. Comprobado antes que no había ningún despliegue de `main` pendiente, ya que la ejecución de la rama comparte el grupo de concurrencia `pages`.
 - `https://spareilleux.github.io/method/` → 404: un enlace absoluto desde la raíz sale del sitio del proyecto.
 
+## 2026-09-14 — Lección 9: timeouts que tardan más, y un fallo que cuenta como éxito
+
+- `gh run view --log-failed`: 15 líneas de 169; el job cancelado por su timeout no aparece.
+- `gh run rerun --debug`: evaluaciones de condiciones `##[debug]`, `RUNNER_DEBUG=1`, el job `noisy` de 70 a 190 líneas, y una carpeta `runner-diagnostic-logs` (logs de Runner y Worker) en el archivo.
+- `gh run rerun --failed` volvió a ejecutar los jobs fallidos y el cancelado, y conservó el que tuvo éxito en el intento 1.
+- `timeout-minutes: 1` en un job: cancelado a los 87 s, tres veces, con `sleep 90` o `sleep 300`. En un step: fallido a los 72 s, `The action 'Run date -u +%T' has timed out after 1 minutes.`
+- Una ejecución cuyos jobs tuvieron éxito, fallaron con `continue-on-error` o fueron cancelados por un timeout termina en `cancelled`. Con solo el fallo con `continue-on-error`, termina en `success`, y `needs.<job>.result` es `success`.
+
 ## Preguntas abiertas
 
 - ¿El disparador `schedule` de `gha-03` (lunes 06:17 UTC) se ejecuta a su hora? *Por verificar el 2026-09-21.*
 - ¿Qué artefacto elige `download-artifact` cuando dos comparten nombre, y es estable? *Por verificar.*
 - ¿Falla `actions/checkout` en un repositorio privado cuando el token del job no tiene el permiso `contents`? *Por verificar.*
+- ¿Por qué un timeout de job de 1 minuto se aplica a los 87 s? *Por verificar* con límites más largos.
 - ¿Qué muestra exactamente la página de un pull request para un check obligatorio omitido por `paths`? *Por verificar.*

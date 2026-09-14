@@ -16,7 +16,7 @@ sidebar:
 - [x] Lesson 6: reusable workflows and composite actions
 - [x] Lesson 7: security — permissions, secrets, pinning, OIDC
 - [x] Lesson 8: deploying to GitHub Pages
-- [ ] Lesson 9: debugging runs
+- [x] Lesson 9: debugging runs
 - [ ] Lesson 10: writing your own action
 
 ## 2026-09-14 — Local first: two xUnit v3 traps
@@ -85,9 +85,18 @@ The site stayed on the previous version until the next push. Fix in `deploy.yml`
 - `gh workflow run deploy.yml --ref gha-06-invalid`: the build ran, the deploy job was rejected (`Branch "gha-06-invalid" is not allowed to deploy to github-pages due to environment protection rules`), the live site didn't change. Checked beforehand that no deployment of `main` was pending, since the branch run shares the `pages` concurrency group.
 - `https://spareilleux.github.io/method/` → 404: a root-absolute link leaves the project site.
 
+## 2026-09-14 — Lesson 9: timeouts that take longer, and a failure that counts as success
+
+- `gh run view --log-failed`: 15 lines out of 169; the job cancelled by its timeout isn't included.
+- `gh run rerun --debug`: `##[debug]` condition evaluations, `RUNNER_DEBUG=1`, the `noisy` job from 70 to 190 lines, and a `runner-diagnostic-logs` folder (Runner and Worker logs) in the archive.
+- `gh run rerun --failed` re-ran the failed and the cancelled jobs, and kept the successful one from attempt 1.
+- `timeout-minutes: 1` on a job: cancelled after 87 s, three times, with `sleep 90` or `sleep 300`. On a step: failed after 72 s, `The action 'Run date -u +%T' has timed out after 1 minutes.`
+- A run whose jobs are successful, failed with `continue-on-error`, or cancelled by a timeout ends `cancelled`. With only the `continue-on-error` failure, it ends `success`, and `needs.<job>.result` is `success`.
+
 ## Open questions
 
 - Does the `schedule` trigger of `gha-03` (Mondays 06:17 UTC) run on time? *To verify on 2026-09-21.*
 - Which artifact does `download-artifact` pick when two share a name, and is it stable? *To verify.*
 - Does `actions/checkout` fail on a private repository when the job token has no `contents` permission? *To verify.*
+- Why is a 1-minute job timeout enforced after 87 s? *To verify* with longer limits.
 - What exactly does a pull request page show for a required check skipped by `paths`? *To verify.*

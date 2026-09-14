@@ -41,7 +41,7 @@ You know how to build and test a .NET or Java project from the command line (`do
 | 6 | [Reusable workflows and composite actions](06-reuse/) | step, job and stage templates |
 | 7 | [Security: permissions, secrets, pinning, OIDC](07-security/) | service connections, workload identity federation |
 | 8 | [Deploying to GitHub Pages](08-pages/) | environments, approvals |
-| 9 | Debugging runs *(coming)* | diagnostic logs |
+| 9 | [Debugging runs](09-debugging/) | `system.debug`, diagnostic logs, retry failed jobs |
 | 10 | Writing your own action *(coming)* | custom tasks |
 | — | [Journal](journal/) | |
 

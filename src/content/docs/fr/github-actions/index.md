@@ -41,7 +41,7 @@ Tu sais compiler et tester un projet .NET ou Java en ligne de commande (`dotnet 
 | 6 | [Workflows réutilisables et actions composites](06-reuse/) | templates de step, de job et de stage |
 | 7 | [Sécurité : permissions, secrets, épinglage, OIDC](07-security/) | connexions de service, fédération d'identité de charge de travail |
 | 8 | [Déployer sur GitHub Pages](08-pages/) | environnements, approbations |
-| 9 | Déboguer les exécutions *(à venir)* | logs de diagnostic |
+| 9 | [Déboguer les exécutions](09-debugging/) | `system.debug`, logs de diagnostic, relancer les jobs en échec |
 | 10 | Écrire sa propre action *(à venir)* | tâches personnalisées |
 | — | [Journal](journal/) | |
 

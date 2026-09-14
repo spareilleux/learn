@@ -16,7 +16,7 @@ sidebar:
 - [x] Leçon 6 : workflows réutilisables et actions composites
 - [x] Leçon 7 : sécurité — permissions, secrets, épinglage, OIDC
 - [x] Leçon 8 : déployer sur GitHub Pages
-- [ ] Leçon 9 : déboguer les exécutions
+- [x] Leçon 9 : déboguer les exécutions
 - [ ] Leçon 10 : écrire sa propre action
 
 ## 2026-09-14 — D'abord en local : deux pièges de xUnit v3
@@ -85,9 +85,18 @@ Le site est resté sur la version précédente jusqu'au push suivant. Correction
 - `gh workflow run deploy.yml --ref gha-06-invalid` : le build a tourné, le job de déploiement a été rejeté (`Branch "gha-06-invalid" is not allowed to deploy to github-pages due to environment protection rules`), le site en ligne n'a pas changé. Vérifié au préalable qu'aucun déploiement de `main` n'était en attente, puisque l'exécution de la branche partage le groupe de concurrence `pages`.
 - `https://spareilleux.github.io/method/` → 404 : un lien absolu depuis la racine sort du site du projet.
 
+## 2026-09-14 — Leçon 9 : des timeouts qui prennent plus de temps, et un échec qui compte comme un succès
+
+- `gh run view --log-failed` : 15 lignes sur 169 ; le job annulé par son timeout n'y figure pas.
+- `gh run rerun --debug` : évaluations de conditions `##[debug]`, `RUNNER_DEBUG=1`, le job `noisy` passé de 70 à 190 lignes, et un dossier `runner-diagnostic-logs` (logs Runner et Worker) dans l'archive.
+- `gh run rerun --failed` a relancé les jobs en échec et le job annulé, et a conservé celui qui avait réussi à la tentative 1.
+- `timeout-minutes: 1` sur un job : annulé au bout de 87 s, trois fois, avec `sleep 90` ou `sleep 300`. Sur un step : en échec au bout de 72 s, `The action 'Run date -u +%T' has timed out after 1 minutes.`
+- Une exécution dont les jobs ont réussi, échoué avec `continue-on-error` ou été annulés par un timeout se termine `cancelled`. Avec seulement l'échec `continue-on-error`, elle se termine `success`, et `needs.<job>.result` vaut `success`.
+
 ## Questions ouvertes
 
 - Le déclencheur `schedule` de `gha-03` (le lundi à 06:17 UTC) s'exécute-t-il à l'heure ? *À vérifier le 2026-09-21.*
 - Quel artefact `download-artifact` choisit-il quand deux portent le même nom, et ce choix est-il stable ? *À vérifier.*
 - `actions/checkout` échoue-t-il sur un dépôt privé quand le token du job n'a pas la permission `contents` ? *À vérifier.*
+- Pourquoi un timeout de job d'1 minute s'applique-t-il au bout de 87 s ? *À vérifier* avec des limites plus longues.
 - Qu'affiche exactement la page d'une pull request pour un check obligatoire ignoré à cause de `paths` ? *À vérifier.*
