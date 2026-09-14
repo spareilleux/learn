@@ -71,4 +71,20 @@ for skill in sorted((here / "skills").glob("*/SKILL.md")):
     report(bool(fields.get("description", "").strip()), f"skill {folder}: has a description")
     report(len(text.splitlines()) <= 500, f"skill {folder}: {len(text.splitlines())} lines, under 500")
 
+# Subagents: Markdown with frontmatter for Claude Code (.claude/agents), TOML for Codex (.codex/agents)
+known_tools = {"Read", "Grep", "Glob", "Edit", "Write", "Bash", "PowerShell", "WebFetch", "WebSearch"}
+for agent in sorted((here / "claude" / "agents").glob("*.md")):
+    text = agent.read_text(encoding="utf-8")
+    front = re.match(r"^---\n(.*?)\n---\n", text, re.S)
+    fields = dict(line.split(":", 1) for line in front.group(1).splitlines()) if front else {}
+    report(fields.get("name", "").strip() == agent.stem, f"claude agent {agent.stem}: name matches the file")
+    report(bool(fields.get("description", "").strip()), f"claude agent {agent.stem}: has a description")
+    tools = [t.strip() for t in fields.get("tools", "").split(",") if t.strip()]
+    report(bool(tools) and set(tools) <= known_tools, f"claude agent {agent.stem}: tools {', '.join(tools)}")
+for agent in sorted((here / "codex" / "agents").glob("*.toml")):
+    fields = tomllib.loads(agent.read_text(encoding="utf-8"))
+    missing = [key for key in ("name", "description", "developer_instructions") if not fields.get(key)]
+    report(not missing, f"codex agent {agent.stem}: has name, description and developer_instructions")
+    report(fields.get("sandbox_mode") in (None, "read-only", "workspace-write", "danger-full-access"), f"codex agent {agent.stem}: sandbox_mode {fields.get('sandbox_mode')}")
+
 sys.exit(1 if problems else 0)

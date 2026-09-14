@@ -16,3 +16,8 @@ ok   codex config.toml: PreToolUse (Windows): code/agentic-coding/hooks/guard-gi
 ok   skill journal-status: name matches the folder
 ok   skill journal-status: has a description
 ok   skill journal-status: 13 lines, under 500
+ok   claude agent lesson-checker: name matches the file
+ok   claude agent lesson-checker: has a description
+ok   claude agent lesson-checker: tools Read, Grep, Glob
+ok   codex agent lesson-checker: has name, description and developer_instructions
+ok   codex agent lesson-checker: sandbox_mode read-only
