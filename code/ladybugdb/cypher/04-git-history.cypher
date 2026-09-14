@@ -21,8 +21,10 @@ MATCH (last:Commit)-[p:PARENT*1..100]->(first:Commit)
 WHERE last.sha STARTS WITH 'cbcbb42' AND NOT EXISTS { MATCH (first)-[:PARENT]->(:Commit) }
 RETURN first.subject, length(p) AS commits_between;
 
-// No merge commit: every commit has at most one parent
+// Parents per commit: no merge commit, one root
+// A bug in 0.20.4: grouped by a COUNT subquery, the group of the commits whose count is 0 disappears
 MATCH (c:Commit) RETURN COUNT { MATCH (c)-[:PARENT]->(:Commit) } AS parents, count(*) AS commits ORDER BY parents;
+MATCH (c:Commit) OPTIONAL MATCH (c)-[:PARENT]->(p:Commit) WITH c, count(p) AS parents RETURN parents, count(*) AS commits ORDER BY parents;
 
 // Files changed together with astro.config.mjs
 MATCH (a:File {path: 'astro.config.mjs'})<-[:CHANGED]-(c:Commit)-[:CHANGED]->(b:File)
