@@ -1,0 +1,49 @@
+# LadybugDB course: run the Cypher of every lesson with the LadybugDB CLI on three OSes and compare the output
+name: LadybugDB course examples
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['code/ladybugdb/**', 'code/duckdb/data/**', '.github/workflows/ladybugdb-examples.yml']
+  pull_request:
+    paths: ['code/ladybugdb/**', 'code/duckdb/data/**', '.github/workflows/ladybugdb-examples.yml']
+
+permissions:
+  contents: read
+
+env:
+  LBUG_VERSION: 0.20.4
+
+jobs:
+  cypher:
+    name: cypher (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            asset: lbug_cli-linux-x86_64.tar.gz
+          - os: windows-latest
+            asset: lbug_cli-windows-x86_64.zip
+          - os: macos-latest
+            asset: lbug_cli-osx-arm64.tar.gz
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install the LadybugDB CLI
+        env:
+          ASSET: ${{ matrix.asset }}
+        run: |
+          curl -fsSL -o "$RUNNER_TEMP/$ASSET" "https://github.com/LadybugDB/ladybug/releases/download/v$LBUG_VERSION/$ASSET"
+          mkdir -p "$RUNNER_TEMP/lbug"
+          case "$ASSET" in
+            *.zip) unzip -q "$RUNNER_TEMP/$ASSET" -d "$RUNNER_TEMP/lbug" ;;
+            *) tar -xzf "$RUNNER_TEMP/$ASSET" -C "$RUNNER_TEMP/lbug" ;;
+          esac
+          ls -R "$RUNNER_TEMP/lbug"
+          echo "$RUNNER_TEMP/lbug" >> "$GITHUB_PATH"
+      - run: bash code/ladybugdb/check.sh

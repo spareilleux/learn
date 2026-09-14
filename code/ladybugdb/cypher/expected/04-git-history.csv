@@ -1,0 +1,71 @@
+result
+Table Commit has been created.
+result
+Table File has been created.
+result
+Table PARENT has been created.
+result
+Table CHANGED has been created.
+result,skipped_duplicate_pk_count,skipped_duplicate_pks
+74 tuples have been copied to the Commit table.,0,[]
+result,skipped_duplicate_pk_count,skipped_duplicate_pks
+710 tuples have been copied to the File table.,0,[]
+result
+73 tuples have been copied to the PARENT table.
+result
+1019 tuples have been copied to the CHANGED table.
+commits,first_commit,last_commit
+74,2026-09-13 15:52:51,2026-09-14 16:03:28
+first.subject,commits_between
+
+first.subject,commits_between
+"Initial learn site: Starlight, bilingual en/fr, WSL containers course",73
+parents,commits
+1,73
+b.path,commits
+astro.config.mjs,11
+src/content/docs/fr/index.mdx,9
+src/content/docs/index.mdx,9
+AGENTS.md,7
+README.md,7
+f.path,commits
+src/content/docs/fr/wsl-containers/journal.md,16
+src/content/docs/wsl-containers/journal.md,15
+README.md,13
+astro.config.mjs,11
+src/content/docs/fr/index.mdx,9
+result
+Extension: json has been loaded.
+result
+Table Run has been created.
+result
+Table RAN_ON has been created.
+result,skipped_duplicate_pk_count,skipped_duplicate_pks
+125 tuples have been copied to the Run table.,0,[]
+Error: Copy exception: Unable to find primary key value bd17932fe35899909b8d983ab289e1ea4ff344a8.
+headBranch,runs
+gha-06-invalid,2
+result
+123 tuples have been copied to the RAN_ON table.
+links,runs,commits
+123,1,64
+
+result
+123 tuples have been copied to the RAN_ON table.
+links,runs,commits
+123,123,64
+f.path,failed_commits
+.github/workflows/gha-03-triggers.yml,2
+.github/workflows/gha-05-exercises.yml,2
+astro.config.mjs,2
+code/github-actions/.gitignore,2
+src/content/docs/fr/index.mdx,2
+r.workflowName,runs
+Deploy to GitHub Pages,2
+GHA 02: build and test,2
+Rust course examples,2
+GHA 01: hello,1
+GHA 03: triggers,1
+GHA 04: data between steps and jobs,1
+GHA 05: caches and artifacts,1
+GHA 05: exercise checks,1

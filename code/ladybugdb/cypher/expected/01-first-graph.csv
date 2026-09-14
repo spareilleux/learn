@@ -1,0 +1,46 @@
+result
+Table Course has been created.
+result
+Table Lesson has been created.
+result
+Table HAS_LESSON has been created.
+result
+Table LINKS_TO has been created.
+
+
+
+
+c.title,l.number,l.title
+DuckDB,1,First queries
+DuckDB,2,Friendly SQL
+DuckDB,3,Nested data
+from_lesson,to_lesson
+Friendly SQL,First queries
+l.title
+Friendly SQL
+Nested data
+Error: Runtime exception: Found duplicated primary key value /duckdb/01-first-queries/, which violates the uniqueness constraint of the primary key column.
+Error: Binder exception: Cannot find property minutes for .
+Error: Binder exception: Create node  expects primary key url as input.
+l.url,l.number,l.title
+/duckdb/04-files/,4,Files
+l.url,l.number,l.title
+/duckdb/04-files/,4,Files: CSV and Parquet
+name,type
+Course,NODE
+HAS_LESSON,REL
+LINKS_TO,REL
+Lesson,NODE
+property id,name,type,default expression,primary key
+0,url,STRING,NULL,True
+1,number,INT64,NULL,False
+2,title,STRING,NULL,False
+table_name,nodes
+Course,1
+Lesson,4
+Error: Runtime exception: Node(nodeOffset: 0) has connected edges in table HAS_LESSON in the bwd direction, which cannot be deleted. Please delete the edges first or try DETACH DELETE.
+
+lessons
+3
+table_name,relationships
+HAS_LESSON,2

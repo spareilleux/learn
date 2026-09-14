@@ -1,0 +1,84 @@
+url,locale,course,title,lines
+/,en,"",learn,90
+/artifacts/,en,artifacts,Artifacts,32
+/duckdb/,en,duckdb,DuckDB — Mission,70
+locale,pages
+en,117
+es,101
+fr,101
+result
+Table Page has been created.
+result
+Table LINKS_TO has been created.
+result,skipped_duplicate_pk_count,skipped_duplicate_pks
+319 tuples have been copied to the Page table.,0,[]
+
+Error: Copy exception: Unable to find primary key value /es/streeling/computer-science/cs-001-governing-agentic-loops/.
+links
+0
+result
+648 tuples have been copied to the LINKS_TO table.
+64 warnings encountered during copy. Use 'CALL show_warnings() RETURN *' to view the actual warnings. Query ID: 8
+warnings
+64
+locale,course,links
+streeling,computer-science,4
+streeling,cybernetics,12
+streeling,guitar-alchemist-academy,8
+streeling,information-theory,4
+streeling,music,20
+streeling,musicology,4
+streeling,network-science,4
+streeling,psychohistory,4
+streeling,semiotics,4
+english_page
+/streeling/computer-science/cs-001-governing-agentic-loops/
+/streeling/cybernetics/cyb-001-vsm-ai-governance-mapping/
+/streeling/cybernetics/cyb-002-active-dampening-cross-repo-oscillation/
+/streeling/cybernetics/cyb-003-measuring-variety-ratio-quantitatively/
+/streeling/guitar-alchemist-academy/gaa-002-training-your-ear/
+/streeling/guitar-alchemist-academy/gaa-003-improvisation-foundations/
+/streeling/information-theory/inf-001-entropy-of-governance/
+/streeling/music/mus-002-beyond-tonality/
+/streeling/music/mus-003-functional-harmony/
+/streeling/music/mus-004-rhythm-and-groove/
+/streeling/music/mus-005-jazz-harmony/
+/streeling/music/mus-006-the-scale-universe/
+/streeling/musicology/mcl-002-musical-form/
+/streeling/network-science/net-001-scale-free-tool-networks/
+/streeling/psychohistory/psy-002-governance-phase-transitions/
+/streeling/semiotics/sem-001-signs-in-governance/
+result
+Table Domain has been created.
+result
+Table CITES has been created.
+Error: Copy exception: Error in file data/external_links.csv on line 591: expected 3 values per row, but got more. Line/record containing the error: '/es/java-for-csharp/02-types-and-operators/,"https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Math.html#addExact(int,int)",docs.oracle.com'
+result,skipped_duplicate_pk_count,skipped_duplicate_pks
+85 tuples have been copied to the Domain table.,0,[]
+result
+1054 tuples have been copied to the CITES table.
+domains
+85
+domain,pages,links
+learn.microsoft.com,44,198
+doc.rust-lang.org,16,192
+github.com,88,189
+docs.oracle.com,28,171
+duckdb.org,9,140
+docs.github.com,12,51
+openjdk.org,15,49
+docs.rs,5,30
+domain,pages,links
+duckdb.org,9,""
+openjdk.org,15,""
+domain,links,pages
+duckdb.org,140,9
+openjdk.org,49,15
+Error: Binder exception: Cannot load from file type json. If this file type is part of a lbug extension please load the extension then try again.
+result
+Extension: json has been loaded.
+conclusion,runs
+success,104
+failure,16
+cancelled,4
+startup_failure,1

@@ -1,0 +1,68 @@
+result
+Table Page has been created.
+result
+Table LINKS_TO has been created.
+result,skipped_duplicate_pk_count,skipped_duplicate_pks
+319 tuples have been copied to the Page table.,0,[]
+result
+648 tuples have been copied to the LINKS_TO table.
+64 warnings encountered during copy. Use 'CALL show_warnings() RETURN *' to view the actual warnings. Query ID: 3
+course.url,lesson.url
+/duckdb/,/duckdb/01-first-queries/
+/duckdb/,/duckdb/02-friendly-sql/
+/duckdb/,/duckdb/03-nested-data/
+/duckdb/,/duckdb/04-files/
+/duckdb/,/duckdb/05-csharp/
+/duckdb/,/duckdb/06-java/
+/duckdb/,/duckdb/07-performance/
+/duckdb/,/duckdb/08-persistence/
+/duckdb/,/duckdb/journal/
+/duckdb/,/github-actions/
+p.url,links
+/github-actions/journal/,0
+/github-actions/02-build-and-test/,1
+/github-actions/09-debugging/,1
+/github-actions/01-first-workflow/,2
+p.url,incoming
+/streeling/journal/,32
+/wsl-containers/journal/,13
+/streeling/music/mus-001-what-is-a-chord/,8
+/github-actions/01-first-workflow/,6
+/github-actions/05-caches-and-artifacts/,6
+/github-actions/07-security/,6
+/streeling/guitar-studies/gtr-001-the-fretboard-map/,6
+/github-actions/04-expressions-and-outputs/,5
+links,walks
+1,1
+2,5
+3,12
+4,29
+links,trails
+1,1
+2,5
+3,12
+4,26
+links,acyclic_paths
+1,1
+2,5
+3,12
+4,14
+clicks,pages
+1,7
+2,77
+3,32
+p.url
+links,pages_between
+4,3
+through
+"[/github-actions/04-expressions-and-outputs/,/github-actions/01-first-workflow/,/github-actions/05-caches-and-artifacts/]"
+"[/github-actions/04-expressions-and-outputs/,/github-actions/07-security/,/github-actions/05-caches-and-artifacts/]"
+links
+links
+3
+links,walks
+1,1
+2,4
+3,7
+4,14
+Error: Binder exception: Upper bound of rel e exceeds maximum: 30.
