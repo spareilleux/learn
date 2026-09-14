@@ -18,9 +18,13 @@ MATCH ()-[l:LINKS_TO]->() RETURN count(*) AS links;
 // IGNORE_ERRORS skips the bad rows and keeps them as warnings
 COPY LINKS_TO FROM 'data/links.csv' (HEADER = true, IGNORE_ERRORS = true);
 CALL show_warnings() RETURN count(*) AS warnings;
+CALL show_warnings() RETURN message, file_path, line_number ORDER BY line_number LIMIT 2;
+
+// split_part skips the empty string before a leading separator: part 1 of '/es/streeling/' is 'es'
+RETURN split_part('/es/streeling/', '/', 1) AS part_1, split_part('/es/streeling/', '/', 2) AS part_2;
 CALL show_warnings()
 WITH split_part(message, 'value ', 2) AS missing
-RETURN split_part(missing, '/', 2) AS locale, split_part(missing, '/', 3) AS course, count(*) AS links
+RETURN split_part(missing, '/', 1) AS locale, split_part(missing, '/', 2) AS course, count(*) AS links
 ORDER BY locale, course;
 
 // The pages a French link points to, when only the English page exists
