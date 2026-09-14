@@ -40,9 +40,14 @@ CREATE (:Lesson {number: 4});
 MERGE (l:Lesson {url: '/duckdb/04-files/'}) ON CREATE SET l.number = 4, l.title = 'Files' RETURN l.*;
 MERGE (l:Lesson {url: '/duckdb/04-files/'}) ON MATCH SET l.title = 'Files: CSV and Parquet' RETURN l.*;
 
+// MERGE matches the whole pattern: without the key it can't create, with a different property it creates a duplicate
+MERGE (l:Lesson {number: 4}) RETURN l.*;
+MERGE (l:Lesson {url: '/duckdb/04-files/', number: 5}) RETURN l.*;
+
 // What the database contains
 CALL show_tables() RETURN name, type ORDER BY name;
 CALL table_info('Lesson') RETURN *;
+:schema
 MATCH (n) RETURN label(n) AS table_name, count(*) AS nodes ORDER BY table_name;
 
 // Deleting: a node with relationships needs DETACH DELETE

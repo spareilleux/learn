@@ -26,6 +26,8 @@ l.url,l.number,l.title
 /duckdb/04-files/,4,Files
 l.url,l.number,l.title
 /duckdb/04-files/,4,Files: CSV and Parquet
+Error: Binder exception: Create node l expects primary key url as input.
+Error: Runtime exception: Found duplicated primary key value /duckdb/04-files/, which violates the uniqueness constraint of the primary key column.
 name,type
 Course,NODE
 HAS_LESSON,REL
@@ -35,6 +37,10 @@ property id,name,type,default expression,primary key
 0,url,STRING,NULL,True
 1,number,INT64,NULL,False
 2,title,STRING,NULL,False
+CREATE NODE TABLE `Course` (`slug` STRING,`title` STRING, PRIMARY KEY(`slug`));
+CREATE NODE TABLE `Lesson` (`url` STRING,`number` INT64,`title` STRING, PRIMARY KEY(`url`));
+CREATE REL TABLE `HAS_LESSON` (FROM `Course` TO `Lesson`, MANY_MANY);
+CREATE REL TABLE `LINKS_TO` (FROM `Lesson` TO `Lesson`, MANY_MANY);
 table_name,nodes
 Course,1
 Lesson,4

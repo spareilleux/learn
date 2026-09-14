@@ -64,3 +64,9 @@ ORDER BY domain;
 LOAD FROM '../duckdb/data/runs.json' RETURN count(*);
 LOAD json;
 LOAD FROM '../duckdb/data/runs.json' RETURN conclusion, count(*) AS runs ORDER BY runs DESC, conclusion;
+
+// A bug in 0.20.4, in-memory databases only: a COPY that fails on a duplicate key empties the primary key index
+COPY Page FROM (LOAD FROM 'data/pages.csv' (HEADER = true) WHERE url = '/duckdb/' RETURN *);
+MATCH (p:Page) RETURN count(*) AS pages;
+MATCH (p:Page {url: '/duckdb/'}) RETURN count(*) AS found_by_key;
+MATCH (p:Page) WHERE lower(p.url) = '/duckdb/' RETURN count(*) AS found_by_scan;

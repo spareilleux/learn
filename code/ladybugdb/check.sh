@@ -17,4 +17,18 @@ for script in cypher/*.cypher; do
     status=1
   fi
 done
+# SQL cross-checks, run with DuckDB when it's installed (the CI installs it)
+if command -v duckdb > /dev/null; then
+  duckdb --version
+  for script in sql/*.sql; do
+    name=$(basename "$script" .sql)
+    if duckdb -csv < "$script" | diff --strip-trailing-cr "sql/expected/$name.csv" -; then
+      echo "ok   sql/$name"
+    else
+      echo "FAIL sql/$name"; status=1
+    fi
+  done
+else
+  echo "skip sql/*.sql: duckdb not found"
+fi
 exit $status
