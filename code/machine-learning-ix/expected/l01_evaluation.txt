@@ -1,0 +1,38 @@
+== builds.csv
+x: [65, 1] [18.0, 110.0, 122.0], y: 65
+y mean 18.846, std 5.424 (hand)
+y mean 18.846, std 5.424 (ix_math::stats)
+
+== split
+chronological: train 52, test 13, test pages 274..289
+ix train_test_split: train 52, test 13, test pages [138, 253, 253, 130, 280, 241, 271, 130, 138, 138, 289, 274, 138]
+
+== baseline on the chronological test set: always 17.385 s
+hand: mse 107.000, rmse 10.344, mae 7.308, r2 -0.996
+ix:   mse 107.000, rmse 10.344, mae 7.308, r2 -0.996
+
+== scaling pages
+hand, train rows: mean 184.038, std 62.476
+ix,   train rows: mean 184.038, std 62.476
+ix,   all rows:   mean 203.277, std 67.883
+first test row scaled: 1.440 (train statistics), 1.042 (all rows)
+
+== infer_task_type: 18 distinct values -> MulticlassClassification { n_classes: 18 }
+same seconds with 0.5 added to one row -> true
+
+== jobs.csv: [186, 5] ["queue_s", "setup_s", "checkout_s", "post_checkout_s", "complete_s"], classes ["ubuntu", "windows", "macos"] = [121, 34, 31]
+confusion matrix (rows = true class, columns = predicted):
+[[121, 0, 0],
+ [34, 0, 0],
+ [31, 0, 0]]
+accuracy 0.651 (hand), 0.651 (ix)
+ubuntu   precision 0.651 recall 1.000 f1 0.788 | ix 0.651 1.000 0.788
+windows  precision 0.000 recall 0.000 f1 0.000 | ix 0.000 0.000 0.000
+macos    precision 0.000 recall 0.000 f1 0.000 | ix 0.000 0.000 0.000
+macro f1 0.263 (hand), 0.263 (ix f1_avg)
+Confusion Matrix:
+pred →	0	1	2
+true 0:	121	0	0
+true 1:	34	0	0
+true 2:	31	0	0
+exit 0

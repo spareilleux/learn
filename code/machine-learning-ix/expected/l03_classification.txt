@@ -1,0 +1,46 @@
+== split: train 148 [95, 25, 28], test 38 [26, 9, 3] (ubuntu, windows, macos)
+
+== logistic regression, windows or not, features ["checkout_s", "post_checkout_s"]
+lr 0.01, 1000 iterations: hand w [0.2924, 0.4670] b -1.9327 | ix w [0.2924, 0.4670] b -1.9327 | same to 1e-9: true
+  test: accuracy 1.000, windows precision 1.000, recall 1.000
+  P(windows | checkout 1 s, post 0.5 s) = 0.197  P(windows | checkout 3 s, post 1.5 s) = 0.412  P(windows | checkout 6 s, post 3 s) = 0.773
+lr 0.1, 20000 iterations: hand w [2.4770, 1.8829] b -12.3652 | ix w [2.4770, 1.8829] b -12.3652 | same to 1e-9: true
+  test: accuracy 0.974, windows precision 0.900, recall 1.000
+  P(windows | checkout 1 s, post 0.5 s) = 0.000  P(windows | checkout 3 s, post 1.5 s) = 0.108  P(windows | checkout 6 s, post 3 s) = 1.000
+
+== k nearest neighbours, features ["queue_s", "setup_s", "checkout_s", "post_checkout_s", "complete_s"]
+raw          k = 4: accuracy hand 0.921, ix 0.921, test rows where they differ: []
+raw          k = 5: accuracy hand 0.921, ix 0.921, test rows where they differ: []
+standardized k = 4: accuracy hand 0.974, ix 0.947, test rows where they differ: [27]
+  test row 27 (jobs.csv row 135, from 0): votes [2, 0, 2] -> hand ubuntu, ix macos, true ubuntu
+standardized k = 5: accuracy hand 0.974, ix 0.974, test rows where they differ: []
+
+== decision tree, max depth 3
+checkout_s <= 4
+  queue_s <= 5.5
+    queue_s <= 4.5
+      -> ubuntu [89, 0, 0]
+    queue_s > 4.5
+      -> ubuntu [5, 0, 3]
+  queue_s > 5.5
+    checkout_s <= 1.5
+      -> macos [1, 0, 4]
+    checkout_s > 1.5
+      -> macos [0, 0, 21]
+checkout_s > 4
+  -> windows [0, 25, 0]
+ix nodes, pre-order: [{"Split":{"feature":2,"threshold":4.0}},{"Split":{"feature":0,"threshold":5.5}},{"Split":{"feature":0,"threshold":4.5}},{"Leaf":{"class":0,"class_counts":[89.0,0.0,0.0]}},{"Leaf":{"class":0,"class_counts":[5.0,0.0,3.0]}},{"Split":{"feature":2,"threshold":1.5}},{"Leaf":{"class":2,"class_counts":[1.0,0.0,4.0]}},{"Leaf":{"class":2,"class_counts":[0.0,0.0,21.0]}},{"Leaf":{"class":1,"class_counts":[0.0,25.0,0.0]}}]
+test accuracy hand 0.921, ix 0.921, same predictions: true
+confusion matrix (rows = true, columns = predicted):
+[[23, 1, 2],
+ [0, 9, 0],
+ [0, 0, 3]]
+ubuntu   precision 1.000 recall 0.885 f1 0.939
+windows  precision 0.900 recall 1.000 f1 0.947
+macos    precision 0.600 recall 1.000 f1 0.750
+
+== cross_val_score, 5 stratified folds, seed 42
+knn k=5, raw           folds [0.923, 0.919, 0.973, 1.000, 1.000] mean 0.963
+decision tree depth 3  folds [0.923, 0.919, 0.973, 1.000, 0.944] mean 0.952
+decision tree depth 10 folds [0.923, 0.892, 0.973, 1.000, 0.917] mean 0.941
+exit 0

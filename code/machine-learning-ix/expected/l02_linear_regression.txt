@@ -1,0 +1,38 @@
+== least squares on the 52 training builds
+hand: seconds = 0.041707 * pages + 9.708880
+ix:   seconds = 0.041707 * pages + 9.708880
+same to 1e-9: true
+
+== 13 test builds
+line:     rmse 7.952, mae 4.574, r2 -0.180
+baseline: rmse 10.344, mae 7.308, r2 -0.996
+  93a0ea8 274 pages: actual 23 s, predicted 21.1 s, error +1.9
+  a7a6f72 274 pages: actual 21 s, predicted 21.1 s, error -0.1
+  fd52d46 277 pages: actual 24 s, predicted 21.3 s, error +2.7
+  bd17932 271 pages: actual 24 s, predicted 21.0 s, error +3.0
+  3147e64 277 pages: actual 23 s, predicted 21.3 s, error +1.7
+  e5254f6 280 pages: actual 25 s, predicted 21.4 s, error +3.6
+  b96934a 283 pages: actual 18 s, predicted 21.5 s, error -3.5
+  35c2e3e 283 pages: actual 20 s, predicted 21.5 s, error -1.5
+  85a8c04 283 pages: actual 19 s, predicted 21.5 s, error -2.5
+  b0803c9 283 pages: actual 29 s, predicted 21.5 s, error +7.5
+  bcfc3fc 283 pages: actual 26 s, predicted 21.5 s, error +4.5
+  849fb18 286 pages: actual 21 s, predicted 21.6 s, error -0.6
+  95a3830 289 pages: actual 48 s, predicted 21.8 s, error +26.2
+without the 48 s build: rmse 3.336, mae 2.769, r2 -0.234
+
+== gradient descent by hand, raw pages
+learning rate 3e-5: step 1 loss 4.957e2 step 10 loss 3.373e4 step 1000 loss 4.538e207 step 100000 loss NaN
+  -> w NaN, b NaN
+learning rate 1e-5: step 1 loss 3.354e1 step 10 loss 1.565e1 step 1000 loss 1.561e1 step 100000 loss 1.235e1
+  -> w 0.080177, b 1.813045
+
+== gradient descent by hand, standardized pages, learning rate 0.1
+100 steps: ws 2.605694, bs 17.384615 -> w 0.041707, b 9.708880
+
+== ix_optimize::gradient::minimize, from [0, 0]
+SGD(0.1), exact gradient       iterations    79, converged true , loss 5.908583, w 0.041707, b 9.708880
+SGD(0.1), numerical gradient   iterations    79, converged true , loss 5.908583, w 0.041707, b 9.708880
+Adam(0.1), exact gradient      iterations   868, converged true , loss 5.908583, w 0.041707, b 9.708880
+closed-form loss on the training builds: 5.908583
+exit 0

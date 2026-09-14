@@ -1,0 +1,51 @@
+numpy 2.4.2, scikit-learn 1.8.0
+
+== lesson 1
+y mean 18.846, std 5.424
+baseline: mse 107.000, rmse 10.344, mae 7.308, r2 -0.996
+StandardScaler on train rows: mean 184.038, std 62.476
+always ubuntu: accuracy 0.651, f1 per class [0.788, 0.0, 0.0], macro f1 0.263
+
+== lesson 2
+seconds = 0.041707 * pages + 9.708880
+test: rmse 7.952, mae 4.574, r2 -0.180
+
+== lesson 3
+logistic C=1: w [2.0809, 0.9997] b -9.8885, test accuracy 0.974
+logistic C=1e+06: w [6.5664, 2.9888] b -30.3265, test accuracy 0.974
+knn raw k = 4: test accuracy 0.921
+knn raw k = 5: test accuracy 0.921
+knn standardized k = 4: test accuracy 0.974
+knn standardized k = 5: test accuracy 0.974
+|--- checkout_s <= 4.00
+|   |--- queue_s <= 5.50
+|   |   |--- queue_s <= 4.50
+|   |   |   |--- class: ubuntu
+|   |   |--- queue_s >  4.50
+|   |   |   |--- class: ubuntu
+|   |--- queue_s >  5.50
+|   |   |--- checkout_s <= 1.50
+|   |   |   |--- class: macos
+|   |   |--- checkout_s >  1.50
+|   |   |   |--- class: macos
+|--- checkout_s >  4.00
+|   |--- class: windows
+tree test accuracy 0.921
+[[23  1  2]
+ [ 0  9  0]
+ [ 0  0  3]]
+
+== lesson 4
+k 2: best inertia of 50 starts 631.311, silhouette 0.4351
+k 3: best inertia of 50 starts 411.237, silhouette 0.4997
+k 4: best inertia of 50 starts 301.641, silhouette 0.4158
+k 5: best inertia of 50 starts 240.416, silhouette 0.4348
+k 6: best inertia of 50 starts 214.040, silhouette 0.4400
+silhouette of [0, 1 | 10]: 0.5963
+KMeans(3) on [5, 5, 9, 9]: centroids [5.0, 9.0, 9.0], warning: ['Number of distinct clusters (2) found smaller than n_clusters (3). Possibly due to duplicate points in X.']
+DBSCAN eps 0.5: cluster sizes [12, 7, 15, 25, 23, 12, 6, 5, 7, 6], noise 68
+DBSCAN eps 1.0: cluster sizes [84, 40, 13, 13, 7], noise 29
+DBSCAN eps 1.5: cluster sizes [162, 11], noise 13
+DBSCAN eps 2.0: cluster sizes [164, 12], noise 10
+GaussianMixture diag, best of 10 starts: log-likelihood -102.667, weights [0.691, 0.188, 0.121]
+exit 0

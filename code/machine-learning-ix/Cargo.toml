@@ -1,0 +1,17 @@
+[package]
+name = "machine-learning-ix"
+version = "0.1.0"
+edition = "2024"
+publish = false
+description = "Examples of the 'Machine learning, as applied in IX' course: each algorithm written by hand, then compared with the IX crate"
+
+# IX pinned on one commit of main: https://github.com/GuitarAlchemist/ix/commit/490c39533627d296bf9f8f050e6fafc14d7a20c2
+[dependencies]
+ix-math = { git = "https://github.com/GuitarAlchemist/ix", rev = "490c39533627d296bf9f8f050e6fafc14d7a20c2" }
+ix-optimize = { git = "https://github.com/GuitarAlchemist/ix", rev = "490c39533627d296bf9f8f050e6fafc14d7a20c2" }
+ix-supervised = { git = "https://github.com/GuitarAlchemist/ix", rev = "490c39533627d296bf9f8f050e6fafc14d7a20c2" }
+ix-unsupervised = { git = "https://github.com/GuitarAlchemist/ix", rev = "490c39533627d296bf9f8f050e6fafc14d7a20c2" }
+ix-voicings = { git = "https://github.com/GuitarAlchemist/ix", rev = "490c39533627d296bf9f8f050e6fafc14d7a20c2" }
+ndarray = "0.17"
+csv = "1.4"
+serde_json = "1"

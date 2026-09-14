@@ -1,0 +1,57 @@
+== 186 jobs, features ["queue_s", "setup_s", "checkout_s", "post_checkout_s", "complete_s"], standardized
+
+== k-means, k = 3
+ix centroid 0: [-0.318, 0.167, -0.503, -0.472, -0.281]
+ix centroid 1: [2.302, -0.162, 0.031, -0.003, 1.668]
+ix centroid 2: [-0.352, -0.526, 1.888, 1.791, -0.063]
+ix inertia 411.2367, hand inertia 411.2367
+hand Lloyd steps from ix centroids until nothing moves: 1, same labels: true
+clusters (rows) against OS (columns ["ubuntu", "windows", "macos"]):
+[[120, 0, 9],
+ [1, 0, 22],
+ [0, 34, 0]]
+
+hand, starting from the first 3 rows: 5 steps, inertia 531.9563
+ix, seeds 0 to 9: inertia [411.3595, 411.2367, 411.9568, 618.0229, 489.7771, 411.2367, 526.3602, 411.3595, 411.2367, 411.2322]
+
+== choosing k (ix KMeans, seed 42)
+k 2: inertia  713.392, silhouette hand 0.4014, ix_voicings 0.4014
+k 3: inertia  411.237, silhouette hand 0.4997, ix_voicings 0.4997
+k 4: inertia  301.641, silhouette hand 0.4158, ix_voicings 0.4158
+k 5: inertia  240.527, silhouette hand 0.4350, ix_voicings 0.4350
+k 6: inertia  223.366, silhouette hand 0.3646, ix_voicings 0.3646
+ix-voicings rule: silhouette(k = 5) = 0.4350 -> keep k = 5
+
+== edge cases
+silhouette of [0, 1 | 10]: hand 0.5963, ix_voicings 0.9296
+KMeans(3) on [5, 5, 9, 9]: centroids [5.0, 9.0, 0.0]
+predict [1.0] -> cluster 2
+
+== DBSCAN, min_points 5
+eps 0.5: cluster sizes [12, 7, 15, 25, 23, 12, 6, 5, 7, 6], noise 68, ix labels - 1 == hand labels: true
+eps 1: cluster sizes [84, 40, 13, 13, 7], noise 29, ix labels - 1 == hand labels: true
+clusters (rows, noise last) against OS:
+[[82, 0, 2],
+ [34, 0, 6],
+ [0, 13, 0],
+ [0, 13, 0],
+ [0, 0, 7],
+ [5, 8, 16]]
+eps 1.5: cluster sizes [162, 11], noise 13, ix labels - 1 == hand labels: true
+eps 2: cluster sizes [164, 12], noise 10, ix labels - 1 == hand labels: true
+
+== Gaussian mixture, k = 3, diagonal covariances
+weights [0.682, 0.175, 0.143]
+log-likelihood ix 85.623, hand 85.623, after one more hand step 85.623
+largest change of a mean in that step: below 1e-3
+components (rows) against OS:
+[[115, 0, 11],
+ [3, 30, 0],
+ [3, 4, 20]]
+variance of queue_s         per component [0.392263, 0.143030, 1.747301]
+variance of setup_s         per component [1.031510, 0.440962, 1.182363]
+variance of checkout_s      per component [0.064918, 0.575761, 0.595058]
+variance of post_checkout_s per component [0.248103, 0.581853, 0.435369]
+variance of complete_s      per component [0.000001, 0.000001, 2.311161]
+log-likelihood, seeds 0 to 9: [116.576, 116.576, 116.576, 552.879, -102.666, -102.666, 116.576, 116.576, -102.666, -102.666]
+exit 0

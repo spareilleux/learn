@@ -1,0 +1,53 @@
+# Machine learning course: build the examples against the IX crates pinned in Cargo.toml, run them on three OSes and
+# compare their output with expected/; on Linux, recompute the results that don't depend on IX with numpy and scikit-learn
+name: Machine learning (IX) course examples
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['code/machine-learning-ix/**', '.github/workflows/ml-ix-examples.yml']
+  pull_request:
+    paths: ['code/machine-learning-ix/**', '.github/workflows/ml-ix-examples.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  rust:
+    name: rust (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7
+      - name: Toolchain
+        run: rustup show active-toolchain && cargo --version
+      - name: Formatting, clippy, tests and examples
+        run: bash code/machine-learning-ix/check.sh
+
+  crosscheck:
+    name: numpy and scikit-learn (ubuntu-latest)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: code/machine-learning-ix
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - name: Install numpy and scikit-learn
+        run: pip install numpy==2.4.2 scikit-learn==1.8.0
+      - name: Compare with expected/crosscheck.txt
+        run: |
+          mkdir -p out
+          python crosscheck/crosscheck.py > out/crosscheck.txt 2>&1
+          echo "exit $?" >> out/crosscheck.txt
+          diff --strip-trailing-cr expected/crosscheck.txt out/crosscheck.txt
