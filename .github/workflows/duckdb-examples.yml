@@ -42,6 +42,9 @@ jobs:
           unzip -q duckdb.zip -d "$RUNNER_TEMP/duckdb"
           echo "$RUNNER_TEMP/duckdb" >> "$GITHUB_PATH"
       - run: bash code/duckdb/check.sh
+      - name: Lesson 7 timings (not compared)
+        working-directory: code/duckdb
+        run: duckdb < timings/07-performance.sql
 
   csharp:
     name: csharp (${{ matrix.os }})
