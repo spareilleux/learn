@@ -16,6 +16,7 @@ sidebar:
 - [x] Test Compose
 - [x] Check whether Docker and `wslc` images are shared
 - [x] Small C# program with `Microsoft.WSL.Containers`
+- [x] Go further: `WslcImage`, API networking, Kubernetes, extensions, GUI
 
 ## 2026-09-12 — Taking stock
 
@@ -726,10 +727,138 @@ Conflict. The container name "/wslc-host-hello" is already in use by container "
 The container survives the process in `storage.vhdx`. Two fixes in the program: `Delete(DeleteContainerOption.Force)` in a `finally`, and on startup `OpenContainer` + `Delete` of a leftover (`COMException` if there is none). Verified: leftover removed (`Removed leftover container wslc-host-hello`), then a command that doesn't exist (`/nope`) no longer leaves anything behind.
 
 **Conclusion:** the API works and is fast, but in preview its documentation lags behind the package: names, SDK version. Compile first, read the types if in doubt. On GitHub Actions the Windows runners have no WSL containers service: CI only compiles the program.
+## 2026-09-13 — Going further: `WslcImage`, networking, Kubernetes, GUI
+
+### Building an image during `dotnet build`
+
+The package's MSBuild targets (`build\Microsoft.WSL.Containers.common.targets`) add a `WslcImage` item: after `Build`, they run `wslc image build` then `wslc image save` to a `.tar` next to the program. Test project:
+
+```xml
+<ItemGroup>
+  <PackageReference Include="Microsoft.WSL.Containers" Version="2.9.9" />
+  <WslcImage Include="greeter" Image="wslc-host/greeter:1.0" Dockerfile="container/Containerfile" Context="container/" />
+</ItemGroup>
+```
+
+```dockerfile
+FROM docker.io/library/alpine:3.24
+COPY greet.sh /usr/local/bin/greet
+RUN chmod +x /usr/local/bin/greet
+ENTRYPOINT ["/usr/local/bin/greet"]
+```
+
+First trap, the same as with the CLI: the targets call a bare `wslc`, so a terminal (or an IDE) opened before WSL was installed doesn't find it:
+
+```text
+error WSLC0001: The wslc CLI check failed: 'wslc --version' returned exit code 9009. Install WSL by running 'wsl --install --no-distribution', or set the WslcCliPath property to a specific wslc.exe path.
+```
+
+With `-p:WslcCliPath="C:\Program Files\WSL\wslc.exe"` (or a new terminal):
+
+```text
+  WSLC: Building image 'wslc-host/greeter:1.0'...
+    | naming to docker.io/wslc-host/greeter:1.0
+  WSLC: Saving image 'wslc-host/greeter:1.0' to 'bin\Debug\net10.0-windows10.0.26100.0\win-x64\greeter.tar'...
+Build succeeded.
+```
+
+9 s, and an 8.3 MB `greeter.tar`. The image is built in the CLI session (`wslc-cli-spare`), where it stays.
+
+The build is incremental: the target compares the files in `Context` (and a `wslc.greeter.options` file that records the options) with the `.tar`:
+
+| Change | `dotnet build` | `.tar` |
+|---|---|---|
+| none | 1 s, no `WSLC:` line | unchanged |
+| `greet.sh` touched | 2 s, rebuilt (layer cache) | rewritten |
+| `echo edited` added to `greet.sh` | 3 s, rebuilt | rewritten |
+| none | 2 s, no `WSLC:` line | unchanged |
+
+Each real change leaves the previous image untagged (`<none>`) in the CLI session: that's what the `WslcPruneAfterBuild` property is for.
+
+### Loading the `.tar` into the application's session
+
+`LoadImageAsync` (the equivalent of `wslc load`) keeps the tag and the `ENTRYPOINT`; `CommandLine` then passes arguments to the entrypoint, like `docker run image args`:
+
+```csharp
+await session.LoadImageAsync(Path.Combine(AppContext.BaseDirectory, "greeter.tar"));
+// ... new ContainerSettings("wslc-host/greeter:1.0") with CommandLine = ["Claude"]
+```
+
+```text
+before: 
+load 427 ms
+after: wslc-host/greeter:1.0
+Hello Claude from an image built by dotnet build (alpine 3.24.1)
+edited
+exit 0
+```
+
+So the full chain works without a registry: `dotnet build` produces the image, the `.tar` ships with the program, the program loads it into its own session.
+
+`ImportImageAsync` is something else (the equivalent of `wslc import`): it expects a flat filesystem, like the one `wslc export` produces. Given the `.tar` from `image save` (an OCI layout starting with `blobs/sha256/…`), it accepts it, but the resulting image has no entrypoint (`CommandLine = ["Claude"]` fails with `exec: "Claude": executable file not found in $PATH`) and no `/bin/sh` either:
+
+```text
+failed to create task for container: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: error during container init: exec: "/bin/sh": stat /bin/sh: no such file or directory: unknown
+```
+
+Checked with the CLI: `wslc export` of an alpine container, `wslc import`, then `wslc run --rm exptest/rootfs:1 /bin/cat /etc/alpine-release` → `3.24.1`, and `image inspect` shows `"Cmd": null` and `"Entrypoint": null`.
+
+### Trap: API containers have no network by default
+
+`container.Inspect()` shows `"NetworkMode":"none"` when `ContainerSettings.NetworkingMode` isn't set, while `wslc run` connects to the bridge. Same alpine container, `ip -4 addr` then `wget` to the internet:
+
+```text
+--- NetworkingMode=default
+NetworkMode in inspect: none
+    inet 127.0.0.1/8 scope host lo
+no internet
+--- NetworkingMode=Bridged
+NetworkMode in inspect: bridge
+    inet 127.0.0.1/8 scope host lo
+    inet 172.17.0.2/16 brd 172.17.255.255 scope global eth0
+internet ok
+```
+
+The pull itself works without it (it's done by the session, not by the container). A containerized service that needs to call out, or that is published with `PortMappings`, needs `NetworkingMode = ContainerNetworkingMode.Bridged`.
+
+### Kubernetes: no, not even k3s
+
+`wslc` has no Kubernetes command. Attempt with [k3s](https://k3s.io/) in a container, as is done with Docker (`--privileged`):
+
+- The CLI has no `--privileged` or `--cap-add` option (`wslc run --help`). Without them, `wslc run -d --name k3s-cli --tmpfs /run --tmpfs /var/run rancher/k3s:v1.36.4-k3s1 server` stops immediately:
+
+  ```text
+  time="2026-09-14T02:17:38Z" level=fatal msg="Error: failed to evacuate root cgroup: mkdir /sys/fs/cgroup/init: read-only file system"
+  ```
+
+- The API has `ContainerSettings.Privileged`. With `Privileged = true`: same error. Comparison of two alpine containers in the same session:
+
+  ```text
+  --- Privileged=False
+  cgroup /sys/fs/cgroup cgroup2 ro,nosuid,nodev,noexec,relatime 0 0
+  CapEff:	00000000a80425fb
+  15
+  --- Privileged=True
+  cgroup /sys/fs/cgroup cgroup2 ro,nosuid,nodev,noexec,relatime 0 0
+  CapEff:	00000000a80425fb
+  15
+  ```
+
+  Same capabilities (Docker's default set), cgroups read-only, same 15 entries in `/dev`: in a non-administrator session, `Privileged` has no visible effect in 2.9.11.
+
+### Extensions and GUI: none
+
+- `wslc --help` lists `container`, `image`, `network`, `registry`, `settings`, `system`, `volume` and the Docker-style shortcuts: no extension mechanism.
+- `wslc settings` only opens `settings.yaml` in the default editor.
+- The **WSL Settings** app (the only WSL app in the Start menu besides `WSL`) has no container page: its pages are `About`, `Developer`, `DistroManagement`, `DockerDesktopIntegration`, `FileSystem`, `General`, `GPUAcceleration`, `GUIApps`, `MemAndProc`, `Networking`, `NetworkingIntegration`, `OptionalFeatures`, `VSCodeIntegration`, `VSIntegration`, `WorkingAcrossFileSystems`.
+
+**Conclusion:** the `dotnet build` → `.tar` → `LoadImage` chain is the most original thing in the package, and it works. Around it, `wslc` 2.9.11 stays a runtime: no Compose, no Kubernetes, no extensions, no GUI. Cleanup: test images removed from the CLI session (`greeter`, `k3s`, `docker:cli`), test sessions' `storage.vhdx` deleted (336 MB + 81 MB).
+
 ## Open questions
 
 - ~~Where does `wslc` store its images and containers?~~ In `%LocalAppData%\wslc\sessions\<session>\storage.vhdx`, one virtual disk per session. It grows with images and doesn't shrink on its own (see above).
 - ~~Can the memory and CPU of the VM used by `wslc` be limited?~~ Yes: `cpuCount` and `memorySize` in `settings.yaml`, then terminate the session (see above).
 - ~~Can `wslc` and Docker Desktop publish ports without conflict?~~ They can publish the same port without **any error**, which is the problem: `127.0.0.1` reaches `wslc`, `localhost` reaches Docker (see above).
 - ~~How do you compact a session's `storage.vhdx`?~~ Terminate the session, then `Optimize-VHD -Mode Full` as administrator: 3995 MB → 2789 MB (see above).
-- Does the MSBuild `WslcImage` integration (building an image to a `.tar` during `dotnet build`) work? *To verify.*
+- ~~Does the MSBuild `WslcImage` integration (building an image to a `.tar` during `dotnet build`) work?~~ Yes, incrementally; the `.tar` is loaded with `LoadImageAsync`, not `ImportImageAsync` (see above).
+- Does `ContainerSettings.Privileged` take effect in an administrator session? *To verify* (no effect in a normal session).

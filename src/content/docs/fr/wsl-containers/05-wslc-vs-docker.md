@@ -14,7 +14,7 @@ sidebar:
 | CLI | proche de Docker | `docker` |
 | API pour applications Windows | oui — NuGet `Microsoft.WSL.Containers` | API Docker Engine (HTTP) |
 | Gestion en entreprise | Microsoft Defender for Endpoint, Intune | Docker Business |
-| Écosystème (Compose, Kubernetes, extensions, interface graphique) | pas de commande `compose` en 2.9.11 ; Kubernetes, extensions, interface graphique *à vérifier* | complet |
+| Écosystème (Compose, Kubernetes, extensions, interface graphique) | aucun en 2.9.11 : pas de commande `compose`, pas de Kubernetes (k3s ne démarre pas), pas d'extensions, pas de page conteneurs dans WSL Settings | complet |
 
 :::note[Vérifié : pas de Compose dans `wslc` 2.9.11]
 `wslc compose` → `Unrecognized command: 'compose'`, et `docker compose` ne peut pas atteindre le moteur Docker de la session. Une petite pile se reproduit avec un script (`network create`, `volume create`, `run --network --network-alias`) ; la traduction testée d'un `compose.yaml` est dans le [journal](../journal/).
@@ -120,6 +120,12 @@ Container 2b900903f6c8 exited with code 0
 ```
 
 Le programme complet, qui supprime aussi un conteneur laissé par une exécution plantée, est dans [`code/wsl-containers/wslc-host`](https://github.com/spareilleux/learn/tree/main/code/wsl-containers/wslc-host).
+
+:::caution[Pas de réseau par défaut]
+Un conteneur créé par l'API reçoit `NetworkMode: none` : aucune interface à part `lo`, pas d'accès à internet, contrairement à `wslc run`. Renseigner `NetworkingMode = ContainerNetworkingMode.Bridged` dans `ContainerSettings` pour un service qui appelle l'extérieur ou publie des ports.
+:::
+
+Le paquet sait aussi construire ta propre image pendant `dotnet build` : un élément `WslcImage` lance `wslc image build` et `wslc image save`, et le programme charge le `.tar` dans sa session avec `LoadImageAsync` (pas `ImportImageAsync`, qui attend un système de fichiers à plat). Montage testé et sorties dans le [journal](../journal/).
 
 :::caution[Les extraits de Microsoft Learn ne compilent pas avec la 2.9.9]
 La page utilise `ComponentFlags`, `MemoryMB`, `CmdLine` et `DeleteContainerFlags`. Dans le paquet 2.9.9, ce sont `IReadOnlyList<Component>`, `MemorySizeInMB`, `CommandLine` et `DeleteContainerOption`. Détails dans le [journal](../journal/).

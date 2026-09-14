@@ -14,7 +14,7 @@ sidebar:
 | CLI | cercana a Docker | `docker` |
 | API para aplicaciones Windows | sí — NuGet `Microsoft.WSL.Containers` | Docker Engine API (HTTP) |
 | Gestión empresarial | Microsoft Defender for Endpoint, Intune | Docker Business |
-| Ecosistema (Compose, Kubernetes, extensiones, GUI) | ningún comando `compose` en la 2.9.11; Kubernetes, extensiones, GUI *por verificar* | completo |
+| Ecosistema (Compose, Kubernetes, extensiones, GUI) | nada en la 2.9.11: ningún comando `compose`, sin Kubernetes (k3s no arranca), sin extensiones, sin página de contenedores en WSL Settings | completo |
 
 :::note[Verificado: no hay Compose en `wslc` 2.9.11]
 `wslc compose` → `Unrecognized command: 'compose'`, y `docker compose` no puede alcanzar el motor Docker de la sesión. Una pequeña stack se puede reproducir con un script (`network create`, `volume create`, `run --network --network-alias`); la traducción probada de un `compose.yaml` está en el [diario](../journal/).
@@ -120,6 +120,12 @@ Container 2b900903f6c8 exited with code 0
 ```
 
 El programa completo, que también elimina un contenedor dejado por una ejecución que falló, está en [`code/wsl-containers/wslc-host`](https://github.com/spareilleux/learn/tree/main/code/wsl-containers/wslc-host).
+
+:::caution[Sin red por defecto]
+Un contenedor creado por la API recibe `NetworkMode: none`: ninguna interfaz aparte de `lo`, sin acceso a internet, a diferencia de `wslc run`. Define `NetworkingMode = ContainerNetworkingMode.Bridged` en `ContainerSettings` para un servicio que llame al exterior o publique puertos.
+:::
+
+El paquete también puede construir tu propia imagen durante `dotnet build`: un elemento `WslcImage` ejecuta `wslc image build` y `wslc image save`, y el programa carga el `.tar` en su sesión con `LoadImageAsync` (no `ImportImageAsync`, que espera un sistema de archivos plano). Configuración probada y salidas en el [diario](../journal/).
 
 :::caution[Los extractos de Microsoft Learn no compilan con la 2.9.9]
 La página usa `ComponentFlags`, `MemoryMB`, `CmdLine` y `DeleteContainerFlags`. En el paquete 2.9.9 son `IReadOnlyList<Component>`, `MemorySizeInMB`, `CommandLine` y `DeleteContainerOption`. Detalles en el [diario](../journal/).

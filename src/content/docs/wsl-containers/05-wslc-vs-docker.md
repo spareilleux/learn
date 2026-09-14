@@ -14,7 +14,7 @@ sidebar:
 | CLI | close to Docker | `docker` |
 | API for Windows applications | yes — NuGet `Microsoft.WSL.Containers` | Docker Engine API (HTTP) |
 | Enterprise management | Microsoft Defender for Endpoint, Intune | Docker Business |
-| Ecosystem (Compose, Kubernetes, extensions, GUI) | no `compose` command in 2.9.11; Kubernetes, extensions, GUI *to verify* | complete |
+| Ecosystem (Compose, Kubernetes, extensions, GUI) | none in 2.9.11: no `compose` command, no Kubernetes (k3s doesn't start), no extensions, no container page in WSL Settings | complete |
 
 :::note[Verified: no Compose in `wslc` 2.9.11]
 `wslc compose` → `Unrecognized command: 'compose'`, and the session's Docker engine can't be reached by `docker compose`. A small stack can be reproduced with a script (`network create`, `volume create`, `run --network --network-alias`); the tested translation of a `compose.yaml` is in the [journal](../journal/).
@@ -120,6 +120,12 @@ Container 2b900903f6c8 exited with code 0
 ```
 
 The full program, which also removes a container left by a crashed run, is in [`code/wsl-containers/wslc-host`](https://github.com/spareilleux/learn/tree/main/code/wsl-containers/wslc-host).
+
+:::caution[No network by default]
+A container created by the API gets `NetworkMode: none`: no interface other than `lo`, no internet access, unlike `wslc run`. Set `NetworkingMode = ContainerNetworkingMode.Bridged` in `ContainerSettings` for a service that calls out or publishes ports.
+:::
+
+The package can also build your own image during `dotnet build`: a `WslcImage` item runs `wslc image build` and `wslc image save`, and the program loads the `.tar` into its session with `LoadImageAsync` (not `ImportImageAsync`, which expects a flat filesystem). Tested setup and outputs in the [journal](../journal/).
 
 :::caution[The Microsoft Learn snippets don't compile against 2.9.9]
 The page uses `ComponentFlags`, `MemoryMB`, `CmdLine` and `DeleteContainerFlags`. In package 2.9.9 they are `IReadOnlyList<Component>`, `MemorySizeInMB`, `CommandLine` and `DeleteContainerOption`. Details in the [journal](../journal/).
