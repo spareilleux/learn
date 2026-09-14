@@ -1,0 +1,29 @@
+# GitHub Actions course, lesson 9: checks for the exercises (manual runs only)
+name: "GHA 09: exercise checks"
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  # Exercise: when exactly is a job with timeout-minutes: 1 cancelled?
+  job-timeout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
+      - run: |
+          date -u +%T
+          sleep 300
+
+  # Exercise: a timeout on one step only
+  step-timeout:
+    runs-on: ubuntu-latest
+    steps:
+      - timeout-minutes: 1
+        run: |
+          date -u +%T
+          sleep 300
+      - if: always()
+        run: date -u +%T
