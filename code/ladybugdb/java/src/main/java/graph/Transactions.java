@@ -1,5 +1,5 @@
 // LadybugDB course, lesson 8: transactions and concurrency from Java, with the com.ladybugdb:lbug package.
-// Run from code/ladybugdb: mvn -q -f java/pom.xml exec:java -Dexec.mainClass=graph.Transactions
+// Run from code/ladybugdb: mvn -q -f java/pom.xml exec:java -Dexec.mainClass=graph.Transactions [-Dexec.args=refused-begin]
 // Lines starting with "# " depend on the operating system or on timing: check.sh prints them without comparing them.
 package graph;
 
@@ -11,6 +11,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Transactions {
     public static void main(String[] args) throws Exception {
+        if (args.length > 0 && args[0].equals("refused-begin")) {
+            refusedBegin();
+            return;
+        }
         section("1. Two connections, one write transaction");
         try (var database = new Database(""); var first = new Connection(database); var second = new Connection(database)) {
             execute(first, "CREATE NODE TABLE Project(path STRING PRIMARY KEY, name STRING)");
@@ -20,11 +24,7 @@ public class Transactions {
             print("first sees", execute(first, "MATCH (p:Project) RETURN count(*)"));
             print("second sees", execute(second, "MATCH (p:Project) RETURN count(*)"));
             print("second: CREATE Two", execute(second, "CREATE (:Project {path: 'New/Two.csproj', name: 'Two'})"));
-            print("second: BEGIN", execute(second, "BEGIN TRANSACTION"));
-            print("second: CREATE Two", execute(second, "CREATE (:Project {path: 'New/Two.csproj', name: 'Two'})"));
             print("first: COMMIT", execute(first, "COMMIT"));
-            // After a refused BEGIN, every query of that connection throws, until a BEGIN succeeds
-            print("second sees", execute(second, "MATCH (p:Project) RETURN count(*)"));
             print("second: CREATE Two", execute(second, "CREATE (:Project {path: 'New/Two.csproj', name: 'Two'})"));
 
             section("2. A read-only transaction reads a snapshot");
@@ -105,6 +105,22 @@ public class Transactions {
             print("# a read-only Database, then a read-write one", open(path, false));
         }
         print("a missing file, read-only", open(directory.resolve("missing.lbdb").toString(), true));
+    }
+
+    // A BEGIN refused because another connection writes breaks the connection: the next query throws on Windows
+    // and crashes the JVM on Linux and macOS. Run on its own, not compared.
+    static void refusedBegin() {
+        try (var database = new Database(""); var first = new Connection(database); var second = new Connection(database)) {
+            execute(first, "CREATE NODE TABLE Project(path STRING PRIMARY KEY, name STRING)");
+            print("first: BEGIN", execute(first, "BEGIN TRANSACTION"));
+            print("second: BEGIN", execute(second, "BEGIN TRANSACTION"));
+            print("first: COMMIT", execute(first, "COMMIT"));
+            System.out.flush();
+            print("second: MATCH", execute(second, "MATCH (p:Project) RETURN count(*)"));
+            print("second: BEGIN", execute(second, "BEGIN TRANSACTION"));
+            print("second: MATCH", execute(second, "MATCH (p:Project) RETURN count(*)"));
+            print("second: COMMIT", execute(second, "COMMIT"));
+        }
     }
 
     static void section(String title) {

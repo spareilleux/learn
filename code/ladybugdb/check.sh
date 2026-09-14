@@ -35,7 +35,7 @@ for script in cypher/*.cypher; do
   fi
 done
 # Database files and processes (lesson 8): the lines starting with "# " depend on the OS and aren't compared
-bash files/files.sh > out/files.txt 2>&1
+bash files/files.sh > out/files.txt 2>&1 || true
 if grep -v '^# ' out/files.txt | diff --strip-trailing-cr files/expected.txt -; then
   echo "ok   files"
 else

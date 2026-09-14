@@ -5,21 +5,18 @@ first: CREATE One: ok
 first sees: 112
 second sees: 111
 second: CREATE Two: error: Cannot start a new write transaction in the system. Only one write transaction at a time is allowed in the system.
-second: BEGIN: error: Cannot start a new write transaction in the system. Only one write transaction at a time is allowed in the system.
-second: CREATE Two: thrown RuntimeException: Unknown Error
 first: COMMIT: ok
-second sees: thrown RuntimeException: Unknown Error
-second: CREATE Two: thrown RuntimeException: Unknown Error
+second: CREATE Two: ok
 
 == 2. A read-only transaction reads a snapshot
 second: BEGIN READ ONLY: ok
-second sees: 112
-first: CREATE Three: ok
-first sees: 113
-second sees: 112
-second: COMMIT: ok
 second sees: 113
-second: CREATE Two: ok
+first: CREATE Three: ok
+first sees: 114
+second sees: 113
+second: COMMIT: ok
+second sees: 114
+second: CREATE Two: error: Runtime exception: Found duplicated primary key value New/Two.csproj, which violates the uniqueness constraint of the primary key column.
 
 == 3. An error ends the transaction
 first: BEGIN: ok

@@ -33,6 +33,11 @@ else
 fi
 echo "== Transactions: what depends on the OS or on timing (not compared)"
 grep '^# ' out/java/transactions.txt || true
+echo "== A refused BEGIN (not compared: the JVM crashes on Linux and macOS)"
+set +e
+mvn -B -q -f java/pom.xml exec:java -Dexec.mainClass=graph.Transactions -Dexec.args=refused-begin 2>&1 | grep -v '^Warning: failed to create directory' | grep -E '^(first|second)|^#.*(fatal error|SIGSEGV|EXCEPTION_ACCESS_VIOLATION|liblbug_java)'
+echo "exit code of mvn: ${PIPESTATUS[0]}"
+set -e
 echo "== Native library copies (not compared)"
 run temp
 run timings | sed -n '/Timings/,$p'
