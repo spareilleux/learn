@@ -1,0 +1,78 @@
+# l1
+
+== Pitches: MIDI number and pitch class (C4 = 60)
+pitch    course               GA                   check
+E2       midi 40 pc 4         midi 40 pc 4         ok
+A2       midi 45 pc 9         midi 45 pc 9         ok
+D3       midi 50 pc 2         midi 50 pc 2         ok
+G3       midi 55 pc 7         midi 55 pc 7         ok
+B3       midi 59 pc 11        midi 59 pc 11        ok
+E4       midi 64 pc 4         midi 64 pc 4         ok
+C4       midi 60 pc 0         midi 60 pc 0         ok
+A4       midi 69 pc 9         midi 69 pc 9         ok
+C#4      midi 61 pc 1         midi 61 pc 1         ok
+GA prints pitch classes as: 0 1 2 3 4 5 6 7 8 9 T E
+
+== Spellings: many names, one pitch class
+note     course GA     check
+C#       1      1      ok
+Db       1      1      ok
+B#       0      0      ok
+Cb       11     11     ok
+E#       5      5      ok
+Fb       4      4      ok
+Bbb      9      9      ok
+Fx       7      7      ok
+
+== Intervals: name from the letters, size in semitones, interval class
+notes    course         GA             check
+C-E      M3 4 ic4       M3 4 ic4       ok
+C-Eb     m3 3 ic3       m3 3 ic3       ok
+C-D#     A2 3 ic3       A2 3 ic3       ok
+C-G      P5 7 ic5       P5 7 ic5       ok
+C-F#     A4 6 ic6       A4 6 ic6       ok
+C-Gb     d5 6 ic6       d5 6 ic6       ok
+B-F      d5 6 ic6       d5 6 ic6       ok
+E-C      m6 8 ic4       m6 8 ic4       ok
+!M3      m6             m6             ok
+
+== Standard tuning: string 1 is the highest
+string   course     GA         check
+1        E4         E4         ok
+2        B3         B3         ok
+3        G3         G3         ok
+4        D3         D3         ok
+5        A2         A2         ok
+6        E2         E2         ok
+
+== Fretboard: each fret adds one semitone
+string/fret  course       GA           check
+6/0          E2 40        E2 40        ok
+6/3          G2 43        G2 43        ok
+5/3          C3 48        C3 48        ok
+2/1          C4 60        C4 60        ok
+3/5          C4 60        C4 60        ok
+1/8          C5 72        C5 72        ok
+4/10         C4 60        C4 60        ok
+
+== Where is pitch class C on frets 0-12? (string/fret)
+course              6/8 5/3 4/10 3/5 2/1 1/8
+GA, Note.Chromatic  6/8 5/3 4/10 3/5 2/1 1/8
+GA, Note.Sharp      (none)
+
+== Surprises found while writing this lesson
+call                       course       GA           check
+Pitch.Flat.DFlat(4)        Db4          D4           DIFF
+Pitch.Flat.GFlat(4)        Gb4          A4           DIFF
+Pitch.Flat.FFlat(4)        Fb4          G4           DIFF
+Pitch.Sharp.TryParse Eb2   rejected     B2           DIFF
+Note.Flat.Parse B          B            Bb           DIFF
+PitchClass.Parse A         9            10           DIFF
+IntervalSize.TryParse x    False        throws ArgumentException DIFF
+
+== Exercise solutions
+question               course               GA                   check
+1. string 4, fret 7    A3 midi 57 pc 9      A3 midi 57 pc 9      ok
+2. E-Bb                d5 6 ic6             d5 6 ic6             ok
+2. A-C#                M3 4 ic4             M3 4 ic4             ok
+3. D in drop D, 0-5    6/0 5/5 4/0 2/3      6/0 5/5 4/0 2/3      ok

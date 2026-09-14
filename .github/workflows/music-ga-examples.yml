@@ -1,0 +1,32 @@
+# Music theory for Guitar Alchemist: build the course program against GA pinned on one commit,
+# on three OSes, and compare each lesson's output
+name: Music theory for GA examples
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['code/music-theory-ga/**', '.github/workflows/music-ga-examples.yml']
+  pull_request:
+    paths: ['code/music-theory-ga/**', '.github/workflows/music-ga-examples.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  csharp:
+    name: csharp (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: code/music-theory-ga/global.json
+      - run: bash code/music-theory-ga/check.sh

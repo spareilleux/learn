@@ -1,0 +1,93 @@
+# l3
+
+== Chord symbols on C: pitch classes
+symbol   course         GA             check
+C        0 4 7          0 4 7          ok
+Cm       0 3 7          0 3 7          ok
+Cdim     0 3 6          0 3 6          ok
+Caug     0 4 8          0 4 8          ok
+Csus2    0 2 7          0 2 7          ok
+Csus4    0 5 7          0 5 7          ok
+C6       0 4 7 9        0 4 7 9        ok
+C7       0 4 7 T        0 4 7 T        ok
+Cmaj7    0 4 7 E        0 4 7 E        ok
+Cm7      0 3 7 T        0 3 7 T        ok
+Cm7b5    0 3 6 T        0 3 6 T        ok
+Cdim7    0 3 6 9        0 3 6 9        ok
+C9       0 2 4 7 T      0 2 4 7 T      ok
+Cadd9    0 2 4 7        0 2 4 7        ok
+
+== Pitch classes back to a symbol: GA's ChordFormula.GetSymbolSuffix
+symbol   course   GA       check
+C        (major)  (major)  ok
+Cm       m        m        ok
+Cdim     dim      dim      ok
+Caug     aug      aug      ok
+Csus2    sus2     sus2     ok
+Csus4    sus4     sus4     ok
+C6       6        6        ok
+C7       7        7        ok
+Cmaj7    maj7     7        DIFF
+Cm7      m7       m7       ok
+Cm7b5    m7b5     dim7     DIFF
+Cdim7    dim7     dim6     DIFF
+C9       9        9        ok
+Cadd9    add9     add9     ok
+
+== GA's recognition catalog (CanonicalChordPatternCatalog.TryFindExact)
+  C       0,4,7        major-triad
+  Cm      0,3,7        minor-triad
+  Cdim    0,3,6        diminished-triad
+  Caug    0,4,8        augmented-triad
+  Csus2   0,2,7        sus2
+  Csus4   0,5,7        sus4
+  C6      0,4,7,9      major-6
+  C7      0,4,7,10     dominant-7
+  Cmaj7   0,4,7,11     major-7
+  Cm7     0,3,7,10     minor-7
+  Cm7b5   0,3,6,10     half-diminished-7
+  Cdim7   0,3,6,9      diminished-7
+  C9      0,2,4,7,10   dominant-9
+  Cadd9   0,2,4,7      add-9
+
+== Spelling: one letter per chord degree
+symbol   course           GA               check
+Cm       C Eb G           C D# G           DIFF
+Eb       Eb G Bb          Eb G A#          DIFF
+Ab       Ab C Eb          Ab C D#          DIFF
+F#       F# A# C#         F# A# C#         ok
+Bbm7     Bb Db F Ab       Bb C# F G#       DIFF
+Cdim     C Eb Gb          C D# F#          DIFF
+Cdim7    C Eb Gb Bbb      C D# F# A        DIFF
+Gb7      Gb Bb Db Fb      Gb A# C# E       DIFF
+
+== Inversions of C major
+inversion  course                         GA                             check
+0          C bass C inversion 0 Major     C bass C inversion 0 Major     ok
+1          C/E bass E inversion 1 Major   C/E bass E inversion 1 Other   DIFF
+2          C/G bass G inversion 2 Major   C/G bass G inversion 2 Major   ok
+
+== Voicings: fret numbers from string 6 (low E) to string 1 (high E)
+shape    course                           GA                               check
+x32010   0-1-0-2-3-x 0 4 7 span 2         0-1-0-2-3-x 0 4 7 span 2         ok
+032010   0-1-0-2-3-0 0 4 7 span 2         0-1-0-2-3-0 0 4 7 span 2 barre   DIFF
+x02210   0-1-2-2-0-x 0 4 9 span 1         0-1-2-2-0-x 0 4 9 span 1         ok
+022100   0-0-1-2-2-0 4 8 E span 1         0-0-1-2-2-0 4 8 E span 1 barre   DIFF
+320003   3-0-0-0-2-3 2 7 E span 1         3-0-0-0-2-3 2 7 E span 1 barre   DIFF
+xx0232   2-3-2-0-x-x 2 6 9 span 1         2-3-2-0-x-x 2 6 9 span 1         ok
+133211   1-1-2-3-3-1 0 5 9 span 2 barre   1-1-2-3-3-1 0 5 9 span 2 barre   ok
+
+== Naming a voicing: course tries the bass first, GA's catalog reads from the bass
+  x32010  course C      GA major-triad
+  032010  course C/E    GA (none)
+  x02210  course Am     GA minor-triad
+  022100  course E      GA major-triad
+  320003  course G      GA major-triad
+  xx0232  course D      GA major-triad
+  133211  course F      GA major-triad
+
+== Exercise solutions
+question         course               GA                   check
+1. F#dim7        F# A C Eb            F# A C D#            DIFF
+2. x35543  notes C3 G3 C4 D#4 G4  course Cm  GA minor-triad
+2. x02010  notes A2 E3 G3 C4 E4  course Am7  GA minor-7

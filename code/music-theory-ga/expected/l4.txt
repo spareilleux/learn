@@ -1,0 +1,75 @@
+# l4
+
+== Transposition and inversion of a C major triad (0 4 7)
+operation  course     GA         check
+T2         2 6 9      2 6 9      ok
+I0         0 5 8      0 5 8      ok
+T2I        2 7 T      2 7 T      ok
+
+== Interval-class vectors
+set                course               GA                   check
+C major triad      <0 0 1 1 1 0>        <0 0 1 1 1 0>        ok
+A minor triad      <0 0 1 1 1 0>        <0 0 1 1 1 0>        ok
+C7                 <0 1 2 1 1 1>        <0 1 2 1 1 1>        ok
+Cm7b5              <0 1 2 1 1 1>        <0 1 2 1 1 1>        ok
+Cdim7              <0 0 4 0 0 2>        <0 0 4 0 0 2>        ok
+C major scale      <2 5 4 3 6 1>        <2 5 4 3 6 1>        ok
+11 pitch classes   <10 10 10 10 10 5>   <10 10 10 10 10 5>   ok
+all 12             <12 12 12 12 12 6>   <1 1 1 1 0 6>        DIFF
+
+== Prime forms and Forte numbers (each set transposed by 5 first)
+table row        course                         GA                             check
+(037) 3-11       (037) 3-11 <001110>            (037) 3-11 <001110>            ok
+(0158) 4-20      (0158) 4-20 <101220>           (0158) 4-20 <101220>           ok
+(0358) 4-26      (0358) 4-26 <012120>           (0358) 4-26 <012120>           ok
+(0258) 4-27      (0258) 4-27 <012111>           (0258) 4-27 <012111>           ok
+(0369) 4-28      (0369) 4-28 <004002>           (0369) 4-28 <004002>           ok
+(0146) 4-Z15     (0146) 4-Z15 <111111>          (0146) 4-Z15 <111111>          ok
+(0137) 4-Z29     (0137) 4-Z29 <111111>          (0137) 4-Z29 <111111>          ok
+(01568) 5-20     (01568) 5-20 <211231>          (01568) 5-20 <211231>          ok
+(023679) 6-Z29   (023679) 6-Z29 <224232>        (023679) 6-Z29 <224232>        ok
+(014579) 6-31    (014579) 6-31 <223431>         (014579) 6-31 <223431>         ok
+(02468T) 6-35    (02468T) 6-35 <060603>         (02468T) 6-35 <060603>         ok
+(013568T) 7-35   (013568T) 7-35 <254361>        (013568T) 7-35 <254361>        ok
+(0145679) 7-Z18  (0145679) 7-Z18 <434442>       (0145679) 7-Z18 <434442>       ok
+(0125679) 7-20   (0125679) 7-20 <433452>        (0125679) 7-20 <433452>        ok
+
+== Packed from the right (Rahn) or to the left (Forte)?
+set classes where the two packings disagree: 6
+  Rahn (01568)         Forte (01378)
+  Rahn (014579)        Forte (013589)
+  Rahn (023679)        Forte (013689)
+  Rahn (0125679)       Forte (0124789)
+  Rahn (0145679)       Forte (0123589)
+  Rahn (0134578T)      Forte (0124579T)
+sets whose GA prime form is Rahn's: 4096 of 4096
+
+== Counting classes
+equivalence            course GA     check
+T and I (set classes)  224    224    ok
+T only                 352    352    ok
+
+== Z-relation: same vector, different set classes
+set      course                       GA                           check
+0146     <1 1 1 1 1 1> (0146) 4-Z15   <1 1 1 1 1 1> (0146) 4-Z15   ok
+0137     <1 1 1 1 1 1> (0137) 4-Z29   <1 1 1 1 1 1> (0137) 4-Z29   ok
+
+== Modal families: GA counts the sets containing 0 that share the vector
+set (rotations)          course GA     check
+major triad (3)          6      6      ok
+dominant 7th (4)         8      8      ok
+major scale (7)          7      7      ok
+harmonic minor (7)       14     14     ok
+0146 (4)                 16     16     ok
+
+== Same set class as Am, then G7, among 12 roots x 12 chord types
+Am course: C Cm C# C#m D Dm Eb Ebm E Em F Fm F# F#m G Gm Ab Abm A Bb Bbm B Bm
+Am GA:     C Cm C# C#m D Dm Eb Ebm E Em F Fm F# F#m G Gm Ab Abm A Bb Bbm B Bm
+G7 course: C7 Cm7b5 C#7 C#m7b5 D7 Dm7b5 Eb7 Ebm7b5 E7 Em7b5 F7 Fm7b5 F#7 F#m7b5 Gm7b5 Ab7 Abm7b5 A7 Am7b5 Bb7 Bbm7b5 B7 Bm7b5
+G7 GA:     C7 Cm7b5 C#7 C#m7b5 D7 Dm7b5 Eb7 Ebm7b5 E7 Em7b5 F7 Fm7b5 F#7 F#m7b5 Gm7b5 Ab7 Abm7b5 A7 Am7b5 Bb7 Bbm7b5 B7 Bm7b5
+
+== Exercise solutions
+question             course                     GA                         check
+1. minor pentatonic  <0 3 2 1 4 0> (02479)      <0 3 2 1 4 0> (02479)      ok
+2. Cmaj7 vs Am7      (0158) (0358)              (0158) (0358)              ok
+3. partner of 6-Z29  (014679) 6-Z50             (014679) 6-Z50             ok
