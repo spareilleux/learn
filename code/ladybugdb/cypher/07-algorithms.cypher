@@ -103,6 +103,8 @@ ORDER BY node.url;
 CALL QUERY_FTS_INDEX('Page', 'titles', 'DONNÉES') RETURN count(*) AS pages;
 CALL QUERY_FTS_INDEX('Page', 'titles', 'donnees') RETURN count(*) AS pages;
 CALL QUERY_FTS_INDEX('Page', 'titles', 'the') RETURN count(*) AS pages;
+// The default stop words are English, whatever the stemmer: "de" is indexed in the French index
+CALL QUERY_FTS_INDEX('Page', 'titles_fr', 'de') RETURN count(*) AS pages;
 
 // Any word, or all the words
 CALL QUERY_FTS_INDEX('Commit', 'subjects', 'lesson exercises')
