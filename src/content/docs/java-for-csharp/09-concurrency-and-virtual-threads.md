@@ -83,6 +83,8 @@ Ten thousand blocking sleeps take about one second in total: the whole program r
 
 Virtual threads help with *waiting*, not with computing. A CPU-bound loop still needs a core, and there are only as many cores as before. Parallel streams, at the end of this lesson, are the tool for that. Don't pool virtual threads either: they are meant to be created per task and thrown away.
 
+Cheap blocking also doesn't make blocking safe everywhere. The event-loop threads of reactive libraries such as [Project Reactor](https://projectreactor.io/docs/core/release/reference/) and Netty must never block, virtual threads or not. [BlockHound](https://github.com/reactor/BlockHound) detects blocking calls on those threads, and [lesson 11](../11-testing/) sets it up in the tests.
+
 `submit` catches an exception thrown by the task and keeps it in the `Future`. `get()` rethrows it wrapped in the checked `ExecutionException`:
 
 ```java

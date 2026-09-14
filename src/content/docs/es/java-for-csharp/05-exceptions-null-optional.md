@@ -421,7 +421,7 @@ new Customer(Objects.requireNonNull(null, "name"), null);
 requireNonNull: name
 ```
 
-El análisis estático puede recuperar parte de la comprobación en tiempo de compilación. [JSpecify](https://jspecify.dev/) estandariza las anotaciones `@Nullable` y `@NullMarked`, y herramientas como [NullAway](https://github.com/uber/NullAway) las hacen cumplir durante la compilación. Este curso todavía no las usa: *por verificar* en la lección 11.
+El análisis estático puede recuperar parte de la comprobación en tiempo de compilación. [JSpecify](https://jspecify.dev/) estandariza las anotaciones `@Nullable` y `@NullMarked`, y herramientas como [NullAway](https://github.com/uber/NullAway) las hacen cumplir durante la compilación. La [lección 11](../11-testing/) las configura y muestra a NullAway rechazando este tipo de código.
 
 ## `Optional<T>` en lugar de `?.` y `??`
 

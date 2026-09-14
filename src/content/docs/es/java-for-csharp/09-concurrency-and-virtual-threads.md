@@ -83,6 +83,8 @@ Diez mil esperas bloqueantes tardan en total alrededor de un segundo: el program
 
 Los hilos virtuales ayudan a *esperar*, no a calcular. Un bucle limitado por la CPU (CPU-bound) sigue necesitando un núcleo, y no hay más núcleos que antes. Los streams paralelos, al final de esta lección, son la herramienta para eso. Tampoco metas los hilos virtuales en un pool: están pensados para crearse por tarea y desecharse.
 
+Que bloquear sea barato tampoco lo vuelve seguro en todas partes. Los hilos de bucle de eventos (event loop) de las bibliotecas reactivas como [Project Reactor](https://projectreactor.io/docs/core/release/reference/) y Netty nunca deben bloquearse, haya hilos virtuales o no. [BlockHound](https://github.com/reactor/BlockHound) detecta las llamadas bloqueantes en esos hilos, y la [lección 11](../11-testing/) lo configura en las pruebas.
+
 `submit` captura una excepción lanzada por la tarea y la guarda en el `Future`. `get()` la vuelve a lanzar envuelta en la excepción comprobada `ExecutionException`:
 
 ```java

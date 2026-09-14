@@ -421,7 +421,7 @@ new Customer(Objects.requireNonNull(null, "name"), null);
 requireNonNull: name
 ```
 
-Static analysis can bring back part of the compile-time checking. [JSpecify](https://jspecify.dev/) standardises `@Nullable` and `@NullMarked` annotations, and tools such as [NullAway](https://github.com/uber/NullAway) enforce them at build time. This course doesn't use them yet: *to verify* in lesson 11.
+Static analysis can bring back part of the compile-time checking. [JSpecify](https://jspecify.dev/) standardises `@Nullable` and `@NullMarked` annotations, and tools such as [NullAway](https://github.com/uber/NullAway) enforce them at build time. [Lesson 11](../11-testing/) sets them up and shows NullAway rejecting this kind of code.
 
 ## `Optional<T>` in place of `?.` and `??`
 

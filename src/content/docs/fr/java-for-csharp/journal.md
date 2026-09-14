@@ -17,10 +17,30 @@ sidebar:
 - [x] Leçon 8 — Pattern matching
 - [x] Leçon 9 — Concurrence et threads virtuels
 - [x] Leçon 10 — Maven et Gradle en profondeur
-- [ ] Leçon 11 — Tests
+- [x] Leçon 11 — Tests
 - [ ] Leçon 12 — La bibliothèque standard du quotidien
 - [ ] Leçon 13 — La JVM à l'exécution
 - [ ] Leçon 14 — Annotations, réflexion et modules
+
+## 2026-09-13 — Leçon 11
+
+- La leçon 11 a son propre projet Maven, [`l11`](https://github.com/spareilleux/learn/tree/main/code/java-for-csharp/l11), avec 24 tests. Les messages d'échec que cite la leçon sont produits par `FailureMessagesTest` et comparés à des fichiers texte : une mise à jour de bibliothèque qui modifie un message fait donc échouer le build. `l11/check.sh` couvre le reste : les noms des tests, l'avertissement de Mockito sans l'agent, l'échec de BlockHound sans son flag de JVM, et les erreurs de NullAway.
+- La question ouverte de la leçon 5 sur JSpecify et NullAway trouve sa réponse dans cette leçon : NullAway 0.14.1 sur Error Prone 2.50.0 fonctionne sur JDK 25.
+
+**Surprises en venant de C# :**
+
+- Le conflit de la leçon 10 est apparu tout seul dans ce projet. Mockito 5.23.0 demande Byte Buddy 1.17.7, AssertJ 3.27.7 demande 1.18.3, et la règle de la définition la plus proche de Maven a placé Byte Buddy 1.18.3 à côté de `byte-buddy-agent` 1.17.7. Cela fonctionne par chance, parce que le chemin d'AssertJ est plus court et apporte la version la plus récente.
+- JUnit 6 met entre guillemets les valeurs CSV dans les noms des tests paramétrés, nombres compris, parce que les valeurs sont encore des chaînes quand le nom est construit.
+- Les rapports de Surefire ignorent `@DisplayName` tant qu'une option de reporter n'est pas définie, et sa sortie console a attribué les neuf tests de `PriceCalculatorTest` à sa classe imbriquée.
+- Avec Mockito chargé comme agent, la JVM affiche encore « Sharing is only supported for boot loader classes because bootstrap classpath has been appended ». La leçon ne le cite pas ; *à vérifier* : si `-Xshare:off` est la bonne façon de le faire taire.
+- BlockHound 1.0.17 a besoin de `-XX:+AllowRedefinitionToAddDeleteMethods`, un flag de JVM déprécié depuis JDK 13, et signale `Thread.sleep` sous le nom `java.lang.Thread.sleepNanos0`, la méthode privée du JDK qu'il instrumente.
+
+**Ce que j'ai d'abord mal fait :**
+
+- La première exécution de NullAway a échoué avec « An unknown compilation problem occurred ». La vraie erreur, une `IllegalAccessError` sur l'API interne de javac, n'est apparue qu'avec `mvn -e`. Error Prone a besoin d'un `.mvn/jvm.config` avec des lignes `--add-exports`.
+- J'ai d'abord installé BlockHound avec `BlockHound.install()`, comme le fait son README. Sur JDK 25, cela a échoué avec « Could not self-attach to current VM using external process », et avec `-Djdk.attach.allowAttachSelf=true` avec « Agent JAR loaded but agent failed to initialize ». Seul `-javaagent` associé au flag a fonctionné.
+- Mon premier jet faisait correspondre `MockBehavior.Strict` de Moq aux stubs stricts de Mockito. Ils ne vérifient pas la même chose : Moq échoue sur un appel sans setup, Mockito sur un stub jamais utilisé.
+- J'ai d'abord écrit que C# signale l'unboxing d'un nullable par l'avertissement CS8629. Convertir un `int?` en `int` sans cast ne compile pas du tout (CS0266) ; CS8629 concerne `.Value` sur un `int?` possiblement null.
 
 ## 2026-09-13 — Leçon 10
 

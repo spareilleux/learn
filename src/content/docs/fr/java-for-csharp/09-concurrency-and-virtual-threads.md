@@ -83,6 +83,8 @@ Dix mille `sleep` bloquants prennent environ une seconde au total : le programme
 
 Les threads virtuels aident à *attendre*, pas à calculer. Une boucle liée au CPU (CPU-bound) a toujours besoin d'un cœur, et il n'y a pas plus de cœurs qu'avant. Les streams parallèles, à la fin de cette leçon, sont l'outil pour cela. Ne mettez pas non plus les threads virtuels en pool : ils sont faits pour être créés pour chaque tâche, puis jetés.
 
+Qu'il soit peu coûteux de bloquer ne rend pas pour autant le blocage sûr partout. Les threads de boucle d'événements (event loop) des bibliothèques réactives comme [Project Reactor](https://projectreactor.io/docs/core/release/reference/) et Netty ne doivent jamais bloquer, threads virtuels ou non. [BlockHound](https://github.com/reactor/BlockHound) détecte les appels bloquants sur ces threads, et la [leçon 11](../11-testing/) le met en place dans les tests.
+
 `submit` intercepte une exception levée par la tâche et la conserve dans le `Future`. `get()` la relance, enveloppée dans l'exception vérifiée `ExecutionException` :
 
 ```java
