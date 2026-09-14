@@ -29,6 +29,12 @@ SET threads = 1;
 SELECT sum(len(name)) FROM 'out/steps-big.parquet' WHERE started_at BETWEEN '2030-01-01' AND '2030-01-02';
 SELECT sum(len(name)) FROM 'out/steps-big-sorted.parquet' WHERE started_at BETWEEN '2030-01-01' AND '2030-01-02';
 SELECT os, name, avg(completed_at - started_at) AS took FROM steps GROUP BY ALL ORDER BY took DESC LIMIT 1;
+
+-- Exercise 1: the same day, written four ways, on the sorted file
+SELECT count(*) FROM 'out/steps-big-sorted.parquet' WHERE started_at >= '2030-01-01' AND started_at < '2030-01-02';
+SELECT count(*) FROM 'out/steps-big-sorted.parquet' WHERE started_at::DATE = '2030-01-01';
+SELECT count(*) FROM 'out/steps-big-sorted.parquet' WHERE date_trunc('day', started_at) = '2030-01-01';
+SELECT count(*) FROM 'out/steps-big-sorted.parquet' WHERE strftime(started_at, '%Y-%m-%d') = '2030-01-01';
 RESET threads;
 
 .timer off

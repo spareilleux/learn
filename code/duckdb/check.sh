@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# DuckDB course: run every lesson script in CSV mode and compare with the expected output
+# DuckDB course: run every lesson script (SQL in CSV mode, then shell) and compare with the expected output
 set -euo pipefail
 cd "$(dirname "$0")"
 duckdb --version
@@ -8,6 +8,15 @@ status=0
 for script in sql/*.sql; do
   name=$(basename "$script" .sql)
   if duckdb -csv < "$script" | diff --strip-trailing-cr "sql/expected/$name.csv" -; then
+    echo "ok   $name"
+  else
+    echo "FAIL $name"
+    status=1
+  fi
+done
+for script in shell/*.sh; do
+  name=$(basename "$script" .sh)
+  if bash "$script" | diff --strip-trailing-cr "shell/expected/$name.txt" -; then
     echo "ok   $name"
   else
     echo "FAIL $name"

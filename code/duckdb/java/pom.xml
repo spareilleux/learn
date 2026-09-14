@@ -13,6 +13,8 @@
   <properties>
     <maven.compiler.release>25</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <!-- The class exec:java runs; lesson 8 overrides it with -Dexec.mainClass=ci.Transactions -->
+    <exec.mainClass>ci.CiQueries</exec.mainClass>
   </properties>
 
   <dependencies>
@@ -38,9 +40,6 @@
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
         <version>3.6.4</version>
-        <configuration>
-          <mainClass>ci.CiQueries</mainClass>
-        </configuration>
       </plugin>
     </plugins>
   </build>

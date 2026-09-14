@@ -1,0 +1,30 @@
+a: CREATE TABLE counters (name VARCHAR PRIMARY KEY, n INTEGER) -> ok
+a: INSERT INTO counters VALUES ('builds', 0) -> ok
+
+== 1. Isolation: b doesn't see what a hasn't committed
+a: UPDATE counters SET n = n + 1 WHERE name = 'builds' -> ok
+b: SELECT n FROM counters WHERE name = 'builds' -> 0
+
+== 2. Two updates of the same row
+b: UPDATE counters SET n = n + 1 WHERE name = 'builds' -> TransactionContext Error: Conflict on update!
+b: SELECT n FROM counters WHERE name = 'builds' -> Invalid Input Error: Attempting to execute an unsuccessful or closed pending query result | Error: TransactionContext Error: Current transaction is aborted (please ROLLBACK)
+a: commit -> ok
+b: commit -> ok
+a: SELECT n FROM counters WHERE name = 'builds' -> 1
+a: commit -> ok
+
+== 3. Two inserts with different keys
+a: INSERT INTO counters VALUES ('deploys', 1) -> ok
+b: INSERT INTO counters VALUES ('tests', 1) -> ok
+a: commit -> ok
+b: commit -> ok
+
+== 4. Two inserts with the same key
+a: INSERT INTO counters VALUES ('lint', 1) -> ok
+b: INSERT INTO counters VALUES ('lint', 2) -> ok
+a: commit -> ok
+b: commit -> TransactionContext Error: Failed to commit: PRIMARY KEY or UNIQUE constraint violation: duplicate key "lint"
+
+== 5. What was committed
+a: SELECT string_agg(name || '=' || n, ', ' ORDER BY name) FROM counters -> builds=1, deploys=1, lint=1, tests=1
+a: commit -> ok

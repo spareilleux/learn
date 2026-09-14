@@ -1,0 +1,77 @@
+
+== 1. A database file
+exit code 0
+out/ci.duckdb: 798720 bytes
+out/ci.duckdb.wal: absent
+database_size,block_size,total_blocks,used_blocks,free_blocks,wal_size
+768.0 KiB,262144,3,3,0,0 bytes
+exit code 0
+database_name,tags
+ci,{storage_version=v1.0.0+}
+memory,{}
+v150,{storage_version=v1.5.0+}
+exit code 0
+
+== 2. The write-ahead log
+Success
+exit code 0
+out/ci.duckdb: 798720 bytes
+out/ci.duckdb.wal: 135677 bytes
+steps
+2204
+exit code 0
+out/ci.duckdb: 1060864 bytes
+out/ci.duckdb.wal: absent
+
+== 3. Free blocks
+total_blocks,used_blocks,free_blocks
+4,4,0
+exit code 0
+Success
+total_blocks,used_blocks,free_blocks
+4,3,1
+exit code 0
+exit code 0
+out/ci.duckdb: 1060864 bytes
+out/ci-compact.duckdb: 798720 bytes
+
+== 4. Transactions
+runs_in_transaction
+0
+runs_after_rollback
+125
+Constraint Error: PRIMARY KEY or UNIQUE constraint violation: duplicate key "builds"
+TransactionContext Error: Current transaction is aborted (please ROLLBACK)
+Catalog Error: Table with name counters does not exist!
+Did you mean "pg_constraint"?
+
+LINE 1: SELECT count(*) FROM counters;
+                             ^
+exit code 1
+
+== 5. Constraints and upserts
+Constraint Error: Duplicate key "name: builds" violates primary key constraint.
+name,n
+builds,5
+deploys,2
+tests,1
+exit code 1
+
+== 6. A writing process and a second process
+IO Error
+exit code 1
+IO Error
+exit code 1
+process,runs
+writer,125
+
+== 7. Reading processes
+process,runs
+second reader,125
+exit code 0
+Invalid Input Error: Cannot execute statement of type "INSERT" on database "ci" which is attached in read-only mode!
+exit code 1
+IO Error
+exit code 1
+process,runs
+reader,125
