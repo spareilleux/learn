@@ -1,0 +1,36 @@
+DuckDB v1.5.5
+
+== 1. A query with a result set
+Deploy to GitHub Pages    65 runs  2 failures
+Rust course examples      18 runs  3 failures
+Java course examples       7 runs  0 failures
+
+== 2. Parameters
+Rust course failures: 3
+
+== 3. DuckDB types as Java types
+workflowName VARCHAR                                java.lang.String
+databaseId   BIGINT                                 java.lang.Long
+createdAt    TIMESTAMP                              java.sql.Timestamp
+day          DATE                                   java.time.LocalDate
+took         INTERVAL                               java.lang.String
+created_utc  TIMESTAMP WITH TIME ZONE               java.time.OffsetDateTime
+total        HUGEINT                                java.math.BigInteger
+pair         VARCHAR[]                              org.duckdb.DuckDBArray
+info         STRUCT("event" VARCHAR, attempt BIGINT) org.duckdb.DuckDBStruct
+took: 00:00:39
+created_utc as an instant: 2026-09-13T15:53:16Z
+created_utc in UTC: 2026-09-13T15:53:16Z
+
+== 4. Lists and structs
+labels: [ubuntu-latest]
+step 1: Set up job, success, started_at is a java.sql.Timestamp
+step 2: Checkout, success, started_at is a java.sql.Timestamp
+step 3: Install, build, and upload site, success, started_at is a java.sql.Timestamp
+
+== 5. Errors
+java.sql.SQLException, SQLState = null
+Invalid Input Error: Attempting to execute an unsuccessful or closed pending query result
+Error: Binder Error: Referenced column "workflow_name" not found in FROM clause!
+statement closed after the error: true
+next query on the same statement: Statement was closed

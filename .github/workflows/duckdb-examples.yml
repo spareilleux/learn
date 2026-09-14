@@ -59,3 +59,23 @@ jobs:
         with:
           global-json-file: code/duckdb/csharp/global.json
       - run: bash code/duckdb/csharp/check.sh
+
+  java:
+    name: java (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '25'
+          cache: maven
+          cache-dependency-path: code/duckdb/java/pom.xml
+      - run: bash code/duckdb/java/check.sh
