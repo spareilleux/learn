@@ -40,6 +40,9 @@ const t = fr
 			englishVoice: 'Voix pour l’anglais',
 			englishHint: 'Code et termes techniques en anglais',
 			otherLanguages: 'Autres langues',
+			region: 'Région',
+			natural: 'voix naturelle',
+			noVoice: 'Aucune voix pour cette langue dans ce navigateur.',
 			test: 'Tester',
 			sample: 'Bonjour, voici la voix qui lira cette page.',
 			rate: 'Débit',
@@ -65,6 +68,9 @@ const t = fr
 				englishVoice: 'Voz para el inglés',
 				englishHint: 'Código y términos técnicos en inglés',
 				otherLanguages: 'Otros idiomas',
+				region: 'Región',
+				natural: 'voz natural',
+				noVoice: 'Ninguna voz para este idioma en este navegador.',
 				test: 'Probar',
 				sample: 'Hola, esta es la voz que leerá esta página.',
 				rate: 'Velocidad',
@@ -89,6 +95,9 @@ const t = fr
 				englishVoice: 'Voice for English',
 				englishHint: 'Code and English terms',
 				otherLanguages: 'Other languages',
+				region: 'Region',
+				natural: 'natural voice',
+				noVoice: 'No voice for this language in this browser.',
 				test: 'Try',
 				sample: 'Hello, this is the voice that will read this page.',
 				rate: 'Speed',
@@ -132,7 +141,7 @@ const decimal = new Intl.NumberFormat(lang, { maximumFractionDigits: 2 });
 {
 	!splash && !audio && (
 		<div class="page-speech-slot">
-			<page-speech class="page-speech" data-lang={fr ? 'fr-FR' : es ? 'es-ES' : lang === 'en' ? 'en-US' : lang} data-listen={t.listen} data-pause={t.pause} data-resume={t.resume} data-from-here={t.fromHere} data-section={t.section} data-other-languages={t.otherLanguages} hidden>
+			<page-speech class="page-speech" data-lang={fr ? 'fr-FR' : es ? 'es-ES' : lang === 'en' ? 'en-US' : lang} data-listen={t.listen} data-pause={t.pause} data-resume={t.resume} data-from-here={t.fromHere} data-section={t.section} data-natural={t.natural} hidden>
 				<div class="page-speech__bar">
 					<button type="button" class="page-speech__play" aria-describedby="page-speech-hint">
 						<svg class="page-speech__icon-listen" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
@@ -170,20 +179,32 @@ const decimal = new Intl.NumberFormat(lang, { maximumFractionDigits: 2 });
 
 				<div class="page-speech__popover" id="page-speech-settings" role="dialog" aria-label={t.settings} popover>
 					<p class="page-speech__popover-title">{t.settings}</p>
-					<div class="page-speech__field">
-						<label for="page-speech-voice">{t.voice}</label>
-						<div class="page-speech__voice-row">
-							<select id="page-speech-voice" class="page-speech__voice" data-voice="page" />
+					<div class="page-speech__field" data-voice-field="page">
+						<div class="page-speech__field-head">
+							<span class="page-speech__label" id="page-speech-page-label">{t.voice}</span>
 							<button type="button" class="page-speech__test" data-test="page">{t.test}</button>
 						</div>
+						<div class="page-speech__regions" role="radiogroup" aria-label={t.region} />
+						<div class="page-speech__voice-list" role="radiogroup" aria-labelledby="page-speech-page-label" />
+						<p class="page-speech__field-hint page-speech__no-voice" hidden>{t.noVoice}</p>
+						<details class="page-speech__others">
+							<summary>{t.otherLanguages}</summary>
+							<select class="page-speech__voice" aria-label={t.otherLanguages} />
+						</details>
 					</div>
-					<div class="page-speech__field page-speech__english-field">
-						<label for="page-speech-english-voice">{t.englishVoice}</label>
-						<p class="page-speech__field-hint" id="page-speech-english-hint">{t.englishHint}</p>
-						<div class="page-speech__voice-row">
-							<select id="page-speech-english-voice" class="page-speech__voice" data-voice="english" aria-describedby="page-speech-english-hint" />
+					<div class="page-speech__field page-speech__english-field" data-voice-field="english">
+						<div class="page-speech__field-head">
+							<span class="page-speech__label" id="page-speech-english-label">{t.englishVoice}</span>
 							<button type="button" class="page-speech__test" data-test="english">{t.test}</button>
 						</div>
+						<p class="page-speech__field-hint">{t.englishHint}</p>
+						<div class="page-speech__regions" role="radiogroup" aria-label={t.region} />
+						<div class="page-speech__voice-list" role="radiogroup" aria-labelledby="page-speech-english-label" />
+						<p class="page-speech__field-hint page-speech__no-voice" hidden>{t.noVoice}</p>
+						<details class="page-speech__others">
+							<summary>{t.otherLanguages}</summary>
+							<select class="page-speech__voice" aria-label={t.otherLanguages} />
+						</details>
 					</div>
 					<div class="page-speech__field">
 						<div class="page-speech__field-head">
@@ -235,6 +256,33 @@ const decimal = new Intl.NumberFormat(lang, { maximumFractionDigits: 2 });
 	}
 
 	const tag = (v: SpeechSynthesisVoice) => v.lang.toLowerCase().replace('_', '-');
+	type VoiceField = 'page' | 'english';
+	const natural = (v: SpeechSynthesisVoice) => /natural|neural|online|premium|enhanced/i.test(v.name);
+	const score = (v: SpeechSynthesisVoice) => (natural(v) ? 2 : 0) + (/google/i.test(v.name) ? 1 : 0) + (v.default ? 0.5 : 0);
+	const sortVoices = (voices: SpeechSynthesisVoice[]) => [...voices].sort((a, b) => score(b) - score(a) || voiceName(a).localeCompare(voiceName(b)));
+	const best = (voices: SpeechSynthesisVoice[]): SpeechSynthesisVoice | undefined => sortVoices(voices)[0];
+	const regionRank = (region: string, preferred: string[]) => (preferred.includes(region) ? preferred.indexOf(region) : preferred.length);
+
+	// "Microsoft Denise Online (Natural) - French (France)" -> "Denise"
+	function voiceName(v: SpeechSynthesisVoice): string {
+		const name = v.name
+			.replace(/^(Microsoft|Apple)\s+/, '')
+			.replace(/\s+-\s+.*$/, '')
+			.replace(/\s*\((Natural|Enhanced|Premium)\)/gi, '')
+			.replace(/\s+Online\b/i, '')
+			.trim();
+		return name || v.name;
+	}
+
+	// "fr-CA" -> "Canada", in the page's language
+	function regionName(tag: string, pageLang: string): string {
+		const region = tag.split('-')[1];
+		try {
+			return (region && new Intl.DisplayNames([pageLang], { type: 'region' }).of(region.toUpperCase())) || languageName(tag, pageLang);
+		} catch {
+			return tag;
+		}
+	}
 	const sameSentence = (a: Part | undefined, b: Part | undefined) => Boolean(a && b && a.block === b.block && a.from === b.from);
 
 	class PageSpeech extends HTMLElement {
@@ -245,6 +293,7 @@ const decimal = new Intl.NumberFormat(lang, { maximumFractionDigits: 2 });
 		#state: 'idle' | 'playing' | 'paused' = 'idle';
 		#voices: SpeechSynthesisVoice[] = [];
 		#voice: SpeechSynthesisVoice | undefined; // the page's language
+		#regions: Record<VoiceField, string | undefined> = { page: undefined, english: undefined };
 		#englishVoice: SpeechSynthesisVoice | undefined; // code and English terms
 		#rate = 1;
 		#pitch = 1;
@@ -275,14 +324,11 @@ const decimal = new Intl.NumberFormat(lang, { maximumFractionDigits: 2 });
 			this.#$('.page-speech__next').addEventListener('click', () => this.#jump(1));
 			this.#setUpPopovers();
 
-			for (const select of this.querySelectorAll<HTMLSelectElement>('.page-speech__voice')) {
-				select.addEventListener('change', () => {
-					const voice = this.#voices.find((v) => v.voiceURI === select.value);
-					if (!voice) return;
-					if (select.dataset.voice === 'english') this.#englishVoice = voice;
-					else this.#voice = voice;
-					store(`speech-voice-${select.dataset.voice === 'english' ? 'en' : this.#lang}`, voice.voiceURI);
-					this.#restart();
+			for (const field of this.querySelectorAll<HTMLElement>('[data-voice-field]')) {
+				const key = field.dataset.voiceField as VoiceField;
+				field.querySelector('select')!.addEventListener('change', (e) => {
+					const voice = this.#voices.find((v) => v.voiceURI === (e.target as HTMLSelectElement).value);
+					if (voice) this.#chooseVoice(key, voice);
 				});
 			}
 			for (const button of this.querySelectorAll<HTMLButtonElement>('[data-test]')) {
@@ -409,50 +455,123 @@ const decimal = new Intl.NumberFormat(lang, { maximumFractionDigits: 2 });
 			else this.#speak();
 		}
 
-		// voices of a language first, by region, then every other voice the browser has
-		#loadVoices() {
-			this.#voices = speechSynthesis.getVoices();
-			const pageTag = (this.dataset.lang ?? 'en').toLowerCase();
-			const pick = (lang: string, preferred: string, saved: string | null) => {
-				const score = (v: SpeechSynthesisVoice) => (tag(v) === preferred ? 1 : 0) + (/natural|neural|online|google|premium|enhanced/i.test(v.name) ? 2 : 0) + (v.default ? 0.5 : 0);
-				const mine = this.#voices.filter((v) => tag(v).startsWith(lang)).sort((a, b) => score(b) - score(a) || a.name.localeCompare(b.name));
-				const others = this.#voices.filter((v) => !tag(v).startsWith(lang)).sort((a, b) => a.lang.localeCompare(b.lang) || a.name.localeCompare(b.name));
-				return { mine, others, chosen: this.#voices.find((v) => v.voiceURI === saved) ?? mine[0] ?? others[0] };
-			};
-			const page = pick(this.#lang, pageTag, store(`speech-voice-${this.#lang}`));
-			const english = pick('en', 'en-us', store('speech-voice-en'));
-			this.#voice = page.chosen;
-			this.#englishVoice = this.#englishPage ? page.chosen : english.chosen;
-			for (const select of this.querySelectorAll<HTMLSelectElement>('.page-speech__voice')) {
-				const { mine, others, chosen } = select.dataset.voice === 'english' ? english : page;
-				this.#fillVoices(select, mine, others, chosen);
-			}
+		// the language, the preferred regions and the storage key of a voice field
+		#fieldInfo(key: VoiceField) {
+			const lang = key === 'english' ? 'en' : this.#lang;
+			const fallback = key === 'english' ? 'en-us' : (this.dataset.lang ?? 'en').toLowerCase();
+			// the browser's locale gives the default region (fr-CA: Canada), except for English terms in other pages: US English
+			const browser = key === 'english' && !this.#englishPage ? undefined : navigator.languages.map((l) => l.toLowerCase()).find((l) => l.startsWith(`${lang}-`));
+			return { lang, preferred: [browser, fallback].filter((r): r is string => Boolean(r)), storeKey: key === 'english' ? 'en' : this.#lang };
 		}
 
-		#fillVoices(select: HTMLSelectElement, mine: SpeechSynthesisVoice[], others: SpeechSynthesisVoice[], chosen: SpeechSynthesisVoice | undefined) {
+		#voicesOf(key: VoiceField) {
+			const { lang, preferred } = this.#fieldInfo(key);
+			const mine = this.#voices.filter((v) => tag(v) === lang || tag(v).startsWith(`${lang}-`));
+			const regions = [...new Set(mine.map(tag))].sort((a, b) => regionRank(a, preferred) - regionRank(b, preferred) || a.localeCompare(b));
+			return { mine, regions, preferred };
+		}
+
+		#loadVoices() {
+			this.#voices = speechSynthesis.getVoices();
+			for (const key of ['page', 'english'] as VoiceField[]) {
+				const { lang, storeKey } = this.#fieldInfo(key);
+				const { mine, regions, preferred } = this.#voicesOf(key);
+				const savedRegion = store(`speech-region-${storeKey}`);
+				const region = regions.find((r) => r === savedRegion) ?? regions.find((r) => preferred.includes(r)) ?? regions[0];
+				const saved = this.#voices.find((v) => v.voiceURI === store(`speech-voice-${storeKey}`));
+				const inRegion = best(mine.filter((v) => tag(v) === region));
+				const voice = saved && (tag(saved) === region || !tag(saved).startsWith(lang)) ? saved : (inRegion ?? saved ?? this.#voices[0]);
+				this.#regions[key] = region;
+				if (key === 'english') this.#englishVoice = voice;
+				else this.#voice = voice;
+			}
+			if (this.#englishPage) this.#englishVoice = this.#voice;
+			this.#renderVoices();
+		}
+
+		#chooseVoice(key: VoiceField, voice: SpeechSynthesisVoice) {
+			if (key === 'english') this.#englishVoice = voice;
+			else this.#voice = voice;
+			if (this.#englishPage) this.#englishVoice = this.#voice;
+			store(`speech-voice-${this.#fieldInfo(key).storeKey}`, voice.voiceURI);
+			this.#renderVoices();
+			this.#restart();
+		}
+
+		#chooseRegion(key: VoiceField, region: string) {
+			this.#regions[key] = region;
+			store(`speech-region-${this.#fieldInfo(key).storeKey}`, region);
+			const voice = best(this.#voices.filter((v) => tag(v) === region));
+			if (voice) this.#chooseVoice(key, voice);
+		}
+
+		// per field: a toggle of the regions that have voices, the voices of the chosen region, and the other languages in a list
+		#renderVoices() {
 			const pageLang = this.dataset.lang ?? 'en';
-			const option = (v: SpeechSynthesisVoice) => {
-				const o = new Option(`${v.name.replace(/^(Microsoft|Google) /, '').replace(/ - .*$/, '')} — ${languageName(v.lang, pageLang)}`, v.voiceURI);
-				o.selected = v === chosen;
-				return o;
-			};
-			const groups: HTMLOptGroupElement[] = [];
-			const byTag = new Map<string, SpeechSynthesisVoice[]>();
-			for (const v of mine) byTag.set(tag(v), [...(byTag.get(tag(v)) ?? []), v]);
-			for (const [t, voices] of byTag) {
-				const group = document.createElement('optgroup');
-				group.label = languageName(t, pageLang);
-				group.append(...voices.map(option));
-				groups.push(group);
+			for (const field of this.querySelectorAll<HTMLElement>('[data-voice-field]')) {
+				const key = field.dataset.voiceField as VoiceField;
+				const chosen = key === 'english' ? this.#englishVoice : this.#voice;
+				const { mine, regions } = this.#voicesOf(key);
+				const region = this.#regions[key];
+
+				const toggle = field.querySelector<HTMLElement>('.page-speech__regions')!;
+				toggle.replaceChildren(
+					...regions.map((r) => {
+						const b = document.createElement('button');
+						b.type = 'button';
+						b.setAttribute('role', 'radio');
+						b.setAttribute('aria-checked', String(r === region));
+						b.textContent = regionName(r, pageLang);
+						b.addEventListener('click', () => this.#chooseRegion(key, r));
+						return b;
+					}),
+				);
+				toggle.hidden = regions.length < 2;
+
+				const list = field.querySelector<HTMLElement>('.page-speech__voice-list')!;
+				list.replaceChildren(
+					...sortVoices(mine.filter((v) => tag(v) === region)).map((v) => {
+						const b = document.createElement('button');
+						b.type = 'button';
+						b.setAttribute('role', 'radio');
+						b.setAttribute('aria-checked', String(v === chosen));
+						const name = document.createElement('span');
+						name.textContent = voiceName(v);
+						b.append(name);
+						if (natural(v)) {
+							const badge = document.createElement('span');
+							badge.className = 'page-speech__badge';
+							badge.textContent = '✦';
+							badge.title = this.dataset.natural ?? '';
+							const label = document.createElement('span');
+							label.className = 'sr-only';
+							label.textContent = ` (${this.dataset.natural})`;
+							name.append(label);
+							b.append(badge);
+						}
+						b.addEventListener('click', () => this.#chooseVoice(key, v));
+						return b;
+					}),
+				);
+				field.querySelector<HTMLElement>('.page-speech__no-voice')!.hidden = mine.length > 0;
+
+				const others = this.#voices.filter((v) => !mine.includes(v)).sort((a, b) => a.lang.localeCompare(b.lang) || a.name.localeCompare(b.name));
+				const select = field.querySelector('select')!;
+				const placeholder = new Option('—', '');
+				select.replaceChildren(placeholder, ...others.map((v) => new Option(`${voiceName(v)} — ${languageName(v.lang, pageLang)}`, v.voiceURI, false, v === chosen)));
+				const otherChosen = Boolean(chosen && others.includes(chosen));
+				if (!otherChosen) placeholder.selected = true;
+				const details = field.querySelector('details')!;
+				details.hidden = others.length === 0;
+				// opened for the reader when the list is the only choice or holds the voice; closed again once it doesn't
+				if (mine.length === 0 || otherChosen) {
+					details.open = true;
+					details.dataset.auto = '';
+				} else if (details.dataset.auto !== undefined) {
+					details.open = false;
+					delete details.dataset.auto;
+				}
 			}
-			if (others.length) {
-				const group = document.createElement('optgroup');
-				group.label = this.dataset.otherLanguages ?? '';
-				group.append(...others.map(option));
-				groups.push(group);
-			}
-			select.replaceChildren(...groups);
-			select.disabled = this.#voices.length === 0;
 		}
 
 		#utteranceFor(text: string, english: boolean): SpeechSynthesisUtterance {
@@ -888,13 +1007,100 @@ const decimal = new Intl.NumberFormat(lang, { maximumFractionDigits: 2 });
 		color: var(--sl-color-white);
 		font-variant-numeric: tabular-nums;
 	}
-	.page-speech__voice-row {
+	.page-speech__label {
+		color: var(--sl-color-gray-2);
+		font-weight: 600;
+	}
+	.page-speech__field > .page-speech__field-head {
+		align-items: center;
+		margin-bottom: 0.5rem;
+	}
+	.page-speech .page-speech__test {
+		height: 1.75rem;
+		padding: 0 0.7rem;
+		border-radius: 999rem;
+		font-size: var(--sl-text-xs);
+	}
+	/* region toggle: a segmented control */
+	.page-speech__regions {
 		display: flex;
+		gap: 0.2rem;
+		margin-bottom: 0.5rem;
+		padding: 0.2rem;
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: 999rem;
+		background: var(--sl-color-gray-6);
+	}
+	.page-speech__regions :global(button) {
+		flex: 1;
+		height: 1.9rem;
+		padding: 0 0.6rem;
+		border: 0;
+		border-radius: 999rem;
+		background: transparent;
+		color: var(--sl-color-gray-2);
+		font: inherit;
+		font-size: var(--sl-text-xs);
+		cursor: pointer;
+	}
+	.page-speech__regions :global(button:hover) {
+		color: var(--sl-color-white);
+	}
+	.page-speech__regions :global(button[aria-checked='true']) {
+		background: var(--sl-color-accent);
+		color: var(--sl-color-text-invert);
+		font-weight: 600;
+	}
+	/* the voices of the region */
+	.page-speech__voice-list {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+		gap: 0.3rem;
+	}
+	.page-speech__voice-list :global(button) {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
 		gap: 0.5rem;
+		width: 100%;
+		min-height: 2.25rem;
+		padding: 0.35rem 0.7rem;
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: 0.5rem;
+		background: transparent;
+		color: var(--sl-color-white);
+		font: inherit;
+		text-align: start;
+		cursor: pointer;
+	}
+	.page-speech__voice-list :global(button:hover) {
+		background: var(--sl-color-gray-6);
+	}
+	.page-speech__voice-list :global(button[aria-checked='true']) {
+		border-color: var(--sl-color-accent);
+		background: var(--sl-color-accent-low);
+		font-weight: 600;
+	}
+	.page-speech__voice-list :global(button > span:first-child) {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	.page-speech__voice-list :global(.page-speech__badge) {
+		color: var(--sl-color-accent-high);
+		font-size: 0.75rem;
+	}
+	.page-speech__others {
+		margin-top: 0.5rem;
+	}
+	.page-speech__others summary {
+		color: var(--sl-color-gray-3);
+		font-size: var(--sl-text-xs);
+		cursor: pointer;
 	}
 	.page-speech__voice {
-		flex: 1;
-		min-width: 0;
+		width: 100%;
+		margin-top: 0.4rem;
 		height: 2.25rem;
 		padding: 0 0.5rem;
 		border: 1px solid var(--sl-color-gray-5);
@@ -902,9 +1108,6 @@ const decimal = new Intl.NumberFormat(lang, { maximumFractionDigits: 2 });
 		background: var(--sl-color-gray-6);
 		color: var(--sl-color-white);
 		font: inherit;
-	}
-	.page-speech .page-speech__test {
-		border-radius: 0.5rem;
 	}
 	.page-speech__popover input[type='range'] {
 		width: 100%;
