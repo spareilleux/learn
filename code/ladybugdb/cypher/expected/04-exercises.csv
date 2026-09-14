@@ -1,0 +1,54 @@
+result
+Table Commit has been created.
+result
+Table File has been created.
+result
+Table PARENT has been created.
+result
+Table CHANGED has been created.
+result,skipped_duplicate_pk_count,skipped_duplicate_pks
+74 tuples have been copied to the Commit table.,0,[]
+result,skipped_duplicate_pk_count,skipped_duplicate_pks
+710 tuples have been copied to the File table.,0,[]
+result
+73 tuples have been copied to the PARENT table.
+result
+1019 tuples have been copied to the CHANGED table.
+result
+Extension: json has been loaded.
+result
+Table Run has been created.
+result
+Table RAN_ON has been created.
+result,skipped_duplicate_pk_count,skipped_duplicate_pks
+125 tuples have been copied to the Run table.,0,[]
+result
+123 tuples have been copied to the RAN_ON table.
+sha,c.subject,files
+d32b186,Java lessons 5-8 and a Spanish locale for the whole site,160
+f43ba7e,Import Streeling University modules from Demerzel,103
+529c946,"Java for C# developers: lessons 1-4, tested code and journal",80
+
+commits_before,sha,c.subject
+42,d32b186,Java lessons 5-8 and a Spanish locale for the whole site
+c.committed_at,sha,c.subject
+2026-09-13 17:13:23,00f2ca4,"Rust course: lessons 9-12 (lifetimes, modules, smart pointers, threads)"
+2026-09-14 14:08:24,3f3b219,"DuckDB course: data snapshot of this repository's runs, lesson 1 SQL, CI on 3 OSes"
+2026-09-14 14:24:14,742c967,DuckDB course: SQL and expected output for lessons 1-4 and their exercises
+2026-09-14 14:25:34,36207da,"DuckDB course: don't compare Parquet compressed sizes, they differ on macOS arm64"
+2026-09-14 14:43:42,3e9530f,"DuckDB course: mission, lessons 1-4 and journal (en/fr/es)"
+2026-09-14 15:13:02,a96fd27,"DuckDB course: lesson 5 C# program (DuckDB.NET, Dapper) and CI on 3 OSes"
+2026-09-14 15:16:11,5a26d1a,DuckDB course: lesson 6 Java program (JDBC) and CI on 3 OSes
+2026-09-14 15:33:19,bdf2692,"DuckDB course: lesson 7 scripts (plans, pushdown, row groups) and CI timings"
+2026-09-14 15:48:40,86e34d9,"DuckDB course: lesson 7 exercises, lesson 8 persistence script and Java transactions"
+2026-09-14 16:03:28,cbcbb42,"DuckDB course: lessons 5-8 (C#, Java, performance, persistence) in en/fr/es"
+without_runs,next_commit,gap,next_commit_runs
+00f2ca4,95a42da,00:00:00,2
+36207da,3e9530f,00:18:08,0
+3e9530f,a96fd27,00:29:20,0
+3f3b219,742c967,00:15:50,0
+5a26d1a,bdf2692,00:17:08,0
+742c967,36207da,00:01:20,0
+86e34d9,cbcbb42,00:14:48,0
+a96fd27,5a26d1a,00:03:09,0
+bdf2692,86e34d9,00:15:21,0
