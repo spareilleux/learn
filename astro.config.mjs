@@ -100,6 +100,18 @@ export default defineConfig({
 					],
 				},
 				{
+					label: 'Music',
+					translations: { fr: 'Musique', es: 'Música' },
+					items: [
+						{
+							label: 'Music theory for Guitar Alchemist',
+							translations: { fr: 'Théorie musicale pour Guitar Alchemist', es: 'Teoría musical para Guitar Alchemist' },
+							collapsed: true,
+							items: [{ autogenerate: { directory: 'music-theory-ga' } }],
+						},
+					],
+				},
+				{
 					label: 'Streeling University',
 					collapsed: true,
 					items: streelingSidebar,
