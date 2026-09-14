@@ -40,7 +40,7 @@ Sabes compilar y probar un proyecto .NET o Java desde la línea de comandos (`do
 | 5 | [Cachés y artefactos](05-caches-and-artifacts/) | `Cache@2`, `PublishPipelineArtifact@1` |
 | 6 | [Workflows reutilizables y acciones compuestas](06-reuse/) | plantillas de step, de job y de stage |
 | 7 | [Seguridad: permisos, secretos, fijación de versiones, OIDC](07-security/) | conexiones de servicio, federación de identidades de carga de trabajo |
-| 8 | Desplegar en GitHub Pages *(próximamente)* | entornos, aprobaciones |
+| 8 | [Desplegar en GitHub Pages](08-pages/) | entornos, aprobaciones |
 | 9 | Depurar ejecuciones *(próximamente)* | logs de diagnóstico |
 | 10 | Escribir tu propia action *(próximamente)* | tareas personalizadas |
 | — | [Diario](journal/) | |

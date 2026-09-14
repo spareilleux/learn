@@ -15,7 +15,7 @@ sidebar:
 - [x] Lección 5: cachés y artefactos (caché de NuGet con `packages.lock.json`, `actions/cache`, artefactos entre jobs)
 - [x] Lección 6: workflows reutilizables y acciones compuestas
 - [x] Lección 7: seguridad — permisos, secretos, fijación de versiones, OIDC
-- [ ] Lección 8: desplegar en GitHub Pages
+- [x] Lección 8: desplegar en GitHub Pages
 - [ ] Lección 9: depurar ejecuciones
 - [ ] Lección 10: escribir tu propia action
 
@@ -77,6 +77,13 @@ El sitio se quedó en la versión anterior hasta el push siguiente. Corrección 
 - El input de `workflow_dispatch` `$(whoami)`, pegado con `${{ }}` en `run:`, imprimió `runner`; a través de `env:`, imprimió `$(whoami)`.
 - `::add-mask::` oculta el valor solo en las líneas impresas después.
 - Token OIDC para la audiencia `learn-course`: duración 300 s, `sub` = `repo:spareilleux@6644695/learn@1368550922:ref:refs/heads/main`, el formato inmutable de los repositorios creados después del 2026-07-15.
+
+## 2026-09-14 — Lección 8: el despliegue de este sitio, desmontado
+
+- Una ejecución de despliegue: `build` 30 s (310 páginas construidas en 7,47 s, artefacto `github-pages` de 9 108 634 bytes conservado 1 día), `deploy` 8 s. Estados del despliegue: `waiting` → `queued` → `in_progress` → `success` en 13 s.
+- La cola de concurrencia funcionó: un push 41 s después de otro esperó 14 s, y su job `build` se creó a las 13:32:18, el segundo en que terminó el job `deploy` anterior.
+- `gh workflow run deploy.yml --ref gha-06-invalid`: el build se ejecutó, el job de despliegue fue rechazado (`Branch "gha-06-invalid" is not allowed to deploy to github-pages due to environment protection rules`), el sitio publicado no cambió. Comprobado antes que no había ningún despliegue de `main` pendiente, ya que la ejecución de la rama comparte el grupo de concurrencia `pages`.
+- `https://spareilleux.github.io/method/` → 404: un enlace absoluto desde la raíz sale del sitio del proyecto.
 
 ## Preguntas abiertas
 

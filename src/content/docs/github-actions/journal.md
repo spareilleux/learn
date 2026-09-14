@@ -15,7 +15,7 @@ sidebar:
 - [x] Lesson 5: caches and artifacts (NuGet cache with `packages.lock.json`, `actions/cache`, artifacts between jobs)
 - [x] Lesson 6: reusable workflows and composite actions
 - [x] Lesson 7: security — permissions, secrets, pinning, OIDC
-- [ ] Lesson 8: deploying to GitHub Pages
+- [x] Lesson 8: deploying to GitHub Pages
 - [ ] Lesson 9: debugging runs
 - [ ] Lesson 10: writing your own action
 
@@ -77,6 +77,13 @@ The site stayed on the previous version until the next push. Fix in `deploy.yml`
 - `workflow_dispatch` input `$(whoami)` pasted with `${{ }}` into `run:` printed `runner`; through `env:` it printed `$(whoami)`.
 - `::add-mask::` hides the value only from the lines printed after it.
 - OIDC token for audience `learn-course`: lifetime 300 s, `sub` = `repo:spareilleux@6644695/learn@1368550922:ref:refs/heads/main`, the immutable format of repositories created after 2026-07-15.
+
+## 2026-09-14 — Lesson 8: this site's deployment, taken apart
+
+- A deploy run: `build` 30 s (310 pages built in 7.47 s, `github-pages` artifact of 9,108,634 bytes kept 1 day), `deploy` 8 s. Deployment statuses: `waiting` → `queued` → `in_progress` → `success` in 13 s.
+- The concurrency queue worked: a push 41 s after another one waited 14 s, and its `build` job was created at 13:32:18, the second the previous `deploy` job finished.
+- `gh workflow run deploy.yml --ref gha-06-invalid`: the build ran, the deploy job was rejected (`Branch "gha-06-invalid" is not allowed to deploy to github-pages due to environment protection rules`), the live site didn't change. Checked beforehand that no deployment of `main` was pending, since the branch run shares the `pages` concurrency group.
+- `https://spareilleux.github.io/method/` → 404: a root-absolute link leaves the project site.
 
 ## Open questions
 
