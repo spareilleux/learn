@@ -39,11 +39,11 @@ Vous écrivez du C# avec aisance : classes, interfaces, génériques, LINQ, `asy
 | 2 | [Types, égalité et opérateurs](02-types-and-operators/) | types valeur, `checked`, `==`, interpolation de chaînes |
 | 3 | [Classes, records et enums](03-classes-records-enums/) | propriétés, `virtual`/`override`, `record`, `enum` |
 | 4 | [Génériques et effacement de type](04-generics-and-erasure/) | génériques réifiés, `where T : new()`, variance `in`/`out` |
-| 5 | Exceptions, `null` et `Optional` *(à venir)* | exceptions, `using`, types référence nullables |
-| 6 | Lambdas et interfaces fonctionnelles | délégués, `Func`/`Action`, événements |
-| 7 | Collections et Streams | `List<T>`, `Dictionary`, LINQ |
-| 8 | Pattern matching | expressions `switch`, motifs `is`, records |
-| 9 | Concurrence et threads virtuels | `Task`, `async`/`await`, `lock`, `Parallel` |
+| 5 | [Exceptions, `null` et `Optional`](05-exceptions-null-optional/) | exceptions, `using`, types référence nullables |
+| 6 | [Lambdas et interfaces fonctionnelles](06-lambdas-and-functional-interfaces/) | délégués, `Func`/`Action`, événements |
+| 7 | [Collections et Streams](07-collections-and-streams/) | `List<T>`, `Dictionary`, LINQ |
+| 8 | [Pattern matching](08-pattern-matching/) | expressions `switch`, motifs `is`, records |
+| 9 | Concurrence et threads virtuels *(à venir)* | `Task`, `async`/`await`, `lock`, `Parallel` |
 | 10 | Maven et Gradle en profondeur | NuGet, Central Package Management, solutions |
 | 11 | Tests | xUnit, Moq, FluentAssertions |
 | 12 | La bibliothèque standard du quotidien | `DateTime`, `decimal`, `HttpClient`, `System.IO` |

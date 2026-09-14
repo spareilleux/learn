@@ -1,0 +1,10 @@
+open db
+open cache
+using db and cache
+close cache
+close db
+finally
+open db
+close db
+caught: query failed on db
+suppressed: close failed: db

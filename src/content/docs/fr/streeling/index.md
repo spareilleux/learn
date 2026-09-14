@@ -16,29 +16,29 @@ Ces modules ont été écrits par des départements IA et **n'ont pas été relu
 
 ## Départements
 
-| Département | Modules | En français |
-|---|---|---|
-| [Ingénierie audio](audio-engineering/) | 1 | 1 |
-| [Sciences cognitives](cognitive-science/) | 1 | 1 |
-| [Informatique](computer-science/) | 2 | 1 |
-| [Cybernétique](cybernetics/) | 3 | 0 |
-| [Visualisation de données](data-visualization/) | 0 | 0 |
-| [Futurologie](futurology/) | 1 | 1 |
-| [Acoustique de la guitare et synthèse sonore](guitar-acoustics/) | 0 | 0 |
-| [Guitar Alchemist Academy](guitar-alchemist-academy/) | 3 | 1 |
-| [Études de guitare](guitar-studies/) | 2 | 2 |
-| [Théorie de l'information](information-theory/) | 1 | 0 |
-| [Mathématiques](mathematics/) | 1 | 1 |
-| [Musique](music/) | 6 | 1 |
-| [Musicologie](musicology/) | 2 | 1 |
-| [Science des réseaux](network-science/) | 1 | 0 |
-| [Philosophie](philosophy/) | 1 | 1 |
-| [Physique](physics/) | 1 | 1 |
-| [Gestion de produit et de projet](product-management/) | 1 | 1 |
-| [Psychohistoire](psychohistory/) | 2 | 1 |
-| [Sémiotique](semiotics/) | 1 | 0 |
-| [Informatique visuelle](visual-computing/) | 0 | 0 |
-| [Musiques et langues du monde](world-music-languages/) | 1 | 1 |
+| Département | Modules | En français | En espagnol |
+|---|---|---|---|
+| [Ingénierie audio](audio-engineering/) | 1 | 1 | 1 |
+| [Sciences cognitives](cognitive-science/) | 1 | 1 | 1 |
+| [Informatique](computer-science/) | 2 | 1 | 1 |
+| [Cybernétique](cybernetics/) | 3 | 0 | 0 |
+| [Visualisation de données](data-visualization/) | 0 | 0 | 0 |
+| [Futurologie](futurology/) | 1 | 1 | 1 |
+| [Acoustique de la guitare et synthèse sonore](guitar-acoustics/) | 0 | 0 | 0 |
+| [Guitar Alchemist Academy](guitar-alchemist-academy/) | 3 | 1 | 1 |
+| [Études de guitare](guitar-studies/) | 2 | 2 | 2 |
+| [Théorie de l'information](information-theory/) | 1 | 0 | 0 |
+| [Mathématiques](mathematics/) | 1 | 1 | 1 |
+| [Musique](music/) | 6 | 1 | 1 |
+| [Musicologie](musicology/) | 2 | 1 | 1 |
+| [Science des réseaux](network-science/) | 1 | 0 | 0 |
+| [Philosophie](philosophy/) | 1 | 1 | 1 |
+| [Physique](physics/) | 1 | 1 | 1 |
+| [Gestion de produit et de projet](product-management/) | 1 | 1 | 1 |
+| [Psychohistoire](psychohistory/) | 2 | 1 | 1 |
+| [Sémiotique](semiotics/) | 1 | 0 | 0 |
+| [Informatique visuelle](visual-computing/) | 0 | 0 | 0 |
+| [Musiques et langues du monde](world-music-languages/) | 1 | 1 | 1 |
 
 ## Provenance
 

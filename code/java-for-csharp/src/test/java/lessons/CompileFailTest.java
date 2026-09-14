@@ -19,7 +19,7 @@ import org.junit.jupiter.api.TestFactory;
 
 /**
  * Compiles every snippet a lesson shows as rejected and checks that javac reports the diagnostic the lesson quotes.
- * Each file starts with one or more {@code // expect: <diagnostic key>} lines, for example
+ * Each file ends with one or more {@code // expect: <diagnostic key>} lines, for example
  * {@code // expect: compiler.err.cant.resolve.location}. {@code // expect-warning: <key>} checks a warning
  * instead; a snippet with only expected warnings must still compile. Snippets can use the lesson examples, which are
  * on the class path.

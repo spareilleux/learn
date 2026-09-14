@@ -1,0 +1,401 @@
+---
+title: 1. El JDK y las herramientas de build
+description: El JDK, java, javac y JShell, y después Maven y Gradle — relacionados con el SDK de .NET, la CLI dotnet y NuGet, en Windows, Linux/WSL y macOS.
+sidebar:
+  order: 1
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Ejemplo completo: [`code/java-for-csharp/l01`](https://github.com/spareilleux/learn/tree/main/code/java-for-csharp/l01) — cada comando de abajo se ejecuta en CI en los tres sistemas operativos.
+
+## Las piezas
+
+| .NET | Java | Función |
+|---|---|---|
+| SDK de .NET | [JDK](https://dev.java/learn/getting-started/) (Java Development Kit) | compilador, runtime y herramientas en una sola instalación |
+| CLR | [JVM](https://docs.oracle.com/javase/specs/jvms/se25/html/index.html) ([HotSpot](https://openjdk.org/groups/hotspot/)) | ejecuta el código compilado, lo compila con JIT, recolecta la basura |
+| IL en una `.dll` | bytecode en archivos `.class`, comprimidos en un [`.jar`](https://dev.java/learn/jvm/tools/core/jar/) | el resultado de la compilación |
+| Roslyn (`csc`) | [`javac`](https://docs.oracle.com/en/java/javase/25/docs/specs/man/javac.html) | el compilador |
+| `dotnet run app.cs` | [`java Hello.java`](https://openjdk.org/jeps/458) | ejecutar un archivo fuente sin proyecto |
+| REPL de C# | [JShell](https://docs.oracle.com/en/java/javase/25/jshell/introduction-jshell.html) | probar una expresión de forma interactiva |
+| CLI `dotnet` + `.csproj` | [Maven](https://maven.apache.org/) (`pom.xml`) o [Gradle](https://gradle.org/) (`build.gradle.kts`) | compilar, probar, empaquetar, resolver dependencias |
+| [NuGet](https://www.nuget.org/) | [Maven Central](https://central.sonatype.com/) | repositorio público de paquetes |
+
+La gran diferencia: **el JDK no tiene sistema de proyectos**. `dotnet build` entiende el `.csproj`; `javac` solo entiende archivos fuente. Las dependencias, las pruebas y el empaquetado vienen de una herramienta de build aparte, y tanto Maven como Gradle son habituales.
+
+## Versiones y distribuciones
+
+Cada seis meses sale una nueva versión de Java, y una de cada cuatro es una versión con soporte a largo plazo (LTS): [Java 21](https://openjdk.org/projects/jdk/21/) en 2023, [Java 25](https://openjdk.org/projects/jdk/25/) en septiembre de 2025. Es el mismo ritmo que las versiones anuales de .NET, con una LTS cada dos años. La versión del lenguaje sigue a la del JDK: no hay `<LangVersion>`, eliges un JDK y un destino con `--release`.
+
+OpenJDK es de código abierto y varios proveedores lo compilan: [Eclipse Temurin](https://adoptium.net/), el [Microsoft Build of OpenJDK](https://learn.microsoft.com/java/openjdk/overview), [Amazon Corretto](https://aws.amazon.com/corretto/), los builds de Oracle. Ejecutan el mismo código; se diferencian en sus condiciones de soporte y su calendario de actualizaciones. La CI de este curso usa Temurin; mi máquina ejecuta el build OpenJDK 25 de Oracle.
+
+## Instalar un JDK
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+```powershell
+winget install Microsoft.OpenJDK.25
+```
+
+Abre una terminal nueva para que `java` esté en el `PATH`.
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```bash
+sudo apt install openjdk-25-jdk      # Ubuntu 24.04 y versiones posteriores
+```
+
+O, para cualquier distribución y para cambiar de una versión a otra, [SDKMAN!](https://sdkman.io/):
+
+```bash
+curl -s "https://get.sdkman.io" | bash
+sdk install java 25.0.4-tem
+```
+
+</TabItem>
+<TabItem label="macOS">
+
+```bash
+brew install openjdk@25
+sudo ln -sfn "$(brew --prefix)/opt/openjdk@25/libexec/openjdk.jdk" /Library/Java/JavaVirtualMachines/openjdk-25.jdk
+```
+
+La fórmula es *keg-only*: la segunda línea la registra para que `/usr/bin/java` la encuentre. SDKMAN! (consulta la pestaña Linux) también funciona en macOS.
+
+</TabItem>
+</Tabs>
+
+```text
+$ java --version
+openjdk 25 2025-09-16
+OpenJDK Runtime Environment (build 25+36-3489)
+OpenJDK 64-Bit Server VM (build 25+36-3489, mixed mode, sharing)
+```
+
+## Ejecutar un solo archivo
+
+Desde Java 25, un archivo fuente puede ser tan corto como un programa C# con instrucciones de nivel superior ([JEP 512, archivos fuente compactos](https://openjdk.org/jeps/512)):
+
+```java
+// Hello.java
+void main() {
+    IO.println("Hello, world!");
+}
+```
+
+```text
+$ java Hello.java
+Hello, world!
+```
+
+`java Hello.java` compila el archivo en memoria y lo ejecuta; no se escribe nada en disco. Un archivo fuente compacto también importa automáticamente todo el módulo `java.base`, así que `List`, `Map` o `Files` no necesitan ningún `import`.
+
+La forma clásica, que verás en cualquier base de código existente, declara una clase con un método `public static void main(String[] args)`:
+
+```java
+// Greeter.java
+public class Greeter {
+    public static void main(String[] args) {
+        System.out.println("Hello, " + (args.length > 0 ? args[0] : "world") + "!");
+    }
+}
+```
+
+Con las herramientas del JDK, compilar y ejecutar son dos pasos: `javac` escribe archivos `.class`, y `java` ejecuta una clase que encuentra en el **class path** (`-cp`), el equivalente en la JVM a la búsqueda de ensamblados.
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+```powershell
+javac -d out Greeter.java     # escribe out\Greeter.class
+java -cp out Greeter Ada
+```
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```bash
+javac -d out Greeter.java     # escribe out/Greeter.class
+java -cp out Greeter Ada
+```
+
+</TabItem>
+<TabItem label="macOS">
+
+```bash
+javac -d out Greeter.java     # escribe out/Greeter.class
+java -cp out Greeter Ada
+```
+
+</TabItem>
+</Tabs>
+
+```text
+Hello, Ada!
+```
+
+Al ejecutar un archivo fuente, un error de compilación lo detiene todo antes de que se ejecute nada:
+
+```java
+// Oops.java
+void main() {
+    int count = "three";
+}
+```
+
+```text
+$ java Oops.java
+Oops.java:2: error: incompatible types: String cannot be converted to int
+    int count = "three";
+                ^
+1 error
+error: compilation failed
+```
+
+:::tip[Mantén JShell abierto]
+`jshell` evalúa las declaraciones y las expresiones de una en una, y muestra cada resultado con un nombre que puedes reutilizar:
+
+```text
+jshell> int x = 21 * 2;
+x ==> 42
+
+jshell> "abc".toUpperCase()
+$2 ==> "ABC"
+```
+:::
+
+## Un proyecto Maven
+
+Maven se basa en convenciones: pon el código donde lo espera y basta con un `pom.xml` muy corto.
+
+```text
+hello-maven/
+├── pom.xml                         ← como el .csproj
+└── src/
+    ├── main/java/com/example/App.java
+    └── test/java/                  ← las pruebas van al lado, no en otro proyecto
+```
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.example</groupId>
+  <artifactId>hello</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
+  <properties>
+    <maven.compiler.release>25</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+</project>
+```
+
+- `groupId:artifactId:version` (las **coordenadas**) identifican el proyecto, como el ID y la versión de un paquete NuGet. `groupId` suele ser un nombre de dominio invertido.
+- `-SNAPSHOT` marca una versión todavía en desarrollo, más o menos un sufijo de versión preliminar.
+- `maven.compiler.release` es la versión de Java para la que se compila, como `<TargetFramework>`.
+- El nombre de paquete `com.example` debe coincidir con la carpeta `com/example`. En C#, los espacios de nombres y las carpetas son independientes; en Java, el compilador y el cargador de clases dependen de esa coincidencia.
+
+```text
+$ mvn package
+...
+[INFO] --- compiler:3.15.0:compile (default-compile) @ hello ---
+[INFO] Compiling 1 source file with javac [debug release 25] to target\classes
+...
+[INFO] --- surefire:3.5.4:test (default-test) @ hello ---
+[INFO] No tests to run.
+[INFO]
+[INFO] --- jar:3.5.0:jar (default-jar) @ hello ---
+[INFO] Building jar: …\hello\target\hello-1.0-SNAPSHOT.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+```
+
+`mvn package` ejecuta un **ciclo de vida**: cada fase incluye todas las anteriores, y son los plugins los que hacen el trabajo (`compiler`, `surefire` para las pruebas, `jar`). El primer build descarga esos plugins en `~/.m2/repository`, el equivalente en Maven a la carpeta global de paquetes de NuGet.
+
+| Tarea | dotnet | Maven | Gradle |
+|---|---|---|---|
+| Compilar | `dotnet build` | `mvn compile` | `gradle build` (o `classes`) |
+| Ejecutar las pruebas | `dotnet test` | `mvn test` | `gradle test` |
+| Producir el artefacto | `dotnet publish` | `mvn package` | `gradle jar` |
+| Limpiar | `dotnet clean` | `mvn clean` | `gradle clean` |
+| Instalar localmente para otros proyectos | feed local de NuGet | `mvn install` | `gradle publishToMavenLocal` (con el plugin `maven-publish`) |
+| Añadir una dependencia | `dotnet add package` | editar `pom.xml` | editar `build.gradle.kts` |
+
+El JAR contiene las clases compiladas, pero no dice cuál arrancar:
+
+```text
+$ java -cp target/classes com.example.App
+Hello from Maven!
+$ java -jar target/hello-1.0-SNAPSHOT.jar
+no main manifest attribute, in target\hello-1.0-SNAPSHOT.jar
+```
+
+Un JAR no es un `.exe`: mientras su manifiesto no indique una `Main-Class`, `java -jar` no tiene nada que ejecutar. El ejercicio 2 lo corrige.
+
+## Un proyecto Gradle
+
+`gradle init` genera un proyecto con un **wrapper**: scripts `gradlew` que descargan la versión exacta de Gradle que necesita el proyecto, para que los colaboradores no tengan que instalar Gradle ellos mismos (Maven tiene la misma idea con el [Maven Wrapper](https://maven.apache.org/tools/wrapper/)).
+
+```text
+hello-gradle/
+├── settings.gradle.kts        ← como un .sln: enumera los proyectos
+├── gradle/libs.versions.toml  ← catálogo de versiones: las versiones de las dependencias en un solo lugar
+├── gradlew, gradlew.bat       ← el wrapper
+└── app/
+    ├── build.gradle.kts       ← el script de build, en Kotlin
+    └── src/main/java/com/example/App.java
+```
+
+```kotlin
+// app/build.gradle.kts (generado por Gradle 9.7.1, sin los comentarios)
+plugins {
+    application
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation(libs.junit.jupiter)
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    implementation(libs.guava)
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+}
+
+application {
+    mainClass = "com.example.App"
+}
+```
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+```powershell
+.\gradlew run
+```
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```bash
+./gradlew run
+```
+
+</TabItem>
+<TabItem label="macOS">
+
+```bash
+./gradlew run
+```
+
+</TabItem>
+</Tabs>
+
+```text
+> Task :app:run
+Hello World!
+
+BUILD SUCCESSFUL in 2s
+```
+
+Los scripts de build de Gradle son código, lo que los hace potentes y más difíciles de leer; el XML de Maven es declarativo y verboso. Las guías de inicio de Spring ofrecen ambos. Este curso usa Maven: sus convenciones se aplican a casi cualquier proyecto Java que abras.
+
+:::note[¿Qué Java usa Gradle?]
+El bloque `toolchain` pide Java 25 *sea cual sea el JDK que ejecuta Gradle*: Gradle busca un JDK que coincida en la máquina, y descarga uno mediante el plugin foojay que `gradle init` añade a `settings.gradle.kts`. Por defecto, Maven compila con el JDK que ejecuta Maven y solo le pasa `release`. Ambos se parecen más a `global.json` más `<TargetFramework>` que a cualquier cosa de `javac` en sí.
+:::
+
+## Puntos clave
+
+- El JDK te da `java`, `javac`, `jar` y `jshell`; el modelo de proyecto viene de Maven o de Gradle.
+- `java File.java` ejecuta un solo archivo; desde Java 25 puede ser un archivo compacto con `void main()`.
+- Los paquetes deben coincidir con las carpetas, y `src/main/java` / `src/test/java` es la estructura que esperan todas las herramientas.
+- Un JAR necesita una entrada `Main-Class` en el manifiesto para que `java -jar` pueda ejecutarlo.
+
+## Ejercicios
+
+1. Sin compilarlo antes, ejecuta `Greeter.java` con tu nombre como argumento. ¿Qué hace el JDK para que esto sea posible?
+
+<details>
+<summary>Solución</summary>
+
+```text
+$ java Greeter.java Grace
+Hello, Grace!
+```
+
+El modo de archivo fuente del lanzador ([JEP 330](https://openjdk.org/jeps/330), ampliado a varios archivos por la [JEP 458](https://openjdk.org/jeps/458)) compila el archivo en memoria y luego ejecuta el método `main` de la primera clase de nivel superior con los argumentos restantes. No se escribe ningún archivo `.class`.
+
+</details>
+
+2. Haz que funcione `java -jar target/hello-1.0-SNAPSHOT.jar`.
+
+<details>
+<summary>Solución</summary>
+
+Configura el plugin JAR para que escriba una entrada `Main-Class` en el manifiesto:
+
+```xml
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.5.0</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <mainClass>com.example.App</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+```
+
+```text
+$ mvn -q package
+$ java -jar target/hello-1.0-SNAPSHOT.jar
+Hello from Maven!
+```
+
+El `META-INF/MANIFEST.MF` generado contiene ahora `Main-Class: com.example.App`. Si la aplicación tuviera dependencias, seguirían faltando en el class path: eso es lo que resuelven los plugins de «fat JAR» (o el empaquetado propio de Spring Boot).
+
+</details>
+
+3. En JShell, calcula `-7 % 3` y `Math.floorMod(-7, 3)`. ¿Cuál coincide con el `%` de C#?
+
+<details>
+<summary>Solución</summary>
+
+```text
+jshell> -7 % 3
+$1 ==> -1
+
+jshell> Math.floorMod(-7, 3)
+$2 ==> 2
+```
+
+En los dos lenguajes, `%` es un resto que toma el signo del dividendo, así que `-7 % 3` también vale `-1` en C#. `Math.floorMod` es el módulo matemático, siempre en `[0, 3)` para un divisor positivo.
+
+</details>
+
+## Fuentes
+
+- [JEP 512 — Compact source files and instance main methods](https://openjdk.org/jeps/512)
+- Las páginas de referencia [del lanzador `java`](https://docs.oracle.com/en/java/javase/25/docs/specs/man/java.html) y [de `javac`](https://docs.oracle.com/en/java/javase/25/docs/specs/man/javac.html)
+- [Maven — Introduction to the build lifecycle](https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html)
+- [Gradle — Building Java & JVM projects](https://docs.gradle.org/current/userguide/building_java_projects.html)
+- [Gradle — Toolchains for JVM projects](https://docs.gradle.org/current/userguide/toolchains.html)

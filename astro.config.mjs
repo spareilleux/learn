@@ -15,31 +15,32 @@ export default defineConfig({
 			locales: {
 				root: { label: 'English', lang: 'en' },
 				fr: { label: 'Français', lang: 'fr' },
+				es: { label: 'Español', lang: 'es' },
 			},
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/spareilleux/learn' }],
 			editLink: { baseUrl: 'https://github.com/spareilleux/learn/edit/main/' },
 			lastUpdated: true,
 			customCss: ['./src/styles/custom.css'],
 			sidebar: [
-				{ label: 'Method', translations: { fr: 'Méthode' }, slug: 'method' },
-				{ label: 'Artifacts', translations: { fr: 'Artefacts' }, slug: 'artifacts' },
+				{ label: 'Method', translations: { fr: 'Méthode', es: 'Método' }, slug: 'method' },
+				{ label: 'Artifacts', translations: { fr: 'Artefacts', es: 'Artefactos' }, slug: 'artifacts' },
 				{
 					label: 'Software Engineering',
-					translations: { fr: 'Génie logiciel' },
+					translations: { fr: 'Génie logiciel', es: 'Ingeniería de software' },
 					items: [
 						{
 							label: 'Languages & frameworks',
-							translations: { fr: 'Langages et frameworks' },
+							translations: { fr: 'Langages et frameworks', es: 'Lenguajes y frameworks' },
 							items: [
 								{
 									label: 'Rust for C#/Java developers',
-									translations: { fr: 'Rust pour développeurs C#/Java' },
+									translations: { fr: 'Rust pour développeurs C#/Java', es: 'Rust para desarrolladores C#/Java' },
 									collapsed: true,
 									items: [{ autogenerate: { directory: 'rust-for-csharp-java' } }],
 								},
 								{
 									label: 'Java for C# developers',
-									translations: { fr: 'Java pour développeurs C#' },
+									translations: { fr: 'Java pour développeurs C#', es: 'Java para desarrolladores C#' },
 									collapsed: true,
 									items: [{ autogenerate: { directory: 'java-for-csharp' } }],
 								},
@@ -47,10 +48,11 @@ export default defineConfig({
 						},
 						{
 							label: 'Infrastructure & tooling',
-							translations: { fr: 'Infrastructure et outillage' },
+							translations: { fr: 'Infrastructure et outillage', es: 'Infraestructura y herramientas' },
 							items: [
 								{
 									label: 'WSL containers',
+									translations: { es: 'Contenedores WSL' },
 									collapsed: true,
 									items: [{ autogenerate: { directory: 'wsl-containers' } }],
 								},

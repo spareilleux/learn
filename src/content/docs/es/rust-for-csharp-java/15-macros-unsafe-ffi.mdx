@@ -1,0 +1,549 @@
+---
+title: 15. Macros, unsafe y FFI
+description: Un panorama de las vías de escape — macros declarativas y procedurales, lo que unsafe permite realmente, y la llamada a Rust desde C# a través de una ABI de C.
+sidebar:
+  order: 15
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Ejemplos completos: [`examples/l15_macros_unsafe.rs`](https://github.com/spareilleux/learn/blob/main/code/rust-for-csharp-java/examples/l15_macros_unsafe.rs) — `cargo run --example l15_macros_unsafe` — y [`l15-ffi/`](https://github.com/spareilleux/learn/tree/main/code/rust-for-csharp-java/l15-ffi), una biblioteca Rust llamada desde una aplicación de consola C#.
+
+Esta última lección es un **panorama**: cada tema merece su propio libro (enlazado en Fuentes). El objetivo es reconocer estas herramientas en código real y saber cuándo son la respuesta adecuada — lo que ocurre pocas veces.
+
+## Macros: código que escribe código
+
+Usas macros desde la lección 1: `println!`, `vec!`, `assert_eq!`, `#[derive(Debug)]`, `#[tokio::main]`. Se ejecutan **en tiempo de compilación** y se expanden en código Rust normal, cuyos tipos se comprueban después como todo lo demás.
+
+| Rust | C# | Java |
+|---|---|---|
+| [`macro_rules!`](https://doc.rust-lang.org/reference/macros-by-example.html) (declarativa) | — | — |
+| [`#[derive(...)]`](https://doc.rust-lang.org/reference/attributes/derive.html) (procedural) | [generadores de código fuente](https://learn.microsoft.com/dotnet/csharp/roslyn-sdk/source-generators-overview) | [procesadores de anotaciones](https://docs.oracle.com/en/java/javase/25/docs/api/java.compiler/javax/annotation/processing/Processor.html), [Lombok](https://projectlombok.org) |
+| macros de atributo (`#[tokio::main]`) | generadores de código fuente + atributos | procesadores de anotaciones |
+| macros procedurales de tipo función ([`sqlx::query!`](https://docs.rs/sqlx/latest/sqlx/macro.query.html)) | generadores de código fuente | — |
+
+### Macros declarativas
+
+Una macro `macro_rules!` es un `match` sobre la **sintaxis**: cada regla tiene un patrón y una expansión.
+
+```rust
+macro_rules! square {
+    ($x:expr) => {
+        $x * $x
+    };
+}
+
+println!("square!(1 + 2) = {}", square!(1 + 2));   // 9
+```
+
+`$x:expr` captura una expresión completa y la mantiene agrupada, así que `square!(1 + 2)` es `(1 + 2) * (1 + 2)` = 9. Un `#define SQUARE(x) x * x` de C daría `1 + 2 * 1 + 2` = 5. Las macros de Rust trabajan sobre el árbol sintáctico, no sobre el texto.
+
+La repetición, `$( … ),*`, maneja listas — así está escrito `vec!`:
+
+```rust
+macro_rules! hashmap {
+    ($($key:expr => $value:expr),* $(,)?) => {{
+        let mut map = HashMap::new();
+        $( map.insert($key, $value); )*
+        map
+    }};
+}
+
+let ages = hashmap! {
+    "Ada" => 36,
+    "Grace" => 85,
+};
+```
+
+Las reglas se prueban en orden y pueden ser recursivas; las macros también pueden generar elementos como structs:
+
+```rust
+macro_rules! max_of {
+    ($x:expr) => { $x };
+    ($x:expr, $($rest:expr),+) => {{
+        let rest = max_of!($($rest),+);
+        if $x > rest { $x } else { rest }
+    }};
+}
+
+macro_rules! newtype {
+    ($name:ident, $inner:ty) => {
+        #[derive(Debug, Clone, Copy, PartialEq)]
+        struct $name($inner);
+    };
+}
+
+newtype!(UserId, u32);
+newtype!(OrderId, u32);
+// max_of!(3, 9, 4) = 9
+// UserId(7) OrderId(7) true
+```
+
+| Fragmento | Captura |
+|---|---|
+| `expr` | una expresión: `1 + 2`, `foo()` |
+| `ident` | un identificador: `UserId` |
+| `ty` | un tipo: `u32`, `Vec<String>` |
+| `pat` | un patrón: `Some(x)` |
+| `literal` | un literal: `42`, `"text"` |
+| `block` | un bloque: `{ … }` |
+| `tt` | cualquier árbol de tokens individual — la vía de escape |
+
+Como las macros se ejecutan en el compilador, sus errores son errores de compilación. `println!` comprueba su cadena de formato contra sus argumentos:
+
+```text
+error: 2 positional arguments in format string, but there is 1 argument
+ --> e15_format.rs:3:15
+  |
+3 |     println!("{} is {} years old", name);
+  |               ^^    ^^             ----
+```
+
+Y una llamada que no coincide con ninguna regla se rechaza en el punto de llamada:
+
+```text
+error: unexpected end of macro invocation
+ --> e15_macro_args.rs:8:20
+  |
+1 | macro_rules! square {
+  | ------------------- when calling this macro
+...
+8 |     println!("{}", square!());
+  |                    ^^^^^^^^^ missing tokens in macro arguments
+  |
+note: while trying to match meta-variable `$x:expr`
+```
+
+### Macros procedurales
+
+Las [macros procedurales](https://doc.rust-lang.org/reference/procedural-macros.html) son funciones Rust que reciben un flujo de tokens y devuelven otro. Deben vivir en su propio crate con `proc-macro = true`, y normalmente se escriben con los crates [`syn`](https://docs.rs/syn) (análisis) y [`quote`](https://docs.rs/quote) (generación). Sobre todo las vas a **usar**:
+
+- **derive**: `#[derive(Serialize, Deserialize)]` de [serde](https://serde.rs) genera el soporte de JSON (y de otros formatos), como lo harían la [generación de código fuente de `System.Text.Json`](https://learn.microsoft.com/dotnet/standard/serialization/system-text-json/source-generation) o las [anotaciones de Jackson](https://github.com/FasterXML/jackson-annotations);
+- **de atributo**: `#[tokio::main]` reescribe `main` para arrancar un runtime, `#[test]` registra un test;
+- **de tipo función**: `sqlx::query!("SELECT …")` comprueba el SQL contra el esquema de una base de datos en tiempo de compilación.
+
+:::tip[Antes de escribir una macro]
+Prueba primero una función, un genérico o un trait: son más fáciles de leer, documentar y depurar. Recurre a `macro_rules!` para código repetitivo o sintaxis variádica, y a una macro procedural solo cuando estés construyendo una biblioteca de la que otros van a derivar. La herramienta de terceros [`cargo expand`](https://github.com/dtolnay/cargo-expand) muestra en qué se expande una macro.
+:::
+
+## `unsafe`: el compilador confía en ti
+
+El Rust seguro garantiza que no hay punteros colgantes, ni carreras de datos, ni accesos fuera de límites. Algunos programas útiles no pueden ser demostrados seguros por el compilador — hablar con C, escribir un asignador de memoria, implementar el propio `Vec`. [`unsafe`](https://doc.rust-lang.org/std/keyword.unsafe.html) marca los lugares donde **tú** asumes la responsabilidad de esas garantías.
+
+Un bloque `unsafe` desbloquea exactamente cinco operaciones adicionales:
+
+1. desreferenciar un puntero crudo (`*const T`, `*mut T`);
+2. llamar a una función `unsafe` (incluidas las funciones externas);
+3. leer o escribir un `static` mutable;
+4. implementar un trait `unsafe` (como `Send` o `Sync` a mano);
+5. acceder a los campos de una `union`.
+
+Todo lo demás sigue aplicándose dentro de `unsafe`: el borrow checker, la comprobación de tipos, la comprobación de límites en los slices. Crear un puntero crudo es seguro; solo usarlo no lo es:
+
+```rust
+let x = 42;
+let ptr = &x as *const i32;      // permitido en código seguro
+println!("{}", *ptr);
+```
+
+```text
+error[E0133]: dereference of raw pointer is unsafe and requires unsafe block
+ --> e15_deref.rs:4:20
+  |
+4 |     println!("{}", *ptr);
+  |                    ^^^^ dereference of raw pointer
+  |
+  = note: raw pointers may be null, dangling or unaligned; they can violate aliasing rules and cause data races: all of these are undefined behavior
+```
+
+C# tiene la misma idea — la [palabra clave `unsafe`, los punteros](https://learn.microsoft.com/dotnet/csharp/language-reference/unsafe-code) y [`fixed`](https://learn.microsoft.com/dotnet/csharp/language-reference/statements/fixed), activados con [`<AllowUnsafeBlocks>`](https://learn.microsoft.com/dotnet/csharp/language-reference/compiler-options/language#allowunsafeblocks) — y Java tiene `sun.misc.Unsafe` y la [Foreign Function & Memory API](https://docs.oracle.com/en/java/javase/25/core/foreign-function-and-memory-api.html). La diferencia es que en Rust un **[comportamiento indefinido](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)** en código `unsafe` puede romper las garantías en cualquier otra parte del programa, así que la convención es estricta.
+
+### Abstracciones seguras sobre código unsafe
+
+El patrón estándar es un pequeño núcleo `unsafe` envuelto en una **función segura** que comprueba ella misma cada condición. Devolver referencias mutables al primer elemento y al resto de un slice parece inofensivo, pero el borrow checker no puede ver que las dos partes no se solapan:
+
+```rust
+fn split_first_rest(values: &mut [i32]) -> Option<(&mut i32, &mut [i32])> {
+    if values.is_empty() {
+        return None;
+    }
+    Some((&mut values[0], &mut values[1..]))
+}
+```
+
+```text
+error[E0499]: cannot borrow `*values` as mutable more than once at a time
+ --> e15_split.rs:5:32
+  |
+1 | fn split_first_rest(values: &mut [i32]) -> Option<(&mut i32, &mut [i32])> {
+  |                             - let's call the lifetime of this reference `'1`
+...
+5 |     Some((&mut values[0], &mut values[1..]))
+  |     ---------------------------^^^^^^-------
+  |     |     |                    |
+  |     |     |                    second mutable borrow occurs here
+  |     |     first mutable borrow occurs here
+  |     returning this value requires that `values[_]` is borrowed for `'1`
+```
+
+Con punteros crudos, y un comentario `SAFETY` que explica por qué se cumplen los invariantes:
+
+```rust
+fn split_first_rest(values: &mut [i32]) -> Option<(&mut i32, &mut [i32])> {
+    if values.is_empty() {
+        return None;
+    }
+    let len = values.len();
+    let ptr = values.as_mut_ptr();
+    // SAFETY: el slice no está vacío, así que `ptr` es válido para `len` elementos;
+    // el elemento 0 y los elementos 1..len no se solapan, así que los dos préstamos mutables son disjuntos.
+    unsafe {
+        Some((
+            &mut *ptr,
+            std::slice::from_raw_parts_mut(ptr.add(1), len - 1),
+        ))
+    }
+}
+// [10, 20, 30] -> first += 1, rest *= 2 -> [11, 40, 60]
+```
+
+Quien llama solo ve una firma segura. Así es exactamente como la biblioteca estándar implementa [`split_at_mut`](https://doc.rust-lang.org/std/primitive.slice.html#method.split_at_mut) y [`split_first_mut`](https://doc.rust-lang.org/std/primitive.slice.html#method.split_first_mut) — lo que significa que deberías usar esas en su lugar (ejercicio 2).
+
+La edición 2024 hizo `unsafe` más explícito. Dentro de una `unsafe fn`, [las operaciones unsafe necesitan ahora su propio bloque `unsafe`](https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-op-in-unsafe-fn.html) — el `unsafe` de la función restringe a **quien la llama**, no a su cuerpo:
+
+```text
+warning[E0133]: dereference of raw pointer is unsafe and requires unsafe block
+ --> w15_unsafe_op.rs:4:5
+  |
+4 |     *ptr
+  |     ^^^^ dereference of raw pointer
+  |
+note: an unsafe function restricts its caller, but its body is safe by default
+ --> w15_unsafe_op.rs:3:1
+  |
+3 | pub unsafe fn read(ptr: *const i32) -> i32 {
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  = note: `#[warn(unsafe_op_in_unsafe_fn)]` (part of `#[warn(rust_2024_compatibility)]`) on by default
+```
+
+Toda `unsafe fn` pública debería documentar su contrato en una sección `# Safety` (lección 14); el lint [`missing_safety_doc`](https://rust-lang.github.io/rust-clippy/master/index.html#missing_safety_doc) de clippy lo comprueba. [Miri](https://github.com/rust-lang/miri), un intérprete disponible en nightly, puede detectar muchos tipos de comportamiento indefinido al ejecutar los tests.
+
+## FFI: hablar con otros lenguajes
+
+La **FFI** (*foreign function interface*, interfaz de funciones externas) pasa por la **ABI de C**: la convención de llamada que entienden todos los lenguajes de la plataforma.
+
+### Llamar a C desde Rust
+
+```rust
+unsafe extern "C" {
+    fn abs(input: i32) -> i32;
+}
+
+// SAFETY: `abs` no tiene precondiciones para esta entrada.
+println!("abs(-3) from C = {}", unsafe { abs(-3) });   // 3
+```
+
+El bloque es `unsafe extern` porque Rust no puede comprobar que la declaración coincide con la función C real; desde la edición 2024, olvidar `unsafe` es un error (`extern blocks must be unsafe`). Llamar a la función también necesita `unsafe`:
+
+```text
+error[E0133]: call to unsafe function `abs` is unsafe and requires unsafe block
+ --> e15_call_unsafe.rs:6:20
+  |
+6 |     println!("{}", abs(-3));
+  |                    ^^^^^^^ call to unsafe function
+  |
+  = note: consult the function's documentation for information on how to avoid undefined behavior
+```
+
+Para bibliotecas C reales, la herramienta [`bindgen`](https://github.com/rust-lang/rust-bindgen) genera estas declaraciones a partir de las cabeceras C.
+
+### Llamar a Rust desde C#
+
+Es la dirección inversa, y la más útil para un desarrollador C#: escribir en Rust una pieza crítica para el rendimiento o compartida, y llamarla desde .NET con [P/Invoke](https://learn.microsoft.com/dotnet/standard/native-interop/pinvoke). La carpeta [`l15-ffi`](https://github.com/spareilleux/learn/tree/main/code/rust-for-csharp-java/l15-ffi) contiene los dos lados.
+
+**Lado Rust** — una biblioteca compilada como biblioteca dinámica nativa:
+
+```toml
+[lib]
+# cdylib: una .dll / .so / .dylib nativa con ABI de C; rlib: para que `cargo test` pueda enlazarla
+crate-type = ["cdylib", "rlib"]
+```
+
+```rust
+use std::ffi::{CStr, CString, c_char};
+
+/// Añade un `percent` % de IVA a un importe en céntimos.
+#[unsafe(no_mangle)]
+pub extern "C" fn pricing_add_vat(cents: u64, percent: u32) -> u64 {
+    cents * (100 + u64::from(percent)) / 100
+}
+
+/// Suma `len` precios.
+///
+/// # Safety
+///
+/// `prices` debe apuntar a `len` valores `f64` inicializados, o ser nulo.
+#[unsafe(no_mangle)]
+pub unsafe extern "C" fn pricing_sum(prices: *const f64, len: usize) -> f64 {
+    if prices.is_null() {
+        return 0.0;
+    }
+    // SAFETY: quien llama garantiza que `prices` apunta a `len` valores.
+    let prices = unsafe { std::slice::from_raw_parts(prices, len) };
+    prices.iter().sum()
+}
+
+/// Formatea `name: 42.50` en una cadena asignada por Rust.
+/// Quien llama debe liberarla con [`pricing_free_string`].
+///
+/// # Safety
+///
+/// `name` debe ser una cadena válida terminada en NUL, o ser nulo.
+#[unsafe(no_mangle)]
+pub unsafe extern "C" fn pricing_label(name: *const c_char, cents: u64) -> *mut c_char {
+    if name.is_null() {
+        return std::ptr::null_mut();
+    }
+    // SAFETY: quien llama garantiza una cadena válida terminada en NUL.
+    let name = unsafe { CStr::from_ptr(name) }.to_string_lossy();
+    let label = format!("{name}: {}.{:02}", cents / 100, cents % 100);
+    CString::new(label).map_or(std::ptr::null_mut(), CString::into_raw)
+}
+
+/// Libera una cadena devuelta por [`pricing_label`].
+///
+/// # Safety
+///
+/// `label` debe proceder de `pricing_label` y no debe volver a usarse ni liberarse.
+#[unsafe(no_mangle)]
+pub unsafe extern "C" fn pricing_free_string(label: *mut c_char) {
+    if !label.is_null() {
+        // SAFETY: el puntero lo creó CString::into_raw en pricing_label.
+        drop(unsafe { CString::from_raw(label) });
+    }
+}
+```
+
+- `extern "C"` usa la convención de llamada de C; [`#[unsafe(no_mangle)]`](https://doc.rust-lang.org/reference/abi.html#the-no_mangle-attribute) conserva el nombre de símbolo `pricing_add_vat` en lugar de un nombre Rust decorado (mangled). En la edición 2024 es un [*atributo unsafe*](https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-attributes.html): dos bibliotecas que exportaran el mismo nombre entrarían en conflicto, y el compilador no puede comprobarlo.
+- Solo cruzan la frontera tipos compatibles con C: enteros, flotantes, `bool`, punteros crudos, structs [`#[repr(C)]`](https://doc.rust-lang.org/reference/type-layout.html#the-c-representation). Nada de `String`, `Vec` ni `Result`.
+- **Quien asigna, libera.** Una cadena asignada por Rust debe volver a Rust (`pricing_free_string`), nunca a [`Marshal.FreeHGlobal`](https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.marshal.freehglobal).
+
+**Lado C#** — [`[LibraryImport]`](https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.libraryimportattribute), el sucesor de [`[DllImport]`](https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.dllimportattribute) basado en generación de código fuente:
+
+```csharp
+using System.Runtime.InteropServices;
+
+Console.WriteLine($"1000 cents + 20% VAT = {Native.AddVat(1000, 20)}");
+
+double[] prices = [19.99, 5.0, 12.5];
+Console.WriteLine($"sum computed in Rust: {Native.Sum(prices, (nuint)prices.Length):F2}");
+
+// Rust asignó esta cadena, así que Rust debe liberarla
+nint label = Native.Label("book", 4250);
+try
+{
+    Console.WriteLine(Marshal.PtrToStringUTF8(label));
+}
+finally
+{
+    Native.FreeString(label);
+}
+
+static partial class Native
+{
+    // Se resuelve como pricing_ffi.dll en Windows, libpricing_ffi.so en Linux, libpricing_ffi.dylib en macOS
+    private const string Lib = "pricing_ffi";
+
+    [LibraryImport(Lib, EntryPoint = "pricing_add_vat")]
+    internal static partial ulong AddVat(ulong cents, uint percent);
+
+    [LibraryImport(Lib, EntryPoint = "pricing_sum")]
+    internal static partial double Sum([In] double[] prices, nuint len);
+
+    [LibraryImport(Lib, EntryPoint = "pricing_label", StringMarshalling = StringMarshalling.Utf8)]
+    internal static partial nint Label(string name, ulong cents);
+
+    [LibraryImport(Lib, EntryPoint = "pricing_free_string")]
+    internal static partial void FreeString(nint label);
+}
+```
+
+Las cadenas de .NET están en UTF-16; [`StringMarshalling.Utf8`](https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.stringmarshalling) las convierte al UTF-8 terminado en NUL que espera [`CStr`](https://doc.rust-lang.org/std/ffi/struct.CStr.html). El `double[]` se fija en memoria y se pasa como puntero, sin copia.
+
+El archivo de proyecto copia la biblioteca nativa junto al ejecutable. Compila primero la biblioteca Rust y después ejecuta la aplicación C#:
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+```powershell
+cd code\rust-for-csharp-java\l15-ffi
+cargo build --release          # target\release\pricing_ffi.dll
+dotnet run --project dotnet
+```
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```bash
+cd code/rust-for-csharp-java/l15-ffi
+cargo build --release          # target/release/libpricing_ffi.so
+dotnet run --project dotnet
+```
+
+</TabItem>
+<TabItem label="macOS">
+
+```bash
+cd code/rust-for-csharp-java/l15-ffi
+cargo build --release          # target/release/libpricing_ffi.dylib
+dotnet run --project dotnet
+```
+
+</TabItem>
+</Tabs>
+
+```text
+1000 cents + 20% VAT = 1200
+sum computed in Rust: 37.49
+book: 42.50
+```
+
+El mismo nombre de `DllImport`, `pricing_ffi`, funciona en todos los sistemas operativos: .NET añade el prefijo y la extensión de la plataforma cuando busca la biblioteca.
+
+:::caution[Lo que detectaron los tests]
+El test unitario de Rust afirmaba al principio `pricing_sum(…) == 37.49` y falló: la suma de `19.99 + 5.0 + 12.5` en `f64` es `37.489999999999995`. C# la imprime como `37.49` solo por el formato `F2`. Los flotantes cruzan la frontera FFI de forma exacta, pero siguen siendo flotantes.
+:::
+
+Escribir los dos lados a mano no escala. Hay herramientas que los generan: [`cbindgen`](https://github.com/mozilla/cbindgen) escribe una cabecera C a partir de Rust, [`csbindgen`](https://github.com/Cysharp/csbindgen) escribe declaraciones `DllImport` de C#, y [`uniffi`](https://github.com/mozilla/uniffi-rs) genera bindings para Kotlin, Swift y Python. Para Java, la Foreign Function & Memory API ([`java.lang.foreign`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/foreign/package-summary.html), definitiva desde Java 22) sustituye a [JNI](https://docs.oracle.com/en/java/javase/25/docs/specs/jni/index.html) para este tipo de llamadas.
+
+## Puntos clave
+
+- Las macros se expanden en tiempo de compilación en código Rust comprobado; `macro_rules!` hace coincidir sintaxis, y las macros procedurales son plugins del compilador que sobre todo consumes mediante `derive` y atributos.
+- `unsafe` desbloquea cinco operaciones y nada más; el borrow checker sigue funcionando.
+- Envuelve los pequeños núcleos `unsafe` en funciones seguras que hagan cumplir los invariantes, y documéntalos con comentarios `SAFETY` y secciones `# Safety`.
+- La FFI pasa por la ABI de C: `extern "C"`, `#[unsafe(no_mangle)]`, tipos compatibles con C, y quien asigna libera.
+- Un `cdylib` de Rust más `[LibraryImport]` es una forma práctica de usar Rust desde .NET en Windows, Linux y macOS.
+
+## Ejercicios
+
+1. Escribe una macro `strings!` para que `strings!["Ada", "Grace", 42]` produzca un `Vec<String>` (`["Ada", "Grace", "42"]`), y `strings![]` uno vacío. Admite una coma final.
+
+<details>
+<summary>Solución</summary>
+
+```rust
+macro_rules! strings {
+    ($($s:expr),* $(,)?) => {
+        vec![$($s.to_string()),*]
+    };
+}
+
+let names: Vec<String> = strings!["Ada", "Grace", 42];
+assert_eq!(names, ["Ada", "Grace", "42"]);
+let empty: Vec<String> = strings![];
+assert!(empty.is_empty());
+```
+
+`$(,)?` acepta una coma final opcional. Cualquier tipo que implemente `Display` tiene `to_string()`, así que el entero también funciona. Las macros pueden invocarse con `()`, `[]` o `{}`; `[]` solo hace que se parezca a `vec!`.
+
+</details>
+
+2. Reescribe `split_first_rest` **sin** `unsafe`, de dos maneras: con `split_first_mut` y con `split_at_mut`.
+
+<details>
+<summary>Solución</summary>
+
+```rust
+fn split_first_rest(values: &mut [i32]) -> Option<(&mut i32, &mut [i32])> {
+    values.split_first_mut()
+}
+
+fn split_first_rest_at(values: &mut [i32]) -> Option<(&mut i32, &mut [i32])> {
+    if values.is_empty() {
+        return None;
+    }
+    let (head, rest) = values.split_at_mut(1);
+    Some((&mut head[0], rest))
+}
+
+let mut scores = [10, 20, 30];
+if let Some((first, rest)) = split_first_rest(&mut scores) {
+    *first += 1;
+    rest[0] *= 2;
+}
+if let Some((first, rest)) = split_first_rest_at(&mut scores) {
+    *first += 1;
+    rest[1] *= 2;
+}
+assert_eq!(scores, [12, 40, 60]);
+assert!(split_first_rest(&mut []).is_none());
+```
+
+El `unsafe` sigue existiendo, dentro de la biblioteca estándar, revisado y probado una sola vez para todos. La mayor parte del código de aplicación nunca necesita su propio bloque `unsafe`.
+
+</details>
+
+3. Añade `pricing_average(prices, len, average)` a la biblioteca FFI: escribe la media a través de un puntero de salida y devuelve `false` cuando `len` es 0. Llámala desde C# con un parámetro `out double`.
+
+<details>
+<summary>Solución</summary>
+
+```rust
+/// Escribe la media de `len` precios en `*average`.
+/// Devuelve `false`, sin tocar `*average`, cuando `len` es 0.
+///
+/// # Safety
+///
+/// `prices` debe apuntar a `len` valores `f64` inicializados y `average`
+/// debe ser un puntero válido a memoria en la que se pueda escribir.
+#[unsafe(no_mangle)]
+pub unsafe extern "C" fn pricing_average(
+    prices: *const f64,
+    len: usize,
+    average: *mut f64,
+) -> bool {
+    if prices.is_null() || average.is_null() || len == 0 {
+        return false;
+    }
+    // SAFETY: lo garantiza quien llama, ver arriba.
+    let prices = unsafe { std::slice::from_raw_parts(prices, len) };
+    unsafe { *average = prices.iter().sum::<f64>() / len as f64 };
+    true
+}
+```
+
+```csharp
+if (Native.Average(prices, (nuint)prices.Length, out double average))
+{
+    Console.WriteLine($"average: {average:F2}");
+}
+Console.WriteLine($"average of nothing: {Native.Average([], 0, out _)}");
+
+// en la clase Native:
+[LibraryImport(Lib, EntryPoint = "pricing_average")]
+[return: MarshalAs(UnmanagedType.U1)]
+internal static partial bool Average([In] double[] prices, nuint len, out double average);
+```
+
+```text
+average: 12.50
+average of nothing: False
+```
+
+Un `out double` de C# se pasa como puntero, que es lo que recibe `*mut f64`. El `bool` de Rust ocupa un byte. `[LibraryImport]` se niega a adivinar cómo se serializa un `bool` — sin el atributo, la compilación falla con [`SYSLIB1051: Marshalling bool without explicit marshalling information is not supported`](https://learn.microsoft.com/dotnet/fundamentals/syslib-diagnostics/syslib1050-1069) — así que `[return: MarshalAs(UnmanagedType.U1)]` dice: un byte. (El antiguo `[DllImport]` suponía en silencio un `BOOL` de Win32 de 4 bytes.) Coloca la nueva función Rust **encima** del módulo `#[cfg(test)]`: el lint [`items_after_test_module`](https://rust-lang.github.io/rust-clippy/master/index.html#items_after_test_module) de clippy rechaza los elementos colocados después de él.
+
+</details>
+
+## Cómo seguir
+
+Esta ha sido la última lección del curso principal. La continuación, **Rust en la práctica: IX y compañía**, aplica estas ideas a código real del workspace de IX.
+
+## Fuentes
+
+- [The Book, ch. 20.1 — Unsafe Rust](https://doc.rust-lang.org/book/ch20-01-unsafe-rust.html) y [ch. 20.5 — Macros](https://doc.rust-lang.org/book/ch20-05-macros.html)
+- [The Little Book of Rust Macros](https://lukaswirth.dev/tlborm/)
+- [The Rustonomicon](https://doc.rust-lang.org/nomicon/) — la referencia para el código unsafe
+- [Edition Guide — los cambios de unsafe en Rust 2024](https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-extern.html)
+- [The Rust Reference — los bloques `extern` y la ABI de C](https://doc.rust-lang.org/reference/items/external-blocks.html)
+- [.NET — generación de código fuente de P/Invoke (`LibraryImport`)](https://learn.microsoft.com/dotnet/standard/native-interop/pinvoke-source-generation)
+- [Java — Foreign Function & Memory API](https://docs.oracle.com/en/java/javase/25/core/foreign-function-and-memory-api.html)

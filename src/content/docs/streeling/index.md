@@ -16,29 +16,29 @@ These modules were written by AI departments and have **not been reviewed**. Unl
 
 ## Departments
 
-| Department | Modules | French |
-|---|---|---|
-| [Audio Engineering](audio-engineering/) | 1 | 1 |
-| [Cognitive Science](cognitive-science/) | 1 | 1 |
-| [Computer Science](computer-science/) | 2 | 1 |
-| [Cybernetics](cybernetics/) | 3 | 0 |
-| [Data Visualization](data-visualization/) | 0 | 0 |
-| [Futurology](futurology/) | 1 | 1 |
-| [Guitar Acoustics & Sound Synthesis](guitar-acoustics/) | 0 | 0 |
-| [Guitar Alchemist Academy](guitar-alchemist-academy/) | 3 | 1 |
-| [Guitar Studies](guitar-studies/) | 2 | 2 |
-| [Information Theory](information-theory/) | 1 | 0 |
-| [Mathematics](mathematics/) | 1 | 1 |
-| [Music](music/) | 6 | 1 |
-| [Musicology](musicology/) | 2 | 1 |
-| [Network Science](network-science/) | 1 | 0 |
-| [Philosophy](philosophy/) | 1 | 1 |
-| [Physics](physics/) | 1 | 1 |
-| [Product and Project Management](product-management/) | 1 | 1 |
-| [Psychohistory](psychohistory/) | 2 | 1 |
-| [Semiotics](semiotics/) | 1 | 0 |
-| [Visual Computing](visual-computing/) | 0 | 0 |
-| [World Music & Languages](world-music-languages/) | 1 | 1 |
+| Department | Modules | French | Spanish |
+|---|---|---|---|
+| [Audio Engineering](audio-engineering/) | 1 | 1 | 1 |
+| [Cognitive Science](cognitive-science/) | 1 | 1 | 1 |
+| [Computer Science](computer-science/) | 2 | 1 | 1 |
+| [Cybernetics](cybernetics/) | 3 | 0 | 0 |
+| [Data Visualization](data-visualization/) | 0 | 0 | 0 |
+| [Futurology](futurology/) | 1 | 1 | 1 |
+| [Guitar Acoustics & Sound Synthesis](guitar-acoustics/) | 0 | 0 | 0 |
+| [Guitar Alchemist Academy](guitar-alchemist-academy/) | 3 | 1 | 1 |
+| [Guitar Studies](guitar-studies/) | 2 | 2 | 2 |
+| [Information Theory](information-theory/) | 1 | 0 | 0 |
+| [Mathematics](mathematics/) | 1 | 1 | 1 |
+| [Music](music/) | 6 | 1 | 1 |
+| [Musicology](musicology/) | 2 | 1 | 1 |
+| [Network Science](network-science/) | 1 | 0 | 0 |
+| [Philosophy](philosophy/) | 1 | 1 | 1 |
+| [Physics](physics/) | 1 | 1 | 1 |
+| [Product and Project Management](product-management/) | 1 | 1 | 1 |
+| [Psychohistory](psychohistory/) | 2 | 1 | 1 |
+| [Semiotics](semiotics/) | 1 | 0 | 0 |
+| [Visual Computing](visual-computing/) | 0 | 0 | 0 |
+| [World Music & Languages](world-music-languages/) | 1 | 1 | 1 |
 
 ## Provenance
 

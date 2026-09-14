@@ -6,7 +6,7 @@
 //   npm run sync:streeling -- --ref <sha|tag>   # pin a Demerzel revision
 //   npm run sync:streeling -- --source <dir>    # use an existing Demerzel checkout
 //
-// Generated (overwritten on every run): src/content/docs/{,fr/}streeling/** except journal.md,
+// Generated (overwritten on every run): src/content/docs/{,fr/,es/}streeling/** except journal.md,
 // src/streeling-sidebar.json and streeling.lock.json. Journals are created once and never touched again.
 
 import { execFileSync } from 'node:child_process';
@@ -23,7 +23,12 @@ const COURSES = `${STREELING}/courses`;
 const OUT = {
 	en: path.join(ROOT, 'src/content/docs/streeling'),
 	fr: path.join(ROOT, 'src/content/docs/fr/streeling'),
+	es: path.join(ROOT, 'src/content/docs/es/streeling'),
 };
+
+// English is the source; each translation is read from `<dept>/<lang>/<stem>.<lang>.md` when Demerzel provides it.
+const LANGS = ['en', 'fr', 'es'];
+const TRANSLATIONS = LANGS.filter((lang) => lang !== 'en');
 
 const FR_DEPARTMENTS = {
 	'audio-engineering': 'Ingénierie audio',
@@ -49,7 +54,36 @@ const FR_DEPARTMENTS = {
 	'world-music-languages': 'Musiques et langues du monde',
 };
 
-const FR_LEVELS = { beginner: 'débutant', intermediate: 'intermédiaire', advanced: 'avancé' };
+const ES_DEPARTMENTS = {
+	'audio-engineering': 'Ingeniería de audio',
+	'cognitive-science': 'Ciencia cognitiva',
+	'computer-science': 'Ciencias de la computación',
+	cybernetics: 'Cibernética',
+	'data-visualization': 'Visualización de datos',
+	futurology: 'Futurología',
+	'guitar-acoustics': 'Acústica de la guitarra y síntesis sonora',
+	'guitar-alchemist-academy': 'Guitar Alchemist Academy',
+	'guitar-studies': 'Estudios de guitarra',
+	'information-theory': 'Teoría de la información',
+	mathematics: 'Matemáticas',
+	music: 'Música',
+	musicology: 'Musicología',
+	'network-science': 'Ciencia de redes',
+	philosophy: 'Filosofía',
+	physics: 'Física',
+	'product-management': 'Gestión de productos y proyectos',
+	psychohistory: 'Psicohistoria',
+	semiotics: 'Semiótica',
+	'visual-computing': 'Computación visual',
+	'world-music-languages': 'Músicas y lenguas del mundo',
+};
+
+const DEPARTMENTS = { fr: FR_DEPARTMENTS, es: ES_DEPARTMENTS };
+
+const LEVELS = {
+	fr: { beginner: 'débutant', intermediate: 'intermédiaire', advanced: 'avancé' },
+	es: { beginner: 'principiante', intermediate: 'intermedio', advanced: 'avanzado' },
+};
 
 const T = {
 	en: {
@@ -75,6 +109,18 @@ const T = {
 		noModules: "Aucun module produit pour l'instant.",
 		catalog: 'Catalogue de cours (prévu)',
 		domain: 'Domaine',
+	},
+	es: {
+		overview: 'Presentación',
+		journal: 'Diario',
+		generatedBy: (dept) => `Generado por el departamento *${dept}* de Demerzel — todavía no lo he revisado.`,
+		source: 'Ver la fuente',
+		myJournal: 'Mi diario',
+		prerequisites: 'Requisitos previos',
+		modules: 'Módulos',
+		noModules: 'Todavía no se ha producido ningún módulo.',
+		catalog: 'Catálogo de cursos (previsto)',
+		domain: 'Dominio',
 	},
 };
 
@@ -209,7 +255,7 @@ function cleanOutput(dir) {
 
 function banner(lang, mod, dept, sourceUrl, moduleIndex) {
 	const t = T[lang];
-	const level = mod.meta.level && (lang === 'fr' ? (FR_LEVELS[mod.meta.level] ?? mod.meta.level) : mod.meta.level);
+	const level = mod.meta.level && (LEVELS[lang]?.[mod.meta.level] ?? mod.meta.level);
 	const facts = [`**${mod.code}**`, mod.meta.course, level, mod.meta.estimated_duration, mod.meta.date]
 		.filter(Boolean)
 		.join(' · ');
@@ -254,7 +300,7 @@ function main() {
 		const dept = {
 			id: deptId,
 			info,
-			label: { en: enLabel, fr: FR_DEPARTMENTS[deptId] ?? enLabel },
+			label: { en: enLabel, ...Object.fromEntries(TRANSLATIONS.map((lang) => [lang, DEPARTMENTS[lang][deptId] ?? enLabel])) },
 			modules: [],
 			catalog: null,
 		};
@@ -270,8 +316,11 @@ function main() {
 				const stem = file.replace(/\.md$/, '');
 				const parsed = parseModule(path.join(enDir, file));
 				const id = String(parsed.meta.module_id ?? stem).toLowerCase();
-				const frFile = path.join(deptDir, 'fr', `${stem}.fr.md`);
-				const mod = { id, stem, code: moduleCode(id), dept: deptId, en: parsed, fr: fs.existsSync(frFile) ? parseModule(frFile) : null };
+				const mod = { id, stem, code: moduleCode(id), dept: deptId, en: parsed };
+				for (const lang of TRANSLATIONS) {
+					const file = path.join(deptDir, lang, `${stem}.${lang}.md`);
+					mod[lang] = fs.existsSync(file) ? parseModule(file) : null;
+				}
 				mod.meta = parsed.meta;
 				dept.modules.push(mod);
 				moduleIndex.set(id, mod);
@@ -281,16 +330,15 @@ function main() {
 		departments.push(dept);
 	}
 
-	cleanOutput(OUT.en);
-	cleanOutput(OUT.fr);
+	for (const lang of LANGS) cleanOutput(OUT[lang]);
 
-	const totals = { en: 0, fr: 0, internal: 0, github: 0 };
+	const totals = { ...Object.fromEntries(LANGS.map((lang) => [lang, 0])), internal: 0, github: 0 };
 	for (const dept of departments) {
 		dept.modules.forEach((mod, i) => {
-			for (const lang of ['en', 'fr']) {
+			for (const lang of LANGS) {
 				const parsed = mod[lang];
 				if (!parsed) continue;
-				const srcFile = lang === 'en' ? `${mod.stem}.md` : `${mod.stem}.fr.md`;
+				const srcFile = lang === 'en' ? `${mod.stem}.md` : `${mod.stem}.${lang}.md`;
 				const srcRepoPath = `${COURSES}/${dept.id}/${lang}/${srcFile}`;
 				const sourceUrl = `https://github.com/${REPO}/blob/${sha}/${srcRepoPath}`;
 				const { body, stats } = rewriteLinks(parsed.body, { srcRepoPath, moduleIndex, sha });
@@ -311,7 +359,7 @@ function main() {
 			}
 		});
 
-		for (const lang of ['en', 'fr']) {
+		for (const lang of LANGS) {
 			const t = T[lang];
 			const parts = [
 				frontmatter({
@@ -324,7 +372,7 @@ function main() {
 			parts.push(`## ${t.modules}\n`);
 			if (dept.modules.length) {
 				for (const mod of dept.modules) {
-					const title = (lang === 'fr' && mod.fr?.title) || mod.en.title || mod.code;
+					const title = (lang !== 'en' && mod[lang]?.title) || mod.en.title || mod.code;
 					parts.push(`- [${mod.code} · ${title}](${mod.id}/)`);
 				}
 				parts.push('');
@@ -347,12 +395,12 @@ function main() {
 		commit_date: commitDate,
 		synced_at: new Date().toISOString(),
 		departments: departments.length,
-		modules: { en: totals.en, fr: totals.fr },
+		modules: Object.fromEntries(LANGS.map((lang) => [lang, totals[lang]])),
 	};
 	write(path.join(ROOT, 'streeling.lock.json'), JSON.stringify(lock, null, 2) + '\n');
 
 	console.log(`Streeling @ ${sha.slice(0, 7)} (${commitDate})`);
-	console.log(`  departments: ${departments.length}, modules: ${totals.en} en / ${totals.fr} fr`);
+	console.log(`  departments: ${departments.length}, modules: ${LANGS.map((lang) => `${totals[lang]} ${lang}`).join(' / ')}`);
 	console.log(`  links: ${totals.internal} rewritten to site pages, ${totals.github} pointed at GitHub`);
 }
 
@@ -363,8 +411,8 @@ function writeOverview(university, departments, sha, commitDate) {
 	const rows = (lang) =>
 		departments
 			.map((d) => {
-				const fr = d.modules.filter((m) => m.fr).length;
-				return `| [${d.label[lang]}](${d.id}/) | ${d.modules.length} | ${fr} |`;
+				const translated = TRANSLATIONS.map((t) => d.modules.filter((m) => m[t]).length);
+				return `| [${d.label[lang]}](${d.id}/) | ${d.modules.length} | ${translated.join(' | ')} |`;
 			})
 			.join('\n');
 
@@ -378,7 +426,7 @@ function writeOverview(university, departments, sha, commitDate) {
 			`> ${university.mandate}\n\n` +
 			`Streeling University is the knowledge layer of [Demerzel](https://github.com/${REPO}), the governance framework of the GuitarAlchemist ecosystem. Each department is an agent persona that researches its discipline and writes course modules.\n\n` +
 			`:::caution[Generated content]\nThese modules were written by AI departments and have **not been reviewed**. Unlike the other courses on this site, nothing here has been tested on my machine yet — my [journal](journal/) tracks what I have actually studied and verified.\n:::\n\n` +
-			`## Departments\n\n| Department | Modules | French |\n|---|---|---|\n${rows('en')}\n\n` +
+			`## Departments\n\n| Department | Modules | French | Spanish |\n|---|---|---|---|\n${rows('en')}\n\n` +
 			`## Provenance\n\n- Source: [\`${REPO}\` → \`${COURSES}\`](${commitUrl}) at commit \`${short}\` (${date}), MIT license.\n- Imported with \`npm run sync:streeling\`; do not edit these pages by hand — only \`journal.md\` is kept between syncs.\n`,
 	);
 
@@ -392,8 +440,22 @@ function writeOverview(university, departments, sha, commitDate) {
 			`> ${university.mandate}\n\n` +
 			`Streeling University est la couche de connaissances de [Demerzel](https://github.com/${REPO}), le cadre de gouvernance de l'écosystème GuitarAlchemist. Chaque département est une persona d'agent qui étudie sa discipline et rédige des modules de cours.\n\n` +
 			`:::caution[Contenu généré]\nCes modules ont été écrits par des départements IA et **n'ont pas été relus**. Contrairement aux autres cours du site, rien ici n'a encore été testé sur ma machine — mon [journal](journal/) suit ce que j'ai réellement étudié et vérifié.\n:::\n\n` +
-			`## Départements\n\n| Département | Modules | En français |\n|---|---|---|\n${rows('fr')}\n\n` +
+			`## Départements\n\n| Département | Modules | En français | En espagnol |\n|---|---|---|---|\n${rows('fr')}\n\n` +
 			`## Provenance\n\n- Source : [\`${REPO}\` → \`${COURSES}\`](${commitUrl}) au commit \`${short}\` (${date}), licence MIT.\n- Importé avec \`npm run sync:streeling\` ; ne pas modifier ces pages à la main — seul \`journal.md\` est conservé entre deux synchronisations.\n`,
+	);
+
+	write(
+		path.join(OUT.es, 'index.md'),
+		frontmatter({
+			title: 'Streeling University',
+			description: 'Módulos producidos por los departamentos de Demerzel, importados para estudiarlos y llevar un diario de aprendizaje.',
+			sidebar: { label: 'Presentación', order: 0 },
+		}) +
+			`> ${university.mandate}\n\n` +
+			`Streeling University es la capa de conocimiento de [Demerzel](https://github.com/${REPO}), el marco de gobernanza del ecosistema GuitarAlchemist. Cada departamento es una persona de agente que investiga su disciplina y redacta módulos de curso.\n\n` +
+			`:::caution[Contenido generado]\nEstos módulos fueron escritos por departamentos de IA y **no han sido revisados**. A diferencia de los demás cursos del sitio, nada de lo que hay aquí se ha probado todavía en mi máquina — mi [diario](journal/) registra lo que realmente he estudiado y verificado.\n:::\n\n` +
+			`## Departamentos\n\n| Departamento | Módulos | En francés | En español |\n|---|---|---|---|\n${rows('es')}\n\n` +
+			`## Procedencia\n\n- Fuente: [\`${REPO}\` → \`${COURSES}\`](${commitUrl}) en el commit \`${short}\` (${date}), licencia MIT.\n- Importado con \`npm run sync:streeling\`; no edites estas páginas a mano — solo \`journal.md\` se conserva entre sincronizaciones.\n`,
 	);
 }
 
@@ -404,7 +466,7 @@ function writeJournals(departments) {
 			.filter((d) => d.modules.length)
 			.map((d) => {
 				const items = d.modules.map((m) => {
-					const title = (lang === 'fr' && m.fr?.title) || m.en.title || m.code;
+					const title = (lang !== 'en' && m[lang]?.title) || m.en.title || m.code;
 					return `- [ ] [${m.code} · ${shortTitle(title, m.code)}](../${d.id}/${m.id}/) <!-- ${m.id} -->`;
 				});
 				return `### ${d.label[lang]}\n\n${items.join('\n')}`;
@@ -418,9 +480,12 @@ function writeJournals(departments) {
 		fr:
 			frontmatter({ title: 'Journal Streeling', description: "Ce que j'ai étudié à Streeling University, ce que j'ai vérifié et ce que j'ai trouvé d'erroné.", sidebar: { label: 'Journal', order: 1 } }) +
 			`Coche un module une fois étudié. Sous **Notes**, ajoute une entrée datée : ce que j'ai compris, ce que j'ai testé, et toute erreur trouvée dans le module (avec une source).\n\n## Progression\n\n${checklist('fr')}\n\n## Notes\n\n<!-- ## AAAA-MM-JJ — CODE · Titre -->\n`,
+		es:
+			frontmatter({ title: 'Diario Streeling', description: 'Lo que estudié en Streeling University, lo que verifiqué y los errores que encontré.', sidebar: { label: 'Diario', order: 1 } }) +
+			`Marca un módulo una vez estudiado. En **Notas**, añade una entrada fechada: lo que entendí, lo que probé y cualquier error encontrado en el módulo (con una fuente).\n\n## Progreso\n\n${checklist('es')}\n\n## Notas\n\n<!-- ## AAAA-MM-DD — CÓDIGO · Título -->\n`,
 	};
 
-	for (const lang of ['en', 'fr']) {
+	for (const lang of LANGS) {
 		const file = path.join(OUT[lang], 'journal.md');
 		if (!fs.existsSync(file)) {
 			write(file, templates[lang]);
@@ -434,11 +499,11 @@ function writeJournals(departments) {
 
 function writeSidebar(departments) {
 	const sidebar = [
-		{ label: 'Overview', translations: { fr: 'Présentation' }, slug: 'streeling' },
-		{ label: 'Journal', slug: 'streeling/journal' },
+		{ label: 'Overview', translations: { fr: T.fr.overview, es: T.es.overview }, slug: 'streeling' },
+		{ label: 'Journal', translations: { es: T.es.journal }, slug: 'streeling/journal' },
 		...departments.map((d) => ({
 			label: d.label.en,
-			translations: { fr: d.label.fr },
+			translations: Object.fromEntries(TRANSLATIONS.map((lang) => [lang, d.label[lang]])),
 			collapsed: true,
 			items: [{ autogenerate: { directory: `streeling/${d.id}` } }],
 		})),

@@ -1,0 +1,78 @@
+---
+title: learn
+description: Aprender en público — cursos escritos a medida que aprendo.
+template: splash
+hero:
+  tagline: Cursos escritos mientras aprendo, publicados tal cual — con los errores, los callejones sin salida y lo que al final funcionó.
+  actions:
+    - text: Empieza por Contenedores WSL
+      link: wsl-containers/
+      icon: right-arrow
+    - text: Cómo se construyen estos cursos
+      link: method/
+      icon: open-book
+      variant: minimal
+---
+
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+## Por qué este sitio
+
+Escribo estos cursos primero para mí: explicar un tema es la mejor manera de comprobar que lo has entendido.
+Son públicos para que otros puedan aprovecharlos — y corregirme.
+
+<CardGrid>
+	<Card title="Misión" icon="rocket">
+		Cada curso empieza por *por qué* aprendo el tema y qué quiero ser capaz de hacer al final.
+	</Card>
+	<Card title="Lecciones" icon="document">
+		Lecciones cortas, con comandos reales y ejercicios con solución.
+	</Card>
+	<Card title="Diario" icon="pencil">
+		Notas de progreso: lo que probé, lo que se rompió, lo que todavía queda por verificar.
+	</Card>
+	<Card title="Fuentes" icon="external">
+		Cada afirmación importante enlaza a una fuente primaria (documentación oficial, repositorios).
+	</Card>
+</CardGrid>
+
+## Cursos
+
+### Ingeniería de software
+
+#### Lenguajes y frameworks
+
+<LinkCard
+	title="Rust para desarrolladores C#/Java"
+	description="Rust desde cero para desarrolladores C# y Java — cada ejemplo compilado y probado en CI."
+	href="rust-for-csharp-java/"
+/>
+<LinkCard
+	title="Java para desarrolladores C#"
+	description="Java 25 para desarrolladores C# — cada ejemplo, error de compilación y ejercicio probado en CI, con el lado C# mostrado al lado."
+	href="java-for-csharp/"
+/>
+
+#### Infraestructura y herramientas
+
+<LinkCard
+	title="Contenedores WSL"
+	description="Ejecutar contenedores Linux en Windows con wslc.exe, sin Docker Desktop."
+	href="wsl-containers/"
+/>
+
+### Otros
+
+<LinkCard
+	title="Streeling University"
+	description="31 módulos de los departamentos de Demerzel — música, guitarra, matemáticas, informática, filosofía… — estudiados con un diario."
+	href="streeling/"
+/>
+
+## Artefactos
+
+<LinkCard
+	title="Artefactos"
+	description="Páginas interactivas construidas con Claude — un mapa del playbook SDLC aplicado a IX, un pipeline de assets gobernado, un banco de colocación de micrófonos."
+	href="artifacts/"
+/>

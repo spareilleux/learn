@@ -19,11 +19,11 @@ Chaque cours vit dans son propre dossier et suit la même structure.
 2. **Citer des sources primaires.** Documentation officielle, dépôts, notes de version — pas de blogs de seconde main quand on peut l'éviter.
 3. **Garder les échecs.** Une erreur rencontrée (et sa cause) est souvent plus instructive que le chemin idéal.
 4. **Dater ce qui change vite.** Les outils en préversion évoluent : chaque cours indique la version étudiée.
-5. **Bilingue.** L'anglais est la langue de référence ; la version française suit sous `/fr/`.
+5. **Trilingue.** L'anglais est la langue de référence ; la version française suit sous `/fr/` et la version espagnole sous `/es/`.
 
 ## Ajouter un cours
 
-1. Créer `src/content/docs/<sujet>/` (anglais) et `src/content/docs/fr/<sujet>/` (français), avec les mêmes noms de fichiers.
+1. Créer `src/content/docs/<sujet>/` (anglais), `src/content/docs/fr/<sujet>/` (français) et `src/content/docs/es/<sujet>/` (espagnol), avec les mêmes noms de fichiers.
 2. Écrire `index.md` (mission), les leçons numérotées et `journal.md`.
 3. Ordonner les pages avec `sidebar: { order: N }` dans le frontmatter.
 4. Ajouter le groupe dans `astro.config.mjs` :

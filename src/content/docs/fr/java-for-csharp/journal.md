@@ -11,16 +11,37 @@ sidebar:
 - [x] Leçon 2 — Types, égalité et opérateurs
 - [x] Leçon 3 — Classes, records et enums
 - [x] Leçon 4 — Génériques et effacement de type
-- [ ] Leçon 5 — Exceptions, `null` et `Optional`
-- [ ] Leçon 6 — Lambdas et interfaces fonctionnelles
-- [ ] Leçon 7 — Collections et Streams
-- [ ] Leçon 8 — Pattern matching
+- [x] Leçon 5 — Exceptions, `null` et `Optional`
+- [x] Leçon 6 — Lambdas et interfaces fonctionnelles
+- [x] Leçon 7 — Collections et Streams
+- [x] Leçon 8 — Pattern matching
 - [ ] Leçon 9 — Concurrence et threads virtuels
 - [ ] Leçon 10 — Maven et Gradle en profondeur
 - [ ] Leçon 11 — Tests
 - [ ] Leçon 12 — La bibliothèque standard du quotidien
 - [ ] Leçon 13 — La JVM à l'exécution
 - [ ] Leçon 14 — Annotations, réflexion et modules
+
+## 2026-09-13 — Leçons 5 à 8
+
+- Le côté C# couvre désormais toutes les leçons : `dotnet run -- l05` à `l08` affichent le comportement .NET auquel chaque leçon se compare.
+- Le projet compte 98 tests : 56 extraits rejetés, 21 sorties d'exemples et 21 solutions d'exercices.
+
+**Surprises en venant de C# :**
+
+- Quand la fermeture d'une ressource échoue après l'échec du corps, Java conserve l'exception du corps et y attache l'autre comme exception *supprimée* (suppressed). Le `using` de C# perd l'exception d'origine : le côté C# affiche `dispose failed: db` au lieu de `query failed on db`.
+- `throw e` conserve la trace de pile en Java, car la trace est capturée à la création de l'exception. L'analyseur C# avertit sur la même ligne (CA2200).
+- Deux évaluations de `display::onPrice` produisent deux objets différents au sens d'`equals` : retirer un écouteur avec une nouvelle référence de méthode ne fait donc rien, en silence. Les délégués C# sont égaux.
+- `Map.of(…)` itère dans un ordre différent d'un démarrage de la JVM à l'autre : quatre exécutions du même one-liner ont donné deux ordres.
+- Une expression `switch` sur une interface scellée qui oublie un sous-type est une erreur de compilation, là où C# se contente d'un avertissement (CS8509).
+- Les motifs primitifs (`case byte b` sur un `int`) sont encore en préversion en Java 25 ; javac le dit et suggère `--enable-preview`.
+
+**Ce que j'ai d'abord mal fait :**
+
+- La première capture de la sortie C# attendue pour la leçon 7 contenait un avertissement de l'analyseur, parce que `dotnet run` avait recompilé le projet et écrit l'avertissement sur la sortie standard. Les fichiers attendus sont désormais produits avec `dotnet run --no-build`, comme en CI.
+- `IntSummaryStatistics.toString()` et `printf("%.2f")` formatent les nombres selon la locale par défaut : la sortie dépend donc de la machine, `2.200000` ici, `2,200000` avec une locale française. La leçon 7 affiche elle-même les champs et la leçon 8 passe `Locale.ROOT`. Les exemples `Enums` et `Shapes` de la leçon 3 utilisent encore la locale par défaut : *à vérifier* sur une machine en locale française.
+- Je me souvenais de l'erreur C# de bras de switch dominé comme CS8120. Ce code concerne les instructions `switch` ; une expression switch signale CS8510.
+- `reduce(UnaryOperator.identity(), (f, g) -> f.andThen(g))` ne compile pas : `andThen` renvoie une `Function`, pas un `UnaryOperator`. L'exercice 1 de la leçon 6 explique pourquoi.
 
 ## 2026-09-13 — Leçons 1 à 4
 

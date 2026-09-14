@@ -11,16 +11,37 @@ sidebar:
 - [x] Lesson 2 — Types, equality and operators
 - [x] Lesson 3 — Classes, records and enums
 - [x] Lesson 4 — Generics and type erasure
-- [ ] Lesson 5 — Exceptions, `null` and `Optional`
-- [ ] Lesson 6 — Lambdas and functional interfaces
-- [ ] Lesson 7 — Collections and Streams
-- [ ] Lesson 8 — Pattern matching
+- [x] Lesson 5 — Exceptions, `null` and `Optional`
+- [x] Lesson 6 — Lambdas and functional interfaces
+- [x] Lesson 7 — Collections and Streams
+- [x] Lesson 8 — Pattern matching
 - [ ] Lesson 9 — Concurrency and virtual threads
 - [ ] Lesson 10 — Maven and Gradle in depth
 - [ ] Lesson 11 — Testing
 - [ ] Lesson 12 — The standard library you reach for
 - [ ] Lesson 13 — The JVM at run time
 - [ ] Lesson 14 — Annotations, reflection and modules
+
+## 2026-09-13 — Lessons 5 to 8
+
+- The C# side now covers every lesson: `dotnet run -- l05` to `l08` print the .NET behaviour each lesson compares with.
+- The project has 98 tests: 56 rejected snippets, 21 example outputs and 21 exercise solutions.
+
+**Surprises coming from C#:**
+
+- When closing a resource fails after the body has failed, Java keeps the body's exception and attaches the other as *suppressed*. C#'s `using` loses the original: the C# side prints `dispose failed: db` instead of `query failed on db`.
+- `throw e` keeps the stack trace in Java, because the trace is captured when the exception is created. The C# analyzer warns about the same line (CA2200).
+- Two evaluations of `display::onPrice` produce two unequal objects, so removing a listener with a fresh method reference silently does nothing. C# delegates compare equal.
+- `Map.of(…)` iterates in a different order from one JVM start to the next: four runs of the same one-liner gave two orders.
+- A `switch` expression over a sealed interface that misses a subtype is a compile error, where C# only warns (CS8509).
+- Primitive patterns (`case byte b` on an `int`) are still a preview in Java 25; javac says so and suggests `--enable-preview`.
+
+**Things I got wrong first:**
+
+- The first capture of the C# expected output for lesson 7 included an analyzer warning, because `dotnet run` rebuilt the project and printed the warning to standard output. The expected files are now produced with `dotnet run --no-build`, as in CI.
+- `IntSummaryStatistics.toString()` and `printf("%.2f")` format numbers with the default locale, so the output depends on the machine: `2.200000` here, `2,200000` with a French locale. Lesson 7 prints the fields itself and lesson 8 passes `Locale.ROOT`. Lesson 3's `Enums` and `Shapes` examples still use the default locale: *to verify* on a French-locale machine.
+- I remembered C#'s dominated switch-arm error as CS8120. That code is for `switch` statements; a switch expression reports CS8510.
+- `reduce(UnaryOperator.identity(), (f, g) -> f.andThen(g))` doesn't compile: `andThen` returns a `Function`, not a `UnaryOperator`. Exercise 1 of lesson 6 explains why.
 
 ## 2026-09-13 — Lessons 1 to 4
 
