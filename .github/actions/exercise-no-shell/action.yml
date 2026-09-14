@@ -1,0 +1,8 @@
+# GitHub Actions course, lesson 6, exercise 1: a composite step without shell (expected to fail)
+name: Exercise - composite step without shell
+description: Deliberately broken composite action used by gha-06-exercises.yml.
+
+runs:
+  using: composite
+  steps:
+    - run: echo "hello from a composite action"

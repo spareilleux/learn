@@ -1,0 +1,21 @@
+# GitHub Actions course, lesson 6: checks for the exercises (manual runs only)
+name: "GHA 06: exercise checks"
+
+on:
+  workflow_dispatch:
+
+jobs:
+  # Exercise 1: a run step in a composite action without shell
+  no-shell:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/exercise-no-shell
+
+  # Exercise 2: a local action used before actions/checkout
+  before-checkout:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/actions/dotnet-restore
+        with:
+          directory: code/github-actions/dotnet

@@ -1,0 +1,30 @@
+# GitHub Actions course, lesson 6: calling a reusable workflow with a matrix, and reading its outputs
+name: "GHA 06: reuse"
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/gha-06-reuse.yml', '.github/workflows/gha-06-dotnet-test.yml', '.github/actions/dotnet-restore/**']
+
+env:
+  COURSE: github-actions
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    uses: ./.github/workflows/gha-06-dotnet-test.yml
+    with:
+      os: ${{ matrix.os }}
+
+  summary:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "COURSE in the caller: '$COURSE'"
+          echo "sdk-version: ${{ needs.test.outputs.sdk-version }}"
+          echo "tested-on:   ${{ needs.test.outputs.tested-on }}"

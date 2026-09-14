@@ -1,0 +1,32 @@
+# GitHub Actions course, lesson 6: a composite action that installs the SDK and restores with the NuGet cache
+name: Set up and restore a .NET solution
+description: Installs the SDK pinned by global.json, then restores with the NuGet cache and the lock files.
+
+inputs:
+  directory:
+    description: Folder that contains global.json, the solution and the packages.lock.json files
+    required: true
+
+outputs:
+  sdk-version:
+    description: The SDK version reported by dotnet --version
+    value: ${{ steps.sdk.outputs.version }}
+
+runs:
+  using: composite
+  steps:
+    - name: Keep NuGet packages in the workspace
+      shell: bash
+      run: echo "NUGET_PACKAGES=$GITHUB_WORKSPACE/.nuget/packages" >> "$GITHUB_ENV"
+    - uses: actions/setup-dotnet@v6
+      with:
+        global-json-file: ${{ inputs.directory }}/global.json
+        cache: true
+        cache-dependency-path: ${{ inputs.directory }}/*/packages.lock.json
+    - id: sdk
+      shell: bash
+      working-directory: ${{ inputs.directory }}
+      run: echo "version=$(dotnet --version)" >> "$GITHUB_OUTPUT"
+    - shell: bash
+      working-directory: ${{ inputs.directory }}
+      run: dotnet restore --locked-mode

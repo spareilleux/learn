@@ -1,0 +1,41 @@
+# GitHub Actions course, lesson 6: a reusable workflow that tests the .NET sample on one OS
+name: "GHA 06: reusable .NET test"
+
+on:
+  workflow_call:
+    inputs:
+      os:
+        description: Runner label
+        type: string
+        default: ubuntu-latest
+    outputs:
+      sdk-version:
+        description: SDK used by the tests
+        value: ${{ jobs.test.outputs.sdk-version }}
+      tested-on:
+        description: Operating system of the runner
+        value: ${{ jobs.test.outputs.tested-on }}
+
+jobs:
+  test:
+    runs-on: ${{ inputs.os }}
+    outputs:
+      sdk-version: ${{ steps.setup.outputs.sdk-version }}
+      tested-on: ${{ runner.os }}
+    steps:
+      - uses: actions/checkout@v7
+      - id: setup
+        uses: ./.github/actions/dotnet-restore
+        with:
+          directory: code/github-actions/dotnet
+      - run: dotnet test --no-restore
+        working-directory: code/github-actions/dotnet
+      - name: What the called workflow sees
+        shell: bash
+        run: |
+          echo "event_name:         ${{ github.event_name }}"
+          echo "github.workflow:    ${{ github.workflow }}"
+          echo "github.workflow_ref: ${{ github.workflow_ref }}"
+          echo "job.workflow_ref:   ${{ job.workflow_ref }}"
+          echo "COURSE from caller: '$COURSE'"
+          echo "NUGET_PACKAGES:     $NUGET_PACKAGES"
