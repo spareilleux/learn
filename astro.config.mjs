@@ -56,6 +56,11 @@ export default defineConfig({
 									collapsed: true,
 									items: [{ autogenerate: { directory: 'wsl-containers' } }],
 								},
+								{
+									label: 'GitHub Actions',
+									collapsed: true,
+									items: [{ autogenerate: { directory: 'github-actions' } }],
+								},
 							],
 						},
 					],
