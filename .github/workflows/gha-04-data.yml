@@ -1,0 +1,72 @@
+# GitHub Actions course, lesson 4: expressions, contexts, environment, outputs, conditions
+name: "GHA 04: data between steps and jobs"
+
+on:
+  workflow_dispatch:
+    inputs:
+      fail:
+        description: Make the test step fail
+        type: boolean
+        default: false
+  push:
+    branches: [main]
+    paths: ['.github/workflows/gha-04-data.yml']
+
+env:
+  COURSE: github-actions
+
+jobs:
+  produce:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.value }}
+    env:
+      LESSON: '04'
+    steps:
+      - name: Expressions and contexts
+        run: |
+          echo "course=$COURSE lesson=$LESSON"
+          echo "run ${{ github.run_number }}, attempt ${{ github.run_attempt }}"
+          echo "is main: ${{ github.ref == 'refs/heads/main' }}"
+          echo "upper: ${{ format('{0}-{1}', env.COURSE, env.LESSON) }}"
+
+      - name: Compute a version
+        id: version
+        run: echo "value=1.0.${{ github.run_number }}" >> "$GITHUB_OUTPUT"
+
+      - name: Export a variable for later steps
+        run: echo "BUILD_LABEL=build-${{ steps.version.outputs.value }}" >> "$GITHUB_ENV"
+
+      - name: Read it back
+        run: echo "BUILD_LABEL is $BUILD_LABEL"
+
+      - name: A secret is masked in logs
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "token length: ${#TOKEN}"
+          echo "token: $TOKEN"
+
+      - name: Tests (fail on demand)
+        run: |
+          if [ "${{ inputs.fail }}" = "true" ]; then
+            echo "::error file=code/github-actions/dotnet/Slugs/Slug.cs,line=9::Pretend a test failed"
+            exit 1
+          fi
+          echo "tests passed"
+
+      - name: Only on failure
+        if: failure()
+        run: echo "a previous step failed"
+
+      - name: Always
+        if: always()
+        run: |
+          echo "job status: ${{ job.status }}"
+          echo "### Version ${{ steps.version.outputs.value }}" >> "$GITHUB_STEP_SUMMARY"
+
+  consume:
+    needs: produce
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "version from produce = ${{ needs.produce.outputs.version }}"

@@ -1,0 +1,43 @@
+# GitHub Actions course, lesson 3: events, filters, manual inputs, schedules, concurrency
+name: "GHA 03: triggers"
+
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/gha-03-triggers.yml']
+  workflow_dispatch:
+    inputs:
+      greeting:
+        description: Who to greet
+        type: string
+        default: world
+      loud:
+        description: Shout the greeting
+        type: boolean
+        default: false
+  schedule:
+    - cron: '17 6 * * 1'   # Mondays 06:17 UTC
+
+concurrency:
+  group: gha-03-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  show:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Which event?
+        run: |
+          echo "event_name: ${{ github.event_name }}"
+          echo "ref:        ${{ github.ref }}"
+          echo "actor:      ${{ github.actor }}"
+      - name: Manual inputs
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          echo "greeting: ${{ inputs.greeting }}"
+          echo "loud:     ${{ inputs.loud }}"
+      - name: Scheduled run
+        if: github.event_name == 'schedule'
+        run: echo "cron: ${{ github.event.schedule }}"
+      - name: Slow step (to see concurrency cancel a run)
+        run: sleep 60

@@ -1,0 +1,29 @@
+# GitHub Actions course, lesson 1: the smallest useful workflow
+name: "GHA 01: hello"
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/gha-01-hello.yml']
+
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Say hello
+        run: echo "Hello from GitHub Actions"
+
+      - name: Where am I?
+        run: |
+          echo "Event:   ${{ github.event_name }}"
+          echo "Commit:  ${{ github.sha }}"
+          echo "Runner:  $RUNNER_OS $RUNNER_ARCH"
+          echo "Workdir: $(pwd)"
+          ls -A
+
+      - name: Check out the repository
+        uses: actions/checkout@v7
+
+      - name: Look again
+        run: ls -A
