@@ -1,0 +1,18 @@
+# GitHub Actions course, lesson 7: checks for the exercises (manual runs only)
+name: "GHA 07: exercise checks"
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  # Exercise 1: a job that sets permissions replaces the workflow-level ones
+  job-permissions:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+    steps:
+      - uses: actions/checkout@v7
+      - run: git log -1 --format='%h %s'

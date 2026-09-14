@@ -1,0 +1,94 @@
+# GitHub Actions course, lesson 7: token permissions, masking, pinned actions, OIDC claims, script injection
+name: "GHA 07: security"
+
+on:
+  workflow_dispatch:
+    inputs:
+      title:
+        description: A title typed by someone else (try $(whoami))
+        type: string
+        default: Hello
+  push:
+    branches: [main]
+    paths: ['.github/workflows/gha-07-security.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  token-read-contents:
+    runs-on: ubuntu-latest
+    steps:
+      - name: List runs with contents:read only
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh run list --repo "$GITHUB_REPOSITORY" --limit 1 || echo "gh exit code: $?"
+
+  token-read-actions:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - name: List runs with actions:read
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh run list --repo "$GITHUB_REPOSITORY" --limit 1 --json workflowName,status --jq '.[0]'
+
+  masking:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Mask a value computed by the script
+        run: |
+          derived=$(echo -n "${{ github.run_id }}-not-a-real-secret" | sha256sum | cut -c1-16)
+          echo "before add-mask: $derived"
+          echo "::add-mask::$derived"
+          echo "after add-mask:  $derived"
+      - name: A secret that doesn't exist
+        run: |
+          echo "value='${{ secrets.DOES_NOT_EXIST }}'"
+
+  pinned:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - run: git log -1 --format='%h %s'
+
+  oidc:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Request an OIDC token and print its claims (not the token)
+        run: |
+          token=$(curl -sS -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=learn-course" | jq -r .value)
+          python3 - "$token" <<'PY'
+          import base64, json, sys
+          payload = sys.argv[1].split(".")[1]
+          claims = json.loads(base64.urlsafe_b64decode(payload + "=" * (-len(payload) % 4)))
+          for name in ["iss", "aud", "sub", "repository", "ref", "event_name", "job_workflow_ref", "runner_environment"]:
+              print(f"{name}: {claims.get(name)}")
+          print(f"lifetime: {claims['exp'] - claims['iat']} s")
+          PY
+
+  no-oidc:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Without id-token:write
+        run: |
+          echo "ACTIONS_ID_TOKEN_REQUEST_URL is ${ACTIONS_ID_TOKEN_REQUEST_URL:-not set}"
+
+  injection:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Unsafe, the expression is pasted into the script
+        run: |
+          echo "Title: ${{ inputs.title }}"
+      - name: Safe, the value goes through the environment
+        env:
+          TITLE: ${{ inputs.title }}
+        run: |
+          echo "Title: $TITLE"
