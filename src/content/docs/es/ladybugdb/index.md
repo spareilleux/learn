@@ -7,7 +7,7 @@ sidebar:
 ---
 
 :::note[Cómo se prueba este curso]
-Cada consulta de este curso está en [`code/ladybugdb/cypher`](https://github.com/spareilleux/learn/tree/main/code/ladybugdb/cypher), junto a su salida esperada. [`.github/workflows/ladybugdb-examples.yml`](https://github.com/spareilleux/learn/blob/main/.github/workflows/ladybugdb-examples.yml) las ejecuta todas con la CLI de LadybugDB en Linux, Windows y macOS y compara los resultados, y hace lo mismo con el programa C# de la lección 5 y el programa Java de la lección 6. Las salidas de las lecciones se capturaron con LadybugDB 0.20.4 en septiembre de 2026, con la CLI 0.19.1 para las extensiones de la lección 7, con el paquete NuGet `LadybugDB` 0.19.1 para C#, y con el paquete Maven `com.ladybugdb:lbug` 0.20.4 para Java.
+Cada consulta de este curso está en [`code/ladybugdb/cypher`](https://github.com/spareilleux/learn/tree/main/code/ladybugdb/cypher), junto a su salida esperada. [`.github/workflows/ladybugdb-examples.yml`](https://github.com/spareilleux/learn/blob/main/.github/workflows/ladybugdb-examples.yml) las ejecuta todas con la CLI de LadybugDB en Linux, Windows y macOS y compara los resultados, y hace lo mismo con el programa C# de la lección 5, los programas Java de las lecciones 6 y 8, y el script de la lección 8 que arranca y mata procesos de la CLI sobre un archivo de base de datos. Las salidas de las lecciones se capturaron con LadybugDB 0.20.4 en septiembre de 2026, con la CLI 0.19.1 para las extensiones de la lección 7, con el paquete NuGet `LadybugDB` 0.19.1 para C#, y con el paquete Maven `com.ladybugdb:lbug` 0.20.4 para Java.
 :::
 
 ## Por qué estoy aprendiendo esto
@@ -67,7 +67,7 @@ Las lecciones 5 y 6 consultan otro repositorio: los proyectos .NET de [GuitarAlc
 | 5 | [LadybugDB desde C#](05-csharp/) | ADO.NET |
 | 6 | [LadybugDB desde Java](06-java/) | JDBC |
 | 7 | [Algoritmos de grafos y búsqueda de texto completo](07-algorithms/) | índices de texto completo, `CONTAINSTABLE` |
-| 8 | Persistencia, transacciones y concurrencia (próximamente) | aislamiento, bloqueos |
+| 8 | [Persistencia, transacciones y concurrencia](08-persistence/) | aislamiento, bloqueos, el registro de transacciones |
 | — | [Diario](journal/) | |
 
 ## Recursos

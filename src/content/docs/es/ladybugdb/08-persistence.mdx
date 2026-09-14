@@ -1,0 +1,674 @@
+---
+title: 8. Persistencia, transacciones y concurrencia
+description: Transacciones que terminan en el primer error, una sola transacción de escritura para toda la base de datos, instantáneas de solo lectura, el archivo de base de datos y su registro de escritura anticipada, un proceso matado, dos procesos sobre un archivo y lo que el bloqueo no impide, EXPORT e IMPORT DATABASE, versiones de almacenamiento y un BEGIN rechazado que hace caer la JVM.
+sidebar:
+  order: 8
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Las lecciones 1 a 7 abrían una base de datos, la consultaban y la cerraban. Una aplicación la mantiene abierta, escribe desde varios hilos y a veces se detiene en mal momento. Esta lección pregunta qué promete entonces LadybugDB, y comprueba cada promesa: en un script Cypher, en un script Bash que inicia y mata procesos de la CLI, y en un programa Java con varias conexiones e hilos.
+
+| | SQL Server | DuckDB ([lección 8](../../duckdb/08-persistence/)) | LadybugDB |
+|---|---|---|---|
+| Escritores | muchos, con bloqueos de fila y de página; un escritor espera los bloqueos que necesita | muchos; una actualización de la misma fila falla al instante, una clave duplicada en el commit | **una sola transacción de escritura en toda la base de datos**; otra se rechaza al instante |
+| Un lector durante una escritura | espera con `READ COMMITTED`, lee versiones de fila con `SNAPSHOT` | lee una instantánea | lee una instantánea |
+| Un error dentro de una transacción | con `XACT_ABORT OFF`, la mayoría de los errores solo deshacen la sentencia | la transacción se aborta: las sentencias siguientes fallan, y `COMMIT` revierte | **la transacción se revierte, y las sentencias siguientes se ejecutan en auto-commit** |
+| El registro | el registro de transacciones | un archivo `.wal`, hasta el siguiente checkpoint | un archivo `.wal`, hasta el siguiente checkpoint |
+| Procesos | clientes de un servidor | un proceso de lectura-escritura, o varios de solo lectura | lo mismo, según la documentación |
+
+Los tres scripts están en `code/ladybugdb`, y la CI compara su salida en los tres sistemas operativos:
+
+- [`cypher/08-transactions.cypher`](https://github.com/spareilleux/learn/blob/main/code/ladybugdb/cypher/08-transactions.cypher), con [`cypher/expected/08-transactions.csv`](https://github.com/spareilleux/learn/blob/main/code/ladybugdb/cypher/expected/08-transactions.csv), como los scripts de las lecciones 1 a 4;
+- [`files/files.sh`](https://github.com/spareilleux/learn/blob/main/code/ladybugdb/files/files.sh), con [`files/expected.txt`](https://github.com/spareilleux/learn/blob/main/code/ladybugdb/files/expected.txt): las líneas que empiezan por `# ` dependen del sistema operativo, y [`check.sh`](https://github.com/spareilleux/learn/blob/main/code/ladybugdb/check.sh) las imprime sin compararlas;
+- [`java/src/main/java/graph/Transactions.java`](https://github.com/spareilleux/learn/blob/main/code/ladybugdb/java/src/main/java/graph/Transactions.java), con [`java/expected-transactions.txt`](https://github.com/spareilleux/learn/blob/main/code/ladybugdb/java/expected-transactions.txt), y la misma convención de `# `.
+
+```bash
+lbug < cypher/08-transactions.cypher
+bash files/files.sh
+mvn -q -f java/pom.xml exec:java -Dexec.mainClass=graph.Transactions
+```
+
+`files.sh` necesita Bash, `kill` y la CLI 0.19.1 de la lección 7 como `lbug19` para su última parte; en Windows, ejecútalo desde Git Bash, como hace la CI.
+
+## Auto-commit y transacciones manuales
+
+Cada sentencia enviada sin `BEGIN TRANSACTION` es una transacción por sí sola ([transacciones](https://docs.ladybugdb.com/cypher/transaction/)). Una sentencia que crea dos proyectos, el segundo con la clave primaria de `GA.Core` ([líneas 6-9](https://github.com/spareilleux/learn/blob/93f6f82/code/ladybugdb/cypher/08-transactions.cypher#L6-L9)):
+
+```cypher
+UNWIND ['New/Zero.csproj', 'Common/GA.Core/GA.Core.csproj'] AS path
+CREATE (:Project {path: path, name: 'Zero'});
+MATCH (p:Project) RETURN count(*) AS projects;
+```
+
+```text
+Error: Runtime exception: Found duplicated primary key value Common/GA.Core/GA.Core.csproj, which violates the uniqueness constraint of the primary key column.
+┌──────────┐
+│ projects │
+│ INT64    │
+├──────────┤
+│ 111      │
+└──────────┘
+```
+
+Siguen los 111 proyectos de ga: `Zero`, creado antes del error, desapareció con el resto de la sentencia. Una transacción manual ve sus propios cambios, y `ROLLBACK` los deshace ([líneas 11-16](https://github.com/spareilleux/learn/blob/93f6f82/code/ladybugdb/cypher/08-transactions.cypher#L11-L16)):
+
+```cypher
+BEGIN TRANSACTION;
+CREATE (:Project {path: 'New/One.csproj', name: 'One'});
+MATCH (p:Project) RETURN count(*) AS inside;
+ROLLBACK;
+MATCH (p:Project) RETURN count(*) AS after_rollback;
+```
+
+```text
+┌────────┐
+│ inside │
+│ INT64  │
+├────────┤
+│ 112    │
+└────────┘
+┌────────────────┐
+│ after_rollback │
+│ INT64          │
+├────────────────┤
+│ 111            │
+└────────────────┘
+```
+
+Crear una tabla y cargarla también forman parte de la transacción, como dice la documentación del DDL y de `COPY` ([líneas 18-24](https://github.com/spareilleux/learn/blob/93f6f82/code/ladybugdb/cypher/08-transactions.cypher#L18-L24)):
+
+```cypher
+BEGIN TRANSACTION;
+CREATE NODE TABLE Package(name STRING PRIMARY KEY);
+COPY Package FROM (LOAD FROM 'data/ga/package_refs.csv' (HEADER = true) RETURN DISTINCT package);
+MATCH (k:Package) RETURN count(*) AS packages_inside;
+ROLLBACK;
+CALL show_tables() RETURN name ORDER BY name;
+```
+
+```text
+┌─────────────────┐
+│ packages_inside │
+│ INT64           │
+├─────────────────┤
+│ 136             │
+└─────────────────┘
+┌─────────┐
+│ name    │
+│ STRING  │
+├─────────┤
+│ Project │
+└─────────┘
+```
+
+136 paquetes dentro de la transacción; después del rollback, ninguna tabla `Package`, como con `CREATE TABLE` en una transacción de SQL Server o de DuckDB.
+
+## Un error termina la transacción
+
+Tres creaciones en una transacción, la segunda un duplicado, y luego `ROLLBACK` ([líneas 26-32](https://github.com/spareilleux/learn/blob/93f6f82/code/ladybugdb/cypher/08-transactions.cypher#L26-L32)):
+
+```cypher
+BEGIN TRANSACTION;
+CREATE (:Project {path: 'New/Two.csproj', name: 'Two'});
+CREATE (:Project {path: 'Common/GA.Core/GA.Core.csproj', name: 'Duplicate'});
+CREATE (:Project {path: 'New/Three.csproj', name: 'Three'});
+ROLLBACK;
+MATCH (p:Project) WHERE p.path STARTS WITH 'New/' RETURN p.name;
+```
+
+```text
+Error: Runtime exception: Found duplicated primary key value Common/GA.Core/GA.Core.csproj, which violates the uniqueness constraint of the primary key column.
+Error: No active transaction for ROLLBACK.
+┌────────┐
+│ p.name │
+│ STRING │
+├────────┤
+│ Three  │
+└────────┘
+```
+
+**`Three` está en la base de datos, después de un `ROLLBACK`.** El error revirtió toda la transacción, `Two` incluido, sin decirlo; `CREATE Three` se ejecutó entonces solo, en auto-commit, y se confirmó; `ROLLBACK` no encontró ninguna transacción. Un script que confía en su `ROLLBACK` final, o en su `COMMIT`, conserva las sentencias que siguen al error y pierde las que lo preceden.
+
+DuckDB se detiene en el mismo punto, pero rechaza las sentencias siguientes con `Current transaction is aborted (please ROLLBACK)`: nada se ejecuta por accidente. SQL Server, con `XACT_ABORT OFF`, solo deshace la sentencia fallida y mantiene abierta la transacción. LadybugDB no hace ni lo uno ni lo otro.
+
+Otros errores hacen lo mismo. Un `BEGIN` dentro de una transacción ([líneas 34-39](https://github.com/spareilleux/learn/blob/93f6f82/code/ladybugdb/cypher/08-transactions.cypher#L34-L39)):
+
+```cypher
+BEGIN TRANSACTION;
+MATCH (p:Project {name: 'Three'}) DELETE p;
+BEGIN TRANSACTION;
+COMMIT;
+MATCH (p:Project) WHERE p.path STARTS WITH 'New/' RETURN p.name;
+```
+
+```text
+Error: Connection already has an active transaction. Cannot start a transaction within another one. For concurrent multiple transactions, please open other connections.
+Error: No active transaction for COMMIT.
+┌────────┐
+│ p.name │
+│ STRING │
+├────────┤
+│ Three  │
+└────────┘
+```
+
+La eliminación se deshace, y `COMMIT` no tiene nada que confirmar. `CHECKPOINT` dentro de una transacción también la termina ([líneas 47-52](https://github.com/spareilleux/learn/blob/93f6f82/code/ladybugdb/cypher/08-transactions.cypher#L47-L52)):
+
+```text
+Error: Found active transaction for CHECKPOINT.
+Error: No active transaction for COMMIT.
+┌────────┐
+│ p.name │
+│ STRING │
+├────────┤
+│ Three  │
+└────────┘
+```
+
+`Five`, creado antes del `CHECKPOINT`, se pierde. En mi máquina, un error de binder (una propiedad desconocida) y un error de catálogo (una tabla que no existe) dentro de una transacción se comportaron igual.
+
+Un error no termina la transacción: una escritura en una transacción de solo lectura ([líneas 41-45](https://github.com/spareilleux/learn/blob/93f6f82/code/ladybugdb/cypher/08-transactions.cypher#L41-L45)):
+
+```cypher
+BEGIN TRANSACTION READ ONLY;
+MATCH (p:Project) RETURN count(*) AS read_only;
+CREATE (:Project {path: 'New/Four.csproj', name: 'Four'});
+COMMIT;
+```
+
+```text
+┌───────────┐
+│ read_only │
+│ INT64     │
+├───────────┤
+│ 112       │
+└───────────┘
+Error: Can not execute a write query inside a read-only transaction.
+```
+
+El `COMMIT` tiene éxito, en silencio: la transacción seguía abierta. El ejercicio 1 escribe una función que maneja ambos casos.
+
+## Dos conexiones, un escritor
+
+El programa Java abre una base de datos en memoria y dos conexiones, `first` y `second`, sobre el mismo objeto `Database`: la concurrencia que la [documentación](https://docs.ladybugdb.com/concurrency/) considera segura. `execute` devuelve el primer valor de un resultado, `ok`, o el error, tanto si lo informa el resultado como si la llamada lanza una excepción ([líneas 134-144](https://github.com/spareilleux/learn/blob/93f6f82/code/ladybugdb/java/src/main/java/graph/Transactions.java#L134-L144)). La primera sección ([líneas 18-28](https://github.com/spareilleux/learn/blob/93f6f82/code/ladybugdb/java/src/main/java/graph/Transactions.java#L18-L28)):
+
+```java
+print("first: BEGIN", execute(first, "BEGIN TRANSACTION"));
+print("first: CREATE One", execute(first, "CREATE (:Project {path: 'New/One.csproj', name: 'One'})"));
+print("first sees", execute(first, "MATCH (p:Project) RETURN count(*)"));
+print("second sees", execute(second, "MATCH (p:Project) RETURN count(*)"));
+print("second: CREATE Two", execute(second, "CREATE (:Project {path: 'New/Two.csproj', name: 'Two'})"));
+print("first: COMMIT", execute(first, "COMMIT"));
+print("second: CREATE Two", execute(second, "CREATE (:Project {path: 'New/Two.csproj', name: 'Two'})"));
+```
+
+```text
+== 1. Two connections, one write transaction
+first: BEGIN: ok
+first: CREATE One: ok
+first sees: 112
+second sees: 111
+second: CREATE Two: error: Cannot start a new write transaction in the system. Only one write transaction at a time is allowed in the system.
+first: COMMIT: ok
+second: CREATE Two: ok
+```
+
+`second` no ve el proyecto sin confirmar, y lee sin esperar. Su escritura se rechaza **al instante**: sin esperar el bloqueo, sin tiempo límite que configurar. Y el rechazo no depende de lo que tocan las transacciones: `One` y `Two` son nodos distintos, y en SQL Server, dos bloqueos de fila. La documentación lo dice: una transacción de escritura a la vez, en toda la base de datos.
+
+Una transacción de solo lectura lee una instantánea, y no bloquea al escritor ([líneas 30-38](https://github.com/spareilleux/learn/blob/93f6f82/code/ladybugdb/java/src/main/java/graph/Transactions.java#L30-L38)):
+
+```text
+== 2. A read-only transaction reads a snapshot
+second: BEGIN READ ONLY: ok
+second sees: 113
+first: CREATE Three: ok
+first sees: 114
+second sees: 113
+second: COMMIT: ok
+second sees: 114
+```
+
+Como el aislamiento `SNAPSHOT` de SQL Server: el recuento se queda en 113 hasta el final de la transacción de solo lectura, mientras `first` confirma. El error de la sección 3 ([líneas 40-46](https://github.com/spareilleux/learn/blob/93f6f82/code/ladybugdb/java/src/main/java/graph/Transactions.java#L40-L46)) se comporta desde Java como en la CLI:
+
+```text
+== 3. An error ends the transaction
+first: BEGIN: ok
+first: CREATE Four: ok
+first: CREATE GA.Core again: error: Runtime exception: Found duplicated primary key value Common/GA.Core/GA.Core.csproj, which violates the uniqueness constraint of the primary key column.
+first: CREATE Five: ok
+first: ROLLBACK: error: No active transaction for ROLLBACK.
+new projects: [Five,One,Three,Two]
+```
+
+`Four` se pierde, `Five` se confirma.
+
+## Un BEGIN rechazado
+
+El rechazo de arriba era una sentencia en auto-commit, y `second` siguió con normalidad. Cuando la sentencia rechazada es `BEGIN TRANSACTION`, la conexión se rompe. El programa ejecuta ese caso en un modo propio, `refused-begin` ([líneas 110-124](https://github.com/spareilleux/learn/blob/93f6f82/code/ladybugdb/java/src/main/java/graph/Transactions.java#L110-L124)), porque el programa se detiene ahí en dos de los tres runners:
+
+```java
+print("first: BEGIN", execute(first, "BEGIN TRANSACTION"));
+print("second: BEGIN", execute(second, "BEGIN TRANSACTION"));
+print("first: COMMIT", execute(first, "COMMIT"));
+System.out.flush();
+print("second: MATCH", execute(second, "MATCH (p:Project) RETURN count(*)"));
+print("second: BEGIN", execute(second, "BEGIN TRANSACTION"));
+print("second: MATCH", execute(second, "MATCH (p:Project) RETURN count(*)"));
+print("second: COMMIT", execute(second, "COMMIT"));
+```
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+```text
+first: BEGIN: ok
+second: BEGIN: error: Cannot start a new write transaction in the system. Only one write transaction at a time is allowed in the system.
+first: COMMIT: ok
+second: MATCH: thrown RuntimeException: Unknown Error
+second: BEGIN: ok
+second: MATCH: 0
+second: COMMIT: ok
+```
+
+Una consulta que debería devolver 0 lanza una excepción sin mensaje: el código nativo lanzó algo que no es una excepción de LadybugDB, y el `catch (...)` del código JNI lo convierte en `Unknown Error` ([`lbug_java.cpp`, líneas 751-752](https://github.com/LadybugDB/ladybug-java/blob/f2fb39f/src/jni/lbug_java.cpp#L751-L752)). Un `BEGIN` que tiene éxito repara la conexión.
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```text
+first: BEGIN: ok
+second: BEGIN: error: Cannot start a new write transaction in the system. Only one write transaction at a time is allowed in the system.
+first: COMMIT: ok
+# A fatal error has been detected by the Java Runtime Environment:
+#  SIGSEGV (0xb) at pc=0x00007f53bb338b98, pid=3375, tid=3448
+# C  [liblbug_java_native3142814795411884706.so+0xb38b98]  lbug::catalog::CatalogSet::traverseVersionChainsForTransactionNoLock(lbug::transaction::Transaction const*, lbug::catalog::CatalogEntry*)+0x8
+exit code of mvn: 134
+```
+
+La JVM cae en la biblioteca nativa, mientras el catálogo busca la tabla con una transacción que ya no existe. Ninguna excepción que capturar: el proceso termina.
+
+</TabItem>
+<TabItem label="macOS">
+
+```text
+first: BEGIN: ok
+second: BEGIN: error: Cannot start a new write transaction in the system. Only one write transaction at a time is allowed in the system.
+first: COMMIT: ok
+# A fatal error has been detected by the Java Runtime Environment:
+#  SIGSEGV (0xb) at pc=0x000000012d64409c, pid=1392, tid=42755
+# C  [liblbug_java_native8035757179035443103.so+0xdc09c]  lbug::catalog::CatalogSet::containsEntry(lbug::transaction::Transaction const*, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>> const&)+0x50
+exit code of mvn: 134
+```
+
+La JVM cae en la biblioteca nativa, en otra función del catálogo que en Linux. Ninguna excepción que capturar: el proceso termina.
+
+</TabItem>
+</Tabs>
+
+Estos son los logs de CI del commit `93f6f82`. En un servidor, un `BEGIN` rechazado seguido de una consulta tumba todo el proceso en Linux. La regla que esto sugiere, y que sigue el ejercicio 2: después de un `BEGIN` rechazado, la siguiente sentencia en esa conexión es otro `BEGIN`, o se cierra la conexión.
+
+## El archivo de base de datos y su registro de escritura anticipada
+
+El resto de la lección trata de archivos y procesos, y `files.sh` controla la CLI. Una CLI de solo lectura no puede crear una base de datos ([líneas 33-35](https://github.com/spareilleux/learn/blob/93f6f82/code/ladybugdb/files/files.sh#L33-L35)), y una de lectura-escritura que carga ga y sale deja un solo archivo ([líneas 37-39](https://github.com/spareilleux/learn/blob/93f6f82/code/ladybugdb/files/files.sh#L37-L39)):
+
+```text
+== 1. A read-only CLI can't create a file
+Cannot create an empty database under READ ONLY mode.
+files: 
+== 2. Create and load, then close
+files: ga.lbdb 
+```
+
+Luego una CLI que confirma una creación y se queda abierta, leyendo su entrada de un comando que espera 20 segundos ([líneas 41-52](https://github.com/spareilleux/learn/blob/93f6f82/code/ladybugdb/files/files.sh#L41-L52)):
+
+```bash
+lbug --no_progress_bar --no_stats --mode csv "$D/ga.lbdb" > "$D/writer.txt" 2>&1 < <(
+  echo "CREATE (:Project {path: 'New/One.csproj', name: 'One'});"
+  sleep 20) &
+writer=$!
+# El commit escribe el WAL
+wait_for "$D/ga.lbdb.wal"
+```
+
+```text
+== 3. A process that stays open after a commit
+files: ga.lbdb ga.lbdb.wal 
+```
+
+El commit escribió `ga.lbdb.wal`, el registro de escritura anticipada (write-ahead log). El script espera ese archivo en lugar de la salida de la CLI: con su salida redirigida a un archivo, la CLI no escribe nada hasta que sale. La [página de archivos en disco](https://docs.ladybugdb.com/developer-guide/files/) describe el registro tal como lo encontró la lección 8 de DuckDB: lo crea una transacción de escritura confirmada, y se elimina cuando un checkpoint tiene éxito. El checkpoint se ejecuta con `CHECKPOINT`, al cerrar la base de datos, y al final de una transacción de escritura cuando el registro supera `checkpoint_threshold`, que lee el script Cypher ([línea 53](https://github.com/spareilleux/learn/blob/93f6f82/code/ladybugdb/cypher/08-transactions.cypher#L53)): 16777216 bytes, 16 MiB, lo mismo que DuckDB.
+
+## Un proceso matado
+
+`kill -9` sobre el escritor, y luego una CLI nueva sobre el archivo ([líneas 54-59](https://github.com/spareilleux/learn/blob/93f6f82/code/ladybugdb/files/files.sh#L54-L59)):
+
+```text
+== 4. The same process, killed
+files: ga.lbdb ga.lbdb.wal 
+projects
+112
+files: ga.lbdb 
+```
+
+El proceso matado dejó su registro. El siguiente lo volvió a aplicar al abrir el archivo, `One` está ahí, e hizo un checkpoint al cerrarse: no queda registro. Una copia de `ga.lbdb` solo, hecha mientras existe el registro, pierde los cambios confirmados; copia ambos archivos, o ejecuta antes `CHECKPOINT`.
+
+Un proceso matado dentro de una transacción, después de su `CREATE` pero antes de cualquier `COMMIT` ([líneas 61-72](https://github.com/spareilleux/learn/blob/93f6f82/code/ladybugdb/files/files.sh#L61-L72)):
+
+```text
+== 5. Killed inside a transaction
+files: ga.lbdb 
+p.name
+One
+```
+
+Ningún registro: una transacción sin confirmar no escribe nada en disco, así que nada muestra que está en marcha, y el script solo puede esperar 5 segundos. `Two` se pierde, como promete la documentación. El programa Java cierra un `Database` cuya conexión tiene una transacción abierta ([líneas 92-102](https://github.com/spareilleux/learn/blob/93f6f82/code/ladybugdb/java/src/main/java/graph/Transactions.java#L92-L102)):
+
+```text
+== 6. A database file
+files: [ga.lbdb, ga.lbdb.wal]
+BEGIN: ok
+CREATE One: ok
+files after close: [ga.lbdb]
+reopened: [GA.Core]
+```
+
+Cerrar revierte: `One` no está en el archivo reabierto.
+
+## Dos procesos sobre un archivo
+
+Mientras el escritor de la sección 3 está abierto, una segunda CLI abre el archivo en lectura-escritura, y luego otra en solo lectura ([líneas 49-52](https://github.com/spareilleux/learn/blob/93f6f82/code/ladybugdb/files/files.sh#L49-L52)):
+
+```text
+-- a second process, read-write
+IO exception: Could not set lock on file : out/files/ga.lbdb
+See the docs: https://docs.ladybugdb.com/concurrency for more information.
+-- a second process, read-only
+```
+
+El proceso de lectura-escritura se rechaza en los tres sistemas operativos, con un código de error del sistema entre paréntesis que el script elimina. El de solo lectura depende del sistema operativo:
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+```text
+# IO exception: Cannot read from file: out/files/ga.lbdb numBytesRead: 0 numBytesToRead: 4096 position: 0. Error 33: The process cannot access the file because another process has locked a portion of the file.
+```
+
+Rechazado, pero no por un bloqueo propio: la lectura falla. El escritor bloqueó el primer byte del archivo con [`LockFileEx`](https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-lockfileex) ([`local_file_system.cpp`, líneas 118-133](https://github.com/LadybugDB/ladybug/blob/v0.20.4/src/common/file_system/local_file_system.cpp#L118-L133)), y Windows niega la lectura de una región bloqueada a cualquier otro handle.
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```text
+# projects
+# 112
+```
+
+Aceptado, y ve 112 proyectos: `One`, que solo está en el registro. El bloqueo del escritor es un bloqueo [`fcntl`](https://pubs.opengroup.org/onlinepubs/9799919799/functions/fcntl.html), consultivo: solo detiene a los procesos que piden un bloqueo.
+
+</TabItem>
+<TabItem label="macOS">
+
+```text
+# projects
+# 112
+```
+
+Aceptado, y ve 112 proyectos: `One`, que solo está en el registro. El bloqueo del escritor es un bloqueo [`fcntl`](https://pubs.opengroup.org/onlinepubs/9799919799/functions/fcntl.html), consultivo: solo detiene a los procesos que piden un bloqueo.
+
+</TabItem>
+</Tabs>
+
+Una base de datos de solo lectura no pide ninguno. El gestor de almacenamiento solo añade el flag de bloqueo a las aperturas en lectura-escritura ([`storage_manager.cpp`, líneas 87-91](https://github.com/LadybugDB/ladybug/blob/v0.20.4/src/storage/storage_manager.cpp#L87-L91)). Así que el orden inverso funciona en todos los sistemas operativos: primero una CLI de solo lectura, luego un escritor que elimina `GA.Core`, crea 1.000 proyectos y hace un checkpoint, mientras el lector espera 8 segundos entre dos recuentos ([líneas 74-90](https://github.com/spareilleux/learn/blob/93f6f82/code/ladybugdb/files/files.sh#L74-L90)):
+
+```bash
+lbug --no_progress_bar --no_stats --mode csv --read_only "$D/ga.lbdb" > "$D/reader.txt" 2>&1 < <(
+  echo "$COUNT"
+  sleep 8
+  echo "$COUNT"
+  echo "MATCH (p:Project {name: 'GA.Core'}) RETURN count(*) AS ga_core;") &
+reader=$!
+sleep 3
+q "$D/ga.lbdb" <<EOF
+MATCH (p:Project {name: 'GA.Core'}) DETACH DELETE p;
+UNWIND range(1, 1000) AS i CREATE (:Project {path: 'Generated/' + string(i), name: 'Generated' + string(i)});
+CHECKPOINT;
+$COUNT
+EOF
+```
+
+```text
+projects
+1111
+-- what the reader saw
+projects
+112
+projects
+112
+ga_core
+1
+```
+
+El escritor confirmó 1.111 proyectos y los llevó al archivo con un checkpoint; el lector, todavía abierto, cuenta 112 y sigue encontrando `GA.Core`. La [página de concurrencia](https://docs.ladybugdb.com/concurrency/) explica por qué no es seguro, cada `Database` guarda en caché datos que otro no puede refrescar, y dice que LadybugDB no lo permitirá. Lo permite, en Windows, Linux y macOS: el lector responde desde un estado que ya no existe. Si devuelve datos incorrectos, en lugar de datos antiguos, cuando lee páginas que no tenía en caché antes del checkpoint está *por verificar*.
+
+El mensaje `Could not set lock` tiene una variante para Linux y macOS, `Lock is held by PID …`, que nunca aparece: el código cierra el descriptor de archivo, y luego pregunta a `fcntl` quién tiene el bloqueo sobre ese descriptor cerrado, lo que falla ([líneas 147-172](https://github.com/LadybugDB/ladybug/blob/v0.20.4/src/common/file_system/local_file_system.cpp#L147-L172)). El mensaje de DuckDB nombra el proceso; el de LadybugDB no.
+
+Dentro de un proceso, el programa Java abre un segundo `Database` sobre el archivo mientras el primero está abierto ([líneas 96-97 y 103-106](https://github.com/spareilleux/learn/blob/93f6f82/code/ladybugdb/java/src/main/java/graph/Transactions.java#L96-L106)):
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+```text
+# a second read-write Database, same process: java.lang.Exception: IO exception: Could not set lock on file : out\java-files\ga.lbdb (Error: 33)
+# a read-only Database, same process: java.lang.Exception: IO exception: Cannot read from file: out\java-files\ga.lbdb handle: 1764 numBytesRead: 0 numBytesToRead: 4096 position: 0. Error 33: The process cannot access the file because another process has locked a portion of the file.
+# a read-only Database, then a read-write one: [GA.Core]
+```
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```text
+# a second read-write Database, same process: [GA.Core]
+# a read-only Database, same process: [GA.Core]
+# a read-only Database, then a read-write one: [GA.Core]
+```
+
+</TabItem>
+<TabItem label="macOS">
+
+```text
+# a second read-write Database, same process: [GA.Core]
+# a read-only Database, same process: [GA.Core]
+# a read-only Database, then a read-write one: [GA.Core]
+```
+
+</TabItem>
+</Tabs>
+
+En Linux y macOS, los bloqueos `fcntl` pertenecen al proceso: un segundo bloqueo desde el mismo proceso tiene éxito, y dos objetos `Database` de lectura-escritura funcionan sobre un archivo, con dos cachés. En Windows, los bloqueos `LockFileEx` pertenecen al handle, y el segundo `Database` falla. Un `Database` de solo lectura seguido de uno de lectura-escritura se abre en todas partes. La regla que el bloqueo no impone, entonces: un `Database` por archivo por proceso, compartido por todos los hilos, y ningún otro proceso sobre el archivo mientras escribe.
+
+`new Database(path)` no declara ninguna excepción, pero lanza `java.lang.Exception`, una excepción comprobada, cuando el archivo no se puede abrir: el código JNI la lanza por su clase ([`lbug_java.cpp`, líneas 618-636](https://github.com/LadybugDB/ladybug-java/blob/f2fb39f/src/jni/lbug_java.cpp#L618-L636)), cosa que el compilador de Java no puede ver. `catch (IOException e)` no la captura, y `catch (Exception e)` sí; el `open` del programa la captura así ([líneas 184-191](https://github.com/spareilleux/learn/blob/93f6f82/code/ladybugdb/java/src/main/java/graph/Transactions.java#L184-L191)).
+
+## EXPORT DATABASE e IMPORT DATABASE
+
+Una macro, luego una exportación a archivos CSV, y una importación en un archivo nuevo ([líneas 92-107](https://github.com/spareilleux/learn/blob/93f6f82/code/ladybugdb/files/files.sh#L92-L107)):
+
+```cypher
+CREATE MACRO major(version) AS split_part(version, '.', 1);
+EXPORT DATABASE 'out/files/export' (format = 'csv', header = true);
+```
+
+```text
+export: Project.csv REFERENCES_Project_Project.csv copy.cypher index.cypher schema.cypher 
+CREATE NODE TABLE `Project` (`path` STRING,`name` STRING,`language` STRING,`sdk` STRING,`frameworks` STRING,`in_solution` BOOL, PRIMARY KEY(`path`));
+CREATE REL TABLE `REFERENCES` (FROM `Project` TO `Project`, MANY_MANY);
+CREATE MACRO `MAJOR` (version) AS split_part(version, '.', 1);
+a.path,a.name,a.language,a.sdk,a.frameworks,a.in_solution
+```
+
+Un archivo de datos por tabla, y tres scripts Cypher. La [página de migración](https://docs.ladybugdb.com/migrate/) enumera un archivo `macro.cypher`; la macro está en `schema.cypher`, después de las tablas, con su nombre en mayúsculas. `index.cypher` está vacío: la base de datos no tiene más índices que las claves primarias, que declara `schema.cypher`. La cabecera CSV de `Project.csv` tiene un prefijo `a.` en cada columna, que no molesta a la importación de abajo. `copy.cypher` enumera las columnas y las opciones de `COPY`, en un orden que cambia de un sistema operativo a otro:
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+```text
+# COPY `Project` (`path`,`name`,`language`,`sdk`,`frameworks`,`in_solution`) FROM "Project.csv" (parallel=true, header=true);
+# COPY `REFERENCES` FROM "REFERENCES_Project_Project.csv" (parallel=true, header=true, from='Project', to='Project');
+```
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```text
+# COPY `Project` (`path`,`name`,`language`,`sdk`,`frameworks`,`in_solution`) FROM "Project.csv" (header=true, parallel=true);
+# COPY `REFERENCES` FROM "REFERENCES_Project_Project.csv" (to='Project', from='Project', header=true, parallel=true);
+```
+
+</TabItem>
+<TabItem label="macOS">
+
+```text
+# COPY `Project` (`path`,`name`,`language`,`sdk`,`frameworks`,`in_solution`) FROM "Project.csv" (header=true, parallel=true);
+# COPY `REFERENCES` FROM "REFERENCES_Project_Project.csv" (to='Project', from='Project', header=true, parallel=true);
+```
+
+</TabItem>
+</Tabs>
+
+La importación, y luego una importación en la base de datos que se exportó:
+
+```cypher
+IMPORT DATABASE 'out/files/export';
+MATCH (p:Project) RETURN count(*) AS projects;
+MATCH ()-[r:REFERENCES]->() RETURN count(*) AS references;
+RETURN major('10.0.1') AS major;
+```
+
+```text
+result
+Imported database successfully.
+projects
+1111
+references
+233
+major
+10
+-- into a database that isn't empty
+Error: Runtime exception: Import database failed: Binder exception: Project already exists in catalog.
+```
+
+1.111 proyectos y 233 referencias: las 265 de la lección 7, menos las 32 que apuntaban a `GA.Core`, eliminado con `DETACH DELETE`. La macro funciona en el archivo nuevo. `IMPORT DATABASE` exige una base de datos vacía, como dice la documentación, que también advierte que una importación fallida no se revierte: borra el archivo y vuelve a empezar.
+
+## Versiones de almacenamiento
+
+Un archivo creado por la CLI 0.19.1, y luego abierto por la 0.20.4 y de nuevo por la 0.19.1 ([líneas 109-123](https://github.com/spareilleux/learn/blob/93f6f82/code/ladybugdb/files/files.sh#L109-L123)):
+
+```text
+== 8. A file of LadybugDB 0.19.1, opened by 0.20.4
+-- 0.20.4, read-only
+projects
+1
+-- 0.19.1
+projects
+1
+-- 0.20.4, read-write
+projects
+1
+-- 0.19.1 again
+Runtime exception: Trying to read a database file with a different version. Database file version: 47, Current build storage version: 43
+```
+
+La 0.20.4 lee el archivo antiguo, en solo lectura sin modificarlo. En lectura-escritura, **actualiza el archivo de la versión de almacenamiento 43 a la 47 sin decir nada**, y la 0.19.1 ya no puede abrirlo. La [lección 5](../05-csharp/#compartir-un-archivo-con-la-cli) encontró lo mismo con el paquete NuGet 0.19.1, cuya excepción no daba la causa; la CLI 0.19.1 sí la da. El consejo de la lección 5, `lbug --read_only` sobre los archivos de una aplicación, protege contra ello. Para volver atrás, o entre versiones que no pueden leerse entre sí, `EXPORT DATABASE` con una versión e `IMPORT DATABASE` con la otra.
+
+## Puntos clave
+
+- Cada sentencia es una transacción; el DDL y `COPY` dentro de una transacción manual se revierten con ella.
+- **Un error dentro de una transacción manual la revierte y la termina, en silencio**: las sentencias siguientes se ejecutan en auto-commit, y `ROLLBACK` o `COMMIT` informan `No active transaction`. Detente en el primer error. Una escritura rechazada por una transacción de solo lectura es la excepción: la transacción sigue abierta.
+- Una sola transacción de escritura en toda la base de datos: una segunda se rechaza al instante, toque lo que toque. Los lectores ven una instantánea y no bloquean al escritor.
+- Desde Java, un `BEGIN` rechazado rompe la conexión: `Unknown Error` en Windows, una caída de la JVM en Linux y macOS en la siguiente consulta. Reintenta el `BEGIN`, o cierra la conexión.
+- Los commits van a `.wal` hasta un checkpoint; un proceso matado deja el registro, y la siguiente apertura lo vuelve a aplicar. Una transacción sin confirmar no deja nada.
+- El bloqueo de lectura-escritura no detiene a un proceso de solo lectura en Linux y macOS, y nada detiene a un escritor después de un proceso de solo lectura: el lector responde entonces desde un estado antiguo. Dentro de un proceso, Linux y macOS aceptan dos objetos `Database` de lectura-escritura sobre un archivo. Mantén un solo `Database` por archivo, en un solo proceso.
+- Una apertura en lectura-escritura con una versión más reciente actualiza el archivo en silencio; `EXPORT DATABASE` e `IMPORT DATABASE` mueven los datos entre versiones.
+
+## Ejercicios
+
+Las soluciones están en `Transactions.java`, secciones 4 y 5, y su salida en `java/expected-transactions.txt`: la CI las comprueba con el resto.
+
+1. Escribe `String transaction(Connection connection, List<String> statements)`: ejecuta las sentencias en una transacción y las confirma todas, o ninguna. Devuelve `ok`, o el primer error. Pruébala con una lista cuya segunda sentencia falla, luego con una lista válida, y muestra qué proyectos existen.
+
+<details>
+<summary>Solución</summary>
+
+[Líneas 146-161](https://github.com/spareilleux/learn/blob/93f6f82/code/ladybugdb/java/src/main/java/graph/Transactions.java#L146-L161):
+
+```java
+// Ejercicio 1: todas las sentencias o ninguna. Ante un fallo, se detiene antes de la siguiente sentencia, que se ejecutaría en auto-commit
+static String transaction(Connection connection, List<String> statements) {
+    var begin = execute(connection, "BEGIN TRANSACTION");
+    if (!begin.equals("ok")) {
+        return begin;
+    }
+    for (var statement : statements) {
+        var outcome = execute(connection, statement);
+        if (outcome.startsWith("error") || outcome.startsWith("thrown")) {
+            // El motor ya ha revertido; ROLLBACK es para los errores que dejan la transacción abierta
+            execute(connection, "ROLLBACK");
+            return outcome;
+        }
+    }
+    return execute(connection, "COMMIT");
+}
+```
+
+```text
+== 4. Exercise 1: a transaction that stops at the first error
+transaction: error: Runtime exception: Found duplicated primary key value Common/GA.Core/GA.Core.csproj, which violates the uniqueness constraint of the primary key column.
+transaction: ok
+new projects: [Five,One,Seven,Six,Three,Two]
+```
+
+La primera llamada crea `Six`, falla en `GA.Core` y se detiene: `Seven` nunca se ejecuta, y el motor revierte `Six`. La segunda llamada crea ambos. Detenerse es precisamente la idea: un bucle que siguiera confirmaría `Seven` solo. El `ROLLBACK` después de un error suele informar `No active transaction`, y su resultado se ignora; está ahí para los errores que dejan la transacción abierta, como una escritura en una transacción de solo lectura. La prueba de error también cubre `thrown`: una excepción del código JNI, como `Unknown Error`, es un error.
+
+</details>
+
+2. Ocho hilos, cada uno con su propia conexión sobre el mismo `Database`, crean 25 proyectos cada uno, una transacción por proyecto, con `transaction` del ejercicio 1. Escribe `withRetry`, que reintenta una transacción rechazada porque otra está escribiendo, y comprueba que los 200 proyectos están ahí.
+
+<details>
+<summary>Solución</summary>
+
+[Líneas 163-176](https://github.com/spareilleux/learn/blob/93f6f82/code/ladybugdb/java/src/main/java/graph/Transactions.java#L163-L176), y los hilos en las [líneas 58-80](https://github.com/spareilleux/learn/blob/93f6f82/code/ladybugdb/java/src/main/java/graph/Transactions.java#L58-L80):
+
+```java
+// Ejercicio 2: reintentar una transacción que el motor rechaza porque otra está escribiendo
+static int withRetry(Callable<String> transaction, AtomicInteger failures) throws Exception {
+    for (int retries = 0; ; retries++) {
+        var outcome = transaction.call();
+        if (!outcome.contains("Only one write transaction at a time")) {
+            if (!outcome.equals("ok")) {
+                throw new IllegalStateException(outcome);
+            }
+            return retries;
+        }
+        failures.incrementAndGet();
+        Thread.sleep(1 + ThreadLocalRandom.current().nextInt(5));
+    }
+}
+```
+
+```text
+== 5. Exercise 2: eight threads that write
+thread projects: 200
+```
+
+Los 200 proyectos, en los tres runners. El número de rechazos no se compara: 153 en Windows, 155 en Linux y 24 en macOS en la ejecución de CI de `93f6f82`. Una pausa aleatoria de 1 a 5 milisegundos evita que los hilos reintenten al unísono. Cualquier otro error termina el hilo con una excepción, en lugar de reintentarse indefinidamente.
+
+Los rechazos vienen de `BEGIN TRANSACTION`, y la siguiente sentencia en la conexión es el `BEGIN` del reintento: el patrón que sobrevive al bug del `BEGIN` rechazado en los tres sistemas operativos. `ExecutorService` es `AutoCloseable` desde Java 19: el `try`-with-resources espera a las ocho tareas, e `invokeAll` devuelve sus recuentos de reintentos.
+
+</details>
+
+## Fuentes
+
+- Documentación de LadybugDB: [transacciones](https://docs.ladybugdb.com/cypher/transaction/), [conexiones y concurrencia](https://docs.ladybugdb.com/concurrency/), [archivos en disco](https://docs.ladybugdb.com/developer-guide/files/), [configuración](https://docs.ladybugdb.com/cypher/configuration/), [migrar una base de datos](https://docs.ladybugdb.com/migrate/)
+- Código fuente de LadybugDB 0.20.4: [`storage_manager.cpp`](https://github.com/LadybugDB/ladybug/blob/v0.20.4/src/storage/storage_manager.cpp#L87-L91) y [`local_file_system.cpp`](https://github.com/LadybugDB/ladybug/blob/v0.20.4/src/common/file_system/local_file_system.cpp#L118-L172); [`lbug_java.cpp`](https://github.com/LadybugDB/ladybug-java/blob/f2fb39f/src/jni/lbug_java.cpp#L618-L636) de `ladybug-java` en el commit `f2fb39f`
+- [`LockFileEx`](https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-lockfileex) y [`fcntl`](https://pubs.opengroup.org/onlinepubs/9799919799/functions/fcntl.html) de POSIX
+- SQL Server: [`SET XACT_ABORT`](https://learn.microsoft.com/sql/t-sql/statements/set-xact-abort-transact-sql), [bloqueos y versionado de filas](https://learn.microsoft.com/sql/relational-databases/sql-server-transaction-locking-and-row-versioning-guide)
