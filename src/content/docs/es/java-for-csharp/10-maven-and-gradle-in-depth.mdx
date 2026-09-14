@@ -1,0 +1,556 @@
+---
+title: 10. Maven y Gradle a fondo
+description: Builds multimódulo, ámbitos de dependencias, cómo resuelven Maven, Gradle y NuGet un conflicto de versiones, BOM y versiones centralizadas, verificación, wrappers y lock files.
+sidebar:
+  order: 10
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Ejemplo completo: [`code/java-for-csharp/l10`](https://github.com/spareilleux/learn/tree/main/code/java-for-csharp/l10). El mismo build de tres módulos existe para Maven y para Gradle, con un equivalente NuGet. [`check.sh`](https://github.com/spareilleux/learn/blob/main/code/java-for-csharp/l10/check.sh) ejecuta en CI cada comando de abajo en los tres sistemas operativos y compara la salida con la lección.
+
+## De las soluciones a los builds
+
+La lección 1 compiló un solo proyecto. El código real son varios proyectos que dependen unos de otros y de bibliotecas que a su vez dependen de otras bibliotecas. Todas las piezas de .NET tienen un equivalente, pero hay una regla que difiere de un modo que rompe los programas en tiempo de ejecución: **qué versión gana cuando se piden dos**.
+
+| .NET | Maven | Gradle |
+|---|---|---|
+| `.sln` que enumera los proyectos | POM padre con `<modules>` | `settings.gradle.kts` con `include(...)` |
+| [`Directory.Build.props`](https://learn.microsoft.com/visualstudio/msbuild/customize-by-directory) | el POM `<parent>` | un plugin de convenciones en `buildSrc` |
+| [`Directory.Packages.props`](https://learn.microsoft.com/nuget/consume-packages/central-package-management) | `<dependencyManagement>`, BOM | [catálogo de versiones](https://docs.gradle.org/current/userguide/version_catalogs.html), [plataformas](https://docs.gradle.org/current/userguide/platforms.html) |
+| `ProjectReference` | una dependencia sobre las coordenadas del módulo | `project(":lib")` |
+| `PrivateAssets="all"` | `<optional>true</optional>` | `compileOnly` |
+| *sin equivalente* | *sin equivalente* | `implementation`: oculta al compilador de los consumidores |
+| error de degradación [NU1605](https://learn.microsoft.com/nuget/reference/errors-and-warnings/nu1605) | [enforcer](https://maven.apache.org/enforcer/enforcer-rules/requireUpperBoundDeps.html) `requireUpperBoundDeps` | `failOnVersionConflict()` |
+| `packages.lock.json` | *sin equivalente* | [`gradle.lockfile`](https://docs.gradle.org/current/userguide/dependency_locking.html) |
+| `global.json` | [Maven Wrapper](https://maven.apache.org/tools/wrapper/) | [Gradle Wrapper](https://docs.gradle.org/current/userguide/gradle_wrapper.html) |
+| [`dotnet list package --include-transitive`](https://learn.microsoft.com/dotnet/core/tools/dotnet-list-package) | [`mvn dependency:tree`](https://maven.apache.org/plugins/maven-dependency-plugin/tree-mojo.html) | `gradle dependencies` |
+
+## Un build de tres módulos
+
+El ejemplo es una pequeña cadena de bibliotecas. `core` da formato a títulos de libros con [Apache Commons Lang](https://commons.apache.org/proper/commons-lang/), `lib` construye slugs de URL sobre `core`, y `app` usa `lib` más [Commons Text](https://commons.apache.org/proper/commons-text/):
+
+```text
+maven/                               gradle/
+├── pom.xml          ← padre         ├── settings.gradle.kts   ← como el .sln
+├── mvnw, mvnw.cmd   ← wrapper       ├── gradlew, gradlew.bat  ← wrapper
+├── core/pom.xml                     ├── gradle/libs.versions.toml
+├── lib/pom.xml                      ├── buildSrc/             ← lógica de build compartida
+└── app/pom.xml                      ├── core/build.gradle.kts
+                                     ├── lib/build.gradle.kts
+                                     └── app/build.gradle.kts
+```
+
+### Maven: un padre y sus módulos
+
+Un [build multimódulo](https://maven.apache.org/guides/mini/guide-multiple-modules.html) tiene un POM padre con empaquetado `pom`. Este enumera los módulos, y los módulos lo nombran como `<parent>` para heredar sus propiedades y sus versiones de plugins:
+
+```xml
+  <groupId>com.example.books</groupId>
+  <artifactId>books-parent</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <modules>
+    <module>core</module>
+    <module>lib</module>
+    <module>app</module>
+  </modules>
+
+  <properties>
+    <maven.compiler.release>25</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+```
+
+```xml
+  <parent>
+    <groupId>com.example.books</groupId>
+    <artifactId>books-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>app</artifactId>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-text</artifactId>
+      <version>1.12.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.example.books</groupId>
+      <artifactId>lib</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
+```
+
+El padre de Maven cumple dos papeles que .NET mantiene separados: el `.sln` (qué proyectos se compilan juntos, lo que se llama el **reactor**) y `Directory.Build.props` (los ajustes compartidos). Una dependencia sobre otro módulo usa sus coordenadas, como si fuera un paquete publicado; dentro del reactor, Maven usa la salida recién compilada del módulo en lugar de descargarla. `mvn -pl app -am package` compila `app` y los módulos que necesita («also make»), igual que `dotnet build App.csproj` compila sus referencias de proyecto.
+
+### Gradle: ajustes, un catálogo y un plugin de convenciones
+
+```kotlin
+rootProject.name = "books"
+
+dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+    }
+}
+
+include("core", "lib", "app")
+```
+
+Las versiones viven en el catálogo de versiones, `gradle/libs.versions.toml`, donde los scripts de build las ven como `libs.commons.text`:
+
+```toml
+[versions]
+commons-lang3 = "3.20.0"
+commons-text = "1.12.0"
+
+[libraries]
+commons-lang3 = { module = "org.apache.commons:commons-lang3", version.ref = "commons-lang3" }
+commons-text = { module = "org.apache.commons:commons-text", version.ref = "commons-text" }
+```
+
+Los ajustes compartidos van en un plugin de convenciones, un script de build en `buildSrc` que cada proyecto aplica por su nombre. Hace el papel de `Directory.Build.props`, salvo que un proyecto solo recibe los ajustes cuando los pide:
+
+```kotlin
+// Ajustes compartidos por todos los proyectos que aplican este plugin, como Directory.Build.props
+plugins {
+    java
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+}
+```
+
+```kotlin
+plugins {
+    id("books.java-conventions")
+    application
+}
+
+dependencies {
+    implementation(libs.commons.text)
+    implementation(project(":lib"))
+}
+
+application {
+    mainClass = "app.Main"
+}
+```
+
+Mi primera versión ponía estos ajustes en un `build.gradle.kts` raíz con un bloque `subprojects { }`, como hacen muchos builds antiguos. La documentación de Gradle llama ahora a esa configuración entre proyectos [«an improper way to share build logic»](https://docs.gradle.org/current/userguide/sharing_build_logic_between_subprojects.html), porque el script de un subproyecto ya no muestra todo lo que se le aplica.
+
+## Ámbitos y configuraciones
+
+Una dependencia no está simplemente «referenciada». Cada herramienta indica en qué class path va, y si se transmite a los consumidores:
+
+| Necesaria para | NuGet | Ámbito de Maven | Configuración de Gradle |
+|---|---|---|---|
+| compilar y ejecutar, visible para los consumidores | `PackageReference` (por defecto) | `compile` (por defecto) | `api` (plugin `java-library`) |
+| compilar y ejecutar, oculta al compilador de los consumidores | *ninguno* | *ninguno* | `implementation` |
+| solo compilar (el runtime la proporciona) | `ExcludeAssets="runtime"` | `provided` | `compileOnly` |
+| solo ejecutar (un driver JDBC) | `ExcludeAssets="compile"` | `runtime` | `runtimeOnly` |
+| pruebas | un proyecto de pruebas aparte | `test` | `testImplementation` |
+| solo tu build, nunca se transmite (analizadores) | `PrivateAssets="all"` | `<optional>true</optional>` | `compileOnly`, `annotationProcessor` |
+
+La fila que importa es la segunda. [El `implementation` de Gradle](https://docs.gradle.org/current/userguide/java_library_plugin.html) pone una dependencia en el class path de *ejecución* del consumidor, pero no en su class path de *compilación*. `lib` declara `implementation(project(":core"))`, así que `app` no puede usar `core` sin declararlo. Un segundo source set de `app` lo intenta:
+
+```java
+package app;
+
+import core.Titles;
+
+public class Leak {
+
+    public static void main(String[] args) {
+        System.out.println(Titles.withoutArticle("the pragmatic programmer"));
+    }
+}
+```
+
+```text
+Leak.java:3: error: package core does not exist
+import core.Titles;
+           ^
+Leak.java:8: error: cannot find symbol
+        System.out.println(Titles.withoutArticle("the pragmatic programmer"));
+                           ^
+  symbol:   variable Titles
+  location: class Leak
+2 errors
+```
+
+Maven no hace esa distinción: una dependencia `compile` está en el class path de compilación de todos los consumidores, de forma transitiva. NuGet se comporta igual, y por eso un proyecto C# puede usar un paquete que solo declara un proyecto referenciado. `app/Main.java` hace exactamente eso: importa `org.apache.commons.lang3.StringUtils` sin declarar Commons Lang, y compila. El goal [`dependency:analyze`](https://maven.apache.org/plugins/maven-dependency-plugin/analyze-mojo.html) lo detecta:
+
+```text
+[WARNING] Used undeclared dependencies found:
+[WARNING]    org.apache.commons:commons-lang3:jar:3.20.0:compile
+```
+
+Apoyarse en una dependencia transitiva funciona hasta que la biblioteca intermedia la abandona.
+
+## Cuando se encuentran dos versiones
+
+Aquí está la trampa. `core` necesita Commons Lang **3.20.0**: usa la clase `Strings`, añadida en la 3.18.0. `app` depende además de Commons Text 1.12.0, que depende de Commons Lang **3.14.0**. Solo puede haber un JAR por biblioteca en el class path.
+
+### Maven: gana la definición más cercana
+
+[Maven elige la «definición más cercana»](https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html): la versión más próxima a tu proyecto en el árbol y, en caso de empate, la primera declarada. Commons Text es una dependencia directa de `app`, así que su Commons Lang está a profundidad 2; la de `core` está a profundidad 3. Gana la versión más antigua:
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+```powershell
+.\mvnw package dependency:tree -Dverbose
+```
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```bash
+./mvnw package dependency:tree -Dverbose
+```
+
+</TabItem>
+<TabItem label="macOS">
+
+```bash
+./mvnw package dependency:tree -Dverbose
+```
+
+</TabItem>
+</Tabs>
+
+```text
+com.example.books:app:jar:1.0-SNAPSHOT
++- org.apache.commons:commons-text:jar:1.12.0:compile
+|  \- org.apache.commons:commons-lang3:jar:3.14.0:compile
+\- com.example.books:lib:jar:1.0-SNAPSHOT:compile
+   \- com.example.books:core:jar:1.0-SNAPSHOT:compile
+      \- (org.apache.commons:commons-lang3:jar:3.20.0:compile - omitted for conflict with 3.14.0)
+```
+
+Todo compiló, porque `core` se compiló contra su propia versión declarada. El fallo llega en tiempo de ejecución, cuando `core` busca una clase que la 3.14.0 no tiene:
+
+```text
+commons-lang3 on the class path: 3.14.0
+The Art Of Computer Programming
+Exception in thread "main" java.lang.NoClassDefFoundError: org/apache/commons/lang3/Strings
+```
+
+`-Dverbose` es lo que muestra la versión omitida; sin él, el árbol solo enumera la ganadora.
+
+### Gradle: gana la versión más alta
+
+[Gradle considera todas las versiones pedidas y selecciona la más alta](https://docs.gradle.org/current/userguide/graph_resolution.html). El mismo grafo da 3.20.0, y la flecha muestra la sustitución:
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+```powershell
+.\gradlew :app:dependencies --configuration runtimeClasspath
+```
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```bash
+./gradlew :app:dependencies --configuration runtimeClasspath
+```
+
+</TabItem>
+<TabItem label="macOS">
+
+```bash
+./gradlew :app:dependencies --configuration runtimeClasspath
+```
+
+</TabItem>
+</Tabs>
+
+```text
+runtimeClasspath - Runtime classpath of source set 'main'.
++--- org.apache.commons:commons-text:1.12.0
+|    \--- org.apache.commons:commons-lang3:3.14.0 -> 3.20.0
+\--- project ':lib'
+     \--- project ':core'
+          \--- org.apache.commons:commons-lang3:3.20.0
+```
+
+```text
+commons-lang3 on the class path: 3.20.0
+The Art Of Computer Programming
+art-of-computer-programming
+```
+
+`dependencyInsight` explica una elección:
+
+```text
+   Selection reasons:
+      - By conflict resolution: between versions 3.20.0 and 3.14.0
+
+org.apache.commons:commons-lang3:3.20.0
+\--- project ':core'
+     \--- project ':lib'
+          \--- runtimeClasspath
+
+org.apache.commons:commons-lang3:3.14.0 -> 3.20.0
+\--- org.apache.commons:commons-text:1.12.0
+     \--- runtimeClasspath
+```
+
+Elegir la versión más alta tampoco es siempre seguro: una versión mayor puede eliminar lo que llama un consumidor más antiguo. Pero con las bibliotecas que mantienen la compatibilidad hacia atrás, como Commons Lang, ese modo de fallo es mucho más raro.
+
+### NuGet: la más baja aplicable, pero nunca una degradación silenciosa
+
+NuGet tiene [cuatro reglas](https://learn.microsoft.com/nuget/concepts/dependency-resolution): versión aplicable más baja, versiones flotantes, gana la dependencia directa y dependencias primas. La carpeta `nuget` reproduce la misma forma. `App` referencia `Microsoft.Extensions.Logging` 8.0.0, que necesita `Microsoft.Extensions.DependencyInjection.Abstractions` como mínimo en 8.0.0, y `Lib` → `Core` referencia ese paquete en 9.0.0:
+
+```text
+Project 'App' has the following package references
+   [net10.0]:
+   Top-level Package                   Requested   Resolved
+   > Microsoft.Extensions.Logging      8.0.0       8.0.0
+
+   Transitive Package                                           Resolved
+   > Microsoft.Extensions.DependencyInjection                   8.0.0
+   > Microsoft.Extensions.DependencyInjection.Abstractions      9.0.0
+   > Microsoft.Extensions.Logging.Abstractions                  8.0.0
+   > Microsoft.Extensions.Options                               8.0.0
+   > Microsoft.Extensions.Primitives                            8.0.0
+
+Microsoft.Extensions.DependencyInjection.Abstractions loaded: 9.0.0.0
+```
+
+Los números de versión de NuGet son mínimos (`>= 8.0.0`), así que la regla de las dependencias primas toma la versión más baja que satisface todos los requisitos, que aquí es la más alta de los mínimos, 9.0.0. Donde Maven tomaría la más cercana, NuGet llega al mismo resultado que Gradle.
+
+«Gana la dependencia directa» todavía puede producir el resultado de Maven: añade en `App` una referencia directa al paquete 8.0.0 (`dotnet restore -p:Downgrade=true` en el ejemplo). La diferencia es que NuGet se niega a hacerlo en silencio. NU1605 es una advertencia que el SDK de .NET trata como error:
+
+```text
+error NU1605: Warning As Error: Detected package downgrade: Microsoft.Extensions.DependencyInjection.Abstractions from 9.0.0 to 8.0.0. Reference the package directly from the project to select a different version.
+error NU1605:  App -> Lib -> Core -> Microsoft.Extensions.DependencyInjection.Abstractions (>= 9.0.0)
+error NU1605:  App -> Microsoft.Extensions.DependencyInjection.Abstractions (>= 8.0.0)
+```
+
+| Regla | Maven | Gradle | NuGet |
+|---|---|---|---|
+| Elección por defecto | la más cercana, luego la primera declarada | la más alta | la versión más baja que satisface todos los mínimos |
+| Declaración directa | gana | gana solo si es la más alta | gana |
+| Degradación por debajo de un requisito transitivo | silenciosa | imposible por defecto | error NU1605 |
+
+## Tomar el control
+
+### Fijar la versión para todo el build
+
+`<dependencyManagement>` en el padre fija la versión de una biblioteca allí donde aparezca en el árbol, sea transitiva o no, sin añadirla como dependencia. El ejemplo la pone en un perfil `pin` para mostrar los dos estados:
+
+```xml
+    <!-- mvn -Ppin: una sola versión para todo el build, como Directory.Packages.props -->
+    <profile>
+      <id>pin</id>
+      <dependencyManagement>
+        <dependencies>
+          <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.20.0</version>
+          </dependency>
+        </dependencies>
+      </dependencyManagement>
+    </profile>
+```
+
+```text
+com.example.books:app:jar:1.0-SNAPSHOT
++- org.apache.commons:commons-text:jar:1.12.0:compile
+|  \- org.apache.commons:commons-lang3:jar:3.20.0:compile (version managed from 3.14.0)
+\- com.example.books:lib:jar:1.0-SNAPSHOT:compile
+   \- com.example.books:core:jar:1.0-SNAPSHOT:compile
+      \- (org.apache.commons:commons-lang3:jar:3.20.0:compile - version managed from 3.20.0; omitted for duplicate)
+commons-lang3 on the class path: 3.20.0
+The Art Of Computer Programming
+art-of-computer-programming
+```
+
+Es Central Package Management con la fijación transitiva activada. En .NET, `Directory.Packages.props` solo fija los paquetes transitivos cuando `CentralPackageTransitivePinningEnabled` es `true`. En Maven, las versiones gestionadas se aplican siempre a las dependencias transitivas.
+
+En un proyecto real, el `<dependencyManagement>` del padre no está en un perfil. Los [perfiles](https://maven.apache.org/guides/introduction/introduction-to-profiles.html) son los bloques condicionales de Maven, el equivalente de un `Condition` de MSBuild, y aquí solo sirven para mantener los dos estados en un mismo ejemplo.
+
+### BOM
+
+Un **BOM** (bill of materials, lista de materiales) es un POM que solo contiene `<dependencyManagement>`, publicado para que otros builds puedan importarlo. El propio `pom.xml` de este curso importa el BOM de JUnit, y por eso su dependencia de JUnit no lleva versión:
+
+```xml
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-bom</artifactId>
+        <version>${junit.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+```
+
+El ámbito `import` solo existe dentro de `<dependencyManagement>`: copia las versiones gestionadas del BOM en este POM. El `spring-boot-starter-parent` de Spring Boot, en el ejemplo del curso de WSL, va más lejos: es un *padre* cuyo propio padre es el BOM de Spring Boot, `spring-boot-dependencies`, y además configura plugins. Gradle importa los mismos BOM con `testImplementation(platform("org.junit:junit-bom:6.1.3"))`. NuGet no tiene el concepto de BOM: un `Directory.Packages.props` se queda en el repositorio que lo usa.
+
+### Hacer fallar el build
+
+Fijar una versión arregla un conflicto que conoces. La regla [`requireUpperBoundDeps`](https://maven.apache.org/enforcer/enforcer-rules/requireUpperBoundDeps.html) del enforcer encuentra los que no conoces: falla cuando una dependencia se resuelve a una versión más baja que la que pidió algo del árbol. Es lo más parecido a NU1605:
+
+```text
+[ERROR] Require upper bound dependencies error for org.apache.commons:commons-lang3:3.14.0. Paths to dependency are:
+[ERROR] +-com.example.books:app:1.0-SNAPSHOT
+[ERROR]   +-org.apache.commons:commons-text:1.12.0
+[ERROR]     +-org.apache.commons:commons-lang3:3.14.0
+[ERROR] and
+[ERROR] +-com.example.books:app:1.0-SNAPSHOT
+[ERROR]   +-com.example.books:lib:1.0-SNAPSHOT
+[ERROR]     +-com.example.books:core:1.0-SNAPSHOT
+[ERROR]       +-org.apache.commons:commons-lang3:3.20.0
+[ERROR] ]
+```
+
+Con el perfil `pin` además (`-Ppin,enforce`), la regla pasa.
+
+## Wrappers y lock files
+
+El **wrapper** fija la versión de la herramienta de build, igual que `global.json` fija la del SDK. `mvn wrapper:wrapper` genera `mvnw`, `mvnw.cmd` y un archivo de propiedades, que hay que versionar todos:
+
+```text
+wrapperVersion=3.3.4
+distributionType=only-script
+distributionUrl=https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.9.16/apache-maven-3.9.16-bin.zip
+```
+
+`gradle wrapper` genera `gradlew`, `gradlew.bat` y `gradle/wrapper/gradle-wrapper.jar` junto al archivo de propiedades. El [diario](../journal/) describe un repositorio donde solo se versionó el archivo de propiedades, lo que deja el wrapper inutilizable.
+
+Un **lock file** (archivo de bloqueo) registra las versiones exactas que produjo una resolución, para que el siguiente build obtenga las mismas. NuGet escribe `packages.lock.json` cuando `RestorePackagesWithLockFile` es `true`; Gradle escribe un `gradle.lockfile` por proyecto cuando se define `dependencyLocking { lockAllConfigurations() }` y un build se ejecuta con `--write-locks`. Maven no tiene ninguno: su resolución es determinista para un POM dado, salvo que el POM use rangos de versiones o dependencias `-SNAPSHOT`, lo que es un motivo más para evitar ambos en las versiones publicadas.
+
+:::note[Maven 4]
+El 2026-09-13, la [página de descargas de Maven](https://maven.apache.org/download.cgi) ofrece Maven 4.0.0-rc-6 como versión preliminar (preview) y la 3.9.x como versión actual. Este curso usa la 3.9.
+:::
+
+## Puntos clave
+
+- Un POM padre de Maven es a la vez el `.sln` y `Directory.Build.props`; Gradle los separa en `settings.gradle.kts` y plugins de convenciones.
+- El `implementation` de Gradle oculta una dependencia a los compiladores de los consumidores; Maven y NuGet dejan que las dependencias transitivas se filtren en la compilación. `mvn dependency:analyze` encuentra esas filtraciones.
+- Ante un conflicto de versiones, Maven toma la versión **más cercana**, Gradle la **más alta**, y NuGet la más baja que satisface todos los mínimos, con un error ante una degradación. La regla de Maven puede poner en silencio una biblioteca más antigua en el class path, y el programa solo falla en tiempo de ejecución.
+- `mvn dependency:tree -Dverbose`, `gradle dependencies` y `dependencyInsight` muestran qué ganó y por qué.
+- Fija las versiones con `<dependencyManagement>` y BOM, o con un catálogo de versiones y plataformas; haz que los conflictos rompan el build con el enforcer o con `failOnVersionConflict()`.
+- Versiona el wrapper. Gradle y NuGet pueden bloquear las versiones resueltas; Maven se apoya en versiones exactas.
+
+## Ejercicios
+
+1. Haz que el build de Maven funcione sin el perfil `pin` y sin tocar `core` ni `lib`.
+
+<details>
+<summary>Solución</summary>
+
+Declara Commons Lang en el propio `app`. Una dependencia directa está a profundidad 1, la más cercana posible. El ejemplo guarda esta solución en un perfil `direct` de `app/pom.xml`:
+
+```xml
+        <dependency>
+          <groupId>org.apache.commons</groupId>
+          <artifactId>commons-lang3</artifactId>
+          <version>3.20.0</version>
+        </dependency>
+```
+
+```text
+com.example.books:app:jar:1.0-SNAPSHOT
++- org.apache.commons:commons-text:jar:1.12.0:compile
+|  \- (org.apache.commons:commons-lang3:jar:3.14.0:compile - omitted for conflict with 3.20.0)
++- com.example.books:lib:jar:1.0-SNAPSHOT:compile
+|  \- com.example.books:core:jar:1.0-SNAPSHOT:compile
+|     \- (org.apache.commons:commons-lang3:jar:3.20.0:compile - omitted for duplicate)
+\- org.apache.commons:commons-lang3:jar:3.20.0:compile
+commons-lang3 on the class path: 3.20.0
+The Art Of Computer Programming
+art-of-computer-programming
+```
+
+Funciona, y además corrige la advertencia de dependencia no declarada, ya que `app` usa `StringUtils`. El inconveniente: cada aplicación que use `lib` debe conocer el requisito de `core` y repetirlo. Una versión gestionada en un padre o un BOM compartidos escala mejor.
+
+</details>
+
+2. Haz que el build de Gradle falle ante este conflicto, como hace el enforcer, en lugar de elegir en silencio la versión más alta.
+
+<details>
+<summary>Solución</summary>
+
+```kotlin
+// Ejercicio 2: ./gradlew -PfailOnConflict falla en lugar de elegir la versión más alta
+if (providers.gradleProperty("failOnConflict").isPresent) {
+    configurations.all {
+        resolutionStrategy.failOnVersionConflict()
+    }
+}
+```
+
+```text
+* What went wrong:
+Execution failed for task ':app:run' (registered by plugin 'org.gradle.application').
+> Could not resolve all files for configuration ':app:runtimeClasspath'.
+   > Could not resolve org.apache.commons:commons-lang3:3.14.0.
+     Required by:
+         project ':app' > org.apache.commons:commons-text:1.12.0
+      > Conflict found for module 'org.apache.commons:commons-lang3': between versions 3.20.0 and 3.14.0
+> There is 1 more failure with an identical cause.
+```
+
+[`failOnVersionConflict()`](https://docs.gradle.org/current/userguide/resolution_strategy_tuning.html) se aplica a cada configuración en la que se define. `compileJava` sigue funcionando, porque el class path de compilación de `app` solo contiene la 3.14.0: `core` y su Commons Lang son dependencias `implementation` de `lib`, así que el conflicto solo existe en el class path de ejecución. Esa es la diferencia práctica con el enforcer, que comprueba el árbol entero.
+
+</details>
+
+3. Reproduce en Gradle el fallo de Maven: fuerza Commons Lang 3.14.0 desde `app`. ¿Qué muestra el árbol, y qué haría NuGet con la misma petición?
+
+<details>
+<summary>Solución</summary>
+
+```kotlin
+// Ejercicio 3: ./gradlew -PstrictLang3 fuerza la versión antigua, como hizo la regla de la más cercana de Maven
+if (providers.gradleProperty("strictLang3").isPresent) {
+    dependencies {
+        implementation(libs.commons.lang3) {
+            version {
+                strictly("3.14.0")
+            }
+        }
+    }
+}
+```
+
+```text
+runtimeClasspath - Runtime classpath of source set 'main'.
++--- org.apache.commons:commons-text:1.12.0
+|    \--- org.apache.commons:commons-lang3:3.14.0
++--- project ':lib'
+|    \--- project ':core'
+|         \--- org.apache.commons:commons-lang3:3.20.0 -> 3.14.0
+\--- org.apache.commons:commons-lang3:{strictly 3.14.0} -> 3.14.0
+```
+
+```text
+commons-lang3 on the class path: 3.14.0
+The Art Of Computer Programming
+Exception in thread "main" java.lang.NoClassDefFoundError: org/apache/commons/lang3/Strings
+```
+
+Un simple `implementation("…:3.14.0")` perdería frente a 3.20.0: en Gradle, una declaración directa es un candidato más, no una imposición. [`strictly`](https://docs.gradle.org/current/userguide/dependency_versions.html) es la forma de degradar, y el árbol lo marca como `{strictly 3.14.0}` para que quien lo lea vea que fue deliberado. NuGet, ante una referencia directa a 8.0.0 por debajo de un requisito transitivo de 9.0.0, se detiene con NU1605. De las tres herramientas, solo Maven hace la degradación sin que se lo pidan y sin avisar.
+
+</details>
+
+## Fuentes
+
+- Maven: [introducción al mecanismo de dependencias](https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html), [builds multimódulo](https://maven.apache.org/guides/mini/guide-multiple-modules.html), [perfiles](https://maven.apache.org/guides/introduction/introduction-to-profiles.html), [`requireUpperBoundDeps`](https://maven.apache.org/enforcer/enforcer-rules/requireUpperBoundDeps.html), [Maven Wrapper](https://maven.apache.org/tools/wrapper/)
+- Gradle: [resolución del grafo](https://docs.gradle.org/current/userguide/graph_resolution.html), [el plugin Java Library](https://docs.gradle.org/current/userguide/java_library_plugin.html), [builds multiproyecto](https://docs.gradle.org/current/userguide/multi_project_builds.html), [compartir la lógica de build](https://docs.gradle.org/current/userguide/sharing_build_logic_between_subprojects.html), [bloqueo de dependencias](https://docs.gradle.org/current/userguide/dependency_locking.html)
+- NuGet: [resolución de dependencias](https://learn.microsoft.com/nuget/concepts/dependency-resolution), [Central Package Management](https://learn.microsoft.com/nuget/consume-packages/central-package-management), [PackageReference en los archivos de proyecto](https://learn.microsoft.com/nuget/consume-packages/package-references-in-project-files), [NU1605](https://learn.microsoft.com/nuget/reference/errors-and-warnings/nu1605)

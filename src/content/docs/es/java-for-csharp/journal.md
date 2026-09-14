@@ -16,11 +16,30 @@ sidebar:
 - [x] Lección 7 — Colecciones y Streams
 - [x] Lección 8 — Pattern matching
 - [x] Lección 9 — Concurrencia e hilos virtuales
-- [ ] Lección 10 — Maven y Gradle a fondo
+- [x] Lección 10 — Maven y Gradle a fondo
 - [ ] Lección 11 — Pruebas
 - [ ] Lección 12 — La biblioteca estándar del día a día
 - [ ] Lección 13 — La JVM en tiempo de ejecución
 - [ ] Lección 14 — Anotaciones, reflexión y módulos
+
+## 2026-09-13 — Lección 10
+
+- La lección 10 se prueba de otra manera: [`l10/check.sh`](https://github.com/spareilleux/learn/blob/main/code/java-for-csharp/l10/check.sh) ejecuta los builds de Maven, Gradle y NuGet, y la CI compara 14 archivos de salida con los que cita la lección. El script tarda unos tres minutos en mi máquina, casi todo en el arranque de Maven y Gradle.
+- Maven 4: la página de descargas ofrece la 4.0.0-rc-6 como versión preliminar (preview) y la 3.9.x como versión actual, lo que por ahora responde a la pregunta abierta de más abajo.
+
+**Sorpresas viniendo de C#:**
+
+- Maven puso Commons Lang 3.14.0 en el class path cuando una biblioteca del build necesitaba la 3.20.0, sin ninguna advertencia, y el programa solo falló en tiempo de ejecución con `NoClassDefFoundError`. Hace falta `-Dverbose` incluso para ver que se había pedido otra versión.
+- Un `implementation("…:3.14.0")` directo en Gradle no degrada nada: es un candidato más, y la 3.20.0 sigue ganando. Solo `strictly` lo fuerza.
+- NuGet fue el más estricto de los tres: su advertencia de degradación, NU1605, es un error por defecto.
+- `failOnVersionConflict()` dejó que `compileJava` funcionara, porque el conflicto solo existe en el class path de ejecución cuando la otra versión llega a través de una dependencia `implementation`.
+
+**Lo que hice mal al principio:**
+
+- Mi primer build de Gradle compartía sus ajustes con `subprojects { }` en el script raíz. La documentación de Gradle lo llama «an improper way to share build logic»; el ejemplo usa ahora un plugin de convenciones en `buildSrc`.
+- La primera ejecución de `mvn install` puso los módulos del ejemplo en mi repositorio local (`~/.m2`). El script compila ahora en el reactor con `package`, que no necesita instalación, y borré las copias instaladas.
+- `dotnet list package` imprime mensajes de restauración cuya redacción depende de lo que ya está restaurado, así que el script de comprobación los filtra.
+- Mi tabla de resumen decía al principio que Maven no tenía equivalente de `PrivateAssets="all"`, mientras que la tabla de ámbitos, dos secciones más abajo, lo hacía corresponder con `<optional>true</optional>`. La tabla de resumen coincide ahora.
 
 ## 2026-09-13 — Lección 9
 
@@ -127,5 +146,5 @@ El `spring-boot-maven-plugin` reempaqueta el JAR: la `Main-Class` del manifiesto
 
 ## Preguntas abiertas
 
-- ¿Merece ya la pena enseñar Maven 4, dado que la mayoría de los proyectos siguen usando la 3.9? *Por verificar*: su estado de publicación.
+- ¿Merece ya la pena enseñar Maven 4? El 2026-09-13 sigue siendo una versión candidata (4.0.0-rc-6); volver a mirarlo cuando la 4.0.0 sea definitiva.
 - ¿Cómo se comparan las inspecciones de IntelliJ IDEA con `-Xlint:all` de javac para las trampas de las lecciones 2 y 3?

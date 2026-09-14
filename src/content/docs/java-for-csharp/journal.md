@@ -16,11 +16,30 @@ sidebar:
 - [x] Lesson 7 — Collections and Streams
 - [x] Lesson 8 — Pattern matching
 - [x] Lesson 9 — Concurrency and virtual threads
-- [ ] Lesson 10 — Maven and Gradle in depth
+- [x] Lesson 10 — Maven and Gradle in depth
 - [ ] Lesson 11 — Testing
 - [ ] Lesson 12 — The standard library you reach for
 - [ ] Lesson 13 — The JVM at run time
 - [ ] Lesson 14 — Annotations, reflection and modules
+
+## 2026-09-13 — Lesson 10
+
+- Lesson 10 is tested differently: [`l10/check.sh`](https://github.com/spareilleux/learn/blob/main/code/java-for-csharp/l10/check.sh) runs the Maven, Gradle and NuGet builds and CI compares 14 output files with the ones quoted in the lesson. The script takes about three minutes on my machine, most of it Maven and Gradle starting up.
+- Maven 4: the download page offers 4.0.0-rc-6 as a preview and 3.9.x as the current release, which answers the open question below for now.
+
+**Surprises coming from C#:**
+
+- Maven put Commons Lang 3.14.0 on the class path when a library in the build needed 3.20.0, without a warning, and the program failed only at run time with `NoClassDefFoundError`. `-Dverbose` is needed even to see that another version was requested.
+- A direct `implementation("…:3.14.0")` in Gradle doesn't downgrade anything: it is one more candidate, and 3.20.0 still wins. Only `strictly` forces it.
+- NuGet was the strictest of the three: its downgrade warning, NU1605, is an error by default.
+- `failOnVersionConflict()` let `compileJava` succeed, because the conflict only exists on the runtime class path when the other version comes through an `implementation` dependency.
+
+**Things I got wrong first:**
+
+- My first Gradle build shared its settings with `subprojects { }` in the root script. Gradle's documentation calls that "an improper way to share build logic"; the example now uses a convention plugin in `buildSrc`.
+- The first run of `mvn install` put the example's modules into my local repository (`~/.m2`). The script now builds in the reactor with `package`, which needs no install, and I deleted the installed copies.
+- `dotnet list package` prints restore messages whose wording depends on what is already restored, so the check script filters them out.
+- My summary table first said Maven had no equivalent of `PrivateAssets="all"`, while the scopes table two sections later mapped it to `<optional>true</optional>`. The summary table now matches.
 
 ## 2026-09-13 — Lesson 9
 
@@ -127,5 +146,5 @@ The `spring-boot-maven-plugin` repackages the JAR: the manifest's `Main-Class` i
 
 ## Open questions
 
-- Is Maven 4 worth teaching yet, given that most projects still use 3.9? *To verify*: its release status.
+- Is Maven 4 worth teaching yet? On 2026-09-13 it is still a release candidate (4.0.0-rc-6); revisit when 4.0.0 is final.
 - How do IntelliJ IDEA's inspections compare with javac's `-Xlint:all` for the traps in lessons 2 and 3?
