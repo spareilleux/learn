@@ -1,0 +1,60 @@
+---
+import Default from '@astrojs/starlight/components/MarkdownContent.astro';
+---
+
+<Default><slot /></Default>
+
+<script>
+	// Replaces each ```mermaid code block with its diagram, drawn again when the theme changes.
+	// The source comes from the copy button of Expressive Code, which separates lines with U+007F.
+	const MERMAID = 'https://cdn.jsdelivr.net/npm/mermaid@12.0.0/dist/mermaid.esm.min.mjs';
+	const figures = [...document.querySelectorAll<HTMLElement>('.sl-markdown-content .expressive-code')].filter((figure) =>
+		figure.querySelector('pre[data-language="mermaid"]'),
+	);
+	if (figures.length > 0) {
+		void (async () => {
+			const { default: mermaid } = await import(/* @vite-ignore */ MERMAID);
+			const blocks = figures.map((figure) => {
+				const source = (figure.querySelector<HTMLElement>('[data-code]')?.dataset.code ?? '').replaceAll('', '\n');
+				const block = document.createElement('pre');
+				block.className = 'mermaid';
+				block.dataset.source = source;
+				return { figure, block };
+			});
+			let rendering = Promise.resolve();
+			const render = () => {
+				rendering = rendering.then(async () => {
+					const dark = document.documentElement.dataset.theme === 'dark';
+					mermaid.initialize({ startOnLoad: false, theme: dark ? 'dark' : 'default', securityLevel: 'strict' });
+					for (const { block } of blocks) {
+						block.removeAttribute('data-processed');
+						block.textContent = block.dataset.source ?? '';
+					}
+					// Mermaid measures text, so the diagram is drawn in the page, next to its code block
+					for (const { figure, block } of blocks) if (!block.isConnected) figure.before(block);
+					try {
+						await mermaid.run({ nodes: blocks.map(({ block }) => block) });
+					} catch (error) {
+						console.error('Mermaid', error);
+					}
+					// Keep the code block of a diagram that fails to parse
+					for (const { figure, block } of blocks) {
+						if (block.querySelector('svg')) figure.remove();
+						else if (figure.isConnected) block.remove();
+					}
+				});
+			};
+			render();
+			new MutationObserver(render).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+		})();
+	}
+</script>
+
+<style is:global>
+	.sl-markdown-content pre.mermaid {
+		background: transparent;
+		border: none;
+		text-align: center;
+		overflow-x: auto;
+	}
+</style>

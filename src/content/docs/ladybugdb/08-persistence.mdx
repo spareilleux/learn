@@ -338,6 +338,14 @@ files: ga.lbdb ga.lbdb.wal
 
 The commit wrote `ga.lbdb.wal`, the write-ahead log. The script waits for that file rather than for the output of the CLI: with its output redirected to a file, the CLI writes nothing until it exits. The [on-disk files page](https://docs.ladybugdb.com/developer-guide/files/) describes the log as DuckDB's lesson 8 found it: created by a committed write transaction, removed when a checkpoint succeeds. The checkpoint runs on `CHECKPOINT`, when the database closes, and at the end of a write transaction once the log is over `checkpoint_threshold`, which the Cypher script reads ([line 53](https://github.com/spareilleux/learn/blob/93f6f82/code/ladybugdb/cypher/08-transactions.cypher#L53)): 16777216 bytes, 16 MiB, the same as DuckDB.
 
+```mermaid
+flowchart TB
+  T[Write transaction] -->|COMMIT| L[ga.lbdb.wal]
+  L -->|"checkpoint: CHECKPOINT, close,<br/>log over checkpoint_threshold"| F[(ga.lbdb)]
+  L -->|"process killed:<br/>replayed at the next open"| F
+  T -->|"ROLLBACK, error, close,<br/>process killed"| N[nothing written]
+```
+
 ## A killed process
 
 `kill -9` on the writer, then a new CLI on the file ([lines 54-59](https://github.com/spareilleux/learn/blob/93f6f82/code/ladybugdb/files/files.sh#L54-L59)):

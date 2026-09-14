@@ -338,6 +338,14 @@ files: ga.lbdb ga.lbdb.wal
 
 La validation a écrit `ga.lbdb.wal`, le journal d'écriture anticipée (*write-ahead log*). Le script attend ce fichier plutôt que la sortie de la CLI : quand sa sortie est redirigée vers un fichier, la CLI n'écrit rien avant de se terminer. La [page sur les fichiers sur disque](https://docs.ladybugdb.com/developer-guide/files/) décrit le journal tel que l'a trouvé la leçon 8 de DuckDB : créé par une transaction d'écriture validée, supprimé quand un point de contrôle réussit. Le point de contrôle s'exécute sur `CHECKPOINT`, à la fermeture de la base de données, et à la fin d'une transaction d'écriture dès que le journal dépasse `checkpoint_threshold`, que lit le script Cypher ([ligne 53](https://github.com/spareilleux/learn/blob/93f6f82/code/ladybugdb/cypher/08-transactions.cypher#L53)) : 16777216 octets, 16 Mio, comme DuckDB.
 
+```mermaid
+flowchart TB
+  T[Transaction d'écriture] -->|COMMIT| L[ga.lbdb.wal]
+  L -->|"point de contrôle : CHECKPOINT, fermeture,<br/>journal au-delà de checkpoint_threshold"| F[(ga.lbdb)]
+  L -->|"processus tué :<br/>rejoué à l'ouverture suivante"| F
+  T -->|"ROLLBACK, erreur, fermeture,<br/>processus tué"| N[rien d'écrit]
+```
+
 ## Un processus tué
 
 `kill -9` sur l'écrivain, puis une nouvelle CLI sur le fichier ([lignes 54-59](https://github.com/spareilleux/learn/blob/93f6f82/code/ladybugdb/files/files.sh#L54-L59)) :

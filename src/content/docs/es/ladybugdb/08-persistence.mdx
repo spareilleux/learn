@@ -338,6 +338,14 @@ files: ga.lbdb ga.lbdb.wal
 
 El commit escribió `ga.lbdb.wal`, el registro de escritura anticipada (write-ahead log). El script espera ese archivo en lugar de la salida de la CLI: con su salida redirigida a un archivo, la CLI no escribe nada hasta que sale. La [página de archivos en disco](https://docs.ladybugdb.com/developer-guide/files/) describe el registro tal como lo encontró la lección 8 de DuckDB: lo crea una transacción de escritura confirmada, y se elimina cuando un checkpoint tiene éxito. El checkpoint se ejecuta con `CHECKPOINT`, al cerrar la base de datos, y al final de una transacción de escritura cuando el registro supera `checkpoint_threshold`, que lee el script Cypher ([línea 53](https://github.com/spareilleux/learn/blob/93f6f82/code/ladybugdb/cypher/08-transactions.cypher#L53)): 16777216 bytes, 16 MiB, lo mismo que DuckDB.
 
+```mermaid
+flowchart TB
+  T[Transacción de escritura] -->|COMMIT| L[ga.lbdb.wal]
+  L -->|"checkpoint: CHECKPOINT, cierre,<br/>registro por encima de checkpoint_threshold"| F[(ga.lbdb)]
+  L -->|"proceso matado:<br/>se reproduce en la siguiente apertura"| F
+  T -->|"ROLLBACK, error, cierre,<br/>proceso matado"| N[nada escrito]
+```
+
 ## Un proceso matado
 
 `kill -9` sobre el escritor, y luego una CLI nueva sobre el archivo ([líneas 54-59](https://github.com/spareilleux/learn/blob/93f6f82/code/ladybugdb/files/files.sh#L54-L59)):
