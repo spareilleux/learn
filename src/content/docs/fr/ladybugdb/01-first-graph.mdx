@@ -20,7 +20,7 @@ Expand-Archive lbug_cli-windows-x86_64.zip -DestinationPath lbug
 .\lbug\lbug.exe --version
 ```
 
-Le fichier zip ne contient que `lbug.exe` (14,8 Mo). Ajoute son dossier au `PATH` pour taper `lbug` depuis n'importe où. La [page d'installation](https://docs.ladybugdb.com/installation/) utilise `releases/latest/download/` au lieu d'un numéro de version : toujours la release la plus récente.
+Le fichier zip ne contient que `lbug.exe` (14,8 Mo). Il a besoin de deux DLL OpenSSL qui n'y sont pas, `libssl-3-x64.dll` et `libcrypto-3-x64.dll` : sans elles, il se termine avec le code `0xC0000135` et aucun message. Sur ma machine, elles viennent de Git for Windows, `C:\Program Files\Git\mingw64\bin`, dans le `PATH` de Git Bash. Ajoute le dossier de `lbug.exe` au `PATH` pour taper `lbug` depuis n'importe où. La [page d'installation](https://docs.ladybugdb.com/installation/) utilise `releases/latest/download/` au lieu d'un numéro de version : toujours la release la plus récente.
 
 </TabItem>
 <TabItem label="Linux / WSL">
