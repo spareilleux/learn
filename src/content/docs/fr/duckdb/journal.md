@@ -13,10 +13,10 @@ sidebar:
 - [x] Leçon 2 : Friendly SQL
 - [x] Leçon 3 : données imbriquées
 - [x] Leçon 4 : fichiers
-- [ ] Leçon 5 : DuckDB depuis C#
-- [ ] Leçon 6 : DuckDB depuis Java
-- [ ] Leçon 7 : performances
-- [ ] Leçon 8 : persistance, transactions et concurrence
+- [x] Leçon 5 : DuckDB depuis C#
+- [x] Leçon 6 : DuckDB depuis Java
+- [x] Leçon 7 : performances
+- [x] Leçon 8 : persistance, transactions et concurrence
 
 ## 2026-09-14 — Les données
 
@@ -44,9 +44,34 @@ sidebar:
 - Premier push du script de la leçon 4 : échec sur `macos-latest` uniquement. Le `total_compressed_size` Parquet de 8 blocs de colonnes (column chunks) différait de 1 à 6 octets de celui de Linux et de Windows. Le script compare désormais `num_values` à la place.
 - `COPY` vers un fichier existant l'écrase ; `COPY … PARTITION_BY` vers un dossier non vide échoue sans `OVERWRITE`.
 
+## 2026-09-14 — Surprises en écrivant les leçons 5-6
+
+- `DuckDB.NET.Data.Full` 1.5.5 pèse 420 Mo dans le cache NuGet, 316 Mo dans `bin/Debug`, 69 Mo une fois publié pour `linux-x64` seulement. Le jar JDBC pèse 85 Mo, avec quatre bibliothèques natives et aucune build Windows on Arm.
+- DuckDB.NET associe un `STRUCT` à une classe par nom de propriété, sans tenir compte de la casse mais en tenant compte des underscores : `StartedAt` reste silencieusement à sa valeur par défaut, `Started_At` est rempli. Un record positionnel lève `MissingMethodException`.
+- `TIMESTAMPTZ` revient sous forme de `DateTime` contenant la valeur UTC avec `Kind` `Unspecified`, donc `ToUniversalTime` la décale une seconde fois. En Java, c'est un `OffsetDateTime` dans le fuseau par défaut de la JVM, quoi que dise `SET TimeZone`.
+- `(long)` et `Convert.ToInt64` lèvent tous deux une exception sur le `BigInteger` d'un `HUGEINT` ; `(long)(BigInteger)value` fonctionne.
+- Avec JDBC, un `Statement` est fermé après une requête en échec : une boucle qui attrape l'erreur et continue fait échouer toutes les instructions suivantes avec `Statement was closed`.
+- Le JDK 25 affiche quatre avertissements d'accès natif au chargement du driver, sauf avec `--enable-native-access=ALL-UNNAMED` ; le lanceur de Maven le passe déjà.
+- Temps dans la CI, non comparés : l'appender C# a chargé 1 000 000 de lignes en 226 à 331 ms et 10 000 instructions `INSERT` isolées ont pris 1,3 à 3,9 s ; en Java, un batch JDBC n'était pas plus rapide que des instructions isolées (690 ms à 2,4 s pour 10 000 lignes).
+- Les chemins relatifs dans le SQL sont relatifs au répertoire de travail du processus, pas au projet : les deux programmes s'exécutent depuis `code/duckdb`.
+
+## 2026-09-14 — Surprises en écrivant les leçons 7-8
+
+- La sortie de `EXPLAIN` ne dépend pas du nombre de threads, et les estimations étaient les mêmes sur les trois runners : la CI peut donc comparer les plans.
+- Le writer Parquet utilise plusieurs threads, et la taille du même fichier de 11 millions de lignes a changé d'une exécution à l'autre : 119 021 205 puis 119 392 814 octets en local, de 118 714 412 à 119 120 557 octets sur les runners.
+- L'optimiseur réécrit `started_at::DATE = …` et `date_trunc('day', started_at) = …` en un intervalle qui saute des row groups ; `strftime(started_at, …) = …` reste une expression et lit toutes les lignes : 0,47 s contre 0,003 s sur le fichier trié.
+- Les téléchargements du Parquet distant étaient identiques à l'octet près sur les quatre machines, et correspondent exactement aux métadonnées : les trois blocs `trip_distance` pour la moyenne, le row group 0 à partir de l'octet 4 pour `SELECT * … LIMIT 1`.
+- Un tri de 11 millions de lignes avec `memory_limit = '100MB'` échoue avec 4 threads et réussit avec 1 (6,3 à 9,9 s). Le `COPY` en échec a laissé un fichier partiel derrière lui.
+- `COMMIT` après une erreur dans une transaction n'affiche aucune erreur et annule tout, dans le CLI comme en JDBC. Les chaînes de plusieurs instructions ne sont pas atomiques non plus : `-c "a; b; c"` et `statement.execute("a; b; c")` ont gardé les deux premières lignes quand la troisième a échoué, alors que la page sur les transactions décrit une transaction implicite.
+- Un conflit d'écriture échoue au second `UPDATE`, une clé en double entre deux transactions seulement au second commit.
+- Un processus qui tient un fichier de base de données bloque tous les autres processus, y compris ceux en lecture seule, avec un message différent sur chaque OS. Les fichiers écrits par DuckDB 1.5.5 portent l'étiquette `storage_version=v1.0.0+` et ont été lus par le CLI de DuckDB 1.0.0 ; avec `STORAGE_VERSION 'v1.5.0'`, la 1.0.0 les a refusés (numéro de version 68, ne sait lire que 64).
+- La CI exécute aussi `timings/07-performance.sql` (non comparé : 17 s sous Ubuntu, 32 s sous Windows, avec un fichier CSV de 1 Go) et `shell/08-*.sh`.
+
 ## À vérifier
 
 - Pourquoi le step numéro 4 manque dans les jobs de `Deploy to GitHub Pages` (step `withastro/action`) : un step interne de l'action composite ?
 - Le chemin d'installation des extensions sous Linux et macOS (`~/.duckdb/extensions/v1.5.5/<platform>/`), déduit de celui de Windows.
-- Les requêtes de plage (range requests) lors de la lecture de Parquet en HTTPS (leçon 7).
-- L'élagage des partitions (partition pruning) sur `WHERE os = 'windows-latest'` (leçon 7).
+- Les commandes Linux et macOS pour lancer le programme Java sans Maven (leçon 6).
+- Les conflits d'écriture et les connexions en lecture seule avec DuckDB.NET (leçon 8) : testés avec JDBC seulement.
+- Ouvrir, écrire et fermer un fichier de base de données depuis plusieurs processus sous charge (leçon 8, exercice 3).
+- Le protocole distant Quack et DuckLake, pour plusieurs processus qui écrivent : mentionnés, pas essayés.

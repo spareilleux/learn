@@ -55,10 +55,10 @@ They are the runs written by the [GitHub Actions course](../github-actions/): re
 | 2 | [Friendly SQL: dates, windows, `QUALIFY`, `PIVOT`](02-friendly-sql/) | window functions, `PIVOT` |
 | 3 | [Nested data: `STRUCT`, `LIST`, `unnest`](03-nested-data/) | `OPENJSON`, `CROSS APPLY` |
 | 4 | [Files: CSV, Parquet, globs, remote files](04-files/) | `BULK INSERT`, external tables |
-| 5 | DuckDB from C# | ADO.NET |
-| 6 | DuckDB from Java | JDBC |
-| 7 | Performance: plans and columnar storage | execution plans, columnstore indexes |
-| 8 | Persistence, transactions and concurrency | isolation, locks |
+| 5 | [DuckDB from C#](05-csharp/) | ADO.NET |
+| 6 | [DuckDB from Java](06-java/) | JDBC |
+| 7 | [Performance: plans and columnar storage](07-performance/) | execution plans, columnstore indexes |
+| 8 | [Persistence, transactions and concurrency](08-persistence/) | isolation, locks |
 | — | [Journal](journal/) | |
 
 ## Resources

@@ -55,10 +55,10 @@ Ce sont les exécutions produites par le [cours GitHub Actions](../github-action
 | 2 | [Friendly SQL : dates, fenêtres, `QUALIFY`, `PIVOT`](02-friendly-sql/) | fonctions de fenêtrage, `PIVOT` |
 | 3 | [Données imbriquées : `STRUCT`, `LIST`, `unnest`](03-nested-data/) | `OPENJSON`, `CROSS APPLY` |
 | 4 | [Fichiers : CSV, Parquet, globs, fichiers distants](04-files/) | `BULK INSERT`, tables externes |
-| 5 | DuckDB depuis C# | ADO.NET |
-| 6 | DuckDB depuis Java | JDBC |
-| 7 | Performances : plans et stockage en colonnes | plans d'exécution, index columnstore |
-| 8 | Persistance, transactions et concurrence | isolation, verrous |
+| 5 | [DuckDB depuis C#](05-csharp/) | ADO.NET |
+| 6 | [DuckDB depuis Java](06-java/) | JDBC |
+| 7 | [Performances : plans et stockage en colonnes](07-performance/) | plans d'exécution, index columnstore |
+| 8 | [Persistance, transactions et concurrence](08-persistence/) | isolation, verrous |
 | — | [Journal](journal/) | |
 
 ## Ressources

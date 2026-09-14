@@ -1,0 +1,394 @@
+---
+title: 8. Persistencia, transacciones y concurrencia
+description: Un archivo de base de datos DuckDB, sus bloques y su versión de almacenamiento, el registro de escritura anticipada y los checkpoints, los bloques libres y la compactación, las transacciones que se abortan con el primer error, los upserts, los conflictos de escritura entre dos conexiones y lo que ocurre cuando dos procesos abren el mismo archivo.
+sidebar:
+  order: 8
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Hasta ahora, las tablas vivían en memoria y desaparecían con el proceso, y los archivos eran CSV, JSON o Parquet. Esta lección guarda los datos en un archivo de base de datos DuckDB y luego hace lo que hace una aplicación con una base de datos: transacciones, restricciones y más de una conexión o proceso a la vez.
+
+Dos programas, comparados por la CI en los tres sistemas operativos como las consultas de las demás lecciones:
+
+- [`shell/08-persistence.sh`](https://github.com/spareilleux/learn/blob/main/code/duckdb/shell/08-persistence.sh) ejecuta la CLI de DuckDB varias veces, a veces dos procesos a la vez, e imprime tamaños de archivo y códigos de salida. Su salida se compara con [`shell/expected/08-persistence.txt`](https://github.com/spareilleux/learn/blob/main/code/duckdb/shell/expected/08-persistence.txt).
+- [`java/src/main/java/ci/Transactions.java`](https://github.com/spareilleux/learn/blob/main/code/duckdb/java/src/main/java/ci/Transactions.java) abre dos conexiones JDBC al mismo archivo, y su salida se compara con [`java/expected-transactions.txt`](https://github.com/spareilleux/learn/blob/main/code/duckdb/java/expected-transactions.txt).
+
+```bash
+bash shell/08-persistence.sh
+mvn -q -f java/pom.xml compile exec:java -Dexec.mainClass=ci.Transactions
+```
+
+En el script, `run` es la CLI de DuckDB en modo CSV seguida de su código de salida, y `files` imprime el tamaño de cada archivo.
+
+## Un archivo de base de datos
+
+Dale a la CLI un nombre de archivo y las tablas van a ese archivo:
+
+```bash
+run $db -c "CREATE TABLE runs AS FROM 'data/runs.json'; CREATE TABLE jobs AS FROM 'data/jobs.json';"
+files $db $db.wal
+run $db -c "SELECT database_size, block_size, total_blocks, used_blocks, free_blocks, wal_size FROM pragma_database_size();"
+```
+
+```text
+exit code 0
+out/ci.duckdb: 798720 bytes
+out/ci.duckdb.wal: absent
+database_size,block_size,total_blocks,used_blocks,free_blocks,wal_size
+768.0 KiB,262144,3,3,0,0 bytes
+exit code 0
+```
+
+Un solo archivo, `out/ci.duckdb`, para todas las tablas, como un archivo de SQLite y no como un `.mdf` de SQL Server. [`pragma_database_size`](https://duckdb.org/docs/current/configuration/pragmas) muestra cómo está organizado: bloques de 262.144 bytes (256 KiB), tres aquí, más 12.288 bytes antes del primer bloque. El archivo crece en bloques enteros.
+
+En un programa, [`ATTACH`](https://duckdb.org/docs/current/sql/statements/attach) abre un archivo de base de datos junto a la base de datos en memoria, y una consulta puede unir tablas de ambas. `ATTACH` también elige el formato de almacenamiento:
+
+```bash
+run -c "ATTACH '$db' AS ci; ATTACH 'out/ci-v150.duckdb' AS v150 (STORAGE_VERSION 'v1.5.0'); SELECT database_name, tags FROM duckdb_databases() WHERE NOT internal ORDER BY ALL;"
+```
+
+```text
+database_name,tags
+ci,{storage_version=v1.0.0+}
+memory,{}
+v150,{storage_version=v1.5.0+}
+exit code 0
+```
+
+DuckDB 1.5.5 sigue escribiendo los archivos en el formato 1.0.0 por defecto, para que las versiones anteriores puedan leerlos: la [página de almacenamiento](https://duckdb.org/docs/current/internals/storage) dice que las versiones 1.0 a 1.5 crean todas la versión de almacenamiento 64 por defecto. Lo comprobé con la CLI de DuckDB 1.0.0, que no forma parte de la CI, con dos archivos creados de la misma forma: leyó el del formato por defecto y rechazó el `v1.5.0`:
+
+```text
+Error: unable to open database "out/v-150.duckdb": IO Error: Trying to read a database file with version number 68, but we can only read version 64.
+The database file was created with an newer version of DuckDB.
+```
+
+El resto de ese mensaje todavía dice que el formato de almacenamiento aún no es estable y que lo será con la versión 1.0, que es precisamente la versión que lo imprime. Mantén el formato por defecto cuando un archivo se comparte con otras herramientas u otras versiones de DuckDB.
+
+## El registro de escritura anticipada
+
+Un cambio confirmado no se escribe en los bloques de inmediato. DuckDB lo añade a un registro de escritura anticipada (write-ahead log), un segundo archivo con el nombre de la base de datos más `.wal`, y lo traslada al archivo de base de datos en un **checkpoint**: cuando el WAL llega a 16 MiB (`checkpoint_threshold`), con [`CHECKPOINT`](https://duckdb.org/docs/current/sql/statements/checkpoint) y al cerrar la base de datos. El script desactiva el checkpoint al cerrar para ver el WAL:
+
+```bash
+run $db -c "PRAGMA disable_checkpoint_on_shutdown; CREATE TABLE steps AS SELECT j.id AS job_id, s.* FROM jobs j, unnest(j.steps) AS t(s);"
+files $db $db.wal
+run $db -c "SELECT count(*) AS steps FROM steps;"
+files $db $db.wal
+```
+
+```text
+Success
+exit code 0
+out/ci.duckdb: 798720 bytes
+out/ci.duckdb.wal: 135677 bytes
+steps
+2204
+exit code 0
+out/ci.duckdb: 1060864 bytes
+out/ci.duckdb.wal: absent
+```
+
+Después del primer proceso, el archivo de base de datos no ha cambiado y los 2.204 steps solo están en el WAL de 135.677 bytes. El segundo proceso reprodujo el WAL al abrir el archivo e hizo un checkpoint al cerrarlo: un bloque más, y ya no hay WAL. El archivo `.wal` cumple la función del [registro de transacciones de SQL Server](https://learn.microsoft.com/sql/relational-databases/logs/the-transaction-log-sql-server), pero solo vive hasta el siguiente checkpoint: no hay copias de seguridad ni truncamiento del registro que gestionar.
+
+La consecuencia para las copias de seguridad: una copia solo de `ci.duckdb` puede no incluir datos confirmados. En una prueba desechable, una copia hecha mientras existía el WAL se abrió sin su última tabla; con el archivo `.wal` copiado al lado, la tabla estaba. Copia ambos archivos, o ejecuta antes `CHECKPOINT`, o cierra la base de datos.
+
+## Bloques libres y compactación
+
+```bash
+run $db -c "SELECT total_blocks, used_blocks, free_blocks FROM pragma_database_size();"
+run $db -c "DROP TABLE jobs; CHECKPOINT; SELECT total_blocks, used_blocks, free_blocks FROM pragma_database_size();"
+run -c "ATTACH '$db' AS ci; ATTACH 'out/ci-compact.duckdb' AS compact; COPY FROM DATABASE ci TO compact;"
+files $db out/ci-compact.duckdb
+```
+
+```text
+total_blocks,used_blocks,free_blocks
+4,4,0
+exit code 0
+Success
+total_blocks,used_blocks,free_blocks
+4,3,1
+exit code 0
+exit code 0
+out/ci.duckdb: 1060864 bytes
+out/ci-compact.duckdb: 798720 bytes
+```
+
+Eliminar `jobs` liberó un bloque en medio del archivo: DuckDB lo reutiliza para las escrituras siguientes, pero el archivo conserva su tamaño. En una versión anterior del script, eliminé `steps`, la última tabla escrita, y el archivo volvió a 798.720 bytes: los bloques libres al final del archivo se recortan. Para recuperar el espacio en cualquier caso, [`COPY FROM DATABASE`](https://duckdb.org/docs/current/sql/statements/copy) copia todas las tablas a un archivo nuevo.
+
+## Transacciones
+
+Cada sentencia se ejecuta en su propia transacción, salvo que abras una con `BEGIN`:
+
+```sql
+BEGIN;
+DELETE FROM runs;
+SELECT count(*) AS runs_in_transaction FROM runs;
+ROLLBACK;
+SELECT count(*) AS runs_after_rollback FROM runs;
+BEGIN;
+CREATE TABLE counters (name VARCHAR PRIMARY KEY, n INTEGER);
+INSERT INTO counters VALUES ('builds', 0);
+INSERT INTO counters VALUES ('builds', 1);
+SELECT count(*) FROM counters;
+COMMIT;
+SELECT count(*) FROM counters;
+```
+
+```text
+runs_in_transaction
+0
+runs_after_rollback
+125
+Constraint Error: PRIMARY KEY or UNIQUE constraint violation: duplicate key "builds"
+TransactionContext Error: Current transaction is aborted (please ROLLBACK)
+Catalog Error: Table with name counters does not exist!
+Did you mean "pg_constraint"?
+
+LINE 1: SELECT count(*) FROM counters;
+                             ^
+exit code 1
+```
+
+Tres cosas que leer en esta salida:
+
+- `CREATE TABLE` es transaccional: el rollback también eliminó la tabla.
+- El primer error abortó toda la transacción. El `SELECT` siguiente fue rechazado, y el `INSERT` válido anterior al error se perdió.
+- **El `COMMIT` de una transacción abortada no mostró ningún error.** Hizo un rollback, en silencio: la tabla no existe después. La única señal en la CLI es el código de salida, 1 por los errores anteriores. El programa Java de más abajo muestra el mismo comportamiento a través de JDBC.
+
+Un desarrollador de SQL Server espera otra cosa: con [`SET XACT_ABORT OFF`](https://learn.microsoft.com/sql/t-sql/statements/set-xact-abort-transact-sql), el valor por defecto, una violación de restricción solo revierte la sentencia, y `COMMIT` confirma el resto. En DuckDB, comprueba cada sentencia de una transacción y no te fíes de un `COMMIT` que no lanzó una excepción.
+
+La [página de transacciones](https://duckdb.org/docs/current/sql/statements/transactions) indica el nivel de aislamiento: aislamiento de instantánea (snapshot isolation). Una transacción ve la base de datos tal como estaba cuando empezó la transacción.
+
+## Restricciones y upserts
+
+```sql
+CREATE TABLE counters (name VARCHAR PRIMARY KEY, n INTEGER);
+INSERT INTO counters VALUES ('builds', 0), ('deploys', 0);
+INSERT INTO counters VALUES ('builds', 5);
+INSERT INTO counters VALUES ('builds', 5) ON CONFLICT DO UPDATE SET n = counters.n + excluded.n;
+INSERT OR REPLACE INTO counters VALUES ('deploys', 2);
+INSERT OR IGNORE INTO counters VALUES ('deploys', 99), ('tests', 1);
+FROM counters ORDER BY name;
+```
+
+```text
+Constraint Error: Duplicate key "name: builds" violates primary key constraint.
+name,n
+builds,5
+deploys,2
+tests,1
+exit code 1
+```
+
+La misma violación tiene dos mensajes: `Duplicate key "name: builds" violates primary key constraint` para una sentencia sola, y `PRIMARY KEY or UNIQUE constraint violation: duplicate key "builds"` dentro de una transacción, en la sección anterior. No te bases en el texto.
+
+Donde SQL Server tiene `MERGE`, DuckDB tiene [`INSERT … ON CONFLICT`](https://duckdb.org/docs/current/sql/statements/insert), como PostgreSQL: `excluded` es la fila que fue rechazada. `INSERT OR REPLACE` e `INSERT OR IGNORE` son los atajos de SQLite para `DO UPDATE` sobre todas las columnas y `DO NOTHING`. Necesitan una clave primaria o una [restricción](https://duckdb.org/docs/current/sql/constraints) única para detectar el conflicto.
+
+## Dos conexiones en un proceso
+
+Dos llamadas a `DriverManager.getConnection` con el mismo nombre de archivo comparten una sola base de datos: la segunda conexión ve la tabla que creó la primera. Cada conexión tiene su propia transacción:
+
+```java
+execute(a, "a", "CREATE TABLE counters (name VARCHAR PRIMARY KEY, n INTEGER)");
+execute(a, "a", "INSERT INTO counters VALUES ('builds', 0)");
+a.setAutoCommit(false);
+b.setAutoCommit(false);
+
+section("1. Isolation: b doesn't see what a hasn't committed");
+execute(a, "a", "UPDATE counters SET n = n + 1 WHERE name = 'builds'");
+execute(b, "b", "SELECT n FROM counters WHERE name = 'builds'");
+
+section("2. Two updates of the same row");
+execute(b, "b", "UPDATE counters SET n = n + 1 WHERE name = 'builds'");
+execute(b, "b", "SELECT n FROM counters WHERE name = 'builds'");
+commit(a, "a");
+commit(b, "b");
+execute(a, "a", "SELECT n FROM counters WHERE name = 'builds'");
+```
+
+`execute` imprime el primer valor del resultado, `ok` o el error, en una línea:
+
+```text
+== 1. Isolation: b doesn't see what a hasn't committed
+a: UPDATE counters SET n = n + 1 WHERE name = 'builds' -> ok
+b: SELECT n FROM counters WHERE name = 'builds' -> 0
+
+== 2. Two updates of the same row
+b: UPDATE counters SET n = n + 1 WHERE name = 'builds' -> TransactionContext Error: Conflict on update!
+b: SELECT n FROM counters WHERE name = 'builds' -> Invalid Input Error: Attempting to execute an unsuccessful or closed pending query result | Error: TransactionContext Error: Current transaction is aborted (please ROLLBACK)
+a: commit -> ok
+b: commit -> ok
+a: SELECT n FROM counters WHERE name = 'builds' -> 1
+```
+
+En SQL Server, con el comportamiento de bloqueo por defecto, el `UPDATE` de `b` esperaría a que `a` confirmara y luego se aplicaría. DuckDB usa control de concurrencia optimista: `b` falla de inmediato con `Conflict on update!`, su transacción se aborta y `commit()` retorna sin excepción, como el `COMMIT` de la CLI. El contador termina en 1, no en 2: se perdió un incremento, y solo el error en el `UPDATE` te lo indica. La [página de concurrencia](https://duckdb.org/docs/current/connect/concurrency) sugiere volver a ejecutar la transacción; ese es el ejercicio 2.
+
+Las inserciones se comportan de otra manera:
+
+```text
+== 3. Two inserts with different keys
+a: INSERT INTO counters VALUES ('deploys', 1) -> ok
+b: INSERT INTO counters VALUES ('tests', 1) -> ok
+a: commit -> ok
+b: commit -> ok
+
+== 4. Two inserts with the same key
+a: INSERT INTO counters VALUES ('lint', 1) -> ok
+b: INSERT INTO counters VALUES ('lint', 2) -> ok
+a: commit -> ok
+b: commit -> TransactionContext Error: Failed to commit: PRIMARY KEY or UNIQUE constraint violation: duplicate key "lint"
+```
+
+Añadir filas a la misma tabla no genera conflictos. Una clave duplicada entre dos transacciones no se detecta en el `INSERT`, sino en el segundo commit, que esta vez sí lanza una excepción.
+
+El driver de C# envuelve el mismo motor, así que el comportamiento debería ser el mismo con DuckDB.NET; el programa C# de la lección 5 no lo prueba (*por verificar*).
+
+## Dos procesos
+
+Dentro de un proceso, muchas conexiones. Entre procesos, la regla es más sencilla: el script mantiene la base de datos abierta en un proceso de la CLI en segundo plano y luego inicia un segundo.
+
+```bash
+hold_open writer $db
+run_os_error $db -c "SELECT count(*) FROM runs;"
+run_os_error -readonly $db -c "SELECT count(*) FROM runs;"
+```
+
+Los dos intentos fallan, incluso el de solo lectura, y aunque el primer proceso no esté escribiendo nada. El mensaje depende del sistema operativo, así que el script solo compara el tipo de error y el código de salida, e imprime el mensaje completo en la salida de error. De los logs de la CI y de mi máquina:
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+```text
+IO Error: Cannot open file "out/ci.duckdb": The process cannot access the file because it is being used by another process.
+
+File is already open in 
+C:\Users\spare\tools\duckdb-1.5.5\duckdb.exe (PID 147148)
+```
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```text
+IO Error: Could not set lock on file "/home/runner/work/learn/learn/code/duckdb/out/ci.duckdb": Conflicting lock is held in /home/runner/.duckdb/cli/1.5.5/duckdb (PID 2268). See also https://duckdb.org/docs/stable/connect/concurrency
+```
+
+</TabItem>
+<TabItem label="macOS">
+
+```text
+IO Error: Could not set lock on file "/Users/runner/work/learn/learn/code/duckdb/out/ci.duckdb": Conflicting lock is held in /Users/runner/.duckdb/cli/1.5.5/duckdb (PID 1345) by user runner. See also https://duckdb.org/docs/stable/connect/concurrency
+```
+
+</TabItem>
+</Tabs>
+
+Los tres nombran el proceso que tiene el archivo, lo que ayuda cuando una CLI olvidada o un IDE lo mantiene abierto. La pestaña Linux / WSL viene del runner de Ubuntu, no de WSL.
+
+Los procesos que abren el archivo en solo lectura, con `-readonly` en la CLI, pueden compartirlo:
+
+```bash
+hold_open reader -readonly $db
+run -readonly $db -c "SELECT 'second reader' AS process, count(*) AS runs FROM runs;"
+run -readonly $db -c "INSERT INTO counters VALUES ('lint', 1);"
+run_os_error $db -c "SELECT count(*) FROM runs;"
+```
+
+```text
+process,runs
+second reader,125
+exit code 0
+Invalid Input Error: Cannot execute statement of type "INSERT" on database "ci" which is attached in read-only mode!
+exit code 1
+IO Error
+exit code 1
+```
+
+Un segundo lector funciona, un proceso de solo lectura no puede escribir, y un proceso que quiere escribir no puede abrir el archivo mientras un lector lo tiene abierto. En Linux y macOS, ese último mensaje añade una pista: `However, you would be able to open this database in read-only mode, e.g. by using the -readonly parameter in the CLI.` Con JDBC, la propiedad `duckdb.read_only` con valor `true` en las propiedades de conexión abrió el archivo en solo lectura en un programa desechable, y rechazó un `INSERT` con el mismo mensaje.
+
+Así que un archivo DuckDB tiene o bien **un proceso que lee y escribe**, con tantas conexiones e hilos como quiera dentro, o bien **varios procesos que solo leen**. La [página de concurrencia](https://duckdb.org/docs/current/connect/concurrency) enumera dos formas de sortear esta regla para varios procesos que escriben, ninguna probada en este curso: el protocolo remoto Quack, que convierte DuckDB en una base de datos cliente-servidor y está en beta en la 1.5; y [DuckLake](https://ducklake.select/), que guarda el catálogo en una base de datos como PostgreSQL y los datos en archivos Parquet. Y la [FAQ](https://duckdb.org/faq) desaconseja encarecidamente las cargas de lectura y escritura en almacenamiento conectado a la red.
+
+## Puntos clave
+
+- Un archivo de base de datos está formado por bloques de 256 KiB; `pragma_database_size` los muestra, y un bloque liberado se reutiliza pero no reduce el archivo salvo que esté al final. `COPY FROM DATABASE` compacta.
+- Los archivos nuevos usan por defecto el formato de almacenamiento 1.0.0, legible por DuckDB 1.0; `STORAGE_VERSION` permite optar por formatos más recientes.
+- Los cambios confirmados van primero al archivo `.wal`, y a la base de datos en un checkpoint. Haz copia de seguridad de ambos archivos, o haz antes un checkpoint.
+- El primer error aborta una transacción, y `COMMIT` hace entonces un rollback sin error, en la CLI y en JDBC.
+- `INSERT … ON CONFLICT`, `INSERT OR REPLACE` e `INSERT OR IGNORE` gestionan las claves duplicadas.
+- La concurrencia es optimista: una segunda actualización de la misma fila falla de inmediato, una clave duplicada falla en el commit, y añadir filas no genera conflictos. Reintenta la transacción.
+- Un proceso puede abrir un archivo para escribir, y entonces ningún otro proceso puede abrirlo; o varios procesos pueden abrirlo en solo lectura.
+
+## Ejercicios
+
+1. La CLI de DuckDB ejecuta tres sentencias en un solo argumento `-c`; la tercera viola la clave primaria. ¿Cuántas filas quedan? ¿Y con `BEGIN;` y `COMMIT;` alrededor?
+
+```bash
+duckdb -csv $db -c "INSERT INTO counters VALUES ('builds', 1); INSERT INTO counters VALUES ('tests', 1); INSERT INTO counters VALUES ('builds', 2);"
+```
+
+<details>
+<summary>Solución</summary>
+
+De [`shell/08-exercises.sh`](https://github.com/spareilleux/learn/blob/main/code/duckdb/shell/08-exercises.sh):
+
+```text
+== Exercise 1: three statements in one -c argument, the last one failing
+Constraint Error: Duplicate key "name: builds" violates primary key constraint.
+exit code 1
+rows
+2
+== Exercise 1: the same statements in an explicit transaction
+Constraint Error: PRIMARY KEY or UNIQUE constraint violation: duplicate key "builds"
+exit code 1
+rows
+0
+```
+
+Dos filas: cada sentencia se confirmó por separado, y solo se perdió la que falló. La [página de transacciones](https://duckdb.org/docs/current/sql/statements/transactions) dice que las sentencias enviadas juntas se ejecutan en una única transacción implícita y se revierten todas si una falla; eso no es lo que hizo la CLI con DuckDB 1.5.5, ni JDBC, donde `statement.execute` con las mismas tres sentencias también dejó dos filas en un programa desechable. Con `BEGIN` y `COMMIT`, el error abortó la transacción, `COMMIT` la revirtió en silencio y no quedó ninguna fila. Cuando varias sentencias deben tener éxito juntas, escribe la transacción de forma explícita.
+
+</details>
+
+2. En la sección 2 del programa Java, `b` pierde su incremento. Cambia el final de la sección para que el contador termine en 2.
+
+<details>
+<summary>Solución</summary>
+
+Después del conflicto, haz rollback de `b` y vuelve a ejecutar su transacción cuando `a` haya confirmado:
+
+```java
+commit(a, "a");
+b.rollback();
+execute(b, "b", "UPDATE counters SET n = n + 1 WHERE name = 'builds'");
+commit(b, "b");
+```
+
+En un programa desechable con la misma secuencia, partiendo de 1, el contador terminó en 3: se aplicaron ambos incrementos. En un programa real, el reintento es un bucle alrededor de toda la transacción, que vuelve a leer la fila, porque el valor que `b` leyó antes del conflicto está obsoleto. Reintenta solo en conflictos de escritura como `Conflict on update!`: una clave duplicada en el commit también es un `TransactionContext Error`, y reintentarla falla siempre. El `SQLState` es null con este driver (lección 6), así que el mensaje es todo lo que tienes.
+
+</details>
+
+3. Tu API de ASP.NET Core se ejecuta en dos instancias detrás de un balanceador de carga, y ambas deben insertar ejecuciones de CI en `ci.duckdb` en un disco compartido. ¿Qué ocurre y qué harías?
+
+<details>
+<summary>Solución</summary>
+
+La primera instancia que abre el archivo se queda con él; la segunda falla al arrancar o en su primera consulta con `IO Error`, como en la sección de dos procesos, y lo mismo le pasaría a cualquier otro proceso, incluso de solo lectura, mientras la primera instancia mantenga el archivo abierto. Un disco de red compartido lo empeora: la FAQ desaconseja ahí las cargas de lectura y escritura.
+
+Opciones, empezando por la más sencilla:
+
+- un solo escritor: un único proceso es dueño del archivo y las demás instancias le envían sus inserciones, mediante una API o una cola;
+- cada instancia escribe sus propios archivos (Parquet o su propio archivo DuckDB), y un lector los consulta todos con un glob, como en la lección 4;
+- abrir, escribir y cerrar rápido, y reintentar cuando el archivo está bloqueado: dos procesos se ejecutan uno tras otro sin problema, pero fallan bajo carga (*por verificar* a escala);
+- si los datos son realmente transaccionales y compartidos, una base de datos de servidor como PostgreSQL o SQL Server, posiblemente con DuckDB leyendo de ella para análisis; DuckLake y Quack son las respuestas de DuckDB, no probadas aquí.
+
+</details>
+
+## Fuentes
+
+- [Concurrencia](https://duckdb.org/docs/current/connect/concurrency) y [transacciones](https://duckdb.org/docs/current/sql/statements/transactions)
+- [`ATTACH`](https://duckdb.org/docs/current/sql/statements/attach), [`CHECKPOINT`](https://duckdb.org/docs/current/sql/statements/checkpoint), [`COPY FROM DATABASE`](https://duckdb.org/docs/current/sql/statements/copy)
+- [Versiones de almacenamiento y compatibilidad](https://duckdb.org/docs/current/internals/storage)
+- [Pragmas](https://duckdb.org/docs/current/configuration/pragmas): `database_size`, `disable_checkpoint_on_shutdown`
+- [`INSERT`](https://duckdb.org/docs/current/sql/statements/insert) y [restricciones](https://duckdb.org/docs/current/sql/constraints)
+- [Argumentos de la CLI](https://duckdb.org/docs/current/clients/cli/arguments), incluido `-readonly`
+- [DuckLake](https://ducklake.select/) y la [FAQ de DuckDB](https://duckdb.org/faq)
+- SQL Server: [registro de transacciones](https://learn.microsoft.com/sql/relational-databases/logs/the-transaction-log-sql-server), [`SET XACT_ABORT`](https://learn.microsoft.com/sql/t-sql/statements/set-xact-abort-transact-sql), [bloqueo y control de versiones de filas](https://learn.microsoft.com/sql/relational-databases/sql-server-transaction-locking-and-row-versioning-guide)

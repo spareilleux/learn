@@ -1,0 +1,339 @@
+---
+title: 6. DuckDB from Java
+description: The DuckDB JDBC driver — connection, result sets, prepared statements, Java types of DuckDB values, arrays and structs, a statement that closes itself after an error, native access warnings, and the appender.
+sidebar:
+  order: 6
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+The same program as [lesson 5](../05-csharp/), in Java, with the [DuckDB JDBC driver](https://duckdb.org/docs/current/clients/java/overview): [`java/src/main/java/ci/CiQueries.java`](https://github.com/spareilleux/learn/blob/main/code/duckdb/java/src/main/java/ci/CiQueries.java), compared with [`java/expected.txt`](https://github.com/spareilleux/learn/blob/main/code/duckdb/java/expected.txt) on the three operating systems. The differences with C# are the interesting part.
+
+## The project
+
+```xml
+  <dependencies>
+    <dependency>
+      <groupId>org.duckdb</groupId>
+      <artifactId>duckdb_jdbc</artifactId>
+      <version>1.5.5.1</version>
+    </dependency>
+  </dependencies>
+```
+
+One artifact, [`org.duckdb:duckdb_jdbc`](https://central.sonatype.com/artifact/org.duckdb/duckdb_jdbc), versioned after DuckDB with a fourth number for driver releases: 1.5.5.1 embeds DuckDB 1.5.5. The jar is 85 MB, because it contains the native library for four platforms:
+
+```text
+ 60780968  2026-08-03 22:27   libduckdb_java.so_linux_amd64
+108682352  2026-08-03 22:28   libduckdb_java.so_osx_universal
+ 35090432  2026-08-03 22:28   libduckdb_java.so_windows_amd64
+ 53584160  2026-08-03 22:28   libduckdb_java.so_linux_arm64
+```
+
+Where DuckDB.NET splits platforms into NuGet runtime folders, the JDBC driver ships one jar for all, and picks the right file at run time. There's no Windows on Arm build in this list.
+
+The program runs with the [Exec Maven Plugin](https://www.mojohaus.org/exec-maven-plugin/), from `code/duckdb` so that `data/…` paths resolve, like in C#:
+
+```bash
+mvn -q -f java/pom.xml compile exec:java -Dexec.args=check
+```
+
+## A query with a result set
+
+```java
+        // An in-memory database, like the CLI started without a file name
+        try (Connection connection = DriverManager.getConnection("jdbc:duckdb:")) {
+```
+
+```java
+        try (var statement = connection.createStatement();
+             var rs = statement.executeQuery("""
+                 SELECT workflowName, count(*) AS runs, count(*) FILTER (conclusion = 'failure') AS failures
+                 FROM 'data/runs.json'
+                 GROUP BY ALL
+                 ORDER BY runs DESC, workflowName
+                 LIMIT 3
+                 """)) {
+            while (rs.next()) {
+                System.out.printf("%-24s %3d runs %2d failures%n", rs.getString(1), rs.getLong("runs"), rs.getLong("failures"));
+            }
+        }
+```
+
+```text
+DuckDB v1.5.5
+
+== 1. A query with a result set
+Deploy to GitHub Pages    65 runs  2 failures
+Rust course examples      18 runs  3 failures
+Java course examples       7 runs  0 failures
+```
+
+`jdbc:duckdb:` with nothing after the colon is an in-memory database; `jdbc:duckdb:ci.duckdb` opens a file. The output is the same as the C# program's, character for character, apart from the section title.
+
+## Parameters
+
+```java
+        try (var ps = connection.prepareStatement(
+                "SELECT count(*) FROM read_json(?) WHERE workflowName = ? AND conclusion = ?")) {
+            ps.setString(1, "data/runs.json");
+            ps.setString(2, "Rust course examples");
+            ps.setString(3, "failure");
+            try (var rs = ps.executeQuery()) {
+                rs.next();
+                System.out.println("Rust course failures: " + rs.getLong(1));
+            }
+        }
+```
+
+```text
+== 2. Parameters
+Rust course failures: 3
+```
+
+JDBC's `?` placeholders, numbered from 1. The file path is a parameter here too.
+
+## DuckDB types as Java types
+
+The same query as in C#:
+
+```text
+== 3. DuckDB types as Java types
+workflowName VARCHAR                                java.lang.String
+databaseId   BIGINT                                 java.lang.Long
+createdAt    TIMESTAMP                              java.sql.Timestamp
+day          DATE                                   java.time.LocalDate
+took         INTERVAL                               java.lang.String
+created_utc  TIMESTAMP WITH TIME ZONE               java.time.OffsetDateTime
+total        HUGEINT                                java.math.BigInteger
+pair         VARCHAR[]                              org.duckdb.DuckDBArray
+info         STRUCT("event" VARCHAR, attempt BIGINT) org.duckdb.DuckDBStruct
+took: 00:00:39
+created_utc as an instant: 2026-09-13T15:53:16Z
+created_utc in UTC: 2026-09-13T15:53:16Z
+```
+
+Side by side with lesson 5:
+
+| DuckDB | C# (DuckDB.NET) | Java (JDBC) |
+|---|---|---|
+| `TIMESTAMP` | `DateTime` | `java.sql.Timestamp`, or `LocalDateTime` with `getObject(i, LocalDateTime.class)` |
+| `DATE` | `DateOnly` | `LocalDate` |
+| `INTERVAL` | `TimeSpan` | **`String`** |
+| `TIMESTAMPTZ` | `DateTime`, UTC value, `Kind` `Unspecified` | `OffsetDateTime` **in the JVM's time zone** |
+| `HUGEINT` | `BigInteger` | `BigInteger` |
+| `LIST` | `List<T>` | `java.sql.Array` |
+| `STRUCT` | `Dictionary<string, object>` or a class | `java.sql.Struct` (`DuckDBStruct`) |
+
+- `INTERVAL` arrives as the text `00:00:39`. To compute with it, convert in SQL (`epoch(took)` gives seconds as a `DOUBLE`) rather than parsing the string.
+- `TIMESTAMP WITH TIME ZONE` becomes an [`OffsetDateTime`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/OffsetDateTime.html) expressed in the JVM's default zone. The same instant printed on this machine with `getObject(i).toString()`: `2026-09-13T11:53:16-04:00`; with `-Duser.timezone=UTC`: `2026-09-13T15:53:16Z`. DuckDB's own `SET TimeZone` or a `TimeZone` connection property changed nothing in the Java value. That's why the program prints `toInstant()` and `withOffsetSameInstant(ZoneOffset.UTC)`, which don't depend on where it runs.
+
+## Arrays and structs
+
+```java
+        try (var statement = connection.createStatement();
+             var rs = statement.executeQuery("SELECT labels, steps FROM 'data/jobs.json' WHERE id = 104004920113")) {
+            rs.next();
+            Array labels = rs.getArray("labels");
+            System.out.println("labels: " + Arrays.toString((Object[]) labels.getArray()));
+            Object[] steps = (Object[]) rs.getArray("steps").getArray();
+            for (int i = 0; i < 3; i++) {
+                Map<String, Object> step = ((DuckDBStruct) steps[i]).getMap();
+                System.out.println("step " + step.get("number") + ": " + step.get("name") + ", " + step.get("conclusion")
+                        + ", started_at is a " + step.get("started_at").getClass().getName());
+            }
+        }
+```
+
+```text
+== 4. Lists and structs
+labels: [ubuntu-latest]
+step 1: Set up job, success, started_at is a java.sql.Timestamp
+step 2: Checkout, success, started_at is a java.sql.Timestamp
+step 3: Install, build, and upload site, success, started_at is a java.sql.Timestamp
+```
+
+JDBC predates generics in this area: [`Array.getArray()`](https://docs.oracle.com/en/java/javase/25/docs/api/java.sql/java/sql/Array.html) returns an `Object` to cast, and a struct is a [`java.sql.Struct`](https://docs.oracle.com/en/java/javase/25/docs/api/java.sql/java/sql/Struct.html) whose standard `getAttributes()` gives the values by position only. The driver's `DuckDBStruct.getMap()` adds the names, at the price of a cast to a driver class. There's no mapping to a record or a class: that's the job of a library like Spring's `JdbcTemplate` or jOOQ, *not tried in this course*.
+
+## Errors: a statement that closes itself
+
+```java
+        try (var statement = connection.createStatement()) {
+            try {
+                statement.executeQuery("SELECT workflow_name FROM 'data/runs.json'");
+            } catch (SQLException e) {
+                String[] lines = e.getMessage().split("\n");
+                System.out.println(e.getClass().getName() + ", SQLState = " + e.getSQLState());
+                System.out.println(lines[0]);
+                System.out.println(lines[1]);
+            }
+            System.out.println("statement closed after the error: " + statement.isClosed());
+            try {
+                statement.executeQuery("SELECT 42");
+            } catch (SQLException e) {
+                System.out.println("next query on the same statement: " + e.getMessage());
+            }
+        }
+```
+
+```text
+== 5. Errors
+java.sql.SQLException, SQLState = null
+Invalid Input Error: Attempting to execute an unsuccessful or closed pending query result
+Error: Binder Error: Referenced column "workflow_name" not found in FROM clause!
+statement closed after the error: true
+next query on the same statement: Statement was closed
+```
+
+Three differences with C#:
+
+- The message starts with a generic line, `Attempting to execute an unsuccessful or closed pending query result`, and the actual error comes on the second line, after `Error: `. A log that keeps only the first line of the message keeps nothing useful.
+- `SQLState` is `null`: code that checks SQL states, such as a retry on `40001`, gets nothing from this driver.
+- **The statement is closed after the error.** In C#, the same `DuckDBCommand` ran the next query. In Java, a loop that reuses one `Statement` and catches errors to continue fails on every query after the first error, with `Statement was closed`. Create a statement per query, which `try`-with-resources makes natural.
+
+## Native access on JDK 25
+
+Through Maven, the program prints nothing but its output. Run directly with `java`, it starts with four warnings:
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+```powershell
+java -cp "java/target/classes;$env:USERPROFILE\.m2\repository\org\duckdb\duckdb_jdbc\1.5.5.1\duckdb_jdbc-1.5.5.1.jar" ci.CiQueries check
+```
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```bash
+java -cp "java/target/classes:$HOME/.m2/repository/org/duckdb/duckdb_jdbc/1.5.5.1/duckdb_jdbc-1.5.5.1.jar" ci.CiQueries check
+```
+
+*To verify*: run on Windows only; the classpath separator is `:` outside Windows.
+
+</TabItem>
+<TabItem label="macOS">
+
+```bash
+java -cp "java/target/classes:$HOME/.m2/repository/org/duckdb/duckdb_jdbc/1.5.5.1/duckdb_jdbc-1.5.5.1.jar" ci.CiQueries check
+```
+
+*To verify*: run on Windows only; the classpath separator is `:` outside Windows.
+
+</TabItem>
+</Tabs>
+
+```text
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by org.duckdb.DuckDBNative in an unnamed module (file:/C:/Users/spare/.m2/repository/org/duckdb/duckdb_jdbc/1.5.5.1/duckdb_jdbc-1.5.5.1.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+```
+
+Loading a native library is a "restricted method" since [JEP 472](https://openjdk.org/jeps/472): a warning today, an error in a future JDK. `java --enable-native-access=ALL-UNNAMED -cp …` removes the warnings. Maven didn't show them because its launch script already passes that option to the JVM it runs in (`bin/mvn`, Maven 3.9.16), and `exec:java` runs the program inside that JVM. A packaged application must add the option to its own launch command.
+
+## Bulk loading
+
+The `timings` mode loads a million rows with the driver's appender, then 10,000 rows with a batch and with single `INSERT` statements, in a transaction:
+
+```java
+        try (var appender = connection.unwrap(DuckDBConnection.class).createAppender(DuckDBConnection.DEFAULT_SCHEMA, "numbers")) {
+            for (int i = 0; i < appended; i++) {
+                appender.beginRow();
+                appender.append(i);
+                appender.append("n" + i);
+                appender.endRow();
+            }
+        }
+```
+
+`unwrap` is the JDBC way to reach a driver's own class from a `Connection`. The CI timings, with the C# ones of lesson 5 for comparison:
+
+| Runner | Java appender, 1,000,000 rows | Java batch, 10,000 rows | Java one by one, 10,000 rows | C# `INSERT`, 10,000 rows |
+|---|---|---|---|---|
+| `ubuntu-latest` | 257 ms | 858 ms | 832 ms | 3,165 ms |
+| `windows-latest` | 511 ms | 2,443 ms | 2,378 ms | 3,917 ms |
+| `macos-latest` | 212 ms | 690 ms | 675 ms | 1,312 ms |
+
+- The appender loads a million rows in about the time C# takes, apart from Windows.
+- `addBatch` and `executeBatch` bring nothing: the batch was no faster than single statements on any runner, or on this machine (609 ms against 532 ms). With this driver, a JDBC batch doesn't send the rows in one call. Use the appender, or `INSERT … SELECT` from a file.
+- The single `INSERT` statements are 1.6 to 3.8 times faster in Java than in C#. *Not investigated*: both prepare the statement once; the difference may be in how each wrapper binds parameters.
+
+## Key takeaways
+
+- One jar, `org.duckdb:duckdb_jdbc`, holds the driver and the native libraries of four platforms; the JDBC URL `jdbc:duckdb:` opens an in-memory database.
+- `INTERVAL` is a `String`, and `TIMESTAMPTZ` an `OffsetDateTime` in the JVM's zone: convert to an `Instant` before printing or comparing.
+- Arrays and structs go through `java.sql.Array` and `DuckDBStruct.getMap()`, with casts.
+- After an error, the statement is closed: one statement per query.
+- JDK 25 warns about native access unless the JVM is started with `--enable-native-access=ALL-UNNAMED`.
+- JDBC batches don't speed up inserts with this driver; the appender does.
+
+## Exercises
+
+1. A service runs `SELECT createdAt AT TIME ZONE 'UTC' FROM runs` and returns `rs.getObject(1).toString()` in a JSON response. It gives `2026-09-13T15:53:16Z` in production and `2026-09-13T11:53:16-04:00` on a developer's laptop. Is one of them wrong? How do you make them agree?
+
+<details>
+<summary>Solution</summary>
+
+Neither is wrong: both are the same instant, with different offsets. The value depends on the JVM's default time zone (`user.timezone`, or the OS setting), as the lesson measured. To make the output independent of the machine, choose the representation in code: `rs.getObject(1, OffsetDateTime.class).toInstant()` prints `2026-09-13T15:53:16Z` everywhere, and so does `withOffsetSameInstant(ZoneOffset.UTC)`. Starting the JVM with `-Duser.timezone=UTC` also works, but it changes every date of the application, and it's easy to forget on one machine.
+
+</details>
+
+2. This loop inserts rows and skips the invalid ones. With the DuckDB driver, what happens after the first invalid row?
+
+```java
+try (var statement = connection.createStatement()) {
+    for (String sql : statements) {
+        try {
+            statement.execute(sql);
+        } catch (SQLException e) {
+            System.err.println("skipped: " + e.getMessage());
+        }
+    }
+}
+```
+
+<details>
+<summary>Solution</summary>
+
+Every following statement fails with `Statement was closed`, and the loop "skips" all the remaining rows, valid or not: section 5 of the program shows the statement closed after a failed query. Create the statement inside the loop:
+
+```java
+for (String sql : statements) {
+    try (var statement = connection.createStatement()) {
+        statement.execute(sql);
+    } catch (SQLException e) {
+        System.err.println("skipped: " + e.getMessage());
+    }
+}
+```
+
+Checked in a scratch program with three `INSERT` statements, the second one inserting `'x'` into an `INTEGER` column:
+
+```text
+skipped: Invalid Input Error: Attempting to execute an unsuccessful or closed pending query result
+skipped: Statement was closed
+rows: 1
+```
+
+The third row, valid, was never inserted.
+
+</details>
+
+3. The C# program formats dates with `CultureInfo.InvariantCulture`. Does the Java program have the same problem with `printf("%,d")` in its `timings` mode, and does it matter for the CI?
+
+<details>
+<summary>Solution</summary>
+
+Yes: `%,d` uses the default locale's grouping separator. The CI printed `1,000,000`; in a scratch program, `String.format(Locale.FRANCE, "%,d", 1_000_000)` separated the groups with U+202F, a narrow no-break space, which looks like a space and isn't one for a parser. It doesn't matter for the CI, because `check.sh` only compares the `check` mode's output, and the timings aren't compared. For output that is compared or parsed, use `String.format(Locale.ROOT, …)`, which gave `1,000,000`.
+
+</details>
+
+## Sources
+
+- [DuckDB Java (JDBC) client](https://duckdb.org/docs/current/clients/java/overview), [connecting](https://duckdb.org/docs/current/clients/java/connecting), [querying](https://duckdb.org/docs/current/clients/java/querying), [result handling](https://duckdb.org/docs/current/clients/java/result_handling) and [data import](https://duckdb.org/docs/current/clients/java/data_import)
+- [DuckDB Java source code](https://github.com/duckdb/duckdb-java)
+- [`org.duckdb:duckdb_jdbc` on Maven Central](https://central.sonatype.com/artifact/org.duckdb/duckdb_jdbc)
+- [JEP 472: Prepare to Restrict the Use of JNI](https://openjdk.org/jeps/472)
+- [`java.sql` package](https://docs.oracle.com/en/java/javase/25/docs/api/java.sql/java/sql/package-summary.html)
+- [Exec Maven Plugin](https://www.mojohaus.org/exec-maven-plugin/)

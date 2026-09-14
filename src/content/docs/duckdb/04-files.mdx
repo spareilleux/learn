@@ -251,7 +251,7 @@ C:\Users\<you>\.duckdb\extensions\v1.5.5\windows_amd64\httpfs.duckdb_extension
 </TabItem>
 </Tabs>
 
-The CI of this course downloads it on each run, on each operating system, without any configuration. A machine without Internet access can't download it: run `INSTALL httpfs` ahead of time where the network is available. For Parquet over HTTP, DuckDB reads only the parts of the file it needs, with range requests; *to verify* in lesson 7.
+The CI of this course downloads it on each run, on each operating system, without any configuration. A machine without Internet access can't download it: run `INSTALL httpfs` ahead of time where the network is available. For Parquet over HTTP, DuckDB reads only the parts of the file it needs, with range requests: [lesson 7](../07-performance/#a-remote-parquet-file) counts the bytes.
 
 ## Key takeaways
 
