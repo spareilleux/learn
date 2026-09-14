@@ -50,6 +50,11 @@ export default defineConfig({
 									collapsed: true,
 									items: [{ autogenerate: { directory: 'java-for-csharp' } }],
 								},
+								{
+									label: 'V for C#/Java developers',
+									collapsed: true,
+									items: [{ autogenerate: { directory: 'v-for-csharp-java' } }],
+								},
 							],
 						},
 						{
