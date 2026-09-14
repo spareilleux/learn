@@ -38,6 +38,7 @@ jobs:
           echo "loud:     ${{ inputs.loud }}"
       - name: Scheduled run
         if: github.event_name == 'schedule'
-        run: echo "cron: ${{ github.event.schedule }}"
+        run: |
+          echo "cron: ${{ github.event.schedule }}"
       - name: Slow step (to see concurrency cancel a run)
         run: sleep 60
