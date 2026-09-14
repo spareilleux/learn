@@ -1,0 +1,50 @@
+result
+Table Project has been created.
+result,skipped_duplicate_pk_count,skipped_duplicate_pks
+111 tuples have been copied to the Project table.,0,[]
+Error: Runtime exception: Found duplicated primary key value Common/GA.Core/GA.Core.csproj, which violates the uniqueness constraint of the primary key column.
+projects
+111
+
+
+inside
+112
+
+after_rollback
+111
+
+result
+Table Package has been created.
+result,skipped_duplicate_pk_count,skipped_duplicate_pks
+136 tuples have been copied to the Package table.,0,[]
+packages_inside
+136
+
+name
+Project
+
+
+Error: Runtime exception: Found duplicated primary key value Common/GA.Core/GA.Core.csproj, which violates the uniqueness constraint of the primary key column.
+
+Error: No active transaction for ROLLBACK.
+p.name
+Three
+
+
+Error: Connection already has an active transaction. Cannot start a transaction within another one. For concurrent multiple transactions, please open other connections.
+Error: No active transaction for COMMIT.
+p.name
+Three
+
+read_only
+112
+Error: Can not execute a write query inside a read-only transaction.
+
+
+
+Error: Found active transaction for CHECKPOINT.
+Error: No active transaction for COMMIT.
+p.name
+Three
+checkpoint_threshold
+16777216

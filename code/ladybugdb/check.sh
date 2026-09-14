@@ -34,6 +34,17 @@ for script in cypher/*.cypher; do
     status=1
   fi
 done
+# Database files and processes (lesson 8): the lines starting with "# " depend on the OS and aren't compared
+bash files/files.sh > out/files.txt 2>&1
+if grep -v '^# ' out/files.txt | diff --strip-trailing-cr files/expected.txt -; then
+  echo "ok   files"
+else
+  echo "FAIL files"
+  status=1
+fi
+echo "--- files: what depends on the OS"
+grep '^# ' out/files.txt || true
+echo "---"
 # SQL cross-checks, run with DuckDB when it's installed (the CI installs it)
 if command -v duckdb > /dev/null; then
   duckdb --version

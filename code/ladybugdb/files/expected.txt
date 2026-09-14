@@ -1,0 +1,65 @@
+== 1. A read-only CLI can't create a file
+Cannot create an empty database under READ ONLY mode.
+files: 
+== 2. Create and load, then close
+files: ga.lbdb 
+== 3. A process that stays open after a commit
+files: ga.lbdb ga.lbdb.wal 
+-- a second process, read-write
+IO exception: Could not set lock on file : out/files/ga.lbdb
+See the docs: https://docs.ladybugdb.com/concurrency for more information.
+-- a second process, read-only
+== 4. The same process, killed
+files: ga.lbdb ga.lbdb.wal 
+projects
+112
+files: ga.lbdb 
+== 5. Killed inside a transaction
+files: ga.lbdb 
+p.name
+One
+== 6. A read-only process, then a writer
+
+
+
+projects
+1111
+-- what the reader saw
+projects
+112
+projects
+112
+ga_core
+1
+== 7. EXPORT DATABASE and IMPORT DATABASE
+result
+Macro: MAJOR has been created.
+result
+Exported database successfully.
+export: Project.csv REFERENCES_Project_Project.csv copy.cypher index.cypher schema.cypher 
+CREATE NODE TABLE `Project` (`path` STRING,`name` STRING,`language` STRING,`sdk` STRING,`frameworks` STRING,`in_solution` BOOL, PRIMARY KEY(`path`));
+CREATE REL TABLE `REFERENCES` (FROM `Project` TO `Project`, MANY_MANY);
+CREATE MACRO `MAJOR` (version) AS split_part(version, '.', 1);
+a.path,a.name,a.language,a.sdk,a.frameworks,a.in_solution
+result
+Imported database successfully.
+projects
+1111
+references
+233
+major
+10
+-- into a database that isn't empty
+Error: Runtime exception: Import database failed: Binder exception: Project already exists in catalog.
+== 8. A file of LadybugDB 0.19.1, opened by 0.20.4
+-- 0.20.4, read-only
+projects
+1
+-- 0.19.1
+projects
+1
+-- 0.20.4, read-write
+projects
+1
+-- 0.19.1 again
+Runtime exception: Trying to read a database file with a different version. Database file version: 47, Current build storage version: 43

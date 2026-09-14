@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# LadybugDB course, lesson 6: run the Java program from code/ladybugdb and compare its output with the expected one,
+# LadybugDB course, lessons 6 and 8: run the Java programs from code/ladybugdb and compare their output with the expected one,
 # then share a database file between the Maven package (0.20.4) and the CLI (0.20.4)
 set -euo pipefail
 cd "$(dirname "$0")/.."
@@ -24,6 +24,15 @@ if diff --strip-trailing-cr java/expected-files.txt out/java/files.txt; then
 else
   echo "FAIL java/files"; status=1
 fi
+# Lesson 8: transactions and concurrency; the lines starting with "# " depend on the OS or on timing
+mvn -B -q -f java/pom.xml exec:java -Dexec.mainClass=graph.Transactions 2>&1 | grep -v '^Warning: failed to create directory' > out/java/transactions.txt || true
+if grep -v '^# ' out/java/transactions.txt | diff --strip-trailing-cr java/expected-transactions.txt -; then
+  echo "ok   java/transactions"
+else
+  echo "FAIL java/transactions"; status=1
+fi
+echo "== Transactions: what depends on the OS or on timing (not compared)"
+grep '^# ' out/java/transactions.txt || true
 echo "== Native library copies (not compared)"
 run temp
 run timings | sed -n '/Timings/,$p'
