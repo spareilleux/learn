@@ -135,7 +135,7 @@ Metadata: read
 Packages: read
 ```
 
-`ubuntu-latest` is a moving label: in September 2026 it's Ubuntu 24.04. And the job received a `GITHUB_TOKEN` that can only **read** the repository — lesson 7 explains how to widen or narrow it.
+`ubuntu-latest` is a moving label: in September 2026 it's Ubuntu 24.04. And the job received a `GITHUB_TOKEN` that can only **read** the repository — [lesson 7](../07-security/) explains how to widen or narrow it.
 
 ## Trap: an invalid workflow fails on every push
 

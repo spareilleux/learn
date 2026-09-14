@@ -135,7 +135,7 @@ Metadata: read
 Packages: read
 ```
 
-`ubuntu-latest` est une étiquette mouvante : en septembre 2026, c'est Ubuntu 24.04. Et le job a reçu un `GITHUB_TOKEN` qui ne peut que **lire** le dépôt — la leçon 7 explique comment l'élargir ou le restreindre.
+`ubuntu-latest` est une étiquette mouvante : en septembre 2026, c'est Ubuntu 24.04. Et le job a reçu un `GITHUB_TOKEN` qui ne peut que **lire** le dépôt — la [leçon 7](../07-security/) explique comment l'élargir ou le restreindre.
 
 ## Piège : un workflow invalide échoue à chaque push
 

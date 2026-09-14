@@ -208,7 +208,7 @@ From the reference:
 
 - "You can connect up to ten levels of workflows" (the caller plus nine nested levels);
 - "You can call a maximum of 50 unique reusable workflows from a single workflow file";
-- a reusable workflow referenced by branch or tag can change under your feet; a commit SHA can't. Lesson 7 comes back to pinning.
+- a reusable workflow referenced by branch or tag can change under your feet; a commit SHA can't. [Lesson 7](../07-security/) comes back to pinning.
 
 ## Key takeaways
 

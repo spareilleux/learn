@@ -135,7 +135,7 @@ Metadata: read
 Packages: read
 ```
 
-`ubuntu-latest` es una etiqueta que cambia con el tiempo: en septiembre de 2026 es Ubuntu 24.04. Y el job recibió un `GITHUB_TOKEN` que solo puede **leer** el repositorio — la lección 7 explica cómo ampliarlo o restringirlo.
+`ubuntu-latest` es una etiqueta que cambia con el tiempo: en septiembre de 2026 es Ubuntu 24.04. Y el job recibió un `GITHUB_TOKEN` que solo puede **leer** el repositorio — la [lección 7](../07-security/) explica cómo ampliarlo o restringirlo.
 
 ## Trampa: un workflow inválido falla en cada push
 

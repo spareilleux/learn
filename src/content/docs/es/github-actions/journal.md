@@ -14,7 +14,7 @@ sidebar:
 - [x] Lección 4: expresiones, contextos, salidas, condiciones
 - [x] Lección 5: cachés y artefactos (caché de NuGet con `packages.lock.json`, `actions/cache`, artefactos entre jobs)
 - [x] Lección 6: workflows reutilizables y acciones compuestas
-- [ ] Lección 7: seguridad — permisos, secretos, fijación de versiones, OIDC
+- [x] Lección 7: seguridad — permisos, secretos, fijación de versiones, OIDC
 - [ ] Lección 8: desplegar en GitHub Pages
 - [ ] Lección 9: depurar ejecuciones
 - [ ] Lección 10: escribir tu propia action
@@ -70,8 +70,17 @@ El sitio se quedó en la versión anterior hasta el push siguiente. Corrección 
 - `run:` de acción compuesta sin `shell:`: `Required property is missing: shell`, solo cuando un job ejecuta la acción.
 - Input no declarado: `startup_failure`, ningún job, y `gh run view` no muestra el motivo (la página de la ejecución, sí). Probado desde una rama temporal `gha-06-invalid` para que `main` nunca contuviera un workflow no válido. El borrado de la rama remota lo bloqueó un hook de seguridad local: sigue ahí, hay que borrarla a mano.
 
+## 2026-09-14 — Lección 7: permisos que no restringen y una inyección que se ejecuta
+
+- `gh run list` desde un job con solo `contents: read` (sin `actions: read`) funcionó: datos públicos de un repositorio público. Se sustituyó por la creación de una etiqueta con nombre vacío: 403 `Resource not accessible by integration` sin `issues: write`, 422 `Validation Failed` con él — no se creó nada en ningún caso.
+- `permissions: actions: read` a nivel de job → el token perdió `Contents`, y `actions/checkout` funcionó igualmente en este repositorio público.
+- El input de `workflow_dispatch` `$(whoami)`, pegado con `${{ }}` en `run:`, imprimió `runner`; a través de `env:`, imprimió `$(whoami)`.
+- `::add-mask::` oculta el valor solo en las líneas impresas después.
+- Token OIDC para la audiencia `learn-course`: duración 300 s, `sub` = `repo:spareilleux@6644695/learn@1368550922:ref:refs/heads/main`, el formato inmutable de los repositorios creados después del 2026-07-15.
+
 ## Preguntas abiertas
 
 - ¿El disparador `schedule` de `gha-03` (lunes 06:17 UTC) se ejecuta a su hora? *Por verificar el 2026-09-21.*
 - ¿Qué artefacto elige `download-artifact` cuando dos comparten nombre, y es estable? *Por verificar.*
+- ¿Falla `actions/checkout` en un repositorio privado cuando el token del job no tiene el permiso `contents`? *Por verificar.*
 - ¿Qué muestra exactamente la página de un pull request para un check obligatorio omitido por `paths`? *Por verificar.*

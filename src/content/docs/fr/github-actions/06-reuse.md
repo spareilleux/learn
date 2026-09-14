@@ -208,7 +208,7 @@ D'après la référence :
 
 - « Tu peux connecter jusqu'à dix niveaux de workflows » (l'appelant plus neuf niveaux imbriqués) ;
 - « Tu peux appeler au maximum 50 workflows réutilisables uniques depuis un même fichier de workflow » ;
-- un workflow réutilisable référencé par branche ou par tag peut changer sans prévenir ; un SHA de commit, non. La leçon 7 revient sur l'épinglage.
+- un workflow réutilisable référencé par branche ou par tag peut changer sans prévenir ; un SHA de commit, non. La [leçon 7](../07-security/) revient sur l'épinglage.
 
 ## À retenir
 

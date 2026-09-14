@@ -208,7 +208,7 @@ Según la referencia:
 
 - «Puedes conectar hasta diez niveles de workflows» (el llamador más nueve niveles anidados);
 - «Puedes llamar a un máximo de 50 workflows reutilizables únicos desde un solo archivo de workflow»;
-- un workflow reutilizable referenciado por rama o por tag puede cambiar sin avisar; un SHA de commit, no. La lección 7 vuelve sobre la fijación de versiones.
+- un workflow reutilizable referenciado por rama o por tag puede cambiar sin avisar; un SHA de commit, no. La [lección 7](../07-security/) vuelve sobre la fijación de versiones.
 
 ## Puntos clave
 

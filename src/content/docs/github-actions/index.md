@@ -39,7 +39,7 @@ You know how to build and test a .NET or Java project from the command line (`do
 | 4 | [Expressions, contexts and outputs](04-expressions-and-outputs/) | `$[ ]`, variables, output variables, `condition` |
 | 5 | [Caches and artifacts](05-caches-and-artifacts/) | `Cache@2`, `PublishPipelineArtifact@1` |
 | 6 | [Reusable workflows and composite actions](06-reuse/) | step, job and stage templates |
-| 7 | Security: permissions, secrets, OIDC *(coming)* | service connections |
+| 7 | [Security: permissions, secrets, pinning, OIDC](07-security/) | service connections, workload identity federation |
 | 8 | Deploying to GitHub Pages *(coming)* | environments, approvals |
 | 9 | Debugging runs *(coming)* | diagnostic logs |
 | 10 | Writing your own action *(coming)* | custom tasks |

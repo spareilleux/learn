@@ -14,7 +14,7 @@ sidebar:
 - [x] Lesson 4: expressions, contexts, outputs, conditions
 - [x] Lesson 5: caches and artifacts (NuGet cache with `packages.lock.json`, `actions/cache`, artifacts between jobs)
 - [x] Lesson 6: reusable workflows and composite actions
-- [ ] Lesson 7: security — permissions, secrets, pinning, OIDC
+- [x] Lesson 7: security — permissions, secrets, pinning, OIDC
 - [ ] Lesson 8: deploying to GitHub Pages
 - [ ] Lesson 9: debugging runs
 - [ ] Lesson 10: writing your own action
@@ -70,8 +70,17 @@ The site stayed on the previous version until the next push. Fix in `deploy.yml`
 - Composite `run:` without `shell:`: `Required property is missing: shell`, only when a job runs the action.
 - Undeclared input: `startup_failure`, no job, and `gh run view` doesn't show the reason (the run page does). Tested from a temporary branch `gha-06-invalid` so that `main` never carried an invalid workflow. Deleting the remote branch was blocked by a local safety hook: it's still there, to delete by hand.
 
+## 2026-09-14 — Lesson 7: permissions that don't restrict, and an injection that runs
+
+- `gh run list` from a job with `contents: read` only (no `actions: read`) worked: public data of a public repository. Replaced by a label creation with an empty name: 403 `Resource not accessible by integration` without `issues: write`, 422 `Validation Failed` with it — nothing created either way.
+- Job-level `permissions: actions: read` → the token lost `Contents`, and `actions/checkout` still worked on this public repository.
+- `workflow_dispatch` input `$(whoami)` pasted with `${{ }}` into `run:` printed `runner`; through `env:` it printed `$(whoami)`.
+- `::add-mask::` hides the value only from the lines printed after it.
+- OIDC token for audience `learn-course`: lifetime 300 s, `sub` = `repo:spareilleux@6644695/learn@1368550922:ref:refs/heads/main`, the immutable format of repositories created after 2026-07-15.
+
 ## Open questions
 
 - Does the `schedule` trigger of `gha-03` (Mondays 06:17 UTC) run on time? *To verify on 2026-09-21.*
 - Which artifact does `download-artifact` pick when two share a name, and is it stable? *To verify.*
+- Does `actions/checkout` fail on a private repository when the job token has no `contents` permission? *To verify.*
 - What exactly does a pull request page show for a required check skipped by `paths`? *To verify.*
