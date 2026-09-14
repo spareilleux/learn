@@ -311,7 +311,7 @@ Two more rules from the [modules documentation](https://docs.vlang.io/modules.ht
 | Lint | `v vet .` | [Roslyn analyzers](https://learn.microsoft.com/dotnet/fundamentals/code-analysis/overview) | [Error Prone](https://errorprone.info/) |
 | Check the setup | `v doctor` | `dotnet --info` | `java -XshowSettings` |
 
-`v help <command>` documents each command. Tests, `v fmt`, `v vet` and packages are the subject of lesson 8.
+`v help <command>` documents each command. Tests, `v fmt`, `v vet` and `v doc` are the subject of [lesson 8](../08-tests-tools/), packages of lesson 12.
 
 :::note[Outputs in this course]
 The outputs in the lessons were captured on Windows with V 0.5.2. Every example and every rejected snippet is also run on Linux and macOS by [the course's CI](https://github.com/spareilleux/learn/blob/main/.github/workflows/v-examples.yml), which compares the outputs: they are identical on the three OSes, except the memory figures of lesson 4 and the backtraces of panics, which [`check.sh`](https://github.com/spareilleux/learn/blob/4fcc7d65f74976bbcb8aafbbf6773219e617f486/code/v-for-csharp-java/check.sh) doesn't compare.

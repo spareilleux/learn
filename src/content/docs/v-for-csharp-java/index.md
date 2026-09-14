@@ -45,6 +45,8 @@ Sources: [.NET garbage collection](https://learn.microsoft.com/dotnet/standard/g
 
 Lessons 3 and 4 read [`code/v-for-csharp-java/data/pages.csv`](https://github.com/spareilleux/learn/blob/main/code/v-for-csharp-java/data/pages.csv): the 319 pages of this site at commit `cbcbb42`, with their locale, course, title and number of lines. It is a copy of the file the [LadybugDB course](../ladybugdb/) extracts from this repository.
 
+Lessons 5 to 8 read [`code/v-for-csharp-java/data/ga`](https://github.com/spareilleux/learn/tree/main/code/v-for-csharp-java/data/ga): the 111 .NET projects of [GuitarAlchemist/ga](https://github.com/GuitarAlchemist/ga) at commit [`a26a7893`](https://github.com/GuitarAlchemist/ga/commit/a26a7893), their 266 project references and 478 package references, copied from the LadybugDB course too. Lesson 7 walks their references in parallel, lesson 8 tests a module that parses them.
+
 ## By the end of this course, I will be able to
 
 - install V on Windows, Linux and macOS, and organize a program in modules;
@@ -62,14 +64,14 @@ Lessons 3 and 4 read [`code/v-for-csharp-java/data/pages.csv`](https://github.co
 | 2 | [Types, immutable variables, structs and methods](02-types-structs-methods/) | `var`, `readonly`/`final`, classes, records |
 | 3 | [Errors: `?`, `!` and `or { }`](03-errors-option-result/) | `null`, `Optional`, exceptions |
 | 4 | [Arrays, maps, slices and memory](04-arrays-maps-memory/) | `List<T>`, `Dictionary`, `ArrayList`, `HashMap`, the GC |
-| 5 | Interfaces and generics (coming next) | interfaces, generics |
-| 6 | Sum types, enums and `match` | sealed hierarchies, `switch` expressions |
-| 7 | Concurrency: `spawn`, channels and `shared` | `Task`, `Thread`, `lock`/`synchronized` |
-| 8 | Tests, `v fmt`, `v vet`, docs and packages | xUnit/JUnit, analyzers, NuGet/Maven Central |
-| 9 | Calling C | P/Invoke, JNI, the FFM API |
+| 5 | [Interfaces and generics](05-interfaces-generics/) | interfaces, generics, constraints |
+| 6 | [Enums, sum types and `match`](06-sum-types-match/) | enums, sealed hierarchies, `switch` expressions |
+| 7 | [Concurrency: `spawn`, channels and `shared`](07-concurrency/) | `Task`, `CompletableFuture`, virtual threads, `lock`/`synchronized` |
+| 8 | [Tests, `v fmt`, `v vet` and `v doc`](08-tests-tools/) | xUnit/JUnit, `dotnet format`, analyzers, XML doc comments |
+| 9 | Calling C (coming next) | P/Invoke, JNI, the FFM API |
 | 10 | JSON and a web server with `veb` | `System.Text.Json`, ASP.NET Core, Jackson, Spring |
 | 11 | The ORM and SQLite | Entity Framework, JPA |
-| 12 | Cross-compilation and deployment | `dotnet publish`, `jlink` |
+| 12 | Packages, cross-compilation and deployment | NuGet/Maven Central, `dotnet publish`, `jlink` |
 | — | [Journal](journal/) | |
 
 ## Resources
