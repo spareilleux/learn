@@ -17,7 +17,7 @@ FROM read_csv('out/runs-fr.csv', timestampformat = '%d/%m/%Y %H:%M');
 
 -- A Parquet file keeps the types, and stores each column separately
 COPY jobs TO 'out/jobs.parquet';
-SELECT path_in_schema, type, compression, total_compressed_size
+SELECT path_in_schema, type, num_values, compression
 FROM parquet_metadata('out/jobs.parquet')
 ORDER BY column_id;
 

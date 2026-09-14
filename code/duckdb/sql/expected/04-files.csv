@@ -5,22 +5,22 @@ Delimiter,HasHeader,name,type
 ;,true,createdAt,VARCHAR
 type,first_run,last_run
 TIMESTAMP,2026-09-13 15:53:00,2026-09-14 14:01:00
-path_in_schema,type,compression,total_compressed_size
-id,INT64,SNAPPY,1651
-run_id,INT64,SNAPPY,942
-name,BYTE_ARRAY,SNAPPY,1235
-status,BYTE_ARRAY,SNAPPY,59
-conclusion,BYTE_ARRAY,SNAPPY,152
-created_at,INT64,SNAPPY,1222
-started_at,INT64,SNAPPY,1579
-completed_at,INT64,SNAPPY,1948
-runner_name,BYTE_ARRAY,SNAPPY,1589
-"labels, list, element",BYTE_ARRAY,SNAPPY,165
-"steps, list, element, number",INT64,SNAPPY,1103
-"steps, list, element, name",BYTE_ARRAY,SNAPPY,5551
-"steps, list, element, conclusion",BYTE_ARRAY,SNAPPY,618
-"steps, list, element, started_at",INT64,SNAPPY,8864
-"steps, list, element, completed_at",INT64,SNAPPY,8346
+path_in_schema,type,num_values,compression
+id,INT64,315,SNAPPY
+run_id,INT64,315,SNAPPY
+name,BYTE_ARRAY,315,SNAPPY
+status,BYTE_ARRAY,315,SNAPPY
+conclusion,BYTE_ARRAY,315,SNAPPY
+created_at,INT64,315,SNAPPY
+started_at,INT64,315,SNAPPY
+completed_at,INT64,315,SNAPPY
+runner_name,BYTE_ARRAY,315,SNAPPY
+"labels, list, element",BYTE_ARRAY,315,SNAPPY
+"steps, list, element, number",INT64,2208,SNAPPY
+"steps, list, element, name",BYTE_ARRAY,2208,SNAPPY
+"steps, list, element, conclusion",BYTE_ARRAY,2208,SNAPPY
+"steps, list, element, started_at",INT64,2208,SNAPPY
+"steps, list, element, completed_at",INT64,2208,SNAPPY
 file,os,jobs
 out/jobs-by-os/os=macos-latest/data_0.parquet,macos-latest,34
 out/jobs-by-os/os=ubuntu-latest/data_0.parquet,ubuntu-latest,246
