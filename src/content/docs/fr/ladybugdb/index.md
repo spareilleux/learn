@@ -7,7 +7,7 @@ sidebar:
 ---
 
 :::note[Comment ce cours est testé]
-Chaque requête de ce cours se trouve dans [`code/ladybugdb/cypher`](https://github.com/spareilleux/learn/tree/main/code/ladybugdb/cypher), à côté de sa sortie attendue. [`.github/workflows/ladybugdb-examples.yml`](https://github.com/spareilleux/learn/blob/main/.github/workflows/ladybugdb-examples.yml) les exécute toutes avec la CLI de LadybugDB sous Linux, Windows et macOS et compare les résultats ; il fait de même avec le programme C# de la leçon 5 et le programme Java de la leçon 6. Les sorties des leçons ont été capturées avec LadybugDB 0.20.4 en septembre 2026, avec la CLI 0.19.1 pour les extensions de la leçon 7, avec le paquet NuGet `LadybugDB` 0.19.1 pour C#, et avec le paquet Maven `com.ladybugdb:lbug` 0.20.4 pour Java.
+Chaque requête de ce cours se trouve dans [`code/ladybugdb/cypher`](https://github.com/spareilleux/learn/tree/main/code/ladybugdb/cypher), à côté de sa sortie attendue. [`.github/workflows/ladybugdb-examples.yml`](https://github.com/spareilleux/learn/blob/main/.github/workflows/ladybugdb-examples.yml) les exécute toutes avec la CLI de LadybugDB sous Linux, Windows et macOS et compare les résultats ; il fait de même avec le programme C# de la leçon 5, les programmes Java des leçons 6 et 8, et le script de la leçon 8 qui lance et tue des processus de la CLI sur un fichier de base de données. Les sorties des leçons ont été capturées avec LadybugDB 0.20.4 en septembre 2026, avec la CLI 0.19.1 pour les extensions de la leçon 7, avec le paquet NuGet `LadybugDB` 0.19.1 pour C#, et avec le paquet Maven `com.ladybugdb:lbug` 0.20.4 pour Java.
 :::
 
 ## Pourquoi j'apprends ça
@@ -67,7 +67,7 @@ Les leçons 5 et 6 interrogent un autre dépôt : les projets .NET de [GuitarAlc
 | 5 | [LadybugDB depuis C#](05-csharp/) | ADO.NET |
 | 6 | [LadybugDB depuis Java](06-java/) | JDBC |
 | 7 | [Algorithmes de graphe et recherche plein texte](07-algorithms/) | index plein texte, `CONTAINSTABLE` |
-| 8 | Persistance, transactions et concurrence (à venir) | isolation, verrous |
+| 8 | [Persistance, transactions et concurrence](08-persistence/) | isolation, verrous, journal des transactions |
 | — | [Journal](journal/) | |
 
 ## Ressources
