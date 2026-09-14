@@ -1,7 +1,8 @@
 ---
 // Starlight PageTitle override: the default title, then a narration player.
 // Pages listed in src/data/audio-manifest.json (written by scripts/tts/generate.py) get an <audio> player;
-// other pages get a "Listen" button that reads the page with the browser's Web Speech API.
+// other pages get a "Listen" player that reads the page with the browser's Web Speech API, highlights the sentence
+// and the word being read, and lets the reader pick a voice and a speed.
 import Default from '@astrojs/starlight/components/PageTitle.astro';
 
 type AudioEntry = { src: string; duration: number; hash: string; engine: string; voice: string };
@@ -21,10 +22,10 @@ const splash = route.entry.data.template === 'splash' || Boolean(route.entry.dat
 const fr = lang.startsWith('fr');
 const es = lang.startsWith('es');
 const t = fr
-	? { listenPage: 'Écouter cette page', synthetic: 'voix de synthèse', listen: 'Écouter', pause: 'Pause', resume: 'Reprendre', stop: 'Arrêter', browser: 'Lecture par la synthèse vocale du navigateur' }
+	? { listenPage: 'Écouter cette page', synthetic: 'voix de synthèse', listen: 'Écouter', pause: 'Pause', resume: 'Reprendre', stop: 'Arrêter', previous: 'Phrase précédente', next: 'Phrase suivante', section: 'Section', fromHere: 'Écouter à partir de cette section', voice: 'Voix', rate: 'Débit', browser: 'Lecture par la synthèse vocale du navigateur' }
 	: es
-		? { listenPage: 'Escuchar esta página', synthetic: 'voz sintética', listen: 'Escuchar', pause: 'Pausa', resume: 'Reanudar', stop: 'Detener', browser: 'Leído en voz alta por la síntesis de voz de tu navegador' }
-		: { listenPage: 'Listen to this page', synthetic: 'synthetic voice', listen: 'Listen', pause: 'Pause', resume: 'Resume', stop: 'Stop', browser: 'Read aloud by your browser’s speech synthesis' };
+		? { listenPage: 'Escuchar esta página', synthetic: 'voz sintética', listen: 'Escuchar', pause: 'Pausa', resume: 'Reanudar', stop: 'Detener', previous: 'Frase anterior', next: 'Frase siguiente', section: 'Sección', fromHere: 'Escuchar desde esta sección', voice: 'Voz', rate: 'Velocidad', browser: 'Leído en voz alta por la síntesis de voz de tu navegador' }
+		: { listenPage: 'Listen to this page', synthetic: 'synthetic voice', listen: 'Listen', pause: 'Pause', resume: 'Resume', stop: 'Stop', previous: 'Previous sentence', next: 'Next sentence', section: 'Section', fromHere: 'Listen from this section', voice: 'Voice', rate: 'Speed', browser: 'Read aloud by your browser’s speech synthesis' };
 
 let durationText = '';
 let durationIso = '';
@@ -58,88 +59,314 @@ if (audio) {
 
 {
 	!splash && !audio && (
-		<page-speech class="page-speech" data-lang={fr ? 'fr-FR' : es ? 'es-ES' : lang === 'en' ? 'en-US' : lang} data-listen={t.listen} data-pause={t.pause} data-resume={t.resume} hidden>
-			<button type="button" class="page-speech__play" aria-describedby="page-speech-hint">
-				<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-					<path d="M3 10v4a1 1 0 0 0 1 1h3l4 4V5L7 9H4a1 1 0 0 0-1 1Zm13.5 2A4.5 4.5 0 0 0 14 8v8a4.47 4.47 0 0 0 2.5-4ZM14 3.23v2.06a7 7 0 0 1 0 13.42v2.06a9 9 0 0 0 0-17.54Z" />
-				</svg>
-				<span class="page-speech__text">{t.listen}</span>
-			</button>
-			<button type="button" class="page-speech__stop" hidden>
-				<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="5" y="5" width="14" height="14" rx="2" /></svg>
-				{t.stop}
-			</button>
-			<span class="page-speech__hint" id="page-speech-hint">{t.browser}</span>
-		</page-speech>
+		<div class="page-speech-slot">
+			<page-speech class="page-speech" data-lang={fr ? 'fr-FR' : es ? 'es-ES' : lang === 'en' ? 'en-US' : lang} data-listen={t.listen} data-pause={t.pause} data-resume={t.resume} data-from-here={t.fromHere} hidden>
+				<div class="page-speech__buttons">
+					<button type="button" class="page-speech__play" aria-describedby="page-speech-hint">
+						<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+							<path d="M3 10v4a1 1 0 0 0 1 1h3l4 4V5L7 9H4a1 1 0 0 0-1 1Zm13.5 2A4.5 4.5 0 0 0 14 8v8a4.47 4.47 0 0 0 2.5-4ZM14 3.23v2.06a7 7 0 0 1 0 13.42v2.06a9 9 0 0 0 0-17.54Z" />
+						</svg>
+						<span class="page-speech__text">{t.listen}</span>
+					</button>
+					<button type="button" class="page-speech__previous page-speech__icon" aria-label={t.previous} title={t.previous} hidden>
+						<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h2v14H6zM20 5v14L9 12z" /></svg>
+					</button>
+					<button type="button" class="page-speech__next page-speech__icon" aria-label={t.next} title={t.next} hidden>
+						<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 5h2v14h-2zM4 5v14l11-7z" /></svg>
+					</button>
+					<button type="button" class="page-speech__stop" hidden>
+						<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="5" y="5" width="14" height="14" rx="2" /></svg>
+						{t.stop}
+					</button>
+				</div>
+				<div class="page-speech__settings">
+					<label>
+						{t.section}
+						<select class="page-speech__section" />
+					</label>
+					<label>
+						{t.voice}
+						<select class="page-speech__voice" />
+					</label>
+					<label>
+						{t.rate}
+						<input class="page-speech__rate" type="range" min="0.5" max="2" step="0.1" value="1" />
+						<output class="page-speech__rate-value">1×</output>
+					</label>
+				</div>
+				<span class="page-speech__hint" id="page-speech-hint">{t.browser}</span>
+			</page-speech>
+		</div>
 	)
 }
 
 <script>
 	const BLOCKS = 'h1, h2, h3, h4, h5, h6, p, li, dt, dd, blockquote, figcaption';
 	const SKIP = 'pre, .expressive-code, table, details, script, style, .sl-anchor-link, [role="tablist"], [hidden], .sr-only';
+	const NESTED = `${BLOCKS}, ${SKIP}, ul, ol`;
 	const MAX_UTTERANCE = 180; // Chrome cuts utterances after ~15 s
 
-	function pageText(): string[] {
-		const parts: string[] = [];
-		const title = document.querySelector('main h1');
-		if (title?.textContent) parts.push(title.textContent);
-		const content = document.querySelector('main .sl-markdown-content');
-		if (!content) return parts;
-		for (const el of content.querySelectorAll<HTMLElement>(BLOCKS)) {
-			if (el.closest(SKIP)) continue;
-			// blocks that contain other blocks are read through their children
-			const copy = el.cloneNode(true) as HTMLElement;
-			copy.querySelectorAll(`${BLOCKS}, ${SKIP}, ul, ol`).forEach((n) => n.remove());
-			const text = copy.textContent?.replace(/\s+/g, ' ').trim();
-			if (text) parts.push(/[.!?:;…]$/.test(text) ? text : `${text}.`);
+	// Browser voices read symbols literally ("C croisillon"): respell the names that contain them.
+	// C# uses the fr / es respellings of the pre-generated narration (scripts/tts/lexicon.json).
+	type Lang = 'en' | 'fr' | 'es';
+	const SAY: [RegExp, Partial<Record<Lang, string>>][] = [
+		[/\bASP(?=\.NET\b)/g, { en: 'A S P', fr: 'A S P', es: 'A S P' }],
+		[/\bADO(?=\.NET\b)/g, { en: 'A D O', fr: 'A D O', es: 'A D O' }],
+		[/(?<=\S)\.NET\b/g, { en: ' dot net', fr: ' dotte nette', es: ' dot net' }],
+		[/\.NET\b/g, { en: 'dot net', fr: 'dotte nette', es: 'dot net' }],
+		[/\bC#(?![\w#])/g, { en: 'C sharp', fr: 'ci charpe', es: 'si sharp' }],
+		[/\bF#(?![\w#])/g, { en: 'F sharp', fr: 'èf charpe', es: 'ef sharp' }],
+		[/\bC\+\+(?!\w)/g, { en: 'C plus plus', fr: 'C plus plus', es: 'C más más' }],
+		// said the English way, not "ruust"
+		[/\brustc\b/g, { fr: 'reuste C', es: 'rast C' }],
+		[/\bRust\b/g, { fr: 'Reuste', es: 'Rast' }],
+	];
+
+	// A piece of spoken text and the range of page text it stands for
+	type Segment = { text: string; from: number; to: number; respelled: boolean };
+
+	function respell(text: string, from: number, lang: Lang): Segment[] {
+		let segments: Segment[] = [{ text, from, to: from + text.length, respelled: false }];
+		for (const [rx, say] of SAY) {
+			segments = segments.flatMap((seg) => {
+				const replacement = say[lang];
+				if (seg.respelled || replacement === undefined) return [seg];
+				const out: Segment[] = [];
+				let last = 0;
+				for (const m of seg.text.matchAll(rx)) {
+					const start = m.index!;
+					if (start > last) out.push({ text: seg.text.slice(last, start), from: seg.from + last, to: seg.from + start, respelled: false });
+					out.push({ text: replacement, from: seg.from + start, to: seg.from + start + m[0].length, respelled: true });
+					last = start + m[0].length;
+				}
+				if (last < seg.text.length) out.push({ text: seg.text.slice(last), from: seg.from + last, to: seg.to, respelled: false });
+				return out;
+			});
 		}
-		return parts;
+		return segments;
 	}
 
-	function utterances(parts: string[]): string[] {
-		const out: string[] = [];
-		for (const part of parts) {
-			let cur = '';
-			for (const sentence of part.split(/(?<=[.!?;:…])\s+/)) {
-				// very long sentences are cut at commas, then spaces
-				const pieces = sentence.length <= MAX_UTTERANCE ? [sentence] : sentence.match(new RegExp(`.{1,${MAX_UTTERANCE}}(?:[,\\s]|$)`, 'g')) ?? [sentence];
-				for (const piece of pieces) {
-					if (cur && cur.length + piece.length + 1 > MAX_UTTERANCE) {
-						out.push(cur);
-						cur = piece.trim();
-					} else cur = `${cur} ${piece}`.trim();
-				}
+	// One block of the page: its normalised text, and the text node and offset of each character
+	type Block = { el: HTMLElement; text: string; at: [Text, number][] };
+	// One utterance: a range of a block's text, and what the voice is given for it
+	type Utterance = { block: Block; from: number; to: number; spoken: string; segments: Segment[] };
+
+	function readBlock(el: HTMLElement): Block {
+		let text = '';
+		const at: [Text, number][] = [];
+		const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, {
+			acceptNode: (n) => (n.parentElement?.closest(NESTED) === el ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT),
+		});
+		for (let node = walker.nextNode() as Text | null; node; node = walker.nextNode() as Text | null) {
+			const data = node.data;
+			for (let i = 0; i < data.length; i++) {
+				if (/\s/.test(data[i])) {
+					if (!text || text.endsWith(' ')) continue;
+					text += ' ';
+				} else text += data[i];
+				at.push([node, i]);
 			}
-			if (cur) out.push(cur);
+		}
+		if (text.endsWith(' ')) {
+			text = text.slice(0, -1);
+			at.pop();
+		}
+		return { el, text, at };
+	}
+
+	function pageBlocks(): Block[] {
+		const blocks: Block[] = [];
+		const title = document.querySelector<HTMLElement>('main h1');
+		if (title) blocks.push(readBlock(title));
+		const content = document.querySelector('main .sl-markdown-content');
+		if (!content) return blocks;
+		for (const el of content.querySelectorAll<HTMLElement>(BLOCKS)) {
+			if (el.closest(SKIP)) continue;
+			const block = readBlock(el);
+			if (block.text) blocks.push(block);
+		}
+		return blocks;
+	}
+
+	function pageSections(): HTMLElement[] {
+		const title = document.querySelector<HTMLElement>('main h1');
+		const headings = [...document.querySelectorAll<HTMLElement>('main .sl-markdown-content :is(h2, h3)')].filter((h) => !h.closest(SKIP));
+		return title ? [title, ...headings] : headings;
+	}
+
+	// Sentences, long ones cut at commas then spaces, merged up to MAX_UTTERANCE characters
+	function ranges(text: string): [number, number][] {
+		const pieces: [number, number][] = [];
+		let start = 0;
+		const sentenceEnds = [...text.matchAll(/(?<=[.!?;:…])\s+/g)].map((m) => [m.index!, m.index! + m[0].length]);
+		for (const [end, next] of [...sentenceEnds, [text.length, text.length]]) {
+			let from = start;
+			while (end - from > MAX_UTTERANCE) {
+				const window = text.slice(from, from + MAX_UTTERANCE);
+				const cut = Math.max(window.lastIndexOf(', '), window.lastIndexOf(' '));
+				const at = cut > 0 ? from + cut + 1 : from + MAX_UTTERANCE;
+				pieces.push([from, at]);
+				from = at;
+			}
+			if (end > from) pieces.push([from, end]);
+			start = next;
+		}
+		const merged: [number, number][] = [];
+		for (const [from, to] of pieces) {
+			const last = merged[merged.length - 1];
+			if (last && to - last[0] <= MAX_UTTERANCE) last[1] = to;
+			else merged.push([from, to]);
+		}
+		return merged.map(([from, to]) => {
+			while (to > from && text[to - 1] === ' ') to--;
+			while (from < to && text[from] === ' ') from++;
+			return [from, to];
+		});
+	}
+
+	function utterances(blocks: Block[], lang: Lang): Utterance[] {
+		const out: Utterance[] = [];
+		for (const block of blocks) {
+			for (const [from, to] of ranges(block.text)) {
+				const segments = respell(block.text.slice(from, to), from, lang);
+				let spoken = segments.map((s) => s.text).join('');
+				if (to === block.text.length && !/[.!?:;…]$/.test(spoken)) spoken += '.';
+				out.push({ block, from, to, spoken, segments });
+			}
 		}
 		return out;
 	}
 
+	// Page text offset of a character of the spoken text
+	function pageOffset(u: Utterance, spokenIndex: number, end: boolean): number {
+		let pos = 0;
+		for (const seg of u.segments) {
+			if (spokenIndex < pos + seg.text.length || (end && spokenIndex === pos + seg.text.length)) {
+				if (seg.respelled) return end ? seg.to : seg.from;
+				return seg.from + (spokenIndex - pos);
+			}
+			pos += seg.text.length;
+		}
+		return u.to;
+	}
+
+	function range(block: Block, from: number, to: number): Range | undefined {
+		if (to <= from || !block.at[from] || !block.at[to - 1]) return undefined;
+		const r = document.createRange();
+		r.setStart(...block.at[from]);
+		r.setEnd(block.at[to - 1][0], block.at[to - 1][1] + 1);
+		return r;
+	}
+
+	const highlights = typeof CSS !== 'undefined' && 'highlights' in CSS && typeof Highlight !== 'undefined';
+
+	function store(key: string, value?: string): string | null {
+		try {
+			if (value === undefined) return localStorage.getItem(key);
+			localStorage.setItem(key, value);
+		} catch {}
+		return null;
+	}
+
 	class PageSpeech extends HTMLElement {
-		#queue: string[] = [];
+		#lang: Lang = 'en';
+		#queue: Utterance[] = [];
 		#index = 0;
 		#state: 'idle' | 'playing' | 'paused' = 'idle';
+		#voices: SpeechSynthesisVoice[] = [];
 		#voice: SpeechSynthesisVoice | undefined;
+		#rate = 1;
 		#utterance: SpeechSynthesisUtterance | undefined;
+		#current: HTMLElement | undefined;
+		#slot: HTMLElement | undefined;
 
 		connectedCallback() {
-			if (!('speechSynthesis' in window) || typeof SpeechSynthesisUtterance === 'undefined') return;
+			// the player moves to <body> while it reads (see #render): set it up once
+			if (this.#slot || !('speechSynthesis' in window) || typeof SpeechSynthesisUtterance === 'undefined') return;
+			this.#slot = this.parentElement!;
 			speechSynthesis.cancel();
 			this.hidden = false;
-			this.#pickVoice();
-			speechSynthesis.addEventListener('voiceschanged', () => this.#pickVoice());
+			const base = (this.dataset.lang ?? 'en').slice(0, 2);
+			this.#lang = base === 'fr' || base === 'es' ? base : 'en';
+			this.#rate = Number(store('speech-rate')) || 1;
+			const rate = this.querySelector<HTMLInputElement>('.page-speech__rate')!;
+			rate.value = String(this.#rate);
+			this.#renderRate();
+			this.#loadVoices();
+			speechSynthesis.addEventListener('voiceschanged', () => this.#loadVoices());
 			this.querySelector('.page-speech__play')!.addEventListener('click', () => this.#toggle());
 			this.querySelector('.page-speech__stop')!.addEventListener('click', () => this.#stop());
+			this.querySelector('.page-speech__previous')!.addEventListener('click', () => this.#jump(-1));
+			this.querySelector('.page-speech__next')!.addEventListener('click', () => this.#jump(1));
+			this.querySelector<HTMLSelectElement>('.page-speech__voice')!.addEventListener('change', (e) => {
+				const name = (e.target as HTMLSelectElement).value;
+				this.#voice = this.#voices.find((v) => v.name === name);
+				store(`speech-voice-${this.#lang}`, name);
+				this.#restart();
+			});
+			rate.addEventListener('input', () => {
+				this.#rate = Number(rate.value);
+				this.#renderRate();
+			});
+			rate.addEventListener('change', () => {
+				store('speech-rate', String(this.#rate));
+				this.#restart();
+			});
 			window.addEventListener('pagehide', () => speechSynthesis.cancel());
+			this.#addSections();
 		}
 
-		#pickVoice() {
+		// a "listen from here" button after each section heading, and the same sections in a list in the player
+		#addSections() {
+			const sections = pageSections();
+			const select = this.querySelector<HTMLSelectElement>('.page-speech__section')!;
+			select.replaceChildren(
+				...sections.map((h, i) => new Option(`${h.tagName === 'H3' ? '— ' : ''}${h.textContent?.trim() ?? ''}`, String(i))),
+			);
+			select.closest('label')!.hidden = sections.length < 2;
+			select.addEventListener('change', () => this.#startAt(sections[Number(select.value)]));
+			for (const heading of sections.slice(1)) {
+				const button = document.createElement('button');
+				button.type = 'button';
+				button.className = 'speech-from-here';
+				button.title = `${this.dataset.fromHere}: ${heading.textContent?.trim() ?? ''}`;
+				button.setAttribute('aria-label', button.title);
+				button.innerHTML = this.querySelector('.page-speech__play svg')!.outerHTML;
+				button.addEventListener('click', () => this.#startAt(heading));
+				heading.after(button);
+			}
+		}
+
+		#startAt(el: HTMLElement) {
+			if (this.#state === 'idle') this.#queue = utterances(pageBlocks(), this.#lang);
+			const index = this.#queue.findIndex((u) => u.block.el === el || Boolean(el.compareDocumentPosition(u.block.el) & Node.DOCUMENT_POSITION_FOLLOWING));
+			if (index < 0) return;
+			this.#index = index;
+			const wasPlaying = this.#state === 'playing';
+			this.#state = 'playing';
+			this.#render(); // float first, so the block is revealed above the player
+			if (wasPlaying) this.#restart();
+			else this.#speak();
+		}
+
+		#loadVoices() {
 			const lang = (this.dataset.lang ?? 'en').toLowerCase();
-			const base = lang.split('-')[0];
-			const voices = speechSynthesis.getVoices().filter((v) => v.lang.toLowerCase().replace('_', '-').startsWith(base));
+			const all = speechSynthesis.getVoices();
+			const matching = all.filter((v) => v.lang.toLowerCase().replace('_', '-').startsWith(this.#lang));
 			const score = (v: SpeechSynthesisVoice) =>
-				(v.lang.toLowerCase() === lang ? 1 : 0) + (/natural|neural|online|google|premium|enhanced/i.test(v.name) ? 2 : 0) + (v.default ? 0.5 : 0);
-			this.#voice = voices.sort((a, b) => score(b) - score(a))[0];
+				(v.lang.toLowerCase().replace('_', '-') === lang ? 1 : 0) + (/natural|neural|online|google|premium|enhanced/i.test(v.name) ? 2 : 0) + (v.default ? 0.5 : 0);
+			this.#voices = (matching.length ? matching : all).sort((a, b) => score(b) - score(a) || a.name.localeCompare(b.name));
+			const saved = store(`speech-voice-${this.#lang}`);
+			this.#voice = this.#voices.find((v) => v.name === saved) ?? this.#voices[0];
+			const select = this.querySelector<HTMLSelectElement>('.page-speech__voice')!;
+			select.replaceChildren(
+				...this.#voices.map((v) => {
+					const option = new Option(`${v.name} (${v.lang})`, v.name);
+					option.selected = v === this.#voice;
+					return option;
+				}),
+			);
+			select.closest('label')!.hidden = this.#voices.length < 2;
 		}
 
 		#toggle() {
@@ -150,11 +377,13 @@ if (audio) {
 				speechSynthesis.cancel();
 			} else {
 				if (this.#state === 'idle') {
-					this.#queue = utterances(pageText());
+					this.#queue = utterances(pageBlocks(), this.#lang);
 					this.#index = 0;
 				}
 				this.#state = 'playing';
+				this.#render(); // float first, so the block is revealed above the player
 				this.#speak();
+				return;
 			}
 			this.#render();
 		}
@@ -163,16 +392,32 @@ if (audio) {
 			this.#state = 'idle';
 			this.#utterance = undefined;
 			speechSynthesis.cancel();
+			this.#highlight();
 			this.#render();
+		}
+
+		#jump(delta: number) {
+			if (this.#state === 'idle') return;
+			this.#index = Math.min(Math.max(this.#index + delta, 0), this.#queue.length - 1);
+			this.#restart();
+			if (this.#state === 'paused') this.#highlight(this.#queue[this.#index]);
+		}
+
+		#restart() {
+			if (this.#state !== 'playing') return;
+			this.#utterance = undefined;
+			speechSynthesis.cancel();
+			this.#speak();
 		}
 
 		#speak() {
 			if (this.#state !== 'playing') return;
 			if (this.#index >= this.#queue.length) return this.#stop();
-			const u = new SpeechSynthesisUtterance(this.#queue[this.#index]);
-			u.lang = this.dataset.lang ?? 'en';
+			const item = this.#queue[this.#index];
+			const u = new SpeechSynthesisUtterance(item.spoken);
+			u.lang = this.#voice?.lang ?? this.dataset.lang ?? 'en';
 			if (this.#voice) u.voice = this.#voice;
-			u.rate = 1;
+			u.rate = this.#rate;
 			const next = () => {
 				if (this.#utterance !== u) return; // cancelled
 				this.#index++;
@@ -180,8 +425,58 @@ if (audio) {
 			};
 			u.addEventListener('end', next);
 			u.addEventListener('error', (e) => (e.error === 'interrupted' || e.error === 'canceled' ? undefined : next()));
+			// word boundaries: most local voices send them, some network voices don't (the sentence stays highlighted)
+			u.addEventListener('boundary', (e) => {
+				if (this.#utterance !== u || e.name !== 'word') return;
+				const length = e.charLength || (item.spoken.slice(e.charIndex).match(/^\S+/)?.[0].length ?? 0);
+				this.#highlight(item, pageOffset(item, e.charIndex, false), pageOffset(item, e.charIndex + length, true));
+			});
 			this.#utterance = u;
+			this.#highlight(item);
 			speechSynthesis.speak(u);
+		}
+
+		#highlight(item?: Utterance, wordFrom?: number, wordTo?: number) {
+			if (highlights) {
+				CSS.highlights.delete('speech-sentence');
+				CSS.highlights.delete('speech-word');
+			}
+			if (!item) {
+				this.#current?.classList.remove('speech-current');
+				this.#current = undefined;
+				return;
+			}
+			if (this.#current !== item.block.el) {
+				this.#current?.classList.remove('speech-current');
+				this.#current = item.block.el;
+				this.#current.classList.add('speech-current');
+			}
+			// the section list follows the reading
+			const sections = pageSections();
+			const select = this.querySelector<HTMLSelectElement>('.page-speech__section')!;
+			const sectionIndex = sections.findLastIndex((h) => h === item.block.el || Boolean(h.compareDocumentPosition(item.block.el) & Node.DOCUMENT_POSITION_FOLLOWING));
+			if (sectionIndex >= 0) select.value = String(sectionIndex);
+			if (highlights) {
+				const sentence = range(item.block, item.from, item.to);
+				if (sentence) CSS.highlights.set('speech-sentence', new Highlight(sentence));
+				const word = wordFrom !== undefined && wordTo !== undefined ? range(item.block, wordFrom, wordTo) : undefined;
+				if (word) CSS.highlights.set('speech-word', new Highlight(word));
+			}
+			if (wordFrom === undefined) this.#reveal(item.block.el);
+		}
+
+		// scroll the block into view when it's hidden, or under the floating player
+		#reveal(el: HTMLElement) {
+			const box = el.getBoundingClientRect();
+			const bars = document.querySelectorAll('header, mobile-starlight-toc nav');
+			const top = Math.max(0, ...[...bars].map((bar) => bar.getBoundingClientRect().bottom));
+			const bottom = this.hasAttribute('data-floating') ? this.getBoundingClientRect().top : innerHeight;
+			if (box.top < top || box.bottom > bottom) el.scrollIntoView({ block: 'center', behavior: 'smooth' });
+		}
+
+		#renderRate() {
+			const format = new Intl.NumberFormat(this.dataset.lang, { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+			this.querySelector('.page-speech__rate-value')!.textContent = `${format.format(this.#rate)}×`;
 		}
 
 		#render() {
@@ -189,7 +484,22 @@ if (audio) {
 			const label = { idle: this.dataset.listen, playing: this.dataset.pause, paused: this.dataset.resume }[this.#state];
 			play.querySelector('.page-speech__text')!.textContent = label ?? '';
 			play.setAttribute('aria-pressed', String(this.#state === 'playing'));
-			this.querySelector<HTMLButtonElement>('.page-speech__stop')!.hidden = this.#state === 'idle';
+			const idle = this.#state === 'idle';
+			for (const selector of ['.page-speech__stop', '.page-speech__previous', '.page-speech__next']) {
+				this.querySelector<HTMLButtonElement>(selector)!.hidden = idle;
+			}
+			// keep the player on screen while it reads, and its place in the page so nothing jumps
+			// a fixed element inside the content column is positioned by it (Starlight's container queries): move it to <body>
+			const slot = this.#slot!;
+			if (!idle && !this.hasAttribute('data-floating')) {
+				slot.style.minHeight = `${slot.offsetHeight}px`;
+				document.body.append(this);
+			}
+			if (idle && this.hasAttribute('data-floating')) {
+				slot.style.minHeight = '';
+				slot.append(this);
+			}
+			this.toggleAttribute('data-floating', !idle);
 		}
 	}
 
@@ -208,8 +518,54 @@ if (audio) {
 		color: var(--sl-color-gray-2);
 	}
 	.page-speech[hidden],
-	.page-speech button[hidden] {
+	.page-speech [hidden] {
 		display: none;
+	}
+	.page-speech[data-floating] {
+		position: fixed;
+		z-index: 20;
+		bottom: 1rem;
+		left: 50%;
+		transform: translateX(-50%);
+		width: min(44rem, calc(100vw - 2rem));
+		margin: 0;
+		padding: 0.6rem 0.9rem;
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: 0.75rem;
+		background: var(--sl-color-bg-nav);
+		box-shadow: var(--sl-shadow-lg);
+	}
+	.page-speech[data-floating] .page-speech__hint {
+		display: none;
+	}
+	.page-speech__buttons,
+	.page-speech__settings {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.5rem 0.75rem;
+	}
+	.page-speech__settings label {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+	}
+	.page-speech__voice {
+		max-width: 14rem;
+		padding: 0.2rem 0.4rem;
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: 0.4rem;
+		background: var(--sl-color-gray-6);
+		color: var(--sl-color-white);
+		font: inherit;
+	}
+	.page-speech__rate {
+		width: 6rem;
+		accent-color: var(--sl-color-accent);
+	}
+	.page-speech__rate-value {
+		min-width: 2.5rem;
+		font-variant-numeric: tabular-nums;
 	}
 	.page-audio__label {
 		display: inline-flex;
@@ -243,10 +599,15 @@ if (audio) {
 		font: inherit;
 		cursor: pointer;
 	}
+	.page-speech button.page-speech__icon {
+		padding: 0.25rem 0.6rem;
+	}
 	.page-speech button:hover {
 		border-color: var(--sl-color-accent);
 	}
-	.page-speech button:focus-visible {
+	.page-speech button:focus-visible,
+	.page-speech select:focus-visible,
+	.page-speech input:focus-visible {
 		outline: 2px solid var(--sl-color-accent);
 		outline-offset: 2px;
 	}
@@ -257,5 +618,41 @@ if (audio) {
 	.page-speech__hint {
 		color: var(--sl-color-gray-3);
 		font-size: var(--sl-text-xs);
+	}
+</style>
+
+<style is:global>
+	/* "listen from here" buttons after section headings */
+	.speech-from-here {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 1.75rem;
+		height: 1.75rem;
+		margin-inline-start: 0.35rem;
+		padding: 0;
+		border: 1px solid transparent;
+		border-radius: 999rem;
+		background: transparent;
+		color: var(--sl-color-gray-3);
+		vertical-align: middle;
+		cursor: pointer;
+	}
+	.speech-from-here:hover,
+	.speech-from-here:focus-visible {
+		border-color: var(--sl-color-accent);
+		color: var(--sl-color-accent-high);
+	}
+	/* the block, sentence and word being read aloud */
+	.speech-current {
+		border-radius: 0.25rem;
+		box-shadow: -0.6rem 0 0 -0.35rem var(--sl-color-accent);
+	}
+	::highlight(speech-sentence) {
+		background-color: var(--sl-color-accent-low);
+	}
+	::highlight(speech-word) {
+		background-color: var(--sl-color-accent);
+		color: var(--sl-color-black);
 	}
 </style>
