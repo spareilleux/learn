@@ -17,7 +17,7 @@ sidebar:
 - [x] Leçon 7 : sécurité — permissions, secrets, épinglage, OIDC
 - [x] Leçon 8 : déployer sur GitHub Pages
 - [x] Leçon 9 : déboguer les exécutions
-- [ ] Leçon 10 : écrire sa propre action
+- [x] Leçon 10 : écrire sa propre action
 
 ## 2026-09-14 — D'abord en local : deux pièges de xUnit v3
 
@@ -92,6 +92,14 @@ Le site est resté sur la version précédente jusqu'au push suivant. Correction
 - `gh run rerun --failed` a relancé les jobs en échec et le job annulé, et a conservé celui qui avait réussi à la tentative 1.
 - `timeout-minutes: 1` sur un job : annulé au bout de 87 s, trois fois, avec `sleep 90` ou `sleep 300`. Sur un step : en échec au bout de 72 s, `The action 'Run date -u +%T' has timed out after 1 minutes.`
 - Une exécution dont les jobs ont réussi, échoué avec `continue-on-error` ou été annulés par un timeout se termine `cancelled`. Avec seulement l'échec `continue-on-error`, elle se termine `success`, et `needs.<job>.result` vaut `success`.
+
+## 2026-09-14 — Leçon 10 : trois échecs avant une action qui fonctionne
+
+- `require()` dans l'action JavaScript : `require is not defined in ES module scope`, en local, parce que le `package.json` du dépôt (celui du site Astro) indique `"type": "module"`. Passage à `import` ; une copie CommonJS a échoué de la même façon sur le runner.
+- Action conteneur, premier push, commitée sans le bit exécutable exprès : `exec: "/entrypoint.sh": permission denied`. Les fichiers créés sous Windows sont commités en `100644` (`core.filemode` vaut `false`) ; corrigé avec `git update-index --chmod=+x`.
+- Action conteneur sur `windows-latest` : `Container action is only supported on Linux`.
+- Le runner n'impose pas `required: true` ; un input inconnu n'est qu'un avertissement (`Unexpected input(s) 'txt', valid inputs are ['text', 'max-length']`).
+- Durées des steps : action JavaScript en moins d'1 s sur les trois OS, action conteneur en 5 s (construction de l'image comprise).
 
 ## Questions ouvertes
 

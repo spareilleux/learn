@@ -17,7 +17,7 @@ sidebar:
 - [x] Lesson 7: security — permissions, secrets, pinning, OIDC
 - [x] Lesson 8: deploying to GitHub Pages
 - [x] Lesson 9: debugging runs
-- [ ] Lesson 10: writing your own action
+- [x] Lesson 10: writing your own action
 
 ## 2026-09-14 — Local first: two xUnit v3 traps
 
@@ -92,6 +92,14 @@ The site stayed on the previous version until the next push. Fix in `deploy.yml`
 - `gh run rerun --failed` re-ran the failed and the cancelled jobs, and kept the successful one from attempt 1.
 - `timeout-minutes: 1` on a job: cancelled after 87 s, three times, with `sleep 90` or `sleep 300`. On a step: failed after 72 s, `The action 'Run date -u +%T' has timed out after 1 minutes.`
 - A run whose jobs are successful, failed with `continue-on-error`, or cancelled by a timeout ends `cancelled`. With only the `continue-on-error` failure, it ends `success`, and `needs.<job>.result` is `success`.
+
+## 2026-09-14 — Lesson 10: three failures before a working action
+
+- `require()` in the JavaScript action: `require is not defined in ES module scope`, locally, because the repository's `package.json` (the Astro site's) says `"type": "module"`. Switched to `import`; a CommonJS copy failed the same way on the runner.
+- Container action, first push, committed without the executable bit on purpose: `exec: "/entrypoint.sh": permission denied`. Files created on Windows are committed as `100644` (`core.filemode` is `false`); fixed with `git update-index --chmod=+x`.
+- Container action on `windows-latest`: `Container action is only supported on Linux`.
+- `required: true` isn't enforced by the runner; an unknown input is only a warning (`Unexpected input(s) 'txt', valid inputs are ['text', 'max-length']`).
+- Step durations: JavaScript action under 1 s on the three OSes, container action 5 s (image build included).
 
 ## Open questions
 

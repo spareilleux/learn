@@ -42,7 +42,7 @@ Sabes compilar y probar un proyecto .NET o Java desde la línea de comandos (`do
 | 7 | [Seguridad: permisos, secretos, fijación de versiones, OIDC](07-security/) | conexiones de servicio, federación de identidades de carga de trabajo |
 | 8 | [Desplegar en GitHub Pages](08-pages/) | entornos, aprobaciones |
 | 9 | [Depurar ejecuciones](09-debugging/) | `system.debug`, logs de diagnóstico, volver a ejecutar los jobs fallidos |
-| 10 | Escribir tu propia action *(próximamente)* | tareas personalizadas |
+| 10 | [Escribir tu propia acción](10-custom-action/) | tareas personalizadas, jobs de contenedor |
 | — | [Diario](journal/) | |
 
 ## Recursos

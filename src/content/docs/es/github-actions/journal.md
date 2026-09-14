@@ -17,7 +17,7 @@ sidebar:
 - [x] Lección 7: seguridad — permisos, secretos, fijación de versiones, OIDC
 - [x] Lección 8: desplegar en GitHub Pages
 - [x] Lección 9: depurar ejecuciones
-- [ ] Lección 10: escribir tu propia action
+- [x] Lección 10: escribir tu propia acción
 
 ## 2026-09-14 — Primero en local: dos trampas de xUnit v3
 
@@ -92,6 +92,14 @@ El sitio se quedó en la versión anterior hasta el push siguiente. Corrección 
 - `gh run rerun --failed` volvió a ejecutar los jobs fallidos y el cancelado, y conservó el que tuvo éxito en el intento 1.
 - `timeout-minutes: 1` en un job: cancelado a los 87 s, tres veces, con `sleep 90` o `sleep 300`. En un step: fallido a los 72 s, `The action 'Run date -u +%T' has timed out after 1 minutes.`
 - Una ejecución cuyos jobs tuvieron éxito, fallaron con `continue-on-error` o fueron cancelados por un timeout termina en `cancelled`. Con solo el fallo con `continue-on-error`, termina en `success`, y `needs.<job>.result` es `success`.
+
+## 2026-09-14 — Lección 10: tres fallos antes de una acción que funciona
+
+- `require()` en la acción JavaScript: `require is not defined in ES module scope`, en local, porque el `package.json` del repositorio (el del sitio Astro) dice `"type": "module"`. Cambiado a `import`; una copia CommonJS falló igual en el runner.
+- Acción de contenedor, primer push, incluida en el commit sin el bit de ejecución a propósito: `exec: "/entrypoint.sh": permission denied`. Los archivos creados en Windows se incluyen en el commit como `100644` (`core.filemode` es `false`); corregido con `git update-index --chmod=+x`.
+- Acción de contenedor en `windows-latest`: `Container action is only supported on Linux`.
+- El runner no impone `required: true`; un input desconocido es solo una advertencia (`Unexpected input(s) 'txt', valid inputs are ['text', 'max-length']`).
+- Duración de los steps: acción JavaScript en menos de 1 s en los tres sistemas operativos, acción de contenedor en 5 s (construcción de la imagen incluida).
 
 ## Preguntas abiertas
 
