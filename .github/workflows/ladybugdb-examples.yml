@@ -1,4 +1,5 @@
 # LadybugDB course: run the Cypher of every lesson with the LadybugDB CLI on three OSes and compare the output,
+# the C# program of lesson 5 with the NuGet package,
 # and the SQL cross-checks with the DuckDB CLI
 name: LadybugDB course examples
 
@@ -60,3 +61,37 @@ jobs:
           unzip -q "$RUNNER_TEMP/$ASSET" -d "$RUNNER_TEMP/duckdb"
           echo "$RUNNER_TEMP/duckdb" >> "$GITHUB_PATH"
       - run: bash code/ladybugdb/check.sh
+
+  csharp:
+    name: csharp (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            asset: lbug_cli-linux-x86_64.tar.gz
+          - os: windows-latest
+            asset: lbug_cli-windows-x86_64.zip
+          - os: macos-latest
+            asset: lbug_cli-osx-arm64.tar.gz
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: code/ladybugdb/csharp/global.json
+      - name: Install the LadybugDB CLI, to share a database file with the NuGet package
+        env:
+          ASSET: ${{ matrix.asset }}
+        run: |
+          curl -fsSL -o "$RUNNER_TEMP/$ASSET" "https://github.com/LadybugDB/ladybug/releases/download/v$LBUG_VERSION/$ASSET"
+          mkdir -p "$RUNNER_TEMP/lbug"
+          case "$ASSET" in
+            *.zip) unzip -q "$RUNNER_TEMP/$ASSET" -d "$RUNNER_TEMP/lbug" ;;
+            *) tar -xzf "$RUNNER_TEMP/$ASSET" -C "$RUNNER_TEMP/lbug" ;;
+          esac
+          echo "$RUNNER_TEMP/lbug" >> "$GITHUB_PATH"
+      - run: bash code/ladybugdb/csharp/check.sh
