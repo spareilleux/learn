@@ -22,7 +22,7 @@ compare() {
 }
 
 # Formatting (the rejected snippets are left out: v fmt checks them too, and fails)
-if v fmt -verify examples warnings panics l01-project > out/fmt.txt 2>&1; then
+if v fmt -verify examples warnings panics l01-project l01-exercise > out/fmt.txt 2>&1; then
   echo "ok   fmt"
 else
   cat out/fmt.txt
@@ -47,6 +47,9 @@ done
   echo "exit $?"
 } > out/l01_project.txt 2>&1
 compare l01_project
+(cd l01-exercise && v run . V for C# and Java developers) > out/l01_exercise.txt 2>&1
+echo "exit $?" >> out/l01_exercise.txt
+compare l01_exercise
 
 # Programs that compile with a warning or a notice, run from their folder
 for f in warnings/*.v; do
