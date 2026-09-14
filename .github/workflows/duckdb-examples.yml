@@ -1,0 +1,44 @@
+# DuckDB course: run the SQL of every lesson with the DuckDB CLI on three OSes and compare the output
+name: DuckDB course examples
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['code/duckdb/**', '.github/workflows/duckdb-examples.yml']
+  pull_request:
+    paths: ['code/duckdb/**', '.github/workflows/duckdb-examples.yml']
+
+permissions:
+  contents: read
+
+env:
+  DUCKDB_VERSION: 1.5.5
+
+jobs:
+  sql:
+    name: sql (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install the DuckDB CLI (Linux, macOS)
+        if: runner.os != 'Windows'
+        run: |
+          curl -fsSL https://install.duckdb.org | sh
+          ls "$HOME/.duckdb/cli"
+          echo "$HOME/.duckdb/cli/latest" >> "$GITHUB_PATH"
+      - name: Install the DuckDB CLI (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          curl -fsSL -o duckdb.zip "https://github.com/duckdb/duckdb/releases/download/v$DUCKDB_VERSION/duckdb_cli-windows-amd64.zip"
+          mkdir -p "$RUNNER_TEMP/duckdb"
+          unzip -q duckdb.zip -d "$RUNNER_TEMP/duckdb"
+          echo "$RUNNER_TEMP/duckdb" >> "$GITHUB_PATH"
+      - run: bash code/duckdb/check.sh
