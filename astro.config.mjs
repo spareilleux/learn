@@ -115,6 +115,12 @@ export default defineConfig({
 									collapsed: true,
 									items: [{ autogenerate: { directory: 'ladybugdb' } }],
 								},
+								{
+									label: 'RabbitMQ',
+									translations: { fr: 'RabbitMQ', es: 'RabbitMQ' },
+									collapsed: true,
+									items: [{ autogenerate: { directory: 'rabbitmq' } }],
+								},
 							],
 						},
 						{

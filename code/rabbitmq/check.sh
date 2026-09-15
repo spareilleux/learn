@@ -49,6 +49,9 @@ in_broker() { MSYS_NO_PATHCONV=1 $engine exec "$container" "$@"; }
 
 # Lesson 1: a producer and a consumer in two languages, and the broker's view in between
 step l01-server-version in_broker rabbitmq-diagnostics server_version
+step l01-listeners in_broker rabbitmq-diagnostics listeners
+step l01-plugins in_broker rabbitmq-plugins list --enabled
+step l01-port-connectivity in_broker rabbitmq-diagnostics check_port_connectivity
 step l01-send-cs cs l01-send
 step l01-list-queues in_broker rabbitmqctl list_queues name messages consumers
 step l01-receive-java java_client l01-receive
@@ -66,6 +69,7 @@ if [ "${UPDATE:-}" != 1 ] && ! diff --strip-trailing-cr expected/l02-topic.txt o
 else
   echo "ok   l02-topic (java)"
 fi
+step l02-exercise-topic cs l02-exercise-topic
 step l02-headers cs l02-headers
 step l02-unroutable cs l02-unroutable
 step l02-inequivalent cs l02-inequivalent
@@ -84,6 +88,7 @@ step l03-consume-cs-from-spring cs l03-consume
 # Lesson 4: acknowledgements, prefetch, confirms, durability across a broker restart, idempotence
 step l04-autoack cs l04-autoack
 step l04-manual-ack cs l04-manual-ack
+step l04-exercise-prefetch cs l04-exercise-prefetch
 step l04-nack cs l04-nack
 step l04-prefetch cs l04-prefetch
 step l04-confirms-cs cs l04-confirms

@@ -89,10 +89,15 @@ static class L04
         await DrainAsync(connection, "work.autoack");
     }
 
-    public static async Task ManualAck()
+    public static Task ManualAck() => ManualAckAsync("l04-manual-ack", [1, 0]);
+
+    // Exercise 1: the same crash with a prefetch window of 2.
+    public static Task ExercisePrefetch() => ManualAckAsync("l04-exercise-prefetch", [2]);
+
+    static async Task ManualAckAsync(string name, ushort[] prefetches)
     {
-        await using IConnection connection = await ConnectAsync("l04-manual-ack");
-        foreach (ushort prefetch in new ushort[] { 1, 0 })
+        await using IConnection connection = await ConnectAsync(name);
+        foreach (var prefetch in prefetches)
         {
             Console.WriteLine($"autoAck: false, prefetch {(prefetch == 0 ? "unlimited" : prefetch)}, 4 tasks");
             IChannel channel = await WorkQueueAsync(connection, "work.manual", 4);
@@ -219,6 +224,7 @@ static class L04
         catch (OperationInterruptedException e)
         {
             Console.WriteLine($"non-durable queue refused: {e.ShutdownReason?.ReplyCode} {e.ShutdownReason?.ReplyText}");
+            Console.WriteLine($"channel open: {channel.IsOpen}, connection open: {connection.IsOpen}");
         }
     }
 

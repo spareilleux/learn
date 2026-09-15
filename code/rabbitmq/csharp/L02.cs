@@ -64,9 +64,16 @@ static class L02
     }
 
     // Topic: keys are words separated by dots; * matches exactly one word, # matches zero or more.
-    public static async Task Topic()
+    public static Task Topic() =>
+        TopicAsync("l02-topic", ["order.created.eu", "order.shipped.us", "invoice.created.eu", "order", "order.cancelled", "eu"]);
+
+    // Exercise 1: the same bindings, with keys chosen to test the edges of * and #.
+    public static Task ExerciseTopic() =>
+        TopicAsync("l02-exercise-topic", ["order.created.us.west", "created.eu", "order..eu", "Order.created.eu", "eu.order"]);
+
+    static async Task TopicAsync(string name, string[] keys)
     {
-        await using IConnection connection = await ConnectAsync("l02-topic");
+        await using IConnection connection = await ConnectAsync(name);
         await using IChannel channel = await connection.CreateChannelAsync();
         (string Queue, string Pattern)[] bindings =
         [
@@ -85,7 +92,6 @@ static class L02
             Console.WriteLine($"bind {queue} to {pattern}");
         }
 
-        string[] keys = ["order.created.eu", "order.shipped.us", "invoice.created.eu", "order", "order.cancelled", "eu"];
         foreach (var key in keys)
         {
             await channel.BasicPublishAsync("events.topic", key, Bytes(key));
