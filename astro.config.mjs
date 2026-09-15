@@ -47,6 +47,12 @@ export default defineConfig({
 									items: [{ autogenerate: { directory: 'csharp-beginner' } }],
 								},
 								{
+									label: 'Advanced C#',
+									translations: { fr: 'C# avancé', es: 'C# avanzado' },
+									collapsed: true,
+									items: [{ autogenerate: { directory: 'csharp-advanced' } }],
+								},
+								{
 									label: 'Rust for C#/Java developers',
 									translations: { fr: 'Rust pour développeurs C#/Java', es: 'Rust para desarrolladores C#/Java' },
 									collapsed: true,
