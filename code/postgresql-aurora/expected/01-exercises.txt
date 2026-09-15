@@ -1,0 +1,41 @@
+SET
+      workflow_name      | failures 
+-------------------------+----------
+ GHA 05: exercise checks |        3
+ Rust course examples    |        3
+ Deploy to GitHub Pages  |        2
+ GHA 03: triggers        |        2
+(4 rows)
+
+CREATE ROLE
+GRANT
+GRANT
+CREATE TABLE
+SET
+ERROR:  permission denied for table flaky_steps
+RESET
+ALTER DEFAULT PRIVILEGES
+CREATE TABLE
+SET
+ count 
+-------
+     0
+(1 row)
+
+RESET
+CREATE TABLE
+INSERT 0 2
+INSERT 0 1
+ERROR:  duplicate key value violates unique constraint "notes_pkey"
+DETAIL:  Key (note_id)=(3) already exists.
+ setval 
+--------
+      3
+(1 row)
+
+ note_id 
+---------
+       4
+(1 row)
+
+INSERT 0 1

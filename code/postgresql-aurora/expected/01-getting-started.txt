@@ -1,0 +1,142 @@
+ current_database | current_user |            version            
+------------------+--------------+-------------------------------
+ postgres         | postgres     | 18.6 (Debian 18.6-1.pgdg13+2)
+(1 row)
+
+CREATE DATABASE
+You are now connected to database "learn" as user "postgres".
+      List of schemas
+  Name  |       Owner       
+--------+-------------------
+ public | pg_database_owner
+(1 row)
+
+CREATE SCHEMA
+   search_path   
+-----------------
+ "$user", public
+(1 row)
+
+CREATE TABLE
+                    Table "ci.runs"
+    Column    |  Type  | Collation | Nullable | Default 
+--------------+--------+-----------+----------+---------
+ databaseid   | bigint |           | not null | 
+ workflowName | text   |           | not null | 
+Indexes:
+    "runs_pkey" PRIMARY KEY, btree (databaseid)
+
+ERROR:  column "workflowname" does not exist
+LINE 1: SELECT workflowName FROM ci.runs;
+               ^
+HINT:  Perhaps you meant to reference the column "runs.workflowName".
+ERROR:  relation "runs" does not exist
+LINE 1: SELECT count(*) FROM runs;
+                             ^
+SET
+ count 
+-------
+     0
+(1 row)
+
+DROP TABLE
+ERROR:  syntax error at or near "3"
+LINE 1: SELECT TOP 3 relname FROM pg_class;
+                   ^
+ runs 
+------
+  125
+(1 row)
+
+CREATE TABLE
+INSERT 0 125
+     workflow_name      | runs | failures 
+------------------------+------+----------
+ Deploy to GitHub Pages |   65 |        2
+ Rust course examples   |   18 |        3
+ Java course examples   |    7 |        0
+ GHA 03: triggers       |    5 |        2
+ GHA 07: security       |    4 |        0
+(5 rows)
+
+ databaseid | workflowname 
+------------+--------------
+            | 
+            | 
+(2 rows)
+
+CREATE TABLE
+ note_id 
+---------
+       1
+(1 row)
+
+INSERT 0 1
+ERROR:  cannot insert a non-DEFAULT value into column "note_id"
+DETAIL:  Column "note_id" is an identity column defined as GENERATED ALWAYS.
+HINT:  Use OVERRIDING SYSTEM VALUE to override.
+BEGIN
+ note_id 
+---------
+       2
+(1 row)
+
+INSERT 0 1
+ROLLBACK
+ note_id 
+---------
+       3
+(1 row)
+
+INSERT 0 1
+ note_id |            body             
+---------+-----------------------------
+       1 | first deployment of the day
+       3 | after the rollback
+(2 rows)
+
+                            Table "ci.notes"
+ Column  |  Type  | Collation | Nullable |           Default            
+---------+--------+-----------+----------+------------------------------
+ note_id | bigint |           | not null | generated always as identity
+ run_id  | bigint |           | not null | 
+ body    | text   |           | not null | 
+Indexes:
+    "notes_pkey" PRIMARY KEY, btree (note_id)
+Foreign-key constraints:
+    "notes_run_id_fkey" FOREIGN KEY (run_id) REFERENCES runs(run_id)
+
+       sequence       
+----------------------
+ ci.notes_note_id_seq
+(1 row)
+
+CREATE ROLE
+SET
+ERROR:  permission denied for schema ci
+LINE 1: SELECT count(*) FROM ci.runs;
+                             ^
+ERROR:  permission denied for schema public
+LINE 1: CREATE TABLE public.scratch (a integer);
+                     ^
+ERROR:  permission denied for function pg_read_file
+RESET
+GRANT
+GRANT
+SET
+ count 
+-------
+   125
+(1 row)
+
+ERROR:  permission denied for table notes
+RESET
+                             List of roles
+ Role name |                         Attributes                         
+-----------+------------------------------------------------------------
+ app       | 
+ postgres  | Superuser, Create role, Create DB, Replication, Bypass RLS
+
+ERROR:  cross-database references are not implemented: "postgres.public.pg_class"
+LINE 1: SELECT * FROM postgres.public.pg_class;
+                      ^

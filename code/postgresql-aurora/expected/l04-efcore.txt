@@ -1,0 +1,15 @@
+SELECT i.name AS "Name", i.guitar_voicing AS "GuitarVoicing", i.alternate_names[1] AS "FirstAlias"
+FROM ga.iconic_chords AS i
+WHERE 4 = ANY (i.pitch_classes) AND i.guitar_voicing IS NOT NULL
+ORDER BY i.name
+
+Hendrix Chord: [0, 7, 6, 7, 8, 0] alias Purple Haze Chord
+James Bond Chord: [0, 2, 1, 0, 0, 0] alias Spy Chord
+
+SELECT i.name
+FROM ga.iconic_chords AS i
+WHERE EXISTS (
+    SELECT 1
+    FROM unnest(i.alternate_names) AS a(value)
+    WHERE a.value ILIKE '%beatles%')
+A Hard Day's Night Chord, Blackbird Chord

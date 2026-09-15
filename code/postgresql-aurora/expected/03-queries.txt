@@ -1,0 +1,159 @@
+            workflow_name            | failed_runs | failed_jobs 
+-------------------------------------+-------------+-------------
+ GHA 05: exercise checks             |           3 |           3
+ Rust course examples                |           3 |           7
+ Deploy to GitHub Pages              |           2 |           2
+ GHA 03: triggers                    |           2 |           0
+ GHA 04: data between steps and jobs |           1 |           1
+(5 rows)
+
+ paths | projects | longest_path 
+-------+----------+--------------
+   435 |       20 |            7
+(1 row)
+
+ depth |                                   chain                                    
+-------+----------------------------------------------------------------------------
+     3 | GA.Business.AI.csproj > GA.Data.MongoDB.csproj > GA.Business.Assets.csproj
+(1 row)
+
+INSERT 0 1
+SET
+ERROR:  canceling statement due to statement timeout
+RESET
+ paths | cycles | longest_path 
+-------+--------+--------------
+ 15655 |   6982 |           13
+(1 row)
+
+ projects 
+----------
+       21
+(1 row)
+
+DELETE 1
+   run_id    |       started_at       |   took   | previous_took | nth | failures_so_far 
+-------------+------------------------+----------+---------------+-----+-----------------
+ 34768259924 | 2026-09-13 16:20:06+00 | 00:00:32 |               |   1 |               0
+ 34768314558 | 2026-09-13 16:21:09+00 | 00:00:20 | 00:00:32      |   2 |               0
+ 34769559799 | 2026-09-13 16:45:55+00 | 00:00:20 | 00:00:20      |   3 |               0
+ 34770934509 | 2026-09-13 17:13:25+00 | 00:00:33 | 00:00:20      |   4 |               0
+ 34772306529 | 2026-09-13 17:40:34+00 | 00:00:40 | 00:00:33      |   5 |               1
+ 34772373891 | 2026-09-13 17:41:56+00 | 00:00:31 | 00:00:40      |   6 |               2
+(6 rows)
+
+       os       | jobs |  total   | percent 
+----------------+------+----------+---------
+ ubuntu-latest  |  246 | 01:27:52 |    50.0
+ windows-latest |   35 | 00:56:25 |    32.1
+ macos-latest   |   34 | 00:31:33 |    17.9
+(3 rows)
+
+            workflow_name            |   run_id    |     job      |            step             
+-------------------------------------+-------------+--------------+-----------------------------
+ Deploy to GitHub Pages              | 34845198191 | deploy       | Deploy to GitHub Pages
+ GHA 04: data between steps and jobs | 34845384597 | produce      | Tests (fail on demand)
+ GHA 04: exercise checks             | 34847078287 | produce      | Fail
+ GHA 05: exercise checks             | 34847802892 | no-lock-file | Run actions/setup-dotnet@v6
+ GHA 05: exercise checks             | 34848189352 | no-lock-file | Run actions/setup-dotnet@v6
+ GHA 05: exercise checks             | 34848421802 | no-lock-file | Run actions/setup-dotnet@v6
+(6 rows)
+
+ failed_runs | without_failed_step 
+-------------+---------------------
+          16 |                   3
+(1 row)
+
+                  package                  | text_max | versions 
+-------------------------------------------+----------+----------
+ Microsoft.Extensions.Hosting              | 9.0.4    |        5
+ Microsoft.Extensions.Hosting.Abstractions | 9.0.10   |        1
+(2 rows)
+
+ERROR:  invalid input syntax for type integer: "0-preview"
+         version         | refs 
+-------------------------+------
+ 0.*                     |    1
+ 0.1.0-preview.10        |    1
+ 0.22.0-preview.24378.1  |    1
+ 1.0.0-alpha0031         |    1
+ 1.0.0-beta.24164.1      |   12
+ 1.0.0-preview.251028.1  |    1
+ 1.27.0-alpha            |    2
+ 13.0.0-preview.24       |    2
+ 2.0.0-beta5.25277.114   |    2
+ 2.2.0-beta.1            |    5
+ 4.0.0-preview.24478.1   |    2
+ 8.*-*                   |    1
+ 9.4.0-preview.1.25207.5 |    4
+(13 rows)
+
+                  package                  | version 
+-------------------------------------------+---------
+ Microsoft.Extensions.Hosting              | 10.0.5
+ Microsoft.Extensions.Hosting.Abstractions | 9.0.10
+ Microsoft.Extensions.Http                 | 10.0.0
+ Microsoft.Extensions.Http.Polly           | 9.0.10
+ Microsoft.Extensions.Http.Resilience      | 9.1.0
+(5 rows)
+
+CREATE TABLE
+           package            | version |       pinned_at        
+------------------------------+---------+------------------------
+ Microsoft.Extensions.Hosting | 10.0.5  | 2026-09-14 00:00:00+00
+ MongoDB.Driver               | 3.5.0   | 2026-09-14 00:00:00+00
+(2 rows)
+
+INSERT 0 2
+    package     | old_version | new_version | inserted 
+----------------+-------------+-------------+----------
+ MongoDB.Driver | 3.5.0       | 3.2.0       | f
+ Npgsql         |             | 10.0.3      | t
+(2 rows)
+
+INSERT 0 2
+ERROR:  ON CONFLICT DO UPDATE command cannot affect row a second time
+HINT:  Ensure that no rows proposed for insertion within the same command have duplicate constrained values.
+ package 
+---------
+(0 rows)
+
+INSERT 0 0
+ action |                  package                  | old_version | new_version 
+--------+-------------------------------------------+-------------+-------------
+ DELETE | Npgsql                                    | 10.0.3      | 
+ INSERT | coverlet.collector                        |             | 6.0.4
+ INSERT | JetBrains.Annotations                     |             | 2024.3.0
+ INSERT | Microsoft.Extensions.DependencyInjection  |             | 10.0.2
+ INSERT | Microsoft.Extensions.Logging              |             | 10.0.0
+ INSERT | Microsoft.Extensions.Logging.Abstractions |             | 10.0.2
+ INSERT | Microsoft.Extensions.Logging.Console      |             | 10.0.0
+ INSERT | Microsoft.NET.Test.Sdk                    |             | 17.14.0
+ INSERT | NUnit                                     |             | 4.3.2
+ INSERT | NUnit3TestAdapter                         |             | 5.0.0
+ INSERT | NUnit.Analyzers                           |             | 4.7.0
+ INSERT | Spectre.Console                           |             | 0.51.1
+ INSERT | Swashbuckle.AspNetCore                    |             | 7.0.0
+ INSERT | System.Numerics.Tensors                   |             | 10.0.2
+ UPDATE | MongoDB.Driver                            | 3.2.0       | 3.5.0
+(15 rows)
+
+                  package                  | version  |       pinned_at        
+-------------------------------------------+----------+------------------------
+ coverlet.collector                        | 6.0.4    | 2026-09-14 00:00:00+00
+ JetBrains.Annotations                     | 2024.3.0 | 2026-09-14 00:00:00+00
+ Microsoft.Extensions.DependencyInjection  | 10.0.2   | 2026-09-14 00:00:00+00
+ Microsoft.Extensions.Hosting              | 10.0.5   | 2026-09-14 00:00:00+00
+ Microsoft.Extensions.Logging              | 10.0.0   | 2026-09-14 00:00:00+00
+ Microsoft.Extensions.Logging.Abstractions | 10.0.2   | 2026-09-14 00:00:00+00
+ Microsoft.Extensions.Logging.Console      | 10.0.0   | 2026-09-14 00:00:00+00
+ Microsoft.NET.Test.Sdk                    | 17.14.0  | 2026-09-14 00:00:00+00
+ MongoDB.Driver                            | 3.5.0    | 2026-09-16 00:00:00+00
+ NUnit                                     | 4.3.2    | 2026-09-14 00:00:00+00
+ NUnit3TestAdapter                         | 5.0.0    | 2026-09-14 00:00:00+00
+ NUnit.Analyzers                           | 4.7.0    | 2026-09-14 00:00:00+00
+ Spectre.Console                           | 0.51.1   | 2026-09-14 00:00:00+00
+ Swashbuckle.AspNetCore                    | 7.0.0    | 2026-09-14 00:00:00+00
+ System.Numerics.Tensors                   | 10.0.2   | 2026-09-14 00:00:00+00
+(15 rows)
+

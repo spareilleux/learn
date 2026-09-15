@@ -1,0 +1,128 @@
+       float8        | numeric | int_division |  numeric_division  
+---------------------+---------+--------------+--------------------
+ 0.30000000000000004 |     0.3 |            3 | 3.5000000000000000
+(1 row)
+
+ERROR:  integer out of range
+ERROR:  numeric field overflow
+DETAIL:  A field with precision 5, scale 2 must round to an absolute value less than 10^3.
+ cast_truncates 
+----------------
+ windows
+(1 row)
+
+CREATE TABLE
+ERROR:  value too long for type character varying(7)
+ char_concat | characters | bytes 
+-------------+------------+-------
+ ab|         |          1 |     2
+(1 row)
+
+   run_id    |       started_at       
+-------------+------------------------
+ 34852867099 | 2026-09-14 14:01:09+00
+(1 row)
+
+SET
+   run_id    |       started_at       
+-------------+------------------------
+ 34852867099 | 2026-09-14 10:01:09-04
+(1 row)
+
+  tokyo_wall_clock   |          pg_typeof          
+---------------------+-----------------------------
+ 2026-09-14 23:01:09 | timestamp without time zone
+(1 row)
+
+      timestamptz       |      timestamp      
+------------------------+---------------------
+ 2026-09-14 04:01:09-04 | 2026-09-14 10:01:09
+(1 row)
+
+RESET
+       os       | jobs |     average     | longest  
+----------------+------+-----------------+----------
+ macos-latest   |   34 | 00:00:55.676471 | 00:04:30
+ ubuntu-latest  |  246 | 00:00:21.430894 | 00:03:39
+ windows-latest |   35 | 00:01:36.714286 | 00:04:44
+(3 rows)
+
+ERROR:  column "duration" can only be updated to DEFAULT
+DETAIL:  Column "duration" is a generated column.
+ERROR:  invalid input syntax for type boolean: "maybe"
+LINE 1: ...ECT 'yes'::boolean AS yes, 'off'::boolean AS off, 'maybe'::b...
+                                                             ^
+CREATE TABLE
+INSERT 0 3
+ version | created_just_now |          message           
+---------+------------------+----------------------------
+       7 | t                | slowest macos-latest job
+       7 | t                | slowest ubuntu-latest job
+       7 | t                | slowest windows-latest job
+(3 rows)
+
+             json              |      jsonb       
+-------------------------------+------------------
+ {"b": 1, "a": [1, 2], "a": 3} | {"a": 3, "b": 1}
+(1 row)
+
+      labels      | jobs 
+------------------+------
+ {ubuntu-latest}  |  246
+ {windows-latest} |   35
+ {macos-latest}   |   34
+(3 rows)
+
+ macos_jobs 
+------------
+         34
+(1 row)
+
+ pitch_classes |          artists           
+---------------+----------------------------
+ {0,4,7,10}    | {"Jimi Hendrix","",Prince}
+(1 row)
+
+ number |            name             |       started_at       |      completed_at      |                         ran                         | empty 
+--------+-----------------------------+------------------------+------------------------+-----------------------------------------------------+-------
+      1 | Set up job                  | 2026-09-14 02:50:32+00 | 2026-09-14 02:50:33+00 | ["2026-09-14 02:50:32+00","2026-09-14 02:50:33+00") | f
+      2 | Run actions/checkout@v7     | 2026-09-14 02:50:33+00 | 2026-09-14 02:50:40+00 | ["2026-09-14 02:50:33+00","2026-09-14 02:50:40+00") | f
+      3 | Run actions/setup-java@v6   | 2026-09-14 02:50:40+00 | 2026-09-14 02:50:41+00 | ["2026-09-14 02:50:40+00","2026-09-14 02:50:41+00") | f
+      4 | Run actions/setup-dotnet@v6 | 2026-09-14 02:50:41+00 | 2026-09-14 02:51:13+00 | ["2026-09-14 02:50:41+00","2026-09-14 02:51:13+00") | f
+(4 rows)
+
+ zero_second_steps | steps 
+-------------------+-------
+               857 |  2204
+(1 row)
+
+ overlapping_if_closed 
+-----------------------
+                  2798
+(1 row)
+
+ERROR:  conflicting key value violates exclusion constraint "steps_job_id_ran_excl"
+DETAIL:  Key (job_id, ran)=(103842192310, ["2026-09-14 02:50:35+00","2026-09-14 02:50:36+00")) conflicts with existing key (job_id, ran)=(103842192310, ["2026-09-14 02:50:33+00","2026-09-14 02:50:40+00")).
+ERROR:  value for domain ci.conclusion violates check constraint "conclusion_check"
+ERROR:  new row for relation "runs" violates check constraint "runs_head_sha_check"
+DETAIL:  Failing row contains (1, Test, push, success, main, not-a-sha, 1, 2026-09-15 00:00:00+00, 2026-09-15 00:00:00+00, 2026-09-15 00:00:00+00).
+CREATE TABLE
+INSERT 0 2
+ owners_without_email 
+----------------------
+                    2
+(1 row)
+
+CREATE TABLE
+ERROR:  duplicate key value violates unique constraint "maintainers_email_key"
+DETAIL:  Key (email)=(null) already exists.
+CREATE TABLE
+ALTER TABLE
+ERROR:  column name mismatch in header line field 1: got "from", expected "from_path"
+CONTEXT:  COPY raw_refs, line 1: "from,to"
+ERROR:  duplicate key value violates unique constraint "raw_refs_pkey"
+DETAIL:  Key (from_path, to_path)=(Apps/ga-server/GA.Knowledge.Service/GA.Knowledge.Service.csproj, Common/GA.Business.Config/GA.Business.Config.fsproj) already exists.
+CONTEXT:  COPY raw_refs, line 61
+ALTER TABLE
+ERROR:  insert or update on table "raw_refs" violates foreign key constraint "raw_refs_to_path_fkey"
+DETAIL:  Key (to_path)=(Experiments/React/reactapp1.client/reactapp1.client.esproj) is not present in table "projects".

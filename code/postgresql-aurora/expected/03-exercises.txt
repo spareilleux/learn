@@ -1,0 +1,64 @@
+       name       |   declared   |   played    | missing |  extra  
+------------------+--------------+-------------+---------+---------
+ Blackbird Chord  | {2,7,11}     | {1,2,4,7,9} | {11}    | {1,4,9}
+ Cowboy Chord     | {2,7,11}     | {2,7,11}    | {}      | {}
+ Hendrix Chord    | {2,4,7,8,11} | {2,4,7,8}   | {11}    | {}
+ James Bond Chord | {3,4,7,11}   | {3,4,7,11}  | {}      | {}
+ Mu Major Chord   | {0,2,7}      | {0,2,4,7}   | {}      | {4}
+ Power Chord      | {2,7}        | {2,7}       | {}      | {}
+(6 rows)
+
+ depth |                                      project                                      
+-------+-----------------------------------------------------------------------------------
+     1 | Apps/GaChatbotCli/GaChatbotCli.csproj
+     1 | Apps/GaChatbot/GaChatbot.csproj
+     1 | Apps/ga-server/GA.BSP.Service/GA.BSP.Service.csproj
+     1 | Apps/ga-server/GA.DocumentProcessing.Service/GA.DocumentProcessing.Service.csproj
+     1 | Common/GA.Business.AI/GA.Business.AI.csproj
+     1 | Common/GA.Business.ML/GA.Business.ML.csproj
+     1 | GaCLI/GaCLI.csproj
+     2 | Apps/GaChatbot.Api/GaChatbot.Api.csproj
+     2 | Apps/GaMemoryCli/GaMemoryCli.csproj
+     2 | Apps/GaQaMcp/GaQaMcp.csproj
+     2 | Apps/ga-server/GaApi/GaApi.csproj
+     2 | Common/GA.Business.Core.Orchestration/GA.Business.Core.Orchestration.csproj
+     2 | Common/GA.Business.Intelligence/GA.Business.Intelligence.csproj
+     2 | Common/GA.Testing.Semantic/GA.Testing.Semantic.csproj
+     2 | Demos/IntelligentAnalysis/IntelligentAnalysisDemo.csproj
+     2 | Demos/Music Theory/FretboardVoicingsCLI/FretboardVoicingsCLI.csproj
+     2 | GaMcpServer/GaMcpServer.csproj
+     2 | GenerateNatData/GenerateNatData.csproj
+     2 | Tests/Apps/GaChatbot.Tests/GaChatbot.Tests.csproj
+     2 | Tests/Common/GA.Business.Core.Tests/GA.Business.Core.Tests.csproj
+     2 | Tests/Common/GA.Business.ML.Tests/GA.Business.ML.Tests.csproj
+     2 | Tools/GaStructureInvariance/GaStructureInvariance.csproj
+     3 | AllProjects.AppHost/AllProjects.AppHost.csproj
+     3 | Apps/ga-server/GA.Analytics.Service/GA.Analytics.Service.csproj
+     3 | Apps/InteractiveTutorial/InteractiveTutorial.csproj
+     3 | Demos/Performance/VectorSearchBenchmark/VectorSearchBenchmark.csproj
+     3 | Tests/Apps/GaApi.Tests/GaApi.Tests.csproj
+     3 | Tests/Apps/GaChatbot.Api.Tests/GaChatbot.Api.Tests.csproj
+     3 | Tests/Apps/GaMcpServer.Tests/GaMcpServer.Tests.csproj
+     3 | Tests/GaApi.Tests/GaApi.Tests.csproj
+(30 rows)
+
+            workflow_name            |       failed_at        | time_to_green 
+-------------------------------------+------------------------+---------------
+ GHA 04: data between steps and jobs | 2026-09-14 12:47:40+00 | 
+ GHA 04: exercise checks             | 2026-09-14 13:05:23+00 | 
+ GHA 05: exercise checks             | 2026-09-14 13:12:27+00 | 
+ GHA 05: exercise checks             | 2026-09-14 13:16:06+00 | 
+ GHA 05: exercise checks             | 2026-09-14 13:18:20+00 | 
+ GHA 06: exercise checks             | 2026-09-14 13:24:13+00 | 
+ GHA 10: exercise checks             | 2026-09-14 13:53:12+00 | 
+ Rust course examples                | 2026-09-13 19:09:08+00 | 00:03:48
+ Deploy to GitHub Pages              | 2026-09-14 13:36:16+00 | 00:03:46
+ Rust course examples                | 2026-09-13 17:40:34+00 | 00:02:15
+ GHA 09: exercise checks             | 2026-09-14 13:46:43+00 | 00:02:13
+ GHA 03: triggers                    | 2026-09-14 12:45:24+00 | 00:02:05
+ GHA 03: triggers                    | 2026-09-14 12:45:38+00 | 00:01:51
+ GHA 10: custom actions              | 2026-09-14 13:53:04+00 | 00:01:03
+ Deploy to GitHub Pages              | 2026-09-14 12:45:39+00 | 00:00:59
+ Rust course examples                | 2026-09-13 17:41:56+00 | 00:00:53
+(16 rows)
+

@@ -1,0 +1,25 @@
+       name       |  pitch_classes  | notes |     first_alias     
+------------------+-----------------+-------+---------------------
+ Debussy Chord    | {0,4,7,11,2}    |     5 | Impressionist Chord
+ Elektra Chord    | {4,8,11,2,5,10} |     6 | Strauss Chord
+ Hendrix Chord    | {4,8,11,2,7}    |     5 | Purple Haze Chord
+ James Bond Chord | {4,7,11,3}      |     4 | Spy Chord
+ So What Chord    | {4,9,2,7,11}    |     5 | Em11
+(5 rows)
+
+ERROR:  value for domain ga.pitch_class violates check constraint "pitch_class_check"
+  utc_day   | toronto_day | runs 
+------------+-------------+------
+ 2026-09-13 | 2026-09-13  |   43
+ 2026-09-14 | 2026-09-13  |   23
+ 2026-09-14 | 2026-09-14  |   59
+(3 rows)
+
+ERROR:  indexes on virtual generated columns are not supported
+CREATE INDEX
+                           QUERY PLAN                           
+----------------------------------------------------------------
+ Seq Scan on jobs
+   Filter: ((completed_at - started_at) > '00:04:00'::interval)
+(2 rows)
+

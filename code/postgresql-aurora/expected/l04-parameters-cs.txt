@@ -1,0 +1,12 @@
+34776807003 2026-09-13T19:09:08.0000000Z Kind=Utc
+34777004019 2026-09-13T19:12:56.0000000Z Kind=Utc
+windows jobs over 2 minutes: 8
+macos-latest: 34
+windows-latest: 35
+Timezone=UTC, Kind=Utc: 82 runs since 2026-09-14 00:00
+Timezone=UTC, Kind=Unspecified: 82 runs since 2026-09-14 00:00
+Timezone=America/Toronto, Kind=Utc: 82 runs since 2026-09-14 00:00
+Timezone=America/Toronto, Kind=Unspecified: 59 runs since 2026-09-14 00:00
+ArgumentException: Cannot write DateTimeOffset with Offset=-04:00:00 to PostgreSQL type 'timestamp with time zone', only offset 0 (UTC) is supported.  (Parameter 'value')
+DateTimeOffset in UTC: 59 runs since 2026-09-14 00:00 in Toronto
+42883: operator does not exist: bigint = text
