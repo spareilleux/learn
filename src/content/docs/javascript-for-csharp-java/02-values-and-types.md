@@ -5,9 +5,9 @@ sidebar:
   order: 2
 ---
 
-Code: the files [`examples/l02_*.js`](https://github.com/spareilleux/learn/tree/c13a07e40b30f8ce81fc25cd373b821b569e6c60/code/javascript-for-csharp-java/examples), and the C# and Java sides in [`compare/l02_numbers.cs`](https://github.com/spareilleux/learn/blob/c13a07e40b30f8ce81fc25cd373b821b569e6c60/code/javascript-for-csharp-java/compare/l02_numbers.cs) and [`compare/L02Numbers.java`](https://github.com/spareilleux/learn/blob/c13a07e40b30f8ce81fc25cd373b821b569e6c60/code/javascript-for-csharp-java/compare/L02Numbers.java).
+Code: the files [`examples/l02_*.js`](https://github.com/spareilleux/learn/tree/c65efe4fb76e61efd229793b296d3d7a44e71baf/code/javascript-for-csharp-java/examples), and the C# and Java sides in [`compare/l02_numbers.cs`](https://github.com/spareilleux/learn/blob/c65efe4fb76e61efd229793b296d3d7a44e71baf/code/javascript-for-csharp-java/compare/l02_numbers.cs) and [`compare/L02Numbers.java`](https://github.com/spareilleux/learn/blob/c65efe4fb76e61efd229793b296d3d7a44e71baf/code/javascript-for-csharp-java/compare/L02Numbers.java).
 
-The examples of this lesson and the next two print their results with two small helpers from [`examples/show.js`](https://github.com/spareilleux/learn/blob/c13a07e40b30f8ce81fc25cd373b821b569e6c60/code/javascript-for-csharp-java/examples/show.js). `show` prints a label, then the value the way Node.js's interactive shell would, with strings in quotes so that `'12'` and `12` look different. `attempt` does the same for a function, and prints the error instead when the function throws.
+The examples of this lesson and the next two print their results with two small helpers from [`examples/show.js`](https://github.com/spareilleux/learn/blob/c65efe4fb76e61efd229793b296d3d7a44e71baf/code/javascript-for-csharp-java/examples/show.js). `show` prints a label, then the value the way Node.js's interactive shell would, with strings in quotes so that `'12'` and `12` look different. `attempt` does the same for a function, and prints the error instead when the function throws.
 
 ```js
 // examples/show.js
@@ -548,7 +548,7 @@ An `if`, `!`, `&&` and `||` accept any value and convert it with [ToBoolean](htt
 <details>
 <summary>Solution</summary>
 
-[`solutions/l02_ex1_is_blank.js`](https://github.com/spareilleux/learn/blob/c13a07e40b30f8ce81fc25cd373b821b569e6c60/code/javascript-for-csharp-java/solutions/l02_ex1_is_blank.js):
+[`solutions/l02_ex1_is_blank.js`](https://github.com/spareilleux/learn/blob/c65efe4fb76e61efd229793b296d3d7a44e71baf/code/javascript-for-csharp-java/solutions/l02_ex1_is_blank.js):
 
 ```js
 function isBlank(value) {
@@ -578,7 +578,7 @@ isBlank([])                        false
 <details>
 <summary>Solution</summary>
 
-[`solutions/l02_ex2_parse_port.js`](https://github.com/spareilleux/learn/blob/c13a07e40b30f8ce81fc25cd373b821b569e6c60/code/javascript-for-csharp-java/solutions/l02_ex2_parse_port.js):
+[`solutions/l02_ex2_parse_port.js`](https://github.com/spareilleux/learn/blob/c65efe4fb76e61efd229793b296d3d7a44e71baf/code/javascript-for-csharp-java/solutions/l02_ex2_parse_port.js):
 
 ```js
 function parsePort(text) {
@@ -610,7 +610,7 @@ The regular expression does the work neither built-in function does: `Number` al
 
 </details>
 
-3. Predict each result, then run [`solutions/l02_ex3_predict.js`](https://github.com/spareilleux/learn/blob/c13a07e40b30f8ce81fc25cd373b821b569e6c60/code/javascript-for-csharp-java/solutions/l02_ex3_predict.js): `'2' + 2 * '2'`, `null + 1`, `undefined + 1`, `[] == ![]`, `'b' + 'a' + +'a' + 'a'`, `0.1 * 3 === 0.3`, and `10n ** 400n > Number.MAX_VALUE`.
+3. Predict each result, then run [`solutions/l02_ex3_predict.js`](https://github.com/spareilleux/learn/blob/c65efe4fb76e61efd229793b296d3d7a44e71baf/code/javascript-for-csharp-java/solutions/l02_ex3_predict.js): `'2' + 2 * '2'`, `null + 1`, `undefined + 1`, `[] == ![]`, `'b' + 'a' + +'a' + 'a'`, `0.1 * 3 === 0.3`, and `10n ** 400n > Number.MAX_VALUE`.
 
 <details>
 <summary>Solution</summary>

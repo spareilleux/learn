@@ -5,7 +5,7 @@ sidebar:
   order: 3
 ---
 
-Code: the files [`examples/l03_*`](https://github.com/spareilleux/learn/tree/c13a07e40b30f8ce81fc25cd373b821b569e6c60/code/javascript-for-csharp-java/examples), [`errors/l03_duplicate_function.js`](https://github.com/spareilleux/learn/blob/c13a07e40b30f8ce81fc25cd373b821b569e6c60/code/javascript-for-csharp-java/errors/l03_duplicate_function.js), and the C# and Java sides in [`compare/l03_closures.cs`](https://github.com/spareilleux/learn/blob/c13a07e40b30f8ce81fc25cd373b821b569e6c60/code/javascript-for-csharp-java/compare/l03_closures.cs), [`compare/L03MethodRef.java`](https://github.com/spareilleux/learn/blob/c13a07e40b30f8ce81fc25cd373b821b569e6c60/code/javascript-for-csharp-java/compare/L03MethodRef.java) and [`compare_fail/L03Closures.java`](https://github.com/spareilleux/learn/blob/c13a07e40b30f8ce81fc25cd373b821b569e6c60/code/javascript-for-csharp-java/compare_fail/L03Closures.java).
+Code: the files [`examples/l03_*`](https://github.com/spareilleux/learn/tree/c65efe4fb76e61efd229793b296d3d7a44e71baf/code/javascript-for-csharp-java/examples), [`errors/l03_duplicate_function.js`](https://github.com/spareilleux/learn/blob/c65efe4fb76e61efd229793b296d3d7a44e71baf/code/javascript-for-csharp-java/errors/l03_duplicate_function.js), and the C# and Java sides in [`compare/l03_closures.cs`](https://github.com/spareilleux/learn/blob/c65efe4fb76e61efd229793b296d3d7a44e71baf/code/javascript-for-csharp-java/compare/l03_closures.cs), [`compare/L03MethodRef.java`](https://github.com/spareilleux/learn/blob/c65efe4fb76e61efd229793b296d3d7a44e71baf/code/javascript-for-csharp-java/compare/L03MethodRef.java) and [`compare_fail/L03Closures.java`](https://github.com/spareilleux/learn/blob/c65efe4fb76e61efd229793b296d3d7a44e71baf/code/javascript-for-csharp-java/compare_fail/L03Closures.java).
 
 ## Three ways to write a function
 
@@ -265,15 +265,15 @@ function whoAmI() {
 const lesson = { name: 'lesson', whoAmI };
 const journal = { name: 'journal' };
 
-// Rule 1, implicit binding: the object before the dot
+// Implicit binding: the object before the dot
 show('lesson.whoAmI()', lesson.whoAmI());
 
-// Rule 2, default binding: a plain call, undefined in strict code (modules and classes)
+// Default binding: a plain call, undefined in strict code (modules and classes)
 show('whoAmI()', whoAmI());
 const detached = lesson.whoAmI;
 show('detached()', detached());
 
-// Rule 3, explicit binding: call, apply and bind
+// Explicit binding: call, apply and bind
 show('whoAmI.call(journal)', whoAmI.call(journal));
 show('whoAmI.apply(journal, [])', whoAmI.apply(journal, []));
 const bound = whoAmI.bind(journal);
@@ -282,7 +282,7 @@ lesson.bound = bound;
 show('lesson.bound()', lesson.bound());
 show('bound.call(lesson)', bound.call(lesson));
 
-// Rule 4, new binding: a new object
+// New binding: a new object
 function Page(name) {
   this.name = name;
 }
@@ -516,7 +516,7 @@ bind returns a new function each time: false
 <details>
 <summary>Solution</summary>
 
-[`solutions/l03_ex1_var_loop.js`](https://github.com/spareilleux/learn/blob/c13a07e40b30f8ce81fc25cd373b821b569e6c60/code/javascript-for-csharp-java/solutions/l03_ex1_var_loop.js) shows two ways:
+[`solutions/l03_ex1_var_loop.js`](https://github.com/spareilleux/learn/blob/c65efe4fb76e61efd229793b296d3d7a44e71baf/code/javascript-for-csharp-java/solutions/l03_ex1_var_loop.js) shows two ways:
 
 ```js
 const withParameter = [];
@@ -546,7 +546,7 @@ The first calls a function at each iteration, and a parameter is a new variable 
 <details>
 <summary>Solution</summary>
 
-[`solutions/l03_ex2_once.js`](https://github.com/spareilleux/learn/blob/c13a07e40b30f8ce81fc25cd373b821b569e6c60/code/javascript-for-csharp-java/solutions/l03_ex2_once.js):
+[`solutions/l03_ex2_once.js`](https://github.com/spareilleux/learn/blob/c65efe4fb76e61efd229793b296d3d7a44e71baf/code/javascript-for-csharp-java/solutions/l03_ex2_once.js):
 
 ```js
 function once(fn) {
@@ -583,7 +583,7 @@ starts: 1
 
 </details>
 
-3. Predict each line, then run [`solutions/l03_ex3_predict.js`](https://github.com/spareilleux/learn/blob/c13a07e40b30f8ce81fc25cd373b821b569e6c60/code/javascript-for-csharp-java/solutions/l03_ex3_predict.js):
+3. Predict each line, then run [`solutions/l03_ex3_predict.js`](https://github.com/spareilleux/learn/blob/c65efe4fb76e61efd229793b296d3d7a44e71baf/code/javascript-for-csharp-java/solutions/l03_ex3_predict.js):
 
 ```js
 class Tuner {

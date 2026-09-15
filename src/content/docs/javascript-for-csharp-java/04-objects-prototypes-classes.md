@@ -5,7 +5,7 @@ sidebar:
   order: 4
 ---
 
-Code: the files [`examples/l04_*.js`](https://github.com/spareilleux/learn/tree/c13a07e40b30f8ce81fc25cd373b821b569e6c60/code/javascript-for-csharp-java/examples), [`errors/l04_private_outside.js`](https://github.com/spareilleux/learn/blob/c13a07e40b30f8ce81fc25cd373b821b569e6c60/code/javascript-for-csharp-java/errors/l04_private_outside.js), and the C# and Java sides in [`compare/l04_equality.cs`](https://github.com/spareilleux/learn/blob/c13a07e40b30f8ce81fc25cd373b821b569e6c60/code/javascript-for-csharp-java/compare/l04_equality.cs) and [`compare/L04Equality.java`](https://github.com/spareilleux/learn/blob/c13a07e40b30f8ce81fc25cd373b821b569e6c60/code/javascript-for-csharp-java/compare/L04Equality.java).
+Code: the files [`examples/l04_*.js`](https://github.com/spareilleux/learn/tree/c65efe4fb76e61efd229793b296d3d7a44e71baf/code/javascript-for-csharp-java/examples), [`errors/l04_private_outside.js`](https://github.com/spareilleux/learn/blob/c65efe4fb76e61efd229793b296d3d7a44e71baf/code/javascript-for-csharp-java/errors/l04_private_outside.js), and the C# and Java sides in [`compare/l04_equality.cs`](https://github.com/spareilleux/learn/blob/c65efe4fb76e61efd229793b296d3d7a44e71baf/code/javascript-for-csharp-java/compare/l04_equality.cs) and [`compare/L04Equality.java`](https://github.com/spareilleux/learn/blob/c65efe4fb76e61efd229793b296d3d7a44e71baf/code/javascript-for-csharp-java/compare/L04Equality.java).
 
 ## Objects are property bags
 
@@ -473,7 +473,7 @@ Exercise 3 rewrites the function.
 <details>
 <summary>Solution</summary>
 
-[`solutions/l04_ex1_deep_equal.js`](https://github.com/spareilleux/learn/blob/c13a07e40b30f8ce81fc25cd373b821b569e6c60/code/javascript-for-csharp-java/solutions/l04_ex1_deep_equal.js):
+[`solutions/l04_ex1_deep_equal.js`](https://github.com/spareilleux/learn/blob/c65efe4fb76e61efd229793b296d3d7a44e71baf/code/javascript-for-csharp-java/solutions/l04_ex1_deep_equal.js):
 
 ```js
 function deepEqual(a, b) {
@@ -509,7 +509,7 @@ true
 <details>
 <summary>Solution</summary>
 
-[`solutions/l04_ex2_temperature.js`](https://github.com/spareilleux/learn/blob/c13a07e40b30f8ce81fc25cd373b821b569e6c60/code/javascript-for-csharp-java/solutions/l04_ex2_temperature.js):
+[`solutions/l04_ex2_temperature.js`](https://github.com/spareilleux/learn/blob/c65efe4fb76e61efd229793b296d3d7a44e71baf/code/javascript-for-csharp-java/solutions/l04_ex2_temperature.js):
 
 ```js
 class Temperature {
@@ -560,7 +560,7 @@ Without `toJSON`, `JSON.stringify(room)` would print `{}`, since a private field
 <details>
 <summary>Solution</summary>
 
-[`solutions/l04_ex3_merge.js`](https://github.com/spareilleux/learn/blob/c13a07e40b30f8ce81fc25cd373b821b569e6c60/code/javascript-for-csharp-java/solutions/l04_ex3_merge.js):
+[`solutions/l04_ex3_merge.js`](https://github.com/spareilleux/learn/blob/c65efe4fb76e61efd229793b296d3d7a44e71baf/code/javascript-for-csharp-java/solutions/l04_ex3_merge.js):
 
 ```js
 function getDefaults(search, saved) {

@@ -7,7 +7,7 @@ sidebar:
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-Code: [`examples/l01_hello.js`](https://github.com/spareilleux/learn/blob/c13a07e40b30f8ce81fc25cd373b821b569e6c60/code/javascript-for-csharp-java/examples/l01_hello.js), the projects [`l01-esm`](https://github.com/spareilleux/learn/tree/c13a07e40b30f8ce81fc25cd373b821b569e6c60/code/javascript-for-csharp-java/l01-esm), [`l01-cjs`](https://github.com/spareilleux/learn/tree/c13a07e40b30f8ce81fc25cd373b821b569e6c60/code/javascript-for-csharp-java/l01-cjs) and [`l01-interop`](https://github.com/spareilleux/learn/tree/c13a07e40b30f8ce81fc25cd373b821b569e6c60/code/javascript-for-csharp-java/l01-interop), and the error snippets in [`errors/`](https://github.com/spareilleux/learn/tree/c13a07e40b30f8ce81fc25cd373b821b569e6c60/code/javascript-for-csharp-java/errors).
+Code: [`examples/l01_hello.js`](https://github.com/spareilleux/learn/blob/c65efe4fb76e61efd229793b296d3d7a44e71baf/code/javascript-for-csharp-java/examples/l01_hello.js), the projects [`l01-esm`](https://github.com/spareilleux/learn/tree/c65efe4fb76e61efd229793b296d3d7a44e71baf/code/javascript-for-csharp-java/l01-esm), [`l01-cjs`](https://github.com/spareilleux/learn/tree/c65efe4fb76e61efd229793b296d3d7a44e71baf/code/javascript-for-csharp-java/l01-cjs) and [`l01-interop`](https://github.com/spareilleux/learn/tree/c65efe4fb76e61efd229793b296d3d7a44e71baf/code/javascript-for-csharp-java/l01-interop), and the error snippets in [`errors/`](https://github.com/spareilleux/learn/tree/c65efe4fb76e61efd229793b296d3d7a44e71baf/code/javascript-for-csharp-java/errors).
 
 ## An engine and a host
 
@@ -195,7 +195,7 @@ Commit `package.json` and `package-lock.json`, never `node_modules`. In CI, `npm
 
 ### Scripts
 
-The `scripts` of `package.json` are named commands, the closest thing to MSBuild targets or Maven goals. [`l01-esm/package.json`](https://github.com/spareilleux/learn/blob/c13a07e40b30f8ce81fc25cd373b821b569e6c60/code/javascript-for-csharp-java/l01-esm/package.json) has two:
+The `scripts` of `package.json` are named commands, the closest thing to MSBuild targets or Maven goals. [`l01-esm/package.json`](https://github.com/spareilleux/learn/blob/c65efe4fb76e61efd229793b296d3d7a44e71baf/code/javascript-for-csharp-java/l01-esm/package.json) has two:
 
 ```json
 {
@@ -233,7 +233,7 @@ Both add `node_modules/.bin` to the `PATH`, so a script can call the tools of in
 
 ### In real projects
 
-This site's [`package.json`](https://github.com/spareilleux/learn/blob/c13a07e40b30f8ce81fc25cd373b821b569e6c60/package.json#L1-L12) declares `"type": "module"` and scripts that call [Astro](https://docs.astro.build/): `npm run build` runs `astro build`, found in `node_modules/.bin`.
+This site's [`package.json`](https://github.com/spareilleux/learn/blob/c65efe4fb76e61efd229793b296d3d7a44e71baf/package.json#L1-L12) declares `"type": "module"` and scripts that call [Astro](https://docs.astro.build/): `npm run build` runs `astro build`, found in `node_modules/.bin`.
 
 GuitarAlchemist/ga shows two traps of a JavaScript project maintained by C# developers:
 
@@ -249,7 +249,7 @@ npm error notsup Valid cpu:  x64
 npm error notsup Actual cpu: x64
 ```
 
-macOS fails the same way. The folder has only a `pnpm-lock.yaml`, and pnpm 10 installed a package for another OS without a word on my machine, so the project installs with pnpm and not with npm. The usual fix is to leave the platform packages out: esbuild lists them all as `optionalDependencies`, and each package manager installs the one that matches.
+macOS fails the same way. The folder has only a `pnpm-lock.yaml`, and pnpm 10 installed a package for another OS without a word on my machine, so the project probably installs with pnpm on every OS, but not with npm (*to verify* on Linux and macOS). The usual fix is to leave the platform packages out: esbuild lists them all as `optionalDependencies`, and each package manager installs the one that matches.
 
 ## Modules: ES modules and CommonJS
 
@@ -275,7 +275,7 @@ Node.js [chooses the module system](https://nodejs.org/docs/latest-v24.x/api/pac
 2. a `.js` file follows the `"type"` field of the nearest `package.json`, `"module"` or `"commonjs"`;
 3. a `.js` file without a `"type"` above it is parsed as CommonJS, and parsed again as an ES module if it contains `import` or `export` ([syntax detection](https://nodejs.org/docs/latest-v24.x/api/packages.html#syntax-detection)).
 
-The third case works, with a warning. [`l01-interop/package.json`](https://github.com/spareilleux/learn/blob/c13a07e40b30f8ce81fc25cd373b821b569e6c60/code/javascript-for-csharp-java/l01-interop/package.json) has no `"type"`, and `detect.js` contains an `import`:
+The third case works, with a warning. [`l01-interop/package.json`](https://github.com/spareilleux/learn/blob/c65efe4fb76e61efd229793b296d3d7a44e71baf/code/javascript-for-csharp-java/l01-interop/package.json) has no `"type"`, and `detect.js` contains an `import`:
 
 ```text
 > node detect.js
@@ -287,7 +287,7 @@ To eliminate this warning, add "type": "module" to l01-interop/package.json.
 ```
 
 :::note[Error outputs in this course]
-Node.js prints absolute paths, a process ID and a stack trace whose frames name its internal files. The outputs in the lessons show the paths relative to the course folder, `PID` for the process ID, and no `at …` frames; [`normalize.mjs`](https://github.com/spareilleux/learn/blob/c13a07e40b30f8ce81fc25cd373b821b569e6c60/code/javascript-for-csharp-java/normalize.mjs) makes the same changes before the CI compares them. Everything else is Node.js 24.21.0's output, identical on Windows, Linux and macOS.
+Node.js prints absolute paths, a process ID and a stack trace whose frames name its internal files. The outputs in the lessons show the paths relative to the course folder, `PID` for the process ID, and no `at …` frames; [`normalize.mjs`](https://github.com/spareilleux/learn/blob/c65efe4fb76e61efd229793b296d3d7a44e71baf/code/javascript-for-csharp-java/normalize.mjs) makes the same changes before the CI compares them. Everything else is Node.js 24.21.0's output, identical on Windows, Linux and macOS.
 :::
 
 ### The same program, twice
@@ -381,7 +381,7 @@ l01-cjs: main.js, typeof require = function
 
 ### Mixing them up
 
-`require` in an ES module. The course folder's [`package.json`](https://github.com/spareilleux/learn/blob/c13a07e40b30f8ce81fc25cd373b821b569e6c60/code/javascript-for-csharp-java/package.json) says `"type": "module"`:
+`require` in an ES module. The course folder's [`package.json`](https://github.com/spareilleux/learn/blob/c65efe4fb76e61efd229793b296d3d7a44e71baf/code/javascript-for-csharp-java/package.json) says `"type": "module"`:
 
 ```js
 // errors/l01_require_in_esm.js
@@ -502,7 +502,7 @@ GuitarAlchemist/ga uses the extensions as intended: its front ends are `"type": 
 ## Key takeaways
 
 - ECMAScript is the language; V8 is the engine; Node.js is a host that adds files, processes and modules. A browser is another host.
-- Node.js 24 is the LTS line until October 2026, supported until April 2028; npm comes with it.
+- Node.js 24 is the active LTS line until October 2026 and stays supported until April 2028; npm comes with it.
 - `package.json` is the manifest and `package-lock.json` the lock file; commit both, and install in CI with `npm ci`.
 - `npm install` writes `^` ranges: any later minor or patch version is accepted, and the lock file is what pins the exact one.
 - A `.js` file is an ES module or a CommonJS module according to the `"type"` of the nearest `package.json`; `.mjs` and `.cjs` force the choice.
@@ -515,7 +515,7 @@ GuitarAlchemist/ga uses the extensions as intended: its front ends are `"type": 
 <details>
 <summary>Solution</summary>
 
-Only the path: `require('./greet')` doesn't find `greet.mjs`, because `require` only tries the extensions `.js`, `.json` and `.node`. [`solutions/l01-ex1`](https://github.com/spareilleux/learn/tree/c13a07e40b30f8ce81fc25cd373b821b569e6c60/code/javascript-for-csharp-java/solutions/l01-ex1):
+Only the path: `require('./greet')` doesn't find `greet.mjs`, because `require` only tries the extensions `.js`, `.json` and `.node`. [`solutions/l01-ex1`](https://github.com/spareilleux/learn/tree/c65efe4fb76e61efd229793b296d3d7a44e71baf/code/javascript-for-csharp-java/solutions/l01-ex1):
 
 ```js
 // main.js
