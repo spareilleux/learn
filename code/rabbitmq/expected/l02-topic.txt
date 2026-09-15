@@ -1,0 +1,9 @@
+bind orders.all to order.#
+bind created.anywhere to *.created.*
+bind europe to #.eu
+bind orders.two-words to order.*
+orders.all: order.created.eu | order.shipped.us | order | order.cancelled
+created.anywhere: order.created.eu | invoice.created.eu
+europe: order.created.eu | invoice.created.eu | eu
+orders.two-words: order.cancelled
+exit 0

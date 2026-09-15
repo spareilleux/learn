@@ -1,0 +1,8 @@
+get task 1 delivery-tag=1 redelivered=False (then 1 ready)
+  nack requeue=true: back in the queue, at its original position
+get task 1 delivery-tag=2 redelivered=True (then 1 ready)
+  reject requeue=false: discarded (or dead-lettered, lesson 6)
+get task 2 delivery-tag=3 redelivered=False (then 0 ready)
+  ack: removed
+work.nack holds 0 message(s)
+exit 0

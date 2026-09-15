@@ -1,0 +1,15 @@
+autoAck: false, prefetch 1, 4 tasks
+  consumer 1 handled task 1
+  consumer 1 crashes while handling task 2
+  work.manual holds 3 message(s)
+  consumer 2 handled task 2 redelivered=True
+  consumer 2 handled task 3 redelivered=False
+  consumer 2 handled task 4 redelivered=False
+autoAck: false, prefetch unlimited, 4 tasks
+  consumer 1 handled task 1
+  consumer 1 crashes while handling task 2
+  work.manual holds 3 message(s)
+  consumer 2 handled task 2 redelivered=True
+  consumer 2 handled task 3 redelivered=True
+  consumer 2 handled task 4 redelivered=True
+exit 0

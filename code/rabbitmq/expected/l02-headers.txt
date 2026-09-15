@@ -1,0 +1,3 @@
+reports.pdf: report/pdf
+reports.any: report/pdf | report/csv | invoice/pdf
+exit 0

@@ -1,0 +1,5 @@
+#1 order.created.ca content-type=application/json message-id=C-1 type=order.created app-id=spring headers=[__TypeId__=dev.learn.rabbitmq.spring.OrdersApplication$Order, region=ca]
+   Order { Id = C-1, Sku = AMP, Quantity = 1 }
+#2 order.created.ca content-type=application/json message-id=C-2 type=order.created app-id=spring headers=[__TypeId__=dev.learn.rabbitmq.spring.OrdersApplication$Order, region=ca]
+   Order { Id = C-2, Sku = CABLE, Quantity = 3 }
+exit 0

@@ -1,0 +1,7 @@
+consumer 1: P-1 redelivered=False charged, balance 30
+consumer 1: P-1 redelivered=False already processed, acknowledged without charging
+consumer 1: P-2 redelivered=False charged, balance 75
+consumer 1: crashes before acknowledging P-2
+consumer 2: P-2 redelivered=True already processed, acknowledged without charging
+final balance 75
+exit 0

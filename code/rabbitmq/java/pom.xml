@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <!-- Spring Boot's parent POM: dependency and plugin versions for both modules, including Spring AMQP -->
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>4.1.1</version>
+    <relativePath/>
+  </parent>
+
+  <groupId>io.github.spareilleux.learn</groupId>
+  <artifactId>rabbitmq</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>RabbitMQ course: Java examples</name>
+
+  <modules>
+    <module>client</module>
+    <module>spring</module>
+  </modules>
+
+  <properties>
+    <java.version>25</java.version>
+    <!-- Spring Boot 4.1.1 manages 5.30.0; the course uses the current Java client in both modules -->
+    <rabbit-amqp-client.version>5.35.0</rabbit-amqp-client.version>
+  </properties>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <configuration>
+            <compilerArgs>
+              <arg>-Xlint:all,-processing</arg>
+            </compilerArgs>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>

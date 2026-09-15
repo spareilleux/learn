@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: orders-spring
+  main:
+    web-application-type: none
+    banner-mode: off
+  rabbitmq:
+    # Spring Boot's defaults are localhost:5672, guest/guest; RABBITMQ_HOST points the course examples elsewhere
+    host: ${RABBITMQ_HOST:localhost}
+  lifecycle:
+    timeout-per-shutdown-phase: 5s
+
+# The listener stops the application after this many orders
+orders:
+  expected: 3
+
+logging:
+  level:
+    root: warn

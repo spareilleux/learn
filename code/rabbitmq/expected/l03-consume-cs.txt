@@ -1,0 +1,5 @@
+#1 order.created.us content-type=application/json message-id=B-1 type=order.created app-id=java headers=[region=us]
+   Order { Id = B-1, Sku = TUNER, Quantity = 1 }
+#2 order.created.us content-type=application/json message-id=B-2 type=order.created app-id=java headers=[region=us]
+   Order { Id = B-2, Sku = STRAP, Quantity = 2 }
+exit 0

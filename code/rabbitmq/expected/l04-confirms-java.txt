@@ -1,0 +1,7 @@
+#1 order 1 to orders.confirmed: confirmed
+#2 order 2 to no-such-queue: confirmed
+   basic.return 312 NO_ROUTE
+#3 order 3 to no-such-queue: confirmed
+#4 order 4 to orders.limited: confirmed
+#5 order 5 to orders.limited: nacked
+exit 0

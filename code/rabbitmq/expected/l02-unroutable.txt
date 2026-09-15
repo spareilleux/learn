@@ -1,0 +1,6 @@
+mandatory=false: published refund #1, billing.invoices holds 0 message(s)
+mandatory=true: returned 312 NO_ROUTE, exchange=billing.direct key=refund body=refund #2
+alternate-exchange:
+billing.invoices: invoice #3
+billing.unrouted: refund #3
+exit 0
