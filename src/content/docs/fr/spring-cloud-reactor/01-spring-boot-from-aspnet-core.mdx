@@ -1,0 +1,640 @@
+---
+title: 1. Spring Boot vu depuis ASP.NET Core
+description: Spring Initializr, le conteneur IoC et ses beans, l'auto-configuration, application.yml et les profils, @ConfigurationProperties et Actuator — mis en correspondance avec Program.cs, IServiceCollection, appsettings.json, IOptions et les health checks.
+sidebar:
+  order: 1
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Exemple complet : [`code/spring-cloud-reactor/l01-mvc`](https://github.com/spareilleux/learn/tree/main/code/spring-cloud-reactor/l01-mvc), une API de gammes sur Spring MVC. Ses tests comparent chaque réponse, extrait de journal et rapport d'erreur cité ci-dessous aux fichiers de [`expected`](https://github.com/spareilleux/learn/tree/main/code/spring-cloud-reactor/l01-mvc/expected), et le côté .NET est [`csharp/l01-di.cs`](https://github.com/spareilleux/learn/blob/main/code/spring-cloud-reactor/csharp/l01-di.cs).
+
+## La même application, deux frameworks
+
+Une application ASP.NET Core dit ce qu'elle contient : `Program.cs` enregistre les services, lit la configuration et mappe les endpoints, une ligne à la fois. Une application Spring Boot, pour l'essentiel, ne le dit pas. Elle déclare une classe, en annote quelques autres, et le framework trouve le reste sur le class path. Les pièces sont les mêmes ; ce qui change, c'est qui écrit la liste.
+
+| ASP.NET Core | Spring Boot | Rôle |
+|---|---|---|
+| `dotnet new webapi` | [Spring Initializr](https://start.spring.io/) | génère un projet |
+| `Program.cs` avec `WebApplication.CreateBuilder` | une classe annotée [`@SpringBootApplication`](https://docs.spring.io/spring-boot/reference/using/using-the-springbootapplication-annotation.html) | le point d'entrée |
+| `IServiceCollection`, `IServiceProvider` | le [conteneur IoC](https://docs.spring.io/spring-framework/reference/core/beans.html), un `ApplicationContext` | crée et injecte les objets |
+| `builder.Services.AddScoped<T>()` | le [component scanning](https://docs.spring.io/spring-framework/reference/core/beans/classpath-scanning.html) des classes `@Component`, ou des méthodes `@Bean` | les enregistre |
+| `AddControllers()`, `AddHealthChecks()`… | l'[auto-configuration](https://docs.spring.io/spring-boot/reference/using/auto-configuration.html) | active les fonctionnalités |
+| `appsettings.json`, `appsettings.Development.json` | `application.yml`, `application-dev.yml` ([profils](https://docs.spring.io/spring-boot/reference/features/profiles.html)) | configuration |
+| `IOptions<T>` | [`@ConfigurationProperties`](https://docs.spring.io/spring-boot/reference/features/external-config.html#features.external-config.typesafe-configuration-properties) | configuration typée |
+| `[ApiController]`, minimal APIs | `@RestController` ([Spring MVC](https://docs.spring.io/spring-framework/reference/web/webmvc.html)) | endpoints |
+| Kestrel | Tomcat (embarqué) | le serveur HTTP |
+| `MapHealthChecks`, `IHealthCheck` | [Actuator](https://docs.spring.io/spring-boot/reference/actuator/endpoints.html), `HealthIndicator` | endpoints de santé et de gestion |
+| `WebApplicationFactory<Program>` | `@SpringBootTest` | tests d'intégration |
+
+## Générer un projet
+
+[Spring Initializr](https://start.spring.io/) est à la fois une page web et une API HTTP. La page permet de cocher des dépendances ; l'API fait la même chose depuis un terminal :
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+```powershell
+curl.exe https://start.spring.io/starter.zip -d type=maven-project -d bootVersion=4.1.1 -d javaVersion=25 `
+  -d groupId=dev.learn -d artifactId=scales -d packageName=dev.learn.scales `
+  -d dependencies=web,actuator,validation -o scales.zip
+Expand-Archive scales.zip -DestinationPath scales
+cd scales
+.\mvnw.cmd package
+```
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```bash
+curl https://start.spring.io/starter.zip -d type=maven-project -d bootVersion=4.1.1 -d javaVersion=25 \
+  -d groupId=dev.learn -d artifactId=scales -d packageName=dev.learn.scales \
+  -d dependencies=web,actuator,validation -o scales.zip
+unzip scales.zip -d scales
+cd scales
+./mvnw package
+```
+
+</TabItem>
+<TabItem label="macOS">
+
+```bash
+curl https://start.spring.io/starter.zip -d type=maven-project -d bootVersion=4.1.1 -d javaVersion=25 \
+  -d groupId=dev.learn -d artifactId=scales -d packageName=dev.learn.scales \
+  -d dependencies=web,actuator,validation -o scales.zip
+unzip scales.zip -d scales
+cd scales
+./mvnw package
+```
+
+</TabItem>
+</Tabs>
+
+J'ai exécuté les commandes PowerShell, et les commandes Bash dans Git Bash, sous Windows le 2026-09-14 ; sous Linux et macOS, elles sont *à vérifier* (il faudra peut-être d'abord installer `unzip`). L'archive contient un projet Maven avec le [Maven Wrapper](https://maven.apache.org/tools/wrapper/) (`mvnw`, qui télécharge Maven 3.9.16 à la première utilisation), une classe d'application et un test :
+
+```text
+scales/
+├── .mvn/wrapper/maven-wrapper.properties
+├── mvnw, mvnw.cmd
+├── pom.xml
+└── src/
+    ├── main/java/dev/learn/scales/ScalesApplication.java
+    ├── main/resources/application.properties
+    └── test/java/dev/learn/scales/ScalesApplicationTests.java
+```
+
+Le `pom.xml` généré est court parce que son parent fait le travail, comme l'expliquait la [leçon 10 du cours Java](../../java-for-csharp/10-maven-and-gradle-in-depth/) : `spring-boot-starter-parent` fixe la version de chaque bibliothèque et de chaque plugin Spring, comme `Directory.Packages.props` et les valeurs par défaut du SDK réunis.
+
+```xml
+<parent>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-parent</artifactId>
+  <version>4.1.1</version>
+  <relativePath/> <!-- lookup parent from repository -->
+</parent>
+...
+<dependencies>
+  <dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-webmvc</artifactId>
+  </dependency>
+  ...
+  <dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-webmvc-test</artifactId>
+    <scope>test</scope>
+  </dependency>
+</dependencies>
+```
+
+Un **starter** est une dépendance sans code propre qui apporte un ensemble cohérent de bibliothèques : `spring-boot-starter-webmvc` apporte Spring MVC, Tomcat et Jackson. Il joue le rôle de la référence au framework qu'ajoute `Microsoft.NET.Sdk.Web` à un projet. Deux détails sont nouveaux dans Spring Boot 4, d'après le [guide de migration](https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-4.0-Migration-Guide) : le starter web que je connaissais sous le nom `spring-boot-starter-web` s'appelle désormais `spring-boot-starter-webmvc` (l'API d'Initializr accepte encore l'ancien identifiant `web`, comme le montre la commande ci-dessus), et chaque technologie a son propre starter de test, nommé `spring-boot-starter-<technology>-test`.
+
+Le [POM parent](https://github.com/spareilleux/learn/blob/main/code/spring-cloud-reactor/pom.xml) du cours importe aussi le BOM de Spring Cloud, `spring-cloud-dependencies` 2025.1.3, le release train que [spring.io](https://spring.io/projects/spring-cloud) associe à Spring Boot 4.0 et 4.1. Les leçons 1 à 4 n'utilisent pas encore Spring Cloud ; importer le BOM dès le départ permet aux leçons suivantes d'ajouter des dépendances sans version.
+
+## Le point d'entrée
+
+```java
+// Program.cs : @SpringBootApplication active le component scanning et l'auto-configuration pour ce package et ses sous-packages.
+@SpringBootApplication
+@ConfigurationPropertiesScan
+public class ScalesApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(ScalesApplication.class, args);
+    }
+}
+```
+
+`@SpringBootApplication` combine trois annotations : `@SpringBootConfiguration` (cette classe peut déclarer des beans), `@EnableAutoConfiguration` (configurer ce que suggère le class path) et `@ComponentScan` (enregistrer chaque classe annotée de ce package et de ses sous-packages). `@ConfigurationPropertiesScan` ajoute les classes de configuration typée des mêmes packages. `SpringApplication.run` crée le conteneur, démarre le serveur embarqué et rend la main une fois l'application prête. Le journal montre les étapes ; le test qui le capture remplace l'identifiant du processus, le port, les chemins et les durées, qui changent d'une exécution à l'autre :
+
+```text
+INFO <pid> --- [scales] [           main] dev.learn.scales.ScalesApplication : Starting ScalesApplication using Java <version> with PID <pid> (<path>)
+ INFO <pid> --- [scales] [           main] dev.learn.scales.ScalesApplication : No active profile set, falling back to 1 default profile: "default"
+ INFO <pid> --- [scales] [           main] o.s.boot.tomcat.TomcatWebServer : Tomcat initialized with port <port> (http)
+ INFO <pid> --- [scales] [           main] o.apache.catalina.core.StandardService : Starting service [Tomcat]
+ INFO <pid> --- [scales] [           main] o.apache.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/<version>]
+ INFO <pid> --- [scales] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in <n> ms
+ INFO <pid> --- [scales] [           main] o.s.b.a.e.web.EndpointLinksResolver : Exposing 2 endpoints beneath base path '/actuator'
+ INFO <pid> --- [scales] [           main] o.s.boot.tomcat.TomcatWebServer : Tomcat started on port <port> (http) with context path '/'
+ INFO <pid> --- [scales] [           main] dev.learn.scales.ScalesApplication : Started ScalesApplication in <n> seconds (process running for <n>)
+```
+
+`[scales]` est `spring.application.name`, et `main` est le thread. Sur ma machine, le démarrage complet a pris 1,5 seconde, pour l'essentiel du chargement de classes.
+
+## Les beans et le conteneur
+
+Spring appelle **beans** les objets que gère son conteneur. Il y a deux façons d'en déclarer un, et une application Spring utilise les deux.
+
+**Le component scanning.** Une classe annotée `@Component`, ou l'une de ses spécialisations `@Service`, `@Repository`, `@Controller` et `@RestController`, est enregistrée parce qu'elle se trouve dans un package scanné. Il n'y a de ligne `AddSingleton` nulle part :
+
+```java
+// @Service est un @Component : le component scanning l'enregistre comme singleton, sans appel à AddSingleton.
+@Service
+public class ScaleService {
+
+    private final NoteSpeller speller;
+
+    // Un constructeur unique n'a pas besoin de @Autowired : Spring injecte ses paramètres, comme le conteneur .NET.
+    public ScaleService(NoteSpeller speller) {
+        this.speller = speller;
+    }
+```
+
+**Les méthodes `@Bean`.** Une méthode d'une classe `@Configuration` renvoie l'objet à enregistrer. C'est la forme Spring de `services.AddSingleton<INoteSpeller>(sp => ...)`, pour les objets qui demandent une décision ou qui viennent d'une bibliothèque qu'on ne peut pas annoter :
+
+```java
+// Une classe @Configuration contient des méthodes de fabrique, comme services.AddSingleton<INoteSpeller>(sp => ...).
+@Configuration
+class SpellingConfiguration {
+
+    @Bean
+    NoteSpeller noteSpeller(ScalesProperties properties) {
+        return switch (properties.spelling()) {
+            case SHARPS -> NoteSpeller.sharps();
+            case FLATS -> NoteSpeller.flats();
+        };
+    }
+}
+```
+
+Les paramètres d'une méthode `@Bean` sont injectés comme des paramètres de constructeur. `NoteSpeller` nomme une note avec des dièses (`A#`) ou des bémols (`Bb`) ; la section suivante lie `ScalesProperties` à la configuration.
+
+Trois différences avec .NET comptent au quotidien :
+
+- **Singleton est la valeur par défaut.** Un enregistrement .NET indique toujours une durée de vie. Un bean Spring est un singleton sauf s'il dit autre chose avec [`@Scope`](https://docs.spring.io/spring-framework/reference/core/beans/factory-scopes.html) : `prototype` est le transient de .NET, et `request` est ce qui se rapproche le plus de scoped dans une application web. La plupart des beans d'un service Spring sont des singletons sans état.
+- **Chaque bean a un nom.** `scaleService` pour la classe ci-dessus, `noteSpeller` pour la méthode. Les noms comptent quand plusieurs beans partagent un type, et ils entrent en collision : à la leçon 4, une méthode `@Bean` nommée comme sa propre classe `@Configuration` a empêché l'application de démarrer.
+- **Le conteneur est vérifié au démarrage.** Les singletons sont créés dès le démarrage du contexte, si bien qu'une dépendance manquante arrête l'application avant qu'elle ne serve une requête.
+
+### Quand le conteneur ne peut pas trancher
+
+Le cas d'une dépendance manquante montre le mieux la dernière différence. Le test [`StartupTest`](https://github.com/spareilleux/learn/blob/main/code/spring-cloud-reactor/l01-mvc/src/test/java/dev/learn/scales/StartupTest.java) démarre un contexte qui enregistre `ScaleService` mais rien qui implémente `NoteSpeller`. Les failure analyzers de Spring Boot transforment l'exception en rapport :
+
+```text
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 0 of constructor in dev.learn.scales.ScaleService required a bean of type 'dev.learn.scales.NoteSpeller' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'dev.learn.scales.NoteSpeller' in your configuration.
+```
+
+Le conteneur .NET construit un provider sans broncher et n'échoue qu'au moment où le service est résolu. `ValidateOnBuild` déplace la vérification au démarrage, ce que Spring fait toujours. Le côté C# affiche :
+
+```text
+built a provider without INoteSpeller
+resolve: Unable to resolve service for type 'INoteSpeller' while attempting to activate 'ScaleService'.
+ValidateOnBuild: 1 error(s): Error while validating the service descriptor 'ServiceType: ScaleService Lifetime: Singleton ImplementationType: ScaleService': Unable to resolve service for type 'INoteSpeller' while attempting to activate 'ScaleService'.
+```
+
+[`ServiceProviderOptions.ValidateOnBuild`](https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.serviceprovideroptions.validateonbuild) est activé par défaut dans l'environnement Development d'un hôte ASP.NET Core : les deux frameworks détectent donc ce cas au démarrage pendant le développement ; seul Spring le fait dans tous les environnements.
+
+**Deux candidats** sont un cas plus délicat. Enregistrez deux beans `NoteSpeller` et demandez-en un :
+
+```java
+// Deux beans NoteSpeller et un constructeur qui en demande un : .NET prendrait en silence le dernier enregistrement.
+@Configuration
+@Import(ScaleService.class)
+public class TwoSpellersApplication {
+
+    @Bean
+    NoteSpeller sharpSpeller() {
+        return NoteSpeller.sharps();
+    }
+
+    @Bean
+    NoteSpeller flatSpeller() {
+        return NoteSpeller.flats();
+    }
+}
+```
+
+```text
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 0 of constructor in dev.learn.scales.ScaleService required a single bean, but 2 were found:
+	- sharpSpeller: defined by method 'sharpSpeller' in dev.learn.broken.ambiguous.TwoSpellersApplication
+	- flatSpeller: defined by method 'flatSpeller' in dev.learn.broken.ambiguous.TwoSpellersApplication
+
+This may be due to missing parameter name information
+
+Action:
+
+Consider marking one of the beans as @Primary, updating the consumer to accept multiple beans, or using @Qualifier to identify the bean that should be consumed
+```
+
+.NET résout la même situation en silence, avec le dernier enregistrement :
+
+```text
+two registrations, ScaleService uses FlatSpeller
+IEnumerable<INoteSpeller>: SharpSpeller, FlatSpeller
+keyed "flats": FlatSpeller
+```
+
+Les trois portes de sortie de Spring correspondent à celles de .NET :
+
+| Spring | .NET |
+|---|---|
+| `@Primary` sur un bean | l'enregistrer en dernier |
+| un paramètre `List<NoteSpeller>` | `IEnumerable<INoteSpeller>` |
+| `@Qualifier("flatSpeller")` sur le paramètre, ou une `Map<String, NoteSpeller>` indexée par nom de bean | les [keyed services](https://learn.microsoft.com/dotnet/core/extensions/dependency-injection#keyed-services), `[FromKeyedServices("flats")]` |
+
+La ligne "This may be due to missing parameter name information" est ici du bruit : quand le nom du paramètre correspond à un nom de bean, Spring l'utilise comme qualificateur de repli, et il lui faut seulement `-parameters`, que le POM parent passe déjà à javac.
+
+## L'auto-configuration
+
+Rien dans l'exemple ne crée de serveur Tomcat, de mapper JSON ni de `DispatcherServlet` (le contrôleur frontal de Spring MVC). Ce sont des classes d'**auto-configuration**, livrées dans les JAR de Spring Boot, qui les créent, chacune sous conditions. Démarrer l'application avec `--debug` affiche le rapport d'évaluation des conditions. Un extrait du mien :
+
+```text
+============================
+CONDITIONS EVALUATION REPORT
+============================
+
+
+Positive matches:
+-----------------
+
+   DispatcherServletAutoConfiguration matched:
+      - @ConditionalOnClass found required class 'org.springframework.web.servlet.DispatcherServlet' (OnClassCondition)
+      - found 'session' scope (OnWebApplicationCondition)
+
+   JacksonAutoConfiguration#jacksonJsonMapper matched:
+      - @ConditionalOnMissingBean (types: tools.jackson.databind.json.JsonMapper; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   TomcatServletWebServerAutoConfiguration matched:
+      - @ConditionalOnClass found required classes 'jakarta.servlet.ServletRequest', 'org.apache.catalina.startup.Tomcat', 'org.apache.coyote.UpgradeProtocol', 'org.springframework.boot.tomcat.servlet.TomcatServletWebServerFactory' (OnClassCondition)
+      - found 'session' scope (OnWebApplicationCondition)
+
+Negative matches:
+-----------------
+
+   JacksonAutoConfiguration.XmlConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required class 'tools.jackson.dataformat.xml.XmlMapper' (OnClassCondition)
+```
+
+Deux conditions font l'essentiel du travail :
+
+- **`@ConditionalOnClass`** : configurer Tomcat parce que Tomcat est sur le class path. Ajouter un starter, c'est la façon d'activer une fonctionnalité, là où ASP.NET Core demande à la fois le package et un appel `Add…()`.
+- **`@ConditionalOnMissingBean`** : créer un `JsonMapper` seulement si l'application n'en a pas déclaré. Déclarer son propre bean de ce type, c'est la façon de remplacer celui par défaut, sans `Replace` ni `RemoveAll` sur la collection de services.
+
+Le package `tools.jackson` est lui aussi nouveau : Spring Boot 4 utilise [Jackson 3](https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-4.0-Migration-Guide), dont les packages ont quitté `com.fasterxml.jackson`.
+
+## La configuration
+
+### `application.yml` et les propriétés typées
+
+```yaml
+spring:
+  application:
+    name: scales
+
+# Lié à ScalesProperties ; SCALES_SPELLING=flats dans l'environnement le remplace
+scales:
+  default-mode: ionian
+  spelling: sharps
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
+```
+
+`application.properties` (des lignes plates `key=value`) et `application.yml` sont équivalents ; Initializr génère le premier, beaucoup de projets utilisent le second. La section `scales` est liée à un record, l'équivalent Spring d'une classe d'options :
+
+```java
+// Le pattern options : IOptions<ScalesOptions> lié à la section "Scales", validé au démarrage.
+@ConfigurationProperties("scales")
+@Validated
+public record ScalesProperties(@NotBlank String defaultMode, @NotNull Spelling spelling) {
+
+    public enum Spelling { SHARPS, FLATS }
+}
+```
+
+Le record est lui-même un bean : `ScaleController` et la méthode `@Bean` ci-dessus reçoivent directement `ScalesProperties`, là où le code .NET injecte `IOptions<ScalesOptions>` et lit `.Value`. `@Validated` avec des annotations [Jakarta Bean Validation](https://docs.spring.io/spring-boot/reference/features/external-config.html#features.external-config.typesafe-configuration-properties.validation), c'est `ValidateDataAnnotations().ValidateOnStart()`. Un mode vide arrête l'application :
+
+```text
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Binding to target dev.learn.scales.ScalesProperties failed:
+
+    Property: scales.defaultMode
+    Value: ""
+    Origin: "scales.default-mode" from property source "commandLineArgs"
+    Reason: must not be blank
+
+
+Action:
+
+Update your application's configuration
+```
+
+Le rapport nomme la source de la propriété, ici la ligne de commande. C'est le [relaxed binding](https://docs.spring.io/spring-boot/reference/features/external-config.html#features.external-config.typesafe-configuration-properties.relaxed-binding) de Spring : `scales.default-mode` dans un fichier, `scales.defaultMode` en Java, et `SCALES_DEFAULTMODE` ou `SCALES_DEFAULT_MODE` dans l'environnement atteignent tous le même champ. La convention .NET pour la même chose est `Scales__DefaultMode`.
+
+### D'où vient une valeur
+
+Les deux frameworks empilent des sources de configuration, et une source ultérieure l'emporte. En .NET, l'ordre est celui des appels `Add…` ; le côté C# place une source en mémoire d'abord et les variables d'environnement ensuite, et affiche `Scales:Spelling = flats, Scales:DefaultMode = ionian`. Spring Boot a un [ordre fixe](https://docs.spring.io/spring-boot/reference/features/external-config.html) d'une quinzaine de sources. Celles qu'on rencontre au quotidien, de la plus faible à la plus forte :
+
+1. `application.yml` empaqueté dans le JAR ;
+2. `application-<profile>.yml` empaqueté dans le JAR ;
+3. les mêmes fichiers à côté du JAR, en dehors ;
+4. les variables d'environnement ;
+5. les propriétés système Java (`-Dscales.spelling=flats`) ;
+6. les arguments de ligne de commande (`--scales.spelling=flats`).
+
+Les annotations de test se placent au-dessus de tout cela : `@SpringBootTest(properties = ...)` l'emporte sur les fichiers, ce que vérifie [`ProfilesTest`](https://github.com/spareilleux/learn/blob/main/code/spring-cloud-reactor/l01-mvc/src/test/java/dev/learn/scales/ProfilesTest.java).
+
+### Les profils
+
+Un **profil** est un ensemble nommé de beans et de propriétés, activé avec `spring.profiles.active`. Il couvre ce que .NET répartit entre `ASPNETCORE_ENVIRONMENT` et `appsettings.{Environment}.json`, à ceci près que plusieurs profils peuvent être actifs à la fois et que leurs noms sont libres. `application-flats.yml` est chargé par-dessus `application.yml` quand le profil `flats` est actif :
+
+```yaml
+# Chargé par-dessus application.yml quand le profil "flats" est actif, comme appsettings.Development.json
+scales:
+  spelling: flats
+  default-mode: aeolian
+```
+
+Les beans peuvent aussi dépendre d'un profil. Ce runner n'existe qu'avec le profil `print`, ce qui donne un moyen rapide de voir la configuration sans démarrer de serveur web :
+
+```java
+// S'exécute une fois le contexte démarré, seulement avec le profil "print" : un moyen rapide de voir la configuration à l'œuvre.
+@Component
+@Profile("print")
+class PrintScaleRunner implements ApplicationRunner {
+```
+
+`ApplicationRunner` s'exécute une fois après le démarrage, comme le début d'un `IHostedService` qui fait son travail et rend la main. Lancer le JAR empaqueté avec une variable d'environnement :
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+```powershell
+$env:SCALES_SPELLING = 'flats'
+java -jar target/scales.jar --spring.profiles.active=print --spring.main.web-application-type=none
+Remove-Item Env:SCALES_SPELLING
+```
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```bash
+SCALES_SPELLING=flats java -jar target/scales.jar --spring.profiles.active=print --spring.main.web-application-type=none
+```
+
+</TabItem>
+<TabItem label="macOS">
+
+```bash
+SCALES_SPELLING=flats java -jar target/scales.jar --spring.profiles.active=print --spring.main.web-application-type=none
+```
+
+</TabItem>
+</Tabs>
+
+```text
+spelling: FLATS
+ScaleView[root=Bb, mode=ionian, notes=[Bb, C, D, Eb, F, G, A], chords=[Bb, Cm, Dm, Eb, F, Gm, Adim]]
+```
+
+`--spring.main.web-application-type=none` démarre le conteneur sans Tomcat. La CI exécute la même commande via [`check.sh`](https://github.com/spareilleux/learn/blob/main/code/spring-cloud-reactor/check.sh), avec le niveau de journalisation relevé à `warn` pour qu'il ne reste que ces lignes.
+
+## Le contrôleur
+
+```java
+// [ApiController] avec [Route("scales")] : la valeur renvoyée est écrite en JSON.
+@RestController
+@RequestMapping("/scales")
+class ScaleController {
+
+    private final ScaleService scales;
+    private final ScalesProperties properties;
+
+    ScaleController(ScaleService scales, ScalesProperties properties) {
+        this.scales = scales;
+        this.properties = properties;
+    }
+
+    // GET /scales/D?mode=dorian, comme [HttpGet("{root}")] avec un paramètre [FromQuery].
+    @GetMapping("/{root}")
+    ScaleService.ScaleView scale(@PathVariable String root, @RequestParam Optional<String> mode) {
+        return scales.describe(root, mode.orElse(properties.defaultMode()));
+    }
+
+    // Un problème RFC 9457, comme Results.Problem(...) dans ASP.NET Core.
+    @ExceptionHandler(IllegalArgumentException.class)
+    ProblemDetail badName(IllegalArgumentException e) {
+        ProblemDetail problem = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, e.getMessage());
+        problem.setTitle("Unknown note or mode");
+        return problem;
+    }
+}
+```
+
+La correspondance est proche d'un contrôleur ASP.NET Core. `@PathVariable` et `@RequestParam` sont `[FromRoute]` et `[FromQuery]` ; un paramètre `Optional` est facultatif, comme un paramètre nullable. [`@ExceptionHandler`](https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-ann-rest-exceptions.html) intercepte une exception levée par les méthodes de ce contrôleur et renvoie un [`ProblemDetail`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/http/ProblemDetail.html), le corps RFC 9457 qu'ASP.NET Core écrit avec [`Results.Problem`](https://learn.microsoft.com/aspnet/core/fundamentals/error-handling-api). [`HttpTranscriptTest`](https://github.com/spareilleux/learn/blob/main/code/spring-cloud-reactor/l01-mvc/src/test/java/dev/learn/scales/HttpTranscriptTest.java) démarre l'application sur un port libre et enregistre les réponses :
+
+```text
+GET /scales/D?mode=dorian
+200 application/json
+{"root":"D","mode":"dorian","notes":["D","E","F","G","A","B","C"],"chords":["Dm","Em","F","G","Am","Bdim","C"]}
+
+GET /scales/Bb
+200 application/json
+{"root":"A#","mode":"ionian","notes":["A#","C","D","D#","F","G","A"],"chords":["A#","Cm","Dm","D#","F","Gm","Adim"]}
+
+GET /scales/H
+400 application/problem+json
+{"detail":"unknown note: H","instance":"/scales/H","status":400,"title":"Unknown note or mode"}
+```
+
+`Bb` revient sous la forme `A#` : sans profil, le speller utilise des dièses. Le record est sérialisé avec les noms de ses composants, et Jackson écrit les propriétés du problème dans l'ordre alphabétique, là où ASP.NET Core commence par `type` et `title`.
+
+## Actuator
+
+`spring-boot-starter-actuator` ajoute des endpoints de gestion sous `/actuator`. Seul `health` est exposé en HTTP par défaut ; la configuration ci-dessus ajoute `info` et affiche les détails. Une vérification personnalisée est un bean `HealthIndicator`, l'équivalent de `IHealthCheck` :
+
+```java
+// IHealthCheck : Actuator ajoute chaque bean HealthIndicator à /actuator/health, sous le nom du bean.
+@Component
+class ScaleCatalogHealthIndicator implements HealthIndicator {
+
+    @Override
+    public Health health() {
+        int modes = Mode.values().length;
+        return modes == 7
+                ? Health.up().withDetail("modes", modes).build()
+                : Health.down().withDetail("modes", modes).build();
+    }
+}
+```
+
+```text
+GET /actuator/health/scaleCatalog
+200 application/vnd.spring-boot.actuator.v3+json
+{"details":{"modes":7},"status":"UP"}
+
+GET /actuator/health/liveness
+200 application/vnd.spring-boot.actuator.v3+json
+{"status":"UP"}
+```
+
+L'indicateur s'appelle `scaleCatalog`, son nom de bean sans le suffixe `HealthIndicator`, et chaque composant a sa propre URL. Le `/actuator/health` complet listait aussi `diskSpace`, `ping`, `ssl`, `livenessState` et `readinessState` sur ma machine ; le test ne le cite pas, car l'espace disque et les chemins diffèrent d'une machine à l'autre. Les groupes `liveness` et `readiness` existent pour les sondes Kubernetes, comme les [tags de health checks](https://learn.microsoft.com/aspnet/core/host-and-deploy/health-checks#filter-health-checks) dans ASP.NET Core. `HealthIndicator` et `Health` ont migré dans Spring Boot 4 vers le package `org.springframework.boot.health.contributor` : les exemples plus anciens les importent donc depuis un package qui n'existe plus.
+
+## Tests d'intégration
+
+`@SpringBootTest` démarre le contexte entier, comme `WebApplicationFactory<Program>`. Avec `webEnvironment = RANDOM_PORT`, il démarre aussi Tomcat sur un port libre, et `@LocalServerPort` injecte le port :
+
+```java
+// WebApplicationFactory<Program> avec un vrai Kestrel : l'application démarre sur un port libre pour la classe de test.
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+class HttpTranscriptTest {
+
+    @LocalServerPort
+    int port;
+```
+
+Spring met le contexte en cache entre les classes de test qui utilisent la même configuration : huit classes de test ne démarrent donc pas huit serveurs. Le starter de test apporte JUnit, AssertJ et Mockito, que la [leçon 11 du cours Java](../../java-for-csharp/11-testing/) a couverts. Bien qu'aucun test ne mocke quoi que ce soit, le support de test de Spring initialise Mockito, et la JVM avertissait qu'un agent Java avait été chargé dynamiquement, jusqu'à ce que Surefire charge Mockito avec `-javaagent`, comme le fait cette leçon-là. L'exercice 3 écrit un test avec [`RestTestClient`](https://docs.spring.io/spring-boot/reference/testing/spring-boot-applications.html), le client fluide de Spring Framework 7 pour les tests.
+
+## À retenir
+
+- Une application Spring Boot déclare moins de choses que `Program.cs` : le component scanning enregistre les classes annotées, et l'auto-configuration active ce que contient le class path.
+- Les beans sont des singletons par défaut, ont un nom et sont créés au démarrage : une dépendance manquante ou ambiguë arrête donc l'application avec un rapport lisible. .NET prend le dernier enregistrement là où Spring refuse de deviner.
+- Les méthodes `@Bean` d'une classe `@Configuration` sont les enregistrements par fabrique ; `@Primary`, `@Qualifier` et les paramètres `List` et `Map` départagent plusieurs candidats.
+- `@ConditionalOnClass` et `@ConditionalOnMissingBean` expliquent l'essentiel de l'auto-configuration : ajouter un starter pour activer une fonctionnalité, déclarer son propre bean pour remplacer un défaut. `--debug` affiche le rapport.
+- `application.yml`, les profils et les records `@ConfigurationProperties` remplacent `appsettings.json`, les environnements et `IOptions<T>`. Les variables d'environnement l'emportent sur les fichiers empaquetés ; les arguments de ligne de commande l'emportent sur tout, sauf les tests.
+- Spring Boot 4 a renommé le starter web en `spring-boot-starter-webmvc`, découpé les starters de test par technologie, adopté Jackson 3 et déplacé les classes de santé d'Actuator.
+
+## Exercices
+
+1. Avec le profil `flats`, `application-flats.yml` règle `default-mode` sur `aeolian`. Prédisez ce qu'affiche le runner `print` avec `SCALES_DEFAULT_MODE=dorian` dans l'environnement et `--spring.profiles.active=print,flats`, puis vérifiez.
+
+<details>
+<summary>Solution</summary>
+
+```text
+$ SCALES_DEFAULT_MODE=dorian java -jar target/scales.jar --spring.profiles.active=print,flats
+spelling: FLATS
+ScaleView[root=Bb, mode=dorian, notes=[Bb, C, Db, Eb, F, G, Ab], chords=[Bbm, Cm, Db, Eb, Fm, Gdim, Ab]]
+```
+
+L'orthographe des notes vient du fichier du profil, que rien ne remplace. Le mode vient de la variable d'environnement : les variables d'environnement passent avant tous les fichiers `application*.yml` empaquetés dans le JAR, spécifiques à un profil ou non. En .NET, le même résultat dépend de l'ordre des appels `Add…` ; l'hôte par défaut ajoute les variables d'environnement après les fichiers JSON, donc le résultat concorde. `check.sh` exécute cette commande en CI et compare la sortie.
+
+</details>
+
+2. Les keyed services de .NET permettent à une classe de choisir une implémentation par clé à l'exécution. Enregistrez deux beans `NoteSpeller` nommés `sharps` et `flats`, et écrivez un `SpellingChooser` qui les reçoit tous et nomme une note avec le speller dont on lui donne le nom, sans `@Qualifier`.
+
+<details>
+<summary>Solution</summary>
+
+```java
+@Configuration
+static class Spellers {
+
+    @Bean
+    NoteSpeller sharps() {
+        return NoteSpeller.sharps();
+    }
+
+    @Bean
+    NoteSpeller flats() {
+        return NoteSpeller.flats();
+    }
+
+    @Bean
+    SpellingChooser chooser(Map<String, NoteSpeller> byName, List<NoteSpeller> all) {
+        return new SpellingChooser(byName, all);
+    }
+}
+
+// Map<String, T> est indexée par nom de bean, comme [FromKeyedServices("flats")] ; List<T> est IEnumerable<T>.
+record SpellingChooser(Map<String, NoteSpeller> byName, List<NoteSpeller> all) {
+
+    String name(Note note, String spelling) {
+        NoteSpeller speller = byName.get(spelling);
+        if (speller == null) {
+            throw new IllegalArgumentException("unknown spelling: " + spelling + ", expected one of " + byName.keySet());
+        }
+        return speller.name(note);
+    }
+}
+```
+
+Un paramètre `Map<String, NoteSpeller>` reçoit chaque bean de ce type, indexé par nom de bean, dans l'ordre d'enregistrement : le test vérifie que les clés sont `[sharps, flats]` et que `A#` devient `Bb` avec `flats`. Le test crée lui-même le conteneur avec `new AnnotationConfigApplicationContext(Spellers.class)`, ce qui suffit au conteneur IoC ; Spring Boot n'intervient pas. `@Qualifier("flats")` fixerait un seul choix au moment de l'injection, comme `[FromKeyedServices]` ; la map le reporte à chaque appel, comme `GetRequiredKeyedService`.
+
+</details>
+
+3. Écrivez un test d'intégration avec `RestTestClient` qui vérifie que `GET /scales/C?mode=blues` répond 400 avec un corps `application/problem+json` dont `title`, `detail` et `instance` sont ceux que fixe le contrôleur.
+
+<details>
+<summary>Solution</summary>
+
+```java
+@SpringBootTest(classes = ScalesApplication.class, webEnvironment = WebEnvironment.RANDOM_PORT)
+@AutoConfigureRestTestClient
+class Exercise3ProblemDetailsTest {
+
+    @Autowired
+    RestTestClient client;
+
+    @Test
+    void unknownModeIsABadRequestProblem() {
+        client.get().uri("/scales/C?mode=blues")
+                .exchange()
+                .expectStatus().isBadRequest()
+                .expectHeader().contentType(MediaType.APPLICATION_PROBLEM_JSON)
+                .expectBody()
+                .jsonPath("$.title").isEqualTo("Unknown note or mode")
+                .jsonPath("$.detail").isEqualTo("unknown mode: blues")
+                .jsonPath("$.instance").isEqualTo("/scales/C");
+    }
+}
+```
+
+`@AutoConfigureRestTestClient` configure le client avec le port aléatoire : les URI sont donc relatives, comme avec le `HttpClient` que renvoie `WebApplicationFactory.CreateClient()`. `classes = ScalesApplication.class` est facultatif ici : sans lui, `@SpringBootTest` cherche une `@SpringBootConfiguration` dans le package du test et ses parents, et trouve `ScalesApplication` un niveau plus haut. `instance` est le chemin sans la query string.
+
+</details>
+
+## Sources
+
+- [Référence Spring Boot : utiliser `@SpringBootApplication`](https://docs.spring.io/spring-boot/reference/using/using-the-springbootapplication-annotation.html), [auto-configuration](https://docs.spring.io/spring-boot/reference/using/auto-configuration.html), [configuration externalisée](https://docs.spring.io/spring-boot/reference/features/external-config.html), [profils](https://docs.spring.io/spring-boot/reference/features/profiles.html), [endpoints d'Actuator](https://docs.spring.io/spring-boot/reference/actuator/endpoints.html), [tester les applications Spring Boot](https://docs.spring.io/spring-boot/reference/testing/spring-boot-applications.html)
+- [Guide de migration vers Spring Boot 4.0](https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-4.0-Migration-Guide)
+- Référence Spring Framework : [le conteneur IoC](https://docs.spring.io/spring-framework/reference/core/beans.html), [la configuration en Java](https://docs.spring.io/spring-framework/reference/core/beans/java.html), [les portées de beans](https://docs.spring.io/spring-framework/reference/core/beans/factory-scopes.html), [les réponses d'erreur](https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-ann-rest-exceptions.html)
+- .NET : [l'injection de dépendances dans ASP.NET Core](https://learn.microsoft.com/aspnet/core/fundamentals/dependency-injection), [la configuration](https://learn.microsoft.com/aspnet/core/fundamentals/configuration/), [le pattern options](https://learn.microsoft.com/aspnet/core/fundamentals/configuration/options), [les environnements](https://learn.microsoft.com/aspnet/core/fundamentals/environments), [les health checks](https://learn.microsoft.com/aspnet/core/host-and-deploy/health-checks), [les tests d'intégration](https://learn.microsoft.com/aspnet/core/test/integration-tests)

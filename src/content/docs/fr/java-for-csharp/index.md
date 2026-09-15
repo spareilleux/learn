@@ -18,7 +18,7 @@ Ce cours est la carte que j'aurais voulu avoir : pour chaque sujet, ce qui se tr
 
 ## À qui s'adresse ce cours
 
-Vous écrivez du C# avec aisance : classes, interfaces, génériques, LINQ, `async`/`await`, NuGet et la [CLI `dotnet`](https://learn.microsoft.com/dotnet/core/tools/). Vous avez lu un peu de Java sans jamais en livrer. Un cours de suite, *Spring Boot, Spring Cloud et Reactor pour développeurs C#*, s'appuie sur celui-ci.
+Vous écrivez du C# avec aisance : classes, interfaces, génériques, LINQ, `async`/`await`, NuGet et la [CLI `dotnet`](https://learn.microsoft.com/dotnet/core/tools/). Vous avez lu un peu de Java sans jamais en livrer. Un cours de suite, [*Spring Boot, Spring Cloud et Reactor pour développeurs C#*](../spring-cloud-reactor/), s'appuie sur celui-ci.
 
 ## À la fin de ce cours, je saurai
 

@@ -18,7 +18,7 @@ Este curso es el mapa que me hubiera gustado tener: para cada tema, lo que se tr
 
 ## A quién va dirigido este curso
 
-Escribes C# con soltura: clases, interfaces, genéricos, LINQ, `async`/`await`, NuGet y la [CLI `dotnet`](https://learn.microsoft.com/dotnet/core/tools/). Has leído algo de Java pero nunca lo has llevado a producción. Un curso de continuación, *Spring Boot, Spring Cloud y Reactor para desarrolladores C#*, se apoya en este.
+Escribes C# con soltura: clases, interfaces, genéricos, LINQ, `async`/`await`, NuGet y la [CLI `dotnet`](https://learn.microsoft.com/dotnet/core/tools/). Has leído algo de Java pero nunca lo has llevado a producción. Un curso de continuación, [*Spring Boot, Spring Cloud y Reactor para desarrolladores C#*](../spring-cloud-reactor/), se apoya en este.
 
 ## Al final de este curso, sabré
 

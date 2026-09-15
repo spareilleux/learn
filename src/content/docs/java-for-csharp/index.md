@@ -18,7 +18,7 @@ This course is the map I wanted: for each topic, what carries over from C#, what
 
 ## Who this course is for
 
-You write C# comfortably: classes, interfaces, generics, LINQ, `async`/`await`, NuGet and the [`dotnet` CLI](https://learn.microsoft.com/dotnet/core/tools/). You have read some Java but never shipped it. A follow-up course, *Spring Boot, Spring Cloud and Reactor for C# developers*, builds on this one.
+You write C# comfortably: classes, interfaces, generics, LINQ, `async`/`await`, NuGet and the [`dotnet` CLI](https://learn.microsoft.com/dotnet/core/tools/). You have read some Java but never shipped it. A follow-up course, [*Spring Boot, Spring Cloud and Reactor for C# developers*](../spring-cloud-reactor/), builds on this one.
 
 ## By the end of this course, I will be able to
 
