@@ -88,6 +88,12 @@ export default defineConfig({
 									collapsed: true,
 									items: [{ autogenerate: { directory: 'typescript-for-csharp-java' } }],
 								},
+								{
+									label: 'Python for C#/Java developers',
+									translations: { fr: 'Python pour développeurs C#/Java', es: 'Python para desarrolladores C#/Java' },
+									collapsed: true,
+									items: [{ autogenerate: { directory: 'python-for-csharp-java' } }],
+								},
 							],
 						},
 						{
