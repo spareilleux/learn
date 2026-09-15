@@ -1,0 +1,609 @@
+---
+title: 1. Premiers pas
+description: PostgreSQL 18 dans un conteneur et la vérification de disponibilité qu'exige son premier démarrage, psql et ses métacommandes, clusters, bases et schémas, le search_path, pourquoi les noms sans guillemets passent en minuscules, LIMIT au lieu de TOP, charger l'historique de CI de ce site depuis du JSON, colonnes d'identité et séquences, rôles et privilèges.
+sidebar:
+  order: 1
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Les scripts de cette leçon sont [`sql/01-getting-started.sql`](https://github.com/spareilleux/learn/blob/f92b07e/code/postgresql-aurora/sql/01-getting-started.sql) et [`sql/01-exercises.sql`](https://github.com/spareilleux/learn/blob/f92b07e/code/postgresql-aurora/sql/01-exercises.sql). [`check.sh`](https://github.com/spareilleux/learn/blob/f92b07e/code/postgresql-aurora/check.sh) les exécute avec `psql` et compare leur sortie à [`expected/01-getting-started.txt`](https://github.com/spareilleux/learn/blob/f92b07e/code/postgresql-aurora/expected/01-getting-started.txt) et [`expected/01-exercises.txt`](https://github.com/spareilleux/learn/blob/f92b07e/code/postgresql-aurora/expected/01-exercises.txt).
+
+## Lancer PostgreSQL dans un conteneur
+
+L'[image officielle](https://hub.docker.com/_/postgres) est le moyen le plus rapide d'obtenir un serveur jetable. Le cours fixe un tag exact, `postgres:18.6-trixie` : PostgreSQL 18.6 sur Debian 13 « trixie ». Un tag comme `postgres:18` ou `postgres:latest` passe à la version mineure suivante, voire à la majeure suivante, sans te prévenir.
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+Avec Docker Desktop, dans PowerShell :
+
+```powershell
+docker run -d --name pg -e POSTGRES_PASSWORD=learn -p 5432:5432 postgres:18.6-trixie
+```
+
+Avec Podman, ou `wslc` du cours [Conteneurs WSL](../../wsl-containers/), les options sont les mêmes :
+
+```powershell
+podman run -d --name pg -e POSTGRES_PASSWORD=learn -p 5432:5432 docker.io/library/postgres:18.6-trixie
+wslc run -d --name pg -e POSTGRES_PASSWORD=learn -p 5432:5432 postgres:18.6-trixie
+```
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```bash
+docker run -d --name pg -e POSTGRES_PASSWORD=learn -p 5432:5432 postgres:18.6-trixie
+```
+
+</TabItem>
+<TabItem label="macOS">
+
+```bash
+docker run -d --name pg -e POSTGRES_PASSWORD=learn -p 5432:5432 postgres:18.6-trixie
+```
+
+</TabItem>
+</Tabs>
+
+J'ai exécuté la commande Docker Desktop sous Windows 11 le 2026-09-15 ; les commandes Podman et `wslc`, ainsi que celles pour Linux et macOS, sont *à vérifier* sur cette machine. La CI exécute la même image sous Linux comme service GitHub Actions. Le script [`server.sh`](https://github.com/spareilleux/learn/blob/f92b07e/code/postgresql-aurora/server.sh) du cours l'enveloppe : `bash server.sh start` lance le conteneur, l'attend et copie les fichiers du cours dans `/course`, `bash server.sh psql` ouvre `psql` à l'intérieur, et `bash server.sh stop` le supprime.
+
+- **`-e POSTGRES_PASSWORD=learn`** est obligatoire : sans lui, l'image refuse de démarrer plutôt que de créer un superutilisateur sans mot de passe. Il fixe le mot de passe du rôle `postgres`, et ne s'applique qu'au premier démarrage, quand le répertoire de données est vide.
+- **`-p 5432:5432`** publie le port de PostgreSQL. Si un PostgreSQL installé sur ta machine écoute déjà sur 5432, utilise `-p 5433:5432` et connecte-toi sur 5433.
+- **Pas de volume** : les données vivent dans le conteneur et disparaissent avec `docker rm`. C'est ce qu'il faut pour un cours. Pour des données à garder, monte un volume sur `/var/lib/postgresql` ; depuis PostgreSQL 18, l'image range ses données dans un sous-répertoire nommé d'après la version majeure, `/var/lib/postgresql/18/docker` (la valeur de `PGDATA` dans le conteneur), ce qui laisse de la place au répertoire d'une autre version majeure pendant une mise à niveau (leçon 11).
+
+### Quand est-il prêt ?
+
+Le conteneur démarre en une fraction de seconde ; le serveur, non. Au premier démarrage, le [script d'entrée](https://github.com/docker-library/postgres/blob/4f9ced003ba58a854656ba150d146243d27ae3ac/18/trixie/docker-entrypoint.sh#L290-L307) de l'image crée le répertoire de données, puis démarre un serveur *temporaire* pour exécuter les scripts d'initialisation, l'arrête, et seulement ensuite démarre le vrai. Le journal du conteneur montre les deux (un extrait) :
+
+```text
+2026-09-15 16:01:15.924 UTC [59] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2026-09-15 16:01:15.945 UTC [59] LOG:  database system is ready to accept connections
+waiting for server to shut down....2026-09-15 16:01:16.024 UTC [59] LOG:  received fast shutdown request
+2026-09-15 16:01:16.092 UTC [59] LOG:  database system is shut down
+PostgreSQL init process complete; ready for start up.
+2026-09-15 16:01:16.151 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2026-09-15 16:01:16.173 UTC [1] LOG:  database system is ready to accept connections
+```
+
+Le serveur temporaire n'écoute que sur le socket Unix (`listen_addresses=''` dans le script d'entrée), et pendant environ un dixième de seconde il se dit prêt. Une vérification qui lance `docker exec pg pg_isready` se connecte par ce socket, peut réussir dans cette fenêtre, et laisser la commande suivante tomber sur un serveur en train de s'arrêter. [`pg_isready`](https://www.postgresql.org/docs/18/app-pg-isready.html) avec `-h 127.0.0.1` passe par TCP, sur lequel seul le vrai serveur écoute. C'est ce qu'utilisent `server.sh` et le contrôle de santé du service de la CI :
+
+```bash
+docker exec pg pg_isready -h 127.0.0.1 -U postgres
+```
+
+```text
+127.0.0.1:5432 - accepting connections
+```
+
+## psql
+
+[`psql`](https://www.postgresql.org/docs/18/app-psql.html) est le client en ligne de commande de PostgreSQL, l'équivalent de [`sqlcmd`](https://learn.microsoft.com/sql/tools/sqlcmd/sqlcmd-utility). L'image le contient, donc tu n'as rien à installer sur ta machine :
+
+```bash
+docker exec -it pg psql -U postgres
+```
+
+```text
+psql (18.6 (Debian 18.6-1.pgdg13+2))
+Type "help" for help.
+
+postgres=#
+```
+
+Dans le conteneur, `psql` se connecte par le socket Unix, et l'image fait confiance aux connexions locales : aucun mot de passe n'est demandé. Depuis ta machine, par le port publié, le mot de passe est exigé. Si tu installes `psql` localement, l'équivalent est `psql -h localhost -U postgres`.
+
+`psql` lit deux sortes d'entrées. Les instructions SQL se terminent par un point-virgule et peuvent tenir sur plusieurs lignes ; l'invite passe de `=#` à `-#` tant qu'une instruction est incomplète. Les **métacommandes** commencent par une barre oblique inverse, se terminent en fin de ligne et sont exécutées par `psql` lui-même, souvent en envoyant pour toi des requêtes aux catalogues système :
+
+| Métacommande | Ce qu'elle fait | Dans SSMS ou `sqlcmd` |
+|---|---|---|
+| `\l` | lister les bases | Explorateur d'objets, `sys.databases` |
+| `\c learn` | se connecter à une autre base | `USE learn` |
+| `\dn` | lister les schémas | `sys.schemas` |
+| `\dt ci.*` | lister les tables du schéma `ci` | `sys.tables` |
+| `\d ci.runs` | décrire une table : colonnes, index, contraintes | `sp_help` |
+| `\du` | lister les rôles | connexions et utilisateurs |
+| `\x` | basculer l'affichage étendu, une ligne par colonne | |
+| `\timing` | afficher la durée de chaque instruction | `SET STATISTICS TIME ON` |
+| `\i file.sql` | exécuter un script | `:r file.sql` |
+| `\?` et `\h CREATE TABLE` | aide sur les métacommandes, aide sur une commande SQL | |
+| `\q` | quitter | `exit` |
+
+`\set ECHO_HIDDEN on` montre les requêtes sur les catalogues qu'exécutent les commandes `\d` : un bon moyen d'apprendre les catalogues.
+
+## Clusters, bases et schémas
+
+Un serveur PostgreSQL gère un **cluster** : un répertoire de données qui contient plusieurs bases. Un cluster neuf en a trois. `postgres` est une base vide où se connecter, `template1` est copiée par chaque `CREATE DATABASE`, et `template0` en est une copie intacte. Ta première requête ([lignes 3-6](https://github.com/spareilleux/learn/blob/f92b07e/code/postgresql-aurora/sql/01-getting-started.sql#L3-L6)) :
+
+```sql
+SELECT current_database(), current_user, current_setting('server_version') AS version;
+CREATE DATABASE learn;
+\c learn
+\dn
+```
+
+```text
+ current_database | current_user |            version
+------------------+--------------+-------------------------------
+ postgres         | postgres     | 18.6 (Debian 18.6-1.pgdg13+2)
+(1 row)
+
+CREATE DATABASE
+You are now connected to database "learn" as user "postgres".
+      List of schemas
+  Name  |       Owner
+--------+-------------------
+ public | pg_database_owner
+(1 row)
+```
+
+`CREATE DATABASE` répond par une **étiquette de commande**, le nom de la commande exécutée ; pour `INSERT`, l'étiquette porte aussi le nombre de lignes. Une nouvelle base a un schéma, `public`, qui appartient à `pg_database_owner`, un rôle prédéfini qui représente le propriétaire de la base, quel qu'il soit.
+
+La hiérarchie ressemble à celle de SQL Server, instance → base → schéma, avec une différence qu'on remarque vite. **Une connexion est liée à une seule base.** Il n'y a pas de `USE`, et un nom en trois parties n'atteint pas une autre base ([ligne 92](https://github.com/spareilleux/learn/blob/f92b07e/code/postgresql-aurora/sql/01-getting-started.sql#L92)) :
+
+```sql
+SELECT * FROM postgres.public.pg_class;
+```
+
+```text
+ERROR:  cross-database references are not implemented: "postgres.public.pg_class"
+LINE 1: SELECT * FROM postgres.public.pg_class;
+                      ^
+```
+
+`\c` ouvre une nouvelle connexion. Pour interroger deux bases dans une même instruction, PostgreSQL a l'extension [`postgres_fdw`](https://www.postgresql.org/docs/18/postgres-fdw.html), plus proche d'un serveur lié que d'un nom en trois parties. Dans PostgreSQL, ce que tu découperais en plusieurs bases SQL Server sur une instance est souvent un **schéma** : une base, un schéma par application ou par module. Le cours met l'historique de CI dans un schéma `ci`, et les données de Guitar Alchemist dans un schéma `ga`.
+
+Les erreurs viennent avec une position : `LINE 1:` et un accent circonflexe sous le mot où l'analyseur ou le planificateur s'est arrêté. Certaines ajoutent un `DETAIL:` et un `HINT:`, comme le montrent les sections suivantes.
+
+### Le search_path
+
+Dans SQL Server, un nom sans schéma est cherché dans le schéma par défaut de l'utilisateur, puis dans `dbo`. PostgreSQL utilise le paramètre [`search_path`](https://www.postgresql.org/docs/18/ddl-schemas.html#DDL-SCHEMAS-PATH), une liste de schémas essayés dans l'ordre ([lignes 9-10](https://github.com/spareilleux/learn/blob/f92b07e/code/postgresql-aurora/sql/01-getting-started.sql#L9-L10)) :
+
+```sql
+CREATE SCHEMA ci;
+SHOW search_path;
+```
+
+```text
+CREATE SCHEMA
+   search_path
+-----------------
+ "$user", public
+(1 row)
+```
+
+`"$user"` est un schéma qui porte le nom du rôle courant, s'il existe ; ensuite `public`. Une table créée sans schéma va dans le premier schéma existant de la liste, ici `public`. La section suivante modifie le `search_path`.
+
+## Identifiants : les noms sans guillemets passent en minuscules
+
+L'habitude C# et Java des noms en `PascalCase` ou `camelCase` rencontre la règle de PostgreSQL : **les identifiants sans guillemets sont convertis en minuscules**, et ceux entre guillemets sont gardés exactement tels qu'écrits ([lignes 13-22](https://github.com/spareilleux/learn/blob/f92b07e/code/postgresql-aurora/sql/01-getting-started.sql#L13-L22)) :
+
+```sql
+CREATE TABLE ci.Runs (
+    databaseId     bigint PRIMARY KEY,
+    "workflowName" text NOT NULL
+);
+\d ci.runs
+SELECT workflowName FROM ci.runs;
+SELECT count(*) FROM runs;
+SET search_path = ci, public;
+SELECT count(*) FROM runs;
+DROP TABLE runs;
+```
+
+```text
+CREATE TABLE
+                    Table "ci.runs"
+    Column    |  Type  | Collation | Nullable | Default
+--------------+--------+-----------+----------+---------
+ databaseid   | bigint |           | not null |
+ workflowName | text   |           | not null |
+Indexes:
+    "runs_pkey" PRIMARY KEY, btree (databaseid)
+
+ERROR:  column "workflowname" does not exist
+LINE 1: SELECT workflowName FROM ci.runs;
+               ^
+HINT:  Perhaps you meant to reference the column "runs.workflowName".
+ERROR:  relation "runs" does not exist
+LINE 1: SELECT count(*) FROM runs;
+                             ^
+SET
+ count
+-------
+     0
+(1 row)
+
+DROP TABLE
+```
+
+- `Runs` est devenu `runs` et `databaseId` est devenu `databaseid`. Les requêtes qui les écrivent `Runs` ou `DATABASEID` fonctionnent encore, parce qu'ils sont convertis de la même façon.
+- `"workflowName"`, entre guillemets à la création de la table, est un nom avec une majuscule. Désormais, **chaque** requête doit le mettre entre guillemets. Le `workflowName` sans guillemets est devenu `workflowname`, qui n'existe pas. L'indice de PostgreSQL trouve la bonne colonne, mais ton ORM ne lit pas les indices.
+- `runs` seul est introuvable : `ci` n'était pas dans le `search_path` avant le `SET`.
+
+Dans SQL Server, la sensibilité à la casse dépend de la collation, et les collations par défaut y sont insensibles, donc `WorkflowName` et `workflowname` y sont la même colonne. Le [standard SQL](https://www.postgresql.org/docs/18/sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS) convertit les noms sans guillemets en *majuscules* ; PostgreSQL les convertit en minuscules, ce que la documentation qualifie d'« incompatible avec le standard SQL ». La conversion ne touche que l'ASCII pour les encodages multi-octets comme UTF-8 : [`downcase_identifier`](https://github.com/postgres/postgres/blob/724edf9bde9d356724ad384a2e196edc3c9f80f7/src/backend/parser/scansup.c#L46-L80) dans l'analyseur, au tag `REL_18_6`, change `A`-`Z` et laisse `É` tel quel.
+
+La règle pour la suite du cours, et pour tes schémas : **`snake_case`, jamais de guillemets**. La leçon 4 montre ce qu'EF Core fait des propriétés en `PascalCase`.
+
+## Pas de TOP
+
+[Ligne 25](https://github.com/spareilleux/learn/blob/f92b07e/code/postgresql-aurora/sql/01-getting-started.sql#L25) :
+
+```sql
+SELECT TOP 3 relname FROM pg_class;
+```
+
+```text
+ERROR:  syntax error at or near "3"
+LINE 1: SELECT TOP 3 relname FROM pg_class;
+                   ^
+```
+
+`TOP` n'est pas de la syntaxe PostgreSQL : l'analyseur a lu `TOP` comme un nom de colonne et s'est arrêté sur `3`. PostgreSQL a [`LIMIT`](https://www.postgresql.org/docs/18/queries-limit.html), et le standard `FETCH FIRST n ROWS ONLY`, que SQL Server accepte aussi après `ORDER BY … OFFSET 0 ROWS`. La requête suivante l'utilise.
+
+## Les données du cours
+
+L'historique de CI de ce site est un tableau JSON de 125 exécutions dans [`code/duckdb/data/runs.json`](https://github.com/spareilleux/learn/blob/f92b07e/code/duckdb/data/runs.json), un objet par exécution :
+
+```json
+{"attempt":1,"conclusion":"success","createdAt":"2026-09-14T14:01:09Z","databaseId":34852867099,"event":"push","headBranch":"main","headSha":"95a3830ebbcfa3f0addbc1eba8335a20cc2c41f2","startedAt":"2026-09-14T14:01:09Z","status":"completed","updatedAt":"2026-09-14T14:03:38Z","workflowName":"Deploy to GitHub Pages"}
+```
+
+`server.sh` l'a copié dans le conteneur sous `/course/data/runs.json`. [`pg_read_file`](https://www.postgresql.org/docs/18/functions-admin.html#FUNCTIONS-ADMIN-GENFILE) lit un fichier **sur le serveur**, et une conversion en `jsonb` l'analyse ([ligne 28](https://github.com/spareilleux/learn/blob/f92b07e/code/postgresql-aurora/sql/01-getting-started.sql#L28)) :
+
+```sql
+SELECT jsonb_array_length(pg_read_file('/course/data/runs.json')::jsonb) AS runs;
+```
+
+```text
+ runs
+------
+  125
+(1 row)
+```
+
+`::jsonb` est l'opérateur de conversion de PostgreSQL, la forme courte de `CAST(… AS jsonb)`. Ensuite, une table dans `ci`, avec des colonnes en `snake_case`, remplie par [`jsonb_to_recordset`](https://www.postgresql.org/docs/18/functions-json.html#FUNCTIONS-JSON-PROCESSING), qui transforme un tableau d'objets en lignes. Sa liste de définition de colonnes nomme les clés JSON et leurs types SQL ([lignes 30-54](https://github.com/spareilleux/learn/blob/f92b07e/code/postgresql-aurora/sql/01-getting-started.sql#L30-L54)) :
+
+```sql
+CREATE TABLE runs (
+    run_id        bigint PRIMARY KEY,
+    workflow_name text NOT NULL,
+    event         text NOT NULL,
+    conclusion    text,
+    head_branch   text NOT NULL,
+    head_sha      text NOT NULL,
+    attempt       integer NOT NULL,
+    created_at    timestamptz NOT NULL,
+    started_at    timestamptz NOT NULL,
+    updated_at    timestamptz NOT NULL
+);
+
+INSERT INTO runs
+SELECT r."databaseId", r."workflowName", r.event, r.conclusion, r."headBranch", r."headSha",
+       r.attempt, r."createdAt", r."startedAt", r."updatedAt"
+FROM jsonb_to_recordset(pg_read_file('/course/data/runs.json')::jsonb) AS r(
+    "databaseId" bigint, "workflowName" text, event text, conclusion text, "headBranch" text,
+    "headSha" text, attempt integer, "createdAt" timestamptz, "startedAt" timestamptz, "updatedAt" timestamptz);
+
+SELECT workflow_name, count(*) AS runs, count(*) FILTER (WHERE conclusion = 'failure') AS failures
+FROM runs
+GROUP BY workflow_name
+ORDER BY runs DESC, workflow_name
+FETCH FIRST 5 ROWS ONLY;
+```
+
+```text
+CREATE TABLE
+INSERT 0 125
+     workflow_name      | runs | failures
+------------------------+------+----------
+ Deploy to GitHub Pages |   65 |        2
+ Rust course examples   |   18 |        3
+ Java course examples   |    7 |        0
+ GHA 03: triggers       |    5 |        2
+ GHA 07: security       |    4 |        0
+(5 rows)
+```
+
+Les mêmes chiffres que la première requête du [cours DuckDB](../../duckdb/01-first-queries/) : même fichier, même question. `INSERT 0 125` est l'étiquette de commande, et `0` est un champ hérité qui vaut toujours 0 aujourd'hui. `FILTER (WHERE …)` restreint un agrégat, là où SQL Server a besoin de `sum(CASE WHEN … THEN 1 ELSE 0 END)`. Les colonnes `timestamptz` ont reçu des chaînes comme `2026-09-14T14:01:09Z` ; la leçon 2 explique ce que ce type stocke.
+
+Pourquoi mettre les clés entre guillemets dans la liste de définition de colonnes ? Parce que les noms de cette liste sont eux aussi des identifiants, et sont convertis avant que la fonction cherche les clés ([lignes 57-60](https://github.com/spareilleux/learn/blob/f92b07e/code/postgresql-aurora/sql/01-getting-started.sql#L57-L60)) :
+
+```sql
+SELECT r.databaseId, r.workflowName
+FROM jsonb_to_recordset(pg_read_file('/course/data/runs.json')::jsonb) AS r(databaseId bigint, workflowName text)
+ORDER BY r.workflowName
+LIMIT 2;
+```
+
+```text
+ databaseid | workflowname
+------------+--------------
+            |
+            |
+(2 rows)
+```
+
+Aucune erreur : deux lignes de `NULL`. La fonction a cherché les clés `databaseid` et `workflowname`, n'en a trouvé aucune, et une clé absente vaut `NULL`. La conversion en minuscules ne casse pas seulement des requêtes, elle renvoie aussi des données vides sans se plaindre.
+
+## Colonnes d'identité et séquences
+
+Le `IDENTITY(1,1)` de SQL Server a deux équivalents. `serial`, l'historique, est un raccourci pour une colonne entière dont la valeur par défaut vient d'une séquence. Le standard, celui à utiliser, est une [colonne d'identité](https://www.postgresql.org/docs/18/ddl-identity-columns.html) ([lignes 63-76](https://github.com/spareilleux/learn/blob/f92b07e/code/postgresql-aurora/sql/01-getting-started.sql#L63-L76)) :
+
+```sql
+CREATE TABLE notes (
+    note_id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    run_id  bigint NOT NULL REFERENCES runs,
+    body    text NOT NULL
+);
+INSERT INTO notes (run_id, body) VALUES (34852867099, 'first deployment of the day') RETURNING note_id;
+INSERT INTO notes (note_id, run_id, body) VALUES (10, 34852867099, 'explicit id');
+BEGIN;
+INSERT INTO notes (run_id, body) VALUES (34852867099, 'rolled back') RETURNING note_id;
+ROLLBACK;
+INSERT INTO notes (run_id, body) VALUES (34852867099, 'after the rollback') RETURNING note_id;
+SELECT note_id, body FROM notes ORDER BY note_id;
+\d notes
+SELECT pg_get_serial_sequence('ci.notes', 'note_id') AS sequence;
+```
+
+```text
+CREATE TABLE
+ note_id
+---------
+       1
+(1 row)
+
+INSERT 0 1
+ERROR:  cannot insert a non-DEFAULT value into column "note_id"
+DETAIL:  Column "note_id" is an identity column defined as GENERATED ALWAYS.
+HINT:  Use OVERRIDING SYSTEM VALUE to override.
+BEGIN
+ note_id
+---------
+       2
+(1 row)
+
+INSERT 0 1
+ROLLBACK
+ note_id
+---------
+       3
+(1 row)
+
+INSERT 0 1
+ note_id |            body
+---------+-----------------------------
+       1 | first deployment of the day
+       3 | after the rollback
+(2 rows)
+
+                            Table "ci.notes"
+ Column  |  Type  | Collation | Nullable |           Default
+---------+--------+-----------+----------+------------------------------
+ note_id | bigint |           | not null | generated always as identity
+ run_id  | bigint |           | not null |
+ body    | text   |           | not null |
+Indexes:
+    "notes_pkey" PRIMARY KEY, btree (note_id)
+Foreign-key constraints:
+    "notes_run_id_fkey" FOREIGN KEY (run_id) REFERENCES runs(run_id)
+
+       sequence
+----------------------
+ ci.notes_note_id_seq
+(1 row)
+```
+
+- **`RETURNING note_id`** renvoie la valeur générée dans la même instruction, comme `OUTPUT inserted.note_id`. La leçon 3 s'en sert davantage.
+- **`GENERATED ALWAYS`** refuse une valeur explicite, comme SQL Server sans `SET IDENTITY_INSERT ON`. `GENERATED BY DEFAULT` l'accepterait. `OVERRIDING SYSTEM VALUE` est l'échappatoire au niveau de l'instruction, et l'exercice 3 montre son piège.
+- **L'insertion annulée a consommé 2.** L'identité s'appuie sur une séquence, `ci.notes_note_id_seq`, et [les séquences ne sont pas transactionnelles](https://www.postgresql.org/docs/18/functions-sequence.html) : une valeur distribuée n'est jamais rendue. L'`IDENTITY` de SQL Server laisse les mêmes trous. N'utilise jamais ces numéros comme numéros de facture sans trou.
+- `REFERENCES runs` sans colonne référence la clé primaire. La [contrainte de clé étrangère](https://www.postgresql.org/docs/18/ddl-constraints.html#DDL-CONSTRAINTS-FK) a reçu un nom généré, `notes_run_id_fkey` : table, colonne, suffixe.
+
+## Rôles et privilèges
+
+SQL Server sépare les **connexions**, au niveau de l'instance, des **utilisateurs**, dans chaque base. PostgreSQL a un seul concept, le [rôle](https://www.postgresql.org/docs/18/user-manag.html), défini pour tout le cluster. Un rôle doté de l'attribut `LOGIN` peut se connecter ; `CREATE USER` est `CREATE ROLE … LOGIN`. Un rôle peut aussi être membre d'un autre rôle, ce qui en fait un groupe. Les privilèges s'accordent objet par objet ([lignes 79-91](https://github.com/spareilleux/learn/blob/f92b07e/code/postgresql-aurora/sql/01-getting-started.sql#L79-L91)) :
+
+```sql
+CREATE ROLE app LOGIN PASSWORD 'app-password';
+SET ROLE app;
+SELECT count(*) FROM ci.runs;
+CREATE TABLE public.scratch (a integer);
+SELECT pg_read_file('/course/data/runs.json');
+RESET ROLE;
+GRANT USAGE ON SCHEMA ci TO app;
+GRANT SELECT ON ALL TABLES IN SCHEMA ci TO app;
+SET ROLE app;
+SELECT count(*) FROM ci.runs;
+INSERT INTO ci.notes (run_id, body) VALUES (34852867099, 'from app');
+RESET ROLE;
+\du
+```
+
+```text
+CREATE ROLE
+SET
+ERROR:  permission denied for schema ci
+LINE 1: SELECT count(*) FROM ci.runs;
+                             ^
+ERROR:  permission denied for schema public
+LINE 1: CREATE TABLE public.scratch (a integer);
+                     ^
+ERROR:  permission denied for function pg_read_file
+RESET
+GRANT
+GRANT
+SET
+ count
+-------
+   125
+(1 row)
+
+ERROR:  permission denied for table notes
+RESET
+                             List of roles
+ Role name |                         Attributes
+-----------+------------------------------------------------------------
+ app       |
+ postgres  | Superuser, Create role, Create DB, Replication, Bypass RLS
+```
+
+[`SET ROLE`](https://www.postgresql.org/docs/18/sql-set-role.html) change le rôle courant sans se reconnecter, comme `EXECUTE AS USER` dans SQL Server ; un superutilisateur peut passer à n'importe quel rôle. Ce que dit chaque erreur :
+
+- **Un schéma exige `USAGE`** avant qu'on puisse atteindre l'une de ses tables, même avec un privilège sur la table.
+- **Personne d'autre que le propriétaire ne peut créer d'objets dans `public`**. Jusqu'à PostgreSQL 14, tous les rôles le pouvaient ; PostgreSQL 15 a retiré le privilège `CREATE` à `PUBLIC` sur ce schéma (« Remove `PUBLIC` creation permission on the `public` schema » dans les [notes de version](https://www.postgresql.org/docs/15/release-15.html), commit [`b073c3ccd`](https://postgr.es/c/b073c3ccd)). Les vieux tutoriels qui créent des tables dans `public` avec n'importe quel utilisateur datent d'avant.
+- **`pg_read_file` est révoqué pour `PUBLIC`** dans [`system_functions.sql`](https://github.com/postgres/postgres/blob/724edf9bde9d356724ad384a2e196edc3c9f80f7/src/backend/catalog/system_functions.sql#L722-L728), et un appelant qui n'est pas membre de `pg_read_server_files` ne peut lire que des fichiers du répertoire de données ([`convert_and_check_filename`](https://github.com/postgres/postgres/blob/724edf9bde9d356724ad384a2e196edc3c9f80f7/src/backend/utils/adt/genfile.c#L54-L80)). Le cours charge ses données en tant que `postgres`, un superutilisateur, ce qui convient à un conteneur jetable et pas à une application.
+- **`GRANT SELECT ON ALL TABLES IN SCHEMA`** couvre les tables qui existent *maintenant*. `app` peut lire, pas insérer. L'exercice 2 montre ce qui arrive à la table suivante.
+
+`\du` montre les attributs de chaque rôle : `postgres`, créé par l'image, les a tous. Une application devrait se connecter avec un rôle comme `app` : `LOGIN`, et rien d'autre que les privilèges dont elle a besoin.
+
+## Sur Aurora
+
+*À vérifier : rien dans cette section n'a été exécuté sur AWS.* Sur Amazon Aurora PostgreSQL, le compte créé avec le cluster, `postgres` par défaut, n'est **pas un superutilisateur**. La [documentation de `rds_superuser`](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Appendix.PostgreSQL.CommonDBATasks.Roles.rds_superuser.html) donne sa définition, `CREATE ROLE postgres WITH LOGIN NOSUPERUSER INHERIT CREATEDB CREATEROLE …`, membre du rôle prédéfini `rds_superuser`, et précise que « you can't access the host OS, and you can't connect using the PostgreSQL superuser account ». Deux conséquences pour cette leçon :
+
+- Il n'y a pas de système de fichiers du serveur à lire, donc `pg_read_file('/course/data/runs.json')` n'a rien à ouvrir. Les voies d'entrée documentées par Aurora sont un chargement côté client (`\copy` dans `psql`, ou `COPY … FROM STDIN` depuis un programme, leçon 4) et l'[extension `aws_s3`](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PostgreSQL.S3Import.html), qui importe un fichier CSV ou texte depuis un bucket S3.
+- La même page note que depuis Aurora PostgreSQL 14.7 et 15.2, un membre de `rds_superuser` a aussi besoin du privilège `CONNECT` sur une base pour s'y connecter.
+
+`psql` se connecte à Aurora comme à n'importe quel serveur, avec `-h` et l'endpoint du cluster ; la leçon 12 explique les endpoints.
+
+## À retenir
+
+- Fixe le tag exact de l'image, et attends PostgreSQL avec `pg_isready -h 127.0.0.1` : le premier démarrage lance un serveur temporaire sur le socket Unix.
+- Une connexion est liée à une seule base ; les schémas sont l'unité d'organisation à l'intérieur, et `search_path` décide où vont les noms non qualifiés.
+- Les identifiants sans guillemets passent en minuscules. Utilise `snake_case` sans jamais de guillemets, ou mets des guillemets pour toujours.
+- `LIMIT` ou `FETCH FIRST … ROWS ONLY` remplace `TOP` ; `RETURNING` remplace `OUTPUT`.
+- Préfère les colonnes d'identité à `serial` ; leur séquence laisse des trous, comme l'`IDENTITY` de SQL Server.
+- Connexions et utilisateurs ne font qu'un, le rôle. Les schémas exigent `USAGE`, `public` n'accepte plus les tables de tout le monde, et un privilège sur toutes les tables ne couvre pas les tables futures.
+
+## Exercices
+
+Les solutions sont dans [`sql/01-exercises.sql`](https://github.com/spareilleux/learn/blob/f92b07e/code/postgresql-aurora/sql/01-exercises.sql), qui charge d'abord le modèle de la leçon 2 ; `check.sh` compare sa sortie comme celle de la leçon.
+
+1. SQL Server a `SELECT TOP (3) WITH TIES`. Trouve les trois workflows qui ont le plus d'exécutions en échec, en gardant les workflows à égalité avec le troisième.
+
+<details>
+<summary>Solution</summary>
+
+Tiré de [`sql/01-exercises.sql`, lignes 8-16](https://github.com/spareilleux/learn/blob/f92b07e/code/postgresql-aurora/sql/01-exercises.sql#L8-L16) :
+
+```sql
+SELECT * FROM (
+    SELECT workflow_name, count(*) AS failures
+    FROM runs
+    WHERE conclusion = 'failure'
+    GROUP BY workflow_name
+    ORDER BY failures DESC
+    FETCH FIRST 3 ROWS WITH TIES
+) AS top_failures
+ORDER BY failures DESC, workflow_name;
+```
+
+```text
+      workflow_name      | failures
+-------------------------+----------
+ GHA 05: exercise checks |        3
+ Rust course examples    |        3
+ Deploy to GitHub Pages  |        2
+ GHA 03: triggers        |        2
+(4 rows)
+```
+
+Quatre lignes pour « trois » : deux workflows partagent la troisième place avec 2 échecs. `WITH TIES` exige un `ORDER BY`, et les égalités sont décidées par ce seul `ORDER BY`, c'est pourquoi la requête ne peut pas y ajouter `workflow_name` ; la requête externe trie le résultat pour que la sortie soit la même à chaque exécution. Sans le `ORDER BY` externe, l'ordre des lignes à égalité est celui que produit le plan.
+
+</details>
+
+2. Crée un rôle `reader` qui peut lire toutes les tables de `ci`. Crée ensuite une table dans `ci` : `reader` peut-il la lire ? Fais en sorte que les tables créées plus tard soient lisibles aussi.
+
+<details>
+<summary>Solution</summary>
+
+Tiré de [`sql/01-exercises.sql`, lignes 19-30](https://github.com/spareilleux/learn/blob/f92b07e/code/postgresql-aurora/sql/01-exercises.sql#L19-L30) :
+
+```sql
+CREATE ROLE reader LOGIN PASSWORD 'reader-password';
+GRANT USAGE ON SCHEMA ci TO reader;
+GRANT SELECT ON ALL TABLES IN SCHEMA ci TO reader;
+CREATE TABLE ci.flaky_steps (step_name text PRIMARY KEY);
+SET ROLE reader;
+SELECT count(*) FROM ci.flaky_steps;
+RESET ROLE;
+ALTER DEFAULT PRIVILEGES IN SCHEMA ci GRANT SELECT ON TABLES TO reader;
+CREATE TABLE ci.slow_steps (step_name text PRIMARY KEY);
+SET ROLE reader;
+SELECT count(*) FROM ci.slow_steps;
+RESET ROLE;
+```
+
+```text
+CREATE ROLE
+GRANT
+GRANT
+CREATE TABLE
+SET
+ERROR:  permission denied for table flaky_steps
+RESET
+ALTER DEFAULT PRIVILEGES
+CREATE TABLE
+SET
+ count
+-------
+     0
+(1 row)
+
+RESET
+```
+
+`GRANT … ON ALL TABLES` est une boucle unique sur les tables existantes. [`ALTER DEFAULT PRIVILEGES`](https://www.postgresql.org/docs/18/sql-alterdefaultprivileges.html) enregistre un privilège à appliquer aux tables créées plus tard, et seulement à celles créées **par le rôle qui l'a exécuté** (ici `postgres`), sauf si `FOR ROLE` nomme un autre créateur. Un outil de migration qui se connecte avec un autre rôle que celui qui a fixé les privilèges par défaut crée des tables que personne d'autre ne peut lire. `flaky_steps` reste illisible jusqu'à un `GRANT` explicite. Dans SQL Server, un `GRANT SELECT ON SCHEMA::ci` couvre les tables futures ; le privilège au niveau du schéma, dans PostgreSQL, n'est que `USAGE`.
+
+</details>
+
+3. Dans une nouvelle table `notes` avec une identité `GENERATED ALWAYS`, insère deux lignes, puis importe une ligne avec `note_id` 3 grâce à `OVERRIDING SYSTEM VALUE`. Que se passe-t-il à l'insertion ordinaire suivante, et comment corriger ?
+
+<details>
+<summary>Solution</summary>
+
+Tiré de [`sql/01-exercises.sql`, lignes 33-41](https://github.com/spareilleux/learn/blob/f92b07e/code/postgresql-aurora/sql/01-exercises.sql#L33-L41) :
+
+```sql
+CREATE TABLE notes (
+    note_id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    body    text NOT NULL
+);
+INSERT INTO notes (body) VALUES ('one'), ('two');
+INSERT INTO notes (note_id, body) OVERRIDING SYSTEM VALUE VALUES (3, 'imported');
+INSERT INTO notes (body) VALUES ('three');
+SELECT setval(pg_get_serial_sequence('ci.notes', 'note_id'), (SELECT max(note_id) FROM notes));
+INSERT INTO notes (body) VALUES ('three') RETURNING note_id;
+```
+
+```text
+CREATE TABLE
+INSERT 0 2
+INSERT 0 1
+ERROR:  duplicate key value violates unique constraint "notes_pkey"
+DETAIL:  Key (note_id)=(3) already exists.
+ setval
+--------
+      3
+(1 row)
+
+ note_id
+---------
+       4
+(1 row)
+
+INSERT 0 1
+```
+
+La valeur explicite ne fait pas avancer la séquence : elle avait distribué 1 et 2, donne 3 ensuite, et la clé primaire le refuse. [`setval`](https://www.postgresql.org/docs/18/functions-sequence.html) règle la séquence sur la plus grande valeur de la table, pour que l'appel suivant renvoie 4 ; `ALTER TABLE notes ALTER COLUMN note_id RESTART WITH 4` fait la même chose par l'identité. C'est le même piège que `SET IDENTITY_INSERT ON` dans SQL Server, sauf que SQL Server fait avancer l'identité quand une valeur explicite dépasse la valeur courante, et que `DBCC CHECKIDENT` corrige quand ce n'est pas le cas. Après un import en masse avec des identifiants explicites, réinitialise chaque identité.
+
+</details>
+
+## Sources
+
+- [Documentation de PostgreSQL 18](https://www.postgresql.org/docs/18/) : [`psql`](https://www.postgresql.org/docs/18/app-psql.html), [`pg_isready`](https://www.postgresql.org/docs/18/app-pg-isready.html), [créer une base](https://www.postgresql.org/docs/18/manage-ag-createdb.html), [schémas](https://www.postgresql.org/docs/18/ddl-schemas.html), [identifiants et mots-clés](https://www.postgresql.org/docs/18/sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS), [`LIMIT` et `OFFSET`](https://www.postgresql.org/docs/18/queries-limit.html), [fonctions de traitement JSON](https://www.postgresql.org/docs/18/functions-json.html#FUNCTIONS-JSON-PROCESSING), [colonnes d'identité](https://www.postgresql.org/docs/18/ddl-identity-columns.html), [fonctions de séquence](https://www.postgresql.org/docs/18/functions-sequence.html), [rôles](https://www.postgresql.org/docs/18/user-manag.html), [privilèges](https://www.postgresql.org/docs/18/ddl-priv.html), [`ALTER DEFAULT PRIVILEGES`](https://www.postgresql.org/docs/18/sql-alterdefaultprivileges.html)
+- [Notes de version de PostgreSQL 15](https://www.postgresql.org/docs/15/release-15.html), pour les privilèges du schéma `public`
+- [L'image Docker `postgres`](https://hub.docker.com/_/postgres) et son [script d'entrée](https://github.com/docker-library/postgres/blob/4f9ced003ba58a854656ba150d146243d27ae3ac/18/trixie/docker-entrypoint.sh)
+- Sources de PostgreSQL au tag `REL_18_6` : [`scansup.c`](https://github.com/postgres/postgres/blob/724edf9bde9d356724ad384a2e196edc3c9f80f7/src/backend/parser/scansup.c#L46-L80), [`system_functions.sql`](https://github.com/postgres/postgres/blob/724edf9bde9d356724ad384a2e196edc3c9f80f7/src/backend/catalog/system_functions.sql#L722-L728), [`genfile.c`](https://github.com/postgres/postgres/blob/724edf9bde9d356724ad384a2e196edc3c9f80f7/src/backend/utils/adt/genfile.c#L54-L80)
+- Amazon Aurora : [comprendre le rôle `rds_superuser`](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Appendix.PostgreSQL.CommonDBATasks.Roles.rds_superuser.html), [importer des données depuis Amazon S3](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PostgreSQL.S3Import.html)
+- SQL Server : [`sqlcmd`](https://learn.microsoft.com/sql/tools/sqlcmd/sqlcmd-utility)
