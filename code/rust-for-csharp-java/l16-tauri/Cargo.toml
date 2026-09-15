@@ -1,0 +1,13 @@
+# Lessons 16 to 18: a desktop chord explorer.
+# `theory` is plain Rust with no dependencies; `src-tauri` is the Tauri app that calls it.
+[workspace]
+resolver = "3"
+members = ["theory", "src-tauri"]
+
+# From the create-tauri-app template: a smaller, faster release binary
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = 3
+panic = "abort"
+strip = true
