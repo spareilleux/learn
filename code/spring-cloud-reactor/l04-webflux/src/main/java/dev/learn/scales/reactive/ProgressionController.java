@@ -28,12 +28,14 @@ class ProgressionController {
     Flux<ServerSentEvent<String>> progression(@PathVariable String root) {
         return Flux.defer(() -> {
             List<Chord> triads = Scale.of(root, "major").triads();
-            return Flux.interval(beat)
-                    .take(DEGREES.size())
+            // Not Flux.interval: it ticks whether or not Netty has asked for the next event,
+            // and fails with OverflowException when a slow connection hasn't. delayElements waits for demand.
+            return Flux.range(0, DEGREES.size())
+                    .delayElements(beat)
                     .map(beatNumber -> ServerSentEvent.<String>builder()
                             .id(String.valueOf(beatNumber + 1))
                             .event("chord")
-                            .data(triads.get(DEGREES.get(beatNumber.intValue())).symbol())
+                            .data(triads.get(DEGREES.get(beatNumber)).symbol())
                             .build());
         });
     }
