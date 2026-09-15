@@ -1,0 +1,59 @@
+
+== Where the types come from
+IObservable<T>: System.Private.CoreLib; Observable: System.Reactive 7.0.0.0
+
+== Cold: each subscriber runs the source
+source ran 2 times; first got Dm7 G7 Cmaj7 A7, second got Dm7 G7 Cmaj7 A7
+
+== Hot: a Subject pushes to whoever is subscribed now
+subscribed before G7: G7 Cmaj7; subscribed before Cmaj7: Cmaj7; Dm7 went to nobody
+ReplaySubject(2), subscribed after four chords: Cmaj7 A7
+Publish() and Connect(): source ran 1 time; both got Dm7 G7 Cmaj7 A7 / Dm7 G7 Cmaj7 A7
+
+== Virtual time: notes played within 50 ms of each other form a chord
+t =   75 ms  OnNext C E G
+t =  620 ms  OnNext D F A
+t = 1060 ms  OnNext B
+t = 1200 ms  OnCompleted
+
+== The same notes: Sample(100 ms) and Buffer(100 ms)
+Sample(100 ms): 100:G  600:A  1100:B
+Buffer(100 ms): 100:[C E G]  600:[D F A]  1100:[B]
+
+== Schedulers: Rx runs the observer on the thread that calls OnNext, unless told otherwise
+Subject.OnNext: observer ran on the caller's thread True, before OnNext returned True
+ObserveOn(rx-loop): observer on rx-loop
+SubscribeOn(rx-loop): the source ran on rx-loop
+Observable.Timer(1 ms): observer on a pool thread True
+
+== No backpressure: without a scheduler, OnNext waits for the observer
+1,000 OnNext: the observer ran inside each call True, processed 1000
+
+== No backpressure: behind ObserveOn, OnNext returns at once and the queue grows
+10,000 OnNext of 1 KB returned while the observer held the first: processed 0, more than 10 MB still reachable True
+after releasing the observer: processed 10000
+
+== An asynchronous step: SelectMany runs batches concurrently, Concat one at a time
+SelectMany       batch 1 started while batch 0 ran: True   results: batch 1, batch 0
+Select + Concat  batch 1 started while batch 0 ran: False  results: batch 0, batch 1
+
+== GA's reactive demo: 1,000 events, batches of 100, counted after SelectMany
+element type after SelectMany: IEnumerable<ProcessedEvent>; processedCount 10
+with a second SelectMany that flattens each batch: processedCount 1000
+
+== Disposing the subscription drops the batch still in flight
+after Dispose, then the last batch finishing: received 2, OnCompleted False
+
+== Errors: OnError ends the sequence
+observer saw: Dm7, OnError(the MIDI device was unplugged); a later subscriber sees: OnError(the MIDI device was unplugged)
+
+== Retry subscribes again; Catch switches to another sequence
+Retry(3): D dorian after 3 subscriptions
+Retry(2) on a source that keeps failing: InvalidOperationException: scale service unavailable, 2 subscriptions
+Catch: C ionian (cached)
+
+== Exercise solutions
+1. Publish().RefCount(2): source ran 1 time; first Dm7 G7 Cmaj7 A7, second Dm7 G7 Cmaj7 A7
+2. a note every 40 ms from 0 to 280 ms: 330:[C D E F G A B C]
+3. Select + Merge(2): 8 results, at most 2 running at once, all of 0..7 True
+exit 0

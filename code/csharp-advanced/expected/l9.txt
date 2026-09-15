@@ -1,0 +1,51 @@
+
+== An async iterator runs only when the consumer asks for the next item
+produce Dm7, consume Dm7, produce G7, consume G7, produce Cmaj7, consume Cmaj7, produce A7, consume A7, source finally
+
+== System.Linq.AsyncEnumerable, part of .NET 10
+AsyncEnumerable: System.Linq.AsyncEnumerable, in the shared framework True
+Take(2): Dm7 G7; log: produce Dm7, produce G7, source finally
+Where with an async predicate, then Select with an index: 0:Dm7 1:G7 2:A7
+AsyncEnumerable.Range(1, 10).Chunk(4): [1 2 3 4] [5 6 7 8] [9 10]
+
+== GA's usage example: GenerateAllVoicingsAsync(...).Take(100)
+GA shape: took 100; producer completed within 10 s True, windows generated 24 of 24
+fixed:    took 100; producer already completed True, windows generated fewer than 24 True
+
+== A consumer holds item 0: how many of 1,000 items has the source produced?
+async iterator (IAsyncEnumerable)      1
+Channel.CreateBounded(2)               4
+Channel.CreateUnbounded()           1000
+ActionBlock, BoundedCapacity 2         3
+Rx Subject, no scheduler               1
+Rx Subject, ObserveOn(TaskPool)     1000
+
+== The source fails after 3 items: what does the consumer see?
+async iterator                         0, 1, 2, InvalidOperationException: source failed
+channel, writer just throws            0, 1, 2, still waiting after 1 s
+channel, writer calls Complete(e)      0, 1, 2, InvalidOperationException: source failed
+Dataflow, PropagateCompletion          target.Completion Faulted: AggregateException: One or more errors occurred. (source failed) (inner InvalidOperationException: source failed)
+Rx                                     0, 1, 2, OnError(InvalidOperationException: source failed)
+
+== The consumer fails on item 1: does the source stop?
+async iterator                     consumer: InvalidOperationException: consumer failed; source produced 2, its finally ran True
+Channel.CreateBounded(2)           consumer: InvalidOperationException: consumer failed; producer finished within 1 s False, Reader.Count 2
+ActionBlock, BoundedCapacity 2     block Faulted; SendAsync returned false before the end True
+Rx, synchronous source             Subscribe: InvalidOperationException: consumer failed; source produced 2
+
+== Bridges
+ChannelReader.ReadAllAsync(): Dm7 G7 Cmaj7 A7
+ISourceBlock.ReceiveAllAsync(): Dm7 G7 Cmaj7 A7
+IObservable through a channel: Dm7 G7 Cmaj7 A7
+IAsyncEnumerable with Observable.Create: Dm7 G7 Cmaj7 A7
+ISourceBlock.AsObservable(): dm7 g7 cmaj7 a7
+
+== A Subject read through a channel: the channel's options decide what happens to a fast source
+unbounded                1,000 OnNext while the consumer held item 0; it then read 1000 items, the last 999
+bounded 10, DropOldest   1,000 OnNext while the consumer held item 0; it then read 11 items, the last 999: 0 990 991 992 993 994 995 996 997 998 999
+
+== Exercise solutions
+1. Merge(a, b): 6 items, a in order True, b in order True
+   Merge(a, failing): InvalidOperationException: b failed
+2. FixedVoicings(4 windows of 3).Chunk(5): 5 5 2
+exit 0

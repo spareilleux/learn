@@ -1,0 +1,76 @@
+
+== Which channel you get
+CreateUnbounded<int>()                       UnboundedChannel<T>                  CanCount True, CanPeek True
+CreateUnbounded<int>(SingleReader = true)    SingleConsumerUnboundedChannel<T>    CanCount False, CanPeek True
+CreateBounded<int>(10)                       BoundedChannel<T>                    CanCount True, CanPeek True
+CreateBounded<int>(10, SingleReader = true)  BoundedChannel<T>                    CanCount True, CanPeek True
+CreateUnboundedPrioritized<int>()            UnboundedPrioritizedChannel<T>       CanCount True, CanPeek True
+
+== Backpressure: a bounded channel of capacity 2 makes the writer wait
+WriteAsync(Dm7): completed True, Reader.Count 1
+WriteAsync(G7): completed True, Reader.Count 2
+WriteAsync(Cmaj7): completed False, Reader.Count 2
+WriteAsync(A7): completed False, Reader.Count 2
+TryWrite(Dm7): False
+ReadAsync: Dm7; Reader.Count 2, Cmaj7 moved in from the waiting writer
+WriteAsync(Cmaj7) has completed; WriteAsync(A7) still waiting True
+the reader got Dm7 G7 Cmaj7 A7, in the order written
+
+== A full channel: BoundedChannelFullMode, capacity 3, TryWrite 1 to 6
+Wait         TryWrite true  true  true  false false false reader gets 1 2 3  dropped -
+DropNewest   TryWrite true  true  true  true  true  true  reader gets 1 2 6  dropped 3 4 5
+DropOldest   TryWrite true  true  true  true  true  true  reader gets 4 5 6  dropped 1 2 3
+DropWrite    TryWrite true  true  true  true  true  true  reader gets 1 2 3  dropped 4 5 6
+
+== Completion: the reader drains what was written, then sees the end
+after Complete(): Reader.Count 2, Reader.Completion.IsCompleted False
+ReadAllAsync: Dm7 G7; Reader.Completion RanToCompletion
+WaitToReadAsync: False, TryRead: False
+
+== Completion with an error
+ReadAllAsync: Dm7 G7, then InvalidOperationException: the chord source failed
+ReadAsync: ChannelClosedException: The channel has been closed. (inner InvalidOperationException: the chord source failed)
+Reader.Completion: Faulted, InvalidOperationException: the chord source failed
+WriteAsync after Complete: ChannelClosedException: The channel has been closed. (inner InvalidOperationException: the chord source failed)
+TryWrite after Complete: False, TryComplete: False, Complete: ChannelClosedException: The channel has been closed.
+
+== Three producers, two consumers, one bounded channel
+300 items written, received 300, each exactly once: True
+each consumer saw each producer's items in the order written: True
+
+== Cancellation: a write waiting for room, a read waiting for an item
+WriteAsync(G7) cancelled: OperationCanceledException, e.CancellationToken == token True
+Reader.Count 1: G7 was not written; the reader gets Dm7
+ReadAsync on an empty channel, cancelled: OperationCanceledException: The operation was canceled.
+the channel still works: TryWrite(Cmaj7) True, TryRead Cmaj7
+
+== GA's voicing generator shape: the consumer stops after one voicing
+one voicing read, then break
+producer completed within 10 s: True; windows generated 24 of 24, left unread in the channel 23
+
+== GA's voicing generator shape: window 5 throws
+producer: faulted with InvalidOperationException: window 5 failed
+consumer finished within 1 s: False
+
+== GA's voicing generator shape: does window order survive?
+window 0 held until the reader got something: first voicing from window 0 False, 8 windows read True
+
+== Fixed generator: the consumer stops after one voicing
+one voicing read, then break
+producer already completed when the loop exited: True, windows generated fewer than 24: True
+
+== Fixed generator: window 5 throws
+consumer: faulted with InvalidOperationException: window 5 failed
+
+== GA's index command shape: the first batch upsert fails
+command finished within 1 s: False
+upserts tried 1, Reader.Count 8 (capacity 8), log: Error in DB Writer Consumer: database unavailable
+
+== Fixed index command: the first batch upsert fails
+command: faulted with IOException: database unavailable, upserts tried 1
+
+== Exercise solutions
+1. DropOldest, capacity 2: reader gets Cmaj7 A7, dropped Dm7 G7
+2. ReadBatchesAsync(max 4) over 1 to 10: [1 2 3 4] [5 6 7 8] [9 10]
+3. without cts.Cancel() in finally, leaving after one voicing: DisposeAsync completed within 1 s False, Reader.Count 4 (capacity 4)
+exit 0

@@ -45,6 +45,10 @@ run l2-modes-server l2-modes DOTNET_gcServer=1
 run l2-modes-non-concurrent l2-modes DOTNET_gcConcurrent=0
 run l3 l3
 run l4 l4
+run l6 l6
+run l7 l7
+run l8 l8
+run l9 l9
 
 ilspy() {
   dotnet ilspycmd --disable-updatecheck "$@" 2>&1

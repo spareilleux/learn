@@ -6,6 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <!-- Lesson 8: Rx.NET and its virtual-time test scheduler -->
+    <PackageReference Include="System.Reactive" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Reactive.Testing" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="../Snippets/Snippets.csproj" />
     <ProjectReference Include="$(GaRoot)Common/GA.Domain.Core/GA.Domain.Core.csproj" />
   </ItemGroup>

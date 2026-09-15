@@ -9,6 +9,10 @@ var lessons = new Dictionary<string, Action>
     ["l2-modes"] = Lesson2.Modes,
     ["l3"] = Lesson3.Run,
     ["l4"] = Lesson4.Run,
+    ["l6"] = Lesson6.Run,
+    ["l7"] = Lesson7.Run,
+    ["l8"] = Lesson8.Run,
+    ["l9"] = Lesson9.Run,
 };
 
 if (args.Length != 1 || !lessons.TryGetValue(args[0], out var run))

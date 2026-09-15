@@ -1,0 +1,48 @@
+
+== Where the types come from
+TransformBlock<,>: System.Threading.Tasks.Dataflow, in the shared framework True
+
+== A pipeline: parse, describe, batch by 3, write
+[0 2 5 9 (4-3), 2 5 7 E (4-2), 0 4 7 E (4-9)]
+[0 4 7 9 (4-3), 0 2 5 9 (4-3), 2 5 7 E (4-2)]
+[0 4 7 E (4-9)]
+Completion: parse RanToCompletion, describe RanToCompletion, batch RanToCompletion, write RanToCompletion
+
+== MaxDegreeOfParallelism 4: items 1 to 3 have finished, item 0 is still running
+EnsureOrdered = True   received while item 0 runs: nothing  then: 0 1 2 3
+EnsureOrdered = False  received while item 0 runs: 1 2 3    then: 0
+
+== BoundedCapacity 2: Post refuses, SendAsync waits
+Post 1 to 4 while item 1 is running: True True False False
+SendAsync(5): completed False
+once item 1 finishes: SendAsync(5) returned True
+
+== Errors: '04X7' does not parse
+SendAsync(0259) True, SendAsync(04X7) True
+await parse.Completion: PitchClassSetParseException: Exception of type 'GA.Domain.Core.Theory.Atonal.PitchClassSetParseException' was thrown.
+after the fault: SendAsync(047E) False, Post(0479) False
+parse.Completion.Exception: AggregateException > PitchClassSetParseException
+describe: Faulted, results: Faulted
+results.Completion.Exception: AggregateException > AggregateException > AggregateException > PitchClassSetParseException
+results.OutputAvailableAsync(): False, results.Count 0
+
+== Completion says the block is empty, not that your consumer is done
+await block.Completion returned: results.Count 1
+await consumer returned: results.Count 2
+
+== GA's index command with blocks: the writer fails on its first batch
+producer finished within 1 s: False; batch block completed False, OutputCount 2
+
+== The same, with the writer's fault passed to the batch block
+producer finished within 1 s: True, before sending all 100 items True; batch block: Faulted, IOException: database unavailable
+
+== Cancellation: the token in the block options
+Completion: TaskCanceledException: A task was canceled., status Canceled
+Post after cancellation: False, InputCount 0
+
+== Exercise solutions
+1. without NullTarget: completed within 1 s False, triads [0 4 7], tetrads [0 2 5 9], parse.OutputCount 3
+1. with NullTarget:    completed within 1 s True, triads [0 4 7, 0 3 7], tetrads [0 2 5 9, 2 5 7 E], parse.OutputCount 0
+2. fixed demo: sending stopped before the end True, pipeline AggregateException: One or more errors occurred. (The input string 'x' was not in a correct format.) (inner FormatException: The input string 'x' was not in a correct format.), consumer finished True
+3. TransformManyBlock over 257E: 2 5 7 E
+exit 0
