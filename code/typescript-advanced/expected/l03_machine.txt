@@ -1,0 +1,8 @@
+stopped → … → s4                   [ 'connecting', 'connected', 'reconnecting', 'polling' ]
+stop('reconnecting')               'stopped'
+stopped       start → connecting
+connecting    connected → connected, failed → polling, stop → stopped
+connected     dropped → reconnecting, stop → stopped
+reconnecting  reconnected → connected, closed → polling, stop → stopped
+polling       stop → stopped
+exit 0

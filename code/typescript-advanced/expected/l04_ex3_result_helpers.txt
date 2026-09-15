@@ -1,0 +1,4 @@
+{ ok: true, value: 'E string, fret 7' }
+{ ok: false, error: { kind: 'unknown-note', text: 'H' } }
+{ ok: false, error: { kind: 'fret-out-of-range', fret: 30 } }
+exit 0

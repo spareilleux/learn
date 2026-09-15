@@ -1,0 +1,21 @@
+errors/l02_assignability.ts:25:7 - error TS2559: Type '{ theme: string; fontSize: number; }' has no properties in common with type 'TuningOptions'.
+
+25 const options: TuningOptions = theme;
+         ~~~~~~~
+
+errors/l02_assignability.ts:30:16 - error TS2352: Conversion of type 'Guitar' to type 'string[]' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Type 'Guitar' is missing the following properties from type 'string[]': length, pop, push, concat, and 35 more.
+
+30 const tuning = guitar as string[];
+                  ~~~~~~~~~~~~~~~~~~
+
+errors/l02_assignability.ts:34:7 - error TS2322: Type 'SafeSlot<Guitar>' is not assignable to type 'SafeSlot<{ name: string; }>'.
+  Property 'strings' is missing in type '{ name: string; }' but required in type 'Guitar'.
+
+34 const namedSlot: SafeSlot<{ name: string }> = guitarSlot;
+         ~~~~~~~~~
+
+
+Found 3 errors in the same file, starting at: errors/l02_assignability.ts:25
+
+exit 1

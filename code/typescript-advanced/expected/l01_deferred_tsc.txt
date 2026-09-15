@@ -1,0 +1,14 @@
+errors/l01_deferred.ts:4:34 - error TS2322: Type '"text"' is not assignable to type 'T extends string ? "text" : "number"'.
+
+4   if (typeof value === 'string') return 'text';
+                                   ~~~~~~
+
+errors/l01_deferred.ts:5:3 - error TS2322: Type '"number"' is not assignable to type 'T extends string ? "text" : "number"'.
+
+5   return 'number';
+    ~~~~~~
+
+
+Found 2 errors in the same file, starting at: errors/l01_deferred.ts:4
+
+exit 1

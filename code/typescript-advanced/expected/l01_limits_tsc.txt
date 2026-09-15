@@ -1,0 +1,19 @@
+errors/l01_limits.ts:5:19 - error TS2589: Type instantiation is excessively deep and possibly infinite.
+
+5 type Length1000 = BuildTuple<1000>['length'];
+                    ~~~~~~~~~~~~~~~~
+
+errors/l01_limits.ts:9:19 - error TS2589: Type instantiation is excessively deep and possibly infinite.
+
+9 type Reversed49 = Reverse<BuildTuple<49>>['length'];
+                    ~~~~~~~~~~~~~~~~~~~~~~~
+
+errors/l01_limits.ts:17:19 - error TS2590: Expression produces a union type that is too complex to represent.
+
+17 type FiveDigits = `${Digit}${Digit}${Digit}${Digit}${Digit}`;
+                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Found 3 errors in the same file, starting at: errors/l01_limits.ts:5
+
+exit 1

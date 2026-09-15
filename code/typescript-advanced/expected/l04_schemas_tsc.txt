@@ -1,0 +1,17 @@
+errors/l04_schemas.ts:23:34 - error TS1360: Type 'ZodObject<{ connectionId: ZodString; color: ZodString; browser: ZodString; connectedAt: ZodISODateTime; displayName: ZodNullable<ZodString>; avatarUrl: ZodNullable<...>; }, $strip>' does not satisfy the expected type 'ZodType<ViewerInfo, unknown, $ZodTypeInternals<ViewerInfo, unknown>>'.
+  The types of '_zod.output.displayName' are incompatible between these types.
+    Type 'string | null' is not assignable to type 'string'.
+      Type 'null' is not assignable to type 'string'.
+
+23 const checked = ViewerInfoSchema satisfies z.ZodType<ViewerInfo>;
+                                    ~~~~~~~~~
+
+errors/l04_schemas.ts:27:22 - error TS18048: 'result.data' is possibly 'undefined'.
+
+27 console.log(checked, result.data.color);
+                        ~~~~~~~~~~~
+
+
+Found 2 errors in the same file, starting at: errors/l04_schemas.ts:23
+
+exit 1

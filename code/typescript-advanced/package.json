@@ -1,0 +1,22 @@
+{
+  "name": "typescript-advanced",
+  "private": true,
+  "description": "Examples of the course Advanced TypeScript, checked with tsc and run with Node.js by check.sh",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "check": "bash check.sh",
+    "typecheck": "tsc"
+  },
+  "devDependencies": {
+    "@standard-schema/spec": "1.1.0",
+    "@types/node": "24.13.4",
+    "arktype": "2.2.3",
+    "esbuild": "0.28.2",
+    "typescript": "7.0.2",
+    "valibot": "1.5.0",
+    "zod": "4.6.5"
+  }
+}

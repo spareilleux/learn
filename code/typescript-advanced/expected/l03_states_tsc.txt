@@ -1,0 +1,29 @@
+errors/l03_states.ts:8:31 - error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+
+8 function label(state: Voice): string {
+                                ~~~~~~
+
+errors/l03_states.ts:9:62 - error TS2339: Property 'transcript' does not exist on type '{ status: "listening"; startedAt: number; }'.
+
+9   if (state.status === 'listening') return `sending "${state.transcript}"`;
+                                                               ~~~~~~~~~~
+
+errors/l03_states.ts:29:42 - error TS2353: Object literal may only specify known properties, and 'transcript' does not exist in type '{ status: "idle"; }'.
+
+29 const invalid: Voice = { status: 'idle', transcript: 'leftover' };
+                                            ~~~~~~~~~~
+
+errors/l03_states.ts:30:17 - error TS2345: Argument of type '"stop"' is not assignable to parameter of type '"start"'.
+
+30 send('stopped', 'stop');
+                   ~~~~~~
+
+errors/l03_states.ts:31:7 - error TS2820: Type '"poling"' is not assignable to type '"connected" | "connecting" | "polling" | "stopped"'. Did you mean '"polling"'?
+
+31 const next: LiveState = send('connecting', 'failed');
+         ~~~~
+
+
+Found 5 errors in the same file, starting at: errors/l03_states.ts:8
+
+exit 1

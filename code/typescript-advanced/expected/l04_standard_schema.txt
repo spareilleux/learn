@@ -1,0 +1,10 @@
+zod      ok: saturn
+zod      target: Too small: expected string to have >=1 characters | timestamp: Invalid ISO datetime
+zod      not JSON: Unexpected end of JSON input
+valibot  ok: saturn
+valibot  target: Invalid length: Expected >=1 but received 0 | timestamp: Invalid timestamp: Received "yesterday"
+valibot  not JSON: Unexpected end of JSON input
+arktype  ok: saturn
+arktype  target: target must be non-empty | timestamp: timestamp must be an ISO 8601 (YYYY-MM-DDTHH:mm:ss.sssZ) date (was "yesterday")
+arktype  not JSON: Unexpected end of JSON input
+exit 0

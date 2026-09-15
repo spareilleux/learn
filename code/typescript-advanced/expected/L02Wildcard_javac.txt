@@ -1,0 +1,8 @@
+L02Wildcard.java:12: error: incompatible types: Instrument cannot be converted to CAP#1
+        objects.add(new Instrument("piano"));
+                    ^
+  where CAP#1 is a fresh type-variable:
+    CAP#1 extends Object from capture of ? extends Object
+Note: Some messages have been simplified; recompile with -Xdiags:verbose to get full output
+1 error
+exit 1

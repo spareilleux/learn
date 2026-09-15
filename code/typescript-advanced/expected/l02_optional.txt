@@ -1,0 +1,8 @@
+'displayName' in absent            false
+Object.keys(withNull)              [ 'connectionId', 'color', 'avatarUrl' ]
+applyPatch(absent, …)              { connectionId: 'a1', color: '#58a6ff', displayName: 'Stephane' }
+{ ...viewer, ...sloppyPatch }      { connectionId: 'c3', color: '#d2a8ff', displayName: undefined }
+tune(fromSettings)                 'capo 2, drop D false'
+JSON.stringify(withNull)           '{"connectionId":"b2","color":"#3fb950","avatarUrl":null}'
+JSON.stringify(sloppyPatch)        '{}'
+exit 0

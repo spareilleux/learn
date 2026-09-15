@@ -1,0 +1,52 @@
+errors/l03_brands.ts:11:14 - error TS2345: Argument of type 'StringIndex' is not assignable to parameter of type 'StringNumber'.
+  Type 'StringIndex' is not assignable to type '{ readonly [brand]: "StringNumber"; }'.
+    Types of property '[brand]' are incompatible.
+      Type '"StringIndex"' is not assignable to type '"StringNumber"'.
+
+11 openStringOf(clicked.string); // a 0-based index where a 1-based number is expected
+                ~~~~~~~~~~~~~~
+
+errors/l03_brands.ts:12:14 - error TS2345: Argument of type 'number' is not assignable to parameter of type 'StringNumber'.
+  Type 'number' is not assignable to type '{ readonly [brand]: "StringNumber"; }'.
+
+12 openStringOf(2); // a plain number
+                ~
+
+errors/l03_brands.ts:13:48 - error TS2322: Type 'number' is not assignable to type 'Fret'.
+  Type 'number' is not assignable to type '{ readonly [brand]: "Fret"; }'.
+
+13 const moved: FretboardPosition = { ...clicked, fret: clicked.fret + 1 }; // arithmetic loses the brand
+                                                  ~~~~
+
+  errors/l03_brands.ts:7:3 - The expected type comes from property 'fret' which is declared here on type 'FretboardPosition'
+    7   fret: Fret;
+        ~~~~
+
+errors/l03_brands.ts:14:38 - error TS2322: Type 'Fret' is not assignable to type 'StringIndex'.
+  Type 'Fret' is not assignable to type '{ readonly [brand]: "StringIndex"; }'.
+    Types of property '[brand]' are incompatible.
+      Type '"Fret"' is not assignable to type '"StringIndex"'.
+
+14 const swapped: FretboardPosition = { string: clicked.fret, fret: clicked.string };
+                                        ~~~~~~
+
+  errors/l03_brands.ts:6:3 - The expected type comes from property 'string' which is declared here on type 'FretboardPosition'
+    6   string: StringIndex;
+        ~~~~~~
+
+errors/l03_brands.ts:14:60 - error TS2322: Type 'StringIndex' is not assignable to type 'Fret'.
+  Type 'StringIndex' is not assignable to type '{ readonly [brand]: "Fret"; }'.
+    Types of property '[brand]' are incompatible.
+      Type '"StringIndex"' is not assignable to type '"Fret"'.
+
+14 const swapped: FretboardPosition = { string: clicked.fret, fret: clicked.string };
+                                                              ~~~~
+
+  errors/l03_brands.ts:7:3 - The expected type comes from property 'fret' which is declared here on type 'FretboardPosition'
+    7   fret: Fret;
+        ~~~~
+
+
+Found 5 errors in the same file, starting at: errors/l03_brands.ts:11
+
+exit 1

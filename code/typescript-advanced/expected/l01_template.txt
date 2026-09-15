@@ -1,0 +1,6 @@
+parseChord('F#m7')                 { root: 'F#', quality: 'm7' }
+parseChord('Bbmaj7').root          'Bb'
+parse 'Gsus4'                      { root: 'G', quality: 'sus4' }
+parse 'H7'                         'rejected: H7'
+handlerName('cameraSync')          'onCameraSync'
+exit 0

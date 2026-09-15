@@ -1,0 +1,25 @@
+errors/l04_result.ts:7:20 - error TS2339: Property 'value' does not exist on type 'Result<{ nodes: string[]; }, LoadError>'.
+  Property 'value' does not exist on type '{ ok: false; error: LoadError; }'.
+
+7 console.log(result.value.nodes); // the value exists only when ok is true
+                     ~~~~~
+
+errors/l04_result.ts:16:7 - error TS2322: Type '{ kind: "invalid-json"; message: string; }' is not assignable to type 'string'.
+
+16       return error satisfies never; // invalid-json is not handled
+         ~~~~~~
+
+errors/l04_result.ts:16:20 - error TS1360: Type '{ kind: "invalid-json"; message: string; }' does not satisfy the expected type 'never'.
+
+16       return error satisfies never; // invalid-json is not handled
+                      ~~~~~~~~~
+
+errors/l04_result.ts:23:15 - error TS18046: 'e' is of type 'unknown'.
+
+23   console.log(e.message, describe({ kind: 'http', status: 500 }));
+                 ~
+
+
+Found 4 errors in the same file, starting at: errors/l04_result.ts:7
+
+exit 1

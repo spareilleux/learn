@@ -1,0 +1,11 @@
+openStringOf(toStringNumber(…))    'B/4'
+typeof clicked.string              'number'
+JSON.stringify(clicked)            '{"string":1,"fret":3}'
+fret(next)                         4
+fret(25)                           RangeError: fret out of range: 25
+stringNumber(0)                    RangeError: string number out of range: 0
+Math.max(clicked.fret, 5)          5
+toStringIndex(stringNumber(6))     5
+new Semitones(7).value             7
+wrong instanceof Semitones         false
+exit 0

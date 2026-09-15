@@ -1,0 +1,18 @@
+{
+  // The course's compiler options: Node.js 24 runs the .ts files itself, tsc only checks them
+  "compilerOptions": {
+    "noEmit": true,
+    "target": "esnext",
+    "lib": ["esnext"],
+    "types": ["node"],
+    "module": "nodenext",
+    "rewriteRelativeImportExtensions": true,
+    "erasableSyntaxOnly": true,
+    "verbatimModuleSyntax": true,
+    "strict": true,
+    "exactOptionalPropertyTypes": true,
+    "noUncheckedIndexedAccess": true,
+    "skipLibCheck": true
+  },
+  "include": ["examples", "solutions", "bundle"]
+}

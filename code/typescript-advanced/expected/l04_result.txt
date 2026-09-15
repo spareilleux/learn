@@ -1,0 +1,7 @@
+/api/governance            1 node(s) at 2026-09-15T12:00:00Z
+/api/governance/offline    offline (fetch failed), keeping the static graph
+/api/governance/missing    HTTP 404, keeping the static graph
+/api/governance/html       not JSON: Unexpected token '<', "<!doctype html>" is not valid JSON
+/api/governance/stale      unexpected graph: nodes.0.name: Invalid input: expected string, received undefined; timestamp: Invalid ISO datetime
+caught                             [ 'governance graph unavailable: http', { kind: 'http', status: 404 } ]
+exit 0

@@ -1,0 +1,7 @@
+contradictory                      { isListening: false, voiceState: 'listening', error: 'network' }
+start         → listening since 120 ms
+final-result  → sending "show me drop D voicings"
+send-failed   → could not send "show me drop D voicings": HTTP 503
+sent          → could not send "show me drop D voicings": HTTP 503
+reset         → mic off
+exit 0

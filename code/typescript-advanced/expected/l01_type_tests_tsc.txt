@@ -1,0 +1,14 @@
+errors/l01_type_tests.ts:8:18 - error TS2344: Type 'false' does not satisfy the constraint 'true'.
+
+8 type _2 = Expect<Equal<ElementOf<readonly string[]>, string>>;
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+errors/l01_type_tests.ts:10:1 - error TS2578: Unused '@ts-expect-error' directive.
+
+10 // @ts-expect-error: a string is not an array, so this line should be rejected
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Found 2 errors in the same file, starting at: errors/l01_type_tests.ts:8
+
+exit 1

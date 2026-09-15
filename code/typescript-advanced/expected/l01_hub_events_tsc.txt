@@ -1,0 +1,29 @@
+errors/l01_hub_events.ts:28:4 - error TS2345: Argument of type '"NodeChange"' is not assignable to parameter of type 'keyof GovernanceHubEvents'.
+
+28 on('NodeChange', (data) => console.log(data));
+      ~~~~~~~~~~~~
+
+errors/l01_hub_events.ts:29:46 - error TS2339: Property 'id' does not exist on type '{ nodeId: string; healthStatus: string; color: string; timestamp: string; }'.
+
+29 on('NodeChanged', (data) => console.log(data.id));
+                                                ~~
+
+errors/l01_hub_events.ts:30:1 - error TS2554: Expected 7 arguments, but got 4.
+
+30 invoke('SyncCamera', 0, 2, 10);
+   ~~~~~~
+
+errors/l01_hub_events.ts:32:3 - error TS2353: Object literal may only specify known properties, and 'onScreenshotRequest' does not exist in type 'Callbacks<GovernanceHubEvents>'.
+
+32   onScreenshotRequest: (data) => console.log(data.reason),
+     ~~~~~~~~~~~~~~~~~~~
+
+errors/l01_hub_events.ts:32:25 - error TS7006: Parameter 'data' implicitly has an 'any' type.
+
+32   onScreenshotRequest: (data) => console.log(data.reason),
+                           ~~~~
+
+
+Found 5 errors in the same file, starting at: errors/l01_hub_events.ts:28
+
+exit 1

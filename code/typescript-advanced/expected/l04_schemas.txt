@@ -1,0 +1,12 @@
+camera.sentAt.getUTCHours()        12
+camera.zoom                        1.5
+nodeId                             'policy-7'
+safeParse('Policy 7').success      false
+'isAdmin' in parse(payload)        false
+strictObject issues                [ 'unrecognized_keys: Unrecognized key: "isAdmin"' ]
+z.toJSONSchema(NodeIdSchema)       {
+  '$schema': 'https://json-schema.org/draft/2020-12/schema',
+  type: 'string',
+  pattern: '^[a-z0-9-]+$'
+}
+exit 0

@@ -1,0 +1,8 @@
+errors/l01_hub_events.ts:25
+connection.on('NodeChange', (data                ) => console.log(data.id));
+^
+
+ReferenceError: connection is not defined
+
+Node.js v24.21.0
+exit 1

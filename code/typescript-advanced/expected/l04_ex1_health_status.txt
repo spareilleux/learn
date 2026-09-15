@@ -1,0 +1,7 @@
+strict:   [
+  '1.healthStatus: Invalid option: expected one of "error"|"warning"|"healthy"|"unknown"|"contradictory"',
+  '2.healthStatus: Invalid option: expected one of "error"|"warning"|"healthy"|"unknown"|"contradictory"'
+]
+tolerant: [ 'healthy', 'unknown', 'unknown' ]
+reported: [ 'healthy', 'unknown', 'unknown' ] replaced [ 'critical', 'ok' ]
+exit 0
