@@ -157,3 +157,11 @@ INSERT 0 0
  System.Numerics.Tensors                   | 10.0.2   | 2026-09-14 00:00:00+00
 (15 rows)
 
+BEGIN
+ pinned 
+--------
+     15
+(1 row)
+
+ERROR:  cannot execute DELETE in a read-only transaction
+ROLLBACK

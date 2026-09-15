@@ -13,6 +13,7 @@ var examples = new Dictionary<string, Func<Task>>
     ["l04-efcore"] = L04Ef.Query,
     ["l04-efcore-ga"] = L04Ef.GaModel,
     ["l04-exercise-batch"] = L04.ExerciseBatch,
+    ["l04-target"] = L04.Target,
 };
 
 if (args.Length != 1 || !examples.TryGetValue(args[0], out var example))

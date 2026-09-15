@@ -275,4 +275,19 @@ final class L04 {
             }
         }
     }
+
+    static void target() {
+        // targetServerType: before handing out a connection, the driver checks the server's role, as it would for each
+        // host of an Aurora cluster; the local server is a primary
+        for (String target : List.of("primary", "preferSecondary", "secondary")) {
+            try (Connection connection = DriverManager.getConnection(url() + "&targetServerType=" + target);
+                 Statement statement = connection.createStatement();
+                 ResultSet rs = statement.executeQuery("SELECT pg_is_in_recovery()")) {
+                rs.next();
+                System.out.println(target + ": connected, pg_is_in_recovery() = " + rs.getBoolean(1));
+            } catch (SQLException e) {
+                System.out.println(target + ": " + e.getSQLState() + ": " + e.getMessage());
+            }
+        }
+    }
 }

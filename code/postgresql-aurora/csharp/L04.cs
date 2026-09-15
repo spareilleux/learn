@@ -329,4 +329,34 @@ static class L04
             }
         }
     }
+
+    public static async Task Target()
+    {
+        // In a connection string, Target Session Attributes needs several hosts, such as Aurora's writer and reader endpoints
+        try
+        {
+            Db.DataSource("Target Session Attributes=standby");
+        }
+        catch (NotSupportedException e)
+        {
+            Console.WriteLine($"one host: {e.GetType().Name}: {e.Message}");
+        }
+
+        // A multi-host data source checks each server's role before handing out a connection; the local server is a primary
+        await using var multiHost = new NpgsqlDataSourceBuilder(Db.ConnectionString).BuildMultiHost();
+        foreach (var target in new[] { TargetSessionAttributes.ReadWrite, TargetSessionAttributes.PreferStandby, TargetSessionAttributes.Standby })
+        {
+            var dataSource = multiHost.WithTargetSession(target);
+            try
+            {
+                await using var connection = await dataSource.OpenConnectionAsync();
+                await using var command = new NpgsqlCommand("SELECT pg_is_in_recovery()", connection);
+                Console.WriteLine($"{target}: connected, pg_is_in_recovery() = {await command.ExecuteScalarAsync()}");
+            }
+            catch (NpgsqlException e)
+            {
+                Console.WriteLine($"{target}: {e.GetType().Name}: {e.Message}");
+            }
+        }
+    }
 }

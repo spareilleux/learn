@@ -19,6 +19,7 @@ public final class Main {
         examples.put("l04-copy", L04::copy);
         examples.put("l04-generated-keys", L04::generatedKeys);
         examples.put("l04-exercise-batch", L04::exerciseBatch);
+        examples.put("l04-target", L04::target);
         Example example = args.length == 1 ? examples.get(args[0]) : null;
         if (example == null) {
             System.err.println("usage: pg <" + String.join("|", examples.keySet()) + ">");

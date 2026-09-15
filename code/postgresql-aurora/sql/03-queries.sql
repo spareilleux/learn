@@ -193,3 +193,9 @@ WITH changes AS (
 SELECT * FROM changes ORDER BY action, package;
 
 SELECT package, version, pinned_at FROM ga.pinned_versions ORDER BY package;
+
+-- A read-only transaction refuses writes, as every transaction on a standby does
+BEGIN TRANSACTION READ ONLY;
+SELECT count(*) AS pinned FROM ga.pinned_versions;
+DELETE FROM ga.pinned_versions WHERE package = 'Npgsql';
+ROLLBACK;

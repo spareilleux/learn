@@ -91,6 +91,8 @@ run_programs() {
   step l04-exercise-batch-cs cs l04-exercise-batch
   step l04-exercise-batch-java java_client l04-exercise-batch
   step l04-too-many-cs cs l04-too-many
+  step l04-target-cs cs l04-target
+  step l04-target-java java_client l04-target
   echo "---- lesson 4 timings (not compared)"
   cs l04-timings
 }
