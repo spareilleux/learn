@@ -23,8 +23,11 @@ class StartupTest {
         // In a test, the class that called main() is Surefire's; java -jar logs ScalesApplication here.
         application.setMainApplicationClass(ScalesApplication.class);
         application.setBannerMode(org.springframework.boot.Banner.Mode.OFF);
-        application.run("--server.port=0").close();
-        String lines = output.getOut().lines()
+        var context = application.run("--server.port=0");
+        // Read the log before closing: the shutdown lines come from another thread, in no fixed order.
+        String log = output.getOut();
+        context.close();
+        String lines = log.lines()
                 .filter(line -> line.contains(" INFO "))
                 .map(StartupTest::normalizeLogLine)
                 .collect(Collectors.joining("\n"));

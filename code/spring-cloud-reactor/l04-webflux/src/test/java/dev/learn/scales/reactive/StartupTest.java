@@ -16,8 +16,11 @@ class StartupTest {
         var application = new SpringApplication(ReactiveScalesApplication.class);
         application.setMainApplicationClass(ReactiveScalesApplication.class);
         application.setBannerMode(Banner.Mode.OFF);
-        application.run("--server.port=0").close();
-        Expected.check("startup-log", output.getOut().lines()
+        var context = application.run("--server.port=0");
+        // Read the log before closing: the shutdown lines come from another thread, in no fixed order.
+        String log = output.getOut();
+        context.close();
+        Expected.check("startup-log", log.lines()
                 .filter(line -> line.contains(" INFO "))
                 .map(line -> line.substring(line.indexOf(" INFO "))
                         .replaceAll(" INFO \\d+ --- ", " INFO <pid> --- ")

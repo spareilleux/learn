@@ -21,9 +21,9 @@ compare() { # expected actual
 }
 
 if [ "${UPDATE:-}" = 1 ]; then
-  mvn -B verify -Dupdate.expected=true
+  mvn -B -fae verify -Dupdate.expected=true
 else
-  mvn -B verify
+  mvn -B -fae verify
 fi
 
 # Lesson 1: relaxed binding of environment variables, and their precedence over a profile's file.
