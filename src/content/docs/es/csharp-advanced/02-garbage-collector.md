@@ -157,7 +157,7 @@ Generation 2, Compacted True, Concurrent False
 #   POH: before 8,184, after 8,184
 ```
 
-Esta fue la undécima recolección del programa (`Index`), pausó el proceso durante 0.16 ms y dejó un montón de 276 KB: un programa pequeño, incluso con las tablas estáticas de GA cargadas. `TotalAvailableMemoryBytes` es la memoria física que el GC cree que puede usar, o el límite del contenedor cuando lo hay; por encima de `HighMemoryLoadThresholdBytes` (90% de forma predeterminada), recolecta de forma más agresiva. Los mismos valores se exportan como [métricas del runtime](https://learn.microsoft.com/dotnet/core/diagnostics/built-in-metrics-runtime), como `dotnet.gc.last_collection.heap.size`, que un panel de supervisión puede seguir en producción; la lección 12 las usa.
+Esta fue la undécima recolección del programa (`Index`), pausó el proceso durante 0.16 ms y dejó un montón de 276 KB: un programa pequeño, incluso con las tablas estáticas de GA cargadas. `TotalAvailableMemoryBytes` es la memoria física que el GC cree que puede usar, o el límite del contenedor cuando lo hay; por encima de `HighMemoryLoadThresholdBytes` (90% de forma predeterminada), recolecta de forma más agresiva. Los mismos valores se exportan como [métricas del runtime](https://learn.microsoft.com/dotnet/core/diagnostics/built-in-metrics-runtime), como `dotnet.gc.last_collection.heap.size`, que un panel de supervisión puede seguir en producción; la lección 19 las usa.
 
 ## Los objetos de vida corta son baratos, hasta que dejan de serlo
 

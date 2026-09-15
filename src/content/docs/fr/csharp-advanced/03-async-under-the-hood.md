@@ -425,7 +425,7 @@ t=4 min: Value 1
 t=6 min: Value 2
 ```
 
-La valeur est calculée une fois, conservée à 4 minutes, et recalculée à 6 minutes, dans un test qui s'exécute instantanément. Le verrou est un [`System.Threading.Lock`](https://learn.microsoft.com/dotnet/api/system.threading.lock), que `lock` utilise directement depuis C# 13 ; la leçon 6 y reviendra.
+La valeur est calculée une fois, conservée à 4 minutes, et recalculée à 6 minutes, dans un test qui s'exécute instantanément. Le verrou est un [`System.Threading.Lock`](https://learn.microsoft.com/dotnet/api/system.threading.lock), que `lock` utilise directement depuis C# 13 ; la leçon 10 y reviendra.
 
 ## Exercices
 

@@ -425,7 +425,7 @@ t=4 min: Value 1
 t=6 min: Value 2
 ```
 
-The value is computed once, kept at 4 minutes, and computed again at 6 minutes, in a test that runs in no time. The lock is a [`System.Threading.Lock`](https://learn.microsoft.com/dotnet/api/system.threading.lock), which `lock` uses directly since C# 13; lesson 6 comes back to it.
+The value is computed once, kept at 4 minutes, and computed again at 6 minutes, in a test that runs in no time. The lock is a [`System.Threading.Lock`](https://learn.microsoft.com/dotnet/api/system.threading.lock), which `lock` uses directly since C# 13; lesson 10 comes back to it.
 
 ## Exercises
 

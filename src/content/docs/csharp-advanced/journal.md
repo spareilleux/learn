@@ -1,6 +1,6 @@
 ---
 title: Journal
-description: Dated progress notes for the Advanced C# course — the GA pin, checking IL and compiler errors on three OSes, what the JIT and the runtime did that the documentation doesn't say, benchmarks on a hybrid processor, GA findings and items to verify.
+description: Dated progress notes for the Advanced C# course — the GA pin, checking IL and compiler errors on three OSes, what the JIT and the runtime did that the documentation doesn't say, benchmarks on a hybrid processor, deterministic programs for channels, Dataflow and Rx, the new outline, GA findings and items to verify.
 sidebar:
   order: 99
 ---
@@ -14,6 +14,11 @@ sidebar:
 - [x] Lesson 3: async and await under the hood
 - [x] Lesson 4: measured performance
 - [ ] Lesson 5: generics in depth
+- [x] A new outline in four parts and 24 lessons, with ASP.NET Core in depth and Spring and Reactor equivalents
+- [x] Lesson 6: channels
+- [x] Lesson 7: TPL Dataflow
+- [x] Lesson 8: Rx.NET
+- [x] Lesson 9: choosing a stream
 
 ## 2026-09-14 — Setup and the GA pin
 
@@ -63,6 +68,36 @@ None of these has been reported upstream yet; they are listed for the GA maintai
 - Commit [`d85a319`](https://github.com/spareilleux/learn/commit/d85a319), run [34915741516](https://github.com/spareilleux/learn/actions/runs/34915741516): green on the three OSes, lessons' code only.
 - Commit [`8ba378e`](https://github.com/spareilleux/learn/commit/8ba378e7ea22a64a57b3e45b45afa4c85afa85a3), run [34919815590](https://github.com/spareilleux/learn/actions/runs/34919815590): the exercise solutions, green on the three OSes. Jobs took 1 min 23 s on Linux, 2 min on macOS and 3 min 14 s on Windows, of which the dry run of the 37 benchmarks took 23 s, 27 s and 53 s. About 14 s of each job is lesson 3's `LazyWithExpiration` demonstration: a `Task.Run` waited 11,001 ms on Linux, 11,766 ms on macOS and 11,050 ms on Windows, where the previous run had measured 9,878 ms.
 - The Windows runner reported the same vector widths and the same floating-point differences as my machine; the Linux runner has AVX-512.
+
+## 2026-09-15 — A new outline, and part 2 starts
+
+- The course grows from 12 to 24 lessons in four parts: runtime and performance, concurrency and data flow, ASP.NET Core in depth, metaprogramming and tooling. Lessons 1 to 4 keep their slugs; the old lessons 6 and 12 become lessons 10 and 19, and lessons 2 and 3 now point there. Lessons 6 to 9 were written before lesson 5.
+- Parts 2 and 3 compare each topic with Spring and Reactor, from C# to Java. The [Spring Boot, Spring Cloud and Reactor course](../../spring-cloud-reactor/) makes the comparison in the other direction, so the lessons link to its pages instead of explaining Reactor again, and part 3 will build the ASP.NET Core counterpart of its scales service.
+
+## 2026-09-15 — Making concurrent programs deterministic
+
+Every behaviour in lessons 6 to 9 is printed by the program and compared with `expected/`, on three OSes. A first version of each lesson printed something that changed between runs; each lesson ran at least nine times in a row before its output was committed.
+
+- **Gates, not delays.** Items are held with a `TaskCompletionSource` until the program has seen what it wants to show, and "the producer is stuck" is measured by waiting until a counter stops moving, then printing the counter.
+- **Continuations run when they like.** A `WriteAsync(...).AsTask()` that had completed still reported `IsCompleted` false on some runs, because its continuation is asynchronous: the program now awaits it. The same with `Fault` on a Dataflow block, whose `Completion.Exception` was still `null` right after the call.
+- **`EnsureOrdered = false` doesn't mean "reversed".** A first test expected the slow item 0 to come out last; it didn't in 8 runs of 20. Lesson 7 now shows what a consumer can receive while item 0 runs.
+- **Boundaries in virtual time.** Notes at exactly 500 or 1,000 ms fell on the edge of `Sample` and `Buffer` windows; lesson 8's notes are placed away from them.
+- **`Reader.Count` throws** `NotSupportedException` on an unbounded channel created with `SingleReader = true`: its `CanCount` is `false`. The program drains the channel to count what's left.
+- **Rx.NET 7.0 has no bridge to `IAsyncEnumerable`**: `ToAsyncEnumerable()` on an observable didn't compile. Lesson 9 writes both directions by hand.
+- Lesson 7's first version labelled Dm7 as Forte 4-3, from GA's `ProgrammaticForteCatalog`; Forte's table says 4-26. The lesson now takes the labels from `CanonicalForteCatalog` and prints both.
+- Commits [`69bb214`](https://github.com/spareilleux/learn/commit/69bb2145cf22795d6394209ff82220e8a2bdf0d4) and [`b4d713f`](https://github.com/spareilleux/learn/commit/b4d713f86711b770a75d7504f334c5871c95f820), runs [34994143077](https://github.com/spareilleux/learn/actions/runs/34994143077) and [34995561655](https://github.com/spareilleux/learn/actions/runs/34995561655): green on the three OSes.
+- The stream benchmark of lesson 9 ran alone for 5 minutes on the same machine as lesson 4. BenchmarkDotNet reported a bimodal distribution for `RxObserveOnTaskPool`.
+
+## 2026-09-15 — Dogfooding: channels, Dataflow and Rx in GA
+
+GA uses channels in its voicing generator and its index command, and TPL Dataflow and Rx.NET in a performance demo. None of these has been reported upstream yet.
+
+- [`VoicingGenerator.GenerateAllVoicingsAsync`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Voicings/Generation/VoicingGenerator.cs#L180-L249): a consumer that stops early, like the usage example's `.Take(100)`, leaves the producers generating every window into an unbounded channel; a window that throws leaves the consumer waiting forever, because `Writer.Complete()` is never reached; the summary says the order is preserved, the comments below it say it isn't (lessons 6 and 9).
+- [`IndexVoicingsCommand`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaCLI/Commands/IndexVoicingsCommand.cs#L158-L251): when the consumer fails, the database being down for example, it logs and returns, and the producers wait forever on the full channel (lesson 6). The bounded channel in `Wait` mode is the right choice.
+- [`PerformanceOptimizationDemo`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Demos/Performance/PerformanceOptimizationDemo/Program.cs): the Dataflow part counts results from a `List<T>` filled by another thread without awaiting that thread, and ignores `SendAsync`'s result (lesson 7); the Rx part counts batches as events, 10 instead of 1,000, and waits a fixed 500 ms instead of awaiting the pipeline (lesson 8). Its channel part is correct.
+- The same demo and `MusicalAnalysisApp`, both `net10.0`, reference the `System.Threading.Tasks.Dataflow` 9.0.10 package, which .NET 10 already has in its shared framework. A new `net10.0` project with the same reference gets warning NU1510 at restore, and loads the framework's assembly anyway.
+- `ProgrammaticForteCatalog`'s numbers follow another ordering than Forte's table, although its remarks call the differences minor: 4-3 for the minor seventh chord where Forte says 4-26 (lesson 7).
+- GA has several `BackgroundService` classes, among them the cache warming and the voicing index initialization; lesson 15 is the place to read them.
 
 ## To verify
 

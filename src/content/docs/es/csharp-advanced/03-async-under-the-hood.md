@@ -425,7 +425,7 @@ t=4 min: Value 1
 t=6 min: Value 2
 ```
 
-El valor se calcula una vez, se conserva a los 4 minutos y se vuelve a calcular a los 6 minutos, en una prueba que no tarda nada. El bloqueo es un [`System.Threading.Lock`](https://learn.microsoft.com/dotnet/api/system.threading.lock), que `lock` usa directamente desde C# 13; la lección 6 vuelve sobre ello.
+El valor se calcula una vez, se conserva a los 4 minutos y se vuelve a calcular a los 6 minutos, en una prueba que no tarda nada. El bloqueo es un [`System.Threading.Lock`](https://learn.microsoft.com/dotnet/api/system.threading.lock), que `lock` usa directamente desde C# 13; la lección 10 vuelve sobre ello.
 
 ## Ejercicios
 
