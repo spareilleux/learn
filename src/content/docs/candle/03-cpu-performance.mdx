@@ -1,0 +1,385 @@
+---
+title: 3. CPU compute and performance
+description: Which Candle operations share a tensor's buffer and which copy it, strides and contiguity, when the graph of operations is recorded and what it keeps alive, how many threads the CPU backend uses and for what, and timings of matrix products, element-wise operations and a small network on a named machine, with and without target-cpu=native and in a container limited to four CPUs.
+sidebar:
+  order: 3
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Lesson 2 used tensors without asking what they cost. This lesson looks under them: when two tensors share memory, when Candle copies, what the graph of operations holds on to, and how the CPU backend spends its threads. Then it measures, on one machine, with the versions named, because performance claims without a machine are opinions.
+
+The code is [`examples/l03_views.rs`](https://github.com/spareilleux/learn/blob/c45b150/code/candle/course/examples/l03_views.rs), [`examples/l03_bench.rs`](https://github.com/spareilleux/learn/blob/c45b150/code/candle/course/examples/l03_bench.rs) and [`examples/l03_exercises.rs`](https://github.com/spareilleux/learn/blob/c45b150/code/candle/course/examples/l03_exercises.rs).
+
+## Views and copies
+
+A `Tensor` is a shared buffer plus a [`Layout`](https://docs.rs/candle-core/0.11.0/candle_core/layout/struct.Layout.html): a shape, a **stride** per dimension (how many elements of the buffer one step along that dimension skips) and an **offset** (where the first element is). Two tensors can share the buffer with different layouts. The example tells whether they do by comparing the address of the first element of the buffer behind each tensor ([lines 7-14](https://github.com/spareilleux/learn/blob/c45b150/code/candle/course/examples/l03_views.rs#L7-L14)):
+
+```rust
+fn buffer(t: &Tensor) -> usize {
+    let (storage, _layout) = t.storage_and_layout();
+    match &*storage {
+        Storage::Cpu(CpuStorage::F32(v)) => v.as_ptr() as usize,
+        Storage::Cpu(CpuStorage::F64(v)) => v.as_ptr() as usize,
+        _ => unimplemented!("only f32 and f64 CPU tensors in this example"),
+    }
+}
+```
+
+Creating a tensor from a `Vec` takes the `Vec` without copying it, and creating it from a slice copies ([lines 30-40](https://github.com/spareilleux/learn/blob/c45b150/code/candle/course/examples/l03_views.rs#L30-L40)):
+
+```text
+== from_vec keeps the Vec's buffer
+same buffer as the Vec: true
+from_slice, same buffer as the slice: false
+```
+
+So `from_vec` is the way to hand a large buffer you built yourself to Candle; `Tensor::new(&[...])` and `from_slice` always copy. Then fifteen operations on a `(3, 4)` tensor `a`, holding 0 to 11 ([lines 42-57](https://github.com/spareilleux/learn/blob/c45b150/code/candle/course/examples/l03_views.rs#L42-L57)):
+
+```text
+== views and copies of a (3, 4) tensor
+a                          dims [3, 4]     stride [4, 1]     offset 0 contiguous true  same buffer true
+a.clone()                  dims [3, 4]     stride [4, 1]     offset 0 contiguous true  same buffer true
+a.reshape((2, 6))          dims [2, 6]     stride [6, 1]     offset 0 contiguous true  same buffer true
+a.unsqueeze(0)             dims [1, 3, 4]  stride [4, 4, 1]  offset 0 contiguous true  same buffer true
+a.t()                      dims [4, 3]     stride [1, 4]     offset 0 contiguous false same buffer true
+a.t().contiguous()         dims [4, 3]     stride [3, 1]     offset 0 contiguous true  same buffer false
+a.t().reshape(12)          dims [12]       stride [1]        offset 0 contiguous true  same buffer false
+a.i((1.., 1..3))           dims [2, 2]     stride [4, 1]     offset 5 contiguous false same buffer true
+a.i(2)                     dims [4]        stride [1]        offset 8 contiguous true  same buffer true
+a.i((.., 2))               dims [3]        stride [4]        offset 2 contiguous false same buffer true
+a.broadcast_as((2, 3, 4))  dims [2, 3, 4]  stride [0, 4, 1]  offset 0 contiguous false same buffer true
+a.to_dtype(F32)            dims [3, 4]     stride [4, 1]     offset 0 contiguous true  same buffer true
+a.detach()                 dims [3, 4]     stride [4, 1]     offset 0 contiguous true  same buffer true
+a.copy()                   dims [3, 4]     stride [4, 1]     offset 0 contiguous true  same buffer false
+(&a + 1.0)                 dims [3, 4]     stride [4, 1]     offset 0 contiguous true  same buffer false
+```
+
+How to read it:
+
+- **Contiguous** means the elements sit in the buffer in row order with no gaps, strides `[4, 1]` for a `(3, 4)` tensor. `clone()` copies the `Arc`, not the data, like cloning a reference in C# or Java.
+- **`t()`** swaps the strides: one step along the new first dimension skips 1 element, one step along the second skips 4. Nothing moves. The same goes for `permute` and `transpose`.
+- **Indexing** with `i` changes the offset and the strides. `a.i((1.., 1..3))` starts at element 5, the `5.` in row 1, column 1. A whole row, `a.i(2)`, is still contiguous; a column, `a.i((.., 2))`, has stride 4 and isn't.
+- **`broadcast_as`** gives the new dimension a stride of **0**: every step along it reads the same elements. A broadcast of a thousand rows costs nothing until something copies it (exercise 2).
+- **`reshape`** is a view when the tensor is contiguous, and a copy when it isn't ([`tensor.rs`, lines 2523-2551](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-core/src/tensor.rs#L2523-L2551)): `a.t().reshape(12)` must put the elements in the order `0, 4, 8, 1, …`, which the buffer doesn't have. PyTorch's `view` would refuse here and `reshape` would copy; Candle has only `reshape`.
+- **`contiguous()`** returns the same tensor when it already is contiguous, and copies when it isn't ([lines 2466-2477](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-core/src/tensor.rs#L2466-L2477)). `to_dtype` to the type the tensor already has is also a no-op ([line 2453](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-core/src/tensor.rs#L2453)).
+- **`copy()`** and every arithmetic operation allocate a new buffer. There is no in-place `add_` as in PyTorch: `a + 1.0` always allocates.
+
+A view and a copy hold the same values; only the path to them differs:
+
+```text
+== the same values through a view and through a copy
+t.i(0)  [0.0, 4.0, 8.0]
+tc.i(0) [0.0, 4.0, 8.0]
+t equals tc everywhere: true
+```
+
+The difference shows in speed: an operation on a strided tensor walks the buffer by its strides, and the measurements below show what that costs.
+
+## The graph of operations
+
+Every tensor carries a [`BackpropOp`](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-core/src/op.rs#L1093-L1116), the operation that produced it with its inputs, or nothing. An operation records itself only when one of its inputs is tracked ([`op.rs`, lines 1100-1116](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-core/src/op.rs#L1100-L1116)), and a tensor is tracked when it is a variable or has a recorded operation ([`tensor.rs`, lines 592-594](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-core/src/tensor.rs#L592-L594)):
+
+```rust
+pub(crate) fn new1(arg: &Tensor, f: impl Fn(Tensor) -> Op) -> Self {
+    let op = if arg.track_op() {
+        Some(f(arg.clone()))
+    } else {
+        None
+    };
+    Self(op)
+}
+```
+
+[Lines 69-101](https://github.com/spareilleux/learn/blob/c45b150/code/candle/course/examples/l03_views.rs#L69-L101) compute the same kind of expression from plain tensors and from a [`Var`](https://docs.rs/candle-core/0.11.0/candle_core/struct.Var.html), a tensor marked as a variable, and count the nodes behind the result with `sorted_nodes`, the walk that `backward` uses:
+
+```rust
+let x = Tensor::new(&[1f32, 2., 3.], &dev)?;
+let y = x.sqr()?.sum_all()?;
+let w = Var::new(&[1f32, 2., 3.], &dev)?;
+let h = w.broadcast_mul(&x)?;
+let z = h.sqr()?.sum(D::Minus1)?;
+let zd = z.detach();
+```
+
+```text
+== the graph of operations
+plain tensors: y.track_op() false, nodes behind y 0
+with a Var:    z.track_op() true, nodes behind z 5
+their dims, from z to w: [[], [1], [3], [3], [3]]
+w.is_variable() true, h.is_variable() false
+z.detach():    track_op() false, nodes behind 0
+an op after detach: track_op() false
+```
+
+Three consequences:
+
+- **There is no `no_grad` mode to remember.** PyTorch records operations on any tensor with `requires_grad`, and inference code wraps itself in `torch.no_grad()`. In Candle, a computation that involves no `Var` records nothing. The `[1]` node is the broadcast that `broadcast_mul` inserts for `x`; lesson 4 shows that `backward` also gives `x` a gradient.
+- **The graph keeps its inputs alive.** A recorded operation holds a clone of each input tensor, an `Arc`, so as long as `z` lives, `h`, the broadcast and `w` stay in memory. For a network's forward pass, that is every activation of every layer; training needs them for `backward`, inference doesn't.
+- **`detach()` cuts the link.** It returns a tensor on the same buffer with no operation ([lines 2350-2365](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-core/src/tensor.rs#L2350-L2365)), so the intermediate tensors can be freed once the original result is dropped, and operations on it aren't recorded.
+
+## Threads
+
+The CPU backend decides its thread count once, in [`utils.rs`, lines 313-333](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-core/src/utils.rs#L313-L333):
+
+```rust
+fn default_num_threads() -> usize {
+    let physical = {
+        #[cfg(target_os = "macos")]
+        {
+            perf_core_count().unwrap_or_else(num_cpus::get_physical)
+        }
+        #[cfg(not(target_os = "macos"))]
+        {
+            num_cpus::get_physical()
+        }
+    };
+    physical.max(1) // safeguard against bad number
+}
+
+fn rayon_num_threads() -> usize {
+    std::env::var("RAYON_NUM_THREADS")
+        .ok()
+        .and_then(|s| usize::from_str(&s).ok())
+        .filter(|nt| nt > &0)
+        .unwrap_or_else(default_num_threads)
+}
+```
+
+- The default is the number of **physical** cores reported by [`num_cpus`](https://docs.rs/num_cpus/1.17.0/num_cpus/fn.get_physical.html), not logical ones; on Apple Silicon, only the performance cores (*to verify*, the course has no Mac run yet).
+- **`RAYON_NUM_THREADS`** overrides it. The matrix product reads it through [`get_num_threads`](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-core/src/utils.rs#L343-L346) and hands it to [`gemm`](https://docs.rs/gemm/0.19.0/gemm/) as `Parallelism::Rayon` ([`cpu_backend/mod.rs`, lines 1408-1413](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-core/src/cpu_backend/mod.rs#L1408-L1413)). It is also the variable [`rayon`](https://docs.rs/rayon/1.12.0/rayon/struct.ThreadPoolBuilder.html#method.num_threads) itself reads for its global pool.
+- **`CANDLE_NUM_THREADS`** sizes a separate pool used by the matrix products of quantized tensors ([`k_quants.rs`, line 2432](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-core/src/quantized/k_quants.rs#L2432)), for lesson 8.
+- **Element-wise operations use one thread.** `add`, `mul`, `exp` or `relu` are a plain loop over the elements, [`binary_map`](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-core/src/cpu_backend/utils.rs#L134-L155) for binary operations, whatever the variable says.
+
+`num_cpus::get_physical` counts the machine's cores, not what a container is allowed to use; the measurements below show what that does under Docker.
+
+## Measurements
+
+All the numbers below come from `l03_bench` built with `cargo build --release`, on an **Intel Core Ultra 9 285K** (24 cores: 8 performance and 16 efficient, no hyper-threading), 64 GB of RAM, **Windows 11 Pro**, **Rust 1.94.0**, `candle-core` **0.11.0**. Each figure is the median of several runs after one warm-up call ([lines 8-19](https://github.com/spareilleux/learn/blob/c45b150/code/candle/course/examples/l03_bench.rs#L8-L19)). The machine was running other work at the same time, so treat differences under about 20% as noise. `check.sh` runs the example without comparing its output.
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+```powershell
+cd code\candle
+cargo run --release --example l03_bench
+$env:RAYON_NUM_THREADS = "1"; cargo run --release --example l03_bench; Remove-Item Env:RAYON_NUM_THREADS
+```
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```bash
+cd code/candle
+cargo run --release --example l03_bench
+RAYON_NUM_THREADS=1 cargo run --release --example l03_bench
+```
+
+</TabItem>
+<TabItem label="macOS">
+
+```bash
+cd code/candle
+cargo run --release --example l03_bench
+RAYON_NUM_THREADS=1 cargo run --release --example l03_bench
+```
+
+</TabItem>
+</Tabs>
+
+### Matrix products
+
+Two `n × n` matrices of values in [-1, 1), in milliseconds. GFLOPS are billions of floating-point operations per second, counting `2n³` for a product. The triple loop is the textbook i-k-j loop in plain Rust on the same `f32` data ([lines 35-46](https://github.com/spareilleux/learn/blob/c45b150/code/candle/course/examples/l03_bench.rs#L35-L46)), the loop anyone would write without a library.
+
+| n | threads | `f32` | `f64` | `f16` | `f32` GFLOPS | triple loop, `f32` |
+|---|---|---|---|---|---|---|
+| 256 | 24 (default) | 0.21 | 0.25 | 0.17 | 158 | 1.20 |
+| 256 | 1 | 0.33 | 0.98 | 0.68 | 103 | 1.27 |
+| 512 | 24 | 0.44 | 0.65 | 0.80 | 608 | 11.01 |
+| 512 | 1 | 3.67 | 6.95 | 4.01 | 73 | 12.44 |
+| 1024 | 24 | 1.75 | 4.19 | 2.97 | 1227 | — |
+| 1024 | 8 | 3.66 | 8.51 | 4.05 | 586 | — |
+| 1024 | 1 | 20.72 | 38.71 | 20.55 | 104 | — |
+
+- **One thread of `gemm` is 3 to 4 times faster than the triple loop.** It cuts the matrices into blocks that fit the processor's caches and multiplies them with SIMD kernels.
+- **Threads pay mostly from `n = 512` on.** At `n = 1024`, 24 threads are 11.8 times faster than one; 8 threads, 5.7 times. At `n = 256`, a matrix is 256 KB of `f32` and the threads have little to share out.
+- **`f64` costs about twice `f32`**: half as many numbers fit in a SIMD register, and twice as many bytes move through the caches.
+- **`f16` is not faster than `f32` on a CPU.** Single-threaded they're equal at `n = 1024`, because [`gemm-f16`](https://docs.rs/gemm-f16/0.19.0/gemm_f16/) converts each block to `f32` and multiplies it with the `f32` kernels (`pack_lhs` in its `gemm.rs`); with threads, the conversions make it slower. Half precision saves memory; its speed-up belongs to GPUs (lesson 9).
+
+### Element-wise operations
+
+`2048 × 2048` matrices of `f32`, 16 MB each, in milliseconds:
+
+| Operation | 24 threads | 1 thread |
+|---|---|---|
+| `a + b`, both contiguous | 5.000 | 5.159 |
+| `a.t() + b.t()`, both strided | 33.550 | 29.203 |
+| `a.broadcast_add(bias)`, bias of 2048 | 4.131 | 4.845 |
+| `a.t().contiguous()`, a copy | 20.415 | 21.200 |
+| `a.exp()` | 8.061 | 7.615 |
+| `a.relu()` | 5.066 | 5.372 |
+| `a.t()`, a view | 0.000 | 0.000 |
+
+- **The thread count changes nothing here**, as the code said: these are single-threaded loops.
+- **A strided operand costs six times more.** `a.t()` has strides `[1, 2048]`, so reading one row of it jumps 2048 elements, 8 KB, between two numbers, and the processor's cache and its vectorization both stop helping. `contiguous()` pays the same walk once; after it, operations are back to 5 ms. When an operation on a transposed or permuted tensor sits in a loop, make it contiguous before the loop.
+- **`a + b` and `relu` take the same time**, so most of those 5 ms is probably allocating and filling a fresh 16 MB buffer rather than the arithmetic (*to verify* with a profiler).
+- **A view is free**: `t()` builds a new layout and nothing else.
+
+### A small network
+
+Three layers `256 → 256` with a ReLU, a batch of 64, 200 forward passes, in milliseconds. The layer is a `Module` with a weight and a bias ([lines 48-57](https://github.com/spareilleux/learn/blob/c45b150/code/candle/course/examples/l03_bench.rs#L48-L57)); the same weights are run once as plain tensors and once as `Var`s, so that the graph is recorded, in two alternating rounds ([lines 121-155](https://github.com/spareilleux/learn/blob/c45b150/code/candle/course/examples/l03_bench.rs#L121-L155)):
+
+```rust
+impl Module for Layer {
+    fn forward(&self, xs: &Tensor) -> candle_core::Result<Tensor> {
+        xs.matmul(&self.w.t()?)?.broadcast_add(&self.b)?.relu()
+    }
+}
+```
+
+| | 24 threads | 1 thread |
+|---|---|---|
+| round 1, plain tensors | 65.94 | 94.29 |
+| round 1, `Var` weights, graph kept | 45.86 | 50.87 |
+| round 2, plain tensors | 43.48 | 44.91 |
+| round 2, `Var` weights, graph kept | 43.08 | 46.28 |
+
+- **The first measurement is wrong.** A first version of the benchmark ran each variant once, plain tensors first, and "found" the graph 35% faster than no graph. Alternating shows the first run pays for warming up the allocator and the thread pool; in round 2 the four figures are within 7%. Measure each variant more than once, in alternation.
+- **Recording the graph costs no measurable time**: it clones a few `Arc`s per operation. Its cost is memory, as the previous section showed.
+- **Threads bring nothing at this size.** A `64 × 256` by `256 × 256` product is too small to share out, the same as `n = 256` above. The weight `w.t()` is a strided view, but `gemm` takes the strides directly and doesn't need a copy.
+
+### `target-cpu=native`
+
+Lesson 1 showed that a crate depending on Candle is compiled for a baseline x86-64 processor, without the AVX2 kernels behind [`with_avx`](https://docs.rs/candle-core/0.11.0/candle_core/utils/fn.with_avx.html). The same benchmark built with `RUSTFLAGS="-C target-cpu=native"`, in its own target directory so as not to replace the default build (65 seconds with `-j 4`):
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+```powershell
+$env:RUSTFLAGS = "-C target-cpu=native"
+cargo run --release --target-dir target/native --example l03_bench
+Remove-Item Env:RUSTFLAGS
+```
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```bash
+RUSTFLAGS="-C target-cpu=native" cargo run --release --target-dir target/native --example l03_bench
+```
+
+</TabItem>
+<TabItem label="macOS">
+
+```bash
+RUSTFLAGS="-C target-cpu=native" cargo run --release --target-dir target/native --example l03_bench
+```
+
+</TabItem>
+</Tabs>
+
+| 24 threads | default build | `target-cpu=native` |
+|---|---|---|
+| `avx2 kernels compiled in` | false | true |
+| matmul `n = 1024`, `f32` | 1.85 | 2.14 |
+| matmul `n = 512`, triple loop | 9.69 | 8.82 |
+| `a + b`, contiguous | 4.845 | 4.206 |
+| `a.t().contiguous()` | 18.782 | 22.400 |
+| network, round 2, plain | 41.35 | 53.26 |
+
+No gain beyond the noise, and the network round even came out slower. Two reasons from the sources:
+
+- **`gemm` already chooses its kernels at run time.** It asks the processor whether it has AVX-512 or FMA with `is_x86_feature_detected!` ([`gemm-common`, `lib.rs` lines 77-83](https://docs.rs/crate/gemm-common/0.19.0/source/src/lib.rs), and `gemm.rs` line 1015), so the default build already multiplies matrices with AVX2 and FMA on this processor.
+- **Candle's own AVX2 kernels serve other operations**: the dot products of quantized tensors ([`k_quants.rs`, line 282](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-core/src/quantized/k_quants.rs#L282)), sums in reductions and convolutions. `vec_add` for `f32` is a plain loop ([`cpu/kernels.rs`, lines 88-98](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-core/src/cpu/kernels.rs#L88-L98)) that the compiler vectorizes either way.
+
+The flag matters for quantized models, which lesson 8 measures. It also has a cost: a binary built with `target-cpu=native` can crash with an illegal instruction on an older processor, so it is a flag for a binary built where it runs, not for one you distribute.
+
+### In a container
+
+The same machine, under Docker Desktop 29.2.1 (Linux kernel 6.18 in WSL 2), in the `rust:1.94.0` image, with the container limited to four CPUs by `docker run --cpus 4`. That option sets a time quota; the container still sees the 24 cores, and so do `nproc` and `num_cpus`. The example was built in the container and run three times:
+
+| In the container | 24 threads (default) | `RAYON_NUM_THREADS=4` | `RAYON_NUM_THREADS=1` |
+|---|---|---|---|
+| matmul `n = 1024`, `f32` | 4.36 | 4.15 | 14.54 |
+| matmul `n = 256`, `f32` | 0.51 | 0.16 | 0.22 |
+| network, round 2, plain | 168.16 | 52.74 | 43.80 |
+| network, round 2, `Var` | 167.26 | 54.70 | 44.63 |
+| `a + b`, contiguous | 2.776 | 2.545 | 2.467 |
+
+With the default, Candle starts 24 threads on a quota of 4 CPUs: they spend their time waiting for the scheduler, and the small network runs **four times slower** than with a single thread. Setting `RAYON_NUM_THREADS` to the CPUs the container is given brings the large product back to its best and the network close to the single-threaded time. When you deploy a Candle program in a container with a CPU limit (lesson 10), set `RAYON_NUM_THREADS` explicitly.
+
+The contiguous element-wise operations take half the time they take on Windows, on the same processor. That fits the hypothesis above that allocating the result dominates them, since the two systems commit fresh memory differently (*to verify*).
+
+## Key takeaways
+
+- `from_vec` takes your buffer; `from_slice` and `Tensor::new` copy it. `clone`, `reshape` of a contiguous tensor, `t`, `permute`, `i`, `broadcast_as`, `detach` and `to_dtype` to the same type are views; arithmetic, `copy` and `contiguous` of a strided tensor allocate.
+- A broadcast has stride 0 and costs nothing until it is copied.
+- Operations are recorded only when a `Var` is involved. The graph costs no measurable time, but keeps every intermediate tensor alive until the result is dropped or detached.
+- The CPU backend uses as many threads as physical cores, for matrix products only; `RAYON_NUM_THREADS` changes it. Element-wise operations are single-threaded.
+- On this machine, threads pay for matrix products from about `512 × 512`, and in a container limited to 4 CPUs the default of 24 threads makes a small network four times slower. `f16` is no faster than `f32`, strided operands cost six times more, and `target-cpu=native` changes nothing for these operations.
+- Measure twice, in alternation: the first run pays for warming up.
+
+## Exercises
+
+1. Without running it, predict for each of these operations on `a = arange(0, 24).reshape((2, 3, 4))` whether the result is contiguous and whether it shares `a`'s buffer: `a.permute((2, 0, 1))`, then `.flatten_all()` on it; `a.flatten_all()`; `a.i((.., 1, ..))`, then `.contiguous()` on it; `a.i((1, ..)).contiguous()`; `a.squeeze(0)`; `a.transpose(1, 1)`.
+
+<details>
+<summary>Solution</summary>
+
+[Lines 27-49](https://github.com/spareilleux/learn/blob/c45b150/code/candle/course/examples/l03_exercises.rs#L27-L49) print the answer:
+
+```text
+== exercise 1: view or copy?
+a.permute((2, 0, 1))                 contiguous false same buffer true
+a.permute((2, 0, 1)).flatten_all()   contiguous true  same buffer false
+a.flatten_all()                      contiguous true  same buffer true
+a.i((.., 1, ..))                     contiguous false same buffer true
+a.i((.., 1, ..)).contiguous()        contiguous true  same buffer false
+a.i((1, ..)).contiguous()            contiguous true  same buffer true
+a.squeeze(0)                         contiguous true  same buffer true
+a.transpose(1, 1)                    contiguous true  same buffer true
+```
+
+- `flatten_all` is a `reshape`, so it copies a permuted tensor and not a contiguous one.
+- `a.i((1, ..))` is the second block of 12 elements, contiguous with an offset of 12, so `contiguous()` returns it as is. The middle row of every block, `a.i((.., 1, ..))`, has gaps and must be copied.
+- `a.squeeze(0)` is the trap: dimension 0 has size 2, so there is nothing to remove, and Candle returns `a` unchanged instead of an error, as PyTorch does (lesson 2).
+- `transpose(1, 1)` swaps a dimension with itself.
+
+</details>
+
+2. A bias of 1000 zeros is broadcast to `(1000, 1000)`, made contiguous, and then only its first row is kept. How many bytes does each step hold? Use `storage_and_layout` to read the length of the buffer behind a tensor. Is `copy()` of the row enough to free the rest?
+
+<details>
+<summary>Solution</summary>
+
+[Lines 51-82](https://github.com/spareilleux/learn/blob/c45b150/code/candle/course/examples/l03_exercises.rs#L51-L82):
+
+```rust
+let bias = Tensor::zeros(1000, DType::F32, &dev)?;
+let wide = bias.broadcast_as((1000, 1000))?;
+let copy = wide.contiguous()?;
+let row = copy.i(0)?;
+let small = row.copy()?;
+let compact = row.force_contiguous()?;
+```
+
+```text
+== exercise 2: the memory behind a broadcast
+wide:   1000000 elements, buffer 4000 bytes
+copy:   1000000 elements, buffer 4000000 bytes
+copy.i(0): 1000 elements, buffer 4000000 bytes
+copy.i(0).copy(): 1000 elements, buffer 4000000 bytes
+copy.i(0).force_contiguous(): 1000 elements, buffer 4000 bytes
+```
+
+The broadcast holds the bias's 4 KB for a million elements. `contiguous()` materializes 4 MB. The row is a view on those 4 MB, which is expected. The surprise is `copy()`: it clones the **whole** storage and keeps the row's layout ([`tensor.rs`, lines 2332-2344](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-core/src/tensor.rs#L2332-L2344), which calls `try_clone`, [`cpu_backend/mod.rs`, lines 2991-2993](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-core/src/cpu_backend/mod.rs#L2991-L2993)), so a 1000-element copy still holds 4 MB. [`force_contiguous`](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-core/src/tensor.rs#L2480-L2487) copies only the elements of the layout. To keep a small piece of a large tensor and let the rest go, use `force_contiguous`, not `copy`. The [journal](../journal/) lists this.
+
+</details>
+
+## Sources
+
+- Candle at `31f35b1`: [`tensor.rs`](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-core/src/tensor.rs), [`op.rs`](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-core/src/op.rs), [`utils.rs`](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-core/src/utils.rs), [`cpu_backend/mod.rs`](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-core/src/cpu_backend/mod.rs), [`cpu/kernels.rs`](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-core/src/cpu/kernels.rs), [`.cargo/config.toml`](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/.cargo/config.toml)
+- [`gemm` 0.19.0](https://docs.rs/gemm/0.19.0/gemm/) and the sources of [`gemm-common`](https://docs.rs/crate/gemm-common/0.19.0/source/) and [`gemm-f16`](https://docs.rs/crate/gemm-f16/0.19.0/source/)
+- [`num_cpus::get_physical`](https://docs.rs/num_cpus/1.17.0/num_cpus/fn.get_physical.html) and [rayon's `RAYON_NUM_THREADS`](https://docs.rs/rayon/1.12.0/rayon/struct.ThreadPoolBuilder.html#method.num_threads)
+- [PyTorch: tensor views](https://docs.pytorch.org/docs/stable/tensor_view.html)
+- [The rustc book: `target-cpu`](https://doc.rust-lang.org/rustc/codegen-options/index.html#target-cpu)

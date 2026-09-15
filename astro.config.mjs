@@ -171,6 +171,12 @@ export default defineConfig({
 							collapsed: true,
 							items: [{ autogenerate: { directory: 'ga-ai' } }],
 						},
+						{
+							label: "Candle: Hugging Face's machine learning in Rust",
+							translations: { fr: "Candle : le ML en Rust de Hugging Face", es: 'Candle: el ML en Rust de Hugging Face' },
+							collapsed: true,
+							items: [{ autogenerate: { directory: 'candle' } }],
+						},
 					],
 				},
 				{
