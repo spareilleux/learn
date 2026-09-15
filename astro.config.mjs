@@ -53,6 +53,12 @@ export default defineConfig({
 									items: [{ autogenerate: { directory: 'csharp-advanced' } }],
 								},
 								{
+									label: 'F# for C#/Java developers',
+									translations: { fr: 'F# pour développeurs C#/Java', es: 'F# para desarrolladores C#/Java' },
+									collapsed: true,
+									items: [{ autogenerate: { directory: 'fsharp' } }],
+								},
+								{
 									label: 'Rust for C#/Java developers',
 									translations: { fr: 'Rust pour développeurs C#/Java', es: 'Rust para desarrolladores C#/Java' },
 									collapsed: true,
@@ -87,6 +93,12 @@ export default defineConfig({
 									translations: { fr: 'TypeScript pour développeurs C#/Java', es: 'TypeScript para desarrolladores C#/Java' },
 									collapsed: true,
 									items: [{ autogenerate: { directory: 'typescript-for-csharp-java' } }],
+								},
+								{
+									label: 'Advanced TypeScript',
+									translations: { fr: 'TypeScript avancé', es: 'TypeScript avanzado' },
+									collapsed: true,
+									items: [{ autogenerate: { directory: 'typescript-advanced' } }],
 								},
 								{
 									label: 'Python for C#/Java developers',
