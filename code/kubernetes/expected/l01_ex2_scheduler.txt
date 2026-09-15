@@ -1,0 +1,8 @@
+registry.k8s.io/kube-scheduler:v1.37.0
+kube-scheduler
+--authentication-kubeconfig=/etc/kubernetes/scheduler.conf
+--authorization-kubeconfig=/etc/kubernetes/scheduler.conf
+--bind-address=<ip>
+--kubeconfig=/etc/kubernetes/scheduler.conf
+--leader-elect=true
+exit 0

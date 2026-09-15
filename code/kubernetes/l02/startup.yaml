@@ -1,0 +1,30 @@
+# Lesson 2: the Spring Boot API takes a few seconds to start. The startup probe gives it up to 60 s,
+# and the liveness probe only begins once the startup probe has succeeded.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: java-reactor-api
+  labels:
+    app: java-reactor-api
+spec:
+  containers:
+    - name: api
+      image: java-reactor-api:1.0
+      imagePullPolicy: Never
+      resources:
+        requests:
+          cpu: 250m
+          memory: 256Mi
+        limits:
+          memory: 512Mi
+      startupProbe:
+        httpGet:
+          path: /
+          port: 8080
+        periodSeconds: 1
+        failureThreshold: 60
+      livenessProbe:
+        httpGet:
+          path: /
+          port: 8080
+        periodSeconds: 10

@@ -1,0 +1,21 @@
+# Lesson 4: a fourth pod with the Service's label whose readiness probe always fails.
+# The EndpointSlice lists it, marked not ready, and the Service sends it nothing.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: csharp-api-unready
+  labels:
+    app: csharp-api
+spec:
+  containers:
+    - name: api
+      image: csharp-api:1.0
+      imagePullPolicy: Never
+      ports:
+        - name: http
+          containerPort: 8080
+      readinessProbe:
+        httpGet:
+          path: /ready
+          port: http
+        periodSeconds: 2

@@ -1,0 +1,13 @@
+# Lesson 4, exercise 1: a headless Service. No virtual IP: its DNS name returns the IP addresses of the ready pods.
+apiVersion: v1
+kind: Service
+metadata:
+  name: csharp-api-headless
+spec:
+  clusterIP: None
+  selector:
+    app: csharp-api
+  ports:
+    - name: http
+      port: 80
+      targetPort: http

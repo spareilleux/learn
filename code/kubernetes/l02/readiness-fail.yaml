@@ -1,0 +1,15 @@
+# Lesson 2: the same mistake on the readiness probe. Nothing restarts, but the pod never becomes Ready.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: readiness-fail
+spec:
+  containers:
+    - name: api
+      image: csharp-api:1.0
+      imagePullPolicy: Never
+      readinessProbe:
+        httpGet:
+          path: /ready
+          port: 8080
+        periodSeconds: 2

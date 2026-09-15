@@ -1,0 +1,38 @@
+# Lesson 2: an init container that runs once before the others, and a native sidecar
+# (an init container with restartPolicy: Always) that keeps running next to the app.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: init-sidecar
+spec:
+  # sh runs as PID 1 and ignores SIGTERM: without this, deleting the pod waits the default 30 s before SIGKILL
+  terminationGracePeriodSeconds: 5
+  initContainers:
+    - name: setup
+      image: busybox:1.38.0
+      command: ["sh", "-c", "echo 'greeting=hello' > /config/app.conf && echo setup done"]
+      volumeMounts:
+        - name: config
+          mountPath: /config
+    - name: log-shipper
+      image: busybox:1.38.0
+      restartPolicy: Always
+      # Follows the file the app writes; a real sidecar would send it somewhere
+      command: ["sh", "-c", "touch /logs/app.log && tail -F /logs/app.log"]
+      volumeMounts:
+        - name: logs
+          mountPath: /logs
+  containers:
+    - name: app
+      image: busybox:1.38.0
+      command: ["sh", "-c", ". /config/app.conf; i=0; while true; do i=$((i+1)); echo \"$greeting $i\" >> /logs/app.log; sleep 1; done"]
+      volumeMounts:
+        - name: config
+          mountPath: /config
+        - name: logs
+          mountPath: /logs
+  volumes:
+    - name: config
+      emptyDir: {}
+    - name: logs
+      emptyDir: {}

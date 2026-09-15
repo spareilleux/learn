@@ -1,0 +1,13 @@
+# Lesson 2, exercise 2: a memory limit too small for the .NET runtime.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: oom
+spec:
+  containers:
+    - name: api
+      image: csharp-api:1.0
+      imagePullPolicy: Never
+      resources:
+        limits:
+          memory: 8Mi

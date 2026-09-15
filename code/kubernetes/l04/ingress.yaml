@@ -1,0 +1,28 @@
+# Lesson 4: the older API for the same job as the Gateway. Without ingressClassName, the default IngressClass applies:
+# on kind, the one cloud-provider-kind creates.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: apis
+spec:
+  rules:
+    - host: csharp.example.test
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: csharp-api
+                port:
+                  name: http
+    - host: java.example.test
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: java-reactor-api
+                port:
+                  name: http

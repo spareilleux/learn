@@ -1,0 +1,18 @@
+# Lesson 1: a desired state. Two copies of the smallest image there is: pause does nothing and never exits.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hello
+  template:
+    metadata:
+      labels:
+        app: hello
+    spec:
+      containers:
+        - name: pause
+          image: registry.k8s.io/pause:3.10

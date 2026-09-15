@@ -1,0 +1,11 @@
+# Lesson 4: a pod to send requests from inside the cluster. curl's image would run curl and exit: sleep instead.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: client
+spec:
+  terminationGracePeriodSeconds: 0
+  containers:
+    - name: curl
+      image: curlimages/curl:8.22.0
+      command: ["sleep", "infinity"]

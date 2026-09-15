@@ -133,6 +133,12 @@ export default defineConfig({
 									collapsed: true,
 									items: [{ autogenerate: { directory: 'rabbitmq' } }],
 								},
+								{
+									label: 'Kubernetes',
+									translations: { fr: 'Kubernetes', es: 'Kubernetes' },
+									collapsed: true,
+									items: [{ autogenerate: { directory: 'kubernetes' } }],
+								},
 							],
 						},
 						{

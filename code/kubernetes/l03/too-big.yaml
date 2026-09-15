@@ -1,0 +1,22 @@
+# Lesson 3, exercise 3: a request no node can satisfy. The pod stays Pending.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: too-big
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: too-big
+  template:
+    metadata:
+      labels:
+        app: too-big
+    spec:
+      containers:
+        - name: api
+          image: java-reactor-api:1.0
+          imagePullPolicy: Never
+          resources:
+            requests:
+              memory: 100Gi

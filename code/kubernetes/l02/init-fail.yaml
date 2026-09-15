@@ -1,0 +1,15 @@
+# Lesson 2, exercise 3: an init container that fails. The app container never starts.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: init-fail
+spec:
+  terminationGracePeriodSeconds: 5
+  initContainers:
+    - name: setup
+      image: busybox:1.38.0
+      command: ["sh", "-c", "echo 'config server unreachable' >&2; exit 1"]
+  containers:
+    - name: app
+      image: busybox:1.38.0
+      command: ["sleep", "infinity"]

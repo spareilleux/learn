@@ -1,0 +1,11 @@
+NAME READY UP-TO-DATE AVAILABLE AGE
+deployment.apps/csharp-api 3/3 3 3 <age>
+
+NAME DESIRED CURRENT READY AGE
+replicaset.apps/csharp-api-55b7fbb748 3 3 3 <age>
+
+NAME READY STATUS RESTARTS AGE
+pod/csharp-api-<rs>-<pod> 1/1 Running 0 <age>
+pod/csharp-api-<rs>-<pod> 1/1 Running 0 <age>
+pod/csharp-api-<rs>-<pod> 1/1 Running 0 <age>
+exit 0

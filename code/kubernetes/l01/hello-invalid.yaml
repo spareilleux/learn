@@ -1,0 +1,18 @@
+# Lesson 1: a typo, replica instead of replicas. The API server rejects unknown fields.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello
+spec:
+  replica: 2
+  selector:
+    matchLabels:
+      app: hello
+  template:
+    metadata:
+      labels:
+        app: hello
+    spec:
+      containers:
+        - name: pause
+          image: registry.k8s.io/pause:3.10

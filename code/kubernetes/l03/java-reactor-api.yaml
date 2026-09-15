@@ -1,0 +1,46 @@
+# Lesson 3: the Spring Boot WebFlux API as a Deployment of two replicas, with a startup probe for the JVM.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java-reactor-api
+  labels:
+    app: java-reactor-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: java-reactor-api
+  template:
+    metadata:
+      labels:
+        app: java-reactor-api
+    spec:
+      containers:
+        - name: api
+          image: java-reactor-api:1.0
+          imagePullPolicy: Never
+          ports:
+            - name: http
+              containerPort: 8080
+          resources:
+            requests:
+              cpu: 250m
+              memory: 256Mi
+            limits:
+              memory: 512Mi
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+            periodSeconds: 1
+            failureThreshold: 60
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            periodSeconds: 10

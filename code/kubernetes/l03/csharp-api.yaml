@@ -1,0 +1,50 @@
+# Lesson 3: the C# API as a Deployment of three replicas, updated one pod at a time without losing capacity.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: csharp-api
+  labels:
+    app: csharp-api
+spec:
+  replicas: 3
+  # Old ReplicaSets kept for kubectl rollout undo
+  revisionHistoryLimit: 5
+  # A rollout that makes no progress for 60 s is reported as failed (the default is 600 s)
+  progressDeadlineSeconds: 60
+  selector:
+    matchLabels:
+      app: csharp-api
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      # One extra pod during the update, and never fewer than 3 ready ones
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: csharp-api
+    spec:
+      containers:
+        - name: api
+          image: csharp-api:1.0
+          imagePullPolicy: Never
+          ports:
+            - name: http
+              containerPort: 8080
+          resources:
+            requests:
+              cpu: 100m
+              memory: 64Mi
+            limits:
+              memory: 256Mi
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            periodSeconds: 10

@@ -1,0 +1,35 @@
+# Lesson 4: one entry point for both APIs with the Gateway API, routed by host name.
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: web
+spec:
+  # The class provided by cloud-provider-kind; a cloud or a gateway controller provides its own
+  gatewayClassName: cloud-provider-kind
+  listeners:
+    - name: http
+      protocol: HTTP
+      port: 80
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: apis
+spec:
+  parentRefs:
+    - name: web
+  rules:
+    - matches:
+        - headers:
+            - name: Host
+              value: csharp.example.test
+      backendRefs:
+        - name: csharp-api
+          port: 80
+    - matches:
+        - headers:
+            - name: Host
+              value: java.example.test
+      backendRefs:
+        - name: java-reactor-api
+          port: 80

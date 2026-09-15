@@ -1,0 +1,12 @@
+# Lesson 4, exercise 2: a Service whose selector matches no pod. The pods are labeled app: csharp-api.
+apiVersion: v1
+kind: Service
+metadata:
+  name: csharp-api-typo
+spec:
+  selector:
+    app: csharp_api
+  ports:
+    - name: http
+      port: 80
+      targetPort: http

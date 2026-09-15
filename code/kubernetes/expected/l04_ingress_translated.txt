@@ -1,0 +1,9 @@
+NAME CLASS ADDRESS PROGRAMMED AGE
+gateway.gateway.networking.k8s.io/kind-ingress-gateway cloud-provider-kind <ip> True <age>
+gateway.gateway.networking.k8s.io/web cloud-provider-kind <ip> True <age>
+
+NAME HOSTNAMES AGE
+httproute.gateway.networking.k8s.io/apis <age>
+httproute.gateway.networking.k8s.io/apis-57edfef398 ["java.example.test"] <age>
+httproute.gateway.networking.k8s.io/apis-f45dc871d2 ["csharp.example.test"] <age>
+exit 0

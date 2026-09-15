@@ -1,0 +1,17 @@
+# Lesson 2, exercise 1: the pod of pod.yaml in the Guaranteed QoS class. Requests equal limits, for CPU and memory.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: csharp-api-guaranteed
+spec:
+  containers:
+    - name: api
+      image: csharp-api:1.0
+      imagePullPolicy: Never
+      resources:
+        requests:
+          cpu: 100m
+          memory: 128Mi
+        limits:
+          cpu: 100m
+          memory: 128Mi

@@ -1,0 +1,16 @@
+# Lesson 2: a liveness probe on a path the API doesn't have. Every GET /healthz gets a 404, so the kubelet restarts it.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: liveness-fail
+spec:
+  containers:
+    - name: api
+      image: csharp-api:1.0
+      imagePullPolicy: Never
+      livenessProbe:
+        httpGet:
+          path: /healthz
+          port: 8080
+        periodSeconds: 2
+        failureThreshold: 2
