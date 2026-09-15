@@ -1,0 +1,74 @@
+---
+title: Journal
+description: Notes de progression datées du cours TypeScript — l'installation de TypeScript 7.0.2, la CI sur trois OS, les surprises de tsc, Node.js et dotnet, ce que tsc a trouvé dans les front ends de GuitarAlchemist/ga et dans ce site, et les points à vérifier.
+sidebar:
+  order: 99
+---
+
+## Progression
+
+- [x] TypeScript 7.0.2 épinglé dans le `package.json` et le fichier de verrouillage propres au cours, avec `@types/node` 24.13.4 et tsx 4.23.13
+- [x] CI : `tsc` sur le projet et sur chaque extrait d'erreur, chaque exemple et chaque solution exécutés avec Node.js 24.21.0, les comparaisons C# et Java compilées et exécutées, le tout comparé à la sortie attendue sur trois OS
+- [x] Leçon 1 : le compilateur et l'outillage
+- [x] Leçon 2 : le typage structurel
+- [x] Leçon 3 : unions et *narrowing*
+- [x] Leçon 4 : génériques
+- [ ] Leçon 5 : programmation au niveau des types
+
+## 2026-09-14 — Installer TypeScript 7.0.2
+
+- `npm view typescript version` donne 7.0.2, le portage en Go, publié le 2026-07-08. Le package `typescript` est maintenant petit : npm installe le compilateur sous forme d'un package par plateforme, `@typescript/typescript-win32-x64` sur ma machine, et l'étape d'information de la CI liste `typescript-linux-x64` sous Linux et `typescript-darwin-arm64` sous macOS. Le fichier de verrouillage liste les vingt packages de plateforme comme dépendances optionnelles, donc `npm ci` fonctionne sur les trois OS à partir de l'unique fichier de verrouillage écrit sous Windows.
+- TypeScript 7.0 n'a pas encore d'API programmatique. Les outils qui chargent le compilateur comme bibliothèque peuvent utiliser `@typescript/typescript6`, un package de compatibilité qui fournit TypeScript 6.0 avec une commande `tsc6` ; je n'en ai pas eu besoin pour le cours.
+- Le cours épingle ses versions dans [`code/typescript-for-csharp-java/package.json`](https://github.com/spareilleux/learn/blob/main/code/typescript-for-csharp-java/package.json), pas dans celui du site : le site lui-même n'a pas de dépendance `typescript`.
+- npm 11.19 n'exécute plus les scripts d'installation par défaut. L'installation de tsx a affiché `npm warn install-scripts esbuild@0.28.2 (postinstall: node install.js)`, et tsx fonctionne quand même, sur les trois OS : le binaire d'esbuild vient d'un package de plateforme installé comme dépendance optionnelle.
+
+## 2026-09-14 — La CI
+
+- [`typescript-examples.yml`](https://github.com/spareilleux/learn/blob/main/.github/workflows/typescript-examples.yml) installe Node.js 24.21.0, .NET 10 et Java 25, exécute `npm ci` dans le dossier du cours, puis [`check.sh`](https://github.com/spareilleux/learn/blob/main/code/typescript-for-csharp-java/check.sh) avec `REQUIRE_COMPARE=1`, pour qu'un `dotnet` ou un `java` manquant fasse échouer l'exécution au lieu de sauter les comparaisons.
+- `check.sh` exécute `tsc` une fois sur tout le projet, qui doit passer, et une fois par extrait d'erreur, avec un `tsconfig` généré qui étend celui du cours et liste ce seul fichier ; un extrait peut demander des options supplémentaires avec un commentaire `// tsc options:`, comme le fait celui de la leçon 2 pour `noUncheckedIndexedAccess`. [`normalize.mjs`](https://github.com/spareilleux/learn/blob/main/code/typescript-for-csharp-java/normalize.mjs), adapté du cours JavaScript, rend les chemins relatifs et retire les frames de la pile et les identifiants de processus.
+- La première exécution a échoué sur les trois OS, sur deux fichiers seulement, et pour la même raison : les avertissements C# `CS8602` et `CS8509` figuraient dans la sortie de la CI et pas dans la mienne. `dotnet run file.cs` compile un programme basé sur un fichier de façon incrémentale, et une seconde exécution avec une source inchangée n'appelle pas le compilateur, donc ses avertissements ne s'affichent qu'une fois. `check.sh` exécute maintenant `dotnet clean` sur le fichier avant `dotnet run --no-cache`, et les sorties capturées sous Windows correspondent sous Linux et macOS. L'exécution suivante est passée sur les trois OS en 2 minutes 41 secondes, Windows étant le job le plus lent.
+
+## 2026-09-15 — Surprises en écrivant les leçons 1-4
+
+**Le code de sortie de `tsc` a changé entre 6.0 et 7.0.** Avec `--noEmit` et des erreurs, `tsc` 6.0.3 renvoie 2, et 7.0.2 renvoie 1. Dans 7.0.2, 1 signifie que des erreurs ont empêché la sortie, avec `noEmit` ou `noEmitOnError`, et 2 que la sortie a été écrite malgré des erreurs, ce que la leçon 1 montre avec `l01-emit`. Une étape de CI qui teste `$? -eq 2` casserait à la mise à jour ; teste un code non nul.
+
+**`tsc file.ts` à côté d'un `tsconfig.json` est une erreur depuis 6.0.** `TS5112` refuse d'ignorer la configuration en silence, comme le faisaient les anciennes versions ; `--ignoreConfig` rétablit l'ancien comportement. `check.sh` construit plutôt un petit `tsconfig` pour chaque extrait d'erreur.
+
+**Les membres d'une union ne s'affichent pas dans l'ordre de déclaration.** La même comparaison dans le `ForceRadiant.tsx` de GA affiche `"warning" | "error" | "unknown" | "contradictory"` avec 5.9.3 et `"contradictory" | "error" | "unknown" | "warning"` avec 7.0.2. Les [notes de version de la 6.0](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-6-0.html#the---stabletypeordering-flag) l'expliquent : TypeScript 7 trie les types selon leur contenu pour que des vérificateurs parallèles tombent d'accord. Les sorties attendues de la leçon 3 sont uniquement celles de 7.0.2.
+
+**Une annotation `out` fausse compile.** J'ai écrit `interface Mislabeled<out T> { accept(value: T): void }` pour l'extrait d'erreur de la leçon 4, en m'attendant à une erreur, et `tsc` 7.0.2 l'a acceptée : `accept` est une méthode, les paramètres de méthode sont bivariants, et `T` à cette position satisfait les deux annotations. C# signale la même interface avec `CS1961`. L'extrait utilise maintenant l'erreur que `tsc` détecte, `in T` sur une méthode qui renvoie `T` (`TS2636`).
+
+**`Array.isArray` ramène `any`.** Dans la solution du deuxième exercice de la leçon 2, la valeur était `unknown`, et `Array.isArray(value)` l'a restreinte à `any[]` : `item.name` compilait sans vérification. Les vérifications `typeof` de la solution la rendent correcte ; `tsc` ne les a pas demandées. La leçon 2 le signale.
+
+**Node.js affiche la ligne dépouillée de ses types.** Quand un fichier `.ts` échoue à l'exécution, la ligne source dans le message de Node.js contient des espaces là où se trouvaient les types, comme le `const guitarSource                 = instrumentSource;` de la leçon 4. C'est ainsi que la suppression des types (*type stripping*) conserve les numéros de ligne et de colonne.
+
+**`module.stripTypeScriptTypes` affiche encore un `ExperimentalWarning` en 24.21.0**, bien que la suppression des types elle-même soit stable et silencieuse ; la leçon 1 montre l'avertissement.
+
+## 2026-09-15 — Ce que tsc a trouvé dans GuitarAlchemist/ga (a826864)
+
+J'ai cloné [GuitarAlchemist/ga](https://github.com/GuitarAlchemist/ga) au commit [`a826864`](https://github.com/GuitarAlchemist/ga/commit/a826864f3a012cad88e415954bf57eca0ce12aa6) dans un dossier de travail, installé les deux front ends, et exécuté `tsc` avec 5.9.3, la version que résout le `pnpm-lock.yaml` de la bibliothèque de composants, et avec 7.0.2.
+
+- **Des noms utilisés et jamais définis.** [`Apps/ga-client/src/components/Chat/ChatInterface.tsx`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Apps/ga-client/src/components/Chat/ChatInterface.tsx#L219) utilise `VIRTUALIZATION_THRESHOLD` (lignes 69 et 219) et `VirtualizedMessageList` (lignes 254 et 255), et rien ne les définit ni ne les importe : `TS2304`. La route `/ai-copilot` d'[`App.tsx`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Apps/ga-client/src/App.tsx#L105) charge ce composant, donc la page devrait lever une `ReferenceError` à son rendu (*à vérifier* dans un navigateur). Reproduction : `cd Apps/ga-client && npm ci && npx tsc -b --pretty false | grep ChatInterface`. Cela ressemble à un bug qui mérite une issue.
+- **Les erreurs de type ne font pas échouer le build.** Les deux front ends se construisent avec `vite build`, qui retire les types sans les vérifier ; `ga-client` signale 346 erreurs avec `tsc -b` (dont 165 `TS6133`, des variables inutilisées), et `ga-react-components` 186. Une étape `tsc --noEmit` en CI aurait détecté les noms manquants.
+- **Un fichier de verrouillage périmé.** Dans `ReactComponents/ga-react-components`, `pnpm install --frozen-lockfile` échoue avec `ERR_PNPM_OUTDATED_LOCKFILE` : 21 dépendances de `package.json` manquent dans `pnpm-lock.yaml`, et les versions de `@react-three/drei` et `@react-three/fiber` diffèrent. J'ai installé sans `--frozen-lockfile`, donc les nombres d'erreurs de la bibliothèque de composants peuvent dépendre des versions que j'ai obtenues.
+- **Des statuts que le type exclut.** [`ForceRadiant.tsx`, lignes 721 et 725](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/ReactComponents/ga-react-components/src/components/PrimeRadiant/ForceRadiant.tsx#L720-L729) compare un `GovernanceHealthStatus` à `'ok'` et `'critical'`, que l'union ne contient pas (`TS2367`), et [`DataLoader.ts`, lignes 276-278](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/ReactComponents/ga-react-components/src/components/PrimeRadiant/DataLoader.ts#L276-L278) fait passer le `healthStatus: string` d'un message SignalR par `as unknown as GovernanceNode`. Soit il manque deux statuts à l'union, soit les comparaisons sont du code mort (*à vérifier* dans le hub de GA). La ligne 1464 du même fichier compare une sévérité de signal, `'info' | 'warning' | 'emergency'`, à `'critical'`. La leçon 3 reproduit le premier cas sous une forme réduite.
+- **`noImplicitAny: false` à côté de `strict: true`** dans [`ga-react-components/tsconfig.app.json`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/ReactComponents/ga-react-components/tsconfig.app.json#L17-L20). Le réactiver n'ajoute que quatre erreurs, dans `BSPDoomExplorer.tsx` et `IxqlFormPanel.tsx` ; la leçon 2 les liste.
+- **Des données non vérifiées.** La bibliothèque de composants compte 34 `as unknown as`, 42 appels à `JSON.parse` et 18 `as any`. La caméra est restaurée depuis `localStorage` avec `JSON.parse(saved) as { px: number; … }` ([`ForceRadiant.tsx`, ligne 3558](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/ReactComponents/ga-react-components/src/components/PrimeRadiant/ForceRadiant.tsx#L3555-L3561)), `loadQueue<T>` renvoie `JSON.parse` comme un `T[]` ([`CourseViewer.tsx`, ligne 152](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/ReactComponents/ga-react-components/src/components/PrimeRadiant/CourseViewer.tsx#L152-L159)), et l'`isApiResponse<T>` de `ga-client` vérifie deux noms de propriétés avant de promettre un `ApiResponse<T>`, avec `json as T` comme repli ([`musicService.ts`, lignes 17-49](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Apps/ga-client/src/services/musicService.ts#L17-L49)). Les leçons 3 et 4 et leurs exercices écrivent les versions vérifiées.
+- **TypeScript 7 en trouve davantage.** `tsc -p tsconfig.app.json` sur la bibliothèque de composants donne 180 erreurs en 14,7 secondes avec 5.9.3 et 197 en 1,9 seconde avec 7.0.2. Les nouvelles erreurs sont des noms Node.js dans deux scripts (`TS2591`, parce que `types` vaut maintenant `[]` par défaut), `TS2871` (« this expression is always nullish ») dans `BrainstormPanel.tsx` ligne 40 et `GitHubPollingManager.ts` ligne 48, et `TS2550` pour `.at()` dans `ChatWidget.tsx` ligne 1254, avec `lib` réglé sur ES2020 ; 5.9.3 ne signalait aucun de ces codes.
+- **Des détails.** `ga-client/tsconfig.json` a `"sourceMaps": true` à son niveau supérieur, où `tsc` l'ignore ; l'option est `sourceMap`, dans `compilerOptions`. `src/components/PrimeRadiant/index.ts` dans la bibliothèque de composants exporte `RemediationAction` deux fois (`TS2300`, lignes 101 et 129), et `ThreeFretboard.tsx` ligne 780 utilise un type `GuitarModelStyle` qui n'existe pas. Le `ShowcasePanel.test.tsx` de `ga-client` utilise le `global` de Node.js, que les types du projet navigateur ne déclarent pas.
+
+## 2026-09-15 — Ce que tsc a trouvé dans ce site (8ba378e)
+
+`npx -p typescript@7.0.2 tsc --noEmit` au commit [`8ba378e`](https://github.com/spareilleux/learn/commit/8ba378e7ea22a64a57b3e45b45afa4c85afa85a3), avec le `tsconfig.json` du site, signale trois erreurs, les mêmes qu'avec 6.0.3. Aucune ne casse le site.
+
+- `astro.config.mjs`, ligne 146 : la barre latérale importée de `src/streeling-sidebar.json` ne correspond pas au `SidebarItemUserConfig` de Starlight, parce que l'union inférée de ses entrées ajoute `fr?: undefined` à l'entrée qui n'a qu'une traduction espagnole. La leçon 3 explique l'inférence.
+- `code/javascript-for-csharp-java/errors/l04_private_outside.js` : le `tsconfig.json` du site inclut `**/*`, donc `tsc` vérifie le code des cours, y compris un extrait d'erreur faux exprès. Les `errors/*.ts` du cours TypeScript seront pris en compte de la même façon ; exclure `code/` dans le `tsconfig.json` du site limiterait les éditeurs et `tsc` aux fichiers propres du site.
+- `src/content.config.ts` : `astro:content` n'est déclaré qu'après `astro sync`.
+
+## À vérifier
+
+- La `ReferenceError` sur la page `/ai-copilot` de GA, dans un navigateur.
+- Si le hub de gouvernance de GA envoie `ok` et `critical` comme statuts de santé.
+- Ce que fait le `ForceRadiant` de GA d'une caméra sauvegardée à laquelle il manque une coordonnée.
+- `new[] { 1, "two", null }` en C#, cité dans la leçon 2 comme refusé faute de meilleur type commun.
+- Les commandes d'installation de la leçon 1 sous Linux et macOS en dehors de la CI.
