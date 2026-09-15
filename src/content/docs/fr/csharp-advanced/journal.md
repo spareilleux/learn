@@ -1,6 +1,6 @@
 ---
 title: Journal
-description: Notes de progression datées du cours de C# avancé — l'épinglage de GA, la vérification de l'IL et des erreurs du compilateur sur trois OS, ce que le JIT et le runtime ont fait sans que la documentation le dise, des benchmarks sur un processeur hybride, les trouvailles dans GA et les points à vérifier.
+description: Notes de progression datées du cours de C# avancé — l'épinglage de GA, la vérification de l'IL et des erreurs du compilateur sur trois OS, ce que le JIT et le runtime ont fait sans que la documentation le dise, des benchmarks sur un processeur hybride, des programmes déterministes pour les channels, Dataflow et Rx, le nouveau plan, les trouvailles dans GA et les points à vérifier.
 sidebar:
   order: 99
 ---
@@ -14,6 +14,11 @@ sidebar:
 - [x] Leçon 3 : async et await sous le capot
 - [x] Leçon 4 : performances mesurées
 - [ ] Leçon 5 : les génériques en profondeur
+- [x] Un nouveau plan en quatre parties et 24 leçons, avec ASP.NET Core en profondeur et les équivalents Spring et Reactor
+- [x] Leçon 6 : les channels
+- [x] Leçon 7 : TPL Dataflow
+- [x] Leçon 8 : Rx.NET
+- [x] Leçon 9 : choisir un flux
 
 ## 2026-09-14 — Mise en place et épinglage de GA
 
@@ -63,6 +68,36 @@ Aucun de ces points n'a encore été signalé en amont ; ils sont listés pour q
 - Commit [`d85a319`](https://github.com/spareilleux/learn/commit/d85a319), exécution [34915741516](https://github.com/spareilleux/learn/actions/runs/34915741516) : verte sur les trois OS, code des leçons uniquement.
 - Commit [`8ba378e`](https://github.com/spareilleux/learn/commit/8ba378e7ea22a64a57b3e45b45afa4c85afa85a3), exécution [34919815590](https://github.com/spareilleux/learn/actions/runs/34919815590) : les solutions des exercices, verte sur les trois OS. Les jobs ont pris 1 min 23 s sous Linux, 2 min sous macOS et 3 min 14 s sous Windows, dont 23 s, 27 s et 53 s pour l'exécution à blanc des 37 benchmarks. Environ 14 s de chaque job reviennent à la démonstration `LazyWithExpiration` de la leçon 3 : un `Task.Run` a attendu 11 001 ms sous Linux, 11 766 ms sous macOS et 11 050 ms sous Windows, alors que l'exécution précédente avait mesuré 9 878 ms.
 - Le runner Windows a indiqué les mêmes largeurs de vecteurs et les mêmes écarts en virgule flottante que ma machine ; le runner Linux dispose d'AVX-512.
+
+## 2026-09-15 — Un nouveau plan, et la partie 2 commence
+
+- Le cours passe de 12 à 24 leçons en quatre parties : runtime et performances, concurrence et flux de données, ASP.NET Core en profondeur, métaprogrammation et outillage. Les leçons 1 à 4 gardent leurs slugs ; les anciennes leçons 6 et 12 deviennent les leçons 10 et 19, et les leçons 2 et 3 y renvoient désormais. Les leçons 6 à 9 ont été écrites avant la leçon 5.
+- Les parties 2 et 3 comparent chaque sujet avec Spring et Reactor, de C# vers Java. Le [cours Spring Boot, Spring Cloud et Reactor](../../spring-cloud-reactor/) fait la comparaison dans l'autre sens, donc les leçons renvoient à ses pages au lieu de réexpliquer Reactor, et la partie 3 construira le pendant ASP.NET Core de son service de gammes.
+
+## 2026-09-15 — Rendre déterministes des programmes concurrents
+
+Chaque comportement des leçons 6 à 9 est affiché par le programme et comparé avec `expected/`, sur trois OS. Une première version de chaque leçon affichait quelque chose qui changeait d'une exécution à l'autre ; chaque leçon a tourné au moins neuf fois de suite avant que sa sortie soit commitée.
+
+- **Des barrières, pas des délais.** Les éléments sont retenus avec un `TaskCompletionSource` jusqu'à ce que le programme ait vu ce qu'il veut montrer, et « le producteur est bloqué » se mesure en attendant qu'un compteur ne bouge plus, puis en affichant le compteur.
+- **Les continuations s'exécutent quand bon leur semble.** Un `WriteAsync(...).AsTask()` terminé indiquait encore `IsCompleted` à false sur certaines exécutions, parce que sa continuation est asynchrone : le programme l'attend maintenant. De même avec `Fault` sur un bloc Dataflow, dont le `Completion.Exception` valait encore `null` juste après l'appel.
+- **`EnsureOrdered = false` ne veut pas dire « inversé ».** Un premier test attendait que l'élément 0, lent, sorte en dernier ; ce n'était pas le cas sur 8 exécutions sur 20. La leçon 7 montre maintenant ce qu'un consommateur peut recevoir pendant que l'élément 0 s'exécute.
+- **Les bornes en temps virtuel.** Des notes à exactement 500 ou 1 000 ms tombaient sur la limite des fenêtres de `Sample` et de `Buffer` ; les notes de la leçon 8 sont placées loin d'elles.
+- **`Reader.Count` lève** `NotSupportedException` sur un channel non borné créé avec `SingleReader = true` : son `CanCount` vaut `false`. Le programme draine le channel pour compter ce qui reste.
+- **Rx.NET 7.0 n'a pas de pont vers `IAsyncEnumerable`** : `ToAsyncEnumerable()` sur un observable ne compilait pas. La leçon 9 écrit les deux sens à la main.
+- La première version de la leçon 7 étiquetait Dm7 comme Forte 4-3, d'après le `ProgrammaticForteCatalog` de GA ; la table de Forte dit 4-26. La leçon prend maintenant les étiquettes dans `CanonicalForteCatalog` et affiche les deux.
+- Commits [`69bb214`](https://github.com/spareilleux/learn/commit/69bb2145cf22795d6394209ff82220e8a2bdf0d4) et [`b4d713f`](https://github.com/spareilleux/learn/commit/b4d713f86711b770a75d7504f334c5871c95f820), exécutions [34994143077](https://github.com/spareilleux/learn/actions/runs/34994143077) et [34995561655](https://github.com/spareilleux/learn/actions/runs/34995561655) : vertes sur les trois OS.
+- Le benchmark de flux de la leçon 9 a tourné seul pendant 5 minutes sur la même machine que la leçon 4. BenchmarkDotNet a signalé une distribution bimodale pour `RxObserveOnTaskPool`.
+
+## 2026-09-15 — Dogfooding : channels, Dataflow et Rx dans GA
+
+GA utilise des channels dans son générateur de voicings et sa commande d'indexation, et TPL Dataflow et Rx.NET dans une démo de performances. Aucun de ces points n'a encore été signalé en amont.
+
+- [`VoicingGenerator.GenerateAllVoicingsAsync`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Voicings/Generation/VoicingGenerator.cs#L180-L249) : un consommateur qui s'arrête tôt, comme le `.Take(100)` de l'exemple d'utilisation, laisse les producteurs générer toutes les fenêtres dans un channel non borné ; une fenêtre qui lève une exception laisse le consommateur attendre indéfiniment, parce que `Writer.Complete()` n'est jamais atteint ; le résumé dit que l'ordre est conservé, les commentaires en dessous disent le contraire (leçons 6 et 9).
+- [`IndexVoicingsCommand`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaCLI/Commands/IndexVoicingsCommand.cs#L158-L251) : quand le consommateur échoue, parce que la base de données est arrêtée par exemple, il journalise et rend la main, et les producteurs attendent indéfiniment sur le channel plein (leçon 6). Le channel borné en mode `Wait` est le bon choix.
+- [`PerformanceOptimizationDemo`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Demos/Performance/PerformanceOptimizationDemo/Program.cs) : la partie Dataflow compte les résultats d'une `List<T>` remplie par un autre thread sans attendre ce thread, et ignore le résultat de `SendAsync` (leçon 7) ; la partie Rx compte des lots comme des événements, 10 au lieu de 1 000, et attend 500 ms fixes au lieu d'attendre le pipeline (leçon 8). Sa partie channels est correcte.
+- La même démo et `MusicalAnalysisApp`, tous deux en `net10.0`, référencent le paquet `System.Threading.Tasks.Dataflow` 9.0.10, que .NET 10 a déjà dans son framework partagé. Un nouveau projet `net10.0` avec la même référence reçoit l'avertissement NU1510 à la restauration, et charge quand même l'assembly du framework.
+- Les numéros de `ProgrammaticForteCatalog` suivent un autre ordre que la table de Forte, bien que ses remarques qualifient les différences de mineures : 4-3 pour l'accord de septième mineure là où Forte dit 4-26 (leçon 7).
+- GA a plusieurs classes `BackgroundService`, entre autres le préchauffage du cache et l'initialisation de l'index des voicings ; la leçon 15 est l'endroit où les lire.
 
 ## À vérifier
 

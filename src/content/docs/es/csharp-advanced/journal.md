@@ -1,6 +1,6 @@
 ---
 title: Diario
-description: Notas de progreso fechadas del curso C# avanzado — la versión fijada de GA, la comprobación del IL y de los errores del compilador en tres sistemas operativos, lo que hicieron el JIT y el runtime que la documentación no dice, benchmarks en un procesador híbrido, hallazgos en GA y puntos por verificar.
+description: Notas de progreso fechadas del curso C# avanzado — la versión fijada de GA, la comprobación del IL y de los errores del compilador en tres sistemas operativos, lo que hicieron el JIT y el runtime que la documentación no dice, benchmarks en un procesador híbrido, programas deterministas para canales, Dataflow y Rx, el nuevo plan, hallazgos en GA y puntos por verificar.
 sidebar:
   order: 99
 ---
@@ -14,6 +14,11 @@ sidebar:
 - [x] Lección 3: async y await por dentro
 - [x] Lección 4: rendimiento medido
 - [ ] Lección 5: genéricos en profundidad
+- [x] Un nuevo plan en cuatro partes y 24 lecciones, con ASP.NET Core en profundidad y los equivalentes en Spring y Reactor
+- [x] Lección 6: canales
+- [x] Lección 7: TPL Dataflow
+- [x] Lección 8: Rx.NET
+- [x] Lección 9: elegir un flujo
 
 ## 2026-09-14 — Configuración y la versión fijada de GA
 
@@ -63,6 +68,36 @@ Todavía no he comunicado ninguno de estos hallazgos al proyecto GA; los enumero
 - Commit [`d85a319`](https://github.com/spareilleux/learn/commit/d85a319), ejecución [34915741516](https://github.com/spareilleux/learn/actions/runs/34915741516): en verde en los tres sistemas operativos, solo el código de las lecciones.
 - Commit [`8ba378e`](https://github.com/spareilleux/learn/commit/8ba378e7ea22a64a57b3e45b45afa4c85afa85a3), ejecución [34919815590](https://github.com/spareilleux/learn/actions/runs/34919815590): las soluciones de los ejercicios, en verde en los tres sistemas operativos. Los jobs tardaron 1 min 23 s en Linux, 2 min en macOS y 3 min 14 s en Windows, de los cuales la ejecución de prueba de los 37 benchmarks ocupó 23 s, 27 s y 53 s. Unos 14 s de cada job corresponden a la demostración de `LazyWithExpiration` de la lección 3: un `Task.Run` esperó 11 001 ms en Linux, 11 766 ms en macOS y 11 050 ms en Windows, donde la ejecución anterior había medido 9878 ms.
 - El runner de Windows dio los mismos anchos de vector y las mismas diferencias en coma flotante que mi máquina; el runner de Linux tiene AVX-512.
+
+## 2026-09-15 — Un nuevo plan, y empieza la parte 2
+
+- El curso pasa de 12 a 24 lecciones en cuatro partes: runtime y rendimiento, concurrencia y flujo de datos, ASP.NET Core en profundidad, metaprogramación y herramientas. Las lecciones 1 a 4 conservan sus slugs; las antiguas lecciones 6 y 12 pasan a ser las lecciones 10 y 19, y las lecciones 2 y 3 apuntan ahora a ellas. Las lecciones 6 a 9 se escribieron antes que la lección 5.
+- Las partes 2 y 3 comparan cada tema con Spring y Reactor, de C# a Java. El [curso de Spring Boot, Spring Cloud y Reactor](../../spring-cloud-reactor/) hace la comparación en el otro sentido, así que las lecciones enlazan con sus páginas en lugar de volver a explicar Reactor, y la parte 3 construirá el equivalente en ASP.NET Core de su servicio de escalas.
+
+## 2026-09-15 — Volver deterministas los programas concurrentes
+
+Cada comportamiento de las lecciones 6 a 9 lo imprime el programa y se compara con `expected/`, en tres sistemas operativos. Una primera versión de cada lección imprimía algo que cambiaba entre ejecuciones; cada lección se ejecutó al menos nueve veces seguidas antes de hacer commit de su salida.
+
+- **Barreras, no retardos.** Los elementos se retienen con un `TaskCompletionSource` hasta que el programa ha visto lo que quiere mostrar, y «el productor está atascado» se mide esperando a que un contador deje de moverse, e imprimiendo después el contador.
+- **Las continuaciones se ejecutan cuando quieren.** Un `WriteAsync(...).AsTask()` que había terminado seguía indicando `IsCompleted` en false en algunas ejecuciones, porque su continuación es asíncrona: el programa ahora lo espera. Lo mismo con `Fault` sobre un bloque de Dataflow, cuyo `Completion.Exception` seguía siendo `null` justo después de la llamada.
+- **`EnsureOrdered = false` no significa «al revés».** Una primera prueba esperaba que el lento elemento 0 saliera el último; no lo hizo en 8 ejecuciones de 20. La lección 7 muestra ahora lo que un consumidor puede recibir mientras el elemento 0 se ejecuta.
+- **Límites en tiempo virtual.** Las notas en exactamente 500 o 1.000 ms caían en el borde de las ventanas de `Sample` y `Buffer`; las notas de la lección 8 están colocadas lejos de ellos.
+- **`Reader.Count` lanza** `NotSupportedException` en un canal no acotado creado con `SingleReader = true`: su `CanCount` es `false`. El programa vacía el canal para contar lo que queda.
+- **Rx.NET 7.0 no tiene puente hacia `IAsyncEnumerable`**: `ToAsyncEnumerable()` sobre un observable no compiló. La lección 9 escribe a mano las dos direcciones.
+- La primera versión de la lección 7 etiquetaba Dm7 como Forte 4-3, a partir de `ProgrammaticForteCatalog` de GA; la tabla de Forte dice 4-26. La lección toma ahora las etiquetas de `CanonicalForteCatalog` e imprime ambas.
+- Commits [`69bb214`](https://github.com/spareilleux/learn/commit/69bb2145cf22795d6394209ff82220e8a2bdf0d4) y [`b4d713f`](https://github.com/spareilleux/learn/commit/b4d713f86711b770a75d7504f334c5871c95f820), ejecuciones [34994143077](https://github.com/spareilleux/learn/actions/runs/34994143077) y [34995561655](https://github.com/spareilleux/learn/actions/runs/34995561655): en verde en los tres sistemas operativos.
+- El benchmark de flujos de la lección 9 se ejecutó solo durante 5 minutos en la misma máquina que la lección 4. BenchmarkDotNet indicó una distribución bimodal para `RxObserveOnTaskPool`.
+
+## 2026-09-15 — Dogfooding: canales, Dataflow y Rx en GA
+
+GA usa canales en su generador de voicings y en su comando de indexación, y TPL Dataflow y Rx.NET en una demo de rendimiento. Nada de esto se ha notificado todavía aguas arriba.
+
+- [`VoicingGenerator.GenerateAllVoicingsAsync`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Voicings/Generation/VoicingGenerator.cs#L180-L249): un consumidor que se detiene antes de tiempo, como el `.Take(100)` del ejemplo de uso, deja a los productores generando todas las ventanas en un canal no acotado; una ventana que lanza una excepción deja al consumidor esperando para siempre, porque nunca se llega a `Writer.Complete()`; el resumen dice que el orden se conserva, los comentarios de debajo dicen que no (lecciones 6 y 9).
+- [`IndexVoicingsCommand`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaCLI/Commands/IndexVoicingsCommand.cs#L158-L251): cuando el consumidor falla, por ejemplo porque la base de datos está caída, registra el error y retorna, y los productores esperan para siempre ante el canal lleno (lección 6). El canal acotado en modo `Wait` es la elección correcta.
+- [`PerformanceOptimizationDemo`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Demos/Performance/PerformanceOptimizationDemo/Program.cs): la parte de Dataflow cuenta los resultados de una `List<T>` que llena otro subproceso sin esperar a ese subproceso, e ignora el resultado de `SendAsync` (lección 7); la parte Rx cuenta lotes como eventos, 10 en lugar de 1.000, y espera 500 ms fijos en lugar de esperar el pipeline (lección 8). Su parte de canales es correcta.
+- La misma demo y `MusicalAnalysisApp`, ambos `net10.0`, hacen referencia al paquete `System.Threading.Tasks.Dataflow` 9.0.10, que .NET 10 ya tiene en su framework compartido. Un proyecto `net10.0` nuevo con la misma referencia recibe la advertencia NU1510 al restaurar, y carga de todos modos el ensamblado del framework.
+- Los números de `ProgrammaticForteCatalog` siguen otro orden que la tabla de Forte, aunque sus observaciones dicen que las diferencias son menores: 4-3 para el acorde de séptima menor donde Forte dice 4-26 (lección 7).
+- GA tiene varias clases `BackgroundService`, entre ellas el precalentamiento de la caché y la inicialización del índice de voicings; la lección 15 es el lugar para leerlas.
 
 ## Por verificar
 

@@ -1,24 +1,28 @@
 ---
 title: C# avancé — Mission
-description: Ce qui se passe sous le capot de C# 14 et .NET 10 — disposition en mémoire, ramasse-miettes, machine à états d'async et performances mesurées — chaque affirmation vérifiée par un programme, par l'IL ou par un benchmark, sur du vrai code de Guitar Alchemist.
+description: Ce qui se passe sous le capot de C# 14, .NET 10 et ASP.NET Core — mémoire, ramasse-miettes, async, performances mesurées, channels, TPL Dataflow, Rx.NET et flux asynchrones, puis la pile web et l'outillage — chaque affirmation vérifiée par un programme, par l'IL ou par un benchmark, sur du vrai code de Guitar Alchemist, avec les équivalents Spring et Reactor.
 sidebar:
   label: Mission
   order: 0
 ---
 
 :::note[Comment ce cours est testé]
-Chaque sortie des leçons vient de [`code/csharp-advanced`](https://github.com/spareilleux/learn/tree/main/code/csharp-advanced). [`check.sh`](https://github.com/spareilleux/learn/blob/8ba378e7ea22a64a57b3e45b45afa4c85afa85a3/code/csharp-advanced/check.sh) compile le programme du cours avec [Guitar Alchemist](https://github.com/GuitarAlchemist/ga) cloné au commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6), exécute chaque leçon, désassemble les exemples avec [l'outil en ligne de commande d'ILSpy](https://github.com/icsharpcode/ILSpy/tree/master/ICSharpCode.ILSpyCmd), compile chaque extrait rejeté avec [Roslyn](https://learn.microsoft.com/dotnet/csharp/roslyn-sdk/), et compare le tout aux fichiers attendus. [`.github/workflows/csharp-advanced-examples.yml`](https://github.com/spareilleux/learn/blob/8ba378e7ea22a64a57b3e45b45afa4c85afa85a3/.github/workflows/csharp-advanced-examples.yml) fait de même sous Linux, Windows et macOS, et vérifie que chaque benchmark s'exécute. Les lignes qui dépendent de la machine commencent par `# ` et ne sont pas comparées ; les temps des benchmarks viennent de la machine de l'auteur, jamais de la CI. Sorties capturées en septembre 2026 avec le SDK .NET 10.0.112 et le runtime .NET 10.0.12.
+Chaque sortie des leçons vient de [`code/csharp-advanced`](https://github.com/spareilleux/learn/tree/main/code/csharp-advanced). [`check.sh`](https://github.com/spareilleux/learn/blob/b4d713f86711b770a75d7504f334c5871c95f820/code/csharp-advanced/check.sh) compile le programme du cours avec [Guitar Alchemist](https://github.com/GuitarAlchemist/ga) cloné au commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6), exécute chaque leçon, désassemble les exemples avec [l'outil en ligne de commande d'ILSpy](https://github.com/icsharpcode/ILSpy/tree/master/ICSharpCode.ILSpyCmd), compile chaque extrait rejeté avec [Roslyn](https://learn.microsoft.com/dotnet/csharp/roslyn-sdk/), et compare le tout aux fichiers attendus. [`.github/workflows/csharp-advanced-examples.yml`](https://github.com/spareilleux/learn/blob/8ba378e7ea22a64a57b3e45b45afa4c85afa85a3/.github/workflows/csharp-advanced-examples.yml) fait de même sous Linux, Windows et macOS, et vérifie que chaque benchmark s'exécute. Les lignes qui dépendent de la machine commencent par `# ` et ne sont pas comparées ; les temps des benchmarks viennent de la machine de l'auteur, jamais de la CI. Sorties capturées en septembre 2026 avec le SDK .NET 10.0.112 et le runtime .NET 10.0.12.
 :::
 
 ## Pourquoi j'apprends ça
 
 J'écris du C# depuis des années, et l'essentiel de ce que je sais de ses performances relève du folklore : « les structs sont plus rapides », « évitez LINQ », « toujours `ConfigureAwait(false)` », « `FrozenDictionary`, c'est le rapide ». Une partie était vraie avec .NET Framework 4.5 et devient fausse sur .NET 10, où le JIT supprime des allocations que l'IL demande. Ce cours remplace chaque morceau de folklore par quelque chose que je peux examiner : la taille d'un objet, l'IL émis par le compilateur, la machine à états derrière `await`, la génération d'un tableau, un tableau de résultats BenchmarkDotNet.
 
-Les mesures portent sur du vrai code, pas sur des classes jouets : [Guitar Alchemist](https://github.com/GuitarAlchemist/ga) (GA), une grande base de code .NET 10 consacrée à la théorie musicale. Ses objets valeur, ses caches et ses fonctions vectorielles sont exactement le genre de code où ces questions se posent, et les leçons ont trouvé plusieurs endroits où GA paie pour quelque chose qu'il ne voulait pas.
+Il en va de même pour le code qui fait passer des données entre tâches, et pour ASP.NET Core. J'utilise des channels et `BackgroundService` sans avoir vérifié ce qui se passe quand un consommateur s'arrête tôt ou qu'un producteur lève une exception, et je configure ASP.NET Core en recopiant ce qui a marché la dernière fois. Les parties suivantes du cours transforment aussi ces questions en programmes.
+
+Les mesures portent sur du vrai code, pas sur des classes jouets : [Guitar Alchemist](https://github.com/GuitarAlchemist/ga) (GA), une grande base de code .NET 10 consacrée à la théorie musicale. Ses objets valeur, ses caches, son générateur de voicings et ses services hébergés sont exactement le genre de code où ces questions se posent, et les leçons ont trouvé plusieurs endroits où GA paie pour quelque chose qu'il ne voulait pas, ou se bloque là où il devrait échouer.
 
 ## À qui s'adresse ce cours
 
-Vous écrivez du C# tous les jours et connaissez bien le langage : génériques, LINQ, `async`/`await`, records, pattern matching. Vous voulez savoir ce que le compilateur, le JIT et le ramasse-miettes font de ce code, et mesurer avant d'optimiser. Si vous débutez en C#, commencez par le cours [C# pour débutants](../csharp-beginner/), qui s'arrête là où celui-ci commence.
+Vous écrivez du C# tous les jours et connaissez bien le langage : génériques, LINQ, `async`/`await`, records, pattern matching. Vous voulez savoir ce que le compilateur, le JIT, le ramasse-miettes et ASP.NET Core font de ce code, et mesurer avant d'optimiser. Si vous débutez en C#, commencez par le cours [C# pour débutants](../csharp-beginner/), qui s'arrête là où celui-ci commence.
+
+Si vous travaillez aussi avec Java, les parties 2 et 3 terminent chaque leçon par un tableau « Si vous connaissez Spring et Reactor », de C# vers Java. Le [cours Spring Boot, Spring Cloud et Reactor](../spring-cloud-reactor/) fait le chemin inverse, d'ASP.NET Core vers Spring ; les deux cours renvoient l'un à l'autre au lieu d'expliquer deux fois la même chose.
 
 ## À la fin de ce cours, je saurai
 
@@ -28,9 +32,18 @@ Vous écrivez du C# tous les jours et connaissez bien le langage : génériques,
 - lire la machine à états que le compilateur génère pour une méthode `async`, choisir entre `Task` et `ValueTask`, et éviter les interblocages et les annulations perdues ;
 - écrire un benchmark BenchmarkDotNet qui mesure bien ce que je crois qu'il mesure, et interpréter la compilation par niveaux et la PGO ;
 - choisir entre `Dictionary`, `FrozenDictionary`, `SearchValues` et une simple arithmétique, et vectoriser une boucle avec `Vector<T>` ou `TensorPrimitives` ;
-- et, dans les leçons suivantes : math générique, générateurs de source, analyseurs Roslyn, interop, Native AOT et diagnostic en production.
+- relier producteurs et consommateurs avec des channels, TPL Dataflow, Rx.NET ou `IAsyncEnumerable`, et dire pour chacun ce qui se passe sous backpressure, sur une erreur et sur une annulation ;
+- suivre une requête à travers ASP.NET Core, de Kestrel jusqu'à l'endpoint, et choisir en connaissance de cause durées de vie des services, options, filtres, services hébergés, résilience et mise en cache ;
+- observer et tester un service ASP.NET Core, et le publier avec Native AOT ;
+- et, dans la dernière partie : arbres d'expressions, générateurs de source, analyseurs Roslyn et interop.
+
+## L'exemple fil rouge
+
+Les parties 1 et 2 mesurent le propre code de GA. La partie 3 construit un petit service de gammes et d'accords sur les types du domaine de GA, le pendant ASP.NET Core du service de gammes du [cours Spring Boot, Spring Cloud et Reactor](../spring-cloud-reactor/#lexemple-fil-rouge) : les mêmes endpoints, pour que chaque leçon puisse comparer les deux implémentations ligne à ligne.
 
 ## Plan
+
+### Partie 1 : runtime et performances
 
 | # | Leçon | Sous le capot | Mesuré sur GA |
 |---|---|---|---|
@@ -39,26 +52,54 @@ Vous écrivez du C# tous les jours et connaissez bien le langage : génériques,
 | 3 | [async et await sous le capot](03-async-under-the-hood/) | la machine à états générée, `ValueTask`, `SynchronizationContext`, `ConfigureAwait`, annulation, `IAsyncEnumerable` | `Try.OfAsync`, `LazyWithExpiration` |
 | 4 | [Performances mesurées](04-measured-performance/) | BenchmarkDotNet, JIT par niveaux et PGO, `SearchValues`, `FrozenDictionary`, `Vector<T>` | soustraction de `PitchClass`, `SimdOps.Dot` |
 | 5 | Les génériques en profondeur | contraintes, membres abstraits statiques, math générique, `allows ref struct`, comment le JIT partage le code générique | `IStaticValueObjectList<TSelf>` de GA |
-| 6 | Primitives de concurrence | `System.Threading.Lock`, `Interlocked`, `Channel<T>`, `Parallel.ForEachAsync`, le pool de threads | |
-| 7 | Délégués, fermetures et arbres d'expressions | ce que devient une lambda une fois compilée, `Expression<T>`, compiler des expressions à l'exécution | |
-| 8 | Réflexion et générateurs de source | le coût de la réflexion, générateurs incrémentiels, `[GeneratedRegex]` | |
-| 9 | Analyseurs Roslyn et correctifs de code | modèles syntaxique et sémantique, écrire un analyseur et ses tests | |
-| 10 | Interop et code unsafe | `[LibraryImport]`, pointeurs de fonction, `Unsafe`, `MemoryMarshal`, épinglage | |
-| 11 | Native AOT et trimming | ce que l'AOT supprime, avertissements de trimming, démarrage et taille mesurés | |
-| 12 | Diagnostic en production | `dotnet-counters`, `dotnet-trace`, `dotnet-dump`, EventPipe, `System.Diagnostics.Metrics` | |
-| — | [Journal](journal/) | | |
 
-Les leçons 5 à 12 sont prévues et pas encore écrites.
+### Partie 2 : concurrence et flux de données
+
+| # | Leçon | Sous le capot | Spring et Reactor |
+|---|---|---|---|
+| 6 | [Les channels](06-channels/) | channels bornés et non bornés, modes de saturation, complétion et erreurs, plusieurs producteurs et consommateurs, annulation ; le générateur de voicings et la commande d'indexation de GA | `onBackpressureBuffer`, `onBackpressureDrop`, `BlockingQueue` |
+| 7 | [TPL Dataflow](07-tpl-dataflow/) | blocs et liens, parallélisme et ordre, `BoundedCapacity`, échecs qui ne font que descendre, complétion ; la démo Dataflow de GA | `flatMap` avec concurrence, `buffer`, `publishOn` |
+| 8 | [Rx.NET](08-rx-net/) | `IObservable<T>`, froid et chaud, opérateurs en temps virtuel, schedulers, pas de backpressure, nouvelles tentatives ; la démo réactive de GA | `Flux`, `Sinks`, `publishOn`, `StepVerifier.withVirtualTime` |
+| 9 | [Choisir un flux](09-choosing-streams/) | `IAsyncEnumerable` et `System.Linq.AsyncEnumerable`, les quatre types de flux mesurés côte à côte, ponts, débit, un diagramme de décision | [Reactor : `Mono` et `Flux`](../spring-cloud-reactor/02-reactor-mono-and-flux/), [Reactor sous le capot](../spring-cloud-reactor/03-reactor-under-the-hood/) |
+| 10 | État partagé et pool de threads | `System.Threading.Lock`, `Interlocked`, collections concurrentes, `Parallel.ForEachAsync`, famine du pool de threads | `synchronized`, `ReentrantLock`, threads virtuels |
+
+### Partie 3 : ASP.NET Core en profondeur
+
+| # | Leçon | Sous le capot | Spring et Reactor |
+|---|---|---|---|
+| 11 | Hébergement, `WebApplication` et Kestrel | l'hôte générique, le builder, les limites de connexions et de requêtes de Kestrel, l'arrêt en douceur | [Spring Boot vu depuis ASP.NET Core](../spring-cloud-reactor/01-spring-boot-from-aspnet-core/), Tomcat et Netty embarqués |
+| 12 | Le pipeline de middlewares | `Use`, `Map`, `Run`, ordre, courts-circuits, gestion des exceptions, routage des endpoints | filtres Servlet, `WebFilter` |
+| 13 | Injection de dépendances et options | durées de vie, dépendances captives, validation des portées, services à clé, `IOptions`, `IOptionsSnapshot`, `IOptionsMonitor`, validation | le conteneur Spring, `@ConfigurationProperties` |
+| 14 | Minimal APIs et contrôleurs | gestionnaires de routes et liaison des paramètres, filtres, validation, `TypedResults`, réponses `IAsyncEnumerable` en flux | `@RestController`, endpoints fonctionnels [WebFlux](../spring-cloud-reactor/04-webflux/) |
+| 15 | Services hébergés | `IHostedService`, `BackgroundService`, ordre de démarrage et d'arrêt, exceptions, files avec des channels ; les services hébergés de GA | `@Scheduled`, `SmartLifecycle` |
+| 16 | Authentification et autorisation | schémas, gestionnaires, JWT bearer, stratégies et exigences | Spring Security |
+| 17 | gRPC et SignalR | contrats protobuf, appels en flux, hubs, backpressure à travers le réseau | Spring gRPC, WebSocket, RSocket |
+| 18 | Résilience, limitation de débit et cache de sortie | `Microsoft.Extensions.Http.Resilience`, pipelines Polly, limiteurs de débit, stratégies de cache de sortie | Resilience4j, Spring Cloud Circuit Breaker |
+| 19 | OpenTelemetry et diagnostic en production | `System.Diagnostics.Metrics`, `ActivitySource`, exportateurs OpenTelemetry, `dotnet-counters`, `dotnet-trace`, `dotnet-dump` | Micrometer, Actuator |
+| 20 | Tester avec `WebApplicationFactory` | l'hôte de test, remplacer des services, l'authentification dans les tests, Testcontainers | `@SpringBootTest`, `WebTestClient` |
+| 21 | Native AOT et trimming | publier une API avec Native AOT, avertissements de trimming, le générateur de délégués de requête, démarrage et taille mesurés | images natives GraalVM |
+
+### Partie 4 : métaprogrammation et outillage
+
+| # | Leçon | Sous le capot |
+|---|---|---|
+| 22 | Arbres d'expressions, réflexion et générateurs de source | ce que devient une lambda une fois compilée, `Expression<T>`, le coût de la réflexion, générateurs incrémentiels, `[GeneratedRegex]` |
+| 23 | Analyseurs Roslyn et correctifs de code | modèles syntaxique et sémantique, écrire un analyseur et ses tests |
+| 24 | Interop et code unsafe | `[LibraryImport]`, pointeurs de fonction, `Unsafe`, `MemoryMarshal`, épinglage |
+| — | [Journal](journal/) | |
+
+Les leçons 5 et 10 à 24 sont prévues et pas encore écrites ; les leçons 6 à 9 ont été écrites avant la leçon 5, et n'en dépendent pas.
 
 ## Prérequis
 
 - Le [SDK .NET 10](https://dotnet.microsoft.com/download/dotnet/10.0) et [Git](https://git-scm.com/downloads). Sous Windows, lancez les scripts du cours depuis Git Bash.
-- `check.sh` restaure [`ilspycmd`](https://www.nuget.org/packages/ilspycmd) comme outil .NET local (version 11.0.0.9375, épinglée dans [`.config/dotnet-tools.json`](https://github.com/spareilleux/learn/blob/8ba378e7ea22a64a57b3e45b45afa4c85afa85a3/code/csharp-advanced/.config/dotnet-tools.json)) et récupère les trois projets GA qu'utilise le programme, environ 11 Mo.
+- `check.sh` restaure [`ilspycmd`](https://www.nuget.org/packages/ilspycmd) comme outil .NET local (version 11.0.0.9375, épinglée dans [`.config/dotnet-tools.json`](https://github.com/spareilleux/learn/blob/8ba378e7ea22a64a57b3e45b45afa4c85afa85a3/code/csharp-advanced/.config/dotnet-tools.json)), récupère les trois projets GA qu'utilise le programme, environ 11 Mo, et restaure [`System.Reactive`](https://www.nuget.org/packages/System.Reactive) 7.0.0 pour la leçon 8.
 - Pour les benchmarks, une machine que vous pouvez laisser au calme quelques minutes : fermez le navigateur, branchez le portable sur secteur.
 
 ## Cours liés sur ce site
 
 - [C# pour débutants](../csharp-beginner/) : le langage à partir de zéro, écrit en même temps que ce cours.
+- [Spring Boot, Spring Cloud et Reactor pour développeurs C#](../spring-cloud-reactor/) : les mêmes questions côté Java, avec le même exemple fil rouge.
 - [Théorie musicale pour Guitar Alchemist](../music-theory-ga/) lit les mêmes projets GA pour ce qu'ils calculent ; ce cours les lit pour la façon dont ils s'exécutent.
 - [Rust pour développeurs C#/Java](../rust-for-csharp-java/) rend explicite ce que .NET décide pour vous : la possession au lieu d'un ramasse-miettes, l'emprunt au lieu des règles de sûreté de `ref`.
 
@@ -69,4 +110,6 @@ Les leçons 5 à 12 sont prévues et pas encore écrites.
 - Stephen Toub, [Performance Improvements in .NET 10](https://devblogs.microsoft.com/dotnet/performance-improvements-in-net-10/) et [How async/await really works in C#](https://devblogs.microsoft.com/dotnet/how-async-await-really-works/), sur le blog .NET.
 - Le dépôt [dotnet/runtime](https://github.com/dotnet/runtime) : les leçons renvoient aux lignes du runtime sur lesquelles elles s'appuient, au tag `v10.0.12` (commit `4271d88`).
 - [BenchmarkDotNet](https://benchmarkdotnet.org/) et ses [bonnes pratiques](https://benchmarkdotnet.org/articles/guides/good-practices.html).
+- Microsoft Learn : [channels](https://learn.microsoft.com/dotnet/core/extensions/channels), [TPL Dataflow](https://learn.microsoft.com/dotnet/standard/parallel-programming/dataflow-task-parallel-library), [notions fondamentales d'ASP.NET Core](https://learn.microsoft.com/aspnet/core/fundamentals/).
+- Ian Griffiths et Lee Campbell, [Introduction to Rx.NET, 2nd edition](https://introtorx.com/), gratuit en ligne.
 - Konrad Kokosa, *Pro .NET Memory Management* (Apress, 2018) : antérieur à .NET 10, c'est toujours le livre le plus approfondi sur le GC.
