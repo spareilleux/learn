@@ -1,0 +1,61 @@
+# l1
+
+== Orchestrator and application service
+IHarmonicChatOrchestrator        ProductionOrchestrator
+IChatApplicationService (host)   OrchestratedChatApplicationService
+
+== Intents the semantic router chooses from (36)
+id                           examples  first example
+skill.chordinfo              32        What is a C major chord?
+skill.scaleinfo              24        What notes are in C major?
+skill.modes                  37        What are the modes of the major scale
+skill.interval               13        What is the interval between C and G?
+skill.fretspan               0         (none)
+skill.chordsubstitution      12        Tritone substitution for G7
+skill.beginnerchords         7         Show me some easy beginner chords
+skill.progressionmood        15        How do I make this progression sound darker?
+skill.circleoffifths         10        Explain the circle of fifths
+skill.practiceroutine        9         give me a 20 minute practice routine
+skill.genreessentials        8         essential chords for blues guitar
+skill.whatcanyoudo           14        what can you do
+skill.transpose              13        transpose this progression down a half step
+skill.commontones            9         What notes do Cmaj7 and Am7 share?
+skill.diatonicchords         20        Give me the diatonic chords in C major
+skill.relativekey            12        What is the relative minor of G major
+skill.theorycomparison       7         What is the difference between major and minor
+skill.settheoryequivalence   5         Are pitch classes 0,1,4 and 0,1,6 equivalent under inversion
+skill.capo                   10        What shape do I play in E with capo 4
+skill.voiceleading           10        voice leading from C to F
+skill.alternatetunings       12        what is DADGAD tuning
+skill.intervalclassvector    10        what is the interval-class vector of Cmaj7
+skill.grothendieckdelta      10        how harmonically far is Am from D7
+skill.icvneighbors           10        which chords are most similar to Dm7
+skill.icvshortestpath        10        shortest harmonic path from Cmaj7 to G7
+skill.grothendieckparse      10        parse C ⊗ G
+skill.chordvoicings          12        voicings for Cmaj7
+skill.improvisation          17        what scale can I use to solo over Cmaj7?
+skill.outsidenotes           10        why does F sound outside over Cmaj7
+skill.keyidentification      7         What key is C Am F G in?
+skill.progressioncompletion  5         What chord comes next after C G Am?
+skill.rememberthis           7         remember that I prefer drop-2 voicings for jazz comping
+algebra                      13        Are 0146 and 0137 z-related?
+tab.optimize                 5         Make this progression smoother to play
+tab.analyze                  4         Analyse this tab
+voicing                      11        Show me Drop 2 voicings of Cmaj7
+
+== Agents behind the LLM path (6)
+tab          TabAgent
+theory       TheoryAgent
+technique    TechniqueAgent
+composer     ComposerAgent
+critic       CriticAgent
+voicing      VoicingAgent
+
+== Hooks, in the order they run (4)
+PromptSanitizationHook
+MemoryHook
+MemoryWriteHook
+ObservabilityHook
+
+== The embedding every voicing gets
+OPTIC-K-v1.8, 240 dims in 11 partitions, 124 of them searched

@@ -1,0 +1,78 @@
+# l4
+
+== POST /api/chatbot/chat "Are 0146 and 0137 z-related?"
+HTTP 200
+agentId        algebra
+routingMethod  ix-algebra
+confidence     1.00
+grounding      ix-compatible 7b02a56 z-relation
+  left         [0,1,4,6]
+  right        [0,1,3,7]
+  leftIcv      <1 1 1 1 1 1>
+  rightIcv     <1 1 1 1 1 1>
+  zRelated     True
+answer:
+  | [0,1,4,6] and [0,1,3,7] are Z-related: they share ICV <1 1 1 1 1 1> but have different prime forms.
+trace:
+  chat.request             completed
+  orchestration.answer     completed
+  orchestration.route      completed
+  agent.semantic_result    completed
+  notation.vextab          completed
+  response.emit            completed
+
+== POST /api/chatbot/chat "Show me Cmaj7 voicings"
+HTTP 200
+agentId        voicing
+routingMethod  deterministic-voicing
+confidence     0.92
+grounding      (none)
+answer:
+  | Found 2 voicings matching chord Cmaj7:
+  | 
+  | - **Cmaj7** `3-0-x-2-3-x` (guitar, score 0.369)
+  | ```vextab
+  | 6/3 5/0 3/2 2/3
+  | ```
+  | - **Cmaj7** `3-0-0-2-3-x` (guitar, score 0.369)
+  | ```vextab
+  | 6/3 5/0 4/0 3/2 2/3
+  | ```
+trace:
+  chat.request             completed
+  orchestration.answer     completed
+  orchestration.route      completed
+  agent.semantic_result    completed
+  notation.vextab          completed
+  response.emit            completed
+
+== POST /api/chatbot/chat "What is the relative minor of C major?"
+HTTP 500
+logged:
+  Error ExceptionHandlerMiddleware: An unhandled exception has occurred while executing the request. [HttpRequestException at DirectChatApplicationService.GenerateAnswerAsync, DirectChatApplicationService.cs:96]
+  Error OrchestratedChatApplicationService: Chat orchestration failed. Falling back to direct chat client. [HttpRequestException at SemanticRouter.EnsureEmbeddingsInitializedAsync, SemanticRouter.cs:251]
+  Warning QueryUnderstandingService: [QueryUnderstanding] Failed to extract filters [HttpRequestException at OllamaGenerateClient.GenerateAsync, OllamaGenerateClient.cs:46]
+  Warning SemanticIntentRouter: SemanticIntentRouter: example embedding failed; router will degrade to fallback [HttpRequestException at SemanticIntentRouter.EnsureExamplesEmbeddedAsync, SemanticIntentRouter.cs:370]
+  Warning SemanticIntentRouter: SemanticIntentRouter: query embedding failed; routing falls through to LLM path [HttpRequestException at SemanticIntentRouter.RouteAsync, SemanticIntentRouter.cs:111]
+
+== POST /api/chatbot/chat "Why does a ii-V-I sound resolved?"
+HTTP 500
+logged:
+  Error ExceptionHandlerMiddleware: An unhandled exception has occurred while executing the request. [HttpRequestException at DirectChatApplicationService.GenerateAnswerAsync, DirectChatApplicationService.cs:96]
+  Error OrchestratedChatApplicationService: Chat orchestration failed. Falling back to direct chat client. [HttpRequestException at SemanticRouter.EnsureEmbeddingsInitializedAsync, SemanticRouter.cs:251]
+  Warning QueryUnderstandingService: [QueryUnderstanding] Failed to extract filters [HttpRequestException at OllamaGenerateClient.GenerateAsync, OllamaGenerateClient.cs:46]
+  Warning SemanticIntentRouter: SemanticIntentRouter: example embedding failed; router will degrade to fallback [HttpRequestException at SemanticIntentRouter.EnsureExamplesEmbeddedAsync, SemanticIntentRouter.cs:370]
+  Warning SemanticIntentRouter: SemanticIntentRouter: query embedding failed; routing falls through to LLM path [HttpRequestException at SemanticIntentRouter.RouteAsync, SemanticIntentRouter.cs:111]
+
+== IOrchestratorSkill.CanHandle for each prompt (the keyword path the orchestrator no longer calls)
+Are 0146 and 0137 z-related?             (none)
+Show me Cmaj7 voicings                   ChordVoicings
+What is the relative minor of C major?   ScaleInfo
+Why does a ii-V-I sound resolved?        (none)
+
+== The skill.relativekey intent, called directly with "What is the relative minor of C major?"
+confidence     1.00
+  | The relative minor of **C major** is **Am**.
+  | 
+  | Both share the same key signature (no sharps or flats). Same notes, different tonal center — the relative minor starts on the 6th degree of the major scale.
+  | 

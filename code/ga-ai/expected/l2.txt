@@ -1,0 +1,82 @@
+# l2
+
+== EmbeddingSchema.Partitions (OPTIC-K-v1.8)
+partition     raw      dims  role        weight
+IDENTITY      0-5      6     Identity    0.00
+STRUCTURE     6-29     24    Similarity  0.45
+MORPHOLOGY    30-53    24    Similarity  0.25
+CONTEXT       54-65    12    Similarity  0.20
+SYMBOLIC      66-77    12    Similarity  0.10
+EXTENSIONS    78-95    18    Info        0.00
+SPECTRAL      96-108   13    Info        0.00
+MODAL         109-148  40    Similarity  0.10
+HIERARCHY     149-163  15    Info        0.00
+ATONAL_MODAL  164-227  64    Info        0.00
+ROOT          228-239  12    Similarity  0.05
+TotalDimension          240
+sum of dims             240
+sum of weights          1.15
+CompactDimension        124
+CompactLayoutV4         optk-v4-pp-r:STRUCTURE:0-23,MORPHOLOGY:24-47,CONTEXT:48-59,SYMBOLIC:60-71,MODAL:72-111,ROOT:112-123
+SchemaHashV4            0x37CD8ECF
+
+== Loose constants next to the registry
+constant                 value      registry
+HierarchyDim             8          15
+AtonalModalDim           17         64
+ExtensionsEnd            96         240
+
+== From a chord shape to GA's voicing document
+shape   GA diagram   GA name       pcs      MIDI            doc root inv   rootless function
+x32010  0-1-0-2-3-x  C             0 4 7    64 60 55 52 48  4 E      1     yes  Functional Harmony
+x35553  3-5-5-5-3-x  C             0 4 7    67 64 60 55 48  7 G      2     yes  Functional Harmony
+032010  0-1-0-2-3-0  C/E           0 4 7    64 60 55 52 48 40 4 E      1     yes  Functional Harmony
+x32000  0-0-0-2-3-x  Cmaj7         0 4 7 11 64 59 55 52 48  4 E      1     yes  Functional Harmony
+x02210  0-1-2-2-0-x  Am            0 4 9    64 60 57 52 45  4 E      2     yes  Functional Harmony
+320003  3-0-0-0-2-3  G             2 7 11   67 59 55 50 47 43 7 G      0     yes  Functional Harmony
+
+== The 240 values of x32010 (C), partition by partition
+IDENTITY       3/6   1 0 1 0 0 1
+STRUCTURE     10/24  1 0 0 0 1 0 0 1 0 0 0 0 0.5 0 0 1 1 1 0 0 1 0.83 1 0
+MORPHOLOGY     7/24  0 0 0 0 1 0 0 0 0 0 0 0 0.17 0.83 1 0.87 -0.5 0.33 0 0 0 0 0 0
+CONTEXT        1/12  0 0 0 0 1 0 0 0 0 0 0 0
+SYMBOLIC       4/12  1 1 0 0 0 0 0 0 0 1 0 1
+EXTENSIONS     9/18  0 1 0.4 0 0 0.57 0.33 0.47 0.2 0 0 0 0.33 0 0 1 0.6 0
+SPECTRAL      13/13  0.2 0.26 0.61 0.37 0.4 0.47 0.29 0.6 0.53 0.29 0.64 0.5 0.16
+MODAL          2/40  0 0 0 0 0 0.43 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.67 (+13 zeros)
+HIERARCHY      1/15  0.33 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ATONAL_MODAL  11/64  0.2 0.5 0 1 0 0 0.33 0.33 0.33 0 0.03 0.44 0.67 1 0 0.88 (+48 zeros)
+ROOT           1/12  0 0 0 0 1 0 0 0 0 0 0 0
+MODAL slots set: Aeolian=0.43, LydianAugmentedSharp2=0.67
+
+== Cosine per partition, and GA's weighted score, against open C
+pair             structure  morphology  context  symbolic  modal  root   weighted  compact dot
+x32010 x35553    1.000      0.348       1.000    1.000     0.000  0.000  0.837     0.837
+x32010 032010    1.000      0.997       1.000    0.750     1.000  1.000  1.124     1.124
+x32010 x32000    0.883      0.998       1.000    0.816     0.541  1.000  1.033     1.033
+x32010 x02210    0.888      0.998       1.000    0.816     0.153  1.000  0.996     0.996
+x32010 320003    0.776      0.496       1.000    0.671     0.000  0.000  0.740     0.740
+open C with itself: 1.150
+
+== STRUCTURE of C major (0 4 7) against its 11 transpositions (TheoryVectorService)
+T    pcs        structure  icv dims
+1    1 5 8      0.665      1.000
+2    2 6 9      0.665      1.000
+3    3 7 10     0.776      1.000
+4    4 8 11     0.776      1.000
+5    0 5 9      0.776      1.000
+6    1 6 10     0.665      1.000
+7    2 7 11     0.776      1.000
+8    0 3 8      0.776      1.000
+9    1 4 9      0.776      1.000
+10   2 5 10     0.665      1.000
+11   3 6 11     0.665      1.000
+set classes swept                 222
+invariant (min cosine > 0.9999)   1
+mean of the minimum cosines       0.881
+worst minimum cosine              0.514
+
+== ga_generate_voicing_embedding's example diagram, x-3-2-0-1-0
+parsed by              GA diagram   MIDI             GA name          pcs
+the MCP tool's parser  x-3-2-0-1-0  62 57 50 46 40   Dsus2/E          2 4 9 10
+chord chart x32010     0-1-0-2-3-x  64 60 55 52 48   C                0 4 7

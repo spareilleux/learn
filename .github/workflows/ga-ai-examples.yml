@@ -1,0 +1,32 @@
+# GA's AI: build the course program against Guitar Alchemist pinned on one commit, on three OSes,
+# and compare each lesson's output (embeddings, index, search, chatbot host without a model)
+name: GA's AI examples
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['code/ga-ai/**', '.github/workflows/ga-ai-examples.yml']
+  pull_request:
+    paths: ['code/ga-ai/**', '.github/workflows/ga-ai-examples.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  csharp:
+    name: csharp (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: code/ga-ai/global.json
+      - run: bash code/ga-ai/check.sh
