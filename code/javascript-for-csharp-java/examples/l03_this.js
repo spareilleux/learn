@@ -7,15 +7,15 @@ function whoAmI() {
 const lesson = { name: 'lesson', whoAmI };
 const journal = { name: 'journal' };
 
-// Rule 1, implicit binding: the object before the dot
+// Implicit binding: the object before the dot
 show('lesson.whoAmI()', lesson.whoAmI());
 
-// Rule 2, default binding: a plain call, undefined in strict code (modules and classes)
+// Default binding: a plain call, undefined in strict code (modules and classes)
 show('whoAmI()', whoAmI());
 const detached = lesson.whoAmI;
 show('detached()', detached());
 
-// Rule 3, explicit binding: call, apply and bind
+// Explicit binding: call, apply and bind
 show('whoAmI.call(journal)', whoAmI.call(journal));
 show('whoAmI.apply(journal, [])', whoAmI.apply(journal, []));
 const bound = whoAmI.bind(journal);
@@ -24,7 +24,7 @@ lesson.bound = bound;
 show('lesson.bound()', lesson.bound());
 show('bound.call(lesson)', bound.call(lesson));
 
-// Rule 4, new binding: a new object
+// New binding: a new object
 function Page(name) {
   this.name = name;
 }
