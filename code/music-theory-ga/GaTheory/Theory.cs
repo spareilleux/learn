@@ -196,4 +196,53 @@ public static class Theory
     // The distinct transpositions of a set that contain pitch class 0: its modes, rotations of one scale
     public static int[] Modes(int id) =>
         [.. PitchClasses(id).Select(pc => Transpose(id, -pc)).Distinct().Order()];
+
+    // ---- Keys (lesson 5)
+
+    public static readonly int[] MajorSteps = [2, 2, 1, 2, 2, 2, 1];
+    public static readonly int[] NaturalMinorSteps = [2, 1, 2, 2, 1, 2, 2];
+    public static readonly int[] HarmonicMinorSteps = [2, 1, 2, 2, 1, 3, 1];
+
+    // Spell a scale from its tonic, one letter per degree
+    public static string[] SpellScale(string tonic, IReadOnlyList<int> steps)
+    {
+        var notes = new string[steps.Count];
+        var semitones = 0;
+        for (var degree = 1; degree <= steps.Count; degree++)
+        {
+            notes[degree - 1] = Spell(tonic, degree, semitones);
+            semitones += steps[degree - 1];
+        }
+        return notes;
+    }
+
+    // The tonic of the major key with `fifths` sharps (or -fifths flats): C moved that many fifths
+    // up (a perfect fifth, letter + 4) or fourths up for flats (a perfect fourth, letter + 3)
+    public static string MajorTonic(int fifths)
+    {
+        var tonic = "C";
+        for (var i = 0; i < Math.Abs(fifths); i++)
+        {
+            tonic = fifths > 0 ? Spell(tonic, 5, 7) : Spell(tonic, 4, 5);
+        }
+        return tonic;
+    }
+
+    // The relative minor shares the signature; its tonic is the major key's sixth degree
+    public static string MinorTonic(int fifths) => Spell(MajorTonic(fifths), 6, 9);
+
+    // Sharps are added in the order F C G D A E B, flats in the reverse order
+    public static string[] SignatureAccidentals(int fifths) => fifths >= 0
+        ? [.. "FCGDAEB"[..fifths].Select(letter => $"{letter}#")]
+        : [.. "BEADGCF"[..-fifths].Select(letter => $"{letter}b")];
+
+    // Keys are named as GA prints them: "Key of Eb", "Key of F#m"
+    public static string KeyName(int fifths, bool minor) =>
+        $"Key of {(minor ? MinorTonic(fifths) + "m" : MajorTonic(fifths))}";
+
+    // The key signature of a tonic, with the fewest accidentals when two spellings exist (Db rather than C#)
+    public static int FifthsOf(int tonicPc, bool minor) => Enumerable.Range(-7, 15)
+        .Where(n => PitchClassOf(minor ? MinorTonic(n) : MajorTonic(n)) == tonicPc)
+        .OrderBy(Math.Abs).ThenByDescending(n => n)
+        .First();
 }

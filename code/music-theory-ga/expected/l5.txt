@@ -1,0 +1,78 @@
+# l5
+
+== Key signatures: major and relative minor tonic, accidentals
+fifths  course                             GA                                 check
+-7      Cb Abm Bb Eb Ab Db Gb Cb Fb        Cb Abm Bb Eb Ab Db Gb Cb Fb        ok
+-6      Gb Ebm Bb Eb Ab Db Gb Cb           Gb Ebm Bb Eb Ab Db Gb Cb           ok
+-5      Db Bbm Bb Eb Ab Db Gb              Db Bbm Bb Eb Ab Db Gb              ok
+-4      Ab Fm Bb Eb Ab Db                  Ab Fm Bb Eb Ab Db                  ok
+-3      Eb Cm Bb Eb Ab                     Eb Cm Bb Eb Ab                     ok
+-2      Bb Gm Bb Eb                        Bb Gm Bb Eb                        ok
+-1      F Dm Bb                            F Dm Bb                            ok
+0       C Am                               C Am                               ok
++1      G Em F#                            G Em F#                            ok
++2      D Bm F# C#                         D Bm F# C#                         ok
++3      A F#m F# C# G#                     A F#m F# C# G#                     ok
++4      E C#m F# C# G# D#                  E C#m F# C# G# D#                  ok
++5      B G#m F# C# G# D# A#               B G#m F# C# G# D# A#               ok
++6      F# D#m F# C# G# D# A# E#           F# D#m F# C# G# D# A# E#           ok
++7      C# A#m F# C# G# D# A# E# B#        C# A#m F# C# G# D# A# E# B#        ok
+
+== The notes of a key: one letter per degree
+key        course                   GA                       check
+Eb         Eb F G Ab Bb C D         Eb F G Ab Bb C D         ok
+E          E F# G# A B C# D#        E F# G# A B C# D#        ok
+F#         F# G# A# B C# D# E#      F# G# A# B C# D# E#      ok
+Cb         Cb Db Eb Fb Gb Ab Bb     Cb Db Eb Fb Gb Ab Bb     ok
+Dm         D E F G A Bb C           D E F G A Bb C           ok
+G#m        G# A# B C# D# E F#       G# A# B C# D# E F#       ok
+Bbm        Bb C Db Eb F Gb Ab       Bb C Db Eb F Gb Ab       ok
+A#m        A# B# C# D# E# F# G#     A# B# C# D# E# F# G#     ok
+
+== Relative and parallel keys (GA column: the expressions of GA's MCP key tools)
+key              course       GA           check
+relative C       Key of Am    Key of Am    ok
+parallel C       Key of Cm    Key of Am    DIFF
+relative Ab      Key of Fm    Key of Fm    ok
+parallel Ab      Key of Abm   Key of Fm    DIFF
+relative Am      Key of C     Key of C     ok
+parallel Am      Key of A     Key of C     DIFF
+relative Em      Key of G     Key of G     ok
+parallel Em      Key of E     Key of G     DIFF
+
+== The circle of fifths: clockwise one fifth up and one more sharp
+course sharps  C G D A E B F# C#
+GA sharps      C G D A E B F# C#
+course flats   C F Bb Eb Ab Db Gb Cb
+GA flats       C F Bb Eb Ab Db Gb Cb
+pair             course     GA         check
+B = Cb           same       same       ok
+F# = Gb          same       same       ok
+C# = Db          same       same       ok
+neighbours       course     GA         check
+C and G          6 common   6 common   ok
+C and F          6 common   6 common   ok
+C and D          5 common   5 common   ok
+C and F#         2 common   2 common   ok
+
+== Closely related keys: signatures within one accidental
+key        course                                       GA                                           check
+C          F Dm Am G Em                                 F Dm Am G Em                                 ok
+Dm         Bb Gm F C Am                                 Bb Gm F C Am                                 ok
+E          A F#m C#m B G#m                              A F#m C#m B G#m                              ok
+MCP tool                   course               GA                   check
+get_neighboring_keys C     Key of F, Key of G   throws InvalidOperationException DIFF
+
+== Surprises found while writing this lesson
+call                           course       GA           check
+Key.Major.C.GetInterval(E)     M3           m6           DIFF
+Key.Major.G.GetInterval(F#)    M7           m2           DIFF
+Key.Major.TryParse("H")        False        throws InvalidOperationException DIFF
+Key.Minor.TryParse("A")        Key of Am    Key of Am    ok
+
+== Exercise solutions
+question               course                           GA                               check
+1. E major             F# C# G# D# / E F# G# A B C# D#  F# C# G# D# / E F# G# A B C# D#  ok
+2. relative of Ab      Key of Fm                        Key of Fm                        ok
+2. parallel of Ab      Key of Abm (7 flats)             Key of Fm                        DIFF
+3. related to Dm       Bb Gm F C Am                     Bb Gm F C Am                     ok

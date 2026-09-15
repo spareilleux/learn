@@ -1,0 +1,71 @@
+# l6
+
+== Triads of C major: numeral, root, quality, function
+numeral   course                           GA                               check
+I         C major-triad Tonic              C major-triad Tonic              ok
+ii        D minor-triad Supertonic         D minor-triad Supertonic         ok
+iii       E minor-triad Mediant            E minor-triad Mediant            ok
+IV        F major-triad Subdominant        F major-triad Subdominant        ok
+V         G major-triad Dominant           G major-triad Dominant           ok
+vi        A minor-triad Submediant         A minor-triad Submediant         ok
+vii°      B diminished-triad LeadingTone   B diminished-triad LeadingTone   ok
+symbols: C Dm Em F G Am Bdim
+
+== Seventh chords of C major
+numeral   course                           GA                               check
+I7        C major-7                        C major-7                        ok
+ii7       D minor-7                        D minor-7                        ok
+iii7      E minor-7                        E minor-7                        ok
+IV7       F major-7                        F major-7                        ok
+V7        G dominant-7                     G dominant-7                     ok
+vi7       A minor-7                        A minor-7                        ok
+viiø7     B half-diminished-7              B half-diminished-7              ok
+symbols: Cmaj7 Dm7 Em7 Fmaj7 G7 Am7 Bm7b5
+
+== Triads of A minor, natural minor
+numeral   course                           GA                               check
+i         A minor-triad Tonic              A minor-triad Tonic              ok
+ii°       B diminished-triad Supertonic    B diminished-triad Supertonic    ok
+III       C major-triad Mediant            C major-triad Mediant            ok
+iv        D minor-triad Subdominant        D minor-triad Subdominant        ok
+v         E minor-triad Dominant           E minor-triad Dominant           ok
+VI        F major-triad Submediant         F major-triad Submediant         ok
+VII       G major-triad Subtonic           G major-triad LeadingTone        DIFF
+
+== Triads of A minor with the raised leading tone (harmonic minor)
+numeral   course                           GA                               check
+i         A minor-triad Tonic              A minor-triad Tonic              ok
+ii°       B diminished-triad Supertonic    B diminished-triad Supertonic    ok
+III+      C augmented-triad Mediant        C augmented-triad Mediant        ok
+iv        D minor-triad Subdominant        D minor-triad Subdominant        ok
+V         E major-triad Dominant           E major-triad Dominant           ok
+VI        F major-triad Submediant         F major-triad Submediant         ok
+vii°      G# diminished-triad LeadingTone  G# diminished-triad LeadingTone  ok
+symbols: Am Bdim Caug Dm E F G#dim
+
+== The triads of other keys, stacked on the course's notes and on GA's Key.Notes
+key    course                                       GA                                           check
+Eb     Eb Fm Gm Ab Bb Cm Ddim                       Eb Fm Gm Ab Bb Cm Ddim                       ok
+F#     F# G#m A#m B C# D#m E#dim                    F# G#m A#m B C# D#m E#dim                    ok
+Gb     Gb Abm Bbm Cb Db Ebm Fdim                    Gb Abm Bbm Cb Db Ebm Fdim                    ok
+C#m    C#m D#dim E F#m G#m A B                      C#m D#dim E F#m G#m A B                      ok
+
+== Which triads belong to a key? (major, minor and diminished triads on 12 roots)
+Key of G     course: C D Em F#dim G Am Bm
+             GA:     C D Em F#dim G Am Bm
+Key of Bb    course: Cm Dm Eb F Gm Adim Bb
+             GA:     Cm Dm Eb F Gm Adim Bb
+
+== Which keys contain a chord? (GA: PitchClassSet.GetCompatibleKeys)
+chord  course                                             GA                                                 check
+Dm     C Am F Dm Bb Gm                                    C Am F Dm Bb Gm                                    ok
+G7     C Am                                               C Am                                               ok
+Bdim   C Am                                               C Am                                               ok
+E      A F#m E C#m B G#m Cb Abm                           A F#m E C#m B G#m Cb Abm                           ok
+
+== Exercise solutions
+question             course                               GA                                   check
+1. G major triads    G Am Bm C D Em F#dim                 G Am Bm C D Em F#dim                 ok
+2. degree 5 of D harmonic minor, stacked in four: A7 (V7)
+2. A7 pitch classes  1 4 7 9                              1 4 7 9                              ok
+3. iii of Bb major   D minor-triad Mediant                D minor-triad Mediant                ok
