@@ -1,0 +1,7 @@
+built a provider without INoteSpeller
+resolve: Unable to resolve service for type 'INoteSpeller' while attempting to activate 'ScaleService'.
+ValidateOnBuild: 1 error(s): Error while validating the service descriptor 'ServiceType: ScaleService Lifetime: Singleton ImplementationType: ScaleService': Unable to resolve service for type 'INoteSpeller' while attempting to activate 'ScaleService'.
+two registrations, ScaleService uses FlatSpeller
+IEnumerable<INoteSpeller>: SharpSpeller, FlatSpeller
+keyed "flats": FlatSpeller
+Scales:Spelling = flats, Scales:DefaultMode = ionian

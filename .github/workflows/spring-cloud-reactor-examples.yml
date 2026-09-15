@@ -1,0 +1,42 @@
+# Spring Boot, Spring Cloud and Reactor course: build and test every module with Maven on three OSes
+# (the tests compare each example, HTTP response and log excerpt with the output quoted in the lessons),
+# run lesson 1's JAR with environment variables, and run the C# side of each comparison
+name: Spring Cloud and Reactor course examples
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['code/spring-cloud-reactor/**', '.github/workflows/spring-cloud-reactor-examples.yml']
+  pull_request:
+    paths: ['code/spring-cloud-reactor/**', '.github/workflows/spring-cloud-reactor-examples.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  spring-cloud-reactor:
+    name: spring-cloud-reactor (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+        working-directory: code/spring-cloud-reactor
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '25'
+          cache: maven
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: '10.0.x'
+      - name: Toolchain
+        run: java --version && mvn --version && dotnet --version
+      - name: Tests, JAR runs and C# comparisons
+        run: bash check.sh "$RUNNER_TEMP/spring-cloud-reactor"

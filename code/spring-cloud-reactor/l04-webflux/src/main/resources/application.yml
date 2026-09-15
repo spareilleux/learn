@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: scales-reactive
+
+# One chord every half second on /progressions/{root}; the tests make it faster
+progressions:
+  beat: 500ms

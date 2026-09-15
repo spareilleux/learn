@@ -1,0 +1,30 @@
+a subscriber that requests 2 at a time:
+  source asked for 2
+  got Dm7
+  got G7
+  source asked for 2
+  got Cmaj7
+  got A7
+  source asked for 2
+  got Dm7
+  got G7
+  source asked for 2
+limitRate(10) under an unbounded subscriber, first 25 elements:
+  source asked for 10
+  source asked for 8
+  source asked for 8
+  source asked for 8
+publishOn:
+  source asked for 256
+onBackpressureDrop, subscriber requests 3:
+  got 1
+  got 2
+  got 3
+  dropped [4, 5, 6, 7, 8, 9, 10]
+onBackpressureBuffer(3), subscriber requests 1:
+  got 1
+  subscriber now requests 10 more
+  got 2
+  got 3
+  got 4
+  error OverflowException: The receiver is overrun by more signals than expected (bounded queue...)

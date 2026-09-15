@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: scales
+
+# Bound to ScalesProperties; SCALES_SPELLING=flats in the environment overrides it
+scales:
+  default-mode: ionian
+  spelling: sharps
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always

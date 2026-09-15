@@ -1,0 +1,16 @@
+assembled a Mono
+first subscriber:
+  looking up D dorian
+  got [D, E, F, G, A, B, C]
+second subscriber:
+  looking up D dorian
+  got [D, E, F, G, A, B, C]
+CompletableFuture:
+  looking up E phrygian
+  joined twice, same result: true
+Mono.just:
+  looking up F lydian
+  assembled, no subscriber yet
+Mono.defer:
+  assembled, no subscriber yet
+  looking up G mixolydian

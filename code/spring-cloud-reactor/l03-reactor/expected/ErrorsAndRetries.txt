@@ -1,0 +1,16 @@
+retry(2):
+  call 1
+  call 2
+  call 3
+  result: D dorian
+retry(1):
+  call 1
+  call 2
+  block() threw scale service unavailable
+fallbacks:
+  onErrorReturn: C ionian
+  onErrorResume: cached: scale service unavailable
+  doOnError saw: scale service unavailable
+  onErrorMap: lookup failed, caused by scale service unavailable
+timeout:
+  timed out, default scale

@@ -1,0 +1,7 @@
+GET /fn/scales/Eb?mode=lydian
+200 application/json
+{"root":"D#","mode":"lydian","notes":["D#","F","G","A","A#","C","D"],"chords":["D#","F","Gm","Adim","A#","Cm","Dm"]}
+
+GET /fn/scales/H
+400 application/json
+{"detail":"unknown note: H","status":400,"title":"Bad Request"}

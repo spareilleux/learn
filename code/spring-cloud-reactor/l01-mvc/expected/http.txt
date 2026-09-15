@@ -1,0 +1,19 @@
+GET /scales/D?mode=dorian
+200 application/json
+{"root":"D","mode":"dorian","notes":["D","E","F","G","A","B","C"],"chords":["Dm","Em","F","G","Am","Bdim","C"]}
+
+GET /scales/Bb
+200 application/json
+{"root":"A#","mode":"ionian","notes":["A#","C","D","D#","F","G","A"],"chords":["A#","Cm","Dm","D#","F","Gm","Adim"]}
+
+GET /scales/H
+400 application/problem+json
+{"detail":"unknown note: H","instance":"/scales/H","status":400,"title":"Unknown note or mode"}
+
+GET /actuator/health/scaleCatalog
+200 application/vnd.spring-boot.actuator.v3+json
+{"details":{"modes":7},"status":"UP"}
+
+GET /actuator/health/liveness
+200 application/vnd.spring-boot.actuator.v3+json
+{"status":"UP"}

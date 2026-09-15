@@ -1,0 +1,12 @@
+INFO <pid> --- [scales] [           main] dev.learn.scales.ScalesApplication : Starting ScalesApplication using Java <version> with PID <pid> (<path>)
+ INFO <pid> --- [scales] [           main] dev.learn.scales.ScalesApplication : No active profile set, falling back to 1 default profile: "default"
+ INFO <pid> --- [scales] [           main] o.s.boot.tomcat.TomcatWebServer : Tomcat initialized with port <port> (http)
+ INFO <pid> --- [scales] [           main] o.apache.catalina.core.StandardService : Starting service [Tomcat]
+ INFO <pid> --- [scales] [           main] o.apache.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/<version>]
+ INFO <pid> --- [scales] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in <n> ms
+ INFO <pid> --- [scales] [           main] o.s.b.a.e.web.EndpointLinksResolver : Exposing 2 endpoints beneath base path '/actuator'
+ INFO <pid> --- [scales] [           main] o.s.boot.tomcat.TomcatWebServer : Tomcat started on port <port> (http) with context path '/'
+ INFO <pid> --- [scales] [           main] dev.learn.scales.ScalesApplication : Started ScalesApplication in <n> seconds (process running for <n>)
+ INFO <pid> --- [scales] [           main] o.s.boot.tomcat.GracefulShutdown : Commencing graceful shutdown. Waiting for active requests to complete
+ INFO <pid> --- [scales] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown : Graceful shutdown complete
+ INFO <pid> --- [scales] [           main] o.apache.catalina.core.StandardService : Stopping service [Tomcat]

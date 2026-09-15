@@ -1,0 +1,6 @@
+$ SCALES_SPELLING=flats java -jar target/scales.jar --spring.profiles.active=print
+spelling: FLATS
+ScaleView[root=Bb, mode=ionian, notes=[Bb, C, D, Eb, F, G, A], chords=[Bb, Cm, Dm, Eb, F, Gm, Adim]]
+$ SCALES_DEFAULT_MODE=dorian java -jar target/scales.jar --spring.profiles.active=print,flats
+spelling: FLATS
+ScaleView[root=Bb, mode=dorian, notes=[Bb, C, Db, Eb, F, G, Ab], chords=[Bbm, Cm, Db, Eb, Fm, Gdim, Ab]]

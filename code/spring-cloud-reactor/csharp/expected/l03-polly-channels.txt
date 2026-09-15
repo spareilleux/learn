@@ -1,0 +1,13 @@
+Polly, 2 retries:
+  call 1
+  retry 1 after 10 ms
+  call 2
+  retry 2 after 20 ms
+  call 3
+  result: D dorian
+Polly, retries exhausted:
+  retry 1 after 10 ms
+  retry 2 after 20 ms
+  InvalidOperationException: scale service still unavailable
+bounded channel (3, DropWrite): TryWrite returned true 10 times, reader gets 1, 2, 3
+in a new thread: AsyncLocal=ada, ThreadLocal=null

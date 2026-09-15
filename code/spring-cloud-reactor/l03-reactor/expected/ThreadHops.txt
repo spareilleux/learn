@@ -1,0 +1,15 @@
+no scheduler:
+  map on main
+  subscriber on main
+publishOn(parallel):
+  map above publishOn on main
+  map below publishOn on parallel
+subscribeOn(boundedElastic):
+  callable on boundedElastic
+  map on boundedElastic
+both, subscribeOn written last:
+  map A on boundedElastic
+  map B on parallel
+Mono.delay:
+  map after delay on parallel
+  block() returned on main

@@ -1,0 +1,23 @@
+GET /scales/D
+200 application/json; charset=utf-8
+{"root":"D","notes":["D","E","F#","G","A","B","C#"]}
+
+GET /scales/H
+400 application/problem+json
+{"type":"https://tools.ietf.org/html/rfc9110#section-15.5.1","title":"Unknown note or mode","status":400,"detail":"unknown note: H","traceId":"..."}
+
+GET /progressions/G
+200 text/event-stream
+event: chord
+data: G
+
+event: chord
+data: Em
+
+event: chord
+data: C
+
+event: chord
+data: D
+
+HttpRequestException: Response status code does not indicate success: 400 (Bad Request).
