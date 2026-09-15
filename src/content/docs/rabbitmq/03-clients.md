@@ -160,7 +160,7 @@ The Java client has the same rules with blocking calls. Its [API guide](https://
 
 ## Spring AMQP
 
-[Spring AMQP](https://docs.spring.io/spring-amqp/reference/) wraps the Java client in the Spring way: a template to send, annotated methods to receive, beans to declare. With `spring-boot-starter-amqp`, Spring Boot [auto-configures](https://docs.spring.io/spring-boot/reference/messaging/amqp.html) a `CachingConnectionFactory` from the `spring.rabbitmq.*` properties, a `RabbitTemplate`, a `RabbitAdmin` and a listener container factory. [Lesson 1 of the Spring course](../spring-cloud-reactor/01-spring-boot-from-aspnet-core/) explains beans, auto-configuration and profiles, which this application uses without further comment.
+[Spring AMQP](https://docs.spring.io/spring-amqp/reference/) wraps the Java client in the Spring way: a template to send, annotated methods to receive, beans to declare. With `spring-boot-starter-amqp`, Spring Boot [auto-configures](https://docs.spring.io/spring-boot/reference/messaging/amqp.html) a `CachingConnectionFactory` from the `spring.rabbitmq.*` properties, a `RabbitTemplate`, a `RabbitAdmin` and a listener container factory. [Lesson 1 of the Spring course](../../spring-cloud-reactor/01-spring-boot-from-aspnet-core/) explains beans, auto-configuration and profiles, which this application uses without further comment.
 
 The topology is three beans. `RabbitAdmin` declares every `Exchange`, `Queue` and `Binding` bean when the application first opens a connection:
 
