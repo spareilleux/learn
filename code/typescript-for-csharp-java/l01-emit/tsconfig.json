@@ -1,0 +1,11 @@
+{
+  // The course's options, but tsc writes JavaScript and declaration files to dist
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "rootDir": "src",
+    "outDir": "dist",
+    "declaration": true
+  },
+  "include": ["src"]
+}

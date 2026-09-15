@@ -1,0 +1,34 @@
+errors/l04_variance.ts:14:38 - error TS2322: Type '(g: Guitar) => string' is not assignable to type '(instrument: Instrument) => string'.
+  Types of parameters 'g' and 'instrument' are incompatible.
+    Type 'Instrument' is missing the following properties from type 'Guitar': strings, tune
+
+14 const withProperty: WithProperty = { play: tuneGuitar };
+                                        ~~~~
+
+  errors/l04_variance.ts:11:3 - The expected type comes from property 'play' which is declared here on type 'WithProperty'
+    11   play: (instrument: Instrument) => string;
+         ~~~~
+
+errors/l04_variance.ts:24:7 - error TS2322: Type 'Source<Instrument>' is not assignable to type 'Source<Guitar>'.
+  Type 'Instrument' is missing the following properties from type 'Guitar': strings, tune
+
+24 const guitarSource: Source<Guitar> = instrumentSource;
+         ~~~~~~~~~~~~
+
+errors/l04_variance.ts:25:7 - error TS2322: Type 'Sink<Guitar>' is not assignable to type 'Sink<Instrument>'.
+  Type 'Instrument' is missing the following properties from type 'Guitar': strings, tune
+
+25 const instrumentSink: Sink<Instrument> = guitarSink;
+         ~~~~~~~~~~~~~~
+
+errors/l04_variance.ts:28:22 - error TS2636: Type 'Mislabeled<super-T>' is not assignable to type 'Mislabeled<sub-T>' as implied by variance annotation.
+  The types returned by 'next()' are incompatible between these types.
+    Type 'super-T' is not assignable to type 'sub-T'.
+
+28 interface Mislabeled<in T> {
+                        ~~~~
+
+
+Found 4 errors in the same file, starting at: errors/l04_variance.ts:14
+
+exit 1

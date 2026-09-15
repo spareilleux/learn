@@ -1,0 +1,9 @@
+errors/l02_excess.ts:13:38 - error TS2561: Object literal may only specify known properties, but 'towr' does not exist in type 'SceneOptions'. Did you mean to write 'tower'?
+
+13 console.log(describe({ stars: false, towr: true }));
+                                        ~~~~
+
+
+Found 1 error in errors/l02_excess.ts:13
+
+exit 1

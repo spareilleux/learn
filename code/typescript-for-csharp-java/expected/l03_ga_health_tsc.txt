@@ -1,0 +1,14 @@
+errors/l03_ga_health.ts:10:31 - error TS2367: This comparison appears to be unintentional because the types '"contradictory" | "error" | "unknown" | "warning"' and '"ok"' have no overlap.
+
+10   if (status === 'healthy' || status === 'ok') return 'stable';
+                                 ~~~~~~~~~~~~~~~
+
+errors/l03_ga_health.ts:12:29 - error TS2367: This comparison appears to be unintentional because the types '"contradictory" | "unknown"' and '"critical"' have no overlap.
+
+12   if (status === 'error' || status === 'critical') return 'failing';
+                               ~~~~~~~~~~~~~~~~~~~~~
+
+
+Found 2 errors in the same file, starting at: errors/l03_ga_health.ts:10
+
+exit 1

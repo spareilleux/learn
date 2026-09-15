@@ -1,0 +1,6 @@
+initial()                          '?'
+initial('Ada')                     'A'
+tunings.get('drop D')?.length      undefined
+tunings.get('drop D') ?? 'DADGBE'  'DADGBE'
+tunings.get('drop D')!.length      TypeError: Cannot read properties of undefined (reading 'length')
+exit 0

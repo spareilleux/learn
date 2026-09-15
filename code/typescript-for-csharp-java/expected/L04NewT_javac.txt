@@ -1,0 +1,14 @@
+L04NewT.java:4: error: unexpected type
+        return new T();
+                   ^
+  required: class
+  found:    type parameter T
+  where T is a type-variable:
+    T extends Object declared in method <T>create()
+L04NewT.java:8: error: Object cannot be safely cast to T
+        return value instanceof T;
+               ^
+  where T is a type-variable:
+    T extends Object declared in method <T>isOf(Object)
+2 errors
+exit 1

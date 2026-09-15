@@ -1,0 +1,6 @@
+L01Types.java:6: error: incompatible types: String cannot be converted to double
+        var lines = new Line[] { new Line("capo", "9.99", 2), new Line("strings", 12.5, 1) };
+                                                  ^
+Note: Some messages have been simplified; recompile with -Xdiags:verbose to get full output
+1 error
+exit 1

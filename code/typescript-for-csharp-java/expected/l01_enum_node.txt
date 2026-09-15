@@ -1,0 +1,18 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+errors/l01_enum.ts:2
+    // errors/l01_enum.ts
+  > enum Currency {
+      CAD,
+      EUR,
+  > }
+
+SyntaxError [ERR_UNSUPPORTED_TYPESCRIPT_SYNTAX]: TypeScript enum is not supported in strip-only mode
+{
+  code: 'ERR_UNSUPPORTED_TYPESCRIPT_SYNTAX'
+}
+
+Node.js v24.21.0
+exit 1

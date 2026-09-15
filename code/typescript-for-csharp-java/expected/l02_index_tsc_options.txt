@@ -1,0 +1,16 @@
+errors/l02_index.ts:4:7 - error TS2322: Type 'string | undefined' is not assignable to type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+
+4 const seventh: string = strings[6];
+        ~~~~~~~
+
+errors/l02_index.ts:6:7 - error TS2322: Type 'number | undefined' is not assignable to type 'number'.
+  Type 'undefined' is not assignable to type 'number'.
+
+6 const count: number = record['A'];
+        ~~~~~
+
+
+Found 2 errors in the same file, starting at: errors/l02_index.ts:4
+
+exit 1

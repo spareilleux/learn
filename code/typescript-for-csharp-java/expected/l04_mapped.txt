@@ -1,0 +1,5 @@
+name, skybox                       [ 'skyboxMode', 'nebula' ]
+state                              { stars: true, tower: false, skyboxMode: 'nebula' }
+'isAdmin' in state                 false
+toggles, labels[frozen.skyboxMode] [ { stars: true, tower: true, skyboxMode: 'milky-way' }, 'Milky Way' ]
+exit 0

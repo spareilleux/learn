@@ -1,0 +1,16 @@
+errors/l02_nominal.ts:24:7 - error TS2322: Type 'Fahrenheit' is not assignable to type 'Celsius'.
+  Property '#value' in type 'Fahrenheit' refers to a different member that cannot be accessed from within type 'Celsius'.
+
+24 const water: Celsius = new Fahrenheit(212);
+         ~~~~~
+
+errors/l02_nominal.ts:25:7 - error TS2322: Type 'number' is not assignable to type 'Kelvin'.
+  Type 'number' is not assignable to type '{ readonly brand: "Kelvin"; }'.
+
+25 const room: Kelvin = 293.15;
+         ~~~~
+
+
+Found 2 errors in the same file, starting at: errors/l02_nominal.ts:24
+
+exit 1

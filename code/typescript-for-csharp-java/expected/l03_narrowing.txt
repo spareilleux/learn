@@ -1,0 +1,10 @@
+describe(3)                        'fret 3'
+describe('muted')                  'not played'
+label(0)                           'no fret'
+label(undefined)                   'no fret'
+lowest({ pitch: 40 })              40
+lowest({ pitches: [52, 45] })      45
+message(new RangeError('fret 25')) 'fret 25'
+message(['a', 'b'])                '2 errors'
+'x32010'.split('').map(parseFret)  [ 'muted', 3, 2, 0, 1, 0 ]
+exit 0

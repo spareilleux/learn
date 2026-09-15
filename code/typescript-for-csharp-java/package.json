@@ -1,0 +1,18 @@
+{
+  "name": "typescript-for-csharp-java",
+  "private": true,
+  "description": "Examples of the course TypeScript for C#/Java developers, checked with tsc and run with Node.js by check.sh",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "check": "bash check.sh",
+    "typecheck": "tsc"
+  },
+  "devDependencies": {
+    "@types/node": "24.13.4",
+    "tsx": "4.23.13",
+    "typescript": "7.0.2"
+  }
+}

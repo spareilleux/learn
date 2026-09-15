@@ -1,0 +1,13 @@
+                
+                
+                   
+ 
+export function total(lines                 )         {
+  let sum         = 0;
+  for (const line of lines) sum += line.price * line.quantity;
+  return sum;
+}
+const empty = []          ;
+(node:PID) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+exit 0

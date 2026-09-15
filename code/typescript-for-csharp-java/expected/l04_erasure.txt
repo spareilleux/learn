@@ -1,0 +1,7 @@
+typeof count                       'string'
+count.toFixed(1)                   TypeError: count.toFixed is not a function
+create(Tuner)                      Tuner { reference: 440 }
+parseArray('[0, 2, 2]', isNumber)  [ 0, 2, 2 ]
+parseArray('[0, "2"]', isNumber)   TypeError: not the expected array: [0, "2"]
+json.data.map((n) => n.length)     TypeError: json.data.map is not a function
+exit 0

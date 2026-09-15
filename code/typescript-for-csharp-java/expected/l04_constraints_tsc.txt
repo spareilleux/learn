@@ -1,0 +1,19 @@
+errors/l04_constraints.ts:14:21 - error TS2345: Argument of type 'number' is not assignable to parameter of type '{ length: number; }'.
+
+14 console.log(longest(10, 20), longest('capo', [1, 2]));
+                       ~~
+
+errors/l04_constraints.ts:14:46 - error TS2345: Argument of type 'number[]' is not assignable to parameter of type '"capo"'.
+
+14 console.log(longest(10, 20), longest('capo', [1, 2]));
+                                                ~~~~~~
+
+errors/l04_constraints.ts:15:27 - error TS2345: Argument of type '"nmae"' is not assignable to parameter of type 'keyof Tuning'.
+
+15 console.log(get(standard, 'nmae'));
+                             ~~~~~~
+
+
+Found 3 errors in the same file, starting at: errors/l04_constraints.ts:14
+
+exit 1

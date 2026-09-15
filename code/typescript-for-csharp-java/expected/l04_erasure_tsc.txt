@@ -1,0 +1,14 @@
+errors/l04_erasure.ts:3:14 - error TS2693: 'T' only refers to a type, but is being used as a value here.
+
+3   return new T();
+               ~
+
+errors/l04_erasure.ts:6:27 - error TS2693: 'T' only refers to a type, but is being used as a value here.
+
+6   return value instanceof T;
+                            ~
+
+
+Found 2 errors in the same file, starting at: errors/l04_erasure.ts:3
+
+exit 1

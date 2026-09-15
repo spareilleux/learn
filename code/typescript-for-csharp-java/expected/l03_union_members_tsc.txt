@@ -1,0 +1,10 @@
+errors/l03_union_members.ts:5:23 - error TS2339: Property 'toFixed' does not exist on type 'Fret'.
+  Property 'toFixed' does not exist on type '"muted"'.
+
+5   return `fret ${fret.toFixed(0)}`;
+                        ~~~~~~~
+
+
+Found 1 error in errors/l03_union_members.ts:5
+
+exit 1

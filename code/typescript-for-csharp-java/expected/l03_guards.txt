@@ -1,0 +1,8 @@
+trusted.pz                         undefined
+trusted.pz * 2                     NaN
+restore('{"px":1,"py":2}')         { px: 0, py: 0, pz: 100 }
+restore('{"px":1,"py":2,"pz":3}')  { px: 1, py: 2, pz: 3 }
+brightness(fromUrl)                2
+assertMode('locrian')              RangeError: unknown mode: locrian
+lie.px.toFixed(1)                  TypeError: Cannot read properties of undefined (reading 'toFixed')
+exit 0

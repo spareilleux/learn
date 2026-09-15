@@ -1,0 +1,56 @@
+# TypeScript course: type-check every example and solution with tsc, run them with Node.js on three OSes, check each
+# error snippet with tsc and run it with Node.js, compare every output, and run the C# and Java sides of the comparisons
+name: TypeScript course examples
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['code/typescript-for-csharp-java/**', '.github/workflows/typescript-examples.yml']
+  pull_request:
+    paths: ['code/typescript-for-csharp-java/**', '.github/workflows/typescript-examples.yml']
+
+permissions:
+  contents: read
+
+env:
+  NODE_VERSION: 24.21.0
+
+jobs:
+  typescript:
+    name: typescript (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+        working-directory: code/typescript-for-csharp-java
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: '10.0.x'
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '25'
+      - name: Toolchain
+        run: node --version && npm --version && dotnet --version && java --version
+      - name: Install the pinned TypeScript, @types/node and tsx
+        run: npm ci
+      # Lesson 1 shows these: TypeScript 7 is a native binary, installed from the package for the current OS
+      - name: Lesson 1, the compiler package for this OS, for information
+        run: |
+          ls node_modules/@typescript
+          node -p "process.platform + ' ' + process.arch"
+          npx tsc --version
+      - name: Examples, errors, solutions and comparisons
+        env:
+          REQUIRE_COMPARE: '1'
+        run: bash check.sh

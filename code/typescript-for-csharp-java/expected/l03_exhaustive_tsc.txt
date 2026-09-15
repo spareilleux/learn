@@ -1,0 +1,14 @@
+errors/l03_exhaustive.ts:22:26 - error TS2345: Argument of type '{ kind: "tie"; beats: number; }' is not assignable to parameter of type 'never'.
+
+22       return assertNever(event);
+                            ~~~~~
+
+errors/l03_exhaustive.ts:26:38 - error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+
+26 function beatsOf(event: MusicEvent): number {
+                                        ~~~~~~
+
+
+Found 2 errors in the same file, starting at: errors/l03_exhaustive.ts:22
+
+exit 1

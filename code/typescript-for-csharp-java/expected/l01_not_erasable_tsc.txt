@@ -1,0 +1,19 @@
+errors/l01_not_erasable.ts:3:15 - error TS1294: This syntax is not allowed when 'erasableSyntaxOnly' is enabled.
+
+3   constructor(private readonly cents: number) {} // a parameter property declares and assigns a field
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+errors/l01_not_erasable.ts:9:11 - error TS1294: This syntax is not allowed when 'erasableSyntaxOnly' is enabled.
+
+9 namespace Tax {
+            ~~~
+
+errors/l01_not_erasable.ts:13:15 - error TS1294: This syntax is not allowed when 'erasableSyntaxOnly' is enabled.
+
+13 const price = <Price>new Price(999); // the old cast syntax
+                 ~~~~~~~
+
+
+Found 3 errors in the same file, starting at: errors/l01_not_erasable.ts:3
+
+exit 1

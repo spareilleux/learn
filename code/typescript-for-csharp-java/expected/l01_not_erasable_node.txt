@@ -1,0 +1,17 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+errors/l01_not_erasable.ts:3
+class Price {
+  constructor(private readonly cents: number) {} // a parameter property declares and assigns a field
+                               ^^^^^^^^^^^^^
+  toString() {
+
+SyntaxError [ERR_UNSUPPORTED_TYPESCRIPT_SYNTAX]: TypeScript parameter property is not supported in strip-only mode
+{
+  code: 'ERR_UNSUPPORTED_TYPESCRIPT_SYNTAX'
+}
+
+Node.js v24.21.0
+exit 1

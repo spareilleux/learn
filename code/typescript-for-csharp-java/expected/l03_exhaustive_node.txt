@@ -1,0 +1,8 @@
+errors/l03_exhaustive.ts:10
+  throw new Error(`unexpected event: ${JSON.stringify(value)}`);
+        ^
+
+Error: unexpected event: {"kind":"tie","beats":1}
+
+Node.js v24.21.0
+exit 1

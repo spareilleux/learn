@@ -1,0 +1,7 @@
+guitars.length                     2
+guitars[1].tune()                  TypeError: guitars[1].tune is not a function
+withMethod.play(piano)             TypeError: g.tune is not a function
+withProperty.play(piano)           'piano'
+instrumentSource.next().name       'guitar'
+names                              [ 'guitar', 'piano' ]
+exit 0

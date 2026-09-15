@@ -1,0 +1,9 @@
+errors/l01_imports.ts:2:36 - error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean '../examples/l01_money.js'?
+
+2 import { formatMoney, Money } from '../examples/l01_money';
+                                     ~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Found 1 error in errors/l01_imports.ts:2
+
+exit 1

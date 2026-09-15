@@ -1,0 +1,13 @@
+errors/l04_mapped.ts:14:7 - error TS2741: Property 'weather' is missing in type '{ stars: (value: unknown) => value is boolean; tower: (value: unknown) => value is boolean; skyboxMode: (value: unknown) => value is "milky-way" | "nebula"; }' but required in type 'Validators<SceneOptions>'.
+
+14 const sceneValidators: Validators<SceneOptions> = {
+         ~~~~~~~~~~~~~~~
+
+  errors/l04_mapped.ts:7:3 - 'weather' is declared here.
+    7   weather: boolean;
+        ~~~~~~~
+
+
+Found 1 error in errors/l04_mapped.ts:14
+
+exit 1

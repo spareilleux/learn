@@ -1,0 +1,20 @@
+export declare let count: number;
+export declare const tuning = "EADGBE";
+export declare const strings: string[];
+export declare const capo: {
+    fret: number;
+    label: string;
+};
+export declare const frozen: Readonly<{
+    fret: 2;
+    label: "capo";
+}>;
+export declare const literal: {
+    readonly fret: 2;
+    readonly label: 'capo';
+};
+export declare const mixed: (string | number | null)[];
+export declare const pair: [string, number];
+export declare function fretOf(label: string): number | undefined;
+export declare const parsed: any;
+exit 0

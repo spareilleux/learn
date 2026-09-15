@@ -1,0 +1,14 @@
+errors/l02_unknown.ts:3:24 - error TS18046: 'options' is of type 'unknown'.
+
+3 const stars: boolean = options.stars;
+                         ~~~~~~~
+
+errors/l02_unknown.ts:4:7 - error TS2322: Type 'unknown' is not assignable to type 'boolean'.
+
+4 const copy: boolean = options;
+        ~~~~
+
+
+Found 2 errors in the same file, starting at: errors/l02_unknown.ts:3
+
+exit 1

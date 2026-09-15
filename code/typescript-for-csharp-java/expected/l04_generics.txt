@@ -1,0 +1,8 @@
+note, fret                         [ 'E', 0 ]
+first<string>([])                  undefined
+longest('capo', 'strings')         'strings'
+longest([1, 2], [1, 2, 3])         [ 1, 2, 3 ]
+get(standard, 'notes').join('')    'EADGBE'
+get(standard, 'capo') + 2          2
+page.items.length, byName.next     [ 1, 'open G' ]
+exit 0

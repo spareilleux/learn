@@ -1,0 +1,13 @@
+errors/l01_order.ts:14:22 - error TS2322: Type 'string' is not assignable to type 'number'.
+
+14   { product: 'capo', price: '9.99', quantity: 2 },
+                        ~~~~~
+
+  errors/l01_order.ts:4:3 - The expected type comes from property 'price' which is declared here on type 'Line'
+    4   price: number;
+        ~~~~~
+
+
+Found 1 error in errors/l01_order.ts:14
+
+exit 1
