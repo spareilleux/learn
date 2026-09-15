@@ -1,0 +1,63 @@
+== creating
+new(&[[f32; 3]; 2]): shape [2, 3], F32, [1, 2, 3, 4, 5, 6]
+from_vec(Vec<u32>, (3, 2)): shape [3, 2], U32, [1, 2, 3, 4, 5, 6]
+from_vec(0..12, (2, (), 3)): shape [2, 2, 3], I64, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+zeros((2, 2), F64): shape [2, 2], F64, [0, 0, 0, 0]
+full(7u8, 3): shape [3], U8, [7, 7, 7]
+arange_step(0.0, 1.0, 0.25): shape [4], F32, [0.00, 0.25, 0.50, 0.75]
+scalar: rank 0, dims [], value 2.5
+
+== dtypes
+f32: shape [4], F32, [1.40, 2.50, -2.50, 300.70]
+to_dtype(U8): shape [4], U8, [1, 2, 0, 255]
+to_dtype(I64): shape [4], I64, [1, 2, -2, 300]
+to_dtype(F16): shape [4], F16, [1.40, 2.50, -2.50, 300.75]
+1/3 as f64 0.33333333333333331, as f32 0.33333334326744080
+size in bytes: F16 2, F32 4, F64 8, U8 1
+
+== shapes
+dims [2, 3, 4], rank 3, elem_count 24
+dim(0) 2, dim(D::Minus1) 4
+dims3: b 2, r 3, c 4
+reshape((4, ())) -> [4, 6]
+flatten_from(1) -> [2, 12]
+unsqueeze(0) -> [1, 2, 3, 4], then squeeze(0) -> [2, 3, 4]
+transpose(1, 2) -> [2, 4, 3], permute((2, 0, 1)) -> [4, 2, 3]
+
+== broadcasting
+m.broadcast_add(row): shape [2, 3], F32, [11, 22, 33, 14, 25, 36]
+m.broadcast_add(col): shape [2, 3], F32, [101, 102, 103, 204, 205, 206]
+row.broadcast_mul(col): shape [2, 3], F32, [1000, 2000, 3000, 2000, 4000, 6000]
+(&m * 2.0)? - 1.0: shape [2, 3], F32, [1, 3, 5, 7, 9, 11]
+m.broadcast_as((2, 2, 3)): shape [2, 2, 3], F32, [1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6]
+
+== indexing
+m.i(1): shape [3], F32, [4, 5, 6]
+m.i((.., 1)): shape [2], F32, [2, 5]
+m.i((.., 1..)): shape [2, 2], F32, [2, 3, 5, 6]
+m.i((0, ..=1)): shape [2], F32, [1, 2]
+m.narrow(1, 0, 2): shape [2, 2], F32, [1, 2, 4, 5]
+m.index_select(ids [2, 0, 2], 1): shape [2, 3], F32, [3, 1, 3, 6, 4, 6]
+m.i((.., &ids)): shape [2, 3], F32, [3, 1, 3, 6, 4, 6]
+m.gather(picks [[2], [0]], 1): shape [2, 1], F32, [3, 4]
+m.i((1, 2)) as a Rust value: 6
+m.to_vec2(): [[1.0, 2.0, 3.0], [4.0, 5.0, 6.0]]
+
+== operations
+m.sum_all(): shape [], F32, [21]
+m.sum(0): shape [3], F32, [5, 7, 9]
+m.sum_keepdim(0): shape [1, 3], F32, [5, 7, 9]
+m.mean(D::Minus1): shape [2], F32, [2.0, 5.0]
+m.max(1): shape [2], F32, [3, 6]
+m.argmax(1): shape [2], U32, [2, 2]
+m.t()?.matmul(&m): shape [3, 3], F32, [17, 22, 27, 22, 29, 36, 27, 36, 45]
+m.sqr()?.sqrt(): shape [2, 3], F32, [1, 2, 3, 4, 5, 6]
+m.ge(3.0): shape [2, 3], U8, [0, 0, 1, 1, 1, 1]
+row.exp(): shape [3], F32, [2.7183, 7.3891, 20.0855]
+softmax by hand: shape [3], F32, [0.0900, 0.2447, 0.6652]
+Tensor::cat(&[&m, &m], 0): shape [4, 3], F32, [1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6]
+Tensor::stack(&[&row, &row], 0): shape [2, 3], F32, [10, 20, 30, 10, 20, 30]
+[[2., 3.],
+ [5., 6.]]
+Tensor[[2, 2], f32]
+exit 0

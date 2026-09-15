@@ -1,0 +1,40 @@
+== y = x^2 + 3x at x = 2, so dy/dx = 2x + 3 = 7
+y 10
+dy/dx 7
+
+== which tensors get a gradient
+d loss / dw: shape [3], F32, [32, -100, 216]
+2 * w * c^2 by hand: shape [3], F32, [32, -100, 216]
+d loss / dc, c a plain tensor: shape [3], F32, [8, 40, 108]
+tensors in the GradStore: 2
+loss = sum(w * exp(c)): gradient for e true, for c false
+
+== a tensor used twice adds up its gradients
+d sum(h*h) / dw: shape [3], F32, [4, -2, 8]
+
+== backward on a tensor that isn't a scalar starts from ones
+d v / dw, seeded with ones: shape [3], F32, [2, -4, 6]
+d sum(v) / dw: shape [3], F32, [2, -4, 6]
+
+== each backward returns a new GradStore: nothing accumulates between calls
+first: shape [3], F32, [32, -100, 216]
+second: shape [3], F32, [32, -100, 216]
+
+== detach and operations without a gradient
+through detach: gradient for w None
+through round: gradient for w None
+through max: d max(w) / dw: shape [3], F32, [0, 0, 1]
+
+== matmul against finite differences, f64
+backward: shape [2, 3], F64, [0.007283, 0.001819, -0.007278, 0.420743, -0.419782, 1.259154]
+finite differences: shape [2, 3], F64, [0.007283, 0.001819, -0.007278, 0.420743, -0.419782, 1.259154]
+largest gap below 1e-8: true
+
+== Var::set changes the value in place
+p after set: shape [2], F32, [10, 20]
+a clone taken before set sees it: shape [2], F32, [10, 20]
+p.set(&p.detach()): error: cannot set variable cannot set a variable to a tensor that is derived from its value
+p.set(3 values): error: shape mismatch in set, lhs: [2], rhs: [3]
+p.set(f64 values): error: dtype mismatch in copy_strided, lhs: F64, rhs: F32
+gradient for a u32 Var: None
+exit 0

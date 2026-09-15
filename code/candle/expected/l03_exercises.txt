@@ -1,0 +1,17 @@
+== exercise 1: view or copy?
+a.permute((2, 0, 1))                 contiguous false same buffer true
+a.permute((2, 0, 1)).flatten_all()   contiguous true  same buffer false
+a.flatten_all()                      contiguous true  same buffer true
+a.i((.., 1, ..))                     contiguous false same buffer true
+a.i((.., 1, ..)).contiguous()        contiguous true  same buffer false
+a.i((1, ..)).contiguous()            contiguous true  same buffer true
+a.squeeze(0)                         contiguous true  same buffer true
+a.transpose(1, 1)                    contiguous true  same buffer true
+
+== exercise 2: the memory behind a broadcast
+wide:   1000000 elements, buffer 4000 bytes
+copy:   1000000 elements, buffer 4000000 bytes
+copy.i(0): 1000 elements, buffer 4000000 bytes
+copy.i(0).copy(): 1000 elements, buffer 4000000 bytes
+copy.i(0).force_contiguous(): 1000 elements, buffer 4000 bytes
+exit 0

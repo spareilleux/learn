@@ -1,0 +1,15 @@
+[package]
+name = "candle-course"
+version = "0.1.0"
+edition.workspace = true
+publish.workspace = true
+description = "Examples of the 'Candle' course: tensors, CPU performance and autodiff with huggingface/candle, on the CPU only"
+
+[dependencies]
+candle-core.workspace = true
+candle-nn.workspace = true
+anyhow.workspace = true
+
+[dev-dependencies]
+ix-autograd.workspace = true
+ndarray.workspace = true

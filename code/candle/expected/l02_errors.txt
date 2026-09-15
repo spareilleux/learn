@@ -1,0 +1,37 @@
+== shapes
+m + row (no implicit broadcasting): error: shape mismatch in add, lhs: [2, 3], rhs: [3]
+m.broadcast_add(row): ok
+m.broadcast_add([1, 2]): error: shape mismatch in broadcast_add, lhs: [2, 3], rhs: [2]
+m.matmul(m): error: shape mismatch in matmul, lhs: [2, 3], rhs: [2, 3]
+m.matmul(row): error: shape mismatch in matmul, lhs: [2, 3], rhs: [3]
+m.reshape((4, 2)): error: shape mismatch in reshape, lhs: [2, 3], rhs: [4, 2]
+m.reshape(((), 4)): error: cannot reshape tensor with 6 elements to ((), 4)
+col.broadcast_as((2, 3)): ok
+row.broadcast_as((3, 2)): error: cannot broadcast [3] to [3, 2]
+Tensor::cat(&[&m, &col], 0): error: shape mismatch in cat for dim 1, shape for arg 1: [2, 3] shape for arg 2: [2, 1]
+m.squeeze(0): ok
+
+== dimensions and indexes
+m.sum(2): error: sum: dimension index 2 out of range for shape [2, 3]
+row.dim(D::Minus2): error: dim: dimension index -2 out of range for shape [3]
+m.i(2): error: narrow invalid args start + len > dim_len: [2, 3], dim: 0, start: 2, len:1
+m.i((.., ..5)): error: narrow invalid args start + len > dim_len: [2, 3], dim: 1, start: 0, len:5
+m.narrow(1, 2, 2): error: narrow invalid args start + len > dim_len: [2, 3], dim: 1, start: 2, len:2
+m.index_select([0, 3], 1): error: index-select invalid index 3 with dim size 3
+m.i((0, 0, 0)): error: narrow: dimension index 0 out of range for shape []
+
+== dtypes
+row.to_vec1::<f64>(): error: unexpected dtype, expected: F64, got: F32
+row + ints: error: dtype mismatch in add, lhs: F32, rhs: U32
+ints.matmul(ints): error: unsupported dtype U32 for op matmul
+ints.sqrt(): panic: not yet implemented: no unary function for u32
+m.index_select(f32 ids, 0): error: unsupported dtype F32 for op index-select
+m.to_scalar::<f32>(): error: unexpected rank, expected: 0, got: 2 ([2, 3])
+
+== a shape that doesn't match the data (issue #3812, fixed after 0.11.0)
+from_vec(5 values, (2, 3)): ok, dims [2, 3], elem_count 6
+short.sum_all(): panic: range end index 6 out of range for slice of length 5
+
+== seeds
+Device::Cpu.set_seed(42): error: cannot seed the CPU rng with set_seed
+exit 0

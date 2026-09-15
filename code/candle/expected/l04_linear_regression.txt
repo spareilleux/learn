@@ -1,0 +1,19 @@
+== closed form in plain Rust, f64, 52 builds
+seconds = 0.041707 * pages + 9.708880
+
+== gradient of the loss at w = 0, b = 0, raw pages
+candle:  loss 314.923077, dw -6724.461538, db -34.769231
+by hand:              dw -6724.461538, db -34.769231
+ix:      loss 314.923077, dw -6724.461538, db -34.769231
+candle and ix agree to 1e-9: true
+tape nodes in ix: 10, nodes behind candle's loss: 11
+gradients ix computed: 10, gradients candle kept: 4
+
+== gradient descent with Var::set, raw pages
+learning rate 3e-5: step 1 loss 4.957e2 step 10 loss 3.373e4 step 1000 loss 4.538e207 -> w -3.4661e101, b -1.6887e99
+learning rate 1e-5: step 1 loss 3.354e1 step 10 loss 1.565e1 step 1000 loss 1.561e1 -> w 8.8911e-2, b 2.0477e-2
+
+== gradient descent with Var::set, standardized pages, learning rate 0.1, 100 steps
+F64: ws 2.605694, bs 17.384615 -> w 0.041707, b 9.708880, gap to the closed form 2.0e-9
+F32: ws 2.605694, bs 17.384611 -> w 0.041707, b 9.708877, gap to the closed form 2.8e-6
+exit 0

@@ -1,0 +1,18 @@
+# Candle course: one workspace, one member per batch of lessons that needs its own dependencies.
+# Candle is pinned to the version published on crates.io; its sources are at
+# https://github.com/huggingface/candle/tree/31f35b147389700ed2a178ee66a91c3cc25cc80d (tag 0.11.0).
+[workspace]
+members = ["course"]
+resolver = "3"
+
+[workspace.package]
+edition = "2024"
+publish = false
+
+[workspace.dependencies]
+candle-core = "=0.11.0"
+candle-nn = "=0.11.0"
+anyhow = "1"
+# IX pinned on the commit the machine learning course uses: https://github.com/GuitarAlchemist/ix/commit/490c39533627d296bf9f8f050e6fafc14d7a20c2
+ix-autograd = { git = "https://github.com/GuitarAlchemist/ix", rev = "490c39533627d296bf9f8f050e6fafc14d7a20c2" }
+ndarray = "0.17"

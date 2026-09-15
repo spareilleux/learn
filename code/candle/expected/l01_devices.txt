@@ -1,0 +1,8 @@
+cuda feature:       false
+metal feature:      false
+mkl feature:        false
+accelerate feature: false
+Device::new_cuda(0): error: the candle crate has not been built with cuda support
+Device::new_metal(0): error: the candle crate has not been built with metal support
+Device::cuda_if_available(0): Cpu
+exit 0

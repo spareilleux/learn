@@ -1,0 +1,17 @@
+== exercise 1: b x a, then b x a transposed
+b.matmul(&a): error: shape mismatch in matmul, lhs: [3, 4], rhs: [2, 3]
+[[20., 56.],
+ [23., 68.],
+ [26., 80.],
+ [29., 92.]]
+Tensor[[4, 2], f32]
+b.t() x a.t() equals (a x b).t(): true
+
+== exercise 2: matmul on each dtype
+F64: ok, first row [20.0, 23.0, 26.0, 29.0]
+F16: ok, first row [20.0, 23.0, 26.0, 29.0]
+BF16: error: unsupported dtype BF16 for op matmul
+U32: error: unsupported dtype U32 for op matmul
+I64: error: unsupported dtype I64 for op matmul
+U8: error: unsupported dtype U8 for op matmul
+exit 0
