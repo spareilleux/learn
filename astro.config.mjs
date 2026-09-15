@@ -82,6 +82,12 @@ export default defineConfig({
 									collapsed: true,
 									items: [{ autogenerate: { directory: 'javascript-for-csharp-java' } }],
 								},
+								{
+									label: 'TypeScript for C#/Java developers',
+									translations: { fr: 'TypeScript pour développeurs C#/Java', es: 'TypeScript para desarrolladores C#/Java' },
+									collapsed: true,
+									items: [{ autogenerate: { directory: 'typescript-for-csharp-java' } }],
+								},
 							],
 						},
 						{

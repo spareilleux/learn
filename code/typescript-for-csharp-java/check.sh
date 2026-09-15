@@ -67,6 +67,9 @@ done
 run l02_inference_dts . node -e "process.stdout.write(require('node:fs').readFileSync('out/dts/examples/l02_inference.d.ts', 'utf8'))"
 
 # Lesson 1
+rm -rf out/init && mkdir -p out/init
+run l01_init out/init "../../$tsc" --init
+run l01_init_file out/init node -e "process.stdout.write(require('node:fs').readFileSync('tsconfig.json', 'utf8'))"
 run l01_tsc_file . "$tsc" examples/l01_order.ts
 run l01_enum_tsx . "$tsx" errors/l01_enum.ts
 run l01_enum_transform . node --experimental-transform-types errors/l01_enum.ts
