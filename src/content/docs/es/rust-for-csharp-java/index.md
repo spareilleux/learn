@@ -1,6 +1,6 @@
 ---
 title: Rust para desarrolladores C#/Java — Misión
-description: Aprende Rust desde cero, apoyándote en lo que ya sabes de C# y Java.
+description: Aprende Rust desde cero, apoyándote en lo que ya sabes de C# y Java, y luego construye una aplicación de escritorio con Tauri.
 sidebar:
   label: Misión
   order: 0
@@ -8,12 +8,15 @@ sidebar:
 
 :::note[Versión estudiada]
 Rust **1.94.0**, edición **2024**. Cada ejemplo de código de este curso se compila y ejecuta en CI desde [`code/rust-for-csharp-java`](https://github.com/spareilleux/learn/tree/main/code/rust-for-csharp-java); cada fragmento «esto no compila» es un doctest `compile_fail`.
+
+La parte 2 fija **Tauri 2.11.5**. Su aplicación, [`code/rust-for-csharp-java/l16-tauri`](https://github.com/spareilleux/learn/tree/main/code/rust-for-csharp-java/l16-tauri), de momento se compila y prueba en Windows; aún no forma parte de las ejecuciones de CI, y Linux y macOS están *por verificar*.
 :::
 
 ## Por qué aprendo esto
 
 Escribo C# (y leo mucho Java), y una parte creciente de mi ecosistema — [IX](https://github.com/GuitarAlchemist/ix), [hari](https://github.com/GuitarAlchemist/hari) — está escrita en Rust.
 Quiero leer y modificar ese código con seguridad en lugar de adivinar, y entender *por qué* el compilador rechaza lo que sería perfectamente válido en C#.
+Después quiero saber si Rust es una opción seria para las aplicaciones de escritorio que, si no, escribiría con [WPF](https://learn.microsoft.com/dotnet/desktop/wpf/overview/), [.NET MAUI](https://learn.microsoft.com/dotnet/maui/what-is-maui), [JavaFX](https://openjfx.io/) o [Electron](https://www.electronjs.org/).
 
 ## Para quién es este curso
 
@@ -28,9 +31,13 @@ Nunca has escrito Rust. Cada lección parte del concepto que ya conoces y muestr
 - gestionar errores con `Option`, `Result` y `?` en lugar de `null` y excepciones;
 - usar traits, genéricos e iteradores como uso interfaces, genéricos y LINQ/Streams;
 - escribir código concurrente y asíncrono seguro;
-- probar, documentar y analizar (lint) un crate.
+- probar, documentar y analizar (lint) un crate;
+- elegir entre los toolkits de interfaz de escritorio de Rust, y construir una aplicación Tauri cuya interfaz web llama a comandos Rust, comparte estado y recibe eventos y flujos;
+- asegurar, probar y empaquetar esa aplicación para Windows, Linux y macOS.
 
 ## Plan
+
+### Parte 1 — El lenguaje
 
 | # | Lección | Ya conoces |
 |---|---|---|
@@ -49,6 +56,19 @@ Nunca has escrito Rust. Cada lección parte del concepto que ya conoces y muestr
 | 13 | [`async` y tokio](13-async-and-tokio/) | `async`/`await`, `CompletableFuture` |
 | 14 | [Tests, docs, clippy, fmt](14-tests-docs-tooling/) | [xUnit](https://xunit.net/)/[JUnit](https://junit.org/), documentación XML/[Javadoc](https://docs.oracle.com/en/java/javase/25/javadoc/), analizadores |
 | 15 | [Macros, `unsafe` y FFI](15-macros-unsafe-ffi/) (panorama) | [generadores de código fuente](https://learn.microsoft.com/dotnet/csharp/roslyn-sdk/source-generators-overview), [P/Invoke](https://learn.microsoft.com/dotnet/standard/native-interop/pinvoke), [JNI](https://docs.oracle.com/en/java/javase/25/docs/specs/jni/index.html) |
+
+### Parte 2 — Aplicaciones de escritorio con Tauri
+
+Las seis lecciones construyen una sola aplicación, un explorador de acordes, en [`l16-tauri`](https://github.com/spareilleux/learn/tree/main/code/rust-for-csharp-java/l16-tauri).
+
+| # | Lección | Ya conoces |
+|---|---|---|
+| 16 | [Interfaces de escritorio en Rust, y luego Tauri](16-desktop-ui-and-tauri/) | WPF, MAUI, JavaFX, Electron |
+| 17 | [Comandos de Tauri](17-tauri-commands/) | los comandos de WPF, los controladores, `ipcMain.handle` de Electron |
+| 18 | [Estado, eventos y canales](18-tauri-state-events-channels/) | singletons de inyección de dependencias, messengers, [`IProgress<T>`](https://learn.microsoft.com/dotnet/api/system.iprogress-1) |
+| 19 | El frontend: Vite, TypeScript y tipos generados desde Rust (próximamente) | un cliente TypeScript generado a partir de una descripción de API |
+| 20 | Seguridad: capabilities, CSP y plugins (próximamente) | el aislamiento de contexto de Electron, los permisos de las aplicaciones |
+| 21 | Tests y empaquetado (próximamente) | [MSIX](https://learn.microsoft.com/windows/msix/overview), [`jpackage`](https://docs.oracle.com/en/java/javase/25/docs/specs/man/jpackage.html), instaladores |
 
 Un curso de continuación, **Rust en la práctica: IX y compañía**, aplica cada una de estas ideas a código real de IX, hari y mis otros repositorios Rust.
 
