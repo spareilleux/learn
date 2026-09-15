@@ -1,0 +1,12 @@
+mission.describe()                 'Mission is a page'
+Object.keys(mission)               [ 'title' ]
+Object.hasOwn(mission, 'kind')     false
+getPrototypeOf(mission) === base   true
+mission.describe()                 'Mission is a lesson'
+base.kind                          'page'
+journal.describe()                 'Journal, page, changed at run time'
+getPrototypeOf(base)               [Object: null prototype] {}
+getPrototypeOf(Object.prototype)   null
+'toString' in {}                   true
+'toString' in dictionary           false
+exit 0

@@ -1,0 +1,13 @@
+2n ** 64n                          18446744073709551616n
+7n / 2n                            3n
+typeof 7n                          'bigint'
+BigInt(2 ** 53) + 1n               9007199254740993n
+1n + 1                             TypeError: Cannot mix BigInt and other types, use explicit conversions
+1n + BigInt(1)                     2n
+1n == 1                            true
+1n === 1                           false
+Number(2n ** 64n)                  18446744073709552000
+BigInt(1.5)                        RangeError: The number 1.5 cannot be converted to a BigInt because it is not an integer
+JSON.stringify({ id: 1n })         TypeError: Do not know how to serialize a BigInt
+Math.max(1n, 2n)                   TypeError: Cannot convert a BigInt value to a number
+exit 0

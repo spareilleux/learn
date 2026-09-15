@@ -1,0 +1,15 @@
+notAssigned                        undefined
+page.author                        undefined
+noReturn()                         undefined
+greet()                            undefined
+page.draft                         null
+typeof page.draft                  'object'
+page.author.name                   TypeError: Cannot read properties of undefined (reading 'name')
+page.author?.name                  undefined
+page.author ?? 'anonymous'         'anonymous'
+page.order || 99                   99
+page.order ?? 99                   0
+JSON.stringify(page)               '{"title":"Mission","order":0,"draft":null}'
+null == undefined                  true
+null === undefined                 false
+exit 0

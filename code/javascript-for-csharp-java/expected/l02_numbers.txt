@@ -1,0 +1,23 @@
+0.1 + 0.2                          0.30000000000000004
+7 / 2                              3.5
+Math.trunc(-7 / 2)                 -3
+Math.floor(-7 / 2)                 -4
+-7 % 2                             -1
+1 / 0                              Infinity
+0 / 0                              NaN
+NaN === NaN                        false
+Number.isNaN(NaN)                  true
+isNaN('abc')                       true
+Number.isNaN('abc')                false
+Number.MAX_SAFE_INTEGER            9007199254740991
+2 ** 53 + 1                        9007199254740992
+2 ** 53 + 1 === 2 ** 53            true
+9007199254740993                   9007199254740992
+Number.isSafeInteger(2 ** 53)      false
+2 ** 31 | 0                        -2147483648
+(2 ** 32 + 5) | 0                  5
+-0                                 -0
+-0 === 0                           true
+Object.is(-0, 0)                   false
+(0.1 + 0.2).toFixed(2)             '0.30'
+exit 0

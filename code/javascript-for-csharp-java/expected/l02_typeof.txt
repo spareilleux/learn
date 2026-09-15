@@ -1,0 +1,14 @@
+typeof value                       'number'
+typeof value                       'string'
+typeof undefined                   'undefined'
+typeof true                        'boolean'
+typeof 3.14                        'number'
+typeof 10n                         'bigint'
+typeof 'text'                      'string'
+typeof Symbol()                    'symbol'
+typeof {}                          'object'
+typeof []                          'object'
+typeof null                        'object'
+typeof (() => 1)                   'function'
+Array.isArray([])                  true
+exit 0

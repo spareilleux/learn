@@ -1,0 +1,13 @@
+page                               { title: 'Mission', locale: 'en' }
+page.author                        undefined
+'title' in page                    true
+Object.hasOwn(page, 'title')       true
+grid                               { '1': 'one, again', '[object Object]': 'another object' }
+Object.keys(lessons)               [ '2', '10', 'journal', 'index' ]
+lesson.describe()                  'Values and types (draft)'
+Object.entries(lesson)             [
+  [ 'title', 'Values and types' ],
+  [ 'draft', true ],
+  [ 'describe', [Function: describe] ]
+]
+exit 0

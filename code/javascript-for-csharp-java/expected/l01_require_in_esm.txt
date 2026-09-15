@@ -1,0 +1,9 @@
+errors/l01_require_in_esm.js:2
+const fs = require('node:fs');
+           ^
+
+ReferenceError: require is not defined in ES module scope, you can use import instead
+This file is being treated as an ES module because it has a '.js' file extension and 'package.json' contains "type": "module". To treat it as a CommonJS script, rename it to use the '.cjs' file extension.
+
+Node.js v24.21.0
+exit 1

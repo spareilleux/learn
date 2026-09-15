@@ -1,0 +1,54 @@
+# JavaScript course: run every example, error snippet and solution with Node.js on three OSes and compare the output,
+# run the C# and Java sides of the comparisons, and print what lesson 1 shows about npm on each OS
+name: JavaScript course examples
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['code/javascript-for-csharp-java/**', '.github/workflows/javascript-examples.yml']
+  pull_request:
+    paths: ['code/javascript-for-csharp-java/**', '.github/workflows/javascript-examples.yml']
+
+permissions:
+  contents: read
+
+env:
+  NODE_VERSION: 24.21.0
+
+jobs:
+  javascript:
+    name: javascript (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: '10.0.x'
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '25'
+      - name: Toolchain
+        run: node --version && npm --version && dotnet --version && java --version
+      # Lesson 1 shows these: npm init, and a package restricted to one OS installed as a devDependency
+      - name: Lesson 1 npm commands, for information
+        working-directory: ${{ runner.temp }}
+        run: |
+          mkdir npm-init && cd npm-init
+          npm init -y
+          npm install --save-dev @esbuild/win32-x64@0.25.12 && echo "npm installed @esbuild/win32-x64" || echo "npm refused @esbuild/win32-x64 (exit $?)"
+      - name: Examples, errors, solutions and comparisons
+        env:
+          REQUIRE_COMPARE: '1'
+        run: bash code/javascript-for-csharp-java/check.sh

@@ -1,0 +1,8 @@
+square(4)                          16
+withVar()                          [ undefined, 10 ]
+withLet()                          ReferenceError: Cannot access 'total' before initialization
+typeof total, in the TDZ           ReferenceError: Cannot access 'total' before initialization
+typeof neverDeclared               'undefined'
+new Later()                        ReferenceError: Cannot access 'Later' before initialization
+blocks()                           [ 'visible', 'undefined' ]
+exit 0

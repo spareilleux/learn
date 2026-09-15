@@ -1,0 +1,19 @@
+values.describe()                  'Values and types (25 min)'
+quiz.describe()                    'Coercions (10 min), with a solution'
+values                             Lesson { title: 'Values and types' }
+Object.keys(quiz)                  [ 'title', 'solution' ]
+Lesson.count                       2
+values.minutes = 'ten'             RangeError: minutes must be a non-negative integer, got ten
+values.minutes                     25
+typeof Lesson                      'function'
+Object.hasOwn(values, 'describe')  false
+values.describe === proto.describe true
+quiz.describe === proto.describe   false
+quiz instanceof Lesson             true
+Lesson('no new')                   TypeError: Class constructor Lesson cannot be invoked without 'new'
+Lesson.isLesson(quiz)              true
+Lesson.isLesson({ minutes: 5 })    false
+Object.hasOwn(values, '#minutes')  false
+JSON.stringify(values)             '{"title":"Values and types"}'
+proto.describe.call({ title })     TypeError: Cannot read private member #minutes from an object whose class did not declare it
+exit 0

@@ -1,0 +1,7 @@
+read()                             TypeError: Cannot read properties of undefined (reading 'note')
+readArrow()                        'E'
+read.call({ note: 'A' })           'A'
+readArrow.call({ note: 'A' })      'E'
+tuner.read === other.read          true
+readArrow === other.readArrow      false
+exit 0

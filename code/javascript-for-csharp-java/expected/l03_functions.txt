@@ -1,0 +1,17 @@
+add(2, 3)                          5
+subtract(2, 3)                     -1
+multiply(2, 3)                     6
+add(2)                             NaN
+add(2, 3, 4)                       5
+add.length                         2
+greet()                            'Hello, reader!'
+greet('Hopper', 'Admiral')         'Hello, Admiral Hopper!'
+greet(undefined)                   'Hello, reader!'
+greet(null)                        'Hello, !'
+overloads()                        'page mission in undefined'
+Object.keys(operations)            [ 'add', 'subtract', 'multiply' ]
+[1, 2, 3].map(multiply)            [ 0, 2, 6 ]
+['1', '2', '3'].map(parseInt)      [ 1, NaN, NaN ]
+typeof add                         'function'
+add.name                           'add'
+exit 0

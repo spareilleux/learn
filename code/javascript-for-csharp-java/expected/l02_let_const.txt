@@ -1,0 +1,6 @@
+count                              2
+settings                           { theme: 'light', tabs: [ 'lessons', 'journal' ] }
+settings = {}                      TypeError: Assignment to constant variable.
+frozen.theme = 'light'             TypeError: Cannot assign to read only property 'theme' of object '#<Object>'
+frozen                             { theme: 'dark', tabs: [ 'lessons', 'journal' ] }
+exit 0

@@ -1,0 +1,16 @@
+course.length                      10
+course[4]                          'S'
+course.at(-1)                      't'
+`${course} for C#`                 'JavaScript for C#'
+course[0] = 'X'                    TypeError: Cannot assign to read only property '0' of string 'JavaScript'
+'é'.length                         1
+'e\u0301'.length                   2
+'é' === 'e\u0301'                  false
+'e\u0301'.normalize() === 'é'      true
+'🎸'.length                        2
+[...'🎸'].length                   1
+'🎸'.codePointAt(0)                127928
+'b' > 'a'                          true
+'B' > 'a'                          false
+'10' < '9'                         true
+exit 0

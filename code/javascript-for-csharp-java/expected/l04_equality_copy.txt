@@ -1,0 +1,19 @@
+a === b                            false
+a === a                            true
+visits.size                        2
+visits.get({ x: 1, y: 2 })         undefined
+byKey.get('1,2')                   'first'
+course.title                       'JavaScript'
+course.tags                        [ 'node', 'typescript' ]
+course.tags                        [ 'node', 'typescript' ]
+deep.created instanceof Date       true
+cloned                             { x: 3, y: 4 }
+cloned instanceof Point            false
+structuredClone({ f() {} })        DataCloneError: f() {} could not be cloned.
+viaJson                            {
+  title: 'JavaScript',
+  tags: [ 'node', 'typescript' ],
+  created: '2026-09-14T00:00:00.000Z'
+}
+frozen.tags                        [ 'node', 'still mutable' ]
+exit 0

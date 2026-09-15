@@ -1,0 +1,11 @@
+"8080"     8080
+"443"      443
+""         TypeError: not a port: ""
+" 80"      TypeError: not a port: " 80"
+"8080abc"  TypeError: not a port: "8080abc"
+"0x50"     TypeError: not a port: "0x50"
+"1e3"      TypeError: not a port: "1e3"
+"70000"    RangeError: port out of range: 70000
+"0"        RangeError: port out of range: 0
+8080       TypeError: not a port: 8080
+exit 0

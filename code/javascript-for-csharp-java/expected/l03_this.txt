@@ -1,0 +1,18 @@
+lesson.whoAmI()                    'lesson'
+whoAmI()                           undefined
+detached()                         undefined
+whoAmI.call(journal)               'journal'
+whoAmI.apply(journal, [])          'journal'
+bound()                            'journal'
+lesson.bound()                     'journal'
+bound.call(lesson)                 'journal'
+new Page('index')                  Page { name: 'index' }
+new BoundPage('index')             Page { name: 'index' }
+journal, unchanged                 { name: 'journal' }
+site.withArrow()                   [ 'site/mission', 'site/journal' ]
+site.withFunction()                [ 'undefined/mission', 'undefined/journal' ]
+site.arrowMethod()                 'undefined'
+['C'].map(player.play)             TypeError: Cannot read properties of undefined (reading 'name')
+['C'].map(() => player.play())     [ 'GA plays' ]
+['C'].map(play)                    [ 'GA plays' ]
+exit 0

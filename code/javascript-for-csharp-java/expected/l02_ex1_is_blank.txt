@@ -1,0 +1,11 @@
+isBlank(null)                      true
+isBlank(undefined)                 true
+isBlank('')                        true
+isBlank('   ')                     true
+isBlank('\t\n')                    true
+isBlank('text')                    false
+isBlank(0)                         false
+isBlank(false)                     false
+isBlank(NaN)                       false
+isBlank([])                        false
+exit 0

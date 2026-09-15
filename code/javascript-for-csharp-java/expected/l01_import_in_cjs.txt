@@ -1,0 +1,10 @@
+(node:PID) Warning: Failed to load the ES module: errors/l01_import_in_cjs.cjs. Make sure to set "type": "module" in the nearest package.json file or use the .mjs extension.
+(Use `node --trace-warnings ...` to show where the warning was created)
+errors/l01_import_in_cjs.cjs:2
+import { readFileSync } from 'node:fs';
+^^^^^^
+
+SyntaxError: Cannot use import statement outside a module
+
+Node.js v24.21.0
+exit 1
