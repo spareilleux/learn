@@ -32,7 +32,8 @@ public static class Lesson7
     // The exception types from the outside in: AggregateException > PitchClassSetParseException
     static string Chain(Exception e) => e.InnerException is { } inner ? $"{e.GetType().Name} > {Chain(inner)}" : e.GetType().Name;
 
-    static string Named(PitchClassSet set) => $"{set.Name} ({ProgrammaticForteCatalog.GetForteNumber(set)})";
+    // The set and its label in Allen Forte's catalog (GA's ProgrammaticForteCatalog numbers set classes in another order)
+    static string Named(PitchClassSet set) => $"{set.Name} ({(CanonicalForteCatalog.TryGetForteLabel(set, out var label) ? label : "?")})";
 
     static void Assemblies()
     {
@@ -66,6 +67,8 @@ public static class Lesson7
         }
 
         Line($"Completion: parse {parse.Completion.Status}, describe {describe.Completion.Status}, batch {batch.Completion.Status}, write {write.Completion.Status}");
+        var labels = Progression.Select(s => PitchClassSet.Parse(s)).Select(set => $"{set.Name}: {ProgrammaticForteCatalog.GetForteNumber(set)}");
+        Line($"the same sets in GA's ProgrammaticForteCatalog: {string.Join(", ", labels)}");
     }
 
     // Item 0 runs until the test releases it, after items 1 to 3 have finished: what can a consumer receive meanwhile?

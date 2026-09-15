@@ -3,10 +3,11 @@
 TransformBlock<,>: System.Threading.Tasks.Dataflow, in the shared framework True
 
 == A pipeline: parse, describe, batch by 3, write
-[0 2 5 9 (4-3), 2 5 7 E (4-2), 0 4 7 E (4-9)]
-[0 4 7 9 (4-3), 0 2 5 9 (4-3), 2 5 7 E (4-2)]
-[0 4 7 E (4-9)]
+[0 2 5 9 (4-26), 2 5 7 E (4-27), 0 4 7 E (4-20)]
+[0 4 7 9 (4-26), 0 2 5 9 (4-26), 2 5 7 E (4-27)]
+[0 4 7 E (4-20)]
 Completion: parse RanToCompletion, describe RanToCompletion, batch RanToCompletion, write RanToCompletion
+the same sets in GA's ProgrammaticForteCatalog: 0 2 5 9: 4-3, 2 5 7 E: 4-2, 0 4 7 E: 4-9, 0 4 7 9: 4-3
 
 == MaxDegreeOfParallelism 4: items 1 to 3 have finished, item 0 is still running
 EnsureOrdered = True   received while item 0 runs: nothing  then: 0 1 2 3
