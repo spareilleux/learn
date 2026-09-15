@@ -22,6 +22,12 @@ sidebar:
 - [x] Lesson 13 — `async` and tokio
 - [x] Lesson 14 — Tests, docs, clippy, fmt
 - [x] Lesson 15 — Macros, `unsafe` and FFI
+- [x] Lesson 16 — Desktop UI in Rust, then Tauri
+- [x] Lesson 17 — Tauri commands
+- [x] Lesson 18 — State, events and channels
+- [ ] Lesson 19 — The frontend: Vite, TypeScript and generated types
+- [ ] Lesson 20 — Security: capabilities, CSP and plugins
+- [ ] Lesson 21 — Tests and packaging
 
 ## 2026-09-13 — Lessons 1 to 4
 
@@ -92,6 +98,31 @@ The core course is complete. The code now has tokio as a dev-dependency, two mor
 - `cargo fmt` had never been run on this course: 30 formatting differences in twelve lessons of examples.
 - Hello world in release mode: about 130 KB on Windows, 430–460 KB on Linux and macOS (CI runners, Cargo 1.98.1).
 
+## 2026-09-15 — Lessons 16 to 18: desktop applications with Tauri
+
+Part 2 starts. The course now builds a chord explorer with Tauri 2.11.5 in `l16-tauri`, a separate workspace with its own `Cargo.lock` and `package-lock.json`. It is built and tested on Windows only so far: the CI job for the three operating systems is written but not running yet.
+
+**Things I got wrong first:**
+
+- The first `cargo test` of the Tauri app compiled, then every test executable died with `STATUS_ENTRYPOINT_NOT_FOUND` before running a test. `tauri-build` embeds the Common Controls v6 manifest in the binaries only ([tauri#13419](https://github.com/tauri-apps/tauri/issues/13419), open since May 2025). The fix in `build.rs` passes the same manifest to the linker for test targets with `cargo:rustc-link-arg-tests`.
+- The page showed `undefined: undefined` for some errors: when Tauri refuses a call itself (unknown command, invalid arguments), the promise rejects with a **string**, not with the command's error object.
+- My first script to drive the window through the DevTools protocol connected to `127.0.0.1:9222`, where another program on this machine was already listening; the WebView2 instance was on `[::1]:9222`. Nothing was sent to the wrong target; the script now names `[::1]`, and later runs used another port.
+- My `tauri dev` wrapper waited for the line ``Running ` ``, which never matched because Cargo colours its output: the wait needs to strip the escape codes.
+
+**Surprises:**
+
+- A synchronous command runs on the main thread. During a one-second search, the page's JavaScript timers kept ticking (the webview is another process), but the native window did not answer `WM_NULL` for 945 ms, and every other command waited.
+- Forgetting `.manage()` compiles; the call is rejected at run time with `state not managed for field …`. Tauri's guide says a mismatched `State` type panics: in 2.11.5 a command rejects instead, and only `Manager::state` panics.
+- `#[tauri::command]` turns mistakes into unusual compile errors: `blocking_kind … IpcResponse` for a return type without `Serialize`, `E0255 __cmd__…` for a `pub` command at the crate root, `AsyncCommandMustReturnResult` for an `async` command that borrows.
+- The release executable is 4.2 MB, against 385 MB for an unpacked Electron 44.3.0; with the window open, the Rust process uses 5.6 MB of private memory and WebView2's six processes about 170 MB.
+- `create-tauri-app` 4.7.4 prints `npm run tauri android init` as the first step of a desktop project, and its template uses edition 2021 and `"csp": null`.
+
+**Found in Tauri's documentation** (tauri-docs at `a6b59b7`): the *Calling Rust* page's error example `Ok(format!(value))` does not compile; its `AppHandle` example uses Tauri 1 APIs (`GlobalShortcutManager`, `app_dir`); the *State management* page's runtime panic for a mismatched type, above.
+
+**Dogfooding IX** (`crates/ix-demo` at `a7e5fbc`, read, not changed): every computation runs inside egui's `ui`, on the drawing thread (58 `clicked()` handlers, no thread or channel); the *Neural Network (ix-nn)* tab trains its own `ndarray` network instead of calling `ix-nn`; the layer list typed by the user silently drops invalid entries; `eframe = "0.31"` while 0.36.2 is current, with no committed `Cargo.lock`.
+
 ## Open questions
 
+- Does the explorer build and run under WSLg, on Ubuntu with WebKitGTK 4.1, and on macOS? (*to verify*: the CI job is ready but not running.)
+- Does Tauri 3's `tauri-runtime-cef` change the size and memory numbers enough to matter? It is an alpha as of 2026-09-13.
 - How does `rust-analyzer` in RustRover compare with VS Code for these exercises?

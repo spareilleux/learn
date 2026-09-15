@@ -1,6 +1,6 @@
 ---
 title: Rust for C#/Java developers — Mission
-description: Learn Rust from scratch, building on what you already know from C# and Java.
+description: Learn Rust from scratch, building on what you already know from C# and Java, then build a desktop application with Tauri.
 sidebar:
   label: Mission
   order: 0
@@ -8,12 +8,15 @@ sidebar:
 
 :::note[Version studied]
 Rust **1.94.0**, edition **2024**. Every code sample in this course is compiled and run in CI from [`code/rust-for-csharp-java`](https://github.com/spareilleux/learn/tree/main/code/rust-for-csharp-java); every "this does not compile" snippet is a `compile_fail` doctest.
+
+Part 2 pins **Tauri 2.11.5**. Its application, [`code/rust-for-csharp-java/l16-tauri`](https://github.com/spareilleux/learn/tree/main/code/rust-for-csharp-java/l16-tauri), is built and tested on Windows so far; it is not part of the CI runs yet, and Linux and macOS are *to verify*.
 :::
 
 ## Why I'm learning this
 
 I write C# (and read plenty of Java), and a growing part of my ecosystem — [IX](https://github.com/GuitarAlchemist/ix), [hari](https://github.com/GuitarAlchemist/hari) — is written in Rust.
 I want to read and change that code with confidence instead of guessing, and understand *why* the compiler rejects what would be perfectly fine in C#.
+Then I want to know whether Rust is a serious option for the desktop applications I would otherwise write with [WPF](https://learn.microsoft.com/dotnet/desktop/wpf/overview/), [.NET MAUI](https://learn.microsoft.com/dotnet/maui/what-is-maui), [JavaFX](https://openjfx.io/) or [Electron](https://www.electronjs.org/).
 
 ## Who this course is for
 
@@ -28,9 +31,13 @@ You have never written Rust. Each lesson starts from the concept you already kno
 - handle errors with `Option`, `Result` and `?` instead of `null` and exceptions;
 - use traits, generics and iterators the way I use interfaces, generics and LINQ/Streams;
 - write safe concurrent and async code;
-- test, document and lint a crate.
+- test, document and lint a crate;
+- choose between Rust's desktop UI toolkits, and build a Tauri application whose web UI calls Rust commands, shares state and receives events and streams;
+- secure, test and package that application for Windows, Linux and macOS.
 
 ## Outline
+
+### Part 1 — The language
 
 | # | Lesson | You already know |
 |---|---|---|
@@ -49,6 +56,19 @@ You have never written Rust. Each lesson starts from the concept you already kno
 | 13 | [`async` and tokio](13-async-and-tokio/) | `async`/`await`, `CompletableFuture` |
 | 14 | [Tests, docs, clippy, fmt](14-tests-docs-tooling/) | [xUnit](https://xunit.net/)/[JUnit](https://junit.org/), XML docs/[Javadoc](https://docs.oracle.com/en/java/javase/25/javadoc/), analyzers |
 | 15 | [Macros, `unsafe` and FFI](15-macros-unsafe-ffi/) (overview) | [source generators](https://learn.microsoft.com/dotnet/csharp/roslyn-sdk/source-generators-overview), [P/Invoke](https://learn.microsoft.com/dotnet/standard/native-interop/pinvoke), [JNI](https://docs.oracle.com/en/java/javase/25/docs/specs/jni/index.html) |
+
+### Part 2 — Desktop applications with Tauri
+
+The six lessons build one application, a chord explorer, in [`l16-tauri`](https://github.com/spareilleux/learn/tree/main/code/rust-for-csharp-java/l16-tauri).
+
+| # | Lesson | You already know |
+|---|---|---|
+| 16 | [Desktop UI in Rust, then Tauri](16-desktop-ui-and-tauri/) | WPF, MAUI, JavaFX, Electron |
+| 17 | [Tauri commands](17-tauri-commands/) | WPF commands, controllers, Electron's `ipcMain.handle` |
+| 18 | [State, events and channels](18-tauri-state-events-channels/) | DI singletons, messengers, [`IProgress<T>`](https://learn.microsoft.com/dotnet/api/system.iprogress-1) |
+| 19 | The frontend: Vite, TypeScript and types generated from Rust (coming) | a TypeScript client generated from an API description |
+| 20 | Security: capabilities, CSP and plugins (coming) | Electron's context isolation, app permissions |
+| 21 | Tests and packaging (coming) | [MSIX](https://learn.microsoft.com/windows/msix/overview), [`jpackage`](https://docs.oracle.com/en/java/javase/25/docs/specs/man/jpackage.html), installers |
 
 A follow-up course, **Rust in practice: IX and co**, applies each of these ideas to real code in IX, hari and my other Rust repositories.
 
