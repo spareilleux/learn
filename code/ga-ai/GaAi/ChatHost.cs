@@ -20,6 +20,19 @@ public sealed class ChatHost : WebApplicationFactory<Program>
     // Warnings and errors the host logs, kept to explain failed requests
     public ConcurrentQueue<(LogLevel Level, string Category, string Message, Exception? Exception)> Logs { get; } = new();
 
+    // IntentEmbeddingWarmupService embeds the intents' examples in the background when the host
+    // starts, and logs once when it is done. Its warnings would otherwise land in whichever request
+    // runs at that moment, which differs between operating systems.
+    const string WarmupCategory = "GA.Business.Core.Orchestration.Services.IntentEmbeddingWarmupService";
+    readonly TaskCompletionSource _warmedUp = new(TaskCreationOptions.RunContinuationsAsynchronously);
+
+    public void WaitForWarmup()
+    {
+        if (!_warmedUp.Task.Wait(TimeSpan.FromMinutes(2)))
+            throw new TimeoutException("IntentEmbeddingWarmupService did not finish");
+        while (Logs.TryDequeue(out _)) { }
+    }
+
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.UseSetting("Chatbot:Mode", "full");
@@ -40,25 +53,28 @@ public sealed class ChatHost : WebApplicationFactory<Program>
         {
             logging.ClearProviders();
             logging.SetMinimumLevel(LogLevel.Warning);
-            logging.AddProvider(new QueueLoggerProvider(Logs));
+            logging.AddFilter(WarmupCategory, LogLevel.Information);
+            logging.AddProvider(new QueueLoggerProvider(Logs, _warmedUp));
         });
     }
 
-    sealed class QueueLoggerProvider(ConcurrentQueue<(LogLevel, string, string, Exception?)> queue) : ILoggerProvider
+    sealed class QueueLoggerProvider(ConcurrentQueue<(LogLevel, string, string, Exception?)> queue, TaskCompletionSource warmedUp) : ILoggerProvider
     {
-        public ILogger CreateLogger(string categoryName) => new QueueLogger(categoryName, queue);
+        public ILogger CreateLogger(string categoryName) => new QueueLogger(categoryName, queue, warmedUp);
         public void Dispose() { }
     }
 
-    sealed class QueueLogger(string category, ConcurrentQueue<(LogLevel, string, string, Exception?)> queue) : ILogger
+    sealed class QueueLogger(string category, ConcurrentQueue<(LogLevel, string, string, Exception?)> queue, TaskCompletionSource warmedUp) : ILogger
     {
         public IDisposable? BeginScope<TState>(TState state) where TState : notnull => null;
-        public bool IsEnabled(LogLevel logLevel) => logLevel >= LogLevel.Warning;
+        public bool IsEnabled(LogLevel logLevel) => logLevel >= LogLevel.Warning || category == WarmupCategory;
 
         public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception,
             Func<TState, Exception?, string> formatter)
         {
-            if (IsEnabled(logLevel)) queue.Enqueue((logLevel, category, formatter(state, exception), exception));
+            // "cache warmed in …ms" or "warmup failed": either way the warm-up is over
+            if (category == WarmupCategory) warmedUp.TrySetResult();
+            else if (logLevel >= LogLevel.Warning) queue.Enqueue((logLevel, category, formatter(state, exception), exception));
         }
     }
 }

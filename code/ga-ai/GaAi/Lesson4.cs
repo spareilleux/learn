@@ -25,6 +25,7 @@ public static class Lesson4
         EnsureIndex();
         using var host = new ChatHost();
         using var client = host.CreateClient();
+        host.WaitForWarmup();
         foreach (var prompt in Prompts)
         {
             Title($"POST /api/chatbot/chat \"{prompt}\"");

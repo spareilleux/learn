@@ -25,6 +25,7 @@ public static class Lesson2
         Schema();
         var embedded = Chords.Select(c => Voicings.Embed(c.Shape)).ToList();
         Documents(embedded);
+        PositionalRecords(embedded);
         Partitions(embedded[0]);
         Similarities(embedded);
         Transpositions();
@@ -62,6 +63,21 @@ public static class Lesson2
             Row(w, e.Shape, e.Voicing.Diagram, e.Analysis.ChordId.ChordName, Ints(e.Doc.PitchClasses),
                 Ints(e.Doc.MidiNotes), $"{e.Doc.RootPitchClass} {Voicings.NoteName(e.Doc.RootPitchClass ?? 0)}",
                 e.Doc.Inversion, e.Doc.IsRootless ? "yes" : "no", e.Doc.HarmonicFunction);
+    }
+
+    // VoicingCharacteristics and PerceptualQualities are positional records, and two of their
+    // constructor calls pass arguments in the wrong slots
+    static void PositionalRecords(List<Embedded> embedded)
+    {
+        Title("VoicingCharacteristics and PerceptualQualities, as VoicingAnalyzer fills them");
+        int[] w = [7, 7, 11, 9, 11, 12, 11];
+        Row(w, "shape", "span", "IsRootless", "IsOpen", "Consonance", "Brightness", "ConsonanceScore");
+        foreach (var e in embedded)
+        {
+            var c = e.Analysis.VoicingCharacteristics;
+            var p = e.Analysis.PerceptualQualities;
+            Row(w, e.Shape, c.IntervalSpread, c.IsRootless, c.IsOpenVoicing, c.Consonance, p.Brightness, p.ConsonanceScore);
+        }
     }
 
     static void Partitions(Embedded e)
