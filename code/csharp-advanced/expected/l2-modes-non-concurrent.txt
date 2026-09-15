@@ -1,0 +1,10 @@
+
+== GC mode
+GCSettings.IsServerGC: False
+GCSettings.LatencyMode: Batch
+GC.MaxGeneration: 2
+GC.GetConfigurationVariables()["ServerGC"]: False
+GC.GetConfigurationVariables()["ConcurrentGC"]: False
+GC.GetConfigurationVariables()["LOHThreshold"]: 85000
+GC.GetConfigurationVariables()["GCDynamicAdaptationMode"]: 1
+exit 0

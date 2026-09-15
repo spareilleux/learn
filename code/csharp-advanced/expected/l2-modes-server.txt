@@ -1,0 +1,10 @@
+
+== GC mode
+GCSettings.IsServerGC: True
+GCSettings.LatencyMode: Interactive
+GC.MaxGeneration: 2
+GC.GetConfigurationVariables()["ServerGC"]: True
+GC.GetConfigurationVariables()["ConcurrentGC"]: True
+GC.GetConfigurationVariables()["LOHThreshold"]: 85000
+GC.GetConfigurationVariables()["GCDynamicAdaptationMode"]: 1
+exit 0

@@ -1,0 +1,43 @@
+
+== GC mode
+GCSettings.IsServerGC: False
+GCSettings.LatencyMode: Interactive
+GC.MaxGeneration: 2
+GC.GetConfigurationVariables()["ServerGC"]: False
+GC.GetConfigurationVariables()["ConcurrentGC"]: True
+GC.GetConfigurationVariables()["LOHThreshold"]: 85000
+GC.GetConfigurationVariables()["GCDynamicAdaptationMode"]: 1
+
+== Generations: an object that survives a collection is promoted
+new int[3]           generation 0
+after GC.Collect()   generation 1
+after a second one   generation 2
+after a third one    generation 2
+GC.Collect(0) then new int[3]: generation 0
+
+== Large object heap: 85,000 bytes and more, counted with the object header
+new byte[   84,975]  object size    85,000  generation 0
+new byte[   84,976]  object size    85,000  generation 2
+new byte[1,000,000]  object size 1,000,024  generation 2
+new double[10,622]   object size    85,000  generation 2
+
+== Pinned object heap: GC.AllocateArray(pinned: true)
+pinned byte[1024]    generation 2
+ordinary byte[1024]  generation 0
+heaps in GCGenerationInfo: 5 (gen0, gen1, gen2, LOH, POH)
+
+== Reachability: a weak reference does not keep an object alive
+only weakly reachable:  IsAlive False
+still referenced:       IsAlive True (4 notes)
+
+== Finalizers: a finalizable object is freed one collection later
+after 1 collection:  finalized 1, short weak IsAlive False, long weak IsAlive True
+after 2 collections: finalized 1, short weak IsAlive False, long weak IsAlive False
+bytes of new Finalizable(): 24, of new object(): 24
+
+== GC.GetGCMemoryInfo after an induced, blocking, compacting collection
+Generation 2, Compacted True, Concurrent False
+
+== Allocation budget: many short-lived objects, few collections
+allocated 32,000,152 bytes for 1,000,000 arrays of 2 ints, 16 still referenced
+exit 0

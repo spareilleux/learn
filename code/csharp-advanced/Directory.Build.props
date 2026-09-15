@@ -1,0 +1,12 @@
+<Project>
+  <!-- Settings shared by the course projects (not by GA's projects, which have their own) -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>14</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <!-- The pinned Guitar Alchemist clone, fetched by fetch-ga.sh -->
+    <GaRoot>$(MSBuildThisFileDirectory).ga/</GaRoot>
+  </PropertyGroup>
+</Project>

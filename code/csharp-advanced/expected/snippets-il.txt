@@ -1,0 +1,424 @@
+// IL code: Snippets
+.class private auto ansi '<Module>'
+{
+} // end of class <Module>
+
+.class public auto ansi abstract sealed beforefieldinit Snippets.AsyncMachine
+	extends [System.Runtime]System.Object
+{
+	// Nested Types
+	.class nested private auto ansi sealed beforefieldinit '<AddLaterAsync>d__0'
+		extends [System.Runtime]System.ValueType
+		implements [System.Runtime]System.Runtime.CompilerServices.IAsyncStateMachine
+	{
+		.custom instance void [System.Runtime]System.Runtime.CompilerServices.CompilerGeneratedAttribute::.ctor() = (
+			01 00 00 00
+		)
+		// Fields
+		.field public int32 '<>1__state'
+		.field public valuetype [System.Runtime]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<int32> '<>t__builder'
+		.field public int32 left
+		.field public int32 right
+		.field private int32 '<sum>5__2'
+		.field private valuetype [System.Runtime]System.Runtime.CompilerServices.YieldAwaitable/YieldAwaiter '<>u__1'
+		.field private valuetype [System.Runtime]System.Runtime.CompilerServices.TaskAwaiter '<>u__2'
+
+		// Methods
+		.method private final hidebysig newslot virtual 
+			instance void MoveNext () cil managed 
+		{
+			.override method instance void [System.Runtime]System.Runtime.CompilerServices.IAsyncStateMachine::MoveNext()
+			// Header size: 12
+			// Code size: 275 (0x113)
+			.maxstack 3
+			.locals init (
+				[0] int32,
+				[1] int32,
+				[2] valuetype [System.Runtime]System.Runtime.CompilerServices.YieldAwaitable/YieldAwaiter,
+				[3] valuetype [System.Runtime]System.Runtime.CompilerServices.YieldAwaitable,
+				[4] valuetype [System.Runtime]System.Runtime.CompilerServices.TaskAwaiter,
+				[5] class [System.Runtime]System.Exception
+			)
+
+			IL_0000: ldarg.0
+			IL_0001: ldfld int32 Snippets.AsyncMachine/'<AddLaterAsync>d__0'::'<>1__state'
+			IL_0006: stloc.0
+			.try
+			{
+				IL_0007: ldloc.0
+				IL_0008: brfalse.s IL_004b
+
+				IL_000a: ldloc.0
+				IL_000b: ldc.i4.1
+				IL_000c: beq IL_00b8
+
+				IL_0011: call valuetype [System.Runtime]System.Runtime.CompilerServices.YieldAwaitable [System.Runtime]System.Threading.Tasks.Task::Yield()
+				IL_0016: stloc.3
+				IL_0017: ldloca.s 3
+				IL_0019: call instance valuetype [System.Runtime]System.Runtime.CompilerServices.YieldAwaitable/YieldAwaiter [System.Runtime]System.Runtime.CompilerServices.YieldAwaitable::GetAwaiter()
+				IL_001e: stloc.2
+				IL_001f: ldloca.s 2
+				IL_0021: call instance bool [System.Runtime]System.Runtime.CompilerServices.YieldAwaitable/YieldAwaiter::get_IsCompleted()
+				IL_0026: brtrue.s IL_0067
+
+				IL_0028: ldarg.0
+				IL_0029: ldc.i4.0
+				IL_002a: dup
+				IL_002b: stloc.0
+				IL_002c: stfld int32 Snippets.AsyncMachine/'<AddLaterAsync>d__0'::'<>1__state'
+				IL_0031: ldarg.0
+				IL_0032: ldloc.2
+				IL_0033: stfld valuetype [System.Runtime]System.Runtime.CompilerServices.YieldAwaitable/YieldAwaiter Snippets.AsyncMachine/'<AddLaterAsync>d__0'::'<>u__1'
+				IL_0038: ldarg.0
+				IL_0039: ldflda valuetype [System.Runtime]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<int32> Snippets.AsyncMachine/'<AddLaterAsync>d__0'::'<>t__builder'
+				IL_003e: ldloca.s 2
+				IL_0040: ldarg.0
+				IL_0041: call instance void valuetype [System.Runtime]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<int32>::AwaitUnsafeOnCompleted<valuetype [System.Runtime]System.Runtime.CompilerServices.YieldAwaitable/YieldAwaiter, valuetype Snippets.AsyncMachine/'<AddLaterAsync>d__0'>(!!0&, !!1&)
+				IL_0046: leave IL_0112
+
+				IL_004b: ldarg.0
+				IL_004c: ldfld valuetype [System.Runtime]System.Runtime.CompilerServices.YieldAwaitable/YieldAwaiter Snippets.AsyncMachine/'<AddLaterAsync>d__0'::'<>u__1'
+				IL_0051: stloc.2
+				IL_0052: ldarg.0
+				IL_0053: ldflda valuetype [System.Runtime]System.Runtime.CompilerServices.YieldAwaitable/YieldAwaiter Snippets.AsyncMachine/'<AddLaterAsync>d__0'::'<>u__1'
+				IL_0058: initobj [System.Runtime]System.Runtime.CompilerServices.YieldAwaitable/YieldAwaiter
+				IL_005e: ldarg.0
+				IL_005f: ldc.i4.m1
+				IL_0060: dup
+				IL_0061: stloc.0
+				IL_0062: stfld int32 Snippets.AsyncMachine/'<AddLaterAsync>d__0'::'<>1__state'
+
+				IL_0067: ldloca.s 2
+				IL_0069: call instance void [System.Runtime]System.Runtime.CompilerServices.YieldAwaitable/YieldAwaiter::GetResult()
+				IL_006e: ldarg.0
+				IL_006f: ldarg.0
+				IL_0070: ldfld int32 Snippets.AsyncMachine/'<AddLaterAsync>d__0'::left
+				IL_0075: ldarg.0
+				IL_0076: ldfld int32 Snippets.AsyncMachine/'<AddLaterAsync>d__0'::right
+				IL_007b: add
+				IL_007c: stfld int32 Snippets.AsyncMachine/'<AddLaterAsync>d__0'::'<sum>5__2'
+				IL_0081: ldc.i4.1
+				IL_0082: call class [System.Runtime]System.Threading.Tasks.Task [System.Runtime]System.Threading.Tasks.Task::Delay(int32)
+				IL_0087: callvirt instance valuetype [System.Runtime]System.Runtime.CompilerServices.TaskAwaiter [System.Runtime]System.Threading.Tasks.Task::GetAwaiter()
+				IL_008c: stloc.s 4
+				IL_008e: ldloca.s 4
+				IL_0090: call instance bool [System.Runtime]System.Runtime.CompilerServices.TaskAwaiter::get_IsCompleted()
+				IL_0095: brtrue.s IL_00d5
+
+				IL_0097: ldarg.0
+				IL_0098: ldc.i4.1
+				IL_0099: dup
+				IL_009a: stloc.0
+				IL_009b: stfld int32 Snippets.AsyncMachine/'<AddLaterAsync>d__0'::'<>1__state'
+				IL_00a0: ldarg.0
+				IL_00a1: ldloc.s 4
+				IL_00a3: stfld valuetype [System.Runtime]System.Runtime.CompilerServices.TaskAwaiter Snippets.AsyncMachine/'<AddLaterAsync>d__0'::'<>u__2'
+				IL_00a8: ldarg.0
+				IL_00a9: ldflda valuetype [System.Runtime]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<int32> Snippets.AsyncMachine/'<AddLaterAsync>d__0'::'<>t__builder'
+				IL_00ae: ldloca.s 4
+				IL_00b0: ldarg.0
+				IL_00b1: call instance void valuetype [System.Runtime]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<int32>::AwaitUnsafeOnCompleted<valuetype [System.Runtime]System.Runtime.CompilerServices.TaskAwaiter, valuetype Snippets.AsyncMachine/'<AddLaterAsync>d__0'>(!!0&, !!1&)
+				IL_00b6: leave.s IL_0112
+
+				IL_00b8: ldarg.0
+				IL_00b9: ldfld valuetype [System.Runtime]System.Runtime.CompilerServices.TaskAwaiter Snippets.AsyncMachine/'<AddLaterAsync>d__0'::'<>u__2'
+				IL_00be: stloc.s 4
+				IL_00c0: ldarg.0
+				IL_00c1: ldflda valuetype [System.Runtime]System.Runtime.CompilerServices.TaskAwaiter Snippets.AsyncMachine/'<AddLaterAsync>d__0'::'<>u__2'
+				IL_00c6: initobj [System.Runtime]System.Runtime.CompilerServices.TaskAwaiter
+				IL_00cc: ldarg.0
+				IL_00cd: ldc.i4.m1
+				IL_00ce: dup
+				IL_00cf: stloc.0
+				IL_00d0: stfld int32 Snippets.AsyncMachine/'<AddLaterAsync>d__0'::'<>1__state'
+
+				IL_00d5: ldloca.s 4
+				IL_00d7: call instance void [System.Runtime]System.Runtime.CompilerServices.TaskAwaiter::GetResult()
+				IL_00dc: ldarg.0
+				IL_00dd: ldfld int32 Snippets.AsyncMachine/'<AddLaterAsync>d__0'::'<sum>5__2'
+				IL_00e2: stloc.1
+				IL_00e3: leave.s IL_00fe
+			} // end .try
+			catch [System.Runtime]System.Exception
+			{
+				IL_00e5: stloc.s 5
+				IL_00e7: ldarg.0
+				IL_00e8: ldc.i4.s -2
+				IL_00ea: stfld int32 Snippets.AsyncMachine/'<AddLaterAsync>d__0'::'<>1__state'
+				IL_00ef: ldarg.0
+				IL_00f0: ldflda valuetype [System.Runtime]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<int32> Snippets.AsyncMachine/'<AddLaterAsync>d__0'::'<>t__builder'
+				IL_00f5: ldloc.s 5
+				IL_00f7: call instance void valuetype [System.Runtime]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<int32>::SetException(class [System.Runtime]System.Exception)
+				IL_00fc: leave.s IL_0112
+			} // end handler
+
+			IL_00fe: ldarg.0
+			IL_00ff: ldc.i4.s -2
+			IL_0101: stfld int32 Snippets.AsyncMachine/'<AddLaterAsync>d__0'::'<>1__state'
+			IL_0106: ldarg.0
+			IL_0107: ldflda valuetype [System.Runtime]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<int32> Snippets.AsyncMachine/'<AddLaterAsync>d__0'::'<>t__builder'
+			IL_010c: ldloc.1
+			IL_010d: call instance void valuetype [System.Runtime]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<int32>::SetResult(!0)
+
+			IL_0112: ret
+		} // end of method '<AddLaterAsync>d__0'::MoveNext
+
+		.method private final hidebysig newslot virtual 
+			instance void SetStateMachine (
+				class [System.Runtime]System.Runtime.CompilerServices.IAsyncStateMachine stateMachine
+			) cil managed 
+		{
+			.custom instance void [System.Runtime]System.Diagnostics.DebuggerHiddenAttribute::.ctor() = (
+				01 00 00 00
+			)
+			.override method instance void [System.Runtime]System.Runtime.CompilerServices.IAsyncStateMachine::SetStateMachine(class [System.Runtime]System.Runtime.CompilerServices.IAsyncStateMachine)
+			.param [1]
+				.custom instance void [System.Runtime]System.Runtime.CompilerServices.NullableAttribute::.ctor(uint8) = (
+					01 00 01 00 00
+				)
+			// Header size: 1
+			// Code size: 13 (0xd)
+			.maxstack 8
+
+			IL_0000: ldarg.0
+			IL_0001: ldflda valuetype [System.Runtime]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<int32> Snippets.AsyncMachine/'<AddLaterAsync>d__0'::'<>t__builder'
+			IL_0006: ldarg.1
+			IL_0007: call instance void valuetype [System.Runtime]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<int32>::SetStateMachine(class [System.Runtime]System.Runtime.CompilerServices.IAsyncStateMachine)
+			IL_000c: ret
+		} // end of method '<AddLaterAsync>d__0'::SetStateMachine
+
+	} // end of class <AddLaterAsync>d__0
+
+
+	// Methods
+	.method public hidebysig static 
+		class [System.Runtime]System.Threading.Tasks.Task`1<int32> AddLaterAsync (
+			int32 left,
+			int32 right
+		) cil managed 
+	{
+		.custom instance void [System.Runtime]System.Runtime.CompilerServices.AsyncStateMachineAttribute::.ctor(class [System.Runtime]System.Type) = (
+			01 00 29 53 6e 69 70 70 65 74 73 2e 41 73 79 6e
+			63 4d 61 63 68 69 6e 65 2b 3c 41 64 64 4c 61 74
+			65 72 41 73 79 6e 63 3e 64 5f 5f 30 00 00
+		)
+		// Header size: 12
+		// Code size: 63 (0x3f)
+		.maxstack 2
+		.locals init (
+			[0] valuetype Snippets.AsyncMachine/'<AddLaterAsync>d__0'
+		)
+
+		IL_0000: ldloca.s 0
+		IL_0002: call valuetype [System.Runtime]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<!0> valuetype [System.Runtime]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<int32>::Create()
+		IL_0007: stfld valuetype [System.Runtime]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<int32> Snippets.AsyncMachine/'<AddLaterAsync>d__0'::'<>t__builder'
+		IL_000c: ldloca.s 0
+		IL_000e: ldarg.0
+		IL_000f: stfld int32 Snippets.AsyncMachine/'<AddLaterAsync>d__0'::left
+		IL_0014: ldloca.s 0
+		IL_0016: ldarg.1
+		IL_0017: stfld int32 Snippets.AsyncMachine/'<AddLaterAsync>d__0'::right
+		IL_001c: ldloca.s 0
+		IL_001e: ldc.i4.m1
+		IL_001f: stfld int32 Snippets.AsyncMachine/'<AddLaterAsync>d__0'::'<>1__state'
+		IL_0024: ldloca.s 0
+		IL_0026: ldflda valuetype [System.Runtime]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<int32> Snippets.AsyncMachine/'<AddLaterAsync>d__0'::'<>t__builder'
+		IL_002b: ldloca.s 0
+		IL_002d: call instance void valuetype [System.Runtime]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<int32>::Start<valuetype Snippets.AsyncMachine/'<AddLaterAsync>d__0'>(!!0&)
+		IL_0032: ldloca.s 0
+		IL_0034: ldflda valuetype [System.Runtime]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<int32> Snippets.AsyncMachine/'<AddLaterAsync>d__0'::'<>t__builder'
+		IL_0039: call instance class [System.Runtime]System.Threading.Tasks.Task`1<!0> valuetype [System.Runtime]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<int32>::get_Task()
+		IL_003e: ret
+	} // end of method AsyncMachine::AddLaterAsync
+
+} // end of class Snippets.AsyncMachine
+
+.class public auto ansi abstract sealed beforefieldinit Snippets.Boxing
+	extends [System.Runtime]System.Object
+{
+	// Methods
+	.method public hidebysig static 
+		int32 ToObjectAndBack (
+			int32 'value'
+		) cil managed 
+	{
+		// Header size: 1
+		// Code size: 12 (0xc)
+		.maxstack 8
+
+		IL_0000: ldarg.0
+		IL_0001: box [System.Runtime]System.Int32
+		IL_0006: unbox.any [System.Runtime]System.Int32
+		IL_000b: ret
+	} // end of method Boxing::ToObjectAndBack
+
+	.method public hidebysig static 
+		bool ThroughInterface<valuetype .ctor (class [System.Runtime]System.IEquatable`1<!!T>, [System.Runtime]System.ValueType) T> (
+			!!T left,
+			!!T right
+		) cil managed 
+	{
+		// Header size: 1
+		// Code size: 13 (0xd)
+		.maxstack 8
+
+		IL_0000: ldarg.0
+		IL_0001: box !!T
+		IL_0006: ldarg.1
+		IL_0007: callvirt instance bool class [System.Runtime]System.IEquatable`1<!!T>::Equals(!0)
+		IL_000c: ret
+	} // end of method Boxing::ThroughInterface
+
+	.method public hidebysig static 
+		bool ThroughConstraint<(class [System.Runtime]System.IEquatable`1<!!T>) T> (
+			!!T left,
+			!!T right
+		) cil managed 
+	{
+		// Header size: 1
+		// Code size: 15 (0xf)
+		.maxstack 8
+
+		IL_0000: ldarga.s left
+		IL_0002: ldarg.1
+		IL_0003: constrained. !!T
+		IL_0009: callvirt instance bool class [System.Runtime]System.IEquatable`1<!!T>::Equals(!0)
+		IL_000e: ret
+	} // end of method Boxing::ThroughConstraint
+
+	.method public hidebysig static 
+		string Format (
+			int32 'value'
+		) cil managed 
+	{
+		// Header size: 1
+		// Code size: 17 (0x11)
+		.maxstack 8
+
+		IL_0000: ldstr "{0}"
+		IL_0005: ldarg.0
+		IL_0006: box [System.Runtime]System.Int32
+		IL_000b: call string [System.Runtime]System.String::Format(string, object)
+		IL_0010: ret
+	} // end of method Boxing::Format
+
+	.method public hidebysig static 
+		string Interpolate (
+			int32 'value'
+		) cil managed 
+	{
+		// Header size: 12
+		// Code size: 25 (0x19)
+		.maxstack 3
+		.locals init (
+			[0] valuetype [System.Runtime]System.Runtime.CompilerServices.DefaultInterpolatedStringHandler
+		)
+
+		IL_0000: ldloca.s 0
+		IL_0002: ldc.i4.0
+		IL_0003: ldc.i4.1
+		IL_0004: call instance void [System.Runtime]System.Runtime.CompilerServices.DefaultInterpolatedStringHandler::.ctor(int32, int32)
+		IL_0009: ldloca.s 0
+		IL_000b: ldarg.0
+		IL_000c: call instance void [System.Runtime]System.Runtime.CompilerServices.DefaultInterpolatedStringHandler::AppendFormatted<int32>(!!0)
+		IL_0011: ldloca.s 0
+		IL_0013: call instance string [System.Runtime]System.Runtime.CompilerServices.DefaultInterpolatedStringHandler::ToStringAndClear()
+		IL_0018: ret
+	} // end of method Boxing::Interpolate
+
+} // end of class Snippets.Boxing
+
+.class public sequential ansi sealed beforefieldinit Snippets.Counter
+	extends [System.Runtime]System.ValueType
+{
+	// Fields
+	.field public int32 Value
+
+	// Methods
+	.method public hidebysig 
+		instance void Increment () cil managed 
+	{
+		// Header size: 1
+		// Code size: 15 (0xf)
+		.maxstack 8
+
+		IL_0000: ldarg.0
+		IL_0001: ldarg.0
+		IL_0002: ldfld int32 Snippets.Counter::Value
+		IL_0007: ldc.i4.1
+		IL_0008: add
+		IL_0009: stfld int32 Snippets.Counter::Value
+		IL_000e: ret
+	} // end of method Counter::Increment
+
+} // end of class Snippets.Counter
+
+.class public auto ansi abstract sealed beforefieldinit Snippets.DefensiveCopy
+	extends [System.Runtime]System.Object
+{
+	// Methods
+	.method public hidebysig static 
+		int32 ByIn (
+			[in] valuetype Snippets.Counter& counter
+		) cil managed 
+	{
+		.param [1]
+			.custom instance void [System.Runtime]System.Runtime.CompilerServices.IsReadOnlyAttribute::.ctor() = (
+				01 00 00 00
+			)
+		// Header size: 12
+		// Code size: 21 (0x15)
+		.maxstack 1
+		.locals init (
+			[0] valuetype Snippets.Counter
+		)
+
+		IL_0000: ldarg.0
+		IL_0001: ldobj Snippets.Counter
+		IL_0006: stloc.0
+		IL_0007: ldloca.s 0
+		IL_0009: call instance void Snippets.Counter::Increment()
+		IL_000e: ldarg.0
+		IL_000f: ldfld int32 Snippets.Counter::Value
+		IL_0014: ret
+	} // end of method DefensiveCopy::ByIn
+
+	.method public hidebysig static 
+		int32 ByRef (
+			valuetype Snippets.Counter& counter
+		) cil managed 
+	{
+		// Header size: 1
+		// Code size: 13 (0xd)
+		.maxstack 8
+
+		IL_0000: ldarg.0
+		IL_0001: call instance void Snippets.Counter::Increment()
+		IL_0006: ldarg.0
+		IL_0007: ldfld int32 Snippets.Counter::Value
+		IL_000c: ret
+	} // end of method DefensiveCopy::ByRef
+
+} // end of class Snippets.DefensiveCopy
+
+.class public auto ansi abstract sealed beforefieldinit Snippets.Escape
+	extends [System.Runtime]System.Object
+{
+	// Methods
+	.method public hidebysig static 
+		int32 BoxAndHash (
+			int32 'value'
+		) cil managed 
+	{
+		// Header size: 1
+		// Code size: 12 (0xc)
+		.maxstack 8
+
+		IL_0000: ldarg.0
+		IL_0001: box [System.Runtime]System.Int32
+		IL_0006: callvirt instance int32 [System.Runtime]System.Object::GetHashCode()
+		IL_000b: ret
+	} // end of method Escape::BoxAndHash
+
+} // end of class Snippets.Escape
+

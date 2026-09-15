@@ -1,0 +1,38 @@
+# Advanced C#: build the course programs against GA pinned on one commit, on three OSes, compare each lesson's
+# output, the IL and decompiled code and the compiler errors with expected/, then check that the benchmarks run
+name: Advanced C# examples
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['code/csharp-advanced/**', '.github/workflows/csharp-advanced-examples.yml']
+  pull_request:
+    paths: ['code/csharp-advanced/**', '.github/workflows/csharp-advanced-examples.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  csharp:
+    name: csharp (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: code/csharp-advanced/global.json
+      - run: bash code/csharp-advanced/check.sh
+      # Timings mean nothing on a shared runner: one iteration per benchmark, to check that each one runs
+      - name: Benchmarks (dry run)
+        working-directory: code/csharp-advanced
+        env:
+          BENCHMARKS_DRY: '1'
+        run: dotnet run -c Release --project Benchmarks -- --filter '*' --job Dry --stopOnFirstError

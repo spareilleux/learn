@@ -1,0 +1,9 @@
+
+== Boxing: bytes allocated by the second call (DOTNET_TieredCompilation=0)
+Boxing.ToObjectAndBack(42)                0
+Escape.BoxAndHash(42)                     0
+Boxing.ThroughInterface(pc, pc)           0
+Boxing.ThroughConstraint(pc, pc)          0
+Boxing.Format(12345)                     56
+Boxing.Interpolate(12345)                32
+exit 0

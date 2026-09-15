@@ -1,0 +1,24 @@
+== l1_in_assign.cs
+l1_in_assign.cs(9,53): error CS8332: Cannot assign to a member of variable 'counter' or use it as the right hand side of a ref assignment because it is a readonly variable
+== l1_ref_struct_field.cs
+l1_ref_struct_field.cs(4,13): error CS8345: Field or auto-implemented property cannot be of type 'Span<int>' unless it is an instance member of a ref struct.
+== l1_ref_to_local.cs
+l1_ref_to_local.cs(7,20): error CS8168: Cannot return local 'count' by reference because it is not a ref local
+== l1_span_lambda.cs
+l1_span_lambda.cs(4,59): error CS9108: Cannot use parameter 'frets' that has ref-like type inside an anonymous method, lambda expression, query expression, or local function
+l1_span_lambda.cs(4,70): error CS9108: Cannot use parameter 'frets' that has ref-like type inside an anonymous method, lambda expression, query expression, or local function
+== l1_span_type_argument.cs
+l1_span_type_argument.cs(4,35): error CS9244: The type 'Span<int>' may not be a ref struct or a type parameter allowing ref structs in order to use it as parameter 'T' in the generic type or method 'List<T>'
+== l1_stackalloc_escape.cs
+l1_stackalloc_escape.cs(7,16): error CS8352: Cannot use variable 'frets' in this context because it may expose referenced variables outside of their declaration scope
+== l3_await_in_lock.cs
+l3_await_in_lock.cs(10,13): error CS1996: Cannot await in the body of a lock statement
+== l3_missing_enumerator_cancellation.cs
+l3_missing_enumerator_cancellation.cs(4,47): warning CS8425: Async-iterator 'Frets.AllAsync(CancellationToken)' has one or more parameters of type 'CancellationToken' but none of them is decorated with the 'EnumeratorCancellation' attribute, so the cancellation token parameter from the generated 'IAsyncEnumerable<>.GetAsyncEnumerator' will be unconsumed
+== l3_ref_parameter.cs
+l3_ref_parameter.cs(4,48): error CS1988: Async methods cannot have ref, in or out parameters
+== l3_span_across_await.cs
+l3_span_across_await.cs(8,16): error CS4007: Instance of type 'System.Span<int>' cannot be preserved across 'await' or 'yield' boundary.
+l3_span_across_await.cs(8,28): error CS4007: Instance of type 'System.Span<int>' cannot be preserved across 'await' or 'yield' boundary.
+l3_span_across_await.cs(8,40): error CS4007: Instance of type 'System.Span<int>' cannot be preserved across 'await' or 'yield' boundary.
+exit 0

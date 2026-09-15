@@ -1,0 +1,42 @@
+
+== Inline size (Unsafe.SizeOf) and heap size of one allocation, in bytes
+type                       inline   heap  what the heap bytes are
+int                             4     24  a boxed int
+long                            8     24  a boxed long
+decimal                        16     32  a boxed decimal
+Guid                           16     32  a boxed Guid
+Point (2 ints)                  8     24  a boxed Point
+Padded (byte, long)            16     32  a boxed Padded
+(byte, long)                   16     32  a boxed tuple
+object                          8     24  new object()
+Node (class, 1 int)             8     24  new Node(1)
+string                          8     32  a 5-char string
+int[]                           8     24  an empty int[]
+int[]                           8     64  an int[10]
+GA PitchClass                   4     24  a boxed PitchClass
+GA PitchClassSetId              4     24  a boxed PitchClassSetId
+
+== Boxing: bytes allocated by the second call (tiered JIT, first tier)
+Boxing.ToObjectAndBack(42)                0
+Escape.BoxAndHash(42)                    24
+Boxing.ThroughInterface(pc, pc)          24
+Boxing.ThroughConstraint(pc, pc)          0
+Boxing.Format(12345)                     56
+Boxing.Interpolate(12345)                32
+
+== in and ref: a method called on an in parameter runs on a copy
+ByIn returns 0, counter.Value is now 0
+ByRef returns 1, counter.Value is now 1
+
+== ref locals: one dictionary lookup per update (CollectionsMarshal)
+sets by number of notes: 1 12 66 220 495 792 924 792 495 220 66 12 1
+
+== Parsing a voicing: string.Split versus spans
+split: 6 frets, 216 bytes
+spans: 6 frets, 0 bytes
+
+== GA: ItemsSpan of two value objects
+PitchClass.ItemsSpan: 12 items, 0 bytes
+PitchClassSetId.ItemsSpan: 4096 items, 16408 bytes
+PitchClassSetId.Items is <>z__ReadOnlyList`1
+exit 0

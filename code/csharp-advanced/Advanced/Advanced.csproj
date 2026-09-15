@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Snippets/Snippets.csproj" />
+    <ProjectReference Include="$(GaRoot)Common/GA.Domain.Core/GA.Domain.Core.csproj" />
+  </ItemGroup>
+
+</Project>

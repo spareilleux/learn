@@ -1,0 +1,49 @@
+
+== The state machine behind AsyncMachine.AddLaterAsync (reflection)
+[AsyncStateMachine(typeof(<AddLaterAsync>d__0))], a struct implementing IAsyncStateMachine
+  public  Int32                          <>1__state
+  public  AsyncTaskMethodBuilder<Int32>  <>t__builder
+  public  Int32                          left
+  public  Int32                          right
+  private Int32                          <sum>5__2
+  private YieldAwaitable.YieldAwaiter    <>u__1
+  private TaskAwaiter                    <>u__2
+AddLaterAsync(2, 3).Result = 5
+
+== Completing synchronously: bytes allocated by one call
+TaskOf(5)                   0  (Task<int> results from -1 to 8 are cached)
+TaskOf(500)                72
+ValueTaskOf(500)            0
+Task.FromResult(true)       0
+
+== SynchronizationContext: where the code after await runs
+before await:                     on ui True
+after await Task.Delay:           on ui True
+after ConfigureAwait(false):      on ui False, pool thread True
+
+== Blocking on async code from the ui thread
+awaits with the context, .Wait(1 s):         completed False
+awaits with ConfigureAwait(false), .Wait(10 s): completed True
+GA Try.OfAsync(...), .Wait(1 s):             completed False
+
+== Exceptions: await rethrows the first one, the Task keeps them all
+Task.Exception holds 2: first, second; await threw InnerExceptions[0]: True
+ConfigureAwaitOptions.SuppressThrowing: no exception
+
+== Cancellation
+Task.Delay(10 s, token cancelled after 50 ms): TaskCanceledException, e.CancellationToken == token True
+linked token after parent.Cancel(): IsCancellationRequested True
+Task.Delay(10 s).WaitAsync(50 ms): TimeoutException
+GA Try.OfAsync(cancelled task): IsFailure True, TaskCanceledException, no exception thrown
+
+== IAsyncEnumerable: the token reaches the iterator through [EnumeratorCancellation]
+frets 0 1 2, then TaskCanceledException
+
+== An expiring cache without a sleeping thread: TimeProvider
+t=0:     Value 1
+t=4 min: Value 1
+t=6 min: Value 2
+
+== GA LazyWithExpiration: one sleeping thread-pool thread per expiring value
+sum of the 64 values: 2016
+exit 0

@@ -1,0 +1,29 @@
+
+== The JIT of this process
+DOTNET_TieredCompilation=(unset), DOTNET_TieredPGO=(unset)
+RuntimeFeature.IsDynamicCodeCompiled: True
+
+== SearchValues: the same answers as a loop
+first accidental: -1 -1 -1 -1 -1 3 -1 1 1 1 1 1 -1 2; same as the loop: True
+quality found: -1 -1 -1 1 -1 1 1 -1 2 -1 -1 -1 1 -1
+
+== FrozenDictionary: which implementation ToFrozenDictionary() picks
+10 chord suffixes (string keys)              LengthBucketsFrozenDictionary`1
+same, StringComparer.OrdinalIgnoreCase       LengthBucketsFrozenDictionary`1
+12 pitch classes (int keys)                  WithFullValues`3
+12 PitchClass keys (record struct)           ValueTypeDefaultComparerFrozenDictionary`2
+GA: 144 (int, int) keys, PitchClass -        ValueTypeDefaultComparerFrozenDictionary`2
+GA: ProgrammaticForteCatalog.ForteByPrimeFormId ValueTypeDefaultComparerFrozenDictionary`2 (224 keys)
+lookups agree with the Dictionary: True
+
+== GA PitchClass subtraction: FrozenDictionary lookup versus arithmetic
+144 of 144 pairs agree; E - 1 = T, 1 - E = 2
+bytes allocated by one GA subtraction: 0
+
+== Vectorized dot products: GA SimdOps.Dot, TensorPrimitives.Dot and a scalar loop
+small integers: scalar 157.000000, SimdOps 157.000000, TensorPrimitives 157.000000; equal to 1e-9: True
+small integers: bit-identical to the scalar loop: True
+random doubles: scalar 3.010745, SimdOps 3.010745, TensorPrimitives 3.010745; equal to 1e-9: True
+random doubles: bit-identical to the scalar loop: (depends on the vector width)
+SimdOps.Dot allocates nothing itself: 0 bytes
+exit 0
