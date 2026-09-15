@@ -41,6 +41,12 @@ export default defineConfig({
 							translations: { fr: 'Langages et frameworks', es: 'Lenguajes y frameworks' },
 							items: [
 								{
+									label: 'C# for beginners',
+									translations: { fr: 'C# pour débutants', es: 'C# para principiantes' },
+									collapsed: true,
+									items: [{ autogenerate: { directory: 'csharp-beginner' } }],
+								},
+								{
 									label: 'Rust for C#/Java developers',
 									translations: { fr: 'Rust pour développeurs C#/Java', es: 'Rust para desarrolladores C#/Java' },
 									collapsed: true,
