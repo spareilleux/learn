@@ -178,37 +178,39 @@ public static class Diagrams
 
     // ---- Fretboard: frets 0 to 12, string 1 (high E) at the top, as in tablature
 
-    static string Fretboard(int pitchClass, int frets = 12)
+    static string Fretboard(int pitchClass, int frets = 12, string[]? tuning = null)
     {
+        var strings = tuning ?? Standard;
+        var count = strings.Length;
         const double left = 44, top = 24, stringGap = 26, fretGap = 52;
         var width = left + fretGap * (frets + 0.6);
-        var svg = new StringBuilder(Open(width, top + stringGap * 5 + 44));
+        var svg = new StringBuilder(Open(width, top + stringGap * (count - 1) + 44));
         double X(int fret) => left + fret * fretGap; // fret wire position; a note sits before its wire
         double NoteX(int fret) => fret == 0 ? left - 22 : X(fret) - fretGap / 2;
         double Y(int stringNumber) => top + (stringNumber - 1) * stringGap;
 
         foreach (var dotFret in new[] { 3, 5, 7, 9 }.Where(f => f <= frets))
         {
-            svg.Append($"  <circle cx=\"{F(NoteX(dotFret))}\" cy=\"{F(Y(3) + stringGap / 2)}\" r=\"5\" fill=\"{Ink}\" fill-opacity=\"0.2\"/>\n");
+            svg.Append($"  <circle cx=\"{F(NoteX(dotFret))}\" cy=\"{F(Y(count / 2) + stringGap / 2)}\" r=\"5\" fill=\"{Ink}\" fill-opacity=\"0.2\"/>\n");
         }
-        if (frets >= 12)
+        if (frets >= 12 && count >= 5)
         {
             svg.Append($"  <circle cx=\"{F(NoteX(12))}\" cy=\"{F(Y(2) + stringGap / 2)}\" r=\"5\" fill=\"{Ink}\" fill-opacity=\"0.2\"/>\n");
-            svg.Append($"  <circle cx=\"{F(NoteX(12))}\" cy=\"{F(Y(4) + stringGap / 2)}\" r=\"5\" fill=\"{Ink}\" fill-opacity=\"0.2\"/>\n");
+            svg.Append($"  <circle cx=\"{F(NoteX(12))}\" cy=\"{F(Y(count - 2) + stringGap / 2)}\" r=\"5\" fill=\"{Ink}\" fill-opacity=\"0.2\"/>\n");
         }
-        for (var s = 1; s <= 6; s++)
+        for (var s = 1; s <= count; s++)
         {
             svg.Append($"  <line x1=\"{F(X(0))}\" y1=\"{F(Y(s))}\" x2=\"{F(X(frets))}\" y2=\"{F(Y(s))}\" stroke=\"{Ink}\" stroke-width=\"{F(0.8 + s * 0.3)}\"/>\n");
         }
         for (var f = 0; f <= frets; f++)
         {
             var w = f == 0 ? 5 : 1.5;
-            svg.Append($"  <line x1=\"{F(X(f))}\" y1=\"{F(Y(1))}\" x2=\"{F(X(f))}\" y2=\"{F(Y(6))}\" stroke=\"{Ink}\" stroke-width=\"{F(w)}\"/>\n");
-            svg.Append($"  <text x=\"{F(NoteX(f))}\" y=\"{F(Y(6) + 26)}\" font-size=\"12\" text-anchor=\"middle\" fill=\"{Ink}\" fill-opacity=\"0.8\">{f}</text>\n");
+            svg.Append($"  <line x1=\"{F(X(f))}\" y1=\"{F(Y(1))}\" x2=\"{F(X(f))}\" y2=\"{F(Y(count))}\" stroke=\"{Ink}\" stroke-width=\"{F(w)}\"/>\n");
+            svg.Append($"  <text x=\"{F(NoteX(f))}\" y=\"{F(Y(count) + 26)}\" font-size=\"12\" text-anchor=\"middle\" fill=\"{Ink}\" fill-opacity=\"0.8\">{f}</text>\n");
         }
-        for (var s = 1; s <= 6; s++)
+        for (var s = 1; s <= count; s++)
         {
-            var open = Standard[6 - s];
+            var open = strings[count - s];
             for (var f = 0; f <= frets; f++)
             {
                 var midi = Theory.MidiOf(open) + f;
@@ -278,6 +280,8 @@ public static class Diagrams
         return new SortedDictionary<string, string>(StringComparer.Ordinal)
         {
             ["l1-fretboard-c.svg"] = Fretboard(pitchClass: 0),
+            ["l8-fretboard-ukulele-c.svg"] = Fretboard(pitchClass: 0, tuning: ["G4", "C4", "E4", "A4"]),
+            ["l8-fretboard-bass-c.svg"] = Fretboard(pitchClass: 0, tuning: ["E1", "A1", "D2", "G2"]),
             ["l2-bracelet-major.svg"] = Bracelets(([Set(major)], Labels.Numbers, null, null)),
             ["l2-bracelet-transposition.svg"] = Bracelets(
                 ([Set(major)], Labels.Numbers, null, "T0"),

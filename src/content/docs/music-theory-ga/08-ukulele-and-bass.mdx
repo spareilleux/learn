@@ -1,0 +1,256 @@
+---
+title: "Lesson 8: The ukulele and the bass"
+description: Re-entrant tunings, tunings in fourths, and what stops being true when the instrument is not a six-string guitar — with Guitar Alchemist's Tuning, Fretboard and instrument catalogue.
+sidebar:
+  label: 8. Ukulele and bass
+  order: 8
+---
+
+import UkuleleC from '../../../assets/music-theory-ga/l8-fretboard-ukulele-c.svg';
+import BassC from '../../../assets/music-theory-ga/l8-fretboard-bass-c.svg';
+
+The first seven lessons were written on a six-string guitar in standard tuning, and almost every sentence in them is still true on a ukulele or a bass: a pitch class is a pitch class, a major triad is a major triad. What changes is the **map** — the grid of strings and frets that the notes are laid on. Two of GA's own constants, `Tuning.Ukulele` and `Tuning.Bass`, define that map for the two instruments most people pick up after the guitar, and they are enough to show the two facts that guitar-shaped code tends to get wrong.
+
+- A ukulele is **re-entrant**: its fourth string is *higher* than its third. String number and pitch stop agreeing.
+- A bass is tuned entirely **in fourths**: it has none of the guitar's one irregular pair, so every shape moves between strings unchanged.
+
+All GA links point to commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6).
+
+```bash
+dotnet run --project code/music-theory-ga/GaTheory -c Release -- l8
+```
+
+## The two tunings
+
+A ukulele's four strings are **G C E A**, and a bass's four are **E A D G**, the guitar's four lowest strings an octave down. Strings are numbered from the highest-sounding one, so string 1 is the A on a ukulele and the G on a bass.
+
+```text
+== Tunings: the ukulele and the bass, string 1 first
+string       course       GA           check
+ukulele 1    A4           A4           ok
+ukulele 2    E4           E4           ok
+ukulele 3    C4           C4           ok
+ukulele 4    G4           G4           ok
+bass 1       G2           G2           ok
+bass 2       D2           D2           ok
+bass 3       A1           A1           ok
+bass 4       E1           E1           ok
+```
+
+The course writes each tuning as a list of pitches and reads string *n* off it; GA stores a [`Tuning`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Instruments/Tuning.cs#L46-L57) and indexes it with a [`Str`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Instruments/Primitives/Str.cs), a range value object from 1 to 26. Both agree on all eight strings.
+
+## Re-entrant: the fourth string is not the lowest
+
+On a guitar, string 6 is the lowest and string 1 the highest, and the pitches rise all the way. A standard ukulele does not do that. Its fourth string is a G *above* middle C — above the third string and above the second.
+
+```text
+== Re-entrant: on a ukulele the fourth string is not the lowest
+string       course         GA             check
+ukulele 1    A4 midi 69     A4 midi 69     ok
+ukulele 2    E4 midi 64     E4 midi 64     ok
+ukulele 3    C4 midi 60     C4 midi 60     ok
+ukulele 4    G4 midi 67     G4 midi 67     ok
+steps from string 4 to string 1: -7 4 5  (the negative step is what makes it re-entrant)
+the low G ukulele instead:      5 4 5  (only rising: not re-entrant)
+```
+
+The steps between consecutive strings are the giveaway: −7, +4, +5. A tuning is **re-entrant** when the pitches, read in string order, neither only rise nor only fall ([Re-entrant tuning](https://en.wikipedia.org/wiki/Re-entrant_tuning), Wikipedia). The ukulele's high fourth string is what gives it its sound: a strummed chord has no bass note, and the lowest note you hear is not the one your lowest finger is on.
+
+Some players restring the fourth string an octave down — "low G" — and then the ukulele is an ordinary rising instrument. GA's constant is the re-entrant one.
+
+:::note[Why this matters in code]
+Anything that reasons about a fretboard by assuming that a higher string number means a lower pitch is right on a guitar, a bass, a mandolin and a violin, and wrong on a ukulele, a five-string banjo, a charango and a Tahitian ukulele. That assumption is easy to write by accident, because on a guitar the two orders coincide.
+:::
+
+## Where GA decides which end of a tuning is string 1
+
+GA builds its array of strings in [`Tuning.BuildPitchArray`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Instruments/Tuning.cs#L85-L108). A tuning may be written either way round, so the constructor guesses: if the first pitch is lower than the last, reverse the list; otherwise keep it.
+
+```csharp
+if (buffer[0] < buffer[^1])
+{
+    for (var i = 0; i < buffer.Length; i++)
+    {
+        result[i] = buffer[buffer.Length - 1 - i];
+    }
+}
+```
+
+It compares the two **ends** only. On any tuning that rises or falls all the way, the ends tell you the direction and the guess is right. On a re-entrant tuning they do not.
+
+```text
+== How GA decides which end of a tuning is string 1
+instrument             course           GA               check
+guitar                 E4               E4               ok
+ukulele                A4               A4               ok
+bass                   G2               G2               ok
+banjo, tenor jazz      A4               A4               ok
+banjo, 5 strings       D4               G4               DIFF
+banjo, C tuning        D4               G4               DIFF
+GA, banjo strings 1 to 5: G4 D3 G3 B3 D4
+The fifth string of a 5-string banjo is the short drone, the highest of the five, so
+"string 1 is the highest" is not a definition: here GA returns the file's order, reversed.
+```
+
+The ukulele survives, by luck: its highest string happens to be the last one written. The five-string banjo does not. Its fifth string is a short drone tuned to the G *above* the first string, and GA's own [`Instruments.yaml`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/Instruments.yaml) writes it first, `G4 D3 G3 B3 D4`. The first pitch is higher than the last, so the list is kept as written, and GA answers that string 1 is the drone and string 5 is the first string — the instrument's numbering, reversed.
+
+The deeper problem is in the documentation rather than in the arithmetic. `Str`'s comment reads "String 1 is the string with the highest pitch", and `Tuning.AsSpan` promises "highest string first". On a five-string banjo no such rule can hold: string 1 is D4 and string 5 is G4, higher. String numbering is a fact about the instrument — which string your first finger falls on — not a sort order. A tuning that carries its strings in playing order, and never re-sorts them, has nothing to guess.
+
+## The ukulele has the interval pattern of four guitar strings
+
+Forget the pitches for a moment and look only at the gaps between strings.
+
+```text
+== The ukulele has the interval pattern of four guitar strings
+instrument               tuning                 steps between strings
+guitar, strings 4 to 1   D3 G3 B3 E4            5 4 5
+ukulele, low G           G3 C4 E4 A4            5 4 5
+ukulele, baritone        D3 G3 B3 E4            5 4 5
+guitar, strings 6 to 3   E2 A2 D3 G3            5 5 5
+bass                     E1 A1 D2 G2            5 5 5
+ukulele - guitar         5 5 5 5                semitones, string by string
+baritone - guitar        0 0 0 0                semitones
+bass - guitar 6 to 3     -12 -12 -12 -12        semitones
+```
+
+Three results, each worth a sentence.
+
+- A ukulele's gaps are **5 4 5** semitones, and so are the gaps of the guitar's strings 4-3-2-1. A ukulele is the top four strings of a guitar, tuned up a perfect fourth.
+- A **baritone** ukulele is those four strings *exactly*: D3 G3 B3 E4, difference zero. Every chord shape you know on the top four strings of a guitar is the same chord, with the same name, on a baritone ukulele.
+- A bass's gaps are **5 5 5**, and so are the guitar's strings 6-5-4-3. A bass is the guitar's bottom four strings an octave down.
+
+That is why the ukulele feels familiar: the one irregular gap of the guitar, the major third between strings 3 and 2, is *also* on the ukulele, between its strings 3 and 2. The shapes carry over with their kinks intact.
+
+## A guitar shape played on a ukulele
+
+Take the top four strings of the open C chord — frets 2, 0, 1, 0 on strings 4, 3, 2, 1 — and put the same fingers on a ukulele.
+
+```text
+== A guitar shape played on a ukulele: the same fingers, a fourth higher
+instrument               sounds                 pitch classes
+guitar, strings 4 to 1   E3 G3 C4 E4            0 4 7  C major
+ukulele, low G           A3 C4 F4 A4            0 5 9  F major
+ukulele, re-entrant      A4 C4 F4 A4            0 5 9  F major
+difference               5 5 5 5                semitones: a perfect fourth
+The re-entrant ukulele plays the same four pitch classes, with its bass note an octave up.
+```
+
+The same fingering, a perfect fourth higher: a C major shape becomes F major. The third line is the interesting one. On a re-entrant ukulele the fourth string is an octave up, so the shape sounds A4 C4 F4 A4 instead of A3 C4 F4 A4: the same four pitch classes, the same chord name, a different voicing, with the root no longer at the bottom. Lesson 3's point about inversions applies here at the level of the instrument — a re-entrant ukulele has no root-position voicings on all four strings.
+
+<UkuleleC role="img" aria-label="Ukulele fretboard, frets 0 to 12, string 1 at the top. Pitch class C: string 4 fret 5, string 3 frets 0 and 12, string 2 fret 8, string 1 fret 3." />
+
+```text
+== Pitch class C on frets 0 to 12
+instrument   course                             GA                                 check
+ukulele      4/5 3/0 3/12 2/8 1/3               4/5 3/0 3/12 2/8 1/3               ok
+bass         4/8 3/3 2/10 1/5                   4/8 3/3 2/10 1/5                   ok
+```
+
+Five Cs on a ukulele's first twelve frets against six on a guitar's, and the course and GA agree on all of them: [`Fretboard`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Instruments/Primitives/Fretboard.cs#L19-L20) takes any `Tuning` and any fret count, so `new Fretboard(Tuning.Ukulele, 12)` works with no other change.
+
+:::caution[A comment that contradicts its code]
+`Fretboard.GetNote(int stringIndex, int fret)` documents its first parameter as "Zero-based string index (0 = lowest string)", then calls `Tuning[new(stringIndex + 1)]` — and string 1 is the *highest*. Index 0 is the highest string, not the lowest. The code is consistent with `Str`; only the comment is wrong, which is the more dangerous way round.
+:::
+
+## A bass is tuned in fourths
+
+<BassC role="img" aria-label="Bass fretboard, frets 0 to 12, string 1 at the top. Pitch class C: string 4 fret 8, string 3 fret 3, string 2 fret 10, string 1 fret 5." />
+
+```text
+== A bass is tuned in fourths: one shape, every pair of strings
+pair             semitones    interval
+bass 4-3         5            a fourth
+bass 3-2         5            a fourth
+bass 2-1         5            a fourth
+guitar 6-5       5            a fourth
+guitar 5-4       5            a fourth
+guitar 4-3       5            a fourth
+guitar 3-2       4            a major third
+guitar 2-1       5            a fourth
+Every pair on the bass is a fourth, so a shape keeps its sound on any pair of strings.
+On the guitar the 3-2 pair is a major third: that one gap is what makes the shapes irregular.
+```
+
+A guitar has one irregular pair. Strings 3 and 2 are a major third apart, four semitones, where every other pair is a perfect fourth. That single gap is the reason the CAGED shapes of lesson 3 are five different shapes rather than one shape moved around, and the reason a shape moved across the 3-2 boundary has to be adjusted by a fret.
+
+A bass has no such pair. Every interval is a fourth, so an interval shape — a root and a fifth, an octave, a scale fragment — keeps its sound wherever you move it, sideways or across strings. The same is true of the seven-string guitar's B string, of `AllFourthsguitar` in GA's catalogue, and of a bass with five or six strings.
+
+## The ukulele and the bass in GA's catalogue
+
+`Tuning.Ukulele` and `Tuning.Bass` are C# constants. GA also has a 1589-line YAML catalogue, [`Instruments.yaml`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/Instruments.yaml), with 122 instruments and 280 tunings, and the two do not say the same thing. Appendix A reads the whole file; here are the rows for these two instruments.
+
+```text
+== The ukulele and the bass in GA's Instruments.yaml
+entry                                tuning as written              read by the course
+BassGuitar.Standard                  E1 A1 D2 G2                    4 pitches
+BassGuitar.FiveStrings               B0 E1 A1 D2 G2                 5 pitches
+BassGuitar.SixStrings                B0 E1 A1 D2 G2 C3              6 pitches
+Ukulele.SopranoConcertAndTenorC      C6 G4 C4 E4 A4                 5 pitches
+Ukulele.SopranoConcertAndTenorD      D6 A4 D4 F#4 B4                5 pitches
+Ukulele.Baritone                     D4 G3 B4 E4                    4 pitches
+Ukulele.Tahitian                     G4 G4 C5 C5 E5 E5 A4 A4        8 pitches
+Ukulele.BanjoOrBanjoleteC            C6 G4 C4 E4 A4                 5 pitches
+Ukulele.BanjoOrBanjoleteD            D6 A4 D4 F#4 B4                5 pitches
+BassGuitarExtended.DropD             D1 A1 D2 G2                    4 pitches
+BassGuitarExtended.BEAD              B0 E1 A1 D2                    4 pitches
+BassGuitarExtended.Tenor             A1 D2 G2 C3                    4 pitches
+BassGuitarExtended.Piccolo           E2 A2 D3 G3                    4 pitches
+BassGuitarExtended.FretlessStandard  E1 A1 D2 G2                    4 pitches
+BaritoneUkulele.Standard             D4 G3 B3 E4                    4 pitches
+BaritoneUkulele.LowGReentrant        D4 G4 B3 E4                    4 pitches
+SopraninoUkulele.Standard            D5 G4 B4 E5                    4 pitches
+
+GA's own constants: Tuning.Ukulele = G4 C4 E4 A4 (4 strings), Tuning.Bass = E1 A1 D2 G2 (4 strings)
+A ukulele has four strings: in the five C6 and D6 entries, the tuning's name, C or D, is written as a pitch.
+A baritone ukulele is tuned like the guitar's top four strings, D3 G3 B3 E4; the two entries
+disagree with each other and with that: D4 G3 B4 E4 and D4 G3 B3 E4.
+```
+
+The bass rows are all correct — standard, five-string, six-string, drop D, BEAD, tenor, piccolo — and `BassGuitarExtended.Piccolo`, E2 A2 D3 G3, is exactly the guitar's bottom four strings, which is what a piccolo bass is.
+
+The ukulele rows are not.
+
+- **Five pitches for a four-string instrument**, four times over. `C6 G4 C4 E4 A4` is the correct tuning `G4 C4 E4 A4` with `C6` in front of it. That `C6` is the tuning's *name* — ukulele players call G C E A "C tuning" — written where a pitch goes, and it parses as the C two octaves above middle C. The same mistake produced `D6 A4 D4 F#4 B4`, and both are repeated for the banjolele. It is not confined to the ukulele: the pedal steel guitar's two tunings begin `C6` and `E9`, which are also tuning names, [C6 and E9](https://en.wikipedia.org/wiki/Pedal_steel_guitar) being the two standard pedal steel setups.
+- **A baritone ukulele in the wrong octave, twice, differently.** A baritone is tuned D3 G3 B3 E4, the guitar's top four strings. `Ukulele.Baritone` says `D4 G3 B4 E4` and `BaritoneUkulele.Standard` says `D4 G3 B3 E4`: two entries for one instrument, disagreeing with each other and both putting the D an octave too high.
+- **A name that contradicts itself.** `BaritoneUkulele.LowGReentrant`, "Re-entrant (dGBE)", is `D4 G4 B3 E4`. Low G and re-entrant are opposites: a low G is what you restring a re-entrant ukulele to in order to *stop* it being re-entrant.
+
+None of this reaches a program that asks GA for a ukulele tuning, because nothing reads the file — which is Appendix A's subject.
+
+## Exercises
+
+1. A ukulele's open C chord is `0003`: nothing on strings 4, 3 and 2, third fret on string 1. Which notes sound, and what chord is it?
+2. Play the same `0003` on a baritone ukulele. Which chord is it now, and why is it not the same one?
+3. How many of the 280 tunings in GA's catalogue are written neither only rising nor only falling? Is every one of them a re-entrant instrument?
+
+<details>
+<summary>Solutions</summary>
+
+```text
+== Exercise solutions
+question                     answer
+1. ukulele 0003              G4 C4 E4 C5                    pitch classes 0 4 7: C major
+2. 0003 on a baritone        D3 G3 B3 G4                    pitch classes 2 7 E: G major
+3. re-entrant entries        107 of 273                     tunings that rise and fall
+   first ten: Baglama.Greek, Bajo.Quinto, Bajo.Sexto, Bandola.Central, Bandola.Guayanesa, Bandora.Standard, Bandurria.Peruvian, Banjo.TenorIrish, Banjo.Bluegrass5Strings, Banjo.CTuning5Strings
+```
+
+1. G4 C4 E4 C5 — pitch classes 0, 4 and 7, a C major triad. The re-entrant G4 is the *highest* note but sits on the fourth string, so the chord sounds with G on top and C doubled.
+2. D3 G3 B3 G4 — pitch classes 2, 7 and 11, a G major triad. The baritone is tuned a perfect fourth below the standard ukulele, so every shape names a chord a fourth lower: C becomes G.
+3. 107 of the 273 readable tunings. But no: most of them are **courses**, pairs of strings tuned in octaves or unisons, written as `A2 A1 D3 D2 …`, where the fall is inside a pair rather than across the instrument. The test used here — "the steps are not all of one sign" — finds every re-entrant tuning and also every doubled-course instrument, and the file gives no way to tell them apart, because it stores pitches and nothing about which of them share a course. Telling the twelve-string guitar from the ukulele would need a field the file does not have.
+
+</details>
+
+## What to remember
+
+- Strings are numbered from the highest-sounding string on a guitar, but that is a convention about *typical* instruments, not a definition: on a five-string banjo, string 5 is the highest.
+- A tuning is re-entrant when its pitches, in string order, neither only rise nor only fall. Guessing the direction from the two ends works only for the instruments that make the guess unnecessary.
+- The gaps matter more than the pitches. 5 4 5 is a guitar's top four strings, a ukulele and a baritone ukulele; 5 5 5 is a bass and a guitar's bottom four.
+- A baritone ukulele is a guitar's top four strings, exactly. A standard ukulele is the same, up a fourth. A bass is the bottom four, down an octave.
+
+## Sources
+
+- [Re-entrant tuning](https://en.wikipedia.org/wiki/Re-entrant_tuning), [Ukulele](https://en.wikipedia.org/wiki/Ukulele), [Banjo](https://en.wikipedia.org/wiki/Banjo), [Bass guitar](https://en.wikipedia.org/wiki/Bass_guitar) and [Pedal steel guitar](https://en.wikipedia.org/wiki/Pedal_steel_guitar), Wikipedia.
+- GuitarAlchemist/ga at [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6): `Common/GA.Domain.Core/Instruments` (`Tuning.cs`, `Primitives/Str.cs`, `Primitives/Fretboard.cs`), `Common/GA.Business.Config/Instruments.yaml`.
+- The course program: [`Lesson8.cs`](https://github.com/spareilleux/learn/blob/main/code/music-theory-ga/GaTheory/Lesson8.cs), [`Instruments.cs`](https://github.com/spareilleux/learn/blob/main/code/music-theory-ga/GaTheory/Instruments.cs), [`expected/l8.txt`](https://github.com/spareilleux/learn/blob/main/code/music-theory-ga/expected/l8.txt).
+
+Next: [Appendix A](../appendix-instruments/) reads all 122 instruments of GA's catalogue, and what GA's own loader returns for them.

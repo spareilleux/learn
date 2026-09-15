@@ -17,7 +17,24 @@ sidebar:
 - [x] Lesson 5: keys, key signatures and the circle of fifths
 - [x] Lesson 6: the chords of a key
 - [x] Lesson 7: cadences, ii–V–I and the key of a progression
-- [ ] Lessons 8 to 16 (see the outline on the mission page)
+- [x] Lesson 8: the ukulele and the bass
+- [x] Appendix A: every instrument in GA's catalogue
+- [x] Appendix B: the OPTIC hierarchy
+- [x] Appendix C: a verdict on every `DIFF` row of lessons 1 to 7
+- [ ] Lessons 9 to 17 (see the outline on the mission page)
+
+## 2026-09-15 — A verdict on every divergence, the ukulele and the bass, three appendices
+
+- **All 40 `DIFF` rows of lessons 1 to 7 now have a verdict**, in [Appendix C](../appendix-ga-findings/): 39 are GA's bug, one (`PitchClass.Parse("A")`) is a defensible convention with a precedence flaw underneath, and none is an error in the course. They come from **19 distinct defects** — one wrong line in `Note.Chromatic.ToAccidented` accounts for eight rows on its own — and they fall into three families: copy-paste inside a block of near-identical members, a reduced type asked for the information it was built to discard, and `TryParse` that throws.
+- Nine sentences across lessons 1, 2, 3, 4, 6 and 7 presented a divergence as a matter of taste and now give the verdict. The worst of them was lesson 2's "Neither answer is wrong" about `ModalFamily`: a mode is a rotation, a scale has as many modes as it has notes, and Ian Ring's pages answer 7 and 6 where GA answers 14 and 24.
+- **Lesson 8, the ukulele and the bass.** Two facts that guitar-shaped code gets wrong: a ukulele is re-entrant (its fourth string is higher than its third), and a bass is tuned entirely in fourths (it has none of the guitar's one irregular pair). A ukulele's gaps are 5 4 5, the same as the guitar's top four strings; a baritone ukulele *is* those four strings; a bass is the bottom four, an octave down.
+- `Tuning.BuildPitchArray` decides which end of a tuning is string 1 by comparing the **first pitch with the last one only**. That works on any tuning that rises or falls all the way. On GA's own two 5-string banjo tunings, whose short drone string is written first and sounds higher than the last string, it keeps the file's order and numbers the strings backwards. `Str`'s comment, "String 1 is the string with the highest pitch", cannot hold for that instrument: string 1 is D4 and string 5 is G4.
+- `Fretboard.GetNote` documents its first parameter as "Zero-based string index (0 = lowest string)" and then indexes `Tuning[stringIndex + 1]`, where string 1 is the highest. The comment is wrong, not the code.
+- **Appendix A: `InstrumentsConfig` returns one instrument.** The course program now references `GA.Business.Config` and calls `getAllInstruments()` on the same run that reads the file itself: the file holds **122 instruments and 280 tunings**, the loader returns **1 and 2**. `InstrumentsYaml` expects a document with an `Instruments:` list of `{ Name, Tunings }`; the file is a mapping of instruments, each a mapping of tunings, with no `Instruments` key anywhere. Both the null check and the `with _ ->` handler fall back to `defaultData ()`, two hard-coded guitar tunings. Nothing fails and nothing logs.
+- Seven of the 280 tunings are not pitches: two pedal steel entries begin with their tuning's *name* (`C6`, `E9`), one begins with the literal word `Tuning`, one is the instrument's own name, one is missing an octave, and the two harp guitars use `|` to separate the sub-bass strings. The same name-as-a-pitch slip produced the ukulele's five-pitch tunings, which parse silently.
+- **Appendix B: the OPTIC hierarchy.** One fingering climbed to a set class, one equivalence at a time, with GA's type at each rung — `PitchClassSet` after O, P and C, `TranspositionClass` after T, `SetClass` after I — and the counts 4096, 352 and 224 agreeing with the course. GA's OPTIC-K embedding schema splits the same ladder in two: STRUCTURE (dimensions 6-29, weight 0.45) is "pitch-class set invariants (O+P+T+I)", MORPHOLOGY (30-53, weight 0.25) is "physical fretboard realization", which is everything the ladder discards. The weights and ranges are read from the skill document, not run: *to verify*.
+- The appendix also explains Ian Ring's [scale finder](https://ianring.com/musictheory/scales/finder/) as the ladder made clickable — Rotate is T, Reflect is I — and [Harmonious](https://harmoniousapp.net/) as the same material seen from the other end, by key and by chord rather than by set number.
+- The course program grows to ten entry points (`l1` to `l10`), all in `check.sh`. `Diagrams.Fretboard` now takes a tuning, so the ukulele and the bass get their own fretboard diagrams; the fourteen existing SVG files are byte-identical after the change.
 
 ## 2026-09-14 — Pinning GA and building against it
 

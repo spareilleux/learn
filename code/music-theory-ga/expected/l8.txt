@@ -1,0 +1,102 @@
+# l8
+
+== Tunings: the ukulele and the bass, string 1 first
+string       course       GA           check
+ukulele 1    A4           A4           ok
+ukulele 2    E4           E4           ok
+ukulele 3    C4           C4           ok
+ukulele 4    G4           G4           ok
+bass 1       G2           G2           ok
+bass 2       D2           D2           ok
+bass 3       A1           A1           ok
+bass 4       E1           E1           ok
+
+== Re-entrant: on a ukulele the fourth string is not the lowest
+string       course         GA             check
+ukulele 1    A4 midi 69     A4 midi 69     ok
+ukulele 2    E4 midi 64     E4 midi 64     ok
+ukulele 3    C4 midi 60     C4 midi 60     ok
+ukulele 4    G4 midi 67     G4 midi 67     ok
+steps from string 4 to string 1: -7 4 5  (the negative step is what makes it re-entrant)
+the low G ukulele instead:      5 4 5  (only rising: not re-entrant)
+
+== How GA decides which end of a tuning is string 1
+instrument             course           GA               check
+guitar                 E4               E4               ok
+ukulele                A4               A4               ok
+bass                   G2               G2               ok
+banjo, tenor jazz      A4               A4               ok
+banjo, 5 strings       D4               G4               DIFF
+banjo, C tuning        D4               G4               DIFF
+GA, banjo strings 1 to 5: G4 D3 G3 B3 D4
+The fifth string of a 5-string banjo is the short drone, the highest of the five, so
+"string 1 is the highest" is not a definition: here GA returns the file's order, reversed.
+
+== The ukulele has the interval pattern of four guitar strings
+instrument               tuning                 steps between strings
+guitar, strings 4 to 1   D3 G3 B3 E4            5 4 5
+ukulele, low G           G3 C4 E4 A4            5 4 5
+ukulele, baritone        D3 G3 B3 E4            5 4 5
+guitar, strings 6 to 3   E2 A2 D3 G3            5 5 5
+bass                     E1 A1 D2 G2            5 5 5
+ukulele - guitar         5 5 5 5                semitones, string by string
+baritone - guitar        0 0 0 0                semitones
+bass - guitar 6 to 3     -12 -12 -12 -12        semitones
+
+== A guitar shape played on a ukulele: the same fingers, a fourth higher
+instrument               sounds                 pitch classes
+guitar, strings 4 to 1   E3 G3 C4 E4            0 4 7  C major
+ukulele, low G           A3 C4 F4 A4            0 5 9  F major
+ukulele, re-entrant      A4 C4 F4 A4            0 5 9  F major
+difference               5 5 5 5                semitones: a perfect fourth
+The re-entrant ukulele plays the same four pitch classes, with its bass note an octave up.
+
+== Pitch class C on frets 0 to 12
+instrument   course                             GA                                 check
+ukulele      4/5 3/0 3/12 2/8 1/3               4/5 3/0 3/12 2/8 1/3               ok
+bass         4/8 3/3 2/10 1/5                   4/8 3/3 2/10 1/5                   ok
+
+== A bass is tuned in fourths: one shape, every pair of strings
+pair             semitones    interval
+bass 4-3         5            a fourth
+bass 3-2         5            a fourth
+bass 2-1         5            a fourth
+guitar 6-5       5            a fourth
+guitar 5-4       5            a fourth
+guitar 4-3       5            a fourth
+guitar 3-2       4            a major third
+guitar 2-1       5            a fourth
+Every pair on the bass is a fourth, so a shape keeps its sound on any pair of strings.
+On the guitar the 3-2 pair is a major third: that one gap is what makes the shapes irregular.
+
+== The ukulele and the bass in GA's Instruments.yaml
+entry                                tuning as written              read by the course
+BassGuitar.Standard                  E1 A1 D2 G2                    4 pitches
+BassGuitar.FiveStrings               B0 E1 A1 D2 G2                 5 pitches
+BassGuitar.SixStrings                B0 E1 A1 D2 G2 C3              6 pitches
+Ukulele.SopranoConcertAndTenorC      C6 G4 C4 E4 A4                 5 pitches
+Ukulele.SopranoConcertAndTenorD      D6 A4 D4 F#4 B4                5 pitches
+Ukulele.Baritone                     D4 G3 B4 E4                    4 pitches
+Ukulele.Tahitian                     G4 G4 C5 C5 E5 E5 A4 A4        8 pitches
+Ukulele.BanjoOrBanjoleteC            C6 G4 C4 E4 A4                 5 pitches
+Ukulele.BanjoOrBanjoleteD            D6 A4 D4 F#4 B4                5 pitches
+BassGuitarExtended.DropD             D1 A1 D2 G2                    4 pitches
+BassGuitarExtended.BEAD              B0 E1 A1 D2                    4 pitches
+BassGuitarExtended.Tenor             A1 D2 G2 C3                    4 pitches
+BassGuitarExtended.Piccolo           E2 A2 D3 G3                    4 pitches
+BassGuitarExtended.FretlessStandard  E1 A1 D2 G2                    4 pitches
+BaritoneUkulele.Standard             D4 G3 B3 E4                    4 pitches
+BaritoneUkulele.LowGReentrant        D4 G4 B3 E4                    4 pitches
+SopraninoUkulele.Standard            D5 G4 B4 E5                    4 pitches
+
+GA's own constants: Tuning.Ukulele = G4 C4 E4 A4 (4 strings), Tuning.Bass = E1 A1 D2 G2 (4 strings)
+A ukulele has four strings: in the five C6 and D6 entries, the tuning's name, C or D, is written as a pitch.
+A baritone ukulele is tuned like the guitar's top four strings, D3 G3 B3 E4; the two entries
+disagree with each other and with that: D4 G3 B4 E4 and D4 G3 B3 E4.
+
+== Exercise solutions
+question                     answer
+1. ukulele 0003              G4 C4 E4 C5                    pitch classes 0 4 7: C major
+2. 0003 on a baritone        D3 G3 B3 G4                    pitch classes 2 7 E: G major
+3. re-entrant entries        107 of 273                     tunings that rise and fall
+   first ten: Baglama.Greek, Bajo.Quinto, Bajo.Sexto, Bandola.Central, Bandola.Guayanesa, Bandora.Standard, Bandurria.Peruvian, Banjo.TenorIrish, Banjo.Bluegrass5Strings, Banjo.CTuning5Strings

@@ -86,7 +86,7 @@ VI        F major-triad Submediant         F major-triad Submediant         ok
 VII       G major-triad Subtonic           G major-triad LeadingTone        DIFF
 ```
 
-`FromDegree(7)` returns `LeadingTone` whatever the key. GA's `ScaleDegreeFunction` enumeration does have a `Subtonic` member, but `FromDegree` only sees a number. With the raised leading tone, both sides agree; the GA column stacks GA's `Scale.HarmonicMinor`:
+`FromDegree(7)` returns `LeadingTone` whatever the key, for two reasons rather than one: its only parameter is a degree number, with no key and no mode to tell a half step below the tonic from a whole step, and its return type, the `HarmonicFunction` enumeration, has no `Subtonic` member at all. GA does define one, in a separate enumeration, [`ScaleDegreeFunction`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/Primitives/ScaleDegreeFunction.cs#L64-L70), documented as "one whole step below tonic in natural minor scale", which `FromDegree` does not use. With the raised leading tone, both sides agree; the GA column stacks GA's `Scale.HarmonicMinor`:
 
 ```text
 == Triads of A minor with the raised leading tone (harmonic minor)

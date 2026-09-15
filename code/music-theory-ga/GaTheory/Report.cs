@@ -42,5 +42,17 @@ public static class Report
         }
     }
 
+    // A plain aligned row, for tables that show data instead of comparing the course with GA
+    public static void Plain(string label, object? first, object? second = null) =>
+        Console.WriteLine($"{label.PadRight(_labelWidth)} {(first?.ToString() ?? string.Empty).PadRight(_width)} {second}".TrimEnd());
+
+    // Header of a plain table
+    public static void Headings(string label, string first, string second, int labelWidth = 14, int width = 20)
+    {
+        _width = width;
+        _labelWidth = labelWidth;
+        Plain(label, first, second);
+    }
+
     public static void Line(string text = "") => Console.WriteLine(text);
 }

@@ -1,0 +1,44 @@
+# l10
+
+== One fingering, climbed rung by rung
+rung                       the object                         what it forgets
+a fingering                x32010                             nothing: strings, frets, muted strings
+the pitches                C3 E3 G3 C4 E4                     which string each note was played on
+- O, octave                0 4 7 0 4                          the octave of each note
+- P, permutation           0 0 4 4 7                          the order of the notes
+- C, cardinality           0 4 7                              doubled notes
+- T, transposition         0 4 7                              which key it is in
+- I, inversion             (037)                              major against minor
+
+== What each rung identifies
+rung                       distinct objects     of the C major triad
+fingerings, frets 0 to 4   63                   ways to play these three pitch classes
+pitch multisets            5                    notes sounding in x32010
+the pitch-class set        1                    0 4 7
+- T: transposition class   1                    one of the 12 major triads
+- I: set class             1                    one of the 24 major and minor triads
+
+== How many objects there are at each rung
+rung                           course   GA       check
+pitch-class sets (P, O, C)     4096     4096     ok
+transposition classes (+T)     352      352      ok
+set classes (+I)               224      224      ok
+cardinalities (+C)             13       13       ok
+
+== The same climb for four chords
+chord          pitch classes      transposition class / set class
+C              0 4 7              0 4 7  /  (037)
+A minor        0 4 9              0 3 7  /  (037)
+G              2 7 E              0 4 7  /  (037)
+F              0 5 9              0 4 7  /  (037)
+C and G are different chords, the same transposition class, the same set class.
+C and A minor are different transposition classes and the same set class: I joins them.
+
+== GA's types, one per rung
+rung                       course                     GA                         check
+- O, P, C: a set           id 145: 0 4 7              id 145: 0 4 7              ok
+cardinality                3                          3                          ok
+- I: prime form            (037)                      (037)                      ok
+interval-class vector      <0 0 1 1 1 0>              <0 0 1 1 1 0>              ok
+GA's SetClass for this set: SetClass[3 (Tritonic)-<0 0 1 1 1 0>/137]
+its Forte number: 3-11

@@ -49,15 +49,19 @@ The course follows the concepts that GA's code, configuration files and MCP tool
 | 5 | [Keys, key signatures and the circle of fifths](05-keys-and-the-circle-of-fifths/) | key signatures, relative and parallel keys, closely related keys | `Key`, `KeySignature`, MCP key tools | range value objects, lookup tables |
 | 6 | [The chords of a key](06-diatonic-chords/) | diatonic triads and seventh chords, Roman numerals, scale-degree names, functions | `HarmonicFunction`, `Key.Notes`, `PitchClassSet.GetCompatibleKeys`, `ga_diatonic_chords` | enums, subset tests on bit masks |
 | 7 | [Cadences, ii–V–I and the key of a progression](07-cadences-and-progressions/) | cadences, plagal and deceptive motion, ii–V–I, resolving V⁷, finding the key | `Cadences.yaml`, `PitchClassSet.ClosestDiatonicKey`, `ga_analyze_progression`, `ga_key_from_progression` | scoring and tie-breaking |
-| 8 | Voice leading and common tones | common tones, smooth voice leading, voice-leading distance | `VoiceLeadingSpace`, `ProgressionVoiceLeadingAnalyzer`, `ga_common_tones`, `ga_voice_leading_pair` | distance metrics |
-| 9 | Substitutions and modal mixture | relative and tritone substitution, borrowed chords | `ChordSubstitutionSkill`, `ModalInterchange.yaml`, `get_borrowed_chords`, `ga_chord_substitutions`, `GrothendieckDelta` | ranking candidates |
-| 10 | Modes in depth | modes of melodic and harmonic minor, brightness, modal families | `MelodicMinorMode`, `HarmonicMinorMode`, `Modes.yaml`, `PitchClassSet.StepBrightness` | generics over scale degrees |
-| 11 | Symmetry: modes of limited transposition | whole-tone, octatonic and augmented scales, symmetric bracelets | `SymmetricScaleMode`, `WholeToneScaleMode`, `DiminishedScaleMode`, `AugmentedScaleMode` | invariants under rotation |
-| 12 | Extended and altered chords | ninths, elevenths, thirteenths, alterations, upper structures, polychords | `ChordAlterationService`, `ExtendedChords.yaml`, `ga_polychord` | parsers with optional parts |
-| 13 | Guitar voicings: shells, drop 2 and drop 3 | shell voicings, close and drop voicings, guide tones | `VoicingAnalyzer`, `VoicingDecomposer`, `VoicingGenerator`, `ga_search_voicings` | combinatorial generation |
-| 14 | The fretboard: CAGED, fingering and playability | CAGED shapes, fretboard geometry, fingering, alternate tunings | `FretboardGeometry`, `PhysicalCostService`, `Biomechanics`, `Tunings.toml`, `ga_easier_voicings` | cost functions |
-| 15 | Arpeggios, chord–scale theory and improvisation | arpeggios, chord–scale pairs, outside notes | `ImprovisationConcepts.yaml`, `OutsideNotesSkill`, `ga_arpeggio_suggestions` | mapping tables |
-| 16 | The Tonnetz and neo-Riemannian transformations | P, L and R, the Tonnetz, chromatic mediants | `NeoRiemannian.yaml`, `NeoRiemannianConfig.fs` | graphs of transformations |
+| 8 | [The ukulele and the bass](08-ukulele-and-bass/) | re-entrant tunings, tunings in fourths, string numbering | `Tuning.Ukulele`, `Tuning.Bass`, `Str`, `Fretboard`, `Instruments.yaml` | guessing from data, and when not to |
+| 9 | Voice leading and common tones | common tones, smooth voice leading, voice-leading distance | `VoiceLeadingSpace`, `ProgressionVoiceLeadingAnalyzer`, `ga_common_tones`, `ga_voice_leading_pair` | distance metrics |
+| 10 | Substitutions and modal mixture | relative and tritone substitution, borrowed chords | `ChordSubstitutionSkill`, `ModalInterchange.yaml`, `get_borrowed_chords`, `ga_chord_substitutions`, `GrothendieckDelta` | ranking candidates |
+| 11 | Modes in depth | modes of melodic and harmonic minor, brightness, modal families | `MelodicMinorMode`, `HarmonicMinorMode`, `Modes.yaml`, `PitchClassSet.StepBrightness` | generics over scale degrees |
+| 12 | Symmetry: modes of limited transposition | whole-tone, octatonic and augmented scales, symmetric bracelets | `SymmetricScaleMode`, `WholeToneScaleMode`, `DiminishedScaleMode`, `AugmentedScaleMode` | invariants under rotation |
+| 13 | Extended and altered chords | ninths, elevenths, thirteenths, alterations, upper structures, polychords | `ChordAlterationService`, `ExtendedChords.yaml`, `ga_polychord` | parsers with optional parts |
+| 14 | Guitar voicings: shells, drop 2 and drop 3 | shell voicings, close and drop voicings, guide tones | `VoicingAnalyzer`, `VoicingDecomposer`, `VoicingGenerator`, `ga_search_voicings` | combinatorial generation |
+| 15 | The fretboard: CAGED, fingering and playability | CAGED shapes, fretboard geometry, fingering, alternate tunings | `FretboardGeometry`, `PhysicalCostService`, `Biomechanics`, `Tunings.toml`, `ga_easier_voicings` | cost functions |
+| 16 | Arpeggios, chord–scale theory and improvisation | arpeggios, chord–scale pairs, outside notes | `ImprovisationConcepts.yaml`, `OutsideNotesSkill`, `ga_arpeggio_suggestions` | mapping tables |
+| 17 | The Tonnetz and neo-Riemannian transformations | P, L and R, the Tonnetz, chromatic mediants | `NeoRiemannian.yaml`, `NeoRiemannianConfig.fs` | graphs of transformations |
+| A | [Every instrument in Guitar Alchemist](appendix-instruments/) | tunings, courses, re-entrant strings | `Instruments.yaml`, `InstrumentsConfig`, `Tuning` | configuration that nothing reads |
+| B | [The OPTIC hierarchy](appendix-optic/) | octave, permutation, transposition, inversion, cardinality | `PitchClassSet`, `TranspositionClass`, `SetClass`, GA's OPTIC-K schema | equivalence, quotient by quotient |
+| C | [Every divergence, and whose bug it is](appendix-ga-findings/) | the 40 `DIFF` rows of lessons 1 to 7 | the 19 defects they come from | reading a comparison honestly |
 | — | [Journal](journal/) | | | |
 
 ## Prerequisites

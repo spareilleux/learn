@@ -12,6 +12,8 @@
 
   <ItemGroup>
     <ProjectReference Include="$(GaRoot)Common/GA.Domain.Core/GA.Domain.Core.csproj" />
+    <!-- Lessons 8 and 9 read Instruments.yaml, which this project copies to the output directory -->
+    <ProjectReference Include="$(GaRoot)Common/GA.Business.Config/GA.Business.Config.fsproj" />
   </ItemGroup>
 
 </Project>

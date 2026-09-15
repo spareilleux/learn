@@ -10,6 +10,9 @@ var lessons = new Dictionary<string, Action>
     ["l5"] = Lesson5.Run,
     ["l6"] = Lesson6.Run,
     ["l7"] = Lesson7.Run,
+    ["l8"] = Lesson8.Run,
+    ["l9"] = Lesson9.Run,
+    ["l10"] = Lesson10.Run,
 };
 
 Console.OutputEncoding = System.Text.Encoding.UTF8;
