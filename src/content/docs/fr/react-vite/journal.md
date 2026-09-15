@@ -1,0 +1,71 @@
+---
+title: Journal
+description: Notes d'avancement datées du cours React (Vite) — React 19.3, Vite 8.3 et Vitest 5 épinglés, le serveur de développement et une mise à jour HMR capturés par un script, les surprises de Vite, Vitest et @types/react, ce que le cours a trouvé dans les composants React de GuitarAlchemist/ga, et les points à vérifier.
+sidebar:
+  order: 99
+---
+
+## Avancement
+
+- [x] React 19.3.0, Vite 8.3.0, TypeScript 7.0.2, Vitest 5.0.0, Testing Library et oxlint épinglés dans le `package.json` et le fichier de verrouillage propres au cours
+- [x] `check.sh` : `create-vite`, le serveur de développement, une mise à jour HMR, `tsc`, `vite build`, oxlint, chaque extrait d'erreur et chaque test, comparés avec `expected/`
+- [ ] CI sur trois OS (voir plus bas)
+- [x] Leçon 1 : un projet Vite
+- [x] Leçon 2 : composants et JSX
+- [x] Leçon 3 : état et rendu
+- [x] Leçon 4 : événements et formulaires
+- [ ] Leçon 5 : effets
+
+## 2026-09-15 — Versions
+
+- `npm view` donne React et React DOM 19.3.0, publiés le 9 septembre 2026, Vite 8.3.0, `@vitejs/plugin-react` 6.1.1, Vitest 5.0.0, jsdom 30.0.1, `@testing-library/react` 16.3.3, `@testing-library/dom` 10.4.2, `@testing-library/user-event` 14.6.7, oxlint 1.83.0 et `create-vite` 9.2.1. Le cours les épingle exactement dans [`code/react-vite/package.json`](https://github.com/spareilleux/learn/blob/3f7a5df/code/react-vite/package.json), et utilise le Node.js 24.21.0 et le TypeScript 7.0.2 des autres cours du site.
+- Le modèle `react-ts` de `create-vite` 9.2.1 demande TypeScript `~6.0.2`, pas 7.0 : une plage avec `~` n'autorise que 6.0.x. Le cours utilise 7.0.2, et `tsc -b` vérifie les deux projets du modèle sans changement. Son `strict` est absent, parce que c'est le défaut depuis TypeScript 6.0, et son outil de lint est oxlint plutôt qu'ESLint, avec une option `--eslint` pour retrouver ESLint.
+- Vite 8 regroupe avec Rolldown et transforme avec Oxc. La [leçon 1 du cours TypeScript](../../typescript-for-csharp-java/01-compiler-and-tooling/#dans-de-vrais-projets) dit que Vite retire les types avec esbuild : c'est vrai du Vite 5 de GA, et ne l'est plus de Vite 8. `@vitejs/plugin-react` 6 n'a pas non plus de dépendance à Babel ; Fast Refresh est fait par Oxc.
+- Le fichier de verrouillage écrit sous Windows liste les paquets natifs de toutes les plateformes comme dépendances optionnelles : `@rolldown/binding-*`, `@oxlint/*` et `@typescript/typescript-*`.
+
+## 2026-09-15 — Capturer le serveur de développement
+
+- Le serveur de développement, les modules qu'il sert et le message HMR sont capturés par des scripts, pas à la main : [`dev-start.mjs`](https://github.com/spareilleux/learn/blob/3f7a5df/code/react-vite/scripts/dev-start.mjs) démarre `vite` et l'arrête quand l'URL est affichée, [`dev-module.mjs`](https://github.com/spareilleux/learn/blob/3f7a5df/code/react-vite/scripts/dev-module.mjs) demande une URL par l'API JavaScript de Vite, et [`hmr.mjs`](https://github.com/spareilleux/learn/blob/3f7a5df/code/react-vite/scripts/hmr.mjs) se connecte au WebSocket HMR, modifie une copie d'`App.tsx` et affiche les messages.
+- Quand la sortie n'est pas un terminal, Vite n'affiche pas de ligne `press h + enter to show help`. Mon premier `dev-start.mjs` attendait cette ligne, ne l'a jamais vue, et a laissé un serveur tourner sur le port 5199 ; il attend maintenant `use --host to expose`.
+- Sous Windows, `server.close()` appelé juste après la première requête de module ne se résolvait jamais : Node.js affichait « Detected unsettled top-level await » et quittait avec le code 13. La requête avait lancé l'optimiseur de dépendances, qui tournait encore. Attendre `server.environments.client.waitForRequestsIdle()` avant `close()` a réglé le problème. Je n'ai pas vérifié si Linux ou macOS se comportent de la même façon (*à vérifier*), ni cherché une issue Vite existante.
+- Git Bash sous Windows réécrit les arguments qui commencent par `/` : `vite build --base /learn/react-vite/` a construit des pages qui demandaient `/Program Files/Git/learn/react-vite/assets/…`. `check.sh` définit `MSYS_NO_PATHCONV=1`, et les scripts prennent les chemins de modules sans leur barre oblique initiale.
+- Les sorties sont normalisées par [`normalize.mjs`](https://github.com/spareilleux/learn/blob/3f7a5df/code/react-vite/normalize.mjs) : les durées, le hash `?v=` des dépendances pré-empaquetées, les horodatages HMR et les source maps en ligne. Les noms des fichiers de production, comme `index-BQ_Vbf-Q.js`, sont des hashs du contenu et sont gardés tels quels.
+- Le fait que Fast Refresh garde l'état n'est pas dans `check.sh`, qui ne voit que le message WebSocket. Je l'ai vérifié à la main dans un navigateur : trois clics sur le compteur, deux sur le capo, puis une modification du titre dans `App.tsx`. Le titre a changé, le compteur et le capo ont gardé leurs valeurs, et une variable définie sur `window` avant la modification a survécu, donc la page n'avait pas été rechargée. Pour la leçon 1, j'ai aussi servi le build avec une erreur de type via `vite preview` et cliqué deux fois sur son bouton : `Count is 01`, puis `Count is 011`.
+
+## 2026-09-15 — Vitest et Testing Library
+
+- React Testing Library démonte les composants rendus après chaque test seulement quand le framework de test expose un `afterEach` global. Vitest ne le fait pas, sauf si `globals: true` est défini, donc le DOM d'un test restait dans le suivant et les requêtes trouvaient deux formulaires. [`src/testing/setup.ts`](https://github.com/spareilleux/learn/blob/3f7a5df/code/react-vite/src/testing/setup.ts) appelle `cleanup` dans `afterEach`, comme le décrit la [documentation de Testing Library](https://testing-library.com/docs/react-testing-library/api#cleanup).
+- Le reporter par défaut de Vitest affiche la sortie console groupée par moment, pas par test, et le groupement changeait d'une exécution à l'autre. Le [`reporter.mjs`](https://github.com/spareilleux/learn/blob/3f7a5df/code/react-vite/scripts/reporter.mjs) du cours collecte chaque log avec son test et les affiche dans l'ordre à la fin, et `check.sh` exécute un fichier de test par exécution de Vitest.
+- Les avertissements de développement de React, la clé manquante ou le champ contrôlé, vont dans `console.error`, et le reporter les affiche avec un préfixe `console.error:`, donc les leçons les citent depuis les tests.
+- Un compteur au niveau du module, dans une première version du test StrictMode de la leçon 3, continuait de compter d'un test au suivant : Vitest isole les fichiers de test, pas les tests. Le composant impur reçoit maintenant en prop le tableau qu'il modifie.
+- `tsconfig.app.json` avait d'abord la lib `DOM.Iterable`, pour décomposer une `NodeList` dans un test. Avec TypeScript 7.0.2, `DOM` seul l'accepte ; la configuration du cours a maintenant le `["ES2023", "DOM"]` du modèle.
+
+## 2026-09-15 — @types/react et React 19.3
+
+- `@types/react` 19.3.0 marque `FormEvent` et `FormEventHandler` comme `@deprecated`, avec le commentaire « FormEvent doesn't actually exist », et renvoie vers `ChangeEvent`, `InputEvent` et `SubmitEvent`. `ChangeEvent` a deux paramètres de type, la cible courante et la cible. La leçon 4 utilise `SubmitEvent<HTMLFormElement>` pour `onSubmit`.
+- Le type de retour d'un composant, dans le message de `tsc`, est `Promise<ReactNode> | ReactNode` : les types acceptent les composants asynchrones, pour les Server Components.
+- En StrictMode, React 19.3 rend deux fois un composant impur au montage, et le DOM affiche la sortie du second rendu, « Played so far: G G ».
+
+## 2026-09-15 — La CI
+
+- [`react-vite-examples.yml`](https://github.com/spareilleux/learn/blob/f6417a9/.github/workflows/react-vite-examples.yml) exécute `npm ci` et `bash check.sh` sur Ubuntu, Windows et macOS avec Node.js 24.21.0. `check.sh` prend environ 50 secondes sur ma machine Windows.
+- Le premier push a été refusé : le jeton GitHub utilisé pour pousser n'a pas le scope `workflow`, que GitHub exige pour créer un fichier sous `.github/workflows`. Le code a été poussé sans le workflow, et l'exécution sur trois OS reste à faire (*à vérifier* : les différences entre OS, comme l'ordre de la liste de fichiers de `create-vite` ou le format de sortie d'oxlint).
+
+## 2026-09-15 — Ce que le cours a trouvé dans GuitarAlchemist/ga
+
+Au commit [`8cc8c5a`](https://github.com/GuitarAlchemist/ga/commit/8cc8c5a17c685c779c46cd5e6d0a3f5d5036cc41), dans `ReactComponents/ga-react-components` et `Apps/ga-client` ; `Apps/ga-dashboard` est une application Angular 21, hors de ce cours. Rien de ceci n'a été signalé à GA.
+
+- **Des lignes dépliées retenues par index.** [`DynamicPanel.tsx`](https://github.com/GuitarAlchemist/ga/blob/8cc8c5a17c685c779c46cd5e6d0a3f5d5036cc41/ReactComponents/ga-react-components/src/components/PrimeRadiant/DynamicPanel.tsx#L76-L120) garde ses lignes dépliées dans un `Set<number>` de positions dans les données filtrées et interrogées périodiquement. Après un filtre ou une interrogation qui change l'ordre, c'est une autre ligne qui est dépliée. La leçon 3 le reproduit dans `ExpandableList.tsx`. Les données du panneau sont `unknown[]` ; le champ qui pourrait servir d'identité dépend des définitions de panneaux (*à vérifier*).
+- **Une boucle de rendus entre deux composants.** [`NotesSelector.tsx`](https://github.com/GuitarAlchemist/ga/blob/8cc8c5a17c685c779c46cd5e6d0a3f5d5036cc41/ReactComponents/ga-react-components/src/components/NotesSelector.tsx#L15-L18) appelle `onNotesChange` depuis un effet qui en dépend, et [`ScaleSelector.tsx`](https://github.com/GuitarAlchemist/ga/blob/8cc8c5a17c685c779c46cd5e6d0a3f5d5036cc41/ReactComponents/ga-react-components/src/components/ScaleSelector.tsx#L18-L21) passe un nouveau gestionnaire à chaque rendu, qui stocke un nouveau tableau. La réduction de la leçon 4 se termine par « Maximum update depth exceeded ». `ScaleSelector` stocke aussi dans l'état `scale`, dérivé des notes. Il est exporté depuis `components/index.ts`, et aucune application de GA ne le rend à ce commit, donc la boucle est latente. Je n'ai pas monté le composant de GA lui-même (*à vérifier*).
+- **Une fenêtre glissante avec l'index pour clé.** [`DemerzelCriticOverlay.tsx`](https://github.com/GuitarAlchemist/ga/blob/8cc8c5a17c685c779c46cd5e6d0a3f5d5036cc41/ReactComponents/ga-react-components/src/components/PrimeRadiant/DemerzelCriticOverlay.tsx#L179-L189) dessine les dix derniers scores avec `key={i}`, et ses barres ont `transition: height 0.3s ease` : une fois la fenêtre pleine, chaque nouveau score modifie et anime toutes les barres. L'exercice 3 de la leçon 2 montre la réutilisation des éléments ; je n'ai pas regardé l'animation (*à vérifier*).
+- **Les règles React d'oxlint.** oxlint 1.83.0 avec `react/no-array-index-key`, `react/exhaustive-deps` et `typescript/no-explicit-any` signale, dans `ga-react-components/src`, 85 clés par index, 34 listes de dépendances d'effet ou de callback qui ne correspondent pas à ce que lit la fonction, et 11 `any` explicites ; dans `ga-client/src`, 6 clés par index. `react/jsx-key` et `react/rules-of-hooks` ne signalent rien. Les chiffres sont des résultats de lint, pas des bugs : la plupart des clés par index sont sur des listes qui ne changent jamais.
+- **Des effets sans nettoyage.** Une recherche sommaire des appels `useEffect` qui démarrent un timer, un écouteur ou un abonnement et ne renvoient pas de nettoyage en a trouvé un : [`ChatWidget.tsx`](https://github.com/GuitarAlchemist/ga/blob/8cc8c5a17c685c779c46cd5e6d0a3f5d5036cc41/ReactComponents/ga-react-components/src/components/PrimeRadiant/ChatWidget.tsx#L810-L815) démarre un `setTimeout` de 300 ms qui n'est pas annulé si le composant est démonté avant. La recherche est textuelle, pas un parseur (*à vérifier* avant d'en tirer des conclusions).
+- **Les options de scène.** [`SceneOptions.tsx`](https://github.com/GuitarAlchemist/ga/blob/8cc8c5a17c685c779c46cd5e6d0a3f5d5036cc41/ReactComponents/ga-react-components/src/components/PrimeRadiant/SceneOptions.tsx#L119) prévient aussi son parent depuis un effet, une fois au montage, avec la règle des dépendances désactivée. Sa fusion des paramètres d'URL et des options sauvegardées fait déjà l'objet de la pull request ouverte [GuitarAlchemist/ga#683](https://github.com/GuitarAlchemist/ga/pull/683), issue du cours JavaScript ; ce cours ne la corrige pas une seconde fois.
+- **Build et serveur de développement.** Le script `build` de `ga-react-components` est `vite build` sans `tsc`, et son `vite.config.ts`, 3 005 lignes, ajoute des middlewares pour des dizaines d'endpoints `/dev-data/` derrière un tunnel Cloudflare (leçon 1). Le script `dev` d'`Apps/ga-client` refuse de démarrer, et dit d'utiliser `ga-react-components` à la place. Le dépôt suit aussi des fichiers générés : `tsconfig.app.tsbuildinfo`, `playwright-report` et `test-results` dans `ga-react-components`.
+
+## À vérifier
+
+- Le blocage de `server.close()` sous Linux et macOS, et l'existence d'une issue Vite à ce sujet.
+- Les `ScaleSelector` et `NotesSelector` de GA montés avec Material UI, et l'animation de DemerzelCriticOverlay.
+- Un champ d'identité pour les lignes de `DynamicPanel` dans les définitions de panneaux de GA.
+- Les sorties du cours sous Linux et macOS, une fois la CI lancée.
