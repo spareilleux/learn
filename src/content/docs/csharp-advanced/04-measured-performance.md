@@ -214,7 +214,7 @@ public static PitchClass NormalizedSubtraction(PitchClass pitchClass1, PitchClas
     _lazySubtractionDictionary.Value[(pitchClass1.Value, pitchClass2.Value)];
 ```
 
-Each value in that table is computed with `FromValue((pcValue1 - pcValue2 + 12) % 12)`: the dictionary caches an addition and a remainder. The program checks that the arithmetic gives the same 144 results, and that the lookup allocates nothing ([`Lesson4.cs#L113-L131`](https://github.com/spareilleux/learn/blob/8ba378e7ea22a64a57b3e45b45afa4c85afa85a3/code/csharp-advanced/Advanced/Lesson4.cs#L113-L131)):
+Each value in that table is computed with `FromValue((pcValue1 - pcValue2 + 12) % 12)`: the dictionary caches a subtraction, an addition and a remainder. The program checks that the arithmetic gives the same 144 results, and that the lookup allocates nothing ([`Lesson4.cs#L113-L131`](https://github.com/spareilleux/learn/blob/8ba378e7ea22a64a57b3e45b45afa4c85afa85a3/code/csharp-advanced/Advanced/Lesson4.cs#L113-L131)):
 
 ```text
 == GA PitchClass subtraction: FrozenDictionary lookup versus arithmetic
