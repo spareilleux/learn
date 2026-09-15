@@ -1,6 +1,6 @@
 ---
 title: Python for C#/Java developers — Mission
-description: Idiomatic, typed and tested Python for developers who know C# or Java — every example, traceback, mypy error and solution run by Python 3.14.7 with uv in CI on Windows, Linux and macOS, with the C# and Java side next to it.
+description: Idiomatic, typed and tested Python for developers who know C# or Java — every example, traceback, mypy error and solution run by Python 3.14.7 with uv, with the C# and Java side next to it.
 sidebar:
   label: Mission
   order: 0

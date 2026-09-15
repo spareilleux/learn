@@ -1,0 +1,611 @@
+---
+title: 1. Instalar y ejecutar Python
+description: Instalar Python 3.14.7 con uv, crear un proyecto, fijar su intérprete y sus dependencias en pyproject.toml y uv.lock, ejecutar archivos y módulos, y ver que Python no comprueba nada antes de que se ejecute una línea — comparado con dotnet, NuGet, Maven, csc y javac.
+sidebar:
+  order: 1
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Código: los archivos [`examples/l01_*`](https://github.com/spareilleux/learn/tree/7d3b4bcda19a81326612cd833dc03b9ca77d3451/code/python-for-csharp-java/examples) y [`errors/l01_*`](https://github.com/spareilleux/learn/tree/7d3b4bcda19a81326612cd833dc03b9ca77d3451/code/python-for-csharp-java/errors), el [`pyproject.toml`](https://github.com/spareilleux/learn/blob/7d3b4bcda19a81326612cd833dc03b9ca77d3451/code/python-for-csharp-java/pyproject.toml) y el [`check.sh`](https://github.com/spareilleux/learn/blob/7d3b4bcda19a81326612cd833dc03b9ca77d3451/code/python-for-csharp-java/check.sh) del curso, y los equivalentes en C# y Java en [`compare_fail/l01_order.cs`](https://github.com/spareilleux/learn/blob/7d3b4bcda19a81326612cd833dc03b9ca77d3451/code/python-for-csharp-java/compare_fail/l01_order.cs), [`compare_fail/L01Order.java`](https://github.com/spareilleux/learn/blob/7d3b4bcda19a81326612cd833dc03b9ca77d3451/code/python-for-csharp-java/compare_fail/L01Order.java) y [`compare/l01_script.cs`](https://github.com/spareilleux/learn/blob/7d3b4bcda19a81326612cd833dc03b9ca77d3451/code/python-for-csharp-java/compare/l01_script.cs).
+
+## Un intérprete por proyecto
+
+Un desarrollador .NET instala un SDK, y `global.json` elige una versión cuando hay varias instaladas. Los paquetes van a una caché global, y cada proyecto restaura las versiones que pide su `.csproj`. Java funciona igual con un JDK, Maven o Gradle, y el repositorio `~/.m2`.
+
+Python no trae esa separación de serie. Un intérprete viene con una carpeta llamada `site-packages`, y un paquete instalado con `pip install` va a esa carpeta, para todos los programas que usan ese intérprete. Dos proyectos que necesitan dos versiones del mismo paquete no pueden compartir un intérprete. La respuesta es un **entorno virtual**: una carpeta, normalmente `.venv` en el proyecto, con su propio `site-packages` y un enlace a un intérprete. Las distribuciones Linux rechazan ahora `pip install` en el Python del sistema, como les permite [PEP 668](https://peps.python.org/pep-0668/), para que un paquete no pueda romper las herramientas del sistema.
+
+| | .NET | Java | Python con uv |
+|---|---|---|---|
+| Entorno de ejecución | el runtime de .NET, en el SDK | un JDK | CPython, una carpeta por versión, instalado por uv |
+| Fijar el entorno de ejecución | `global.json` | toolchains, `.sdkmanrc` | `.python-version`, y `requires-python` en `pyproject.toml` |
+| Archivo de proyecto | `.csproj` | `pom.xml`, `build.gradle` | `pyproject.toml` |
+| Registro de paquetes | NuGet | Maven Central | [PyPI](https://pypi.org/) |
+| Dónde van los paquetes | una caché global, referenciada por proyecto | `~/.m2`, referenciado por proyecto | una caché global, *copiada o enlazada* en el `.venv` del proyecto |
+| Archivo de bloqueo | `packages.lock.json` | archivos de bloqueo de Gradle | `uv.lock` |
+| Compilar y ejecutar | `dotnet run` | `mvn`, `gradle`, `java` | `uv run` |
+
+[uv](https://docs.astral.sh/uv/) es un único ejecutable, escrito en Rust por Astral, que instala versiones de Python, crea entornos virtuales, resuelve y bloquea dependencias, y ejecuta comandos dentro del entorno. Sustituye a pip, venv, pip-tools, pipx y pyenv con una sola herramienta, igual que el comando `dotnet` cubre el SDK, los paquetes y las ejecuciones. Las herramientas oficiales siguen funcionando, y cada paquete que instala uv es un wheel normal de PyPI: nada en el proyecto depende de uv salvo el archivo de bloqueo.
+
+## Python 3.14
+
+CPython publica una nueva versión menor cada octubre, como decidió [PEP 602](https://peps.python.org/pep-0602/), y da soporte a cada una durante cinco años: dos años de correcciones de bugs cada dos meses, y después solo correcciones de seguridad. [PEP 745](https://peps.python.org/pep-0745/) lista las fechas de la 3.14: la 3.14.0 salió el 2025-10-07, y la **3.14.7**, la versión que usa este curso, el 2026-08-05. [PEP 790](https://peps.python.org/pep-0790/) prevé la 3.15.0 para el 2026-10-01.
+
+Las versiones de Python no son como las versiones LTS y STS de .NET: cada versión menor recibe los mismos cinco años. Tampoco son siempre compatibles. Una versión menor puede eliminar módulos y características declarados obsoletos dos versiones antes, así que el código se prueba con las versiones que dice soportar, que es lo que declara `requires-python`.
+
+En Windows, python.org distribuye ahora Python a través del [Python install manager](https://docs.python.org/3.14/using/windows.html), y su documentación marca el instalador tradicional y el lanzador `py` como obsoletos desde la 3.14. Este curso instala Python con uv en los tres SO, para que los comandos y las versiones sean los mismos en todas partes.
+
+## Instalar uv y Python
+
+Los scripts de instalación aceptan una versión en su URL, lo que fija uv igual que `--save-exact` fija un paquete npm:
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+```powershell
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/0.12.14/install.ps1 | iex"
+uv --version
+uv python install 3.14.7
+```
+
+```text
+uv 0.12.14 (ce3bd7931 2026-09-14 x86_64-pc-windows-msvc)
+Downloading cpython-3.14.7-windows-x86_64-none (download) (21.7MiB)
+ Downloaded cpython-3.14.7-windows-x86_64-none (download)
+Installed Python 3.14.7 in 1.99s
+ + cpython-3.14.7-windows-x86_64-none
+```
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```bash
+curl -LsSf https://astral.sh/uv/0.12.14/install.sh | sh
+uv --version
+uv python install 3.14.7
+```
+
+La salida nombra la build para la plataforma, `cpython-3.14.7-linux-x86_64-gnu` en una máquina Intel o AMD de 64 bits (*por verificar*: la CI del curso imprime el intérprete que obtiene en Linux).
+
+</TabItem>
+<TabItem label="macOS">
+
+```bash
+curl -LsSf https://astral.sh/uv/0.12.14/install.sh | sh
+uv --version
+uv python install 3.14.7
+```
+
+La salida nombra la build para la plataforma, `cpython-3.14.7-macos-aarch64-none` en Apple silicon (*por verificar*: la CI del curso imprime el intérprete que obtiene en macOS).
+
+</TabItem>
+</Tabs>
+
+uv descarga sus builds de Python del proyecto [python-build-standalone](https://github.com/astral-sh/python-build-standalone): un CPython compilado para ejecutarse desde cualquier carpeta, sin instalador y sin derechos de administrador. En mi máquina Windows fue a `%APPDATA%\uv\python`. uv también puede usar un intérprete instalado de otra manera, desde python.org, un paquete de Linux o Homebrew, cuando su versión coincide con la solicitada.
+
+`uv python install` también pone un ejecutable `python3.14` en `~/.local/bin`, y en Windows registra el intérprete en el registro para que el install manager pueda verlo. `--no-bin` y `--no-registry` desactivan eso. El resto del curso no lo necesita: `uv run` encuentra el intérprete por sí solo.
+
+## Un proyecto: uv init
+
+`uv init` crea un proyecto. Desde uv 0.12, publicado en julio, el proyecto es un paquete por defecto: su código va a `src/<name>`, y `pyproject.toml` declara cómo construirlo y un comando para ejecutarlo. El [registro de cambios de la 0.12.0](https://github.com/astral-sh/uv/blob/0.12.14/CHANGELOG.md#0120) lo llama un cambio incompatible; antes, `uv init` escribía un `main.py` junto a un `pyproject.toml` que no se podía instalar. `--author-from none` deja mi nombre y mi correo de Git fuera del archivo, y `--vcs none` no crea un repositorio Git dentro de este:
+
+```text
+> uv init hello --python 3.14.7 --author-from none --vcs none
+Initialized project `hello` at `out/uv-demo/hello`
+```
+
+Escribió cuatro archivos. (`check.sh` también pasa `--no-workspace`, porque ejecuta este comando dentro del propio proyecto del curso, que uv extendería si no en un workspace.)
+
+```text
+.python-version
+pyproject.toml
+README.md
+src
+src/hello
+src/hello/__init__.py
+```
+
+```toml
+[project]
+name = "hello"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14.7"
+dependencies = []
+
+[project.scripts]
+hello = "hello:main"
+
+[build-system]
+requires = ["uv_build>=0.12.14,<0.13.0"]
+build-backend = "uv_build"
+```
+
+[`pyproject.toml`](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/) es el archivo de proyecto estándar de Python, definido por [PEP 518](https://peps.python.org/pep-0518/) y [PEP 621](https://peps.python.org/pep-0621/), y lo leen todas las herramientas, no solo uv. Cada tabla tiene un dueño:
+
+| Tabla | Qué contiene | Lo más parecido en un `.csproj` |
+|---|---|---|
+| `[project]` | el nombre, la versión y los metadatos del paquete, las versiones de Python que soporta, sus dependencias | `PackageId`, `Version`, `PackageReference` |
+| `requires-python` | los intérpretes que acepta el proyecto; uv se niega a usar otro | `TargetFramework`, más o menos |
+| `[project.scripts]` | comandos que se crean cuando se instala el paquete: `hello` llama a la función `main` del módulo `hello` | `OutputType` `Exe`, el `ToolCommandName` de una herramienta .NET |
+| `[build-system]` | el backend de build que convierte el código fuente en un wheel, aquí el propio `uv_build` de uv | el SDK de `Sdk="Microsoft.NET.Sdk"` |
+| `[tool.*]` | la configuración de cada herramienta: `[tool.uv]`, `[tool.mypy]`, `[tool.pytest]` | `Directory.Build.props`, `.editorconfig` |
+
+`.python-version` contiene `3.14.7`: el intérprete que usa uv para este proyecto, igual que `global.json` fija un SDK. `src/hello/__init__.py` contiene la función `main` que imprime un saludo. El primer `uv run` crea el entorno, construye el proyecto y lo instala en el entorno, y después ejecuta el comando (las rutas del proyecto están abreviadas):
+
+```text
+> uv run hello
+Using CPython 3.14.7
+Creating virtual environment at: .venv
+   Building hello @ file:///.../out/uv-demo/hello
+      Built hello @ file:///.../out/uv-demo/hello
+Installed 1 package in 25ms
+Hello from hello!
+```
+
+Las líneas anteriores al saludo son mensajes del propio uv, que los escribe en la salida de errores; el `check.sh` del curso los quita antes de comparar las salidas, porque dependen de la caché de uv. Un segundo `uv run hello` solo imprime el saludo.
+
+El propio proyecto del curso no es un paquete: su [`pyproject.toml`](https://github.com/spareilleux/learn/blob/7d3b4bcda19a81326612cd833dc03b9ca77d3451/code/python-for-csharp-java/pyproject.toml) no tiene `[build-system]`, y `[tool.uv]` pone `package = false`, porque es una carpeta de scripts que nadie va a instalar. uv gestiona entonces su entorno y su archivo de bloqueo, y ejecuta los scripts donde están.
+
+## Las dependencias y el archivo de bloqueo
+
+`uv add` añade una dependencia a `pyproject.toml`, resuelve todo el grafo, escribe `uv.lock` e instala el resultado en `.venv`, en un solo paso. `--dev` pone una herramienta en el [grupo de dependencias](https://peps.python.org/pep-0735/) `dev`, que el paquete no necesita una vez instalado:
+
+```text
+> uv add httpx==0.28.1
+Resolved 8 packages in 307ms
+Prepared 1 package in 20ms
+Uninstalled 1 package in 3ms
+Installed 8 packages in 106ms
+ + anyio==4.15.1
+ + certifi==2026.7.22
+ + h11==0.16.0
+ ~ hello==0.1.0 (from file:///.../out/uv-demo/hello)
+ + httpcore==1.0.9
+ + httpx==0.28.1
+ + idna==3.19
+ + typing-extensions==4.16.0
+> uv add --dev pytest==9.1.1
+```
+
+```toml
+dependencies = [
+    "httpx==0.28.1",
+]
+
+[dependency-groups]
+dev = [
+    "pytest==9.1.1",
+]
+```
+
+Sin versión, `uv add httpx` escribe `"httpx>=0.28.1"`, una cota inferior sobre la versión que encontró, igual que `Version="0.28.1"` en NuGet significa "0.28.1 o posterior". Las versiones exactas de todo, incluidos los seis paquetes que arrastra httpx, están en `uv.lock`, que es el archivo que hay que hacer commit. `uv tree` muestra el grafo:
+
+```text
+> uv tree --universal
+hello v0.1.0
+├── httpx v0.28.1
+│   ├── anyio v4.15.1
+│   │   ├── idna v3.19
+│   │   └── typing-extensions v4.16.0
+│   ├── certifi v2026.7.22
+│   ├── httpcore v1.0.9
+│   │   ├── certifi v2026.7.22
+│   │   └── h11 v0.16.0
+│   └── idna v3.19
+└── pytest v9.1.1 (group: dev)
+    ├── colorama v0.4.6
+    ├── iniconfig v2.3.0
+    ├── packaging v26.3
+    ├── pluggy v1.6.0
+    └── pygments v2.21.0
+```
+
+`--universal` importa. Sin él, `uv tree` muestra los paquetes para la máquina actual, y colorama, que pytest usa para colorear su salida en Windows, desaparece del árbol en Linux y macOS. El archivo de bloqueo es universal: uv resuelve una sola vez para cada SO y cada versión de Python que permite `requires-python`, y registra la condición en la entrada de pytest:
+
+```toml
+[[package]]
+name = "pytest"
+version = "9.1.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "colorama", marker = "sys_platform == 'win32'" },
+    { name = "iniconfig" },
+    { name = "packaging" },
+    { name = "pluggy" },
+    { name = "pygments" },
+]
+```
+
+Así, un `uv.lock` escrito en Windows instala las mismas versiones en los runners de Linux y macOS. En CI, `uv sync --locked` instala exactamente las versiones bloqueadas y falla si `pyproject.toml` ha cambiado sin el archivo de bloqueo, como `dotnet restore --locked-mode`; `uv lock --check` solo comprueba.
+
+Las versiones de arriba son las publicadas antes del 15 de septiembre de 2026: `check.sh` define [`UV_EXCLUDE_NEWER`](https://docs.astral.sh/uv/concepts/resolution/#reproducible-resolutions) para esta demostración, para que una nueva versión de certifi no cambie la salida de la lección. uv registra la fecha en el archivo de bloqueo.
+
+## Ejecutar código
+
+Un archivo Python es un programa: el intérprete ejecuta sus instrucciones de arriba abajo. No hay método `Main`, como en las instrucciones de nivel superior de C#. El mismo archivo también puede importarlo otro archivo como módulo, y entonces sus instrucciones de nivel superior se ejecutan también, una vez. La variable `__name__` distingue los dos casos: contiene `'__main__'` en el archivo que se lanzó, y el nombre del módulo en un archivo importado.
+
+```python
+# examples/l01_greeting.py
+print(f"loading l01_greeting, __name__ = {__name__!r}")
+
+
+def greet(name: str) -> str:
+    return f"Hello, {name}!"
+
+
+# True solo cuando este archivo es el programa, no cuando otro archivo lo importa
+if __name__ == "__main__":
+    print(greet("script"))
+```
+
+```python
+# examples/l01_import.py
+import l01_greeting
+import l01_greeting  # un segundo import encuentra el módulo en sys.modules y no ejecuta nada
+
+print(l01_greeting.greet("importer"))
+```
+
+```text
+> uv run python examples/l01_greeting.py
+loading l01_greeting, __name__ = '__main__'
+Hello, script!
+> uv run python examples/l01_import.py
+loading l01_greeting, __name__ = 'l01_greeting'
+Hello, importer!
+```
+
+Importado, el archivo imprimió su primera línea y no el saludo, y el segundo `import` no imprimió nada: Python guarda cada módulo cargado en el diccionario [`sys.modules`](https://docs.python.org/3.14/library/sys.html#sys.modules), y un `import` de un módulo que ya está ahí solo enlaza el nombre. La [lección 2](../02-execution-model/#importar-ejecuta-el-módulo) examina lo que eso significa cuando un módulo hace algo más que imprimir. `import l01_greeting` encuentra el archivo porque Python pone la carpeta del script que ejecuta al principio de su ruta de búsqueda.
+
+Las formas de lanzar código, y sus equivalentes en .NET y Java:
+
+| Comando | Qué ejecuta | .NET, Java |
+|---|---|---|
+| `uv run python file.py` | un archivo, en el entorno del proyecto | `dotnet run file.cs`, `java File.java` |
+| `uv run python -m package.module` | un módulo encontrado en la ruta de búsqueda, como `__main__` | `dotnet run --project`, `java -cp … Main` |
+| `uv run hello` | un comando declarado en `[project.scripts]` | una herramienta .NET |
+| `uv run python -c "…"` | un programa de una línea | `dotnet fsi`, `jshell` |
+| `uv run python` | el intérprete interactivo, el REPL | `csi`, `jshell` |
+
+`uv run` comprueba que `.venv` coincide con `uv.lock` antes de cada comando, y lo sincroniza si no es así. El entorno también se puede activar, con `.venv\Scripts\activate` en Windows o `source .venv/bin/activate` en los demás, tras lo cual `python` designa el intérprete del proyecto; el curso siempre escribe `uv run`, que funciona igual en los tres SO sin activación.
+
+El REPL de Python 3.13 y posteriores colorea sus prompts y edita bloques de varias líneas, y `help(object)` o `dir(object)` dentro de él muestran la documentación y los atributos de cualquier cosa: es la forma más rápida de probar una línea antes de escribirla en un archivo.
+
+## Nada se comprueba antes de que se ejecute una línea
+
+Un pedido a partir de un archivo CSV, donde los precios llegan como texto, con un error en una rama a la que solo llegan las cantidades grandes:
+
+```python
+# errors/l01_order.py
+def with_tax(price: float) -> float:
+    return price + price * 0.15
+
+
+def line_total(product: str, price: float, quantity: int) -> float:
+    if quantity > 10:
+        return with_tax(price) * quantity * discount  # discount no está definido en ningún sitio
+    return with_tax(price) * quantity
+
+
+# Los precios vienen de un archivo CSV, donde todo es texto
+print("capo", line_total("capo", 9.99, 2))
+print("strings", line_total("strings", "12.50", 1))
+print("picks", line_total("picks", 0.5, 50))
+```
+
+C# y Java rechazan el archivo, y señalan los dos problemas:
+
+```text
+> dotnet run l01_order.cs
+compare_fail/l01_order.cs(3,51): error CS1503: Argument 2: cannot convert from 'string' to 'double'
+compare_fail/l01_order.cs(11,44): error CS0103: The name 'discount' does not exist in the current context
+
+The build failed. Fix the build errors and run again.
+```
+
+```text
+> javac L01Order.java
+L01Order.java:9: error: cannot find symbol
+            return withTax(price) * quantity * discount;
+                                               ^
+  symbol:   variable discount
+  location: class L01Order
+L01Order.java:16: error: incompatible types: String cannot be converted to double
+        System.out.println("strings " + lineTotal("strings", "12.50", 1));
+                                                             ^
+Note: Some messages have been simplified; recompile with -Xdiags:verbose to get full output
+2 errors
+```
+
+Python lo ejecuta:
+
+```text
+> uv run python errors/l01_order.py
+capo 22.977
+Traceback (most recent call last):
+  File "errors/l01_order.py", line 14, in <module>
+    print("strings", line_total("strings", "12.50", 1))
+                     ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "errors/l01_order.py", line 9, in line_total
+    return with_tax(price) * quantity
+           ~~~~~~~~^^^^^^^
+  File "errors/l01_order.py", line 3, in with_tax
+    return price + price * 0.15
+                   ~~~~~~^~~~~~
+TypeError: can't multiply sequence by non-int of type 'float'
+```
+
+La primera línea se ejecutó e imprimió su total. La segunda solo falló cuando `price * 0.15` se ejecutó con la cadena `'12.50'`: la anotación `price: float` no detuvo la llamada, porque Python no lee las anotaciones cuando llama a una función. La tercera línea nunca se ejecutó, así que el `discount` no definido pasó desapercibido; fallaría con un `NameError` el día en que alguien pida más de diez artículos.
+
+Un **traceback** es la traza de pila de Python, impresa en el orden inverso al de .NET: primero la llamada más externa y al final la línea que falló, justo encima de la excepción. Desde Python 3.11, las marcas `~` y `^` señalan la expresión dentro de la línea, aquí la multiplicación, y no solo la línea.
+
+Fíjate también en lo que no ocurrió: la cadena no se convirtió. `"12.50" * 0.15` es un `TypeError`, donde JavaScript habría calculado `1.875`. La [lección 2](../02-execution-model/#dinámico-y-fuerte) vuelve sobre esa diferencia.
+
+### Lo que el compilador sí comprueba
+
+Python sí compila. Cuando carga un archivo, CPython convierte todo el archivo en bytecode antes de ejecutar la primera línea, y un error de sintaxis en cualquier parte lo detiene todo:
+
+```python
+# errors/l01_syntax.py
+print("before the error")
+
+
+def with_tax(price: float) -> float
+    return price + price * 0.15
+```
+
+```text
+> uv run python errors/l01_syntax.py
+  File "errors/l01_syntax.py", line 5
+    def with_tax(price: float) -> float
+                                       ^
+SyntaxError: expected ':'
+```
+
+`before the error` nunca se imprimió. El compilador comprueba la sintaxis y resuelve qué nombres son locales a cada función, y nada más: [`py_compile`](https://docs.python.org/3.14/library/py_compile.html), que solo compila, acepta el archivo del pedido con sus dos errores y termina con 0.
+
+```text
+> uv run python -m py_compile errors/l01_order.py
+```
+
+El bytecode es el equivalente del IL, y el módulo [`dis`](https://docs.python.org/3.14/library/dis.html) lo muestra:
+
+```python
+# examples/l01_bytecode.py
+import dis
+
+
+def with_tax(price: float) -> float:
+    return price + price * rate
+
+
+rate = 0.15
+dis.dis(with_tax)  # el bytecode que CPython compiló a partir de la función, como ildasm muestra el IL
+```
+
+```text
+> uv run python examples/l01_bytecode.py
+  5           RESUME                   0
+
+  6           LOAD_FAST_BORROW_LOAD_FAST_BORROW 0 (price, price)
+              LOAD_GLOBAL              0 (rate)
+              BINARY_OP                5 (*)
+              BINARY_OP                0 (+)
+              RETURN_VALUE
+```
+
+`LOAD_GLOBAL rate` busca el nombre en el módulo cuando se ejecuta la línea, y por eso un nombre no definido compila. `BINARY_OP` no conoce los tipos de sus operandos: pregunta a los propios objetos, en tiempo de ejecución, cómo multiplicar. Las instrucciones cambian entre versiones menores de Python (`LOAD_FAST_BORROW_LOAD_FAST_BORROW` es nueva en la 3.14), y el bytecode solo se guarda en caché en carpetas `__pycache__` para los módulos importados, con la versión en el nombre del archivo.
+
+### Un verificador de tipos lee las anotaciones
+
+Las anotaciones son para las herramientas. [mypy](https://mypy.readthedocs.io/en/stable/), el primer verificador de tipos para las anotaciones de Python, las lee e informa de lo que habría informado `csc`:
+
+```text
+> uv run mypy errors/l01_order.py
+errors/l01_order.py:8: error: Returning Any from function declared to return "float"  [no-any-return]
+errors/l01_order.py:8: error: Name "discount" is not defined  [name-defined]
+errors/l01_order.py:14: error: Argument 2 to "line_total" has incompatible type "str"; expected "float"  [arg-type]
+Found 3 errors in 1 file (checked 1 source file)
+```
+
+El nombre no definido, la cadena pasada como float, y una consecuencia del primero: mypy da a un nombre desconocido el tipo `Any`, y `strict` se niega a devolver `Any` desde una función que promete un `float`. El curso ejecuta mypy con `strict = true`, definido en su `pyproject.toml`, y `check.sh` exige que los ejemplos, las soluciones y las pruebas lo pasen. [pyright](https://microsoft.github.io/pyright/), el verificador dentro de Pylance de VS Code, hace el mismo trabajo con sus propias reglas; la lección 6 los compara.
+
+Es la misma situación que la de TypeScript, descrita en el [curso de TypeScript](../../typescript-for-csharp-java/01-compiler-and-tooling/#un-error-de-tipo-no-detiene-nada): un verificador que se ejecuta junto al programa, y un entorno de ejecución que ignora sus conclusiones. La diferencia es que Python ni siquiera elimina las anotaciones. Las conserva, y el `__annotations__` de una función las contiene en tiempo de ejecución, pero nada las impone salvo que una biblioteca como Pydantic las lea a propósito.
+
+:::note[Salidas en este curso]
+Las salidas son las de Python 3.14.7, uv 0.12.14, mypy 2.3.1, .NET 10 y Java 25. Las rutas se muestran relativas a la carpeta del curso, y una dirección de memoria como `0xADDRESS`. Los mensajes de progreso de uv se muestran donde explican algo, con las duraciones medidas en mi máquina. [`normalize.py`](https://github.com/spareilleux/learn/blob/7d3b4bcda19a81326612cd833dc03b9ca77d3451/code/python-for-csharp-java/normalize.py) hace los mismos cambios antes de que `check.sh` compare las salidas, y `check.sh` ejecuta Python con `PYTHONUTF8=1` y `PYTHON_COLORS=0`, para que las salidas estén en UTF-8 y sin colores en todos los SO.
+:::
+
+## Scripts que declaran sus dependencias
+
+Un solo archivo puede declarar sus propias dependencias en un bloque de comentarios, un formato definido por [PEP 723](https://peps.python.org/pep-0723/). `uv init --script` escribe uno, y `uv add --script` lo rellena:
+
+```text
+> uv init --script check.py --python 3.14
+Initialized script at `check.py`
+> uv add --script check.py jsonschema
+Resolved 5 packages in 322ms
+```
+
+```python
+# /// script
+# requires-python = ">=3.14"
+# dependencies = [
+#     "jsonschema>=4.26.0",
+# ]
+# ///
+
+
+def main() -> None:
+    print("Hello from check.py!")
+
+
+if __name__ == "__main__":
+    main()
+```
+
+`uv run check.py` lee el bloque, crea un entorno en caché con jsonschema dentro, y ejecuta el archivo; el `.venv` del proyecto no interviene. `uv lock --script check.py` escribe un `check.py.lock` a su lado cuando hay que fijar las versiones. Es el equivalente de la directiva `#:package` de las [aplicaciones basadas en archivos](https://learn.microsoft.com/dotnet/core/sdk/file-based-apps) de .NET 10:
+
+```cs
+// compare/l01_script.cs
+#:package Humanizer.Core@2.14.1
+using Humanizer;
+
+// Una aplicación basada en archivos declara sus paquetes NuGet en el archivo, como un script Python declara sus dependencias
+Console.WriteLine("line_total".Humanize());
+Console.WriteLine(3.ToWords());
+```
+
+```text
+> dotnet run l01_script.cs
+line total
+three
+```
+
+El [modo de archivo fuente](https://openjdk.org/jeps/330) de Java, `java File.java`, ejecuta un archivo sin build, pero no tiene forma de declarar una dependencia en él.
+
+## En proyectos reales
+
+**El agente de gobernanza de GA** tiene un [`pyproject.toml`](https://github.com/GuitarAlchemist/ga/blob/cc42d215504631e168daf3bdf2c6d47b5c9fbe93/Apps/demerzel-agent/pyproject.toml), y su [README](https://github.com/GuitarAlchemist/ga/blob/cc42d215504631e168daf3bdf2c6d47b5c9fbe93/Apps/demerzel-agent/README.md#L7-L11) dice que se inicia con `uv sync`. Copié la carpeta, en el commit [`cc42d21`](https://github.com/GuitarAlchemist/ga/commit/cc42d215504631e168daf3bdf2c6d47b5c9fbe93), y lo ejecuté:
+
+- No hay `uv.lock` en el repositorio, así que `uv sync` resolvió las dependencias del día. `acp-sdk>=0.2.0` dio acp-sdk **1.0.3**, una nueva versión mayor; los imports de `server.py` todavía cargan con ella, pero la próxima instalación puede obtener otra cosa, y nada registra lo que funcionó.
+- El archivo declara un comando, `demerzel = "src.server:main"`, y ningún `[build-system]`. uv advirtió: `warning: Skipping installation of entry points (project.scripts) for package demerzel-agent because this project is not packaged; to install entry points, set tool.uv.package = true or define a build-system`. `uv run demerzel` buscó entonces `demerzel` en el `PATH`, y en mi máquina encontró un `demerzel.exe` sin relación en otra instalación de Python. El paquete de nivel superior se llama `src`, que es el nombre de carpeta que la estructura de uv deja *fuera* de la ruta de importación.
+
+**Los scripts de GA** no declaran nada. [`Scripts/train-router-head.py`](https://github.com/GuitarAlchemist/ga/blob/cc42d215504631e168daf3bdf2c6d47b5c9fbe93/Scripts/train-router-head.py#L22-L25) importa numpy y scikit-learn, y ningún archivo del repositorio dice qué versiones; [`Scripts/validate_optick_sae_artifacts.py`](https://github.com/GuitarAlchemist/ga/blob/cc42d215504631e168daf3bdf2c6d47b5c9fbe93/Scripts/validate_optick_sae_artifacts.py#L34-L39) captura el `ImportError` de jsonschema e imprime `Install with uv pip install jsonschema`. Un bloque PEP 723 haría que `uv run Scripts/validate_optick_sae_artifacts.py` lo instalara por sí solo (ejercicio 2). El [servicio graphiti](https://github.com/GuitarAlchemist/ga/blob/cc42d215504631e168daf3bdf2c6d47b5c9fbe93/Apps/ga-graphiti-service/Dockerfile) construye su imagen a partir de `python:3.11-slim` con uv 0.10.4 y un [`requirements.txt`](https://github.com/GuitarAlchemist/ga/blob/cc42d215504631e168daf3bdf2c6d47b5c9fbe93/Apps/ga-graphiti-service/requirements.txt) solo de cotas inferiores, como `fastapi>=0.104.1`: cada build de la imagen puede obtener versiones distintas.
+
+**IX** lista las dependencias de entrenamiento de su autoencoder disperso en [`crates/ix-optick-sae/python/requirements.txt`](https://github.com/GuitarAlchemist/ix/blob/2190c685e3664488c9a3d0c1388c96b868a178cb/crates/ix-optick-sae/python/requirements.txt), también como cotas inferiores (`torch>=2.0.0`, `numpy>=1.24.0`), sin bloqueo.
+
+**TARS** tiene 23 herramientas Python en [`tools/python`](https://github.com/GuitarAlchemist/tars/tree/26c5f67252c84f1b9da48a415c58b0725cb5b45c/tools/python), en el commit [`26c5f67`](https://github.com/GuitarAlchemist/tars/commit/26c5f67252c84f1b9da48a415c58b0725cb5b45c). Siete de ellas importan `requests`, `aiohttp` o `websockets`, y ningún `pyproject.toml` ni `requirements.txt` los declara. El repositorio sí contiene un entorno virtual: [`Scripts/tts-venv`](https://github.com/GuitarAlchemist/tars/tree/26c5f67252c84f1b9da48a415c58b0725cb5b45c/Scripts/tts-venv), 2,691 archivos en el commit, con un `python.exe` de Windows, numpy 2.2.4 compilado para CPython 3.12 en Windows de 64 bits, Flask y pip. Un entorno virtual contiene rutas absolutas y binarios para un SO y un intérprete; no se puede mover, y es el `bin` y el `obj` de Python, que hay que ignorar en lugar de hacer commit.
+
+**Este sitio**, en su [curso de aprendizaje automático](../../machine-learning-ix/01-data-and-evaluation/), ejecuta su contraste con `pip install numpy==2.4.2 scikit-learn==1.8.0`, en el Python que haya en la máquina. Las versiones están fijadas, lo cual está bien, pero instaladas globalmente, donde pueden entrar en conflicto con las del curso siguiente.
+
+## Puntos clave
+
+- Python instala los paquetes por intérprete; un entorno virtual por proyecto da a cada proyecto su propio `site-packages`. uv lo crea, lo llena a partir del archivo de bloqueo y ejecuta comandos en él.
+- `pyproject.toml` es el archivo de proyecto, `.python-version` fija el intérprete, `uv.lock` fija cada paquete para cada SO. Haz commit de los dos últimos con el primero, e instala en CI con `uv sync --locked`.
+- Un archivo se ejecuta de arriba abajo, y se vuelve a ejecutar como módulo cuando se importa, una vez. `if __name__ == "__main__":` separa el programa del módulo.
+- CPython compila un archivo a bytecode antes de ejecutarlo, pero solo comprueba su sintaxis: los nombres no definidos y los tipos incorrectos fallan cuando se ejecuta su línea. Las anotaciones son para mypy o pyright, que la build debe ejecutar explícitamente.
+- Un script puede declarar sus dependencias en un bloque `# /// script`, como hace una aplicación basada en archivos de .NET 10 con `#:package`.
+
+## Ejercicios
+
+1. Corrige [`errors/l01_order.py`](https://github.com/spareilleux/learn/blob/7d3b4bcda19a81326612cd833dc03b9ca77d3451/code/python-for-csharp-java/errors/l01_order.py) para que `mypy --strict` lo acepte e imprima los tres totales con dos decimales, leyendo cada línea de una fila CSV como `"capo,9.99,2"`, con un descuento del 10 % a partir de once artículos. ¿Dónde debería el texto convertirse en números?
+
+<details>
+<summary>Solución</summary>
+
+En la frontera, una sola vez, en una función que devuelve valores tipados: el resto del programa trabaja entonces con un `float` y un `int`. [`solutions/l01_ex1_order.py`](https://github.com/spareilleux/learn/blob/7d3b4bcda19a81326612cd833dc03b9ca77d3451/code/python-for-csharp-java/solutions/l01_ex1_order.py):
+
+```python
+# solutions/l01_ex1_order.py
+DISCOUNT = 0.9  # 10 % de descuento a partir de 11 artículos
+
+
+def with_tax(price: float) -> float:
+    return price + price * 0.15
+
+
+def line_total(price: float, quantity: int) -> float:
+    total = with_tax(price) * quantity
+    return total * DISCOUNT if quantity > 10 else total
+
+
+def parse_row(row: str) -> tuple[str, float, int]:
+    # El CSV da texto: se convierte una sola vez, en la frontera
+    product, price, quantity = row.split(",")
+    return product, float(price), int(quantity)
+
+
+if __name__ == "__main__":
+    for row in ["capo,9.99,2", "strings,12.50,1", "picks,0.50,50"]:
+        product, price, quantity = parse_row(row)
+        print(product, f"{line_total(price, quantity):.2f}")
+```
+
+```text
+> uv run python solutions/l01_ex1_order.py
+capo 22.98
+strings 14.38
+picks 25.87
+```
+
+`float("nine")` lanza `ValueError: could not convert string to float: 'nine'`, que es la comprobación que necesita el programa; el [`tests/test_l01.py`](https://github.com/spareilleux/learn/blob/7d3b4bcda19a81326612cd833dc03b9ca77d3451/code/python-for-csharp-java/tests/test_l01.py) del curso lo prueba con pytest. La guarda `if __name__ == "__main__":` permite que la prueba importe `parse_row` sin ejecutar el bucle. Fíjate en las púas: 0.575 × 50 × 0.9 es exactamente 25.875, y sin embargo el programa imprime 25.87, porque `0.15` no es exactamente representable como float binario; la [lección 3](../03-collections/#números) muestra por qué, y lo corrige con `Decimal`.
+
+</details>
+
+2. [`Scripts/validate_optick_sae_artifacts.py`](https://github.com/GuitarAlchemist/ga/blob/cc42d215504631e168daf3bdf2c6d47b5c9fbe93/Scripts/validate_optick_sae_artifacts.py) en GA necesita jsonschema, y le dice al usuario que lo instale. Escribe un script que valide dos artefactos contra un pequeño esquema, uno válido y otro con una lista `partitions` vacía, y que `uv run` pueda lanzar en una máquina donde jsonschema nunca se ha instalado.
+
+<details>
+<summary>Solución</summary>
+
+Un bloque PEP 723 con la versión fijada. [`scripts/l01_ex2_validate.py`](https://github.com/spareilleux/learn/blob/7d3b4bcda19a81326612cd833dc03b9ca77d3451/code/python-for-csharp-java/scripts/l01_ex2_validate.py):
+
+```python
+# /// script
+# requires-python = ">=3.14"
+# dependencies = [
+#     "jsonschema==4.26.0",
+# ]
+# ///
+# scripts/l01_ex2_validate.py
+import jsonschema
+
+schema = {
+    "type": "object",
+    "required": ["name", "partitions"],
+    "properties": {
+        "name": {"type": "string"},
+        "partitions": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    },
+}
+artifacts = {
+    "good.json": {"name": "optick-sae", "partitions": ["ROOT", "STRUCTURE"]},
+    "bad.json": {"name": "optick-sae", "partitions": []},
+}
+for name, artifact in artifacts.items():
+    try:
+        jsonschema.validate(artifact, schema)
+        print(f"PASS {name}")
+    except jsonschema.ValidationError as e:
+        print(f"FAIL {name}: {e.message}")
+```
+
+```text
+> uv run --script scripts/l01_ex2_validate.py
+Installed 5 packages in 105ms
+PASS good.json
+FAIL bad.json: [] should be non-empty
+```
+
+El bloque debe ir antes de cualquier otro código, y cada una de sus líneas empieza por `#`, para que Python solo vea comentarios. `--script` le dice a uv que trate el archivo como un script incluso dentro de un proyecto; el curso guarda esos scripts en `scripts/`, fuera de los archivos que verifica mypy, ya que jsonschema no está en el entorno del curso.
+
+</details>
+
+3. El `pyproject.toml` de un proyecto dice `requires-python = ">=3.15"`, y su `.python-version` dice `3.14.7`. ¿Qué hace `uv run python --version`?
+
+<details>
+<summary>Solución</summary>
+
+Se niega a ejecutarse, antes de crear ningún entorno:
+
+```text
+> uv run python --version
+Using CPython 3.14.7
+error: The Python request from `.python-version` resolved to Python 3.14.7, which is incompatible with the project's Python requirement: `>=3.15` (from `project.requires-python`)
+Use `uv python pin` to update the `.python-version` file to a compatible version
+```
+
+El código de salida es 2. Los dos archivos responden a preguntas distintas: `requires-python` es una promesa a los usuarios del proyecto, publicada con el paquete, y `.python-version` es el intérprete que usa esta copia de trabajo para el desarrollo. `uv python pin 3.15` reescribe el segundo; una biblioteca suele mantener un `requires-python` amplio y probar varias versiones en CI. `check.sh` construye este proyecto en [`out/pin`](https://github.com/spareilleux/learn/blob/7d3b4bcda19a81326612cd833dc03b9ca77d3451/code/python-for-csharp-java/check.sh) para capturar el mensaje.
+
+</details>
+
+## Fuentes
+
+- [Python — Using Python on Windows](https://docs.python.org/3.14/using/windows.html), [`__main__` — Top-level code environment](https://docs.python.org/3.14/library/__main__.html), [`dis`](https://docs.python.org/3.14/library/dis.html), [`py_compile`](https://docs.python.org/3.14/library/py_compile.html)
+- [PEP 602 — Annual release cycle](https://peps.python.org/pep-0602/), [PEP 745 — Python 3.14 release schedule](https://peps.python.org/pep-0745/), [PEP 790 — Python 3.15 release schedule](https://peps.python.org/pep-0790/), [PEP 668 — Externally managed environments](https://peps.python.org/pep-0668/), [PEP 621 — Project metadata in pyproject.toml](https://peps.python.org/pep-0621/), [PEP 723 — Inline script metadata](https://peps.python.org/pep-0723/), [PEP 735 — Dependency groups](https://peps.python.org/pep-0735/)
+- [uv — Instalación](https://docs.astral.sh/uv/getting-started/installation/), [Crear proyectos](https://docs.astral.sh/uv/concepts/projects/init/), [Bloquear y sincronizar](https://docs.astral.sh/uv/concepts/projects/sync/), [Ejecutar scripts](https://docs.astral.sh/uv/guides/scripts/), [registro de cambios de la 0.12.0](https://github.com/astral-sh/uv/blob/0.12.14/CHANGELOG.md#0120)
+- [Python Packaging User Guide — Writing your pyproject.toml](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/)
+- [mypy — Error codes enabled by default](https://mypy.readthedocs.io/en/stable/error_code_list.html)
+- [Microsoft — Aplicaciones basadas en archivos](https://learn.microsoft.com/dotnet/core/sdk/file-based-apps), [JEP 330 — Launch Single-File Source-Code Programs](https://openjdk.org/jeps/330)
