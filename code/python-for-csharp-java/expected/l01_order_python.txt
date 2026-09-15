@@ -1,0 +1,13 @@
+capo 22.977
+Traceback (most recent call last):
+  File "errors/l01_order.py", line 14, in <module>
+    print("strings", line_total("strings", "12.50", 1))
+                     ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "errors/l01_order.py", line 9, in line_total
+    return with_tax(price) * quantity
+           ~~~~~~~~^^^^^^^
+  File "errors/l01_order.py", line 3, in with_tax
+    return price + price * 0.15
+                   ~~~~~~^~~~~~
+TypeError: can't multiply sequence by non-int of type 'float'
+exit 1

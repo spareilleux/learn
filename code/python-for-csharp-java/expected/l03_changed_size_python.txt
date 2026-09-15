@@ -1,0 +1,7 @@
+{'capo': 2, 'picks': 50}
+Traceback (most recent call last):
+  File "errors/l03_changed_size.py", line 6, in <module>
+    for name, count in stock.items():
+                       ~~~~~~~~~~~^^
+RuntimeError: dictionary changed size during iteration
+exit 1

@@ -1,0 +1,7 @@
+C major
+Traceback (most recent call last):
+  File "errors/l03_unhashable.py", line 5, in <module>
+    names = {["x", 3, 2, 0, 1, 0]: "C major"}  # a list can't: it could change after being stored
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: cannot use 'list' as a dict key (unhashable type: 'list')
+exit 1

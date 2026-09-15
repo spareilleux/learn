@@ -1,0 +1,11 @@
+L01Order.java:9: error: cannot find symbol
+            return withTax(price) * quantity * discount;
+                                               ^
+  symbol:   variable discount
+  location: class L01Order
+L01Order.java:16: error: incompatible types: String cannot be converted to double
+        System.out.println("strings " + lineTotal("strings", "12.50", 1));
+                                                             ^
+Note: Some messages have been simplified; recompile with -Xdiags:verbose to get full output
+2 errors
+exit 1

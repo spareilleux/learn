@@ -1,0 +1,10 @@
+D d
+Traceback (most recent call last):
+  File "errors/l02_scope.py", line 13, in <module>
+    add_one()
+    ~~~~~~~^^
+  File "errors/l02_scope.py", line 10, in add_one
+    count += 1  # an assignment anywhere in the function makes count local to all of it
+    ^^^^^
+UnboundLocalError: cannot access local variable 'count' where it is not associated with a value
+exit 1

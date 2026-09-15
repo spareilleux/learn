@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "errors/l02_governance.py", line 20, in <module>
+    GOV_ROOT = find_governance_root()
+  File "errors/l02_governance.py", line 17, in find_governance_root
+    raise FileNotFoundError("Could not locate governance/demerzel/ directory")
+FileNotFoundError: Could not locate governance/demerzel/ directory
+exit 1
