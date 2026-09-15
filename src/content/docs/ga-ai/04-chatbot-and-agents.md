@@ -22,12 +22,12 @@ dotnet run --project code/ga-ai/GaAi -c Release -- l4
 flowchart TB
   In(["message"]) --> H["hooks: OnRequestReceived<br/>sanitize, memory, observability"]
   H --> V{"voicing guard<br/>keyword or chord + 'voicings'"}
-  V -- match --> VA["VoicingAgent<br/>OPTIC-K search"]
-  V -- no --> A{"algebra classifier<br/>'z-related', 'prime form', a set like 0146"}
-  A -- match --> AL["IxAlgebraService"]
-  A -- no --> I{"SemanticIntentRouter<br/>message embedding vs 36 intents<br/>best cosine ≥ 0.55"}
-  I -- match --> SK["intent: a skill"]
-  I -- no --> R["QueryUnderstandingService<br/>and SemanticRouter"]
+  V -->|yes| VA["VoicingAgent<br/>OPTIC-K search"]
+  V -->|no| A{"algebra classifier<br/>'z-related', 'prime form', a set like 0146"}
+  A -->|yes| AL["IxAlgebraService"]
+  A -->|no| I{"SemanticIntentRouter<br/>message embedding vs 36 intents<br/>best cosine ≥ 0.55"}
+  I -->|yes| SK["intent: a skill"]
+  I -->|no| R["QueryUnderstandingService<br/>and SemanticRouter"]
   R --> AG["one of 6 agents<br/>language model"]
   SK -. "exception" .-> F
   AG -. "exception" .-> F["fallback: direct model call"]

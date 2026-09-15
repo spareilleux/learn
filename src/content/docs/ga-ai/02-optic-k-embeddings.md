@@ -121,7 +121,7 @@ RootPitchClass = analysis.MidiNotes.Length > 0 ? analysis.MidiNotes[0] % 12 : 0,
 MidiBassNote = analysis.MidiNotes.Length > 0 ? analysis.MidiNotes[0] : 0,
 ```
 
-Because the notes come string 1 first, `MidiNotes[0]` is the **highest** note, the melody note, not the bass and not the root. The inversion column is computed from that note too: open C in root position is reported as a first inversion. Every partition that reads `RootPitchClass` or `MidiBassNote` inherits the error: ROOT, MODAL, part of MORPHOLOGY.
+Because the notes come string 1 first, `MidiNotes[0]` is the **highest** note, the melody note, not the bass and not the root. The inversion column is computed from that note too: open C in root position is reported as a first inversion. The chord root it is compared with is read by `PitchClass.Parse`, which takes the note names A and E for the numbers 10 and 11 ([lines 43-44](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Rag/VoicingDocumentFactory.cs#L43-L44)): outside the course program, a root-position E minor, `022000`, came out with the inversion -1. Every partition that reads `RootPitchClass` or `MidiBassNote` inherits the error: ROOT, MODAL, part of MORPHOLOGY.
 
 ## Two positional records
 
