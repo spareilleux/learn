@@ -21,6 +21,8 @@ You are comfortable with C# or Java, including generics, interfaces and nullable
 
 Components, JSX and the DOM belong to the **React (Vite)** course that follows this one. This course runs TypeScript in Node.js, where every example can be checked and run in CI, and looks at React code only as data from the GA repository.
 
+The [Advanced TypeScript](../typescript-advanced/) course goes further for developers who already write strict TypeScript: how the checker evaluates the types computed from other types, variance, modeling with brands and state machines, and schemas at the border of a program.
+
 ## TypeScript in one table
 
 | | C# | Java | TypeScript |
