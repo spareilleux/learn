@@ -64,6 +64,12 @@ export default defineConfig({
 									collapsed: true,
 									items: [{ autogenerate: { directory: 'v-for-csharp-java' } }],
 								},
+								{
+									label: 'JavaScript for C#/Java developers',
+									translations: { fr: 'JavaScript pour développeurs C#/Java', es: 'JavaScript para desarrolladores C#/Java' },
+									collapsed: true,
+									items: [{ autogenerate: { directory: 'javascript-for-csharp-java' } }],
+								},
 							],
 						},
 						{
