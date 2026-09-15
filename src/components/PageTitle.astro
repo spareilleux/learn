@@ -368,7 +368,7 @@ const decimal = new Intl.NumberFormat(lang, { maximumFractionDigits: 2 });
 			if (this.#speech) speechSynthesis.cancel();
 			this.hidden = false;
 			// the studio voice when the page has one, unless the reader chose the browser's
-			this.#source = this.dataset.audio && (!this.#speech || store('speech-source') !== 'browser') ? 'studio' : 'browser';
+			this.#source = this.dataset.audio && (!this.#speech || store('narration-source') !== 'browser') ? 'studio' : 'browser';
 			for (const button of this.querySelectorAll<HTMLButtonElement>('[data-source]')) {
 				button.hidden = button.dataset.source === 'browser' && !this.#speech;
 				button.addEventListener('click', () => this.#setSource(button.dataset.source as Source));
@@ -457,7 +457,7 @@ const decimal = new Intl.NumberFormat(lang, { maximumFractionDigits: 2 });
 				});
 				// no network: the browser's voice goes on from the same sentence
 				audio.addEventListener('error', () => {
-					if (this.#speech && this.#source === 'studio' && this.#state !== 'idle') this.#setSource('browser');
+					if (this.#speech && this.#source === 'studio' && this.#state !== 'idle') this.#setSource('browser', false);
 				});
 				this.#audio = audio;
 			}
@@ -539,7 +539,8 @@ const decimal = new Intl.NumberFormat(lang, { maximumFractionDigits: 2 });
 			return part && { el: part.block.el, from: part.from };
 		}
 
-		#setSource(source: Source) {
+		// remember: false for the automatic fallback, so that one failed download doesn't replace the reader's choice on every page
+		#setSource(source: Source, remember = true) {
 			if (source === this.#source) return;
 			const location = this.#location();
 			const state = this.#state;
@@ -547,7 +548,8 @@ const decimal = new Intl.NumberFormat(lang, { maximumFractionDigits: 2 });
 			if (this.#speech) speechSynthesis.cancel();
 			this.#audio?.pause();
 			this.#source = source;
-			store('speech-source', source);
+			// a new key: the old one, speech-source, may hold a fallback saved before the fix
+			if (remember) store('narration-source', source);
 			this.#render();
 			this.#renderSettings();
 			if (state === 'idle') return;
