@@ -1,0 +1,400 @@
+---
+title: 1. Installation, v run, modules et projets
+description: Installer V 0.5.2 sous Windows, Linux/WSL et macOS, exécuter un fichier et un dossier, et découper un programme en modules — mis en regard de dotnet, javac et java.
+sidebar:
+  order: 1
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Code : [`examples/l01_hello.v`](https://github.com/spareilleux/learn/blob/4fcc7d65f74976bbcb8aafbbf6773219e617f486/code/v-for-csharp-java/examples/l01_hello.v), [`examples/l01_script.v`](https://github.com/spareilleux/learn/blob/4fcc7d65f74976bbcb8aafbbf6773219e617f486/code/v-for-csharp-java/examples/l01_script.v) et le projet [`l01-project`](https://github.com/spareilleux/learn/tree/4fcc7d65f74976bbcb8aafbbf6773219e617f486/code/v-for-csharp-java/l01-project).
+
+## Comment V construit un programme
+
+| | C# | Java | V |
+|---|---|---|---|
+| Le compilateur produit | de l'IL dans une `.dll` | du bytecode dans des fichiers `.class` | du code C, dans un fichier temporaire |
+| Ensuite | le CLR compile l'IL à l'exécution (JIT) | la JVM interprète et compile le bytecode (JIT) | un compilateur C transforme le C en exécutable natif |
+| Pour l'exécuter, il faut | le runtime .NET, sauf publication autonome ou [Native AOT](https://learn.microsoft.com/dotnet/core/deploying/native-aot/) | une JVM, ou une image [`jlink`](https://docs.oracle.com/en/java/javase/25/docs/specs/man/jlink.html) | rien : l'exécutable est natif |
+
+V est livré avec un compilateur C, [TCC](https://bellard.org/tcc/) (Tiny C Compiler), dans `thirdparty/tcc` de chaque archive de release. TCC compile vite et optimise peu : V l'utilise pour les builds de tous les jours, et le compilateur C du système (`gcc`, `clang` ou MSVC) pour les builds optimisés avec `-prod`. [`v -showcc`](https://docs.vlang.io/debugging.html) affiche la commande du compilateur C. La CI du cours montre quel compilateur construit le « Hello World » de [`v new`](#un-projet--v-new-et-vmod), et la taille du résultat :
+
+| OS | `v .` | taille | `v -prod .` | taille |
+|---|---|---|---|---|
+| Windows (ma machine) | `tcc.exe` | 281 600 octets | MSVC `cl.exe` | 29 184 octets |
+| Windows (runner CI) | `tcc.exe` | 280 576 octets | `gcc` (MinGW) | 160 784 octets |
+| Linux (runner CI) | `tcc.exe` | 385 782 octets | `cc` (gcc 13.3) | 138 296 octets |
+| macOS (runner CI) | `cc` (Apple clang) | 96 808 octets | `cc` (Apple clang) | 126 408 octets |
+
+Sous macOS, V a choisi `cc` même sans `-prod`. Sous Windows, `-prod` utilise le compilateur C qu'il trouve : MSVC sur ma machine, qui a les Visual Studio Build Tools et pas de `gcc`, et `gcc` MinGW sur le runner. La [leçon 4](../04-arrays-maps-memory/#par-défaut--un-ramasse-miettes) montre pourquoi ce choix compte pour la mémoire.
+
+## Installer
+
+La [documentation](https://docs.vlang.io/installing-v-from-source.html) recommande de construire V depuis les sources avec `git clone` et `make`, ce qui suit la branche `master`. Ce cours fixe plutôt la [release 0.5.2](https://github.com/vlang/v/releases/tag/0.5.2), et télécharge son archive : une par OS, avec `v`, la bibliothèque standard, les outils et TCC. Je l'installe dans un dossier à part et je ne la mets pas dans le `PATH` global.
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+```powershell
+Invoke-WebRequest https://github.com/vlang/v/releases/download/0.5.2/v_windows.zip -OutFile v_windows.zip
+Expand-Archive v_windows.zip -DestinationPath C:\tools   # crée C:\tools\v (53 s sur ma machine)
+C:\tools\v\v.exe version
+```
+
+Pour l'appeler `v` depuis n'importe quel terminal, ajoute `C:\tools\v` à ton `PATH`, ou exécute `v.exe symlink` dans un shell administrateur, comme l'explique le [README](https://github.com/vlang/v/blob/0.5.2/README.md#symlinking) (*à vérifier* : je ne l'ai pas exécuté).
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```bash
+curl -fLO https://github.com/vlang/v/releases/download/0.5.2/v_linux.zip   # v_linux_arm64.zip sur ARM
+unzip -q v_linux.zip -d ~/tools          # crée ~/tools/v
+~/tools/v/v version
+export PATH="$HOME/tools/v:$PATH"        # l'ajouter à ~/.bashrc pour le garder
+```
+
+L'archive conserve les bits d'exécution de `v` et de `thirdparty/tcc/tcc.exe` (oui, avec `.exe`, sous Linux aussi). TCC a besoin des en-têtes C du système ; le runner Ubuntu 24.04 les a. Sur une distribution minimale, installe `build-essential` ou son équivalent (*à vérifier*).
+
+**Sous WSL**, installe l'archive Linux *dans* la distribution, et garde tes projets dans le système de fichiers Linux (`~/src/...`), pas sous `/mnt/c`.
+
+</TabItem>
+<TabItem label="macOS">
+
+```bash
+xcode-select --install                   # les outils en ligne de commande d'Apple : V compile avec cc sous macOS
+curl -fLO https://github.com/vlang/v/releases/download/0.5.2/v_macos_arm64.zip   # v_macos_x86_64.zip sur Intel
+unzip -q v_macos_arm64.zip -d ~/tools    # crée ~/tools/v
+~/tools/v/v version
+export PATH="$HOME/tools/v:$PATH"        # l'ajouter à ~/.zshrc pour le garder
+```
+
+`curl` ne pose pas l'attribut de quarantaine ; une archive téléchargée avec un navigateur peut nécessiter `xattr -dr com.apple.quarantine ~/tools/v` avant que macOS n'exécute `v` (*à vérifier*).
+
+</TabItem>
+</Tabs>
+
+Ensuite, sur n'importe quel OS :
+
+```text
+> v version
+V 0.5.2 7647ce1
+```
+
+[`v doctor`](https://github.com/vlang/v/blob/0.5.2/cmd/tools/vdoctor.v) affiche ce que V a trouvé : son dossier, le dossier `VMODULES` où vont les packages, et chaque compilateur C. Sur ma machine :
+
+```text
+|V full version      |V 0.5.2 45ae01d23168b6372f734eeb38a77360bbcf184a.7647ce1
+|V executable        |C:\Users\spare\tools\v-0.5.2\v.exe
+|VMODULES            |OK, value: C:\Users\spare\.vmodules
+|cc version          |N/A
+|gcc version         |N/A
+|clang version       |N/A
+|msvc version        |N/A
+|tcc version         |tcc version 0.9.27 (x86_64 Windows)
+```
+
+`v doctor` indique `msvc version N/A`, et pourtant `v -prod` a trouvé MSVC via l'installation des Build Tools.
+
+## Hello, world
+
+```v
+// examples/l01_hello.v
+fn main() {
+	println('Hello, world!')
+}
+```
+
+```text
+> v run examples/l01_hello.v
+Hello, world!
+```
+
+| | C# | Java | V |
+|---|---|---|---|
+| Compiler et exécuter un fichier | `dotnet run app.cs` ([.NET 10](https://learn.microsoft.com/dotnet/core/sdk/file-based-apps)) | [`java Hello.java`](https://openjdk.org/jeps/330) | `v run hello.v` |
+| Compiler seulement | `dotnet build` | `javac Hello.java` | `v hello.v`, qui écrit `hello.exe` ou `hello` |
+| Build optimisé | `dotnet publish -c Release` | — | `v -prod hello.v` |
+
+`v run` compile vers un exécutable temporaire, l'exécute, puis le supprime. Les options du compilateur se placent *avant* `run` ; tout ce qui suit le nom du fichier va à ton programme.
+
+- `fn` déclare une fonction ; le type de retour, s'il y en a un, vient après les paramètres.
+- `println` est une fonction intégrée : pas d'import, pas de `Console.` ni de `System.out.`.
+- Les chaînes utilisent des guillemets simples ; [`v fmt`](https://docs.vlang.io/tools.html) transforme les guillemets doubles en guillemets simples.
+- Il n'y a pas de points-virgules, et le code V est indenté avec des tabulations.
+
+## Scripts : pas de `fn main`
+
+Un fichier unique peut se passer de `fn main`, comme les [instructions de niveau supérieur](https://learn.microsoft.com/dotnet/csharp/fundamentals/program-structure/top-level-statements) en C# ou un [fichier source compact](https://openjdk.org/jeps/512) en Java 25 :
+
+```v
+// examples/l01_script.v
+fn greeting(name string) string {
+	return 'Hello, ${name}!'
+}
+
+println(greeting('C#'))
+println(greeting('Java'))
+```
+
+```text
+Hello, C#!
+Hello, Java!
+```
+
+`${…}` interpole une expression dans une chaîne, comme `$"…{name}"` en C#. L'ordre est l'inverse de celui de C#, où les instructions de niveau supérieur doivent venir *avant* les déclarations de types : dans un script V, les définitions viennent en premier, et une fonction placée après la première instruction est rejetée.
+
+```v
+fn greeting(name string) string {
+	return 'Hello, ${name}!'
+}
+
+println(greeting('C#'))
+
+fn farewell(name string) string {
+	return 'Bye, ${name}!'
+}
+```
+
+```text
+e01_script_order.v:5:1: notice: script mode started here
+    3 | }
+    4 | 
+    5 | println(greeting('C#'))
+      | ~~~~~~~
+    6 | 
+    7 | fn farewell(name string) string {
+e01_script_order.v:7:4: error: all definitions must occur before code in script mode
+    5 | println(greeting('C#'))
+    6 | 
+    7 | fn farewell(name string) string {
+      |    ~~~~~~~~
+    8 |     return 'Bye, ${name}!'
+    9 | }
+```
+
+Le compilateur affiche les erreurs sur la sortie d'erreur standard, avec le fichier, la ligne et la colonne, et se termine avec le code 1.
+
+## Un projet : `v new` et `v.mod`
+
+```bash
+v new hello
+```
+
+[`v new`](https://docs.vlang.io/getting-started.html) pose trois questions (description, version, licence) et crée un dossier :
+
+```text
+hello/
+├── .editorconfig
+├── .gitattributes
+├── .gitignore
+├── main.v          ← module main, fn main
+└── v.mod           ← like .csproj or pom.xml, but only metadata
+```
+
+```v
+Module {
+	name: 'hello'
+	description: 'Greets people'
+	version: '0.0.0'
+	license: 'MIT'
+	dependencies: []
+}
+```
+
+Il exécute aussi `git init` quand Git est installé. `v init` fait la même chose dans un dossier existant.
+
+Les réponses sont lues sur l'entrée standard : si elle est fermée, comme dans un script sans entrée, `v new` ne s'arrête pas, et écrit `'<EOF>'` dans les trois champs. [`os.input`](https://modules.vlang.io/os.html#input) renvoie cette chaîne à la fin de l'entrée ([`os.v`, lignes 436-441](https://github.com/vlang/v/blob/7647ce1c6fad63b5578bc07883139906de74b2f8/vlib/os/os.v#L436-L441)), et [`vcreate.v`](https://github.com/vlang/v/blob/7647ce1c6fad63b5578bc07883139906de74b2f8/cmd/tools/vcreate/vcreate.v#L170-L181) ne remplace par la valeur par défaut qu'une réponse vide. La CI répond avec `printf 'Greets people\n\n\n' | v new hello`.
+
+`v run .` compile tous les fichiers `.v` du dossier en un seul programme, qui porte le nom du dossier :
+
+```text
+> cd hello
+> v run .
+Hello World!
+```
+
+Il n'y a pas de fichier de build à maintenir : V trouve les fichiers et les modules à partir des dossiers. `v.mod` nomme le projet, liste ses dépendances, et marque la racine à partir de laquelle `import` trouve les modules du projet.
+
+## Modules
+
+Un module est un **dossier**. Chaque fichier `.v` du dossier commence par `module <nom du dossier>`, et ils voient tous les déclarations les uns des autres ; les fichiers à la racine du projet sont `module main`.
+
+```text
+l01-project/
+├── v.mod
+├── main.v
+└── greet/
+    └── greet.v
+```
+
+```v
+// greet/greet.v
+module greet
+
+// hello est publique : les autres modules peuvent l'appeler sous la forme `greet.hello`
+pub fn hello(name string) string {
+	return 'Hello, ${capitalize(name)}!'
+}
+
+// capitalize est privée au module, comme `internal` en C# ou package-private en Java
+fn capitalize(s string) string {
+	return s.capitalize()
+}
+```
+
+```v
+// main.v
+module main
+
+import os
+import greet
+
+fn main() {
+	names := if os.args.len > 1 { os.args[1..] } else { ['world'] }
+	for name in names {
+		println(greet.hello(name))
+	}
+}
+```
+
+```text
+> v run .
+Hello, World!
+> v run . ada grace
+Hello, Ada!
+Hello, Grace!
+```
+
+[`os.args`](https://modules.vlang.io/os.html#args) contient le chemin du programme, puis ses arguments : `os.args[1..]` saute le chemin, comme `string[] args` en C# et en Java.
+
+| | C# | Java | V |
+|---|---|---|---|
+| Unité | `namespace`, indépendant des dossiers | `package`, un dossier | module, un dossier |
+| Import | `using Greet;` | `import greet.*;` | `import greet` |
+| Appel | `Greeter.Hello(…)` | `Greeter.hello(…)` | `greet.hello(…)` : toujours avec le nom du module |
+| Public | `public` | `public` | `pub` |
+| Par défaut | `internal` (l'assembly) pour un type, `private` pour un membre | package-private | privé au module |
+
+Sans `pub`, un autre module ne peut pas appeler la fonction :
+
+```v
+module main
+
+import greet
+
+fn main() {
+	println(greet.capitalize('java'))
+}
+```
+
+```text
+main.v:6:16: error: function `greet.capitalize` is private
+    4 | 
+    5 | fn main() {
+    6 |     println(greet.capitalize('java'))
+      |                   ~~~~~~~~~~~~~~~~~~
+    7 | }
+```
+
+Deux autres règles de la [documentation des modules](https://docs.vlang.io/modules.html) : les imports ne peuvent pas être circulaires, et un module dans `a/b/` s'importe sous la forme `a.b` mais s'appelle par son dernier nom, `b.hello()`.
+
+## Commandes de tous les jours
+
+| Tâche | V | dotnet | Java |
+|---|---|---|---|
+| Nouvelle application | `v new app` | `dotnet new console` | `mvn archetype:generate` |
+| Exécuter un dossier | `v run .` | `dotnet run` | `mvn exec:java` |
+| Compiler | `v .` | `dotnet build` | `mvn compile` |
+| Build optimisé | `v -prod .` | `dotnet publish -c Release` | `mvn package` |
+| Tester | `v test .` | `dotnet test` | `mvn test` |
+| Formater | `v fmt -w .` | [`dotnet format`](https://learn.microsoft.com/dotnet/core/tools/dotnet-format) | un plugin comme [Spotless](https://github.com/diffplug/spotless) |
+| Linter | `v vet .` | [analyseurs Roslyn](https://learn.microsoft.com/dotnet/fundamentals/code-analysis/overview) | [Error Prone](https://errorprone.info/) |
+| Vérifier l'installation | `v doctor` | `dotnet --info` | `java -XshowSettings` |
+
+`v help <command>` documente chaque commande. Les tests, `v fmt`, `v vet` et `v doc` sont le sujet de la [leçon 8](../08-tests-tools/), les packages de la leçon 12.
+
+:::note[Sorties dans ce cours]
+Les sorties des leçons ont été capturées sous Windows avec V 0.5.2. Chaque exemple et chaque snippet rejeté est aussi exécuté sous Linux et macOS par [la CI du cours](https://github.com/spareilleux/learn/blob/main/.github/workflows/v-examples.yml), qui compare les sorties : elles sont identiques sur les trois OS, sauf les chiffres mémoire de la leçon 4 et les backtraces des panics, que [`check.sh`](https://github.com/spareilleux/learn/blob/4fcc7d65f74976bbcb8aafbbf6773219e617f486/code/v-for-csharp-java/check.sh) ne compare pas.
+:::
+
+## À retenir
+
+- V traduit ton programme en C, et un compilateur C produit l'exécutable : TCC, livré avec V, pour les builds de tous les jours ; `gcc`, `clang` ou MSVC avec `-prod`.
+- `v run file.v` ou `v run .` compile et exécute ; `v file.v` ou `v .` compile seulement.
+- Un fichier unique peut se passer de `fn main`, si chaque définition vient avant la première instruction.
+- Un module est un dossier ; une fonction est privée à son module sauf si elle est `pub`, et elle s'appelle toujours avec le nom du module.
+- `v.mod` contient les métadonnées du projet ; il n'y a pas de liste de fichiers à maintenir.
+
+## Exercices
+
+1. Déplace `fn greeting` de `l01_script.v` sous les deux appels à `println`. Que dit le compilateur, et pourquoi le même ordre ne fonctionne-t-il pas dans un script ?
+
+<details>
+<summary>Solution</summary>
+
+```text
+error: all definitions must occur before code in script mode
+```
+
+Dans un fichier sans `fn main`, V crée un `main` implicite de la première instruction jusqu'à la fin du fichier ([mode script](https://docs.vlang.io/hello-world.html)) : une fonction déclarée après ce point se trouverait à l'intérieur de `main`. Dans un fichier avec `fn main`, l'ordre n'a pas d'importance : V [remonte](https://docs.vlang.io/functions.html#hoisting) (*hoisting*) chaque déclaration.
+
+</details>
+
+2. Ajoute un module `stats` à une copie de `l01-project`, avec une fonction publique `word_count(s string) int`, et affiche le nombre de mots des arguments du programme.
+
+<details>
+<summary>Solution</summary>
+
+[`l01-exercise`](https://github.com/spareilleux/learn/tree/4fcc7d65f74976bbcb8aafbbf6773219e617f486/code/v-for-csharp-java/l01-exercise) :
+
+```v
+// stats/stats.v
+module stats
+
+// word_count compte les mots séparés par des espaces
+pub fn word_count(s string) int {
+	return s.fields().len
+}
+```
+
+```v
+// main.v
+module main
+
+import os
+import greet
+import stats
+
+fn main() {
+	text := os.args[1..].join(' ')
+	println(greet.hello('reader'))
+	println('${stats.word_count(text)} words')
+}
+```
+
+```text
+> v run . V for C# and Java developers
+Hello, Reader!
+6 words
+```
+
+Rien d'autre ne change : pas de fichier de projet à modifier, `import stats` trouve le dossier à côté de `v.mod`. [`fields`](https://modules.vlang.io/builtin.html#string.fields) découpe sur les blancs.
+
+</details>
+
+3. Construis `l01-project` avec `v -showcc .` et avec `v -showcc -prod .`. Quel compilateur C chaque build utilise-t-il sur ta machine, et quelle est la taille des deux exécutables ?
+
+<details>
+<summary>Solution</summary>
+
+La première ligne qui commence par `> C compiler cmd:` nomme le compilateur. Sous Windows et Linux, le premier build utilise `thirdparty/tcc/tcc.exe` ; le build `-prod` utilise `gcc`, `cc` ou MSVC, selon ce que V trouve. Sous macOS, les deux utilisent `cc`. Compare tes tailles avec le tableau en haut de cette leçon : la taille dépend autant du compilateur C que de `-prod`, puisque sur le runner macOS c'est le build `-prod` qui est le plus gros.
+
+</details>
+
+## Sources
+
+- [Documentation de V — Hello World](https://docs.vlang.io/hello-world.html), [Running a project folder](https://docs.vlang.io/running-a-project-folder-with-several-files.html), [Modules](https://docs.vlang.io/modules.html), [Module imports](https://docs.vlang.io/module-imports.html)
+- [README de V — installer V](https://github.com/vlang/v/blob/0.5.2/README.md)
+- [Release 0.5.2 de V](https://github.com/vlang/v/releases/tag/0.5.2)
+- [`v help`](https://github.com/vlang/v/tree/0.5.2/vlib/v/help) — le texte de chaque page `v help`
+- [Microsoft — File-based apps](https://learn.microsoft.com/dotnet/core/sdk/file-based-apps), [JEP 330 — Launch single-file source-code programs](https://openjdk.org/jeps/330), [JEP 512 — Compact source files and instance main methods](https://openjdk.org/jeps/512)

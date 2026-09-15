@@ -1,0 +1,385 @@
+---
+title: 3. Hooks, skills et sous-agents
+description: Trois façons d'étendre un agent de code — un hook en C# qui refuse les commandes git push dangereuses quoi que décide le modèle, un skill qui empaquette une procédure, et un sous-agent qui travaille dans son propre contexte — chacun écrit une fois et enregistré à la fois dans Claude Code et dans Codex, avec les captures qui montrent où ils aident et où ils n'aident pas.
+sidebar:
+  order: 3
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+La [leçon 2](../02-project-context/) s'est terminée sur une limite : les fichiers d'instructions sont du texte que le modèle peut ne pas suivre. Cette leçon ajoute trois extensions, de la plus déterministe à la moins déterministe :
+
+| | S'exécute | Décidé par | Équivalent le plus proche en .NET ou Java |
+|---|---|---|---|
+| **Hook** | un programme à toi, à un point fixe de la boucle | ton code | un hook Git, une cible MSBuild, un filtre de servlet |
+| **Skill** | des instructions et des fichiers que le modèle charge au besoin | le modèle, ou toi avec `/name` | un script dans `tools/` avec un README |
+| **Sous-agent** | une autre session de modèle, avec son propre contexte et ses propres outils | le modèle, ou toi en le demandant | déléguer à un collègue qui te fait un compte rendu |
+
+Le code se trouve dans [`code/agentic-coding`](https://github.com/spareilleux/learn/tree/da4cce3583638c4828cc242269be00f5c065a3b2/code/agentic-coding), et la CI exécute le hook sur 14 appels d'outils enregistrés et analyse chaque fichier de configuration, sous Linux, Windows et macOS.
+
+## Les hooks
+
+Un [hook](https://code.claude.com/docs/en/hooks) est une commande que le programme de l'agent lance à un événement du cycle de vie : `SessionStart`, `UserPromptSubmit`, `PreToolUse`, `PostToolUse`, `Stop` et d'autres. Pour `PreToolUse`, l'agent écrit l'appel d'outil en attente sur l'entrée standard du hook, en JSON :
+
+```json
+{
+  "session_id": "0f9c…",
+  "cwd": "/home/me/learn",
+  "hook_event_name": "PreToolUse",
+  "tool_name": "Bash",
+  "tool_input": { "command": "git push --delete origin old-branch" }
+}
+```
+
+Le hook répond par son code de sortie :
+
+| Code de sortie | Claude Code | Codex |
+|---|---|---|
+| 0 | l'appel continue ; du JSON sur stdout peut encore décider | pareil |
+| 2 | **l'appel est bloqué**, stderr est envoyé au modèle comme raison | pareil |
+| toute autre valeur | une erreur non bloquante : l'appel continue, tu vois un avertissement | pareil |
+
+Un hook peut aussi sortir avec 0 et afficher `{"hookSpecificOutput": {"hookEventName": "PreToolUse", "permissionDecision": "deny", "permissionDecisionReason": "…"}}` ; les deux agents acceptent cette forme ([Claude Code](https://code.claude.com/docs/en/hooks#pretooluse-decision-control), [Codex](https://learn.chatgpt.com/docs/hooks)). Attention au code de sortie 1 : c'est la convention Unix pour un échec, et ici il **laisse passer l'appel**.
+
+### Pourquoi analyser la commande
+
+La machine sur laquelle ce cours est écrit a déjà un hook `PreToolUse`, un script Bash qui applique des expressions régulières à tout le texte de la commande, par exemple :
+
+```bash
+"push .*--force"
+"push .*--delete"
+"push .*--mirror"
+```
+
+Deux fois pendant ce cours, il a bloqué une de mes commandes qui n'était pas du tout un push : un here-document écrivant un fichier de test dont le contenu mentionnait `git push --delete`. Et il laisse passer `git push --prune origin HEAD:main`, qui supprime chaque branche distante qui n'existe pas en local. Une expression régulière sur une ligne de commande a les deux problèmes à la fois, faux positifs et faux négatifs, pour la raison que donne la documentation de Claude Code à propos de ses propres règles Bash : elle voit du texte, pas une commande.
+
+### Un hook en C#
+
+[`hooks/guard-git-push.cs`](https://github.com/spareilleux/learn/blob/13143d3a4d1d7d7b97fd087d4ad89c00e42fe788/code/agentic-coding/hooks/guard-git-push.cs) est une [application basée sur un fichier de .NET 10](https://learn.microsoft.com/dotnet/core/sdk/file-based-apps) (*file-based app*) : un seul fichier `.cs`, pas de projet, lancé avec `dotnet run guard-git-push.cs`. Ses instructions de niveau supérieur sont tout le protocole ([lignes 7-33](https://github.com/spareilleux/learn/blob/13143d3a4d1d7d7b97fd087d4ad89c00e42fe788/code/agentic-coding/hooks/guard-git-push.cs#L7-L33)) :
+
+```csharp
+string command;
+try
+{
+    using var input = JsonDocument.Parse(Console.In.ReadToEnd());
+    // Claude Code et Codex envoient tous deux la commande shell dans tool_input.command
+    command = input.RootElement.TryGetProperty("tool_input", out var toolInput)
+        && toolInput.TryGetProperty("command", out var value)
+        && value.ValueKind == JsonValueKind.String
+            ? value.GetString()!
+            : "";
+}
+catch (JsonException e)
+{
+    // Le code de sortie 1 est une erreur non bloquante : l'agent continue, et l'utilisateur voit le message
+    Console.Error.WriteLine($"guard-git-push: stdin is not JSON: {e.Message}");
+    return 1;
+}
+
+foreach (var words in Shell.SimpleCommands(command))
+{
+    if (Git.DangerousPush(words) is { } reason)
+    {
+        Console.Error.WriteLine($"Blocked by guard-git-push: `{string.Join(' ', words)}` {reason}. Ask the user to run it.");
+        return 2;
+    }
+}
+return 0;
+```
+
+`Shell.SimpleCommands` ([lignes 89-169](https://github.com/spareilleux/learn/blob/13143d3a4d1d7d7b97fd087d4ad89c00e42fe788/code/agentic-coding/hooks/guard-git-push.cs#L89-L169)) découpe la ligne comme le ferait un shell POSIX : guillemets, barres obliques inverses, les séparateurs `;`, `&`, `|` et le saut de ligne, et les corps de here-documents, qui sont du texte, pas des commandes. `Git.DangerousPush` ([lignes 35-87](https://github.com/spareilleux/learn/blob/13143d3a4d1d7d7b97fd087d4ad89c00e42fe788/code/agentic-coding/hooks/guard-git-push.cs#L35-L87)) lit ensuite chaque commande simple comme une liste de mots : il saute les affectations `VAR=value` et les options globales de git (`-C dir`, `-c key=value`), regarde à l'intérieur de `bash -c "…"`, et refuse `push` avec `--force*`, `--delete`, `--mirror`, `--prune`, un groupe d'options courtes contenant `f` ou `d`, un `+refspec` ou un `:ref`. Le commentaire en tête de `Shell` dit ce qu'il ne fait pas : « `$(…)`, backquotes, functions, aliases. A hook is a guard rail, not a security boundary. »
+
+### Tester un hook sans agent
+
+Un hook est un programme qui lit du JSON et se termine : tu le testes comme tel. [`hooks/cases/`](https://github.com/spareilleux/learn/tree/13143d3a4d1d7d7b97fd087d4ad89c00e42fe788/code/agentic-coding/hooks/cases) contient 14 appels d'outils, et `check.sh` compare les codes de sortie et les messages avec [`hooks/expected.txt`](https://github.com/spareilleux/learn/blob/13143d3a4d1d7d7b97fd087d4ad89c00e42fe788/code/agentic-coding/hooks/expected.txt). Lances-en un toi-même, depuis `code/agentic-coding/hooks` :
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+```powershell
+Get-Content cases\02-delete-branch.json -Raw | dotnet run guard-git-push.cs
+"exit code: $LASTEXITCODE"
+```
+
+PowerShell n'a pas de redirection `<`, d'où le pipe.
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```bash
+dotnet run guard-git-push.cs < cases/02-delete-branch.json
+echo "exit code: $?"
+```
+
+</TabItem>
+<TabItem label="macOS">
+
+```bash
+dotnet run guard-git-push.cs < cases/02-delete-branch.json
+echo "exit code: $?"
+```
+
+</TabItem>
+</Tabs>
+
+```text
+Blocked by guard-git-push: `git push --delete origin old-branch` uses --delete. Ask the user to run it.
+exit code: 2
+```
+
+Les cas qui comptent sont ceux qu'une expression régulière traite mal :
+
+| Cas | Commande | Sortie |
+|---|---|---|
+| `07-chained` | `git fetch && git push origin --delete old-branch` | 2 |
+| `08-quoted-text` | `echo 'never run git push --delete'` | 0 |
+| `09-here-document` | `cat > notes.md <<'EOF'` … `git push --delete origin old-branch` … `EOF`, puis `git status` | 0 |
+| `10-bash-c` | `bash -c "git push --force origin main"` | 2 |
+| `11-git-dash-C` | `git -C ../other push --mirror` | 2 |
+| `12-plain-push` | `git push origin main` | 0 |
+| `14-not-json` | du texte brut au lieu de JSON | 1 |
+
+Le premier `dotnet run` d'un fichier le compile, environ 13 secondes sur ma machine ; les exécutions suivantes réutilisent le cache de build, 0,24 seconde. C'est pourquoi les enregistrements ci-dessous fixent un délai d'expiration de 120 secondes.
+
+### L'enregistrer dans Claude Code
+
+Dans `.claude/settings.json` ([l'exemple](https://github.com/spareilleux/learn/blob/13143d3a4d1d7d7b97fd087d4ad89c00e42fe788/code/agentic-coding/config/claude/settings.json)) :
+
+```json
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "dotnet run \"${CLAUDE_PROJECT_DIR}/code/agentic-coding/hooks/guard-git-push.cs\"",
+            "timeout": 120
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+Le matcher inclut `PowerShell` parce que, sous Windows, Claude Code peut lancer des commandes avec son outil PowerShell au lieu de Bash (cas `13-powershell-tool`). `${CLAUDE_PROJECT_DIR}` est la racine du projet où la session a démarré ; la chaîne de commande est passée à un shell, Git Bash sous Windows, ou PowerShell sans lui ([référence des hooks](https://code.claude.com/docs/en/hooks)).
+
+Une capture du 2026-09-14 à 22:18 UTC, Claude Code 2.1.271, dans un dépôt jetable avec ce fichier de paramètres, un dépôt distant nu local et une branche distante `old` qui n'existe pas en local. Invité à pousser avec `--prune`, le modèle a appelé :
+
+```json
+{"command": "git push --prune origin HEAD:main", "description": "Push current branch to remote main"}
+```
+
+et le résultat d'outil qu'il a reçu était :
+
+```text
+PreToolUse:Bash hook error: [dotnet run "${CLAUDE_PROJECT_DIR}/code/agentic-coding/hooks/guard-git-push.cs"]: Blocked by guard-git-push: `git push --prune origin HEAD:main` uses --prune. Ask the user to run it.
+```
+
+Sa réponse finale : « I didn't push anything: your `guard-git-push` hook blocked `git push --prune origin HEAD:main` because it uses `--prune`, and the hook says you need to run that yourself. » Le dépôt distant avait toujours `refs/heads/old`, et `permission_denials` listait l'appel. La session était en mode `auto` ; le mode n'a pas d'importance, car « les hooks PreToolUse s'exécutent avant chaque appel d'outil, qu'il nécessite une permission ou non ».
+
+La même exécution a affiché un avertissement sur stderr : « Ignoring 2 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. » Les **règles allow** d'un dossier non approuvé attendaient la confiance ; le **hook** du même fichier, lui, s'est exécuté. C'est documenté : « session `-p` ou SDK : Claude Code n'affiche jamais la boîte de dialogue et traite le dossier comme approuvé, donc les hooks commités dans le `.claude/settings.json` d'un dépôt s'exécutent dans un dossier que tu n'as jamais approuvé » ([confiance de l'espace de travail](https://code.claude.com/docs/en/hooks#workspace-trust)). Un hook est du code arbitraire. Avant de lancer `claude -p` dans un dépôt que tu viens de cloner, lis son répertoire `.claude/`, ou passe `--bare` ou `--settings '{"disableAllHooks": true}'`.
+
+### L'enregistrer dans Codex
+
+Codex lit les hooks depuis `hooks.json` ou depuis des tables `[hooks]` dans `config.toml`, dans `~/.codex/` ou dans le `.codex/` d'un projet approuvé ([hooks de Codex](https://learn.chatgpt.com/docs/hooks)). [L'exemple](https://github.com/spareilleux/learn/blob/13143d3a4d1d7d7b97fd087d4ad89c00e42fe788/code/agentic-coding/config/codex/config.toml) :
+
+```toml
+[[hooks.PreToolUse]]
+matcher = "^Bash$"
+
+[[hooks.PreToolUse.hooks]]
+type = "command"
+# Les hooks s'exécutent depuis le répertoire de travail de la session : résoudre le chemin depuis la racine du dépôt Git
+command = "dotnet run \"$(git rev-parse --show-toplevel)/code/agentic-coding/hooks/guard-git-push.cs\""
+# Sous Windows, Codex lance les commandes de hook avec cmd.exe /C, qui ne comprend pas $(...)
+command_windows = "dotnet run code/agentic-coding/hooks/guard-git-push.cs"
+timeout = 120
+statusMessage = "Checking git push options"
+```
+
+Trois différences avec Claude Code :
+
+- **Pas de variable pour la racine du projet.** Les exemples de Codex résolvent les chemins avec `$(git rev-parse --show-toplevel)`, parce que « Codex peut être démarré depuis un sous-répertoire ».
+- **Windows lance `cmd.exe /C`**, ou `%COMSPEC%`, comme le montre [le code source de Codex](https://github.com/openai/codex/blob/60e35765c3e43e152bf5b382a38a0628efd70842/codex-rs/hooks/src/engine/command_runner.rs#L435-L441) : `$(…)` n'y fonctionne donc pas, et `command_windows` remplace la commande. Le chemin relatif de l'exemple ne fonctionne que si Codex démarre à la racine du dépôt : *à vérifier*, comme tout l'enregistrement côté Codex, que je n'ai pas pu lancer à cause de la limite d'utilisation.
+- **Confiance par empreinte.** « Codex enregistre la confiance par rapport à l'empreinte actuelle du hook : les hooks nouveaux ou modifiés sont marqués pour revue et ignorés tant qu'ils ne sont pas approuvés » : tu approuves chaque hook dans `/hooks`, et de nouveau après chaque modification. Claude Code fait confiance à un dossier, pas à un hook.
+
+La CLI Codex de cette machine avait déjà des hooks à la fois dans `~/.codex/hooks.json` et dans `~/.codex/config.toml`, et `codex exec` avertissait : « loading hooks from both … hooks.json and … config.toml; prefer a single representation for this layer ».
+
+### Ce qu'un hook ne fait pas
+
+- **Il échoue en laissant passer** (*fail open*). Si `dotnet` n'est pas installé, le shell sort avec 127, une erreur non bloquante : le push passe. Pareil avec un délai dépassé. Un hook pour quelque chose qui ne doit jamais arriver doit être doublé d'une règle côté serveur, ici la protection de branche sur le dépôt distant.
+- **Il voit un seul appel d'outil.** Un script que l'agent écrit, puis exécute, pousse depuis l'intérieur du script : le hook voit `bash deploy.sh`.
+- **Ce n'est pas un bac à sable.** Pour limiter le système de fichiers et le réseau, utilise les [bacs à sable de la leçon 1](../01-agents-and-permissions/#codex--un-bac-à-sable-et-une-politique-dapprobation).
+
+## Les skills
+
+Un skill est un dossier avec un `SKILL.md` : un frontmatter YAML qui dit **quand** l'utiliser, et des instructions Markdown qui disent **comment**. Les deux agents suivent le format [Agent Skills](https://agentskills.io/specification) et utilisent la divulgation progressive : seuls le nom et la description sont dans le contexte au démarrage, et le corps se charge quand le skill est utilisé ([skills de Claude Code](https://code.claude.com/docs/en/skills), [skills de Codex](https://learn.chatgpt.com/docs/build-skills)).
+
+[`config/skills/journal-status/SKILL.md`](https://github.com/spareilleux/learn/blob/13143d3a4d1d7d7b97fd087d4ad89c00e42fe788/code/agentic-coding/config/skills/journal-status/SKILL.md) :
+
+```markdown
+---
+name: journal-status
+description: Lists what is left to do in a course of the learn site, from the unchecked items and the "To verify" section of its journal. Use when asked about the progress or the open items of a course.
+argument-hint: <course folder, for example duckdb>
+allowed-tools: Read Grep
+---
+
+Report the open items of the course in `src/content/docs/$ARGUMENTS/`.
+
+1. Read `src/content/docs/$ARGUMENTS/journal.md`. If the file doesn't exist, say so and stop.
+2. List every line of the "Progress" section that starts with `- [ ]`, in the order of the file.
+3. List the bullets of the "To verify" section, if there is one, shortened to one line each.
+4. Answer with two short Markdown lists, "Unchecked" and "To verify", and the number of items in each. Don't edit any file.
+```
+
+| | Claude Code | Codex |
+|---|---|---|
+| Emplacement dans un dépôt | `.claude/skills/journal-status/SKILL.md` | `.agents/skills/journal-status/SKILL.md` |
+| Invocation explicite | `/journal-status v-for-csharp-java` | `$journal-status` |
+| `$ARGUMENTS`, `argument-hint`, `allowed-tools` | extensions de Claude Code | absents de la documentation de Codex : *à vérifier* |
+
+`allowed-tools: Read Grep` laisse ces outils s'exécuter sans demande pendant que le skill tourne. Les fichiers `.claude/commands/*.md` fonctionnent toujours, mais « les commandes personnalisées ont été fusionnées dans les skills ».
+
+Deux captures, 2026-09-14, Claude Code 2.1.271, dans une copie de ce dépôt avec le skill installé. La première, à 22:24 UTC, depuis Git Bash :
+
+```bash
+claude -p "/journal-status v-for-csharp-java" --permission-mode default
+```
+
+Le modèle a reçu le prompt sous la forme `C:/Program Files/Git/journal-status v-for-csharp-java` : la [conversion de chemins](https://www.msys2.org/docs/filesystem-paths/) de Git Bash transforme un argument qui commence par `/` en chemin Windows. Ne reconnaissant pas de commande, le modèle a appelé lui-même l'outil `Skill`, qui demande une permission en mode `default`, et a été refusé. Il a alors trouvé `SKILL.md` avec `Glob`, l'a lu, a suivi les étapes à la main et a répondu correctement au bout de 6 tours, en ajoutant : « The skill command didn't start when I called it, so I read the skill's instructions and followed them myself. »
+
+La seconde, une minute plus tard :
+
+```bash
+MSYS_NO_PATHCONV=1 claude -p "/journal-status v-for-csharp-java" --permission-mode default --allowedTools "Skill,Read,Grep"
+```
+
+Deux tours, un `Read` :
+
+```text
+**Unchecked (1)**
+- [ ] Lesson 5: interfaces and generics
+
+**To verify (5)**
+- `v symlink` on Windows, and whether it changes the user `PATH`.
+- A minimal Linux distribution without the C headers: does TCC still find what it needs?
+- macOS: the quarantine flag on an archive downloaded with a browser, and development builds with TCC instead of `cc`.
+- `v -prod -cc gcc` on a Windows machine that has both MSVC and MinGW.
+- `.vvmrc`, which pins the compiler version for a project: it's documented in the 0.5.2 docs but hasn't been tried yet.
+```
+
+La première exécution est la plus instructive : un modèle qui ne peut pas utiliser un mécanisme le contourne, et le résultat a l'air identique. Seule la transcription montre que le skill ne s'est jamais exécuté.
+
+## Les sous-agents
+
+Un sous-agent est une session de modèle que l'agent principal démarre avec une tâche, dans **sa propre fenêtre de contexte**, avec ses propres instructions, ses propres outils et éventuellement un modèle moins cher ; seule sa réponse finale revient ([sous-agents de Claude Code](https://code.claude.com/docs/en/sub-agents), [sous-agents de Codex](https://learn.chatgpt.com/docs/agent-configuration/subagents)). Utilises-en un pour un travail qui lit beaucoup et conclut peu : explorer une base de code, relire un diff, vérifier de la documentation. La recherche des liens de documentation de ce cours a été faite ainsi, par deux sous-agents qui ont chacun lu des dizaines de pages et rendu un rapport.
+
+Le même relecteur, pour les deux agents ([Claude Code](https://github.com/spareilleux/learn/blob/da4cce3583638c4828cc242269be00f5c065a3b2/code/agentic-coding/config/claude/agents/lesson-checker.md), [Codex](https://github.com/spareilleux/learn/blob/da4cce3583638c4828cc242269be00f5c065a3b2/code/agentic-coding/config/codex/agents/lesson-checker.toml)) :
+
+<Tabs>
+<TabItem label=".claude/agents/lesson-checker.md">
+
+```markdown
+---
+name: lesson-checker
+description: Checks one lesson of the learn site against the course conventions of AGENTS.md and reports what is missing. Use after writing or editing a lesson, before committing it.
+tools: Read, Grep, Glob
+model: haiku
+---
+
+You review one lesson file of the learn site. You never edit files.
+
+1. Read `AGENTS.md` at the root of the repository, then the lesson file you were given.
+2. Check, and quote the line for each problem you find:
+   - the frontmatter has a `title`, a `description` and `sidebar.order`;
+   - there is a "Key takeaways" section and at least one exercise, each exercise with a `<details>` solution;
+   - Markdown links to other pages of the site are relative, never starting with `/`;
+   - in an `.mdx` file, prose has no bare `{`, `}` or `<` outside code;
+   - commands that differ between Windows, Linux and macOS are in `<Tabs syncKey="os">`.
+3. Answer with a short list of problems, most important first, or "No problems found". Don't list what is correct.
+```
+
+</TabItem>
+<TabItem label=".codex/agents/lesson-checker.toml">
+
+```toml
+name = "lesson_checker"
+description = "Checks one lesson of the learn site against the course conventions of AGENTS.md and reports what is missing."
+sandbox_mode = "read-only"
+developer_instructions = """
+You review one lesson file of the learn site. You never edit files.
+AGENTS.md is already in your instructions. Read the lesson file you were given, then check, quoting the line for each problem:
+…
+"""
+```
+
+</TabItem>
+</Tabs>
+
+Dans Claude Code, `tools` limite ce que le sous-agent peut appeler, et `model: haiku` le fait tourner sur un modèle plus petit. Un agent personnalisé de Codex est une couche de configuration : `sandbox_mode = "read-only"` fait de la limite un bac à sable du système d'exploitation plutôt qu'une liste d'outils. La CI vérifie les champs obligatoires des deux fichiers, pas ce qu'ils font.
+
+Une capture du 2026-09-14 à 22:48 UTC, Claude Code 2.1.271, dans un dépôt jetable avec l'`AGENTS.md` de ce site, le sous-agent, et une leçon de 20 lignes contenant cinq erreurs volontaires : un lien absolu depuis la racine, pas de `sidebar.order`, une commande Windows hors des onglets, `List<T>` dans la prose `.mdx`, et un exercice sans solution.
+
+```bash
+claude -p "Use the lesson-checker subagent to review src/content/docs/demo/01-intro.mdx, then give me its findings." --permission-mode default --output-format stream-json --verbose
+```
+
+Ce que montre la transcription, dans l'ordre :
+
+1. L'agent principal (Opus 5) a appelé l'outil `Agent` avec un prompt qu'il a écrit lui-même, bien plus large que la liste de vérification du sous-agent : les miroirs français et espagnol, `astro.config.mjs`, Mermaid, les marqueurs « to verify ».
+2. Le sous-agent (Haiku 4.5) a d'abord essayé de lire `/C:/Users/…/AGENTS.md`, un chemin avec une barre oblique en tête, et a obtenu « a suspicious Windows path pattern that requires manual approval » : refusé, deux fois, et listé dans `permission_denials`. Il a réessayé avec des chemins relatifs, qui ont fonctionné.
+3. Il a rendu 8 constats, et une liste « Could not check » avec « Bare `{`, `}`, or `<` in prose (file is short enough that this appears absent) ». Il a manqué `List<T>`, la seule erreur qui casse le build.
+4. L'agent principal a lu lui-même le fichier de 20 lignes, trouvé `List<T>`, et répondu avec 9 constats confirmés et une section « Checker claims to drop or fix ». L'un d'eux : « 'Key takeaways' section: AGENTS.md has no such rule. The checker credited it to my task instructions, but I never asked for one. »
+
+Ce dernier point est faux, et instructif : la règle est dans la propre définition du sous-agent, que l'agent principal n'a jamais lue. **Chaque agent voit un contexte différent.** L'agent principal connaissait la description du sous-agent, pas son corps ; le sous-agent connaissait son corps et le prompt, pas la conversation. L'exécution complète a coûté 0,49 $, dont 0,04 $ pour le sous-agent.
+
+Deux leçons pour utiliser des sous-agents. Un modèle bon marché qui lit beaucoup est utile pour rassembler, pas pour un verdict final : vérifie ce qu'il rend, comme l'a fait ici l'agent principal. Et le prompt qu'écrit l'agent principal fait partie du résultat ; si la tâche compte, dis dans ta demande ce que le sous-agent doit vérifier.
+
+## À retenir
+
+- Les hooks sont des programmes à des points fixes de la boucle ; le code de sortie 2 bloque un appel d'outil dans Claude Code comme dans Codex, et le code de sortie 1 non.
+- Analyse la commande au lieu de comparer son texte, teste le hook avec des appels JSON enregistrés, et souviens-toi qu'il échoue en laissant passer.
+- `claude -p` exécute les hooks d'un dossier que tu n'as jamais approuvé. Codex te demande d'approuver chaque hook par son empreinte.
+- Un skill est un `SKILL.md` dont la description est toujours dans le contexte et dont le corps se charge à l'usage ; `.claude/skills` pour Claude Code, `.agents/skills` pour Codex.
+- Un sous-agent travaille dans son propre contexte et ne rend que sa réponse : bien pour lire beaucoup, mais ça ne dispense pas de vérifier ce qu'il dit.
+- Lis la transcription, pas seulement la réponse : dans ces captures, un skill qui ne s'est jamais exécuté et un sous-agent qui a manqué le seul bug grave ont tous deux abouti à une réponse plausible.
+
+## Exercices
+
+1. Sans l'exécuter, donne le code de sortie de `guard-git-push.cs` pour chaque commande, et dis lesquelles révèlent une faille : (a) `git push origin main --force-if-includes` ; (b) `git push origin HEAD:refs/heads/main -n` ; (c) `$(echo git) push --force` ; (d) `git push "--delete" origin old`.
+
+<details>
+<summary>Solution</summary>
+
+(a) 2 : `--force-if-includes` commence par `--force-`, reconnu à la [ligne 68](https://github.com/spareilleux/learn/blob/13143d3a4d1d7d7b97fd087d4ad89c00e42fe788/code/agentic-coding/hooks/guard-git-push.cs#L68). Cette option s'utilise avec `--force-with-lease` et refuse plus qu'elle ne permet : la bloquer est donc sans conséquence. (b) 0 : `-n` est `--dry-run` et ne contient ni `f` ni `d`. (c) 0, **une faille** : le premier mot est `$(echo`, pas `git`, et le fichier dit qu'il ne gère pas `$(…)`. (d) 2 : les guillemets sont retirés avant la comparaison des mots, comme le fait un shell, donc `"--delete"` est `--delete`. Tu peux vérifier avec un fichier JSON par commande dans `hooks/cases/` et `check.sh`, ce qui est la manière d'ajouter un cas : écrire l'appel, l'exécuter, relire la sortie, l'ajouter à `expected.txt`.
+
+</details>
+
+2. Ton équipe veut que chaque modification de fichier faite par un agent soit formatée avec `dotnet format` juste après, dans les deux agents. Quel événement, quel matcher, et que reçoit le hook ?
+
+<details>
+<summary>Solution</summary>
+
+`PostToolUse`, qui s'exécute après la réussite de l'outil. Dans Claude Code, le matcher `Edit|Write`, et `tool_input.file_path` contient le chemin ; lance `dotnet format --include <path>` sur les fichiers `.cs`. Dans Codex, les modifications de fichiers passent par `apply_patch`, et « les valeurs de `matcher` peuvent utiliser `apply_patch`, `Edit` ou `Write` ; l'entrée du hook indique toujours `tool_name: "apply_patch"` », avec le patch dans `tool_input.command` : le hook doit donc extraire les chemins du patch. Un hook `PostToolUse` ne peut pas annuler la modification : sortir avec 2 ne fait que montrer son stderr au modèle. Et `dotnet format` sur toute une solution après chaque modification est lent ; ne formate que le fichier modifié.
+
+</details>
+
+3. Le skill `journal-status` devrait-il plutôt être un sous-agent ? Et `lesson-checker` devrait-il être un skill ?
+
+<details>
+<summary>Solution</summary>
+
+`journal-status` lit un fichier court et répond en quelques lignes : l'exécuter dans le contexte principal coûte peu, et l'utilisateur voit directement le résultat. Un sous-agent ajouterait une session de modèle, et son coût, sans économiser de contexte. `lesson-checker` lit `AGENTS.md` et une leçon entière, et seule la liste des problèmes compte ensuite : c'est exactement à cela que sert un sous-agent, et `tools: Read, Grep, Glob` garantit qu'il ne modifie rien. En skill, ses instructions et tout ce qu'il a lu resteraient dans la conversation principale. Les deux pourraient coexister : un skill `/check-lesson` dont les instructions disent « délègue au sous-agent lesson-checker, puis vérifie chaque constat dans le fichier », ce que l'agent principal a fait de lui-même dans la capture.
+
+</details>
+
+## Sources
+
+- Claude Code : [référence des hooks](https://code.claude.com/docs/en/hooks), [guide des hooks](https://code.claude.com/docs/en/hooks-guide), [skills](https://code.claude.com/docs/en/skills), [sous-agents](https://code.claude.com/docs/en/sub-agents), [mode *headless*](https://code.claude.com/docs/en/headless)
+- Codex : [hooks](https://learn.chatgpt.com/docs/hooks), [skills](https://learn.chatgpt.com/docs/build-skills), [sous-agents](https://learn.chatgpt.com/docs/agent-configuration/subagents)
+- [Spécification Agent Skills](https://agentskills.io/specification)
+- [Applications basées sur un fichier dans .NET 10](https://learn.microsoft.com/dotnet/core/sdk/file-based-apps)

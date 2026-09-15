@@ -54,6 +54,7 @@ export default defineConfig({
 								},
 								{
 									label: 'V for C#/Java developers',
+									translations: { fr: 'V pour développeurs C#/Java', es: 'V para desarrolladores C#/Java' },
 									collapsed: true,
 									items: [{ autogenerate: { directory: 'v-for-csharp-java' } }],
 								},
@@ -92,6 +93,7 @@ export default defineConfig({
 							items: [
 								{
 									label: 'Agentic coding with Claude Code and Codex',
+									translations: { fr: 'Programmation agentique avec Claude Code et Codex', es: 'Programación agéntica con Claude Code y Codex' },
 									collapsed: true,
 									items: [{ autogenerate: { directory: 'agentic-coding' } }],
 								},
@@ -105,6 +107,7 @@ export default defineConfig({
 					items: [
 						{
 							label: 'Machine learning, as applied in IX',
+							translations: { fr: 'Apprentissage automatique, appliqué dans IX', es: 'Aprendizaje automático, aplicado en IX' },
 							collapsed: true,
 							items: [{ autogenerate: { directory: 'machine-learning-ix' } }],
 						},
