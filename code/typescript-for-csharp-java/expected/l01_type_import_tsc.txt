@@ -1,0 +1,9 @@
+errors/l01_type_import.ts:2:23 - error TS1484: 'Money' is a type and must be imported using a type-only import when 'verbatimModuleSyntax' is enabled.
+
+2 import { formatMoney, Money } from '../examples/l01_money.ts';
+                        ~~~~~
+
+
+Found 1 error in errors/l01_type_import.ts:2
+
+exit 1

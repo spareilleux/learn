@@ -53,7 +53,8 @@ for f in errors/*.ts; do
   printf '{ "extends": "../tsconfig.json", "include": [], "files": ["../%s"] }\n' "$f" > "out/tsconfig.$name.json"
   run "${name}_tsc" . "$tsc" -p "out/tsconfig.$name.json" --pretty true
   # A line "// tsc options: …" checks the snippet a second time with those options added
-  options=$(sed -n 's|^// tsc options: ||p' "$f" | head -1 | tr -d '')
+  options=$(sed -n 's|^// tsc options: ||p' "$f" | head -1 | tr -d '
+')
   if [ -n "$options" ]; then
     # shellcheck disable=SC2086
     run "${name}_tsc_options" . "$tsc" -p "out/tsconfig.$name.json" --pretty true $options
@@ -74,12 +75,20 @@ run l01_emit_tsc l01-emit "../$tsc" --pretty false
 run l01_emit_files l01-emit node -e "for (const f of require('node:fs').readdirSync('dist').sort()) console.log('dist/' + f)"
 run l01_emit_main_js l01-emit node -e "process.stdout.write(require('node:fs').readFileSync('dist/main.js', 'utf8'))"
 run l01_emit_node l01-emit node dist/main.js
+rm -rf solutions/l01-ex3/dist
+run l01-ex3_tsc solutions/l01-ex3 "../../$tsc" --pretty false
+run l01-ex3_files solutions/l01-ex3 node -e "console.log('dist exists:', require('node:fs').existsSync('dist'))"
 
-# The C# and Java sides of the comparisons (--no-cache rebuilds, so the compiler's warnings are printed on every run)
+# The C# and Java sides of the comparisons
+# csharp <file>: cleans, then builds and runs a file-based app, so the compiler's warnings are printed on every run
+csharp() {
+  dotnet clean "$1" > /dev/null 2>&1
+  dotnet run --no-cache "$1"
+}
 if command -v dotnet > /dev/null; then
   for f in compare/*.cs compare_fail/*.cs; do
     [ -e "$f" ] || continue
-    run "$(basename "${f%.*}")_cs" "$(dirname "$f")" dotnet run --no-cache "$(basename "$f")"
+    run "$(basename "${f%.*}")_cs" "$(dirname "$f")" csharp "$(basename "$f")"
   done
 else
   echo "skip C# comparisons: dotnet not found"

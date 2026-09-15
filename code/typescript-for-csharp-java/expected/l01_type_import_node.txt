@@ -1,0 +1,7 @@
+errors/l01_type_import.ts:2
+import { formatMoney, Money } from '../examples/l01_money.ts';
+                      ^^^^^
+SyntaxError: The requested module '../examples/l01_money.ts' does not provide an export named 'Money'
+
+Node.js v24.21.0
+exit 1

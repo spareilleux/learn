@@ -1,0 +1,10 @@
+{
+  // Exercise 3: l01-emit's project, with noEmitOnError
+  "extends": "../../l01-emit/tsconfig.json",
+  "compilerOptions": {
+    "noEmitOnError": true,
+    "rootDir": "../../l01-emit/src",
+    "outDir": "dist"
+  },
+  "include": ["../../l01-emit/src"]
+}
