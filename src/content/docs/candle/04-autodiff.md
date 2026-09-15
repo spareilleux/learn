@@ -139,7 +139,7 @@ through max: d max(w) / dw: shape [3], F32, [0, 0, 1]
 ```
 
 - `detach` cuts the graph, as in lesson 3.
-- `round`, `floor`, `ceil` and `sign` have a derivative of zero almost everywhere, and the walk skips them ([`backprop.rs`, lines 114-117](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-core/src/backprop.rs#L114-L117)). The result is `None`, not a tensor of zeros, so code that `unwrap`s the gradient panics. So do integer tensors: a `Var` of `u32` gets `None` (below).
+- `round`, `floor`, `ceil` and `sign` have a derivative of zero almost everywhere, and the walk skips them ([`backprop.rs`, lines 114-117](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-core/src/backprop.rs#L114-L117)). The result is `None`, not a tensor of zeros, so code that `unwrap`s the gradient panics. Integer tensors get no gradient either: a `Var` of `u32` gets `None` (below).
 - `max` sends the whole gradient to the largest element, `3` at index 2.
 
 The gradients themselves are detached from the graph ([lines 176-182](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-core/src/backprop.rs#L176-L182)), so a gradient of a gradient, a second derivative, isn't available: the comment there calls second-order derivatives out of scope. An environment variable read on the next line, `CANDLE_GRAD_DO_NOT_DETACH`, keeps them attached (*to verify*, the course hasn't tried it).
@@ -359,7 +359,7 @@ step 2000: loss 5.899971
 a -0.096816, b 2.603830, c 17.481431
 ```
 
-The curve reaches 5.899971 against 5.908583 for the line: 0.15% better on the data it was trained on, which says nothing yet about builds it hasn't seen, and a third parameter can always fit the training set at least as well. `a` is small and negative, a slight flattening for large pages. `z²` is computed once, outside the loop, as a plain tensor, and `loss_of` takes the three `Var`s as `&Tensor` through `Deref`. `z²` ranges further than `z`, so the learning rate is 0.05 instead of 0.1: a sensible first guess (*to verify* how close 0.1 comes to diverging). To judge the curve properly, split the builds as lesson 1 of the IX course does.
+The curve reaches 5.899971 against 5.908583 for the line: 0.15% better on the data it was trained on, which says nothing yet about builds it hasn't seen, and a third parameter can always fit the training set at least as well. `a` is small and negative, a slight flattening for large page counts. `z²` is computed once, outside the loop, as a plain tensor, and `loss_of` takes the three `Var`s as `&Tensor` through `Deref`. `z²` ranges further than `z`, so the learning rate is 0.05 instead of 0.1: a sensible first guess (*to verify* how close 0.1 comes to diverging). To judge the curve properly, split the builds as lesson 1 of the IX course does.
 
 </details>
 

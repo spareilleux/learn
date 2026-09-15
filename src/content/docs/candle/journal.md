@@ -16,7 +16,7 @@ sidebar:
 - [x] Lesson 3: CPU compute and performance
 - [x] Lesson 4: automatic differentiation
 - [ ] Lessons 5 to 12
-- [ ] French and Spanish translations
+- [x] French and Spanish translations of lessons 1 to 4
 
 ## 2026-09-15 — Candle, pinned
 

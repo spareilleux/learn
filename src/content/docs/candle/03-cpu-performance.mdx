@@ -220,7 +220,7 @@ Two `n × n` matrices of values in [-1, 1), in milliseconds. GFLOPS are billions
 | `a.relu()` | 5.066 | 5.372 |
 | `a.t()`, a view | 0.000 | 0.000 |
 
-- **The thread count changes nothing here**, as the code said: these are single-threaded loops.
+- **The thread count changes nothing here**, as `binary_map` in the previous section showed: these are single-threaded loops.
 - **A strided operand costs six times more.** `a.t()` has strides `[1, 2048]`, so reading one row of it jumps 2048 elements, 8 KB, between two numbers, and the processor's cache and its vectorization both stop helping. `contiguous()` pays the same walk once; after it, operations are back to 5 ms. When an operation on a transposed or permuted tensor sits in a loop, make it contiguous before the loop.
 - **`a + b` and `relu` take the same time**, so most of those 5 ms is probably allocating and filling a fresh 16 MB buffer rather than the arithmetic (*to verify* with a profiler).
 - **A view is free**: `t()` builds a new layout and nothing else.

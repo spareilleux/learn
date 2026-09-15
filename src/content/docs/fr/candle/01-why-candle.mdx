@@ -1,0 +1,314 @@
+---
+title: 1. Pourquoi Candle
+description: Où se place Candle, de Hugging Face, à côté de PyTorch, tch-rs, Burn, ONNX Runtime, TorchSharp, ML.NET et DJL, les crates de son workspace et leurs features, le premier programme avec sa sortie réelle et son coût de compilation, les deux erreurs de compilation que tout débutant rencontre, ce que fait une demande de GPU sans la feature, et si GA, IX et TARS s'en servent.
+sidebar:
+  order: 1
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+[Candle](https://github.com/huggingface/candle/tree/31f35b147389700ed2a178ee66a91c3cc25cc80d) est un framework d'apprentissage automatique écrit en Rust par Hugging Face. Il fournit des tenseurs, la différentiation automatique, des couches de réseaux de neurones et des implémentations de modèles connus, et il se compile dans ton programme comme n'importe quelle autre crate : pas de Python, pas de runtime C++ à installer à côté. Cette leçon le situe parmi les outils qu'un développeur C# ou Java connaît peut-être déjà, démonte le workspace, et exécute un premier programme.
+
+## Où se place Candle
+
+| | Langage que tu écris | Ce qui calcule | Entraînement | Ce que tu livres |
+|---|---|---|---|---|
+| [PyTorch](https://pytorch.org/) | Python | libtorch, en C++ et CUDA | oui | un environnement Python, ou un modèle exporté pour un autre runtime |
+| [tch-rs](https://github.com/LaurentMazare/tch-rs/tree/4227b89b72059b0651ff83a38637693574e0a2d6) | Rust | libtorch, via une API C | oui | ton binaire plus les bibliothèques libtorch |
+| [TorchSharp](https://github.com/dotnet/TorchSharp/tree/8f4def03b641b6753f18076aa5438f8eaaef2d30) | C#, F# | libtorch, via des paquets natifs | oui | ton application .NET plus un paquet NuGet `libtorch-*` |
+| [ONNX Runtime](https://onnxruntime.ai/) | C#, Java, Python, C++, Rust via [`ort`](https://ort.pyke.io/) | son propre moteur C++ | l'inférence d'abord | ton application plus le runtime natif et un fichier `.onnx` |
+| [ML.NET](https://learn.microsoft.com/dotnet/machine-learning/) | C#, F# | des entraîneurs .NET, et ONNX Runtime ou TorchSharp pour l'apprentissage profond | oui | une application .NET |
+| [DJL](https://djl.ai/) | Java | un moteur que tu choisis : PyTorch, ONNX Runtime et d'autres | selon le moteur | une application JVM plus les bibliothèques natives du moteur |
+| [Burn](https://burn.dev/) | Rust | des backends derrière un trait `Backend`, de CUDA à un backend CPU en Rust pur | oui | un binaire Rust |
+| **Candle** | Rust | du code Rust, avec CUDA, Metal, MKL ou Accelerate en option | oui | un binaire Rust, ou un module WebAssembly |
+
+Sources : les README de [tch-rs](https://github.com/LaurentMazare/tch-rs/blob/4227b89b72059b0651ff83a38637693574e0a2d6/README.md), [TorchSharp](https://github.com/dotnet/TorchSharp/blob/8f4def03b641b6753f18076aa5438f8eaaef2d30/README.md), [`ort`](https://github.com/pykeio/ort/blob/85bdfa5642cfdbafc925def9868db2ca03ca5329/README.md), [DJL](https://github.com/deepjavalibrary/djl/blob/f3782179ff48a1bd31382667dbfae1f568891a55/README.md), [Burn](https://github.com/tracel-ai/burn/blob/66a8a5ff8addc17a4b5e021b732850a1e0900370/README.md) et [Candle](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/README.md).
+
+La colonne qui compte pour ce cours est la dernière. Avec tch-rs ou TorchSharp, les calculs sur les tenseurs se font dans libtorch, une bibliothèque native de plusieurs centaines de mégaoctets que tu déploies à côté de ton programme. Avec ONNX Runtime, tu déploies sa bibliothèque native et un modèle exporté depuis Python. Le [README](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/README.md#why-should-i-use-candle) de Candle énonce ses objectifs dans les mêmes termes : rendre possible l'inférence serverless avec de petits binaires qui démarrent vite, et retirer Python des charges de production.
+
+Ce que tu perds, c'est l'étendue. PyTorch a des milliers d'opérations et un vaste écosystème ; Candle a les opérations dont ses modèles ont besoin. La leçon 2 rencontre certaines de ses limites, comme des opérations qui paniquent sur des tenseurs entiers au lieu de renvoyer une erreur.
+
+## Le workspace
+
+Candle est publié sous forme de plusieurs crates. La version étudiée ici est **0.11.0**, la dernière sur [crates.io](https://crates.io/crates/candle-core/0.11.0) (26 juin 2026), dont les sources sont le tag `0.11.0`, commit [`31f35b1`](https://github.com/huggingface/candle/commit/31f35b147389700ed2a178ee66a91c3cc25cc80d). Chaque lien vers le code de Candle dans ce cours pointe vers ce commit.
+
+| Crate | Ce qu'elle contient | Leçons |
+|---|---|---|
+| [`candle-core`](https://docs.rs/candle-core/0.11.0/candle_core/) | `Tensor`, `DType`, `Device`, les backends CPU, CUDA et Metal, l'autodiff, les tenseurs quantifiés, les formats `safetensors` et GGUF | 2 à 4, 8 |
+| [`candle-nn`](https://docs.rs/candle-nn/0.11.0/candle_nn/) | couches (`Linear`, `Embedding`, normalisations), activations, pertes, optimiseurs, `VarBuilder` | 5, 6 |
+| [`candle-transformers`](https://docs.rs/candle-transformers/0.11.0/candle_transformers/) | implémentations de modèles publiés : 125 entrées sous `models/`, de BERT à Qwen3 quantifié | 7, 8 |
+| [`candle-datasets`](https://docs.rs/candle-datasets/0.11.0/candle_datasets/) | chargeurs de jeux de données courants comme MNIST | 5 |
+| [`candle-examples`](https://github.com/huggingface/candle/tree/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-examples/examples) | 111 programmes en ligne de commande, un par modèle ou par tâche | 7 à 9 |
+| [`candle-onnx`](https://docs.rs/candle-onnx/0.11.0/candle_onnx/) | un évaluateur de graphes ONNX | 11 |
+| [`candle-pyo3`](https://github.com/huggingface/candle/tree/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-pyo3) | des bindings Python, la direction inverse de ce cours | — |
+| `candle-kernels`, `candle-metal-kernels`, `candle-flash-attn` | noyaux GPU en CUDA et Metal | 9 |
+| [`candle-wasm-examples`](https://github.com/huggingface/candle/tree/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-wasm-examples) | les mêmes modèles compilés en WebAssembly pour le navigateur | 10 |
+
+`candle-core` active ses backends avec des features Cargo, déclarées dans [`candle-core/Cargo.toml`, lignes 48-62](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-core/Cargo.toml#L48-L62). Aucune n'est active par défaut, donc une dépendance simple ne te donne que le backend CPU.
+
+| Feature | Ce qu'elle ajoute | Où |
+|---|---|---|
+| `cuda` | le backend CUDA, via la crate [`cudarc`](https://docs.rs/cudarc/), et les noyaux CUDA | GPU NVIDIA, demande le toolkit CUDA |
+| `cudnn` | `cuda` plus cuDNN pour les convolutions | idem |
+| `nccl` | `cuda` plus NCCL, pour répartir un modèle sur plusieurs GPU | idem |
+| `metal` | le backend Metal | GPU Apple, macOS |
+| `accelerate` | le framework Accelerate d'Apple pour les produits matriciels sur le CPU | macOS |
+| `mkl` | la Math Kernel Library d'Intel pour les produits matriciels sur le CPU | CPU x86 |
+
+`candle-nn` et `candle-transformers` transmettent les mêmes features à `candle-core`. La leçon 9 couvre les features GPU ; le code de ce cours n'en utilise aucune.
+
+## Exécuter le code
+
+Le code du cours est un workspace Cargo dans [`code/candle`](https://github.com/spareilleux/learn/tree/c45b150/code/candle), avec un exemple par sujet et un par série de solutions d'exercices. Il te faut [Rust](https://www.rust-lang.org/tools/install) et un compilateur C, pour une raison expliquée plus bas : sous Windows, les Visual Studio Build Tools que `rustup` demande suffisent.
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+```powershell
+cd code\candle
+cargo run --release --example l01_hello
+bash check.sh
+```
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```bash
+cd code/candle
+cargo run --release --example l01_hello
+bash check.sh
+```
+
+</TabItem>
+<TabItem label="macOS">
+
+```bash
+cd code/candle
+cargo run --release --example l01_hello
+bash check.sh
+```
+
+</TabItem>
+</Tabs>
+
+`check.sh` exécute `cargo fmt --check`, [clippy](https://doc.rust-lang.org/clippy/), les tests (dont les doctests `compile_fail` des extraits que ce cours montre refusés), puis chaque exemple, et compare chaque sortie avec le fichier de `expected/`. Sous Windows, lance-le depuis Git Bash.
+
+## Le premier programme
+
+Le [livre de Candle](https://huggingface.github.io/candle/guide/installation.html) ajoute `candle-core` avec `cargo add --git`, qui suit la branche `main`. Ce cours épingle plutôt la version publiée, pour que les sorties ci-dessous restent vraies : [`Cargo.toml`](https://github.com/spareilleux/learn/blob/c45b150/code/candle/Cargo.toml#L12-L14) demande exactement 0.11.0 avec `=`, comme le décrit la [référence Cargo](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html#comparison-requirements), et `Cargo.lock` est commité.
+
+```toml
+[workspace.dependencies]
+candle-core = "=0.11.0"
+candle-nn = "=0.11.0"
+```
+
+Le programme est celui du README de Candle, un produit matriciel, avec un changement. Le README remplit les matrices avec `Tensor::randn`, des nombres aléatoires, et le générateur aléatoire du CPU de Candle ne peut pas recevoir de graine (la leçon 2 montre l'erreur), donc sa sortie change à chaque exécution. [`examples/l01_hello.rs`](https://github.com/spareilleux/learn/blob/c45b150/code/candle/course/examples/l01_hello.rs#L3-L15) utilise `arange` à la place :
+
+```rust
+use candle_core::{Device, Tensor};
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let device = Device::Cpu;
+
+    // arange au lieu du randn du README : les mêmes nombres à chaque exécution et sur chaque OS
+    let a = Tensor::arange(0f32, 6., &device)?.reshape((2, 3))?;
+    let b = Tensor::arange(0f32, 12., &device)?.reshape((3, 4))?;
+
+    let c = a.matmul(&b)?;
+    println!("{c}");
+    Ok(())
+}
+```
+
+```text
+[[20., 23., 26., 29.],
+ [56., 68., 80., 92.]]
+Tensor[[2, 4], f32]
+```
+
+Quatre choses à remarquer, quand on vient de C# ou de Java :
+
+- **Chaque opération renvoie un `Result`.** `arange`, `reshape` et `matmul` peuvent toutes échouer, sur une forme qui ne convient pas par exemple, et elles le signalent par une valeur [`candle_core::Error`](https://docs.rs/candle-core/0.11.0/candle_core/error/enum.Error.html) au lieu de lever une exception. Le `?` après chaque appel renvoie l'erreur à l'appelant, comme l'explique le [cours Rust](../../rust-for-csharp-java/06-option-result/). Là où TorchSharp lève une exception, Candle te remet une valeur.
+- **Le périphérique est explicite.** Chaque tenseur est créé sur un [`Device`](https://docs.rs/candle-core/0.11.0/candle_core/enum.Device.html) : `Device::Cpu` ici, un périphérique CUDA ou Metal à la leçon 9.
+- **La forme et le type des éléments sont des valeurs d'exécution.** `Tensor` est un seul type pour toutes les formes et tous les types d'éléments ; la dernière ligne de la sortie affiche les deux, `[2, 4]` et `f32`. Une erreur de forme se découvre quand le programme s'exécute, pas quand il compile.
+- **`0f32, 6.`** donne un suffixe de type au premier nombre ; Rust en déduit `f32` pour le second.
+
+Une matrice `(2, 3)` fois une matrice `(3, 4)` donne une matrice `(2, 4)` : le premier élément vaut `0·0 + 1·4 + 2·8 = 20`.
+
+### Deux erreurs que tout débutant rencontre
+
+Afficher le résultat de `matmul` sans `?` affiche un `Result`, pas un tenseur, et `Result` n'implémente pas `Display` :
+
+```rust
+let c = a.matmul(&b);
+println!("{c}");
+```
+
+```text
+error[E0277]: `Result<candle_core::Tensor, candle_core::Error>` doesn't implement `std::fmt::Display`
+ --> course\examples\x_result.rs:8:15
+  |
+8 |     println!("{c}");
+  |               ^^^ `Result<candle_core::Tensor, candle_core::Error>` cannot be formatted with the default formatter
+```
+
+La seconde vient de l'aide-mémoire du propre [README de Candle, ligne 278](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/README.md?plain=1#L278), qui convertit un tenseur avec `tensor.to_dtype(&DType::F16)?`. [`to_dtype`](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-core/src/tensor.rs#L2453) prend le `DType` par valeur :
+
+```text
+error[E0308]: mismatched types
+    --> course\examples\x_readme.rs:5:32
+     |
+   5 |     let half = tensor.to_dtype(&DType::F16)?;
+     |                       -------- ^^^^^^^^^^^ expected `DType`, found `&DType`
+     |                       |
+     |                       arguments to this method are incorrect
+```
+
+`DType` est une petite enum `Copy`, il n'y a donc aucune raison de passer une référence ; la suggestion du compilateur, retirer le `&`, est la correction. Les deux extraits sont des doctests `compile_fail` dans [`src/lib.rs`](https://github.com/spareilleux/learn/blob/c45b150/code/candle/course/src/lib.rs#L53-L74), pour que le cours s'aperçoive si une version ultérieure de Candle ou de Rust les accepte.
+
+## Ce que coûte la compilation
+
+Le premier `cargo build --release` de ce workspace a pris **73 secondes** et compilé **128 crates**, sur un Intel Core Ultra 9 285K sous Windows 11 avec Rust 1.94.0, limité à 4 tâches parallèles (`-j 4`) parce que la machine était partagée. L'exécutable `l01_hello` fait **1,4 Mo**. Les builds suivants ne recompilent que la crate du cours, en une seconde environ.
+
+La plupart de ces crates sont celles qu'on attend : [`gemm`](https://docs.rs/gemm/0.19.0/gemm/) pour les produits matriciels, [`rayon`](https://docs.rs/rayon/) pour les threads, [`half`](https://docs.rs/half/) pour les flottants 16 bits, [`safetensors`](https://huggingface.co/docs/safetensors) pour les fichiers de modèle. Une ne l'est pas. `cargo tree` montre par où arrive le compilateur C :
+
+```text
+> cargo tree -p candle-course -e normal -i onig_sys
+onig_sys v69.9.3
+└── onig v6.5.3
+    └── tokenizers v0.22.2
+        └── candle-core v0.11.0
+```
+
+`candle-core` 0.11.0 dépend de la crate [`tokenizers`](https://docs.rs/tokenizers/0.22.2/tokenizers/) de Hugging Face sur toutes les cibles sauf WebAssembly ([`Cargo.toml`, lignes 37-38](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-core/Cargo.toml#L37-L38)), et avec sa feature `onig`, qui compile la bibliothèque d'expressions régulières [Oniguruma](https://github.com/kkos/oniguruma) depuis ses sources C. Un seul fichier s'en sert, [`quantized/tokenizer.rs`](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-core/src/quantized/tokenizer.rs#L4-L18), qui reconstruit un tokenizer à partir des métadonnées d'un fichier GGUF (leçon 8). Sur les 119 crates derrière `candle-core`, 72 sont dans l'arbre de dépendances de `tokenizers`. Sur `main`, après 0.11.0, la dépendance est toujours là, mais avec la feature `fancy-regex` en Rust pur au lieu de `onig` ([`Cargo.toml` à `ddf1b87`](https://github.com/huggingface/candle/blob/ddf1b879dc3a1760cbcb3f3c4a7c6467850cec4a/candle-core/Cargo.toml#L39-L40)), donc l'exigence d'un compilateur C devrait disparaître avec la prochaine version (*à vérifier* quand elle sera publiée).
+
+## Demander un GPU
+
+[`examples/l01_devices.rs`](https://github.com/spareilleux/learn/blob/c45b150/code/candle/course/examples/l01_devices.rs#L5-L23) demande au build quels backends il possède, puis demande un périphérique CUDA et un périphérique Metal :
+
+```rust
+println!("cuda feature:       {}", utils::cuda_is_available());
+match Device::new_cuda(0) {
+    Ok(d) => println!("Device::new_cuda(0): {d:?}"),
+    Err(e) => println!("Device::new_cuda(0): error: {e}"),
+}
+// Se rabat sur le CPU au lieu d'échouer
+let device = Device::cuda_if_available(0)?;
+```
+
+```text
+cuda feature:       false
+metal feature:      false
+mkl feature:        false
+accelerate feature: false
+Device::new_cuda(0): error: the candle crate has not been built with cuda support
+Device::new_metal(0): error: the candle crate has not been built with metal support
+Device::cuda_if_available(0): Cpu
+```
+
+La sortie est la même sur une machine avec un GPU NVIDIA : [`utils::cuda_is_available`](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-core/src/utils.rs#L402-L404) indique si la feature `cuda` a été compilée, pas si un GPU est présent. Sans la feature, Candle compile un backend de substitution dont les constructeurs renvoient cette erreur. `cuda_if_available` est la façon habituelle d'écrire un programme qui utilise un GPU quand il a été compilé pour, et le CPU sinon.
+
+Le backend CPU a un autre interrupteur qui n'est pas une feature. [`examples/l01_machine.rs`](https://github.com/spareilleux/learn/blob/c45b150/code/candle/course/examples/l01_machine.rs) affiche ce que le build sait du processeur ; `check.sh` l'exécute sans comparer, puisque cela dépend de la machine :
+
+```text
+os / arch:        windows / x86_64
+compiled for avx2: false
+compiled for neon: false
+compiled for f16c: false
+threads (rayon):   24
+```
+
+Le processeur a AVX2, mais le programme n'a pas été compilé pour : Rust cible un CPU x86-64 de base sauf si tu passes `-C target-cpu=native`. Le dépôt de Candle le fait, dans [`.cargo/config.toml`](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/.cargo/config.toml), donc ses exemples sont compilés pour la machine sur laquelle ils tournent, et une crate qui dépend de Candle ne l'est pas. La leçon 3 mesure ce que cela change.
+
+## Dans GA, IX et TARS
+
+Aucun des trois dépôts que ce site étudie ne dépend de Candle aujourd'hui.
+
+- **GA** exécute ses modèles d'embeddings en C# avec ONNX Runtime : [`GA.Business.ML.csproj`](https://github.com/GuitarAlchemist/ga/blob/32f143c866c126338b332e384e4a615cd4b44381/Common/GA.Business.ML/GA.Business.ML.csproj#L54-L57) référence `Microsoft.ML.OnnxRuntime` 1.23.2 et `Microsoft.ML.Tokenizers` 2.0.0, et [`OnnxEmbeddingService.cs`](https://github.com/GuitarAlchemist/ga/blob/32f143c866c126338b332e384e4a615cd4b44381/Common/GA.Business.ML/Text/Onnx/OnnxEmbeddingService.cs#L526) ouvre une `InferenceSession`. C'est la ligne « ONNX Runtime » du tableau ci-dessus ; la leçon 7 calcule des embeddings avec Candle, et la leçon 11 appelle un modèle Candle depuis C#.
+- **TARS** fait de même depuis F# : [`TarsEngine.FSharp.Cli.fsproj`](https://github.com/GuitarAlchemist/tars/blob/87464ce583c42cd11c3d76836e05842377455b24/TarsEngine.FSharp.Cli/TarsEngine.FSharp.Cli.fsproj#L136-L137) référence ONNX Runtime 1.19.2 et `Microsoft.ML.Tokenizers` 0.22.0.
+- **IX** est écrit en Rust et a choisi de ne pas s'appuyer sur Candle. Sa crate de différentiation automatique, `ix-autograd`, est écrite à partir de zéro au-dessus de `ndarray` ; sa documentation consigne cette décision ([`lib.rs`, ligne 27](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-autograd/src/lib.rs#L27)) et garde une place pour « a future Candle or GPU backend » ([`tensor.rs`, lignes 9-19](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-autograd/src/tensor.rs#L9-L19)). La leçon 4 fait passer le même gradient par les deux.
+
+Le guide d'IX sur les bibliothèques Rust décrit Candle comme « optimised for LLM inference on NVIDIA GPUs via cuTENSOR and cuDNN » ([`code-analysis-tools.md`, ligne 129](https://github.com/GuitarAlchemist/ix/blob/a7e5fbce3d4a7a9d15bb9638b3bcba7c08c2941a/docs/guides/code-analysis-tools.md?plain=1#L129)). Les features CUDA du workspace de Candle demandent à `cudarc` cuBLAS, cuBLASLt, cuRAND et NVRTC, avec cuDNN en option ([`Cargo.toml`, lignes 50-61](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/Cargo.toml#L50-L61)) ; cuTENSOR n'en fait pas partie, et les backends CPU, Metal et WebAssembly ne sont pas mentionnés. Le [journal](../journal/) le recense.
+
+## À retenir
+
+- Candle est un framework Rust pour les tenseurs, l'autodiff et les modèles, compilé dans ton binaire. Son argument face à tch-rs, TorchSharp et ONNX Runtime est qu'il n'y a aucun runtime natif à livrer.
+- `candle-core` contient les tenseurs et les backends, `candle-nn` les couches et les optimiseurs, `candle-transformers` les modèles. Les backends GPU et MKL ou Accelerate sont des features Cargo à activer.
+- Chaque opération sur un tenseur renvoie un `Result` ; les formes et les types d'éléments sont vérifiés à l'exécution.
+- Épingle la version de crates.io avec `=` pour des résultats reproductibles. La version 0.11.0 demande un compilateur C parce que `candle-core` tire `tokenizers` avec Oniguruma.
+- `cuda_is_available` indique une feature compilée, pas le matériel. Sans `-C target-cpu=native`, les noyaux propres au CPU derrière `with_avx` ne sont pas compilés.
+
+## Exercices
+
+Les solutions sont dans [`examples/l01_exercises.rs`](https://github.com/spareilleux/learn/blob/c45b150/code/candle/course/examples/l01_exercises.rs), et leur sortie dans `expected/l01_exercises.txt`.
+
+1. Dans `l01_hello`, calcule `b.matmul(&a)` au lieu de `a.matmul(&b)`. Lis l'erreur, puis trouve un produit de matrices transposées (`t()`) qui soit défini et donne les nombres de la leçon, transposés.
+
+<details>
+<summary>Solution</summary>
+
+[Lignes 11-18](https://github.com/spareilleux/learn/blob/c45b150/code/candle/course/examples/l01_exercises.rs#L11-L18) :
+
+```rust
+outcome("b.matmul(&a)", b.matmul(&a));
+// (3, 4) x (4, 3) est défini si on transpose plutôt b : b.t() est (4, 3), a.t() est (3, 2)
+let c = b.t()?.matmul(&a.t()?)?;
+println!("{c}");
+// (AB)^T = B^T A^T : les mêmes nombres que le a.matmul(&b) de la leçon, transposés
+let same = c.eq(&a.matmul(&b)?.t()?)?.min_all()?.to_scalar::<u8>()? == 1;
+```
+
+```text
+== exercise 1: b x a, then b x a transposed
+b.matmul(&a): error: shape mismatch in matmul, lhs: [3, 4], rhs: [2, 3]
+[[20., 56.],
+ [23., 68.],
+ [26., 80.],
+ [29., 92.]]
+Tensor[[4, 2], f32]
+b.t() x a.t() equals (a x b).t(): true
+```
+
+Une matrice `(3, 4)` ne peut multiplier qu'une matrice de 4 lignes. La transposée d'un produit est le produit des transposées dans l'autre ordre, donc `b.t()` fois `a.t()`, une `(4, 3)` fois une `(3, 2)`, donne la transposée `(4, 2)` du résultat de la leçon. `eq` compare élément par élément et renvoie un tenseur de `u8`, dont le minimum vaut 1 seulement si tous les éléments sont égaux.
+
+</details>
+
+2. Convertis `a` et `b` en `F64`, `F16`, `BF16`, `U32`, `I64` et `U8` avec `to_dtype`, et essaie `matmul` sur chacun. Quels types d'éléments le backend CPU sait-il multiplier ?
+
+<details>
+<summary>Solution</summary>
+
+[Lignes 20-37](https://github.com/spareilleux/learn/blob/c45b150/code/candle/course/examples/l01_exercises.rs#L20-L37) :
+
+```rust
+for dtype in [DType::F64, DType::F16, DType::BF16, DType::U32, DType::I64, DType::U8] {
+    let result = a.to_dtype(dtype)?.matmul(&b.to_dtype(dtype)?);
+    match result {
+        Ok(c) => println!("{dtype:?}: ok, first row {:?}", c.to_dtype(DType::F64)?.to_vec2::<f64>()?[0]),
+        Err(e) => println!("{dtype:?}: error: {e}"),
+    }
+}
+```
+
+```text
+== exercise 2: matmul on each dtype
+F64: ok, first row [20.0, 23.0, 26.0, 29.0]
+F16: ok, first row [20.0, 23.0, 26.0, 29.0]
+BF16: error: unsupported dtype BF16 for op matmul
+U32: error: unsupported dtype U32 for op matmul
+I64: error: unsupported dtype I64 for op matmul
+U8: error: unsupported dtype U8 for op matmul
+```
+
+Seulement `F16`, `F32` et `F64` : le produit matriciel du CPU appelle `gemm`, et [`cpu_backend/mod.rs`, lignes 1382-1385](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-core/src/cpu_backend/mod.rs#L1382-L1385) refuse tous les autres types. `BF16`, le format « brain float » dans lequel beaucoup de modèles sont stockés, doit d'abord être converti en `F32` sur le CPU. Les tenseurs entiers contiennent des indices et des masques, pas des poids.
+
+</details>
+
+## Sources
+
+- Candle au tag `0.11.0` : [README](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/README.md), [`Cargo.toml` du workspace](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/Cargo.toml), [`candle-core/Cargo.toml`](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-core/Cargo.toml), [`utils.rs`](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-core/src/utils.rs)
+- [Le livre de Candle](https://huggingface.github.io/candle/), chapitre d'installation
+- [`candle-core` 0.11.0 sur docs.rs](https://docs.rs/candle-core/0.11.0/candle_core/)
+- [La référence Cargo : spécifier des dépendances](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html) et [features](https://doc.rust-lang.org/cargo/reference/features.html)
+- [rustc : `target-cpu`](https://doc.rust-lang.org/rustc/codegen-options/index.html#target-cpu)

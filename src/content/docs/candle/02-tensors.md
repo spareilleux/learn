@@ -180,7 +180,7 @@ error[E0599]: no method named `sum_all` found for enum `Result<T, E>` in the cur
      |                           ^^^^^^^ method not found in `Result<candle_core::Tensor, candle_core::Error>`
 ```
 
-`Result<Tensor> - Tensor` does compile, because Candle implements the operators on `Result` when the right side is a tensor, so `(&a + &b) - &c` works without `?` in the middle. Only a number on the right is missing.
+`Result<Tensor> - Tensor` does compile, because Candle implements the operators on `Result` when the right side is a tensor, so `(&a + &b) - &c` works without `?` in the middle. Only the version with a number on the right, `Result<Tensor> - f64`, is missing.
 
 ## Indexing
 
