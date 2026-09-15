@@ -1,0 +1,1201 @@
+---
+title: 4. PostgreSQL from C# and Java
+description: Npgsql and EF Core on .NET 10, the PostgreSQL JDBC driver and HikariCP on Java 25, against the course model — data sources and pools, parameters and their types, DateTime and time zones, prepared statements, COPY, batches and generated keys, EF Core with arrays and Guitar Alchemist's value converters; and on Aurora, TLS by default, IAM tokens, max_connections, RDS Proxy pinning and choosing the writer or a reader.
+sidebar:
+  order: 4
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+The programs of this lesson are in [`code/postgresql-aurora/csharp`](https://github.com/spareilleux/learn/tree/15c2294/code/postgresql-aurora/csharp) and [`code/postgresql-aurora/java`](https://github.com/spareilleux/learn/tree/15c2294/code/postgresql-aurora/java). Each example is a name on the command line, such as `l04-connect`. [`check.sh`](https://github.com/spareilleux/learn/blob/15c2294/code/postgresql-aurora/check.sh) builds both, creates a fresh `learn` database with [lesson 2's model](../02-types/), runs every example and compares its output with a file in `expected/`.
+
+| | .NET | Java |
+|---|---|---|
+| Driver | [Npgsql](https://www.npgsql.org/doc/) 10.0.3 | [PostgreSQL JDBC driver](https://jdbc.postgresql.org/documentation/) 42.7.13, "pgjdbc" |
+| Pool | built into Npgsql | none in the driver; [HikariCP](https://github.com/brettwooldridge/HikariCP) 7.1.0 |
+| ORM | [EF Core with the Npgsql provider](https://www.npgsql.org/efcore/) 10.0.3 | Spring Data or Hibernate, not in this lesson |
+| SQL Server equivalent | `Microsoft.Data.SqlClient` | Microsoft JDBC Driver for SQL Server |
+
+## Running the examples
+
+The commands run in `code/postgresql-aurora`, because the `COPY` examples read `../ladybugdb/data/ga/package_refs.csv`. `server.sh` is a Bash script: on Windows, run it from Git Bash.
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+```powershell
+# Git Bash: the server, and the database of lesson 2
+bash server.sh start
+bash server.sh psql -d postgres -c "CREATE DATABASE learn"
+bash server.sh psql -q -d learn -c '\ir schema.sql'
+
+# PowerShell: the programs
+dotnet run --project csharp -c Release -- l04-connect
+mvn -f java/pom.xml package
+java "-Duser.timezone=America/Toronto" -jar java/target/pg.jar l04-connect
+```
+
+In PowerShell, quote the `-D` option: unquoted, PowerShell splits `-Duser.timezone=America/Toronto` at the dot, and Java answers "Could not find or load main class .timezone=…".
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```bash
+bash server.sh start
+bash server.sh psql -d postgres -c "CREATE DATABASE learn"
+bash server.sh psql -q -d learn -c '\ir schema.sql'
+
+dotnet run --project csharp -c Release -- l04-connect
+mvn -f java/pom.xml package
+java -Duser.timezone=America/Toronto -jar java/target/pg.jar l04-connect
+```
+
+</TabItem>
+<TabItem label="macOS">
+
+```bash
+bash server.sh start
+bash server.sh psql -d postgres -c "CREATE DATABASE learn"
+bash server.sh psql -q -d learn -c '\ir schema.sql'
+
+dotnet run --project csharp -c Release -- l04-connect
+mvn -f java/pom.xml package
+java -Duser.timezone=America/Toronto -jar java/target/pg.jar l04-connect
+```
+
+</TabItem>
+</Tabs>
+
+I ran these commands on Windows 11 on 2026-09-15; the Linux and macOS commands are *to verify* on those systems, and CI builds the programs on all three. The programs connect to `localhost:5432` as `postgres`. The environment variables `PG_CONNECTION`, an Npgsql connection string, and `PG_JDBC_URL`, a JDBC URL, point them elsewhere. `-Duser.timezone` is explained below.
+
+## Connecting
+
+In .NET, an [`NpgsqlDataSource`](https://www.npgsql.org/doc/basic-usage.html) holds a connection string and its pool. An application creates one per database and keeps it, often as a singleton in dependency injection; `NpgsqlConnection` objects come from it ([`Db.cs`, lines 8-13](https://github.com/spareilleux/learn/blob/15c2294/code/postgresql-aurora/csharp/Db.cs#L8-L13), [`L04.cs`, lines 10-21](https://github.com/spareilleux/learn/blob/15c2294/code/postgresql-aurora/csharp/L04.cs#L10-L21)):
+
+```csharp
+    public static string ConnectionString =>
+        Environment.GetEnvironmentVariable("PG_CONNECTION")
+        ?? "Host=localhost;Port=5432;Username=postgres;Password=learn;Database=learn;Application Name=learn-csharp";
+
+    public static NpgsqlDataSource DataSource(string? extra = null) =>
+        NpgsqlDataSource.Create(extra is null ? ConnectionString : $"{ConnectionString};{extra}");
+
+    public static async Task Connect()
+    {
+        // One NpgsqlDataSource per database for the whole application: it owns the connection pool
+        await using var dataSource = Db.DataSource();
+        await using var command = dataSource.CreateCommand(
+            "SELECT current_user, current_setting('server_version'), (SELECT count(*) FROM ci.runs)");
+        await using var reader = await command.ExecuteReaderAsync();
+        await reader.ReadAsync();
+        Console.WriteLine($"user: {reader.GetString(0)}");
+        Console.WriteLine($"server: {reader.GetString(1)}");
+        Console.WriteLine($"runs: {reader.GetInt64(2)}");
+    }
+```
+
+```text
+user: postgres
+server: 18.6 (Debian 18.6-1.pgdg13+2)
+runs: 125
+```
+
+In Java, [`DriverManager`](https://docs.oracle.com/en/java/javase/25/docs/api/java.sql/java/sql/DriverManager.html) opens a new connection at each call, from a URL ([`L04.java`, lines 35-49](https://github.com/spareilleux/learn/blob/15c2294/code/postgresql-aurora/java/src/main/java/dev/learn/pg/L04.java#L35-L49)):
+
+```java
+    static void connect() throws SQLException {
+        try (Connection connection = DriverManager.getConnection(url());
+             Statement statement = connection.createStatement();
+             ResultSet rs = statement.executeQuery(
+                     "SELECT current_user, current_setting('server_version'), (SELECT count(*) FROM ci.runs),"
+                             + " current_setting('TimeZone')")) {
+            rs.next();
+            System.out.println("driver: " + connection.getMetaData().getDriverVersion());
+            // The driver sets the session's TimeZone to the JVM's default time zone
+            System.out.println("JVM time zone: " + java.util.TimeZone.getDefault().getID() + ", session TimeZone: " + rs.getString(4));
+            System.out.println("user: " + rs.getString(1));
+            System.out.println("server: " + rs.getString(2));
+            System.out.println("runs: " + rs.getLong(3));
+        }
+    }
+```
+
+```text
+driver: 42.7.13
+JVM time zone: America/Toronto, session TimeZone: America/Toronto
+user: postgres
+server: 18.6 (Debian 18.6-1.pgdg13+2)
+runs: 125
+```
+
+The second line is the first difference between the drivers. **pgjdbc sets the session's `TimeZone` to the JVM's default time zone**: it sends it in the connection's startup message, next to `DateStyle` ([`ConnectionFactoryImpl.java`, lines 458-464](https://github.com/pgjdbc/pgjdbc/blob/3297557c6a8059d0d6e3522c79f0bd9a6f82ee07/pgjdbc/src/main/java/org/postgresql/core/v3/ConnectionFactoryImpl.java#L458-L464)). Every `timestamptz` the server formats as text for this connection is in that zone. `check.sh` fixes the JVM's zone with `-Duser.timezone=America/Toronto`, so that the output is the same on every machine; exercise 2 changes it. Npgsql doesn't send the client's zone: the session keeps the server's default, UTC in the image, unless the connection string sets `Timezone`.
+
+`Application Name` and `ApplicationName` name the connection in [`pg_stat_activity`](https://www.postgresql.org/docs/18/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW): the pool examples below count their own sessions with it.
+
+## Parameters
+
+PostgreSQL's own placeholders are positional: `$1`, `$2`. Npgsql accepts them as they are, and also `@name`, which it rewrites to `$1` before sending the query. JDBC uses `?`, which pgjdbc rewrites to `$1` ([`L04.cs`, lines 27-53](https://github.com/spareilleux/learn/blob/15c2294/code/postgresql-aurora/csharp/L04.cs#L27-L53), [`L04.java`, lines 53-67](https://github.com/spareilleux/learn/blob/15c2294/code/postgresql-aurora/java/src/main/java/dev/learn/pg/L04.java#L53-L67)):
+
+```csharp
+        // Positional parameters: $1, $2 are what PostgreSQL itself understands
+        await using (var command = dataSource.CreateCommand("""
+            SELECT run_id, started_at FROM ci.runs
+            WHERE workflow_name = $1 AND started_at >= $2
+            ORDER BY started_at, run_id
+            LIMIT 2
+            """))
+        {
+            command.Parameters.Add(new() { Value = "Rust course examples" });
+            command.Parameters.Add(new() { Value = new DateTime(2026, 9, 13, 18, 0, 0, DateTimeKind.Utc) });
+            await using var reader = await command.ExecuteReaderAsync();
+            while (await reader.ReadAsync())
+            {
+                var startedAt = reader.GetDateTime(1);
+                Console.WriteLine($"{reader.GetInt64(0)} {startedAt:O} Kind={startedAt.Kind}");
+            }
+        }
+
+        // Named parameters: Npgsql rewrites @os into $1 before sending the query
+        await using (var command = dataSource.CreateCommand("""
+            SELECT count(*) FROM ci.jobs WHERE labels[1] = @os AND duration > @longer_than
+            """))
+        {
+            command.Parameters.AddWithValue("os", "windows-latest");
+            command.Parameters.AddWithValue("longer_than", TimeSpan.FromMinutes(2));
+            Console.WriteLine($"windows jobs over 2 minutes: {await command.ExecuteScalarAsync()}");
+        }
+```
+
+```text
+34776807003 2026-09-13T19:09:08.0000000Z Kind=Utc
+34777004019 2026-09-13T19:12:56.0000000Z Kind=Utc
+windows jobs over 2 minutes: 8
+```
+
+```java
+            // JDBC's ? placeholders; the driver sends them as $1, $2
+            try (PreparedStatement ps = connection.prepareStatement("""
+                    SELECT run_id, started_at FROM ci.runs
+                    WHERE workflow_name = ? AND started_at >= ?
+                    ORDER BY started_at, run_id
+                    LIMIT 2
+                    """)) {
+                ps.setString(1, "Rust course examples");
+                ps.setObject(2, OffsetDateTime.of(2026, 9, 13, 18, 0, 0, 0, ZoneOffset.UTC));
+                try (ResultSet rs = ps.executeQuery()) {
+                    while (rs.next()) {
+                        System.out.println(rs.getLong(1) + " " + rs.getObject(2, OffsetDateTime.class));
+                    }
+                }
+            }
+```
+
+```text
+34776807003 2026-09-13T19:09:08Z
+34777004019 2026-09-13T19:12:56Z
+```
+
+The values travel apart from the SQL text, in the protocol's `Bind` message: no SQL injection, and no quoting to get wrong. `TimeSpan` maps to `interval`, and the named parameter `@longer_than` is compared with the virtual column `duration` of lesson 2.
+
+### Lists: an array, not IN
+
+`WHERE x IN (@a, @b, @c)` needs one parameter per value, and a different statement for each list length. PostgreSQL takes the whole list as one array parameter ([`L04.cs`, lines 55-66](https://github.com/spareilleux/learn/blob/15c2294/code/postgresql-aurora/csharp/L04.cs#L55-L66), [`L04.java`, lines 69-78](https://github.com/spareilleux/learn/blob/15c2294/code/postgresql-aurora/java/src/main/java/dev/learn/pg/L04.java#L69-L78)):
+
+```csharp
+        // An array parameter replaces a list of values: = ANY ($1), not IN (...)
+        await using (var command = dataSource.CreateCommand("""
+            SELECT labels[1], count(*) FROM ci.jobs WHERE labels[1] = ANY ($1) GROUP BY 1 ORDER BY 1
+            """))
+        {
+            command.Parameters.Add(new() { Value = new[] { "macos-latest", "windows-latest" } });
+            await using var reader = await command.ExecuteReaderAsync();
+            while (await reader.ReadAsync())
+            {
+                Console.WriteLine($"{reader.GetString(0)}: {reader.GetInt64(1)}");
+            }
+        }
+```
+
+```java
+            // An array parameter: = ANY (?)
+            try (PreparedStatement ps = connection.prepareStatement(
+                    "SELECT labels[1], count(*) FROM ci.jobs WHERE labels[1] = ANY (?) GROUP BY 1 ORDER BY 1")) {
+                ps.setArray(1, connection.createArrayOf("text", new String[] {"macos-latest", "windows-latest"}));
+                try (ResultSet rs = ps.executeQuery()) {
+                    while (rs.next()) {
+                        System.out.println(rs.getString(1) + ": " + rs.getLong(2));
+                    }
+                }
+            }
+```
+
+```text
+macos-latest: 34
+windows-latest: 35
+```
+
+Npgsql maps a `string[]` to `text[]`; in JDBC, `Connection.createArrayOf` builds the array. SQL Server's equivalents are a table-valued parameter or `STRING_SPLIT`.
+
+### DateTime, DateTimeOffset and time zones
+
+Npgsql decides the PostgreSQL type of a [`DateTime`](https://learn.microsoft.com/dotnet/api/system.datetime) from its `Kind`, as its [date and time documentation](https://www.npgsql.org/doc/types/datetime.html) describes: `Utc` is sent as `timestamptz`, `Unspecified` and `Local` as `timestamp` without time zone. Compared with a `timestamptz` column, a `timestamp` is converted by the server, **in the session's time zone** ([`L04.cs`, lines 68-94](https://github.com/spareilleux/learn/blob/15c2294/code/postgresql-aurora/csharp/L04.cs#L68-L94)):
+
+```csharp
+        // DateTime.Kind decides the parameter's type: Utc is sent as timestamptz, Unspecified and Local as timestamp,
+        // which the server converts to timestamptz in the session's time zone
+        foreach (var options in new[] { "Timezone=UTC", "Timezone=America/Toronto" })
+        {
+            await using var zoned = Db.DataSource(options);
+            foreach (var kind in new[] { DateTimeKind.Utc, DateTimeKind.Unspecified })
+            {
+                await using var command = zoned.CreateCommand("SELECT count(*) FROM ci.runs WHERE started_at >= $1");
+                command.Parameters.Add(new() { Value = new DateTime(2026, 9, 14, 0, 0, 0, kind) });
+                Console.WriteLine($"{options}, Kind={kind}: {await command.ExecuteScalarAsync()} runs since 2026-09-14 00:00");
+            }
+        }
+        await using (var command = dataSource.CreateCommand("SELECT count(*) FROM ci.runs WHERE started_at >= $1"))
+        {
+            var toronto = new DateTimeOffset(2026, 9, 14, 0, 0, 0, TimeSpan.FromHours(-4));
+            command.Parameters.Add(new() { Value = toronto });
+            try
+            {
+                await command.ExecuteScalarAsync();
+            }
+            catch (ArgumentException e)
+            {
+                Console.WriteLine($"{e.GetType().Name}: {e.Message}");
+            }
+            command.Parameters[0].Value = toronto.ToUniversalTime();
+            Console.WriteLine($"DateTimeOffset in UTC: {await command.ExecuteScalarAsync()} runs since 2026-09-14 00:00 in Toronto");
+        }
+```
+
+```text
+Timezone=UTC, Kind=Utc: 82 runs since 2026-09-14 00:00
+Timezone=UTC, Kind=Unspecified: 82 runs since 2026-09-14 00:00
+Timezone=America/Toronto, Kind=Utc: 82 runs since 2026-09-14 00:00
+Timezone=America/Toronto, Kind=Unspecified: 59 runs since 2026-09-14 00:00
+ArgumentException: Cannot write DateTimeOffset with Offset=-04:00:00 to PostgreSQL type 'timestamp with time zone', only offset 0 (UTC) is supported.  (Parameter 'value')
+DateTimeOffset in UTC: 59 runs since 2026-09-14 00:00 in Toronto
+```
+
+- The same `DateTime`, midnight on September 14, counts 82 runs in three cases, and 59 when it is `Unspecified` and the session is in Toronto: midnight in Toronto is 04:00 UTC, and 23 runs started in between. Exercise 2 of lesson 2 found the same 23 runs.
+- The query is correct in the four cases. The count depends on a `Kind` that comes from wherever the `DateTime` was created, and on a session setting. Send `Kind=Utc` values to `timestamptz` columns.
+- A [`DateTimeOffset`](https://learn.microsoft.com/dotnet/api/system.datetimeoffset) with a non-zero offset is refused before anything is sent: `timestamptz` doesn't store an offset (lesson 2), and Npgsql won't drop one silently. Convert with `ToUniversalTime()`.
+
+In Java, [`OffsetDateTime`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/OffsetDateTime.html) keeps its offset on the way to the server, and the server compares instants ([`L04.java`, lines 80-87](https://github.com/spareilleux/learn/blob/15c2294/code/postgresql-aurora/java/src/main/java/dev/learn/pg/L04.java#L80-L87)):
+
+```java
+            // An OffsetDateTime keeps its offset; the server compares instants
+            try (PreparedStatement ps = connection.prepareStatement("SELECT count(*) FROM ci.runs WHERE started_at >= ?")) {
+                ps.setObject(1, OffsetDateTime.of(2026, 9, 14, 0, 0, 0, 0, ZoneOffset.ofHours(-4)));
+                try (ResultSet rs = ps.executeQuery()) {
+                    rs.next();
+                    System.out.println("runs since 2026-09-14 00:00 in Toronto: " + rs.getLong(1));
+                }
+            }
+```
+
+```text
+runs since 2026-09-14 00:00 in Toronto: 59
+```
+
+Reading, `reader.GetDateTime` returns a `DateTime` with `Kind=Utc`, and `rs.getObject(2, OffsetDateTime.class)` an `OffsetDateTime` in UTC, whatever the session's zone: the first lines of both outputs above. Only a value formatted as text by the server, such as `rs.getString`, follows the session's `TimeZone`.
+
+### Parameter types
+
+A parameter has a type, and PostgreSQL doesn't convert a string to a number silently ([`L04.cs`, lines 96-108](https://github.com/spareilleux/learn/blob/15c2294/code/postgresql-aurora/csharp/L04.cs#L96-L108), [`L04.java`, lines 89-95](https://github.com/spareilleux/learn/blob/15c2294/code/postgresql-aurora/java/src/main/java/dev/learn/pg/L04.java#L89-L95)):
+
+```csharp
+        // A value that doesn't match the column's type is PostgreSQL's error, not Npgsql's
+        await using (var command = dataSource.CreateCommand("SELECT count(*) FROM ci.runs WHERE run_id = $1"))
+        {
+            command.Parameters.Add(new() { Value = "34852867099" });
+            try
+            {
+                await command.ExecuteScalarAsync();
+            }
+            catch (PostgresException e)
+            {
+                Console.WriteLine($"{e.SqlState}: {e.MessageText}");
+            }
+        }
+```
+
+```text
+42883: operator does not exist: bigint = text
+```
+
+```java
+            // setString binds a varchar: PostgreSQL has no bigint = varchar operator
+            try (PreparedStatement ps = connection.prepareStatement("SELECT count(*) FROM ci.runs WHERE run_id = ?")) {
+                ps.setString(1, "34852867099");
+                ps.executeQuery();
+            } catch (PSQLException e) {
+                System.out.println(e.getSQLState() + ": " + e.getServerErrorMessage().getMessage());
+            }
+```
+
+```text
+42883: operator does not exist: bigint = character varying
+```
+
+Npgsql sends a `string` as `text`, pgjdbc sends `setString` as `varchar`, and neither type has an `=` operator with `bigint`. SQL Server would convert the string implicitly. The fix is the right .NET or Java type; pgjdbc's [`stringtype=unspecified`](https://jdbc.postgresql.org/documentation/use/) property sends strings untyped and lets the server infer the type, which also hides mistakes. Error `42883` is `undefined_function` in the [list of error codes](https://www.postgresql.org/docs/18/errcodes-appendix.html): an operator is a function.
+
+## Pools
+
+Opening a PostgreSQL connection starts a **server process**, lesson 1's "one process per connection": a TCP connection, authentication, a fork. A pool keeps connections open and hands them out again ([`L04.cs`, lines 111-153](https://github.com/spareilleux/learn/blob/15c2294/code/postgresql-aurora/csharp/L04.cs#L111-L153)):
+
+```csharp
+    public static async Task Pool()
+    {
+        foreach (var pooling in new[] { true, false })
+        {
+            await using var dataSource = Db.DataSource($"Pooling={pooling}");
+            var backends = new HashSet<int>();
+            for (var i = 0; i < 20; i++)
+            {
+                await using var connection = await dataSource.OpenConnectionAsync();
+                backends.Add(connection.ProcessID);
+            }
+            Console.WriteLine($"Pooling={pooling}: 20 opens, {backends.Count} server process(es)");
+        }
+
+        // Five connections held at the same time are five server processes
+        await using (var dataSource = Db.DataSource("Application Name=learn-pool"))
+        {
+            var connections = new List<NpgsqlConnection>();
+            for (var i = 0; i < 5; i++)
+            {
+                connections.Add(await dataSource.OpenConnectionAsync());
+            }
+            foreach (var connection in connections)
+            {
+                await connection.CloseAsync();
+            }
+            await using var command = dataSource.CreateCommand("""
+                SELECT state, count(*) FROM pg_stat_activity
+                WHERE application_name = 'learn-pool' GROUP BY state ORDER BY state
+                """);
+            await using var reader = await command.ExecuteReaderAsync();
+            while (await reader.ReadAsync())
+            {
+                Console.WriteLine($"after closing: {reader.GetInt64(1)} {reader.GetString(0)}");
+            }
+        }
+        await using (var dataSource = Db.DataSource())
+        {
+            await using var command = dataSource.CreateCommand(
+                "SELECT count(*) FROM pg_stat_activity WHERE application_name = 'learn-pool'");
+            Console.WriteLine($"after disposing the data source: {await command.ExecuteScalarAsync()}");
+        }
+    }
+```
+
+```text
+Pooling=True: 20 opens, 1 server process(es)
+Pooling=False: 20 opens, 20 server process(es)
+after closing: 1 active
+after closing: 4 idle
+after disposing the data source: 0
+```
+
+- With pooling, 20 opens and closes use one server process; without, 20.
+- Five connections held at the same time are five processes. Closed, they stay open on the server, `idle`, in the pool. The one `active` session is the connection running the `pg_stat_activity` query itself.
+- Disposing the data source closes its connections.
+
+Npgsql's pool is on by default, per data source, with at most 100 connections (`Maximum Pool Size`) and a minimum of 0; idle connections above the minimum are closed after 300 seconds ([connection string parameters](https://www.npgsql.org/doc/connection-string-parameters.html)). SqlClient has the same defaults of 100 and 0.
+
+pgjdbc has no pool of its own: each `DriverManager.getConnection` is a new process. HikariCP is the usual pool ([`L04.java`, lines 107-142](https://github.com/spareilleux/learn/blob/15c2294/code/postgresql-aurora/java/src/main/java/dev/learn/pg/L04.java#L107-L142)):
+
+```java
+    static void pool() throws SQLException {
+        Set<Integer> backends = new HashSet<>();
+        for (int i = 0; i < 20; i++) {
+            try (Connection connection = DriverManager.getConnection(url())) {
+                backends.add(backendPid(connection));
+            }
+        }
+        System.out.println("DriverManager: 20 connections, " + backends.size() + " server process(es)");
+
+        HikariConfig config = new HikariConfig();
+        config.setJdbcUrl(url().replace("learn-java", "learn-hikari"));
+        config.setMaximumPoolSize(5);
+        try (HikariDataSource pool = new HikariDataSource(config)) {
+            backends.clear();
+            for (int i = 0; i < 20; i++) {
+                try (Connection connection = pool.getConnection()) {
+                    backends.add(backendPid(connection));
+                }
+            }
+            System.out.println("HikariCP: 20 connections, " + backends.size() + " server process(es)");
+            // HikariCP opens connections in the background until minimumIdle, which defaults to maximumPoolSize
+            try (Connection connection = pool.getConnection()) {
+                long deadline = System.currentTimeMillis() + 10_000;
+                long sessions;
+                do {
+                    try (Statement statement = connection.createStatement();
+                         ResultSet rs = statement.executeQuery(
+                                 "SELECT count(*) FROM pg_stat_activity WHERE application_name = 'learn-hikari'")) {
+                        rs.next();
+                        sessions = rs.getLong(1);
+                    }
+                } while (sessions < 5 && System.currentTimeMillis() < deadline && sleep(100));
+                System.out.println("sessions opened by the pool: " + sessions);
+            }
+        }
+    }
+```
+
+```text
+DriverManager: 20 connections, 20 server process(es)
+HikariCP: 20 connections, 1 server process(es)
+sessions opened by the pool: 5
+```
+
+HikariCP's `minimumIdle` defaults to `maximumPoolSize`, per its [README](https://github.com/brettwooldridge/HikariCP): a pool of 5 opens 5 sessions in the background as soon as it starts, used or not. Npgsql opens connections on demand.
+
+### A pool meets max_connections
+
+The server has a limit too, [`max_connections`](https://www.postgresql.org/docs/18/runtime-config-connection.html#GUC-MAX-CONNECTIONS), 100 by default ([`L04.cs`, lines 308-331](https://github.com/spareilleux/learn/blob/15c2294/code/postgresql-aurora/csharp/L04.cs#L308-L331)):
+
+```csharp
+    public static async Task TooMany()
+    {
+        // No pool: each Open is a new server process, until max_connections (100 by default) is reached
+        await using var dataSource = Db.DataSource("Pooling=false");
+        var connections = new List<NpgsqlConnection>();
+        try
+        {
+            for (var i = 0; i < 200; i++)
+            {
+                connections.Add(await dataSource.OpenConnectionAsync());
+            }
+        }
+        catch (PostgresException e)
+        {
+            Console.WriteLine($"{e.SqlState}: {e.MessageText}");
+        }
+        finally
+        {
+            foreach (var connection in connections)
+            {
+                await connection.DisposeAsync();
+            }
+        }
+    }
+```
+
+```text
+53300: sorry, too many clients already
+```
+
+Npgsql's default maximum pool size is the server's default maximum of connections. One application instance at full load can take them all; two instances with default settings can ask for 200. Size the pools from the server's limit: the sum over every application instance, plus the administrators, must stay below it. Connections are expensive processes, and a few dozen well-used connections usually beat hundreds of idle ones.
+
+## Prepared statements
+
+A prepared statement is parsed and planned once, then executed with new parameters. Both drivers prepare on the server only after a statement has been executed a few times ([`L04.cs`, lines 155-170](https://github.com/spareilleux/learn/blob/15c2294/code/postgresql-aurora/csharp/L04.cs#L155-L170), [`L04.java`, lines 154-171](https://github.com/spareilleux/learn/blob/15c2294/code/postgresql-aurora/java/src/main/java/dev/learn/pg/L04.java#L154-L171)):
+
+```csharp
+    public static async Task Prepare()
+    {
+        // Npgsql prepares a statement only when asked, or after Auto Prepare Min Usages executions (default 5)
+        // when Max Auto Prepare is above 0
+        await using var dataSource = Db.DataSource("Max Auto Prepare=10");
+        await using var connection = await dataSource.OpenConnectionAsync();
+        await using var count = new NpgsqlCommand(
+            "SELECT count(*) FROM pg_prepared_statements WHERE statement ~ 'ci\\.jobs WHERE'", connection);
+        for (var i = 1; i <= 6; i++)
+        {
+            await using var command = new NpgsqlCommand("SELECT count(*) FROM ci.jobs WHERE run_id = $1", connection);
+            command.Parameters.Add(new() { Value = 34852867099L });
+            await command.ExecuteScalarAsync();
+            Console.WriteLine($"after {i} execution(s): {await count.ExecuteScalarAsync()} prepared statement(s)");
+        }
+    }
+```
+
+```java
+    static void prepare() throws SQLException {
+        // The driver switches to a named server-side prepared statement on the prepareThreshold-th execution (default 5)
+        try (Connection connection = DriverManager.getConnection(url());
+             PreparedStatement count = connection.prepareStatement(
+                     "SELECT count(*) FROM pg_prepared_statements WHERE statement ~ 'ci\\.jobs WHERE'")) {
+            count.unwrap(org.postgresql.PGStatement.class).setPrepareThreshold(0);
+            for (int i = 1; i <= 6; i++) {
+                try (PreparedStatement ps = connection.prepareStatement("SELECT count(*) FROM ci.jobs WHERE run_id = ?")) {
+                    ps.setLong(1, 34852867099L);
+                    ps.executeQuery().close();
+                }
+                try (ResultSet rs = count.executeQuery()) {
+                    rs.next();
+                    System.out.println("after " + i + " execution(s): " + rs.getLong(1) + " prepared statement(s)");
+                }
+            }
+        }
+    }
+```
+
+```text
+after 1 execution(s): 0 prepared statement(s)
+after 2 execution(s): 0 prepared statement(s)
+after 3 execution(s): 0 prepared statement(s)
+after 4 execution(s): 0 prepared statement(s)
+after 5 execution(s): 1 prepared statement(s)
+after 6 execution(s): 1 prepared statement(s)
+```
+
+Both outputs are identical: the statement appears in [`pg_prepared_statements`](https://www.postgresql.org/docs/18/view-pg-prepared-statements.html) at the fifth execution.
+
+- **Npgsql** doesn't prepare automatically unless `Max Auto Prepare` is above 0; its default is 0. Then a statement executed `Auto Prepare Min Usages` times, 5 by default, is prepared. `NpgsqlCommand.Prepare()` prepares explicitly.
+- **pgjdbc** switches a `PreparedStatement` to a named server-side statement at the `prepareThreshold`-th execution, 5 by default ([connection properties](https://jdbc.postgresql.org/documentation/use/)). The counting query sets its own threshold to 0, so that it's never prepared and doesn't count itself.
+
+A prepared statement belongs to one session, and a pooled connection keeps it across opens: that's why the pools matter here. Lesson 5 comes back to generic and custom plans.
+
+## Bulk loads: COPY and batches
+
+Lesson 1 loaded files with `COPY … FROM` a path **on the server**. From a program, `COPY … FROM STDIN` sends the rows over the connection. Npgsql writes them in PostgreSQL's binary format, typed ([`L04.cs`, lines 172-208](https://github.com/spareilleux/learn/blob/15c2294/code/postgresql-aurora/csharp/L04.cs#L172-L208)):
+
+```csharp
+    static IEnumerable<string[]> PackageRefs() =>
+        File.ReadLines("../ladybugdb/data/ga/package_refs.csv").Skip(1).Select(line => line.Split(','));
+
+    public static async Task Copy()
+    {
+        await using var dataSource = Db.DataSource();
+        await using var connection = await dataSource.OpenConnectionAsync();
+        await using (var create = new NpgsqlCommand("""
+            DROP TABLE IF EXISTS ga.package_refs_import;
+            CREATE TABLE ga.package_refs_import (LIKE ga.package_refs INCLUDING ALL);
+            """, connection))
+        {
+            await create.ExecuteNonQueryAsync();
+        }
+
+        // COPY ... FROM STDIN in binary format: the client sends the rows, typed, in one stream
+        await using (var writer = await connection.BeginBinaryImportAsync(
+            "COPY ga.package_refs_import (project, package, version) FROM STDIN (FORMAT binary)"))
+        {
+            foreach (var fields in PackageRefs())
+            {
+                await writer.StartRowAsync();
+                await writer.WriteAsync(fields[0], NpgsqlDbType.Text);
+                await writer.WriteAsync(fields[1], NpgsqlDbType.Text);
+                await writer.WriteAsync(fields[2], NpgsqlDbType.Text);
+            }
+            Console.WriteLine($"copied: {await writer.CompleteAsync()} rows");
+        }
+
+        await using var compare = new NpgsqlCommand("""
+            SELECT (SELECT count(*) FROM (TABLE ga.package_refs EXCEPT TABLE ga.package_refs_import) AS d),
+                   (SELECT count(*) FROM (TABLE ga.package_refs_import EXCEPT TABLE ga.package_refs) AS d)
+            """, connection);
+        await using var reader = await compare.ExecuteReaderAsync();
+        await reader.ReadAsync();
+        Console.WriteLine($"rows only in the server-side load: {reader.GetInt64(0)}, only in the client copy: {reader.GetInt64(1)}");
+    }
+```
+
+```text
+copied: 478 rows
+rows only in the server-side load: 0, only in the client copy: 0
+```
+
+pgjdbc's [`CopyManager`](https://jdbc.postgresql.org/documentation/publicapi/org/postgresql/copy/CopyManager.html) streams the CSV file as text, and the server parses it ([`L04.java`, lines 181-186](https://github.com/spareilleux/learn/blob/15c2294/code/postgresql-aurora/java/src/main/java/dev/learn/pg/L04.java#L181-L186)):
+
+```java
+            // COPY ... FROM STDIN: the file is on the client, the server parses the CSV
+            try (BufferedReader csv = Files.newBufferedReader(Path.of("../ladybugdb/data/ga/package_refs.csv"))) {
+                long rows = connection.unwrap(PGConnection.class).getCopyAPI()
+                        .copyIn("COPY ga.package_refs_import FROM STDIN (FORMAT csv, HEADER match)", csv);
+                System.out.println("copied: " + rows + " rows");
+            }
+```
+
+```text
+copied: 478 rows
+rows only in the server-side load: 0, only in the client copy: 0
+```
+
+Both copies match the server-side load of lesson 2, row for row: `TABLE t` is short for `SELECT * FROM t`, and `EXCEPT` both ways finds no difference. `COPY FROM STDIN` is SQL Server's `SqlBulkCopy`, and it's also how data reaches a managed server that has no file system to read, such as Aurora.
+
+`l04-timings` compares three ways of inserting the 478 rows over one connection. It isn't compared by `check.sh`, since the times depend on the machine; one run on the author's machine, against the local container ([`L04.cs`, lines 249-306](https://github.com/spareilleux/learn/blob/15c2294/code/postgresql-aurora/csharp/L04.cs#L249-L306)):
+
+```text
+round 1: 478 INSERT commands: 1040 ms
+round 1: one NpgsqlBatch of 478 INSERTs: 7 ms
+round 1: binary COPY of 478 rows: 56 ms
+round 2: 478 INSERT commands: 1005 ms
+round 2: one NpgsqlBatch of 478 INSERTs: 5 ms
+round 2: binary COPY of 478 rows: 49 ms
+```
+
+478 `INSERT` commands are 478 round trips, and each one commits on its own. An [`NpgsqlBatch`](https://www.npgsql.org/doc/basic-usage.html#batching) sends all the statements in one round trip, in one implicit transaction. At 478 short rows, the batch is the fastest here; this run doesn't measure where `COPY` overtakes it, and a network between client and server multiplies the cost of every round trip. Exercise 1 loads the same rows with a batch in both languages.
+
+## Generated keys
+
+`RETURNING` (lesson 3) gives back what the server generated. JDBC's portable API for it is [`Statement.RETURN_GENERATED_KEYS`](https://docs.oracle.com/en/java/javase/25/docs/api/java.sql/java/sql/Connection.html#prepareStatement(java.lang.String,int)) ([`L04.java`, lines 199-241](https://github.com/spareilleux/learn/blob/15c2294/code/postgresql-aurora/java/src/main/java/dev/learn/pg/L04.java#L199-L241)):
+
+```java
+    static void generatedKeys() throws SQLException {
+        try (Connection connection = DriverManager.getConnection(url())) {
+            try (Statement statement = connection.createStatement()) {
+                statement.execute("""
+                        DROP TABLE IF EXISTS ci.notes;
+                        CREATE TABLE ci.notes (
+                            note_id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+                            run_id  bigint NOT NULL REFERENCES ci.runs,
+                            body    text NOT NULL,
+                            created timestamptz NOT NULL DEFAULT '2026-09-15 00:00:00+00'
+                        );
+                        """);
+            }
+            // RETURN_GENERATED_KEYS: the driver appends RETURNING * to the INSERT
+            try (PreparedStatement ps = connection.prepareStatement(
+                    "INSERT INTO ci.notes (run_id, body) VALUES (?, ?)", Statement.RETURN_GENERATED_KEYS)) {
+                ps.setLong(1, 34852867099L);
+                ps.setString(2, "first deployment of the day");
+                ps.executeUpdate();
+                try (ResultSet keys = ps.getGeneratedKeys()) {
+                    keys.next();
+                    int columns = keys.getMetaData().getColumnCount();
+                    StringBuilder line = new StringBuilder("generated keys:");
+                    for (int c = 1; c <= columns; c++) {
+                        line.append(' ').append(keys.getMetaData().getColumnName(c)).append('=').append(keys.getString(c));
+                    }
+                    System.out.println(line);
+                }
+            }
+            // Naming the columns asks for RETURNING note_id only
+            try (PreparedStatement ps = connection.prepareStatement(
+                    "INSERT INTO ci.notes (run_id, body) VALUES (?, ?)", new String[] {"note_id"})) {
+                ps.setLong(1, 34852867099L);
+                ps.setString(2, "second note");
+                ps.executeUpdate();
+                try (ResultSet keys = ps.getGeneratedKeys()) {
+                    keys.next();
+                    System.out.println("generated keys: " + keys.getMetaData().getColumnCount() + " column, note_id="
+                            + keys.getLong("note_id"));
+                }
+            }
+        }
+    }
+```
+
+```text
+generated keys: note_id=1 run_id=34852867099 body=first deployment of the day created=2026-09-14 20:00:00-04
+generated keys: 1 column, note_id=2
+```
+
+pgjdbc appends `RETURNING *` to the statement ([`Parser.java`, lines 371-386](https://github.com/pgjdbc/pgjdbc/blob/3297557c6a8059d0d6e3522c79f0bd9a6f82ee07/pgjdbc/src/main/java/org/postgresql/core/Parser.java#L371-L386)), so the "keys" are every column of the row, `created` included; naming the columns asks for those only. `created` is `2026-09-15 00:00:00+00`, printed as `2026-09-14 20:00:00-04` by `getString`: the session is in Toronto, the JVM's zone. In C#, write `RETURNING note_id` in the SQL and read it with `ExecuteScalarAsync`.
+
+## EF Core
+
+The [Npgsql EF Core provider](https://www.npgsql.org/efcore/) maps .NET arrays and lists of primitive types to PostgreSQL arrays, and translates LINQ on them. A context on the course's `ga.iconic_chords` table ([`L04Ef.cs`, lines 6-34](https://github.com/spareilleux/learn/blob/15c2294/code/postgresql-aurora/csharp/L04Ef.cs#L6-L34) and [lines 90-108](https://github.com/spareilleux/learn/blob/15c2294/code/postgresql-aurora/csharp/L04Ef.cs#L90-L108)):
+
+```csharp
+// Mapped onto the table of sql/schema.sql: native arrays, no value converter
+public class IconicChord
+{
+    public int Id { get; set; }
+    public string Name { get; set; } = "";
+    public string Artist { get; set; } = "";
+    public short[] PitchClasses { get; set; } = [];
+    public short[]? GuitarVoicing { get; set; }
+    public List<string> AlternateNames { get; set; } = [];
+}
+
+public class ChordsContext : DbContext
+{
+    public DbSet<IconicChord> Chords => Set<IconicChord>();
+
+    protected override void OnConfiguring(DbContextOptionsBuilder options) => options.UseNpgsql(Db.ConnectionString);
+
+    protected override void OnModelCreating(ModelBuilder model) =>
+        model.Entity<IconicChord>(entity =>
+        {
+            entity.ToTable("iconic_chords", "ga");
+            entity.Property(c => c.Id).HasColumnName("chord_id");
+            entity.Property(c => c.Name).HasColumnName("name");
+            entity.Property(c => c.Artist).HasColumnName("artist");
+            entity.Property(c => c.PitchClasses).HasColumnName("pitch_classes");
+            entity.Property(c => c.GuitarVoicing).HasColumnName("guitar_voicing");
+            entity.Property(c => c.AlternateNames).HasColumnName("alternate_names");
+        });
+}
+
+    public static async Task Query()
+    {
+        await using var db = new ChordsContext();
+        var withE = db.Chords
+            .Where(c => c.PitchClasses.Contains((short)4) && c.GuitarVoicing != null)
+            .OrderBy(c => c.Name)
+            .Select(c => new { c.Name, c.GuitarVoicing, FirstAlias = c.AlternateNames[0] });
+        Console.WriteLine(withE.ToQueryString());
+        Console.WriteLine();
+        foreach (var chord in await withE.ToListAsync())
+        {
+            Console.WriteLine($"{chord.Name}: [{string.Join(", ", chord.GuitarVoicing!)}] alias {chord.FirstAlias}");
+        }
+        Console.WriteLine();
+
+        var aliases = db.Chords.Where(c => c.AlternateNames.Any(a => EF.Functions.ILike(a, "%beatles%"))).Select(c => c.Name);
+        Console.WriteLine(aliases.ToQueryString());
+        Console.WriteLine(string.Join(", ", await aliases.OrderBy(n => n).ToListAsync()));
+    }
+```
+
+```text
+SELECT i.name AS "Name", i.guitar_voicing AS "GuitarVoicing", i.alternate_names[1] AS "FirstAlias"
+FROM ga.iconic_chords AS i
+WHERE 4 = ANY (i.pitch_classes) AND i.guitar_voicing IS NOT NULL
+ORDER BY i.name
+
+Hendrix Chord: [0, 7, 6, 7, 8, 0] alias Purple Haze Chord
+James Bond Chord: [0, 2, 1, 0, 0, 0] alias Spy Chord
+
+SELECT i.name
+FROM ga.iconic_chords AS i
+WHERE EXISTS (
+    SELECT 1
+    FROM unnest(i.alternate_names) AS a(value)
+    WHERE a.value ILIKE '%beatles%')
+A Hard Day's Night Chord, Blackbird Chord
+```
+
+- `Contains` on an array becomes `= ANY`, and `AlternateNames[0]` becomes `alternate_names[1]`: the provider shifts the index, since PostgreSQL arrays start at 1 ([array type mapping](https://www.npgsql.org/efcore/mapping/array.html)).
+- `Any` with `EF.Functions.ILike` becomes an `EXISTS` over `unnest`. `ILIKE` is PostgreSQL's case-insensitive `LIKE`: the default collation is case-sensitive, unlike SQL Server's usual `_CI_` collations.
+
+### Guitar Alchemist's model on PostgreSQL
+
+Guitar Alchemist's `MusicalKnowledgeDbContext`, met in lesson 2, stores the same lists as joined strings, through value converters written for SQLite. `L04Ef.cs` copies its entity and configuration, reduced to the properties that matter here, and builds two contexts: GA's configuration, and the same entity without converters ([lines 36-86](https://github.com/spareilleux/learn/blob/15c2294/code/postgresql-aurora/csharp/L04Ef.cs#L36-L86), [lines 110-170](https://github.com/spareilleux/learn/blob/15c2294/code/postgresql-aurora/csharp/L04Ef.cs#L110-L170)):
+
+```csharp
+// EF Core builds a model once per context type: one class for each configuration
+public abstract class GaStyleContext(bool withConverters) : DbContext
+{
+    public DbSet<CachedIconicChord> IconicChords => Set<CachedIconicChord>();
+
+    protected override void OnConfiguring(DbContextOptionsBuilder options) => options.UseNpgsql(Db.ConnectionString);
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.HasDefaultSchema(withConverters ? "ef_ga" : "ef_native");
+        modelBuilder.Entity<CachedIconicChord>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.HasIndex(e => e.Name);
+            if (!withConverters)
+            {
+                return;
+            }
+            entity.Property(e => e.PitchClasses).HasConversion(
+                v => string.Join(',', v),
+                v => v.Split(',', StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToList()
+            );
+            entity.Property(e => e.GuitarVoicing).HasConversion(
+                v => v != null ? string.Join(',', v) : null,
+                v => !string.IsNullOrEmpty(v)
+                    ? v.Split(',', StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToList()
+                    : null
+            );
+            entity.Property(e => e.AlternateNames).HasConversion(
+                v => string.Join('|', v),
+                v => v.Split('|', StringSplitOptions.RemoveEmptyEntries).ToList()
+            );
+        });
+    }
+}
+
+public class GaConvertersContext() : GaStyleContext(withConverters: true);
+
+public class GaNativeContext() : GaStyleContext(withConverters: false);
+
+    public static async Task GaModel()
+    {
+        await using (var db = new GaConvertersContext())
+        {
+            Console.WriteLine("-- GA's configuration, with value converters");
+            Console.WriteLine(db.Database.GenerateCreateScript().Trim());
+            Console.WriteLine();
+        }
+        await using (var db = new GaNativeContext())
+        {
+            Console.WriteLine("-- the same entity, without converters");
+            Console.WriteLine(db.Database.GenerateCreateScript().Trim());
+            Console.WriteLine();
+        }
+
+        await using (var db = new GaNativeContext())
+        {
+            await db.Database.ExecuteSqlRawAsync("DROP SCHEMA IF EXISTS ef_native CASCADE");
+            await db.Database.ExecuteSqlRawAsync(db.Database.GenerateCreateScript());
+            db.IconicChords.Add(new CachedIconicChord
+            {
+                Name = "Hendrix Chord",
+                PitchClasses = [4, 8, 11, 2, 7],
+                GuitarVoicing = [0, 7, 6, 7, 8, 0],
+                AlternateNames = ["Purple Haze Chord", "E7#9"],
+                LastUpdated = DateTime.Now,
+            });
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateException e)
+            {
+                Console.WriteLine($"{e.GetType().Name}: {e.Message}");
+                Console.WriteLine($"  {e.InnerException!.GetType().Name}: {e.InnerException.Message}");
+            }
+        }
+
+        // An empty string in a list: the array keeps it, GA's joined string loses it on the way back
+        foreach (var db in new GaStyleContext[] { new GaNativeContext(), new GaConvertersContext() })
+        {
+            await using (db)
+            {
+                if (db is GaConvertersContext)
+                {
+                    await db.Database.ExecuteSqlRawAsync("DROP SCHEMA IF EXISTS ef_ga CASCADE");
+                    await db.Database.ExecuteSqlRawAsync(db.Database.GenerateCreateScript());
+                }
+                db.IconicChords.Add(new CachedIconicChord
+                {
+                    Name = "Hendrix Chord",
+                    PitchClasses = [4, 8, 11, 2, 7],
+                    AlternateNames = ["Purple Haze Chord", "", "E7#9"],
+                    LastUpdated = DateTime.UtcNow,
+                });
+                await db.SaveChangesAsync();
+                var saved = await db.IconicChords.AsNoTracking().SingleAsync();
+                Console.WriteLine($"{db.GetType().Name}: 3 alternate names saved, {saved.AlternateNames.Count} read back, LastUpdated.Kind={saved.LastUpdated.Kind}");
+            }
+        }
+    }
+```
+
+```text
+-- GA's configuration, with value converters
+DO $EF$
+BEGIN
+    IF NOT EXISTS(SELECT 1 FROM pg_namespace WHERE nspname = 'ef_ga') THEN
+        CREATE SCHEMA ef_ga;
+    END IF;
+END $EF$;
+
+
+CREATE TABLE ef_ga."IconicChords" (
+    "Id" integer GENERATED BY DEFAULT AS IDENTITY,
+    "Name" text NOT NULL,
+    "PitchClasses" text NOT NULL,
+    "GuitarVoicing" text,
+    "AlternateNames" text NOT NULL,
+    "LastUpdated" timestamp with time zone NOT NULL,
+    CONSTRAINT "PK_IconicChords" PRIMARY KEY ("Id")
+);
+
+
+CREATE INDEX "IX_IconicChords_Name" ON ef_ga."IconicChords" ("Name");
+
+-- the same entity, without converters
+DO $EF$
+BEGIN
+    IF NOT EXISTS(SELECT 1 FROM pg_namespace WHERE nspname = 'ef_native') THEN
+        CREATE SCHEMA ef_native;
+    END IF;
+END $EF$;
+
+
+CREATE TABLE ef_native."IconicChords" (
+    "Id" integer GENERATED BY DEFAULT AS IDENTITY,
+    "Name" text NOT NULL,
+    "PitchClasses" integer[] NOT NULL,
+    "GuitarVoicing" integer[],
+    "AlternateNames" text[] NOT NULL,
+    "LastUpdated" timestamp with time zone NOT NULL,
+    CONSTRAINT "PK_IconicChords" PRIMARY KEY ("Id")
+);
+
+
+CREATE INDEX "IX_IconicChords_Name" ON ef_native."IconicChords" ("Name");
+
+DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+  ArgumentException: Cannot write DateTime with Kind=Local to PostgreSQL type 'timestamp with time zone', only UTC is supported. Note that it's not possible to mix DateTimes with different Kinds in an array, range, or multirange. (Parameter 'value')
+GaNativeContext: 3 alternate names saved, 3 read back, LastUpdated.Kind=Utc
+GaConvertersContext: 3 alternate names saved, 2 read back, LastUpdated.Kind=Utc
+```
+
+1. **The schema.** With converters, the lists are `text` columns; without, `integer[]` and `text[]`, which the database can check, index and query. EF Core builds a model once per context type, which is why each configuration is its own class.
+2. **`DateTime.Now`.** `LastUpdated` maps to `timestamp with time zone`, and Npgsql refuses a `DateTime` with `Kind=Local` for that type since Npgsql 6. SQLite accepted it. A model moved from SQLite or SQL Server to PostgreSQL finds its `DateTime.Now` calls at the first `SaveChanges`.
+3. **The empty name.** Three alternate names saved, the second one empty: the array gives back three, the converter two. `Split('|', StringSplitOptions.RemoveEmptyEntries)` drops the empty entry, on any database. That's a finding about GA's code, not about PostgreSQL, and the native array doesn't have the problem.
+
+## Errors
+
+A server error arrives as [`PostgresException`](https://www.npgsql.org/doc/api/Npgsql.PostgresException.html) in Npgsql, and `PSQLException` in pgjdbc, with the five-character `SqlState` of the [error codes appendix](https://www.postgresql.org/docs/18/errcodes-appendix.html). Test the code, not the message: `23505` is `unique_violation` in every language, while the message follows `lc_messages`. Npgsql also defines constants such as `PostgresErrorCodes.UniqueViolation`.
+
+The `DETAIL` of an error can contain data, as in lesson 2's "Failing row contains …". Npgsql redacts it unless the connection string sets `Include Error Detail=true`; exercise 1 shows both.
+
+## On Aurora
+
+*To verify: nothing in this section ran on AWS.* Npgsql and pgjdbc connect to Aurora PostgreSQL as to any PostgreSQL server. What changes is around the connection.
+
+**TLS is required by default.** The [Aurora PostgreSQL security page](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Security.html) gives the default of `rds.force_ssl` as 1 (on) for Aurora PostgreSQL 17 and later, and 0 for 16 and older; a connection without TLS is refused with `no pg_hba.conf entry for host …, SSL off`. The local container has `ssl` off. Both drivers default to `prefer`, which uses TLS when the server offers it but doesn't verify the certificate. Against Aurora, use `SSL Mode=VerifyFull` in Npgsql and `sslmode=verify-full` in pgjdbc, with the RDS certificate authority bundle as the trusted root.
+
+**Passwords or IAM tokens.** With [IAM database authentication](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html), the password is a token generated by the AWS SDK from IAM credentials. AWS gives it "a lifetime of 15 minutes", notes that it "doesn't affect the session after it is established", and that its size "is generally about 1 KB but can be larger". A pool opens new connections all day, so the token must be refreshed:
+
+- In .NET, [`NpgsqlDataSourceBuilder.UsePeriodicPasswordProvider`](https://github.com/npgsql/npgsql/blob/d3768398c17877b3a916c3c4d87e8e11698991fc/src/Npgsql/NpgsqlDataSourceBuilder.cs#L344-L371) calls a function on a timer, "the recommended way to fetch a rotating access token" according to its documentation comment; the function would call the AWS SDK for .NET's `RDSAuthTokenGenerator`.
+- In Java, AWS documents the IAM authentication plugin of the [AWS Advanced JDBC Wrapper](https://github.com/aws/aws-advanced-jdbc-wrapper), which wraps pgjdbc.
+
+**max_connections depends on the instance.** Its default on Aurora PostgreSQL is `LEAST({DBInstanceClassMemory/9531392},5000)`, per [performance and scaling for Aurora PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Managing.html), which also recommends keeping "at least 3 more connections to support AWS automation". The `53300` of the pool section happens at whatever that number is; the arithmetic of pool sizes is the same.
+
+**RDS Proxy and pinning.** [RDS Proxy](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-proxy.html) shares database connections between client connections at transaction boundaries. A client connection whose session state changed is **pinned** to its database connection until it disconnects. AWS's [list of pinning conditions for PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-proxy-pinning.html#rds-proxy-pinning.postgres) meets this lesson's drivers in three places:
+
+- "Using `SET` commands" pins. A session setting such as the time zone belongs in the connection string (`Timezone`, or the JVM's zone for pgjdbc, sent at startup), or in the proxy's initialization query. Whether RDS Proxy pins on parameters sent in the startup message is *to verify*.
+- "Using `PREPARE`, `DISCARD`, `DEALLOCATE`, or `EXECUTE` commands to manage prepared statements" pins. The drivers' automatic preparation uses the protocol's messages, not these SQL commands; the page doesn't say whether that pins, so it's *to verify*.
+- "If you use connection pooling libraries with `DISCARD ALL` query configured as a reset query, RDS Proxy pins your client connection on release." Npgsql resets a pooled connection with `DISCARD ALL` when it goes back to the pool, unless it has prepared statements ([`NpgsqlConnector.cs`, lines 2752-2766](https://github.com/npgsql/npgsql/blob/d3768398c17877b3a916c3c4d87e8e11698991fc/src/Npgsql/Internal/NpgsqlConnector.cs#L2752-L2766)). `No Reset On Close=true` turns the reset off, "at the cost of leaking state". Behind RDS Proxy, a pool in the application and a pool in the proxy are two layers doing the same job.
+
+**Writer and readers.** Lesson 3 described the cluster endpoint and the reader endpoint. A program can hold one data source per endpoint, or give both hosts to one data source and let the driver pick by role: exercise 3 tries it on the local server. For fast failover in Java, AWS maintains the AWS Advanced JDBC Wrapper, which follows the cluster's topology instead of relying on DNS.
+
+## Key takeaways
+
+- One `NpgsqlDataSource` per database, kept for the application's lifetime; in Java, a HikariCP pool around pgjdbc.
+- Use the parameters' real types. A string compared with a `bigint` is error `42883`, not a conversion.
+- Send `DateTime` values with `Kind=Utc` to `timestamptz`; convert `DateTimeOffset` to UTC. pgjdbc sets the session's time zone from the JVM.
+- `Maximum Pool Size` defaults to 100 and `max_connections` to 100: size pools from the server's limit.
+- Both drivers prepare statements on the server after 5 executions, Npgsql only when `Max Auto Prepare` is set.
+- `COPY FROM STDIN` and batches load rows in one round trip; one `INSERT` per row pays one round trip per row.
+- The EF Core provider maps arrays natively; value converters written for SQLite lose information and hide `DateTime.Kind` problems.
+- On Aurora: TLS required from version 17, IAM tokens valid 15 minutes, `max_connections` from the instance's memory, and a `DISCARD ALL` reset that pins RDS Proxy connections.
+
+## Exercises
+
+1. Load `package_refs.csv` into an empty copy of `ga.package_refs` in **one batch**, with the first row of the file added again at the end: an `NpgsqlBatch` in C#, `addBatch` and `executeBatch` in Java. How many rows are in the table afterwards? What does each driver tell you about the duplicate?
+
+<details>
+<summary>Solution</summary>
+
+[`L04.cs`, lines 210-246](https://github.com/spareilleux/learn/blob/15c2294/code/postgresql-aurora/csharp/L04.cs#L210-L246):
+
+```csharp
+    public static async Task ExerciseBatch()
+    {
+        await using var dataSource = Db.DataSource();
+        await using var connection = await dataSource.OpenConnectionAsync();
+        await using (var create = new NpgsqlCommand("""
+            DROP TABLE IF EXISTS ga.package_refs_batch;
+            CREATE TABLE ga.package_refs_batch (LIKE ga.package_refs INCLUDING ALL);
+            """, connection))
+        {
+            await create.ExecuteNonQueryAsync();
+        }
+
+        // One NpgsqlBatch: every INSERT goes to the server in one round trip, in one implicit transaction
+        var rows = PackageRefs().ToList();
+        rows.Add(rows[0]);
+        await using var batch = new NpgsqlBatch(connection);
+        foreach (var fields in rows)
+        {
+            var command = new NpgsqlBatchCommand("INSERT INTO ga.package_refs_batch VALUES ($1, $2, $3)");
+            foreach (var field in fields)
+            {
+                command.Parameters.Add(new() { Value = field });
+            }
+            batch.BatchCommands.Add(command);
+        }
+        try
+        {
+            await batch.ExecuteNonQueryAsync();
+        }
+        catch (PostgresException e)
+        {
+            Console.WriteLine($"{e.SqlState}: {e.MessageText}");
+            Console.WriteLine(e.Detail);
+        }
+        await using var count = new NpgsqlCommand("SELECT count(*) FROM ga.package_refs_batch", connection);
+        Console.WriteLine($"rows in the table: {await count.ExecuteScalarAsync()}");
+    }
+```
+
+```text
+23505: duplicate key value violates unique constraint "package_refs_batch_pkey"
+Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+rows in the table: 0
+```
+
+[`L04.java`, lines 243-277](https://github.com/spareilleux/learn/blob/15c2294/code/postgresql-aurora/java/src/main/java/dev/learn/pg/L04.java#L243-L277):
+
+```java
+    static void exerciseBatch() throws Exception {
+        try (Connection connection = DriverManager.getConnection(url() + "&reWriteBatchedInserts=true")) {
+            try (Statement statement = connection.createStatement()) {
+                statement.execute("""
+                        DROP TABLE IF EXISTS ga.package_refs_batch;
+                        CREATE TABLE ga.package_refs_batch (LIKE ga.package_refs INCLUDING ALL);
+                        """);
+            }
+            List<String> lines = Files.readAllLines(Path.of("../ladybugdb/data/ga/package_refs.csv"));
+            List<String> rows = new java.util.ArrayList<>(lines.subList(1, lines.size()));
+            rows.add(rows.get(0));
+            connection.setAutoCommit(false);
+            try (PreparedStatement ps = connection.prepareStatement("INSERT INTO ga.package_refs_batch VALUES (?, ?, ?)")) {
+                for (String row : rows) {
+                    String[] fields = row.split(",");
+                    ps.setString(1, fields[0]);
+                    ps.setString(2, fields[1]);
+                    ps.setString(3, fields[2]);
+                    ps.addBatch();
+                }
+                ps.executeBatch();
+                connection.commit();
+            } catch (BatchUpdateException e) {
+                connection.rollback();
+                SQLException cause = e.getNextException();
+                System.out.println(cause.getSQLState() + ": " + ((PSQLException) cause).getServerErrorMessage().getMessage());
+            }
+            connection.setAutoCommit(true);
+            try (Statement statement = connection.createStatement();
+                 ResultSet rs = statement.executeQuery("SELECT count(*) FROM ga.package_refs_batch")) {
+                rs.next();
+                System.out.println("rows in the table: " + rs.getLong(1));
+            }
+        }
+    }
+```
+
+```text
+23505: duplicate key value violates unique constraint "package_refs_batch_pkey"
+rows in the table: 0
+```
+
+- **Zero rows in both.** An `NpgsqlBatch` runs in one implicit transaction: the failure of the 479th statement rolls back the 478 before it. In Java, `setAutoCommit(false)` and `rollback()` do the same explicitly; with autocommit on, each statement of the batch would commit on its own.
+- `reWriteBatchedInserts=true` lets pgjdbc rewrite the batch into multi-row `INSERT … VALUES (…), (…)` statements. The error arrives as a `BatchUpdateException`, whose `getNextException()` carries the server's error.
+- Npgsql redacts the detail. With `Include Error Detail=true` in `PG_CONNECTION`, the second line becomes `Key (project, package)=(AllProjects.AppHost/AllProjects.AppHost.csproj, Aspire.Dashboard.Sdk.win-x64) already exists.`, which I ran on 2026-09-15 but `check.sh` doesn't compare.
+
+</details>
+
+2. Run `l04-generated-keys` with the JVM in Tokyo's time zone. Before running it, predict the `created` value it prints. Which call in the program would print the same thing in every time zone?
+
+<details>
+<summary>Solution</summary>
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+```powershell
+java "-Duser.timezone=Asia/Tokyo" -jar java/target/pg.jar l04-generated-keys
+```
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```bash
+java -Duser.timezone=Asia/Tokyo -jar java/target/pg.jar l04-generated-keys
+```
+
+</TabItem>
+<TabItem label="macOS">
+
+```bash
+java -Duser.timezone=Asia/Tokyo -jar java/target/pg.jar l04-generated-keys
+```
+
+</TabItem>
+</Tabs>
+
+```text
+generated keys: note_id=1 run_id=34852867099 body=first deployment of the day created=2026-09-15 09:00:00+09
+generated keys: 1 column, note_id=2
+```
+
+The row holds the same instant, `2026-09-15 00:00:00+00`. pgjdbc set the session's `TimeZone` to `Asia/Tokyo`, and `getString` returns the text the server formatted in that zone: 09:00 on September 15, where Toronto gave 20:00 on September 14. `keys.getObject("created", OffsetDateTime.class)` returns the instant as an `OffsetDateTime` in UTC, whatever the JVM's zone. A server-side report that formats dates as text, such as `to_char(created, 'YYYY-MM-DD')`, changes day with the JVM that runs it. I ran this on Windows only.
+
+</details>
+
+3. Your application will run on an Aurora cluster with a writer and a reader endpoint. Against the local server, ask each driver for a connection to a **standby**, then for a standby if there is one and the primary otherwise. What do the drivers do, and what does a connection string need for this?
+
+<details>
+<summary>Solution</summary>
+
+[`L04.cs`, lines 333-361](https://github.com/spareilleux/learn/blob/15c2294/code/postgresql-aurora/csharp/L04.cs#L333-L361):
+
+```csharp
+    public static async Task Target()
+    {
+        // In a connection string, Target Session Attributes needs several hosts, such as Aurora's writer and reader endpoints
+        try
+        {
+            Db.DataSource("Target Session Attributes=standby");
+        }
+        catch (NotSupportedException e)
+        {
+            Console.WriteLine($"one host: {e.GetType().Name}: {e.Message}");
+        }
+
+        // A multi-host data source checks each server's role before handing out a connection; the local server is a primary
+        await using var multiHost = new NpgsqlDataSourceBuilder(Db.ConnectionString).BuildMultiHost();
+        foreach (var target in new[] { TargetSessionAttributes.ReadWrite, TargetSessionAttributes.PreferStandby, TargetSessionAttributes.Standby })
+        {
+            var dataSource = multiHost.WithTargetSession(target);
+            try
+            {
+                await using var connection = await dataSource.OpenConnectionAsync();
+                await using var command = new NpgsqlCommand("SELECT pg_is_in_recovery()", connection);
+                Console.WriteLine($"{target}: connected, pg_is_in_recovery() = {await command.ExecuteScalarAsync()}");
+            }
+            catch (NpgsqlException e)
+            {
+                Console.WriteLine($"{target}: {e.GetType().Name}: {e.Message}");
+            }
+        }
+    }
+```
+
+```text
+one host: NotSupportedException: Target Session Attributes other then Any is only supported with multiple hosts
+ReadWrite: connected, pg_is_in_recovery() = False
+PreferStandby: connected, pg_is_in_recovery() = False
+Standby: NpgsqlException: No suitable host was found.
+```
+
+[`L04.java`, lines 279-292](https://github.com/spareilleux/learn/blob/15c2294/code/postgresql-aurora/java/src/main/java/dev/learn/pg/L04.java#L279-L292):
+
+```java
+    static void target() {
+        // targetServerType: before handing out a connection, the driver checks the server's role, as it would for each
+        // host of an Aurora cluster; the local server is a primary
+        for (String target : List.of("primary", "preferSecondary", "secondary")) {
+            try (Connection connection = DriverManager.getConnection(url() + "&targetServerType=" + target);
+                 Statement statement = connection.createStatement();
+                 ResultSet rs = statement.executeQuery("SELECT pg_is_in_recovery()")) {
+                rs.next();
+                System.out.println(target + ": connected, pg_is_in_recovery() = " + rs.getBoolean(1));
+            } catch (SQLException e) {
+                System.out.println(target + ": " + e.getSQLState() + ": " + e.getMessage());
+            }
+        }
+    }
+```
+
+```text
+primary: connected, pg_is_in_recovery() = false
+preferSecondary: connected, pg_is_in_recovery() = false
+secondary: 08001: Could not find a server with specified targetServerType: secondary
+```
+
+- Npgsql refuses `Target Session Attributes` with a single host in a connection string, before connecting ([`NpgsqlConnectionStringBuilder.cs`, lines 1508-1514](https://github.com/npgsql/npgsql/blob/d3768398c17877b3a916c3c4d87e8e11698991fc/src/Npgsql/NpgsqlConnectionStringBuilder.cs#L1508-L1514)). Several hosts go in `Host`, as in `Host=writer-endpoint,reader-endpoint`. `BuildMultiHost()` builds a data source on them, and `WithTargetSession` derives a data source for a role from it. According to [multiple hosts and failover](https://www.npgsql.org/doc/failover-and-load-balancing.html), Npgsql "detects whether a server is a primary or a standby by occasionally querying `pg_is_in_recovery()`", and checks again every `Host Recheck Seconds`, 10 by default.
+- pgjdbc accepts a single host and checks the server's role when it connects: `targetServerType=secondary` finds no standby, SQLSTATE `08001`. Several hosts go in the URL, `jdbc:postgresql://writer-endpoint,reader-endpoint/learn`.
+- Both find no standby on the local primary, and both fall back to it with `prefer-standby` and `preferSecondary`.
+
+On Aurora, the reader endpoint already points to the replicas, and a separate data source for each endpoint is the simplest design. Role-based selection is useful when both endpoints are in one connection string, and during a failover, when the reader endpoint "might direct connections to the new primary DB instance", in the words of the [endpoints page](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Overview.Endpoints.html). Whether an Aurora Replica answers `pg_is_in_recovery()` with true, as a PostgreSQL standby does, is *to verify*.
+
+</details>
+
+## Sources
+
+- Npgsql: [documentation](https://www.npgsql.org/doc/), [basic usage](https://www.npgsql.org/doc/basic-usage.html), [connection string parameters](https://www.npgsql.org/doc/connection-string-parameters.html), [date and time handling](https://www.npgsql.org/doc/types/datetime.html), [multiple hosts and failover](https://www.npgsql.org/doc/failover-and-load-balancing.html), [EF Core provider](https://www.npgsql.org/efcore/) and [array mapping](https://www.npgsql.org/efcore/mapping/array.html); source at `v10.0.3`: [`NpgsqlConnector.cs`](https://github.com/npgsql/npgsql/blob/d3768398c17877b3a916c3c4d87e8e11698991fc/src/Npgsql/Internal/NpgsqlConnector.cs#L2752-L2766), [`NpgsqlConnectionStringBuilder.cs`](https://github.com/npgsql/npgsql/blob/d3768398c17877b3a916c3c4d87e8e11698991fc/src/Npgsql/NpgsqlConnectionStringBuilder.cs#L1508-L1514), [`NpgsqlDataSourceBuilder.cs`](https://github.com/npgsql/npgsql/blob/d3768398c17877b3a916c3c4d87e8e11698991fc/src/Npgsql/NpgsqlDataSourceBuilder.cs#L344-L371)
+- PostgreSQL JDBC driver: [connection properties](https://jdbc.postgresql.org/documentation/use/), [`CopyManager`](https://jdbc.postgresql.org/documentation/publicapi/org/postgresql/copy/CopyManager.html); source at `REL42.7.13`: [`ConnectionFactoryImpl.java`](https://github.com/pgjdbc/pgjdbc/blob/3297557c6a8059d0d6e3522c79f0bd9a6f82ee07/pgjdbc/src/main/java/org/postgresql/core/v3/ConnectionFactoryImpl.java#L458-L464), [`Parser.java`](https://github.com/pgjdbc/pgjdbc/blob/3297557c6a8059d0d6e3522c79f0bd9a6f82ee07/pgjdbc/src/main/java/org/postgresql/core/Parser.java#L371-L386)
+- [HikariCP](https://github.com/brettwooldridge/HikariCP)
+- PostgreSQL 18 documentation: [`pg_stat_activity`](https://www.postgresql.org/docs/18/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW), [`max_connections`](https://www.postgresql.org/docs/18/runtime-config-connection.html#GUC-MAX-CONNECTIONS), [`pg_prepared_statements`](https://www.postgresql.org/docs/18/view-pg-prepared-statements.html), [error codes](https://www.postgresql.org/docs/18/errcodes-appendix.html)
+- .NET and Java: [`DateTime`](https://learn.microsoft.com/dotnet/api/system.datetime), [`DateTimeOffset`](https://learn.microsoft.com/dotnet/api/system.datetimeoffset), [`DriverManager`](https://docs.oracle.com/en/java/javase/25/docs/api/java.sql/java/sql/DriverManager.html), [`OffsetDateTime`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/OffsetDateTime.html)
+- Amazon Aurora: [security and TLS](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Security.html), [IAM database authentication](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html), [performance and scaling](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Managing.html), [RDS Proxy](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-proxy.html) and [pinning](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-proxy-pinning.html), [endpoints](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Overview.Endpoints.html), [AWS Advanced JDBC Wrapper](https://github.com/aws/aws-advanced-jdbc-wrapper)
+- Guitar Alchemist at commit `32f143c`: [`MusicalKnowledgeDbContext.cs`](https://github.com/GuitarAlchemist/ga/blob/32f143c/Common/GA.Infrastructure/Persistence/EntityFramework/MusicalKnowledgeDbContext.cs)

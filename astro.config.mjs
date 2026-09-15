@@ -140,6 +140,12 @@ export default defineConfig({
 									items: [{ autogenerate: { directory: 'ladybugdb' } }],
 								},
 								{
+									label: 'PostgreSQL and Amazon Aurora',
+									translations: { fr: 'PostgreSQL et Amazon Aurora', es: 'PostgreSQL y Amazon Aurora' },
+									collapsed: true,
+									items: [{ autogenerate: { directory: 'postgresql-aurora' } }],
+								},
+								{
 									label: 'RabbitMQ',
 									translations: { fr: 'RabbitMQ', es: 'RabbitMQ' },
 									collapsed: true,
