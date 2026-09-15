@@ -21,6 +21,8 @@ Tu es à l'aise avec C# ou Java, y compris les génériques, les interfaces et l
 
 Les composants, JSX et le DOM appartiennent au cours **React (Vite)** qui suit celui-ci. Ce cours exécute TypeScript dans Node.js, où chaque exemple peut être vérifié et exécuté en CI, et ne regarde le code React que comme des données tirées du dépôt de GA.
 
+Le cours [TypeScript avancé](../typescript-advanced/) va plus loin pour les développeurs qui écrivent déjà du TypeScript strict : comment le vérificateur évalue les types calculés à partir d'autres types, la variance, la modélisation avec des brands et des machines à états, et les schémas à la frontière d'un programme.
+
 ## TypeScript en un tableau
 
 | | C# | Java | TypeScript |
