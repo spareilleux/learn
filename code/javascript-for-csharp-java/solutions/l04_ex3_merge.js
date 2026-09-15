@@ -1,20 +1,19 @@
-// Lesson 4, exercise 3: merge saved preferences into the defaults, one level deep, known keys only
-function mergePreferences(defaults, saved) {
-  const result = structuredClone(defaults);
-  for (const [key, value] of Object.entries(saved)) {
-    if (!Object.hasOwn(defaults, key)) continue; // unknown keys, __proto__ included, are ignored
-    const current = result[key];
-    if (current !== null && typeof current === 'object' && value !== null && typeof value === 'object') {
-      result[key] = { ...current, ...value };
-    } else {
-      result[key] = value;
+// Lesson 4, exercise 3: defaults, then saved preferences of the right type for known keys only, then URL overrides
+function getDefaults(search, saved) {
+  const state = { stars: true, tower: false, skyboxMode: 'milky-way' };
+  const preferences = saved ? JSON.parse(saved) : {};
+  for (const key of Object.keys(state)) {
+    // Object.keys(state) lists the known keys: __proto__ and old keys are never read
+    if (Object.hasOwn(preferences, key) && typeof preferences[key] === typeof state[key]) {
+      state[key] = preferences[key];
     }
   }
-  return result;
+  const params = new URLSearchParams(search);
+  if (params.has('tower')) state.tower = true; // last, so the URL wins
+  return state;
 }
 
-const defaults = { skyboxMode: 'default', camera: { fov: 60, near: 0.1 } };
-const saved = JSON.parse('{"__proto__":{"isAdmin":true},"camera":{"fov":75},"extra":1}');
-const merged = mergePreferences(defaults, saved);
-console.log(merged);
-console.log(merged.isAdmin, Object.getPrototypeOf(merged) === Object.prototype, defaults.camera.fov);
+const saved = JSON.stringify({ stars: false, tower: false, skyboxMode: 'milky-way' });
+console.log(getDefaults('?tower', saved));
+console.log(getDefaults('', '{"bloomLevel":3,"stars":"yes","__proto__":{"isAdmin":true}}'));
+console.log(getDefaults('', '{"__proto__":{"isAdmin":true}}').isAdmin);

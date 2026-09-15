@@ -1,26 +1,33 @@
-// Lesson 4: SceneOptions.tsx in GuitarAlchemist/ga (a826864) merges saved preferences with Object.assign
+// Lesson 4: getDefaults in SceneOptions.tsx of GuitarAlchemist/ga (a826864), reduced to plain JavaScript
 import { show } from './show.js';
 
-function defaults() {
-  return { skyboxMode: 'default', camera: { fov: 60, near: 0.1 } };
+function getDefaults(search, saved) {
+  const state = { stars: true, tower: false, skyboxMode: 'milky-way' };
+  // Lines 62-73: URL parameters override the defaults
+  const params = new URLSearchParams(search);
+  if (params.has('tower')) state.tower = true;
+  // Lines 75-78: then the preferences saved in localStorage are merged in
+  if (saved) Object.assign(state, JSON.parse(saved));
+  return state;
 }
 
-// Line 77: if (saved) Object.assign(state, JSON.parse(saved));
-const saved = '{"camera":{"fov":75}}';
-const state = defaults();
-Object.assign(state, JSON.parse(saved));
-show('state.camera', state.camera); // the saved object replaced the default one: near is gone
+// Every toggle saves the whole state (lines 94, 103 and 112), so a saved state has every key
+const saved = JSON.stringify({ stars: false, tower: false, skyboxMode: 'milky-way' });
+show("getDefaults('?tower', null)", getDefaults('?tower', null));
+show("getDefaults('?tower', saved)", getDefaults('?tower', saved));
+
+// Object.assign copies every own property of the source, known or not
+show('with an old key', getDefaults('', '{"bloomLevel":3,"stars":"yes"}'));
 
 // JSON.parse makes __proto__ an ordinary property; Object.assign then assigns it, which changes the prototype
-const odd = '{"__proto__":{"isAdmin":true},"skyboxMode":"jwst"}';
-const parsed = JSON.parse(odd);
+const parsed = JSON.parse('{"__proto__":{"isAdmin":true}}');
 show("Object.hasOwn(parsed, '__proto__')", Object.hasOwn(parsed, '__proto__'));
-const assigned = Object.assign(defaults(), parsed);
-show('assigned.isAdmin', assigned.isAdmin);
-show("Object.hasOwn(assigned, 'isAdmin')", Object.hasOwn(assigned, 'isAdmin'));
+const state = getDefaults('', '{"__proto__":{"isAdmin":true}}');
+show('state.isAdmin', state.isAdmin);
+show("Object.hasOwn(state, 'isAdmin')", Object.hasOwn(state, 'isAdmin'));
+show('{}.isAdmin', {}.isAdmin);
 
 // Spread defines properties instead of assigning them: the prototype stays Object.prototype
-const spread = { ...defaults(), ...parsed };
+const spread = { ...parsed };
 show('spread.isAdmin', spread.isAdmin);
 show('Object.keys(spread)', Object.keys(spread));
-show('{}.isAdmin', {}.isAdmin);

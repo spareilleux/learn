@@ -1,8 +1,10 @@
-state.camera                       { fov: 75 }
+getDefaults('?tower', null)        { stars: true, tower: true, skyboxMode: 'milky-way' }
+getDefaults('?tower', saved)       { stars: false, tower: false, skyboxMode: 'milky-way' }
+with an old key                    { stars: 'yes', tower: false, skyboxMode: 'milky-way', bloomLevel: 3 }
 Object.hasOwn(parsed, '__proto__') true
-assigned.isAdmin                   true
-Object.hasOwn(assigned, 'isAdmin') false
-spread.isAdmin                     undefined
-Object.keys(spread)                [ 'skyboxMode', 'camera', '__proto__' ]
+state.isAdmin                      true
+Object.hasOwn(state, 'isAdmin')    false
 {}.isAdmin                         undefined
+spread.isAdmin                     undefined
+Object.keys(spread)                [ '__proto__' ]
 exit 0
