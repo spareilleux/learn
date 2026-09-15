@@ -22,7 +22,7 @@ type _1 = Expect<Equal<ViewerInfo['displayName'], string | undefined>>;
 function applyPatch(viewer: ViewerInfo, patch: Partial<ViewerInfo>): ViewerInfo {
   return { ...viewer, ...patch };
 }
-show('applyPatch(absent, …)', applyPatch(absent, { displayName: 'Stephane' }));
+show('applyPatch(absent, …)', applyPatch(absent, { displayName: 'Ada' }));
 
 // Why the rule matters: a spread copies an own property holding undefined, and erases the value
 const viewer: ViewerInfo = { connectionId: 'c3', color: '#d2a8ff', displayName: 'Hari' };
