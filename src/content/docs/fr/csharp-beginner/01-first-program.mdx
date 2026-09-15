@@ -1,0 +1,429 @@
+---
+title: 1. Installer .NET et exécuter ton premier programme
+description: Installer le SDK .NET 10 sous Windows, Linux/WSL ou macOS, exécuter un fichier C# avec dotnet run, créer un projet, et lire les erreurs du compilateur.
+sidebar:
+  order: 1
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Code : [`examples/l01_hello.cs`](https://github.com/spareilleux/learn/blob/b19a296d6edc70be634ba147e27fd2d0c66f395f/code/csharp-beginner/examples/l01_hello.cs), [`examples/l01_statements.cs`](https://github.com/spareilleux/learn/blob/b19a296d6edc70be634ba147e27fd2d0c66f395f/code/csharp-beginner/examples/l01_statements.cs), les extraits refusés dans [`compile_fail/`](https://github.com/spareilleux/learn/tree/b19a296d6edc70be634ba147e27fd2d0c66f395f/code/csharp-beginner/compile_fail) et le projet [`l01-project/Hello`](https://github.com/spareilleux/learn/tree/b19a296d6edc70be634ba147e27fd2d0c66f395f/code/csharp-beginner/l01-project/Hello).
+
+## Ce qu'est un programme
+
+Un programme est une liste d'instructions pour l'ordinateur, écrite dans un langage que les humains peuvent lire. L'ordinateur ne peut pas exécuter ce texte directement : un outil appelé **compilateur** commence par le vérifier et le traduire.
+
+Avec C#, la traduction se fait en deux étapes :
+
+```mermaid
+flowchart LR
+    A["hello.cs<br/>ton code C#"] -->|"le compilateur C#<br/>vérifie et traduit"| B["hello.dll<br/>langage intermédiaire"]
+    B -->|"runtime .NET<br/>traduit en code machine pendant l'exécution"| C["Sortie<br/>Hello, world!"]
+```
+
+1. Le **compilateur C#** lit ton fichier `.cs`. Si quelque chose ne va pas, il s'arrête et affiche une erreur. Sinon, il écrit un fichier `.dll` dans un *langage intermédiaire* (IL), le même sur tous les ordinateurs.
+2. Le **runtime .NET** charge la `.dll` et la transforme en instructions pour ton processeur pendant que le programme s'exécute.
+
+Tu installes les deux d'un coup avec le **SDK .NET** (Software Development Kit, kit de développement). Il contient aussi la commande `dotnet`, qui te servira pour tout : créer, compiler, exécuter et tester des programmes. La [présentation de .NET](https://learn.microsoft.com/dotnet/core/introduction) décrit les pièces plus en détail.
+
+Ce cours utilise [.NET 10](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-10/overview), une version à support long terme, et [C# 14](https://learn.microsoft.com/dotnet/csharp/whats-new/csharp-14), la version du langage qui l'accompagne.
+
+## Ouvrir un terminal
+
+Un terminal est une fenêtre où tu tapes des commandes. Chaque commande de ce cours se tape là, puis s'exécute avec <kbd>Entrée</kbd>.
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+Appuie sur <kbd>Win</kbd>, tape `Terminal`, et ouvre **Terminal**. Il démarre PowerShell. Sous Windows 10, si Terminal n'est pas installé, ouvre plutôt **Windows PowerShell**.
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+Sous Ubuntu, appuie sur <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>T</kbd>. Sous Windows avec [WSL](https://learn.microsoft.com/windows/wsl/install), ouvre **Ubuntu** depuis le menu Démarrer : les commandes s'exécutent alors dans Linux.
+
+</TabItem>
+<TabItem label="macOS">
+
+Appuie sur <kbd>Cmd</kbd>+<kbd>Espace</kbd>, tape `Terminal`, et ouvre **Terminal**.
+
+</TabItem>
+</Tabs>
+
+## Installer le SDK .NET
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+Windows inclut le gestionnaire de paquets [WinGet](https://learn.microsoft.com/windows/package-manager/winget/). Dans le terminal :
+
+```powershell
+winget install Microsoft.DotNet.SDK.10
+```
+
+Ferme le terminal et ouvres-en un nouveau, pour qu'il trouve la commande `dotnet`. Tu peux aussi télécharger l'installeur depuis la [page de téléchargement de .NET](https://dotnet.microsoft.com/download/dotnet/10.0). Le [guide d'installation pour Windows](https://learn.microsoft.com/dotnet/core/install/windows) liste les autres méthodes.
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+Sous Ubuntu 24.04 et plus récent, .NET 10 fait partie des paquets d'Ubuntu :
+
+```bash
+sudo apt-get update && sudo apt-get install -y dotnet-sdk-10.0
+```
+
+`sudo` demande ton mot de passe. Les autres distributions ont leur propre page dans le [guide d'installation pour Linux](https://learn.microsoft.com/dotnet/core/install/linux) (*à vérifier* : j'ai suivi ce cours sous Windows, et sous Ubuntu seulement en CI).
+
+**Sous WSL**, installe le SDK dans la distribution Linux, même s'il est déjà installé sous Windows : Linux ne peut pas utiliser la version Windows.
+
+</TabItem>
+<TabItem label="macOS">
+
+Télécharge l'**Installer** pour macOS depuis la [page de téléchargement de .NET 10](https://dotnet.microsoft.com/download/dotnet/10.0) : **Arm64** pour un processeur Apple (M1 et suivants), **x64** pour un processeur Intel. Ouvre le fichier `.pkg` et suis les étapes, puis ouvre un nouveau terminal. Le [guide d'installation pour macOS](https://learn.microsoft.com/dotnet/core/install/macos) donne les détails (*à vérifier* : j'ai suivi ce cours sous macOS seulement en CI).
+
+</TabItem>
+</Tabs>
+
+Vérifie ensuite que le SDK répond :
+
+```text
+> dotnet --version
+10.0.112
+```
+
+Toute version qui commence par `10.0` convient. Si le terminal dit que `dotnet` n'est pas reconnu, ou `command not found`, ouvre un nouveau terminal ; si ça échoue encore, reprends le guide d'installation de ton OS.
+
+:::note[Plusieurs SDK sur un même ordinateur]
+`dotnet --list-sdks` affiche tous les SDK installés. Mon ordinateur en a deux :
+
+```text
+> dotnet --list-sdks
+10.0.112 [C:\Program Files\dotnet\sdk]
+11.0.100-preview.3.26207.106 [C:\Program Files\dotnet\sdk]
+```
+
+Par défaut, `dotnet` utilise le plus récent. Le dossier du cours contient un fichier [`global.json`](https://learn.microsoft.com/dotnet/core/tools/global-json) qui demande un SDK de version 10 : dans ce dossier, `dotnet --version` affiche donc `10.0.112`, et dans mon dossier personnel, `11.0.100-preview.3.26207.106`.
+:::
+
+## Ton premier programme
+
+Crée un dossier pour le cours, et crée dedans un fichier nommé `hello.cs` avec n'importe quel éditeur de texte (Bloc-notes, TextEdit, `nano`, ou les éditeurs décrits [à la fin de cette leçon](#choisir-un-éditeur)). Tapes-y cette seule ligne :
+
+```csharp
+Console.WriteLine("Hello, world!");
+```
+
+Enregistre le fichier, va dans son dossier dans le terminal avec `cd`, et exécute-le :
+
+```text
+> dotnet run hello.cs
+Hello, world!
+```
+
+[`dotnet run`](https://learn.microsoft.com/dotnet/core/tools/dotnet-run) a compilé le fichier, puis l'a exécuté. Exécuter à nouveau le même fichier est plus rapide : le SDK garde le programme compilé et ne recompile que si le fichier change. Un fichier `.cs` unique exécuté ainsi est une [**application basée sur un fichier**](https://learn.microsoft.com/dotnet/core/sdk/file-based-apps) (*file-based app*), une nouveauté de .NET 10. La plupart des exemples de ce cours sont des applications basées sur un fichier.
+
+Lisons la ligne morceau par morceau :
+
+| Morceau | Sens |
+|---|---|
+| `Console` | la console : la fenêtre de texte dans laquelle ton programme écrit |
+| `.` | « dans » : `WriteLine` appartient à `Console` |
+| `WriteLine` | une *méthode*, un travail qui porte un nom : écrire une ligne de texte |
+| `( … )` | ce que tu donnes à la méthode pour travailler, son *argument* |
+| `"Hello, world!"` | une *chaîne* (*string*) : du texte, entre guillemets droits doubles |
+| `;` | la fin de l'*instruction*, comme le point à la fin d'une phrase |
+
+C# est **sensible à la casse** : `Console` et `console` sont deux noms différents, et seul le premier existe. Les guillemets ne sont pas affichés : ils indiquent seulement au compilateur où le texte commence et où il finit.
+
+## Plusieurs instructions
+
+Un programme exécute ses instructions l'une après l'autre, de haut en bas :
+
+```csharp
+// Un commentaire commence par deux barres obliques : le compilateur l'ignore
+Console.WriteLine("Guitar Alchemist tunes a guitar like this:");
+Console.Write("E2 A2 D3 ");   // Write ne passe pas à la ligne suivante
+Console.Write("G3 B3 E4");
+Console.WriteLine();          // un WriteLine vide termine la ligne
+Console.WriteLine("Six strings, from the lowest to the highest.");
+
+/* Un commentaire peut aussi
+   s'étendre sur plusieurs lignes */
+Console.WriteLine(6 * 12);    // l'ordinateur calcule, puis affiche le résultat
+```
+
+```text
+> dotnet run examples/l01_statements.cs
+Guitar Alchemist tunes a guitar like this:
+E2 A2 D3 G3 B3 E4
+Six strings, from the lowest to the highest.
+72
+```
+
+- [`Console.Write`](https://learn.microsoft.com/dotnet/api/system.console.write) écrit du texte et reste sur la même ligne ; [`Console.WriteLine`](https://learn.microsoft.com/dotnet/api/system.console.writeline) écrit du texte et passe à la ligne suivante.
+- Un **commentaire** est une note pour les humains. `//` met en commentaire le reste de la ligne ; `/*` et `*/` entourent un commentaire qui peut s'étendre sur plusieurs lignes.
+- `6 * 12` n'a pas de guillemets : ce n'est pas du texte, c'est un calcul. Le programme calcule `72` et affiche le nombre. Avec des guillemets, `"6 * 12"` afficherait les caractères `6 * 12`.
+
+L'accordage vient de [Guitar Alchemist](https://github.com/GuitarAlchemist/ga), une application C# consacrée à la musique : son accordage par défaut s'écrit `E2 A2 D3 G3 B3 E4` dans [`Tuning.cs`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Instruments/Tuning.cs#L20-L23). Une lettre est une note en notation anglaise (E pour mi, A pour la…), le nombre est son octave.
+
+Dans une application basée sur un fichier, les instructions en haut du fichier sont le point de départ du programme. La documentation C# les appelle [instructions de niveau supérieur](https://learn.microsoft.com/dotnet/csharp/fundamentals/program-structure/top-level-statements).
+
+## Lire une erreur du compilateur
+
+Tout le monde fait des erreurs en tapant du code. Le compilateur les trouve avant que le programme ne s'exécute. Ici, il manque le point-virgule à la fin de la première ligne :
+
+```csharp
+Console.WriteLine("Hello, world!")
+Console.WriteLine("Goodbye!");
+```
+
+```text
+> dotnet run l01_missing_semicolon.cs
+C:\Users\spare\source\repos\learn\code\csharp-beginner\compile_fail\l01_missing_semicolon.cs(1,35): error CS1002: ; expected
+
+The build failed. Fix the build errors and run again.
+```
+
+La ligne d'erreur a cinq parties :
+
+| Partie | Ici | Sens |
+|---|---|---|
+| fichier | `C:\…\l01_missing_semicolon.cs` | quel fichier |
+| position | `(1,35)` | ligne 1, colonne 35 : le caractère où le compilateur a remarqué le problème |
+| type | `error` | le programme ne peut pas être compilé ; un `warning` (avertissement) le laisserait s'exécuter |
+| code | `CS1002` | le numéro de l'erreur : cherche-le dans la [liste des messages du compilateur](https://learn.microsoft.com/dotnet/csharp/language-reference/compiler-messages/) |
+| message | `; expected` | ce que le compilateur s'attendait à trouver (ici, un `;`) |
+
+La colonne 35 est juste après la parenthèse fermante, là où devrait se trouver le `;`. Rien ne s'est exécuté : pas même la deuxième ligne. Le chemin complet du fichier dépend de ton dossier, donc la suite du cours n'affiche que le nom du fichier.
+
+Deux autres erreurs que fait chaque débutant. Un `console` en minuscules :
+
+```csharp
+console.WriteLine("Hello, world!");
+```
+
+```text
+l01_lowercase.cs(1,1): error CS0103: The name 'console' does not exist in the current context
+```
+
+Un guillemet fermant manquant :
+
+```csharp
+Console.WriteLine("Hello, world!);
+```
+
+```text
+l01_missing_quote.cs(1,19): error CS1010: Newline in constant
+l01_missing_quote.cs(1,35): error CS1026: ) expected
+l01_missing_quote.cs(1,35): error CS1002: ; expected
+```
+
+Une faute, trois erreurs. Sans le guillemet fermant, la chaîne va jusqu'au bout de la ligne (CS1010, « newline in constant », retour à la ligne dans une constante), et elle avale la `)` et le `;`, qui manquent donc aussi. **Corrige d'abord la première erreur**, puis relance : les suivantes disparaissent souvent avec elle.
+
+## Exécuter un fichier comme un script
+
+Sous Linux et macOS, une application basée sur un fichier peut s'exécuter comme n'importe quelle autre commande. Sa première ligne, qui commence par un dièse et un point d'exclamation, `#!` (un *shebang*), dit au système de l'exécuter avec `dotnet` :
+
+```csharp
+#!/usr/bin/env -S dotnet --
+Console.WriteLine("Hello from a script!");
+```
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+Windows ne lit pas les lignes shebang. `dotnet run l01_shebang.cs` fonctionne quand même : le compilateur ignore la première ligne.
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```text
+$ chmod +x l01_shebang.cs
+$ ./l01_shebang.cs
+Hello from a script!
+```
+
+`chmod +x` rend le fichier exécutable. La CI lance ces deux commandes sous Linux. Le fichier doit utiliser des fins de ligne Linux (LF).
+
+</TabItem>
+<TabItem label="macOS">
+
+```text
+$ chmod +x l01_shebang.cs
+$ ./l01_shebang.cs
+Hello from a script!
+```
+
+`chmod +x` rend le fichier exécutable. La CI lance ces deux commandes sous macOS. Le fichier doit utiliser des fins de ligne Linux (LF).
+
+</TabItem>
+</Tabs>
+
+## Un projet
+
+Un seul fichier est parfait pour apprendre et pour les petits outils. Les programmes plus gros ont beaucoup de fichiers, et un **projet** les regroupe. [`dotnet new console`](https://learn.microsoft.com/dotnet/core/tools/dotnet-new) en crée un :
+
+```text
+> dotnet new console -o HelloApp
+The template "Console App" was created successfully.
+
+Processing post-creation actions...
+Restoring C:\Users\spare\…\HelloApp\HelloApp.csproj:
+  Determining projects to restore...
+  Restored C:\Users\spare\…\HelloApp\HelloApp.csproj (in 66 ms).
+Restore succeeded.
+```
+
+`-o HelloApp` donne le nom du dossier de sortie, et le projet prend ce nom. Le dossier contient deux fichiers, et un dossier `obj` utilisé par la compilation :
+
+```text
+HelloApp/
+├── HelloApp.csproj   ← le fichier projet : comment compiler le programme
+├── Program.cs        ← le code
+└── obj/
+```
+
+```xml
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>
+```
+
+- `OutputType` `Exe` : le projet produit un programme que tu peux exécuter, pas une bibliothèque pour d'autres programmes.
+- `TargetFramework` `net10.0` : le programme s'exécute sur .NET 10.
+- `ImplicitUsings` et `Nullable` activent deux commodités sur lesquelles revient la [leçon 4](../04-methods-arrays-lists/#null--aucune-valeur). Les applications basées sur un fichier les activent aussi.
+
+`Program.cs` contient le même genre de code que `hello.cs` :
+
+```csharp
+// See https://aka.ms/new-console-template for more information
+Console.WriteLine("Hello, World!");
+```
+
+Dans le dossier du projet, `dotnet run` n'a pas besoin de nom de fichier : il trouve le fichier `.csproj`.
+
+```text
+> cd HelloApp
+> dotnet run
+Hello, World!
+```
+
+[`dotnet build`](https://learn.microsoft.com/dotnet/core/tools/dotnet-build) se contente de compiler, et écrit le programme dans `bin/Debug/net10.0/` : `HelloApp.dll`, et sous Windows un `HelloApp.exe` qui le lance.
+
+Quand une application basée sur un fichier grandit, [`dotnet project convert hello.cs`](https://learn.microsoft.com/dotnet/core/sdk/file-based-apps#convert-to-project) la transforme en projet : la commande crée un dossier avec un fichier `.csproj` et une copie du code.
+
+| Tu veux | Application basée sur un fichier | Projet |
+|---|---|---|
+| Créer | n'importe quel éditeur : un fichier `.cs` | `dotnet new console -o Name` |
+| Exécuter | `dotnet run hello.cs` | `dotnet run`, dans le dossier |
+| Seulement compiler | `dotnet build hello.cs` | `dotnet build` |
+| Plusieurs fichiers de code | un seul fichier ; les SDK 10.0.300 et suivants ajoutent [`#:include`](https://learn.microsoft.com/dotnet/core/sdk/file-based-apps#include) | oui |
+| Idéal pour | apprendre, les scripts, les petits outils | les applications, les bibliothèques, les tests |
+
+## Choisir un éditeur
+
+N'importe quel éditeur de texte fonctionne, mais un éditeur de code colore le code, complète les noms pendant que tu tapes, souligne les erreurs avant l'exécution, et te laisse exécuter le programme pas à pas avec un *débogueur* ([leçon 3](../03-conditions-and-loops/#trouver-une-erreur-avec-le-débogueur)). Trois éditeurs sont faits pour C# :
+
+| Éditeur | Fonctionne sous | Prix | Remarques |
+|---|---|---|---|
+| [Visual Studio Code](https://code.visualstudio.com/docs/languages/csharp) avec l'extension [C# Dev Kit](https://learn.microsoft.com/visualstudio/subscriptions/vs-c-sharp-dev-kit) | Windows, Linux, macOS | gratuit ; le C# Dev Kit est gratuit pour les particuliers | léger, le choix le plus courant pour apprendre |
+| [Visual Studio](https://visualstudio.microsoft.com/vs/community/) Community | Windows | gratuit pour les particuliers et les étudiants | un environnement complet et volumineux |
+| [JetBrains Rider](https://www.jetbrains.com/rider/) | Windows, Linux, macOS | gratuit pour un usage non commercial | un environnement complet de JetBrains |
+
+Rider et VS Code sont installés sur l'ordinateur sur lequel ce cours a été écrit. Les licences changent avec le temps : lis les conditions de chaque éditeur quand tu l'installes (*à vérifier*).
+
+## À retenir
+
+- Le SDK .NET contient le compilateur C#, le runtime .NET et la commande `dotnet` ; `dotnet --version` vérifie qu'il est installé.
+- `dotnet run hello.cs` compile et exécute un fichier ; dans le dossier d'un projet, `dotnet run` compile et exécute le projet.
+- Une instruction se termine par `;`, les chaînes se mettent entre guillemets doubles, et C# est sensible à la casse.
+- Une erreur du compilateur donne le fichier, la ligne et la colonne, un code comme `CS1002`, et un message : corrige d'abord la première erreur.
+- `dotnet new console` crée un projet : un fichier `.csproj` qui dit comment compiler, et `Program.cs`.
+
+## Exercices
+
+1. Écris une application basée sur un fichier `chord.cs` qui affiche le nom d'un accord, les six cordes, et les cases à appuyer pour un accord de do majeur (`x 3 2 0 1 0` : `x` veut dire « ne pas jouer cette corde »). Sur une dernière ligne, affiche la somme des trois numéros de case, calculée par le programme.
+
+<details>
+<summary>Solution</summary>
+
+[`exercises/l01_ex_chord.cs`](https://github.com/spareilleux/learn/blob/b19a296d6edc70be634ba147e27fd2d0c66f395f/code/csharp-beginner/exercises/l01_ex_chord.cs) :
+
+```csharp
+// Un accord de do majeur (x32010), dessiné avec un WriteLine par ligne
+Console.WriteLine("C major");
+Console.WriteLine("E A D G B E");
+Console.WriteLine("x 3 2 0 1 0");
+Console.WriteLine("Frets played: " + (3 + 2 + 1));
+```
+
+```text
+C major
+E A D G B E
+x 3 2 0 1 0
+Frets played: 6
+```
+
+`"Frets played: " + (3 + 2 + 1)` calcule d'abord les parenthèses, `6`, puis `+` colle le texte et le nombre. Sans les parenthèses, le résultat serait `Frets played: 321` : de gauche à droite, le texte plus `3` donne le texte `Frets played: 3`, et ainsi de suite. La [leçon 2](../02-variables-and-types/#du-nombre-au-texte) explique pourquoi.
+
+</details>
+
+2. Ce programme contient trois fautes. Exécute-le, corrige ce que signale le compilateur, et relance-le jusqu'à ce qu'il fonctionne. Combien de fois as-tu dû l'exécuter ?
+
+```csharp
+Console.Writeline("Strings of a guitar:");
+Console.WriteLine("E A D G B E")
+Console.WriteLine("That makes " + 6 + " strings);
+```
+
+<details>
+<summary>Solution</summary>
+
+La première exécution signale le `;` manquant ligne 2 et le guillemet manquant ligne 3 :
+
+```text
+l01_ex_broken.cs(2,33): error CS1002: ; expected
+l01_ex_broken.cs(3,39): error CS1010: Newline in constant
+l01_ex_broken.cs(3,50): error CS1026: ) expected
+l01_ex_broken.cs(3,50): error CS1002: ; expected
+```
+
+Elle ne dit rien de `Writeline` ligne 1. Le compilateur travaille par étapes : il vérifie d'abord que le texte a la forme du C# (la *syntaxe*), et seulement si c'est le cas, que les noms existent. Une fois les lignes 2 et 3 corrigées, la deuxième exécution trouve la troisième faute :
+
+```text
+l01_ex_broken_step2.cs(1,9): error CS0117: 'Console' does not contain a definition for 'Writeline'
+```
+
+La méthode s'appelle `WriteLine`, avec un L majuscule. La troisième exécution fonctionne ([`exercises/l01_ex_fixed.cs`](https://github.com/spareilleux/learn/blob/b19a296d6edc70be634ba147e27fd2d0c66f395f/code/csharp-beginner/exercises/l01_ex_fixed.cs)) :
+
+```text
+Strings of a guitar:
+E A D G B E
+That makes 6 strings
+```
+
+</details>
+
+3. Crée un projet avec `dotnet new console -o Tuning`, remplace le code de `Program.cs` par le programme de [Plusieurs instructions](#plusieurs-instructions), et exécute-le. Ensuite, toujours dans le dossier, lance `dotnet build` et trouve le fichier `.dll`. Quel est son nom ?
+
+<details>
+<summary>Solution</summary>
+
+`dotnet run` affiche les mêmes quatre lignes que `dotnet run l01_statements.cs`. `dotnet build` écrit `bin/Debug/net10.0/Tuning.dll` : le programme porte le nom du projet, pas celui de `Program.cs`. `dotnet bin/Debug/net10.0/Tuning.dll` l'exécute sans recompiler.
+
+</details>
+
+## Sources
+
+- [Installer .NET sous Windows](https://learn.microsoft.com/dotnet/core/install/windows), [sous Linux](https://learn.microsoft.com/dotnet/core/install/linux-ubuntu-install), [sous macOS](https://learn.microsoft.com/dotnet/core/install/macos)
+- [Applications basées sur des fichiers](https://learn.microsoft.com/dotnet/core/sdk/file-based-apps), [`dotnet run`](https://learn.microsoft.com/dotnet/core/tools/dotnet-run), [`dotnet new`](https://learn.microsoft.com/dotnet/core/tools/dotnet-new)
+- [Instructions de niveau supérieur](https://learn.microsoft.com/dotnet/csharp/fundamentals/program-structure/top-level-statements), [Structure générale d'un programme C#](https://learn.microsoft.com/dotnet/csharp/fundamentals/program-structure/)
+- [Messages du compilateur C#](https://learn.microsoft.com/dotnet/csharp/language-reference/compiler-messages/)
+- [Nouveautés de C# 14](https://learn.microsoft.com/dotnet/csharp/whats-new/csharp-14)
