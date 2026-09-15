@@ -47,7 +47,7 @@ sidebar:
 
 **`dotnet run file.cs` caches the build.** As in the TypeScript course, a second run of an unchanged file doesn't call the compiler, so `check.sh` runs `dotnet clean` then `dotnet run --no-cache` on each C# comparison. `compare/global.json` pins the SDK to 10.0.100 with `latestFeature`, since the machine also has a .NET 11 preview.
 
-**The CI can't be pushed yet.** The GitHub token used for pushing has no `workflow` scope, and GitHub refuses a push that adds a file under `.github/workflows/`. The code and the lessons are pushed; [`python-examples.yml`](https://github.com/spareilleux/learn/blob/main/.github/workflows/python-examples.yml) waits for `gh auth refresh -s workflow`. Until it runs, the Linux and macOS parts of lesson 1 are *to verify*.
+**The CI can't be pushed yet.** The GitHub token used for pushing has no `workflow` scope, and GitHub refuses a push that adds a file under `.github/workflows/`. The code and the lessons are pushed; `.github/workflows/python-examples.yml` waits for `gh auth refresh -s workflow`. Until it runs, the Linux and macOS parts of lesson 1 are *to verify*.
 
 ## 2026-09-15 — What the lessons found in GuitarAlchemist/ga (cc42d21)
 

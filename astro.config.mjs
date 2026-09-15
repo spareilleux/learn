@@ -94,6 +94,12 @@ export default defineConfig({
 									collapsed: true,
 									items: [{ autogenerate: { directory: 'python-for-csharp-java' } }],
 								},
+								{
+									label: 'React (Vite) for C#/Java developers',
+									translations: { fr: 'React (Vite) pour développeurs C#/Java', es: 'React (Vite) para desarrolladores C#/Java' },
+									collapsed: true,
+									items: [{ autogenerate: { directory: 'react-vite' } }],
+								},
 							],
 						},
 						{
