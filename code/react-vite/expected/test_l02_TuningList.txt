@@ -1,0 +1,46 @@
+✓ renders one card per tuning
+  <TuningList>
+  <div>
+    <section>
+      <article
+        class="tuning-card"
+      >
+        <h2>
+          Standard
+        </h2>
+        <p>
+          E A D G B E
+          , capo 
+          0
+        </p>
+      </article>
+      <article
+        class="tuning-card"
+      >
+        <h2>
+          Drop D
+        </h2>
+        <p>
+          D A D G B E
+          , capo 
+          0
+        </p>
+      </article>
+    </section>
+  </div>
+✓ without a key, the list renders and React warns
+  console.error: Each child in a list should have a unique "key" prop.
+  
+  Check the render method of `TuningListNoKey`. See https://react.dev/link/warning-keys for more information.
+  <TuningListNoKey>
+  <div>
+    <ul>
+      <li>
+        Standard
+      </li>
+      <li>
+        Drop D
+      </li>
+    </ul>
+  </div>
+exit 0

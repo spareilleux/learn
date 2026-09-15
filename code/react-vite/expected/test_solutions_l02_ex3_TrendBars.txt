@@ -1,0 +1,9 @@
+✓ key={i}: every element gets a new score
+  before: [ '10:00', '10:05', '10:10' ]
+  after:  [ '10:05', '10:10', '10:15' ]
+  elements of the first render now show: [ '10:05', '10:10', '10:15' ]
+✓ key={score.at}: the element follows its score
+  before: [ '10:00', '10:05', '10:10' ]
+  after:  [ '10:05', '10:10', '10:15' ]
+  elements of the first render now show: [ 'removed', '10:05', '10:10' ]
+exit 0

@@ -1,0 +1,37 @@
+errors/l02_props.tsx:7:8 - error TS2741: Property 'name' is missing in type '{ notes: string[]; }' but required in type 'TuningCardProps'.
+
+7       <TuningCard notes={['E', 'A', 'D', 'G', 'B', 'E']} />
+         ~~~~~~~~~~
+
+  src/l02/TuningCard.tsx:5:3 - 'name' is declared here.
+    5   name: string;
+        ~~~~
+
+errors/l02_props.tsx:8:72 - error TS2322: Type 'string' is not assignable to type 'number'.
+
+8       <TuningCard name="Drop D" notes={['D', 'A', 'D', 'G', 'B', 'E']} capo="2" />
+                                                                         ~~~~
+
+  src/l02/TuningCard.tsx:7:3 - The expected type comes from property 'capo' which is declared here on type 'IntrinsicAttributes & TuningCardProps'
+    7   capo?: number;
+        ~~~~
+
+errors/l02_props.tsx:9:33 - error TS2322: Type 'string' is not assignable to type 'readonly string[]'.
+
+9       <TuningCard name="Open G" notes="D G D G B D" />
+                                  ~~~~~
+
+  src/l02/TuningCard.tsx:6:3 - The expected type comes from property 'notes' which is declared here on type 'IntrinsicAttributes & TuningCardProps'
+    6   notes: readonly string[];
+        ~~~~~
+
+errors/l02_props.tsx:10:72 - error TS2322: Type '{ name: string; notes: string[]; strings: number; }' is not assignable to type 'IntrinsicAttributes & TuningCardProps'.
+  Property 'strings' does not exist on type 'IntrinsicAttributes & TuningCardProps'.
+
+10       <TuningCard name="DADGAD" notes={['D', 'A', 'D', 'G', 'A', 'D']} strings={6} />
+                                                                          ~~~~~~~
+
+
+Found 4 errors in the same file, starting at: errors/l02_props.tsx:7
+
+exit 1

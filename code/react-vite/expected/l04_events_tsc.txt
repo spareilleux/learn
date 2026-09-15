@@ -1,0 +1,37 @@
+errors/l04_events.tsx:13:41 - error TS2322: Type 'Dispatch<SetStateAction<number>>' is not assignable to type 'ChangeEventHandler<HTMLInputElement, HTMLInputElement>'.
+  Types of parameters 'value' and 'event' are incompatible.
+    Type 'ChangeEvent<HTMLInputElement, HTMLInputElement>' is not assignable to type 'SetStateAction<number>'.
+
+13       <input type="number" value={capo} onChange={setCapo} />
+                                           ~~~~~~~~
+
+  node_modules/@types/react/index.d.ts:3411:9 - The expected type comes from property 'onChange' which is declared here on type 'DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>'
+    3411         onChange?: ChangeEventHandler<T, HTMLInputElement> | undefined;
+                 ~~~~~~~~
+
+errors/l04_events.tsx:14:28 - error TS2322: Type '(event: ChangeEvent<HTMLInputElement, Element>) => void' is not assignable to type 'ChangeEventHandler<HTMLSelectElement, HTMLSelectElement>'.
+  Types of parameters 'event' and 'event' are incompatible.
+    Type 'ChangeEvent<HTMLSelectElement, HTMLSelectElement>' is not assignable to type 'ChangeEvent<HTMLInputElement, Element>'.
+      Type 'HTMLSelectElement' is missing the following properties from type 'HTMLInputElement': accept, align, alt, capture, and 38 more.
+
+14       <select value={capo} onChange={handleInput}>
+                              ~~~~~~~~
+
+  node_modules/@types/react/index.d.ts:3578:9 - The expected type comes from property 'onChange' which is declared here on type 'DetailedHTMLProps<SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement>'
+    3578         onChange?: ChangeEventHandler<T, HTMLSelectElement> | undefined;
+                 ~~~~~~~~
+
+errors/l04_events.tsx:18:57 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'SetStateAction<number>'.
+
+18       <button type="button" onClick={(event) => setCapo(event.currentTarget.value)}>
+                                                           ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+errors/l04_events.tsx:21:74 - error TS2339: Property 'value' does not exist on type 'EventTarget'.
+
+21       <button type="button" onClick={(event) => console.log(event.target.value)}>
+                                                                            ~~~~~
+
+
+Found 4 errors in the same file, starting at: errors/l04_events.tsx:13
+
+exit 1

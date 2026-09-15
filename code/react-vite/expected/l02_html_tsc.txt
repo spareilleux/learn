@@ -1,0 +1,32 @@
+errors/l02_html.tsx:2:10 - error TS6133: 'tuningName' is declared but its value is never read.
+
+2 function tuningName({ name }: { name: string }) {
+           ~~~~~~~~~~
+
+errors/l02_html.tsx:3:14 - error TS2322: Type '{ class: string; children: string; }' is not assignable to type 'DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>'.
+  Property 'class' does not exist on type 'DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>'. Did you mean 'className'?
+
+3   return <h2 class="tuning-name">{name}</h2>;
+               ~~~~~
+
+errors/l02_html.tsx:8:12 - error TS2322: Type '{ for: string; children: Element[]; }' is not assignable to type 'DetailedHTMLProps<LabelHTMLAttributes<HTMLLabelElement>, HTMLLabelElement>'.
+  Property 'for' does not exist on type 'DetailedHTMLProps<LabelHTMLAttributes<HTMLLabelElement>, HTMLLabelElement>'. Did you mean 'htmlFor'?
+
+8     <label for="capo">
+             ~~~
+
+errors/l02_html.tsx:9:7 - error TS2339: Property 'tuningName' does not exist on type 'JSX.IntrinsicElements'.
+
+9       <tuningName name="Standard" />
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+errors/l02_html.tsx:10:55 - error TS2322: Type '{ id: string; type: "number"; min: number; max: string; onchange: () => void; }' is not assignable to type 'DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>'.
+  Property 'onchange' does not exist on type 'DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>'. Did you mean 'onChange'?
+
+10       <input id="capo" type="number" min={0} max="12" onchange={() => {}} />
+                                                         ~~~~~~~~
+
+
+Found 5 errors in the same file, starting at: errors/l02_html.tsx:2
+
+exit 1

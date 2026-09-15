@@ -1,0 +1,17 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+// A component is a function that takes its props and returns what to render
+export function TuningCard({ name, notes, capo = 0, children }) {
+	return /* @__PURE__ */ _jsxs("article", {
+		className: "tuning-card",
+		children: [
+			/* @__PURE__ */ _jsx("h2", { children: name }),
+			/* @__PURE__ */ _jsxs("p", { children: [
+				notes.join(" "),
+				", capo ",
+				capo
+			] }),
+			children
+		]
+	});
+}
+exit 0

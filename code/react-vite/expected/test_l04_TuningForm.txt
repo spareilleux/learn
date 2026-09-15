@@ -1,0 +1,12 @@
+✓ parseNotes
+  "E A D G B E"         { ok: true, notes: [ 'E', 'A', 'D', 'G', 'B', 'E' ] }
+  "d a d g a d"         { ok: true, notes: [ 'D', 'A', 'D', 'G', 'A', 'D' ] }
+  "Eb Ab Db Gb Bb Eb"   { ok: true, notes: [ 'D#', 'G#', 'C#', 'F#', 'A#', 'D#' ] }
+  "E A D G B"           { ok: false, error: 'A guitar tuning has 6 notes, not 5.' }
+  "E A D G H E"         { ok: false, error: '"H" is not a note.' }
+✓ the form validates as you type, and on submit
+  typed "D A D G": [ 'A guitar tuning has 6 notes, not 4.' ]
+  typed " A D": []
+  submitted without a name: [ 'Give the tuning a name.' ] onAdd calls: 0
+  submitted: [] [[{"name":"DADGAD","notes":["D","A","D","G","A","D"],"capo":2}]]
+exit 0

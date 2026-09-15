@@ -1,0 +1,13 @@
+// The course's Vite configuration: React with Fast Refresh, and Vitest in a simulated DOM
+import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vitest/config';
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react()],
+  test: {
+    environment: 'jsdom',
+    include: ['src/**/*.test.tsx'],
+    setupFiles: ['src/testing/setup.ts'],
+  },
+});

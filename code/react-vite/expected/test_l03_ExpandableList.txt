@@ -1,0 +1,7 @@
+✓ by index: after filtering, another row is expanded
+  expanded policy-2: [ 'policy-1', 'policy-2: warning', 'policy-3' ]
+  filtered out policy-1: [ 'policy-2', 'policy-3: error' ]
+✓ by id: the expanded row stays expanded
+  expanded policy-2: [ 'policy-1', 'policy-2: warning', 'policy-3' ]
+  filtered out policy-1: [ 'policy-2: warning', 'policy-3' ]
+exit 0

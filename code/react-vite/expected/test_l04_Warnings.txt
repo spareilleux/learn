@@ -1,0 +1,7 @@
+✓ value without onChange: typing changes nothing
+  console.error: You provided a `value` prop to a form field without an `onChange` handler. This will render a read-only field. If the field should be mutable use `defaultValue`. Otherwise, set either `onChange` or `readOnly`.
+  value after typing 5: 2
+✓ undefined, then a number: React warns on the first keystroke
+  console.error: A component is changing an uncontrolled input to be controlled. This is likely caused by the value changing from undefined to a defined value, which should not happen. Decide between using a controlled or uncontrolled input element for the lifetime of the component. More info: https://react.dev/link/controlled-components
+  value after typing 3: 3
+exit 0

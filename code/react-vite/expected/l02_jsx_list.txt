@@ -1,0 +1,10 @@
+import { TuningCard } from "./TuningCard.tsx";
+import { jsx as _jsx } from "react/jsx-runtime";
+// One card per tuning: the key tells React which card is which from one render to the next
+export function TuningList({ tunings }) {
+	return /* @__PURE__ */ _jsx("section", { children: tunings.map((tuning) => /* @__PURE__ */ _jsx(TuningCard, {
+		name: tuning.name,
+		notes: tuning.notes
+	}, tuning.id)) });
+}
+exit 0

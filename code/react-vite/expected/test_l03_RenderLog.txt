@@ -1,0 +1,13 @@
+✓ a state change renders the component and its children again
+  ChordPicker renders with G
+  ChordName renders G
+  ChordName renders D
+  --- click
+  ChordPicker renders with C
+  ChordName renders C
+  ChordName renders D
+✓ without StrictMode, the impure component renders once
+  Played so far: G [ 'G' ]
+✓ in StrictMode, React renders it twice in development, and the output shows the impurity
+  Played so far: G G [ 'G', 'G' ]
+exit 0

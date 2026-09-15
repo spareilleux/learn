@@ -1,0 +1,25 @@
+errors/l02_children.tsx:5:30 - error TS2322: Type 'Tuning' is not assignable to type 'ReactNode'.
+
+5   return <p>Favorite tuning: {standard}</p>;
+                               ~~~~~~~~~~
+
+errors/l02_children.tsx:24:6 - error TS2786: 'Nothing' cannot be used as a JSX component.
+  Its type '() => void' is not a valid JSX element type.
+    Type '() => void' is not assignable to type '(props: any) => Promise<ReactNode> | ReactNode'.
+      Type 'void' is not assignable to type 'Promise<ReactNode> | ReactNode'.
+
+24     <Nothing />
+        ~~~~~~~
+
+errors/l02_children.tsx:25:6 - error TS2786: 'Wrong' cannot be used as a JSX component.
+  Its type '() => { name: string; }' is not a valid JSX element type.
+    Type '() => { name: string; }' is not assignable to type '(props: any) => Promise<ReactNode> | ReactNode'.
+      Type '{ name: string; }' is not assignable to type 'Promise<ReactNode> | ReactNode'.
+
+25     <Wrong />
+        ~~~~~
+
+
+Found 3 errors in the same file, starting at: errors/l02_children.tsx:5
+
+exit 1
