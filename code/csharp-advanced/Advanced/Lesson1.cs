@@ -70,6 +70,33 @@ public static class Lesson1
         Line($"PitchClass.ItemsSpan: {PitchClass.ItemsSpan.Length} items, {Allocated(() => _ = PitchClass.ItemsSpan.Length)} bytes");
         Line($"PitchClassSetId.ItemsSpan: {PitchClassSetId.ItemsSpan.Length} items, {Allocated(() => _ = PitchClassSetId.ItemsSpan.Length)} bytes");
         Line($"PitchClassSetId.Items is {PitchClassSetId.Items.GetType().Name}");
+
+        Title("Exercise solutions");
+        Line($"1. (bool, int, bool) {Unsafe.SizeOf<(bool, int, bool)>()} bytes, SequentialFlags {Unsafe.SizeOf<SequentialFlags>()}, AutoFlags {Unsafe.SizeOf<AutoFlags>()}");
+        Line($"3. cached ItemsSpan: {CachedIds.ItemsSpan.Length} items, {Allocated(() => _ = CachedIds.ItemsSpan.Length)} bytes, same ids {CachedIds.ItemsSpan.SequenceEqual(PitchClassSetId.ItemsSpan)}");
+    }
+
+    struct SequentialFlags(bool muted, int fret, bool barre)
+    {
+        public bool Muted = muted;
+        public int Fret = fret;
+        public bool Barre = barre;
+    }
+
+    [StructLayout(LayoutKind.Auto)]
+    struct AutoFlags(bool muted, int fret, bool barre)
+    {
+        public bool Muted = muted;
+        public int Fret = fret;
+        public bool Barre = barre;
+    }
+
+    // Exercise 3: PitchClassSetId.ItemsSpan without a copy per call
+    static class CachedIds
+    {
+        private static readonly PitchClassSetId[] Items = [.. PitchClassSetId.Items];
+
+        public static ReadOnlySpan<PitchClassSetId> ItemsSpan => Items;
     }
 
     // Also run alone by check.sh with DOTNET_TieredCompilation=0, where every method is compiled fully optimized at once

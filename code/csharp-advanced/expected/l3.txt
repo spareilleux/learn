@@ -46,4 +46,10 @@ t=6 min: Value 2
 
 == GA LazyWithExpiration: one sleeping thread-pool thread per expiring value
 sum of the 64 values: 2016
+
+== Exercise solutions
+1. ThreeDelaysAsync: 1 awaiter field (TaskAwaiter <>u__1), result 3
+2. TryFixed.OfAsync(...) on the ui thread, .Wait(10 s): completed True
+   TryFixed.OfAsync(cancelled task): TaskCanceledException, e.CancellationToken == token True
+3. without [EnumeratorCancellation]: frets 0 1 2 3 4 5 6 7 8 9 10 11, then completed
 exit 0

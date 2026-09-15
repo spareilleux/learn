@@ -102,6 +102,107 @@ namespace Snippets
 			}
 		}
 
+		[StructLayout(LayoutKind.Auto)]
+		[CompilerGenerated]
+		private struct <ThreeDelaysAsync>d__1 : IAsyncStateMachine
+		{
+			public int <>1__state;
+
+			public AsyncTaskMethodBuilder<int> <>t__builder;
+
+			private TaskAwaiter <>u__1;
+
+			private void MoveNext()
+			{
+				int num = <>1__state;
+				int result;
+				try
+				{
+					TaskAwaiter awaiter;
+					switch (num)
+					{
+					default:
+						awaiter = Task.Delay(1).GetAwaiter();
+						if (!awaiter.IsCompleted)
+						{
+							num = (<>1__state = 0);
+							<>u__1 = awaiter;
+							<>t__builder.AwaitUnsafeOnCompleted(ref awaiter, ref this);
+							return;
+						}
+						goto IL_006d;
+					case 0:
+						awaiter = <>u__1;
+						<>u__1 = default(TaskAwaiter);
+						num = (<>1__state = -1);
+						goto IL_006d;
+					case 1:
+						awaiter = <>u__1;
+						<>u__1 = default(TaskAwaiter);
+						num = (<>1__state = -1);
+						goto IL_00c8;
+					case 2:
+						{
+							awaiter = <>u__1;
+							<>u__1 = default(TaskAwaiter);
+							num = (<>1__state = -1);
+							break;
+						}
+						IL_00c8:
+						awaiter.GetResult();
+						awaiter = Task.Delay(1).GetAwaiter();
+						if (!awaiter.IsCompleted)
+						{
+							num = (<>1__state = 2);
+							<>u__1 = awaiter;
+							<>t__builder.AwaitUnsafeOnCompleted(ref awaiter, ref this);
+							return;
+						}
+						break;
+						IL_006d:
+						awaiter.GetResult();
+						awaiter = Task.Delay(1).GetAwaiter();
+						if (!awaiter.IsCompleted)
+						{
+							num = (<>1__state = 1);
+							<>u__1 = awaiter;
+							<>t__builder.AwaitUnsafeOnCompleted(ref awaiter, ref this);
+							return;
+						}
+						goto IL_00c8;
+					}
+					awaiter.GetResult();
+					result = 3;
+				}
+				catch (Exception exception)
+				{
+					<>1__state = -2;
+					<>t__builder.SetException(exception);
+					return;
+				}
+				<>1__state = -2;
+				<>t__builder.SetResult(result);
+			}
+
+			void IAsyncStateMachine.MoveNext()
+			{
+				//ILSpy generated this explicit interface implementation from .override directive in MoveNext
+				this.MoveNext();
+			}
+
+			[DebuggerHidden]
+			private void SetStateMachine([Nullable(1)] IAsyncStateMachine stateMachine)
+			{
+				<>t__builder.SetStateMachine(stateMachine);
+			}
+
+			void IAsyncStateMachine.SetStateMachine([Nullable(1)] IAsyncStateMachine stateMachine)
+			{
+				//ILSpy generated this explicit interface implementation from .override directive in SetStateMachine
+				this.SetStateMachine(stateMachine);
+			}
+		}
+
 		[AsyncStateMachine(typeof(<AddLaterAsync>d__0))]
 		public static Task<int> AddLaterAsync(int left, int right)
 		{
@@ -109,6 +210,16 @@ namespace Snippets
 			stateMachine.<>t__builder = AsyncTaskMethodBuilder<int>.Create();
 			stateMachine.left = left;
 			stateMachine.right = right;
+			stateMachine.<>1__state = -1;
+			stateMachine.<>t__builder.Start(ref stateMachine);
+			return stateMachine.<>t__builder.Task;
+		}
+
+		[AsyncStateMachine(typeof(<ThreeDelaysAsync>d__1))]
+		public static Task<int> ThreeDelaysAsync()
+		{
+			<ThreeDelaysAsync>d__1 stateMachine = default(<ThreeDelaysAsync>d__1);
+			stateMachine.<>t__builder = AsyncTaskMethodBuilder<int>.Create();
 			stateMachine.<>1__state = -1;
 			stateMachine.<>t__builder.Start(ref stateMachine);
 			return stateMachine.<>t__builder.Task;

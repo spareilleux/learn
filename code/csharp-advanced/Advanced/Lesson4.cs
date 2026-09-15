@@ -21,7 +21,26 @@ public static class Lesson4
         Frozen();
         PitchClassSubtraction();
         Vectors();
+        Exercises();
     }
+
+    static void Exercises()
+    {
+        Title("Exercise solutions");
+        string[] naturals = ["C", "D", "E", "F", "G", "A", "B"];
+        Line($"1. the 7 natural notes: {naturals.ToFrozenDictionary(n => n, n => Array.IndexOf(naturals, n)).GetType().Name}");
+        var agree = PitchClass.Items.All(l => PitchClass.Items.All(r => SubtractWithTable(l, r) == l - r));
+        Line($"2. table of 144 PitchClass: agrees with GA {agree}, {Allocated(() => _ = SubtractWithTable(PitchClass.FromValue(4), PitchClass.FromValue(7)))} bytes");
+        var chart = string.Concat(Enumerable.Repeat("C Am F G | ", 100)) + "F#m7b5";
+        Line($"3. IndexOfAny('#', 'b') {chart.AsSpan().IndexOfAny('#', 'b')}, IndexOfAny(SearchValues) {chart.AsSpan().IndexOfAny(Accidentals)}");
+    }
+
+    // Exercise 2: every difference computed once, in a flat array indexed by left * 12 + right
+    static readonly PitchClass[] DifferenceTable =
+        [.. Enumerable.Range(0, 144).Select(i => PitchClass.FromValue((i / 12 - i % 12 + 12) % 12))];
+
+    public static PitchClass SubtractWithTable(PitchClass left, PitchClass right) =>
+        DifferenceTable[left.Value * 12 + right.Value];
 
     static void Jit()
     {

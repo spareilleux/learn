@@ -16,6 +16,24 @@ public static class Lesson2
         Reachability();
         MemoryInfo();
         Budget();
+        Exercises();
+    }
+
+    static void Exercises()
+    {
+        Title("Exercise solutions");
+        Line($"1. new char[42,487] generation {GC.GetGeneration(new char[42_487])}, new char[42,488] generation {GC.GetGeneration(new char[42_488])}");
+        var started = GC.TryStartNoGCRegion(1_000_000);
+        var gen0 = GC.CollectionCount(0);
+        var ring = new byte[16][];
+        for (var i = 0; i < 1_000; i++)
+        {
+            ring[i & 15] = new byte[100];
+        }
+        Line($"2. TryStartNoGCRegion(1 MB) {started}, LatencyMode {GCSettings.LatencyMode}, gen0 collections for 1,000 arrays {GC.CollectionCount(0) - gen0}");
+        GC.EndNoGCRegion();
+        Line($"   after EndNoGCRegion: LatencyMode {GCSettings.LatencyMode}, {ring.Length} arrays kept");
+        Line($"3. GC.GetGeneration(\"C major\") {GC.GetGeneration("C major")}, of new string('C', 7) {GC.GetGeneration(new string('C', 7))}, of typeof(PitchClass) {GC.GetGeneration(typeof(PitchClass))}");
     }
 
     // Also run alone by check.sh with DOTNET_gcServer=1, then with DOTNET_gcConcurrent=0

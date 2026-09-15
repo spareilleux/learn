@@ -39,6 +39,20 @@ public class PitchClassBenchmarks
         }
         return sum;
     }
+
+    [Benchmark]
+    public int LookupTable()
+    {
+        var sum = 0;
+        foreach (var left in All)
+        {
+            foreach (var right in All)
+            {
+                sum += Lesson4.SubtractWithTable(left, right).Value;
+            }
+        }
+        return sum;
+    }
 }
 
 // Lesson 4: Dictionary against FrozenDictionary on chord suffixes, two of which are missing
@@ -107,4 +121,7 @@ public class SearchBenchmarks
 
     [Benchmark]
     public int ChartSearchValues() => Chart.AsSpan().IndexOfAny(Accidentals);
+
+    [Benchmark]
+    public int ChartIndexOfAnyTwoChars() => Chart.AsSpan().IndexOfAny('#', 'b');
 }

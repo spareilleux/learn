@@ -40,4 +40,10 @@ Generation 2, Compacted True, Concurrent False
 
 == Allocation budget: many short-lived objects, few collections
 allocated 32,000,152 bytes for 1,000,000 arrays of 2 ints, 16 still referenced
+
+== Exercise solutions
+1. new char[42,487] generation 0, new char[42,488] generation 2
+2. TryStartNoGCRegion(1 MB) True, LatencyMode NoGCRegion, gen0 collections for 1,000 arrays 0
+   after EndNoGCRegion: LatencyMode Interactive, 16 arrays kept
+3. GC.GetGeneration("C major") 2147483647, of new string('C', 7) 0, of typeof(PitchClass) 2147483647
 exit 0

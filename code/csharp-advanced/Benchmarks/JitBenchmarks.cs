@@ -7,6 +7,7 @@ namespace Benchmarks;
 
 // Lesson 4: the same code under four JIT settings, set through environment variables
 [Config(typeof(JitConfig))]
+[MemoryDiagnoser]
 public class JitBenchmarks
 {
     private sealed class JitConfig : ManualConfig

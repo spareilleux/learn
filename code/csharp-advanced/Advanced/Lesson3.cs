@@ -19,6 +19,50 @@ public static class Lesson3
         Cancellation();
         Streams();
         Expiration();
+        Exercises();
+    }
+
+    static void Exercises()
+    {
+        Title("Exercise solutions");
+        var three = typeof(AsyncMachine).GetMethod(nameof(AsyncMachine.ThreeDelaysAsync))!.GetCustomAttribute<AsyncStateMachineAttribute>()!.StateMachineType;
+        var awaiters = three.GetFields(BindingFlags.Instance | BindingFlags.NonPublic).Where(f => f.Name.StartsWith("<>u__")).ToList();
+        Line($"1. ThreeDelaysAsync: {awaiters.Count} awaiter field ({string.Join(", ", awaiters.Select(f => $"{TypeName(f.FieldType)} {f.Name}"))}), result {AsyncMachine.ThreeDelaysAsync().Result}");
+
+        using var ui = new SingleThreadContext("ui");
+        ui.Run(() =>
+        {
+            var fixedTry = TryFixed.OfAsync(() => DelayThenAdd(captureContext: false));
+            Line($"2. TryFixed.OfAsync(...) on the ui thread, .Wait(10 s): completed {fixedTry.Wait(TimeSpan.FromSeconds(10))}");
+            return Task.CompletedTask;
+        });
+        var token = new CancellationToken(canceled: true);
+        Line($"   TryFixed.OfAsync(cancelled task): {Outcome(() => TryFixed.OfAsync(() => Task.FromCanceled<int>(token)), token)}");
+
+        var streamed = Run(async () =>
+        {
+            using var cts = new CancellationTokenSource();
+            var seen = new List<int>();
+            await foreach (var fret in FretsWithoutAttribute().WithCancellation(cts.Token))
+            {
+                seen.Add(fret);
+                if (seen.Count == 3) cts.Cancel();
+            }
+            return $"frets {string.Join(" ", seen)}, then completed";
+        });
+        Line($"3. without [EnumeratorCancellation]: {streamed}");
+    }
+
+    // Exercise 3: the warning CS8425 is the point of the exercise
+#pragma warning disable CS8425
+    static async IAsyncEnumerable<int> FretsWithoutAttribute(CancellationToken token = default)
+#pragma warning restore CS8425
+    {
+        for (var fret = 0; fret < 12; fret++)
+        {
+            await Task.Delay(1, token);
+            yield return fret;
+        }
     }
 
     static void StateMachine()
@@ -211,6 +255,23 @@ public static class Lesson3
     }
 
     static T Run<T>(Func<Task<T>> start) => start().GetAwaiter().GetResult();
+}
+
+// Exercise 2: GA's Try.OfAsync, with cancellation left to propagate and no captured context
+public static class TryFixed
+{
+    public static async Task<Try<T>> OfAsync<T>(Func<Task<T>> operation)
+    {
+        try
+        {
+            var result = await operation().ConfigureAwait(false);
+            return Try<T>.Success(result);
+        }
+        catch (Exception ex) when (ex is not OperationCanceledException)
+        {
+            return Try<T>.Failure(ex);
+        }
+    }
 }
 
 // A value computed again once it is older than the expiration, read from an injectable clock

@@ -10,4 +10,13 @@ public static class AsyncMachine
         await Task.Delay(1);
         return sum;
     }
+
+    // Exercise 1 of lesson 3
+    public static async Task<int> ThreeDelaysAsync()
+    {
+        await Task.Delay(1);
+        await Task.Delay(1);
+        await Task.Delay(1);
+        return 3;
+    }
 }

@@ -26,4 +26,9 @@ small integers: bit-identical to the scalar loop: True
 random doubles: scalar 3.010745, SimdOps 3.010745, TensorPrimitives 3.010745; equal to 1e-9: True
 random doubles: bit-identical to the scalar loop: (depends on the vector width)
 SimdOps.Dot allocates nothing itself: 0 bytes
+
+== Exercise solutions
+1. the 7 natural notes: OrdinalStringFrozenDictionary_LeftJustifiedSingleChar`1
+2. table of 144 PitchClass: agrees with GA True, 0 bytes
+3. IndexOfAny('#', 'b') 1101, IndexOfAny(SearchValues) 1101
 exit 0

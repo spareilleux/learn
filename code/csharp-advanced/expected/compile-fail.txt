@@ -1,5 +1,7 @@
 == l1_in_assign.cs
 l1_in_assign.cs(9,53): error CS8332: Cannot assign to a member of variable 'counter' or use it as the right hand side of a ref assignment because it is a readonly variable
+== l1_readonly_member.cs
+l1_readonly_member.cs(6,41): error CS1604: Cannot assign to 'Value' because it is read-only
 == l1_ref_struct_field.cs
 l1_ref_struct_field.cs(4,13): error CS8345: Field or auto-implemented property cannot be of type 'Span<int>' unless it is an instance member of a ref struct.
 == l1_ref_to_local.cs

@@ -189,6 +189,206 @@
 
 	} // end of class <AddLaterAsync>d__0
 
+	.class nested private auto ansi sealed beforefieldinit '<ThreeDelaysAsync>d__1'
+		extends [System.Runtime]System.ValueType
+		implements [System.Runtime]System.Runtime.CompilerServices.IAsyncStateMachine
+	{
+		.custom instance void [System.Runtime]System.Runtime.CompilerServices.CompilerGeneratedAttribute::.ctor() = (
+			01 00 00 00
+		)
+		// Fields
+		.field public int32 '<>1__state'
+		.field public valuetype [System.Runtime]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<int32> '<>t__builder'
+		.field private valuetype [System.Runtime]System.Runtime.CompilerServices.TaskAwaiter '<>u__1'
+
+		// Methods
+		.method private final hidebysig newslot virtual 
+			instance void MoveNext () cil managed 
+		{
+			.override method instance void [System.Runtime]System.Runtime.CompilerServices.IAsyncStateMachine::MoveNext()
+			// Header size: 12
+			// Code size: 343 (0x157)
+			.maxstack 3
+			.locals init (
+				[0] int32,
+				[1] int32,
+				[2] valuetype [System.Runtime]System.Runtime.CompilerServices.TaskAwaiter,
+				[3] class [System.Runtime]System.Exception
+			)
+
+			IL_0000: ldarg.0
+			IL_0001: ldfld int32 Snippets.AsyncMachine/'<ThreeDelaysAsync>d__1'::'<>1__state'
+			IL_0006: stloc.0
+			.try
+			{
+				IL_0007: ldloc.0
+				IL_0008: switch (IL_0051, IL_00ac, IL_0104)
+
+				IL_0019: ldc.i4.1
+				IL_001a: call class [System.Runtime]System.Threading.Tasks.Task [System.Runtime]System.Threading.Tasks.Task::Delay(int32)
+				IL_001f: callvirt instance valuetype [System.Runtime]System.Runtime.CompilerServices.TaskAwaiter [System.Runtime]System.Threading.Tasks.Task::GetAwaiter()
+				IL_0024: stloc.2
+				IL_0025: ldloca.s 2
+				IL_0027: call instance bool [System.Runtime]System.Runtime.CompilerServices.TaskAwaiter::get_IsCompleted()
+				IL_002c: brtrue.s IL_006d
+
+				IL_002e: ldarg.0
+				IL_002f: ldc.i4.0
+				IL_0030: dup
+				IL_0031: stloc.0
+				IL_0032: stfld int32 Snippets.AsyncMachine/'<ThreeDelaysAsync>d__1'::'<>1__state'
+				IL_0037: ldarg.0
+				IL_0038: ldloc.2
+				IL_0039: stfld valuetype [System.Runtime]System.Runtime.CompilerServices.TaskAwaiter Snippets.AsyncMachine/'<ThreeDelaysAsync>d__1'::'<>u__1'
+				IL_003e: ldarg.0
+				IL_003f: ldflda valuetype [System.Runtime]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<int32> Snippets.AsyncMachine/'<ThreeDelaysAsync>d__1'::'<>t__builder'
+				IL_0044: ldloca.s 2
+				IL_0046: ldarg.0
+				IL_0047: call instance void valuetype [System.Runtime]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<int32>::AwaitUnsafeOnCompleted<valuetype [System.Runtime]System.Runtime.CompilerServices.TaskAwaiter, valuetype Snippets.AsyncMachine/'<ThreeDelaysAsync>d__1'>(!!0&, !!1&)
+				IL_004c: leave IL_0156
+
+				IL_0051: ldarg.0
+				IL_0052: ldfld valuetype [System.Runtime]System.Runtime.CompilerServices.TaskAwaiter Snippets.AsyncMachine/'<ThreeDelaysAsync>d__1'::'<>u__1'
+				IL_0057: stloc.2
+				IL_0058: ldarg.0
+				IL_0059: ldflda valuetype [System.Runtime]System.Runtime.CompilerServices.TaskAwaiter Snippets.AsyncMachine/'<ThreeDelaysAsync>d__1'::'<>u__1'
+				IL_005e: initobj [System.Runtime]System.Runtime.CompilerServices.TaskAwaiter
+				IL_0064: ldarg.0
+				IL_0065: ldc.i4.m1
+				IL_0066: dup
+				IL_0067: stloc.0
+				IL_0068: stfld int32 Snippets.AsyncMachine/'<ThreeDelaysAsync>d__1'::'<>1__state'
+
+				IL_006d: ldloca.s 2
+				IL_006f: call instance void [System.Runtime]System.Runtime.CompilerServices.TaskAwaiter::GetResult()
+				IL_0074: ldc.i4.1
+				IL_0075: call class [System.Runtime]System.Threading.Tasks.Task [System.Runtime]System.Threading.Tasks.Task::Delay(int32)
+				IL_007a: callvirt instance valuetype [System.Runtime]System.Runtime.CompilerServices.TaskAwaiter [System.Runtime]System.Threading.Tasks.Task::GetAwaiter()
+				IL_007f: stloc.2
+				IL_0080: ldloca.s 2
+				IL_0082: call instance bool [System.Runtime]System.Runtime.CompilerServices.TaskAwaiter::get_IsCompleted()
+				IL_0087: brtrue.s IL_00c8
+
+				IL_0089: ldarg.0
+				IL_008a: ldc.i4.1
+				IL_008b: dup
+				IL_008c: stloc.0
+				IL_008d: stfld int32 Snippets.AsyncMachine/'<ThreeDelaysAsync>d__1'::'<>1__state'
+				IL_0092: ldarg.0
+				IL_0093: ldloc.2
+				IL_0094: stfld valuetype [System.Runtime]System.Runtime.CompilerServices.TaskAwaiter Snippets.AsyncMachine/'<ThreeDelaysAsync>d__1'::'<>u__1'
+				IL_0099: ldarg.0
+				IL_009a: ldflda valuetype [System.Runtime]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<int32> Snippets.AsyncMachine/'<ThreeDelaysAsync>d__1'::'<>t__builder'
+				IL_009f: ldloca.s 2
+				IL_00a1: ldarg.0
+				IL_00a2: call instance void valuetype [System.Runtime]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<int32>::AwaitUnsafeOnCompleted<valuetype [System.Runtime]System.Runtime.CompilerServices.TaskAwaiter, valuetype Snippets.AsyncMachine/'<ThreeDelaysAsync>d__1'>(!!0&, !!1&)
+				IL_00a7: leave IL_0156
+
+				IL_00ac: ldarg.0
+				IL_00ad: ldfld valuetype [System.Runtime]System.Runtime.CompilerServices.TaskAwaiter Snippets.AsyncMachine/'<ThreeDelaysAsync>d__1'::'<>u__1'
+				IL_00b2: stloc.2
+				IL_00b3: ldarg.0
+				IL_00b4: ldflda valuetype [System.Runtime]System.Runtime.CompilerServices.TaskAwaiter Snippets.AsyncMachine/'<ThreeDelaysAsync>d__1'::'<>u__1'
+				IL_00b9: initobj [System.Runtime]System.Runtime.CompilerServices.TaskAwaiter
+				IL_00bf: ldarg.0
+				IL_00c0: ldc.i4.m1
+				IL_00c1: dup
+				IL_00c2: stloc.0
+				IL_00c3: stfld int32 Snippets.AsyncMachine/'<ThreeDelaysAsync>d__1'::'<>1__state'
+
+				IL_00c8: ldloca.s 2
+				IL_00ca: call instance void [System.Runtime]System.Runtime.CompilerServices.TaskAwaiter::GetResult()
+				IL_00cf: ldc.i4.1
+				IL_00d0: call class [System.Runtime]System.Threading.Tasks.Task [System.Runtime]System.Threading.Tasks.Task::Delay(int32)
+				IL_00d5: callvirt instance valuetype [System.Runtime]System.Runtime.CompilerServices.TaskAwaiter [System.Runtime]System.Threading.Tasks.Task::GetAwaiter()
+				IL_00da: stloc.2
+				IL_00db: ldloca.s 2
+				IL_00dd: call instance bool [System.Runtime]System.Runtime.CompilerServices.TaskAwaiter::get_IsCompleted()
+				IL_00e2: brtrue.s IL_0120
+
+				IL_00e4: ldarg.0
+				IL_00e5: ldc.i4.2
+				IL_00e6: dup
+				IL_00e7: stloc.0
+				IL_00e8: stfld int32 Snippets.AsyncMachine/'<ThreeDelaysAsync>d__1'::'<>1__state'
+				IL_00ed: ldarg.0
+				IL_00ee: ldloc.2
+				IL_00ef: stfld valuetype [System.Runtime]System.Runtime.CompilerServices.TaskAwaiter Snippets.AsyncMachine/'<ThreeDelaysAsync>d__1'::'<>u__1'
+				IL_00f4: ldarg.0
+				IL_00f5: ldflda valuetype [System.Runtime]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<int32> Snippets.AsyncMachine/'<ThreeDelaysAsync>d__1'::'<>t__builder'
+				IL_00fa: ldloca.s 2
+				IL_00fc: ldarg.0
+				IL_00fd: call instance void valuetype [System.Runtime]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<int32>::AwaitUnsafeOnCompleted<valuetype [System.Runtime]System.Runtime.CompilerServices.TaskAwaiter, valuetype Snippets.AsyncMachine/'<ThreeDelaysAsync>d__1'>(!!0&, !!1&)
+				IL_0102: leave.s IL_0156
+
+				IL_0104: ldarg.0
+				IL_0105: ldfld valuetype [System.Runtime]System.Runtime.CompilerServices.TaskAwaiter Snippets.AsyncMachine/'<ThreeDelaysAsync>d__1'::'<>u__1'
+				IL_010a: stloc.2
+				IL_010b: ldarg.0
+				IL_010c: ldflda valuetype [System.Runtime]System.Runtime.CompilerServices.TaskAwaiter Snippets.AsyncMachine/'<ThreeDelaysAsync>d__1'::'<>u__1'
+				IL_0111: initobj [System.Runtime]System.Runtime.CompilerServices.TaskAwaiter
+				IL_0117: ldarg.0
+				IL_0118: ldc.i4.m1
+				IL_0119: dup
+				IL_011a: stloc.0
+				IL_011b: stfld int32 Snippets.AsyncMachine/'<ThreeDelaysAsync>d__1'::'<>1__state'
+
+				IL_0120: ldloca.s 2
+				IL_0122: call instance void [System.Runtime]System.Runtime.CompilerServices.TaskAwaiter::GetResult()
+				IL_0127: ldc.i4.3
+				IL_0128: stloc.1
+				IL_0129: leave.s IL_0142
+			} // end .try
+			catch [System.Runtime]System.Exception
+			{
+				IL_012b: stloc.3
+				IL_012c: ldarg.0
+				IL_012d: ldc.i4.s -2
+				IL_012f: stfld int32 Snippets.AsyncMachine/'<ThreeDelaysAsync>d__1'::'<>1__state'
+				IL_0134: ldarg.0
+				IL_0135: ldflda valuetype [System.Runtime]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<int32> Snippets.AsyncMachine/'<ThreeDelaysAsync>d__1'::'<>t__builder'
+				IL_013a: ldloc.3
+				IL_013b: call instance void valuetype [System.Runtime]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<int32>::SetException(class [System.Runtime]System.Exception)
+				IL_0140: leave.s IL_0156
+			} // end handler
+
+			IL_0142: ldarg.0
+			IL_0143: ldc.i4.s -2
+			IL_0145: stfld int32 Snippets.AsyncMachine/'<ThreeDelaysAsync>d__1'::'<>1__state'
+			IL_014a: ldarg.0
+			IL_014b: ldflda valuetype [System.Runtime]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<int32> Snippets.AsyncMachine/'<ThreeDelaysAsync>d__1'::'<>t__builder'
+			IL_0150: ldloc.1
+			IL_0151: call instance void valuetype [System.Runtime]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<int32>::SetResult(!0)
+
+			IL_0156: ret
+		} // end of method '<ThreeDelaysAsync>d__1'::MoveNext
+
+		.method private final hidebysig newslot virtual 
+			instance void SetStateMachine (
+				class [System.Runtime]System.Runtime.CompilerServices.IAsyncStateMachine stateMachine
+			) cil managed 
+		{
+			.custom instance void [System.Runtime]System.Diagnostics.DebuggerHiddenAttribute::.ctor() = (
+				01 00 00 00
+			)
+			.override method instance void [System.Runtime]System.Runtime.CompilerServices.IAsyncStateMachine::SetStateMachine(class [System.Runtime]System.Runtime.CompilerServices.IAsyncStateMachine)
+			.param [1]
+				.custom instance void [System.Runtime]System.Runtime.CompilerServices.NullableAttribute::.ctor(uint8) = (
+					01 00 01 00 00
+				)
+			// Header size: 1
+			// Code size: 13 (0xd)
+			.maxstack 8
+
+			IL_0000: ldarg.0
+			IL_0001: ldflda valuetype [System.Runtime]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<int32> Snippets.AsyncMachine/'<ThreeDelaysAsync>d__1'::'<>t__builder'
+			IL_0006: ldarg.1
+			IL_0007: call instance void valuetype [System.Runtime]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<int32>::SetStateMachine(class [System.Runtime]System.Runtime.CompilerServices.IAsyncStateMachine)
+			IL_000c: ret
+		} // end of method '<ThreeDelaysAsync>d__1'::SetStateMachine
+
+	} // end of class <ThreeDelaysAsync>d__1
+
 
 	// Methods
 	.method public hidebysig static 
@@ -230,6 +430,37 @@
 		IL_0039: call instance class [System.Runtime]System.Threading.Tasks.Task`1<!0> valuetype [System.Runtime]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<int32>::get_Task()
 		IL_003e: ret
 	} // end of method AsyncMachine::AddLaterAsync
+
+	.method public hidebysig static 
+		class [System.Runtime]System.Threading.Tasks.Task`1<int32> ThreeDelaysAsync () cil managed 
+	{
+		.custom instance void [System.Runtime]System.Runtime.CompilerServices.AsyncStateMachineAttribute::.ctor(class [System.Runtime]System.Type) = (
+			01 00 2c 53 6e 69 70 70 65 74 73 2e 41 73 79 6e
+			63 4d 61 63 68 69 6e 65 2b 3c 54 68 72 65 65 44
+			65 6c 61 79 73 41 73 79 6e 63 3e 64 5f 5f 31 00 00
+		)
+		// Header size: 12
+		// Code size: 47 (0x2f)
+		.maxstack 2
+		.locals init (
+			[0] valuetype Snippets.AsyncMachine/'<ThreeDelaysAsync>d__1'
+		)
+
+		IL_0000: ldloca.s 0
+		IL_0002: call valuetype [System.Runtime]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<!0> valuetype [System.Runtime]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<int32>::Create()
+		IL_0007: stfld valuetype [System.Runtime]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<int32> Snippets.AsyncMachine/'<ThreeDelaysAsync>d__1'::'<>t__builder'
+		IL_000c: ldloca.s 0
+		IL_000e: ldc.i4.m1
+		IL_000f: stfld int32 Snippets.AsyncMachine/'<ThreeDelaysAsync>d__1'::'<>1__state'
+		IL_0014: ldloca.s 0
+		IL_0016: ldflda valuetype [System.Runtime]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<int32> Snippets.AsyncMachine/'<ThreeDelaysAsync>d__1'::'<>t__builder'
+		IL_001b: ldloca.s 0
+		IL_001d: call instance void valuetype [System.Runtime]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<int32>::Start<valuetype Snippets.AsyncMachine/'<ThreeDelaysAsync>d__1'>(!!0&)
+		IL_0022: ldloca.s 0
+		IL_0024: ldflda valuetype [System.Runtime]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<int32> Snippets.AsyncMachine/'<ThreeDelaysAsync>d__1'::'<>t__builder'
+		IL_0029: call instance class [System.Runtime]System.Threading.Tasks.Task`1<!0> valuetype [System.Runtime]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<int32>::get_Task()
+		IL_002e: ret
+	} // end of method AsyncMachine::ThreeDelaysAsync
 
 } // end of class Snippets.AsyncMachine
 
