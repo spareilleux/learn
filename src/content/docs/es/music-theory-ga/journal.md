@@ -13,6 +13,11 @@ sidebar:
 - [x] Lección 2: escalas, modos e ids de escala de 12 bits
 - [x] Lección 3: acordes, cifrados, inversiones y voicings
 - [x] Lección 4: clases de conjuntos, vectores interválicos y la relación Z
+- [x] Diagramas: brazaletes, diagramas de acordes, mástil y círculos de quintas dibujados por el programa del curso, comprobados por la CI
+- [x] Lección 5: tonalidades, armaduras y el círculo de quintas
+- [x] Lección 6: los acordes de una tonalidad
+- [x] Lección 7: cadencias, ii–V–I y la tonalidad de una progresión
+- [ ] Lecciones 8 a 16 (ver el plan en la página de la misión)
 
 ## 2026-09-14 — Fijar GA y compilar contra él
 
@@ -85,7 +90,53 @@ Los módulos se generan a partir de GuitarAlchemist/Demerzel y no se modificaron
 - MUS-002 obtiene la forma prima de las cuerdas al aire (E A D G B) como `[0,2,5,7,9]`, comparando clases de altura en lugar de intervalos en el desempate; la forma prima es `(02479)`. El mismo módulo responde "are major and minor triads different set classes? Yes", luego pone ambas en 3-11, y escribe las formas primas entre corchetes donde Open Music Theory usa paréntesis.
 - GTR-002 etiqueta la forma de C `x 3 2 0 1 0` con "Strings: 5-4-3-2-1": seis símbolos para cinco cuerdas, siendo la `x` la cuerda 6.
 
+## 2026-09-15 — Diagramas
+
+- Los diagramas son archivos SVG que escribe el programa del curso ([`Diagrams.cs`](https://github.com/spareilleux/learn/blob/a2439ba/code/music-theory-ga/GaTheory/Diagrams.cs)) en `src/assets/music-theory-ga/` y que las lecciones `.mdx` importan como componentes, así que quedan incrustados en la página. Sus colores son `currentColor` y las variables CSS de Starlight (`--sl-color-accent-high`, `--sl-color-orange-high`, `--sl-color-green-high`, `--sl-color-bg`), con un valor de reserva claro, y siguen el tema claro u oscuro del sitio. Solo contienen nombres de notas y números, así que los tres idiomas comparten los mismos archivos; la descripción está en el `aria-label` de cada página y en el párrafo que precede a la figura.
+- `check.sh` los regenera en memoria y los compara con los archivos del repositorio; la CI falla cuando un diagrama no está al día. Para regenerarlos: `dotnet run --project GaTheory -c Release -- svg ../../src/assets/music-theory-ga`.
+- GA tiene componentes React para las mismas figuras, que el curso lee pero no reutiliza: `BraceletNotation.tsx`, `FretDiagram.tsx` y `VexChordDiagram.tsx`, en `ReactComponents/ga-react-components/src/components`. Leyendo `BraceletNotation` y su `NoteGroup` (sin ejecutarlos, *por verificar* en un navegador): los puntos y las etiquetas se colocan en `angle − 90°`, pero los radios de `NoteGroup` usan `cos(angle)` sin ese desfase, así que estarían girados un cuarto de vuelta; y `findSymmetryAxes` solo prueba ejes que pasan por una nota, se salta los ejes que pasan entre dos notas y añade cada eje dos veces.
+
+## 2026-09-15 — Lecciones 5 a 7: diferencias en el código de GA (commit a826864)
+
+Conservadas como líneas `DIFF` en las salidas esperadas. Ninguna se ha comunicado al proyecto original.
+
+Lección 5, tonalidades:
+
+- `Key.GetInterval(note)` devuelve `note.GetInterval(Root)`, el intervalo que sube desde la nota hasta la tónica: `Key.Major.C.GetInterval(E)` es m6, no M3 ([`Key.cs#L70-L76`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/Key.cs#L70-L76)).
+- `Key.Major.TryParse("H")` lanza `InvalidOperationException` en lugar de devolver `false`, y `Key.Minor.TryParse` tiene el mismo código ([`Key.cs#L153-L186`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/Key.cs#L153-L186)).
+- Las herramientas MCP `get_parallel_key` y `get_relative_key` tienen el mismo cuerpo: el otro modo sobre la misma armadura, así que la tonalidad homónima de C es A menor ([`KeyTools.cs#L135-L169`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaMcpServer/Tools/KeyTools.cs#L135-L169)).
+- `get_neighboring_keys` pasa `key.KeySignature.ToString()`, la lista de alteraciones, a una búsqueda por nombre de tonalidad, y falla ([`KeyTools.cs#L197-L215`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaMcpServer/Tools/KeyTools.cs#L197-L215)).
+
+Lección 6, acordes de una tonalidad:
+
+- `HarmonicFunctionExtensions.FromDegree(7)` es siempre `LeadingTone`, también para la subtónica de la menor natural; `ScaleDegreeFunction.Subtonic` existe pero no se usa ahí.
+- `ga_diatonic_chords` nombra las fundamentales con una tabla de 12 nombres: F♯ mayor recibe `Fdim` (E♯dim) y G♭ mayor recibe `B` (C♭) ([`DomainClosures.fs#L23-L36`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs#L23-L36)). El `Key.Notes` del núcleo escribe bien las dos tonalidades.
+- Solo lectura del código (el curso no compila `GA.Domain.Services`, *por verificar*): `HarmonicFunctionAnalyzer.Parse` prueba `Contains("tonic")` antes que `"supertonic"` y `"mediant"` antes que `"submediant"`, así que "Supertonic" se analizaría como `Tonic` y "Submediant" como `Mediant` ([`HarmonicFunctionAnalyzer.cs#L29-L72`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Tonal/HarmonicFunctionAnalyzer.cs#L29-L72)). `ToPrimaryCategory` agrupa la mediante y la submediante con la tónica, donde Open Music Theory llama a iii y vi predominantes débiles: una elección de manual, no un error.
+
+Lección 7, cadencias y progresiones:
+
+- `Cadences.yaml` numera "Chromatic Mediant (Metal)", Em–Gm en E menor, como `i biii`, desde E mayor; la cadencia andaluza del mismo archivo se numera a partir de las notas de E frigio. Su "Phrygian Half Cadence" es ♭II–i, cuando el término clásico designa iv⁶–V en menor.
+- `PitchClassSet.ClosestDiatonicKey` resuelve los empates con «la forma normal contiene la clase de altura 3, luego menor». La forma normal de las notas de una escala mayor es `0 1 3 5 6 8 T`, así que C F G C, G D Em C, Dm7 G7 Cmaj7 y C Am F G7 salen en la relativa menor ([`PitchClassSet.cs#L597-L660`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Atonal/PitchClassSet.cs#L597-L660)).
+- `ga_key_from_progression` y `ga_analyze_progression` puntúan las tonalidades solo por las fundamentales de los acordes, contra la escala menor natural, y prefieren la fundamental del primer acorde ([`GuitaristProblemTools.cs#L157-L223`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaMcpServer/Tools/GuitaristProblemTools.cs#L157-L223), [`DomainClosures.fs#L255-L336`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs#L255-L336)).
+
+## 2026-09-15 — El servidor MCP de GA, tonalidades y progresiones
+
+La misma salvedad que el 2026-09-14: el servidor no indica su versión.
+
+- `get_parallel_key("Key of C")` → `Key of Am`. `get_relative_key("Key of Ab")` → `Key of Fm`, correcto. `get_key_signature_info("Key of Gm")` → tónica G, `Bb Eb`, notas G A Bb C D Eb F, correcto.
+- `get_neighboring_keys("Key of C")` y `get_diatonic_chords("A minor")`: "An error occurred invoking …".
+- `ga_diatonic_chords`: F♯ mayor → `F#, G#m, A#m, B, C#, D#m, Fdim`; G♭ mayor → `Gb, Abm, Bbm, B, Db, Ebm, Fdim`.
+- `ga_key_from_progression(["Am","F","C","G"])` → mejor opción A menor (luego C mayor y D menor, todas 4/4), mientras que la descripción de la herramienta promete C mayor; `(["Dm7","G7","Cmaj7"])` → D menor (luego C mayor y C menor).
+- `ga_analyze_progression("Am Dm E7 Am")` → "Key: A major, I IV V I"; `("Dm7 G7 Cmaj7")` → "Key: D minor, i iv VII".
+
+## 2026-09-15 — Notas sobre los módulos de Streeling (continuación)
+
+- MUS-003, "Guitar Example — D7 to G Voice Movements": la tablatura pone C en el traste 1 de la cuerda E aguda y F♯ en el traste 1 de la cuerda B. El traste 1 es F en la cuerda E aguda y C en la cuerda B; el D7 abierto (`xx0212`) tiene F♯ en el traste 2 de la cuerda 1 y C en el traste 1 de la cuerda 2. Las lecciones enlazan MUS-003 por sus funciones, sus cadencias y sus tonalidades estrechamente relacionadas, no por este ejemplo.
+- MUS-003 pone iii y vi en la familia de la tónica; la lección 6 da las dos lecturas.
+
 ## Por verificar
 
 - Si el reconocedor completo de acordes de GA (no solo `TryFindExact`) nombra inversiones como `032010`; la búsqueda de voicings por MCP sugiere que sí (`C/E`), pero el curso no lo llamó.
 - El commit del servidor MCP: las respuestas anteriores no se reprodujeron contra un servidor compilado desde `a826864`.
+- `HarmonicFunctionAnalyzer.Parse` con "Supertonic" y "Submediant", mediante un test en GA.
+- Los radios y los ejes de simetría del `BraceletNotation` de GA, renderizados en un navegador.

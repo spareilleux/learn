@@ -6,6 +6,11 @@ sidebar:
   order: 2
 ---
 
+import BraceletMajor from '../../../../assets/music-theory-ga/l2-bracelet-major.svg';
+import BraceletTransposition from '../../../../assets/music-theory-ga/l2-bracelet-transposition.svg';
+import BraceletModes from '../../../../assets/music-theory-ga/l2-bracelet-modes.svg';
+import BraceletSymmetric from '../../../../assets/music-theory-ga/l2-bracelet-symmetric.svg';
+
 Una escala es un patrón de pasos; si se prescinde de la octava, es también un conjunto de clases de altura, y un conjunto de como mucho doce elementos cabe en doce bits. Esta lección va del patrón al número: cómo se construyen las escalas mayor y menores, por qué transponer una escala es rotar sus bits, qué es un modo y cómo [Guitar Alchemist](https://github.com/GuitarAlchemist/ga) (GA) construye sobre ese único `int`.
 
 Todos los enlaces a GA apuntan al commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6). Las salidas proceden del programa del curso (la [lección 1](../01-notes-and-the-fretboard/#ejecutar-el-programa-de-la-lección) explica cómo ejecutarlo):
@@ -55,6 +60,12 @@ id         2741                   2741                   ok
 ### La idea
 
 Olvida el orden y la octava, y una escala de C mayor es el conjunto de clases de altura `{0, 2, 4, 5, 7, 9, 11}`. Un subconjunto de doce elementos es un campo de bits, exactamente como un enum `[Flags]` o un `EnumSet` de Java: el bit *n* está activado cuando la clase de altura *n* pertenece al conjunto. Hay 2¹² = 4096 conjuntos así, de modo que cada escala, acorde o fragmento melódico, reducido a sus clases de altura, tiene un id de 0 a 4095. El [catálogo de escalas](https://ianring.com/musictheory/scales/) de Ian Ring las numera así; C mayor es la [escala 2741](https://ianring.com/musictheory/scales/2741). El módulo de Streeling [MUS-006 · El universo de las escalas](../../streeling/music/mus-006-the-scale-universe/) parte de la misma idea.
+
+Un conjunto de clases de altura también se puede dibujar. Coloca las doce clases de altura en la esfera de un reloj, 0 arriba y las demás en el sentido de las agujas del reloj, rellena las que pertenecen al conjunto y únelas: Ian Ring llama a esta figura **diagrama de brazalete** (*bracelet diagram*), que "shows tones that are in this scale, starting from the top (12 o'clock), going clockwise in ascending semitones" ([escala 2741](https://ianring.com/musictheory/scales/2741)). La escala mayor rellena 0, 2, 4, 5, 7, 9 y 11; los dos lugares donde dos cuentas llenas son vecinas, 4 y 5, 11 y 0, son los dos semitonos del patrón.
+
+<BraceletMajor role="img" aria-label="Diagrama de brazalete de la escala mayor: clases de altura 0 2 4 5 7 9 11 rellenas sobre una esfera de reloj de 12, unidas por un polígono." />
+
+GA tiene un componente React para la misma figura, [`BraceletNotation`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/ReactComponents/ga-react-components/src/components/Atonal/BraceletNotation.tsx#L17-L45), que toma el número de 12 bits, lee el bit *i* como la clase de altura *i* y dibuja una cuenta cada 30 grados. El curso dibuja sus propios diagramas con [`Diagrams.cs`](https://github.com/spareilleux/learn/blob/a2439ba/code/music-theory-ga/GaTheory/Diagrams.cs), con los mismos números que las tablas, y la CI comprueba que las imágenes del repositorio están al día.
 
 ### La notación
 
@@ -109,6 +120,10 @@ T7 G       2773 101011010101          2773 101011010101          ok
 
 Compara `101010110101` (C) con `101011010110` (D): el patrón se ha movido dos posiciones a la izquierda, y los dos `10` iniciales han dado la vuelta hasta el final.
 
+En el brazalete, el desplazamiento circular es una rotación: cada cuenta avanza dos posiciones en el sentido de las agujas del reloj, y el polígono de D mayor es el polígono de C mayor girado 60 grados.
+
+<BraceletTransposition role="img" aria-label="Dos brazaletes. T0, la escala mayor sobre C: 0 2 4 5 7 9 11. T2, la escala mayor sobre D: 1 2 4 6 7 9 11, el mismo polígono girado dos posiciones en el sentido de las agujas del reloj." />
+
 ### La notación
 
 La teoría de conjuntos escribe la transposición de *n* semitonos como **T*n*** ([Open Music Theory, "Pitch-Class Sets, Normal Order, and Transformations"](https://viva.pressbooks.pub/openmusictheory/chapter/pc-sets-normal-order-and-transformations/)): D mayor es T2 de C mayor, G mayor T7.
@@ -146,6 +161,10 @@ Locrian      1387 0 1 3 5 6 8 T     1387 0 1 3 5 6 8 T     ok
 ```
 
 El lidio sobre C (2773) tiene el mismo id que G mayor (T7 arriba): C lidio usa las notas de G mayor. El módulo de Streeling [MUS-006](../../streeling/music/mus-006-the-scale-universe/) describe un modo como un "circular left shift by the distance to the next scale tone"; con bit *n* = clase de altura *n*, un desplazamiento a la izquierda de 2 da D **mayor** (2774), y hace falta el desplazamiento opuesto, T−2, para obtener D dórico sobre C (1709).
+
+Los brazaletes muestran la diferencia. El dórico sobre C es el polígono de la escala mayor girado dos posiciones en sentido contrario a las agujas del reloj, de modo que la cuenta de D cae en 0. Todos los modos de la escala mayor son este mismo polígono; lo que cambia es cuál de sus cuentas queda arriba, la tónica.
+
+<BraceletModes role="img" aria-label="Dos brazaletes con el mismo polígono. 2741, jónico: 0 2 4 5 7 9 11. 1709, dórico sobre C: 0 2 3 5 7 9 10, el primer polígono girado dos posiciones en sentido contrario a las agujas del reloj." />
 
 ### La notación
 
@@ -187,6 +206,10 @@ Las marcas `>` coinciden con los grados característicos del libro de texto en l
 ### La idea
 
 Una escala de siete notas tiene siete rotaciones, pero no todas las escalas tienen tantos modos distintos como notas. La escala de tonos enteros es igual desde cualquier nota: un modo. La escala octatónica se repite cada tres semitonos: dos modos. La pentatónica tiene cinco ([Open Music Theory, "Collections"](https://viva.pressbooks.pub/openmusictheory/chapter/collections/)). El curso cuenta los modos de una escala como sus rotaciones distintas llevadas a 0 ([`Theory.Modes`](https://github.com/spareilleux/learn/blob/79d2198/code/music-theory-ga/GaTheory/Theory.cs#L196-L198)).
+
+Los brazaletes de las dos escalas simétricas explican sus recuentos. La escala de tonos enteros es un hexágono regular: gíralo dos posiciones y se cubre a sí mismo, así que toda rotación que pone una cuenta arriba da el mismo conjunto, un modo. La escala octatónica se cubre a sí misma tras tres posiciones, así que sus rotaciones solo dan dos conjuntos distintos.
+
+<BraceletSymmetric role="img" aria-label="Dos brazaletes. 1365, la escala de tonos enteros: 0 2 4 6 8 10, un hexágono regular. 2925, la escala disminuida u octatónica: 0 2 3 5 6 8 9 11, una forma que se repite cada tres semitonos." />
 
 ```text
 == How many modes does a scale have?

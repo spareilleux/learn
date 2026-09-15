@@ -6,6 +6,9 @@ sidebar:
   order: 4
 ---
 
+import BraceletInversion from '../../../../assets/music-theory-ga/l4-bracelet-inversion.svg';
+import BraceletZ from '../../../../assets/music-theory-ga/l4-bracelet-z-relation.svg';
+
 La lección 2 convirtió un acorde o una escala en un número de 12 bits. Esta lección agrupa esos números. Si dos conjuntos tienen la misma forma desplazada o reflejada, la teoría musical los pone en una misma **clase de conjuntos**, y los 4096 conjuntos se reparten en 224 clases. [Guitar Alchemist](https://github.com/GuitarAlchemist/ga) (GA) se basa en esa agrupación: sus formas primas, sus vectores interválicos y sus «familias modales» salen de ella, y sus herramientas MCP la usan para sugerir acordes sustitutos. El programa del curso lo recalcula todo a partir de las definiciones del libro de texto, para los 4096 conjuntos.
 
 Todos los enlaces a GA apuntan al commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6). Las salidas proceden de:
@@ -33,6 +36,10 @@ T2I        2 7 T      2 7 T      ok
 ```
 
 T2 es D mayor (D F♯ A), I0 es F menor (F A♭ C), y T2I, inversión y luego T2, es G menor (G B♭ D).
+
+En un brazalete, T*n* gira el polígono e I0 lo refleja respecto a la línea que pasa por 0 y 6: 4 va a 8 y 7 a 5, mientras que 0 se queda en su sitio. Las páginas de brazaletes de Ian Ring marcan esas líneas de reflexión con trazos punteados, sus "axes of reflective symmetry" ([escala 2741](https://ianring.com/musictheory/scales/2741)).
+
+<BraceletInversion role="img" aria-label="Brazalete con dos triángulos reflejados respecto a un eje discontinuo que pasa por 0 y 6: la tríada de C mayor 0 4 7 y su inversión I0, la tríada de F menor 0 5 8. La clase de altura 0 pertenece a ambas." />
 
 ### En GA
 
@@ -160,6 +167,10 @@ La [`TranspositionClass`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a0
 ### La idea
 
 Dos conjuntos pueden tener el mismo contenido interválico sin ser transposiciones ni inversiones el uno del otro. El ejemplo de Wikipedia es 4-Z15 `{0,1,4,6}` y 4-Z29 `{0,1,3,7}`: ambos contienen un intervalo de cada clase, `<111111>`, "but one can not transpose and/or invert the one set onto the other" ([Interval vector](https://en.wikipedia.org/wiki/Interval_vector)). Estos pares están **relacionados por Z**. Para los conjuntos de seis notas hay una regla elegante: el complemento de un hexacordo Z es su pareja Z (mismo artículo). El módulo de Streeling [MUS-002 · Más allá de la tonalidad](../../streeling/music/mus-002-beyond-tonality/) presenta los vectores interválicos y las relaciones Z con el mismo par.
+
+Los dos brazaletes hacen visible la diferencia: ninguna rotación ni imagen especular convierte una forma en la otra, y sin embargo cada una contiene exactamente un par de notas a un semitono, uno a un tono, y así hasta un solo tritono.
+
+<BraceletZ role="img" aria-label="Dos brazaletes. 4-Z15: 0 1 4 6. 4-Z29: 0 1 3 7. Formas distintas con el mismo vector interválico 111111." />
 
 ```text
 == Z-relation: same vector, different set classes

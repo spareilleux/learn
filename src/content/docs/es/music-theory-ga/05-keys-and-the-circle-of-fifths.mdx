@@ -1,0 +1,216 @@
+---
+title: "Lección 5: Tonalidades, armaduras y el círculo de quintas"
+description: Qué es una tonalidad, cómo se construye su armadura, las tonalidades relativas y homónimas, el círculo de quintas y las tonalidades estrechamente relacionadas, y cómo Guitar Alchemist modela las tonalidades, desde sus tipos del núcleo hasta sus herramientas MCP de tonalidades.
+sidebar:
+  label: 5. Las tonalidades y el círculo de quintas
+  order: 5
+---
+
+import CircleOfFifths from '../../../../assets/music-theory-ga/l5-circle-of-fifths.svg';
+import BraceletCG from '../../../../assets/music-theory-ga/l5-bracelet-c-g.svg';
+import CircleRelatedC from '../../../../assets/music-theory-ga/l5-circle-related-c.svg';
+
+Las lecciones 1 a 4 trataban las notas como clases de altura, donde C♯ y D♭ son el mismo número. Una **tonalidad** necesita más: una tónica, un modo y una grafía en la que cada letra aparece una sola vez. Esta lección construye las quince tonalidades mayores y las quince menores a partir de esas reglas, las ordena en el círculo de quintas y compara el resultado con [Guitar Alchemist](https://github.com/GuitarAlchemist/ga) (GA): sus tipos `Key` y `KeySignature`, que coinciden con la teoría en todo, y sus herramientas MCP de tonalidades, que no siempre lo hacen.
+
+Todos los enlaces a GA apuntan al commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6). Las salidas proceden de:
+
+```bash
+dotnet run --project code/music-theory-ga/GaTheory -c Release -- l5
+```
+
+## Armaduras
+
+### La idea
+
+Una pieza «en C mayor» usa las notas de la escala de C mayor y toma C como nota de reposo. Construye la misma escala mayor, tono, tono, semitono, tono, tono, tono, semitono (lección 2), sobre otra tónica y algunos grados necesitan un sostenido o un bemol. La regla es **una letra por grado**: la escala mayor sobre E es E F♯ G♯ A B C♯ D♯, nunca E G♭ A♭ A B D♭ E♭, así que cada letra de A a G aparece exactamente una vez. Las alteraciones que necesita la escala se escriben una sola vez, al principio de cada pentagrama, como **armadura** ([Open Music Theory, "Major Scales, Scale Degrees, and Key Signatures"](https://viva.pressbooks.pub/openmusictheory/chapter/major-scales/)).
+
+Las armaduras siguen un orden fijo. Los sostenidos se añaden en el orden F C G D A E B, y los bemoles en el orden inverso, B E A D G C F (mismo capítulo). La tónica de cada tonalidad con sostenidos está una quinta justa por encima de la anterior, G, D, A…, y el sostenido que añade es su séptimo grado, la nota un semitono por debajo de la tónica. La tónica de cada tonalidad con bemoles está una cuarta justa por encima de la anterior, F, B♭, E♭…, y el bemol que añade es su cuarto grado. De ahí salen dos trucos de lectura: con sostenidos, la tónica está un semitono por encima del último sostenido; con bemoles, la tónica es el penúltimo bemol, salvo en F mayor, que solo tiene uno.
+
+### La notación
+
+El programa del curso numera una armadura por sus **quintas**: +*n* para *n* sostenidos, −*n* para *n* bemoles, de −7 (siete bemoles, C♭ mayor) a +7 (siete sostenidos, C♯ mayor). Sus salidas escriben los sostenidos y los bemoles como `#` y `b`, y la tonalidad menor con una `m`, tal como los imprime GA. Cada línea da la tónica mayor, la tónica menor con la misma armadura y luego las alteraciones en orden:
+
+```text
+== Key signatures: major and relative minor tonic, accidentals
+fifths  course                             GA                                 check
+-7      Cb Abm Bb Eb Ab Db Gb Cb Fb        Cb Abm Bb Eb Ab Db Gb Cb Fb        ok
+-6      Gb Ebm Bb Eb Ab Db Gb Cb           Gb Ebm Bb Eb Ab Db Gb Cb           ok
+-5      Db Bbm Bb Eb Ab Db Gb              Db Bbm Bb Eb Ab Db Gb              ok
+-4      Ab Fm Bb Eb Ab Db                  Ab Fm Bb Eb Ab Db                  ok
+-3      Eb Cm Bb Eb Ab                     Eb Cm Bb Eb Ab                     ok
+-2      Bb Gm Bb Eb                        Bb Gm Bb Eb                        ok
+-1      F Dm Bb                            F Dm Bb                            ok
+0       C Am                               C Am                               ok
++1      G Em F#                            G Em F#                            ok
++2      D Bm F# C#                         D Bm F# C#                         ok
++3      A F#m F# C# G#                     A F#m F# C# G#                     ok
++4      E C#m F# C# G# D#                  E C#m F# C# G# D#                  ok
++5      B G#m F# C# G# D# A#               B G#m F# C# G# D# A#               ok
++6      F# D#m F# C# G# D# A# E#           F# D#m F# C# G# D# A# E#           ok
++7      C# A#m F# C# G# D# A# E# B#        C# A#m F# C# G# D# A# E# B#        ok
+```
+
+El curso calcula cada fila a partir de C: sube la tónica una quinta (una letra cuatro pasos más arriba y siete semitonos), o una cuarta para los bemoles, y luego escribe las letras ([`Theory.MajorTonic` y `SignatureAccidentals`](https://github.com/spareilleux/learn/blob/a2439ba/code/music-theory-ga/GaTheory/Theory.cs#L219-L237)).
+
+Una vez conocida la tónica, escribir la tonalidad es de nuevo la escala, una letra por grado ([`Theory.SpellScale`](https://github.com/spareilleux/learn/blob/a2439ba/code/music-theory-ga/GaTheory/Theory.cs#L206-L217)). Las tonalidades menores de abajo usan la escala **menor natural**, tono, semitono, tono, tono, semitono, tono, tono ([Open Music Theory, "Minor Scales, Scale Degrees, and Key Signatures"](https://viva.pressbooks.pub/openmusictheory/chapter/minor-scales/)):
+
+```text
+== The notes of a key: one letter per degree
+key        course                   GA                       check
+Eb         Eb F G Ab Bb C D         Eb F G Ab Bb C D         ok
+E          E F# G# A B C# D#        E F# G# A B C# D#        ok
+F#         F# G# A# B C# D# E#      F# G# A# B C# D# E#      ok
+Cb         Cb Db Eb Fb Gb Ab Bb     Cb Db Eb Fb Gb Ab Bb     ok
+Dm         D E F G A Bb C           D E F G A Bb C           ok
+G#m        G# A# B C# D# E F#       G# A# B C# D# E F#       ok
+Bbm        Bb C Db Eb F Gb Ab       Bb C Db Eb F Gb Ab       ok
+A#m        A# B# C# D# E# F# G#     A# B# C# D# E# F# G#     ok
+```
+
+F♯ mayor tiene un E♯, y C♭ mayor un F♭: son las clases de altura de F y de E, pero la letra E y la letra F ya están ocupadas. Por eso una tonalidad es más que un conjunto de clases de altura. C♭ mayor y B mayor suenan igual en una guitarra; sobre el papel son tonalidades distintas.
+
+### En GA
+
+GA modela los mismos objetos. [`KeySignature`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/KeySignature.cs#L112-L116) es un valor de −7 a +7, y sus `AccidentedNotes` son los sostenidos o los bemoles en orden. Una [`Key`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/Key.cs#L15-L50) es un record que contiene una armadura, con dos subtipos, `Key.Major` y `Key.Minor`, y `Key.Items` enumera las 30 tonalidades. La tónica de cada armadura sale de una tabla de búsqueda ([`Major.GetRoot`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/Key.cs#L210-L229)), y `Notes` recorre las siete letras hacia arriba desde la tónica, añadiendo la alteración de la armadura cuando una letra la tiene ([`GetNotes`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/Key.cs#L82-L129)). Es la regla de una letra por grado hecha código, y da las mismas 15 armaduras y las mismas grafías que el curso.
+
+## Tonalidades relativas y homónimas
+
+### La idea
+
+Dos tonalidades pueden estar relacionadas de dos maneras distintas ([Open Music Theory, "Minor Scales, Scale Degrees, and Key Signatures"](https://viva.pressbooks.pub/openmusictheory/chapter/minor-scales/)):
+
+- Las tonalidades **relativas** comparten armadura, y por tanto las mismas siete notas, pero no la tónica. La relativa menor de una tonalidad mayor empieza en su sexto grado, tres semitonos por debajo de la tónica: C mayor y A menor no tienen ni sostenidos ni bemoles.
+- Las tonalidades **homónimas** (*parallel keys*) comparten tónica, pero no las notas. C mayor y C menor empiezan en la misma nota; C menor tiene tres bemoles, B♭, E♭ y A♭. En la escala de las armaduras, la homónima menor está siempre tres quintas más abajo.
+
+### En GA
+
+El núcleo de GA no tiene ningún método para ninguna de las dos relaciones. Su servidor MCP, que permite a un asistente de IA llamar a GA, tiene dos herramientas, `get_relative_key` y `get_parallel_key`. Sus cuerpos son iguales: ambas construyen la tonalidad del otro modo **sobre la misma armadura** ([`KeyTools.GetRelativeKey` y `GetParallelKey`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaMcpServer/Tools/KeyTools.cs#L135-L169)). El programa del curso ejecuta esa expresión junto a su propia respuesta ([`Lesson5.RelativeAsMcp` y `ParallelAsMcp`](https://github.com/spareilleux/learn/blob/a2439ba/code/music-theory-ga/GaTheory/Lesson5.cs#L109-L120)):
+
+```text
+== Relative and parallel keys (GA column: the expressions of GA's MCP key tools)
+key              course       GA           check
+relative C       Key of Am    Key of Am    ok
+parallel C       Key of Cm    Key of Am    DIFF
+relative Ab      Key of Fm    Key of Fm    ok
+parallel Ab      Key of Abm   Key of Fm    DIFF
+relative Am      Key of C     Key of C     ok
+parallel Am      Key of A     Key of C     DIFF
+relative Em      Key of G     Key of G     ok
+parallel Em      Key of E     Key of G     DIFF
+```
+
+Así que la herramienta de la tonalidad homónima responde la relativa. El 2026-09-15, el servidor MCP que se ejecutaba en la máquina del autor (no indica su versión) dio las mismas respuestas: `get_parallel_key("Key of C")` devolvió `Key of Am`, y `get_relative_key("Key of Ab")` devolvió `Key of Fm`, que es correcto.
+
+## El círculo de quintas
+
+### La idea
+
+Coloca las tonalidades mayores en un reloj, cada una una quinta justa por encima de la anterior. En el sentido de las agujas del reloj desde C, arriba, cada paso añade un sostenido: G, D, A, E, B, F♯, C♯. En sentido contrario, cada paso añade un bemol: F, B♭, E♭, A♭, D♭, G♭, C♭. Tras doce quintas, las tónicas vuelven a C, así que quince nombres de tonalidades comparten doce posiciones: en la parte baja del círculo, B y C♭, F♯ y G♭, C♯ y D♭ son tonalidades **enarmónicas**, las mismas clases de altura con grafías distintas ([Open Music Theory, "Major Scales, Scale Degrees, and Key Signatures"](https://viva.pressbooks.pub/openmusictheory/chapter/major-scales/); [Circle of fifths](https://en.wikipedia.org/wiki/Circle_of_fifths), Wikipedia).
+
+La figura siguiente dibuja el círculo en tres anillos. El anillo exterior nombra las tonalidades mayores: C arriba; luego, en el sentido de las agujas del reloj, G, D, A, E, B o C♭, F♯ o G♭, C♯ o D♭, A♭, E♭, B♭ y F. El anillo central da la armadura: 0 arriba, de 1 a 4 sostenidos a la derecha, de 1 a 4 bemoles a la izquierda, y dos recuentos en las tres posiciones enarmónicas, 5 sostenidos o 7 bemoles, 6 sostenidos o 6 bemoles, 7 sostenidos o 5 bemoles. El anillo interior nombra las tonalidades relativas menores, en minúsculas: a arriba, luego e, b, f♯, c♯, g♯ o a♭, d♯ o e♭, a♯ o b♭, f, c, g y d.
+
+<CircleOfFifths role="img" aria-label="Círculo de quintas en tres anillos. Anillo exterior, tonalidades mayores en el sentido de las agujas del reloj desde arriba: C, G, D, A, E, B/C bemol, F sostenido/G bemol, C sostenido/D bemol, A bemol, E bemol, B bemol, F. Anillo central, armaduras: 0, de 1 a 4 sostenidos, 5 sostenidos/7 bemoles, 6 sostenidos/6 bemoles, 7 sostenidos/5 bemoles, de 4 a 1 bemoles. Anillo interior, tonalidades relativas menores: a, e, b, f sostenido, c sostenido, g sostenido/a bemol, d sostenido/e bemol, a sostenido/b bemol, f, c, g, d." />
+
+¿Por qué una quinta? Dos vecinas en el círculo difieren en una sola nota. C mayor y G mayor comparten seis notas; G mayor sube F a F♯. En un brazalete (lección 2), G mayor es C mayor girada siete semitonos, T7, y solo se mueve una cuenta, un paso. La figura siguiente superpone las dos escalas: C mayor en un color, G mayor en otro; las seis notas comunes, C, D, E, G, A y B, van rodeadas por un círculo, F pertenece solo a C mayor y F♯ solo a G mayor.
+
+<BraceletCG role="img" aria-label="Brazalete de nombres de notas con dos heptágonos superpuestos, C mayor y G mayor. Las seis notas comunes C, D, E, G, A y B van rodeadas por un círculo; F pertenece solo a C mayor y F sostenido solo a G mayor." />
+
+Cuanto más alejadas están dos tonalidades en el círculo, menos notas comparten. El programa las cuenta y luego comprueba los pares enarmónicos:
+
+```text
+== The circle of fifths: clockwise one fifth up and one more sharp
+course sharps  C G D A E B F# C#
+GA sharps      C G D A E B F# C#
+course flats   C F Bb Eb Ab Db Gb Cb
+GA flats       C F Bb Eb Ab Db Gb Cb
+pair             course     GA         check
+B = Cb           same       same       ok
+F# = Gb          same       same       ok
+C# = Db          same       same       ok
+neighbours       course     GA         check
+C and G          6 common   6 common   ok
+C and F          6 common   6 common   ok
+C and D          5 common   5 common   ok
+C and F#         2 common   2 common   ok
+```
+
+C mayor y F♯ mayor, opuestas, comparten dos clases de altura: B, y F, que F♯ mayor escribe E♯.
+
+### En GA
+
+El núcleo coincide en todo: `new Key.Major(n)` da la misma tónica, y `PitchClassSet` confirma los pares enarmónicos y las notas comunes. El servidor MCP tiene dos herramientas del círculo. `get_circle_of_fifths_position` devuelve el valor de la armadura. `get_neighboring_keys` debería devolver las tonalidades de cada lado, pero llama a esa herramienta de posición con `key.KeySignature.ToString()`, la lista de alteraciones ("F#" para G mayor, una cadena vacía para C), en lugar de un nombre de tonalidad, y la herramienta de posición no encuentra ninguna tonalidad con ese nombre ([`KeyTools.GetNeighboringKeys`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaMcpServer/Tools/KeyTools.cs#L197-L215)). El curso reproduce esa búsqueda; el resultado está en la tabla siguiente, y el 2026-09-15, `get_neighboring_keys("Key of C")` respondió: `An error occurred invoking 'get_neighboring_keys'.`
+
+## Tonalidades estrechamente relacionadas
+
+### La idea
+
+Una pieza rara vez se queda en una sola tonalidad. Lo más frecuente es que pase a una tonalidad **estrechamente relacionada**, una cuya armadura difiere como mucho en una alteración: la tonalidad relativa, las tonalidades una quinta por encima y una quinta por debajo, y sus relativas. Toda tonalidad tiene cinco ([Open Music Theory, "Extended Tonicization and Modulation to Closely Related Keys"](https://viva.pressbooks.pub/openmusictheory/chapter/extended-tonicization-and-modulation-to-closely-related-keys/)). En el círculo, son la propia posición de la tonalidad y sus dos vecinas, anillos interior y exterior. Para C mayor: F mayor y D menor, A menor, G mayor y E menor. El módulo de Streeling [MUS-003 · Cómo funciona la armonía](../../streeling/music/mus-003-functional-harmony/) enumera las mismas cinco para G mayor, en su sección sobre las tonalidades estrechamente relacionadas.
+
+En la figura siguiente se resaltan las armaduras de C mayor y de sus dos vecinas, 1 bemol, 0 y 1 sostenido, con las seis tonalidades de esas posiciones: F, C y G mayor fuera, d, a y e menor dentro.
+
+<CircleRelatedC role="img" aria-label="El mismo círculo de quintas con tres posiciones resaltadas: 1 bemol, 0 y 1 sostenido. Contienen F, C y G mayor y d, a y e menor, las tonalidades estrechamente relacionadas con C mayor." />
+
+```text
+== Closely related keys: signatures within one accidental
+key        course                                       GA                                           check
+C          F Dm Am G Em                                 F Dm Am G Em                                 ok
+Dm         Bb Gm F C Am                                 Bb Gm F C Am                                 ok
+E          A F#m C#m B G#m                              A F#m C#m B G#m                              ok
+MCP tool                   course               GA                   check
+get_neighboring_keys C     Key of F, Key of G   throws InvalidOperationException DIFF
+```
+
+La columna de GA filtra `Key.Items` por el valor de la armadura; coincide. La última fila es la búsqueda MCP descrita arriba.
+
+## Sorpresas
+
+Otras dos llamadas no hicieron lo que dicen sus nombres:
+
+```text
+== Surprises found while writing this lesson
+call                           course       GA           check
+Key.Major.C.GetInterval(E)     M3           m6           DIFF
+Key.Major.G.GetInterval(F#)    M7           m2           DIFF
+Key.Major.TryParse("H")        False        throws InvalidOperationException DIFF
+Key.Minor.TryParse("A")        Key of Am    Key of Am    ok
+```
+
+- [`Key.GetInterval(note)`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/Key.cs#L70-L76) está documentado como "the simple interval between the key root note and the specified note", pero devuelve `note.GetInterval(Root)`, el intervalo que sube desde la nota hasta la tónica. De C a E subiendo hay una tercera mayor; de E a C subiendo, una sexta menor, su inversión.
+- [`Key.Major.TryParse`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/Key.cs#L153-L186) lanza `InvalidOperationException` cuando el texto no es una nota, donde el [patrón `TryParse`](https://learn.microsoft.com/dotnet/standard/design-guidelines/exceptions-and-performance#try-parse-pattern) de .NET devuelve `false`. `Key.Minor.TryParse` tiene el mismo código.
+
+## Ejercicios
+
+1. ¿Cuál es la armadura de E mayor, y cuáles son sus notas?
+2. ¿Cuáles son la relativa menor y la homónima menor de A♭ mayor? ¿Cuántos bemoles tiene cada una?
+3. Enumera las tonalidades estrechamente relacionadas con D menor.
+
+<details>
+<summary>Soluciones</summary>
+
+1. Cuatro sostenidos, F♯ C♯ G♯ D♯, los cuatro primeros en el orden de los sostenidos. Las notas son E F♯ G♯ A B C♯ D♯. D♯ es el último sostenido, un semitono por debajo de la tónica.
+2. La relativa menor empieza en el sexto grado de A♭ mayor: F menor, con los mismos cuatro bemoles. La homónima menor es A♭ menor, tres quintas más abajo en el círculo: siete bemoles. La expresión de `get_parallel_key` de GA responde F menor para las dos.
+3. D menor tiene un bemol. Tonalidades con 0, 1 o 2 bemoles: B♭ mayor, G menor, F mayor (su relativa), C mayor y A menor.
+
+```text
+== Exercise solutions
+question               course                           GA                               check
+1. E major             F# C# G# D# / E F# G# A B C# D#  F# C# G# D# / E F# G# A B C# D#  ok
+2. relative of Ab      Key of Fm                        Key of Fm                        ok
+2. parallel of Ab      Key of Abm (7 flats)             Key of Fm                        DIFF
+3. related to Dm       Bb Gm F C Am                     Bb Gm F C Am                     ok
+```
+
+</details>
+
+## Puntos clave
+
+- Una tonalidad es una tónica, un modo y una grafía: una letra por grado, y por eso F♯ mayor tiene un E♯ y C♭ mayor no es B mayor sobre el papel.
+- Los sostenidos llegan en el orden F C G D A E B, los bemoles en el orden inverso; la armadura, de −7 a +7, es la posición en el círculo de quintas.
+- Las tonalidades relativas comparten la armadura, las homónimas comparten la tónica; las vecinas en el círculo comparten seis notas, y las cinco tonalidades estrechamente relacionadas están a una alteración como mucho.
+- Los `Key` y `KeySignature` del núcleo de GA coinciden con la teoría en las 30 tonalidades. Sus herramientas MCP responden la tonalidad relativa cuando se pide la homónima y fallan con las tonalidades vecinas, y `Key.GetInterval` mide el intervalo al revés.
+
+## Fuentes
+
+- Mark Gotham et al., [*Open Music Theory*](https://viva.pressbooks.pub/openmusictheory/), versión 2, 2023, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/): capítulos [Major Scales, Scale Degrees, and Key Signatures](https://viva.pressbooks.pub/openmusictheory/chapter/major-scales/), [Minor Scales, Scale Degrees, and Key Signatures](https://viva.pressbooks.pub/openmusictheory/chapter/minor-scales/), [Extended Tonicization and Modulation to Closely Related Keys](https://viva.pressbooks.pub/openmusictheory/chapter/extended-tonicization-and-modulation-to-closely-related-keys/).
+- [Circle of fifths](https://en.wikipedia.org/wiki/Circle_of_fifths) y [Closely related key](https://en.wikipedia.org/wiki/Closely_related_key), Wikipedia.
+- GuitarAlchemist/ga en [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6): `Common/GA.Domain.Core/Theory/Tonal` (`Key.cs`, `KeySignature.cs`), `Common/GA.Domain.Core/Theory/Atonal/PitchClassSet.cs`, `GaMcpServer/Tools/KeyTools.cs`.

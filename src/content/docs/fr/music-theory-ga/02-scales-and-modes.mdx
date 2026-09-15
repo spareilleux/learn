@@ -6,6 +6,11 @@ sidebar:
   order: 2
 ---
 
+import BraceletMajor from '../../../../assets/music-theory-ga/l2-bracelet-major.svg';
+import BraceletTransposition from '../../../../assets/music-theory-ga/l2-bracelet-transposition.svg';
+import BraceletModes from '../../../../assets/music-theory-ga/l2-bracelet-modes.svg';
+import BraceletSymmetric from '../../../../assets/music-theory-ga/l2-bracelet-symmetric.svg';
+
 Une gamme est un motif de pas ; une fois l'octave oubliée, c'est aussi un ensemble de classes de hauteurs, et un ensemble d'au plus douze éléments tient sur douze bits. Cette leçon va du motif au nombre : comment se construisent les gammes majeure et mineures, pourquoi transposer une gamme revient à faire tourner ses bits, ce qu'est un mode, et ce que [Guitar Alchemist](https://github.com/GuitarAlchemist/ga) (GA) bâtit sur ce simple `int`.
 
 Tous les liens vers GA pointent sur le commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6). Les sorties viennent du programme du cours (la [leçon 1](../01-notes-and-the-fretboard/#exécuter-le-programme-de-la-leçon) montre comment l'exécuter) :
@@ -55,6 +60,12 @@ id         2741                   2741                   ok
 ### L'idée
 
 Oublie l'ordre et l'octave : une gamme de C majeur est l'ensemble de classes de hauteurs `{0, 2, 4, 5, 7, 9, 11}`. Un sous-ensemble de douze éléments est un champ de bits, exactement comme une enum `[Flags]` ou un `EnumSet` Java : le bit *n* est à 1 quand la classe de hauteurs *n* appartient à l'ensemble. Il existe 2¹² = 4096 ensembles de ce genre, donc chaque gamme, accord ou fragment de mélodie, une fois réduit à ses classes de hauteurs, a un identifiant de 0 à 4095. Le [catalogue des gammes](https://ianring.com/musictheory/scales/) d'Ian Ring les numérote ainsi ; C majeur est la [gamme 2741](https://ianring.com/musictheory/scales/2741). Le module Streeling [MUS-006 · L'univers des gammes](../../streeling/music/mus-006-the-scale-universe/) part de la même idée.
+
+Un ensemble de classes de hauteurs peut aussi se dessiner. Place les douze classes de hauteurs sur un cadran d'horloge, 0 en haut et les autres dans le sens des aiguilles d'une montre, remplis celles de l'ensemble et relie-les : Ian Ring appelle cette image un **diagramme en bracelet** (*bracelet diagram*), qui « montre les notes de cette gamme en partant du haut (12 heures), dans le sens des aiguilles d'une montre, par demi-tons ascendants » ([gamme 2741](https://ianring.com/musictheory/scales/2741)). La gamme majeure remplit 0, 2, 4, 5, 7, 9 et 11 ; les deux endroits où deux perles pleines sont voisines, 4 et 5, 11 et 0, sont les deux demi-tons du motif.
+
+<BraceletMajor role="img" aria-label="Diagramme en bracelet de la gamme majeure : classes de hauteurs 0 2 4 5 7 9 11 remplies sur un cadran de 12, reliées par un polygone." />
+
+GA a un composant React pour la même image, [`BraceletNotation`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/ReactComponents/ga-react-components/src/components/Atonal/BraceletNotation.tsx#L17-L45), qui prend le nombre sur 12 bits, lit le bit *i* comme la classe de hauteurs *i* et dessine une perle tous les 30 degrés. Le cours dessine ses propres diagrammes avec [`Diagrams.cs`](https://github.com/spareilleux/learn/blob/a2439ba/code/music-theory-ga/GaTheory/Diagrams.cs), à partir des mêmes nombres que les tableaux, et la CI vérifie que les images enregistrées dans le dépôt sont à jour.
 
 ### La notation
 
@@ -109,6 +120,10 @@ T7 G       2773 101011010101          2773 101011010101          ok
 
 Compare `101010110101` (C) avec `101011010110` (D) : le motif s'est décalé de deux places vers la gauche, et les deux `10` de tête sont revenus à la fin.
 
+Sur le bracelet, le décalage circulaire est une rotation : chaque perle avance de deux positions dans le sens des aiguilles d'une montre, et le polygone de D majeur est celui de C majeur tourné de 60 degrés.
+
+<BraceletTransposition role="img" aria-label="Deux bracelets. T0, la gamme majeure sur C : 0 2 4 5 7 9 11. T2, la gamme majeure sur D : 1 2 4 6 7 9 11, le même polygone tourné de deux positions dans le sens des aiguilles d'une montre." />
+
 ### La notation
 
 La théorie des ensembles note la transposition de *n* demi-tons **T*n*** ([Open Music Theory, "Pitch-Class Sets, Normal Order, and Transformations"](https://viva.pressbooks.pub/openmusictheory/chapter/pc-sets-normal-order-and-transformations/)) : D majeur est T2 de C majeur, G majeur T7.
@@ -146,6 +161,10 @@ Locrian      1387 0 1 3 5 6 8 T     1387 0 1 3 5 6 8 T     ok
 ```
 
 Le lydien sur C (2773) a le même identifiant que G majeur (T7 ci-dessus) : C lydien utilise les notes de G majeur. Le module Streeling [MUS-006](../../streeling/music/mus-006-the-scale-universe/) décrit un mode comme un « décalage circulaire à gauche de la distance jusqu'à la note suivante de la gamme » ; avec bit *n* = classe de hauteurs *n*, un décalage à gauche de 2 donne D **majeur** (2774), et il faut le décalage opposé, T−2, pour obtenir D dorien sur C (1709).
+
+Les bracelets montrent la différence. Le dorien sur C est le polygone de la gamme majeure tourné de deux positions dans le sens inverse des aiguilles d'une montre, pour que la perle de D arrive sur 0. Chaque mode de la gamme majeure est ce même polygone ; ce qui change, c'est laquelle de ses perles se trouve en haut, la tonique.
+
+<BraceletModes role="img" aria-label="Deux bracelets au même polygone. 2741, ionien : 0 2 4 5 7 9 11. 1709, dorien sur C : 0 2 3 5 7 9 10, le premier polygone tourné de deux positions dans le sens inverse des aiguilles d'une montre." />
 
 ### La notation
 
@@ -187,6 +206,10 @@ Les marques `>` correspondent aux degrés caractéristiques du manuel pour les s
 ### L'idée
 
 Une gamme de sept notes a sept rotations, mais toutes les gammes n'ont pas autant de modes distincts que de notes. La gamme par tons est la même depuis chaque note : un seul mode. La gamme octatonique se répète tous les trois demi-tons : deux modes. La pentatonique en a cinq ([Open Music Theory, "Collections"](https://viva.pressbooks.pub/openmusictheory/chapter/collections/)). Le cours compte les modes d'une gamme comme ses rotations distinctes ramenées à 0 ([`Theory.Modes`](https://github.com/spareilleux/learn/blob/79d2198/code/music-theory-ga/GaTheory/Theory.cs#L196-L198)).
+
+Les bracelets des deux gammes symétriques expliquent leurs comptes. La gamme par tons est un hexagone régulier : tourne-le de deux positions et il se recouvre lui-même, donc chaque rotation qui met une perle en haut donne le même ensemble, un seul mode. La gamme octatonique se recouvre après trois positions, donc ses rotations ne donnent que deux ensembles différents.
+
+<BraceletSymmetric role="img" aria-label="Deux bracelets. 1365, la gamme par tons : 0 2 4 6 8 10, un hexagone régulier. 2925, la gamme diminuée ou octatonique : 0 2 3 5 6 8 9 11, une forme qui se répète tous les trois demi-tons." />
 
 ```text
 == How many modes does a scale have?

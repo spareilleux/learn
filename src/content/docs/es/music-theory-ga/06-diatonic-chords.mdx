@@ -1,0 +1,209 @@
+---
+title: "Lección 6: Los acordes de una tonalidad"
+description: Tríadas y acordes de séptima apilados sobre cada grado de una tonalidad mayor o menor, números romanos, nombres de los grados y funciones armónicas, y cómo Guitar Alchemist nombra, encuentra y etiqueta los acordes de una tonalidad.
+sidebar:
+  label: 6. Los acordes de una tonalidad
+  order: 6
+---
+
+import BraceletPrimary from '../../../../assets/music-theory-ga/l6-bracelet-primary-triads.svg';
+
+La lección 3 construía acordes sobre cualquier fundamental; la lección 5, tonalidades. Esta lección apila acordes **dentro** de una tonalidad, uno sobre cada grado, lo que da a todas las tonalidades el mismo patrón de cualidades de acordes, nombradas con números romanos. Luego se pregunta qué hace cada acorde en la tonalidad, su **función**, y lo compara todo con [Guitar Alchemist](https://github.com/GuitarAlchemist/ga) (GA): su catálogo de acordes y sus tonalidades compatibles coinciden con la teoría, sus nombres de funciones se quedan cortos en las tonalidades menores y su herramienta MCP escribe mal algunas tonalidades.
+
+Todos los enlaces a GA apuntan al commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6). Las salidas proceden de:
+
+```bash
+dotnet run --project code/music-theory-ga/GaTheory -c Release -- l6
+```
+
+## Tríadas sobre cada grado
+
+### La idea
+
+Toma las notas de una tonalidad y, sobre cada grado, apila dos notas más de la tonalidad, saltando una nota cada vez: C E G sobre C, D F A sobre D, y así sucesivamente. Cada tríada usa solo las notas de la tonalidad, así que sus terceras salen mayores o menores según el grado. En toda tonalidad mayor, las tríadas de los grados 1, 4 y 5 son mayores, las de los grados 2, 3 y 6 menores, y la del 7 disminuida ([Open Music Theory, "Triads"](https://viva.pressbooks.pub/openmusictheory/chapter/triads/)).
+
+### La notación
+
+Un **número romano** nombra el grado de la fundamental del acorde. Su caja indica la cualidad: mayúsculas para una tercera mayor sobre la fundamental (mayor, aumentada), minúsculas para una tercera menor (menor, disminuida); un pequeño círculo marca una tríada disminuida y un signo más una aumentada ([Open Music Theory, "Roman Numerals"](https://viva.pressbooks.pub/openmusictheory/chapter/roman-numerals/)). Así, C mayor se lee I ii iii IV V vi vii°, y esos números son los mismos en todas las tonalidades mayores.
+
+Cada grado tiene además un nombre: tónica, supertónica, mediante, subdominante, dominante, submediante y, para el grado 7, la **sensible**, un semitono por debajo de la tónica ([Open Music Theory, "Major Scales, Scale Degrees, and Key Signatures"](https://viva.pressbooks.pub/openmusictheory/chapter/major-scales/)). El programa del curso apila las tríadas a partir de las notas escritas de la tonalidad, nombra su cualidad a partir de sus intervalos con los nombres que usa el catálogo de acordes de GA y añade el nombre del grado ([`Lesson6.Stack` y `DegreeName`](https://github.com/spareilleux/learn/blob/a2439ba/code/music-theory-ga/GaTheory/Lesson6.cs#L32-L52)):
+
+```text
+== Triads of C major: numeral, root, quality, function
+numeral   course                           GA                               check
+I         C major-triad Tonic              C major-triad Tonic              ok
+ii        D minor-triad Supertonic         D minor-triad Supertonic         ok
+iii       E minor-triad Mediant            E minor-triad Mediant            ok
+IV        F major-triad Subdominant        F major-triad Subdominant        ok
+V         G major-triad Dominant           G major-triad Dominant           ok
+vi        A minor-triad Submediant         A minor-triad Submediant         ok
+vii°      B diminished-triad LeadingTone   B diminished-triad LeadingTone   ok
+symbols: C Dm Em F G Am Bdim
+```
+
+### En GA
+
+La columna de GA apila las mismas terceras sobre [`Key.Major.C.Notes`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/Key.cs#L36) (lección 5), nombra cada acorde con [`CanonicalChordPatternCatalog.TryFindExact`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Harmony/CanonicalChordPatternCatalog.cs#L161-L177), que solo acepta un patrón sin intervalos que falten ni sobren, y toma el nombre del grado de [`HarmonicFunctionExtensions.FromDegree`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/HarmonicFunction.cs#L7-L35). En una tonalidad mayor, todo coincide.
+
+## Acordes de séptima
+
+Apila una tercera más y cada grado obtiene un acorde de séptima. En una tonalidad mayor: acordes de séptima mayor sobre I y IV, acordes de séptima menor sobre ii, iii y vi, una **séptima de dominante** sobre V, la única de la tonalidad, y una séptima semidisminuida sobre vii. El número añade un 7, y ø marca el acorde semidisminuido ([Open Music Theory, "Seventh Chords"](https://viva.pressbooks.pub/openmusictheory/chapter/seventh-chords/) y "Roman Numerals"):
+
+```text
+== Seventh chords of C major
+numeral   course                           GA                               check
+I7        C major-7                        C major-7                        ok
+ii7       D minor-7                        D minor-7                        ok
+iii7      E minor-7                        E minor-7                        ok
+IV7       F major-7                        F major-7                        ok
+V7        G dominant-7                     G dominant-7                     ok
+vi7       A minor-7                        A minor-7                        ok
+viiø7     B half-diminished-7              B half-diminished-7              ok
+symbols: Cmaj7 Dm7 Em7 Fmaj7 G7 Am7 Bm7b5
+```
+
+El curso imprime el acorde semidisminuido como `Bm7b5`, el cifrado de la lección 3.
+
+## Las tonalidades menores y la sensible
+
+### La idea
+
+Apila tríadas sobre la escala menor natural y las cualidades se desplazan: i, ii°, III, iv, v, VI, VII. Dos grados difieren del mayor. El acorde del quinto grado es menor, y el séptimo grado está un tono por debajo de la tónica, la **subtónica**, no una sensible ([Open Music Theory, "Minor Scales, Scale Degrees, and Key Signatures"](https://viva.pressbooks.pub/openmusictheory/chapter/minor-scales/)). La música en menor suele elevar ese séptimo grado cuando va a la dominante: G pasa a G♯ en A menor. El acorde v se convierte en un V mayor, y VII en un vii° disminuido, los mismos acordes de dominante que en mayor ("Triads" y "Roman Numerals"). Las notas de A menor con G♯ forman la escala menor armónica.
+
+### En GA
+
+En menor natural, el curso llama al grado 7 subtónica y GA, sensible:
+
+```text
+== Triads of A minor, natural minor
+numeral   course                           GA                               check
+i         A minor-triad Tonic              A minor-triad Tonic              ok
+ii°       B diminished-triad Supertonic    B diminished-triad Supertonic    ok
+III       C major-triad Mediant            C major-triad Mediant            ok
+iv        D minor-triad Subdominant        D minor-triad Subdominant        ok
+v         E minor-triad Dominant           E minor-triad Dominant           ok
+VI        F major-triad Submediant         F major-triad Submediant         ok
+VII       G major-triad Subtonic           G major-triad LeadingTone        DIFF
+```
+
+`FromDegree(7)` devuelve `LeadingTone` sea cual sea la tonalidad. La enumeración `ScaleDegreeFunction` de GA sí tiene un miembro `Subtonic`, pero `FromDegree` solo ve un número. Con la sensible elevada, los dos lados coinciden; la columna de GA apila el `Scale.HarmonicMinor` de GA:
+
+```text
+== Triads of A minor with the raised leading tone (harmonic minor)
+numeral   course                           GA                               check
+i         A minor-triad Tonic              A minor-triad Tonic              ok
+ii°       B diminished-triad Supertonic    B diminished-triad Supertonic    ok
+III+      C augmented-triad Mediant        C augmented-triad Mediant        ok
+iv        D minor-triad Subdominant        D minor-triad Subdominant        ok
+V         E major-triad Dominant           E major-triad Dominant           ok
+VI        F major-triad Submediant         F major-triad Submediant         ok
+vii°      G# diminished-triad LeadingTone  G# diminished-triad LeadingTone  ok
+symbols: Am Bdim Caug Dm E F G#dim
+```
+
+La mediante de la menor armónica es una tríada aumentada, `III+`: C E G♯.
+
+## El mismo patrón en todas las tonalidades
+
+Los números no dependen de la tónica, pero las grafías sí: una letra por grado, como en la lección 5. El programa apila las tríadas de E♭ mayor, F♯ mayor, G♭ mayor y C♯ menor sobre sus propias notas y luego sobre el `Key.Notes` de GA:
+
+```text
+== The triads of other keys, stacked on the course's notes and on GA's Key.Notes
+key    course                                       GA                                           check
+Eb     Eb Fm Gm Ab Bb Cm Ddim                       Eb Fm Gm Ab Bb Cm Ddim                       ok
+F#     F# G#m A#m B C# D#m E#dim                    F# G#m A#m B C# D#m E#dim                    ok
+Gb     Gb Abm Bbm Cb Db Ebm Fdim                    Gb Abm Bbm Cb Db Ebm Fdim                    ok
+C#m    C#m D#dim E F#m G#m A B                      C#m D#dim E F#m G#m A B                      ok
+```
+
+El acorde del séptimo grado de F♯ mayor es E♯dim, y el acorde del cuarto grado de G♭ mayor es C♭. El núcleo de GA acierta en los dos.
+
+La herramienta MCP de GA `ga_diatonic_chords`, no. Es un closure de la capa F# de GA: calcula las fundamentales en semitonos a partir de un patrón fijo y luego las nombra con una de dos tablas de 12 nombres, sostenidos o bemoles, elegida según la alteración de la fundamental ([`DomainClosures.fs`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs#L23-L36), [`diatonicChords`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs#L167-L196)). Una tabla no tiene ni E♯ ni C♭. El 2026-09-15, el servidor MCP que se ejecutaba en la máquina del autor (no indica su versión) respondió:
+
+```text
+ga_diatonic_chords F# major  ->  F#, G#m, A#m, B, C#, D#m, Fdim
+ga_diatonic_chords Gb major  ->  Gb, Abm, Bbm, B, Db, Ebm, Fdim
+```
+
+Fdim tiene las clases de altura correctas para F♯ mayor, pero la tonalidad no tiene F; en G♭ mayor, `B` debería ser C♭. Otra herramienta MCP, `get_diatonic_chords`, respondió `An error occurred invoking 'get_diatonic_chords'.` para "A minor".
+
+## Funciones armónicas
+
+### La idea
+
+Los acordes de una tonalidad no hacen todos el mismo trabajo. Open Music Theory los reparte en tres **funciones** ([Open Music Theory, "Introduction to Harmony, Cadences, and Phrase Endings"](https://viva.pressbooks.pub/openmusictheory/chapter/intro-to-harmony/)):
+
+- **tónica** (T), estable, la casa: I (en menor: i);
+- **predominante** (PD), se aleja de la tónica hacia la dominante; IV y ii son predominantes fuertes, iii y vi débiles (en menor: iv y ii° fuertes, VII, III y VI débiles);
+- **dominante** (D), urgente, tira hacia la tónica: V y vii°, igual en menor.
+
+Una frase suele ir de T a PD, luego a D y de vuelta a T. I, IV y V, las **tríadas principales**, cubren entre las tres las tres funciones y las siete notas de la tonalidad ([Primary triad](https://en.wikipedia.org/wiki/Primary_triad), Wikipedia). En C mayor: C E G, F A C y G B D. La figura siguiente las dibuja en un mismo brazalete de nombres de notas: tres triángulos, la tríada de tónica C E G en un color, F A C en un segundo y G B D en un tercero. La tríada de tónica comparte C con IV y G con V, y esas dos notas van rodeadas por un círculo.
+
+<BraceletPrimary role="img" aria-label="Brazalete de nombres de notas con tres triángulos: C E G, F A C y G B D, los acordes I, IV y V de C mayor. C es común a los dos primeros y G al primero y al tercero." />
+
+No todos los libros de texto clasifican vi y iii de la misma manera. El módulo de Streeling [MUS-003 · Cómo funciona la armonía](../../streeling/music/mus-003-functional-harmony/) los pone en la familia de la tónica, como sustitutos de I que comparten dos de sus notas, una lectura habitual en los manuales de armonía; Open Music Theory reserva la función de tónica solo para I.
+
+### En GA
+
+GA tiene dos tipos de función. `HarmonicFunction`, usado arriba, nombra el **grado** (de Tonic a LeadingTone). Su capa de servicios asigna esos nombres a tres categorías, Tonic, Subdominant y Dominant, y pone la mediante y la submediante con la tónica, la lectura de MUS-003 ([`HarmonicFunctionAnalyzer.ToPrimaryCategory`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Tonal/HarmonicFunctionAnalyzer.cs#L92-L99)).
+
+Leer el mismo archivo revela un despiste que el programa del curso no puede ejecutar, porque `GA.Domain.Services` es demasiado pesado para referenciarlo (*por verificar* con un test en GA). `HarmonicFunctionAnalyzer.Parse` convierte un nombre en una función probando `Contains` en orden, y prueba "tonic" antes que "supertonic" y "mediant" antes que "submediant" ([L29-L72](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Tonal/HarmonicFunctionAnalyzer.cs#L29-L72)). "Supertonic" contiene "tonic", así que debería analizarse como `Tonic`, y "Submediant" como `Mediant`.
+
+## ¿Qué acordes pertenecen a una tonalidad?
+
+Dos preguntas aparecen todo el tiempo: ¿encaja este acorde en esta tonalidad?, y ¿qué tonalidades contienen este acorde? El curso responde con los ids de 12 bits de la lección 2: un acorde encaja cuando ninguno de sus bits cae fuera de los de la tonalidad. GA responde con `PitchClassSet.IsSubsetOf` y [`GetCompatibleKeys`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Atonal/PitchClassSet.cs#L592-L595):
+
+```text
+== Which triads belong to a key? (major, minor and diminished triads on 12 roots)
+Key of G     course: C D Em F#dim G Am Bm
+             GA:     C D Em F#dim G Am Bm
+Key of Bb    course: Cm Dm Eb F Gm Adim Bb
+             GA:     Cm Dm Eb F Gm Adim Bb
+```
+
+```text
+== Which keys contain a chord? (GA: PitchClassSet.GetCompatibleKeys)
+chord  course                                             GA                                                 check
+Dm     C Am F Dm Bb Gm                                    C Am F Dm Bb Gm                                    ok
+G7     C Am                                               C Am                                               ok
+Bdim   C Am                                               C Am                                               ok
+E      A F#m E C#m B G#m Cb Abm                           A F#m E C#m B G#m Cb Abm                           ok
+```
+
+Las respuestas ignoran la grafía. La tríada de E mayor, E G♯ B, está en la tonalidad de C♭ mayor como F♭ A♭ C♭, y los dos lados incluyen C♭ y A♭ menor. G7 y Bdim solo encajan en C mayor y A menor: un acorde de séptima de dominante o una tríada disminuida apunta a una sola armadura, una de las razones por las que importan en la lección 7.
+
+## Ejercicios
+
+1. Nombra las siete tríadas de G mayor.
+2. Construye el acorde de séptima sobre el grado 5 de D menor, con la sensible elevada. ¿Cuál es su cifrado y su número romano?
+3. ¿Cuál es la tríada sobre el grado 3 de B♭ mayor, y cómo se llama ese grado?
+
+<details>
+<summary>Soluciones</summary>
+
+1. G Am Bm C D Em F♯dim: I ii iii IV V vi vii°, como en toda tonalidad mayor.
+2. D menor armónica es D E F G A B♭ C♯. Sobre A: A C♯ E G, un acorde de séptima de dominante, A7, número V7. Sus clases de altura son 1 4 7 9.
+3. D F A, D menor, iii, sobre la mediante.
+
+```text
+== Exercise solutions
+question             course                               GA                                   check
+1. G major triads    G Am Bm C D Em F#dim                 G Am Bm C D Em F#dim                 ok
+2. degree 5 of D harmonic minor, stacked in four: A7 (V7)
+2. A7 pitch classes  1 4 7 9                              1 4 7 9                              ok
+3. iii of Bb major   D minor-triad Mediant                D minor-triad Mediant                ok
+```
+
+</details>
+
+## Puntos clave
+
+- Apilar terceras sobre una tonalidad mayor da I ii iii IV V vi vii° en todas las tonalidades; los acordes de séptima añaden Imaj7, V7 y viiø7.
+- La menor natural da i ii° III iv v VI VII; elevar el séptimo grado, la sensible, convierte v en V y VII en vii°, los acordes de dominante del mayor.
+- Las funciones de Open Music Theory son tónica (I), predominante (IV y ii fuertes, iii y vi débiles) y dominante (V, vii°); otros manuales, MUS-003 y el analizador de GA agrupan vi y iii con la tónica.
+- El núcleo de GA apila, nombra y sitúa los acordes como la teoría, salvo que el grado 7 es siempre la «sensible». Su herramienta MCP escribe F♯ y G♭ mayor con notas de una tabla de 12 nombres, y su analizador de funciones prueba los nombres en un orden en el que "Supertonic" coincide con "tonic".
+
+## Fuentes
+
+- Mark Gotham et al., [*Open Music Theory*](https://viva.pressbooks.pub/openmusictheory/), versión 2, 2023, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/): capítulos [Triads](https://viva.pressbooks.pub/openmusictheory/chapter/triads/), [Seventh Chords](https://viva.pressbooks.pub/openmusictheory/chapter/seventh-chords/), [Roman Numerals](https://viva.pressbooks.pub/openmusictheory/chapter/roman-numerals/), [Major Scales, Scale Degrees, and Key Signatures](https://viva.pressbooks.pub/openmusictheory/chapter/major-scales/), [Minor Scales, Scale Degrees, and Key Signatures](https://viva.pressbooks.pub/openmusictheory/chapter/minor-scales/), [Introduction to Harmony, Cadences, and Phrase Endings](https://viva.pressbooks.pub/openmusictheory/chapter/intro-to-harmony/).
+- GuitarAlchemist/ga en [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6): `Common/GA.Domain.Core/Theory/Tonal` (`Key.cs`, `HarmonicFunction.cs`, `Primitives/ScaleDegreeFunction.cs`), `Common/GA.Domain.Core/Theory/Harmony/CanonicalChordPatternCatalog.cs`, `Common/GA.Domain.Core/Theory/Atonal/PitchClassSet.cs`, `Common/GA.Domain.Services/Tonal/HarmonicFunctionAnalyzer.cs`, `Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs`.

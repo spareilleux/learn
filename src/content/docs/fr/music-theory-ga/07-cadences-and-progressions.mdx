@@ -1,0 +1,205 @@
+---
+title: "Leçon 7 : cadences, ii–V–I et tonalité d'une progression"
+description: Fins authentiques, demi-cadences, mouvements plagal et rompu, l'attraction de V7 vers I, la progression ii–V–I, et comment trouver la tonalité d'une progression d'accords, comparés avec le catalogue de cadences de Guitar Alchemist, son détecteur de tonalité et ses outils MCP.
+sidebar:
+  label: 7. Cadences et progressions
+  order: 7
+---
+
+import GridsIIVI from '../../../../assets/music-theory-ga/l7-ii-v-i.svg';
+import BraceletG7C from '../../../../assets/music-theory-ga/l7-bracelet-g7-c.svg';
+
+La leçon 6 a donné à chaque accord d'une tonalité un chiffre romain et une fonction. Cette leçon enchaîne les accords : comment se terminent les phrases, pourquoi V7 mène à I, ce qui fait de ii–V–I la colonne vertébrale du jazz, et comment faire le chemin inverse, d'une liste de chiffrages d'accords à leur tonalité. [Guitar Alchemist](https://github.com/GuitarAlchemist/ga) (GA) a un catalogue de cadences, un détecteur de tonalité dans son cœur et deux outils MCP pour cette dernière question ; le programme du cours vérifie les trois.
+
+Tous les liens vers GA pointent sur le commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6). Les sorties viennent de :
+
+```bash
+dotnet run --project code/music-theory-ga/GaTheory -c Release -- l7
+```
+
+## Cadences
+
+### L'idée
+
+Une **cadence** marque la fin d'une phrase. Open Music Theory en distingue deux grandes sortes ([Open Music Theory, "Introduction to Harmony, Cadences, and Phrase Endings"](https://viva.pressbooks.pub/openmusictheory/chapter/intro-to-harmony/)) :
+
+- une **cadence authentique** va de V à I et sonne conclusive. Elle est **parfaite** (PAC) quand les deux accords sont à l'état fondamental et que la tonique est à la voix supérieure sur l'accord I, **imparfaite** (IAC) quand V–I est là mais que l'une de ces conditions manque ;
+- une **demi-cadence** (HC) se termine sur V, à partir de n'importe quel accord, « x–V », et sonne suspensive.
+
+Deux autres mouvements ont leur propre nom. IV–I, l'« amen » de la fin des hymnes, est souvent appelé cadence plagale ; Open Music Theory préfère « mouvement plagal », parce que dans la musique des XVIIIe et XIXe siècles il prolonge surtout une tonique déjà atteinte ([Open Music Theory, "Plagal Motion as a Form of Prolongation"](https://viva.pressbooks.pub/openmusictheory/chapter/plagal-motion/)). V(7)–vi, où l'oreille attend I et reçoit vi, est un **mouvement rompu** ([Open Music Theory, "La in the Bass at Beginnings, Middles, and Endings"](https://viva.pressbooks.pub/openmusictheory/chapter/la-in-the-bass/)). Le module Streeling [MUS-003 · Comment fonctionne l'harmonie](../../streeling/music/mus-003-functional-harmony/) présente les mêmes cinq fins, avec des exemples à la guitare en G majeur.
+
+### Dans GA
+
+GA liste 21 cadences et fins courantes dans un fichier de configuration, [`Cadences.yaml`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/Cadences.yaml), de la PAC aux motifs jazz, rock, metal, flamenco et neo-soul. Chaque entrée donne des chiffres romains, une tonalité et les accords dans cette tonalité. Le programme lit le fichier, calcule les chiffres romains à partir des accords et de la tonalité, avec les règles de la leçon 6 plus un bémol ou un dièse quand une fondamentale n'est pas dans la gamme de la tonalité ([`Lesson7.Numeral`](https://github.com/spareilleux/learn/blob/a2439ba/code/music-theory-ga/GaTheory/Lesson7.cs#L26-L46)), et les compare à ceux du fichier, en ignorant les suffixes de qualité d'accord :
+
+```text
+== GA's Cadences.yaml: its Roman numerals, and the course's from the chords and the key
+cadence                            course           GA               check
+Perfect Authentic Cadence (PAC)    V I              V I              ok
+Imperfect Authentic Cadence (IAC)  V I              V I              ok
+Plagal Cadence                     IV I             IV I             ok
+Half Cadence                       I V              I V              ok
+Deceptive Cadence                  V vi             V vi             ok
+Major ii-V-I                       ii V I           ii V I           ok
+Minor ii-V-i                       ii V i           ii V i           ok
+Tritone Substitution               ii bII I         ii bII I         ok
+Backdoor Cadence                   iv bVII I        iv bVII I        ok
+Tadd Dameron Turnaround            I bIII bVI bII   I bIII bVI bII   ok
+Coltrane Turnaround                I bIII bVI bII I I bIII bVI bII I ok
+Rock Authentic Cadence             V I              V I              ok
+Mixolydian Cadence (bVII-I)        bVII I           bVII I           ok
+Aeolian Cadence (Mario Cadence)    bVI bVII I       bVI bVII I       ok
+Double Plagal                      bVII IV I        bVII IV I        ok
+Phrygian Half Cadence              bII i            bII i            ok
+Chromatic Mediant (Metal)          i iii            i biii           DIFF
+Andalusian Cadence                 iv III II I      iv III II I      ok
+Neo-Soul ii-V                      ii V I           ii V I           ok
+Minor Plagal (Neo-Soul)            iv I             iv I             ok
+Tritone Sub ii-V (Neo-Soul)        ii bII I         ii bII I         ok
+```
+
+Les accords et les chiffres romains concordent, sauf sur une ligne. "Chromatic Mediant (Metal)", c'est Em–Gm en E mineur. G est le troisième degré de E mineur, donc le cours écrit iii ; le fichier écrit ♭iii, en mesurant depuis E majeur, dont le troisième degré est G♯. Le même fichier analyse la cadence andalouse, Am G F E, en E phrygien ("iv III II I"), à partir des notes du mode. Les deux lectures existent, mais un même fichier devrait en choisir une : Open Music Theory numérote les accords en mineur à partir de la gamme mineure, III, VI et VII sans bémols (["Roman Numerals"](https://viva.pressbooks.pub/openmusictheory/chapter/roman-numerals/)).
+
+Un nom est aussi trompeur. La "Phrygian Half Cadence" du fichier est ♭II–i, de F à Em, qui se termine sur la tonique. En théorie classique, une demi-cadence phrygienne est iv⁶–V en mineur, une demi-cadence nommée d'après le demi-ton de sa basse ([Cadence](https://en.wikipedia.org/wiki/Cadence), Wikipédia, "Phrygian half cadence").
+
+## V7 et l'attraction vers I
+
+### L'idée
+
+Ajoute une septième à V et il est attiré plus fort vers I ([Open Music Theory, "Strengthening Endings with V7"](https://viva.pressbooks.pub/openmusictheory/chapter/strengthening-endings-with-v7/)). En C majeur, V7 est G7, G B D F. Ses notes actives ont des tendances : la sensible B monte vers C, la septième F descend vers E, et D va vers C (même chapitre). B et F sont à six demi-tons l'un de l'autre, un **triton**, le seul de la tonalité ; la triade de C majeur n'en a aucun. Le programme déplace chaque note de G7 vers la note de C la plus proche, puis compte les tritons avec les vecteurs d'intervalles de la leçon 4 :
+
+```text
+== Resolving V7 to I: each tone of G7 to the nearest tone of C
+  G (root)                 -> G (0)
+  B (third, leading tone)  -> C (+1)
+  D (fifth)                -> C (-2) or E (+2)
+  F (seventh)              -> E (-1)
+tritone        course       GA           check
+in G7          1            1            ok
+in C           0            0            ok
+```
+
+La figure suivante dessine G7 et C sur un même bracelet de noms de notes : un quadrilatère G B D F et un triangle C E G, qui ne partagent que G, cerclé. En faisant le tour du cercle, B est un cran sous C et F un cran au-dessus de E : les deux résolutions sont les deux déplacements les plus courts sur le cadran.
+
+<BraceletG7C role="img" aria-label="Bracelet de noms de notes avec un quadrilatère G, B, D, F pour G7 et un triangle C, E, G pour C majeur. G est partagé et cerclé ; B est à côté de C et F à côté de E." />
+
+Les accords qui partagent des notes s'enchaînent en douceur, et le programme liste les notes communes de quelques paires. Les sorties sont des classes de hauteurs, comme dans la leçon 2, et le programme écrit 10 et 11 T et E : ici, `E` est la classe de hauteurs 11, B, pas la note E.
+
+```text
+== Common tones between neighbouring chords (GA: PitchClassSet.Intersect)
+chords         course       GA           check
+G7 C           7            7            ok
+Dm7 G7         2 5          2 5          ok
+G7 Cmaj7       7 E          7 E          ok
+C Am           0 4          0 4          ok
+C F#           (none)       (none)       ok
+```
+
+La colonne GA est `PitchClassSet.Intersect` ; elle concorde. G7 et Cmaj7 partagent G et B, et C et F♯ ne partagent rien.
+
+## ii–V–I
+
+### L'idée
+
+En jazz, la progression la plus importante est **ii–V–I** : ii7–V7–Imaj7 en majeur, iiø7–V7–i7 en mineur ([Open Music Theory, "ii–V–I"](https://viva.pressbooks.pub/openmusictheory/chapter/ii-v-i/)). Chaque fondamentale est une quinte au-dessus de la suivante, D, G, C, et les qualités d'accords suivent un motif fixe : septième mineure, septième de dominante, septième majeure en majeur ; septième demi-diminuée, septième de dominante, septième mineure en mineur. L'accord V est de dominante dans les deux modes (même chapitre). Un ii–V fonctionne même sans son I, et des ii–V–I entiers passent de tonalité en tonalité à l'intérieur d'un morceau. Le module Streeling [MUS-003](../../streeling/music/mus-003-functional-harmony/) l'analyse en G majeur (section "Functional Analysis in Practice"), et [MUS-005 · L'harmonie jazz à la guitare](../../streeling/music/mus-005-jazz-harmony/) en C majeur, avec des voicings shell et drop 2.
+
+Le programme empile les degrés 2, 5 et 1 de C majeur, puis de C mineur avec la sensible haussée pour V, et nomme les qualités ; la colonne GA nomme les accords analysés avec `Chord.FromSymbol` à travers le catalogue de la leçon 6 :
+
+```text
+== ii-V-I: chord qualities from the key (major, then minor with the raised leading tone)
+progression        course                                   GA                                       check
+Dm7 G7 Cmaj7       minor-7 dominant-7 major-7               minor-7 dominant-7 major-7               ok
+  numerals in C major: ii V I; roots D G C, each a fifth below the one before
+Dm7b5 G7 Cm7       half-diminished-7 dominant-7 minor-7     half-diminished-7 dominant-7 minor-7     ok
+  numerals in C minor: ii V i; roots D G C, each a fifth below the one before
+```
+
+La figure ci-dessous donne un jeu de formes en position ouverte pour ii–V–I en C majeur, en grilles d'accords, corde 6 à gauche. Dm7 est xx0211 : cordes 6 et 5 étouffées, D à vide, puis A, C et F. G7 est 320001 : G, B, D à vide, G et B, et F à la première case de la corde 1. Cmaj7 est x32000 : C, E, puis G, B et E à vide. De G7 à Cmaj7, le F de la corde 1 descend d'un demi-ton sur le E à vide, et le B de la corde 2 reste ; à la guitare, la sensible ne monte pas toujours.
+
+<GridsIIVI role="img" aria-label="Trois grilles d'accords. Dm7, xx0211 : D3 A3 C4 F4. G7, 320001 : G2 B2 D3 G3 B3 F4. Cmaj7, x32000 : C3 E3 G3 B3 E4." />
+
+## Trouver la tonalité d'une progression
+
+### L'idée
+
+Avec seulement des chiffrages d'accords, dans quelle tonalité est-on ? Une première réponse : la tonalité dont les notes contiennent toutes les notes des accords. La leçon 6 a montré qu'un accord va souvent dans plusieurs tonalités, et une progression entière aussi. C F G C utilise exactement les notes de C majeur, qui sont aussi celles de A mineur ; dans toute égalité de ce genre, un second indice tranche. Une phrase commence généralement sur la tonique, et une fin conclusive, une cadence authentique, y revient (Open Music Theory, "Introduction to Harmony, Cadences, and Phrase Endings"). La règle du cours ([`Lesson7.CourseKey`](https://github.com/spareilleux/learn/blob/a2439ba/code/music-theory-ga/GaTheory/Lesson7.cs#L93-L118)) est :
+
+1. garder les tonalités qui contiennent le plus d'accords, avec, pour les tonalités mineures, la gamme mineure naturelle plus la sensible haussée ;
+2. parmi elles, préférer la tonalité dont l'accord de tonique termine la progression, puis celle dont l'accord de tonique la commence ; afficher une égalité sous la forme « X or Y ».
+
+C'est une heuristique, pas une théorie : les vrais morceaux modulent, empruntent des accords et finissent sur V. Elle suffit pour des progressions courtes.
+
+### Dans GA
+
+Le cœur de GA a [`PitchClassSet.ClosestDiatonicKey`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Atonal/PitchClassSet.cs#L353). Il compte, pour chacune des 30 tonalités, combien des notes de la tonalité sont dans l'ensemble, et départage les égalités avec un mode attendu : mineur si la **forme normale** de l'ensemble contient la classe de hauteurs 3, E♭, et majeur sinon ([`FindClosestDiatonicKey2`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Atonal/PitchClassSet.cs#L597-L660)). Le programme lui donne la réunion des notes des accords :
+
+```text
+== Finding the key: the course, then GA's PitchClassSet.ClosestDiatonicKey on all the notes
+progression    course             GA                 check
+C F G C        Key of C           Key of Am          DIFF
+  notes 0 2 4 5 7 9 E, GA normal form 0 1 3 5 6 8 T; GA compatible keys: C, Am; roots only: C major 4/4
+G D Em C       Key of G           Key of Em          DIFF
+  notes 0 2 4 6 7 9 E, GA normal form 0 1 3 5 6 8 T; GA compatible keys: G, Em; roots only: G major 4/4
+Dm7 G7 Cmaj7   Key of C           Key of Am          DIFF
+  notes 0 2 4 5 7 9 E, GA normal form 0 1 3 5 6 8 T; GA compatible keys: C, Am; roots only: D minor 3/3
+Am Dm E7 Am    Key of Am          Key of Am          ok
+  notes 0 2 4 5 8 9 E, GA normal form 0 1 3 4 6 8 9; GA compatible keys: (none); roots only: A major 4/4
+Am F C G       Key of Am          Key of Am          ok
+  notes 0 2 4 5 7 9 E, GA normal form 0 1 3 5 6 8 T; GA compatible keys: C, Am; roots only: A minor 4/4
+C Am F G7      Key of C           Key of Am          DIFF
+  notes 0 2 4 5 7 9 E, GA normal form 0 1 3 5 6 8 T; GA compatible keys: C, Am; roots only: C major 4/4
+```
+
+La forme normale est une transposition de l'ensemble qui commence sur 0, pas l'ensemble vu depuis sa tonique, donc « contient 3 » ne dit rien du mode. Pour les notes de C majeur ou de G majeur, la forme normale contient 3, l'égalité penche vers le mineur, et une progression qui commence et finit sur C sort en A mineur. Rien dans la méthode ne regarde quel accord vient en premier ou en dernier. La ligne "notes" montre aussi `GetCompatibleKeys`, qui est juste mais ne sait pas choisir, et rien ne convient au G♯ de Am Dm E7 Am, sauf la collection mineure du cours.
+
+Le serveur MCP de GA a deux outils pour la même question, `ga_key_from_progression` et `ga_analyze_progression`. Tous deux notent chaque tonalité majeure et mineure naturelle en comptant les **fondamentales** des accords dans sa gamme, pas les notes des accords, et préfèrent la tonalité sur la fondamentale du premier accord ([`GaKeyFromProgressionTool`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaMcpServer/Tools/GuitaristProblemTools.cs#L157-L223), [`analyzeProgression`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs#L255-L336)). Les chiffres romains viennent ensuite d'une liste fixe par mode. La partie "roots only" de chaque ligne ci-dessus est cette règle, réécrite dans le programme du cours ([`Lesson7.RootsOnlyKey`](https://github.com/spareilleux/learn/blob/a2439ba/code/music-theory-ga/GaTheory/Lesson7.cs#L120-L135)). Le 2026-09-15, le serveur MCP qui tournait sur la machine de l'auteur (sa version n'est pas indiquée) a répondu :
+
+```text
+ga_key_from_progression ["Am","F","C","G"]   ->  bestGuess "A minor" (candidates A minor, C major, D minor, all 4/4)
+ga_key_from_progression ["Dm7","G7","Cmaj7"] ->  bestGuess "D minor" (candidates D minor, C major, C minor, all 3/3)
+ga_analyze_progression "Am Dm E7 Am"         ->  Key: A major  (confidence 4/4)   I IV V I
+ga_analyze_progression "Dm7 G7 Cmaj7"        ->  Key: D minor  (confidence 3/3)   i iv VII
+```
+
+La description du premier outil promet elle-même "Am F C G → best guess C major". A mineur est une réponse défendable pour une progression qui commence sur Am ; C mineur, candidat pour Dm7 G7 Cmaj7, ne l'est pas : le E et le B de Cmaj7 ne sont pas dans C mineur, mais l'outil ne compte que les fondamentales D, G et C, qui y sont. Am Dm E7 Am est en A mineur : A majeur a C♯, F♯ et G♯, et le C et le F de la progression l'excluent.
+
+## Exercices
+
+1. Donne les chiffres romains de F Gm C7 F en F majeur. Les quatre accords sont-ils tous dans la tonalité ?
+2. Dans quelle tonalité est Em Am B7 Em ?
+3. Quelle note A7 et D ont-ils en commun, et pourquoi est-ce important ?
+
+<details>
+<summary>Solutions</summary>
+
+1. I ii V7 I. F majeur a un bémol, B♭ : F A C, G B♭ D, C E G B♭ et F A C sont tous dedans. La progression est une fin PD–D–T, une cadence authentique V7–I.
+2. E mineur. B7 contient D♯, la sensible haussée de E mineur, et la progression commence et finit sur Em. La règle des fondamentales seules répond E majeur : E, A et B sont tous dans la gamme de E majeur, et les tierces mineures de Em et Am ne sont pas comptées.
+3. A, classe de hauteurs 9 : la fondamentale de A7 est la quinte de D. A7–D est V7–I en D majeur, et cette note commune reste pendant que C♯ monte vers D et que G descend vers F♯.
+
+```text
+== Exercise solutions
+question             course         GA             check
+1. F Gm C7 F in F major: I ii V I
+1. all in F major    True           True           ok
+2. Em Am B7 Em       Key of Em      Key of Em      ok
+   roots only: E major 4/4
+3. common A7 D       9              9              ok
+```
+
+La première ligne affiche les chiffres romains du cours sans le 7 de C7 : les chiffres romains de la leçon 6 marquent la qualité, et le chiffrage dit déjà qu'il s'agit d'un accord de septième.
+
+</details>
+
+## À retenir
+
+- Une cadence authentique est V–I, parfaite avec les deux accords à l'état fondamental et la tonique en haut ; une demi-cadence se termine sur V. IV–I est surtout un mouvement plagal, V–vi un mouvement rompu.
+- V7 contient le seul triton de la tonalité, B–F en C ; la sensible monte et la septième descend, vers C et E.
+- ii–V–I, c'est septième mineure, septième de dominante, septième majeure en majeur, et semi-diminuée, dominante, septième mineure en mineur, avec des fondamentales qui descendent par quintes.
+- La tonalité d'une progression demande les notes des accords et un départage sur l'accord de tonique. Le cœur de GA départage sur une forme normale qui ne code pas le mode, et ses outils MCP ne comptent que les fondamentales ; aucun ne regarde le dernier accord.
+- Le catalogue de cadences de GA est juste accord par accord, mais mélange deux conventions de chiffres romains pour le mineur et appelle ♭II–i une « demi-cadence phrygienne ».
+
+## Sources
+
+- Mark Gotham et al., [*Open Music Theory*](https://viva.pressbooks.pub/openmusictheory/), version 2, 2023, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) : chapitres [Introduction to Harmony, Cadences, and Phrase Endings](https://viva.pressbooks.pub/openmusictheory/chapter/intro-to-harmony/), [Plagal Motion as a Form of Prolongation](https://viva.pressbooks.pub/openmusictheory/chapter/plagal-motion/), [La in the Bass at Beginnings, Middles, and Endings](https://viva.pressbooks.pub/openmusictheory/chapter/la-in-the-bass/), [Strengthening Endings with V7](https://viva.pressbooks.pub/openmusictheory/chapter/strengthening-endings-with-v7/), [ii–V–I](https://viva.pressbooks.pub/openmusictheory/chapter/ii-v-i/), [Roman Numerals](https://viva.pressbooks.pub/openmusictheory/chapter/roman-numerals/).
+- [Cadence](https://en.wikipedia.org/wiki/Cadence), Wikipédia.
+- GuitarAlchemist/ga au commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6) : `Common/GA.Business.Config/Cadences.yaml`, `Common/GA.Domain.Core/Theory/Atonal/PitchClassSet.cs`, `GaMcpServer/Tools/GuitaristProblemTools.cs`, `Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs`.

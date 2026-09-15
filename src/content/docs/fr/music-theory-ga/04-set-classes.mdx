@@ -6,6 +6,9 @@ sidebar:
   order: 4
 ---
 
+import BraceletInversion from '../../../../assets/music-theory-ga/l4-bracelet-inversion.svg';
+import BraceletZ from '../../../../assets/music-theory-ga/l4-bracelet-z-relation.svg';
+
 La leçon 2 a transformé un accord ou une gamme en nombre sur 12 bits. Cette leçon regroupe ces nombres. Si deux ensembles ont la même forme, déplacée ou mise en miroir, la théorie musicale les range dans une même **classe d'ensembles** (*set class*), et les 4096 ensembles se répartissent en 224 classes. [Guitar Alchemist](https://github.com/GuitarAlchemist/ga) (GA) repose sur ce regroupement : ses formes primaires, ses vecteurs d'intervalles et ses « familles modales » en découlent tous, et ses outils MCP s'en servent pour suggérer des accords de substitution. Le programme du cours recalcule tout cela à partir des définitions des manuels, pour les 4096 ensembles.
 
 Tous les liens vers GA pointent sur le commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6). Les sorties viennent de :
@@ -33,6 +36,10 @@ T2I        2 7 T      2 7 T      ok
 ```
 
 T2 est D majeur (D F♯ A), I0 est F mineur (F A♭ C), et T2I, l'inversion puis T2, est G mineur (G B♭ D).
+
+Sur un bracelet, T*n* fait tourner le polygone et I0 le reflète par rapport à la droite qui passe par 0 et 6 : 4 va sur 8 et 7 sur 5, tandis que 0 reste en place. Sur ses pages, Ian Ring marque ces droites sur les bracelets en pointillés, comme « axes de symétrie par réflexion » ([gamme 2741](https://ianring.com/musictheory/scales/2741)).
+
+<BraceletInversion role="img" aria-label="Bracelet avec deux triangles symétriques par rapport à un axe en tirets passant par 0 et 6 : la triade de C majeur 0 4 7 et son inversion I0, la triade de F mineur 0 5 8. La classe de hauteurs 0 appartient aux deux." />
 
 ### Dans GA
 
@@ -160,6 +167,10 @@ Le [`TranspositionClass`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a0
 ### L'idée
 
 Deux ensembles peuvent avoir le même contenu en intervalles sans être transpositions ou inversions l'un de l'autre. L'exemple de Wikipédia est 4-Z15 `{0,1,4,6}` et 4-Z29 `{0,1,3,7}` : tous deux contiennent un intervalle de chaque classe, `<111111>`, « mais on ne peut pas transposer et/ou inverser l'un des ensembles sur l'autre » ([Interval vector](https://en.wikipedia.org/wiki/Interval_vector)). De telles paires sont **en relation Z**. Pour les ensembles de six notes, il existe une règle élégante : le complément d'un hexacorde Z est son partenaire Z (même article). Le module Streeling [MUS-002 · Au-delà de la tonalité](../../streeling/music/mus-002-beyond-tonality/) présente les vecteurs d'intervalles et la relation Z avec la même paire.
+
+Les deux bracelets rendent la différence visible : aucune rotation ni image miroir ne transforme une forme en l'autre, et pourtant chacune contient exactement une paire de notes à un demi-ton, une à un ton, et ainsi de suite jusqu'à un triton.
+
+<BraceletZ role="img" aria-label="Deux bracelets. 4-Z15 : 0 1 4 6. 4-Z29 : 0 1 3 7. Des formes différentes au même vecteur d'intervalles 111111." />
 
 ```text
 == Z-relation: same vector, different set classes

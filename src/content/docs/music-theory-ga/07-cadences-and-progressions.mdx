@@ -161,7 +161,7 @@ ga_analyze_progression "Am Dm E7 Am"         ->  Key: A major  (confidence 4/4) 
 ga_analyze_progression "Dm7 G7 Cmaj7"        ->  Key: D minor  (confidence 3/3)   i iv VII
 ```
 
-The first tool's own description promises "Am F C G → best guess C major". A minor is a defensible answer for a progression that starts on Am; C minor is not, since neither Cmaj7's E nor its B belongs to it, but its root does. Am Dm E7 Am is in A minor: A major has C♯, F♯ and G♯, and the progression's C and F rule it out.
+The first tool's own description promises "Am F C G → best guess C major". A minor is a defensible answer for a progression that starts on Am; C minor, a candidate for Dm7 G7 Cmaj7, is not: Cmaj7's E and B are not in C minor, but the tool only counts the roots D, G and C, which are. Am Dm E7 Am is in A minor: A major has C♯, F♯ and G♯, and the progression's C and F rule it out.
 
 ## Exercises
 
@@ -194,7 +194,7 @@ The first line prints the course's numerals without the 7 of C7: lesson 6's nume
 
 - An authentic cadence is V–I, perfect with both chords in root position and the tonic on top; a half cadence ends on V. IV–I is mostly plagal motion, V–vi deceptive motion.
 - V7 holds the key's only tritone, B–F in C; the leading tone rises and the seventh falls, to C and E.
-- ii–V–I is mi7–7–ma7 in major and ø7–7–mi7 in minor, roots moving down by fifths.
+- ii–V–I is minor seventh, dominant seventh, major seventh in major, and half-diminished, dominant, minor seventh in minor, with roots moving down by fifths.
 - The key of a progression needs the chords' notes and a tie-break on the tonic chord. GA's core breaks ties on a normal form that doesn't encode the mode, and its MCP tools count roots only; neither looks at the last chord.
 - GA's cadence catalog is right chord by chord, but mixes two numeral conventions for minor and names ♭II–i a "Phrygian half cadence".
 

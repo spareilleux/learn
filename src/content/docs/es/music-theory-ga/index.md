@@ -7,7 +7,7 @@ sidebar:
 ---
 
 :::note[Cómo se prueba este curso]
-Cada tabla de salida de las lecciones procede de [`code/music-theory-ga`](https://github.com/spareilleux/learn/tree/main/code/music-theory-ga), un programa .NET 10 que calcula cada concepto a partir de las definiciones de los libros de texto y le pide la misma respuesta a [Guitar Alchemist](https://github.com/GuitarAlchemist/ga). Se compila contra el proyecto `GA.Domain.Core` de GA, clonado en el commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6). [`.github/workflows/music-ga-examples.yml`](https://github.com/spareilleux/learn/blob/main/.github/workflows/music-ga-examples.yml) lo ejecuta en Linux, Windows y macOS y compara la salida, líneas `DIFF` incluidas, con los archivos esperados. Las salidas se capturaron en septiembre de 2026.
+Cada tabla de salida de las lecciones procede de [`code/music-theory-ga`](https://github.com/spareilleux/learn/tree/main/code/music-theory-ga), un programa .NET 10 que calcula cada concepto a partir de las definiciones de los libros de texto y le pide la misma respuesta a [Guitar Alchemist](https://github.com/GuitarAlchemist/ga). Se compila contra el proyecto `GA.Domain.Core` de GA, clonado en el commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6). [`.github/workflows/music-ga-examples.yml`](https://github.com/spareilleux/learn/blob/main/.github/workflows/music-ga-examples.yml) lo ejecuta en Linux, Windows y macOS y compara la salida, líneas `DIFF` incluidas, con los archivos esperados. El mismo programa dibuja las figuras, brazaletes, diagramas de acordes, mástiles y círculos de quintas, como archivos SVG, y la CI comprueba que las imágenes del repositorio están al día. Las salidas se capturaron en septiembre de 2026.
 :::
 
 ## Por qué aprendo esto
@@ -28,19 +28,36 @@ El lado de la programación te resultará familiar: value objects, records, camp
 
 - convertir entre nombres de notas, clases de altura, números MIDI y posiciones en el mástil;
 - nombrar y deletrear intervalos, y reducirlos a clases de intervalo;
-- construir escalas y modos a partir de patrones de pasos y leerlos como números de 12 bits;
+- construir escalas y modos a partir de patrones de pasos, leerlos como números de 12 bits y dibujarlos como brazaletes;
 - leer cifrados de acordes, deletrear acordes, reconocer inversiones y nombrar *voicings* de guitarra;
 - calcular vectores interválicos, formas primas y números de Forte, y explicar la relación Z;
+- leer armaduras, recorrer el círculo de quintas y encontrar las tonalidades relativas, homónimas y estrechamente relacionadas;
+- construir los acordes de una tonalidad, etiquetarlos con números romanos y funciones, y analizar cadencias y progresiones;
+- explicar la conducción de voces, las sustituciones, la mezcla modal, las escalas simétricas, los acordes extendidos y las técnicas de voicing de guitarra;
 - encontrar cada uno de estos conceptos en el código de GA, y decir dónde GA coincide con la teoría y dónde no.
 
 ## Plan
 
+El curso sigue los conceptos que usan el código, los archivos de configuración y las herramientas MCP de GA, desde la nota aislada hasta las transformaciones neorriemannianas. Las lecciones 1 a 7 están escritas; las demás son el plan, y su columna «En GA» nombra los tipos, archivos y herramientas que leerá cada una.
+
 | # | Lección | Teoría | En GA | Si escribes C# |
 |---|---|---|---|---|
 | 1 | [Notas, clases de altura y el mástil](01-notes-and-the-fretboard/) | altura, clase de altura, alteraciones, intervalos, afinación | `PitchClass`, `Note`, `Interval`, `Tuning`, `Fretboard` | value objects, jerarquías cerradas de records |
-| 2 | [Escalas, modos e ids de escala de 12 bits](02-scales-and-modes/) | escalas mayores y menores, modos, transposición | `PitchClassSetId`, `Scale`, `MajorScaleMode`, `ModalFamily` | `[Flags]`, rotación de bits, `PopCount` |
+| 2 | [Escalas, modos e ids de escala de 12 bits](02-scales-and-modes/) | escalas mayores y menores, modos, transposición, brazaletes | `PitchClassSetId`, `Scale`, `MajorScaleMode`, `ModalFamily` | `[Flags]`, rotación de bits, `PopCount` |
 | 3 | [Acordes, cifrados, inversiones y voicings](03-chords-and-voicings/) | tríadas, acordes de séptima, cifrados, inversiones | `Chord`, `ChordFormula`, `CanonicalChordPatternCatalog`, `Voicing` | parsers, expresiones `switch` |
 | 4 | [Clases de conjuntos, vectores interválicos y la relación Z](04-set-classes/) | equivalencia T/I, vectores interválicos, formas primas, números de Forte | `SetClass`, `IntervalClassVector`, `ForteCatalog`, herramientas MCP | formas canónicas, clases de equivalencia |
+| 5 | [Tonalidades, armaduras y el círculo de quintas](05-keys-and-the-circle-of-fifths/) | armaduras, tonalidades relativas y homónimas, tonalidades estrechamente relacionadas | `Key`, `KeySignature`, herramientas MCP de tonalidades | value objects de rango, tablas de búsqueda |
+| 6 | [Los acordes de una tonalidad](06-diatonic-chords/) | tríadas y acordes de séptima diatónicos, números romanos, nombres de los grados, funciones | `HarmonicFunction`, `Key.Notes`, `PitchClassSet.GetCompatibleKeys`, `ga_diatonic_chords` | enums, pruebas de subconjunto sobre máscaras de bits |
+| 7 | [Cadencias, ii–V–I y la tonalidad de una progresión](07-cadences-and-progressions/) | cadencias, movimientos plagal y de engaño, ii–V–I, resolución de V⁷, encontrar la tonalidad | `Cadences.yaml`, `PitchClassSet.ClosestDiatonicKey`, `ga_analyze_progression`, `ga_key_from_progression` | puntuación y desempate |
+| 8 | Conducción de voces y notas comunes | notas comunes, conducción de voces fluida, distancia de conducción de voces | `VoiceLeadingSpace`, `ProgressionVoiceLeadingAnalyzer`, `ga_common_tones`, `ga_voice_leading_pair` | métricas de distancia |
+| 9 | Sustituciones y mezcla modal | sustitución por la relativa y por tritono, acordes prestados | `ChordSubstitutionSkill`, `ModalInterchange.yaml`, `get_borrowed_chords`, `ga_chord_substitutions`, `GrothendieckDelta` | clasificación de candidatos |
+| 10 | Los modos en profundidad | modos de la menor melódica y de la menor armónica, brillo, familias modales | `MelodicMinorMode`, `HarmonicMinorMode`, `Modes.yaml`, `PitchClassSet.StepBrightness` | genéricos sobre grados de la escala |
+| 11 | Simetría: modos de transposición limitada | escalas de tonos enteros, octatónica y aumentada, brazaletes simétricos | `SymmetricScaleMode`, `WholeToneScaleMode`, `DiminishedScaleMode`, `AugmentedScaleMode` | invariantes por rotación |
+| 12 | Acordes extendidos y alterados | novenas, oncenas, trecenas, alteraciones, estructuras superiores, poliacordes | `ChordAlterationService`, `ExtendedChords.yaml`, `ga_polychord` | parsers con partes opcionales |
+| 13 | Voicings de guitarra: shells, drop 2 y drop 3 | voicings shell, voicings cerrados y drop, notas guía | `VoicingAnalyzer`, `VoicingDecomposer`, `VoicingGenerator`, `ga_search_voicings` | generación combinatoria |
+| 14 | El mástil: CAGED, digitación y tocabilidad | formas CAGED, geometría del mástil, digitación, afinaciones alternativas | `FretboardGeometry`, `PhysicalCostService`, `Biomechanics`, `Tunings.toml`, `ga_easier_voicings` | funciones de coste |
+| 15 | Arpegios, teoría acorde–escala e improvisación | arpegios, pares acorde–escala, notas fuera de la escala | `ImprovisationConcepts.yaml`, `OutsideNotesSkill`, `ga_arpeggio_suggestions` | tablas de correspondencia |
+| 16 | El Tonnetz y las transformaciones neorriemannianas | P, L y R, el Tonnetz, mediantes cromáticas | `NeoRiemannian.yaml`, `NeoRiemannianConfig.fs` | grafos de transformaciones |
 | — | [Diario](journal/) | | | |
 
 ## Requisitos previos
@@ -55,11 +72,12 @@ Los módulos de [Streeling](../streeling/), generados a partir de [GuitarAlchemi
 
 - [MUS-001 · ¿Qué es un acorde?](../streeling/music/mus-001-what-is-a-chord/) y [MUS-002 · Más allá de la tonalidad](../streeling/music/mus-002-beyond-tonality/) (lecciones 3 y 4);
 - [MUS-006 · El universo de las escalas](../streeling/music/mus-006-the-scale-universe/) (lecciones 2 y 4);
+- [MUS-003 · Cómo funciona la armonía](../streeling/music/mus-003-functional-harmony/) (lecciones 5, 6 y 7) y [MUS-005 · Armonía de jazz para guitarra](../streeling/music/mus-005-jazz-harmony/) (lección 7);
 - [GTR-001 · El mapa del mástil](../streeling/guitar-studies/gtr-001-the-fretboard-map/), [GTR-002 · Geometría CAGED](../streeling/guitar-studies/gtr-002-caged-geometry/) y [GAA-001 · Tu primer acorde](../streeling/guitar-alchemist-academy/gaa-001-your-first-chord/) (lecciones 1 y 3).
 
 ## Recursos
 
 - Mark Gotham et al., [*Open Music Theory*](https://viva.pressbooks.pub/openmusictheory/), versión 2 (2023), un libro de texto gratuito y revisado por pares bajo CC BY-SA 4.0: la principal fuente teórica del curso.
-- Ian Ring, [*A Study of Musical Scales*](https://ianring.com/musictheory/scales/): todas las escalas por su número de 12 bits, la numeración que usa GA.
-- Wikipedia: [Interval vector](https://en.wikipedia.org/wiki/Interval_vector), [List of set classes](https://en.wikipedia.org/wiki/List_of_set_classes), [Guitar chord](https://en.wikipedia.org/wiki/Guitar_chord).
+- Ian Ring, [*A Study of Musical Scales*](https://ianring.com/musictheory/scales/): todas las escalas por su número de 12 bits, la numeración que usa GA, con un diagrama de brazalete para cada una.
+- Wikipedia: [Interval vector](https://en.wikipedia.org/wiki/Interval_vector), [List of set classes](https://en.wikipedia.org/wiki/List_of_set_classes), [Guitar chord](https://en.wikipedia.org/wiki/Guitar_chord), [Circle of fifths](https://en.wikipedia.org/wiki/Circle_of_fifths), [Cadence](https://en.wikipedia.org/wiki/Cadence).
 - [GuitarAlchemist/ga](https://github.com/GuitarAlchemist/ga): el código que lee este curso.

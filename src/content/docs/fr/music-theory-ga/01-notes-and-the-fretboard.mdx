@@ -6,6 +6,8 @@ sidebar:
   order: 1
 ---
 
+import FretboardC from '../../../../assets/music-theory-ga/l1-fretboard-c.svg';
+
 Toutes les autres leçons reposent sur quatre idées : une **hauteur** (*pitch*) est une note à une hauteur donnée, une **classe de hauteurs** (*pitch class*) est cette note dans n'importe quelle octave, un **intervalle** est la distance entre deux notes, et sur une guitare chaque **case** ajoute l'une de ces distances, un demi-ton. Cette leçon les parcourt dans cet ordre : d'abord l'idée musicale, puis sa notation, puis les types que [Guitar Alchemist](https://github.com/GuitarAlchemist/ga) (GA) utilise pour la représenter.
 
 Tous les liens vers GA pointent sur le commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6) de `GuitarAlchemist/ga`, celui contre lequel le programme du cours est compilé.
@@ -155,6 +157,10 @@ E-C      m6 8 ic4       m6 8 ic4       ok
 ### L'idée
 
 Les cordes d'une guitare sont numérotées à partir de la plus aiguë : la corde 1 est le E aigu, la plus fine, la corde 6 le E grave. L'**accordage standard** est E2 A2 D3 G3 B3 E4 de la corde 6 à la corde 1 ([Guitar tunings](https://en.wikipedia.org/wiki/Guitar_tunings)). Chaque case élève la corde d'un demi-ton, donc la note à la corde *s*, case *f*, est le numéro MIDI de la corde à vide plus *f*. La même hauteur apparaît sur plusieurs cordes : C4 est à la corde 2 case 1, à la corde 3 case 5 et à la corde 4 case 10. Le module Streeling [GTR-001 · La carte du manche](../../streeling/guitar-studies/gtr-001-the-fretboard-map/) passe en revue les notes naturelles sur chaque corde.
+
+Le diagramme dessine les cases 0 à 12 en accordage standard, la corde 1 en haut comme dans une tablature, et marque chaque position de la classe de hauteurs C avec sa hauteur. Il y en a six : C3 sur la corde 6 case 8 et sur la corde 5 case 3, C4 sur la corde 4 case 10, la corde 3 case 5 et la corde 2 case 1, et C5 sur la corde 1 case 8. Trois positions jouent exactement la même hauteur, C4.
+
+<FretboardC role="img" aria-label="Manche de guitare en accordage standard, cases 0 à 12, corde 1 en haut. Classe de hauteurs C : corde 6 case 8 (C3), corde 5 case 3 (C3), corde 4 case 10 (C4), corde 3 case 5 (C4), corde 2 case 1 (C4), corde 1 case 8 (C5)." />
 
 ```text
 == Standard tuning: string 1 is the highest

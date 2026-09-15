@@ -6,6 +6,8 @@ sidebar:
   order: 1
 ---
 
+import FretboardC from '../../../../assets/music-theory-ga/l1-fretboard-c.svg';
+
 Todas las demás lecciones se apoyan en cuatro ideas: una **altura** (*pitch*) es una nota a una altura dada, una **clase de altura** (*pitch class*) es esa nota en cualquier octava, un **intervalo** es la distancia entre dos notas y, en una guitarra, cada **traste** añade una de esas distancias, un semitono. Esta lección las recorre en ese orden: primero la idea musical, luego cómo se escribe y después los tipos que usa [Guitar Alchemist](https://github.com/GuitarAlchemist/ga) (GA) para representarla.
 
 Todos los enlaces a GA apuntan al commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6) de `GuitarAlchemist/ga`, aquel contra el que se compila el programa del curso.
@@ -155,6 +157,10 @@ E-C      m6 8 ic4       m6 8 ic4       ok
 ### La idea
 
 Las cuerdas de una guitarra se numeran desde la que suena más aguda: la cuerda 1 es la E aguda y fina, y la cuerda 6 la E grave. La **afinación estándar** es E2 A2 D3 G3 B3 E4 de la cuerda 6 a la cuerda 1 ([Guitar tunings](https://en.wikipedia.org/wiki/Guitar_tunings)). Cada traste sube la cuerda un semitono, así que la nota de la cuerda *s*, traste *f*, es el número MIDI de la cuerda al aire más *f*. La misma altura aparece en varias cuerdas: C4 está en la cuerda 2 traste 1, la cuerda 3 traste 5 y la cuerda 4 traste 10. El módulo de Streeling [GTR-001 · El mapa del mástil](../../streeling/guitar-studies/gtr-001-the-fretboard-map/) recorre las notas naturales de cada cuerda.
+
+El diagrama dibuja los trastes 0 a 12 en afinación estándar, con la cuerda 1 arriba como en la tablatura, y marca cada posición de la clase de altura C con su altura. Hay seis: C3 en la cuerda 6 traste 8 y en la cuerda 5 traste 3, C4 en la cuerda 4 traste 10, la cuerda 3 traste 5 y la cuerda 2 traste 1, y C5 en la cuerda 1 traste 8. Tres posiciones tocan exactamente la misma altura, C4.
+
+<FretboardC role="img" aria-label="Mástil de guitarra en afinación estándar, trastes 0 a 12, cuerda 1 arriba. Clase de altura C: cuerda 6 traste 8 (C3), cuerda 5 traste 3 (C3), cuerda 4 traste 10 (C4), cuerda 3 traste 5 (C4), cuerda 2 traste 1 (C4), cuerda 1 traste 8 (C5)." />
 
 ```text
 == Standard tuning: string 1 is the highest
