@@ -6,6 +6,8 @@ sidebar:
   order: 1
 ---
 
+import FretboardC from '../../../assets/music-theory-ga/l1-fretboard-c.svg';
+
 Every other lesson builds on four ideas: a **pitch** is a note at a given height, a **pitch class** is that note in any octave, an **interval** is the distance between two notes, and on a guitar each **fret** adds one of those distances, a semitone. This lesson goes through them in that order: the musical idea first, then how it is written, then the types that [Guitar Alchemist](https://github.com/GuitarAlchemist/ga) (GA) uses for it.
 
 All GA links point to commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6) of `GuitarAlchemist/ga`, the one the course program is built against.
@@ -155,6 +157,10 @@ E-C      m6 8 ic4       m6 8 ic4       ok
 ### The idea
 
 A guitar's strings are numbered from the highest-sounding one: string 1 is the thin high E, string 6 the low E. **Standard tuning** is E2 A2 D3 G3 B3 E4 from string 6 to string 1 ([Guitar tunings](https://en.wikipedia.org/wiki/Guitar_tunings)). Each fret raises the string by one semitone, so the note at string *s*, fret *f* is the open string's MIDI number plus *f*. The same pitch appears on several strings: C4 is string 2 fret 1, string 3 fret 5 and string 4 fret 10. The Streeling module [GTR-001 · The Fretboard Map](../../streeling/guitar-studies/gtr-001-the-fretboard-map/) walks through the natural notes on each string.
+
+The diagram draws frets 0 to 12 in standard tuning, string 1 at the top as in tablature, and marks every position of pitch class C with its pitch. There are six: C3 on string 6 at fret 8 and on string 5 at fret 3, C4 on string 4 at fret 10, string 3 at fret 5 and string 2 at fret 1, and C5 on string 1 at fret 8. Three positions play the very same pitch, C4.
+
+<FretboardC role="img" aria-label="Guitar fretboard in standard tuning, frets 0 to 12, string 1 at the top. Pitch class C: string 6 fret 8 (C3), string 5 fret 3 (C3), string 4 fret 10 (C4), string 3 fret 5 (C4), string 2 fret 1 (C4), string 1 fret 8 (C5)." />
 
 ```text
 == Standard tuning: string 1 is the highest

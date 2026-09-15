@@ -6,6 +6,8 @@ sidebar:
   order: 3
 ---
 
+import Voicings from '../../../assets/music-theory-ga/l3-voicings.svg';
+
 A chord symbol such as `Cm7` is a small language: a root, a quality, extensions. A guitar chord shape such as `x32010` is another one. This lesson parses both: what the symbol means, which notes it names and how to spell them, what an inversion is, and how a shape on six strings becomes a set of pitch classes and a name again. At each step it compares the textbook with [Guitar Alchemist](https://github.com/GuitarAlchemist/ga) (GA), and here the two disagree more often than in the first two lessons.
 
 All GA links point to commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6). The outputs come from:
@@ -211,6 +213,10 @@ xx0232   2-3-2-0-x-x 2 6 9 span 1         2-3-2-0-x-x 2 6 9 span 1         ok
 ```
 
 Both columns print the diagram the way GA does, which is **reversed**: `0-1-0-2-3-x` is `x32010` read from string 1.
+
+Drawn as chord charts draw them, string 6 on the left and the nut at the top, four of these shapes look like this. A cross marks a string that is not played, a circle an open string, and each string shows the pitch it sounds. The first two are the same C major chord: `x32010` has C3 in the bass, root position, and `032010` adds the open low E, E2, which puts the chord in first inversion. `320003` is G major, and `133211` is F major with one finger barring fret 1.
+
+<Voicings role="img" aria-label="Four chord diagrams. x32010: C3 E3 G3 C4 E4. 032010: E2 C3 E3 G3 C4 E4. 320003: G2 B2 D3 G3 B3 G4. 133211: a barre on fret 1, F2 C3 F3 A3 C4 F4." />
 
 ### In GA
 

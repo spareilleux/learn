@@ -1,0 +1,209 @@
+---
+title: "Lesson 6: The chords of a key"
+description: Triads and seventh chords stacked on each degree of a major or minor key, Roman numerals, scale-degree names and harmonic functions, and how Guitar Alchemist names, finds and labels the chords of a key.
+sidebar:
+  label: 6. The chords of a key
+  order: 6
+---
+
+import BraceletPrimary from '../../../assets/music-theory-ga/l6-bracelet-primary-triads.svg';
+
+Lesson 3 built chords on any root; lesson 5 built keys. This lesson stacks chords **inside** a key, one on each degree, which gives every key the same pattern of chord qualities, named with Roman numerals. It then asks what each chord does in the key, its **function**, and compares all of it with [Guitar Alchemist](https://github.com/GuitarAlchemist/ga) (GA): its chord catalog and its compatible keys agree with the theory, its function names stop short for minor keys, and its MCP tool spells some keys wrong.
+
+All GA links point to commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6). The outputs come from:
+
+```bash
+dotnet run --project code/music-theory-ga/GaTheory -c Release -- l6
+```
+
+## Triads on every degree
+
+### The idea
+
+Take the notes of a key and, on each degree, stack two more notes of the key, skipping one note each time: C E G on C, D F A on D, and so on. Each triad uses only the key's notes, so its thirds come out major or minor depending on the degree. In every major key, the triads on degrees 1, 4 and 5 are major, those on 2, 3 and 6 are minor, and the one on 7 is diminished ([Open Music Theory, "Triads"](https://viva.pressbooks.pub/openmusictheory/chapter/triads/)).
+
+### The notation
+
+A **Roman numeral** names the degree of the chord's root. Its case gives the quality: upper case for a major third above the root (major, augmented), lower case for a minor third (minor, diminished); a small circle marks a diminished triad and a plus an augmented one ([Open Music Theory, "Roman Numerals"](https://viva.pressbooks.pub/openmusictheory/chapter/roman-numerals/)). So C major reads I ii iii IV V vi vii°, and those numerals are the same in every major key.
+
+Each degree also has a name: tonic, supertonic, mediant, subdominant, dominant, submediant, and for degree 7 the **leading tone**, a half step below the tonic ([Open Music Theory, "Major Scales, Scale Degrees, and Key Signatures"](https://viva.pressbooks.pub/openmusictheory/chapter/major-scales/)). The course program stacks the triads from the key's spelled notes, names their quality from their intervals with the names GA's chord catalog uses, and adds the degree name ([`Lesson6.Stack` and `DegreeName`](https://github.com/spareilleux/learn/blob/a2439ba/code/music-theory-ga/GaTheory/Lesson6.cs#L32-L52)):
+
+```text
+== Triads of C major: numeral, root, quality, function
+numeral   course                           GA                               check
+I         C major-triad Tonic              C major-triad Tonic              ok
+ii        D minor-triad Supertonic         D minor-triad Supertonic         ok
+iii       E minor-triad Mediant            E minor-triad Mediant            ok
+IV        F major-triad Subdominant        F major-triad Subdominant        ok
+V         G major-triad Dominant           G major-triad Dominant           ok
+vi        A minor-triad Submediant         A minor-triad Submediant         ok
+vii°      B diminished-triad LeadingTone   B diminished-triad LeadingTone   ok
+symbols: C Dm Em F G Am Bdim
+```
+
+### In GA
+
+The GA column stacks the same thirds on [`Key.Major.C.Notes`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/Key.cs#L36) (lesson 5), names each chord with [`CanonicalChordPatternCatalog.TryFindExact`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Harmony/CanonicalChordPatternCatalog.cs#L161-L177), which accepts only a pattern with no missing and no extra interval, and takes the degree name from [`HarmonicFunctionExtensions.FromDegree`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/HarmonicFunction.cs#L7-L35). In a major key, everything matches.
+
+## Seventh chords
+
+Stack one more third and every degree gets a seventh chord. In a major key: major seventh chords on I and IV, minor seventh chords on ii, iii and vi, a **dominant seventh** on V, the only one in the key, and a half-diminished seventh on vii. The numeral adds a 7, and ø marks the half-diminished chord ([Open Music Theory, "Seventh Chords"](https://viva.pressbooks.pub/openmusictheory/chapter/seventh-chords/) and "Roman Numerals"):
+
+```text
+== Seventh chords of C major
+numeral   course                           GA                               check
+I7        C major-7                        C major-7                        ok
+ii7       D minor-7                        D minor-7                        ok
+iii7      E minor-7                        E minor-7                        ok
+IV7       F major-7                        F major-7                        ok
+V7        G dominant-7                     G dominant-7                     ok
+vi7       A minor-7                        A minor-7                        ok
+viiø7     B half-diminished-7              B half-diminished-7              ok
+symbols: Cmaj7 Dm7 Em7 Fmaj7 G7 Am7 Bm7b5
+```
+
+The course prints the half-diminished chord as `Bm7b5`, the chord symbol of lesson 3.
+
+## Minor keys and the leading tone
+
+### The idea
+
+Stack triads on the natural minor scale and the qualities move: i, ii°, III, iv, v, VI, VII. Two degrees differ from major. The fifth-degree chord is minor, and the seventh degree is a whole step below the tonic, the **subtonic**, not a leading tone ([Open Music Theory, "Minor Scales, Scale Degrees, and Key Signatures"](https://viva.pressbooks.pub/openmusictheory/chapter/minor-scales/)). Music in minor usually raises that seventh degree when it moves to the dominant: G becomes G♯ in A minor. The v chord becomes a major V, and VII becomes a diminished vii°, the same dominant chords as in major ("Triads" and "Roman Numerals"). The notes of A minor with G♯ form the harmonic minor scale.
+
+### In GA
+
+In natural minor, the course calls degree 7 the subtonic and GA the leading tone:
+
+```text
+== Triads of A minor, natural minor
+numeral   course                           GA                               check
+i         A minor-triad Tonic              A minor-triad Tonic              ok
+ii°       B diminished-triad Supertonic    B diminished-triad Supertonic    ok
+III       C major-triad Mediant            C major-triad Mediant            ok
+iv        D minor-triad Subdominant        D minor-triad Subdominant        ok
+v         E minor-triad Dominant           E minor-triad Dominant           ok
+VI        F major-triad Submediant         F major-triad Submediant         ok
+VII       G major-triad Subtonic           G major-triad LeadingTone        DIFF
+```
+
+`FromDegree(7)` returns `LeadingTone` whatever the key. GA's `ScaleDegreeFunction` enumeration does have a `Subtonic` member, but `FromDegree` only sees a number. With the raised leading tone, both sides agree; the GA column stacks GA's `Scale.HarmonicMinor`:
+
+```text
+== Triads of A minor with the raised leading tone (harmonic minor)
+numeral   course                           GA                               check
+i         A minor-triad Tonic              A minor-triad Tonic              ok
+ii°       B diminished-triad Supertonic    B diminished-triad Supertonic    ok
+III+      C augmented-triad Mediant        C augmented-triad Mediant        ok
+iv        D minor-triad Subdominant        D minor-triad Subdominant        ok
+V         E major-triad Dominant           E major-triad Dominant           ok
+VI        F major-triad Submediant         F major-triad Submediant         ok
+vii°      G# diminished-triad LeadingTone  G# diminished-triad LeadingTone  ok
+symbols: Am Bdim Caug Dm E F G#dim
+```
+
+The mediant of harmonic minor is an augmented triad, `III+`: C E G♯.
+
+## The same pattern in every key
+
+The numerals don't depend on the tonic, but the spellings do: one letter per degree, as in lesson 5. The program stacks the triads of E♭ major, F♯ major, G♭ major and C♯ minor on its own notes, then on GA's `Key.Notes`:
+
+```text
+== The triads of other keys, stacked on the course's notes and on GA's Key.Notes
+key    course                                       GA                                           check
+Eb     Eb Fm Gm Ab Bb Cm Ddim                       Eb Fm Gm Ab Bb Cm Ddim                       ok
+F#     F# G#m A#m B C# D#m E#dim                    F# G#m A#m B C# D#m E#dim                    ok
+Gb     Gb Abm Bbm Cb Db Ebm Fdim                    Gb Abm Bbm Cb Db Ebm Fdim                    ok
+C#m    C#m D#dim E F#m G#m A B                      C#m D#dim E F#m G#m A B                      ok
+```
+
+F♯ major's seventh-degree chord is E♯dim, and G♭ major's fourth-degree chord is C♭. GA's core gets both right.
+
+GA's MCP tool `ga_diatonic_chords` does not. It is a closure of GA's F# layer: it computes the roots by semitones from a fixed pattern, then names them from one of two 12-name tables, sharps or flats, chosen from the root's accidental ([`DomainClosures.fs`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs#L23-L36), [`diatonicChords`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs#L167-L196)). A table has no E♯ and no C♭. On 2026-09-15, the MCP server running on the author's machine (its version is not reported) answered:
+
+```text
+ga_diatonic_chords F# major  ->  F#, G#m, A#m, B, C#, D#m, Fdim
+ga_diatonic_chords Gb major  ->  Gb, Abm, Bbm, B, Db, Ebm, Fdim
+```
+
+Fdim has the right pitch classes for F♯ major, but the key has no F; in G♭ major, `B` should be C♭. Another MCP tool, `get_diatonic_chords`, answered `An error occurred invoking 'get_diatonic_chords'.` for "A minor".
+
+## Harmonic functions
+
+### The idea
+
+Chords of a key do not all do the same job. Open Music Theory sorts them into three **functions** ([Open Music Theory, "Introduction to Harmony, Cadences, and Phrase Endings"](https://viva.pressbooks.pub/openmusictheory/chapter/intro-to-harmony/)):
+
+- **tonic** (T), stable, home: I (in minor: i);
+- **predominant** (PD), moving away from the tonic toward the dominant; IV and ii are strong predominants, iii and vi weak ones (in minor: iv and ii° strong, VII, III and VI weak);
+- **dominant** (D), urgent, pulling toward the tonic: V and vii°, the same in minor.
+
+A phrase usually runs T, then PD, then D, and back to T. I, IV and V, the **primary triads**, cover the three functions and all seven notes of the key between them ([Primary triad](https://en.wikipedia.org/wiki/Primary_triad), Wikipedia). In C major: C E G, F A C and G B D. The next figure draws them on one bracelet of note names: three triangles, the tonic triad C E G in one colour, F A C in a second and G B D in a third. The tonic triad shares C with IV and G with V, and those two notes are ringed.
+
+<BraceletPrimary role="img" aria-label="Bracelet of note names with three triangles: C E G, F A C and G B D, the I, IV and V chords of C major. C is shared by the first two and G by the first and third." />
+
+Not every textbook sorts vi and iii the same way. The Streeling module [MUS-003 · How Harmony Works](../../streeling/music/mus-003-functional-harmony/) puts them in the tonic family, as substitutes for I that share two of its notes, a common reading in harmony textbooks; Open Music Theory keeps the tonic function for I alone.
+
+### In GA
+
+GA has two function types. `HarmonicFunction`, used above, names the **degree** (Tonic to LeadingTone). Its service layer maps those names onto three categories, Tonic, Subdominant and Dominant, and puts the mediant and the submediant with the tonic, MUS-003's reading ([`HarmonicFunctionAnalyzer.ToPrimaryCategory`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Tonal/HarmonicFunctionAnalyzer.cs#L92-L99)).
+
+Reading the same file shows a slip that the course program cannot run, because `GA.Domain.Services` is too heavy to reference (*to verify* by a test in GA). `HarmonicFunctionAnalyzer.Parse` turns a name into a function by testing `Contains` in order, and tests "tonic" before "supertonic" and "mediant" before "submediant" ([L29-L72](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Tonal/HarmonicFunctionAnalyzer.cs#L29-L72)). "Supertonic" contains "tonic", so it should parse as `Tonic`, and "Submediant" as `Mediant`.
+
+## Which chords belong to a key?
+
+Two questions come up all the time: does this chord fit this key, and which keys contain this chord? The course answers with the 12-bit ids of lesson 2: a chord fits when none of its bits falls outside the key's. GA answers with `PitchClassSet.IsSubsetOf` and [`GetCompatibleKeys`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Atonal/PitchClassSet.cs#L592-L595):
+
+```text
+== Which triads belong to a key? (major, minor and diminished triads on 12 roots)
+Key of G     course: C D Em F#dim G Am Bm
+             GA:     C D Em F#dim G Am Bm
+Key of Bb    course: Cm Dm Eb F Gm Adim Bb
+             GA:     Cm Dm Eb F Gm Adim Bb
+```
+
+```text
+== Which keys contain a chord? (GA: PitchClassSet.GetCompatibleKeys)
+chord  course                                             GA                                                 check
+Dm     C Am F Dm Bb Gm                                    C Am F Dm Bb Gm                                    ok
+G7     C Am                                               C Am                                               ok
+Bdim   C Am                                               C Am                                               ok
+E      A F#m E C#m B G#m Cb Abm                           A F#m E C#m B G#m Cb Abm                           ok
+```
+
+The answers ignore spelling. E major's triad, E G♯ B, is in the key of C♭ major as F♭ A♭ C♭, and both sides list C♭ and A♭ minor. G7 and Bdim fit only C major and A minor: a dominant seventh chord or a diminished triad points to a single key signature, which is one reason why they matter in lesson 7.
+
+## Exercises
+
+1. Name the seven triads of G major.
+2. Build the seventh chord on degree 5 of D minor, with the raised leading tone. What is its symbol and its numeral?
+3. What is the triad on degree 3 of B♭ major, and what is the degree called?
+
+<details>
+<summary>Solutions</summary>
+
+1. G Am Bm C D Em F♯dim: I ii iii IV V vi vii°, as in every major key.
+2. D harmonic minor is D E F G A B♭ C♯. On A: A C♯ E G, a dominant seventh chord, A7, numeral V7. Its pitch classes are 1 4 7 9.
+3. D F A, D minor, iii, on the mediant.
+
+```text
+== Exercise solutions
+question             course                               GA                                   check
+1. G major triads    G Am Bm C D Em F#dim                 G Am Bm C D Em F#dim                 ok
+2. degree 5 of D harmonic minor, stacked in four: A7 (V7)
+2. A7 pitch classes  1 4 7 9                              1 4 7 9                              ok
+3. iii of Bb major   D minor-triad Mediant                D minor-triad Mediant                ok
+```
+
+</details>
+
+## Key takeaways
+
+- Stacking thirds on a major key gives I ii iii IV V vi vii° in every key; seventh chords add Imaj7, V7 and viiø7.
+- Natural minor gives i ii° III iv v VI VII; raising the seventh degree, the leading tone, turns v into V and VII into vii°, the dominant chords of major.
+- Open Music Theory's functions are tonic (I), predominant (IV and ii strong, iii and vi weak) and dominant (V, vii°); other textbooks, MUS-003 and GA's analyzer group vi and iii with the tonic.
+- GA's core stacks, names and places chords like the theory, except that degree 7 is always the "leading tone". Its MCP tool spells F♯ and G♭ major with notes from a 12-name table, and its function parser tests names in an order where "Supertonic" matches "tonic".
+
+## Sources
+
+- Mark Gotham et al., [*Open Music Theory*](https://viva.pressbooks.pub/openmusictheory/), version 2, 2023, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/): chapters [Triads](https://viva.pressbooks.pub/openmusictheory/chapter/triads/), [Seventh Chords](https://viva.pressbooks.pub/openmusictheory/chapter/seventh-chords/), [Roman Numerals](https://viva.pressbooks.pub/openmusictheory/chapter/roman-numerals/), [Major Scales, Scale Degrees, and Key Signatures](https://viva.pressbooks.pub/openmusictheory/chapter/major-scales/), [Minor Scales, Scale Degrees, and Key Signatures](https://viva.pressbooks.pub/openmusictheory/chapter/minor-scales/), [Introduction to Harmony, Cadences, and Phrase Endings](https://viva.pressbooks.pub/openmusictheory/chapter/intro-to-harmony/).
+- GuitarAlchemist/ga at [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6): `Common/GA.Domain.Core/Theory/Tonal` (`Key.cs`, `HarmonicFunction.cs`, `Primitives/ScaleDegreeFunction.cs`), `Common/GA.Domain.Core/Theory/Harmony/CanonicalChordPatternCatalog.cs`, `Common/GA.Domain.Core/Theory/Atonal/PitchClassSet.cs`, `Common/GA.Domain.Services/Tonal/HarmonicFunctionAnalyzer.cs`, `Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs`.

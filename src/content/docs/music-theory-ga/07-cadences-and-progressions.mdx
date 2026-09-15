@@ -1,0 +1,205 @@
+---
+title: "Lesson 7: Cadences, ii–V–I and the key of a progression"
+description: Authentic, half, plagal and deceptive endings, the pull of V7 toward I, the ii–V–I progression, and how to find the key of a chord progression, compared with Guitar Alchemist's cadence catalog, its core key finder and its MCP tools.
+sidebar:
+  label: 7. Cadences and progressions
+  order: 7
+---
+
+import GridsIIVI from '../../../assets/music-theory-ga/l7-ii-v-i.svg';
+import BraceletG7C from '../../../assets/music-theory-ga/l7-bracelet-g7-c.svg';
+
+Lesson 6 gave every chord of a key a numeral and a function. This lesson strings chords together: how phrases end, why V7 leads to I, what makes ii–V–I the backbone of jazz, and how to go the other way, from a list of chord symbols to the key they are in. [Guitar Alchemist](https://github.com/GuitarAlchemist/ga) (GA) has a catalog of cadences, a core key finder and two MCP tools for the last question; the course program checks all three.
+
+All GA links point to commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6). The outputs come from:
+
+```bash
+dotnet run --project code/music-theory-ga/GaTheory -c Release -- l7
+```
+
+## Cadences
+
+### The idea
+
+A **cadence** marks the end of a phrase. Open Music Theory distinguishes two main kinds ([Open Music Theory, "Introduction to Harmony, Cadences, and Phrase Endings"](https://viva.pressbooks.pub/openmusictheory/chapter/intro-to-harmony/)):
+
+- an **authentic cadence** goes from V to I and sounds conclusive. It is **perfect** (PAC) when both chords are in root position and the tonic is in the top voice over the I chord, **imperfect** (IAC) when V–I is there but one of those conditions is not met;
+- a **half cadence** (HC) ends on V, from any chord, "x–V", and sounds inconclusive.
+
+Two more motions get their own names. IV–I, the "amen" at the end of hymns, is often called a plagal cadence; Open Music Theory prefers "plagal motion", because in 18th- and 19th-century music it mostly prolongs a tonic that has already arrived ([Open Music Theory, "Plagal Motion as a Form of Prolongation"](https://viva.pressbooks.pub/openmusictheory/chapter/plagal-motion/)). V(7)–vi, where the ear expects I and gets vi, is **deceptive motion** ([Open Music Theory, "La in the Bass at Beginnings, Middles, and Endings"](https://viva.pressbooks.pub/openmusictheory/chapter/la-in-the-bass/)). The Streeling module [MUS-003 · How Harmony Works](../../streeling/music/mus-003-functional-harmony/) presents the same five endings, with guitar examples in G major.
+
+### In GA
+
+GA lists 21 cadences and common endings in a configuration file, [`Cadences.yaml`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/Cadences.yaml), from the PAC to jazz, rock, metal, flamenco and neo-soul patterns. Each entry gives Roman numerals, a key and the chords in that key. The program reads the file, computes the numerals from the chords and the key, with the rules of lesson 6 plus a flat or a sharp when a root is not in the key's scale ([`Lesson7.Numeral`](https://github.com/spareilleux/learn/blob/a2439ba/code/music-theory-ga/GaTheory/Lesson7.cs#L26-L46)), and compares them with the file's, ignoring the chord-quality suffixes:
+
+```text
+== GA's Cadences.yaml: its Roman numerals, and the course's from the chords and the key
+cadence                            course           GA               check
+Perfect Authentic Cadence (PAC)    V I              V I              ok
+Imperfect Authentic Cadence (IAC)  V I              V I              ok
+Plagal Cadence                     IV I             IV I             ok
+Half Cadence                       I V              I V              ok
+Deceptive Cadence                  V vi             V vi             ok
+Major ii-V-I                       ii V I           ii V I           ok
+Minor ii-V-i                       ii V i           ii V i           ok
+Tritone Substitution               ii bII I         ii bII I         ok
+Backdoor Cadence                   iv bVII I        iv bVII I        ok
+Tadd Dameron Turnaround            I bIII bVI bII   I bIII bVI bII   ok
+Coltrane Turnaround                I bIII bVI bII I I bIII bVI bII I ok
+Rock Authentic Cadence             V I              V I              ok
+Mixolydian Cadence (bVII-I)        bVII I           bVII I           ok
+Aeolian Cadence (Mario Cadence)    bVI bVII I       bVI bVII I       ok
+Double Plagal                      bVII IV I        bVII IV I        ok
+Phrygian Half Cadence              bII i            bII i            ok
+Chromatic Mediant (Metal)          i iii            i biii           DIFF
+Andalusian Cadence                 iv III II I      iv III II I      ok
+Neo-Soul ii-V                      ii V I           ii V I           ok
+Minor Plagal (Neo-Soul)            iv I             iv I             ok
+Tritone Sub ii-V (Neo-Soul)        ii bII I         ii bII I         ok
+```
+
+The chords and the numerals agree, except in one row. "Chromatic Mediant (Metal)" is Em–Gm in E minor. G is the third degree of E minor, so the course writes iii; the file writes ♭iii, measuring from E major, whose third degree is G♯. The same file analyses the Andalusian cadence, Am G F E, in E Phrygian ("iv III II I"), from the notes of the mode. Both readings exist, but one file should pick one: Open Music Theory numbers chords in minor from the minor scale, III, VI and VII without flats (["Roman Numerals"](https://viva.pressbooks.pub/openmusictheory/chapter/roman-numerals/)).
+
+One name is also misleading. The file's "Phrygian Half Cadence" is ♭II–i, F to Em, which ends on the tonic. In classical theory, a Phrygian half cadence is iv⁶–V in minor, a half cadence named after the half step in its bass ([Cadence](https://en.wikipedia.org/wiki/Cadence), Wikipedia, "Phrygian half cadence").
+
+## V7 and the pull toward I
+
+### The idea
+
+Add a seventh to V and it pulls harder toward I ([Open Music Theory, "Strengthening Endings with V7"](https://viva.pressbooks.pub/openmusictheory/chapter/strengthening-endings-with-v7/)). In C major, V7 is G7, G B D F. Its active notes have tendencies: the leading tone B rises to C, the seventh F falls to E, and D moves to C (same chapter). B and F are six semitones apart, a **tritone**, the only one in the key; the C major triad has none. The program moves each note of G7 to the nearest note of C, then counts tritones with the interval-class vectors of lesson 4:
+
+```text
+== Resolving V7 to I: each tone of G7 to the nearest tone of C
+  G (root)                 -> G (0)
+  B (third, leading tone)  -> C (+1)
+  D (fifth)                -> C (-2) or E (+2)
+  F (seventh)              -> E (-1)
+tritone        course       GA           check
+in G7          1            1            ok
+in C           0            0            ok
+```
+
+The next figure draws G7 and C on one bracelet of note names: a quadrilateral G B D F and a triangle C E G, which share only G, ringed. Read around the circle, B sits one step below C and F one step above E: the two resolutions are the two shortest moves on the clock.
+
+<BraceletG7C role="img" aria-label="Bracelet of note names with a quadrilateral G, B, D, F for G7 and a triangle C, E, G for C major. G is shared and ringed; B is next to C and F next to E." />
+
+Chords that share notes connect smoothly, and the program lists the common tones of a few pairs. The outputs are pitch classes, as in lesson 2, and the program writes 10 and 11 as T and E: here `E` is pitch class 11, B, not the note E.
+
+```text
+== Common tones between neighbouring chords (GA: PitchClassSet.Intersect)
+chords         course       GA           check
+G7 C           7            7            ok
+Dm7 G7         2 5          2 5          ok
+G7 Cmaj7       7 E          7 E          ok
+C Am           0 4          0 4          ok
+C F#           (none)       (none)       ok
+```
+
+The GA column is `PitchClassSet.Intersect`; it agrees. G7 and Cmaj7 share G and B, and C and F♯ share nothing.
+
+## ii–V–I
+
+### The idea
+
+In jazz, the most important progression is **ii–V–I**: ii7–V7–Imaj7 in major, iiø7–V7–i7 in minor ([Open Music Theory, "ii–V–I"](https://viva.pressbooks.pub/openmusictheory/chapter/ii-v-i/)). Each root is a fifth above the next, D, G, C, and the chord qualities follow a fixed pattern: minor seventh, dominant seventh, major seventh in major; half-diminished seventh, dominant seventh, minor seventh in minor. The V chord is dominant in both modes (same chapter). A ii–V even works without its I, and whole ii–V–Is move from key to key inside a tune. The Streeling module [MUS-003](../../streeling/music/mus-003-functional-harmony/) analyses it in G major (section "Functional Analysis in Practice"), and [MUS-005 · Jazz Harmony for Guitar](../../streeling/music/mus-005-jazz-harmony/) in C major, with shell and drop 2 voicings.
+
+The program stacks degrees 2, 5 and 1 of C major, then of C minor with the raised leading tone for V, and names the qualities; the GA column names the chords parsed with `Chord.FromSymbol` through the catalog of lesson 6:
+
+```text
+== ii-V-I: chord qualities from the key (major, then minor with the raised leading tone)
+progression        course                                   GA                                       check
+Dm7 G7 Cmaj7       minor-7 dominant-7 major-7               minor-7 dominant-7 major-7               ok
+  numerals in C major: ii V I; roots D G C, each a fifth below the one before
+Dm7b5 G7 Cm7       half-diminished-7 dominant-7 minor-7     half-diminished-7 dominant-7 minor-7     ok
+  numerals in C minor: ii V i; roots D G C, each a fifth below the one before
+```
+
+The figure below gives one set of open-position shapes for ii–V–I in C major, as chord grids, string 6 on the left. Dm7 is xx0211: strings 6 and 5 muted, open D, then A, C and F. G7 is 320001: G, B, open D, G and B, and F on the first fret of string 1. Cmaj7 is x32000: C, E, then open G, B and E. From G7 to Cmaj7, the F on string 1 falls a half step to the open E, and the B on string 2 stays; the leading tone does not always rise on a guitar.
+
+<GridsIIVI role="img" aria-label="Three chord grids. Dm7, xx0211: D3 A3 C4 F4. G7, 320001: G2 B2 D3 G3 B3 F4. Cmaj7, x32000: C3 E3 G3 B3 E4." />
+
+## Finding the key of a progression
+
+### The idea
+
+Given only chord symbols, which key are they in? A first answer is: the key whose notes contain all the chords' notes. Lesson 6 showed that one chord often fits several keys, and so can a whole progression. C F G C uses exactly the notes of C major, which are also the notes of A minor; in every such tie, a second clue decides. A phrase usually starts on the tonic, and a conclusive ending, an authentic cadence, returns to it (Open Music Theory, "Introduction to Harmony, Cadences, and Phrase Endings"). The course's rule ([`Lesson7.CourseKey`](https://github.com/spareilleux/learn/blob/a2439ba/code/music-theory-ga/GaTheory/Lesson7.cs#L93-L118)) is:
+
+1. keep the keys that contain the most chords, with, for minor keys, the natural minor scale plus the raised leading tone;
+2. among them, prefer the key whose tonic chord ends the progression, then the one whose tonic chord starts it; print a tie as "X or Y".
+
+This is a heuristic, not a theory: real pieces modulate, borrow chords and end on V. It is enough for short progressions.
+
+### In GA
+
+GA's core has [`PitchClassSet.ClosestDiatonicKey`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Atonal/PitchClassSet.cs#L353). It counts, for each of the 30 keys, how many of the key's notes are in the set, and breaks ties with an expected mode: minor if the set's **normal form** contains pitch class 3, E♭, and major otherwise ([`FindClosestDiatonicKey2`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Atonal/PitchClassSet.cs#L597-L660)). The program gives it the union of the chords' notes:
+
+```text
+== Finding the key: the course, then GA's PitchClassSet.ClosestDiatonicKey on all the notes
+progression    course             GA                 check
+C F G C        Key of C           Key of Am          DIFF
+  notes 0 2 4 5 7 9 E, GA normal form 0 1 3 5 6 8 T; GA compatible keys: C, Am; roots only: C major 4/4
+G D Em C       Key of G           Key of Em          DIFF
+  notes 0 2 4 6 7 9 E, GA normal form 0 1 3 5 6 8 T; GA compatible keys: G, Em; roots only: G major 4/4
+Dm7 G7 Cmaj7   Key of C           Key of Am          DIFF
+  notes 0 2 4 5 7 9 E, GA normal form 0 1 3 5 6 8 T; GA compatible keys: C, Am; roots only: D minor 3/3
+Am Dm E7 Am    Key of Am          Key of Am          ok
+  notes 0 2 4 5 8 9 E, GA normal form 0 1 3 4 6 8 9; GA compatible keys: (none); roots only: A major 4/4
+Am F C G       Key of Am          Key of Am          ok
+  notes 0 2 4 5 7 9 E, GA normal form 0 1 3 5 6 8 T; GA compatible keys: C, Am; roots only: A minor 4/4
+C Am F G7      Key of C           Key of Am          DIFF
+  notes 0 2 4 5 7 9 E, GA normal form 0 1 3 5 6 8 T; GA compatible keys: C, Am; roots only: C major 4/4
+```
+
+The normal form is a transposition of the set, starting on 0, not the set seen from its tonic, so "contains 3" says nothing about the mode. For the notes of C major or G major, the normal form contains 3, the tie breaks toward minor, and a progression that starts and ends on C comes out in A minor. Nothing in the method looks at which chord is first or last. The "notes" line also shows `GetCompatibleKeys`, which is right but can't choose, and nothing fits Am Dm E7 Am's G♯ except the course's minor collection.
+
+GA's MCP server has two tools for the same question, `ga_key_from_progression` and `ga_analyze_progression`. Both score each major key and natural minor key by counting the chord **roots** in its scale, not the chords' notes, and prefer the key on the first chord's root ([`GaKeyFromProgressionTool`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaMcpServer/Tools/GuitaristProblemTools.cs#L157-L223), [`analyzeProgression`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs#L255-L336)). The numerals then come from a fixed list per mode. The "roots only" part of each line above is that rule, rewritten in the course program ([`Lesson7.RootsOnlyKey`](https://github.com/spareilleux/learn/blob/a2439ba/code/music-theory-ga/GaTheory/Lesson7.cs#L120-L135)). On 2026-09-15, the MCP server running on the author's machine (its version is not reported) answered:
+
+```text
+ga_key_from_progression ["Am","F","C","G"]   ->  bestGuess "A minor" (candidates A minor, C major, D minor, all 4/4)
+ga_key_from_progression ["Dm7","G7","Cmaj7"] ->  bestGuess "D minor" (candidates D minor, C major, C minor, all 3/3)
+ga_analyze_progression "Am Dm E7 Am"         ->  Key: A major  (confidence 4/4)   I IV V I
+ga_analyze_progression "Dm7 G7 Cmaj7"        ->  Key: D minor  (confidence 3/3)   i iv VII
+```
+
+The first tool's own description promises "Am F C G → best guess C major". A minor is a defensible answer for a progression that starts on Am; C minor is not, since neither Cmaj7's E nor its B belongs to it, but its root does. Am Dm E7 Am is in A minor: A major has C♯, F♯ and G♯, and the progression's C and F rule it out.
+
+## Exercises
+
+1. Give the numerals of F Gm C7 F in F major. Are all four chords in the key?
+2. What key is Em Am B7 Em in?
+3. Which note do A7 and D have in common, and why does it matter?
+
+<details>
+<summary>Solutions</summary>
+
+1. I ii V7 I. F major has one flat, B♭: F A C, G B♭ D, C E G B♭ and F A C are all inside. The progression is a PD–D–T ending, a V7–I authentic cadence.
+2. E minor. B7 contains D♯, the raised leading tone of E minor, and the progression starts and ends on Em. The roots-only rule answers E major: E, A and B are all in E major's scale, and the minor thirds of Em and Am are not counted.
+3. A, pitch class 9: the root of A7 is the fifth of D. A7–D is V7–I in D major, and that shared note stays while C♯ rises to D and G falls to F♯.
+
+```text
+== Exercise solutions
+question             course         GA             check
+1. F Gm C7 F in F major: I ii V I
+1. all in F major    True           True           ok
+2. Em Am B7 Em       Key of Em      Key of Em      ok
+   roots only: E major 4/4
+3. common A7 D       9              9              ok
+```
+
+The first line prints the course's numerals without the 7 of C7: lesson 6's numerals mark the quality, the chord symbol already says it is a seventh chord.
+
+</details>
+
+## Key takeaways
+
+- An authentic cadence is V–I, perfect with both chords in root position and the tonic on top; a half cadence ends on V. IV–I is mostly plagal motion, V–vi deceptive motion.
+- V7 holds the key's only tritone, B–F in C; the leading tone rises and the seventh falls, to C and E.
+- ii–V–I is mi7–7–ma7 in major and ø7–7–mi7 in minor, roots moving down by fifths.
+- The key of a progression needs the chords' notes and a tie-break on the tonic chord. GA's core breaks ties on a normal form that doesn't encode the mode, and its MCP tools count roots only; neither looks at the last chord.
+- GA's cadence catalog is right chord by chord, but mixes two numeral conventions for minor and names ♭II–i a "Phrygian half cadence".
+
+## Sources
+
+- Mark Gotham et al., [*Open Music Theory*](https://viva.pressbooks.pub/openmusictheory/), version 2, 2023, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/): chapters [Introduction to Harmony, Cadences, and Phrase Endings](https://viva.pressbooks.pub/openmusictheory/chapter/intro-to-harmony/), [Plagal Motion as a Form of Prolongation](https://viva.pressbooks.pub/openmusictheory/chapter/plagal-motion/), [La in the Bass at Beginnings, Middles, and Endings](https://viva.pressbooks.pub/openmusictheory/chapter/la-in-the-bass/), [Strengthening Endings with V7](https://viva.pressbooks.pub/openmusictheory/chapter/strengthening-endings-with-v7/), [ii–V–I](https://viva.pressbooks.pub/openmusictheory/chapter/ii-v-i/), [Roman Numerals](https://viva.pressbooks.pub/openmusictheory/chapter/roman-numerals/).
+- [Cadence](https://en.wikipedia.org/wiki/Cadence), Wikipedia.
+- GuitarAlchemist/ga at [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6): `Common/GA.Business.Config/Cadences.yaml`, `Common/GA.Domain.Core/Theory/Atonal/PitchClassSet.cs`, `GaMcpServer/Tools/GuitaristProblemTools.cs`, `Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs`.

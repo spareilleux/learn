@@ -1,0 +1,216 @@
+---
+title: "Lesson 5: Keys, key signatures and the circle of fifths"
+description: What a key is, how its signature is built, relative and parallel keys, the circle of fifths and closely related keys, and how Guitar Alchemist models keys, from its core types to its MCP key tools.
+sidebar:
+  label: 5. Keys and the circle of fifths
+  order: 5
+---
+
+import CircleOfFifths from '../../../assets/music-theory-ga/l5-circle-of-fifths.svg';
+import BraceletCG from '../../../assets/music-theory-ga/l5-bracelet-c-g.svg';
+import CircleRelatedC from '../../../assets/music-theory-ga/l5-circle-related-c.svg';
+
+Lessons 1 to 4 treated notes as pitch classes, where C♯ and D♭ are the same number. A **key** needs more: a tonic, a mode, and a spelling in which every letter appears once. This lesson builds the fifteen major and fifteen minor keys from those rules, arranges them on the circle of fifths, and compares the result with [Guitar Alchemist](https://github.com/GuitarAlchemist/ga) (GA): its `Key` and `KeySignature` types, which agree with the theory everywhere, and its MCP key tools, which do not always.
+
+All GA links point to commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6). The outputs come from:
+
+```bash
+dotnet run --project code/music-theory-ga/GaTheory -c Release -- l5
+```
+
+## Key signatures
+
+### The idea
+
+A piece "in C major" uses the notes of the C major scale and treats C as home. Build the same major scale, whole, whole, half, whole, whole, whole, half (lesson 2), on another tonic and some degrees need a sharp or a flat. The rule is **one letter per degree**: the major scale on E is E F♯ G♯ A B C♯ D♯, never E G♭ A♭ A B D♭ E♭, so each letter A to G appears exactly once. The accidentals the scale needs are written once, at the start of each staff, as the **key signature** ([Open Music Theory, "Major Scales, Scale Degrees, and Key Signatures"](https://viva.pressbooks.pub/openmusictheory/chapter/major-scales/)).
+
+Signatures follow a fixed order. Sharps are added in the order F C G D A E B, and flats in the reverse order, B E A D G C F (same chapter). Each sharp key's tonic is a perfect fifth above the previous one, G, D, A…, and the sharp it adds is its seventh degree, the note a half step below the tonic. Each flat key's tonic is a perfect fourth above the previous one, F, B♭, E♭…, and the flat it adds is its fourth degree. Two reading tips follow: with sharps, the tonic is a half step above the last sharp; with flats, the tonic is the next-to-last flat, except for F major, which has only one.
+
+### The notation
+
+The course program numbers a signature by its **fifths**: +*n* for *n* sharps, −*n* for *n* flats, from −7 (seven flats, C♭ major) to +7 (seven sharps, C♯ major). Its outputs write sharps and flats as `#` and `b`, and the minor key with an `m`, the way GA prints them. Each line gives the major tonic, the minor tonic with the same signature, then the accidentals in order:
+
+```text
+== Key signatures: major and relative minor tonic, accidentals
+fifths  course                             GA                                 check
+-7      Cb Abm Bb Eb Ab Db Gb Cb Fb        Cb Abm Bb Eb Ab Db Gb Cb Fb        ok
+-6      Gb Ebm Bb Eb Ab Db Gb Cb           Gb Ebm Bb Eb Ab Db Gb Cb           ok
+-5      Db Bbm Bb Eb Ab Db Gb              Db Bbm Bb Eb Ab Db Gb              ok
+-4      Ab Fm Bb Eb Ab Db                  Ab Fm Bb Eb Ab Db                  ok
+-3      Eb Cm Bb Eb Ab                     Eb Cm Bb Eb Ab                     ok
+-2      Bb Gm Bb Eb                        Bb Gm Bb Eb                        ok
+-1      F Dm Bb                            F Dm Bb                            ok
+0       C Am                               C Am                               ok
++1      G Em F#                            G Em F#                            ok
++2      D Bm F# C#                         D Bm F# C#                         ok
++3      A F#m F# C# G#                     A F#m F# C# G#                     ok
++4      E C#m F# C# G# D#                  E C#m F# C# G# D#                  ok
++5      B G#m F# C# G# D# A#               B G#m F# C# G# D# A#               ok
++6      F# D#m F# C# G# D# A# E#           F# D#m F# C# G# D# A# E#           ok
++7      C# A#m F# C# G# D# A# E# B#        C# A#m F# C# G# D# A# E# B#        ok
+```
+
+The course computes each row from C: move the tonic up a fifth (a letter four steps up and seven semitones) or up a fourth for flats, then spell the letters ([`Theory.MajorTonic` and `SignatureAccidentals`](https://github.com/spareilleux/learn/blob/a2439ba/code/music-theory-ga/GaTheory/Theory.cs#L219-L237)).
+
+Once the tonic is known, spelling the key is the scale again, one letter per degree ([`Theory.SpellScale`](https://github.com/spareilleux/learn/blob/a2439ba/code/music-theory-ga/GaTheory/Theory.cs#L206-L217)). The minor keys below use the **natural minor** scale, whole, half, whole, whole, half, whole, whole ([Open Music Theory, "Minor Scales, Scale Degrees, and Key Signatures"](https://viva.pressbooks.pub/openmusictheory/chapter/minor-scales/)):
+
+```text
+== The notes of a key: one letter per degree
+key        course                   GA                       check
+Eb         Eb F G Ab Bb C D         Eb F G Ab Bb C D         ok
+E          E F# G# A B C# D#        E F# G# A B C# D#        ok
+F#         F# G# A# B C# D# E#      F# G# A# B C# D# E#      ok
+Cb         Cb Db Eb Fb Gb Ab Bb     Cb Db Eb Fb Gb Ab Bb     ok
+Dm         D E F G A Bb C           D E F G A Bb C           ok
+G#m        G# A# B C# D# E F#       G# A# B C# D# E F#       ok
+Bbm        Bb C Db Eb F Gb Ab       Bb C Db Eb F Gb Ab       ok
+A#m        A# B# C# D# E# F# G#     A# B# C# D# E# F# G#     ok
+```
+
+F♯ major has an E♯, and C♭ major an F♭: they are the pitch classes of F and E, but the letter E and the letter F are already taken. That is why a key is more than a pitch-class set. C♭ major and B major sound the same on a guitar; they are different keys on paper.
+
+### In GA
+
+GA models the same objects. [`KeySignature`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/KeySignature.cs#L112-L116) is a value from −7 to +7, and its `AccidentedNotes` are the sharps or flats in order. A [`Key`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/Key.cs#L15-L50) is a record holding a signature, with two subtypes, `Key.Major` and `Key.Minor`, and `Key.Items` lists the 30 keys. The tonic of each signature is a lookup table ([`Major.GetRoot`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/Key.cs#L210-L229)), and `Notes` walks the seven letters up from the tonic, adding the signature's accidental when a letter has one ([`GetNotes`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/Key.cs#L82-L129)). That is the one-letter-per-degree rule in code, and it gives the same 15 signatures and the same spellings as the course.
+
+## Relative and parallel keys
+
+### The idea
+
+Two keys can be related in two different ways ([Open Music Theory, "Minor Scales, Scale Degrees, and Key Signatures"](https://viva.pressbooks.pub/openmusictheory/chapter/minor-scales/)):
+
+- **Relative** keys share a key signature, and so the same seven notes, but not the tonic. The relative minor of a major key starts on its sixth degree, three half steps below the tonic: C major and A minor have no sharps or flats.
+- **Parallel** keys share a tonic, but not the notes. C major and C minor start on the same note; C minor has three flats, B♭, E♭ and A♭. On the signature scale, the parallel minor is always three fifths lower.
+
+### In GA
+
+GA's core has no method for either relation. Its MCP server, which lets an AI assistant call GA, has two tools, `get_relative_key` and `get_parallel_key`. Their bodies are the same: both build the key of the other mode **on the same signature** ([`KeyTools.GetRelativeKey` and `GetParallelKey`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaMcpServer/Tools/KeyTools.cs#L135-L169)). The course program runs that expression next to its own answer ([`Lesson5.RelativeAsMcp` and `ParallelAsMcp`](https://github.com/spareilleux/learn/blob/a2439ba/code/music-theory-ga/GaTheory/Lesson5.cs#L109-L120)):
+
+```text
+== Relative and parallel keys (GA column: the expressions of GA's MCP key tools)
+key              course       GA           check
+relative C       Key of Am    Key of Am    ok
+parallel C       Key of Cm    Key of Am    DIFF
+relative Ab      Key of Fm    Key of Fm    ok
+parallel Ab      Key of Abm   Key of Fm    DIFF
+relative Am      Key of C     Key of C     ok
+parallel Am      Key of A     Key of C     DIFF
+relative Em      Key of G     Key of G     ok
+parallel Em      Key of E     Key of G     DIFF
+```
+
+So the parallel tool answers the relative key. On 2026-09-15, the MCP server running on the author's machine (its version is not reported) gave the same answers: `get_parallel_key("Key of C")` returned `Key of Am`, and `get_relative_key("Key of Ab")` returned `Key of Fm`, which is right.
+
+## The circle of fifths
+
+### The idea
+
+Put the major keys on a clock, each a perfect fifth above the previous one. Clockwise from C at the top, every step adds a sharp: G, D, A, E, B, F♯, C♯. Counterclockwise, every step adds a flat: F, B♭, E♭, A♭, D♭, G♭, C♭. After twelve fifths, the tonics come back to C, so fifteen key names share twelve positions: at the bottom of the circle, B and C♭, F♯ and G♭, C♯ and D♭ are **enharmonic** keys, the same pitch classes under different spellings ([Open Music Theory, "Major Scales, Scale Degrees, and Key Signatures"](https://viva.pressbooks.pub/openmusictheory/chapter/major-scales/); [Circle of fifths](https://en.wikipedia.org/wiki/Circle_of_fifths), Wikipedia).
+
+The figure below draws the circle three rings deep. The outer ring names the major keys: C at the top; then, clockwise, G, D, A, E, B or C♭, F♯ or G♭, C♯ or D♭, A♭, E♭, B♭ and F. The middle ring gives the signature: 0 at the top, 1 to 4 sharps on the right, 1 to 4 flats on the left, and two counts at the three enharmonic positions, 5 sharps or 7 flats, 6 sharps or 6 flats, 7 sharps or 5 flats. The inner ring names the relative minor keys, in lower case: a at the top, then e, b, f♯, c♯, g♯ or a♭, d♯ or e♭, a♯ or b♭, f, c, g and d.
+
+<CircleOfFifths role="img" aria-label="Circle of fifths in three rings. Outer ring, major keys clockwise from the top: C, G, D, A, E, B/C flat, F sharp/G flat, C sharp/D flat, A flat, E flat, B flat, F. Middle ring, key signatures: 0, 1 to 4 sharps, 5 sharps/7 flats, 6 sharps/6 flats, 7 sharps/5 flats, 4 to 1 flats. Inner ring, relative minor keys: a, e, b, f sharp, c sharp, g sharp/a flat, d sharp/e flat, a sharp/b flat, f, c, g, d." />
+
+Why a fifth? Two neighbours on the circle differ by a single note. C major and G major share six notes; G major raises F to F♯. On a bracelet (lesson 2), G major is C major turned by seven semitones, T7, and only one bead moves, by one step. The next figure overlays the two scales: C major in one colour, G major in another; the six common notes, C, D, E, G, A and B, are ringed, F belongs only to C major and F♯ only to G major.
+
+<BraceletCG role="img" aria-label="Bracelet of note names with two overlapping heptagons, C major and G major. The six common notes C, D, E, G, A and B are ringed; F belongs only to C major and F sharp only to G major." />
+
+The further apart two keys are on the circle, the fewer notes they share. The program counts them, then checks the enharmonic pairs:
+
+```text
+== The circle of fifths: clockwise one fifth up and one more sharp
+course sharps  C G D A E B F# C#
+GA sharps      C G D A E B F# C#
+course flats   C F Bb Eb Ab Db Gb Cb
+GA flats       C F Bb Eb Ab Db Gb Cb
+pair             course     GA         check
+B = Cb           same       same       ok
+F# = Gb          same       same       ok
+C# = Db          same       same       ok
+neighbours       course     GA         check
+C and G          6 common   6 common   ok
+C and F          6 common   6 common   ok
+C and D          5 common   5 common   ok
+C and F#         2 common   2 common   ok
+```
+
+C and F♯ major, opposite each other, share two pitch classes: B, and F, which F♯ major spells E♯.
+
+### In GA
+
+The core agrees everywhere: `new Key.Major(n)` gives the same tonic, and `PitchClassSet` confirms the enharmonic pairs and the common notes. The MCP server has two circle tools. `get_circle_of_fifths_position` returns the signature value. `get_neighboring_keys` should return the keys on either side, but it calls that position tool with `key.KeySignature.ToString()`, the list of accidentals ("F#" for G major, an empty string for C), instead of a key name, and the position tool can't find a key by that name ([`KeyTools.GetNeighboringKeys`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaMcpServer/Tools/KeyTools.cs#L197-L215)). The course reproduces that lookup; the result is in the next table, and on 2026-09-15, `get_neighboring_keys("Key of C")` answered: `An error occurred invoking 'get_neighboring_keys'.`
+
+## Closely related keys
+
+### The idea
+
+A piece rarely stays in one key. It most often moves to a **closely related** key, one whose signature differs by at most one accidental: the relative key, the keys a fifth above and a fifth below, and their relatives. Every key has five ([Open Music Theory, "Extended Tonicization and Modulation to Closely Related Keys"](https://viva.pressbooks.pub/openmusictheory/chapter/extended-tonicization-and-modulation-to-closely-related-keys/)). On the circle, they are the key's own position and its two neighbours, inner and outer rings. For C major: F major and D minor, A minor, G major and E minor. The Streeling module [MUS-003 · How Harmony Works](../../streeling/music/mus-003-functional-harmony/) lists the same five for G major, in its section on closely related keys.
+
+In the next figure, the signatures of C major and its two neighbours, 1 flat, 0 and 1 sharp, are highlighted, with the six keys at those positions: F, C and G major outside, d, a and e minor inside.
+
+<CircleRelatedC role="img" aria-label="The same circle of fifths with three positions highlighted: 1 flat, 0 and 1 sharp. They hold F, C and G major and d, a and e minor, the keys closely related to C major." />
+
+```text
+== Closely related keys: signatures within one accidental
+key        course                                       GA                                           check
+C          F Dm Am G Em                                 F Dm Am G Em                                 ok
+Dm         Bb Gm F C Am                                 Bb Gm F C Am                                 ok
+E          A F#m C#m B G#m                              A F#m C#m B G#m                              ok
+MCP tool                   course               GA                   check
+get_neighboring_keys C     Key of F, Key of G   throws InvalidOperationException DIFF
+```
+
+GA's column filters `Key.Items` on the signature value; it matches. The last row is the MCP lookup described above.
+
+## Surprises
+
+Two more calls did not do what their names say:
+
+```text
+== Surprises found while writing this lesson
+call                           course       GA           check
+Key.Major.C.GetInterval(E)     M3           m6           DIFF
+Key.Major.G.GetInterval(F#)    M7           m2           DIFF
+Key.Major.TryParse("H")        False        throws InvalidOperationException DIFF
+Key.Minor.TryParse("A")        Key of Am    Key of Am    ok
+```
+
+- [`Key.GetInterval(note)`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/Key.cs#L70-L76) is documented as "the simple interval between the key root note and the specified note", but it returns `note.GetInterval(Root)`, the interval from the note up to the root. From C up to E is a major third; from E up to C is a minor sixth, its inversion.
+- [`Key.Major.TryParse`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/Key.cs#L153-L186) throws `InvalidOperationException` when the text is not a note, where the .NET [`TryParse` pattern](https://learn.microsoft.com/dotnet/standard/design-guidelines/exceptions-and-performance#try-parse-pattern) returns `false`. `Key.Minor.TryParse` has the same code.
+
+## Exercises
+
+1. What is the key signature of E major, and what are its notes?
+2. What are the relative and the parallel minor keys of A♭ major? How many flats does each have?
+3. List the keys closely related to D minor.
+
+<details>
+<summary>Solutions</summary>
+
+1. Four sharps, F♯ C♯ G♯ D♯, the first four in the order of sharps. The notes are E F♯ G♯ A B C♯ D♯. D♯ is the last sharp, a half step below the tonic.
+2. The relative minor starts on the sixth degree of A♭ major: F minor, with the same four flats. The parallel minor is A♭ minor, three fifths lower on the circle: seven flats. GA's `get_parallel_key` expression answers F minor for both.
+3. D minor has one flat. Keys with 0, 1 or 2 flats: B♭ major, G minor, F major (its relative), C major and A minor.
+
+```text
+== Exercise solutions
+question               course                           GA                               check
+1. E major             F# C# G# D# / E F# G# A B C# D#  F# C# G# D# / E F# G# A B C# D#  ok
+2. relative of Ab      Key of Fm                        Key of Fm                        ok
+2. parallel of Ab      Key of Abm (7 flats)             Key of Fm                        DIFF
+3. related to Dm       Bb Gm F C Am                     Bb Gm F C Am                     ok
+```
+
+</details>
+
+## Key takeaways
+
+- A key is a tonic, a mode and a spelling: one letter per degree, which is why F♯ major has an E♯ and C♭ major is not B major on paper.
+- Sharps come in the order F C G D A E B, flats in the reverse order; the signature, from −7 to +7, is the position on the circle of fifths.
+- Relative keys share the signature, parallel keys share the tonic; neighbours on the circle share six notes, and the five closely related keys sit within one accidental.
+- GA's core `Key` and `KeySignature` agree with the theory on all 30 keys. Its MCP tools answer the relative key for the parallel key and fail on neighbouring keys, and `Key.GetInterval` measures the interval upside down.
+
+## Sources
+
+- Mark Gotham et al., [*Open Music Theory*](https://viva.pressbooks.pub/openmusictheory/), version 2, 2023, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/): chapters [Major Scales, Scale Degrees, and Key Signatures](https://viva.pressbooks.pub/openmusictheory/chapter/major-scales/), [Minor Scales, Scale Degrees, and Key Signatures](https://viva.pressbooks.pub/openmusictheory/chapter/minor-scales/), [Extended Tonicization and Modulation to Closely Related Keys](https://viva.pressbooks.pub/openmusictheory/chapter/extended-tonicization-and-modulation-to-closely-related-keys/).
+- [Circle of fifths](https://en.wikipedia.org/wiki/Circle_of_fifths) and [Closely related key](https://en.wikipedia.org/wiki/Closely_related_key), Wikipedia.
+- GuitarAlchemist/ga at [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6): `Common/GA.Domain.Core/Theory/Tonal` (`Key.cs`, `KeySignature.cs`), `Common/GA.Domain.Core/Theory/Atonal/PitchClassSet.cs`, `GaMcpServer/Tools/KeyTools.cs`.
