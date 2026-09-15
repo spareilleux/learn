@@ -65,6 +65,12 @@ export default defineConfig({
 									items: [{ autogenerate: { directory: 'java-for-csharp' } }],
 								},
 								{
+									label: 'Spring Boot, Spring Cloud and Reactor for C# developers',
+									translations: { fr: 'Spring Boot, Spring Cloud et Reactor pour développeurs C#', es: 'Spring Boot, Spring Cloud y Reactor para desarrolladores C#' },
+									collapsed: true,
+									items: [{ autogenerate: { directory: 'spring-cloud-reactor' } }],
+								},
+								{
 									label: 'V for C#/Java developers',
 									translations: { fr: 'V pour développeurs C#/Java', es: 'V para desarrolladores C#/Java' },
 									collapsed: true,

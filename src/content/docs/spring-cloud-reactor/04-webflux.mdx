@@ -1,0 +1,530 @@
+---
+title: 4. WebFlux
+description: The scales API on Spring WebFlux and Netty — annotated controllers returning Mono and Flux, functional endpoints, NDJSON and server-sent events, WebClient and WebTestClient — compared with minimal APIs, TypedResults.ServerSentEvents and HttpClient.
+sidebar:
+  order: 4
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Full example: [`code/spring-cloud-reactor/l04-webflux`](https://github.com/spareilleux/learn/tree/main/code/spring-cloud-reactor/l04-webflux). Its tests start the application on a free port, record the responses quoted below in [`expected`](https://github.com/spareilleux/learn/tree/main/code/spring-cloud-reactor/l04-webflux/expected), and call it with `WebClient` and `WebTestClient`. The .NET side is [`csharp/l04-minimal-api.cs`](https://github.com/spareilleux/learn/blob/main/code/spring-cloud-reactor/csharp/l04-minimal-api.cs), a minimal API that calls itself with `HttpClient`.
+
+## Spring MVC and WebFlux, side by side
+
+[Spring WebFlux](https://docs.spring.io/spring-framework/reference/web/webflux.html) is the reactive twin of Spring MVC. It keeps the programming model of lesson 1, controllers and annotations, and changes what is underneath: the HTTP server is [Reactor Netty](https://projectreactor.io/docs/netty/release/reference/) instead of Tomcat, a small set of event-loop threads serves every request, and a handler returns a `Mono` or a `Flux` that WebFlux subscribes to, instead of a value that a request thread waits for.
+
+| ASP.NET Core | Spring MVC (lesson 1) | Spring WebFlux |
+|---|---|---|
+| Kestrel | Tomcat, one thread per request | Reactor Netty, event loops |
+| `async Task<T>` action | `T` returned by a blocked thread | `Mono<T>` |
+| `IAsyncEnumerable<T>` result | `StreamingResponseBody`, `SseEmitter` | `Flux<T>` |
+| controllers with `[HttpGet]` | `@RestController` | the same `@RestController` |
+| `app.MapGet(...)` | `RouterFunction` for MVC | `RouterFunction` with `HandlerFunction`s returning `Mono` |
+| `HttpClient` | `RestClient` | [`WebClient`](https://docs.spring.io/spring-framework/reference/web/webflux-webclient.html) |
+| `WebApplicationFactory` and its `HttpClient` | `RestTestClient` | [`WebTestClient`](https://docs.spring.io/spring-framework/reference/testing/webtestclient.html) |
+
+ASP.NET Core never had this split: Kestrel is asynchronous, and an action chooses between `T` and `Task<T>`. Java built a second stack because the Servlet API was designed around a thread per request, which is exactly what lesson 3's virtual threads now make cheap.
+
+The dependency is `spring-boot-starter-webflux`, and the entry point is lesson 1's, unchanged. According to the [Spring Boot documentation](https://docs.spring.io/spring-boot/reference/web/reactive.html), an application with both the MVC and the WebFlux starters becomes a Spring MVC application: many MVC applications add WebFlux only for `WebClient`. The startup log names the new server:
+
+```text
+INFO <pid> --- [scales-reactive] [           main] d.l.s.r.ReactiveScalesApplication : Starting ReactiveScalesApplication using Java <version> with PID <pid> (<path>)
+ INFO <pid> --- [scales-reactive] [           main] d.l.s.r.ReactiveScalesApplication : No active profile set, falling back to 1 default profile: "default"
+ INFO <pid> --- [scales-reactive] [           main] o.s.boot.reactor.netty.NettyWebServer : Netty started on port <port> (http)
+ INFO <pid> --- [scales-reactive] [           main] d.l.s.r.ReactiveScalesApplication : Started ReactiveScalesApplication in <n> seconds (process running for <n>)
+```
+
+## Annotated controllers
+
+The service now returns publishers. `Mono.fromCallable` turns the exception that an unknown note throws into an error signal, as lesson 2 showed:
+
+```java
+@Service
+public class ScaleCatalog {
+
+    public record ScaleView(String root, String mode, List<String> notes, List<String> chords) {
+
+        static ScaleView of(Scale scale) {
+            return new ScaleView(scale.root().sharpName(), scale.mode().label(),
+                    scale.notes().stream().map(note -> note.sharpName()).toList(),
+                    scale.triads().stream().map(Chord::symbol).toList());
+        }
+    }
+
+    // fromCallable: an unknown note becomes an error signal when someone subscribes, not an exception in the controller.
+    public Mono<ScaleView> describe(String root, String mode) {
+        return Mono.fromCallable(() -> ScaleView.of(Scale.of(root, mode)));
+    }
+
+    public Flux<ScaleView> allModes(String root) {
+        return Flux.fromArray(Mode.values()).concatMap(mode -> describe(root, mode.label()));
+    }
+}
+```
+
+The controller keeps lesson 1's annotations; only its return types change:
+
+```java
+// The annotations of lesson 1's controller; only the return types change.
+@RestController
+@RequestMapping("/scales")
+class ScaleController {
+
+    private final ScaleCatalog catalog;
+
+    ScaleController(ScaleCatalog catalog) {
+        this.catalog = catalog;
+    }
+
+    // A Mono is a Task<ScaleView>: WebFlux subscribes to it and writes the value when it arrives.
+    @GetMapping("/{root}")
+    Mono<ScaleView> scale(@PathVariable String root, @RequestParam(defaultValue = "ionian") String mode) {
+        return catalog.describe(root, mode);
+    }
+
+    // A Flux with a streaming media type is written element by element, one JSON document per line.
+    @GetMapping(value = "/{root}/modes", produces = MediaType.APPLICATION_NDJSON_VALUE)
+    Flux<ScaleView> modes(@PathVariable String root) {
+        return catalog.allModes(root);
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    ProblemDetail badName(IllegalArgumentException e) {
+        ProblemDetail problem = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, e.getMessage());
+        problem.setTitle("Unknown note or mode");
+        return problem;
+    }
+}
+```
+
+```text
+GET /scales/D?mode=dorian
+200 application/json
+{"root":"D","mode":"dorian","notes":["D","E","F","G","A","B","C"],"chords":["Dm","Em","F","G","Am","Bdim","C"]}
+
+GET /scales/H
+400 application/problem+json
+{"detail":"unknown note: H","instance":"/scales/H","status":400,"title":"Unknown note or mode"}
+```
+
+The responses are lesson 1's, byte for byte. The error took a different path, though: nothing was thrown in the controller, which returned a `Mono` without running anything. The exception happened when WebFlux subscribed, travelled down as an `onError` signal, and WebFlux handed it to the same `@ExceptionHandler`.
+
+## Functional endpoints
+
+A minimal API maps a route to a lambda. WebFlux's [functional endpoints](https://docs.spring.io/spring-framework/reference/web/webflux-functional.html) do the same with a `RouterFunction` bean:
+
+```java
+// Functional endpoints: routes declared in code, like app.MapGet(...) in a minimal API.
+// The method is not called scaleRoutes: that is already the bean name of this class.
+@Configuration
+class ScaleRoutes {
+
+    @Bean
+    RouterFunction<ServerResponse> scaleRouter(ScaleCatalog catalog) {
+        return route()
+                .GET("/fn/scales/{root}", request -> catalog
+                        .describe(request.pathVariable("root"), request.queryParam("mode").orElse("ionian"))
+                        .flatMap(view -> ServerResponse.ok().bodyValue(view)))
+                .onError(IllegalArgumentException.class, (error, request) -> {
+                    ProblemDetail problem = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, error.getMessage());
+                    return ServerResponse.badRequest().bodyValue(problem);
+                })
+                .build();
+    }
+}
+```
+
+```text
+GET /fn/scales/Eb?mode=lydian
+200 application/json
+{"root":"D#","mode":"lydian","notes":["D#","F","G","A","A#","C","D"],"chords":["D#","F","Gm","Adim","A#","Cm","Dm"]}
+
+GET /fn/scales/H
+400 application/json
+{"detail":"unknown note: H","status":400,"title":"Bad Request"}
+```
+
+Two things differ from the annotated controller, and both surprised me. The comment in the class records the first: I had called the method `scaleRoutes`, the bean name Spring gives the `ScaleRoutes` class itself, and the application refused to start with a `BeanDefinitionOverrideException`. The second is in the transcript. The same `ProblemDetail`, written with `bodyValue`, went out as `application/json` without `instance`, and with the status's reason phrase as its title. Nothing in a `ServerResponse` knows the RFC 9457 conventions; the `@ExceptionHandler` path is the one that applies them.
+
+Functional endpoints suit what minimal APIs suit: few routes, composed in code. Annotated controllers remain the common choice in Spring code bases, and the reference documentation covers both.
+
+## Streams: NDJSON and server-sent events
+
+A `Flux` returned with a streaming media type is written as it is produced. With `application/x-ndjson`, each element is one JSON document on its own line, the format of [NDJSON](https://github.com/ndjson/ndjson-spec):
+
+```text
+GET /scales/C/modes
+200 application/x-ndjson
+{"root":"C","mode":"ionian","notes":["C","D","E","F","G","A","B"],"chords":["C","Dm","Em","F","G","Am","Bdim"]}
+{"root":"C","mode":"dorian","notes":["C","D","D#","F","G","A","A#"],"chords":["Cm","Dm","D#","F","Gm","Adim","A#"]}
+{"root":"C","mode":"phrygian","notes":["C","C#","D#","F","G","G#","A#"],"chords":["Cm","C#","D#","Fm","Gdim","G#","A#m"]}
+{"root":"C","mode":"lydian","notes":["C","D","E","F#","G","A","B"],"chords":["C","D","Em","F#dim","G","Am","Bm"]}
+{"root":"C","mode":"mixolydian","notes":["C","D","E","F","G","A","A#"],"chords":["C","Dm","Edim","F","Gm","Am","A#"]}
+{"root":"C","mode":"aeolian","notes":["C","D","D#","F","G","G#","A#"],"chords":["Cm","Ddim","D#","Fm","Gm","G#","A#"]}
+{"root":"C","mode":"locrian","notes":["C","C#","D#","F","F#","G#","A#"],"chords":["Cdim","C#","D#m","Fm","F#","G#","A#m"]}
+```
+
+[Server-sent events](https://html.spec.whatwg.org/multipage/server-sent-events.html) are what a browser's `EventSource` reads: a long-lived `text/event-stream` response made of events, each with optional `id` and `event` fields. The progressions endpoint sends the chords of a I–vi–IV–V progression, one per beat:
+
+```java
+@RestController
+class ProgressionController {
+
+    /** I–vi–IV–V, as scale degrees counted from 0. */
+    private static final List<Integer> DEGREES = List.of(0, 5, 3, 4);
+
+    private final Duration beat;
+
+    ProgressionController(@Value("${progressions.beat:500ms}") Duration beat) {
+        this.beat = beat;
+    }
+
+    // Server-sent events: one event per beat, then the stream ends.
+    @GetMapping("/progressions/{root}")
+    Flux<ServerSentEvent<String>> progression(@PathVariable String root) {
+        return Flux.defer(() -> {
+            List<Chord> triads = Scale.of(root, "major").triads();
+            // Not Flux.interval: it ticks whether or not Netty has asked for the next event,
+            // and fails with OverflowException when a slow connection hasn't. delayElements waits for demand.
+            return Flux.range(0, DEGREES.size())
+                    .delayElements(beat)
+                    .map(beatNumber -> ServerSentEvent.<String>builder()
+                            .id(String.valueOf(beatNumber + 1))
+                            .event("chord")
+                            .data(triads.get(DEGREES.get(beatNumber)).symbol())
+                            .build());
+        });
+    }
+}
+```
+
+The beat is half a second by default and 20 ms in the tests, which set `progressions.beat=20ms`. The comment about `Flux.interval` is lesson 3's backpressure, met the hard way. My first version used `Flux.interval(beat).take(4)`. It passed on Windows and Linux, and failed on the macOS runner, where the server logged:
+
+```text
+reactor.core.Exceptions$OverflowException: Could not emit tick 1 due to lack of requests (interval doesn't support small downstream requests that replenish slower than the ticks)
+```
+
+Reactor Netty requests events from the `Flux` as it writes them to the connection. `Flux.interval` is a clock: it can't wait, so when a tick finds no pending request it fails, as the [`Flux` Javadoc](https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Flux.html) says of `interval`. The client saw a connection closed in the middle of a `200 OK`. `delayElements` requests one element, waits, emits it, and asks for the next only when the subscriber has asked, so a slow connection slows the stream instead of breaking it.
+
+Run the application, with Maven on the `PATH`, and watch the chords arrive, one every half second. `curl -N` turns off curl's output buffering. On Windows, `curl.exe` is the curl that ships with the system; in Windows PowerShell 5.1, plain `curl` is an alias of `Invoke-WebRequest`.
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+```powershell
+cd code\spring-cloud-reactor
+mvn -q -pl l04-webflux -am package -DskipTests
+java -jar l04-webflux\target\scales-reactive.jar --server.port=18084
+# in a second terminal
+curl.exe -N http://localhost:18084/progressions/C
+```
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```bash
+cd code/spring-cloud-reactor
+mvn -q -pl l04-webflux -am package -DskipTests
+java -jar l04-webflux/target/scales-reactive.jar --server.port=18084
+# in a second terminal
+curl -N http://localhost:18084/progressions/C
+```
+
+</TabItem>
+<TabItem label="macOS">
+
+```bash
+cd code/spring-cloud-reactor
+mvn -q -pl l04-webflux -am package -DskipTests
+java -jar l04-webflux/target/scales-reactive.jar --server.port=18084
+# in a second terminal
+curl -N http://localhost:18084/progressions/C
+```
+
+</TabItem>
+</Tabs>
+
+```text
+id:1
+event:chord
+data:C
+
+id:2
+event:chord
+data:Am
+
+id:3
+event:chord
+data:F
+
+id:4
+event:chord
+data:G
+```
+
+I ran the Java and `curl.exe` commands on Windows; on Linux and macOS they are *to verify*, while CI runs the tests that record the same stream. The .NET 10 counterpart is [`TypedResults.ServerSentEvents`](https://learn.microsoft.com/aspnet/core/fundamentals/minimal-apis/responses), which writes an `IAsyncEnumerable`:
+
+```csharp
+// .NET 10 writes server-sent events from an IAsyncEnumerable, like a Flux<ServerSentEvent>.
+app.MapGet("/progressions/{root}", (string root, CancellationToken cancellation) =>
+    TypedResults.ServerSentEvents(Progression(root, cancellation), eventType: "chord"));
+
+static async IAsyncEnumerable<string> Progression(string root, [EnumeratorCancellation] CancellationToken cancellation)
+{
+    foreach (var chord in new[] { "G", "Em", "C", "D" })
+    {
+        await Task.Delay(20, cancellation);
+        yield return chord;
+    }
+}
+```
+
+```text
+GET /progressions/G
+200 text/event-stream
+event: chord
+data: G
+
+event: chord
+data: Em
+
+event: chord
+data: C
+
+event: chord
+data: D
+```
+
+Two formats, both valid: Spring writes `data:G` and adds `;charset=UTF-8` to the content type (`200 text/event-stream;charset=UTF-8` in the Java transcript), .NET writes `data: G`, and the specification removes one space after the colon. `IAsyncEnumerable` pulls, so the .NET version can't overflow the way `Flux.interval` did.
+
+One more trap in the same controller. `/progressions/H` doesn't return lesson 1's problem, because an `@ExceptionHandler` only handles the exceptions of its own controller:
+
+```text
+HTTP/1.1 500 Internal Server Error
+Content-Type: application/json
+Content-Length: 135
+
+{"timestamp":"2026-09-15T02:32:37.755Z","path":"/progressions/H","status":500,"error":"Internal Server Error","requestId":"72dab2fd-5"}
+```
+
+That is Spring Boot's default error response, from a manual run with `curl.exe -i` (the timestamp and request ID change every time). A handler shared by every controller goes in a class annotated [`@RestControllerAdvice`](https://docs.spring.io/spring-framework/reference/web/webflux/controller/ann-advice.html), the counterpart of ASP.NET Core's exception handler middleware. `Flux.defer` makes the unknown note an error signal before the first event, while the server can still choose a status. An error in the middle of a stream can only close the connection: the macOS log above said so, `ServerHttpResponse already committed (200 OK)`.
+
+## `WebClient`
+
+`WebClient` is the reactive HTTP client, built on the same Reactor Netty as the server. Spring Boot configures a `WebClient.Builder` bean with the application's JSON codecs, the role of `IHttpClientFactory`; since Spring Boot 4 that bean comes from its own starter, `spring-boot-starter-webclient`, and the test context failed to find it until I added the dependency. According to the Spring Boot documentation, a client built from that builder also shares the server's Netty resources.
+
+```java
+/** Calls the scales API over HTTP, as another service would: HttpClient with a base address. */
+public class ChordChartClient {
+
+    private final WebClient client;
+
+    public ChordChartClient(WebClient.Builder builder, String baseUrl) {
+        this.client = builder.baseUrl(baseUrl).build();
+    }
+
+    public Mono<ScaleView> scale(String root, String mode) {
+        return client.get()
+                .uri(uri -> uri.path("/scales/{root}").queryParam("mode", mode).build(root))
+                .retrieve()
+                .bodyToMono(ScaleView.class);
+    }
+
+    /** A chord chart such as "| Dm | G | C |" for degrees 2, 5 and 1 of C major, counted from 1. */
+    public Mono<String> chart(String root, String mode, List<Integer> degrees) {
+        return scale(root, mode).map(view -> degrees.stream()
+                .map(degree -> view.chords().get(degree - 1))
+                .collect(Collectors.joining(" | ", "| ", " |")));
+    }
+}
+```
+
+Nothing is sent when `chart` returns: the request leaves when someone subscribes, and again for every subscriber. `retrieve()` turns an error status into an error signal, like `EnsureSuccessStatusCode`. The test calls the running application:
+
+```java
+// Spring Boot configures a WebClient.Builder with the application's codecs, like IHttpClientFactory.
+@Autowired
+WebClient.Builder builder;
+
+ChordChartClient charts;
+
+@BeforeEach
+void setUp() {
+    charts = new ChordChartClient(builder, "http://localhost:" + port);
+}
+
+@Test
+void chartFromTheScalesApi() {
+    StepVerifier.create(charts.chart("C", "major", List.of(2, 5, 1)))
+            .expectNext("| Dm | G | C |")
+            .verifyComplete();
+}
+
+@Test
+void anErrorStatusBecomesAnErrorSignal() {
+    StepVerifier.create(charts.chart("H", "major", List.of(1)))
+            .consumeErrorWith(error -> Expected.check("webclient-error",
+                    error.getClass().getName() + ": " + error.getMessage().replace(":" + port + "/", ":<port>/")))
+            .verify();
+}
+```
+
+```text
+org.springframework.web.reactive.function.client.WebClientResponseException$BadRequest: 400 Bad Request from GET http://localhost:<port>/scales/H
+```
+
+The C# program does the same with `HttpClient`:
+
+```text
+HttpRequestException: Response status code does not indicate success: 400 (Bad Request).
+```
+
+`WebClientResponseException` has a subclass per status and keeps the response body, which `onErrorResume` can read; `HttpRequestException` carries the status code only. The operators of lesson 3 apply to any `WebClient` call: `timeout`, `retryWhen` and `onErrorReturn`, which exercise 2 combines. In a Spring MVC application, [`RestClient`](https://docs.spring.io/spring-framework/reference/integration/rest-clients.html) is the blocking client with the same fluent style, and on virtual threads it is the simpler choice.
+
+## `WebTestClient`
+
+`WebTestClient` tests a WebFlux application with assertions that read like the request. With `@AutoConfigureWebTestClient`, it is bound to the server started by `@SpringBootTest`:
+
+```java
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, properties = "progressions.beat=20ms")
+@AutoConfigureWebTestClient
+class WebTestClientTest {
+
+    @Autowired
+    WebTestClient client;
+
+    @Test
+    void jsonBody() {
+        client.get().uri("/scales/A?mode=minor")
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(ScaleView.class)
+                .isEqualTo(new ScaleView("A", "aeolian", List.of("A", "B", "C", "D", "E", "F", "G"),
+                        List.of("Am", "Bdim", "C", "Dm", "Em", "F", "G")));
+    }
+
+    @Test
+    void serverSentEvents() {
+        var chords = client.get().uri("/progressions/F")
+                .accept(MediaType.TEXT_EVENT_STREAM)
+                .exchange()
+                .expectStatus().isOk()
+                .returnResult(new ParameterizedTypeReference<ServerSentEvent<String>>() {})
+                .getResponseBody()
+                .map(event -> event.id() + ":" + event.data());
+        StepVerifier.create(chords)
+                .expectNext("1:F", "2:Dm", "3:A#", "4:C")
+                .verifyComplete();
+    }
+```
+
+A streamed body becomes a `Flux`, and `StepVerifier` checks it event by event. The annotation moved in Spring Boot 4 as well: it is now `org.springframework.boot.webtestclient.autoconfigure.AutoConfigureWebTestClient`, in the `spring-boot-starter-webflux-test` starter. `ParameterizedTypeReference` is Java's way around type erasure, which [lesson 4 of the Java course](../../java-for-csharp/04-generics-and-erasure/) described: the anonymous subclass keeps `ServerSentEvent<String>` in its signature, where `typeof` would be enough in C#.
+
+## Key takeaways
+
+- WebFlux keeps Spring MVC's annotations and replaces Tomcat's thread per request with Reactor Netty's event loops; handlers return `Mono` and `Flux`, which WebFlux subscribes to.
+- With both web starters on the class path, Spring Boot chooses Spring MVC. `WebClient.Builder` needs `spring-boot-starter-webclient` since Spring Boot 4.
+- Functional endpoints are WebFlux's minimal APIs. A `ProblemDetail` written with `bodyValue` isn't sent as `application/problem+json`; an `@ExceptionHandler` covers its own controller only, and `@RestControllerAdvice` covers all of them.
+- A `Flux` with `application/x-ndjson` or `text/event-stream` is streamed. Backpressure reaches the server's socket: a clock such as `Flux.interval` overflows under a slow connection, while `delayElements` waits.
+- `WebClient` sends nothing until subscribed to, turns error statuses into error signals, and combines with `timeout` and `retryWhen`. `WebTestClient` turns a streamed body into a `Flux` for `StepVerifier`.
+
+## Exercises
+
+1. Add a functional route `/fn/scales/{root}/modes` that streams the seven modes as NDJSON, and test it with `WebClient`: the first two elements for `D` are `D ionian` and `D dorian`, followed by five more.
+
+<details>
+<summary>Solution</summary>
+
+```java
+@Bean
+RouterFunction<ServerResponse> modeRoutes(ScaleCatalog catalog) {
+    return route()
+            .GET("/fn/scales/{root}/modes", request -> ServerResponse.ok()
+                    .contentType(MediaType.APPLICATION_NDJSON)
+                    .body(catalog.allModes(request.pathVariable("root")), ScaleView.class))
+            .build();
+}
+
+@Test
+void exercise1FunctionalStream() {
+    var modes = builder.baseUrl("http://localhost:" + port).build()
+            .get().uri("/fn/scales/{root}/modes", "D")
+            .accept(MediaType.APPLICATION_NDJSON)
+            .retrieve()
+            .bodyToFlux(ScaleView.class)
+            .map(view -> view.root() + " " + view.mode());
+    StepVerifier.create(modes)
+            .expectNext("D ionian", "D dorian")
+            .expectNextCount(5)
+            .verifyComplete();
+}
+```
+
+`body(publisher, ScaleView.class)` takes the whole `Flux`, where `bodyValue` takes a value already there; the element class is needed because of type erasure. The test puts the route in a `@TestConfiguration` class imported by the test, so the application itself doesn't change.
+
+</details>
+
+2. Write `callWithFallback(WebClient client, String path)`: a GET that gives up after 200 ms, retries twice with an exponential backoff from 50 ms, and returns `service unavailable` if every attempt failed. Test it against a route that answers after two seconds, and against `/scales/C`.
+
+<details>
+<summary>Solution</summary>
+
+```java
+static Mono<String> callWithFallback(WebClient client, String path) {
+    return client.get().uri(path)
+            .retrieve()
+            .bodyToMono(String.class)
+            .timeout(Duration.ofMillis(200))
+            .retryWhen(Retry.backoff(2, Duration.ofMillis(50)).jitter(0))
+            .onErrorReturn("service unavailable");
+}
+
+@Test
+void exercise2TimeoutRetryFallback() {
+    WebClient client = builder.baseUrl("http://localhost:" + port).build();
+    // Three attempts of 200 ms and two waits of 50 and 100 ms: about 750 ms.
+    StepVerifier.create(callWithFallback(client, "/fn/slow"))
+            .expectNext("service unavailable")
+            .verifyComplete();
+    StepVerifier.create(callWithFallback(client, "/scales/C"))
+            .expectNextMatches(body -> body.startsWith("{\"root\":\"C\""))
+            .verifyComplete();
+}
+```
+
+The order is the pipeline's: `timeout` is above `retryWhen`, so each attempt has its own 200 ms, and `retryWhen` subscribes again, so each retry sends a new request. Written the other way round, one timeout would cover every attempt. This is Polly's pipeline of timeout, retry and fallback, with the strategies read from bottom to top. The slow route is `Mono.delay(Duration.ofSeconds(2))` in the test's routes.
+
+</details>
+
+3. Read the first two chords of `/progressions/D` with `WebClient`, then stop listening. What does the client do with the rest of the stream?
+
+<details>
+<summary>Solution</summary>
+
+```java
+@Test
+void exercise3FirstChordsOfAProgression() {
+    Mono<List<String>> firstTwo = builder.baseUrl("http://localhost:" + port).build()
+            .get().uri("/progressions/{root}", "D")
+            .retrieve()
+            .bodyToFlux(new ParameterizedTypeReference<ServerSentEvent<String>>() {})
+            .map(ServerSentEvent::data)
+            .take(2)
+            .collectList();
+    StepVerifier.create(firstTwo)
+            .expectNext(List.of("D", "Bm"))
+            .verifyComplete();
+}
+```
+
+`take(2)` cancels its subscription after the second chord, and the cancel signal travels up to `WebClient`, which stops reading the response. The test completes without waiting for the last two beats. What the server sees then, a closed connection and a cancelled `Flux`, is *to verify*: the test doesn't record it. In C#, the same effect takes a `break` out of `await foreach` and the `CancellationToken` the enumerator was given.
+
+</details>
+
+## Sources
+
+- Spring Framework reference: [Spring WebFlux](https://docs.spring.io/spring-framework/reference/web/webflux.html), [functional endpoints](https://docs.spring.io/spring-framework/reference/web/webflux-functional.html), [`WebClient`](https://docs.spring.io/spring-framework/reference/web/webflux-webclient.html), [controller advice](https://docs.spring.io/spring-framework/reference/web/webflux/controller/ann-advice.html), [REST clients](https://docs.spring.io/spring-framework/reference/integration/rest-clients.html), [`WebTestClient`](https://docs.spring.io/spring-framework/reference/testing/webtestclient.html)
+- Spring Boot reference: [reactive web applications](https://docs.spring.io/spring-boot/reference/web/reactive.html); [Spring Boot 4.0 migration guide](https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-4.0-Migration-Guide)
+- [Reactor Netty reference](https://projectreactor.io/docs/netty/release/reference/), [`Flux` Javadoc](https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Flux.html)
+- [HTML Standard: server-sent events](https://html.spec.whatwg.org/multipage/server-sent-events.html), [NDJSON specification](https://github.com/ndjson/ndjson-spec)
+- .NET: [minimal API responses](https://learn.microsoft.com/aspnet/core/fundamentals/minimal-apis/responses), [`HttpClient`](https://learn.microsoft.com/dotnet/api/system.net.http.httpclient), [`IHttpClientFactory`](https://learn.microsoft.com/dotnet/core/extensions/httpclient-factory)
