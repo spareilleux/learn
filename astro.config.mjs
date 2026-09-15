@@ -123,6 +123,12 @@ export default defineConfig({
 							collapsed: true,
 							items: [{ autogenerate: { directory: 'machine-learning-ix' } }],
 						},
+						{
+							label: "GA's AI: OPTIC-K, ML, agents and the chatbot",
+							translations: { fr: "L'IA de GA : OPTIC-K, ML, agents et chatbot", es: 'La IA de GA: OPTIC-K, ML, agentes y chatbot' },
+							collapsed: true,
+							items: [{ autogenerate: { directory: 'ga-ai' } }],
+						},
 					],
 				},
 				{
