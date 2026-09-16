@@ -19,7 +19,7 @@ sidebar:
 - [x] Leçon 7 : TPL Dataflow
 - [x] Leçon 8 : Rx.NET
 - [x] Leçon 9 : choisir un flux
-- [x] Annexe 1 : trois membres de GA optimisés, prouvés sur les 4096 ensembles de classes de hauteurs, puis mesurés
+- [x] Annexe 1 : cinq membres de GA optimisés, prouvés sur les 4096 ensembles de classes de hauteurs, puis mesurés — les benchmarks ayant été réécrits une fois qu'il est apparu qu'ils mesuraient le JIT
 
 ## 2026-09-14 — Mise en place et épinglage de GA
 
@@ -107,9 +107,9 @@ La leçon 4 mesurait le code de GA tel quel. Cette annexe réécrit trois de ses
 - Les trois sont `PitchClassSetId.IsClusterFree`, `PitchClassSet.IntervalClassVector` et `PitchClassSet.ClosestDiatonicKey`. Tous prennent un ensemble de 12 bits, donc le domaine d'entrée entier compte 4096 valeurs : `Advanced -- a1` compare chaque réécriture à la réponse de GA pour chacune d'elles, et la CI l'exécute sur trois OS. Écrire la preuve avant le benchmark a changé ce que j'étais prêt à affirmer.
 - `IntervalClassVectorId` empaquette six comptes en chiffres de base 12, et les comptes de 12 de l'agrégat chromatique reportent. GA le documente comme une limitation connue. Empaqueter correctement changerait l'identifiant de l'ensemble 4095, et `ProgrammaticForteCatalog` ordonne chaque cardinalité par cet identifiant, donc tous les numéros de Forte pourraient bouger — la version rapide reproduit le report à la place. Un « correctif » glissé dans un changement de performance, c'est précisément le sujet de cette annexe.
 - La réponse de `ClosestDiatonicKey` dépend de la stabilité d'`OrderByDescending` : les égalités reviennent à la tonalité que `Key.Items` liste en premier, les 15 majeures avant les 15 mineures. Une boucle qui remplacerait le tenant du titre sur `>=` plutôt que sur `>` renverrait discrètement une autre tonalité à chaque égalité ; celle qui remplace sur `>` est d'accord avec GA sur les 4096 ensembles.
-- Les chiffres, sur cette machine : le vecteur de classes d'intervalles passe de 5 518,86 ns et 16 304 o par lecture de propriété à 2,62 ns calculé et 0,0799 ns depuis une table de 4096 entrées, sans aucune allocation ; `IsClusterFree` de 3,5344 ns à 0,1131 ns ; `ClosestDiatonicKey` de 68,211 µs et 175,66 Ko à 6,195 µs et 15,69 Ko.
+- **Les premiers benchmarks étaient faux, et flatteurs.** Appeler chaque membre une fois sur un argument `const` a laissé le JIT replier l'appel en un littéral : le `IsClusterFree` rapide ressortait à 0,0107 ns, un vingt-cinquième de cycle. Un statique mutable a supprimé le repliement et donnait encore une médiane de zéro, parce que BenchmarkDotNet soustrait une méthode vide. Réécrits pour balayer les 4096 ensembles, `IsClusterFree` est 4 fois plus rapide, pas 31 — et j'aurais publié le 31.
 - Ce sont les 175 Ko qui constituent la trouvaille, pas les microsecondes. `IdentifyClosestKey` reçoit un `Dictionary<Key, IReadOnlyCollection<PitchClass>>` et le déstructure en `foreach (var (key, _) in items)` : les valeurs sont construites pour les 30 tonalités et jamais lues. Aucun profileur n'a été nécessaire — il a suffi de lire la méthode.
-- Les 15,69 Ko qui restent dans la version rapide viennent de `ToNormalForm()`, appelé seulement pour deviner un mode. Les tables de `PrimeForm` et un cache d'instances de `PitchClassSet` sont les candidats suivants, et aucun n'est encore écrit.
+- `ToNormalForm` et `PrimeForm` sont faits aussi, donc l'annexe prouve maintenant cinq membres et non trois. Tabuler la forme normale a retiré les derniers 16 Ko du `ClosestDiatonicKey` rapide, qui n'alloue plus rien : 1 615 fois plus rapide, 175 Ko par appel disparus. `PrimeForm`, déjà de l'arithmétique sur les bits, n'a donné que 1,8 — le plafond honnête de la réécriture d'une arithmétique correcte, et il mérite d'être posé à côté du 1 615.
 - Rien de tout cela n'a encore été remonté en amont.
 
 ## À vérifier

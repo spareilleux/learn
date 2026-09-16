@@ -19,7 +19,7 @@ sidebar:
 - [x] Lesson 7: TPL Dataflow
 - [x] Lesson 8: Rx.NET
 - [x] Lesson 9: choosing a stream
-- [x] Appendix 1: three GA members optimised, proved on all 4096 pitch-class sets, then measured
+- [x] Appendix 1: five GA members optimised, proved on all 4096 pitch-class sets, then measured — with the benchmarks rewritten once they turned out to be measuring the JIT
 
 ## 2026-09-14 — Setup and the GA pin
 
@@ -107,9 +107,9 @@ Lesson 4 measured GA's code as it is. This appendix rewrites three members of it
 - The three are `PitchClassSetId.IsClusterFree`, `PitchClassSet.IntervalClassVector` and `PitchClassSet.ClosestDiatonicKey`. They all take a 12-bit set, so the whole input domain is 4096 values: `Advanced -- a1` compares each rewrite with GA's own answer for every one of them, and CI runs that on three OSes. Writing the proof before the benchmark changed what I was willing to claim.
 - `IntervalClassVectorId` packs six counts as base-12 digits, and the chromatic aggregate's counts of 12 carry. GA documents it as a known limitation. Packing it correctly would change set 4095's id, and `ProgrammaticForteCatalog` orders each cardinality by that id, so every Forte number could move — the fast version reproduces the carry instead. A "fix" smuggled into a performance change is the thing this appendix is about.
 - `ClosestDiatonicKey`'s answer depends on `OrderByDescending` being stable: ties fall to whichever key `Key.Items` lists first, the 15 major ones before the 15 minor ones. A loop that replaced its incumbent on `>=` rather than `>` would quietly return a different key on every tie; the one that replaces on `>` agrees with GA on all 4096 sets.
-- The numbers, on this machine: the interval-class vector 5,518.86 ns and 16,304 B per property read, down to 2.62 ns computed and 0.0799 ns from a 4096-entry table, with no allocation; `IsClusterFree` 3.5344 ns to 0.1131 ns; `ClosestDiatonicKey` 68.211 µs and 175.66 KB to 6.195 µs and 15.69 KB.
+- **The first benchmarks were wrong, and flattering.** Calling each member once on a `const` argument let the JIT fold the call into a literal: the fast `IsClusterFree` came out at 0.0107 ns, a twenty-fifth of a cycle. A mutable static removed the folding and still gave a median of zero, because BenchmarkDotNet subtracts an empty method. Rewritten to sweep all 4096 sets, `IsClusterFree` is 4 times faster, not 31 — and I would have published the 31.
 - The 175 KB is the finding, not the microseconds. `IdentifyClosestKey` receives a `Dictionary<Key, IReadOnlyCollection<PitchClass>>` and destructures it as `foreach (var (key, _) in items)`: the values are built for all 30 keys and never read. No profiler was needed — just reading the method.
-- The 15.69 KB left in the fast version is `ToNormalForm()`, called only to guess a mode. `PrimeForm`'s tables and a `PitchClassSet` instance cache are the next candidates, and none of them is written yet.
+- `ToNormalForm` and `PrimeForm` are done too, so the appendix now proves five members rather than three. Tabulating the normal form took the last 16 KB out of the fast `ClosestDiatonicKey`, which now allocates nothing: 1,615 times faster, 175 KB per call gone. `PrimeForm`, which was already bit arithmetic, only gave 1.8 — the honest ceiling on rewriting correct arithmetic, and worth having next to the 1,615.
 - None of this has been reported upstream.
 
 ## To verify
