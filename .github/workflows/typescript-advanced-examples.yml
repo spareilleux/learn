@@ -42,6 +42,11 @@ jobs:
           java-version: '25'
       - name: Toolchain
         run: node --version && npm --version && dotnet --version && java --version
+      # esbuild and Vite also read the site's tsconfig.json at the root of the repository, which extends
+      # astro/tsconfigs/strict: install the site's packages so that it resolves as it does on the author's machine
+      - name: Install the site's packages, for the root tsconfig.json
+        working-directory: .
+        run: npm ci --ignore-scripts
       - name: Install the pinned TypeScript, @types/node, Zod, Valibot, ArkType and esbuild
         run: npm ci
       - name: Examples, errors, solutions and comparisons
