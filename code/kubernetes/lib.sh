@@ -10,9 +10,12 @@ mkdir -p "$K8S_DIR/out" "$K8S_DIR/expected"
 status=${status:-0}
 
 # Fields that change on every run become placeholders; runs of spaces become one, since column widths follow them.
+# The kubelet appends the node's own search domains to a pod's resolv.conf (on a CI runner, an internal.cloudapp.net
+# domain): they are dropped after cluster.local.
 normalize() {
   sed -E \
     -e 's/\r$//' \
+    -e 's/^(search [^ ]+\.svc\.cluster\.local svc\.cluster\.local cluster\.local) .*$/\1/' \
     -e 's/[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9:.]+Z/<time>/g' \
     -e 's/\b(I|W|E)[0-9]{4} [0-9:.]+ +[0-9]+ /\1<time> /g' \
     -e 's/\b[0-9]{1,3}(\.[0-9]{1,3}){3}\b/<ip>/g' \
