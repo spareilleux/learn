@@ -6,9 +6,9 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ['code/music-theory-ga/**', '.github/workflows/music-ga-examples.yml']
+    paths: ['code/music-theory-ga/**', 'src/assets/music-theory-ga/**', '.github/workflows/music-ga-examples.yml']
   pull_request:
-    paths: ['code/music-theory-ga/**', '.github/workflows/music-ga-examples.yml']
+    paths: ['code/music-theory-ga/**', 'src/assets/music-theory-ga/**', '.github/workflows/music-ga-examples.yml']
 
 permissions:
   contents: read
