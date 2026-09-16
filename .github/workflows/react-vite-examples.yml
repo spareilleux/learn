@@ -49,4 +49,5 @@ jobs:
           ls node_modules/@rolldown node_modules/@oxlint node_modules/@typescript
           node -p "process.platform + ' ' + process.arch"
       - name: Scaffold, dev server, build, type errors, lint and tests
-        run: bash check.sh
+        # oxlint switches to GitHub annotations when GITHUB_ACTIONS is set: the expected outputs are its default format
+        run: env -u GITHUB_ACTIONS bash check.sh
