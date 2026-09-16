@@ -1,0 +1,82 @@
+# PostgreSQL and Aurora course: run the SQL scripts with psql and the C# and Java programs against PostgreSQL on Linux,
+# and build the programs on Windows and macOS. GitHub's Windows and macOS runners have no Docker, so there is no server
+# to run them against there.
+name: PostgreSQL and Aurora course examples
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['code/postgresql-aurora/**', 'code/duckdb/data/**', 'code/ladybugdb/data/ga/**', '.github/workflows/postgresql-aurora-examples.yml']
+  pull_request:
+    paths: ['code/postgresql-aurora/**', 'code/duckdb/data/**', 'code/ladybugdb/data/ga/**', '.github/workflows/postgresql-aurora-examples.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  run:
+    name: run against PostgreSQL (ubuntu-latest)
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:18.6-trixie
+        env:
+          POSTGRES_PASSWORD: learn
+        ports:
+          - 5432:5432
+        # -h 127.0.0.1, as in server.sh: during the first start, the entrypoint's temporary server listens on the Unix socket only
+        options: >-
+          --health-cmd "pg_isready -h 127.0.0.1 -U postgres"
+          --health-interval 2s
+          --health-timeout 5s
+          --health-retries 30
+    defaults:
+      run:
+        shell: bash
+        working-directory: code/postgresql-aurora
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '25'
+          cache: maven
+          cache-dependency-path: code/postgresql-aurora/java/pom.xml
+      - uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: code/postgresql-aurora/global.json
+      - name: Toolchain
+        run: java --version && mvn --version && dotnet --version
+      - name: Build, run and compare with expected/
+        env:
+          PG_CONTAINER: ${{ job.services.postgres.id }}
+        run: bash check.sh
+      - name: Server log
+        if: failure()
+        run: docker logs --tail 200 ${{ job.services.postgres.id }}
+
+  build:
+    name: build (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+        working-directory: code/postgresql-aurora
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '25'
+          cache: maven
+          cache-dependency-path: code/postgresql-aurora/java/pom.xml
+      - uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: code/postgresql-aurora/global.json
+      - name: Build the C# and Java examples
+        run: bash check.sh build
