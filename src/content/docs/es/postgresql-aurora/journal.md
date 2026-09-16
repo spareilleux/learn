@@ -14,7 +14,11 @@ sidebar:
 - [x] Lección 2: tipos y modelado
 - [x] Lección 3: CTE, ventanas, `LATERAL`, upserts y `MERGE`
 - [x] Lección 4: PostgreSQL desde C# y Java
-- [ ] Lecciones 5 a 13
+- [x] Lección 5: índices y planes
+- [x] Lección 6: transacciones y MVCC
+- [x] Lección 7: JSON y búsqueda
+- [x] Lección 8: funciones, extensiones y pgvector
+- [ ] Lecciones 9 a 13
 - [ ] Todo lo relativo a AWS: cada sección de Aurora sigue *por verificar*
 
 ## 2026-09-15 — Versiones
@@ -56,7 +60,42 @@ Nada de esto se ha comunicado al proyecto; son notas, con las consultas que los 
 - Npgsql rechaza `Target Session Attributes=standby` con un solo host: `NotSupportedException: Target Session Attributes other then Any is only supported with multiple hosts`. pgjdbc acepta `targetServerType=secondary` con un host y falla al conectarse.
 - Una ejecución de `l04-timings`: 478 comandos `INSERT` en un segundo aproximadamente, un `NpgsqlBatch` en 5 a 7 ms, un `COPY` binario en unos 50 ms. Ejecuciones anteriores ese mismo día tardaron hasta 2,2 segundos en el bucle de `INSERT`.
 
+## 2026-09-16 — Planes que dan la misma salida en cada ejecución
+
+- `EXPLAIN ANALYZE` sobre el historial de pasos de 440 800 filas daba filas distintas por nodo de una ejecución a otra: los workers paralelos repartían las filas de forma distinta cada vez. `max_parallel_workers_per_gather = 0` para las lecciones que muestran planes.
+- Las estimaciones del planificador cambiaban tras cada `ANALYZE`, que lee una muestra aleatoria de 30 000 filas con el objetivo de estadísticas por defecto. Con 1500, la muestra es de 450 000 filas, más que la tabla, y las estimaciones son exactas y estables.
+- La línea `Buffers` repartía las páginas entre `hit` y `read` según lo que las instrucciones anteriores dejaban en memoria. La función auxiliar de planes las suma en un solo número; el total no cambió tras reiniciar el contenedor.
+- PostgreSQL 18 imprime `Buffers` sin `BUFFERS`, los recuentos de filas con dos decimales, e `Index Searches`.
+- `xmin` imprimía `-1` para la primera versión de fila: el ID de transacción guardado con `\gset` se tomaba después del `INSERT`. Ahora se toma justo antes.
+- `pg_stat_user_tables` mostraba cero actualizaciones HOT justo después de las actualizaciones: las estadísticas se envían como mucho una vez por segundo. `pg_stat_force_next_flush()` corrige el recuento.
+
+## 2026-09-16 — Dos sesiones en un programa
+
+- Un programa no puede esperar a que vuelva la instrucción bloqueada de B. Los programas C# y Java la lanzan, y una tercera conexión consulta `pg_stat_activity` hasta que B espera un bloqueo, con `pg_blocking_pids` nombrando a A.
+- En el ejemplo de deadlock, cualquiera de las dos sesiones podía ser la cancelada, según cuál esperara primero `deadlock_timeout`. A tiene 10 segundos y B 100 ms: B detecta siempre el ciclo, y se cancela.
+
+## 2026-09-16 — JSON y búsqueda
+
+- Un `tsvector` generado almacenado cuya configuración venía de otra columna generada fue rechazado: una columna generada no puede referirse a otra. La configuración es una columna normal, fijada por el `INSERT`.
+- Un índice de trigramas sobre las 478 filas de `ga.package_refs` nunca se usaba, ni siquiera con `enable_seqscan = off`: el índice de la clave primaria era más barato. El ejemplo usa los 88 160 nombres de pasos de los documentos copiados.
+- Sobre estos documentos, `jsonb_path_ops` salió algo más grande que `jsonb_ops`, 1752 kB frente a 1688 kB, lo contrario de lo que la documentación dice que es habitual.
+- La frase `"prepared statements"` coincidió con `pg_prepared_statements` en este diario: el analizador de búsqueda de texto corta en los guiones bajos.
+
+## 2026-09-16 — Funciones y pgvector
+
+- **Hallazgo, Npgsql 10.0.3.** Un único `CREATE FUNCTION … BEGIN ATOMIC SELECT …; END` en un `NpgsqlCommand` sin parámetros falla con `42601: syntax error at end of input`. Npgsql corta el texto del comando en el punto y coma de dentro del cuerpo, como hace con varias instrucciones. El mismo texto funciona en un `NpgsqlBatch`, con el switch `Npgsql.EnableSqlRewriting` a `false`, o en un comando con parámetros posicionales. pgjdbc 42.7.13 detecta `BEGIN ATOMIC` y no corta; una función `BEGIN ATOMIC` seguida de otra instrucción en un solo `execute` falla entonces por tener varios comandos en una sentencia preparada. No comunicado a ninguno de los dos proyectos.
+- La imagen oficial no tiene pgvector. Los scripts de pgvector se ejecutan sobre `pgvector/pgvector:0.8.6-pg18-trixie`, un servidor cada vez en el puerto 5432; la CI lo ejecuta como un segundo servicio, sin puerto.
+- Con `enable_seqscan = off`, una consulta de vecinos más cercanos filtrada por tríadas no devolvía ninguna fila, donde se pedían diez: el escaneo HNSW devuelve 40 candidatos, ninguno de ellos una tríada. `hnsw.iterative_scan = strict_order` devuelve las diez. Reconstruí el índice cinco veces: las distancias de los 40 candidatos fueron las mismas cada vez.
+- Los vectores de clases de intervalo de los acordes icónicos muestran que el acorde Elektra es el acorde Petrushka transpuesto una tercera mayor hacia arriba, y que el acorde Foxy Lady es la inversión del acorde Joni Mitchell, cuya transposición es el acorde Debussy.
+
+## 2026-09-16 — Aurora, según la documentación
+
+- Aurora PostgreSQL 18.4 incluye pgvector 0.8.2, mientras que el curso ejecuta 0.8.6. `pageinspect` no está en la tabla de extensiones de Aurora PostgreSQL 18.
+- Las páginas de AWS no coinciden sobre el fin de vida de Performance Insights: 31 de julio de 2026 en la guía de CloudWatch, 30 de noviembre de 2025 en el historial de la Aurora User Guide. Tampoco coinciden sobre si Database Insights usa por defecto el modo Standard o el Advanced.
+- `max_standby_streaming_delay`: 30 segundos en la página `Lock:Relation`, 14 000 ms en la tabla de parámetros de Aurora PostgreSQL 14.
+
 ## Por verificar
 
 - Los comandos de Linux y macOS de las lecciones 1 y 4, en esos sistemas.
 - Cada sección «En Aurora»: `pg_read_file` y el requisito de `CONNECT` para `rds_superuser`, `btree_gist` 1.6, el error de solo lectura en una réplica, TLS por defecto, los tokens IAM con el proveedor de contraseña periódico de Npgsql, la fijación de RDS Proxy con el `DISCARD ALL` de Npgsql y con las sentencias preparadas a nivel de protocolo, y `pg_is_in_recovery()` en una Aurora Replica.
+- Las lecciones 5 a 8 en Aurora: el valor por defecto de `shared_buffers` en Aurora PostgreSQL 18 y la razón de que sea mayor, la gestión de planes de consulta en 18.4, `hot_standby_feedback` frenando `VACUUM` en el writer, el valor por defecto de `max_standby_streaming_delay`, las extensiones de confianza bajo `rds.allowed_extensions`, y los escaneos iterativos de pgvector 0.8.2.

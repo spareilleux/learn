@@ -7,7 +7,7 @@ sidebar:
 ---
 
 :::note[Versiones estudiadas]
-[PostgreSQL](https://www.postgresql.org/docs/18/) **18.6**, la versión menor actual de la versión mayor más reciente a 2026-09-15 según la [página de la política de versiones](https://www.postgresql.org/support/versioning/) (PostgreSQL 18 tiene soporte hasta noviembre de 2030), en la imagen Docker oficial [`postgres:18.6-trixie`](https://hub.docker.com/_/postgres), digest `sha256:4ef4dbc939d61acea57712655ddb4b4ab27419c913f94cca0cd57cb3ea3c2280`. Los clientes son [Npgsql](https://www.npgsql.org/) **10.0.3** y su [proveedor EF Core](https://www.npgsql.org/efcore/) **10.0.3** en .NET 10, y el [driver JDBC de PostgreSQL](https://jdbc.postgresql.org/) **42.7.13** con [HikariCP](https://github.com/brettwooldridge/HikariCP) **7.1.0** en Java 25. En AWS, la versión más reciente que figura en las [notas de versión de Aurora PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html) ese mismo día es **Aurora PostgreSQL 18.4.1** (21 de agosto de 2026), compatible con PostgreSQL 18.4.
+[PostgreSQL](https://www.postgresql.org/docs/18/) **18.6**, la versión menor actual de la versión mayor más reciente a 2026-09-15 según la [página de la política de versiones](https://www.postgresql.org/support/versioning/) (PostgreSQL 18 tiene soporte hasta noviembre de 2030), en la imagen Docker oficial [`postgres:18.6-trixie`](https://hub.docker.com/_/postgres), digest `sha256:4ef4dbc939d61acea57712655ddb4b4ab27419c913f94cca0cd57cb3ea3c2280`. Los scripts de [pgvector](https://github.com/pgvector/pgvector) de la lección 8 se ejecutan sobre [`pgvector/pgvector:0.8.6-pg18-trixie`](https://hub.docker.com/r/pgvector/pgvector), el mismo PostgreSQL 18.6 con pgvector **0.8.6**, digest `sha256:78bf48b801e792f99e3ac62b5036fd3876e9be48afda16c1e331af1c75ceb2ff`. Los clientes son [Npgsql](https://www.npgsql.org/) **10.0.3** y su [proveedor EF Core](https://www.npgsql.org/efcore/) **10.0.3** en .NET 10, y el [driver JDBC de PostgreSQL](https://jdbc.postgresql.org/) **42.7.13** con [HikariCP](https://github.com/brettwooldridge/HikariCP) **7.1.0** en Java 25. En AWS, la versión más reciente que figura en las [notas de versión de Aurora PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html) ese mismo día es **Aurora PostgreSQL 18.4.1** (21 de agosto de 2026), compatible con PostgreSQL 18.4.
 
 Cada ejemplo está en [`code/postgresql-aurora`](https://github.com/spareilleux/learn/tree/main/code/postgresql-aurora): [`check.sh`](https://github.com/spareilleux/learn/blob/main/code/postgresql-aurora/check.sh) ejecuta cada script SQL con `psql` y cada programa C# y Java contra una base nueva, y compara su salida con los archivos de [`expected`](https://github.com/spareilleux/learn/tree/main/code/postgresql-aurora/expected). La CI compila los programas en Windows, Linux y macOS, y lo ejecuta todo contra PostgreSQL solo en Linux, porque los runners de Windows y macOS de GitHub no tienen Docker.
 :::
@@ -99,17 +99,17 @@ El esquema `ci` contiene las tres primeras tablas, el esquema `ga` las demás.
 | 2 | [Tipos y modelado](02-types/) | `datetimeoffset`, `nvarchar`, columnas calculadas, índices únicos y `NULL` |
 | 3 | [Consultas: CTE, ventanas, `LATERAL`, upserts y `MERGE`](03-queries/) | `CROSS APPLY`, `OUTPUT inserted.*`, `MERGE` |
 | 4 | [PostgreSQL desde C# y Java](04-csharp-java/) | pool de `SqlConnection`, `SqlBulkCopy`, proveedores de EF Core |
-| 5 | Índices y planes: B-tree, GIN, GiST, BRIN, `EXPLAIN (ANALYZE, BUFFERS)` *(la siguiente)* | planes de ejecución, columnas incluidas, índices filtrados |
-| 6 | Transacciones y MVCC: niveles de aislamiento, bloqueos, `VACUUM`, bloat, deadlocks | `READ_COMMITTED_SNAPSHOT`, el version store |
-| 7 | JSON y búsqueda: operadores e índices `jsonb`, búsqueda de texto completo, `pg_trgm` | `OPENJSON`, catálogos de texto completo |
-| 8 | Funciones y extensiones: PL/pgSQL, triggers, `pgvector` | procedimientos T-SQL, CLR |
-| 9 | Particionado y tablas grandes | funciones y esquemas de partición |
+| 5 | [Índices y planes: B-tree, GIN, BRIN, `EXPLAIN (ANALYZE, BUFFERS)`](05-indexes/) | planes de ejecución, columnas incluidas, índices filtrados |
+| 6 | [Transacciones y MVCC: niveles de aislamiento, bloqueos, `VACUUM`, bloat, deadlocks](06-transactions/) | `READ_COMMITTED_SNAPSHOT`, el version store |
+| 7 | [JSON y búsqueda: operadores e índices `jsonb`, búsqueda de texto completo, `pg_trgm`](07-json-search/) | `OPENJSON`, catálogos de texto completo |
+| 8 | [Funciones y extensiones: PL/pgSQL, triggers, `pgvector`](08-functions/) | procedimientos T-SQL, CLR |
+| 9 | Particionado y tablas grandes *(la siguiente)* | funciones y esquemas de partición |
 | 10 | Replicación y alta disponibilidad: WAL, replicación física y lógica | grupos de disponibilidad Always On, trasvase de registros |
 | 11 | Copia de seguridad, restauración y actualizaciones: `pg_dump`, recuperación a un momento dado, `pg_upgrade` | `BACKUP`, `RESTORE`, actualizaciones en el sitio |
 | 12 | Amazon Aurora PostgreSQL: almacenamiento, réplicas, endpoints, Serverless v2, Global Database, RDS Proxy, autenticación IAM, Performance Insights | Azure SQL Database, Hyperscale |
 | 13 | Migración y costes: de SQL Server a PostgreSQL y Aurora con AWS DMS y Babelfish | el Data Migration Assistant |
 
-Cada una de las cuatro primeras lecciones termina con una sección breve sobre lo que cambia en Aurora, según la documentación de AWS; la lección 12 vuelve sobre ello en profundidad. Nada de eso se ejecuta en AWS: el curso no crea ningún recurso de AWS, así que todo lo relativo a Aurora está marcado *por verificar*.
+Cada una de las ocho primeras lecciones termina con una sección breve sobre lo que cambia en Aurora, según la documentación de AWS; la lección 12 vuelve sobre ello en profundidad. Nada de eso se ejecuta en AWS: el curso no crea ningún recurso de AWS, así que todo lo relativo a Aurora está marcado *por verificar*.
 
 [Diario](journal/): lo que probé, lo que me sorprendió, lo que aún tengo que verificar.
 

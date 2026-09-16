@@ -7,7 +7,7 @@ sidebar:
 ---
 
 :::note[Versions étudiées]
-[PostgreSQL](https://www.postgresql.org/docs/18/) **18.6**, la version mineure courante de la plus récente version majeure au 2026-09-15 d'après la [page de la politique de versions](https://www.postgresql.org/support/versioning/) (PostgreSQL 18 est supporté jusqu'en novembre 2030), dans l'image Docker officielle [`postgres:18.6-trixie`](https://hub.docker.com/_/postgres), digest `sha256:4ef4dbc939d61acea57712655ddb4b4ab27419c913f94cca0cd57cb3ea3c2280`. Les clients sont [Npgsql](https://www.npgsql.org/) **10.0.3** et son [fournisseur EF Core](https://www.npgsql.org/efcore/) **10.0.3** sur .NET 10, et le [pilote JDBC de PostgreSQL](https://jdbc.postgresql.org/) **42.7.13** avec [HikariCP](https://github.com/brettwooldridge/HikariCP) **7.1.0** sur Java 25. Chez AWS, la version la plus récente listée dans les [notes de version d'Aurora PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html) le même jour est **Aurora PostgreSQL 18.4.1** (21 août 2026), compatible avec PostgreSQL 18.4.
+[PostgreSQL](https://www.postgresql.org/docs/18/) **18.6**, la version mineure courante de la plus récente version majeure au 2026-09-15 d'après la [page de la politique de versions](https://www.postgresql.org/support/versioning/) (PostgreSQL 18 est supporté jusqu'en novembre 2030), dans l'image Docker officielle [`postgres:18.6-trixie`](https://hub.docker.com/_/postgres), digest `sha256:4ef4dbc939d61acea57712655ddb4b4ab27419c913f94cca0cd57cb3ea3c2280`. Les scripts [pgvector](https://github.com/pgvector/pgvector) de la leçon 8 s'exécutent sur [`pgvector/pgvector:0.8.6-pg18-trixie`](https://hub.docker.com/r/pgvector/pgvector), le même PostgreSQL 18.6 avec pgvector **0.8.6**, digest `sha256:78bf48b801e792f99e3ac62b5036fd3876e9be48afda16c1e331af1c75ceb2ff`. Les clients sont [Npgsql](https://www.npgsql.org/) **10.0.3** et son [fournisseur EF Core](https://www.npgsql.org/efcore/) **10.0.3** sur .NET 10, et le [pilote JDBC de PostgreSQL](https://jdbc.postgresql.org/) **42.7.13** avec [HikariCP](https://github.com/brettwooldridge/HikariCP) **7.1.0** sur Java 25. Chez AWS, la version la plus récente listée dans les [notes de version d'Aurora PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html) le même jour est **Aurora PostgreSQL 18.4.1** (21 août 2026), compatible avec PostgreSQL 18.4.
 
 Chaque exemple est dans [`code/postgresql-aurora`](https://github.com/spareilleux/learn/tree/main/code/postgresql-aurora) : [`check.sh`](https://github.com/spareilleux/learn/blob/main/code/postgresql-aurora/check.sh) exécute chaque script SQL avec `psql` et chaque programme C# et Java contre une base neuve, et compare leur sortie aux fichiers de [`expected`](https://github.com/spareilleux/learn/tree/main/code/postgresql-aurora/expected). La CI construit les programmes sous Windows, Linux et macOS, et exécute le tout contre PostgreSQL sous Linux seulement, parce que les runners Windows et macOS de GitHub n'ont pas Docker.
 :::
@@ -99,17 +99,17 @@ Le schéma `ci` contient les trois premières tables, le schéma `ga` les autres
 | 2 | [Types et modélisation](02-types/) | `datetimeoffset`, `nvarchar`, colonnes calculées, index uniques et `NULL` |
 | 3 | [Requêtes : CTE, fenêtres, `LATERAL`, upserts et `MERGE`](03-queries/) | `CROSS APPLY`, `OUTPUT inserted.*`, `MERGE` |
 | 4 | [PostgreSQL depuis C# et Java](04-csharp-java/) | pool de `SqlConnection`, `SqlBulkCopy`, fournisseurs EF Core |
-| 5 | Index et plans : B-tree, GIN, GiST, BRIN, `EXPLAIN (ANALYZE, BUFFERS)` *(la prochaine)* | plans d'exécution, colonnes incluses, index filtrés |
-| 6 | Transactions et MVCC : niveaux d'isolation, verrous, `VACUUM`, bloat, deadlocks | `READ_COMMITTED_SNAPSHOT`, le version store |
-| 7 | JSON et recherche : opérateurs et index `jsonb`, recherche plein texte, `pg_trgm` | `OPENJSON`, catalogues de texte intégral |
-| 8 | Fonctions et extensions : PL/pgSQL, triggers, `pgvector` | procédures T-SQL, CLR |
-| 9 | Partitionnement et grandes tables | fonctions et schémas de partition |
+| 5 | [Index et plans : B-tree, GIN, BRIN, `EXPLAIN (ANALYZE, BUFFERS)`](05-indexes/) | plans d'exécution, colonnes incluses, index filtrés |
+| 6 | [Transactions et MVCC : niveaux d'isolation, verrous, `VACUUM`, bloat, deadlocks](06-transactions/) | `READ_COMMITTED_SNAPSHOT`, le version store |
+| 7 | [JSON et recherche : opérateurs et index `jsonb`, recherche plein texte, `pg_trgm`](07-json-search/) | `OPENJSON`, catalogues de texte intégral |
+| 8 | [Fonctions et extensions : PL/pgSQL, triggers, `pgvector`](08-functions/) | procédures T-SQL, CLR |
+| 9 | Partitionnement et grandes tables *(la prochaine)* | fonctions et schémas de partition |
 | 10 | Réplication et haute disponibilité : WAL, réplication physique et logique | groupes de disponibilité Always On, log shipping |
 | 11 | Sauvegarde, restauration et mises à niveau : `pg_dump`, restauration à un instant donné, `pg_upgrade` | `BACKUP`, `RESTORE`, mises à niveau sur place |
 | 12 | Amazon Aurora PostgreSQL : stockage, réplicas, endpoints, Serverless v2, Global Database, RDS Proxy, authentification IAM, Performance Insights | Azure SQL Database, Hyperscale |
 | 13 | Migration et coûts : de SQL Server vers PostgreSQL et Aurora avec AWS DMS et Babelfish | le Data Migration Assistant |
 
-Chacune des quatre premières leçons se termine par une courte section sur ce qui change sur Aurora, d'après la documentation d'AWS ; la leçon 12 y revient en profondeur. Rien de tout cela ne tourne sur AWS : le cours ne crée aucune ressource AWS, donc tout ce qui concerne Aurora est marqué *à vérifier*.
+Chacune des huit premières leçons se termine par une courte section sur ce qui change sur Aurora, d'après la documentation d'AWS ; la leçon 12 y revient en profondeur. Rien de tout cela ne tourne sur AWS : le cours ne crée aucune ressource AWS, donc tout ce qui concerne Aurora est marqué *à vérifier*.
 
 [Journal](journal/) : ce que j'ai essayé, ce qui m'a surpris, ce qu'il me reste à vérifier.
 
