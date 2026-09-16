@@ -18,6 +18,17 @@ pub fn launch(builder: Builder<MockRuntime>) -> (App<MockRuntime>, WebviewWindow
     (app, webview)
 }
 
+/// The page's origin, which the capabilities are checked against. Windows and Android
+/// serve the embedded assets over `http://tauri.localhost`, the other systems over the
+/// `tauri://` protocol; sending the wrong one rejects every call with `not allowed`.
+fn page_url() -> &'static str {
+    if cfg!(windows) || cfg!(target_os = "android") {
+        "http://tauri.localhost"
+    } else {
+        "tauri://localhost"
+    }
+}
+
 /// What `invoke(cmd, args)` resolves (`Ok`) or rejects (`Err`) with in JavaScript.
 pub fn invoke(
     webview: &WebviewWindow<MockRuntime>,
@@ -28,7 +39,7 @@ pub fn invoke(
         cmd: cmd.into(),
         callback: CallbackFn(0),
         error: CallbackFn(1),
-        url: "http://tauri.localhost".parse().unwrap(),
+        url: page_url().parse().unwrap(),
         body: InvokeBody::Json(args),
         headers: Default::default(),
         invoke_key: INVOKE_KEY.to_string(),
