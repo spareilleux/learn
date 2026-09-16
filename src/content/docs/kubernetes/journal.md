@@ -52,3 +52,11 @@ sidebar:
 
 - The Windows `PATH` command of lesson 1, and the macOS tab.
 - What GA's deployment guide actually does on a cluster, which I reasoned about without deploying it.
+
+## 2026-09-16 — The first CI runs
+
+The workflow could only be pushed once the `gh` token had the `workflow` scope. It took [three runs](https://github.com/spareilleux/learn/actions/workflows/kubernetes-examples.yml) to go green, and none of the failures came from the lessons themselves:
+
+- **A checksum tool per OS.** Git Bash on the Windows runner has `sha256sum` but no `shasum`. The macOS runner has both, and its `sha256sum` is the BSD one, which refused a checksum list on standard input. The step now writes the expected line to a file and uses `shasum -a 256` on macOS, `sha256sum` elsewhere.
+- **The runner's DNS in the pod.** Every step of lessons 1 to 4 matched `expected/` except the pod's `/etc/resolv.conf`, whose `search` line ended with the runner's own `internal.cloudapp.net` domain: the kubelet appends the node's search domains after the cluster's three. On my machine the node inherits none. `normalize` now drops what follows `cluster.local` on that line.
+- **An answer order.** `nslookup` passed on the first run and failed on the second with the same lines, only its blank lines moved. My explanation, not verified: it sends the A and AAAA queries together and prints each answer as it arrives. The comparison now ignores blank lines; lesson 4 quotes the raw output unchanged.

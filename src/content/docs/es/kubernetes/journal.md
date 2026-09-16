@@ -52,3 +52,11 @@ sidebar:
 
 - El comando del `PATH` de Windows de la lección 1, y la pestaña de macOS.
 - Lo que hace realmente la guía de despliegue de GA en un clúster, sobre lo que razoné sin desplegarla.
+
+## 2026-09-16 — Las primeras ejecuciones de la CI
+
+El workflow solo pudo publicarse cuando el token de `gh` tuvo el scope `workflow`. Hicieron falta [tres ejecuciones](https://github.com/spareilleux/learn/actions/workflows/kubernetes-examples.yml) para ponerlo en verde, y ningún fallo venía de las lecciones en sí:
+
+- **Una herramienta de sumas de verificación por sistema.** Git Bash en el runner de Windows tiene `sha256sum` pero no `shasum`. El runner de macOS tiene las dos, y su `sha256sum` es el de BSD, que rechazó una lista de sumas leída por la entrada estándar. El paso escribe ahora la línea esperada en un archivo y usa `shasum -a 256` en macOS y `sha256sum` en los demás.
+- **El DNS del runner dentro del pod.** Todos los pasos de las lecciones 1 a 4 coincidieron con `expected/` salvo el `/etc/resolv.conf` del pod, cuya línea `search` terminaba con el dominio `internal.cloudapp.net` del propio runner: el kubelet añade los dominios de búsqueda del nodo después de los tres del clúster. En mi máquina el nodo no hereda ninguno. `normalize` quita ahora lo que sigue a `cluster.local` en esa línea.
+- **Un orden de respuestas.** `nslookup` pasó en la primera ejecución y falló en la segunda con las mismas líneas; solo se movieron sus líneas vacías. Mi explicación, sin verificar: envía juntas las consultas A y AAAA e imprime cada respuesta según llega. La comparación ignora ahora las líneas vacías; la lección 4 cita la salida sin cambios.

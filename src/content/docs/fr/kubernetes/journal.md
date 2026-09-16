@@ -52,3 +52,11 @@ sidebar:
 
 - La commande `PATH` Windows de la leçon 1, et l'onglet macOS.
 - Ce que fait réellement le guide de déploiement de GA sur un cluster, que j'ai raisonné sans le déployer.
+
+## 2026-09-16 — Les premières exécutions de la CI
+
+Le workflow n'a pu être poussé qu'une fois le jeton `gh` doté du scope `workflow`. Il a fallu [trois exécutions](https://github.com/spareilleux/learn/actions/workflows/kubernetes-examples.yml) pour passer au vert, et aucun échec ne venait des leçons elles-mêmes :
+
+- **Un outil de somme de contrôle par OS.** Git Bash sur le runner Windows a `sha256sum` mais pas `shasum`. Le runner macOS a les deux, et son `sha256sum` est celui de BSD, qui a refusé une liste de sommes lue sur l'entrée standard. L'étape écrit maintenant la ligne attendue dans un fichier et utilise `shasum -a 256` sous macOS, `sha256sum` ailleurs.
+- **Le DNS du runner dans le pod.** Toutes les étapes des leçons 1 à 4 correspondaient à `expected/`, sauf le `/etc/resolv.conf` du pod, dont la ligne `search` se terminait par le domaine `internal.cloudapp.net` du runner : le kubelet ajoute les domaines de recherche du nœud après les trois du cluster. Sur ma machine, le nœud n'en hérite d'aucun. `normalize` supprime désormais ce qui suit `cluster.local` sur cette ligne.
+- **Un ordre de réponses.** `nslookup` a réussi à la première exécution et échoué à la deuxième avec les mêmes lignes, seules ses lignes vides ayant bougé. Mon explication, non vérifiée : il envoie les requêtes A et AAAA ensemble et affiche chaque réponse à son arrivée. La comparaison ignore maintenant les lignes vides ; la leçon 4 cite la sortie brute sans changement.
