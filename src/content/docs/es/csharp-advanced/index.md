@@ -86,7 +86,13 @@ Las partes 1 y 2 miden el propio código de GA. La parte 3 construye un pequeño
 | 22 | Árboles de expresión, reflexión y generadores de código fuente | en qué se compila una lambda, `Expression<T>`, el coste de la reflexión, generadores incrementales, `[GeneratedRegex]` |
 | 23 | Analizadores y correcciones de código de Roslyn | modelos sintácticos y semánticos, escribir un analizador y sus pruebas |
 | 24 | Interoperabilidad y código no seguro | `[LibraryImport]`, punteros de función, `Unsafe`, `MemoryMarshal`, fijación |
-| — | [Diario](journal/) | |
+
+### Apéndices
+
+| # | Página | Bajo el capó | Medido sobre GA |
+|---|---|---|---|
+| 1 | [Tres optimizaciones, demostradas y luego medidas](appendix-benchmarks/) | rotaciones y `PopCount` sobre conjuntos de 12 bits, una tabla de consulta, una demostración de equivalencia sobre todo el dominio de entrada, los ordenamientos estables como desempate | `IsClusterFree`, `IntervalClassVector`, `ClosestDiatonicKey` |
+| — | [Diario](journal/) | | |
 
 Las lecciones 5 y 10 a 24 están planificadas y aún no se han escrito; las lecciones 6 a 9 se escribieron antes que la lección 5, y no dependen de ella.
 
