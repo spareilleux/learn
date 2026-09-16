@@ -76,3 +76,44 @@ jobs:
           cargo build --release
           ls target/release | grep pricing_ffi
           dotnet run --project dotnet
+
+  # Lessons 16 to 21: the Tauri chord explorer, a separate workspace with its own lock files
+  tauri-chord-explorer:
+    name: l16-tauri (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+        working-directory: code/rust-for-csharp-java/l16-tauri
+    steps:
+      - uses: actions/checkout@v7
+      # The Debian/Ubuntu list from https://v2.tauri.app/start/prerequisites/
+      - name: Webview and system libraries (Linux)
+        if: runner.os == 'Linux'
+        working-directory: .
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev build-essential curl wget file \
+            libxdo-dev libssl-dev libayatana-appindicator3-dev librsvg2-dev
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+      - name: Tauri CLI from package-lock.json
+        run: npm ci && npx tauri --version
+      - name: Toolchain
+        run: rustup show active-toolchain && cargo --version
+      - name: Formatting
+        run: cargo fmt --all --check
+      - name: Clippy
+        run: cargo clippy --workspace --all-targets --locked -- -D warnings
+      # theory needs no webview; the chord-explorer tests use Tauri's mock runtime, so no display either
+      - name: Tests, IPC tests and compile_fail doctests
+        run: cargo test --workspace --locked
+      - name: Release build without installers
+        run: |
+          npx tauri build --no-bundle
+          ls -l target/release | grep chord-explorer
