@@ -34,7 +34,8 @@ const neck = new THREE.Mesh(
   new THREE.MeshStandardMaterial({ color: 0x4a2c1d, metalness: 0, roughness: 0.75 }),
 );
 neck.position.y = 0.3;
-neck.castShadow = true;
+// ?neckshadow=off: the neck receives shadows but casts none (exercise 3)
+neck.castShadow = params.get('neckshadow') !== 'off';
 neck.receiveShadow = true;
 scene.add(neck);
 
@@ -67,7 +68,9 @@ const sun = new THREE.DirectionalLight(0xffffff, 3);
 sun.position.set(2, 4, 3);
 sun.castShadow = true;
 sun.shadow.mapSize.set(1024, 1024);
+// The shadow camera is orthographic: the box it covers is the only place where shadows can fall
 Object.assign(sun.shadow.camera, { left: -3, right: 3, top: 3, bottom: -3, near: 0.5, far: 12 });
+sun.shadow.camera.updateProjectionMatrix();
 scene.add(sun);
 
 let frames = 0;

@@ -6,6 +6,8 @@ const renderer = new THREE.WebGPURenderer({ antialias: true, forceWebGL });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.append(renderer.domElement);
+// ?linear: write linear values to the canvas, which removes the output pass (lesson 3 explains why it exists)
+if (new URLSearchParams(location.search).has('linear')) renderer.outputColorSpace = THREE.LinearSRGBColorSpace;
 
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x1e2127);
@@ -17,6 +19,14 @@ camera.lookAt(0, 0, 0);
 
 const cube = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshNormalMaterial());
 scene.add(cube);
+
+// ?cubes=n adds n − 1 cubes that share the first cube's geometry and material (exercise 1)
+const cubes = Number(new URLSearchParams(location.search).get('cubes') ?? 1);
+for (let i = 1; i < cubes; i++) {
+  const copy = new THREE.Mesh(cube.geometry, cube.material);
+  copy.position.x = i * 1.5;
+  scene.add(copy);
+}
 
 const timer = new THREE.Timer();
 timer.connect(document);

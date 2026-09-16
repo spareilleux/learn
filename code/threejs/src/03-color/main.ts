@@ -10,12 +10,16 @@ const toneMappings = {
   agx: THREE.AgXToneMapping,
   neutral: THREE.NeutralToneMapping,
 } as const;
-const tone = (new URLSearchParams(location.search).get('tone') ?? 'none') as keyof typeof toneMappings;
+const params = new URLSearchParams(location.search);
+const tone = (params.get('tone') ?? 'none') as keyof typeof toneMappings;
+// ?exposure=2 multiplies the linear values before the tone mapping curve (exercise 3)
+const exposure = Number(params.get('exposure') ?? 1);
 
 const renderer = new THREE.WebGPURenderer({ antialias: true, forceWebGL });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.toneMapping = toneMappings[tone];
+renderer.toneMappingExposure = exposure;
 document.body.append(renderer.domElement);
 
 const scene = new THREE.Scene();
@@ -63,7 +67,7 @@ renderer.setAnimationLoop(() => {
       const ndc = mesh.position.clone().project(camera);
       samples[name] = [Math.round(((ndc.x + 1) / 2) * window.innerWidth), Math.round(((1 - ndc.y) / 2) * window.innerHeight)];
     }
-    report(renderer, { tone, samples });
+    report(renderer, { tone, ...(exposure !== 1 && { exposure }), samples });
   }
 });
 

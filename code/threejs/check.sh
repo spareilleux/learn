@@ -58,12 +58,17 @@ run l01_scene_graph node scripts/l01-scene-graph.ts
 probe l01_probe 01-scene
 probe l01_probe_webgl 01-scene --webgl
 probe l01_probe_webglrenderer 01-scene-webgl
+probe l01_probe_linear_output 01-scene --query linear
+probe l01_probe_three_cubes 01-scene --query cubes=3
+run l01_exercises node scripts/l01-exercises.ts
 PROBE_CHANNEL=chromium-headless-shell probe l01_probe_headless_shell 01-scene
 
 # Lesson 2
 run l02_geometries node scripts/l02-geometries.ts
 probe l02_probe 02-materials-lights
 probe l02_probe_noshadows 02-materials-lights --query noshadows
+probe l02_probe_neck_no_shadow 02-materials-lights --query neckshadow=off
+run l02_exercises node scripts/l02-exercises.ts
 
 # Lesson 3
 run l03_make_hdr node scripts/make-studio-hdr.ts
@@ -73,11 +78,16 @@ for tone in none aces agx neutral; do
 done
 probe l03_probe_webgl_aces 03-color --webgl --query tone=aces
 probe l03_probe_environment 03-environment
+run l03_exercises node scripts/l03-exercises.ts
+for exposure in 2 4; do
+  probe "l03_probe_agx_exposure_$exposure" 03-color --query "tone=agx&exposure=$exposure"
+done
 
 # Lesson 4
 run l04_make_models node scripts/make-models.ts
 run l04_gltf node scripts/l04-gltf.ts
 probe l04_probe 04-gltf
+run l04_exercises node scripts/l04-exercises.ts
 
 # The production build: one HTML page per lesson, three.js's build files in shared chunks (lessons 1 and 4)
 rm -rf dist
