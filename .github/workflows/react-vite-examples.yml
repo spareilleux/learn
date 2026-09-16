@@ -1,0 +1,47 @@
+# React (Vite) course: scaffold a project with create-vite, start Vite's dev server and receive an HMR update, check
+# the course's application with tsc, build it with Vite, check each error snippet, lint it with oxlint and run every
+# Vitest file on three OSes, comparing every output with the ones pasted in the lessons
+name: React (Vite) course examples
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['code/react-vite/**', '.github/workflows/react-vite-examples.yml']
+  pull_request:
+    paths: ['code/react-vite/**', '.github/workflows/react-vite-examples.yml']
+
+permissions:
+  contents: read
+
+env:
+  NODE_VERSION: 24.21.0
+
+jobs:
+  react-vite:
+    name: react-vite (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+        working-directory: code/react-vite
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Toolchain
+        run: node --version && npm --version
+      - name: Install the pinned React, Vite, TypeScript, Vitest and oxlint
+        run: npm ci
+      # Vite's bundler, Rolldown, and oxlint are native binaries, installed from the package for the current OS
+      - name: Native packages for this OS, for information
+        run: |
+          ls node_modules/@rolldown node_modules/@oxlint node_modules/@typescript
+          node -p "process.platform + ' ' + process.arch"
+      - name: Scaffold, dev server, build, type errors, lint and tests
+        run: bash check.sh
