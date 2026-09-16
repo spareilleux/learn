@@ -36,6 +36,11 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
       - name: Toolchain
         run: node --version && npm --version
+      # esbuild and Vite also read the site's tsconfig.json at the root of the repository, which extends
+      # astro/tsconfigs/strict: install the site's packages so that it resolves as it does on the author's machine
+      - name: Install the site's packages, for the root tsconfig.json
+        working-directory: .
+        run: npm ci --ignore-scripts
       - name: Install the pinned React, Vite, TypeScript, Vitest and oxlint
         run: npm ci
       # Vite's bundler, Rolldown, and oxlint are native binaries, installed from the package for the current OS
