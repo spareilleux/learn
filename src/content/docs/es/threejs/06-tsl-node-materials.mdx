@@ -1,0 +1,251 @@
+---
+title: 6. TSL y materiales de nodos
+description: Shaders escritos en TypeScript con el Three Shading Language — una veta de palisandro procedural en un colorNode, una cuerda que vibra en un positionNode controlado por uniforms, el WGSL y el GLSL en que se convierte el mismo grafo, y cuándo un cambio provoca una recompilación, contado con renderer.debug — comparado con los efectos HLSL, el ShaderEffect de WPF y el ShaderMaterial en GLSL.
+sidebar:
+  order: 6
+---
+
+Código: la página en [`src/06-tsl/main.ts`](https://github.com/spareilleux/learn/blob/8bf126b/code/threejs/src/06-tsl/main.ts), y los shaders generados que `check.sh` escribe en `out/l06_shader_webgpu.txt` y `out/l06_shader_webgl.txt`.
+
+## Shaders, en tres toolkits
+
+Un shader es un pequeño programa que se ejecuta en la GPU para cada vértice o cada píxel. En MonoGame, lo escribes en HLSL, en un archivo `.fx` que la canalización de contenido compila en un [`Effect`](https://docs.monogame.net/api/Microsoft.Xna.Framework.Graphics.Effect.html), y asignas sus parámetros desde C#. El 3D de WPF no tiene shaders personalizados; su [`ShaderEffect`](https://learn.microsoft.com/dotnet/api/system.windows.media.effects.shadereffect) ejecuta un pixel shader HLSL sobre un elemento renderizado, en 2D. JavaFX no tiene ninguno.
+
+three.js ha tenido dos maneras. Con `WebGLRenderer`, un [`ShaderMaterial`](https://threejs.org/docs/pages/ShaderMaterial.html) recibe el código fuente GLSL como cadenas. Con `WebGPURenderer`, una cadena GLSL no puede ejecutarse en WebGPU, que habla WGSL, y una cadena WGSL no puede ejecutarse en la alternativa WebGL 2. Por eso los materiales de `WebGPURenderer` se construyen con **nodos**, escritos en [TSL](https://threejs.org/docs/pages/TSL.html), el Three Shading Language: funciones TypeScript que construyen un grafo, que el renderizador convierte en WGSL o GLSL para el backend sobre el que se ejecuta.
+
+| | MonoGame | WPF | three.js, `WebGLRenderer` | three.js, `WebGPURenderer` |
+|---|---|---|---|---|
+| Lenguaje | HLSL | HLSL (solo pixel shaders) | cadenas GLSL | TSL, en TypeScript |
+| Compilación | en tiempo de compilación, por la canalización de contenido | en tiempo de compilación, por `fxc` | por el navegador, en el primer renderizado | a WGSL o GLSL por three.js, luego por el navegador, en el primer renderizado |
+| Parámetros | `Effect.Parameters["name"].SetValue` | propiedades de dependencia enlazadas a registros | `uniforms: { name: { value } }` | nodos `uniform(value)`, asignados con `.value` |
+| Iluminación | te toca escribirla | ninguna | la tuya, o parches con `onBeforeCompile` | la del propio material: reemplazas una entrada, como el color |
+
+La última fila es donde TSL más cambia el trabajo. Un `ShaderMaterial` reemplaza el shader entero: para tener luces, sombras y niebla, las reescribes o parcheas los fragmentos GLSL de three.js. Un material de nodos conserva su modelo de iluminación y te deja conectar un nodo en una de sus entradas.
+
+## Un material de nodos con una entrada reemplazada
+
+El mástil de la página de esta lección recibe una veta de palisandro calculada por píxel, sin textura ([`main.ts`, líneas 26-37](https://github.com/spareilleux/learn/blob/8bf126b/code/threejs/src/06-tsl/main.ts#L26-L37)):
+
+```ts
+// Palisandro: bandas oscuras y claras a lo largo del mástil, curvadas por ruido, calculadas por píxel en la GPU
+const grain = Fn(() => {
+  const p = positionWorld;
+  const bend = mx_noise_float(vec3(p.x.mul(0.8), p.y.mul(6), 0)).mul(0.6);
+  const bands = sin(p.y.mul(90).add(bend.mul(12))).mul(0.5).add(0.5);
+  return mix(color(0x2a160d), color(0x5a3422), smoothstep(0.2, 0.9, bands));
+});
+const neckMaterial = new THREE.MeshStandardNodeMaterial({ roughness: 0.75 });
+neckMaterial.colorNode = grain();
+const neck = new THREE.Mesh(new THREE.PlaneGeometry(3.6, 0.9), neckMaterial);
+```
+
+Leerlo como TypeScript confunde al principio: aquí nada calcula un color. `positionWorld` es un nodo que representa "la posición en el mundo del píxel que se sombrea"; `p.y.mul(90)` devuelve un nodo nuevo, una multiplicación; `sin`, `mix` y `smoothstep` son las funciones GLSL y WGSL del mismo nombre, como nodos. No hay operadores: JavaScript no tiene sobrecarga de operadores, así que `a * b` es `a.mul(b)`. `Fn` envuelve la función constructora, y `grain()` la llama una vez, para construir el grafo.
+
+[`MeshStandardNodeMaterial`](https://threejs.org/docs/pages/MeshStandardNodeMaterial.html) es el `MeshStandardMaterial` de la lección 2 como material de nodos. Su `colorNode` reemplaza el color base, y todo lo demás se mantiene: la rugosidad, las luces, el mapeo de tonos. Las demás entradas siguen la misma nomenclatura: `normalNode`, `roughnessNode`, `metalnessNode`, `emissiveNode`, `opacityNode`, y `positionNode` para los vértices ([`NodeMaterial.js`, líneas 153-372](https://github.com/mrdoob/three.js/blob/r186/src/materials/nodes/NodeMaterial.js#L153-L372)). `mx_noise_float` es ruido Perlin del port que hizo three.js de la biblioteca de nodos de [MaterialX](https://materialx.org/).
+
+## Uniforms: valores que cambian sin un shader nuevo
+
+La cuerda es una caja fina, de 64 segmentos de largo, cuyos vértices se mueven en el vertex shader como una onda estacionaria. Su amplitud, su fase y su armónico son **uniforms**: valores que el shader lee, y que JavaScript puede cambiar entre fotogramas ([líneas 39-57](https://github.com/spareilleux/learn/blob/8bf126b/code/threejs/src/06-tsl/main.ts#L39-L57)):
+
+```ts
+// La cuerda: una caja fina a lo largo de X de −1.6 a 1.6, fija en ambos extremos
+const LENGTH = 3.2;
+const amplitude = uniform(0.2);
+const phase = uniform(0); // 2π × frecuencia × tiempo, asignado desde JavaScript
+const startHarmonic = Number(params.get('harmonic') ?? 1);
+const harmonic = uniform(startHarmonic); // 1 = fundamental, 2 = octava: un nodo en el centro
+const vibrate = Fn(() => {
+  const u = positionLocal.x.div(LENGTH).add(0.5); // 0 en un extremo, 1 en el otro
+  const shape = sin(u.mul(PI).mul(harmonic)); // la forma de la onda estacionaria, 0 en ambos extremos
+  const offset = amplitude.mul(shape).mul(sin(phase));
+  return positionLocal.add(vec3(0, offset, 0));
+});
+const stringMaterial = new THREE.MeshBasicNodeMaterial();
+stringMaterial.colorNode = color(0xf2efe6);
+stringMaterial.positionNode = vibrate();
+```
+
+El bucle asigna `phase.value` en cada fotograma. Cuando se sondea, la página fija el tiempo en un cuarto de periodo, donde `sin(phase)` vale 1 y el centro de la cuerda está 0.2 unidades por encima de su posición de reposo:
+
+```text
+$ node scripts/probe.mjs 06-tsl --extract shader out/l06_shader_webgpu.txt
+{
+  "frame": 4,
+  "render": {
+    "calls": 6,
+    "drawCalls": 3,
+    "triangles": 519
+  },
+  "memory": {
+    "geometries": 3,
+    "textures": 3,
+    "programs": 6
+  },
+  "t": 0.25,
+  "harmonic": 1,
+  "offsetAtMiddle": 0.2,
+  "nodeBuilds": {
+    "firstFrames": 3,
+    "afterUniformChange": 3,
+    "afterNewNodeGraph": 4
+  },
+  "pixels": {
+    "string middle, displaced": "rgb(242, 239, 230)",
+    "string middle, at rest": "rgb(56, 39, 34)",
+    "quarter length, displaced": "rgb(242, 239, 230)"
+  }
+}
+```
+
+![Una tabla marrón oscura con una veta horizontal fina y ondulada que llena el centro del encuadre, y una cuerda fina de color crema arqueada hacia arriba en un arco suave, fija en ambos extremos.](../../../../assets/threejs/l06-tsl.webp)
+
+Los píxeles confirman la forma: crema en el centro desplazado y en el punto a un cuarto desplazado, y madera en la posición de reposo del centro, donde la cuerda ya no está. Tres draw calls: el mástil, la cuerda y la pasada de salida. La ejecución con `--webgl` da los mismos recuentos y los mismos tres colores.
+
+### Cuándo se reconstruye el shader
+
+`renderer.debug.onNodeBuilderCreated` se llama cada vez que el renderizador convierte el grafo de nodos de un material en código de shader ([`Renderer.js`, líneas 736-760](https://github.com/mrdoob/three.js/blob/r186/src/renderers/common/Renderer.js#L736-L760)). La página cuenta las llamadas ([líneas 72-91](https://github.com/spareilleux/learn/blob/8bf126b/code/threejs/src/06-tsl/main.ts#L72-L91)):
+
+- **3 construcciones en los primeros fotogramas**: el mástil, la cuerda, y la pasada de salida del renderizador, que también es un material de nodos.
+- **Siguen siendo 3 tras `harmonic.value = 2`**: cambiar un uniform es escribir en un búfer de la GPU. El shader se queda.
+- **4 tras reemplazar `colorNode`** con un grafo nuevo y activar `needsUpdate`: un grafo nuevo es código nuevo, construido y compilado de nuevo. En un material grande, eso es un tirón visible.
+
+Así que todo lo que cambia mientras la página se ejecuta va en un `uniform`, no en un número JavaScript fijado dentro del grafo. `color(0xffb454)` y `float(1)` son constantes: se escriben en el código fuente del shader.
+
+## En qué se convierte el grafo
+
+`renderer.debug.getShaderAsync(scene, camera, object)` devuelve el código generado para un objeto, para el backend sobre el que se ejecuta el renderizador. La página lo extrae, una vez de la ejecución por defecto y otra de la ejecución con `--webgl`. En la máquina del autor, los dos archivos contienen la misma línea en WGSL y en GLSL:
+
+```text
+$ grep -h 'positionLocal = ' out/l06_shader_webgpu.txt out/l06_shader_webgl.txt
+	positionLocal = position;
+	positionLocal = ( positionLocal + vec3<f32>( 0.0, ( ( object.nodeUniform0 * sin( ( ( ( ( positionLocal.x / 3.2 ) + 0.5 ) * 3.141592653589793 ) * object.nodeUniform1 ) ) ) * sin( object.nodeUniform2 ) ), 0.0 ) );
+	positionLocal = position;
+	positionLocal = ( positionLocal + vec3( 0.0, ( ( nodeUniform0 * sin( ( ( ( ( positionLocal.x / 3.2 ) + 0.5 ) * 3.141592653589793 ) * nodeUniform1 ) ) ) * sin( nodeUniform2 ) ), 0.0 ) );
+```
+
+La misma expresión, del mismo TSL, en los dos lenguajes: `object.nodeUniform0` es la amplitud, `nodeUniform1` el armónico y `nodeUniform2` la fase, y `LENGTH`, una constante JavaScript, es el literal `3.2`. En WGSL, los uniforms están en un struct llamado `object`: un `uniform()` pertenece por defecto al grupo del objeto, subido para cada objeto que lo usa ([`UniformNode.js`, línea 55](https://github.com/mrdoob/three.js/blob/r186/src/nodes/core/UniformNode.js#L55)). Un valor compartido por todo un fotograma, como un tiempo, puede unirse al grupo del fotograma con `.setGroup(frameGroup)`, subido una vez por fotograma ([`UniformGroupNode.js`, líneas 152-168](https://github.com/mrdoob/three.js/blob/r186/src/nodes/core/UniformGroupNode.js#L152-L168)).
+
+El resto del archivo, unas 250 líneas por backend, es de three.js: el modelo de iluminación, el mapeo de tonos, los structs. Cambia entre versiones, por eso `check.sh` solo compara la línea GLSL. Imprime la otra sin compararla: en los runners de CI de Linux y Windows, que no tienen GPU, la ejecución por defecto recurre a WebGL 2, y su archivo también contiene GLSL.
+
+## De GLSL a TSL
+
+Un `ShaderMaterial` en GLSL tiene tres partes, y cada una tiene su equivalente en TSL:
+
+| `ShaderMaterial` en GLSL | TSL |
+|---|---|
+| `uniforms: { exponent: { value: 0.6 } }` | `const exponent = uniform(0.6)` |
+| `varying vec3 vWorldPosition;` y el vertex shader que lo rellena | `positionWorld`, calculado donde se usa; `varying(node)` cuando necesitas uno |
+| `gl_FragColor = vec4(…)` en `main()` | un nodo devuelto a `colorNode`, o `fragmentNode` para reemplazar toda la salida |
+| `pow(max(h, 0.0), exponent)` | `pow(max(h, 0), exponent)`, o `h.max(0).pow(exponent)` |
+| integrados: `modelMatrix`, `cameraPosition` | nodos: `modelWorldMatrix`, `cameraPosition` |
+
+TSL también tiene control de flujo, `If`, `Loop` y `select`, variables con `.toVar()`, y funciones con parámetros tipados, todo descrito en la [especificación de TSL](https://github.com/mrdoob/three.js/wiki/Three.js-Shading-Language) de la wiki del proyecto.
+
+## En GuitarAlchemist/ga
+
+GA está en plena migración: `ShaderMaterial` aparece en 15 archivos y `three/tsl` en 33.
+
+- **Un cielo GLSL, dos veces.** `BSP/Sunburst3D.tsx` dibuja su cielo como una gran esfera con un `ShaderMaterial`: un vertex shader que pasa la posición en el mundo, y un fragment shader que mezcla dos colores según la altura ([líneas 450-481](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/BSP/Sunburst3D.tsx#L450-L481)). `BSP/ImmersiveMusicalWorld.tsx` tiene una copia ([líneas 144-171](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/BSP/ImmersiveMusicalWorld.tsx#L144-L171)). Ninguno puede renderizarse con `WebGPURenderer`, ni siquiera en su backend WebGL 2, ya que no ejecuta cadenas GLSL. El ejercicio 3 lo porta.
+- **Un port a TSL que funciona, con parámetros congelados.** `PrimeRadiant/shaders/FresnelGlowTSL.ts` reemplaza la corona GLSL del sistema solar por un `colorNode` ([líneas 25-44](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/PrimeRadiant/shaders/FresnelGlowTSL.ts#L25-L44)):
+
+  ```ts
+  material.colorNode = Fn(() => {
+    const viewDir = cameraPosition.sub(positionWorld).normalize();
+    const f = float(1.0).sub(abs(normalWorld.dot(viewDir)));
+    const corona = pow(f, float(power)).mul(intensity);
+    return vec3(corona.mul(color[0]), corona.mul(color[1]), corona.mul(color[2]));
+  })();
+  ```
+
+  `power`, `intensity` y el color son números JavaScript, así que se convierten en constantes en el shader: cambiar la intensidad de la corona implica un material nuevo, y una construcción nueva, como se midió arriba. La fábrica de atmósferas del mismo archivo usa `uniform` para sus parámetros ([líneas 58-81](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/PrimeRadiant/shaders/FresnelGlowTSL.ts#L58-L81)), que es el patrón a seguir cuando un valor debe cambiar.
+- **No es TSL, pese al nombre.** `PrimeRadiant/shaders/MoebiusPassTSL.ts` dice en su cabecera que está "Implemented as a Three.js ShaderPass" ([línea 16](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/PrimeRadiant/shaders/MoebiusPassTSL.ts#L16)), y crea un `THREE.ShaderMaterial` ([línea 174](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/PrimeRadiant/shaders/MoebiusPassTSL.ts#L174)): GLSL, solo para `WebGLRenderer`.
+- **Buscar el material en cada fotograma.** `BSP/PortalDoor.tsx` actualiza el uniform `time` de su portal buscando un `ShaderMaterial` entre los hijos en cada fotograma ([líneas 218-228](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/BSP/PortalDoor.tsx#L218-L228)). Con TSL, el nodo integrado `time` no necesita ninguna actualización, y un `uniform` guardado en una variable no necesita búsqueda.
+
+## Puntos clave
+
+- `WebGPURenderer` no ejecuta cadenas GLSL: sus materiales son grafos de nodos, escritos en TSL y compilados a WGSL o GLSL para el backend que elige.
+- El código TSL construye un grafo; no calcula. Los métodos reemplazan a los operadores: `a.mul(b)`, `a.add(b)`.
+- Un material de nodos conserva su iluminación: reemplaza una entrada, `colorNode`, `positionNode`, `normalNode`, en lugar del shader entero.
+- Un `uniform` cambia sin reconstrucción; un número JavaScript en el grafo es una constante, y un grafo nuevo es un shader nuevo. `renderer.debug.onNodeBuilderCreated` cuenta las construcciones.
+- `renderer.debug.getShaderAsync` muestra el código generado, para un objeto y un backend.
+
+## Ejercicios
+
+1. Sondea la página con `?harmonic=2`, la octava. Antes de ejecutarlo, predice los colores en los tres puntos de muestreo, y el valor de `offsetAtMiddle`.
+2. En `out/l06_shader_webgl.txt`, busca las declaraciones GLSL de `nodeUniform0` a `nodeUniform2`. ¿Dónde están, y en qué se diferencia del archivo WGSL?
+3. Porta el degradado de cielo GLSL de GA a un `colorNode` TSL para un `MeshBasicNodeMaterial`, con los dos colores y el exponente como uniforms. No hace falta ejecutarlo, pero compara tu grafo con el GLSL línea por línea.
+
+<details>
+<summary>Solución 1</summary>
+
+```text
+$ node scripts/probe.mjs 06-tsl --query harmonic=2 --extract shader out/l06_shader_harmonic_2.txt
+{
+  "frame": 4,
+  "render": {
+    "calls": 6,
+    "drawCalls": 3,
+    "triangles": 519
+  },
+  "memory": {
+    "geometries": 3,
+    "textures": 3,
+    "programs": 6
+  },
+  "t": 0.25,
+  "harmonic": 2,
+  "offsetAtMiddle": 0,
+  "nodeBuilds": {
+    "firstFrames": 3,
+    "afterUniformChange": 3,
+    "afterNewNodeGraph": 4
+  },
+  "pixels": {
+    "string middle, displaced": "rgb(242, 239, 230)",
+    "string middle, at rest": "rgb(242, 239, 230)",
+    "quarter length, displaced": "rgb(242, 239, 230)"
+  }
+}
+```
+
+El segundo armónico es `sin(2πu)`: cero en el centro, donde `u = 0.5`, y máximo en el punto a un cuarto. Así que el centro de la cuerda se queda en reposo, y las dos muestras del centro, que ahora son el mismo punto, leen el color de la cuerda; el punto a un cuarto se desplaza los 0.2 completos y también lee el color de la cuerda. Las construcciones son las mismas que para la fundamental: el armónico es un uniform.
+
+</details>
+
+<details>
+<summary>Solución 2</summary>
+
+En el backend WebGL 2, los uniforms son miembros de un uniform block, declarado cerca del principio de cada shader, y se usan sin prefijo: `nodeUniform0 * sin(…)`. En WGSL, son miembros de un struct enlazado como `var<uniform> object : objectStruct` en el bind group 1, y se usan como `object.nodeUniform0`. Ambos agrupan los uniforms por objeto en un solo búfer, para que una sola escritura los actualice todos. La numeración, y los nombres, pertenecen al node builder de three.js: no dependas de ellos fuera de la depuración.
+
+</details>
+
+<details>
+<summary>Solución 3</summary>
+
+```ts
+import { color, float, Fn, max, mix, normalize, positionWorld, pow, uniform } from 'three/tsl';
+
+const topColor = uniform(color(0x0077ff));
+const bottomColor = uniform(color(0x000033));
+const offset = uniform(33);
+const exponent = uniform(0.6);
+
+const sky = new THREE.MeshBasicNodeMaterial({ side: THREE.BackSide });
+sky.colorNode = Fn(() => {
+  // float h = normalize(vWorldPosition + offset).y;
+  const h = normalize(positionWorld.add(offset)).y;
+  // mix(bottomColor, topColor, max(pow(max(h, 0.0), exponent), 0.0))
+  return mix(bottomColor, topColor, max(pow(max(h, float(0)), exponent), 0));
+})();
+```
+
+El varying desaparece: `positionWorld` en un nodo de fragmento es la posición en el mundo interpolada, que el vertex shader de la versión GLSL pasaba a mano. El alfa de 1 de `gl_FragColor` es la opacidad por defecto del material. Una diferencia que comprobar: el GLSL escribe el color mezclado en la salida tal cual, mientras que la salida de un material de nodos pasa por el mapeo de tonos y la conversión de espacio de color del renderizador, así que el cielo puede verse distinto (*por verificar* en una página). Para un cielo, `scene.backgroundNode` puede recibir el mismo tipo de nodo sin esfera. Este fragmento no se compiló en `check.sh` (*por verificar*).
+
+</details>
+
+## Fuentes
+
+- Documentación de three.js: [TSL](https://threejs.org/docs/pages/TSL.html), [`MeshStandardNodeMaterial`](https://threejs.org/docs/pages/MeshStandardNodeMaterial.html), [`MeshBasicNodeMaterial`](https://threejs.org/docs/pages/MeshBasicNodeMaterial.html), [`ShaderMaterial`](https://threejs.org/docs/pages/ShaderMaterial.html); la especificación [Three.js Shading Language](https://github.com/mrdoob/three.js/wiki/Three.js-Shading-Language) de la wiki
+- Código fuente de three.js en r186: [`NodeMaterial.js`](https://github.com/mrdoob/three.js/blob/r186/src/materials/nodes/NodeMaterial.js), [`UniformNode.js`](https://github.com/mrdoob/three.js/blob/r186/src/nodes/core/UniformNode.js), [`UniformGroupNode.js`](https://github.com/mrdoob/three.js/blob/r186/src/nodes/core/UniformGroupNode.js), [`Renderer.js`](https://github.com/mrdoob/three.js/blob/r186/src/renderers/common/Renderer.js)
+- W3C: [WGSL](https://gpuweb.github.io/gpuweb/wgsl/); Khronos: [GLSL ES 3.00](https://registry.khronos.org/OpenGL/specs/es/3.0/GLSL_ES_Specification_3.00.pdf)
+- MonoGame: [`Effect`](https://docs.monogame.net/api/Microsoft.Xna.Framework.Graphics.Effect.html); WPF: [`ShaderEffect`](https://learn.microsoft.com/dotnet/api/system.windows.media.effects.shadereffect)

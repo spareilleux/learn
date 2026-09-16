@@ -1,0 +1,325 @@
+---
+title: 5. Interacción, Raycaster y controles de cámara
+description: De un evento de puntero a un traste, una cuerda y una nota — coordenadas normalizadas de dispositivo, Raycaster, pruebas de impacto recursivas y por capas, zonas de impacto invisibles, umbrales de Points y OrbitControls, con eventos de puntero reales enviados por Playwright a una página headless, comparados con VisualTreeHelper.HitTest de WPF, el Ray de MonoGame y el PickResult de JavaFX.
+sidebar:
+  order: 5
+---
+
+Código: la página en [`src/05-picking/main.ts`](https://github.com/spareilleux/learn/blob/8bf126b/code/threejs/src/05-picking/main.ts), el diapasón que comparte con los scripts en [`src/05-picking/fretboard.ts`](https://github.com/spareilleux/learn/blob/8bf126b/code/threejs/src/05-picking/fretboard.ts), las pruebas de rayos sin navegador en [`scripts/l05-raycaster.ts`](https://github.com/spareilleux/learn/blob/8bf126b/code/threejs/scripts/l05-raycaster.ts), y los ejercicios en [`scripts/l05-exercises.ts`](https://github.com/spareilleux/learn/blob/8bf126b/code/threejs/scripts/l05-exercises.ts).
+
+## Pruebas de impacto, en tres toolkits
+
+Una escena 3D no sabe dónde está el puntero. WPF hace el trabajo por ti: [`VisualTreeHelper.HitTest`](https://learn.microsoft.com/dotnet/api/system.windows.media.visualtreehelper.hittest) sobre un `Viewport3D` devuelve un [`RayMeshGeometry3DHitTestResult`](https://learn.microsoft.com/dotnet/api/system.windows.media.media3d.raymeshgeometry3dhittestresult) con la malla, el punto y el triángulo. JavaFX pone un [`PickResult`](https://openjfx.io/javadoc/25/javafx.graphics/javafx/scene/input/PickResult.html) en cada evento de ratón. MonoGame te da las piezas: [`Viewport.Unproject`](https://docs.monogame.net/api/Microsoft.Xna.Framework.Graphics.Viewport.html) para convertir un punto de la pantalla en dos puntos del mundo, un [`Ray`](https://docs.monogame.net/api/Microsoft.Xna.Framework.Ray.html) entre ellos, y `Ray.Intersects` contra cajas y esferas envolventes, nunca contra triángulos.
+
+three.js está a medio camino. [`Raycaster`](https://threejs.org/docs/pages/Raycaster.html) convierte una posición del puntero en un rayo que parte de la cámara, y lo prueba contra los triángulos de las mallas; conectar los eventos de puntero es tarea tuya.
+
+| | WPF 3D | MonoGame | JavaFX 3D | three.js |
+|---|---|---|---|---|
+| Entrada | un punto en el `Viewport3D` | un punto en la ventana | un evento de ratón | coordenadas normalizadas de dispositivo, de −1 a 1 |
+| Se prueba contra | triángulos de `ModelVisual3D` | `BoundingBox`, `BoundingSphere`, `Plane` | triángulos de `Node` | triángulos de `Mesh`, `Points` y `Line` dentro de un umbral, sprites |
+| Resultado | el impacto más cercano, o un callback por impacto | una distancia | el nodo, el punto, la cara y la coordenada de textura más cercanos | todos los impactos, ordenados por distancia: objeto, punto, cara, UV, instancia |
+| Omitir objetos | `IsHitTestVisible` | tu código | `mouseTransparent` | capas, o la lista de objetos que pasas |
+
+## La escena: un diapasón al que apuntar
+
+[`fretboard.ts`](https://github.com/spareilleux/learn/blob/8bf126b/code/threejs/src/05-picking/fretboard.ts) vuelve a construir el mástil de la lección 2, más largo: una caja, 12 trastes y 6 cuerdas, todo en un solo `Group`. Los trastes siguen la regla de una guitarra real, cada uno una raíz duodécima de dos más cerca del puente ([línea 16](https://github.com/spareilleux/learn/blob/8bf126b/code/threejs/src/05-picking/fretboard.ts#L16)), así que la X de un punto devuelve el traste con un logaritmo, y su Z da la cuerda más cercana ([líneas 20-36](https://github.com/spareilleux/learn/blob/8bf126b/code/threejs/src/05-picking/fretboard.ts#L20-L36)):
+
+```ts
+// Dónde pisa un dedo en x: 0 antes del lado de la cejuela del traste 1, n entre el traste n − 1 y el traste n
+export function fretAt(x: number): number | null {
+  if (x < NUT_X || x > fretX(FRETS)) return null;
+  return Math.ceil(-12 * Math.log2(1 - (x - NUT_X) / SCALE));
+}
+```
+
+El archivo no importa nada del DOM, así que la página y un script de Node.js lo comparten.
+
+## De un evento de puntero a un rayo
+
+Un `Raycaster` quiere el puntero en **coordenadas normalizadas de dispositivo** (NDC): −1 en el borde izquierdo del canvas, +1 en el derecho, +1 arriba y −1 abajo, sea cual sea su tamaño en píxeles. La página las calcula a partir del propio rectángulo del canvas ([`main.ts`, líneas 35-44](https://github.com/spareilleux/learn/blob/8bf126b/code/threejs/src/05-picking/main.ts#L35-L44)):
+
+```ts
+// El puntero en coordenadas normalizadas de dispositivo (−1 a 1), a partir del propio rectángulo del canvas
+const pointer = new THREE.Vector2();
+let pointerInside = false;
+let pointerMoved = false;
+renderer.domElement.addEventListener('pointermove', (event) => {
+  const rect = renderer.domElement.getBoundingClientRect();
+  pointer.set(((event.clientX - rect.left) / rect.width) * 2 - 1, -((event.clientY - rect.top) / rect.height) * 2 + 1);
+  pointerInside = true;
+  pointerMoved = true;
+});
+```
+
+La Y se invierte: el DOM cuenta hacia abajo desde arriba, NDC cuenta hacia arriba. [`setFromCamera`](https://github.com/mrdoob/three.js/blob/r186/src/core/Raycaster.js#L119-L139) hace entonces partir el rayo de la posición de la cámara y lo dirige a través del puntero, desproyectando el punto `(x, y, 0.5)` con las matrices de la cámara. Con una cámara ortográfica, todos los rayos son paralelos y parten del plano de la cámara.
+
+Después `intersectObject` prueba el rayo, y el primer impacto da el traste, la cuerda y la nota ([líneas 59-73](https://github.com/spareilleux/learn/blob/8bf126b/code/threejs/src/05-picking/main.ts#L59-L73)):
+
+```ts
+function pick(ndc: THREE.Vector2): Pick {
+  raycaster.setFromCamera(ndc, camera);
+  // Recursivo: los hijos del grupo del diapasón son el mástil, los trastes y las cuerdas
+  const [hit] = raycaster.intersectObject(board, true);
+  if (!hit) return null;
+  const fret = fretAt(hit.point.x);
+  const string = stringAt(hit.point.z);
+  return {
+    object: hit.object.name,
+    point: hit.point.toArray().map((n) => Number(n.toFixed(3))),
+    fret,
+    string,
+    note: fret === null ? null : noteName(string, fret),
+  };
+}
+```
+
+## Lo que encuentra un rayo, sin navegador
+
+`Raycaster` son simples cálculos en la CPU: sin renderer, sin GPU, sin DOM. [`scripts/l05-raycaster.ts`](https://github.com/spareilleux/learn/blob/8bf126b/code/threejs/scripts/l05-raycaster.ts) construye el mismo diapasón y la misma cámara en Node.js, y les lanza rayos:
+
+```text
+$ node scripts/l05-raycaster.ts
+pointer (NDC): [ -0.1894, 0.0006 ]
+ray origin [ -0.2, 2.4, 1.6 ] direction [ -0.122, -0.789, -0.602 ]
+intersectObject(board, true): neck at 2.584
+first hit: { point: [ -0.514, 0.36, 0.045 ], faceIndex: 4, uv: [ 0.413, 0.418 ] }
+fret 5, string 3: C4
+intersectObject(board, false): (none)
+over string 1: string 1 at 2.598 | neck at 2.648
+strings on layer 1: neck at 2.648
+raycaster.layers.enable(1): string 1 at 2.598 | neck at 2.648
+far = 2: (none)
+ray.intersectPlane: [ -0.514, 0.36, 0.045 ]
+over fret 4, InstancedMesh: frets (instanced) at 2.531, instance 3
+10,000 × intersectObject(board, true): N µs per ray
+10,000 × ray.intersectPlane: N µs per ray
+```
+
+Línea a línea:
+
+- El punto donde un dedo pisa la cuerda 3 en el traste 5 se proyecta en NDC (−0.19, 0.0006): a la izquierda del centro, a media altura. El rayo sale de la cámara en (−0.2, 2.4, 1.6), y alcanza la parte superior del mástil a 2.584 unidades, en (−0.514, 0.36, 0.045): traste 5, cuerda 3, C4.
+- Cada impacto lleva el punto, la distancia, el índice del triángulo (`faceIndex`) y la coordenada de textura en ese punto (`uv`), interpolada a partir de los vértices del triángulo.
+- `intersectObject(board, false)` no encuentra nada: el `Group` en sí no tiene geometría, y sin `recursive` sus hijos no se prueban.
+- Sobre la cuerda 1, el rayo alcanza primero la cuerda y luego el mástil que hay detrás: el array contiene **todos** los impactos a lo largo del rayo, ordenados por distancia, no solo el más cercano.
+- Un objeto en la capa 1 se omite: `Raycaster` prueba un objeto solo si sus [capas](https://threejs.org/docs/pages/Layers.html) comparten alguna con las del raycaster ([`Raycaster.js`, líneas 240-250](https://github.com/mrdoob/three.js/blob/r186/src/core/Raycaster.js#L240-L250)). No mira `visible`: una malla invisible sigue recibiendo impactos, algo que el ejercicio 1 convierte en una ventaja.
+- `far = 2` ignora todo lo que esté a más de 2 unidades, y el mástil está a 2.584.
+- Contra un plano matemático a la altura del mástil, `ray.intersectPlane` da el mismo punto, sin ninguna malla.
+- Con los trastes como un único [`InstancedMesh`](https://threejs.org/docs/pages/InstancedMesh.html), el impacto indica qué instancia: el `instanceId` 3 es el traste 4.
+- El coste, en la máquina del autor: unos pocos microsegundos por rayo contra las 19 mallas, unas pocas centésimas de microsegundo contra el plano. Cada malla se prueba primero contra su esfera envolvente, y luego triángulo a triángulo. `check.sh` sustituye los números por N, ya que cambian en cada ejecución.
+
+Dos detalles del script importan en cualquier código que lance rayos fuera de un bucle de render. Una página renderiza antes de lanzar rayos, y renderizar actualiza las matrices de mundo de los objetos; un script, un test o un manejador de eventos que se ejecuta antes del primer frame debe llamar él mismo a `updateMatrixWorld()`. Y la cámara, que no está en la escena, también lo necesita: sin `camera.updateMatrixWorld()`, la primera versión de este script proyectaba el punto pisado a un NDC de −3.6, muy fuera del canvas.
+
+## Eventos de puntero reales en un navegador headless
+
+La sonda de la página pide a [`scripts/probe.mjs`](https://github.com/spareilleux/learn/blob/8bf126b/code/threejs/scripts/probe.mjs) que mueva el ratón de Playwright sobre el canvas, en 5 pasos, hasta la posición en pantalla de la cuerda 3 traste 5, luego de la cuerda 6 traste 8, luego por encima del mástil, y que arrastre 120 píxeles hacia la derecha. Chromium convierte esto en eventos `pointermove`, `pointerdown` y `pointerup` reales. Tras cada acción, la página renderiza dos frames e informa de lo que ha seleccionado:
+
+```text
+$ node scripts/probe.mjs 05-picking
+{
+  "frame": 4,
+  "render": {
+    "calls": 6,
+    "drawCalls": 20,
+    "triangles": 781
+  },
+  "memory": {
+    "geometries": 9,
+    "textures": 3,
+    "programs": 4
+  },
+  "canvas": [0, 0, 800, 450],
+  "after": {
+    "string 3, fret 5": {
+      "pick": {
+        "object": "neck",
+        "point": [-0.515, 0.36, 0.046],
+        "fret": 5,
+        "string": 3,
+        "note": "C4"
+      }
+    },
+    "string 6, fret 8": {
+      "pick": {
+        "object": "neck",
+        "point": [0.286, 0.36, -0.226],
+        "fret": 8,
+        "string": 6,
+        "note": "C3"
+      }
+    },
+    "beside the neck": {
+      "pick": null
+    },
+    "orbit 120 px right": {
+      "camera": [-1.791, 2.4, -0.167],
+      "target": [-0.2, 0.3, 0]
+    }
+  }
+}
+```
+
+![Un diapasón marrón oscuro visto de frente desde un ángulo bajo, con cuerdas claras que lo recorren y trastes de metal oscuro cada vez más juntos hacia la derecha, y una pequeña esfera naranja sobre una de las cuerdas centrales, entre dos trastes a la izquierda del centro.](../../../../assets/threejs/l05-picking.webp)
+
+La captura se toma después del primer movimiento: el marcador naranja está donde está el puntero. El punto seleccionado difiere del del script en el tercer decimal, (−0.515, 0.36, 0.046) en lugar de (−0.514, 0.36, 0.045), porque la página redondea el objetivo a píxeles CSS enteros antes de mover el ratón allí. Hay tres cosas que vale la pena leer:
+
+- **20 draw calls** para el mástil, 12 trastes, 6 cuerdas y el pase de salida. La selección no cuesta nada en la GPU.
+- **Un raycast por frame.** La página lanza rayos como mucho una vez por frame, y solo cuando el puntero se ha movido ([líneas 75-92](https://github.com/spareilleux/learn/blob/8bf126b/code/threejs/src/05-picking/main.ts#L75-L92)). Un ratón puede enviar más eventos `pointermove` que frames muestra la pantalla, y un raycast en el manejador de eventos probaría la escena para posiciones que nadie ve.
+- **La órbita.** Un arrastre de 120 píxeles giró la cámara 96° alrededor del objetivo: [`OrbitControls`](https://threejs.org/docs/pages/OrbitControls.html) rota 2π × píxeles ÷ la altura del elemento, "yes, height" dice el código fuente ([`OrbitControls.js`, línea 1118](https://github.com/mrdoob/three.js/blob/r186/examples/jsm/controls/OrbitControls.js#L1118)), así que 120 ÷ 450 de una vuelta completa. La cámara se mantiene a 1.6 unidades del eje y a la misma altura.
+
+### Controles
+
+```ts
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.target.set(-0.2, 0.3, 0);
+controls.enableDamping = params.has('damping');
+controls.update();
+```
+
+`OrbitControls` vive en `three/addons/controls/OrbitControls.js`, no en el núcleo. Escucha `pointerdown` en el canvas, luego captura el puntero (`setPointerCapture`) y escucha `pointermove` y `pointerup` en el documento, así que un arrastre que sale del canvas sigue girando ([líneas 1553-1564](https://github.com/mrdoob/three.js/blob/r186/examples/jsm/controls/OrbitControls.js#L1553-L1564)). Fija `touch-action: none` en el canvas, para que un dedo gire la cámara en lugar de desplazar la página. Con `enableDamping`, la cámara sigue moviéndose un rato después del arrastre: `controls.update()` debe entonces ejecutarse en cada frame, y el bucle lo hace. `controls.dispose()` quita los listeners ([líneas 512-538](https://github.com/mrdoob/three.js/blob/r186/examples/jsm/controls/OrbitControls.js#L512-L538)); un componente que crea controles y nunca llama a su `dispose` deja esos listeners atrás.
+
+Los addons tienen otros controles, con el mismo constructor: `MapControls` (primero el desplazamiento, como en un mapa), `TrackballControls` (sin dirección vertical fija), `PointerLockControls` (primera persona), `TransformControls` (un gizmo para mover un objeto) y `DragControls`.
+
+## Cuando el canvas no empieza en (0, 0)
+
+Muchos ejemplos en la web calculan las NDC a partir de la ventana: `event.clientX / window.innerWidth * 2 - 1`. Eso solo es correcto cuando el canvas ocupa toda la ventana. Con `?sidebar`, la página pone un panel de 240 píxeles a la izquierda del canvas, y calcula ambas versiones para el mismo evento de puntero ([líneas 50-54](https://github.com/spareilleux/learn/blob/8bf126b/code/threejs/src/05-picking/main.ts#L50-L54)):
+
+```text
+$ node scripts/probe.mjs 05-picking --query sidebar
+{
+  "frame": 4,
+  "render": {
+    "calls": 6,
+    "drawCalls": 20,
+    "triangles": 781
+  },
+  "memory": {
+    "geometries": 9,
+    "textures": 3,
+    "programs": 4
+  },
+  "canvas": [240, 0, 560, 450],
+  "after": {
+    "string 3, fret 5": {
+      "pick": {
+        "object": "neck",
+        "point": [-0.515, 0.36, 0.046],
+        "fret": 5,
+        "string": 3,
+        "note": "C4"
+      },
+      "pickFromWindow": {
+        "object": "neck",
+        "point": [-0.072, 0.36, 0.046],
+        "fret": 7,
+        "string": 3,
+        "note": "D4"
+      }
+    },
+    "string 6, fret 8": {
+      "pick": {
+        "object": "neck",
+        "point": [0.286, 0.36, -0.226],
+        "fret": 8,
+        "string": 6,
+        "note": "C3"
+      },
+      "pickFromWindow": {
+        "object": "neck",
+        "point": [0.511, 0.36, -0.226],
+        "fret": 9,
+        "string": 6,
+        "note": "C#3"
+      }
+    },
+    "beside the neck": {
+      "pick": null,
+      "pickFromWindow": null
+    },
+    "orbit 120 px right": {
+      "camera": [-1.791, 2.4, -0.167],
+      "target": [-0.2, 0.3, 0]
+    }
+  }
+}
+```
+
+El canvas mide ahora 560 por 450 píxeles en x = 240. A partir de su propio rectángulo, la página sigue encontrando la cuerda 3 traste 5. A partir de la ventana, el mismo puntero cae dos trastes más allá, en una nota un tono entero más aguda, sin ningún error en ninguna parte. El listener `resize` de la página tiene la misma trampa: dimensiona el renderer a partir de su contenedor, no de la ventana ([líneas 94-103](https://github.com/spareilleux/learn/blob/8bf126b/code/threejs/src/05-picking/main.ts#L94-L103)).
+
+## En GuitarAlchemist/ga
+
+GA usa `Raycaster` en 14 archivos. Todos calculan las NDC a partir del rectángulo del canvas, así que el error de la barra lateral de arriba no aparece. Las diferencias están en cuándo lanzan rayos, y en lo que limpian.
+
+- **Un listener por cada ejecución del efecto.** `ThreeHeadstock.tsx` añade su manejador de clic con `canvas.addEventListener('click', handleClick)` en `setupMouseInteraction` ([líneas 698-744](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeHeadstock.tsx#L698-L744)), llamado desde un `useEffect` cuyas dependencias incluyen el modelo de guitarra, el estilo, la afinación, el ancho y la altura ([línea 178](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeHeadstock.tsx#L178)). La limpieza libera los controles y el renderer, pero nunca quita el listener, y el canvas es el mismo elemento de una ejecución a otra (`canvasRef`). Tras cada cambio de afinación, un manejador más se ejecuta en cada clic, cada uno con la escena de su propia ejecución. Si las escenas antiguas siguen llamando a `onTuningPegClick` está *por verificar* en el navegador. El manejador además prueba `scene.children` recursivamente ([línea 713](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeHeadstock.tsx#L713)): todas las mallas de la pala, cuando solo las clavijas se pueden pulsar.
+- **Un raycast por evento de ratón.** `TonalOrbit.tsx` selecciona en cada `pointermove` ([líneas 835-850](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/TonalOrbit/TonalOrbit.tsx#L835-L850)), y construye un nuevo `Vector2` y un nuevo array de mallas cada vez ([líneas 799-813](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/TonalOrbit/TonalOrbit.tsx#L799-L813)). `MinimalThreeInstrument.tsx` crea un nuevo `Raycaster` en su manejador React `onMouseMove` ([líneas 664-675](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/MinimalThree/MinimalThreeInstrument.tsx#L664-L675)). La basura es poca; los raycasts para posiciones que ningún frame muestra son el coste mayor.
+- **El patrón de esta lección, ya en GA.** `InteractionHandler.ts`, de Prime Radiant, guarda las NDC en `mousemove` ([líneas 64-68](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/PrimeRadiant/InteractionHandler.ts#L64-L68)), lanza los rayos desde el bucle de render, y quita sus tres listeners en `dispose` ([líneas 58-62](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/PrimeRadiant/InteractionHandler.ts#L58-L62)). Sus nodos llevan una esfera invisible, más grande, para que el rayo la alcance ([`NodeRenderer.ts`, líneas 86-95](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/PrimeRadiant/NodeRenderer.ts#L86-L95)), la técnica del ejercicio 1. Comprueba el hover en cada frame, incluso cuando el puntero no se ha movido; el flag `pointerMoved` de la página de esta lección se los ahorraría.
+- **Controles sin `dispose`.** De los 25 archivos que crean `OrbitControls`, cuatro nunca los liberan, entre ellos `BSP/HarmonicNavigator3D.tsx` ([línea 189](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/BSP/HarmonicNavigator3D.tsx#L189)), cuya limpieza solo libera el renderer ([líneas 250-260](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/BSP/HarmonicNavigator3D.tsx#L250-L260)). El canvas se elimina con el componente, y sus listeners con él, pero el listener `keydown` que los controles añaden al documento ([línea 505](https://github.com/mrdoob/three.js/blob/r186/examples/jsm/controls/OrbitControls.js#L505)) se queda.
+
+## Puntos clave
+
+- `Raycaster.setFromCamera` recibe coordenadas normalizadas de dispositivo: calcúlalas a partir del `getBoundingClientRect()` del canvas, no de la ventana.
+- `intersectObject(object, true)` devuelve todos los impactos a lo largo del rayo, el más cercano primero, con punto, distancia, cara, UV y, para mallas instanciadas, `instanceId`.
+- El raycaster mira las capas, no `visible`; `far`, `near` y la lista de objetos que pasas limitan el trabajo.
+- El raycasting son cálculos en la CPU: pruébalo en Node.js, pero actualiza tú mismo las matrices de mundo, incluida la de la cámara.
+- Lanza los rayos desde el bucle de frames, una vez, cuando el puntero se haya movido; quita tus listeners y libera los controles cuando el componente desaparezca.
+
+## Ejercicios
+
+1. Las cuerdas son finas: un puntero a 0.012 unidades al lado de la cuerda 1 cae en el mástil. Haz que cada cuerda sea más fácil de alcanzar sin que parezca más gruesa. Compruébalo con [`scripts/l05-exercises.ts`](https://github.com/spareilleux/learn/blob/8bf126b/code/threejs/scripts/l05-exercises.ts).
+2. Los puntos de nota dibujados como [`Points`](https://threejs.org/docs/pages/Points.html) no tienen superficie. ¿Cómo decide `Raycaster` que un punto recibe un impacto? Apunta 0.04 unidades a la derecha del punto del traste 5, y prueba umbrales de 1, 0.1, 0.05 y 0.02.
+3. Con el diseño `?sidebar`, la selección basada en la ventana decía traste 7. Sin ejecutar la página, ¿qué traste diría con una barra lateral de 480 píxeles, y por qué no puedes deducirlo solo a partir de las NDC?
+
+<details>
+<summary>Solución 1</summary>
+
+Añade un cilindro invisible y más grueso en la posición de cada cuerda, en el mismo grupo. `Raycaster` mira las capas, no `visible`, y el renderer omite los objetos invisibles ([líneas 13-31](https://github.com/spareilleux/learn/blob/8bf126b/code/threejs/scripts/l05-exercises.ts#L13-L31)):
+
+```ts
+const proxyMaterial = new THREE.MeshBasicMaterial();
+for (const string of strings) {
+  const proxy = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, 1, 8).rotateZ(Math.PI / 2), proxyMaterial);
+  proxy.name = `${string.name} (hit area)`;
+  proxy.visible = false;
+  proxy.scale.x = (string.geometry as THREE.CylinderGeometry).parameters.height;
+  proxy.position.copy(string.position);
+  board.add(proxy);
+}
+```
+
+```text
+$ node scripts/l05-exercises.ts
+0.012 beside string 1: neck at 2.654
+with invisible hit areas: string 1 (hit area) at 2.584 | neck at 2.654
+...
+```
+
+El nombre de la zona de impacto dice qué cuerda representa. El `NodeRenderer.ts` de GA hace lo mismo con `visible: false` en el material en lugar de en la malla; `Mesh.raycast` solo sale antes de tiempo cuando no hay ningún material ([`Mesh.js`, línea 244](https://github.com/mrdoob/three.js/blob/r186/src/objects/Mesh.js#L244)), así que ambas formas funcionan.
+
+</details>
+
+<details>
+<summary>Solución 2</summary>
+
+```text
+threshold 1: 3 hit(s), nearest to the ray: index 2, first: index 3
+threshold 0.1: 1 hit(s), nearest to the ray: index 2, first: index 2
+threshold 0.05: 1 hit(s), nearest to the ray: index 2, first: index 2
+threshold 0.02: 0 hit(s)
+```
+
+Para `Points`, un impacto es un punto cuya distancia al rayo es menor que `raycaster.params.Points.threshold`, en unidades del mundo; el valor por defecto es 1, más que el ancho de todo este diapasón. Con 1, cuentan tres de los cuatro puntos, y `hits[0]` es el **más cercano a la cámara** a lo largo del rayo, el índice 3 (traste 7), no el más cercano al rayo: cada impacto tiene un `distanceToRay` por el que ordenar. De 0.1 a 0.05, solo queda el punto del traste 5; con 0.02, el rayo pasa a 0.04 y no alcanza nada. `Line` tiene el mismo parámetro, `params.Line.threshold`. Con `PointsMaterial.sizeAttenuation`, el tamaño de un punto en pantalla cambia con la distancia pero el umbral no: un umbral en píxeles necesita tu propia conversión.
+
+</details>
+
+<details>
+<summary>Solución 3</summary>
+
+Depende de dónde esté el puntero, no solo de la barra lateral. Las NDC basadas en la ventana son `clientX / innerWidth`, las correctas son `(clientX − left) / width`: el error crece con el panel y se reduce hacia el borde derecho de la ventana, donde ambas llegan a 1. Con un panel de 480 píxeles, el canvas mediría 320 píxeles de ancho, y el puntero en la cuerda 3 traste 5 estaría también en otro `clientX`, así que el traste equivocado no se puede leer del primer resultado. Razonado, no medido: ejecuta la página con un `.sidebar` más ancho para comprobarlo (*por verificar*).
+
+</details>
+
+## Fuentes
+
+- Documentación de three.js: [`Raycaster`](https://threejs.org/docs/pages/Raycaster.html), [`Layers`](https://threejs.org/docs/pages/Layers.html), [`OrbitControls`](https://threejs.org/docs/pages/OrbitControls.html), [`InstancedMesh`](https://threejs.org/docs/pages/InstancedMesh.html), [`Points`](https://threejs.org/docs/pages/Points.html)
+- Código fuente de three.js en r186: [`Raycaster.js`](https://github.com/mrdoob/three.js/blob/r186/src/core/Raycaster.js), [`Mesh.js`](https://github.com/mrdoob/three.js/blob/r186/src/objects/Mesh.js), [`OrbitControls.js`](https://github.com/mrdoob/three.js/blob/r186/examples/jsm/controls/OrbitControls.js)
+- MDN: [Pointer events](https://developer.mozilla.org/docs/Web/API/Pointer_events), [`Element.getBoundingClientRect()`](https://developer.mozilla.org/docs/Web/API/Element/getBoundingClientRect), [`Element.setPointerCapture()`](https://developer.mozilla.org/docs/Web/API/Element/setPointerCapture)
+- Playwright: [`Mouse`](https://playwright.dev/docs/api/class-mouse)

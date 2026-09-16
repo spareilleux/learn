@@ -100,16 +100,16 @@ meshopt weight position: Int16Array normalized true scale [ 0.09, 0.09, 0.09 ]
 
 ## Géométrie compressée : Draco et meshopt
 
-Le fichier non compressé fait 58 540 octets, surtout des données de sommets en flottants. Deux extensions glTF le compressent, et toutes deux ont besoin d'un décodeur dans le navigateur :
+Le fichier non compressé fait 58 540 octets, surtout des données de sommets en flottants. Deux extensions glTF le compressent, et toutes deux ont besoin d'un décodeur dans le navigateur :
 
 - **[Draco](https://google.github.io/draco/)** (`KHR_draco_mesh_compression`), de Google, encode la connectivité d'un maillage et ses attributs quantifiés dans un flux de bits compact. Il donne les fichiers les plus petits, et a besoin d'un décodeur WebAssembly de quelques centaines de kilo-octets, exécuté dans des Web Workers.
 - **[meshopt](https://meshoptimizer.org/)** (`EXT_meshopt_compression`), issu de meshoptimizer, réordonne et encode les buffers pour que gzip ou Brotli les compressent bien, et vise un décodage rapide. Ici, il s'accompagne de `KHR_mesh_quantization`, qui stocke les positions et les normales sous forme de petits entiers au lieu de flottants. Son décodeur est un module JavaScript avec du WebAssembly intégré.
 
 | Fichier | Octets | Avec gzip |
 |---|---|---|
-| `metronome.glb` | 58 540 | 24 239 |
-| `metronome-draco.glb` | 10 424 | 7 438 |
-| `metronome-meshopt.glb` | 24 616 | 7 526 |
+| `metronome.glb` | 58 540 | 24 239 |
+| `metronome-draco.glb` | 10 424 | 7 438 |
+| `metronome-meshopt.glb` | 24 616 | 7 526 |
 
 Sur disque, Draco est 2.4 fois plus petit que meshopt ; sur une connexion HTTP qui compresse, ils sont à 1 % l'un de l'autre. C'est le principe de meshopt : il laisse la dernière étape au serveur web. La dernière ligne de la sortie du script montre la quantification : les positions du poids reviennent sous la forme d'un `Int16Array` normalisé, avec une échelle de 0.09 sur le nœud pour retrouver le rayon de la sphère.
 
@@ -181,7 +181,7 @@ $ node scripts/probe.mjs 04-gltf
 ```
 
 - Les trois métronomes se ressemblent, et le bras de la copie Draco est à 12.5° après trois images de 0.125 s : 0.375 s dans le clip, sur le retour de 25° vers 0°.
-- 10 draw calls : 3 maillages par modèle et la passe de sortie. Chaque modèle a 16 + 12 + 2 208 = 2 236 triangles, et 3 × 2 236 + 1 = 6 709. Les 23 appels sont ceux de la leçon 3 : 17 pour la PMREM de l'environnement, et 2 par image.
+- 10 draw calls : 3 maillages par modèle et la passe de sortie. Chaque modèle a 16 + 12 + 2 208 = 2 236 triangles, et 3 × 2 236 + 1 = 6 709. Les 23 appels sont ceux de la leçon 3 : 17 pour la PMREM de l'environnement, et 2 par image.
 - Les nombres de sommets diffèrent, et l'exercice 1 trouve où sont passés les sommets.
 
 ### Ce que pèsent les décodeurs
@@ -228,7 +228,7 @@ GA charge des modèles glTF dans plusieurs composants, et chacun illustre un poi
 
 ## Exercices
 
-1. Le modèle non compressé a 1 297 sommets, la copie Draco 1 287 et la copie meshopt 1 295, et pourtant les trois métronomes se ressemblent et ont le même nombre de triangles. Où sont passés les sommets ? Vérifiez avec [`scripts/l04-exercises.ts`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/scripts/l04-exercises.ts), qui décode les deux copies dans Node.js avec glTF Transform.
+1. Le modèle non compressé a 1 297 sommets, la copie Draco 1 287 et la copie meshopt 1 295, et pourtant les trois métronomes se ressemblent et ont le même nombre de triangles. Où sont passés les sommets ? Vérifiez avec [`scripts/l04-exercises.ts`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/scripts/l04-exercises.ts), qui décode les deux copies dans Node.js avec glTF Transform.
 2. Où est le bras à 0.875 s ? Jouez ensuite le clip une seule fois, avec `LoopOnce` et `clampWhenFinished = true`, pendant 1.5 s : où est le bras, que vaut `action.time`, et l'action est-elle toujours en cours ?
 3. Une page affiche un seul modèle numérisé de 3 MB, et une autre affiche 40 petits modèles de 50 kB chacun. Quelle compression choisiriez-vous pour chacune, et que mesureriez-vous avant de décider ?
 

@@ -7,7 +7,7 @@ sidebar:
 ---
 
 :::note[Versión estudiada]
-[three.js](https://threejs.org/) **r186** (el paquete npm `three` 0.186.0, publicado el 8 de septiembre de 2026), con [`@types/three`](https://www.npmjs.com/package/@types/three) 0.186.0, servido y construido por [Vite](https://vite.dev/) 8.3.0, verificado con [TypeScript](https://www.typescriptlang.org/) 7.0.2 y medido en Chromium headless con [Playwright](https://playwright.dev/) 1.63.0 sobre [Node.js](https://nodejs.org/) 24. Las escenas y los scripts del curso están en [`code/threejs`](https://github.com/spareilleux/learn/tree/8e8f303/code/threejs), con un `package.json` y un archivo de bloqueo que también fijan [glTF Transform](https://gltf-transform.dev/) 4.5.0. [`.github/workflows/threejs-examples.yml`](https://github.com/spareilleux/learn/blob/8e8f303/.github/workflows/threejs-examples.yml) ejecuta [`check.sh`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/check.sh) en Linux, Windows y macOS: verifica los tipos de todo, ejecuta los scripts de Node.js, abre cada página de lección en Chromium headless, construye las páginas y compara las salidas con las que se pegan en las lecciones.
+[three.js](https://threejs.org/) **r186** (el paquete npm `three` 0.186.0, publicado el 8 de septiembre de 2026), con [`@types/three`](https://www.npmjs.com/package/@types/three) 0.186.0, servido y construido por [Vite](https://vite.dev/) 8.3.0, verificado con [TypeScript](https://www.typescriptlang.org/) 7.0.2 y medido en Chromium headless con [Playwright](https://playwright.dev/) 1.63.0 sobre [Node.js](https://nodejs.org/) 24. Las escenas y los scripts del curso están en [`code/threejs`](https://github.com/spareilleux/learn/tree/8bf126b/code/threejs), con un `package.json` y un archivo de bloqueo que también fijan [glTF Transform](https://gltf-transform.dev/) 4.5.0. [`.github/workflows/threejs-examples.yml`](https://github.com/spareilleux/learn/blob/8bf126b/.github/workflows/threejs-examples.yml) ejecuta [`check.sh`](https://github.com/spareilleux/learn/blob/8bf126b/code/threejs/check.sh) en Linux, Windows y macOS: verifica los tipos de todo, ejecuta los scripts de Node.js, abre cada página de lección en Chromium headless, construye las páginas y compara las salidas con las que se pegan en las lecciones.
 :::
 
 ## Por qué aprendo esto
@@ -59,11 +59,11 @@ El código real es [GuitarAlchemist/ga](https://github.com/GuitarAlchemist/ga) e
 | 2 | [Geometrías, materiales, luces y sombras](02-geometries-materials-lights/) | `MeshGeometry3D`, `DiffuseMaterial`, `BasicEffect`, luces direccionales y puntuales |
 | 3 | [Color, tone mapping y entornos HDR](03-color-tone-mapping-environments/) | sRGB, `Color` en WPF o JavaFX, fotos HDR |
 | 4 | [Cargar modelos glTF y animaciones](04-gltf-models-and-animations/) | el content pipeline de MonoGame, los storyboards de WPF, `AnimationTimer` |
-| 5 | Interacción: `Raycaster`, eventos de puntero y controles de cámara (próximamente) | hit testing en WPF, `VisualTreeHelper.HitTest`, `PickResult` de JavaFX |
-| 6 | TSL y materiales de nodos | efectos HLSL, grafos de shaders |
-| 7 | Posprocesado con `RenderPipeline` | render targets, pixel shaders |
-| 8 | Rendimiento: instancing, `BatchedMesh`, LOD, frustum culling, mediciones | dibujo instanciado, profilers |
-| 9 | React Three Fiber y drei | data binding de WPF, componentes Blazor o React |
+| 5 | [Interacción, `Raycaster` y controles de cámara](05-interaction-raycaster-controls/) | hit testing en WPF, `VisualTreeHelper.HitTest`, `PickResult` de JavaFX |
+| 6 | [TSL y materiales de nodos](06-tsl-node-materials/) | efectos HLSL, grafos de shaders |
+| 7 | [Posprocesado con `RenderPipeline`](07-post-processing-renderpipeline/) | render targets, pixel shaders |
+| 8 | [Rendimiento, medido: instancing, `BatchedMesh`, LOD, frustum culling](08-performance-instancing-batching-lod/) | dibujo instanciado, profilers |
+| 9 | React Three Fiber y drei (próximamente) | data binding de WPF, componentes Blazor o React |
 | 10 | Física con Rapier en WebAssembly | BEPUphysics, motores de física en juegos |
 | 11 | WebXR | Windows Mixed Reality, OpenXR |
 | 12 | Pruebas y CI: renderizado headless, capturas de pantalla comparadas, y sus límites | automatización de UI, pruebas de snapshot |

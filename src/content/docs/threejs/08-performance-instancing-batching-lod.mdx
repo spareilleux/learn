@@ -170,7 +170,7 @@ $ node scripts/probe.mjs 08-performance --query "mode=tiles&view=close"
 }
 ```
 
-Two of the 16 tiles touch the frustum: 2 draw calls and 100,000 triangles, an eighth of the grid, instead of all of it. The tile size is a trade-off: smaller tiles cull better and cost more draw calls when everything is on screen, 17 for the overview instead of 2 (computed: 16 tiles and the output pass, since the overview shows every marker). `memory.programs` is 5, one more than a single `InstancedMesh`: a difference in the tiles' instance counts or buffers gives one of them its own pipeline (*to verify* in the source). For a camera that moves, `BatchedMesh`'s per-instance culling does the same without choosing a tile size.
+Two of the 16 tiles touch the frustum: 3 draw calls with the output pass, and 100,000 triangles, an eighth of the grid, instead of all of it. The tile size is a trade-off: smaller tiles cull better and cost more draw calls when everything is on screen, 17 for the overview instead of 2 (computed: 16 tiles and the output pass, since the overview shows every marker). `memory.programs` is 5, one more than a single `InstancedMesh`: a difference in the tiles' instance counts or buffers gives one of them its own pipeline (*to verify* in the source). For a camera that moves, `BatchedMesh`'s per-instance culling does the same without choosing a tile size.
 
 </details>
 

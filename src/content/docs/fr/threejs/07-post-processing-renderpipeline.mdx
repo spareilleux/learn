@@ -1,0 +1,314 @@
+---
+title: 7. Post-traitement avec RenderPipeline
+description: Des effets appliqués à l'image rendue — une passe de scène, du bloom sur des repères lumineux, FXAA après la transformation de sortie, et DirectRenderPipeline qui supprime la passe de sortie — avec les draw calls, les render targets et les pixels que coûte chacun, ce que libère vraiment dispose(), et la migration depuis EffectComposer, comparés aux render targets de MonoGame et au ShaderEffect de WPF.
+sidebar:
+  order: 7
+---
+
+Code : la page dans [`src/07-post/main.ts`](https://github.com/spareilleux/learn/blob/8bf126b/code/threejs/src/07-post/main.ts), qui reprend la touche de guitare de la leçon 5.
+
+## Le post-traitement, dans trois outils
+
+Le post-traitement dessine la scène dans une texture au lieu de l'écran, puis exécute des pixel shaders sur cette texture : bloom, anticrénelage, profondeur de champ, étalonnage des couleurs. Dans MonoGame, vous le faites à la main : `GraphicsDevice.SetRenderTarget` avec une [`RenderTarget2D`](https://docs.monogame.net/api/Microsoft.Xna.Framework.Graphics.RenderTarget2D.html), vous dessinez la scène, puis la texture sur un quad plein écran à travers un `Effect`. WPF applique un [`ShaderEffect`](https://learn.microsoft.com/dotnet/api/system.windows.media.effects.shadereffect) aux pixels rendus d'un élément, y compris ceux d'un `Viewport3D`.
+
+three.js avait `EffectComposer` pour `WebGLRenderer` : une liste de passes, chacune un `ShaderMaterial` dessiné sur un quad. `WebGPURenderer` le remplace par [`RenderPipeline`](https://threejs.org/docs/pages/RenderPipeline.html), où les effets sont des nœuds TSL de la leçon 6, reliés en graphe.
+
+| | MonoGame | three.js, `WebGLRenderer` | three.js, `WebGPURenderer` |
+|---|---|---|---|
+| La chaîne | votre code, target par target | `EffectComposer`, une liste de passes | `RenderPipeline`, un graphe de nœuds |
+| Rendre la scène | `SetRenderTarget`, puis dessiner | `RenderPass` | `pass(scene, camera)` |
+| Un effet | un `Effect` sur un quad | `UnrealBloomPass`, `ShaderPass(shader)` | `bloom(node)`, `fxaa(node)`, n'importe quel nœud TSL |
+| Tone mapping et sRGB | votre dernier shader | `OutputPass`, ajoutée à la main | appliqués par le pipeline, sauf si `outputColorTransform = false` |
+| À chaque image | `Draw` | `composer.render()` | `pipeline.render()`, au lieu de `renderer.render()` |
+
+`RenderPipeline` s'appelait `PostProcessing` jusqu'à r183. L'ancien nom fonctionne toujours, avec un avertissement : « PostProcessing: "PostProcessing" has been renamed to "RenderPipeline". Please update your code to use "THREE.RenderPipeline" instead. » ([`PostProcessing.js`, lignes 5-20](https://github.com/mrdoob/three.js/blob/r186/src/renderers/common/PostProcessing.js#L5-L20)).
+
+## Du bloom sur les repères
+
+La touche reçoit cinq repères qui émettent de la lumière, avec une intensité émissive de 6 : bien au-delà de 1, la valeur la plus lumineuse qu'un pixel peut afficher après le tone mapping. Le bloom prend les pixels au-dessus d'un seuil, les floute à plusieurs tailles, et ajoute ce flou à l'image, si bien que les objets lumineux rayonnent comme à travers l'objectif d'un appareil photo ([lignes 46-62](https://github.com/spareilleux/learn/blob/8bf126b/code/threejs/src/07-post/main.ts#L46-L62)) :
+
+```ts
+// La chaîne, sous forme de graphe de nœuds : la texture de couleur de la passe de scène, le bloom ajouté par-dessus, puis la transformation de sortie
+let pipeline: THREE.RenderPipeline | null = null;
+let direct: THREE.DirectRenderPipeline | null = null;
+const disposables: { dispose(): void }[] = [];
+if (mode === 'bloom' || mode === 'bloom-fxaa') {
+  pipeline = new THREE.RenderPipeline(renderer);
+  const scenePass = pass(scene, camera);
+  const sceneColor = scenePass.getTextureNode('output');
+  const glow = bloom(sceneColor, 1.2, 0.4, threshold);
+  disposables.push(scenePass, glow);
+  if (mode === 'bloom') {
+    pipeline.outputNode = sceneColor.add(glow);
+  } else {
+    // FXAA attend des valeurs sRGB après tone mapping : la transformation de sortie du pipeline est désactivée et appliquée avant FXAA
+    pipeline.outputColorTransform = false;
+    pipeline.outputNode = fxaa(renderOutput(sceneColor.add(glow)));
+  }
+}
+```
+
+`pass(scene, camera)` rend la scène dans une render target, et `getTextureNode('output')` est sa couleur, sous forme de nœud. [`bloom(node, strength, radius, threshold)`](https://github.com/mrdoob/three.js/blob/r186/examples/jsm/tsl/display/BloomNode.js#L585-L597) vient de `three/addons/tsl/display/BloomNode.js` ; les addons comptent une cinquantaine de nœuds de ce genre dans le même dossier, de `fxaa` et `smaa` à `ssao`, `ssr`, `dof` et `outline`. `sceneColor.add(glow)` est du TSL : l'image finale est la scène plus son halo. Le pipeline rend ce graphe sur un quad plein écran, puis applique le tone mapping et la conversion sRGB du renderer, puisque `outputColorTransform` vaut `true` par défaut.
+
+La boucle de la page appelle `pipeline.render()` au lieu de `renderer.render(scene, camera)` : la scène est rendue par la passe, à l'intérieur du pipeline.
+
+## Ce que coûte chaque chaîne
+
+La page accepte `?pipeline=none`, `bloom`, `bloom-fxaa` ou `direct`. Pour chacun, la sonde lit quatre pixels : le repère de la case 5, le manche à 0.06 unité à côté, là où devrait se trouver le halo, le manche à 0.15 unité, et le fond dans un coin.
+
+```text
+$ node scripts/probe.mjs 07-post --query pipeline=none
+{
+  "frame": 4,
+  "render": {
+    "calls": 6,
+    "drawCalls": 25,
+    "triangles": 941
+  },
+  "memory": {
+    "geometries": 10,
+    "textures": 3,
+    "programs": 4
+  },
+  "pipeline": "none",
+  "threshold": 1,
+  "renderTargets": 1,
+  "pixels": {
+    "inlay at fret 5": "rgb(242, 250, 252)",
+    "halo, 0.06 beside it": "rgb(53, 28, 20)",
+    "neck, 0.15 beside it": "rgb(53, 28, 20)",
+    "background": "rgb(12, 15, 20)"
+  }
+}
+```
+
+```text
+$ node scripts/probe.mjs 07-post --query pipeline=bloom
+{
+  "frame": 4,
+  "render": {
+    "calls": 42,
+    "drawCalls": 37,
+    "triangles": 953
+  },
+  "memory": {
+    "geometries": 10,
+    "textures": 14,
+    "programs": 13
+  },
+  "pipeline": "bloom",
+  "threshold": 1,
+  "renderTargets": 12,
+  "pixels": {
+    "inlay at fret 5": "rgb(247, 252, 254)",
+    "halo, 0.06 beside it": "rgb(127, 168, 190)",
+    "neck, 0.15 beside it": "rgb(74, 81, 94)",
+    "background": "rgb(13, 17, 23)"
+  }
+}
+```
+
+![Une touche sombre vue de dessus et de biais, avec cinq repères ronds qui brillent d'un bleu pâle, chacun entouré d'un doux halo bleu qui déborde sur les frettes et les cordes voisines.](../../../../assets/threejs/l07-bloom.webp)
+
+| `?pipeline=` | appels, 3 images | draw calls | render targets | programmes | halo, à 0.06 | manche, à 0.15 | fond |
+|---|---|---|---|---|---|---|---|
+| `none` | 6 | 25 | 1 | 4 | 53, 28, 20 | 53, 28, 20 | 12, 15, 20 |
+| `bloom` | 42 | 37 | 12 | 13 | 127, 168, 190 | 74, 81, 94 | 13, 17, 23 |
+| `bloom-fxaa` | 45 | 38 | 13 | 15 | 132, 174, 195 | 74, 82, 96 | 13, 17, 23 |
+| `direct` | 3 | 25 | 0 | 4 | 53, 28, 20 | 53, 28, 20 | 12, 15, 20 |
+
+Sans bloom, le manche à côté du repère a le même brun que partout ailleurs. Avec, le halo rend le manche bleu clair à 0.06 unité, le teinte encore à 0.15, et éclaircit même le fond de quelques niveaux. Le prix se lit dans les autres colonnes :
+
+- **Draw calls : 37 au lieu de 25.** Les 24 objets sont dessinés une fois, dans la passe de scène. Viennent ensuite 13 quads plein écran : un pour garder les pixels lumineux, cinq floutés horizontalement et cinq verticalement à des tailles divisées par deux, un pour les combiner, et le quad de sortie du pipeline. Par image, les `calls` comptent 14 rendus au lieu de 2.
+- **Render targets : 12 au lieu de 1.** La passe de scène en a une ; `BloomNode` en crée onze, une pour les pixels lumineux, et une horizontale et une verticale pour chacune de ses cinq tailles ([`BloomNode.js`, lignes 156-180](https://github.com/mrdoob/three.js/blob/r186/examples/jsm/tsl/display/BloomNode.js#L156-L180)). Ce sont des textures en demi-flottants, dimensionnées d'après le canvas : de la mémoire qui grandit avec l'écran.
+- **Programmes : 13 au lieu de 4.** Chaque étape est un shader.
+
+FXAA ajoute une passe, une render target et deux programmes. Le tableau vient de WebGPU. Sur le backend WebGL 2, les chaînes avec bloom comptent un programme de plus, 14 et 16, et sur les runners de CI sans GPU, qui rendent avec SwiftShader sur le CPU, le pixel du halo de FXAA donne 135, 176, 197 : 3 de plus qu'ici, au-delà de l'écart de 2 par canal qu'accepte `compare.mjs`. `check.sh` garde ces sorties WebGL 2 dans `expected/*.webgl.txt`.
+
+### FXAA, après la transformation de sortie
+
+FXAA lisse les bords crénelés en regardant le contraste entre pixels voisins, et « requires sRGB input », dit son code source : le tone mapping et la conversion sRGB doivent passer avant ([`FXAANode.js`, lignes 5-6](https://github.com/mrdoob/three.js/blob/r186/examples/jsm/tsl/display/FXAANode.js#L5-L6)). La page désactive donc la transformation de sortie propre au pipeline, et l'applique dans le graphe avec `renderOutput`, avant `fxaa`. Dans ce mode, le renderer est créé avec `antialias: false` : le MSAA sur la passe de scène et FXAA après elle feraient deux fois le travail.
+
+## DirectRenderPipeline : pas de passe de sortie
+
+Même sans effet, `WebGPURenderer` rend dans une render target, puis la copie à l'écran par une passe de sortie qui fait le tone mapping et la conversion sRGB : la ligne `none` a 1 render target et 2 appels par image. r186 ajoute [`DirectRenderPipeline`](https://github.com/mrdoob/three.js/blob/r186/src/renderers/common/DirectRenderPipeline.js), qui « applies output processing directly in material shaders », évitant « the intermediate framebuffer and output pass », mais « changes blending and is not compatible with materials that sample the framebuffer, such as transmissive materials » ([lignes 6-20](https://github.com/mrdoob/three.js/blob/r186/src/renderers/common/DirectRenderPipeline.js#L6-L20)). Son `render` prend la scène et la caméra, contrairement à celui de `RenderPipeline` :
+
+```text
+$ node scripts/probe.mjs 07-post --query pipeline=direct
+{
+  "frame": 4,
+  "render": {
+    "calls": 3,
+    "drawCalls": 25,
+    "triangles": 2924
+  },
+  "memory": {
+    "geometries": 10,
+    "textures": 1,
+    "programs": 4
+  },
+  "pipeline": "direct",
+  "threshold": 1,
+  "renderTargets": 0,
+  "pixels": {
+    "inlay at fret 5": "rgb(242, 250, 252)",
+    "halo, 0.06 beside it": "rgb(53, 28, 20)",
+    "neck, 0.15 beside it": "rgb(53, 28, 20)",
+    "background": "rgb(12, 15, 20)"
+  }
+}
+```
+
+Les mêmes quatre pixels que `none`, avec 0 render target et un appel par image. Les draw calls restent à 25, mais le 25e n'est plus un quad : un `scene.background` uni devient une sphère de 1 984 triangles dessinée derrière la scène ([`DirectRenderPipeline.js`, lignes 156-175](https://github.com/mrdoob/three.js/blob/r186/src/renderers/common/DirectRenderPipeline.js#L156-L175), et [`Background.js`, ligne 131](https://github.com/mrdoob/three.js/blob/r186/src/renderers/common/Background.js#L131)), d'où 2 924 triangles au lieu de 941. Sur un téléphone, une copie plein écran de moins par image peut compter ; mesurez-le sur l'appareil (*à vérifier*).
+
+## Ce que libère dispose()
+
+Un composant qui crée un pipeline doit le libérer quand il disparaît. Le mode `?dispose=` de la page libère après trois images et compte les render targets :
+
+```text
+$ node scripts/probe.mjs 07-post --query dispose=pipeline
+{
+  "frame": 4,
+  "render": {
+    "calls": 42,
+    "drawCalls": 37,
+    "triangles": 953
+  },
+  "memory": {
+    "geometries": 10,
+    "textures": 14,
+    "programs": 12
+  },
+  "pipeline": "bloom",
+  "renderTargets": {
+    "before": 12,
+    "afterPipelineDispose": 12
+  }
+}
+```
+
+```text
+$ node scripts/probe.mjs 07-post --query dispose=all
+{
+  "frame": 4,
+  "render": {
+    "calls": 42,
+    "drawCalls": 37,
+    "triangles": 953
+  },
+  "memory": {
+    "geometries": 10,
+    "textures": 1,
+    "programs": 2
+  },
+  "pipeline": "bloom",
+  "renderTargets": {
+    "before": 12,
+    "afterPipelineDispose": 12,
+    "afterNodesDispose": 0
+  }
+}
+```
+
+`pipeline.dispose()` libère un programme, le matériau de son quad de sortie, et aucune des 12 render targets : il ne libère que ce matériau ([`RenderPipeline.js`, lignes 162-169](https://github.com/mrdoob/three.js/blob/r186/src/renderers/common/RenderPipeline.js#L162-L169)). Les render targets appartiennent aux nœuds, et ne partent que lorsque la passe de scène et le nœud de bloom sont libérés eux aussi : il reste alors 0 render target, 1 texture et 2 programmes. Gardez donc une référence à chaque nœud qui possède une render target, et libérez-les avec le pipeline.
+
+## Dans GuitarAlchemist/ga
+
+- **L'ancien nom, et un pipeline jamais libéré.** `Ocean/Ocean.tsx` importe `PostProcessing` depuis `three/webgpu` ([ligne 10](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/Ocean/Ocean.tsx#L10)) et construit la même chaîne que cette leçon ([lignes 534-541](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/Ocean/Ocean.tsx#L534-L541)) :
+
+  ```tsx
+  let postProcessing: PostProcessing | null = null;
+  if (quality.enableBloom) {
+    postProcessing = new PostProcessing(renderer);
+    const scenePass = pass(scene, camera);
+    const scenePassColor = scenePass.getTextureNode('output');
+    const bloomPass = bloom(scenePassColor, quality.bloomStrength, quality.bloomRadius, quality.bloomThreshold);
+    postProcessing.outputNode = scenePassColor.add(bloomPass);
+  }
+  ```
+
+  Avec le three.js 0.180 de GA, le nom est correct ; à partir de r183, il journalise l'avertissement cité plus haut. Le nettoyage libère les contrôles, les géométries, les matériaux, les textures, le loader Draco et le renderer, mais ni le pipeline, ni `scenePass`, ni `bloomPass` ([lignes 641-673](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/Ocean/Ocean.tsx#L641-L673)). Savoir si `renderer.dispose()` libère leurs render targets avec le renderer est *à vérifier* ; avec un renderer conservé d'un montage à l'autre, elles resteraient. `PrimeRadiant/LunarLanderEngine.ts` a la même chaîne sous le même nom ([lignes 420-424](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/PrimeRadiant/LunarLanderEngine.ts#L420-L424)).
+- **Des effets abandonnés sur le chemin WebGPU.** `PrimeRadiant/ForceRadiant.tsx` est passé à `WebGPURenderer` avec `const USE_WEBGPU = true` ([lignes 1672-1676](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/PrimeRadiant/ForceRadiant.tsx#L1672-L1676)), et son commentaire en explique le coût : « The old EffectComposer + UnrealBloomPass + ShaderPass chain is disabled when useWebGPU is on », le remplacement en TSL étant « a follow-up task ». Le bloom n'est créé que `if (!USE_WEBGPU)` ([lignes 1883-1898](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/PrimeRadiant/ForceRadiant.tsx#L1883-L1898)) : aujourd'hui, le graphe s'affiche sans bloom. Le nœud `bloom` de cette leçon est cette suite ; les effets `ShaderPass` qui viennent après lui devraient être portés en nœuds TSL, comme dans la leçon 6.
+- **`EffectComposer` bien utilisé, pour WebGL.** Les 10 fichiers qui utilisent `EffectComposer` se terminent tous par une `OutputPass`, redimensionnent le composer et le libèrent ; `CheeseAvalanche/CheeseAvalanche.tsx` en est un exemple compact ([lignes 496-501](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/CheeseAvalanche/CheeseAvalanche.tsx#L496-L501), [ligne 673](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/CheeseAvalanche/CheeseAvalanche.tsx#L673) et [ligne 682](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/CheeseAvalanche/CheeseAvalanche.tsx#L682)). Passer l'un d'eux à `WebGPURenderer` revient à réécrire la chaîne, pas à l'adapter.
+
+## À retenir
+
+- Avec `WebGPURenderer`, le post-traitement, c'est `RenderPipeline` : un graphe de nœuds TSL qui commence par `pass(scene, camera)`, rendu par `pipeline.render()`. `PostProcessing` est son nom d'avant r183.
+- Chaque effet coûte des draw calls, des programmes et des render targets qui grandissent avec le canvas : le bloom a ajouté ici 13 quads et 11 render targets.
+- Les effets qui attendent du sRGB, comme FXAA, viennent après `renderOutput`, avec `outputColorTransform = false`.
+- `DirectRenderPipeline` supprime la passe de sortie quand aucun effet n'est nécessaire, avec des limites sur le blending et la transmission.
+- `pipeline.dispose()` ne libère pas les render targets des passes : libérez chaque nœud qui en possède une.
+
+## Exercices
+
+1. Sondez la page avec `?threshold=0`. Lesquels des quatre pixels changent par rapport au seuil par défaut de 1, et pourquoi le fond change-t-il autant ?
+2. Les render targets du bloom sont dimensionnées d'après le canvas. Estimez, à partir de son code source, la mémoire de la première target horizontale du bloom sur un écran de 3840 × 2160, puis dites ce que `renderer.setPixelRatio` y change.
+3. `ForceRadiant.tsx` de GA a besoin du bloom et d'une aberration chromatique sur le chemin WebGPU. Esquissez l'`outputNode`, avec le nœud que fournissent les addons.
+
+<details>
+<summary>Solution 1</summary>
+
+```text
+$ node scripts/probe.mjs 07-post --query threshold=0
+{
+  "frame": 4,
+  "render": {
+    "calls": 42,
+    "drawCalls": 37,
+    "triangles": 953
+  },
+  "memory": {
+    "geometries": 10,
+    "textures": 14,
+    "programs": 13
+  },
+  "pipeline": "bloom",
+  "threshold": 0,
+  "renderTargets": 12,
+  "pixels": {
+    "inlay at fret 5": "rgb(248, 252, 254)",
+    "halo, 0.06 beside it": "rgb(183, 196, 207)",
+    "neck, 0.15 beside it": "rgb(161, 146, 146)",
+    "background": "rgb(66, 71, 84)"
+  }
+}
+```
+
+Le repère change à peine : il était déjà presque blanche. Tout le reste change : le halo passe de 127, 168, 190 à 183, 196, 207, le manche à 0.15 de 74, 81, 94 à 161, 146, 146, et le fond de 13, 17, 23 à 66, 71, 84. Avec un seuil de 0, chaque pixel est assez lumineux pour le bloom : le manche brun et le fond sombre sont floutés et rajoutés sur eux-mêmes, et toute l'image devient laiteuse. Le seuil compare la luminance, donc une scène éclairée dans la plage habituelle de 0 à 1 a besoin d'un seuil proche de 1, et les repères, émissifs au-delà de 1, sont les seuls pixels censés le franchir. Les compteurs ne changent pas : les mêmes passes s'exécutent quel que soit le seuil.
+
+</details>
+
+<details>
+<summary>Solution 2</summary>
+
+`BloomNode` dimensionne ses targets à la moitié du drawing buffer (`_resolutionScale = 0.5`), puis divise la taille par deux à chacun de ses cinq niveaux ([`BloomNode.js`, lignes 322-341](https://github.com/mrdoob/three.js/blob/r186/examples/jsm/tsl/display/BloomNode.js#L322-L341)). Les targets sont en `HalfFloatType`, quatre canaux de 2 octets chacun, sans depth buffer ([lignes 164-180](https://github.com/mrdoob/three.js/blob/r186/examples/jsm/tsl/display/BloomNode.js#L164-L180)). En 3840 × 2160, la première target horizontale fait 1920 × 1080 × 8 octets : 16 588 800 octets, environ 16.6 MB. La target des pixels lumineux a la même taille, et les targets horizontale et verticale de chaque niveau font un quart de celles du niveau au-dessus : 1 + 2 × (1 + 1/4 + 1/16 + 1/64 + 1/256) ≈ 3.66 fois 16.6 MB, environ 61 MB pour le seul bloom, avant la passe de scène. Ces valeurs sont calculées à partir du code source, pas mesurées dans la mémoire GPU.
+
+`setPixelRatio(2)` sur un canvas CSS de 1920 × 1080 donne le même drawing buffer de 3840 × 2160. Les pages de la leçon plafonnent le ratio à 2 ; `ThreeFretboard.tsx` de GA accepte jusqu'à 6, soit 36 fois les pixels d'un ratio de 1, et 9 fois ceux d'un ratio de 2.
+
+</details>
+
+<details>
+<summary>Solution 3</summary>
+
+```ts
+import { pass } from 'three/tsl';
+import { bloom } from 'three/addons/tsl/display/BloomNode.js';
+import { chromaticAberration } from 'three/addons/tsl/display/ChromaticAberrationNode.js';
+
+const pipeline = new THREE.RenderPipeline(renderer);
+const scenePass = pass(scene, camera);
+const color = scenePass.getTextureNode('output');
+const glow = bloom(color, 0.6, 0.6, 0.5);
+const aberrated = chromaticAberration(color.add(glow));
+pipeline.outputNode = aberrated;
+```
+
+La force, le rayon et le seuil sont ceux que ForceRadiant passe à `UnrealBloomPass` sur desktop. `chromaticAberration(node, strength = 1.0, center = null, scale = 1.1)` se trouve dans `three/addons/tsl/display/ChromaticAberrationNode.js` ([lignes 152-163](https://github.com/mrdoob/three.js/blob/r186/examples/jsm/tsl/display/ChromaticAberrationNode.js#L152-L163)). Cette esquisse passe `tsc` avec les types de r186, mais n'a pas été rendue : la force qui correspond au `ShaderPass` de ForceRadiant est *à vérifier* sur la page. Gardez `scenePass`, `glow` et `aberrated` pour les libérer avec le pipeline.
+
+</details>
+
+## Sources
+
+- Documentation de three.js : [`RenderPipeline`](https://threejs.org/docs/pages/RenderPipeline.html), [`PassNode`](https://threejs.org/docs/pages/PassNode.html), [`BloomNode`](https://threejs.org/docs/pages/BloomNode.html), [`FXAANode`](https://threejs.org/docs/pages/FXAANode.html), [`EffectComposer`](https://threejs.org/docs/pages/EffectComposer.html) ; la page [post-processing](https://threejs.org/manual/pages/post-processing.html) du manuel, écrite pour `WebGLRenderer`
+- Code source de three.js à r186 : [`RenderPipeline.js`](https://github.com/mrdoob/three.js/blob/r186/src/renderers/common/RenderPipeline.js), [`DirectRenderPipeline.js`](https://github.com/mrdoob/three.js/blob/r186/src/renderers/common/DirectRenderPipeline.js), [`PostProcessing.js`](https://github.com/mrdoob/three.js/blob/r186/src/renderers/common/PostProcessing.js), [`BloomNode.js`](https://github.com/mrdoob/three.js/blob/r186/examples/jsm/tsl/display/BloomNode.js), [`FXAANode.js`](https://github.com/mrdoob/three.js/blob/r186/examples/jsm/tsl/display/FXAANode.js)
+- MonoGame : [`RenderTarget2D`](https://docs.monogame.net/api/Microsoft.Xna.Framework.Graphics.RenderTarget2D.html) ; WPF : [`ShaderEffect`](https://learn.microsoft.com/dotnet/api/system.windows.media.effects.shadereffect)

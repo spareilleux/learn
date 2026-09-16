@@ -14,7 +14,11 @@ sidebar:
 - [x] Leçon 2 : géométries, matériaux, lumières et ombres
 - [x] Leçon 3 : couleur, tone mapping et environnements HDR
 - [x] Leçon 4 : modèles glTF et animations
-- [ ] Leçon 5 : interaction, `Raycaster` et contrôles de caméra
+- [x] Leçon 5 : interaction, `Raycaster` et contrôles de caméra
+- [x] Leçon 6 : TSL et matériaux à nœuds
+- [x] Leçon 7 : post-traitement avec `RenderPipeline`
+- [x] Leçon 8 : la performance, mesurée
+- [ ] Leçon 9 : React Three Fiber et drei
 
 ## 2026-09-16 — Versions
 
@@ -59,11 +63,37 @@ Le cours lit GA au commit [`05c8eda`](https://github.com/GuitarAlchemist/ga/tree
 - Sa texture de bois n'a pas de `colorSpace`, elle s'affiche donc plus claire que peinte, et son environnement est un dégradé sur 8 bits dont le moteur de rendu construit quand même la PMREM (leçon 3). L'écart de couleur du bois à l'écran est *à vérifier* dans un navigateur.
 - `Guitar3D.tsx` construit un environnement noir avec `fromScene` sur une scène qui ne contient qu'une lumière ambiante, et annonce la prise en charge de KTX2 et de meshopt sans régler aucun des deux décodeurs (leçons 3 et 4).
 - `Ocean.tsx` charge les décodeurs de Draco depuis gstatic.com ; `DemerzelFaceOverlay.tsx` masque les erreurs KTX2 en remplaçant `console.error` pendant un chargement ; `HandAnimationTest.tsx` met à jour un `AnimationMixer` qui n'a aucune action (leçon 4).
-- Pour les leçons suivantes : `Ocean.tsx` utilise `PostProcessing`, renommé `RenderPipeline` dans r183 ; 16 fichiers utilisent `ShaderMaterial` ou du GLSL, et 10 utilisent `EffectComposer`, que `WebGPURenderer` ne prend pas en charge ; `Experiments/ThreeJS-BSP-Loader` importe `WebGPURenderer` depuis un chemin supprimé dans r167 ; le visualiseur d'embeddings du tableau de bord retire un écouteur de redimensionnement avec un nouveau `bind`, ce qui ne retire rien.
+- `Experiments/ThreeJS-BSP-Loader` importe `WebGPURenderer` depuis un chemin supprimé dans r167 ; le visualiseur d'embeddings du tableau de bord retire un écouteur de redimensionnement avec un nouveau `bind`, ce qui ne retire rien.
+- `ThreeHeadstock.tsx` ajoute un écouteur de clic au même canvas à chaque exécution de son effet et ne le retire jamais ; `TonalOrbit.tsx` et `MinimalThreeInstrument.tsx` lancent un rayon à chaque événement de souris, le second avec un nouveau `Raycaster` à chaque fois ; `InteractionHandler.ts`, dans Prime Radiant, le fait comme la leçon ; 4 des 25 fichiers qui utilisent `OrbitControls` ne les libèrent jamais (leçon 5).
+- Le ciel GLSL de `Sunburst3D.tsx`, copié dans `ImmersiveMusicalWorld.tsx`, ne peut pas tourner sur `WebGPURenderer` ; `FresnelGlowTSL.ts` fige l'intensité et la couleur de sa couronne dans le shader sous forme de constantes ; `MoebiusPassTSL.ts` est un `ShaderPass` GLSL malgré son nom (leçon 6).
+- `Ocean.tsx` et `LunarLanderEngine.ts` utilisent `PostProcessing`, renommé `RenderPipeline` dans r183, et `Ocean.tsx` ne libère jamais le pipeline ni ses nœuds ; `ForceRadiant.tsx` tourne sur `WebGPURenderer` sans les effets de bloom et de `ShaderPass` de son chemin WebGL, une « tâche de suivi » ; les 10 fichiers qui utilisent `EffectComposer` s'en servent correctement pour WebGL (leçon 7).
+- `ThreeFretboard.tsx` crée une géométrie et un matériau par frette et par repère, reconstruit sa scène chaque fois que sa prop `positions` est un nouveau tableau, y compris le `[]` par défaut, et ne libère pas ses 29 sprites ; `NodeInstancer.ts` instancie bien ses nœuds, avec le culling désactivé ; GA n'utilise ni `BatchedMesh` ni `THREE.LOD` (leçon 8).
+
+## 2026-09-16 — Leçons 5 à 8 : pointeurs, shaders, effets, comptes
+
+- **De vrais événements de pointeur dans une page headless.** [`scripts/probe.mjs`](https://github.com/spareilleux/learn/blob/8bf126b/code/threejs/scripts/probe.mjs) effectue maintenant les déplacements et les glisser-déposer qu'une page liste, avec la souris de Playwright, et demande à la page ce qu'elle a vu après chacun. Chromium les transforme en événements `pointermove`, `pointerdown` et `pointerup`, que `OrbitControls` traite comme ceux d'un utilisateur : un glisser de 120 pixels a tourné la caméra de 96°.
+- **Une caméra hors de la scène a une matrice périmée dans un script.** La première version de `l05-raycaster.ts` projetait un point à un NDC de −3.6 : le rendu met à jour la matrice monde de la caméra, et un script Node.js ne fait pas de rendu. `camera.updateMatrixWorld()` l'a corrigé.
+- **Une feuille de style partagée fait partie du hash de chaque chunk.** Ajouter les règles de mise en page de la leçon 5 à `page.css` a changé le nom de tous les chunks du build, y compris le `04-gltf-CCDSPzCq.js` que cite la leçon 4. La leçon 5 a reçu sa propre feuille de style, et `check.sh` construit d'abord les pages des leçons 1 à 4 seules, avec un filtre `PAGES`, avant de tout construire : avec les pages des leçons 5 à 8, Rolldown nomme le chunk WebGPU partagé `three.tsl` au lieu de `three.webgpu`.
+- **`PostProcessing` s'appelle `RenderPipeline` depuis r183, et `pipeline.dispose()` libère un seul matériau.** Les 11 render targets du bloom et celui de la passe de scène restent jusqu'à ce que les nœuds eux-mêmes soient libérés.
+- **`DirectRenderPipeline.render` prend la scène et la caméra**, contrairement à `RenderPipeline.render()`, donc TypeScript le refuse dans une variable `RenderPipeline` ; et il dessine un fond uni sous la forme d'une sphère de 1 984 triangles.
+- **`renderer.info.render` s'additionne entre les appels à `render()` d'une même image d'animation.** Une page qui rendait 60 images dans une boucle pour les chronométrer rapportait 610 061 draw calls ; la leçon 8 lit d'abord les comptes.
+
+## 2026-09-16 — Les runners de CI et les leçons 5 à 8
+
+- L'exécution [35123228046](https://github.com/spareilleux/learn/actions/runs/35123228046) a réussi sous macOS (WebGPU sur l'adaptateur « apple ») et échoué sous Linux et Windows, où `WebGPURenderer` se replie sur WebGL 2 avec SwiftShader. Quatre différences, toutes réelles :
+  - Les chaînes de bloom comptent un programme de plus sur WebGL 2 : 14 au lieu de 13, 16 au lieu de 15.
+  - Avec FXAA, le pixel du halo vaut 135, 176, 197 sur SwiftShader, là où le GPU de l'auteur donne 132, 174, 195 sur les deux backends : 3 de plus que ce qu'accepte `compare.mjs`.
+  - Un `BatchedMesh` est dessiné avec `WEBGL_multi_draw` et compté comme 2 draw calls, pas 10 001.
+  - Le fichier de shader WebGPU contient du GLSL, puisque la page tournait sur WebGL 2.
+- Les pages de la leçon 8 à 800 000 triangles dépassaient le délai : le résultat de la sonde arrivait, mais la capture d'écran de Playwright attendait plus de 30 secondes derrière les 60 images chronométrées encore en file dans le rasteriseur logiciel.
+- La correction : `check.sh` compare une sonde avec `expected/<name>.webgl.txt` quand ce fichier existe et que la page a tourné sur WebGL 2. Les cinq fichiers viennent de `chromium-headless-shell` sur la machine de l'auteur, dont le SwiftShader a donné les mêmes valeurs que les runners. La ligne GLSL est comparée, et la ligne WGSL seulement affichée. La leçon 8 chronomètre 20 images, et ses sondes attendent jusqu'à 240 secondes (`PROBE_TIMEOUT`). L'exécution [35124756498](https://github.com/spareilleux/learn/actions/runs/35124756498) a réussi sur les trois OS.
 
 ## À vérifier
 
-- Si une scène modélisée en centimètres a besoin de lumières 10 000 fois plus fortes pour avoir le même aspect qu'en mètres (leçon 2).
-- Les textures KTX2 : chargement, formats GPU choisis sur chaque OS, mémoire (leçon 8).
+- Si une scène modélisée en centimètres a besoin de lumières 10 000 fois plus fortes pour avoir le même aspect qu'en mètres (leçon 2).
+- Les textures KTX2 : chargement, formats GPU choisis sur chaque OS, mémoire.
+- Si `ThreeHeadstock.tsx` appelle `onTuningPegClick` une fois par écouteur périmé après les nouvelles exécutions de son effet (leçon 5).
+- Si `ThreeFretboard.tsx` est reconstruit à chaque rendu de ses parents dans les pages de GA (leçon 8).
+- Le temps GPU, pas seulement le temps CPU, avec le `timestamp-query` de WebGPU (leçon 8).
 - Draco face à meshopt sur un gros modèle et sur de nombreux petits, sur un vrai réseau (leçon 4, exercice 3).
 - WebGPU sur une machine Linux ou Windows dotée d'un GPU, autre que celle de l'auteur.

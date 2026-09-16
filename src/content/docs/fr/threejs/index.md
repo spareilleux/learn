@@ -7,7 +7,7 @@ sidebar:
 ---
 
 :::note[Version étudiée]
-[three.js](https://threejs.org/) **r186** (le paquet npm `three` 0.186.0, publié le 8 septembre 2026), avec [`@types/three`](https://www.npmjs.com/package/@types/three) 0.186.0, servi et construit par [Vite](https://vite.dev/) 8.3.0, vérifié avec [TypeScript](https://www.typescriptlang.org/) 7.0.2, et mesuré dans Chromium headless avec [Playwright](https://playwright.dev/) 1.63.0 sur [Node.js](https://nodejs.org/) 24. Les scènes et les scripts du cours se trouvent dans [`code/threejs`](https://github.com/spareilleux/learn/tree/8e8f303/code/threejs), avec un `package.json` et un fichier de verrouillage qui fixent aussi [glTF Transform](https://gltf-transform.dev/) 4.5.0. [`.github/workflows/threejs-examples.yml`](https://github.com/spareilleux/learn/blob/8e8f303/.github/workflows/threejs-examples.yml) exécute [`check.sh`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/check.sh) sous Linux, Windows et macOS : il vérifie les types de tout le code, exécute les scripts Node.js, ouvre chaque page de leçon dans Chromium headless, construit les pages, et compare les sorties avec celles collées dans les leçons.
+[three.js](https://threejs.org/) **r186** (le paquet npm `three` 0.186.0, publié le 8 septembre 2026), avec [`@types/three`](https://www.npmjs.com/package/@types/three) 0.186.0, servi et construit par [Vite](https://vite.dev/) 8.3.0, vérifié avec [TypeScript](https://www.typescriptlang.org/) 7.0.2, et mesuré dans Chromium headless avec [Playwright](https://playwright.dev/) 1.63.0 sur [Node.js](https://nodejs.org/) 24. Les scènes et les scripts du cours se trouvent dans [`code/threejs`](https://github.com/spareilleux/learn/tree/8bf126b/code/threejs), avec un `package.json` et un fichier de verrouillage qui fixent aussi [glTF Transform](https://gltf-transform.dev/) 4.5.0. [`.github/workflows/threejs-examples.yml`](https://github.com/spareilleux/learn/blob/8bf126b/.github/workflows/threejs-examples.yml) exécute [`check.sh`](https://github.com/spareilleux/learn/blob/8bf126b/code/threejs/check.sh) sous Linux, Windows et macOS : il vérifie les types de tout le code, exécute les scripts Node.js, ouvre chaque page de leçon dans Chromium headless, construit les pages, et compare les sorties avec celles collées dans les leçons.
 :::
 
 ## Pourquoi j'apprends ça
@@ -59,11 +59,11 @@ Le vrai code est [GuitarAlchemist/ga](https://github.com/GuitarAlchemist/ga) au 
 | 2 | [Géométries, matériaux, lumières et ombres](02-geometries-materials-lights/) | `MeshGeometry3D`, `DiffuseMaterial`, `BasicEffect`, lumières directionnelles et ponctuelles |
 | 3 | [Couleur, tone mapping et environnements HDR](03-color-tone-mapping-environments/) | sRGB, `Color` dans WPF ou JavaFX, photos HDR |
 | 4 | [Charger des modèles glTF et des animations](04-gltf-models-and-animations/) | le content pipeline de MonoGame, les storyboards WPF, `AnimationTimer` |
-| 5 | Interaction : `Raycaster`, événements de pointeur et contrôles de caméra (prochainement) | le hit testing dans WPF, `VisualTreeHelper.HitTest`, le `PickResult` de JavaFX |
-| 6 | TSL et matériaux à nœuds | effets HLSL, graphes de shaders |
-| 7 | Post-traitement avec `RenderPipeline` | render targets, pixel shaders |
-| 8 | Performance : instanciation, `BatchedMesh`, LOD, frustum culling, mesures | dessin instancié, profileurs |
-| 9 | React Three Fiber et drei | le data binding de WPF, composants Blazor ou React |
+| 5 | [Interaction, `Raycaster` et contrôles de caméra](05-interaction-raycaster-controls/) | le hit testing dans WPF, `VisualTreeHelper.HitTest`, le `PickResult` de JavaFX |
+| 6 | [TSL et matériaux à nœuds](06-tsl-node-materials/) | effets HLSL, graphes de shaders |
+| 7 | [Post-traitement avec `RenderPipeline`](07-post-processing-renderpipeline/) | render targets, pixel shaders |
+| 8 | [La performance, mesurée : instanciation, `BatchedMesh`, LOD, frustum culling](08-performance-instancing-batching-lod/) | dessin instancié, profileurs |
+| 9 | React Three Fiber et drei (prochainement) | le data binding de WPF, composants Blazor ou React |
 | 10 | Physique avec Rapier en WebAssembly | BEPUphysics, moteurs physiques de jeux |
 | 11 | WebXR | Windows Mixed Reality, OpenXR |
 | 12 | Tests et CI : rendu headless, captures d'écran comparées, et leurs limites | automatisation d'interface, tests de snapshot |
