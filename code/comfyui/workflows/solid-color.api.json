@@ -1,0 +1,18 @@
+{
+  "1": {
+    "class_type": "EmptyImage",
+    "inputs": { "width": 64, "height": 48, "batch_size": 1, "color": 3368601 }
+  },
+  "2": {
+    "class_type": "ImageInvert",
+    "inputs": { "image": ["1", 0] }
+  },
+  "3": {
+    "class_type": "SaveImage",
+    "inputs": { "filename_prefix": "ci/solid", "images": ["1", 0] }
+  },
+  "4": {
+    "class_type": "SaveImage",
+    "inputs": { "filename_prefix": "ci/inverted", "images": ["2", 0] }
+  }
+}

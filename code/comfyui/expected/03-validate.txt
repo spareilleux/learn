@@ -1,0 +1,9 @@
+valid; the nodes can run in this order: 4 5 6 7 3 8 9
+error: node 4 (CheckpointLoaderSimple) input ckpt_name: "sd_xl_base_1.0.safetensors" is not one of the 0 allowed values
+valid; the nodes can run in this order: 1 2 3 4
+error: node 4 (CheckpointLoaderSimple) input ckpt_name: "sd_xl_base_1.0.safetensors" is not one of the 0 allowed values
+error: node 3 (KSampler) input steps: 0 is below the minimum 1
+error: node 3 (KSampler) input sampler_name: "euler_a" is not one of the 45 allowed values
+error: node 3 (KSampler) input negative: links to node 12, which doesn't exist
+error: node 3 (KSampler) input latent_image: expects LATENT, node 4 output 2 is VAE
+exit code 1

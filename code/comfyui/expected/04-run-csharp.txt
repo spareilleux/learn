@@ -1,0 +1,30 @@
+--- C#, first run
+POST /prompt: 200
+status: connected, queue_remaining 0
+execution_start
+execution_cached: []
+executing: node 1
+executing: node 3
+executed: node 3, ci/solid_00001_.png
+executing: node 2
+executing: node 4
+executed: node 4, ci/inverted_00001_.png
+execution_success
+GET /view node 3: ci/solid_00001_.png, 64 x 48, pixel SHA-256 da28b3b4fc5883a2
+GET /view node 4: ci/inverted_00001_.png, 64 x 48, pixel SHA-256 252fab8d4cbe179f
+--- C#, same workflow again
+POST /prompt: 200
+status: connected, queue_remaining 0
+execution_start
+execution_cached: [1, 2, 3, 4]
+executed: node 4, ci/inverted_00001_.png
+executed: node 3, ci/solid_00001_.png
+execution_success
+GET /view node 4: ci/inverted_00001_.png, 64 x 48, pixel SHA-256 252fab8d4cbe179f
+GET /view node 3: ci/solid_00001_.png, 64 x 48, pixel SHA-256 da28b3b4fc5883a2
+--- C#, a broken workflow
+POST /prompt: 400
+error prompt_outputs_failed_validation: Prompt outputs failed validation
+  node 4 (CheckpointLoaderSimple): value_not_in_list: ckpt_name: 'sd_xl_base_1.0.safetensors' not in []
+  node 3 (KSampler): exception_during_inner_validation: '12'
+exit code 1

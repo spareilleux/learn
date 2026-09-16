@@ -1,0 +1,64 @@
+# ComfyUI course: install ComfyUI v0.36.0 with PyTorch for the CPU on three OSes, then run check.sh: the offline
+# workflow checks, and the C# and Java clients against a real server on a workflow that needs no model.
+# There is no GPU and no model here: the SDXL renders in the lessons were made on the author's machine.
+name: ComfyUI course examples
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['code/comfyui/**', '.github/workflows/comfyui-examples.yml']
+  pull_request:
+    paths: ['code/comfyui/**', '.github/workflows/comfyui-examples.yml']
+
+permissions:
+  contents: read
+
+env:
+  COMFYUI_TAG: v0.36.0
+  COMFYUI_COMMIT: ee71d5c4993f29086b27fde1629a945ae48425bf
+
+jobs:
+  check:
+    name: check (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: '10.0.x'
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '25'
+          cache: maven
+      - name: ComfyUI at its release tag
+        run: |
+          git clone --depth 1 --branch "$COMFYUI_TAG" https://github.com/Comfy-Org/ComfyUI.git "$RUNNER_TEMP/ComfyUI"
+          test "$(git -C "$RUNNER_TEMP/ComfyUI" rev-parse HEAD)" = "$COMFYUI_COMMIT"
+      # PyTorch for the CPU: from PyTorch's CPU index on Linux and Windows, from PyPI on macOS (its only build)
+      - name: Python packages
+        run: |
+          python -m venv "$RUNNER_TEMP/venv"
+          if [ "$RUNNER_OS" = Windows ]; then py="$RUNNER_TEMP/venv/Scripts/python.exe"; else py="$RUNNER_TEMP/venv/bin/python"; fi
+          if [ "$RUNNER_OS" = macOS ]; then index=(); else index=(--index-url https://download.pytorch.org/whl/cpu); fi
+          "$py" -m pip install --quiet torch==2.13.0 torchvision==0.28.0 torchaudio "${index[@]}"
+          "$py" -m pip install --quiet -r "$RUNNER_TEMP/ComfyUI/requirements.txt"
+          "$py" -c "import torch; print('torch', torch.__version__, 'cuda', torch.cuda.is_available())"
+          echo "COMFYUI_PYTHON=$py" >> "$GITHUB_ENV"
+          echo "COMFYUI_DIR=$RUNNER_TEMP/ComfyUI" >> "$GITHUB_ENV"
+      - name: Build, offline checks, and the clients against ComfyUI on the CPU
+        run: bash code/comfyui/check.sh
+      - name: Server log
+        if: failure()
+        run: cat code/comfyui/out/base/server.log || true
