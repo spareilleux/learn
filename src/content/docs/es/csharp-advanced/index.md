@@ -91,7 +91,7 @@ Las partes 1 y 2 miden el propio código de GA. La parte 3 construye un pequeño
 
 | # | Página | Bajo el capó | Medido sobre GA |
 |---|---|---|---|
-| 1 | [Tres optimizaciones, demostradas y luego medidas](appendix-benchmarks/) | rotaciones y `PopCount` sobre conjuntos de 12 bits, una tabla de consulta, una demostración de equivalencia sobre todo el dominio de entrada, los ordenamientos estables como desempate | `IsClusterFree`, `IntervalClassVector`, `ClosestDiatonicKey` |
+| 1 | [Cinco optimizaciones, demostradas y luego medidas](appendix-benchmarks/) | rotaciones y `PopCount` sobre conjuntos de 12 bits, tablas de consulta, una demostración de equivalencia sobre todo el dominio de entrada, los ordenamientos estables como desempate, y un benchmark que medía el JIT en lugar del código | `IsClusterFree`, `IntervalClassVector`, `ClosestDiatonicKey`, `ToNormalForm`, `PrimeForm` |
 | — | [Diario](journal/) | | |
 
 Las lecciones 5 y 10 a 24 están planificadas y aún no se han escrito; las lecciones 6 a 9 se escribieron antes que la lección 5, y no dependen de ella.

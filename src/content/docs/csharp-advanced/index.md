@@ -91,7 +91,7 @@ Parts 1 and 2 measure GA's own code. Part 3 builds a small scales and chords ser
 
 | # | Page | Under the hood | Measured on GA |
 |---|---|---|---|
-| 1 | [Three optimisations, proved then measured](appendix-benchmarks/) | rotations and `PopCount` on 12-bit sets, a lookup table, an equivalence proof over the whole input domain, stable sorts as a tie-break | `IsClusterFree`, `IntervalClassVector`, `ClosestDiatonicKey` |
+| 1 | [Five optimisations, proved then measured](appendix-benchmarks/) | rotations and `PopCount` on 12-bit sets, lookup tables, an equivalence proof over the whole input domain, stable sorts as a tie-break, and a benchmark that measured the JIT instead of the code | `IsClusterFree`, `IntervalClassVector`, `ClosestDiatonicKey`, `ToNormalForm`, `PrimeForm` |
 | — | [Journal](journal/) | | |
 
 Lessons 5 and 10 to 24 are planned and not written yet; lessons 6 to 9 were written before lesson 5, and don't depend on it.

@@ -1,14 +1,16 @@
 ---
-title: "Apéndice 1: tres optimizaciones, demostradas y luego medidas"
-description: Tres miembros de Guitar Alchemist reescritos con rotaciones, popcounts y una tabla de consulta — primero una comprobación exhaustiva de la equivalencia sobre los 4096 conjuntos de clases de altura, después BenchmarkDotNet, y un defecto documentado que la versión rápida no tiene permitido corregir.
+title: "Apéndice 1: cinco optimizaciones, demostradas y luego medidas"
+description: Cinco miembros de Guitar Alchemist reescritos con rotaciones, popcounts y tablas de consulta — primero una comprobación exhaustiva de la equivalencia sobre los 4096 conjuntos de clases de altura, después BenchmarkDotNet, un defecto documentado que la versión rápida no tiene permitido corregir, y un benchmark que hubo que tirar porque medía el JIT y no el código.
 sidebar:
   label: "Apéndice 1: optimizaciones demostradas"
   order: 90
 ---
 
-Un benchmark por sí solo no demuestra nada. «Dos mil veces más rápido» es una afirmación sobre dos programas, y solo resulta interesante si son el *mismo* programa: la forma más fácil de ganar un benchmark es dejar de hacer discretamente una parte del trabajo.
+Un benchmark por sí solo no demuestra nada. «Mil veces más rápido» es una afirmación sobre dos programas, y solo resulta interesante si son el *mismo* programa: la forma más fácil de ganar un benchmark es dejar de hacer discretamente una parte del trabajo.
 
-Este apéndice toma tres miembros de [Guitar Alchemist](https://github.com/GuitarAlchemist/ga), reescribe cada uno de ellos y hace la demostración antes que la medición. Los tres reciben un **conjunto de clases de altura**: un subconjunto de las doce clases de altura, es decir, un número de 12 bits, es decir, un dominio de entrada de 4096 valores en total. No hay nada que muestrear ni nada que discutir. El programa comprueba que la reescritura devuelve lo que devuelve GA para **cada** entrada, y la CI lo ejecuta en Linux, Windows y macOS en cada push. Solo entonces merece la pena leer los tiempos.
+Este apéndice toma cinco miembros de [Guitar Alchemist](https://github.com/GuitarAlchemist/ga), reescribe cada uno de ellos y hace la demostración antes que la medición. Los cinco reciben un **conjunto de clases de altura**: un subconjunto de las doce clases de altura, es decir, un número de 12 bits, es decir, un dominio de entrada de 4096 valores en total. No hay nada que muestrear ni nada que discutir. El programa comprueba que la reescritura devuelve lo que devuelve GA para **cada** entrada, y la CI lo ejecuta en Linux, Windows y macOS en cada push. Solo entonces merece la pena leer los tiempos.
+
+La medición acabó necesitando el mismo escepticismo que el código. La primera versión de los benchmarks llamaba a cada miembro una vez y anunciaba que el `IsClusterFree` rápido se ejecutaba en 0,0107 ns — una veinticincoava parte de un ciclo, que no es una velocidad sino un síntoma. Esa historia está en [las mediciones](#las-mediciones), al final, y es la razón por la que cada cifra de más abajo es un barrido del dominio entero.
 
 Los enlaces a GA apuntan al commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6).
 
@@ -18,7 +20,7 @@ Los enlaces a GA apuntan al commit [`a826864`](https://github.com/GuitarAlchemis
 bash code/csharp-advanced/check.sh                                   # todas las lecciones, comparadas con expected/
 dotnet run --project code/csharp-advanced/Advanced -c Release -- a1  # solo la demostración, después de check.sh
 cd code/csharp-advanced
-dotnet run -c Release --project Benchmarks -- --filter "*IntervalClassVectorBenchmarks*"
+dotnet run -c Release --project Benchmarks -- --filter "*NormalFormBenchmarks*"
 ```
 
 Las reescrituras están en [`Advanced/GaFast.cs`](https://github.com/spareilleux/learn/blob/main/code/csharp-advanced/Advanced/GaFast.cs), la demostración en [`Advanced/Appendix1.cs`](https://github.com/spareilleux/learn/blob/main/code/csharp-advanced/Advanced/Appendix1.cs), las mediciones en [`Benchmarks/GaBenchmarks.cs`](https://github.com/spareilleux/learn/blob/main/code/csharp-advanced/Benchmarks/GaBenchmarks.cs).
@@ -28,6 +30,10 @@ Las reescrituras están en [`Advanced/GaFast.cs`](https://github.com/spareilleux
 | 1 | `PitchClassSetId.IsClusterFree` | sacar un invariante del bucle y luego eliminar el bucle | nada: es una ganancia limpia |
 | 2 | `PitchClassSet.IntervalClassVector` | contar pares con `PopCount` y luego precalcular los 4096 | un defecto aritmético documentado que hay que **conservar** |
 | 3 | `PitchClassSet.ClosestDiatonicKey` | eliminar un diccionario que nadie lee | un empate resuelto por la estabilidad del orden, a reproducir exactamente |
+| 4 | `PitchClassSet.ToNormalForm` | rotar bits en lugar de construir conjuntos ordenados | una regla de compacidad que no es la de los manuales |
+| 5 | `PitchClassSetId.PrimeForm` | la misma aritmética, y después una tabla | nada: ya era aritmética de bits |
+
+Todo se apoya en una representación, que conviene enunciar una vez. El bit *p* del número vale 1 cuando la clase de altura *p* está en el conjunto. Transponer *n* semitonos es rotar esos doce bits *n* posiciones: no se añade ni se quita nada, el anillo gira. «Cuántas clases de altura cumplen X» es un recuento de bits, o sea una instrucción. Y el dominio es lo bastante pequeño como para tabular al arrancar cualquier función de un conjunto.
 
 ## 1. Un bucle que hace doce veces lo mismo
 
@@ -69,12 +75,12 @@ public static bool IsClusterFree(int set) => (set & Rotr12(set, 1) & Rotr12(set,
 
 `Rotr12(v, 1)` lleva el bit *i + 1* a donde estaba el bit *i*, y `Rotr12(v, 2)` lleva allí el bit *i + 2*. El bit *i* del AND es, por tanto, exactamente la prueba de GA para ese *i*, y el conjunto está libre de clústeres cuando no sobrevive ningún bit. Dos rotaciones, dos AND, una comparación con cero, ninguna bifurcación.
 
-| Método | Media | Ratio |
-|---|---|---|
-| `Ga` | 3,5344 ns | 1,00 |
-| `Fast` | 0,1131 ns | 0,03 |
+| Método | Los 4096 conjuntos | Por conjunto | Ratio |
+|---|---|---|---|
+| `Ga` | 9,582 µs | 2,34 ns | 1,00 |
+| `Fast` | 2,378 µs | 0,58 ns | 0,25 |
 
-Treinta y una veces más rápido, y 0,11 ns está por debajo del coste de una sola predicción errónea de salto: el método se ha disuelto prácticamente dentro de quien lo llama. Ninguna de las dos versiones asigna memoria.
+**Cuatro veces, no treinta.** Este es el miembro cuya medición honesta resulta menos halagüeña, y merece detenerse en él: el mismo par de métodos, medido llamada a llamada, anunciaba 3,25 ns frente a 0,0107 ns y un ratio de 0,003. Ninguna de las dos versiones asigna memoria. El bucle de GA sale pronto en cuanto encuentra un clúster —2.597 de los 4096 conjuntos tienen uno—, así que de media hace bastantes menos de doce iteraciones, y el predictor de saltos lo aprende.
 
 ## 2. Contar pares, y un defecto que debe sobrevivir
 
@@ -106,28 +112,33 @@ public static int IntervalClassVectorId(int set)
     var value = 0;
     for (var ic = 1; ic <= 6; ic++)
     {
+        // El bit p del AND vale 1 cuando p y p + ic están ambas en el conjunto: un bit por par
         var count = BitOperations.PopCount((uint)(set & Rotr12(set, ic)));
+
+        // El tritono es su propio complemento: el AND contó cada par por los dos extremos
         if (ic == 6) count /= 2;
+
+        // El empaquetado de GA: desplazar los dígitos un lugar en base 12 y sumar esta cuenta
         value = value * 12 + count;
     }
     return value;
 }
 ```
 
-La clase de intervalo 6 se divide entre dos porque *p* y *p + 6* nombran el mismo par visto desde ambos extremos. Y como el dominio tiene 4096 valores, todo esto puede hacerse una sola vez, al arrancar:
+Y como el dominio tiene 4096 valores, todo esto puede hacerse una sola vez, al arrancar:
 
 ```csharp
 public static readonly int[] IntervalClassVectorIds =
     [.. Enumerable.Range(0, 4096).Select(IntervalClassVectorId)];
 ```
 
-| Método | Media | Asignado | Ratio |
-|---|---|---|---|
-| `Ga` | 5.518,86 ns | 16.304 B | 1,00 |
-| `Computed` | 2,62 ns | — | 0,0005 |
-| `Table` | 0,0799 ns | — | 0,00001 |
+| Método | Los 4096 conjuntos | Por conjunto | Asignado, por conjunto | Ratio |
+|---|---|---|---|---|
+| `Ga` | 18,747 ms | 4.577 ns | 13.513 B | 1,000 |
+| `Computed` | 15,480 µs | 3,78 ns | — | 0,001 |
+| `Table` | 828,4 ns | 0,20 ns | — | 0,00004 |
 
-Dos mil veces más rápido calculando en cada llamada, sesenta y nueve mil veces desde la tabla, y dieciséis kilobytes de asignación por lectura de propiedad pasan a ser cero. Esa última cifra es la que importa en un servicio: el propio constructor estático de `PitchClassSet` construye un índice de los 4096 conjuntos por esta propiedad, y `SetClass.ToString()` la llama, de modo que cada línea de registro que nombraba una clase de conjuntos costaba 16 KB.
+**Leer esta propiedad para los 4096 conjuntos asigna 55 MB.** Mil veces más rápido calculando en cada llamada, veintidós mil desde la tabla, y la asignación baja a cero. Esa última cifra es la que importa en un servicio: el propio constructor estático de `PitchClassSet` construye un índice de los 4096 conjuntos por esta propiedad, y `SetClass.ToString()` la llama, de modo que cada línea de registro que nombraba una clase de conjuntos lo pagaba.
 
 ### La parte que convierte esto en una demostración
 
@@ -181,16 +192,19 @@ static int Mask(Key key) => key.Notes.Aggregate(0, (mask, note) => mask | 1 << n
 
 public static Key ClosestDiatonicKey(PitchClassSet set)
 {
-    // El desempate de GA: se espera que un conjunto cuya forma normal contiene la clase 3 sea menor
-    var normalForm = set.IsNormalForm ? set : set.ToNormalForm();
-    var expectMinor = normalForm.Contains(Note.Chromatic.DSharpOrEFlat.PitchClass);
+    // `Id` es una propiedad almacenada, no calculada: los doce bits del conjunto salen gratis
+    var mask = set.Id.Value;
 
-    var mask = set.Aggregate(0, (bits, pitchClass) => bits | 1 << pitchClass.Value);
+    // El desempate de GA: se espera que un conjunto cuya forma normal contiene la clase 3 sea menor.
+    // Aquí es una lectura de array, porque la sección 4 tabuló la forma normal de todos los conjuntos.
+    var expectMinor = (NormalFormMasks[mask] & (1 << 3)) != 0;
+
     var best = Keys[0];
     var bestScore = -1;
     var bestExpected = false;
     foreach (var candidate in Keys)
     {
+        // El AND deja las notas de la tonalidad que el conjunto contiene: es el `Matches.Count` de GA
         var score = BitOperations.PopCount((uint)(mask & candidate.Mask));
         var expected = candidate.IsMinor == expectMinor;
         if (score > bestScore || (score == bestScore && expected && !bestExpected))
@@ -202,12 +216,12 @@ public static Key ClosestDiatonicKey(PitchClassSet set)
 }
 ```
 
-| Método | Media | Asignado | Ratio |
-|---|---|---|---|
-| `Ga` | 68,211 µs | 175,66 KB | 1,00 |
-| `Fast` | 6,195 µs | 15,69 KB | 0,09 |
+| Método | Los 4096 conjuntos | Por conjunto | Asignado, por conjunto | Ratio |
+|---|---|---|---|---|
+| `Ga` | 279,681 ms | 68,28 µs | 175.650 B | 1,000 |
+| `Fast` | 173,2 µs | 42,3 ns | — | 0,001 |
 
-**175 kilobytes para leer una propiedad.** Once veces más rápido y once veces más ligero — y los 15,69 KB restantes no vienen de la búsqueda de tonalidad: son de `ToNormalForm()`, llamado para decidir si esperar una respuesta mayor o menor, e intacto aquí. Es el siguiente candidato.
+**175 kilobytes para leer una propiedad**, y 719 MB para leerla en cada conjunto del dominio. Mil seiscientas veces más rápido, y nada asignado.
 
 ### El empate es toda la dificultad
 
@@ -236,6 +250,96 @@ La tonalidad diatónica más cercana a la escala de do mayor es la menor, y la d
 
 La optimización reproduce todo eso, porque en eso consiste una optimización.
 
+## 4. La forma normal, que se escondía dentro de la anterior
+
+El párrafo anterior usaba `NormalFormMasks`, y es esa tabla la que hace que el `ClosestDiatonicKey` rápido no asigne nada. Antes de que existiera, la reescritura todavía llamaba a `set.ToNormalForm()`, y esa única llamada era la totalidad de los 16 KB que le quedaban.
+
+El `ToNormalForm` de GA transpone el conjunto una vez por miembro, de modo que ese miembro quede en 0, y se queda con la transposición cuya secuencia de huecos circulares tiene el menor *hueco mayor menos hueco menor*, resolviendo los empates lexicográficamente sobre los huecos. Conviene releerlo, porque **no** es la forma normal de los manuales, que minimiza la amplitud de la primera clase de altura a la última; los propios comentarios de GA lo dicen. La reescritura debe reproducir la regla de GA, no la de los libros.
+
+El coste no es la regla, es de qué está hecha la regla — un `ImmutableSortedSet` por rotación, dos `ImmutableArray` de huecos por comparación, una `List<PitchClass>` para el que va ganando y un `PitchClassSet` para la respuesta. Una transposición es una rotación y los huecos se leen en los bits, así que todo cabe en dos búferes de pila:
+
+```csharp
+public static int NormalFormMask(int set)
+{
+    if (set == 0) return 0;
+
+    Span<int> gaps = stackalloc int[12];
+    Span<int> bestGaps = stackalloc int[12];
+    var count = BitOperations.PopCount((uint)set);
+    var best = 0;
+    var bestSpan = int.MaxValue;
+
+    // Ascendente, porque GA enumera un ImmutableSortedSet y conserva la rotación que vio primero
+    for (var member = 0; member < 12; member++)
+    {
+        if ((set & (1 << member)) == 0) continue;
+
+        // Transponer para que este miembro caiga en 0 es rotar el conjunto `member` posiciones hacia abajo
+        var rotation = Rotr12(set, member);
+        Gaps(rotation, count, gaps);
+        var span = Span(gaps, count);
+
+        // Una amplitud menor siempre gana; a igual amplitud, la secuencia de huecos menor
+        if (span > bestSpan) continue;
+        if (span == bestSpan && !MoreCompact(gaps, bestGaps, count)) continue;
+
+        best = rotation;
+        bestSpan = span;
+        gaps[..count].CopyTo(bestGaps);
+    }
+
+    return best;
+}
+```
+
+Hay un detalle que merece conservarse aunque no cambie nada. GA mide cada hueco como `(pitchClasses[(i + 1) % n] - pitchClasses[i])`, así que para un conjunto de una sola nota el único hueco es la distancia del miembro a sí mismo: **0**, y no los doce semitonos que sugeriría un «hueco circular». La reescritura hace lo mismo, y la comprobación exhaustiva es lo que demuestra que la elección es gratuita: un conjunto de una nota tiene exactamente una rotación, así que nunca se hace ninguna comparación y ambas lecturas devuelven la misma respuesta para los doce. Es el tipo de cosa que conviene saber en lugar de suponer, y la única forma de saberlo es ejecutar todas las entradas.
+
+| Método | Los 4096 conjuntos | Por conjunto | Asignado, por conjunto | Ratio |
+|---|---|---|---|---|
+| `Ga` | 11,085 ms | 2.706 ns | 6.657 B | 1,000 |
+| `Computed` | 1,172 ms | 286 ns | — | 0,106 |
+| `Table` | 834,5 ns | 0,20 ns | — | 0,00008 |
+
+Fíjate en la distancia entre `Computed` y `Table` aquí. La reescritura solo es 9,5 veces más rápida que la de GA, porque a diferencia del vector de clases de intervalo sigue haciendo trabajo real en cada llamada — hasta doce rotaciones y una comparación lexicográfica. Eso es lo que hace que la tabla valga sus 16 KB: el coste no está solo en las asignaciones.
+
+```text
+== Normal form and prime form, on the same sets
+set                          GA's normal form         prime form
+major scale                  0 1 3 5 6 8 T            0 1 3 5 6 8 T
+C major triad                0 3 8                    0 3 7
+whole tone                   0 2 4 6 8 T              0 2 4 6 8 T
+chromatic aggregate          0 1 2 3 4 5 6 7 8 9 T E  0 1 2 3 4 5 6 7 8 9 T E
+```
+
+La segunda fila es la regla de GA mostrándose a las claras: la forma normal del acorde perfecto de do mayor es `0 3 8`, mientras que su forma prima es `0 3 7`. Los huecos de `0 3 8` son 3, 5, 4 —una amplitud de 2— frente a 4, 3, 5 para `0 4 7`, también amplitud 2, y `3 5 4` gana el empate lexicográfico frente a `4 3 5`. Una forma normal de manual habría respondido `0 4 7`.
+
+## 5. PrimeForm, que ya estaba bien
+
+El `PitchClassSetId.PrimeForm` de GA es el único miembro de aquí que no necesitaba replantearse. Ya es aritmética pura sobre el identificador —el menor de las doce transposiciones y de las doce transposiciones de la inversión— y no asigna nada:
+
+```csharp
+var min = Value;
+var inverse = Inverse;
+for (var i = 0; i < 12; i++)
+{
+    var t = Transpose(i).Value;
+    if (t < min) min = t;
+
+    var ti = inverse.Transpose(i).Value;
+    if (ti < min) min = ti;
+}
+```
+
+Lo que paga es el envoltorio. `Inverse` es una propiedad que ejecuta un bucle de doce iteraciones para reflejar los bits; `Transpose` se llama 24 veces, y cada llamada construye un `PitchClassSetId` mediante un constructor que comprueba el rango de su argumento. Escribir la misma aritmética sobre `int` pelados es 1,8 veces más rápido, y la tabla 415 veces:
+
+| Método | Los 4096 conjuntos | Por conjunto | Ratio |
+|---|---|---|---|
+| `Ga` | 347,4 µs | 84,8 ns | 1,000 |
+| `Computed` | 193,9 µs | 47,3 ns | 0,562 |
+| `Table` | 836,9 ns | 0,20 ns | 0,002 |
+
+Un factor de 1,8 por reescribir un método que ya era correcto es el techo honesto de «microoptimizar la aritmética», y conviene ponerlo al lado del 1.600× de la sección 3. Las grandes ganancias de este apéndice no vinieron de trucos con bits. Vinieron de eliminar trabajo que nunca hizo falta: un diccionario que nadie lee, un producto cartesiano construido para contar seis números, un conjunto ordenado por rotación.
+
 ## Lo que imprime la comprobación exhaustiva
 
 ```text
@@ -244,10 +348,12 @@ member                       agree              verdict
 IsClusterFree                4096/4096          identical
 IntervalClassVector.Id       4096/4096          identical
 ClosestDiatonicKey           4096/4096          identical
+ToNormalForm                 4096/4096          identical
+PrimeForm                    4096/4096          identical
 sets with no chromatic cluster: 1499 of 4096
 ```
 
-Tres líneas, y son la razón por la que se pueden citar los tiempos anteriores. `ClosestDiatonicKey` se compara por la forma de *texto* de la tonalidad y no por igualdad de record, para que un cambio en cómo `Key` se compara consigo misma no pueda ocultar una diferencia.
+Cinco líneas, y son la razón por la que se pueden citar los tiempos anteriores. `ClosestDiatonicKey` se compara por la forma de *texto* de la tonalidad y no por igualdad de record, para que un cambio en cómo `Key` se compara consigo misma no pueda ocultar una diferencia.
 
 ## Las mediciones
 
@@ -261,9 +367,42 @@ Intel Core Ultra 9 285K 3.70GHz, 1 CPU, 24 logical and 24 physical cores
   DefaultJob : .NET 10.0.12 (10.0.12, 10.0.1226.42308), X64 RyuJIT x86-64-v3
 ```
 
-Cada método `[Benchmark]` hace exactamente una llamada, sobre la escala mayor (2741) — siete notas, el caso habitual en GA. La CI ejecuta las mismas clases con `--job Dry`, que comprueba que siguen funcionando y no mide nada, porque los tiempos de un runner compartido son ruido. Los tiempos absolutos serán distintos en tu máquina; los ratios son la afirmación.
+### El benchmark que hubo que tirar
 
-Las cifras de asignación, en cambio, no tienen nada de estadístico:
+La primera versión de estos benchmarks hacía lo evidente: una llamada por método `[Benchmark]`, sobre la escala mayor. Anunciaba esto para `IsClusterFree`:
+
+```text
+| Method | Mean      | Ratio |
+| Ga     | 3.2472 ns |  1.000 |
+| Fast   | 0.0107 ns |  0.003 |
+```
+
+0,0107 ns en un procesador a 3,7 GHz es una veinticincoava parte de un ciclo. Ningún método se ejecuta en una veinticincoava parte de un ciclo. El argumento era una `const`, así que el JIT plegó la llamada entera en un literal, y lo que se estaba midiendo era el plegado.
+
+Un campo `static readonly` tampoco habría ayudado: el JIT los promueve a constantes en cuanto la compilación por niveles se estabiliza. Convertirlo en un `static int` mutable eliminó el plegado y aun así produjo 0,0474 ns con una **mediana de 0,0000 ns**: por debajo de la resolución de la técnica, porque BenchmarkDotNet resta el coste de un método vacío y no quedaba nada.
+
+Por eso cada benchmark barre el dominio entero, acumulando un valor que el JIT no puede dar por muerto:
+
+```csharp
+[Benchmark]
+public int Fast()
+{
+    var count = 0;
+    for (var id = 0; id < 4096; id++)
+    {
+        if (GaFast.IsClusterFree(id)) count++;
+    }
+    return count;
+}
+```
+
+El contador del bucle es la entrada, así que nada puede plegarse; cada método tiene milisegundos o microsegundos de trabajo real; y las columnas «por conjunto» de más arriba son la media dividida entre 4096. Que las tres filas `Table` caigan en 828,4 ns, 834,5 ns y 836,9 ns —el mismo número tres veces, para tres tablas distintas— es el suelo de la técnica: una lectura de array con comprobación de límites y una iteración de bucle, unos 0,20 ns, incluidos en cada cifra de este apéndice.
+
+Esto no es una nota al pie. El benchmark descartado habría publicado «treinta y una veces más rápido» para un miembro que lo es cuatro veces, y habría parecido más impresionante que todo lo que el apéndice encontró de verdad.
+
+### Las asignaciones
+
+Estas no tienen nada de estadístico:
 
 ```text
 # GA   IntervalClassVector.Id.Value    16,432 bytes
@@ -271,23 +410,29 @@ Las cifras de asignación, en cambio, no tienen nada de estadístico:
 # GA   IsClusterFree                        0 bytes
 # fast IsClusterFree                        0 bytes
 # GA   ClosestDiatonicKey             179,848 bytes
-# fast ClosestDiatonicKey              16,064 bytes
+# fast ClosestDiatonicKey                   0 bytes
+# GA   ToNormalForm                     8,000 bytes
+# fast NormalFormMask                       0 bytes
+# GA   PrimeForm                        1,704 bytes
+# fast PrimeFormIds[id]                     0 bytes
 ```
 
-Vienen de [`GC.GetAllocatedBytesForCurrentThread`](https://learn.microsoft.com/dotnet/api/system.gc.getallocatedbytesforcurrentthread) alrededor de una única llamada, después de una llamada de calentamiento que ha ejecutado los constructores estáticos — la técnica de la [lección 1](../01-memory-values-and-spans/). Dependen lo bastante de la máquina como para imprimirse con el prefijo `# ` y quedar fuera de la comparación, y son lo bastante estables como para merecer imprimirse. También son algo mayores que las de `[MemoryDiagnoser]`, que resta su propio sobrecoste.
+Vienen de [`GC.GetAllocatedBytesForCurrentThread`](https://learn.microsoft.com/dotnet/api/system.gc.getallocatedbytesforcurrentthread) alrededor de una única llamada, después de una llamada de calentamiento que ha ejecutado los constructores estáticos — la técnica de la [lección 1](../01-memory-values-and-spans/). Dependen lo bastante de la máquina como para imprimirse con el prefijo `# ` y quedar fuera de la comparación, y son lo bastante estables como para merecer imprimirse. Son mayores que las cifras «por conjunto» de las tablas, que son las medias de `[MemoryDiagnoser]` sobre todo el barrido con su propio sobrecoste restado; una llamada aislada, algo fría, cuesta un poco más que la media de 4096.
+
+La CI ejecuta cada clase de benchmarks con `--job Dry`, que comprueba que siguen funcionando y no mide nada, porque los tiempos de un runner compartido son ruido.
 
 ## Puntos clave
 
 - El dominio de entrada de un conjunto de 12 bits tiene 4096 valores. Cuando el dominio es así de pequeño, «lo he probado» debería significar *entero*, y esa prueba pertenece a la CI, junto al benchmark.
-- Una reescritura que devuelve otra respuesta no es la versión rápida de nada. El acarreo en base 12 de GA es un defecto real, y la versión rápida lo reproduce exactamente; corregirlo es un cambio aparte, con su propio radio de impacto.
-- Los ordenamientos estables sostienen la estructura. `OrderByDescending(…).ThenByDescending(…).First()` esconde un desempate en el *orden de entrada*, y a un bucle escrito a mano hay que contárselo.
+- Una reescritura que devuelve otra respuesta no es la versión rápida de nada. El acarreo en base 12 de GA es un defecto real y la versión rápida lo reproduce; el hueco nulo de un conjunto de una sola nota, también.
+- **Mide tu medición.** Una cifra por debajo del ciclo no es un resultado, es un error en la medición: un argumento `const` o `static readonly` se pliega, y la resta del sobrecoste de BenchmarkDotNet se lleva el resto. Barre un dominio, acumula un resultado y divide.
+- Las grandes ganancias vinieron de eliminar trabajo, no de trucos con bits: un diccionario cuyos valores nunca se leen, un producto cartesiano construido para contar seis números, un conjunto ordenado por rotación. Reescribir aritmética que ya era correcta dio 1,8×.
 - Una propiedad sin caché es un método con un nombre engañoso. `IntervalClassVector` y `Key.Items` reconstruyen todo en cada acceso, y ambas se leen dentro de bucles en otras partes de GA.
-- La cifra que destaca aquí no es un tiempo, son 175 KB de asignación para leer una propiedad — y no hizo falta ningún perfilador para encontrarla, solo leer un método que llena un diccionario y luego ignora sus valores.
 
 ## Fuentes
 
 - BenchmarkDotNet: [cómo funciona](https://benchmarkdotnet.org/articles/guides/how-it-works.html), [buenas prácticas](https://benchmarkdotnet.org/articles/guides/good-practices.html).
-- Microsoft Learn: [`BitOperations.PopCount`](https://learn.microsoft.com/dotnet/api/system.numerics.bitoperations.popcount), [`GC.GetAllocatedBytesForCurrentThread`](https://learn.microsoft.com/dotnet/api/system.gc.getallocatedbytesforcurrentthread), [`Enumerable.OrderByDescending`](https://learn.microsoft.com/dotnet/api/system.linq.enumerable.orderbydescending), [`BigInteger`](https://learn.microsoft.com/dotnet/api/system.numerics.biginteger).
-- Guitar Alchemist en el commit `a826864`: [`PitchClassSetId.cs`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Atonal/PitchClassSetId.cs#L42-L57), [`PitchClassSet.cs`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Atonal/PitchClassSet.cs#L597-L658), [`AtonalExtensions.cs`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Atonal/AtonalExtensions.cs#L28-L35), [`VariationsWithRepetitions.cs`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Core/Combinatorics/VariationsWithRepetitions.cs#L55-L73), [`IntervalClassVector.cs`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Atonal/IntervalClassVector.cs), [`Key.cs`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/Key.cs#L49-L50).
+- Microsoft Learn: [`BitOperations.PopCount`](https://learn.microsoft.com/dotnet/api/system.numerics.bitoperations.popcount), [`GC.GetAllocatedBytesForCurrentThread`](https://learn.microsoft.com/dotnet/api/system.gc.getallocatedbytesforcurrentthread), [`Enumerable.OrderByDescending`](https://learn.microsoft.com/dotnet/api/system.linq.enumerable.orderbydescending), [`BigInteger`](https://learn.microsoft.com/dotnet/api/system.numerics.biginteger), [`stackalloc`](https://learn.microsoft.com/dotnet/csharp/language-reference/operators/stackalloc).
+- Guitar Alchemist en el commit `a826864`: [`PitchClassSetId.cs`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Atonal/PitchClassSetId.cs#L42-L57) y su [`PrimeForm`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Atonal/PitchClassSetId.cs#L133-L156), [`PitchClassSet.ToNormalForm`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Atonal/PitchClassSet.cs#L412-L475) y [`FindClosestDiatonicKey2`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Atonal/PitchClassSet.cs#L597-L658), [`AtonalExtensions.cs`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Atonal/AtonalExtensions.cs#L28-L35), [`VariationsWithRepetitions.cs`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Core/Combinatorics/VariationsWithRepetitions.cs#L55-L73), [`Key.cs`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/Key.cs#L49-L50).
 - El código del curso: [`GaFast.cs`](https://github.com/spareilleux/learn/blob/main/code/csharp-advanced/Advanced/GaFast.cs), [`Appendix1.cs`](https://github.com/spareilleux/learn/blob/main/code/csharp-advanced/Advanced/Appendix1.cs), [`GaBenchmarks.cs`](https://github.com/spareilleux/learn/blob/main/code/csharp-advanced/Benchmarks/GaBenchmarks.cs), [`expected/a1.txt`](https://github.com/spareilleux/learn/blob/main/code/csharp-advanced/expected/a1.txt).
 - El mismo código leído como música y no como rendimiento: [Teoría musical para Guitar Alchemist](../../music-theory-ga/), en particular la [lección 4](../../music-theory-ga/04-set-classes/), la [lección 7](../../music-theory-ga/07-cadences-and-progressions/) y [su apéndice C](../../music-theory-ga/appendix-ga-findings/).

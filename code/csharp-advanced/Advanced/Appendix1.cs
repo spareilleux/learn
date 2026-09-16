@@ -14,12 +14,17 @@ public static class Appendix1
     static void Row(string label, object? first, object? second = null) =>
         Line($"{label,-28} {first,-18} {second}".TrimEnd());
 
+    // The chromatic aggregate spelled out is 23 characters, so its table gets a wider first column
+    static void WideRow(string label, object? first, object? second = null) =>
+        Line($"{label,-28} {first,-24} {second}".TrimEnd());
+
     public static void Run()
     {
         Title("Exhaustive check: all 4096 twelve-bit pitch-class sets");
         Row("member", "agree", "verdict");
 
         int clusterFree = 0, clusterAgree = 0, icvAgree = 0, firstIcv = -1;
+        int normalAgree = 0, firstNormal = -1, primeAgree = 0, firstPrime = -1;
         for (var id = 0; id < 4096; id++)
         {
             var ga = PitchClassSetId.FromValue(id);
@@ -27,6 +32,14 @@ public static class Appendix1
             if (ga.IsClusterFree == GaFast.IsClusterFree(id)) clusterAgree++;
             if (Set(id).IntervalClassVector.Id.Value == GaFast.IntervalClassVectorIds[id]) icvAgree++;
             else if (firstIcv < 0) firstIcv = id;
+
+            // The normal form is compared as a set of pitch classes, folded back to twelve bits,
+            // because that is all `ClosestDiatonicKey` reads out of it
+            if (Set(id).ToNormalForm().Id.Value == GaFast.NormalFormMasks[id]) normalAgree++;
+            else if (firstNormal < 0) firstNormal = id;
+
+            if (ga.PrimeForm.Value == GaFast.PrimeFormIds[id]) primeAgree++;
+            else if (firstPrime < 0) firstPrime = id;
         }
 
         int keyAgree = 0, firstKey = -1;
@@ -40,6 +53,8 @@ public static class Appendix1
         Row("IsClusterFree", $"{clusterAgree}/4096", clusterAgree == 4096 ? "identical" : "differs");
         Row("IntervalClassVector.Id", $"{icvAgree}/4096", icvAgree == 4096 ? "identical" : $"differs first at {firstIcv}");
         Row("ClosestDiatonicKey", $"{keyAgree}/4096", keyAgree == 4096 ? "identical" : $"differs first at {firstKey}");
+        Row("ToNormalForm", $"{normalAgree}/4096", normalAgree == 4096 ? "identical" : $"differs first at {firstNormal}");
+        Row("PrimeForm", $"{primeAgree}/4096", primeAgree == 4096 ? "identical" : $"differs first at {firstPrime}");
         Line($"sets with no chromatic cluster: {clusterFree} of 4096");
 
         Title("The defect the fast version has to keep, not fix");
@@ -65,6 +80,10 @@ public static class Appendix1
         Machine($"fast IsClusterFree                 {Allocated(() => _ = GaFast.IsClusterFree(2741)),8:N0} bytes");
         Machine($"GA   ClosestDiatonicKey            {Allocated(() => _ = one.ClosestDiatonicKey),8:N0} bytes");
         Machine($"fast ClosestDiatonicKey            {Allocated(() => _ = GaFast.ClosestDiatonicKey(one)),8:N0} bytes");
+        Machine($"GA   ToNormalForm                  {Allocated(() => _ = one.ToNormalForm()),8:N0} bytes");
+        Machine($"fast NormalFormMask                {Allocated(() => _ = GaFast.NormalFormMask(2741)),8:N0} bytes");
+        Machine($"GA   PrimeForm                     {Allocated(() => _ = one.PrimeForm),8:N0} bytes");
+        Machine($"fast PrimeFormIds[id]              {Allocated(() => _ = GaFast.PrimeFormIds[2741]),8:N0} bytes");
 
         Title("A few sets, so the tables above are readable");
         Row("set", "interval-class vector", "closest key, cluster-free");
@@ -72,6 +91,15 @@ public static class Appendix1
         {
             var set = Set(id);
             Row(name, $"{id}: {set.IntervalClassVector}", $"{set.ClosestDiatonicKey}, {GaFast.IsClusterFree(id)}");
+        }
+
+        // GA's normal form minimises (largest gap - smallest gap), not the span from the first
+        // pitch class to the last, so it does not always agree with the textbook normal form
+        Title("Normal form and prime form, on the same sets");
+        WideRow("set", "GA's normal form", "prime form");
+        foreach (var (name, id) in new[] { ("major scale", 2741), ("C major triad", 145), ("whole tone", 1365), ("chromatic aggregate", 4095) })
+        {
+            WideRow(name, Set(GaFast.NormalFormMasks[id]).ToString(), Set(GaFast.PrimeFormIds[id]).ToString());
         }
     }
 }
