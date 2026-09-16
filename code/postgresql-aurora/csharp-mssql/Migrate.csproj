@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Lesson 13, apart from csharp/: Microsoft.Data.SqlClient refuses to open a connection in invariant globalization
+       mode, which the course's other programs use -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>14</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>Learn.Pg</RootNamespace>
+    <AssemblyName>migrate</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="../csharp/Db.cs" Link="Db.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="7.0.3" />
+    <PackageReference Include="Npgsql" Version="10.0.3" />
+  </ItemGroup>
+
+</Project>

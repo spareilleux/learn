@@ -1,0 +1,21 @@
+CREATE VIEW
+               name               |    workflow_name     | seconds 
+----------------------------------+----------------------+---------
+ java-for-csharp (windows-latest) | Java course examples |     284
+ java-for-csharp (macos-latest)   | Java course examples |     270
+ java-for-csharp (windows-latest) | Java course examples |     270
+ java-for-csharp (windows-latest) | Java course examples |     255
+ java-for-csharp (windows-latest) | Java course examples |     254
+(5 rows)
+
+    configuration     | instances | storage |  io   |  month  
+----------------------+-----------+---------+-------+---------
+ Aurora Standard      |   402.960 |   10.00 | 60.00 | 472.960
+ Aurora I/O-Optimized |   524.140 |  22.500 |  0.00 | 546.640
+(2 rows)
+
+ million_ios 
+-------------
+         668
+(1 row)
+

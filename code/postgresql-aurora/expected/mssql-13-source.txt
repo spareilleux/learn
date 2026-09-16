@@ -1,0 +1,67 @@
+Changed database context to 'master'.
+Changed database context to 'ci'.
+collation
+---------
+SQL_Latin1_General_CP1_CI_AS
+table|rows
+-----|----
+Runs|125
+Jobs|315
+JobLabels|315
+Steps|2204
+Notes|3
+NoteId|WrittenAt|WrittenLocal
+------|---------|------------
+1|2026-09-14 14:05:00.000|2026-09-14 16:05:00.1234567 +02:00
+2|2026-09-14 14:06:00.007|2026-09-14 10:06:00.9999999 -04:00
+3|2026-09-14 14:07:00.997|2026-09-14 14:07:00.0000000 +00:00
+authors|= 'reviewer'
+-------|------------
+1|3
+error|message
+-----|-------
+2627|Violation of UNIQUE KEY constraint 'UQ_Notes_Tag'. Cannot insert duplicate key in object 'dbo.Notes'. The duplicate key value is (SLOW).
+error|message
+-----|-------
+2627|Violation of UNIQUE KEY constraint 'UQ_Notes_Tag'. Cannot insert duplicate key in object 'dbo.Notes'. The duplicate key value is (<NULL>).
+NoteGuid|Cost
+--------|----
+01000000-0000-0000-0000-000000000000|3.5000
+00000000-0000-0000-0000-000000000001|NULL
+6F9619FF-8B86-D011-B42D-00C04FC964FF|.0125
+NoteId|Cost
+------|----
+2|NULL
+1|.0125
+3|3.5000
+NoteId|plus|concat|tag
+------|----|------|---
+1|Slow: Deploy took 2.5 minutes|Slow: Deploy took 2.5 minutes|Slow
+2|NULL|: Looks fine now|none
+message|xact_state
+-------|----------
+Violation of PRIMARY KEY constraint 'PK_JobLabels'. Cannot insert duplicate key in object 'dbo.JobLabels'. The duplicate key value is (104004920113, ubuntu-latest).|1
+Label
+-----
+linux
+self-hosted
+ubuntu-latest
+xact_state
+----------
+-1
+labels
+------
+1
+Name|WorkflowName|Seconds
+----|------------|-------
+java-for-csharp (windows-latest)|Java course examples|284
+java-for-csharp (macos-latest)|Java course examples|270
+java-for-csharp (windows-latest)|Java course examples|270
+java-for-csharp (windows-latest)|Java course examples|255
+java-for-csharp (windows-latest)|Java course examples|254
+NoteId
+------
+6
+ident_current|max_note_id
+-------------|-----------
+6|3

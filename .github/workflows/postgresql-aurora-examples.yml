@@ -1,5 +1,6 @@
-# PostgreSQL and Aurora course: run the SQL scripts with psql, the replication and backup scripts of ops/, and the C# and
-# Java programs against PostgreSQL on Linux, and build the programs on Windows and macOS. GitHub's Windows and macOS
+# PostgreSQL and Aurora course: run the SQL scripts with psql, the replication and backup scripts of ops/, the C# and
+# Java programs, and lesson 13's migration from SQL Server against PostgreSQL on Linux, and build the programs on Windows
+# and macOS. GitHub's Windows and macOS
 # runners have no Docker, so there is no server to run them against there.
 name: PostgreSQL and Aurora course examples
 
@@ -44,6 +45,15 @@ jobs:
           --health-interval 2s
           --health-timeout 5s
           --health-retries 30
+      # Lesson 13: the SQL Server database to migrate; mssql.sh wait checks that it accepts logins
+      mssql:
+        image: mcr.microsoft.com/mssql/server:2025-CU9-ubuntu-24.04
+        env:
+          ACCEPT_EULA: 'Y'
+          MSSQL_SA_PASSWORD: 'Learn-2026!'
+          MSSQL_MEMORY_LIMIT_MB: 2048
+        ports:
+          - 1433:1433
     defaults:
       run:
         shell: bash
@@ -70,6 +80,12 @@ jobs:
         env:
           PG_CONTAINER: ${{ job.services.pgvector.id }}
         run: bash check.sh pgvector
+      - name: The migration from SQL Server
+        if: success() || failure()
+        env:
+          PG_CONTAINER: ${{ job.services.postgres.id }}
+          MS_CONTAINER: ${{ job.services.mssql.id }}
+        run: bash mssql.sh wait && bash check.sh mssql
       - name: Server log
         if: failure()
         run: docker logs --tail 200 ${{ job.services.postgres.id }}

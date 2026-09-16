@@ -1,0 +1,111 @@
+SET
+DROP SCHEMA
+CREATE SCHEMA
+CREATE COLLATION
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+RESET
+INSERT 0 3
+ERROR:  duplicate key value violates unique constraint "notes_pkey"
+DETAIL:  Key (note_id)=(1) already exists.
+ALTER TABLE
+ note_id 
+---------
+       7
+(1 row)
+
+INSERT 0 1
+ note_id |       written_at        |         written_local         
+---------+-------------------------+-------------------------------
+       1 | 2026-09-14 14:05:00     | 2026-09-14 14:05:00.123456+00
+       2 | 2026-09-14 14:06:00.007 | 2026-09-14 14:06:00.999999+00
+       3 | 2026-09-14 14:07:00.997 | 2026-09-14 14:07:00+00
+       7 | 2026-09-16 00:00:00     | 2026-09-16 00:00:00+00
+(4 rows)
+
+ authors | = 'reviewer' 
+---------+--------------
+       2 |            3
+(1 row)
+
+ authors 
+---------
+       3
+(1 row)
+
+ authors 
+---------
+       1
+(1 row)
+
+ note_id |  author   
+---------+-----------
+       1 | Reviewer
+       2 | reviewer 
+       3 | REVIEWER
+       7 | Reviewer
+(4 rows)
+
+ERROR:  duplicate key value violates unique constraint "notes_tag_key"
+DETAIL:  Key (tag)=(SLOW) already exists.
+ERROR:  duplicate key value violates unique constraint "notes_tag_key"
+DETAIL:  Key (tag)=(null) already exists.
+              note_guid               |  cost  
+--------------------------------------+--------
+ 00000000-0000-0000-0000-000000000001 |       
+ 01000000-0000-0000-0000-000000000000 | 3.5000
+ 6f9619ff-8b86-d011-b42d-00c04fc964ff | 0.0125
+ 70000000-0000-0000-0000-000000000000 |       
+(4 rows)
+
+ note_id |  cost  
+---------+--------
+       1 | 0.0125
+       3 | 3.5000
+       2 |       
+       7 |       
+(4 rows)
+
+ note_id |  cost  
+---------+--------
+       2 |       
+       7 |       
+       1 | 0.0125
+       3 | 3.5000
+(4 rows)
+
+ note_id |             plus              |            concat             | tag  
+---------+-------------------------------+-------------------------------+------
+       1 | Slow: Deploy took 2.5 minutes | Slow: Deploy took 2.5 minutes | Slow
+       2 |                               | : Looks fine now              | none
+(2 rows)
+
+BEGIN
+INSERT 0 1
+ERROR:  duplicate key value violates unique constraint "notes_tag_key"
+DETAIL:  Key (tag)=(Retry) already exists.
+ERROR:  current transaction is aborted, commands ignored until end of transaction block
+ROLLBACK
+ kept 
+------
+    0
+(1 row)
+
+BEGIN
+INSERT 0 1
+SAVEPOINT
+ERROR:  duplicate key value violates unique constraint "notes_tag_key"
+DETAIL:  Key (tag)=(Retry) already exists.
+ROLLBACK
+COMMIT
+ kept 
+------
+    1
+(1 row)
+
+CREATE FUNCTION
+ERROR:  Unknown run
+CONTEXT:  PL/pgSQL function migrated.add_note(bigint,character varying,text,character varying) line 6 at RAISE

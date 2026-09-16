@@ -1,0 +1,40 @@
+ table_name |                                                                                                                  columns                                                                                                                   
+------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ joblabels  | jobid bigint, label text
+ jobs       | jobid bigint, runid bigint, name text, conclusion text, runnername text, startedat timestamp with time zone, completedat timestamp with time zone, rowver bytea
+ notes      | noteid integer default nextval('dbo.notes_noteid_seq'::regclass), noteguid uuid, runid bigint, author text, tag text, body text, cost numeric, writtenat timestamp with time zone, writtenlocal timestamp with time zone
+ runs       | runid bigint, workflowname text, event text, conclusion text, headbranch text, headsha text, attempt smallint, createdat timestamp with time zone, startedat timestamp with time zone, updatedat timestamp with time zone, isrerun boolean
+ steps      | jobid bigint, number smallint, name text, conclusion text, startedat timestamp with time zone, completedat timestamp with time zone
+(5 rows)
+
+ noteid |  author   | cost |         writtenat          |         writtenlocal          
+--------+-----------+------+----------------------------+-------------------------------
+      1 | Reviewer  | 0.01 | 2026-09-14 14:05:00+00     | 2026-09-14 14:05:00.123457+00
+      2 | reviewer  |      | 2026-09-14 14:06:00.007+00 | 2026-09-14 14:06:01+00
+      3 | REVIEWER  | 3.50 | 2026-09-14 14:07:00.997+00 | 2026-09-14 14:07:00+00
+(3 rows)
+
+ last_value 
+------------
+          3
+(1 row)
+
+ contype | count 
+---------+-------
+ f       |     4
+ n       |    28
+ p       |     5
+(3 rows)
+
+                                    index                                     
+------------------------------------------------------------------------------
+ CREATE INDEX ix_jobs_runid ON dbo.jobs USING btree (runid, conclusion)
+ CREATE UNIQUE INDEX pk_joblabels ON dbo.joblabels USING btree (jobid, label)
+ CREATE UNIQUE INDEX pk__jobs ON dbo.jobs USING btree (jobid)
+ CREATE UNIQUE INDEX pk__notes ON dbo.notes USING btree (noteid)
+ CREATE UNIQUE INDEX pk__runs ON dbo.runs USING btree (runid)
+ CREATE UNIQUE INDEX pk__steps ON dbo.steps USING btree (jobid, number)
+ CREATE UNIQUE INDEX uq__notes ON dbo.notes USING btree (noteguid)
+ CREATE UNIQUE INDEX uq_notes_tag ON dbo.notes USING btree (tag)
+(8 rows)
+

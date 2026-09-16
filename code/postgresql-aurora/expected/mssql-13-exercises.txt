@@ -1,0 +1,25 @@
+Changed database context to 'ci'.
+table|column|type|scale|is_computed|is_identity
+-----|------|----|-----|-----------|-----------
+Jobs|StartedAt|datetime2|7|0|0
+Jobs|CompletedAt|datetime2|7|0|0
+Jobs|RowVer|timestamp|0|0|0
+Notes|NoteId|int|0|0|1
+Notes|NoteGuid|uniqueidentifier|0|0|0
+Notes|Cost|money|4|0|0
+Notes|WrittenAt|datetime|3|0|0
+Notes|WrittenLocal|datetimeoffset|7|0|0
+Runs|Attempt|tinyint|0|0|0
+Runs|CreatedAt|datetime2|0|0|0
+Runs|StartedAt|datetime|3|0|0
+Runs|UpdatedAt|datetimeoffset|7|0|0
+Runs|IsRerun|bit|0|1|0
+Steps|StartedAt|datetime2|0|0|0
+Steps|CompletedAt|datetime2|0|0|0
+table|column|collation_name
+-----|------|--------------
+author|notes
+------|-----
+REVIEWER|1
+Reviewer|1
+reviewer |1

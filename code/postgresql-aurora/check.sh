@@ -5,10 +5,11 @@
 #   bash check.sh sql        runs the SQL scripts only, except those that need pgvector
 #   bash check.sh pgvector   runs sql/*-pgvector*.sql, on a server started with PG_IMAGE=pgvector/pgvector:0.8.6-pg18-trixie
 #   bash check.sh ops        runs the shell scripts of lessons 10 and 11 (replication, backups, pg_upgrade) in the container
+#   bash check.sh mssql      lesson 13: the SQL Server scripts, pgloader and the C# migration; SQL Server must be up (bash mssql.sh start)
 #   bash check.sh programs   runs the C# and Java programs only (already built)
 #   bash check.sh            builds, runs the SQL scripts, the ops scripts and the programs; the server must be up (bash server.sh start)
 #   UPDATE=1 bash check.sh   writes the outputs to expected/ instead of comparing (review the diff before committing)
-# PG_CONTAINER and ENGINE are passed on to server.sh; PG_CONNECTION (C#) and PG_JDBC_URL (Java) override where the programs connect.
+# PG_CONTAINER and ENGINE are passed on to server.sh, MS_CONTAINER to mssql.sh; PG_CONNECTION (C#) and PG_JDBC_URL (Java) override where the programs connect.
 set -uo pipefail
 cd "$(dirname "$0")"
 MVN=${MVN:-mvn}
@@ -41,6 +42,7 @@ reset() {
 
 build() {
   dotnet build csharp -c Release -m:1 --nologo -v quiet "-clp:ErrorsOnly;NoSummary" || exit 1
+  dotnet build csharp-mssql -c Release -m:1 --nologo -v quiet "-clp:ErrorsOnly;NoSummary" || exit 1
   $MVN -B -q -f java/pom.xml package || exit 1
 }
 
@@ -140,11 +142,40 @@ run_programs() {
   cs l04-timings
 }
 
+# Lesson 13: SQL Server in its own container, then the same database migrated to PostgreSQL twice, by pgloader and by
+# the C# program. pgloader's own output has timings (not compared); what it created is.
+PGLOADER=ghcr.io/dimitri/pgloader@sha256:a1d4a78e78a64e46cd3fc7dfc57d24eb91ffb1a5520f2b1f55631815e3658d6e
+migrate() { dotnet csharp-mssql/bin/Release/net10.0/migrate.dll "$@"; }
+
+run_mssql() {
+  bash mssql.sh copy || exit 1
+  bash server.sh copy || exit 1
+  # The source database first: the exercises query it
+  for script in 13-source.sql 13-exercises.sql; do
+    name=mssql-$(basename "$script" .sql)
+    bash mssql.sh sqlcmd "$script" > "out/$name.txt"
+    compare "$name"
+  done
+  psql_quiet -d postgres -c "DROP DATABASE IF EXISTS pgloader WITH (FORCE)"
+  psql_quiet -d postgres -c "CREATE DATABASE pgloader"
+  if ! ${ENGINE:-docker} run --rm --add-host=host.docker.internal:host-gateway "$PGLOADER" pgloader       'mssql://sa:Learn-2026!@host.docker.internal:1433/ci'       'postgresql://postgres:learn@host.docker.internal:5432/pgloader' > out/pgloader.txt 2>&1; then
+    echo "FAIL pgloader (out/pgloader.txt)"
+    status=1
+  fi
+  bash server.sh psql -d pgloader < sql/pgloader-check.sql > out/13-pgloader.txt 2>&1
+  compare 13-pgloader
+  reset
+  psql_quiet -d postgres -c "CREATE DATABASE learn"
+  step l13-migrate-cs migrate l13-migrate
+  step l13-validate-cs migrate l13-validate
+}
+
 case $what in
   build) build ;;
   sql) run_sql other ;;
   pgvector) run_sql pgvector ;;
   ops) run_ops ;;
+  mssql) run_mssql ;;
   programs) run_programs ;;
   all)
     build
@@ -153,7 +184,7 @@ case $what in
     run_programs
     ;;
   *)
-    echo "usage: bash check.sh [build|sql|pgvector|ops|programs]" >&2
+    echo "usage: bash check.sh [build|sql|pgvector|ops|mssql|programs]" >&2
     exit 2
     ;;
 esac
