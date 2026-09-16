@@ -112,6 +112,12 @@ export default defineConfig({
 									collapsed: true,
 									items: [{ autogenerate: { directory: 'react-vite' } }],
 								},
+								{
+									label: 'three.js for C#/Java developers',
+									translations: { fr: 'three.js pour développeurs C#/Java', es: 'three.js para desarrolladores C#/Java' },
+									collapsed: true,
+									items: [{ autogenerate: { directory: 'threejs' } }],
+								},
 							],
 						},
 						{

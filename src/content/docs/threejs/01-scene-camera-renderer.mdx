@@ -1,0 +1,438 @@
+---
+title: 1. Scene, camera, renderer
+description: The three objects of every three.js page — a WebGPURenderer that falls back to WebGL 2, a scene graph and a perspective camera — the animation loop, resizing, what renderer.info counts, and what the renderer costs in the bundle, measured in headless Chromium and compared with WPF 3D, MonoGame and JavaFX 3D.
+sidebar:
+  order: 1
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import cubeShot from '../../../assets/threejs/l01-cube.webp';
+
+Code: the lesson's page [`src/01-scene/main.ts`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/src/01-scene/main.ts), the same cube with the older renderer in [`src/01-scene-webgl/main.ts`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/src/01-scene-webgl/main.ts), the scene graph without a renderer in [`scripts/l01-scene-graph.ts`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/scripts/l01-scene-graph.ts), and the probe that opens a page in headless Chromium and prints what it reports, [`scripts/probe.mjs`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/scripts/probe.mjs).
+
+## What three.js is, for a WPF, MonoGame or JavaFX developer
+
+[three.js](https://threejs.org/) is a JavaScript library that draws 3D scenes into a `<canvas>` element. It sits where WPF's retained 3D layer sits, above the GPU API: you describe objects, a camera and lights, and the library turns them into GPU buffers, shaders and draw calls. Under it, the browser offers two GPU APIs: [WebGL 2](https://registry.khronos.org/webgl/specs/latest/2.0/), based on OpenGL ES 3.0, and [WebGPU](https://gpuweb.github.io/gpuweb/), a newer API designed to run on top of Direct3D 12, Metal and Vulkan.
+
+| | WPF 3D | MonoGame | JavaFX 3D | three.js |
+|---|---|---|---|---|
+| The surface | [`Viewport3D`](https://learn.microsoft.com/dotnet/api/system.windows.controls.viewport3d) in the visual tree | the window of a [`Game`](https://docs.monogame.net/api/Microsoft.Xna.Framework.Game.html) | [`SubScene`](https://openjfx.io/javadoc/25/javafx.graphics/javafx/scene/SubScene.html) in the scene graph | a `<canvas>` that the renderer creates |
+| What draws | WPF's composition engine | your `Draw` method, through `GraphicsDevice` | Prism, JavaFX's graphics pipeline | a renderer object: `WebGPURenderer` or `WebGLRenderer` |
+| The camera | [`PerspectiveCamera`](https://learn.microsoft.com/dotnet/api/system.windows.media.media3d.perspectivecamera), horizontal field of view | a projection matrix you build | [`PerspectiveCamera`](https://openjfx.io/javadoc/25/javafx.graphics/javafx/scene/PerspectiveCamera.html), vertical field of view by default | `PerspectiveCamera`, vertical field of view |
+| When it draws | when something changes | every frame, from the game loop | every pulse | every frame that your loop renders |
+| Axes | right-handed, Y up | right-handed, Y up | Y down | right-handed, Y up |
+
+The last line matters when you port code. The [WPF documentation](https://learn.microsoft.com/dotnet/desktop/wpf/graphics-multimedia/3-d-graphics-overview#3d-coordinate-space) describes the same axes as three.js: X to the right, Y up, and Z toward the viewer. MonoGame's [`Matrix`](https://docs.monogame.net/api/Microsoft.Xna.Framework.Matrix.html) is right-handed too. JavaFX 3D keeps its 2D convention, with [the Y axis pointing down](https://openjfx.io/javadoc/25/javafx.graphics/javafx/scene/PerspectiveCamera.html).
+
+The versions are the current ones on 16 September 2026: three.js **r186**, published on npm as `three` 0.186.0, with the type declarations of [`@types/three`](https://www.npmjs.com/package/@types/three) 0.186.0, served and bundled by [Vite](https://vite.dev/) 8.3.0 and checked with TypeScript 7.0.2. three.js numbers its releases: r186 is the 186th, and in 2026 a new one came out every two or three months. The API changes between them, and the [migration guide](https://github.com/mrdoob/three.js/wiki/Migration-Guide) lists what breaks.
+
+## Running the course's scenes
+
+The course's project in `code/threejs` has one HTML page per scene. Vite serves them during development and bundles them for production, as in the [React (Vite) course](../../react-vite/01-vite-project/). [Playwright](https://playwright.dev/) opens them in headless Chromium for `check.sh`, which needs a Chromium build of its own.
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+```powershell
+Set-Location code\threejs
+npm ci
+npx playwright install chromium chromium-headless-shell
+npm run dev
+# check.sh is a Bash script: run it from Git Bash
+bash check.sh
+```
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```bash
+cd code/threejs
+npm ci
+# --with-deps also installs the system libraries that Chromium needs (sudo)
+npx playwright install --with-deps chromium chromium-headless-shell
+npm run dev
+bash check.sh
+```
+
+</TabItem>
+<TabItem label="macOS">
+
+```bash
+cd code/threejs
+npm ci
+npx playwright install chromium chromium-headless-shell
+npm run dev
+bash check.sh
+```
+
+</TabItem>
+</Tabs>
+
+`npm run dev` serves the pages on port 5188: open `http://localhost:5188/01-scene.html`. To start a project of your own, `three` is an ordinary npm package, and `@types/three` gives TypeScript its types:
+
+```bash
+npm install three@0.186.0
+npm install --save-dev @types/three@0.186.0
+```
+
+## Three objects: a renderer, a scene and a camera
+
+Every three.js page creates the same three objects. Here is the start of the lesson's page ([`src/01-scene/main.ts`, lines 1-21](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/src/01-scene/main.ts#L1-L21)); the `probe.ts` module it imports is the course's test hook, described below:
+
+```ts
+// Lesson 1: a scene, a camera, a renderer, an animation loop, and a canvas that follows the window
+import * as THREE from 'three/webgpu';
+import { backendName, forceWebGL, probing, report } from '../probe.ts';
+
+const renderer = new THREE.WebGPURenderer({ antialias: true, forceWebGL });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.append(renderer.domElement);
+// ?linear: write linear values to the canvas, which removes the output pass (lesson 3 explains why it exists)
+if (new URLSearchParams(location.search).has('linear')) renderer.outputColorSpace = THREE.LinearSRGBColorSpace;
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x1e2127);
+
+// 50° vertical field of view, the window's aspect ratio, and everything between 0.1 and 100 units is drawn
+const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 100);
+camera.position.set(0, 1.5, 4);
+camera.lookAt(0, 0, 0);
+
+const cube = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshNormalMaterial());
+scene.add(cube);
+```
+
+- The **renderer** owns the `<canvas>`, in `renderer.domElement`, and the GPU device. `setSize` sets the canvas's size in CSS pixels, and `setPixelRatio` multiplies it for the drawing buffer: on a screen at 200 %, a 800 by 450 canvas draws 1600 by 900 pixels. The course caps the ratio at 2, because each step up multiplies the pixels to shade.
+- The **scene** is the root of a tree of objects, like WPF's `Viewport3D.Children`. [`Scene`](https://threejs.org/docs/pages/Scene.html), [`Mesh`](https://threejs.org/docs/pages/Mesh.html), [`Group`](https://threejs.org/docs/pages/Group.html), the lights and the cameras all extend [`Object3D`](https://threejs.org/docs/pages/Object3D.html), which carries a position, a rotation, a scale and a list of children.
+- The **camera** is an `Object3D` too, but it doesn't need to be in the scene: `renderer.render(scene, camera)` takes both. [`PerspectiveCamera`](https://threejs.org/docs/pages/PerspectiveCamera.html) takes a vertical field of view in degrees, an aspect ratio, and the near and far distances between which objects are drawn.
+- A **mesh** is a geometry and a material. [`MeshNormalMaterial`](https://threejs.org/docs/pages/MeshNormalMaterial.html) colors each face by the direction it faces and needs no light, which makes it the "hello world" material. Lesson 2 builds real ones.
+
+<img src={cubeShot.src} width={cubeShot.width} height={cubeShot.height} alt="A cube on a dark gray background, turned so that three faces show: a light green top, a magenta front and a blue side, each colored by the direction it faces." loading="lazy" style={{ maxWidth: "100%", height: "auto" }} />
+
+The screenshot is the page's third frame, taken by `node scripts/probe.mjs 01-scene --shot out/cube.png`, with WebGPU on the author's machine.
+
+## WebGPURenderer and its fallback
+
+three.js has two renderers. [`WebGLRenderer`](https://threejs.org/docs/pages/WebGLRenderer.html), imported from `'three'`, has been the renderer for more than a decade. [`WebGPURenderer`](https://threejs.org/docs/pages/WebGPURenderer.html), imported from `'three/webgpu'`, is the new one: it talks to WebGPU when the browser offers it, and to WebGL 2 otherwise. The [WebGPURenderer page of the manual](https://threejs.org/manual/pages/webgpurenderer.html) calls it the "next-generation renderer", still in an experimental state, and says that `WebGLRenderer` stays maintained without large new features, since the project's focus is on `WebGPURenderer`. The course uses `WebGPURenderer` from the first lesson: the node materials of lesson 6 and the post-processing of lesson 7 exist only there.
+
+The choice happens in the constructor ([`WebGPURenderer.js` at r186, lines 57-73](https://github.com/mrdoob/three.js/blob/r186/src/renderers/webgpu/WebGPURenderer.js#L57-L73)):
+
+```js
+if ( parameters.forceWebGL ) {
+
+	BackendClass = WebGLBackend;
+
+} else {
+
+	BackendClass = WebGPUBackend;
+
+	parameters.getFallback = () => {
+
+		warn( 'WebGPURenderer: WebGPU is not available, running under WebGL2 backend.' );
+
+		return new WebGLBackend( parameters );
+
+	};
+
+}
+```
+
+The WebGPU device is requested asynchronously, so a renderer isn't ready when its constructor returns. `renderer.init()` returns a promise that resolves once a backend works, and `setAnimationLoop` calls `init()` itself before it starts the loop ([`Renderer.js`, lines 2067-2073](https://github.com/mrdoob/three.js/blob/r186/src/renderers/common/Renderer.js#L2067-L2073)). The `await renderer.init()` at the end of the page only waits for it to print the backend in the tab's title.
+
+Which backend runs depends on the browser and the machine, not on the code. `scripts/probe.mjs` opens the page with `?probe`; after three frames, the page reports the backend, the GPU that answered, and the renderer's counters. On the author's machine (Windows 11, an NVIDIA GeForce RTX 5080), in Chromium 153's headless mode:
+
+```text
+$ node scripts/probe.mjs 01-scene
+{
+  "backend": "WebGPU",
+  "gpu": "nvidia, blackwell",
+  "frame": 4,
+  "render": {
+    "calls": 6,
+    "drawCalls": 2,
+    "triangles": 13
+  },
+  "memory": {
+    "geometries": 2,
+    "textures": 2,
+    "programs": 4
+  },
+  "canvas": [800, 450],
+  "pixelRatio": 1,
+  "coordinateSystem": "WebGPU"
+}
+```
+
+With `?webgl`, the page passes `forceWebGL: true`. The counters are the same; the GPU is now reached through [ANGLE](https://chromium.googlesource.com/angle/angle), which Chromium on Windows uses to run WebGL on Direct3D 11:
+
+```text
+$ node scripts/probe.mjs 01-scene --webgl
+{
+  "backend": "WebGL 2",
+  "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  ...
+  "coordinateSystem": "WebGL"
+}
+```
+
+Playwright ships two headless browsers. `chromium` runs Chromium's new headless mode, the one used above. `chromium-headless-shell` is a lighter build, and on the same machine it has no WebGPU adapter at all: the browser prints a warning, three.js prints its own, and the page runs on WebGL 2 through [SwiftShader](https://github.com/google/swiftshader), a GPU emulated on the CPU:
+
+```text
+$ PROBE_CHANNEL=chromium-headless-shell node scripts/probe.mjs 01-scene
+console.warning: No available adapters.
+console.warning: THREE.WebGPURenderer: WebGPU is not available, running under WebGL2 backend.
+{
+  "backend": "WebGL 2",
+  "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+  ...
+}
+```
+
+The GitHub runners have no GPU. On each of them, `check.sh` printed:
+
+| Runner image | Chromium's headless mode | Chromium's headless shell |
+|---|---|---|
+| `ubuntu-24.04` | WebGL 2 after the fallback warning, on `SwiftShader Device (Subzero)` | the same |
+| `windows-2025-vs2026` | WebGL 2 after the fallback warning, on `SwiftShader Device (Subzero)` | the same |
+| `macos-26-arm64` | **WebGPU**, adapter `apple`; with `?webgl`, `ANGLE Metal Renderer: Apple Paravirtual device` | WebGL 2 after the fallback warning, on `SwiftShader Device (LLVM 10.0.0)` |
+
+The macOS runner is a virtual machine with a paravirtualized Apple GPU, and Chromium offers WebGPU there; the Linux and Windows runners have no GPU, and even Chromium's full headless mode falls back to SwiftShader (run [35115118564](https://github.com/spareilleux/learn/actions/runs/35115118564)).
+
+The code didn't change, and every counter was identical on all of them; only a few pixel colors in lesson 3 differed, by one. That is the promise of the fallback, and also its trap: a page can run on WebGL 2 for months without anyone noticing. Log the backend, as the course does in the page's title.
+
+`coordinateSystem` is the only field that follows the backend. WebGL's clip space runs from −1 to 1 in depth, WebGPU's from 0 to 1, and the renderer builds the camera's projection matrix for the backend it runs on. Your code doesn't see it, unless it builds projection matrices itself.
+
+## The animation loop
+
+```ts
+const timer = new THREE.Timer();
+timer.connect(document);
+let frames = 0;
+
+renderer.setAnimationLoop((time) => {
+  timer.update(time);
+  // Probing: the same angles on every machine, whatever the frame rate
+  cube.rotation.y = probing ? frames * 0.25 : timer.getElapsed();
+  cube.rotation.x = cube.rotation.y / 2;
+  renderer.render(scene, camera);
+  frames++;
+```
+
+[`setAnimationLoop`](https://threejs.org/docs/pages/Renderer.html#setAnimationLoop) calls the callback before each frame the browser paints, with `time` in milliseconds, like `requestAnimationFrame`, which it uses underneath. Three reasons to prefer it: it waits for `init()`, it pauses when the tab is hidden since the browser stops painting, and in WebXR (lesson 11) the headset, not the page, drives the frames, which `setAnimationLoop` handles and `requestAnimationFrame` doesn't. `setAnimationLoop(null)` stops it.
+
+There is no `Update` and `Draw` split as in MonoGame: the callback changes the scene, then renders. Nothing is drawn unless the callback calls `render()`; unlike WPF, three.js keeps no picture of the scene, and doesn't redraw by itself when an object changes.
+
+[`Timer`](https://threejs.org/docs/pages/Timer.html) measures the time between frames. It replaced [`Clock`](https://threejs.org/docs/pages/Clock.html), deprecated since r183, whose constructor now warns: `Clock: This module has been deprecated. Please use THREE.Timer instead.` A `Timer` is updated once per frame with the loop's timestamp, so that every call to `getDelta()` in the same frame returns the same value, and `connect(document)` makes it ignore the time spent in a hidden tab.
+
+The probe doesn't use the clock: it sets the angle from the frame number, so the cube is in the same position on every machine, whatever the frame rate.
+
+## What renderer.info counts
+
+`renderer.info` is the only profiler three.js has built in, and the counters above already tell a story. There is one cube, 12 triangles, yet the renderer reports **2 draw calls and 13 triangles** per frame:
+
+- `render.drawCalls` and `render.triangles` count the last frame. The renderer resets them at the start of each animation frame ([`Animation.js`](https://github.com/mrdoob/three.js/blob/r186/src/renderers/common/Animation.js)), so the page reads them right after `render()`, inside the loop.
+- `render.calls` counts the calls to `render()` since the start: 6 for 3 frames, 2 per frame.
+- `frame` is 4 after 3 rendered frames, because the loop ticks once during `init()`, before the callback is set.
+
+The second draw call, with its single triangle, is the **output pass**. `WebGPURenderer` draws the scene into an internal render target in linear color, then draws that target onto the canvas with one triangle covering the screen, converting to sRGB and applying tone mapping on the way. The renderer's source says it: "Unlike in `WebGLRenderer`, this is done in a separate render pass and not inline to achieve more correct results" ([`Renderer.js`, lines 1553-1561](https://github.com/mrdoob/three.js/blob/r186/src/renderers/common/Renderer.js#L1553-L1561)). The extra geometry, the two extra textures (the render target's color and depth) and the extra shader programs come from there. With `?linear`, the page sets `renderer.outputColorSpace` to linear, no conversion is needed, and the pass disappears:
+
+```text
+$ node scripts/probe.mjs 01-scene --query linear
+{
+  "backend": "WebGPU",
+  "gpu": "nvidia, blackwell",
+  "frame": 4,
+  "render": {
+    "calls": 3,
+    "drawCalls": 1,
+    "triangles": 12
+  },
+  "memory": {
+    "geometries": 1,
+    "textures": 0,
+    "programs": 2
+  },
+  ...
+}
+```
+
+The colors are then wrong, which lesson 3 explains. The same cube with `WebGLRenderer`, from `'three'`, converts colors inside each material's shader instead: one draw call, no render target. Its `info` object has a different shape, with no `drawCalls`, and `calls` counts the draw calls of the last frame:
+
+```text
+$ node scripts/probe.mjs 01-scene-webgl
+{
+  "backend": "WebGLRenderer",
+  "render": {
+    "frame": 3,
+    "calls": 1,
+    "triangles": 12
+  },
+  "memory": {
+    "geometries": 1,
+    "textures": 0,
+    "programs": 1
+  }
+}
+```
+
+## The scene graph, without a renderer
+
+The core of three.js runs in Node.js: objects, math and serialization don't need a GPU. [`scripts/l01-scene-graph.ts`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/scripts/l01-scene-graph.ts) places a tuning peg inside a guitar that is moved 2 units along X and turned a quarter turn around Y, then projects a few points with a camera 5 units away:
+
+```text
+$ node scripts/l01-scene-graph.ts
+local position of the peg: [ 1, 0, 0 ]
+matrixWorld before any update: [ 0, 0, 0 ]
+getWorldPosition(): [ 2, 0, -1 ]
+[0,0,0] -> NDC [0,0,0.962]
+[1,0,0] -> NDC [0.241,0,0.962]
+[0,1,0] -> NDC [0,0.429,0.962]
+[0,0,-95] -> NDC [0,0,1]
+toJSON: {
+  metadata: { version: 4.7, type: 'Object', generator: 'Object3D.toJSON' },
+  geometries: 1,
+  materials: 1,
+  children: [ 'Group guitar' ]
+}
+```
+
+- `position`, `rotation` and `scale` are local to the parent, as a WPF `Transform3D` is local to its model. A quarter turn around Y takes the local X axis to world −Z, so the peg ends up at (2, 0, −1).
+- **`matrixWorld` is a cache.** Setting a position changes nothing else until something recomputes the matrices: `renderer.render()` does it for the whole scene, `getWorldPosition()` for one object. Code that reads `matrixWorld` before the first render reads the identity.
+- `project(camera)` gives normalized device coordinates: X and Y from −1 to 1 across the screen, and a depth that is not linear. The origin, 5 units away, is already at 0.962, and the far plane, 100 units away, at 1. Most of the depth range goes to the objects close to the near plane, which is why `near` shouldn't be smaller than the scene needs. In Node.js, the camera uses WebGL's clip space.
+- `toJSON()` writes the scene in [three.js's JSON format](https://github.com/mrdoob/three.js/wiki/JSON-Object-Scene-format-4), with geometries and materials listed once and referenced by UUID. It is how the editor at [threejs.org/editor](https://threejs.org/editor/) saves scenes, not an exchange format: lesson 4 uses glTF for that.
+
+The types of that JSON are wrong in `@types/three` 0.186.0. They declare `children` as an array of strings and no `geometries` or `materials` at the top, while [`Object3D.toJSON()`](https://github.com/mrdoob/three.js/blob/r186/src/core/Object3D.js#L1518-L1552) writes the children as objects and adds both arrays. The script casts the result to its own interface; without the cast, `tsc` rejects code that works ([`errors/l01_tojson_types.ts`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/errors/l01_tojson_types.ts)):
+
+```text
+errors/l01_tojson_types.ts(7,18): error TS2339: Property 'geometries' does not exist on type 'SceneJSON'.
+errors/l01_tojson_types.ts(8,56): error TS2339: Property 'type' does not exist on type 'string'.
+```
+
+`@types/three` isn't written by the three.js team: it is developed in [three-types/three-ts-types](https://github.com/three-types/three-ts-types) and published through [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/three). Its version follows three.js's, but it is a separate description of the library, and it can be wrong.
+
+## Resizing
+
+```ts
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+```
+
+Two things must follow the window. The camera's aspect ratio, or the cube stretches; and the camera caches its projection matrix, so `updateProjectionMatrix()` must follow any change to `fov`, `aspect`, `near` or `far`. Then the canvas and its drawing buffer, through `setSize`. A canvas inside a layout rather than the whole window should watch its own size with a [`ResizeObserver`](https://developer.mozilla.org/docs/Web/API/ResizeObserver) instead of the window's `resize` event.
+
+## What the renderer weighs
+
+`vite build` bundles the pages for production. The course's Vite configuration puts each of three.js's build files in a chunk of its own, so the sizes can be read directly:
+
+```text
+dist/assets/three.core-p_ik4R10.js           249.85 kB │ gzip:  64.99 kB
+dist/assets/three.module-CFLRzNqX.js         352.34 kB │ gzip:  84.70 kB
+dist/assets/three.webgpu-DyXHSfxk.js         581.15 kB │ gzip: 162.14 kB
+```
+
+The page with `WebGLRenderer` loads `three.core` and `three.module`: 602 kB, 150 kB compressed. The page with `WebGPURenderer` loads `three.core` and `three.webgpu`: 831 kB, 227 kB compressed, for a spinning cube. The node system and both backends are in it, whether the scene uses them or not. Vite warns about any chunk above 500 kB: `(!) Some chunks are larger than 500 kB after minification.`
+
+## In GuitarAlchemist/ga
+
+GA's [`ThreeFretboard.tsx`](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeFretboard.tsx#L152-L211) creates a `WebGPURenderer` with `samples: 8`, awaits `init()`, and catches an error to fall back to `WebGLRenderer`, at commit `05c8eda`:
+
+```tsx
+            await renderer.init();
+
+            // Check again after async init
+            if (!isMounted) {
+              renderer.dispose();
+              return;
+            }
+
+            console.log('✅ ThreeFretboard: Using WebGPU renderer with 8x MSAA');
+            setIsWebGPU(true);
+          } catch (error) {
+            console.warn('ThreeFretboard: WebGPU initialization failed, falling back to WebGL:', error);
+            renderer = null;
+          }
+```
+
+This lesson's measurements say what happens on a machine without a WebGPU adapter: `init()` doesn't throw, because `WebGPURenderer` has already switched to its WebGL 2 backend. The `catch` doesn't run, the console says "Using WebGPU renderer", and two lines later (line 201) the component calls `setIsWebGPU(true)` for every renderer. The shadows are enabled only for a `WebGLRenderer` (line 208), so a `WebGPURenderer` running on WebGL 2 gets none. Asking the renderer, `renderer.backend.isWebGPUBackend`, would give the real answer. Whether 8 samples are accepted on each backend is *to verify*: the [WebGPU specification](https://gpuweb.github.io/gpuweb/#dom-gputexturedescriptor-samplecount) allows a texture's sample count to be 1 or 4.
+
+Two more points from the same file and from the rest of GA's React components:
+
+- The pixel ratio is `Math.min(window.devicePixelRatio * 3, 6)` (line 204): on an ordinary screen, three times as many pixels in each direction as the canvas shows, nine times the shading work.
+- There is no resize listener: the width and height are dependencies of the React effect, so a new size builds the whole scene again.
+- Of the 139 files under `src` that import three.js, 33 use `requestAnimationFrame` and 3 use `setAnimationLoop`; 29 create a `WebGLRenderer` and 8 a `WebGPURenderer`; 15 create a `Clock`, deprecated since r183. GA asks for three.js 0.180, where `Clock` wasn't deprecated yet.
+
+These findings are in the [journal](../journal/).
+
+## Key takeaways
+
+- A three.js page is a renderer, a scene and a camera; nothing is drawn unless the loop calls `render()`.
+- `WebGPURenderer` from `three/webgpu` picks WebGPU or WebGL 2 at run time. The code doesn't change, so log the backend: headless browsers and GPU-less machines fall back silently, except for a console warning.
+- Use `setAnimationLoop` and `Timer`, not `requestAnimationFrame` and `Clock`.
+- `renderer.info` counts per frame and resets at each frame: with `WebGPURenderer`, one draw call and one triangle go to the output pass.
+- Positions are local to the parent; `matrixWorld` is a cache that `render()` updates.
+- `@types/three` is a separate project and can disagree with the library.
+
+## Exercises
+
+1. Predict `render.drawCalls`, `render.triangles` and `memory.geometries` when the page shows three cubes that share one geometry and one material (`?cubes=3`). Check with `node scripts/probe.mjs 01-scene --query cubes=3`.
+2. In `scripts/l01-scene-graph.ts`, the guitar is also scaled by 2. Where is the peg in world space? And which local position would put the peg at the world's origin, without changing its parent? Check with [`scripts/l01-exercises.ts`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/scripts/l01-exercises.ts).
+3. Open the page in your own browser with `npm run dev`, then in its developer tools, run `navigator.gpu` and `await navigator.gpu?.requestAdapter()`. Which backend should the page pick? Compare with the tab's title.
+
+<details>
+<summary>Solution 1</summary>
+
+```text
+$ node scripts/probe.mjs 01-scene --query cubes=3
+{
+  "backend": "WebGPU",
+  "gpu": "nvidia, blackwell",
+  "frame": 4,
+  "render": {
+    "calls": 6,
+    "drawCalls": 4,
+    "triangles": 37
+  },
+  "memory": {
+    "geometries": 2,
+    "textures": 2,
+    "programs": 4
+  },
+  ...
+}
+```
+
+Each mesh is one draw call, whatever it shares: 3 for the cubes and 1 for the output pass, 36 triangles plus 1. The GPU keeps one copy of the shared geometry, so `geometries` is still 2, and the material compiles once. Sharing saves memory and compilation, not draw calls; lesson 8 uses instancing to draw many copies in one call.
+
+</details>
+
+<details>
+<summary>Solution 2</summary>
+
+```text
+$ node scripts/l01-exercises.ts
+peg in world space, guitar scaled by 2: [ 2, 0, -2 ]
+world (0, 0, 0) in the guitar's local space: [ 0, 0, -1 ]
+```
+
+The scale applies before the rotation and the translation: (1, 0, 0) becomes (2, 0, 0), then (0, 0, −2) after the quarter turn, then (2, 0, −2). [`worldToLocal`](https://threejs.org/docs/pages/Object3D.html#worldToLocal) applies the inverse of the parent's `matrixWorld`: setting `peg.position` to (0, 0, −1) puts the peg at the origin.
+
+</details>
+
+<details>
+<summary>Solution 3</summary>
+
+The answer depends on your machine. If `navigator.gpu` is `undefined`, the browser has no WebGPU at all; if `requestAdapter()` resolves to `null`, it has the API but no adapter, as in the headless shell above. In both cases the title reads `Lesson 1 — WebGL 2`. The [WebGPU implementation status](https://github.com/gpuweb/gpuweb/wiki/Implementation-Status) lists which browsers and systems enable it by default; I checked only Chromium 153 on the machines above (*to verify* elsewhere).
+
+</details>
+
+## Sources
+
+- three.js manual: [Creating a scene](https://threejs.org/manual/pages/creating-a-scene.html), [Fundamentals](https://threejs.org/manual/pages/fundamentals.html), [Responsive design](https://threejs.org/manual/pages/responsive.html), [WebGPURenderer](https://threejs.org/manual/pages/webgpurenderer.html)
+- three.js documentation: [`WebGPURenderer`](https://threejs.org/docs/pages/WebGPURenderer.html), [`Renderer`](https://threejs.org/docs/pages/Renderer.html), [`Object3D`](https://threejs.org/docs/pages/Object3D.html), [`PerspectiveCamera`](https://threejs.org/docs/pages/PerspectiveCamera.html), [`Timer`](https://threejs.org/docs/pages/Timer.html), and the [migration guide](https://github.com/mrdoob/three.js/wiki/Migration-Guide)
+- three.js source at r186: [`WebGPURenderer.js`](https://github.com/mrdoob/three.js/blob/r186/src/renderers/webgpu/WebGPURenderer.js), [`Renderer.js`](https://github.com/mrdoob/three.js/blob/r186/src/renderers/common/Renderer.js), [`Info.js`](https://github.com/mrdoob/three.js/blob/r186/src/renderers/common/Info.js)
+- [WebGPU](https://gpuweb.github.io/gpuweb/), W3C, and MDN's [WebGPU API](https://developer.mozilla.org/docs/Web/API/WebGPU_API)
+- Microsoft: [3D graphics overview](https://learn.microsoft.com/dotnet/desktop/wpf/graphics-multimedia/3-d-graphics-overview); MonoGame: [`Matrix`](https://docs.monogame.net/api/Microsoft.Xna.Framework.Matrix.html); JavaFX: [`PerspectiveCamera`](https://openjfx.io/javadoc/25/javafx.graphics/javafx/scene/PerspectiveCamera.html)
+- Playwright: [Browsers](https://playwright.dev/docs/browsers)
