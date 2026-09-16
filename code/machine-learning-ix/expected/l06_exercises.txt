@@ -1,0 +1,23 @@
+== depth against the two scores (hand forest, 50 trees, 3 of 5 features)
+  depth 1: out-of-bag 0.7838, test 0.9211
+  depth 2: out-of-bag 0.9730, test 0.9211
+  depth 3: out-of-bag 0.9730, test 0.9211
+  depth 4: out-of-bag 0.9459, test 0.9211
+  depth 5: out-of-bag 0.9662, test 0.9211
+  depth 6: out-of-bag 0.9595, test 0.9211
+  depth 7: out-of-bag 0.9595, test 0.9211
+  depth 8: out-of-bag 0.9595, test 0.9211
+
+== the two forests on the 38 test jobs
+  hand 0.9211, ix 0.9211, rows where they disagree: []
+  the rows the hand forest still gets wrong:
+    test job 12, workflow Deploy to GitHub Pages         truly ubuntu  predicted macos
+    test job 27, workflow Rust course examples           truly ubuntu  predicted macos
+    test job 29, workflow GHA 05: caches and artifacts   truly ubuntu  predicted windows
+
+== confusion of the hand forest, rows true, columns predicted
+  order ["ubuntu", "windows", "macos"]
+  ubuntu  [23, 1, 2]
+  windows [0, 9, 0]
+  macos   [0, 0, 3]
+exit 0

@@ -1,0 +1,19 @@
+== matching one step of the hand layer with one step of Dense
+  hand weight after one step at rate 0.5      0.667447851
+  Dense weight after one step at rate 0.5 x 65  0.667447851
+  gap 0.00e0
+
+== ix_nn::loss::mse_gradient divided by the true gradient of mse_loss
+  1 column(s): ratio [1.0000], and mse_loss = 0.626042
+  2 column(s): ratio [2.0000], and mse_loss = 1.859063
+  3 column(s): ratio [3.0000], and mse_loss = 3.758750
+  4 column(s): ratio [4.0000], and mse_loss = 6.325104
+
+== width of the hidden layer against what it can learn (exclusive or)
+  hidden 1: final loss 0.166788, corners right 3 of 4
+  hidden 2: final loss 0.000000, corners right 4 of 4
+  hidden 3: final loss 0.000000, corners right 4 of 4
+  hidden 4: final loss 0.000000, corners right 4 of 4
+  a single sigmoid unit still draws one boundary: 0.25 is the best a constant can do
+  the variance of the four targets is 0.2500
+exit 0

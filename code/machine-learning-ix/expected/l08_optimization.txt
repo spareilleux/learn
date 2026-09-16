@@ -1,0 +1,37 @@
+== Rosenbrock from [-1.2, 1.0], minimum 0 at [1, 1]
+  f(start) = 24.2000
+
+== by hand, 5000 steps at most
+  SGD        5000 steps: last [0.9387, 0.8810] f 0.003761, best f 0.003761
+  Momentum   4129 steps: last [1.0000, 1.0000] f 0.000000, best f 0.000000
+  Adam       2822 steps: last [1.0000, 1.0000] f 0.000000, best f 0.000000
+
+== ix_optimize::gradient::minimize, the same 5000 steps
+  SGD        5000 steps: best [0.9387, 0.8810] f 0.003761, converged false
+  Momentum   4129 steps: best [1.0000, 1.0000] f 0.000000, converged true
+  Adam       2822 steps: best [1.0000, 1.0000] f 0.000000, converged true
+
+== the first Adam step from the same gradient
+  gradient [-215.6000, -88.0000]
+  hand [-1.15000000, 1.05000000]
+  ix   [-1.15000000, 1.05000000]
+
+== the gradient at the start, written and measured
+  written  [-215.600000000, -88.000000000]
+  measured [-215.600000093, -87.999999998]
+  largest gap 9.30e-8, and two extra evaluations of f per coordinate per step
+  Adam on ClosureObjective: best f 1.061e-16 against 1.061e-16 with the written gradient
+
+== a step size that diverges
+  ix SGD lr 0.01: best f 24.200000 after 5000 steps, converged false
+  the same run by hand ends at f NaN — the best point hides the divergence
+
+== without a gradient
+  simulated annealing, seed 42: best [0.9934, 0.9881] f 0.000193 after 3216 iterations
+  particle swarm, 40 particles, seed 42: best [1.0000, 1.0000] f 0.000000
+
+== the build-time line, standardized: closed form slope 0.667448, intercept 0
+  SGD        106 steps: slope 0.667448, intercept -0.000000, loss 0.554513
+  Momentum   366 steps: slope 0.667448, intercept -0.000000, loss 0.554513
+  Adam       384 steps: slope 0.667448, intercept -0.000000, loss 0.554513
+exit 0

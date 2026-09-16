@@ -1,0 +1,23 @@
+== plain descent on Rosenbrock, 5000 steps, by learning rate
+  rate 0.0001 : ends at f 2.305718
+  rate 0.0005 : ends at f 0.042952
+  rate 0.001  : ends at f 0.003761
+  rate 0.002  : ends at f 0.000055
+  rate 0.005  : ends at f 0.788039
+  rate 0.01   : ends at f NaN
+
+== evaluations of f for 200 Adam steps
+  written gradient true : 201 evaluations, best f 2.588e0
+  written gradient false: 1001 evaluations, best f 2.588e0
+
+== momentum coefficient against steps to reach f < 1e-10
+  0    : 20000 steps, last [0.9999, 0.9997] f 1.938e-8
+  0.5  : 20000 steps, last [1.0000, 1.0000] f 2.130e-15
+  0.9  :  4129 steps, last [1.0000, 1.0000] f 1.244e-16
+  0.95 :  1790 steps, last [1.0000, 1.0000] f 1.242e-16
+  0.99 :  4014 steps, last [1.0000, 1.0000] f 4.696e-18
+
+== the measured gradient, both ways, 200 steps
+  hand [-0.607769, 0.374561] f 2.588e0
+  ix   [-0.607769, 0.374561] f 2.588e0
+exit 0

@@ -7,7 +7,9 @@ description = "Examples of the 'Machine learning, as applied in IX' course: each
 
 # IX pinned on one commit of main: https://github.com/GuitarAlchemist/ix/commit/490c39533627d296bf9f8f050e6fafc14d7a20c2
 [dependencies]
+ix-ensemble = { git = "https://github.com/GuitarAlchemist/ix", rev = "490c39533627d296bf9f8f050e6fafc14d7a20c2" }
 ix-math = { git = "https://github.com/GuitarAlchemist/ix", rev = "490c39533627d296bf9f8f050e6fafc14d7a20c2" }
+ix-nn = { git = "https://github.com/GuitarAlchemist/ix", rev = "490c39533627d296bf9f8f050e6fafc14d7a20c2" }
 ix-optimize = { git = "https://github.com/GuitarAlchemist/ix", rev = "490c39533627d296bf9f8f050e6fafc14d7a20c2" }
 ix-supervised = { git = "https://github.com/GuitarAlchemist/ix", rev = "490c39533627d296bf9f8f050e6fafc14d7a20c2" }
 ix-unsupervised = { git = "https://github.com/GuitarAlchemist/ix", rev = "490c39533627d296bf9f8f050e6fafc14d7a20c2" }

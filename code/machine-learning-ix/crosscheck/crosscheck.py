@@ -91,3 +91,198 @@ for eps in [0.5, 1.0, 1.5, 2.0]:
     print(f"DBSCAN eps {eps}: cluster sizes {sizes}, noise {int((labels == -1).sum())}")
 gmm = GaussianMixture(n_components=3, covariance_type="diag", n_init=10, random_state=0, reg_covar=1e-6).fit(Z)
 print(f"GaussianMixture diag, best of 10 starts: log-likelihood {gmm.score(Z) * len(Z):.3f}, weights {sorted(np.round(gmm.weights_, 3).tolist(), reverse=True)}")
+
+# Lesson 5: principal components. scikit-learn signs each component so that its largest entry is
+# positive, the same rule the course's Jacobi version applies.
+print("\n== lesson 5")
+from sklearn.decomposition import PCA  # noqa: E402
+
+Z5 = StandardScaler().fit_transform(X)
+pca5 = PCA(n_components=5).fit(Z5)
+print(f"explained variance {np.round(pca5.explained_variance_, 4).tolist()}")
+print(f"ratios             {np.round(pca5.explained_variance_ratio_, 4).tolist()}")
+print(f"sum of ratios      {pca5.explained_variance_ratio_.sum():.4f}")
+for i in range(5):
+    print(f"component {i + 1}: {np.round(pca5.components_[i], 3).tolist()}")
+pca2 = PCA(n_components=2).fit(Z5)
+print(f"two components: ratios {np.round(pca2.explained_variance_ratio_, 4).tolist()}, "
+      f"sum {pca2.explained_variance_ratio_.sum():.4f}")
+scores2 = pca2.transform(Z5)
+print(f"first three jobs: {[np.round(scores2[i], 4).tolist() for i in range(3)]}")
+for k in range(1, 6):
+    p = PCA(n_components=k).fit(Z5)
+    back = p.inverse_transform(p.transform(Z5))
+    print(f"k {k}: reconstruction error {((Z5 - back) ** 2).mean():.4f}, "
+          f"variance kept {p.explained_variance_ratio_.sum():.4f}")
+anti = np.array([[1.0, -1.0], [-1.0, 1.0], [2.0, -2.0], [-2.0, 2.0], [1.0, 1.0], [-1.0, -1.0]])
+anti_pca = PCA(n_components=2).fit(anti)
+print(f"the cloud stretched along (1, -1): variance {np.round(anti_pca.explained_variance_, 4).tolist()}, "
+      f"first component {np.round(anti_pca.components_[0], 4).tolist()}")
+
+# Lesson 6: the course's own generator replayed, then the same boosting recipe in numpy.
+print("\n== lesson 6")
+
+
+def xorshift(seed):
+    x = seed if seed else 1
+    mask = (1 << 64) - 1
+    while True:
+        x ^= (x << 13) & mask
+        x ^= x >> 7
+        x ^= (x << 17) & mask
+        yield x
+
+
+def bootstrap(n, rng):
+    return [next(rng) % n for _ in range(n)]
+
+
+rng = xorshift(42)
+sample = bootstrap(148, rng)
+left_out = sorted(set(range(148)) - set(sample))
+print(f"bootstrap of 148 rows, seed 42: {148 - len(left_out)} distinct rows, {len(left_out)} left out "
+      f"({len(left_out) / 148:.3f}); 1/e = {1 / np.e:.3f}")
+
+test_idx = [i for i in range(len(os_)) if i % 5 == 0]
+train_idx = [i for i in range(len(os_)) if i % 5 != 0]
+Xtr6, Xte6 = X[train_idx], X[test_idx]
+ytr6, yte6 = os_[train_idx], os_[test_idx]
+
+
+def stump_fit(x, residuals):
+    n, p = x.shape
+    total = residuals.sum()
+    best = (-np.inf, 0, 0.0, total / n, total / n)
+    for feature in range(p):
+        order = np.argsort(x[:, feature], kind="stable")
+        left_sum = 0.0
+        for cut in range(n - 1):
+            left_sum += residuals[order[cut]]
+            lo, hi = x[order[cut], feature], x[order[cut + 1], feature]
+            if abs(lo - hi) < 1e-12:
+                continue
+            ln, rn = cut + 1, n - cut - 1
+            lm, rm = left_sum / ln, (total - left_sum) / rn
+            score = ln * lm * lm + rn * rm * rm
+            if score > best[0]:
+                best = (score, feature, (lo + hi) / 2.0, lm, rm)
+    return best[1:]
+
+
+def softmax(scores):
+    e = np.exp(scores - scores.max(axis=1, keepdims=True))
+    return e / e.sum(axis=1, keepdims=True)
+
+
+def boost(x, y, classes, rounds, rate):
+    n = len(y)
+    counts = np.bincount(y, minlength=classes)
+    init = np.log((counts + 1.0) / (n + classes))
+    scores = np.tile(init, (n, 1))
+    trees = []
+    for _ in range(rounds):
+        proba = softmax(scores)
+        round_trees = []
+        for c in range(classes):
+            residuals = (y == c).astype(float) - proba[:, c]
+            feature, threshold, left, right = stump_fit(x, residuals)
+            scores[:, c] += rate * np.where(x[:, feature] <= threshold, left, right)
+            round_trees.append((feature, threshold, left, right))
+        trees.append(round_trees)
+    return init, trees
+
+
+def boost_predict(init, trees, x, rate):
+    scores = np.tile(init, (len(x), 1))
+    for round_trees in trees:
+        for c, (feature, threshold, left, right) in enumerate(round_trees):
+            scores[:, c] += rate * np.where(x[:, feature] <= threshold, left, right)
+    return scores.argmax(axis=1)
+
+
+for rounds in [1, 5, 10, 25, 50]:
+    init, trees = boost(Xtr6, ytr6, 3, rounds, 0.3)
+    pred = boost_predict(init, trees, Xte6, 0.3)
+    print(f"{rounds:2} rounds of boosting on stumps: test accuracy {accuracy_score(yte6, pred):.4f}")
+init, trees = boost(Xtr6, ytr6, 3, 1, 0.3)
+print(f"smoothed log priors {np.round(init, 4).tolist()}")
+for c in range(3):
+    feature, threshold, left, right = trees[0][c]
+    print(f"round 1, class {OS[c]:<7}: split {features[feature]} <= {threshold:.1f}, "
+          f"leaves {left:.4f} and {right:.4f}")
+
+# Lesson 7: the gradient ix_nn::layer::Dense applies, measured in numpy.
+print("\n== lesson 7")
+xs = (pages[:, 0] - pages[:, 0].mean()) / pages[:, 0].std()
+ts = (seconds - seconds.mean()) / seconds.std()
+n7 = len(xs)
+
+
+def mse_loss(w, columns=1):
+    prediction = np.outer(xs, np.full(columns, w if np.isscalar(w) else w))
+    target = np.column_stack([ts * (j + 1) for j in range(columns)])
+    return ((prediction - target) ** 2).mean()
+
+
+h = 1e-6
+measured = (mse_loss(0.4 + h) - mse_loss(0.4 - h)) / (2 * h)
+print(f"gradient of the mean squared error at w = 0.4: {measured:.9f}")
+print(f"what Dense subtracts is that divided by the {n7} rows: {measured / n7:.9f}")
+print(f"the exclusive-or targets have variance {np.var([0.0, 1.0, 1.0, 0.0]):.4f}, "
+      "the loss a constant cannot beat")
+
+# Lesson 8: the three update rules in numpy, on the same function from the same start.
+print("\n== lesson 8")
+
+
+def rosen(v):
+    return (1 - v[0]) ** 2 + 100 * (v[1] - v[0] ** 2) ** 2
+
+
+def rosen_grad(v):
+    return np.array([-2 * (1 - v[0]) - 400 * v[0] * (v[1] - v[0] ** 2), 200 * (v[1] - v[0] ** 2)])
+
+
+def run(rule, start, steps=5000, tol=1e-8):
+    p = np.array(start, dtype=float)
+    for i in range(steps):
+        g = rosen_grad(p)
+        if np.sqrt(g @ g) < tol:
+            return p, i + 1
+        p = rule(p, g)
+    return p, steps
+
+
+def sgd(rate):
+    return lambda p, g: p - rate * g
+
+
+def momentum(rate, beta):
+    state = {"v": None}
+
+    def step(p, g):
+        state["v"] = rate * g if state["v"] is None else beta * state["v"] + rate * g
+        return p - state["v"]
+
+    return step
+
+
+def adam(rate, b1=0.9, b2=0.999, eps=1e-8):
+    state = {"m": None, "v": None, "t": 0}
+
+    def step(p, g):
+        state["t"] += 1
+        state["m"] = (1 - b1) * g if state["m"] is None else b1 * state["m"] + (1 - b1) * g
+        state["v"] = (1 - b2) * g * g if state["v"] is None else b2 * state["v"] + (1 - b2) * g * g
+        mh = state["m"] / (1 - b1 ** state["t"])
+        vh = state["v"] / (1 - b2 ** state["t"])
+        return p - rate * mh / (np.sqrt(vh) + eps)
+
+    return step
+
+
+for name, rule in [("SGD", sgd(0.001)), ("Momentum", momentum(0.001, 0.9)), ("Adam", adam(0.05))]:
+    point, steps = run(rule, [-1.2, 1.0])
+    print(f"{name:9} {steps:5} steps: last {np.round(point, 4).tolist()} f {rosen(point):.6f}")
+slope = float((xs * ts).mean())
+print(f"the build-time line, standardized: closed-form slope {slope:.6f}")

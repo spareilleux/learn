@@ -22,8 +22,12 @@
 pub mod classify;
 pub mod cluster;
 pub mod data;
+pub mod ensemble;
 pub mod evaluation;
 pub mod linear;
+pub mod net;
+pub mod optimize;
+pub mod reduce;
 
 use ndarray::{Array1, Array2};
 

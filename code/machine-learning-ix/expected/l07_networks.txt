@@ -1,0 +1,27 @@
+== 65 builds, pages standardized -> seconds standardized
+
+== the hand layer, judged by finite differences
+  analytic -0.534895701, numeric -0.534895701, gap 4.35e-11
+
+== ix_nn::layer::Dense, one output column
+  gradient of mse_loss, measured: -0.534895701
+  what backward subtracts:        -0.008229165
+  ratio: 65.0000, and the batch has 65 rows
+
+== the same layer with two output columns
+  measured gradient [-0.267448, -1.234896]
+  backward subtracts [-0.008229, -0.037997]
+  ratios [32.5000, 32.5000]
+
+== Dense::new(3, 2) twice in the same run
+  the two weight matrices are equal: false
+  all zero biases: true, weights are public, so a course can overwrite them
+
+== exclusive or
+  hand, two affine layers with a sigmoid between them: loss 0.35722182 -> 0.00000000
+  predictions [0.0000, 1.0000, 1.0000, 0.0000]
+  ix_nn, two Dense layers and nothing between them: loss 0.34500000 -> 0.25000000
+  predictions [0.5000, 0.5000, 0.5000, 0.5000]
+  f(0,0) + f(1,1) - f(0,1) - f(1,0) = 0.00e0: the stack is one affine map
+  the only impl of the Layer trait in ix-nn is Dense
+exit 0

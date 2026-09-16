@@ -1,0 +1,24 @@
+== components needed for a share of the variance
+  k 1: really kept 0.3867, ix reports 1.0000
+  k 2: really kept 0.6863, ix reports 1.0000
+  k 3: really kept 0.8690, ix reports 1.0000
+  k 4: really kept 0.9588, ix reports 1.0000
+  k 5: really kept 1.0000, ix reports 1.0000
+  4 components pass 0.90; IX reports 1.0000 for every k
+
+== whitening the two-component scores
+  covariance of the raw scores
+    [1.944062, 0.000000]
+    [0.000000, 1.505963]
+  covariance of the whitened scores
+    [1.000000, 0.000000]
+    [0.000000, 1.000000]
+
+== job 0 rebuilt, one component at a time
+  true      [-0.091, 1.785, -0.596, -0.796, 1.968]
+  k 1       [-0.198, 0.409, -0.797, -0.808, -0.173]
+  k 2       [0.984, 0.655, -0.975, -1.059, 1.043]
+  k 3       [0.589, 2.056, -0.517, -0.754, 1.273]
+  k 4       [-0.091, 1.783, -0.581, -0.811, 1.968]
+  k 5       [-0.091, 1.785, -0.596, -0.796, 1.968]
+exit 0
