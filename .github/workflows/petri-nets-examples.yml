@@ -1,0 +1,32 @@
+# Petri nets: build the analyser, run its unit tests, then run each lesson and compare its output
+# with expected/, on Windows, Linux and macOS. The PNML files in nets/ are regenerated and compared too.
+name: Petri nets course examples
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['code/petri-nets/**', '.github/workflows/petri-nets-examples.yml']
+  pull_request:
+    paths: ['code/petri-nets/**', '.github/workflows/petri-nets-examples.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  petri-nets:
+    name: petri-nets (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: code/petri-nets/global.json
+      - run: bash code/petri-nets/check.sh
