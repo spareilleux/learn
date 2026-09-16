@@ -19,6 +19,7 @@ sidebar:
 - [x] Lección 7: TPL Dataflow
 - [x] Lección 8: Rx.NET
 - [x] Lección 9: elegir un flujo
+- [x] Apéndice 1: tres miembros de GA optimizados, demostrados sobre los 4096 conjuntos de clases de altura y luego medidos
 
 ## 2026-09-14 — Configuración y la versión fijada de GA
 
@@ -98,6 +99,18 @@ GA usa canales en su generador de voicings y en su comando de indexación, y TPL
 - La misma demo y `MusicalAnalysisApp`, ambos `net10.0`, hacen referencia al paquete `System.Threading.Tasks.Dataflow` 9.0.10, que .NET 10 ya tiene en su framework compartido. Un proyecto `net10.0` nuevo con la misma referencia recibe la advertencia NU1510 al restaurar, y carga de todos modos el ensamblado del framework.
 - Los números de `ProgrammaticForteCatalog` siguen otro orden que la tabla de Forte, aunque sus observaciones dicen que las diferencias son menores: 4-3 para el acorde de séptima menor donde Forte dice 4-26 (lección 7).
 - GA tiene varias clases `BackgroundService`, entre ellas el precalentamiento de la caché y la inicialización del índice de voicings; la lección 15 es el lugar para leerlas.
+
+## 2026-09-15 — Apéndice 1: optimizar GA, primero la demostración
+
+La lección 4 medía el código de GA tal cual. Este apéndice reescribe tres de sus miembros, y lo interesante resultó no ser la ganancia de velocidad sino lo que la reescritura *no* tiene permitido cambiar.
+
+- Los tres son `PitchClassSetId.IsClusterFree`, `PitchClassSet.IntervalClassVector` y `PitchClassSet.ClosestDiatonicKey`. Todos reciben un conjunto de 12 bits, así que el dominio de entrada entero tiene 4096 valores: `Advanced -- a1` compara cada reescritura con la respuesta de GA para cada uno de ellos, y la CI lo ejecuta en tres sistemas operativos. Escribir la demostración antes que el benchmark cambió lo que estaba dispuesto a afirmar.
+- `IntervalClassVectorId` empaqueta seis cuentas como dígitos en base 12, y las cuentas de 12 del agregado cromático acarrean. GA lo documenta como una limitación conocida. Empaquetarlo correctamente cambiaría el identificador del conjunto 4095, y `ProgrammaticForteCatalog` ordena cada cardinalidad por ese identificador, así que todos los números de Forte podrían moverse — la versión rápida reproduce el acarreo en su lugar. Una «corrección» colada dentro de un cambio de rendimiento es justamente de lo que trata este apéndice.
+- La respuesta de `ClosestDiatonicKey` depende de que `OrderByDescending` sea estable: los empates van a la tonalidad que `Key.Items` lista primero, las 15 mayores antes que las 15 menores. Un bucle que sustituyera al que va ganando con `>=` en lugar de `>` devolvería en silencio otra tonalidad en cada empate; el que sustituye con `>` coincide con GA en los 4096 conjuntos.
+- Las cifras, en esta máquina: el vector de clases de intervalo pasa de 5.518,86 ns y 16.304 B por lectura de propiedad a 2,62 ns calculado y 0,0799 ns desde una tabla de 4096 entradas, sin asignación alguna; `IsClusterFree` de 3,5344 ns a 0,1131 ns; `ClosestDiatonicKey` de 68,211 µs y 175,66 KB a 6,195 µs y 15,69 KB.
+- El hallazgo son los 175 KB, no los microsegundos. `IdentifyClosestKey` recibe un `Dictionary<Key, IReadOnlyCollection<PitchClass>>` y lo desestructura como `foreach (var (key, _) in items)`: los valores se construyen para las 30 tonalidades y nunca se leen. No hizo falta ningún perfilador — bastó con leer el método.
+- Los 15,69 KB que quedan en la versión rápida vienen de `ToNormalForm()`, llamado solo para adivinar un modo. Las tablas de `PrimeForm` y una caché de instancias de `PitchClassSet` son los siguientes candidatos, y ninguno está escrito todavía.
+- Nada de esto se ha reportado aún aguas arriba.
 
 ## Por verificar
 
