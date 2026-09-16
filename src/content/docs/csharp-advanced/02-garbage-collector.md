@@ -221,6 +221,27 @@ The timings come from one machine and one run, and CI never compares them. The a
 
 Read `Allocated` first: it is exact and repeatable. Read `Mean` with its `Error` and `StdDev`, and with the warnings BenchmarkDotNet prints under the table. Lesson 4 is about getting timings you can trust.
 
+## If you know Spring and Reactor
+
+Both runtimes are generational, both replaced most of their tuning flags with ergonomics, and they share almost no vocabulary. The table maps what this lesson measured onto what you would read in a [GC tuning guide](https://docs.oracle.com/en/java/javase/25/gctuning/).
+
+| .NET | HotSpot |
+|---|---|
+| generations 0, 1 and 2 | a young generation (eden and survivors) and an old generation; [G1](https://docs.oracle.com/en/java/javase/25/gctuning/garbage-first-g1-garbage-collector1.html) gives each region one of those roles |
+| the large object heap, from 85,000 bytes | G1's humongous objects, "larger or equal the size of half a region", allocated as contiguous regions of the old generation. The region size is ergonomic: about 2,048 regions, up to 32 MB each |
+| the pinned object heap, a heap of its own | nothing equivalent. Pinning is transient, scoped to a JNI critical region; since [JEP 423](https://openjdk.org/jeps/423) (JDK 22) G1 pins the *region* instead of disabling collection, and logs an evacuation failure with the reason `Pinned` |
+| workstation or server GC, chosen by configuration | one collector among [G1](https://openjdk.org/jeps/248) — the default, and since [JEP 523](https://openjdk.org/jeps/523) in every environment, not only on server-class machines — Parallel, Serial and [ZGC](https://docs.oracle.com/en/java/javase/25/gctuning/z-garbage-collector.html) |
+| DATAS sizes the heap to the load | each collector's ergonomics, plus ZGC's `-XX:SoftMaxHeapSize`: a soft limit it strives to respect, "but is still allowed to grow beyond this limit up to the maximum heap size" |
+| pause durations read from `GC.GetGCMemoryInfo()` | a stated goal per collector: ZGC's is "Pause times should not exceed 1 millisecond" ([JEP 439](https://openjdk.org/jeps/439)), tightened from the 10 ms of its first JEP |
+| finalizers, and the finalizer thread | [`finalize()`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html), deprecated for removal since JDK 18 ([JEP 421](https://openjdk.org/jeps/421)) and still enabled by default; [`Cleaner`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/ref/Cleaner.html) and `PhantomReference` in its place |
+| `WeakReference<T>`, `ConditionalWeakTable` | [`WeakReference`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/ref/package-summary.html), `PhantomReference`, and `SoftReference`, "cleared at the discretion of the garbage collector in response to memory demand" — .NET has no soft reference |
+| `GC.GetGCMemoryInfo()` and `GC.GetConfigurationVariables()`, from inside the process | [`GarbageCollectorMXBean`](https://docs.oracle.com/en/java/javase/25/docs/api/java.management/java/lang/management/GarbageCollectorMXBean.html) with `getCollectionCount()` and `getCollectionTime()`, `-Xlog:gc`, and JDK Flight Recorder |
+| `[MemoryDiagnoser]`: bytes and gen0 collections per operation | JMH's `-prof gc`, whose `gc.alloc.rate.norm` is bytes per operation |
+
+One row deserves care, because lesson 1 measured it here. .NET 9 and 10 stack-allocate boxes and small objects that don't escape. HotSpot's [escape analysis](https://docs.oracle.com/en/java/javase/25/vm/java-hotspot-virtual-machine-performance-enhancements.html) is documented more narrowly: for an object that "does not escape", the server compiler "eliminates the scalar replaceable object allocations and the associated locks from generated code" — the object is broken into its fields rather than moved to the stack. The measured outcome is the same, zero bytes allocated; the wording of the guarantee is not.
+
+For a reactive service, the number this lesson insists on — bytes per operation — matters even more than here. A Reactor pipeline allocates one subscriber object per operator on *every* subscription, and a WebFlux server subscribes once per request, so allocation scales with traffic in a way a single benchmark won't show. Reactor publishes no allocation figures of its own; `-prof gc` on your own pipeline is how you get them.
+
 ## Exercises
 
 1. What is the smallest `char[]` that goes to the large object heap?

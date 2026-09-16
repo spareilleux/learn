@@ -221,6 +221,27 @@ Les temps viennent d'une seule machine et d'une seule exécution, et la CI ne le
 
 Lisez `Allocated` en premier : cette valeur est exacte et reproductible. Lisez `Mean` avec ses colonnes `Error` et `StdDev`, et avec les avertissements que BenchmarkDotNet affiche sous le tableau. La leçon 4 explique comment obtenir des temps dignes de confiance.
 
+## Si vous connaissez Spring et Reactor
+
+Les deux plateformes sont générationnelles, toutes deux ont remplacé la plupart de leurs options de réglage par de l'ergonomie, et elles ne partagent presque aucun vocabulaire. Le tableau relie ce que cette leçon a mesuré à ce que vous liriez dans un [guide de réglage du GC](https://docs.oracle.com/en/java/javase/25/gctuning/).
+
+| .NET | HotSpot |
+|---|---|
+| générations 0, 1 et 2 | une génération jeune (eden et survivants) et une génération ancienne ; [G1](https://docs.oracle.com/en/java/javase/25/gctuning/garbage-first-g1-garbage-collector1.html) donne à chaque région l'un de ces rôles |
+| le tas des grands objets, à partir de 85 000 octets | les objets *humongous* de G1, « larger or equal the size of half a region », alloués en régions contiguës de la génération ancienne. La taille de région est ergonomique : environ 2 048 régions, jusqu'à 32 Mo chacune |
+| le tas des objets épinglés, un tas à part | rien d'équivalent. L'épinglage est transitoire, limité à une région critique JNI ; depuis la [JEP 423](https://openjdk.org/jeps/423) (JDK 22), G1 épingle la *région* au lieu de désactiver la collecte, et journalise un échec d'évacuation avec le motif `Pinned` |
+| GC station de travail ou serveur, choisi par configuration | un ramasse-miettes parmi [G1](https://openjdk.org/jeps/248) — celui par défaut, et depuis la [JEP 523](https://openjdk.org/jeps/523) dans tous les environnements, plus seulement sur les machines de type serveur —, Parallel, Serial et [ZGC](https://docs.oracle.com/en/java/javase/25/gctuning/z-garbage-collector.html) |
+| DATAS dimensionne le tas selon la charge | l'ergonomie de chaque ramasse-miettes, plus le `-XX:SoftMaxHeapSize` de ZGC : une limite souple qu'il s'efforce de respecter, « but is still allowed to grow beyond this limit up to the maximum heap size » |
+| les durées de pause lues dans `GC.GetGCMemoryInfo()` | un objectif annoncé par ramasse-miettes : celui de ZGC est « Pause times should not exceed 1 millisecond » ([JEP 439](https://openjdk.org/jeps/439)), resserré depuis les 10 ms de sa première JEP |
+| les finaliseurs, et le thread de finalisation | [`finalize()`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html), déprécié pour suppression depuis le JDK 18 ([JEP 421](https://openjdk.org/jeps/421)) et toujours actif par défaut ; [`Cleaner`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/ref/Cleaner.html) et `PhantomReference` à sa place |
+| `WeakReference<T>`, `ConditionalWeakTable` | [`WeakReference`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/ref/package-summary.html), `PhantomReference`, et `SoftReference`, « cleared at the discretion of the garbage collector in response to memory demand » — .NET n'a pas de référence souple |
+| `GC.GetGCMemoryInfo()` et `GC.GetConfigurationVariables()`, depuis l'intérieur du processus | [`GarbageCollectorMXBean`](https://docs.oracle.com/en/java/javase/25/docs/api/java.management/java/lang/management/GarbageCollectorMXBean.html) avec `getCollectionCount()` et `getCollectionTime()`, `-Xlog:gc`, et JDK Flight Recorder |
+| `[MemoryDiagnoser]` : octets et collectes gen0 par opération | le `-prof gc` de JMH, dont `gc.alloc.rate.norm` donne les octets par opération |
+
+Une ligne mérite de la prudence, parce que la leçon 1 l'a mesurée ici. .NET 9 et 10 allouent sur la pile les boxes et les petits objets qui ne s'échappent pas. L'[analyse d'échappement](https://docs.oracle.com/en/java/javase/25/vm/java-hotspot-virtual-machine-performance-enhancements.html) de HotSpot est documentée plus étroitement : pour un objet qui « does not escape », le compilateur serveur « eliminates the scalar replaceable object allocations and the associated locks from generated code » — l'objet est décomposé en ses champs plutôt que déplacé sur la pile. Le résultat mesuré est le même, zéro octet alloué ; la formulation de la garantie, non.
+
+Pour un service réactif, le nombre sur lequel cette leçon insiste — les octets par opération — compte encore plus qu'ici. Un pipeline Reactor alloue un objet abonné par opérateur à *chaque* souscription, et un serveur WebFlux souscrit une fois par requête : les allocations croissent donc avec le trafic, ce qu'un benchmark isolé ne montre pas. Reactor ne publie aucun chiffre d'allocation ; `-prof gc` sur votre propre pipeline est la façon de l'obtenir.
+
 ## Exercices
 
 1. Quel est le plus petit `char[]` qui va dans le tas des grands objets ?

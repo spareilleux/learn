@@ -347,6 +347,25 @@ PitchClassSetId.Items is <>z__ReadOnlyList`1
 
 16,408 bytes is 24 bytes of array header plus 4,096 × 4. The code compiles, runs and returns the right values; only a measurement shows the cost. The fix is exercise 3.
 
+## If you know Spring and Reactor
+
+This lesson has almost no Java counterpart, and that is what it teaches. On the JVM every type you declare is a reference type: `PitchClass`, four bytes inline here, would be an object with a header there, and a list of them a list of references. C# gives you tools to keep values off the heap; Java asks its collector to clear them away quickly, which lesson 2 compares.
+
+| C# | Java, Spring and Reactor |
+|---|---|
+| `struct`, `readonly record struct`: 4 bytes, inline, no header | no user-defined value type; a `record` is an ordinary heap object. [Project Valhalla](https://openjdk.org/projects/valhalla/)'s value objects are a *preview* targeted at JDK 28 ([JEP 401](https://openjdk.org/jeps/401)), so they are in no released JDK |
+| boxing is a `box` instruction, which the JIT sometimes removes | autoboxing calls `Integer.valueOf` ([generics restrictions](https://docs.oracle.com/javase/tutorial/java/generics/restrictions.html)); HotSpot's escape analysis, `-XX:+DoEscapeAnalysis`, [enabled by default](https://docs.oracle.com/en/java/javase/25/docs/specs/man/java.html), may remove the allocation |
+| generics are reified: `PitchClass[]` holds 4-byte values | generics are erased ([JLS §4.6](https://docs.oracle.com/javase/specs/jls/se25/html/jls-4.html)): `List<Integer>` holds references to boxed objects, and `List<int>` doesn't compile at all |
+| `Span<T>` over an array, a string, native memory or the stack | [`ByteBuffer`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/ByteBuffer.html), Netty's [`ByteBuf`](https://netty.io/wiki/reference-counted-objects.html), WebFlux's [`DataBuffer`](https://docs.spring.io/spring-framework/reference/core/databuffer-codec.html): objects, and none of them a window over a `String` |
+| `stackalloc` | nothing equivalent. `ByteBuffer.allocateDirect` allocates outside the heap, and its Javadoc recommends it "primarily for large, long-lived buffers" |
+| CS8345, CS8352 and the other ref-safety errors: the compiler proves the span can't outlive its memory | reference counting, checked at run time: `release()`, `IllegalReferenceCountException`, and a leak detector that samples about 1% of allocations |
+| `Memory<T>` for data that crosses an `await` | a pooled buffer retained across an operator boundary, released by whoever reads it last |
+| a silent defensive copy when you call a method on an `in` parameter | doesn't arise: objects are always passed by reference |
+
+The row that costs real debugging time is ownership. A `Span<T>` owns nothing and the compiler rejects the code that would let it outlive its memory. A `PooledDataBuffer` starts at a reference count of 1, `retain()` and `release()` move it, and Spring's documentation is explicit that "special care must be taken to ensure buffers are released since they may be pooled" — with a rule per case: release each buffer you read, and add `doOnDiscard(DataBuffer.class, DataBufferUtils::release)` when an operator may drop items. You only own that job when you handle `DataBuffer` yourself; decode to a `String` or a record and the codec has already released it. The two runtimes solve the same problem, one with a type system, the other with a discipline and a leak detector.
+
+GA's `ItemsSpan` has a Java shape too. A property that returns `collection.toArray()` copies on every read, returns the right values, and no test notices; the measurement that found the 16,408 bytes here is the one to run there.
+
 ## Exercises
 
 1. Predict `Unsafe.SizeOf` of the tuple `(bool, int, bool)`, of a struct with the fields `bool Muted; int Fret; bool Barre;` in that order, and of the same struct marked [`[StructLayout(LayoutKind.Auto)]`](https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.layoutkind).

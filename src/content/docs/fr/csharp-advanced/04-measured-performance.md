@@ -301,6 +301,27 @@ Voilà pour la machine de l'auteur. Le runner Linux a indiqué `Vector512 True` 
 
 Sur 1 024 éléments, `SimdOps.Dot` de GA est 3,3 fois plus rapide que la boucle scalaire, et `TensorPrimitives.Dot` 4,5 fois. Le JIT ne vectorise pas la boucle scalaire de lui-même : avec des `double`, réordonner les additions changerait le résultat, donc chaque addition attend la précédente. Sur 16 éléments, les deux versions vectorisées sont environ 1,7 fois plus rapides. Pour GA, remplacer le corps de `SimdOps.Dot` par un appel à `TensorPrimitives.Dot` serait plus simple et plus rapide sur cette machine ; les durées sur Arm64 n'ont pas été mesurées, *à vérifier*.
 
+## Si vous connaissez Spring et Reactor
+
+Toutes les difficultés de cette leçon existent sur la JVM, et [JMH](https://github.com/openjdk/jmh) y répond par les mêmes moyens. Son README fait la même promesse que BenchmarkDotNet : « Do not assume that a nice harness will magically free you from considering benchmarking pitfalls. We only promise to make avoiding them easier, not avoiding them completely. »
+
+| BenchmarkDotNet | JMH |
+|---|---|
+| un processus par benchmark | [`@Fork`](https://github.com/openjdk/jmh/blob/master/jmh-samples/src/main/java/org/openjdk/jmh/samples/JMHSample_12_Forking.java), cinq forks de mesure par défaut, parce que « JVMs are notoriously good at profile-guided optimizations » et que deux tests dans une même JVM mélangent leurs profils |
+| plusieurs exécutions pour voir la variance d'une exécution à l'autre | les forks, encore : « JVMs are complex systems, and the non-determinism is inherent for them » |
+| des itérations d'échauffement, puis des itérations de mesure | `@Warmup` et `@Measurement` : cinq itérations de dix secondes chacune, par défaut |
+| `[MemoryDiagnoser]`, octets alloués par opération | `-prof gc`, dont `gc.alloc.rate.norm` donne les octets par opération |
+| le niveau 0, puis le niveau 1, avec l'OSR pour une boucle déjà en cours | l'interpréteur, C1 et C2, avec le [remplacement sur la pile](https://openjdk.org/groups/hotspot/docs/HotSpotGlossary.html), « converting an interpreted stack frame into a compiled stack frame » |
+| le PGO dynamique dévirtualise un appel d'interface | C2, le « highly optimizing bytecode compiler », compile à partir du profil collecté par les niveaux inférieurs |
+| `DOTNET_TieredCompilation=0` pour voir ce que les niveaux apportaient | [`-XX:-TieredCompilation`](https://docs.oracle.com/en/java/javase/25/docs/specs/man/java.html), documenté « By default, this option is enabled », ou `-Xint` pour l'interpréteur seul |
+| l'analyse d'échappement met un box sur la pile | `-XX:+DoEscapeAnalysis`, également activée par défaut, avec le remplacement scalaire |
+| `SearchValues<T>`, `FrozenDictionary` | aucune API équivalente : `Map.of` est immuable mais pas réoptimisée pour la recherche, et `String.indexOf` est une intrinsèque |
+| `Vector<T>`, et `TensorPrimitives` au-dessus | l'API Vector, à sa douzième incubation ([JEP 537](https://openjdk.org/jeps/537)), qui annonce qu'elle « will incubate until necessary features of Project Valhalla become available as preview features » |
+
+Le côté JVM ajoute deux choses. Le ramasse-miettes est une source de variance de plus : `gc.alloc.rate.norm` est quasi déterministe, alors qu'un temps mesuré sur un tas qui se remplit ne l'est pas — c'est l'argument de la leçon 2, transposé dans un harnais de benchmark. Et mesurer un pipeline Reactor mesure autant ses changements d'ordonnanceur que son travail : un benchmark qui assemble une chaîne et souscrit une seule fois mesure surtout l'assemblage, et `StepVerifier.withVirtualTime` supprime l'attente, pas les sauts de thread.
+
+La dernière règle de cette leçon vaut des deux côtés. Un temps appartient à la machine qui l'a produit : JMH et BenchmarkDotNet impriment tous deux l'environnement au-dessus du tableau pour cette raison, et aucun de ces nombres ne signifie quoi que ce soit sur un runner de CI.
+
 ## Exercices
 
 1. Construisez un `FrozenDictionary` à partir des sept notes naturelles, de `"C"` à `"B"`, associées à leur indice. Quelle implémentation obtenez-vous, et pourquoi pas des compartiments par longueur ?

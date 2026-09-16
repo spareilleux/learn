@@ -45,13 +45,13 @@ Les parties 1 et 2 mesurent le propre code de GA. La partie 3 construit un petit
 
 ### Partie 1 : runtime et performances
 
-| # | Leçon | Sous le capot | Mesuré sur GA |
-|---|---|---|---|
-| 1 | [Mémoire : valeurs, références et spans](01-memory-values-and-spans/) | disposition des objets, boxing dans l'IL, `ref`/`in`, `ref struct`, `Span<T>`, `stackalloc` | `PitchClass`, `PitchClassSetId.ItemsSpan` |
-| 2 | [Le ramasse-miettes](02-garbage-collector/) | générations, LOH et POH, GC station de travail et serveur, DATAS, finaliseurs, `GC.GetGCMemoryInfo` | allocations d'`ItemsSpan` avec `[MemoryDiagnoser]` |
-| 3 | [async et await sous le capot](03-async-under-the-hood/) | la machine à états générée, `ValueTask`, `SynchronizationContext`, `ConfigureAwait`, annulation, `IAsyncEnumerable` | `Try.OfAsync`, `LazyWithExpiration` |
-| 4 | [Performances mesurées](04-measured-performance/) | BenchmarkDotNet, JIT par niveaux et PGO, `SearchValues`, `FrozenDictionary`, `Vector<T>` | soustraction de `PitchClass`, `SimdOps.Dot` |
-| 5 | Les génériques en profondeur | contraintes, membres abstraits statiques, math générique, `allows ref struct`, comment le JIT partage le code générique | `IStaticValueObjectList<TSelf>` de GA |
+| # | Leçon | Sous le capot | Mesuré sur GA | Spring et Reactor |
+|---|---|---|---|---|
+| 1 | [Mémoire : valeurs, références et spans](01-memory-values-and-spans/) | disposition des objets, boxing dans l'IL, `ref`/`in`, `ref struct`, `Span<T>`, `stackalloc` | `PitchClass`, `PitchClassSetId.ItemsSpan` | pas de types valeur, génériques effacés, libérer un `DataBuffer` |
+| 2 | [Le ramasse-miettes](02-garbage-collector/) | générations, LOH et POH, GC station de travail et serveur, DATAS, finaliseurs, `GC.GetGCMemoryInfo` | allocations d'`ItemsSpan` avec `[MemoryDiagnoser]` | G1 et ZGC, `Cleaner`, le `-prof gc` de JMH |
+| 3 | [async et await sous le capot](03-async-under-the-hood/) | la machine à états générée, `ValueTask`, `SynchronizationContext`, `ConfigureAwait`, annulation, `IAsyncEnumerable` | `Try.OfAsync`, `LazyWithExpiration` | assemblage et souscription, `publishOn`, threads virtuels |
+| 4 | [Performances mesurées](04-measured-performance/) | BenchmarkDotNet, JIT par niveaux et PGO, `SearchValues`, `FrozenDictionary`, `Vector<T>` | soustraction de `PitchClass`, `SimdOps.Dot` | JMH, C1 et C2, l'API Vector |
+| 5 | Les génériques en profondeur | contraintes, membres abstraits statiques, math générique, `allows ref struct`, comment le JIT partage le code générique | `IStaticValueObjectList<TSelf>` de GA | l'effacement, et des génériques sans primitifs |
 
 ### Partie 2 : concurrence et flux de données
 
@@ -81,11 +81,11 @@ Les parties 1 et 2 mesurent le propre code de GA. La partie 3 construit un petit
 
 ### Partie 4 : métaprogrammation et outillage
 
-| # | Leçon | Sous le capot |
-|---|---|---|
-| 22 | Arbres d'expressions, réflexion et générateurs de source | ce que devient une lambda une fois compilée, `Expression<T>`, le coût de la réflexion, générateurs incrémentiels, `[GeneratedRegex]` |
-| 23 | Analyseurs Roslyn et correctifs de code | modèles syntaxique et sémantique, écrire un analyseur et ses tests |
-| 24 | Interop et code unsafe | `[LibraryImport]`, pointeurs de fonction, `Unsafe`, `MemoryMarshal`, épinglage |
+| # | Leçon | Sous le capot | Spring et Reactor |
+|---|---|---|---|
+| 22 | Arbres d'expressions, réflexion et générateurs de source | ce que devient une lambda une fois compilée, `Expression<T>`, le coût de la réflexion, générateurs incrémentiels, `[GeneratedRegex]` | processeurs d'annotations, [le moteur AOT de Spring](https://docs.spring.io/spring-framework/reference/core/aot.html) |
+| 23 | Analyseurs Roslyn et correctifs de code | modèles syntaxique et sémantique, écrire un analyseur et ses tests | [Error Prone](https://errorprone.info/), [SpotBugs](https://spotbugs.github.io/) |
+| 24 | Interop et code unsafe | `[LibraryImport]`, pointeurs de fonction, `Unsafe`, `MemoryMarshal`, épinglage | JNI, et l'[API des fonctions et de la mémoire étrangères](https://openjdk.org/jeps/454) |
 
 ### Annexes
 

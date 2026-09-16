@@ -427,6 +427,28 @@ t=6 min: Value 2
 
 The value is computed once, kept at 4 minutes, and computed again at 6 minutes, in a test that runs in no time. The lock is a [`System.Threading.Lock`](https://learn.microsoft.com/dotnet/api/system.threading.lock), which `lock` uses directly since C# 13; lesson 10 comes back to it.
 
+## If you know Spring and Reactor
+
+Reactor answers this lesson's question the other way round. C# rewrites sequential code into a state machine so that it can suspend; Reactor asks you to describe the work as a chain of operators, and runs it when someone subscribes. Both moments allocate, and not the same way: assembling `.map(...)` creates one `Publisher` object, once, while each subscription creates one subscriber object per operator ([`FluxMap`](https://github.com/reactor/reactor-core/blob/main/reactor-core/src/main/java/reactor/core/publisher/FluxMap.java) builds a `MapSubscriber` in `subscribeOrReturn`). The [Reactor course](../../spring-cloud-reactor/02-reactor-mono-and-flux/#assembly-and-subscription) runs both.
+
+| C# | Reactor |
+|---|---|
+| the compiler generates a state machine for each `async` method | no code generation: operators are objects, and `subscribe` builds a second chain, of subscribers |
+| a `Task` is hot: it is already running, and awaiting it twice gives the same result | a pipeline is [cold](https://projectreactor.io/docs/core/release/reference/advancedFeatures/reactor-hotCold.html): each subscriber runs it again. `cache()` turns it hot; `Mono.just(lookUp())` is the trap, because its argument ran at assembly, and `Mono.defer` is the fix |
+| `ValueTask` saves the allocation of a synchronous completion | the equivalent saving is fusion: [`Fuseable`](https://projectreactor.io/docs/core/release/api/reactor/core/Fuseable.html) lets adjacent operators share one queue instead of one per stage, and a scalar source is replaced by a cheaper operator at assembly. Reactor publishes no figure for it |
+| `await` resumes on the captured `SynchronizationContext` | nothing captures anything. [`publishOn`](https://projectreactor.io/docs/core/release/reference/coreFeatures/schedulers.html) changes the thread for the operators below it; `subscribeOn` changes the thread the whole chain subscribes on, and only the closest one counts |
+| `ConfigureAwait(false)` opts out of a capture you never asked for | `publishOn` opts *in* to a thread change you did ask for |
+| blocking under a single-threaded context deadlocks | `block()` from a thread marked [`NonBlocking`](https://projectreactor.io/docs/core/release/api/reactor/core/scheduler/NonBlocking.html) throws instead of deadlocking; [BlockHound](https://github.com/reactor/BlockHound) catches the blocking calls that check misses |
+| `AsyncLocal<T>` flows with the execution context | `Context` and `ContextView` travel with the subscription, written downstream and read upstream |
+| a `CancellationToken` you pass down by hand and check | `cancel()` travels up the subscription on its own — as a request to stop *eventually*: the [Reactive Streams rules](https://github.com/reactive-streams/reactive-streams-jvm) say a subscriber must still be ready for items already requested (rule 2.8) |
+| `await` rethrows the first exception, and the task keeps them all | an error is terminal: it ends the sequence, and an error-handling operator doesn't resume it, it starts a new sequence in its place |
+| `IAsyncEnumerable<T>` and `[EnumeratorCancellation]` | `Flux<T>`, where the consumer asks with `request(n)` |
+| `TimeProvider` to make time testable | `StepVerifier.withVirtualTime`, which installs a virtual-time scheduler — hence its `Supplier`: the pipeline must be built inside the lambda |
+
+Put the two deadlocks side by side. In C#, blocking deadlocks because a context you never asked for captured the continuation, and the fix is to stop blocking. In Reactor, blocking fails because you are on a thread that refuses to block, and the fix is [`Mono.fromCallable(...).subscribeOn(Schedulers.boundedElastic())`](https://projectreactor.io/docs/core/release/reference/faq.html) joined with `flatMap` — again, not blocking. The rule survives the translation; only the error message changes.
+
+What does change is the price of blocking. Virtual threads ([JEP 444](https://openjdk.org/jeps/444), final in Java 21) make a blocked thread almost free, and [JEP 491](https://openjdk.org/jeps/491) removed the `synchronized` pinning that came with them, so the thread-per-request style is viable again for code that waits. The [Reactor course](../../spring-cloud-reactor/03-reactor-under-the-hood/#virtual-threads-or-reactive) weighs the two models; .NET has no equivalent, and `async` remains the only way to wait without holding a thread.
+
 ## Exercises
 
 1. `ThreeDelaysAsync` awaits `Task.Delay(1)` three times in a row. How many awaiter fields does its state machine have? Predict, then check with reflection or `ilspycmd`.

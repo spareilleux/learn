@@ -301,6 +301,27 @@ That's the author's machine. The Linux runner reported `Vector512 True` and a `T
 
 On 1,024 elements, GA's `SimdOps.Dot` is 3.3 times faster than the scalar loop, and `TensorPrimitives.Dot` 4.5 times. The JIT doesn't vectorize the scalar loop by itself: with `double`, reordering the additions would change the result, so each addition waits for the previous one. On 16 elements, both vectorized versions are about 1.7 times faster. For GA, replacing the body of `SimdOps.Dot` with a call to `TensorPrimitives.Dot` would be simpler and faster on this machine; the Arm64 timings haven't been measured, *to verify*.
 
+## If you know Spring and Reactor
+
+Every difficulty of this lesson exists on the JVM, and [JMH](https://github.com/openjdk/jmh) answers it with the same means. Its README makes the same promise BenchmarkDotNet does: "Do not assume that a nice harness will magically free you from considering benchmarking pitfalls. We only promise to make avoiding them easier, not avoiding them completely."
+
+| BenchmarkDotNet | JMH |
+|---|---|
+| one process per benchmark | [`@Fork`](https://github.com/openjdk/jmh/blob/master/jmh-samples/src/main/java/org/openjdk/jmh/samples/JMHSample_12_Forking.java), five measurement forks by default, because "JVMs are notoriously good at profile-guided optimizations", and two benchmarks in one JVM mix their profiles |
+| several runs to see the run-to-run variance | forks again: "JVMs are complex systems, and the non-determinism is inherent for them" |
+| warmup iterations, then measurement iterations | `@Warmup` and `@Measurement`: five iterations of ten seconds each, by default |
+| `[MemoryDiagnoser]`, allocated bytes per operation | `-prof gc`, whose `gc.alloc.rate.norm` is bytes per operation |
+| tier 0, then tier 1, with OSR for a loop that is already running | the interpreter, C1 and C2, with [on-stack replacement](https://openjdk.org/groups/hotspot/docs/HotSpotGlossary.html), "converting an interpreted stack frame into a compiled stack frame" |
+| dynamic PGO devirtualises an interface call | C2, the "highly optimizing bytecode compiler", compiles from the profile the lower tiers collected |
+| `DOTNET_TieredCompilation=0` to see what tiering was worth | [`-XX:-TieredCompilation`](https://docs.oracle.com/en/java/javase/25/docs/specs/man/java.html), documented as "By default, this option is enabled", or `-Xint` for the interpreter alone |
+| escape analysis puts a box on the stack | `-XX:+DoEscapeAnalysis`, also enabled by default, with scalar replacement |
+| `SearchValues<T>`, `FrozenDictionary` | no equivalent API: `Map.of` is immutable but not re-optimised for lookups, and `String.indexOf` is an intrinsic |
+| `Vector<T>`, and `TensorPrimitives` above it | the Vector API, in its twelfth incubation ([JEP 537](https://openjdk.org/jeps/537)), which states it "will incubate until necessary features of Project Valhalla become available as preview features" |
+
+Two things the JVM side adds. The garbage collector is one more source of variance: `gc.alloc.rate.norm` is nearly deterministic, while a timing on a heap that is filling up is not — which is the argument of lesson 2, made in a benchmark harness. And measuring a Reactor pipeline measures its scheduler hops as much as its work: a benchmark that assembles a chain and subscribes once mostly measures assembly, and `StepVerifier.withVirtualTime` removes the waiting but not the hops.
+
+The last rule of this lesson holds on both sides. A timing belongs to the machine that produced it: JMH and BenchmarkDotNet both print the environment above the table for that reason, and neither number means anything on a CI runner.
+
 ## Exercises
 
 1. Build a `FrozenDictionary` from the seven natural notes, `"C"` to `"B"`, mapped to their index. Which implementation do you get, and why not length buckets?

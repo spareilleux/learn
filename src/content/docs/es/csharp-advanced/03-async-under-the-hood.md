@@ -427,6 +427,28 @@ t=6 min: Value 2
 
 El valor se calcula una vez, se conserva a los 4 minutos y se vuelve a calcular a los 6 minutos, en una prueba que no tarda nada. El bloqueo es un [`System.Threading.Lock`](https://learn.microsoft.com/dotnet/api/system.threading.lock), que `lock` usa directamente desde C# 13; la lección 10 vuelve sobre ello.
 
+## Si conoces Spring y Reactor
+
+Reactor responde a la pregunta de esta lección al revés. C# reescribe el código secuencial como una máquina de estados para que pueda suspenderse; Reactor te pide que describas el trabajo como una cadena de operadores, y lo ejecuta cuando alguien se suscribe. Los dos momentos asignan, y no de la misma forma: ensamblar `.map(...)` crea un objeto `Publisher`, una sola vez, mientras que cada suscripción crea un objeto suscriptor por operador ([`FluxMap`](https://github.com/reactor/reactor-core/blob/main/reactor-core/src/main/java/reactor/core/publisher/FluxMap.java) construye un `MapSubscriber` en `subscribeOrReturn`). El [curso de Reactor](../../spring-cloud-reactor/02-reactor-mono-and-flux/#ensamblado-y-suscripción) ejecuta ambos.
+
+| C# | Reactor |
+|---|---|
+| el compilador genera una máquina de estados para cada método `async` | ninguna generación de código: los operadores son objetos, y `subscribe` construye una segunda cadena, la de los suscriptores |
+| una `Task` es caliente: ya está en marcha, y esperarla dos veces da el mismo resultado | un pipeline es [frío](https://projectreactor.io/docs/core/release/reference/advancedFeatures/reactor-hotCold.html): cada suscriptor lo vuelve a ejecutar. `cache()` lo vuelve caliente; `Mono.just(lookUp())` es la trampa, porque su argumento se ejecutó en el ensamblado, y `Mono.defer` es la corrección |
+| `ValueTask` ahorra la asignación de una finalización síncrona | el ahorro equivalente es la fusión: [`Fuseable`](https://projectreactor.io/docs/core/release/api/reactor/core/Fuseable.html) permite que operadores vecinos compartan una cola en vez de una por etapa, y una fuente escalar se sustituye por un operador más barato ya en el ensamblado. Reactor no publica ninguna cifra al respecto |
+| `await` reanuda en el `SynchronizationContext` capturado | nada captura nada. [`publishOn`](https://projectreactor.io/docs/core/release/reference/coreFeatures/schedulers.html) cambia el hilo de los operadores que están por debajo; `subscribeOn` cambia el hilo desde el que se suscribe toda la cadena, y solo cuenta el más cercano |
+| `ConfigureAwait(false)` renuncia a una captura que nunca pediste | `publishOn` pide explícitamente el cambio de hilo |
+| bloquear bajo un contexto de un solo hilo produce un interbloqueo | `block()` desde un hilo marcado como [`NonBlocking`](https://projectreactor.io/docs/core/release/api/reactor/core/scheduler/NonBlocking.html) lanza una excepción en vez de interbloquearse; [BlockHound](https://github.com/reactor/BlockHound) atrapa las llamadas bloqueantes que esa comprobación deja pasar |
+| `AsyncLocal<T>` fluye con el contexto de ejecución | `Context` y `ContextView` viajan con la suscripción, se escriben aguas abajo y se leen aguas arriba |
+| un `CancellationToken` que pasas y compruebas a mano | `cancel()` sube por la suscripción por sí solo — como una petición de parar *con el tiempo*: las [reglas de Reactive Streams](https://github.com/reactive-streams/reactive-streams-jvm) exigen que un suscriptor siga aceptando los elementos ya solicitados (regla 2.8) |
+| `await` relanza la primera excepción, y la tarea las conserva todas | un error es terminal: termina la secuencia, y un operador de manejo de errores no la reanuda, sino que arranca una secuencia nueva en su lugar |
+| `IAsyncEnumerable<T>` y `[EnumeratorCancellation]` | `Flux<T>`, donde el consumidor pide con `request(n)` |
+| `TimeProvider` para hacer el tiempo comprobable | `StepVerifier.withVirtualTime`, que instala un planificador de tiempo virtual — de ahí su `Supplier`: el pipeline debe construirse dentro de la lambda |
+
+Pon los dos interbloqueos uno al lado del otro. En C#, bloquear produce un interbloqueo porque un contexto que nunca pediste capturó la continuación, y la corrección es dejar de bloquear. En Reactor, bloquear falla porque estás en un hilo que se niega a bloquearse, y la corrección es [`Mono.fromCallable(...).subscribeOn(Schedulers.boundedElastic())`](https://projectreactor.io/docs/core/release/reference/faq.html) enlazado con `flatMap` — otra vez, no bloquear. La regla sobrevive a la traducción; solo cambia el mensaje de error.
+
+Lo que sí cambia es el precio de bloquear. Los hilos virtuales ([JEP 444](https://openjdk.org/jeps/444), definitivos en Java 21) hacen que un hilo bloqueado sea casi gratis, y la [JEP 491](https://openjdk.org/jeps/491) eliminó la fijación por `synchronized` que venía con ellos, así que el estilo de un hilo por petición vuelve a ser viable para el código que espera. El [curso de Reactor](../../spring-cloud-reactor/03-reactor-under-the-hood/#hilos-virtuales-o-reactivo) sopesa los dos modelos; .NET no tiene equivalente, y `async` sigue siendo allí la única forma de esperar sin ocupar un hilo.
+
 ## Ejercicios
 
 1. `ThreeDelaysAsync` espera `Task.Delay(1)` tres veces seguidas. ¿Cuántos campos de awaiter tiene su máquina de estados? Haz tu predicción y luego compruébala con reflexión o con `ilspycmd`.

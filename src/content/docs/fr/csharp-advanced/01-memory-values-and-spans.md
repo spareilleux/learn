@@ -347,6 +347,25 @@ PitchClassSetId.Items is <>z__ReadOnlyList`1
 
 Ces 16 408 octets, ce sont 24 octets d'en-tête de tableau plus 4 096 × 4. Le code compile, s'exécute et renvoie les bonnes valeurs ; seule une mesure en révèle le coût. La correction fait l'objet de l'exercice 3.
 
+## Si vous connaissez Spring et Reactor
+
+Cette leçon n'a presque pas d'équivalent Java, et c'est justement ce qu'elle apprend. Sur la JVM, tout type que vous déclarez est un type référence : `PitchClass`, qui tient ici sur 4 octets en ligne, y serait un objet avec un en-tête, et une liste de `PitchClass` une liste de références. C# vous donne des outils pour garder les valeurs hors du tas ; Java demande à son ramasse-miettes de les faire disparaître vite, ce que compare la leçon 2.
+
+| C# | Java, Spring et Reactor |
+|---|---|
+| `struct`, `readonly record struct` : 4 octets, en ligne, sans en-tête | aucun type valeur défini par l'utilisateur ; un `record` est un objet ordinaire du tas. Les objets valeur du [projet Valhalla](https://openjdk.org/projects/valhalla/) sont une *préversion* visée pour le JDK 28 ([JEP 401](https://openjdk.org/jeps/401)), donc absents de tout JDK publié |
+| le boxing est une instruction `box`, que le JIT supprime parfois | l'autoboxing appelle `Integer.valueOf` ([restrictions des génériques](https://docs.oracle.com/javase/tutorial/java/generics/restrictions.html)) ; l'analyse d'échappement de HotSpot, `-XX:+DoEscapeAnalysis`, [activée par défaut](https://docs.oracle.com/en/java/javase/25/docs/specs/man/java.html), peut supprimer l'allocation |
+| les génériques sont réifiés : un `PitchClass[]` contient des valeurs de 4 octets | les génériques sont effacés ([JLS §4.6](https://docs.oracle.com/javase/specs/jls/se25/html/jls-4.html)) : une `List<Integer>` contient des références vers des objets boxés, et `List<int>` ne compile pas |
+| `Span<T>` sur un tableau, une chaîne, de la mémoire native ou la pile | [`ByteBuffer`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/ByteBuffer.html), le [`ByteBuf`](https://netty.io/wiki/reference-counted-objects.html) de Netty, le [`DataBuffer`](https://docs.spring.io/spring-framework/reference/core/databuffer-codec.html) de WebFlux : des objets, et aucun n'est une fenêtre sur une `String` |
+| `stackalloc` | rien d'équivalent. `ByteBuffer.allocateDirect` alloue hors du tas, et sa Javadoc la réserve « primarily for large, long-lived buffers » |
+| CS8345, CS8352 et les autres erreurs de sûreté des références : le compilateur prouve qu'un span ne survit pas à sa mémoire | un comptage de références vérifié à l'exécution : `release()`, `IllegalReferenceCountException`, et un détecteur de fuites qui échantillonne environ 1 % des allocations |
+| `Memory<T>` pour les données qui traversent un `await` | un tampon du pool retenu au-delà d'un opérateur, libéré par celui qui le lit en dernier |
+| une copie défensive silencieuse quand on appelle une méthode sur un paramètre `in` | ne se pose pas : les objets sont toujours passés par référence |
+
+La ligne qui coûte du temps de débogage, c'est la propriété. Un `Span<T>` ne possède rien, et le compilateur rejette le code qui le laisserait survivre à sa mémoire. Un `PooledDataBuffer` démarre à un compteur de références de 1, que `retain()` et `release()` font varier, et la documentation de Spring est explicite : « special care must be taken to ensure buffers are released since they may be pooled », avec une règle par cas — libérer chaque tampon lu, et ajouter `doOnDiscard(DataBuffer.class, DataBufferUtils::release)` quand un opérateur peut écarter des éléments. Cette charge ne vous revient que si vous manipulez vous-même des `DataBuffer` : décodez vers une `String` ou un record, et le codec a déjà libéré. Les deux plateformes résolvent le même problème, l'une par un système de types, l'autre par une discipline et un détecteur de fuites.
+
+L'`ItemsSpan` de GA a aussi sa forme Java. Une propriété qui renvoie `collection.toArray()` copie à chaque lecture, renvoie les bonnes valeurs, et aucun test ne le remarque ; la mesure qui a trouvé les 16 408 octets ici est celle qu'il faut lancer là-bas.
+
 ## Exercices
 
 1. Prédisez `Unsafe.SizeOf` du tuple `(bool, int, bool)`, d'une struct avec les champs `bool Muted; int Fret; bool Barre;` dans cet ordre, et de la même struct marquée [`[StructLayout(LayoutKind.Auto)]`](https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.layoutkind).

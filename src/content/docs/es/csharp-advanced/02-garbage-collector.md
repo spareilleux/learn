@@ -221,6 +221,27 @@ Los tiempos proceden de una sola máquina y una sola ejecución, y la CI nunca l
 
 Lee primero `Allocated`: es exacto y reproducible. Lee `Mean` con su `Error` y su `StdDev`, y con las advertencias que BenchmarkDotNet imprime debajo de la tabla. La lección 4 trata de cómo obtener tiempos en los que puedas confiar.
 
+## Si conoces Spring y Reactor
+
+Las dos plataformas son generacionales, ambas sustituyeron la mayoría de sus opciones de ajuste por ergonomía, y no comparten casi nada de vocabulario. La tabla conecta lo que esta lección midió con lo que leerías en una [guía de ajuste del GC](https://docs.oracle.com/en/java/javase/25/gctuning/).
+
+| .NET | HotSpot |
+|---|---|
+| generaciones 0, 1 y 2 | una generación joven (edén y supervivientes) y una generación antigua; [G1](https://docs.oracle.com/en/java/javase/25/gctuning/garbage-first-g1-garbage-collector1.html) asigna a cada región uno de esos papeles |
+| el montón de objetos grandes, desde 85 000 bytes | los objetos *humongous* de G1, «larger or equal the size of half a region», asignados en regiones contiguas de la generación antigua. El tamaño de región es ergonómico: unas 2 048 regiones, de hasta 32 MB cada una |
+| el montón de objetos fijados, un montón aparte | nada equivalente. La fijación es transitoria y se limita a una región crítica de JNI; desde la [JEP 423](https://openjdk.org/jeps/423) (JDK 22), G1 fija la *región* en vez de desactivar la recolección, y registra un fallo de evacuación con el motivo `Pinned` |
+| GC de estación de trabajo o de servidor, elegido por configuración | un recolector entre [G1](https://openjdk.org/jeps/248) —el predeterminado, y desde la [JEP 523](https://openjdk.org/jeps/523) en todos los entornos, no solo en máquinas de tipo servidor—, Parallel, Serial y [ZGC](https://docs.oracle.com/en/java/javase/25/gctuning/z-garbage-collector.html) |
+| DATAS dimensiona el montón según la carga | la ergonomía de cada recolector, más el `-XX:SoftMaxHeapSize` de ZGC: un límite blando que intenta respetar, «but is still allowed to grow beyond this limit up to the maximum heap size» |
+| las duraciones de pausa leídas en `GC.GetGCMemoryInfo()` | un objetivo declarado por recolector: el de ZGC es «Pause times should not exceed 1 millisecond» ([JEP 439](https://openjdk.org/jeps/439)), más estricto que los 10 ms de su primera JEP |
+| los finalizadores, y el hilo de finalización | [`finalize()`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html), obsoleto y marcado para eliminación desde el JDK 18 ([JEP 421](https://openjdk.org/jeps/421)) y todavía activo por defecto; [`Cleaner`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/ref/Cleaner.html) y `PhantomReference` en su lugar |
+| `WeakReference<T>`, `ConditionalWeakTable` | [`WeakReference`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/ref/package-summary.html), `PhantomReference`, y `SoftReference`, «cleared at the discretion of the garbage collector in response to memory demand» — .NET no tiene referencia blanda |
+| `GC.GetGCMemoryInfo()` y `GC.GetConfigurationVariables()`, desde dentro del proceso | [`GarbageCollectorMXBean`](https://docs.oracle.com/en/java/javase/25/docs/api/java.management/java/lang/management/GarbageCollectorMXBean.html) con `getCollectionCount()` y `getCollectionTime()`, `-Xlog:gc`, y JDK Flight Recorder |
+| `[MemoryDiagnoser]`: bytes y recolecciones de gen0 por operación | el `-prof gc` de JMH, cuyo `gc.alloc.rate.norm` son los bytes por operación |
+
+Una fila merece cuidado, porque la lección 1 la midió aquí. .NET 9 y 10 asignan en la pila las cajas y los objetos pequeños que no escapan. El [análisis de escape](https://docs.oracle.com/en/java/javase/25/vm/java-hotspot-virtual-machine-performance-enhancements.html) de HotSpot está documentado de forma más estrecha: para un objeto que «does not escape», el compilador de servidor «eliminates the scalar replaceable object allocations and the associated locks from generated code» — el objeto se descompone en sus campos en vez de trasladarse a la pila. El resultado medido es el mismo, cero bytes asignados; la redacción de la garantía, no.
+
+Para un servicio reactivo, el número en el que insiste esta lección —los bytes por operación— importa aún más que aquí. Un pipeline de Reactor asigna un objeto suscriptor por operador en *cada* suscripción, y un servidor WebFlux se suscribe una vez por petición, así que las asignaciones crecen con el tráfico de un modo que un benchmark aislado no muestra. Reactor no publica cifras de asignación propias; `-prof gc` sobre tu propio pipeline es la manera de obtenerlas.
+
 ## Ejercicios
 
 1. ¿Cuál es el `char[]` más pequeño que va al montón de objetos grandes?

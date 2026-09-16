@@ -301,6 +301,27 @@ Esa es la máquina del autor. El runner de Linux informó de `Vector512 True` y 
 
 Sobre 1024 elementos, `SimdOps.Dot` de GA es 3.3 veces más rápido que el bucle escalar, y `TensorPrimitives.Dot`, 4.5 veces. El JIT no vectoriza el bucle escalar por su cuenta: con `double`, reordenar las sumas cambiaría el resultado, así que cada suma espera a la anterior. Sobre 16 elementos, las dos versiones vectorizadas son unas 1.7 veces más rápidas. Para GA, sustituir el cuerpo de `SimdOps.Dot` por una llamada a `TensorPrimitives.Dot` sería más sencillo y más rápido en esta máquina; los tiempos en Arm64 no se han medido, *por verificar*.
 
+## Si conoces Spring y Reactor
+
+Todas las dificultades de esta lección existen en la JVM, y [JMH](https://github.com/openjdk/jmh) responde a ellas con los mismos medios. Su README hace la misma promesa que BenchmarkDotNet: «Do not assume that a nice harness will magically free you from considering benchmarking pitfalls. We only promise to make avoiding them easier, not avoiding them completely.»
+
+| BenchmarkDotNet | JMH |
+|---|---|
+| un proceso por benchmark | [`@Fork`](https://github.com/openjdk/jmh/blob/master/jmh-samples/src/main/java/org/openjdk/jmh/samples/JMHSample_12_Forking.java), cinco forks de medición por defecto, porque «JVMs are notoriously good at profile-guided optimizations» y dos pruebas en una misma JVM mezclan sus perfiles |
+| varias ejecuciones para ver la varianza entre ejecuciones | de nuevo los forks: «JVMs are complex systems, and the non-determinism is inherent for them» |
+| iteraciones de calentamiento y luego de medición | `@Warmup` y `@Measurement`: cinco iteraciones de diez segundos cada una, por defecto |
+| `[MemoryDiagnoser]`, bytes asignados por operación | `-prof gc`, cuyo `gc.alloc.rate.norm` son los bytes por operación |
+| el nivel 0 y luego el nivel 1, con OSR para un bucle ya en marcha | el intérprete, C1 y C2, con el [reemplazo en la pila](https://openjdk.org/groups/hotspot/docs/HotSpotGlossary.html), «converting an interpreted stack frame into a compiled stack frame» |
+| el PGO dinámico desvirtualiza una llamada de interfaz | C2, el «highly optimizing bytecode compiler», compila a partir del perfil que recogieron los niveles inferiores |
+| `DOTNET_TieredCompilation=0` para ver qué aportaban los niveles | [`-XX:-TieredCompilation`](https://docs.oracle.com/en/java/javase/25/docs/specs/man/java.html), documentado como «By default, this option is enabled», o `-Xint` para el intérprete solo |
+| el análisis de escape coloca una caja en la pila | `-XX:+DoEscapeAnalysis`, también activado por defecto, con el reemplazo escalar |
+| `SearchValues<T>`, `FrozenDictionary` | ninguna API equivalente: `Map.of` es inmutable pero no se reoptimiza para la búsqueda, y `String.indexOf` es una intrínseca |
+| `Vector<T>`, y `TensorPrimitives` por encima | la API Vector, en su duodécima incubación ([JEP 537](https://openjdk.org/jeps/537)), que declara que «will incubate until necessary features of Project Valhalla become available as preview features» |
+
+El lado de la JVM añade dos cosas. El recolector de basura es una fuente más de varianza: `gc.alloc.rate.norm` es casi determinista, mientras que un tiempo medido sobre un montón que se va llenando no lo es — es el argumento de la lección 2, trasladado a un arnés de benchmarks. Y medir un pipeline de Reactor mide tanto sus saltos de planificador como su trabajo: un benchmark que ensambla una cadena y se suscribe una sola vez mide sobre todo el ensamblado, y `StepVerifier.withVirtualTime` quita la espera, no los saltos de hilo.
+
+La última regla de esta lección vale en ambos lados. Un tiempo pertenece a la máquina que lo produjo: JMH y BenchmarkDotNet imprimen el entorno encima de la tabla por esa razón, y ninguno de esos números significa nada en un runner de CI.
+
 ## Ejercicios
 
 1. Construye un `FrozenDictionary` a partir de las siete notas naturales, de `"C"` a `"B"`, asociadas a su índice. ¿Qué implementación obtienes, y por qué no cubos por longitud?

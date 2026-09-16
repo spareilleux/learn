@@ -347,6 +347,25 @@ PitchClassSetId.Items is <>z__ReadOnlyList`1
 
 16,408 bytes son 24 bytes de encabezado del array más 4,096 × 4. El código compila, se ejecuta y devuelve los valores correctos; solo una medición revela el coste. La solución es el ejercicio 3.
 
+## Si conoces Spring y Reactor
+
+Esta lección casi no tiene equivalente en Java, y eso es justamente lo que enseña. En la JVM todo tipo que declaras es un tipo por referencia: `PitchClass`, que aquí ocupa 4 bytes en línea, allí sería un objeto con cabecera, y una lista de ellos una lista de referencias. C# te da herramientas para mantener los valores fuera del montón; Java le pide a su recolector que los haga desaparecer pronto, algo que compara la lección 2.
+
+| C# | Java, Spring y Reactor |
+|---|---|
+| `struct`, `readonly record struct`: 4 bytes, en línea, sin cabecera | ningún tipo por valor definido por el usuario; un `record` es un objeto corriente del montón. Los objetos valor del [proyecto Valhalla](https://openjdk.org/projects/valhalla/) son una *versión preliminar* prevista para el JDK 28 ([JEP 401](https://openjdk.org/jeps/401)), así que no están en ningún JDK publicado |
+| el boxing es una instrucción `box`, que el JIT a veces elimina | el autoboxing llama a `Integer.valueOf` ([restricciones de los genéricos](https://docs.oracle.com/javase/tutorial/java/generics/restrictions.html)); el análisis de escape de HotSpot, `-XX:+DoEscapeAnalysis`, [activado por defecto](https://docs.oracle.com/en/java/javase/25/docs/specs/man/java.html), puede eliminar la asignación |
+| los genéricos están reificados: un `PitchClass[]` contiene valores de 4 bytes | los genéricos se borran ([JLS §4.6](https://docs.oracle.com/javase/specs/jls/se25/html/jls-4.html)): una `List<Integer>` contiene referencias a objetos boxeados, y `List<int>` ni siquiera compila |
+| `Span<T>` sobre un arreglo, una cadena, memoria nativa o la pila | [`ByteBuffer`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/ByteBuffer.html), el [`ByteBuf`](https://netty.io/wiki/reference-counted-objects.html) de Netty, el [`DataBuffer`](https://docs.spring.io/spring-framework/reference/core/databuffer-codec.html) de WebFlux: objetos, y ninguno es una ventana sobre un `String` |
+| `stackalloc` | nada equivalente. `ByteBuffer.allocateDirect` asigna fuera del montón, y su Javadoc lo reserva «primarily for large, long-lived buffers» |
+| CS8345, CS8352 y los demás errores de seguridad de referencias: el compilador demuestra que un span no sobrevive a su memoria | un conteo de referencias comprobado en ejecución: `release()`, `IllegalReferenceCountException`, y un detector de fugas que muestrea alrededor del 1 % de las asignaciones |
+| `Memory<T>` para los datos que cruzan un `await` | un búfer del pool retenido más allá de un operador, liberado por quien lo lee al final |
+| una copia defensiva silenciosa al llamar a un método sobre un parámetro `in` | no ocurre: los objetos siempre se pasan por referencia |
+
+La fila que cuesta tiempo de depuración es la propiedad. Un `Span<T>` no posee nada, y el compilador rechaza el código que lo dejaría sobrevivir a su memoria. Un `PooledDataBuffer` empieza con un conteo de referencias de 1, que `retain()` y `release()` mueven, y la documentación de Spring es explícita: «special care must be taken to ensure buffers are released since they may be pooled», con una regla por caso: liberar cada búfer leído y añadir `doOnDiscard(DataBuffer.class, DataBufferUtils::release)` cuando un operador pueda descartar elementos. Esa tarea solo es tuya si manejas `DataBuffer` directamente: si decodificas a un `String` o a un record, el códec ya los liberó. Las dos plataformas resuelven el mismo problema, una con un sistema de tipos y otra con disciplina y un detector de fugas.
+
+El `ItemsSpan` de GA también tiene forma Java. Una propiedad que devuelve `collection.toArray()` copia en cada lectura, devuelve los valores correctos y ninguna prueba lo nota; la medición que encontró aquí los 16 408 bytes es la que hay que ejecutar allí.
+
 ## Ejercicios
 
 1. Predice `Unsafe.SizeOf` de la tupla `(bool, int, bool)`, de un struct con los campos `bool Muted; int Fret; bool Barre;` en ese orden, y del mismo struct marcado con [`[StructLayout(LayoutKind.Auto)]`](https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.layoutkind).

@@ -45,13 +45,13 @@ Parts 1 and 2 measure GA's own code. Part 3 builds a small scales and chords ser
 
 ### Part 1: runtime and performance
 
-| # | Lesson | Under the hood | Measured on GA |
-|---|---|---|---|
-| 1 | [Memory: values, references and spans](01-memory-values-and-spans/) | object layout, boxing in IL, `ref`/`in`, `ref struct`, `Span<T>`, `stackalloc` | `PitchClass`, `PitchClassSetId.ItemsSpan` |
-| 2 | [The garbage collector](02-garbage-collector/) | generations, LOH and POH, workstation and server GC, DATAS, finalizers, `GC.GetGCMemoryInfo` | allocations of `ItemsSpan` with `[MemoryDiagnoser]` |
-| 3 | [async and await under the hood](03-async-under-the-hood/) | the generated state machine, `ValueTask`, `SynchronizationContext`, `ConfigureAwait`, cancellation, `IAsyncEnumerable` | `Try.OfAsync`, `LazyWithExpiration` |
-| 4 | [Measured performance](04-measured-performance/) | BenchmarkDotNet, tiered JIT and PGO, `SearchValues`, `FrozenDictionary`, `Vector<T>` | `PitchClass` subtraction, `SimdOps.Dot` |
-| 5 | Generics in depth | constraints, static abstract members, generic math, `allows ref struct`, how the JIT shares generic code | GA's `IStaticValueObjectList<TSelf>` |
+| # | Lesson | Under the hood | Measured on GA | Spring and Reactor |
+|---|---|---|---|---|
+| 1 | [Memory: values, references and spans](01-memory-values-and-spans/) | object layout, boxing in IL, `ref`/`in`, `ref struct`, `Span<T>`, `stackalloc` | `PitchClass`, `PitchClassSetId.ItemsSpan` | no value types, erased generics, releasing a `DataBuffer` |
+| 2 | [The garbage collector](02-garbage-collector/) | generations, LOH and POH, workstation and server GC, DATAS, finalizers, `GC.GetGCMemoryInfo` | allocations of `ItemsSpan` with `[MemoryDiagnoser]` | G1 and ZGC, `Cleaner`, JMH's `-prof gc` |
+| 3 | [async and await under the hood](03-async-under-the-hood/) | the generated state machine, `ValueTask`, `SynchronizationContext`, `ConfigureAwait`, cancellation, `IAsyncEnumerable` | `Try.OfAsync`, `LazyWithExpiration` | assembly and subscription, `publishOn`, virtual threads |
+| 4 | [Measured performance](04-measured-performance/) | BenchmarkDotNet, tiered JIT and PGO, `SearchValues`, `FrozenDictionary`, `Vector<T>` | `PitchClass` subtraction, `SimdOps.Dot` | JMH, C1 and C2, the Vector API |
+| 5 | Generics in depth | constraints, static abstract members, generic math, `allows ref struct`, how the JIT shares generic code | GA's `IStaticValueObjectList<TSelf>` | erasure, and generics without primitives |
 
 ### Part 2: concurrency and data flow
 
@@ -81,11 +81,11 @@ Parts 1 and 2 measure GA's own code. Part 3 builds a small scales and chords ser
 
 ### Part 4: metaprogramming and tooling
 
-| # | Lesson | Under the hood |
-|---|---|---|
-| 22 | Expression trees, reflection and source generators | what a lambda compiles to, `Expression<T>`, the cost of reflection, incremental generators, `[GeneratedRegex]` |
-| 23 | Roslyn analyzers and code fixes | syntax and semantic models, writing an analyzer and its tests |
-| 24 | Interop and unsafe code | `[LibraryImport]`, function pointers, `Unsafe`, `MemoryMarshal`, pinning |
+| # | Lesson | Under the hood | Spring and Reactor |
+|---|---|---|---|
+| 22 | Expression trees, reflection and source generators | what a lambda compiles to, `Expression<T>`, the cost of reflection, incremental generators, `[GeneratedRegex]` | annotation processors, [Spring's AOT engine](https://docs.spring.io/spring-framework/reference/core/aot.html) |
+| 23 | Roslyn analyzers and code fixes | syntax and semantic models, writing an analyzer and its tests | [Error Prone](https://errorprone.info/), [SpotBugs](https://spotbugs.github.io/) |
+| 24 | Interop and unsafe code | `[LibraryImport]`, function pointers, `Unsafe`, `MemoryMarshal`, pinning | JNI, and the [foreign function and memory API](https://openjdk.org/jeps/454) |
 
 ### Appendices
 
