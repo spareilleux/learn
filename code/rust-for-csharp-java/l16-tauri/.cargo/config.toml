@@ -1,0 +1,3 @@
+# ts-rs writes the TypeScript declarations here when `cargo test` runs its export tests
+[env]
+TS_RS_EXPORT_DIR = { value = "frontend/src/bindings", relative = true }

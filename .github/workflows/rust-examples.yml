@@ -98,22 +98,38 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y libwebkit2gtk-4.1-dev build-essential curl wget file \
-            libxdo-dev libssl-dev libayatana-appindicator3-dev librsvg2-dev
+            libxdo-dev libssl-dev libayatana-appindicator3-dev librsvg2-dev xvfb
       - uses: actions/setup-node@v7
         with:
           node-version: '24'
-      - name: Tauri CLI from package-lock.json
+      - name: Tauri CLI, Vite and WebdriverIO from package-lock.json
         run: npm ci && npx tauri --version
       - name: Toolchain
         run: rustup show active-toolchain && cargo --version
       - name: Formatting
         run: cargo fmt --all --check
-      - name: Clippy
-        run: cargo clippy --workspace --all-targets --locked -- -D warnings
+      - name: Clippy, with and without the webdriver feature
+        run: |
+          cargo clippy --workspace --all-targets --locked -- -D warnings
+          cargo clippy -p chord-explorer --features webdriver --locked -- -D warnings
       # theory needs no webview; the chord-explorer tests use Tauri's mock runtime, so no display either
       - name: Tests, IPC tests and compile_fail doctests
         run: cargo test --workspace --locked
-      - name: Release build without installers
+      # cargo test rewrote frontend/src/bindings (lesson 19): the committed files must not change
+      - name: TypeScript bindings up to date
         run: |
-          npx tauri build --no-bundle
+          git status --porcelain -- frontend/src/bindings
+          test -z "$(git status --porcelain -- frontend/src/bindings)"
+      - name: TypeScript check, Vite build and Vitest (lessons 19 and 21)
+        run: npm run web:build && npm test
+      # Lesson 21: the release binary with its embedded WebDriver server, driven by WebdriverIO
+      - name: End-to-end tests
+        run: |
+          npm run build:e2e
+          if [ "$RUNNER_OS" = Linux ]; then xvfb-run -a npm run test:e2e; else npm run test:e2e; fi
+      - name: Installers (MSI and NSIS, deb, rpm and AppImage, app and dmg)
+        run: |
+          npm run build:vite
           ls -l target/release | grep chord-explorer
+          find target/release/bundle -maxdepth 2 -type f -exec ls -l {} \;
+          if [ "$RUNNER_OS" = macOS ]; then du -sk target/release/bundle/macos/*.app; fi

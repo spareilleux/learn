@@ -1,0 +1,11 @@
+{
+  "build": {
+    "devUrl": "http://localhost:5173",
+    "frontendDist": "../frontend/dist",
+    "beforeDevCommand": "npm run web:dev",
+    "beforeBuildCommand": "npm run web:build"
+  },
+  "app": {
+    "withGlobalTauri": false
+  }
+}

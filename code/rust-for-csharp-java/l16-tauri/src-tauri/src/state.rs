@@ -8,12 +8,20 @@ use serde::Serialize;
 use tauri::ipc::Channel;
 use tauri::{AppHandle, Emitter, Runtime, State};
 use theory::{Chord, SearchOptions, Voicing};
+use ts_rs::TS;
 
 use crate::commands::CommandError;
 
 /// The favourite chord symbols, shared by every window.
 #[derive(Default)]
 pub struct Favorites(Mutex<Vec<String>>);
+
+impl Favorites {
+    /// Replaces the list, for example with the favourites saved by a previous run.
+    pub fn replace(&self, symbols: Vec<String>) {
+        *self.0.lock().unwrap() = symbols;
+    }
+}
 
 /// Lets `cancel_search` stop the search started by `find_voicings`.
 #[derive(Default)]
@@ -49,7 +57,8 @@ pub fn toggle_favorite<R: Runtime>(
 }
 
 /// What `find_voicings` streams to the frontend, in order.
-#[derive(Clone, Serialize)]
+#[derive(Clone, Serialize, TS)]
+#[ts(export)]
 #[serde(
     tag = "event",
     content = "data",
@@ -66,6 +75,8 @@ pub enum SearchEvent {
     },
     Finished {
         found: usize,
+        // ts-rs maps u128 to `bigint`, but serde_json writes a plain JSON number
+        #[ts(type = "number")]
         elapsed_ms: u128,
         cancelled: bool,
     },

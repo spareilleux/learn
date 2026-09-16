@@ -4,9 +4,30 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "tauri": "tauri"
+    "tauri": "tauri",
+    "web:dev": "vite",
+    "web:build": "tsc && vite build",
+    "dev:vite": "tauri dev --config src-tauri/tauri.vite.conf.json",
+    "build:vite": "tauri build --config src-tauri/tauri.vite.conf.json",
+    "test": "vitest run",
+    "build:e2e": "tauri build --no-bundle --features webdriver --config src-tauri/tauri.vite.conf.json",
+    "test:e2e": "wdio run e2e/wdio.conf.ts"
   },
   "devDependencies": {
-    "@tauri-apps/cli": "2.11.4"
+    "@tauri-apps/cli": "2.11.4",
+    "@wdio/cli": "9.31.9",
+    "@wdio/globals": "9.31.3",
+    "@wdio/local-runner": "9.31.9",
+    "@wdio/mocha-framework": "9.31.9",
+    "@wdio/spec-reporter": "9.31.2",
+    "jsdom": "30.0.1",
+    "typescript": "7.0.2",
+    "vite": "8.3.0",
+    "vitest": "5.0.1"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "2.11.1",
+    "@tauri-apps/plugin-dialog": "2.7.3",
+    "@tauri-apps/plugin-fs": "2.5.2"
   }
 }

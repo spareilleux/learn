@@ -1,7 +1,8 @@
 //! Chord Explorer: a Tauri window over the `theory` crate.
 //!
 //! `commands` is lesson 17 (calling Rust from the UI), `state` is lesson 18
-//! (managed state, events and channels).
+//! (managed state, events and channels). `run` adds lesson 20's plugins and, for
+//! lesson 21's end-to-end tests, an optional WebDriver server.
 
 pub mod commands;
 pub mod state;
@@ -9,7 +10,8 @@ pub mod state;
 #[cfg(doctest)]
 mod compile_fail;
 
-use tauri::{Builder, Runtime};
+use tauri::{AppHandle, Builder, Listener, Manager, Runtime};
+use tauri_plugin_store::StoreExt;
 
 /// Registers the managed state and every command.
 ///
@@ -32,9 +34,41 @@ pub fn setup<R: Runtime>(builder: Builder<R>) -> Builder<R> {
         ])
 }
 
+/// The store file, in the app's data folder, that keeps the favourites between runs.
+const STORE_FILE: &str = "favorites.json";
+const FAVORITES_KEY: &str = "favorites";
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
-    setup(tauri::Builder::default())
+    let builder = setup(tauri::Builder::default())
+        // Lesson 20: plugins. Their commands still need permissions in a capability
+        .plugin(tauri_plugin_dialog::init())
+        .plugin(tauri_plugin_fs::init())
+        .plugin(tauri_plugin_store::Builder::new().build());
+
+    // Lesson 21: absent from normal builds, so the shipped app opens no WebDriver port
+    #[cfg(feature = "webdriver")]
+    let builder = builder.plugin(tauri_plugin_wdio_webdriver::init());
+
+    builder
+        .setup(|app| restore_favorites(app.handle()))
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
+}
+
+/// Loads the saved favourites into the managed state, then saves them again each time
+/// `toggle_favorite` announces a change (lesson 18's event). This is Rust code, so no
+/// capability is involved: permissions only restrict what the webview may call.
+fn restore_favorites<R: Runtime>(app: &AppHandle<R>) -> Result<(), Box<dyn std::error::Error>> {
+    let store = app.store(STORE_FILE)?;
+    if let Some(saved) = store.get(FAVORITES_KEY) {
+        let symbols: Vec<String> = serde_json::from_value(saved).unwrap_or_default();
+        app.state::<state::Favorites>().replace(symbols);
+    }
+    app.listen("favorites-changed", move |event| {
+        if let Ok(symbols) = serde_json::from_str::<serde_json::Value>(event.payload()) {
+            store.set(FAVORITES_KEY, symbols);
+        }
+    });
+    Ok(())
 }

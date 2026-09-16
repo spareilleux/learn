@@ -4,10 +4,12 @@ use std::sync::atomic::AtomicBool;
 
 use serde::{Deserialize, Serialize};
 use theory::{Chord, Mode, Note, Quality, SearchOptions, TheoryError};
+use ts_rs::TS;
 
 /// A chord as the frontend receives it: strings ready to display.
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, TS)]
 #[serde(rename_all = "camelCase")]
+#[ts(export)]
 pub struct ChordView {
     symbol: String,
     quality_name: &'static str,
@@ -27,7 +29,8 @@ impl From<Chord> for ChordView {
 }
 
 /// A quality for the frontend's help list.
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, TS)]
+#[ts(export)]
 pub struct QualityView {
     suffix: &'static str,
     name: &'static str,
@@ -35,7 +38,8 @@ pub struct QualityView {
 
 /// The error a failed command sends to the frontend, where the promise rejects with
 /// `{ kind, message }`.
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, TS)]
+#[ts(export)]
 pub struct CommandError {
     kind: &'static str,
     message: String,
@@ -65,8 +69,9 @@ impl From<tauri::Error> for CommandError {
 }
 
 /// `"major"` or `"minor"` in JSON.
-#[derive(Debug, Clone, Copy, Deserialize)]
+#[derive(Debug, Clone, Copy, Deserialize, TS)]
 #[serde(rename_all = "lowercase")]
+#[ts(export)]
 pub enum ScaleMode {
     Major,
     Minor,
