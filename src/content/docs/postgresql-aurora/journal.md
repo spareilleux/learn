@@ -18,7 +18,11 @@ sidebar:
 - [x] Lesson 6: transactions and MVCC
 - [x] Lesson 7: JSON and search
 - [x] Lesson 8: functions, extensions and pgvector
-- [ ] Lessons 9 to 13
+- [x] Lesson 9: partitioning
+- [x] Lesson 10: replication, on three clusters inside the course container
+- [x] Lesson 11: backups, point-in-time recovery and `pg_upgrade`
+- [x] Lesson 12: Aurora, from the documentation, and a failover from C# and Java
+- [ ] Lesson 13
 - [ ] Anything on AWS: every Aurora section is still *to verify*
 
 ## 2026-09-15 — Versions
@@ -94,8 +98,46 @@ Nothing here was reported to the project; these are notes, with the queries that
 - AWS's pages disagree on Performance Insights' end of life: July 31, 2026 in the CloudWatch guide, November 30, 2025 in the Aurora User Guide's history. They also disagree on whether Database Insights defaults to Standard or Advanced mode.
 - `max_standby_streaming_delay`: 30 seconds on the `Lock:Relation` page, 14,000 ms in the parameter table for Aurora PostgreSQL 14.
 
+## 2026-09-16 — Partitioning
+
+- A primary key on `id` alone is refused on a table partitioned by `started_at`; with `(id, started_at)` it's accepted, and checked partition by partition.
+- `DETACH PARTITION … CONCURRENTLY` isn't allowed while the table has a default partition, and a default partition that holds a row for October blocks creating October's partition.
+- Hash partitioning on 64 job names gave one partition 2.1 times the rows of another.
+- A procedure that printed a `regclass` after `DROP TABLE` printed the bare OID: the notice has to come before the drop.
+
+## 2026-09-16 — Several servers in one container
+
+- The course runs one container at a time. Lessons 10 and 11 start small clusters inside it with `initdb` and `pg_ctl`, on ports 5433 to 5436, with `shared_buffers = 32MB`; CI runs the same scripts inside its service container.
+- A script rewritten on Windows through Python's text mode got CRLF line endings, and `bash -s` in the container failed on its first lines. Files written with `newline=''` keep LF.
+- The image's clusters put their Unix socket in `/var/run/postgresql`, not `/tmp`: with `PGHOST=/tmp`, every `psql` failed, and each wait loop timed out after 30 seconds.
+- `SET statement_timeout = '2s'` didn't end an `INSERT` waiting for a synchronous standby that was stopped: it waited ten minutes, until I cancelled it with `pg_cancel_backend`. The script now cancels the wait from another session; the warning says the transaction "has already committed locally".
+- `pg_rewind` first failed with `could not open file "node1/pg_wal/000000010000000000000002"`: the old primary had recycled the segment it needed. `wal_keep_size = 128MB` keeps it.
+- PostgreSQL 18's conflict statistics count the `insert_exists` conflict of a subscriber that had its own row; the apply worker retries until the row is deleted.
+
+## 2026-09-16 — Backups and pg_upgrade
+
+- `pg_upgrade --check` from a 17 cluster to a new 18 cluster stopped at "old cluster does not use data checksums but the new one does": `initdb` 18 enables checksums by default. `--no-data-checksums` on the new cluster fixes it.
+- `pg_upgrade` 18 kept the six column statistics of `ci.runs`, not its extended statistics; `vacuumdb --analyze-only --missing-stats-only` rebuilt them.
+- The upgrade needs PostgreSQL 17's binaries: `check.sh` installs `postgresql-17` from the apt repository the image already uses, so the old side's minor version isn't pinned. The outputs show the major version only.
+
+## 2026-09-16 — A failover from the drivers
+
+- `ops/12-cluster.sh` starts a primary and a standby in the course container, published on ports 5433 and 5434. The programs stop the primary through `COPY … TO PROGRAM 'pg_ctl … -W stop'` and promote the standby with `pg_promote()`.
+- On the connection opened before the failure, pgjdbc reports `57P01`, "terminating connection due to administrator command", and Npgsql "Exception while reading from stream" on Windows through Docker Desktop, but a `PostgresException` with `57P01` in CI on Linux: the first CI run failed on that line. The C# program now prints the connection's `FullState`, `Broken` on both.
+- Both drivers cache host states for 10 seconds by default, yet a write right after the promotion found the new primary in both. I haven't traced why in their source.
+
+## 2026-09-16 — Aurora, lessons 9 to 12
+
+- The maximum cluster volume: 256 TiB for Aurora PostgreSQL 15.13, 16.9, 17.5 and higher in the quotas page's version table, 128 TiB in the same page's quota table, 256 TiB without condition in the overview.
+- The release calendar gives PostgreSQL 18 a "community release date" of February 26, 2026, the date of 18.3; PostgreSQL 18.0 came out on September 25, 2025.
+- The major version upgrade page says optimizer statistics aren't transferred, while `pg_upgrade` 18 transfers most of them.
+- Blue/green deployments and zero-ETL have no Aurora PostgreSQL 18 column in their version tables yet; RDS Proxy has one, from 18.3.
+- The AWS Advanced .NET Data Provider Wrapper exists, 2.2.0 on GitHub, with an Npgsql dialect, but the Aurora User Guide's list of AWS drivers doesn't mention it.
+
 ## To verify
 
 - The Linux and macOS commands of lessons 1 and 4, on those systems.
 - Every "On Aurora" section: `pg_read_file` and the `CONNECT` requirement for `rds_superuser`, `btree_gist` 1.6, the read-only error on a replica, TLS by default, IAM tokens with Npgsql's periodic password provider, RDS Proxy pinning with Npgsql's `DISCARD ALL` and with protocol-level prepared statements, and `pg_is_in_recovery()` on an Aurora Replica.
 - Lessons 5 to 8 on Aurora: the `shared_buffers` default for Aurora PostgreSQL 18 and the reason it's larger, query plan management on 18.4, `hot_standby_feedback` holding back `VACUUM` on the writer, the `max_standby_streaming_delay` default, trusted extensions under `rds.allowed_extensions`, and pgvector 0.8.2's iterative scans.
+- Lessons 9 to 12 on Aurora: pg_partman 5.4.3 on 18.4, logical replication after `rds.logical_replication`, statistics after a major upgrade to 18, blue/green deployments and zero-ETL on 18, Aurora Serverless ranges and auto-pause on 18, whether a pool's idle connections prevent auto-pause, RDS Proxy with cancel requests, and a failover's duration as seen from Npgsql and pgjdbc.
+- Why Npgsql and pgjdbc found the promoted standby right away despite their 10-second host state caches.
