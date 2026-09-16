@@ -22,7 +22,8 @@ sidebar:
 - [x] Lesson 10: replication, on three clusters inside the course container
 - [x] Lesson 11: backups, point-in-time recovery and `pg_upgrade`
 - [x] Lesson 12: Aurora, from the documentation, and a failover from C# and Java
-- [ ] Lesson 13
+- [x] Lesson 13: migrating from SQL Server, by hand, by program and with pgloader; DMS, Babelfish and costs from the documentation
+- [x] The course is complete
 - [ ] Anything on AWS: every Aurora section is still *to verify*
 
 ## 2026-09-15 — Versions
@@ -134,6 +135,17 @@ Nothing here was reported to the project; these are notes, with the queries that
 - Blue/green deployments and zero-ETL have no Aurora PostgreSQL 18 column in their version tables yet; RDS Proxy has one, from 18.3.
 - The AWS Advanced .NET Data Provider Wrapper exists, 2.2.0 on GitHub, with an Npgsql dialect, but the Aurora User Guide's list of AWS drivers doesn't mention it.
 
+## 2026-09-16 — Migrating from SQL Server
+
+- The course is complete: 13 lessons. SQL Server 2025 CU9 started in a few seconds in its container and used about 450 MB at rest; CI runs it as a service container next to PostgreSQL.
+- `sqlcmd` 18.6 (`mssql-tools18` in the image) dropped every result that followed an uncaught error in a script run with `-i`, when the error was the first statement of a batch that came after a batch with results; `-Q` with the same statements printed them. The scripts catch their errors with `TRY … CATCH`.
+- `Microsoft.Data.SqlClient` 7.0.3 threw `Globalization Invariant Mode is not supported.` on `OpenAsync` in the course's C# project, which sets `InvariantGlobalization`. The migration program has its own project.
+- Npgsql truncated `datetimeoffset(7)` ticks to microseconds (`.9999999` to `.999999`); pgloader rounded them (`10:06:00.9999999 -04:00` to `14:06:01`).
+- pgloader, image built from `231ab86`, turned a `money` value of `0.0125` into `0.01`, without error or warning: it reads `money` with `convert(varchar(40), [col], 0)`, and style 0 keeps two decimals ([`mssql-schema.lisp`, lines 212-217](https://github.com/dimitri/pgloader/blob/231ab86778ca5ffd7de40878714760c8b4860cdf/src/sources/mssql/mssql-schema.lisp#L212-L217)). It also left out the `CHECK` constraint and turned `INCLUDE (Conclusion)` into a key column.
+- SQL Server's `IDENT_CURRENT` was 6 with three rows: two failed inserts and a deleted row had used values.
+- AWS documentation read the same day: DMS doesn't list SQL Server 2025 as a source; Babelfish's parameter table and collations page give two different default server collations, and the collations page still says PostgreSQL doesn't support `LIKE` on nondeterministic collations; the open-source Babelfish stops at PostgreSQL 17.7 and has no container image.
+- Microsoft's SQL Server 2025 pricing web page refused scripted requests; the prices come from its PDF pricing sheet.
+
 ## To verify
 
 - The Linux and macOS commands of lessons 1 and 4, on those systems.
@@ -141,3 +153,4 @@ Nothing here was reported to the project; these are notes, with the queries that
 - Lessons 5 to 8 on Aurora: the `shared_buffers` default for Aurora PostgreSQL 18 and the reason it's larger, query plan management on 18.4, `hot_standby_feedback` holding back `VACUUM` on the writer, the `max_standby_streaming_delay` default, trusted extensions under `rds.allowed_extensions`, and pgvector 0.8.2's iterative scans.
 - Lessons 9 to 12 on Aurora: pg_partman 5.4.3 on 18.4, logical replication after `rds.logical_replication`, statistics after a major upgrade to 18, blue/green deployments and zero-ETL on 18, Aurora Serverless ranges and auto-pause on 18, whether a pool's idle connections prevent auto-pause, RDS Proxy with cancel requests, and a failover's duration as seen from Npgsql and pgjdbc.
 - Why Npgsql and pgjdbc found the promoted standby right away despite their 10-second host state caches.
+- Lesson 13 on AWS: DMS with a SQL Server 2025 source, whether DMS validation reports `datetimeoffset(7)` values truncated to microseconds, Babelfish's default server collation and its handling of this lesson's seven behaviours, the prices of the AWS Price List published on 2026-09-11, and whether RDS bills a 2-vCPU SQL Server instance for 4 license vCPUs.
