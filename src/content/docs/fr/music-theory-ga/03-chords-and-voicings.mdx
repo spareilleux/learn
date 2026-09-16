@@ -115,6 +115,8 @@ Trois des cinq accords de septième reviennent avec le chiffrage d'un autre acco
 - `Cm7b5` est `Diminished` plus `Seventh` : `"dim" + "7"`, le chiffrage de l'accord *entièrement* diminué ;
 - `Cdim7` est `Diminished`, et son intervalle de 9 demi-tons est lu comme une sixte par [`DetermineExtension`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Harmony/ChordFormula.cs#L216-L294) : `"dim6"`. Neuf demi-tons font une sixte majeure *ou* une septième diminuée ; seule l'orthographe (B𝄫 plutôt que A) dit laquelle, et une formule en demi-tons n'a pas d'orthographe. La section suivante y revient.
 
+Les membres que `DetermineQuality` ne renvoie jamais ne sont pas inutilisés ailleurs dans GA, et les bons chiffrages sont déjà écrits deux fois : [`CadenceChordParser`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Chords/Parsing/CadenceChordParser.cs#L11-L14) fait correspondre `"maj7"`, `"m7b5"` et `"dim7"` à `Major7`, `HalfDiminished` et `Diminished7`, et le [`DslCommand`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.DSL/Types/DslCommand.fs#L227-L230) F# les réimprime en `maj7`, `m7`, `dim7` et `ø7`, les chiffrages du manuel — Open Music Theory écrit l'accord demi-diminué F∅7 et l'accord entièrement diminué Fo7 (["Seventh Chords"](https://viva.pressbooks.pub/openmusictheory/chapter/seventh-chords/)). La table existe dans le même commit ; `ChordFormula` ne l'atteint simplement jamais.
+
 **`CanonicalChordPatternCatalog`** est une liste écrite à la main de motifs d'intervalles avec des noms et des priorités, et [`TryFindExact`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Harmony/CanonicalChordPatternCatalog.cs#L165-L177) renvoie le premier motif, par priorité, dont les intervalles correspondent exactement. Il nomme correctement les quatorze accords :
 
 ```text
@@ -167,7 +169,7 @@ var newPitchClassValue = (root.PitchClass.Value + interval.Interval.Semitones.Va
 var newNote = new PitchClass { Value = newPitchClassValue }.ToChromaticNote().ToAccidented();
 ```
 
-Une classe de hauteurs n'a pas de lettre, donc la conversion choisit un nom avec dièse pour chaque touche noire. Les classes de hauteurs restent justes, tout comme les accords dont l'orthographe correcte utilise des dièses (F♯ majeur), mais un accord d'une tonalité à bémols comme E♭ reçoit `Eb G A#`, qui mélange les deux, et `Gb7` reçoit un E pour sa septième. Pour jouer, le son est le même. Pour l'affichage, l'analyse ou les noms d'intervalles de la leçon 1, l'orthographe est fausse : d'après ses lettres, de E♭ à A♯ il y a une quarte (E F G A) large de sept demi-tons, pas la quinte juste de l'accord.
+Une classe de hauteurs n'a pas de lettre, et la conversion tient en une ligne : [`Note.Chromatic.ToAccidented`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Primitives/Notes/Note.cs#L75-L77) est `ToSharp().ToAccidented()`, si bien que chaque touche noire reçoit un nom avec dièse. Les classes de hauteurs restent justes, tout comme les accords dont l'orthographe correcte utilise des dièses (F♯ majeur), mais un accord d'une tonalité à bémols comme E♭ reçoit `Eb G A#`, qui mélange les deux, et `Gb7` reçoit un E pour sa septième. Pour jouer, le son est le même. Pour l'affichage, l'analyse ou les noms d'intervalles de la leçon 1, l'orthographe est fausse : d'après ses lettres, de E♭ à A♯ il y a une quarte (E F G A) large de sept demi-tons, pas la quinte juste de l'accord.
 
 ## Renversements et accords à basse imposée
 
@@ -218,11 +220,18 @@ Dessinées comme sur les diagrammes d'accords, corde 6 à gauche et sillet en ha
 
 <Voicings role="img" aria-label="Quatre diagrammes d'accords. x32010 : C3 E3 G3 C4 E4. 032010 : E2 C3 E3 G3 C4 E4. 320003 : G2 B2 D3 G3 B3 G4. 133211 : un barré sur la case 1, F2 C3 F3 A3 C4 F4." />
 
+```play
+C3 E3 G3 C4 E4
+E2 C3 E3 G3 C4 E4
+G2 B2 D3 G3 B3 G4
+F2 C3 F3 A3 C4 F4
+```
+
 ### Dans GA
 
 - [`Voicing`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Instruments/Fretboard/Voicings/Core/Voicing.cs#L14-L36) est un `record` de `Position` (`Position.Muted` ou `Position.Played`, encore une hiérarchie fermée) et de notes MIDI. Son `Diagram` joint les positions dans l'ordre du tableau, et le [`VoicingGenerator`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Voicings/Generation/VoicingGenerator.cs#L167) de GA remplit ce tableau dans l'ordre de `Str.Range`, à partir de la [corde 1, "the first string (highest pitch)"](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Instruments/Primitives/Str.cs#L35-L38), donc les diagrammes de GA commencent par le E aigu, à l'inverse des diagrammes d'accords. Le programme construit ses voicings [de la même façon](https://github.com/spareilleux/learn/blob/79d2198/code/music-theory-ga/GaTheory/Lesson3.cs#L128-L137).
 - [`FretSpan`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Instruments/Fretboard/Voicings/Core/Voicing.cs#L38-L48) ignore les cordes à vide, comme le cours.
-- [`HasBarre`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Instruments/Fretboard/Voicings/Core/Voicing.cs#L73-L80) est vrai quand trois cordes jouées partagent une case, **case 0 comprise**. Trois cordes à vide ne font pas un barré, donc `032010` (C avec un E grave), `022100` (E) et `320003` (G), tous joués sans barré, ressortent comme des accords barrés. La règle du cours ne compte que les cordes appuyées ; c'est encore une simplification, car un vrai barré exige aussi que les cordes soient voisines, ce que le commentaire au-dessus de `HasBarre` note comme travail à faire.
+- [`HasBarre`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Instruments/Fretboard/Voicings/Core/Voicing.cs#L73-L80) est vrai quand trois cordes jouées partagent une case, **case 0 comprise**. Trois cordes à vide ne font pas un barré, donc `032010` (C avec un E grave), `022100` (E) et `320003` (G), tous joués sans barré, ressortent comme des accords barrés. Un barré, c'est "one finger to press down multiple strings across a single fret" ([Barre chord](https://en.wikipedia.org/wiki/Barre_chord), Wikipédia), et aucun doigt n'appuie une corde à vide : les trois lignes sont donc une erreur de GA, pas une affaire de définition. Le travail à faire annoncé dans le commentaire au-dessus de `HasBarre` est déjà écrit : [`DetectBarreRequirement`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Voicings/Analysis/VoicingPhysicalAnalyzer.cs#L219-L233) teste bien `fret > 0` et exige bien que les cordes soient voisines — et pour cette raison elle répond *pas de barré* pour `133211`, dont la case 1 est sur les cordes 6, 2 et 1. La règle du cours compte les cordes appuyées sans exiger la contiguïté, donc elle appellerait aussi barré une forme comme `x1x1x1`. Les trois règles sont des approximations ; seule celle du cours donne la bonne réponse sur chaque ligne de ce tableau.
 
 ## Nommer un voicing
 

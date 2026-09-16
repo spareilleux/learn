@@ -166,6 +166,28 @@ Les bracelets montrent la différence. Le dorien sur C est le polygone de la gam
 
 <BraceletModes role="img" aria-label="Deux bracelets au même polygone. 2741, ionien : 0 2 4 5 7 9 11. 1709, dorien sur C : 0 2 3 5 7 9 10, le premier polygone tourné de deux positions dans le sens inverse des aiguilles d'une montre." />
 
+```play
+C4
+D4
+Eb4
+F4
+G4
+A4
+Bb4
+C5
+```
+
+```play
+C4
+D4
+E4
+F4
+G4
+A4
+B4
+C5
+```
+
 ### La notation
 
 Les modes s'écrivent en degrés comparés à la gamme majeure, ou à la mineure naturelle pour les modes à tierce mineure. Chaque mode a alors un ou deux degrés **caractéristiques** : le dorien est mineur avec un 6 haussé, le phrygien mineur avec un 2 abaissé, le lydien majeur avec un 4 haussé, le mixolydien majeur avec un 7 abaissé, et le locrien mineur avec 2 et 5 abaissés ([Open Music Theory, "Introduction to Diatonic Modes and the Chromatic Scale"](https://viva.pressbooks.pub/openmusictheory/chapter/intro-to-diatonic-modes-and-the-chromatic-scale/)). Le même chapitre classe les modes du plus lumineux au plus sombre. Le tableau ci-dessus montre pourquoi ce classement est si régulier : du lydien au locrien, chaque mode abaisse exactement une note du précédent.
@@ -231,7 +253,7 @@ diminished       2      2      ok
 - **mineure harmonique** (7 + 7) : son image miroir, 1 2 3 4 5 b6 7, la gamme *majeure harmonique* (le `Scale.HarmonicMajor` de GA lui-même), a les mêmes intervalles dans l'ordre inverse, donc le même vecteur et sept rotations de plus ;
 - **blues** (6 + 6 + 12) : ses six rotations, les six de son image miroir, et douze ensembles d'une autre classe d'ensembles au même vecteur, une *relation Z* (leçon 4).
 
-Les six autres gammes du tableau sont leur propre image miroir et n'ont pas de partenaire en relation Z, donc pour elles les deux comptes concordent. Aucune des deux réponses n'est fausse, mais le nom évoque des rotations, et un lecteur qui compte les « modes de la mineure harmonique » dans GA obtient le double du nombre du manuel.
+Les six autres gammes du tableau sont leur propre image miroir et n'ont pas de partenaire en relation Z, donc pour elles les deux comptes concordent. Une classe de vecteurs d'intervalles est un véritable objet de la théorie des ensembles, mais ce n'est pas ce que veut dire *mode*. Un mode est une rotation d'une gamme, et une gamme a autant de modes qu'elle a de notes, sauf si une symétrie de rotation rend deux rotations identiques : "Modes are the rotational transformations of this scale. This number includes the scale itself, so the number is usually the same as its cardinality" ([Ian Ring, gamme 2477](https://ianring.com/musictheory/scales/2477)). Ses pages répondent 7 pour la [mineure harmonique](https://ianring.com/musictheory/scales/2477) et 6 pour la [gamme blues](https://ianring.com/musictheory/scales/1257), les nombres du cours. Le commentaire de classe de `ModalFamily` dit lui-même ce qu'il construit réellement, des ensembles de classes de hauteurs "that share the same interval vector" — mais il les appelle `Modes`, et un lecteur qui compte les modes de la mineure harmonique dans GA obtient le double du nombre.
 
 ## Autres opérations sur les bits
 

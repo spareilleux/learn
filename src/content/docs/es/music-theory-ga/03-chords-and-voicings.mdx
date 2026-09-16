@@ -115,6 +115,8 @@ Tres de los cinco acordes de séptima vuelven con el cifrado de otro acorde. El 
 - `Cm7b5` es `Diminished` más `Seventh`: `"dim" + "7"`, el cifrado del acorde *totalmente* disminuido;
 - `Cdim7` es `Diminished`, y [`DetermineExtension`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Harmony/ChordFormula.cs#L216-L294) lee su intervalo de 9 semitonos como una sexta: `"dim6"`. Nueve semitonos son una sexta mayor *o* una séptima disminuida; solo la grafía (B𝄫 en lugar de A) dice cuál, y una fórmula en semitonos no tiene grafía. La sección siguiente vuelve sobre esto.
 
+Los miembros que `DetermineQuality` nunca devuelve no están sin usar en el resto de GA, y los cifrados correctos ya están escritos dos veces: [`CadenceChordParser`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Chords/Parsing/CadenceChordParser.cs#L11-L14) hace corresponder `"maj7"`, `"m7b5"` y `"dim7"` con `Major7`, `HalfDiminished` y `Diminished7`, y el [`DslCommand`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.DSL/Types/DslCommand.fs#L227-L230) en F# los vuelve a imprimir como `maj7`, `m7`, `dim7` y `ø7`, los cifrados del libro de texto: Open Music Theory escribe F∅7 para el acorde semidisminuido y Fo7 para el totalmente disminuido (["Seventh Chords"](https://viva.pressbooks.pub/openmusictheory/chapter/seventh-chords/)). La tabla existe en el mismo commit; `ChordFormula` simplemente nunca llega hasta ella.
+
 **`CanonicalChordPatternCatalog`** es una lista escrita a mano de patrones de intervalos con nombres y prioridades, y [`TryFindExact`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Harmony/CanonicalChordPatternCatalog.cs#L165-L177) devuelve el primer patrón, por prioridad, cuyos intervalos coinciden exactamente. Nombra correctamente los catorce acordes:
 
 ```text
@@ -167,7 +169,7 @@ var newPitchClassValue = (root.PitchClass.Value + interval.Interval.Semitones.Va
 var newNote = new PitchClass { Value = newPitchClassValue }.ToChromaticNote().ToAccidented();
 ```
 
-Una clase de altura no tiene letra, así que la conversión elige un nombre con sostenido para cada tecla negra. Las clases de altura siguen siendo correctas, y también los acordes cuya grafía correcta usa sostenidos (F♯ mayor), pero un acorde de tonalidad con bemoles como E♭ obtiene `Eb G A#`, mezclando ambos, y `Gb7` recibe un E como séptima. Para tocar, el sonido es el mismo. Para mostrar, analizar o nombrar los intervalos de la lección 1, la grafía es incorrecta: por sus letras, de E♭ a A♯ hay una cuarta (E F G A) de siete semitonos, no la quinta justa del acorde.
+Una clase de altura no tiene letra, y la conversión cabe en una línea: [`Note.Chromatic.ToAccidented`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Primitives/Notes/Note.cs#L75-L77) es `ToSharp().ToAccidented()`, así que cada tecla negra recibe un nombre con sostenido. Las clases de altura siguen siendo correctas, y también los acordes cuya grafía correcta usa sostenidos (F♯ mayor), pero un acorde de tonalidad con bemoles como E♭ obtiene `Eb G A#`, mezclando ambos, y `Gb7` recibe un E como séptima. Para tocar, el sonido es el mismo. Para mostrar, analizar o nombrar los intervalos de la lección 1, la grafía es incorrecta: por sus letras, de E♭ a A♯ hay una cuarta (E F G A) de siete semitonos, no la quinta justa del acorde.
 
 ## Inversiones y acordes con barra
 
@@ -218,11 +220,18 @@ Dibujadas como las dibujan los diagramas de acordes, con la cuerda 6 a la izquie
 
 <Voicings role="img" aria-label="Cuatro diagramas de acordes. x32010: C3 E3 G3 C4 E4. 032010: E2 C3 E3 G3 C4 E4. 320003: G2 B2 D3 G3 B3 G4. 133211: una cejilla en el traste 1, F2 C3 F3 A3 C4 F4." />
 
+```play
+C3 E3 G3 C4 E4
+E2 C3 E3 G3 C4 E4
+G2 B2 D3 G3 B3 G4
+F2 C3 F3 A3 C4 F4
+```
+
 ### En GA
 
 - [`Voicing`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Instruments/Fretboard/Voicings/Core/Voicing.cs#L14-L36) es un `record` de `Position`s (`Position.Muted` o `Position.Played`, otra jerarquía cerrada) y notas MIDI. Su `Diagram` une las posiciones en el orden del array, y el [`VoicingGenerator`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Voicings/Generation/VoicingGenerator.cs#L167) de GA rellena ese array en el orden de `Str.Range`, desde la [cuerda 1, "the first string (highest pitch)"](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Instruments/Primitives/Str.cs#L35-L38), así que los diagramas de GA empiezan por la E aguda, al contrario que los diagramas de acordes. El programa construye sus voicings [de la misma manera](https://github.com/spareilleux/learn/blob/79d2198/code/music-theory-ga/GaTheory/Lesson3.cs#L128-L137).
 - [`FretSpan`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Instruments/Fretboard/Voicings/Core/Voicing.cs#L38-L48) ignora las cuerdas al aire, como el curso.
-- [`HasBarre`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Instruments/Fretboard/Voicings/Core/Voicing.cs#L73-L80) es verdadero cuando tres cuerdas tocadas comparten traste, **traste 0 incluido**. Tres cuerdas al aire no son una cejilla, así que `032010` (C con un E grave), `022100` (E) y `320003` (G), que se tocan sin cejilla, salen como acordes con cejilla. La regla del curso solo cuenta las cuerdas pisadas; sigue siendo una simplificación, ya que una cejilla real también exige que las cuerdas sean contiguas, algo que el comentario sobre `HasBarre` anota como tarea pendiente.
+- [`HasBarre`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Instruments/Fretboard/Voicings/Core/Voicing.cs#L73-L80) es verdadero cuando tres cuerdas tocadas comparten traste, **traste 0 incluido**. Tres cuerdas al aire no son una cejilla, así que `032010` (C con un E grave), `022100` (E) y `320003` (G), que se tocan sin cejilla, salen como acordes con cejilla. Una cejilla es "one finger to press down multiple strings across a single fret" ([Barre chord](https://en.wikipedia.org/wiki/Barre_chord), Wikipedia), y ningún dedo pisa una cuerda al aire, así que las tres líneas son un error de GA y no una cuestión de definición. La tarea pendiente que anota el comentario sobre `HasBarre` ya está escrita: [`DetectBarreRequirement`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Voicings/Analysis/VoicingPhysicalAnalyzer.cs#L219-L233) sí comprueba `fret > 0` y sí exige que las cuerdas sean contiguas, y por eso responde *no hay cejilla* para `133211`, cuyo traste 1 está en las cuerdas 6, 2 y 1. La regla del curso cuenta las cuerdas pisadas sin la contigüidad, así que también llamaría cejilla a una forma como `x1x1x1`. Las tres reglas son aproximaciones; solo la del curso acierta en todas las líneas de esta tabla.
 
 ## Nombrar un voicing
 

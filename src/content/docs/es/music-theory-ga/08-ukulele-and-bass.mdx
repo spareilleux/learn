@@ -1,0 +1,264 @@
+---
+title: "Lección 8: El ukelele y el bajo"
+description: Afinaciones reentrantes, afinaciones por cuartas y lo que deja de ser cierto cuando el instrumento no es una guitarra de seis cuerdas — con el Tuning, el Fretboard y el catálogo de instrumentos de Guitar Alchemist.
+sidebar:
+  label: 8. Ukelele y bajo
+  order: 8
+---
+
+import UkuleleC from '../../../../assets/music-theory-ga/l8-fretboard-ukulele-c.svg';
+import BassC from '../../../../assets/music-theory-ga/l8-fretboard-bass-c.svg';
+
+Las siete primeras lecciones se escribieron sobre una guitarra de seis cuerdas en afinación estándar, y casi todas sus frases siguen siendo ciertas en un ukelele o en un bajo: una clase de altura es una clase de altura, una tríada mayor es una tríada mayor. Lo que cambia es el **mapa**: la cuadrícula de cuerdas y trastes sobre la que se disponen las notas. Dos constantes del propio GA, `Tuning.Ukulele` y `Tuning.Bass`, definen ese mapa para los dos instrumentos que más gente coge después de la guitarra, y bastan para mostrar los dos hechos que un código con forma de guitarra suele equivocar.
+
+- Un ukelele es **reentrante** (*re-entrant*): su cuarta cuerda es *más aguda* que la tercera. El número de cuerda y la altura dejan de ir juntos.
+- Un bajo está afinado enteramente **por cuartas**: no tiene el único par irregular de la guitarra, así que cualquier forma se mueve de cuerda en cuerda sin cambiar.
+
+Todos los enlaces a GA apuntan al commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6).
+
+```bash
+dotnet run --project code/music-theory-ga/GaTheory -c Release -- l8
+```
+
+## Las dos afinaciones
+
+Las cuatro cuerdas de un ukelele son **G C E A**, y las cuatro de un bajo **E A D G**, las cuatro cuerdas más graves de la guitarra una octava más abajo. Las cuerdas se numeran desde la que suena más aguda, así que la cuerda 1 es el A en un ukelele y el G en un bajo.
+
+```text
+== Tunings: the ukulele and the bass, string 1 first
+string       course       GA           check
+ukulele 1    A4           A4           ok
+ukulele 2    E4           E4           ok
+ukulele 3    C4           C4           ok
+ukulele 4    G4           G4           ok
+bass 1       G2           G2           ok
+bass 2       D2           D2           ok
+bass 3       A1           A1           ok
+bass 4       E1           E1           ok
+```
+
+El curso escribe cada afinación como una lista de alturas y lee de ella la cuerda *n*; GA guarda un [`Tuning`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Instruments/Tuning.cs#L46-L57) y lo indexa con un [`Str`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Instruments/Primitives/Str.cs), un value object de rango de 1 a 26. Los dos coinciden en las ocho cuerdas.
+
+## Reentrante: la cuarta cuerda no es la más grave
+
+En una guitarra, la cuerda 6 es la más grave y la cuerda 1 la más aguda, y las alturas suben de principio a fin. Un ukelele estándar no hace eso. Su cuarta cuerda es un G *por encima* del do central: por encima de la tercera cuerda y por encima de la segunda.
+
+```text
+== Re-entrant: on a ukulele the fourth string is not the lowest
+string       course         GA             check
+ukulele 1    A4 midi 69     A4 midi 69     ok
+ukulele 2    E4 midi 64     E4 midi 64     ok
+ukulele 3    C4 midi 60     C4 midi 60     ok
+ukulele 4    G4 midi 67     G4 midi 67     ok
+steps from string 4 to string 1: -7 4 5  (the negative step is what makes it re-entrant)
+the low G ukulele instead:      5 4 5  (only rising: not re-entrant)
+```
+
+Los saltos entre cuerdas consecutivas lo delatan: −7, +4, +5. Una afinación es **reentrante** cuando las alturas, leídas en orden de cuerdas, ni solo suben ni solo bajan ([Re-entrant tuning](https://en.wikipedia.org/wiki/Re-entrant_tuning), Wikipedia). La cuarta cuerda aguda del ukelele es lo que le da su sonido: un acorde rasgueado no tiene nota de bajo, y la nota más grave que oyes no es aquella sobre la que está tu dedo más grave.
+
+Algunos intérpretes cambian la cuarta cuerda por otra una octava más abajo —«low G»— y entonces el ukelele es un instrumento ascendente corriente. La constante de GA es la reentrante.
+
+:::note[Por qué esto importa en el código]
+Todo lo que razona sobre un mástil suponiendo que un número de cuerda mayor significa una altura más grave acierta en una guitarra, un bajo, una mandolina y un violín, y se equivoca en un ukelele, un banjo de cinco cuerdas, un charango y un ukelele tahitiano. Esa suposición se escribe sin querer con facilidad, porque en una guitarra los dos órdenes coinciden.
+:::
+
+## Dónde decide GA cuál de los extremos de una afinación es la cuerda 1
+
+GA construye su array de cuerdas en [`Tuning.BuildPitchArray`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Instruments/Tuning.cs#L85-L108). Una afinación se puede escribir en cualquiera de los dos sentidos, así que el constructor lo adivina: si la primera altura es más grave que la última, invierte la lista; si no, la conserva.
+
+```csharp
+if (buffer[0] < buffer[^1])
+{
+    for (var i = 0; i < buffer.Length; i++)
+    {
+        result[i] = buffer[buffer.Length - 1 - i];
+    }
+}
+```
+
+Compara solo los dos **extremos**. En cualquier afinación que suba o baje de principio a fin, los extremos dicen la dirección y la suposición acierta. En una afinación reentrante, no.
+
+```text
+== How GA decides which end of a tuning is string 1
+instrument             course           GA               check
+guitar                 E4               E4               ok
+ukulele                A4               A4               ok
+bass                   G2               G2               ok
+banjo, tenor jazz      A4               A4               ok
+banjo, 5 strings       D4               G4               DIFF
+banjo, C tuning        D4               G4               DIFF
+GA, banjo strings 1 to 5: G4 D3 G3 B3 D4
+The fifth string of a 5-string banjo is the short drone, the highest of the five, so
+"string 1 is the highest" is not a definition: here GA returns the file's order, reversed.
+```
+
+El ukelele se salva, por suerte: su cuerda más aguda resulta ser la última escrita. El banjo de cinco cuerdas no. Su quinta cuerda es una corta cuerda de bordón afinada en el G *por encima* de la primera cuerda, y el propio [`Instruments.yaml`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/Instruments.yaml) de GA la escribe la primera, `G4 D3 G3 B3 D4`. La primera altura es más aguda que la última, así que la lista se conserva tal cual, y GA responde que la cuerda 1 es el bordón y la cuerda 5 es la primera cuerda: la numeración del instrumento, al revés.
+
+El problema de fondo está en la documentación más que en la aritmética. El comentario de `Str` dice "String 1 is the string with the highest pitch", y `Tuning.AsSpan` promete "highest string first". En un banjo de cinco cuerdas ninguna regla así puede cumplirse: la cuerda 1 es D4 y la cuerda 5 es G4, más aguda. La numeración de las cuerdas es un hecho del instrumento —sobre cuál cae tu primer dedo—, no un orden de clasificación. Una afinación que lleva sus cuerdas en el orden en que se tocan, y que nunca las reordena, no tiene nada que adivinar.
+
+## El ukelele tiene el patrón de intervalos de cuatro cuerdas de guitarra
+
+Olvida un momento las alturas y mira solo los saltos entre cuerdas.
+
+```text
+== The ukulele has the interval pattern of four guitar strings
+instrument               tuning                 steps between strings
+guitar, strings 4 to 1   D3 G3 B3 E4            5 4 5
+ukulele, low G           G3 C4 E4 A4            5 4 5
+ukulele, baritone        D3 G3 B3 E4            5 4 5
+guitar, strings 6 to 3   E2 A2 D3 G3            5 5 5
+bass                     E1 A1 D2 G2            5 5 5
+ukulele - guitar         5 5 5 5                semitones, string by string
+baritone - guitar        0 0 0 0                semitones
+bass - guitar 6 to 3     -12 -12 -12 -12        semitones
+```
+
+Tres resultados, y cada uno merece una frase.
+
+- Los saltos de un ukelele son **5 4 5** semitonos, y son también los saltos de las cuerdas 4-3-2-1 de la guitarra. Un ukelele son las cuatro cuerdas agudas de una guitarra, subidas una cuarta justa.
+- Un ukelele **barítono** son *exactamente* esas cuatro cuerdas: D3 G3 B3 E4, diferencia cero. Cada forma de acorde que conoces en las cuatro cuerdas agudas de una guitarra es el mismo acorde, con el mismo nombre, en un ukelele barítono.
+- Los saltos de un bajo son **5 5 5**, y son también los de las cuerdas 6-5-4-3 de la guitarra. Un bajo son las cuatro cuerdas graves de la guitarra una octava más abajo.
+
+Por eso el ukelele resulta familiar: el único salto irregular de la guitarra, la tercera mayor entre las cuerdas 3 y 2, está *también* en el ukelele, entre sus cuerdas 3 y 2. Las formas se trasladan con sus irregularidades intactas.
+
+## Una forma de guitarra tocada en un ukelele
+
+Coge las cuatro cuerdas agudas del acorde de C abierto —trastes 2, 0, 1, 0 en las cuerdas 4, 3, 2, 1— y pon los mismos dedos en un ukelele.
+
+```text
+== A guitar shape played on a ukulele: the same fingers, a fourth higher
+instrument               sounds                 pitch classes
+guitar, strings 4 to 1   E3 G3 C4 E4            0 4 7  C major
+ukulele, low G           A3 C4 F4 A4            0 5 9  F major
+ukulele, re-entrant      A4 C4 F4 A4            0 5 9  F major
+difference               5 5 5 5                semitones: a perfect fourth
+The re-entrant ukulele plays the same four pitch classes, with its bass note an octave up.
+```
+
+La misma digitación, una cuarta justa más arriba: una forma de C mayor se convierte en F mayor. La tercera línea es la interesante. En un ukelele reentrante la cuarta cuerda está una octava más arriba, así que la forma suena A4 C4 F4 A4 en lugar de A3 C4 F4 A4: las mismas cuatro clases de altura, el mismo nombre de acorde, otro voicing, con la fundamental ya no abajo. Lo que decía la lección 3 sobre las inversiones se aplica aquí al nivel del instrumento: un ukelele reentrante no tiene ningún voicing en estado fundamental sobre las cuatro cuerdas.
+
+```play
+A3 C4 F4 A4
+```
+
+```play
+E3 G3 C4 E4
+```
+
+<UkuleleC role="img" aria-label="Mástil de ukelele, trastes 0 a 12, cuerda 1 arriba. Clase de altura C: cuerda 4 traste 5, cuerda 3 trastes 0 y 12, cuerda 2 traste 8, cuerda 1 traste 3." />
+
+```text
+== Pitch class C on frets 0 to 12
+instrument   course                             GA                                 check
+ukulele      4/5 3/0 3/12 2/8 1/3               4/5 3/0 3/12 2/8 1/3               ok
+bass         4/8 3/3 2/10 1/5                   4/8 3/3 2/10 1/5                   ok
+```
+
+Cinco C en los doce primeros trastes de un ukelele frente a seis en los de una guitarra, y el curso y GA coinciden en todos: [`Fretboard`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Instruments/Primitives/Fretboard.cs#L19-L20) acepta cualquier `Tuning` y cualquier número de trastes, así que `new Fretboard(Tuning.Ukulele, 12)` funciona sin ningún otro cambio.
+
+:::caution[Un comentario que contradice a su código]
+`Fretboard.GetNote(int stringIndex, int fret)` documenta su primer parámetro como "Zero-based string index (0 = lowest string)" y luego llama a `Tuning[new(stringIndex + 1)]`, y la cuerda 1 es la *más aguda*. El índice 0 es la cuerda más aguda, no la más grave. El código es coherente con `Str`; solo el comentario está mal, que es el sentido más peligroso.
+:::
+
+## Un bajo está afinado por cuartas
+
+<BassC role="img" aria-label="Mástil de bajo, trastes 0 a 12, cuerda 1 arriba. Clase de altura C: cuerda 4 traste 8, cuerda 3 traste 3, cuerda 2 traste 10, cuerda 1 traste 5." />
+
+```text
+== A bass is tuned in fourths: one shape, every pair of strings
+pair             semitones    interval
+bass 4-3         5            a fourth
+bass 3-2         5            a fourth
+bass 2-1         5            a fourth
+guitar 6-5       5            a fourth
+guitar 5-4       5            a fourth
+guitar 4-3       5            a fourth
+guitar 3-2       4            a major third
+guitar 2-1       5            a fourth
+Every pair on the bass is a fourth, so a shape keeps its sound on any pair of strings.
+On the guitar the 3-2 pair is a major third: that one gap is what makes the shapes irregular.
+```
+
+Una guitarra tiene un par irregular. Las cuerdas 3 y 2 están a una tercera mayor, cuatro semitonos, mientras que todos los demás pares están a una cuarta justa. Ese único salto es la razón de que las formas CAGED de la lección 3 sean cinco formas distintas y no una sola forma desplazada, y la razón de que una forma que cruza la frontera 3-2 haya que ajustarla un traste.
+
+Un bajo no tiene ese par. Todos los intervalos son cuartas, así que una forma de intervalos —una fundamental y una quinta, una octava, un fragmento de escala— conserva su sonido allí donde la muevas, de lado o de cuerda en cuerda. Lo mismo vale para la cuerda B de la guitarra de siete cuerdas, para `AllFourthsguitar` en el catálogo de GA y para un bajo de cinco o seis cuerdas.
+
+## El ukelele y el bajo en el catálogo de GA
+
+`Tuning.Ukulele` y `Tuning.Bass` son constantes de C#. GA tiene además un catálogo YAML de 1589 líneas, [`Instruments.yaml`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/Instruments.yaml), con 122 instrumentos y 280 afinaciones, y los dos no dicen lo mismo. El apéndice A lee el archivo entero; aquí están las filas de estos dos instrumentos.
+
+```text
+== The ukulele and the bass in GA's Instruments.yaml
+entry                                tuning as written              read by the course
+BassGuitar.Standard                  E1 A1 D2 G2                    4 pitches
+BassGuitar.FiveStrings               B0 E1 A1 D2 G2                 5 pitches
+BassGuitar.SixStrings                B0 E1 A1 D2 G2 C3              6 pitches
+Ukulele.SopranoConcertAndTenorC      C6 G4 C4 E4 A4                 5 pitches
+Ukulele.SopranoConcertAndTenorD      D6 A4 D4 F#4 B4                5 pitches
+Ukulele.Baritone                     D4 G3 B4 E4                    4 pitches
+Ukulele.Tahitian                     G4 G4 C5 C5 E5 E5 A4 A4        8 pitches
+Ukulele.BanjoOrBanjoleteC            C6 G4 C4 E4 A4                 5 pitches
+Ukulele.BanjoOrBanjoleteD            D6 A4 D4 F#4 B4                5 pitches
+BassGuitarExtended.DropD             D1 A1 D2 G2                    4 pitches
+BassGuitarExtended.BEAD              B0 E1 A1 D2                    4 pitches
+BassGuitarExtended.Tenor             A1 D2 G2 C3                    4 pitches
+BassGuitarExtended.Piccolo           E2 A2 D3 G3                    4 pitches
+BassGuitarExtended.FretlessStandard  E1 A1 D2 G2                    4 pitches
+BaritoneUkulele.Standard             D4 G3 B3 E4                    4 pitches
+BaritoneUkulele.LowGReentrant        D4 G4 B3 E4                    4 pitches
+SopraninoUkulele.Standard            D5 G4 B4 E5                    4 pitches
+
+GA's own constants: Tuning.Ukulele = G4 C4 E4 A4 (4 strings), Tuning.Bass = E1 A1 D2 G2 (4 strings)
+A ukulele has four strings: in the five C6 and D6 entries, the tuning's name, C or D, is written as a pitch.
+A baritone ukulele is tuned like the guitar's top four strings, D3 G3 B3 E4; the two entries
+disagree with each other and with that: D4 G3 B4 E4 and D4 G3 B3 E4.
+```
+
+Las filas del bajo son todas correctas —estándar, cinco cuerdas, seis cuerdas, drop D, BEAD, tenor, piccolo— y `BassGuitarExtended.Piccolo`, E2 A2 D3 G3, son exactamente las cuatro cuerdas graves de la guitarra, que es lo que es un bajo piccolo.
+
+Las filas del ukelele no lo son.
+
+- **Cinco alturas para un instrumento de cuatro cuerdas**, cuatro veces. `C6 G4 C4 E4 A4` es la afinación correcta `G4 C4 E4 A4` con un `C6` delante. Ese `C6` es el *nombre* de la afinación —quienes tocan el ukelele llaman a G C E A «afinación en C»— escrito donde va una altura, y se analiza como el C dos octavas por encima del do central. El mismo error produjo `D6 A4 D4 F#4 B4`, y ambos se repiten para el banjolele. No se limita al ukelele: las dos afinaciones del pedal steel empiezan por `C6` y `E9`, que también son nombres de afinaciones, siendo [C6 y E9](https://en.wikipedia.org/wiki/Pedal_steel_guitar) las dos configuraciones estándar del pedal steel.
+- **Un ukelele barítono en la octava equivocada, dos veces y de dos maneras distintas.** Un barítono se afina D3 G3 B3 E4, las cuatro cuerdas agudas de la guitarra. `Ukulele.Baritone` dice `D4 G3 B4 E4` y `BaritoneUkulele.Standard` dice `D4 G3 B3 E4`: dos entradas para un solo instrumento, que no coinciden entre sí y que ponen las dos el D una octava demasiado arriba.
+- **Un nombre que se contradice a sí mismo.** `BaritoneUkulele.LowGReentrant`, "Re-entrant (dGBE)", es `D4 G4 B3 E4`. *Low G* y reentrante son cosas opuestas: un *low G* es aquello a lo que cambias la cuerda de un ukelele reentrante precisamente para que *deje* de serlo.
+
+Nada de esto llega a un programa que le pida a GA una afinación de ukelele, porque nadie lee el archivo, que es el tema del apéndice A.
+
+## Ejercicios
+
+1. El acorde de C abierto de un ukelele es `0003`: nada en las cuerdas 4, 3 y 2, tercer traste en la cuerda 1. ¿Qué notas suenan y qué acorde es?
+2. Toca ese mismo `0003` en un ukelele barítono. ¿Qué acorde es ahora, y por qué no es el mismo?
+3. ¿Cuántas de las 280 afinaciones del catálogo de GA no están escritas ni solo ascendiendo ni solo descendiendo? ¿Son todas ellas instrumentos reentrantes?
+
+<details>
+<summary>Soluciones</summary>
+
+```text
+== Exercise solutions
+question                     answer
+1. ukulele 0003              G4 C4 E4 C5                    pitch classes 0 4 7: C major
+2. 0003 on a baritone        D3 G3 B3 G4                    pitch classes 2 7 E: G major
+3. re-entrant entries        107 of 273                     tunings that rise and fall
+   first ten: Baglama.Greek, Bajo.Quinto, Bajo.Sexto, Bandola.Central, Bandola.Guayanesa, Bandora.Standard, Bandurria.Peruvian, Banjo.TenorIrish, Banjo.Bluegrass5Strings, Banjo.CTuning5Strings
+```
+
+1. G4 C4 E4 C5: las clases de altura 0, 4 y 7, una tríada de C mayor. El G4 reentrante es la nota *más aguda* pero está en la cuarta cuerda, así que el acorde suena con el G arriba y el C doblado.
+2. D3 G3 B3 G4: las clases de altura 2, 7 y 11, una tríada de G mayor. El barítono está afinado una cuarta justa por debajo del ukelele estándar, así que cada forma nombra un acorde una cuarta más abajo: C se convierte en G.
+3. 107 de las 273 afinaciones legibles. Pero no: la mayoría son **órdenes**, pares de cuerdas afinadas en octavas o al unísono, escritos `A2 A1 D3 D2 …`, donde el descenso está dentro de un par y no a lo largo del instrumento. La prueba usada aquí —«los saltos no tienen todos el mismo signo»— encuentra todas las afinaciones reentrantes y también todos los instrumentos de órdenes dobles, y el archivo no da forma de distinguirlos, porque guarda alturas y nada sobre cuáles de ellas comparten un orden. Distinguir la guitarra de doce cuerdas del ukelele exigiría un campo que el archivo no tiene.
+
+</details>
+
+## Qué recordar
+
+- Las cuerdas se numeran desde la que suena más aguda en una guitarra, pero eso es una convención sobre los instrumentos *habituales*, no una definición: en un banjo de cinco cuerdas, la cuerda 5 es la más aguda.
+- Una afinación es reentrante cuando sus alturas, en orden de cuerdas, ni solo suben ni solo bajan. Adivinar la dirección a partir de los dos extremos solo funciona con los instrumentos que hacen innecesaria la suposición.
+- Los saltos importan más que las alturas. 5 4 5 son las cuatro cuerdas agudas de una guitarra, un ukelele y un ukelele barítono; 5 5 5 son un bajo y las cuatro cuerdas graves de una guitarra.
+- Un ukelele barítono son exactamente las cuatro cuerdas agudas de una guitarra. Un ukelele estándar es lo mismo, una cuarta más arriba. Un bajo son las cuatro graves, una octava más abajo.
+
+## Fuentes
+
+- [Re-entrant tuning](https://en.wikipedia.org/wiki/Re-entrant_tuning), [Ukulele](https://en.wikipedia.org/wiki/Ukulele), [Banjo](https://en.wikipedia.org/wiki/Banjo), [Bass guitar](https://en.wikipedia.org/wiki/Bass_guitar) y [Pedal steel guitar](https://en.wikipedia.org/wiki/Pedal_steel_guitar), Wikipedia.
+- GuitarAlchemist/ga en [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6): `Common/GA.Domain.Core/Instruments` (`Tuning.cs`, `Primitives/Str.cs`, `Primitives/Fretboard.cs`), `Common/GA.Business.Config/Instruments.yaml`.
+- El programa del curso: [`Lesson8.cs`](https://github.com/spareilleux/learn/blob/main/code/music-theory-ga/GaTheory/Lesson8.cs), [`Instruments.cs`](https://github.com/spareilleux/learn/blob/main/code/music-theory-ga/GaTheory/Instruments.cs), [`expected/l8.txt`](https://github.com/spareilleux/learn/blob/main/code/music-theory-ga/expected/l8.txt).
+
+Siguiente: el [apéndice A](../appendix-instruments/) lee los 122 instrumentos del catálogo de GA, y lo que devuelve para ellos el propio cargador de GA.

@@ -50,7 +50,163 @@ import Default from '@astrojs/starlight/components/MarkdownContent.astro';
 	}
 </script>
 
+<script>
+	// Turns each ```play code block into a player. The block holds pitches: tokens on one line
+	// sound together, one line after another. The samples are one recorded note per semitone of
+	// FluidR3_GM's nylon acoustic guitar, pinned on one commit; nothing is synthesised.
+	const SOUNDFONT =
+		'https://cdn.jsdelivr.net/gh/gleitz/midi-js-soundfonts@044fab8e1456bfafc5776e86dfd6bb8697149aef/FluidR3_GM/acoustic_guitar_nylon-mp3';
+	const LABELS: Record<string, [string, string]> = {
+		en: ['Play', 'Stop'],
+		fr: ['Écouter', 'Arrêter'],
+		es: ['Escuchar', 'Detener'],
+	};
+
+	const LETTERS: Record<string, number> = { C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11 };
+	const FLATS = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'];
+
+	// "C4", "F#3", "Bb2" -> MIDI number, middle C = C4 = 60; null when it is not a pitch
+	function midiOf(token: string): number | null {
+		const match = /^([A-G])(#|b|x)?(-?\d+)$/.exec(token);
+		if (!match) return null;
+		const [, letter, accidental, octave] = match;
+		const shift = accidental === '#' ? 1 : accidental === 'b' ? -1 : accidental === 'x' ? 2 : 0;
+		return 12 * (Number(octave) + 1) + LETTERS[letter] + shift;
+	}
+
+	const sampleName = (midi: number) => `${FLATS[((midi % 12) + 12) % 12]}${Math.floor(midi / 12) - 1}`;
+
+	const figures = [...document.querySelectorAll<HTMLElement>('.sl-markdown-content .expressive-code')].filter((figure) =>
+		figure.querySelector('pre[data-language="play"]'),
+	);
+	if (figures.length > 0) {
+		const [play, stop] = LABELS[document.documentElement.lang?.slice(0, 2) ?? 'en'] ?? LABELS.en;
+		let context: AudioContext | null = null;
+		const buffers = new Map<number, Promise<AudioBuffer>>();
+		let playing: { stop: () => void } | null = null;
+
+		function load(midi: number) {
+			let buffer = buffers.get(midi);
+			if (!buffer) {
+				buffer = fetch(`${SOUNDFONT}/${sampleName(midi)}.mp3`)
+					.then((response) => (response.ok ? response.arrayBuffer() : Promise.reject(new Error(String(response.status)))))
+					.then((bytes) => context!.decodeAudioData(bytes));
+				buffers.set(midi, buffer);
+			}
+			return buffer;
+		}
+
+		for (const figure of figures) {
+			const source = (figure.querySelector<HTMLElement>('[data-code]')?.dataset.code ?? '').replaceAll('', '\n');
+			const chords = source
+				.split('\n')
+				.map((line) => line.split(/\s+/).map(midiOf).filter((midi): midi is number => midi !== null))
+				.filter((chord) => chord.length > 0);
+			if (chords.length === 0) continue;
+
+			const widget = document.createElement('div');
+			widget.className = 'ga-play';
+			const button = document.createElement('button');
+			button.type = 'button';
+			button.textContent = `▶ ${play}`;
+			const notes = document.createElement('span');
+			notes.className = 'ga-play-notes';
+			notes.textContent = chords.map((chord) => chord.map(sampleName).join(' ')).join('   |   ');
+			widget.append(button, notes);
+			figure.replaceWith(widget);
+
+			button.addEventListener('click', () => {
+				if (playing) {
+					playing.stop();
+					return;
+				}
+				context ??= new AudioContext();
+				void context.resume();
+				const started: AudioBufferSourceNode[] = [];
+				let cancelled = false;
+				const reset = () => {
+					playing = null;
+					button.textContent = `▶ ${play}`;
+				};
+				playing = {
+					stop: () => {
+						cancelled = true;
+						for (const node of started) node.stop();
+						reset();
+					},
+				};
+				button.textContent = `■ ${stop}`;
+				void (async () => {
+					try {
+						// every note is fetched before the first one sounds, so the timing is not the network's
+						const decoded = await Promise.all(chords.map((chord) => Promise.all(chord.map(load))));
+						if (cancelled) return;
+						const start = context!.currentTime + 0.1;
+						decoded.forEach((chord, index) => {
+							chord.forEach((buffer, voice) => {
+								const node = context!.createBufferSource();
+								node.buffer = buffer;
+								const gain = context!.createGain();
+								// a chord is strummed, low string first, and each note fades rather than stopping
+								const at = start + index * 1.15 + voice * 0.03;
+								gain.gain.setValueAtTime(0.85, at);
+								gain.gain.setTargetAtTime(0, at + 1.6, 0.35);
+								node.connect(gain).connect(context!.destination);
+								node.start(at);
+								node.stop(at + 2.6);
+								started.push(node);
+							});
+						});
+						started[started.length - 1].addEventListener('ended', () => {
+							if (!cancelled) reset();
+						});
+					} catch (error) {
+						console.error('Play', error);
+						button.disabled = true;
+						button.textContent = `▶ ${play}`;
+						playing = null;
+					}
+				})();
+			});
+		}
+	}
+</script>
+
 <style is:global>
+	.sl-markdown-content .ga-play {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		flex-wrap: wrap;
+		margin: 1rem 0;
+	}
+
+	.sl-markdown-content .ga-play button {
+		background: var(--sl-color-gray-6);
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: 999px;
+		color: var(--sl-color-white);
+		cursor: pointer;
+		font: inherit;
+		font-size: var(--sl-text-sm);
+		padding: 0.3rem 0.9rem;
+	}
+
+	.sl-markdown-content .ga-play button:hover:not(:disabled) {
+		background: var(--sl-color-gray-5);
+	}
+
+	.sl-markdown-content .ga-play button:disabled {
+		cursor: not-allowed;
+		opacity: 0.6;
+	}
+
+	.sl-markdown-content .ga-play-notes {
+		color: var(--sl-color-gray-3);
+		font-family: var(--sl-font-mono, monospace);
+		font-size: var(--sl-text-sm);
+	}
+
 	.sl-markdown-content pre.mermaid {
 		background: transparent;
 		border: none;

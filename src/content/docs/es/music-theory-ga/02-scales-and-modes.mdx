@@ -166,6 +166,28 @@ Los brazaletes muestran la diferencia. El dórico sobre C es el polígono de la 
 
 <BraceletModes role="img" aria-label="Dos brazaletes con el mismo polígono. 2741, jónico: 0 2 4 5 7 9 11. 1709, dórico sobre C: 0 2 3 5 7 9 10, el primer polígono girado dos posiciones en sentido contrario a las agujas del reloj." />
 
+```play
+C4
+D4
+Eb4
+F4
+G4
+A4
+Bb4
+C5
+```
+
+```play
+C4
+D4
+E4
+F4
+G4
+A4
+B4
+C5
+```
+
 ### La notación
 
 Los modos se escriben como grados comparados con la escala mayor, o con la menor natural para los modos con tercera menor. Cada modo tiene entonces uno o dos grados **característicos**: el dórico es menor con un 6 elevado, el frigio menor con un 2 rebajado, el lidio mayor con un 4 elevado, el mixolidio mayor con un 7 rebajado y el locrio menor con el 2 y el 5 rebajados ([Open Music Theory, "Introduction to Diatonic Modes and the Chromatic Scale"](https://viva.pressbooks.pub/openmusictheory/chapter/intro-to-diatonic-modes-and-the-chromatic-scale/)). El mismo capítulo ordena los modos del más brillante al más oscuro. La tabla de arriba muestra por qué esa ordenación es tan regular: del lidio al locrio, cada modo rebaja exactamente una nota del anterior.
@@ -231,7 +253,7 @@ diminished       2      2      ok
 - **menor armónica** (7 + 7): su imagen especular, 1 2 3 4 5 b6 7, la escala *mayor armónica* (el propio `Scale.HarmonicMajor` de GA), tiene los mismos intervalos en orden inverso, y por tanto el mismo vector y siete rotaciones más;
 - **blues** (6 + 6 + 12): sus seis rotaciones, las seis de su imagen especular y doce conjuntos de otra clase de conjuntos con el mismo vector, una *relación Z* (lección 4).
 
-Las otras seis escalas de la tabla son su propia imagen especular y no tienen pareja relacionada por Z, así que para ellas los dos recuentos coinciden. Ninguna respuesta es incorrecta, pero el nombre sugiere rotaciones, y quien cuente en GA los «modos de la menor armónica» obtiene el doble que el libro de texto.
+Las otras seis escalas de la tabla son su propia imagen especular y no tienen pareja relacionada por Z, así que para ellas los dos recuentos coinciden. Una clase de vector interválico es un objeto real de la teoría de conjuntos, pero no es lo que significa *modo*. Un modo es una rotación de una escala, y una escala tiene tantos modos como notas, salvo que una simetría rotacional haga que dos rotaciones den el mismo conjunto: "Modes are the rotational transformations of this scale. This number includes the scale itself, so the number is usually the same as its cardinality" ([Ian Ring, escala 2477](https://ianring.com/musictheory/scales/2477)). Sus páginas responden 7 para [la menor armónica](https://ianring.com/musictheory/scales/2477) y 6 para [la escala de blues](https://ianring.com/musictheory/scales/1257), las cifras del curso. El propio comentario de clase de `ModalFamily` dice lo que de verdad construye, conjuntos de clases de altura "that share the same interval vector", pero los llama `Modes`, y quien cuente en GA los modos de la menor armónica obtiene el doble.
 
 ## Otras operaciones sobre los bits
 

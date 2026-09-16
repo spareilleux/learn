@@ -58,7 +58,7 @@ Minor Plagal (Neo-Soul)            iv I             iv I             ok
 Tritone Sub ii-V (Neo-Soul)        ii bII I         ii bII I         ok
 ```
 
-Les accords et les chiffres romains concordent, sauf sur une ligne. "Chromatic Mediant (Metal)", c'est Em–Gm en E mineur. G est le troisième degré de E mineur, donc le cours écrit iii ; le fichier écrit ♭iii, en mesurant depuis E majeur, dont le troisième degré est G♯. Le même fichier analyse la cadence andalouse, Am G F E, en E phrygien ("iv III II I"), à partir des notes du mode. Les deux lectures existent, mais un même fichier devrait en choisir une : Open Music Theory numérote les accords en mineur à partir de la gamme mineure, III, VI et VII sans bémols (["Roman Numerals"](https://viva.pressbooks.pub/openmusictheory/chapter/roman-numerals/)).
+Les accords et les chiffres romains concordent, sauf sur une ligne. "Chromatic Mediant (Metal)", c'est Em–Gm en E mineur. G est le troisième degré de E mineur, donc le cours écrit iii ; le fichier écrit ♭iii, en mesurant depuis E majeur, dont le troisième degré est G♯. Le même fichier analyse la cadence andalouse, Am G F E, en E phrygien ("iv III II I"), à partir des notes du mode. Ce n'est pas un choc de conventions : Open Music Theory numérote les accords d'une tonalité mineure à partir de la gamme mineure, "iii and vi in major keys; III and VI in minor keys" (["Mediants"](https://viva.pressbooks.pub/openmusictheory/chapter/mediants/)), et l'analyseur F# de GA lui-même fait de même, ses chiffres romains mineurs étant i, ii°, III, iv, v, VI, VII ([`DomainClosures`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs#L259-L260)). Lu en E mineur, ♭iii désigne G♭, une note que l'accord ne contient pas. Seul `Cadences.yaml` mesure depuis la majeure homonyme, et seulement sur cette ligne.
 
 Un nom est aussi trompeur. La "Phrygian Half Cadence" du fichier est ♭II–i, de F à Em, qui se termine sur la tonique. En théorie classique, une demi-cadence phrygienne est iv⁶–V en mineur, une demi-cadence nommée d'après le demi-ton de sa basse ([Cadence](https://en.wikipedia.org/wiki/Cadence), Wikipédia, "Phrygian half cadence").
 
@@ -118,6 +118,12 @@ La figure ci-dessous donne un jeu de formes en position ouverte pour ii–V–I 
 
 <GridsIIVI role="img" aria-label="Trois grilles d'accords. Dm7, xx0211 : D3 A3 C4 F4. G7, 320001 : G2 B2 D3 G3 B3 F4. Cmaj7, x32000 : C3 E3 G3 B3 E4." />
 
+```play
+D3 A3 C4 F4
+G2 B2 D3 G3 B3 F4
+C3 E3 G3 B3 E4
+```
+
 ## Trouver la tonalité d'une progression
 
 ### L'idée
@@ -150,7 +156,7 @@ C Am F G7      Key of C           Key of Am          DIFF
   notes 0 2 4 5 7 9 E, GA normal form 0 1 3 5 6 8 T; GA compatible keys: C, Am; roots only: C major 4/4
 ```
 
-La forme normale est une transposition de l'ensemble qui commence sur 0, pas l'ensemble vu depuis sa tonique, donc « contient 3 » ne dit rien du mode. Pour les notes de C majeur ou de G majeur, la forme normale contient 3, l'égalité penche vers le mineur, et une progression qui commence et finit sur C sort en A mineur. Rien dans la méthode ne regarde quel accord vient en premier ou en dernier. La ligne "notes" montre aussi `GetCompatibleKeys`, qui est juste mais ne sait pas choisir, et rien ne convient au G♯ de Am Dm E7 Am, sauf la collection mineure du cours.
+La forme normale est une transposition de l'ensemble qui commence sur 0, pas l'ensemble vu depuis sa tonique, donc « contient 3 » ne dit rien du mode. Et ce ne sont pas deux exemples malchanceux : toute collection diatonique de sept notes a la même forme normale, `0 1 3 5 6 8 T`, qui contient 3. Le drapeau est toujours levé, l'égalité penche toujours vers le mineur, et comme toute tonalité majeure a une relative mineure avec les sept mêmes classes de hauteurs, la méthode ne peut jamais répondre une tonalité majeure pour une gamme majeure complète. Une progression qui commence et finit sur C sort en A mineur. Rien dans la méthode ne regarde quel accord vient en premier ou en dernier, et après le drapeau de mode il ne reste plus aucun départage non plus : pour les ensembles de moins de sept notes, la réponse est la tonalité qui vient en premier dans la liste de GA, laquelle commence à C♭ majeur. La ligne "notes" montre aussi `GetCompatibleKeys`, qui est juste mais ne sait pas choisir, et rien ne convient au G♯ de Am Dm E7 Am, sauf la collection mineure du cours.
 
 Le serveur MCP de GA a deux outils pour la même question, `ga_key_from_progression` et `ga_analyze_progression`. Tous deux notent chaque tonalité majeure et mineure naturelle en comptant les **fondamentales** des accords dans sa gamme, pas les notes des accords, et préfèrent la tonalité sur la fondamentale du premier accord ([`GaKeyFromProgressionTool`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaMcpServer/Tools/GuitaristProblemTools.cs#L157-L223), [`analyzeProgression`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs#L255-L336)). Les chiffres romains viennent ensuite d'une liste fixe par mode. La partie "roots only" de chaque ligne ci-dessus est cette règle, réécrite dans le programme du cours ([`Lesson7.RootsOnlyKey`](https://github.com/spareilleux/learn/blob/a2439ba/code/music-theory-ga/GaTheory/Lesson7.cs#L120-L135)). Le 2026-09-15, le serveur MCP qui tournait sur la machine de l'auteur (sa version n'est pas indiquée) a répondu :
 
@@ -195,7 +201,7 @@ La première ligne affiche les chiffres romains du cours sans le 7 de C7 : les c
 - Une cadence authentique est V–I, parfaite avec les deux accords à l'état fondamental et la tonique en haut ; une demi-cadence se termine sur V. IV–I est surtout un mouvement plagal, V–vi un mouvement rompu.
 - V7 contient le seul triton de la tonalité, B–F en C ; la sensible monte et la septième descend, vers C et E.
 - ii–V–I, c'est septième mineure, septième de dominante, septième majeure en majeur, et semi-diminuée, dominante, septième mineure en mineur, avec des fondamentales qui descendent par quintes.
-- La tonalité d'une progression demande les notes des accords et un départage sur l'accord de tonique. Le cœur de GA départage sur une forme normale qui ne code pas le mode, et ses outils MCP ne comptent que les fondamentales ; aucun ne regarde le dernier accord.
+- La tonalité d'une progression demande les notes des accords et un départage sur l'accord de tonique. Le cœur de GA départage sur une forme normale qui ne code pas le mode, si bien qu'il répond la relative mineure pour toute gamme majeure complète ; ses outils MCP ne comptent que les fondamentales ; aucun ne regarde le dernier accord.
 - Le catalogue de cadences de GA est juste accord par accord, mais mélange deux conventions de chiffres romains pour le mineur et appelle ♭II–i une « demi-cadence phrygienne ».
 
 ## Sources

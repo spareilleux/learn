@@ -58,7 +58,7 @@ Minor Plagal (Neo-Soul)            iv I             iv I             ok
 Tritone Sub ii-V (Neo-Soul)        ii bII I         ii bII I         ok
 ```
 
-Los acordes y los números coinciden, salvo en una fila. "Chromatic Mediant (Metal)" es Em–Gm en E menor. G es el tercer grado de E menor, así que el curso escribe iii; el archivo escribe ♭iii, midiendo desde E mayor, cuyo tercer grado es G♯. El mismo archivo analiza la cadencia andaluza, Am G F E, en E frigio ("iv III II I"), a partir de las notas del modo. Las dos lecturas existen, pero un mismo archivo debería elegir una: Open Music Theory numera los acordes en menor a partir de la escala menor, III, VI y VII sin bemoles (["Roman Numerals"](https://viva.pressbooks.pub/openmusictheory/chapter/roman-numerals/)).
+Los acordes y los números coinciden, salvo en una fila. "Chromatic Mediant (Metal)" es Em–Gm en E menor. G es el tercer grado de E menor, así que el curso escribe iii; el archivo escribe ♭iii, midiendo desde E mayor, cuyo tercer grado es G♯. El mismo archivo analiza la cadencia andaluza, Am G F E, en E frigio ("iv III II I"), a partir de las notas del modo. No es un choque de convenciones: Open Music Theory numera los acordes de una tonalidad menor a partir de la escala menor, "iii and vi in major keys; III and VI in minor keys" (["Mediants"](https://viva.pressbooks.pub/openmusictheory/chapter/mediants/)), y el propio analizador en F# de GA hace lo mismo, con los números romanos del menor i, ii°, III, iv, v, VI, VII ([`DomainClosures`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs#L259-L260)). Leído en E menor, ♭iii señala un G♭, una nota que el acorde no contiene. Solo `Cadences.yaml` mide desde el mayor homónimo, y solo en esta fila.
 
 Un nombre también induce a error. La "Phrygian Half Cadence" del archivo es ♭II–i, de F a Em, que termina en la tónica. En la teoría clásica, una semicadencia frigia es iv⁶–V en menor, una semicadencia que debe su nombre al semitono de su bajo ([Cadence](https://en.wikipedia.org/wiki/Cadence), Wikipedia, "Phrygian half cadence").
 
@@ -118,6 +118,12 @@ La figura de abajo da un juego de formas en posición abierta para ii–V–I en
 
 <GridsIIVI role="img" aria-label="Tres diagramas de acordes. Dm7, xx0211: D3 A3 C4 F4. G7, 320001: G2 B2 D3 G3 B3 F4. Cmaj7, x32000: C3 E3 G3 B3 E4." />
 
+```play
+D3 A3 C4 F4
+G2 B2 D3 G3 B3 F4
+C3 E3 G3 B3 E4
+```
+
 ## Encontrar la tonalidad de una progresión
 
 ### La idea
@@ -150,7 +156,7 @@ C Am F G7      Key of C           Key of Am          DIFF
   notes 0 2 4 5 7 9 E, GA normal form 0 1 3 5 6 8 T; GA compatible keys: C, Am; roots only: C major 4/4
 ```
 
-La forma normal es una transposición del conjunto que empieza en 0, no el conjunto visto desde su tónica, así que «contiene 3» no dice nada del modo. Para las notas de C mayor o de G mayor, la forma normal contiene 3, el empate se resuelve hacia menor, y una progresión que empieza y termina en C sale en A menor. Nada en el método mira qué acorde es el primero o el último. La línea "notes" muestra también `GetCompatibleKeys`, que acierta pero no puede elegir, y nada encaja con el G♯ de Am Dm E7 Am salvo la colección menor del curso.
+La forma normal es una transposición del conjunto que empieza en 0, no el conjunto visto desde su tónica, así que «contiene 3» no dice nada del modo. Y no son dos ejemplos desafortunados: toda colección diatónica de siete notas tiene la misma forma normal, `0 1 3 5 6 8 T`, que contiene 3. La marca se activa siempre, el empate se resuelve siempre hacia menor, y como toda tonalidad mayor tiene una relativa menor con las mismas siete clases de altura, el método nunca puede responder una tonalidad mayor para una escala mayor completa. Una progresión que empieza y termina en C sale en A menor. Nada en el método mira qué acorde es el primero o el último, y después de la marca de modo tampoco queda ningún desempate: para los conjuntos de menos de siete notas la respuesta es la primera tonalidad de la lista de GA, que empieza por C♭ mayor. La línea "notes" muestra también `GetCompatibleKeys`, que acierta pero no puede elegir, y nada encaja con el G♯ de Am Dm E7 Am salvo la colección menor del curso.
 
 El servidor MCP de GA tiene dos herramientas para la misma pregunta, `ga_key_from_progression` y `ga_analyze_progression`. Las dos puntúan cada tonalidad mayor y cada menor natural contando las **fundamentales** de los acordes que están en su escala, no las notas de los acordes, y prefieren la tonalidad sobre la fundamental del primer acorde ([`GaKeyFromProgressionTool`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaMcpServer/Tools/GuitaristProblemTools.cs#L157-L223), [`analyzeProgression`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs#L255-L336)). Los números romanos salen después de una lista fija por modo. La parte "roots only" de cada línea de arriba es esa regla, reescrita en el programa del curso ([`Lesson7.RootsOnlyKey`](https://github.com/spareilleux/learn/blob/a2439ba/code/music-theory-ga/GaTheory/Lesson7.cs#L120-L135)). El 2026-09-15, el servidor MCP que se ejecutaba en la máquina del autor (no indica su versión) respondió:
 
@@ -195,7 +201,7 @@ La primera línea imprime los números del curso sin el 7 de C7: los números de
 - Una cadencia auténtica es V–I, perfecta con los dos acordes en estado fundamental y la tónica arriba; una semicadencia termina en V. IV–I es sobre todo un movimiento plagal, V–vi un movimiento de engaño.
 - V7 contiene el único tritono de la tonalidad, B–F en C; la sensible sube y la séptima baja, a C y a E.
 - ii–V–I es séptima menor, séptima de dominante, séptima mayor en mayor, y semidisminuido, dominante, séptima menor en menor, con las fundamentales bajando por quintas.
-- La tonalidad de una progresión necesita las notas de los acordes y un desempate por el acorde de tónica. El núcleo de GA resuelve los empates con una forma normal que no codifica el modo, y sus herramientas MCP solo cuentan las fundamentales; ninguno de los dos mira el último acorde.
+- La tonalidad de una progresión necesita las notas de los acordes y un desempate por el acorde de tónica. El núcleo de GA resuelve los empates con una forma normal que no codifica el modo, así que responde la relativa menor para toda escala mayor completa; sus herramientas MCP solo cuentan las fundamentales; ninguno de los dos mira el último acorde.
 - El catálogo de cadencias de GA es correcto acorde por acorde, pero mezcla dos convenciones de numeración para el menor y llama a ♭II–i una «semicadencia frigia».
 
 ## Fuentes

@@ -158,6 +158,15 @@ E-C      m6 8 ic4       m6 8 ic4       ok
 
 Las cuerdas de una guitarra se numeran desde la que suena más aguda: la cuerda 1 es la E aguda y fina, y la cuerda 6 la E grave. La **afinación estándar** es E2 A2 D3 G3 B3 E4 de la cuerda 6 a la cuerda 1 ([Guitar tunings](https://en.wikipedia.org/wiki/Guitar_tunings)). Cada traste sube la cuerda un semitono, así que la nota de la cuerda *s*, traste *f*, es el número MIDI de la cuerda al aire más *f*. La misma altura aparece en varias cuerdas: C4 está en la cuerda 2 traste 1, la cuerda 3 traste 5 y la cuerda 4 traste 10. El módulo de Streeling [GTR-001 · El mapa del mástil](../../streeling/guitar-studies/gtr-001-the-fretboard-map/) recorre las notas naturales de cada cuerda.
 
+```play
+E2
+A2
+D3
+G3
+B3
+E4
+```
+
 El diagrama dibuja los trastes 0 a 12 en afinación estándar, con la cuerda 1 arriba como en la tablatura, y marca cada posición de la clase de altura C con su altura. Hay seis: C3 en la cuerda 6 traste 8 y en la cuerda 5 traste 3, C4 en la cuerda 4 traste 10, la cuerda 3 traste 5 y la cuerda 2 traste 1, y C5 en la cuerda 1 traste 8. Tres posiciones tocan exactamente la misma altura, C4.
 
 <FretboardC role="img" aria-label="Mástil de guitarra en afinación estándar, trastes 0 a 12, cuerda 1 arriba. Clase de altura C: cuerda 6 traste 8 (C3), cuerda 5 traste 3 (C3), cuerda 4 traste 10 (C4), cuerda 3 traste 5 (C4), cuerda 2 traste 1 (C4), cuerda 1 traste 8 (C5)." />
@@ -213,9 +222,9 @@ IntervalSize.TryParse x    False        throws ArgumentException DIFF
 
 - `Pitch.Flat.DFlat(octave)`, `FFlat` y `GFlat` [construyen D, G y A](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Primitives/Notes/Pitch.cs#L285-L295) en lugar de D♭, F♭ y G♭. Las propiedades `DFlat4` y compañía son correctas; solo los métodos están mal.
 - [`PitchParser`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Primitives/Notes/PitchParser.cs#L20-L25) busca su patrón `([A-G])(#?)(10|11|[0-9])` sin anclas `^…$` e ignora las mayúsculas: en `"Eb2"`, el parser de sostenidos se salta la E y reconoce `b2` como B2.
-- [`Note.Flat.TryParse`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Primitives/Notes/Note.cs#L219-L237) pasa su entrada a mayúsculas y luego trata una `B` final como signo de bemol: la propia `"B"` se convierte en B♭.
-- [`PitchClass.TryParse`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Atonal/PitchClass.cs#L252-L267) lee `A` y `B` como los dígitos 10 y 11, a propósito (el comentario lo dice), antes de probar los nombres de notas: `"A"` es la clase de altura 10, pero la nota A es 9.
-- [`SimpleIntervalSize.TryParse`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Primitives/Intervals/SimpleIntervalSize.cs#L155-L164) lanza una excepción ante una entrada incorrecta en lugar de devolver `false`, al contrario de lo que pide el contrato de [`IParsable<TSelf>.TryParse`](https://learn.microsoft.com/dotnet/api/system.iparsable-1.tryparse).
+- [`Note.Flat.TryParse`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Primitives/Notes/Note.cs#L219-L237) pasa su entrada a mayúsculas *antes* de sustituir `♭` por `b`, y luego trata una `B` final como signo de bemol. Esas dos líneas lo estropean en los dos sentidos: la propia `"B"` se convierte en B♭, y un `"D♭"` auténtico se rechaza, porque la sustitución deja una `b` minúscula donde el `EndsWith("B")`, sensible a las mayúsculas, ya no la reconoce.
+- [`PitchClass.TryParse`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Atonal/PitchClass.cs#L252-L267) lee `A` y `B` como los dígitos 10 y 11, a propósito: el comentario los llama "common hex-like aliases sometimes used in set notation". La convención existe de verdad; el error está en el orden. Los alias se prueban *antes* que los nombres de notas, así que `"A"` es la clase de altura 10 y la nota A, la clase de altura 9, no se puede analizar en absoluto.
+- [`SimpleIntervalSize.TryParse`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Primitives/Intervals/SimpleIntervalSize.cs#L155-L164) lanza una excepción ante una entrada incorrecta en lugar de devolver `false`, al contrario de lo que pide el contrato de [`IParsable<TSelf>.TryParse`](https://learn.microsoft.com/dotnet/api/system.iparsable-1.tryparse), y [`CompoundIntervalSize.TryParse`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Primitives/Intervals/CompoundIntervalSize.cs#L101-L110) hace lo mismo. La tabla acorta el nombre: el tipo es `SimpleIntervalSize`.
 
 ## Ejercicios
 
