@@ -9,7 +9,7 @@ sidebar:
 :::note[Versión estudiada]
 Rust **1.94.0**, edición **2024**. Cada ejemplo de código de este curso se compila y ejecuta en CI desde [`code/rust-for-csharp-java`](https://github.com/spareilleux/learn/tree/main/code/rust-for-csharp-java); cada fragmento «esto no compila» es un doctest `compile_fail`.
 
-La parte 2 fija **Tauri 2.11.5**. Su aplicación, [`code/rust-for-csharp-java/l16-tauri`](https://github.com/spareilleux/learn/tree/main/code/rust-for-csharp-java/l16-tauri), de momento se compila y prueba en Windows; aún no forma parte de las ejecuciones de CI, y Linux y macOS están *por verificar*.
+La parte 2 fija **Tauri 2.11.5**. Su aplicación, [`code/rust-for-csharp-java/l16-tauri`](https://github.com/spareilleux/learn/tree/main/code/rust-for-csharp-java/l16-tauri), se compila, se analiza con clippy y se prueba en la CI en Windows, Ubuntu y macOS; su ventana solo se ha ejecutado en Windows.
 :::
 
 ## Por qué aprendo esto

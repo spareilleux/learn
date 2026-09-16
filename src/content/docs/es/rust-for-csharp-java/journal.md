@@ -100,7 +100,7 @@ El curso principal está completo. El código tiene ahora tokio como dev-depende
 
 ## 2026-09-15 — Lecciones 16 a 18: aplicaciones de escritorio con Tauri
 
-Empieza la parte 2. El curso construye ahora un explorador de acordes con Tauri 2.11.5 en `l16-tauri`, un workspace aparte con su propio `Cargo.lock` y su `package-lock.json`. De momento solo se compila y prueba en Windows: el job de CI para los tres sistemas operativos está escrito pero aún no se ejecuta.
+Empieza la parte 2. El curso construye ahora un explorador de acordes con Tauri 2.11.5 en `l16-tauri`, un workspace aparte con su propio `Cargo.lock` y su `package-lock.json`. La CI lo compila, lo analiza y lo prueba en Windows, Ubuntu y macOS, con un build release en cada uno; la ventana en sí solo se ha ejecutado en Windows.
 
 **Cosas que primero hice mal:**
 
@@ -108,6 +108,7 @@ Empieza la parte 2. El curso construye ahora un explorador de acordes con Tauri 
 - La página mostraba `undefined: undefined` para algunos errores: cuando es Tauri quien rechaza una llamada (comando desconocido, argumentos inválidos), la promesa se rechaza con una **cadena**, no con el objeto de error del comando.
 - Mi primer script para controlar la ventana mediante el protocolo DevTools se conectó a `127.0.0.1:9222`, donde ya escuchaba otro programa de esta máquina; la instancia de WebView2 estaba en `[::1]:9222`. No se envió nada al destino equivocado; el script ahora indica `[::1]`, y las ejecuciones posteriores usaron otro puerto.
 - Mi envoltorio de `tauri dev` esperaba la línea ``Running ` ``, que nunca coincidía porque Cargo colorea su salida: la espera tiene que quitar los códigos de escape.
+- Las pruebas con el runtime mock enviaban `http://tauri.localhost` como URL de la página. Ese es el origen solo en Windows y Android; macOS y Linux usan `tauri://localhost`, así que en la primera ejecución de la CI las capabilities rechazaron allí cada llamada con `not allowed. Plugin not found`. Las pruebas eligen ahora el origen según la plataforma (commit `2253508`).
 
 **Sorpresas:**
 
@@ -123,6 +124,6 @@ Empieza la parte 2. El curso construye ahora un explorador de acordes con Tauri 
 
 ## Preguntas abiertas
 
-- ¿Compila y funciona el explorador en WSLg, en Ubuntu con WebKitGTK 4.1 y en macOS? (*por verificar*: el job de CI está listo pero no se ejecuta.)
+- ¿Se abre y funciona la ventana del explorador en WSLg, en Ubuntu con WebKitGTK 4.1 y en macOS? La CI demuestra que compila y que sus pruebas pasan allí, no que la ventana funcione (*por verificar*).
 - ¿Cambia `tauri-runtime-cef` de Tauri 3 las cifras de tamaño y memoria lo bastante como para importar? Es una alfa a fecha de 2026-09-13.
 - ¿Cómo se compara `rust-analyzer` en RustRover con VS Code para estos ejercicios?

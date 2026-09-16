@@ -365,6 +365,8 @@ fn a_theory_error_rejects_with_kind_and_message() {
 
 L'utilitaire `invoke` construit une [`InvokeRequest`](https://docs.rs/tauri/2.11.5/tauri/webview/struct.InvokeRequest.html) et la passe à [`get_ipc_response`](https://docs.rs/tauri/2.11.5/tauri/test/fn.get_ipc_response.html) ([`tests/common/mod.rs`](https://github.com/spareilleux/learn/blob/373237a/code/rust-for-csharp-java/l16-tauri/src-tauri/tests/common/mod.rs)). La documentation de Tauri marque ce module comme instable. La leçon 21 va plus loin, avec des tests WebDriver de la vraie fenêtre.
 
+La requête porte aussi l'URL de la page, et c'est elle que les capabilities vérifient (leçon 20). Windows et Android servent les fichiers embarqués via `http://tauri.localhost`, les autres systèmes via `tauri://localhost` ; avec la mauvaise, chaque appel est refusé par ``spell_chord not allowed. Plugin not found``. La première version de cette leçon codait en dur l'origine de Windows, et la CI l'a trouvé sur les runners macOS et Linux.
+
 :::caution[Sous Windows, les tests ont d'abord refusé de démarrer]
 Le premier `cargo test` a compilé, puis s'est arrêté avant d'exécuter le moindre test :
 
