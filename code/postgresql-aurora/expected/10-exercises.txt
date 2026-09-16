@@ -1,0 +1,39 @@
+
+-- Exercise 1: node2 pauses its replay; the lag, in bytes of WAL, grows on node1's side, then goes back to 0
+ application_name | behind 
+------------------+--------
+ node2            | t
+ node3            | f
+(2 rows)
+
+ application_name | behind 
+------------------+--------
+ node2            | f
+ node3            | f
+(2 rows)
+
+
+-- Exercise 2: ANY 1 (node2, node3): a commit waits for one of the two, so it goes through with node2 stopped
+ application_name | sync_state 
+------------------+------------
+ node2            | quorum
+ node3            | quorum
+(2 rows)
+
+INSERT 0 1
+
+-- Exercise 3: node3 becomes a primary of its own, and subscribes to a table with a stored generated column
+INSERT 0 2
+CREATE PUBLICATION
+NOTICE:  created replication slot "sizes_from_node1" on publisher
+CREATE SUBSCRIPTION
+ id |    body     | length 
+----+-------------+--------
+  1 | partition   |      9
+  2 | replication |     11
+(2 rows)
+
+
+-- Clean-up
+NOTICE:  dropped replication slot "sizes_from_node1" on publisher
+done

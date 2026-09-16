@@ -1,0 +1,115 @@
+
+-- node1: a new cluster, with enough WAL for logical decoding, and the course schema
+on
+
+-- node2: a copy of node1 taken over a replication connection, with a slot and the settings of a standby (-R)
+node2/standby.signal
+port=5433
+primary_slot_name = 'node2'
+ application_name |   state   | sync_state 
+------------------+-----------+------------
+ node2            | streaming | async
+(1 row)
+
+ slot_name | slot_type | active | wal_status 
+-----------+-----------+--------+------------
+ node2     | physical  | t      | reserved
+(1 row)
+
+
+-- A write on node1 is replayed on node2, which answers read-only queries
+ pg_is_in_recovery |  workflow_name   
+-------------------+------------------
+ t                 | Replication test
+(1 row)
+
+ERROR:  cannot execute DELETE in a read-only transaction
+
+-- Synchronous replication: node1's commits now wait for node2 to confirm
+ application_name | sync_state 
+------------------+------------
+ node2            | sync
+(1 row)
+
+node2 stopped
+ wait_event_type | wait_event | pg_cancel_backend 
+-----------------+------------+-------------------
+ IPC             | SyncRep    | t
+(1 row)
+
+WARNING:  canceling wait for synchronous replication due to user request
+DETAIL:  The transaction has already committed locally, but might not have been replicated to the standby.
+INSERT 0 1
+ run_id |   workflow_name   
+--------+-------------------
+      1 | Replication test
+      2 | Committed locally
+(2 rows)
+
+
+-- Asynchronous again, node2 still down: node1 commits a run that node2 will never receive
+node1 stopped
+
+-- Failover: node2 starts, is promoted, and becomes a primary on a new timeline
+ pg_promote 
+------------
+ t
+(1 row)
+
+ pg_is_in_recovery | timeline 
+-------------------+----------
+ f                 | 00000002
+(1 row)
+
+ run_id |  workflow_name   
+--------+------------------
+      1 | Replication test
+(1 row)
+
+
+-- node1 can't simply follow node2: its WAL went further on the old timeline. pg_rewind takes it back.
+pg_rewind: servers diverged at WAL location X/XXXXXXXX on timeline 1
+pg_rewind: rewinding from last common checkpoint at X/XXXXXXXX on timeline 1
+pg_rewind: Done!
+ pg_is_in_recovery | run_id |   workflow_name    
+-------------------+--------+--------------------
+ t                 |      1 | Replication test
+ t                 |      4 | After the failover
+(2 rows)
+
+
+-- Logical replication: node3, a separate cluster, subscribes to the runs table of node2
+CREATE PUBLICATION
+NOTICE:  created replication slot "runs_from_node2" on publisher
+CREATE SUBSCRIPTION
+ on_main | count 
+---------+-------
+ f       |     2
+ t       |   125
+(2 rows)
+
+ on_main | count 
+---------+-------
+ t       |   125
+(1 row)
+
+
+-- The subscriber is an ordinary primary: it accepts writes, which can conflict with replicated rows
+INSERT 0 1
+     subname     | apply_errors | insert_conflicts 
+-----------------+--------------+------------------
+ runs_from_node2 | t            | t
+(1 row)
+
+ERROR:  conflict detected on relation "ci.runs": conflict=insert_exists
+ run_id |   workflow_name    
+--------+--------------------
+      1 | Replication test
+      4 | After the failover
+      5 | Written on node2
+(3 rows)
+
+
+-- Clean-up
+NOTICE:  dropped replication slot "runs_from_node2" on publisher
+done

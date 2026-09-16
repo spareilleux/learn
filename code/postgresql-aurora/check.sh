@@ -4,8 +4,9 @@
 #   bash check.sh build      only builds the C# and Java programs (CI on Windows and macOS: no Docker there)
 #   bash check.sh sql        runs the SQL scripts only, except those that need pgvector
 #   bash check.sh pgvector   runs sql/*-pgvector*.sql, on a server started with PG_IMAGE=pgvector/pgvector:0.8.6-pg18-trixie
+#   bash check.sh ops        runs the shell scripts of lessons 10 and 11 (replication, backups, pg_upgrade) in the container
 #   bash check.sh programs   runs the C# and Java programs only (already built)
-#   bash check.sh            builds, runs the SQL scripts and the programs; the server must be up (bash server.sh start)
+#   bash check.sh            builds, runs the SQL scripts, the ops scripts and the programs; the server must be up (bash server.sh start)
 #   UPDATE=1 bash check.sh   writes the outputs to expected/ instead of comparing (review the diff before committing)
 # PG_CONTAINER and ENGINE are passed on to server.sh; PG_CONNECTION (C#) and PG_JDBC_URL (Java) override where the programs connect.
 set -uo pipefail
@@ -64,6 +65,22 @@ run_sql() {
   done
 }
 
+# The ops scripts start their own clusters next to the server. pg_upgrade needs PostgreSQL 17's binaries, installed
+# as root from the PostgreSQL apt repository that the image already uses (output not compared)
+run_ops() {
+  bash server.sh copy || exit 1
+  if ! ${ENGINE:-docker} exec "${PG_CONTAINER:-pg}" sh -c \
+      'apt-get update -qq && apt-get install -qq -y --no-install-recommends postgresql-17' > out/apt-get.txt 2>&1; then
+    echo "FAIL apt-get install postgresql-17 (out/apt-get.txt)"
+    status=1
+  fi
+  for script in ops/1[01]-*.sh; do
+    name=$(basename "$script" .sh)
+    bash server.sh sh < "$script" > "out/$name.txt"
+    compare "$name"
+  done
+}
+
 # step <expected name> <command...>: runs the command, records its output, compares
 step() {
   local name=$1
@@ -113,6 +130,12 @@ run_programs() {
   step l08-routines-cs cs l08-routines
   step l08-routines-java java_client l08-routines
   step l08-trigger-error-cs cs l08-trigger-error
+  # Lesson 12: a failover, on a primary and a standby set up again before each program
+  bash server.sh sh < ops/12-cluster.sh > /dev/null
+  step l12-failover-cs cs l12-failover
+  bash server.sh sh < ops/12-cluster.sh > /dev/null
+  step l12-failover-java java_client l12-failover
+  bash server.sh sh stop < ops/12-cluster.sh
   echo "---- lesson 4 timings (not compared)"
   cs l04-timings
 }
@@ -121,14 +144,16 @@ case $what in
   build) build ;;
   sql) run_sql other ;;
   pgvector) run_sql pgvector ;;
+  ops) run_ops ;;
   programs) run_programs ;;
   all)
     build
     run_sql other
+    run_ops
     run_programs
     ;;
   *)
-    echo "usage: bash check.sh [build|sql|pgvector|programs]" >&2
+    echo "usage: bash check.sh [build|sql|pgvector|ops|programs]" >&2
     exit 2
     ;;
 esac

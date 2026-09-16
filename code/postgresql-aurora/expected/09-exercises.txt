@@ -1,0 +1,68 @@
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+INSERT 0 125
+    partition     | runs 
+------------------+------
+ ci.runs_deploy   |   65
+ ci.runs_examples |   27
+ ci.runs_other    |   33
+(3 rows)
+
+                                  QUERY PLAN                                  
+------------------------------------------------------------------------------
+ Aggregate (actual rows=1.00 loops=1)
+   Buffers: shared hit+read=1
+   ->  Seq Scan on runs_examples runs_by_workflow (actual rows=18.00 loops=1)
+         Filter: (workflow_name = 'Rust course examples'::text)
+         Rows Removed by Filter: 9
+         Buffers: shared hit+read=1
+(6 rows)
+
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+INSERT 0 30185
+             relid              |      parentrelid       | isleaf | level 
+--------------------------------+------------------------+--------+-------
+ ci.step_months                 |                        | f      |     0
+ ci.step_months_2026_09         | ci.step_months         | f      |     1
+ ci.step_months_2026_09_other   | ci.step_months_2026_09 | t      |     2
+ ci.step_months_2026_09_success | ci.step_months_2026_09 | t      |     2
+(4 rows)
+
+                                                           QUERY PLAN                                                            
+---------------------------------------------------------------------------------------------------------------------------------
+ Aggregate (actual rows=1.00 loops=1)
+   Buffers: shared hit+read=36
+   ->  Seq Scan on step_months_2026_09_other step_months (actual rows=15.00 loops=1)
+         Filter: ((started_at >= '2026-09-14 00:00:00+00'::timestamp with time zone) AND ((conclusion)::text = 'failure'::text))
+         Rows Removed by Filter: 1512
+         Buffers: shared hit+read=36
+(6 rows)
+
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE PROCEDURE
+NOTICE:  dropping ci.step_log_2026_02
+NOTICE:  dropping ci.step_log_2026_03
+NOTICE:  dropping ci.step_log_2026_04
+NOTICE:  dropping ci.step_log_2026_05
+CALL
+        relid        
+---------------------
+ ci.step_log_2026_06
+ ci.step_log_2026_07
+ ci.step_log_2026_08
+ ci.step_log_2026_09
+(4 rows)
+

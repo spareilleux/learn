@@ -23,6 +23,7 @@ var examples = new Dictionary<string, Func<Task>>
     ["l06-skip-locked"] = L06.SkipLocked,
     ["l08-routines"] = L08.Routines,
     ["l08-trigger-error"] = L08.TriggerError,
+    ["l12-failover"] = L12.Failover,
 };
 
 if (args.Length != 1 || !examples.TryGetValue(args[0], out var example))

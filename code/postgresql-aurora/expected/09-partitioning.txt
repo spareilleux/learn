@@ -1,0 +1,167 @@
+ERROR:  unique constraint on partitioned table must include all partitioning columns
+DETAIL:  PRIMARY KEY constraint on table "step_log" lacks column "started_at" which is part of the partition key.
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+INSERT 0 440800
+VACUUM
+      partition      | rows  | first_day  |  last_day  
+---------------------+-------+------------+------------
+ ci.step_log_2026_02 |  5079 | 2026-02-26 | 2026-02-28
+ ci.step_log_2026_03 | 68324 | 2026-03-01 | 2026-03-31
+ ci.step_log_2026_04 | 66120 | 2026-04-01 | 2026-04-30
+ ci.step_log_2026_05 | 68324 | 2026-05-01 | 2026-05-31
+ ci.step_log_2026_06 | 66120 | 2026-06-01 | 2026-06-30
+ ci.step_log_2026_07 | 68324 | 2026-07-01 | 2026-07-31
+ ci.step_log_2026_08 | 68324 | 2026-08-01 | 2026-08-31
+ ci.step_log_2026_09 | 30185 | 2026-09-01 | 2026-09-14
+(8 rows)
+
+ERROR:  no partition of relation "step_log" found for row
+DETAIL:  Partition key of the failing row contains (started_at) = (2026-10-01 12:00:00+00).
+                                                  QUERY PLAN                                                  
+--------------------------------------------------------------------------------------------------------------
+ Aggregate (actual rows=1.00 loops=1)
+   Buffers: shared hit+read=121
+   ->  Index Only Scan using step_log_2026_09_pkey on step_log_2026_09 step_log (actual rows=1533.00 loops=1)
+         Index Cond: (started_at >= '2026-09-14 00:00:00+00'::timestamp with time zone)
+         Heap Fetches: 0
+         Index Searches: 1
+         Buffers: shared hit+read=121
+(7 rows)
+
+                                    QUERY PLAN                                     
+-----------------------------------------------------------------------------------
+ Aggregate (actual rows=1.00 loops=1)
+   Buffers: shared hit+read=7453
+   ->  Append (actual rows=9200.00 loops=1)
+         Buffers: shared hit+read=7453
+         ->  Seq Scan on step_log_2026_02 step_log_1 (actual rows=114.00 loops=1)
+               Filter: (step_name = 'Compile-fail doctests'::text)
+               Rows Removed by Filter: 4965
+               Buffers: shared hit+read=86
+         ->  Seq Scan on step_log_2026_03 step_log_2 (actual rows=1426.00 loops=1)
+               Filter: (step_name = 'Compile-fail doctests'::text)
+               Rows Removed by Filter: 66898
+               Buffers: shared hit+read=1155
+         ->  Seq Scan on step_log_2026_04 step_log_3 (actual rows=1380.00 loops=1)
+               Filter: (step_name = 'Compile-fail doctests'::text)
+               Rows Removed by Filter: 64740
+               Buffers: shared hit+read=1118
+         ->  Seq Scan on step_log_2026_05 step_log_4 (actual rows=1426.00 loops=1)
+               Filter: (step_name = 'Compile-fail doctests'::text)
+               Rows Removed by Filter: 66898
+               Buffers: shared hit+read=1155
+         ->  Seq Scan on step_log_2026_06 step_log_5 (actual rows=1380.00 loops=1)
+               Filter: (step_name = 'Compile-fail doctests'::text)
+               Rows Removed by Filter: 64740
+               Buffers: shared hit+read=1118
+         ->  Seq Scan on step_log_2026_07 step_log_6 (actual rows=1426.00 loops=1)
+               Filter: (step_name = 'Compile-fail doctests'::text)
+               Rows Removed by Filter: 66898
+               Buffers: shared hit+read=1155
+         ->  Seq Scan on step_log_2026_08 step_log_7 (actual rows=1426.00 loops=1)
+               Filter: (step_name = 'Compile-fail doctests'::text)
+               Rows Removed by Filter: 66898
+               Buffers: shared hit+read=1155
+         ->  Seq Scan on step_log_2026_09 step_log_8 (actual rows=622.00 loops=1)
+               Filter: (step_name = 'Compile-fail doctests'::text)
+               Rows Removed by Filter: 29563
+               Buffers: shared hit+read=511
+(36 rows)
+
+PREPARE
+SET
+                                      QUERY PLAN                                       
+---------------------------------------------------------------------------------------
+ Aggregate (actual rows=1.00 loops=1)
+   ->  Append (actual rows=301.00 loops=1)
+         Subplans Removed: 7
+         ->  Seq Scan on step_log_2026_09 step_log_1 (actual rows=301.00 loops=1)
+               Filter: ((started_at >= $1) AND ((conclusion)::text = 'failure'::text))
+               Rows Removed by Filter: 29884
+(6 rows)
+
+RESET
+CREATE INDEX
+             index              |        parent         
+--------------------------------+-----------------------
+ step_log_2026_02_step_name_idx | ci.step_log_step_name
+ step_log_2026_03_step_name_idx | ci.step_log_step_name
+ step_log_2026_04_step_name_idx | ci.step_log_step_name
+ step_log_2026_05_step_name_idx | ci.step_log_step_name
+ step_log_2026_06_step_name_idx | ci.step_log_step_name
+ step_log_2026_07_step_name_idx | ci.step_log_step_name
+ step_log_2026_08_step_name_idx | ci.step_log_step_name
+ step_log_2026_09_step_name_idx | ci.step_log_step_name
+(8 rows)
+
+       now_in        |       started_at       
+---------------------+------------------------
+ ci.step_log_2026_08 | 2026-08-01 01:37:05+00
+(1 row)
+
+UPDATE 1
+CREATE EXTENSION
+BEGIN
+DELETE 5079
+  size  | dead_tuple_count 
+--------+------------------
+ 688 kB |             5079
+(1 row)
+
+ROLLBACK
+ALTER TABLE
+ rows_left 
+-----------
+    435721
+(1 row)
+
+DROP TABLE
+CREATE TABLE
+INSERT 0 1
+ERROR:  updated partition constraint for default partition "step_log_default" would be violated by some row
+DELETE 1
+CREATE TABLE
+INSERT 0 30184
+ALTER TABLE
+ALTER TABLE
+    partition     |                                  bounds                                  
+------------------+--------------------------------------------------------------------------
+ step_log_2026_03 | FOR VALUES FROM ('2026-03-01 00:00:00+00') TO ('2026-04-01 00:00:00+00')
+ step_log_2026_04 | FOR VALUES FROM ('2026-04-01 00:00:00+00') TO ('2026-05-01 00:00:00+00')
+ step_log_2026_05 | FOR VALUES FROM ('2026-05-01 00:00:00+00') TO ('2026-06-01 00:00:00+00')
+ step_log_2026_06 | FOR VALUES FROM ('2026-06-01 00:00:00+00') TO ('2026-07-01 00:00:00+00')
+ step_log_2026_07 | FOR VALUES FROM ('2026-07-01 00:00:00+00') TO ('2026-08-01 00:00:00+00')
+ step_log_2026_08 | FOR VALUES FROM ('2026-08-01 00:00:00+00') TO ('2026-09-01 00:00:00+00')
+ step_log_2026_09 | FOR VALUES FROM ('2026-09-01 00:00:00+00') TO ('2026-10-01 00:00:00+00')
+ step_log_2026_10 | FOR VALUES FROM ('2026-10-01 00:00:00+00') TO ('2026-11-01 00:00:00+00')
+ step_log_default | DEFAULT
+(9 rows)
+
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+INSERT 0 465905
+INSERT 0 465905
+        partition         |  rows  | jobs 
+--------------------------+--------+------
+ ci.step_outcomes_success | 441875 |   64
+ ci.step_outcomes_other   |  24030 |   17
+ ci.step_buckets_0        |  83288 |   18
+ ci.step_buckets_1        | 113779 |   15
+ ci.step_buckets_2        | 175176 |   13
+ ci.step_buckets_3        |  93662 |   18
+(6 rows)
+

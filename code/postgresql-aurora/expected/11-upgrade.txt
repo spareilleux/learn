@@ -1,0 +1,96 @@
+
+-- A PostgreSQL 17 cluster, with a table, its statistics, and extended statistics
+ version | checksums 
+---------+-----------
+      17 | off
+(1 row)
+
+ column_stats | extended_stats 
+--------------+----------------
+            6 |              1
+(1 row)
+
+
+-- A new 18 cluster: initdb 18 turns data checksums on, 17 left them off
+Performing Consistency Checks
+-----------------------------
+Checking cluster versions                                     ok
+old cluster does not use data checksums but the new one does
+Failure, exiting
+
+-- The upgrade: --swap moves the old data directory into the new cluster, so the 17 cluster can't be started again
+Performing Consistency Checks
+-----------------------------
+Checking cluster versions                                     ok
+Checking database connection settings                         ok
+Checking database user is the install user                    ok
+Checking for prepared transactions                            ok
+Checking for contrib/isn with bigint-passing mismatch         ok
+Checking for valid logical replication slots                  ok
+Checking for subscription state                               ok
+Checking data type usage                                      ok
+Checking for objects affected by Unicode update               ok
+Checking for not-null constraint inconsistencies              ok
+Creating dump of global objects                               ok
+Creating dump of database schemas                             ok
+Checking for presence of required libraries                   ok
+Checking database user is the install user                    ok
+Checking for prepared transactions                            ok
+Checking for new cluster tablespace directories               ok
+If pg_upgrade fails after this point, you must re-initdb the
+new cluster before continuing.
+Performing Upgrade
+------------------
+Setting locale and encoding for new cluster                   ok
+Analyzing all rows in the new cluster                         ok
+Freezing all rows in the new cluster                          ok
+Deleting files from new pg_xact                               ok
+Copying old pg_xact to new server                             ok
+Setting oldest XID for new cluster                            ok
+Setting next transaction ID and epoch for new cluster         ok
+Deleting files from new pg_multixact/offsets                  ok
+Copying old pg_multixact/offsets to new server                ok
+Deleting files from new pg_multixact/members                  ok
+Copying old pg_multixact/members to new server                ok
+Setting next multixact ID and offset for new cluster          ok
+Resetting WAL archives                                        ok
+Setting frozenxid and minmxid counters in new cluster         ok
+Restoring global objects in the new cluster                   ok
+Restoring database schemas in the new cluster                 ok
+Adding ".old" suffix to old "global/pg_control"               ok
+Because "swap" mode was used, the old cluster can no longer be
+safely started.
+Swapping data directories                                     ok
+Setting next OID for new cluster                              ok
+Sync data directory to disk                                   ok
+Creating script to delete old cluster                         ok
+Checking for extension updates                                ok
+Upgrade Complete
+----------------
+Some statistics are not transferred by pg_upgrade.
+Once you start the new server, consider running these two commands:
+    /usr/lib/postgresql/18/bin/vacuumdb --all --analyze-in-stages --missing-stats-only
+    /usr/lib/postgresql/18/bin/vacuumdb --all --analyze-only
+Running this script will delete the old cluster's data files:
+    ./delete_old_cluster.sh
+ version | runs 
+---------+------
+      18 |  125
+(1 row)
+
+ column_stats | extended_stats 
+--------------+----------------
+            6 |              0
+(1 row)
+
+vacuumdb: vacuuming database "learn"
+vacuumdb: vacuuming database "postgres"
+vacuumdb: vacuuming database "template1"
+ column_stats | extended_stats 
+--------------+----------------
+            6 |              1
+(1 row)
+
+
+-- Clean-up
+done

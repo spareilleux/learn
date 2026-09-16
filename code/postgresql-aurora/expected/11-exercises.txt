@@ -1,0 +1,19 @@
+
+-- Exercise 1: the iconic chords are deleted by mistake; only that table's data comes back from the dump
+DELETE 17
+ chords 
+--------
+     17
+(1 row)
+
+
+-- Exercise 2: a recovery that stops before the transaction of a DELETE, found by its ID
+recovery stopping before commit of transaction
+ steps | last_run  
+-------+-----------
+  2204 | cancelled
+(1 row)
+
+
+-- Clean-up
+done

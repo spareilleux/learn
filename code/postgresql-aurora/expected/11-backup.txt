@@ -1,0 +1,66 @@
+
+-- node1: every finished WAL segment is copied to /tmp/archive, and the WAL summarizer runs for incremental backups
+ runs | jobs | steps 
+------+------+-------
+  125 |  315 |  2204
+(1 row)
+
+
+-- A logical dump in the custom format, its table of contents, and a restore with two parallel jobs
+TABLE DATA ci jobs postgres
+TABLE DATA ci runs postgres
+TABLE DATA ci steps postgres
+TABLE DATA ga iconic_chords postgres
+TABLE DATA ga package_refs postgres
+TABLE DATA ga project_refs postgres
+TABLE DATA ga projects postgres
+ runs | jobs | steps 
+------+------+-------
+  125 |  315 |  2204
+(1 row)
+
+CREATE ROLE reader;
+ALTER ROLE reader WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB NOLOGIN NOREPLICATION NOBYPASSRLS;
+
+-- A full base backup, with its manifest, then new work on node1
+base/backup_manifest
+
+-- An incremental backup holds only the blocks changed since the manifest it is given
+without WAL, the incremental backup is less than a third of the full one
+backup successfully verified
+
+-- Later: a named restore point, then a mistake
+ restore_point 
+---------------
+ t
+(1 row)
+
+NOTICE:  truncate cascades to table "jobs"
+NOTICE:  truncate cascades to table "steps"
+TRUNCATE TABLE
+ runs | jobs | steps 
+------+------+-------
+    0 |    0 |     0
+(1 row)
+
+
+-- Point-in-time recovery on node2: the combined backup, the archived WAL, and a target
+recovery stopping at restore point "before_truncate"
+ runs | jobs | steps 
+------+------+-------
+  125 |  315 |  2204
+(1 row)
+
+ conclusion 
+------------
+ failure
+(1 row)
+
+ timeline 
+----------
+ 00000002
+(1 row)
+
+
+-- Clean-up
+done

@@ -23,6 +23,7 @@ public final class Main {
         examples.put("l06-lost-update", L06::lostUpdate);
         examples.put("l06-retry", L06::retry);
         examples.put("l08-routines", L08::routines);
+        examples.put("l12-failover", L12::failover);
         Example example = args.length == 1 ? examples.get(args[0]) : null;
         if (example == null) {
             System.err.println("usage: pg <" + String.join("|", examples.keySet()) + ">");

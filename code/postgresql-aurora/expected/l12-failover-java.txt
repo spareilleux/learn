@@ -1,0 +1,7 @@
+secondary: port 5434, pg_is_in_recovery() = true
+before: order written on port 5433
+node1 stopped
+open connection: 57P01: FATAL: terminating connection due to administrator command
+no primary: 08001: Could not find a server with specified targetServerType: primary
+pg_promote() on node2: true
+after: order written on port 5434

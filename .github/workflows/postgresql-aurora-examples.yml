@@ -1,6 +1,6 @@
-# PostgreSQL and Aurora course: run the SQL scripts with psql and the C# and Java programs against PostgreSQL on Linux,
-# and build the programs on Windows and macOS. GitHub's Windows and macOS runners have no Docker, so there is no server
-# to run them against there.
+# PostgreSQL and Aurora course: run the SQL scripts with psql, the replication and backup scripts of ops/, and the C# and
+# Java programs against PostgreSQL on Linux, and build the programs on Windows and macOS. GitHub's Windows and macOS
+# runners have no Docker, so there is no server to run them against there.
 name: PostgreSQL and Aurora course examples
 
 on:
@@ -25,6 +25,9 @@ jobs:
           POSTGRES_PASSWORD: learn
         ports:
           - 5432:5432
+          # lesson 12: the primary and standby that ops/12-cluster.sh starts inside this container
+          - 5433:5433
+          - 5434:5434
         # -h 127.0.0.1, as in server.sh: during the first start, the entrypoint's temporary server listens on the Unix socket only
         options: >-
           --health-cmd "pg_isready -h 127.0.0.1 -U postgres"

@@ -1,0 +1,7 @@
+standby: port 5434, pg_is_in_recovery() = True
+before: order written on port 5433
+node1 stopped
+open connection: NpgsqlException: Exception while reading from stream
+no primary: NpgsqlException: No suitable host was found.
+pg_promote() on node2: True
+after: order written on port 5434

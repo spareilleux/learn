@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
-# The course server, one container named pg: bash server.sh start | wait | copy | psql [args] | stop
+# The course server, one container named pg: bash server.sh start | wait | copy | psql [args] | sh [args] | stop
 #   start  runs PostgreSQL, waits until it accepts TCP connections, and copies the course files into /course
 #   copy   copies sql/ and the data files again (after editing a script)
 #   psql   runs psql inside the container, in /course/sql, with the course's session settings
+#   sh     runs the bash script read from stdin inside the container, as the postgres user, with the same settings
+#          (ops/: the clusters of lessons 10 to 12, next to the server; ports 5433 and 5434 are published for lesson 12)
 # ENGINE=podman uses Podman instead of Docker; PG_CONTAINER names another container (CI's service).
 # PG_IMAGE=pgvector/pgvector:0.8.6-pg18-trixie starts the same PostgreSQL with pgvector, for sql/08-pgvector.sql.
 set -euo pipefail
@@ -41,7 +43,7 @@ copy_files() {
 
 case ${1:-} in
   start)
-    $engine run -d --name "$name" -e POSTGRES_PASSWORD=learn -p 5432:5432 $image > /dev/null
+    $engine run -d --name "$name" -e POSTGRES_PASSWORD=learn -p 5432:5432 -p 5433:5433 -p 5434:5434 $image > /dev/null
     wait_ready
     copy_files
     ;;
@@ -55,9 +57,13 @@ case ${1:-} in
     $engine exec -i -w /course/sql -e PGOPTIONS="-c lc_messages=C -c TimeZone=UTC -c DateStyle=ISO,MDY" \
       "$name" sh -c 'stdbuf -o0 psql -X -U postgres "$@" 2>&1' psql "$@"
     ;;
+  sh)
+    shift
+    $engine exec -i -u postgres -e PGOPTIONS="-c lc_messages=C -c TimeZone=UTC -c DateStyle=ISO,MDY" "$name" bash -s "$@" 2>&1
+    ;;
   stop) $engine rm -f "$name" > /dev/null ;;
   *)
-    echo "usage: bash server.sh start|wait|copy|psql [args]|stop" >&2
+    echo "usage: bash server.sh start|wait|copy|psql [args]|sh [args]|stop" >&2
     exit 2
     ;;
 esac
