@@ -207,7 +207,7 @@ For this model, Draco saves 88 bytes over meshopt on the wire, and costs about 9
 
 ### Textures: KTX2
 
-Geometry is often the smaller part of a model: a 2048 by 2048 texture takes about 16 MB of GPU memory once decoded, more with mipmaps, whatever the size of its PNG. **KTX2** files with Basis Universal compression (`KHR_texture_basisu`) stay compressed on the GPU: [`KTX2Loader`](https://threejs.org/docs/pages/KTX2Loader.html) transcodes them to a format the GPU supports, such as BC7 on desktop GPUs or ASTC on phones. The loader needs its transcoder files and the renderer to detect the formats: `new KTX2Loader().setTranscoderPath(…).detectSupport(renderer)`, then `gltfLoader.setKTX2Loader(ktx2Loader)`. The course's metronome has no textures, so this part isn't measured here (*to verify* in lesson 8, which measures memory).
+Geometry is often the smaller part of a model: a 2048 by 2048 texture takes about 16 MB of GPU memory once decoded, more with mipmaps, whatever the size of its PNG. **KTX2** files with Basis Universal compression (`KHR_texture_basisu`) stay compressed on the GPU: [`KTX2Loader`](https://threejs.org/docs/pages/KTX2Loader.html) transcodes them to a format the GPU supports, such as BC7 on desktop GPUs or ASTC on phones. The loader needs its transcoder files and the renderer to detect the formats: `new KTX2Loader().setTranscoderPath(…).detectSupport(renderer)`, then `gltfLoader.setKTX2Loader(ktx2Loader)`. The course's metronome has no textures, so this part isn't measured here (*to verify*).
 
 ## In GuitarAlchemist/ga
 

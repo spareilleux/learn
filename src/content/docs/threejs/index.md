@@ -7,7 +7,7 @@ sidebar:
 ---
 
 :::note[Version studied]
-[three.js](https://threejs.org/) **r186** (the npm package `three` 0.186.0, released on 8 September 2026), with [`@types/three`](https://www.npmjs.com/package/@types/three) 0.186.0, served and built by [Vite](https://vite.dev/) 8.3.0, checked with [TypeScript](https://www.typescriptlang.org/) 7.0.2, and measured in headless Chromium with [Playwright](https://playwright.dev/) 1.63.0 on [Node.js](https://nodejs.org/) 24. The course's scenes and scripts are in [`code/threejs`](https://github.com/spareilleux/learn/tree/8e8f303/code/threejs), with a `package.json` and lock file that also pin [glTF Transform](https://gltf-transform.dev/) 4.5.0. [`.github/workflows/threejs-examples.yml`](https://github.com/spareilleux/learn/blob/8e8f303/.github/workflows/threejs-examples.yml) runs [`check.sh`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/check.sh) on Linux, Windows and macOS: it type-checks everything, runs the Node.js scripts, opens every lesson page in headless Chromium, builds the pages, and compares the outputs with the ones pasted in the lessons.
+[three.js](https://threejs.org/) **r186** (the npm package `three` 0.186.0, released on 8 September 2026), with [`@types/three`](https://www.npmjs.com/package/@types/three) 0.186.0, served and built by [Vite](https://vite.dev/) 8.3.0, checked with [TypeScript](https://www.typescriptlang.org/) 7.0.2, and measured in headless Chromium with [Playwright](https://playwright.dev/) 1.63.0 on [Node.js](https://nodejs.org/) 24. The course's scenes and scripts are in [`code/threejs`](https://github.com/spareilleux/learn/tree/8bf126b/code/threejs), with a `package.json` and lock file that also pin [glTF Transform](https://gltf-transform.dev/) 4.5.0. [`.github/workflows/threejs-examples.yml`](https://github.com/spareilleux/learn/blob/8bf126b/.github/workflows/threejs-examples.yml) runs [`check.sh`](https://github.com/spareilleux/learn/blob/8bf126b/code/threejs/check.sh) on Linux, Windows and macOS: it type-checks everything, runs the Node.js scripts, opens every lesson page in headless Chromium, builds the pages, and compares the outputs with the ones pasted in the lessons.
 :::
 
 ## Why I'm learning this
@@ -36,7 +36,7 @@ You are comfortable with C# or Java, and you have followed [JavaScript for C#/Ja
 
 ## The data
 
-The course's own scenes are small and deterministic: a cube, a piece of guitar neck made of primitives, color patches, ten spheres in an HDR studio, and a metronome written as a glTF file by a script. Each page reports what the renderer did, and a Playwright script reads it, so the numbers in the lessons come from a run, not from memory.
+The course's own scenes are small and deterministic: a cube, a piece of guitar neck made of primitives, color patches, ten spheres in an HDR studio, a metronome written as a glTF file by a script, a fretboard to point at, a vibrating string, glowing inlays, and 10,000 note markers. Each page reports what the renderer did, and a Playwright script reads it, so the numbers in the lessons come from a run, not from memory.
 
 The real code is [GuitarAlchemist/ga](https://github.com/GuitarAlchemist/ga) at commit [`05c8eda`](https://github.com/GuitarAlchemist/ga/commit/05c8eda013f2a4d11efaa52c4ca94674521ee684), mainly [`ThreeFretboard.tsx`](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeFretboard.tsx), its 3D guitar neck. GA's React components ask for three.js 0.180, six releases behind this course. The lessons quote GA's code where it shows a point well, including what changed since r180; the findings are in the [journal](journal/).
 
@@ -59,11 +59,11 @@ The real code is [GuitarAlchemist/ga](https://github.com/GuitarAlchemist/ga) at 
 | 2 | [Geometries, materials, lights and shadows](02-geometries-materials-lights/) | `MeshGeometry3D`, `DiffuseMaterial`, `BasicEffect`, directional and point lights |
 | 3 | [Color, tone mapping and HDR environments](03-color-tone-mapping-environments/) | sRGB, `Color` in WPF or JavaFX, HDR photos |
 | 4 | [Loading glTF models and animations](04-gltf-models-and-animations/) | MonoGame's content pipeline, WPF storyboards, `AnimationTimer` |
-| 5 | Interaction: `Raycaster`, pointer events and camera controls (coming next) | hit testing in WPF, `VisualTreeHelper.HitTest`, JavaFX `PickResult` |
-| 6 | TSL and node materials | HLSL effects, shader graphs |
-| 7 | Post-processing with `RenderPipeline` | render targets, pixel shaders |
-| 8 | Performance: instancing, `BatchedMesh`, LOD, frustum culling, measurements | instanced drawing, profilers |
-| 9 | React Three Fiber and drei | WPF data binding, Blazor or React components |
+| 5 | [Interaction, `Raycaster` and camera controls](05-interaction-raycaster-controls/) | hit testing in WPF, `VisualTreeHelper.HitTest`, JavaFX `PickResult` |
+| 6 | [TSL and node materials](06-tsl-node-materials/) | HLSL effects, shader graphs |
+| 7 | [Post-processing with `RenderPipeline`](07-post-processing-renderpipeline/) | render targets, pixel shaders |
+| 8 | [Performance, measured: instancing, `BatchedMesh`, LOD, frustum culling](08-performance-instancing-batching-lod/) | instanced drawing, profilers |
+| 9 | React Three Fiber and drei (coming next) | WPF data binding, Blazor or React components |
 | 10 | Physics with Rapier in WebAssembly | BEPUphysics, physics engines in games |
 | 11 | WebXR | Windows Mixed Reality, OpenXR |
 | 12 | Tests and CI: headless rendering, compared screenshots, and their limits | UI automation, snapshot tests |

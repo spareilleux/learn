@@ -14,7 +14,11 @@ sidebar:
 - [x] Lesson 2: geometries, materials, lights and shadows
 - [x] Lesson 3: color, tone mapping and HDR environments
 - [x] Lesson 4: glTF models and animations
-- [ ] Lesson 5: interaction, `Raycaster` and camera controls
+- [x] Lesson 5: interaction, `Raycaster` and camera controls
+- [x] Lesson 6: TSL and node materials
+- [x] Lesson 7: post-processing with `RenderPipeline`
+- [x] Lesson 8: performance, measured
+- [ ] Lesson 9: React Three Fiber and drei
 
 ## 2026-09-16 — Versions
 
@@ -59,11 +63,37 @@ The course reads GA at commit [`05c8eda`](https://github.com/GuitarAlchemist/ga/
 - Its wood texture has no `colorSpace`, so it shows lighter than painted, and its environment is an 8-bit gradient whose PMREM the renderer builds anyway (lesson 3). How much the wood color differs on screen is *to verify* in a browser.
 - `Guitar3D.tsx` builds a black environment with `fromScene` on a scene that holds only an ambient light, and announces KTX2 and meshopt support without setting either decoder (lessons 3 and 4).
 - `Ocean.tsx` loads Draco's decoders from gstatic.com; `DemerzelFaceOverlay.tsx` hides KTX2 errors by replacing `console.error` during a load; `HandAnimationTest.tsx` updates an `AnimationMixer` that has no action (lesson 4).
-- For later lessons: `Ocean.tsx` uses `PostProcessing`, renamed `RenderPipeline` in r183; 16 files use `ShaderMaterial` or GLSL, and 10 use `EffectComposer`, which `WebGPURenderer` doesn't support; `Experiments/ThreeJS-BSP-Loader` imports `WebGPURenderer` from a path removed in r167; the dashboard's embedding viewer removes a resize listener with a new `bind`, which removes nothing.
+- `Experiments/ThreeJS-BSP-Loader` imports `WebGPURenderer` from a path removed in r167; the dashboard's embedding viewer removes a resize listener with a new `bind`, which removes nothing.
+- `ThreeHeadstock.tsx` adds a click listener to the same canvas on each run of its effect and never removes it; `TonalOrbit.tsx` and `MinimalThreeInstrument.tsx` raycast on every mouse event, the second with a new `Raycaster` each time; Prime Radiant's `InteractionHandler.ts` does it the lesson's way; 4 of the 25 files with `OrbitControls` never dispose them (lesson 5).
+- The GLSL sky of `Sunburst3D.tsx`, copied in `ImmersiveMusicalWorld.tsx`, can't run on `WebGPURenderer`; `FresnelGlowTSL.ts` bakes its corona's intensity and color into the shader as constants; `MoebiusPassTSL.ts` is a GLSL `ShaderPass` despite its name (lesson 6).
+- `Ocean.tsx` and `LunarLanderEngine.ts` use `PostProcessing`, renamed `RenderPipeline` in r183, and `Ocean.tsx` never disposes the pipeline or its nodes; `ForceRadiant.tsx` runs on `WebGPURenderer` without the bloom and `ShaderPass` effects of its WebGL path, a "follow-up task"; the 10 files with `EffectComposer` use it correctly for WebGL (lesson 7).
+- `ThreeFretboard.tsx` creates a geometry and a material per fret and per marker, rebuilds its scene whenever its `positions` prop is a new array, including the default `[]`, and doesn't dispose its 29 sprites; `NodeInstancer.ts` instances its nodes well, with culling turned off; GA uses neither `BatchedMesh` nor `THREE.LOD` (lesson 8).
+
+## 2026-09-16 — Lessons 5 to 8: pointers, shaders, effects, counts
+
+- **Real pointer events in a headless page.** [`scripts/probe.mjs`](https://github.com/spareilleux/learn/blob/8bf126b/code/threejs/scripts/probe.mjs) now performs the moves and drags a page lists, with Playwright's mouse, and asks the page what it saw after each one. Chromium turns them into `pointermove`, `pointerdown` and `pointerup` events, which `OrbitControls` handles as it would a user's: a 120-pixel drag turned the camera by 96°.
+- **A camera outside the scene has a stale matrix in a script.** The first version of `l05-raycaster.ts` projected a point to an NDC of −3.6: rendering updates the camera's world matrix, and a Node.js script doesn't render. `camera.updateMatrixWorld()` fixed it.
+- **A shared stylesheet is part of every chunk's hash.** Adding lesson 5's layout rules to `page.css` changed the names of all the build's chunks, including the `04-gltf-CCDSPzCq.js` that lesson 4 quotes. Lesson 5 got its own stylesheet, and `check.sh` builds the pages of lessons 1 to 4 alone, with a `PAGES` filter, before building everything: with the pages of lessons 5 to 8, Rolldown names the shared WebGPU chunk `three.tsl` instead of `three.webgpu`.
+- **`PostProcessing` is `RenderPipeline` since r183, and `pipeline.dispose()` frees one material.** The bloom's 11 render targets and the scene pass's one stay until the nodes themselves are disposed.
+- **`DirectRenderPipeline.render` takes the scene and the camera**, unlike `RenderPipeline.render()`, so TypeScript rejects it in a `RenderPipeline` variable; and it draws a solid background as a sphere of 1,984 triangles.
+- **`renderer.info.render` adds up across `render()` calls within one animation frame.** A page that rendered 60 frames in a loop to time them reported 610,061 draw calls; lesson 8 reads the counts first.
+
+## 2026-09-16 — The CI runners and lessons 5 to 8
+
+- Run [35123228046](https://github.com/spareilleux/learn/actions/runs/35123228046) passed on macOS (WebGPU on the "apple" adapter) and failed on Linux and Windows, where `WebGPURenderer` falls back to WebGL 2 on SwiftShader. Four differences, all real:
+  - The bloom chains count one more program on WebGL 2: 14 instead of 13, 16 instead of 15.
+  - With FXAA, SwiftShader's halo pixel is 135, 176, 197, where the author's GPU gives 132, 174, 195 on both backends: 3 more than `compare.mjs` accepts.
+  - A `BatchedMesh` is drawn with `WEBGL_multi_draw` and counted as 2 draw calls, not 10,001.
+  - The WebGPU shader file holds GLSL, since the page ran on WebGL 2.
+- Lesson 8's pages with 800,000 triangles timed out: the probe result arrived, but Playwright's screenshot waited more than 30 seconds behind the 60 timed frames still queued in the software rasterizer.
+- The fix: `check.sh` compares a probe with `expected/<name>.webgl.txt` when that file exists and the page ran on WebGL 2. The five files come from `chromium-headless-shell` on the author's machine, whose SwiftShader gave the same values as the runners. The GLSL line is compared, and the WGSL line only printed. Lesson 8 times 20 frames, and its probes wait up to 240 seconds (`PROBE_TIMEOUT`). Run [35124756498](https://github.com/spareilleux/learn/actions/runs/35124756498) passed on the three OSes.
 
 ## To verify
 
 - Whether a scene modeled in centimeters needs lights 10,000 times stronger to look the same as in meters (lesson 2).
-- KTX2 textures: loading, GPU formats chosen on each OS, memory (lesson 8).
+- KTX2 textures: loading, GPU formats chosen on each OS, memory.
+- Whether `ThreeHeadstock.tsx` calls `onTuningPegClick` once per stale listener after its effect reruns (lesson 5).
+- Whether `ThreeFretboard.tsx` is rebuilt on every render of its parents in GA's pages (lesson 8).
+- GPU time, not only CPU time, with WebGPU's `timestamp-query` (lesson 8).
 - Draco against meshopt on a large model and on many small ones, over a real network (lesson 4, exercise 3).
 - WebGPU on a Linux or Windows machine with a GPU, outside the author's.

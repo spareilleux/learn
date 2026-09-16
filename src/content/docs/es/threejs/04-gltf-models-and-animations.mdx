@@ -207,7 +207,7 @@ Para este modelo, Draco ahorra 88 bytes respecto a meshopt en la transferencia, 
 
 ### Texturas: KTX2
 
-La geometría suele ser la parte más pequeña de un modelo: una textura de 2048 por 2048 ocupa unos 16 MB de memoria de GPU una vez decodificada, más con mipmaps, sea cual sea el tamaño de su PNG. Los archivos **KTX2** con compresión Basis Universal (`KHR_texture_basisu`) permanecen comprimidos en la GPU: [`KTX2Loader`](https://threejs.org/docs/pages/KTX2Loader.html) los transcodifica a un formato que la GPU admita, como BC7 en las GPU de escritorio o ASTC en los teléfonos. El cargador necesita sus archivos de transcodificación y que el renderizador detecte los formatos: `new KTX2Loader().setTranscoderPath(…).detectSupport(renderer)`, y luego `gltfLoader.setKTX2Loader(ktx2Loader)`. El metrónomo del curso no tiene texturas, así que esta parte no se mide aquí (*por verificar* en la lección 8, que mide la memoria).
+La geometría suele ser la parte más pequeña de un modelo: una textura de 2048 por 2048 ocupa unos 16 MB de memoria de GPU una vez decodificada, más con mipmaps, sea cual sea el tamaño de su PNG. Los archivos **KTX2** con compresión Basis Universal (`KHR_texture_basisu`) permanecen comprimidos en la GPU: [`KTX2Loader`](https://threejs.org/docs/pages/KTX2Loader.html) los transcodifica a un formato que la GPU admita, como BC7 en las GPU de escritorio o ASTC en los teléfonos. El cargador necesita sus archivos de transcodificación y que el renderizador detecte los formatos: `new KTX2Loader().setTranscoderPath(…).detectSupport(renderer)`, y luego `gltfLoader.setKTX2Loader(ktx2Loader)`. El metrónomo del curso no tiene texturas, así que esta parte no se mide aquí (*por verificar*).
 
 ## En GuitarAlchemist/ga
 
