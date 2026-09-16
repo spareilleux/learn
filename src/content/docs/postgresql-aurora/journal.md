@@ -9,7 +9,7 @@ sidebar:
 
 - [x] Mission and a 13-lesson outline
 - [x] Code: SQL scripts run by `psql`, C# and Java programs, all compared with their expected output by `check.sh`
-- [ ] CI: the workflow is written and passes locally; not on GitHub yet
+- [x] CI: [`postgresql-aurora-examples.yml`](https://github.com/spareilleux/learn/blob/main/.github/workflows/postgresql-aurora-examples.yml) runs everything against PostgreSQL on Linux and builds the programs on Windows and macOS; first run green on 2026-09-16
 - [x] Lesson 1: a container, `psql`, databases, schemas and roles
 - [x] Lesson 2: types and modeling
 - [x] Lesson 3: CTEs, windows, `LATERAL`, upserts and `MERGE`

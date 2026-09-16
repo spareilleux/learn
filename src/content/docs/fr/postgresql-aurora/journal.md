@@ -9,7 +9,7 @@ sidebar:
 
 - [x] Mission et un plan en 13 leçons
 - [x] Code : scripts SQL exécutés par `psql`, programmes C# et Java, tous comparés à leur sortie attendue par `check.sh`
-- [ ] CI : le workflow est écrit et passe en local ; pas encore sur GitHub
+- [x] CI : [`postgresql-aurora-examples.yml`](https://github.com/spareilleux/learn/blob/main/.github/workflows/postgresql-aurora-examples.yml) exécute tout contre PostgreSQL sous Linux et construit les programmes sous Windows et macOS ; premier passage vert le 2026-09-16
 - [x] Leçon 1 : un conteneur, `psql`, bases, schémas et rôles
 - [x] Leçon 2 : types et modélisation
 - [x] Leçon 3 : CTE, fenêtres, `LATERAL`, upserts et `MERGE`
