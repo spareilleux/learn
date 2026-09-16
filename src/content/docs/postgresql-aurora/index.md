@@ -7,7 +7,7 @@ sidebar:
 ---
 
 :::note[Versions studied]
-[PostgreSQL](https://www.postgresql.org/docs/18/) **18.6**, the current minor release of the newest major version on 2026-09-15 according to the [versioning policy page](https://www.postgresql.org/support/versioning/) (PostgreSQL 18 is supported until November 2030), in the official Docker image [`postgres:18.6-trixie`](https://hub.docker.com/_/postgres), digest `sha256:4ef4dbc939d61acea57712655ddb4b4ab27419c913f94cca0cd57cb3ea3c2280`. The clients are [Npgsql](https://www.npgsql.org/) **10.0.3** and its [EF Core provider](https://www.npgsql.org/efcore/) **10.0.3** on .NET 10, and the [PostgreSQL JDBC driver](https://jdbc.postgresql.org/) **42.7.13** with [HikariCP](https://github.com/brettwooldridge/HikariCP) **7.1.0** on Java 25. On AWS, the newest release listed in the [Aurora PostgreSQL release notes](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html) on the same day is **Aurora PostgreSQL 18.4.1** (August 21, 2026), compatible with PostgreSQL 18.4.
+[PostgreSQL](https://www.postgresql.org/docs/18/) **18.6**, the current minor release of the newest major version on 2026-09-15 according to the [versioning policy page](https://www.postgresql.org/support/versioning/) (PostgreSQL 18 is supported until November 2030), in the official Docker image [`postgres:18.6-trixie`](https://hub.docker.com/_/postgres), digest `sha256:4ef4dbc939d61acea57712655ddb4b4ab27419c913f94cca0cd57cb3ea3c2280`. Lesson 8's [pgvector](https://github.com/pgvector/pgvector) scripts run on [`pgvector/pgvector:0.8.6-pg18-trixie`](https://hub.docker.com/r/pgvector/pgvector), the same PostgreSQL 18.6 with pgvector **0.8.6**, digest `sha256:78bf48b801e792f99e3ac62b5036fd3876e9be48afda16c1e331af1c75ceb2ff`. The clients are [Npgsql](https://www.npgsql.org/) **10.0.3** and its [EF Core provider](https://www.npgsql.org/efcore/) **10.0.3** on .NET 10, and the [PostgreSQL JDBC driver](https://jdbc.postgresql.org/) **42.7.13** with [HikariCP](https://github.com/brettwooldridge/HikariCP) **7.1.0** on Java 25. On AWS, the newest release listed in the [Aurora PostgreSQL release notes](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Updates.html) on the same day is **Aurora PostgreSQL 18.4.1** (August 21, 2026), compatible with PostgreSQL 18.4.
 
 Every example is in [`code/postgresql-aurora`](https://github.com/spareilleux/learn/tree/main/code/postgresql-aurora): [`check.sh`](https://github.com/spareilleux/learn/blob/main/code/postgresql-aurora/check.sh) runs each SQL script with `psql` and each C# and Java program against a fresh database, and compares their output with the files in [`expected`](https://github.com/spareilleux/learn/tree/main/code/postgresql-aurora/expected). CI builds the programs on Windows, Linux and macOS, and runs everything against PostgreSQL on Linux only, because GitHub's Windows and macOS runners have no Docker.
 :::
@@ -99,17 +99,17 @@ Schema `ci` holds the first three tables, schema `ga` the others.
 | 2 | [Types and modeling](02-types/) | `datetimeoffset`, `nvarchar`, computed columns, unique indexes and `NULL` |
 | 3 | [Queries: CTEs, windows, `LATERAL`, upserts and `MERGE`](03-queries/) | `CROSS APPLY`, `OUTPUT inserted.*`, `MERGE` |
 | 4 | [PostgreSQL from C# and Java](04-csharp-java/) | `SqlConnection` pooling, `SqlBulkCopy`, EF Core providers |
-| 5 | Indexes and plans: B-tree, GIN, GiST, BRIN, `EXPLAIN (ANALYZE, BUFFERS)` *(coming next)* | execution plans, included columns, filtered indexes |
-| 6 | Transactions and MVCC: isolation levels, locks, `VACUUM`, bloat, deadlocks | `READ_COMMITTED_SNAPSHOT`, the version store |
-| 7 | JSON and search: `jsonb` operators and indexes, full-text search, `pg_trgm` | `OPENJSON`, full-text catalogs |
-| 8 | Functions and extensions: PL/pgSQL, triggers, `pgvector` | T-SQL procedures, CLR |
-| 9 | Partitioning and large tables | partition functions and schemes |
+| 5 | [Indexes and plans: B-tree, GIN, BRIN, `EXPLAIN (ANALYZE, BUFFERS)`](05-indexes/) | execution plans, included columns, filtered indexes |
+| 6 | [Transactions and MVCC: isolation levels, locks, `VACUUM`, bloat, deadlocks](06-transactions/) | `READ_COMMITTED_SNAPSHOT`, the version store |
+| 7 | [JSON and search: `jsonb` operators and indexes, full-text search, `pg_trgm`](07-json-search/) | `OPENJSON`, full-text catalogs |
+| 8 | [Functions and extensions: PL/pgSQL, triggers, `pgvector`](08-functions/) | T-SQL procedures, CLR |
+| 9 | Partitioning and large tables *(coming next)* | partition functions and schemes |
 | 10 | Replication and high availability: WAL, physical and logical replication | Always On availability groups, log shipping |
 | 11 | Backup, restore and upgrades: `pg_dump`, point-in-time recovery, `pg_upgrade` | `BACKUP`, `RESTORE`, in-place upgrades |
 | 12 | Amazon Aurora PostgreSQL: storage, replicas, endpoints, Serverless v2, Global Database, RDS Proxy, IAM authentication, Performance Insights | Azure SQL Database, Hyperscale |
 | 13 | Migration and costs: from SQL Server to PostgreSQL and Aurora with AWS DMS and Babelfish | the Data Migration Assistant |
 
-Each of the first four lessons ends with a short section on what changes on Aurora, from AWS's documentation; lesson 12 comes back to it in depth. None of it runs on AWS: the course creates no AWS resource, so everything about Aurora is marked *to verify*.
+Each of the first eight lessons ends with a short section on what changes on Aurora, from AWS's documentation; lesson 12 comes back to it in depth. None of it runs on AWS: the course creates no AWS resource, so everything about Aurora is marked *to verify*.
 
 [Journal](journal/): what I tried, what surprised me, what I still need to verify.
 

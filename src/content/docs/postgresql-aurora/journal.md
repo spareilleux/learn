@@ -14,7 +14,11 @@ sidebar:
 - [x] Lesson 2: types and modeling
 - [x] Lesson 3: CTEs, windows, `LATERAL`, upserts and `MERGE`
 - [x] Lesson 4: PostgreSQL from C# and Java
-- [ ] Lessons 5 to 13
+- [x] Lesson 5: indexes and plans
+- [x] Lesson 6: transactions and MVCC
+- [x] Lesson 7: JSON and search
+- [x] Lesson 8: functions, extensions and pgvector
+- [ ] Lessons 9 to 13
 - [ ] Anything on AWS: every Aurora section is still *to verify*
 
 ## 2026-09-15 — Versions
@@ -56,7 +60,42 @@ Nothing here was reported to the project; these are notes, with the queries that
 - Npgsql refuses `Target Session Attributes=standby` with a single host: `NotSupportedException: Target Session Attributes other then Any is only supported with multiple hosts`. pgjdbc accepts `targetServerType=secondary` with one host and fails at connection time.
 - One run of `l04-timings`: 478 `INSERT` commands in about a second, one `NpgsqlBatch` in 5 to 7 ms, a binary `COPY` in about 50 ms. Earlier runs the same day took up to 2.2 seconds for the `INSERT` loop.
 
+## 2026-09-16 — Plans that give the same output at every run
+
+- `EXPLAIN ANALYZE` on the 440,800-row step history gave different rows per node from one run to the next: parallel workers split the rows differently each time. `max_parallel_workers_per_gather = 0` for the lessons that show plans.
+- The planner's estimates changed after each `ANALYZE`, which reads a random sample of 30,000 rows with the default statistics target. At 1,500, the sample is 450,000 rows, more than the table, and the estimates are exact and stable.
+- The `Buffers` line split pages between `hit` and `read` depending on what the previous statements left in memory. The plan helper adds them into one number; the total didn't change across a container restart.
+- PostgreSQL 18 prints `Buffers` without `BUFFERS`, row counts with two decimals, and `Index Searches`.
+- `xmin` printed `-1` for the first row version: the transaction ID saved with `\gset` was taken after the `INSERT`. It is taken just before now.
+- `pg_stat_user_tables` showed zero HOT updates right after the updates: statistics are sent at most once a second. `pg_stat_force_next_flush()` fixes the count.
+
+## 2026-09-16 — Two sessions in one program
+
+- A program can't wait for B's blocked statement to return. The C# and Java programs start it, and a third connection polls `pg_stat_activity` until B waits on a lock, with `pg_blocking_pids` naming A.
+- In the deadlock example, either session could be the one cancelled, depending on which waited `deadlock_timeout` first. A has 10 seconds and B 100 ms: B always detects the cycle, and is cancelled.
+
+## 2026-09-16 — JSON and search
+
+- A stored generated `tsvector` whose configuration came from another generated column was refused: a generated column can't refer to another one. The configuration is a plain column, set by the `INSERT`.
+- A trigram index on the 478 rows of `ga.package_refs` was never used, even with `enable_seqscan = off`: the primary key's index was cheaper. The example uses the 88,160 step names of the copied documents.
+- On these documents, `jsonb_path_ops` came out slightly larger than `jsonb_ops`, 1,752 kB against 1,688 kB, the opposite of what the documentation says is usual.
+- The phrase `"prepared statements"` matched `pg_prepared_statements` in this journal: the text search parser splits at underscores.
+
+## 2026-09-16 — Functions and pgvector
+
+- **Finding, Npgsql 10.0.3.** A single `CREATE FUNCTION … BEGIN ATOMIC SELECT …; END` in an `NpgsqlCommand` without parameters fails with `42601: syntax error at end of input`. Npgsql splits the command text at the semicolon inside the body, as it does for several statements. The same text works in an `NpgsqlBatch`, with the `Npgsql.EnableSqlRewriting` switch set to `false`, or in a command that has positional parameters. pgjdbc 42.7.13 detects `BEGIN ATOMIC` and doesn't split; a `BEGIN ATOMIC` function followed by another statement in one `execute` then fails as several commands in a prepared statement. Not reported to either project.
+- The official image has no pgvector. The pgvector scripts run on `pgvector/pgvector:0.8.6-pg18-trixie`, one server at a time on port 5432; CI runs it as a second service, without a port.
+- With `enable_seqscan = off`, a nearest-neighbour query filtered on triads returned no row at all, where ten were asked for: the HNSW scan returns 40 candidates, none of them a triad. `hnsw.iterative_scan = strict_order` returns the ten. I rebuilt the index five times: the 40 candidates' distances were the same each time.
+- The interval-class vectors of the iconic chords show that the Elektra chord is the Petrushka chord transposed up a major third, and that the Foxy Lady chord is the inversion of the Joni Mitchell chord, whose transposition is the Debussy chord.
+
+## 2026-09-16 — Aurora, from the documentation
+
+- Aurora PostgreSQL 18.4 ships pgvector 0.8.2, where the course runs 0.8.6. `pageinspect` isn't in the Aurora PostgreSQL 18 extension table.
+- AWS's pages disagree on Performance Insights' end of life: July 31, 2026 in the CloudWatch guide, November 30, 2025 in the Aurora User Guide's history. They also disagree on whether Database Insights defaults to Standard or Advanced mode.
+- `max_standby_streaming_delay`: 30 seconds on the `Lock:Relation` page, 14,000 ms in the parameter table for Aurora PostgreSQL 14.
+
 ## To verify
 
 - The Linux and macOS commands of lessons 1 and 4, on those systems.
 - Every "On Aurora" section: `pg_read_file` and the `CONNECT` requirement for `rds_superuser`, `btree_gist` 1.6, the read-only error on a replica, TLS by default, IAM tokens with Npgsql's periodic password provider, RDS Proxy pinning with Npgsql's `DISCARD ALL` and with protocol-level prepared statements, and `pg_is_in_recovery()` on an Aurora Replica.
+- Lessons 5 to 8 on Aurora: the `shared_buffers` default for Aurora PostgreSQL 18 and the reason it's larger, query plan management on 18.4, `hot_standby_feedback` holding back `VACUUM` on the writer, the `max_standby_streaming_delay` default, trusted extensions under `rds.allowed_extensions`, and pgvector 0.8.2's iterative scans.
