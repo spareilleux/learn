@@ -16,6 +16,8 @@ permissions:
 
 env:
   UV_VERSION: 0.12.14
+  # Only the Pythons uv installs, as on the author's machine: the runners' own Python would change uv's messages
+  UV_PYTHON_PREFERENCE: only-managed
 
 jobs:
   python:

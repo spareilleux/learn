@@ -38,7 +38,7 @@ run() {
   shift 2
   (cd "$dir" && "$@") > "out/$name.raw.txt" 2>&1
   local code=$?
-  { uv run --frozen --project "$COURSE_DIR" python "$COURSE_DIR/normalize.py" "${flags[@]}" < "out/$name.raw.txt"; echo "exit $code"; } > "out/$name.txt"
+  { uv run --frozen --project "$COURSE_DIR" python "$COURSE_DIR/normalize.py" ${flags[@]+"${flags[@]}"} < "out/$name.raw.txt"; echo "exit $code"; } > "out/$name.txt"
   compare "$name"
 }
 
@@ -76,7 +76,7 @@ export UV_EXCLUDE_NEWER=2026-09-15T00:00:00Z
 run l01_py_compile . py -m py_compile errors/l01_order.py
 rm -rf out/uv-demo && mkdir -p out/uv-demo
 run --uv l01_uv_init out/uv-demo uv init hello --python 3.14.7 --author-from none --vcs none --no-workspace
-run l01_uv_init_files out/uv-demo/hello py -c "import pathlib; [print(p.as_posix()) for p in sorted(pathlib.Path('.').rglob('*'))]"
+run l01_uv_init_files out/uv-demo/hello py -c "import pathlib; [print(p) for p in sorted((p.as_posix() for p in pathlib.Path('.').rglob('*')), key=str.casefold)]"
 run l01_uv_init_pyproject out/uv-demo/hello py -c "print(open('pyproject.toml').read(), end='')"
 run --uv l01_uv_run out/uv-demo/hello uv run hello
 run --uv l01_uv_add out/uv-demo/hello uv add httpx==0.28.1
