@@ -103,7 +103,7 @@ public static class Png
         return pa <= pb && pa <= pc ? a : pb <= pc ? b : c;
     }
 
-    static byte[] Inflate(byte[] data)
+    internal static byte[] Inflate(byte[] data)
     {
         using var output = new MemoryStream();
         using (var zlib = new ZLibStream(new MemoryStream(data), CompressionMode.Decompress))
@@ -136,7 +136,14 @@ public static class PngCommands
     {
         var chunks = Png.ReadChunks(path);
         foreach (var group in chunks.GroupBy(c => c.Type))
-            Console.WriteLine($"chunk {group.Key}: {group.Count()} x, {group.Sum(c => c.Data.Length)} bytes");
+        {
+            // How well zlib compresses depends on the zlib Pillow was built with: on Linux, the same pixels
+            // took 84 bytes where Windows and macOS took 88. The inflated size doesn't change.
+            string size = group.Key == "IDAT"
+                ? $"{Png.Inflate(group.SelectMany(c => c.Data).ToArray()).Length} bytes once inflated"
+                : $"{group.Sum(c => c.Data.Length)} bytes";
+            Console.WriteLine($"chunk {group.Key}: {group.Count()} x, {size}");
+        }
         foreach (var (keyword, text) in Png.TextChunks(chunks))
         {
             string start = text.Length > 60 ? text[..60] + "..." : text;
