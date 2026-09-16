@@ -1,0 +1,91 @@
+# Kubernetes course: validates every manifest against the Kubernetes 1.37.0 schemas on Windows, Linux and macOS, then
+# runs the lessons on a kind cluster under Linux and compares their outputs with expected/.
+# GitHub's Windows and macOS runners have no Docker able to run Linux containers, so kind runs on Linux only.
+name: Kubernetes course examples
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['code/kubernetes/**', 'code/wsl-containers/csharp-api/**', 'code/wsl-containers/java-reactor-api/**', '.github/workflows/kubernetes-examples.yml']
+  pull_request:
+    paths: ['code/kubernetes/**', 'code/wsl-containers/csharp-api/**', 'code/wsl-containers/java-reactor-api/**', '.github/workflows/kubernetes-examples.yml']
+
+permissions:
+  contents: read
+
+env:
+  KIND_VERSION: v0.33.0
+  KUBECTL_VERSION: v1.37.0
+  KUBECONFORM_VERSION: v0.8.0
+
+jobs:
+  validate:
+    name: validate manifests (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            asset: kubeconform-linux-amd64.tar.gz
+          - os: windows-latest
+            asset: kubeconform-windows-amd64.zip
+          - os: macos-latest
+            asset: kubeconform-darwin-arm64.tar.gz
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+        working-directory: code/kubernetes
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install kubeconform
+        run: |
+          mkdir -p "$RUNNER_TEMP/bin" && cd "$RUNNER_TEMP/bin"
+          base=https://github.com/yannh/kubeconform/releases/download/$KUBECONFORM_VERSION
+          curl -sSLO "$base/${{ matrix.asset }}"
+          curl -sSL "$base/CHECKSUMS" | grep " ${{ matrix.asset }}$" | shasum -a 256 -c
+          case "${{ matrix.asset }}" in *.zip) unzip -q "${{ matrix.asset }}" ;; *) tar -xzf "${{ matrix.asset }}" ;; esac
+          echo "$RUNNER_TEMP/bin" >> "$GITHUB_PATH"
+      - name: Validate
+        run: bash validate.sh
+
+  cluster:
+    name: lessons on kind (ubuntu-latest)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: code/kubernetes
+    steps:
+      - uses: actions/checkout@v7
+      # The same downloads as lesson 1's Linux tab, with their published checksums
+      - name: Install kind and kubectl
+        run: |
+          mkdir -p "$RUNNER_TEMP/bin" && cd "$RUNNER_TEMP/bin"
+          curl -sSLo kind "https://kind.sigs.k8s.io/dl/$KIND_VERSION/kind-linux-amd64"
+          echo "$(curl -sSL "https://github.com/kubernetes-sigs/kind/releases/download/$KIND_VERSION/kind-linux-amd64.sha256sum" | cut -d' ' -f1)  kind" | sha256sum -c
+          curl -sSLO "https://dl.k8s.io/release/$KUBECTL_VERSION/bin/linux/amd64/kubectl"
+          echo "$(curl -sSL "https://dl.k8s.io/release/$KUBECTL_VERSION/bin/linux/amd64/kubectl.sha256")  kubectl" | sha256sum -c
+          chmod +x kind kubectl
+          echo "$RUNNER_TEMP/bin" >> "$GITHUB_PATH"
+      - name: Toolchain
+        run: kind version && kubectl version --client && docker version --format '{{.Server.Version}}'
+      - name: Create the cluster
+        run: kind create cluster --config kind/cluster.yaml --wait 120s
+      - name: Build and load the images
+        run: bash images.sh
+      - name: Lessons
+        run: bash check.sh
+      - name: Keep the outputs
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: kubernetes-outputs
+          path: code/kubernetes/out/
+      - name: Cluster state on failure
+        if: failure()
+        run: |
+          kubectl get all -A || true
+          kubectl get events -A --sort-by=.metadata.creationTimestamp | tail -50 || true
+          docker logs learn-k8s-cloud-provider 2>&1 | tail -50 || true
