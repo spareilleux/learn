@@ -337,7 +337,7 @@ Cuando un componente se renderiza de nuevo, React compara la nueva lista de elem
   Check the render method of `TuningListNoKey`. See https://react.dev/link/warning-keys for more information.
 ```
 
-La advertencia aparece solo en desarrollo, cuando la lista se renderiza, y la lista se renderiza correctamente. oxlint, con las reglas del `.oxlintrc.json` de la plantilla, la encuentra sin ejecutar nada:
+La advertencia aparece solo en desarrollo, cuando la lista se renderiza, y la lista se renderiza correctamente. oxlint, con las reglas del `.oxlintrc.json` de la plantilla, la encuentra sin ejecutar nada. Aquí con `oxlint --format agent src`, el formato de una línea que oxlint también elige por sí mismo cuando lo ejecuta un agente de IA; en tu terminal, el formato por defecto dibuja la misma advertencia en un marco alrededor de las líneas 6 a 9:
 
 ```text
 src/l02/TuningListNoKey.tsx:7:16: warning react(jsx-key): Missing "key" prop for element in iterator. help: Add a "key" prop to the element in the iterator (https://react.dev/learn/rendering-lists#keeping-list-items-in-order-with-key).

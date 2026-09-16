@@ -78,7 +78,8 @@ run l02_jsx_card . node scripts/jsx.mjs src/l02/TuningCard.tsx
 run l02_jsx_list . node scripts/jsx.mjs src/l02/TuningList.tsx
 
 # The template's lint rules, on the course's code
-run lint . "$bin/oxlint" src
+# --format agent: the one-line format quoted in lesson 2, which oxlint otherwise picks only under an AI agent
+run lint . "$bin/oxlint" --format agent src
 
 # Error snippets: tsc checks each one alone, with the application's options (tsc refuses a file name next to a
 # tsconfig.json, so each gets a small tsconfig that extends the application's)
