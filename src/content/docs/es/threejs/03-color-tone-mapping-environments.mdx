@@ -1,0 +1,321 @@
+---
+title: 3. Color, mapeo de tonos y entornos HDR
+description: Por qué un color hexadecimal no es el número que recibe el shader, el espacio de color de trabajo lineal y la salida sRGB, los espacios de color de las texturas, el mapeo de tonos de ACES a AgX y Neutral medido píxel a píxel, y la iluminación basada en imágenes a partir de un entorno HDR escrito por un script, con los costos que informa renderer.info.
+sidebar:
+  order: 3
+---
+
+Código: los parches de color en [`src/03-color/main.ts`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/src/03-color/main.ts), la página del entorno en [`src/03-environment/main.ts`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/src/03-environment/main.ts), y dos scripts de Node.js: [`scripts/l03-color.ts`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/scripts/l03-color.ts) y [`scripts/make-studio-hdr.ts`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/scripts/make-studio-hdr.ts).
+
+## Dos tipos de números
+
+En WPF, `Color.FromRgb(128, 128, 128)` es un gris, y el número llega a la pantalla tal cual. Eso funciona para una interfaz 2D. Falla para la iluminación: la luz se suma de forma lineal, dos lámparas dan el doble de luz, pero los bytes de una imagen no. El byte 128 de un monitor emite alrededor del 22 % de la luz del byte 255, no el 50 %. La codificación [sRGB](https://www.w3.org/Graphics/Color/srgb) dedica más de sus 256 pasos a los tonos oscuros, donde el ojo percibe las diferencias, y menos a los claros.
+
+Por eso three.js mantiene separados dos tipos de números:
+
+- Los valores **lineales**, proporcionales a la luz. La iluminación, la mezcla y el mapeo de tonos calculan con ellos. Es el **espacio de color de trabajo**, `LinearSRGBColorSpace`, escrito `srgb-linear`.
+- Los valores **sRGB**, los de los selectores de color, CSS, las imágenes PNG y JPEG, y el canvas. Se convierten a lineal a la entrada y de vuelta a sRGB a la salida.
+
+[`scripts/l03-color.ts`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/scripts/l03-color.ts) muestra las conversiones sin renderizador:
+
+```text
+$ node scripts/l03-color.ts
+working color space: srgb-linear
+Color(0x4a2c1d) stores [ 0.0685, 0.0252, 0.0123 ]
+getHexString() 4a2c1d | getHexString(LinearSRGBColorSpace) 110603
+setRGB(0.5, 0.5, 0.5).getHexString() bcbcbc
+setRGB(0.5, 0.5, 0.5, SRGBColorSpace) stores [ 0.214, 0.214, 0.214 ]
+new Texture().colorSpace: ""
+...
+```
+
+- **Un color hexadecimal es sRGB.** El palisandro de la lección 2, `0x4a2c1d`, tiene un byte rojo de 74, que es 0.29 de 255; [`Color`](https://threejs.org/docs/pages/Color.html) guarda 0.0685, su valor lineal. `getHexString()` convierte de vuelta y da el hexadecimal que escribiste; si se le piden valores lineales, da `110603`.
+- **`setRGB` sin espacio de color recibe valores lineales.** `setRGB(0.5, 0.5, 0.5)` es la mitad de la luz del blanco, que en sRGB es `bcbcbc`, no `808080`. Con `SRGBColorSpace` como cuarto argumento, los mismos números significan un gris sRGB y se guardan como 0.214.
+- **Una textura nueva no tiene espacio de color**, la cadena vacía `NoColorSpace`: sus valores llegan al shader tal cual. Eso es correcto para datos, como los mapas de normales, de rugosidad o de metalicidad, e incorrecto para una imagen en color, que necesita `texture.colorSpace = THREE.SRGBColorSpace`. [`GLTFLoader`](https://threejs.org/docs/pages/GLTFLoader.html) lo asigna a las texturas de un material glTF (lección 4); para una textura que creas tú mismo, es tarea tuya.
+
+Es la [gestión del color](https://threejs.org/manual/pages/color-management.html) del manual, activada por defecto desde r152 ([guía de migración](https://github.com/mrdoob/three.js/wiki/Migration-Guide#151--152)).
+
+## Medirlo
+
+Una página de parches planos hace visibles las reglas. [`MeshBasicMaterial`](https://threejs.org/docs/pages/MeshBasicMaterial.html) ignora las luces, así que el píxel de un parche es su color después de la conversión de salida del renderizador. La fila de arriba contiene intensidades lineales de 0.05 a 8; la de abajo, el mismo gris dado de cuatro maneras ([`main.ts`, líneas 40-56](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/src/03-color/main.ts#L40-L56)):
+
+```ts
+// Valores lineales, como los produciría una luz: 1 no es lo más brillante que puede ser una escena
+[0.05, 0.18, 0.5, 1, 2, 8].forEach((value, i) => {
+  const color = new THREE.Color().setRGB(value, value, value, THREE.LinearSRGBColorSpace);
+  patch(`linear ${value}`, new THREE.MeshBasicMaterial({ color }), -6.25 + i * 2.5, 2);
+});
+
+// Una textura de un píxel que contiene el byte 128, leída como sRGB o como datos en bruto
+function grayTexture(colorSpace: string) {
+  const texture = new THREE.DataTexture(new Uint8Array([128, 128, 128, 255]), 1, 1);
+  texture.colorSpace = colorSpace;
+  texture.needsUpdate = true;
+  return texture;
+}
+patch('texture 128, SRGBColorSpace', new THREE.MeshBasicMaterial({ map: grayTexture(THREE.SRGBColorSpace) }), -3.75, -2);
+patch('texture 128, NoColorSpace', new THREE.MeshBasicMaterial({ map: grayTexture(THREE.NoColorSpace) }), -1.25, -2);
+// Un color hexadecimal es sRGB; setRGB() sin espacio de color recibe valores del espacio de trabajo (lineales)
+patch('Color(0x808080)', new THREE.MeshBasicMaterial({ color: new THREE.Color(0x808080) }), 1.25, -2);
+patch('setRGB(0.5, 0.5, 0.5)', new THREE.MeshBasicMaterial({ color: new THREE.Color().setRGB(0.5, 0.5, 0.5) }), 3.75, -2);
+```
+
+La página indica dónde está en pantalla el centro de cada parche, y [`scripts/probe.mjs`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/scripts/probe.mjs) lee esos píxeles de la captura de pantalla:
+
+```text
+$ node scripts/probe.mjs 03-color --query tone=none
+{
+  ...
+  "render": {
+    "calls": 6,
+    "drawCalls": 11,
+    "triangles": 21
+  },
+  ...
+  "tone": "none",
+  "pixels": {
+    "linear 0.05": "rgb(63, 63, 63)",
+    "linear 0.18": "rgb(118, 118, 118)",
+    "linear 0.5": "rgb(188, 188, 188)",
+    "linear 1": "rgb(255, 255, 255)",
+    "linear 2": "rgb(255, 255, 255)",
+    "linear 8": "rgb(255, 255, 255)",
+    "texture 128, SRGBColorSpace": "rgb(128, 128, 128)",
+    "texture 128, NoColorSpace": "rgb(188, 188, 188)",
+    "Color(0x808080)": "rgb(128, 128, 128)",
+    "setRGB(0.5, 0.5, 0.5)": "rgb(188, 188, 188)"
+  }
+}
+```
+
+- La conversión de salida convierte el lineal 0.18, el gris de la tarjeta gris de un fotógrafo, en el byte 118, y 0.5 en 188: los bytes `bcbcbc` del script.
+- La textura que contiene 128 **y está marcada como sRGB** sale como 128: decodificada a la entrada, codificada a la salida. La misma textura **sin espacio de color** sale como 188: su 128 se tomó por un lineal 0.5 y se codificó. Una imagen con el espacio de color equivocado se ve desvaída.
+- `Color(0x808080)` da 128 y `setRGB(0.5, 0.5, 0.5)` da 188, como predijo el script.
+- Sin mapeo de tonos, **1, 2 y 8 dan todos 255**: la salida recorta todo lo que supera 1.
+
+## Mapeo de tonos
+
+Una escena real contiene mucho más que de 0 a 1. Una pared iluminada puede valer 0.5 y una lámpara en la misma vista 20: el entorno de esta lección tiene exactamente esos valores. Recortar en 1 convierte cada reflejo en un blanco plano. Una curva de **mapeo de tonos** (tone mapping) comprime los valores altos dentro del rango que se puede mostrar, como una cámara o el ojo, antes de la codificación sRGB. Se configura en el renderizador y se aplica a toda la imagen:
+
+```ts
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1; // el valor por defecto: un multiplicador aplicado antes de la curva
+```
+
+La misma página con las tres curvas más usadas hoy:
+
+![Dos filas de cuadrados grises sobre un fondo oscuro. La fila de arriba va del gris oscuro al blanco en seis pasos; la de abajo tiene cuatro cuadrados que alternan un gris medio y un gris más claro.](../../../../assets/threejs/l03-patches-aces.webp)
+
+| Parche | ninguno | ACES Filmic | AgX | Neutral |
+|---|---|---|---|---|
+| lineal 0.05 | 63 | 50 | 70 | 33 |
+| lineal 0.18 | 118 | 127 | 128 | 105 |
+| lineal 0.5 | 188 | 197 | 174 | 181 |
+| lineal 1 | 255 | 227 | 202 | 240 |
+| lineal 2 | 255 | 242 | 224 | 250 |
+| lineal 8 | 255 | 253 | 248 | 254 |
+| textura 128, sRGB | 128 | 141 | 136 | 116 |
+| textura 128, sin espacio de color | 188 | 197 | 175 | 181 |
+
+Los valores son el canal rojo de cada píxel, obtenidos con `node scripts/probe.mjs 03-color --query tone=aces`, `tone=agx` y `tone=neutral`, con WebGPU en la máquina del autor.
+
+- **[ACES Filmic](https://github.com/mrdoob/three.js/blob/r186/src/nodes/display/ToneMappingFunctions.js#L107)** viene del sistema de color de la industria del cine. Sube los tonos medios (0.18 da 127 en lugar de 118), oscurece las sombras, y sigue separando 1, 2 y 8. También desplaza los colores saturados, algo que los naranjas y azules intensos muestran más que los grises.
+- **[AgX](https://github.com/mrdoob/three.js/blob/r186/src/nodes/display/ToneMappingFunctions.js#L166)**, de Blender desde la versión 4.0, es la más plana: tonos oscuros más claros, tonos claros más bajos, 8 en 248. Los reflejos de colores saturados se desvanecen hacia el blanco en lugar de cambiar de tono, como hace la película fotográfica.
+- **[Neutral](https://github.com/mrdoob/three.js/blob/r186/src/nodes/display/ToneMappingFunctions.js#L208)**, la curva PBR Neutral de Khronos, deja casi sin cambios los colores por debajo de 0.8 aproximadamente, salvo una parte baja más oscura, y comprime solo la parte alta. Está pensada para vistas de producto, donde el color base de un material debe coincidir con su muestra.
+
+El mapeo de tonos es una elección de estilo, no una corrección: el curso usa ACES donde una escena tiene reflejos intensos, como hace GA, y usaría Neutral para mostrar el acabado de una guitarra fiel a su color. `WebGLRenderer` dibuja los mismos píxeles: con `?webgl`, ACES da los mismos valores que WebGPU en esta máquina. En los runners de CI, que dibujan con un rasterizador por software, algunos valores difieren en uno, y por eso `check.sh` acepta una diferencia de dos por canal.
+
+`WebGPURenderer` aplica el mapeo de tonos y la codificación sRGB en la pasada de salida que contó la lección 1: una llamada de dibujo y un triángulo más, 11 llamadas de dibujo y 21 triángulos para 10 parches. `WebGLRenderer`, en cambio, los aplica en el shader de cada material.
+
+## Entornos HDR
+
+Una foto de estudio de una guitarra no está iluminada por dos lámparas: las paredes, el techo y las softboxes se reflejan en la laca. La **iluminación basada en imágenes** ilumina una escena a partir de una imagen de todo lo que la rodea, un mapa de entorno, en lugar de objetos de luz. La imagen tiene que contener niveles de luz reales, así que es un archivo HDR, no un PNG.
+
+[`scripts/make-studio-hdr.ts`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/scripts/make-studio-hdr.ts) escribe un archivo así en lugar de descargar una foto: una imagen equirrectangular, toda la esfera desplegada como un mapamundi, de 256 por 128 píxeles, con paredes tenues, un suelo cálido y dos softboxes 40 veces más brillantes que las paredes. El formato es [Radiance RGBE](https://www.graphics.cornell.edu/~bjw/rgbe.html): tres mantisas de 8 bits que comparten un exponente de 8 bits, así que un píxel puede contener 20 en 4 bytes ([líneas 9-15](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/scripts/make-studio-hdr.ts#L9-L15)):
+
+```ts
+function rgbe([r, g, b]: [number, number, number]): number[] {
+  const max = Math.max(r, g, b);
+  if (max < 1e-32) return [0, 0, 0, 0];
+  const exponent = Math.ceil(Math.log2(max));
+  const scale = 255.9999 / 2 ** exponent;
+  return [Math.floor(r * scale), Math.floor(g * scale), Math.floor(b * scale), exponent + 128];
+}
+```
+
+```text
+$ node scripts/make-studio-hdr.ts
+public/generated/studio.hdr: 256×128, 131174 bytes
+$ node scripts/l03-color.ts
+...
+HDRLoader.parse: {
+  width: 256,
+  height: 128,
+  type: 'HalfFloatType',
+  values: 'Uint16Array'
+}
+a wall texel (0, 20): [ 0.4038, 0.4038, 0.4451 ] | a softbox texel (64, 32): [ 19.9375, 19.9375, 18.9375 ]
+```
+
+[`HDRLoader`](https://threejs.org/docs/pages/HDRLoader.html) decodifica el archivo en medios flotantes (half float), 16 bits por canal, que la GPU filtra en todas las plataformas, y marca la textura como `srgb-linear`: los valores HDR son luz lineal. La softbox vuelve como 19.94 en lugar de 20: RGBE conserva 8 bits de mantisa, y el medio flotante de 16 bits vuelve a redondear. `HDRLoader` es el nuevo nombre de `RGBELoader`, obsoleto desde r180: la clase antigua sigue cargando, y avisa `RGBELoader has been deprecated. Please use HDRLoader instead.` ([`RGBELoader.js`](https://github.com/mrdoob/three.js/blob/r186/examples/jsm/loaders/RGBELoader.js)).
+
+La página usa el archivo a la vez como entorno y como fondo, sin ningún objeto de luz ([`main.ts`, líneas 15-31](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/src/03-environment/main.ts#L15-L31)):
+
+```ts
+const environment = await new HDRLoader().loadAsync('generated/studio.hdr');
+environment.mapping = THREE.EquirectangularReflectionMapping;
+scene.environment = environment;
+scene.background = environment;
+scene.backgroundBlurriness = 0.4;
+
+// Filas: un dieléctrico (metalness 0) y un metal (metalness 1). Columnas: rugosidad de 0 a 1.
+const sphere = new THREE.SphereGeometry(0.45, 64, 32);
+for (const [row, metalness] of [0, 1].entries()) {
+  for (let column = 0; column < 5; column++) {
+    const material = new THREE.MeshStandardMaterial({ color: 0xd4a373, metalness, roughness: column / 4 });
+    const mesh = new THREE.Mesh(sphere, material);
+    mesh.position.set((column - 2) * 1.2, 0.6 - row * 1.2, 0);
+    scene.add(mesh);
+  }
+}
+```
+
+![Diez esferas de color canela en dos filas sobre un fondo de estudio gris y desenfocado. En la fila de arriba, las esferas de aspecto plástico van de brillantes, con un reflejo blanco y nítido de una softbox, a mates. En la fila de abajo, las esferas metálicas van de un cobre como un espejo con un reflejo nítido a un cobre suave e iluminado de forma uniforme.](../../../../assets/threejs/l03-environment.webp)
+
+Las reglas de la lección 2 se ven en cada esfera. Los dieléctricos de la fila de arriba conservan su color canela y reflejan la softbox en blanco; los metales de la fila de abajo no tienen color difuso, y tiñen el reflejo, que es nítido con rugosidad 0 y se extiende por toda la esfera con rugosidad 1.
+
+### PMREM: lo que hace el renderizador con el entorno
+
+Una superficie rugosa refleja un entorno desenfocado, así que el renderizador necesita el entorno ya desenfocado a varios niveles de rugosidad. Construye un **PMREM** (prefiltered, mipmapped radiance environment map, un mapa de entorno de radiancia prefiltrado y con mipmaps) a partir de cualquier textura equirrectangular o cúbica asignada a `scene.environment` o al `envMap` de un material, sin que se lo pidan: `WebGPURenderer` envuelve la textura en un nodo PMREM ([`EnvironmentNode.js`, línea 64](https://github.com/mrdoob/three.js/blob/r186/src/nodes/lighting/EnvironmentNode.js#L50-L70)), y `WebGLRenderer` hace lo mismo en [`WebGLEnvironments.js`](https://github.com/mrdoob/three.js/blob/r186/src/renderers/webgl/WebGLEnvironments.js#L32). Los contadores muestran el trabajo:
+
+```text
+$ node scripts/probe.mjs 03-environment
+{
+  "backend": "WebGPU",
+  "gpu": "nvidia, blackwell",
+  "frame": 4,
+  "render": {
+    "calls": 23,
+    "drawCalls": 12,
+    "triangles": 41665
+  },
+  "memory": {
+    "geometries": 12,
+    "textures": 6,
+    "programs": 10
+  },
+  "environment": {
+    "width": 256,
+    "height": 128,
+    "halfFloat": true,
+    "colorSpace": "srgb-linear"
+  }
+}
+```
+
+- **23 llamadas** para 3 fotogramas, donde la página de parches tenía 6. Los fotogramas suman 6: la escena y la pasada de salida. Las otras 17 son el PMREM, construido una vez durante el primer fotograma. [`PMREMGenerator.js`](https://github.com/mrdoob/three.js/blob/r186/src/renderers/common/extras/PMREMGenerator.js#L346-L363) dimensiona las caras del cubo a un cuarto del ancho de la imagen, 64 píxeles, lo que da 9 niveles de rugosidad ([`_createPlanes`, línea 747](https://github.com/mrdoob/three.js/blob/r186/src/renderers/common/extras/PMREMGenerator.js#L740-L760)). Dibuja la imagen en el primer nivel (1 renderizado), y luego filtra cada uno de los otros 8 a partir del anterior, con un renderizado en un destino temporal y una copia de vuelta ([líneas 590-667](https://github.com/mrdoob/three.js/blob/r186/src/renderers/common/extras/PMREMGenerator.js#L590-L667)): 1 + 8 × 2 = 17.
+- **12 llamadas de dibujo**: 10 esferas, el fondo y la pasada de salida. Las esferas comparten una geometría, de 64 por 32 segmentos, que da 2 × 64 × 32 − 2 × 64 = 3 968 triángulos cada una. El fondo es una esfera propia, de 32 por 32 segmentos ([`Background.js`, línea 131](https://github.com/mrdoob/three.js/blob/r186/src/renderers/common/Background.js#L131)): 1 984 triángulos. 39 680 + 1 984 + 1 = 41 665.
+- `backgroundBlurriness` lee el fondo de un nivel más desenfocado del mismo PMREM, así que no cuesta ninguna textura adicional.
+
+Un archivo HDR más grande cuesta más trabajo de PMREM en la carga, no en cada fotograma: un entorno de 2K da caras de 512 píxeles y más niveles. Una escena que cambia de entorno a menudo debería conservar sus texturas y reutilizarlas, ya que el PMREM se guarda en caché por textura.
+
+## En GuitarAlchemist/ga
+
+El diapasón de GA en [`05c8eda`](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeFretboard.tsx#L236-L268) ya usa ACES y un entorno. Dibuja el entorno en un canvas, un degradado gris vertical, en lugar de cargar un archivo HDR:
+
+```tsx
+      const envTexture = new THREE.CanvasTexture(envCanvas);
+      envTexture.mapping = THREE.EquirectangularReflectionMapping;
+      envTexture.colorSpace = THREE.SRGBColorSpace;
+
+      // Apply environment map directly (no PMREM for performance)
+      scene.environment = envTexture;
+```
+
+Lo que dicen de él las mediciones de esta lección:
+
+- **El PMREM ocurre de todos modos.** Los comentarios encima de ese código dicen que el PMREM se omite con WebGPU, para evitar avisos y por rendimiento. Como el renderizador construye un PMREM para cualquier `scene.environment` equirrectangular, como muestran las 17 llamadas adicionales de arriba, asignar la textura directamente no lo evita; solo lo traslada al primer fotograma. Si r180, la versión de GA, imprime los avisos que menciona el comentario está *por verificar*.
+- **Un degradado de 8 bits no tiene reflejos intensos.** Un canvas contiene bytes: la parte más clara del degradado, `#e0e0e0`, es un lineal 0.75, por debajo del rango de 0.5 a 20 de un estudio con softboxes. Las cuerdas y los trastes metálicos reflejan un techo gris, y `toneMappingExposure = 1.2` aclara toda la imagen, no los reflejos. Un entorno HDR, incluso uno generado como el de esta lección, daría al metal reflejos reales.
+- **La textura de madera no tiene espacio de color.** `createWoodTexture` ([líneas 563-654](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeFretboard.tsx#L563-L654)) pinta la madera en `#4a3525` sobre un canvas y devuelve una `CanvasTexture` sin asignar `colorSpace`, y el material la usa como `map` (lección 2). La medición de arriba predice el resultado: el byte rojo 74 se toma por un lineal 0.29, y se muestra como 147 antes de la iluminación, donde `SRGBColorSpace` lo mantendría en 74. El diapasón es más claro y más gris que el color escrito en el código, algo que el `color` del material quizá se ajustó para disimular (*por verificar* en un navegador).
+- `Guitar3D.tsx` construye su entorno con `pmremGenerator.fromScene` sobre una escena que solo contiene una `AmbientLight` ([líneas 171-187](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/Guitar3D/Guitar3D.tsx#L171-L187)). Una luz sin nada que iluminar no renderiza nada: el entorno es negro, y los modelos glTF cargados en ese componente no obtienen de él ningún reflejo.
+
+## Puntos clave
+
+- El espacio de color de trabajo es lineal; los colores hexadecimales y las imágenes son sRGB, y three.js convierte a la entrada y a la salida.
+- `setRGB` recibe valores lineales salvo que se le indique un espacio de color; una textura que creas necesita `colorSpace = SRGBColorSpace` cuando contiene colores, y nada cuando contiene datos.
+- Sin mapeo de tonos, todo lo que supera 1 es blanco. ACES Filmic, AgX y Neutral comprimen los reflejos de forma distinta; la elección es de estilo.
+- `WebGPURenderer` aplica el mapeo de tonos y la codificación sRGB en su pasada de salida.
+- Los entornos HDR iluminan una escena con niveles de luz reales; el renderizador los convierte en un PMREM una sola vez, con un costo que muestra `renderer.info`.
+
+## Ejercicios
+
+1. Una textura contiene un píxel con los bytes (200, 100, 50) y tiene `NoColorSpace`. Sin mapeo de tonos y con un `MeshBasicMaterial`, ¿el canal rojo en pantalla quedará por encima o por debajo de 200? ¿Y el verde?
+2. ¿Qué devuelve `new THREE.Color('#808080').getHexString(THREE.LinearSRGBColorSpace)`? Haz tu predicción y luego comprueba ambas respuestas con [`scripts/l03-exercises.ts`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/scripts/l03-exercises.ts).
+3. Con AgX, el lineal 1 da 202. ¿Qué `toneMappingExposure` probarías para acercarlo a 240, el valor que da Neutral, y qué le pasa al lineal 0.05? La página acepta un parámetro `?exposure=`: compruébalo con `node scripts/probe.mjs 03-color --query "tone=agx&exposure=2"`, y luego con 4.
+
+<details>
+<summary>Solución 1</summary>
+
+```text
+$ node scripts/l03-exercises.ts
+bytes [ 200, 100, 50 ] with NoColorSpace are shown as [ 229, 168, 122 ]
+Color('#808080').getHexString(LinearSRGBColorSpace): 373737
+```
+
+Los dos por encima. Sin espacio de color, los bytes se toman como valores lineales, 200/255 = 0.784 y 100/255 = 0.392, y la salida los codifica a sRGB. La codificación sube todos los valores entre 0 y 1, y más los oscuros: el rojo pasa a 229 y el verde a 168. La fila "textura 128, sin espacio de color" midió el mismo efecto: 128 se convirtió en 188. La imagen se ve más clara y menos saturada de lo que es.
+
+</details>
+
+<details>
+<summary>Solución 2</summary>
+
+`373737`, como muestra la salida de la solución 1. `#808080` es sRGB 0.502, guardado como lineal 0.2158, y 0.2158 × 255 = 55, que es `37` en hexadecimal. Es la misma conversión que el `110603` del palisandro en la salida del script: pedir el hexadecimal lineal muestra lo que recibe el shader.
+
+</details>
+
+<details>
+<summary>Solución 3</summary>
+
+```text
+$ node scripts/probe.mjs 03-color --query "tone=agx&exposure=2"
+{
+  ...
+  "tone": "agx",
+  "exposure": 2,
+  "pixels": {
+    "linear 0.05": "rgb(100, 100, 100)",
+    "linear 0.18": "rgb(160, 160, 160)",
+    "linear 0.5": "rgb(202, 202, 202)",
+    "linear 1": "rgb(224, 224, 224)",
+    "linear 2": "rgb(239, 239, 239)",
+    "linear 8": "rgb(254, 254, 254)",
+    ...
+  }
+}
+$ node scripts/probe.mjs 03-color --query "tone=agx&exposure=4"
+{
+  ...
+  "pixels": {
+    "linear 0.05": "rgb(133, 133, 133)",
+    "linear 0.18": "rgb(189, 189, 189)",
+    "linear 0.5": "rgb(224, 224, 224)",
+    "linear 1": "rgb(239, 239, 239)",
+    "linear 2": "rgb(248, 248, 248)",
+    "linear 8": "rgb(255, 255, 255)",
+    ...
+  }
+}
+```
+
+Una exposición de 4 lleva el lineal 1 a 239. La exposición multiplica los valores lineales antes de la curva, así que cada parche se desplaza a lo largo de la misma curva AgX: con exposición 2, el lineal 1 da 224, el valor que tenía el lineal 2 con exposición 1, y el lineal 0.5 da 202, el antiguo valor del lineal 1. Todo lo demás se mueve también: el lineal 0.05 pasa de 70 a 133, y toda la imagen es mucho más clara, mientras que Neutral mantenía 0.05 en 33. La exposición no puede convertir AgX en Neutral: la forma de la curva se mantiene.
+
+</details>
+
+## Fuentes
+
+- Manual de three.js: [Color management](https://threejs.org/manual/pages/color-management.html)
+- Documentación de three.js: [`Color`](https://threejs.org/docs/pages/Color.html), [`Texture.colorSpace`](https://threejs.org/docs/pages/Texture.html#colorSpace), [`Renderer.toneMapping`](https://threejs.org/docs/pages/Renderer.html#toneMapping), [`HDRLoader`](https://threejs.org/docs/pages/HDRLoader.html), [`PMREMGenerator`](https://threejs.org/docs/pages/PMREMGenerator.html)
+- Código fuente de three.js en r186: [`ToneMappingFunctions.js`](https://github.com/mrdoob/three.js/blob/r186/src/nodes/display/ToneMappingFunctions.js), [`PMREMGenerator.js`](https://github.com/mrdoob/three.js/blob/r186/src/renderers/common/extras/PMREMGenerator.js), [`EnvironmentNode.js`](https://github.com/mrdoob/three.js/blob/r186/src/nodes/lighting/EnvironmentNode.js)
+- W3C: [sRGB](https://www.w3.org/Graphics/Color/srgb); Khronos: [PBR Neutral tone mapper](https://github.com/KhronosGroup/ToneMapping/tree/main/PBR_Neutral)
+- Manual de Blender: [AgX view transform](https://docs.blender.org/manual/en/latest/render/color_management/index.html)
+- Greg Ward: [el formato RGBE](https://www.graphics.cornell.edu/~bjw/rgbe.html)

@@ -5,9 +5,6 @@ sidebar:
   order: 3
 ---
 
-import patchesShot from '../../../assets/threejs/l03-patches-aces.webp';
-import environmentShot from '../../../assets/threejs/l03-environment.webp';
-
 Code: the color patches in [`src/03-color/main.ts`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/src/03-color/main.ts), the environment page in [`src/03-environment/main.ts`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/src/03-environment/main.ts), and two Node.js scripts: [`scripts/l03-color.ts`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/scripts/l03-color.ts) and [`scripts/make-studio-hdr.ts`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/scripts/make-studio-hdr.ts).
 
 ## Two kinds of numbers
@@ -107,7 +104,7 @@ renderer.toneMappingExposure = 1; // the default: a multiplier applied before th
 
 The same page with the three curves most used today:
 
-<img src={patchesShot.src} width={patchesShot.width} height={patchesShot.height} alt="Two rows of gray squares on a dark background. The top row goes from dark gray to white in six steps; the bottom row has four squares alternating a middle gray and a lighter gray." loading="lazy" style={{ maxWidth: "100%", height: "auto" }} />
+![Two rows of gray squares on a dark background. The top row goes from dark gray to white in six steps; the bottom row has four squares alternating a middle gray and a lighter gray.](../../../assets/threejs/l03-patches-aces.webp)
 
 | Patch | none | ACES Filmic | AgX | Neutral |
 |---|---|---|---|---|
@@ -183,7 +180,7 @@ for (const [row, metalness] of [0, 1].entries()) {
 }
 ```
 
-<img src={environmentShot.src} width={environmentShot.width} height={environmentShot.height} alt="Ten tan spheres in two rows against a blurred gray studio background. In the top row, the plastic-like spheres go from glossy, with a sharp white reflection of a softbox, to matte. In the bottom row, the metal spheres go from a mirror-like copper with a sharp reflection to a soft, evenly lit copper." loading="lazy" style={{ maxWidth: "100%", height: "auto" }} />
+![Ten tan spheres in two rows against a blurred gray studio background. In the top row, the plastic-like spheres go from glossy, with a sharp white reflection of a softbox, to matte. In the bottom row, the metal spheres go from a mirror-like copper with a sharp reflection to a soft, evenly lit copper.](../../../assets/threejs/l03-environment.webp)
 
 Lesson 2's rules show on every sphere. The dielectrics of the top row keep their tan color and reflect the softbox in white; the metals of the bottom row have no diffuse color, and tint the reflection, which is sharp at roughness 0 and spread over the whole sphere at roughness 1.
 

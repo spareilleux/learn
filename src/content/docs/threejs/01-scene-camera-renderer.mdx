@@ -6,7 +6,6 @@ sidebar:
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
-import cubeShot from '../../../assets/threejs/l01-cube.webp';
 
 Code: the lesson's page [`src/01-scene/main.ts`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/src/01-scene/main.ts), the same cube with the older renderer in [`src/01-scene-webgl/main.ts`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/src/01-scene-webgl/main.ts), the scene graph without a renderer in [`scripts/l01-scene-graph.ts`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/scripts/l01-scene-graph.ts), and the probe that opens a page in headless Chromium and prints what it reports, [`scripts/probe.mjs`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/scripts/probe.mjs).
 
@@ -108,7 +107,7 @@ scene.add(cube);
 - The **camera** is an `Object3D` too, but it doesn't need to be in the scene: `renderer.render(scene, camera)` takes both. [`PerspectiveCamera`](https://threejs.org/docs/pages/PerspectiveCamera.html) takes a vertical field of view in degrees, an aspect ratio, and the near and far distances between which objects are drawn.
 - A **mesh** is a geometry and a material. [`MeshNormalMaterial`](https://threejs.org/docs/pages/MeshNormalMaterial.html) colors each face by the direction it faces and needs no light, which makes it the "hello world" material. Lesson 2 builds real ones.
 
-<img src={cubeShot.src} width={cubeShot.width} height={cubeShot.height} alt="A cube on a dark gray background, turned so that three faces show: a light green top, a magenta front and a blue side, each colored by the direction it faces." loading="lazy" style={{ maxWidth: "100%", height: "auto" }} />
+![A cube on a dark gray background, turned so that three faces show: a light green top, a magenta front and a blue side, each colored by the direction it faces.](../../../assets/threejs/l01-cube.webp)
 
 The screenshot is the page's third frame, taken by `node scripts/probe.mjs 01-scene --shot out/cube.png`, with WebGPU on the author's machine.
 

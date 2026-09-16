@@ -1,0 +1,275 @@
+---
+title: 4. Cargar modelos glTF y animaciones
+description: glTF 2.0 como el JPEG del 3D, un metrónomo escrito por un script con glTF Transform, cargado por GLTFLoader y animado por AnimationMixer, y comprimido de dos maneras, Draco y meshopt, con los bytes, los decodificadores y los vértices que cuesta cada una, comparado con la canalización de contenido de MonoGame y los storyboards de WPF.
+sidebar:
+  order: 4
+---
+
+Código: la página en [`src/04-gltf/main.ts`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/src/04-gltf/main.ts), el script que escribe los modelos, [`scripts/make-models.ts`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/scripts/make-models.ts), lo que construye el cargador en [`scripts/l04-gltf.ts`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/scripts/l04-gltf.ts), y los ejercicios en [`scripts/l04-exercises.ts`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/scripts/l04-exercises.ts).
+
+## glTF, el formato que espera three.js
+
+[glTF 2.0](https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html) es un estándar de Khronos, como OpenGL y Vulkan, para enviar escenas 3D a una aplicación que las renderiza. Khronos lo llama "el JPEG del 3D": un formato de entrega, no un formato de edición como un archivo de Blender. Un recurso glTF contiene un grafo de escena de nodos, mallas cuyos búferes corresponden directamente a búferes de la GPU, materiales metálico-rugosidad (el modelo de la lección 2), texturas, cámaras, skins y animaciones.
+
+Viene en dos formas: un archivo JSON `.gltf` con archivos `.bin` e imágenes por separado, o un único binario `.glb` que los empaqueta juntos. Blender lo exporta, igual que la mayoría de las herramientas 3D y tiendas de recursos.
+
+| | MonoGame | WPF 3D | three.js |
+|---|---|---|---|
+| Archivos de modelo | FBX o X, compilados en tiempo de compilación por la canalización de contenido a `.xnb` | sin cargador: XAML o código, o una biblioteca de terceros | glTF 2.0, cargado en tiempo de ejecución por [`GLTFLoader`](https://threejs.org/docs/pages/GLTFLoader.html) |
+| Lo que da una carga | un `Model` con mallas y huesos | | un `Group` con hijos `Mesh`, `Object3D` y `Bone`, más clips de animación |
+| Animaciones | tu código, o una biblioteca | `Storyboard` y `AnimationClock` | `AnimationClip` reproducido por `AnimationMixer` |
+| Compresión | los formatos de la canalización | | Draco o meshopt para la geometría, KTX2 para las texturas, cada uno con su propio decodificador |
+
+## Un modelo escrito por un script
+
+Para que cada byte sea reproducible, el curso no descarga ningún modelo: [`scripts/make-models.ts`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/scripts/make-models.ts) construye un metrónomo con primitivas de three.js y lo escribe con [glTF Transform](https://gltf-transform.dev/), una biblioteca para leer, editar y escribir glTF en Node.js. Un cuerpo ahusado, y un brazo formado por una varilla y una pesa que oscila de +25° a −25° y vuelve en un segundo.
+
+Dos detalles del script importan para cualquier modelo:
+
+- **El pivote del brazo es el origen de su nodo.** La geometría de la varilla se desplaza hacia arriba la mitad de su longitud, y el nodo del brazo está en la base de la varilla, delante del cuerpo, así que al rotar el nodo el brazo oscila alrededor de su base ([líneas 54-57](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/scripts/make-models.ts#L54-L57)). Un modelo cuyas piezas giran alrededor del punto equivocado se exportó con los orígenes equivocados.
+- **Los colores de los materiales en glTF son lineales.** `baseColorFactor` contiene valores lineales, así que el script primero convierte sus colores hexadecimales sRGB con `THREE.Color` ([línea 21](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/scripts/make-models.ts#L21)); `GLTFLoader` lee el factor como `LinearSRGBColorSpace` y una textura de color base como `SRGBColorSpace` ([`GLTFLoader.js`, líneas 829-836](https://github.com/mrdoob/three.js/blob/r186/examples/jsm/loaders/GLTFLoader.js#L829-L836)), las reglas de la lección 3.
+
+La animación es un canal glTF que apunta a la `rotation` del brazo con cinco cuaterniones, uno cada cuarto de segundo, interpolados linealmente ([líneas 62-72](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/scripts/make-models.ts#L62-L72)):
+
+```ts
+// Una animación, "swing": rotación del brazo alrededor de Z, como cuaterniones (x, y, z, w), interpolados linealmente
+const angles = [0, 25, 0, -25, 0];
+const times = document.createAccessor('swing_times').setType(Accessor.Type.SCALAR).setArray(new Float32Array([0, 0.25, 0.5, 0.75, 1])).setBuffer(buffer);
+const rotations = document
+  .createAccessor('swing_rotations')
+  .setType(Accessor.Type.VEC4)
+  .setArray(new Float32Array(angles.flatMap((deg) => new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 0, 1), THREE.MathUtils.degToRad(deg)).toArray())))
+  .setBuffer(buffer);
+const sampler = document.createAnimationSampler().setInput(times).setOutput(rotations).setInterpolation('LINEAR');
+const channel = document.createAnimationChannel().setTargetNode(arm).setTargetPath('rotation').setSampler(sampler);
+document.createAnimation('swing').addSampler(sampler).addChannel(channel);
+```
+
+El script escribe el modelo tres veces, tal cual y con cada compresión de geometría:
+
+```text
+$ node scripts/make-models.ts
+metronome.glb 58540 bytes, 24239 gzipped
+metronome-draco.glb 10424 bytes, 7438 gzipped
+prune: Removed types... Accessor (12)
+prune: Removed types... Accessor (9)
+metronome-meshopt.glb 24616 bytes, 7526 gzipped
+```
+
+## Lo que construye GLTFLoader
+
+`GLTFLoader` también funciona en Node.js, siempre que el archivo no tenga imágenes que decodificar ni geometría Draco, que `DRACOLoader` decodifica en Web Workers. [`scripts/l04-gltf.ts`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/scripts/l04-gltf.ts) analiza el archivo sin comprimir e imprime el árbol:
+
+```text
+$ node scripts/l04-gltf.ts
+Group "metronome"
+  Object3D "metronome_1"
+    Mesh "body" — 48 vertices, MeshStandardMaterial "walnut"
+    Object3D "arm"
+      Mesh "rod" — 24 vertices, MeshStandardMaterial "brass"
+      Mesh "weight" — 1225 vertices, MeshStandardMaterial "brass"
+asset: { generator: 'glTF-Transform v4.5.0', version: '2.0' }
+clip "swing": 1 s, tracks arm.quaternion (5 keys, QuaternionKeyframeTrack)
+...
+```
+
+- **`gltf.scene` es un `Group`** que lleva el nombre de la escena glTF, y cada nodo glTF se convierte en un `Object3D`, o en un `Mesh` cuando tiene una malla. El nodo raíz del script también se llamaba "metronome"; `GLTFLoader` hace únicos los nombres, y lo renombra "metronome_1" ([`createUniqueName`](https://github.com/mrdoob/three.js/blob/r186/examples/jsm/loaders/GLTFLoader.js#L3757)). El código que busca objetos con `getObjectByName` depende de esos nombres, así que acuérdalos con quien exporte el modelo.
+- **Los materiales son `MeshStandardMaterial`**, con el nombre del material glTF. Extensiones como `KHR_materials_clearcoat` los convierten en `MeshPhysicalMaterial`.
+- **La animación se convierte en un [`AnimationClip`](https://threejs.org/docs/pages/AnimationClip.html)** en `gltf.animations`, con una pista por propiedad animada, llamada `nodo.propiedad`: `arm.quaternion`. Un clip son datos, no está ligado a un objeto: los nombres de nodo en los nombres de las pistas lo conectan con una escena.
+
+## Reproducir la animación
+
+[`AnimationMixer`](https://threejs.org/docs/pages/AnimationMixer.html) reproduce clips sobre los objetos que cuelgan de una raíz. `clipAction(clip)` devuelve una [`AnimationAction`](https://threejs.org/docs/pages/AnimationAction.html), el equivalente de un `AnimationClock` de WPF: tiene su propio tiempo, velocidad (`timeScale`), peso y modo de bucle, y varias acciones pueden mezclarse sobre los mismos objetos. Nada se mueve hasta que llamas a `mixer.update(delta)` con los segundos transcurridos desde el último fotograma, normalmente desde el bucle de animación y un `Timer`.
+
+El mismo script avanza el mezclador a mano y lee el ángulo del brazo:
+
+```text
+t = 0.000 s: arm at 0°
+t = 0.125 s: arm at 12.5°
+t = 0.250 s: arm at 25°
+t = 0.500 s: arm at 0°
+t = 0.750 s: arm at -25°
+t = 1.250 s: arm at 25°
+timeScale 2, then 0.125 s more: t = 0.500 s in the clip, arm at 0°
+meshopt weight position: Int16Array normalized true scale [ 0.09, 0.09, 0.09 ]
+```
+
+- Entre dos claves, el ángulo se interpola: 12.5° a 0.125 s, a medio camino entre 0° y 25°. Las pistas de cuaterniones se interpolan con una interpolación esférica, que da el mismo ángulo intermedio para una rotación alrededor de un único eje.
+- El clip se repite en bucle por defecto (`LoopRepeat`): a 1.25 s, el brazo está donde estaba a 0.25 s. `mixer.time` sigue contando, y cada acción reinicia su propio tiempo.
+- Con `timeScale = 2`, 0.125 s de tiempo real hacen avanzar la acción 0.25 s en el clip, de 0.25 a 0.5.
+
+## Geometría comprimida: Draco y meshopt
+
+El archivo sin comprimir ocupa 58 540 bytes, sobre todo datos de vértices en coma flotante. Dos extensiones de glTF lo comprimen, y ambas necesitan un decodificador en el navegador:
+
+- **[Draco](https://google.github.io/draco/)** (`KHR_draco_mesh_compression`), de Google, codifica la conectividad de una malla y sus atributos cuantizados en un flujo de bits compacto. Da los archivos más pequeños, y necesita un decodificador WebAssembly de unos cientos de kilobytes, que se ejecuta en Web Workers.
+- **[meshopt](https://meshoptimizer.org/)** (`EXT_meshopt_compression`), de meshoptimizer, reordena y codifica los búferes para que gzip o Brotli los compriman bien, y busca una decodificación rápida. Aquí viene con `KHR_mesh_quantization`, que guarda las posiciones y las normales como enteros pequeños en lugar de números en coma flotante. Su decodificador es un módulo JavaScript con WebAssembly incrustado.
+
+| Archivo | Bytes | Con gzip |
+|---|---|---|
+| `metronome.glb` | 58 540 | 24 239 |
+| `metronome-draco.glb` | 10 424 | 7 438 |
+| `metronome-meshopt.glb` | 24 616 | 7 526 |
+
+En disco, Draco es 2.4 veces más pequeño que meshopt; sobre una conexión HTTP que comprime, están a menos de un 1 % de diferencia. Ese es el diseño de meshopt: deja el último paso al servidor web. La última línea de la salida del script muestra la cuantización: las posiciones de la pesa volvieron como un `Int16Array` normalizado, con una escala de 0.09 en el nodo para restaurar el radio de la esfera.
+
+La página carga los tres archivos con un solo cargador ([`main.ts`, líneas 25-44](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/src/04-gltf/main.ts#L25-L44)):
+
+```ts
+// Un solo cargador para los tres archivos: elige el decodificador que pide el extensionsRequired de cada archivo
+const loader = new GLTFLoader().setDRACOLoader(new DRACOLoader()).setMeshoptDecoder(MeshoptDecoder);
+
+const files = ['metronome.glb', 'metronome-draco.glb', 'metronome-meshopt.glb'];
+const mixers: THREE.AnimationMixer[] = [];
+const loaded: Record<string, unknown> = {};
+const models = await Promise.all(files.map((file) => loader.loadAsync(`generated/${file}`)));
+
+models.forEach((gltf, i) => {
+  gltf.scene.position.x = (i - 1) * 1.6;
+  scene.add(gltf.scene);
+  const mixer = new THREE.AnimationMixer(gltf.scene);
+  mixer.clipAction(gltf.animations[0]).play();
+  mixers.push(mixer);
+  let vertices = 0;
+  gltf.scene.traverse((object) => {
+    if ((object as THREE.Mesh).isMesh) vertices += (object as THREE.Mesh).geometry.getAttribute('position').count;
+  });
+  loaded[files[i]] = { extensionsUsed: gltf.parser.json.extensionsUsed ?? [], vertices, clip: gltf.animations[0].name };
+});
+```
+
+Sin el decodificador correspondiente, un archivo que declara la extensión en `extensionsRequired` no se carga, con `THREE.GLTFLoader: setMeshoptDecoder must be called before loading compressed files` ([`GLTFLoader.js`, línea 1622](https://github.com/mrdoob/three.js/blob/r186/examples/jsm/loaders/GLTFLoader.js#L1618-L1624)) o `THREE.GLTFLoader: No DRACOLoader instance provided.` para Draco ([línea 1951](https://github.com/mrdoob/three.js/blob/r186/examples/jsm/loaders/GLTFLoader.js#L1951)).
+
+![Tres metrónomos idénticos uno al lado del otro sobre un fondo oscuro: cuerpos ahusados con una varilla fina de latón y una pesa redonda de latón, con las tres varillas inclinadas hacia el mismo lado.](../../../../assets/threejs/l04-metronomes.webp)
+
+```text
+$ node scripts/probe.mjs 04-gltf
+{
+  "backend": "WebGPU",
+  "gpu": "nvidia, blackwell",
+  "frame": 4,
+  "render": {
+    "calls": 23,
+    "drawCalls": 10,
+    "triangles": 6709
+  },
+  ...
+  "loaded": {
+    "metronome.glb": {
+      "extensionsUsed": [],
+      "vertices": 1297,
+      "clip": "swing"
+    },
+    "metronome-draco.glb": {
+      "extensionsUsed": [
+        "KHR_draco_mesh_compression"
+      ],
+      "vertices": 1287,
+      "clip": "swing"
+    },
+    "metronome-meshopt.glb": {
+      "extensionsUsed": [
+        "EXT_meshopt_compression",
+        "KHR_mesh_quantization"
+      ],
+      "vertices": 1295,
+      "clip": "swing"
+    }
+  },
+  "dracoArmAngle": 12.5
+}
+```
+
+- Los tres metrónomos se ven iguales, y el brazo de la copia Draco está a 12.5° después de tres fotogramas de 0.125 s: 0.375 s dentro del clip, de vuelta de 25° hacia 0°.
+- 10 llamadas de dibujo: 3 mallas por modelo y la pasada de salida. Cada modelo tiene 16 + 12 + 2 208 = 2 236 triángulos, y 3 × 2 236 + 1 = 6 709. Las 23 llamadas son las de la lección 3: 17 para el PMREM del entorno, y 2 por fotograma.
+- El número de vértices difiere, y el ejercicio 1 averigua adónde fueron los vértices.
+
+### Lo que pesan los decodificadores
+
+La compilación de producción muestra la otra cara del compromiso:
+
+```text
+$ npx vite build
+...
+dist/assets/draco_wasm_wrapper-fZCQGLGb.js    58.45 kB
+dist/assets/draco_wasm_wrapper-DxJM36Ib.js    58.76 kB
+dist/assets/draco_decoder-Z1_iN-Ht.wasm      192.42 kB │ gzip:  64.11 kB
+dist/assets/draco_decoder-C32yEggz.wasm      285.74 kB │ gzip:  89.66 kB
+dist/assets/draco_decoder-fzg4nYZr.js        719.41 kB
+...
+dist/assets/04-gltf-CCDSPzCq.js               80.55 kB │ gzip:  24.11 kB
+...
+```
+
+Desde r185, `DRACOLoader` no necesita `setDecoderPath`: localiza los decodificadores incluidos en el paquete `three` con `new URL(…, import.meta.url)` ([`DRACOLoader.js`, líneas 16-24](https://github.com/mrdoob/three.js/blob/r186/examples/jsm/loaders/DRACOLoader.js#L16-L24)); el `DRACOLoader` de r184 no tiene esa URL, y el de r180 empieza con un `decoderPath` vacío. Vite ve las cinco URL en el módulo y copia los cinco archivos en la compilación, 1.31 MB, aunque un navegador con WebAssembly solo carga dos de ellos: el envoltorio y el decodificador de 286 kB ([líneas 381-402](https://github.com/mrdoob/three.js/blob/r186/examples/jsm/loaders/DRACOLoader.js#L381-L402)). El decodificador más pequeño, solo para glTF, de 192 kB, se usa cuando pasas la constante exportada `DRACO_GLTF_CONFIG` a `setDecoderPath`, y el `draco_decoder.js` de 719 kB es una alternativa para navegadores sin WebAssembly. El decodificador de meshopt no tiene archivo propio: está dentro del fragmento de 80.55 kB de la página, con `GLTFLoader` y `DRACOLoader`.
+
+Para este modelo, Draco ahorra 88 bytes respecto a meshopt en la transferencia, y cuesta unos 90 kB de WebAssembly comprimido con gzip en la primera carga. Draco compensa en mallas grandes, como objetos escaneados o terrenos; para la mayoría de las escenas, meshopt con gzip es la mejor opción por defecto, y además comprime animaciones y datos de instancias, algo que Draco no hace.
+
+### Texturas: KTX2
+
+La geometría suele ser la parte más pequeña de un modelo: una textura de 2048 por 2048 ocupa unos 16 MB de memoria de GPU una vez decodificada, más con mipmaps, sea cual sea el tamaño de su PNG. Los archivos **KTX2** con compresión Basis Universal (`KHR_texture_basisu`) permanecen comprimidos en la GPU: [`KTX2Loader`](https://threejs.org/docs/pages/KTX2Loader.html) los transcodifica a un formato que la GPU admita, como BC7 en las GPU de escritorio o ASTC en los teléfonos. El cargador necesita sus archivos de transcodificación y que el renderizador detecte los formatos: `new KTX2Loader().setTranscoderPath(…).detectSupport(renderer)`, y luego `gltfLoader.setKTX2Loader(ktx2Loader)`. El metrónomo del curso no tiene texturas, así que esta parte no se mide aquí (*por verificar* en la lección 8, que mide la memoria).
+
+## En GuitarAlchemist/ga
+
+GA carga modelos glTF en varios componentes, y cada uno ilustra un punto de esta lección en el commit [`05c8eda`](https://github.com/GuitarAlchemist/ga/tree/05c8eda013f2a4d11efaa52c4ca94674521ee684):
+
+- **Una promesa que el cargador no cumple.** `Guitar3D.tsx` anuncia "GLTF/GLB model loading with KTX2 texture compression support" y un "Meshopt decoder for optimized geometry" en su cabecera ([líneas 1-12](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/Guitar3D/Guitar3D.tsx#L1-L12)), pero crea un `new GLTFLoader()` sin más ([línea 189](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/Guitar3D/Guitar3D.tsx#L188-L245)), sin `setKTX2Loader` ni `setMeshoptDecoder`. Una guitarra exportada con meshopt o KTX2 fallaría con los errores citados arriba.
+- **Decodificadores desde una CDN.** `Ocean.tsx` carga los decodificadores de Draco desde los servidores de Google, `setDecoderPath('https://www.gstatic.com/draco/v1/decoders/')` ([línea 339](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/Ocean/Ocean.tsx#L337-L341)). Con r180, hace falta una ruta. Eso hace que la página dependa de un tercero en tiempo de ejecución, y de una versión del decodificador que three.js no eligió. Tras actualizar a r185 o posterior, quitar la línea permite que Vite empaquete el decodificador que corresponde al cargador.
+- **Errores silenciados.** `DemerzelFaceOverlay.tsx` reemplaza `console.error` mientras se carga su modelo de rostro, para ocultar los errores de KTX2 ([líneas 173-180](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/PrimeRadiant/DemerzelFaceOverlay.tsx#L173-L180)), y lo restaura después. Las texturas KTX2 del modelo se omiten, algo que el comentario acepta porque el componente reemplaza los materiales; cualquier otro componente que registre un error que mencione KTX2 durante ese tiempo queda silenciado también. `setKTX2Loader` eliminaría los errores en lugar de ocultarlos.
+- **Un mezclador sin nada que reproducir.** `HandAnimationTest.tsx` crea un `AnimationMixer` para el modelo de la mano ([línea 231](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/pages/HandAnimationTest.tsx#L229-L232)) y lo actualiza en cada fotograma ([línea 157](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/pages/HandAnimationTest.tsx#L155-L158)), pero nunca llama a `clipAction`: un mezclador sin acciones no mueve nada. La página mueve ella misma los huesos de la mano, asignando sus rotaciones ([línea 389](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/pages/HandAnimationTest.tsx#L389)).
+
+## Puntos clave
+
+- glTF 2.0 es el formato de entrega en torno al cual está construido three.js: un árbol de nodos, materiales metálico-rugosidad con factores de color lineales, y animaciones como pistas de fotogramas clave.
+- `GLTFLoader` devuelve `gltf.scene`, un `Group`, y `gltf.animations`; los nombres pueden volverse únicos, y el código que busca objetos por nombre depende de ellos.
+- `AnimationMixer.update(delta)` hace avanzar el reloj; `clipAction` devuelve la acción que guarda el tiempo, la velocidad, el modo de bucle y el peso.
+- Draco da los archivos más pequeños y un decodificador grande; meshopt da archivos que se comprimen bien con gzip y un decodificador pequeño. Mide los dos, en la transferencia.
+- Desde r185, `DRACOLoader` encuentra sus decodificadores por sí solo, y un empaquetador los copia todos en la compilación.
+
+## Ejercicios
+
+1. El modelo sin comprimir tiene 1 297 vértices, la copia Draco 1 287 y la copia meshopt 1 295, y sin embargo los tres metrónomos se ven iguales y tienen el mismo número de triángulos. ¿Adónde fueron los vértices? Compruébalo con [`scripts/l04-exercises.ts`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/scripts/l04-exercises.ts), que decodifica ambas copias en Node.js con glTF Transform.
+2. ¿Dónde está el brazo a 0.875 s? Luego reproduce el clip una sola vez, con `LoopOnce` y `clampWhenFinished = true`, durante 1.5 s: ¿dónde está el brazo, cuánto vale `action.time`, y sigue en marcha la acción?
+3. Una página muestra un único modelo escaneado de 3 MB, y otra muestra 40 modelos pequeños de 50 kB cada uno. ¿Qué compresión elegirías para cada una, y qué medirías antes de decidir?
+
+<details>
+<summary>Solución 1</summary>
+
+```text
+$ node scripts/l04-exercises.ts
+metronome.glb          body 48 vertices, 16 triangles | rod 24 vertices, 12 triangles | weight 1225 vertices, 2208 triangles
+metronome-draco.glb    body 40 vertices, 16 triangles | rod 24 vertices, 12 triangles | weight 1223 vertices, 2208 triangles
+metronome-meshopt.glb  body 48 vertices, 16 triangles | rod 24 vertices, 12 triangles | weight 1223 vertices, 2208 triangles
+...
+```
+
+Dos causas. La pesa, una `SphereGeometry` de 48 segmentos, tiene 49 vértices en sus filas superior e inferior, pero los triángulos de cada polo solo usan 48 de ellos: los vértices 48 y 1176 no pertenecen a ningún triángulo. Los dos codificadores descartan los vértices que ningún triángulo usa, ya que reconstruyen los búferes a partir del índice. El cuerpo pierde 8 más solo en la copia Draco: el `draco()` de glTF Transform primero suelda los vértices que tienen los mismos atributos ([`draco.ts`, línea 71](https://github.com/donmccurdy/glTF-Transform/blob/v4.5.0/packages/functions/src/draco.ts#L71)), y el cuerpo se había hecho no indexado, con una copia de cada esquina por triángulo. `meshopt()` reordena los vértices pero no los suelda.
+
+</details>
+
+<details>
+<summary>Solución 2</summary>
+
+```text
+t = 0.875 s: arm at -12.5°
+LoopOnce, clampWhenFinished, after 1.5 s: arm at 0°, action.time 1, running false, finished events 1
+```
+
+A 0.875 s, el brazo está a medio camino entre −25° a 0.75 s y la vuelta a 0° a 1 s. Reproducida una sola vez, la acción se detiene al final del clip: su tiempo se queda en 1, `isRunning()` es false, y el mezclador emite un evento `finished`, que es donde una página empezaría la siguiente animación. `clampWhenFinished` conserva la última pose; sin él, la [documentación](https://threejs.org/docs/pages/AnimationAction.html#clampWhenFinished) dice que la acción se desactiva al terminar y deja de afectar al objeto. Este clip termina en 0°, donde empezó, así que la diferencia no se nota aquí: pruébalo con un clip que termine en otra posición.
+
+</details>
+
+<details>
+<summary>Solución 3</summary>
+
+Para el modelo escaneado de 3 MB, Draco: la geometría densa e irregular es donde su codificación gana más, y descargar una vez un decodificador de unos 90 kB con gzip es poco al lado de los megabytes ahorrados. Para los 40 modelos pequeños, meshopt: los archivos se comprimen con gzip casi tan bien como los de Draco, el decodificador ya está en el paquete JavaScript, y busca una decodificación rápida, lo que importa cuando llegan 40 archivos a la vez. Mide el tamaño de transferencia con la compresión real del servidor, el tiempo desde la petición hasta el primer fotograma, y el tiempo de decodificación en un teléfono lento, no el tamaño en disco. Esta respuesta está razonada a partir de las mediciones de esta lección sobre un modelo pequeño, no medida en esas dos páginas (*por verificar*).
+
+</details>
+
+## Fuentes
+
+- Khronos: [especificación de glTF 2.0](https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html), [`KHR_draco_mesh_compression`](https://github.com/KhronosGroup/glTF/tree/main/extensions/2.0/Khronos/KHR_draco_mesh_compression), [`EXT_meshopt_compression`](https://github.com/KhronosGroup/glTF/tree/main/extensions/2.0/Vendor/EXT_meshopt_compression), [`KHR_mesh_quantization`](https://github.com/KhronosGroup/glTF/tree/main/extensions/2.0/Khronos/KHR_mesh_quantization), [`KHR_texture_basisu`](https://github.com/KhronosGroup/glTF/tree/main/extensions/2.0/Khronos/KHR_texture_basisu)
+- Manual de three.js: [Loading 3D models](https://threejs.org/manual/pages/loading-3d-models.html); documentación: [`GLTFLoader`](https://threejs.org/docs/pages/GLTFLoader.html), [`DRACOLoader`](https://threejs.org/docs/pages/DRACOLoader.html), [`KTX2Loader`](https://threejs.org/docs/pages/KTX2Loader.html), [`AnimationMixer`](https://threejs.org/docs/pages/AnimationMixer.html), [`AnimationAction`](https://threejs.org/docs/pages/AnimationAction.html)
+- Código fuente de three.js en r186: [`GLTFLoader.js`](https://github.com/mrdoob/three.js/blob/r186/examples/jsm/loaders/GLTFLoader.js), [`DRACOLoader.js`](https://github.com/mrdoob/three.js/blob/r186/examples/jsm/loaders/DRACOLoader.js)
+- [glTF Transform](https://gltf-transform.dev/) 4.5.0: [`draco`](https://gltf-transform.dev/modules/functions/functions/draco) y [`meshopt`](https://gltf-transform.dev/modules/functions/functions/meshopt)
+- [Draco](https://google.github.io/draco/), Google; [meshoptimizer](https://meshoptimizer.org/)

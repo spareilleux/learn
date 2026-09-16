@@ -5,16 +5,13 @@ sidebar:
   order: 2
 ---
 
-import neckShot from '../../../assets/threejs/l02-neck.webp';
-import neckNoShadowShot from '../../../assets/threejs/l02-neck-no-neck-shadow.webp';
-
 Code: the lesson's page [`src/02-materials-lights/main.ts`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/src/02-materials-lights/main.ts), the geometry counts and material defaults in [`scripts/l02-geometries.ts`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/scripts/l02-geometries.ts), and the exercises in [`scripts/l02-exercises.ts`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/scripts/l02-exercises.ts).
 
 ## The scene
 
 Lesson 1 drew a cube with a material that needs no light. This lesson builds a piece of guitar neck on a table: a rosewood fretboard, five nickel frets, a mother-of-pearl dot, a sky light and a sun that casts shadows. Every part is a three.js primitive.
 
-<img src={neckShot.src} width={neckShot.width} height={neckShot.height} alt="A dark brown fretboard lying on a blue-gray table, seen from above and to the side, with five thin metal frets near its left end, a white dot between the second and third frets, and its shadow on the table below it." loading="lazy" style={{ maxWidth: "100%", height: "auto" }} />
+![A dark brown fretboard lying on a blue-gray table, seen from above and to the side, with five thin metal frets near its left end, a white dot between the second and third frets, and its shadow on the table below it.](../../../assets/threejs/l02-neck.webp)
 
 The screenshot comes from `node scripts/probe.mjs 02-materials-lights --shot out/neck.png`, in headless Chromium on the author's machine, with WebGPU.
 
@@ -271,7 +268,7 @@ $ node scripts/probe.mjs 02-materials-lights --query neckshadow=off
 
 One draw call and 12 triangles fewer: the neck is no longer drawn into the shadow map. The frets still are, so their thin shadows now reach the table through the neck, which no longer hides them:
 
-<img src={neckNoShadowShot.src} width={neckNoShadowShot.width} height={neckNoShadowShot.height} alt="The same fretboard, without its large shadow on the table: five short dark marks, the shadows of the frets, lie on the table just below the neck." loading="lazy" style={{ maxWidth: "100%", height: "auto" }} />
+![The same fretboard, without its large shadow on the table: five short dark marks, the shadows of the frets, lie on the table just below the neck.](../../../assets/threejs/l02-neck-no-neck-shadow.webp)
 
 The neck still receives the frets' shadows on its top face. A mesh that casts no shadow but should hide another one is a common cause of light leaking where it shouldn't.
 

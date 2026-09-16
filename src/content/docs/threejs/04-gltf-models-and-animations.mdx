@@ -5,8 +5,6 @@ sidebar:
   order: 4
 ---
 
-import metronomeShot from '../../../assets/threejs/l04-metronomes.webp';
-
 Code: the page in [`src/04-gltf/main.ts`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/src/04-gltf/main.ts), the model writer [`scripts/make-models.ts`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/scripts/make-models.ts), what the loader builds in [`scripts/l04-gltf.ts`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/scripts/l04-gltf.ts), and the exercises in [`scripts/l04-exercises.ts`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/scripts/l04-exercises.ts).
 
 ## glTF, the format three.js expects
@@ -142,7 +140,7 @@ models.forEach((gltf, i) => {
 
 Without the matching decoder, a file that lists the extension in `extensionsRequired` fails to load, with `THREE.GLTFLoader: setMeshoptDecoder must be called before loading compressed files` ([`GLTFLoader.js`, line 1622](https://github.com/mrdoob/three.js/blob/r186/examples/jsm/loaders/GLTFLoader.js#L1618-L1624)) or `THREE.GLTFLoader: No DRACOLoader instance provided.` for Draco ([line 1951](https://github.com/mrdoob/three.js/blob/r186/examples/jsm/loaders/GLTFLoader.js#L1951)).
 
-<img src={metronomeShot.src} width={metronomeShot.width} height={metronomeShot.height} alt="Three identical metronomes side by side on a dark background: tapered bodies with a thin brass rod and a round brass weight, all three rods tilted the same way." loading="lazy" style={{ maxWidth: "100%", height: "auto" }} />
+![Three identical metronomes side by side on a dark background: tapered bodies with a thin brass rod and a round brass weight, all three rods tilted the same way.](../../../assets/threejs/l04-metronomes.webp)
 
 ```text
 $ node scripts/probe.mjs 04-gltf

@@ -1,0 +1,284 @@
+---
+title: 2. Geometrías, materiales, luces y sombras
+description: Un trozo de mástil de guitarra hecho con primitivas de three.js — qué contiene una BufferGeometry, materiales basados en la física con metalness y roughness, luces en unidades físicas, y shadow maps con su coste en draw calls, medidos con renderer.info y comparados con WPF 3D y MonoGame.
+sidebar:
+  order: 2
+---
+
+Código: la página de la lección [`src/02-materials-lights/main.ts`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/src/02-materials-lights/main.ts), los recuentos de las geometrías y los valores por defecto de los materiales en [`scripts/l02-geometries.ts`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/scripts/l02-geometries.ts), y los ejercicios en [`scripts/l02-exercises.ts`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/scripts/l02-exercises.ts).
+
+## La escena
+
+La lección 1 dibujó un cubo con un material que no necesita luz. Esta lección construye un trozo de mástil de guitarra sobre una mesa: un diapasón de palisandro, cinco trastes de níquel, un punto de nácar, una luz de cielo y un sol que proyecta sombras. Cada pieza es una primitiva de three.js.
+
+![Un diapasón marrón oscuro sobre una mesa gris azulada, visto desde arriba y de lado, con cinco trastes metálicos finos cerca de su extremo izquierdo, un punto blanco entre el segundo y el tercer traste, y su sombra sobre la mesa debajo de él.](../../../../assets/threejs/l02-neck.webp)
+
+La captura de pantalla viene de `node scripts/probe.mjs 02-materials-lights --shot out/neck.png`, en Chromium headless en la máquina del autor, con WebGPU.
+
+| | WPF 3D | MonoGame | three.js |
+|---|---|---|---|
+| Geometría | [`MeshGeometry3D`](https://learn.microsoft.com/dotnet/api/system.windows.media.media3d.meshgeometry3d): `Positions`, `Normals`, `TextureCoordinates`, `TriangleIndices` | `VertexBuffer` e `IndexBuffer` | [`BufferGeometry`](https://threejs.org/docs/pages/BufferGeometry.html): atributos con nombre y un índice |
+| Formas integradas | ninguna | ninguna | caja, plano, esfera, cilindro, toro y más |
+| Material | [`DiffuseMaterial`](https://learn.microsoft.com/dotnet/api/system.windows.media.media3d.diffusematerial), `SpecularMaterial`, `EmissiveMaterial` | [`BasicEffect`](https://docs.monogame.net/api/Microsoft.Xna.Framework.Graphics.BasicEffect.html): difuso, especular, tres luces direccionales | `MeshStandardMaterial`, `MeshPhysicalMaterial`: metalness y roughness |
+| Luces | `AmbientLight`, `DirectionalLight`, `PointLight`, `SpotLight` | lo que calcula el efecto | las mismas cuatro, más `HemisphereLight`, en unidades físicas |
+| Sombras | ninguna | tu propio shadow map | shadow maps, activados por renderer, por luz y por objeto |
+
+## Qué contiene una geometría
+
+Una [`BufferGeometry`](https://threejs.org/docs/pages/BufferGeometry.html) es un conjunto de arrays tipados que el renderer sube a la GPU tal cual: un atributo por propiedad de vértice, `position`, `normal` y `uv`, y un índice opcional que enumera los triángulos por número de vértice. Las primitivas solo rellenan esos arrays. [`scripts/l02-geometries.ts`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/scripts/l02-geometries.ts) imprime lo que contienen las geometrías de la escena, sin renderer:
+
+```text
+$ node scripts/l02-geometries.ts
+BoxGeometry(1, 1, 1)                       position 24×3, normal 24×3, uv 24×2; index 36; triangles 12; groups 6
+PlaneGeometry(8, 8)                        position 4×3, normal 4×3, uv 4×2; index 6; triangles 2; groups 0
+CircleGeometry(0.06, 32)                   position 34×3, normal 34×3, uv 34×2; index 96; triangles 32; groups 0
+CylinderGeometry(0.012, 0.012, 0.55, 12)   position 76×3, normal 76×3, uv 76×2; index 144; triangles 48; groups 3
+SphereGeometry(1, 32, 16)                  position 561×3, normal 561×3, uv 561×2; index 2880; triangles 960; groups 0
+normals at the corner (0.5, 0.5, 0.5): (1, 0, 0) (0, 1, 0) (0, 0, 1)
+MeshStandardMaterial: { color: 'ffffff', roughness: 1, metalness: 0 }
+MeshPhysicalMaterial: { ior: 1.5, reflectivity: 0.5, clearcoat: 0, transmission: 0 }
+PointLight with power 800 lm: { intensity: 63.66, decay: 2, distance: 0 }
+```
+
+- **Un cubo tiene 24 vértices, no 8.** Un vértice es una posición *y* una normal y una UV. Cada esquina pertenece a tres caras que apuntan en tres direcciones, así que la caja la guarda tres veces, como muestran las últimas líneas para la esquina (0.5, 0.5, 0.5). El `MeshGeometry3D` de WPF funciona igual: compartir una posición entre caras comparte su normal, y las aristas se ven redondeadas.
+- Los **grupos** dividen una geometría en partes que pueden llevar materiales distintos: una caja tiene uno por cara, un cilindro uno para su lateral y uno para cada tapa. Pasar un array de materiales a un `Mesh` los utiliza.
+- Los parámetros que siguen al tamaño son **segmentos**. `CylinderGeometry(…, 12)` tiene 12 lados, suficientes para un traste así de fino visto a distancia; los 32 segmentos de la incrustación son para su borde redondo. Los segmentos cuestan triángulos, y los triángulos son lo que cuenta `renderer.info`.
+- `SphereGeometry(1, 32, 16)` tiene 32 × 16 cuadriláteros, lo que daría 1 024 triángulos, pero informa de 960: en cada polo, una fila de cuadriláteros se reduce a triángulos, y las mitades degeneradas se omiten (ejercicio 1).
+- Un `PlaneGeometry` está en el plano XY, orientado hacia +Z. La mesa se gira −90° alrededor de X para mirar hacia arriba; una cara frontal vista desde detrás no se dibuja, salvo que el material fije `side: THREE.DoubleSide`.
+
+## Materiales basados en la física
+
+El mástil, los trastes y el punto usan dos materiales ([`main.ts`, líneas 31-63](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/src/02-materials-lights/main.ts#L31-L63)):
+
+```ts
+// El mástil: el palisandro es un dieléctrico (metalness 0) con una superficie rugosa
+const neck = new THREE.Mesh(
+  new THREE.BoxGeometry(4, 0.12, 0.55),
+  new THREE.MeshStandardMaterial({ color: 0x4a2c1d, metalness: 0, roughness: 0.75 }),
+);
+neck.position.y = 0.3;
+// ?neckshadow=off: el mástil recibe sombras pero no proyecta ninguna (ejercicio 3)
+neck.castShadow = params.get('neckshadow') !== 'off';
+neck.receiveShadow = true;
+scene.add(neck);
+
+// Trastes: alpaca, un metal, así que metalness 1 y el color tiñe los reflejos
+const fretMaterial = new THREE.MeshStandardMaterial({ color: 0xc9c5bd, metalness: 1, roughness: 0.3 });
+const fretGeometry = new THREE.CylinderGeometry(0.012, 0.012, 0.55, 12);
+for (let fret = 1; fret <= 5; fret++) {
+  // Cada traste está a tiro de escala × (1 − 2^(−n/12)) de la cejuela, aquí con un tiro de escala de 6.5 unidades
+  const x = -2 + 6.5 * (1 - 2 ** (-fret / 12));
+  const mesh = new THREE.Mesh(fretGeometry, fretMaterial);
+  mesh.rotation.x = Math.PI / 2;
+  mesh.position.set(x, 0.37, 0);
+  mesh.castShadow = true;
+  scene.add(mesh);
+}
+
+// Una incrustación: nácar, con una capa transparente que MeshPhysicalMaterial añade sobre el modelo estándar
+const inlay = new THREE.Mesh(
+  new THREE.CircleGeometry(0.06, 32),
+  new THREE.MeshPhysicalMaterial({ color: 0xf2efe6, roughness: 0.4, clearcoat: 1, clearcoatRoughness: 0.05, iridescence: 0.6 }),
+);
+inlay.rotation.x = -Math.PI / 2;
+// Entre el segundo y el tercer traste, donde una guitarra tiene su primer punto
+inlay.position.set(-1.13, 0.361, 0);
+scene.add(inlay);
+```
+
+El `DiffuseMaterial` de WPF y el `BasicEffect` de MonoGame usan el modelo de iluminación clásico: un color difuso, y un color especular con una potencia que fija el tamaño del brillo. Los valores se ven bien bajo una luz y mal bajo otra. [`MeshStandardMaterial`](https://threejs.org/docs/pages/MeshStandardMaterial.html) está **basado en la física**: describe la superficie, y el renderer deduce cómo se refleja la luz en ella. El modelo es el modelo metallic-roughness de glTF 2.0 (lección 4), así que un material exportado desde Blender llega con los mismos valores.
+
+- **`metalness`** vale 0 para un dieléctrico, como la madera, el plástico, la piel o la piedra, y 1 para un metal. Un dieléctrico muestra su color con luz difusa y refleja un poco de luz blanca en ángulos rasantes; un metal no tiene parte difusa, y su color tiñe el reflejo. Los valores intermedios son para transiciones, como el óxido sobre el metal, no para materiales "ligeramente metálicos".
+- **`roughness`** va de 0, un espejo, a 1, una superficie mate. Difumina el reflejo y ensancha el brillo a la vez, en lugar de la potencia especular separada del modelo clásico.
+- **`color`** es el albedo, el color de la superficie sin iluminación: los valores hexadecimales son sRGB, y el renderer los convierte a valores lineales, como mide la lección 3.
+- Los valores por defecto impresos arriba son un dieléctrico blanco y totalmente rugoso: `color: 'ffffff', roughness: 1, metalness: 0`.
+
+[`MeshPhysicalMaterial`](https://threejs.org/docs/pages/MeshPhysicalMaterial.html) amplía el material estándar con capas para las superficies que el estándar no puede describir: `clearcoat` para el barniz o la pintura de coche, `iridescence` para el arcoíris del nácar o de las pompas de jabón, `sheen` para los tejidos, `transmission` para el vidrio. Cada capa cuesta trabajo de shader, así que úsala donde se note.
+
+Con `WebGPURenderer`, ambos materiales se convierten internamente en materiales de nodos, `MeshStandardNodeMaterial` y `MeshPhysicalNodeMaterial`, que la lección 6 amplía con TSL.
+
+## Luces en unidades físicas
+
+```ts
+// Una luz de cielo y suelo rellena las sombras; una luz direccional, como el sol, las proyecta
+scene.add(new THREE.HemisphereLight(0xdde6ff, 0x302820, 1.2));
+const sun = new THREE.DirectionalLight(0xffffff, 3);
+sun.position.set(2, 4, 3);
+```
+
+- Una [`DirectionalLight`](https://threejs.org/docs/pages/DirectionalLight.html) envía rayos paralelos desde su posición hacia su objetivo, el origen por defecto, como el sol. Solo cuenta la dirección, no la distancia.
+- Una [`HemisphereLight`](https://threejs.org/docs/pages/HemisphereLight.html) mezcla un color de cielo desde arriba con un color de suelo desde abajo, según la orientación de cada superficie. Es un sustituto barato de la luz que devuelve una habitación real; la lección 3 la reemplaza por un mapa de entorno.
+- Una [`PointLight`](https://threejs.org/docs/pages/PointLight.html) ilumina en todas las direcciones desde un punto, y una [`SpotLight`](https://threejs.org/docs/pages/SpotLight.html) en un cono. Su luz disminuye con el cuadrado de la distancia (`decay: 2`), y `distance: 0` significa sin corte.
+
+Desde r155, three.js usa unidades físicas por defecto ([guía de migración](https://github.com/mrdoob/three.js/wiki/Migration-Guide#154--155)), y el código fuente de r186 ya no tiene el interruptor `useLegacyLights` que recuperaba el comportamiento antiguo. La intensidad de una luz puntual o de un foco está en candelas, y su propiedad `power` convierte desde lúmenes: 800 lm, una bombilla doméstica corriente, son 800 / 4π ≈ 63.66 cd, como imprimió el script. Las luces direccionales y hemisféricas no tienen una posición desde la que disminuir; su intensidad se aplica igual en todas partes. Las unidades de la escena importan entonces: la atenuación con el cuadrado de la distancia trata una unidad como un metro, así que una escena modelada en centímetros necesita luces 10 000 veces más fuertes para verse igual (*por verificar* en una escena propia).
+
+## Sombras
+
+Las sombras se activan explícitamente en tres niveles, y hacen falta los tres:
+
+```ts
+renderer.shadowMap.enabled = shadows;
+renderer.shadowMap.type = THREE.PCFShadowMap;
+```
+
+```ts
+sun.castShadow = true;
+sun.shadow.mapSize.set(1024, 1024);
+// La cámara de sombras es ortográfica: la caja que cubre es el único lugar donde pueden caer sombras
+Object.assign(sun.shadow.camera, { left: -3, right: 3, top: 3, bottom: -3, near: 0.5, far: 12 });
+sun.shadow.camera.updateProjectionMatrix();
+```
+
+y cada malla indica si proyecta sombras, si las recibe, o ambas cosas (`castShadow`, `receiveShadow`).
+
+Un **shadow map** es una imagen de profundidad renderizada desde la luz: antes de dibujar la escena, el renderer dibuja los objetos que proyectan sombra en una textura, aquí de 1024 por 1024 píxeles, desde el punto de vista del sol, guardando solo su distancia. Después, para cada píxel de una superficie receptora, el material compara su propia distancia a la luz con la guardada en el mapa: si algo estaba más cerca, el píxel está en sombra. Para una luz direccional, la "cámara" de ese render es ortográfica, y la caja `left`, `right`, `top`, `bottom`, `near`, `far` es todo lo que ve: una sombra fuera de la caja no se dibuja, y una caja más grande que la escena reparte los 1024 píxeles sobre espacio vacío y hace la sombra pixelada. La caja por defecto mide 10 unidades de ancho, `(-5, 5, 5, -5, 0.5, 500)` en [`DirectionalLightShadow.js`](https://github.com/mrdoob/three.js/blob/r186/src/lights/DirectionalLightShadow.js).
+
+`WebGPURenderer` actualiza la proyección de la cámara de sombras una sola vez, cuando construye la sombra ([`ShadowNode.js`, línea 379](https://github.com/mrdoob/three.js/blob/r186/src/nodes/lighting/ShadowNode.js#L379)); un cambio hecho después del primer frame necesita `updateProjectionMatrix()`, y el curso lo llama siempre.
+
+### Lo que cuestan las sombras
+
+La página informa de sus contadores con y sin sombras (`?noshadows`):
+
+```text
+$ node scripts/probe.mjs 02-materials-lights
+{
+  "backend": "WebGPU",
+  "gpu": "nvidia, blackwell",
+  "frame": 4,
+  "render": {
+    "calls": 9,
+    "drawCalls": 15,
+    "triangles": 539
+  },
+  "memory": {
+    "geometries": 5,
+    "textures": 5,
+    "programs": 10
+  },
+  "shadows": true,
+  "objects": {
+    "Scene": 1,
+    "Mesh": 8,
+    "HemisphereLight": 1,
+    "DirectionalLight": 1
+  }
+}
+$ node scripts/probe.mjs 02-materials-lights --query noshadows
+{
+  ...
+  "render": {
+    "calls": 6,
+    "drawCalls": 9,
+    "triangles": 287
+  },
+  "memory": {
+    "geometries": 5,
+    "textures": 3,
+    "programs": 6
+  },
+  "shadows": false,
+  ...
+}
+```
+
+Sin sombras: 8 mallas y el pase de salida, 9 draw calls, y 2 + 12 + 5 × 48 + 32 + 1 = 287 triángulos. Con sombras, los seis objetos que proyectan sombra se dibujan una segunda vez en el shadow map: 6 draw calls más y 12 + 240 = 252 triángulos más. `calls`, que cuenta los renders desde el inicio (lección 1), pasa de 2 por frame a 3: el shadow map es un render en sí mismo. El shadow map también añade texturas y sus propios programas de shader. La mesa y la incrustación no proyectan sombra y no se dibujan en el mapa. Cada luz que proyecta sombras añade un pase como este, y una luz puntual añade seis, uno por cara de un cubo, por eso las escenas en tiempo real se limitan a una o dos luces con sombras.
+
+`PCFShadowMap` filtra el borde de la sombra comparando varias muestras del mapa. r186 eliminó `PCFSoftShadowMap` de `WebGPURenderer`: la constante sigue existiendo, marcada como obsoleta en [`constants.js`](https://github.com/mrdoob/three.js/blob/r186/src/constants.js#L66-L75), y un renderer que la recibe avisa `WebGPURenderer: PCFSoftShadowMap has been removed. Using PCFShadowMap instead.` ([`Renderer.js`, líneas 902-906](https://github.com/mrdoob/three.js/blob/r186/src/renderers/common/Renderer.js#L902-L906)). `VSMShadowMap` sigue disponible para sombras más suaves.
+
+## En GuitarAlchemist/ga
+
+El diapasón de GA en [`05c8eda`](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeFretboard.tsx#L271-L316) ilumina el mástil con una luz ambiental, cinco luces direccionales y una luz puntual. La luz principal proyecta sombras, con una caja de sombra de 60 por 60 unidades, donde una unidad son 10 mm (`scaleLength / 10`, un tiro de escala de 65 unidades), un mapa de 1024 por 1024, y un bias contra el shadow acne, las rayas que aparecen en una superficie cuando se sombrea a sí misma:
+
+```tsx
+      const directionalLight = new THREE.DirectionalLight(0xffffff, 1.3);
+      directionalLight.position.set(15, 30, 15);
+      directionalLight.castShadow = true;
+      directionalLight.shadow.camera.near = 0.1;
+      directionalLight.shadow.camera.far = 100;
+      directionalLight.shadow.camera.left = -30;
+      directionalLight.shadow.camera.right = 30;
+      directionalLight.shadow.camera.top = 30;
+      directionalLight.shadow.camera.bottom = -30;
+      directionalLight.shadow.mapSize.width = 1024;
+      directionalLight.shadow.mapSize.height = 1024;
+      directionalLight.shadow.radius = 4;
+      directionalLight.shadow.bias = -0.0005;
+```
+
+Lo que esta lección añade a ese código:
+
+- **Las sombras son solo para `WebGLRenderer`.** La lección 1 mostró que el diapasón las activa, como `VSMShadowMap`, solo cuando el renderer es un `WebGLRenderer` ([líneas 207-211](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeFretboard.tsx#L207-L211)). Con `WebGPURenderer`, `renderer.shadowMap.enabled` se queda en false, y los ajustes de sombra de arriba no hacen nada.
+- **La luz puntual apenas cuenta.** `new THREE.PointLight(0xffffff, 0.6, 20)` en (0, 3, 0) son 0.6 cd: 3 unidades por debajo, sobre el mástil, 0.6 / 3² ≈ 0.07, frente a 1.3 de la luz principal, alrededor del 5 %. Con `distance: 20`, las partes del mástil a más de 20 unidades no reciben nada. Los valores parecen escritos antes de r155, cuando las intensidades no eran físicas.
+- **Una textura cumple cuatro papeles.** El `MeshStandardMaterial` del diapasón ([líneas 805-819](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeFretboard.tsx#L805-L819)) usa la misma `woodTexture` como `map`, `roughnessMap`, `normalMap` y `bumpMap`. Un mapa de rugosidad lee su canal verde como rugosidad, y un mapa de normales lee sus canales rojo, verde y azul como una dirección: una imagen de color de madera no da ni lo uno ni lo otro. La lección 3 explica por qué una imagen de color y una imagen de datos también deben diferir en espacio de color.
+- Las cuerdas entorchadas usan `MeshPhysicalMaterial` con `metalness: 1`, `clearcoat`, `sheen`, un mapa de normales y un mapa de normales para la capa transparente ([líneas 761-774](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeFretboard.tsx#L761-L774)): tres capas de shading en cada cuerda, cada una pagada en cada píxel que cubren las cuerdas.
+
+## Puntos clave
+
+- Una `BufferGeometry` son arrays tipados: un vértice es una posición, una normal y una UV juntas, así que las aristas vivas duplican vértices.
+- `MeshStandardMaterial` describe la superficie con `metalness` (0 o 1) y `roughness`; `MeshPhysicalMaterial` añade capa transparente, sheen, iridiscencia y transmisión.
+- Las intensidades de las luces son físicas desde r155: candelas para las luces puntuales y los focos, con `power` en lúmenes, y la atenuación trata una unidad como un metro.
+- Las sombras necesitan el renderer, la luz y cada malla; cada luz con sombras dibuja de nuevo los objetos que las proyectan, y la caja de la cámara de sombras decide dónde pueden aparecer.
+- `PCFSoftShadowMap` ya no existe en `WebGPURenderer` desde r186.
+
+## Ejercicios
+
+1. Sin ejecutar nada, ¿cuántos vértices y triángulos tiene `SphereGeometry(1, 8, 4)`? Luego compruébalo con [`scripts/l02-exercises.ts`](https://github.com/spareilleux/learn/blob/8e8f303/code/threejs/scripts/l02-exercises.ts).
+2. Una `SpotLight` recibe `power = 800`. ¿Cuál es su intensidad en candelas, y cambia cuando estrechas el cono con `angle = Math.PI / 12`? Lee [`SpotLight.js`](https://github.com/mrdoob/three.js/blob/r186/src/lights/SpotLight.js#L133-L149) antes de comprobarlo con el script.
+3. Con `?neckshadow=off`, el mástil recibe sombras pero no proyecta ninguna. Predice `drawCalls` y `triangles`, y lo que aparece sobre la mesa, luego compruébalo con `node scripts/probe.mjs 02-materials-lights --query neckshadow=off --shot out/neck.png`.
+
+<details>
+<summary>Solución 1</summary>
+
+```text
+$ node scripts/l02-exercises.ts
+SphereGeometry(1, 8, 4): { vertices: 45, triangles: 48 }
+```
+
+Los vértices forman una cuadrícula de (8 + 1) × (4 + 1) = 45: la costura de la esfera se guarda dos veces, para que las coordenadas de textura puedan ir de 0 a 1 a su alrededor. Hay 8 × 4 = 32 cuadriláteros, 64 triángulos, menos un triángulo por cuadrilátero en las filas superior e inferior, donde el cuadrilátero se ha reducido a un triángulo en el polo: 64 − 8 − 8 = 48. Para `SphereGeometry(1, 32, 16)`: 33 × 17 = 561 vértices y 2 × 32 × 16 − 2 × 32 = 960 triángulos, como se imprimió arriba.
+
+</details>
+
+<details>
+<summary>Solución 2</summary>
+
+```text
+SpotLight with power 800 lm: { intensity: 254.65, angle: 1.0472 }
+after angle = π/12: { intensity: 254.65, power: 800 }
+```
+
+La potencia de `SpotLight` es intensidad × π, "por convención para un foco", dice su código fuente, así que 800 lm dan 800 / π ≈ 254.65 cd, cuatro veces los 63.66 de la luz puntual. Estrechar el cono no cambia ni la intensidad ni la potencia: three.js no concentra los lúmenes en un cono más pequeño, como haría un reflector real. El ángulo por defecto es π/3 (1.0472 radianes).
+
+</details>
+
+<details>
+<summary>Solución 3</summary>
+
+```text
+$ node scripts/probe.mjs 02-materials-lights --query neckshadow=off
+{
+  ...
+  "render": {
+    "calls": 9,
+    "drawCalls": 14,
+    "triangles": 527
+  },
+  ...
+}
+```
+
+Un draw call y 12 triángulos menos: el mástil ya no se dibuja en el shadow map. Los trastes sí, así que sus sombras finas llegan ahora a la mesa a través del mástil, que ya no las tapa:
+
+![El mismo diapasón, sin su gran sombra sobre la mesa: cinco marcas oscuras cortas, las sombras de los trastes, quedan sobre la mesa justo debajo del mástil.](../../../../assets/threejs/l02-neck-no-neck-shadow.webp)
+
+El mástil sigue recibiendo las sombras de los trastes en su cara superior. Una malla que no proyecta sombra pero debería tapar otra es una causa frecuente de luz que se cuela donde no debería.
+
+</details>
+
+## Fuentes
+
+- Manual de three.js: [Primitives](https://threejs.org/manual/pages/primitives.html), [Materials](https://threejs.org/manual/pages/materials.html), [Lights](https://threejs.org/manual/pages/lights.html), [Shadows](https://threejs.org/manual/pages/shadows.html)
+- Documentación de three.js: [`BufferGeometry`](https://threejs.org/docs/pages/BufferGeometry.html), [`MeshStandardMaterial`](https://threejs.org/docs/pages/MeshStandardMaterial.html), [`MeshPhysicalMaterial`](https://threejs.org/docs/pages/MeshPhysicalMaterial.html), [`DirectionalLight`](https://threejs.org/docs/pages/DirectionalLight.html), [`LightShadow`](https://threejs.org/docs/pages/LightShadow.html)
+- Código fuente de three.js en r186: [`PointLight.js`](https://github.com/mrdoob/three.js/blob/r186/src/lights/PointLight.js), [`SpotLight.js`](https://github.com/mrdoob/three.js/blob/r186/src/lights/SpotLight.js), [`DirectionalLightShadow.js`](https://github.com/mrdoob/three.js/blob/r186/src/lights/DirectionalLightShadow.js), [`ShadowNode.js`](https://github.com/mrdoob/three.js/blob/r186/src/nodes/lighting/ShadowNode.js)
+- La [guía de migración](https://github.com/mrdoob/three.js/wiki/Migration-Guide) para las luces físicas de r155 y los tipos de sombra de r186
+- Khronos: [glTF 2.0, materiales](https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html#materials)
+- Microsoft: [Información general sobre gráficos 3D, materiales y luces](https://learn.microsoft.com/dotnet/desktop/wpf/graphics-multimedia/3-d-graphics-overview#materials)
