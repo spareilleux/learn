@@ -44,9 +44,9 @@ jobs:
           mkdir -p "$RUNNER_TEMP/bin" && cd "$RUNNER_TEMP/bin"
           base=https://github.com/yannh/kubeconform/releases/download/$KUBECONFORM_VERSION
           curl -sSLO "$base/${{ matrix.asset }}"
-          # sha256sum on Linux and in Git Bash on Windows; macOS has only shasum
-          sha256=$(command -v sha256sum || echo "shasum -a 256")
-          curl -sSL "$base/CHECKSUMS" | grep " ${{ matrix.asset }}$" | $sha256 -c
+          curl -sSL "$base/CHECKSUMS" | grep " ${{ matrix.asset }}$" > asset.sha256
+          # Git Bash on Windows has no shasum, and macOS's sha256sum is BSD's, with other options: one tool per OS
+          if [ "$RUNNER_OS" = macOS ]; then shasum -a 256 -c asset.sha256; else sha256sum -c asset.sha256; fi
           case "${{ matrix.asset }}" in *.zip) unzip -q "${{ matrix.asset }}" ;; *) tar -xzf "${{ matrix.asset }}" ;; esac
           echo "$RUNNER_TEMP/bin" >> "$GITHUB_PATH"
       - name: Validate

@@ -22,7 +22,8 @@ sh_step ${L}_curl_csharp "kubectl exec -n $L client -- curl -s http://csharp-api
 sh_step ${L}_curl_java "kubectl exec -n $L client -- curl -s http://java-reactor-api/ | api; echo"
 sh_step ${L}_curl_fqdn "kubectl exec -n $L client -- curl -s http://csharp-api.$L.svc.cluster.local/ | api; echo"
 step ${L}_resolv_conf kubectl exec -n $L client -- cat /etc/resolv.conf
-step ${L}_nslookup kubectl exec -n $L client -- nslookup csharp-api.$L.svc.cluster.local.
+# nslookup asks for A and AAAA records at once and prints its blank separator lines in the order the answers arrive
+sh_step ${L}_nslookup "kubectl exec -n $L client -- nslookup csharp-api.$L.svc.cluster.local. | grep -v '^\$'"
 
 # EndpointSlices: the pods behind the Service, and their readiness
 # EndpointSlice names end with five random characters
