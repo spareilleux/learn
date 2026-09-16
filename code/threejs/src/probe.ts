@@ -19,6 +19,19 @@ export function backendName(renderer: WebGPURenderer): string {
   return (renderer.backend as { isWebGPUBackend?: boolean }).isWebGPUBackend ? 'WebGPU' : 'WebGL 2';
 }
 
+// Which GPU answered: the WebGPU adapter's vendor and architecture, or the WebGL renderer string
+export function gpuName(renderer: WebGPURenderer): string {
+  const backend = renderer.backend as {
+    device?: { adapterInfo?: { vendor: string; architecture: string; description: string } };
+    gl?: WebGL2RenderingContext;
+  };
+  const info = backend.device?.adapterInfo;
+  if (info) return [info.vendor, info.architecture, info.description].filter(Boolean).join(', ');
+  const gl = backend.gl;
+  const debug = gl?.getExtension('WEBGL_debug_renderer_info');
+  return gl && debug ? String(gl.getParameter(debug.UNMASKED_RENDERER_WEBGL)) : 'unknown';
+}
+
 // What the page hands to the probe, once
 export function publish(result: Record<string, unknown>): void {
   resolveProbe(result);
@@ -29,6 +42,7 @@ export function report(renderer: WebGPURenderer, extra: Record<string, unknown> 
   const { render, memory } = renderer.info;
   publish({
     backend: backendName(renderer),
+    gpu: gpuName(renderer),
     frame: renderer.info.frame,
     render: { calls: render.calls, drawCalls: render.drawCalls, triangles: render.triangles },
     memory: { geometries: memory.geometries, textures: memory.textures, programs: memory.programs },
