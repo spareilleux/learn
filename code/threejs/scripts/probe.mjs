@@ -4,6 +4,7 @@
 // If the page reports samples ({ name: [x, y] } in CSS pixels), the screenshot's color at each point is printed instead.
 // The browser's warnings and errors are printed first: three.js reports its backend fallback there.
 // PROBE_CHANNEL=chromium-headless-shell uses Playwright's older headless shell instead of Chromium's new headless mode.
+// PROBE_TIMEOUT=<seconds> waits longer than 30 s for the result and the screenshot, for heavy pages on a software rasterizer.
 import { writeFileSync } from 'node:fs';
 import { chromium } from 'playwright';
 import { PNG } from 'pngjs';
@@ -29,8 +30,13 @@ try {
   });
   page.on('pageerror', (error) => messages.push(`pageerror: ${error.message}`));
   await page.goto(`http://localhost:5188/${pageName}.html?${params.join('&')}`);
-  // A page that never reports fails after 30 s instead of waiting forever
-  const result = await page.evaluate(() => Promise.race([window.probe, new Promise((_, reject) => setTimeout(() => reject(new Error('no probe result after 30 s')), 30_000))]));
+  // A page that never reports fails after 30 s, or PROBE_TIMEOUT, instead of waiting forever
+  const timeout = Number(process.env.PROBE_TIMEOUT ?? 30) * 1000;
+  page.setDefaultTimeout(timeout);
+  const result = await page.evaluate(
+    (ms) => Promise.race([window.probe, new Promise((_, reject) => setTimeout(() => reject(new Error(`no probe result after ${ms / 1000} s`)), ms))]),
+    timeout,
+  );
   // Pages that need a pointer list actions: each is performed with Playwright's mouse, which the browser turns into real
   // pointer events, then window.probeAfter(name) returns what the page saw
   let screenshot = null;

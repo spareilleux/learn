@@ -110,7 +110,8 @@ renderer.setAnimationLoop(() => {
     const { calls, drawCalls, triangles } = renderer.info.render;
     const { geometries, textures, programs } = renderer.info.memory;
     // The CPU side of a frame: renderer.render() prepares and submits the commands, the GPU works afterwards
-    const timed = 60;
+    // 20 frames: enough to average the timer's rounding, few enough for a software rasterizer in CI
+    const timed = 20;
     const timerStart = performance.now();
     for (let i = 0; i < timed; i++) renderer.render(scene, camera);
     const renderMs = (performance.now() - timerStart) / timed;

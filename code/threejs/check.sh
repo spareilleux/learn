@@ -45,7 +45,14 @@ probe() {
   local code=$?
   echo "     $name: $(grep -o '"backend": "[^"]*"' "out/$name.raw.txt") $(grep -o '"gpu": "[^"]*"' "out/$name.raw.txt")$(grep -c 'WebGPU is not available' "out/$name.raw.txt" | sed 's/^0$//; s/^[1-9].*/, after a fallback warning/')"
   { grep -v '"backend":\|"gpu":\|"coordinateSystem":\|No available adapters\|WebGPU is not available\|"[A-Za-z]*Ms":' "out/$name.raw.txt" | node normalize.mjs; echo "exit $code"; } > "out/$name.txt"
-  compare "$name"
+  # A few outputs depend on the backend (programs, multi-draw, blurred pixels): expected/<name>.webgl.txt, when it
+  # exists, holds the WebGL 2 version, which runners without a GPU get
+  if [ -f "expected/$name.webgl.txt" ] && grep -q '"backend": "WebGL 2"' "out/$name.raw.txt"; then
+    cp "out/$name.txt" "out/$name.webgl.txt"
+    compare "$name.webgl"
+  else
+    compare "$name"
+  fi
 }
 
 # Types: the scenes, the scripts, and one snippet that tsc rejects
@@ -100,7 +107,9 @@ run l05_exercises node scripts/l05-exercises.ts
 probe l06_probe 06-tsl --extract shader out/l06_shader_webgpu.txt
 probe l06_probe_webgl 06-tsl --webgl --extract shader out/l06_shader_webgl.txt
 probe l06_probe_harmonic_2 06-tsl --query harmonic=2 --extract shader out/l06_shader_harmonic_2.txt
-run l06_shader_lines grep -h 'positionLocal = ' out/l06_shader_webgpu.txt out/l06_shader_webgl.txt
+# The GLSL of the WebGL 2 backend is compared; the first file is WGSL only where WebGPU runs, so it is printed
+run l06_shader_glsl grep -h 'positionLocal = ' out/l06_shader_webgl.txt
+echo "     $(grep -h 'positionLocal = (' out/l06_shader_webgpu.txt)"
 
 # Lesson 7
 for pipeline in none bloom bloom-fxaa direct; do
@@ -110,7 +119,8 @@ probe l07_probe_threshold_0 07-post --query threshold=0
 probe l07_probe_dispose_pipeline 07-post --query dispose=pipeline
 probe l07_probe_dispose_all 07-post --query dispose=all
 
-# Lesson 8: the counts are compared, the CPU times only printed
+# Lesson 8: the counts are compared, the CPU times only printed. 800,000 triangles take minutes on a software rasterizer.
+export PROBE_TIMEOUT=240
 for mode in meshes unshared instanced batched lod; do
   probe "l08_probe_$mode" 08-performance --query "mode=$mode"
   echo "     $(grep -o '"[a-zA-Z]*Ms": [0-9.]*' "out/l08_probe_$mode.raw.txt" | tr '\n' ' ')"
@@ -119,6 +129,7 @@ for mode in meshes instanced tiles batched lod; do
   probe "l08_probe_${mode}_close" 08-performance --query "mode=$mode&view=close"
 done
 probe l08_probe_batched_webgl 08-performance --webgl --query mode=batched
+unset PROBE_TIMEOUT
 
 # The production build: one HTML page per lesson, three.js's build files in shared chunks (lessons 1 and 4). The pages of
 # lessons 1 to 4 alone, as lessons 1 and 4 show it, then every page: later lessons change how the shared chunks are split
