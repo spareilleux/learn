@@ -1,6 +1,6 @@
 ---
-title: Aprendizaje automático, aplicado en IX — Misión
-description: Aprende aprendizaje automático desde el álgebra — dividir y puntuar, regresión lineal y descenso de gradiente, clasificación, agrupamiento — escribiendo cada algoritmo a mano en Rust y luego leyendo y ejecutando el mismo algoritmo en los crates de IX, sobre el historial de CI de este sitio.
+title: "Aprendizaje automático, aplicado en IX — Misión"
+description: "Aprende aprendizaje automático desde el álgebra — dividir y puntuar, regresión, clasificación, agrupamiento, componentes principales, conjuntos, redes neuronales, optimización y lo demás — escribiendo cada algoritmo a mano en Rust y luego leyendo y ejecutando el mismo algoritmo en los crates de IX, sobre el historial de CI de este sitio."
 sidebar:
   label: Misión
   order: 0
@@ -14,7 +14,7 @@ Cada resultado de este curso lo imprime un programa de [`code/machine-learning-i
 
 [IX](https://github.com/GuitarAlchemist/ix) es un workspace de Rust con algoritmos de aprendizaje automático y de matemáticas que Claude Code puede llamar como herramientas: k-means, árboles de decisión, descenso de gradiente y unos ochenta crates más. Cuando una herramienta responde «3 clusters, silueta 0.50», quiero saber qué se calculó, si es correcto y cómo sería una respuesta mejor.
 
-Mi forma de aprender un algoritmo es escribirlo. Cada lección escribe un algoritmo en unas pocas decenas de líneas, lo ejecuta junto con la versión de IX sobre los mismos datos, y compara ambos hasta el último dígito impreso. Cuando difieren, uno de los dos está mal, y averiguar cuál es donde más aprendo: esta tanda encontró nueve puntos en los que la respuesta de IX, o su documentación, difiere del libro de texto o de scikit-learn, enumerados en el [diario](journal/).
+Mi forma de aprender un algoritmo es escribirlo. Cada lección escribe un algoritmo en unas pocas decenas de líneas, lo ejecuta junto con la versión de IX sobre los mismos datos, y compara ambos hasta el último dígito impreso. Cuando difieren, uno de los dos está mal, y averiguar cuál es donde más aprendo: eso es lo que registra el [diario](journal/), lección a lección.
 
 ## Para quién es este curso
 
@@ -39,11 +39,11 @@ Fuentes: [tareas y entrenadores de ML.NET](https://learn.microsoft.com/dotnet/ma
 Ningún conjunto de datos descargado: ambos archivos vienen de este repositorio, y [`data/extract.py`](https://github.com/spareilleux/learn/blob/15cde435d825d3c392307e7c6f9ee2e085d0e2bc/code/machine-learning-ix/data/extract.py) los reconstruye a partir del historial de CI que el [curso de DuckDB](../duckdb/) exportó el 2026-09-14 (`runs.json` y `jobs.json`) y de Git:
 
 - [`builds.csv`](https://github.com/spareilleux/learn/blob/15cde435d825d3c392307e7c6f9ee2e085d0e2bc/code/machine-learning-ix/data/builds.csv), para la regresión: los 65 builds exitosos de este sitio, en orden de commit, con el número de páginas Markdown en ese commit (de 18 a 289) y los segundos del paso que las compila (de 10 a 48). ¿Crece el tiempo de build con el número de páginas?
-- [`jobs.csv`](https://github.com/spareilleux/learn/blob/15cde435d825d3c392307e7c6f9ee2e085d0e2bc/code/machine-learning-ix/data/jobs.csv), para la clasificación y el agrupamiento: 186 jobs de CI, cada uno con cinco tiempos en segundos enteros (espera en la cola, preparación del job, checkout del repositorio, limpieza del checkout, finalización del job) y el sistema operativo del runner: 121 Ubuntu, 34 Windows, 31 macOS. ¿Pueden los tiempos decir qué sistema operativo ejecutó un job?
+- [`jobs.csv`](https://github.com/spareilleux/learn/blob/15cde435d825d3c392307e7c6f9ee2e085d0e2bc/code/machine-learning-ix/data/jobs.csv), para la clasificación, el agrupamiento y todo lo que viene después: 186 jobs de CI, cada uno con cinco tiempos en segundos enteros (espera en la cola, preparación del job, checkout del repositorio, limpieza del checkout, finalización del job) y el sistema operativo del runner: 121 Ubuntu, 34 Windows, 31 macOS. ¿Pueden los tiempos decir qué sistema operativo ejecutó un job?
 
 ## IX, fijado
 
-El curso usa cinco crates de IX: `ix-math` (estadística, escalado, división), `ix-supervised` (regresión, clasificación, métricas, validación cruzada), `ix-optimize` (descenso de gradiente), `ix-unsupervised` (k-means, DBSCAN, mezclas gaussianas) e `ix-voicings` (el coeficiente de silueta y el agrupamiento de voicings de guitarra). [`Cargo.toml`](https://github.com/spareilleux/learn/blob/15cde435d825d3c392307e7c6f9ee2e085d0e2bc/code/machine-learning-ix/Cargo.toml) los toma de Git, fijados a un commit, como describe la [referencia de Cargo](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html):
+El curso usa por ahora siete crates de IX: `ix-math` (estadística, escalado, división, cálculo), `ix-supervised` (regresión, clasificación, métricas, validación cruzada), `ix-optimize` (descenso de gradiente, recocido, enjambre de partículas), `ix-unsupervised` (k-means, DBSCAN, mezclas gaussianas, ACP), `ix-ensemble` (bosques aleatorios, gradient boosting), `ix-nn` (capas, pérdidas, atención) e `ix-voicings` (el coeficiente de silueta y el agrupamiento de voicings de guitarra). [`Cargo.toml`](https://github.com/spareilleux/learn/blob/37b8830/code/machine-learning-ix/Cargo.toml) los toma de Git, fijados a un commit, como describe la [referencia de Cargo](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html):
 
 ```toml
 ix-supervised = { git = "https://github.com/GuitarAlchemist/ix", rev = "490c39533627d296bf9f8f050e6fafc14d7a20c2" }
@@ -57,17 +57,41 @@ Cada enlace a código de IX en las lecciones apunta a ese commit, así que los n
 - ajustar una recta de dos maneras, con la forma cerrada y con descenso de gradiente, y explicar por qué el descenso diverge;
 - entrenar y comparar la regresión logística, los k vecinos más cercanos y un árbol de decisión, con validación cruzada;
 - agrupar datos sin etiquetas con k-means, DBSCAN y una mezcla gaussiana, y juzgar los grupos;
+- reducir cinco dimensiones a dos, y decir exactamente qué costó la reducción;
+- combinar modelos débiles con bagging y con boosting, y saber cuál de los dos perdona un mal ajuste;
+- derivar una red a mano y comprobar la respuesta contra diferencias finitas;
+- elegir una regla de actualización, y distinguir una ejecución que divergió de una que convergió;
 - leer un algoritmo en IX, contrastarlo con una versión escrita a mano y con scikit-learn, y describir una diferencia con precisión.
 
 ## Plan
 
-| # | Lección | Si conoces ML.NET |
-|---|---|---|
-| 1 | [Datos, características y evaluación](01-data-and-evaluation/) | `IDataView`, `TrainTestSplit`, `RegressionMetrics` |
-| 2 | [Regresión lineal y descenso de gradiente](02-linear-regression/) | `Ols`, `OnlineGradientDescent` |
-| 3 | [Clasificación: regresión logística, k vecinos más cercanos, árboles de decisión](03-classification/) | `LbfgsLogisticRegression`, `FastTree`, `CrossValidate` |
-| 4 | [Agrupamiento: k-means, DBSCAN, mezclas gaussianas](04-clustering/) | `KMeansTrainer` |
-| — | [Diario](journal/) | |
+Las lecciones 1 a 8 están escritas. El resto es el plan, una lección por familia de algoritmos que IX implementa, y cada una se publicará con su código y su comprobación cruzada como las demás.
+
+| # | Lección | Crates de IX | Si conoces ML.NET |
+|---|---|---|---|
+| 1 | [Datos, características y evaluación](01-data-and-evaluation/) | `ix-math` | `IDataView`, `TrainTestSplit`, `RegressionMetrics` |
+| 2 | [Regresión lineal y descenso de gradiente](02-linear-regression/) | `ix-supervised`, `ix-optimize` | `Ols`, `OnlineGradientDescent` |
+| 3 | [Clasificación: regresión logística, k vecinos más cercanos, árboles de decisión](03-classification/) | `ix-supervised` | `LbfgsLogisticRegression`, `FastTree`, `CrossValidate` |
+| 4 | [Agrupamiento: k-means, DBSCAN, mezclas gaussianas](04-clustering/) | `ix-unsupervised`, `ix-voicings` | `KMeansTrainer` |
+| 5 | [Componentes principales, y qué significa una razón de varianza](05-dimensionality-reduction/) | `ix-unsupervised` | `ProjectToPrincipalComponents` |
+| 6 | [Conjuntos: bagging, bosques aleatorios y gradient boosting](06-ensembles/) | `ix-ensemble` | `FastForest`, `LightGbm` |
+| 7 | [Redes neuronales, y las diferencias finitas como juez](07-neural-networks/) | `ix-nn` | — |
+| 8 | [Optimización: descenso, momento, Adam y búsquedas sin gradiente](08-optimization/) | `ix-optimize`, `ix-math` | — |
+| 9 | Los demás reductores: t-SNE, MDS, ACP con núcleo, NMF, LDA | `ix-unsupervised` | — |
+| 10 | Secuencias: cadenas de Markov, modelos ocultos de Markov y Viterbi | `ix-graph` | — |
+| 11 | Contar sin contar: filtros de Bloom, HyperLogLog, count-min, cuco | `ix-probabilistic` | — |
+| 12 | Diferenciación automática: la cinta de Wengert | `ix-autograd` | — |
+| 13 | Atención, normalización de capa y un bloque transformer | `ix-nn` | — |
+| 14 | Aprendizaje por refuerzo: bandidos y Q-learning | `ix-rl` | — |
+| 15 | Señales: la transformada de Fourier, ondículas, filtros y Kalman | `ix-signal` | — |
+| 16 | Búsqueda: A\*, búsqueda en árbol de Monte-Carlo, búsqueda local | `ix-search`, `ix-graph` | — |
+| 17 | Evolución: algoritmos genéticos, evolución diferencial, frentes de Pareto | `ix-evolution` | — |
+| 18 | Ejemplos adversarios, envenenamiento y las defensas | `ix-adversarial` | — |
+| 19 | La forma de los datos: homología persistente | `ix-topo`, `ix-manifold` | — |
+| 20 | En la GPU: productos de matrices, distancias y k vecinos más cercanos en WGSL | `ix-gpu` | — |
+| 21 | Pipelines de principio a fin, y las herramientas MCP que llama un asistente | `ix-pipeline`, `ix-agent` | `MLContext` |
+| — | [Cada crate y cada función pública](api-map/) | los 80 con superficie pública | — |
+| — | [Diario](journal/) | | |
 
 ## Recursos
 
@@ -75,4 +99,5 @@ Cada enlace a código de IX en las lecciones apunta a ese commit, así que los n
 - [Guía de usuario de scikit-learn](https://scikit-learn.org/stable/), la referencia que usa la comprobación cruzada, y su página sobre [errores comunes](https://scikit-learn.org/stable/common_pitfalls.html)
 - [Documentación de ML.NET](https://learn.microsoft.com/dotnet/machine-learning/) y [documentación de Tribuo](https://tribuo.org/)
 - *[An Introduction to Statistical Learning](https://www.statlearning.com/)*, de James, Witten, Hastie, Tibshirani y Taylor: gratuito en línea, el libro detrás de la mayoría de las fórmulas de este curso
+- *[Deep Learning](https://www.deeplearningbook.org/)*, de Goodfellow, Bengio y Courville, para las lecciones 7, 8 y 12 a 14
 - [ndarray](https://docs.rs/ndarray/0.17/ndarray/), el crate de matrices que comparten IX y este curso

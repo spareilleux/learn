@@ -14,6 +14,7 @@ Learning in public — courses written as I learn, in English, French and Spanis
 | Software Engineering › Languages & frameworks | [Java for C# developers](src/content/docs/java-for-csharp/) | in progress (lessons 1–12 of 14) |
 | Software Engineering › Languages & frameworks | [V for C#/Java developers](src/content/docs/v-for-csharp-java/) | in progress (lessons 1–8 of 12) |
 | Software Engineering › Infrastructure & tooling | [WSL containers](src/content/docs/wsl-containers/) | in progress |
+| Machine Learning | [Machine learning, as applied in IX](src/content/docs/machine-learning-ix/) | in progress (lessons 1–8 of 21, plus a generated API map) |
 | Other | [Streeling University](src/content/docs/streeling/) | 31 imported modules, journal started |
 
 Streeling modules are imported from [GuitarAlchemist/Demerzel](https://github.com/GuitarAlchemist/Demerzel) with `npm run sync:streeling` (pin a revision with `-- --ref <sha>`); the imported commit is recorded in `streeling.lock.json`.

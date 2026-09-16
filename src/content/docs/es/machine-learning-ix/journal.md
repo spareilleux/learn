@@ -1,20 +1,26 @@
 ---
-title: Diario
-description: Notas de avance fechadas — IX fijado en 490c395, los datos extraídos del CI de este sitio, el CI del código del curso, nueve puntos en los que IX difiere del libro de texto o de scikit-learn, y puntos por verificar.
+title: "Diario"
+description: "Notas de avance fechadas — IX fijado en 490c395, los datos extraídos del CI de este sitio, el CI del código del curso, diecinueve puntos en los que IX difiere del libro de texto o de scikit-learn, lo que coincidió, el mapa de API generado, y puntos por verificar."
 sidebar:
   order: 99
 ---
 
 ## Progreso
 
-- [x] IX clonado y fijado en el commit `490c395`; el código del curso depende de cinco de sus crates
+- [x] IX clonado y fijado en el commit `490c395`; el código del curso depende de siete de sus crates
 - [x] Datos: `builds.csv` y `jobs.csv`, extraídos del historial de CI y del historial de Git de este repositorio
 - [x] CI: formato, clippy, pruebas unitarias y cada ejemplo comparado con `expected/` en tres sistemas operativos, y una comprobación cruzada con numpy y scikit-learn en Linux
 - [x] Lección 1: datos, características y evaluación
 - [x] Lección 2: regresión lineal y descenso de gradiente
 - [x] Lección 3: clasificación
 - [x] Lección 4: agrupamiento
-- [ ] Traducciones al francés y al español
+- [x] Lección 5: componentes principales
+- [x] Lección 6: conjuntos
+- [x] Lección 7: redes neuronales
+- [x] Lección 8: optimización
+- [x] Apéndice: el mapa de API, generado desde el commit fijado
+- [ ] Lecciones 9 a 21
+- [x] Traducciones al francés y al español
 
 ## 2026-09-14 — IX, fijado
 
@@ -67,6 +73,50 @@ Diferencias que vale la pena conocer, que no cuento como errores:
 - `ix_io::csv_io::read_csv` convierte los campos de texto en `NaN` sin error.
 - `train_test_split` siempre baraja, y toma las etiquetas de clasificación como `f64`; no hay opción estratificada ni por orden temporal.
 
+## 2026-09-15 — Lecciones 5 a 8
+
+- Cuatro lecciones de una tanda: componentes principales, conjuntos, redes neuronales, optimización. El curso depende ahora de siete crates de IX, tras añadir `ix-ensemble` e `ix-nn` en el mismo commit fijado, y ejecuta dieciséis ejemplos en el CI.
+- La comprobación cruzada creció con ellas. La lección 5 es la primera en la que scikit-learn puede comprobar IX directa y completamente — `PCA` es determinista, no toma semilla y tiene una convención de signo documentada — así que cada número de esa lección tiene tres fuentes independientes.
+- La lección 6 introdujo un generador xorshift de 64 bits en el código del curso. IX extrae de `StdRng`, que Python no puede reproducir; tres desplazamientos y tres XOR sí se reproducen exactamente, y la comprobación con numpy cae en las mismas 48 filas que dejó fuera el mismo bootstrap. Eso cierra la brecha de la que se quejaba la nota del 2026-09-14, para los algoritmos que el curso escribe él mismo.
+- La lección 7 es la primera que usa las diferencias finitas como oráculo en lugar de scikit-learn. Cada afirmación sobre lo que calcula `ix_nn` se midió moviendo un peso y observando la pérdida, no se dedujo leyendo — lo cual resultó importar, porque dos de los tres hallazgos se desvían por un factor que nadie adivinaría leyendo el código.
+- La lección 8 no encontró nada malo en las reglas de actualización de `ix_optimize`: SGD, Momentum y Adam igualan a las versiones a mano paso a paso y aterrizan en los mismos puntos. El hallazgo allí es sobre el tipo de resultado de `minimize`, no sobre su aritmética.
+
+## 2026-09-15 — Donde IX difiere, continuación
+
+Diez puntos más en los que la respuesta de IX, o su documentación, difiere del libro de texto o de scikit-learn, cada uno mostrado por código compilado en el curso. Con los nueve del 2026-09-14 son diecinueve. Ninguno está registrado como issue de IX.
+
+10. **La razón de varianza explicada está normalizada sobre las componentes retenidas.** `explained_variance_ratio` divide cada valor propio por la suma de los valores propios *retenidos* ([`pca.rs`, líneas 46-57](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-unsupervised/src/pca.rs#L46-L57)), así que las razones suman 1 para cualquier `n_components` y el «proportion of total variance» del comentario de documentación solo se cumple si se guardan todas las componentes. Sobre los jobs estandarizados, `PCA::new(2)` informa de `[0.5635, 0.4365]` donde la verdad, y scikit-learn, dicen `[0.3867, 0.2996]`, con suma 0.6863. La pregunta habitual «¿cuántas componentes para el 90 %?» no se le puede hacer.
+11. **La iteración de potencia parte de un vector fijo y puede devolver el eje menor.** El inicio es `(1, …, 1)/√n` ([`pca.rs`, línea 107](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-unsupervised/src/pca.rs#L107)). En una nube de seis puntos estirada a lo largo de `(1, -1)`, cuya covarianza es `[[2.4, -1.6], [-1.6, 2.4]]`, ese inicio *es* el vector propio menor, así que `PCA::new(1)` devuelve varianza 0.8 a lo largo de `(1, 1)` en lugar de 4.0 a lo largo de `(1, -1)`. `PCA::new(2)` es peor: la deflación deja una matriz que envía el inicio a cero, salta la protección `norm < 1e-15`, y el modelo acaba con la misma componente dos veces y una varianza de 0. La SVD de scikit-learn devuelve 4.0 y `(0.7071, -0.7071)`. Un caso al filo de la navaja — necesita varianzas exactamente iguales — pero nada en la salida dice en qué caso estás.
+12. **Las varianzas son inalcanzables.** `PCA::explained_variance` es un campo privado, y `explained_variance_ratio()` está normalizado como en el hallazgo 10, así que `save_state()` es la única forma de sacar los valores propios de un modelo ajustado.
+13. **Un bosque aleatorio sortea sus variables una vez por árbol, no una vez por división.** El comentario de documentación promete «random feature subsets (sqrt(n_features) features per split)»; el código las sortea antes de hacer crecer el árbol y construye todo el árbol con esas columnas ([`random_forest.rs`, líneas 68-84](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-ensemble/src/random_forest.rs#L68-L84)). Con el valor por defecto de tres variables de cinco ambos coinciden, llegando los dos a 0.9211 en los jobs de prueba; con `max_features = 1` la versión a mano, que sortea en cada división, llega a 0.9474 e IX a 0.7632, porque cincuenta árboles unidimensionales no pueden combinar variables.
+14. **Un empate en el voto del bosque va al mayor índice de clase.** `predict` usa `max_by`, que se queda con el último máximo ([`random_forest.rs`, línea 97](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-ensemble/src/random_forest.rs#L97)). Dos tocones con la semilla 6 dan probabilidades `[0.500, 0.500]`, e IX responde la clase 1 donde scikit-learn y `np.argmax` responden 0. La misma forma que el hallazgo 3 sobre `KNN::predict`.
+15. **`Dense::backward` divide dos veces por el tamaño del lote.** `grad_output` ya lleva el `1/n` que puso ahí `mse_gradient`, y `backward` vuelve a dividir por `n` ([`layer.rs`, líneas 40-52](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-nn/src/layer.rs#L40-L52)). Medido contra el gradiente por diferencias centradas de `mse_loss` sobre las 65 compilaciones, la razón es 65.0000 exactamente. El entrenamiento converge igualmente, ya que cada capa divide por el mismo `n`, pero la tasa de aprendizaje que pasas es la tasa de aprendizaje dividida por el tamaño del lote.
+16. **`mse_gradient` no es el gradiente de `mse_loss` más allá de una columna de salida.** `mse_loss` promedia sobre filas y columnas, `mse_gradient` divide solo por las filas ([`loss.rs`, líneas 6-16](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-nn/src/loss.rs#L6-L16)). Medido de una a cuatro columnas, la razón es 1, 2, 3, 4. Combinado con el hallazgo 15, una capa de dos salidas sobre 65 filas se mueve por el gradiente verdadero dividido por 32.5.
+17. **`Dense::new` no toma semilla.** Extrae del generador del hilo ([`layer.rs`, línea 27](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-nn/src/layer.rs#L27)), así que dos capas construidas en la misma ejecución ya difieren y ningún resultado de `Sequential` puede reproducirse ni someterse a pruebas de regresión. Todos los demás algoritmos aleatorios de IX toman una — `KMeans`, `RandomForest`, `Dropout`, `transformer::FeedForward`. Los campos `weights` y `bias` son públicos, que es la salida y lo que hace el curso.
+18. **Un `Sequential` de capas `Dense` es una sola aplicación afín.** `Dense` es el único tipo que implementa el trait `Layer`: `ix-nn` no tiene capa de activación que `Sequential::push` pudiera aceptar entre dos aplicaciones afines. En el o exclusivo, dos capas `Dense` convergen a una pérdida de 0.25 — la varianza de los objetivos, lo mejor que puede hacer una constante — y predicen 0.5 en las cuatro esquinas, mientras que la red a mano del mismo tamaño con una sigmoide entre sus capas llega a 0. Tras 50 000 épocas la pila sigue satisfaciendo `f(0,0) + f(1,1) - f(0,1) - f(1,0) = 0` hasta el último bit: no está poco entrenada, no puede representar la función. Las no linealidades reales del crate viven en `transformer::gelu`, dentro de `FeedForward`, que trabaja sobre `Array3` y no es un `Layer`.
+19. **`minimize` devuelve el punto de partida para una ejecución que divergió.** Recuerda el mejor punto por el que ha pasado y devuelve ese ([`gradient.rs`, líneas 124-165](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-optimize/src/gradient.rs#L124-L165)). El descenso simple a tasa 0.01 sobre Rosenbrock se va a NaN en sus primeros pasos; el resultado informa de `best f 24.200000`, que es `f` en el punto que pasó el llamante, con `converged: false` — la misma bandera que recibe una ejecución perfectamente buena que simplemente agotó sus iteraciones. Ni `best_value` ni `converged` separan ambos casos.
+
+Diferencias que vale la pena conocer, que no cuento como errores:
+
+- `RegressionStump` pone la media de los residuos en cada hoja, donde la receta de Friedman y scikit-learn usan un paso de Newton. Es una simplificación defendible, y la versión a mano la copia para que ambas se puedan comparar; con ella, IX y la versión a mano coinciden en cada una de las 38 filas de prueba con 1, 5, 10, 25 y 50 rondas.
+- `GradientBoostedClassifier` no tiene parada temprana ni puntuación sobre un conjunto reservado. En los jobs alcanza un máximo de 0.9474 tras cinco rondas y se asienta en 0.9211 hacia las veinticinco, y nada en la API lo mide.
+- `ix-ensemble` no tiene puntuación out-of-bag, que el bagging regala y scikit-learn expone como `oob_score=True`.
+- `ClosureObjective` nunca redefine `ObjectiveFunction::gradient`, así que envolver una closure compra en silencio un gradiente medido a costa de dos evaluaciones extra por coordenada y por paso — 1001 evaluaciones frente a 201 para 200 pasos de Adam en dos dimensiones. Sobre un objetivo suave no cuesta nada en precisión: ambas ejecuciones terminaron en `1.061e-16`.
+
+## 2026-09-15 — Lo que coincidió
+
+Merece anotarse junto a los hallazgos, porque las lecciones hasta ahora han encontrado sobre todo lo contrario:
+
+- SGD, Momentum y Adam de `ix_optimize` igualan exactamente a las versiones a mano — mismos recuentos de pasos (5000, 4129, 2822), mismos puntos finales, mismo primer paso desde el mismo gradiente.
+- `GradientBoostedClassifier` iguala a la versión a mano en cada fila de prueba con cualquier número de rondas, y numpy reproduce las mismas exactitudes, los mismos log-priores suavizados y los mismos tocones de la primera ronda.
+- Las cinco varianzas de `PCA` coinciden con las de Jacobi hasta `1.28e-10` y con las de scikit-learn hasta los dígitos impresos; solo la razón y el vector inicial fijo están en cuestión.
+
+## 2026-09-15 — El mapa de API
+
+- El plan promete una lección por familia de algoritmos, lo que aún dejará intacta la mayor parte del workspace. [`scripts/sync-ix-api-map.mjs`](https://github.com/spareilleux/learn/blob/main/scripts/sync-ix-api-map.mjs) llena el hueco por el otro lado: un solo `git grep` sobre el commit fijado, y una página generada por idioma que lista cada declaración `pub` bajo `crates/*/src/`, crate a crate y módulo a módulo. 80 crates, 3398 declaraciones, de las cuales 2307 son funciones.
+- Está generada, nunca escrita a mano, y `npm run sync:ix-api-map` la reconstruye — así que no puede alejarse del commit fijado, que es lo que suele pudrir una página así. La revisión se lee del `Cargo.toml` del curso en vez de escribirse dos veces.
+- Cuenta lo que dice el código fuente, no lo que un llamante puede alcanzar: un `pub` dentro de un módulo privado aparece listado y es invisible desde fuera del crate. El hallazgo 12 — un campo privado que deja la razón inservible — es exactamente el tipo de cosa que la página no puede contarte, y las lecciones sí.
+
 ## Por verificar
 
 - La herramienta `ix_ml_pipeline` de principio a fin: el orden del escalado del hallazgo 1, la inferencia de tarea del hallazgo 2 sobre un archivo CSV, y el error `All rows contain NaN values` para un archivo con una columna de texto. Los tres están leídos en el código, no ejecutados.
@@ -76,3 +126,8 @@ Diferencias que vale la pena conocer, que no cuento como errores:
 - La causa del build de 48 segundos de `95a3830`.
 - Si los hallazgos 1 a 9 ya se conocen en el proyecto original: no he buscado en los issues de IX.
 - Los ejemplos en runners Linux ARM: el CI solo cubre `ubuntu-latest` (x64), `windows-latest` y `macos-latest` (ARM).
+- Si `PCA` devuelve alguna vez varianzas sin ordenar con datos reales, y no con la nube construida del hallazgo 11.
+- Si un `Sequential` más profundo que dos capas `Dense` se usa en algún sitio de IX, donde mordería el hallazgo 18.
+- `ix-autograd`: su cinta es el crate que debería hacer innecesario el hallazgo 15, y la lección 12 lo medirá.
+- Si los hallazgos 10 a 19 ya se conocen en el proyecto original: sigo sin buscar en los issues de IX.
+- El mapa de API cuenta declaraciones `pub`, no las alcanzables; cuánto se separan ambos números está sin medir.
