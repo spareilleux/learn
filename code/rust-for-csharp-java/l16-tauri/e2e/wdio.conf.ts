@@ -15,16 +15,20 @@ const binary = path.join(
 );
 let app: ChildProcess | undefined;
 
-async function serverReady() {
-  for (let attempt = 0; attempt < 100; attempt++) {
+async function serverReady(timeoutMs = 60_000) {
+  const deadline = Date.now() + timeoutMs;
+  while (Date.now() < deadline) {
+    if (app?.exitCode !== null && app?.exitCode !== undefined) {
+      throw new Error(`the app exited with code ${app.exitCode} before its WebDriver server started`);
+    }
     try {
       if ((await fetch(`http://127.0.0.1:${port}/status`)).ok) return;
     } catch {
-      // not listening yet
+      // not listening yet: a CI runner can take tens of seconds to start the webview
     }
-    await new Promise((resolve) => setTimeout(resolve, 200));
+    await new Promise((resolve) => setTimeout(resolve, 250));
   }
-  throw new Error(`no WebDriver server on port ${port}: was the app built with --features webdriver?`);
+  throw new Error(`no WebDriver server on port ${port} after ${timeoutMs} ms: was the app built with --features webdriver?`);
 }
 
 export const config: WebdriverIO.Config = {
@@ -41,8 +45,10 @@ export const config: WebdriverIO.Config = {
   mochaOpts: { timeout: 60000 },
 
   async onPrepare() {
+    const started = Date.now();
     app = spawn(binary, [], { env: { ...process.env, TAURI_WEBDRIVER_PORT: String(port) }, stdio: "inherit" });
     await serverReady();
+    console.log(`WebDriver server ready after ${Date.now() - started} ms`);
   },
   onComplete() {
     app?.kill();

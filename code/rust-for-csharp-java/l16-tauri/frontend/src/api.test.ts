@@ -12,7 +12,7 @@ test("spellChord sends the symbol and returns the command's value", async () => 
   const calls: [string, unknown][] = [];
   mockIPC((cmd, args) => {
     calls.push([cmd, args]);
-    return { symbol: "Am7", qualityName: "minor seventh", notes: ["A", "C", "E", "G"], intervals: ["P1", "m3", "P5", "m7"] };
+    return { symbol: "Am7", qualityName: "minor seventh", notes: ["A", "C", "E", "G"], intervals: ["1", "b3", "5", "b7"] };
   });
 
   const chord = await api.spellChord("Am7");

@@ -124,9 +124,17 @@ jobs:
         run: npm run web:build && npm test
       # Lesson 21: the release binary with its embedded WebDriver server, driven by WebdriverIO
       - name: End-to-end tests
+        env:
+          # No accessibility bus on the runner (same settings as WebdriverIO's own Tauri CI)
+          NO_AT_BRIDGE: '1'
+          RUST_BACKTRACE: '1'
         run: |
           npm run build:e2e
-          if [ "$RUNNER_OS" = Linux ]; then xvfb-run -a npm run test:e2e; else npm run test:e2e; fi
+          if [ "$RUNNER_OS" = Linux ]; then
+            xvfb-run --auto-servernum --server-args="-screen 0 1280x1024x24" npm run test:e2e
+          else
+            npm run test:e2e
+          fi
       - name: Installers (MSI and NSIS, deb, rpm and AppImage, app and dmg)
         run: |
           npm run build:vite
