@@ -1,0 +1,32 @@
+# F#: run every script, exercise solution and F# Interactive session, compile every rejected snippet,
+# and build the lesson projects, on three OSes, and compare the outputs with the expected files
+name: F# examples
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['code/fsharp/**', '.github/workflows/fsharp-examples.yml']
+  pull_request:
+    paths: ['code/fsharp/**', '.github/workflows/fsharp-examples.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  fsharp:
+    name: fsharp (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: code/fsharp/global.json
+      - run: bash code/fsharp/check.sh
