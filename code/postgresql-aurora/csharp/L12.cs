@@ -74,9 +74,11 @@ static class L12
         {
             await query.ExecuteScalarAsync();
         }
-        catch (NpgsqlException e)
+        catch (NpgsqlException)
         {
-            Console.WriteLine($"open connection: {e.GetType().Name}: {e.Message}");
+            // The exception depends on the machine: a PostgresException 57P01 on Linux in CI, "Exception while reading
+            // from stream" through Docker Desktop on Windows. The connection's state is the same on both
+            Console.WriteLine($"open connection: the query fails, FullState = {open.FullState}");
         }
         Console.WriteLine($"no primary: {await Write(writer)}");
 
