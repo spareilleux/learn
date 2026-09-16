@@ -1,0 +1,57 @@
+# Python course: type-check the examples, solutions and tests with mypy, run them with Python 3.14.7 on three OSes,
+# check each error snippet with mypy and run it, run the scripts and the tests, compare every output, and run the
+# C# and Java sides of the comparisons
+name: Python course examples
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['code/python-for-csharp-java/**', '.github/workflows/python-examples.yml']
+  pull_request:
+    paths: ['code/python-for-csharp-java/**', '.github/workflows/python-examples.yml']
+
+permissions:
+  contents: read
+
+env:
+  UV_VERSION: 0.12.14
+
+jobs:
+  python:
+    name: python (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+        working-directory: code/python-for-csharp-java
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10
+        with:
+          version: ${{ env.UV_VERSION }}
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: '10.0.x'
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '25'
+      # uv reads .python-version and downloads Python 3.14.7, then installs mypy and pytest from uv.lock
+      - name: Install Python 3.14.7 and the locked dependencies
+        run: uv sync --locked
+      # Lesson 1 shows these: the interpreter that uv installed, for this OS
+      - name: Lesson 1, the interpreter for this OS, for information
+        run: |
+          uv --version
+          uv python find
+          uv run python -c "import platform, sys; print(sys.version); print(platform.system(), platform.machine())"
+          dotnet --version && java --version
+      - name: Examples, errors, solutions, tests and comparisons
+        env:
+          REQUIRE_COMPARE: '1'
+        run: bash check.sh
