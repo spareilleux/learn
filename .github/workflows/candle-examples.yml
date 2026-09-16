@@ -1,0 +1,49 @@
+# Candle course: build the examples against candle-core and candle-nn 0.11.0 on the CPU, run them on three OSes
+# and compare their output with expected/; on Linux, also check the error codes of the compile_fail doctests
+name: Candle course examples
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['code/candle/**', '.github/workflows/candle-examples.yml']
+  pull_request:
+    paths: ['code/candle/**', '.github/workflows/candle-examples.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  rust:
+    name: rust (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7
+      - name: Toolchain
+        run: rustup show active-toolchain && cargo --version
+      # The registry, the IX git checkout and the compiled dependencies, keyed on the lock file
+      - uses: actions/cache@v6
+        with:
+          path: |
+            ~/.cargo/registry/index
+            ~/.cargo/registry/cache
+            ~/.cargo/git/db
+            code/candle/target
+          key: candle-${{ runner.os }}-${{ hashFiles('code/candle/Cargo.lock') }}
+          restore-keys: candle-${{ runner.os }}-
+      - name: Formatting, clippy, tests and examples
+        run: bash code/candle/check.sh
+      # Stable rustdoc only checks that a compile_fail snippet fails; nightly also checks its E0xxx code
+      - name: Compile-fail error codes (nightly)
+        if: runner.os == 'Linux'
+        working-directory: code/candle
+        run: |
+          rustup toolchain install nightly --profile minimal
+          cargo +nightly test --doc -j 4
