@@ -3,6 +3,12 @@
 import { $, expect } from "@wdio/globals";
 
 describe("chord explorer", () => {
+  // The WebDriver server can answer before the page's script has run: wait for the
+  // qualities list, which the page fills from Rust once its handlers are in place
+  before(async () => {
+    await expect($("#qualities")).toHaveText(expect.stringContaining("Qualities:"));
+  });
+
   it("spells the chord typed in the form", async () => {
     await $("#chord-input").setValue("Am7");
     await $("#chord-form button[type=submit]").click();
