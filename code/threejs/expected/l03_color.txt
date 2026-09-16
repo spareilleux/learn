@@ -1,0 +1,14 @@
+working color space: srgb-linear
+Color(0x4a2c1d) stores [ 0.0685, 0.0252, 0.0123 ]
+getHexString() 4a2c1d | getHexString(LinearSRGBColorSpace) 110603
+setRGB(0.5, 0.5, 0.5).getHexString() bcbcbc
+setRGB(0.5, 0.5, 0.5, SRGBColorSpace) stores [ 0.214, 0.214, 0.214 ]
+new Texture().colorSpace: ""
+HDRLoader.parse: {
+  width: 256,
+  height: 128,
+  type: 'HalfFloatType',
+  values: 'Uint16Array'
+}
+a wall texel (0, 20): [ 0.4038, 0.4038, 0.4451 ] | a softbox texel (64, 32): [ 19.9375, 19.9375, 18.9375 ]
+exit 0

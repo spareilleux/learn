@@ -1,0 +1,50 @@
+# three.js course: type-check the scenes and scripts, generate the HDR environment and the glTF models, open every
+# lesson page in headless Chromium, build the pages with Vite, and compare every output with the ones pasted in the
+# lessons, on three OSes. The runners have no GPU: check.sh prints the backend that WebGPURenderer picks on each.
+name: three.js course examples
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['code/threejs/**', '.github/workflows/threejs-examples.yml']
+  pull_request:
+    paths: ['code/threejs/**', '.github/workflows/threejs-examples.yml']
+
+permissions:
+  contents: read
+
+env:
+  NODE_VERSION: 24.21.0
+
+jobs:
+  threejs:
+    name: threejs (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+        working-directory: code/threejs
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Install the pinned three.js, Vite, TypeScript, glTF Transform and Playwright
+        run: npm ci
+      # On Linux, --with-deps also installs the system libraries that Chromium needs
+      - name: Chromium for Playwright
+        run: npx playwright install ${{ runner.os == 'Linux' && '--with-deps' || '' }} chromium chromium-headless-shell
+      - name: Types, scripts, headless probes and build
+        run: bash check.sh
+      - name: Screenshots
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: threejs-shots-${{ matrix.os }}
+          path: code/threejs/out/shots/
+          if-no-files-found: ignore

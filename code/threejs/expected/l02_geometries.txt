@@ -1,0 +1,10 @@
+BoxGeometry(1, 1, 1)                       position 24×3, normal 24×3, uv 24×2; index 36; triangles 12; groups 6
+PlaneGeometry(8, 8)                        position 4×3, normal 4×3, uv 4×2; index 6; triangles 2; groups 0
+CircleGeometry(0.06, 32)                   position 34×3, normal 34×3, uv 34×2; index 96; triangles 32; groups 0
+CylinderGeometry(0.012, 0.012, 0.55, 12)   position 76×3, normal 76×3, uv 76×2; index 144; triangles 48; groups 3
+SphereGeometry(1, 32, 16)                  position 561×3, normal 561×3, uv 561×2; index 2880; triangles 960; groups 0
+normals at the corner (0.5, 0.5, 0.5): (1, 0, 0) (0, 1, 0) (0, 0, 1)
+MeshStandardMaterial: { color: 'ffffff', roughness: 1, metalness: 0 }
+MeshPhysicalMaterial: { ior: 1.5, reflectivity: 0.5, clearcoat: 0, transmission: 0 }
+PointLight with power 800 lm: { intensity: 63.66, decay: 2, distance: 0 }
+exit 0

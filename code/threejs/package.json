@@ -1,0 +1,33 @@
+{
+  "name": "threejs",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Examples of the course three.js for C#/Java developers: scenes served by Vite, checked with tsc, measured in headless Chromium by Playwright and compared with expected/ by check.sh",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "probe": "node scripts/probe.mjs",
+    "check": "bash check.sh"
+  },
+  "dependencies": {
+    "three": "0.186.0"
+  },
+  "devDependencies": {
+    "@gltf-transform/core": "4.5.0",
+    "@gltf-transform/extensions": "4.5.0",
+    "@gltf-transform/functions": "4.5.0",
+    "@types/node": "24.13.4",
+    "@types/pngjs": "6.0.5",
+    "@types/three": "0.186.0",
+    "draco3dgltf": "1.5.7",
+    "meshoptimizer": "1.2.0",
+    "playwright": "1.63.0",
+    "pngjs": "7.0.0",
+    "typescript": "7.0.2",
+    "vite": "8.3.0"
+  }
+}

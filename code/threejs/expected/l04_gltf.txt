@@ -1,0 +1,17 @@
+Group "metronome"
+  Object3D "metronome_1"
+    Mesh "body" — 48 vertices, MeshStandardMaterial "walnut"
+    Object3D "arm"
+      Mesh "rod" — 24 vertices, MeshStandardMaterial "brass"
+      Mesh "weight" — 1225 vertices, MeshStandardMaterial "brass"
+asset: { generator: 'glTF-Transform v4.5.0', version: '2.0' }
+clip "swing": 1 s, tracks arm.quaternion (5 keys, QuaternionKeyframeTrack)
+t = 0.000 s: arm at 0°
+t = 0.125 s: arm at 12.5°
+t = 0.250 s: arm at 25°
+t = 0.500 s: arm at 0°
+t = 0.750 s: arm at -25°
+t = 1.250 s: arm at 25°
+timeScale 2, then 0.125 s more: t = 0.500 s in the clip, arm at 0°
+meshopt weight position: Int16Array normalized true scale [ 0.09, 0.09, 0.09 ]
+exit 0

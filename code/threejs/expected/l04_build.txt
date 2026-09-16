@@ -1,0 +1,36 @@
+vite v8.3.0 building client environment for production...
+transforming...
+✓ 25 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/01-scene.html                             0.61 kB │ gzip:   0.31 kB
+dist/03-color.html                             0.61 kB │ gzip:   0.31 kB
+dist/02-materials-lights.html                  0.62 kB │ gzip:   0.32 kB
+dist/01-scene-webgl.html                       0.63 kB │ gzip:   0.32 kB
+dist/04-gltf.html                              0.68 kB │ gzip:   0.33 kB
+dist/03-environment.html                       0.69 kB │ gzip:   0.33 kB
+dist/assets/draco_wasm_wrapper-fZCQGLGb.js    58.45 kB
+dist/assets/draco_wasm_wrapper-DxJM36Ib.js    58.76 kB
+dist/assets/draco_decoder-Z1_iN-Ht.wasm      192.42 kB │ gzip:  64.11 kB
+dist/assets/draco_decoder-C32yEggz.wasm      285.74 kB │ gzip:  89.66 kB
+dist/assets/draco_decoder-fzg4nYZr.js        719.41 kB
+dist/assets/probe-CaeimIHR.css                 0.08 kB │ gzip:   0.10 kB
+dist/assets/01-scene-webgl-DfbvMi7_.js         1.03 kB │ gzip:   0.57 kB
+dist/assets/01-scene-D8e_GnG0.js               1.10 kB │ gzip:   0.62 kB
+dist/assets/probe-D1KLi2XJ.js                  1.14 kB │ gzip:   0.63 kB
+dist/assets/03-environment-Do8TcMTN.js         1.26 kB │ gzip:   0.73 kB
+dist/assets/03-color-fsryco1-.js               1.59 kB │ gzip:   0.90 kB
+dist/assets/02-materials-lights-CHyuJL86.js    1.92 kB │ gzip:   1.03 kB
+dist/assets/HDRLoader-B8sbSdVl.js              3.28 kB │ gzip:   1.56 kB
+dist/assets/04-gltf-CLMatag-.js               80.55 kB │ gzip:  24.12 kB
+dist/assets/three.core-p_ik4R10.js           249.85 kB │ gzip:  64.99 kB
+dist/assets/three.module-CFLRzNqX.js         352.34 kB │ gzip:  84.70 kB
+dist/assets/three.webgpu-DyXHSfxk.js         581.15 kB │ gzip: 162.14 kB
+
+✓ built in N ms
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+exit 0
