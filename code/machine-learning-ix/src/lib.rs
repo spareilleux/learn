@@ -48,8 +48,38 @@ pub fn pick<T: Clone>(y: &Array1<T>, indices: &[usize]) -> Array1<T> {
     indices.iter().map(|&i| y[i].clone()).collect()
 }
 
-/// `[1.000, 2.500]`: fixed decimals, so the outputs don't depend on how each OS prints the last digits
+/// `[1.000, 2.500]`: fixed decimals, so the outputs don't depend on how each OS prints the last digits.
+///
+/// A value that rounds to zero prints as `0.000`, never `-0.000`. The sign of a zero is not a result:
+/// the exclusive-or network of lesson 7 lands on `-0.0` on macOS and `0.0` on Windows and Linux, from
+/// the same arithmetic in a different order, and both mean the same number.
 pub fn fmt_vec(v: impl IntoIterator<Item = f64>, decimals: usize) -> String {
-    let parts: Vec<String> = v.into_iter().map(|x| format!("{x:.decimals$}")).collect();
+    let parts: Vec<String> = v
+        .into_iter()
+        .map(|x| {
+            let printed = format!("{x:.decimals$}");
+            match printed.strip_prefix('-') {
+                Some(without_sign) if without_sign.chars().all(|c| c == '0' || c == '.') => {
+                    without_sign.to_string()
+                }
+                _ => printed,
+            }
+        })
+        .collect();
     format!("[{}]", parts.join(", "))
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn a_zero_never_prints_with_a_minus_sign() {
+        // -0.0 and a value too small to show are the same number as 0.0 at this precision,
+        // and which of the two an optimizer lands on differs between macOS and Windows.
+        assert_eq!(fmt_vec([-0.0, 0.0], 4), "[0.0000, 0.0000]");
+        assert_eq!(fmt_vec([-1e-9, 1e-9], 4), "[0.0000, 0.0000]");
+        // every other sign survives
+        assert_eq!(fmt_vec([-0.5, -0.00006], 4), "[-0.5000, -0.0001]");
+    }
 }
