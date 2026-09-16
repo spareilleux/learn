@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pnml xmlns="http://www.pnml.org/version-2009/grammar/pnml">
+  <net id="n1" type="http://www.pnml.org/version-2009/grammar/ptnet">
+    <name>
+      <text>two-locks</text>
+    </name>
+    <page id="page1">
+      <place id="a_idle">
+        <name>
+          <text>a_idle</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="a_has_x">
+        <name>
+          <text>a_has_x</text>
+        </name>
+      </place>
+      <place id="b_idle">
+        <name>
+          <text>b_idle</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="b_has_y">
+        <name>
+          <text>b_has_y</text>
+        </name>
+      </place>
+      <place id="x">
+        <name>
+          <text>x</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="y">
+        <name>
+          <text>y</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <transition id="a_take_x">
+        <name>
+          <text>a_take_x</text>
+        </name>
+      </transition>
+      <transition id="a_take_y">
+        <name>
+          <text>a_take_y</text>
+        </name>
+      </transition>
+      <transition id="b_take_y">
+        <name>
+          <text>b_take_y</text>
+        </name>
+      </transition>
+      <transition id="b_take_x">
+        <name>
+          <text>b_take_x</text>
+        </name>
+      </transition>
+      <arc id="a1" source="a_idle" target="a_take_x" />
+      <arc id="a2" source="x" target="a_take_x" />
+      <arc id="a3" source="a_take_x" target="a_has_x" />
+      <arc id="a4" source="a_has_x" target="a_take_y" />
+      <arc id="a5" source="y" target="a_take_y" />
+      <arc id="a6" source="a_take_y" target="a_idle" />
+      <arc id="a7" source="a_take_y" target="x" />
+      <arc id="a8" source="a_take_y" target="y" />
+      <arc id="a9" source="b_idle" target="b_take_y" />
+      <arc id="a10" source="y" target="b_take_y" />
+      <arc id="a11" source="b_take_y" target="b_has_y" />
+      <arc id="a12" source="b_has_y" target="b_take_x" />
+      <arc id="a13" source="x" target="b_take_x" />
+      <arc id="a14" source="b_take_x" target="b_idle" />
+      <arc id="a15" source="b_take_x" target="x" />
+      <arc id="a16" source="b_take_x" target="y" />
+    </page>
+  </net>
+</pnml>

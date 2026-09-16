@@ -160,6 +160,18 @@ export default defineConfig({
 							],
 						},
 						{
+							label: 'Modeling & formal methods',
+							translations: { fr: 'Modélisation et méthodes formelles', es: 'Modelado y métodos formales' },
+							items: [
+								{
+									label: 'Petri nets and what they are good for',
+									translations: { fr: 'Réseaux de Petri et à quoi ils servent', es: 'Redes de Petri y para qué sirven' },
+									collapsed: true,
+									items: [{ autogenerate: { directory: 'petri-nets' } }],
+								},
+							],
+						},
+						{
 							label: 'AI-assisted development',
 							translations: { fr: 'Développement assisté par IA', es: 'Desarrollo asistido por IA' },
 							items: [

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pnml xmlns="http://www.pnml.org/version-2009/grammar/pnml">
+  <net id="n1" type="http://www.pnml.org/version-2009/grammar/ptnet">
+    <name>
+      <text>handshake</text>
+    </name>
+    <page id="page1">
+      <place id="request">
+        <name>
+          <text>request</text>
+        </name>
+      </place>
+      <place id="response">
+        <name>
+          <text>response</text>
+        </name>
+      </place>
+      <place id="served">
+        <name>
+          <text>served</text>
+        </name>
+      </place>
+      <transition id="receive">
+        <name>
+          <text>receive</text>
+        </name>
+      </transition>
+      <transition id="reply">
+        <name>
+          <text>reply</text>
+        </name>
+      </transition>
+      <arc id="a1" source="request" target="receive" />
+      <arc id="a2" source="receive" target="response" />
+      <arc id="a3" source="receive" target="served" />
+      <arc id="a4" source="response" target="reply" />
+      <arc id="a5" source="reply" target="request" />
+    </page>
+  </net>
+</pnml>

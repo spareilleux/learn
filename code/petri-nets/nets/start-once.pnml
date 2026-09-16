@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pnml xmlns="http://www.pnml.org/version-2009/grammar/pnml">
+  <net id="n1" type="http://www.pnml.org/version-2009/grammar/ptnet">
+    <name>
+      <text>start-once</text>
+    </name>
+    <page id="page1">
+      <place id="stopped">
+        <name>
+          <text>stopped</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="running">
+        <name>
+          <text>running</text>
+        </name>
+      </place>
+      <place id="serving">
+        <name>
+          <text>serving</text>
+        </name>
+      </place>
+      <transition id="start">
+        <name>
+          <text>start</text>
+        </name>
+      </transition>
+      <transition id="accept">
+        <name>
+          <text>accept</text>
+        </name>
+      </transition>
+      <transition id="finish">
+        <name>
+          <text>finish</text>
+        </name>
+      </transition>
+      <arc id="a1" source="stopped" target="start" />
+      <arc id="a2" source="start" target="running" />
+      <arc id="a3" source="running" target="accept" />
+      <arc id="a4" source="accept" target="serving" />
+      <arc id="a5" source="serving" target="finish" />
+      <arc id="a6" source="finish" target="running" />
+    </page>
+  </net>
+</pnml>

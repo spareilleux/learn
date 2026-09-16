@@ -1,0 +1,98 @@
+
+== The net ==
+net producer-consumer
+places      ready produced free full waiting taken
+transitions produce deposit take consume
+M0          (1, 0, 2, 0, 1, 0) = ready:1 free:2 waiting:1
+arc         ready -> produce
+arc         produce -> produced
+arc         produced -> deposit
+arc         free -> deposit
+arc         deposit -> full
+arc         deposit -> ready
+arc         full -> take
+arc         waiting -> take
+arc         take -> taken
+arc         take -> free
+arc         taken -> consume
+arc         consume -> waiting
+
+== The same net as a diagram ==
+flowchart LR
+    ready(("ready<br/>●"))
+    produced(("produced"))
+    free(("free<br/>● ●"))
+    full(("full"))
+    waiting(("waiting<br/>●"))
+    taken(("taken"))
+    produce["produce"]
+    deposit["deposit"]
+    take["take"]
+    consume["consume"]
+    ready --> produce
+    produce --> produced
+    produced --> deposit
+    free --> deposit
+    deposit --> full
+    deposit --> ready
+    full --> take
+    waiting --> take
+    take --> taken
+    take --> free
+    taken --> consume
+    consume --> waiting
+
+== Enabled at the initial marking ==
+produce
+
+== One round trip: produce, deposit, take, consume ==
+          (1, 0, 2, 0, 1, 0)  ready:1 free:2 waiting:1
+produce   (0, 1, 2, 0, 1, 0)  produced:1 free:2 waiting:1
+deposit   (1, 0, 1, 1, 1, 0)  ready:1 free:1 full:1 waiting:1
+take      (1, 0, 2, 0, 0, 1)  ready:1 free:2 taken:1
+consume   (1, 0, 2, 0, 1, 0)  ready:1 free:2 waiting:1
+
+== Filling the buffer: the producer is stopped by the empty place free ==
+          (1, 0, 2, 0, 1, 0)  ready:1 free:2 waiting:1
+produce   (0, 1, 2, 0, 1, 0)  produced:1 free:2 waiting:1
+deposit   (1, 0, 1, 1, 1, 0)  ready:1 free:1 full:1 waiting:1
+produce   (0, 1, 1, 1, 1, 0)  produced:1 free:1 full:1 waiting:1
+deposit   (1, 0, 0, 2, 1, 0)  ready:1 full:2 waiting:1
+enabled now: produce take
+after produce: (0, 1, 0, 2, 1, 0) produced:1 full:2 waiting:1
+enabled now: take
+deposit enabled: False  (free holds 0 tokens)
+
+== Concurrency: produce and take do not compete, and the order does not matter ==
+from (1, 0, 1, 1, 1, 0) ready:1 free:1 full:1 waiting:1
+produce then take: (0, 1, 2, 0, 0, 1)
+take then produce: (0, 1, 2, 0, 0, 1)
+same marking: True
+
+== A state machine would need one state per combination ==
+markings of this net: 12
+tokens in the net: 4
+
+== Exercise 2: two threads and one lock, as a diagram ==
+flowchart LR
+    idle1(("idle1<br/>●"))
+    critical1(("critical1"))
+    idle2(("idle2<br/>●"))
+    critical2(("critical2"))
+    mutex(("mutex<br/>●"))
+    enter1["enter1"]
+    leave1["leave1"]
+    enter2["enter2"]
+    leave2["leave2"]
+    idle1 --> enter1
+    mutex --> enter1
+    enter1 --> critical1
+    critical1 --> leave1
+    leave1 --> idle1
+    leave1 --> mutex
+    idle2 --> enter2
+    mutex --> enter2
+    enter2 --> critical2
+    critical2 --> leave2
+    leave2 --> idle2
+    leave2 --> mutex

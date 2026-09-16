@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pnml xmlns="http://www.pnml.org/version-2009/grammar/pnml">
+  <net id="n1" type="http://www.pnml.org/version-2009/grammar/ptnet">
+    <name>
+      <text>emit-loop</text>
+    </name>
+    <page id="page1">
+      <place id="ready">
+        <name>
+          <text>ready</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="log">
+        <name>
+          <text>log</text>
+        </name>
+      </place>
+      <place id="queue">
+        <name>
+          <text>queue</text>
+        </name>
+      </place>
+      <transition id="emit">
+        <name>
+          <text>emit</text>
+        </name>
+      </transition>
+      <arc id="a1" source="ready" target="emit" />
+      <arc id="a2" source="emit" target="ready" />
+      <arc id="a3" source="emit" target="log" />
+      <arc id="a4" source="emit" target="queue" />
+    </page>
+  </net>
+</pnml>

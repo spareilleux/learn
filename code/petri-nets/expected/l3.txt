@@ -1,0 +1,227 @@
+
+== The reachability graph of the bounded producer and consumer ==
+reachability graph of producer-consumer: 12 states, 20 firings
+places ready produced free full waiting taken
+  M0 = (1, 0, 2, 0, 1, 0)  ready:1 free:2 waiting:1
+  M1 = (0, 1, 2, 0, 1, 0)  produced:1 free:2 waiting:1
+  M2 = (1, 0, 1, 1, 1, 0)  ready:1 free:1 full:1 waiting:1
+  M3 = (0, 1, 1, 1, 1, 0)  produced:1 free:1 full:1 waiting:1
+  M4 = (1, 0, 2, 0, 0, 1)  ready:1 free:2 taken:1
+  M5 = (1, 0, 0, 2, 1, 0)  ready:1 full:2 waiting:1
+  M6 = (0, 1, 2, 0, 0, 1)  produced:1 free:2 taken:1
+  M7 = (0, 1, 0, 2, 1, 0)  produced:1 full:2 waiting:1
+  M8 = (1, 0, 1, 1, 0, 1)  ready:1 free:1 full:1 taken:1
+  M9 = (0, 1, 1, 1, 0, 1)  produced:1 free:1 full:1 taken:1
+  M10 = (1, 0, 0, 2, 0, 1)  ready:1 full:2 taken:1
+  M11 = (0, 1, 0, 2, 0, 1)  produced:1 full:2 taken:1
+  M0 --produce--> M1
+  M1 --deposit--> M2
+  M2 --produce--> M3
+  M2 --take--> M4
+  M3 --deposit--> M5
+  M3 --take--> M6
+  M4 --produce--> M6
+  M4 --consume--> M0
+  M5 --produce--> M7
+  M5 --take--> M8
+  M6 --deposit--> M8
+  M6 --consume--> M1
+  M7 --take--> M9
+  M8 --produce--> M9
+  M8 --consume--> M2
+  M9 --deposit--> M10
+  M9 --consume--> M3
+  M10 --produce--> M11
+  M10 --consume--> M5
+  M11 --consume--> M7
+
+== The same graph as a diagram ==
+flowchart LR
+    M0["M0<br/>(1, 0, 2, 0, 1, 0)"]
+    M1["M1<br/>(0, 1, 2, 0, 1, 0)"]
+    M2["M2<br/>(1, 0, 1, 1, 1, 0)"]
+    M3["M3<br/>(0, 1, 1, 1, 1, 0)"]
+    M4["M4<br/>(1, 0, 2, 0, 0, 1)"]
+    M5["M5<br/>(1, 0, 0, 2, 1, 0)"]
+    M6["M6<br/>(0, 1, 2, 0, 0, 1)"]
+    M7["M7<br/>(0, 1, 0, 2, 1, 0)"]
+    M8["M8<br/>(1, 0, 1, 1, 0, 1)"]
+    M9["M9<br/>(0, 1, 1, 1, 0, 1)"]
+    M10["M10<br/>(1, 0, 0, 2, 0, 1)"]
+    M11["M11<br/>(0, 1, 0, 2, 0, 1)"]
+    M0 -- produce --> M1
+    M1 -- deposit --> M2
+    M2 -- produce --> M3
+    M2 -- take --> M4
+    M3 -- deposit --> M5
+    M3 -- take --> M6
+    M4 -- produce --> M6
+    M4 -- consume --> M0
+    M5 -- produce --> M7
+    M5 -- take --> M8
+    M6 -- deposit --> M8
+    M6 -- consume --> M1
+    M7 -- take --> M9
+    M8 -- produce --> M9
+    M8 -- consume --> M2
+    M9 -- deposit --> M10
+    M9 -- consume --> M3
+    M10 -- produce --> M11
+    M10 -- consume --> M5
+    M11 -- consume --> M7
+
+== Its coverability tree: bounded, so no omega appears ==
+coverability tree of producer-consumer: 56 nodes
+places ready produced free full waiting taken
+  root (1, 0, 2, 0, 1, 0)
+    produce -> (0, 1, 2, 0, 1, 0)
+      deposit -> (1, 0, 1, 1, 1, 0)
+        produce -> (0, 1, 1, 1, 1, 0)
+          deposit -> (1, 0, 0, 2, 1, 0)
+            produce -> (0, 1, 0, 2, 1, 0)
+              take -> (0, 1, 1, 1, 0, 1)
+                deposit -> (1, 0, 0, 2, 0, 1)
+                  produce -> (0, 1, 0, 2, 0, 1)
+                    consume -> (0, 1, 0, 2, 1, 0)  [already on this path]
+                  consume -> (1, 0, 0, 2, 1, 0)  [already on this path]
+                consume -> (0, 1, 1, 1, 1, 0)  [already on this path]
+            take -> (1, 0, 1, 1, 0, 1)
+              produce -> (0, 1, 1, 1, 0, 1)
+                deposit -> (1, 0, 0, 2, 0, 1)
+                  produce -> (0, 1, 0, 2, 0, 1)
+                    consume -> (0, 1, 0, 2, 1, 0)
+                      take -> (0, 1, 1, 1, 0, 1)  [already on this path]
+                  consume -> (1, 0, 0, 2, 1, 0)  [already on this path]
+                consume -> (0, 1, 1, 1, 1, 0)  [already on this path]
+              consume -> (1, 0, 1, 1, 1, 0)  [already on this path]
+          take -> (0, 1, 2, 0, 0, 1)
+            deposit -> (1, 0, 1, 1, 0, 1)
+              produce -> (0, 1, 1, 1, 0, 1)
+                deposit -> (1, 0, 0, 2, 0, 1)
+                  produce -> (0, 1, 0, 2, 0, 1)
+                    consume -> (0, 1, 0, 2, 1, 0)
+                      take -> (0, 1, 1, 1, 0, 1)  [already on this path]
+                  consume -> (1, 0, 0, 2, 1, 0)
+                    produce -> (0, 1, 0, 2, 1, 0)
+                      take -> (0, 1, 1, 1, 0, 1)  [already on this path]
+                    take -> (1, 0, 1, 1, 0, 1)  [already on this path]
+                consume -> (0, 1, 1, 1, 1, 0)  [already on this path]
+              consume -> (1, 0, 1, 1, 1, 0)  [already on this path]
+            consume -> (0, 1, 2, 0, 1, 0)  [already on this path]
+        take -> (1, 0, 2, 0, 0, 1)
+          produce -> (0, 1, 2, 0, 0, 1)
+            deposit -> (1, 0, 1, 1, 0, 1)
+              produce -> (0, 1, 1, 1, 0, 1)
+                deposit -> (1, 0, 0, 2, 0, 1)
+                  produce -> (0, 1, 0, 2, 0, 1)
+                    consume -> (0, 1, 0, 2, 1, 0)
+                      take -> (0, 1, 1, 1, 0, 1)  [already on this path]
+                  consume -> (1, 0, 0, 2, 1, 0)
+                    produce -> (0, 1, 0, 2, 1, 0)
+                      take -> (0, 1, 1, 1, 0, 1)  [already on this path]
+                    take -> (1, 0, 1, 1, 0, 1)  [already on this path]
+                consume -> (0, 1, 1, 1, 1, 0)
+                  deposit -> (1, 0, 0, 2, 1, 0)
+                    produce -> (0, 1, 0, 2, 1, 0)
+                      take -> (0, 1, 1, 1, 0, 1)  [already on this path]
+                    take -> (1, 0, 1, 1, 0, 1)  [already on this path]
+                  take -> (0, 1, 2, 0, 0, 1)  [already on this path]
+              consume -> (1, 0, 1, 1, 1, 0)  [already on this path]
+            consume -> (0, 1, 2, 0, 1, 0)  [already on this path]
+          consume -> (1, 0, 2, 0, 1, 0)  [already on this path]
+  bound of ready: 1
+  bound of produced: 1
+  bound of free: 2
+  bound of full: 2
+  bound of waiting: 1
+  bound of taken: 1
+  dead transitions: none
+
+== Remove the place free and the graph becomes infinite ==
+net unbounded-producer
+places      ready produced full waiting taken
+transitions produce deposit take consume
+M0          (1, 0, 0, 1, 0) = ready:1 waiting:1
+arc         ready -> produce
+arc         produce -> produced
+arc         produced -> deposit
+arc         deposit -> full
+arc         deposit -> ready
+arc         full -> take
+arc         waiting -> take
+arc         take -> taken
+arc         taken -> consume
+arc         consume -> waiting
+stopped after 50 states, complete: False
+largest number of tokens in full among them: 13
+
+== The coverability tree finds the same net finite ==
+coverability tree of unbounded-producer: 17 nodes
+places ready produced full waiting taken
+  root (1, 0, 0, 1, 0)
+    produce -> (0, 1, 0, 1, 0)
+      deposit -> (1, 0, ω, 1, 0)
+        produce -> (0, 1, ω, 1, 0)
+          deposit -> (1, 0, ω, 1, 0)  [already on this path]
+          take -> (0, 1, ω, 0, 1)
+            deposit -> (1, 0, ω, 0, 1)
+              produce -> (0, 1, ω, 0, 1)  [already on this path]
+              consume -> (1, 0, ω, 1, 0)  [already on this path]
+            consume -> (0, 1, ω, 1, 0)  [already on this path]
+        take -> (1, 0, ω, 0, 1)
+          produce -> (0, 1, ω, 0, 1)
+            deposit -> (1, 0, ω, 0, 1)  [already on this path]
+            consume -> (0, 1, ω, 1, 0)
+              deposit -> (1, 0, ω, 1, 0)  [already on this path]
+              take -> (0, 1, ω, 0, 1)  [already on this path]
+          consume -> (1, 0, ω, 1, 0)  [already on this path]
+  bound of ready: 1
+  bound of produced: 1
+  bound of full: unbounded
+  bound of waiting: 1
+  bound of taken: 1
+  dead transitions: none
+
+== What omega forgets ==
+The tree says full is unbounded. It cannot say whether full ever holds exactly 3 tokens
+while the consumer waits, because omega replaced the count.
+
+== How fast the graph grows ==
+capacity  states  firings
+       1       8       12
+       2      12       20
+       3      16       28
+       4      20       36
+       5      24       44
+       6      28       52
+       7      32       60
+       8      36       68
+
+philosophers  states  firings
+           2       3        4
+           3       4        6
+           4       7       16
+           5      11       30
+           6      18       60
+           7      29      112
+           8      47      208
+           9      76      378
+          10     123      680
+
+independent copies  states  firings
+                 1      12       20
+                 2     144      480
+                 3    1728     8640
+                 4   20736   138240
+                 5  248832  2073600
+
+== Exercise 4: a transition that reads a place and fills two others ==
+flowchart LR
+    ready(("ready<br/>●"))
+    log(("log"))
+    queue(("queue"))
+    emit["emit"]
+    ready --> emit
+    emit --> ready
+    emit --> log
+    emit --> queue

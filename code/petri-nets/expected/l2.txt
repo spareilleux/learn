@@ -1,0 +1,110 @@
+
+== Pre, Post and the incidence matrix ==
+Pre (tokens a firing takes from the place)
+          produce deposit    take consume
+ready           1       0       0       0
+produced        0       1       0       0
+free            0       1       0       0
+full            0       0       1       0
+waiting         0       0       1       0
+taken           0       0       0       1
+Post (tokens a firing puts into the place)
+          produce deposit    take consume
+ready           0       1       0       0
+produced        1       0       0       0
+free            0       0       1       0
+full            0       1       0       0
+waiting         0       0       0       1
+taken           0       0       1       0
+C = Post - Pre (change of marking per firing)
+          produce deposit    take consume
+ready          -1       1       0       0
+produced        1      -1       0       0
+free            0      -1       1       0
+full            0       1      -1       0
+waiting         0       0      -1       1
+taken           0       0       1      -1
+
+== One firing as a column of C ==
+produce    -1  1  0  0  0  0
+deposit     1 -1 -1  1  0  0
+take        0  0  1 -1 -1  1
+consume     0  0  0  0  1 -1
+
+== The state equation on a real sequence ==
+sequence  produce deposit produce take
+x         (2, 1, 1, 0)   in the order produce deposit take consume
+M0        (1, 0, 2, 0, 1, 0)
+M0 + C x  (0, 1, 2, 0, 0, 1)
+fired     (0, 1, 2, 0, 0, 1)
+
+== The same x in a different order ==
+produce deposit take produce -> (0, 1, 2, 0, 0, 1)
+same marking: True
+
+== An order that does not exist ==
+take produce deposit produce: take is not enabled at M0, and the equation does not care.
+M0 + C x  (0, 1, 2, 0, 0, 1)
+
+== A net where the equation accepts what the net refuses ==
+net handshake
+places      request response served
+transitions receive reply
+M0          (0, 0, 0) = (empty)
+arc         request -> receive
+arc         receive -> response
+arc         receive -> served
+arc         response -> reply
+arc         reply -> request
+flowchart LR
+    request(("request"))
+    response(("response"))
+    served(("served"))
+    receive["receive"]
+    reply["reply"]
+    request --> receive
+    receive --> response
+    receive --> served
+    response --> reply
+    reply --> request
+Pre (tokens a firing takes from the place)
+          receive   reply
+request         1       0
+response        0       1
+served          0       0
+Post (tokens a firing puts into the place)
+          receive   reply
+request         0       1
+response        1       0
+served          1       0
+C = Post - Pre (change of marking per firing)
+          receive   reply
+request        -1       1
+response        1      -1
+served          1       0
+reachability graph of handshake: 1 state, 0 firings
+places request response served
+  M0 = (0, 0, 0)  (empty)
+  dead marking M0 = (0, 0, 0)  (empty)
+target    (0, 0, 1)  served:1
+solution  x = (1, 1)   in the order receive reply
+reachable: False
+spurious markings up to 2 tokens: (0, 0, 1) (0, 0, 2)
+
+== Invariants read off the same matrix (lesson 5) ==
+invariants of producer-consumer
+  place invariants (3):
+    ready + produced = 1
+    free + full = 2
+    waiting + taken = 1
+  transition invariants (1):
+    produce + deposit + take + consume
+
+== Exercise 1: the incidence matrix of mutual exclusion ==
+C = Post - Pre (change of marking per firing)
+           enter1 leave1 enter2 leave2
+idle1          -1      1      0      0
+critical1       1     -1      0      0
+idle2           0      0     -1      1
+critical2       0      0      1     -1
+mutex          -1      1     -1      1

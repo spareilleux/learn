@@ -1,0 +1,146 @@
+
+== producer-consumer ==
+properties of producer-consumer
+  bound of ready: 1
+  bound of produced: 1
+  bound of free: 2
+  bound of full: 2
+  bound of waiting: 1
+  bound of taken: 1
+  bounded:       yes (2-bounded)
+  safe:          no
+  deadlock-free: yes
+  live:          yes
+    produce    L4, live
+    deposit    L4, live
+    take       L4, live
+    consume    L4, live
+  reversible:    yes
+  home states:   12 markings
+  persistent:    yes
+
+
+== mutual-exclusion ==
+properties of mutual-exclusion
+  bound of idle1: 1
+  bound of critical1: 1
+  bound of idle2: 1
+  bound of critical2: 1
+  bound of mutex: 1
+  bounded:       yes (1-bounded)
+  safe:          yes
+  deadlock-free: yes
+  live:          yes
+    enter1     L4, live
+    leave1     L4, live
+    enter2     L4, live
+    leave2     L4, live
+  reversible:    yes
+  home states:   (1, 0, 1, 0, 1) (0, 1, 1, 0, 0) (1, 0, 0, 1, 0)
+  persistent:    no
+
+
+== two-locks ==
+properties of two-locks
+  bound of a_idle: 1
+  bound of a_has_x: 1
+  bound of b_idle: 1
+  bound of b_has_y: 1
+  bound of x: 1
+  bound of y: 1
+  bounded:       yes (1-bounded)
+  safe:          yes
+  deadlock-free: no
+    dead marking (0, 1, 0, 1, 0, 0)  a_has_x:1 b_has_y:1
+  live:          no
+    a_take_x   L2/L3, can fire for ever but not from everywhere
+    a_take_y   L2/L3, can fire for ever but not from everywhere
+    b_take_y   L2/L3, can fire for ever but not from everywhere
+    b_take_x   L2/L3, can fire for ever but not from everywhere
+  reversible:    no
+  home states:   (0, 1, 0, 1, 0, 0)
+  persistent:    no
+
+
+== start-once ==
+properties of start-once
+  bound of stopped: 1
+  bound of running: 1
+  bound of serving: 1
+  bounded:       yes (1-bounded)
+  safe:          yes
+  deadlock-free: yes
+  live:          no
+    start      L1, can fire once
+    accept     L4, live
+    finish     L4, live
+  reversible:    no
+  home states:   (0, 1, 0) (0, 0, 1)
+  persistent:    yes
+
+
+== handshake ==
+properties of handshake
+  bound of request: 0
+  bound of response: 0
+  bound of served: 0
+  bounded:       yes (0-bounded)
+  safe:          yes
+  deadlock-free: no
+    dead marking (0, 0, 0)  (empty)
+  live:          no
+    receive    L0, dead
+    reply      L0, dead
+  reversible:    yes
+  home states:   (0, 0, 0)
+  persistent:    yes
+
+
+== The unbounded net, seen by the coverability tree ==
+bounded: False
+  bound of ready: 1
+  bound of produced: 1
+  bound of full: unbounded
+  bound of waiting: 1
+  bound of taken: 1
+
+== How the two locks deadlock ==
+flowchart LR
+    a_idle(("a_idle<br/>●"))
+    a_has_x(("a_has_x"))
+    b_idle(("b_idle<br/>●"))
+    b_has_y(("b_has_y"))
+    x(("x<br/>●"))
+    y(("y<br/>●"))
+    a_take_x["a_take_x"]
+    a_take_y["a_take_y"]
+    b_take_y["b_take_y"]
+    b_take_x["b_take_x"]
+    a_idle --> a_take_x
+    x --> a_take_x
+    a_take_x --> a_has_x
+    a_has_x --> a_take_y
+    y --> a_take_y
+    a_take_y --> a_idle
+    a_take_y --> x
+    a_take_y --> y
+    b_idle --> b_take_y
+    y --> b_take_y
+    b_take_y --> b_has_y
+    b_has_y --> b_take_x
+    x --> b_take_x
+    b_take_x --> b_idle
+    b_take_x --> x
+    b_take_x --> y
+M3 = (0, 1, 0, 1, 0, 0)  a_has_x:1 b_has_y:1
+  reached by: a_take_x, b_take_y
+
+== The place invariants that make mutual exclusion a proof ==
+invariants of mutual-exclusion
+  place invariants (3):
+    idle1 + critical1 = 1
+    critical1 + critical2 + mutex = 1
+    idle2 + critical2 = 1
+  transition invariants (2):
+    enter1 + leave1
+    enter2 + leave2
