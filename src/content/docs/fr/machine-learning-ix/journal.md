@@ -117,6 +117,13 @@ Cela mérite d'être consigné à côté des constats, car les leçons ont surto
 - Elle est générée, jamais écrite à la main, et `npm run sync:ix-api-map` la reconstruit — elle ne peut donc pas s'écarter du pin, ce qui est d'ordinaire ce qui pourrit une page de ce genre. La révision est lue dans le `Cargo.toml` du cours plutôt qu'écrite deux fois.
 - Elle compte ce que dit la source, pas ce qu'un appelant peut atteindre : un `pub` dans un module privé est listé et reste invisible depuis l'extérieur du crate. Le constat 12 — un champ privé qui rend le ratio inutilisable — est exactement le genre de chose que la page ne peut pas dire, et que les leçons peuvent.
 
+## 2026-09-16 — Un zéro négatif sous macOS
+
+- La première exécution CI du code des leçons 5 à 8 était rouge sur `macos-latest` seulement, dans `l07_networks` : le réseau du ou exclusif affichait `predictions [-0.0000, 1.0000, 1.0000, -0.0000]` là où Windows et Linux affichent `0.0000` à ces deux coins. Exécution [35039180659](https://github.com/spareilleux/learn/actions/runs/35039180659) ; les trois autres jobs ont réussi, ainsi que les quinze autres exemples.
+- Aux deux coins nuls, le réseau atterrit sous la quatrième décimale, et seul le *signe* diffère — les mêmes additions prises dans un autre ordre sur ARM. `-0.0` et `0.0` sont le même nombre et se comparent égaux : le signe n'est pas un résultat, et aucune affirmation des leçons ne change.
+- [`fmt_vec`](https://github.com/spareilleux/learn/blob/be41ba8/code/machine-learning-ix/src/lib.rs#L52-L70) existe pour que « les sorties ne dépendent pas de la façon dont chaque OS imprime les derniers chiffres », ce qui en fait l'endroit du correctif : tout ce qui s'arrondit à zéro affiche désormais `0.0000`, jamais `-0.0000`, et tout autre signe survit. Un test unitaire fixe les deux moitiés. Aucun fichier `expected/` n'a changé, donc aucune leçon n'a eu à être recitée.
+- La note du 2026-09-14 — des décimales fixes, donc des sorties identiques sur les trois systèmes — avait raison sur le remède et lui manquait un cas. Des décimales fixes ne tranchent pas le signe d'un zéro, et un cours écrit sur une seule machine ne peut pas l'apprendre.
+
 ## À vérifier
 
 - L'outil `ix_ml_pipeline` de bout en bout : l'ordre de mise à l'échelle du constat 1, l'inférence de tâche du constat 2 sur un fichier CSV, et l'erreur `All rows contain NaN values` pour un fichier avec une colonne texte. Les trois sont lus dans le code, pas exécutés.
@@ -131,3 +138,4 @@ Cela mérite d'être consigné à côté des constats, car les leçons ont surto
 - `ix-autograd` : son ruban est le crate qui devrait rendre le constat 15 inutile, et la leçon 12 le mesurera.
 - Si les constats 10 à 19 sont déjà connus en amont : je n'ai toujours pas cherché dans les issues d'IX.
 - La carte d'API compte les déclarations `pub`, pas celles qui sont atteignables ; l'écart entre les deux nombres n'est pas mesuré.
+- Les valeurs affichées par un `println!("{:.6}")` direct plutôt que par `fmt_vec` — l'`intercept -0.000000` de la leçon 8 en est une — portent le même risque de zéro signé et ne sont pas normalisées. Celle-là concordait sur les trois systèmes dans l'exécution 35039180659 ; les autres n'ont pas été recensées.

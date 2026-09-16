@@ -117,6 +117,13 @@ Worth recording next to the findings, because the lessons so far have mostly fou
 - It is generated, never hand-written, and `npm run sync:ix-api-map` rebuilds it — so it cannot drift from the pin, which is what usually rots a page like this. The revision is read out of the course's `Cargo.toml` rather than written twice.
 - It counts what the source says, not what a caller can reach: `pub` inside a private module is listed and is invisible from outside the crate. Finding 12 — a private field where the ratio is unusable — is exactly the kind of thing the page cannot tell you, and the lessons can.
 
+## 2026-09-16 — A negative zero on macOS
+
+- The first CI run of the lesson 5 to 8 code was red on `macos-latest` alone, in `l07_networks`: the exclusive-or network printed `predictions [-0.0000, 1.0000, 1.0000, -0.0000]` where Windows and Linux print `0.0000` at those two corners. Run [35039180659](https://github.com/spareilleux/learn/actions/runs/35039180659); the other three jobs passed, and so did the fifteen other examples.
+- At the two zero corners the network lands below the fourth decimal, and only the *sign* differs — the same additions taken in a different order on ARM. `-0.0` and `0.0` are the same number and compare equal, so the sign is not a result, and no lesson claim changes.
+- [`fmt_vec`](https://github.com/spareilleux/learn/blob/be41ba8/code/machine-learning-ix/src/lib.rs#L52-L70) exists so that "the outputs don't depend on how each OS prints the last digits", which makes it where the fix belongs: anything that rounds to zero now prints `0.0000`, never `-0.0000`, and every other sign survives. A unit test pins both halves. No `expected/` file changed, so no lesson had to be requoted.
+- The 2026-09-14 note — fixed decimals, so the outputs are identical on the three systems — was right about the remedy and one case short of complete. Fixed decimals do not settle the sign of a zero, and a course written on one machine cannot find that out.
+
 ## To verify
 
 - The `ix_ml_pipeline` tool end to end: the scaling order of finding 1, the task inference of finding 2 on a CSV file, and the `All rows contain NaN values` error for a file with a text column. All three are read in the code, not run.
@@ -131,3 +138,4 @@ Worth recording next to the findings, because the lessons so far have mostly fou
 - `ix-autograd`: its tape is the crate that should make finding 15 unnecessary, and lesson 12 will measure it.
 - Whether findings 10 to 19 are already known upstream: I still have not searched IX issues.
 - The API map counts `pub` declarations, not reachable ones; how far apart the two numbers are is unmeasured.
+- The values printed by a direct `println!("{:.6}")` rather than through `fmt_vec` — lesson 8's `intercept -0.000000` is one — carry the same signed-zero hazard and are not normalized. That one agreed on the three systems in run 35039180659; the others have not been enumerated.

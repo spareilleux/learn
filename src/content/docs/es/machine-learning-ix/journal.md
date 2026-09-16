@@ -117,6 +117,13 @@ Merece anotarse junto a los hallazgos, porque las lecciones hasta ahora han enco
 - Está generada, nunca escrita a mano, y `npm run sync:ix-api-map` la reconstruye — así que no puede alejarse del commit fijado, que es lo que suele pudrir una página así. La revisión se lee del `Cargo.toml` del curso en vez de escribirse dos veces.
 - Cuenta lo que dice el código fuente, no lo que un llamante puede alcanzar: un `pub` dentro de un módulo privado aparece listado y es invisible desde fuera del crate. El hallazgo 12 — un campo privado que deja la razón inservible — es exactamente el tipo de cosa que la página no puede contarte, y las lecciones sí.
 
+## 2026-09-16 — Un cero negativo en macOS
+
+- La primera ejecución de CI del código de las lecciones 5 a 8 salió roja solo en `macos-latest`, en `l07_networks`: la red del o exclusivo imprimía `predictions [-0.0000, 1.0000, 1.0000, -0.0000]` donde Windows y Linux imprimen `0.0000` en esas dos esquinas. Ejecución [35039180659](https://github.com/spareilleux/learn/actions/runs/35039180659); los otros tres jobs pasaron, y también los otros quince ejemplos.
+- En las dos esquinas nulas la red aterriza por debajo del cuarto decimal, y solo difiere el *signo* — las mismas sumas tomadas en otro orden en ARM. `-0.0` y `0.0` son el mismo número y se comparan iguales: el signo no es un resultado, y ninguna afirmación de las lecciones cambia.
+- [`fmt_vec`](https://github.com/spareilleux/learn/blob/be41ba8/code/machine-learning-ix/src/lib.rs#L52-L70) existe para que «las salidas no dependan de cómo imprime cada sistema los últimos dígitos», lo que lo convierte en el lugar del arreglo: todo lo que se redondea a cero imprime ahora `0.0000`, nunca `-0.0000`, y cualquier otro signo sobrevive. Una prueba unitaria fija ambas mitades. Ningún archivo `expected/` cambió, así que ninguna lección tuvo que volver a citarse.
+- La nota del 2026-09-14 — decimales fijos, así que las salidas son idénticas en los tres sistemas — acertaba con el remedio y se quedaba a un caso de estar completa. Los decimales fijos no deciden el signo de un cero, y un curso escrito en una sola máquina no puede descubrirlo.
+
 ## Por verificar
 
 - La herramienta `ix_ml_pipeline` de principio a fin: el orden del escalado del hallazgo 1, la inferencia de tarea del hallazgo 2 sobre un archivo CSV, y el error `All rows contain NaN values` para un archivo con una columna de texto. Los tres están leídos en el código, no ejecutados.
@@ -131,3 +138,4 @@ Merece anotarse junto a los hallazgos, porque las lecciones hasta ahora han enco
 - `ix-autograd`: su cinta es el crate que debería hacer innecesario el hallazgo 15, y la lección 12 lo medirá.
 - Si los hallazgos 10 a 19 ya se conocen en el proyecto original: sigo sin buscar en los issues de IX.
 - El mapa de API cuenta declaraciones `pub`, no las alcanzables; cuánto se separan ambos números está sin medir.
+- Los valores impresos por un `println!("{:.6}")` directo y no a través de `fmt_vec` — el `intercept -0.000000` de la lección 8 es uno — llevan el mismo riesgo de cero con signo y no están normalizados. Ese coincidió en los tres sistemas en la ejecución 35039180659; los demás no se han enumerado.
