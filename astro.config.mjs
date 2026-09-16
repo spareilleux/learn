@@ -169,6 +169,12 @@ export default defineConfig({
 									collapsed: true,
 									items: [{ autogenerate: { directory: 'agentic-coding' } }],
 								},
+								{
+									label: 'Gaia: coordinating agents with evidence',
+									translations: { fr: 'Gaia : coordonner des agents avec des preuves', es: 'Gaia: coordinar agentes con evidencia' },
+									collapsed: true,
+									items: [{ autogenerate: { directory: 'gaia' } }],
+								},
 							],
 						},
 					],
