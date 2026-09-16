@@ -1,0 +1,57 @@
+{
+  "frame": 4,
+  "render": {
+    "calls": 6,
+    "drawCalls": 20,
+    "triangles": 781
+  },
+  "memory": {
+    "geometries": 9,
+    "textures": 3,
+    "programs": 4
+  },
+  "canvas": [240, 0, 560, 450],
+  "after": {
+    "string 3, fret 5": {
+      "pick": {
+        "object": "neck",
+        "point": [-0.515, 0.36, 0.046],
+        "fret": 5,
+        "string": 3,
+        "note": "C4"
+      },
+      "pickFromWindow": {
+        "object": "neck",
+        "point": [-0.072, 0.36, 0.046],
+        "fret": 7,
+        "string": 3,
+        "note": "D4"
+      }
+    },
+    "string 6, fret 8": {
+      "pick": {
+        "object": "neck",
+        "point": [0.286, 0.36, -0.226],
+        "fret": 8,
+        "string": 6,
+        "note": "C3"
+      },
+      "pickFromWindow": {
+        "object": "neck",
+        "point": [0.511, 0.36, -0.226],
+        "fret": 9,
+        "string": 6,
+        "note": "C#3"
+      }
+    },
+    "beside the neck": {
+      "pick": null,
+      "pickFromWindow": null
+    },
+    "orbit 120 px right": {
+      "camera": [-1.791, 2.4, -0.167],
+      "target": [-0.2, 0.3, 0]
+    }
+  }
+}
+exit 0

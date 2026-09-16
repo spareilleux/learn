@@ -1,0 +1,5 @@
+	positionLocal = position;
+	positionLocal = ( positionLocal + vec3<f32>( 0.0, ( ( object.nodeUniform0 * sin( ( ( ( ( positionLocal.x / 3.2 ) + 0.5 ) * 3.141592653589793 ) * object.nodeUniform1 ) ) ) * sin( object.nodeUniform2 ) ), 0.0 ) );
+	positionLocal = position;
+	positionLocal = ( positionLocal + vec3( 0.0, ( ( nodeUniform0 * sin( ( ( ( ( positionLocal.x / 3.2 ) + 0.5 ) * 3.141592653589793 ) * nodeUniform1 ) ) ) * sin( nodeUniform2 ) ), 0.0 ) );
+exit 0

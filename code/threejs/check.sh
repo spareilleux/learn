@@ -37,14 +37,14 @@ run() {
 }
 
 # probe <name> <page> [options…]: like run, but prints the backend and the fallback warning, then removes them with the
-# coordinate system, which follows the backend
+# coordinate system, which follows the backend, and with the CPU times (fields ending in Ms)
 probe() {
   local name=$1
   shift
   node scripts/probe.mjs "$@" --shot "out/shots/$name.png" > "out/$name.raw.txt" 2>&1
   local code=$?
   echo "     $name: $(grep -o '"backend": "[^"]*"' "out/$name.raw.txt") $(grep -o '"gpu": "[^"]*"' "out/$name.raw.txt")$(grep -c 'WebGPU is not available' "out/$name.raw.txt" | sed 's/^0$//; s/^[1-9].*/, after a fallback warning/')"
-  { grep -v '"backend":\|"gpu":\|"coordinateSystem":\|No available adapters\|WebGPU is not available' "out/$name.raw.txt" | node normalize.mjs; echo "exit $code"; } > "out/$name.txt"
+  { grep -v '"backend":\|"gpu":\|"coordinateSystem":\|No available adapters\|WebGPU is not available\|"[A-Za-z]*Ms":' "out/$name.raw.txt" | node normalize.mjs; echo "exit $code"; } > "out/$name.txt"
   compare "$name"
 }
 
@@ -89,10 +89,45 @@ run l04_gltf node scripts/l04-gltf.ts
 probe l04_probe 04-gltf
 run l04_exercises node scripts/l04-exercises.ts
 
-# The production build: one HTML page per lesson, three.js's build files in shared chunks (lessons 1 and 4)
+# Lesson 5
+run l05_raycaster node scripts/l05-raycaster.ts
+probe l05_probe 05-picking
+probe l05_probe_sidebar 05-picking --query sidebar
+run l05_exercises node scripts/l05-exercises.ts
+
+# Lesson 6: the generated shaders go to their own files (out/l06_shader_*.txt), and the line that moves the string is
+# compared: the rest of the code follows three.js's node builders, not the lesson
+probe l06_probe 06-tsl --extract shader out/l06_shader_webgpu.txt
+probe l06_probe_webgl 06-tsl --webgl --extract shader out/l06_shader_webgl.txt
+probe l06_probe_harmonic_2 06-tsl --query harmonic=2 --extract shader out/l06_shader_harmonic_2.txt
+run l06_shader_lines grep -h 'positionLocal = ' out/l06_shader_webgpu.txt out/l06_shader_webgl.txt
+
+# Lesson 7
+for pipeline in none bloom bloom-fxaa direct; do
+  probe "l07_probe_$pipeline" 07-post --query "pipeline=$pipeline"
+done
+probe l07_probe_threshold_0 07-post --query threshold=0
+probe l07_probe_dispose_pipeline 07-post --query dispose=pipeline
+probe l07_probe_dispose_all 07-post --query dispose=all
+
+# Lesson 8: the counts are compared, the CPU times only printed
+for mode in meshes unshared instanced batched lod; do
+  probe "l08_probe_$mode" 08-performance --query "mode=$mode"
+  echo "     $(grep -o '"[a-zA-Z]*Ms": [0-9.]*' "out/l08_probe_$mode.raw.txt" | tr '\n' ' ')"
+done
+for mode in meshes instanced tiles batched lod; do
+  probe "l08_probe_${mode}_close" 08-performance --query "mode=$mode&view=close"
+done
+probe l08_probe_batched_webgl 08-performance --webgl --query mode=batched
+
+# The production build: one HTML page per lesson, three.js's build files in shared chunks (lessons 1 and 4). The pages of
+# lessons 1 to 4 alone, as lessons 1 and 4 show it, then every page: later lessons change how the shared chunks are split
 rm -rf dist
 # Vite prints its warning on stderr: stdout first, then stderr, so that the order doesn't depend on the OS
-run l04_build bash -c "$bin/vite build 2> out/l04_build.stderr.txt; code=\$?; cat out/l04_build.stderr.txt; exit \$code"
+run l04_build bash -c "PAGES='^0[1-4]-' $bin/vite build 2> out/l04_build.stderr.txt; code=\$?; cat out/l04_build.stderr.txt; exit \$code"
 run l04_dist_files node scripts/files.mjs dist
+rm -rf dist
+run l08_build bash -c "$bin/vite build 2> out/l08_build.stderr.txt; code=\$?; cat out/l08_build.stderr.txt; exit \$code"
+run l08_dist_files node scripts/files.mjs dist
 
 exit $status

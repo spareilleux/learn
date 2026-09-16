@@ -1,0 +1,15 @@
+pointer (NDC): [ -0.1894, 0.0006 ]
+ray origin [ -0.2, 2.4, 1.6 ] direction [ -0.122, -0.789, -0.602 ]
+intersectObject(board, true): neck at 2.584
+first hit: { point: [ -0.514, 0.36, 0.045 ], faceIndex: 4, uv: [ 0.413, 0.418 ] }
+fret 5, string 3: C4
+intersectObject(board, false): (none)
+over string 1: string 1 at 2.598 | neck at 2.648
+strings on layer 1: neck at 2.648
+raycaster.layers.enable(1): string 1 at 2.598 | neck at 2.648
+far = 2: (none)
+ray.intersectPlane: [ -0.514, 0.36, 0.045 ]
+over fret 4, InstancedMesh: frets (instanced) at 2.531, instance 3
+10,000 × intersectObject(board, true): N µs per ray
+10,000 × ray.intersectPlane: N µs per ray
+exit 0

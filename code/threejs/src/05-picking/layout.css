@@ -1,0 +1,20 @@
+/* Lesson 5: the canvas fills a container, which ?sidebar moves right of a 240 px panel */
+.viewport {
+  position: fixed;
+  inset: 0;
+}
+
+.sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: 240px;
+  padding: 16px;
+  box-sizing: border-box;
+  color: #c8ccd4;
+  font: 16px system-ui, sans-serif;
+  background: #2a2e36;
+}
+
+.sidebar + .viewport {
+  left: 240px;
+}

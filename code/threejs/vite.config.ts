@@ -3,9 +3,11 @@ import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
 
 // One HTML page per lesson at the root of the project: 01-scene.html, 02-…
+// PAGES=<regex> builds only the pages whose name matches, e.g. PAGES='^0[1-4]-' for the pages of lessons 1 to 4
+const only = new RegExp(process.env.PAGES ?? '');
 const pages = Object.fromEntries(
   readdirSync(import.meta.dirname)
-    .filter((file) => /^\d\d-.*\.html$/.test(file))
+    .filter((file) => /^\d\d-.*\.html$/.test(file) && only.test(file))
     .map((file) => [file.replace('.html', ''), resolve(import.meta.dirname, file)]),
 );
 
