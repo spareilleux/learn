@@ -14,6 +14,15 @@ var examples = new Dictionary<string, Func<Task>>
     ["l04-efcore-ga"] = L04Ef.GaModel,
     ["l04-exercise-batch"] = L04.ExerciseBatch,
     ["l04-target"] = L04.Target,
+    ["l06-isolation"] = L06.Isolation,
+    ["l06-lost-update"] = L06.LostUpdate,
+    ["l06-write-skew"] = L06.WriteSkew,
+    ["l06-locks"] = L06.Locks,
+    ["l06-deadlock"] = L06.Deadlock,
+    ["l06-vacuum-horizon"] = L06.VacuumHorizon,
+    ["l06-skip-locked"] = L06.SkipLocked,
+    ["l08-routines"] = L08.Routines,
+    ["l08-trigger-error"] = L08.TriggerError,
 };
 
 if (args.Length != 1 || !examples.TryGetValue(args[0], out var example))

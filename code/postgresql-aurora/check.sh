@@ -2,7 +2,8 @@
 # PostgreSQL and Aurora course: run every lesson script with psql inside the server's container, then the C# and
 # Java programs, and compare every output the lessons quote with expected/.
 #   bash check.sh build      only builds the C# and Java programs (CI on Windows and macOS: no Docker there)
-#   bash check.sh sql        runs the SQL scripts only
+#   bash check.sh sql        runs the SQL scripts only, except those that need pgvector
+#   bash check.sh pgvector   runs sql/*-pgvector*.sql, on a server started with PG_IMAGE=pgvector/pgvector:0.8.6-pg18-trixie
 #   bash check.sh programs   runs the C# and Java programs only (already built)
 #   bash check.sh            builds, runs the SQL scripts and the programs; the server must be up (bash server.sh start)
 #   UPDATE=1 bash check.sh   writes the outputs to expected/ instead of comparing (review the diff before committing)
@@ -42,10 +43,15 @@ build() {
   $MVN -B -q -f java/pom.xml package || exit 1
 }
 
+# run_sql <pgvector|other>: the scripts that need pgvector, or the others
 run_sql() {
   bash server.sh copy || exit 1
   for script in sql/[0-9][0-9]-*.sql; do
     name=$(basename "$script" .sql)
+    case $name in
+      *-pgvector*) [ "$1" = pgvector ] || continue ;;
+      *) [ "$1" = pgvector ] && continue ;;
+    esac
     reset
     if [ "${name#01-getting-started}" = "$name" ]; then
       psql_quiet -d postgres -c "CREATE DATABASE learn"
@@ -93,21 +99,36 @@ run_programs() {
   step l04-too-many-cs cs l04-too-many
   step l04-target-cs cs l04-target
   step l04-target-java java_client l04-target
+  # Lesson 6: two sessions at once
+  step l06-isolation-cs cs l06-isolation
+  step l06-lost-update-cs cs l06-lost-update
+  step l06-lost-update-java java_client l06-lost-update
+  step l06-write-skew-cs cs l06-write-skew
+  step l06-locks-cs cs l06-locks
+  step l06-deadlock-cs cs l06-deadlock
+  step l06-vacuum-horizon-cs cs l06-vacuum-horizon
+  step l06-retry-java java_client l06-retry
+  step l06-skip-locked-cs cs l06-skip-locked
+  # Lesson 8: functions and procedures from the drivers
+  step l08-routines-cs cs l08-routines
+  step l08-routines-java java_client l08-routines
+  step l08-trigger-error-cs cs l08-trigger-error
   echo "---- lesson 4 timings (not compared)"
   cs l04-timings
 }
 
 case $what in
   build) build ;;
-  sql) run_sql ;;
+  sql) run_sql other ;;
+  pgvector) run_sql pgvector ;;
   programs) run_programs ;;
   all)
     build
-    run_sql
+    run_sql other
     run_programs
     ;;
   *)
-    echo "usage: bash check.sh [build|sql|programs]" >&2
+    echo "usage: bash check.sh [build|sql|pgvector|programs]" >&2
     exit 2
     ;;
 esac

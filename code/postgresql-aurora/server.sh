@@ -4,11 +4,12 @@
 #   copy   copies sql/ and the data files again (after editing a script)
 #   psql   runs psql inside the container, in /course/sql, with the course's session settings
 # ENGINE=podman uses Podman instead of Docker; PG_CONTAINER names another container (CI's service).
+# PG_IMAGE=pgvector/pgvector:0.8.6-pg18-trixie starts the same PostgreSQL with pgvector, for sql/08-pgvector.sql.
 set -euo pipefail
 cd "$(dirname "$0")"
 export MSYS_NO_PATHCONV=1
 engine=${ENGINE:-docker}
-image=postgres:18.6-trixie
+image=${PG_IMAGE:-postgres:18.6-trixie}
 name=${PG_CONTAINER:-pg}
 
 wait_ready() {
@@ -35,6 +36,7 @@ copy_files() {
     $engine cp "../ladybugdb/data/ga/$f.csv" "$name:/course/data/ga/$f.csv"
   done
   $engine cp data/iconic_chords.json "$name:/course/data/ga/iconic_chords.json"
+  $engine cp data/pages.json "$name:/course/data/pages.json"
 }
 
 case ${1:-} in

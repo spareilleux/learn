@@ -1,0 +1,32 @@
+CREATE EXTENSION
+CREATE FUNCTION
+           name           |   theoretical_name    |      icv      
+--------------------------+-----------------------+---------------
+ Hendrix Chord            | E7#9                  | [1,1,3,2,2,1]
+ James Bond Chord         | Em(maj7)              | [1,0,1,3,1,0]
+ Tristan Chord            | F7#11                 | [0,1,2,1,1,1]
+ Mystic Chord             | C6#11                 | [1,4,2,4,2,2]
+ So What Chord            | Em11                  | [0,3,2,1,4,0]
+ Mu Major Chord           | Cadd9(no3)            | [0,1,0,0,2,0]
+ Elektra Chord            | E7b9#11               | [2,2,4,2,2,3]
+ Petrushka Chord          | C/F# Polychord        | [2,2,4,2,2,3]
+ Cowboy Chord             | G                     | [0,0,1,1,1,0]
+ Power Chord              | G5                    | [0,0,0,0,1,0]
+ Joni Mitchell Chord      | Dmaj7add6             | [1,2,2,2,3,0]
+ Blackbird Chord          | G/B                   | [0,0,1,1,1,0]
+ Evans Chord              | Dm9 (rootless)        | [1,0,1,2,2,0]
+ A Hard Day's Night Chord | G7sus4add9            | [1,3,2,1,3,0]
+ Foxy Lady Chord          | F#m7#9                | [1,2,2,2,3,0]
+ Farben Chord             | Pentachord Op.16 No.3 | [2,0,2,4,2,0]
+ Debussy Chord            | Cmaj9                 | [1,2,2,2,3,0]
+(17 rows)
+
+        name         | theoretical_name | same_intervals_as |    as_chord    | same_notes 
+---------------------+------------------+-------------------+----------------+------------
+ Elektra Chord       | E7b9#11          | Petrushka Chord   | C/F# Polychord | f
+ Cowboy Chord        | G                | Blackbird Chord   | G/B            | t
+ Joni Mitchell Chord | Dmaj7add6        | Foxy Lady Chord   | F#m7#9         | f
+ Joni Mitchell Chord | Dmaj7add6        | Debussy Chord     | Cmaj9          | f
+ Foxy Lady Chord     | F#m7#9           | Debussy Chord     | Cmaj9          | f
+(5 rows)
+

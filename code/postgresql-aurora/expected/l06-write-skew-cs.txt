@@ -1,0 +1,6 @@
+REPEATABLE READ: A sees 2 enabled, B sees 2 enabled
+  both commit
+  enabled now: 0
+SERIALIZABLE: A sees 2 enabled, B sees 2 enabled
+  A commits, B's COMMIT gets 40001: could not serialize access due to read/write dependencies among transactions
+  enabled now: 1

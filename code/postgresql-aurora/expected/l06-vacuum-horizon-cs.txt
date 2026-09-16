@@ -1,0 +1,5 @@
+A opens a snapshot: 65 runs
+B updates 21 rows
+VACUUM while A is open: 21 dead row versions left
+A still reads 65 runs
+VACUUM after A commits: 0 dead row versions left

@@ -1,0 +1,5 @@
+NOWAIT: 55P03: could not obtain lock on row in relation "workflow_runs"
+lock_timeout: 55P03: canceling statement due to lock timeout
+B reads without waiting: 65
+B: wait_event_type=Lock, wait_event=transactionid, state=active, blocked by A: True
+A commits, B's UPDATE returns: 1 row

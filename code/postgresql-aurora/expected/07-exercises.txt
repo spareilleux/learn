@@ -1,0 +1,48 @@
+SELECT 315
+                  step                   | failures 
+-----------------------------------------+----------
+ Formatting                              |        6
+ Run actions/setup-dotnet@v6             |        3
+ Run exit 3                              |        3
+ Run ./.github/actions/hello-container   |        2
+ Compile-fail doctests                   |        1
+ Deploy to GitHub Pages                  |        1
+ Fail                                    |        1
+ Run date -u +%T                         |        1
+ Run ./.github/actions/dotnet-restore    |        1
+ Run ./.github/actions/exercise-commonjs |        1
+ Run ./.github/actions/exercise-no-shell |        1
+ Tests (fail on demand)                  |        1
+(12 rows)
+
+ differences 
+-------------
+           0
+(1 row)
+
+SELECT 48
+      course       |      slug      | rank  
+-------------------+----------------+-------
+ postgresql-aurora | index          | 0.197
+ duckdb            | index          | 0.167
+ duckdb            | 07-performance | 0.099
+(3 rows)
+
+      spanish       |             english              
+--------------------+----------------------------------
+ 'plan' <2> 'ejecu' | 'plane' <-> 'de' <-> 'ejecución'
+(1 row)
+
+CREATE EXTENSION
+SELECT 136
+                 package                  | similarity 
+------------------------------------------+------------
+ Microsoft.Extensions.DependencyInjection |       0.33
+(1 row)
+
+                        package                        | word_similarity 
+-------------------------------------------------------+-----------------
+ Microsoft.Extensions.DependencyInjection              |            0.60
+ Microsoft.Extensions.DependencyInjection.Abstractions |            0.60
+(2 rows)
+

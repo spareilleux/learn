@@ -1,0 +1,35 @@
+CREATE FUNCTION
+      workflow_name      |              job               |                    step                     | duration 
+-------------------------+--------------------------------+---------------------------------------------+----------
+ Java course examples    | java-for-csharp (macos-latest) | Lesson 10 builds                            | 00:02:38
+ GHA 09: debugging       | timeout                        | Run sleep 90                                | 00:01:27
+ GHA 09: exercise checks | job-timeout                    | Run date -u +%T                             | 00:01:27
+ Deploy to GitHub Pages  | deploy                         | Deploy to GitHub Pages                      | 00:01:14
+ GHA 03: triggers        | show                           | Slow step (to see concurrency cancel a run) | 00:01:00
+(5 rows)
+
+CREATE FUNCTION
+CREATE TABLE
+CREATE FUNCTION
+CREATE TRIGGER
+INSERT 0 2
+ERROR:  Npgsql can't go from 10.0.3 down to 9.0.4
+CONTEXT:  PL/pgSQL function ga.refuse_downgrade() line 4 at RAISE
+UPDATE 1
+    package     | version 
+----------------+---------
+ MongoDB.Driver | 3.10.0
+ Npgsql         | 10.0.3
+(2 rows)
+
+CREATE TABLE
+CREATE PROCEDURE
+ERROR:  duplicate key value violates unique constraint "counters_pkey"
+DETAIL:  Key (name)=(runs) already exists.
+CONTEXT:  SQL statement "INSERT INTO ci.counters VALUES ('runs', 0)"
+PL/pgSQL function ci.count_twice() line 5 at SQL statement
+ name | value 
+------+-------
+ runs |   125
+(1 row)
+

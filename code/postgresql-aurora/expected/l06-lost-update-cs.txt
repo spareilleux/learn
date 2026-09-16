@@ -1,0 +1,6 @@
+runs before: 65
+READ COMMITTED, read then write: two increments, runs = 66
+REPEATABLE READ, read then write: B gets 40001: could not serialize access due to concurrent update
+runs = 67
+READ COMMITTED, runs = runs + 1: B waits, blocked by A: True
+runs = 69

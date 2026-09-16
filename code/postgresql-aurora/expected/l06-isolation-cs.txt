@@ -1,0 +1,4 @@
+READ COMMITTED: A reads 65, B commits +1, A reads 66
+REPEATABLE READ: A reads 66, B commits +1, A reads 66
+SERIALIZABLE: A reads 67, B commits +1, A reads 67
+READ UNCOMMITTED: B has not committed, A reads 68

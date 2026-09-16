@@ -1,0 +1,3 @@
+{? = call ci.failure_rate(?)}: 0.17
+{call ci.count_runs(?, ?, ?)}, escapeSyntaxCallMode=select: 42809: ERROR: ci.count_runs(character varying) is a procedure
+{call ci.count_runs(?, ?, ?)}, escapeSyntaxCallMode=callIfNoReturn: runs = 18, failures = 3

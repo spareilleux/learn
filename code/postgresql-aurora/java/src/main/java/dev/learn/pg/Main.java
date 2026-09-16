@@ -20,6 +20,9 @@ public final class Main {
         examples.put("l04-generated-keys", L04::generatedKeys);
         examples.put("l04-exercise-batch", L04::exerciseBatch);
         examples.put("l04-target", L04::target);
+        examples.put("l06-lost-update", L06::lostUpdate);
+        examples.put("l06-retry", L06::retry);
+        examples.put("l08-routines", L08::routines);
         Example example = args.length == 1 ? examples.get(args[0]) : null;
         if (example == null) {
             System.err.println("usage: pg <" + String.join("|", examples.keySet()) + ">");

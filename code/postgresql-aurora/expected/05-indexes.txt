@@ -1,0 +1,208 @@
+  rows  | size  | first_day  |  last_day  
+--------+-------+------------+------------
+ 440800 | 76 MB | 2026-02-26 | 2026-09-14
+(1 row)
+
+                                                           QUERY PLAN                                                            
+---------------------------------------------------------------------------------------------------------------------------------
+ Aggregate (actual rows=1.00 loops=1)
+   Buffers: shared hit+read=9667
+   ->  Seq Scan on step_history (actual rows=15.00 loops=1)
+         Filter: ((started_at >= '2026-09-14 00:00:00+00'::timestamp with time zone) AND ((conclusion)::text = 'failure'::text))
+         Rows Removed by Filter: 440785
+         Buffers: shared hit+read=9667
+(6 rows)
+
+CREATE INDEX
+                                         QUERY PLAN                                         
+--------------------------------------------------------------------------------------------
+ Aggregate (actual rows=1.00 loops=1)
+   Buffers: shared hit+read=47
+   ->  Index Scan using step_history_started_at on step_history (actual rows=15.00 loops=1)
+         Index Cond: (started_at >= '2026-09-14 00:00:00+00'::timestamp with time zone)
+         Filter: ((conclusion)::text = 'failure'::text)
+         Rows Removed by Filter: 1518
+         Index Searches: 1
+         Buffers: shared hit+read=47
+(8 rows)
+
+                                          QUERY PLAN                                          
+----------------------------------------------------------------------------------------------
+ Aggregate (actual rows=1.00 loops=1)
+   Buffers: shared hit+read=4396
+   ->  Index Scan using step_history_started_at on step_history (actual rows=1665.00 loops=1)
+         Index Cond: (started_at >= '2026-07-01 00:00:00+00'::timestamp with time zone)
+         Filter: ((conclusion)::text = 'failure'::text)
+         Rows Removed by Filter: 165168
+         Index Searches: 1
+         Buffers: shared hit+read=4396
+(8 rows)
+
+CREATE INDEX
+                                                  QUERY PLAN                                                   
+---------------------------------------------------------------------------------------------------------------
+ Limit (actual rows=5.00 loops=1)
+   Buffers: shared hit+read=6
+   ->  Index Scan Backward using step_history_conclusion_started_at on step_history (actual rows=5.00 loops=1)
+         Index Cond: ((conclusion)::text = 'failure'::text)
+         Index Searches: 1
+         Buffers: shared hit+read=6
+(6 rows)
+
+CREATE INDEX
+                 index                 |  size   
+---------------------------------------+---------
+ ci.step_history_conclusion_started_at | 9792 kB
+ ci.step_history_pkey                  | 9688 kB
+ ci.step_history_started_at            | 7504 kB
+ ci.step_history_not_success           | 368 kB
+(4 rows)
+
+                                             QUERY PLAN                                             
+----------------------------------------------------------------------------------------------------
+ Aggregate (actual rows=1.00 loops=1)
+   Buffers: shared hit+read=6
+   ->  Index Only Scan using step_history_not_success on step_history (actual rows=1527.00 loops=1)
+         Index Cond: (started_at >= '2026-09-01 00:00:00+00'::timestamp with time zone)
+         Heap Fetches: 0
+         Index Searches: 1
+         Buffers: shared hit+read=6
+(7 rows)
+
+ERROR:  functions in index expression must be marked IMMUTABLE
+CREATE INDEX
+                                           QUERY PLAN                                           
+------------------------------------------------------------------------------------------------
+ Aggregate (actual rows=1.00 loops=1)
+   Buffers: shared hit+read=41
+   ->  Bitmap Heap Scan on step_history (actual rows=1533.00 loops=1)
+         Recheck Cond: (((started_at AT TIME ZONE 'UTC'::text))::date = '2026-09-14'::date)
+         Heap Blocks: exact=37
+         Buffers: shared hit+read=41
+         ->  Bitmap Index Scan on step_history_day (actual rows=1533.00 loops=1)
+               Index Cond: (((started_at AT TIME ZONE 'UTC'::text))::date = '2026-09-14'::date)
+               Index Searches: 1
+               Buffers: shared hit+read=4
+(10 rows)
+
+CREATE INDEX
+                                            QUERY PLAN                                            
+--------------------------------------------------------------------------------------------------
+ Aggregate (actual rows=1.00 loops=1)
+   Buffers: shared hit+read=70
+   ->  Index Only Scan using step_history_step_name on step_history (actual rows=9200.00 loops=1)
+         Index Cond: (step_name = 'Compile-fail doctests'::text)
+         Heap Fetches: 0
+         Index Searches: 1
+         Buffers: shared hit+read=70
+(7 rows)
+
+UPDATE 622
+                                            QUERY PLAN                                            
+--------------------------------------------------------------------------------------------------
+ Aggregate (actual rows=1.00 loops=1)
+   Buffers: shared hit+read=426
+   ->  Index Only Scan using step_history_step_name on step_history (actual rows=9200.00 loops=1)
+         Index Cond: (step_name = 'Compile-fail doctests'::text)
+         Heap Fetches: 1244
+         Index Searches: 1
+         Buffers: shared hit+read=426
+(7 rows)
+
+VACUUM
+                                            QUERY PLAN                                            
+--------------------------------------------------------------------------------------------------
+ Aggregate (actual rows=1.00 loops=1)
+   Buffers: shared hit+read=71
+   ->  Index Only Scan using step_history_step_name on step_history (actual rows=9200.00 loops=1)
+         Index Cond: (step_name = 'Compile-fail doctests'::text)
+         Heap Fetches: 0
+         Index Searches: 1
+         Buffers: shared hit+read=71
+(7 rows)
+
+CREATE INDEX
+                                            QUERY PLAN                                            
+--------------------------------------------------------------------------------------------------
+ Aggregate (actual rows=1.00 loops=1)
+   Buffers: shared hit+read=3631
+   ->  Bitmap Heap Scan on step_history (actual rows=4200.00 loops=1)
+         Recheck Cond: ((step_name = 'Toolchain'::text) AND (labels @> '{macos-latest}'::text[]))
+         Heap Blocks: exact=3532
+         Buffers: shared hit+read=3631
+         ->  BitmapAnd (actual rows=0.00 loops=1)
+               Buffers: shared hit+read=99
+               ->  Bitmap Index Scan on step_history_step_name (actual rows=13400.00 loops=1)
+                     Index Cond: (step_name = 'Toolchain'::text)
+                     Index Searches: 1
+                     Buffers: shared hit+read=84
+               ->  Bitmap Index Scan on step_history_labels (actual rows=80400.00 loops=1)
+                     Index Cond: (labels @> '{macos-latest}'::text[])
+                     Index Searches: 1
+                     Buffers: shared hit+read=15
+(16 rows)
+
+                                       QUERY PLAN                                       
+----------------------------------------------------------------------------------------
+ Aggregate (actual rows=1.00 loops=1)
+   Buffers: shared hit+read=5548
+   ->  Bitmap Heap Scan on step_history (actual rows=4200.00 loops=1)
+         Recheck Cond: (step_name = 'Toolchain'::text)
+         Filter: ('macos-latest'::text = ANY (labels))
+         Rows Removed by Filter: 9200
+         Heap Blocks: exact=5464
+         Buffers: shared hit+read=5548
+         ->  Bitmap Index Scan on step_history_step_name (actual rows=13400.00 loops=1)
+               Index Cond: (step_name = 'Toolchain'::text)
+               Index Searches: 1
+               Buffers: shared hit+read=84
+(12 rows)
+
+DROP INDEX
+CREATE INDEX
+ brin_size 
+-----------
+ 24 kB
+(1 row)
+
+                                          QUERY PLAN                                          
+----------------------------------------------------------------------------------------------
+ Aggregate (actual rows=1.00 loops=1)
+   Buffers: shared hit+read=87
+   ->  Bitmap Heap Scan on step_history (actual rows=15.00 loops=1)
+         Recheck Cond: (started_at >= '2026-09-14 00:00:00+00'::timestamp with time zone)
+         Rows Removed by Index Recheck: 2094
+         Filter: ((conclusion)::text = 'failure'::text)
+         Rows Removed by Filter: 1518
+         Heap Blocks: lossy=82
+         Buffers: shared hit+read=87
+         ->  Bitmap Index Scan on step_history_started_at_brin (actual rows=820.00 loops=1)
+               Index Cond: (started_at >= '2026-09-14 00:00:00+00'::timestamp with time zone)
+               Index Searches: 1
+               Buffers: shared hit+read=5
+(13 rows)
+
+  attname   | correlation 
+------------+-------------
+ id         |        1.00
+ started_at |        1.00
+ step_name  |        0.06
+(3 rows)
+
+ estimated | actual 
+-----------+--------
+      2254 |  18200
+(1 row)
+
+CREATE STATISTICS
+ANALYZE
+ estimated | actual 
+-----------+--------
+     17896 |  18200
+(1 row)
+
+               dependencies               
+------------------------------------------
+ {"2 => 3": 0.010889, "3 => 2": 0.980944}
+(1 row)
+

@@ -1,0 +1,5 @@
+CREATE FUNCTION ... BEGIN ATOMIC in an NpgsqlCommand: 42601: syntax error at end of input
+the same statements in an NpgsqlBatch: created
+SELECT ci.failure_rate($1): 0.17
+StoredProcedure ci.count_runs: runs = 18, failures = 3
+StoredProcedure ci.failure_rate: 42809: ci.failure_rate(text) is not a procedure (To call a function, use SELECT.)

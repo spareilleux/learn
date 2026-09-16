@@ -1,0 +1,2 @@
+READ COMMITTED: A and B read 65, both write 66, runs = 66
+REPEATABLE READ: A and B read 66, B's write gets 40001: ERROR: could not serialize access due to concurrent update

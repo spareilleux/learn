@@ -1,0 +1,157 @@
+                               json                               |                      jsonb                      
+------------------------------------------------------------------+-------------------------------------------------
+ {"name": "build", "labels": ["ubuntu-latest"], "name": "deploy"} | {"name": "deploy", "labels": ["ubuntu-latest"]}
+(1 row)
+
+CREATE TABLE
+INSERT 0 315
+  name  |      labels       |  first_label  | first_step | steps 
+--------+-------------------+---------------+------------+-------
+ build  | ["ubuntu-latest"] | ubuntu-latest | Set up job |     6
+ deploy | ["ubuntu-latest"] | ubuntu-latest | Set up job |     3
+(2 rows)
+
+ with_a_failed_step | on_windows | on_macos_or_windows 
+--------------------+------------+---------------------
+                 22 |         35 |                  69
+(1 row)
+
+                  job                  | failed_step 
+---------------------------------------+-------------
+ rust-for-csharp-java (ubuntu-latest)  | Formatting
+ rust-for-csharp-java (macos-latest)   | Formatting
+ rust-for-csharp-java (windows-latest) | Formatting
+ rust-for-csharp-java (ubuntu-latest)  | Formatting
+ rust-for-csharp-java (macos-latest)   | Formatting
+(5 rows)
+
+ number |                 name                 | conclusion | duration 
+--------+--------------------------------------+------------+----------
+      1 | Set up job                           | success    | 00:00:04
+      2 | Checkout                             | success    | 00:00:02
+      3 | Install, build, and upload site      | success    | 00:00:48
+      5 | Post Install, build, and upload site | success    | 00:00:00
+      6 | Post Checkout                        | success    | 00:00:01
+      7 | Complete job                         | success    | 00:00:00
+(6 rows)
+
+                                                                                                                                           summary                                                                                                                                           |      labels      
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------
+ {"id": 104004920113, "name": "build", "rerun": true, "run_id": 34852867099, "status": "completed", "conclusion": "success", "created_at": "2026-09-14T14:01:10Z", "started_at": "2026-09-14T14:01:14Z", "runner_name": "GitHub Actions 1000000319", "completed_at": "2026-09-14T14:02:12Z"} | ["ubuntu-24.04"]
+(1 row)
+
+INSERT 0 12285
+VACUUM
+ documents | size  
+-----------+-------
+     12600 | 15 MB
+(1 row)
+
+                                                QUERY PLAN                                                 
+-----------------------------------------------------------------------------------------------------------
+ Aggregate (actual rows=1.00 loops=1)
+   Buffers: shared hit+read=1881
+   ->  Seq Scan on job_docs (actual rows=40.00 loops=1)
+         Filter: (doc @> '{"steps": [{"name": "Compile-fail doctests", "conclusion": "failure"}]}'::jsonb)
+         Rows Removed by Filter: 12560
+         Buffers: shared hit+read=1881
+(6 rows)
+
+CREATE INDEX
+CREATE INDEX
+        index         |  size   
+----------------------+---------
+ ci.job_docs_ops      | 1688 kB
+ ci.job_docs_path_ops | 1752 kB
+(2 rows)
+
+                                                     QUERY PLAN                                                      
+---------------------------------------------------------------------------------------------------------------------
+ Aggregate (actual rows=1.00 loops=1)
+   Buffers: shared hit+read=85
+   ->  Bitmap Heap Scan on job_docs (actual rows=40.00 loops=1)
+         Recheck Cond: (doc @> '{"steps": [{"name": "Compile-fail doctests", "conclusion": "failure"}]}'::jsonb)
+         Rows Removed by Index Recheck: 240
+         Heap Blocks: exact=80
+         Buffers: shared hit+read=85
+         ->  Bitmap Index Scan on job_docs_path_ops (actual rows=280.00 loops=1)
+               Index Cond: (doc @> '{"steps": [{"name": "Compile-fail doctests", "conclusion": "failure"}]}'::jsonb)
+               Index Searches: 1
+               Buffers: shared hit+read=5
+(11 rows)
+
+CREATE SCHEMA
+CREATE TABLE
+                             english                             |                            french                            |            simple             
+-----------------------------------------------------------------+--------------------------------------------------------------+-------------------------------
+ 'bitmap':8 'chose':6 'index':1,9 'plan':3 'planner':5 'scan':10 | 'a':6 'chois':7 'index':1,11 'parcour':9 'plan':3 'planif':5 | 'and':2 'indexes':1 'plans':3
+(1 row)
+
+             query1             |           query2            
+--------------------------------+-----------------------------
+ 'connect' & 'pool' & !'aurora' | 'index' <-> 'scan' | 'brin'
+(1 row)
+
+INSERT 0 48
+CREATE INDEX
+      course       |      slug      | rank  
+-------------------+----------------+-------
+ postgresql-aurora | 04-csharp-java | 1.000
+ postgresql-aurora | 03-queries     | 0.625
+ postgresql-aurora | index          | 0.381
+(3 rows)
+
+      slug      |                                                 excerpt                                                 
+----------------+---------------------------------------------------------------------------------------------------------
+ 04-csharp-java | beat hundreds of idle ones. ## [Prepared] [statements] A [prepared] [statement] is parsed
+ index          | JDBC and HikariCP, including pools, [prepared] [statements] and `COPY`; - read a query
+ journal        | hours throws `ArgumentException`. - `pg_[prepared]_[statements]` counted the counting query itself once
+(3 rows)
+
+ with_accent | without_accent 
+-------------+----------------
+           3 |              0
+(1 row)
+
+CREATE EXTENSION
+CREATE TEXT SEARCH CONFIGURATION
+ALTER TEXT SEARCH CONFIGURATION
+       french        |    french_unaccent    
+---------------------+-----------------------
+ 'don':3 'modélis':1 | 'donne':3 'modelis':1
+(1 row)
+
+ without_accent 
+----------------
+              3
+(1 row)
+
+CREATE EXTENSION
+              trigrams               
+-------------------------------------
+ {"  n"," np",gsq,npg,pgs,"ql ",sql}
+(1 row)
+
+        package        | similarity 
+-----------------------+------------
+ MongoDB.Driver        |       0.75
+ MongoDB.Driver.GridFS |       0.52
+(2 rows)
+
+SELECT 88160
+CREATE INDEX
+VACUUM
+                                     QUERY PLAN                                     
+------------------------------------------------------------------------------------
+ Aggregate (actual rows=1.00 loops=1)
+   Buffers: shared hit+read=500
+   ->  Bitmap Heap Scan on doc_steps (actual rows=1840.00 loops=1)
+         Recheck Cond: (name ~~* '%doctest%'::text)
+         Heap Blocks: exact=487
+         Buffers: shared hit+read=500
+         ->  Bitmap Index Scan on doc_steps_name_trgm (actual rows=1840.00 loops=1)
+               Index Cond: (name ~~* '%doctest%'::text)
+               Index Searches: 1
+               Buffers: shared hit+read=13
+(10 rows)
+

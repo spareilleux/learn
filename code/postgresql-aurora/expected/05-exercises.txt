@@ -1,0 +1,63 @@
+CREATE INDEX
+                                            QUERY PLAN                                             
+---------------------------------------------------------------------------------------------------
+ Limit (actual rows=20.00 loops=1)
+   Buffers: shared hit+read=15
+   ->  Index Scan Backward using step_history_failures on step_history (actual rows=20.00 loops=1)
+         Index Cond: (workflow_name = 'Rust course examples'::text)
+         Index Searches: 1
+         Buffers: shared hit+read=15
+(6 rows)
+
+  size  
+--------
+ 232 kB
+(1 row)
+
+CREATE INDEX
+                                                 QUERY PLAN                                                 
+------------------------------------------------------------------------------------------------------------
+ Aggregate (actual rows=1.00 loops=1)
+   Buffers: shared hit+read=935
+   ->  Index Only Scan using step_history_started_at on step_history (actual rows=2204.00 loops=1)
+         Filter: (date_trunc('day'::text, started_at) = '2026-09-10 00:00:00+00'::timestamp with time zone)
+         Rows Removed by Filter: 438596
+         Heap Fetches: 0
+         Index Searches: 1
+         Buffers: shared hit+read=935
+(8 rows)
+
+                                                                           QUERY PLAN                                                                           
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Aggregate (actual rows=1.00 loops=1)
+   Buffers: shared hit+read=8
+   ->  Index Only Scan using step_history_started_at on step_history (actual rows=2204.00 loops=1)
+         Index Cond: ((started_at >= '2026-09-10 00:00:00+00'::timestamp with time zone) AND (started_at < '2026-09-11 00:00:00+00'::timestamp with time zone))
+         Heap Fetches: 0
+         Index Searches: 1
+         Buffers: shared hit+read=8
+(7 rows)
+
+SELECT 440800
+CREATE INDEX
+VACUUM
+  attname   | correlation 
+------------+-------------
+ started_at |        0.06
+(1 row)
+
+                                          QUERY PLAN                                          
+----------------------------------------------------------------------------------------------
+ Aggregate (actual rows=1.00 loops=1)
+   Buffers: shared hit+read=4869
+   ->  Bitmap Heap Scan on step_history_by_name (actual rows=1533.00 loops=1)
+         Recheck Cond: (started_at >= '2026-09-14 00:00:00+00'::timestamp with time zone)
+         Rows Removed by Index Recheck: 212661
+         Heap Blocks: lossy=4864
+         Buffers: shared hit+read=4869
+         ->  Bitmap Index Scan on step_history_by_name_brin (actual rows=48640.00 loops=1)
+               Index Cond: (started_at >= '2026-09-14 00:00:00+00'::timestamp with time zone)
+               Index Searches: 1
+               Buffers: shared hit+read=5
+(11 rows)
+
