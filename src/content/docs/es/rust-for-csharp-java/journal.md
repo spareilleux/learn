@@ -25,9 +25,9 @@ sidebar:
 - [x] Lección 16 — Interfaces de escritorio en Rust, y luego Tauri
 - [x] Lección 17 — Comandos de Tauri
 - [x] Lección 18 — Estado, eventos y canales
-- [ ] Lección 19 — El frontend: Vite, TypeScript y tipos generados
-- [ ] Lección 20 — Seguridad: capabilities, CSP y plugins
-- [ ] Lección 21 — Tests y empaquetado
+- [x] Lección 19 — El frontend: Vite, TypeScript y tipos generados
+- [x] Lección 20 — Seguridad: capabilities, CSP y plugins
+- [x] Lección 21 — Tests, empaquetado y distribución
 
 ## 2026-09-13 — Lecciones 1 a 4
 
@@ -121,6 +121,31 @@ Empieza la parte 2. El curso construye ahora un explorador de acordes con Tauri 
 **Encontrado en la documentación de Tauri** (tauri-docs en `a6b59b7`): el ejemplo de error de la página *Calling Rust*, `Ok(format!(value))`, no compila; su ejemplo de `AppHandle` usa API de Tauri 1 (`GlobalShortcutManager`, `app_dir`); y el panic en ejecución de la página *State management* para un tipo que no coincide, citado arriba.
 
 **Dogfooding de IX** (`crates/ix-demo` en `a7e5fbc`, leído, sin cambios): todo el cálculo se ejecuta dentro del `ui` de egui, en el hilo de dibujo (58 manejadores `clicked()`, ni hilos ni canales); la pestaña *Neural Network (ix-nn)* entrena su propia red `ndarray` en lugar de llamar a `ix-nn`; la lista de capas que teclea el usuario descarta en silencio las entradas inválidas; `eframe = "0.31"` cuando la versión actual es la 0.36.2, sin `Cargo.lock` commiteado.
+
+## 2026-09-16 — Lecciones 19 a 21: frontend, seguridad, tests y empaquetado
+
+Termina la parte 2. El explorador recibe un segundo frontend en TypeScript con Vite (seleccionado con `--config`, `ui/` se queda), tipos generados por ts-rs, los plugins dialog, fs y store con una capability `export`, tests Vitest con `mockIPC`, tests WebdriverIO contra el binario de release, e instaladores. La CI comprueba ahora también los bindings generados, ejecuta Vitest y los tests end-to-end, y compila los instaladores en los tres sistemas.
+
+**Cosas que primero hice mal:**
+
+- ts-rs tipó el `elapsed_ms: u128` de la lección 18 como `bigint`, mientras que serde_json envía un número normal: `tsc` rechazó `elapsedMs / 1000`. Corregido con `#[ts(type = "number")]` en el campo.
+- Un test Vitest construido con `elapsedMs: 3` pasaba mientras `tsc` rechazaba el mismo archivo: Vitest no comprueba los tipos.
+- `@wdio/tauri-service`, la vía que recomienda la página de Tauri sobre WebDriver, hizo que dos tests tardaran 1 min 30 s: antes de cada comando esperaba 5 s a `tauri-plugin-wdio`, un segundo plugin que el curso no usa. WebdriverIO a secas contra el servidor incrustado los ejecuta en más o menos un segundo.
+- `browser.keys("Enter")` en el campo del acorde no enviaba el formulario; hacer clic en el botón de envío sí.
+- En `ubuntu-latest`, el servidor WebDriver incrustado no respondió dentro de los 20 s que esperaba mi configuración; el propio servicio de WebdriverIO espera 60 s en CI. Con 60 s, el servidor respondió a los 25 s más o menos.
+- En `windows-latest`, lo contrario: el servidor respondió a los 394 ms, antes de que la página hubiera enganchado sus handlers, y el primer test hizo clic en un formulario HTML normal. Los tests esperan ahora a que la página haya rellenado desde Rust su lista de calidades.
+- Mis primeros intentos de automatizar el diálogo *Guardar como* de Windows mediante UI Automation pulsaban botones que no hacían nada y dejaban dos diálogos abiertos; funcionó fijar el nombre del archivo con `WM_SETTEXT` y enviar `IDOK` con `WM_COMMAND`.
+
+**Sorpresas:**
+
+- Con `tauri dev` y Vite, la CSP no se aplica: un `fetch` a una API remota devolvió `200`, y la misma llamada en el build de release se bloqueó con una violación de `connect-src`.
+- Los mensajes de rechazo difieren entre builds: `dialog.save not allowed. Permissions associated with this command: …` en desarrollo, `Command plugin:store|load not allowed by ACL` en release.
+- El plugin dialog añade al scope de fs el archivo que elige el usuario, y solo ese archivo: la misma página pudo entonces escribir `favorites.txt` y no `other.txt` en la misma carpeta.
+- Un cambio de CSS actualizó la página en caliente y conservó su estado; un cambio en `main.ts` recargó la página, y los favoritos sobrevivieron porque viven en Rust.
+- El ejecutable de release pasó de 4,2 MB (lección 16) a 4,9 MB con los tres plugins; el instalador NSIS pesa 1,5 MB y el MSI 2,2 MB, ya que WebView2 no va incrustado. La feature `webdriver` añade 1,2 MB.
+- `tauri build` descargó por su cuenta WiX 3.14 y NSIS 3.11 la primera vez, con comprobación de hashes.
+
+**No probado, marcado *por verificar* en las lecciones:** instalar los instaladores, la firma de código y la notarización, el updater (solo se ejecutó `tauri signer generate`), tauri-specta, los scopes estáticos de fs, `AppManifest::commands`, los targets móviles.
 
 ## Preguntas abiertas
 

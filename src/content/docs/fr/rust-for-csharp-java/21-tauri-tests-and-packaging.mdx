@@ -1,0 +1,480 @@
+---
+title: 21. Tests, packaging et distribution avec Tauri
+description: Quatre niveaux de tests pour une application Tauri — Rust, le runtime simulé, Vitest avec mockIPC, WebdriverIO contre le vrai binaire — puis tauri build avec les installeurs de chaque système et leurs tailles mesurées, la signature de code, l'updater et un aperçu du mobile — comparés à xUnit, WebApplicationFactory, Playwright, MSIX et jpackage.
+sidebar:
+  order: 21
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Exemple complet : [`l16-tauri/frontend/src/api.test.ts`](https://github.com/spareilleux/learn/blob/main/code/rust-for-csharp-java/l16-tauri/frontend/src/api.test.ts), [`e2e/`](https://github.com/spareilleux/learn/tree/main/code/rust-for-csharp-java/l16-tauri/e2e) et le job de CI `tauri-chord-explorer` dans [`.github/workflows/rust-examples.yml`](https://github.com/spareilleux/learn/blob/main/.github/workflows/rust-examples.yml).
+
+L'explorateur fonctionne sur la machine de l'auteur. Cette leçon rend cette affirmation vérifiable sur trois systèmes, puis transforme l'application en fichiers que quelqu'un d'autre peut installer.
+
+## Ce que vous connaissez déjà
+
+| Niveau | Tauri | .NET | Java |
+|---|---|---|---|
+| La logique pure | `cargo test` sur `theory` | xUnit | JUnit |
+| Le backend par son vrai point d'entrée, sans interface | le runtime simulé [`tauri::test`](https://docs.rs/tauri/2.11.5/tauri/test/index.html) (leçons 17-18) | [`WebApplicationFactory`](https://learn.microsoft.com/aspnet/core/test/integration-tests) | [`MockMvc`](https://docs.spring.io/spring-framework/reference/testing/mockmvc.html) de Spring |
+| Le frontend, avec un faux backend | [Vitest](https://vitest.dev/) + [`mockIPC`](https://v2.tauri.app/develop/tests/mocking/) | bUnit, Jest | Jest |
+| L'application entière | [WebDriver](https://v2.tauri.app/develop/tests/webdriver/) | [Playwright](https://playwright.dev/dotnet/), WinAppDriver | Selenium |
+| Les installeurs | `tauri build` | [MSIX](https://learn.microsoft.com/windows/msix/overview), WiX | [`jpackage`](https://docs.oracle.com/en/java/javase/25/docs/specs/man/jpackage.html) |
+
+Les deux premiers niveaux existent déjà : 15 tests dans `theory`, 12 dans `src-tauri/tests/` qui appellent chaque commande à travers la couche IPC de Tauri, sans fenêtre. Cette leçon ajoute les deux autres.
+
+## Le frontend avec `mockIPC`
+
+`@tauri-apps/api/mocks` remplace la couche IPC dans un DOM simulé : `invoke` appelle une fonction du test au lieu de Rust. Vitest tourne dans la configuration Vite de la leçon 19, avec [jsdom](https://github.com/jsdom/jsdom) (extrait de [`vite.config.ts`, lignes 26-30](https://github.com/spareilleux/learn/blob/2ce5e72/code/rust-for-csharp-java/l16-tauri/vite.config.ts#L26-L30)) :
+
+```ts
+  test: {
+    // Un DOM simulé : ni webview ni Rust, c'est mockIPC qui répond à invoke
+    environment: "jsdom",
+    include: ["src/**/*.test.ts"],
+  },
+```
+
+Un test vérifie ce que la page envoie et comment elle lit la réponse (extrait de [`frontend/src/api.test.ts`, lignes 11-22](https://github.com/spareilleux/learn/blob/2ce5e72/code/rust-for-csharp-java/l16-tauri/frontend/src/api.test.ts#L11-L22)) :
+
+```ts
+test("spellChord sends the symbol and returns the command's value", async () => {
+  const calls: [string, unknown][] = [];
+  mockIPC((cmd, args) => {
+    calls.push([cmd, args]);
+    return { symbol: "Am7", qualityName: "minor seventh", notes: ["A", "C", "E", "G"], intervals: ["1", "b3", "5", "b7"] };
+  });
+
+  const chord = await api.spellChord("Am7");
+
+  expect(calls).toEqual([["spell_chord", { symbol: "Am7" }]]);
+  expect(chord.notes).toEqual(["A", "C", "E", "G"]);
+});
+```
+
+Le canal de la leçon 18 fonctionne aussi : le mock reçoit l'objet `Channel` lui-même et peut appeler son `onmessage` (extrait de [`frontend/src/api.test.ts`, lignes 37-44](https://github.com/spareilleux/learn/blob/2ce5e72/code/rust-for-csharp-java/l16-tauri/frontend/src/api.test.ts#L37-L44)) :
+
+```ts
+test("findVoicings passes each channel message to the callback", async () => {
+  mockIPC((cmd, args) => {
+    if (cmd !== "find_voicings") return;
+    const { onEvent, maxSpan } = args as { onEvent: Channel<SearchEvent>; maxSpan: number };
+    onEvent.onmessage({ event: "voicings", data: { frets: ["x32010"] } });
+    onEvent.onmessage({ event: "finished", data: { found: 1, elapsedMs: 3, cancelled: false } });
+    return maxSpan;
+  });
+```
+
+```text
+ RUN  v5.0.1 C:/Users/spare/source/repos/learn/code/rust-for-csharp-java/l16-tauri/frontend
+
+ ✓ src/api.test.ts > spellChord sends the symbol and returns the command's value 2ms
+ ✓ src/api.test.ts > a rejected command is a CommandError, a refused call is a string 0ms
+ ✓ src/api.test.ts > findVoicings passes each channel message to the callback 1ms
+
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+   Start at  09:52:30
+   Duration  869ms (environment 94%, transform 4%, import 2%)
+```
+
+Deux limites, rencontrées toutes les deux en écrivant cette leçon :
+
+- **Vitest ne vérifie pas les types.** Tant que `elapsedMs` était encore un `bigint` (leçon 19), le troisième test passait, et `tsc` rejetait le même fichier : `frontend/src/api.test.ts(42,62): error TS2322: Type 'number' is not assignable to type 'bigint'.` Le `npm run web:build` du cours lance `tsc` avant Vite, et la CI le lance avant `npm test`.
+- **Le mock répond à tout ce qu'on lui demande.** Renommez la commande Rust et ces tests passent toujours. Ils testent la logique du frontend, pas le contrat avec Rust : c'est le travail du niveau suivant.
+
+## L'application entière avec WebDriver
+
+[WebDriver](https://www.w3.org/TR/webdriver2/) est le protocole du W3C derrière Selenium : un serveur qui pilote un navigateur, ici la webview de l'application. La documentation de Tauri décrit deux voies :
+
+- `tauri-driver`, un proxy vers le driver de la plateforme : Microsoft Edge Driver sous Windows, `WebKitWebDriver` sous Linux. macOS n'a pas de driver pour WKWebView, donc pas de macOS.
+- [`tauri-plugin-wdio-webdriver`](https://crates.io/crates/tauri-plugin-wdio-webdriver) (1.4.0), un serveur WebDriver *à l'intérieur* de l'application, maintenu par le projet [WebdriverIO](https://webdriver.io/). Pas de driver externe, et il fonctionne sous macOS.
+
+Le cours prend la seconde voie, derrière une feature Cargo, pour que l'application que vous livrez n'ait pas de port WebDriver (extrait de [`src-tauri/Cargo.toml`, lignes 27-32](https://github.com/spareilleux/learn/blob/2ce5e72/code/rust-for-csharp-java/l16-tauri/src-tauri/Cargo.toml#L27-L32)) :
+
+```toml
+# Leçon 21 : un serveur WebDriver dans l'application, compilé seulement pour les tests de bout en bout
+tauri-plugin-wdio-webdriver = { version = "1.4.0", optional = true }
+
+[features]
+# `tauri build --features webdriver` construit le binaire que pilote WebdriverIO
+webdriver = ["dep:tauri-plugin-wdio-webdriver"]
+```
+
+(extrait de [`src-tauri/src/lib.rs`, lignes 49-51](https://github.com/spareilleux/learn/blob/2ce5e72/code/rust-for-csharp-java/l16-tauri/src-tauri/src/lib.rs#L49-L51)) :
+
+```rust
+    // Leçon 21 : absent des builds normaux, l'application livrée n'ouvre donc aucun port WebDriver
+    #[cfg(feature = "webdriver")]
+    let builder = builder.plugin(tauri_plugin_wdio_webdriver::init());
+```
+
+`npm run build:e2e` lance `tauri build --no-bundle --features webdriver` avec le frontend Vite. La configuration WebdriverIO démarre ce binaire et attend son serveur sur le port 4445 (extrait de [`e2e/wdio.conf.ts`, lignes 34-56](https://github.com/spareilleux/learn/blob/2ce5e72/code/rust-for-csharp-java/l16-tauri/e2e/wdio.conf.ts#L34-L56)) :
+
+```ts
+export const config: WebdriverIO.Config = {
+  runner: "local",
+  specs: ["./*.e2e.ts"],
+  maxInstances: 1,
+  hostname: "127.0.0.1",
+  port,
+  capabilities: [{}],
+  framework: "mocha",
+  reporters: ["spec"],
+  logLevel: "warn",
+  waitforTimeout: 10000,
+  mochaOpts: { timeout: 60000 },
+
+  async onPrepare() {
+    const started = Date.now();
+    app = spawn(binary, [], { env: { ...process.env, TAURI_WEBDRIVER_PORT: String(port) }, stdio: "inherit" });
+    await serverReady();
+    console.log(`WebDriver server ready after ${Date.now() - started} ms`);
+  },
+  onComplete() {
+    app?.kill();
+  },
+};
+```
+
+Le test saisit, clique et lit, et tout ce qui se trouve entre les deux est réel : la page, l'IPC, les capabilities, la commande Rust (extrait de [`e2e/chords.e2e.ts`, lignes 5-25](https://github.com/spareilleux/learn/blob/c34306b/code/rust-for-csharp-java/l16-tauri/e2e/chords.e2e.ts#L5-L25)) :
+
+```ts
+describe("chord explorer", () => {
+  // Le serveur WebDriver peut répondre avant que le script de la page ait tourné : attendre la
+  // liste des qualités, que la page remplit depuis Rust une fois ses gestionnaires en place
+  before(async () => {
+    await expect($("#qualities")).toHaveText(expect.stringContaining("Qualities:"));
+  });
+
+  it("spells the chord typed in the form", async () => {
+    await $("#chord-input").setValue("Am7");
+    await $("#chord-form button[type=submit]").click();
+
+    await expect($("#chord-output")).toHaveText("Am7 (minor seventh): A C E G  —  1 b3 5 b7");
+  });
+
+  it("shows a Rust error when the quality is unknown", async () => {
+    await $("#chord-input").setValue("Cm9");
+    await $("#chord-form button[type=submit]").click();
+
+    await expect($("#chord-error")).toHaveText("unknownQuality: unknown chord quality `m9` in `Cm9`");
+  });
+});
+```
+
+Sur le runner `windows-latest` (`npm run build:e2e`, puis `npm run test:e2e`) :
+
+```text
+> wdio run e2e/wdio.conf.ts
+
+WebDriver server ready after 287 ms
+[msedge 152.0.0.0 windows #0-0] Running: msedge (v152.0.0.0) on windows
+[msedge 152.0.0.0 windows #0-0] » e2e\chords.e2e.ts
+[msedge 152.0.0.0 windows #0-0] chord explorer
+[msedge 152.0.0.0 windows #0-0]    ✓ spells the chord typed in the form
+[msedge 152.0.0.0 windows #0-0]    ✓ shows a Rust error when the quality is unknown
+[msedge 152.0.0.0 windows #0-0]
+[msedge 152.0.0.0 windows #0-0] 2 passing (973ms)
+Spec Files:	 1 passed, 1 total (100% completed) in 00:00:05
+```
+
+Le serveur se présente comme `msedge`, avec la version de WebView2 : 152 sur le runner, 153 sur la machine de l'auteur (leçon 16). Pour vérifier que le test peut échouer, les notes attendues ont été changées en `A C E Gb` lors d'une exécution locale :
+
+```text
+Expected: "Am7 (minor seventh): A C E Gb  —  1 b3 5 b7"
+Received: "Am7 (minor seventh): A C E G  —  1 b3 5 b7"
+```
+
+Quatre choses n'ont pas fonctionné du premier coup :
+
+- `setValue` suivi de `browser.keys("Enter")` n'a pas soumis le formulaire : la sortie montrait toujours l'accord par défaut, `Bbm7 (minor seventh): Bb Db F Ab  —  1 b3 5 b7`. Cliquer sur le bouton d'envoi fait ce que fait un utilisateur.
+- La page WebDriver de Tauri recommande le [`@wdio/tauri-service`](https://webdriver.io/docs/desktop-testing/tauri) (1.4.0). Avec lui, les deux mêmes tests passaient en 1 min 30 s au lieu d'une seconde, avec un avertissement avant chaque commande : `WARN tauri-service:window: Failed to get window states: Error: Tauri core.invoke not available after 5s timeout`. Le service attend un second plugin, `tauri-plugin-wdio`, plus son paquet npm importé par la page, pour son `browser.tauri.execute()` et ses mocks de commandes. Le cours n'a besoin ni de l'un ni de l'autre, il parle donc directement au serveur embarqué.
+- Sur `ubuntu-latest`, la première configuration attendait le serveur 20 s puis abandonnait avec `Error: no WebDriver server on port 4445`. L'application met là-bas environ 25 s à démarrer sous un écran virtuel ; la configuration attend maintenant jusqu'à 60 s, comme le fait le service WebdriverIO en CI, et s'arrête aussitôt si l'application se termine.
+- Sur `windows-latest`, c'est l'inverse qui s'est produit : le serveur a répondu après 394 ms, avant que le script de la page ait attaché ses gestionnaires. Le clic a soumis un simple formulaire HTML, et le test a lu `Received: ""`. Le hook `before` attend un texte que la page n'écrit qu'après avoir appelé Rust. La machine de l'auteur n'est jamais tombée dans cette fenêtre de temps ; deux runners de vitesses différentes ont révélé les deux problèmes de timing.
+
+Sur chaque système :
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+Rien à installer : le serveur embarqué pilote WebView2. Sortie ci-dessus, depuis `windows-latest`.
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+L'application a besoin d'un écran. La CI lance les tests sous un serveur X virtuel, `xvfb-run -a npm run test:e2e`, après `sudo apt-get install -y xvfb`.
+
+```text
+WebDriver server ready after 25614 ms
+libEGL warning: DRI3 error: Could not get DRI3 device
+libEGL warning: Ensure your X server supports DRI3 to get accelerated rendering
+[WebKitGTK 605.1.15 linux #0-0] Running: WebKitGTK (v605.1.15) on linux
+[WebKitGTK 605.1.15 linux #0-0] » e2e/chords.e2e.ts
+[WebKitGTK 605.1.15 linux #0-0] chord explorer
+[WebKitGTK 605.1.15 linux #0-0]    ✓ spells the chord typed in the form
+[WebKitGTK 605.1.15 linux #0-0]    ✓ shows a Rust error when the quality is unknown
+[WebKitGTK 605.1.15 linux #0-0]
+[WebKitGTK 605.1.15 linux #0-0] 2 passing (85ms)
+Spec Files:	 1 passed, 1 total (100% completed) in 00:00:09
+```
+
+Les avertissements `libEGL` indiquent que l'écran virtuel n'a pas d'accélération GPU. Le job définit aussi `NO_AT_BRIDGE=1`, puisque le runner n'a pas de bus d'accessibilité. Sous WSLg, l'application utiliserait plutôt l'affichage de WSLg (*à vérifier*).
+
+</TabItem>
+<TabItem label="macOS">
+
+Rien à installer : le serveur embarqué est la voie qui prend en charge WKWebView. Sur le runner `macos-latest` (Apple silicon) :
+
+```text
+WebDriver server ready after 535 ms
+[webkit 605.1.15 macos #0-0] Running: webkit (v605.1.15) on macos
+[webkit 605.1.15 macos #0-0] » e2e/chords.e2e.ts
+[webkit 605.1.15 macos #0-0] chord explorer
+[webkit 605.1.15 macos #0-0]    ✓ spells the chord typed in the form
+[webkit 605.1.15 macos #0-0]    ✓ shows a Rust error when the quality is unknown
+[webkit 605.1.15 macos #0-0]
+[webkit 605.1.15 macos #0-0] 2 passing (1s)
+Spec Files:	 1 passed, 1 total (100% completed) in 00:00:07
+```
+
+</TabItem>
+</Tabs>
+
+## `tauri build`
+
+`tauri build` compile le binaire de release, embarque le frontend, et produit les installeurs listés dans `bundle.targets` (`"all"` dans la configuration du cours). Sous Windows (`npm run build:vite`) :
+
+```text
+    Finished `release` profile [optimized] target(s) in 3m 05s
+       Built application at: C:\Users\spare\source\repos\learn\code\rust-for-csharp-java\l16-tauri\target\release\chord-explorer.exe
+        Info Patching C:\Users\spare\source\repos\learn\code\rust-for-csharp-java\l16-tauri\target\release\chord-explorer.exe with bundle type information: msi
+        Info Verifying wix package
+ Downloading https://github.com/wixtoolset/wix3/releases/download/wix3141rtm/wix314-binaries.zip
+        Info validating hash
+        Info extracting WIX
+        Info Target: x64
+     Running candle for "C:\\Users\\spare\\source\\repos\\learn\\code\\rust-for-csharp-java\\l16-tauri\\target\\release\\wix\\x64\\main.wxs"
+     Running light to produce C:\Users\spare\source\repos\learn\code\rust-for-csharp-java\l16-tauri\target\release\bundle\msi\Chord Explorer_0.1.0_x64_en-US.msi
+        Info Patching C:\Users\spare\source\repos\learn\code\rust-for-csharp-java\l16-tauri\target\release\chord-explorer.exe with bundle type information: nsis
+        Info Verifying NSIS package
+ Downloading https://github.com/tauri-apps/binary-releases/releases/download/nsis-3.11/nsis-3.11.zip
+        Info validating hash
+        Info extracting NSIS
+ Downloading https://github.com/tauri-apps/nsis-tauri-utils/releases/download/nsis_tauri_utils-v0.5.3/nsis_tauri_utils.dll
+        Info validating hash
+        Info Target: x64
+     Running makensis to produce C:\Users\spare\source\repos\learn\code\rust-for-csharp-java\l16-tauri\target\release\bundle\nsis\Chord Explorer_0.1.0_x64-setup.exe
+    Finished 2 bundles at:
+        C:\Users\spare\source\repos\learn\code\rust-for-csharp-java\l16-tauri\target\release\bundle\msi\Chord Explorer_0.1.0_x64_en-US.msi
+        C:\Users\spare\source\repos\learn\code\rust-for-csharp-java\l16-tauri\target\release\bundle\nsis\Chord Explorer_0.1.0_x64-setup.exe
+```
+
+La CLI a téléchargé WiX 3.14 et NSIS 3.11 à la première utilisation, vérifié leurs empreintes, et les a mis en cache : rien à installer au préalable. Elle a aussi *patché* l'exécutable avant chaque installeur, en y écrivant le type de paquet auquel il appartient (`msi`, puis `nsis`).
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+| Fichier | Taille |
+|---|---|
+| `chord-explorer.exe` (release, LTO, strippé) | 5 120 000 octets (4,9 Mo) |
+| le même avec `--features webdriver` | 6 330 880 octets (6,0 Mo) |
+| `bundle/nsis/Chord Explorer_0.1.0_x64-setup.exe` | 1 570 344 octets (1,5 Mo) |
+| `bundle/msi/Chord Explorer_0.1.0_x64_en-US.msi` | 2 351 104 octets (2,2 Mo) |
+
+Aucun des deux installeurs ne contient WebView2. Le [`webviewInstallMode`](https://v2.tauri.app/distribute/windows-installer/#webview2-installation-options) par défaut est `downloadBootstrapper` : si WebView2 manque, l'installeur le télécharge, ce dont Windows 11 n'a jamais besoin. Les autres modes embarquent le bootstrapper (environ 1,8 Mo), l'installeur hors ligne (environ 127 Mo) ou un runtime fixe (environ 180 Mo), selon la documentation de Tauri.
+
+MSI est le format qu'attendent les outils de déploiement en entreprise comme Intune ou les stratégies de groupe ; NSIS donne un `setup.exe` plus petit et personnalisable. Les installeurs n'ont pas été lancés sur la machine de l'auteur (*à vérifier*).
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+`tauri build` sous Ubuntu produit un `.deb`, un `.rpm` et une AppImage. Depuis le runner de CI, `ubuntu-latest` (x86-64) :
+
+```text
+     Bundling Chord Explorer_0.1.0_amd64.deb (/home/runner/work/learn/learn/code/rust-for-csharp-java/l16-tauri/target/release/bundle/deb/Chord Explorer_0.1.0_amd64.deb)
+     Bundling Chord Explorer-0.1.0-1.x86_64.rpm (/home/runner/work/learn/learn/code/rust-for-csharp-java/l16-tauri/target/release/bundle/rpm/Chord Explorer-0.1.0-1.x86_64.rpm)
+     Bundling Chord Explorer_0.1.0_amd64.AppImage (/home/runner/work/learn/learn/code/rust-for-csharp-java/l16-tauri/target/release/bundle/appimage/Chord Explorer_0.1.0_amd64.AppImage)
+     Finished 3 bundles at:
+```
+
+| Fichier | Taille |
+|---|---|
+| `chord-explorer` (release) | 5 512 296 octets (5,3 Mo) |
+| `bundle/deb/Chord Explorer_0.1.0_amd64.deb` | 2 089 240 octets (2,0 Mo) |
+| `bundle/rpm/Chord Explorer-0.1.0-1.x86_64.rpm` | 2 091 830 octets (2,0 Mo) |
+| `bundle/appimage/Chord Explorer_0.1.0_amd64.AppImage` | 77 249 016 octets (73,7 Mo) |
+
+Le `.deb` et le `.rpm` laissent le gestionnaire de paquets installer WebKitGTK comme dépendance. L'AppImage est un seul fichier exécutable destiné à tourner sur n'importe quelle distribution, elle transporte donc elle-même des bibliothèques : 37 fois la taille du `.deb` (*à vérifier* : quelles bibliothèques, et si elle démarre sur une distribution sans WebKitGTK).
+
+</TabItem>
+<TabItem label="macOS">
+
+`tauri build` sous macOS produit un bundle `.app` et un `.dmg`. Depuis le runner de CI, `macos-latest`, sur Apple silicon :
+
+```text
+     Bundling Chord Explorer.app (/Users/runner/work/learn/learn/code/rust-for-csharp-java/l16-tauri/target/release/bundle/macos/Chord Explorer.app)
+     Bundling Chord Explorer_0.1.0_aarch64.dmg (/Users/runner/work/learn/learn/code/rust-for-csharp-java/l16-tauri/target/release/bundle/dmg/Chord Explorer_0.1.0_aarch64.dmg)
+      Running bundle_dmg.sh
+     Finished 2 bundles at:
+```
+
+| Fichier | Taille |
+|---|---|
+| `chord-explorer` (release, arm64) | 4 608 608 octets (4,4 Mo) |
+| `bundle/macos/Chord Explorer.app` | 4 608 Ko sur le disque (`du -sk`) |
+| `bundle/dmg/Chord Explorer_0.1.0_aarch64.dmg` | 2 114 226 octets (2,0 Mo) |
+
+WKWebView fait partie du système, donc le bundle pèse à peu près ce que pèse son exécutable. Le nom du fichier indique `aarch64` : un build pour les Mac Intel demande `--target x86_64-apple-darwin`, ou `universal-apple-darwin` pour les deux dans un seul bundle (*à vérifier*).
+
+</TabItem>
+</Tabs>
+
+Pour comparaison, la leçon 16 a mesuré Electron 44.3.0 pour Windows x64 à 385 Mo décompressé, avant la moindre ligne de code applicatif.
+
+## La signature de code
+
+Aucun des installeurs ci-dessus n'est signé. Windows le dit :
+
+```powershell
+Get-AuthenticodeSignature "target\release\bundle\nsis\Chord Explorer_0.1.0_x64-setup.exe" | Format-List Status, StatusMessage
+```
+
+```text
+Status        : NotSigned
+StatusMessage : The file C:\Users\spare\source\repos\learn\code\rust-for-csharp-java\l16-tauri\target\release\bundle\nsis\Chord Explorer_0.1.0_x64-setup.exe is not digitally signed. […]
+```
+
+Le cours ne signe rien : un certificat coûte de l'argent et appartient à une personne ou à une entreprise. Ce qu'attend chaque système, d'après les guides de distribution de Tauri (*à vérifier*, rien de tout cela n'a été essayé ici) :
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+Un installeur non signé téléchargé avec un navigateur déclenche un avertissement [SmartScreen](https://learn.microsoft.com/windows/apps/package-and-deploy/smartscreen-reputation). La signature utilise un certificat de signature de code OV ou EV, ou une clé dans Azure Key Vault, configuré dans `bundle.windows` (`certificateThumbprint`, `digestAlgorithm`, `timestampUrl`, ou une `signCommand` personnalisée). Depuis 2024, un certificat EV n'accorde plus de réputation immédiate : un fichier nouvellement signé peut encore afficher l'avertissement jusqu'à ce qu'il se construise une réputation. La publication sur le Microsoft Store exige la signature.
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+Pas de signature à l'échelle du système : un `.deb` ou un `.rpm` est signé par le dépôt qui le distribue (APT, DNF), et une AppImage peut porter une signature GPG (`SIGN=1`, avec `SIGN_KEY` et `APPIMAGETOOL_SIGN_PASSPHRASE` dans l'environnement de `tauri build`).
+
+</TabItem>
+<TabItem label="macOS">
+
+Hors de l'App Store, une application est signée avec un certificat *Developer ID Application*, puis **notarisée** : envoyée à Apple, qui l'analyse et renvoie un ticket que `tauri build` agrafe au bundle. Les deux demandent une adhésion payante à l'Apple Developer Program ; avec un compte gratuit, l'application ne s'ouvre qu'après que l'utilisateur a contourné Gatekeeper. Les identifiants vont dans des variables d'environnement (`APPLE_CERTIFICATE`, `APPLE_CERTIFICATE_PASSWORD`, `APPLE_SIGNING_IDENTITY`, puis `APPLE_ID`, `APPLE_PASSWORD` et `APPLE_TEAM_ID`, ou `APPLE_API_ISSUER`, `APPLE_API_KEY` et `APPLE_API_KEY_PATH` pour une clé d'API App Store Connect).
+
+</TabItem>
+</Tabs>
+
+## L'updater
+
+Le [plugin updater](https://v2.tauri.app/plugin/updater/) (2.11.0) télécharge une nouvelle version et l'installe. Sa sécurité ne repose pas sur la signature de code ci-dessus mais sur sa propre paire de clés, que la CLI génère :
+
+```text
+Your keypair was generated successfully:
+Private: C:\Users\spare\AppData\Local\Temp\claude\C--Users-spare-source-repos-learn\515605f1-4f43-4be8-b806-602d45816b1f\scratchpad\updater-key\chord-explorer.key (Keep it secret!)
+Public: C:\Users\spare\AppData\Local\Temp\claude\C--Users-spare-source-repos-learn\515605f1-4f43-4be8-b806-602d45816b1f\scratchpad\updater-key\chord-explorer.key.pub
+---------------------------
+
+Environment variables used to sign:
+- `TAURI_SIGNING_PRIVATE_KEY`: String of your private key
+- `TAURI_SIGNING_PRIVATE_KEY_PATH`: Path to your private key file
+- `TAURI_SIGNING_PRIVATE_KEY_PASSWORD`:  Your private key password (optional if key has no password)
+
+ATTENTION: If you lose your private key OR password, you'll not be able to sign your update package and updates will not work
+```
+
+(`npx tauri signer generate --ci -p "" -w <file>` : `--ci` saute les questions et `-p ""` définit un mot de passe vide, acceptable seulement pour une clé jetable comme celle-ci.)
+
+Le mécanisme, tel qu'il est documenté (*à vérifier*, l'application du cours n'a pas d'updater) :
+
+1. La clé publique va dans `tauri.conf.json` sous `plugins.updater.pubkey`, avec les URL à consulter dans `endpoints`, et `bundle.createUpdaterArtifacts: true`.
+2. Avec la clé privée dans `TAURI_SIGNING_PRIVATE_KEY`, `tauri build` écrit aussi un fichier `.sig` à côté de chaque installeur.
+3. Vous publiez un fichier JSON à l'un des endpoints (le `latest.json` d'une release GitHub fonctionne) qui donne, par plateforme, la version, l'URL de téléchargement et le contenu du `.sig`.
+4. L'application appelle `check()` depuis JavaScript ou Rust, télécharge la mise à jour, vérifie la signature avec la clé publique embarquée, et l'installe ; HTTPS est imposé en production.
+
+Perdez la clé privée, et les applications installées ne pourront plus jamais accepter de mise à jour : elles ne font confiance qu'à cette clé.
+
+## Le mobile, en une section
+
+Le projet Tauri 2 contient déjà ce dont le mobile a besoin : `#[cfg_attr(mobile, tauri::mobile_entry_point)]` sur `run`, et `crate-type = ["staticlib", "cdylib", "rlib"]` dans `src-tauri/Cargo.toml`, pour que la même bibliothèque puisse être chargée par une application Android ou iOS. Les commandes, l'état, les événements et les capabilities des leçons 17 à 20 sont le même code. Ce qui change, selon la [documentation de Tauri](https://v2.tauri.app/start/prerequisites/#configure-for-mobile-targets) (*à vérifier*, rien n'a été lancé ici) :
+
+- `tauri android init` génère un projet Gradle dans `src-tauri/gen/android` ; il faut le SDK et le NDK Android, et `tauri android dev` s'exécute sur un émulateur ou un appareil.
+- `tauri ios init` génère un projet Xcode ; il faut macOS et Xcode.
+- L'origine de la page devient `http://tauri.localhost` sous Android (les tests simulés de la leçon 17 la choisissent déjà).
+- Les plugins déclarent les plateformes qu'ils prennent en charge : dialog, fs et store existent sur mobile, avec des différences documentées plugin par plugin ; le système de fichiers mobile est isolé dans un bac à sable.
+- La voie WebDriver de cette leçon concerne le bureau ; les tests de bout en bout sur mobile utilisent Appium ou les outils de la plateforme.
+
+## À retenir
+
+- Quatre niveaux : `cargo test` pour la logique, le runtime simulé pour les commandes à travers l'IPC, Vitest avec `mockIPC` pour le frontend, WebDriver pour l'application entière. Chacun attrape ce que le niveau inférieur ne peut pas attraper.
+- `mockIPC` répond à tout ce qu'on lui demande, et Vitest ne vérifie pas les types : gardez `tsc` dans le pipeline et un test de bout en bout pour le contrat.
+- `tauri-plugin-wdio-webdriver` derrière une feature Cargo fournit un serveur WebDriver sous Windows, Linux et macOS sans le livrer.
+- `tauri build` produit des installeurs natifs pour chaque système : 1,5 Mo pour NSIS et 2,2 Mo pour MSI sous Windows, sans WebView2.
+- La signature dépend du système et coûte un certificat ou une adhésion ; l'updater a sa propre paire de clés, et perdre la clé privée casse les mises à jour pour de bon.
+
+## Exercices
+
+1. Écrivez un test Vitest pour `api.diatonicChords` qui vérifie le nom de la commande et ses arguments. Pourquoi l'argument s'appelle-t-il `tonicNote` et pas `tonic_note` ?
+
+<details>
+<summary>Solution</summary>
+
+```ts
+test("diatonicChords sends the tonic and the mode in camelCase", async () => {
+  let received: unknown;
+  mockIPC((cmd, args) => {
+    if (cmd === "diatonic_chords") received = args;
+    return [];
+  });
+
+  await api.diatonicChords("E", "minor");
+
+  expect(received).toEqual({ tonicNote: "E", mode: "minor" });
+});
+```
+
+`#[tauri::command]` convertit le paramètre Rust `tonic_note` en camelCase dans le JSON qu'il attend (leçon 17). Le test fige ce comportement : si `api.ts` envoyait `tonic_note`, ce test échouerait, et la vraie commande se rejetterait pour un argument manquant.
+
+</details>
+
+2. Ajoutez un test de bout en bout qui épelle `Am7`, clique sur *+1*, et vérifie le résultat. Avant d'écrire le texte attendu, décidez : `A#m7` ou `Bbm7` ? Pourquoi cela vaut-il un test de bout en bout alors que `theory` a déjà des tests unitaires ?
+
+<details>
+<summary>Solution</summary>
+
+```ts
+it("transposes up a semitone", async () => {
+  await $("#chord-input").setValue("Am7");
+  await $("#chord-form button[type=submit]").click();
+  await $("#up").click();
+
+  await expect($("#chord-output")).toHaveText("Bbm7 (minor seventh): Bb Db F Ab  —  1 b3 5 b7");
+});
+```
+
+`theory` épelle la fondamentale transposée avec l'orthographe courante : son test unitaire `transposes_with_common_spellings` affirme que `Am7` monté d'un demi-ton donne `Bbm7`, et la ligne de sortie est celle que l'application a affichée pour `Bbm7` lors de la première exécution WebDriver en échec, plus haut. Deviner `A#m7` aurait fait vérifier au test la croyance de l'auteur au lieu du comportement du programme.
+
+Le test unitaire prouve la transposition ; ce test prouve le câblage : le bouton *+1* envoie `semitones: 1` (et non `"1"`, rejeté comme l'a montré la leçon 17), la page lit l'accord dans le champ, et le résultat remplace la sortie. Rien de cela ne s'exécute dans `cargo test` ni avec `mockIPC`.
+
+</details>
+
+3. Un collègue propose de livrer le build `webdriver`, « pour que le support puisse piloter l'application d'un client ». Qu'est-ce que ce build ouvre, et que répondriez-vous ?
+
+<details>
+<summary>Solution</summary>
+
+Le serveur embarqué écoute sur un port TCP (4445 par défaut, ou `TAURI_WEBDRIVER_PORT`) et accepte des commandes WebDriver : trouver des éléments, cliquer, saisir, exécuter des scripts dans la page. Sur le bureau, le serveur n'écoute que sur `127.0.0.1` ; sous Android, il écoute sur toutes les interfaces, pour tester en Wi-Fi ([`src/server/mod.rs`, lignes 71-76](https://docs.rs/crate/tauri-plugin-wdio-webdriver/1.4.0/source/src/server/mod.rs)). N'importe quel processus de n'importe quel utilisateur de la machine peut donc piloter l'application en se faisant passer pour la page : la session de l'utilisateur, ses fichiers via l'export, tout ce que les capabilities accordent.
+
+Réponse : non. Le support a besoin de logs, d'un export de diagnostic ou d'une session à distance que l'utilisateur lance lui-même. La feature existe justement pour que le binaire livré ne contienne pas ce serveur ; la CI construit les deux et ne livre que celui qui ne l'a pas.
+
+</details>
+
+## Sources
+
+- [Tauri 2 — Tests](https://v2.tauri.app/develop/tests/), [Simuler les API Tauri](https://v2.tauri.app/develop/tests/mocking/), [WebDriver](https://v2.tauri.app/develop/tests/webdriver/)
+- [WebdriverIO — Tauri](https://webdriver.io/docs/desktop-testing/tauri) et le [code source de `tauri-plugin-wdio-webdriver`](https://github.com/webdriverio/desktop-mobile)
+- [W3C — WebDriver](https://www.w3.org/TR/webdriver2/)
+- [Tauri 2 — Distribuer](https://v2.tauri.app/distribute/), [Installeur Windows](https://v2.tauri.app/distribute/windows-installer/), [Debian](https://v2.tauri.app/distribute/debian/), [AppImage](https://v2.tauri.app/distribute/appimage/), [DMG](https://v2.tauri.app/distribute/dmg/)
+- [Tauri 2 — Signature de code Windows](https://v2.tauri.app/distribute/sign/windows/), [Signature de code macOS](https://v2.tauri.app/distribute/sign/macos/), [Signature de code Linux](https://v2.tauri.app/distribute/sign/linux/)
+- [Tauri 2 — Updater](https://v2.tauri.app/plugin/updater/)
+- [Tauri 2 — Prérequis, cibles mobiles](https://v2.tauri.app/start/prerequisites/)

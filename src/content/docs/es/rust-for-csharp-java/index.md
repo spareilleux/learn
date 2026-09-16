@@ -66,9 +66,9 @@ Las seis lecciones construyen una sola aplicación, un explorador de acordes, en
 | 16 | [Interfaces de escritorio en Rust, y luego Tauri](16-desktop-ui-and-tauri/) | WPF, MAUI, JavaFX, Electron |
 | 17 | [Comandos de Tauri](17-tauri-commands/) | los comandos de WPF, los controladores, `ipcMain.handle` de Electron |
 | 18 | [Estado, eventos y canales](18-tauri-state-events-channels/) | singletons de inyección de dependencias, messengers, [`IProgress<T>`](https://learn.microsoft.com/dotnet/api/system.iprogress-1) |
-| 19 | El frontend: Vite, TypeScript y tipos generados desde Rust (próximamente) | un cliente TypeScript generado a partir de una descripción de API |
-| 20 | Seguridad: capabilities, CSP y plugins (próximamente) | el aislamiento de contexto de Electron, los permisos de las aplicaciones |
-| 21 | Tests y empaquetado (próximamente) | [MSIX](https://learn.microsoft.com/windows/msix/overview), [`jpackage`](https://docs.oracle.com/en/java/javase/25/docs/specs/man/jpackage.html), instaladores |
+| 19 | [El frontend: Vite, TypeScript y tipos generados desde Rust](19-tauri-frontend-and-types/) | un cliente TypeScript generado a partir de una descripción de API |
+| 20 | [Seguridad: capabilities, CSP y plugins](20-tauri-security-and-plugins/) | el aislamiento de contexto de Electron, los permisos de las aplicaciones |
+| 21 | [Tests, empaquetado y distribución](21-tauri-tests-and-packaging/) | [MSIX](https://learn.microsoft.com/windows/msix/overview), [`jpackage`](https://docs.oracle.com/en/java/javase/25/docs/specs/man/jpackage.html), instaladores |
 
 Un curso de continuación, **Rust en la práctica: IX y compañía**, aplica cada una de estas ideas a código real de IX, hari y mis otros repositorios Rust.
 
