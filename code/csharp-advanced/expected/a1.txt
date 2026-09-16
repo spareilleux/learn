@@ -1,0 +1,29 @@
+
+== Exhaustive check: all 4096 twelve-bit pitch-class sets
+member                       agree              verdict
+IsClusterFree                4096/4096          identical
+IntervalClassVector.Id       4096/4096          identical
+ClosestDiatonicKey           4096/4096          identical
+sets with no chromatic cluster: 1499 of 4096
+
+== The defect the fast version has to keep, not fix
+chromatic aggregate          id                 decoded
+GA                           3257430            <1 1 1 1 0 6>
+the fast version             3257430            <1 1 1 1 0 6>
+The true vector is <12 12 12 12 12 6>, and 12 does not fit a base-12 digit: it carries.
+Packing it correctly would change 4095's id, and with it every Forte number in
+ProgrammaticForteCatalog, which orders each cardinality by this id. So it is kept.
+
+== Forte numbering is unchanged
+set classes                  224                224 vector ids identical
+distinct Forte numbers       224
+
+== What one call costs
+
+== A few sets, so the tables above are readable
+set                          interval-class vector closest key, cluster-free
+major scale                  2741: <2 5 4 3 6 1> Key of Am, True
+C major triad                145: <0 0 1 1 1 0> Key of Dm, True
+whole tone                   1365: <0 6 0 6 0 3> Key of Cb, True
+chromatic aggregate          4095: <1 1 1 1 0 6> Key of Abm, False
+exit 0

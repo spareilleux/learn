@@ -86,7 +86,13 @@ Parts 1 and 2 measure GA's own code. Part 3 builds a small scales and chords ser
 | 22 | Expression trees, reflection and source generators | what a lambda compiles to, `Expression<T>`, the cost of reflection, incremental generators, `[GeneratedRegex]` |
 | 23 | Roslyn analyzers and code fixes | syntax and semantic models, writing an analyzer and its tests |
 | 24 | Interop and unsafe code | `[LibraryImport]`, function pointers, `Unsafe`, `MemoryMarshal`, pinning |
-| — | [Journal](journal/) | |
+
+### Appendices
+
+| # | Page | Under the hood | Measured on GA |
+|---|---|---|---|
+| 1 | [Three optimisations, proved then measured](appendix-benchmarks/) | rotations and `PopCount` on 12-bit sets, a lookup table, an equivalence proof over the whole input domain, stable sorts as a tie-break | `IsClusterFree`, `IntervalClassVector`, `ClosestDiatonicKey` |
+| — | [Journal](journal/) | | |
 
 Lessons 5 and 10 to 24 are planned and not written yet; lessons 6 to 9 were written before lesson 5, and don't depend on it.
 

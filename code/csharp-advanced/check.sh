@@ -49,6 +49,7 @@ run l6 l6
 run l7 l7
 run l8 l8
 run l9 l9
+run a1 a1
 
 ilspy() {
   dotnet ilspycmd --disable-updatecheck "$@" 2>&1
