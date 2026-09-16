@@ -9,7 +9,7 @@ sidebar:
 :::note[Version studied]
 Rust **1.94.0**, edition **2024**. Every code sample in this course is compiled and run in CI from [`code/rust-for-csharp-java`](https://github.com/spareilleux/learn/tree/main/code/rust-for-csharp-java); every "this does not compile" snippet is a `compile_fail` doctest.
 
-Part 2 pins **Tauri 2.11.5**. Its application, [`code/rust-for-csharp-java/l16-tauri`](https://github.com/spareilleux/learn/tree/main/code/rust-for-csharp-java/l16-tauri), is built and tested on Windows so far; it is not part of the CI runs yet, and Linux and macOS are *to verify*.
+Part 2 pins **Tauri 2.11.5**. Its application, [`code/rust-for-csharp-java/l16-tauri`](https://github.com/spareilleux/learn/tree/main/code/rust-for-csharp-java/l16-tauri), is built, linted and tested by CI on Windows, Ubuntu and macOS; its window has only been run on Windows.
 :::
 
 ## Why I'm learning this

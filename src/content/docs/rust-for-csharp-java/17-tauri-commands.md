@@ -365,6 +365,8 @@ fn a_theory_error_rejects_with_kind_and_message() {
 
 The `invoke` helper builds an [`InvokeRequest`](https://docs.rs/tauri/2.11.5/tauri/webview/struct.InvokeRequest.html) and passes it to [`get_ipc_response`](https://docs.rs/tauri/2.11.5/tauri/test/fn.get_ipc_response.html) ([`tests/common/mod.rs`](https://github.com/spareilleux/learn/blob/373237a/code/rust-for-csharp-java/l16-tauri/src-tauri/tests/common/mod.rs)). The module is marked unstable in Tauri's documentation. Lesson 21 goes further, with WebDriver tests of the real window.
 
+The request also carries the page's URL, and the capabilities check the call against it (lesson 20). Windows and Android serve the embedded assets over `http://tauri.localhost`, the other systems over `tauri://localhost`; with the wrong one, every call is rejected with ``spell_chord not allowed. Plugin not found``. This lesson's first version hardcoded the Windows origin, and CI found it on the macOS and Linux runners.
+
 :::caution[On Windows, the tests first failed to start]
 The first `cargo test` compiled, then stopped before running a single test:
 

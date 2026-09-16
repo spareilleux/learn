@@ -100,7 +100,7 @@ The core course is complete. The code now has tokio as a dev-dependency, two mor
 
 ## 2026-09-15 — Lessons 16 to 18: desktop applications with Tauri
 
-Part 2 starts. The course now builds a chord explorer with Tauri 2.11.5 in `l16-tauri`, a separate workspace with its own `Cargo.lock` and `package-lock.json`. It is built and tested on Windows only so far: the CI job for the three operating systems is written but not running yet.
+Part 2 starts. The course now builds a chord explorer with Tauri 2.11.5 in `l16-tauri`, a separate workspace with its own `Cargo.lock` and `package-lock.json`. CI builds, lints and tests it on Windows, Ubuntu and macOS, with a release build on each; the window itself has only been run on Windows.
 
 **Things I got wrong first:**
 
@@ -108,6 +108,7 @@ Part 2 starts. The course now builds a chord explorer with Tauri 2.11.5 in `l16-
 - The page showed `undefined: undefined` for some errors: when Tauri refuses a call itself (unknown command, invalid arguments), the promise rejects with a **string**, not with the command's error object.
 - My first script to drive the window through the DevTools protocol connected to `127.0.0.1:9222`, where another program on this machine was already listening; the WebView2 instance was on `[::1]:9222`. Nothing was sent to the wrong target; the script now names `[::1]`, and later runs used another port.
 - My `tauri dev` wrapper waited for the line ``Running ` ``, which never matched because Cargo colours its output: the wait needs to strip the escape codes.
+- The mock-runtime tests sent `http://tauri.localhost` as the page's URL. That is the origin only on Windows and Android; macOS and Linux use `tauri://localhost`, so on the first CI run the capabilities rejected every call there with `not allowed. Plugin not found`. The tests now pick the origin by platform (commit `2253508`).
 
 **Surprises:**
 
@@ -123,6 +124,6 @@ Part 2 starts. The course now builds a chord explorer with Tauri 2.11.5 in `l16-
 
 ## Open questions
 
-- Does the explorer build and run under WSLg, on Ubuntu with WebKitGTK 4.1, and on macOS? (*to verify*: the CI job is ready but not running.)
+- Does the explorer's window open and work under WSLg, on Ubuntu with WebKitGTK 4.1, and on macOS? CI proves that it builds and that its tests pass there, not that the window works (*to verify*).
 - Does Tauri 3's `tauri-runtime-cef` change the size and memory numbers enough to matter? It is an alpha as of 2026-09-13.
 - How does `rust-analyzer` in RustRover compare with VS Code for these exercises?
