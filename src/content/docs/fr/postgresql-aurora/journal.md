@@ -22,7 +22,8 @@ sidebar:
 - [x] Leçon 10 : réplication, sur trois clusters dans le conteneur du cours
 - [x] Leçon 11 : sauvegardes, restauration à un instant donné et `pg_upgrade`
 - [x] Leçon 12 : Aurora, d'après la documentation, et un basculement depuis C# et Java
-- [ ] Leçon 13
+- [x] Leçon 13 : migrer depuis SQL Server, à la main, par programme et avec pgloader ; DMS, Babelfish et les coûts d'après la documentation
+- [x] Le cours est terminé
 - [ ] Tout ce qui touche AWS : chaque section Aurora est encore *à vérifier*
 
 ## 2026-09-15 — Versions
@@ -134,6 +135,17 @@ Rien de tout cela n'a été signalé au projet ; ce sont des notes, avec les req
 - Les déploiements blue/green et zero-ETL n'ont pas encore de colonne Aurora PostgreSQL 18 dans leurs tableaux de versions ; RDS Proxy en a une, à partir de 18.3.
 - L'AWS Advanced .NET Data Provider Wrapper existe, en 2.2.0 sur GitHub, avec un dialecte Npgsql, mais la liste des pilotes AWS du guide de l'utilisateur d'Aurora ne le mentionne pas.
 
+## 2026-09-16 — Migrer depuis SQL Server
+
+- Le cours est terminé : 13 leçons. SQL Server 2025 CU9 a démarré en quelques secondes dans son conteneur et utilisait environ 450 Mo au repos ; la CI l'exécute comme conteneur de service à côté de PostgreSQL.
+- `sqlcmd` 18.6 (`mssql-tools18` dans l'image) abandonnait tous les résultats qui suivaient une erreur non attrapée dans un script exécuté avec `-i`, quand l'erreur était la première instruction d'un lot venant après un lot qui avait des résultats ; `-Q` avec les mêmes instructions les affichait. Les scripts attrapent leurs erreurs avec `TRY … CATCH`.
+- `Microsoft.Data.SqlClient` 7.0.3 levait `Globalization Invariant Mode is not supported.` sur `OpenAsync` dans le projet C# du cours, qui active `InvariantGlobalization`. Le programme de migration a son propre projet.
+- Npgsql a tronqué les ticks de `datetimeoffset(7)` aux microsecondes (`.9999999` en `.999999`) ; pgloader les a arrondis (`10:06:00.9999999 -04:00` en `14:06:01`).
+- pgloader, image construite depuis `231ab86`, a changé une valeur `money` de `0.0125` en `0.01`, sans erreur ni avertissement : il lit `money` avec `convert(varchar(40), [col], 0)`, et le style 0 garde deux décimales ([`mssql-schema.lisp`, lignes 212-217](https://github.com/dimitri/pgloader/blob/231ab86778ca5ffd7de40878714760c8b4860cdf/src/sources/mssql/mssql-schema.lisp#L212-L217)). Il a aussi laissé de côté la contrainte `CHECK` et changé `INCLUDE (Conclusion)` en colonne de clé.
+- L'`IDENT_CURRENT` de SQL Server valait 6 avec trois lignes : deux insertions en échec et une ligne supprimée avaient utilisé des valeurs.
+- Documentation d'AWS lue le même jour : DMS ne liste pas SQL Server 2025 comme source ; le tableau des paramètres et la page des collations de Babelfish donnent deux collations serveur par défaut différentes, et la page des collations dit encore que PostgreSQL ne prend pas en charge `LIKE` sur les collations non déterministes ; le Babelfish open source s'arrête à PostgreSQL 17.7 et n'a pas d'image de conteneur.
+- La page web des prix de SQL Server 2025 de Microsoft refusait les requêtes scriptées ; les prix viennent de sa grille tarifaire en PDF.
+
 ## À vérifier
 
 - Les commandes Linux et macOS des leçons 1 et 4, sur ces systèmes.
@@ -141,3 +153,4 @@ Rien de tout cela n'a été signalé au projet ; ce sont des notes, avec les req
 - Les leçons 5 à 8 sur Aurora : la valeur par défaut de `shared_buffers` pour Aurora PostgreSQL 18 et la raison pour laquelle elle est plus grande, la gestion des plans de requête sur 18.4, `hot_standby_feedback` qui retient `VACUUM` sur le writer, la valeur par défaut de `max_standby_streaming_delay`, les extensions de confiance sous `rds.allowed_extensions`, et les parcours itératifs de pgvector 0.8.2.
 - Les leçons 9 à 12 sur Aurora : pg_partman 5.4.3 sur 18.4, la réplication logique après `rds.logical_replication`, les statistiques après une mise à niveau majeure vers 18, les déploiements blue/green et zero-ETL sur 18, les plages d'Aurora Serverless et la mise en pause automatique sur 18, si les connexions inactives d'un pool empêchent la mise en pause automatique, RDS Proxy avec les demandes d'annulation, et la durée d'un basculement vue depuis Npgsql et pgjdbc.
 - Pourquoi Npgsql et pgjdbc ont trouvé le standby promu tout de suite malgré leurs caches d'état des hôtes de 10 secondes.
+- La leçon 13 sur AWS : DMS avec une source SQL Server 2025, si la validation de DMS signale les valeurs `datetimeoffset(7)` tronquées aux microsecondes, la collation serveur par défaut de Babelfish et sa façon de traiter les sept comportements de cette leçon, les prix de l'AWS Price List publiée le 2026-09-11, et si RDS facture une instance SQL Server à 2 vCPU pour 4 vCPU de licence.
