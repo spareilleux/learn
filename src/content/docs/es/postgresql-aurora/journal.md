@@ -18,7 +18,11 @@ sidebar:
 - [x] Lección 6: transacciones y MVCC
 - [x] Lección 7: JSON y búsqueda
 - [x] Lección 8: funciones, extensiones y pgvector
-- [ ] Lecciones 9 a 13
+- [x] Lección 9: particionado
+- [x] Lección 10: replicación, en tres clústeres dentro del contenedor del curso
+- [x] Lección 11: copias de seguridad, recuperación a un momento dado y `pg_upgrade`
+- [x] Lección 12: Aurora, según la documentación, y una conmutación por error desde C# y Java
+- [ ] Lección 13
 - [ ] Todo lo relativo a AWS: cada sección de Aurora sigue *por verificar*
 
 ## 2026-09-15 — Versiones
@@ -94,8 +98,46 @@ Nada de esto se ha comunicado al proyecto; son notas, con las consultas que los 
 - Las páginas de AWS no coinciden sobre el fin de vida de Performance Insights: 31 de julio de 2026 en la guía de CloudWatch, 30 de noviembre de 2025 en el historial de la Aurora User Guide. Tampoco coinciden sobre si Database Insights usa por defecto el modo Standard o el Advanced.
 - `max_standby_streaming_delay`: 30 segundos en la página `Lock:Relation`, 14 000 ms en la tabla de parámetros de Aurora PostgreSQL 14.
 
+## 2026-09-16 — Particionado
+
+- Una clave primaria solo sobre `id` se rechaza en una tabla particionada por `started_at`; con `(id, started_at)` se acepta, y se comprueba partición a partición.
+- `DETACH PARTITION … CONCURRENTLY` no está permitido mientras la tabla tiene una partición por defecto, y una partición por defecto que contiene una fila de octubre impide crear la partición de octubre.
+- El particionado por hash de 64 nombres de job dio a una partición 2,1 veces las filas de otra.
+- Un procedimiento que imprimía un `regclass` después de `DROP TABLE` imprimía el OID a secas: el aviso tiene que ir antes del borrado.
+
+## 2026-09-16 — Varios servidores en un contenedor
+
+- El curso ejecuta un contenedor cada vez. Las lecciones 10 y 11 arrancan pequeños clústeres dentro de él con `initdb` y `pg_ctl`, en los puertos 5433 a 5436, con `shared_buffers = 32MB`; la CI ejecuta los mismos scripts dentro de su contenedor de servicio.
+- Un script reescrito en Windows mediante el modo texto de Python acabó con finales de línea CRLF, y `bash -s` en el contenedor falló en sus primeras líneas. Los archivos escritos con `newline=''` conservan LF.
+- Los clústeres de la imagen ponen su socket Unix en `/var/run/postgresql`, no en `/tmp`: con `PGHOST=/tmp`, cada `psql` fallaba, y cada bucle de espera agotaba sus 30 segundos.
+- `SET statement_timeout = '2s'` no terminó un `INSERT` que esperaba a un standby síncrono detenido: esperó diez minutos, hasta que lo cancelé con `pg_cancel_backend`. El script cancela ahora la espera desde otra sesión; el aviso dice que la transacción «has already committed locally».
+- `pg_rewind` falló primero con `could not open file "node1/pg_wal/000000010000000000000002"`: el antiguo primario había reciclado el segmento que necesitaba. `wal_keep_size = 128MB` lo conserva.
+- Las estadísticas de conflictos de PostgreSQL 18 cuentan el conflicto `insert_exists` de un suscriptor que tenía su propia fila; el apply worker reintenta hasta que se borra la fila.
+
+## 2026-09-16 — Copias de seguridad y pg_upgrade
+
+- `pg_upgrade --check` de un clúster 17 a un clúster 18 nuevo se detuvo en «old cluster does not use data checksums but the new one does»: `initdb` 18 activa los checksums por defecto. `--no-data-checksums` en el clúster nuevo lo resuelve.
+- `pg_upgrade` 18 conservó las seis estadísticas de columna de `ci.runs`, no sus estadísticas extendidas; `vacuumdb --analyze-only --missing-stats-only` las reconstruyó.
+- La actualización necesita los binarios de PostgreSQL 17: `check.sh` instala `postgresql-17` desde el repositorio apt que la imagen ya usa, así que la versión menor del lado antiguo no está fijada. Las salidas solo muestran la versión mayor.
+
+## 2026-09-16 — Una conmutación por error desde los drivers
+
+- `ops/12-cluster.sh` arranca un primario y un standby en el contenedor del curso, publicados en los puertos 5433 y 5434. Los programas detienen el primario mediante `COPY … TO PROGRAM 'pg_ctl … -W stop'` y promueven el standby con `pg_promote()`.
+- En la conexión abierta antes del fallo, pgjdbc informa de `57P01`, «terminating connection due to administrator command», y Npgsql «Exception while reading from stream» en Windows a través de Docker Desktop, pero una `PostgresException` con `57P01` en la CI en Linux: la primera ejecución de la CI falló en esa línea. El programa C# imprime ahora el `FullState` de la conexión, `Broken` en ambos casos.
+- Ambos drivers guardan en caché el estado de los hosts durante 10 segundos por defecto, y sin embargo una escritura justo después de la promoción encontró el nuevo primario en los dos. No he rastreado por qué en su código fuente.
+
+## 2026-09-16 — Aurora, lecciones 9 a 12
+
+- El volumen de clúster máximo: 256 TiB para Aurora PostgreSQL 15.13, 16.9, 17.5 y posteriores en la tabla de versiones de la página de cuotas, 128 TiB en la tabla de cuotas de la misma página, 256 TiB sin condición en la descripción general.
+- El calendario de versiones da a PostgreSQL 18 una «community release date» del 26 de febrero de 2026, la fecha de 18.3; PostgreSQL 18.0 se publicó el 25 de septiembre de 2025.
+- La página de actualizaciones de versión mayor dice que las estadísticas del optimizador no se transfieren, mientras que `pg_upgrade` 18 transfiere la mayoría.
+- Los Blue/Green Deployments y zero-ETL todavía no tienen columna de Aurora PostgreSQL 18 en sus tablas de versiones; RDS Proxy sí, desde 18.3.
+- El AWS Advanced .NET Data Provider Wrapper existe, 2.2.0 en GitHub, con un dialecto Npgsql, pero la lista de drivers de AWS de la Aurora User Guide no lo menciona.
+
 ## Por verificar
 
 - Los comandos de Linux y macOS de las lecciones 1 y 4, en esos sistemas.
 - Cada sección «En Aurora»: `pg_read_file` y el requisito de `CONNECT` para `rds_superuser`, `btree_gist` 1.6, el error de solo lectura en una réplica, TLS por defecto, los tokens IAM con el proveedor de contraseña periódico de Npgsql, la fijación de RDS Proxy con el `DISCARD ALL` de Npgsql y con las sentencias preparadas a nivel de protocolo, y `pg_is_in_recovery()` en una Aurora Replica.
 - Las lecciones 5 a 8 en Aurora: el valor por defecto de `shared_buffers` en Aurora PostgreSQL 18 y la razón de que sea mayor, la gestión de planes de consulta en 18.4, `hot_standby_feedback` frenando `VACUUM` en el writer, el valor por defecto de `max_standby_streaming_delay`, las extensiones de confianza bajo `rds.allowed_extensions`, y los escaneos iterativos de pgvector 0.8.2.
+- Las lecciones 9 a 12 en Aurora: pg_partman 5.4.3 en 18.4, la replicación lógica tras `rds.logical_replication`, las estadísticas tras una actualización mayor a 18, los Blue/Green Deployments y zero-ETL en 18, los rangos y la pausa automática de Aurora Serverless en 18, si las conexiones inactivas de un pool impiden la pausa automática, RDS Proxy con las solicitudes de cancelación, y la duración de una conmutación por error vista desde Npgsql y pgjdbc.
+- Por qué Npgsql y pgjdbc encontraron enseguida el standby promovido pese a sus cachés de estado de hosts de 10 segundos.
