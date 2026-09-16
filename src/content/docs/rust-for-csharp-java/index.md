@@ -66,9 +66,9 @@ The six lessons build one application, a chord explorer, in [`l16-tauri`](https:
 | 16 | [Desktop UI in Rust, then Tauri](16-desktop-ui-and-tauri/) | WPF, MAUI, JavaFX, Electron |
 | 17 | [Tauri commands](17-tauri-commands/) | WPF commands, controllers, Electron's `ipcMain.handle` |
 | 18 | [State, events and channels](18-tauri-state-events-channels/) | DI singletons, messengers, [`IProgress<T>`](https://learn.microsoft.com/dotnet/api/system.iprogress-1) |
-| 19 | The frontend: Vite, TypeScript and types generated from Rust (coming) | a TypeScript client generated from an API description |
-| 20 | Security: capabilities, CSP and plugins (coming) | Electron's context isolation, app permissions |
-| 21 | Tests and packaging (coming) | [MSIX](https://learn.microsoft.com/windows/msix/overview), [`jpackage`](https://docs.oracle.com/en/java/javase/25/docs/specs/man/jpackage.html), installers |
+| 19 | [The frontend: Vite, TypeScript and types generated from Rust](19-tauri-frontend-and-types/) | a TypeScript client generated from an API description |
+| 20 | [Security: capabilities, CSP and plugins](20-tauri-security-and-plugins/) | Electron's context isolation, app permissions |
+| 21 | [Tests, packaging and distribution](21-tauri-tests-and-packaging/) | [MSIX](https://learn.microsoft.com/windows/msix/overview), [`jpackage`](https://docs.oracle.com/en/java/javase/25/docs/specs/man/jpackage.html), installers |
 
 A follow-up course, **Rust in practice: IX and co**, applies each of these ideas to real code in IX, hari and my other Rust repositories.
 
