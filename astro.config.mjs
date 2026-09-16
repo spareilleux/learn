@@ -219,6 +219,12 @@ export default defineConfig({
 							collapsed: true,
 							items: [{ autogenerate: { directory: 'candle' } }],
 						},
+						{
+							label: 'ComfyUI: image generation with diffusion models',
+							translations: { fr: 'ComfyUI : générer des images avec les modèles de diffusion', es: 'ComfyUI: generar imágenes con modelos de difusión' },
+							collapsed: true,
+							items: [{ autogenerate: { directory: 'comfyui' } }],
+						},
 					],
 				},
 				{
