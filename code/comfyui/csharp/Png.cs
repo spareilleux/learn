@@ -122,7 +122,7 @@ public static class Png
         return c;
     }).ToArray();
 
-    static uint Crc32(byte[] bytes)
+    internal static uint Crc32(byte[] bytes)
     {
         uint c = 0xFFFFFFFF;
         foreach (byte b in bytes) c = CrcTable[(c ^ b) & 0xFF] ^ (c >> 8);
@@ -154,21 +154,29 @@ public static class PngCommands
         return 0;
     }
 
-    public static int Compare(string first, string second)
+    // compare <a.png> <b.png> [--outside mask.png]: with a mask, only the pixels where the mask image is opaque count,
+    // that is, outside the area LoadImage would repaint.
+    public static int Compare(string first, string second, string? outsideMask = null)
     {
         var a = Png.ReadPixels(Png.ReadChunks(first));
         var b = Png.ReadPixels(Png.ReadChunks(second));
-        if (a.Width != b.Width || a.Height != b.Height || a.Channels != b.Channels)
+        if (a.Width != b.Width || a.Height != b.Height)
         {
             Console.WriteLine($"different sizes: {a.Width} x {a.Height} and {b.Width} x {b.Height}");
             return 1;
         }
-        int pixelCount = a.Width * a.Height, changed = 0, changedMoreThan8 = 0, max = 0;
+        var mask = outsideMask is null ? null : Png.ReadPixels(Png.ReadChunks(outsideMask));
+        if (mask is not null && (mask.Channels != 4 || mask.Width != a.Width || mask.Height != a.Height))
+            throw new InvalidDataException("the mask must be an RGBA image of the same size");
+        int channels = Math.Min(3, Math.Min(a.Channels, b.Channels));
+        int pixelCount = 0, changed = 0, changedMoreThan8 = 0, max = 0;
         long sum = 0;
-        for (int p = 0; p < pixelCount; p++)
+        for (int p = 0; p < a.Width * a.Height; p++)
         {
+            if (mask is not null && mask.Data[p * 4 + 3] != 255) continue;
+            pixelCount++;
             int pixelMax = 0;
-            for (int ch = 0; ch < a.Channels; ch++)
+            for (int ch = 0; ch < channels; ch++)
             {
                 int d = Math.Abs(a.Data[p * a.Channels + ch] - b.Data[p * b.Channels + ch]);
                 sum += d;
@@ -179,7 +187,8 @@ public static class PngCommands
             max = Math.Max(max, pixelMax);
         }
         Console.WriteLine($"identical pixels: {(changed == 0 ? "yes" : "no")}");
-        Console.WriteLine($"largest difference: {max} of 255, mean {(double)sum / (pixelCount * a.Channels):F3}");
+        if (mask is not null) Console.WriteLine($"compared: {pixelCount} opaque pixels of the mask");
+        Console.WriteLine($"largest difference: {max} of 255, mean {(double)sum / (pixelCount * channels):F3}");
         Console.WriteLine($"pixels that differ: {100.0 * changed / pixelCount:F2} %, by more than 8: {100.0 * changedMoreThan8 / pixelCount:F2} %");
         return 0;
     }

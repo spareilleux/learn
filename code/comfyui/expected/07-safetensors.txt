@@ -1,0 +1,15 @@
+tiny-lora.safetensors: header 752 bytes, 6 tensors, 772 bytes of tensor data
+  F32          4 tensors, 768 bytes
+  BF16         2 tensors,   4 bytes
+LoRA: 2 adapted layers (1 in the UNet, 1 in the text encoders), rank 4
+  alpha: 2, 4 (the weight change is scaled by alpha / rank)
+metadata ss_network_module: networks.lora
+metadata ss_network_dim: 4
+metadata ss_network_alpha: 4.0
+tiny-quant.safetensors: header 320 bytes, 4 tensors, 113 bytes of tensor data
+  I8           1 tensors,  64 bytes
+  U8           1 tensors,  29 bytes
+  BF16         1 tensors,  16 bytes
+  F32          1 tensors,   4 bytes
+quantized layers (.comfy_quant): 1
+  1 x {"format": "int8_tensorwise"}

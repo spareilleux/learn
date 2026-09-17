@@ -1,13 +1,16 @@
 #!/usr/bin/env bash
 # ComfyUI course: everything that runs without a GPU and without a model, compared with expected/.
 #   bash check.sh build     builds the C# tool and the Java client
-#   bash check.sh offline   the workflow checks, the UI-to-API conversion and the diffs (lesson 3), no server
+#   bash check.sh offline   the workflow checks, the UI-to-API conversion and the diffs (lesson 3), and model file
+#                           headers read from two tiny files (lessons 7 and 8), no server
 #   bash check.sh server    starts ComfyUI on the CPU (server.sh), runs the C# and Java clients on a workflow that
-#                           needs no model (lesson 4), reads the PNGs they download, then stops the server
+#                           needs no model (lesson 4), reads the PNGs they download, uploads images and runs the
+#                           mask nodes (lesson 5), then stops the server
 #   bash check.sh           all three
 #   UPDATE=1 bash check.sh  writes the outputs to expected/ instead of comparing (review the diff before committing)
 # The server mode needs COMFYUI_DIR (the folder with ComfyUI's main.py) and COMFYUI_PYTHON (a Python with its
-# requirements), and port 8188 free: see server.sh. MVN overrides the Maven command.
+# requirements), and port 8188 free: see server.sh. MVN overrides the Maven command, PYTHON the Python that
+# writes the tiny model files.
 set -uo pipefail
 cd "$(dirname "$0")"
 MVN=${MVN:-mvn}
@@ -46,6 +49,14 @@ offline() {
   compare 03-validate
 
   # The conversion must give, byte for byte, what the frontend's Export (API) gave.
+  # Lessons 7 and 8: what a model file's header says, on two tiny files written by a script
+  "${PYTHON:-python}" data/tiny-safetensors.py out/tiny > /dev/null
+  {
+    comfy safetensors-info out/tiny/tiny-lora.safetensors
+    comfy safetensors-info out/tiny/tiny-quant.safetensors
+  } > out/07-safetensors.txt 2>&1
+  compare 07-safetensors
+
   comfy ui-to-api workflows/01-txt2img.ui.json data/object_info.json > out/converted.api.json
   if diff --strip-trailing-cr workflows/01-txt2img.exported.api.json out/converted.api.json > /dev/null; then
     echo "ok   03-ui-to-api (same bytes as the frontend's export)"
@@ -106,6 +117,22 @@ server() {
     comfy compare out/run-java/solid_00002_.png out/run-java/inverted_00002_.png
   } > out/03-png.txt 2>&1
   compare 03-png
+
+  # Lesson 5: images made by the tool, uploaded, and the mask nodes, which need no model
+  {
+    comfy make-image 64 48 out/pattern.png
+    comfy cut out/pattern.png out/pattern-hole.png 32 24 12 8 4
+    mkdir -p out/other && cp out/pattern.png out/other/pattern-hole.png
+    echo "--- the mask workflow, with its input uploaded first"
+    comfy run "$url" workflows/05-masks.api.json --image 1.image=out/pattern-hole.png --out out/run-05
+    echo "--- the same file again, then other bytes under the same name, then with overwrite"
+    comfy upload "$url" out/pattern-hole.png
+    comfy upload "$url" out/other/pattern-hole.png
+    comfy upload "$url" out/other/pattern-hole.png --overwrite
+    comfy upload "$url" out/pattern.png --subfolder ../outside
+    echo "exit code $?"
+  } > out/05-masks.txt 2>&1
+  compare 05-masks
 
   bash server.sh stop
 }

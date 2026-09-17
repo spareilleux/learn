@@ -1,0 +1,10 @@
+{
+  "4": {"class_type": "CheckpointLoaderSimple", "inputs": {"ckpt_name": "sd_xl_base_1.0.safetensors"}},
+  "5": {"class_type": "EmptyLatentImage", "inputs": {"width": 1024, "height": 1024, "batch_size": 1}},
+  "6": {"class_type": "CLIPTextEncode", "inputs": {"text": "a brass metronome on an old wooden workbench, morning light through a window, dust in the air, photograph", "clip": ["50", 1]}},
+  "7": {"class_type": "CLIPTextEncode", "inputs": {"text": "blurry, text, watermark", "clip": ["50", 1]}},
+  "3": {"class_type": "KSampler", "inputs": {"seed": 42, "steps": 4, "cfg": 1.0, "sampler_name": "euler", "scheduler": "sgm_uniform", "denoise": 1.0, "model": ["50", 0], "positive": ["6", 0], "negative": ["7", 0], "latent_image": ["5", 0]}},
+  "8": {"class_type": "VAEDecode", "inputs": {"samples": ["3", 0], "vae": ["4", 2]}},
+  "9": {"class_type": "SaveImage", "inputs": {"filename_prefix": "l07/lightning", "images": ["8", 0]}},
+  "50": {"class_type": "LoraLoader", "inputs": {"model": ["4", 0], "clip": ["4", 1], "lora_name": "sdxl_lightning_4step_lora.safetensors", "strength_model": 1.0, "strength_clip": 1.0}}
+}

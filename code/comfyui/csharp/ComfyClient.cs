@@ -14,9 +14,17 @@ public static class ComfyClient
         var server = new Uri(args[0]);
         var workflow = Workflow.Load(args[1]);
         string outDir = "out";
+        var images = new List<(string Node, string Input, string Path)>();
         for (int i = 2; i < args.Length; i += 2)
         {
             if (args[i] == "--out") { outDir = args[i + 1]; continue; }
+            if (args[i] == "--image")
+            {
+                // --image 10.image=photo.png: upload the file, then point the input at the name the server gives it
+                string[] image = args[i + 1].Split('=', 2), node = image[0].Split('.', 2);
+                images.Add((node[0], node[1], image[1]));
+                continue;
+            }
             if (args[i] != "--set") throw new ArgumentException($"unknown option {args[i]}");
             // --set 3.seed=43 or --set 6.text="a lighthouse"
             string[] parts = args[i + 1].Split('=', 2);
@@ -29,6 +37,12 @@ public static class ComfyClient
 
         using var http = new HttpClient { BaseAddress = server, Timeout = TimeSpan.FromMinutes(10) };
         using var cancel = new CancellationTokenSource(TimeSpan.FromMinutes(20));
+        foreach (var (node, input, path) in images)
+        {
+            var uploaded = await UploadImage(http, path, subfolder: "", overwrite: false, cancel.Token);
+            string name = uploaded["subfolder"]!.GetValue<string>() is { Length: > 0 } sub ? $"{sub}/{uploaded["name"]}" : $"{uploaded["name"]}";
+            workflow[node]!["inputs"]![input] = name;
+        }
 
         // Connect first: the server only sends a prompt's events to the client id it was queued with,
         // and it doesn't replay the events a client missed.
@@ -142,6 +156,42 @@ public static class ComfyClient
                     break;
             }
         }
+    }
+
+    // POST /upload/image: a multipart form with the file in "image", and optional "subfolder", "type" and "overwrite".
+    // Without overwrite, a file with the same name and the same bytes is not written again, and a file with the same
+    // name and other bytes is saved as "name (1).png".
+    static async Task<JsonNode> UploadImage(HttpClient http, string path, string subfolder, bool overwrite, CancellationToken cancel)
+    {
+        using var form = new MultipartFormDataContent();
+        var file = new ByteArrayContent(await File.ReadAllBytesAsync(path, cancel));
+        file.Headers.ContentType = new("image/png");
+        form.Add(file, "image", Path.GetFileName(path));
+        if (subfolder.Length > 0) form.Add(new StringContent(subfolder), "subfolder");
+        if (overwrite) form.Add(new StringContent("true"), "overwrite");
+        using var response = await http.PostAsync("upload/image", form, cancel);
+        string body = await response.Content.ReadAsStringAsync(cancel);
+        if (!response.IsSuccessStatusCode)
+            throw new HttpRequestException($"POST /upload/image: {(int)response.StatusCode} {body}");
+        var json = JsonNode.Parse(body)!;
+        Console.WriteLine($"POST /upload/image {Path.GetFileName(path)}: {(int)response.StatusCode}, name {json["name"]}, subfolder \"{json["subfolder"]}\", type {json["type"]}");
+        return json;
+    }
+
+    // upload <server> <file.png> [--subfolder dir] [--overwrite]
+    public static async Task<int> Upload(string[] args)
+    {
+        using var http = new HttpClient { BaseAddress = new Uri(args[0]) };
+        string subfolder = "";
+        bool overwrite = false;
+        for (int i = 2; i < args.Length; i++)
+        {
+            if (args[i] == "--subfolder") subfolder = args[++i];
+            else if (args[i] == "--overwrite") overwrite = true;
+            else throw new ArgumentException($"unknown option {args[i]}");
+        }
+        await UploadImage(http, args[1], subfolder, overwrite, CancellationToken.None);
+        return 0;
     }
 
     // object-info <server> <class>...: the definitions a workflow's nodes need, for offline checks.

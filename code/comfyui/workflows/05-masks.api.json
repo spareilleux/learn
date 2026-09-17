@@ -1,0 +1,55 @@
+{
+  "1": {
+    "class_type": "LoadImage",
+    "inputs": { "image": "pattern-hole.png" },
+    "_meta": { "title": "Image with a transparent ellipse" }
+  },
+  "2": {
+    "class_type": "MaskToImage",
+    "inputs": { "mask": ["1", 1] },
+    "_meta": { "title": "LoadImage's mask" }
+  },
+  "3": {
+    "class_type": "SaveImage",
+    "inputs": { "images": ["2", 0], "filename_prefix": "ci/mask" }
+  },
+  "4": {
+    "class_type": "ImagePadForOutpaint",
+    "inputs": { "image": ["1", 0], "left": 16, "top": 0, "right": 16, "bottom": 8, "feathering": 12 },
+    "_meta": { "title": "Pad for outpainting" }
+  },
+  "5": {
+    "class_type": "SaveImage",
+    "inputs": { "images": ["4", 0], "filename_prefix": "ci/padded" }
+  },
+  "6": {
+    "class_type": "MaskToImage",
+    "inputs": { "mask": ["4", 1] }
+  },
+  "7": {
+    "class_type": "SaveImage",
+    "inputs": { "images": ["6", 0], "filename_prefix": "ci/padded-mask" }
+  },
+  "8": {
+    "class_type": "ImageInvert",
+    "inputs": { "image": ["1", 0] }
+  },
+  "9": {
+    "class_type": "ImageCompositeMasked",
+    "inputs": { "destination": ["1", 0], "source": ["8", 0], "x": 0, "y": 0, "resize_source": false, "mask": ["1", 1] },
+    "_meta": { "title": "Inverted colors inside the mask only" }
+  },
+  "10": {
+    "class_type": "SaveImage",
+    "inputs": { "images": ["9", 0], "filename_prefix": "ci/composite" }
+  },
+  "11": {
+    "class_type": "Canny",
+    "inputs": { "image": ["1", 0], "low_threshold": 0.05, "high_threshold": 0.15 },
+    "_meta": { "title": "Edges, for lesson 6" }
+  },
+  "12": {
+    "class_type": "SaveImage",
+    "inputs": { "images": ["11", 0], "filename_prefix": "ci/canny" }
+  }
+}
