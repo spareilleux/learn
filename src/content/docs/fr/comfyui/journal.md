@@ -37,12 +37,20 @@ sidebar:
 - `nvidia-smi` a montré environ 7 Go de plus en usage pendant le rendu. Le log a préparé 1 560 Mo pour les encodeurs de texte, 4 896 Mo pour l'UNet et 159 Mo pour le VAE.
 - Les aperçus du latent de `--preview-method taesd` ont ralenti l'échantillonnage de 6,4 à 4,9 étapes par seconde.
 
+![Un objet en laiton sur un vieil établi en bois, éclairé par le soleil du matin à travers une fenêtre poussiéreuse. Il ressemble plus à un sablier ouvragé qu'à un métronome : un haut corps de verre à la taille étroite, tenu dans un cadre en laiton sur un socle rond.](../../../../assets/comfyui/l01-metronome.webp)
+
+*Le premier rendu. ComfyUI v0.36.0 : Stable Diffusion XL base 1.0, graine 42, 25 étapes, `euler`, `normal`, CFG 7, 1024 × 1024, workflow [`01-txt2img.api.json`](https://github.com/spareilleux/learn/blob/a1a9bffadaa7156b91ca9c2c2b8885e9e9862dd5/code/comfyui/workflows/01-txt2img.api.json).*
+
 ## 2026-09-16 — Une graine, deux images
 
 - Le même workflow et la même graine ont donné `698e7867…` sur un serveur fraîchement démarré, de nouveau après des redémarrages, et `5374ac40…` chaque fois que le prompt négatif était encodé de nouveau avec l'UNet déjà chargé. Les deux images diffèrent en moyenne de 0,92 niveau, et 2,63 % des pixels diffèrent de plus de 8.
 - `--disable-dynamic-vram` a donné `5374ac40…` dès la première exécution aussi. `--deterministic` n'a changé aucun des deux résultats. Je n'ai pas trouvé quelle opération diffère.
 - La première image d'un lot de deux différait de l'image seule de même graine (moyenne 0,74), et la seconde image du lot n'est pas celle de la graine 43.
 - Un rendu de graine 43 par le client Java, sur un autre démarrage du serveur 20 minutes plus tard, avait les mêmes pixels que le premier rendu de graine 43.
+
+![Trois panneaux. Les deux premiers sont les deux rendus de graine 42, qui paraissent identiques à cette taille. Le troisième est une image blanche avec des traits sombres là où ils diffèrent, amplifiés huit fois : le contour de l'objet en laiton, son verre, les outils sur l'établi et le cadre de la fenêtre.](../../../../assets/comfyui/l02-cold-warm.webp)
+
+*Les deux images de graine 42. ComfyUI v0.36.0 : Stable Diffusion XL base 1.0, graine 42, 25 étapes, `euler`, `normal`, CFG 7, workflow [`01-txt2img.api.json`](https://github.com/spareilleux/learn/blob/a1a9bffadaa7156b91ca9c2c2b8885e9e9862dd5/code/comfyui/workflows/01-txt2img.api.json). À gauche : première exécution après le démarrage du serveur. Au milieu : le même graphe après un nouvel encodage du prompt négatif. À droite : là où elles diffèrent, amplifié huit fois.*
 
 ## 2026-09-16 — Les formats JSON et l'API
 
@@ -68,10 +76,20 @@ sidebar:
 - `denoise` n'a pas changé le nombre d'étapes : 25 étapes se sont exécutées pour chaque valeur de 0,3 à 0,9, en 4,6 à 5,1 secondes.
 - Envoyer des octets identiques sous un nom déjà pris a renvoyé le nom existant ; des octets différents ont reçu `name (1).png`. Aucun des deux comportements n'est documenté.
 - `VAEEncodeForInpaint` grise les pixels masqués, ce que le tutoriel ne dit pas. Avec `denoise` à 0,5, le résultat était une ellipse grise uniforme.
+
+![Trois recadrages de l'avant de l'établi. Le premier : une ellipse grise uniforme avec un léger ombrage là où étaient les objets. Le deuxième : une ellipse nette de bois pâle et rugueux, avec un bord sombre le long de son haut. Le troisième : deux nouveaux objets en bois sur l'établi, sans bord visible.](../../../../assets/comfyui/journal-l05-failures.webp)
+
+*Deux échecs d'inpainting et la correction, avant de recoller le résultat. ComfyUI v0.36.0 : Stable Diffusion XL base 1.0, graine 42, 25 étapes, CFG 7, `euler`, `normal`. De gauche à droite : [`05-inpaint-vaeencode.api.json`](https://github.com/spareilleux/learn/blob/40880d5819d3d72102c008a617b4c83b519600cc/code/comfyui/workflows/05-inpaint-vaeencode.api.json) avec `denoise` 0,5 ; le même workflow avec `denoise` 1 et un masque au bord adouci sur 24 pixels ; [`05-inpaint-model.api.json`](https://github.com/spareilleux/learn/blob/40880d5819d3d72102c008a617b4c83b519600cc/code/comfyui/workflows/05-inpaint-model.api.json), le UNet SD-XL inpainting 0.1 avec `denoise` 0,99, sur le même masque adouci.*
+
 - La fiche de SD-XL inpainting dit de garder `strength` sous 1,0 ; 1,0 et 0,99 ont donné ici presque la même image (0,01 % des pixels diffèrent de plus de 8).
 - Le résultat d'inpainting décodé a changé de plus de 8 niveaux 6,2 % des pixels hors du masque ; le recoller avec `ImageCompositeMasked` les a laissés identiques.
 - La page de documentation de `SetUnionControlNetType` liste 13 types ; le nœud en a 8.
 - La première exécution en CI du nœud `Canny` a échoué sous les trois systèmes : quatre machines ont donné quatre hachages de pixels. Les trois runners ont trouvé 467 pixels de contour, la machine de l'auteur 464. La CI les affiche maintenant à titre d'information.
+
+![Des lignes de contour blanches sur fond noir, dessinées en gros pixels : un nid d'abeilles de cellules ondulées tiré de la mire de test du cours.](../../../../assets/comfyui/journal-canny-ci.webp)
+
+*La sortie du nœud `Canny` sur la machine de l'auteur, hachage de pixels `77af5cb1b7e93a5c`, 464 pixels de contour, agrandie quatre fois sans lissage. ComfyUI v0.36.0 sur le CPU, sans modèle, seuils 0,05 et 0,15, workflow [`05-masks.api.json`](https://github.com/spareilleux/learn/blob/40880d5819d3d72102c008a617b4c83b519600cc/code/comfyui/workflows/05-masks.api.json). Les trois runners de la CI ont chacun dessiné 467 pixels de contour, avec trois autres hachages.*
+
 - Avec `end_percent` à 0,3, le ControlNet a guidé 8 étapes sur 25, et l'image était presque la même qu'avec lui actif à chaque étape.
 - Un LoRA coûte du temps avant la première étape, pas pendant l'échantillonnage : changer de LoRA a pris 4 à 5 secondes de plus, et une image en 4 étapes avec le LCM-LoRA a ensuite pris 1,16 seconde.
 
@@ -80,9 +98,19 @@ sidebar:
 - Z-Image-Turbo en bf16 avec son encodeur de texte bf16, soit 19,4 Go de poids, a tourné sur le GPU de 16 Go grâce à la VRAM dynamique : 63,93 secondes pour le premier rendu, puis 5,93 secondes à 1,5 étape par seconde. int8 avec l'encodeur de texte fp8 a tourné à 3,1 étapes par seconde, nvfp4 de 3,7 à 4,1.
 - `nvidia-smi` a montré de 12,5 à 15,3 Go en usage pour chaque configuration : la VRAM dynamique utilise ce qui est libre. Les tailles préparées dans le log sont les chiffres utiles.
 - Les images int8 sont restées proches de celles en bf16 (9 à 15 % des pixels diffèrent de plus de 8) ; les images nvfp4 montraient la même scène disposée autrement (62 à 74 %).
+
+![Quatre rendus côte à côte, chacun un métronome pyramidal or et noir sur un établi en bois usé devant une fenêtre. Les deux premiers sont presque identiques ; les deux derniers montrent la même scène avec les objets disposés autrement.](../../../../assets/comfyui/l08-quantized.webp)
+
+*ComfyUI v0.36.0 : Z-Image-Turbo, graine 42, 8 étapes, CFG 1, `res_multistep`, `simple`, workflow [`08-z-image-turbo.api.json`](https://github.com/spareilleux/learn/blob/40880d5819d3d72102c008a617b4c83b519600cc/code/comfyui/workflows/08-z-image-turbo.api.json). De gauche à droite : bf16 avec l'encodeur de texte bf16, int8 avec fp8, nvfp4 avec fp4, nvfp4 avec bf16.*
+
 - `qwen_3_4b_fp8_mixed` a 12 couches nvfp4, et `qwen_3_4b_fp4_mixed` a 58 couches fp8. Le fichier Z-Image nvfp4 garde ses quatre blocs de raffinement en bf16.
 - Avec `--disable-dynamic-vram`, le premier rendu bf16 a pris 78,87 secondes et a donné les mêmes pixels qu'avec la VRAM dynamique. Le deuxième rendu a été arrêté quand la machine, partagée avec d'autres travaux, a manqué de RAM. Un lot bf16 antérieur avait été arrêté de la même façon : le serveur occupait 14,5 Go de RAM. Chaque serveur ne démarre maintenant que si les poids de la configuration, plus une marge, tiennent dans la RAM libre.
 - FLUX.2 klein 4B a dessiné un support en laiton, pas un métronome, avec les graines 42, 43 et 44 ; Z-Image-Turbo a dessiné un métronome à chaque fois.
+
+![Quatre rendus côte à côte. D'abord, le métronome pyramidal de Z-Image-Turbo sur un établi. Puis trois rendus d'un atelier poussiéreux par FLUX.2 klein 4B, chacun avec, au lieu d'un métronome, un support en laiton muni d'une manivelle ou de bras sur un établi usé.](../../../../assets/comfyui/l08-z-image-klein.webp)
+
+*ComfyUI v0.36.0. D'abord : Z-Image-Turbo bf16, graine 43, workflow [`08-z-image-turbo.api.json`](https://github.com/spareilleux/learn/blob/40880d5819d3d72102c008a617b4c83b519600cc/code/comfyui/workflows/08-z-image-turbo.api.json). Ensuite : FLUX.2 klein 4B, graines 42, 43 et 44, 4 étapes, CFG 1, `euler`, workflow [`08-flux2-klein.api.json`](https://github.com/spareilleux/learn/blob/40880d5819d3d72102c008a617b4c83b519600cc/code/comfyui/workflows/08-flux2-klein.api.json).*
+
 ## À vérifier
 
 - SDXL sous Linux avec CUDA, et sur Apple Silicon avec MPS : la machine GPU du cours tourne sous Windows ; la CI n'installe que les versions CPU.
