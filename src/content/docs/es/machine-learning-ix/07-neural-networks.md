@@ -140,6 +140,14 @@ La última línea es la demostración, no el síntoma. Para cualquier `f` afín,
 
 Nada de esto hace que `ix-nn` esté mal — la atención, la normalización de capa, RoPE, ALiBi y los bloques transformer del mismo crate son donde está su trabajo de verdad, y esos sí tienen sus no linealidades. Pero `Sequential` más `Dense` es la parte que parece una API de red neuronal para principiantes, y es la parte que solo puede ajustar rectas.
 
+## Puntos clave
+
+- La pasada hacia atrás de una capa afín da tres gradientes, `xᵀ g`, la suma de las filas de `g` y `g Wᵀ`. Las diferencias centradas los comprueban hasta unos `1e-11`, y cualquier error real aparece como una diferencia del orden de 1.
+- `Dense::backward` divide una segunda vez por el tamaño del lote, así que la tasa de aprendizaje que pasas se encoge con el número de filas.
+- `mse_loss` promedia sobre todas las celdas pero `mse_gradient` divide solo por las filas: con `m` columnas de salida, el gradiente es `m` veces el verdadero.
+- `Dense::new` sortea sus pesos sin semilla; sobrescribe los campos públicos `weights` y `bias` para que un resultado sea reproducible.
+- Dos aplicaciones afines seguidas son una sola. Sin capa de activación, un `Sequential` de capas `Dense` de IX predice 0.5 en todas partes con el o exclusivo, mientras que una sigmoide entre las capas lo resuelve.
+
 ## Ejercicios
 
 1. Elige una tasa de aprendizaje que haga que un paso de `Dense` aterrice exactamente donde aterriza un paso de la capa a mano.

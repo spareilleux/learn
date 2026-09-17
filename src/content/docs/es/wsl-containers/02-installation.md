@@ -101,6 +101,14 @@ Si el servicio sigue sin querer detenerse: reinicia Windows y lanza la actualiza
 
 Para salir de la pre-release, reinstala una versión estable: `wsl --update` (sin `--pre-release`) o el paquete MSI estable de las [releases de WSL en GitHub](https://github.com/microsoft/WSL/releases). *Por verificar: el comportamiento exacto de la vuelta atrás desde la 2.9.x.*
 
+## Puntos clave
+
+- `wslc` necesita WSL 2.9.3 o posterior, que por ahora solo existe como versión preliminar: `wsl --update --pre-release`.
+- La actualización detiene todas las distribuciones de WSL, incluidas las de Docker Desktop y Podman.
+- Una terminal o un IDE abiertos antes de la actualización conservan el `PATH` antiguo y no encuentran `wslc`.
+- Una actualización puede fallar sin mostrar error: vuelve a ejecutar `wsl --version` y busca el error 1921 o el estado 1603 en los eventos de `MsiInstaller`.
+- Si el servicio de WSL no se detiene, detén Docker Desktop, Podman y los procesos de WSL, y luego actualiza desde una terminal de administrador.
+
 ## Ejercicios
 
 1. ¿Cómo saber si una actualización de WSL ha funcionado de verdad, aunque el comando no muestre ningún error?

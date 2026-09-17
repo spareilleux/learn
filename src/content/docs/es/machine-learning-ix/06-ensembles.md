@@ -154,6 +154,14 @@ start, the smoothed log priors: [-0.4529, -1.7592, -1.6500]
 
 `exp(-0.4529) = 0,636`: 95 de los 148 trabajos de entrenamiento corrieron en Ubuntu, suavizados sumando uno a cada recuento. El modelo empieza adivinando las tasas base. Luego cada clase recibe la pregunta que más reduce su propio residuo — para Windows, «¿el clonado tardó más de 4 segundos?», para macOS, «¿el trabajo esperó más de 5,5 segundos en la cola?» — y las tres respuestas, pasadas por softmax, ya colocan el primer trabajo de prueba en Ubuntu con probabilidad 0,67.
 
+## Puntos clave
+
+- Una muestra bootstrap de `n` filas deja fuera aproximadamente un tercio, `1/e` a medida que `n` crece, y esas filas dan a cada árbol una prueba out-of-bag gratuita.
+- Un bosque aleatorio añade al bagging subconjuntos aleatorios de características. scikit-learn, Tribuo y Breiman los vuelven a sortear en cada división; `ix_ensemble` los sortea una vez por árbol, lo que con una sola característica hace caer la exactitud de prueba de 0.9474 a 0.7632.
+- El bosque de IX resuelve un empate exacto a favor del mayor índice de clase, mientras que scikit-learn toma el menor.
+- Más árboles nunca perjudican a un ensamble de bagging, pero dejan de ayudar: aquí la puntuación de prueba no se movió después del primer árbol.
+- El gradient boosting ajusta cada tocón a los residuos de la pérdida logarítmica. La versión a mano, IX y numpy coinciden hasta el último dígito, y la puntuación alcanza su máximo en 5 rondas, así que el número de rondas necesita una comprobación con datos reservados.
+
 ## Ejercicios
 
 1. ¿Sigue la puntuación out-of-bag a la de prueba cuando los árboles se hacen más profundos?

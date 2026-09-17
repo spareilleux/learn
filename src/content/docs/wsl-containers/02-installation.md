@@ -101,6 +101,14 @@ If the service still refuses to stop: restart Windows and run the update **befor
 
 To leave the pre-release, reinstall a stable version: `wsl --update` (without `--pre-release`) or the stable MSI package from the [WSL GitHub releases](https://github.com/microsoft/WSL/releases). *To verify: the exact rollback behavior from 2.9.x.*
 
+## Key takeaways
+
+- `wslc` needs WSL 2.9.3 or later, which for now only exists as a pre-release: `wsl --update --pre-release`.
+- The update stops every WSL distribution, including those of Docker Desktop and Podman.
+- A terminal or an IDE opened before the update keeps the old `PATH` and doesn't find `wslc`.
+- An update can fail without an error: check `wsl --version` again, and look for error 1921 or status 1603 in the `MsiInstaller` events.
+- If the WSL service won't stop, stop Docker Desktop, Podman and the WSL processes, then update from an administrator terminal.
+
 ## Exercises
 
 1. How can you tell whether a WSL update really succeeded, even if the command shows no error?

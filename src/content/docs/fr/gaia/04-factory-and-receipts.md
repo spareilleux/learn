@@ -201,6 +201,14 @@ Lis cette dernière phrase comme une affirmation sur les agents. Un agent qui or
 
 Deux autres détails dans le même esprit. Le chemin du reçu est réservé **avant** que l'autorité soit dépensée, et tout chemin qui revient après cette réservation y laisse un reçu expurgé, y compris quand on abandonne l'invite, ce qui est « un refus qui se nomme lui-même et sort avec 1, jamais un succès silencieux ». Et l'adaptateur autorisé ne permet que le commit, un push explicite avec bail, et la création d'une pull request : il n'a **aucune capacité de fusion**. Une pull request peut contenir `Closes #N`, sur lequel GitHub n'agit qu'après une fusion distincte, elle-même autorisée.
 
+## À retenir
+
+- Le traceur de coordination prouve le plan de contrôle sans aucun modèle dans la boucle, et son rapport le dit ; il lie les octets exacts du journal, son nombre d'événements et son SHA-256 comme point fixe.
+- L'usine à agents lance un seul travailleur Claude dans un worktree lié propre, lie l'identité du candidat avant la revue, refuse un relecteur qui a modifié l'arborescence, fichiers ignorés compris, et permet au plus une réparation, qui doit changer le candidat.
+- Un `APPROVE` n'accorde aucune autorité de publication, et le document de conception nomme ce qu'il ne peut pas prouver : un travailleur qui tourne sous l'utilisateur hôte n'est pas confiné.
+- Une empreinte n'est jamais affichée sans sa recette. Ce sont les octets bruts qui sont hachés, donc un checkout CRLF et un checkout LF diffèrent, et une entrée qui n'est ni un fichier ni un répertoire est refusée nommément.
+- Le seul chemin vers un effet privilégié est un humain qui tape la révision complète de l'intention et saisit une phrase secrète de façon interactive, jamais par une option, une variable ou un fichier, pour une autorisation à usage unique dont l'adaptateur ne sait pas fusionner.
+
 ## Exercices
 
 1. L'usine renvoie `APPROVE` et un reçu qui lie le SHA-256 de chaque fichier modifié. Un collègue le lit comme « la modification est correcte et peut être fusionnée ». Énumère tout ce qui ne va pas dans cette lecture.

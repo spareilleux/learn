@@ -121,6 +121,14 @@ One distinction from the scientific half is worth carrying into ordinary enginee
 
 Gaia requires reproducibility before promotion, and replication or held-out evidence for claims intended to generalize. In agent terms: re-running the same prompt with the same seed and getting the same diff is reproducibility, and it is cheap and necessary. It says nothing about whether the approach works on the next repository. Lesson 5 shows where Gaia applies this to itself — the four-lane number is reproducible and explicitly not replicated with real Claude and Codex lanes, and the document says so.
 
+## Key takeaways
+
+- A completion marker is evidence that work stopped, not evidence that its claims are true, and the author of a change cannot approve it (ENG-08).
+- Freshness, quality, acceptance and authority are independent axes: an approving review is acceptance, not permission to deploy.
+- Uncertainty is not one number either. Conflict and ignorance are different states, and missing provenance is `UNKNOWN`, never an inferred success.
+- The doctrine follows: several designs at load-bearing seams only, the smallest tracer bullet that can fail honestly, a reversibility class for every change, and transitions that replay to the same state, without manufacturing paperwork for trivial work.
+- Reproducibility, the same inputs giving the same result, is required before promotion; replication with new evidence is what a claim meant to generalize needs.
+
 ## Exercises
 
 1. A teammate proposes a dashboard tile: "Agent throughput: 14 tasks/hour, ▲ 30% this week." Name three of Gaia's rejected shortcuts it steps on, and say what the tile would have to measure instead.

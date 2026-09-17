@@ -121,6 +121,14 @@ Merece la pena llevar a la ingeniería corriente una distinción de la mitad cie
 
 Gaia exige reproducibilidad antes de la promoción, y replicación o evidencia reservada para las afirmaciones que pretenden generalizarse. En términos de agentes: volver a ejecutar el mismo prompt con la misma semilla y obtener el mismo diff es reproducibilidad, y es barato y necesario. No dice nada sobre si el enfoque funciona en el siguiente repositorio. La lección 5 muestra dónde se lo aplica Gaia a sí misma — la cifra de cuatro carriles es reproducible y explícitamente no replicada con carriles reales de Claude y Codex, y el documento lo dice.
 
+## Puntos clave
+
+- Un marcador de fin es evidencia de que el trabajo se detuvo, no de que sus afirmaciones sean ciertas, y el autor de un cambio no puede aprobarlo (ENG-08).
+- Frescura, calidad, aceptación y autoridad son ejes independientes: una revisión que aprueba es aceptación, no permiso para desplegar.
+- La incertidumbre tampoco es un solo número. El conflicto y la ignorancia son estados distintos, y una procedencia que falta es `UNKNOWN`, nunca un éxito inferido.
+- De ahí sale la doctrina: varios diseños solo en las costuras que soportan carga, la bala trazadora más pequeña capaz de fallar honestamente, una clase de reversibilidad para cada cambio y transiciones que se reproducen hasta el mismo estado, sin fabricar papeleo para el trabajo trivial.
+- La reproducibilidad, las mismas entradas dando el mismo resultado, se exige antes de la promoción; una afirmación que pretende generalizarse necesita replicación, con evidencia nueva.
+
 ## Ejercicios
 
 1. Un compañero propone un recuadro para el panel: «Rendimiento de los agentes: 14 tareas por hora, ▲ 30 % esta semana». Nombra tres de los atajos rechazados por Gaia que pisa, y di qué debería medir el recuadro en su lugar.

@@ -131,8 +131,6 @@ Le paquet sait aussi construire ta propre image pendant `dotnet build` : un él�
 La page utilise `ComponentFlags`, `MemoryMB`, `CmdLine` et `DeleteContainerFlags`. Dans le paquet 2.9.9, ce sont `IReadOnlyList<Component>`, `MemorySizeInMB`, `CommandLine` et `DeleteContainerOption`. Détails dans le [journal](../journal/).
 :::
 
-Sources : [WSL container — Microsoft Learn](https://learn.microsoft.com/windows/wsl/wsl-container), [référence de l'API](https://wsl.dev/api-reference/). Exemples complets : [aka.ms/wslc-samples](https://aka.ms/wslc-samples).
-
 ## À retenir
 
 - `wslc` = conteneurs natifs WSL, sans produit tiers, encore en préversion.
@@ -158,3 +156,10 @@ wslc container stop qdrant
 Points à observer : l'image est-elle retéléchargée ? Est-ce la même version que le `latest` de Docker ? Quelle mémoire consomme la VM ? Que journalise qdrant si tu montes un dossier Windows au lieu d'un volume ? Réponses dans le [journal](../journal/).
 
 </details>
+
+## Sources
+
+- [WSL container — Microsoft Learn](https://learn.microsoft.com/windows/wsl/wsl-container)
+- [Référence de l'API WSL container](https://wsl.dev/api-reference/), et les exemples complets sur [aka.ms/wslc-samples](https://aka.ms/wslc-samples)
+- [`Microsoft.WSL.Containers` — NuGet](https://www.nuget.org/packages/Microsoft.WSL.Containers)
+- [C#/WinRT — Microsoft Learn](https://learn.microsoft.com/windows/apps/develop/platform/csharp-winrt/)

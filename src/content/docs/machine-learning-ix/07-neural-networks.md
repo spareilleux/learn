@@ -140,6 +140,14 @@ The last line is the proof rather than the symptom. For any affine `f`, `f(0,0) 
 
 None of this makes `ix-nn` wrong — attention, layer normalization, RoPE, ALiBi and the transformer blocks in the same crate are where its real work is, and those do have their non-linearities. But `Sequential` plus `Dense` is the part that looks like a beginner's neural network API, and it is the part that can only fit lines.
 
+## Key takeaways
+
+- The backward pass of an affine layer gives three gradients, `xᵀ g`, the sum of the rows of `g` and `g Wᵀ`. Central differences check them to about `1e-11`, and any real mistake shows up as a gap of order 1.
+- `Dense::backward` divides by the batch size a second time, so the learning rate you pass shrinks with the number of rows.
+- `mse_loss` averages over every cell but `mse_gradient` divides by the rows only: with `m` output columns, the gradient is `m` times the true one.
+- `Dense::new` draws its weights without a seed; overwrite the public `weights` and `bias` to make a result reproducible.
+- Two affine maps in a row are one affine map. With no activation layer, IX's `Sequential` of `Dense` layers predicts 0.5 everywhere on exclusive or, where one sigmoid between the layers solves it.
+
 ## Exercises
 
 1. Choose a learning rate that makes one step of `Dense` land exactly where one step of the hand layer lands.

@@ -121,6 +121,14 @@ Une distinction de la moitié scientifique mérite d'être emportée dans l'ing�
 
 Gaia exige la reproductibilité avant la promotion, et la réplication ou des preuves mises de côté pour les affirmations destinées à se généraliser. En termes d'agents : relancer le même prompt avec la même graine et obtenir le même diff, c'est de la reproductibilité, et c'est bon marché et nécessaire. Cela ne dit rien sur le fait que l'approche fonctionne sur le dépôt suivant. La leçon 5 montre où Gaia s'applique cela à elle-même : le nombre de quatre voies est reproductible, et explicitement non répliqué avec de vraies voies Claude et Codex, et le document le dit.
 
+## À retenir
+
+- Un marqueur de fin prouve que le travail s'est arrêté, pas que ses affirmations sont vraies, et l'auteur d'un changement ne peut pas l'approuver (ENG-08).
+- Fraîcheur, qualité, acceptation et autorité sont des axes indépendants : une revue qui approuve est une acceptation, pas une permission de déployer.
+- L'incertitude ne tient pas non plus en un seul nombre. Le conflit et l'ignorance sont des états différents, et une provenance manquante vaut `UNKNOWN`, jamais un succès supposé.
+- La doctrine en découle : plusieurs conceptions aux seules jonctions porteuses, la plus petite balle traçante capable d'échouer honnêtement, une classe de réversibilité pour chaque changement, et des transitions qui se rejouent vers le même état, sans fabriquer de paperasse pour un travail trivial.
+- La reproductibilité, les mêmes entrées donnant le même résultat, est exigée avant la promotion ; une affirmation destinée à se généraliser a besoin de réplication, avec de nouvelles preuves.
+
 ## Exercices
 
 1. Un collègue propose une tuile de tableau de bord : « Débit des agents : 14 tâches par heure, en hausse de 30 % cette semaine. » Nomme trois des raccourcis rejetés par Gaia qu'elle enfreint, et dis ce que la tuile devrait mesurer à la place.

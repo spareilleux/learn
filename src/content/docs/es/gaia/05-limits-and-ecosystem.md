@@ -206,6 +206,14 @@ Y el mapa lleva su propio registro de verificación, guardado a propósito fuera
 
 Un registro de verificación que vincula una fecha, un commit revisado y el SHA-256 de los bytes exactos revisados, de modo que «la arquitectura se revisó» es una afirmación comprobable sobre unos bytes concretos y no sobre un documento que se ha editado desde entonces.
 
+## Puntos clave
+
+- Cuatro carriles activos es el mayor número que alguien ha ejercitado de extremo a extremo. Seis y ocho exigen `--experimental-lanes`, que registra una decisión y no crea evidencia, y no se permite nada por encima de ocho.
+- Pedir más que el límite lanza un error en lugar de recortar, y el número vive en el mismo archivo que su evidencia.
+- Las sondas con workers de Node demuestran los invariantes de concurrencia, no el comportamiento de carriles reales de Claude y Codex: reproducible no es replicado.
+- El techo viene de que la reproducción cuesta O(eventos × actores) bajo un único bloqueo; subirlo exige un camino de lectura de coste acotado, una sonda con clientes reales y una respuesta para un bloqueo atascado.
+- Los veredictos del ecosistema se aplican en el código: GA y TARS solo reciben adaptadores, Hari se rechaza, e IX se aplaza con dos condiciones explícitas.
+
 ## Ejercicios
 
 1. Tu equipo choca constantemente con el límite de cuatro carriles. Un colega abre `src/lanes.mjs`, cambia `DEFAULT_MAX_LIVE_LANES` a 8 y señala que las pruebas siguen pasando. ¿Qué está mal, y cuál es el cambio honesto más pequeño?

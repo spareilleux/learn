@@ -154,6 +154,14 @@ start, the smoothed log priors: [-0.4529, -1.7592, -1.6500]
 
 `exp(-0.4529) = 0,636` : 95 des 148 jobs d'entraînement tournaient sur Ubuntu, lissés en ajoutant un à chaque effectif. Le modèle commence par deviner les taux de base. Puis chaque classe reçoit la question qui réduit le plus son propre résidu — pour Windows, « le clonage a-t-il pris plus de 4 secondes ? », pour macOS, « le job a-t-il attendu plus de 5,5 secondes dans la file ? » — et les trois réponses, passées au softmax, placent déjà le premier job de test sur Ubuntu avec une probabilité de 0,67.
 
+## À retenir
+
+- Un échantillon bootstrap de `n` lignes en laisse de côté environ un tiers, `1/e` quand `n` grandit, et ces lignes offrent à chaque arbre un test out-of-bag gratuit.
+- Une forêt aléatoire ajoute au bagging des sous-ensembles aléatoires de caractéristiques. scikit-learn, Tribuo et Breiman les retirent à chaque division ; `ix_ensemble` les tire une fois par arbre, ce qui, avec une seule caractéristique, fait tomber l'exactitude de test de 0.9474 à 0.7632.
+- La forêt d'IX tranche une égalité exacte en faveur du plus grand indice de classe, là où scikit-learn prend le plus petit.
+- Ajouter des arbres ne nuit jamais à un ensemble bagging, mais cela cesse d'aider : ici, le score de test n'a plus bougé après le premier arbre.
+- Le gradient boosting ajuste chaque souche aux résidus de la perte logarithmique. La version à la main, IX et numpy s'accordent au dernier chiffre, et le score culmine à 5 tours : le nombre de tours demande une vérification sur des données mises de côté.
+
 ## Exercices
 
 1. Le score out-of-bag suit-il le score de test quand les arbres s'approfondissent ?

@@ -122,6 +122,14 @@ Las mismas tres reglas sobre la pérdida de la lección 2, estandarizada, donde 
 
 Los tres alcanzan la forma cerrada hasta seis decimales, y el descenso simple llega primero. En un cuenco redondo con una tasa de aprendizaje bien elegida no hay nada que el momento pueda acumular ni nada que Adam pueda reescalar; ambos solo añaden su propia dinámica encima de un problema que no la necesitaba. El valle de Rosenbrock y este cuenco son los dos extremos de la misma historia, y en qué extremo estás es una propiedad del problema, no del optimizador.
 
+## Puntos clave
+
+- El descenso simple rebota entre las paredes del valle de Rosenbrock. El momentum acumula los pasos que coinciden, y Adam da a cada coordenada su propio tamaño de paso, lo que lo llevó al mínimo en 2822 pasos.
+- Las versiones a mano e `ix_optimize` coinciden paso a paso. El primer paso de Adam mueve cada coordenada exactamente la tasa de aprendizaje, sea cual sea el tamaño del gradiente.
+- Sin un gradiente escrito, IX mide uno con diferencias centradas: exacto hasta unos ocho dígitos, a costa de dos evaluaciones más por coordenada y por paso.
+- `minimize` devuelve el mejor punto por el que pasó, así que una ejecución que divergió hasta NaN devuelve su punto de partida como una respuesta finita; compara el objetivo en el resultado con el objetivo en el inicio.
+- El recocido simulado y el enjambre de partículas no necesitan gradiente, pero son una mala elección cuando existe uno, y en un cuenco redondo el descenso simple termina primero: el problema decide qué regla gana.
+
 ## Ejercicios
 
 1. ¿Cuál es la mayor tasa de aprendizaje del descenso simple que aún llega al valle en 5000 pasos?

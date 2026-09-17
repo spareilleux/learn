@@ -122,6 +122,14 @@ Les trois mêmes règles sur la perte de la leçon 2, centrée-réduite, là où
 
 Tous trois atteignent la forme close à six décimales, et la descente simple y arrive la première. Sur une cuvette ronde avec un taux d'apprentissage bien choisi, le momentum n'a rien à accumuler et Adam rien à remettre à l'échelle ; tous deux ne font qu'ajouter leur propre dynamique par-dessus un problème qui n'en avait pas besoin. La vallée de Rosenbrock et cette cuvette sont les deux bouts de la même histoire, et savoir à quel bout vous êtes est une propriété du problème, pas de l'optimiseur.
 
+## À retenir
+
+- La descente simple rebondit entre les parois de la vallée de Rosenbrock. Le momentum accumule les pas qui vont dans le même sens, et Adam donne à chaque coordonnée son propre pas, ce qui l'a mené au minimum en 2822 pas.
+- Les versions à la main et `ix_optimize` s'accordent pas à pas. Le premier pas d'Adam déplace chaque coordonnée du taux d'apprentissage, quelle que soit la taille du gradient.
+- Sans gradient écrit, IX en mesure un par différences centrées : juste à environ huit chiffres, au prix de deux évaluations supplémentaires par coordonnée et par pas.
+- `minimize` renvoie le meilleur point par lequel il est passé : une exécution qui a divergé jusqu'à NaN renvoie donc son point de départ comme une réponse finie ; compare l'objectif au résultat avec l'objectif au départ.
+- Le recuit simulé et l'essaim de particules n'ont pas besoin de gradient, mais sont un mauvais choix quand il en existe un, et sur un bol rond la descente simple finit la première : c'est le problème qui décide quelle règle gagne.
+
 ## Exercices
 
 1. Quel est le plus grand taux d'apprentissage de descente simple qui atteigne encore la vallée en 5000 pas ?

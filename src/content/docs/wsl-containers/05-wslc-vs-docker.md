@@ -131,8 +131,6 @@ The package can also build your own image during `dotnet build`: a `WslcImage` i
 The page uses `ComponentFlags`, `MemoryMB`, `CmdLine` and `DeleteContainerFlags`. In package 2.9.9 they are `IReadOnlyList<Component>`, `MemorySizeInMB`, `CommandLine` and `DeleteContainerOption`. Details in the [journal](../journal/).
 :::
 
-Sources: [WSL container — Microsoft Learn](https://learn.microsoft.com/windows/wsl/wsl-container), [API reference](https://wsl.dev/api-reference/). Full samples: [aka.ms/wslc-samples](https://aka.ms/wslc-samples).
-
 ## Key takeaways
 
 - `wslc` = native WSL containers, with no third-party product, still in preview.
@@ -158,3 +156,10 @@ wslc container stop qdrant
 Things to observe: is the image downloaded again? Is it the same version as Docker's `latest`? How much memory does the VM use? What does qdrant log if you mount a Windows folder instead of a volume? Answers in the [journal](../journal/).
 
 </details>
+
+## Sources
+
+- [WSL container — Microsoft Learn](https://learn.microsoft.com/windows/wsl/wsl-container)
+- [WSL container API reference](https://wsl.dev/api-reference/), and the full samples at [aka.ms/wslc-samples](https://aka.ms/wslc-samples)
+- [`Microsoft.WSL.Containers` — NuGet](https://www.nuget.org/packages/Microsoft.WSL.Containers)
+- [C#/WinRT — Microsoft Learn](https://learn.microsoft.com/windows/apps/develop/platform/csharp-winrt/)

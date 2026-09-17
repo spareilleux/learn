@@ -206,6 +206,14 @@ And the map carries its own verification record, deliberately stored outside the
 
 A verification record that binds a date, a reviewed commit and the SHA-256 of the exact reviewed bytes — so "the architecture was reviewed" is a checkable statement about specific bytes rather than a claim about a document that has since been edited.
 
+## Key takeaways
+
+- Four live lanes is the largest count anyone has exercised end to end. Six and eight need `--experimental-lanes`, which records a decision and creates no evidence, and nothing above eight is allowed.
+- Asking for more than the limit throws rather than clamping, and the number lives in the same file as its evidence.
+- The Node-worker probes prove the concurrency invariants, not the behaviour of real Claude and Codex lanes: reproducible is not replicated.
+- The ceiling comes from replay costing O(events × actors) under one lock; raising it needs a bounded-cost read path, a probe with real clients and an answer for a wedged lock.
+- The ecosystem verdicts are enforced in code: GA and TARS get adapters only, Hari is rejected, and IX is deferred with two named conditions.
+
 ## Exercises
 
 1. Your team hits the four-lane limit constantly. A colleague opens `src/lanes.mjs`, changes `DEFAULT_MAX_LIVE_LANES` to 8 and notes that the tests still pass. What is wrong, and what is the smallest honest change?

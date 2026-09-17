@@ -211,6 +211,14 @@ The two never disagree; `verify` simply asks more. It exits 1 on both conditions
 
 That was not always true, and the README records why it was changed: both previously exited 0 on such a log *while `verify` displayed its own red check saying otherwise*, and a reader keying on the exit code, or on `ok`, read that as a pass. A tool that prints a failure and returns success has produced a reassuring answer where it should have refused — the exact failure mode from [lesson 1](../01-the-problem/), inside the verifier.
 
+## Key takeaways
+
+- The whole coordination state is one append-only JSONL file, and denials, refusals and inbox reads are events too, so "what did this session try?" has an answer.
+- Every commit takes a lock directory, since `mkdir` is atomic on Windows, then re-reads and replays the whole log inside the lock, appends complete lines and calls `fsync`.
+- A stale lock is reported and never broken, because breaking it automatically is a TOCTOU by construction; a corrupt log is preserved for diagnosis, never repaired.
+- Exit code 1 means the answer was no, and 3 means fail-closed I/O with nothing written: retry with a better address, or stop and fetch a human.
+- `verify` keeps authority and integrity checks, which always gate, apart from evidence-richness checks, which gate only when the log is claimed as evidence, and its negative controls prove it can fail.
+
 ## Exercises
 
 1. Your CI wrapper runs a bus command and gets exit 3. It retries three times with backoff, then reports a flaky test. What is wrong with that wrapper?

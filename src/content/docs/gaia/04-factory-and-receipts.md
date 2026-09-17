@@ -201,6 +201,14 @@ Read that last sentence as a statement about agents. An agent orchestrating this
 
 Two more details in the same spirit. The receipt path is claimed **before** authority is spent, and every path returning after that claim leaves a redacted receipt there — including walking away from the prompt, which is "a refusal that names itself and exits 1, never a silent success". And the authorized adapter permits only commit, explicit leased push, and pull-request creation: it has **no merge capability at all**. A pull request may carry `Closes #N`, which GitHub acts on only after a separate authorized merge.
 
+## Key takeaways
+
+- The coordination tracer proves the control plane with no model in the loop, and its report says so; it binds the log's exact bytes, event count and SHA-256 as a fixed point.
+- The agent factory runs one Claude worker in a clean linked worktree, binds the candidate's identity before review, refuses a reviewer that changed the tree, ignored files included, and allows at most one repair, which must change the candidate.
+- An `APPROVE` grants no publication authority, and the design document names what it cannot prove: a worker running as the host user is not contained.
+- A digest is never printed without its recipe. Raw bytes are hashed, so a CRLF and an LF checkout differ, and an entry that is neither a file nor a directory is refused by name.
+- The only path to a privileged effect is a human who types the intent's full revision and enters a passphrase interactively, never through an option, a variable or a file, for a single-use grant whose adapter cannot merge.
+
 ## Exercises
 
 1. The factory returns `APPROVE` and a receipt binding every changed file's SHA-256. A teammate reads it as "the change is correct and can be merged". List everything wrong with that reading.

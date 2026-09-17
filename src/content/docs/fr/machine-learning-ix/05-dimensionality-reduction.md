@@ -169,6 +169,14 @@ C'est un cas sur le fil du rasoir — il faut que les deux variables aient exact
 - Avant de faire confiance à une première composante, ajustez avec toutes les composantes et vérifiez que les variances sortent en ordre décroissant. L'itération de puissance suivie de déflation ne peut pas le garantir, et l'outil `ix_ml_pipeline` active l'ACP avec `normalize`.
 - Comparer deux exécutions d'une ACP, c'est comparer des sous-espaces ou des valeurs absolues, jamais des vecteurs signés.
 
+## À retenir
+
+- L'ACP garde les vecteurs propres de la matrice de covariance aux plus grandes valeurs propres ; chaque valeur propre est la variance le long de son axe, et ensemble elles donnent la variance totale.
+- Sur les jobs de CI, les rotations de Jacobi à la main et l'itération de puissance d'IX trouvent les mêmes variances à dix décimales près. Un vecteur propre n'a pas de signe naturel : compare des axes, jamais des vecteurs signés.
+- Avec des caractéristiques standardisées, l'erreur laissée en gardant `k` composantes est exactement la part de la variance que portaient les autres : cette part est le coût d'une réduction.
+- `explained_variance_ratio()` d'IX divise par les seules composantes gardées, donc la somme vaut toujours 1 ; calcule toi-même le ratio sur toutes les composantes.
+- L'itération de puissance depuis un vecteur de départ fixe manque l'axe principal quand ce vecteur est lui-même un autre vecteur propre, et rien dans la sortie ne le dit.
+
 ## Exercices
 
 1. Combien de composantes faut-il pour garder 90 % de la variance, et que dit `explained_variance_ratio()` pour chaque nombre ?

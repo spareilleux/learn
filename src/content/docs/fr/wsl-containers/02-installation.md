@@ -101,6 +101,14 @@ Si le service refuse encore de s'arrêter : redémarrer Windows et lancer la mis
 
 Pour quitter la pre-release, réinstaller une version stable : `wsl --update` (sans `--pre-release`) ou le paquet MSI stable depuis les [releases GitHub de WSL](https://github.com/microsoft/WSL/releases). *À vérifier : le comportement exact du retour arrière depuis 2.9.x.*
 
+## À retenir
+
+- `wslc` exige WSL 2.9.3 ou plus récent, qui n'existe pour l'instant qu'en pré-version : `wsl --update --pre-release`.
+- La mise à jour arrête toutes les distributions WSL, y compris celles de Docker Desktop et de Podman.
+- Un terminal ou un IDE ouvert avant la mise à jour garde l'ancien `PATH` et ne trouve pas `wslc`.
+- Une mise à jour peut échouer sans erreur : relance `wsl --version`, et cherche l'erreur 1921 ou le statut 1603 dans les événements `MsiInstaller`.
+- Si le service WSL refuse de s'arrêter, arrête Docker Desktop, Podman et les processus WSL, puis mets à jour depuis un terminal administrateur.
+
 ## Exercices
 
 1. Comment savoir si une mise à jour de WSL a vraiment réussi, même si la commande n'affiche aucune erreur ?

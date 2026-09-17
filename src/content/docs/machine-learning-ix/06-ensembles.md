@@ -154,6 +154,14 @@ start, the smoothed log priors: [-0.4529, -1.7592, -1.6500]
 
 `exp(-0.4529) = 0.636`: 95 of the 148 training jobs ran on Ubuntu, smoothed by adding one to each count. The model starts by guessing the base rates. Then each class gets the one question that most reduces its own residual — for Windows, "did the checkout take more than 4 seconds?", for macOS, "did the job wait more than 5.5 seconds in the queue?" — and the three answers, softmaxed, already put the first test job on Ubuntu with probability 0.67.
 
+## Key takeaways
+
+- A bootstrap sample of `n` rows leaves out about a third of them, `1/e` as `n` grows, and those rows give each tree a free out-of-bag test.
+- A random forest adds random feature subsets to bagging. scikit-learn, Tribuo and Breiman redraw them at every split; `ix_ensemble` draws them once per tree, which with a single feature drops the test accuracy from 0.9474 to 0.7632.
+- IX's forest resolves an exact tie in favour of the largest class index, where scikit-learn takes the smallest.
+- More trees never hurt a bagged ensemble, but they stop helping: here the test score did not move after the first tree.
+- Gradient boosting fits each stump to the residuals of the log loss. The hand version, IX and numpy agree to the last digit, and the score peaked at 5 rounds, so the number of rounds needs a held-out check.
+
 ## Exercises
 
 1. Does the out-of-bag score follow the test score as the trees grow deeper?

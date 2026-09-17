@@ -201,6 +201,14 @@ Lee esa última frase como una afirmación sobre los agentes. Un agente que orqu
 
 Dos detalles más con el mismo espíritu. La ruta del recibo se reclama **antes** de gastar la autoridad, y cada camino que vuelve después de esa reclamación deja allí un recibo censurado, incluido el de abandonar el prompt, que es «un rechazo que se nombra a sí mismo y sale con 1, nunca un éxito silencioso». Y el adaptador autorizado solo permite el commit, un push explícito con arrendamiento y la creación de la pull request: **no tiene ninguna capacidad de merge**. Una pull request puede llevar `Closes #N`, y GitHub solo actúa sobre ello después de un merge autorizado por separado.
 
+## Puntos clave
+
+- La bala trazadora de coordinación demuestra el plano de control sin ningún modelo en el bucle, y su informe lo dice; vincula los bytes exactos del registro, su número de eventos y su SHA-256 como punto fijo.
+- La fábrica de agentes ejecuta un solo trabajador Claude en un worktree enlazado limpio, vincula la identidad del candidato antes de la revisión, rechaza a un revisor que cambió el árbol, archivos ignorados incluidos, y permite como mucho una reparación, que debe cambiar el candidato.
+- Un `APPROVE` no concede ninguna autoridad de publicación, y el documento de diseño nombra lo que no puede demostrar: un trabajador que se ejecuta como el usuario anfitrión no está contenido.
+- Un digest nunca se imprime sin su receta. Se hashean los bytes en bruto, así que un checkout CRLF y uno LF difieren, y una entrada que no es ni archivo ni directorio se rechaza por su nombre.
+- El único camino hacia un efecto privilegiado es un humano que escribe la revisión completa de la intención e introduce una frase de paso de forma interactiva, nunca mediante una opción, una variable o un archivo, para una concesión de un solo uso cuyo adaptador no puede fusionar.
+
 ## Ejercicios
 
 1. La fábrica devuelve `APPROVE` y un recibo que vincula el SHA-256 de cada archivo modificado. Un compañero lo lee como «el cambio es correcto y se puede fusionar». Enumera todo lo que está mal en esa lectura.

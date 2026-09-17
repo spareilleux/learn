@@ -169,6 +169,14 @@ Es un caso al filo de la navaja — hacen falta dos variables con exactamente la
 - Antes de fiarte de una primera componente, ajusta con todas las componentes y comprueba que las varianzas salen en orden decreciente. La iteración de potencia seguida de deflación no puede garantizarlo, y la herramienta `ix_ml_pipeline` activa el ACP con `normalize`.
 - Comparar dos ejecuciones de un ACP es comparar subespacios o valores absolutos, nunca vectores con signo.
 
+## Puntos clave
+
+- El PCA conserva los vectores propios de la matriz de covarianza con los mayores valores propios; cada valor propio es la varianza a lo largo de su eje, y juntos suman la varianza total.
+- En los jobs de CI, las rotaciones de Jacobi a mano y la iteración de potencia de IX encuentran las mismas varianzas con diez decimales. Un vector propio no tiene signo natural, así que compara ejes, nunca vectores con signo.
+- Con características estandarizadas, el error que deja conservar `k` componentes es exactamente la parte de la varianza que llevaban las demás: esa parte es lo que cuesta una reducción.
+- `explained_variance_ratio()` de IX divide solo por las componentes conservadas, así que siempre suma 1; calcula tú la razón sobre todas las componentes.
+- La iteración de potencia desde un vector inicial fijo no encuentra el eje principal cuando ese vector es a su vez otro vector propio, y nada en la salida lo dice.
+
 ## Ejercicios
 
 1. ¿Cuántas componentes hacen falta para conservar el 90 % de la varianza, y qué dice `explained_variance_ratio()` para cada número?

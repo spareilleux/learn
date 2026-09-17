@@ -169,6 +169,14 @@ This is a knife-edge case — it needs the two features to have exactly equal va
 - Before trusting a first component, fit with every component and check the variances come out in decreasing order. Power iteration plus deflation cannot guarantee it, and the `ix_ml_pipeline` tool turns PCA on with `normalize`.
 - Comparing two PCA runs means comparing subspaces or absolute values, never signed vectors.
 
+## Key takeaways
+
+- PCA keeps the eigenvectors of the covariance matrix with the largest eigenvalues; each eigenvalue is the variance along its axis, and together they add up to the total variance.
+- On the CI jobs, Jacobi rotations by hand and IX's power iteration find the same variances to ten decimals. An eigenvector has no natural sign, so compare axes, never signed vectors.
+- With standardized features, the error left by keeping `k` components is exactly the share of the variance the others carried: that share is what a reduction costs.
+- IX's `explained_variance_ratio()` divides by the kept components only, so it always sums to 1; compute the ratio over all the components yourself.
+- Power iteration from a fixed starting vector misses the principal axis when that vector is itself another eigenvector, and nothing in the output says so.
+
 ## Exercises
 
 1. How many components does it take to keep 90 % of the variance, and what does `explained_variance_ratio()` say for each count?

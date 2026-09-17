@@ -206,6 +206,14 @@ Et la carte porte son propre enregistrement de vérification, délibérément st
 
 Un enregistrement de vérification qui lie une date, un commit relu et le SHA-256 des octets exacts relus : « l'architecture a été relue » devient ainsi une affirmation vérifiable sur des octets précis, plutôt qu'une affirmation sur un document qui a été modifié depuis.
 
+## À retenir
+
+- Quatre voies actives, c'est le plus grand nombre que quiconque ait exercé de bout en bout. Six et huit exigent `--experimental-lanes`, qui enregistre une décision et ne crée aucune preuve, et rien au-dessus de huit n'est permis.
+- Demander plus que la limite lève une erreur au lieu de plafonner, et le nombre vit dans le même fichier que sa preuve.
+- Les sondes à workers Node prouvent les invariants de concurrence, pas le comportement de vraies voies Claude et Codex : reproductible ne veut pas dire répliqué.
+- Le plafond vient du rejeu qui coûte O(événements × acteurs) sous un seul verrou ; le relever exige un chemin de lecture à coût borné, une sonde avec de vrais clients et une réponse pour un verrou bloqué.
+- Les verdicts sur l'écosystème sont appliqués dans le code : GA et TARS n'ont droit qu'à des adaptateurs, Hari est rejeté, et IX est différé avec deux conditions nommées.
+
 ## Exercices
 
 1. Ton équipe se heurte sans cesse à la limite de quatre voies. Un collègue ouvre `src/lanes.mjs`, passe `DEFAULT_MAX_LIVE_LANES` à 8, et note que les tests passent toujours. Qu'est-ce qui ne va pas, et quelle est la plus petite modification honnête ?

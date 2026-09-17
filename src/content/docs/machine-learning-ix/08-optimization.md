@@ -122,6 +122,14 @@ The same three rules on the loss of lesson 2, standardized, where the answer is 
 
 All three reach the closed form to six decimals, and plain descent gets there first. On a round bowl with a well-chosen learning rate there is nothing for momentum to accumulate and nothing for Adam to rescale; both only add their own dynamics on top of a problem that did not need them. Rosenbrock's valley and this bowl are the two ends of the same story, and which end you are on is a property of the problem, not of the optimizer.
 
+## Key takeaways
+
+- Plain descent bounces between the walls of Rosenbrock's valley. Momentum accumulates the steps that agree, and Adam gives every coordinate its own step size, which took it to the minimum in 2822 steps.
+- The hand versions and `ix_optimize` agree step for step. Adam's first step moves every coordinate by the learning rate, whatever the size of the gradient.
+- Without a written gradient, IX measures one by central differences: accurate to about eight digits, at the cost of two extra evaluations per coordinate per step.
+- `minimize` returns the best point it passed through, so a run that diverged to NaN returns its starting point as a finite answer; compare the objective at the result with the objective at the start.
+- Simulated annealing and particle swarm need no gradient but are a poor choice when one exists, and on a round bowl plain descent finishes first: the problem decides which rule wins.
+
 ## Exercises
 
 1. What is the largest plain-descent learning rate that still reaches the valley in 5000 steps?

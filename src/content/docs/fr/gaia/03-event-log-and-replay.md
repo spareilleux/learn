@@ -211,6 +211,14 @@ Les deux ne se contredisent jamais ; `verify` pose simplement plus de question
 
 Cela n'a pas toujours été vrai, et le README explique pourquoi cela a changé : auparavant, les deux sortaient avec 0 sur un tel journal, *alors même que `verify` affichait sa propre vérification rouge disant le contraire*, et un lecteur qui se fiait au code de sortie, ou à `ok`, y voyait un succès. Un outil qui affiche un échec et renvoie un succès a produit une réponse rassurante là où il aurait dû refuser : c'est exactement le mode de défaillance de la [leçon 1](../01-the-problem/), à l'intérieur du vérificateur.
 
+## À retenir
+
+- Tout l'état de coordination tient dans un seul fichier JSONL en ajout seul, et les refus d'autorité, les rejets et les lectures de boîte de réception sont aussi des événements : « qu'a tenté cette session ? » a donc une réponse.
+- Chaque validation prend un répertoire de verrou, puisque `mkdir` est atomique sous Windows, puis relit et rejoue tout le journal à l'intérieur du verrou, ajoute des lignes complètes et appelle `fsync`.
+- Un verrou périmé est signalé et jamais cassé, parce que le casser automatiquement est un TOCTOU par construction ; un journal corrompu est conservé pour le diagnostic, jamais réparé.
+- Le code de sortie 1 signifie que la réponse était non, et 3 une E/S fermée en cas d'échec, sans rien d'écrit : réessaie avec une meilleure adresse, ou arrête-toi et va chercher un humain.
+- `verify` sépare les vérifications d'autorité et d'intégrité, toujours bloquantes, des vérifications de richesse de la preuve, bloquantes seulement quand on présente le journal comme une preuve, et ses contrôles négatifs prouvent qu'il peut échouer.
+
 ## Exercices
 
 1. Ton script d'enveloppe en CI lance une commande du bus et obtient le code de sortie 3. Il réessaie trois fois avec un délai croissant, puis signale un test instable. Qu'est-ce qui ne va pas dans ce script ?

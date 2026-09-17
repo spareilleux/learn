@@ -140,6 +140,14 @@ La dernière ligne est la preuve plutôt que le symptôme. Pour toute `f` affine
 
 Rien de tout cela ne rend `ix-nn` fautif — l'attention, la normalisation de couche, RoPE, ALiBi et les blocs transformeurs du même crate sont là où est son vrai travail, et ceux-là ont bien leurs non-linéarités. Mais `Sequential` plus `Dense` est la partie qui ressemble à une API de réseau de neurones pour débutants, et c'est la partie qui ne peut ajuster que des droites.
 
+## À retenir
+
+- La passe arrière d'une couche affine donne trois gradients, `xᵀ g`, la somme des lignes de `g` et `g Wᵀ`. Les différences centrées les vérifient à environ `1e-11` près, et toute vraie erreur apparaît comme un écart de l'ordre de 1.
+- `Dense::backward` divise une deuxième fois par la taille du lot : le taux d'apprentissage que tu passes rétrécit avec le nombre de lignes.
+- `mse_loss` fait la moyenne sur toutes les cellules mais `mse_gradient` ne divise que par les lignes : avec `m` colonnes de sortie, le gradient vaut `m` fois le vrai.
+- `Dense::new` tire ses poids sans graine ; écrase les champs publics `weights` et `bias` pour rendre un résultat reproductible.
+- Deux applications affines à la suite n'en font qu'une. Faute de couche d'activation, un `Sequential` de couches `Dense` d'IX prédit 0.5 partout sur le ou exclusif, là où une sigmoïde entre les couches le résout.
+
 ## Exercices
 
 1. Choisissez un taux d'apprentissage qui fasse atterrir un pas de `Dense` exactement là où atterrit un pas de la couche à la main.

@@ -211,6 +211,14 @@ Los dos nunca discrepan; `verify` simplemente pregunta más. Sale con 1 en las d
 
 No siempre fue así, y el README anota por qué se cambió: antes, los dos salían con 0 sobre un registro así *mientras `verify` mostraba su propia comprobación en rojo diciendo lo contrario*, y un lector que se fijara en el código de salida, o en `ok`, lo leía como un aprobado. Una herramienta que imprime un fallo y devuelve éxito ha producido una respuesta tranquilizadora donde debería haberse negado: exactamente el modo de fallo de la [lección 1](../01-the-problem/), dentro del verificador.
 
+## Puntos clave
+
+- Todo el estado de coordinación es un único archivo JSONL de solo anexado, y las denegaciones, los rechazos y las lecturas de la bandeja de entrada también son eventos, así que «¿qué intentó esta sesión?» tiene respuesta.
+- Cada confirmación toma un directorio de bloqueo, porque `mkdir` es atómico en Windows, y luego vuelve a leer y reproduce todo el registro dentro del bloqueo, anexa líneas completas y llama a `fsync`.
+- Un bloqueo obsoleto se informa y nunca se rompe, porque romperlo automáticamente es un TOCTOU por construcción; un registro corrupto se conserva para el diagnóstico, nunca se repara.
+- El código de salida 1 significa que la respuesta fue no, y el 3, E/S cerrada ante fallos sin nada escrito: reintenta con una dirección mejor, o detente y busca a un humano.
+- `verify` separa las comprobaciones de autoridad e integridad, que siempre bloquean, de las de riqueza de la evidencia, que solo bloquean cuando el registro se presenta como evidencia, y sus controles negativos demuestran que puede fallar.
+
 ## Ejercicios
 
 1. Tu envoltorio de CI ejecuta un comando del bus y obtiene la salida 3. Reintenta tres veces con espera progresiva y después informa de una prueba inestable. ¿Qué está mal en ese envoltorio?
