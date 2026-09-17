@@ -40,10 +40,10 @@ You write C# or Java. You know HTTP, JSON and asynchronous code. You don't need 
 | 2 | [Diffusion, and what makes an image reproducible](02-diffusion-reproducibility/) | `new Random(seed)`, and floating-point determinism |
 | 3 | [Workflows as JSON: the UI format, the API format, and diffs](03-workflow-json/) | `System.Text.Json`, Jackson, a schema |
 | 4 | [The HTTP and WebSocket API from C# and Java](04-http-websocket-api/) | `HttpClient`, `ClientWebSocket`, `java.net.http` |
-| 5 | Img2img, inpainting and outpainting | — |
-| 6 | ControlNet: poses, edges and depth | — |
-| 7 | LoRA: loading, stacking, and what training one involves | a plugin that patches weights |
-| 8 | Recent models and their licenses, quantization and VRAM | choosing a dependency and its license |
+| 5 | [Img2img, inpainting and outpainting](05-img2img-inpainting/) | — |
+| 6 | [ControlNet: edges and depth](06-controlnet/) | — |
+| 7 | [LoRA: loading, stacking, and what training one involves](07-lora/) | a plugin that patches weights |
+| 8 | [Recent models and their licenses, quantization and VRAM](08-recent-models-quantization/) | choosing a dependency and its license |
 | 9 | Upscaling, seamless textures and HDR | — |
 | 10 | Video | — |
 | 11 | Custom nodes, and their security | NuGet or Maven packages that run code at install |
