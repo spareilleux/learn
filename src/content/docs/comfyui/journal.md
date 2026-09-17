@@ -37,12 +37,20 @@ sidebar:
 - `nvidia-smi` showed about 7 GB more in use during rendering. The log staged 1,560 MB for the text encoders, 4,896 MB for the UNet, and 159 MB for the VAE.
 - The latent previews of `--preview-method taesd` slowed sampling from 6.4 to 4.9 steps per second.
 
+![A brass object on an old wooden workbench, lit by morning sun through a dusty window. It looks more like an ornate hourglass than a metronome: a tall glass body with a narrow waist, held in a brass frame on a round base.](../../../assets/comfyui/l01-metronome.webp)
+
+*The first render. ComfyUI v0.36.0: Stable Diffusion XL base 1.0, seed 42, 25 steps, `euler`, `normal`, CFG 7, 1024 × 1024, workflow [`01-txt2img.api.json`](https://github.com/spareilleux/learn/blob/a1a9bffadaa7156b91ca9c2c2b8885e9e9862dd5/code/comfyui/workflows/01-txt2img.api.json).*
+
 ## 2026-09-16 — One seed, two images
 
 - The same workflow and seed gave `698e7867…` on a freshly started server, again after restarts, and `5374ac40…` whenever the negative prompt was encoded again with the UNet already loaded. The two images differ by a mean of 0.92 levels, and 2.63 % of the pixels differ by more than 8.
 - `--disable-dynamic-vram` gave `5374ac40…` on the first run too. `--deterministic` changed neither result. I haven't found which operation differs.
 - The first image of a batch of two differed from the single image with the same seed (mean 0.74), and the second image of the batch isn't seed 43's.
 - A seed-43 render by the Java client, on another server start 20 minutes later, had the same pixels as the first seed-43 render.
+
+![Three panels. The first two are the two seed-42 renders, which look the same at this size. The third is a white image with dark lines where they differ, amplified eight times: the outline of the brass object, its glass, the tools on the bench and the window frame.](../../../assets/comfyui/l02-cold-warm.webp)
+
+*The two seed-42 images. ComfyUI v0.36.0: Stable Diffusion XL base 1.0, seed 42, 25 steps, `euler`, `normal`, CFG 7, workflow [`01-txt2img.api.json`](https://github.com/spareilleux/learn/blob/a1a9bffadaa7156b91ca9c2c2b8885e9e9862dd5/code/comfyui/workflows/01-txt2img.api.json). Left: first run after starting the server. Middle: the same graph after the negative prompt was encoded again. Right: where they differ, amplified eight times.*
 
 ## 2026-09-16 — The JSON formats and the API
 
@@ -68,10 +76,20 @@ sidebar:
 - `denoise` didn't change the number of steps: 25 steps ran for every value from 0.3 to 0.9, in 4.6 to 5.1 seconds.
 - Uploading identical bytes under a taken name returned the existing name; different bytes got `name (1).png`. Neither is documented.
 - `VAEEncodeForInpaint` grays the masked pixels, which the tutorial doesn't say. With `denoise` 0.5, the result was a flat gray ellipse.
+
+![Three crops of the front of the workbench. First: a flat gray ellipse with faint shading where the objects were. Second: a sharp ellipse of pale, rough wood with a dark rim along its top. Third: two new wooden objects on the bench, with no visible edge.](../../../assets/comfyui/journal-l05-failures.webp)
+
+*Two inpainting failures and the fix, before pasting back. ComfyUI v0.36.0: Stable Diffusion XL base 1.0, seed 42, 25 steps, CFG 7, `euler`, `normal`. From left to right: [`05-inpaint-vaeencode.api.json`](https://github.com/spareilleux/learn/blob/40880d5819d3d72102c008a617b4c83b519600cc/code/comfyui/workflows/05-inpaint-vaeencode.api.json) with `denoise` 0.5; the same workflow with `denoise` 1 and a mask with a 24-pixel soft edge; [`05-inpaint-model.api.json`](https://github.com/spareilleux/learn/blob/40880d5819d3d72102c008a617b4c83b519600cc/code/comfyui/workflows/05-inpaint-model.api.json), the SD-XL inpainting 0.1 UNet with `denoise` 0.99, on the same soft mask.*
+
 - The SD-XL inpainting card says to keep `strength` below 1.0; 1.0 and 0.99 gave nearly the same image here (0.01 % of the pixels differ by more than 8).
 - The decoded inpainting result changed 6.2 % of the pixels outside the mask by more than 8 levels; pasting it back with `ImageCompositeMasked` left them identical.
 - The documentation page of `SetUnionControlNetType` lists 13 types; the node has 8.
 - The first CI run of the `Canny` node failed on all three OSes: four machines gave four pixel hashes. The three runners found 467 edge pixels, the author's machine 464. CI now prints them as information.
+
+![White edge lines on black, drawn in blocky pixels: a honeycomb of wavy cells drawn from the course's test pattern.](../../../assets/comfyui/journal-canny-ci.webp)
+
+*The `Canny` node's output on the author's machine, pixel hash `77af5cb1b7e93a5c`, 464 edge pixels, enlarged four times without smoothing. ComfyUI v0.36.0 on the CPU, no model, thresholds 0.05 and 0.15, workflow [`05-masks.api.json`](https://github.com/spareilleux/learn/blob/40880d5819d3d72102c008a617b4c83b519600cc/code/comfyui/workflows/05-masks.api.json). The three CI runners each drew 467 edge pixels, with three other hashes.*
+
 - With `end_percent` 0.3, the ControlNet guided 8 of 25 steps, and the image was almost the same as with it on for every step.
 - A LoRA costs time before the first step, not during sampling: switching LoRAs took 4 to 5 seconds more, and a 4-step LCM-LoRA image then took 1.16 seconds.
 
@@ -80,9 +98,19 @@ sidebar:
 - Z-Image-Turbo in bf16 with its bf16 text encoder, 19.4 GB of weights, ran on the 16 GB GPU with dynamic VRAM: 63.93 seconds for the first render, then 5.93 seconds at 1.5 steps per second. int8 with the fp8 text encoder ran at 3.1 steps per second, nvfp4 at 3.7 to 4.1.
 - `nvidia-smi` showed 12.5 to 15.3 GB in use for every configuration: dynamic VRAM uses what is free. The staged sizes in the log are the useful numbers.
 - int8 images stayed close to bf16's (9 to 15 % of the pixels differ by more than 8); nvfp4 images showed the same scene arranged differently (62 to 74 %).
+
+![Four renders side by side, each a gold and black pyramid metronome on a worn wooden workbench in front of a window. The first two are nearly the same; the last two show the same scene with the objects arranged differently.](../../../assets/comfyui/l08-quantized.webp)
+
+*ComfyUI v0.36.0: Z-Image-Turbo, seed 42, 8 steps, CFG 1, `res_multistep`, `simple`, workflow [`08-z-image-turbo.api.json`](https://github.com/spareilleux/learn/blob/40880d5819d3d72102c008a617b4c83b519600cc/code/comfyui/workflows/08-z-image-turbo.api.json). From left to right: bf16 with the bf16 text encoder, int8 with fp8, nvfp4 with fp4, nvfp4 with bf16.*
+
 - `qwen_3_4b_fp8_mixed` has 12 nvfp4 layers, and `qwen_3_4b_fp4_mixed` has 58 fp8 layers. The nvfp4 Z-Image file keeps its four refiner blocks in bf16.
 - With `--disable-dynamic-vram`, the first bf16 render took 78.87 seconds and gave the same pixels as with dynamic VRAM. The second render was stopped when the machine, shared with other work, ran short of RAM. An earlier bf16 batch had been stopped the same way: the server held 14.5 GB of RAM. Each server now starts only when the configuration's weights, plus a margin, fit in free RAM.
 - FLUX.2 klein 4B drew a brass stand, not a metronome, with seeds 42, 43 and 44; Z-Image-Turbo drew a metronome each time.
+
+![Four renders side by side. First, Z-Image-Turbo's pyramid metronome on a workbench. Then three FLUX.2 klein 4B renders of a dusty workshop, each with a brass stand with a crank or arms on a worn bench instead of a metronome.](../../../assets/comfyui/l08-z-image-klein.webp)
+
+*ComfyUI v0.36.0. First: Z-Image-Turbo bf16, seed 43, workflow [`08-z-image-turbo.api.json`](https://github.com/spareilleux/learn/blob/40880d5819d3d72102c008a617b4c83b519600cc/code/comfyui/workflows/08-z-image-turbo.api.json). Then: FLUX.2 klein 4B, seeds 42, 43 and 44, 4 steps, CFG 1, `euler`, workflow [`08-flux2-klein.api.json`](https://github.com/spareilleux/learn/blob/40880d5819d3d72102c008a617b4c83b519600cc/code/comfyui/workflows/08-flux2-klein.api.json).*
+
 ## To verify
 
 - SDXL on Linux with CUDA, and on Apple Silicon with MPS: the course's GPU machine runs Windows; CI only installs the CPU builds.
