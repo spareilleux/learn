@@ -60,6 +60,11 @@ bpy.ops.export_scene.gltf(filepath=sample, export_format="GLB", use_selection=Tr
 r("# sample-pick.glb:", os.path.getsize(sample), "bytes")
 
 args = argparse.Namespace(input=sample, output_dir=work, size=0.03, size_axis="longest", max_tris=2000,
-                          merge_distance=0.0001, min_part=0.01, flat=False, frames=4, resolution=128, samples=8)
+                          merge_distance=0.0001, min_part=0.01, voxel_remesh=0, flat=False, frames=4, resolution=128, samples=8)
+glb_pipeline.run(args, r)
+
+# The same sample through a voxel remesh, the way out when Decimate can't reach its target on a non-manifold mesh
+r("")
+args.output_dir, args.voxel_remesh, args.frames = os.path.join(work, "remesh"), 0.0005, 0
 glb_pipeline.run(args, r)
 r.save()

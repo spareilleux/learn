@@ -28,6 +28,8 @@ def parse_args(argv):
     p.add_argument("--merge-distance", type=float, default=0.0001, help="in the model's units, before scaling")
     p.add_argument("--min-part", type=float, default=0.01,
                    help="remove loose parts with fewer than this fraction of the faces (floaters); 0 keeps them")
+    p.add_argument("--voxel-remesh", type=float, default=0,
+                   help="rebuild the surface on a voxel grid of this size in meters, after scaling; 0 skips it")
     p.add_argument("--flat", action="store_true", help="keep flat shading instead of smooth shading")
     p.add_argument("--frames", type=int, default=8)
     p.add_argument("--resolution", type=int, default=512)
@@ -160,9 +162,13 @@ def remove_small_parts(obj, fraction):
     small = [p for p in parts if len(p) < fraction * total]
     removed = sorted(len(p) for p in small)
     bmesh.ops.delete(bm, geom=[f for p in small for f in p], context="FACES")
+    # Vertices and edges left without any face are parts too, and glTF would drop them silently
+    loose = [v for v in bm.verts if not v.link_faces]
+    bmesh.ops.delete(bm, geom=[e for e in bm.edges if not e.link_faces], context="EDGES_FACES")
+    bmesh.ops.delete(bm, geom=[v for v in bm.verts if v.is_valid and not v.link_faces], context="VERTS")
     bm.to_mesh(obj.data)
     bm.free()
-    return removed
+    return removed, len(loose)
 
 
 def recalc_normals(obj):
@@ -179,11 +185,16 @@ def decimate(obj, max_tris):
     if tris <= max_tris:
         return None
     ratio = max_tris / tris
-    mod = obj.modifiers.new("Decimate", "DECIMATE")
-    mod.ratio = ratio
+    apply_modifier(obj, "DECIMATE", ratio=ratio)
+    return ratio, tris, sum(len(p.vertices) - 2 for p in obj.data.polygons)
+
+
+def apply_modifier(obj, kind, **settings):
+    mod = obj.modifiers.new(kind.title(), kind)
+    for k, v in settings.items():
+        setattr(mod, k, v)
     with bpy.context.temp_override(object=obj, active_object=obj):
         bpy.ops.object.modifier_apply(modifier=mod.name)
-    return ratio
 
 
 def size_and_origin(obj, size, axis):
@@ -297,18 +308,32 @@ def run(args, write):
     write("")
     write("== Cleanup")
     write(f"merge by distance ({args.merge_distance}): {merge_by_distance(obj, args.merge_distance)} vertices removed")
-    removed = remove_small_parts(obj, args.min_part)
-    write(f"loose parts under {args.min_part:.0%} of the faces removed: {len(removed)} (faces: {removed})")
+    removed, loose = remove_small_parts(obj, args.min_part)
+    write(f"loose parts under {args.min_part:.0%} of the faces removed: {len(removed)} (faces: {removed}); "
+          f"vertices without faces removed: {loose}")
     recalc_normals(obj)
     if args.flat:
         write("normals recalculated outside, flat shading kept")
     else:
         obj.data.shade_smooth()
         write("normals recalculated outside, smooth shading")
-    ratio = decimate(obj, args.max_tris)
-    write(f"decimate: {'not needed' if ratio is None else f'ratio {ratio:.4f}'}")
     factor = size_and_origin(obj, args.size, args.size_axis)
     write(f"scale factor: {factor:.6f} (size {args.size} m along {args.size_axis}); origin at the bottom center")
+    if args.voxel_remesh:
+        before = len(obj.data.polygons)
+        apply_modifier(obj, "REMESH", mode="VOXEL", voxel_size=args.voxel_remesh, use_smooth_shade=not args.flat)
+        size_and_origin(obj, None, args.size_axis)
+        write(f"voxel remesh ({args.voxel_remesh} m): {before} faces -> {len(obj.data.polygons)} quads")
+        # Walls thinner than a voxel break into crumbs: a second pass of the floater filter
+        removed, _ = remove_small_parts(obj, args.min_part)
+        write(f"loose parts under {args.min_part:.0%} of the faces removed after the remesh: {len(removed)} (faces: {removed})")
+    result = decimate(obj, args.max_tris)
+    if result is None:
+        write("decimate: not needed")
+    else:
+        ratio, before, after = result
+        missed = "; target missed" if after > args.max_tris * 1.05 else ""
+        write(f"decimate: ratio {ratio:.4f}, {before} -> {after} triangles (target {args.max_tris}){missed}")
 
     write("")
     write("== After cleanup")

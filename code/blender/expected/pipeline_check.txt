@@ -15,10 +15,10 @@ min: (-0.3203, -0.7755, 0.0400)
 
 == Cleanup
 merge by distance (0.0001): 12846 vertices removed
-loose parts under 1% of the faces removed: 1 (faces: [20])
+loose parts under 1% of the faces removed: 1 (faces: [20]); vertices without faces removed: 0
 normals recalculated outside, smooth shading
-decimate: ratio 0.3906
 scale factor: 0.026087 (size 0.03 m along longest); origin at the bottom center
+decimate: ratio 0.3906, 5120 -> 2000 triangles (target 2000)
 
 == After cleanup
 vertices: 1002
@@ -53,3 +53,60 @@ images: ['baked 64x64']
 size: (0.0271, 0.0300, 0.0031)
 min: (-0.0136, -0.0150, 0.0000)
 merged again by position: 92 vertices, boundary edges 0, non-manifold edges 0, loose parts 1
+
+== sample-pick: as imported
+vertices: 15420
+faces: 5140
+triangles: 5140
+boundary edges: 15420
+non-manifold edges: 15420
+wire edges: 0
+degenerate faces: 0
+loose parts: 5140
+uv: 1 layer(s), 0 of 15420 UVs outside 0-1, UV area used 0.286
+materials: ['generated']
+images: ['baked 64x64']
+size: (1.0406, 1.3505, 0.1200)
+min: (-0.3203, -0.7755, 0.0400)
+
+== Cleanup
+merge by distance (0.0001): 12846 vertices removed
+loose parts under 1% of the faces removed: 1 (faces: [20]); vertices without faces removed: 0
+normals recalculated outside, smooth shading
+scale factor: 0.026087 (size 0.03 m along longest); origin at the bottom center
+voxel remesh (0.0005 m): 5120 faces -> 5992 quads
+loose parts under 1% of the faces removed after the remesh: 0 (faces: [])
+decimate: ratio 0.1669, 11984 -> 2000 triangles (target 2000)
+
+== After cleanup
+vertices: 1002
+faces: 1674
+triangles: 2000
+boundary edges: 0
+non-manifold edges: 0
+wire edges: 0
+degenerate faces: 0
+loose parts: 1
+uv: none
+materials: ['generated']
+images: ['baked 64x64']
+size: (0.0271, 0.0295, 0.0031)
+min: (-0.0135, -0.0147, -0.0000)
+
+== Export
+
+== The exported .glb, imported again
+vertices: 1002
+faces: 2000
+triangles: 2000
+boundary edges: 0
+non-manifold edges: 0
+wire edges: 0
+degenerate faces: 0
+loose parts: 1
+uv: none
+materials: ['generated']
+images: ['baked 64x64']
+size: (0.0271, 0.0295, 0.0031)
+min: (-0.0135, -0.0147, -0.0000)
+merged again by position: 0 vertices, boundary edges 0, non-manifold edges 0, loose parts 1
