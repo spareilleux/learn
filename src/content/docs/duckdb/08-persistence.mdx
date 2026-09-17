@@ -90,6 +90,15 @@ out/ci.duckdb.wal: absent
 
 After the first process, the database file hasn't changed and the 2,204 steps are only in the 135,677-byte log. The second process replayed the log when it opened the file, and checkpointed when it closed it: one more block, no more log. The `.wal` file plays the role of the [SQL Server transaction log](https://learn.microsoft.com/sql/relational-databases/logs/the-transaction-log-sql-server), but it only lives until the next checkpoint: there are no log backups or log truncation to manage.
 
+The path of a committed change, from the log to the database file.
+
+```mermaid
+flowchart LR
+    change["committed change"] -->|"appended"| wal[("ci.duckdb.wal")]
+    wal -->|"checkpoint: 16 MiB of log, CHECKPOINT, or closing the database"| db[("ci.duckdb: blocks of 256 KiB")]
+    wal -.->|"after the checkpoint"| gone["no more log file"]
+```
+
 The consequence for backups: a copy of `ci.duckdb` alone can miss committed data. In a scratch test, a copy made while the log existed opened without its last table; with the `.wal` file copied next to it, the table was there. Copy both files, or run `CHECKPOINT` first, or close the database.
 
 ## Free blocks and compaction
@@ -313,6 +322,25 @@ exit code 1
 A second reader works, a read-only process can't write, and a process that wants to write can't open the file while a reader has it. On Linux and macOS, that last message adds a hint: `However, you would be able to open this database in read-only mode, e.g. by using the -readonly parameter in the CLI.` With JDBC, the `duckdb.read_only` property set to `true` in the connection properties opened the file read-only in a scratch program, and refused an `INSERT` with the same message.
 
 So a DuckDB file has either **one process that reads and writes**, with as many connections and threads as it wants inside, or **several processes that only read**. The [concurrency page](https://duckdb.org/docs/current/connect/concurrency) lists two ways around it for several writing processes, neither tested in this course: the Quack remote protocol, which turns DuckDB into a client-server database and is in beta in 1.5; and [DuckLake](https://ducklake.select/), which stores the catalog in a database such as PostgreSQL and the data in Parquet files. And the [FAQ](https://duckdb.org/faq) strongly advises against read-write workloads on network-attached storage.
+
+The two arrangements a database file allows, side by side.
+
+```mermaid
+flowchart LR
+    subgraph rw["either one process that reads and writes"]
+        c1["connection"]
+        c2["connection"]
+    end
+    subgraph ro["or several processes that only read"]
+        r1["process opened with -readonly"]
+        r2["process opened with -readonly"]
+    end
+    file[("ci.duckdb")]
+    c1 -->|"read and write"| file
+    c2 -->|"read and write"| file
+    r1 -->|"read only"| file
+    r2 -->|"read only"| file
+```
 
 ## Key takeaways
 

@@ -153,6 +153,16 @@ ORDER BY file;
 
 Same rows, same answer (13,895 steps for both files), but not the same work. In insertion order, every row group mixes steps from the whole period, so every minimum falls in the first week and no row group can be skipped. Sorted, only the first row group starts before 2026-09-20.
 
+For each row group, the scan makes the same decision before reading anything, and the sort order decides how often the answer is no.
+
+```mermaid
+flowchart TB
+    filter["filter on started_at, pushed into the scan"] --> footer["file footer: minimum and maximum of started_at for each row group"]
+    footer --> check{"can a row of this row group match?"}
+    check -->|"no: 8 of the 9 row groups of the sorted file"| skip["skip the row group"]
+    check -->|"yes: all 9 in insertion order, 1 when sorted"| read["read the columns the query uses"]
+```
+
 The plan is the same for both files: `EXPLAIN` shows that the filter reaches the scan, not how many row groups it will skip. The timings show it. One thread, one day in 2030, on the 11-million-row files:
 
 | One day, one thread | My machine | Ubuntu runner | Windows runner | macOS runner |

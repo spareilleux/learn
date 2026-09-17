@@ -153,6 +153,16 @@ ORDER BY file;
 
 Mêmes lignes, même réponse (13 895 steps pour les deux fichiers), mais pas le même travail. Dans l'ordre d'insertion, chaque row group mélange des steps de toute la période, donc chaque minimum tombe dans la première semaine et aucun row group ne peut être sauté. Trié, seul le premier row group commence avant le 2026-09-20.
 
+Pour chaque row group, le parcours prend la même décision avant de lire quoi que ce soit, et l'ordre de tri décide combien de fois la réponse est non.
+
+```mermaid
+flowchart TB
+    filter["filtre sur started_at, poussé dans le parcours"] --> footer["pied du fichier : minimum et maximum de started_at pour chaque row group"]
+    footer --> check{"une ligne de ce row group peut-elle correspondre ?"}
+    check -->|"non : 8 des 9 row groups du fichier trié"| skip["sauter le row group"]
+    check -->|"oui : les 9 dans l'ordre d'insertion, 1 une fois trié"| read["lire les colonnes que la requête utilise"]
+```
+
 Le plan est le même pour les deux fichiers : `EXPLAIN` montre que le filtre atteint le parcours, pas combien de row groups il sautera. Les temps le montrent. Un thread, un jour de 2030, sur les fichiers de 11 millions de lignes :
 
 | Un jour, un thread | Ma machine | Runner Ubuntu | Runner Windows | Runner macOS |

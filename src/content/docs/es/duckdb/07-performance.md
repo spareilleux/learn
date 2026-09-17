@@ -153,6 +153,16 @@ ORDER BY file;
 
 Mismas filas, misma respuesta (13.895 steps en ambos archivos), pero no el mismo trabajo. En orden de inserción, cada row group mezcla steps de todo el periodo, así que cada mínimo cae en la primera semana y no se puede saltar ningún row group. Ordenado, solo el primer row group empieza antes del 2026-09-20.
 
+Para cada row group, el escaneo toma la misma decisión antes de leer nada, y el orden decide cuántas veces la respuesta es no.
+
+```mermaid
+flowchart TB
+    filter["filtro sobre started_at, empujado al escaneo"] --> footer["pie del archivo: mínimo y máximo de started_at para cada row group"]
+    footer --> check{"¿puede coincidir alguna fila de este row group?"}
+    check -->|"no: 8 de los 9 row groups del archivo ordenado"| skip["saltar el row group"]
+    check -->|"sí: los 9 en orden de inserción, 1 una vez ordenado"| read["leer las columnas que usa la consulta"]
+```
+
 El plan es el mismo para ambos archivos: `EXPLAIN` muestra que el filtro llega al escaneo, no cuántos row groups se saltará. Los tiempos sí lo muestran. Un hilo, un día de 2030, sobre los archivos de 11 millones de filas:
 
 | Un día, un hilo | Mi máquina | Runner de Ubuntu | Runner de Windows | Runner de macOS |

@@ -90,6 +90,15 @@ out/ci.duckdb.wal: absent
 
 Après le premier processus, le fichier de base de données n'a pas changé et les 2 204 steps ne sont que dans le journal de 135 677 octets. Le second processus a rejoué le journal en ouvrant le fichier, et a fait un checkpoint en le fermant : un bloc de plus, plus de journal. Le fichier `.wal` joue le rôle du [journal des transactions SQL Server](https://learn.microsoft.com/sql/relational-databases/logs/the-transaction-log-sql-server), mais il ne vit que jusqu'au checkpoint suivant : pas de sauvegardes ni de troncature du journal à gérer.
 
+Le chemin d'une modification validée, du journal au fichier de base de données.
+
+```mermaid
+flowchart LR
+    change["modification validée"] -->|"ajoutée"| wal[("ci.duckdb.wal")]
+    wal -->|"checkpoint : 16 MiB de journal, CHECKPOINT, ou fermeture de la base"| db[("ci.duckdb : blocs de 256 KiB")]
+    wal -.->|"après le checkpoint"| gone["plus de fichier journal"]
+```
+
 La conséquence pour les sauvegardes : une copie de `ci.duckdb` seul peut manquer des données validées. Dans un test jetable, une copie faite pendant que le journal existait s'est ouverte sans sa dernière table ; avec le fichier `.wal` copié à côté, la table était là. Copie les deux fichiers, ou lance d'abord `CHECKPOINT`, ou ferme la base.
 
 ## Blocs libres et compaction
@@ -313,6 +322,25 @@ exit code 1
 Un second lecteur fonctionne, un processus en lecture seule ne peut pas écrire, et un processus qui veut écrire ne peut pas ouvrir le fichier tant qu'un lecteur le détient. Sous Linux et macOS, ce dernier message ajoute une indication : `However, you would be able to open this database in read-only mode, e.g. by using the -readonly parameter in the CLI.` Avec JDBC, la propriété `duckdb.read_only` à `true` dans les propriétés de connexion a ouvert le fichier en lecture seule dans un programme jetable, et a refusé un `INSERT` avec le même message.
 
 Un fichier DuckDB a donc soit **un seul processus qui lit et écrit**, avec autant de connexions et de threads qu'il veut à l'intérieur, soit **plusieurs processus qui ne font que lire**. La [page sur la concurrence](https://duckdb.org/docs/current/connect/concurrency) cite deux façons de contourner cette règle pour plusieurs processus qui écrivent, aucune testée dans ce cours : le protocole distant Quack, qui fait de DuckDB une base de données client-serveur et qui est en bêta dans la 1.5 ; et [DuckLake](https://ducklake.select/), qui stocke le catalogue dans une base de données comme PostgreSQL et les données dans des fichiers Parquet. Et la [FAQ](https://duckdb.org/faq) déconseille fortement les charges en lecture-écriture sur un stockage réseau.
+
+Les deux organisations qu'un fichier de base de données permet, côte à côte.
+
+```mermaid
+flowchart LR
+    subgraph rw["soit un seul processus qui lit et écrit"]
+        c1["connexion"]
+        c2["connexion"]
+    end
+    subgraph ro["soit plusieurs processus qui ne font que lire"]
+        r1["processus ouvert avec -readonly"]
+        r2["processus ouvert avec -readonly"]
+    end
+    file[("ci.duckdb")]
+    c1 -->|"lecture et écriture"| file
+    c2 -->|"lecture et écriture"| file
+    r1 -->|"lecture seule"| file
+    r2 -->|"lecture seule"| file
+```
 
 ## À retenir
 

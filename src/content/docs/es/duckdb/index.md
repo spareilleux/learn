@@ -29,6 +29,26 @@ Conoces el SQL de [SQL Server](https://learn.microsoft.com/sql/sql-server/), [Po
 | Desde .NET | `Microsoft.Data.SqlClient`, Npgsql | `Microsoft.Data.Sqlite` | DuckDB.NET (ADO.NET) |
 | Desde Java | driver JDBC | driver JDBC | driver JDBC |
 
+La primera fila de la tabla, en imagen: SQL Server y PostgreSQL se ejecutan como un servidor, en un proceso propio, mientras que DuckDB se ejecuta dentro de tu proceso, junto a los archivos que lee.
+
+```mermaid
+flowchart LR
+    subgraph p1["tu proceso"]
+        app1["código C# o Java"] --> driver["driver"]
+    end
+    subgraph p2["proceso servidor"]
+        server["SQL Server o PostgreSQL"]
+    end
+    driver --> server
+    subgraph p3["tu proceso"]
+        app2["código C# o Java"] --> duck["DuckDB, mediante DuckDB.NET o JDBC"]
+    end
+    dbfile[("un archivo de base de datos, o ninguno")]
+    files[("archivos CSV, JSON y Parquet")]
+    duck --> dbfile
+    duck --> files
+```
+
 ## Los datos
 
 El curso consulta una instantánea del historial de GitHub Actions de este mismo repositorio, exportada el 2026-09-14 en [`code/duckdb/data`](https://github.com/spareilleux/learn/tree/main/code/duckdb/data):
