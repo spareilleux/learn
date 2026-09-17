@@ -1,0 +1,555 @@
+{
+  "experiment": "08-shadows",
+  "title": "Shadows under the strings: shadow maps, a baked ambient occlusion texture, contact shadows",
+  "hypothesis": "A dynamic shadow map doubles the draw calls of the shadow casters and costs GPU time growing with its size; rendering it once costs nothing per frame; the baked texture costs a one-time bake on the CPU; the contact shadow costs a pass and a blur per frame.",
+  "predictions": [
+    {
+      "metric": "drawCalls, dynamic shadow map against none",
+      "predicted": "about 2x"
+    },
+    {
+      "metric": "median GPU ms, 4096 against 1024 dynamic shadow map",
+      "predicted": "at most 1.5x (the shadow pass draws few triangles)"
+    },
+    {
+      "metric": "drawCalls, shadow map rendered once, after the first frame",
+      "predicted": "the same as none"
+    },
+    {
+      "metric": "CPU ms to bake a 512x128 AO texture with 16 rays per texel",
+      "predicted": "100 to 500 ms"
+    },
+    {
+      "metric": "median GPU ms, contact shadow against none",
+      "predicted": "under +0.5 ms"
+    }
+  ],
+  "date": "2026-09-17T04:32:46.456Z",
+  "machine": {
+    "os": "Windows_NT 10.0.26200 x64",
+    "cpu": "Intel(R) Core(TM) Ultra 9 285K",
+    "memoryGB": 64,
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 5080",
+      "driver": "610.88"
+    },
+    "node": "v24.12.0",
+    "three": "0.186.0",
+    "playwright": "1.63.0",
+    "browser": "153.0.8010.12",
+    "chromiumArgs": [
+      "--disable-gpu-vsync",
+      "--disable-frame-rate-limit",
+      "--enable-webgpu-developer-features",
+      "--autoplay-policy=no-user-gesture-required",
+      "--enable-precise-memory-info",
+      "--js-flags=--expose-gc"
+    ]
+  },
+  "runs": [
+    {
+      "name": "none",
+      "query": "probe&shadow=none",
+      "channel": "chromium",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 2.876,
+      "messages": [],
+      "result": {
+        "backend": "WebGPU",
+        "gpu": "nvidia, blackwell, NVIDIA GeForce RTX 5080",
+        "adapter": {
+          "vendor": "nvidia",
+          "architecture": "blackwell",
+          "device": "0x2c02",
+          "description": "NVIDIA GeForce RTX 5080"
+        },
+        "drawingBuffer": "1920x1080",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "crossOriginIsolated": true,
+        "shadow": "none",
+        "mapSize": null,
+        "rays": null,
+        "bakeMs": null,
+        "firstFrame": {
+          "drawCalls": 8,
+          "triangles": 11921
+        },
+        "stats": {
+          "frames": 240,
+          "cpuMs": {
+            "median": 0.345,
+            "p95": 0.475,
+            "mean": 0.356,
+            "min": 0.15,
+            "max": 1.06
+          },
+          "wallMs": {
+            "median": 3.58,
+            "p95": 5.005,
+            "mean": 3.704,
+            "min": 0.935,
+            "max": 6.495
+          },
+          "gpuMs": {
+            "median": 0.048,
+            "p95": 0.052,
+            "mean": 0.051,
+            "min": 0.044,
+            "max": 0.392
+          },
+          "gpuTimer": "WebGPU timestamp-query"
+        },
+        "counters": {
+          "firstFrameDrawCalls": 8,
+          "drawCalls": 8,
+          "triangles": 11921,
+          "renderTargets": 1
+        },
+        "info": {
+          "drawCalls": 8,
+          "triangles": 11921,
+          "points": 0,
+          "lines": 0,
+          "geometries": 8,
+          "textures": 4,
+          "programs": 13,
+          "texturesMB": 26.4,
+          "renderTargets": 1
+        }
+      }
+    },
+    {
+      "name": "map-1024",
+      "query": "probe&shadow=map&size=1024",
+      "channel": "chromium",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 2.852,
+      "messages": [],
+      "result": {
+        "backend": "WebGPU",
+        "gpu": "nvidia, blackwell, NVIDIA GeForce RTX 5080",
+        "adapter": {
+          "vendor": "nvidia",
+          "architecture": "blackwell",
+          "device": "0x2c02",
+          "description": "NVIDIA GeForce RTX 5080"
+        },
+        "drawingBuffer": "1920x1080",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "crossOriginIsolated": true,
+        "shadow": "map",
+        "mapSize": 1024,
+        "rays": null,
+        "bakeMs": null,
+        "firstFrame": {
+          "drawCalls": 13,
+          "triangles": 23827
+        },
+        "stats": {
+          "frames": 240,
+          "cpuMs": {
+            "median": 0.42,
+            "p95": 0.59,
+            "mean": 0.424,
+            "min": 0.18,
+            "max": 0.73
+          },
+          "wallMs": {
+            "median": 3.73,
+            "p95": 5.45,
+            "mean": 3.823,
+            "min": 0.615,
+            "max": 6.565
+          },
+          "gpuMs": {
+            "median": 0.053,
+            "p95": 0.055,
+            "mean": 0.055,
+            "min": 0.048,
+            "max": 0.397
+          },
+          "gpuTimer": "WebGPU timestamp-query"
+        },
+        "counters": {
+          "firstFrameDrawCalls": 13,
+          "drawCalls": 13,
+          "triangles": 23827,
+          "renderTargets": 2
+        },
+        "info": {
+          "drawCalls": 13,
+          "triangles": 23827,
+          "points": 0,
+          "lines": 0,
+          "geometries": 8,
+          "textures": 6,
+          "programs": 21,
+          "texturesMB": 34.4,
+          "renderTargets": 2
+        }
+      }
+    },
+    {
+      "name": "map-2048",
+      "query": "probe&shadow=map&size=2048",
+      "channel": "chromium",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 2.829,
+      "messages": [],
+      "result": {
+        "backend": "WebGPU",
+        "gpu": "nvidia, blackwell, NVIDIA GeForce RTX 5080",
+        "adapter": {
+          "vendor": "nvidia",
+          "architecture": "blackwell",
+          "device": "0x2c02",
+          "description": "NVIDIA GeForce RTX 5080"
+        },
+        "drawingBuffer": "1920x1080",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "crossOriginIsolated": true,
+        "shadow": "map",
+        "mapSize": 2048,
+        "rays": null,
+        "bakeMs": null,
+        "firstFrame": {
+          "drawCalls": 13,
+          "triangles": 23827
+        },
+        "stats": {
+          "frames": 240,
+          "cpuMs": {
+            "median": 0.47,
+            "p95": 0.74,
+            "mean": 0.498,
+            "min": 0.23,
+            "max": 0.96
+          },
+          "wallMs": {
+            "median": 3.99,
+            "p95": 5.835,
+            "mean": 4.067,
+            "min": 1.76,
+            "max": 7.225
+          },
+          "gpuMs": {
+            "median": 0.053,
+            "p95": 0.055,
+            "mean": 0.053,
+            "min": 0.048,
+            "max": 0.06
+          },
+          "gpuTimer": "WebGPU timestamp-query"
+        },
+        "counters": {
+          "firstFrameDrawCalls": 13,
+          "drawCalls": 13,
+          "triangles": 23827,
+          "renderTargets": 2
+        },
+        "info": {
+          "drawCalls": 13,
+          "triangles": 23827,
+          "points": 0,
+          "lines": 0,
+          "geometries": 8,
+          "textures": 6,
+          "programs": 21,
+          "texturesMB": 58.4,
+          "renderTargets": 2
+        }
+      }
+    },
+    {
+      "name": "map-4096",
+      "query": "probe&shadow=map&size=4096",
+      "channel": "chromium",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 2.711,
+      "messages": [],
+      "result": {
+        "backend": "WebGPU",
+        "gpu": "nvidia, blackwell, NVIDIA GeForce RTX 5080",
+        "adapter": {
+          "vendor": "nvidia",
+          "architecture": "blackwell",
+          "device": "0x2c02",
+          "description": "NVIDIA GeForce RTX 5080"
+        },
+        "drawingBuffer": "1920x1080",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "crossOriginIsolated": true,
+        "shadow": "map",
+        "mapSize": 4096,
+        "rays": null,
+        "bakeMs": null,
+        "firstFrame": {
+          "drawCalls": 13,
+          "triangles": 23827
+        },
+        "stats": {
+          "frames": 240,
+          "cpuMs": {
+            "median": 0.44,
+            "p95": 0.75,
+            "mean": 0.472,
+            "min": 0.175,
+            "max": 1.13
+          },
+          "wallMs": {
+            "median": 4.07,
+            "p95": 5.865,
+            "mean": 4.022,
+            "min": 0.915,
+            "max": 7.025
+          },
+          "gpuMs": {
+            "median": 0.053,
+            "p95": 0.057,
+            "mean": 0.054,
+            "min": 0.05,
+            "max": 0.268
+          },
+          "gpuTimer": "WebGPU timestamp-query"
+        },
+        "counters": {
+          "firstFrameDrawCalls": 13,
+          "drawCalls": 13,
+          "triangles": 23827,
+          "renderTargets": 2
+        },
+        "info": {
+          "drawCalls": 13,
+          "triangles": 23827,
+          "points": 0,
+          "lines": 0,
+          "geometries": 8,
+          "textures": 6,
+          "programs": 21,
+          "texturesMB": 154.4,
+          "renderTargets": 2
+        }
+      }
+    },
+    {
+      "name": "map-once",
+      "query": "probe&shadow=once&size=2048",
+      "channel": "chromium",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 2.758,
+      "messages": [],
+      "result": {
+        "backend": "WebGPU",
+        "gpu": "nvidia, blackwell, NVIDIA GeForce RTX 5080",
+        "adapter": {
+          "vendor": "nvidia",
+          "architecture": "blackwell",
+          "device": "0x2c02",
+          "description": "NVIDIA GeForce RTX 5080"
+        },
+        "drawingBuffer": "1920x1080",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "crossOriginIsolated": true,
+        "shadow": "once",
+        "mapSize": 2048,
+        "rays": null,
+        "bakeMs": null,
+        "firstFrame": {
+          "drawCalls": 13,
+          "triangles": 23827
+        },
+        "stats": {
+          "frames": 240,
+          "cpuMs": {
+            "median": 0.355,
+            "p95": 0.61,
+            "mean": 0.369,
+            "min": 0.185,
+            "max": 1.025
+          },
+          "wallMs": {
+            "median": 3.71,
+            "p95": 5.005,
+            "mean": 3.704,
+            "min": 0.625,
+            "max": 6.53
+          },
+          "gpuMs": {
+            "median": 0.048,
+            "p95": 0.05,
+            "mean": 0.048,
+            "min": 0.044,
+            "max": 0.061
+          },
+          "gpuTimer": "WebGPU timestamp-query"
+        },
+        "counters": {
+          "firstFrameDrawCalls": 13,
+          "drawCalls": 8,
+          "triangles": 11921,
+          "renderTargets": 2
+        },
+        "info": {
+          "drawCalls": 8,
+          "triangles": 11921,
+          "points": 0,
+          "lines": 0,
+          "geometries": 8,
+          "textures": 6,
+          "programs": 21,
+          "texturesMB": 58.4,
+          "renderTargets": 2
+        }
+      }
+    },
+    {
+      "name": "baked-ao",
+      "query": "probe&shadow=baked",
+      "channel": "chromium",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 3.126,
+      "messages": [],
+      "result": {
+        "backend": "WebGPU",
+        "gpu": "nvidia, blackwell, NVIDIA GeForce RTX 5080",
+        "adapter": {
+          "vendor": "nvidia",
+          "architecture": "blackwell",
+          "device": "0x2c02",
+          "description": "NVIDIA GeForce RTX 5080"
+        },
+        "drawingBuffer": "1920x1080",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "crossOriginIsolated": true,
+        "shadow": "baked",
+        "mapSize": null,
+        "rays": 16,
+        "bakeMs": 347,
+        "firstFrame": {
+          "drawCalls": 8,
+          "triangles": 11921
+        },
+        "stats": {
+          "frames": 240,
+          "cpuMs": {
+            "median": 0.365,
+            "p95": 0.525,
+            "mean": 0.368,
+            "min": 0.15,
+            "max": 0.615
+          },
+          "wallMs": {
+            "median": 3.715,
+            "p95": 5.91,
+            "mean": 3.761,
+            "min": 0.735,
+            "max": 6.92
+          },
+          "gpuMs": {
+            "median": 0.047,
+            "p95": 0.05,
+            "mean": 0.047,
+            "min": 0.044,
+            "max": 0.059
+          },
+          "gpuTimer": "WebGPU timestamp-query"
+        },
+        "counters": {
+          "firstFrameDrawCalls": 8,
+          "drawCalls": 8,
+          "triangles": 11921,
+          "renderTargets": 1
+        },
+        "info": {
+          "drawCalls": 8,
+          "triangles": 11921,
+          "points": 0,
+          "lines": 0,
+          "geometries": 8,
+          "textures": 5,
+          "programs": 13,
+          "texturesMB": 26.65,
+          "renderTargets": 1
+        }
+      }
+    },
+    {
+      "name": "contact",
+      "query": "probe&shadow=contact",
+      "channel": "chromium",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 2.909,
+      "messages": [],
+      "result": {
+        "backend": "WebGPU",
+        "gpu": "nvidia, blackwell, NVIDIA GeForce RTX 5080",
+        "adapter": {
+          "vendor": "nvidia",
+          "architecture": "blackwell",
+          "device": "0x2c02",
+          "description": "NVIDIA GeForce RTX 5080"
+        },
+        "drawingBuffer": "1920x1080",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "crossOriginIsolated": true,
+        "shadow": "contact",
+        "mapSize": null,
+        "rays": null,
+        "bakeMs": null,
+        "firstFrame": {
+          "drawCalls": 14,
+          "triangles": 23829
+        },
+        "stats": {
+          "frames": 240,
+          "cpuMs": {
+            "median": 0.44,
+            "p95": 0.685,
+            "mean": 0.45,
+            "min": 0.135,
+            "max": 0.82
+          },
+          "wallMs": {
+            "median": 3.755,
+            "p95": 5.855,
+            "mean": 3.693,
+            "min": 0.66,
+            "max": 6.585
+          },
+          "gpuMs": {
+            "median": 0.069,
+            "p95": 0.072,
+            "mean": 0.077,
+            "min": 0.065,
+            "max": 1.519
+          },
+          "gpuTimer": "WebGPU timestamp-query"
+        },
+        "counters": {
+          "firstFrameDrawCalls": 14,
+          "drawCalls": 14,
+          "triangles": 23829,
+          "renderTargets": 2
+        },
+        "info": {
+          "drawCalls": 14,
+          "triangles": 23829,
+          "points": 0,
+          "lines": 0,
+          "geometries": 9,
+          "textures": 6,
+          "programs": 23,
+          "texturesMB": 26.9,
+          "renderTargets": 2
+        }
+      }
+    }
+  ]
+}

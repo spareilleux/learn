@@ -24,6 +24,8 @@ for (const [name, entry] of Object.entries(variants)) {
       emptyOutDir: true,
       rolldownOptions: {
         input: join(lab, 'src', entry),
+        // The modules export start() and call nothing: without this, the build keeps no code at all
+        preserveEntrySignatures: 'exports-only',
         output: { codeSplitting: { groups: [{ name: (id) => /node_modules[\\/]three[\\/]build[\\/](three\.\w+)\.js$/.exec(id)?.[1] ?? null }] } },
       },
     },

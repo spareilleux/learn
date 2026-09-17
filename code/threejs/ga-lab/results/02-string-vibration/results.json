@@ -1,0 +1,481 @@
+{
+  "experiment": "02-string-vibration",
+  "title": "A vibrating string three ways: CPU vertices, TSL, morph targets",
+  "hypothesis": "With 6 strings the three are indistinguishable; with 600, rewriting vertices costs CPU time proportional to the vertex count and an upload every frame, while TSL and morph targets cost almost nothing on the CPU.",
+  "predictions": [
+    {
+      "metric": "median CPU ms per frame, 6 strings",
+      "predicted": "the three within 0.3 ms of each other"
+    },
+    {
+      "metric": "median CPU ms per frame, 600 strings",
+      "predicted": "cpu at least 5x tsl; morph within 2x tsl"
+    },
+    {
+      "metric": "median GPU ms per frame, 600 strings",
+      "predicted": "the three within 30% of each other"
+    },
+    {
+      "metric": "pixels differing (pixelmatch default threshold) between cpu and tsl at the same instant, 6 strings",
+      "predicted": "under 0.5% of the image"
+    }
+  ],
+  "date": "2026-09-17T04:42:43.494Z",
+  "machine": {
+    "os": "Windows_NT 10.0.26200 x64",
+    "cpu": "Intel(R) Core(TM) Ultra 9 285K",
+    "memoryGB": 64,
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 5080",
+      "driver": "610.88"
+    },
+    "node": "v24.12.0",
+    "three": "0.186.0",
+    "playwright": "1.63.0",
+    "browser": "153.0.8010.12",
+    "chromiumArgs": [
+      "--disable-gpu-vsync",
+      "--disable-frame-rate-limit",
+      "--enable-webgpu-developer-features",
+      "--autoplay-policy=no-user-gesture-required",
+      "--enable-precise-memory-info",
+      "--js-flags=--expose-gc"
+    ]
+  },
+  "runs": [
+    {
+      "name": "cpu-6",
+      "query": "probe&method=cpu&strings=6",
+      "channel": "chromium",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 3.127,
+      "messages": [],
+      "result": {
+        "backend": "WebGPU",
+        "gpu": "nvidia, blackwell, NVIDIA GeForce RTX 5080",
+        "adapter": {
+          "vendor": "nvidia",
+          "architecture": "blackwell",
+          "device": "0x2c02",
+          "description": "NVIDIA GeForce RTX 5080"
+        },
+        "drawingBuffer": "1280x360",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "crossOriginIsolated": true,
+        "method": "cpu",
+        "strings": 6,
+        "verticesPerString": 429,
+        "setupMs": 6.7,
+        "stats": {
+          "frames": 240,
+          "cpuMs": {
+            "median": 0.405,
+            "p95": 0.595,
+            "mean": 0.425,
+            "min": 0.225,
+            "max": 0.99
+          },
+          "wallMs": {
+            "median": 3.935,
+            "p95": 5.2,
+            "mean": 3.819,
+            "min": 0.8,
+            "max": 6.545
+          },
+          "gpuMs": {
+            "median": 0.01,
+            "p95": 0.012,
+            "mean": 0.01,
+            "min": 0.007,
+            "max": 0.016
+          },
+          "gpuTimer": "WebGPU timestamp-query"
+        },
+        "counters": {
+          "drawCalls": 7,
+          "triangles": 4609,
+          "geometries": 7,
+          "textures": 3
+        },
+        "info": {
+          "drawCalls": 14,
+          "triangles": 9218,
+          "points": 0,
+          "lines": 0,
+          "geometries": 7,
+          "textures": 3,
+          "programs": 4,
+          "texturesMB": 5.27,
+          "renderTargets": 1
+        }
+      }
+    },
+    {
+      "name": "tsl-6",
+      "query": "probe&method=tsl&strings=6",
+      "channel": "chromium",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 2.517,
+      "messages": [],
+      "result": {
+        "backend": "WebGPU",
+        "gpu": "nvidia, blackwell, NVIDIA GeForce RTX 5080",
+        "adapter": {
+          "vendor": "nvidia",
+          "architecture": "blackwell",
+          "device": "0x2c02",
+          "description": "NVIDIA GeForce RTX 5080"
+        },
+        "drawingBuffer": "1280x360",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "crossOriginIsolated": true,
+        "method": "tsl",
+        "strings": 6,
+        "verticesPerString": 429,
+        "setupMs": 5.2,
+        "stats": {
+          "frames": 240,
+          "cpuMs": {
+            "median": 0.355,
+            "p95": 0.555,
+            "mean": 0.376,
+            "min": 0.195,
+            "max": 0.93
+          },
+          "wallMs": {
+            "median": 3.895,
+            "p95": 5.995,
+            "mean": 3.916,
+            "min": 0.775,
+            "max": 7.51
+          },
+          "gpuMs": {
+            "median": 0.01,
+            "p95": 0.013,
+            "mean": 0.01,
+            "min": 0.008,
+            "max": 0.014
+          },
+          "gpuTimer": "WebGPU timestamp-query"
+        },
+        "counters": {
+          "drawCalls": 7,
+          "triangles": 4609,
+          "geometries": 7,
+          "textures": 3
+        },
+        "info": {
+          "drawCalls": 14,
+          "triangles": 9218,
+          "points": 0,
+          "lines": 0,
+          "geometries": 7,
+          "textures": 3,
+          "programs": 9,
+          "texturesMB": 5.27,
+          "renderTargets": 1
+        }
+      }
+    },
+    {
+      "name": "morph-6",
+      "query": "probe&method=morph&strings=6",
+      "channel": "chromium",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 2.636,
+      "messages": [],
+      "result": {
+        "backend": "WebGPU",
+        "gpu": "nvidia, blackwell, NVIDIA GeForce RTX 5080",
+        "adapter": {
+          "vendor": "nvidia",
+          "architecture": "blackwell",
+          "device": "0x2c02",
+          "description": "NVIDIA GeForce RTX 5080"
+        },
+        "drawingBuffer": "1280x360",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "crossOriginIsolated": true,
+        "method": "morph",
+        "strings": 6,
+        "verticesPerString": 429,
+        "setupMs": 6.2,
+        "stats": {
+          "frames": 240,
+          "cpuMs": {
+            "median": 0.375,
+            "p95": 0.59,
+            "mean": 0.399,
+            "min": 0.21,
+            "max": 0.83
+          },
+          "wallMs": {
+            "median": 3.905,
+            "p95": 5.8,
+            "mean": 3.924,
+            "min": 0.915,
+            "max": 7.575
+          },
+          "gpuMs": {
+            "median": 0.011,
+            "p95": 0.014,
+            "mean": 0.011,
+            "min": 0.008,
+            "max": 0.015
+          },
+          "gpuTimer": "WebGPU timestamp-query"
+        },
+        "counters": {
+          "drawCalls": 7,
+          "triangles": 4609,
+          "geometries": 7,
+          "textures": 9
+        },
+        "info": {
+          "drawCalls": 14,
+          "triangles": 9218,
+          "points": 0,
+          "lines": 0,
+          "geometries": 7,
+          "textures": 9,
+          "programs": 9,
+          "texturesMB": 5.31,
+          "renderTargets": 1
+        }
+      }
+    },
+    {
+      "name": "cpu-600",
+      "query": "probe&method=cpu&strings=600",
+      "channel": "chromium",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 2.979,
+      "messages": [],
+      "result": {
+        "backend": "WebGPU",
+        "gpu": "nvidia, blackwell, NVIDIA GeForce RTX 5080",
+        "adapter": {
+          "vendor": "nvidia",
+          "architecture": "blackwell",
+          "device": "0x2c02",
+          "description": "NVIDIA GeForce RTX 5080"
+        },
+        "drawingBuffer": "1280x720",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "crossOriginIsolated": true,
+        "method": "cpu",
+        "strings": 600,
+        "verticesPerString": 429,
+        "setupMs": 53.4,
+        "stats": {
+          "frames": 240,
+          "cpuMs": {
+            "median": 1.8,
+            "p95": 2.475,
+            "mean": 1.877,
+            "min": 1.44,
+            "max": 3.565
+          },
+          "wallMs": {
+            "median": 5.525,
+            "p95": 7.33,
+            "mean": 5.539,
+            "min": 2.44,
+            "max": 9.25
+          },
+          "gpuMs": {
+            "median": 0.03,
+            "p95": 0.035,
+            "mean": 0.035,
+            "min": 0.026,
+            "max": 1.224
+          },
+          "gpuTimer": "WebGPU timestamp-query"
+        },
+        "counters": {
+          "drawCalls": 7,
+          "triangles": 460801,
+          "geometries": 7,
+          "textures": 3
+        },
+        "info": {
+          "drawCalls": 14,
+          "triangles": 921602,
+          "points": 0,
+          "lines": 0,
+          "geometries": 7,
+          "textures": 3,
+          "programs": 4,
+          "texturesMB": 10.55,
+          "renderTargets": 1
+        }
+      }
+    },
+    {
+      "name": "tsl-600",
+      "query": "probe&method=tsl&strings=600",
+      "channel": "chromium",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 2.504,
+      "messages": [],
+      "result": {
+        "backend": "WebGPU",
+        "gpu": "nvidia, blackwell, NVIDIA GeForce RTX 5080",
+        "adapter": {
+          "vendor": "nvidia",
+          "architecture": "blackwell",
+          "device": "0x2c02",
+          "description": "NVIDIA GeForce RTX 5080"
+        },
+        "drawingBuffer": "1280x720",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "crossOriginIsolated": true,
+        "method": "tsl",
+        "strings": 600,
+        "verticesPerString": 429,
+        "setupMs": 5.8,
+        "stats": {
+          "frames": 240,
+          "cpuMs": {
+            "median": 0.36,
+            "p95": 0.505,
+            "mean": 0.371,
+            "min": 0.185,
+            "max": 1.02
+          },
+          "wallMs": {
+            "median": 3.91,
+            "p95": 5.98,
+            "mean": 3.918,
+            "min": 0.585,
+            "max": 6.905
+          },
+          "gpuMs": {
+            "median": 0.051,
+            "p95": 0.055,
+            "mean": 0.052,
+            "min": 0.048,
+            "max": 0.306
+          },
+          "gpuTimer": "WebGPU timestamp-query"
+        },
+        "counters": {
+          "drawCalls": 7,
+          "triangles": 460801,
+          "geometries": 7,
+          "textures": 3
+        },
+        "info": {
+          "drawCalls": 14,
+          "triangles": 921602,
+          "points": 0,
+          "lines": 0,
+          "geometries": 7,
+          "textures": 3,
+          "programs": 9,
+          "texturesMB": 10.55,
+          "renderTargets": 1
+        }
+      }
+    },
+    {
+      "name": "morph-600",
+      "query": "probe&method=morph&strings=600",
+      "channel": "chromium",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 2.566,
+      "messages": [],
+      "result": {
+        "backend": "WebGPU",
+        "gpu": "nvidia, blackwell, NVIDIA GeForce RTX 5080",
+        "adapter": {
+          "vendor": "nvidia",
+          "architecture": "blackwell",
+          "device": "0x2c02",
+          "description": "NVIDIA GeForce RTX 5080"
+        },
+        "drawingBuffer": "1280x720",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "crossOriginIsolated": true,
+        "method": "morph",
+        "strings": 600,
+        "verticesPerString": 429,
+        "setupMs": 6.6,
+        "stats": {
+          "frames": 240,
+          "cpuMs": {
+            "median": 0.465,
+            "p95": 0.69,
+            "mean": 0.485,
+            "min": 0.275,
+            "max": 0.92
+          },
+          "wallMs": {
+            "median": 3.98,
+            "p95": 6.065,
+            "mean": 3.98,
+            "min": 0.815,
+            "max": 7.995
+          },
+          "gpuMs": {
+            "median": 0.035,
+            "p95": 0.038,
+            "mean": 0.036,
+            "min": 0.032,
+            "max": 0.238
+          },
+          "gpuTimer": "WebGPU timestamp-query"
+        },
+        "counters": {
+          "drawCalls": 7,
+          "triangles": 460801,
+          "geometries": 7,
+          "textures": 15
+        },
+        "info": {
+          "drawCalls": 14,
+          "triangles": 921602,
+          "points": 0,
+          "lines": 0,
+          "geometries": 7,
+          "textures": 15,
+          "programs": 9,
+          "texturesMB": 10.59,
+          "renderTargets": 1
+        }
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "a": "cpu-6",
+      "b": "tsl-6",
+      "differingPixels": 0,
+      "percent": 0
+    },
+    {
+      "a": "morph-6",
+      "b": "tsl-6",
+      "differingPixels": 0,
+      "percent": 0
+    },
+    {
+      "a": "cpu-600",
+      "b": "tsl-600",
+      "differingPixels": 0,
+      "percent": 0
+    },
+    {
+      "a": "morph-600",
+      "b": "tsl-600",
+      "differingPixels": 1,
+      "percent": 0
+    }
+  ]
+}

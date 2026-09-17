@@ -1,0 +1,108 @@
+{
+  "experiment": "12-webxr-scale",
+  "title": "WebXR at 1:1: a real-size neck in an immersive session",
+  "hypothesis": "This machine has no headset: an immersive session can't run on hardware. Emulated by IWER (lesson 11), the distance between the nut and the 12th fret measured in the local-floor space is 0.324 m.",
+  "predictions": [
+    {
+      "metric": "immersive-vr session on hardware",
+      "predicted": "could not run: no XR device"
+    },
+    {
+      "metric": "nut to 12th fret in the emulated reference space",
+      "predicted": "0.324 m within 1 mm"
+    },
+    {
+      "metric": "views rendered per XR frame, emulated",
+      "predicted": "2"
+    }
+  ],
+  "date": "2026-09-17T04:33:44.999Z",
+  "machine": {
+    "os": "Windows_NT 10.0.26200 x64",
+    "cpu": "Intel(R) Core(TM) Ultra 9 285K",
+    "memoryGB": 64,
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 5080",
+      "driver": "610.88"
+    },
+    "node": "v24.12.0",
+    "three": "0.186.0",
+    "playwright": "1.63.0",
+    "browser": "153.0.8010.12",
+    "chromiumArgs": [
+      "--disable-gpu-vsync",
+      "--disable-frame-rate-limit",
+      "--enable-webgpu-developer-features",
+      "--autoplay-policy=no-user-gesture-required",
+      "--enable-precise-memory-info",
+      "--js-flags=--expose-gc"
+    ]
+  },
+  "runs": [
+    {
+      "name": "emulated",
+      "query": "probe&xr=emulated",
+      "channel": "chromium",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 0.634,
+      "messages": [],
+      "result": {
+        "xr": "emulated",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "native": {
+          "navigatorXR": true,
+          "immersiveVR": false
+        },
+        "emulated": {
+          "device": "Meta Quest 3",
+          "presenting": true,
+          "enabledFeatures": [
+            "local-floor",
+            "viewer",
+            "local"
+          ],
+          "eyes": 2,
+          "eyeDistanceMm": 63,
+          "headGivenM": [
+            -0.1,
+            1.55,
+            0.45
+          ],
+          "headReportedM": [
+            -0.1,
+            1.5751,
+            0.4751
+          ],
+          "nutTo12thFretM": 0.324,
+          "scaleLengthM": 0.648,
+          "xrFrames": 7,
+          "drawCallsPerFrame": 48
+        },
+        "counters": {
+          "eyes": 2,
+          "nutTo12thFretMm": 324
+        },
+        "errors": []
+      }
+    },
+    {
+      "name": "hardware",
+      "query": "probe&xr=hardware",
+      "channel": "chromium",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 0.337,
+      "messages": [],
+      "result": {
+        "xr": "hardware",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "native": {
+          "navigatorXR": true,
+          "immersiveVR": false
+        },
+        "couldNotRun": "navigator.xr.isSessionSupported(\"immersive-vr\") is false: no XR device on this machine"
+      }
+    }
+  ]
+}

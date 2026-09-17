@@ -1,0 +1,405 @@
+{
+  "experiment": "06-wood-textures",
+  "title": "Fretboard wood: ComfyUI textures against procedural TSL, and texture memory",
+  "hypothesis": "An RGBA8 texture with mipmaps holds about 4/3 x 4 bytes per texel; a GPU-compressed KTX2 (BC7 on this GPU) holds a quarter of that; the procedural wood holds nothing but costs noise evaluations per pixel.",
+  "predictions": [
+    {
+      "metric": "renderer.info.memory.texturesSize, 2048x2048 RGBA8 with mipmaps",
+      "predicted": "about 22 MB"
+    },
+    {
+      "metric": "GPU memory of the KTX2 (UASTC transcoded to BC7)",
+      "predicted": "about 5.6 MB, a quarter"
+    },
+    {
+      "metric": "median GPU ms per frame, procedural TSL against the sampled texture, board filling a 1920x1080 frame",
+      "predicted": "procedural at least 2x"
+    },
+    {
+      "metric": "ComfyUI textures",
+      "predicted": "pending if R2 has not run the ComfyUI GA lab's experiment 4 when this runs"
+    }
+  ],
+  "date": "2026-09-17T04:32:20.226Z",
+  "machine": {
+    "os": "Windows_NT 10.0.26200 x64",
+    "cpu": "Intel(R) Core(TM) Ultra 9 285K",
+    "memoryGB": 64,
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 5080",
+      "driver": "610.88"
+    },
+    "node": "v24.12.0",
+    "three": "0.186.0",
+    "playwright": "1.63.0",
+    "browser": "153.0.8010.12",
+    "chromiumArgs": [
+      "--disable-gpu-vsync",
+      "--disable-frame-rate-limit",
+      "--enable-webgpu-developer-features",
+      "--autoplay-policy=no-user-gesture-required",
+      "--enable-precise-memory-info",
+      "--js-flags=--expose-gc"
+    ]
+  },
+  "runs": [
+    {
+      "name": "texture",
+      "query": "probe&wood=texture",
+      "channel": "chromium",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 2.8,
+      "messages": [],
+      "result": {
+        "backend": "WebGPU",
+        "gpu": "nvidia, blackwell, NVIDIA GeForce RTX 5080",
+        "adapter": {
+          "vendor": "nvidia",
+          "architecture": "blackwell",
+          "device": "0x2c02",
+          "description": "NVIDIA GeForce RTX 5080"
+        },
+        "drawingBuffer": "1920x1080",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "crossOriginIsolated": true,
+        "wood": "texture",
+        "source": "generated/wood-2048.png",
+        "loadMs": 13,
+        "bytes": 1217318,
+        "stats": {
+          "frames": 240,
+          "cpuMs": {
+            "median": 0.31,
+            "p95": 0.49,
+            "mean": 0.323,
+            "min": 0.125,
+            "max": 0.79
+          },
+          "wallMs": {
+            "median": 3.675,
+            "p95": 5.26,
+            "mean": 3.701,
+            "min": 0.425,
+            "max": 7.245
+          },
+          "gpuMs": {
+            "median": 0.052,
+            "p95": 0.063,
+            "mean": 0.051,
+            "min": 0.037,
+            "max": 0.07
+          },
+          "gpuTimer": "WebGPU timestamp-query"
+        },
+        "counters": {
+          "drawCalls": 2,
+          "textures": 4,
+          "texturesMB": 45.06
+        },
+        "info": {
+          "drawCalls": 2,
+          "triangles": 3,
+          "points": 0,
+          "lines": 0,
+          "geometries": 2,
+          "textures": 4,
+          "programs": 4,
+          "texturesMB": 45.06,
+          "renderTargets": 1
+        }
+      }
+    },
+    {
+      "name": "ktx2-uastc",
+      "query": "probe&wood=ktx2-uastc",
+      "channel": "chromium",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 2.868,
+      "messages": [],
+      "result": {
+        "backend": "WebGPU",
+        "gpu": "nvidia, blackwell, NVIDIA GeForce RTX 5080",
+        "adapter": {
+          "vendor": "nvidia",
+          "architecture": "blackwell",
+          "device": "0x2c02",
+          "description": "NVIDIA GeForce RTX 5080"
+        },
+        "drawingBuffer": "1920x1080",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "crossOriginIsolated": true,
+        "wood": "ktx2-uastc",
+        "source": "generated/wood-2048-uastc.ktx2",
+        "bytes": 1018936,
+        "loadMs": 196,
+        "gpuFormat": 36492,
+        "mipmaps": 12,
+        "stats": {
+          "frames": 240,
+          "cpuMs": {
+            "median": 0.315,
+            "p95": 0.475,
+            "mean": 0.323,
+            "min": 0.12,
+            "max": 0.835
+          },
+          "wallMs": {
+            "median": 3.705,
+            "p95": 5.44,
+            "mean": 3.615,
+            "min": 0.465,
+            "max": 6.995
+          },
+          "gpuMs": {
+            "median": 0.05,
+            "p95": 0.061,
+            "mean": 0.048,
+            "min": 0.037,
+            "max": 0.064
+          },
+          "gpuTimer": "WebGPU timestamp-query"
+        },
+        "counters": {
+          "drawCalls": 2,
+          "textures": 4,
+          "texturesMB": 23.73
+        },
+        "info": {
+          "drawCalls": 2,
+          "triangles": 3,
+          "points": 0,
+          "lines": 0,
+          "geometries": 2,
+          "textures": 4,
+          "programs": 4,
+          "texturesMB": 23.73,
+          "renderTargets": 1
+        }
+      }
+    },
+    {
+      "name": "ktx2-basis-lz",
+      "query": "probe&wood=ktx2-basis-lz",
+      "channel": "chromium",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 2.507,
+      "messages": [],
+      "result": {
+        "backend": "WebGPU",
+        "gpu": "nvidia, blackwell, NVIDIA GeForce RTX 5080",
+        "adapter": {
+          "vendor": "nvidia",
+          "architecture": "blackwell",
+          "device": "0x2c02",
+          "description": "NVIDIA GeForce RTX 5080"
+        },
+        "drawingBuffer": "1920x1080",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "crossOriginIsolated": true,
+        "wood": "ktx2-basis-lz",
+        "source": "generated/wood-2048-basis-lz.ktx2",
+        "bytes": 145002,
+        "loadMs": 79,
+        "gpuFormat": 36492,
+        "mipmaps": 12,
+        "stats": {
+          "frames": 240,
+          "cpuMs": {
+            "median": 0.28,
+            "p95": 0.435,
+            "mean": 0.287,
+            "min": 0.13,
+            "max": 0.605
+          },
+          "wallMs": {
+            "median": 3.565,
+            "p95": 5.145,
+            "mean": 3.563,
+            "min": 0.565,
+            "max": 6.58
+          },
+          "gpuMs": {
+            "median": 0.049,
+            "p95": 0.061,
+            "mean": 0.047,
+            "min": 0.036,
+            "max": 0.066
+          },
+          "gpuTimer": "WebGPU timestamp-query"
+        },
+        "counters": {
+          "drawCalls": 2,
+          "textures": 4,
+          "texturesMB": 23.73
+        },
+        "info": {
+          "drawCalls": 2,
+          "triangles": 3,
+          "points": 0,
+          "lines": 0,
+          "geometries": 2,
+          "textures": 4,
+          "programs": 4,
+          "texturesMB": 23.73,
+          "renderTargets": 1
+        }
+      }
+    },
+    {
+      "name": "comfyui",
+      "query": "probe&wood=comfyui",
+      "channel": "chromium",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 0.492,
+      "messages": [],
+      "result": {
+        "backend": "WebGPU",
+        "gpu": "nvidia, blackwell, NVIDIA GeForce RTX 5080",
+        "adapter": {
+          "vendor": "nvidia",
+          "architecture": "blackwell",
+          "device": "0x2c02",
+          "description": "NVIDIA GeForce RTX 5080"
+        },
+        "drawingBuffer": "1920x1080",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "crossOriginIsolated": true,
+        "wood": "comfyui",
+        "pending": "generated/comfyui-wood.png not found",
+        "counters": null
+      }
+    },
+    {
+      "name": "procedural",
+      "query": "probe&wood=procedural",
+      "channel": "chromium",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 2.829,
+      "messages": [],
+      "result": {
+        "backend": "WebGPU",
+        "gpu": "nvidia, blackwell, NVIDIA GeForce RTX 5080",
+        "adapter": {
+          "vendor": "nvidia",
+          "architecture": "blackwell",
+          "device": "0x2c02",
+          "description": "NVIDIA GeForce RTX 5080"
+        },
+        "drawingBuffer": "1920x1080",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "crossOriginIsolated": true,
+        "wood": "procedural",
+        "stats": {
+          "frames": 240,
+          "cpuMs": {
+            "median": 0.29,
+            "p95": 0.415,
+            "mean": 0.298,
+            "min": 0.13,
+            "max": 1.08
+          },
+          "wallMs": {
+            "median": 3.675,
+            "p95": 5.7,
+            "mean": 3.779,
+            "min": 0.79,
+            "max": 6.995
+          },
+          "gpuMs": {
+            "median": 0.116,
+            "p95": 0.121,
+            "mean": 0.119,
+            "min": 0.114,
+            "max": 0.613
+          },
+          "gpuTimer": "WebGPU timestamp-query"
+        },
+        "counters": {
+          "drawCalls": 2,
+          "textures": 3,
+          "texturesMB": 23.73
+        },
+        "info": {
+          "drawCalls": 2,
+          "triangles": 3,
+          "points": 0,
+          "lines": 0,
+          "geometries": 2,
+          "textures": 3,
+          "programs": 4,
+          "texturesMB": 23.73,
+          "renderTargets": 1
+        }
+      }
+    },
+    {
+      "name": "flat",
+      "query": "probe&wood=flat",
+      "channel": "chromium",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 2.334,
+      "messages": [],
+      "result": {
+        "backend": "WebGPU",
+        "gpu": "nvidia, blackwell, NVIDIA GeForce RTX 5080",
+        "adapter": {
+          "vendor": "nvidia",
+          "architecture": "blackwell",
+          "device": "0x2c02",
+          "description": "NVIDIA GeForce RTX 5080"
+        },
+        "drawingBuffer": "1920x1080",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "crossOriginIsolated": true,
+        "wood": "flat",
+        "stats": {
+          "frames": 240,
+          "cpuMs": {
+            "median": 0.29,
+            "p95": 0.45,
+            "mean": 0.302,
+            "min": 0.12,
+            "max": 0.665
+          },
+          "wallMs": {
+            "median": 3.62,
+            "p95": 5.11,
+            "mean": 3.679,
+            "min": 0.635,
+            "max": 6.695
+          },
+          "gpuMs": {
+            "median": 0.038,
+            "p95": 0.05,
+            "mean": 0.039,
+            "min": 0.032,
+            "max": 0.064
+          },
+          "gpuTimer": "WebGPU timestamp-query"
+        },
+        "counters": {
+          "drawCalls": 2,
+          "textures": 3,
+          "texturesMB": 23.73
+        },
+        "info": {
+          "drawCalls": 2,
+          "triangles": 3,
+          "points": 0,
+          "lines": 0,
+          "geometries": 2,
+          "textures": 3,
+          "programs": 4,
+          "texturesMB": 23.73,
+          "renderTargets": 1
+        }
+      }
+    }
+  ]
+}

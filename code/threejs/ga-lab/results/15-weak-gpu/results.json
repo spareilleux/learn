@@ -1,0 +1,741 @@
+{
+  "experiment": "15-weak-gpu",
+  "title": "A weak GPU: pixel ratio, powerPreference and an adaptive budget",
+  "hypothesis": "GPU time follows the pixel count, so GA's pixel ratio of 3 costs about 9x a ratio of 1 on a weak GPU; this machine has one enabled adapter, so powerPreference changes nothing; the controller settles at the largest ratio under budget within 60 frames.",
+  "predictions": [
+    {
+      "metric": "wall ms per frame on SwiftShader, pixel ratio 3 against 1",
+      "predicted": "at least 5x"
+    },
+    {
+      "metric": "adapter for low-power and high-performance on this machine",
+      "predicted": "the same RTX 5080 for both"
+    },
+    {
+      "metric": "adaptive controller's pixel ratio after 60 frames, 16.7 ms budget",
+      "predicted": "RTX 5080: its maximum of 2; SwiftShader: 1 or lower"
+    }
+  ],
+  "date": "2026-09-17T04:34:16.550Z",
+  "machine": {
+    "os": "Windows_NT 10.0.26200 x64",
+    "cpu": "Intel(R) Core(TM) Ultra 9 285K",
+    "memoryGB": 64,
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 5080",
+      "driver": "610.88"
+    },
+    "node": "v24.12.0",
+    "three": "0.186.0",
+    "playwright": "1.63.0",
+    "browser": "153.0.8010.12",
+    "chromiumArgs": [
+      "--disable-gpu-vsync",
+      "--disable-frame-rate-limit",
+      "--enable-webgpu-developer-features",
+      "--autoplay-policy=no-user-gesture-required",
+      "--enable-precise-memory-info",
+      "--js-flags=--expose-gc"
+    ]
+  },
+  "runs": [
+    {
+      "name": "rtx-pr1",
+      "query": "probe&pr=1",
+      "channel": "chromium",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 2.01,
+      "messages": [],
+      "result": {
+        "backend": "WebGPU",
+        "gpu": "nvidia, blackwell, NVIDIA GeForce RTX 5080",
+        "adapter": {
+          "vendor": "nvidia",
+          "architecture": "blackwell",
+          "device": "0x2c02",
+          "description": "NVIDIA GeForce RTX 5080"
+        },
+        "drawingBuffer": "1200x400",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "crossOriginIsolated": true,
+        "pixelRatio": 1,
+        "powerPreference": null,
+        "stats": {
+          "frames": 120,
+          "cpuMs": {
+            "median": 0.45,
+            "p95": 0.68,
+            "mean": 0.469,
+            "min": 0.23,
+            "max": 0.995
+          },
+          "wallMs": {
+            "median": 3.83,
+            "p95": 5.525,
+            "mean": 3.856,
+            "min": 0.945,
+            "max": 6.425
+          },
+          "gpuMs": {
+            "median": 0.014,
+            "p95": 0.016,
+            "mean": 0.016,
+            "min": 0.011,
+            "max": 0.237
+          },
+          "gpuTimer": "WebGPU timestamp-query"
+        },
+        "counters": {
+          "drawCalls": 7,
+          "triangles": 11919
+        },
+        "info": {
+          "drawCalls": 7,
+          "triangles": 11919,
+          "points": 0,
+          "lines": 0,
+          "geometries": 7,
+          "textures": 4,
+          "programs": 11,
+          "texturesMB": 8.16,
+          "renderTargets": 1
+        }
+      }
+    },
+    {
+      "name": "rtx-pr3",
+      "query": "probe&pr=3",
+      "channel": "chromium",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 1.753,
+      "messages": [],
+      "result": {
+        "backend": "WebGPU",
+        "gpu": "nvidia, blackwell, NVIDIA GeForce RTX 5080",
+        "adapter": {
+          "vendor": "nvidia",
+          "architecture": "blackwell",
+          "device": "0x2c02",
+          "description": "NVIDIA GeForce RTX 5080"
+        },
+        "drawingBuffer": "3600x1200",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "crossOriginIsolated": true,
+        "pixelRatio": 3,
+        "powerPreference": null,
+        "stats": {
+          "frames": 120,
+          "cpuMs": {
+            "median": 0.435,
+            "p95": 0.655,
+            "mean": 0.443,
+            "min": 0.245,
+            "max": 0.735
+          },
+          "wallMs": {
+            "median": 3.925,
+            "p95": 5.8,
+            "mean": 3.973,
+            "min": 1.095,
+            "max": 7.09
+          },
+          "gpuMs": {
+            "median": 0.037,
+            "p95": 0.038,
+            "mean": 0.037,
+            "min": 0.035,
+            "max": 0.043
+          },
+          "gpuTimer": "WebGPU timestamp-query"
+        },
+        "counters": {
+          "drawCalls": 7,
+          "triangles": 11919
+        },
+        "info": {
+          "drawCalls": 7,
+          "triangles": 11919,
+          "points": 0,
+          "lines": 0,
+          "geometries": 7,
+          "textures": 4,
+          "programs": 11,
+          "texturesMB": 52.11,
+          "renderTargets": 1
+        }
+      }
+    },
+    {
+      "name": "rtx-adaptive",
+      "query": "probe&adaptive=1",
+      "channel": "chromium",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 1.265,
+      "messages": [],
+      "result": {
+        "backend": "WebGPU",
+        "gpu": "nvidia, blackwell, NVIDIA GeForce RTX 5080",
+        "adapter": {
+          "vendor": "nvidia",
+          "architecture": "blackwell",
+          "device": "0x2c02",
+          "description": "NVIDIA GeForce RTX 5080"
+        },
+        "drawingBuffer": "2400x800",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "crossOriginIsolated": true,
+        "adaptive": true,
+        "budgetMs": 16.7,
+        "finalPixelRatio": 2,
+        "trajectory": [
+          {
+            "frame": 10,
+            "pixelRatio": 2,
+            "medianWallMs": 3.77
+          },
+          {
+            "frame": 20,
+            "pixelRatio": 2,
+            "medianWallMs": 3.615
+          },
+          {
+            "frame": 30,
+            "pixelRatio": 2,
+            "medianWallMs": 4.3
+          },
+          {
+            "frame": 40,
+            "pixelRatio": 2,
+            "medianWallMs": 3.92
+          },
+          {
+            "frame": 50,
+            "pixelRatio": 2,
+            "medianWallMs": 3.505
+          },
+          {
+            "frame": 60,
+            "pixelRatio": 2,
+            "medianWallMs": 4.295
+          },
+          {
+            "frame": 70,
+            "pixelRatio": 2,
+            "medianWallMs": 3.695
+          },
+          {
+            "frame": 80,
+            "pixelRatio": 2,
+            "medianWallMs": 3.8
+          },
+          {
+            "frame": 90,
+            "pixelRatio": 2,
+            "medianWallMs": 3.685
+          },
+          {
+            "frame": 100,
+            "pixelRatio": 2,
+            "medianWallMs": 4.03
+          },
+          {
+            "frame": 110,
+            "pixelRatio": 2,
+            "medianWallMs": 3.93
+          },
+          {
+            "frame": 120,
+            "pixelRatio": 2,
+            "medianWallMs": 3.57
+          }
+        ],
+        "wallMs": {
+          "median": 3.735,
+          "p95": 6.04,
+          "mean": 5.794,
+          "min": 0.92,
+          "max": 233.815
+        },
+        "counters": {
+          "drawCalls": 7
+        },
+        "info": {
+          "drawCalls": 7,
+          "triangles": 11919,
+          "points": 0,
+          "lines": 0,
+          "geometries": 7,
+          "textures": 4,
+          "programs": 11,
+          "texturesMB": 24.64,
+          "renderTargets": 1
+        }
+      }
+    },
+    {
+      "name": "rtx-low-power",
+      "query": "probe&pr=1&power=low-power",
+      "channel": "chromium",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 1.786,
+      "messages": [
+        "console.warning: The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+      ],
+      "result": {
+        "backend": "WebGPU",
+        "gpu": "nvidia, blackwell, NVIDIA GeForce RTX 5080",
+        "adapter": {
+          "vendor": "nvidia",
+          "architecture": "blackwell",
+          "device": "0x2c02",
+          "description": "NVIDIA GeForce RTX 5080"
+        },
+        "drawingBuffer": "1200x400",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "crossOriginIsolated": true,
+        "pixelRatio": 1,
+        "powerPreference": "low-power",
+        "stats": {
+          "frames": 120,
+          "cpuMs": {
+            "median": 0.395,
+            "p95": 0.6,
+            "mean": 0.415,
+            "min": 0.22,
+            "max": 0.81
+          },
+          "wallMs": {
+            "median": 3.755,
+            "p95": 6.22,
+            "mean": 3.888,
+            "min": 0.89,
+            "max": 7.08
+          },
+          "gpuMs": {
+            "median": 0.014,
+            "p95": 0.016,
+            "mean": 0.014,
+            "min": 0.011,
+            "max": 0.02
+          },
+          "gpuTimer": "WebGPU timestamp-query"
+        },
+        "counters": {
+          "drawCalls": 7,
+          "triangles": 11919
+        },
+        "info": {
+          "drawCalls": 7,
+          "triangles": 11919,
+          "points": 0,
+          "lines": 0,
+          "geometries": 7,
+          "textures": 4,
+          "programs": 11,
+          "texturesMB": 8.16,
+          "renderTargets": 1
+        }
+      }
+    },
+    {
+      "name": "rtx-high-performance",
+      "query": "probe&pr=1&power=high-performance",
+      "channel": "chromium",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 1.683,
+      "messages": [
+        "console.warning: The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+      ],
+      "result": {
+        "backend": "WebGPU",
+        "gpu": "nvidia, blackwell, NVIDIA GeForce RTX 5080",
+        "adapter": {
+          "vendor": "nvidia",
+          "architecture": "blackwell",
+          "device": "0x2c02",
+          "description": "NVIDIA GeForce RTX 5080"
+        },
+        "drawingBuffer": "1200x400",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "crossOriginIsolated": true,
+        "pixelRatio": 1,
+        "powerPreference": "high-performance",
+        "stats": {
+          "frames": 120,
+          "cpuMs": {
+            "median": 0.365,
+            "p95": 0.525,
+            "mean": 0.374,
+            "min": 0.205,
+            "max": 0.585
+          },
+          "wallMs": {
+            "median": 3.685,
+            "p95": 5.58,
+            "mean": 3.847,
+            "min": 2.885,
+            "max": 6.305
+          },
+          "gpuMs": {
+            "median": 0.014,
+            "p95": 0.015,
+            "mean": 0.014,
+            "min": 0.011,
+            "max": 0.018
+          },
+          "gpuTimer": "WebGPU timestamp-query"
+        },
+        "counters": {
+          "drawCalls": 7,
+          "triangles": 11919
+        },
+        "info": {
+          "drawCalls": 7,
+          "triangles": 11919,
+          "points": 0,
+          "lines": 0,
+          "geometries": 7,
+          "textures": 4,
+          "programs": 11,
+          "texturesMB": 8.16,
+          "renderTargets": 1
+        }
+      }
+    },
+    {
+      "name": "swiftshader-pr0.5",
+      "query": "probe&pr=0.5",
+      "channel": "chromium-headless-shell",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 2.445,
+      "messages": [
+        "console.warning: No available adapters.",
+        "console.warning: THREE.WebGPURenderer: WebGPU is not available, running under WebGL2 backend."
+      ],
+      "result": {
+        "backend": "WebGL 2",
+        "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "adapter": null,
+        "drawingBuffer": "600x200",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+        "crossOriginIsolated": true,
+        "pixelRatio": 0.5,
+        "powerPreference": null,
+        "stats": {
+          "frames": 120,
+          "cpuMs": {
+            "median": 0.375,
+            "p95": 0.54,
+            "mean": 0.393,
+            "min": 0.265,
+            "max": 1.105
+          },
+          "wallMs": {
+            "median": 9.005,
+            "p95": 9.66,
+            "mean": 9.056,
+            "min": 8.49,
+            "max": 10.51
+          },
+          "gpuMs": null,
+          "gpuTimer": "none: no EXT_disjoint_timer_query_webgl2"
+        },
+        "counters": {
+          "drawCalls": 7,
+          "triangles": 11919
+        },
+        "info": {
+          "drawCalls": 7,
+          "triangles": 11919,
+          "points": 0,
+          "lines": 0,
+          "geometries": 7,
+          "textures": 4,
+          "programs": 11,
+          "texturesMB": 4.04,
+          "renderTargets": 1
+        }
+      }
+    },
+    {
+      "name": "swiftshader-pr1",
+      "query": "probe&pr=1",
+      "channel": "chromium-headless-shell",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 4.533,
+      "messages": [
+        "console.warning: No available adapters.",
+        "console.warning: THREE.WebGPURenderer: WebGPU is not available, running under WebGL2 backend."
+      ],
+      "result": {
+        "backend": "WebGL 2",
+        "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "adapter": null,
+        "drawingBuffer": "1200x400",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+        "crossOriginIsolated": true,
+        "pixelRatio": 1,
+        "powerPreference": null,
+        "stats": {
+          "frames": 120,
+          "cpuMs": {
+            "median": 0.395,
+            "p95": 0.555,
+            "mean": 0.411,
+            "min": 0.285,
+            "max": 1.175
+          },
+          "wallMs": {
+            "median": 26.73,
+            "p95": 28.38,
+            "mean": 26.894,
+            "min": 25.065,
+            "max": 31.67
+          },
+          "gpuMs": null,
+          "gpuTimer": "none: no EXT_disjoint_timer_query_webgl2"
+        },
+        "counters": {
+          "drawCalls": 7,
+          "triangles": 11919
+        },
+        "info": {
+          "drawCalls": 7,
+          "triangles": 11919,
+          "points": 0,
+          "lines": 0,
+          "geometries": 7,
+          "textures": 4,
+          "programs": 11,
+          "texturesMB": 8.16,
+          "renderTargets": 1
+        }
+      }
+    },
+    {
+      "name": "swiftshader-pr2",
+      "query": "probe&pr=2",
+      "channel": "chromium-headless-shell",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 14.195,
+      "messages": [
+        "console.warning: No available adapters.",
+        "console.warning: THREE.WebGPURenderer: WebGPU is not available, running under WebGL2 backend."
+      ],
+      "result": {
+        "backend": "WebGL 2",
+        "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "adapter": null,
+        "drawingBuffer": "2400x800",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+        "crossOriginIsolated": true,
+        "pixelRatio": 2,
+        "powerPreference": null,
+        "stats": {
+          "frames": 120,
+          "cpuMs": {
+            "median": 0.385,
+            "p95": 0.565,
+            "mean": 0.406,
+            "min": 0.275,
+            "max": 1.075
+          },
+          "wallMs": {
+            "median": 95.355,
+            "p95": 98.18,
+            "mean": 95.085,
+            "min": 89.925,
+            "max": 100.975
+          },
+          "gpuMs": null,
+          "gpuTimer": "none: no EXT_disjoint_timer_query_webgl2"
+        },
+        "counters": {
+          "drawCalls": 7,
+          "triangles": 11919
+        },
+        "info": {
+          "drawCalls": 7,
+          "triangles": 11919,
+          "points": 0,
+          "lines": 0,
+          "geometries": 7,
+          "textures": 4,
+          "programs": 11,
+          "texturesMB": 24.64,
+          "renderTargets": 1
+        }
+      }
+    },
+    {
+      "name": "swiftshader-pr3",
+      "query": "probe&pr=3",
+      "channel": "chromium-headless-shell",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 30.244,
+      "messages": [
+        "console.warning: No available adapters.",
+        "console.warning: THREE.WebGPURenderer: WebGPU is not available, running under WebGL2 backend."
+      ],
+      "result": {
+        "backend": "WebGL 2",
+        "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "adapter": null,
+        "drawingBuffer": "3600x1200",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+        "crossOriginIsolated": true,
+        "pixelRatio": 3,
+        "powerPreference": null,
+        "stats": {
+          "frames": 120,
+          "cpuMs": {
+            "median": 0.405,
+            "p95": 0.65,
+            "mean": 0.43,
+            "min": 0.285,
+            "max": 1.06
+          },
+          "wallMs": {
+            "median": 208.245,
+            "p95": 221.955,
+            "mean": 208.984,
+            "min": 194.25,
+            "max": 230.08
+          },
+          "gpuMs": null,
+          "gpuTimer": "none: no EXT_disjoint_timer_query_webgl2"
+        },
+        "counters": {
+          "drawCalls": 7,
+          "triangles": 11919
+        },
+        "info": {
+          "drawCalls": 7,
+          "triangles": 11919,
+          "points": 0,
+          "lines": 0,
+          "geometries": 7,
+          "textures": 4,
+          "programs": 11,
+          "texturesMB": 52.11,
+          "renderTargets": 1
+        }
+      }
+    },
+    {
+      "name": "swiftshader-adaptive",
+      "query": "probe&adaptive=1",
+      "channel": "chromium-headless-shell",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 4.913,
+      "messages": [
+        "console.warning: No available adapters.",
+        "console.warning: THREE.WebGPURenderer: WebGPU is not available, running under WebGL2 backend."
+      ],
+      "result": {
+        "backend": "WebGL 2",
+        "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "adapter": null,
+        "drawingBuffer": "786x262",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+        "crossOriginIsolated": true,
+        "adaptive": true,
+        "budgetMs": 16.7,
+        "finalPixelRatio": 0.655,
+        "trajectory": [
+          {
+            "frame": 10,
+            "pixelRatio": 2,
+            "medianWallMs": 111.5
+          },
+          {
+            "frame": 20,
+            "pixelRatio": 1.6,
+            "medianWallMs": 74.555
+          },
+          {
+            "frame": 30,
+            "pixelRatio": 1.28,
+            "medianWallMs": 47.73
+          },
+          {
+            "frame": 40,
+            "pixelRatio": 1.024,
+            "medianWallMs": 31.165
+          },
+          {
+            "frame": 50,
+            "pixelRatio": 0.819,
+            "medianWallMs": 20.61
+          },
+          {
+            "frame": 60,
+            "pixelRatio": 0.655,
+            "medianWallMs": 14.495
+          },
+          {
+            "frame": 70,
+            "pixelRatio": 0.655,
+            "medianWallMs": 14.94
+          },
+          {
+            "frame": 80,
+            "pixelRatio": 0.655,
+            "medianWallMs": 14.735
+          },
+          {
+            "frame": 90,
+            "pixelRatio": 0.655,
+            "medianWallMs": 14.905
+          },
+          {
+            "frame": 100,
+            "pixelRatio": 0.655,
+            "medianWallMs": 14.435
+          },
+          {
+            "frame": 110,
+            "pixelRatio": 0.655,
+            "medianWallMs": 15.03
+          },
+          {
+            "frame": 120,
+            "pixelRatio": 0.655,
+            "medianWallMs": 14.445
+          }
+        ],
+        "wallMs": {
+          "median": 15.385,
+          "p95": 111.5,
+          "mean": 37.239,
+          "min": 13.025,
+          "max": 578.705
+        },
+        "counters": {
+          "drawCalls": 7
+        },
+        "info": {
+          "drawCalls": 7,
+          "triangles": 11919,
+          "points": 0,
+          "lines": 0,
+          "geometries": 7,
+          "textures": 4,
+          "programs": 11,
+          "texturesMB": 5.02,
+          "renderTargets": 1
+        }
+      }
+    }
+  ]
+}

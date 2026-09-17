@@ -86,11 +86,14 @@ guard(async () => {
         const delta = new Float32Array(base.count * 3);
         for (let v = 0; v < base.count; v++) delta[v * 3 + 2] = AMPLITUDE * Math.sin(Math.PI * geometry.attributes.uv.getY(v));
         geometry.morphAttributes.position = [new THREE.BufferAttribute(delta, 3)];
+        // The target holds displacements, not positions: without this flag the base mesh is scaled by 1 - influence
+        geometry.morphTargetsRelative = true;
       }
       const mesh = new THREE.InstancedMesh(geometry, m, perGauge);
-      // r186's InstancedMesh has no morphTargetInfluences; with a single instance, the morph node reads them instead of
-      // the per-instance texture, and fails on null unless they exist
-      if (method === 'morph') mesh.morphTargetInfluences = [0];
+      // r186's InstancedMesh has no morphTargetInfluences. With a single instance, the morph node reads them instead of
+      // the per-instance texture, and fails on null unless they exist; with more than one, it reads the texture, and
+      // setting them fails instead (the unused influence uniform array is updated before it has a buffer)
+      if (method === 'morph' && perGauge === 1) mesh.morphTargetInfluences = [0];
       const matrix = new THREE.Matrix4();
       const phases = new Float32Array(perGauge);
       for (let guitar = 0; guitar < perGauge; guitar++) {

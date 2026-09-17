@@ -1,0 +1,141 @@
+{
+  "experiment": "13-audio-sync",
+  "title": "WebAudio note and string vibration: how far apart are they?",
+  "hypothesis": "Starting the vibration on the click frame shows it before the sound leaves the speakers by baseLatency plus outputLatency, tens of milliseconds; scheduling the visual start from getOutputTimestamp brings the gap under one frame.",
+  "predictions": [
+    {
+      "metric": "baseLatency + outputLatency, headed Chromium on Windows, default output device",
+      "predicted": "20 to 60 ms"
+    },
+    {
+      "metric": "visual lead without compensation",
+      "predicted": "equal to that sum within one frame (16.7 ms)"
+    },
+    {
+      "metric": "visual lead with compensation",
+      "predicted": "under 17 ms in absolute value"
+    },
+    {
+      "metric": "headless Chromium",
+      "predicted": "reports an outputLatency of 0 or no device: the acoustic delay is not measurable there"
+    }
+  ],
+  "date": "2026-09-17T04:33:48.087Z",
+  "machine": {
+    "os": "Windows_NT 10.0.26200 x64",
+    "cpu": "Intel(R) Core(TM) Ultra 9 285K",
+    "memoryGB": 64,
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 5080",
+      "driver": "610.88"
+    },
+    "node": "v24.12.0",
+    "three": "0.186.0",
+    "playwright": "1.63.0",
+    "browser": "153.0.8010.12",
+    "chromiumArgs": [
+      "--disable-gpu-vsync",
+      "--disable-frame-rate-limit",
+      "--enable-webgpu-developer-features",
+      "--autoplay-policy=no-user-gesture-required",
+      "--enable-precise-memory-info",
+      "--js-flags=--expose-gc"
+    ]
+  },
+  "runs": [
+    {
+      "name": "headless",
+      "query": "probe&notes=20",
+      "channel": "chromium",
+      "headed": false,
+      "vsync": true,
+      "wallSeconds": 7.03,
+      "messages": [],
+      "result": {
+        "backend": null,
+        "gpu": null,
+        "adapter": null,
+        "drawingBuffer": null,
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "crossOriginIsolated": true,
+        "audio": {
+          "sampleRate": 48000,
+          "state": "running",
+          "baseLatencyMs": 10,
+          "outputLatencyMs": 40
+        },
+        "frameMs": {
+          "median": 16.66,
+          "p95": 16.7,
+          "mean": 16.658,
+          "min": 16.615,
+          "max": 16.7
+        },
+        "naiveLeadMs": {
+          "median": 31.033,
+          "p95": 36.846,
+          "mean": 31.316,
+          "min": 25.633,
+          "max": 36.846
+        },
+        "compensatedLeadMs": {
+          "median": -2.302,
+          "p95": 3.491,
+          "mean": -2.02,
+          "min": -7.692,
+          "max": 3.491
+        },
+        "counters": {
+          "notes": 20
+        }
+      }
+    },
+    {
+      "name": "headed",
+      "query": "probe&notes=20",
+      "channel": "chromium",
+      "headed": true,
+      "vsync": true,
+      "wallSeconds": 7.16,
+      "messages": [],
+      "result": {
+        "backend": null,
+        "gpu": null,
+        "adapter": null,
+        "drawingBuffer": null,
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36",
+        "crossOriginIsolated": true,
+        "audio": {
+          "sampleRate": 48000,
+          "state": "running",
+          "baseLatencyMs": 10,
+          "outputLatencyMs": 40
+        },
+        "frameMs": {
+          "median": 16.66,
+          "p95": 16.7,
+          "mean": 16.659,
+          "min": 16.615,
+          "max": 16.7
+        },
+        "naiveLeadMs": {
+          "median": 31.822,
+          "p95": 35.816,
+          "mean": 31.79,
+          "min": 28.392,
+          "max": 35.816
+        },
+        "compensatedLeadMs": {
+          "median": -1.518,
+          "p95": 2.491,
+          "mean": -1.561,
+          "min": -4.968,
+          "max": 2.491
+        },
+        "counters": {
+          "notes": 20
+        }
+      }
+    }
+  ]
+}

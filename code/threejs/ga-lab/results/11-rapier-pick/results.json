@@ -1,0 +1,300 @@
+{
+  "experiment": "11-rapier-pick",
+  "title": "Rapier: a pick striking a string, stability against the time step",
+  "hypothesis": "Without continuous collision detection a 1 mm pick moving 33 mm per step at 1/60 s passes through a 0.5 mm string; CCD on the pick prevents it at every step; the joint error shrinks as the step shrinks.",
+  "predictions": [
+    {
+      "metric": "pick passes through without contact, CCD off",
+      "predicted": "yes at 1/30 and 1/60 s, no at 1/480 s"
+    },
+    {
+      "metric": "pick passes through without contact, CCD on",
+      "predicted": "no at every step"
+    },
+    {
+      "metric": "largest relative stretch of the chain, 1/240 s",
+      "predicted": "under 1%"
+    },
+    {
+      "metric": "largest relative stretch of the chain, 1/30 s",
+      "predicted": "over 5%, or the chain explodes (NaN)"
+    },
+    {
+      "metric": "CPU ms per simulated second",
+      "predicted": "proportional to the steps per second, within 30%"
+    }
+  ],
+  "date": "2026-09-17T04:33:41.263Z",
+  "machine": {
+    "os": "Windows_NT 10.0.26200 x64",
+    "cpu": "Intel(R) Core(TM) Ultra 9 285K",
+    "memoryGB": 64,
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 5080",
+      "driver": "610.88"
+    },
+    "node": "v24.12.0",
+    "three": "0.186.0",
+    "playwright": "1.63.0",
+    "browser": null,
+    "chromiumArgs": [
+      "--disable-gpu-vsync",
+      "--disable-frame-rate-limit",
+      "--enable-webgpu-developer-features",
+      "--autoplay-policy=no-user-gesture-required",
+      "--enable-precise-memory-info",
+      "--js-flags=--expose-gc"
+    ]
+  },
+  "runs": [
+    {
+      "name": "sweep",
+      "args": [],
+      "wallSeconds": 0.998,
+      "result": {
+        "rapier": "0.20.0 (deterministic build)",
+        "segments": 64,
+        "segmentMm": 10.13,
+        "solverIterations": 4,
+        "runs": [
+          {
+            "stepsPerSecond": 30,
+            "ccd": "off",
+            "pickTravelPerStepMm": 66.67,
+            "contact": false,
+            "stringMoved": false,
+            "passedThrough": true,
+            "exploded": false,
+            "maxDisplacementMm": 0,
+            "maxStretchPercent": 0,
+            "cpuMsPerSimulatedSecond": 9.5
+          },
+          {
+            "stepsPerSecond": 30,
+            "ccd": "pick",
+            "pickTravelPerStepMm": 66.67,
+            "contact": false,
+            "stringMoved": false,
+            "passedThrough": true,
+            "exploded": false,
+            "maxDisplacementMm": 0,
+            "maxStretchPercent": 0,
+            "cpuMsPerSimulatedSecond": 7.4
+          },
+          {
+            "stepsPerSecond": 30,
+            "ccd": "string",
+            "pickTravelPerStepMm": 66.67,
+            "contact": false,
+            "stringMoved": false,
+            "passedThrough": true,
+            "exploded": false,
+            "maxDisplacementMm": 0,
+            "maxStretchPercent": 0,
+            "cpuMsPerSimulatedSecond": 9.5
+          },
+          {
+            "stepsPerSecond": 60,
+            "ccd": "off",
+            "pickTravelPerStepMm": 33.33,
+            "contact": true,
+            "stringMoved": false,
+            "passedThrough": true,
+            "exploded": false,
+            "maxDisplacementMm": 0,
+            "maxStretchPercent": 0,
+            "cpuMsPerSimulatedSecond": 14
+          },
+          {
+            "stepsPerSecond": 60,
+            "ccd": "pick",
+            "pickTravelPerStepMm": 33.33,
+            "contact": true,
+            "stringMoved": false,
+            "passedThrough": true,
+            "exploded": false,
+            "maxDisplacementMm": 0,
+            "maxStretchPercent": 0,
+            "cpuMsPerSimulatedSecond": 14.4
+          },
+          {
+            "stepsPerSecond": 60,
+            "ccd": "string",
+            "pickTravelPerStepMm": 33.33,
+            "contact": true,
+            "stringMoved": false,
+            "passedThrough": true,
+            "exploded": false,
+            "maxDisplacementMm": 0,
+            "maxStretchPercent": 0,
+            "cpuMsPerSimulatedSecond": 13.3
+          },
+          {
+            "stepsPerSecond": 120,
+            "ccd": "off",
+            "pickTravelPerStepMm": 16.67,
+            "contact": true,
+            "stringMoved": true,
+            "passedThrough": false,
+            "exploded": false,
+            "maxDisplacementMm": 49.41,
+            "maxStretchPercent": 33.59,
+            "cpuMsPerSimulatedSecond": 43.1
+          },
+          {
+            "stepsPerSecond": 120,
+            "ccd": "pick",
+            "pickTravelPerStepMm": 16.67,
+            "contact": true,
+            "stringMoved": true,
+            "passedThrough": false,
+            "exploded": false,
+            "maxDisplacementMm": 49.41,
+            "maxStretchPercent": 33.59,
+            "cpuMsPerSimulatedSecond": 43.2
+          },
+          {
+            "stepsPerSecond": 120,
+            "ccd": "string",
+            "pickTravelPerStepMm": 16.67,
+            "contact": true,
+            "stringMoved": true,
+            "passedThrough": false,
+            "exploded": false,
+            "maxDisplacementMm": 49.81,
+            "maxStretchPercent": 30.55,
+            "cpuMsPerSimulatedSecond": 38.8
+          },
+          {
+            "stepsPerSecond": 240,
+            "ccd": "off",
+            "pickTravelPerStepMm": 8.33,
+            "contact": true,
+            "stringMoved": true,
+            "passedThrough": false,
+            "exploded": false,
+            "maxDisplacementMm": 36.19,
+            "maxStretchPercent": 24.01,
+            "cpuMsPerSimulatedSecond": 65.3
+          },
+          {
+            "stepsPerSecond": 240,
+            "ccd": "pick",
+            "pickTravelPerStepMm": 8.33,
+            "contact": true,
+            "stringMoved": true,
+            "passedThrough": false,
+            "exploded": false,
+            "maxDisplacementMm": 36.19,
+            "maxStretchPercent": 24.01,
+            "cpuMsPerSimulatedSecond": 73.7
+          },
+          {
+            "stepsPerSecond": 240,
+            "ccd": "string",
+            "pickTravelPerStepMm": 8.33,
+            "contact": true,
+            "stringMoved": true,
+            "passedThrough": false,
+            "exploded": false,
+            "maxDisplacementMm": 32.82,
+            "maxStretchPercent": 18.15,
+            "cpuMsPerSimulatedSecond": 82.5
+          },
+          {
+            "stepsPerSecond": 480,
+            "ccd": "off",
+            "pickTravelPerStepMm": 4.17,
+            "contact": true,
+            "stringMoved": true,
+            "passedThrough": false,
+            "exploded": false,
+            "maxDisplacementMm": 33.5,
+            "maxStretchPercent": 12.89,
+            "cpuMsPerSimulatedSecond": 111.2
+          },
+          {
+            "stepsPerSecond": 480,
+            "ccd": "pick",
+            "pickTravelPerStepMm": 4.17,
+            "contact": true,
+            "stringMoved": true,
+            "passedThrough": false,
+            "exploded": false,
+            "maxDisplacementMm": 33.5,
+            "maxStretchPercent": 12.89,
+            "cpuMsPerSimulatedSecond": 126
+          },
+          {
+            "stepsPerSecond": 480,
+            "ccd": "string",
+            "pickTravelPerStepMm": 4.17,
+            "contact": true,
+            "stringMoved": true,
+            "passedThrough": false,
+            "exploded": false,
+            "maxDisplacementMm": 33.5,
+            "maxStretchPercent": 12.89,
+            "cpuMsPerSimulatedSecond": 118.8
+          },
+          {
+            "stepsPerSecond": 960,
+            "ccd": "off",
+            "pickTravelPerStepMm": 2.08,
+            "contact": true,
+            "stringMoved": true,
+            "passedThrough": false,
+            "exploded": false,
+            "maxDisplacementMm": 27.02,
+            "maxStretchPercent": 7.27,
+            "cpuMsPerSimulatedSecond": 204
+          },
+          {
+            "stepsPerSecond": 960,
+            "ccd": "pick",
+            "pickTravelPerStepMm": 2.08,
+            "contact": true,
+            "stringMoved": true,
+            "passedThrough": false,
+            "exploded": false,
+            "maxDisplacementMm": 27.02,
+            "maxStretchPercent": 7.27,
+            "cpuMsPerSimulatedSecond": 225
+          },
+          {
+            "stepsPerSecond": 960,
+            "ccd": "string",
+            "pickTravelPerStepMm": 2.08,
+            "contact": true,
+            "stringMoved": true,
+            "passedThrough": false,
+            "exploded": false,
+            "maxDisplacementMm": 27.02,
+            "maxStretchPercent": 7.27,
+            "cpuMsPerSimulatedSecond": 213.5
+          }
+        ],
+        "checks": [
+          "30 Hz ccd=off: contact=false passedThrough=true exploded=false stretch=0%",
+          "30 Hz ccd=pick: contact=false passedThrough=true exploded=false stretch=0%",
+          "30 Hz ccd=string: contact=false passedThrough=true exploded=false stretch=0%",
+          "60 Hz ccd=off: contact=true passedThrough=true exploded=false stretch=0%",
+          "60 Hz ccd=pick: contact=true passedThrough=true exploded=false stretch=0%",
+          "60 Hz ccd=string: contact=true passedThrough=true exploded=false stretch=0%",
+          "120 Hz ccd=off: contact=true passedThrough=false exploded=false stretch=33.59%",
+          "120 Hz ccd=pick: contact=true passedThrough=false exploded=false stretch=33.59%",
+          "120 Hz ccd=string: contact=true passedThrough=false exploded=false stretch=30.55%",
+          "240 Hz ccd=off: contact=true passedThrough=false exploded=false stretch=24.01%",
+          "240 Hz ccd=pick: contact=true passedThrough=false exploded=false stretch=24.01%",
+          "240 Hz ccd=string: contact=true passedThrough=false exploded=false stretch=18.15%",
+          "480 Hz ccd=off: contact=true passedThrough=false exploded=false stretch=12.89%",
+          "480 Hz ccd=pick: contact=true passedThrough=false exploded=false stretch=12.89%",
+          "480 Hz ccd=string: contact=true passedThrough=false exploded=false stretch=12.89%",
+          "960 Hz ccd=off: contact=true passedThrough=false exploded=false stretch=7.27%",
+          "960 Hz ccd=pick: contact=true passedThrough=false exploded=false stretch=7.27%",
+          "960 Hz ccd=string: contact=true passedThrough=false exploded=false stretch=7.27%"
+        ]
+      }
+    }
+  ]
+}

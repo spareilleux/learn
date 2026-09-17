@@ -1,0 +1,347 @@
+{
+  "experiment": "10-lod-culling",
+  "title": "A wall of guitars: levels of detail and frustum culling with a glTF body",
+  "hypothesis": "Most bodies are far or outside the frustum: LOD divides the triangles by at least 10, and turning culling off draws all 1,000 bodies every frame.",
+  "predictions": [
+    {
+      "metric": "triangles per frame averaged over the path, LOD against full detail",
+      "predicted": "at most 1/10"
+    },
+    {
+      "metric": "drawCalls averaged over the path, culling off against on",
+      "predicted": "at least 2x"
+    },
+    {
+      "metric": "median GPU ms, LOD against full detail",
+      "predicted": "at most 1/3"
+    }
+  ],
+  "date": "2026-09-17T04:33:25.170Z",
+  "machine": {
+    "os": "Windows_NT 10.0.26200 x64",
+    "cpu": "Intel(R) Core(TM) Ultra 9 285K",
+    "memoryGB": 64,
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 5080",
+      "driver": "610.88"
+    },
+    "node": "v24.12.0",
+    "three": "0.186.0",
+    "playwright": "1.63.0",
+    "browser": "153.0.8010.12",
+    "chromiumArgs": [
+      "--disable-gpu-vsync",
+      "--disable-frame-rate-limit",
+      "--enable-webgpu-developer-features",
+      "--autoplay-policy=no-user-gesture-required",
+      "--enable-precise-memory-info",
+      "--js-flags=--expose-gc"
+    ]
+  },
+  "runs": [
+    {
+      "name": "full",
+      "query": "probe&lod=off&cull=on",
+      "channel": "chromium",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 2.824,
+      "messages": [],
+      "result": {
+        "backend": "WebGPU",
+        "gpu": "nvidia, blackwell, NVIDIA GeForce RTX 5080",
+        "adapter": {
+          "vendor": "nvidia",
+          "architecture": "blackwell",
+          "device": "0x2c02",
+          "description": "NVIDIA GeForce RTX 5080"
+        },
+        "drawingBuffer": "1280x720",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "crossOriginIsolated": true,
+        "lod": false,
+        "cull": true,
+        "count": 1000,
+        "levels": [
+          14360,
+          3590,
+          718
+        ],
+        "stats": {
+          "frames": 240,
+          "cpuMs": {
+            "median": 0.97,
+            "p95": 2.34,
+            "mean": 1.407,
+            "min": 0.325,
+            "max": 61.87
+          },
+          "wallMs": {
+            "median": 4.63,
+            "p95": 7.11,
+            "mean": 5.487,
+            "min": 1.315,
+            "max": 156.455
+          },
+          "gpuMs": {
+            "median": 0.21,
+            "p95": 0.488,
+            "mean": 0.23,
+            "min": 0.009,
+            "max": 0.594
+          },
+          "gpuTimer": "WebGPU timestamp-query"
+        },
+        "pathAverage": {
+          "drawCalls": 334,
+          "triangles": 4780804
+        },
+        "counters": {
+          "pathDrawCalls": 80142,
+          "pathTriangles": 1147392960,
+          "drawCalls": 1,
+          "triangles": 1
+        },
+        "info": {
+          "drawCalls": 458,
+          "triangles": 6548162,
+          "points": 0,
+          "lines": 0,
+          "geometries": 2,
+          "textures": 3,
+          "programs": 4,
+          "texturesMB": 10.55,
+          "renderTargets": 1
+        }
+      }
+    },
+    {
+      "name": "lod",
+      "query": "probe&lod=on&cull=on",
+      "channel": "chromium",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 2.972,
+      "messages": [],
+      "result": {
+        "backend": "WebGPU",
+        "gpu": "nvidia, blackwell, NVIDIA GeForce RTX 5080",
+        "adapter": {
+          "vendor": "nvidia",
+          "architecture": "blackwell",
+          "device": "0x2c02",
+          "description": "NVIDIA GeForce RTX 5080"
+        },
+        "drawingBuffer": "1280x720",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "crossOriginIsolated": true,
+        "lod": true,
+        "cull": true,
+        "count": 1000,
+        "levels": [
+          14360,
+          3590,
+          718
+        ],
+        "stats": {
+          "frames": 240,
+          "cpuMs": {
+            "median": 2.365,
+            "p95": 3.785,
+            "mean": 2.677,
+            "min": 1.08,
+            "max": 68.195
+          },
+          "wallMs": {
+            "median": 6.05,
+            "p95": 8.505,
+            "mean": 6.576,
+            "min": 2.145,
+            "max": 163.805
+          },
+          "gpuMs": {
+            "median": 0.068,
+            "p95": 0.127,
+            "mean": 0.072,
+            "min": 0.009,
+            "max": 0.322
+          },
+          "gpuTimer": "WebGPU timestamp-query"
+        },
+        "pathAverage": {
+          "drawCalls": 334,
+          "triangles": 428091
+        },
+        "counters": {
+          "pathDrawCalls": 80142,
+          "pathTriangles": 102741732,
+          "drawCalls": 1,
+          "triangles": 1
+        },
+        "info": {
+          "drawCalls": 458,
+          "triangles": 534194,
+          "points": 0,
+          "lines": 0,
+          "geometries": 3,
+          "textures": 3,
+          "programs": 4,
+          "texturesMB": 10.55,
+          "renderTargets": 1
+        }
+      }
+    },
+    {
+      "name": "full-nocull",
+      "query": "probe&lod=off&cull=off",
+      "channel": "chromium",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 3.013,
+      "messages": [],
+      "result": {
+        "backend": "WebGPU",
+        "gpu": "nvidia, blackwell, NVIDIA GeForce RTX 5080",
+        "adapter": {
+          "vendor": "nvidia",
+          "architecture": "blackwell",
+          "device": "0x2c02",
+          "description": "NVIDIA GeForce RTX 5080"
+        },
+        "drawingBuffer": "1280x720",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "crossOriginIsolated": true,
+        "lod": false,
+        "cull": false,
+        "count": 1000,
+        "levels": [
+          14360,
+          3590,
+          718
+        ],
+        "stats": {
+          "frames": 240,
+          "cpuMs": {
+            "median": 1.56,
+            "p95": 3.035,
+            "mean": 2.129,
+            "min": 1.07,
+            "max": 83.575
+          },
+          "wallMs": {
+            "median": 6.065,
+            "p95": 7.905,
+            "mean": 7.005,
+            "min": 4.025,
+            "max": 193.805
+          },
+          "gpuMs": {
+            "median": 0.607,
+            "p95": 0.798,
+            "mean": 0.629,
+            "min": 0.598,
+            "max": 1.301
+          },
+          "gpuTimer": "WebGPU timestamp-query"
+        },
+        "pathAverage": {
+          "drawCalls": 1001,
+          "triangles": 14360001
+        },
+        "counters": {
+          "pathDrawCalls": 240240,
+          "pathTriangles": 3446400240,
+          "drawCalls": 1001,
+          "triangles": 14360001
+        },
+        "info": {
+          "drawCalls": 2002,
+          "triangles": 28720002,
+          "points": 0,
+          "lines": 0,
+          "geometries": 2,
+          "textures": 3,
+          "programs": 4,
+          "texturesMB": 10.55,
+          "renderTargets": 1
+        }
+      }
+    },
+    {
+      "name": "lod-nocull",
+      "query": "probe&lod=on&cull=off",
+      "channel": "chromium",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 3.265,
+      "messages": [],
+      "result": {
+        "backend": "WebGPU",
+        "gpu": "nvidia, blackwell, NVIDIA GeForce RTX 5080",
+        "adapter": {
+          "vendor": "nvidia",
+          "architecture": "blackwell",
+          "device": "0x2c02",
+          "description": "NVIDIA GeForce RTX 5080"
+        },
+        "drawingBuffer": "1280x720",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "crossOriginIsolated": true,
+        "lod": true,
+        "cull": false,
+        "count": 1000,
+        "levels": [
+          14360,
+          3590,
+          718
+        ],
+        "stats": {
+          "frames": 240,
+          "cpuMs": {
+            "median": 3.45,
+            "p95": 4.76,
+            "mean": 3.768,
+            "min": 2.085,
+            "max": 59.935
+          },
+          "wallMs": {
+            "median": 7.345,
+            "p95": 9.655,
+            "mean": 7.813,
+            "min": 3.89,
+            "max": 166.585
+          },
+          "gpuMs": {
+            "median": 0.139,
+            "p95": 0.154,
+            "mean": 0.143,
+            "min": 0.096,
+            "max": 0.842
+          },
+          "gpuTimer": "WebGPU timestamp-query"
+        },
+        "pathAverage": {
+          "drawCalls": 1001,
+          "triangles": 1326075
+        },
+        "counters": {
+          "pathDrawCalls": 240240,
+          "pathTriangles": 318258048,
+          "drawCalls": 1001,
+          "triangles": 1079873
+        },
+        "info": {
+          "drawCalls": 2002,
+          "triangles": 2458434,
+          "points": 0,
+          "lines": 0,
+          "geometries": 3,
+          "textures": 3,
+          "programs": 4,
+          "texturesMB": 10.55,
+          "renderTargets": 1
+        }
+      }
+    }
+  ]
+}

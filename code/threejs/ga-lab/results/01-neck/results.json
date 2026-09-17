@@ -1,0 +1,905 @@
+{
+  "experiment": "01-neck",
+  "title": "The neck four ways: one mesh per object, instanced, batched, merged",
+  "hypothesis": "Draw calls drive the CPU time of a frame; the GPU time barely moves, because every strategy draws about the same triangles on an RTX 5080.",
+  "predictions": [
+    {
+      "metric": "drawCalls, 1 neck with the C major chord (WebGPU)",
+      "predicted": "ga 72, instanced 7, batched 4 or fewer, merged 4 or fewer"
+    },
+    {
+      "metric": "median CPU ms per frame, 1 neck, same 1280x720 buffer at pixel ratio 1",
+      "predicted": "ga at least 3x the merged neck; all four under 2 ms"
+    },
+    {
+      "metric": "median CPU ms per frame, 16 necks",
+      "predicted": "ga at least 10 ms; batched and merged under 1.5 ms"
+    },
+    {
+      "metric": "median GPU ms per frame (timestamp-query), 16 necks",
+      "predicted": "the four within 30% of each other"
+    },
+    {
+      "metric": "GA's own pixel ratio (3 at a device pixel ratio of 1) against 1, 1 neck",
+      "predicted": "GPU ms at least 4x"
+    }
+  ],
+  "date": "2026-09-17T04:30:28.972Z",
+  "machine": {
+    "os": "Windows_NT 10.0.26200 x64",
+    "cpu": "Intel(R) Core(TM) Ultra 9 285K",
+    "memoryGB": 64,
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 5080",
+      "driver": "610.88"
+    },
+    "node": "v24.12.0",
+    "three": "0.186.0",
+    "playwright": "1.63.0",
+    "browser": "153.0.8010.12",
+    "chromiumArgs": [
+      "--disable-gpu-vsync",
+      "--disable-frame-rate-limit",
+      "--enable-webgpu-developer-features",
+      "--autoplay-policy=no-user-gesture-required",
+      "--enable-precise-memory-info",
+      "--js-flags=--expose-gc"
+    ]
+  },
+  "runs": [
+    {
+      "name": "ga-1",
+      "query": "probe&strategy=ga&necks=1",
+      "channel": "chromium",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 3.087,
+      "messages": [
+        "console.warning: THREE.Renderer: \"renderAsync()\" has been deprecated. Use \"render()\" and \"await renderer.init();\" when creating the renderer."
+      ],
+      "result": {
+        "backend": "WebGPU",
+        "gpu": "nvidia, blackwell, NVIDIA GeForce RTX 5080",
+        "adapter": {
+          "vendor": "nvidia",
+          "architecture": "blackwell",
+          "device": "0x2c02",
+          "description": "NVIDIA GeForce RTX 5080"
+        },
+        "drawingBuffer": "1200x400",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "crossOriginIsolated": true,
+        "strategy": "ga",
+        "necks": 1,
+        "pixelRatio": 1,
+        "buildMs": 132.3,
+        "firstFrameMs": 5.8,
+        "stats": {
+          "frames": 240,
+          "cpuMs": {
+            "median": 0.715,
+            "p95": 1.04,
+            "mean": 0.76,
+            "min": 0.475,
+            "max": 1.275
+          },
+          "wallMs": {
+            "median": 4.29,
+            "p95": 5.845,
+            "mean": 4.319,
+            "min": 1.165,
+            "max": 6.695
+          },
+          "gpuMs": {
+            "median": 0.017,
+            "p95": 0.018,
+            "mean": 0.017,
+            "min": 0.015,
+            "max": 0.021
+          },
+          "gpuTimer": "WebGPU timestamp-query"
+        },
+        "counters": {
+          "drawCalls": 72,
+          "triangles": 25575,
+          "points": 0,
+          "lines": 0,
+          "geometries": 44,
+          "textures": 32,
+          "programs": 10,
+          "texturesMB": 9.45,
+          "renderTargets": 1
+        },
+        "sceneObjects": 74,
+        "indexedTrianglesInScene": 25516,
+        "info": {
+          "drawCalls": 72,
+          "triangles": 25575,
+          "points": 0,
+          "lines": 0,
+          "geometries": 44,
+          "textures": 32,
+          "programs": 10,
+          "texturesMB": 9.45,
+          "renderTargets": 1
+        }
+      }
+    },
+    {
+      "name": "instanced-1",
+      "query": "probe&strategy=instanced&necks=1",
+      "channel": "chromium",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 2.895,
+      "messages": [
+        "console.warning: THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.",
+        "console.warning: The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127",
+        "console.warning: THREE.Renderer: \"renderAsync()\" has been deprecated. Use \"render()\" and \"await renderer.init();\" when creating the renderer.",
+        "console.warning: THREE.WebGPURenderer: PCFSoftShadowMap has been removed. Using PCFShadowMap instead."
+      ],
+      "result": {
+        "backend": "WebGPU",
+        "gpu": "nvidia, blackwell, NVIDIA GeForce RTX 5080",
+        "adapter": {
+          "vendor": "nvidia",
+          "architecture": "blackwell",
+          "device": "0x2c02",
+          "description": "NVIDIA GeForce RTX 5080"
+        },
+        "drawingBuffer": "1200x400",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "crossOriginIsolated": true,
+        "strategy": "instanced",
+        "necks": 1,
+        "pixelRatio": 1,
+        "buildMs": 249.8,
+        "firstFrameMs": 50.6,
+        "stats": {
+          "frames": 240,
+          "cpuMs": {
+            "median": 0.405,
+            "p95": 0.58,
+            "mean": 0.417,
+            "min": 0.22,
+            "max": 0.78
+          },
+          "wallMs": {
+            "median": 3.88,
+            "p95": 5.865,
+            "mean": 3.925,
+            "min": 0.775,
+            "max": 6.925
+          },
+          "gpuMs": {
+            "median": 0.012,
+            "p95": 0.013,
+            "mean": 0.012,
+            "min": 0.01,
+            "max": 0.014
+          },
+          "gpuTimer": "WebGPU timestamp-query"
+        },
+        "counters": {
+          "drawCalls": 7,
+          "triangles": 11919,
+          "points": 0,
+          "lines": 0,
+          "geometries": 7,
+          "textures": 4,
+          "programs": 13,
+          "texturesMB": 8.16,
+          "renderTargets": 1
+        },
+        "sceneObjects": 11,
+        "indexedTrianglesInScene": 11918,
+        "info": {
+          "drawCalls": 7,
+          "triangles": 11919,
+          "points": 0,
+          "lines": 0,
+          "geometries": 7,
+          "textures": 4,
+          "programs": 13,
+          "texturesMB": 8.16,
+          "renderTargets": 1
+        }
+      }
+    },
+    {
+      "name": "batched-1",
+      "query": "probe&strategy=batched&necks=1",
+      "channel": "chromium",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 2.602,
+      "messages": [
+        "console.warning: THREE.Renderer: \"renderAsync()\" has been deprecated. Use \"render()\" and \"await renderer.init();\" when creating the renderer."
+      ],
+      "result": {
+        "backend": "WebGPU",
+        "gpu": "nvidia, blackwell, NVIDIA GeForce RTX 5080",
+        "adapter": {
+          "vendor": "nvidia",
+          "architecture": "blackwell",
+          "device": "0x2c02",
+          "description": "NVIDIA GeForce RTX 5080"
+        },
+        "drawingBuffer": "1200x400",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "crossOriginIsolated": true,
+        "strategy": "batched",
+        "necks": 1,
+        "pixelRatio": 1,
+        "buildMs": 8.3,
+        "firstFrameMs": 45.2,
+        "stats": {
+          "frames": 240,
+          "cpuMs": {
+            "median": 0.385,
+            "p95": 0.585,
+            "mean": 0.397,
+            "min": 0.175,
+            "max": 0.72
+          },
+          "wallMs": {
+            "median": 3.8,
+            "p95": 6.02,
+            "mean": 3.831,
+            "min": 0.77,
+            "max": 7.2
+          },
+          "gpuMs": {
+            "median": 0.011,
+            "p95": 0.013,
+            "mean": 0.011,
+            "min": 0.008,
+            "max": 0.013
+          },
+          "gpuTimer": "WebGPU timestamp-query"
+        },
+        "counters": {
+          "drawCalls": 44,
+          "triangles": 11919,
+          "points": 0,
+          "lines": 0,
+          "geometries": 3,
+          "textures": 7,
+          "programs": 6,
+          "texturesMB": 8.16,
+          "renderTargets": 1
+        },
+        "sceneObjects": 5,
+        "indexedTrianglesInScene": 1622,
+        "info": {
+          "drawCalls": 44,
+          "triangles": 11919,
+          "points": 0,
+          "lines": 0,
+          "geometries": 3,
+          "textures": 7,
+          "programs": 6,
+          "texturesMB": 8.16,
+          "renderTargets": 1
+        }
+      }
+    },
+    {
+      "name": "merged-1",
+      "query": "probe&strategy=merged&necks=1",
+      "channel": "chromium",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 2.528,
+      "messages": [
+        "console.warning: THREE.Renderer: \"renderAsync()\" has been deprecated. Use \"render()\" and \"await renderer.init();\" when creating the renderer."
+      ],
+      "result": {
+        "backend": "WebGPU",
+        "gpu": "nvidia, blackwell, NVIDIA GeForce RTX 5080",
+        "adapter": {
+          "vendor": "nvidia",
+          "architecture": "blackwell",
+          "device": "0x2c02",
+          "description": "NVIDIA GeForce RTX 5080"
+        },
+        "drawingBuffer": "1200x400",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "crossOriginIsolated": true,
+        "strategy": "merged",
+        "necks": 1,
+        "pixelRatio": 1,
+        "buildMs": 12.7,
+        "firstFrameMs": 39.3,
+        "stats": {
+          "frames": 240,
+          "cpuMs": {
+            "median": 0.315,
+            "p95": 0.465,
+            "mean": 0.328,
+            "min": 0.15,
+            "max": 2.635
+          },
+          "wallMs": {
+            "median": 3.625,
+            "p95": 5.535,
+            "mean": 3.772,
+            "min": 0.6,
+            "max": 7.035
+          },
+          "gpuMs": {
+            "median": 0.012,
+            "p95": 0.015,
+            "mean": 0.012,
+            "min": 0.009,
+            "max": 0.017
+          },
+          "gpuTimer": "WebGPU timestamp-query"
+        },
+        "counters": {
+          "drawCalls": 4,
+          "triangles": 11919,
+          "points": 0,
+          "lines": 0,
+          "geometries": 4,
+          "textures": 4,
+          "programs": 8,
+          "texturesMB": 8.16,
+          "renderTargets": 1
+        },
+        "sceneObjects": 6,
+        "indexedTrianglesInScene": 11918,
+        "info": {
+          "drawCalls": 4,
+          "triangles": 11919,
+          "points": 0,
+          "lines": 0,
+          "geometries": 4,
+          "textures": 4,
+          "programs": 8,
+          "texturesMB": 8.16,
+          "renderTargets": 1
+        }
+      }
+    },
+    {
+      "name": "ga-16",
+      "query": "probe&strategy=ga&necks=16",
+      "channel": "chromium",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 3.65,
+      "messages": [
+        "console.warning: THREE.Renderer: \"renderAsync()\" has been deprecated. Use \"render()\" and \"await renderer.init();\" when creating the renderer."
+      ],
+      "result": {
+        "backend": "WebGPU",
+        "gpu": "nvidia, blackwell, NVIDIA GeForce RTX 5080",
+        "adapter": {
+          "vendor": "nvidia",
+          "architecture": "blackwell",
+          "device": "0x2c02",
+          "description": "NVIDIA GeForce RTX 5080"
+        },
+        "drawingBuffer": "1200x400",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "crossOriginIsolated": true,
+        "strategy": "ga",
+        "necks": 16,
+        "pixelRatio": 1,
+        "buildMs": 150.3,
+        "firstFrameMs": 45.6,
+        "stats": {
+          "frames": 240,
+          "cpuMs": {
+            "median": 2.91,
+            "p95": 4.675,
+            "mean": 3.135,
+            "min": 1.785,
+            "max": 5.905
+          },
+          "wallMs": {
+            "median": 6.975,
+            "p95": 10.015,
+            "mean": 6.924,
+            "min": 2.87,
+            "max": 10.945
+          },
+          "gpuMs": {
+            "median": 0.134,
+            "p95": 0.139,
+            "mean": 0.135,
+            "min": 0.13,
+            "max": 0.302
+          },
+          "gpuTimer": "WebGPU timestamp-query"
+        },
+        "counters": {
+          "drawCalls": 1137,
+          "triangles": 409185,
+          "points": 0,
+          "lines": 0,
+          "geometries": 44,
+          "textures": 32,
+          "programs": 10,
+          "texturesMB": 9.45,
+          "renderTargets": 1
+        },
+        "sceneObjects": 1154,
+        "indexedTrianglesInScene": 408256,
+        "info": {
+          "drawCalls": 1137,
+          "triangles": 409185,
+          "points": 0,
+          "lines": 0,
+          "geometries": 44,
+          "textures": 32,
+          "programs": 10,
+          "texturesMB": 9.45,
+          "renderTargets": 1
+        }
+      }
+    },
+    {
+      "name": "instanced-16",
+      "query": "probe&strategy=instanced&necks=16",
+      "channel": "chromium",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 4.158,
+      "messages": [
+        "console.warning: THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.",
+        "console.warning: The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127",
+        "console.warning: THREE.Renderer: \"renderAsync()\" has been deprecated. Use \"render()\" and \"await renderer.init();\" when creating the renderer.",
+        "console.warning: THREE.WebGPURenderer: PCFSoftShadowMap has been removed. Using PCFShadowMap instead."
+      ],
+      "result": {
+        "backend": "WebGPU",
+        "gpu": "nvidia, blackwell, NVIDIA GeForce RTX 5080",
+        "adapter": {
+          "vendor": "nvidia",
+          "architecture": "blackwell",
+          "device": "0x2c02",
+          "description": "NVIDIA GeForce RTX 5080"
+        },
+        "drawingBuffer": "1200x400",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "crossOriginIsolated": true,
+        "strategy": "instanced",
+        "necks": 16,
+        "pixelRatio": 1,
+        "buildMs": 262.5,
+        "firstFrameMs": 206.7,
+        "stats": {
+          "frames": 240,
+          "cpuMs": {
+            "median": 1.155,
+            "p95": 1.585,
+            "mean": 1.161,
+            "min": 0.645,
+            "max": 3.475
+          },
+          "wallMs": {
+            "median": 4.94,
+            "p95": 7.245,
+            "mean": 4.721,
+            "min": 1.67,
+            "max": 8.425
+          },
+          "gpuMs": {
+            "median": 0.026,
+            "p95": 0.029,
+            "mean": 0.027,
+            "min": 0.024,
+            "max": 0.031
+          },
+          "gpuTimer": "WebGPU timestamp-query"
+        },
+        "counters": {
+          "drawCalls": 97,
+          "triangles": 190689,
+          "points": 0,
+          "lines": 0,
+          "geometries": 97,
+          "textures": 19,
+          "programs": 73,
+          "texturesMB": 48.15,
+          "renderTargets": 1
+        },
+        "sceneObjects": 131,
+        "indexedTrianglesInScene": 190688,
+        "info": {
+          "drawCalls": 97,
+          "triangles": 190689,
+          "points": 0,
+          "lines": 0,
+          "geometries": 97,
+          "textures": 19,
+          "programs": 73,
+          "texturesMB": 48.15,
+          "renderTargets": 1
+        }
+      }
+    },
+    {
+      "name": "batched-16",
+      "query": "probe&strategy=batched&necks=16",
+      "channel": "chromium",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 2.713,
+      "messages": [
+        "console.warning: THREE.Renderer: \"renderAsync()\" has been deprecated. Use \"render()\" and \"await renderer.init();\" when creating the renderer."
+      ],
+      "result": {
+        "backend": "WebGPU",
+        "gpu": "nvidia, blackwell, NVIDIA GeForce RTX 5080",
+        "adapter": {
+          "vendor": "nvidia",
+          "architecture": "blackwell",
+          "device": "0x2c02",
+          "description": "NVIDIA GeForce RTX 5080"
+        },
+        "drawingBuffer": "1200x400",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "crossOriginIsolated": true,
+        "strategy": "batched",
+        "necks": 16,
+        "pixelRatio": 1,
+        "buildMs": 10.2,
+        "firstFrameMs": 39,
+        "stats": {
+          "frames": 240,
+          "cpuMs": {
+            "median": 0.415,
+            "p95": 0.52,
+            "mean": 0.408,
+            "min": 0.23,
+            "max": 0.655
+          },
+          "wallMs": {
+            "median": 3.725,
+            "p95": 5.4,
+            "mean": 3.68,
+            "min": 0.72,
+            "max": 6.825
+          },
+          "gpuMs": {
+            "median": 0.023,
+            "p95": 0.025,
+            "mean": 0.023,
+            "min": 0.02,
+            "max": 0.031
+          },
+          "gpuTimer": "WebGPU timestamp-query"
+        },
+        "counters": {
+          "drawCalls": 689,
+          "triangles": 190689,
+          "points": 0,
+          "lines": 0,
+          "geometries": 3,
+          "textures": 7,
+          "programs": 6,
+          "texturesMB": 8.21,
+          "renderTargets": 1
+        },
+        "sceneObjects": 20,
+        "indexedTrianglesInScene": 1652,
+        "info": {
+          "drawCalls": 689,
+          "triangles": 190689,
+          "points": 0,
+          "lines": 0,
+          "geometries": 3,
+          "textures": 7,
+          "programs": 6,
+          "texturesMB": 8.21,
+          "renderTargets": 1
+        }
+      }
+    },
+    {
+      "name": "merged-16",
+      "query": "probe&strategy=merged&necks=16",
+      "channel": "chromium",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 2.479,
+      "messages": [
+        "console.warning: THREE.Renderer: \"renderAsync()\" has been deprecated. Use \"render()\" and \"await renderer.init();\" when creating the renderer."
+      ],
+      "result": {
+        "backend": "WebGPU",
+        "gpu": "nvidia, blackwell, NVIDIA GeForce RTX 5080",
+        "adapter": {
+          "vendor": "nvidia",
+          "architecture": "blackwell",
+          "device": "0x2c02",
+          "description": "NVIDIA GeForce RTX 5080"
+        },
+        "drawingBuffer": "1200x400",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "crossOriginIsolated": true,
+        "strategy": "merged",
+        "necks": 16,
+        "pixelRatio": 1,
+        "buildMs": 48.9,
+        "firstFrameMs": 46.6,
+        "stats": {
+          "frames": 240,
+          "cpuMs": {
+            "median": 0.36,
+            "p95": 0.535,
+            "mean": 0.369,
+            "min": 0.18,
+            "max": 0.835
+          },
+          "wallMs": {
+            "median": 3.725,
+            "p95": 4.97,
+            "mean": 3.535,
+            "min": 0.65,
+            "max": 6.795
+          },
+          "gpuMs": {
+            "median": 0.025,
+            "p95": 0.026,
+            "mean": 0.025,
+            "min": 0.022,
+            "max": 0.223
+          },
+          "gpuTimer": "WebGPU timestamp-query"
+        },
+        "counters": {
+          "drawCalls": 19,
+          "triangles": 190689,
+          "points": 0,
+          "lines": 0,
+          "geometries": 4,
+          "textures": 4,
+          "programs": 8,
+          "texturesMB": 8.16,
+          "renderTargets": 1
+        },
+        "sceneObjects": 21,
+        "indexedTrianglesInScene": 190688,
+        "info": {
+          "drawCalls": 19,
+          "triangles": 190689,
+          "points": 0,
+          "lines": 0,
+          "geometries": 4,
+          "textures": 4,
+          "programs": 8,
+          "texturesMB": 8.16,
+          "renderTargets": 1
+        }
+      }
+    },
+    {
+      "name": "ga-1-pr3",
+      "query": "probe&strategy=ga&necks=1&pr=3",
+      "channel": "chromium",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 3.328,
+      "messages": [
+        "console.warning: THREE.Renderer: \"renderAsync()\" has been deprecated. Use \"render()\" and \"await renderer.init();\" when creating the renderer."
+      ],
+      "result": {
+        "backend": "WebGPU",
+        "gpu": "nvidia, blackwell, NVIDIA GeForce RTX 5080",
+        "adapter": {
+          "vendor": "nvidia",
+          "architecture": "blackwell",
+          "device": "0x2c02",
+          "description": "NVIDIA GeForce RTX 5080"
+        },
+        "drawingBuffer": "3600x1200",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "crossOriginIsolated": true,
+        "strategy": "ga",
+        "necks": 1,
+        "pixelRatio": 3,
+        "buildMs": 137.5,
+        "firstFrameMs": 4.2,
+        "stats": {
+          "frames": 240,
+          "cpuMs": {
+            "median": 0.63,
+            "p95": 1.015,
+            "mean": 0.658,
+            "min": 0.285,
+            "max": 1.24
+          },
+          "wallMs": {
+            "median": 4.275,
+            "p95": 6,
+            "mean": 4.349,
+            "min": 1.23,
+            "max": 7.805
+          },
+          "gpuMs": {
+            "median": 0.04,
+            "p95": 0.041,
+            "mean": 0.04,
+            "min": 0.039,
+            "max": 0.06
+          },
+          "gpuTimer": "WebGPU timestamp-query"
+        },
+        "counters": {
+          "drawCalls": 72,
+          "triangles": 25575,
+          "points": 0,
+          "lines": 0,
+          "geometries": 44,
+          "textures": 32,
+          "programs": 10,
+          "texturesMB": 53.4,
+          "renderTargets": 1
+        },
+        "sceneObjects": 74,
+        "indexedTrianglesInScene": 25516,
+        "info": {
+          "drawCalls": 72,
+          "triangles": 25575,
+          "points": 0,
+          "lines": 0,
+          "geometries": 44,
+          "textures": 32,
+          "programs": 10,
+          "texturesMB": 53.4,
+          "renderTargets": 1
+        }
+      }
+    },
+    {
+      "name": "ga-1-webgl",
+      "query": "probe&webgl&strategy=ga&necks=1",
+      "channel": "chromium",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 2.453,
+      "messages": [
+        "console.warning: THREE.Renderer: \"renderAsync()\" has been deprecated. Use \"render()\" and \"await renderer.init();\" when creating the renderer."
+      ],
+      "result": {
+        "backend": "WebGL 2",
+        "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "adapter": null,
+        "drawingBuffer": "1200x400",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "crossOriginIsolated": true,
+        "strategy": "ga",
+        "necks": 1,
+        "pixelRatio": 1,
+        "buildMs": 37.6,
+        "firstFrameMs": 4.6,
+        "stats": {
+          "frames": 240,
+          "cpuMs": {
+            "median": 0.59,
+            "p95": 0.845,
+            "mean": 0.599,
+            "min": 0.335,
+            "max": 1.28
+          },
+          "wallMs": {
+            "median": 1.435,
+            "p95": 2.155,
+            "mean": 1.487,
+            "min": 0.91,
+            "max": 3.325
+          },
+          "gpuMs": {
+            "median": 0.052,
+            "p95": 0.34,
+            "mean": 0.106,
+            "min": 0.043,
+            "max": 0.611
+          },
+          "gpuTimer": "EXT_disjoint_timer_query_webgl2"
+        },
+        "counters": {
+          "drawCalls": 72,
+          "triangles": 25575,
+          "points": 0,
+          "lines": 0,
+          "geometries": 44,
+          "textures": 32,
+          "programs": 10,
+          "texturesMB": 9.45,
+          "renderTargets": 1
+        },
+        "sceneObjects": 74,
+        "indexedTrianglesInScene": 25516,
+        "info": {
+          "drawCalls": 72,
+          "triangles": 25575,
+          "points": 0,
+          "lines": 0,
+          "geometries": 44,
+          "textures": 32,
+          "programs": 10,
+          "texturesMB": 9.45,
+          "renderTargets": 1
+        }
+      }
+    },
+    {
+      "name": "merged-1-webgl",
+      "query": "probe&webgl&strategy=merged&necks=1",
+      "channel": "chromium",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 2.134,
+      "messages": [
+        "console.warning: THREE.Renderer: \"renderAsync()\" has been deprecated. Use \"render()\" and \"await renderer.init();\" when creating the renderer."
+      ],
+      "result": {
+        "backend": "WebGL 2",
+        "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "adapter": null,
+        "drawingBuffer": "1200x400",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "crossOriginIsolated": true,
+        "strategy": "merged",
+        "necks": 1,
+        "pixelRatio": 1,
+        "buildMs": 14.4,
+        "firstFrameMs": 117.7,
+        "stats": {
+          "frames": 240,
+          "cpuMs": {
+            "median": 0.265,
+            "p95": 0.415,
+            "mean": 0.276,
+            "min": 0.115,
+            "max": 0.88
+          },
+          "wallMs": {
+            "median": 0.915,
+            "p95": 1.475,
+            "mean": 0.968,
+            "min": 0.455,
+            "max": 3.99
+          },
+          "gpuMs": {
+            "median": 0.041,
+            "p95": 0.053,
+            "mean": 0.044,
+            "min": 0.029,
+            "max": 0.237
+          },
+          "gpuTimer": "EXT_disjoint_timer_query_webgl2"
+        },
+        "counters": {
+          "drawCalls": 4,
+          "triangles": 11919,
+          "points": 0,
+          "lines": 0,
+          "geometries": 4,
+          "textures": 4,
+          "programs": 8,
+          "texturesMB": 8.16,
+          "renderTargets": 1
+        },
+        "sceneObjects": 6,
+        "indexedTrianglesInScene": 11918,
+        "info": {
+          "drawCalls": 4,
+          "triangles": 11919,
+          "points": 0,
+          "lines": 0,
+          "geometries": 4,
+          "textures": 4,
+          "programs": 8,
+          "texturesMB": 8.16,
+          "renderTargets": 1
+        }
+      }
+    }
+  ]
+}

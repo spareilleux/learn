@@ -1,0 +1,252 @@
+{
+  "experiment": "14-r3f-vs-vanilla",
+  "title": "React Three Fiber against vanilla three.js on the same GA scene",
+  "hypothesis": "R3F's per-frame overhead is small next to renderer.render(); its cost is at startup and in the bundle (React, ReactDOM, R3F).",
+  "predictions": [
+    {
+      "metric": "median CPU ms per frame, R3F minus vanilla",
+      "predicted": "under 0.3 ms"
+    },
+    {
+      "metric": "time to first frame, R3F minus vanilla",
+      "predicted": "30 to 150 ms"
+    },
+    {
+      "metric": "production bundle, gzip, R3F page minus vanilla page (three.js chunks excluded)",
+      "predicted": "50 to 90 kB"
+    },
+    {
+      "metric": "drawCalls",
+      "predicted": "equal"
+    }
+  ],
+  "date": "2026-09-17T04:43:05.928Z",
+  "machine": {
+    "os": "Windows_NT 10.0.26200 x64",
+    "cpu": "Intel(R) Core(TM) Ultra 9 285K",
+    "memoryGB": 64,
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 5080",
+      "driver": "610.88"
+    },
+    "node": "v24.12.0",
+    "three": "0.186.0",
+    "playwright": "1.63.0",
+    "browser": null,
+    "chromiumArgs": [
+      "--disable-gpu-vsync",
+      "--disable-frame-rate-limit",
+      "--enable-webgpu-developer-features",
+      "--autoplay-policy=no-user-gesture-required",
+      "--enable-precise-memory-info",
+      "--js-flags=--expose-gc"
+    ]
+  },
+  "runs": [
+    {
+      "name": "r3f",
+      "query": "probe&impl=r3f",
+      "channel": "chromium",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 3.131,
+      "messages": [
+        "console.warning: THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.",
+        "console.warning: The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127",
+        "console.warning: THREE.WebGPURenderer: PCFSoftShadowMap has been removed. Using PCFShadowMap instead."
+      ],
+      "result": {
+        "backend": "WebGPU",
+        "gpu": "nvidia, blackwell, NVIDIA GeForce RTX 5080",
+        "adapter": {
+          "vendor": "nvidia",
+          "architecture": "blackwell",
+          "device": "0x2c02",
+          "description": "NVIDIA GeForce RTX 5080"
+        },
+        "drawingBuffer": "1200x400",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "crossOriginIsolated": true,
+        "impl": "r3f",
+        "firstFrameSinceNavigationMs": 958,
+        "heapMB": {
+          "beforeScene": 20.68,
+          "afterFrames": 36.96
+        },
+        "stats": {
+          "frames": 240,
+          "cpuMs": {
+            "median": 0.4,
+            "p95": 0.635,
+            "mean": 0.427,
+            "min": 0.2,
+            "max": 1.565
+          },
+          "wallMs": {
+            "median": 3.82,
+            "p95": 5.98,
+            "mean": 3.929,
+            "min": 0.88,
+            "max": 8.095
+          },
+          "gpuMs": {
+            "median": 0.014,
+            "p95": 0.015,
+            "mean": 0.013,
+            "min": 0.011,
+            "max": 0.02
+          },
+          "gpuTimer": "WebGPU timestamp-query"
+        },
+        "counters": {
+          "drawCalls": 7,
+          "triangles": 11919,
+          "geometries": 7,
+          "textures": 4
+        },
+        "info": {
+          "drawCalls": 7,
+          "triangles": 11919,
+          "points": 0,
+          "lines": 0,
+          "geometries": 7,
+          "textures": 4,
+          "programs": 13,
+          "texturesMB": 8.16,
+          "renderTargets": 1
+        }
+      }
+    },
+    {
+      "name": "vanilla",
+      "query": "probe&impl=vanilla",
+      "channel": "chromium",
+      "headed": false,
+      "vsync": false,
+      "wallSeconds": 2.654,
+      "messages": [],
+      "result": {
+        "backend": "WebGPU",
+        "gpu": "nvidia, blackwell, NVIDIA GeForce RTX 5080",
+        "adapter": {
+          "vendor": "nvidia",
+          "architecture": "blackwell",
+          "device": "0x2c02",
+          "description": "NVIDIA GeForce RTX 5080"
+        },
+        "drawingBuffer": "1200x400",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "crossOriginIsolated": true,
+        "impl": "vanilla",
+        "firstFrameSinceNavigationMs": 528,
+        "heapMB": {
+          "beforeScene": 20.68,
+          "afterFrames": 26.98
+        },
+        "stats": {
+          "frames": 240,
+          "cpuMs": {
+            "median": 0.355,
+            "p95": 0.53,
+            "mean": 0.367,
+            "min": 0.16,
+            "max": 0.77
+          },
+          "wallMs": {
+            "median": 3.675,
+            "p95": 5.26,
+            "mean": 3.767,
+            "min": 0.72,
+            "max": 5.905
+          },
+          "gpuMs": {
+            "median": 0.014,
+            "p95": 0.016,
+            "mean": 0.014,
+            "min": 0.011,
+            "max": 0.017
+          },
+          "gpuTimer": "WebGPU timestamp-query"
+        },
+        "counters": {
+          "drawCalls": 7,
+          "triangles": 11919,
+          "geometries": 7,
+          "textures": 4
+        },
+        "info": {
+          "drawCalls": 7,
+          "triangles": 11919,
+          "points": 0,
+          "lines": 0,
+          "geometries": 7,
+          "textures": 4,
+          "programs": 11,
+          "texturesMB": 8.16,
+          "renderTargets": 1
+        }
+      }
+    },
+    {
+      "name": "bundle-sizes",
+      "args": [],
+      "wallSeconds": 0.715,
+      "result": {
+        "r3f": {
+          "files": [
+            {
+              "file": "r3f.js",
+              "bytes": 667405,
+              "gzip": 199443
+            },
+            {
+              "file": "rolldown-runtime.js",
+              "bytes": 716,
+              "gzip": 428
+            },
+            {
+              "file": "three.core.js",
+              "bytes": 377553,
+              "gzip": 99963
+            },
+            {
+              "file": "three.module.js",
+              "bytes": 365029,
+              "gzip": 88720
+            },
+            {
+              "file": "three.tsl.js",
+              "bytes": 686103,
+              "gzip": 189784
+            }
+          ],
+          "totalKB": 2048,
+          "totalGzipKB": 565,
+          "withoutThreeGzipKB": 195
+        },
+        "vanilla": {
+          "files": [
+            {
+              "file": "three.core.js",
+              "bytes": 206685,
+              "gzip": 53066
+            },
+            {
+              "file": "three.webgpu.js",
+              "bytes": 581166,
+              "gzip": 160687
+            },
+            {
+              "file": "vanilla.js",
+              "bytes": 3130,
+              "gzip": 1632
+            }
+          ],
+          "totalKB": 772,
+          "totalGzipKB": 210,
+          "withoutThreeGzipKB": 2
+        }
+      }
+    }
+  ]
+}
