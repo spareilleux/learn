@@ -139,6 +139,7 @@ Nothing below has been reported to GA.
 - The guitar is modeled in code: no glTF guitar with a known license was available. 47,405 triangles in 32 draw calls; instancing for the frets, inlays, pole pieces, saddles, knobs and tuners.
 - Rapier's `body.handle` is a float that packs an index and a generation: `handle % 8` is not a palette index; each pick now keeps the color of its throw number. And colors set with `setColorAt` reached the GPU only in a frame of `setAnimationLoop`: a probe that called `render()` itself saw white picks. In r186, `InstanceNode` uploads them in its per-frame update.
 - The VR page uses the classic `WebGLRenderer`, as lesson 11 found necessary with IWER. During a session, its `resize` listener must do nothing: `WebGLRenderer` warns "Can't change size while VR device is presenting".
+- On a phone-sized page (Playwright's Pixel 7 emulation), the frames first measured 150 pixels tall: the site's styles override the iframe's `height` attribute, so the height is now an inline style, `min(420px, 70vh)`. The panel starts folded in a narrow frame. With a 4× CPU slowdown but the author's desktop GPU, the five scenes held 60 frames per second on WebGPU and with `?webgl`; on a real mid-range phone GPU it is *to verify*.
 - The first probe of a page that imports a new dependency failed with "Execution context was destroyed": Vite optimized the dependency and reloaded the page. The second run passed.
 
 ## To verify
