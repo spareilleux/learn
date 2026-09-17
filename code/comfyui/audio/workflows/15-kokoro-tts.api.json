@@ -1,0 +1,31 @@
+{
+  "1": {
+    "class_type": "KokoroSpeaker",
+    "inputs": {
+      "speaker_name": "ff_siwis"
+    }
+  },
+  "2": {
+    "class_type": "KokoroGenerator",
+    "inputs": {
+      "text": "Bienvenue dans la leçon quinze.",
+      "speaker": [
+        "1",
+        0
+      ],
+      "speed": 1.0,
+      "lang": "French"
+    }
+  },
+  "3": {
+    "class_type": "SaveAudioAdvanced",
+    "inputs": {
+      "audio": [
+        "2",
+        0
+      ],
+      "filename_prefix": "l15/kokoro",
+      "format": "flac"
+    }
+  }
+}

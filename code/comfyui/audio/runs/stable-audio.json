@@ -1,0 +1,79 @@
+[
+  {
+    "name": "pick-seed1",
+    "workflow": "../workflows/15-stable-audio-sfx.api.json",
+    "set": [
+      "3.text=a single guitar pick plucking one steel acoustic guitar string, close microphone, dry",
+      "5.seconds=4.0",
+      "6.seed=1",
+      "1.ckpt_name=stable_audio_3_small_sfx.safetensors",
+      "8.filename_prefix=l15/pick-seed1"
+    ]
+  },
+  {
+    "name": "pick-seed2",
+    "workflow": "../workflows/15-stable-audio-sfx.api.json",
+    "set": [
+      "3.text=a single guitar pick plucking one steel acoustic guitar string, close microphone, dry",
+      "5.seconds=4.0",
+      "6.seed=2",
+      "1.ckpt_name=stable_audio_3_small_sfx.safetensors",
+      "8.filename_prefix=l15/pick-seed2"
+    ]
+  },
+  {
+    "name": "fret-squeak",
+    "workflow": "../workflows/15-stable-audio-sfx.api.json",
+    "set": [
+      "3.text=fingers sliding along wound acoustic guitar strings, fret squeak, close microphone",
+      "5.seconds=3.0",
+      "6.seed=1",
+      "1.ckpt_name=stable_audio_3_small_sfx.safetensors",
+      "8.filename_prefix=l15/fret-squeak"
+    ]
+  },
+  {
+    "name": "studio-room",
+    "workflow": "../workflows/15-stable-audio-sfx.api.json",
+    "set": [
+      "3.text=quiet recording studio room tone, soft air conditioning hum, distant muffled footsteps",
+      "5.seconds=10.0",
+      "6.seed=1",
+      "1.ckpt_name=stable_audio_3_small_sfx.safetensors",
+      "8.filename_prefix=l15/studio-room"
+    ]
+  },
+  {
+    "name": "music-loop-100",
+    "workflow": "../workflows/15-stable-audio-sfx.api.json",
+    "set": [
+      "3.text=acoustic guitar loop, 100 BPM, C major, fingerpicked",
+      "5.seconds=10.0",
+      "6.seed=1",
+      "1.ckpt_name=stable_audio_3_small_music.safetensors",
+      "8.filename_prefix=l15/music-loop-100"
+    ]
+  },
+  {
+    "name": "music-loop-100-seed2",
+    "workflow": "../workflows/15-stable-audio-sfx.api.json",
+    "set": [
+      "3.text=acoustic guitar loop, 100 BPM, C major, fingerpicked",
+      "5.seconds=10.0",
+      "6.seed=2",
+      "1.ckpt_name=stable_audio_3_small_music.safetensors",
+      "8.filename_prefix=l15/music-loop-100-seed2"
+    ]
+  },
+  {
+    "name": "sfx-model-music-prompt",
+    "workflow": "../workflows/15-stable-audio-sfx.api.json",
+    "set": [
+      "3.text=acoustic guitar loop, 100 BPM, C major, fingerpicked",
+      "5.seconds=10.0",
+      "6.seed=1",
+      "1.ckpt_name=stable_audio_3_small_sfx.safetensors",
+      "8.filename_prefix=l15/sfx-model-music-prompt"
+    ]
+  }
+]

@@ -1,0 +1,92 @@
+[
+  {
+    "name": "kokoro-en-1",
+    "workflow": "../workflows/15-kokoro-tts.api.json",
+    "set": [
+      "1.speaker_name=af_heart",
+      "2.text=Welcome to lesson fifteen. A C major seven chord stacks a major third, a perfect fifth and a major seventh on the root.",
+      "2.lang=\"English\"",
+      "3.filename_prefix=l15/kokoro-en-1"
+    ]
+  },
+  {
+    "name": "kokoro-en-2",
+    "workflow": "../workflows/15-kokoro-tts.api.json",
+    "set": [
+      "1.speaker_name=af_heart",
+      "2.text=The sampler removes noise from the latent in eight steps, then the VAE decodes it into a waveform.",
+      "2.lang=\"English\"",
+      "3.filename_prefix=l15/kokoro-en-2"
+    ]
+  },
+  {
+    "name": "kokoro-en-3",
+    "workflow": "../workflows/15-kokoro-tts.api.json",
+    "set": [
+      "1.speaker_name=af_heart",
+      "2.text=Save the workflow as JSON, queue it through the API, and download the file when the history says it is done.",
+      "2.lang=\"English\"",
+      "3.filename_prefix=l15/kokoro-en-3"
+    ]
+  },
+  {
+    "name": "kokoro-fr-1",
+    "workflow": "../workflows/15-kokoro-tts.api.json",
+    "set": [
+      "1.speaker_name=ff_siwis",
+      "2.text=Bienvenue dans la leçon quinze. Un accord de do majeur sept empile une tierce majeure, une quinte juste et une septième majeure sur la fondamentale.",
+      "2.lang=\"French\"",
+      "3.filename_prefix=l15/kokoro-fr-1"
+    ]
+  },
+  {
+    "name": "kokoro-fr-2",
+    "workflow": "../workflows/15-kokoro-tts.api.json",
+    "set": [
+      "1.speaker_name=ff_siwis",
+      "2.text=L'échantillonneur retire le bruit du latent en huit étapes, puis le VAE le décode en forme d'onde.",
+      "2.lang=\"French\"",
+      "3.filename_prefix=l15/kokoro-fr-2"
+    ]
+  },
+  {
+    "name": "kokoro-fr-3",
+    "workflow": "../workflows/15-kokoro-tts.api.json",
+    "set": [
+      "1.speaker_name=ff_siwis",
+      "2.text=Enregistrez le workflow en JSON, mettez-le en file par l'API, et téléchargez le fichier quand l'historique indique qu'il est terminé.",
+      "2.lang=\"French\"",
+      "3.filename_prefix=l15/kokoro-fr-3"
+    ]
+  },
+  {
+    "name": "kokoro-es-1",
+    "workflow": "../workflows/15-kokoro-tts.api.json",
+    "set": [
+      "1.speaker_name=ef_dora",
+      "2.text=Bienvenidos a la lección quince. Un acorde de do mayor siete apila una tercera mayor, una quinta justa y una séptima mayor sobre la fundamental.",
+      "2.lang=\"Spanish\"",
+      "3.filename_prefix=l15/kokoro-es-1"
+    ]
+  },
+  {
+    "name": "kokoro-es-2",
+    "workflow": "../workflows/15-kokoro-tts.api.json",
+    "set": [
+      "1.speaker_name=ef_dora",
+      "2.text=El muestreador quita el ruido del latente en ocho pasos, y luego el VAE lo decodifica en una forma de onda.",
+      "2.lang=\"Spanish\"",
+      "3.filename_prefix=l15/kokoro-es-2"
+    ]
+  },
+  {
+    "name": "kokoro-es-3",
+    "workflow": "../workflows/15-kokoro-tts.api.json",
+    "set": [
+      "1.speaker_name=ef_dora",
+      "2.text=Guarda el flujo de trabajo en JSON, ponlo en la cola con la API y descarga el archivo cuando el historial diga que ha terminado.",
+      "2.lang=\"Spanish\"",
+      "3.filename_prefix=l15/kokoro-es-3"
+    ]
+  }
+]

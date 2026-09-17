@@ -1,0 +1,8 @@
+# Lesson 15's analysis tools and their tests; the versions the lesson's measurements used.
+# pipeline.py and validate.py need only the standard library. wer.py also needs faster-whisper==1.2.1 (not in CI).
+librosa==1.0.0
+numpy==2.5.3
+scipy==1.18.1
+numba==0.67.0
+soundfile==0.14.0
+soxr==1.1.0

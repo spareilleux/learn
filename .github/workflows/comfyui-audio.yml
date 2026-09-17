@@ -1,0 +1,74 @@
+# ComfyUI course, lesson 15 (audio): what runs without a GPU and without a model.
+# unit: the audio workflows against node definitions saved from /object_info, the pipeline against a fake server with
+# ffmpeg (-16 LUFS, Opus), WER arithmetic, and key and tempo estimates on a synthetic signal, on three OSes.
+# server: on Ubuntu, a real ComfyUI v0.36.0 on the CPU, and the pipeline on a workflow that needs no model.
+# The music, sound effects and speech in the lesson need model weights and a GPU: they ran on the author's machine.
+name: ComfyUI audio
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['code/comfyui/audio/**', 'code/comfyui/server.sh', '.github/workflows/comfyui-audio.yml']
+  pull_request:
+    paths: ['code/comfyui/audio/**', 'code/comfyui/server.sh', '.github/workflows/comfyui-audio.yml']
+
+permissions:
+  contents: read
+
+env:
+  COMFYUI_TAG: v0.36.0
+  COMFYUI_COMMIT: ee71d5c4993f29086b27fde1629a945ae48425bf
+
+jobs:
+  unit:
+    name: audio unit (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - name: Python packages, and ffmpeg from imageio-ffmpeg
+        run: |
+          python -m pip install --quiet -r code/comfyui/audio/requirements.txt imageio-ffmpeg==0.6.0
+          echo "FFMPEG=$(python -c 'import imageio_ffmpeg; print(imageio_ffmpeg.get_ffmpeg_exe())')" >> "$GITHUB_ENV"
+      - name: Unit tests
+        run: bash code/comfyui/audio/check.sh unit
+
+  server:
+    name: audio pipeline against ComfyUI on the CPU
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - name: ComfyUI at its release tag
+        run: |
+          git clone --depth 1 --branch "$COMFYUI_TAG" https://github.com/Comfy-Org/ComfyUI.git "$RUNNER_TEMP/ComfyUI"
+          test "$(git -C "$RUNNER_TEMP/ComfyUI" rev-parse HEAD)" = "$COMFYUI_COMMIT"
+      - name: Python packages
+        run: |
+          python -m venv "$RUNNER_TEMP/venv"
+          py="$RUNNER_TEMP/venv/bin/python"
+          "$py" -m pip install --quiet torch==2.13.0 torchvision==0.28.0 torchaudio --index-url https://download.pytorch.org/whl/cpu
+          "$py" -m pip install --quiet -r "$RUNNER_TEMP/ComfyUI/requirements.txt" imageio-ffmpeg==0.6.0
+          echo "COMFYUI_PYTHON=$py" >> "$GITHUB_ENV"
+          echo "COMFYUI_DIR=$RUNNER_TEMP/ComfyUI" >> "$GITHUB_ENV"
+          echo "FFMPEG=$("$py" -c 'import imageio_ffmpeg; print(imageio_ffmpeg.get_ffmpeg_exe())')" >> "$GITHUB_ENV"
+      - name: The pipeline on a no-model workflow
+        run: bash code/comfyui/audio/check.sh server
+      - name: Server log
+        if: failure()
+        run: cat code/comfyui/audio/out/base/server.log || true
