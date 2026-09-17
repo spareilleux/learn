@@ -111,6 +111,25 @@ Pourquoi les deux permissions ? Le README : « La permission pages concerne le `
 
 Le job de déploiement ne récupère pas le dépôt et n'installe rien : 8 secondes.
 
+Les deux jobs se passent le site sous forme d'artefact, et le job deploy envoie son identifiant à GitHub avec le jeton OIDC.
+
+```mermaid
+flowchart LR
+    subgraph jbuild["job build"]
+        astro["withastro/action : installer, construire, téléverser"]
+    end
+    artifact[("artefact github-pages : une archive tar de dist/, gardée 1 jour")]
+    subgraph jdeploy["job deploy : needs build"]
+        deploypages["actions/deploy-pages"]
+    end
+    pages["GitHub Pages"]
+    site["https://spareilleux.github.io/learn/"]
+    astro --> artifact
+    artifact -->|"trouvé dans cette exécution"| deploypages
+    deploypages -->|"artifact_id et oidc_token"| pages
+    pages --> site
+```
+
 ## L'environnement `github-pages`
 
 `environment: name: github-pages` rattache le job à un [environnement](https://docs.github.com/actions/how-tos/deploy/configure-and-manage-deployments/manage-environments), que GitHub a créé automatiquement pour Pages. Un environnement peut contenir ses propres secrets et variables, et des **règles de protection** qu'un job doit passer avant de démarrer :

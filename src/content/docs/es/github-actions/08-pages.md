@@ -111,6 +111,25 @@ Evaluated environment url: https://spareilleux.github.io/learn/
 
 El job de despliegue no descarga el repositorio ni instala nada: 8 segundos.
 
+Los dos jobs se pasan el sitio como artefacto, y el job deploy envía su ID a GitHub con el token OIDC.
+
+```mermaid
+flowchart LR
+    subgraph jbuild["job build"]
+        astro["withastro/action: instalar, compilar, subir"]
+    end
+    artifact[("artefacto github-pages: un archivo tar de dist/, conservado 1 día")]
+    subgraph jdeploy["job deploy: needs build"]
+        deploypages["actions/deploy-pages"]
+    end
+    pages["GitHub Pages"]
+    site["https://spareilleux.github.io/learn/"]
+    astro --> artifact
+    artifact -->|"encontrado en esta ejecución"| deploypages
+    deploypages -->|"artifact_id y oidc_token"| pages
+    pages --> site
+```
+
 ## El entorno `github-pages`
 
 `environment: name: github-pages` asocia el job a un [entorno](https://docs.github.com/actions/how-tos/deploy/configure-and-manage-deployments/manage-environments), que GitHub creó automáticamente para Pages. Un entorno puede tener sus propios secretos y variables, y **reglas de protección** que un job debe superar antes de empezar:

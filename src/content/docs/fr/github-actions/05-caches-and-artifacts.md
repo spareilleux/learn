@@ -41,6 +41,28 @@ Un `dotnet restore` en local a alors écrit `Slugs/packages.lock.json` (5 lignes
 
 [`.github/workflows/gha-05-artifacts.yml`](https://github.com/spareilleux/learn/blob/main/.github/workflows/gha-05-artifacts.yml) a quatre jobs : `test` sur trois OS avec le cache NuGet et un rapport de tests, `pack` construit un paquet NuGet, `cache-demo` utilise directement `actions/cache`, et `report` télécharge les artefacts des deux premiers.
 
+Les quatre jobs, et ce qu'ils conservent : les caches reviennent d'exécutions précédentes, les artefacts passent d'un job à l'autre dans cette exécution.
+
+```mermaid
+flowchart LR
+    nuget[("cache NuGet : un par OS, partagé entre les exécutions")]
+    expensive[("cache gha-05-expensive-Linux-v1")]
+    subgraph matrix["test : un job par OS"]
+        tu["test (ubuntu-latest)"]
+        tw["test (windows-latest)"]
+        tm["test (macos-latest)"]
+    end
+    pack["pack"]
+    demo["cache-demo"]
+    report["report : needs test et pack"]
+    nuget -.->|"restauré"| matrix
+    expensive -.->|"restauré"| demo
+    tu -->|"artefact test-results-ubuntu-latest"| report
+    tw -->|"artefact test-results-windows-latest"| report
+    tm -->|"artefact test-results-macos-latest"| report
+    pack -->|"artefact package"| report
+```
+
 ```yaml
 # GitHub Actions course, lesson 5: dependency caches, actions/cache, build artifacts between jobs
 name: "GHA 05: caches and artifacts"

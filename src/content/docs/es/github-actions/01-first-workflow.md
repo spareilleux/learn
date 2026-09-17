@@ -9,6 +9,23 @@ sidebar:
 
 Un **workflow** es un archivo YAML en `.github/workflows/`. Un **evento** (un push, un pull request, un clic en *Run workflow*) inicia una **ejecución** (run) de ese workflow. Una ejecución contiene **jobs**; cada job recibe una máquina virtual nueva, el **runner**, y ejecuta sus **steps** en orden. Un step ejecuta un script de shell (`run:`) o llama a una **action** (`uses:`), un fragmento de código reutilizable publicado en un repositorio.
 
+El mismo vocabulario en imagen: un evento inicia una ejecución, y cada job de la ejecución recibe su propio runner.
+
+```mermaid
+flowchart LR
+    event["evento: un push, un pull request, Run workflow"]
+    run["ejecución del workflow"]
+    subgraph r1["runner: una máquina virtual nueva"]
+        job1["job"] --> s1["step run: un script de shell"] --> s2["step uses: una action"]
+    end
+    subgraph r2["runner: otra máquina virtual nueva"]
+        job2["job"] --> s3["sus propios steps, en orden"]
+    end
+    event --> run
+    run --> job1
+    run --> job2
+```
+
 | GitHub Actions | Azure Pipelines | Jenkins (declarativo) |
 |---|---|---|
 | workflow (`.github/workflows/*.yml`) | pipeline (`azure-pipelines.yml`) | `Jenkinsfile` |

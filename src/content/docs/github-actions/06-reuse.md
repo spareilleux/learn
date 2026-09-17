@@ -152,6 +152,27 @@ jobs:
 
 A job that calls a reusable workflow has **no** `runs-on` and no `steps`: only `name`, `uses`, `with`, `secrets`, `strategy`, `needs`, `if`, `concurrency`, `permissions` and `cache-mode`.
 
+Put together, the caller, the reusable workflow and the composite action form a chain, and the outputs climb back up it to the summary job.
+
+```mermaid
+flowchart TB
+    subgraph wfcaller["gha-06-reuse.yml"]
+        test["job test: matrix ubuntu-latest, windows-latest"]
+        summary["job summary: needs test"]
+    end
+    subgraph wfcalled["gha-06-dotnet-test.yml, on: workflow_call"]
+        job["job test: runs-on inputs.os"]
+    end
+    subgraph composite["composite action dotnet-restore"]
+        steps["four steps, logged as one"]
+    end
+    test -->|"uses, with os"| job
+    job -->|"step setup: uses, with directory"| steps
+    steps -.->|"sdk-version: step output, then job output"| job
+    job -.->|"on.workflow_call.outputs"| test
+    test -.->|"needs.test.outputs"| summary
+```
+
 ## What the run shows
 
 ```text
