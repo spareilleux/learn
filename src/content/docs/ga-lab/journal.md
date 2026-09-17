@@ -119,9 +119,31 @@ Each prototype writes its hypotheses before the measuring script exists, and the
 - Four predictions wrong (H2, H6, H11, H12), two half right (H9, H10). [Lesson](../07-playability-model/)
 - A bug worth remembering, found by a failing split: the first group hash was plain FNV-1a, whose high bits barely move between `chord0` and `chord39`. A split reads exactly those high bits, so all forty chords landed in the training set and the test set came out empty. A murmur3 finalizer fixed it, and a test now checks the three sides get 60/20/20 of three thousand near-identical keys.
 
+## 2026-09-17 — P5: hypotheses, then a bangle
+
+- Twelve predictions in [`results/hypotheses.md`](https://github.com/spareilleux/learn/blob/8a2ed53/code/ga-protos/p5-printable-bracelets/results/hypotheses.md), committed in `8a2ed53` before any mesh existed. Four came out wrong: H2, H6, H11's repair prediction and H7's premise.
+- The pitch classes are parsed out of GA at `a826864`, from `CanonicalChordPatternCatalog.cs` and `Scale.cs`, and cross-checked against the catalog prototype 2 already ported. 58 chord patterns, 19 scales, SHA-256 of both blobs recorded.
+- 31 solids built, unioned with manifold3d and measured in 5.95 s: all watertight, one body, Euler characteristic 0, manifold3d NoError. A 65 mm bangle with cone beads is 5.2473 cm3 and 6.507 g of PLA, its bore 64.9913 mm, its thinnest wall 1.9954 mm, and no face of it below the 45-degree support threshold.
+- PrusaSlicer 2.9.6 was downloaded and run in console mode: 6.42 g and 35 min 40 s for a triad, 6.47 g and 39 min 56 s for a seven-note scale, 6.15 g and 26 min 43 s for the bare band. [Lesson](../05-printable-bracelets/)
+
+## 2026-09-17 — P5: three things that were not true
+
+- **"Watertight" is about edges.** H2 said the fourteen parts written into one file without a boolean would fail the test. They pass it, and manifold3d accepts them too — fourteen closed solids in one bounding box. What they cost is the volume (2.6 % high), the surface area (10.8 % high) and the wall measurement, which reads 1.40 mm because the ribs' buried faces are still real surfaces.
+- **The slicer does not care either.** PrusaSlicer sliced the un-unioned mesh to 2,154.16 mm of filament against the union's 2,154.05, the same 6.42 g, and reported no repair. The case for doing booleans properly has to be made on other grounds than the slicer.
+- **The keel's chamfer was 36 degrees, not the 45 the hypotheses claimed.** `min_slope_deg` printed 36.027 and nothing else would have caught it. Making the ramp a real 45 degrees removed the overhang and left the mark 0.4 mm proud at 1 mm above the bed, half an ordinary rib. Deleting the ramp fixed both: a vertical feature on a vertical wall, printed axis up, overhangs nothing.
+- **The bead from prototype 2 eats the bracelet.** A sphere of radius 3.0 mm centred on the outer surface of a 2.0 mm wall reaches 1.0 mm into the bore: the inner diameter drops from 64.99 to 63.03 mm, and 0.35 % of the surface needs support, with a worst slope of 4.87 degrees. H6 had predicted 3 % to 8 %, an order of magnitude out.
+
+## 2026-09-17 — P5: GA's server disagrees with GA's source
+
+- Asked through GA's MCP tools, `ga_chord_to_set('Cdim7')` answers C, E flat, F sharp, B flat — Forte 4-27, a half-diminished seventh — while `CanonicalChordPatternCatalog.cs` has `diminished-7` as 0 3 6 9, Forte 4-28. `ga_parse_chord('Cdim7')` returns quality `diminished` with component `ext:7`, so the seventh is added as a minor seventh.
+- `ga_chord_to_set('Cm7b5')` answers C, E flat, G, B flat, a plain minor seventh: the `b5` alteration is dropped. GA's file has `half-diminished-7` as 0 3 6 10.
+- `get_scale_notes` for C major and A minor, and `ga_chord_to_set('Cmaj7')`, agree with the files. The exchange is recorded in [`results/ga-check.json`](https://github.com/spareilleux/learn/blob/b171d57/code/ga-protos/p5-printable-bracelets/results/ga-check.json). Two of the thirteen bracelets would have been wrong if they had been built from the running parser instead of the pinned files. For the author to decide whether this becomes an issue on GuitarAlchemist/ga.
+
 ## To verify
 
 - The explorer on macOS Safari and Firefox, with and without WebGPU: tested only in Chromium on Windows.
 - Audio on mobile browsers, which may block the `AudioContext` until a tap.
 - P7's target: the 32 pairwise judgements were made by this model from written rules, not by a guitarist, and the hand model's constants — comfortable spans, barre and mute penalties — are chosen, not measured on a player. A guitarist ranking a few hundred pairs would replace both.
 - P7's 34.2 % of unfingerable voicings is an upper bound: the search has no thumb over the top, no string damped by the fretting hand, and no note held by two fingers.
+- P5 has never been printed. Whether 65 mm fits a wrist, whether a 1.2 mm rib can be told from a 2.5 mm keel by touch, whether a 45-degree cone underside droops on a real machine, and whether a 2.0 mm PLA band survives being pushed over a hand are all open.
+- P5's eight degenerate, zero-area triangles left by manifold3d in the cone unions: PrusaSlicer says nothing about them, and no other slicer has been tried.

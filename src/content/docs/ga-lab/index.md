@@ -35,7 +35,7 @@ You write C# or Java, you have followed at least one of the GA courses, and you 
 | P2 | [Play a chord, see the universe](02-chord-universe/) | Chord recognition in the browser: FFT, note estimation, template matching over GA's chord qualities, 3D neck, bracelet and next chord; 624 synthetic strums and 17 CC0 recordings, predictions first | published |
 | P3 | Album covers | Can a diffusion model make a cover that says something true about a chord progression? | planned |
 | P4 | AI render pass | Does a generated texture or lighting pass make GA's 3D scenes better, measured against the plain render? | planned |
-| P5 | 3D-printable bracelets | Can a pitch-class bracelet become a printable object, from GA's data to a mesh that passes a slicer? | planned |
+| P5 | [3D-printable bracelets](05-printable-bracelets/) | Can a pitch-class bracelet become a printable object, from GA's data to a mesh that passes a slicer? | published |
 | P6 | Full chain | Microphone to chord to voicing to image to object, in one run: where does it break? | planned |
 | P7 | [Playability model](07-playability-model/) | Can a small model trained on the CPU predict how hard a voicing is to play better than GA's hand-written cost? | published |
 | — | [Journal](journal/) | | |
