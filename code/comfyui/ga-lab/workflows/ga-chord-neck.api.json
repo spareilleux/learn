@@ -6,8 +6,9 @@
   "3": {"class_type": "KSampler", "inputs": {"seed": 42, "steps": 25, "cfg": 7.0, "sampler_name": "euler", "scheduler": "normal", "denoise": 1.0, "model": ["4", 0], "positive": ["22", 0], "negative": ["22", 1], "latent_image": ["5", 0]}},
   "8": {"class_type": "VAEDecode", "inputs": {"samples": ["3", 0], "vae": ["4", 2]}},
   "9": {"class_type": "SaveImage", "inputs": {"filename_prefix": "galab/neck", "images": ["8", 0]}},
-  "18": {"class_type": "GAFretboardControlMap", "inputs": {"source": "chord", "chord": "C", "key": "C", "mode": "Ionian", "fret_start": 0, "fret_end": 5, "width": 1344, "height": 768, "line_width": 4}, "_meta": {"title": "GA control map, the latent's size"}},
+  "18": {"class_type": "GAFretboardControlMap", "inputs": {"source": "chord", "chord": "C", "key": "C", "mode": "Ionian", "fret_start": 0, "fret_end": 5, "width": 1344, "height": 768, "line_width": 4, "note_style": "filled", "inlays": "hide"}, "_meta": {"title": "GA control map, the latent's size"}},
   "19": {"class_type": "SaveImage", "inputs": {"filename_prefix": "galab/neck-map", "images": ["18", 0]}},
+  "23": {"class_type": "PreviewAny", "inputs": {"source": ["18", 2]}, "_meta": {"title": "the map's layout JSON, kept in the history for checks/dots.py"}},
   "20": {"class_type": "ControlNetLoader", "inputs": {"control_net_name": "xinsir_controlnet_union_sdxl_promax.safetensors"}},
   "21": {"class_type": "SetUnionControlNetType", "inputs": {"control_net": ["20", 0], "type": "canny/lineart/anime_lineart/mlsd"}},
   "22": {"class_type": "ControlNetApplyAdvanced", "inputs": {"positive": ["6", 0], "negative": ["7", 0], "control_net": ["21", 0], "image": ["18", 0], "strength": 0.8, "start_percent": 0.0, "end_percent": 1.0, "vae": ["4", 2]}}

@@ -1,7 +1,8 @@
 """Computes the measures an experiment declares under `analysis`, from its results.json, into analysis.json.
 
     analysis:
-      - {kind: dots, node: "9", chord_path: "18.chord", fret_start_path: "18.fret_start", fret_end_path: "18.fret_end"}
+      - {kind: dots, node: "9", layout_node: "23", chord_path: "18.chord", fret_start_path: "18.fret_start",
+         fret_end_path: "18.fret_end", inlays_path: "18.inlays"}   # layout_node first; the paths when it has no text
       - {kind: seam, node: "40"}
       - {kind: pixel_diff, node: "10", axis: format, reference: bf16}
       - {kind: luma_rank, node: "9", axis: mode, order: [Locrian, Phrygian, Aeolian, Dorian, Mixolydian, Ionian, Lydian]}
@@ -43,8 +44,15 @@ def analyze(experiment_path, out_dir):
             for item in done:
                 for o in outputs(item, node):
                     p = item["params"]
-                    r = dots.check_against_map(file_of(out_dir, o), p[spec["chord_path"]], int(p[spec["fret_start_path"]]),
-                                               int(p[spec["fret_end_path"]]), spec.get("threshold"))
+                    layout = (item.get("texts") or {}).get(str(spec.get("layout_node")))
+                    if layout:  # the node's own layout output, recorded by PreviewAny
+                        r = dots.check_layout(file_of(out_dir, o), layout[0] if isinstance(layout, list) else layout,
+                                              spec.get("threshold"))
+                    else:
+                        r = dots.check_against_map(file_of(out_dir, o), p[spec["chord_path"]],
+                                                   int(p[spec["fret_start_path"]]), int(p[spec["fret_end_path"]]),
+                                                   spec.get("threshold"), inlays=p.get(spec.get("inlays_path", ""), "show"))
+                    r["layout_from"] = "node" if layout else "recomputed"
                     entry["rows"].append({"key": item["key"], "labels": item["labels"], "seed": item["seed"], **r})
                     g = groups[item["labels"].get(spec.get("group_by", ""), "all")]
                     g["images"] += 1

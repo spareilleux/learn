@@ -69,7 +69,8 @@ def write(name, workflow):
 
 
 def chord_neck():
-    """Experiments 1 and 2: the GA line map drives the union ControlNet in canny mode, like lesson 6's Canny edges."""
+    """Experiments 1 and 2: the GA line map drives the union ControlNet in canny mode, like lesson 6's Canny edges.
+    Filled notes and no inlay rings (GA pack 846bd2d); node 23 records the map's layout JSON."""
     return {
         "4": ckpt(),
         "5": node("EmptyLatentImage", width=1344, height=768, batch_size=1),
@@ -79,8 +80,10 @@ def chord_neck():
         "8": decode(("3", 0)),
         "9": save(("8", 0), "galab/neck"),
         "18": node("GAFretboardControlMap", "GA control map, the latent's size", source="chord", chord="C", key="C",
-                   mode="Ionian", fret_start=0, fret_end=5, width=1344, height=768, line_width=4),
+                   mode="Ionian", fret_start=0, fret_end=5, width=1344, height=768, line_width=4,
+                   note_style="filled", inlays="hide"),
         "19": save(("18", 0), "galab/neck-map"),
+        "23": node("PreviewAny", "the map's layout JSON, kept in the history for checks/dots.py", source=["18", 2]),
         **control(("6", 0), ("7", 0), ("18", 0)),
     }
 

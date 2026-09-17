@@ -13,7 +13,8 @@ Method (numpy and Pillow only):
 The threshold was chosen on a synthetic tuning split and measured on a separate test split: see evaluate.py and
 results/dots-eval.json. Used from the command line:
 
-    python -m checks.dots IMAGE --chord C --fret-start 0 --fret-end 5 [--json]
+    python -m checks.dots IMAGE --layout layout.json
+    python -m checks.dots IMAGE --chord C --fret-start 0 --fret-end 5
 """
 import argparse
 import json
@@ -23,7 +24,7 @@ import sys
 import numpy as np
 from PIL import Image
 
-from .geometry import Layout, parse_voicing
+from .geometry import Layout
 
 DEFAULT_THRESHOLD = 0.06  # evaluate.py picks it again on the tuning split
 SCALES = (0.75, 1.0, 1.35)
@@ -131,7 +132,7 @@ def on_geometry(d, layout, radius):
     x, y = d[:2]
     if not (layout.top - radius <= y <= layout.bottom + radius and layout.left - 3 * radius <= x <= layout.right + radius):
         return False
-    return all(abs(x - layout.wire_x(f)) >= 0.8 * radius for f in range(layout.first_wire + 1, layout.fret_end + 1))
+    return all(abs(x - wx) >= 0.8 * radius for f, wx in layout.wires() if f > layout.first_wire)
 
 
 def check(image, expected, ignore, radius, tolerance, threshold=None, resp=None, layout=None):
@@ -151,34 +152,49 @@ def check(image, expected, ignore, radius, tolerance, threshold=None, resp=None,
             "exact": not missed and not extra}
 
 
-def layout_for(width, height, fret_start, fret_end):
-    return Layout(fret_start, fret_end, width, height)
-
-
-def check_against_map(image, chord, fret_start, fret_end, threshold=None, prior=True):
-    """The chord's dots as GA Fretboard Control Map places them, on an image of the map's size."""
+def check_layout(image, layout, threshold=None, prior=True):
+    """The map's notes, from its layout JSON (or a Layout), looked for on an image of the map's size."""
     if isinstance(image, str):
         with Image.open(image) as opened:
             image = opened.convert("RGB")
-    layout = layout_for(image.width, image.height, fret_start, fret_end)
-    expected = layout.dots(parse_voicing(chord))
-    ignore = [(x, y) for x, y, _ in layout.inlays()] + \
-             [layout.note_xy(s, 0) for s in range(6)]
+    layout = layout if isinstance(layout, Layout) else Layout(layout)
+    if (image.width, image.height) != (layout.width, layout.height):
+        raise ValueError(f"image {image.width}x{image.height} but layout {layout.width}x{layout.height}")
+    expected = layout.dots()
+    ignore = [(x, y) for x, y, _ in layout.inlay_positions()] + layout.open_markers()
     tolerance = max(layout.radius * 1.5, layout.string_gap * 0.45)
     result = check(image, expected, ignore, layout.radius, tolerance, threshold, layout=layout if prior else None)
-    result.update(chord=chord, radius=layout.radius, tolerance=round(tolerance, 1))
+    result.update(radius=layout.radius, tolerance=round(tolerance, 1))
+    return result
+
+
+def check_against_map(image, chord, fret_start, fret_end, threshold=None, prior=True, inlays="show"):
+    """The same, with the layout computed by the GA pack for a chord, when no layout JSON was recorded."""
+    if isinstance(image, str):
+        with Image.open(image) as opened:
+            image = opened.convert("RGB")
+    layout = Layout.compute(chord, fret_start, fret_end, image.width, image.height, inlays)
+    result = check_layout(image, layout, threshold, prior)
+    result.update(chord=chord)
     return result
 
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("image")
-    parser.add_argument("--chord", required=True, help="a voicing (x32010) or a symbol GA knows (C, Am, Bm7b5...)")
+    parser.add_argument("--layout", help="the layout JSON file GA Fretboard Control Map output (preferred)")
+    parser.add_argument("--chord", help="without --layout: a voicing (x32010) or a symbol GA knows (C, Am, Bm7b5...)")
     parser.add_argument("--fret-start", type=int, default=0)
     parser.add_argument("--fret-end", type=int, default=5)
     parser.add_argument("--threshold", type=float)
     args = parser.parse_args(argv)
-    result = check_against_map(args.image, args.chord, args.fret_start, args.fret_end, args.threshold)
+    if args.layout:
+        with open(args.layout, encoding="utf-8") as f:
+            result = check_layout(args.image, json.load(f), args.threshold)
+    elif args.chord:
+        result = check_against_map(args.image, args.chord, args.fret_start, args.fret_end, args.threshold)
+    else:
+        parser.error("give --layout or --chord")
     json.dump(result, sys.stdout, indent=1)
     print()
     return 0 if result["exact"] else 1

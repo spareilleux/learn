@@ -1,6 +1,6 @@
 """A synthetic labelled set for the dot detector: necks drawn with dots at known positions, then degraded.
 
-Each sample uses GA Fretboard Control Map's geometry (geometry.Layout) for a random voicing and fret range, draws a
+Each sample uses GA Fretboard Control Map's layout (geometry.Layout.compute) for a random voicing and fret range, draws a
 wooden board, fret wires, strings, a nut, inlays (distractors, labelled as "ignore") and the chord's dots in a
 random style, then applies the condition's degradations: Gaussian noise, blur, perspective jitter (the labels go
 through the same homography) and low contrast between dots and wood. Everything comes from one seed.
@@ -66,8 +66,8 @@ def sample(seed, condition, width=768, height=432):
     c = CONDITIONS[condition]
     fret_start = rng.choice([0, 0, 0, 1, 3, 5])
     fret_end = fret_start + rng.choice([4, 5, 5, 7, 12 - fret_start if fret_start < 7 else 5])
-    layout = Layout(fret_start, fret_end, width, height)
     frets = _random_voicing(rng, fret_start, fret_end)
+    layout = Layout.compute(frets, fret_start, fret_end, width, height, "show")
 
     wood = rng.choice(WOODS)
     image = Image.new("RGB", (width, height), tuple(rng.randint(10, 60) for _ in range(3)))
@@ -136,6 +136,18 @@ def sample(seed, condition, width=768, height=432):
         glow = glow.filter(ImageFilter.GaussianBlur(layout.radius * 0.8))
         image = Image.fromarray(np.clip(np.asarray(image, dtype=int) + np.asarray(glow, dtype=int), 0, 255).astype(np.uint8))
 
+    image, expected, ignore = degrade(image, expected, ignore, c, rng, seed)
+    inside = [(x, y) for x, y in expected if 0 <= x < width and 0 <= y < height]
+    return {
+        "image": image, "expected": inside, "ignore": ignore, "radius": layout.radius,
+        "tolerance": max(layout.radius * 1.5, layout.string_gap * 0.45),
+        "frets": frets, "fret_range": (fret_start, fret_end), "style": style, "condition": condition,
+    }
+
+
+def degrade(image, expected, ignore, c, rng, seed):
+    """Perspective jitter (labels follow the same homography), then blur, then Gaussian noise."""
+    width, height = image.size
     if c["perspective"]:
         j = c["perspective"]
         corners = [(0, 0), (width, 0), (width, height), (0, height)]
@@ -152,9 +164,20 @@ def sample(seed, condition, width=768, height=432):
         noise = np.random.default_rng(seed + 2).normal(0, c["noise"], (height, width, 1))
         image = Image.fromarray(np.clip(np.asarray(image, dtype=float) + noise, 0, 255).astype(np.uint8))
 
-    inside = [(x, y) for x, y in expected if 0 <= x < width and 0 <= y < height]
-    return {
-        "image": image, "expected": inside, "ignore": ignore, "radius": layout.radius,
-        "tolerance": max(layout.radius * 1.5, layout.string_gap * 0.45),
-        "frets": frets, "fret_range": (fret_start, fret_end), "style": style, "condition": condition,
-    }
+    return image, expected, ignore
+
+
+def ga_map_sample(chord, fret_start, fret_end, note_style, condition, seed, width=1344, height=768):
+    """The pack's own line map for a chord (inlays hidden, as experiments 1 and 2 ask), degraded like the necks."""
+    from .geometry import ga_pack
+    drawing, theory = ga_pack()
+    layout = Layout.compute(chord, fret_start, fret_end, width, height, "hide")
+    positions = theory.voicing_positions(theory.resolve_chord(chord)[1])
+    lines, _ = drawing.fretboard_maps(positions, fret_start, fret_end, width, height, 4, note_style, "hide")
+    rng = random.Random(seed)
+    ignore = [(x, y) for x, y, _ in layout.inlay_positions()] + layout.open_markers()
+    image, expected, ignore = degrade(lines, layout.dots(), ignore, CONDITIONS[condition], rng, seed)
+    return {"image": image, "expected": [(x, y) for x, y in expected if 0 <= x < width and 0 <= y < height],
+            "ignore": ignore, "radius": layout.radius, "tolerance": max(layout.radius * 1.5, layout.string_gap * 0.45),
+            "fret_range": (fret_start, fret_end), "size": (width, height), "style": f"ga-{note_style}",
+            "condition": condition, "chord": chord}

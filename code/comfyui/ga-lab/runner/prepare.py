@@ -2,7 +2,8 @@
 
     {name: bracelet, kind: svg, src: path/to.svg, size: 1024}
     {name: inlays, kind: inlay_mask, fret_start: 0, fret_end: 12, width: 1344, height: 768, scale: 1.8}
-        white where GA Fretboard Control Map draws its inlay rings (grown by `scale`), black elsewhere
+        white where GA Fretboard Control Map draws its inlay rings (from the pack's fretboard_layout, grown by
+        `scale`), black elsewhere
     {name: photo, kind: file, src: path/to.png}
 """
 import os
@@ -26,8 +27,8 @@ def prepare(experiment, step, out_dir):
         image = svg_raster.rasterize(experiment.resolve(step["src"]), size)
         image.save(dst, "PNG")
     elif kind == "inlay_mask":
-        layout = Layout(int(step.get("fret_start", 0)), int(step.get("fret_end", 12)),
-                        int(step["width"]), int(step["height"]))
+        layout = Layout.compute(None, int(step.get("fret_start", 0)), int(step.get("fret_end", 12)),
+                                int(step["width"]), int(step["height"]), "show")
         scale = float(step.get("scale", 1.8))
         mask = Image.new("RGB", (layout.width, layout.height), (0, 0, 0))
         draw = ImageDraw.Draw(mask)

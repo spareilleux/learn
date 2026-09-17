@@ -2,22 +2,30 @@ id: 01-chord-neck
 title: Chord to neck, the GA control map through ControlNet
 written: 2026-09-16
 hypothesis: >
-  GA Fretboard Control Map draws a chord's notes as disks on a neck seen from the front. Fed to the union ControlNet
-  of lesson 6 in canny mode at strength 0.8, it makes SDXL base put marker dots on a generated neck where the chord's
-  fingers go, frets 0 to 5, for the ten chords below. The fret wires and strings follow the map because they are long
-  straight edges; the note disks are small, so they are the part most likely to be lost or moved.
+  GA Fretboard Control Map draws a chord's notes as filled disks (note_style filled, GA pack 846bd2d) on a neck seen
+  from the front, without inlay rings (inlays hide). Fed to the union ControlNet of lesson 6 in canny mode at strength
+  0.8, it makes SDXL base put marker dots on a generated neck where the chord's fingers go, frets 0 to 5, for the ten
+  chords below. The fret wires and strings follow the map because they are long straight edges; the note disks are
+  small, so they are the part most likely to be lost or moved. Inlays are hidden so the map holds no disk that is not
+  a note: with rings at 3 and 5, SDXL has two more round shapes to copy at places no finger goes. The generated neck
+  may still draw inlays on its own; the check ignores detections at the standard inlay positions either way.
+  Revised on 2026-09-16 before any run, when the pack gained filled notes and hidden inlays; the first version (ring
+  outlines with inlay rings, committed in 550fd8b) is in the git history of this file.
 prediction: >
-  Written before any run. Measured by `python -m runner analyze` (checks/dots.py, with the geometric prior, on node 9):
-  (1) dot recall over the 20 images between 0.5 and 0.8; (2) at most 6 of 20 images exact (every dot found, none
-  extra), because SDXL adds position-marker inlays and extra dots, and the detector itself misses some styles (see
-  checks/results/dots-eval.json); (3) chords with 5 or 6 fretted notes (F, G, G7) have lower recall than chords with
-  2 or 3 (E7, Cmaj7, Dm7). Visual check on the contact sheet: fret wires line up with the map in all 20 images;
-  the map's white outlines show up as rings rather than filled dots in at least a quarter of the images.
+  Written before any run. Measured by `python -m runner analyze` (checks/dots.py, with the geometric prior, on node 9,
+  with the layout JSON node 23 recorded): (1) dot recall over the 20 images between 0.6 and 0.9; (2) at most 8 of 20
+  images exact (every dot found, none extra), because SDXL still adds position markers and extra dots of its own;
+  (3) chords with 5 or 6 fretted notes (F, G, G7) have lower recall than chords with 2 or 3 (E7, Cmaj7, Dm7). Control,
+  not a claim about the necks: on the undegraded filled maps themselves the detector is exact for 14 of 14 chords
+  (tests/test_geometry.py). Visual check on the contact sheet: fret wires line up with the map in all 20 images; the
+  notes show up as filled dots, not rings, in at least 15 of the 20 images; at most 5 images show inlays at 3 or 5.
 workflow: ../workflows/ga-chord-neck.api.json
 seeds: [42, 43]
 seed_paths: ["3.seed"]
 fixed:
   "22.strength": 0.8
+  "18.note_style": filled
+  "18.inlays": hide
   "18.fret_start": 0
   "18.fret_end": 5
 axes:
@@ -25,5 +33,5 @@ axes:
     path: "18.chord"
     values: [C, G, Am, F, D, E7, Cmaj7, Dm7, G7, Bm7b5]
 analysis:
-  - {kind: dots, node: "9", chord_path: "18.chord", fret_start_path: "18.fret_start", fret_end_path: "18.fret_end", group_by: chord}
+  - {kind: dots, node: "9", layout_node: "23", inlays_path: "18.inlays", chord_path: "18.chord", fret_start_path: "18.fret_start", fret_end_path: "18.fret_end", group_by: chord}
   - {kind: stats, node: "9"}

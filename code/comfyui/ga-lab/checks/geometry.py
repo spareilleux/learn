@@ -1,81 +1,97 @@
-"""Where GA Fretboard Control Map draws things, computed without drawing.
+"""Where GA Fretboard Control Map draws things, read from its `layout` output instead of recomputed here.
 
-This mirrors the layout of code/comfyui/custom-nodes/ga/drawing.py (fretboard_maps), written by the custom node
-lane: neck horizontal, headstock left, high E on top, frets spaced like a real neck. tests/test_geometry.py
-renders the node's map and checks these coordinates against its pixels, so a change there fails here.
+The node pack (code/comfyui/custom-nodes/ga, commit 846bd2d) returns a third output, `layout`, a JSON string: the
+board rectangle, the x of each fret wire, the y of each string, the note radius, one entry per note (center, string,
+fret) and one per inlay. The lab's workflows send it to a PreviewAny node, so it lands in results.json as text.
+
+When no JSON is at hand (the synthetic set, a check run by hand), Layout.compute asks the pack's own
+drawing.fretboard_layout, imported without the pack's __init__ (which needs ComfyUI and torch). Either way there is
+one source for the geometry; tests/test_geometry.py checks it against the pack's pixels.
 """
-import re
+import importlib
+import json
+import os
+import sys
+import types
 
 STRING_COUNT = 6
-INLAYS = (3, 5, 7, 9, 12, 15, 17, 19, 21, 24)
-SHAPES = {  # the symbols GA Fretboard Control Map accepts, low E first (custom-nodes/ga/theory.py CHORD_SHAPES)
-    "C": "x32010", "D": "xx0232", "E": "022100", "F": "133211", "G": "320003", "A": "x02220", "Am": "x02210",
-    "Dm": "xx0231", "Em": "022000", "E7": "020100", "G7": "320001", "Cmaj7": "x32000", "Dm7": "xx0211",
-    "Bm7b5": "x2323x",
-}
+GA_DIR = os.path.normpath(os.path.join(os.path.dirname(__file__), "..", "..", "custom-nodes", "ga"))
+
+
+def ga_pack():
+    """(drawing, theory) modules of the GA node pack, loaded as a package without running its __init__."""
+    if "galab_ga_pack" not in sys.modules:
+        if not os.path.isfile(os.path.join(GA_DIR, "drawing.py")):
+            raise ImportError(f"the GA node pack is not at {GA_DIR}")
+        pkg = types.ModuleType("galab_ga_pack")
+        pkg.__path__ = [GA_DIR]
+        sys.modules["galab_ga_pack"] = pkg
+    return importlib.import_module("galab_ga_pack.drawing"), importlib.import_module("galab_ga_pack.theory")
 
 
 def parse_voicing(text):
-    text = SHAPES.get(text.strip(), text.strip())
-    parts = list(text) if re.fullmatch(r"[xX0-9]{6}", text) else re.split(r"[\s,-]+", text)
-    if len(parts) != STRING_COUNT:
-        raise ValueError(f"not a voicing: {text!r}")
-    return tuple(None if p in ("x", "X") else int(p) for p in parts)
-
-
-def fret_x(fret, fret_start, fret_end, left, right):
-    def distance(n):
-        return 1 - 2 ** (-n / 12)
-    span = distance(fret_end) - distance(fret_start)
-    return left + (distance(fret) - distance(fret_start)) / span * (right - left)
+    """A voicing (x32010, x-10-12-12-12-10) or a symbol the pack knows -> 6 frets from low E, None when muted."""
+    _, theory = ga_pack()
+    return theory.resolve_chord(text)[1]
 
 
 class Layout:
-    def __init__(self, fret_start=0, fret_end=12, width=1024, height=1024):
-        self.fret_start, self.fret_end, self.width, self.height = fret_start, fret_end, width, height
-        self.first_wire = max(fret_start - 1, 0)
-        self.left, self.right = round(width * 0.10), round(width * 0.96)
-        neck_height = min(height * 0.6, (self.right - self.left) / (fret_end - self.first_wire) * 2.4)
-        self.top = round(height / 2 - neck_height / 2)
-        self.bottom = round(height / 2 + neck_height / 2)
-        self.string_gap = (self.bottom - self.top) / STRING_COUNT
-        gap_min = self.wire_x(fret_end) - self.wire_x(fret_end - 1)
-        self.radius = round(min(self.string_gap, gap_min) * 0.3)
+    def __init__(self, data):
+        if isinstance(data, str):
+            data = json.loads(data)
+        self.data = data
+        self.width, self.height = data["width"], data["height"]
+        self.fret_start, self.fret_end, self.first_wire = data["fret_start"], data["fret_end"], data["first_wire"]
+        board = data["board"]
+        self.left, self.top, self.right, self.bottom = board["left"], board["top"], board["right"], board["bottom"]
+        self.string_gap = data["string_gap"]
+        self.radius = data["radius"]
+        self._wires = {w["fret"]: w["x"] for w in data["fret_wires"]}
+        self._strings = {s["string_index"]: s["y"] for s in data["strings"]}
+
+    @classmethod
+    def compute(cls, voicing=None, fret_start=0, fret_end=12, width=1024, height=1024, inlays="show"):
+        """The layout the node would output for a chord voicing (or no notes), from the pack's own code."""
+        drawing, theory = ga_pack()
+        frets = parse_voicing(voicing) if isinstance(voicing, str) else voicing
+        positions = theory.voicing_positions(frets) if frets else []
+        return cls(drawing.fretboard_layout(positions, fret_start, fret_end, width, height, inlays))
 
     def wire_x(self, fret):
-        return fret_x(fret, self.first_wire, self.fret_end, self.left, self.right)
+        return self._wires[fret]
 
-    def string_y(self, s):
-        """s counts from low E (0) to high E (5); the low E is at the bottom."""
-        return round(self.bottom - (s + 0.5) * self.string_gap)
+    def wires(self):
+        return sorted(self._wires.items())
 
-    def note_xy(self, string, fret):
+    def string_y(self, string_index):
+        """string_index counts from low E (0) to high E (5); the low E is at the bottom."""
+        return self._strings[string_index]
+
+    def note_xy(self, string_index, fret):
+        """Where the map puts a note; an open string (fret 0) is left of the nut."""
+        for note in self.data["notes"]:
+            if note["string_index"] == string_index and note["fret"] == fret:
+                return note["x"], note["y"]
         if fret == 0:
-            x = round(self.left - self.radius * 1.6)
-        else:
-            x = round((self.wire_x(fret - 1) + self.wire_x(fret)) / 2)
-        return x, self.string_y(string)
+            return round(self.left - self.radius * 1.6), self.string_y(string_index)
+        raise KeyError(f"no note on string {string_index} fret {fret} in this layout")
 
-    def dots(self, voicing, include_open=False):
-        """Centers of the notes of a voicing, as the map draws them (open strings are left of the nut)."""
-        frets = parse_voicing(voicing) if isinstance(voicing, str) else voicing
-        result = []
-        for s, f in enumerate(frets):
-            if f is None or not self.fret_start <= f <= self.fret_end or (f == 0 and not include_open):
-                continue
-            result.append(self.note_xy(s, f))
-        return result
+    def dots(self, include_open=False):
+        """Centers of the notes the map draws, fretted notes only unless include_open."""
+        return [(n["x"], n["y"]) for n in self.data["notes"] if include_open or n["fret"] > 0]
+
+    def open_markers(self):
+        """Where an open-string note would sit on each string, left of the nut: ignored by the dot check."""
+        return [(round(self.left - self.radius * 1.6), self.string_y(s)) for s in range(STRING_COUNT)] \
+            if self.fret_start == 0 else []
 
     def inlays(self):
-        """(x, y, r) of the inlay rings the map draws; fret 12 and 24 have two."""
-        result = []
-        for fret in INLAYS:
-            if self.first_wire < fret <= self.fret_end:
-                x = round((self.wire_x(fret - 1) + self.wire_x(fret)) / 2)
-                r = max(2, self.radius // 2)
-                if fret % 12 == 0:
-                    ys = [round(self.top + 2 * self.string_gap), round(self.bottom - 2 * self.string_gap)]
-                else:
-                    ys = [round((self.top + self.bottom) / 2)]
-                result.extend((x, y, r) for y in ys)
-        return result
+        """(x, y, r) of the inlay rings the map draws (none when the node ran with inlays=hide)."""
+        return [(m["x"], m["y"], m["r"]) for m in self.data["inlays"]]
+
+    def inlay_positions(self):
+        """Where inlays are on the neck even if the map hides them: a generated neck may still show inlays there."""
+        if self.data["inlays"]:
+            return self.inlays()
+        full = Layout.compute(None, self.fret_start, self.fret_end, self.width, self.height, "show")
+        return full.inlays()

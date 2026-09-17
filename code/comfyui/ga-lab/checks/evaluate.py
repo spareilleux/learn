@@ -15,6 +15,9 @@ import time
 from . import dots, synth
 from .geometry import Layout
 
+GA_CHORDS = ["C", "G", "Am", "F", "D", "E7", "Cmaj7", "Dm7", "G7", "Bm7b5"]
+GA_RANGES = [(0, 5), (0, 12)]
+GA_CONDITIONS = ["clean", "noise", "blur", "perspective", "combined"]
 THRESHOLDS = (0.01, 0.015, 0.02, 0.03, 0.04, 0.05, 0.06, 0.08, 0.1, 0.12)
 
 
@@ -23,7 +26,8 @@ def score(samples, threshold, prior):
     for s in samples:
         if "response" not in s:
             s["response"] = dots.response(s["image"], s["radius"])
-        layout = Layout(*s["fret_range"], s["image"].width, s["image"].height) if prior else None
+        layout = Layout.compute(s.get("frets"), *s["fret_range"], s["image"].width, s["image"].height,
+                                "show") if prior else None
         r = dots.check(s["image"], s["expected"], s["ignore"], s["radius"], s["tolerance"], threshold, s["response"],
                        layout)
         tp += r["true_positives"]
@@ -67,6 +71,18 @@ def main(argv=None):
         variant["per_dot_style"] = {st: score([s for s in test if s["style"] == st], best, prior) for st in styles}
         print(f"{name} test overall: {variant['overall']}", flush=True)
         result["variants"][name] = variant
+    # Controls on the GA pack's own maps, with the threshold picked above for the prior: what the detector reads on
+    # an image drawn exactly like the ControlNet input, clean and degraded. Not a claim about generated necks.
+    threshold = result["variants"]["with_geometric_prior"]["threshold"]
+    result["ga_maps"] = {"threshold": threshold, "chords": GA_CHORDS, "fret_ranges": GA_RANGES, "inlays": "hide"}
+    for style in ("filled", "ring"):
+        maps = [synth.ga_map_sample(chord, lo, hi, style, c, 7000 + i)
+                for i, (chord, (lo, hi), c) in enumerate((ch, r, c) for ch in GA_CHORDS for r in GA_RANGES
+                                                         for c in GA_CONDITIONS)]
+        entry = {c: score([m for m in maps if m["condition"] == c], threshold, True) for c in GA_CONDITIONS}
+        entry["overall"] = score(maps, threshold, True)
+        result["ga_maps"][style] = entry
+        print(f"GA {style} maps: {entry}", flush=True)
     result["seconds"] = round(time.perf_counter() - t0, 1)
     os.makedirs(os.path.dirname(args.out), exist_ok=True)
     with open(args.out, "w", encoding="utf-8") as f:

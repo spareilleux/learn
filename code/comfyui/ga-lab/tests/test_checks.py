@@ -89,7 +89,7 @@ class ImageChecksTest(unittest.TestCase):
                             "width": 1344, "height": 768}, self.tmp.name)
         with Image.open(out) as im:
             mask = np.asarray(im.convert("L"))
-        layout = Layout(0, 12, 1344, 768)
+        layout = Layout.compute(None, 0, 12, 1344, 768)
         for x, y, _ in layout.inlays():
             self.assertEqual(mask[y, x], 255)
         self.assertEqual(mask[layout.string_y(0), round(layout.wire_x(1)) - 10], 0)
@@ -104,7 +104,7 @@ class DotsTest(unittest.TestCase):
         self.assertEqual(len(extra), 2)
 
     def test_white_dots_on_a_clean_neck(self):
-        layout = Layout(0, 5, 768, 432)
+        layout = Layout.compute("F", 0, 5, 768, 432)
         image = Image.new("RGB", (768, 432), (60, 38, 25))
         draw = ImageDraw.Draw(image)
         for f in range(1, 6):
@@ -113,7 +113,7 @@ class DotsTest(unittest.TestCase):
         for s in range(6):
             y = layout.string_y(s)
             draw.line([layout.left, y, layout.right, y], fill=(200, 200, 190), width=2)
-        expected = layout.dots("133211")
+        expected = layout.dots()
         for x, y in expected:
             r = layout.radius
             draw.ellipse([x - r, y - r, x + r, y + r], fill=(245, 245, 240))
