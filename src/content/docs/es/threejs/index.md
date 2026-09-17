@@ -72,9 +72,10 @@ Cada página de lección funciona en este sitio, en un marco plegado bajo su cap
 | 11 | [WebXR](11-webxr/) | Windows Mixed Reality, OpenXR |
 | 12 | [Pruebas y CI: renderizado headless, capturas de pantalla comparadas, y sus límites](12-tests-and-ci/) | automatización de UI, pruebas de snapshot |
 | 13 | [Proyecto: el mástil de guitarra 3D de GuitarAlchemist, portado a WebGPU](13-project-ga-fretboard/) | las lecciones anteriores |
+| 14 | [Laboratorio: Guitar Alchemist en 3D, quince experimentos medidos](14-guitar-alchemist-lab/) | las lecciones 8, 9, 10, 11 y 13 |
 | — | [Diario](journal/) | |
 
-El curso está completo: las 13 lecciones se escribieron y comprobaron el 16 de septiembre de 2026. Lo que queda por probar en hardware real, un casco de realidad virtual, un teléfono, WebGPU en Linux, figura en el diario.
+El curso está completo: las 13 lecciones se escribieron y comprobaron el 16 de septiembre de 2026. La lección 14, un laboratorio de quince experimentos medidos sobre las necesidades 3D de Guitar Alchemist, se añadió el 17 de septiembre. Lo que queda por probar en hardware real, un casco de realidad virtual, un teléfono, WebGPU en Linux, figura en el diario.
 
 ## Recursos
 

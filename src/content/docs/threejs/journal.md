@@ -23,6 +23,7 @@ sidebar:
 - [x] Lesson 11: WebXR, emulated
 - [x] Lesson 12: tests and CI
 - [x] Lesson 13: project, GuitarAlchemist's 3D guitar neck
+- [x] Lesson 14: lab, Guitar Alchemist in 3D, fifteen measured experiments
 - [x] Course complete
 - [x] Live demos: every lesson page and five complete scenes, published under the site with a *Try it* panel
 
@@ -142,8 +143,25 @@ Nothing below has been reported to GA.
 - On a phone-sized page (Playwright's Pixel 7 emulation), the frames first measured 150 pixels tall: the site's styles override the iframe's `height` attribute, so the height is now an inline style, `min(420px, 70vh)`. The panel starts folded in a narrow frame. With a 4× CPU slowdown but the author's desktop GPU, the five scenes held 60 frames per second on WebGPU and with `?webgl`; on a real mid-range phone GPU it is *to verify*.
 - The first probe of a page that imports a new dependency failed with "Execution context was destroyed": Vite optimized the dependency and reloaded the page. The second run passed.
 
+## 2026-09-17 — Lesson 14, the Guitar Alchemist 3D lab
+
+- Fifteen experiments in `code/threejs/ga-lab`, each with a hypothesis and numeric predictions committed on 16 September before its run, measured on 17 September on an RTX 5080 in Chromium 153 with WebGPU timestamp queries. Of 61 predictions, 19 were wrong in whole or in part and 2 couldn't be measured; they stay in the lesson.
+- Frames are rendered in a tight loop without `requestAnimationFrame`, vsync off, and the page advances `renderer._nodes.nodeFrame` itself: without it, shadow maps and bloom don't update. `onSubmittedWorkDone()` never resolved under about 3.5 ms, so GPU times come from timestamp queries.
+- r186 findings: `InstancedMesh` with morph targets fails with one instance (no `morphTargetInfluences`) and with several when they are set; `BatchedMesh` draws one call per object on WebGPU; TSL compute runs on WebGL 2; `renderer.info.memory.texturesSize` counts 0 for compressed textures.
+- GA's OPTIC-K index has 313,047 vectors of 124 dimensions (OPTK v4), not 112. The lab reads it read-only; CI uses a synthetic stand-in.
+- Rapier's CCD doesn't stop a kinematic pick: it passes through a string at 30 and 60 steps per second either way.
+- R3F's build brought `three` next to `three/webgpu`: 565 kB gzip against 210 for the same scene without React.
+- The ComfyUI wood textures are pending: the ComfyUI GA lab's experiment 4 had no output yet.
+- CI (`threejs-ga-lab.yml`) compares `renderer.info` counters on WebGL 2 on three OSes, never times. A Playwright screenshot hung for 300 s once on macOS: the runner now keeps the result when a screenshot fails.
+
 ## To verify
 
+- KTX2 GPU memory with a GPU tool.
+- R3F's first frame on a production build.
+- A `three` alias to `three/webgpu`.
+- The real-size neck and IWER's 25 mm head offset on a headset.
+- Audio latency with a microphone.
+- `powerPreference` on a laptop with two GPUs.
 - The VR demo with a real headset: entering the session, the controller rays, the note and the haptic pulse.
 - Whether picks thrown without CCD pass through the frets of the physics demo.
 - The five complete scenes on a phone: frame rate, and whether the studio's 2048 × 2048 shadow map and bloom hold up.

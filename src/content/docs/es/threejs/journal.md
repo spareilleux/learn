@@ -23,6 +23,7 @@ sidebar:
 - [x] Lección 11: WebXR, emulado
 - [x] Lección 12: pruebas y CI
 - [x] Lección 13: proyecto, el mástil de guitarra 3D de GuitarAlchemist
+- [x] Lección 14: laboratorio, Guitar Alchemist en 3D, quince experimentos medidos
 - [x] Curso completo
 - [x] Demos en vivo: cada página de lección y cinco escenas completas, publicadas en el sitio con un panel *Try it*
 
@@ -142,8 +143,25 @@ Nada de lo que sigue se ha comunicado a GA.
 - En una página del tamaño de un teléfono (emulación Pixel 7 de Playwright), los marcos medían al principio 150 píxeles de alto: los estilos del sitio anulan el atributo `height` del iframe, así que la altura es ahora un estilo en línea, `min(420px, 70vh)`. El panel empieza plegado en un marco estrecho. Con la CPU ralentizada 4 veces pero la GPU de escritorio del autor, las cinco escenas mantuvieron 60 fotogramas por segundo en WebGPU y con `?webgl`; en la GPU de un teléfono real de gama media está *por verificar*.
 - La primera sonda de una página que importa una dependencia nueva falló con «Execution context was destroyed»: Vite optimizó la dependencia y recargó la página. La segunda ejecución pasó.
 
+## 2026-09-17 — Lección 14, el laboratorio 3D de Guitar Alchemist
+
+- Quince experimentos en `code/threejs/ga-lab`, cada uno con una hipótesis y predicciones numéricas confirmadas en un commit el 16 de septiembre antes de su ejecución, medidos el 17 de septiembre en una RTX 5080 en Chromium 153 con consultas de marca de tiempo de WebGPU. De 61 predicciones, 19 fueron incorrectas total o parcialmente y 2 no se pudieron medir; se quedan en la lección.
+- Los fotogramas se renderizan en un bucle cerrado sin `requestAnimationFrame`, con vsync desactivado, y la página hace avanzar ella misma `renderer._nodes.nodeFrame`: sin eso, los shadow maps y el bloom no se actualizan. `onSubmittedWorkDone()` nunca resolvió por debajo de unos 3.5 ms, así que los tiempos de GPU vienen de las consultas de marca de tiempo.
+- Hallazgos de r186: `InstancedMesh` con morph targets falla con una instancia (sin `morphTargetInfluences`) y con varias cuando se definen; `BatchedMesh` hace una llamada por objeto en WebGPU; el compute de TSL funciona en WebGL 2; `renderer.info.memory.texturesSize` cuenta 0 para las texturas comprimidas.
+- El índice OPTIC-K de GA tiene 313 047 vectores de 124 dimensiones (OPTK v4), no 112. El laboratorio lo lee en solo lectura; la CI usa un sustituto sintético.
+- El CCD de Rapier no detiene una púa cinemática: atraviesa la cuerda a 30 y 60 pasos por segundo en todos los casos.
+- El build de R3F incluía `three` junto a `three/webgpu`: 565 kB gzip frente a 210 para la misma escena sin React.
+- Las texturas de madera de ComfyUI están pendientes: el experimento 4 del laboratorio ComfyUI GA aún no tenía salida.
+- La CI (`threejs-ga-lab.yml`) compara los contadores de `renderer.info` en WebGL 2 en tres sistemas operativos, nunca los tiempos. Una captura de Playwright se bloqueó 300 s una vez en macOS: el lanzador ahora conserva el resultado cuando falla una captura.
+
 ## Por verificar
 
+- La memoria de GPU de los KTX2 con una herramienta de GPU.
+- El primer fotograma de R3F en un build de producción.
+- Un alias de `three` a `three/webgpu`.
+- El mástil a tamaño real y el desfase de cabeza de 25 mm de IWER en un visor.
+- La latencia de audio con un micrófono.
+- `powerPreference` en un portátil con dos GPU.
 - La demo VR con un visor real: la entrada en la sesión, los rayos de los mandos, la nota y el pulso háptico.
 - Si las púas lanzadas sin CCD atraviesan los trastes de la demo de física.
 - Las cinco escenas completas en un teléfono: fotogramas por segundo, y si el shadow map de 2048 × 2048 y el bloom del estudio aguantan.

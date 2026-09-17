@@ -72,9 +72,10 @@ Every lesson page runs on this site, under a folded frame below its screenshot, 
 | 11 | [WebXR](11-webxr/) | Windows Mixed Reality, OpenXR |
 | 12 | [Tests and CI: headless rendering, compared screenshots, and their limits](12-tests-and-ci/) | UI automation, snapshot tests |
 | 13 | [Project: GuitarAlchemist's 3D guitar neck, ported to WebGPU](13-project-ga-fretboard/) | the lessons before it |
+| 14 | [Lab: Guitar Alchemist in 3D, fifteen measured experiments](14-guitar-alchemist-lab/) | lessons 8, 9, 10, 11 and 13 |
 | — | [Journal](journal/) | |
 
-The course is complete: all 13 lessons were written and checked on 16 September 2026. What remains to try on real hardware, a VR headset, a phone, WebGPU on Linux, is listed in the journal.
+The course is complete: all 13 lessons were written and checked on 16 September 2026. Lesson 14, a lab of fifteen measured experiments on Guitar Alchemist's 3D needs, was added on 17 September. What remains to try on real hardware, a VR headset, a phone, WebGPU on Linux, is listed in the journal.
 
 ## Resources
 
