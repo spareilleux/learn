@@ -23,6 +23,14 @@ def save(array, path):
     Image.fromarray(np.clip(np.rint(array * 255.0), 0, 255).astype(np.uint8)).save(path)
 
 
+def save_normal(normal, path):
+    # 0 must map to 128 on every machine: (0 + 1) / 2 * 255 is exactly 127.5, and rounding a tie
+    # went up on Linux and Windows and down on macOS. Floor after adding 128 and a margin far above
+    # floating-point noise.
+    n = normal * 2.0 - 1.0
+    Image.fromarray(np.clip(np.floor(n * 127.5 + 128.0 + 1e-9), 0, 255).astype(np.uint8)).save(path)
+
+
 def luminance(rgb):
     # Rec. 709 weights on the encoded values: a height guess, not a measurement
     return rgb @ np.array([0.2126, 0.7152, 0.0722])
@@ -97,7 +105,7 @@ def main(args):
     elif command == "normal":
         strength = float(args[3]) if len(args) > 3 else 4.0
         blur = int(args[4]) if len(args) > 4 else 1
-        save(normal_map(load(args[1]), strength, blur), args[2])
+        save_normal(normal_map(load(args[1]), strength, blur), args[2])
     elif command == "roughness":
         low = float(args[3]) if len(args) > 3 else 0.45
         high = float(args[4]) if len(args) > 4 else 0.9
