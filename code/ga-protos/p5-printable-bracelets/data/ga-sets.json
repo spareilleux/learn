@@ -1,0 +1,881 @@
+{
+  "gaSha": "a826864f3a012cad88e415954bf57eca0ce12aa6",
+  "files": [
+    {
+      "path": "Common/GA.Domain.Core/Theory/Harmony/CanonicalChordPatternCatalog.cs",
+      "sha256": "39e7daac19ee97f1aa8b6a94cc3ac5e136c14c412cb7e18ce9ecc75d4bcd45d7"
+    },
+    {
+      "path": "Common/GA.Domain.Core/Theory/Tonal/Scales/Scale.cs",
+      "sha256": "54221f506b0a3e418e09941d4ede727d839c0c8b5f8a2f5427f098a494272d88"
+    }
+  ],
+  "chords": [
+    {
+      "id": "major-triad",
+      "intervals": [
+        0,
+        4,
+        7
+      ],
+      "priority": 0
+    },
+    {
+      "id": "minor-triad",
+      "intervals": [
+        0,
+        3,
+        7
+      ],
+      "priority": 1
+    },
+    {
+      "id": "diminished-triad",
+      "intervals": [
+        0,
+        3,
+        6
+      ],
+      "priority": 2
+    },
+    {
+      "id": "augmented-triad",
+      "intervals": [
+        0,
+        4,
+        8
+      ],
+      "priority": 3
+    },
+    {
+      "id": "sus2",
+      "intervals": [
+        0,
+        2,
+        7
+      ],
+      "priority": 8
+    },
+    {
+      "id": "sus4",
+      "intervals": [
+        0,
+        5,
+        7
+      ],
+      "priority": 8
+    },
+    {
+      "id": "major-6",
+      "intervals": [
+        0,
+        4,
+        7,
+        9
+      ],
+      "priority": 10
+    },
+    {
+      "id": "minor-6",
+      "intervals": [
+        0,
+        3,
+        7,
+        9
+      ],
+      "priority": 11
+    },
+    {
+      "id": "major-6-add-9",
+      "intervals": [
+        0,
+        2,
+        4,
+        7,
+        9
+      ],
+      "priority": 12
+    },
+    {
+      "id": "minor-6-add-9",
+      "intervals": [
+        0,
+        2,
+        3,
+        7,
+        9
+      ],
+      "priority": 13
+    },
+    {
+      "id": "dominant-7",
+      "intervals": [
+        0,
+        4,
+        7,
+        10
+      ],
+      "priority": 5
+    },
+    {
+      "id": "major-7",
+      "intervals": [
+        0,
+        4,
+        7,
+        11
+      ],
+      "priority": 5
+    },
+    {
+      "id": "minor-7",
+      "intervals": [
+        0,
+        3,
+        7,
+        10
+      ],
+      "priority": 5
+    },
+    {
+      "id": "minor-major-7",
+      "intervals": [
+        0,
+        3,
+        7,
+        11
+      ],
+      "priority": 6
+    },
+    {
+      "id": "half-diminished-7",
+      "intervals": [
+        0,
+        3,
+        6,
+        10
+      ],
+      "priority": 6
+    },
+    {
+      "id": "diminished-7",
+      "intervals": [
+        0,
+        3,
+        6,
+        9
+      ],
+      "priority": 7
+    },
+    {
+      "id": "augmented-major-7",
+      "intervals": [
+        0,
+        4,
+        8,
+        11
+      ],
+      "priority": 8
+    },
+    {
+      "id": "augmented-7",
+      "intervals": [
+        0,
+        4,
+        8,
+        10
+      ],
+      "priority": 8
+    },
+    {
+      "id": "7-sus4",
+      "intervals": [
+        0,
+        5,
+        7,
+        10
+      ],
+      "priority": 9
+    },
+    {
+      "id": "7-sus2",
+      "intervals": [
+        0,
+        2,
+        7,
+        10
+      ],
+      "priority": 9
+    },
+    {
+      "id": "dominant-9",
+      "intervals": [
+        0,
+        2,
+        4,
+        7,
+        10
+      ],
+      "priority": 15
+    },
+    {
+      "id": "major-9",
+      "intervals": [
+        0,
+        2,
+        4,
+        7,
+        11
+      ],
+      "priority": 15
+    },
+    {
+      "id": "minor-9",
+      "intervals": [
+        0,
+        2,
+        3,
+        7,
+        10
+      ],
+      "priority": 15
+    },
+    {
+      "id": "minor-major-9",
+      "intervals": [
+        0,
+        2,
+        3,
+        7,
+        11
+      ],
+      "priority": 16
+    },
+    {
+      "id": "half-diminished-9",
+      "intervals": [
+        0,
+        2,
+        3,
+        6,
+        10
+      ],
+      "priority": 17
+    },
+    {
+      "id": "9-sus4",
+      "intervals": [
+        0,
+        2,
+        5,
+        7,
+        10
+      ],
+      "priority": 18
+    },
+    {
+      "id": "dominant-11",
+      "intervals": [
+        0,
+        2,
+        5,
+        7,
+        10
+      ],
+      "priority": 20
+    },
+    {
+      "id": "major-11",
+      "intervals": [
+        0,
+        2,
+        5,
+        7,
+        11
+      ],
+      "priority": 20
+    },
+    {
+      "id": "minor-11",
+      "intervals": [
+        0,
+        2,
+        3,
+        5,
+        7,
+        10
+      ],
+      "priority": 20
+    },
+    {
+      "id": "dominant-11-full",
+      "intervals": [
+        0,
+        2,
+        4,
+        5,
+        7,
+        10
+      ],
+      "priority": 22
+    },
+    {
+      "id": "dominant-13",
+      "intervals": [
+        0,
+        2,
+        4,
+        7,
+        9,
+        10
+      ],
+      "priority": 25
+    },
+    {
+      "id": "major-13",
+      "intervals": [
+        0,
+        2,
+        4,
+        7,
+        9,
+        11
+      ],
+      "priority": 25
+    },
+    {
+      "id": "minor-13",
+      "intervals": [
+        0,
+        2,
+        3,
+        7,
+        9,
+        10
+      ],
+      "priority": 26
+    },
+    {
+      "id": "13-sus4",
+      "intervals": [
+        0,
+        2,
+        5,
+        7,
+        9,
+        10
+      ],
+      "priority": 28
+    },
+    {
+      "id": "dominant-7-b5",
+      "intervals": [
+        0,
+        4,
+        6,
+        10
+      ],
+      "priority": 30
+    },
+    {
+      "id": "dominant-7-sharp-5",
+      "intervals": [
+        0,
+        4,
+        8,
+        10
+      ],
+      "priority": 30
+    },
+    {
+      "id": "dominant-7-b9",
+      "intervals": [
+        0,
+        1,
+        4,
+        7,
+        10
+      ],
+      "priority": 32
+    },
+    {
+      "id": "dominant-7-sharp-9",
+      "intervals": [
+        0,
+        3,
+        4,
+        7,
+        10
+      ],
+      "priority": 32
+    },
+    {
+      "id": "dominant-7-sharp-11",
+      "intervals": [
+        0,
+        4,
+        6,
+        7,
+        10
+      ],
+      "priority": 34
+    },
+    {
+      "id": "dominant-7-b13",
+      "intervals": [
+        0,
+        4,
+        7,
+        8,
+        10
+      ],
+      "priority": 34
+    },
+    {
+      "id": "dominant-7-b9-sharp-9",
+      "intervals": [
+        0,
+        1,
+        3,
+        4,
+        7,
+        10
+      ],
+      "priority": 36
+    },
+    {
+      "id": "dominant-7-b9-sharp-11",
+      "intervals": [
+        0,
+        1,
+        4,
+        6,
+        7,
+        10
+      ],
+      "priority": 38
+    },
+    {
+      "id": "dominant-9-sharp-11",
+      "intervals": [
+        0,
+        2,
+        4,
+        6,
+        7,
+        10
+      ],
+      "priority": 40
+    },
+    {
+      "id": "dominant-13-b9",
+      "intervals": [
+        0,
+        1,
+        4,
+        7,
+        9,
+        10
+      ],
+      "priority": 42
+    },
+    {
+      "id": "dominant-7-alt",
+      "intervals": [
+        0,
+        1,
+        3,
+        4,
+        8,
+        10
+      ],
+      "priority": 44
+    },
+    {
+      "id": "add-9",
+      "intervals": [
+        0,
+        2,
+        4,
+        7
+      ],
+      "priority": 50
+    },
+    {
+      "id": "minor-add-9",
+      "intervals": [
+        0,
+        2,
+        3,
+        7
+      ],
+      "priority": 51
+    },
+    {
+      "id": "add-11",
+      "intervals": [
+        0,
+        4,
+        5,
+        7
+      ],
+      "priority": 52
+    },
+    {
+      "id": "minor-add-11",
+      "intervals": [
+        0,
+        3,
+        5,
+        7
+      ],
+      "priority": 53
+    },
+    {
+      "id": "6-9",
+      "intervals": [
+        0,
+        2,
+        4,
+        7,
+        9
+      ],
+      "priority": 54
+    },
+    {
+      "id": "minor-6-9",
+      "intervals": [
+        0,
+        2,
+        3,
+        7,
+        9
+      ],
+      "priority": 55
+    },
+    {
+      "id": "quartal-3",
+      "intervals": [
+        0,
+        5,
+        10
+      ],
+      "priority": 70
+    },
+    {
+      "id": "quartal-4",
+      "intervals": [
+        0,
+        3,
+        5,
+        10
+      ],
+      "priority": 71
+    },
+    {
+      "id": "quartal-5",
+      "intervals": [
+        0,
+        3,
+        5,
+        8,
+        10
+      ],
+      "priority": 72
+    },
+    {
+      "id": "power-chord",
+      "intervals": [
+        0,
+        7
+      ],
+      "priority": 90
+    },
+    {
+      "id": "shell-7",
+      "intervals": [
+        0,
+        4,
+        10
+      ],
+      "priority": 91
+    },
+    {
+      "id": "shell-major-7",
+      "intervals": [
+        0,
+        4,
+        11
+      ],
+      "priority": 91
+    },
+    {
+      "id": "shell-minor-7",
+      "intervals": [
+        0,
+        3,
+        10
+      ],
+      "priority": 91
+    }
+  ],
+  "scales": [
+    {
+      "id": "Major",
+      "notes": "C D E F G A B",
+      "root": 0,
+      "intervals": [
+        0,
+        2,
+        4,
+        5,
+        7,
+        9,
+        11
+      ]
+    },
+    {
+      "id": "MajorPentatonic",
+      "notes": "C D E G A",
+      "root": 0,
+      "intervals": [
+        0,
+        2,
+        4,
+        7,
+        9
+      ]
+    },
+    {
+      "id": "WholeTone",
+      "notes": "C D E F# G# A#",
+      "root": 0,
+      "intervals": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10
+      ]
+    },
+    {
+      "id": "Augmented",
+      "notes": "C D# E G G# B",
+      "root": 0,
+      "intervals": [
+        0,
+        3,
+        4,
+        7,
+        8,
+        11
+      ]
+    },
+    {
+      "id": "Diminished",
+      "notes": "C D Eb F Gb Ab A B",
+      "root": 0,
+      "intervals": [
+        0,
+        2,
+        3,
+        5,
+        6,
+        8,
+        9,
+        11
+      ]
+    },
+    {
+      "id": "Blues",
+      "notes": "C Eb F F# G Bb",
+      "root": 0,
+      "intervals": [
+        0,
+        3,
+        5,
+        6,
+        7,
+        10
+      ]
+    },
+    {
+      "id": "BebopDominant",
+      "notes": "C D E F G A Bb B",
+      "root": 0,
+      "intervals": [
+        0,
+        2,
+        4,
+        5,
+        7,
+        9,
+        10,
+        11
+      ]
+    },
+    {
+      "id": "Tritone",
+      "notes": "C Db E F# G A",
+      "root": 0,
+      "intervals": [
+        0,
+        1,
+        4,
+        6,
+        7,
+        9
+      ]
+    },
+    {
+      "id": "DoubleHarmonic",
+      "notes": "C Db E F G Ab B",
+      "root": 0,
+      "intervals": [
+        0,
+        1,
+        4,
+        5,
+        7,
+        8,
+        11
+      ]
+    },
+    {
+      "id": "Enigmatic",
+      "notes": "C Db E F# G# A# B",
+      "root": 0,
+      "intervals": [
+        0,
+        1,
+        4,
+        6,
+        8,
+        10,
+        11
+      ]
+    },
+    {
+      "id": "Prometheus",
+      "notes": "C D E F# A Bb",
+      "root": 0,
+      "intervals": [
+        0,
+        2,
+        4,
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "HarmonicMajor",
+      "notes": "C D E F G Ab B",
+      "root": 0,
+      "intervals": [
+        0,
+        2,
+        4,
+        5,
+        7,
+        8,
+        11
+      ]
+    },
+    {
+      "id": "NeapolitanMinor",
+      "notes": "C Db Eb F G Ab Bb",
+      "root": 0,
+      "intervals": [
+        0,
+        1,
+        3,
+        5,
+        7,
+        8,
+        10
+      ]
+    },
+    {
+      "id": "NeapolitanMajor",
+      "notes": "C Db Eb F G A B",
+      "root": 0,
+      "intervals": [
+        0,
+        1,
+        3,
+        5,
+        7,
+        9,
+        11
+      ]
+    },
+    {
+      "id": "JapaneseHirajoshi",
+      "notes": "C D Eb G Ab",
+      "root": 0,
+      "intervals": [
+        0,
+        2,
+        3,
+        7,
+        8
+      ]
+    },
+    {
+      "id": "InSen",
+      "notes": "C Db F G Bb",
+      "root": 0,
+      "intervals": [
+        0,
+        1,
+        5,
+        7,
+        10
+      ]
+    },
+    {
+      "id": "Minor.Natural",
+      "notes": "A B C D E F G",
+      "root": 9,
+      "intervals": [
+        0,
+        2,
+        3,
+        5,
+        7,
+        8,
+        10
+      ]
+    },
+    {
+      "id": "Minor.Harmonic",
+      "notes": "A B C D E F G#",
+      "root": 9,
+      "intervals": [
+        0,
+        2,
+        3,
+        5,
+        7,
+        8,
+        11
+      ]
+    },
+    {
+      "id": "Minor.Melodic",
+      "notes": "A B C D E F# G#",
+      "root": 9,
+      "intervals": [
+        0,
+        2,
+        3,
+        5,
+        7,
+        9,
+        11
+      ]
+    }
+  ]
+}

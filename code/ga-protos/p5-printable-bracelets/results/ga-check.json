@@ -1,0 +1,44 @@
+{
+  "what": "The bracelet's pitch classes, checked against Guitar Alchemist's running services rather than against its source files.",
+  "when": "2026-09-17",
+  "how": "GA's MCP server, tools get_scale_notes, ga_chord_to_set and ga_parse_chord. Run by hand: CI has no GA server, so nothing here is re-run there. The committed data/ga-sets.json comes from the source files at GA a826864 and is what the meshes are built from.",
+  "agree": [
+    {
+      "query": "get_scale_notes('C major')",
+      "ga": [0, 2, 4, 5, 7, 9, 11],
+      "ga_sets_json": [0, 2, 4, 5, 7, 9, 11],
+      "note": "Scale.Major in Scale.cs, and the running server, give the same set, with C = 0."
+    },
+    {
+      "query": "get_scale_notes('A minor')",
+      "ga": [9, 11, 0, 2, 4, 5, 7],
+      "ga_sets_json": [9, 11, 0, 2, 4, 5, 7],
+      "note": "Minor.Natural rooted on A: the same twelve positions light up as for C major, which is what the two bracelets show."
+    },
+    {
+      "query": "ga_chord_to_set('Cmaj7')",
+      "ga": [0, 4, 7, 11],
+      "ga_sets_json": [0, 4, 7, 11],
+      "note": "major-7 in CanonicalChordPatternCatalog.cs."
+    }
+  ],
+  "disagree": [
+    {
+      "query": "ga_chord_to_set('Cdim7')",
+      "ga": [0, 3, 6, 10],
+      "ga_printed": "{C, Eb, F#, Bb}, Forte 4-27, prime form 0 2 5 8",
+      "ga_sets_json": [0, 3, 6, 9],
+      "expected": "a diminished seventh is 0 3 6 9, Forte 4-28, prime form 0 3 6 9",
+      "note": "The running chord parser reads dim7 as a half-diminished seventh. ga_parse_chord('Cdim7') returns quality 'diminished' with component 'ext:7', so the seventh is added as a minor seventh instead of a diminished one. GA's own catalog file has diminished-7 = [0, 3, 6, 9]."
+    },
+    {
+      "query": "ga_chord_to_set('Cm7b5')",
+      "ga": [0, 3, 7, 10],
+      "ga_printed": "{C, Eb, G, Bb}, Forte 4-26, prime form 0 3 5 8",
+      "ga_sets_json": [0, 3, 6, 10],
+      "expected": "a half-diminished seventh is 0 3 6 10",
+      "note": "The b5 alteration is dropped: the answer is a plain minor seventh. GA's own catalog file has half-diminished-7 = [0, 3, 6, 10]."
+    }
+  ],
+  "conclusion": "The bracelets are built from GA's catalog files, which are right. A bracelet built from the running chord parser would put the beads of C dim7 and C m7b5 in the wrong places."
+}

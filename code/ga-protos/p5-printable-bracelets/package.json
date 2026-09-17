@@ -1,0 +1,14 @@
+{
+  "name": "ga-p5-printable-bracelets",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Guitar Alchemist Lab, prototype 5: a pitch-class bracelet turned into a printable bangle. GA's chord catalog and scales feed a mesh built with trimesh and manifold3d, measured for watertightness, volume, wall thickness and overhangs, and sliced when a slicer is at hand",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "sets": "node scripts/ga-sets.ts",
+    "test": "node --test \"tests/*.test.ts\""
+  }
+}

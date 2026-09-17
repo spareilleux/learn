@@ -1,0 +1,3690 @@
+{
+  "design": {
+    "inner_diameter_mm": 65.0,
+    "wall_mm": 2.0,
+    "height_mm": 12.0,
+    "segments": 192,
+    "keel_chamfer_mm": 0.0,
+    "positions_deg": [
+      90.0,
+      60.0,
+      30.0,
+      0.0,
+      330.0,
+      300.0,
+      270.0,
+      240.0,
+      210.0,
+      180.0,
+      150.0,
+      120.0
+    ]
+  },
+  "machine": {
+    "python": "3.14.2",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "trimesh": "5.1.0"
+  },
+  "total_s": 5.95,
+  "bracelets": [
+    {
+      "name": "C major-triad",
+      "pitch_classes": [
+        0,
+        4,
+        7
+      ],
+      "notes": "C E G",
+      "bead": "sphere",
+      "build_s": 0.026,
+      "union": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 1,
+          "euler_number": 0,
+          "genus": 1.0,
+          "vertices": 2737,
+          "faces": 5474,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.3761,
+          "area_cm2": 62.0647,
+          "pla_mass_g": 6.666,
+          "bbox_mm": [
+            70.6,
+            72.8,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 31.5,
+          "min_surface_radius_mm": 31.5143,
+          "inner_diameter_mm": 63.0287,
+          "faceting_loss_mm": 0.98566,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.9954,
+          "p5_mm": 1.9954,
+          "median_mm": 1.9969,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 62.0647,
+          "bed_area_cm2": 4.3362,
+          "steep_area_cm2": 0.2163,
+          "steep_fraction": 0.003485,
+          "min_slope_deg": 4.874,
+          "threshold_deg": 45.0
+        }
+      },
+      "naive": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 14,
+          "euler_number": 26,
+          "genus": 0.0714285714285714,
+          "vertices": 2774,
+          "faces": 5496,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.6346,
+          "area_cm2": 69.4657,
+          "pla_mass_g": 6.987,
+          "bbox_mm": [
+            70.6,
+            72.8,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 31.5,
+          "min_surface_radius_mm": 31.5143,
+          "inner_diameter_mm": 63.0287,
+          "faceting_loss_mm": 0.98566,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 0.0488,
+          "p5_mm": 1.4019,
+          "median_mm": 1.9964,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 69.4657,
+          "bed_area_cm2": 4.4152,
+          "steep_area_cm2": 0.5024,
+          "steep_fraction": 0.007232,
+          "min_slope_deg": 4.874,
+          "threshold_deg": 45.0
+        }
+      },
+      "stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-major-triad-sphere.stl",
+        "bytes": 273784
+      },
+      "3mf": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-major-triad-sphere.3mf",
+        "bytes": 77914
+      },
+      "naive_stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-major-triad-sphere-naive.stl",
+        "bytes": 274884
+      }
+    },
+    {
+      "name": "C major-triad",
+      "pitch_classes": [
+        0,
+        4,
+        7
+      ],
+      "notes": "C E G",
+      "bead": "cone",
+      "build_s": 0.012,
+      "union": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 1,
+          "euler_number": 0,
+          "genus": 1.0,
+          "vertices": 1193,
+          "faces": 2386,
+          "degenerate_faces": 8,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.2473,
+          "area_cm2": 61.4836,
+          "pla_mass_g": 6.507,
+          "bbox_mm": [
+            70.6,
+            72.4,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 32.5,
+          "min_surface_radius_mm": 32.4956,
+          "inner_diameter_mm": 64.9913,
+          "faceting_loss_mm": 0.00435,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.9954,
+          "p5_mm": 1.9954,
+          "median_mm": 1.9968,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 61.4836,
+          "bed_area_cm2": 4.3362,
+          "steep_area_cm2": 0.0,
+          "steep_fraction": 0.0,
+          "min_slope_deg": 45.035,
+          "threshold_deg": 45.0
+        }
+      },
+      "naive": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 14,
+          "euler_number": 26,
+          "genus": 0.0714285714285714,
+          "vertices": 1046,
+          "faces": 2040,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.3829,
+          "area_cm2": 68.1342,
+          "pla_mass_g": 6.675,
+          "bbox_mm": [
+            70.6,
+            72.4,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 32.5,
+          "min_surface_radius_mm": 32.4956,
+          "inner_diameter_mm": 64.9913,
+          "faceting_loss_mm": 0.00435,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.4,
+          "p5_mm": 1.4037,
+          "median_mm": 1.9963,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 68.1342,
+          "bed_area_cm2": 4.4152,
+          "steep_area_cm2": 0.0,
+          "steep_fraction": 0.0,
+          "min_slope_deg": 45.035,
+          "threshold_deg": 45.0
+        }
+      },
+      "stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-major-triad-cone.stl",
+        "bytes": 119384
+      },
+      "3mf": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-major-triad-cone.3mf",
+        "bytes": 28003
+      },
+      "naive_stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-major-triad-cone-naive.stl",
+        "bytes": 102084
+      }
+    },
+    {
+      "name": "C minor-triad",
+      "pitch_classes": [
+        0,
+        3,
+        7
+      ],
+      "notes": "C D# G",
+      "bead": "sphere",
+      "build_s": 0.022,
+      "union": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 1,
+          "euler_number": 0,
+          "genus": 1.0,
+          "vertices": 2737,
+          "faces": 5474,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.3761,
+          "area_cm2": 62.0647,
+          "pla_mass_g": 6.666,
+          "bbox_mm": [
+            72.8,
+            72.8,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 31.5,
+          "min_surface_radius_mm": 31.5143,
+          "inner_diameter_mm": 63.0287,
+          "faceting_loss_mm": 0.98566,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.9954,
+          "p5_mm": 1.9954,
+          "median_mm": 1.9969,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 62.0647,
+          "bed_area_cm2": 4.3362,
+          "steep_area_cm2": 0.2163,
+          "steep_fraction": 0.003485,
+          "min_slope_deg": 4.874,
+          "threshold_deg": 45.0
+        }
+      },
+      "naive": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 14,
+          "euler_number": 26,
+          "genus": 0.0714285714285714,
+          "vertices": 2774,
+          "faces": 5496,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.6346,
+          "area_cm2": 69.4657,
+          "pla_mass_g": 6.987,
+          "bbox_mm": [
+            72.8,
+            72.8,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 31.5,
+          "min_surface_radius_mm": 31.5143,
+          "inner_diameter_mm": 63.0287,
+          "faceting_loss_mm": 0.98566,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 0.0488,
+          "p5_mm": 1.4022,
+          "median_mm": 1.9964,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 69.4657,
+          "bed_area_cm2": 4.4152,
+          "steep_area_cm2": 0.5024,
+          "steep_fraction": 0.007232,
+          "min_slope_deg": 4.874,
+          "threshold_deg": 45.0
+        }
+      },
+      "stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-minor-triad-sphere.stl",
+        "bytes": 273784
+      },
+      "3mf": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-minor-triad-sphere.3mf",
+        "bytes": 71021
+      },
+      "naive_stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-minor-triad-sphere-naive.stl",
+        "bytes": 274884
+      }
+    },
+    {
+      "name": "C minor-triad",
+      "pitch_classes": [
+        0,
+        3,
+        7
+      ],
+      "notes": "C D# G",
+      "bead": "cone",
+      "build_s": 0.011,
+      "union": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 1,
+          "euler_number": 0,
+          "genus": 1.0,
+          "vertices": 1191,
+          "faces": 2382,
+          "degenerate_faces": 4,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.2473,
+          "area_cm2": 61.4836,
+          "pla_mass_g": 6.507,
+          "bbox_mm": [
+            72.4,
+            72.4,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 32.5,
+          "min_surface_radius_mm": 32.4956,
+          "inner_diameter_mm": 64.9913,
+          "faceting_loss_mm": 0.00435,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.9954,
+          "p5_mm": 1.9954,
+          "median_mm": 1.9968,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 61.4836,
+          "bed_area_cm2": 4.3362,
+          "steep_area_cm2": 0.0,
+          "steep_fraction": 0.0,
+          "min_slope_deg": 45.035,
+          "threshold_deg": 45.0
+        }
+      },
+      "naive": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 14,
+          "euler_number": 26,
+          "genus": 0.0714285714285714,
+          "vertices": 1046,
+          "faces": 2040,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.3829,
+          "area_cm2": 68.1342,
+          "pla_mass_g": 6.675,
+          "bbox_mm": [
+            72.4,
+            72.4,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 32.5,
+          "min_surface_radius_mm": 32.4956,
+          "inner_diameter_mm": 64.9913,
+          "faceting_loss_mm": 0.00435,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.4,
+          "p5_mm": 1.4044,
+          "median_mm": 1.9963,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 68.1342,
+          "bed_area_cm2": 4.4152,
+          "steep_area_cm2": 0.0,
+          "steep_fraction": 0.0,
+          "min_slope_deg": 45.035,
+          "threshold_deg": 45.0
+        }
+      },
+      "stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-minor-triad-cone.stl",
+        "bytes": 119184
+      },
+      "3mf": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-minor-triad-cone.3mf",
+        "bytes": 27094
+      },
+      "naive_stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-minor-triad-cone-naive.stl",
+        "bytes": 102084
+      }
+    },
+    {
+      "name": "C diminished-triad",
+      "pitch_classes": [
+        0,
+        3,
+        6
+      ],
+      "notes": "C D# F#",
+      "bead": "sphere",
+      "build_s": 0.041,
+      "union": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 1,
+          "euler_number": 0,
+          "genus": 1.0,
+          "vertices": 2737,
+          "faces": 5474,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.3761,
+          "area_cm2": 62.0647,
+          "pla_mass_g": 6.666,
+          "bbox_mm": [
+            72.8,
+            75.0,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 31.5,
+          "min_surface_radius_mm": 31.5143,
+          "inner_diameter_mm": 63.0287,
+          "faceting_loss_mm": 0.98566,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.9954,
+          "p5_mm": 1.9954,
+          "median_mm": 1.9969,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 62.0647,
+          "bed_area_cm2": 4.3362,
+          "steep_area_cm2": 0.2163,
+          "steep_fraction": 0.003485,
+          "min_slope_deg": 4.874,
+          "threshold_deg": 45.0
+        }
+      },
+      "naive": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 14,
+          "euler_number": 26,
+          "genus": 0.0714285714285714,
+          "vertices": 2774,
+          "faces": 5496,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.6346,
+          "area_cm2": 69.4657,
+          "pla_mass_g": 6.987,
+          "bbox_mm": [
+            72.8,
+            75.0,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 31.5,
+          "min_surface_radius_mm": 31.5143,
+          "inner_diameter_mm": 63.0287,
+          "faceting_loss_mm": 0.98566,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 0.0241,
+          "p5_mm": 1.4022,
+          "median_mm": 1.9964,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 69.4657,
+          "bed_area_cm2": 4.4152,
+          "steep_area_cm2": 0.5024,
+          "steep_fraction": 0.007232,
+          "min_slope_deg": 4.874,
+          "threshold_deg": 45.0
+        }
+      },
+      "stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-diminished-triad-sphere.stl",
+        "bytes": 273784
+      },
+      "3mf": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-diminished-triad-sphere.3mf",
+        "bytes": 65631
+      },
+      "naive_stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-diminished-triad-sphere-naive.stl",
+        "bytes": 274884
+      }
+    },
+    {
+      "name": "C diminished-triad",
+      "pitch_classes": [
+        0,
+        3,
+        6
+      ],
+      "notes": "C D# F#",
+      "bead": "cone",
+      "build_s": 0.012,
+      "union": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 1,
+          "euler_number": 0,
+          "genus": 1.0,
+          "vertices": 1189,
+          "faces": 2378,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.2473,
+          "area_cm2": 61.4836,
+          "pla_mass_g": 6.507,
+          "bbox_mm": [
+            72.4,
+            74.2,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 32.5,
+          "min_surface_radius_mm": 32.4956,
+          "inner_diameter_mm": 64.9913,
+          "faceting_loss_mm": 0.00435,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.9954,
+          "p5_mm": 1.9954,
+          "median_mm": 1.9968,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 61.4836,
+          "bed_area_cm2": 4.3362,
+          "steep_area_cm2": 0.0,
+          "steep_fraction": 0.0,
+          "min_slope_deg": 45.035,
+          "threshold_deg": 45.0
+        }
+      },
+      "naive": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 14,
+          "euler_number": 26,
+          "genus": 0.0714285714285714,
+          "vertices": 1046,
+          "faces": 2040,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.3829,
+          "area_cm2": 68.1342,
+          "pla_mass_g": 6.675,
+          "bbox_mm": [
+            72.4,
+            74.2,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 32.5,
+          "min_surface_radius_mm": 32.4956,
+          "inner_diameter_mm": 64.9913,
+          "faceting_loss_mm": 0.00435,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.4,
+          "p5_mm": 1.4044,
+          "median_mm": 1.9963,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 68.1342,
+          "bed_area_cm2": 4.4152,
+          "steep_area_cm2": 0.0,
+          "steep_fraction": 0.0,
+          "min_slope_deg": 45.035,
+          "threshold_deg": 45.0
+        }
+      },
+      "stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-diminished-triad-cone.stl",
+        "bytes": 118984
+      },
+      "3mf": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-diminished-triad-cone.3mf",
+        "bytes": 26433
+      },
+      "naive_stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-diminished-triad-cone-naive.stl",
+        "bytes": 102084
+      }
+    },
+    {
+      "name": "C augmented-triad",
+      "pitch_classes": [
+        0,
+        4,
+        8
+      ],
+      "notes": "C E G#",
+      "bead": "sphere",
+      "build_s": 0.025,
+      "union": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 1,
+          "euler_number": 0,
+          "genus": 1.0,
+          "vertices": 2737,
+          "faces": 5474,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.3761,
+          "area_cm2": 62.0647,
+          "pla_mass_g": 6.666,
+          "bbox_mm": [
+            70.6,
+            72.8,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 31.5,
+          "min_surface_radius_mm": 31.5143,
+          "inner_diameter_mm": 63.0287,
+          "faceting_loss_mm": 0.98566,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.9954,
+          "p5_mm": 1.9954,
+          "median_mm": 1.9969,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 62.0647,
+          "bed_area_cm2": 4.3362,
+          "steep_area_cm2": 0.2163,
+          "steep_fraction": 0.003485,
+          "min_slope_deg": 4.874,
+          "threshold_deg": 45.0
+        }
+      },
+      "naive": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 14,
+          "euler_number": 26,
+          "genus": 0.0714285714285714,
+          "vertices": 2774,
+          "faces": 5496,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.6346,
+          "area_cm2": 69.4657,
+          "pla_mass_g": 6.987,
+          "bbox_mm": [
+            70.6,
+            72.8,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 31.5,
+          "min_surface_radius_mm": 31.5143,
+          "inner_diameter_mm": 63.0287,
+          "faceting_loss_mm": 0.98566,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 0.0488,
+          "p5_mm": 1.4024,
+          "median_mm": 1.9964,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 69.4657,
+          "bed_area_cm2": 4.4152,
+          "steep_area_cm2": 0.5024,
+          "steep_fraction": 0.007232,
+          "min_slope_deg": 4.874,
+          "threshold_deg": 45.0
+        }
+      },
+      "stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-augmented-triad-sphere.stl",
+        "bytes": 273784
+      },
+      "3mf": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-augmented-triad-sphere.3mf",
+        "bytes": 78307
+      },
+      "naive_stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-augmented-triad-sphere-naive.stl",
+        "bytes": 274884
+      }
+    },
+    {
+      "name": "C augmented-triad",
+      "pitch_classes": [
+        0,
+        4,
+        8
+      ],
+      "notes": "C E G#",
+      "bead": "cone",
+      "build_s": 0.013,
+      "union": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 1,
+          "euler_number": 0,
+          "genus": 1.0,
+          "vertices": 1193,
+          "faces": 2386,
+          "degenerate_faces": 8,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.2473,
+          "area_cm2": 61.4836,
+          "pla_mass_g": 6.507,
+          "bbox_mm": [
+            70.6,
+            72.4,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 32.5,
+          "min_surface_radius_mm": 32.4956,
+          "inner_diameter_mm": 64.9913,
+          "faceting_loss_mm": 0.00435,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.9954,
+          "p5_mm": 1.9954,
+          "median_mm": 1.9968,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 61.4836,
+          "bed_area_cm2": 4.3362,
+          "steep_area_cm2": 0.0,
+          "steep_fraction": 0.0,
+          "min_slope_deg": 45.035,
+          "threshold_deg": 45.0
+        }
+      },
+      "naive": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 14,
+          "euler_number": 26,
+          "genus": 0.0714285714285714,
+          "vertices": 1046,
+          "faces": 2040,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.3829,
+          "area_cm2": 68.1342,
+          "pla_mass_g": 6.675,
+          "bbox_mm": [
+            70.6,
+            72.4,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 32.5,
+          "min_surface_radius_mm": 32.4956,
+          "inner_diameter_mm": 64.9913,
+          "faceting_loss_mm": 0.00435,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.4,
+          "p5_mm": 1.4041,
+          "median_mm": 1.9964,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 68.1342,
+          "bed_area_cm2": 4.4152,
+          "steep_area_cm2": 0.0,
+          "steep_fraction": 0.0,
+          "min_slope_deg": 45.035,
+          "threshold_deg": 45.0
+        }
+      },
+      "stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-augmented-triad-cone.stl",
+        "bytes": 119384
+      },
+      "3mf": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-augmented-triad-cone.3mf",
+        "bytes": 28100
+      },
+      "naive_stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-augmented-triad-cone-naive.stl",
+        "bytes": 102084
+      }
+    },
+    {
+      "name": "C sus2",
+      "pitch_classes": [
+        0,
+        2,
+        7
+      ],
+      "notes": "C D G",
+      "bead": "sphere",
+      "build_s": 0.024,
+      "union": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 1,
+          "euler_number": 0,
+          "genus": 1.0,
+          "vertices": 2737,
+          "faces": 5474,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.3761,
+          "area_cm2": 62.0647,
+          "pla_mass_g": 6.666,
+          "bbox_mm": [
+            70.6,
+            72.8,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 31.5,
+          "min_surface_radius_mm": 31.5143,
+          "inner_diameter_mm": 63.0287,
+          "faceting_loss_mm": 0.98566,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.9954,
+          "p5_mm": 1.9954,
+          "median_mm": 1.9969,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 62.0647,
+          "bed_area_cm2": 4.3362,
+          "steep_area_cm2": 0.2163,
+          "steep_fraction": 0.003485,
+          "min_slope_deg": 4.874,
+          "threshold_deg": 45.0
+        }
+      },
+      "naive": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 14,
+          "euler_number": 26,
+          "genus": 0.0714285714285714,
+          "vertices": 2774,
+          "faces": 5496,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.6346,
+          "area_cm2": 69.4657,
+          "pla_mass_g": 6.987,
+          "bbox_mm": [
+            70.6,
+            72.8,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 31.5,
+          "min_surface_radius_mm": 31.5143,
+          "inner_diameter_mm": 63.0287,
+          "faceting_loss_mm": 0.98566,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 0.0127,
+          "p5_mm": 1.4019,
+          "median_mm": 1.9964,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 69.4657,
+          "bed_area_cm2": 4.4152,
+          "steep_area_cm2": 0.5024,
+          "steep_fraction": 0.007232,
+          "min_slope_deg": 4.874,
+          "threshold_deg": 45.0
+        }
+      },
+      "stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-sus2-sphere.stl",
+        "bytes": 273784
+      },
+      "3mf": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-sus2-sphere.3mf",
+        "bytes": 78954
+      },
+      "naive_stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-sus2-sphere-naive.stl",
+        "bytes": 274884
+      }
+    },
+    {
+      "name": "C sus2",
+      "pitch_classes": [
+        0,
+        2,
+        7
+      ],
+      "notes": "C D G",
+      "bead": "cone",
+      "build_s": 0.016,
+      "union": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 1,
+          "euler_number": 0,
+          "genus": 1.0,
+          "vertices": 1193,
+          "faces": 2386,
+          "degenerate_faces": 8,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.2473,
+          "area_cm2": 61.4836,
+          "pla_mass_g": 6.507,
+          "bbox_mm": [
+            70.6,
+            72.4,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 32.5,
+          "min_surface_radius_mm": 32.4956,
+          "inner_diameter_mm": 64.9913,
+          "faceting_loss_mm": 0.00435,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.9954,
+          "p5_mm": 1.9954,
+          "median_mm": 1.9968,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 61.4836,
+          "bed_area_cm2": 4.3362,
+          "steep_area_cm2": 0.0,
+          "steep_fraction": 0.0,
+          "min_slope_deg": 45.035,
+          "threshold_deg": 45.0
+        }
+      },
+      "naive": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 14,
+          "euler_number": 26,
+          "genus": 0.0714285714285714,
+          "vertices": 1046,
+          "faces": 2040,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.3829,
+          "area_cm2": 68.1342,
+          "pla_mass_g": 6.675,
+          "bbox_mm": [
+            70.6,
+            72.4,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 32.5,
+          "min_surface_radius_mm": 32.4956,
+          "inner_diameter_mm": 64.9913,
+          "faceting_loss_mm": 0.00435,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.4,
+          "p5_mm": 1.4036,
+          "median_mm": 1.9963,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 68.1342,
+          "bed_area_cm2": 4.4152,
+          "steep_area_cm2": 0.0,
+          "steep_fraction": 0.0,
+          "min_slope_deg": 45.035,
+          "threshold_deg": 45.0
+        }
+      },
+      "stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-sus2-cone.stl",
+        "bytes": 119384
+      },
+      "3mf": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-sus2-cone.3mf",
+        "bytes": 27650
+      },
+      "naive_stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-sus2-cone-naive.stl",
+        "bytes": 102084
+      }
+    },
+    {
+      "name": "C sus4",
+      "pitch_classes": [
+        0,
+        5,
+        7
+      ],
+      "notes": "C F G",
+      "bead": "sphere",
+      "build_s": 0.021,
+      "union": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 1,
+          "euler_number": 0,
+          "genus": 1.0,
+          "vertices": 2737,
+          "faces": 5474,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.3761,
+          "area_cm2": 62.0647,
+          "pla_mass_g": 6.666,
+          "bbox_mm": [
+            70.6,
+            72.8,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 31.5,
+          "min_surface_radius_mm": 31.5143,
+          "inner_diameter_mm": 63.0287,
+          "faceting_loss_mm": 0.98566,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.9954,
+          "p5_mm": 1.9954,
+          "median_mm": 1.9969,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 62.0647,
+          "bed_area_cm2": 4.3362,
+          "steep_area_cm2": 0.2163,
+          "steep_fraction": 0.003485,
+          "min_slope_deg": 4.874,
+          "threshold_deg": 45.0
+        }
+      },
+      "naive": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 14,
+          "euler_number": 26,
+          "genus": 0.0714285714285714,
+          "vertices": 2774,
+          "faces": 5496,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.6346,
+          "area_cm2": 69.4657,
+          "pla_mass_g": 6.987,
+          "bbox_mm": [
+            70.6,
+            72.8,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 31.5,
+          "min_surface_radius_mm": 31.5143,
+          "inner_diameter_mm": 63.0287,
+          "faceting_loss_mm": 0.98566,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 0.0488,
+          "p5_mm": 1.4019,
+          "median_mm": 1.9964,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 69.4657,
+          "bed_area_cm2": 4.4152,
+          "steep_area_cm2": 0.5024,
+          "steep_fraction": 0.007232,
+          "min_slope_deg": 4.874,
+          "threshold_deg": 45.0
+        }
+      },
+      "stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-sus4-sphere.stl",
+        "bytes": 273784
+      },
+      "3mf": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-sus4-sphere.3mf",
+        "bytes": 77961
+      },
+      "naive_stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-sus4-sphere-naive.stl",
+        "bytes": 274884
+      }
+    },
+    {
+      "name": "C sus4",
+      "pitch_classes": [
+        0,
+        5,
+        7
+      ],
+      "notes": "C F G",
+      "bead": "cone",
+      "build_s": 0.013,
+      "union": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 1,
+          "euler_number": 0,
+          "genus": 1.0,
+          "vertices": 1193,
+          "faces": 2386,
+          "degenerate_faces": 8,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.2473,
+          "area_cm2": 61.4836,
+          "pla_mass_g": 6.507,
+          "bbox_mm": [
+            70.6,
+            72.4,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 32.5,
+          "min_surface_radius_mm": 32.4956,
+          "inner_diameter_mm": 64.9913,
+          "faceting_loss_mm": 0.00435,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.9954,
+          "p5_mm": 1.9954,
+          "median_mm": 1.9969,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 61.4836,
+          "bed_area_cm2": 4.3362,
+          "steep_area_cm2": 0.0,
+          "steep_fraction": 0.0,
+          "min_slope_deg": 45.035,
+          "threshold_deg": 45.0
+        }
+      },
+      "naive": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 14,
+          "euler_number": 26,
+          "genus": 0.0714285714285714,
+          "vertices": 1046,
+          "faces": 2040,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.3829,
+          "area_cm2": 68.1342,
+          "pla_mass_g": 6.675,
+          "bbox_mm": [
+            70.6,
+            72.4,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 32.5,
+          "min_surface_radius_mm": 32.4956,
+          "inner_diameter_mm": 64.9913,
+          "faceting_loss_mm": 0.00435,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.4,
+          "p5_mm": 1.4037,
+          "median_mm": 1.9963,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 68.1342,
+          "bed_area_cm2": 4.4152,
+          "steep_area_cm2": 0.0,
+          "steep_fraction": 0.0,
+          "min_slope_deg": 45.035,
+          "threshold_deg": 45.0
+        }
+      },
+      "stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-sus4-cone.stl",
+        "bytes": 119384
+      },
+      "3mf": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-sus4-cone.3mf",
+        "bytes": 27940
+      },
+      "naive_stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-sus4-cone-naive.stl",
+        "bytes": 102084
+      }
+    },
+    {
+      "name": "C major-6",
+      "pitch_classes": [
+        0,
+        4,
+        7,
+        9
+      ],
+      "notes": "C E G A",
+      "bead": "sphere",
+      "build_s": 0.024,
+      "union": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 1,
+          "euler_number": 0,
+          "genus": 1.0,
+          "vertices": 3347,
+          "faces": 6694,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.4295,
+          "area_cm2": 62.174,
+          "pla_mass_g": 6.733,
+          "bbox_mm": [
+            72.8,
+            72.8,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 31.5,
+          "min_surface_radius_mm": 31.5143,
+          "inner_diameter_mm": 63.0287,
+          "faceting_loss_mm": 0.98566,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.9954,
+          "p5_mm": 1.9954,
+          "median_mm": 1.9969,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 62.174,
+          "bed_area_cm2": 4.3265,
+          "steep_area_cm2": 0.3031,
+          "steep_fraction": 0.004874,
+          "min_slope_deg": 4.874,
+          "threshold_deg": 45.0
+        }
+      },
+      "naive": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 14,
+          "euler_number": 26,
+          "genus": 0.0714285714285714,
+          "vertices": 3408,
+          "faces": 6764,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.7266,
+          "area_cm2": 69.9337,
+          "pla_mass_g": 7.101,
+          "bbox_mm": [
+            72.8,
+            72.8,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 31.5,
+          "min_surface_radius_mm": 31.5143,
+          "inner_diameter_mm": 63.0287,
+          "faceting_loss_mm": 0.98566,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 0.0488,
+          "p5_mm": 1.4015,
+          "median_mm": 1.9964,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 69.9337,
+          "bed_area_cm2": 4.3984,
+          "steep_area_cm2": 0.6699,
+          "steep_fraction": 0.009579,
+          "min_slope_deg": 4.874,
+          "threshold_deg": 45.0
+        }
+      },
+      "stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-major-6-sphere.stl",
+        "bytes": 334784
+      },
+      "3mf": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-major-6-sphere.3mf",
+        "bytes": 95717
+      },
+      "naive_stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-major-6-sphere-naive.stl",
+        "bytes": 338284
+      }
+    },
+    {
+      "name": "C major-6",
+      "pitch_classes": [
+        0,
+        4,
+        7,
+        9
+      ],
+      "notes": "C E G A",
+      "bead": "cone",
+      "build_s": 0.015,
+      "union": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 1,
+          "euler_number": 0,
+          "genus": 1.0,
+          "vertices": 1254,
+          "faces": 2508,
+          "degenerate_faces": 8,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.2547,
+          "area_cm2": 61.3615,
+          "pla_mass_g": 6.516,
+          "bbox_mm": [
+            72.4,
+            72.4,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 32.5,
+          "min_surface_radius_mm": 32.4956,
+          "inner_diameter_mm": 64.9913,
+          "faceting_loss_mm": 0.00435,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.9954,
+          "p5_mm": 1.9954,
+          "median_mm": 1.9969,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 61.3615,
+          "bed_area_cm2": 4.3265,
+          "steep_area_cm2": 0.0,
+          "steep_fraction": 0.0,
+          "min_slope_deg": 45.035,
+          "threshold_deg": 45.0
+        }
+      },
+      "naive": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 14,
+          "euler_number": 26,
+          "genus": 0.0714285714285714,
+          "vertices": 1104,
+          "faces": 2156,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.391,
+          "area_cm2": 68.1583,
+          "pla_mass_g": 6.685,
+          "bbox_mm": [
+            72.4,
+            72.4,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 32.5,
+          "min_surface_radius_mm": 32.4956,
+          "inner_diameter_mm": 64.9913,
+          "faceting_loss_mm": 0.00435,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.4,
+          "p5_mm": 1.4044,
+          "median_mm": 1.9963,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 68.1583,
+          "bed_area_cm2": 4.3984,
+          "steep_area_cm2": 0.0,
+          "steep_fraction": 0.0,
+          "min_slope_deg": 45.035,
+          "threshold_deg": 45.0
+        }
+      },
+      "stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-major-6-cone.stl",
+        "bytes": 125484
+      },
+      "3mf": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-major-6-cone.3mf",
+        "bytes": 29162
+      },
+      "naive_stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-major-6-cone-naive.stl",
+        "bytes": 107884
+      }
+    },
+    {
+      "name": "C dominant-7",
+      "pitch_classes": [
+        0,
+        4,
+        7,
+        10
+      ],
+      "notes": "C E G A#",
+      "bead": "sphere",
+      "build_s": 0.034,
+      "union": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 1,
+          "euler_number": 0,
+          "genus": 1.0,
+          "vertices": 3347,
+          "faces": 6694,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.4295,
+          "area_cm2": 62.174,
+          "pla_mass_g": 6.733,
+          "bbox_mm": [
+            70.6,
+            72.8,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 31.5,
+          "min_surface_radius_mm": 31.5143,
+          "inner_diameter_mm": 63.0287,
+          "faceting_loss_mm": 0.98566,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.9954,
+          "p5_mm": 1.9954,
+          "median_mm": 1.9969,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 62.174,
+          "bed_area_cm2": 4.3265,
+          "steep_area_cm2": 0.3031,
+          "steep_fraction": 0.004874,
+          "min_slope_deg": 4.874,
+          "threshold_deg": 45.0
+        }
+      },
+      "naive": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 14,
+          "euler_number": 26,
+          "genus": 0.0714285714285714,
+          "vertices": 3408,
+          "faces": 6764,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.7266,
+          "area_cm2": 69.9337,
+          "pla_mass_g": 7.101,
+          "bbox_mm": [
+            70.6,
+            72.8,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 31.5,
+          "min_surface_radius_mm": 31.5143,
+          "inner_diameter_mm": 63.0287,
+          "faceting_loss_mm": 0.98566,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 0.0488,
+          "p5_mm": 1.4019,
+          "median_mm": 1.9964,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 69.9337,
+          "bed_area_cm2": 4.3984,
+          "steep_area_cm2": 0.6699,
+          "steep_fraction": 0.009579,
+          "min_slope_deg": 4.874,
+          "threshold_deg": 45.0
+        }
+      },
+      "stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-dominant-7-sphere.stl",
+        "bytes": 334784
+      },
+      "3mf": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-dominant-7-sphere.3mf",
+        "bytes": 96527
+      },
+      "naive_stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-dominant-7-sphere-naive.stl",
+        "bytes": 338284
+      }
+    },
+    {
+      "name": "C dominant-7",
+      "pitch_classes": [
+        0,
+        4,
+        7,
+        10
+      ],
+      "notes": "C E G A#",
+      "bead": "cone",
+      "build_s": 0.018,
+      "union": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 1,
+          "euler_number": 0,
+          "genus": 1.0,
+          "vertices": 1256,
+          "faces": 2512,
+          "degenerate_faces": 12,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.2547,
+          "area_cm2": 61.3615,
+          "pla_mass_g": 6.516,
+          "bbox_mm": [
+            70.6,
+            72.4,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 32.5,
+          "min_surface_radius_mm": 32.4956,
+          "inner_diameter_mm": 64.9913,
+          "faceting_loss_mm": 0.00435,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.9954,
+          "p5_mm": 1.9954,
+          "median_mm": 1.9968,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 61.3615,
+          "bed_area_cm2": 4.3265,
+          "steep_area_cm2": 0.0,
+          "steep_fraction": 0.0,
+          "min_slope_deg": 45.035,
+          "threshold_deg": 45.0
+        }
+      },
+      "naive": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 14,
+          "euler_number": 26,
+          "genus": 0.0714285714285714,
+          "vertices": 1104,
+          "faces": 2156,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.391,
+          "area_cm2": 68.1583,
+          "pla_mass_g": 6.685,
+          "bbox_mm": [
+            70.6,
+            72.4,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 32.5,
+          "min_surface_radius_mm": 32.4956,
+          "inner_diameter_mm": 64.9913,
+          "faceting_loss_mm": 0.00435,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.4,
+          "p5_mm": 1.4047,
+          "median_mm": 1.9963,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 68.1583,
+          "bed_area_cm2": 4.3984,
+          "steep_area_cm2": 0.0,
+          "steep_fraction": 0.0,
+          "min_slope_deg": 45.035,
+          "threshold_deg": 45.0
+        }
+      },
+      "stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-dominant-7-cone.stl",
+        "bytes": 125684
+      },
+      "3mf": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-dominant-7-cone.3mf",
+        "bytes": 28710
+      },
+      "naive_stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-dominant-7-cone-naive.stl",
+        "bytes": 107884
+      }
+    },
+    {
+      "name": "C major-7",
+      "pitch_classes": [
+        0,
+        4,
+        7,
+        11
+      ],
+      "notes": "C E G B",
+      "bead": "sphere",
+      "build_s": 0.025,
+      "union": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 1,
+          "euler_number": 0,
+          "genus": 1.0,
+          "vertices": 3347,
+          "faces": 6694,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.4295,
+          "area_cm2": 62.174,
+          "pla_mass_g": 6.733,
+          "bbox_mm": [
+            70.6,
+            72.8,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 31.5,
+          "min_surface_radius_mm": 31.5143,
+          "inner_diameter_mm": 63.0287,
+          "faceting_loss_mm": 0.98566,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.9954,
+          "p5_mm": 1.9954,
+          "median_mm": 1.9969,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 62.174,
+          "bed_area_cm2": 4.3265,
+          "steep_area_cm2": 0.3031,
+          "steep_fraction": 0.004874,
+          "min_slope_deg": 4.874,
+          "threshold_deg": 45.0
+        }
+      },
+      "naive": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 14,
+          "euler_number": 26,
+          "genus": 0.0714285714285714,
+          "vertices": 3408,
+          "faces": 6764,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.7266,
+          "area_cm2": 69.9337,
+          "pla_mass_g": 7.101,
+          "bbox_mm": [
+            70.6,
+            72.8,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 31.5,
+          "min_surface_radius_mm": 31.5143,
+          "inner_diameter_mm": 63.0287,
+          "faceting_loss_mm": 0.98566,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 0.0488,
+          "p5_mm": 1.4019,
+          "median_mm": 1.9964,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 69.9337,
+          "bed_area_cm2": 4.3984,
+          "steep_area_cm2": 0.6699,
+          "steep_fraction": 0.009579,
+          "min_slope_deg": 4.874,
+          "threshold_deg": 45.0
+        }
+      },
+      "stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-major-7-sphere.stl",
+        "bytes": 334784
+      },
+      "3mf": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-major-7-sphere.3mf",
+        "bytes": 97902
+      },
+      "naive_stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-major-7-sphere-naive.stl",
+        "bytes": 338284
+      }
+    },
+    {
+      "name": "C major-7",
+      "pitch_classes": [
+        0,
+        4,
+        7,
+        11
+      ],
+      "notes": "C E G B",
+      "bead": "cone",
+      "build_s": 0.013,
+      "union": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 1,
+          "euler_number": 0,
+          "genus": 1.0,
+          "vertices": 1256,
+          "faces": 2512,
+          "degenerate_faces": 12,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.2547,
+          "area_cm2": 61.3615,
+          "pla_mass_g": 6.516,
+          "bbox_mm": [
+            70.6,
+            72.4,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 32.5,
+          "min_surface_radius_mm": 32.4956,
+          "inner_diameter_mm": 64.9913,
+          "faceting_loss_mm": 0.00435,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.9954,
+          "p5_mm": 1.9954,
+          "median_mm": 1.9969,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 61.3615,
+          "bed_area_cm2": 4.3265,
+          "steep_area_cm2": 0.0,
+          "steep_fraction": 0.0,
+          "min_slope_deg": 45.035,
+          "threshold_deg": 45.0
+        }
+      },
+      "naive": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 14,
+          "euler_number": 26,
+          "genus": 0.0714285714285714,
+          "vertices": 1104,
+          "faces": 2156,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.391,
+          "area_cm2": 68.1583,
+          "pla_mass_g": 6.685,
+          "bbox_mm": [
+            70.6,
+            72.4,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 32.5,
+          "min_surface_radius_mm": 32.4956,
+          "inner_diameter_mm": 64.9913,
+          "faceting_loss_mm": 0.00435,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.4,
+          "p5_mm": 1.4047,
+          "median_mm": 1.9963,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 68.1583,
+          "bed_area_cm2": 4.3984,
+          "steep_area_cm2": 0.0,
+          "steep_fraction": 0.0,
+          "min_slope_deg": 45.035,
+          "threshold_deg": 45.0
+        }
+      },
+      "stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-major-7-cone.stl",
+        "bytes": 125684
+      },
+      "3mf": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-major-7-cone.3mf",
+        "bytes": 28560
+      },
+      "naive_stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-major-7-cone-naive.stl",
+        "bytes": 107884
+      }
+    },
+    {
+      "name": "C minor-7",
+      "pitch_classes": [
+        0,
+        3,
+        7,
+        10
+      ],
+      "notes": "C D# G A#",
+      "bead": "sphere",
+      "build_s": 0.028,
+      "union": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 1,
+          "euler_number": 0,
+          "genus": 1.0,
+          "vertices": 3347,
+          "faces": 6694,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.4295,
+          "area_cm2": 62.174,
+          "pla_mass_g": 6.733,
+          "bbox_mm": [
+            72.8,
+            72.8,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 31.5,
+          "min_surface_radius_mm": 31.5143,
+          "inner_diameter_mm": 63.0287,
+          "faceting_loss_mm": 0.98566,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.9954,
+          "p5_mm": 1.9954,
+          "median_mm": 1.9969,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 62.174,
+          "bed_area_cm2": 4.3265,
+          "steep_area_cm2": 0.3031,
+          "steep_fraction": 0.004874,
+          "min_slope_deg": 4.874,
+          "threshold_deg": 45.0
+        }
+      },
+      "naive": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 14,
+          "euler_number": 26,
+          "genus": 0.0714285714285714,
+          "vertices": 3408,
+          "faces": 6764,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.7266,
+          "area_cm2": 69.9337,
+          "pla_mass_g": 7.101,
+          "bbox_mm": [
+            72.8,
+            72.8,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 31.5,
+          "min_surface_radius_mm": 31.5143,
+          "inner_diameter_mm": 63.0287,
+          "faceting_loss_mm": 0.98566,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 0.0488,
+          "p5_mm": 1.4022,
+          "median_mm": 1.9964,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 69.9337,
+          "bed_area_cm2": 4.3984,
+          "steep_area_cm2": 0.6699,
+          "steep_fraction": 0.009579,
+          "min_slope_deg": 4.874,
+          "threshold_deg": 45.0
+        }
+      },
+      "stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-minor-7-sphere.stl",
+        "bytes": 334784
+      },
+      "3mf": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-minor-7-sphere.3mf",
+        "bytes": 91431
+      },
+      "naive_stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-minor-7-sphere-naive.stl",
+        "bytes": 338284
+      }
+    },
+    {
+      "name": "C minor-7",
+      "pitch_classes": [
+        0,
+        3,
+        7,
+        10
+      ],
+      "notes": "C D# G A#",
+      "bead": "cone",
+      "build_s": 0.012,
+      "union": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 1,
+          "euler_number": 0,
+          "genus": 1.0,
+          "vertices": 1254,
+          "faces": 2508,
+          "degenerate_faces": 8,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.2547,
+          "area_cm2": 61.3615,
+          "pla_mass_g": 6.516,
+          "bbox_mm": [
+            72.4,
+            72.4,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 32.5,
+          "min_surface_radius_mm": 32.4956,
+          "inner_diameter_mm": 64.9913,
+          "faceting_loss_mm": 0.00435,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.9954,
+          "p5_mm": 1.9954,
+          "median_mm": 1.9968,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 61.3615,
+          "bed_area_cm2": 4.3265,
+          "steep_area_cm2": 0.0,
+          "steep_fraction": 0.0,
+          "min_slope_deg": 45.035,
+          "threshold_deg": 45.0
+        }
+      },
+      "naive": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 14,
+          "euler_number": 26,
+          "genus": 0.0714285714285714,
+          "vertices": 1104,
+          "faces": 2156,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.391,
+          "area_cm2": 68.1583,
+          "pla_mass_g": 6.685,
+          "bbox_mm": [
+            72.4,
+            72.4,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 32.5,
+          "min_surface_radius_mm": 32.4956,
+          "inner_diameter_mm": 64.9913,
+          "faceting_loss_mm": 0.00435,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.4,
+          "p5_mm": 1.4071,
+          "median_mm": 1.9963,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 68.1583,
+          "bed_area_cm2": 4.3984,
+          "steep_area_cm2": 0.0,
+          "steep_fraction": 0.0,
+          "min_slope_deg": 45.035,
+          "threshold_deg": 45.0
+        }
+      },
+      "stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-minor-7-cone.stl",
+        "bytes": 125484
+      },
+      "3mf": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-minor-7-cone.3mf",
+        "bytes": 28405
+      },
+      "naive_stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-minor-7-cone-naive.stl",
+        "bytes": 107884
+      }
+    },
+    {
+      "name": "C half-diminished-7",
+      "pitch_classes": [
+        0,
+        3,
+        6,
+        10
+      ],
+      "notes": "C D# F# A#",
+      "bead": "sphere",
+      "build_s": 0.026,
+      "union": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 1,
+          "euler_number": 0,
+          "genus": 1.0,
+          "vertices": 3347,
+          "faces": 6694,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.4295,
+          "area_cm2": 62.174,
+          "pla_mass_g": 6.733,
+          "bbox_mm": [
+            72.8,
+            75.0,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 31.5,
+          "min_surface_radius_mm": 31.5143,
+          "inner_diameter_mm": 63.0287,
+          "faceting_loss_mm": 0.98566,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.9954,
+          "p5_mm": 1.9954,
+          "median_mm": 1.9969,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 62.174,
+          "bed_area_cm2": 4.3265,
+          "steep_area_cm2": 0.3031,
+          "steep_fraction": 0.004874,
+          "min_slope_deg": 4.874,
+          "threshold_deg": 45.0
+        }
+      },
+      "naive": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 14,
+          "euler_number": 26,
+          "genus": 0.0714285714285714,
+          "vertices": 3408,
+          "faces": 6764,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.7266,
+          "area_cm2": 69.9337,
+          "pla_mass_g": 7.101,
+          "bbox_mm": [
+            72.8,
+            75.0,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 31.5,
+          "min_surface_radius_mm": 31.5143,
+          "inner_diameter_mm": 63.0287,
+          "faceting_loss_mm": 0.98566,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 0.0241,
+          "p5_mm": 1.4021,
+          "median_mm": 1.9964,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 69.9337,
+          "bed_area_cm2": 4.3984,
+          "steep_area_cm2": 0.6699,
+          "steep_fraction": 0.009579,
+          "min_slope_deg": 4.874,
+          "threshold_deg": 45.0
+        }
+      },
+      "stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-half-diminished-7-sphere.stl",
+        "bytes": 334784
+      },
+      "3mf": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-half-diminished-7-sphere.3mf",
+        "bytes": 90101
+      },
+      "naive_stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-half-diminished-7-sphere-naive.stl",
+        "bytes": 338284
+      }
+    },
+    {
+      "name": "C half-diminished-7",
+      "pitch_classes": [
+        0,
+        3,
+        6,
+        10
+      ],
+      "notes": "C D# F# A#",
+      "bead": "cone",
+      "build_s": 0.021,
+      "union": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 1,
+          "euler_number": 0,
+          "genus": 1.0,
+          "vertices": 1252,
+          "faces": 2504,
+          "degenerate_faces": 4,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.2547,
+          "area_cm2": 61.3615,
+          "pla_mass_g": 6.516,
+          "bbox_mm": [
+            72.4,
+            74.2,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 32.5,
+          "min_surface_radius_mm": 32.4956,
+          "inner_diameter_mm": 64.9913,
+          "faceting_loss_mm": 0.00435,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.9954,
+          "p5_mm": 1.9954,
+          "median_mm": 1.9968,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 61.3615,
+          "bed_area_cm2": 4.3265,
+          "steep_area_cm2": 0.0,
+          "steep_fraction": 0.0,
+          "min_slope_deg": 45.035,
+          "threshold_deg": 45.0
+        }
+      },
+      "naive": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 14,
+          "euler_number": 26,
+          "genus": 0.0714285714285714,
+          "vertices": 1104,
+          "faces": 2156,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.391,
+          "area_cm2": 68.1583,
+          "pla_mass_g": 6.685,
+          "bbox_mm": [
+            72.4,
+            74.2,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 32.5,
+          "min_surface_radius_mm": 32.4956,
+          "inner_diameter_mm": 64.9913,
+          "faceting_loss_mm": 0.00435,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.4,
+          "p5_mm": 1.4099,
+          "median_mm": 1.9963,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 68.1583,
+          "bed_area_cm2": 4.3984,
+          "steep_area_cm2": 0.0,
+          "steep_fraction": 0.0,
+          "min_slope_deg": 45.035,
+          "threshold_deg": 45.0
+        }
+      },
+      "stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-half-diminished-7-cone.stl",
+        "bytes": 125284
+      },
+      "3mf": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-half-diminished-7-cone.3mf",
+        "bytes": 28596
+      },
+      "naive_stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-half-diminished-7-cone-naive.stl",
+        "bytes": 107884
+      }
+    },
+    {
+      "name": "C diminished-7",
+      "pitch_classes": [
+        0,
+        3,
+        6,
+        9
+      ],
+      "notes": "C D# F# A",
+      "bead": "sphere",
+      "build_s": 0.022,
+      "union": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 1,
+          "euler_number": 0,
+          "genus": 1.0,
+          "vertices": 3347,
+          "faces": 6694,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.4295,
+          "area_cm2": 62.174,
+          "pla_mass_g": 6.733,
+          "bbox_mm": [
+            75.0,
+            75.0,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 31.5,
+          "min_surface_radius_mm": 31.5143,
+          "inner_diameter_mm": 63.0287,
+          "faceting_loss_mm": 0.98566,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.9954,
+          "p5_mm": 1.9954,
+          "median_mm": 1.9969,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 62.174,
+          "bed_area_cm2": 4.3265,
+          "steep_area_cm2": 0.3031,
+          "steep_fraction": 0.004874,
+          "min_slope_deg": 4.874,
+          "threshold_deg": 45.0
+        }
+      },
+      "naive": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 14,
+          "euler_number": 26,
+          "genus": 0.0714285714285714,
+          "vertices": 3408,
+          "faces": 6764,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.7266,
+          "area_cm2": 69.9337,
+          "pla_mass_g": 7.101,
+          "bbox_mm": [
+            75.0,
+            75.0,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 31.5,
+          "min_surface_radius_mm": 31.5143,
+          "inner_diameter_mm": 63.0287,
+          "faceting_loss_mm": 0.98566,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 0.0241,
+          "p5_mm": 1.4015,
+          "median_mm": 1.9964,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 69.9337,
+          "bed_area_cm2": 4.3984,
+          "steep_area_cm2": 0.6699,
+          "steep_fraction": 0.009579,
+          "min_slope_deg": 4.874,
+          "threshold_deg": 45.0
+        }
+      },
+      "stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-diminished-7-sphere.stl",
+        "bytes": 334784
+      },
+      "3mf": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-diminished-7-sphere.3mf",
+        "bytes": 80958
+      },
+      "naive_stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-diminished-7-sphere-naive.stl",
+        "bytes": 338284
+      }
+    },
+    {
+      "name": "C diminished-7",
+      "pitch_classes": [
+        0,
+        3,
+        6,
+        9
+      ],
+      "notes": "C D# F# A",
+      "bead": "cone",
+      "build_s": 0.012,
+      "union": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 1,
+          "euler_number": 0,
+          "genus": 1.0,
+          "vertices": 1250,
+          "faces": 2500,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.2547,
+          "area_cm2": 61.3615,
+          "pla_mass_g": 6.516,
+          "bbox_mm": [
+            74.2,
+            74.2,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 32.5,
+          "min_surface_radius_mm": 32.4956,
+          "inner_diameter_mm": 64.9913,
+          "faceting_loss_mm": 0.00435,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.9954,
+          "p5_mm": 1.9954,
+          "median_mm": 1.9969,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 61.3615,
+          "bed_area_cm2": 4.3265,
+          "steep_area_cm2": 0.0,
+          "steep_fraction": 0.0,
+          "min_slope_deg": 45.035,
+          "threshold_deg": 45.0
+        }
+      },
+      "naive": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 14,
+          "euler_number": 26,
+          "genus": 0.0714285714285714,
+          "vertices": 1104,
+          "faces": 2156,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.391,
+          "area_cm2": 68.1583,
+          "pla_mass_g": 6.685,
+          "bbox_mm": [
+            74.2,
+            74.2,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 32.5,
+          "min_surface_radius_mm": 32.4956,
+          "inner_diameter_mm": 64.9913,
+          "faceting_loss_mm": 0.00435,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.4,
+          "p5_mm": 1.4068,
+          "median_mm": 1.9963,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 68.1583,
+          "bed_area_cm2": 4.3984,
+          "steep_area_cm2": 0.0,
+          "steep_fraction": 0.0,
+          "min_slope_deg": 45.035,
+          "threshold_deg": 45.0
+        }
+      },
+      "stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-diminished-7-cone.stl",
+        "bytes": 125084
+      },
+      "3mf": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-diminished-7-cone.3mf",
+        "bytes": 27649
+      },
+      "naive_stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-diminished-7-cone-naive.stl",
+        "bytes": 107884
+      }
+    },
+    {
+      "name": "C add-9",
+      "pitch_classes": [
+        0,
+        2,
+        4,
+        7
+      ],
+      "notes": "C D E G",
+      "bead": "sphere",
+      "build_s": 0.025,
+      "union": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 1,
+          "euler_number": 0,
+          "genus": 1.0,
+          "vertices": 3347,
+          "faces": 6694,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.4295,
+          "area_cm2": 62.174,
+          "pla_mass_g": 6.733,
+          "bbox_mm": [
+            70.6,
+            72.8,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 31.5,
+          "min_surface_radius_mm": 31.5143,
+          "inner_diameter_mm": 63.0287,
+          "faceting_loss_mm": 0.98566,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.9954,
+          "p5_mm": 1.9954,
+          "median_mm": 1.9969,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 62.174,
+          "bed_area_cm2": 4.3265,
+          "steep_area_cm2": 0.3031,
+          "steep_fraction": 0.004874,
+          "min_slope_deg": 4.874,
+          "threshold_deg": 45.0
+        }
+      },
+      "naive": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 14,
+          "euler_number": 26,
+          "genus": 0.0714285714285714,
+          "vertices": 3408,
+          "faces": 6764,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.7266,
+          "area_cm2": 69.9337,
+          "pla_mass_g": 7.101,
+          "bbox_mm": [
+            70.6,
+            72.8,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 31.5,
+          "min_surface_radius_mm": 31.5143,
+          "inner_diameter_mm": 63.0287,
+          "faceting_loss_mm": 0.98566,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 0.0127,
+          "p5_mm": 1.4018,
+          "median_mm": 1.9964,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 69.9337,
+          "bed_area_cm2": 4.3984,
+          "steep_area_cm2": 0.6699,
+          "steep_fraction": 0.009579,
+          "min_slope_deg": 4.874,
+          "threshold_deg": 45.0
+        }
+      },
+      "stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-add-9-sphere.stl",
+        "bytes": 334784
+      },
+      "3mf": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-add-9-sphere.3mf",
+        "bytes": 97671
+      },
+      "naive_stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-add-9-sphere-naive.stl",
+        "bytes": 338284
+      }
+    },
+    {
+      "name": "C add-9",
+      "pitch_classes": [
+        0,
+        2,
+        4,
+        7
+      ],
+      "notes": "C D E G",
+      "bead": "cone",
+      "build_s": 0.011,
+      "union": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 1,
+          "euler_number": 0,
+          "genus": 1.0,
+          "vertices": 1256,
+          "faces": 2512,
+          "degenerate_faces": 12,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.2547,
+          "area_cm2": 61.3615,
+          "pla_mass_g": 6.516,
+          "bbox_mm": [
+            70.6,
+            72.4,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 32.5,
+          "min_surface_radius_mm": 32.4956,
+          "inner_diameter_mm": 64.9913,
+          "faceting_loss_mm": 0.00435,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.9954,
+          "p5_mm": 1.9954,
+          "median_mm": 1.9968,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 61.3615,
+          "bed_area_cm2": 4.3265,
+          "steep_area_cm2": 0.0,
+          "steep_fraction": 0.0,
+          "min_slope_deg": 45.035,
+          "threshold_deg": 45.0
+        }
+      },
+      "naive": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 14,
+          "euler_number": 26,
+          "genus": 0.0714285714285714,
+          "vertices": 1104,
+          "faces": 2156,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.391,
+          "area_cm2": 68.1583,
+          "pla_mass_g": 6.685,
+          "bbox_mm": [
+            70.6,
+            72.4,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 32.5,
+          "min_surface_radius_mm": 32.4956,
+          "inner_diameter_mm": 64.9913,
+          "faceting_loss_mm": 0.00435,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.4,
+          "p5_mm": 1.4047,
+          "median_mm": 1.9963,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 68.1583,
+          "bed_area_cm2": 4.3984,
+          "steep_area_cm2": 0.0,
+          "steep_fraction": 0.0,
+          "min_slope_deg": 45.035,
+          "threshold_deg": 45.0
+        }
+      },
+      "stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-add-9-cone.stl",
+        "bytes": 125684
+      },
+      "3mf": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-add-9-cone.3mf",
+        "bytes": 29178
+      },
+      "naive_stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-add-9-cone-naive.stl",
+        "bytes": 107884
+      }
+    },
+    {
+      "name": "C Major",
+      "pitch_classes": [
+        0,
+        2,
+        4,
+        5,
+        7,
+        9,
+        11
+      ],
+      "notes": "C D E F G A B",
+      "bead": "sphere",
+      "build_s": 0.034,
+      "union": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 1,
+          "euler_number": 0,
+          "genus": 1.0,
+          "vertices": 5177,
+          "faces": 10354,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.5896,
+          "area_cm2": 62.5018,
+          "pla_mass_g": 6.931,
+          "bbox_mm": [
+            72.8,
+            72.8,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 31.5,
+          "min_surface_radius_mm": 31.5143,
+          "inner_diameter_mm": 63.0287,
+          "faceting_loss_mm": 0.98566,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.9954,
+          "p5_mm": 1.9954,
+          "median_mm": 1.9969,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 62.5018,
+          "bed_area_cm2": 4.2975,
+          "steep_area_cm2": 0.5634,
+          "steep_fraction": 0.009014,
+          "min_slope_deg": 4.874,
+          "threshold_deg": 45.0
+        }
+      },
+      "naive": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 14,
+          "euler_number": 26,
+          "genus": 0.0714285714285714,
+          "vertices": 5310,
+          "faces": 10568,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 6.0024,
+          "area_cm2": 71.3376,
+          "pla_mass_g": 7.443,
+          "bbox_mm": [
+            72.8,
+            72.8,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 31.5,
+          "min_surface_radius_mm": 31.5143,
+          "inner_diameter_mm": 63.0287,
+          "faceting_loss_mm": 0.98566,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 0.0127,
+          "p5_mm": 1.4007,
+          "median_mm": 1.9964,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 71.3376,
+          "bed_area_cm2": 4.348,
+          "steep_area_cm2": 1.1723,
+          "steep_fraction": 0.016433,
+          "min_slope_deg": 4.874,
+          "threshold_deg": 45.0
+        }
+      },
+      "stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-Major-sphere.stl",
+        "bytes": 517784
+      },
+      "3mf": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-Major-sphere.3mf",
+        "bytes": 157810
+      },
+      "naive_stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-Major-sphere-naive.stl",
+        "bytes": 528484
+      }
+    },
+    {
+      "name": "C Major",
+      "pitch_classes": [
+        0,
+        2,
+        4,
+        5,
+        7,
+        9,
+        11
+      ],
+      "notes": "C D E F G A B",
+      "bead": "cone",
+      "build_s": 0.014,
+      "union": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 1,
+          "euler_number": 0,
+          "genus": 1.0,
+          "vertices": 1443,
+          "faces": 2886,
+          "degenerate_faces": 20,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.277,
+          "area_cm2": 60.9954,
+          "pla_mass_g": 6.543,
+          "bbox_mm": [
+            72.4,
+            72.4,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 32.5,
+          "min_surface_radius_mm": 32.4956,
+          "inner_diameter_mm": 64.9913,
+          "faceting_loss_mm": 0.00435,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.9954,
+          "p5_mm": 1.9954,
+          "median_mm": 1.9969,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 60.9954,
+          "bed_area_cm2": 4.2975,
+          "steep_area_cm2": 0.0,
+          "steep_fraction": 0.0,
+          "min_slope_deg": 45.035,
+          "threshold_deg": 45.0
+        }
+      },
+      "naive": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 14,
+          "euler_number": 26,
+          "genus": 0.0714285714285714,
+          "vertices": 1278,
+          "faces": 2504,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.4152,
+          "area_cm2": 68.2308,
+          "pla_mass_g": 6.715,
+          "bbox_mm": [
+            72.4,
+            72.4,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 32.5,
+          "min_surface_radius_mm": 32.4956,
+          "inner_diameter_mm": 64.9913,
+          "faceting_loss_mm": 0.00435,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.4,
+          "p5_mm": 1.6009,
+          "median_mm": 1.9963,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 68.2308,
+          "bed_area_cm2": 4.348,
+          "steep_area_cm2": 0.0,
+          "steep_fraction": 0.0,
+          "min_slope_deg": 45.035,
+          "threshold_deg": 45.0
+        }
+      },
+      "stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-Major-cone.stl",
+        "bytes": 144384
+      },
+      "3mf": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-Major-cone.3mf",
+        "bytes": 32044
+      },
+      "naive_stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\C-Major-cone-naive.stl",
+        "bytes": 125284
+      }
+    },
+    {
+      "name": "A Minor.Natural",
+      "pitch_classes": [
+        0,
+        2,
+        4,
+        5,
+        7,
+        9,
+        11
+      ],
+      "notes": "C D E F G A B",
+      "bead": "sphere",
+      "build_s": 0.03,
+      "union": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 1,
+          "euler_number": 0,
+          "genus": 1.0,
+          "vertices": 5177,
+          "faces": 10354,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.5896,
+          "area_cm2": 62.5018,
+          "pla_mass_g": 6.931,
+          "bbox_mm": [
+            72.8,
+            72.8,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 31.5,
+          "min_surface_radius_mm": 31.5143,
+          "inner_diameter_mm": 63.0287,
+          "faceting_loss_mm": 0.98566,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.9954,
+          "p5_mm": 1.9954,
+          "median_mm": 1.9969,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 62.5018,
+          "bed_area_cm2": 4.2975,
+          "steep_area_cm2": 0.5634,
+          "steep_fraction": 0.009014,
+          "min_slope_deg": 4.874,
+          "threshold_deg": 45.0
+        }
+      },
+      "naive": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 14,
+          "euler_number": 26,
+          "genus": 0.0714285714285714,
+          "vertices": 5310,
+          "faces": 10568,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 6.0024,
+          "area_cm2": 71.3376,
+          "pla_mass_g": 7.443,
+          "bbox_mm": [
+            72.8,
+            72.8,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 31.5,
+          "min_surface_radius_mm": 31.5143,
+          "inner_diameter_mm": 63.0287,
+          "faceting_loss_mm": 0.98566,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 0.0127,
+          "p5_mm": 1.4007,
+          "median_mm": 1.9964,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 71.3376,
+          "bed_area_cm2": 4.348,
+          "steep_area_cm2": 1.1723,
+          "steep_fraction": 0.016433,
+          "min_slope_deg": 4.874,
+          "threshold_deg": 45.0
+        }
+      },
+      "stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\A-Minor-Natural-sphere.stl",
+        "bytes": 517784
+      },
+      "3mf": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\A-Minor-Natural-sphere.3mf",
+        "bytes": 157814
+      },
+      "naive_stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\A-Minor-Natural-sphere-naive.stl",
+        "bytes": 528484
+      }
+    },
+    {
+      "name": "A Minor.Natural",
+      "pitch_classes": [
+        0,
+        2,
+        4,
+        5,
+        7,
+        9,
+        11
+      ],
+      "notes": "C D E F G A B",
+      "bead": "cone",
+      "build_s": 0.013,
+      "union": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 1,
+          "euler_number": 0,
+          "genus": 1.0,
+          "vertices": 1443,
+          "faces": 2886,
+          "degenerate_faces": 20,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.277,
+          "area_cm2": 60.9954,
+          "pla_mass_g": 6.543,
+          "bbox_mm": [
+            72.4,
+            72.4,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 32.5,
+          "min_surface_radius_mm": 32.4956,
+          "inner_diameter_mm": 64.9913,
+          "faceting_loss_mm": 0.00435,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.9954,
+          "p5_mm": 1.9954,
+          "median_mm": 1.9969,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 60.9954,
+          "bed_area_cm2": 4.2975,
+          "steep_area_cm2": 0.0,
+          "steep_fraction": 0.0,
+          "min_slope_deg": 45.035,
+          "threshold_deg": 45.0
+        }
+      },
+      "naive": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 14,
+          "euler_number": 26,
+          "genus": 0.0714285714285714,
+          "vertices": 1278,
+          "faces": 2504,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.4152,
+          "area_cm2": 68.2308,
+          "pla_mass_g": 6.715,
+          "bbox_mm": [
+            72.4,
+            72.4,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 32.5,
+          "min_surface_radius_mm": 32.4956,
+          "inner_diameter_mm": 64.9913,
+          "faceting_loss_mm": 0.00435,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.4,
+          "p5_mm": 1.6009,
+          "median_mm": 1.9963,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 68.2308,
+          "bed_area_cm2": 4.348,
+          "steep_area_cm2": 0.0,
+          "steep_fraction": 0.0,
+          "min_slope_deg": 45.035,
+          "threshold_deg": 45.0
+        }
+      },
+      "stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\A-Minor-Natural-cone.stl",
+        "bytes": 144384
+      },
+      "3mf": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\A-Minor-Natural-cone.3mf",
+        "bytes": 32050
+      },
+      "naive_stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\A-Minor-Natural-cone-naive.stl",
+        "bytes": 125284
+      }
+    },
+    {
+      "name": "plain band",
+      "pitch_classes": [],
+      "notes": "",
+      "bead": "none",
+      "build_s": 0.0,
+      "union": {
+        "topology": {
+          "watertight": true,
+          "winding_consistent": true,
+          "is_volume": true,
+          "bodies": 1,
+          "euler_number": 0,
+          "genus": 1.0,
+          "vertices": 768,
+          "faces": 1536,
+          "degenerate_faces": 0,
+          "duplicate_faces": 0,
+          "manifold3d_status": "NoError"
+        },
+        "solidity": {
+          "volume_cm3": 5.0508,
+          "area_cm2": 58.9325,
+          "pla_mass_g": 6.263,
+          "bbox_mm": [
+            69.0,
+            69.0,
+            12.0
+          ]
+        },
+        "fit": {
+          "min_vertex_radius_mm": 32.5,
+          "min_surface_radius_mm": 32.4956,
+          "inner_diameter_mm": 64.9913,
+          "faceting_loss_mm": 0.00435,
+          "height_mm": 12.0
+        },
+        "walls": {
+          "rays": 2000,
+          "misses": 0,
+          "min_mm": 1.9954,
+          "p5_mm": 1.9954,
+          "median_mm": 1.9966,
+          "min_away_from_features_mm": 1.9954
+        },
+        "overhangs": {
+          "total_area_cm2": 58.9325,
+          "bed_area_cm2": 4.209,
+          "steep_area_cm2": 0.0,
+          "steep_fraction": 0.0,
+          "min_slope_deg": 90.0,
+          "threshold_deg": 45.0
+        }
+      },
+      "stl": {
+        "path": "G:\\learn-lab\\ga-protos\\p5\\plain-band.stl",
+        "bytes": 76884
+      }
+    }
+  ]
+}

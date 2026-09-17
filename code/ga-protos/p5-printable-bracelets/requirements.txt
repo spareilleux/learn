@@ -1,0 +1,11 @@
+# Prototype 5 builds and measures meshes on the CPU. No GPU, no printer, no slicer needed for any of this.
+# The versions are the ones the committed measurements were produced with, on 2026-09-17.
+numpy==2.5.3
+trimesh==5.1.0
+manifold3d==3.5.3          # the boolean engine: the union of the band and its fourteen features
+shapely==2.1.2             # the keel's profile, extruded
+scipy==1.18.1              # trimesh needs a graph engine to split a mesh into bodies
+networkx==3.6.1
+rtree==1.4.1               # the broad phase of the ray casts that measure wall thickness
+lxml==6.1.3                # the 3MF writer
+pillow==12.3.0             # only for mesh/shrink.py, which trims the renders

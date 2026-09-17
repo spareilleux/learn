@@ -1,0 +1,48 @@
+{
+  "bracelet": "C major-triad",
+  "threshold_deg": 45.0,
+  "variants": [
+    {
+      "keel_chamfer_mm": 1.6,
+      "why": "the first try: 1.6 mm of ramp for 2.2 mm of depth, called 45 degrees in the hypotheses and built at 36",
+      "min_slope_deg": 36.027,
+      "steep_area_cm2": 0.0498,
+      "steep_fraction": 0.000811,
+      "watertight": true,
+      "keel_depth_mm": {
+        "z=0.5": 0.0875,
+        "z=1.0": 0.775,
+        "z=2.0": 1.6,
+        "z=6.0": 2.6
+      }
+    },
+    {
+      "keel_chamfer_mm": 2.2,
+      "why": "a real 45 degree ramp: as much height as depth",
+      "min_slope_deg": 45.0,
+      "steep_area_cm2": 0.0,
+      "steep_fraction": 0.0,
+      "watertight": true,
+      "keel_depth_mm": {
+        "z=0.5": 0.0,
+        "z=1.0": 0.4,
+        "z=2.0": 1.4,
+        "z=6.0": 2.6
+      }
+    },
+    {
+      "keel_chamfer_mm": 0.0,
+      "why": "no ramp at all, the shipped design",
+      "min_slope_deg": 45.035,
+      "steep_area_cm2": 0.0,
+      "steep_fraction": 0.0,
+      "watertight": true,
+      "keel_depth_mm": {
+        "z=0.5": 1.6,
+        "z=1.0": 1.6,
+        "z=2.0": 1.6,
+        "z=6.0": 2.6
+      }
+    }
+  ]
+}
