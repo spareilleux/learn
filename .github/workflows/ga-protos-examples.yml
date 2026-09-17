@@ -60,3 +60,39 @@ jobs:
           bytes=$(find . -type f -exec cat {} + | wc -c)
           echo "public/ga-lab: $bytes bytes"
           test "$bytes" -le 20000000
+
+
+  # P2, play a chord, see the universe: unit tests of the DSP, the corpus evaluation compared with the committed
+  # figures (accuracies and confusion matrix must match exactly; timings are not compared), the type check and the
+  # Vite build, and one headless Chromium run with a fake microphone that reports the backend and the labels found.
+  p2-chord-universe:
+    name: P2 chord universe (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+        working-directory: code/ga-protos/p2-chord-universe
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Install the pinned three.js, Vite, TypeScript and Playwright
+        run: npm ci
+      - name: Unit tests
+        run: npm test
+      - name: Corpus evaluation, same figures as eval/results.json
+        run: node eval/evaluate.ts --check
+      - name: Types and Vite build
+        run: npm run build
+      - name: Chromium for Playwright
+        run: npx playwright install ${{ runner.os == 'Linux' && '--with-deps' || '' }} chromium chromium-headless-shell
+      - name: Headless run with a fake microphone (counters only, no timings)
+        run: |
+          node scripts/fake-mic.ts
+          node scripts/browser-run.ts
+          node -e "const r=require('./out/browser-run.json'); console.log(r.backend, r.sampleRate, r.frames, 'frames', r.inOrder, 'of', r.expected.length); if (r.error || r.frames < 100 || r.offsite.length) process.exit(1)"
