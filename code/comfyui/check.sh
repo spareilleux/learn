@@ -131,7 +131,11 @@ server() {
     comfy upload "$url" out/other/pattern-hole.png --overwrite
     comfy upload "$url" out/pattern.png --subfolder ../outside
     echo "exit code $?"
-  } > out/05-masks.txt 2>&1
+  } > out/05-masks.full.txt 2>&1
+  # Canny's edges differ from one machine to the next (lesson 6): its hash is printed, not compared.
+  grep "node 12:" out/05-masks.full.txt | sed 's/^/info /'
+  "$COMFYUI_PYTHON" -c "from PIL import Image; im = Image.open('out/run-05/canny_00001_.png').convert('L'); print('info Canny edge pixels:', sum(1 for v in im.tobytes() if v > 127), 'of', im.width * im.height)"
+  grep -v "node 12:" out/05-masks.full.txt > out/05-masks.txt
   compare 05-masks
 
   bash server.sh stop
