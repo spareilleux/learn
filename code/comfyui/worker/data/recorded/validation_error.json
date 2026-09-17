@@ -1,0 +1,61 @@
+{
+  "post_prompt": {
+    "status": 400,
+    "content_type": "application/json",
+    "body": {
+      "error": {
+        "type": "prompt_outputs_failed_validation",
+        "message": "Prompt outputs failed validation",
+        "details": "",
+        "extra_info": {}
+      },
+      "node_errors": {
+        "3": {
+          "errors": [
+            {
+              "type": "exception_during_inner_validation",
+              "message": "Exception when validating inner node",
+              "details": "'12'",
+              "extra_info": {
+                "input_name": "samples",
+                "input_config": [
+                  "LATENT",
+                  {
+                    "tooltip": "The latent to be decoded."
+                  }
+                ],
+                "exception_message": "'12'",
+                "exception_type": "KeyError",
+                "traceback": [
+                  "  File \"<ComfyUI>\\execution.py\", line 955, in validate_inputs\n    r = await validate_inputs(prompt_id, prompt, o_id, validated, visiting)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n",
+                  "  File \"<ComfyUI>\\execution.py\", line 933, in validate_inputs\n    o_class_type = prompt[o_id]['class_type']\n                   ~~~~~~^^^^^^\n"
+                ],
+                "linked_node": [
+                  "3",
+                  0
+                ]
+              }
+            }
+          ],
+          "dependent_outputs": [
+            "9"
+          ],
+          "class_type": "KSampler"
+        }
+      }
+    }
+  },
+  "invalid_prompt_id": {
+    "status": 400,
+    "content_type": "application/json",
+    "body": {
+      "error": {
+        "type": "invalid_prompt_id",
+        "message": "prompt_id must be a valid UUID",
+        "details": "prompt_id must be a UUID string in canonical lowercase hyphenated form; omit it to let the server generate one",
+        "extra_info": {}
+      },
+      "node_errors": {}
+    }
+  }
+}

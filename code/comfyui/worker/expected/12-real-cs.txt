@@ -1,0 +1,11 @@
+worker worker-1: 1 GPU(s), up to 2 attempts, job timeout 120 s
+job 00000021 attempt 1 on gpu0: POST /prompt 200
+job 00000021: done on gpu0 after 1 attempt(s), 2 file(s): 3-solid_00001_.png <sha256>, 4-inverted_00001_.png <sha256>
+job 00000021: already done, acknowledged without running
+job 00000022 attempt 1 on gpu0: POST /prompt 200
+job 00000022: dead-lettered, execution_error, node 2 (ImageToMask): IndexError: index 3 is out of bounds for dimension 3 with size 3
+job 00000023 attempt 1 on gpu0: POST /prompt 200
+job 00000023: done on gpu0 after 1 attempt(s), 1 file(s): 5-slow_00001_.png <sha256>
+worker worker-1: stopped
+summary: 3 acknowledged, 1 dead-lettered
+  dead letter 00000022: execution_error, node 2 (ImageToMask): IndexError: index 3 is out of bounds for dimension 3 with size 3

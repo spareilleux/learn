@@ -1,0 +1,68 @@
+{
+  "status": 200,
+  "content_type": "application/json",
+  "body": {
+    "system": {
+      "os": "win32",
+      "ram_total": 68403589120,
+      "ram_free": 24367058944,
+      "comfyui_version": "0.36.0",
+      "required_frontend_version": "1.52.7",
+      "installed_templates_version": "0.11.62",
+      "required_templates_version": "0.11.62",
+      "comfy_package_versions": [
+        {
+          "name": "comfyui-frontend-package",
+          "installed": "1.52.7",
+          "required": "1.52.7"
+        },
+        {
+          "name": "comfyui-workflow-templates",
+          "installed": "0.11.62",
+          "required": "0.11.62"
+        },
+        {
+          "name": "comfyui-embedded-docs",
+          "installed": "0.5.11",
+          "required": "0.5.11"
+        },
+        {
+          "name": "comfy-kitchen",
+          "installed": "0.2.34",
+          "required": "0.2.34"
+        },
+        {
+          "name": "comfy-aimdo",
+          "installed": "0.5.3",
+          "required": "0.5.3"
+        }
+      ],
+      "python_version": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+      "pytorch_version": "2.13.0+cu130",
+      "embedded_python": true,
+      "deploy_environment": "local-portable",
+      "argv": [
+        "<ComfyUI>/main.py",
+        "--cpu",
+        "--port",
+        "8199",
+        "--base-directory",
+        "<base>",
+        "--database-url",
+        "sqlite:///:memory:",
+        "--disable-auto-launch"
+      ]
+    },
+    "devices": [
+      {
+        "name": "cpu",
+        "type": "cpu",
+        "index": null,
+        "vram_total": 68403589120,
+        "vram_free": 24367058944,
+        "torch_vram_total": 68403589120,
+        "torch_vram_free": 24367058944
+      }
+    ]
+  }
+}

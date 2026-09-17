@@ -1,0 +1,302 @@
+{
+  "prompt_id": "3330f99e-b001-4d46-b3e7-5833dc39fe44",
+  "post_prompt": {
+    "status": 200,
+    "content_type": "application/json",
+    "body": {
+      "prompt_id": "3330f99e-b001-4d46-b3e7-5833dc39fe44",
+      "number": 7,
+      "node_errors": {}
+    }
+  },
+  "messages": [
+    {
+      "type": "status",
+      "data": {
+        "status": {
+          "exec_info": {
+            "queue_remaining": 1
+          }
+        }
+      }
+    },
+    {
+      "type": "status",
+      "data": {
+        "status": {
+          "exec_info": {
+            "queue_remaining": 1
+          }
+        }
+      }
+    },
+    {
+      "type": "execution_start",
+      "data": {
+        "prompt_id": "3330f99e-b001-4d46-b3e7-5833dc39fe44",
+        "timestamp": 1789612796469
+      }
+    },
+    {
+      "type": "execution_cached",
+      "data": {
+        "nodes": [],
+        "prompt_id": "3330f99e-b001-4d46-b3e7-5833dc39fe44",
+        "timestamp": 1789612796470
+      }
+    },
+    {
+      "type": "progress_state",
+      "data": {
+        "prompt_id": "3330f99e-b001-4d46-b3e7-5833dc39fe44",
+        "nodes": {
+          "1": {
+            "value": 0.0,
+            "max": 1.0,
+            "state": "running",
+            "node_id": "1",
+            "prompt_id": "3330f99e-b001-4d46-b3e7-5833dc39fe44",
+            "display_node_id": "1",
+            "parent_node_id": null,
+            "real_node_id": "1"
+          }
+        }
+      }
+    },
+    {
+      "type": "executing",
+      "data": {
+        "node": "1",
+        "display_node": "1",
+        "prompt_id": "3330f99e-b001-4d46-b3e7-5833dc39fe44"
+      }
+    },
+    {
+      "type": "progress_state",
+      "data": {
+        "prompt_id": "3330f99e-b001-4d46-b3e7-5833dc39fe44",
+        "nodes": {
+          "1": {
+            "value": 1.0,
+            "max": 1.0,
+            "state": "finished",
+            "node_id": "1",
+            "prompt_id": "3330f99e-b001-4d46-b3e7-5833dc39fe44",
+            "display_node_id": "1",
+            "parent_node_id": null,
+            "real_node_id": "1"
+          }
+        }
+      }
+    },
+    {
+      "type": "progress_state",
+      "data": {
+        "prompt_id": "3330f99e-b001-4d46-b3e7-5833dc39fe44",
+        "nodes": {
+          "1": {
+            "value": 1.0,
+            "max": 1.0,
+            "state": "finished",
+            "node_id": "1",
+            "prompt_id": "3330f99e-b001-4d46-b3e7-5833dc39fe44",
+            "display_node_id": "1",
+            "parent_node_id": null,
+            "real_node_id": "1"
+          },
+          "2": {
+            "value": 0.0,
+            "max": 1.0,
+            "state": "running",
+            "node_id": "2",
+            "prompt_id": "3330f99e-b001-4d46-b3e7-5833dc39fe44",
+            "display_node_id": "2",
+            "parent_node_id": null,
+            "real_node_id": "2"
+          }
+        }
+      }
+    },
+    {
+      "type": "executing",
+      "data": {
+        "node": "2",
+        "display_node": "2",
+        "prompt_id": "3330f99e-b001-4d46-b3e7-5833dc39fe44"
+      }
+    },
+    {
+      "type": "execution_error",
+      "data": {
+        "prompt_id": "3330f99e-b001-4d46-b3e7-5833dc39fe44",
+        "node_id": "2",
+        "node_type": "ImageToMask",
+        "executed": [
+          "1"
+        ],
+        "exception_message": "index 3 is out of bounds for dimension 3 with size 3\n",
+        "exception_type": "IndexError",
+        "traceback": [
+          "  File \"<ComfyUI>\\execution.py\", line 547, in execute\n    output_data, output_ui, has_subgraph, has_pending_tasks = await get_output_data(prompt_id, unique_id, obj, input_data_all, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\n                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n",
+          "  File \"<ComfyUI>\\execution.py\", line 352, in get_output_data\n    return_values = await _async_map_node_over_list(prompt_id, unique_id, obj, input_data_all, obj.FUNCTION, allow_interrupt=True, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n",
+          "  File \"<ComfyUI>\\execution.py\", line 326, in _async_map_node_over_list\n    await process_inputs(input_dict, i)\n",
+          "  File \"<ComfyUI>\\execution.py\", line 314, in process_inputs\n    result = f(**inputs)\n",
+          "  File \"<ComfyUI>\\comfy_api\\internal\\__init__.py\", line 149, in wrapped_func\n    return method(locked_class, **inputs)\n",
+          "  File \"<ComfyUI>\\comfy_api\\latest\\_io.py\", line 2053, in EXECUTE_NORMALIZED\n    to_return = cls.execute(*args, **kwargs)\n",
+          "  File \"<ComfyUI>\\comfy_extras\\nodes_mask.py\", line 149, in execute\n    mask = image[:, :, :, channels.index(channel)]\n           ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"
+        ],
+        "current_inputs": {
+          "image": [
+            "tensor([[[[0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000],\n          ...,\n          [0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000]],\n\n         [[0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000],\n          ...,\n          [0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000]],\n\n         [[0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000],\n          ...,\n          [0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000]],\n\n         ...,\n\n         [[0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000],\n          ...,\n          [0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000]],\n\n         [[0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000],\n          ...,\n          [0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000]],\n\n         [[0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000],\n          ...,\n          [0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000]]]])"
+          ],
+          "channel": [
+            "alpha"
+          ]
+        },
+        "current_outputs": [
+          "4",
+          "2",
+          "1",
+          "3"
+        ],
+        "timestamp": 1789612796485
+      }
+    },
+    {
+      "type": "status",
+      "data": {
+        "status": {
+          "exec_info": {
+            "queue_remaining": 0
+          }
+        }
+      }
+    },
+    {
+      "type": "executing",
+      "data": {
+        "node": null,
+        "prompt_id": "3330f99e-b001-4d46-b3e7-5833dc39fe44"
+      }
+    }
+  ],
+  "history": {
+    "status": 200,
+    "content_type": "application/json",
+    "body": {
+      "3330f99e-b001-4d46-b3e7-5833dc39fe44": {
+        "prompt": [
+          7,
+          "3330f99e-b001-4d46-b3e7-5833dc39fe44",
+          {
+            "1": {
+              "class_type": "EmptyImage",
+              "inputs": {
+                "width": 64,
+                "height": 48,
+                "batch_size": 1,
+                "color": 3368601
+              }
+            },
+            "2": {
+              "class_type": "ImageToMask",
+              "inputs": {
+                "image": [
+                  "1",
+                  0
+                ],
+                "channel": "alpha"
+              }
+            },
+            "3": {
+              "class_type": "MaskToImage",
+              "inputs": {
+                "mask": [
+                  "2",
+                  0
+                ]
+              }
+            },
+            "4": {
+              "class_type": "SaveImage",
+              "inputs": {
+                "filename_prefix": "worker/alpha",
+                "images": [
+                  "3",
+                  0
+                ]
+              }
+            }
+          },
+          {
+            "client_id": "95de7fab3cb240d8bff7449793db0398",
+            "create_time": 1789612796468
+          },
+          [
+            "4"
+          ]
+        ],
+        "outputs": {},
+        "status": {
+          "status_str": "error",
+          "completed": false,
+          "messages": [
+            [
+              "execution_start",
+              {
+                "prompt_id": "3330f99e-b001-4d46-b3e7-5833dc39fe44",
+                "timestamp": 1789612796469
+              }
+            ],
+            [
+              "execution_cached",
+              {
+                "nodes": [],
+                "prompt_id": "3330f99e-b001-4d46-b3e7-5833dc39fe44",
+                "timestamp": 1789612796470
+              }
+            ],
+            [
+              "execution_error",
+              {
+                "prompt_id": "3330f99e-b001-4d46-b3e7-5833dc39fe44",
+                "node_id": "2",
+                "node_type": "ImageToMask",
+                "executed": [
+                  "1"
+                ],
+                "exception_message": "index 3 is out of bounds for dimension 3 with size 3\n",
+                "exception_type": "IndexError",
+                "traceback": [
+                  "  File \"<ComfyUI>\\execution.py\", line 547, in execute\n    output_data, output_ui, has_subgraph, has_pending_tasks = await get_output_data(prompt_id, unique_id, obj, input_data_all, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\n                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n",
+                  "  File \"<ComfyUI>\\execution.py\", line 352, in get_output_data\n    return_values = await _async_map_node_over_list(prompt_id, unique_id, obj, input_data_all, obj.FUNCTION, allow_interrupt=True, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n",
+                  "  File \"<ComfyUI>\\execution.py\", line 326, in _async_map_node_over_list\n    await process_inputs(input_dict, i)\n",
+                  "  File \"<ComfyUI>\\execution.py\", line 314, in process_inputs\n    result = f(**inputs)\n",
+                  "  File \"<ComfyUI>\\comfy_api\\internal\\__init__.py\", line 149, in wrapped_func\n    return method(locked_class, **inputs)\n",
+                  "  File \"<ComfyUI>\\comfy_api\\latest\\_io.py\", line 2053, in EXECUTE_NORMALIZED\n    to_return = cls.execute(*args, **kwargs)\n",
+                  "  File \"<ComfyUI>\\comfy_extras\\nodes_mask.py\", line 149, in execute\n    mask = image[:, :, :, channels.index(channel)]\n           ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"
+                ],
+                "current_inputs": {
+                  "image": [
+                    "tensor([[[[0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000],\n          ...,\n          [0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000]],\n\n         [[0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000],\n          ...,\n          [0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000]],\n\n         [[0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000],\n          ...,\n          [0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000]],\n\n         ...,\n\n         [[0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000],\n          ...,\n          [0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000]],\n\n         [[0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000],\n          ...,\n          [0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000]],\n\n         [[0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000],\n          ...,\n          [0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000],\n          [0.2000, 0.4000, 0.6000]]]])"
+                  ],
+                  "channel": [
+                    "alpha"
+                  ]
+                },
+                "current_outputs": [
+                  "4",
+                  "2",
+                  "1",
+                  "3"
+                ],
+                "timestamp": 1789612796485
+              }
+            ]
+          ]
+        },
+        "meta": {}
+      }
+    }
+  }
+}

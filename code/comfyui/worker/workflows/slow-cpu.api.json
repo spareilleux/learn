@@ -1,0 +1,22 @@
+{
+  "1": {
+    "class_type": "EmptyImage",
+    "inputs": { "width": 1024, "height": 1024, "batch_size": 1, "color": 3368601 }
+  },
+  "2": {
+    "class_type": "ImageBlur",
+    "inputs": { "image": ["1", 0], "blur_radius": 31, "sigma": 10.0 }
+  },
+  "3": {
+    "class_type": "ImageBlur",
+    "inputs": { "image": ["2", 0], "blur_radius": 31, "sigma": 10.0 }
+  },
+  "4": {
+    "class_type": "ImageBlur",
+    "inputs": { "image": ["3", 0], "blur_radius": 31, "sigma": 10.0 }
+  },
+  "5": {
+    "class_type": "SaveImage",
+    "inputs": { "filename_prefix": "worker/slow", "images": ["4", 0] }
+  }
+}

@@ -1,0 +1,8 @@
+worker worker-1: 1 GPU(s), up to 4 attempts, job timeout 600 s
+job 00000001 attempt 1 on gpu0: POST /prompt 200
+job 00000001: done on gpu0 after 1 attempt(s), 2 file(s): 3-solid_00001_.png 12f8083634dd0a19, 4-inverted_00001_.png 12f8083634dd0a19
+job 00000001: already done, acknowledged without running
+job 00000002 attempt 1 on gpu0: POST /prompt 200
+job 00000002: done on gpu0 after 1 attempt(s), 2 file(s): 3-solid_00002_.png 12f8083634dd0a19, 4-inverted_00002_.png 12f8083634dd0a19
+worker worker-1: stopped
+summary: 3 acknowledged, 0 dead-lettered

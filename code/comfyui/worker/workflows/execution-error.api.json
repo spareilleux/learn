@@ -1,0 +1,18 @@
+{
+  "1": {
+    "class_type": "EmptyImage",
+    "inputs": { "width": 64, "height": 48, "batch_size": 1, "color": 3368601 }
+  },
+  "2": {
+    "class_type": "ImageToMask",
+    "inputs": { "image": ["1", 0], "channel": "alpha" }
+  },
+  "3": {
+    "class_type": "MaskToImage",
+    "inputs": { "mask": ["2", 0] }
+  },
+  "4": {
+    "class_type": "SaveImage",
+    "inputs": { "filename_prefix": "worker/alpha", "images": ["3", 0] }
+  }
+}

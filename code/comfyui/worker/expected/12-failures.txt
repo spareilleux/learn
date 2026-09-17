@@ -1,0 +1,27 @@
+worker worker-1: 1 GPU(s), up to 2 attempts, job timeout 1 s
+job 00000003: attempt 1 failed, POST /prompt 500, 500 Internal Server Error; retry in 100 ms
+job 00000003 attempt 2 on gpu0: POST /prompt 200
+job 00000003: done on gpu0 after 2 attempt(s), 2 file(s): 3-solid_00001_.png 12f8083634dd0a19, 4-inverted_00001_.png 12f8083634dd0a19
+job 00000004 attempt 1 on gpu0: POST /prompt 200
+job 00000004 attempt 1 on gpu0: WebSocket lost, reconnecting with the same client id
+job 00000004: done on gpu0 after 1 attempt(s), 2 file(s): 3-solid_00002_.png 12f8083634dd0a19, 4-inverted_00002_.png 12f8083634dd0a19
+job 00000005: dead-lettered, POST /prompt 400, prompt_outputs_failed_validation: node 3 (KSampler): exception_during_inner_validation
+job 00000006 attempt 1 on gpu0: POST /prompt 200
+job 00000006: attempt 1 failed, execution_error, node 2 (ImageInvert): torch.OutOfMemoryError: Allocation on device ; retry in 100 ms
+job 00000006 attempt 2 on gpu0: POST /prompt 200
+job 00000006: done on gpu0 after 2 attempt(s), 2 file(s): 3-solid_00003_.png 12f8083634dd0a19, 4-inverted_00003_.png 12f8083634dd0a19
+job 00000007 attempt 1 on gpu0: POST /prompt 200
+job 00000007: dead-lettered, execution_error, node 2 (ImageToMask): IndexError: index 3 is out of bounds for dimension 3 with size 3
+job 00000008 attempt 1 on gpu0: POST /prompt 200
+job 00000008 attempt 1 on gpu0: no result after 1 s, POST /interrupt and remove it from the queue
+job 00000008: attempt 1 failed, timed out after 1 s; retry in 100 ms
+job 00000008 attempt 2 on gpu0: POST /prompt 200
+job 00000008 attempt 2 on gpu0: no result after 1 s, POST /interrupt and remove it from the queue
+job 00000008: dead-lettered, gave up after 2 attempts, last: timed out after 1 s
+job 00000009 attempt 1 on gpu0: POST /prompt 200
+job 00000009: done on gpu0 after 1 attempt(s), 2 file(s): 3-solid_00004_.png 12f8083634dd0a19, 4-inverted_00004_.png 12f8083634dd0a19
+worker worker-1: stopped
+summary: 4 acknowledged, 3 dead-lettered
+  dead letter 00000005: POST /prompt 400, prompt_outputs_failed_validation: node 3 (KSampler): exception_during_inner_validation
+  dead letter 00000007: execution_error, node 2 (ImageToMask): IndexError: index 3 is out of bounds for dimension 3 with size 3
+  dead letter 00000008: gave up after 2 attempts, last: timed out after 1 s

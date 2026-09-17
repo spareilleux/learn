@@ -1,0 +1,345 @@
+{
+  "prompt_id": "30bd5b2c-398e-4ff1-8ef3-850ad6d33b15",
+  "post_prompt": {
+    "status": 200,
+    "content_type": "application/json",
+    "body": {
+      "prompt_id": "30bd5b2c-398e-4ff1-8ef3-850ad6d33b15",
+      "number": 8,
+      "node_errors": {}
+    }
+  },
+  "queue_while_running": {
+    "status": 200,
+    "content_type": "application/json",
+    "body": {
+      "queue_running": [
+        [
+          8,
+          "30bd5b2c-398e-4ff1-8ef3-850ad6d33b15",
+          {
+            "1": {
+              "class_type": "EmptyImage",
+              "inputs": {
+                "width": 1024,
+                "height": 1024,
+                "batch_size": 1,
+                "color": 4242
+              }
+            },
+            "2": {
+              "class_type": "ImageBlur",
+              "inputs": {
+                "image": [
+                  "1",
+                  0
+                ],
+                "blur_radius": 31,
+                "sigma": 10.0
+              }
+            },
+            "3": {
+              "class_type": "ImageBlur",
+              "inputs": {
+                "image": [
+                  "2",
+                  0
+                ],
+                "blur_radius": 31,
+                "sigma": 10.0
+              }
+            },
+            "4": {
+              "class_type": "ImageBlur",
+              "inputs": {
+                "image": [
+                  "3",
+                  0
+                ],
+                "blur_radius": 31,
+                "sigma": 10.0
+              }
+            },
+            "5": {
+              "class_type": "SaveImage",
+              "inputs": {
+                "filename_prefix": "worker/slow",
+                "images": [
+                  "4",
+                  0
+                ]
+              }
+            }
+          },
+          {
+            "client_id": "95de7fab3cb240d8bff7449793db0398",
+            "create_time": 1789612796488
+          },
+          [
+            "5"
+          ]
+        ]
+      ],
+      "queue_pending": []
+    }
+  },
+  "post_interrupt": {
+    "status": 200,
+    "content_type": "application/octet-stream",
+    "body": ""
+  },
+  "messages": [
+    {
+      "type": "status",
+      "data": {
+        "status": {
+          "exec_info": {
+            "queue_remaining": 1
+          }
+        }
+      }
+    },
+    {
+      "type": "status",
+      "data": {
+        "status": {
+          "exec_info": {
+            "queue_remaining": 1
+          }
+        }
+      }
+    },
+    {
+      "type": "execution_start",
+      "data": {
+        "prompt_id": "30bd5b2c-398e-4ff1-8ef3-850ad6d33b15",
+        "timestamp": 1789612796488
+      }
+    },
+    {
+      "type": "execution_cached",
+      "data": {
+        "nodes": [],
+        "prompt_id": "30bd5b2c-398e-4ff1-8ef3-850ad6d33b15",
+        "timestamp": 1789612796489
+      }
+    },
+    {
+      "type": "progress_state",
+      "data": {
+        "prompt_id": "30bd5b2c-398e-4ff1-8ef3-850ad6d33b15",
+        "nodes": {
+          "1": {
+            "value": 0.0,
+            "max": 1.0,
+            "state": "running",
+            "node_id": "1",
+            "prompt_id": "30bd5b2c-398e-4ff1-8ef3-850ad6d33b15",
+            "display_node_id": "1",
+            "parent_node_id": null,
+            "real_node_id": "1"
+          }
+        }
+      }
+    },
+    {
+      "type": "executing",
+      "data": {
+        "node": "1",
+        "display_node": "1",
+        "prompt_id": "30bd5b2c-398e-4ff1-8ef3-850ad6d33b15"
+      }
+    },
+    {
+      "type": "progress_state",
+      "data": {
+        "prompt_id": "30bd5b2c-398e-4ff1-8ef3-850ad6d33b15",
+        "nodes": {
+          "1": {
+            "value": 1.0,
+            "max": 1.0,
+            "state": "finished",
+            "node_id": "1",
+            "prompt_id": "30bd5b2c-398e-4ff1-8ef3-850ad6d33b15",
+            "display_node_id": "1",
+            "parent_node_id": null,
+            "real_node_id": "1"
+          }
+        }
+      }
+    },
+    {
+      "type": "progress_state",
+      "data": {
+        "prompt_id": "30bd5b2c-398e-4ff1-8ef3-850ad6d33b15",
+        "nodes": {
+          "1": {
+            "value": 1.0,
+            "max": 1.0,
+            "state": "finished",
+            "node_id": "1",
+            "prompt_id": "30bd5b2c-398e-4ff1-8ef3-850ad6d33b15",
+            "display_node_id": "1",
+            "parent_node_id": null,
+            "real_node_id": "1"
+          },
+          "2": {
+            "value": 0.0,
+            "max": 1.0,
+            "state": "running",
+            "node_id": "2",
+            "prompt_id": "30bd5b2c-398e-4ff1-8ef3-850ad6d33b15",
+            "display_node_id": "2",
+            "parent_node_id": null,
+            "real_node_id": "2"
+          }
+        }
+      }
+    },
+    {
+      "type": "executing",
+      "data": {
+        "node": "2",
+        "display_node": "2",
+        "prompt_id": "30bd5b2c-398e-4ff1-8ef3-850ad6d33b15"
+      }
+    },
+    {
+      "type": "execution_interrupted",
+      "data": {
+        "prompt_id": "30bd5b2c-398e-4ff1-8ef3-850ad6d33b15",
+        "node_id": "2",
+        "node_type": "ImageBlur",
+        "executed": [
+          "1"
+        ],
+        "timestamp": 1789612796497
+      }
+    },
+    {
+      "type": "status",
+      "data": {
+        "status": {
+          "exec_info": {
+            "queue_remaining": 0
+          }
+        }
+      }
+    },
+    {
+      "type": "executing",
+      "data": {
+        "node": null,
+        "prompt_id": "30bd5b2c-398e-4ff1-8ef3-850ad6d33b15"
+      }
+    }
+  ],
+  "history": {
+    "status": 200,
+    "content_type": "application/json",
+    "body": {
+      "30bd5b2c-398e-4ff1-8ef3-850ad6d33b15": {
+        "prompt": [
+          8,
+          "30bd5b2c-398e-4ff1-8ef3-850ad6d33b15",
+          {
+            "1": {
+              "class_type": "EmptyImage",
+              "inputs": {
+                "width": 1024,
+                "height": 1024,
+                "batch_size": 1,
+                "color": 4242
+              }
+            },
+            "2": {
+              "class_type": "ImageBlur",
+              "inputs": {
+                "image": [
+                  "1",
+                  0
+                ],
+                "blur_radius": 31,
+                "sigma": 10.0
+              }
+            },
+            "3": {
+              "class_type": "ImageBlur",
+              "inputs": {
+                "image": [
+                  "2",
+                  0
+                ],
+                "blur_radius": 31,
+                "sigma": 10.0
+              }
+            },
+            "4": {
+              "class_type": "ImageBlur",
+              "inputs": {
+                "image": [
+                  "3",
+                  0
+                ],
+                "blur_radius": 31,
+                "sigma": 10.0
+              }
+            },
+            "5": {
+              "class_type": "SaveImage",
+              "inputs": {
+                "filename_prefix": "worker/slow",
+                "images": [
+                  "4",
+                  0
+                ]
+              }
+            }
+          },
+          {
+            "client_id": "95de7fab3cb240d8bff7449793db0398",
+            "create_time": 1789612796488
+          },
+          [
+            "5"
+          ]
+        ],
+        "outputs": {},
+        "status": {
+          "status_str": "error",
+          "completed": false,
+          "messages": [
+            [
+              "execution_start",
+              {
+                "prompt_id": "30bd5b2c-398e-4ff1-8ef3-850ad6d33b15",
+                "timestamp": 1789612796488
+              }
+            ],
+            [
+              "execution_cached",
+              {
+                "nodes": [],
+                "prompt_id": "30bd5b2c-398e-4ff1-8ef3-850ad6d33b15",
+                "timestamp": 1789612796489
+              }
+            ],
+            [
+              "execution_interrupted",
+              {
+                "prompt_id": "30bd5b2c-398e-4ff1-8ef3-850ad6d33b15",
+                "node_id": "2",
+                "node_type": "ImageBlur",
+                "executed": [
+                  "1"
+                ],
+                "timestamp": 1789612796497
+              }
+            ]
+          ]
+        },
+        "meta": {}
+      }
+    }
+  }
+}

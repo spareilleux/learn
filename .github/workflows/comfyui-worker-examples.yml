@@ -1,0 +1,99 @@
+# ComfyUI course, lesson 12: the render worker in C# and Java. On three OSes, its tests and command-line transcripts
+# against a fake ComfyUI server (no GPU, no model, no Python); on Linux, both workers against a real ComfyUI v0.36.0
+# on the CPU, on workflows that need no model.
+name: ComfyUI worker examples
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'code/comfyui/worker/**'
+      - 'code/comfyui/workflows/solid-color.api.json'
+      - 'code/comfyui/workflows/03-broken.api.json'
+      - 'code/comfyui/server.sh'
+      - '.github/workflows/comfyui-worker-examples.yml'
+  pull_request:
+    paths:
+      - 'code/comfyui/worker/**'
+      - 'code/comfyui/workflows/solid-color.api.json'
+      - 'code/comfyui/workflows/03-broken.api.json'
+      - 'code/comfyui/server.sh'
+      - '.github/workflows/comfyui-worker-examples.yml'
+
+permissions:
+  contents: read
+
+env:
+  COMFYUI_TAG: v0.36.0
+  COMFYUI_COMMIT: ee71d5c4993f29086b27fde1629a945ae48425bf
+
+jobs:
+  fake:
+    name: tests and transcripts (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: code/comfyui/worker/csharp/global.json
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '25'
+          cache: maven
+          cache-dependency-path: code/comfyui/worker/java/pom.xml
+      - name: Build, tests, and transcripts against the fake server
+        run: bash code/comfyui/worker/check.sh
+      - name: Test logs
+        if: failure()
+        run: cat code/comfyui/worker/out/test-*.txt code/comfyui/worker/out/fake-*.txt || true
+
+  real:
+    name: both workers against ComfyUI on the CPU (ubuntu-latest)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: code/comfyui/worker/csharp/global.json
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '25'
+          cache: maven
+          cache-dependency-path: code/comfyui/worker/java/pom.xml
+      - name: ComfyUI at its release tag
+        run: |
+          git clone --depth 1 --branch "$COMFYUI_TAG" https://github.com/Comfy-Org/ComfyUI.git "$RUNNER_TEMP/ComfyUI"
+          test "$(git -C "$RUNNER_TEMP/ComfyUI" rev-parse HEAD)" = "$COMFYUI_COMMIT"
+      - name: Python packages (PyTorch for the CPU)
+        run: |
+          python -m venv "$RUNNER_TEMP/venv"
+          py="$RUNNER_TEMP/venv/bin/python"
+          "$py" -m pip install --quiet torch==2.13.0 torchvision==0.28.0 torchaudio --index-url https://download.pytorch.org/whl/cpu
+          "$py" -m pip install --quiet -r "$RUNNER_TEMP/ComfyUI/requirements.txt"
+          echo "COMFYUI_PYTHON=$py" >> "$GITHUB_ENV"
+          echo "COMFYUI_DIR=$RUNNER_TEMP/ComfyUI" >> "$GITHUB_ENV"
+      - name: Build
+        run: bash code/comfyui/worker/check.sh build
+      - name: Both workers against the real server
+        run: bash code/comfyui/worker/check.sh integration
+      - name: Server log and transcripts
+        if: always()
+        run: |
+          cat code/comfyui/worker/out/12-real-*.full.txt || true
+          cat code/comfyui/worker/out/base-real/server.log || true
