@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **COG-001** · Fondements des sciences cognitives · débutant · 25 minutes
 
-Généré par le département *Sciences cognitives* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/882f4250b0b03b03040e0f69123641065ccae754/state/streeling/courses/cognitive-science/fr/cog-001-your-brain-lies-to-you.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Sciences cognitives* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/c72fb746116346ce1991a4f108cd12f5e012e3fb/state/streeling/courses/cognitive-science/fr/cog-001-your-brain-lies-to-you.fr.md) · [Mon journal](../../journal/)
 :::
 
 > **Département de sciences cognitives** | Niveau : Débutant | Durée : 25 minutes

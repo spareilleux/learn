@@ -3,13 +3,13 @@ title: Pensar algoritmicamente
 description: Fundamentos de Ciencias de la Computacion — Ciencias de la computación
 sidebar:
   label: CS-001 · Pensar algoritmicamente
-  order: 2
+  order: 1
 ---
 
 :::note[Streeling University]
 **CS-001** · Fundamentos de Ciencias de la Computacion · principiante · 25 minutes
 
-Generado por el departamento *Ciencias de la computación* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/882f4250b0b03b03040e0f69123641065ccae754/state/streeling/courses/computer-science/es/cs-001-thinking-algorithmically.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ciencias de la computación* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/c72fb746116346ce1991a4f108cd12f5e012e3fb/state/streeling/courses/computer-science/es/cs-001-thinking-algorithmically.es.md) · [Mi diario](../../journal/)
 :::
 
 > **Departamento de Ciencias de la Computacion** | Etapa: Nigredo (Principiante) | Duracion: 25 minutos

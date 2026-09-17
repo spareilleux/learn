@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **GAA-001** · GA Zero to Hero: Principiante Absoluto · principiante · 20 minutos
 
-Generado por el departamento *Guitar Alchemist Academy* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/882f4250b0b03b03040e0f69123641065ccae754/state/streeling/courses/guitar-alchemist-academy/es/gaa-001-your-first-chord.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Guitar Alchemist Academy* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/c72fb746116346ce1991a4f108cd12f5e012e3fb/state/streeling/courses/guitar-alchemist-academy/es/gaa-001-your-first-chord.es.md) · [Mi diario](../../journal/)
 :::
 
 > **Guitar Alchemist Academy** | Etapa: la fase oscura (Principiante) | Duración: 20 minutos

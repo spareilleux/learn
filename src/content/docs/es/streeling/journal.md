@@ -20,8 +20,8 @@ Marca un módulo una vez estudiado. En **Notas**, añade una entrada fechada: lo
 
 ### Ciencias de la computación
 
-- [ ] [CS-001 · Governing Agentic Loops](../computer-science/cs-001-governing-agentic-loops/) <!-- cs-001-governing-agentic-loops -->
 - [ ] [CS-001 · Pensar algorítmicamente](../computer-science/cs-001-thinking-algorithmically/) <!-- cs-001-thinking-algorithmically -->
+- [ ] [CS-002 · Governing Agentic Loops](../computer-science/cs-002-governing-agentic-loops/) <!-- cs-002-governing-agentic-loops -->
 
 ### Cibernética
 

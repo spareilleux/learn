@@ -20,8 +20,8 @@ Tick a module once studied. Under **Notes**, add a dated entry: what I understoo
 
 ### Computer Science
 
-- [ ] [CS-001 · Governing Agentic Loops](../computer-science/cs-001-governing-agentic-loops/) <!-- cs-001-governing-agentic-loops -->
 - [ ] [CS-001 · Thinking Algorithmically](../computer-science/cs-001-thinking-algorithmically/) <!-- cs-001-thinking-algorithmically -->
+- [ ] [CS-002 · Governing Agentic Loops](../computer-science/cs-002-governing-agentic-loops/) <!-- cs-002-governing-agentic-loops -->
 
 ### Cybernetics
 

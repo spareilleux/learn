@@ -20,8 +20,8 @@ Coche un module une fois étudié. Sous **Notes**, ajoute une entrée datée : c
 
 ### Informatique
 
-- [ ] [CS-001 · Governing Agentic Loops](../computer-science/cs-001-governing-agentic-loops/) <!-- cs-001-governing-agentic-loops -->
 - [ ] [CS-001 · Penser algorithmiquement](../computer-science/cs-001-thinking-algorithmically/) <!-- cs-001-thinking-algorithmically -->
+- [ ] [CS-002 · Governing Agentic Loops](../computer-science/cs-002-governing-agentic-loops/) <!-- cs-002-governing-agentic-loops -->
 
 ### Cybernétique
 

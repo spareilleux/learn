@@ -11,5 +11,5 @@ sidebar:
 
 ## Módulos
 
-- [CS-001 · Governing Agentic Loops: Preventing Unbounded Iteration in LLM-Driven Systems](cs-001-governing-agentic-loops/)
 - [CS-001 · Pensar algoritmicamente](cs-001-thinking-algorithmically/)
+- [CS-002 · Governing Agentic Loops: Preventing Unbounded Iteration in LLM-Driven Systems](cs-002-governing-agentic-loops/)

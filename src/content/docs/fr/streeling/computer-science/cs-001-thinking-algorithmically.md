@@ -3,13 +3,13 @@ title: Penser algorithmiquement
 description: Fondements de l'informatique — Informatique
 sidebar:
   label: CS-001 · Penser algorithmiquement
-  order: 2
+  order: 1
 ---
 
 :::note[Streeling University]
 **CS-001** · Fondements de l'informatique · débutant · 25 minutes
 
-Généré par le département *Informatique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/882f4250b0b03b03040e0f69123641065ccae754/state/streeling/courses/computer-science/fr/cs-001-thinking-algorithmically.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Informatique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/c72fb746116346ce1991a4f108cd12f5e012e3fb/state/streeling/courses/computer-science/fr/cs-001-thinking-algorithmically.fr.md) · [Mon journal](../../journal/)
 :::
 
 > **Département d'informatique** | Stade : Nigredo (Débutant) | Durée : 25 minutes
