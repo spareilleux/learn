@@ -1,0 +1,28 @@
+id: 08-quantized-z-image
+title: Z-Image-Turbo in bf16, int8 and nvfp4 on the same GA prompt
+written: 2026-09-16
+hypothesis: >
+  Lesson 8 measured, on a metronome prompt, that int8 images stay close to bf16 (9 to 15 % of pixels differ by more
+  than 8) and nvfp4 images rearrange the scene (62 to 74 %). The same holds on a GA prompt with more small structure
+  (twelve dots, seven lit), and the text encoder's format matters less than the diffusion model's.
+prediction: >
+  Written before any run. Pixel differences against bf16 with the bf16 text encoder, same seed (runner analyze,
+  node 10, share of pixels above 8): int8 with the bf16 encoder between 0.05 and 0.25; nvfp4 with the bf16 encoder
+  above 0.5; bf16 with the fp8 encoder below int8's share for at least one seed. Warm wall times (results.json,
+  second seed of each configuration): nvfp4 fastest, bf16 slowest. Visual: the count of lit dots is seven in at most
+  4 of the 12 images, whatever the format.
+workflow: ../workflows/ga-z-image.api.json
+seeds: [42, 43]
+seed_paths: ["8.seed"]
+axes:
+  - name: config
+    values:
+      - {label: bf16+te-bf16, set: {"1.unet_name": z_image_turbo_bf16.safetensors, "2.clip_name": qwen_3_4b.safetensors}}
+      - {label: bf16+te-fp8, set: {"1.unet_name": z_image_turbo_bf16.safetensors, "2.clip_name": qwen_3_4b_fp8_mixed.safetensors}}
+      - {label: int8+te-bf16, set: {"1.unet_name": z_image_turbo_int8_convrot.safetensors, "2.clip_name": qwen_3_4b.safetensors}}
+      - {label: int8+te-fp8, set: {"1.unet_name": z_image_turbo_int8_convrot.safetensors, "2.clip_name": qwen_3_4b_fp8_mixed.safetensors}}
+      - {label: nvfp4+te-bf16, set: {"1.unet_name": z_image_turbo_nvfp4.safetensors, "2.clip_name": qwen_3_4b.safetensors}}
+      - {label: nvfp4+te-fp8, set: {"1.unet_name": z_image_turbo_nvfp4.safetensors, "2.clip_name": qwen_3_4b_fp8_mixed.safetensors}}
+analysis:
+  - {kind: pixel_diff, node: "10", axis: config, reference: bf16+te-bf16}
+  - {kind: stats, node: "10"}

@@ -1,0 +1,25 @@
+id: 06-bracelet-img2img
+title: Img2img from the major scale's pitch-class bracelet, denoise 0.3 to 0.8
+written: 2026-09-16
+hypothesis: >
+  The music theory course draws the major scale as a bracelet: 12 positions on a circle, 7 filled. Img2img (lesson 5)
+  keeps the layout of its input up to some denoise and then invents its own; the bracelet's pattern, which positions
+  are filled, is a measurable trace of the input.
+prediction: >
+  Written before any run. Readback (checks/images.py bracelet_readback, node 9: the 12 positions split into two
+  groups by brightness, either polarity): all 12 positions agree with the SVG at denoise 0.3 and 0.4 for both seeds;
+  at most 9 of 12 agree at 0.7 and 0.8 for both seeds (9 is about what a random split of 7 and 5 gets); the change
+  happens between 0.5 and 0.6. Visual: the image reads as a brass object from 0.5.
+workflow: ../workflows/ga-bracelet-img2img.api.json
+seeds: [42, 43]
+seed_paths: ["3.seed"]
+prepare:
+  - {name: bracelet, kind: svg, src: ../../../../src/assets/music-theory-ga/l2-bracelet-major.svg, size: 1024}
+fixed:
+  "10.image": {input: bracelet}
+axes:
+  - name: denoise
+    path: "3.denoise"
+    values: [0.3, 0.4, 0.5, 0.6, 0.7, 0.8]
+analysis:
+  - {kind: bracelet, node: "9", svg: ../../../../src/assets/music-theory-ga/l2-bracelet-major.svg}

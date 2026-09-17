@@ -1,0 +1,8 @@
+# Full-size outputs and uploaded inputs stay out of the repository: only results.json, analysis.json,
+# sheet.webp and thumbs/*.webp of results/<experiment>/ are committed.
+results/*/images/
+results/*/inputs/
+results/.model-sha256.json
+results/*/results.json.tmp
+out/
+__pycache__/

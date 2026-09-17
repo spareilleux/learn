@@ -1,0 +1,20 @@
+id: ci-ga-nodes-cpu
+title: CI smoke run on a CPU server, GA nodes only, no model
+written: 2026-09-16
+hypothesis: >
+  The runner drives a real ComfyUI v0.36.0 server the way the tests drive the fake one: WebSocket messages, history,
+  downloads, thumbnails and the contact sheet, on a workflow that needs no model and no GPU. This is a test fixture
+  for CI, not an experiment of the lab.
+prediction: >
+  Written before any run. The 4 items finish with status done, each with 2 outputs (the diagram and the map), and a
+  second run submits nothing.
+workflow: ../../../custom-nodes/ga/workflows/ga-nodes-cpu.api.json
+seeds: [0]
+seed_paths: []
+axes:
+  - name: chord
+    values:
+      - {label: C, set: {"1.chord": "C", "4.source": "chord", "4.chord": "C"}}
+      - {label: Bm7b5, set: {"1.chord": "Bm7b5", "4.source": "chord", "4.chord": "Bm7b5"}}
+      - {label: E-Phrygian, set: {"1.chord": "E7", "4.source": "scale", "4.key": "E", "4.mode": "Phrygian"}}
+      - {label: A-Aeolian, set: {"1.chord": "Am", "4.source": "scale", "4.key": "A", "4.mode": "Aeolian"}}

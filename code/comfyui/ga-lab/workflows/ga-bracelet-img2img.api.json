@@ -1,0 +1,10 @@
+{
+  "4": {"class_type": "CheckpointLoaderSimple", "inputs": {"ckpt_name": "sd_xl_base_1.0.safetensors"}},
+  "10": {"class_type": "LoadImage", "inputs": {"image": "bracelet.png"}, "_meta": {"title": "bracelet, rasterized by the runner"}},
+  "11": {"class_type": "VAEEncode", "inputs": {"pixels": ["10", 0], "vae": ["4", 2]}},
+  "6": {"class_type": "CLIPTextEncode", "inputs": {"text": "an ornate circular brass astrolabe engraved with twelve points, seven of them set with glowing amber gems, on dark velvet, photograph", "clip": ["4", 1]}},
+  "7": {"class_type": "CLIPTextEncode", "inputs": {"text": "blurry, text, watermark", "clip": ["4", 1]}},
+  "3": {"class_type": "KSampler", "inputs": {"seed": 42, "steps": 25, "cfg": 7.0, "sampler_name": "euler", "scheduler": "normal", "denoise": 0.5, "model": ["4", 0], "positive": ["6", 0], "negative": ["7", 0], "latent_image": ["11", 0]}},
+  "8": {"class_type": "VAEDecode", "inputs": {"samples": ["3", 0], "vae": ["4", 2]}},
+  "9": {"class_type": "SaveImage", "inputs": {"filename_prefix": "galab/bracelet", "images": ["8", 0]}}
+}

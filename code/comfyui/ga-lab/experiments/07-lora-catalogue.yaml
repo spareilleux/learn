@@ -1,0 +1,30 @@
+id: 07-lora-catalogue
+title: An instrument catalogue with Pixel Art XL, the LoRA of lesson 7
+written: 2026-09-16
+hypothesis: >
+  Pixel Art XL is the only style LoRA the course uses (LCM-LoRA and SDXL-Lightning change the step count, not the
+  style). Lesson 7 saw its strength trade the subject for the style: at 1.5 the metronome was gone. Across five
+  fretted instruments, the style appears from a moderate strength, and the instrument's identity is what goes first.
+prediction: >
+  Written before any run. Palette size (checks/images.py palette_size: colors at 5 bits per channel covering 90 % of
+  the pixels, node 9): at strength 1.2 less than half of strength 0.0 for all five instruments; at 0.6 between the
+  two for at least four. Visual: at 1.2, at least two of the five no longer show the right instrument (ukulele and
+  mandolin turned into guitars, or no instrument at all).
+workflow: ../workflows/ga-lora-catalogue.api.json
+seeds: [42]
+seed_paths: ["3.seed"]
+axes:
+  - name: instrument
+    values:
+      - {label: acoustic, set: {"6.text": "pixel art, an acoustic guitar standing on a plain background, catalogue item"}}
+      - {label: electric, set: {"6.text": "pixel art, a solid-body electric guitar standing on a plain background, catalogue item"}}
+      - {label: bass, set: {"6.text": "pixel art, a four-string bass guitar standing on a plain background, catalogue item"}}
+      - {label: ukulele, set: {"6.text": "pixel art, a ukulele standing on a plain background, catalogue item"}}
+      - {label: mandolin, set: {"6.text": "pixel art, a mandolin standing on a plain background, catalogue item"}}
+  - name: lora
+    values:
+      - {label: "0.0", set: {"50.strength_model": 0.0, "50.strength_clip": 0.0}}
+      - {label: "0.6", set: {"50.strength_model": 0.6, "50.strength_clip": 0.6}}
+      - {label: "1.2", set: {"50.strength_model": 1.2, "50.strength_clip": 1.2}}
+analysis:
+  - {kind: palette, node: "9"}

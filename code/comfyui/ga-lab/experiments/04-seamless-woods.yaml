@@ -1,0 +1,28 @@
+id: 04-seamless-woods
+title: Seamless rosewood, maple and ebony fretboard textures for the three.js course
+written: 2026-09-16
+hypothesis: >
+  SDXL base doesn't make tileable images: the left and right edges of a texture don't continue each other. Rolling
+  the image by half moves the seams to a center cross; repainting that cross with a noise mask (lesson 5) and
+  blending it with a blurred mask gives a texture whose edges wrap, with core nodes only.
+prediction: >
+  Written before any run. Seam ratio (checks/images.py seam_ratio: wrap-around difference over the mean difference
+  between neighbor columns or rows): above 1.5 on at least one axis for at least 12 of the 15 raw images (node 40);
+  at most 1.2 on both axes for at least 12 of the 15 tiles (node 64), since the tile's edges are the raw image's
+  interior. The 2x2 previews (node 68) still show the repaint: a softer or blurrier cross is visible in at least
+  5 of 15, most in maple, whose light figure shows changes more than rosewood or ebony.
+workflow: ../workflows/ga-seamless-wood.api.json
+seeds: [1, 2, 3, 4, 5]
+seed_paths: ["3.seed", "57.seed"]
+axes:
+  - name: wood
+    values:
+      - label: rosewood
+        set: {"6.text": "seamless texture, flat top-down scan of Indian rosewood fretboard wood, dark brown with straight grain, even lighting, no frets, no strings"}
+      - label: maple
+        set: {"6.text": "seamless texture, flat top-down scan of hard maple fretboard wood, pale cream with fine straight grain, even lighting, no frets, no strings"}
+      - label: ebony
+        set: {"6.text": "seamless texture, flat top-down scan of ebony fretboard wood, nearly black with faint grain, even lighting, no frets, no strings"}
+analysis:
+  - {kind: seam, node: "40"}
+  - {kind: seam, node: "64"}

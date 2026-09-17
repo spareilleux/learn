@@ -1,0 +1,29 @@
+id: 09-diagram-upscale
+title: Upscaling a 256-pixel GA chord diagram four times
+written: 2026-09-16
+hypothesis: >
+  A chord diagram is black lines and disks on white: Lanczos scaling keeps it exact but soft, and SDXL img2img on
+  top sharpens it at low denoise and starts redrawing it (moving or adding dots, bending lines) as denoise grows.
+  An upscale model (RealESRGAN x4plus, planned for lesson 9 and not downloaded yet) sharpens without redrawing.
+prediction: >
+  Written before any run. Visual scoring against the small diagram (node 30) on the contact sheet: Lanczos and
+  refine at 0.2 keep every dot and line in all 3 chords; refine at 0.5 changes at least one dot or line in at least
+  2 of 3; the ESRGAN rows are recorded as could_not_run (model file not found) unless RealESRGAN_x4plus.pth has been
+  added to models/upscale_models, in which case they keep every dot. Palette size (node 9) of the refine images grows
+  with denoise, as SDXL adds gray tones and texture.
+workflow: ../workflows/ga-diagram-upscale.api.json
+seeds: [42]
+seed_paths: []
+axes:
+  - name: chord
+    path: "1.chord"
+    values: [C, F, Bm7b5]
+  - name: method
+    values:
+      - {label: lanczos, workflow: ../workflows/ga-diagram-upscale.api.json}
+      - {label: refine-0.2, workflow: ../workflows/ga-diagram-refine.api.json, set: {"3.denoise": 0.2}, seed_paths: ["3.seed"]}
+      - {label: refine-0.35, workflow: ../workflows/ga-diagram-refine.api.json, set: {"3.denoise": 0.35}, seed_paths: ["3.seed"]}
+      - {label: refine-0.5, workflow: ../workflows/ga-diagram-refine.api.json, set: {"3.denoise": 0.5}, seed_paths: ["3.seed"]}
+      - {label: esrgan, workflow: ../workflows/ga-diagram-esrgan.api.json}
+analysis:
+  - {kind: palette, node: "9"}

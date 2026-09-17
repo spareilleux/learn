@@ -1,0 +1,529 @@
+{
+ "method": "checks/dots.py",
+ "scales": [
+  0.75,
+  1.0,
+  1.35
+ ],
+ "conditions": {
+  "clean": {
+   "noise": 0,
+   "blur": 0,
+   "perspective": 0,
+   "low_contrast": false
+  },
+  "noise": {
+   "noise": 18,
+   "blur": 0,
+   "perspective": 0,
+   "low_contrast": false
+  },
+  "blur": {
+   "noise": 0,
+   "blur": 2.5,
+   "perspective": 0,
+   "low_contrast": false
+  },
+  "perspective": {
+   "noise": 0,
+   "blur": 0,
+   "perspective": 0.05,
+   "low_contrast": false
+  },
+  "combined": {
+   "noise": 12,
+   "blur": 1.5,
+   "perspective": 0.04,
+   "low_contrast": false
+  },
+  "low_contrast": {
+   "noise": 6,
+   "blur": 1.0,
+   "perspective": 0.02,
+   "low_contrast": true
+  }
+ },
+ "tuning_images": 120,
+ "test_images": 300,
+ "variants": {
+  "with_geometric_prior": {
+   "threshold": 0.06,
+   "tuning_sweep": {
+    "0.01": {
+     "images": 120,
+     "dots": 523,
+     "detections": 5800,
+     "true_positives": 462,
+     "precision": 0.0797,
+     "recall": 0.8834,
+     "f1": 0.1461,
+     "image_error_rate": 1.0
+    },
+    "0.015": {
+     "images": 120,
+     "dots": 523,
+     "detections": 3730,
+     "true_positives": 433,
+     "precision": 0.1161,
+     "recall": 0.8279,
+     "f1": 0.2036,
+     "image_error_rate": 1.0
+    },
+    "0.02": {
+     "images": 120,
+     "dots": 523,
+     "detections": 2255,
+     "true_positives": 412,
+     "precision": 0.1827,
+     "recall": 0.7878,
+     "f1": 0.2966,
+     "image_error_rate": 1.0
+    },
+    "0.03": {
+     "images": 120,
+     "dots": 523,
+     "detections": 1102,
+     "true_positives": 381,
+     "precision": 0.3457,
+     "recall": 0.7285,
+     "f1": 0.4689,
+     "image_error_rate": 0.9583
+    },
+    "0.04": {
+     "images": 120,
+     "dots": 523,
+     "detections": 697,
+     "true_positives": 369,
+     "precision": 0.5294,
+     "recall": 0.7055,
+     "f1": 0.6049,
+     "image_error_rate": 0.8417
+    },
+    "0.05": {
+     "images": 120,
+     "dots": 523,
+     "detections": 531,
+     "true_positives": 360,
+     "precision": 0.678,
+     "recall": 0.6883,
+     "f1": 0.6831,
+     "image_error_rate": 0.7167
+    },
+    "0.06": {
+     "images": 120,
+     "dots": 523,
+     "detections": 445,
+     "true_positives": 355,
+     "precision": 0.7978,
+     "recall": 0.6788,
+     "f1": 0.7335,
+     "image_error_rate": 0.6083
+    },
+    "0.08": {
+     "images": 120,
+     "dots": 523,
+     "detections": 362,
+     "true_positives": 312,
+     "precision": 0.8619,
+     "recall": 0.5966,
+     "f1": 0.7051,
+     "image_error_rate": 0.6417
+    },
+    "0.1": {
+     "images": 120,
+     "dots": 523,
+     "detections": 311,
+     "true_positives": 276,
+     "precision": 0.8875,
+     "recall": 0.5277,
+     "f1": 0.6619,
+     "image_error_rate": 0.6417
+    },
+    "0.12": {
+     "images": 120,
+     "dots": 523,
+     "detections": 276,
+     "true_positives": 248,
+     "precision": 0.8986,
+     "recall": 0.4742,
+     "f1": 0.6208,
+     "image_error_rate": 0.6667
+    }
+   },
+   "per_condition": {
+    "clean": {
+     "images": 50,
+     "dots": 230,
+     "detections": 227,
+     "true_positives": 158,
+     "precision": 0.696,
+     "recall": 0.687,
+     "f1": 0.6915,
+     "image_error_rate": 0.64
+    },
+    "noise": {
+     "images": 50,
+     "dots": 218,
+     "detections": 177,
+     "true_positives": 155,
+     "precision": 0.8757,
+     "recall": 0.711,
+     "f1": 0.7848,
+     "image_error_rate": 0.46
+    },
+    "blur": {
+     "images": 50,
+     "dots": 209,
+     "detections": 339,
+     "true_positives": 189,
+     "precision": 0.5575,
+     "recall": 0.9043,
+     "f1": 0.6898,
+     "image_error_rate": 0.74
+    },
+    "perspective": {
+     "images": 50,
+     "dots": 212,
+     "detections": 186,
+     "true_positives": 156,
+     "precision": 0.8387,
+     "recall": 0.7358,
+     "f1": 0.7839,
+     "image_error_rate": 0.5
+    },
+    "combined": {
+     "images": 50,
+     "dots": 219,
+     "detections": 194,
+     "true_positives": 170,
+     "precision": 0.8763,
+     "recall": 0.7763,
+     "f1": 0.8232,
+     "image_error_rate": 0.48
+    },
+    "low_contrast": {
+     "images": 50,
+     "dots": 230,
+     "detections": 47,
+     "true_positives": 12,
+     "precision": 0.2553,
+     "recall": 0.0522,
+     "f1": 0.0866,
+     "image_error_rate": 1.0
+    }
+   },
+   "overall": {
+    "images": 300,
+    "dots": 1318,
+    "detections": 1170,
+    "true_positives": 840,
+    "precision": 0.7179,
+    "recall": 0.6373,
+    "f1": 0.6752,
+    "image_error_rate": 0.6367
+   },
+   "per_dot_style": {
+    "amber_glow": {
+     "images": 49,
+     "dots": 211,
+     "detections": 285,
+     "true_positives": 207,
+     "precision": 0.7263,
+     "recall": 0.981,
+     "f1": 0.8347,
+     "image_error_rate": 0.3878
+    },
+    "black": {
+     "images": 46,
+     "dots": 202,
+     "detections": 178,
+     "true_positives": 155,
+     "precision": 0.8708,
+     "recall": 0.7673,
+     "f1": 0.8158,
+     "image_error_rate": 0.5
+    },
+    "low_contrast": {
+     "images": 50,
+     "dots": 230,
+     "detections": 47,
+     "true_positives": 12,
+     "precision": 0.2553,
+     "recall": 0.0522,
+     "f1": 0.0866,
+     "image_error_rate": 1.0
+    },
+    "red": {
+     "images": 56,
+     "dots": 245,
+     "detections": 350,
+     "true_positives": 245,
+     "precision": 0.7,
+     "recall": 1.0,
+     "f1": 0.8235,
+     "image_error_rate": 0.5536
+    },
+    "ring": {
+     "images": 50,
+     "dots": 221,
+     "detections": 92,
+     "true_positives": 29,
+     "precision": 0.3152,
+     "recall": 0.1312,
+     "f1": 0.1853,
+     "image_error_rate": 1.0
+    },
+    "white": {
+     "images": 49,
+     "dots": 209,
+     "detections": 218,
+     "true_positives": 192,
+     "precision": 0.8807,
+     "recall": 0.9187,
+     "f1": 0.8993,
+     "image_error_rate": 0.3673
+    }
+   }
+  },
+  "without_prior": {
+   "threshold": 0.06,
+   "tuning_sweep": {
+    "0.01": {
+     "images": 120,
+     "dots": 523,
+     "detections": 9760,
+     "true_positives": 466,
+     "precision": 0.0477,
+     "recall": 0.891,
+     "f1": 0.0906,
+     "image_error_rate": 1.0
+    },
+    "0.015": {
+     "images": 120,
+     "dots": 523,
+     "detections": 6722,
+     "true_positives": 437,
+     "precision": 0.065,
+     "recall": 0.8356,
+     "f1": 0.1206,
+     "image_error_rate": 1.0
+    },
+    "0.02": {
+     "images": 120,
+     "dots": 523,
+     "detections": 4258,
+     "true_positives": 416,
+     "precision": 0.0977,
+     "recall": 0.7954,
+     "f1": 0.174,
+     "image_error_rate": 1.0
+    },
+    "0.03": {
+     "images": 120,
+     "dots": 523,
+     "detections": 1915,
+     "true_positives": 385,
+     "precision": 0.201,
+     "recall": 0.7361,
+     "f1": 0.3158,
+     "image_error_rate": 0.975
+    },
+    "0.04": {
+     "images": 120,
+     "dots": 523,
+     "detections": 991,
+     "true_positives": 373,
+     "precision": 0.3764,
+     "recall": 0.7132,
+     "f1": 0.4927,
+     "image_error_rate": 0.8417
+    },
+    "0.05": {
+     "images": 120,
+     "dots": 523,
+     "detections": 623,
+     "true_positives": 364,
+     "precision": 0.5843,
+     "recall": 0.696,
+     "f1": 0.6353,
+     "image_error_rate": 0.7167
+    },
+    "0.06": {
+     "images": 120,
+     "dots": 523,
+     "detections": 467,
+     "true_positives": 359,
+     "precision": 0.7687,
+     "recall": 0.6864,
+     "f1": 0.7253,
+     "image_error_rate": 0.6
+    },
+    "0.08": {
+     "images": 120,
+     "dots": 523,
+     "detections": 366,
+     "true_positives": 316,
+     "precision": 0.8634,
+     "recall": 0.6042,
+     "f1": 0.7109,
+     "image_error_rate": 0.625
+    },
+    "0.1": {
+     "images": 120,
+     "dots": 523,
+     "detections": 315,
+     "true_positives": 280,
+     "precision": 0.8889,
+     "recall": 0.5354,
+     "f1": 0.6683,
+     "image_error_rate": 0.625
+    },
+    "0.12": {
+     "images": 120,
+     "dots": 523,
+     "detections": 280,
+     "true_positives": 252,
+     "precision": 0.9,
+     "recall": 0.4818,
+     "f1": 0.6276,
+     "image_error_rate": 0.65
+    }
+   },
+   "per_condition": {
+    "clean": {
+     "images": 50,
+     "dots": 230,
+     "detections": 229,
+     "true_positives": 158,
+     "precision": 0.69,
+     "recall": 0.687,
+     "f1": 0.6885,
+     "image_error_rate": 0.64
+    },
+    "noise": {
+     "images": 50,
+     "dots": 218,
+     "detections": 177,
+     "true_positives": 155,
+     "precision": 0.8757,
+     "recall": 0.711,
+     "f1": 0.7848,
+     "image_error_rate": 0.46
+    },
+    "blur": {
+     "images": 50,
+     "dots": 209,
+     "detections": 564,
+     "true_positives": 189,
+     "precision": 0.3351,
+     "recall": 0.9043,
+     "f1": 0.489,
+     "image_error_rate": 0.76
+    },
+    "perspective": {
+     "images": 50,
+     "dots": 212,
+     "detections": 194,
+     "true_positives": 162,
+     "precision": 0.8351,
+     "recall": 0.7642,
+     "f1": 0.798,
+     "image_error_rate": 0.48
+    },
+    "combined": {
+     "images": 50,
+     "dots": 219,
+     "detections": 201,
+     "true_positives": 172,
+     "precision": 0.8557,
+     "recall": 0.7854,
+     "f1": 0.819,
+     "image_error_rate": 0.48
+    },
+    "low_contrast": {
+     "images": 50,
+     "dots": 230,
+     "detections": 47,
+     "true_positives": 12,
+     "precision": 0.2553,
+     "recall": 0.0522,
+     "f1": 0.0866,
+     "image_error_rate": 1.0
+    }
+   },
+   "overall": {
+    "images": 300,
+    "dots": 1318,
+    "detections": 1412,
+    "true_positives": 848,
+    "precision": 0.6006,
+    "recall": 0.6434,
+    "f1": 0.6212,
+    "image_error_rate": 0.6367
+   },
+   "per_dot_style": {
+    "amber_glow": {
+     "images": 49,
+     "dots": 211,
+     "detections": 327,
+     "true_positives": 207,
+     "precision": 0.633,
+     "recall": 0.981,
+     "f1": 0.7695,
+     "image_error_rate": 0.3878
+    },
+    "black": {
+     "images": 46,
+     "dots": 202,
+     "detections": 202,
+     "true_positives": 155,
+     "precision": 0.7673,
+     "recall": 0.7673,
+     "f1": 0.7673,
+     "image_error_rate": 0.5217
+    },
+    "low_contrast": {
+     "images": 50,
+     "dots": 230,
+     "detections": 47,
+     "true_positives": 12,
+     "precision": 0.2553,
+     "recall": 0.0522,
+     "f1": 0.0866,
+     "image_error_rate": 1.0
+    },
+    "red": {
+     "images": 56,
+     "dots": 245,
+     "detections": 398,
+     "true_positives": 245,
+     "precision": 0.6156,
+     "recall": 1.0,
+     "f1": 0.7621,
+     "image_error_rate": 0.5536
+    },
+    "ring": {
+     "images": 50,
+     "dots": 221,
+     "detections": 190,
+     "true_positives": 29,
+     "precision": 0.1526,
+     "recall": 0.1312,
+     "f1": 0.1411,
+     "image_error_rate": 1.0
+    },
+    "white": {
+     "images": 49,
+     "dots": 209,
+     "detections": 248,
+     "true_positives": 200,
+     "precision": 0.8065,
+     "recall": 0.9569,
+     "f1": 0.8753,
+     "image_error_rate": 0.3469
+    }
+   }
+  }
+ },
+ "seconds": 191.4
+}

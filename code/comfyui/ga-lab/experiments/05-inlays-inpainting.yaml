@@ -1,0 +1,35 @@
+id: 05-inlays-inpainting
+title: Inlays painted into a neck, base model with a noise mask against the inpainting model
+written: 2026-09-16
+hypothesis: >
+  A neck generated from the GA map without a chord (frets 0 to 12, fixed seed 7) has known inlay positions: the map
+  draws rings at frets 3, 5, 7, 9 and two at 12. Repainting only those positions (mask from checks/geometry.py) with
+  a prompt that names an inlay style changes the markers and nothing else. The SDXL inpainting model of lesson 5
+  follows the mask's shape better than the base model with SetLatentNoiseMask, which repaints the whole 8x8 latent
+  cells around each disk.
+prediction: >
+  Written before any run. Visual scoring on the contact sheet, before reading the labels, of the 6 inlay positions
+  per image (a position counts when it shows an inlay of the requested style inside the mask): the inpainting model
+  scores at least 4 of 6 in at least 6 of its 8 images; the noise-mask method scores at least 4 of 6 in at most 4 of
+  its 8. The composite (node 15) keeps pixels outside the mask identical to the base neck (node 9) in all 16 images
+  (checked with checks/images.py pixel_diff outside the mask, to do by hand).
+workflow: ../workflows/ga-inlays-noisemask.api.json
+seeds: [42, 43]
+seed_paths: ["13.seed"]
+prepare:
+  - {name: inlays, kind: inlay_mask, fret_start: 0, fret_end: 12, width: 1344, height: 768, scale: 1.8}
+fixed:
+  "10.image": {input: inlays}
+axes:
+  - name: method
+    values:
+      - {label: noise-mask, workflow: ../workflows/ga-inlays-noisemask.api.json}
+      - {label: inpaint-model, workflow: ../workflows/ga-inlays-model.api.json}
+  - name: style
+    values:
+      - {label: pearl-dots, set: {"11.text": "mother-of-pearl dot inlays set in the dark fretboard, photograph"}}
+      - {label: abalone-blocks, set: {"11.text": "abalone block inlays set in the dark fretboard, photograph"}}
+      - {label: bone-trapezoids, set: {"11.text": "bone trapezoid inlays set in the dark fretboard, photograph"}}
+      - {label: brass-stars, set: {"11.text": "brass star inlays set in the dark fretboard, photograph"}}
+analysis:
+  - {kind: stats, node: "15"}

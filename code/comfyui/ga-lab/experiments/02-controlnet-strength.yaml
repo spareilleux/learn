@@ -1,0 +1,27 @@
+id: 02-controlnet-strength
+title: ControlNet strength from 0.2 to 1.0 on one chord
+written: 2026-09-16
+hypothesis: >
+  How much the generated neck follows the GA map grows with the ControlNet strength, and the photograph degrades
+  toward a drawing of the map at the top of the range. F is used because its barre gives six dots, the most of the
+  experiment 1 chords, and dots on three different frets.
+prediction: >
+  Written before any run. Dot recall (checks/dots.py, geometric prior, node 9), averaged over the two seeds:
+  below 0.3 at strengths 0.2 and 0.3; at least 0.6 from strength 0.7; not monotonic step by step (the seeds add
+  noise), but the recall at 1.0 is higher than at 0.5. Mean saturation (results.json) drops by at least 15 % between
+  0.2 and 1.0, as the white-on-black map pulls the image toward gray. Visual: at 1.0, straight white lines copied
+  from the map in both seeds.
+workflow: ../workflows/ga-chord-neck.api.json
+seeds: [42, 43]
+seed_paths: ["3.seed"]
+fixed:
+  "18.chord": F
+  "18.fret_start": 0
+  "18.fret_end": 5
+axes:
+  - name: strength
+    path: "22.strength"
+    values: [0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+analysis:
+  - {kind: dots, node: "9", chord_path: "18.chord", fret_start_path: "18.fret_start", fret_end_path: "18.fret_end", group_by: strength}
+  - {kind: stats, node: "9"}

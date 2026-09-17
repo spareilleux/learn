@@ -1,0 +1,24 @@
+id: 03-mode-covers
+title: The seven modes of C as album covers, same seed
+written: 2026-09-16
+hypothesis: >
+  GA Scale Prompt turns a key and a mode into words: the mode's name, its notes and a mood ("major, bright and
+  settled", "diminished, unstable"...). With the same subject and seed, SDXL's cover changes with those words, and
+  the modes musicians call brighter give brighter images, because the moods say "bright", "floating", "dark".
+prediction: >
+  Written before any run. Brightness order used: Locrian < Phrygian < Aeolian < Dorian < Mixolydian < Ionian <
+  Lydian (the usual order by raised or lowered degrees). Spearman correlation between that order and mean luma
+  (runner analyze, node 9): positive for both seeds, but below 0.6 for at least one, because a word like "dark" or
+  "melancholic" changes the palette less than the composition. The PreviewAny text of each item names the mode
+  and its seven notes. Visual: no readable letters in at least 10 of 14 covers despite "no text".
+workflow: ../workflows/ga-mode-cover.api.json
+seeds: [42, 7]
+seed_paths: ["3.seed"]
+fixed:
+  "30.key": C
+axes:
+  - name: mode
+    path: "30.mode"
+    values: [Ionian, Dorian, Phrygian, Lydian, Mixolydian, Aeolian, Locrian]
+analysis:
+  - {kind: luma_rank, node: "9", axis: mode, order: [Locrian, Phrygian, Aeolian, Dorian, Mixolydian, Ionian, Lydian]}

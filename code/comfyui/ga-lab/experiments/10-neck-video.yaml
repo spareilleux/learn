@@ -1,0 +1,27 @@
+id: 10-neck-video
+title: Video along the neck, a pan without a video model, then Wan 2.2 TI2V 5B if it fits
+written: 2026-09-16
+hypothesis: >
+  Two ways to move along a guitar neck. (a) Without a video model: one wide SDXL neck generated from the GA map
+  (frets 0 to 12, Am) and cropped at 12 sliding offsets into an animated WebP; only the camera moves, and SDXL at
+  2048x512, outside its training sizes, repeats patterns. (b) Wan 2.2 TI2V 5B, the smallest current video model
+  ComfyUI documents: a plucked string vibrating, 49 frames at 1280x704. Its three files weigh 18.1 GB (diffusion model
+  10.0 GB, UMT5 XXL fp8 text encoder 6.7 GB, VAE 1.4 GB), so with the 8 GB margin and 6 GB more for 49 frames of
+  latents (to verify) it needs about 32 GB of free RAM: the memory rule decides whether it runs.
+prediction: >
+  Written before any run. (a) The five pan items run; frets stay aligned with the map in all five; repeated sections
+  of neck (the same inlay twice in a row) show in at least two. (b) Recorded as could_not_run: the Wan files are not
+  on the machine (lesson 10 is not written, and a download over 10 GB needs the user's agreement), or, if they are,
+  refused by the memory rule when less than 32 GB is free. If it does run: the string's vibration reads as motion in
+  at most 2 of 5 videos, the rest moving the camera or the whole guitar instead.
+workflow: ../workflows/ga-neck-pan.api.json
+seeds: [42, 43, 44, 45, 46]
+seed_paths: ["3.seed"]
+extra_memory_gb: 6
+axes:
+  - name: video
+    values:
+      - {label: sdxl-pan, workflow: ../workflows/ga-neck-pan.api.json}
+      - {label: wan-ti2v-5b, workflow: ../workflows/ga-wan-video.api.json, seed_paths: ["8.seed"]}
+analysis:
+  - {kind: stats, node: "300"}
