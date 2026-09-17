@@ -1,6 +1,7 @@
 // ComfyUI course, lesson 12: the fake ComfyUI server, as a program, for check.sh and for the Java tests.
 //   fake-comfy [--port 0] [--script ok,500,drop,...] [--step-ms 20] [--busy 0]
 // Prints "listening on <url>" once it accepts connections, then runs until it is killed or its input closes.
+using System.Runtime.InteropServices;
 using Learn.Comfy.Fake;
 
 int port = 0;
@@ -20,11 +21,22 @@ for (int i = 0; i < args.Length; i++)
     }
 }
 
+// SIGTERM (check.sh's kill) or Ctrl+C ends the wait below, and the server stops. With a plain infinite wait, the
+// processes outlived kill on the Linux runner and check.sh waited for them until the job was cancelled.
+var stop = new TaskCompletionSource();
+void Stop(PosixSignalContext context)
+{
+    context.Cancel = true;
+    stop.TrySetResult();
+}
+using var sigterm = PosixSignalRegistration.Create(PosixSignal.SIGTERM, Stop);
+using var sigint = PosixSignalRegistration.Create(PosixSignal.SIGINT, Stop);
+
 await using var server = await FakeComfyServer.StartAsync(options, port);
 Console.WriteLine($"listening on {server.BaseUri}");
 Console.Out.Flush();
 if (untilInputCloses)
-    await Task.Run(() => { while (Console.In.ReadLine() is not null) { } });
+    await Task.WhenAny(Task.Run(() => { while (Console.In.ReadLine() is not null) { } }), stop.Task);
 else
-    await Task.Delay(Timeout.Infinite);
+    await stop.Task;
 return 0;

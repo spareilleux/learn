@@ -4,12 +4,13 @@
 #   bash check.sh test          the C# tests (xUnit) and the Java tests (JUnit), against the fake server
 #   bash check.sh transcripts   both workers from the command line against fake servers, compared with expected/
 #   bash check.sh integration   both workers against a real ComfyUI on the CPU: needs COMFYUI_DIR and COMFYUI_PYTHON (../server.sh)
-#   bash check.sh               build, test and transcripts: no GPU, no model, no Python
+#   bash check.sh               build, test and transcripts: no GPU, no model, no ComfyUI
 #   UPDATE=1 bash check.sh ...  writes the transcripts to expected/ instead of comparing (review the diff before committing)
-# MVN overrides the Maven command.
+# MVN overrides the Maven command, PYTHON the Python used for the results file.
 set -uo pipefail
 cd "$(dirname "$0")"
 MVN=${MVN:-mvn}
+PYTHON=${PYTHON:-$(command -v python3 || command -v python)}
 what=${1:-all}
 status=0
 mkdir -p out expected
@@ -110,6 +111,16 @@ transcripts() {
     sed 's/^/info /' "out/12-two-gpus-$language.full.txt"
     grep "^summary:" "out/12-two-gpus-$language.full.txt" > "out/12-two-gpus-$language.txt"
     compare 12-two-gpus "out/12-two-gpus-$language.txt"
+    stop_fakes
+
+    # The GA lab's chord-to-neck experiment as 20 jobs, one GPU that runs out of memory once, then the results file.
+    # The fake answers with the file names of the workflow's SaveImage nodes: this checks the jobs file, not the images.
+    start_fake "fake-ga-$language.txt" --step-ms 20 --script ok,ok,oom
+    worker $language run --gpu "gpu0=$url" --store "out/store-ga-$language" --jobs jobs/ga-chord-neck.jsonl "${common[@]}" \
+      --attempts 3 > "out/12-ga-$language.txt" 2>&1
+    compare 12-ga "out/12-ga-$language.txt"
+    "$PYTHON" jobs/results.py jobs/ga-chord-neck.jsonl "out/store-ga-$language" > "out/12-ga-results-$language.csv"
+    compare 12-ga-results "out/12-ga-results-$language.csv"
     stop_fakes
   done
 }
