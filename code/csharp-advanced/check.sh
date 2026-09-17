@@ -45,6 +45,16 @@ run l2-modes-server l2-modes DOTNET_gcServer=1
 run l2-modes-non-concurrent l2-modes DOTNET_gcConcurrent=0
 run l3 l3
 run l4 l4
+run l5 l5
+
+# Lesson 5: the Describe methods the JIT compiled for Lesson5.Shared<T>, from the JIT's own summary,
+# without the tier and the code size, which depend on the machine. The app is started directly, not through
+# dotnet run, so that the SDK's own process doesn't write to the same file
+rm -f out/l5-jit-summary.raw.txt
+DOTNET_JitStdOutFile=out/l5-jit-summary.raw.txt DOTNET_JitDisasmSummary=1   dotnet Advanced/bin/Release/net10.0/Advanced.dll l5-jit < /dev/null > out/l5-jit.raw.txt 2>&1
+grep '^# ' out/l5-jit.raw.txt
+{ grep -v '^# ' out/l5-jit.raw.txt; echo "JIT summary:"; grep -o 'Lesson5+Shared`1\[[^]]*\]:Describe([^)]*)' out/l5-jit-summary.raw.txt | LC_ALL=C sort -u; } > out/l5-jit.txt
+compare l5-jit
 run l6 l6
 run l7 l7
 run l8 l8

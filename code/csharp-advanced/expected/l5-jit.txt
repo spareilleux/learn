@@ -1,0 +1,14 @@
+
+== How the JIT shares generic code: one Describe per value type, one for all reference types
+Shared<Int32>.Describe: Calls 1
+Shared<Int64>.Describe: Calls 1
+Shared<PitchClass>.Describe: Calls 1
+Shared<String>.Describe: Calls 1
+Shared<Object>.Describe: Calls 1
+Shared<List`1>.Describe: Calls 1
+ReadStatic<int>(10) 10, ReadStatic<string>(10) 10
+JIT summary:
+Lesson5+Shared`1[GA.Domain.Core.Theory.Atonal.PitchClass]:Describe(GA.Domain.Core.Theory.Atonal.PitchClass)
+Lesson5+Shared`1[System.__Canon]:Describe(System.__Canon)
+Lesson5+Shared`1[int]:Describe(int)
+Lesson5+Shared`1[long]:Describe(long)

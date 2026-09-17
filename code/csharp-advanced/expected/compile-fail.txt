@@ -23,6 +23,28 @@ l3_ref_parameter.cs(4,48): error CS1988: Async methods cannot have ref, in or ou
 l3_span_across_await.cs(8,16): error CS4007: Instance of type 'System.Span<int>' cannot be preserved across 'await' or 'yield' boundary.
 l3_span_across_await.cs(8,28): error CS4007: Instance of type 'System.Span<int>' cannot be preserved across 'await' or 'yield' boundary.
 l3_span_across_await.cs(8,40): error CS4007: Instance of type 'System.Span<int>' cannot be preserved across 'await' or 'yield' boundary.
+== l5_exercise_variance.cs
+l5_exercise_variance.cs(5,37): error CS0266: Cannot implicitly convert type 'System.Collections.Generic.List<string>' to 'System.Collections.Generic.IList<object>'. An explicit conversion exists (are you missing a cast?)
+l5_exercise_variance.cs(6,43): error CS0266: Cannot implicitly convert type 'System.Collections.Generic.List<int>' to 'System.Collections.Generic.IEnumerable<object>'. An explicit conversion exists (are you missing a cast?)
+l5_exercise_variance.cs(8,38): error CS0266: Cannot implicitly convert type 'System.Action<string>' to 'System.Action<object>'. An explicit conversion exists (are you missing a cast?)
+== l5_invariant_list.cs
+l5_invariant_list.cs(4,38): error CS0029: Cannot implicitly convert type 'System.Collections.Generic.List<string>' to 'System.Collections.Generic.List<object>'
+== l5_new_without_constraint.cs
+l5_new_without_constraint.cs(4,36): error CS0304: Cannot create an instance of the variable type 'T' because it does not have the new() constraint
+== l5_notnull_nullable_key.cs
+l5_notnull_nullable_key.cs(4,44): warning CS8714: The type 'string?' cannot be used as type parameter 'TKey' in the generic type or method 'Dictionary<TKey, TValue>'. Nullability of type argument 'string?' doesn't match 'notnull' constraint.
+== l5_operator_without_constraint.cs
+l5_operator_without_constraint.cs(4,48): error CS0019: Operator '+' cannot be applied to operands of type 'T' and 'T'
+== l5_ref_struct_boxing.cs
+l5_ref_struct_boxing.cs(4,73): error CS0029: Cannot implicitly convert type 'T' to 'object'
+== l5_static_abstract_type_argument.cs
+l5_static_abstract_type_argument.cs(14,48): error CS8920: The interface 'IFromValue<PitchClass>' cannot be used as type argument. Static member 'IFromValue<PitchClass>.FromValue(int)' does not have a most specific implementation in the interface.
+== l5_struct_nullable_argument.cs
+l5_struct_nullable_argument.cs(6,47): error CS0453: The type 'int?' must be a non-nullable value type in order to use it as parameter 'T' in the generic type or method 'Options.Find<T>(T[])'
+== l5_unmanaged_reference_field.cs
+l5_unmanaged_reference_field.cs(12,40): error CS8377: The type 'Voicing' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'Buffers.SizeOf<T>()'
+== l5_unsafe_variance.cs
+l5_unsafe_variance.cs(6,17): error CS1961: Invalid variance: The type parameter 'T' must be contravariantly valid on 'IProducer<T>.Accept(T)'. 'T' is covariant.
 == l9_async_predicate.cs
 l9_async_predicate.cs(11,34): error CS4010: Cannot convert async lambda expression to delegate type 'Func<string, bool>'. An async lambda expression may return void, Task or Task<T>, none of which are convertible to 'Func<string, bool>'.
 == l9_foreach_async_stream.cs

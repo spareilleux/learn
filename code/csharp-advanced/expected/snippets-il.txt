@@ -464,6 +464,83 @@
 
 } // end of class Snippets.AsyncMachine
 
+.class interface public auto ansi abstract beforefieldinit Snippets.IFromValue`1<(class Snippets.IFromValue`1<!TSelf>) TSelf>
+{
+	// Methods
+	.method public hidebysig abstract virtual static 
+		!TSelf FromValue (
+			int32 'value'
+		) cil managed 
+	{
+	} // end of method IFromValue`1::FromValue
+
+} // end of class Snippets.IFromValue`1
+
+.class public auto ansi abstract sealed beforefieldinit Snippets.Generics
+	extends [System.Runtime]System.Object
+{
+	// Methods
+	.method public hidebysig static 
+		!!T Create<.ctor T> () cil managed 
+	{
+		// Header size: 1
+		// Code size: 6 (0x6)
+		.maxstack 8
+
+		IL_0000: call !!0 [System.Runtime]System.Activator::CreateInstance<!!T>()
+		IL_0005: ret
+	} // end of method Generics::Create
+
+	.method public hidebysig static 
+		!!T DefaultOf<T> () cil managed 
+	{
+		// Header size: 12
+		// Code size: 10 (0xa)
+		.maxstack 1
+		.locals init (
+			[0] !!T
+		)
+
+		IL_0000: ldloca.s 0
+		IL_0002: initobj !!T
+		IL_0008: ldloc.0
+		IL_0009: ret
+	} // end of method Generics::DefaultOf
+
+	.method public hidebysig static 
+		!!T FromValue<(class Snippets.IFromValue`1<!!T>) T> (
+			int32 'value'
+		) cil managed 
+	{
+		// Header size: 1
+		// Code size: 13 (0xd)
+		.maxstack 8
+
+		IL_0000: ldarg.0
+		IL_0001: constrained. !!T
+		IL_0007: call !0 class Snippets.IFromValue`1<!!T>::FromValue(int32)
+		IL_000c: ret
+	} // end of method Generics::FromValue
+
+	.method public hidebysig static 
+		!!T Add<(class [System.Runtime]System.Numerics.IAdditionOperators`3<!!T, !!T, !!T>) T> (
+			!!T left,
+			!!T right
+		) cil managed 
+	{
+		// Header size: 1
+		// Code size: 14 (0xe)
+		.maxstack 8
+
+		IL_0000: ldarg.0
+		IL_0001: ldarg.1
+		IL_0002: constrained. !!T
+		IL_0008: call !2 class [System.Runtime]System.Numerics.IAdditionOperators`3<!!T, !!T, !!T>::op_Addition(!0, !1)
+		IL_000d: ret
+	} // end of method Generics::Add
+
+} // end of class Snippets.Generics
+
 .class public auto ansi abstract sealed beforefieldinit Snippets.Boxing
 	extends [System.Runtime]System.Object
 {

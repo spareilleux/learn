@@ -1,0 +1,112 @@
+
+== Reified generics: every instantiation is a type of its own
+typeof(List<int>) == typeof(List<string>): False
+typeof(List<PitchClass>): System.Collections.Generic.List`1[GA.Domain.Core.Theory.Atonal.PitchClass]
+new List<PitchClass>() is List<int>: False
+NameOf<PitchClass>(): PitchClass; new T[3] is GA.Domain.Core.Theory.Atonal.PitchClass[]
+12 pitch classes in a List<PitchClass>: 104 bytes
+12 pitch classes in a List<object>:     440 bytes
+
+== Constraints in the metadata: what the runtime sees
+Class            ReferenceTypeConstraint; types []; attributes []
+Struct           NotNullableValueTypeConstraint, DefaultConstructorConstraint; types [ValueType]; attributes []
+Unmanaged        NotNullableValueTypeConstraint, DefaultConstructorConstraint; types [ValueType]; attributes [IsUnmanagedAttribute]
+NotNull          None; types []; attributes []
+New              DefaultConstructorConstraint; types []; attributes []
+Enum             NotNullableValueTypeConstraint, DefaultConstructorConstraint; types [Enum, ValueType]; attributes []
+AllowsRefStruct  AllowByRefLike; types []; attributes []
+
+== Constraints the compiler checks and the runtime doesn't
+MakeGenericMethod((int, string)) on 'where T : unmanaged': accepted
+MakeGenericMethod(string) on 'where T : unmanaged':        ArgumentException
+MakeGenericMethod(int?) on 'where T : struct':            ArgumentException
+sizeof(T) with T : unmanaged: PitchClass 4, (byte, long) 16
+IsReferenceOrContainsReferences: PitchClass False, (int, string) True
+new T() with T : new(): StringBuilder, Str 0
+
+== default(T), and what T? means
+FirstOrDefault(1 2 3, > 5): 0
+FirstOrDefault("C" "G", empty): null
+FirstOrNull(1 2 3, > 5): null
+return type of FirstOrDefault<int>: Int32; of FirstOrNull<int>: Nullable`1
+default(PitchClass): 0, the pitch class C
+default(Str).Value: 0; Str.FromValue(0): ArgumentOutOfRangeException
+new Str[6]: 0 0 0 0 0 0
+
+== Static abstract members: GA's IRangeValueObject<TSelf>
+PitchClass     0 to E   12 values
+IntervalClass 0 (Unison) to 6 (A4, d5; Tritone)   7 values
+Fret           x to 36  38 values
+Str            1 to 26  26 values
+AllOf<IntervalClass>(): 0 (Unison) 1 (m2, M7) 2 (M2, m7) 3 (m3, M6) 4 (M3, m6) 5 (P4, P5) 6 (A4, d5; Tritone)
+CountItems<PitchClass>() through IStaticReadonlyCollection<T>.Items: 12
+
+== Generic math: one Sum and one Mean for every number type
+int     sum 10, mean 2
+double  sum 10, mean 2.5
+decimal sum 0.3, double sum 0.30000000000000004
+byte    250 + 10: unchecked 4, checked OverflowException
+int     MaxValue + 1: unchecked -2147483648, checked OverflowException
+double  MaxValue + MaxValue: checked Infinity
+byte.CreateChecked(300) OverflowException, CreateSaturating 255, CreateTruncating 44
+int.CreateSaturating(double.NaN) 0, int.CreateSaturating(1e10) 2147483647
+
+== Variance: in, out, and why List<T> has neither
+IEnumerable<string> as IEnumerable<object>: True
+List<string> is IEnumerable<object>: True; is IList<object>: False
+List<int> is IEnumerable<object>: False
+Action<object> as Action<string>: True
+object[] array = new string[1]; array[0] = PitchClass.C: ArrayTypeMismatchException
+  IEnumerable`1                  Covariant
+  IReadOnlyList`1                Covariant
+  IList`1                        None
+  Action`1                       Contravariant
+  Func`2                         Contravariant, Covariant
+  IComparer`1                    Contravariant
+  IStaticReadonlyCollection`1    Covariant
+GA ModalFamily (class) is IStaticReadonlyCollection<object>: True
+GA PitchClass (struct) is IStaticReadonlyCollection<object>: False
+
+== allows ref struct: which generic parameters accept a Span<T>
+  Func`2               yes, yes
+  Action`1             yes
+  IEquatable`1         yes
+  IComparable`1        yes
+  IEnumerable`1        yes
+  IEqualityComparer`1  yes
+  List`1               no
+  Dictionary`2         no, no
+  Span`1               no
+  Nullable`1           no
+Apply("x 3 2 0 1 0".AsSpan(), span => span.Count(' ')): 5
+
+== A static field per closed type: a cache the runtime keys by T
+  TypeCache<String> initialized
+  TypeCache<Object> initialized
+  TypeCache<Int32> initialized
+Id: string 1, object 2, int 3; initializations 3
+Hits: string 3, object 1, int 1
+EqualityComparer<T>.Default: int GenericEqualityComparer`1, string StringEqualityComparer, PitchClass GenericEqualityComparer`1
+                             int? NullableEqualityComparer`1, object ObjectEqualityComparer`1, DayOfWeek EnumEqualityComparer`1
+the same instance each time: True
+
+== GA: what IStaticValueObjectList<TSelf> costs per access
+PitchClass.Items:                        32 bytes, the same object twice: False
+foreach over PitchClass.Items:           72 bytes
+PitchClass.Values[3]:                    24 bytes, Values is ImmutableArray`1
+ValueObjectUtils<PitchClass>.Values[3]:  0 bytes
+PitchClass.ItemsSpan[3]:                 0 bytes
+SumAll<PitchClass>() over ItemsSpan:     66, 0 bytes
+
+== GA: who implements IStaticReadonlyCollection<TSelf>
+13 structs, 4 classes: ModalFamily, PitchClassSet, Scale, SetClass
+
+== GA: the two range checks with normalize: true
+ -1: IRangeValueObject<PitchClass>.EnsureValueInRange 11, ValueObjectUtils<PitchClass>.EnsureValueRange 11
+ 12: IRangeValueObject<PitchClass>.EnsureValueInRange  2, ValueObjectUtils<PitchClass>.EnsureValueRange  0
+ 13: IRangeValueObject<PitchClass>.EnsureValueInRange  3, ValueObjectUtils<PitchClass>.EnsureValueRange  1
+
+== Exercise solutions
+1. Wrap(-1, 12) 11, Wrap(-13L, 12L) 11, Wrap(-0.5, 12.0) 11.5, Wrap(25, 12) 1
+2. ParseAll<PitchClass>("0 4 7 T") [0 4 7 T], ParseAll<int>("0 4 7 10") sum 21
+exit 0
