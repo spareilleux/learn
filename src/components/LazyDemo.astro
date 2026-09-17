@@ -1,0 +1,48 @@
+---
+// A live demo that costs nothing until the reader asks for it: a screenshot and a button, replaced on click by an iframe
+// of a page built into public/. `path` is relative to the site's base (e.g. "ga-lab/p1/"), so it works under /learn/.
+interface Props {
+	path: string;
+	title: string;
+	screenshot: string;
+	alt: string;
+	label: string;
+	note?: string;
+	height?: number;
+}
+const { path, title, screenshot, alt, label, note, height = 560 } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const src = base + path;
+const shot = base + screenshot;
+---
+
+<figure class="lazy-demo not-content" data-src={src} data-title={title} style={`--demo-height: ${height}px`}>
+	<div class="lazy-demo-frame">
+		<img src={shot} alt={alt} loading="lazy" />
+		<button type="button">{label}</button>
+	</div>
+	{note && <figcaption>{note} <a href={src} target="_blank" rel="noopener">{src}</a></figcaption>}
+</figure>
+
+<style>
+	.lazy-demo { margin: 1.5rem 0; }
+	.lazy-demo-frame { position: relative; width: 100%; height: var(--demo-height); background: #0d1117; border-radius: 0.5rem; overflow: hidden; }
+	.lazy-demo-frame img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; }
+	.lazy-demo-frame iframe { width: 100%; height: 100%; border: 0; }
+	.lazy-demo button { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); padding: 0.6rem 1.2rem; font-size: 1rem; border-radius: 0.5rem; border: 0; background: var(--sl-color-accent); color: var(--sl-color-black); cursor: pointer; }
+	.lazy-demo figcaption { font-size: var(--sl-text-sm); color: var(--sl-color-gray-3); margin-top: 0.4rem; }
+	@media (max-width: 640px) { .lazy-demo-frame { height: 70vh; } }
+</style>
+
+<script>
+	for (const figure of document.querySelectorAll<HTMLElement>('.lazy-demo')) {
+		figure.querySelector('button')?.addEventListener('click', () => {
+			const iframe = document.createElement('iframe');
+			iframe.src = figure.dataset.src!;
+			iframe.title = figure.dataset.title!;
+			iframe.loading = 'lazy';
+			iframe.allow = 'autoplay; microphone';
+			figure.querySelector('.lazy-demo-frame')!.replaceChildren(iframe);
+		});
+	}
+</script>

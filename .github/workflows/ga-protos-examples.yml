@@ -1,0 +1,62 @@
+# Guitar Alchemist Lab prototypes. P1, the voicing space explorer: unit tests (PCA determinism, the data file round trip,
+# exact neighbours, the diagram's string order), the build step on a tiny generated OPTK index, the Vite build, a headless
+# Chromium smoke test of the page on that data, and the size budget of the published lab. No GPU timings: the runners
+# have no GPU. Other prototypes add their own job.
+name: GA Lab prototypes
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['code/ga-protos/**', 'public/ga-lab/**', '.github/workflows/ga-protos-examples.yml']
+  pull_request:
+    paths: ['code/ga-protos/**', 'public/ga-lab/**', '.github/workflows/ga-protos-examples.yml']
+
+permissions:
+  contents: read
+
+env:
+  NODE_VERSION: 24.21.0
+
+jobs:
+  p1-voicing-explorer:
+    name: P1 voicing explorer (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+        working-directory: code/ga-protos/p1-voicing-explorer
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Install the pinned three.js, Vite and Playwright
+        run: npm ci
+      - name: Unit tests
+        run: npm test
+      - name: Build step on a tiny fixture index
+        run: |
+          node scripts/make-fixture.mjs
+          node scripts/build-data.mjs --index fixture/optick.index --out public/data --sample 200 --k 10 --ga-sha fixture
+          node -e "const m=require('./public/data/manifest.json'); if (m.count!==200||m.k!==10||m.checks.midiMismatches!==0) { console.error(m); process.exit(1) }"
+      - name: Vite build
+        run: node scripts/publish.mjs --out dist
+      - name: Chromium for Playwright
+        run: npx playwright install ${{ runner.os == 'Linux' && '--with-deps' || '' }} chromium
+      - name: The page loads the fixture data and renders, whatever backend the runner has
+        run: |
+          node scripts/probe.mjs --frames 5 | tee probe.txt
+          node -e "const l=require('fs').readFileSync('probe.txt','utf8').trim().split('\n'); if (l.some(x=>x.startsWith('pageerror'))) process.exit(1); const r=JSON.parse(l.at(-1)); console.log(r.backend, r.points, 'points'); if (r.points!==200) process.exit(1)"
+      - name: The committed build in public/ga-lab/p1 loads under /learn/ with its 30,000 voicings
+        run: node scripts/check-published.mjs
+      - name: The published lab stays under 20 MB
+        working-directory: public/ga-lab
+        run: |
+          bytes=$(find . -type f -exec cat {} + | wc -c)
+          echo "public/ga-lab: $bytes bytes"
+          test "$bytes" -le 20000000

@@ -249,6 +249,12 @@ export default defineConfig({
 							collapsed: true,
 							items: [{ autogenerate: { directory: 'music-theory-ga' } }],
 						},
+						{
+							label: 'Guitar Alchemist Lab',
+							translations: { fr: 'Laboratoire Guitar Alchemist', es: 'Laboratorio Guitar Alchemist' },
+							collapsed: true,
+							items: [{ autogenerate: { directory: 'ga-lab' } }],
+						},
 					],
 				},
 				{

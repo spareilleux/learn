@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GA voicing space explorer</title>
+    <script type="module" crossorigin src="./assets/index-Ck8h4uN1.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-CT4d70dC.css">
+  </head>
+  <body>
+    <div id="app">
+      <canvas id="scene"></canvas>
+      <aside id="panel-left" class="panel">
+        <h1>Voicing space</h1>
+        <p id="status" class="small">Loading…</p>
+        <label class="row">Colour by
+          <select id="color-by">
+            <option value="family">chord family</option>
+            <option value="tension">tension</option>
+            <option value="lowFret">position on the neck</option>
+            <option value="noteCount">number of notes</option>
+          </select>
+        </label>
+        <div id="legend"></div>
+        <label class="row">Max fret span <output id="span-out">4</output>
+          <input id="span" type="range" min="0" max="4" step="1" value="4" />
+        </label>
+        <label class="row">Max tension <output id="tension-out">15</output>
+          <input id="tension" type="range" min="0" max="15" step="1" value="15" />
+        </label>
+        <label class="row">Point size <output id="size-out">3</output>
+          <input id="size" type="range" min="1" max="8" step="1" value="3" />
+        </label>
+        <p class="small">Drag to orbit, scroll to zoom. Hover a point to name it, click to select and hear it.</p>
+      </aside>
+      <aside id="panel-right" class="panel" hidden>
+        <h2 id="sel-name"></h2>
+        <p class="small" id="sel-shape"></p>
+        <canvas id="diagram" width="200" height="200"></canvas>
+        <p class="small" id="sel-notes"></p>
+        <button id="play" type="button">Play ▶</button>
+        <h3>Nearest in GA's 124 dimensions</h3>
+        <ol id="neighbours"></ol>
+        <p class="small" id="sel-note"></p>
+      </aside>
+      <div id="tooltip" hidden></div>
+    </div>
+  </body>
+</html>

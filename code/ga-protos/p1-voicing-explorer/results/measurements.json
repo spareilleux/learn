@@ -1,0 +1,119 @@
+{
+ "measuredAt": "2026-09-17T04:06:56.358Z",
+ "node": "v24.12.0",
+ "index": {
+  "path": "G:/learn-33/ga-p1/optick.index",
+  "bytes": 183770270,
+  "sha256": "1e91e4695bab8aa4bb451fdd1f199a4afaa4c4ad913f08acc5163c6ab07caa23",
+  "voicings": 313047,
+  "guitar": 297910,
+  "dim": 124
+ },
+ "sample": {
+  "size": 30000,
+  "seed": 20260916,
+  "queries": 2000,
+  "querySeed": 20260917
+ },
+ "timingsMs": {
+  "loadIndex": 169,
+  "pcaFitAllGuitar": 1242
+ },
+ "explainedVariance": [
+  0.08768,
+  0.0822,
+  0.0525,
+  0.04817,
+  0.04533,
+  0.0411,
+  0.03925,
+  0.02857,
+  0.02779,
+  0.02746,
+  0.02704,
+  0.02687
+ ],
+ "cumulativeVariance": {
+  "1": 0.0877,
+  "2": 0.1699,
+  "3": 0.2224,
+  "10": 0.4801,
+  "32": 0.8465,
+  "64": 0.9986
+ },
+ "withinSample": {
+  "queries": 2000,
+  "candidates": 30000,
+  "exactSearchMs": 5593,
+  "meanTenthNeighbourScore": 1.0553,
+  "tiedTenth": 0.101,
+  "recall": {
+   "2": 0.0355,
+   "3": 0.1684,
+   "10": 0.4381,
+   "32": 0.6929
+  },
+  "recallWithTies": {
+   "2": 0.0357,
+   "3": 0.1689,
+   "10": 0.4395,
+   "32": 0.6952
+  },
+  "familyAgreement": {
+   "exact": 0.6126,
+   "pca2": 0.1636,
+   "pca3": 0.3686,
+   "pca10": 0.7302,
+   "pca32": 0.6046
+  }
+ },
+ "againstIndex": {
+  "queries": 2000,
+  "candidates": 297910,
+  "exactSearchMs": 67671,
+  "meanTenthNeighbourScore": 1.1065,
+  "tiedTenth": 0.474,
+  "recall": {
+   "2": 0.1681,
+   "3": 0.3483,
+   "10": 0.7654,
+   "32": 0.7873
+  },
+  "recallWithTies": {
+   "2": 0.1686,
+   "3": 0.3543,
+   "10": 0.7849,
+   "32": 0.8102
+  },
+  "familyAgreement": {
+   "exact": 0.9649,
+   "pca2": 0.2898,
+   "pca3": 0.6063,
+   "pca10": 0.969,
+   "pca32": 0.9528
+  }
+ },
+ "duplicateVectors": 121768,
+ "offGridDiagrams": 15853,
+ "families": {
+  "major": 10707,
+  "minor": 9046,
+  "power": 9137,
+  "sus": 28411,
+  "dim-aug": 13209,
+  "maj7": 26524,
+  "dom7": 55807,
+  "min7": 38855,
+  "half-dim": 9648,
+  "add": 20496,
+  "other-named": 64194,
+  "unnamed": 11876
+ },
+ "fretSpans": {
+  "0": 627,
+  "1": 7729,
+  "2": 26376,
+  "3": 75628,
+  "4": 187550
+ }
+}

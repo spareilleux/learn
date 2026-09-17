@@ -37,7 +37,8 @@ export function buildData(indexArrayBuffer, { sample = 30000, seed = 20260916, k
   const sampleVectors = new Float32Array(n * index.dim);
   rows.forEach((r, i) => sampleVectors.set(index.vector(r), i * index.dim));
   const kk = Math.min(k, n - 1);
-  const knn = knnByDot(sampleVectors, index.dim, n, Array.from({ length: n }, (_, i) => i), kk);
+  // k = 0 skips the search: the local full-index mode ships the vectors and searches in the browser instead
+  const knn = kk > 0 ? knnByDot(sampleVectors, index.dim, n, Array.from({ length: n }, (_, i) => i), kk) : { ids: [], scores: new Float32Array(0) };
   timings.knnMs = performance.now() - t;
   log(`exact ${kk}-NN of ${n} voicings in ${index.dim} dimensions: ${(timings.knnMs / 1000).toFixed(1)} s`);
 
@@ -114,5 +115,5 @@ export function buildData(indexArrayBuffer, { sample = 30000, seed = 20260916, k
     bytes: bytes.length,
   };
   timings.totalMs = performance.now() - t0;
-  return { bytes, manifest, timings, pca, rows, index };
+  return { bytes, manifest, timings, pca, rows, index, sampleVectors };
 }

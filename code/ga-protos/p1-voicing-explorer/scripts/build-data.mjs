@@ -1,6 +1,6 @@
 // Builds the explorer's data from GA's OPTIC-K index:
 //   node scripts/build-data.mjs --index <optick.index> [--out public/data] [--sample 30000] [--seed 20260916]
-//                               [--k 10] [--fit instrument|sample] [--ga-sha <sha>]
+//                               [--k 10] [--fit instrument|sample] [--ga-sha <sha>] [--with-vectors]
 // Writes <out>/voicings.bin and <out>/manifest.json, and prints what it did.
 import { createHash } from 'node:crypto';
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
@@ -19,7 +19,7 @@ const out = option('--out', 'public/data');
 const file = readFileSync(indexPath);
 const sha256 = createHash('sha256').update(file).digest('hex');
 const arrayBuffer = file.buffer.slice(file.byteOffset, file.byteOffset + file.byteLength);
-const { bytes, manifest, timings } = buildData(arrayBuffer, {
+const { bytes, manifest, timings, sampleVectors } = buildData(arrayBuffer, {
   sample: Number(option('--sample', 30000)),
   seed: Number(option('--seed', 20260916)),
   k: Number(option('--k', 10)),
@@ -35,6 +35,11 @@ manifest.source = {
 
 mkdirSync(out, { recursive: true });
 writeFileSync(join(out, 'voicings.bin'), bytes);
+// --with-vectors: the sampled 124-dimensional vectors too, for the local full-index mode (too large to publish)
+if (args.includes('--with-vectors')) {
+  manifest.vectorsFile = 'vectors.bin';
+  writeFileSync(join(out, 'vectors.bin'), new Uint8Array(sampleVectors.buffer, sampleVectors.byteOffset, sampleVectors.byteLength));
+}
 writeFileSync(join(out, 'manifest.json'), JSON.stringify(manifest, null, 1) + '\n');
 console.log(`checks: ${JSON.stringify(manifest.checks)}`);
 console.log(`PCA explained variance, first 3 components: ${manifest.pca.explained.slice(0, 3).map((x) => (100 * x).toFixed(1) + ' %').join(', ')}`);
