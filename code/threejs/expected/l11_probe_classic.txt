@@ -1,0 +1,55 @@
+{
+  "native": {
+    "navigatorXR": true,
+    "immersiveVR": false,
+    "XRGPUBinding": false
+  },
+  "emulated": {
+    "device": "Meta Quest 3",
+    "immersiveVR": true
+  },
+  "rendererBeforeSession": "WebGLRenderer",
+  "session": {
+    "mode": "immersive-vr",
+    "enabledFeatures": [
+      "local-floor",
+      "viewer",
+      "local"
+    ]
+  },
+  "presenting": true,
+  "rendererInSession": "WebGLRenderer",
+  "frames": [
+    {
+      "eyes": 2,
+      "eyeDistanceMm": 63,
+      "viewport": [
+        [0, 0, 400, 450],
+        [400, 0, 400, 450]
+      ],
+      "calls": 38,
+      "triangles": 1560
+    }
+  ],
+  "picks": [
+    {
+      "controller": 1,
+      "hand": "right",
+      "object": "neck",
+      "fret": 5,
+      "string": 3,
+      "note": "C4"
+    }
+  ],
+  "inputSources": 2,
+  "errors": [],
+  "after": {
+    "in the session": {
+      "presenting": true
+    },
+    "end the session": {
+      "presenting": false
+    }
+  }
+}
+exit 0

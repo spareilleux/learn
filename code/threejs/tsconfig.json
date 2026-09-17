@@ -12,6 +12,8 @@
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",
     "noEmit": true,
+    // Lessons 9, 12 and 13: JSX compiled for React's automatic runtime, by tsc and by Vite
+    "jsx": "react-jsx",
 
     "strict": true,
     "noUnusedLocals": true,
@@ -19,6 +21,6 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "scripts", "vite.config.ts"],
+  "include": ["src", "scripts", "tests", "vite.config.ts"],
   "exclude": ["errors"]
 }

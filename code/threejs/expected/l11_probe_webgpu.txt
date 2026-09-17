@@ -1,0 +1,24 @@
+{
+  "native": {
+    "navigatorXR": true,
+    "immersiveVR": false,
+    "XRGPUBinding": false
+  },
+  "emulated": {
+    "device": "Meta Quest 3",
+    "immersiveVR": true
+  },
+  "rendererBeforeSession": "WebGPURenderer, WebGPU",
+  "session": {
+    "mode": "immersive-vr",
+    "enabledFeatures": [
+      "local-floor",
+      "viewer",
+      "local"
+    ]
+  },
+  "errors": [
+    "Error: THREE.XRManager: WebGPU XR sessions require the \"webgpu\" session feature. Use VRButtonGPU/XRButton with \"webgpu\" enabled or use a WebGL backend."
+  ]
+}
+exit 0

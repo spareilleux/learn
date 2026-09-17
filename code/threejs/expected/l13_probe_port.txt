@@ -1,0 +1,65 @@
+console.warning: THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+{
+  "version": "port",
+  "first": {
+    "drawCalls": 6,
+    "triangles": 10335,
+    "geometries": 7,
+    "textures": 4,
+    "programs": 13,
+    "drawingBuffer": "800x266",
+    "sceneBuilds": 1,
+    "markerBuilds": 1
+  },
+  "afterTenRenders": {
+    "drawCalls": 6,
+    "triangles": 10335,
+    "geometries": 7,
+    "textures": 4,
+    "programs": 13,
+    "drawingBuffer": "800x266",
+    "sceneBuilds": 1,
+    "markerBuilds": 1
+  },
+  "withChord": {
+    "drawCalls": 7,
+    "triangles": 11919,
+    "geometries": 7,
+    "textures": 4,
+    "programs": 13,
+    "drawingBuffer": "800x266",
+    "sceneBuilds": 1,
+    "markerBuilds": 2
+  },
+  "after": {
+    "click string 3, fret 2": {
+      "clicks": [
+        {
+          "string": 3,
+          "fret": 2,
+          "note": "E3"
+        }
+      ],
+      "pluckedStrings": [3],
+      "drawCalls": 7,
+      "triangles": 11919,
+      "geometries": 7,
+      "textures": 4,
+      "programs": 13,
+      "drawingBuffer": "800x266",
+      "sceneBuilds": 1,
+      "markerBuilds": 2
+    },
+    "unmount": {
+      "drawCalls": 1,
+      "triangles": 1,
+      "geometries": 1,
+      "textures": 3,
+      "programs": 2,
+      "drawingBuffer": "800x266",
+      "sceneBuilds": 1,
+      "markerBuilds": 2
+    }
+  }
+}
+exit 0

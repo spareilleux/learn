@@ -44,10 +44,14 @@ probe() {
   node scripts/probe.mjs "$@" --shot "out/shots/$name.png" > "out/$name.raw.txt" 2>&1
   local code=$?
   echo "     $name: $(grep -o '"backend": "[^"]*"' "out/$name.raw.txt") $(grep -o '"gpu": "[^"]*"' "out/$name.raw.txt")$(grep -c 'WebGPU is not available' "out/$name.raw.txt" | sed 's/^0$//; s/^[1-9].*/, after a fallback warning/')"
-  { grep -v '"backend":\|"gpu":\|"coordinateSystem":\|No available adapters\|WebGPU is not available\|"[A-Za-z]*Ms":' "out/$name.raw.txt" | node normalize.mjs; echo "exit $code"; } > "out/$name.txt"
+  { grep -v '"backend":\|"gpu":\|"coordinateSystem":\|No available adapters\|WebGPU is not available\|powerPreference option is currently ignored\|PCFSoftShadowMap has been removed\|\[\.WebGL-0x\|WebGL: too many errors\|"[A-Za-z]*Ms":' "out/$name.raw.txt" | node normalize.mjs; echo "exit $code"; } > "out/$name.txt"
+  # R3F's warning, repeated once per render of <Canvas>, and WebGL errors, whose context address and count vary, are
+  # counted instead
+  grep -q 'PCFSoftShadowMap has been removed' "out/$name.raw.txt" && echo "     $name: $(grep -c 'PCFSoftShadowMap has been removed' "out/$name.raw.txt") PCFSoftShadowMap warnings"
+  grep -q '\[\.WebGL-0x' "out/$name.raw.txt" && echo "     $name: $(grep -c '\[\.WebGL-0x' "out/$name.raw.txt") WebGL error lines, the first: $(grep -m1 -o 'GL_INVALID.*' "out/$name.raw.txt")"
   # A few outputs depend on the backend (programs, multi-draw, blurred pixels): expected/<name>.webgl.txt, when it
   # exists, holds the WebGL 2 version, which runners without a GPU get
-  if [ -f "expected/$name.webgl.txt" ] && grep -q '"backend": "WebGL 2"' "out/$name.raw.txt"; then
+  if [ -f "expected/$name.webgl.txt" ] && grep -q '"backend": "WebGL 2"' "out/$name.raw.txt"      && ! grep -q '"rendererBeforeSession": "WebGPURenderer, WebGPU"' "out/$name.raw.txt"; then
     cp "out/$name.txt" "out/$name.webgl.txt"
     compare "$name.webgl"
   else
@@ -131,6 +135,36 @@ done
 probe l08_probe_batched_webgl 08-performance --webgl --query mode=batched
 unset PROBE_TIMEOUT
 
+# Lesson 9: React Three Fiber
+probe l09_probe 09-r3f
+probe l09_probe_inline_literal 09-r3f --query 'frets=inline&markers=literal'
+
+# Lesson 10: Rapier. The deterministic build's results are compared; the standard build's hash is only printed, since
+# its README promises the same result on the same machine only
+node scripts/l10-rapier.ts > out/l10_rapier.all.txt 2>&1
+run l10_rapier grep -v '^standard build\|^largest distance' out/l10_rapier.all.txt
+echo "     $(grep '^standard build\|^largest distance' out/l10_rapier.all.txt | tr '\n' ' ')"
+probe l10_probe 10-physics
+probe l10_probe_standard 10-physics --query build=standard
+echo "     standard build in the browser: $(grep -o '"stateHash": "[0-9a-f]*"' out/l10_probe_standard.raw.txt)"
+
+# Lesson 11: WebXR, emulated by IWER
+probe l11_probe_webgpu 11-xr
+probe l11_probe_classic 11-xr --query classic
+probe l11_probe_fallback 11-xr --query fallback
+
+# Lesson 12: component tests without a browser, and screenshots compared pixel by pixel. The same page twice must give
+# the same pixels everywhere; the counts between backends depend on the GPU and are only printed
+run l12_vitest "$bin/vitest" run tests --reporter=verbose
+probe l12_probe_again 01-scene
+run l12_pixels_same_page node scripts/l12-pixels.ts out/shots/l01_probe.png out/shots/l12_probe_again.png
+node scripts/l12-pixels.ts out/shots/l01_probe.png out/shots/l01_probe_webgl.png | sed 's/^/     /'
+node scripts/l12-pixels.ts out/shots/l01_probe.png out/shots/l01_probe_headless_shell.png | sed 's/^/     /'
+
+# Lesson 13: GuitarAlchemist's fretboard, as GA builds it and ported
+probe l13_probe_ga 13-fretboard --query version=ga
+probe l13_probe_port 13-fretboard --query version=port
+
 # The production build: one HTML page per lesson, three.js's build files in shared chunks (lessons 1 and 4). The pages of
 # lessons 1 to 4 alone, as lessons 1 and 4 show it, then every page: later lessons change how the shared chunks are split
 rm -rf dist
@@ -138,7 +172,10 @@ rm -rf dist
 run l04_build bash -c "PAGES='^0[1-4]-' $bin/vite build 2> out/l04_build.stderr.txt; code=\$?; cat out/l04_build.stderr.txt; exit \$code"
 run l04_dist_files node scripts/files.mjs dist
 rm -rf dist
-run l08_build bash -c "$bin/vite build 2> out/l08_build.stderr.txt; code=\$?; cat out/l08_build.stderr.txt; exit \$code"
+run l08_build bash -c "PAGES='^0[1-8]-' $bin/vite build 2> out/l08_build.stderr.txt; code=\$?; cat out/l08_build.stderr.txt; exit \$code"
 run l08_dist_files node scripts/files.mjs dist
+rm -rf dist
+run l13_build bash -c "$bin/vite build 2> out/l13_build.stderr.txt; code=\$?; cat out/l13_build.stderr.txt; exit \$code"
+run l13_dist_files node scripts/files.mjs dist
 
 exit $status

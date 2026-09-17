@@ -1,6 +1,7 @@
-# three.js course: type-check the scenes and scripts, generate the HDR environment and the glTF models, open every
-# lesson page in headless Chromium, build the pages with Vite, and compare every output with the ones pasted in the
-# lessons, on three OSes. The runners have no GPU: check.sh prints the backend that WebGPURenderer picks on each.
+# three.js course: type-check the scenes and scripts, generate the HDR environment and the glTF models, run the Vitest
+# component tests and the Rapier script, open every lesson page in headless Chromium, build the pages with Vite, and
+# compare every output with the ones pasted in the lessons, on three OSes. The runners have no GPU: check.sh prints the
+# backend that WebGPURenderer picks on each.
 name: three.js course examples
 
 on:
@@ -34,7 +35,7 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
-      - name: Install the pinned three.js, Vite, TypeScript, glTF Transform and Playwright
+      - name: Install the pinned three.js, Vite, TypeScript, glTF Transform, React Three Fiber, Rapier, IWER, Vitest and Playwright
         run: npm ci
       # On Linux, --with-deps also installs the system libraries that Chromium needs
       - name: Chromium for Playwright

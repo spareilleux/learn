@@ -1,0 +1,61 @@
+vite v8.3.0 building client environment for production...
+transforming...
+✓ 680 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/06-tsl.html                                 0.60 kB │ gzip:     0.30 kB
+dist/01-scene.html                               0.60 kB │ gzip:     0.31 kB
+dist/03-color.html                               0.60 kB │ gzip:     0.30 kB
+dist/08-performance.html                         0.61 kB │ gzip:     0.31 kB
+dist/02-materials-lights.html                    0.61 kB │ gzip:     0.31 kB
+dist/04-gltf.html                                0.68 kB │ gzip:     0.32 kB
+dist/07-post.html                                0.68 kB │ gzip:     0.32 kB
+dist/10-physics.html                             0.69 kB │ gzip:     0.33 kB
+dist/03-environment.html                         0.69 kB │ gzip:     0.33 kB
+dist/01-scene-webgl.html                         0.71 kB │ gzip:     0.34 kB
+dist/05-picking.html                             0.85 kB │ gzip:     0.36 kB
+dist/11-xr.html                                  0.85 kB │ gzip:     0.36 kB
+dist/09-r3f.html                                 1.01 kB │ gzip:     0.39 kB
+dist/13-fretboard.html                           1.03 kB │ gzip:     0.39 kB
+dist/assets/draco_wasm_wrapper-fZCQGLGb.js      58.45 kB
+dist/assets/draco_wasm_wrapper-DxJM36Ib.js      58.76 kB
+dist/assets/draco_decoder-Z1_iN-Ht.wasm        192.42 kB │ gzip:    64.11 kB
+dist/assets/draco_decoder-C32yEggz.wasm        285.74 kB │ gzip:    89.66 kB
+dist/assets/draco_decoder-fzg4nYZr.js          719.41 kB
+dist/assets/13-fretboard-DnBH3g3o.css            0.05 kB │ gzip:     0.07 kB
+dist/assets/probe-CaeimIHR.css                   0.08 kB │ gzip:     0.10 kB
+dist/assets/05-picking-0Pun4eLv.css              0.21 kB │ gzip:     0.17 kB
+dist/assets/09-r3f-CKxbK9XI.css                  0.24 kB │ gzip:     0.19 kB
+dist/assets/rolldown-runtime-hePW80VL.js         0.71 kB │ gzip:     0.42 kB
+dist/assets/01-scene-webgl-ya6XQSSh.js           1.03 kB │ gzip:     0.57 kB
+dist/assets/fretboard-C6UcyyEI.js                1.23 kB │ gzip:     0.71 kB
+dist/assets/03-environment-gnxP7Wgg.js           1.26 kB │ gzip:     0.73 kB
+dist/assets/01-scene-BMa5pzmX.js                 1.34 kB │ gzip:     0.75 kB
+dist/assets/probe-CzdbXJw9.js                    1.42 kB │ gzip:     0.79 kB
+dist/assets/03-color-DyVketac.js                 1.67 kB │ gzip:     0.95 kB
+dist/assets/02-materials-lights-E4miXY9y.js      1.99 kB │ gzip:     1.06 kB
+dist/assets/06-tsl-CA9zkwd5.js                   2.45 kB │ gzip:     1.34 kB
+dist/assets/08-performance-DADnJ17H.js           2.82 kB │ gzip:     1.34 kB
+dist/assets/05-picking-OqQVz5Ed.js               3.09 kB │ gzip:     1.56 kB
+dist/assets/HDRLoader-D1JrOey-.js                3.28 kB │ gzip:     1.56 kB
+dist/assets/10-physics-CEISQV3u.js               4.79 kB │ gzip:     2.41 kB
+dist/assets/13-fretboard-C3jL2_Tk.js            10.60 kB │ gzip:     4.57 kB
+dist/assets/07-post-CyO3tta6.js                 11.59 kB │ gzip:     4.08 kB
+dist/assets/OrbitControls-B5nDZWg4.js           19.85 kB │ gzip:     4.40 kB
+dist/assets/04-gltf-CWMFnkkf.js                 80.55 kB │ gzip:    24.13 kB
+dist/assets/09-r3f-Cn-Cmam2.js                 126.72 kB │ gzip:    46.86 kB
+dist/assets/11-xr-BxEdS4Nu.js                  185.83 kB │ gzip:    51.01 kB
+dist/assets/OrbitControls-Bcda5tyM.js          362.44 kB │ gzip:   113.35 kB
+dist/assets/three.module-DLxuvqX6.js           365.03 kB │ gzip:    89.40 kB
+dist/assets/three.core-Dbc_D4oM.js             377.55 kB │ gzip:   100.73 kB
+dist/assets/three.tsl-oLSlq6VH.js              690.50 kB │ gzip:   192.79 kB
+dist/assets/rapier-B9LFmugn.js               2,853.74 kB │ gzip: 1,094.44 kB
+dist/assets/rapier-B4hmj00C.js               2,889.66 kB │ gzip: 1,106.58 kB
+
+✓ built in N ms
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+exit 0

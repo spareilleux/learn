@@ -1,0 +1,44 @@
+console.warning: THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+{
+  "frets": "shared",
+  "markers": "stable",
+  "first": {
+    "drawCalls": 23,
+    "triangles": 1453,
+    "geometries": 12,
+    "programs": 4,
+    "meshes": 22,
+    "fretboardRenders": 1,
+    "markerBuilds": 1
+  },
+  "afterTenParentRenders": {
+    "drawCalls": 23,
+    "triangles": 1453,
+    "geometries": 12,
+    "programs": 4,
+    "meshes": 22,
+    "fretboardRenders": 11,
+    "markerBuilds": 1
+  },
+  "after": {
+    "string 3, fret 5": {
+      "status": "parent renders: 10, pick: C4",
+      "label": "C4",
+      "drawCalls": 24,
+      "triangles": 1677,
+      "geometries": 13,
+      "programs": 4,
+      "meshes": 23
+    },
+    "unmount the fretboard": {
+      "status": "parent renders: 10, pick: C4",
+      "label": "C4",
+      "drawCalls": 1,
+      "triangles": 1,
+      "geometries": 1,
+      "programs": 2,
+      "meshes": 0
+    }
+  }
+}
+exit 0

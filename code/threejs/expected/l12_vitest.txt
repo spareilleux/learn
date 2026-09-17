@@ -1,0 +1,36 @@
+
+ RUN  v5.0.1 .
+
+(node:PID) [THREE_CJS_DEPRECATED] DeprecationWarning: `require("three")` is deprecated and will be removed.
+Replace `const THREE = require("three")` with `import * as THREE from "three"`.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+stderr | tests/fretboard.test.tsx > Fretboard > has a neck, 12 frets and 6 strings
+THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+
+stderr | tests/fretboard.test.tsx > Fretboard > shares one geometry between the frets, unless they are written inline
+THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+
+stderr | tests/fretboard.test.tsx > Fretboard > shares one geometry between the frets, unless they are written inline
+THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+
+stderr | tests/fretboard.test.tsx > Fretboard > computes the markers once for the same array, and on every render for a new one
+THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+
+stderr | tests/fretboard.test.tsx > Fretboard > reports the note under the pointer
+THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+
+stderr | tests/fretboard.test.tsx > Fretboard > disposes the geometries it created on unmount, including the shared one
+THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+
+ ✓ tests/fretboard.test.tsx > Fretboard > has a neck, 12 frets and 6 strings
+ ✓ tests/fretboard.test.tsx > Fretboard > shares one geometry between the frets, unless they are written inline
+ ✓ tests/fretboard.test.tsx > Fretboard > computes the markers once for the same array, and on every render for a new one
+ ✓ tests/fretboard.test.tsx > Fretboard > reports the note under the pointer
+ ✓ tests/fretboard.test.tsx > Fretboard > disposes the geometries it created on unmount, including the shared one
+
+ Test Files  1 passed (1)
+      Tests  5 passed (5)
+   Start at  TIME
+   Duration  N
+
+exit 0

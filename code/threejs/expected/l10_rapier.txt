@@ -1,0 +1,19 @@
+@dimforge/rapier3d-deterministic-compat 0.20.0: rapier.mjs is 2,893,506 bytes, loaded and initialized in N ms
+@dimforge/rapier3d-compat 0.20.0: rapier.mjs is 2,857,590 bytes, loaded and initialized in N ms
+
+fixed step of 0.01667 s, 24 picks, 38 colliders
+t = 1.0 s: 12 on the neck, 12 on the floor, 1 asleep, lowest y -0.99
+t = 2.0 s: 12 on the neck, 12 on the floor, 24 asleep, lowest y -0.99
+t = 3.0 s: 12 on the neck, 12 on the floor, 24 asleep, lowest y -0.99
+pick 0 at [-1.7, -0.99, -0.33]
+deterministic build, state hash after 180 steps: 68235a2bdba192f1
+
+variable step, 157 steps for the same 3 s: 16 picks more than 1 cm away from the fixed-step run, the farthest 42.15 m, at y = -43.14
+
+snapshot at step 60: 55,186 bytes
+step 180, continued: 68235a2bdba192f1; step 180, restored then stepped: 68235a2bdba192f1
+fixed 2.4 cm wall, 1 cm ball at 60 m/s, CCD off: x = -1.5, -0.5, -0.02, -0.01, -0.01
+fixed 2.4 cm wall, 1 cm ball at 60 m/s, CCD on : x = -1.5, -0.5, -0.02, -0.01, -0.01
+dynamic 2.4 cm wall, 1 cm ball at 60 m/s, CCD off: x = -1.5, -0.5, 0.5, 1.5, 2.5
+dynamic 2.4 cm wall, 1 cm ball at 60 m/s, CCD on : x = -1.5, -0.5, -0.02, 0, -0.01
+exit 0

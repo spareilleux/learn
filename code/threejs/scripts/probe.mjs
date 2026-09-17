@@ -16,6 +16,13 @@ const params = ['probe'];
 if (rest.includes('--webgl')) params.push('webgl');
 if (option('--query')) params.push(option('--query'));
 
+// A page that blocks its own thread, or a screenshot that never comes, ends the process instead of hanging it
+const watchdog = setTimeout(() => {
+  console.log(`probe.mjs: still running after ${2 * Number(process.env.PROBE_TIMEOUT ?? 30) + 30} s, exiting`);
+  process.exit(2);
+}, (2 * Number(process.env.PROBE_TIMEOUT ?? 30) + 30) * 1000);
+watchdog.unref();
+
 const server = await createServer({ configFile: 'vite.config.ts', logLevel: 'silent' });
 await server.listen();
 const browser = await chromium.launch({ channel: process.env.PROBE_CHANNEL ?? 'chromium' });
