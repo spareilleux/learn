@@ -1,0 +1,43 @@
+== A new material and its node tree
+nodes of a new material: ['ShaderNodeBsdfPrincipled', 'ShaderNodeOutputMaterial']
+link: Principled BSDF 'BSDF' -> Material Output 'Surface'
+Principled BSDF inputs: 32 | enabled: 30
+  'Base Color' NodeSocketColor (0.800, 0.800, 0.800, 1.000)
+  'Metallic' NodeSocketFloatFactor 0.000
+  'Roughness' NodeSocketFloatFactor 0.500
+  'IOR' NodeSocketFloat 1.500
+  'Alpha' NodeSocketFloatFactor 1.000
+  'Normal' NodeSocketVector (0.000, 0.000, 0.000)
+  'Coat Weight' NodeSocketFloatFactor 0.000
+  'Emission Strength' NodeSocketFloat 0.000
+the viewport color outside the node tree, diffuse_color: (0.800, 0.800, 0.800, 1.000)
+
+== Three materials for the fretboard
+'Rosewood': base color (linear) (0.1022, 0.0343, 0.0160) metallic 0.00 roughness 0.80 users 1
+'Nickel silver': base color (linear) (0.5841, 0.5647, 0.5089) metallic 1.00 roughness 0.25 users 1
+'Pearl': base color (linear) (0.8388, 0.7913, 0.6724) metallic 0.00 roughness 0.30 users 1
+the material lives on the mesh (slot link DATA), so the 22 frets share it: ['DATA'] Nickel silver
+
+== UV unwrapping
+UV layers before: []
+smart_project: {'FINISHED'} | UV layers after: ['UVMap']
+top face: loops [4, 5, 6, 7] | UV bounds (0.124, 0.002) (0.241, 0.998)
+UV coordinates are stored per loop (face corner), not per vertex: 24 UVs for 8 vertices
+
+== An image texture made from code
+Rosewood links: ['Image Texture.Color -> Principled BSDF.Base Color', 'Noise Texture.Factor -> Principled BSDF.Roughness', 'Principled BSDF.BSDF -> Material Output.Surface']
+
+== Exported to glTF 2.0
+export_scene.gltf: {'FINISHED'} | files ['Rosewood grain.png', 'fretboard.bin', 'fretboard.gltf']
+asset: {'generator': 'Khronos glTF Blender I/O v5.2.40', 'version': '2.0'}
+extensionsUsed: []
+nodes 33 | meshes 3 | materials 3 | textures 1 | images [('Rosewood%20grain.png', 'image/png')]
+material 'Nickel silver': baseColorFactor (0.5841, 0.5647, 0.5089, 1.0000), roughnessFactor 0.2500
+material 'Pearl': baseColorFactor (0.8388, 0.7913, 0.6724, 1.0000), metallicFactor 0, roughnessFactor 0.3000
+material 'Rosewood': baseColorTexture {'index': 0}, metallicFactor 0
+mesh 'Fret wire': attributes (count per accessor) {'NORMAL': 24, 'POSITION': 24} indices 36 material 0
+mesh 'Inlay dot': attributes (count per accessor) {'NORMAL': 144, 'POSITION': 144} indices 276 material 1
+mesh 'Fretboard': attributes (count per accessor) {'NORMAL': 24, 'POSITION': 24, 'TEXCOORD_0': 24} indices 36 material 2
+node 'Fret 12': mesh 0 translation (0.3240, 0.0006, 0.0000) scale (0.0024, 0.0012, 0.0520)
+in Blender: location (0.3240, 0.0000, 0.0006) scale (0.0024, 0.0520, 0.0012)
+root node 'Fretboard': rotation (0.0000, 0.0000, 0.0000, 1.0000) children 32

@@ -1,0 +1,86 @@
+# Blender course: downloads Blender 5.2.2 LTS from download.blender.org on Windows, Linux and macOS, checks the
+# archive against Blender's published SHA-256, then runs check.sh: every lesson's bpy script in the background,
+# Cycles on the CPU only, compared with expected/.
+name: Blender course examples
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['code/blender/**', '.github/workflows/blender-examples.yml']
+  pull_request:
+    paths: ['code/blender/**', '.github/workflows/blender-examples.yml']
+
+permissions:
+  contents: read
+
+env:
+  BLENDER_SERIES: '5.2'
+  BLENDER_VERSION: 5.2.2
+
+jobs:
+  check:
+    name: check (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            asset: linux-x64.tar.xz
+          - os: windows-latest
+            asset: windows-x64.zip
+          - os: macos-latest
+            asset: macos-arm64.dmg
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7
+      - name: Cache the Blender archive
+        uses: actions/cache@v6
+        with:
+          path: ${{ runner.temp }}/blender-download
+          key: blender-${{ env.BLENDER_VERSION }}-${{ matrix.asset }}
+      - name: Download and check Blender
+        run: |
+          file="blender-$BLENDER_VERSION-${{ matrix.asset }}"
+          dir="$RUNNER_TEMP/blender-download"
+          mkdir -p "$dir" && cd "$dir"
+          base="https://download.blender.org/release/Blender$BLENDER_SERIES"
+          [ -f "$file" ] || curl -sSfLO "$base/$file"
+          curl -sSfL "$base/blender-$BLENDER_VERSION.sha256" | grep " $file\$" > asset.sha256
+          # Git Bash on Windows has no shasum, and macOS's sha256sum is BSD's: one tool per OS
+          if [ "$RUNNER_OS" = macOS ]; then shasum -a 256 -c asset.sha256; else sha256sum -c asset.sha256; fi
+      - name: Unpack Blender
+        run: |
+          file="$RUNNER_TEMP/blender-download/blender-$BLENDER_VERSION-${{ matrix.asset }}"
+          cd "$RUNNER_TEMP"
+          case "$RUNNER_OS" in
+            Linux)
+              tar -xJf "$file"
+              echo "BLENDER=$RUNNER_TEMP/blender-$BLENDER_VERSION-linux-x64/blender" >> "$GITHUB_ENV" ;;
+            Windows)
+              unzip -q "$file"
+              echo "BLENDER=$RUNNER_TEMP/blender-$BLENDER_VERSION-windows-x64/blender.exe" >> "$GITHUB_ENV" ;;
+            macOS)
+              hdiutil attach -quiet -nobrowse -mountpoint "$RUNNER_TEMP/blender-dmg" "$file"
+              cp -R "$RUNNER_TEMP/blender-dmg/Blender.app" "$RUNNER_TEMP/"
+              hdiutil detach -quiet "$RUNNER_TEMP/blender-dmg"
+              echo "BLENDER=$RUNNER_TEMP/Blender.app/Contents/MacOS/Blender" >> "$GITHUB_ENV" ;;
+          esac
+      - name: Lessons
+        run: |
+          start=$SECONDS
+          code=0
+          bash code/blender/check.sh || code=$?
+          echo "check.sh took $((SECONDS - start)) s"
+          exit $code
+      - name: Keep the outputs
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: blender-outputs-${{ matrix.os }}
+          path: |
+            code/blender/out/*.txt
+            code/blender/out/*.log

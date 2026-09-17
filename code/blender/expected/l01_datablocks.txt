@@ -1,0 +1,60 @@
+== Version
+bpy.app.version_string: 5.2.2 LTS
+bpy.app.version_file: (5, 2, 45)
+
+== The factory startup scene
+scene 'Scene' engine BLENDER_EEVEE frames 1 - 250
+collection 'Scene Collection' objects []
+  collection 'Collection' objects ['Camera', 'Cube', 'Light']
+object 'Camera' type CAMERA data Camera 'Camera' location (7.359, -6.926, 4.958)
+object 'Cube' type MESH data Mesh 'Cube' location (0.000, 0.000, 0.000)
+object 'Light' type LIGHT data PointLight 'Light' location (4.076, 1.005, 5.904)
+
+== What bpy.data holds (non-empty collections)
+bpy.data.cameras: ['Camera']
+bpy.data.scenes: ['Scene']
+bpy.data.objects: ['Camera', 'Cube', 'Light']
+bpy.data.materials: ['Dots Stroke', 'Material']
+bpy.data.meshes: ['Cube']
+bpy.data.lights: ['Light']
+bpy.data.screens: ['Animation', 'Compositing', 'Geometry Nodes', 'Layout', 'Modeling', 'Rendering', 'Scripting', 'Sculpting', 'Shading', 'Texture Paint', 'UV Editing']
+bpy.data.window_managers: ['WinMan']
+bpy.data.images: ['Render Result', 'Viewer Node']
+bpy.data.worlds: ['World']
+bpy.data.collections: ['Collection']
+bpy.data.palettes: ['Palette']
+bpy.data.linestyles: ['LineStyle']
+bpy.data.workspaces: ['Animation', 'Compositing', 'Geometry Nodes', 'Layout', 'Modeling', 'Rendering', 'Scripting', 'Sculpting', 'Shading', 'Texture Paint', 'UV Editing']
+
+== An object points to its data
+cube.data is bpy.data.meshes['Cube']: True
+mesh 'Cube' vertices 8 edges 12 faces 6 loops 24
+material slots [('DATA', 'Material')]
+users: object 1 mesh 1 material 1
+
+== Linked duplicate (Alt+D) and full duplicate (Shift+D)
+after the linked duplicate: objects 4 meshes 1 mesh users 2
+after the full duplicate: meshes [('Cube', 2), ('Cube.001', 1)]
+the material is shared by both meshes: material users 2
+
+== Orphans and fake users
+after removing the object 'Full': meshes [('Cube', 2), ('Cube.001', 0)]
+a new mesh with a fake user: users 1 use_fake_user True
+meshes written to the file: ['Cube', 'Kept']
+objects written to the file: ['Camera', 'Cube', 'Light', 'Linked']
+orphans_purge: {'FINISHED'} meshes left [('Cube', 2), ('Kept', 1)]
+
+== Names are unique per type
+D.meshes.new('Cube').name: 'Cube.001'
+a material may also be called 'Cube': 'Cube'
+a 300-character name is cut to 255 characters
+
+== RNA: properties describe themselves
+Object.location: type FLOAT subtype TRANSLATION unit LENGTH array_length 3
+default [0.0, 0.0, 0.0]
+repr(cube): bpy.data.objects['Cube']
+repr(cube.location): Vector((0.0, 0.0, 0.0))
+path_from_id('location'): location
+path_resolve('location'): Vector((0.0, 0.0, 0.0))
+Object has 141 RNA properties; Mesh has 71
+an ID's own properties: ['rna_type', 'name', 'name_full', 'id_type', 'session_uid', 'is_evaluated', 'original', 'users']

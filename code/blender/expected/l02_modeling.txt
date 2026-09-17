@@ -1,0 +1,33 @@
+== A mesh from vertices and faces (from_pydata)
+fretboard slab: V 8 E 12 F 6 loops 24
+topology: {'quads': 6} boundary edges 0 non-manifold edges 0 V-E+F 2
+face 0 (bottom) vertices [0, 3, 2, 1] normal (0.000, 0.000, -1.000)
+face 1 (top) vertices [4, 5, 6, 7] normal (0.000, 0.000, 1.000)
+the bottom face wound the other way: normal (0.000, 0.000, 1.000)
+
+== Open and non-manifold meshes
+one quad: V 4 E 4 F 1 {'quads': 1} boundary edges 4 non-manifold edges 4 V-E+F 1
+three quads sharing one edge: V 8 E 10 F 3 {'quads': 3} boundary edges 9 non-manifold edges 10 V-E+F 1
+the slab triangulated: V 8 E 18 F 12 {'tris': 12} boundary edges 0 non-manifold edges 0 V-E+F 2
+
+== The modifier stack is evaluated; the mesh stays as it is
+stack ['Bevel', 'Subdivision']
+cube.data: V 8 E 12 F 6 | evaluated: V 866 E 1728 F 864
+stack ['Subdivision', 'Bevel'] | evaluated: V 98 E 192 F 96
+Subdivision hidden in the viewport | evaluated: V 56 E 108 F 54
+Bevel applied: stack ['Subdivision'] | cube.data: V 56 E 108 F 54 | evaluated: V 866 E 1728 F 864
+
+== Mirror and Array
+a cube whose center is 1 m from the origin, mirrored in X, then 5 copies in Y: V 80 E 120 F 60
+copies that touch, with Merge on: V 48 E 88 F 52
+local bounds: evaluated (-1.50, -0.50, -0.50) (1.50, 4.50, 0.50) | cube.data (0.50, -0.50, -0.50) (1.50, 0.50, 0.50)
+
+== The course's fretboard
+mesh 'Fret wire': V 8 E 12 F 6, 22 objects: Fret 01 to Fret 22
+mesh 'Fretboard': V 8 E 12 F 6, 1 objects: Fretboard to Fretboard
+mesh 'Inlay dot': V 48 E 72 F 26, 10 objects: Inlay 03 to Inlay 21
+Fret 01: x 36.37 mm, length 44.01 mm
+Fret 12: x 324.00 mm, length 52.04 mm
+Fret 22: x 466.16 mm, length 56.00 mm
+objects 33 | vertices stored 64 | vertices drawn 664
+world bounds in mm (0.0, -28.1, -6.0) (476.2, 28.1, 1.2)
