@@ -1,6 +1,6 @@
 ---
 title: Journal
-description: 'Notes de progression datées du cours Blender — Blender 5.2.2 LTS épinglé, une installation portable, des scripts exécutés en arrière-plan et comparés en CI sur trois systèmes, un rendu Cycles aux mêmes pixels sous Windows, Linux et macOS, un bug d''espace colorimétrique dans une texture générée, ce que l''exporteur glTF abandonne ou ignore par défaut, et les points à vérifier.'
+description: 'Notes de progression datées du cours Blender — Blender 5.2.2 LTS épinglé, une installation portable, des scripts exécutés en arrière-plan et comparés en CI sur trois systèmes, un rendu Cycles aux mêmes pixels sous Windows, Linux et macOS, un bug d''espace colorimétrique dans une texture générée, ce que l''exporteur glTF abandonne ou ignore par défaut, deux modèles Hunyuan3D sortis de ComfyUI nettoyés dans Blender avec ce qui a échoué, et les points à vérifier.'
 sidebar:
   order: 99
 ---
@@ -15,6 +15,7 @@ sidebar:
 - [x] Leçon 3 : matériaux, UV, et ce que glTF en garde
 - [x] Leçon 4 : lumières, caméras, et rendu avec EEVEE et Cycles
 - [x] Traductions française et espagnole
+- [x] Un pipeline de nettoyage pour les modèles `.glb` générés dans ComfyUI, essayé sur deux modèles Hunyuan3D
 - [ ] Leçon 5 : scripter avec `bpy`
 
 ## 2026-09-16 — Versions et installation
@@ -39,6 +40,44 @@ sidebar:
 
 - Les rendus viennent de `scripts/render_images.py` : Cycles sur le CPU pour les images des leçons, et Cycles avec OptiX et EEVEE pour les durées, exécutés sous le verrou GPU de la machine, puisque d'autres travaux partagent le GPU.
 - La capture de l'interface vient de Blender démarré avec une fenêtre et d'un script qui sélectionne le cube, écarte le pointeur et appelle `bpy.ops.screen.screenshot` depuis un timer. Avec `--factory-startup`, l'écran d'accueil Quick Setup couvrait le viewport, donc la capture a utilisé un dossier de configuration utilisateur séparé (`BLENDER_USER_CONFIG`) dont les préférences désactivent cet écran. Quitter depuis le script a quand même écrit `quit.blend` dans le dossier temporaire du système.
+
+## 2026-09-17 — Des modèles générés dans ComfyUI, nettoyés dans Blender
+
+La demande : de vrais modèles 3D sortis de ComfyUI, repris dans Blender et montrés ici avec ce qui a échoué. Atlas, une autre session de travail de ce projet, a généré un métronome et un gramophone avec ComfyUI (voir le [cours ComfyUI](../../comfyui/)), en deux temps :
+
+1. [SDXL base 1.0](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0) a dessiné chaque objet seul sur fond blanc, vu de trois quarts et légèrement d'en haut : 1024 × 1024 px, 30 pas, CFG 6,5, `dpmpp_2m` avec le planificateur `karras`, graines 5101 (métronome) et 5110 (gramophone).
+2. [Hunyuan3D 2.0](https://github.com/Tencent-Hunyuan/Hunyuan3D-2), avec les poids fp16 réempaquetés par Comfy-Org ([`hunyuan3d-dit-v2_fp16`](https://huggingface.co/Comfy-Org/hunyuan3D_2.0_repackaged)) et les nœuds natifs de ComfyUI ([tutoriel de Comfy](https://docs.comfy.org/tutorials/3d/hunyuan3D-2)), a changé chaque image en maillage : `ImageOnlyCheckpointLoader` → `CLIPVisionEncode` (crop `center`) → `Hunyuan3Dv2Conditioning` → `EmptyLatentHunyuan3Dv2` (resolution 3072) → `KSampler` (30 steps, CFG 5, `euler`/`normal`, seed 7) → `VAEDecodeHunyuan3D` (8000 chunks, octree resolution 380) → `VoxelToMesh` (surface net, threshold 0.6) → `SaveGLB`. ComfyUI v0.36.0.
+
+La licence de Hunyuan3D 2.0 précise qu'elle ne s'applique pas dans l'Union européenne, au Royaume-Uni et en Corée du Sud. Seuls des rendus des modèles sont publiés ici ; les fichiers `.glb` restent hors du dépôt.
+
+Blender a ensuite exécuté [`scripts/glb_pipeline.py`](https://github.com/spareilleux/learn/blob/9480173/code/blender/scripts/glb_pipeline.py) en arrière-plan sur chaque fichier. Il fusionne les sommets par distance, retire les parties flottantes, recalcule les normales, met à l'échelle réelle, décime, rend compte du maillage avant et après, rend une turntable Cycles, exporte un `.glb` avec les modificateurs appliqués, et le relit. La CI l'exécute sur un petit médiator construit en `bpy`, avec les défauts d'un maillage généré (`scripts/pipeline_check.py`), avec et sans remesh voxel : les rapports, remesh compris, étaient identiques sur les trois runners.
+
+![Métronome, de gauche à droite : l'image SDXL ; le maillage après le premier nettoyage, le cadran et le balancier changés en relief et une surface rugueuse ; après un remesh voxel de 1,2 mm, plus lisse, avec le même relief ; l'arrière après le remesh, une face plate que l'image ne montrait pas](../../../../assets/blender/comfy3d-metronome.webp)
+
+![Gramophone, de gauche à droite : l'image SDXL, avec une ligne de sol sous le meuble ; le maillage après le premier nettoyage, le pavillon plein de triangles déchirés et une dalle sous le meuble ; après un remesh voxel de 3 mm, un pavillon fermé, avec quelques fragments de la dalle au sol ; la vue de côté après le remesh](../../../../assets/blender/comfy3d-gramophone.webp)
+
+Ce qu'ont dit les rapports :
+
+| | Métronome | Gramophone |
+|---|---|---|
+| `.glb` de Hunyuan3D | 15 944 172 octets | 17 421 112 octets |
+| Sommets, triangles | 438 348, 890 140 | 433 806, 1 017 760 |
+| Arêtes non manifold | 19 084 | 189 748 |
+| Parties séparées | 86 | 20 |
+| UV, textures | aucun, aucune | aucun, aucune |
+| Decimate vers 20 000 triangles | 882 644 → 43 302, cible manquée | 1 004 809 → 317 253, cible manquée |
+| `.glb` nettoyé, sans remesh | 632 484 octets | 5 835 300 octets |
+| Remesh voxel, puis Decimate | 1,2 mm : 223 100 → 20 000 | 3 mm : 195 848 → 20 000 |
+| Après remesh : arêtes non manifold, parties séparées | 0, 1 | 0, 3 |
+| `.glb` nettoyé, avec remesh | 361 100 octets | 361 000 octets |
+
+- **Pas de texture, donc pas d'éclairage cuit.** L'échec prévu, un éclairage peint dans la texture, n'a pas eu lieu : ce workflow ne produit que la forme, avec un matériau vide et sans carte UV. Le bois, le laiton et le cadran des images SDXL sont perdus ; couleurs et matériaux sont à refaire dans Blender.
+- **Topologie.** Un surface net construit sa surface sur une grille de voxels. Là où une paroi est plus fine qu'un voxel, comme le pavillon du gramophone, les deux faces tombent probablement sur les mêmes arêtes : le rapport y a compté 189 748 arêtes non manifold, contre 19 084 sur le métronome plein. [Decimate](https://docs.blender.org/manual/en/5.2/modeling/modifiers/generate/decimate.html) en mode Collapse s'est arrêté bien au-dessus de sa cible sur les deux modèles, et la première version du pipeline n'affichait que le ratio demandé. Le rapport affiche maintenant les triangles obtenus et signale une cible manquée.
+- **Remesh voxel.** Le [modificateur Remesh](https://docs.blender.org/manual/en/5.2/modeling/modifiers/generate/remesh.html) en mode Voxel reconstruit une surface fermée. Après lui, Decimate a atteint exactement 20 000 triangles, et les deux maillages n'avaient plus ni bord ni arête non manifold. Son prix : les détails plus petits qu'un voxel disparaissent, et les parois fines se cassent en miettes. Le pipeline repasse maintenant son filtre de parties flottantes après le remesh ; il a retiré 22 miettes du métronome et 2 du gramophone. Les deux fragments qui restent au gramophone portent chacun plus de 1 % des faces.
+- **Arrière inventé.** L'arrière et les côtés du métronome, que l'image ne montre pas, sont sortis en faces planes et plausibles. Le cadran gravé, les graduations et le balancier de l'image sont devenus du relief sur la face avant : Hunyuan3D lit le détail peint comme de la forme.
+- **Le fond.** La ligne où le sol blanc rejoint le mur blanc sous le gramophone est devenue une dalle sous le meuble. Le filtre de parties flottantes l'a gardée, et le remesh n'a fait que la casser en fragments. La correction se place avant l'étape 3D, dans le détourage de l'image.
+- **Petites choses.** Le métronome portait un sommet sans aucune face : glTF l'abandonne, et la taille relue était donc plus petite que la taille écrite. Le pipeline supprime maintenant ces sommets. L'origine est remise en bas après le remesh sans remettre à l'échelle, si bien que le métronome remaillé mesure 22,98 cm de haut au lieu de 23.
+- **Temps, sur la machine de l'auteur.** 17 à 29 s par modèle pour tout le pipeline, import et export compris ; 0,15 à 0,36 s par image de turntable à 512 × 512 px et 32 échantillons, Cycles sur le CPU. Les tailles réelles (23 cm et 60 cm de haut) sont des choix pour cet essai, pas des mesures.
 
 ## À vérifier
 
