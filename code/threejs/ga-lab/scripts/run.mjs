@@ -169,16 +169,24 @@ try {
             (ms) => Promise.race([window.probe, new Promise((_, reject) => setTimeout(() => reject(new Error(`no result after ${ms / 1000} s`)), ms))]),
             timeout,
           );
-          // The first canvas only, when the page has one
-          const canvas = page.locator('canvas').first();
-          const png = (await canvas.count()) ? await canvas.screenshot({ timeout }) : await page.screenshot({ timeout });
-          shots[run.name] = png;
-          if (!ciMode) {
-            const webp = Buffer.from(await toWebP(browser, png), 'base64');
-            writeFileSync(join(outDir, `${run.name}.webp`), webp);
-          }
         } catch (error) {
           result = { error: String(error.message ?? error) };
+        }
+        // The first canvas only, when the page has one. In CI, only the runs a pixel comparison needs (a screenshot
+        // once hung for 300 s on a macOS runner); a failed screenshot is logged and keeps the result
+        const compared = (experiment.compare ?? []).flat().includes(run.name);
+        if (!result.error && (!ciMode || compared)) {
+          try {
+            const canvas = page.locator('canvas').first();
+            const png = (await canvas.count()) ? await canvas.screenshot({ timeout: 60_000 }) : await page.screenshot({ timeout: 60_000 });
+            shots[run.name] = png;
+            if (!ciMode) {
+              const webp = Buffer.from(await toWebP(browser, png), 'base64');
+              writeFileSync(join(outDir, `${run.name}.webp`), webp);
+            }
+          } catch (error) {
+            messages.push(`screenshot: ${String(error.message ?? error).split('\n')[0]}`);
+          }
         }
         await page.close();
         entry = { name: run.name, query, channel: process.env.LAB_CHANNEL ?? run.channel ?? 'chromium', headed: Boolean(run.headed), vsync: Boolean(run.vsync), wallSeconds: (Date.now() - started) / 1000, messages: [...new Set(messages)].slice(0, 40), result };
