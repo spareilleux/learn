@@ -126,7 +126,7 @@ export default defineConfig({
 							items: [
 								{
 									label: 'WSL containers',
-									translations: { es: 'Contenedores WSL' },
+									translations: { fr: 'Conteneurs WSL', es: 'Contenedores WSL' },
 									collapsed: true,
 									items: [{ autogenerate: { directory: 'wsl-containers' } }],
 								},

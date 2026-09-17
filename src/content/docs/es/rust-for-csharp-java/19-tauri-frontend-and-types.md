@@ -123,7 +123,7 @@ Dos vigilantes de archivos funcionan en paralelo, y lo que pasa con un cambio de
 | `frontend/src/main.ts` | Vite | `[vite] (client) page reload src/main.ts`: la página se recargó | solo el estado Rust: los favoritos seguían ahí, el campo de texto había vuelto a su valor por defecto |
 | `src-tauri/capabilities/export.json` | CLI de Tauri | `File src-tauri\capabilities\export.json changed. Rebuilding application...`, una compilación (9,73 s) y un reinicio | nada en memoria |
 
-La segunda fila es la que hay que recordar. Un módulo sin handler HMR, como `main.ts`, recarga la página; frameworks como React añaden handlers que conservan el estado de los componentes ([React (Vite), lección 1](../../react-vite/01-vite-project/#hot-module-replacement-and-fast-refresh)). El proceso Rust no se reinicia, así que su estado gestionado sobrevive: una aplicación Tauri conserva de forma natural en el lado Rust los datos que importan.
+La segunda fila es la que hay que recordar. Un módulo sin handler HMR, como `main.ts`, recarga la página; frameworks como React añaden handlers que conservan el estado de los componentes ([React (Vite), lección 1](../../react-vite/01-vite-project/#hot-module-replacement-y-fast-refresh)). El proceso Rust no se reinicia, así que su estado gestionado sobrevive: una aplicación Tauri conserva de forma natural en el lado Rust los datos que importan.
 
 ## Tipos generados desde Rust
 

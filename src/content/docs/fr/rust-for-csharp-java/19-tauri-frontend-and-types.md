@@ -123,7 +123,7 @@ Deux observateurs tournent côte à côte, et ce qui se passe lors d'une modific
 | `frontend/src/main.ts` | Vite | `[vite] (client) page reload src/main.ts` : la page s'est rechargée | seulement l'état Rust : les favoris étaient toujours là, le champ était revenu à sa valeur par défaut |
 | `src-tauri/capabilities/export.json` | CLI Tauri | `File src-tauri\capabilities\export.json changed. Rebuilding application...`, une compilation (9,73 s) et un redémarrage | rien de ce qui était en mémoire |
 
-C'est la deuxième ligne qu'il faut retenir. Un module sans gestionnaire HMR, comme `main.ts`, recharge la page ; des frameworks comme React ajoutent des gestionnaires qui conservent l'état des composants ([React (Vite), leçon 1](../../react-vite/01-vite-project/#hot-module-replacement-and-fast-refresh)). Le processus Rust ne redémarre pas, donc son état géré survit : une application Tauri garde naturellement les données importantes côté Rust.
+C'est la deuxième ligne qu'il faut retenir. Un module sans gestionnaire HMR, comme `main.ts`, recharge la page ; des frameworks comme React ajoutent des gestionnaires qui conservent l'état des composants ([React (Vite), leçon 1](../../react-vite/01-vite-project/#remplacement-de-modules-à-chaud-et-fast-refresh)). Le processus Rust ne redémarre pas, donc son état géré survit : une application Tauri garde naturellement les données importantes côté Rust.
 
 ## Des types générés depuis Rust
 
