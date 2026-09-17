@@ -20,7 +20,9 @@ sidebar:
 - [x] Leçon 7 : LoRA
 - [x] Leçon 8 : modèles récents, licences, quantification et VRAM
 - [x] Traductions en français et en espagnol des leçons 5 à 8
-- [ ] Leçon 9 : agrandissement, textures raccordables et HDR
+- [x] Leçon 9 : agrandissement, textures raccordables et HDR
+- [ ] Leçon 10 : vidéo
+- [x] Leçon 11 : les nœuds personnalisés, et leur sécurité
 
 ## 2026-09-16 — Versions et installation
 
@@ -111,6 +113,33 @@ sidebar:
 
 *ComfyUI v0.36.0. D'abord : Z-Image-Turbo bf16, graine 43, workflow [`08-z-image-turbo.api.json`](https://github.com/spareilleux/learn/blob/40880d5819d3d72102c008a617b4c83b519600cc/code/comfyui/workflows/08-z-image-turbo.api.json). Ensuite : FLUX.2 klein 4B, graines 42, 43 et 44, 4 étapes, CFG 1, `euler`, workflow [`08-flux2-klein.api.json`](https://github.com/spareilleux/learn/blob/40880d5819d3d72102c008a617b4c83b519600cc/code/comfyui/workflows/08-flux2-klein.api.json).*
 
+## 2026-09-16 — Les nœuds personnalisés et leur sécurité
+
+- ComfyUI v0.36.0 importe chaque pack avec `exec_module` avant de lire `NODE_CLASS_MAPPINGS` ; `prestartup_script.py` s'exécute plus tôt, et le JavaScript de `WEB_DIRECTORY` s'exécute dans le navigateur. `hook_breaker_ac10a0.py` restaure une fonction après le chargement des packs ; rien d'autre ne sépare un pack du processus.
+- ComfyUI-Manager est maintenant le paquet pip `comfyui_manager==4.2.2`, épinglé dans `manager_requirements.txt`. Les 42 fichiers `.py`, `.json` et `.md` de sa wheel sur PyPI sont identiques au tag `4.2.2`, commit `bd4ede22`. Il filtre les installations selon le niveau de sécurité, l'adresse d'écoute et deux nouveaux drapeaux, et cherche au démarrage des noms de paquets malveillants connus ; rien ne lit le code d'un pack.
+- Le pack Guitar Alchemist (GA Chord Diagram, GA Fretboard Control Map, GA Scale Prompt) calcule à partir des tables d'accordage et de gammes de GA au commit `a826864f`, dessine avec Pillow sans police, et passe 14 tests unitaires avec seulement NumPy et Pillow. Chargé dans un répertoire de base jetable, avec le Python de la version portable, sur le CPU, il s'est importé en 0,0 s, a tourné en 0,06 s, et `SaveImage` a écrit les mêmes pixels que le PNG attendu du test. `--disable-all-custom-nodes`, `--whitelist-custom-nodes ga` et un dossier `.disabled` se sont comportés comme le dit le code source.
+- Le script d'audit a tourné sur six packs épinglés le 16 septembre 2026 : ComfyUI-GGUF, comfyui_controlnet_aux, ComfyUI-Impact-Pack, ComfyUI-VideoHelperSuite, rgthree-comfy et ComfyUI_essentials. Aucun constat ne suggère une intention malveillante. Impact-Pack installe `onnxruntime` avec pip la première fois qu'un détecteur ONNX tourne, et son `install.py` télécharge un `.pth` de SAM. rgthree-comfy envoie le SHA-256 d'un fichier de modèle à Civitai quand l'interface demande ses informations. comfyui_controlnet_aux contient 72 appels à `torch.load` sans `weights_only`, sûrs par défaut seulement avec PyTorch 2.6 ou plus récent.
+- Un pickle dont la charge appelle `print` s'est exécuté avec `pickle.loads` et avec `torch.load(weights_only=False)` ; `torch.load(weights_only=True)` l'a refusé avec PyTorch 2.13.
+
+## 2026-09-16 — Les modèles des leçons 9 et 10
+
+- Téléchargés sur le disque des modèles et vérifiés avec le SHA-256 de l'API d'arborescence de Hugging Face : `RealESRGAN_x4plus.safetensors` (66 857 836 octets, BSD-3-Clause), `film_net_fp16.safetensors` (68 882 302 octets), et pour Wan 2.2 TI2V 5B, sous Apache 2.0, `wan2.2_ti2v_5B_fp16.safetensors` (9 999 658 848 octets), `umt5_xxl_fp8_e4m3fn_scaled.safetensors` (6 735 906 897 octets) et `wan2.2_vae.safetensors` (1 409 400 960 octets). Les 18,1 Go de Wan ont pris 10 minutes.
+- Le reconditionnement de Comfy-Org n'a pas de fichier fp8 de TI2V 5B, seulement fp16.
+
+## 2026-09-16 — Agrandissement, textures raccordables et HDR
+
+- La règle de RAM a choisi le modèle à chaque démarrage du serveur : Z-Image-Turbo nvfp4 avec 22 Go de RAM libre, int8 avec 24 Go. La RAM libre est descendue à 9 Go pendant les rendus int8.
+- Une étape d'échantillonnage a pris environ 0,3 seconde en 1024 × 1024 et de 2,2 à 2,8 secondes en 2048 × 2048.
+- Un `VAEDecode` simple du latent 2048 × 2048 a tenu sur le GPU ; son image diffère de celle de `VAEDecodeTiled` de 0,93 niveau en moyenne.
+- L'agrandissement dans l'espace latent a laissé un grain bruité et des cordes dédoublées à un denoise de 0,3.
+- Le PNG 16 bits de `SaveImageAdvanced` tiré d'un rendu 8 bits a 256 niveaux par canal, et son EXR n'a aucune valeur au-dessus de 1,0. Le client C# s'arrêtait au premier PNG 16 bits : il les décode maintenant, et liste les fichiers EXR et AVIF par taille.
+- Le premier essai de texture raccordable, avec une croix de 160 pixels, 64 pixels de fondu et un denoise de 0,7, a divisé les raccords par deux (de 13,4 à 5,2 niveaux sur la ligne du milieu) mais a laissé une ligne mouchetée et une marche de ton. Un denoise de 0,9 n'a pas aidé ; une croix de 384 pixels avec 128 pixels de fondu, si.
+- « Pale maple » (érable pâle) a dessiné des feuilles d'érable sculptées dans le bois. « Pale maple wood, a planed board » (bois d'érable pâle, une planche rabotée) a dessiné une planche.
+
+![Trois panneaux. Une répétition 2 × 2 d'une texture de palissandre, avec de légères lignes horizontales et verticales à travers chaque tuile. Un recadrage du milieu de cette texture, où une rangée de mouchetures sombres traverse le fil du bois et où la moitié inférieure est plus claire. Une répétition 2 × 2 d'un bois pâle avec une grande feuille d'érable sculptée dans chaque tuile.](../../../../assets/comfyui/journal-l09-seamless-failures.webp)
+
+*Les échecs, avant la correction. ComfyUI v0.36.0 : Z-Image-Turbo nvfp4 avec Qwen3 4B fp4 mixed, graine 42, 8 étapes, CFG 1, `res_multistep`, `simple`, workflow [`09-seamless.api.json`](https://github.com/spareilleux/learn/blob/d16b4d70b565257067309b7b8d7f51408cb81741/code/comfyui/workflows/09-seamless.api.json) avec sa croix réglée à 160 pixels, 64 de fondu et un denoise de 0,7. De gauche à droite : le palissandre répété 2 × 2 ; les 512 × 512 pixels du milieu du palissandre ; le prompt « flat top-down photograph of pale maple, subtle straight grain, even soft lighting, no shadows, wood texture » (photo à plat, vue de dessus, d'érable pâle au fil fin et droit, sous un éclairage doux et uniforme, sans ombres, texture de bois), répété 2 × 2.*
+
 ## À vérifier
 
 - SDXL sous Linux avec CUDA, et sur Apple Silicon avec MPS : la machine GPU du cours tourne sous Windows ; la CI n'installe que les versions CPU.
@@ -123,6 +152,9 @@ sidebar:
 - Des LoRA empilés dans l'autre ordre : même image, et même hachage de pixels ou non.
 - Le chemin émulé pour nvfp4 et fp8 sur un GPU sans leurs noyaux ; la machine du cours n'a qu'un GPU de la série RTX 50.
 - Pourquoi le réseau Z-Image nvfp4 échantillonnait plus vite avec l'encodeur de texte bf16 qu'avec celui en fp4.
+- Échantillonner les tuiles de `SplitImageToTileList` et les fusionner avec `ImageMergeTileList` : si des raccords se voient à un denoise faible.
+- Si `LoadImage` liste les fichiers `.exr` sous Linux et macOS, et si l'`EXRLoader` de three.js lit dans un navigateur l'EXR non compressé de ComfyUI.
+- Comment les navigateurs affichent l'AVIF HLG de `SaveImageAdvanced`.
 - Ce que fait l'option `convrot` d'int8 dans les noyaux de comfy-kitchen.
 - Les temps de rendu à chaud avec `--disable-dynamic-vram`, sur une machine avec assez de RAM libre.
 - `execution_error` et `execution_interrupted` tels que les clients les affichent, `POST /interrupt` avec un identifiant de prompt, et la suppression d'un prompt en file d'attente : aucune exécution ne les a encore produits.

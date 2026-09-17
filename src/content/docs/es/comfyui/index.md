@@ -44,9 +44,9 @@ Escribes C# o Java. Conoces HTTP, JSON y el código asíncrono. No necesitas sab
 | 6 | [ControlNet: bordes y profundidad](06-controlnet/) | — |
 | 7 | [LoRA: cargarlos, apilarlos y qué implica entrenar uno](07-lora/) | un plugin que modifica los pesos |
 | 8 | [Modelos recientes y sus licencias, cuantización y VRAM](08-recent-models-quantization/) | elegir una dependencia y su licencia |
-| 9 | Escalado, texturas sin costuras y HDR | — |
+| 9 | [Escalado, texturas sin costuras y HDR](09-upscaling-seamless-hdr/) | — |
 | 10 | Vídeo | — |
-| 11 | Los nodos personalizados y su seguridad | paquetes NuGet o Maven que ejecutan código al instalarse |
+| 11 | [Los nodos personalizados y su seguridad](11-custom-nodes-and-security/) | paquetes NuGet o Maven que ejecutan código al instalarse |
 | 12 | ComfyUI en producción: un servicio, una cola, varias GPU | un worker detrás de una cola de trabajos |
 | 13 | Proyecto: texturas para este sitio y para GuitarAlchemist | — |
 | — | [Diario](journal/) | |

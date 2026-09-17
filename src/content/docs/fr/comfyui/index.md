@@ -44,9 +44,9 @@ Tu écris du C# ou du Java. Tu connais HTTP, JSON et le code asynchrone. Tu n'as
 | 6 | [ControlNet : contours et profondeur](06-controlnet/) | — |
 | 7 | [LoRA : chargement, empilement, et ce qu'implique d'en entraîner un](07-lora/) | un plugin qui modifie des poids |
 | 8 | [Modèles récents et leurs licences, quantification et VRAM](08-recent-models-quantization/) | choisir une dépendance et sa licence |
-| 9 | Agrandissement, textures raccordables et HDR | — |
+| 9 | [Agrandissement, textures raccordables et HDR](09-upscaling-seamless-hdr/) | — |
 | 10 | Vidéo | — |
-| 11 | Les nœuds personnalisés, et leur sécurité | des paquets NuGet ou Maven qui exécutent du code à l'installation |
+| 11 | [Les nœuds personnalisés, et leur sécurité](11-custom-nodes-and-security/) | des paquets NuGet ou Maven qui exécutent du code à l'installation |
 | 12 | ComfyUI en production : un service, une file d'attente, plusieurs GPU | un worker derrière une file de tâches |
 | 13 | Projet : des textures pour ce site et pour GuitarAlchemist | — |
 | — | [Journal](journal/) | |
