@@ -117,7 +117,7 @@ first: shape [3], F32, [32, -100, 216]
 second: shape [3], F32, [32, -100, 216]
 ```
 
-- **Un tenseur utilisé deux fois** reçoit les deux contributions : `h · h` donne à `h` un gradient de `h` de chaque côté, `2h = [4, -2, 8]` pour `w = [1, -2, 3]`.
+- **Un tenseur utilisé deux fois** reçoit les deux contributions : le produit de `h` par lui-même donne à `h` un gradient de `h` de chaque côté, donc le gradient vaut **deux fois** `h`, `[4, -2, 8]`, pour `w = [1, -2, 3]`.
 - **Un résultat qui n'est pas un scalaire** est amorcé avec des uns, ce qui est le gradient de sa somme. PyTorch refuse `backward()` sur un non-scalaire sans argument `gradient` explicite ; Candle l'accepte en silence, donc une perte que tu as oublié de réduire « marche » quand même.
 - **Deux appels donnent les mêmes gradients.** Il n'y a pas de `zero_grad` à oublier. Le revers : pour additionner des gradients sur plusieurs lots, tu additionnes les `GradStore` toi-même.
 
