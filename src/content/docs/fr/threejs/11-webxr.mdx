@@ -1,0 +1,287 @@
+---
+title: 11. WebXR
+description: La touche dans une session VR immersive sans casque — les sessions, les espaces de référence et les sources d'entrée de WebXR, renderer.xr et les manettes de three.js, IWER de Meta émulant un Quest 3 dans Chromium headless, où en est WebGPURenderer avec WebXR dans r186, ce que le repli WebGL et le WebGLRenderer classique font d'un appareil émulé, et ce que seul un vrai casque peut dire, comparé à OpenXR et à Windows Mixed Reality.
+sidebar:
+  order: 11
+---
+
+Code : la page dans [`src/11-xr/main.ts`](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/11-xr/main.ts).
+
+:::caution[Sans casque]
+Tout ce qui est dans cette leçon a tourné dans Chromium headless, avec un Meta Quest 3 émulé par [IWER](https://github.com/meta-quest/immersive-web-emulation-runtime). Ce que cela vérifie, c'est la partie three.js de WebXR : sessions, yeux, poses, manettes et événements. Ce qu'ajoute un vrai casque, le compositeur, la fréquence d'images, les lentilles et le GPU, est *à vérifier* sur un appareil.
+:::
+
+## WebXR en un tableau
+
+La [WebXR Device API](https://www.w3.org/TR/webxr/) est l'accès du navigateur aux casques et aux téléphones en AR ou en VR. Si vous avez utilisé [OpenXR](https://www.khronos.org/openxr/), l'API C derrière Windows Mixed Reality, SteamVR et les applications natives du Quest, les concepts se correspondent de près ; WebXR en est l'équivalent pour le navigateur, et Chromium l'implémente par-dessus OpenXR sous Windows.
+
+| | OpenXR | WebXR | three.js |
+|---|---|---|---|
+| Y a-t-il un appareil ? | `xrGetSystem` | `navigator.xr.isSessionSupported('immersive-vr')` | `VRButton` le vérifie et affiche le bouton |
+| Démarrer | `xrCreateSession` | `navigator.xr.requestSession(mode, features)`, depuis un geste de l'utilisateur | `renderer.xr.setSession(session)` |
+| Systèmes de coordonnées | espaces de référence : `VIEW`, `LOCAL`, `STAGE` | `viewer`, `local`, `local-floor`, `bounded-floor`, `unbounded` | `renderer.xr.setReferenceSpaceType('local-floor')`, la valeur par défaut |
+| Boucle d'images | `xrWaitFrame`, `xrBeginFrame`, `xrEndFrame` | `session.requestAnimationFrame` | `renderer.setAnimationLoop`, qui bascule sur la boucle de la session |
+| Yeux | des vues issues de `xrLocateViews` | `frame.getViewerPose(space).views` | une `ArrayCamera` avec une caméra par œil |
+| Où dessiner | des swapchains | `XRWebGLLayer` ou WebXR Layers ; `XRGPUBinding` pour WebGPU, en cours | la render target XR du renderer |
+| Manettes | des actions liées à des chemins | `session.inputSources`, les événements `select` et `squeeze`, un `Gamepad` | `renderer.xr.getController(i)`, un `Object3D` qui suit la manette |
+
+`setAnimationLoop` est la raison pour laquelle la leçon 1 le préfère à `requestAnimationFrame` : dans une session, le `requestAnimationFrame` de la fenêtre cesse de se déclencher, et le casque cadence les images à son propre rythme, 72, 90 ou 120 Hz. Une boucle écrite avec `setAnimationLoop` continue de tourner, sans changement.
+
+## Émuler un Quest 3
+
+Chromium headless a un `navigator.xr`, mais aucun appareil derrière : `isSessionSupported('immersive-vr')` répond `false`. [IWER](https://www.npmjs.com/package/iwer) 2.4.0, l'Immersive Web Emulation Runtime de Meta, remplace `navigator.xr` par une implémentation JavaScript dont le casque et les manettes sont déplacés par du code : le même runtime que l'extension de navigateur [Immersive Web Emulator](https://github.com/meta-quest/immersive-web-emulator). La page l'installe avant de créer le renderer ([lignes 25-38](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/11-xr/main.ts#L25-L38)) :
+
+```ts
+// Le casque émulé doit être installé avant le renderer : XRManager cherche XRWebGLBinding dans son constructeur
+let device: XRDevice | null = null;
+if (params.get('device') !== 'none') {
+  device = new XRDevice(metaQuest3);
+  // Chromium a déjà un navigator.xr, sans appareil derrière : IWER n'y touche pas sauf si on le force
+  device.installRuntime({ forceInstall: true, polyfillLayers: params.has('layers') });
+  // IWER dessine une seule vue dans la page sauf si la stéréo est activée : les yeux gauche et droit partagent alors le canvas
+  device.stereoEnabled = true;
+  device.position.set(-0.2, 1.6, 0.9);
+  // Regard vers le bas, sur la touche, 40° sous l'horizon
+  const look = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1, 0, 0), (-40 * Math.PI) / 180);
+  device.quaternion.set(look.x, look.y, look.z, look.w);
+  result.emulated = { device: device.name, immersiveVR: await navigator.xr!.isSessionSupported('immersive-vr') };
+}
+```
+
+Deux choses ont chacune coûté une exécution ratée avant d'être trouvées. Sans `forceInstall`, IWER voit le `navigator.xr` de Chromium et le laisse en place, et aucune session ne démarre. Sans `stereoEnabled`, IWER rend une seule vue : le viewport de l'œil droit fait 0 pixel de large.
+
+## La session et les manettes
+
+Dans une session, les unités sont des mètres et, avec `local-floor`, y = 0 est le sol. La page pose la touche de la leçon 5, réduite au quart, sur une table virtuelle haute de 0.8 m. Une vraie page demande la session depuis un clic, souvent via le [`VRButton`](https://github.com/mrdoob/three.js/blob/r186/examples/jsm/webxr/VRButton.js) de three.js, puisque les navigateurs exigent un geste de l'utilisateur ; IWER ne l'exige pas, donc la sonde appelle directement `requestSession` ([lignes 131-143](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/11-xr/main.ts#L131-L143)).
+
+`renderer.xr.getController(i)` renvoie un `Object3D` que three.js déplace à chaque image vers la pose de la *i*-ième source d'entrée de la session. Son indice n'est pas une main : c'est l'événement `connected` qui dit laquelle il est. Un événement `select`, la gâchette, devient un rayon partant de la manette avec `Raycaster.setFromXRController`, puis passe par `fretAt` et `stringAt` de la leçon 5, dans les coordonnées propres de la touche ([lignes 85-99](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/11-xr/main.ts#L85-L99)) :
+
+```ts
+for (const index of [0, 1]) {
+  const controller = renderer.xr.getController(index);
+  scene.add(controller);
+  controller.addEventListener('connected', (event) => (controller.userData.handedness = (event.data as XRInputSource).handedness));
+  controller.addEventListener('select', () => {
+    raycaster.setFromXRController(controller as THREE.XRTargetRaySpace);
+    const [hit] = raycaster.intersectObject(board, true);
+    const hand = controller.userData.handedness;
+    if (!hit) return void picks.push({ controller: index, hand, hit: null });
+    const local = board.worldToLocal(hit.point.clone());
+    const fret = fretAt(local.x);
+    const string = stringAt(local.z);
+    picks.push({ controller: index, hand, object: hit.object.name, fret, string, note: fret === null ? null : noteName(string, fret) });
+  });
+}
+```
+
+La sonde pointe ensuite la manette droite d'IWER vers la corde 3, case 5, et presse sa gâchette : `updateButtonValue('trigger', 1)`, puis `0`, qu'IWER transforme en événements `select` de la session ([lignes 161-178](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/11-xr/main.ts#L161-L178)).
+
+## Avec le WebGLRenderer classique
+
+`?classic` dessine avec le `WebGLRenderer` de `three`, le renderer pour lequel les exemples WebXR de three.js ont été écrits :
+
+```text
+$ node scripts/probe.mjs 11-xr --query classic
+{
+  "native": {
+    "navigatorXR": true,
+    "immersiveVR": false,
+    "XRGPUBinding": false
+  },
+  "emulated": {
+    "device": "Meta Quest 3",
+    "immersiveVR": true
+  },
+  "rendererBeforeSession": "WebGLRenderer",
+  "session": {
+    "mode": "immersive-vr",
+    "enabledFeatures": [
+      "local-floor",
+      "viewer",
+      "local"
+    ]
+  },
+  "presenting": true,
+  "rendererInSession": "WebGLRenderer",
+  "frames": [
+    {
+      "eyes": 2,
+      "eyeDistanceMm": 63,
+      "viewport": [
+        [0, 0, 400, 450],
+        [400, 0, 400, 450]
+      ],
+      "calls": 38,
+      "triangles": 1560
+    }
+  ],
+  "picks": [
+    {
+      "controller": 1,
+      "hand": "right",
+      "object": "neck",
+      "fret": 5,
+      "string": 3,
+      "note": "C4"
+    }
+  ],
+  "inputSources": 2,
+  "errors": [],
+  "after": {
+    "in the session": {
+      "presenting": true
+    },
+    "end the session": {
+      "presenting": false
+    }
+  }
+}
+```
+
+- La session a été accordée avec `local-floor`, plus `viewer` et `local`, que toute session immersive possède.
+- Deux yeux, espacés de 63 mm, la distance interpupillaire par défaut d'IWER, chacun dessiné dans une moitié du canvas de 800 × 450.
+- 38 draw calls et 1 560 triangles : les 19 maillages et 780 triangles de la touche, dessinés une fois par œil. `WebGLRenderer` rend la scène deux fois ; le multiview, qui dessine les deux yeux en une passe, demande l'extension `OVR_multiview2` et un navigateur de casque qui la propose (*à vérifier* sur un Quest).
+- La gâchette de la manette 1, la main droite, a sélectionné la corde 3, case 5 : C4, la note que la leçon 5 trouvait avec la souris.
+- `session.end()` a arrêté la présentation.
+
+La capture d'écran, prise pendant la session, montre ce qu'IWER compose dans la page : l'œil gauche, puis le droit, chacun voyant la touche depuis sa propre position.
+
+![Deux vues presque identiques côte à côte sur un fond sombre, chacune montrant une petite touche brune avec frettes et cordes, vue d'en haut et de biais, légèrement décalée entre la moitié gauche et la moitié droite.](../../../../assets/threejs/l11-stereo.webp)
+
+## Avec WebGPURenderer
+
+La page par défaut utilise `WebGPURenderer` :
+
+```text
+$ node scripts/probe.mjs 11-xr
+{
+  ...
+  "rendererBeforeSession": "WebGPURenderer, WebGPU",
+  "session": {
+    "mode": "immersive-vr",
+    "enabledFeatures": [
+      "local-floor",
+      "viewer",
+      "local"
+    ]
+  },
+  "errors": [
+    "Error: THREE.XRManager: WebGPU XR sessions require the \"webgpu\" session feature. Use VRButtonGPU/XRButton with \"webgpu\" enabled or use a WebGL backend."
+  ]
+}
+```
+
+Dans r186, le backend WebGPU ne dessine dans une session WebXR que par [`XRGPUBinding`](https://github.com/immersive-web/WebXR-WebGPU-Binding/blob/main/explainer.md), issu de la proposition de binding WebXR/WebGPU, et seulement dans une session demandée avec la fonctionnalité `webgpu` ([`XRManager.js`, lignes 739-749](https://github.com/mrdoob/three.js/blob/r186/src/renderers/common/XRManager.js#L739-L749), appelé depuis `setSession` à la [ligne 1211](https://github.com/mrdoob/three.js/blob/r186/src/renderers/common/XRManager.js#L1211)). Chromium headless n'a pas de `XRGPUBinding`, et IWER n'en émule pas. Deux détails du message ne correspondent pas à r186 : il n'y a pas de `VRButtonGPU` dans `examples/jsm/webxr/`, et `XRButton.js` ne demande pas de fonctionnalité `webgpu`. Quels navigateurs et quels casques offrent `XRGPUBinding` en septembre 2026 est *à vérifier*.
+
+### Le backend WebGL 2
+
+Sur une machine sans WebGPU, ou avec `--webgl`, `WebGPURenderer` utilise son backend WebGL 2, que le message présente comme l'issue. Avec IWER, la session démarre, mais chaque image lève une exception :
+
+```text
+$ node scripts/probe.mjs 11-xr --webgl
+  ...
+  "rendererInSession": "WebGPURenderer, WebGL 2",
+  "frames": [
+    {
+      "eyes": 2,
+      "eyeDistanceMm": 63,
+      "viewport": [
+        [0, 0, 400, 450],
+        [400, 0, 400, 450]
+      ],
+      "calls": 4,
+      "triangles": 780
+    }
+  ],
+  ...
+  "errors": [
+    "TypeError: Invalid value used as weak map key"
+  ]
+```
+
+Le `XRWebGLLayer.framebuffer` d'IWER renvoie `null` ([`XRWebGLLayer.js`, lignes 44-46, dans le paquet publié](https://unpkg.com/iwer@2.4.0/lib/layers/XRWebGLLayer.js)) : IWER dessine dans le canvas de la page elle-même, dont WebGL représente le framebuffer par `null`, comme le fait la spécification WebXR pour les sessions inline, qui dessinent dans la page. Le backend WebGL garde cette valeur comme cible XR ([`WebGLBackend.js`, lignes 365-367](https://github.com/mrdoob/three.js/blob/r186/src/renderers/webgl-fallback/WebGLBackend.js#L365-L367)), et `WebGLState.drawBuffers` utilise le framebuffer comme clé d'une `WeakMap` ([`WebGLState.js`, lignes 1149-1164](https://github.com/mrdoob/three.js/blob/r186/src/renderers/webgl-fallback/utils/WebGLState.js#L1149-L1164)), qui refuse `null`. `WebGLRenderer` lie `null` comme framebuffer par défaut, et fonctionne. Sur un vrai casque, le framebuffer de la couche est un framebuffer opaque, pas `null`, donc cet échec tient à la combinaison de l'émulateur et du backend WebGL, pas aux casques (*à vérifier* sur un Quest).
+
+La première version de cette page n'interceptait pas l'exception : les images se sont arrêtées, la sonde les a attendues, et l'exécution est restée bloquée jusqu'à ce qu'on l'arrête à la main, en gardant le verrou GPU de la machine pendant dix minutes. La page intercepte désormais les erreurs de rendu, garde chaque message une seule fois, et renonce à attendre des images au bout de 5 secondes ; [`probe.mjs`](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/scripts/probe.mjs) s'arrête aussi de lui-même après deux fois son délai.
+
+### L'addon de repli WebGL
+
+r186 ajoute [`WebGLXRFallback.js`](https://github.com/mrdoob/three.js/blob/r186/examples/jsm/webxr/WebGLXRFallback.js) : il enveloppe `renderer.xr.setSession`, et quand une session démarre sur le backend WebGPU sans `XRGPUBinding`, il crée un second renderer avec un backend WebGL, lui transfère la boucle d'animation et les réglages XR, et laisse la page échanger les canvas ([lignes 21-69](https://github.com/mrdoob/three.js/blob/r186/examples/jsm/webxr/WebGLXRFallback.js#L21-L69)). `?fallback` l'installe :
+
+```text
+$ node scripts/probe.mjs 11-xr --query fallback
+  ...
+  "fallback": "switched to WebGPURenderer, WebGL 2",
+  "presenting": true,
+  "rendererInSession": "WebGPURenderer, WebGL 2",
+  ...
+  "picks": [],
+  "inputSources": 2,
+  "errors": [
+    "TypeError: Invalid value used as weak map key"
+  ],
+```
+
+Le basculement a fonctionné, et s'est heurté au même framebuffer `null`. Il montre autre chose : `picks` est vide. Les manettes venaient du `renderer.xr.getController` du premier renderer, et le renderer de repli a son propre `XRManager`, qui déplace ses propres manettes. L'addon copie la boucle et les réglages, pas les objets que la page a déjà pris dans `renderer.xr` : une page qui l'utilise doit récupérer à nouveau ses manettes dans `onFallback`.
+
+`check.sh` compare les quatre exécutions. Sur les runners Linux et Windows, qui n'ont pas WebGPU, la page par défaut et `?fallback` démarrent directement sur le backend WebGL 2, et leurs sorties viennent de `expected/l11_probe_webgpu.webgl.txt` et `expected/l11_probe_fallback.webgl.txt`, générés avec `chromium-headless-shell`.
+
+## Ce qu'un navigateur headless ne peut pas vérifier
+
+- **La fréquence d'images.** Un Quest 3 tourne à 72, 90 ou 120 Hz, et une image manquée se ressent plus qu'elle ne se voit. Le temps CPU par image de la leçon 8, doublé pour deux yeux, est le point de départ ; l'overlay de performance du casque lui-même est le point d'arrivée (*à vérifier*).
+- **Le rendu fovéal et l'échelle du framebuffer.** `renderer.xr.setFoveation` et `setFramebufferScaleFactor` changent ce que fait le compositeur du casque ; IWER les accepte et dessine les mêmes pixels.
+- **Le suivi des mains**, qu'IWER émule avec des poses, et le passthrough de l'**AR**, les hit tests et les ancres, que le cours ne traite pas.
+- **Le confort.** La touche à 0.8 m de haut, à 0.9 m des yeux, au quart de sa taille, a été choisie sur le papier.
+
+## Dans GuitarAlchemist/ga
+
+GA n'a aucun code WebXR au commit `05c8eda` : ni `renderer.xr`, ni `VRButton`, ni `navigator.xr`. La seule mention est un fichier de skill Claude, `.claude/skills/three-best-practices/rules/webxr-setup.md`, écrit pour des agents et non utilisé par l'application. Un mode VR pour la touche partirait du `WebGPURenderer` de `ThreeFretboard.tsx`, qui, comme cette leçon l'a constaté, ne peut pas entrer dans une session dans r186 sans `XRGPUBinding` : l'addon de repli ou un `WebGLRenderer` serait la première étape.
+
+## À retenir
+
+- WebXR donne à la page une session, des espaces de référence en mètres, une caméra par œil et des sources d'entrée ; three.js les enveloppe dans `renderer.xr`, `setAnimationLoop` et `getController`.
+- IWER émule un Quest 3 dans un navigateur headless : sessions, vues stéréo, poses des manettes et gâchettes peuvent être testées en CI.
+- Dans r186, `WebGPURenderer` n'entre dans une session WebXR sur WebGPU qu'avec `XRGPUBinding` et la fonctionnalité `webgpu` ; sinon, il lève une exception.
+- L'addon de repli WebGL échange les renderers, mais pas les manettes que la page détient déjà.
+- Avec IWER, seul le `WebGLRenderer` classique a rendu : le backend WebGL 2 n'accepte pas un framebuffer de couche `null`.
+- Mettez un délai strict sur tout ce qui attend des images : une session XR qui cesse d'en produire attend indéfiniment.
+
+## Exercices
+
+1. Ajoutez un `VRButton` à la page `?classic`, pour que le navigateur d'un vrai casque puisse entrer dans la session. Que ne doit plus faire la page, maintenant que la session n'est plus démarrée par la sonde ?
+2. Dans la page `?fallback`, récupérez les manettes du nouveau renderer dans `onFallback`, et déplacez-y leurs listeners `select`. Que devrait alors montrer `picks`, et pourquoi cela échouerait-il encore avec IWER ?
+3. Faites jouer la note par la gâchette : listez ce dont le gestionnaire de `select` a besoin, et ce que le casque change par rapport à un clic de souris.
+
+<details>
+<summary>Solution 1</summary>
+
+```ts
+import { VRButton } from 'three/addons/webxr/VRButton.js';
+
+document.body.append(VRButton.createButton(renderer));
+```
+
+`VRButton` vérifie `isSessionSupported('immersive-vr')`, affiche « ENTER VR » ou « VR NOT SUPPORTED », et, au clic, demande la session avec `local-floor`, `bounded-floor` et `layers` comme fonctionnalités optionnelles ([`VRButton.js`, lignes 68-74](https://github.com/mrdoob/three.js/blob/r186/examples/jsm/webxr/VRButton.js#L68-L74)), ce qui constitue le geste de l'utilisateur qu'exigent les navigateurs. La page ne doit plus appeler `requestSession` elle-même, sinon le clic échouerait avec une session déjà en cours : gardez `startSession` pour la sonde seulement. Le bloc `if (probing)` de la page le fait déjà. Non exécuté sur un casque (*à vérifier*).
+
+</details>
+
+<details>
+<summary>Solution 2</summary>
+
+`onFallback(fallback, previous)` reçoit le nouveau renderer : appelez-y `fallback.xr.getController(0)` et `(1)`, ajoutez-les à la scène, et attachez les listeners `connected` et `select`, la même boucle qu'avant, transformée en fonction qui prend le renderer. Avec IWER, `picks` devrait alors contenir la sélection C4, puisque le rayon est calculé sur le CPU à partir de la pose de la manette, que met à jour le `XRManager` du renderer de repli. Mais chaque image lève toujours une exception sur le framebuffer `null` avant que la scène soit dessinée, et savoir si les poses des manettes sont mises à jour avant cette exception est *à vérifier* : dans `XRManager`, les manettes sont mises à jour dans l'image d'animation XR, avant le callback de la boucle qui lève l'exception ([`XRManager.js`, lignes 1991-1997](https://github.com/mrdoob/three.js/blob/r186/src/renderers/common/XRManager.js#L1991-L1997)), donc elles le sont probablement.
+
+</details>
+
+<details>
+<summary>Solution 3</summary>
+
+Le gestionnaire a besoin de la note (il l'a), d'un son, et d'un moyen de le jouer : la Web Audio API avec un `AudioContext` créé ou relancé depuis un geste de l'utilisateur, que fournit l'entrée dans la session. Par rapport à un clic : la gâchette est analogique, et `inputSource.gamepad.buttons[0].value` donne la force avec laquelle elle est pressée, une vélocité toute trouvée ; `inputSource.gamepad.hapticActuators` peut faire vibrer la manette sur la note ; et le son peut être positionné sur la corde avec un `PannerNode`, ou le `PositionalAudio` de three.js, attaché à la touche, pour qu'il vienne de l'endroit où se trouve la corde. Une conception, pas du code exécuté (*à vérifier*).
+
+</details>
+
+## Sources
+
+- W3C : [WebXR Device API](https://www.w3.org/TR/webxr/), [WebXR Gamepads Module](https://www.w3.org/TR/webxr-gamepads-module-1/) ; Immersive Web Community Group : [explainer du binding WebXR/WebGPU](https://github.com/immersive-web/WebXR-WebGPU-Binding/blob/main/explainer.md)
+- MDN : [WebXR Device API](https://developer.mozilla.org/docs/Web/API/WebXR_Device_API)
+- Code source de three.js à r186 : [`XRManager.js`](https://github.com/mrdoob/three.js/blob/r186/src/renderers/common/XRManager.js), [`WebGLXRFallback.js`](https://github.com/mrdoob/three.js/blob/r186/examples/jsm/webxr/WebGLXRFallback.js), [`VRButton.js`](https://github.com/mrdoob/three.js/blob/r186/examples/jsm/webxr/VRButton.js), [`WebGLBackend.js`](https://github.com/mrdoob/three.js/blob/r186/src/renderers/webgl-fallback/WebGLBackend.js), [`WebGLState.js`](https://github.com/mrdoob/three.js/blob/r186/src/renderers/webgl-fallback/utils/WebGLState.js)
+- Meta : [IWER](https://github.com/meta-quest/immersive-web-emulation-runtime), [Immersive Web Emulator](https://github.com/meta-quest/immersive-web-emulator)
+- Khronos : [OpenXR](https://www.khronos.org/openxr/)

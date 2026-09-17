@@ -177,7 +177,7 @@ After Playwright moves the real mouse over string 3, fret 5:
     },
 ```
 
-The counters are no longer reported after the pointer moves: the browser coalesces `pointermove` events when frames are slow, so the number of renders they cause differs between machines. The label is drei's [`<Html>`](https://drei.docs.pmnd.rs/misc/html): a `div` positioned over the canvas at a 3D point, and moved every frame. It isn't in the draw calls; the hover sphere is the 24th.
+The counters are no longer reported after the pointer moves: the browser coalesces `pointermove` events when frames are slow, so the number of renders they cause differs between machines. The label is drei's [`<Html>`](https://drei.docs.pmnd.rs/misc/html): a `div` positioned over the canvas at a 3D point, and moved every frame. It isn't in the draw calls; the hover sphere is the 24th draw call.
 
 ![A dark brown neck seen from above at an angle, with metal frets and strings, three blue markers of a C major chord on the left, a small orange sphere under the pointer, and an orange label reading C4 above it; at the bottom, the text parent renders: 10, pick: C4.](../../../assets/threejs/l09-r3f.webp)
 

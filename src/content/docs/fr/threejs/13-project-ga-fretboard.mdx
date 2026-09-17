@@ -1,0 +1,298 @@
+---
+title: "13. Projet : le manche de guitare 3D de GuitarAlchemist, porté vers WebGPU"
+description: Le projet du cours — le ThreeFretboard.tsx de GuitarAlchemist reproduit tel que GA le construit, puis porté vers React Three Fiber avec ce que les leçons 1 à 12 ont mesuré — instanciation, ressources partagées, une seule texture pour 23 étiquettes, marqueurs indexés par leur contenu, cordes qui vibrent en TSL, pixel ratio plafonné, sélection et libération — et les deux versions mesurées côte à côte dans Chromium headless, sur WebGPU et sur un rastériseur logiciel où les 8 échantillons de GA ne dessinent rien.
+sidebar:
+  order: 13
+---
+
+Code : les mesures de GA dans [`src/13-fretboard/guitar.ts`](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/13-fretboard/guitar.ts), la structure de GA dans [`GaFretboard.tsx`](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/13-fretboard/GaFretboard.tsx), le portage dans [`Fretboard3D.tsx`](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/13-fretboard/Fretboard3D.tsx), et la page qui mesure les deux dans [`main.tsx`](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/13-fretboard/main.tsx).
+
+## Le composant
+
+[`ThreeFretboard.tsx`](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeFretboard.tsx) est le manche de guitare 3D de GuitarAlchemist : 1 372 lignes de React et de three.js au commit `05c8eda`, sans React Three Fiber. Un `useEffect` crée un `WebGPURenderer`, construit une scène faite d'une touche, de frettes, d'incrustations, de cordes, d'étiquettes en sprites et de marqueurs de notes, et fait tourner une boucle d'animation ; ses props sont les positions à marquer et un objet `config` avec le nombre de frettes, l'accordage, le modèle de guitare, le capodastre et les dimensions. Les leçons 1 à 8 l'ont cité pour un point à la fois. Cette leçon le reproduit en entier, le mesure, et le porte.
+
+La reproduction, [`GaFretboard.tsx`](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/13-fretboard/GaFretboard.tsx), est condensée : les mêmes objets par frette, incrustation, corde, étiquette et marqueur, les mêmes dépendances d'effet, le même nettoyage et le même pixel ratio, avec des commentaires qui renvoient aux numéros de ligne de GA. Elle laisse de côté les textures du bois et des cordes, le dos du manche, le sillet, le capodastre, les étiquettes des marqueurs et la plupart des lumières, si bien que ses comptes sont une borne inférieure de ceux de GA. Les deux versions partagent les mesures de GA tirées de [`guitar.ts`](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/13-fretboard/guitar.ts) : un diapason de 648 mm, un sillet de 42 mm, 22 frettes, une unité pour 10 mm, et la formule des frettes de GA. La page les rend dans la même surface 3:1 que le canvas de 1800 × 600 de GA, avec la caméra, les lumières et le tone mapping ACES de GA, à une exposition de 1.2 ([`ThreeFretboard.tsx`, lignes 238-239](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeFretboard.tsx#L238-L239)).
+
+## Mesurer les deux
+
+[`main.tsx`](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/13-fretboard/main.tsx) monte une version, choisie par `?version=ga|port`, dans un parent qui passe `positions` comme le font les appelants de GA : un nouveau littéral de tableau à chaque rendu, avec le même contenu ([ligne 30](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/13-fretboard/main.tsx#L30)). Quand elle est sondée, elle rapporte `renderer.info` après les premières images, après 10 rendus du parent, après l'affichage d'un accord de do majeur, après un vrai clic sur la corde 3, frette 2, et après le démontage du manche.
+
+![Un long manche brun foncé à 22 frettes vu de côté et d'en haut, qui s'éloigne vers la droite, avec de petits points d'incrustation blancs, les numéros de frettes le long du bord proche, et trois marqueurs bleus d'un accord de do majeur près du sillet, à gauche.](../../../../assets/threejs/l13-ga.webp)
+
+La version de GA :
+
+```text
+$ node scripts/probe.mjs 13-fretboard --query version=ga
+{
+  "version": "ga",
+  "first": {
+    "drawCalls": 69,
+    "triangles": 19623,
+    "geometries": 41,
+    "textures": 32,
+    "programs": 10,
+    "drawingBuffer": "2400x801",
+    "sceneBuilds": 1,
+    "markerBuilds": 1
+  },
+  "afterTenRenders": {
+    "drawCalls": 69,
+    "triangles": 19623,
+    "geometries": 41,
+    "textures": 322,
+    "programs": 10,
+    "drawingBuffer": "2400x801",
+    "sceneBuilds": 11,
+    "markerBuilds": 11
+  },
+  "withChord": {
+    "drawCalls": 72,
+    "triangles": 25575,
+    "geometries": 44,
+    "textures": 351,
+    "programs": 10,
+    "drawingBuffer": "2400x801",
+    "sceneBuilds": 12,
+    "markerBuilds": 12
+  },
+  "after": {
+    "click string 3, fret 2": {
+      "clicks": [],
+      "pluckedStrings": null,
+      ...
+    },
+    "unmount": {
+      "drawCalls": 0,
+      "triangles": 0,
+      "geometries": 0,
+      "textures": 0,
+      "programs": -4,
+      ...
+    }
+  }
+}
+```
+
+Le portage, [`Fretboard3D.tsx`](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/13-fretboard/Fretboard3D.tsx) :
+
+```text
+$ node scripts/probe.mjs 13-fretboard --query version=port
+{
+  "version": "port",
+  "first": {
+    "drawCalls": 6,
+    "triangles": 10335,
+    "geometries": 7,
+    "textures": 4,
+    "programs": 13,
+    "drawingBuffer": "800x266",
+    "sceneBuilds": 1,
+    "markerBuilds": 1
+  },
+  "afterTenRenders": {
+    "drawCalls": 6,
+    "triangles": 10335,
+    "geometries": 7,
+    "textures": 4,
+    "programs": 13,
+    "drawingBuffer": "800x266",
+    "sceneBuilds": 1,
+    "markerBuilds": 1
+  },
+  "withChord": {
+    "drawCalls": 7,
+    "triangles": 11919,
+    "geometries": 7,
+    "textures": 4,
+    "programs": 13,
+    "drawingBuffer": "800x266",
+    "sceneBuilds": 1,
+    "markerBuilds": 2
+  },
+  "after": {
+    "click string 3, fret 2": {
+      "clicks": [
+        {
+          "string": 3,
+          "fret": 2,
+          "note": "E3"
+        }
+      ],
+      "pluckedStrings": [3],
+      ...
+    },
+    "unmount": {
+      "drawCalls": 1,
+      "triangles": 1,
+      "geometries": 1,
+      "textures": 3,
+      "programs": 2,
+      ...
+    }
+  }
+}
+```
+
+![Le même manche, dessiné par le portage, un peu plus sombre, avec des frettes plus fines, les incrustations, et trois marqueurs d'accord bleus près du sillet.](../../../../assets/threejs/l13-port.webp)
+
+| | Structure de GA | Portage | Ce qui a changé |
+|---|---|---|---|
+| Draw calls, sans marqueurs | 69 | 6 | un `InstancedMesh` par sorte d'objet ; 23 étiquettes dans une seule texture |
+| Géométries sur le GPU | 41 | 7 | géométries partagées |
+| Textures | 32 | 4 | un seul canvas pour les numéros de frettes, au lieu d'un par sprite |
+| Pixels dessinés | 2400 × 801 | 800 × 266 | pixel ratio plafonné à 2, au lieu de 3 × celui de l'appareil, jusqu'à 6 |
+| Après 10 rendus avec les mêmes notes | 11 constructions de scène, 322 textures | 1 construction, 4 textures | marqueurs indexés par leur contenu ; rien d'autre ne dépend des props |
+| Clic sur la corde 3, frette 2 | rien | E3, la corde 3 vibre | un gestionnaire de pointeur sur la touche |
+| Après le démontage | renderer libéré | retour à la passe de sortie | chaque ressource libérée, le canvas de R3F reste |
+
+## Ce que les nombres disent de GA
+
+**69 draw calls** : la touche, 22 frettes, 10 incrustations, 6 cordes, 29 sprites (23 numéros de frettes et 6 noms de cordes de l'accordage) et la passe de sortie. Chaque frette a sa propre `CapsuleGeometry` et son propre `MeshPhysicalMaterial` ([lignes 960-1016](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeFretboard.tsx#L960-L1016)), chaque étiquette son propre canvas, sa `CanvasTexture`, son `SpriteMaterial` et son sprite ([lignes 1218-1300](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeFretboard.tsx#L1218-L1300)), et chaque marqueur une `SphereGeometry(0.2, 32, 32)` de 1 984 triangles : les 3 marqueurs de l'accord ajoutent 5 952 triangles ([lignes 1303-1365](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeFretboard.tsx#L1303-L1365)). À cette taille, c'est la ligne `unshared` de la leçon 8 : sans problème sur un GPU de bureau, et la première chose à changer sur un téléphone.
+
+**La scène est reconstruite à chaque rendu du parent.** L'effet qui construit tout liste `positions` et `tuning` parmi ses dépendances ([ligne 424](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeFretboard.tsx#L424)). `positions` vaut `[]` par défaut ([ligne 58](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeFretboard.tsx#L58)), et la page de démonstration de GA passe `config` sous forme de littéral d'objet, avec l'accordage en littéral de tableau à l'intérieur ([`main.tsx`, lignes 147-160](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/main.tsx#L147-L160)) : de nouveaux tableaux à chaque rendu. La sonde a mesuré la conséquence : 10 rendus du parent avec les mêmes notes, 10 constructions de scène de plus. La fréquence à laquelle les parents de GA se rendent en pratique est *à vérifier* avec le profileur de React ; la leçon 8 a soulevé la question, cette leçon compte ce que coûte chaque rendu.
+
+**Chaque reconstruction laisse fuir les étiquettes.** Le nettoyage parcourt la scène et libère les maillages, leurs géométries, leurs matériaux et leurs maps ([lignes 383-423](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeFretboard.tsx#L383-L423)). Les sprites ne sont pas des maillages : leurs 29 textures canvas restent sur le GPU. 32 textures sont devenues 322 après 10 reconstructions, 29 de plus à chaque fois, et 351 avec l'accord. Le nombre de géométries reste à 41, puisque les sprites partagent une seule géométrie et que les maillages sont libérés. Dans le composant complet de GA, les marqueurs reçoivent aussi des sprites d'étiquette ([lignes 1355-1363](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeFretboard.tsx#L1355-L1363)), qui fuient de la même façon.
+
+**Neuf fois plus de pixels.** `setPixelRatio(Math.min(window.devicePixelRatio * 3, 6))` ([ligne 204](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeFretboard.tsx#L204)) donne un drawing buffer de 2400 × 801 pour un canvas de 800 × 267 à un pixel ratio de 1, et jusqu'à 6 × 6 = 36 fois plus de pixels sur un écran haute densité. Son commentaire dit « for crisp rendering and smooth edges » : du suréchantillonnage, en plus des 8 échantillons MSAA qu'il demande. Chaque pixel est calculé par le shader, puis moyenné vers le bas par le navigateur.
+
+**Pas de sélection.** Le composant accepte une prop `onPositionClick`, la renomme `_onPositionClick` ([ligne 60](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeFretboard.tsx#L60)), et ne l'appelle jamais ; il n'y a aucun `Raycaster` dans le fichier. Le clic de la sonde n'a rien fait.
+
+**`programs: -4` après le démontage.** L'effet de démontage de GA libère le renderer ([lignes 427-443](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeFretboard.tsx#L427-L443)), ce qui est juste pour un composant qui possède son renderer. `renderer.info` reste lisible après `dispose()`, et son compte de programmes est devenu négatif : les compteurs d'un renderer libéré n'ont pas de sens, ce qui est bon à savoir avant d'écrire un test de fuite qui s'appuie sur eux.
+
+### Sur une machine sans WebGPU
+
+Dans `chromium-headless-shell`, où `WebGPURenderer` se replie sur WebGL 2 avec SwiftShader, la version de GA a produit les mêmes comptes, et un canvas vide. La console montre pourquoi :
+
+```text
+console.warning: [.WebGL-0x2afc00409400] GL_INVALID_OPERATION: glRenderbufferStorageMultisample: Samples value is negative or greater than maximum supported value for the format.
+console.warning: [.WebGL-0x2afc00409400] GL_INVALID_FRAMEBUFFER_OPERATION: glClearBufferfv: Framebuffer is incomplete: Attachment has zero size.
+console.warning: [.WebGL-0x2afc00409400] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment has zero size.
+...
+```
+
+`samples: 8` ([lignes 158-165](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeFretboard.tsx#L158-L165)) demande au backend WebGL 2 un render target multiéchantillonné à 8 échantillons. Le maximum de SwiftShader est plus bas, le renderbuffer n'est jamais alloué, et chaque draw call va vers un framebuffer incomplet : 253 lignes d'erreur WebGL en une sonde, puis le « too many errors » de Chromium, et rien à l'écran. `renderer.info` a quand même compté les draw calls, puisqu'il compte ce que three.js a demandé. Le journal de la leçon 1 laissait « ce que fait r180 avec 8 échantillons sur chaque backend » *à vérifier* ; sur r186, le WebGL 2 de SwiftShader ne dessine rien. Qu'un vrai GPU accepte 8 en WebGL 2 dépend de son `MAX_SAMPLES` (*à vérifier* pour chaque GPU) ; le portage demande `antialias: true`, que `WebGPURenderer` transforme en 4 échantillons ([`Renderer.js`, ligne 275](https://github.com/mrdoob/three.js/blob/r186/src/renderers/common/Renderer.js#L275)), le nombre que WebGPU lui-même autorise. `check.sh` retire ces lignes d'erreur de la sortie comparée, puisqu'elles portent une adresse de contexte, et affiche leur nombre.
+
+## Le portage, pièce par pièce
+
+### Instanciation et ressources partagées
+
+Tout ce que crée le portage est fait une seule fois, dans un seul `useMemo`, et libéré d'un bloc quand le composant est démonté ([lignes 25-46](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/13-fretboard/Fretboard3D.tsx#L25-L46)) :
+
+```tsx
+// Tout est créé ici une seule fois, et libéré d'un bloc
+const assets = useMemo(() => {
+  const fretGeometry = new THREE.CapsuleGeometry(0.15, NUT_WIDTH - 0.3, 4, 12).rotateX(Math.PI / 2);
+  const fretMaterial = new THREE.MeshStandardMaterial({ color: 0xd8d0c0, metalness: 1, roughness: 0.28 });
+  ...
+}, [length, stringLength]);
+useEffect(
+  () => () => {
+    for (const value of Object.values(assets)) if ('dispose' in value) value.dispose();
+  },
+  [assets],
+);
+```
+
+Les 22 frettes, les 10 incrustations et jusqu'à 24 marqueurs sont trois objets `InstancedMesh`, comme l'a mesuré la leçon 8, avec des matrices écrites dans un `useLayoutEffect`, avant la première image de R3F ([lignes 58-71](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/13-fretboard/Fretboard3D.tsx#L58-L71)). Les frettes utilisent `MeshStandardMaterial` au lieu du `MeshPhysicalMaterial` de GA avec clearcoat et sheen : à cette taille, le second lobe spéculaire du clearcoat sur un fil de frette de 3 mm ne se voit pas, et il coûte un shader plus lourd (un jugement fait sur les captures d'écran, *à vérifier* de près). Les capsules ont 4 × 12 segments au lieu de 8 × 24 : 10 335 triangles pour tout le manche au lieu de 19 623.
+
+Les marqueurs reçoivent leur couleur par instance avec `setColorAt`. La première capture d'écran du portage les montrait blancs : la page monte le manche sans marqueurs, donc `setColorAt` a créé l'attribut `instanceColor` seulement après que le shader du matériau avait été construit sans lui, et les couleurs étaient ignorées. Le portage alloue maintenant l'attribut pour les 24 emplacements dès le départ ([lignes 33-35](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/13-fretboard/Fretboard3D.tsx#L33-L35)), et les programmes sont passés de 12 à 13.
+
+### Des marqueurs indexés par leur contenu
+
+Les marqueurs dépendent d'une chaîne construite à partir du contenu des positions, pas du tableau ([lignes 73-89](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/13-fretboard/Fretboard3D.tsx#L73-L89)) :
+
+```tsx
+// Les marqueurs dépendent du contenu des positions, pas de l'identité du tableau : un nouveau [] avec les mêmes notes ne change rien
+const positionsKey = positions.map((p) => `${p.string}:${p.fret}:${p.color ?? ''}`).join(',');
+```
+
+Les 10 rendus avec un nouveau tableau n'ont rien construit ; l'affichage de l'accord a construit les marqueurs une fois de plus, `markerBuilds: 2`, et a changé `count` sur le même `InstancedMesh` : 7 draw calls, les mêmes 7 géométries. Rien d'autre dans le portage ne dépend des props, donc aucun rendu du parent ne reconstruit le manche.
+
+### 23 étiquettes, une seule texture
+
+Les numéros de frettes sont dessinés une fois dans un canvas de 4 096 × 128, à l'abscisse de chaque frette, et affichés sur un seul plan le long du manche ([lignes 137-151](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/13-fretboard/Fretboard3D.tsx#L137-L151)) : une texture, un matériau, un draw call, au lieu de 23 de chaque. Contrairement aux sprites, le plan ne se tourne pas vers la caméra ; pour un manche vu d'en haut, cela se lit bien, et c'est ce que fait un repère de frette imprimé.
+
+### Des cordes qui vibrent en TSL
+
+Les cordes de GA « respirent » : à chaque image, chaque maillage de corde reçoit une minuscule rotation autour de son propre axe, `Math.sin(t + i) * 0.02 * 0.05` radians ([lignes 361-367](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeFretboard.tsx#L361-L367)), un millième de radian, sur le CPU. Les six cordes du portage sont un seul `InstancedMesh` dont les sommets bougent dans le vertex shader, comme la leçon 6 l'a fait pour une corde. Ce qui diffère d'une corde à l'autre, son rayon, sa fréquence et le moment où elle a été pincée, est un attribut instancié ([lignes 119-135](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/13-fretboard/Fretboard3D.tsx#L119-L135)) :
+
+```tsx
+function vibratingStrings(stringLength: number) {
+  // Le tirant en pouces est un diamètre : GA l'utilise comme rayon (ligne 1079), ce qui dessine des cordes deux fois trop épaisses
+  const radii = new THREE.InstancedBufferAttribute(new Float32Array([0.01, 0.013, 0.017, 0.026, 0.036, 0.046].map((g) => (g * 2.54) / 20)), 1);
+  const frequencies = new THREE.InstancedBufferAttribute(new Float32Array(Array.from({ length: STRINGS }, (_, s) => 60 - s * 6)), 1);
+  const pluckedAt = new THREE.InstancedBufferAttribute(new Float32Array(STRINGS).fill(-100), 1);
+  const now = uniform(0);
+  const stringGeometry = new THREE.CylinderGeometry(1, 1, stringLength, 12, 32, true);
+  const stringMaterial = new THREE.MeshStandardNodeMaterial({ color: 0xd0c8b8, metalness: 1, roughness: 0.3 });
+  const age = max(now.sub(instancedDynamicBufferAttribute(pluckedAt, 'float')), float(0));
+  // uv().y court le long de la corde ; le décalage est divisé par le rayon, puisque la matrice d'instance multiplie le X local par celui-ci
+  const amplitude = float(0.12).div(instancedBufferAttribute(radii, 'float'));
+  const offset = amplitude.mul(sin(uv().y.mul(Math.PI))).mul(cos(age.mul(instancedBufferAttribute(frequencies, 'float')))).mul(exp(age.mul(-3)));
+  stringMaterial.positionNode = positionLocal.add(vec3(offset, 0, 0));
+  return { stringGeometry, stringMaterial, radii, pluckedAt, now };
+}
+```
+
+Un clic règle un élément de `pluckedAt` sur l'heure courante et marque le buffer pour l'envoi au GPU ; le shader fait le reste : une demi-sinusoïde le long de la corde, qui oscille et s'amortit exponentiellement. Les fréquences sont visuelles, pas celles des notes (un vrai mi grave vibre à 82 Hz, bien plus vite que ce qu'un écran à 60 Hz peut montrer). Une première version donnait à chaque corde son propre matériau et ses propres uniforms : 17 programmes au lieu de 12, avant que les couleurs des marqueurs en ajoutent un. `instancedBufferAttribute` a besoin de son type, `'float'`, pour `@types/three`, qui ne peut pas le déduire de l'attribut.
+
+Les tirants sont ceux de GA, en pouces. GA les convertit avec `g * 2.54 / 10` et utilise le résultat comme rayon du cylindre ([lignes 1078-1079](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeFretboard.tsx#L1078-L1079)) ; un tirant est un diamètre, donc les cordes de GA sont deux fois plus épaisses que celles de la guitare. Le portage divise par 20.
+
+### Sélection
+
+Le maillage de la touche a un gestionnaire `onPointerDown` : R3F lance le rayon, `fretAtX` et `stringAtZ` transforment le point touché en frette et en corde, la corde est pincée, et `onPositionClick` reçoit la note ([lignes 91-100](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/13-fretboard/Fretboard3D.tsx#L91-L100)). Les cordes et les étiquettes ont `raycast={() => null}`, pour que le rayon atteigne la touche. Le clic de la sonde sur la corde 3, frette 2 a donné E3, et `pluckedStrings: [3]`.
+
+### Pixel ratio et libération
+
+`<Canvas dpr={[1, 2]}>` plafonne le pixel ratio à 2 : 800 × 266 à un ratio de 1, et au plus 4 fois plus de pixels sur un écran haute densité, au lieu des 36 de GA. Après le démontage, les comptes reviennent à ceux du canvas vide de R3F : une géométrie et une paire de programmes pour la passe de sortie, 3 textures internes. Il ne reste rien de ce que le portage a créé.
+
+## Le portage dans GA
+
+Le portage est écrit pour la page de ce cours ; l'intégrer à GA est un changement à part, et rien n'a été proposé à GA. Ce qu'il faudrait :
+
+- **React 19 et R3F 9.** Les composants de GA utilisent R3F 8 et React 18 (leçon 9). Autrement, les mêmes idées s'intègrent à la structure `useEffect` existante de GA : découper l'effet pour que le manche soit construit une fois, et que les marqueurs soient mis à jour dans leur propre effet indexé par le contenu ; libérer les textures des sprites ; plafonner le pixel ratio ; ajouter un `Raycaster`.
+- **`MeshPhysicalMaterial`, les textures de bois, le capodastre et les modèles de guitare** que la reproduction a laissés de côté. Chaque matériau partagé tient en une ligne ; le modèle du capodastre se charge de façon asynchrone et peut arriver après un nettoyage ([lignes 1188-1201](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeFretboard.tsx#L1188-L1201)) : il a besoin de la même vérification `isMounted` que le renderer.
+- **Tests.** Les tests de composants de la leçon 12 s'exécutent sur le portage comme sur le manche de la leçon 9 ; le `fretboard.spec.ts` de GA recevrait une condition à attendre au lieu de 3 secondes.
+
+## À retenir
+
+- Reproduisez avant de porter : la base mesurée, 69 draw calls, 32 textures et 11 constructions de scène pour 10 rendus, est ce qui donne un sens aux nombres du portage.
+- L'essentiel du gain vient des leçons 8 et 9 : un `InstancedMesh` par sorte d'objet, des ressources créées une fois, des dépendances au contenu plutôt qu'à l'identité.
+- Les fuites se voient à des comptes qui croissent avec les rendus : ici, 29 textures par reconstruction.
+- Un pixel ratio de 3, c'est 9 fois le travail ; plafonnez-le à 2.
+- Testez sur une machine sans WebGPU : les 8 échantillons de GA ne dessinent rien sur le WebGL 2 de SwiftShader.
+- Les couleurs par instance d'un `InstancedMesh` doivent exister avant son premier rendu, sinon le shader les ignore.
+
+## Exercices
+
+1. Ajoutez un capodastre au portage : un paramètre `?capo=3` qui dessine une barre en travers de la frette 3 et décale les notes que rapporte `onPositionClick`. Quelles parties du composant en dépendent ?
+2. Affichez une gamme au lieu d'un accord : la gamme de do majeur sur les six cordes, des cordes à vide à la frette 12. Combien de marqueurs cela fait-il, et que faut-il changer dans le portage ?
+3. Remplacez le plan des numéros de frettes par des sprites tournés vers la caméra, sans revenir à 23 textures.
+
+<details>
+<summary>Solution 1</summary>
+
+Un capodastre à la frette `c` se place entre la frette `c − 1` et la frette `c` : une boîte de la largeur du manche à `markerX(c)`, au-dessus des cordes. Les notes changent : un clic à une frette `f` en deçà du capodastre sonne comme la frette du capodastre ; à sa hauteur ou au-delà, comme la frette `f`. Donc `noteAt(string, Math.max(f, c))`, et un clic derrière le capodastre n'est pas une note jouable. Le capodastre est une nouvelle prop : le maillage du capodastre en dépend, et le gestionnaire de clic aussi ; les frettes, les incrustations, les cordes et les étiquettes, non, donc elle ne doit pas être une dépendance de `assets`. Le `capoFret` de GA figure dans les dépendances de son unique effet, et reconstruit tout. Une conception, pas du code exécuté (*à vérifier*).
+
+</details>
+
+<details>
+<summary>Solution 2</summary>
+
+Do majeur a 7 classes de hauteurs. De la frette 0 à la frette 12 sur une corde, 13 frettes en contiennent 8 : les 7 notes, et l'octave de la note de la corde à vide, puisque la frette 12 répète la frette 0, quand cette note est dans la gamme. Compté corde par corde en accordage standard : les cordes de mi, si, sol, ré, la et mi sont toutes dans do majeur, donc chaque corde porte 8 notes de la gamme entre les frettes 0 et 12, et la gamme fait 48 marqueurs (une boucle Node.js de trois lignes sur les numéros MIDI des cordes à vide a donné 48). Le `MAX_MARKERS` du portage vaut 24 : montez-le à 48 ou plus, ce qui fait un buffer plus grand, pas plus de draw calls ; les marqueurs de la frette 0 se placent avant le sillet, là où `markerX(0)` les met. Dans la structure de GA, 48 marqueurs feraient 48 géométries de 1 984 triangles, 95 232 triangles, et 48 matériaux.
+
+</details>
+
+<details>
+<summary>Solution 3</summary>
+
+Gardez une seule image, et donnez à chaque étiquette sa propre région de celle-ci. Le canvas contient déjà les numéros côte à côte, mais `offset` et `repeat` appartiennent à une texture, pas à un matériau : 23 sprites qui montrent des régions différentes ont besoin de 23 textures, ou de 23 clones d'une texture, qui partagent son image (`texture.clone()` garde la même source ; que le renderer envoie alors l'image une seule fois est *à vérifier* dans `renderer.info.memory.textures`). La voie la moins chère est un seul `InstancedMesh` de quads avec un node material : le vertex shader tourne chaque quad vers la caméra, comme un sprite, et un attribut instancié choisit la région de l'étiquette dans la texture, dans le fragment shader. Une texture, un matériau, un draw call. Une conception, pas du code exécuté (*à vérifier*).
+
+</details>
+
+## Sources
+
+- GuitarAlchemist/ga à `05c8eda` : [`ThreeFretboard.tsx`](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeFretboard.tsx), [`main.tsx`](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/main.tsx)
+- Documentation de three.js : [`InstancedMesh`](https://threejs.org/docs/pages/InstancedMesh.html), [`CanvasTexture`](https://threejs.org/docs/pages/CanvasTexture.html), [`Sprite`](https://threejs.org/docs/pages/Sprite.html), [TSL](https://threejs.org/docs/pages/TSL.html)
+- React Three Fiber : [`Canvas`](https://r3f.docs.pmnd.rs/api/canvas), [scaling performance](https://r3f.docs.pmnd.rs/advanced/scaling-performance)
+- Khronos : [spécification WebGL 2.0](https://registry.khronos.org/webgl/specs/latest/2.0/), `renderbufferStorageMultisample` ; W3C : [WebGPU](https://gpuweb.github.io/gpuweb/), `GPUTextureDescriptor.sampleCount`

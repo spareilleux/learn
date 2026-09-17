@@ -150,7 +150,7 @@ GA's React components have 22 Playwright spec files under `tests/`: 15 in the da
 
 1. Write a component test for lesson 13's port that checks that 10 renders with a new `positions` array of the same content build the markers once. What does the test renderer not let you check about the port's strings?
 2. `floor0-navigation.spec.ts` wants to know whether a WebGL canvas is black. Write the check two ways: from Playwright's screenshot, and from inside the page.
-3. The course's pixel comparison passes at 10,330 differing bytes. Design a check that would catch lesson 3's tone mapping switched from ACES to AgX on any runner, without a byte-exact reference.
+3. The course's pixel comparison passes with 10,330 pixels that aren't byte-identical. Design a check that would catch lesson 3's tone mapping switched from ACES to AgX on any runner, without a byte-exact reference.
 
 <details>
 <summary>Solution 1</summary>

@@ -1,0 +1,201 @@
+---
+title: "12. Pruebas y CI: renderizado headless, capturas de pantalla comparadas, y sus límites"
+description: Cómo prueba este curso el código 3D en tres sistemas operativos, y lo que aprendió al hacerlo — funciones puras en Node.js, componentes de React Three Fiber sin GPU con Vitest y @react-three/test-renderer, páginas sondeadas en Chromium headless a través de renderer.info, capturas de pantalla comparadas con pixelmatch, con qué renderizan los runners de CI, y seis formas en que una prueba 3D se volvió inestable o se colgó en este curso, comparado con la automatización de UI y las pruebas de snapshot en .NET y con las specs de Playwright de GuitarAlchemist.
+sidebar:
+  order: 12
+---
+
+Código: las pruebas de componentes en [`tests/fretboard.test.tsx`](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/tests/fretboard.test.tsx), la comparación de píxeles en [`scripts/l12-pixels.ts`](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/scripts/l12-pixels.ts), el ejecutor de sondas en [`scripts/probe.mjs`](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/scripts/probe.mjs), y la comprobación completa en [`check.sh`](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/check.sh), ejecutada por [`.github/workflows/threejs-examples.yml`](https://github.com/spareilleux/learn/blob/eeca669/.github/workflows/threejs-examples.yml).
+
+## Cuatro capas
+
+Una página 3D mezcla código que cualquier ejecutor de pruebas puede comprobar con código que necesita una GPU, y una GPU es justo lo que suele faltar en las máquinas de CI. Este curso prueba en cuatro capas, de la más barata a la menos fiable:
+
+| Capa | Qué se ejecuta | Necesita | En términos de .NET | En este curso |
+|---|---|---|---|---|
+| Lógica pura | matemáticas, notas, física | Node.js | xUnit sobre una biblioteca de clases | `fretAt`, `noteName`, los rayos de `l05-raycaster.ts`, Rapier en `l10-rapier.ts` |
+| Componentes | el grafo de escena que construye un componente, sus props y sus eventos | Node.js, sin GPU | una prueba de view model; bUnit para Blazor | Vitest con `@react-three/test-renderer` |
+| Páginas sondeadas | el renderer real, en un navegador real | un navegador, una GPU o un rasterizador por software | automatización de UI con FlaUI o Appium | `probe.mjs`: `renderer.info`, colores, hashes, eventos de puntero |
+| Píxeles | lo que muestra la pantalla | la misma GPU y el mismo driver, siempre | comparación de capturas de pantalla, pruebas de snapshot con Verify | `l12-pixels.ts`, y los colores leídos en las lecciones 1 a 7 |
+
+Las capas superiores detectan más y se rompen con más facilidad. El curso compara las tres inferiores en todas partes, y los píxeles solo donde puede explicar qué difiere.
+
+## Componentes sin GPU
+
+[`@react-three/test-renderer`](https://github.com/pmndrs/react-three-fiber/tree/master/packages/test-renderer) 9.1.1 ejecuta el reconciliador de R3F en Node.js: `create(<Fretboard />)` construye el grafo de escena de three.js a partir del componente, con objetos `Mesh` y `BufferGeometry` reales, y no se dibuja nada. [Vitest](https://vitest.dev/) 5.0.1 ejecuta las pruebas, con la transformación de Vite, así que los archivos `.tsx` no necesitan una compilación aparte.
+
+Las cinco pruebas comprueban lo que la lección 9 midió en el navegador ([`fretboard.test.tsx`](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/tests/fretboard.test.tsx)): el mástil, 12 trastes y 6 cuerdas; una geometría compartida por los trastes, o 12 cuando están en línea; los marcadores calculados una vez para el mismo array, y en cada render para uno nuevo; la nota bajo el puntero; y 8 geometrías liberadas al desmontar. La prueba del puntero muestra el límite de la capa: no se lanza ningún rayo, la prueba proporciona el punto de intersección que R3F habría calculado ([líneas 60-69](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/tests/fretboard.test.tsx#L60-L69)):
+
+```tsx
+test('reports the note under the pointer', async () => {
+  const picks: Pick[] = [];
+  const renderer = await ReactThreeTestRenderer.create(<Fretboard onPick={(pick) => picks.push(pick)} />);
+  const group = renderer.scene.find((node) => node.props.name === 'fretboard');
+  // Aquí no se lanza ningún rayo: la prueba proporciona el punto de intersección que R3F habría calculado
+  await renderer.fireEvent(group, 'onPointerMove', { point: pressPoint(3, 5), stopPropagation: () => {} });
+  expect(picks).toEqual([{ fret: 5, string: 3, note: 'C4' }]);
+  expect(renderer.scene.findAll((node) => node.props.name === 'hover')).toHaveLength(1);
+  await renderer.unmount();
+});
+```
+
+```text
+$ npx vitest run tests --reporter=verbose
+
+ RUN  v5.0.1 .
+
+(node:PID) [THREE_CJS_DEPRECATED] DeprecationWarning: `require("three")` is deprecated and will be removed.
+Replace `const THREE = require("three")` with `import * as THREE from "three"`.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+stderr | tests/fretboard.test.tsx > Fretboard > has a neck, 12 frets and 6 strings
+THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+...
+ ✓ tests/fretboard.test.tsx > Fretboard > has a neck, 12 frets and 6 strings
+ ✓ tests/fretboard.test.tsx > Fretboard > shares one geometry between the frets, unless they are written inline
+ ✓ tests/fretboard.test.tsx > Fretboard > computes the markers once for the same array, and on every render for a new one
+ ✓ tests/fretboard.test.tsx > Fretboard > reports the note under the pointer
+ ✓ tests/fretboard.test.tsx > Fretboard > disposes the geometries it created on unmount, including the shared one
+
+ Test Files  1 passed (1)
+      Tests  5 passed (5)
+   Start at  TIME
+   Duration  N
+```
+
+Tres cosas en esa salida:
+
+- **`IS_REACT_ACT_ENVIRONMENT`.** La primera versión del archivo imprimía "The current testing environment is not configured to support act(...)" 23 veces, y su prueba de liberación tenía que esperar a R3F, que libera los objetos eliminados con prioridad idle salvo que se ejecute dentro de `act`. React lee una bandera global para saber que está en una prueba; el archivo ahora la activa ([líneas 10-15](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/tests/fretboard.test.tsx#L10-L15)), los avisos han desaparecido, y R3F libera de inmediato, así que la prueba cuenta las llamadas sin esperar.
+- **Dos copias de three.js.** El aviso de obsolescencia viene de la compilación CommonJS de `@react-three/test-renderer`, que llama a `require('three')` en su línea 6 (encontrado con `--trace-deprecation`): Node.js carga `three.cjs` junto a la compilación de módulos ES que importan las pruebas y el componente. Los objetos de la escena eran instancias de las clases del módulo ES, comprobado con `instanceof` en una prueba desechable, así que la segunda copia cuesta tiempo de carga sin dividir las clases aquí.
+- **`THREE.Clock` otra vez**, desde el store de R3F, como en la lección 9.
+
+`check.sh` ejecuta `vitest run tests`: sin la carpeta, Vitest también recogía una prueba desechable olvidada en `out/`, la carpeta de salida ignorada del curso, y fallaba.
+
+## Páginas sondeadas
+
+Cada página de lección informa de lo que hizo el renderer, y [`probe.mjs`](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/scripts/probe.mjs) lo imprime, como describe la lección 1: recuentos de `renderer.info`, colores leídos de la captura de pantalla, hashes, y lo que la página vio tras eventos de puntero reales. `check.sh` normaliza la salida y la compara con `expected/`. Los recuentos son la columna vertebral de la CI de este curso: la mayoría son los mismos en la GPU del autor y en un rasterizador por software, donde los colores y los tiempos no lo son.
+
+Con qué renderizan los tres runners, según los registros desde la lección 1:
+
+| Runner | `WebGPURenderer` | `WebGLRenderer` y `forceWebGL` | `chromium-headless-shell` |
+|---|---|---|---|
+| `ubuntu-24.04` | alternativa WebGL 2, SwiftShader | SwiftShader | SwiftShader |
+| `windows-2025-vs2026` | alternativa WebGL 2, SwiftShader | SwiftShader | SwiftShader |
+| `macos-26-arm64` | WebGPU, la GPU paravirtualizada de Apple | ANGLE sobre Metal | SwiftShader |
+| La máquina del autor | WebGPU, NVIDIA RTX 5080 | ANGLE sobre Direct3D 11 | SwiftShader |
+
+Así que dos de los tres runners nunca ejecutan el backend WebGPU. Cuando una salida depende del backend, `check.sh` la compara con `expected/<name>.webgl.txt` cuando la página se ejecutó en WebGL 2 desde el principio ([líneas 54-59](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/check.sh#L54-L59)), un archivo generado con `chromium-headless-shell` en la máquina del autor, cuyo SwiftShader ha coincidido hasta ahora con el de los runners. "Desde el principio" importa para la página alternativa de la lección 11: empieza en WebGPU y termina en WebGL 2, y en una GPU hay que compararla con la salida de WebGPU. La propia salida de WebGPU solo se comprueba en la máquina del autor y en macOS.
+
+## Capturas de pantalla, píxel a píxel
+
+[pixelmatch](https://github.com/mapbox/pixelmatch) 7.2.0 compara dos imágenes, cuenta los píxeles cuya distancia de color supera un umbral, en un espacio de color perceptual (YIQ), y puede dejar fuera los píxeles que detecta como antialiasing. `l12-pixels.ts` imprime ese recuento, y antes el más estricto: los píxeles cuyos bytes difieren en lo más mínimo.
+
+La misma página, el cubo de la lección 1, sondeada dos veces en la misma máquina:
+
+```text
+$ node scripts/l12-pixels.ts out/shots/l01_probe.png out/shots/l12_probe_again.png
+l01_probe.png and l12_probe_again.png, 800x450:
+  pixels not byte-identical: 0 (0.00 %)
+  pixels over pixelmatch's threshold 0.1, anti-aliasing excluded: 0 (0.00 %)
+```
+
+`check.sh` compara esta salida en todos los sistemas operativos: una página renderizada dos veces por la misma GPU y el mismo driver da los mismos píxeles. Entre backends, solo imprime los recuentos, ya que dependen de la máquina. En la máquina del autor:
+
+```text
+     l01_probe.png and l01_probe_webgl.png, 800x450:
+       pixels not byte-identical: 294 (0.08 %)
+       pixels over pixelmatch's threshold 0.1, anti-aliasing excluded: 0 (0.00 %)
+     l01_probe.png and l01_probe_headless_shell.png, 800x450:
+       pixels not byte-identical: 10330 (2.87 %)
+       pixels over pixelmatch's threshold 0.1, anti-aliasing excluded: 0 (0.00 %)
+```
+
+WebGPU frente al WebGL 2 de ANGLE en la misma GPU NVIDIA: difieren 294 píxeles. Frente a SwiftShader: 10 330, casi el 3 % de la imagen. Ninguno supera el umbral por defecto de pixelmatch una vez excluido el antialiasing: las diferencias son redondeos en las caras, uno o dos niveles por canal, y bordes rasterizados de otra manera.
+
+![Un cubo gris claro sobre un fondo gris claro, con una línea amarilla punteada a lo largo de sus bordes exteriores donde pixelmatch detectó píxeles con antialiasing que difieren; las caras no muestran ninguna diferencia marcada.](../../../../assets/threejs/l12-pixel-diff.webp)
+
+Una comparación exacta byte a byte falla entre dos cualesquiera de los tres renderers; una con umbral pasa, y también dejaría pasar un cambio real de unos pocos niveles, como el color ACES de la lección 3, 127 en la GPU del autor y 128 en CI. El curso lee colores concretos en posiciones conocidas con una tolerancia de 2 por canal ([`compare.mjs`](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/scripts/compare.mjs)): la comprobación de un número, que un lector puede relacionar con una lección. Las comparaciones de imagen completa tienen sentido donde el renderer es fijo: la misma GPU, el mismo driver y el mismo navegador, como un job de regresión visual en una única máquina dedicada, con las imágenes de referencia regeneradas ahí.
+
+## Seis formas en que una prueba salió mal en este curso
+
+Cada una de estas hizo fallar o colgarse una comprobación antes de corregirse, en las lecciones 1 a 13:
+
+1. **Una promesa reemplazada durante una espera.** La primera sonda de la lección 1 se colgaba: la página reemplazaba `window.probe` después de que `page.evaluate` hubiera empezado a esperar la promesa antigua. Las páginas ahora resuelven una única promesa creada una sola vez.
+2. **Trabajo en cola detrás del resultado.** Las páginas de la lección 8 con 800 000 triángulos informaban a tiempo, y luego la captura de pantalla de Playwright esperaba más de 30 segundos detrás de los fotogramas que seguían en cola en SwiftShader. Esas sondas cronometran menos fotogramas, y esperan hasta 240 segundos.
+3. **Un bucle de render que se detiene.** La página de la lección 11 esperaba fotogramas XR que nunca llegaban, ya que cada uno lanzaba una excepción, y retuvo el bloqueo de GPU compartido de la máquina durante diez minutos hasta que se detuvo a mano. La página ahora captura los errores de render y se rinde a los 5 segundos, y `probe.mjs` termina por sí solo tras el doble de su tiempo límite más 30 segundos ([líneas 19-24](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/scripts/probe.mjs#L19-L24)).
+4. **React agrupando renders en un renderer lento.** La página de la lección 9 contaba 11 renders en la GPU del autor y 6 en `chromium-headless-shell`: cuando los fotogramas son lentos, llegan varias actualizaciones de estado antes de que React renderice, y las agrupa. `flushSync` confirma cada una.
+5. **Eventos de puntero fusionados.** Tras un movimiento de ratón de 5 pasos, los renders contados diferían entre máquinas: el navegador fusiona los eventos `pointermove` cuando los fotogramas son lentos. La página ya no informa de recuentos de renders tras acciones de puntero, y ya no mueve el puntero antes de desmontar.
+6. **Salida que pertenece al sistema operativo.** Chromium en Windows avisa "The powerPreference option is currently ignored" cada vez que R3F pasa `powerPreference`; Linux y macOS no. Los errores de WebGL llevan una dirección de contexto, `[.WebGL-0x2afc00409400]`, distinta en cada ejecución. `check.sh` elimina ambos de la salida comparada, e imprime cuántos errores de WebGL hubo.
+
+El hilo común: una prueba 3D espera fotogramas, y los fotogramas dependen de la máquina. Espera una condición, no una duración; acota cada espera; aplica los cambios de estado de forma síncrona; compara lo que no depende del tiempo.
+
+## En GuitarAlchemist/ga
+
+Los componentes React de GA tienen 22 archivos de specs de Playwright bajo `tests/`: 15 en la suite del panel, bajo `tests/dashboard/`, y otros 7, 6 de ellos sobre páginas 3D (el séptimo prueba el conversor de tablaturas).
+
+- **Esperar una duración.** `fretboard.spec.ts` espera al canvas, y luego 3 segundos "for WebGPU initialization" ([líneas 22-27](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/tests/fretboard.spec.ts#L22-L27)), y llama a `waitForTimeout` 25 veces. En un runner lento, 3 segundos pueden no bastar; en la máquina del autor, son 3 segundos perdidos por prueba. Una página que activa una bandera, o un atributo `data-`, cuando su primer fotograma está renderizado le da a la prueba algo que esperar.
+- **Aserciones que no pueden fallar, y una que no puede pasar.** `bsp-doom-explorer.spec.ts` hace una captura del canvas y afirma `expect(screenshot).toBeTruthy()` ([líneas 14-20](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/tests/bsp-doom-explorer.spec.ts#L14-L20)): un `Buffer` siempre es truthy, incluso para una imagen negra. Más adelante, dos capturas separadas 2 segundos deben diferir ([líneas 76-87](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/tests/bsp-doom-explorer.spec.ts#L76-L87)), algo que un cursor parpadeante o un temporizador satisfarían. `floor0-navigation.spec.ts` comprueba que el canvas no es negro llamando a `getContext('2d')` sobre él ([líneas 280-298](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/tests/floor0-navigation.spec.ts#L280-L298)); un canvas que ya tiene un contexto WebGL o WebGPU devuelve `null` para uno 2D, la función devuelve `true`, "todo negro", y `expect(isBlack).toBe(false)` falla dibuje lo que dibuje la escena. Leer el canvas funciona con `toDataURL` desde el mismo fotograma (con `preserveDrawingBuffer`), o con la captura de la página, como hace `probe.mjs`.
+- **Resultados en el repositorio, no ejecutados.** 13 archivos bajo `ReactComponents/ga-react-components/test-results/` están en el repositorio, incluido un `.last-run.json` cuyo estado es `failed`, con 13 pruebas fallidas. El workflow de CI que ejecuta Playwright, `playwright-dashboard.yml`, solo ejecuta `tests/dashboard/`, contra el sitio en producción, y ninguna de las specs 3D.
+- **La GPU de los runners, conocida.** El `deploy-banner.yml` de GA explica por qué dejó de capturar su banner en CI: "GitHub runners have no GPU and SwiftShader renders WebGPU compute as black frames" ([líneas 64-69](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/.github/workflows/deploy-banner.yml#L64-L69)). Eso coincide con la tabla de este curso: en Linux, WebGPU recurre a WebGL 2, y un compute shader no tiene ninguna alternativa.
+
+## Puntos clave
+
+- Prueba el código 3D por capas: lógica pura y componentes sin GPU en todas partes, páginas sondeadas mediante recuentos, píxeles solo en una máquina fija.
+- `@react-three/test-renderer` construye el grafo de escena real en Node.js; activa `IS_REACT_ACT_ENVIRONMENT` en el archivo de pruebas.
+- Los recuentos de `renderer.info` son los mismos en una GPU y en SwiftShader; los colores y los tiempos no.
+- Dos de los tres runners de GitHub nunca ejecutan WebGPU: conoce con qué renderiza cada uno, y mantén salidas esperadas separadas por backend.
+- Las capturas exactas byte a byte fallan entre renderers; una comparación con umbral oculta pequeños cambios reales. Lee en su lugar valores concretos, con una tolerancia declarada.
+- Nunca esperes una duración ni fotogramas sin límite: espera una condición, con un tiempo límite, y aplica los cambios de estado de forma síncrona.
+
+## Ejercicios
+
+1. Escribe una prueba de componente para el port de la lección 13 que compruebe que 10 renders con un array `positions` nuevo del mismo contenido construyen los marcadores una sola vez. ¿Qué no te deja comprobar el test renderer sobre las cuerdas del port?
+2. `floor0-navigation.spec.ts` quiere saber si un canvas WebGL es negro. Escribe la comprobación de dos formas: a partir de la captura de Playwright, y desde dentro de la página.
+3. La comparación de píxeles del curso pasa con 10 330 píxeles que no son idénticos byte a byte. Diseña una comprobación que detecte que el tone mapping de la lección 3 pasó de ACES a AgX en cualquier runner, sin una referencia exacta byte a byte.
+
+<details>
+<summary>Solución 1</summary>
+
+```tsx
+test('builds the markers once for the same positions', async () => {
+  const positions = () => C_MAJOR.map((p) => ({ ...p }));
+  const renderer = await ReactThreeTestRenderer.create(<Fretboard3D positions={positions()} />);
+  for (let i = 0; i < 10; i++) await renderer.update(<Fretboard3D positions={positions()} />);
+  expect(portStats.markerBuilds).toBe(1);
+  await renderer.unmount();
+});
+```
+
+Las cuerdas se mueven en su vertex shader, en TSL: el test renderer construye el `InstancedMesh` y su material de nodos, pero no se compila ni se ejecuta ningún shader, así que la vibración no se puede comprobar ahí. El `useLayoutEffect` del port también escribe matrices de instancia, que la prueba puede leer con `getMatrixAt`. Un esbozo, no ejecutado: `Fretboard3D` importa `three/webgpu` y dibuja una textura de canvas, lo que necesita un `document` (*por verificar* con el entorno `jsdom` o `happy-dom` de Vitest).
+
+</details>
+
+<details>
+<summary>Solución 2</summary>
+
+Desde Playwright, que captura lo que la página compuso:
+
+```ts
+const png = PNG.sync.read(await page.locator('canvas').screenshot());
+let lit = 0;
+for (let i = 0; i < png.data.length; i += 4) if (png.data[i] > 10 || png.data[i + 1] > 10 || png.data[i + 2] > 10) lit++;
+expect(lit).toBeGreaterThan(1000);
+```
+
+Desde la página: dibuja el canvas 3D sobre un canvas 2D, `ctx2d.drawImage(glCanvas, 0, 0)`, y luego `getImageData`. Para un contexto WebGL, eso solo lee el búfer de dibujo en la misma tarea que el fotograma, salvo que el contexto se creara con `preserveDrawingBuffer: true`; si no, la imagen está borrada, y negra. La captura no necesita ninguna de las dos cosas, y por eso `probe.mjs` lee los colores de ella. No ejecutado contra GA (*por verificar*).
+
+</details>
+
+<details>
+<summary>Solución 3</summary>
+
+Lee lo que cambia el tone mapping, no la imagen entera: la sonda de la lección 3 ya lee parches de valores lineales conocidos. Elige los parches donde los operadores difieren: en el lineal 0.18, ACES da 127 y AgX 128, demasiado cerca para distinguirlos entre GPUs; en el lineal 1, ACES da 227 y AgX 202, y en 0.05, 50 y 70 (la tabla de la lección 3). Esas diferencias son de decenas de niveles, muy por encima de los 2 niveles que separan a las GPUs, así que una comprobación de esos parches, cada uno con una tolerancia de 2, detecta el cambio en todas partes. Para una comprobación de imagen completa, compara con una referencia hecha en el mismo tipo de runner, y fija el umbral de pixelmatch entre el propio ruido del runner (0 píxeles distintos para la misma página dos veces) y el menor cambio que te importe, medido, no adivinado.
+
+</details>
+
+## Fuentes
+
+- [@react-three/test-renderer](https://github.com/pmndrs/react-three-fiber/tree/master/packages/test-renderer); [Vitest](https://vitest.dev/guide/); React: [`act`](https://react.dev/reference/react/act) e `IS_REACT_ACT_ENVIRONMENT`, [`flushSync`](https://react.dev/reference/react-dom/flushSync)
+- [Playwright](https://playwright.dev/docs/screenshots): capturas de pantalla, [`page.mouse`](https://playwright.dev/docs/api/class-mouse)
+- [pixelmatch](https://github.com/mapbox/pixelmatch)
+- MDN: [`HTMLCanvasElement.getContext`](https://developer.mozilla.org/docs/Web/API/HTMLCanvasElement/getContext), [`preserveDrawingBuffer`](https://developer.mozilla.org/docs/Web/API/HTMLCanvasElement/getContext#preservedrawingbuffer), [fusión de eventos de puntero](https://developer.mozilla.org/docs/Web/API/PointerEvent/getCoalescedEvents)
+- [SwiftShader](https://github.com/google/swiftshader); GitHub: [imágenes de los runners](https://github.com/actions/runner-images)

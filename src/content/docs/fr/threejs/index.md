@@ -7,7 +7,7 @@ sidebar:
 ---
 
 :::note[Version étudiée]
-[three.js](https://threejs.org/) **r186** (le paquet npm `three` 0.186.0, publié le 8 septembre 2026), avec [`@types/three`](https://www.npmjs.com/package/@types/three) 0.186.0, servi et construit par [Vite](https://vite.dev/) 8.3.0, vérifié avec [TypeScript](https://www.typescriptlang.org/) 7.0.2, et mesuré dans Chromium headless avec [Playwright](https://playwright.dev/) 1.63.0 sur [Node.js](https://nodejs.org/) 24. Les scènes et les scripts du cours se trouvent dans [`code/threejs`](https://github.com/spareilleux/learn/tree/8bf126b/code/threejs), avec un `package.json` et un fichier de verrouillage qui fixent aussi [glTF Transform](https://gltf-transform.dev/) 4.5.0. [`.github/workflows/threejs-examples.yml`](https://github.com/spareilleux/learn/blob/8bf126b/.github/workflows/threejs-examples.yml) exécute [`check.sh`](https://github.com/spareilleux/learn/blob/8bf126b/code/threejs/check.sh) sous Linux, Windows et macOS : il vérifie les types de tout le code, exécute les scripts Node.js, ouvre chaque page de leçon dans Chromium headless, construit les pages, et compare les sorties avec celles collées dans les leçons.
+[three.js](https://threejs.org/) **r186** (le paquet npm `three` 0.186.0, publié le 8 septembre 2026), avec [`@types/three`](https://www.npmjs.com/package/@types/three) 0.186.0, servi et construit par [Vite](https://vite.dev/) 8.3.0, vérifié avec [TypeScript](https://www.typescriptlang.org/) 7.0.2, et mesuré dans Chromium headless avec [Playwright](https://playwright.dev/) 1.63.0 sur [Node.js](https://nodejs.org/) 24. Les scènes et les scripts du cours se trouvent dans [`code/threejs`](https://github.com/spareilleux/learn/tree/eeca669/code/threejs), avec un `package.json` et un fichier de verrouillage qui fixent aussi [glTF Transform](https://gltf-transform.dev/) 4.5.0, et pour les leçons 9 à 13 [React](https://react.dev/) 19.2.8, [React Three Fiber](https://r3f.docs.pmnd.rs/) 9.7.0, [drei](https://drei.docs.pmnd.rs/) 10.7.8, [Rapier](https://rapier.rs/) 0.20.0, [IWER](https://github.com/meta-quest/immersive-web-emulation-runtime) 2.4.0, [Vitest](https://vitest.dev/) 5.0.1 et [pixelmatch](https://github.com/mapbox/pixelmatch) 7.2.0. [`.github/workflows/threejs-examples.yml`](https://github.com/spareilleux/learn/blob/eeca669/.github/workflows/threejs-examples.yml) exécute [`check.sh`](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/check.sh) sous Linux, Windows et macOS : il vérifie les types de tout le code, exécute les scripts Node.js et les tests de composants, ouvre chaque page de leçon dans Chromium headless, construit les pages, et compare les sorties avec celles collées dans les leçons.
 :::
 
 ## Pourquoi j'apprends ça
@@ -63,12 +63,14 @@ Le vrai code est [GuitarAlchemist/ga](https://github.com/GuitarAlchemist/ga) au 
 | 6 | [TSL et matériaux à nœuds](06-tsl-node-materials/) | effets HLSL, graphes de shaders |
 | 7 | [Post-traitement avec `RenderPipeline`](07-post-processing-renderpipeline/) | render targets, pixel shaders |
 | 8 | [La performance, mesurée : instanciation, `BatchedMesh`, LOD, frustum culling](08-performance-instancing-batching-lod/) | dessin instancié, profileurs |
-| 9 | React Three Fiber et drei (prochainement) | le data binding de WPF, composants Blazor ou React |
-| 10 | Physique avec Rapier en WebAssembly | BEPUphysics, moteurs physiques de jeux |
-| 11 | WebXR | Windows Mixed Reality, OpenXR |
-| 12 | Tests et CI : rendu headless, captures d'écran comparées, et leurs limites | automatisation d'interface, tests de snapshot |
-| 13 | Projet : le manche de guitare 3D de GuitarAlchemist, porté vers WebGPU | |
+| 9 | [React Three Fiber et drei](09-react-three-fiber-drei/) | le data binding de WPF, composants Blazor ou React |
+| 10 | [Physique avec Rapier en WebAssembly](10-physics-rapier-wasm/) | BEPUphysics, moteurs physiques de jeux |
+| 11 | [WebXR](11-webxr/) | Windows Mixed Reality, OpenXR |
+| 12 | [Tests et CI : rendu headless, captures d'écran comparées, et leurs limites](12-tests-and-ci/) | automatisation d'interface, tests de snapshot |
+| 13 | [Projet : le manche de guitare 3D de GuitarAlchemist, porté vers WebGPU](13-project-ga-fretboard/) | les leçons qui la précèdent |
 | — | [Journal](journal/) | |
+
+Le cours est terminé : les 13 leçons ont été écrites et vérifiées le 16 septembre 2026. Ce qui reste à essayer sur du vrai matériel, un casque de réalité virtuelle, un téléphone, WebGPU sous Linux, est listé dans le journal.
 
 ## Ressources
 
@@ -77,4 +79,6 @@ Le vrai code est [GuitarAlchemist/ga](https://github.com/GuitarAlchemist/ga) au 
 - Le code source au tag de version : [mrdoob/three.js@r186](https://github.com/mrdoob/three.js/tree/r186)
 - Spécifications de [WebGPU](https://gpuweb.github.io/gpuweb/) et de [WGSL](https://gpuweb.github.io/gpuweb/wgsl/), W3C
 - [Spécification glTF 2.0](https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html), Khronos
-- [React Three Fiber](https://docs.pmnd.rs/react-three-fiber) et [drei](https://drei.docs.pmnd.rs/)
+- [React Three Fiber](https://r3f.docs.pmnd.rs/) et [drei](https://drei.docs.pmnd.rs/)
+- [Le guide JavaScript de Rapier](https://rapier.rs/docs/user_guides/javascript/getting_started_js/)
+- [WebXR Device API](https://www.w3.org/TR/webxr/), W3C, et l'[Immersive Web Emulation Runtime](https://github.com/meta-quest/immersive-web-emulation-runtime) de Meta

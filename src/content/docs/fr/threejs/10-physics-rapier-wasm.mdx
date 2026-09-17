@@ -1,0 +1,226 @@
+---
+title: 10. La physique avec Rapier en WebAssembly
+description: Des médiators lâchés sur la touche avec Rapier 0.20 — un moteur physique en WebAssembly chargé comme module de 2.9 Mo, pas de temps fixe et variable mesurés l'un contre l'autre, un accumulateur avec interpolation pour la boucle de rendu, un seul InstancedMesh alimenté par les corps rigides, le hash de l'état du build déterministe dans Node.js et dans le navigateur, les snapshots, et la détection continue des collisions, comparé à BEPUphysics, à l'addon RapierPhysics de three.js et à la physique écrite à la main de GuitarAlchemist.
+sidebar:
+  order: 10
+---
+
+Code : le monde que partagent la page et le script dans [`src/10-physics/world.ts`](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/10-physics/world.ts), la page dans [`src/10-physics/main.ts`](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/10-physics/main.ts), et les mesures sans navigateur dans [`scripts/l10-rapier.ts`](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/scripts/l10-rapier.ts).
+
+## Un moteur physique à côté du renderer
+
+three.js dessine ; il ne simule pas. Un moteur physique tient son propre monde de corps rigides et de colliders, le fait avancer d'un pas de temps, et votre boucle copie la position et la rotation de chaque corps sur le maillage qui le montre. [Rapier](https://rapier.rs/) est écrit en Rust par Dimforge, et publié sur npm compilé en WebAssembly. En .NET, le plus proche est [BEPUphysics v2](https://github.com/bepu/bepuphysics2), lui aussi un monde séparé que vous faites avancer et que vous relisez.
+
+| | BEPUphysics v2 | Rapier (JavaScript) | three.js |
+|---|---|---|---|
+| Monde | `Simulation` | `World` | aucun : `Scene` ne contient que ce qui est dessiné |
+| Objet mobile | un corps dans `Bodies`, avec un `BodyHandle` | `RigidBody` : dynamique, fixe ou cinématique | `Mesh`, dont vous copiez la transformation depuis le corps |
+| Forme | `Box`, `Sphere`, `Capsule`, enveloppes convexes, maillages | `Collider` : `cuboid`, `ball`, `capsule`, `convexHull`, `trimesh`, `heightfield` | sa propre `BufferGeometry`, sans lien avec le collider |
+| Pas | `Simulation.Timestep(dt)` | `world.step()`, avec `world.timestep` | — |
+| Unités | les vôtres | mètres, kilogrammes et secondes, par convention | les vôtres |
+
+## Versions et builds
+
+[`@dimforge/rapier3d-compat`](https://www.npmjs.com/package/@dimforge/rapier3d-compat) 0.20.0, publié le 8 août 2026, est la version actuelle. Les paquets « compat » embarquent le module WebAssembly dans leur JavaScript, en base64, si bien qu'ils se chargent dans n'importe quel bundler et dans Node.js sans fichier `.wasm` séparé ; les paquets non compat demandent un bundler qui gère les imports WebAssembly.
+
+Le README de Rapier liste trois builds : le standard est « locally deterministic, on the same machine », mais ne garantit pas le déterminisme d'une plateforme à l'autre ; un build SIMD est plus rapide là où le navigateur prend en charge le SIMD de WebAssembly ; et [`@dimforge/rapier3d-deterministic-compat`](https://www.npmjs.com/package/@dimforge/rapier3d-deterministic-compat) est « less optimized », avec « a guarantee of a cross-platform deterministic execution », ce dont ont besoin le réseau en lockstep et les replays. Le cours charge le build standard et le build déterministe.
+
+Deux autres façons d'utiliser Rapier avec three.js épinglent des versions plus anciennes :
+
+- L'addon [`RapierPhysics`](https://github.com/mrdoob/three.js/blob/r186/examples/jsm/physics/RapierPhysics.js) de three.js importe `rapier3d-compat@0.17.3` depuis skypack.dev à l'exécution ([ligne 3](https://github.com/mrdoob/three.js/blob/r186/examples/jsm/physics/RapierPhysics.js#L3)), fait avancer le monde depuis `setInterval` à 60 Hz, et règle chaque fois `world.timestep` sur le delta mesuré ([lignes 318-325](https://github.com/mrdoob/three.js/blob/r186/examples/jsm/physics/RapierPhysics.js#L318-L325) et [ligne 367](https://github.com/mrdoob/three.js/blob/r186/examples/jsm/physics/RapierPhysics.js#L367)) : un pas variable, dont les mesures ci-dessous montrent le coût. Il sert les exemples ; un projet contrôle sa propre version et sa propre boucle.
+- [`@react-three/rapier`](https://github.com/pmndrs/react-three-rapier) 2.2.0, les composants R3F, dépend exactement de `rapier3d-compat` 0.19.2.
+
+## Le monde : des médiators sur une touche
+
+[`world.ts`](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/10-physics/world.ts) n'importe rien du DOM ni de three.js, si bien que la page et un script Node.js le partagent. La touche est faite de colliders fixes : le manche, et 12 frettes qui dépassent de 1.2 cm au-dessus, comme de fines boîtes où un médiator peut se coincer, puis un sol ([lignes 22-32](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/10-physics/world.ts#L22-L32)). Un collider sans corps rigide ne bouge jamais. Les 24 médiators sont des corps dynamiques avec chacun un collider en boîte, placés sur une grille dont la première et la dernière rangée débordent des bords du manche ([lignes 34-48](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/10-physics/world.ts#L34-L48)) :
+
+```ts
+const body = world.createRigidBody(
+  RAPIER.RigidBodyDesc.dynamic()
+    .setTranslation(NUT_X + 0.3 + column * 0.55, NECK_TOP + 0.6 + row * 0.25, -0.33 + row * 0.22)
+    .setRotation(axisAngle(0.6, 0, 0.8, angle)),
+);
+world.createCollider(RAPIER.ColliderDesc.cuboid(PICK_SIZE.x / 2, PICK_SIZE.y / 2, PICK_SIZE.z / 2).setDensity(1400).setFriction(0.4), body);
+```
+
+`cuboid` prend des demi-dimensions, pas des tailles. La densité, 1 400 kg/m³, est celle du celluloïd ; le collider donne au corps sa masse à partir de son volume. Les unités de Rapier sont celles que vous décidez ; une gravité de 9.81 en fait des mètres, donc cette touche, longue de 3.6 unités, est celle d'un géant.
+
+## Trois secondes, mesurées sans navigateur
+
+`l10-rapier.ts` charge les deux builds, fait avancer le monde 180 fois de 1/60 s, et affiche où se trouvent les médiators à chaque seconde :
+
+```text
+$ node scripts/l10-rapier.ts
+@dimforge/rapier3d-deterministic-compat 0.20.0: rapier.mjs is 2,893,506 bytes, loaded and initialized in N ms
+@dimforge/rapier3d-compat 0.20.0: rapier.mjs is 2,857,590 bytes, loaded and initialized in N ms
+
+fixed step of 0.01667 s, 24 picks, 38 colliders
+t = 1.0 s: 12 on the neck, 12 on the floor, 1 asleep, lowest y -0.99
+t = 2.0 s: 12 on the neck, 12 on the floor, 24 asleep, lowest y -0.99
+t = 3.0 s: 12 on the neck, 12 on the floor, 24 asleep, lowest y -0.99
+pick 0 at [-1.7, -0.99, -0.33]
+deterministic build, state hash after 180 steps: 68235a2bdba192f1
+```
+
+(`N ms` est la façon dont `check.sh` normalise les temps ; sur la machine de l'auteur, le build déterministe s'est chargé en 51 ms et le standard en 30 ms.)
+
+38 colliders : le manche, 12 frettes, le sol et 24 médiators. Après une seconde, la moitié des médiators reposent sur le manche et l'autre moitié sont tombés de ses bords sur le sol, dont le dessus est à −1 : un médiator de 2 cm d'épaisseur repose à −0.99. Après deux secondes, les 24 sont **endormis** : Rapier cesse de simuler un corps dont la vitesse est restée sous un seuil pendant un moment, jusqu'à ce que quelque chose le touche. Une pile au repos ne coûte presque rien par pas.
+
+Le hash est un SHA-256 de la position et de la rotation de chaque médiator, en flottants 32 bits ([`stateBytes`, lignes 58-67](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/10-physics/world.ts#L58-L67)), tronqué à 16 chiffres hexadécimaux. `check.sh` le compare sur les trois OS. La ligne du build standard est affichée, pas comparée :
+
+```text
+standard build, state hash after 180 steps: 68235a2bdba192f1
+largest distance between a pick in the two builds: under 1 µm
+```
+
+Sous Windows x64, les deux builds ont donné les mêmes octets. Dans l'exécution de CI [35175914560](https://github.com/spareilleux/learn/actions/runs/35175914560), le hash du build standard était aussi `68235a2bdba192f1` sous Linux x64 et macOS arm64, dans Node.js et dans le navigateur. C'est une scène sur trois machines, pas une garantie : c'est sur le hash du build déterministe que le cours s'appuie.
+
+## Pas de temps fixe ou variable
+
+Une boucle de jeu reçoit des images de durées inégales. Passer la durée de chaque image au moteur semble naturel, et c'est ce que fait `RapierPhysics`. Le script exécute les mêmes trois secondes avec des pas tirés au hasard entre 1/144 s et 1/30 s, à partir d'une graine fixe ([lignes 51-67](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/scripts/l10-rapier.ts#L51-L67)) :
+
+```text
+variable step, 157 steps for the same 3 s: 16 picks more than 1 cm away from the fixed-step run, the farthest 42.15 m, at y = -43.14
+```
+
+Deux tiers des médiators ont fini ailleurs, et l'un est passé à travers le sol : à y = −43, il tombe encore. Le résultat d'un solveur dépend de son pas : les contacts, le frottement et la résolution des interpénétrations sont tous calculés par pas, et un pas long laisse un objet fin s'enfoncer loin dans un autre avant que le solveur ne le voie. Ainsi, les mêmes entrées donnent une pile différente à chaque fréquence d'images, le résultat ne peut pas être rejoué, et une seule image longue peut faire traverser un sol de 20 cm à un objet.
+
+La page avance à un pas fixe de 1/60 s quelle que soit la fréquence d'images, avec un **accumulateur** ([`main.ts`, lignes 88-102](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/10-physics/main.ts#L88-L102)) :
+
+```ts
+// L'accumulateur : le temps réel entre, des pas entiers de 1/60 s sortent, et le reste décide de l'interpolation.
+// Au plus 5 pas par image, pour qu'une longue pause (un onglet en arrière-plan) ne fige pas la page avec des centaines de pas.
+const timer = new THREE.Timer();
+let accumulator = 0;
+renderer.setAnimationLoop((time) => {
+  if (probing) return;
+  timer.update(time);
+  accumulator = Math.min(accumulator + timer.getDelta(), 5 * STEP);
+  while (accumulator >= STEP) {
+    step();
+    accumulator -= STEP;
+  }
+  draw(accumulator / STEP);
+  renderer.render(scene, camera);
+});
+```
+
+Sur un écran à 144 Hz, la plupart des images n'exécutent aucun pas, et certaines en exécutent un ; sur un écran à 30 Hz, chaque image en exécute deux. Dessiner le dernier état saccaderait, donc `draw` place chaque médiator entre son état avant et après le dernier pas, selon la fraction de pas restant dans l'accumulateur : `lerp` pour les positions, `slerp` pour les rotations ([lignes 65-75](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/10-physics/main.ts#L65-L75)). L'image a au plus un pas de retard sur la simulation. C'est la boucle de l'article de Glenn Fiedler [« Fix Your Timestep! »](https://gafferongames.com/post/fix_your_timestep/), et ce que fait le `Game` de MonoGame avec `IsFixedTimeStep`, sans l'interpolation.
+
+## Des corps vers un InstancedMesh
+
+Les 24 médiators forment un seul `InstancedMesh`, comme le recommande la leçon 8 : un draw call, et une matrice par médiator composée à partir de la translation et de la rotation de son corps. `frustumCulled = false`, puisque la sphère englobante calculée à partir des premières matrices ne suit pas les médiators ([lignes 41-48](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/10-physics/main.ts#L41-L48)) ; l'alternative de la leçon 8, `computeBoundingSphere()` après chaque mise à jour, coûte un passage sur les matrices à chaque image.
+
+Sous la sonde, la page avance 180 fois sans attendre l'horloge, rend une fois, et calcule le hash de l'état avec le `crypto.subtle` du navigateur :
+
+```text
+$ node scripts/probe.mjs 10-physics
+{
+  "frame": 1,
+  "render": {
+    "calls": 2,
+    "drawCalls": 22,
+    "triangles": 1071
+  },
+  "memory": {
+    "geometries": 11,
+    "textures": 3,
+    "programs": 6
+  },
+  "rapier": "0.20.0",
+  "build": "deterministic",
+  "steps": 180,
+  "asleep": 24,
+  "stateHash": "68235a2bdba192f1",
+}
+```
+
+Le même hash que Node.js : le même WebAssembly, nourri des mêmes nombres, donne les mêmes octets dans V8 sur la page et dans V8 sous Node.js. `?build=standard` le donne aussi sur la machine de l'auteur. 22 draw calls : la touche de la leçon 5 (19 maillages), le sol, les médiators et la passe de sortie.
+
+![Un manche brun foncé avec des frettes et des cordes métalliques, vu de face et d'en haut, avec des médiators orange posés à plat ou inclinés entre les frettes, et d'autres éparpillés sur le sol sombre devant lui.](../../../../assets/threejs/l10-picks.webp)
+
+Chargement et pas, sur la machine de l'auteur, tels que la page les a rapportés (`check.sh` retire ces champs de la sortie comparée) : le module déterministe a pris 83 ms pour être importé et initialisé dans la page, et un pas des 24 médiators 0.22 ms en moyenne sur les 180 pas, dont un tiers avec tous les médiators endormis. Le module WebAssembly est chargé avec un `import()` dynamique, donc Vite le place dans son propre chunk, récupéré après le code de la page (le build de la leçon 13 le liste). Les objets de Rapier vivent dans la mémoire WebAssembly : `world.free()` libère un monde quand une page n'en a plus besoin.
+
+## Snapshots
+
+`world.takeSnapshot()` sérialise le monde entier en octets, et `World.restoreSnapshot(bytes)` le reconstruit :
+
+```text
+snapshot at step 60: 55,186 bytes
+step 180, continued: 68235a2bdba192f1; step 180, restored then stepped: 68235a2bdba192f1
+```
+
+Le monde restauré, avancé des mêmes 120 pas, a atteint le même état que l'original. Avec un build déterministe, un snapshot plus les entrées reçues depuis constituent un replay, ou un rollback pour les jeux en réseau.
+
+## Objets rapides et fins
+
+Le script tire une bille de 1 cm de diamètre à 60 m/s vers un mur de 2.4 cm d'épaisseur, à 2.5 m de distance : un pas de 1/60 s déplace la bille de 1 m.
+
+```text
+fixed 2.4 cm wall, 1 cm ball at 60 m/s, CCD off: x = -1.5, -0.5, -0.02, -0.01, -0.01
+fixed 2.4 cm wall, 1 cm ball at 60 m/s, CCD on : x = -1.5, -0.5, -0.02, -0.01, -0.01
+dynamic 2.4 cm wall, 1 cm ball at 60 m/s, CCD off: x = -1.5, -0.5, 0.5, 1.5, 2.5
+dynamic 2.4 cm wall, 1 cm ball at 60 m/s, CCD on : x = -1.5, -0.5, -0.02, 0, -0.01
+```
+
+Contre un mur dynamique sans détection continue des collisions (CCD), la bille passe de x = −0.5 à 0.5 en un pas, et n'est jamais dans le mur à la fin d'un pas : elle le traverse par **effet tunnel**. Avec `setCcdEnabled(true)` sur la bille, Rapier balaie son mouvement pendant le pas et l'arrête au mur. Contre un mur fixe, elle s'est arrêtée même sans CCD lors de cette exécution ; pourquoi le cas fixe diffère est *à vérifier* dans le code source de Rapier. La CCD coûte du temps par pas : activez-la sur les petits corps rapides, pas sur tout.
+
+## Dans GuitarAlchemist/ga
+
+GA n'a pas de bibliothèque physique : ni Rapier, ni cannon-es, ni Ammo.
+
+- **Cheese Avalanche** simule à la main environ 300 corps, avec gravité, collisions contre un heightfield, restitution et une rotation approximative : « intentionally hand-rolled (no cannon / rapier dep) » ([`CheeseAvalanche.tsx`, lignes 16-18](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/CheeseAvalanche/CheeseAvalanche.tsx#L16-L18)). Pour ce travail, des corps contre un terrain et jamais les uns contre les autres, c'est un choix raisonnable. Son pas est le delta de l'image, plafonné à 1/30 s ([lignes 561-562](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/CheeseAvalanche/CheeseAvalanche.tsx#L561-L562), appelé depuis la boucle d'animation à la [ligne 649](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/CheeseAvalanche/CheeseAvalanche.tsx#L649)) : un pas variable, donc l'avalanche se déroule différemment à 60 et à 144 Hz. Elle écrit les corps dans deux objets `InstancedMesh` ([lignes 616-632](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/CheeseAvalanche/CheeseAvalanche.tsx#L616-L632)), comme cette leçon, mais alloue un `Vector3` pour chaque corps qui roule à chaque pas, dans une boucle qui réutilise par ailleurs des objets temporaires ([ligne 595](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/CheeseAvalanche/CheeseAvalanche.tsx#L595)).
+- **L'atterrisseur lunaire** fait les choses de la manière fixe : un accumulateur de pas de 1/120 s, au plus 10 par image, après avoir plafonné le delta de l'image à 0.1 s ([`LunarLanderEngine.ts`, lignes 3030-3040](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/PrimeRadiant/LunarLanderEngine.ts#L3030-L3040), avec `PHYSICS_DT` à la [ligne 66](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/PrimeRadiant/LunarLanderEngine.ts#L66)). Il dessine le dernier état, sans interpolation, ce qui à 1/120 s se voit rarement.
+
+## À retenir
+
+- Un moteur physique est un second monde : faites-le avancer, puis copiez la transformation de chaque corps sur ce que three.js dessine.
+- Les paquets « compat » de Rapier embarquent le module WebAssembly : 2.9 Mo de JavaScript, à charger avec un `import()` dynamique et `init()`.
+- Avancez à fréquence fixe avec un accumulateur, plafonnez le nombre de pas par image, et interpolez ce que vous dessinez. Un pas variable a changé l'endroit où 16 des 24 médiators ont atterri, et en a fait passer un à travers le sol.
+- Le build déterministe donne les mêmes octets d'une plateforme à l'autre ; le standard ne le promet que sur la même machine.
+- Les corps endormis ne coûtent presque rien ; les corps rapides et fins ont besoin de la CCD.
+- Les snapshots sérialisent le monde : avec le déterminisme, ce sont des replays.
+
+## Exercices
+
+1. Lancez un médiator sur le manche : lors d'un clic, donnez à un médiator une vitesse linéaire dirigée vers la touche avec `setLinvel`, et réveillez-le avec `wakeUp()`. Pourquoi un corps endormi en a-t-il besoin ?
+2. Supprimez le plafond de 5 pas par image, et simulez un onglet en arrière-plan : ajoutez 3 secondes à l'accumulateur en une image. Que se passe-t-il, et quel compromis fait le plafond ?
+3. Le build standard a donné le même hash que le déterministe sous Windows. Nommez deux choses qui peuvent le faire différer sur une autre machine, et ce que le build déterministe fait à leur sujet.
+
+<details>
+<summary>Solution 1</summary>
+
+```ts
+renderer.domElement.addEventListener('click', () => {
+  const body = picks[0];
+  body.setTranslation({ x: 0, y: 1.5, z: 1.5 }, true);
+  body.setLinvel({ x: 0, y: -2, z: -4 }, true);
+});
+```
+
+Le second argument de `setTranslation` et de `setLinvel`, `wakeUp`, réveille le corps ; `body.wakeUp()` fait la même chose séparément. Un corps endormi est hors de la simulation : changer sa vitesse sans le réveiller le laisse où il est jusqu'à ce que quelque chose entre en collision avec lui. Après deux secondes, les 24 médiators étaient endormis, donc tout changement venant de l'extérieur en a besoin. Une esquisse, non exécutée dans la page du cours (*à vérifier*).
+
+</details>
+
+<details>
+<summary>Solution 2</summary>
+
+3 secondes font 180 pas, exécutés en une image avant que quoi que ce soit ne soit dessiné : la page se fige le temps que prennent ces pas, puis les médiators sautent là où ils auraient été. Si les pas d'une image prennent plus longtemps que l'image, l'image suivante a encore plus de temps à rattraper : la « spirale de la mort », où la simulation ne rattrape jamais son retard. Le plafond abandonne plutôt le temps en trop : la simulation tourne un moment plus lentement que le temps réel, ce que personne ne voit dans un onglet en arrière-plan. Le `Timer` de three.js a aussi `connect(document)`, qui utilise la Page Visibility API « to avoid large time delta values » après un onglet masqué ([`Timer.js`, lignes 43-58](https://github.com/mrdoob/three.js/blob/r186/src/core/Timer.js#L43-L58)). Un raisonnement à partir du code de la boucle, pas une mesure.
+
+</details>
+
+<details>
+<summary>Solution 3</summary>
+
+Le README de Rapier dit seulement que le build standard est « locally deterministic, on the same machine », et que le build déterministe est « less optimized » et garantit « a cross-platform deterministic execution ». Il ne dit pas ce qui diffère. Les causes habituelles dans du code en virgule flottante sont celles-ci : un compilateur qui fusionne une multiplication et une addition en une seule instruction (FMA), qui arrondit différemment ; des fonctions mathématiques comme `sin` ou `sqrt` implémentées différemment sur chaque plateforme ; et des sommes dont l'ordre change avec du code SIMD ou parallèle. L'arithmétique de base de WebAssembly est spécifiée au bit près, donc ce qui peut varier, c'est ce que le module appelle en dehors, et le relaxed SIMD, dont les résultats peuvent différer selon la plateforme. Auxquelles de ces causes le build standard 0.20.0 est exposé, et ce que le build déterministe change, est *à vérifier* dans les scripts de build de rapier.js. La CI du cours calcule le hash des deux builds sur trois OS : dans l'exécution 35175914560, ils concordaient sur les trois, pour cette seule scène.
+
+</details>
+
+## Sources
+
+- Rapier : [JavaScript user guide](https://rapier.rs/docs/user_guides/javascript/getting_started_js/), [rigid bodies](https://rapier.rs/docs/user_guides/javascript/rigid_bodies/), [colliders](https://rapier.rs/docs/user_guides/javascript/colliders/), [determinism](https://rapier.rs/docs/user_guides/javascript/determinism/), [le dépôt dimforge/rapier.js](https://github.com/dimforge/rapier.js)
+- Code source de three.js à r186 : [`RapierPhysics.js`](https://github.com/mrdoob/three.js/blob/r186/examples/jsm/physics/RapierPhysics.js)
+- [@react-three/rapier](https://github.com/pmndrs/react-three-rapier)
+- Glenn Fiedler, [« Fix Your Timestep! »](https://gafferongames.com/post/fix_your_timestep/)
+- MonoGame : [`Game.IsFixedTimeStep`](https://docs.monogame.net/api/Microsoft.Xna.Framework.Game.html)
+- BEPUphysics v2 : [dépôt et documentation](https://github.com/bepu/bepuphysics2)
