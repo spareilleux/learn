@@ -5,6 +5,24 @@ sidebar:
   order: 1
 ---
 
+## Partir de lo que ya usas
+
+Si escribes C# o Java en Windows, probablemente conociste los contenedores a través de Docker Desktop: un `docker run` para un PostgreSQL local, un `compose.yaml` junto a la solución, un Dockerfile que construye un pipeline de CI, quizá Testcontainers en tus pruebas de integración. Puede que nunca hayas necesitado saber que todo eso se ejecuta en una máquina virtual Linux que Docker Desktop gestiona por ti.
+
+WSL containers es la propia versión de Microsoft para el mismo trabajo, integrada en el Subsistema de Windows para Linux. La mayor parte de tu vocabulario Docker sigue sirviendo; lo que cambia es quién proporciona la máquina Linux y qué herramientas la acompañan:
+
+| Con Docker Desktop usas | Con WSL containers | Lección |
+|---|---|---|
+| `docker run`, `docker ps`, `docker exec` | `wslc run`, `wslc container list`, `wslc exec` | 3 |
+| un `Dockerfile` y `docker build` | el mismo archivo, a menudo llamado `Containerfile`, y `wslc build` | 4 |
+| Settings, Resources, o `.wslconfig` | `settings.yaml`, por sesión | 6 |
+| `docker volume`, `-v` | `wslc volume`, `-v` | 7 |
+| `docker compose up` | sin equivalente: un script | 8 |
+| Docker.DotNet, Testcontainers | el paquete `Microsoft.WSL.Containers`, dentro del proceso | 9 |
+| la casilla de Kubernetes, las extensiones, el panel | nada | 10 |
+
+Las dos primeras lecciones fijan el vocabulario y la instalación; el resto del curso ejecuta cargas de trabajo .NET y Java reales con `wslc` y compara cada paso con Docker Desktop. Este curso trata de Windows por naturaleza, así que sus comandos son solo para PowerShell en Windows 11.
+
 ## Un contenedor, en una frase
 
 Un **contenedor** empaqueta una aplicación con todo lo que necesita (bibliotecas, runtime, configuración) para que se ejecute de la misma manera en todas partes.
@@ -63,6 +81,7 @@ flowchart LR
 - Imagen = plantilla; contenedor = instancia en ejecución.
 - Los contenedores Linux necesitan un kernel Linux → WSL 2 lo proporciona.
 - `wslc` = contenedores integrados en WSL, sin Docker Desktop.
+- Lo que sabes de Docker sirve para la CLI y el formato de imagen; no para Compose, Kubernetes ni la API de Docker Engine.
 
 ## Ejercicios
 
@@ -95,7 +114,17 @@ Una imagen Linux contiene binarios que hacen llamadas al sistema **Linux**. Un c
 
 </details>
 
+3. Un colega usa Docker Desktop y Podman en la misma máquina Windows, y ahora instala WSL 2.9. ¿Cuántas VM Linux pueden acabar ejecutándose, y quién gestiona cada una?
+
+<details>
+<summary>Solución</summary>
+
+Al menos tres. Docker Desktop gestiona la distro `docker-desktop`, Podman gestiona `podman-machine-default`, y `wslc` inicia una VM por sesión: `wslc-cli-<user>` para una terminal normal, otra para una terminal de administrador, y una por cada aplicación que crea su propia sesión. Cada VM toma memoria de Windows, algo que mide la [lección 6](../06-resources-and-limits/).
+
+</details>
+
 ## Fuentes
 
 - [¿Qué es WSL? — Microsoft Learn](https://learn.microsoft.com/windows/wsl/about)
 - [WSL container — Microsoft Learn](https://learn.microsoft.com/windows/wsl/wsl-container)
+- [Backend WSL 2 de Docker Desktop](https://docs.docker.com/desktop/features/wsl/) — documentación de Docker

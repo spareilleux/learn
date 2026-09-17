@@ -308,8 +308,8 @@ wslc container stop csharp java
 
 ```powershell
 wslc container list --all        # inclut les conteneurs arrêtés, avec leur code de sortie
-wslc container logs <conteneur>  # ce que l'application a affiché
-wslc container inspect <conteneur>  # configuration effective : commande, env, ports, code de sortie
+wslc container logs <container>  # ce que l'application a affiché
+wslc container inspect <container>  # configuration effective : commande, env, ports, code de sortie
 wslc image inspect <image>
 ```
 
@@ -332,7 +332,7 @@ wslc image prune --all     # supprime toutes les images non utilisées par un co
 ```
 
 :::caution
-Dans `wslc image prune`, `-f` signifie `--filter`, pas `--force`. Et le nettoyage libère de l'espace **dans** le `storage.vhdx` de la session, mais le fichier ne rétrécit pas côté Windows (mesuré dans le [journal](../journal/)).
+Dans `wslc image prune`, `-f` signifie `--filter`, pas `--force`. Et le nettoyage libère de l'espace **dans** le `storage.vhdx` de la session, mais le fichier ne rétrécit pas côté Windows (mesuré dans la [leçon 6](../06-resources-and-limits/), avec la façon de le compacter).
 :::
 
 ## À retenir

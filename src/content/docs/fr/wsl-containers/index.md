@@ -23,6 +23,12 @@ Je veux savoir s'il peut remplacer — ou compléter — Docker Desktop pour mon
 - installer la bonne version de WSL et diagnostiquer un échec d'installation ;
 - lancer, inspecter, publier et arrêter des conteneurs avec `wslc` ;
 - construire une image à partir d'un `Containerfile` ;
+- faire tourner `wslc` à côté de Docker Desktop sans surprise d'image, de version ou de port ;
+- limiter le CPU et la mémoire d'une session ou d'un conteneur, mesurer sa VM depuis Windows et récupérer son espace disque ;
+- garder les données d'un service dans un volume nommé, et savoir quand un dossier Windows n'est pas le bon endroit ;
+- reproduire une petite pile Compose avec un réseau, des volumes et des noms DNS ;
+- piloter des conteneurs depuis un programme C# avec `Microsoft.WSL.Containers`, y compris une image construite par `dotnet build` ;
+- expliquer ce que `wslc` 2.9.11 ne fait pas : Compose, Kubernetes, conteneurs privilégiés, extensions, interface graphique ;
 - décider quand utiliser `wslc` plutôt que Docker Desktop.
 
 ## Prérequis
@@ -30,6 +36,9 @@ Je veux savoir s'il peut remplacer — ou compléter — Docker Desktop pour mon
 - Windows 11 avec WSL 2 installé.
 - Notions de base sur les conteneurs (image, conteneur, port) — la leçon 1 les rappelle.
 - Un terminal PowerShell ; un accès administrateur pour la mise à jour de WSL.
+- Pour la leçon 9, le [SDK .NET](https://dotnet.microsoft.com/download) 10.
+
+WSL containers n'existe que sous Windows, ce cours n'a donc pas de variantes Linux ou macOS : chaque commande est pour PowerShell sous Windows 11.
 
 ## Plan
 
@@ -37,8 +46,13 @@ Je veux savoir s'il peut remplacer — ou compléter — Docker Desktop pour mon
 2. [Installation](02-installation/) — passer en pre-release, vérifier, dépanner.
 3. [Premiers conteneurs](03-first-containers/) — `run`, ports, `exec`, `stop`.
 4. [Construire une image](04-build-an-image/) — une API C# et une API Spring Boot WebFlux : `Containerfile` multi-étapes, `build`, logs, nettoyage.
-5. [wslc ou Docker Desktop ?](05-wslc-vs-docker/) — comparaison et API pour applications Windows.
-6. [Journal](journal/) — mes essais, erreurs et points à vérifier.
+5. [wslc ou Docker Desktop ?](05-wslc-vs-docker/) — comparaison, magasins d'images séparés, le même port publié deux fois sans erreur.
+6. [Ressources et limites](06-resources-and-limits/) — `settings.yaml`, limites par conteneur, la VM de la session vue depuis Windows, compacter `storage.vhdx`.
+7. [Volumes et un vrai service](07-volumes-and-a-real-service/) — qdrant à côté d'une copie Docker : ports, versions épinglées, volumes nommés, montages de dossiers.
+8. [Compose sans Compose](08-compose/) — ce que fait vraiment Compose, les noms DNS sur un réseau, une traduction PowerShell, les health checks.
+9. [Piloter des conteneurs depuis C#](09-csharp-api/) — `Microsoft.WSL.Containers` : un projet qui compile, les sessions, le nettoyage, `WslcImage` et `LoadImageAsync`.
+10. [Réseau, Kubernetes et interface graphique](10-networking-kubernetes-gui/) — adresses publiées, réseaux par session, conteneurs de l'API sans réseau, k3s et `Privileged`, ce qui manque.
+11. [Journal](journal/) — mes essais, erreurs et points à vérifier.
 
 ## Ressources
 

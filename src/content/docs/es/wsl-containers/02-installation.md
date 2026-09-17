@@ -53,7 +53,7 @@ La última prueba descarga la imagen `hello-world` y muestra su mensaje de bienv
 $env:Path = [Environment]::GetEnvironmentVariable('Path','Machine') + ';' + [Environment]::GetEnvironmentVariable('Path','User')
 ```
 
-Lo mismo ocurre con un IDE abierto antes de la actualización: MSBuild falla entonces con `WSLC0001` (ver la [lección 5](../05-wslc-vs-docker/)).
+Lo mismo ocurre con un IDE abierto antes de la actualización: MSBuild falla entonces con `WSLC0001` (ver la [lección 9](../09-csharp-api/)).
 :::
 
 ## Solución de problemas: la instalación falla (error 1921 / 1603)
@@ -132,6 +132,15 @@ TimeCreated               Id Message
 <summary>Solución</summary>
 
 Docker Desktop ejecuta su propia distro WSL, que mantiene activo el servicio `WSLService`. El instalador no puede reemplazar los archivos de un servicio que no puede detener.
+
+</details>
+
+3. Abres una pestaña nueva en Windows Terminal después de la actualización. `wsl --version` muestra 2.9.11, pero `Get-Command wslc` responde que el término `wslc` no se reconoce. Explica por qué y da un arreglo que funcione en esa pestaña y otro que dure.
+
+<details>
+<summary>Solución</summary>
+
+`wsl.exe` ya estaba en el `PATH` antes de la actualización, `wslc.exe` no. El proceso de Windows Terminal arrancó antes de la actualización, con el `PATH` antiguo, y cada pestaña nueva hereda una copia de él. En esa pestaña, recarga el `PATH` a partir de los valores de la máquina y del usuario con la línea `$env:Path = …` de arriba, o llama a la ruta completa, `& "C:\Program Files\WSL\wslc.exe" --version`. El arreglo duradero es cerrar **todas** las ventanas de Windows Terminal, para que no quede ningún proceso `WindowsTerminal.exe`, y volver a iniciarlo. En `cmd.exe`, la comprobación equivalente es `where wslc`.
 
 </details>
 

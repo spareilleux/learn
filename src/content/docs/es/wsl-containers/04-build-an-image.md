@@ -332,7 +332,7 @@ wslc image prune --all     # elimina todas las imágenes que no usa ningún cont
 ```
 
 :::caution
-En `wslc image prune`, `-f` significa `--filter`, no `--force`. Y la limpieza libera espacio **dentro** del `storage.vhdx` de la sesión, pero el archivo no se reduce del lado de Windows (medido en el [diario](../journal/)).
+En `wslc image prune`, `-f` significa `--filter`, no `--force`. Y la limpieza libera espacio **dentro** del `storage.vhdx` de la sesión, pero el archivo no se reduce del lado de Windows (medido en la [lección 6](../06-resources-and-limits/), con la forma de compactarlo).
 :::
 
 ## Puntos clave

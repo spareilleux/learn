@@ -17,6 +17,7 @@ sidebar:
 - [x] Vérifier si les images Docker et `wslc` sont partagées
 - [x] Petit programme C# avec `Microsoft.WSL.Containers`
 - [x] Aller plus loin : `WslcImage`, réseau de l'API, Kubernetes, extensions, interface graphique
+- [x] Lot 2 : leçons 6 à 10 rédigées à partir des entrées ci-dessous, leçons 1 à 5 complétées
 
 ## 2026-09-12 — État des lieux
 
@@ -192,10 +193,10 @@ guest    sesstest-vol
 Sur le disque, chaque session a ses propres disques virtuels :
 
 ```text
-%LocalAppData%\wslc\sessions\wslc-cli-spare\storage.vhdx         ~587 Mo
-%LocalAppData%\wslc\sessions\wslc-cli-spare\swap.vhdx            36 Mo
-%LocalAppData%\wslc\sessions\wslc-cli-admin-spare\storage.vhdx   ~577 Mo
-%LocalAppData%\wslc\sessions\wslc-cli-admin-spare\swap.vhdx      36 Mo
+%LocalAppData%\wslc\sessions\wslc-cli-spare\storage.vhdx         ~587 MB
+%LocalAppData%\wslc\sessions\wslc-cli-spare\swap.vhdx            36 MB
+%LocalAppData%\wslc\sessions\wslc-cli-admin-spare\storage.vhdx   ~577 MB
+%LocalAppData%\wslc\sessions\wslc-cli-admin-spare\swap.vhdx      36 MB
 ```
 
 Nettoyage : `wslc volume remove sesstest-vol`, `wslc network remove sesstest-net`.
@@ -638,7 +639,7 @@ Après `wslc-down.ps1` : aucun conteneur, seulement les réseaux par défaut `br
 
 ## 2026-09-13 — Un programme C# avec `Microsoft.WSL.Containers`
 
-Objectif : piloter un conteneur depuis une application Windows, sans `wslc.exe`. Le code est dans [`code/wsl-containers/wslc-host`](https://github.com/spareilleux/learn/tree/main/code/wsl-containers/wslc-host) ; la leçon 5 le présente.
+Objectif : piloter un conteneur depuis une application Windows, sans `wslc.exe`. Le code est dans [`code/wsl-containers/wslc-host`](https://github.com/spareilleux/learn/tree/main/code/wsl-containers/wslc-host) ; la [leçon 9](../09-csharp-api/) le présente.
 
 ### L'extrait documenté ne compile pas
 
@@ -873,6 +874,40 @@ Le téléchargement de l'image fonctionne quand même (c'est la session qui le f
 - L'application **WSL Settings** (la seule application WSL du menu Démarrer avec `WSL`) n'a pas de page conteneurs : ses pages sont `About`, `Developer`, `DistroManagement`, `DockerDesktopIntegration`, `FileSystem`, `General`, `GPUAcceleration`, `GUIApps`, `MemAndProc`, `Networking`, `NetworkingIntegration`, `OptionalFeatures`, `VSCodeIntegration`, `VSIntegration`, `WorkingAcrossFileSystems`.
 
 **Conclusion :** la chaîne `dotnet build` → `.tar` → `LoadImage` est ce que le paquet a de plus original, et elle fonctionne. Autour, `wslc` 2.9.11 reste un moteur d'exécution : pas de Compose, pas de Kubernetes, pas d'extensions, pas d'interface graphique. Nettoyage : images de test retirées de la session CLI (`greeter`, `k3s`, `docker:cli`), `storage.vhdx` des sessions de test supprimés (336 Mo + 81 Mo).
+
+## 2026-09-16 — Lot 2 : cinq nouvelles leçons
+
+Les entrées ci-dessus contenaient plus de matière vérifiée que ce qu'enseignaient les cinq leçons. Elles ont maintenant leurs propres leçons : [6. Ressources et limites](../06-resources-and-limits/), [7. Volumes et un vrai service](../07-volumes-and-a-real-service/), [8. Compose sans Compose](../08-compose/), [9. Piloter des conteneurs depuis C#](../09-csharp-api/) et [10. Réseau, Kubernetes et interface graphique](../10-networking-kubernetes-gui/). La section sur l'API est passée de la leçon 5 à la leçon 9 ; la leçon 5 traite maintenant de la cohabitation avec Docker Desktop. Le `compose.yaml` et ses deux scripts `wslc` sont dans [`code/wsl-containers/compose`](https://github.com/spareilleux/learn/tree/main/code/wsl-containers/compose), et la CI exécute le `compose.yaml` avec Docker Compose.
+
+Trois vérifications ont été refaites pour ces leçons, avec `wslc` 2.9.11 et la session à 8 CPU et 16 Go.
+
+`wslc run --help` liste entre autres des limites par conteneur et des health checks : `--cpus`, `-m`/`--memory`, `--health-cmd`, `--health-interval`, `--gpus`. Toujours pas de `--privileged` ni de `--cap-add`.
+
+Les limites par conteneur règlent le groupe de contrôle, mais `nproc` et `free` montrent toujours la VM :
+
+```text
+> wslc run --rm --memory 512M --cpus 1.5 alpine sh -c 'echo nproc=$(nproc); cat /sys/fs/cgroup/memory.max /sys/fs/cgroup/cpu.max; free -m'
+wsl: Your kernel does not support swap limit capabilities or the cgroup is not mounted. Memory limited without swap.
+nproc=8
+536870912
+150000 100000
+              total        used        free      shared  buff/cache   available
+Mem:          15996         278       15439           3         280       15527
+Swap:         16384           0       16384
+```
+
+Un conteneur de la CLI a les mêmes limites que les conteneurs de l'API du test `Privileged` :
+
+```text
+> wslc run --rm alpine sh -c 'grep cgroup /proc/mounts; grep CapEff /proc/self/status; ls /dev | wc -l'
+cgroup /sys/fs/cgroup cgroup2 ro,nosuid,nodev,noexec,relatime 0 0
+CapEff:	00000000a80425fb
+15
+```
+
+Les health checks fonctionnent : `wslc run -d --name hc --health-cmd 'test -f /tmp/ready' --health-interval 2s alpine sh -c 'sleep 6; touch /tmp/ready; sleep 60'` a affiché `Up 3 seconds (health: starting)`, puis `Up 11 seconds (healthy)` dans `wslc container list`, et `container inspect` contient un objet `"Health"`. Conteneur arrêté et supprimé ensuite.
+
+**Encore à vérifier :** `hostLoopback` (`host.wslc.internal`) depuis un conteneur ; si `-p 0.0.0.0:…` est joignable depuis une autre machine ; `wslc network connect` sur un conteneur en cours d'exécution ; le comportement de `volume create` et `network create` quand l'objet existe ; `PortMappings` sur un conteneur de l'API sans réseau ; les scripts de la leçon 8 dans Windows PowerShell 5.1.
 
 ## Questions ouvertes
 
