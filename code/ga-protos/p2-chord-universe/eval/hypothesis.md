@@ -51,3 +51,18 @@ named after the bass note.
   330 ms. Frames are 186 ms long at 44.1 kHz, hops 46 ms, and a label needs 2 frames in a row.
 - Compute per frame in Node.js on the author's machine: median about 0.3 ms, p95 under 1 ms, so the browser has more
   than 40 ms of slack per hop.
+
+## Recorded corpus: predictions (added after the synthetic run, before the recorded one)
+
+Written after the synthetic corpus was measured (main configuration: 79.3 % exact), and before running
+`eval/recorded.ts` on the 17 CC0 recordings of `eval/recorded/sources.json`. Only the titles, descriptions and
+durations had been read; none had been listened to or analyzed.
+
+- Exact chord: 11 of 17, between 7 and 14. Real guitars have inharmonic strings, body resonances, pick noise and MP3
+  coding; the synthetic Karplus-Strong strings have none of these.
+- Root: 13 of 17. Most recordings are plain major and minor triads, which the synthetic run got right 90 % of the time.
+- Likely failures: the pad through delay and reverb (177041), the recording through guitar plugins (334629, Asus4),
+  the tremolo (584138), the "variation" of Dm (456801), whose extra notes may name another chord, and the percussive
+  hit before the E chord (246288).
+- The three-string F minor (8603) and the D major with F# in the bass (8495) are recognized: three distinct pitch
+  classes, and no other chord of the 13 qualities has the same set.
