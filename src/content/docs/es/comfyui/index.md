@@ -40,10 +40,10 @@ Escribes C# o Java. Conoces HTTP, JSON y el código asíncrono. No necesitas sab
 | 2 | [La difusión, y qué hace reproducible una imagen](02-diffusion-reproducibility/) | `new Random(seed)`, y el determinismo en coma flotante |
 | 3 | [Los workflows en JSON: el formato de la interfaz, el formato de la API y los diffs](03-workflow-json/) | `System.Text.Json`, Jackson, un esquema |
 | 4 | [La API HTTP y WebSocket desde C# y Java](04-http-websocket-api/) | `HttpClient`, `ClientWebSocket`, `java.net.http` |
-| 5 | Img2img, inpainting y outpainting | — |
-| 6 | ControlNet: poses, bordes y profundidad | — |
-| 7 | LoRA: cargarlos, combinarlos y lo que supone entrenar uno | un plugin que modifica los pesos |
-| 8 | Los modelos recientes y sus licencias, la cuantización y la VRAM | elegir una dependencia y su licencia |
+| 5 | [Img2img, inpainting y outpainting](05-img2img-inpainting/) | — |
+| 6 | [ControlNet: bordes y profundidad](06-controlnet/) | — |
+| 7 | [LoRA: cargarlos, apilarlos y qué implica entrenar uno](07-lora/) | un plugin que modifica los pesos |
+| 8 | [Modelos recientes y sus licencias, cuantización y VRAM](08-recent-models-quantization/) | elegir una dependencia y su licencia |
 | 9 | Escalado, texturas sin costuras y HDR | — |
 | 10 | Vídeo | — |
 | 11 | Los nodos personalizados y su seguridad | paquetes NuGet o Maven que ejecutan código al instalarse |

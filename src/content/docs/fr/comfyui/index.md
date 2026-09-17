@@ -40,10 +40,10 @@ Tu écris du C# ou du Java. Tu connais HTTP, JSON et le code asynchrone. Tu n'as
 | 2 | [La diffusion, et ce qui rend une image reproductible](02-diffusion-reproducibility/) | `new Random(seed)`, et le déterminisme des calculs en virgule flottante |
 | 3 | [Les workflows en JSON : le format de l'interface, le format de l'API, et les différences](03-workflow-json/) | `System.Text.Json`, Jackson, un schéma |
 | 4 | [L'API HTTP et WebSocket depuis C# et Java](04-http-websocket-api/) | `HttpClient`, `ClientWebSocket`, `java.net.http` |
-| 5 | Img2img, inpainting et outpainting | — |
-| 6 | ControlNet : poses, contours et profondeur | — |
-| 7 | LoRA : chargement, empilement, et ce qu'implique d'en entraîner un | un plugin qui modifie des poids |
-| 8 | Modèles récents et leurs licences, quantification et VRAM | choisir une dépendance et sa licence |
+| 5 | [Img2img, inpainting et outpainting](05-img2img-inpainting/) | — |
+| 6 | [ControlNet : contours et profondeur](06-controlnet/) | — |
+| 7 | [LoRA : chargement, empilement, et ce qu'implique d'en entraîner un](07-lora/) | un plugin qui modifie des poids |
+| 8 | [Modèles récents et leurs licences, quantification et VRAM](08-recent-models-quantization/) | choisir une dépendance et sa licence |
 | 9 | Agrandissement, textures raccordables et HDR | — |
 | 10 | Vidéo | — |
 | 11 | Les nœuds personnalisés, et leur sécurité | des paquets NuGet ou Maven qui exécutent du code à l'installation |
