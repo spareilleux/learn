@@ -227,6 +227,8 @@ G2 B2 D3 G3 B3 G4
 F2 C3 F3 A3 C4 F4
 ```
 
+El curso de ComfyUI dibuja los mismos voicings como imágenes: su [lección 11](../../comfyui/11-custom-nodes-and-security/) escribe nodos de GA que convierten `x32010` en un diagrama de acorde y en un mapa del mástil para generar imágenes, con el orden de cuerdas de los diagramas y el de GA uno junto al otro.
+
 ### En GA
 
 - [`Voicing`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Instruments/Fretboard/Voicings/Core/Voicing.cs#L14-L36) es un `record` de `Position`s (`Position.Muted` o `Position.Played`, otra jerarquía cerrada) y notas MIDI. Su `Diagram` une las posiciones en el orden del array, y el [`VoicingGenerator`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Voicings/Generation/VoicingGenerator.cs#L167) de GA rellena ese array en el orden de `Str.Range`, desde la [cuerda 1, "the first string (highest pitch)"](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Instruments/Primitives/Str.cs#L35-L38), así que los diagramas de GA empiezan por la E aguda, al contrario que los diagramas de acordes. El programa construye sus voicings [de la misma manera](https://github.com/spareilleux/learn/blob/79d2198/code/music-theory-ga/GaTheory/Lesson3.cs#L128-L137).
