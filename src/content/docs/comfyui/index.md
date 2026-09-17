@@ -44,9 +44,9 @@ You write C# or Java. You know HTTP, JSON and asynchronous code. You don't need 
 | 6 | [ControlNet: edges and depth](06-controlnet/) | — |
 | 7 | [LoRA: loading, stacking, and what training one involves](07-lora/) | a plugin that patches weights |
 | 8 | [Recent models and their licenses, quantization and VRAM](08-recent-models-quantization/) | choosing a dependency and its license |
-| 9 | Upscaling, seamless textures and HDR | — |
+| 9 | [Upscaling, seamless textures and HDR](09-upscaling-seamless-hdr/) | — |
 | 10 | Video | — |
-| 11 | Custom nodes, and their security | NuGet or Maven packages that run code at install |
+| 11 | [Custom nodes, and their security](11-custom-nodes-and-security/) | NuGet or Maven packages that run code at install |
 | 12 | ComfyUI in production: a service, a queue, several GPUs | a worker behind a job queue |
 | 13 | Project: textures for this site and for GuitarAlchemist | — |
 | — | [Journal](journal/) | |

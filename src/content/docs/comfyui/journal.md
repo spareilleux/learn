@@ -20,7 +20,9 @@ sidebar:
 - [x] Lesson 7: LoRA
 - [x] Lesson 8: recent models, licenses, quantization and VRAM
 - [x] French and Spanish translations of lessons 5 to 8
-- [ ] Lesson 9: upscaling, seamless textures and HDR
+- [x] Lesson 9: upscaling, seamless textures and HDR
+- [ ] Lesson 10: video
+- [x] Lesson 11: custom nodes, and their security
 
 ## 2026-09-16 — Versions and setup
 
@@ -111,6 +113,33 @@ sidebar:
 
 *ComfyUI v0.36.0. First: Z-Image-Turbo bf16, seed 43, workflow [`08-z-image-turbo.api.json`](https://github.com/spareilleux/learn/blob/40880d5819d3d72102c008a617b4c83b519600cc/code/comfyui/workflows/08-z-image-turbo.api.json). Then: FLUX.2 klein 4B, seeds 42, 43 and 44, 4 steps, CFG 1, `euler`, workflow [`08-flux2-klein.api.json`](https://github.com/spareilleux/learn/blob/40880d5819d3d72102c008a617b4c83b519600cc/code/comfyui/workflows/08-flux2-klein.api.json).*
 
+## 2026-09-16 — Custom nodes and their security
+
+- ComfyUI v0.36.0 imports each pack with `exec_module` before it reads `NODE_CLASS_MAPPINGS`; `prestartup_script.py` runs earlier, and `WEB_DIRECTORY` JavaScript runs in the browser. `hook_breaker_ac10a0.py` restores one function after the packs load; nothing else stands between a pack and the process.
+- ComfyUI-Manager is now the pip package `comfyui_manager==4.2.2`, pinned in `manager_requirements.txt`. The 42 `.py`, `.json` and `.md` files of its PyPI wheel are identical to the `4.2.2` tag, commit `bd4ede22`. It gates installs by security level, listener and two new flags, and looks for known bad package names at startup; nothing reads a pack's code.
+- The Guitar Alchemist pack (GA Chord Diagram, GA Fretboard Control Map, GA Scale Prompt) computes from GA's tuning and scale tables at `a826864f`, draws with Pillow without fonts, and passes 11 unit tests with only NumPy and Pillow. Loaded into a throwaway base directory with the portable build's Python on the CPU, it imported in 0.0 s, ran in 0.06 s, and `SaveImage` wrote the same pixels as the test's expected PNG. `--disable-all-custom-nodes`, `--whitelist-custom-nodes ga` and a `.disabled` folder behaved as the source says.
+- The audit script ran on six packs pinned on 16 September 2026: ComfyUI-GGUF, comfyui_controlnet_aux, ComfyUI-Impact-Pack, ComfyUI-VideoHelperSuite, rgthree-comfy and ComfyUI_essentials. None of the findings suggests bad intent. Impact-Pack installs `onnxruntime` with pip the first time an ONNX detector runs, and its `install.py` downloads a SAM `.pth`. rgthree-comfy sends a model file's SHA-256 to Civitai when the interface asks for its information. comfyui_controlnet_aux has 72 `torch.load` calls without `weights_only`, safe by default only on PyTorch 2.6 or later.
+- A pickle whose payload calls `print` ran with `pickle.loads` and with `torch.load(weights_only=False)`; `torch.load(weights_only=True)` refused it on PyTorch 2.13.
+
+## 2026-09-16 — Models for lessons 9 and 10
+
+- Downloaded to the models drive and checked against the SHA-256 of the Hugging Face tree API: `RealESRGAN_x4plus.safetensors` (66,857,836 bytes, BSD-3-Clause), `film_net_fp16.safetensors` (68,882,302 bytes), and for Wan 2.2 TI2V 5B, under Apache 2.0, `wan2.2_ti2v_5B_fp16.safetensors` (9,999,658,848 bytes), `umt5_xxl_fp8_e4m3fn_scaled.safetensors` (6,735,906,897 bytes) and `wan2.2_vae.safetensors` (1,409,400,960 bytes). The 18.1 GB of Wan took 10 minutes.
+- Comfy-Org's repackage has no fp8 file of TI2V 5B, only fp16.
+
+## 2026-09-16 — Upscaling, seamless textures and HDR
+
+- The RAM rule chose the model at each server start: Z-Image-Turbo nvfp4 with 22 GB of free RAM, int8 with 24 GB. Free RAM fell to 9 GB during the int8 renders.
+- A sampling step took about 0.3 seconds at 1024 × 1024 and 2.2 to 2.8 seconds at 2048 × 2048.
+- A plain `VAEDecode` of the 2048 × 2048 latent fit on the GPU; its image differs from `VAEDecodeTiled`'s by 0.93 levels on average.
+- The latent upscale left a noisy grain and doubled strings at denoise 0.3.
+- `SaveImageAdvanced`'s 16-bit PNG of an 8-bit render has 256 levels per channel, and its EXR has no value above 1.0. The C# client stopped at the first 16-bit PNG: it now decodes them, and lists EXR and AVIF files by size.
+- The first seamless attempt, with a 160-pixel cross, 64 pixels of feather and denoise 0.7, halved the seams (13.4 to 5.2 levels at the middle row) but left a speckled line and a step in tone. Denoise 0.9 didn't help; a 384-pixel cross with 128 pixels of feather did.
+- "Pale maple" drew maple leaves carved in the wood. "Pale maple wood, a planed board" drew a board.
+
+![Three panels. A 2 × 2 repeat of a rosewood texture, with faint horizontal and vertical lines across each tile. A crop of the middle of that texture, where a row of dark speckles runs across the grain and the lower half is lighter. A 2 × 2 repeat of pale wood with a large carved maple leaf in each tile.](../../../assets/comfyui/journal-l09-seamless-failures.webp)
+
+*Failures, before the fix. ComfyUI v0.36.0: Z-Image-Turbo nvfp4 with Qwen3 4B fp4 mixed, seed 42, 8 steps, CFG 1, `res_multistep`, `simple`, workflow [`09-seamless.api.json`](https://github.com/spareilleux/learn/blob/d16b4d70b565257067309b7b8d7f51408cb81741/code/comfyui/workflows/09-seamless.api.json) with its cross set to 160 pixels, 64 of feather and denoise 0.7. From left to right: rosewood repeated 2 × 2; the middle 512 × 512 pixels of the rosewood; the prompt "flat top-down photograph of pale maple, subtle straight grain, even soft lighting, no shadows, wood texture", repeated 2 × 2.*
+
 ## To verify
 
 - SDXL on Linux with CUDA, and on Apple Silicon with MPS: the course's GPU machine runs Windows; CI only installs the CPU builds.
@@ -123,6 +152,9 @@ sidebar:
 - Stacked LoRAs in the other order: same image, and same pixel hash or not.
 - The emulated path for nvfp4 and fp8 on a GPU without their kernels; the course's machine has an RTX 50 series GPU only.
 - Why the nvfp4 Z-Image network sampled faster with the bf16 text encoder than with the fp4 one.
+- Sampling tiles from `SplitImageToTileList` and merging them with `ImageMergeTileList`: whether seams show at a low denoise.
+- Whether `LoadImage` lists `.exr` files on Linux and macOS, and whether three.js's `EXRLoader` reads ComfyUI's uncompressed EXR in a browser.
+- How browsers show the HLG AVIF of `SaveImageAdvanced`.
 - What the `convrot` option of int8 does in comfy-kitchen's kernels.
 - Warm render times with `--disable-dynamic-vram`, on a machine with enough free RAM.
 - `execution_error` and `execution_interrupted` as the clients print them, `POST /interrupt` with a prompt id, and deleting a queued prompt: no run has produced them yet.
