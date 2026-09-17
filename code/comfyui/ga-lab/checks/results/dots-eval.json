@@ -52,41 +52,41 @@
     "0.01": {
      "images": 120,
      "dots": 523,
-     "detections": 5800,
+     "detections": 5815,
      "true_positives": 462,
-     "precision": 0.0797,
+     "precision": 0.0794,
      "recall": 0.8834,
-     "f1": 0.1461,
+     "f1": 0.1458,
      "image_error_rate": 1.0
     },
     "0.015": {
      "images": 120,
      "dots": 523,
-     "detections": 3730,
+     "detections": 3742,
      "true_positives": 433,
-     "precision": 0.1161,
+     "precision": 0.1157,
      "recall": 0.8279,
-     "f1": 0.2036,
+     "f1": 0.203,
      "image_error_rate": 1.0
     },
     "0.02": {
      "images": 120,
      "dots": 523,
-     "detections": 2255,
+     "detections": 2258,
      "true_positives": 412,
-     "precision": 0.1827,
+     "precision": 0.1825,
      "recall": 0.7878,
-     "f1": 0.2966,
+     "f1": 0.2963,
      "image_error_rate": 1.0
     },
     "0.03": {
      "images": 120,
      "dots": 523,
-     "detections": 1102,
+     "detections": 1103,
      "true_positives": 381,
-     "precision": 0.3457,
+     "precision": 0.3454,
      "recall": 0.7285,
-     "f1": 0.4689,
+     "f1": 0.4686,
      "image_error_rate": 0.9583
     },
     "0.04": {
@@ -525,5 +525,155 @@
    }
   }
  },
- "seconds": 191.4
+ "ga_maps": {
+  "threshold": 0.06,
+  "chords": [
+   "C",
+   "G",
+   "Am",
+   "F",
+   "D",
+   "E7",
+   "Cmaj7",
+   "Dm7",
+   "G7",
+   "Bm7b5"
+  ],
+  "fret_ranges": [
+   [
+    0,
+    5
+   ],
+   [
+    0,
+    12
+   ]
+  ],
+  "inlays": "hide",
+  "filled": {
+   "clean": {
+    "images": 20,
+    "dots": 64,
+    "detections": 66,
+    "true_positives": 64,
+    "precision": 0.9697,
+    "recall": 1.0,
+    "f1": 0.9846,
+    "image_error_rate": 0.1
+   },
+   "noise": {
+    "images": 20,
+    "dots": 64,
+    "detections": 64,
+    "true_positives": 64,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "image_error_rate": 0.0
+   },
+   "blur": {
+    "images": 20,
+    "dots": 64,
+    "detections": 136,
+    "true_positives": 64,
+    "precision": 0.4706,
+    "recall": 1.0,
+    "f1": 0.64,
+    "image_error_rate": 1.0
+   },
+   "perspective": {
+    "images": 20,
+    "dots": 64,
+    "detections": 72,
+    "true_positives": 62,
+    "precision": 0.8611,
+    "recall": 0.9688,
+    "f1": 0.9118,
+    "image_error_rate": 0.35
+   },
+   "combined": {
+    "images": 20,
+    "dots": 64,
+    "detections": 84,
+    "true_positives": 63,
+    "precision": 0.75,
+    "recall": 0.9844,
+    "f1": 0.8514,
+    "image_error_rate": 0.5
+   },
+   "overall": {
+    "images": 100,
+    "dots": 320,
+    "detections": 422,
+    "true_positives": 317,
+    "precision": 0.7512,
+    "recall": 0.9906,
+    "f1": 0.8544,
+    "image_error_rate": 0.39
+   }
+  },
+  "ring": {
+   "clean": {
+    "images": 20,
+    "dots": 64,
+    "detections": 0,
+    "true_positives": 0,
+    "precision": 1.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "image_error_rate": 1.0
+   },
+   "noise": {
+    "images": 20,
+    "dots": 64,
+    "detections": 0,
+    "true_positives": 0,
+    "precision": 1.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "image_error_rate": 1.0
+   },
+   "blur": {
+    "images": 20,
+    "dots": 64,
+    "detections": 46,
+    "true_positives": 0,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "image_error_rate": 1.0
+   },
+   "perspective": {
+    "images": 20,
+    "dots": 64,
+    "detections": 5,
+    "true_positives": 0,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "image_error_rate": 1.0
+   },
+   "combined": {
+    "images": 20,
+    "dots": 64,
+    "detections": 14,
+    "true_positives": 0,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "image_error_rate": 1.0
+   },
+   "overall": {
+    "images": 100,
+    "dots": 320,
+    "detections": 65,
+    "true_positives": 0,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "image_error_rate": 1.0
+   }
+  }
+ },
+ "seconds": 619.8
 }
