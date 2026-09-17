@@ -11,7 +11,7 @@ import { DEFAULT_MATCH, QUALITIES, chordName, matchChord, pcsMask, pitchClasses,
 import { ChromaExtractor, defaultChromaOptions, type ChromaOptions } from '../src/dsp/chroma.ts';
 import { ChordTracker, DEFAULT_TRACKER, type TrackerOptions } from '../src/dsp/tracker.ts';
 import { OPEN_MIDI, tab } from '../src/dsp/voicings.ts';
-import { CONDITIONS, LEAD_SECONDS, SAMPLE_RATE, VOICING_KINDS, corpus, render, type Clip } from './corpus.ts';
+import { CONDITIONS, LEAD_SECONDS, SAMPLE_RATE, VOICING_KINDS, corpus, render } from './corpus.ts';
 
 const HOP = 2048;
 

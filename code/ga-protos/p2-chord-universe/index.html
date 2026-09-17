@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Play a chord, see the universe</title>
+    <link rel="stylesheet" href="./src/app/style.css" />
+  </head>
+  <body>
+    <canvas id="scene"></canvas>
+    <main id="panel">
+      <h1>Play a chord, see the universe</h1>
+      <p class="privacy" id="privacy">
+        <strong>Private by design.</strong> The microphone and any file you pick are analyzed on this device, in this page.
+        No audio is uploaded, stored or sent anywhere: the app makes no network request once loaded.
+      </p>
+      <div class="sources">
+        <button id="demo" type="button">Demo progression</button>
+        <button id="mic" type="button">Microphone</button>
+        <label class="file">Audio file<input id="file" type="file" accept="audio/*" /></label>
+        <button id="stop" type="button" disabled>Stop</button>
+      </div>
+      <p id="status" class="status">Choose a source. The demo needs no microphone.</p>
+      <section class="chord">
+        <div id="chord" class="name">–</div>
+        <div class="confidence"><div id="confidence-bar"></div></div>
+        <ol id="top3" class="top3"></ol>
+      </section>
+      <section class="harmony">
+        <div>Key: <span id="key">–</span></div>
+        <div>Next: <ol id="next" class="next"></ol></div>
+      </section>
+      <div id="chroma" class="chroma" aria-label="Live chromagram"></div>
+      <p id="backend" class="backend"></p>
+    </main>
+    <script type="module" src="./src/app/main.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,141 @@
+:root {
+  color-scheme: dark;
+  --bg: #05060d;
+  --panel: rgba(12, 14, 28, 0.82);
+  --text: #e8e9f3;
+  --muted: #9aa0bd;
+  --accent: #ffcf5a;
+  --cool: #5ab0ff;
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  overflow: hidden;
+}
+#scene {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+#panel {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  width: min(360px, calc(100% - 24px));
+  max-height: calc(100% - 24px);
+  overflow: auto;
+  padding: 14px 16px;
+  background: var(--panel);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  backdrop-filter: blur(6px);
+}
+h1 {
+  font-size: 1.05rem;
+  margin: 0 0 8px;
+}
+.privacy {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0 0 10px;
+  padding: 8px;
+  border-left: 3px solid var(--cool);
+  background: rgba(90, 176, 255, 0.07);
+}
+.sources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+button,
+.file {
+  font: inherit;
+  font-size: 0.85rem;
+  color: var(--text);
+  background: #1d2140;
+  border: 1px solid #343a6a;
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.file input {
+  display: none;
+}
+.status {
+  font-size: 0.8rem;
+  color: var(--muted);
+  min-height: 1.2em;
+}
+.chord .name {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1.1;
+}
+.confidence {
+  height: 6px;
+  background: #1d2140;
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 4px 0;
+}
+#confidence-bar {
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  transition: width 0.15s;
+}
+.top3,
+.next {
+  margin: 4px 0;
+  padding-left: 1.2em;
+  font-size: 0.85rem;
+}
+.next li small {
+  color: var(--muted);
+}
+.harmony {
+  font-size: 0.9rem;
+  margin-top: 8px;
+}
+.chroma {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 2px;
+  height: 60px;
+  align-items: end;
+  margin-top: 10px;
+}
+.chroma div {
+  position: relative;
+  background: var(--cool);
+  min-height: 1px;
+  border-radius: 2px 2px 0 0;
+}
+.chroma div span {
+  position: absolute;
+  bottom: -14px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 0.6rem;
+  color: var(--muted);
+}
+.backend {
+  margin: 20px 0 0;
+  font-size: 0.7rem;
+  color: var(--muted);
+}
