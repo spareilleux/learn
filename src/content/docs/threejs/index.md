@@ -40,6 +40,10 @@ The course's own scenes are small and deterministic: a cube, a piece of guitar n
 
 The real code is [GuitarAlchemist/ga](https://github.com/GuitarAlchemist/ga) at commit [`05c8eda`](https://github.com/GuitarAlchemist/ga/commit/05c8eda013f2a4d11efaa52c4ca94674521ee684), mainly [`ThreeFretboard.tsx`](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeFretboard.tsx), its 3D guitar neck. GA's React components ask for three.js 0.180, six releases behind this course. The lessons quote GA's code where it shows a point well, including what changed since r180; the findings are in the [journal](journal/).
 
+## Live demos
+
+Every lesson page runs on this site, under a folded frame below its screenshot, with a *Try it* panel that sets the page's parameters, the ones the exercises use. Five complete scenes put the lessons together on a whole guitar modeled in code: a [guitar to play](../threejs-demos/demos/guitar.html) (lesson 5), [chord voicings](../threejs-demos/demos/voicing.html) on GA's fretboard (lesson 13), a [studio](../threejs-demos/demos/studio.html) with shadows, an HDR environment and bloom (lesson 7), [picks thrown on the guitar](../threejs-demos/demos/physics.html) with Rapier (lesson 10), and the [guitar in VR](../threejs-demos/demos/xr.html?emulate) (lesson 11). A frame loads nothing until it is unfolded. The whole build weighs 9.4 MB, most of it Rapier's two builds in WebAssembly.
+
 ## By the end of this course, I will be able to
 
 - set up a three.js project with Vite and TypeScript, and explain what `WebGPURenderer` does when WebGPU is missing;

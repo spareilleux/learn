@@ -148,6 +148,8 @@ The screenshot, taken during the session, shows what IWER composites to the page
 
 ![Two nearly identical views side by side on a dark background, each showing a small brown fretboard with frets and strings, seen from above at an angle, slightly shifted between the left and right halves.](../../../assets/threejs/l11-stereo.webp)
 
+[Open full screen](../../threejs-demos/demos/xr.html?emulate). **Try it**: this page shows nothing without the probe; the [live demo](#live-demo-the-guitar-in-vr) at the end of the lesson enters the same emulated session with a button, and answers exercises 1 and 3.
+
 ## With WebGPURenderer
 
 The default page uses `WebGPURenderer`:
@@ -235,6 +237,21 @@ The switch worked, and ran into the same `null` framebuffer. It shows something 
 ## In GuitarAlchemist/ga
 
 GA has no WebXR code at commit `05c8eda`: no `renderer.xr`, no `VRButton`, no `navigator.xr`. The only mention is a Claude skill file, `.claude/skills/three-best-practices/rules/webxr-setup.md`, written for agents, not used by the app. A VR mode for the fretboard would start from `ThreeFretboard.tsx`'s `WebGPURenderer`, which, as this lesson found, can't enter a session in r186 without `XRGPUBinding`: the fallback addon or a `WebGLRenderer` would be the first step.
+
+## Live demo: the guitar in VR
+
+Exercises 1 and 3 on a whole guitar: the classic `WebGLRenderer`, the one this lesson saw render both eyes with IWER, a `VRButton`, and a `select` handler that takes the controller's ray into the guitar's own coordinates, finds the string and the fret as lesson 5's guitar does, plays the note and sends a 40 ms haptic pulse. IWER is imported only with `?emulate`, so a real headset downloads nothing of it. The page ignores `resize` during a session: `WebGLRenderer` refuses to change its size while presenting, and warns. Its probe enters an emulated session, aims the right controller at string 3, fret 5, pulls the trigger and reads `string 3, fret 5: C4`, with 2 eyes and no error. The [source](https://github.com/spareilleux/learn/tree/f68e710/code/threejs/demos/xr) is in `code/threejs/demos/xr`.
+
+![Two nearly identical views side by side, the left and right eyes of an emulated headset: a whole electric guitar floating above a gray grid floor, seen from above, with a thin orange controller ray crossing its strings in each view.](../../../assets/threejs/demo-xr.webp)
+
+<details>
+<summary>Live page: run it here</summary>
+
+<iframe src="../../threejs-demos/demos/xr.html?emulate" title="The guitar in VR" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Open full screen](../../threejs-demos/demos/xr.html?emulate). **Try it**: press *Enter VR*: the emulated right controller then plays a C major arpeggio by itself. With a headset, open the page without `?emulate` in its browser, point at the neck and pull the trigger; *to verify*, the author has no headset.
 
 ## Key takeaways
 

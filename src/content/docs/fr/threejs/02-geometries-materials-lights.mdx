@@ -13,6 +13,15 @@ La leçon 1 a dessiné un cube avec un matériau qui n'a besoin d'aucune lumièr
 
 ![Une touche brun foncé posée sur une table gris-bleu, vue d'en haut et de côté, avec cinq fines frettes métalliques près de son extrémité gauche, un repère blanc entre la deuxième et la troisième frette, et son ombre sur la table en dessous.](../../../../assets/threejs/l02-neck.webp)
 
+<details>
+<summary>Page en direct : la lancer ici</summary>
+
+<iframe src="../../../threejs-demos/02-materials-lights.html" title="Leçon 2, en direct" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Ouvrir en plein écran](../../../threejs-demos/02-materials-lights.html). **À essayer** : décochez *neck casts a shadow* pour la scène de l'exercice 3 (`?neckshadow=off`), ou *shadows* pour voir ce qu'apporte la shadow map. La [scène du studio](../../../threejs-demos/demos/studio.html) de la leçon 7 place une guitare entière sous un projecteur aux ombres douces.
+
 La capture d'écran provient de `node scripts/probe.mjs 02-materials-lights --shot out/neck.png`, dans Chromium headless sur la machine de l'auteur, avec WebGPU.
 
 | | WPF 3D | MonoGame | three.js |
@@ -269,6 +278,15 @@ $ node scripts/probe.mjs 02-materials-lights --query neckshadow=off
 Un appel de dessin et 12 triangles de moins : le manche n'est plus dessiné dans la shadow map. Les frettes le sont toujours, donc leurs fines ombres atteignent maintenant la table à travers le manche, qui ne les masque plus :
 
 ![La même touche, sans sa grande ombre sur la table : cinq courtes marques sombres, les ombres des frettes, se trouvent sur la table juste sous le manche.](../../../../assets/threejs/l02-neck-no-neck-shadow.webp)
+
+<details>
+<summary>Page en direct : la lancer ici</summary>
+
+<iframe src="../../../threejs-demos/02-materials-lights.html?neckshadow=off" title="Leçon 2 avec ?neckshadow=off, en direct" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Ouvrir en plein écran](../../../threejs-demos/02-materials-lights.html?neckshadow=off)
 
 Le manche reçoit toujours les ombres des frettes sur sa face supérieure. Un maillage qui ne projette pas d'ombre mais devrait en masquer une autre est une cause fréquente de lumière qui passe là où elle ne devrait pas.
 

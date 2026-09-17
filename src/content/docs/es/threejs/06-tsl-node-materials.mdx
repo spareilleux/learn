@@ -99,6 +99,15 @@ $ node scripts/probe.mjs 06-tsl --extract shader out/l06_shader_webgpu.txt
 
 ![Una tabla marrón oscura con una veta horizontal fina y ondulada que llena el centro del encuadre, y una cuerda fina de color crema arqueada hacia arriba en un arco suave, fija en ambos extremos.](../../../../assets/threejs/l06-tsl.webp)
 
+<details>
+<summary>Página en vivo: ejecutarla aquí</summary>
+
+<iframe src="../../../threejs-demos/06-tsl.html" title="Lección 6, en vivo" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Abrir a pantalla completa](../../../threejs-demos/06-tsl.html). **Pruébalo**: pon *harmonic* en 2, la octava del ejercicio 1, y compara la cuerda con tu predicción. Las cuerdas de la [guitarra entera](../../../threejs-demos/demos/guitar.html) de la lección 5 vibran igual: un `positionNode` cuya amplitud, punto de inicio y tiempo son uniforms que fija un clic.
+
 Los píxeles confirman la forma: crema en el centro desplazado y en el punto a un cuarto desplazado, y madera en la posición de reposo del centro, donde la cuerda ya no está. Tres draw calls: el mástil, la cuerda y la pasada de salida. La ejecución con `--webgl` da los mismos recuentos y los mismos tres colores.
 
 ### Cuándo se reconstruye el shader

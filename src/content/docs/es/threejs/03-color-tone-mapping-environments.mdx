@@ -106,6 +106,15 @@ La misma página con las tres curvas más usadas hoy:
 
 ![Dos filas de cuadrados grises sobre un fondo oscuro. La fila de arriba va del gris oscuro al blanco en seis pasos; la de abajo tiene cuatro cuadrados que alternan un gris medio y un gris más claro.](../../../../assets/threejs/l03-patches-aces.webp)
 
+<details>
+<summary>Página en vivo: ejecutarla aquí</summary>
+
+<iframe src="../../../threejs-demos/03-color.html?tone=aces" title="Lección 3, tone mapping, en vivo" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Abrir a pantalla completa](../../../threejs-demos/03-color.html?tone=aces). **Pruébalo**: elige *agx* en *tone mapping* y pon *exposure* en 2 y en 4: las dos pruebas del ejercicio 3.
+
 | Parche | ninguno | ACES Filmic | AgX | Neutral |
 |---|---|---|---|---|
 | lineal 0.05 | 63 | 50 | 70 | 33 |
@@ -181,6 +190,15 @@ for (const [row, metalness] of [0, 1].entries()) {
 ```
 
 ![Diez esferas de color canela en dos filas sobre un fondo de estudio gris y desenfocado. En la fila de arriba, las esferas de aspecto plástico van de brillantes, con un reflejo blanco y nítido de una softbox, a mates. En la fila de abajo, las esferas metálicas van de un cobre como un espejo con un reflejo nítido a un cobre suave e iluminado de forma uniforme.](../../../../assets/threejs/l03-environment.webp)
+
+<details>
+<summary>Página en vivo: ejecutarla aquí</summary>
+
+<iframe src="../../../threejs-demos/03-environment.html" title="Lección 3, entorno HDR, en vivo" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Abrir a pantalla completa](../../../threejs-demos/03-environment.html). **Pruébalo**: la [escena del estudio](../../../threejs-demos/demos/studio.html) de la lección 7 ilumina una guitarra entera con el mismo `studio.hdr`, y su panel cambia `environmentIntensity` y la exposición.
 
 Las reglas de la lección 2 se ven en cada esfera. Los dieléctricos de la fila de arriba conservan su color canela y reflejan la softbox en blanco; los metales de la fila de abajo no tienen color difuso, y tiñen el reflejo, que es nítido con rugosidad 0 y se extiende por toda la esfera con rugosidad 1.
 

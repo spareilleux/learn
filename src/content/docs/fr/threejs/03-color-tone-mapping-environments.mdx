@@ -106,6 +106,15 @@ La même page avec les trois courbes les plus utilisées aujourd'hui :
 
 ![Deux rangées de carrés gris sur un fond sombre. La rangée du haut va du gris foncé au blanc en six paliers ; la rangée du bas a quatre carrés qui alternent un gris moyen et un gris plus clair.](../../../../assets/threejs/l03-patches-aces.webp)
 
+<details>
+<summary>Page en direct : la lancer ici</summary>
+
+<iframe src="../../../threejs-demos/03-color.html?tone=aces" title="Leçon 3, tone mapping, en direct" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Ouvrir en plein écran](../../../threejs-demos/03-color.html?tone=aces). **À essayer** : choisissez *agx* dans *tone mapping*, puis mettez *exposure* à 2 et à 4 : les deux essais de l'exercice 3.
+
 | Pastille | aucun | ACES Filmic | AgX | Neutral |
 |---|---|---|---|---|
 | linéaire 0.05 | 63 | 50 | 70 | 33 |
@@ -181,6 +190,15 @@ for (const [row, metalness] of [0, 1].entries()) {
 ```
 
 ![Dix sphères beige en deux rangées devant un arrière-plan de studio gris et flou. Dans la rangée du haut, les sphères d'aspect plastique vont du brillant, avec un reflet blanc et net d'une softbox, au mat. Dans la rangée du bas, les sphères métalliques vont d'un cuivre poli comme un miroir, au reflet net, à un cuivre doux, éclairé uniformément.](../../../../assets/threejs/l03-environment.webp)
+
+<details>
+<summary>Page en direct : la lancer ici</summary>
+
+<iframe src="../../../threejs-demos/03-environment.html" title="Leçon 3, environnement HDR, en direct" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Ouvrir en plein écran](../../../threejs-demos/03-environment.html). **À essayer** : la [scène du studio](../../../threejs-demos/demos/studio.html) de la leçon 7 éclaire une guitare entière avec le même `studio.hdr`, et son panneau change `environmentIntensity` et l'exposition.
 
 Les règles de la leçon 2 se voient sur chaque sphère. Les diélectriques de la rangée du haut gardent leur couleur beige et reflètent la softbox en blanc ; les métaux de la rangée du bas n'ont pas de couleur diffuse, et teintent le reflet, net à une rugosité de 0 et étalé sur toute la sphère à une rugosité de 1.
 

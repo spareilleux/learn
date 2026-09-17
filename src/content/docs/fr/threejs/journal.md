@@ -24,6 +24,7 @@ sidebar:
 - [x] Leçon 12 : tests et CI
 - [x] Leçon 13 : projet, le manche de guitare 3D de GuitarAlchemist
 - [x] Cours terminé
+- [x] Démos en direct : chaque page de leçon et cinq scènes complètes, publiées sous le site avec un panneau *Try it*
 
 ## 2026-09-16 — Versions
 
@@ -130,8 +131,21 @@ Rien de ce qui suit n'a été signalé à GA.
 - 22 fichiers de specs Playwright, dont les 7 hors de la suite du tableau de bord, 6 d'entre eux sur des pages 3D, ne sont exécutés par aucun workflow de CI ; des attentes de 3 secondes pour WebGPU ; un `toBeTruthy()` sur le buffer d'une capture d'écran ; une vérification de canvas noir qui appelle `getContext('2d')` sur un canvas WebGL et ne peut jamais réussir ; 13 fichiers de résultats de tests commités, issus d'une exécution en échec (leçon 12).
 - `ThreeFretboard.tsx`, reproduit et mesuré : 69 draw calls et 32 textures pour un manche vide ; 10 rendus de son parent avec les mêmes notes reconstruisent la scène 10 fois et font fuir 29 textures de sprites à chaque fois ; un pixel ratio qui va jusqu'à 6 ; `samples: 8`, qui ne dessine rien sur le WebGL 2 de SwiftShader ; des cordes deux fois trop épaisses, puisqu'un tirant sert de rayon ; et une prop `onPositionClick` jamais appelée. Le portage dessine le même manche en 6 draw calls avec 4 textures, et sélectionne des notes (leçon 13).
 
+## 2026-09-17 — Démos en direct
+
+- Les pages sont construites par une seconde configuration Vite, `vite.demos.config.ts`, avec la base `/learn/threejs-demos/`, dans `public/threejs-demos`, que le site copie tel quel. Les sources des pages des leçons sont inchangées, puisque les leçons 4, 8 et 13 citent leur build ; un plugin de cette configuration ajoute le panneau *Try it* aux seules pages construites. Une page ne se pilote pas de l'extérieur : chaque contrôle règle donc un paramètre d'URL et recharge la page. Le panneau est lil-gui 0.17, la copie que three.js livre dans `three/addons/libs` : aucune nouvelle dépendance.
+- Le build pèse 9.4 Mo en 75 fichiers. Les builds standard et déterministe de Rapier, chacun avec son WebAssembly intégré en base64, font 2.9 Mo chacun ; `three.tsl` 0.69 Mo. `check.sh` le reconstruit et le compare à la copie commitée (`diff -r`, hors modèles et HDR régénérés).
+- Les cadres sont dans un `<details>` fermé, avec `loading="lazy"` : rien ne se charge tant qu'un lecteur n'en déplie pas un.
+- La guitare est modélisée en code : aucune guitare glTF sous licence connue n'était disponible. 47 405 triangles en 32 draw calls ; de l'instanciation pour les frettes, les repères, les plots, les pontets, les boutons et les mécaniques.
+- Le `body.handle` de Rapier est un flottant qui regroupe un index et une génération : `handle % 8` n'est pas un index de palette ; chaque médiator garde maintenant la couleur de son numéro de lancer. Et les couleurs réglées avec `setColorAt` n'atteignaient le GPU que dans une image de `setAnimationLoop` : une sonde qui appelait `render()` elle-même voyait des médiators blancs. En r186, `InstanceNode` les envoie dans sa mise à jour par image.
+- La page VR utilise le `WebGLRenderer` classique, comme la leçon 11 l'a trouvé nécessaire avec IWER. Pendant une session, son écouteur `resize` ne doit rien faire : `WebGLRenderer` avertit « Can't change size while VR device is presenting ».
+- La première sonde d'une page qui importe une nouvelle dépendance a échoué avec « Execution context was destroyed » : Vite a optimisé la dépendance et rechargé la page. Le second essai est passé.
+
 ## À vérifier
 
+- La démo VR avec un vrai casque : l'entrée dans la session, les rayons des manettes, la note et l'impulsion haptique.
+- Si les médiators lancés sans CCD traversent les frettes de la démo physique.
+- Les cinq scènes complètes sur un téléphone : fréquence d'images, et si la shadow map de 2048 × 2048 et le bloom du studio tiennent.
 - Si une scène modélisée en centimètres a besoin de lumières 10 000 fois plus fortes pour avoir le même aspect qu'en mètres (leçon 2).
 - Les textures KTX2 : chargement, formats GPU choisis sur chaque OS, mémoire.
 - Si `ThreeHeadstock.tsx` appelle `onTuningPegClick` une fois par écouteur périmé après les nouvelles exécutions de son effet (leçon 5).

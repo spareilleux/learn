@@ -19,6 +19,15 @@ The reproduction, [`GaFretboard.tsx`](https://github.com/spareilleux/learn/blob/
 
 ![A long dark brown neck with 22 frets seen from the side and above, receding to the right, with small white inlay dots, fret numbers along the near edge, and three blue markers of a C major chord near the nut on the left.](../../../assets/threejs/l13-ga.webp)
 
+<details>
+<summary>Live page: run it here</summary>
+
+<iframe src="../../threejs-demos/13-fretboard.html?version=ga" title="Lesson 13, live" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Open full screen](../../threejs-demos/13-fretboard.html?version=ga). **Try it**: *version* switches between GA's structure and the port. The chord markers are placed by the probe only; the [live demo](#live-demo-chord-voicings) at the end of the lesson places them from a panel.
+
 GA's version:
 
 ```text
@@ -134,6 +143,15 @@ $ node scripts/probe.mjs 13-fretboard --query version=port
 ```
 
 ![The same neck, drawn by the port, slightly darker, with thinner frets, the inlays, and three blue chord markers near the nut.](../../../assets/threejs/l13-port.webp)
+
+<details>
+<summary>Live page: run it here</summary>
+
+<iframe src="../../threejs-demos/13-fretboard.html" title="Lesson 13, the port, live" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Open full screen](../../threejs-demos/13-fretboard.html)
 
 | | GA's structure | Port | What changed |
 |---|---|---|---|
@@ -253,6 +271,21 @@ The port is written for this course's page; moving it into GA is a separate chan
 - **React 19 and R3F 9.** GA's components use R3F 8 and React 18 (lesson 9). Alternatively, the same ideas fit GA's existing `useEffect` structure: split the effect so that the neck is built once, and markers are updated in their own effect keyed by content; dispose sprites' textures; cap the pixel ratio; add a `Raycaster`.
 - **`MeshPhysicalMaterial`, the wood textures, the capo and the guitar models** that the reproduction left out. Each shared material is one line; the capo's model loads asynchronously and can arrive after a cleanup ([lines 1188-1201](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeFretboard.tsx#L1188-L1201)): it needs the same `isMounted` check as the renderer.
 - **Tests.** Lesson 12's component tests run on the port as they do on lesson 9's fretboard; GA's `fretboard.spec.ts` would get a condition to wait for instead of 3 seconds.
+
+## Live demo: chord voicings
+
+The port in use: the panel picks one of 14 chords and one of its voicings, from open shapes to E and A shapes up the neck, and each marker takes the color of its role, root, third, fifth or seventh. The voicings were written by hand, and the probe checks them note by note: C with the E shape at fret 8 reads C3 G3 C4 E4 G4 C5, and Bm7♭5 at fret 2 reads x B2 F3 A3 D4 x. Each change of chord builds the markers once (`markerBuilds` goes 1, 2, 3) and keeps 7 draw calls. The [source](https://github.com/spareilleux/learn/tree/f68e710/code/threejs/demos/voicing) is in `code/threejs/demos/voicing`.
+
+![A long dark fretboard with numbered frets seen from above at an angle, with four colored markers near the nut, red, yellow, blue and green, and a legend at the bottom left reading Bm7♭5, fret 2: x B2 F3 A3 D4 x (low E to high E), then root, third, fifth and seventh with their colors.](../../../assets/threejs/demo-voicing.webp)
+
+<details>
+<summary>Live page: run it here</summary>
+
+<iframe src="../../threejs-demos/demos/voicing.html" title="Chord voicings on the fretboard" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Open full screen](../../threejs-demos/demos/voicing.html). **Try it**: pick a chord and a voicing, click a position to hear it, or *strum*. Before exercise 2, count the markers of a C major chord here, then predict the draw calls of the scale.
 
 ## Key takeaways
 

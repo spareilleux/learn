@@ -25,6 +25,15 @@ The page draws 10,000 small orange icosahedrons of 80 triangles on a 100 × 100 
 
 ![A dense grid of tiny orange dots forming a trapezoid on a dark background, seen from above at an angle, narrower toward the top.](../../../assets/threejs/l08-meshes.webp)
 
+<details>
+<summary>Live page: run it here</summary>
+
+<iframe src="../../threejs-demos/08-performance.html" title="Lesson 8, live" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Open full screen](../../threejs-demos/08-performance.html). **Try it**: *mode* switches between the six versions measured below, *markers* changes their number, and *view* moves the camera close: *tiles* with *close* is exercise 1's measurement. The [voicing scene](../../threejs-demos/demos/voicing.html) of lesson 13 draws a chord's markers with one `InstancedMesh`: 7 draw calls whatever the chord.
+
 After three frames, the page reads `renderer.info`, then renders 20 more frames in a loop and divides the time: the CPU time of one `renderer.render()` call, which records and submits the commands; the GPU works afterwards, and isn't in that number. It also measures the time to build the markers (`setupMs`) and the first frame, which includes compiling the shaders (`firstFrameMs`). `check.sh` compares the counts, and prints the times without comparing them.
 
 ```text
@@ -96,6 +105,15 @@ A [`LOD`](https://threejs.org/docs/pages/LOD.html) holds several versions of an 
 With `?view=close`, the camera looks at one corner of the grid:
 
 ![Orange spheres in regular rows, seen from straight above and close, larger than in the overview, covering most of the frame, with an empty dark strip along the left edge beyond the grid's corner.](../../../assets/threejs/l08-lod-close.webp)
+
+<details>
+<summary>Live page: run it here</summary>
+
+<iframe src="../../threejs-demos/08-performance.html?mode=lod&view=close" title="Lesson 8 with ?mode=lod&view=close, live" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Open full screen](../../threejs-demos/08-performance.html?mode=lod&view=close)
 
 | `?mode=`, `?view=close` | draw calls | triangles | one frame, CPU |
 |---|---|---|---|

@@ -106,6 +106,15 @@ The same page with the three curves most used today:
 
 ![Two rows of gray squares on a dark background. The top row goes from dark gray to white in six steps; the bottom row has four squares alternating a middle gray and a lighter gray.](../../../assets/threejs/l03-patches-aces.webp)
 
+<details>
+<summary>Live page: run it here</summary>
+
+<iframe src="../../threejs-demos/03-color.html?tone=aces" title="Lesson 3, tone mapping, live" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Open full screen](../../threejs-demos/03-color.html?tone=aces). **Try it**: pick *agx* in *tone mapping*, then set *exposure* to 2 and to 4: the two runs of exercise 3.
+
 | Patch | none | ACES Filmic | AgX | Neutral |
 |---|---|---|---|---|
 | linear 0.05 | 63 | 50 | 70 | 33 |
@@ -181,6 +190,15 @@ for (const [row, metalness] of [0, 1].entries()) {
 ```
 
 ![Ten tan spheres in two rows against a blurred gray studio background. In the top row, the plastic-like spheres go from glossy, with a sharp white reflection of a softbox, to matte. In the bottom row, the metal spheres go from a mirror-like copper with a sharp reflection to a soft, evenly lit copper.](../../../assets/threejs/l03-environment.webp)
+
+<details>
+<summary>Live page: run it here</summary>
+
+<iframe src="../../threejs-demos/03-environment.html" title="Lesson 3, HDR environment, live" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Open full screen](../../threejs-demos/03-environment.html). **Try it**: the [studio scene](../../threejs-demos/demos/studio.html) of lesson 7 lights a whole guitar with the same `studio.hdr`, and its panel changes `environmentIntensity` and the exposure.
 
 Lesson 2's rules show on every sphere. The dielectrics of the top row keep their tan color and reflect the softbox in white; the metals of the bottom row have no diffuse color, and tint the reflection, which is sharp at roughness 0 and spread over the whole sphere at roughness 1.
 

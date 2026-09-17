@@ -181,6 +181,15 @@ Los contadores ya no se informan después de que se mueva el puntero: el navegad
 
 ![Un mástil marrón oscuro visto desde arriba en ángulo, con trastes de metal y cuerdas, tres marcadores azules de un acorde de do mayor a la izquierda, una pequeña esfera naranja bajo el puntero, y una etiqueta naranja que dice C4 encima; abajo, el texto parent renders: 10, pick: C4.](../../../../assets/threejs/l09-r3f.webp)
 
+<details>
+<summary>Página en vivo: ejecutarla aquí</summary>
+
+<iframe src="../../../threejs-demos/09-r3f.html" title="Lección 9, en vivo" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Abrir a pantalla completa](../../../threejs-demos/09-r3f.html). **Pruébalo**: elige *literal* en *markers*, el caso del ejercicio 3, o *inline* en *frets*; marca *drei's Text* para la captura siguiente. La [escena de voicings](../../../threejs-demos/demos/voicing.html) también es una página R3F: el port de la lección 13 en un `Canvas` con un `WebGPURenderer`, y un panel lil-gui, fuera de React, que elige el acorde.
+
 ## Lo que libera el desmontaje
 
 ```text
@@ -204,6 +213,15 @@ La etiqueta se queda: pertenece a `App`, que conserva la última selección. Que
 Los componentes de drei están escritos para `WebGLRenderer`. Los que se usan aquí funcionan con `WebGPURenderer`: [`OrbitControls`](https://drei.docs.pmnd.rs/controls/introduction) solo mueve la cámara, y `Html` es DOM. [`<Text>`](https://drei.docs.pmnd.rs/abstractions/text) no funciona. Con `?text`, dibuja un rectángulo pálido y sólido donde deberían estar las palabras "C major", y los programas pasan de 4 a 6:
 
 ![El mismo diapasón más de cerca, con un cuadrilátero blanco roto sólido en la parte superior del encuadre, donde debería haber una línea de texto.](../../../../assets/threejs/l09-text.webp)
+
+<details>
+<summary>Página en vivo: ejecutarla aquí</summary>
+
+<iframe src="../../../threejs-demos/09-r3f.html?text" title="Lección 9 con ?text, en vivo" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Abrir a pantalla completa](../../../threejs-demos/09-r3f.html?text)
 
 `<Text>` usa troika-three-text 0.52.5, que dibuja los glifos con un shader de campo de distancia con signo inyectado mediante `material.onBeforeCompile` ([`troika-three-utils`](https://github.com/protectwise/troika/blob/main/packages/troika-three-utils/src/DerivedMaterial.js)). `WebGPURenderer` nunca llama a `onBeforeCompile`: construye sus shaders a partir de nodos. El quad es el material base, sin el texto. En WebGPU, el texto necesita otra vía: una textura de canvas, `Html` o un material TSL (*por verificar*: si existe una versión de troika preparada para WebGPU).
 

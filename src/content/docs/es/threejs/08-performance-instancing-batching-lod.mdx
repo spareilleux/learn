@@ -25,6 +25,15 @@ La página dibuja 10 000 pequeños icosaedros naranjas de 80 triángulos en un
 
 ![Una cuadrícula densa de puntos naranjas diminutos que forma un trapecio sobre un fondo oscuro, vista desde arriba en ángulo, más estrecha hacia la parte superior.](../../../../assets/threejs/l08-meshes.webp)
 
+<details>
+<summary>Página en vivo: ejecutarla aquí</summary>
+
+<iframe src="../../../threejs-demos/08-performance.html" title="Lección 8, en vivo" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Abrir a pantalla completa](../../../threejs-demos/08-performance.html). **Pruébalo**: *mode* cambia entre las seis versiones medidas más abajo, *markers* cambia su número y *view* acerca la cámara: *tiles* con *close* es la medición del ejercicio 1. La [escena de voicings](../../../threejs-demos/demos/voicing.html) de la lección 13 dibuja los marcadores de un acorde con una sola `InstancedMesh`: 7 draw calls, sea cual sea el acorde.
+
 Tras tres fotogramas, la página lee `renderer.info`, luego renderiza 20 fotogramas más en un bucle y divide el tiempo: el tiempo de CPU de una llamada a `renderer.render()`, que registra y envía los comandos; la GPU trabaja después, y no entra en esa cifra. También mide el tiempo de construir los marcadores (`setupMs`) y el primer fotograma, que incluye la compilación de los shaders (`firstFrameMs`). `check.sh` compara los recuentos, e imprime los tiempos sin compararlos.
 
 ```text
@@ -96,6 +105,15 @@ Un [`LOD`](https://threejs.org/docs/pages/LOD.html) contiene varias versiones de
 Con `?view=close`, la cámara mira una esquina de la cuadrícula:
 
 ![Esferas naranjas en filas regulares, vistas justo desde arriba y de cerca, más grandes que en la vista general, cubriendo la mayor parte del encuadre, con una franja oscura vacía a lo largo del borde izquierdo más allá de la esquina de la cuadrícula.](../../../../assets/threejs/l08-lod-close.webp)
+
+<details>
+<summary>Página en vivo: ejecutarla aquí</summary>
+
+<iframe src="../../../threejs-demos/08-performance.html?mode=lod&view=close" title="Lección 8 con ?mode=lod&view=close, en vivo" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Abrir a pantalla completa](../../../threejs-demos/08-performance.html?mode=lod&view=close)
 
 | `?mode=`, `?view=close` | draw calls | triángulos | un fotograma, CPU |
 |---|---|---|---|

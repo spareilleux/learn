@@ -113,6 +113,8 @@ WebGPU face au WebGL 2 d'ANGLE sur le même GPU NVIDIA : 294 pixels diffèrent. 
 
 ![Un cube gris clair sur un fond gris clair, avec une ligne jaune pointillée le long de ses arêtes extérieures, là où pixelmatch a détecté des pixels anticrénelés qui diffèrent ; les faces ne montrent aucune différence marquée.](../../../../assets/threejs/l12-pixel-diff.webp)
 
+[Ouvrir en plein écran](../../../threejs-demos/03-color.html?tone=aces). **À essayer** : l'exercice 3 porte sur le tone mapping de la leçon 3 passé d'ACES à AgX : sur la page en direct de la leçon 3, le *tone mapping* du panneau fait ce changement. `check.sh` sonde aussi les cinq démos en direct, et les reconstruit pour les comparer à la copie que publie le site : `diff -r` ne doit rien afficher.
+
 Une comparaison à l'octet près échoue entre deux quelconques des trois renderers ; une comparaison avec seuil passe, et laisserait aussi passer un vrai changement de quelques niveaux, comme la couleur ACES de la leçon 3, 127 sur le GPU de l'auteur et 128 en CI. Le cours lit des couleurs précises à des positions connues, avec une tolérance de 2 par canal ([`compare.mjs`](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/scripts/compare.mjs)) : la vérification d'un nombre, qu'un lecteur peut rattacher à une leçon. Les comparaisons d'images entières ont leur place là où le renderer est fixe : le même GPU, le même pilote et le même navigateur, comme une tâche de régression visuelle sur une machine dédiée, avec les images de référence régénérées sur place.
 
 ## Six façons dont un test a mal tourné dans ce cours

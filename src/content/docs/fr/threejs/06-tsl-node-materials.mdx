@@ -99,6 +99,15 @@ $ node scripts/probe.mjs 06-tsl --extract shader out/l06_shader_webgpu.txt
 
 ![Une planche brun foncé au veinage horizontal fin et ondulé qui remplit le milieu de l'image, et une fine corde crème courbée vers le haut en un arc régulier, fixée à ses deux extrémités.](../../../../assets/threejs/l06-tsl.webp)
 
+<details>
+<summary>Page en direct : la lancer ici</summary>
+
+<iframe src="../../../threejs-demos/06-tsl.html" title="Leçon 6, en direct" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Ouvrir en plein écran](../../../threejs-demos/06-tsl.html). **À essayer** : mettez *harmonic* à 2, l'octave de l'exercice 1, et comparez la corde avec votre prédiction. Les cordes de la [guitare entière](../../../threejs-demos/demos/guitar.html) de la leçon 5 vibrent de la même façon : un `positionNode` dont l'amplitude, le point de départ et le temps sont des uniforms qu'un clic règle.
+
 Les pixels confirment la forme : crème au milieu déplacé et au quart déplacé, et bois à la position de repos du milieu, où la corde n'est plus. Trois draw calls : le manche, la corde et la passe de sortie. L'exécution `--webgl` donne les mêmes nombres et les trois mêmes couleurs.
 
 ### Quand le shader est reconstruit

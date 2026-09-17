@@ -24,6 +24,7 @@ sidebar:
 - [x] Lección 12: pruebas y CI
 - [x] Lección 13: proyecto, el mástil de guitarra 3D de GuitarAlchemist
 - [x] Curso completo
+- [x] Demos en vivo: cada página de lección y cinco escenas completas, publicadas en el sitio con un panel *Try it*
 
 ## 2026-09-16 — Versiones
 
@@ -130,8 +131,21 @@ Nada de lo que sigue se ha comunicado a GA.
 - 22 archivos de specs de Playwright, de los cuales los 7 que están fuera de la suite del panel, 6 de ellos sobre páginas 3D, no se ejecutan en ningún workflow de CI; esperas de 3 segundos para WebGPU; un `toBeTruthy()` sobre el búfer de una captura; una comprobación de canvas negro que llama a `getContext('2d')` sobre un canvas WebGL y nunca puede pasar; 13 archivos de resultados de pruebas de una ejecución fallida guardados en el repositorio (lección 12).
 - `ThreeFretboard.tsx`, reproducido y medido: 69 draw calls y 32 texturas para un mástil vacío; 10 renders de su padre con las mismas notas reconstruyen la escena 10 veces y pierden 29 texturas de sprites cada vez; un pixel ratio de hasta 6; `samples: 8`, que no dibuja nada en el WebGL 2 de SwiftShader; cuerdas el doble de gruesas, ya que un calibre se usa como radio; y una prop `onPositionClick` que nunca se llama. El port dibuja el mismo mástil en 6 draw calls con 4 texturas, y selecciona notas (lección 13).
 
+## 2026-09-17 — Demos en vivo
+
+- Las páginas se construyen con una segunda configuración de Vite, `vite.demos.config.ts`, con la base `/learn/threejs-demos/`, en `public/threejs-demos`, que el sitio copia tal cual. Las fuentes de las páginas de las lecciones no cambian, ya que las lecciones 4, 8 y 13 citan su build; un plugin de esa configuración añade el panel *Try it* solo a las páginas construidas. Una página no se puede manejar desde fuera, así que cada control fija un parámetro de URL y recarga la página. El panel es lil-gui 0.17, la copia que three.js incluye en `three/addons/libs`: ninguna dependencia nueva.
+- El build pesa 9.4 MB en 75 archivos. Los builds estándar y determinista de Rapier, cada uno con su WebAssembly incrustado en base64, ocupan 2.9 MB cada uno; `three.tsl` 0.69 MB. `check.sh` lo vuelve a construir y lo compara con la copia confirmada (`diff -r`, salvo los modelos y el HDR regenerados).
+- Los marcos están en un `<details>` cerrado, con `loading="lazy"`: nada se carga hasta que un lector despliega uno.
+- La guitarra está modelada en código: no había ninguna guitarra glTF con licencia conocida. 47 405 triángulos en 32 draw calls; instanciación para los trastes, los marcadores, los polos, las selletas, las perillas y las clavijas.
+- El `body.handle` de Rapier es un flotante que empaqueta un índice y una generación: `handle % 8` no es un índice de paleta; cada púa guarda ahora el color de su número de lanzamiento. Y los colores fijados con `setColorAt` solo llegaban a la GPU en un fotograma de `setAnimationLoop`: una sonda que llamaba a `render()` por su cuenta veía púas blancas. En r186, `InstanceNode` los sube en su actualización por fotograma.
+- La página VR usa el `WebGLRenderer` clásico, como la lección 11 encontró necesario con IWER. Durante una sesión, su listener de `resize` no debe hacer nada: `WebGLRenderer` avisa «Can't change size while VR device is presenting».
+- La primera sonda de una página que importa una dependencia nueva falló con «Execution context was destroyed»: Vite optimizó la dependencia y recargó la página. La segunda ejecución pasó.
+
 ## Por verificar
 
+- La demo VR con un visor real: la entrada en la sesión, los rayos de los mandos, la nota y el pulso háptico.
+- Si las púas lanzadas sin CCD atraviesan los trastes de la demo de física.
+- Las cinco escenas completas en un teléfono: fotogramas por segundo, y si el shadow map de 2048 × 2048 y el bloom del estudio aguantan.
 - Si una escena modelada en centímetros necesita luces 10 000 veces más fuertes para verse igual que en metros (lección 2).
 - Texturas KTX2: carga, formatos de GPU elegidos en cada sistema operativo, memoria.
 - Si `ThreeHeadstock.tsx` llama a `onTuningPegClick` una vez por cada listener obsoleto después de que su efecto se vuelva a ejecutar (lección 5).

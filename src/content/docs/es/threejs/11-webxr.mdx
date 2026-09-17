@@ -148,6 +148,8 @@ La captura, tomada durante la sesión, muestra lo que IWER compone en la página
 
 ![Dos vistas casi idénticas una junto a otra sobre un fondo oscuro, cada una mostrando un pequeño diapasón marrón con trastes y cuerdas, visto desde arriba en ángulo, ligeramente desplazado entre la mitad izquierda y la derecha.](../../../../assets/threejs/l11-stereo.webp)
 
+[Abrir a pantalla completa](../../../threejs-demos/demos/xr.html?emulate). **Pruébalo**: esta página no muestra nada sin la sonda; la [demo en vivo](#demo-en-vivo-la-guitarra-en-vr) al final de la lección entra en la misma sesión emulada con un botón y responde a los ejercicios 1 y 3.
+
 ## Con WebGPURenderer
 
 La página por defecto usa `WebGPURenderer`:
@@ -235,6 +237,21 @@ El cambio funcionó, y se topó con el mismo framebuffer `null`. Muestra otra co
 ## En GuitarAlchemist/ga
 
 GA no tiene código WebXR en el commit `05c8eda`: ni `renderer.xr`, ni `VRButton`, ni `navigator.xr`. La única mención es un archivo de skill de Claude, `.claude/skills/three-best-practices/rules/webxr-setup.md`, escrito para agentes y no usado por la aplicación. Un modo RV para el diapasón partiría del `WebGPURenderer` de `ThreeFretboard.tsx`, que, como descubrió esta lección, no puede entrar en una sesión en r186 sin `XRGPUBinding`: el addon de fallback o un `WebGLRenderer` serían el primer paso.
+
+## Demo en vivo: la guitarra en VR
+
+Los ejercicios 1 y 3 sobre una guitarra entera: el `WebGLRenderer` clásico, el que esta lección vio renderizar los dos ojos con IWER, un `VRButton` y un manejador de `select` que lleva el rayo del mando a las coordenadas de la guitarra, encuentra la cuerda y el traste como la guitarra de la lección 5, toca la nota y envía un pulso háptico de 40 ms. IWER solo se importa con `?emulate`, así que un visor real no descarga nada de él. La página ignora `resize` durante una sesión: `WebGLRenderer` se niega a cambiar de tamaño mientras presenta, y avisa. Su sonda entra en una sesión emulada, apunta el mando derecho a la cuerda 3, traste 5, aprieta el gatillo y lee `string 3, fret 5: C4`, con 2 ojos y ningún error. El [código](https://github.com/spareilleux/learn/tree/f68e710/code/threejs/demos/xr) está en `code/threejs/demos/xr`.
+
+![Dos vistas casi idénticas lado a lado, el ojo izquierdo y el derecho de un visor emulado: una guitarra eléctrica entera flotando sobre un suelo de cuadrícula gris, vista desde arriba, con un fino rayo de mando naranja que cruza sus cuerdas en cada vista.](../../../../assets/threejs/demo-xr.webp)
+
+<details>
+<summary>Página en vivo: ejecutarla aquí</summary>
+
+<iframe src="../../../threejs-demos/demos/xr.html?emulate" title="La guitarra en VR" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Abrir a pantalla completa](../../../threejs-demos/demos/xr.html?emulate). **Pruébalo**: pulsa *Enter VR*: el mando derecho emulado toca entonces solo un arpegio de do mayor. Con un visor, abre la página sin `?emulate` en su navegador, apunta al mástil y aprieta el gatillo; *por verificar*, el autor no tiene visor.
 
 ## Puntos clave
 

@@ -139,6 +139,15 @@ Le même hash que Node.js : le même WebAssembly, nourri des mêmes nombres, don
 
 ![Un manche brun foncé avec des frettes et des cordes métalliques, vu de face et d'en haut, avec des médiators orange posés à plat ou inclinés entre les frettes, et d'autres éparpillés sur le sol sombre devant lui.](../../../../assets/threejs/l10-picks.webp)
 
+<details>
+<summary>Page en direct : la lancer ici</summary>
+
+<iframe src="../../../threejs-demos/10-physics.html" title="Leçon 10, en direct" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Ouvrir en plein écran](../../../threejs-demos/10-physics.html). **À essayer** : *Rapier build* recharge la page avec le build standard, l'autre build de l'exercice 3. L'exercice 1, lancer des médiators d'un clic, est la [démo en direct](#démo-en-direct--des-médiators-sur-une-guitare) en fin de leçon.
+
 Chargement et pas, sur la machine de l'auteur, tels que la page les a rapportés (`check.sh` retire ces champs de la sortie comparée) : le module déterministe a pris 83 ms pour être importé et initialisé dans la page, et un pas des 24 médiators 0.22 ms en moyenne sur les 180 pas, dont un tiers avec tous les médiators endormis. Le module WebAssembly est chargé avec un `import()` dynamique, donc Vite le place dans son propre chunk, récupéré après le code de la page (le build de la leçon 13 le liste). Les objets de Rapier vivent dans la mémoire WebAssembly : `world.free()` libère un monde quand une page n'en a plus besoin.
 
 ## Snapshots
@@ -171,6 +180,21 @@ GA n'a pas de bibliothèque physique : ni Rapier, ni cannon-es, ni Ammo.
 
 - **Cheese Avalanche** simule à la main environ 300 corps, avec gravité, collisions contre un heightfield, restitution et une rotation approximative : « intentionally hand-rolled (no cannon / rapier dep) » ([`CheeseAvalanche.tsx`, lignes 16-18](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/CheeseAvalanche/CheeseAvalanche.tsx#L16-L18)). Pour ce travail, des corps contre un terrain et jamais les uns contre les autres, c'est un choix raisonnable. Son pas est le delta de l'image, plafonné à 1/30 s ([lignes 561-562](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/CheeseAvalanche/CheeseAvalanche.tsx#L561-L562), appelé depuis la boucle d'animation à la [ligne 649](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/CheeseAvalanche/CheeseAvalanche.tsx#L649)) : un pas variable, donc l'avalanche se déroule différemment à 60 et à 144 Hz. Elle écrit les corps dans deux objets `InstancedMesh` ([lignes 616-632](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/CheeseAvalanche/CheeseAvalanche.tsx#L616-L632)), comme cette leçon, mais alloue un `Vector3` pour chaque corps qui roule à chaque pas, dans une boucle qui réutilise par ailleurs des objets temporaires ([ligne 595](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/CheeseAvalanche/CheeseAvalanche.tsx#L595)).
 - **L'atterrisseur lunaire** fait les choses de la manière fixe : un accumulateur de pas de 1/120 s, au plus 10 par image, après avoir plafonné le delta de l'image à 0.1 s ([`LunarLanderEngine.ts`, lignes 3030-3040](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/PrimeRadiant/LunarLanderEngine.ts#L3030-L3040), avec `PHYSICS_DT` à la [ligne 66](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/PrimeRadiant/LunarLanderEngine.ts#L66)). Il dessine le dernier état, sans interpolation, ce qui à 1/120 s se voit rarement.
+
+## Démo en direct : des médiators sur une guitare
+
+L'exercice 1 sur une guitare entière : un clic lance un médiator depuis la caméra, le long du rayon du pointeur, à 3 m/s. Chaque partie visible de la guitare est un collider fixe en maillage de triangles, 47 404 triangles pris aux géométries que dessine three.js, une copie par instance ; les médiators sont des enveloppes convexes de 2.5 mm d'épaisseur, dessinées par une seule `InstancedMesh` avec une couleur par instance. Sa sonde lâche 24 médiators selon une suite à graine fixe et avance de 240 pas : 19 sont endormis, 15 reposent sur la guitare, 9 sur la table, et aucun ne l'a traversée. Deux choses trouvées par cette page : `body.handle` ne peut pas choisir une couleur avec `handle % n`, car les handles de Rapier sont des flottants qui regroupent un index et une génération, et les couleurs écrites avec `setColorAt` n'atteignent le GPU que dans la mise à jour par image du renderer, donc la sonde les lit après deux images de `setAnimationLoop`, pas après un `render()` à elle. Le [source](https://github.com/spareilleux/learn/tree/f68e710/code/threejs/demos/physics) est dans `code/threejs/demos/physics`.
+
+![Une guitare électrique entière posée sur une table brune, vue de haut et de biais, avec une vingtaine de médiators roses, bleus, verts, jaunes, violets, blancs et noirs posés sur son corps, sur sa touche et sur la table autour.](../../../../assets/threejs/demo-physics.webp)
+
+<details>
+<summary>Page en direct : la lancer ici</summary>
+
+<iframe src="../../../threejs-demos/demos/physics.html" title="Des médiators sur une guitare" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Ouvrir en plein écran](../../../threejs-demos/demos/physics.html). **À essayer** : cliquez pour lancer des médiators sur le manche, *drop 10* pour une poignée, et décochez *CCD for new picks* avant d'en lancer d'autres : savoir s'ils traversent alors les frettes est *à vérifier*.
 
 ## À retenir
 

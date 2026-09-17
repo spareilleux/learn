@@ -40,6 +40,10 @@ Les scènes propres au cours sont petites et déterministes : un cube, un morcea
 
 Le vrai code est [GuitarAlchemist/ga](https://github.com/GuitarAlchemist/ga) au commit [`05c8eda`](https://github.com/GuitarAlchemist/ga/commit/05c8eda013f2a4d11efaa52c4ca94674521ee684), principalement [`ThreeFretboard.tsx`](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeFretboard.tsx), son manche de guitare en 3D. Les composants React de GA demandent three.js 0.180, six versions derrière ce cours. Les leçons citent le code de GA là où il illustre bien un point, y compris ce qui a changé depuis r180 ; les constats sont dans le [journal](journal/).
 
+## Démos en direct
+
+Chaque page de leçon tourne sur ce site, dans un cadre replié sous sa capture, avec un panneau *Try it* qui règle les paramètres de la page, ceux qu'utilisent les exercices. Cinq scènes complètes réunissent les leçons sur une guitare entière modélisée en code : une [guitare à jouer](../../threejs-demos/demos/guitar.html) (leçon 5), des [voicings d'accords](../../threejs-demos/demos/voicing.html) sur la touche de GA (leçon 13), un [studio](../../threejs-demos/demos/studio.html) avec ombres, environnement HDR et bloom (leçon 7), des [médiators lancés sur la guitare](../../threejs-demos/demos/physics.html) avec Rapier (leçon 10), et la [guitare en VR](../../threejs-demos/demos/xr.html?emulate) (leçon 11). Un cadre ne charge rien tant qu'il n'est pas déplié. Le build entier pèse 9.4 Mo, surtout les deux builds de Rapier en WebAssembly.
+
 ## À la fin de ce cours, je saurai
 
 - mettre en place un projet three.js avec Vite et TypeScript, et expliquer ce que fait `WebGPURenderer` quand WebGPU manque ;

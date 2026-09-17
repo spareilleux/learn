@@ -99,6 +99,15 @@ $ node scripts/probe.mjs 06-tsl --extract shader out/l06_shader_webgpu.txt
 
 ![A dark brown board with fine wavy horizontal grain filling the middle of the frame, and a thin cream-colored string bowed upward in a smooth arc, fixed at both ends.](../../../assets/threejs/l06-tsl.webp)
 
+<details>
+<summary>Live page: run it here</summary>
+
+<iframe src="../../threejs-demos/06-tsl.html" title="Lesson 6, live" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Open full screen](../../threejs-demos/06-tsl.html). **Try it**: set *harmonic* to 2, the octave of exercise 1, and compare the string with your prediction. The strings of the [whole guitar](../../threejs-demos/demos/guitar.html) of lesson 5 vibrate the same way: a `positionNode` whose amplitude, start point and time are uniforms that a click sets.
+
 The pixels confirm the shape: cream at the displaced middle and at the displaced quarter point, and wood at the middle's rest position, where the string no longer is. Three draw calls: the neck, the string and the output pass. The `--webgl` run gives the same counts and the same three colors.
 
 ### When the shader is rebuilt

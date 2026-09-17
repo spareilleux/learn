@@ -13,6 +13,15 @@ La lección 1 dibujó un cubo con un material que no necesita luz. Esta lección
 
 ![Un diapasón marrón oscuro sobre una mesa gris azulada, visto desde arriba y de lado, con cinco trastes metálicos finos cerca de su extremo izquierdo, un punto blanco entre el segundo y el tercer traste, y su sombra sobre la mesa debajo de él.](../../../../assets/threejs/l02-neck.webp)
 
+<details>
+<summary>Página en vivo: ejecutarla aquí</summary>
+
+<iframe src="../../../threejs-demos/02-materials-lights.html" title="Lección 2, en vivo" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Abrir a pantalla completa](../../../threejs-demos/02-materials-lights.html). **Pruébalo**: desmarca *neck casts a shadow* para la escena del ejercicio 3 (`?neckshadow=off`), o *shadows* para ver lo que aporta el shadow map. La [escena del estudio](../../../threejs-demos/demos/studio.html) de la lección 7 pone una guitarra entera bajo un foco con sombras suaves.
+
 La captura de pantalla viene de `node scripts/probe.mjs 02-materials-lights --shot out/neck.png`, en Chromium headless en la máquina del autor, con WebGPU.
 
 | | WPF 3D | MonoGame | three.js |
@@ -269,6 +278,15 @@ $ node scripts/probe.mjs 02-materials-lights --query neckshadow=off
 Un draw call y 12 triángulos menos: el mástil ya no se dibuja en el shadow map. Los trastes sí, así que sus sombras finas llegan ahora a la mesa a través del mástil, que ya no las tapa:
 
 ![El mismo diapasón, sin su gran sombra sobre la mesa: cinco marcas oscuras cortas, las sombras de los trastes, quedan sobre la mesa justo debajo del mástil.](../../../../assets/threejs/l02-neck-no-neck-shadow.webp)
+
+<details>
+<summary>Página en vivo: ejecutarla aquí</summary>
+
+<iframe src="../../../threejs-demos/02-materials-lights.html?neckshadow=off" title="Lección 2 con ?neckshadow=off, en vivo" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Abrir a pantalla completa](../../../threejs-demos/02-materials-lights.html?neckshadow=off)
 
 El mástil sigue recibiendo las sombras de los trastes en su cara superior. Una malla que no proyecta sombra pero debería tapar otra es una causa frecuente de luz que se cuela donde no debería.
 

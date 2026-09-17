@@ -160,6 +160,15 @@ $ node scripts/probe.mjs 05-picking
 
 ![A dark brown fretboard seen from the front at a low angle, light strings running across it and dark metal frets closer together toward the right, with a small orange sphere on one of the middle strings, between two frets left of center.](../../../assets/threejs/l05-picking.webp)
 
+<details>
+<summary>Live page: run it here</summary>
+
+<iframe src="../../threejs-demos/05-picking.html" title="Lesson 5, live" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Open full screen](../../threejs-demos/05-picking.html). **Try it**: tick *240 px sidebar* for the layout of exercise 3, and move the pointer over the strings; tick *damping* and drag to feel what `enableDamping` changes.
+
 The screenshot is taken after the first move: the orange marker sits where the pointer is. The picked point differs from the script's in the third decimal, (−0.515, 0.36, 0.046) instead of (−0.514, 0.36, 0.045), since the page rounds the target to whole CSS pixels before the mouse moves there. Three things are worth reading:
 
 - **20 draw calls** for the neck, 12 frets, 6 strings and the output pass. Picking costs nothing on the GPU.
@@ -253,6 +262,21 @@ GA has `Raycaster` in 14 files. All of them compute NDC from the canvas's rectan
 - **A raycast per mouse event.** `TonalOrbit.tsx` picks on every `pointermove` ([lines 835-850](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/TonalOrbit/TonalOrbit.tsx#L835-L850)), and builds a new `Vector2` and a new array of meshes each time ([lines 799-813](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/TonalOrbit/TonalOrbit.tsx#L799-L813)). `MinimalThreeInstrument.tsx` creates a new `Raycaster` in its React `onMouseMove` handler ([lines 664-675](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/MinimalThree/MinimalThreeInstrument.tsx#L664-L675)). The garbage is small; the raycasts for positions no frame shows are the larger cost.
 - **The pattern of this lesson, already in GA.** Prime Radiant's `InteractionHandler.ts` stores the NDC in `mousemove` ([lines 64-68](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/PrimeRadiant/InteractionHandler.ts#L64-L68)), raycasts from the render loop, and removes its three listeners in `dispose` ([lines 58-62](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/PrimeRadiant/InteractionHandler.ts#L58-L62)). Its nodes carry an invisible, larger sphere for the ray to hit ([`NodeRenderer.ts`, lines 86-95](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/PrimeRadiant/NodeRenderer.ts#L86-L95)), the technique of exercise 1. It checks hover on every frame, even when the pointer didn't move; the `pointerMoved` flag of this lesson's page would skip those.
 - **Controls without `dispose`.** Of the 25 files that create `OrbitControls`, four never dispose them, among them `BSP/HarmonicNavigator3D.tsx` ([line 189](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/BSP/HarmonicNavigator3D.tsx#L189)), whose cleanup disposes the renderer only ([lines 250-260](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/BSP/HarmonicNavigator3D.tsx#L250-L260)). The canvas is removed with the component, and its listeners with it, but the `keydown` listener that the controls add to the document ([line 505](https://github.com/mrdoob/three.js/blob/r186/examples/jsm/controls/OrbitControls.js#L505)) stays.
+
+## Live demo: a whole guitar
+
+The same two steps on a whole guitar, modeled in code rather than loaded: the body and the headstock are extruded outlines, and the frets, inlays, pole pieces, saddles and tuners are instanced meshes. A ray against an invisible box over the fretboard, then its crossing with the plane of the strings, gives a fret from its x coordinate and a string from its z coordinate, with lesson 13's `fretAtX` and `noteAt`. A click plucks the string, which vibrates in its vertex shader, and plays the note through a small Karplus-Strong synthesizer on the Web Audio API. Its probe clicks string 3 at fret 5 with Playwright's mouse and reads `string 3, fret 5: C4`, with 32 draw calls and 47,405 triangles. The [source](https://github.com/spareilleux/learn/tree/f68e710/code/threejs/demos/guitar) is in `code/threejs/demos/guitar`.
+
+![A three-quarter view of a whole electric guitar on a dark blue-gray background: a sunburst body with a black pickguard, three cream pickups and chrome knobs, a rosewood fretboard with dot inlays, and a light maple headstock with six tuners; a small orange sphere sits on the third string at the fifth fret, and a label at the bottom left reads String 3, fret 5: C4.](../../../assets/threejs/demo-guitar.webp)
+
+<details>
+<summary>Live page: run it here</summary>
+
+<iframe src="../../threejs-demos/demos/guitar.html" title="A whole guitar to play" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Open full screen](../../threejs-demos/demos/guitar.html). **Try it**: click any string between two frets; the panel strums chords, and `?view=body` or `?view=headstock` starts closer. The pick doesn't hit the string meshes, so the problem of exercise 1 doesn't arise here: compare the two approaches.
 
 ## Key takeaways
 

@@ -19,6 +19,15 @@ La reproducción, [`GaFretboard.tsx`](https://github.com/spareilleux/learn/blob/
 
 ![Un mástil largo de color marrón oscuro con 22 trastes visto de lado y desde arriba, alejándose hacia la derecha, con pequeños puntos de incrustación blancos, números de traste a lo largo del borde cercano, y tres marcadores azules de un acorde de do mayor cerca de la cejuela, a la izquierda.](../../../../assets/threejs/l13-ga.webp)
 
+<details>
+<summary>Página en vivo: ejecutarla aquí</summary>
+
+<iframe src="../../../threejs-demos/13-fretboard.html?version=ga" title="Lección 13, en vivo" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Abrir a pantalla completa](../../../threejs-demos/13-fretboard.html?version=ga). **Pruébalo**: *version* cambia entre la estructura de GA y el port. Solo la sonda coloca los marcadores del acorde; la [demo en vivo](#demo-en-vivo-voicings-de-acordes) al final de la lección los coloca desde un panel.
+
 La versión de GA:
 
 ```text
@@ -134,6 +143,15 @@ $ node scripts/probe.mjs 13-fretboard --query version=port
 ```
 
 ![El mismo mástil, dibujado por el port, algo más oscuro, con trastes más finos, las incrustaciones, y tres marcadores azules del acorde cerca de la cejuela.](../../../../assets/threejs/l13-port.webp)
+
+<details>
+<summary>Página en vivo: ejecutarla aquí</summary>
+
+<iframe src="../../../threejs-demos/13-fretboard.html" title="Lección 13, el port, en vivo" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Abrir a pantalla completa](../../../threejs-demos/13-fretboard.html)
 
 | | Estructura de GA | Port | Qué cambió |
 |---|---|---|---|
@@ -253,6 +271,21 @@ El port está escrito para la página de este curso; llevarlo a GA es un cambio 
 - **React 19 y R3F 9.** Los componentes de GA usan R3F 8 y React 18 (lección 9). Como alternativa, las mismas ideas encajan en la estructura `useEffect` existente de GA: dividir el efecto para que el mástil se construya una sola vez, y los marcadores se actualicen en su propio efecto indexado por contenido; liberar las texturas de los sprites; limitar el pixel ratio; añadir un `Raycaster`.
 - **`MeshPhysicalMaterial`, las texturas de madera, la cejilla y los modelos de guitarra** que la reproducción dejó fuera. Cada material compartido es una línea; el modelo de la cejilla se carga de forma asíncrona y puede llegar después de una limpieza ([líneas 1188-1201](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeFretboard.tsx#L1188-L1201)): necesita la misma comprobación `isMounted` que el renderer.
 - **Pruebas.** Las pruebas de componentes de la lección 12 se ejecutan sobre el port igual que sobre el mástil de la lección 9; el `fretboard.spec.ts` de GA tendría una condición que esperar en lugar de 3 segundos.
+
+## Demo en vivo: voicings de acordes
+
+El port en uso: el panel elige uno de 14 acordes y uno de sus voicings, de las formas abiertas a las formas de mi y de la más arriba en el mástil, y cada marcador toma el color de su función, fundamental, tercera, quinta o séptima. Los voicings se escribieron a mano, y la sonda los comprueba nota por nota: do con forma de mi en el traste 8 da C3 G3 C4 E4 G4 C5, y Bm7♭5 en el traste 2 da x B2 F3 A3 D4 x. Cada cambio de acorde construye los marcadores una vez (`markerBuilds` pasa a 1, 2, 3) y mantiene 7 draw calls. El [código](https://github.com/spareilleux/learn/tree/f68e710/code/threejs/demos/voicing) está en `code/threejs/demos/voicing`.
+
+![Un diapasón largo y oscuro con trastes numerados, visto desde arriba y en ángulo, con cuatro marcadores de color cerca de la cejuela, rojo, amarillo, azul y verde, y una leyenda abajo a la izquierda que dice Bm7♭5, fret 2: x B2 F3 A3 D4 x (low E to high E), y luego root, third, fifth y seventh con sus colores.](../../../../assets/threejs/demo-voicing.webp)
+
+<details>
+<summary>Página en vivo: ejecutarla aquí</summary>
+
+<iframe src="../../../threejs-demos/demos/voicing.html" title="Voicings de acordes en el diapasón" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Abrir a pantalla completa](../../../threejs-demos/demos/voicing.html). **Pruébalo**: elige un acorde y un voicing, haz clic en una posición para oírla, o *strum*. Antes del ejercicio 2, cuenta aquí los marcadores de un acorde de do mayor y predice los draw calls de la escala.
 
 ## Puntos clave
 

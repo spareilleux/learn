@@ -24,6 +24,7 @@ sidebar:
 - [x] Lesson 12: tests and CI
 - [x] Lesson 13: project, GuitarAlchemist's 3D guitar neck
 - [x] Course complete
+- [x] Live demos: every lesson page and five complete scenes, published under the site with a *Try it* panel
 
 ## 2026-09-16 — Versions
 
@@ -130,8 +131,21 @@ Nothing below has been reported to GA.
 - 22 Playwright spec files, of which the 7 outside the dashboard suite, 6 of them on 3D pages, run in no CI workflow; 3-second waits for WebGPU; a `toBeTruthy()` on a screenshot buffer; a black-canvas check that calls `getContext('2d')` on a WebGL canvas and can never pass; 13 committed test result files from a failed run (lesson 12).
 - `ThreeFretboard.tsx`, reproduced and measured: 69 draw calls and 32 textures for an empty neck; 10 renders of its parent with the same notes rebuild the scene 10 times and leak 29 sprite textures each time; a pixel ratio of up to 6; `samples: 8`, which draws nothing on SwiftShader's WebGL 2; strings twice as thick, since a gauge is used as a radius; and an `onPositionClick` prop that is never called. The port draws the same neck in 6 draw calls with 4 textures, and picks notes (lesson 13).
 
+## 2026-09-17 — Live demos
+
+- The pages are built by a second Vite config, `vite.demos.config.ts`, with the base `/learn/threejs-demos/`, into `public/threejs-demos`, which the site copies as it is. The lesson pages' sources are unchanged, since lessons 4, 8 and 13 quote their build; a plugin of that config adds the *Try it* panel to the built pages only. A page can't be driven from outside, so each control sets a URL parameter and reloads the page. The panel is lil-gui 0.17, the copy that three.js ships in `three/addons/libs`: no new dependency.
+- The build weighs 9.4 MB in 75 files. Rapier's standard and deterministic builds, each with its WebAssembly inlined as base64, are 2.9 MB each; `three.tsl` 0.69 MB. `check.sh` builds it again and compares it with the committed copy (`diff -r`, apart from the regenerated models and HDR).
+- The frames sit in a closed `<details>`, with `loading="lazy"`: nothing loads until a reader unfolds one.
+- The guitar is modeled in code: no glTF guitar with a known license was available. 47,405 triangles in 32 draw calls; instancing for the frets, inlays, pole pieces, saddles, knobs and tuners.
+- Rapier's `body.handle` is a float that packs an index and a generation: `handle % 8` is not a palette index; each pick now keeps the color of its throw number. And colors set with `setColorAt` reached the GPU only in a frame of `setAnimationLoop`: a probe that called `render()` itself saw white picks. In r186, `InstanceNode` uploads them in its per-frame update.
+- The VR page uses the classic `WebGLRenderer`, as lesson 11 found necessary with IWER. During a session, its `resize` listener must do nothing: `WebGLRenderer` warns "Can't change size while VR device is presenting".
+- The first probe of a page that imports a new dependency failed with "Execution context was destroyed": Vite optimized the dependency and reloaded the page. The second run passed.
+
 ## To verify
 
+- The VR demo with a real headset: entering the session, the controller rays, the note and the haptic pulse.
+- Whether picks thrown without CCD pass through the frets of the physics demo.
+- The five complete scenes on a phone: frame rate, and whether the studio's 2048 × 2048 shadow map and bloom hold up.
 - Whether a scene modeled in centimeters needs lights 10,000 times stronger to look the same as in meters (lesson 2).
 - KTX2 textures: loading, GPU formats chosen on each OS, memory.
 - Whether `ThreeHeadstock.tsx` calls `onTuningPegClick` once per stale listener after its effect reruns (lesson 5).

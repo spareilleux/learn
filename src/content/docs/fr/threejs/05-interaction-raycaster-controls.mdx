@@ -160,6 +160,15 @@ $ node scripts/probe.mjs 05-picking
 
 ![Une touche brun foncé vue de face sous un angle bas, des cordes claires qui la traversent et des frettes en métal sombre plus rapprochées vers la droite, avec une petite sphère orange sur l'une des cordes du milieu, entre deux frettes à gauche du centre.](../../../../assets/threejs/l05-picking.webp)
 
+<details>
+<summary>Page en direct : la lancer ici</summary>
+
+<iframe src="../../../threejs-demos/05-picking.html" title="Leçon 5, en direct" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Ouvrir en plein écran](../../../threejs-demos/05-picking.html). **À essayer** : cochez *240 px sidebar* pour la mise en page de l'exercice 3, et passez le pointeur sur les cordes ; cochez *damping* et faites glisser pour sentir ce que change `enableDamping`.
+
 La capture est prise après le premier déplacement : le marqueur orange se trouve sous le pointeur. Le point sélectionné diffère de celui du script à la troisième décimale, (−0.515, 0.36, 0.046) au lieu de (−0.514, 0.36, 0.045), car la page arrondit la cible à des pixels CSS entiers avant que la souris s'y rende. Trois choses méritent d'être lues :
 
 - **20 draw calls** pour le manche, 12 frettes, 6 cordes et la passe de sortie. La sélection ne coûte rien sur le GPU.
@@ -253,6 +262,21 @@ GA utilise `Raycaster` dans 14 fichiers. Tous calculent les NDC à partir du rec
 - **Un raycast par événement de souris.** `TonalOrbit.tsx` fait sa sélection à chaque `pointermove` ([lignes 835-850](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/TonalOrbit/TonalOrbit.tsx#L835-L850)), et construit à chaque fois un nouveau `Vector2` et un nouveau tableau de maillages ([lignes 799-813](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/TonalOrbit/TonalOrbit.tsx#L799-L813)). `MinimalThreeInstrument.tsx` crée un nouveau `Raycaster` dans son gestionnaire React `onMouseMove` ([lignes 664-675](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/MinimalThree/MinimalThreeInstrument.tsx#L664-L675)). Les objets laissés au garbage collector pèsent peu ; les raycasts pour des positions qu'aucune image n'affiche coûtent davantage.
 - **Le modèle de cette leçon, déjà dans GA.** L'`InteractionHandler.ts` de Prime Radiant enregistre les NDC dans `mousemove` ([lignes 64-68](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/PrimeRadiant/InteractionHandler.ts#L64-L68)), lance ses rayons depuis la boucle de rendu, et retire ses trois listeners dans `dispose` ([lignes 58-62](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/PrimeRadiant/InteractionHandler.ts#L58-L62)). Ses nœuds portent une sphère invisible, plus grande, que le rayon peut toucher ([`NodeRenderer.ts`, lignes 86-95](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/PrimeRadiant/NodeRenderer.ts#L86-L95)), la technique de l'exercice 1. Il vérifie le survol à chaque image, même quand le pointeur n'a pas bougé ; l'indicateur `pointerMoved` de la page de cette leçon éviterait ces tests.
 - **Des contrôles sans `dispose`.** Sur les 25 fichiers qui créent des `OrbitControls`, quatre ne les libèrent jamais, dont `BSP/HarmonicNavigator3D.tsx` ([ligne 189](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/BSP/HarmonicNavigator3D.tsx#L189)), dont le nettoyage ne libère que le renderer ([lignes 250-260](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/BSP/HarmonicNavigator3D.tsx#L250-L260)). Le canvas disparaît avec le composant, et ses listeners avec lui, mais le listener `keydown` que les contrôles ajoutent au document ([ligne 505](https://github.com/mrdoob/three.js/blob/r186/examples/jsm/controls/OrbitControls.js#L505)) reste.
+
+## Démo en direct : une guitare entière
+
+Les deux mêmes étapes sur une guitare entière, modélisée en code plutôt que chargée : le corps et la tête sont des contours extrudés, et les frettes, les repères, les plots des micros, les pontets et les mécaniques sont des meshes instanciés. Un rayon contre une boîte invisible posée sur la touche, puis son intersection avec le plan des cordes, donnent une case à partir de la coordonnée x et une corde à partir de la coordonnée z, avec `fretAtX` et `noteAt` de la leçon 13. Un clic pince la corde, qui vibre dans son vertex shader, et joue la note avec un petit synthétiseur Karplus-Strong sur la Web Audio API. Sa sonde clique la corde 3 à la case 5 avec la souris de Playwright et lit `string 3, fret 5: C4`, avec 32 draw calls et 47 405 triangles. Le [source](https://github.com/spareilleux/learn/tree/f68e710/code/threejs/demos/guitar) est dans `code/threejs/demos/guitar`.
+
+![Une guitare électrique entière vue de trois quarts sur un fond bleu-gris sombre : un corps sunburst avec un pickguard noir, trois micros crème et des boutons chromés, une touche en palissandre avec des repères ronds, et une tête en érable clair avec six mécaniques ; une petite sphère orange est posée sur la troisième corde à la cinquième case, et une étiquette en bas à gauche indique String 3, fret 5: C4.](../../../../assets/threejs/demo-guitar.webp)
+
+<details>
+<summary>Page en direct : la lancer ici</summary>
+
+<iframe src="../../../threejs-demos/demos/guitar.html" title="Une guitare entière à jouer" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Ouvrir en plein écran](../../../threejs-demos/demos/guitar.html). **À essayer** : cliquez sur une corde entre deux frettes ; le panneau gratte des accords, et `?view=body` ou `?view=headstock` démarre plus près. Le pointage ne touche pas les meshes des cordes, donc le problème de l'exercice 1 ne se pose pas ici : comparez les deux approches.
 
 ## À retenir
 

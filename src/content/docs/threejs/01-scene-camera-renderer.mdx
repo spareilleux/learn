@@ -109,6 +109,15 @@ scene.add(cube);
 
 ![A cube on a dark gray background, turned so that three faces show: a light green top, a magenta front and a blue side, each colored by the direction it faces.](../../../assets/threejs/l01-cube.webp)
 
+<details>
+<summary>Live page: run it here</summary>
+
+<iframe src="../../threejs-demos/01-scene.html" title="Lesson 1, live" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Open full screen](../../threejs-demos/01-scene.html). **Try it**: the panel's *cubes* slider reloads the page with `?cubes=`: set it to 3 for exercise 1's scene. Opened full screen, the tab's title names the backend the page picked, the answer to exercise 3.
+
 The screenshot is the page's third frame, taken by `node scripts/probe.mjs 01-scene --shot out/cube.png`, with WebGPU on the author's machine.
 
 ## WebGPURenderer and its fallback

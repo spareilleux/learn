@@ -160,6 +160,15 @@ $ node scripts/probe.mjs 05-picking
 
 ![Un diapasón marrón oscuro visto de frente desde un ángulo bajo, con cuerdas claras que lo recorren y trastes de metal oscuro cada vez más juntos hacia la derecha, y una pequeña esfera naranja sobre una de las cuerdas centrales, entre dos trastes a la izquierda del centro.](../../../../assets/threejs/l05-picking.webp)
 
+<details>
+<summary>Página en vivo: ejecutarla aquí</summary>
+
+<iframe src="../../../threejs-demos/05-picking.html" title="Lección 5, en vivo" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Abrir a pantalla completa](../../../threejs-demos/05-picking.html). **Pruébalo**: marca *240 px sidebar* para el diseño del ejercicio 3 y pasa el puntero por las cuerdas; marca *damping* y arrastra para notar lo que cambia `enableDamping`.
+
 La captura se toma después del primer movimiento: el marcador naranja está donde está el puntero. El punto seleccionado difiere del del script en el tercer decimal, (−0.515, 0.36, 0.046) en lugar de (−0.514, 0.36, 0.045), porque la página redondea el objetivo a píxeles CSS enteros antes de mover el ratón allí. Hay tres cosas que vale la pena leer:
 
 - **20 draw calls** para el mástil, 12 trastes, 6 cuerdas y el pase de salida. La selección no cuesta nada en la GPU.
@@ -253,6 +262,21 @@ GA usa `Raycaster` en 14 archivos. Todos calculan las NDC a partir del rectángu
 - **Un raycast por evento de ratón.** `TonalOrbit.tsx` selecciona en cada `pointermove` ([líneas 835-850](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/TonalOrbit/TonalOrbit.tsx#L835-L850)), y construye un nuevo `Vector2` y un nuevo array de mallas cada vez ([líneas 799-813](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/TonalOrbit/TonalOrbit.tsx#L799-L813)). `MinimalThreeInstrument.tsx` crea un nuevo `Raycaster` en su manejador React `onMouseMove` ([líneas 664-675](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/MinimalThree/MinimalThreeInstrument.tsx#L664-L675)). La basura es poca; los raycasts para posiciones que ningún frame muestra son el coste mayor.
 - **El patrón de esta lección, ya en GA.** `InteractionHandler.ts`, de Prime Radiant, guarda las NDC en `mousemove` ([líneas 64-68](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/PrimeRadiant/InteractionHandler.ts#L64-L68)), lanza los rayos desde el bucle de render, y quita sus tres listeners en `dispose` ([líneas 58-62](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/PrimeRadiant/InteractionHandler.ts#L58-L62)). Sus nodos llevan una esfera invisible, más grande, para que el rayo la alcance ([`NodeRenderer.ts`, líneas 86-95](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/PrimeRadiant/NodeRenderer.ts#L86-L95)), la técnica del ejercicio 1. Comprueba el hover en cada frame, incluso cuando el puntero no se ha movido; el flag `pointerMoved` de la página de esta lección se los ahorraría.
 - **Controles sin `dispose`.** De los 25 archivos que crean `OrbitControls`, cuatro nunca los liberan, entre ellos `BSP/HarmonicNavigator3D.tsx` ([línea 189](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/BSP/HarmonicNavigator3D.tsx#L189)), cuya limpieza solo libera el renderer ([líneas 250-260](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/BSP/HarmonicNavigator3D.tsx#L250-L260)). El canvas se elimina con el componente, y sus listeners con él, pero el listener `keydown` que los controles añaden al documento ([línea 505](https://github.com/mrdoob/three.js/blob/r186/examples/jsm/controls/OrbitControls.js#L505)) se queda.
+
+## Demo en vivo: una guitarra entera
+
+Los mismos dos pasos sobre una guitarra entera, modelada en código en lugar de cargada: el cuerpo y el clavijero son contornos extruidos, y los trastes, los marcadores, los polos de las pastillas, las selletas y las clavijas son meshes instanciados. Un rayo contra una caja invisible sobre el diapasón, y luego su cruce con el plano de las cuerdas, dan un traste a partir de la coordenada x y una cuerda a partir de la coordenada z, con `fretAtX` y `noteAt` de la lección 13. Un clic pulsa la cuerda, que vibra en su vertex shader, y toca la nota con un pequeño sintetizador Karplus-Strong sobre la Web Audio API. Su sonda hace clic en la cuerda 3, traste 5, con el ratón de Playwright y lee `string 3, fret 5: C4`, con 32 draw calls y 47 405 triángulos. El [código](https://github.com/spareilleux/learn/tree/f68e710/code/threejs/demos/guitar) está en `code/threejs/demos/guitar`.
+
+![Una guitarra eléctrica entera vista de tres cuartos sobre un fondo gris azulado oscuro: un cuerpo sunburst con un golpeador negro, tres pastillas color crema y perillas cromadas, un diapasón de palisandro con marcadores redondos y un clavijero de arce claro con seis clavijas; una pequeña esfera naranja está sobre la tercera cuerda en el quinto traste, y una etiqueta abajo a la izquierda dice String 3, fret 5: C4.](../../../../assets/threejs/demo-guitar.webp)
+
+<details>
+<summary>Página en vivo: ejecutarla aquí</summary>
+
+<iframe src="../../../threejs-demos/demos/guitar.html" title="Una guitarra entera para tocar" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Abrir a pantalla completa](../../../threejs-demos/demos/guitar.html). **Pruébalo**: haz clic en una cuerda entre dos trastes; el panel rasguea acordes, y `?view=body` o `?view=headstock` empieza más cerca. La selección no toca los meshes de las cuerdas, así que el problema del ejercicio 1 no aparece aquí: compara los dos enfoques.
 
 ## Puntos clave
 

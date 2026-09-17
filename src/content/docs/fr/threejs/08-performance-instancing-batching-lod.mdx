@@ -25,6 +25,15 @@ La page dessine 10 000 petits icosaèdres orange de 80 triangles sur une grill
 
 ![Une grille dense de minuscules points orange formant un trapèze sur un fond sombre, vue d'en haut et de biais, plus étroite vers le haut.](../../../../assets/threejs/l08-meshes.webp)
 
+<details>
+<summary>Page en direct : la lancer ici</summary>
+
+<iframe src="../../../threejs-demos/08-performance.html" title="Leçon 8, en direct" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Ouvrir en plein écran](../../../threejs-demos/08-performance.html). **À essayer** : *mode* passe d'une des six versions mesurées plus bas à l'autre, *markers* change leur nombre, et *view* rapproche la caméra : *tiles* avec *close* est la mesure de l'exercice 1. La [scène des voicings](../../../threejs-demos/demos/voicing.html) de la leçon 13 dessine les marqueurs d'un accord avec une seule `InstancedMesh` : 7 draw calls, quel que soit l'accord.
+
 Après trois images, la page lit `renderer.info`, puis rend 20 images de plus dans une boucle et divise le temps : le temps CPU d'un appel à `renderer.render()`, qui enregistre et soumet les commandes ; le GPU travaille ensuite, et n'est pas compté dans ce nombre. Elle mesure aussi le temps de construction des marqueurs (`setupMs`) et celui de la première image, qui comprend la compilation des shaders (`firstFrameMs`). `check.sh` compare les comptes, et affiche les temps sans les comparer.
 
 ```text
@@ -96,6 +105,15 @@ Un [`LOD`](https://threejs.org/docs/pages/LOD.html) contient plusieurs versions 
 Avec `?view=close`, la caméra regarde un coin de la grille :
 
 ![Des sphères orange en rangées régulières, vues de près et juste au-dessus, plus grosses que dans la vue d'ensemble, couvrant la majeure partie de l'image, avec une bande sombre vide le long du bord gauche, au-delà du coin de la grille.](../../../../assets/threejs/l08-lod-close.webp)
+
+<details>
+<summary>Page en direct : la lancer ici</summary>
+
+<iframe src="../../../threejs-demos/08-performance.html?mode=lod&view=close" title="Leçon 8 avec ?mode=lod&view=close, en direct" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Ouvrir en plein écran](../../../threejs-demos/08-performance.html?mode=lod&view=close)
 
 | `?mode=`, `?view=close` | draw calls | triangles | une image, CPU |
 |---|---|---|---|

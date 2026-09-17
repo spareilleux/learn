@@ -139,6 +139,15 @@ The same hash as Node.js: the same WebAssembly, fed the same numbers, gives the 
 
 ![A dark brown neck with metal frets and strings, seen from the front and above, with orange picks lying flat or tilted between the frets, and more picks scattered on the dark floor in front of it.](../../../assets/threejs/l10-picks.webp)
 
+<details>
+<summary>Live page: run it here</summary>
+
+<iframe src="../../threejs-demos/10-physics.html" title="Lesson 10, live" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Open full screen](../../threejs-demos/10-physics.html). **Try it**: *Rapier build* reloads the page with the standard build, the other build of exercise 3. Exercise 1, throwing picks with a click, is the [live demo](#live-demo-picks-on-a-guitar) at the end of the lesson.
+
 Loading and stepping, on the author's machine, as the page reported them (`check.sh` removes these fields from the compared output): the deterministic module took 83 ms to import and initialize in the page, and a step of the 24 picks 0.22 ms on average over the 180 steps, a third of them with every pick asleep. The WebAssembly module is loaded with a dynamic `import()`, so Vite puts it in its own chunk, fetched after the page's code (lesson 13's build lists it). Rapier's objects live in WebAssembly memory: `world.free()` releases a world when a page is done with it.
 
 ## Snapshots
@@ -171,6 +180,21 @@ GA has no physics library: no Rapier, no cannon-es, no Ammo.
 
 - **Cheese Avalanche** simulates about 300 bodies by hand, with gravity, collisions against a heightfield, restitution and a rough spin: "intentionally hand-rolled (no cannon / rapier dep)" ([`CheeseAvalanche.tsx`, lines 16-18](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/CheeseAvalanche/CheeseAvalanche.tsx#L16-L18)). For that job, bodies against terrain and never against each other, it is a reasonable choice. Its step is the frame's delta, clamped to 1/30 s ([lines 561-562](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/CheeseAvalanche/CheeseAvalanche.tsx#L561-L562), called from the animation loop at [line 649](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/CheeseAvalanche/CheeseAvalanche.tsx#L649)): a variable step, so the avalanche plays differently at 60 and 144 Hz. It writes the bodies to two `InstancedMesh` objects ([lines 616-632](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/CheeseAvalanche/CheeseAvalanche.tsx#L616-L632)), as this lesson does, but allocates a `Vector3` for each rolling body on each step, inside a loop that otherwise reuses temporaries ([line 595](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/CheeseAvalanche/CheeseAvalanche.tsx#L595)).
 - **The lunar lander** does it the fixed way: an accumulator of steps of 1/120 s, at most 10 per frame, after clamping the frame's delta to 0.1 s ([`LunarLanderEngine.ts`, lines 3030-3040](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/PrimeRadiant/LunarLanderEngine.ts#L3030-L3040), with `PHYSICS_DT` at [line 66](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/PrimeRadiant/LunarLanderEngine.ts#L66)). It draws the last state, without interpolation, which at 1/120 s is rarely visible.
+
+## Live demo: picks on a guitar
+
+Exercise 1 on a whole guitar: a click throws a pick from the camera, along the pointer's ray, at 3 m/s. Every visible part of the guitar is a fixed triangle-mesh collider, 47,404 triangles taken from the geometries three.js draws, one copy per instance; the picks are convex hulls 2.5 mm thick, drawn by one `InstancedMesh` with a color per instance. Its probe drops 24 picks from a seeded sequence and steps 240 times: 19 are asleep, 15 rest on the guitar, 9 on the table, and none went through it. Two things this page found: `body.handle` can't pick a color with `handle % n`, because Rapier's handles are floats that pack an index and a generation, and colors written with `setColorAt` reach the GPU in the renderer's per-frame update, so the probe reads them after two frames of `setAnimationLoop`, not after a `render()` of its own. The [source](https://github.com/spareilleux/learn/tree/f68e710/code/threejs/demos/physics) is in `code/threejs/demos/physics`.
+
+![A whole electric guitar lying on a brown table, seen from above at an angle, with about twenty guitar picks in pink, blue, green, yellow, purple, white and black resting on its body, on its fretboard and on the table around it.](../../../assets/threejs/demo-physics.webp)
+
+<details>
+<summary>Live page: run it here</summary>
+
+<iframe src="../../threejs-demos/demos/physics.html" title="Picks on a guitar" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Open full screen](../../threejs-demos/demos/physics.html). **Try it**: click to throw picks at the neck, *drop 10* for a handful, and untick *CCD for new picks* before throwing more: whether they then pass through the frets is *to verify*.
 
 ## Key takeaways
 

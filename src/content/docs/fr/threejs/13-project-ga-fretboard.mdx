@@ -19,6 +19,15 @@ La reproduction, [`GaFretboard.tsx`](https://github.com/spareilleux/learn/blob/e
 
 ![Un long manche brun foncé à 22 frettes vu de côté et d'en haut, qui s'éloigne vers la droite, avec de petits points d'incrustation blancs, les numéros de frettes le long du bord proche, et trois marqueurs bleus d'un accord de do majeur près du sillet, à gauche.](../../../../assets/threejs/l13-ga.webp)
 
+<details>
+<summary>Page en direct : la lancer ici</summary>
+
+<iframe src="../../../threejs-demos/13-fretboard.html?version=ga" title="Leçon 13, en direct" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Ouvrir en plein écran](../../../threejs-demos/13-fretboard.html?version=ga). **À essayer** : *version* passe de la structure de GA au portage. Seule la sonde place les marqueurs d'accord ; la [démo en direct](#démo-en-direct--des-voicings-daccords) en fin de leçon les place depuis un panneau.
+
 La version de GA :
 
 ```text
@@ -134,6 +143,15 @@ $ node scripts/probe.mjs 13-fretboard --query version=port
 ```
 
 ![Le même manche, dessiné par le portage, un peu plus sombre, avec des frettes plus fines, les incrustations, et trois marqueurs d'accord bleus près du sillet.](../../../../assets/threejs/l13-port.webp)
+
+<details>
+<summary>Page en direct : la lancer ici</summary>
+
+<iframe src="../../../threejs-demos/13-fretboard.html" title="Leçon 13, le portage, en direct" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Ouvrir en plein écran](../../../threejs-demos/13-fretboard.html)
 
 | | Structure de GA | Portage | Ce qui a changé |
 |---|---|---|---|
@@ -253,6 +271,21 @@ Le portage est écrit pour la page de ce cours ; l'intégrer à GA est un change
 - **React 19 et R3F 9.** Les composants de GA utilisent R3F 8 et React 18 (leçon 9). Autrement, les mêmes idées s'intègrent à la structure `useEffect` existante de GA : découper l'effet pour que le manche soit construit une fois, et que les marqueurs soient mis à jour dans leur propre effet indexé par le contenu ; libérer les textures des sprites ; plafonner le pixel ratio ; ajouter un `Raycaster`.
 - **`MeshPhysicalMaterial`, les textures de bois, le capodastre et les modèles de guitare** que la reproduction a laissés de côté. Chaque matériau partagé tient en une ligne ; le modèle du capodastre se charge de façon asynchrone et peut arriver après un nettoyage ([lignes 1188-1201](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeFretboard.tsx#L1188-L1201)) : il a besoin de la même vérification `isMounted` que le renderer.
 - **Tests.** Les tests de composants de la leçon 12 s'exécutent sur le portage comme sur le manche de la leçon 9 ; le `fretboard.spec.ts` de GA recevrait une condition à attendre au lieu de 3 secondes.
+
+## Démo en direct : des voicings d'accords
+
+Le portage à l'usage : le panneau choisit l'un de 14 accords et l'un de ses voicings, des formes ouvertes aux formes de mi et de la plus haut sur le manche, et chaque marqueur prend la couleur de son rôle, fondamentale, tierce, quinte ou septième. Les voicings ont été écrits à la main, et la sonde les vérifie note par note : do en forme de mi à la case 8 donne C3 G3 C4 E4 G4 C5, et Bm7♭5 à la case 2 donne x B2 F3 A3 D4 x. Chaque changement d'accord construit les marqueurs une fois (`markerBuilds` passe à 1, 2, 3) et garde 7 draw calls. Le [source](https://github.com/spareilleux/learn/tree/f68e710/code/threejs/demos/voicing) est dans `code/threejs/demos/voicing`.
+
+![Une longue touche sombre aux frettes numérotées, vue de haut et de biais, avec quatre marqueurs de couleur près du sillet, rouge, jaune, bleu et vert, et une légende en bas à gauche qui indique Bm7♭5, fret 2: x B2 F3 A3 D4 x (low E to high E), puis root, third, fifth et seventh avec leurs couleurs.](../../../../assets/threejs/demo-voicing.webp)
+
+<details>
+<summary>Page en direct : la lancer ici</summary>
+
+<iframe src="../../../threejs-demos/demos/voicing.html" title="Des voicings d'accords sur la touche" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Ouvrir en plein écran](../../../threejs-demos/demos/voicing.html). **À essayer** : choisissez un accord et un voicing, cliquez sur une position pour l'entendre, ou *strum*. Avant l'exercice 2, comptez ici les marqueurs d'un accord de do majeur, puis prédisez les draw calls de la gamme.
 
 ## À retenir
 

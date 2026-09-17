@@ -13,6 +13,15 @@ Lesson 1 drew a cube with a material that needs no light. This lesson builds a p
 
 ![A dark brown fretboard lying on a blue-gray table, seen from above and to the side, with five thin metal frets near its left end, a white dot between the second and third frets, and its shadow on the table below it.](../../../assets/threejs/l02-neck.webp)
 
+<details>
+<summary>Live page: run it here</summary>
+
+<iframe src="../../threejs-demos/02-materials-lights.html" title="Lesson 2, live" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Open full screen](../../threejs-demos/02-materials-lights.html). **Try it**: untick *neck casts a shadow* for exercise 3's scene (`?neckshadow=off`), or *shadows* to see what the shadow map adds. The [studio scene](../../threejs-demos/demos/studio.html) of lesson 7 puts a whole guitar under a spotlight with soft shadows.
+
 The screenshot comes from `node scripts/probe.mjs 02-materials-lights --shot out/neck.png`, in headless Chromium on the author's machine, with WebGPU.
 
 | | WPF 3D | MonoGame | three.js |
@@ -269,6 +278,15 @@ $ node scripts/probe.mjs 02-materials-lights --query neckshadow=off
 One draw call and 12 triangles fewer: the neck is no longer drawn into the shadow map. The frets still are, so their thin shadows now reach the table through the neck, which no longer hides them:
 
 ![The same fretboard, without its large shadow on the table: five short dark marks, the shadows of the frets, lie on the table just below the neck.](../../../assets/threejs/l02-neck-no-neck-shadow.webp)
+
+<details>
+<summary>Live page: run it here</summary>
+
+<iframe src="../../threejs-demos/02-materials-lights.html?neckshadow=off" title="Lesson 2 with ?neckshadow=off, live" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Open full screen](../../threejs-demos/02-materials-lights.html?neckshadow=off)
 
 The neck still receives the frets' shadows on its top face. A mesh that casts no shadow but should hide another one is a common cause of light leaking where it shouldn't.
 

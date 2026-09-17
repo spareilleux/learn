@@ -139,6 +139,15 @@ El mismo hash que en Node.js: el mismo WebAssembly, alimentado con los mismos n�
 
 ![Un mástil marrón oscuro con trastes de metal y cuerdas, visto de frente y desde arriba, con púas naranjas planas o inclinadas entre los trastes, y más púas esparcidas por el suelo oscuro delante.](../../../../assets/threejs/l10-picks.webp)
 
+<details>
+<summary>Página en vivo: ejecutarla aquí</summary>
+
+<iframe src="../../../threejs-demos/10-physics.html" title="Lección 10, en vivo" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Abrir a pantalla completa](../../../threejs-demos/10-physics.html). **Pruébalo**: *Rapier build* recarga la página con el build estándar, el otro build del ejercicio 3. El ejercicio 1, lanzar púas con un clic, es la [demo en vivo](#demo-en-vivo-púas-sobre-una-guitarra) al final de la lección.
+
 Carga y pasos, en la máquina del autor, tal como los informó la página (`check.sh` elimina estos campos de la salida comparada): el módulo determinista tardó 83 ms en importarse e inicializarse en la página, y un paso de las 24 púas 0.22 ms de media en los 180 pasos, un tercio de ellos con todas las púas dormidas. El módulo WebAssembly se carga con un `import()` dinámico, así que Vite lo pone en su propio chunk, descargado después del código de la página (el build de la lección 13 lo lista). Los objetos de Rapier viven en la memoria de WebAssembly: `world.free()` libera un mundo cuando una página ha terminado con él.
 
 ## Snapshots
@@ -171,6 +180,21 @@ GA no tiene biblioteca de física: ni Rapier, ni cannon-es, ni Ammo.
 
 - **Cheese Avalanche** simula unos 300 cuerpos a mano, con gravedad, colisiones contra un heightfield, restitución y un giro aproximado: "intentionally hand-rolled (no cannon / rapier dep)" ([`CheeseAvalanche.tsx`, líneas 16-18](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/CheeseAvalanche/CheeseAvalanche.tsx#L16-L18)). Para esa tarea, cuerpos contra el terreno y nunca entre sí, es una elección razonable. Su paso es el delta del fotograma, limitado a 1/30 s ([líneas 561-562](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/CheeseAvalanche/CheeseAvalanche.tsx#L561-L562), llamado desde el bucle de animación en la [línea 649](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/CheeseAvalanche/CheeseAvalanche.tsx#L649)): un paso variable, así que la avalancha se desarrolla de otra forma a 60 y a 144 Hz. Escribe los cuerpos en dos objetos `InstancedMesh` ([líneas 616-632](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/CheeseAvalanche/CheeseAvalanche.tsx#L616-L632)), como hace esta lección, pero reserva un `Vector3` para cada cuerpo que rueda en cada paso, dentro de un bucle que por lo demás reutiliza variables temporales ([línea 595](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/CheeseAvalanche/CheeseAvalanche.tsx#L595)).
 - **El módulo lunar** lo hace con paso fijo: un acumulador de pasos de 1/120 s, como máximo 10 por fotograma, tras limitar el delta del fotograma a 0.1 s ([`LunarLanderEngine.ts`, líneas 3030-3040](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/PrimeRadiant/LunarLanderEngine.ts#L3030-L3040), con `PHYSICS_DT` en la [línea 66](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/PrimeRadiant/LunarLanderEngine.ts#L66)). Dibuja el último estado, sin interpolación, lo que a 1/120 s rara vez se nota.
+
+## Demo en vivo: púas sobre una guitarra
+
+El ejercicio 1 sobre una guitarra entera: un clic lanza una púa desde la cámara, a lo largo del rayo del puntero, a 3 m/s. Cada parte visible de la guitarra es un collider fijo de malla de triángulos, 47 404 triángulos tomados de las geometrías que dibuja three.js, una copia por instancia; las púas son envolventes convexas de 2.5 mm de grosor, dibujadas por una sola `InstancedMesh` con un color por instancia. Su sonda suelta 24 púas según una secuencia con semilla fija y avanza 240 pasos: 19 están dormidas, 15 descansan sobre la guitarra, 9 sobre la mesa y ninguna la atravesó. Dos cosas que encontró esta página: `body.handle` no sirve para elegir un color con `handle % n`, porque los handles de Rapier son flotantes que empaquetan un índice y una generación, y los colores escritos con `setColorAt` llegan a la GPU en la actualización por fotograma del renderer, así que la sonda los lee tras dos fotogramas de `setAnimationLoop`, no tras un `render()` propio. El [código](https://github.com/spareilleux/learn/tree/f68e710/code/threejs/demos/physics) está en `code/threejs/demos/physics`.
+
+![Una guitarra eléctrica entera sobre una mesa marrón, vista desde arriba y en ángulo, con una veintena de púas rosas, azules, verdes, amarillas, violetas, blancas y negras sobre su cuerpo, sobre su diapasón y sobre la mesa alrededor.](../../../../assets/threejs/demo-physics.webp)
+
+<details>
+<summary>Página en vivo: ejecutarla aquí</summary>
+
+<iframe src="../../../threejs-demos/demos/physics.html" title="Púas sobre una guitarra" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Abrir a pantalla completa](../../../threejs-demos/demos/physics.html). **Pruébalo**: haz clic para lanzar púas al mástil, *drop 10* para un puñado, y desmarca *CCD for new picks* antes de lanzar más: si entonces atraviesan los trastes está *por verificar*.
 
 ## Puntos clave
 

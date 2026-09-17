@@ -110,6 +110,15 @@ $ node scripts/probe.mjs 07-post --query pipeline=bloom
 
 ![Une touche sombre vue de dessus et de biais, avec cinq repères ronds qui brillent d'un bleu pâle, chacun entouré d'un doux halo bleu qui déborde sur les frettes et les cordes voisines.](../../../../assets/threejs/l07-bloom.webp)
 
+<details>
+<summary>Page en direct : la lancer ici</summary>
+
+<iframe src="../../../threejs-demos/07-post.html" title="Leçon 7, en direct" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Ouvrir en plein écran](../../../threejs-demos/07-post.html). **À essayer** : mettez *bloom threshold* à 0, la scène de l'exercice 1 ; *pipeline* passe d'une chaîne à l'autre parmi celles de la section suivante.
+
 | `?pipeline=` | appels, 3 images | draw calls | render targets | programmes | halo, à 0.06 | manche, à 0.15 | fond |
 |---|---|---|---|---|---|---|---|
 | `none` | 6 | 25 | 1 | 4 | 53, 28, 20 | 53, 28, 20 | 12, 15, 20 |
@@ -230,6 +239,21 @@ $ node scripts/probe.mjs 07-post --query dispose=all
   Avec le three.js 0.180 de GA, le nom est correct ; à partir de r183, il journalise l'avertissement cité plus haut. Le nettoyage libère les contrôles, les géométries, les matériaux, les textures, le loader Draco et le renderer, mais ni le pipeline, ni `scenePass`, ni `bloomPass` ([lignes 641-673](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/Ocean/Ocean.tsx#L641-L673)). Savoir si `renderer.dispose()` libère leurs render targets avec le renderer est *à vérifier* ; avec un renderer conservé d'un montage à l'autre, elles resteraient. `PrimeRadiant/LunarLanderEngine.ts` a la même chaîne sous le même nom ([lignes 420-424](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/PrimeRadiant/LunarLanderEngine.ts#L420-L424)).
 - **Des effets abandonnés sur le chemin WebGPU.** `PrimeRadiant/ForceRadiant.tsx` est passé à `WebGPURenderer` avec `const USE_WEBGPU = true` ([lignes 1672-1676](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/PrimeRadiant/ForceRadiant.tsx#L1672-L1676)), et son commentaire en explique le coût : « The old EffectComposer + UnrealBloomPass + ShaderPass chain is disabled when useWebGPU is on », le remplacement en TSL étant « a follow-up task ». Le bloom n'est créé que `if (!USE_WEBGPU)` ([lignes 1883-1898](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/PrimeRadiant/ForceRadiant.tsx#L1883-L1898)) : aujourd'hui, le graphe s'affiche sans bloom. Le nœud `bloom` de cette leçon est cette suite ; les effets `ShaderPass` qui viennent après lui devraient être portés en nœuds TSL, comme dans la leçon 6.
 - **`EffectComposer` bien utilisé, pour WebGL.** Les 10 fichiers qui utilisent `EffectComposer` se terminent tous par une `OutputPass`, redimensionnent le composer et le libèrent ; `CheeseAvalanche/CheeseAvalanche.tsx` en est un exemple compact ([lignes 496-501](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/CheeseAvalanche/CheeseAvalanche.tsx#L496-L501), [ligne 673](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/CheeseAvalanche/CheeseAvalanche.tsx#L673) et [ligne 682](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/CheeseAvalanche/CheeseAvalanche.tsx#L682)). Passer l'un d'eux à `WebGPURenderer` revient à réécrire la chaîne, pas à l'adapter.
+
+## Démo en direct : un studio
+
+Les leçons 2, 3 et 7 réunies : une guitare sur un support, un projecteur avec une shadow map de 2048 × 2048 et un rayon doux, le `studio.hdr` de la leçon 3 comme environnement, le tone mapping ACES, et un anneau de néon dont la couleur est multipliée par 6, bien au-dessus de 1, pour que le bloom d'un `RenderPipeline` le reprenne. Sa sonde lit 62 rendus, 91 draw calls et 15 render targets après trois images. Le [source](https://github.com/spareilleux/learn/tree/f68e710/code/threejs/demos/studio) est dans `code/threejs/demos/studio`.
+
+![Une guitare électrique sunburst debout sur un support noir, sur un sol gris sombre, devant un mur sombre avec un grand anneau de néon rose lumineux derrière elle ; l'anneau projette un halo rose doux sur le mur, et la tête accroche une lumière vive en haut.](../../../../assets/threejs/demo-studio.webp)
+
+<details>
+<summary>Page en direct : la lancer ici</summary>
+
+<iframe src="../../../threejs-demos/demos/studio.html" title="Une guitare dans un studio" loading="lazy" width="100%" height="420" allow="fullscreen; autoplay; xr-spatial-tracking" style={{ border: 0, display: "block" }}></iframe>
+
+</details>
+
+[Ouvrir en plein écran](../../../threejs-demos/demos/studio.html). **À essayer** : le panneau change l'exposition, l'intensité de la lumière principale et celle de l'environnement, la force et le seuil du bloom, et la couleur du néon. Mettez *bloom threshold* à 0, comme dans l'exercice 1, pour voir ce qui d'autre dépasse le seuil. Un clic sur le manche joue une note, comme sur la guitare de la leçon 5.
 
 ## À retenir
 
