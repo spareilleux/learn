@@ -1,9 +1,11 @@
 ---
 title: 5. wslc or Docker Desktop?
-description: Compare wslc and Docker Desktop, and use the WSL container API from a Windows application.
+description: Compare wslc and Docker Desktop, run both on one machine, and avoid their silent traps - separate image stores, a latest tag that differs, and the same port published twice without an error.
 sidebar:
   order: 5
 ---
+
+After four lessons, `wslc` covers what most developers do with Docker every day: pull, run, publish, exec, build. The practical question is not whether it replaces Docker Desktop in general, but whether it can replace it on **your** machine, or live next to it. This lesson compares the two, then tests the coexistence: do they share images, do they both still work, and what happens when both publish the same port. The measurements are in the [journal](../journal/).
 
 ## Comparison
 
@@ -12,166 +14,132 @@ sidebar:
 | Installation | included in WSL ≥ 2.9.3 | separate product |
 | Maturity (Sept. 2026) | public preview | stable |
 | CLI | close to Docker | `docker` |
-| API for Windows applications | yes — NuGet `Microsoft.WSL.Containers` | Docker Engine API (HTTP) |
+| Linux VM | one per session, `vmmem<session>` | one distro, `docker-desktop` |
+| Resource limits | per session, `settings.yaml` ([lesson 6](../06-resources-and-limits/)) | for the WSL 2 VM, `.wslconfig` |
+| API for Windows applications | yes — NuGet `Microsoft.WSL.Containers` ([lesson 9](../09-csharp-api/)) | Docker Engine API (HTTP) |
 | Enterprise management | Microsoft Defender for Endpoint, Intune | Docker Business |
-| Ecosystem (Compose, Kubernetes, extensions, GUI) | none in 2.9.11: no `compose` command, no Kubernetes (k3s doesn't start), no extensions, no container page in WSL Settings | complete |
+| Ecosystem (Compose, Kubernetes, extensions, GUI) | none in 2.9.11: no `compose` command ([lesson 8](../08-compose/)), no Kubernetes (k3s doesn't start), no extensions, no container page in WSL Settings ([lesson 10](../10-networking-kubernetes-gui/)) | complete |
 
-:::note[Verified: no Compose in `wslc` 2.9.11]
-`wslc compose` → `Unrecognized command: 'compose'`, and the session's Docker engine can't be reached by `docker compose`. A small stack can be reproduced with a script (`network create`, `volume create`, `run --network --network-alias`); the tested translation of a `compose.yaml` is in the [journal](../journal/).
-:::
+The row that matters most for a C# or Java team is the API. Every tool built on the Docker Engine API, from Testcontainers to IDE container views, needs an endpoint that `wslc` doesn't expose to Windows ([lesson 8](../08-compose/)). In return, `Microsoft.WSL.Containers` gives a Windows application something Docker Desktop doesn't: its own containers, with no product to install.
 
-:::note[Verified: images are not shared]
-After `docker pull busybox`, `wslc image list` doesn't show it: each tool has its own store (`docker_data.vhdx` for Docker, one `storage.vhdx` per `wslc` session). An image used by both is downloaded twice, and the same `latest` tag can even point to two different versions (qdrant 1.16.3 in Docker, 1.19.1 in `wslc`). Details in the [journal](../journal/).
-:::
+## Both on one machine
+
+### Docker Desktop still works with WSL 2.9.11
+
+Updating WSL to the pre-release didn't break Docker Desktop 4.61, but its CLI gave a confusing first answer. `docker desktop start` replied `Docker Desktop is already running` while no Docker Desktop process existed, and `docker desktop status` replied `Could not retrieve status`. Starting `C:\Program Files\Docker\Docker\Docker Desktop.exe` directly worked: the engine 29.2.1 was ready after about 130 seconds, and `docker run --rm hello-world` succeeded. Podman 5.8.3 also started and ran its test image.
+
+### Images are not shared
+
+After `docker pull busybox`, the two lists differ:
+
+```text
+> docker images            > wslc images
+postgres:16-alpine          alpine   latest
+busybox:latest
+hello-world:latest
+node:18-alpine
+```
+
+Each tool has its own store: `docker_data.vhdx`, about 50 GB here, for Docker, and one `storage.vhdx` per session for `wslc`. An image used by both is downloaded twice and stored twice. Worse, the same tag can point to two versions: `qdrant/qdrant:latest` was qdrant 1.16.3 in Docker, pulled months earlier, and 1.19.1 in `wslc` ([lesson 7](../07-volumes-and-a-real-service/)).
+
+### The same port, twice, without an error
+
+The riskiest trap. A test with two web servers that answer differently: `nginx` in `wslc`, and `httpd`, the Apache server whose page says "It works!", in Docker. The page tells which tool answered.
+
+```powershell
+wslc run -d --name webwslc -p 8080:80 nginx
+docker run -d --name webdocker -p 8080:80 httpd
+curl.exe http://127.0.0.1:8080/   # nginx  → wslc
+curl.exe http://localhost:8080/   # It works! → Docker
+```
+
+**Both containers start without any error.** Windows accepts the two listeners because they don't bind exactly the same address. The listeners on port 8080, with their processes:
+
+```text
+TCP  0.0.0.0:8080     LISTENING  com.docker.backend
+TCP  [::]:8080        LISTENING  com.docker.backend
+TCP  127.0.0.1:8080   LISTENING  dllhost      ← wslc
+TCP  [::1]:8080       LISTENING  wslrelay
+```
+
+`127.0.0.1` goes to `wslc`, because the more specific address wins, while `localhost` resolves to `::1` first and ends up on Docker. The order of the starts and an explicit `0.0.0.0` don't change anything:
+
+| Variant | Errors | `127.0.0.1` | `localhost` |
+|---|---|---|---|
+| `wslc` first, then Docker (8080) | none | wslc | Docker |
+| Docker first, then `wslc` (8081) | none | wslc | Docker |
+| Docker, then `wslc -p 0.0.0.0:8082:80` | none | wslc | Docker |
+| `wslc -p 0.0.0.0:8083:80`, then Docker | none | wslc | Docker |
+
+Think of what this means for an application. A Spring Boot or ASP.NET Core configuration that says `localhost:5432` and a test script that says `127.0.0.1:5432` can talk to two different databases, and every tool reports success. The fix is organizational: give each tool its own port range, as [lesson 7](../07-volumes-and-a-real-service/) does with 16333 for the `wslc` qdrant.
+
+### Two VMs cost two VMs
+
+Each tool keeps its own VM and its own memory. An idle `wslc` session costs about 0.9 GB and stops after 30 seconds without a command ([lesson 6](../06-resources-and-limits/)); Docker Desktop's VM stays up while Docker Desktop runs. On a machine already short of memory, the journal's first entry shows where this can end: `Wsl/0x8007000e`, not enough memory, and Docker Desktop crashing.
 
 ## When to choose what
 
-- **`wslc`**: simple needs (running a database, a service, a tool), a wish not to depend on Docker Desktop, or a Windows application that needs to drive containers.
-- **Docker Desktop**: projects based on Docker Compose, local Kubernetes, a team already tooled around Docker.
-- **Both**: possible, but each tool keeps its own VM and its own memory. On a busy machine, that's a real cost (see the [journal](../journal/)).
-
-## The WSL container API
-
-A Windows application can create its own Linux containers. The objects follow the lifecycle:
-
-| Object | Role |
-|---|---|
-| `WslcService` | check that WSL components are installed, service version |
-| `Session` | WSL host that manages images and creates containers |
-| `Container` | start, stop, inspect, delete; launch processes |
-| `Process` | read `stdout`/`stderr`, write to `stdin`, send signals |
-
-The [`Microsoft.WSL.Containers`](https://www.nuget.org/packages/Microsoft.WSL.Containers) package 2.9.9 is a [C#/WinRT](https://learn.microsoft.com/windows/apps/develop/platform/csharp-winrt/) projection compiled against the Windows 10.0.26100 SDK, with a native DLL for x64 and arm64 only. The project must say so, otherwise the build fails with `CS1705`:
-
-```xml
-<PropertyGroup>
-  <OutputType>Exe</OutputType>
-  <TargetFramework>net10.0-windows10.0.26100.0</TargetFramework>
-  <WindowsSdkPackageVersion>10.0.26100.80</WindowsSdkPackageVersion>
-  <RuntimeIdentifier>win-x64</RuntimeIdentifier>
-</PropertyGroup>
-<ItemGroup>
-  <PackageReference Include="Microsoft.WSL.Containers" Version="2.9.9" />
-</ItemGroup>
-```
-
-```csharp
-using System.Text;
-using Microsoft.WSL.Containers;
-
-var missing = WslcService.GetMissingComponents();
-if (missing.Count > 0)
-{
-    Console.WriteLine($"Missing WSL components: {string.Join(", ", missing)} (run wsl --install)");
-    return 1;
-}
-var version = WslcService.GetVersion();
-Console.WriteLine($"WSL container service {version.Major}.{version.Minor}.{version.Revision}");
-
-// The session keeps its images and containers in its own storage.vhdx.
-var storage = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "WslcHost");
-using var session = new Session(new SessionSettings("wslc-host", storage)
-{
-    CpuCount = 2,
-    MemorySizeInMB = 2048
-});
-session.Start();
-Console.WriteLine($"Session started, storage in {storage}");
-
-await session.PullImageAsync(new PullImageOptions("docker.io/library/alpine:latest"));
-foreach (var image in session.GetImages())
-    Console.WriteLine($"Image {image.Name} ({image.Size / 1024 / 1024} MB)");
-
-using var container = session.CreateContainer(new ContainerSettings("alpine:latest")
-{
-    Name = "wslc-host-hello",
-    InitProcess = new ProcessSettings
-    {
-        CommandLine = ["/bin/sh", "-c", "echo Hello from $(cat /etc/alpine-release) on $(uname -r)"],
-        OutputMode = ProcessOutputMode.Event
-    }
-});
-
-try
-{
-    var exited = new TaskCompletionSource<int>();
-    container.InitProcess.OutputReceived += data => Console.Write(Encoding.UTF8.GetString(data));
-    container.InitProcess.Exited += code => exited.TrySetResult(code);
-    container.Start();
-
-    var exitCode = await exited.Task.WaitAsync(TimeSpan.FromMinutes(2));
-    Console.WriteLine($"Container {container.Id[..12]} exited with code {exitCode}");
-    return exitCode;
-}
-finally
-{
-    // Without this, a failed Start leaves the container in storage.vhdx and blocks its name.
-    container.Delete(DeleteContainerOption.Force);
-    session.Terminate();
-}
-```
-
-```text
-WSL container service 2.9.11
-Session started, storage in C:\Users\spare\AppData\Local\WslcHost
-Image alpine:latest (8 MB)
-Hello from 3.24.1 on 6.18.40.1-microsoft-standard-WSL2
-Container 2b900903f6c8 exited with code 0
-```
-
-The program uses the four objects in order, and its finally block cleans up even when the container fails to start.
-
-```mermaid
-flowchart TB
-    svc["WslcService: missing components, version"] --> sess["Session: start, pull the image"]
-    sess --> create["Session: create the container"]
-    create --> run["Container: start the init process"]
-    run --> proc["Process: output and exit code, as events"]
-    proc --> clean["finally: delete the container, terminate the session"]
-    run -->|"Start fails"| clean
-```
-
-The full program, which also removes a container left by a crashed run, is in [`code/wsl-containers/wslc-host`](https://github.com/spareilleux/learn/tree/main/code/wsl-containers/wslc-host).
-
-:::caution[No network by default]
-A container created by the API gets `NetworkMode: none`: no interface other than `lo`, no internet access, unlike `wslc run`. Set `NetworkingMode = ContainerNetworkingMode.Bridged` in `ContainerSettings` for a service that calls out or publishes ports.
-:::
-
-The package can also build your own image during `dotnet build`: a `WslcImage` item runs `wslc image build` and `wslc image save`, and the program loads the `.tar` into its session with `LoadImageAsync` (not `ImportImageAsync`, which expects a flat filesystem). Tested setup and outputs in the [journal](../journal/).
-
-:::caution[The Microsoft Learn snippets don't compile against 2.9.9]
-The page uses `ComponentFlags`, `MemoryMB`, `CmdLine` and `DeleteContainerFlags`. In package 2.9.9 they are `IReadOnlyList<Component>`, `MemorySizeInMB`, `CommandLine` and `DeleteContainerOption`. Details in the [journal](../journal/).
-:::
+- **`wslc`**: simple needs, such as running a database, a service or a tool; a wish not to depend on Docker Desktop and its licensing; or a Windows application that needs to drive its own containers.
+- **Docker Desktop**, or Podman: projects based on Docker Compose, local Kubernetes, tools that need the Docker Engine API such as Testcontainers, and a team already tooled around Docker.
+- **Both**: possible, with separate ports and the memory of two VMs in mind.
 
 ## Key takeaways
 
 - `wslc` = native WSL containers, with no third-party product, still in preview.
-- Docker Desktop remains more complete (Compose, Kubernetes, GUI).
+- Docker Desktop remains more complete: Compose, Kubernetes, extensions, a graphical interface and the Docker Engine API.
+- Docker Desktop 4.61 keeps working with WSL 2.9.11, but start it from its executable if `docker desktop start` claims it's already running.
+- Images are not shared: an image used by both tools is downloaded twice, and `latest` can be two different versions.
+- Both tools can publish the same port without an error. `127.0.0.1` then reaches `wslc` and `localhost` reaches Docker: keep their ports apart.
 - The `Microsoft.WSL.Containers` API opens up a use case Docker Desktop doesn't cover directly: Windows applications that embed Linux containers.
 
-## Exercise
+## Exercises
 
-Pick a service you currently run with Docker (for example [qdrant](https://qdrant.tech/) or [MongoDB](https://www.mongodb.com/)) and run it with `wslc`. Note in the [journal](../journal/) what differs.
+1. Docker Desktop publishes PostgreSQL on port 5432. You start another PostgreSQL with `wslc run -d -p 5432:5432 postgres:16-alpine`. Your ASP.NET Core application uses `Host=localhost;Port=5432` and your migration script uses `127.0.0.1`. Which database does each one reach, and what errors do you see?
 
 <details>
-<summary>Hint</summary>
+<summary>Solution</summary>
 
-If Docker already publishes qdrant on 6333, pick **another Windows port**: `wslc` would bind 6333 without any error and silently take `127.0.0.1:6333` away from the Docker container.
+No error anywhere. The migration script, on `127.0.0.1`, reaches the `wslc` database, which listens on that exact address. The application, on `localhost`, which resolves to `::1` first, reaches Docker's database. The migrations are applied to a database the application never reads. This follows the four variants measured above; PostgreSQL itself wasn't part of the test, so *to verify* with your client library, since some resolve `localhost` to IPv4 first.
+
+</details>
+
+2. How do you find out, in a few seconds, which process listens on each address of port 8080?
+
+<details>
+<summary>Solution</summary>
+
+With PowerShell, which doesn't need elevation for this:
 
 ```powershell
-wslc volume create qdrant-data
-wslc run -d --name qdrant -p 16333:6333 -v qdrant-data:/qdrant/storage qdrant/qdrant
-curl.exe http://127.0.0.1:16333/
-wslc container stop qdrant
+Get-NetTCPConnection -LocalPort 8080 -State Listen | Select-Object LocalAddress, OwningProcess, @{n='Process';e={(Get-Process -Id $_.OwningProcess).ProcessName}}
 ```
 
-Things to observe: is the image downloaded again? Is it the same version as Docker's `latest`? How much memory does the VM use? What does qdrant log if you mount a Windows folder instead of a volume? Answers in the [journal](../journal/).
+A `dllhost` on `127.0.0.1` is the `wslc` listener; `com.docker.backend` on `0.0.0.0` and `[::]` is Docker Desktop. This command was checked on another port of the same machine, not during the port 8080 test. From an administrator terminal, `netstat -abno` gives the same information.
+
+</details>
+
+3. A teammate says: "No need to pull it again, I already have `qdrant/qdrant:latest` in Docker." Give two reasons why that's wrong for `wslc`.
+
+<details>
+<summary>Solution</summary>
+
+First, the stores are separate: `wslc` downloads the image again into its session's `storage.vhdx`. Second, `latest` is resolved at pull time, so the `wslc` copy can be a newer version than the Docker one: 1.19.1 against 1.16.3 in the test. Pin a version tag when both must match.
+
+</details>
+
+4. After updating WSL, `docker desktop start` answers `Docker Desktop is already running`, but `docker ps` fails. What do you do?
+
+<details>
+<summary>Solution</summary>
+
+Check whether a Docker Desktop process really exists, for example with `Get-Process "Docker Desktop" -ErrorAction SilentlyContinue`. If there is none, start `C:\Program Files\Docker\Docker\Docker Desktop.exe` directly and wait for the engine, which took about two minutes here, before running `docker ps` again.
 
 </details>
 
 ## Sources
 
 - [WSL container — Microsoft Learn](https://learn.microsoft.com/windows/wsl/wsl-container)
-- [WSL container API reference](https://wsl.dev/api-reference/), and the full samples at [aka.ms/wslc-samples](https://aka.ms/wslc-samples)
-- [`Microsoft.WSL.Containers` — NuGet](https://www.nuget.org/packages/Microsoft.WSL.Containers)
-- [C#/WinRT — Microsoft Learn](https://learn.microsoft.com/windows/apps/develop/platform/csharp-winrt/)
+- [Docker Desktop](https://docs.docker.com/desktop/) and [Docker Desktop WSL 2 backend](https://docs.docker.com/desktop/features/wsl/) — Docker docs
+- [Published ports](https://docs.docker.com/engine/network/port-publishing/) — Docker docs
+- [`Get-NetTCPConnection` — Microsoft Learn](https://learn.microsoft.com/powershell/module/nettcpip/get-nettcpconnection)
+- [Testcontainers](https://testcontainers.com/)
