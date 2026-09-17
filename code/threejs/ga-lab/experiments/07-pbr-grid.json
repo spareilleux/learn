@@ -11,9 +11,9 @@
   ],
   "page": "07-pbr-grid",
   "runs": [
-    { "name": "standard", "query": "material=standard" },
-    { "name": "physical", "query": "material=physical" },
-    { "name": "standard-one", "query": "material=standard&grid=1" }
+    { "name": "standard", "query": "material=standard", "viewport": [1920, 1080] },
+    { "name": "physical", "query": "material=physical", "viewport": [1920, 1080] },
+    { "name": "standard-one", "query": "material=standard&grid=1", "viewport": [1920, 1080] }
   ],
   "ci": [
     { "name": "standard", "query": "material=standard" },

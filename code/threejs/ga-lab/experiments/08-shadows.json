@@ -13,13 +13,13 @@
   ],
   "page": "08-shadows",
   "runs": [
-    { "name": "none", "query": "shadow=none" },
-    { "name": "map-1024", "query": "shadow=map&size=1024" },
-    { "name": "map-2048", "query": "shadow=map&size=2048" },
-    { "name": "map-4096", "query": "shadow=map&size=4096" },
-    { "name": "map-once", "query": "shadow=once&size=2048" },
-    { "name": "baked-ao", "query": "shadow=baked" },
-    { "name": "contact", "query": "shadow=contact" }
+    { "name": "none", "query": "shadow=none", "viewport": [1920, 1080] },
+    { "name": "map-1024", "query": "shadow=map&size=1024", "viewport": [1920, 1080] },
+    { "name": "map-2048", "query": "shadow=map&size=2048", "viewport": [1920, 1080] },
+    { "name": "map-4096", "query": "shadow=map&size=4096", "viewport": [1920, 1080] },
+    { "name": "map-once", "query": "shadow=once&size=2048", "viewport": [1920, 1080] },
+    { "name": "baked-ao", "query": "shadow=baked", "viewport": [1920, 1080] },
+    { "name": "contact", "query": "shadow=contact", "viewport": [1920, 1080] }
   ],
   "ci": [
     { "name": "none", "query": "shadow=none" },
