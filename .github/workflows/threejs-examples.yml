@@ -8,9 +8,9 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ['code/threejs/**', '.github/workflows/threejs-examples.yml']
+    paths: ['code/threejs/**', 'public/threejs-demos/**', '.github/workflows/threejs-examples.yml']
   pull_request:
-    paths: ['code/threejs/**', '.github/workflows/threejs-examples.yml']
+    paths: ['code/threejs/**', 'public/threejs-demos/**', '.github/workflows/threejs-examples.yml']
 
 permissions:
   contents: read

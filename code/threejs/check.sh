@@ -165,6 +165,15 @@ node scripts/l12-pixels.ts out/shots/l01_probe.png out/shots/l01_probe_headless_
 probe l13_probe_ga 13-fretboard --query version=ga
 probe l13_probe_port 13-fretboard --query version=port
 
+# Live demos (demos/): the complete scenes that the site embeds, probed like the lesson pages. The guitar is clicked on
+# string 3, fret 5, the voicing page switches chords, the picks are dropped and stepped 240 times, and the VR page plays
+# a note with IWER's emulated controller
+probe demo_guitar demos/guitar
+probe demo_voicing demos/voicing
+probe demo_studio demos/studio
+probe demo_physics demos/physics
+probe demo_xr demos/xr
+
 # The production build: one HTML page per lesson, three.js's build files in shared chunks (lessons 1 and 4). The pages of
 # lessons 1 to 4 alone, as lessons 1 and 4 show it, then every page: later lessons change how the shared chunks are split
 rm -rf dist
@@ -177,5 +186,12 @@ run l08_dist_files node scripts/files.mjs dist
 rm -rf dist
 run l13_build bash -c "$bin/vite build 2> out/l13_build.stderr.txt; code=\$?; cat out/l13_build.stderr.txt; exit \$code"
 run l13_dist_files node scripts/files.mjs dist
+
+# The demos' build, as the site publishes it under /learn/threejs-demos/: built again here, it must match the committed
+# copy in public/threejs-demos, except the generated models and HDR, which check.sh has just regenerated
+rm -rf out/demos-build
+run demos_build bash -c "$bin/vite build --config vite.demos.config.ts --outDir out/demos-build 2> out/demos_build.stderr.txt > /dev/null; code=\$?; cat out/demos_build.stderr.txt; exit \$code"
+run demos_dist_files node scripts/files.mjs out/demos-build
+run demos_published diff -r --exclude=generated out/demos-build ../../public/threejs-demos
 
 exit $status

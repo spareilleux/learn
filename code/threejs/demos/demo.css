@@ -1,0 +1,29 @@
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #1e2127;
+  font: 14px/1.4 system-ui, sans-serif;
+  color: #e6e1d6;
+}
+
+canvas {
+  display: block;
+  touch-action: none;
+}
+
+.overlay {
+  position: fixed;
+  left: 12px;
+  bottom: 10px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: rgb(0 0 0 / 0.45);
+  pointer-events: none;
+  white-space: pre;
+}
+
+.overlay:empty {
+  display: none;
+}
