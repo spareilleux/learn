@@ -12,7 +12,7 @@ sidebar:
 - [x] P2, joue un accord, vois l'univers
 - [ ] P3, pochettes d'album
 - [ ] P4, passe de rendu IA
-- [ ] P5, bracelets imprimables en 3D
+- [x] P5, bracelets imprimables en 3D
 - [ ] P6, chaîne complète
 - [x] P7, modèle de jouabilité
 
@@ -33,6 +33,8 @@ Ce que le laboratoire a trouvé dans GuitarAlchemist/ga en mesurant, pas en lisa
 | `minimumFingers` compte des doigts | Il compte des *frettes distinctes*, plafonnées à 4 | [`VoicingPhysicalAnalyzer.cs:102-103`](https://github.com/GuitarAlchemist/ga/blob/66bdd049ad3f4b10f996e4cc6a9c6e58797cf30e/Common/GA.Domain.Services/Fretboard/Voicings/Analysis/VoicingPhysicalAnalyzer.cs#L102-L103) | Am `x02210` et Am7 `x02010` sortent tous deux à 2.29 ; idem pour E contre E7 et D contre Dsus4 | Reproduit (P7) |
 | L'étiquette `Difficulty` et le `DifficultyScore` s'accordent | La plage « Beginner » de l'étiquette demande un écart d'au plus 64 mm, moins de deux frettes près du sillet, si bien que l'accord de do à vide est « Intermediate » ; et `141404`, étiqueté « Advanced », sort à 4.65, le 26e centile de l'index | [`VoicingPhysicalAnalyzer.cs:105-112`](https://github.com/GuitarAlchemist/ga/blob/66bdd049ad3f4b10f996e4cc6a9c6e58797cf30e/Common/GA.Domain.Services/Fretboard/Voicings/Analysis/VoicingPhysicalAnalyzer.cs#L105-L112) | 3.50 et « Intermediate » pour `x32010` | Reproduit (P7) |
 | Un voicing que personne ne peut jouer obtient un score élevé | 101 967 voicings de guitare sur 297 883 (34.2 %) n'ont aucun doigté légal sous un modèle de main à quatre doigts, et le score le plus élevé que GA donne à l'un d'eux est 7.73, dans la plage des accords ordinaires, donc `maxDifficulty: 8` les renvoie | [`VoicingFilterService.cs:53-70`](https://github.com/GuitarAlchemist/ga/blob/66bdd049ad3f4b10f996e4cc6a9c6e58797cf30e/Apps/ga-server/GaApi/Services/VoicingFilterService.cs#L53-L70) | La recherche de [`fingering.mjs`](https://github.com/spareilleux/learn/blob/main/code/ga-protos/p7-playability/src/lib/fingering.mjs) sur tout l'index | Reproduit (P7). Le modèle de main est le mien et n'a pas de pouce, donc 34.2 % est une borne supérieure |
+| `ga_chord_to_set('Cdim7')` renvoie le `diminished-7` de GA, 0 3 6 9 | Il renvoie 0 3 6 10, une septième demi-diminuée, Forte 4-27 ; `ga_parse_chord('Cdim7')` donne la qualité `diminished` avec le composant `ext:7`, si bien que la septième est ajoutée mineure | Le serveur MCP de GA en marche, contre [`CanonicalChordPatternCatalog.cs:66`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Harmony/CanonicalChordPatternCatalog.cs#L66) | L'échange dans [`results/ga-check.json`](https://github.com/spareilleux/learn/blob/b171d57/code/ga-protos/p5-printable-bracelets/results/ga-check.json), 2026-09-17 | Reproduit (P5), non signalé |
+| `ga_chord_to_set('Cm7b5')` renvoie le `half-diminished-7` de GA, 0 3 6 10 | Il renvoie 0 3 7 10, une simple septième mineure : l'altération `b5` est perdue | Le serveur MCP de GA en marche, contre [`CanonicalChordPatternCatalog.cs:65`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Harmony/CanonicalChordPatternCatalog.cs#L65) | Le même échange ; `get_scale_notes` et `Cmaj7` s'accordent avec les fichiers, ces deux-là non | Reproduit (P5), non signalé |
 
 ## Expériences
 
@@ -50,6 +52,10 @@ Chaque prototype écrit ses hypothèses avant que le script de mesure existe, et
 | Combien des voicings de guitare de GA quatre doigts peuvent-ils jouer ? | H11 : plus de 98 % | 65.8 % : la recherche ne trouve aucun doigté légal pour 101 967 voicings sur 297 883 | Gravement réfutée, et cela a coupé le prototype en deux : une tâche de classement sur ce qui se joue, une question par oui ou non sur le reste (2026-09-17) |
 | Séparer par voicing plutôt que par accord flatte-t-il le modèle ? | H6 : la séparation naïve surestime les arbres boostés de 0.005 à 0.05 de Spearman | 0.0005 ; la séparation par forme transposée le déplace de 0.002 | Réfutée. La séparation par groupe ne vous coûte quelque chose que si le groupe porte une information que les variables n'ont pas, et ici les deux côtés se lisent sur le même diagramme (2026-09-17) |
 | La recherche de doigté est-elle assez coûteuse pour valoir la peine d'être remplacée par un modèle ? | H12 : le modèle note un voicing au moins 50 fois plus vite | 3.8 fois : 0.0145 ms contre 0.0558 ms | Réfutée. La prémisse du prototype était fausse ; ce que le modèle achète, ce sont 949 Ko qui s'embarquent sans le modèle de main (2026-09-17) |
+| Un bracelet de classes de hauteur peut-il devenir un objet qu'un slicer accepte ? | Douze chiffres commités dans [`hypotheses.md`](https://github.com/spareilleux/learn/blob/8a2ed53/code/ga-protos/p5-printable-bracelets/results/hypotheses.md) à `8a2ed53` | 30 solides sur 30 étanches, un seul corps, caractéristique d'Euler 0 ; 5.2473 cm3, alésage 64.9913 mm, paroi la plus mince 1.9954 mm, aucune face sous le seuil de support de 45 degrés ; PrusaSlicer 2.9.6 donne 6.42 g et 35 min 40 s | Oui, et quatre des douze prédictions ont été réfutées (2026-09-17) |
+| Un maillage écrit sans union booléenne échoue-t-il à ses contrôles ? | H2 : les quatorze pièces concaténées ne sont pas étanches | Elles le sont, manifold3d les accepte, et ce sont 14 corps ; volume 2.6 % trop haut, surface 10.8 % trop haute, paroi mesurée à 1.40 mm — et PrusaSlicer les découpe aux mêmes 6.42 g sans message de réparation | Réfutée deux fois : ni les contrôles du maillage ni le slicer ne s'en aperçoivent (2026-09-17) |
+| Quelle part d'un bracelet demande des supports si ses perles sont des sphères ? | H6 : entre 3 % et 8 % de la surface | 0.35 %, pente la pire 4.87 degrés | Réfutée en ordre de grandeur, juste sur le fait qu'il faut des supports (2026-09-17) |
+| La perle que dessine le prototype 2 survit-elle à une paroi de 2 mm ? | H4 : l'alésage reste à 64.98 mm ou plus | Une sphère de rayon 3.0 mm centrée sur la surface extérieure ramène l'alésage à 63.0287 mm, 1.96 mm perdus | La variante sphérique a échoué et est publiée comme un échec ; c'est le cône qui part (2026-09-17) |
 
 ## 2026-09-16 — P1 : d'où viennent les données
 
@@ -119,9 +125,31 @@ Chaque prototype écrit ses hypothèses avant que le script de mesure existe, et
 - Quatre prédictions fausses (H2, H6, H11, H12), deux à moitié justes (H9, H10). [Leçon](../07-playability-model/)
 - Un bogue à retenir, trouvé par une séparation qui échouait : le premier hachage de groupe était un FNV-1a simple, dont les bits de poids fort bougent à peine entre `chord0` et `chord39`. Une séparation lit précisément ces bits de poids fort, si bien que les quarante accords atterrissaient dans le jeu d'apprentissage et que le jeu de test sortait vide. Un finaliseur murmur3 a corrigé cela, et un test vérifie désormais que les trois côtés reçoivent 60/20/20 de trois mille clés presque identiques.
 
+## 2026-09-17 — P5 : hypothèses, puis un jonc
+
+- Douze prédictions dans [`results/hypotheses.md`](https://github.com/spareilleux/learn/blob/8a2ed53/code/ga-protos/p5-printable-bracelets/results/hypotheses.md), commitées dans `8a2ed53` avant qu'aucun maillage n'existe. Quatre se sont révélées fausses : H2, H6, la prédiction de réparation de H11 et la prémisse de H7.
+- Les classes de hauteur sont extraites de GA à `a826864`, de `CanonicalChordPatternCatalog.cs` et de `Scale.cs`, et recoupées avec le catalogue que le prototype 2 avait déjà porté. 58 motifs d'accord, 19 gammes, SHA-256 des deux blobs enregistrés.
+- 31 solides construits, unis avec manifold3d et mesurés en 5.95 s : tous étanches, un seul corps, caractéristique d'Euler 0, manifold3d NoError. Un jonc de 65 mm à perles coniques fait 5.2473 cm3 et 6.507 g de PLA, son alésage 64.9913 mm, sa paroi la plus mince 1.9954 mm, et aucune de ses faces n'est sous le seuil de support de 45 degrés.
+- PrusaSlicer 2.9.6 a été téléchargé et lancé en mode console : 6.42 g et 35 min 40 s pour une triade, 6.47 g et 39 min 56 s pour une gamme de sept notes, 6.15 g et 26 min 43 s pour le jonc nu. [Leçon](../05-printable-bracelets/)
+
+## 2026-09-17 — P5 : trois choses qui n'étaient pas vraies
+
+- **« Étanche » parle des arêtes.** H2 disait que les quatorze pièces écrites dans un seul fichier sans booléenne échoueraient au test. Elles le passent, et manifold3d les accepte aussi — quatorze solides fermés dans une même boîte englobante. Ce qu'elles coûtent, c'est le volume (2.6 % trop haut), l'aire (10.8 % trop haute) et la mesure de paroi, qui donne 1.40 mm parce que les faces enterrées des nervures restent des surfaces réelles.
+- **Le slicer ne s'en soucie pas davantage.** PrusaSlicer a découpé le maillage non uni en 2 154.16 mm de filament contre 2 154.05 pour l'union, les mêmes 6.42 g, et n'a signalé aucune réparation. L'argument pour faire les booléennes proprement doit se défendre sur autre chose que le slicer.
+- **Le chanfrein de la quille faisait 36 degrés, pas les 45 annoncés par les hypothèses.** `min_slope_deg` a imprimé 36.027 et rien d'autre ne l'aurait attrapé. Faire une vraie rampe à 45 degrés a supprimé le surplomb et laissé la marque en saillie de 0.4 mm à 1 mm au-dessus du plateau, la moitié d'une nervure ordinaire. Supprimer la rampe a réglé les deux : un relief vertical sur une paroi verticale, imprimé axe en l'air, ne surplombe rien.
+- **La perle du prototype 2 mange le bracelet.** Une sphère de rayon 3.0 mm centrée sur la surface extérieure d'une paroi de 2.0 mm entre de 1.0 mm dans l'alésage : le diamètre intérieur tombe de 64.99 à 63.03 mm, et 0.35 % de la surface demande des supports, avec une pente la pire de 4.87 degrés. H6 avait prédit 3 % à 8 %, un ordre de grandeur à côté.
+
+## 2026-09-17 — P5 : le serveur de GA contredit la source de GA
+
+- Interrogé par les outils MCP de GA, `ga_chord_to_set('Cdim7')` répond do, mi bémol, fa dièse, si bémol — Forte 4-27, une septième demi-diminuée — alors que `CanonicalChordPatternCatalog.cs` donne `diminished-7` comme 0 3 6 9, Forte 4-28. `ga_parse_chord('Cdim7')` renvoie la qualité `diminished` avec le composant `ext:7`, si bien que la septième est ajoutée mineure.
+- `ga_chord_to_set('Cm7b5')` répond do, mi bémol, sol, si bémol, une simple septième mineure : l'altération `b5` est perdue. Le fichier de GA donne `half-diminished-7` comme 0 3 6 10.
+- `get_scale_notes` pour do majeur et la mineur, et `ga_chord_to_set('Cmaj7')`, s'accordent avec les fichiers. L'échange est consigné dans [`results/ga-check.json`](https://github.com/spareilleux/learn/blob/b171d57/code/ga-protos/p5-printable-bracelets/results/ga-check.json). Deux des treize bracelets auraient été faux s'ils avaient été construits à partir de l'analyseur en marche plutôt que des fichiers épinglés. À l'auteur de décider si cela devient une issue sur GuitarAlchemist/ga.
+
 ## À vérifier
 
 - L'explorateur sous Safari et Firefox sur macOS, avec et sans WebGPU : testé seulement dans Chromium sous Windows.
 - Le son sur les navigateurs mobiles, qui peuvent bloquer l'`AudioContext` jusqu'à un toucher.
 - La cible de P7 : les 32 jugements par paires ont été faits par ce modèle à partir de règles écrites, pas par un guitariste, et les constantes du modèle de main — écarts confortables, pénalités de barré et d'étouffement — sont choisies, pas mesurées sur un joueur. Un guitariste classant quelques centaines de paires remplacerait les deux.
 - Les 34.2 % de voicings indoigtables de P7 sont une borne supérieure : la recherche n'a pas de pouce par-dessus le manche, pas de corde étouffée par la main gauche, et aucune note tenue par deux doigts.
+- P5 n'a jamais été imprimé. Savoir si 65 mm va à un poignet, si une nervure de 1.2 mm se distingue au toucher d'une quille de 2.5 mm, si le dessous d'un cône à 45 degrés s'affaisse sur une vraie machine, et si un jonc de PLA de 2.0 mm survit au passage forcé par-dessus une main, reste ouvert.
+- Les huit triangles dégénérés, d'aire nulle, que manifold3d laisse dans les unions à cônes de P5 : PrusaSlicer n'en dit rien, et aucun autre slicer n'a été essayé.

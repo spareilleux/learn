@@ -35,7 +35,7 @@ Escribes C# o Java, has seguido al menos uno de los cursos sobre GA, y tienes cu
 | P2 | [Toca un acorde, mira el universo](02-chord-universe/) | Reconocimiento de acordes en el navegador: FFT, estimación de notas, plantillas sobre las calidades de acordes de GA, mástil 3D, brazalete y acorde siguiente; 624 rasgueos sintéticos y 17 grabaciones CC0, predicciones primero | publicado |
 | P3 | Portadas de álbum | ¿Puede un modelo de difusión hacer una portada que diga algo cierto sobre una progresión de acordes? | previsto |
 | P4 | Pasada de render con IA | ¿Mejora una textura o una iluminación generadas las escenas 3D de GA, medidas frente al render simple? | previsto |
-| P5 | Pulseras imprimibles en 3D | ¿Puede una pulsera de clases de altura convertirse en un objeto imprimible, de los datos de GA a una malla que pase un slicer? | previsto |
+| P5 | [Pulseras imprimibles en 3D](05-printable-bracelets/) | ¿Puede una pulsera de clases de altura convertirse en un objeto imprimible, de los datos de GA a una malla que pase un slicer? | publicado |
 | P6 | Cadena completa | Del micrófono al acorde, al voicing, a la imagen y al objeto, de una vez: ¿dónde se rompe? | previsto |
 | P7 | [Modelo de tocabilidad](07-playability-model/) | ¿Predice un modelo pequeño entrenado en la CPU lo difícil que es tocar un voicing mejor que el coste escrito a mano en GA? | publicado |
 | — | [Diario](journal/) | | |

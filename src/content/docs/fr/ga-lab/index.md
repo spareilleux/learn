@@ -35,7 +35,7 @@ Vous écrivez du C# ou du Java, vous avez suivi au moins un des cours sur GA, et
 | P2 | [Joue un accord, vois l'univers](02-chord-universe/) | Reconnaissance d'accords dans le navigateur : FFT, estimation des notes, gabarits sur les qualités d'accords de GA, manche 3D, bracelet et accord suivant ; 624 grattés synthétiques et 17 enregistrements CC0, prédictions d'abord | publié |
 | P3 | Pochettes d'album | Un modèle de diffusion peut-il faire une pochette qui dise quelque chose de vrai sur une grille d'accords ? | prévu |
 | P4 | Passe de rendu IA | Une texture ou un éclairage générés améliorent-ils les scènes 3D de GA, mesurés face au rendu simple ? | prévu |
-| P5 | Bracelets imprimables en 3D | Un bracelet de classes de hauteur peut-il devenir un objet imprimable, des données de GA à un maillage qui passe un slicer ? | prévu |
+| P5 | [Bracelets imprimables en 3D](05-printable-bracelets/) | Un bracelet de classes de hauteur peut-il devenir un objet imprimable, des données de GA à un maillage qui passe un slicer ? | publié |
 | P6 | Chaîne complète | Du micro à l'accord, au voicing, à l'image et à l'objet, d'une traite : où est-ce que ça casse ? | prévu |
 | P7 | [Modèle de jouabilité](07-playability-model/) | Un petit modèle entraîné sur le CPU prédit-il la difficulté d'un voicing mieux que le coût écrit à la main dans GA ? | publié |
 | — | [Journal](journal/) | | |
