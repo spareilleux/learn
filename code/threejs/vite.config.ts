@@ -26,6 +26,9 @@ export default defineConfig({
       },
     },
   },
+  // The dev server scans the build inputs for dependencies to pre-bundle; the demos' pages too, or the first visit to one
+  // finds a new dependency, and Vite reloads the page under the probe ("Execution context was destroyed")
+  optimizeDeps: { entries: ['*.html', 'demos/*.html'] },
   server: { port: 5188, strictPort: true },
   preview: { port: 5189, strictPort: true },
 });
