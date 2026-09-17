@@ -12,9 +12,12 @@
   ],
   "page": "06-wood-textures",
   "runs": [
-    { "name": "texture", "query": "wood=texture" },
-    { "name": "procedural", "query": "wood=procedural" },
-    { "name": "flat", "query": "wood=flat" }
+    { "name": "texture", "query": "wood=texture", "viewport": [1920, 1080] },
+    { "name": "ktx2-uastc", "query": "wood=ktx2-uastc", "viewport": [1920, 1080] },
+    { "name": "ktx2-basis-lz", "query": "wood=ktx2-basis-lz", "viewport": [1920, 1080] },
+    { "name": "comfyui", "query": "wood=comfyui", "viewport": [1920, 1080] },
+    { "name": "procedural", "query": "wood=procedural", "viewport": [1920, 1080] },
+    { "name": "flat", "query": "wood=flat", "viewport": [1920, 1080] }
   ],
   "ci": [
     { "name": "texture", "query": "wood=texture&size=256" },

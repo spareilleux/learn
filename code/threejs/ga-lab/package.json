@@ -1,0 +1,13 @@
+{
+  "name": "threejs-ga-lab",
+  "private": true,
+  "version": "0.0.0",
+  "description": "The Guitar Alchemist 3D lab of the three.js course: experiments measured in headless Chromium. No dependencies of its own: run npm ci in code/threejs, whose node_modules this folder uses.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "run": "node scripts/run.mjs",
+    "check": "bash check.sh"
+  }
+}

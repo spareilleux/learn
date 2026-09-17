@@ -23,5 +23,11 @@
     { "name": "cpu-6", "query": "method=cpu&strings=6" },
     { "name": "tsl-6", "query": "method=tsl&strings=6" },
     { "name": "morph-6", "query": "method=morph&strings=6" }
+  ],
+  "compare": [
+    ["cpu-6", "tsl-6"],
+    ["morph-6", "tsl-6"],
+    ["cpu-600", "tsl-600"],
+    ["morph-600", "tsl-600"]
   ]
 }

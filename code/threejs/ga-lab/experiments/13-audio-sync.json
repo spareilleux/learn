@@ -12,8 +12,8 @@
   ],
   "page": "13-audio-sync",
   "runs": [
-    { "name": "headless", "query": "notes=20" },
-    { "name": "headed", "query": "notes=20", "headed": true }
+    { "name": "headless", "query": "notes=20", "vsync": true },
+    { "name": "headed", "query": "notes=20", "headed": true, "vsync": true }
   ],
-  "ci": [{ "name": "headless", "query": "notes=3" }]
+  "ci": [{ "name": "headless", "query": "notes=3", "vsync": true }]
 }

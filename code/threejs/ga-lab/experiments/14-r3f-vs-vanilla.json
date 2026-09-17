@@ -13,7 +13,8 @@
   "page": "14-r3f-vs-vanilla",
   "runs": [
     { "name": "r3f", "query": "impl=r3f" },
-    { "name": "vanilla", "query": "impl=vanilla" }
+    { "name": "vanilla", "query": "impl=vanilla" },
+    { "name": "bundle-sizes", "node": "scripts/bundle-sizes.mjs" }
   ],
   "ci": [
     { "name": "r3f", "query": "impl=r3f" },
