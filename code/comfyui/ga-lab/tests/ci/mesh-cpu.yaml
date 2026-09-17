@@ -1,0 +1,20 @@
+id: ci-mesh-cpu
+title: CI smoke run on a CPU server, core mesh nodes and SaveGLB, no model
+written: 2026-09-16
+hypothesis: >
+  The runner reads .glb outputs from a real ComfyUI v0.36.0 server the way it reads the fake server's: SaveGLB's "3d"
+  output in the history, the file through /view, then runner/glb.py. The mesh comes from tests/fixtures/cube.glb,
+  which check.sh copies into the server's input/3d folder: Load3DAdvanced, Get3DComponents, DecimateMesh (its
+  placement_mode is a dynamic combo, sent in API format as the option's key), MeshSmoothNormals, SaveGLB. This is a
+  test fixture for CI, not an experiment of the lab.
+prediction: >
+  Written before any run. Both items finish done with 2 .glb outputs each. The raw save has the box's 12 triangles,
+  watertight, extents 2 x 1 x 0.5; with target_face_count 0 (disabled) the decimated save keeps 12 triangles, and a
+  second run submits nothing.
+workflow: mesh-cpu.api.json
+seeds: [0]
+seed_paths: []
+axes:
+  - name: decimate
+    path: "3.target_face_count"
+    values: [0, 8]

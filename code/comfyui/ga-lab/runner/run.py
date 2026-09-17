@@ -11,7 +11,7 @@ import socket
 import time
 import uuid
 
-from . import memory, models, prepare, sheet
+from . import glb, memory, models, prepare, sheet
 from .comfy import Comfy, PromptRejected, ServerDown
 from .experiment import Experiment, ExperimentError, apply_sets, canonical, input_references, item_key, sha256_bytes, \
     sha256_file
@@ -45,6 +45,8 @@ class Run:
         lab = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         self.out = os.path.abspath(args.out or os.path.join(lab, "results", self.experiment.id))
         self.images_dir = args.images or os.path.join(self.out, "images")
+        self.meshes_dir = getattr(args, "meshes", None) or os.path.join(self.out, "meshes")
+        self.accepted = set(getattr(args, "accept_licence", None) or [])
         self.results_path = os.path.join(self.out, "results.json")
         self.comfy = Comfy(args.server, timeout=args.http_timeout)
         self.models_dirs = [os.path.abspath(d) for d in (args.models_dir or [])]
@@ -120,6 +122,22 @@ class Run:
         listed = self.server_models[folder]
         return listed is None or name in listed
 
+    def licence_block(self, prompt):
+        """The licences this prompt's models need and the run was not told to accept (--accept-licence ID)."""
+        names = {name for _, name in models.referenced_models(prompt)}
+        return [lic for lic in self.experiment.licences
+                if lic.get("requires_acceptance", True) and names & set(lic["models"]) and lic["id"] not in self.accepted]
+
+    def fetch(self, v):
+        """An output's bytes: from --comfyui-output when the server's output folder is on this machine, else /view."""
+        local_root = getattr(self.args, "comfyui_output", None)
+        if local_root and v.get("type", "output") == "output":
+            path = os.path.join(local_root, v.get("subfolder", ""), v["filename"])
+            if os.path.isfile(path):
+                with open(path, "rb") as f:
+                    return f.read(), "located"
+        return self.comfy.view(v["filename"], v.get("subfolder", ""), v.get("type", "output")), "downloaded"
+
     def ensure_ws(self):
         """Opens the WebSocket before submitting, so no message of the prompt is missed."""
         if self.ws is None:
@@ -189,14 +207,27 @@ class Run:
                 for i, v in enumerate(values):
                     if not isinstance(v, dict) or "filename" not in v:
                         continue
-                    data = self.comfy.view(v["filename"], v.get("subfolder", ""), v.get("type", "output"))
+                    data, how = self.fetch(v)
                     ext = os.path.splitext(v["filename"])[1] or ".png"
-                    local = os.path.join(self.images_dir, f"{key}-{node_id}-{i}{ext}")
+                    is_mesh = ext.lower() == ".glb"
+                    local = os.path.join(self.meshes_dir if is_mesh else self.images_dir, f"{key}-{node_id}-{i}{ext}")
                     os.makedirs(os.path.dirname(local), exist_ok=True)
                     with open(local, "wb") as f:
                         f.write(data)
-                    record = {"node": node_id, "server_filename": v["filename"], "type": v.get("type", "output"),
-                              "file": local, "sha256": sha256_bytes(data), "bytes": len(data)}
+                    record = {"node": node_id, "server_filename": v["filename"], "subfolder": v.get("subfolder", ""),
+                              "type": v.get("type", "output"), "file": local, "sha256": sha256_bytes(data),
+                              "bytes": len(data), "fetched": how}
+                    if is_mesh:
+                        try:
+                            record["glb"] = glb.inspect_bytes(data)
+                            thumb_rel = f"thumbs/{key}-{node_id}-{i}.webp"
+                            os.makedirs(os.path.join(self.out, "thumbs"), exist_ok=True)
+                            glb.preview(data, os.path.join(self.out, thumb_rel))
+                            record["thumb"] = thumb_rel
+                        except (ValueError, KeyError, IndexError, TypeError) as e:  # GlbError is a ValueError
+                            record["note"] = f"not a readable .glb: {e}"
+                        outputs.append(record)
+                        continue
                     try:
                         record.update(sheet.image_stats(local))
                         thumb_rel = f"thumbs/{key}-{node_id}-{i}.webp"
@@ -225,12 +256,14 @@ class Run:
             "memory_rule": {"margin_gb": self.args.margin_gb, "extra_gb": exp.extra_memory_gb,
                             "min_free_vram_gb": self.args.min_free_vram_gb,
                             "method": "see runner/memory.py"},
+            "licences": exp.licences,
             "inputs": {k: {"file": relative(v["path"], self.out), "sha256": v["sha256"]}
                        for k, v in prepared.items()},
             "runs": (previous or {}).get("runs", []),
             "items": [],
         }
-        run_record = {"started": now(), "server": server, "argv_models_dirs": self.models_dirs}
+        run_record = {"started": now(), "server": server, "argv_models_dirs": self.models_dirs,
+                      "accepted_licences": sorted(self.accepted), "meshes_dir": self.meshes_dir}
         self.results["runs"].append(run_record)
         plan = []
         for item in items:
@@ -257,6 +290,14 @@ class Run:
                 count += 1
                 label = ", ".join(f"{k}={v}" for k, v in record["labels"].items()) + f", seed={record['seed']}"
                 log(f"- {record['key']} {label}")
+                blocked = self.licence_block(prompt)
+                if blocked:
+                    record.update(status="could_not_run", error="licence not accepted: " + "; ".join(
+                        f"{lic['id']} ({lic.get('name', '')}, {lic.get('url', '')}): read it, then pass "
+                        f"--accept-licence {lic['id']}" for lic in blocked))
+                    log(f"  could not run: {record['error']}")
+                    self.save()
+                    continue
                 described = models.describe(prompt, self.models_dirs, self.hashes)
                 record["models"] = [{k: m[k] for k in ("folder", "name", "bytes", "sha256")} for m in described]
                 missing = [m for m in described if not m["path"]] + \

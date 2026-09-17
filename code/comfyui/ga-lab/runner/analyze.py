@@ -9,6 +9,7 @@
       - {kind: bracelet, node: "9", svg: ../path/to/bracelet.svg}   # relative to the experiment file
       - {kind: palette, node: "9"}
       - {kind: stats, node: "9"}
+      - {kind: mesh, node: "90", object_axis: object}   # see runner/mesh_analysis.py
 
 Only items with status done are measured; the report lists how many.
 """
@@ -17,7 +18,7 @@ import os
 from collections import defaultdict
 
 from checks import dots, images
-from . import svg_raster
+from . import mesh_analysis, svg_raster
 from .experiment import Experiment
 
 
@@ -115,6 +116,8 @@ def analyze(experiment_path, out_dir):
                                           "peak_vram_used_bytes": (item.get("memory") or {}).get("peak_vram_used_bytes"),
                                           "peak_ram_used_bytes": (item.get("memory") or {}).get("peak_ram_used_bytes"),
                                           "mean_luma": o.get("mean_luma"), "sha256": o["sha256"]})
+        elif kind == "mesh":
+            entry = mesh_analysis.analyze(spec, done, out_dir)
         else:
             entry["error"] = f"unknown analysis kind {kind!r}"
         report["analyses"].append(entry)

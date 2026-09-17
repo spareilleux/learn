@@ -20,6 +20,8 @@
     prepare:                       # input images made before the run, uploaded when a value says {input: name}
       - {name: bracelet, kind: svg, src: ../../../../src/assets/music-theory-ga/l2-bracelet-major.svg, size: 1024}
     extra_memory_gb: 0             # added to the memory rule's margin (video latents, for example)
+    licences:                      # model files whose licence a person must read first: the items that load
+      - {id: x, name: ..., url: ..., models: [x.safetensors]}   # one are could_not_run until --accept-licence x
     analysis: [...]                # what `python -m runner analyze` computes to check the prediction
 
 A path is "node_id.input_name". The input must already exist in the workflow, so a typo fails early.
@@ -83,6 +85,10 @@ class Experiment:
         self.axes = list(data.get("axes") or [])
         self.prepare = list(data.get("prepare") or [])
         self.extra_memory_gb = float(data.get("extra_memory_gb") or 0)
+        self.licences = list(data.get("licences") or [])
+        for lic in self.licences:
+            if not lic.get("id") or not lic.get("models"):
+                raise ExperimentError(f"{path}: each licence needs an id and the model file names it covers")
         self.workflows = {}
         for axis in self.axes:
             if "name" not in axis or "values" not in axis:

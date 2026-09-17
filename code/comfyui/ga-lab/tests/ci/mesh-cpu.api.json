@@ -1,0 +1,8 @@
+{
+  "1": {"class_type": "Load3DAdvanced", "inputs": {"model_file": "3d/galab-cube.glb", "viewport_state": {}, "width": 64, "height": 64}},
+  "2": {"class_type": "Get3DComponents", "inputs": {"model_3d": ["1", 0]}},
+  "3": {"class_type": "DecimateMesh", "inputs": {"mesh": ["2", 0], "target_face_count": 0, "placement_mode": "midpoint"}},
+  "4": {"class_type": "MeshSmoothNormals", "inputs": {"mesh": ["3", 0], "crease_angle": 180.0}},
+  "5": {"class_type": "SaveGLB", "inputs": {"mesh": ["4", 0], "filename_prefix": "galab/ci-mesh"}},
+  "6": {"class_type": "SaveGLB", "inputs": {"mesh": ["2", 0], "filename_prefix": "galab/ci-raw"}}
+}

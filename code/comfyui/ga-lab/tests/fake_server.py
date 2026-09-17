@@ -4,7 +4,8 @@ It speaks the routes and messages the runner uses, in the shapes ComfyUI v0.36.0
 execution.py): GET /system_stats, /models/{folder}, /history/{id}, /view, POST /prompt, /upload/image, /free, and
 the /ws WebSocket with status, execution_start, execution_cached, executing, progress, executed, execution_success.
 "Executing" a prompt draws a small PNG per SaveImage node whose color comes from the prompt's seed, so the same
-prompt gives the same bytes. Test knobs: ram_free, vram_free, die_on_prompt (shut down in the middle of the n-th
+prompt gives the same bytes, and writes a box .glb per SaveGLB node (under "3d", as SaveGLB's ui output does in
+comfy_extras/nodes_save_3d.py), 1 x 0.5 x 0.25 for an odd seed, with its top face missing for an even one. Test knobs: ram_free, vram_free, die_on_prompt (shut down in the middle of the n-th
 prompt, 1-based), fail_on_prompt (send execution_error), models (per folder).
 """
 import base64
@@ -19,6 +20,8 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import parse_qs, urlsplit
 
 from PIL import Image
+
+from runner import glb
 
 GIB = 1024 ** 3
 
@@ -83,7 +86,7 @@ class FakeComfy:
                         self.end_headers()
                         return
                     self.send_response(200)
-                    self.send_header("Content-Type", "image/png")
+                    self.send_header("Content-Type", "model/gltf-binary" if data[:4] == b"glTF" else "image/png")
                     self.send_header("Content-Length", str(len(data)))
                     self.end_headers()
                     self.wfile.write(data)
@@ -97,7 +100,8 @@ class FakeComfy:
                 if url.path == "/prompt":
                     request = json.loads(body)
                     prompt = request.get("prompt")
-                    if not isinstance(prompt, dict) or not any(n.get("class_type") == "SaveImage" for n in prompt.values()):
+                    if not isinstance(prompt, dict) or not any(n.get("class_type") in ("SaveImage", "SaveGLB")
+                                                               for n in prompt.values()):
                         return self._json({"error": {"type": "prompt_no_outputs", "message": "Prompt has no outputs"},
                                            "node_errors": {}}, 400)
                     pid = request.get("prompt_id") or str(uuid.uuid4())
@@ -223,6 +227,16 @@ class FakeComfy:
                 name = f"{node['inputs'].get('filename_prefix', 'ComfyUI')}_{len(self.files) + 1:05}_.png".replace("/", "_")
                 self.files[name] = buf.getvalue()
                 outputs[node_id] = {"images": [{"filename": name, "subfolder": "", "type": "output"}]}
+                self._broadcast({"type": "executed", "data": {"node": node_id, "display_node": node_id,
+                                                              "output": outputs[node_id], "prompt_id": pid}})
+            if node.get("class_type") == "SaveGLB":
+                positions, triangles = glb.cube((1.0, 0.5, 0.25))
+                if seed % 2 == 0:
+                    triangles = triangles[:2] + triangles[4:]  # no top face: an open box
+                name = f"{node['inputs'].get('filename_prefix', '3d/ComfyUI')}_{len(self.files) + 1:05}_.glb"
+                subfolder, _, base = name.rpartition("/")
+                self.files[base] = glb.build_glb(positions, triangles, material=True)
+                outputs[node_id] = {"3d": [{"filename": base, "subfolder": subfolder, "type": "output"}]}
                 self._broadcast({"type": "executed", "data": {"node": node_id, "display_node": node_id,
                                                               "output": outputs[node_id], "prompt_id": pid}})
             if node.get("class_type") == "PreviewAny":

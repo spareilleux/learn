@@ -1,4 +1,4 @@
-"""Every experiment file: its written hypothesis and prediction, 10 to 20 images, and workflows its paths fit.
+"""Every experiment file: its written hypothesis and prediction, 10 to 20 items, and workflows its paths fit.
 
 With COMFYUI_DIR set to a ComfyUI checkout (v0.36.0), every class_type and input name of the lab's workflows is
 also checked against ComfyUI's source and the GA node pack's (tests/node_schema.py).
@@ -25,14 +25,16 @@ COURSE_MODELS = {
     "qwen_3_4b_fp8_mixed.safetensors", "z_image_ae.safetensors",
 }
 PLANNED = {"RealESRGAN_x4plus.pth": "09-diagram-upscale", "wan2.2_ti2v_5B_fp16.safetensors": "10-neck-video",
-           "umt5_xxl_fp8_e4m3fn_scaled.safetensors": "10-neck-video", "wan2.2_vae.safetensors": "10-neck-video"}
+           "umt5_xxl_fp8_e4m3fn_scaled.safetensors": "10-neck-video", "wan2.2_vae.safetensors": "10-neck-video",
+           # downloaded by the Atlas lane (G:/comfyui/models/checkpoints), under a licence the run must accept
+           "hunyuan3d-dit-v2_fp16.safetensors": "11-image-to-3d"}
 
 
 class ExperimentFilesTest(unittest.TestCase):
-    def test_ten_experiments_numbered(self):
+    def test_eleven_experiments_numbered(self):
         names = [os.path.basename(p) for p in EXPERIMENTS]
-        self.assertEqual(len(names), 10)
-        self.assertEqual([n[:2] for n in names], [f"{i:02}" for i in range(1, 11)])
+        self.assertEqual(len(names), 11)
+        self.assertEqual([n[:2] for n in names], [f"{i:02}" for i in range(1, 12)])
 
     def test_each_experiment(self):
         for path in EXPERIMENTS:
@@ -55,6 +57,9 @@ class ExperimentFilesTest(unittest.TestCase):
                     for folder, name in referenced_models(prompt):
                         if name not in COURSE_MODELS:
                             self.assertEqual(PLANNED.get(name), exp.id, f"{name} is not a course model")
+                            if exp.id == "11-image-to-3d":
+                                self.assertTrue(any(name in lic["models"] for lic in exp.licences),
+                                                f"{name} needs a licence entry")
                     for spec in exp.data.get("analysis") or []:
                         if "node" in spec and spec["kind"] != "stats":
                             self.assertIn(spec["node"], prompt, f"analysis node {spec['node']}")
@@ -68,7 +73,7 @@ class ExperimentFilesTest(unittest.TestCase):
             with self.subTest(os.path.basename(path)):
                 with open(path, encoding="utf-8") as f:
                     wf = json.load(f)
-                self.assertTrue(any(n["class_type"] in ("SaveImage", "SaveAnimatedWEBP") for n in wf.values()))
+                self.assertTrue(any(n["class_type"] in ("SaveImage", "SaveAnimatedWEBP", "SaveGLB") for n in wf.values()))
                 for node_id, node in wf.items():
                     for name, value in node["inputs"].items():
                         if isinstance(value, list) and len(value) == 2 and isinstance(value[1], int):
@@ -85,7 +90,13 @@ class ExperimentFilesTest(unittest.TestCase):
             code = source.replace(
                 'HERE = os.path.dirname(os.path.abspath(__file__))', f'HERE = {tmp!r}')
             subprocess.run([sys.executable, "-c", code], check=True)
-            for path in WORKFLOWS:
+            import importlib.util
+            spec = importlib.util.spec_from_file_location("make_3d_workflows",
+                                                          os.path.join(LAB, "workflows", "make_3d_workflows.py"))
+            make_3d = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(make_3d)
+            make_3d.main(tmp, tmp)
+            for path in WORKFLOWS + [os.path.join(LAB, "tests", "ci", "mesh-cpu.api.json")]:
                 with open(path, encoding="utf-8") as a, open(os.path.join(tmp, os.path.basename(path)), encoding="utf-8") as b:
                     self.assertEqual(a.read(), b.read(), os.path.basename(path))
 
@@ -95,7 +106,7 @@ class ExperimentFilesTest(unittest.TestCase):
         if os.path.isdir(GA_NODES):
             roots.append(GA_NODES)
         known = schemas(roots)
-        for path in WORKFLOWS:
+        for path in WORKFLOWS + [os.path.join(LAB, "tests", "ci", "mesh-cpu.api.json")]:
             with open(path, encoding="utf-8") as f:
                 wf = json.load(f)
             for node_id, node in wf.items():

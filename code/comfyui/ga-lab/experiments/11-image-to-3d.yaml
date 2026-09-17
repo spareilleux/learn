@@ -1,0 +1,82 @@
+id: 11-image-to-3d
+title: Guitar Alchemist objects to 3D meshes with Hunyuan3D 2.0, octree resolution 380 against 256
+written: 2026-09-16
+hypothesis: >
+  Hunyuan3D 2.0, in core ComfyUI v0.36.0 nodes, turns one image of an object on a white background into a mesh:
+  its DiT samples a shape latent, VAEDecodeHunyuan3D evaluates the field on an octree grid (octree_resolution
+  cells a side), and VoxelToMesh extracts a surface net. The chain is the one the Atlas lane (session learn-7e) ran
+  on this machine for a metronome (seed 7, 30 steps, cfg 5, octree 380): 890,140 triangles, 85 components, 92 boundary
+  and 18,992 non-manifold edges by runner/glb.py, so not watertight. Here SDXL draws five Guitar Alchemist objects
+  in the same prompt with Atlas's settings, and each mesh is made at octree 380 and 256. The surface grows with the
+  square of the grid, so the triangle count should follow (256/380)^2 = 0.45; the defects of a surface net (non-
+  manifold edges, floaters) should stay at both sizes; and a single view cannot tell how thin an object is, so thin
+  objects (a pick is 0.71 mm thick) come out much thicker than they are. The mesh is normalized to the grid, so only
+  proportions compare with real objects, not sizes: the guitar's reference is a 64.8 cm scale length body.
+prediction: >
+  Written before any run. (1) At least 8 of the 10 items end done, unless the memory rule refuses them: SDXL and
+  Hunyuan3D 2.0 in one prompt make 11.05 GB of weights, so the rule needs 19.05 GB of free RAM (Atlas saw about 1 GB
+  free during its own run; a refusal is recorded as could_not_run and counts as a result). (2) Octree 380: 600,000 to
+  1,200,000 triangles per mesh. For each object, triangles at 256 divided by triangles at 380 is between 0.35 and 0.55.
+  (3) Watertight (runner/glb.py: no boundary edge and no non-manifold edge after welding): 0 of 10. Non-manifold edges
+  are at least 0.5 % of the edges in at least 8 of 10, and more than one component in at least 8 of 10. (4) No texture
+  and no vertex colors in 10 of 10 (VoxelToMesh keeps none). (5) Proportions, bounding box extents sorted and divided
+  by the longest: the pick's thinnest ratio is at least 0.10 at both sizes (real object about 0.024, to verify); the
+  guitar's middle ratio is between 0.25 and 0.45 (real about 0.33, to verify) in at least 1 of its 2 meshes; the
+  longest extent is at least 1.9 grid units in 10 of 10 (Atlas's metronome: 1.97). (6) Wall time at most 4 minutes for
+  an octree 380 item, and the octree 256 item right after it, whose image and sampling ComfyUI takes from its cache, at
+  most half of that. (7) Peak VRAM at most 11 GB (Atlas measured 9.4 GB while sampling).
+workflow: ../workflows/ga-3d-hunyuan20.api.json
+seeds: [5100]
+seed_paths: ["3.seed"]
+licences:
+  - id: tencent-hunyuan-3d-2.0
+    name: Tencent Hunyuan 3D 2.0 Community License Agreement
+    url: https://huggingface.co/tencent/Hunyuan3D-2/blob/9cd649ba6913f7a852e3286bad86bfa9a2d83dcf/LICENSE
+    models: [hunyuan3d-dit-v2_fp16.safetensors]
+    note: >
+      The Territory excludes the European Union, the United Kingdom and South Korea (sections 1.l, 5.c); the user
+      confirmed the machine is in Canada. Section 5.c also forbids displaying Outputs outside the Territory: publishing
+      the meshes or their renders on the public site is a separate decision (see the lane report).
+axes:
+  - name: object
+    values:
+      - label: guitar
+        set: {"6.text": "solid body electric guitar with a maple neck and a rosewood fretboard, the whole guitar from
+          headstock to strap button, single isolated object centered, three-quarter view from slightly above, whole
+          object in frame, plain pure white background, soft even studio light, no shadow, product photograph, sharp
+          focus"}
+      - label: headstock
+        set: {"6.text": "electric guitar headstock with six chrome tuning machines and the top of the maple neck,
+          single isolated object centered, three-quarter view from slightly above, whole object in frame, plain pure
+          white background, soft even studio light, no shadow, product photograph, sharp focus"}
+      - label: bridge
+        set: {"6.text": "chrome tune-o-matic electric guitar bridge with six saddles, single isolated object centered,
+          three-quarter view from slightly above, whole object in frame, plain pure white background, soft even
+          studio light, no shadow, product photograph, sharp focus"}
+      - label: pick
+        set: {"6.text": "one tortoiseshell celluloid guitar pick, standard rounded triangle shape, single isolated
+          object centered, three-quarter view from slightly above, whole object in frame, plain pure white background,
+          soft even studio light, no shadow, product photograph, sharp focus"}
+      - label: metronome
+        set: {"6.text": "mechanical brass metronome with a pendulum, single isolated object centered, three-quarter view
+          from slightly above, whole object in frame, plain pure white background, soft even studio light, no shadow,
+          product photograph, sharp focus"}
+  - name: octree
+    path: "57.octree_resolution"
+    values: [380, 256]
+analysis:
+  - kind: mesh
+    node: "90"
+    object_axis: object
+    pair_axis: octree
+    pair: [256, 380]
+    # sorted extents / longest of the real objects, nominal and to verify: guitar 99 x 32.5 x 4.5 cm (a 64.8 cm scale
+    # solid body), headstock with tuners 19 x 8 x 4 cm, tune-o-matic bridge 8 x 1.5 x 1.3 cm, 351-shape medium pick
+    # 3.0 x 2.6 x 0.071 cm, pyramid metronome 22 x 11 x 11 cm
+    reference:
+      guitar: [1.0, 0.328, 0.045]
+      headstock: [1.0, 0.42, 0.21]
+      bridge: [1.0, 0.19, 0.16]
+      pick: [1.0, 0.87, 0.024]
+      metronome: [1.0, 0.5, 0.5]
+  - {kind: stats, node: "9"}

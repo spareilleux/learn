@@ -13,6 +13,8 @@ from .experiment import sha256_file
 LOADERS = {
     "CheckpointLoaderSimple": {"ckpt_name": "checkpoints"},
     "CheckpointLoader": {"ckpt_name": "checkpoints"},
+    "ImageOnlyCheckpointLoader": {"ckpt_name": "checkpoints"},
+    "LoadBackgroundRemovalModel": {"bg_removal_name": "background_removal"},
     "UNETLoader": {"unet_name": "diffusion_models"},
     "CLIPLoader": {"clip_name": "text_encoders"},
     "DualCLIPLoader": {"clip_name1": "text_encoders", "clip_name2": "text_encoders"},

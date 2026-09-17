@@ -47,6 +47,11 @@ def plan(args):
         need = total + (args.margin_gb + exp.extra_memory_gb) * memory.GIB
         print(f"  memory rule: {total / memory.GIB:.2f} GB + {args.margin_gb + exp.extra_memory_gb:.1f} GB margin "
               f"= {need / memory.GIB:.2f} GB of free RAM needed")
+    for lic in exp.licences:
+        gate = f"needs --accept-licence {lic['id']}" if lic.get("requires_acceptance", True) else "no acceptance needed"
+        print(f"licence {lic['id']}: {lic.get('name', '')} ({gate})")
+        print(f"  {lic.get('url', '')}")
+        print(f"  covers {', '.join(lic['models'])}")
     return 0
 
 
@@ -67,6 +72,12 @@ def main(argv=None):
                    help="a models folder the server reads (repeat for extra_model_paths); used for sizes and hashes")
     r.add_argument("--out", help="default: results/<experiment id> next to this runner")
     r.add_argument("--images", help="where full-size outputs go (default: <out>/images, not committed)")
+    r.add_argument("--meshes", help="where .glb outputs go (default: <out>/meshes, not committed); "
+                                    "the lab keeps them under G:/learn-lab/comfyui/3d/<experiment>")
+    r.add_argument("--comfyui-output", help="the server's output folder, when it is on this machine: outputs are "
+                                            "copied from there instead of downloaded through /view")
+    r.add_argument("--accept-licence", action="append", metavar="ID",
+                   help="run the items whose models fall under this licence id of the experiment (repeat)")
     r.add_argument("--hash-cache", help="default: <out>/../.model-sha256.json")
     r.add_argument("--margin-gb", type=float, default=8.0)
     r.add_argument("--min-free-vram-gb", type=float, default=10.0)
