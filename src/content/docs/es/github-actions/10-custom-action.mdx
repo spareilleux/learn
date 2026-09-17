@@ -5,6 +5,8 @@ sidebar:
   order: 10
 ---
 
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
 ## Tres tipos de acciones
 
 La [lección 6](../06-reuse/) escribió una acción compuesta: steps de YAML. Los otros dos tipos ejecutan **código**:
@@ -92,9 +94,29 @@ try {
 
 Como la acción es solo un script, pruébala en local antes de cualquier push, con las variables que definiría el runner:
 
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
 ```powershell
 $env:INPUT_TEXT = "C# 14 & .NET 10"; $env:GITHUB_OUTPUT = "out.txt"; node .github/actions/slugify/index.js
 ```
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```bash
+INPUT_TEXT="C# 14 & .NET 10" GITHUB_OUTPUT=out.txt node .github/actions/slugify/index.js
+```
+
+</TabItem>
+<TabItem label="macOS">
+
+```bash
+INPUT_TEXT="C# 14 & .NET 10" GITHUB_OUTPUT=out.txt node .github/actions/slugify/index.js
+```
+
+</TabItem>
+</Tabs>
 
 ```text
 slug of "C# 14 & .NET 10" is "c-14-net-10"
