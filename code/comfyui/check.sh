@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # ComfyUI course: everything that runs without a GPU and without a model, compared with expected/.
 #   bash check.sh build     builds the C# tool and the Java client
-#   bash check.sh offline   the workflow checks, the UI-to-API conversion and the diffs (lesson 3), and model file
-#                           headers read from two tiny files (lessons 7 and 8), no server
+#   bash check.sh offline   the workflow checks, the UI-to-API conversion and the diffs (lesson 3), model file
+#                           headers read from two tiny files (lessons 7 and 8), and texture maps (lesson 13), no server
 #   bash check.sh server    starts ComfyUI on the CPU (server.sh), runs the C# and Java clients on a workflow that
 #                           needs no model (lesson 4), reads the PNGs they download, uploads images and runs the
 #                           mask nodes (lesson 5), then stops the server
@@ -47,6 +47,19 @@ offline() {
     echo "exit code $?"
   } > out/03-validate.txt 2>&1
   compare 03-validate
+
+  # Lesson 13: normal and roughness maps from a tileable pattern, with NumPy and Pillow (ComfyUI's requirements)
+  py=${COMFYUI_PYTHON:-${PYTHON:-python}}
+  mkdir -p out/textures
+  {
+    PYTHONDONTWRITEBYTECODE=1 "$py" textures/test_maps.py 2>&1 | grep -v "^Ran "
+    PYTHONDONTWRITEBYTECODE=1 "$py" textures/maps.py pattern out/textures/pattern.png 64
+    PYTHONDONTWRITEBYTECODE=1 "$py" textures/maps.py normal out/textures/pattern.png out/textures/normal.png
+    PYTHONDONTWRITEBYTECODE=1 "$py" textures/maps.py roughness out/textures/pattern.png out/textures/roughness.png
+    for f in pattern normal roughness; do comfy png-info out/textures/$f.png | tail -1; done
+    PYTHONDONTWRITEBYTECODE=1 "$py" textures/maps.py seam out/textures/normal.png
+  } > out/13-maps.txt 2>&1
+  compare 13-maps
 
   # The conversion must give, byte for byte, what the frontend's Export (API) gave.
   # Lessons 7 and 8: what a model file's header says, on two tiny files written by a script
