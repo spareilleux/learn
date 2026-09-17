@@ -1,0 +1,20 @@
+services:
+  qdrant:
+    image: qdrant/qdrant:v1.19.1
+    ports:
+      - "127.0.0.1:16333:6333"
+    volumes:
+      - qdrant-data:/qdrant/storage
+
+  seed:
+    image: curlimages/curl:8.16.0
+    depends_on:
+      - qdrant
+    command: >
+      --silent --show-error --retry 10 --retry-connrefused --retry-delay 1
+      -X PUT http://qdrant:6333/collections/demo
+      -H "Content-Type: application/json"
+      -d '{"vectors":{"size":4,"distance":"Cosine"}}'
+
+volumes:
+  qdrant-data:

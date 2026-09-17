@@ -52,3 +52,24 @@ jobs:
           dotnet-version: 10.0.x
       - name: Build
         run: dotnet build
+
+  # compose.yaml is the file that lesson 8 translates into wslc commands: CI checks it with Docker Compose.
+  lesson-08-compose:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: code/wsl-containers/compose
+    steps:
+      - uses: actions/checkout@v7
+      - name: Up
+        run: docker compose -p wslcdemo up -d
+      - name: Seed created the collection
+        run: |
+          for i in $(seq 1 30); do [ "$(docker inspect -f '{{.State.Status}}' wslcdemo-seed-1)" = exited ] && break; sleep 1; done
+          docker logs wslcdemo-seed-1
+          test "$(docker inspect -f '{{.State.ExitCode}}' wslcdemo-seed-1)" = 0
+          curl -s http://127.0.0.1:16333/collections | tee out.json
+          grep -q '"name":"demo"' out.json
+      - name: Down
+        if: always()
+        run: docker compose -p wslcdemo down --volumes
