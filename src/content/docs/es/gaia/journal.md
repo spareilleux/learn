@@ -14,7 +14,7 @@ sidebar:
 - [x] Lección 4: el trazador de coordinación, la fábrica de agentes, los recibos y el digest del árbol
 - [x] Lección 5: la escalera de carriles y los veredictos del ecosistema
 - [ ] `factory:agent` ejecutado de extremo a extremo con turnos reales de Claude y Codex
-- [ ] Versiones en francés y en español
+- [x] Versiones en francés y en español
 - [ ] Una lección sobre la bomba alojada — el lado de GitHub Actions — que ha crecido en `main` y que este curso no cubre
 
 ## 2026-09-15 — Preparación y versiones

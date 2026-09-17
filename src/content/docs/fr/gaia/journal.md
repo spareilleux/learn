@@ -14,7 +14,7 @@ sidebar:
 - [x] Leçon 4 : le traceur de coordination, l'usine d'agents, les reçus et l'empreinte de l'arbre
 - [x] Leçon 5 : l'échelle des voies et les verdicts sur l'écosystème
 - [ ] `factory:agent` exécuté de bout en bout avec de vrais tours de Claude et de Codex
-- [ ] Versions française et espagnole
+- [x] Versions française et espagnole
 - [ ] Une leçon sur la pompe hébergée, le côté GitHub Actions, que `main` a fait grandir et que ce cours ne couvre pas
 
 ## 2026-09-15 — Installation et versions

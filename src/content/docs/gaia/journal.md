@@ -14,7 +14,7 @@ sidebar:
 - [x] Lesson 4: the coordination tracer, the agent factory, receipts and the tree digest
 - [x] Lesson 5: the lane ladder and the ecosystem verdicts
 - [ ] `factory:agent` run end to end with real Claude and Codex turns
-- [ ] French and Spanish mirrors
+- [x] French and Spanish mirrors
 - [ ] A lesson on the hosted pump — the GitHub Actions side — which `main` has grown and this course does not cover
 
 ## 2026-09-15 — Setup and versions
