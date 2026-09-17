@@ -1,0 +1,31 @@
+{
+  "id": "08-shadows",
+  "title": "Shadows under the strings: shadow maps, a baked ambient occlusion texture, contact shadows",
+  "written": "2026-09-16",
+  "question": "What do the strings' and frets' shadows on the board cost as a dynamic shadow map (1024, 2048, 4096), a shadow map rendered once, an ambient occlusion texture baked on the CPU, and a contact shadow (a top-down depth pass, blurred)?",
+  "hypothesis": "A dynamic shadow map doubles the draw calls of the shadow casters and costs GPU time growing with its size; rendering it once costs nothing per frame; the baked texture costs a one-time bake on the CPU; the contact shadow costs a pass and a blur per frame.",
+  "predictions": [
+    { "metric": "drawCalls, dynamic shadow map against none", "predicted": "about 2x" },
+    { "metric": "median GPU ms, 4096 against 1024 dynamic shadow map", "predicted": "at most 1.5x (the shadow pass draws few triangles)" },
+    { "metric": "drawCalls, shadow map rendered once, after the first frame", "predicted": "the same as none" },
+    { "metric": "CPU ms to bake a 512x128 AO texture with 16 rays per texel", "predicted": "100 to 500 ms" },
+    { "metric": "median GPU ms, contact shadow against none", "predicted": "under +0.5 ms" }
+  ],
+  "page": "08-shadows",
+  "runs": [
+    { "name": "none", "query": "shadow=none" },
+    { "name": "map-1024", "query": "shadow=map&size=1024" },
+    { "name": "map-2048", "query": "shadow=map&size=2048" },
+    { "name": "map-4096", "query": "shadow=map&size=4096" },
+    { "name": "map-once", "query": "shadow=once&size=2048" },
+    { "name": "baked-ao", "query": "shadow=baked" },
+    { "name": "contact", "query": "shadow=contact" }
+  ],
+  "ci": [
+    { "name": "none", "query": "shadow=none" },
+    { "name": "map-1024", "query": "shadow=map&size=1024" },
+    { "name": "map-once", "query": "shadow=once&size=1024" },
+    { "name": "baked-ao", "query": "shadow=baked&rays=4" },
+    { "name": "contact", "query": "shadow=contact" }
+  ]
+}

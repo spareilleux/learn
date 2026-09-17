@@ -1,0 +1,23 @@
+{
+  "id": "07-pbr-grid",
+  "title": "A PBR grid for strings and frets: metalness x roughness, standard against physical",
+  "written": "2026-09-16",
+  "question": "Which metalness and roughness make nickel frets and wound strings read as metal under a studio environment, and what does GA's MeshPhysicalMaterial (clearcoat, sheen) cost over MeshStandardMaterial?",
+  "hypothesis": "Materials of the same type with different values share one program in WebGPURenderer; MeshPhysicalMaterial adds programs and shading work.",
+  "predictions": [
+    { "metric": "programs for a 6x6 grid of MeshStandardMaterial with different metalness and roughness", "predicted": "the same number as for 1 material" },
+    { "metric": "median GPU ms, 6x6 grid filling 1920x1080, physical (clearcoat 0.35, sheen 0.3) against standard", "predicted": "physical at least 1.3x" },
+    { "metric": "frets read as polished nickel", "predicted": "metalness 1, roughness 0.2 to 0.35, as GA's 0.28" }
+  ],
+  "page": "07-pbr-grid",
+  "runs": [
+    { "name": "standard", "query": "material=standard" },
+    { "name": "physical", "query": "material=physical" },
+    { "name": "standard-one", "query": "material=standard&grid=1" }
+  ],
+  "ci": [
+    { "name": "standard", "query": "material=standard" },
+    { "name": "standard-one", "query": "material=standard&grid=1" },
+    { "name": "physical", "query": "material=physical" }
+  ]
+}

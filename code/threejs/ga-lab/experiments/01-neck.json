@@ -1,0 +1,35 @@
+{
+  "id": "01-neck",
+  "title": "The neck four ways: one mesh per object, instanced, batched, merged",
+  "written": "2026-09-16",
+  "question": "For GuitarAlchemist's fretboard, how much do draw calls, CPU time and GPU time change between GaFretboard (one mesh per object, lesson 13), Fretboard3D (InstancedMesh, lesson 13), a BatchedMesh and a merged static geometry, for 1 neck and for 16 necks?",
+  "hypothesis": "Draw calls drive the CPU time of a frame; the GPU time barely moves, because every strategy draws about the same triangles on an RTX 5080.",
+  "predictions": [
+    { "metric": "drawCalls, 1 neck with the C major chord (WebGPU)", "predicted": "ga 72, instanced 7, batched 4 or fewer, merged 4 or fewer" },
+    { "metric": "median CPU ms per frame, 1 neck, same 1280x720 buffer at pixel ratio 1", "predicted": "ga at least 3x the merged neck; all four under 2 ms" },
+    { "metric": "median CPU ms per frame, 16 necks", "predicted": "ga at least 10 ms; batched and merged under 1.5 ms" },
+    { "metric": "median GPU ms per frame (timestamp-query), 16 necks", "predicted": "the four within 30% of each other" },
+    { "metric": "GA's own pixel ratio (3 at a device pixel ratio of 1) against 1, 1 neck", "predicted": "GPU ms at least 4x" }
+  ],
+  "page": "01-neck",
+  "runs": [
+    { "name": "ga-1", "query": "strategy=ga&necks=1" },
+    { "name": "instanced-1", "query": "strategy=instanced&necks=1" },
+    { "name": "batched-1", "query": "strategy=batched&necks=1" },
+    { "name": "merged-1", "query": "strategy=merged&necks=1" },
+    { "name": "ga-16", "query": "strategy=ga&necks=16" },
+    { "name": "instanced-16", "query": "strategy=instanced&necks=16" },
+    { "name": "batched-16", "query": "strategy=batched&necks=16" },
+    { "name": "merged-16", "query": "strategy=merged&necks=16" },
+    { "name": "ga-1-pr3", "query": "strategy=ga&necks=1&pr=3" },
+    { "name": "ga-1-webgl", "query": "strategy=ga&necks=1", "webgl": true },
+    { "name": "merged-1-webgl", "query": "strategy=merged&necks=1", "webgl": true }
+  ],
+  "ci": [
+    { "name": "ga-1", "query": "strategy=ga&necks=1" },
+    { "name": "instanced-1", "query": "strategy=instanced&necks=1" },
+    { "name": "batched-1", "query": "strategy=batched&necks=1" },
+    { "name": "merged-1", "query": "strategy=merged&necks=1" },
+    { "name": "merged-16", "query": "strategy=merged&necks=16" }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "id": "03-picking",
+  "title": "Picking one note among 10,000: Raycaster against GPU ID picking",
+  "written": "2026-09-16",
+  "question": "With 10,000 note markers in one InstancedMesh, how long does one pick take with THREE.Raycaster, and with an ID pass rendered into a 1x1 render target and read back, and do they agree?",
+  "hypothesis": "Raycaster tests every instance on the CPU, so it grows with the note count; the ID pass costs a readback round trip that doesn't depend on the count. At 10,000 notes the GPU pick is faster, and both pick the same note except on silhouettes.",
+  "predictions": [
+    { "metric": "median ms per pick, Raycaster, 10,000 notes", "predicted": "3 to 8 ms" },
+    { "metric": "median ms per pick, GPU ID pass with readRenderTargetPixelsAsync, 10,000 notes (WebGPU)", "predicted": "1 to 3 ms" },
+    { "metric": "agreement over 200 picks at fixed pseudo-random points", "predicted": "at least 98%" },
+    { "metric": "median ms per pick, Raycaster, 1,000 notes", "predicted": "under a quarter of the 10,000-note time" }
+  ],
+  "page": "03-picking",
+  "runs": [
+    { "name": "10000", "query": "notes=10000" },
+    { "name": "1000", "query": "notes=1000" },
+    { "name": "100000", "query": "notes=100000" },
+    { "name": "10000-webgl", "query": "notes=10000", "webgl": true }
+  ],
+  "ci": [
+    { "name": "1000", "query": "notes=1000&picks=20" }
+  ]
+}

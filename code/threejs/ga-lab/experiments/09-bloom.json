@@ -1,0 +1,25 @@
+{
+  "id": "09-bloom",
+  "title": "Bloom on active notes: the cost of each pass",
+  "written": "2026-09-16",
+  "question": "Making the chord's markers glow with RenderPipeline's bloom, what does each configuration add: bloom on the whole scene, selective bloom from an emissive MRT output, and bloom at half resolution?",
+  "hypothesis": "Bloom adds a fixed chain of blur passes whose cost follows the resolution, not the scene; selective bloom adds a second color attachment to the scene pass.",
+  "predictions": [
+    { "metric": "drawCalls added by bloom", "predicted": "about 10 to 12 (5 mip levels, down and up, plus composite)" },
+    { "metric": "median GPU ms added by bloom at 1920x1080", "predicted": "0.5 to 1.5 ms" },
+    { "metric": "selective (MRT emissive) against full bloom", "predicted": "within +20% GPU ms" },
+    { "metric": "bloom at half resolution against full", "predicted": "at most 0.6x the added GPU ms" }
+  ],
+  "page": "09-bloom",
+  "runs": [
+    { "name": "none", "query": "bloom=none" },
+    { "name": "full", "query": "bloom=full" },
+    { "name": "selective", "query": "bloom=selective" },
+    { "name": "half", "query": "bloom=half" }
+  ],
+  "ci": [
+    { "name": "none", "query": "bloom=none" },
+    { "name": "full", "query": "bloom=full" },
+    { "name": "selective", "query": "bloom=selective" }
+  ]
+}

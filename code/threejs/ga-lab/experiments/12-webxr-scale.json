@@ -1,0 +1,18 @@
+{
+  "id": "12-webxr-scale",
+  "title": "WebXR at 1:1: a real-size neck in an immersive session",
+  "written": "2026-09-16",
+  "question": "Can the neck be shown at real size (648 mm scale) in a WebXR session on this machine, and does the scale survive into the XR reference space?",
+  "hypothesis": "This machine has no headset: an immersive session can't run on hardware. Emulated by IWER (lesson 11), the distance between the nut and the 12th fret measured in the local-floor space is 0.324 m.",
+  "predictions": [
+    { "metric": "immersive-vr session on hardware", "predicted": "could not run: no XR device" },
+    { "metric": "nut to 12th fret in the emulated reference space", "predicted": "0.324 m within 1 mm" },
+    { "metric": "views rendered per XR frame, emulated", "predicted": "2" }
+  ],
+  "page": "12-webxr-scale",
+  "runs": [
+    { "name": "emulated", "query": "xr=emulated" },
+    { "name": "hardware", "query": "xr=hardware" }
+  ],
+  "ci": [{ "name": "emulated", "query": "xr=emulated" }]
+}

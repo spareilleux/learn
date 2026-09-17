@@ -1,0 +1,23 @@
+{
+  "id": "06-wood-textures",
+  "title": "Fretboard wood: ComfyUI textures against procedural TSL, and texture memory",
+  "written": "2026-09-16",
+  "question": "For the fretboard's wood, what do a 2048x2048 texture (from the ComfyUI GA lab's experiment 4, seamless woods), the same texture compressed to KTX2, and a procedural wood written in TSL cost in GPU memory and GPU time?",
+  "hypothesis": "An RGBA8 texture with mipmaps holds about 4/3 x 4 bytes per texel; a GPU-compressed KTX2 (BC7 on this GPU) holds a quarter of that; the procedural wood holds nothing but costs noise evaluations per pixel.",
+  "predictions": [
+    { "metric": "renderer.info.memory.texturesSize, 2048x2048 RGBA8 with mipmaps", "predicted": "about 22 MB" },
+    { "metric": "GPU memory of the KTX2 (UASTC transcoded to BC7)", "predicted": "about 5.6 MB, a quarter" },
+    { "metric": "median GPU ms per frame, procedural TSL against the sampled texture, board filling a 1920x1080 frame", "predicted": "procedural at least 2x" },
+    { "metric": "ComfyUI textures", "predicted": "pending if R2 has not run the ComfyUI GA lab's experiment 4 when this runs" }
+  ],
+  "page": "06-wood-textures",
+  "runs": [
+    { "name": "texture", "query": "wood=texture" },
+    { "name": "procedural", "query": "wood=procedural" },
+    { "name": "flat", "query": "wood=flat" }
+  ],
+  "ci": [
+    { "name": "texture", "query": "wood=texture&size=256" },
+    { "name": "procedural", "query": "wood=procedural" }
+  ]
+}

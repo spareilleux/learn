@@ -1,0 +1,22 @@
+{
+  "id": "14-r3f-vs-vanilla",
+  "title": "React Three Fiber against vanilla three.js on the same GA scene",
+  "written": "2026-09-16",
+  "question": "The same instanced fretboard (lesson 13's Fretboard3D) in React Three Fiber, and the same objects built without React: what do R3F and React add to startup, per-frame CPU time, JavaScript heap and the production bundle?",
+  "hypothesis": "R3F's per-frame overhead is small next to renderer.render(); its cost is at startup and in the bundle (React, ReactDOM, R3F).",
+  "predictions": [
+    { "metric": "median CPU ms per frame, R3F minus vanilla", "predicted": "under 0.3 ms" },
+    { "metric": "time to first frame, R3F minus vanilla", "predicted": "30 to 150 ms" },
+    { "metric": "production bundle, gzip, R3F page minus vanilla page (three.js chunks excluded)", "predicted": "50 to 90 kB" },
+    { "metric": "drawCalls", "predicted": "equal" }
+  ],
+  "page": "14-r3f-vs-vanilla",
+  "runs": [
+    { "name": "r3f", "query": "impl=r3f" },
+    { "name": "vanilla", "query": "impl=vanilla" }
+  ],
+  "ci": [
+    { "name": "r3f", "query": "impl=r3f" },
+    { "name": "vanilla", "query": "impl=vanilla" }
+  ]
+}

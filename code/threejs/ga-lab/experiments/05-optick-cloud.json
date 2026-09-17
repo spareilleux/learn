@@ -1,0 +1,34 @@
+{
+  "id": "05-optick-cloud",
+  "title": "The OPTIC-K voicing cloud, from 1,000 to 1,000,000 points: Points, instancing, WebGPU compute",
+  "written": "2026-09-16",
+  "question": "GA's OPTIC-K index holds 313k voicings as 112-dimensional vectors. Projected to 3D, how many can a browser draw as Points, as instanced octahedra, and animate (a morph between two projections) on the CPU or in a WebGPU compute shader?",
+  "hypothesis": "1-pixel Points stay cheap up to 1M; instanced octahedra cost 8 triangles each and fall behind; animating 1M points on the CPU is limited by the loop and the 12 MB upload per frame, which a compute shader removes.",
+  "predictions": [
+    { "metric": "median GPU ms per frame, Points, 1M points", "predicted": "under 3 ms" },
+    { "metric": "median GPU ms per frame, instanced octahedra, 1M", "predicted": "at least 5x Points" },
+    { "metric": "median CPU ms per frame, morph on the CPU, 1M", "predicted": "at least 8 ms" },
+    { "metric": "median CPU ms per frame, morph in a compute shader, 1M", "predicted": "under 1 ms" },
+    { "metric": "WebGL 2 and compute", "predicted": "compute does not run on the WebGL 2 backend; the page reports it" }
+  ],
+  "page": "05-optick-cloud",
+  "runs": [
+    { "name": "points-1k", "query": "mode=points&count=1000" },
+    { "name": "points-100k", "query": "mode=points&count=100000" },
+    { "name": "points-313k", "query": "mode=points&count=313000" },
+    { "name": "points-1m", "query": "mode=points&count=1000000" },
+    { "name": "instanced-1k", "query": "mode=instanced&count=1000" },
+    { "name": "instanced-100k", "query": "mode=instanced&count=100000" },
+    { "name": "instanced-1m", "query": "mode=instanced&count=1000000" },
+    { "name": "cpu-morph-100k", "query": "mode=cpu-morph&count=100000" },
+    { "name": "cpu-morph-1m", "query": "mode=cpu-morph&count=1000000" },
+    { "name": "compute-morph-100k", "query": "mode=compute-morph&count=100000" },
+    { "name": "compute-morph-1m", "query": "mode=compute-morph&count=1000000" },
+    { "name": "compute-morph-1m-webgl", "query": "mode=compute-morph&count=1000000", "webgl": true }
+  ],
+  "ci": [
+    { "name": "points-1k", "query": "mode=points&count=1000" },
+    { "name": "instanced-1k", "query": "mode=instanced&count=1000" },
+    { "name": "cpu-morph-1k", "query": "mode=cpu-morph&count=1000" }
+  ]
+}

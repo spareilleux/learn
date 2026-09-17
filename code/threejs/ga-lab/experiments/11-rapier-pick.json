@@ -1,0 +1,17 @@
+{
+  "id": "11-rapier-pick",
+  "title": "Rapier: a pick striking a string, stability against the time step",
+  "written": "2026-09-16",
+  "question": "A string modelled as a chain of small bodies joined by spherical joints, anchored at the nut and the bridge, and a kinematic pick crossing it at 2 m/s: at which time steps does the pick pass through without contact, and how far does the chain stretch?",
+  "hypothesis": "Without continuous collision detection a 1 mm pick moving 33 mm per step at 1/60 s passes through a 0.5 mm string; CCD on the pick prevents it at every step; the joint error shrinks as the step shrinks.",
+  "predictions": [
+    { "metric": "pick passes through without contact, CCD off", "predicted": "yes at 1/30 and 1/60 s, no at 1/480 s" },
+    { "metric": "pick passes through without contact, CCD on", "predicted": "no at every step" },
+    { "metric": "largest relative stretch of the chain, 1/240 s", "predicted": "under 1%" },
+    { "metric": "largest relative stretch of the chain, 1/30 s", "predicted": "over 5%, or the chain explodes (NaN)" },
+    { "metric": "CPU ms per simulated second", "predicted": "proportional to the steps per second, within 30%" }
+  ],
+  "node": "scripts/e11-rapier-pick.ts",
+  "runs": [{ "name": "sweep", "args": [] }],
+  "ci": [{ "name": "sweep", "args": ["--ci"] }]
+}

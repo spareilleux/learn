@@ -1,0 +1,26 @@
+{
+  "id": "15-weak-gpu",
+  "title": "A weak GPU: pixel ratio, powerPreference and an adaptive budget",
+  "written": "2026-09-16",
+  "question": "How does GA's neck behave on a weak GPU (SwiftShader, Chromium's software rasterizer, standing in for one) at pixel ratios 0.5, 1, 2 and GA's 3; does powerPreference change the adapter on this machine; and does an adaptive controller that lowers the pixel ratio to hold a 16.7 ms budget converge?",
+  "hypothesis": "GPU time follows the pixel count, so GA's pixel ratio of 3 costs about 9x a ratio of 1 on a weak GPU; this machine has one enabled adapter, so powerPreference changes nothing; the controller settles at the largest ratio under budget within 60 frames.",
+  "predictions": [
+    { "metric": "wall ms per frame on SwiftShader, pixel ratio 3 against 1", "predicted": "at least 5x" },
+    { "metric": "adapter for low-power and high-performance on this machine", "predicted": "the same RTX 5080 for both" },
+    { "metric": "adaptive controller's pixel ratio after 60 frames, 16.7 ms budget", "predicted": "RTX 5080: its maximum of 2; SwiftShader: 1 or lower" }
+  ],
+  "page": "15-weak-gpu",
+  "runs": [
+    { "name": "rtx-pr1", "query": "pr=1" },
+    { "name": "rtx-pr3", "query": "pr=3" },
+    { "name": "rtx-adaptive", "query": "adaptive=1" },
+    { "name": "rtx-low-power", "query": "pr=1&power=low-power" },
+    { "name": "rtx-high-performance", "query": "pr=1&power=high-performance" },
+    { "name": "swiftshader-pr0.5", "query": "pr=0.5", "channel": "chromium-headless-shell" },
+    { "name": "swiftshader-pr1", "query": "pr=1", "channel": "chromium-headless-shell" },
+    { "name": "swiftshader-pr2", "query": "pr=2", "channel": "chromium-headless-shell" },
+    { "name": "swiftshader-pr3", "query": "pr=3", "channel": "chromium-headless-shell" },
+    { "name": "swiftshader-adaptive", "query": "adaptive=1", "channel": "chromium-headless-shell" }
+  ],
+  "ci": [{ "name": "pr1", "query": "pr=1" }]
+}

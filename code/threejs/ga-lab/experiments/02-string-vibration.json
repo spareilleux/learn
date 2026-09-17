@@ -1,0 +1,27 @@
+{
+  "id": "02-string-vibration",
+  "title": "A vibrating string three ways: CPU vertices, TSL, morph targets",
+  "written": "2026-09-16",
+  "question": "To animate a plucked string, is it cheaper to rewrite its vertices on the CPU, displace them in a TSL vertex shader (lesson 13's choice), or blend a morph target, for the 6 strings of one guitar and for 600 strings?",
+  "hypothesis": "With 6 strings the three are indistinguishable; with 600, rewriting vertices costs CPU time proportional to the vertex count and an upload every frame, while TSL and morph targets cost almost nothing on the CPU.",
+  "predictions": [
+    { "metric": "median CPU ms per frame, 6 strings", "predicted": "the three within 0.3 ms of each other" },
+    { "metric": "median CPU ms per frame, 600 strings", "predicted": "cpu at least 5x tsl; morph within 2x tsl" },
+    { "metric": "median GPU ms per frame, 600 strings", "predicted": "the three within 30% of each other" },
+    { "metric": "pixels differing (pixelmatch default threshold) between cpu and tsl at the same instant, 6 strings", "predicted": "under 0.5% of the image" }
+  ],
+  "page": "02-string-vibration",
+  "runs": [
+    { "name": "cpu-6", "query": "method=cpu&strings=6" },
+    { "name": "tsl-6", "query": "method=tsl&strings=6" },
+    { "name": "morph-6", "query": "method=morph&strings=6" },
+    { "name": "cpu-600", "query": "method=cpu&strings=600" },
+    { "name": "tsl-600", "query": "method=tsl&strings=600" },
+    { "name": "morph-600", "query": "method=morph&strings=600" }
+  ],
+  "ci": [
+    { "name": "cpu-6", "query": "method=cpu&strings=6" },
+    { "name": "tsl-6", "query": "method=tsl&strings=6" },
+    { "name": "morph-6", "query": "method=morph&strings=6" }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "id": "04-bracelet",
+  "title": "Pitch-class bracelets in 3D, transposed on the CPU or in TSL",
+  "written": "2026-09-16",
+  "question": "Drawing all 4,096 pitch-class sets as 3D bracelets of 12 beads (49,152 instances), and animating a transposition that turns every bracelet by one semitone, is it cheaper to rewrite instance matrices and colors on the CPU each frame or to pass the step as a uniform to a TSL shader?",
+  "hypothesis": "The CPU path pays for 49,152 matrix compositions and a 3 MB upload per frame; the TSL path uploads one float. The images are the same.",
+  "predictions": [
+    { "metric": "median CPU ms per frame, CPU path, 4,096 bracelets", "predicted": "at least 4 ms" },
+    { "metric": "median CPU ms per frame, TSL path, 4,096 bracelets", "predicted": "under 0.5 ms" },
+    { "metric": "median GPU ms per frame", "predicted": "within 30% of each other" },
+    { "metric": "pixels differing between the two paths at the same transposition", "predicted": "under 1% of the image" },
+    { "metric": "classes of the 4,096 sets under transposition, and under transposition and inversion (unit test)", "predicted": "352 and 224" }
+  ],
+  "page": "04-bracelet",
+  "runs": [
+    { "name": "cpu-4096", "query": "method=cpu&sets=4096" },
+    { "name": "tsl-4096", "query": "method=tsl&sets=4096" },
+    { "name": "cpu-352", "query": "method=cpu&sets=352" },
+    { "name": "tsl-352", "query": "method=tsl&sets=352" }
+  ],
+  "ci": [
+    { "name": "cpu-352", "query": "method=cpu&sets=352" },
+    { "name": "tsl-352", "query": "method=tsl&sets=352" }
+  ]
+}

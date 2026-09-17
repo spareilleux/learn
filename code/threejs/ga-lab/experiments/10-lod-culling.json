@@ -1,0 +1,24 @@
+{
+  "id": "10-lod-culling",
+  "title": "A wall of guitars: levels of detail and frustum culling with a glTF body",
+  "written": "2026-09-16",
+  "question": "With 1,000 guitar bodies loaded from a glTF file with three levels of detail (built procedurally and simplified with meshoptimizer), how do triangles, draw calls and frame times change with LOD and with frustum culling turned off, along a fixed camera path?",
+  "hypothesis": "Most bodies are far or outside the frustum: LOD divides the triangles by at least 10, and turning culling off draws all 1,000 bodies every frame.",
+  "predictions": [
+    { "metric": "triangles per frame averaged over the path, LOD against full detail", "predicted": "at most 1/10" },
+    { "metric": "drawCalls averaged over the path, culling off against on", "predicted": "at least 2x" },
+    { "metric": "median GPU ms, LOD against full detail", "predicted": "at most 1/3" }
+  ],
+  "page": "10-lod-culling",
+  "runs": [
+    { "name": "full", "query": "lod=off&cull=on" },
+    { "name": "lod", "query": "lod=on&cull=on" },
+    { "name": "full-nocull", "query": "lod=off&cull=off" },
+    { "name": "lod-nocull", "query": "lod=on&cull=off" }
+  ],
+  "ci": [
+    { "name": "full", "query": "lod=off&cull=on&count=100" },
+    { "name": "lod", "query": "lod=on&cull=on&count=100" },
+    { "name": "full-nocull", "query": "lod=off&cull=off&count=100" }
+  ]
+}

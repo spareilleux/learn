@@ -1,0 +1,19 @@
+{
+  "id": "13-audio-sync",
+  "title": "WebAudio note and string vibration: how far apart are they?",
+  "written": "2026-09-16",
+  "question": "When a click plucks a string and plays its note with WebAudio, how late is the sound against the first frame that shows the vibration, as the browser reports it (baseLatency, outputLatency, getOutputTimestamp), with and without compensation?",
+  "hypothesis": "Starting the vibration on the click frame shows it before the sound leaves the speakers by baseLatency plus outputLatency, tens of milliseconds; scheduling the visual start from getOutputTimestamp brings the gap under one frame.",
+  "predictions": [
+    { "metric": "baseLatency + outputLatency, headed Chromium on Windows, default output device", "predicted": "20 to 60 ms" },
+    { "metric": "visual lead without compensation", "predicted": "equal to that sum within one frame (16.7 ms)" },
+    { "metric": "visual lead with compensation", "predicted": "under 17 ms in absolute value" },
+    { "metric": "headless Chromium", "predicted": "reports an outputLatency of 0 or no device: the acoustic delay is not measurable there" }
+  ],
+  "page": "13-audio-sync",
+  "runs": [
+    { "name": "headless", "query": "notes=20" },
+    { "name": "headed", "query": "notes=20", "headed": true }
+  ],
+  "ci": [{ "name": "headless", "query": "notes=3" }]
+}
