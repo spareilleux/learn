@@ -71,7 +71,7 @@ Le pack du cours dessine ce que [Guitar Alchemist](https://github.com/GuitarAlch
 | Nœud | Entrées | Sorties |
 |---|---|---|
 | `GAChordDiagram` (GA Chord Diagram) | `chord` : un voicing écrit depuis le mi grave, comme `x32010` ou `x-10-12-12-12-10`, ou un symbole comme `C`, `Am`, `G7`, `Bm7b5` ; `size` : de 128 à 2048 pixels | `image` : un diagramme d'accord noir sur blanc, de size × size ; `ga_diagram` : le même voicing dans l'ordre de GA |
-| `GAFretboardControlMap` (GA Fretboard Control Map) | `source` : `chord` ou `scale` ; `chord` ; `key` et `mode` ; `fret_start` de 0 à 23 et `fret_end` de 1 à 24 ; `width` et `height`, de 256 à 2048 par pas de 8, 1024 par défaut ; `line_width` | `lines` : des contours blancs sur noir, comme une carte Canny ; `depth` : une carte façon profondeur, plus clair signifie plus proche |
+| `GAFretboardControlMap` (GA Fretboard Control Map) | `source` : `chord` ou `scale` ; `chord` ; `key` et `mode` ; `fret_start` de 0 à 23 et `fret_end` de 1 à 24 ; `width` et `height`, de 256 à 2048 par pas de 8, 1024 par défaut ; `line_width` ; en option, `note_style`, `ring` (un disque noir cerclé de blanc, par défaut) ou `filled` (un disque blanc), et `inlays`, `show` ou `hide` ; l'accord `xxxxxx` dessine un manche vide | `lines` : des contours blancs sur noir, comme une carte Canny ; `depth` : une carte façon profondeur, plus clair signifie plus proche ; `layout` : du JSON avec le manche, les frettes et les cordes, et le centre et le rayon de chaque note et de chaque repère, en pixels |
 | `GAScalePrompt` (GA Scale Prompt) | `key`, `mode`, `subject` | `prompt` : un fragment de texte, identique à chaque fois |
 
 ### La théorie, calculée localement
@@ -135,7 +135,10 @@ Comme un nœud est une classe, les tests importent le pack comme le fait ComfyUI
 $ python -m unittest discover -s code/comfyui/custom-nodes/ga/tests -v
 test_bad_fret_range (test_ga.NodesTest.test_bad_fret_range) ... ok
 test_chord_diagrams (test_ga.NodesTest.test_chord_diagrams) ... ok
+test_control_map_options (test_ga.NodesTest.test_control_map_options) ... ok
 test_control_maps (test_ga.NodesTest.test_control_maps) ... ok
+test_empty_neck (test_ga.NodesTest.test_empty_neck) ... ok
+test_layout_matches_pixels (test_ga.NodesTest.test_layout_matches_pixels) ... ok
 test_mappings (test_ga.NodesTest.test_mappings) ... ok
 test_scale_prompt (test_ga.NodesTest.test_scale_prompt) ... ok
 test_unknown_chord (test_ga.NodesTest.test_unknown_chord) ... ok
@@ -146,7 +149,7 @@ test_scale_positions (test_ga.TheoryTest.test_scale_positions) ... ok
 test_voicing_formats (test_ga.TheoryTest.test_voicing_formats) ... ok
 
 ----------------------------------------------------------------------
-Ran 11 tests in 1.366s
+Ran 14 tests in 4.113s
 
 OK
 ```
@@ -250,7 +253,7 @@ Ses tests l'exécutent sur une [fixture](https://github.com/spareilleux/learn/tr
 
 ```text
 $ python code/comfyui/custom-nodes/audit/audit.py code/comfyui/custom-nodes/ga
-== ga: 24 files, 5 Python, 0 JavaScript, web folder: no
+== ga: 27 files, 5 Python, 0 JavaScript, web folder: no
    autorun            1  file that runs without being asked
 ```
 

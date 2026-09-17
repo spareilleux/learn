@@ -5,6 +5,8 @@ An IMAGE in ComfyUI is a float32 tensor of shape [batch, height, width, 3] with 
 it in ComfyUI's nodes.py.
 """
 
+import json
+
 import numpy as np
 
 from . import drawing, theory
@@ -61,22 +63,31 @@ class GAFretboardControlMap:
                 "width": ("INT", {"default": 1024, "min": 256, "max": 2048, "step": 8}),
                 "height": ("INT", {"default": 1024, "min": 256, "max": 2048, "step": 8}),
                 "line_width": ("INT", {"default": 4, "min": 1, "max": 16}),
-            }
+            },
+            "optional": {
+                "note_style": (["ring", "filled"], {"default": "ring"}),
+                "inlays": (["show", "hide"], {"default": "show"}),
+            },
         }
 
-    RETURN_TYPES = ("IMAGE", "IMAGE")
-    RETURN_NAMES = ("lines", "depth")
+    RETURN_TYPES = ("IMAGE", "IMAGE", "STRING")
+    RETURN_NAMES = ("lines", "depth", "layout")
     FUNCTION = "draw"
     CATEGORY = CATEGORY
-    DESCRIPTION = "White edges on black for a canny or lineart ControlNet, and a depth-like map (nearer is brighter)."
+    DESCRIPTION = ("White edges on black for a canny or lineart ControlNet, a depth-like map (nearer is brighter), "
+                   "and the layout as JSON: note centers, radius, string and fret, inlays. "
+                   "The chord xxxxxx draws an empty neck.")
 
-    def draw(self, source, chord, key, mode, fret_start, fret_end, width, height, line_width):
+    def draw(self, source, chord, key, mode, fret_start, fret_end, width, height, line_width, note_style="ring",
+             inlays="show"):
         if source == "chord":
             positions = theory.voicing_positions(theory.resolve_chord(chord)[1])
         else:
             positions = theory.scale_positions(key, mode, fret_start, fret_end)
-        lines, depth = drawing.fretboard_maps(positions, fret_start, fret_end, width, height, line_width)
-        return (to_image(lines), to_image(depth))
+        lines, depth = drawing.fretboard_maps(positions, fret_start, fret_end, width, height, line_width, note_style,
+                                              inlays)
+        layout = drawing.fretboard_layout(positions, fret_start, fret_end, width, height, inlays)
+        return (to_image(lines), to_image(depth), json.dumps(layout, sort_keys=True))
 
 
 class GAScalePrompt:

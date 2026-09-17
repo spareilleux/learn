@@ -86,69 +86,111 @@ def fret_x(fret, fret_start, fret_end, left, right):
     return left + (distance(fret) - distance(fret_start)) / span * (right - left)
 
 
-def fretboard_maps(positions, fret_start=0, fret_end=12, width=1024, height=1024, line_width=4):
-    """A neck seen from the front, headstock on the left, high E at the top (like tablature).
+def fretboard_layout(positions, fret_start=0, fret_end=12, width=1024, height=1024, inlays="show"):
+    """Where fretboard_maps draws the board, the strings, the notes and the inlays, in pixels, without drawing.
 
-    Returns two RGB images of width x height:
-    - lines: white edges on black, like the output of a Canny node, for a canny/lineart ControlNet;
-    - depth: nearer is brighter (background black, fingerboard grey, strings lighter, notes white), for a depth
-      ControlNet.
-    positions are (string index from low E, fret) pairs. The frets fret_start to fret_end are shown: with
-    fret_start 0 the board starts at the nut and open strings are drawn left of it, otherwise it starts at the fret
-    wire before fret_start.
+    Returns a dict that json.dumps can write: the board rectangle, the x of each fret wire, the y of each string,
+    the note radius, one entry per note shown and one per inlay marker (none when inlays is "hide"). In notes and
+    strings, "string" counts from the high E (1) to the low E (6) and "string_index" from the low E (0), like the
+    positions. Notes outside fret_start..fret_end are left out; open strings (fret 0) sit left of the nut.
     """
     if not 0 <= fret_start < fret_end <= theory.MAX_FRET:
         raise ValueError(f"need 0 <= fret_start < fret_end <= {theory.MAX_FRET}, got {fret_start} and {fret_end}")
-    lines = Image.new("RGB", (width, height), (0, 0, 0))
-    depth = Image.new("RGB", (width, height), (0, 0, 0))
-    ld, dd = ImageDraw.Draw(lines), ImageDraw.Draw(depth)
-    white = (255, 255, 255)
-
+    if inlays not in ("show", "hide"):
+        raise ValueError(f"inlays must be 'show' or 'hide', got {inlays!r}")
     first_wire = max(fret_start - 1, 0)
     board_left, board_right = round(width * 0.10), round(width * 0.96)
     neck_height = min(height * 0.6, (board_right - board_left) / (fret_end - first_wire) * 2.4)
     board_top = round(height / 2 - neck_height / 2)
     board_bottom = round(height / 2 + neck_height / 2)
     string_gap = (board_bottom - board_top) / theory.STRING_COUNT
-    fret_gap_min = fret_x(fret_end, first_wire, fret_end, board_left, board_right) - \
-        fret_x(fret_end - 1, first_wire, fret_end, board_left, board_right)
-    radius = round(min(string_gap, fret_gap_min) * 0.3)
+
+    def wire(fret):
+        return fret_x(fret, first_wire, fret_end, board_left, board_right)
+
+    radius = round(min(string_gap, wire(fret_end) - wire(fret_end - 1)) * 0.3)
 
     def string_y(s):  # s counts from low E; the low E is at the bottom
         return round(board_bottom - (s + 0.5) * string_gap)
 
+    def fret_center(fret):
+        return round((wire(fret - 1) + wire(fret)) / 2)
+
+    markers = []
+    if inlays == "show":
+        for fret in INLAYS:
+            if first_wire < fret <= fret_end:
+                if fret % 12 == 0:  # 12 and 24 have two markers
+                    ys = [round(board_top + 2 * string_gap), round(board_bottom - 2 * string_gap)]
+                else:
+                    ys = [round((board_top + board_bottom) / 2)]
+                markers.extend({"fret": fret, "x": fret_center(fret), "y": y, "r": max(2, radius // 2)} for y in ys)
+    notes = []
+    for s, fret in positions:
+        if not fret_start <= fret <= fret_end:
+            continue
+        x = round(board_left - radius * 1.6) if fret == 0 else fret_center(fret)
+        notes.append({"string": theory.STRING_COUNT - s, "string_index": s, "fret": fret, "x": x, "y": string_y(s),
+                      "r": radius})
+    return {
+        "width": width, "height": height, "fret_start": fret_start, "fret_end": fret_end, "first_wire": first_wire,
+        "board": {"left": board_left, "top": board_top, "right": board_right, "bottom": board_bottom},
+        "string_gap": string_gap,
+        "fret_wires": [{"fret": f, "x": round(wire(f))} for f in range(first_wire, fret_end + 1)],
+        "strings": [{"string": theory.STRING_COUNT - s, "string_index": s, "y": string_y(s)}
+                    for s in range(theory.STRING_COUNT)],
+        "radius": radius,
+        "notes": notes,
+        "inlays": markers,
+    }
+
+
+def fretboard_maps(positions, fret_start=0, fret_end=12, width=1024, height=1024, line_width=4, note_style="ring",
+                   inlays="show"):
+    """A neck seen from the front, headstock on the left, high E at the top (like tablature).
+
+    Returns two RGB images of width x height:
+    - lines: white edges on black, like the output of a Canny node, for a canny/lineart ControlNet;
+    - depth: nearer is brighter (background black, fingerboard grey, strings lighter, notes white), for a depth
+      ControlNet.
+    positions are (string index from low E, fret) pairs; none (the voicing xxxxxx) draws an empty neck. The frets
+    fret_start to fret_end are shown: with fret_start 0 the board starts at the nut and open strings are drawn left
+    of it, otherwise it starts at the fret wire before fret_start.
+    note_style "ring" draws each note on the lines map as a black disc with a white outline, "filled" as a plain
+    white disc. inlays "hide" leaves the inlay rings out. Every coordinate comes from fretboard_layout.
+    """
+    if note_style not in ("ring", "filled"):
+        raise ValueError(f"note_style must be 'ring' or 'filled', got {note_style!r}")
+    layout = fretboard_layout(positions, fret_start, fret_end, width, height, inlays)
+    lines = Image.new("RGB", (width, height), (0, 0, 0))
+    depth = Image.new("RGB", (width, height), (0, 0, 0))
+    ld, dd = ImageDraw.Draw(lines), ImageDraw.Draw(depth)
+    white = (255, 255, 255)
+    board = layout["board"]
+    board_left, board_top, board_right, board_bottom = board["left"], board["top"], board["right"], board["bottom"]
+
     dd.rectangle([board_left, board_top, board_right, board_bottom], fill=(96, 96, 96))
     ld.rectangle([board_left, board_top, board_right, board_bottom], outline=white, width=line_width)
 
-    for fret in range(first_wire, fret_end + 1):
-        x = round(fret_x(fret, first_wire, fret_end, board_left, board_right))
-        w = line_width * 3 if fret == 0 else line_width
+    for wire in layout["fret_wires"]:
+        x = wire["x"]
+        w = line_width * 3 if wire["fret"] == 0 else line_width
         ld.rectangle([x - w // 2, board_top, x - w // 2 + w - 1, board_bottom], fill=white)
         dd.rectangle([x - w // 2, board_top, x - w // 2 + w - 1, board_bottom], fill=(150, 150, 150))
-    for fret in INLAYS:
-        if first_wire < fret <= fret_end:
-            x = round((fret_x(fret - 1, first_wire, fret_end, board_left, board_right) +
-                       fret_x(fret, first_wire, fret_end, board_left, board_right)) / 2)
-            r = max(2, radius // 2)
-            ys = [round(board_top + 2 * string_gap), round(board_bottom - 2 * string_gap)] if fret % 12 == 0 \
-                else [round((board_top + board_bottom) / 2)]
-            for y in ys:
-                ld.ellipse([x - r, y - r, x + r, y + r], outline=white, width=max(1, line_width // 2))
-    for s in range(theory.STRING_COUNT):
-        y = string_y(s)
+    for marker in layout["inlays"]:
+        x, y, r = marker["x"], marker["y"], marker["r"]
+        ld.ellipse([x - r, y - r, x + r, y + r], outline=white, width=max(1, line_width // 2))
+    for string in layout["strings"]:
+        s, y = string["string_index"], string["y"]
         w = max(1, line_width // 2 + (theory.STRING_COUNT - 1 - s) // 2)  # low strings are thicker
         ld.rectangle([board_left, y - w // 2, board_right, y - w // 2 + w - 1], fill=white)
         dd.rectangle([board_left, y - w // 2, board_right, y - w // 2 + w - 1], fill=(190, 190, 190))
 
-    for s, fret in positions:
-        if not fret_start <= fret <= fret_end:
-            continue
-        if fret == 0:
-            x = round(board_left - radius * 1.6)
+    for note in layout["notes"]:
+        x, y, r = note["x"], note["y"], note["r"]
+        if note_style == "ring":
+            ld.ellipse([x - r, y - r, x + r, y + r], fill=(0, 0, 0), outline=white, width=line_width)
         else:
-            x = round((fret_x(fret - 1, first_wire, fret_end, board_left, board_right) +
-                       fret_x(fret, first_wire, fret_end, board_left, board_right)) / 2)
-        y = string_y(s)
-        ld.ellipse([x - radius, y - radius, x + radius, y + radius], fill=(0, 0, 0), outline=white, width=line_width)
-        dd.ellipse([x - radius, y - radius, x + radius, y + radius], fill=white)
+            ld.ellipse([x - r, y - r, x + r, y + r], fill=white)
+        dd.ellipse([x - r, y - r, x + r, y + r], fill=white)
     return lines, depth

@@ -5,6 +5,7 @@
 """
 
 import importlib
+import json
 import os
 import sys
 import unittest
@@ -101,12 +102,60 @@ class NodesTest(unittest.TestCase):
 
     def test_control_maps(self):
         node = nodes.GAFretboardControlMap()
-        lines, depth = node.draw("chord", "C", "C", "Ionian", 0, 5, 1024, 1024, 4)
+        lines, depth, _ = node.draw("chord", "C", "C", "Ionian", 0, 5, 1024, 1024, 4)
         check_image(self, "map-chord-C-lines", lines)
         check_image(self, "map-chord-C-depth", depth)
-        lines, depth = node.draw("scale", "", "A", "Aeolian", 5, 12, 1024, 1024, 4)
+        lines, depth, _ = node.draw("scale", "", "A", "Aeolian", 5, 12, 1024, 1024, 4)
         check_image(self, "map-scale-A-Aeolian-lines", lines)
         check_image(self, "map-scale-A-Aeolian-depth", depth)
+        # the defaults of the optional inputs draw the same pixels
+        lines, _, _ = node.draw("chord", "C", "C", "Ionian", 0, 5, 1024, 1024, 4, note_style="ring", inlays="show")
+        check_image(self, "map-chord-C-lines", lines)
+
+    def test_control_map_options(self):
+        node = nodes.GAFretboardControlMap()
+        lines, depth, _ = node.draw("chord", "C", "C", "Ionian", 0, 5, 1024, 1024, 4, note_style="filled")
+        check_image(self, "map-chord-C-filled-lines", lines)
+        check_image(self, "map-chord-C-depth", depth)  # the depth map has no note style
+        lines, depth, layout = node.draw("chord", "C", "C", "Ionian", 0, 5, 1024, 1024, 4, inlays="hide")
+        check_image(self, "map-chord-C-no-inlays-lines", lines)
+        self.assertEqual(json.loads(layout)["inlays"], [])
+        with self.assertRaises(ValueError):
+            node.draw("chord", "C", "C", "Ionian", 0, 5, 1024, 1024, 4, note_style="square")
+        with self.assertRaises(ValueError):
+            node.draw("chord", "C", "C", "Ionian", 0, 5, 1024, 1024, 4, inlays="maybe")
+
+    def test_empty_neck(self):
+        # chord xxxxxx mutes every string: frets, strings and inlays, no note
+        lines, depth, layout = nodes.GAFretboardControlMap().draw("chord", "xxxxxx", "C", "Ionian", 0, 12, 1344, 768, 4)
+        check_image(self, "map-empty-0-12-lines", lines)
+        layout = json.loads(layout)
+        self.assertEqual(layout["notes"], [])
+        self.assertEqual([m["fret"] for m in layout["inlays"]], [3, 5, 7, 9, 12, 12])
+
+    def test_layout_matches_pixels(self):
+        node = nodes.GAFretboardControlMap()
+        for style in ("ring", "filled"):
+            for args in (("chord", "C", "C", "Ionian", 0, 5, 1024, 1024, 4),
+                         ("chord", "x-10-12-12-12-10", "C", "Ionian", 9, 15, 1344, 768, 4),
+                         ("scale", "", "E", "Phrygian", 0, 7, 1024, 512, 3)):
+                with self.subTest(style=style, args=args):
+                    lines, depth, text = node.draw(*args, note_style=style)
+                    layout = json.loads(text)
+                    lines, depth = np.asarray(lines)[0], np.asarray(depth)[0]
+                    self.assertEqual((layout["width"], layout["height"]), (lines.shape[1], lines.shape[0]))
+                    self.assertTrue(layout["notes"])
+                    for note in layout["notes"]:
+                        x, y, r = note["x"], note["y"], note["r"]
+                        self.assertEqual(note["string"], 6 - note["string_index"])
+                        self.assertTrue((depth[y, x] == 1.0).all())
+                        center = 0.0 if style == "ring" else 1.0  # a ring is black inside
+                        self.assertTrue((lines[y, x] == center).all(), note)
+                        self.assertTrue((lines[y, x - r + 1] == 1.0).all(), note)  # the outline or the disc
+                    for marker in layout["inlays"]:
+                        self.assertTrue((lines[marker["y"], marker["x"] - marker["r"]] == 1.0).all(), marker)
+                    frets = [n["fret"] for n in layout["notes"]]
+                    self.assertTrue(all(args[4] <= f <= args[5] for f in frets))
 
     def test_bad_fret_range(self):
         with self.assertRaises(ValueError):

@@ -71,7 +71,7 @@ The course's pack draws what [Guitar Alchemist](https://github.com/GuitarAlchemi
 | Node | Inputs | Outputs |
 |---|---|---|
 | `GAChordDiagram` (GA Chord Diagram) | `chord`: a voicing from the low E like `x32010` or `x-10-12-12-12-10`, or a symbol such as `C`, `Am`, `G7`, `Bm7b5`; `size`: 128 to 2048 pixels | `image`: a black-on-white chord chart, size × size; `ga_diagram`: the same voicing in GA's order |
-| `GAFretboardControlMap` (GA Fretboard Control Map) | `source`: `chord` or `scale`; `chord`; `key` and `mode`; `fret_start` 0 to 23 and `fret_end` 1 to 24; `width` and `height`, 256 to 2048 in steps of 8, 1024 by default; `line_width` | `lines`: white edges on black, like a Canny map; `depth`: a depth-like map, nearer is brighter |
+| `GAFretboardControlMap` (GA Fretboard Control Map) | `source`: `chord` or `scale`; `chord`; `key` and `mode`; `fret_start` 0 to 23 and `fret_end` 1 to 24; `width` and `height`, 256 to 2048 in steps of 8, 1024 by default; `line_width`; optional `note_style`, `ring` (a black disc with a white outline, the default) or `filled` (a white disc), and `inlays`, `show` or `hide`; the chord `xxxxxx` draws an empty neck | `lines`: white edges on black, like a Canny map; `depth`: a depth-like map, nearer is brighter; `layout`: JSON with the board, the fret wires and strings, and each note's and inlay's center and radius in pixels |
 | `GAScalePrompt` (GA Scale Prompt) | `key`, `mode`, `subject` | `prompt`: a text fragment, the same every time |
 
 ### The theory, computed locally
@@ -135,7 +135,10 @@ Because a node is a class, the tests import the pack as ComfyUI does, as a packa
 $ python -m unittest discover -s code/comfyui/custom-nodes/ga/tests -v
 test_bad_fret_range (test_ga.NodesTest.test_bad_fret_range) ... ok
 test_chord_diagrams (test_ga.NodesTest.test_chord_diagrams) ... ok
+test_control_map_options (test_ga.NodesTest.test_control_map_options) ... ok
 test_control_maps (test_ga.NodesTest.test_control_maps) ... ok
+test_empty_neck (test_ga.NodesTest.test_empty_neck) ... ok
+test_layout_matches_pixels (test_ga.NodesTest.test_layout_matches_pixels) ... ok
 test_mappings (test_ga.NodesTest.test_mappings) ... ok
 test_scale_prompt (test_ga.NodesTest.test_scale_prompt) ... ok
 test_unknown_chord (test_ga.NodesTest.test_unknown_chord) ... ok
@@ -146,7 +149,7 @@ test_scale_positions (test_ga.TheoryTest.test_scale_positions) ... ok
 test_voicing_formats (test_ga.TheoryTest.test_voicing_formats) ... ok
 
 ----------------------------------------------------------------------
-Ran 11 tests in 1.366s
+Ran 14 tests in 4.113s
 
 OK
 ```
@@ -250,7 +253,7 @@ Its tests run it on a [fixture](https://github.com/spareilleux/learn/tree/22f2bf
 
 ```text
 $ python code/comfyui/custom-nodes/audit/audit.py code/comfyui/custom-nodes/ga
-== ga: 24 files, 5 Python, 0 JavaScript, web folder: no
+== ga: 27 files, 5 Python, 0 JavaScript, web folder: no
    autorun            1  file that runs without being asked
 ```
 

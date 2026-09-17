@@ -71,7 +71,7 @@ El paquete del curso dibuja lo que [Guitar Alchemist](https://github.com/GuitarA
 | Nodo | Entradas | Salidas |
 |---|---|---|
 | `GAChordDiagram` (GA Chord Diagram) | `chord`: una digitación desde el Mi grave, como `x32010` o `x-10-12-12-12-10`, o un símbolo como `C`, `Am`, `G7`, `Bm7b5`; `size`: de 128 a 2048 píxeles | `image`: un diagrama de acorde en negro sobre blanco, de size × size; `ga_diagram`: la misma digitación en el orden de GA |
-| `GAFretboardControlMap` (GA Fretboard Control Map) | `source`: `chord` o `scale`; `chord`; `key` y `mode`; `fret_start` de 0 a 23 y `fret_end` de 1 a 24; `width` y `height`, de 256 a 2048 en pasos de 8, 1024 por defecto; `line_width` | `lines`: bordes blancos sobre negro, como un mapa Canny; `depth`: un mapa de tipo profundidad, donde lo más cercano es más claro |
+| `GAFretboardControlMap` (GA Fretboard Control Map) | `source`: `chord` o `scale`; `chord`; `key` y `mode`; `fret_start` de 0 a 23 y `fret_end` de 1 a 24; `width` y `height`, de 256 a 2048 en pasos de 8, 1024 por defecto; `line_width`; opcionales, `note_style`, `ring` (un disco negro con borde blanco, por defecto) o `filled` (un disco blanco), e `inlays`, `show` o `hide`; el acorde `xxxxxx` dibuja un mástil vacío | `lines`: bordes blancos sobre negro, como un mapa Canny; `depth`: un mapa de tipo profundidad, donde lo más cercano es más claro; `layout`: JSON con el diapasón, los trastes y las cuerdas, y el centro y el radio de cada nota y de cada marcador, en píxeles |
 | `GAScalePrompt` (GA Scale Prompt) | `key`, `mode`, `subject` | `prompt`: un fragmento de texto, siempre el mismo |
 
 ### La teoría, calculada en local
@@ -135,7 +135,10 @@ Como un nodo es una clase, las pruebas importan el paquete como lo hace ComfyUI,
 $ python -m unittest discover -s code/comfyui/custom-nodes/ga/tests -v
 test_bad_fret_range (test_ga.NodesTest.test_bad_fret_range) ... ok
 test_chord_diagrams (test_ga.NodesTest.test_chord_diagrams) ... ok
+test_control_map_options (test_ga.NodesTest.test_control_map_options) ... ok
 test_control_maps (test_ga.NodesTest.test_control_maps) ... ok
+test_empty_neck (test_ga.NodesTest.test_empty_neck) ... ok
+test_layout_matches_pixels (test_ga.NodesTest.test_layout_matches_pixels) ... ok
 test_mappings (test_ga.NodesTest.test_mappings) ... ok
 test_scale_prompt (test_ga.NodesTest.test_scale_prompt) ... ok
 test_unknown_chord (test_ga.NodesTest.test_unknown_chord) ... ok
@@ -146,7 +149,7 @@ test_scale_positions (test_ga.TheoryTest.test_scale_positions) ... ok
 test_voicing_formats (test_ga.TheoryTest.test_voicing_formats) ... ok
 
 ----------------------------------------------------------------------
-Ran 11 tests in 1.366s
+Ran 14 tests in 4.113s
 
 OK
 ```
@@ -250,7 +253,7 @@ Sus pruebas lo ejecutan sobre una [fixture](https://github.com/spareilleux/learn
 
 ```text
 $ python code/comfyui/custom-nodes/audit/audit.py code/comfyui/custom-nodes/ga
-== ga: 24 files, 5 Python, 0 JavaScript, web folder: no
+== ga: 27 files, 5 Python, 0 JavaScript, web folder: no
    autorun            1  file that runs without being asked
 ```
 
