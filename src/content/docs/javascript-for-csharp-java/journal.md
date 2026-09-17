@@ -17,7 +17,7 @@ sidebar:
 
 ## 2026-09-14 — Installing Node.js 24.21.0
 
-- The [release index](https://nodejs.org/dist/index.json) lists 24.21.0, published on 2026-09-07, as the latest LTS release, and 26.8.2 as the latest current release. Node.js 26 becomes LTS on 2026-10-28, according to the [schedule](https://github.com/nodejs/Release/blob/main/schedule.json).
+- The [release index](https://nodejs.org/dist/index.json) lists 24.21.0, published on 2026-09-07, as the latest LTS release, and 26.8.2 as the latest current release. Node.js 26 becomes LTS on 2026-10-28, according to the [schedule](https://github.com/nodejs/Release/blob/72fdab20216c5f04e0a0fe72a225c2504e9f2b42/schedule.json).
 - My machine already had a global Node.js 24.12.0. I left it alone, downloaded `node-v24.21.0-win-x64.zip` into a folder of its own, checked its SHA-256 against `SHASUMS256.txt`, and put that folder first on the `PATH` of the shells that capture the lessons' outputs. `node -p process.versions.v8` prints `13.6.233.17-node.53`; the bundled npm is 11.19.0.
 - The PowerShell commands of lesson 1 downloaded, checked and expanded the archive in 22 seconds, in a scratch folder.
 - `winget show OpenJS.NodeJS.LTS` offered 24.19.0, two releases behind nodejs.org.

@@ -73,5 +73,5 @@ Las lecciones 1 a 4 construyen las dos primeras cajas de la derecha; las leccion
 - [Referencia de Spring Framework](https://docs.spring.io/spring-framework/reference/): el contenedor IoC, Web MVC y WebFlux
 - [Guía de referencia de Reactor 3](https://projectreactor.io/docs/core/release/reference/) y el [Javadoc de `Flux`](https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Flux.html), cuyos diagramas de canicas vale la pena leer
 - [Spring Cloud](https://spring.io/projects/spring-cloud): release trains y proyectos
-- [Especificación Reactive Streams](https://github.com/reactive-streams/reactive-streams-jvm/blob/master/README.md), las cuatro interfaces sobre las que se apoya Reactor
+- [Especificación Reactive Streams](https://github.com/reactive-streams/reactive-streams-jvm/blob/a625d3aba756e9842ad1291a5b73f5db280b6168/README.md), las cuatro interfaces sobre las que se apoya Reactor
 - Del lado .NET: [fundamentos de ASP.NET Core](https://learn.microsoft.com/aspnet/core/fundamentals/), [Reactive Extensions para .NET](https://github.com/dotnet/reactive)

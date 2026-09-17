@@ -126,7 +126,7 @@ AMQP.BasicProperties properties = new AMQP.BasicProperties.Builder()
 
 ## RabbitMQ.Client 7 in practice
 
-Version 7 of the .NET client rewrote the API around `async`/`await`. The [migration guide](https://github.com/rabbitmq/rabbitmq-dotnet-client/blob/main/v7-MIGRATION.md) lists the changes that break code written for version 6 or copied from older answers: `IModel` became `IChannel`, every method gained an `Async` form and lost its synchronous one, `CreateBasicProperties()` gave way to `new BasicProperties()`, and message bodies became `ReadOnlyMemory<byte>`. The C# consumer:
+Version 7 of the .NET client rewrote the API around `async`/`await`. The [migration guide](https://github.com/rabbitmq/rabbitmq-dotnet-client/blob/81622758098163d764ce13f13dce454310038948/v7-MIGRATION.md) lists the changes that break code written for version 6 or copied from older answers: `IModel` became `IChannel`, every method gained an `Async` form and lost its synchronous one, `CreateBasicProperties()` gave way to `new BasicProperties()`, and message bodies became `ReadOnlyMemory<byte>`. The C# consumer:
 
 ```csharp
 var consumer = new AsyncEventingBasicConsumer(channel);
@@ -271,7 +271,7 @@ From the method's parameter. The converter's `TypePrecedence` defaults to `INFER
 <details>
 <summary>Solution</summary>
 
-The memory behind `delivery.Body` belongs to the client, which the [migration guide](https://github.com/rabbitmq/rabbitmq-dotnet-client/blob/main/v7-MIGRATION.md) says is "only valid for application use within the context of the executing ReceivedAsync event". Once the handler returns, the buffer can be reused for the next frame, so the worker may parse the bytes of a later message, or a mix. A single message in a test hides it because nothing overwrites the buffer. The smallest fix is to queue `delivery.Body.ToArray()`, a copy. The worker must also acknowledge through the channel with the delivery tag, not from another channel, and preferably only after parsing succeeded. I didn't write a program that shows the corruption: its output would not be deterministic.
+The memory behind `delivery.Body` belongs to the client, which the [migration guide](https://github.com/rabbitmq/rabbitmq-dotnet-client/blob/81622758098163d764ce13f13dce454310038948/v7-MIGRATION.md) says is "only valid for application use within the context of the executing ReceivedAsync event". Once the handler returns, the buffer can be reused for the next frame, so the worker may parse the bytes of a later message, or a mix. A single message in a test hides it because nothing overwrites the buffer. The smallest fix is to queue `delivery.Body.ToArray()`, a copy. The worker must also acknowledge through the channel with the delivery tag, not from another channel, and preferably only after parsing succeeded. I didn't write a program that shows the corruption: its output would not be deterministic.
 
 </details>
 
@@ -288,6 +288,6 @@ Handler throws: Spring's container catches the exception and rejects the message
 
 ## Sources
 
-- RabbitMQ: [.NET client API guide](https://www.rabbitmq.com/client-libraries/dotnet-api-guide), [.NET client 7 migration guide](https://github.com/rabbitmq/rabbitmq-dotnet-client/blob/main/v7-MIGRATION.md), [Java client API guide](https://www.rabbitmq.com/client-libraries/java-api-guide), [publishers and message properties](https://www.rabbitmq.com/docs/publishers), [consumers](https://www.rabbitmq.com/docs/consumers)
+- RabbitMQ: [.NET client API guide](https://www.rabbitmq.com/client-libraries/dotnet-api-guide), [.NET client 7 migration guide](https://github.com/rabbitmq/rabbitmq-dotnet-client/blob/81622758098163d764ce13f13dce454310038948/v7-MIGRATION.md), [Java client API guide](https://www.rabbitmq.com/client-libraries/java-api-guide), [publishers and message properties](https://www.rabbitmq.com/docs/publishers), [consumers](https://www.rabbitmq.com/docs/consumers)
 - .NET client source at v7.2.2: [`BasicDeliverEventArgs.cs`](https://github.com/rabbitmq/rabbitmq-dotnet-client/blob/740faf07f04ade7d35d3539e20613c6ac6b9b46f/projects/RabbitMQ.Client/Events/BasicDeliverEventArgs.cs#L63-L81), [`Constants.cs`](https://github.com/rabbitmq/rabbitmq-dotnet-client/blob/740faf07f04ade7d35d3539e20613c6ac6b9b46f/projects/RabbitMQ.Client/Constants.cs#L95), [`ConnectionFactory.cs`](https://github.com/rabbitmq/rabbitmq-dotnet-client/blob/740faf07f04ade7d35d3539e20613c6ac6b9b46f/projects/RabbitMQ.Client/ConnectionFactory.cs#L168)
 - Spring: [Spring AMQP reference](https://docs.spring.io/spring-amqp/reference/), [message converters](https://docs.spring.io/spring-amqp/reference/amqp/message-converters.html), [listener container attributes](https://docs.spring.io/spring-amqp/reference/amqp/containerAttributes.html), [Spring Boot AMQP support](https://docs.spring.io/spring-boot/reference/messaging/amqp.html)

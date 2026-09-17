@@ -33,7 +33,7 @@ public static async Task<int> AddLaterAsync(int left, int right)
 }
 ```
 
-There is no `async` in the IL. The compiler turns the method body into a *state machine*: a type that implements [`IAsyncStateMachine`](https://learn.microsoft.com/dotnet/api/system.runtime.compilerservices.iasyncstatemachine), whose `MoveNext` method runs the body up to the next `await` that isn't finished yet, records where it stopped, and returns. `check.sh` decompiles the Release build with [`ilspycmd`](https://github.com/icsharpcode/ILSpy/tree/master/ICSharpCode.ILSpyCmd) at C# 4 language level, before `async` existed, so that ILSpy can't rebuild the `await`s ([`expected/l3-state-machine.txt`](https://github.com/spareilleux/learn/blob/8ba378e7ea22a64a57b3e45b45afa4c85afa85a3/code/csharp-advanced/expected/l3-state-machine.txt)). The method itself has become a stub that creates the state machine and starts it:
+There is no `async` in the IL. The compiler turns the method body into a *state machine*: a type that implements [`IAsyncStateMachine`](https://learn.microsoft.com/dotnet/api/system.runtime.compilerservices.iasyncstatemachine), whose `MoveNext` method runs the body up to the next `await` that isn't finished yet, records where it stopped, and returns. `check.sh` decompiles the Release build with [`ilspycmd`](https://github.com/icsharpcode/ILSpy/tree/72dbe6f41d480728ffa60bb68d1b95f9118d6b15/ICSharpCode.ILSpyCmd) at C# 4 language level, before `async` existed, so that ILSpy can't rebuild the `await`s ([`expected/l3-state-machine.txt`](https://github.com/spareilleux/learn/blob/8ba378e7ea22a64a57b3e45b45afa4c85afa85a3/code/csharp-advanced/expected/l3-state-machine.txt)). The method itself has become a stub that creates the state machine and starts it:
 
 ```csharp
 [AsyncStateMachine(typeof(<AddLaterAsync>d__0))]
@@ -429,7 +429,7 @@ The value is computed once, kept at 4 minutes, and computed again at 6 minutes, 
 
 ## If you know Spring and Reactor
 
-Reactor answers this lesson's question the other way round. C# rewrites sequential code into a state machine so that it can suspend; Reactor asks you to describe the work as a chain of operators, and runs it when someone subscribes. Both moments allocate, and not the same way: assembling `.map(...)` creates one `Publisher` object, once, while each subscription creates one subscriber object per operator ([`FluxMap`](https://github.com/reactor/reactor-core/blob/main/reactor-core/src/main/java/reactor/core/publisher/FluxMap.java) builds a `MapSubscriber` in `subscribeOrReturn`). The [Reactor course](../../spring-cloud-reactor/02-reactor-mono-and-flux/#assembly-and-subscription) runs both.
+Reactor answers this lesson's question the other way round. C# rewrites sequential code into a state machine so that it can suspend; Reactor asks you to describe the work as a chain of operators, and runs it when someone subscribes. Both moments allocate, and not the same way: assembling `.map(...)` creates one `Publisher` object, once, while each subscription creates one subscriber object per operator ([`FluxMap`](https://github.com/reactor/reactor-core/blob/3775d11fe93ed55b75eb4ec802ddd1941322c6f0/reactor-core/src/main/java/reactor/core/publisher/FluxMap.java) builds a `MapSubscriber` in `subscribeOrReturn`). The [Reactor course](../../spring-cloud-reactor/02-reactor-mono-and-flux/#assembly-and-subscription) runs both.
 
 | C# | Reactor |
 |---|---|

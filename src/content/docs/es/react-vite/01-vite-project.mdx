@@ -36,7 +36,7 @@ flowchart LR
     end
 ```
 
-El curso usa las versiones vigentes el 15 de septiembre de 2026: **Vite 8.3.0** con [`@vitejs/plugin-react`](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react) 6.1.1, **React 19.3.0**, y TypeScript 7.0.2, la versión del [curso de TypeScript](../../typescript-for-csharp-java/01-compiler-and-tooling/). Vite 8 requiere Node.js 20.19 o 22.12 y posteriores; el curso se ejecuta con Node.js 24.21.0, como los cursos de JavaScript y TypeScript.
+El curso usa las versiones vigentes el 15 de septiembre de 2026: **Vite 8.3.0** con [`@vitejs/plugin-react`](https://github.com/vitejs/vite-plugin-react/tree/b0a014da31be23c7806ffb0b997ec53b52ab68f2/packages/plugin-react) 6.1.1, **React 19.3.0**, y TypeScript 7.0.2, la versión del [curso de TypeScript](../../typescript-for-csharp-java/01-compiler-and-tooling/). Vite 8 requiere Node.js 20.19 o 22.12 y posteriores; el curso se ejecuta con Node.js 24.21.0, como los cursos de JavaScript y TypeScript.
 
 ## Crear el proyecto
 
@@ -251,7 +251,7 @@ Un desarrollador .NET puede compararlo con un archivo Razor compilado bajo deman
 
 ## Hot module replacement y Fast Refresh
 
-Edita un componente y guarda: la página cambia sin recargarse, y el componente conserva su estado. Dos mecanismos trabajan juntos. La [API HMR](https://vite.dev/guide/api-hmr) de Vite envía un mensaje a la página cuando un archivo cambia, y [React Refresh](https://github.com/facebook/react/tree/main/packages/react-refresh), la parte del plugin de React también llamada Fast Refresh, sustituye la función del componente conservando el estado que React guarda para él. El final de lo que el servidor envía para `App.tsx` muestra el código del plugin:
+Edita un componente y guarda: la página cambia sin recargarse, y el componente conserva su estado. Dos mecanismos trabajan juntos. La [API HMR](https://vite.dev/guide/api-hmr) de Vite envía un mensaje a la página cuando un archivo cambia, y [React Refresh](https://github.com/facebook/react/tree/2b19aecd0e9111b774fad0fad9862e50bcb5bc8a/packages/react-refresh), la parte del plugin de React también llamada Fast Refresh, sustituye la función del componente conservando el estado que React guarda para él. El final de lo que el servidor envía para `App.tsx` muestra el código del plugin:
 
 ```js
 // el final de GET /src/App.tsx, de expected/l01_dev_app.txt
@@ -465,5 +465,5 @@ El script y la hoja de estilos empiezan ahora por `/learn/react-vite/`, y el arc
 
 - [Vite — Getting started](https://vite.dev/guide/), [Why Vite](https://vite.dev/guide/why), [Features: TypeScript](https://vite.dev/guide/features.html#typescript), [Dependency pre-bundling](https://vite.dev/guide/dep-pre-bundling), [HMR API](https://vite.dev/guide/api-hmr), [Building for production](https://vite.dev/guide/build), [CLI](https://vite.dev/guide/cli), [Announcing Vite 8](https://vite.dev/blog/announcing-vite8)
 - [React — Build a React app from scratch](https://react.dev/learn/build-a-react-app-from-scratch), [`createRoot`](https://react.dev/reference/react-dom/client/createRoot), [`StrictMode`](https://react.dev/reference/react/StrictMode), [React 19.3](https://react.dev/blog/2026/09/09/react-19-3)
-- [`@vitejs/plugin-react`](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react), [React Refresh](https://github.com/facebook/react/tree/main/packages/react-refresh), [Oxc](https://oxc.rs/), [Rolldown](https://rolldown.rs/)
+- [`@vitejs/plugin-react`](https://github.com/vitejs/vite-plugin-react/tree/b0a014da31be23c7806ffb0b997ec53b52ab68f2/packages/plugin-react), [React Refresh](https://github.com/facebook/react/tree/2b19aecd0e9111b774fad0fad9862e50bcb5bc8a/packages/react-refresh), [Oxc](https://oxc.rs/), [Rolldown](https://rolldown.rs/)
 - [Microsoft — .NET hot reload con dotnet watch](https://learn.microsoft.com/aspnet/core/test/hot-reload)

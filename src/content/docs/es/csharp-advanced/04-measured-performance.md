@@ -307,7 +307,7 @@ Todas las dificultades de esta lección existen en la JVM, y [JMH](https://githu
 
 | BenchmarkDotNet | JMH |
 |---|---|
-| un proceso por benchmark | [`@Fork`](https://github.com/openjdk/jmh/blob/master/jmh-samples/src/main/java/org/openjdk/jmh/samples/JMHSample_12_Forking.java), cinco forks de medición por defecto, porque «JVMs are notoriously good at profile-guided optimizations» y dos pruebas en una misma JVM mezclan sus perfiles |
+| un proceso por benchmark | [`@Fork`](https://github.com/openjdk/jmh/blob/a194eead0136bb66e5e59e4fdb2e18543e730929/jmh-samples/src/main/java/org/openjdk/jmh/samples/JMHSample_12_Forking.java), cinco forks de medición por defecto, porque «JVMs are notoriously good at profile-guided optimizations» y dos pruebas en una misma JVM mezclan sus perfiles |
 | varias ejecuciones para ver la varianza entre ejecuciones | de nuevo los forks: «JVMs are complex systems, and the non-determinism is inherent for them» |
 | iteraciones de calentamiento y luego de medición | `@Warmup` y `@Measurement`: cinco iteraciones de diez segundos cada una, por defecto |
 | `[MemoryDiagnoser]`, bytes asignados por operación | `-prof gc`, cuyo `gc.alloc.rate.norm` son los bytes por operación |

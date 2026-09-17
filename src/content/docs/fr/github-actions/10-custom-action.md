@@ -88,7 +88,7 @@ try {
 
 - Le runner passe chaque input en variable d'environnement : il « convertit les noms des inputs en lettres majuscules et remplace les espaces par des caractères `_` » ([`Runner.Worker/Handlers/Handler.cs`](https://github.com/actions/runner/blob/v2.337.0/src/Runner.Worker/Handlers/Handler.cs#L181-L187)). Les tirets restent : `max-length` devient `INPUT_MAX-LENGTH`, un nom que bash ne peut pas lire avec `$INPUT_MAX-LENGTH`, mais Node si.
 - Les outputs utilisent le même fichier `$GITHUB_OUTPUT` que les steps `run:` ([leçon 4](../04-expressions-and-outputs/)) ; les erreurs, la même commande de workflow `::error::`.
-- La plupart des vraies actions passent pour cela par le paquet [`@actions/core`](https://github.com/actions/toolkit/tree/main/packages/core) (`core.getInput`, `core.setOutput`, `core.setFailed`), et doivent alors commiter `node_modules` ou un bundle `dist/index.js` : le runner n'exécute pas `npm install`. Sans dépendances, il n'y a rien à bundler.
+- La plupart des vraies actions passent pour cela par le paquet [`@actions/core`](https://github.com/actions/toolkit/tree/193fa46c20fde8b0ed54194bc08b841c78c0776d/packages/core) (`core.getInput`, `core.setOutput`, `core.setFailed`), et doivent alors commiter `node_modules` ou un bundle `dist/index.js` : le runner n'exécute pas `npm install`. Sans dépendances, il n'y a rien à bundler.
 
 Comme l'action n'est qu'un script, teste-la en local avant tout push, avec les variables que le runner définirait :
 

@@ -14,7 +14,7 @@ WebFlux, Spring Cloud Gateway, R2DBC and the reactive clients of the later lesso
 - **`Mono<T>`** emits at most one value, then completes, or fails. It is where C# would return a `Task<T>`.
 - **`Flux<T>`** emits any number of values, then completes, or fails. It is where C# would return an `IAsyncEnumerable<T>` or an `IObservable<T>`.
 
-Both implement `Publisher<T>`, one of the four interfaces of the [Reactive Streams specification](https://github.com/reactive-streams/reactive-streams-jvm/blob/master/README.md): a `Publisher` accepts a `Subscriber`, gives it a `Subscription`, and sends it values only as fast as the subscriber requests them through that subscription. The JDK carries the same four interfaces as [`java.util.concurrent.Flow`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/Flow.html). .NET has no standard equivalent; the closest relative is [Rx.NET](https://github.com/dotnet/reactive), whose `IObservable<T>` pushes without any request mechanism.
+Both implement `Publisher<T>`, one of the four interfaces of the [Reactive Streams specification](https://github.com/reactive-streams/reactive-streams-jvm/blob/a625d3aba756e9842ad1291a5b73f5db280b6168/README.md): a `Publisher` accepts a `Subscriber`, gives it a `Subscription`, and sends it values only as fast as the subscriber requests them through that subscription. The JDK carries the same four interfaces as [`java.util.concurrent.Flow`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/Flow.html). .NET has no standard equivalent; the closest relative is [Rx.NET](https://github.com/dotnet/reactive), whose `IObservable<T>` pushes without any request mechanism.
 
 | C# | Reactor | Notes |
 |---|---|---|
@@ -279,7 +279,7 @@ defaultIfEmpty: ionian
 ```
 
 - **An error ends the sequence.** `D` was never processed and `onComplete` never printed. The exception thrown inside `map` became an `onError` signal instead of propagating up the call stack; lesson 3 shows how to recover from it.
-- **`null` is refused.** The [Reactive Streams specification](https://github.com/reactive-streams/reactive-streams-jvm/blob/master/README.md#2.13) forbids `null` elements, so a mapper that returns `null` fails. `Mono.justOrEmpty` turns a possibly null value into an empty `Mono`, the way `?.` and `??` handle `null` in C#.
+- **`null` is refused.** The [Reactive Streams specification](https://github.com/reactive-streams/reactive-streams-jvm/blob/a625d3aba756e9842ad1291a5b73f5db280b6168/README.md#2.13) forbids `null` elements, so a mapper that returns `null` fails. `Mono.justOrEmpty` turns a possibly null value into an empty `Mono`, the way `?.` and `??` handle `null` in C#.
 - **`block()` on an empty `Mono` returns `null`.** It is the one place where Reactor gives `null` back, at the edge between reactive and ordinary code.
 - **A `subscribe` without an error handler** doesn't throw either. In a one-off probe with the same `map` and only a value consumer, Reactor logged `[ERROR] (main) Operator called default onErrorDropped - reactor.core.Exceptions$ErrorCallbackNotImplemented: java.lang.IllegalStateException: boom` with its stack trace, and `main` carried on. Always pass an error consumer, or let a framework subscribe for you.
 
@@ -425,5 +425,5 @@ void exercise3MetronomeInVirtualTime() {
 
 - [Reactor 3 reference guide](https://projectreactor.io/docs/core/release/reference/): [introduction to reactive programming](https://projectreactor.io/docs/core/release/reference/reactiveProgramming.html), [core features](https://projectreactor.io/docs/core/release/reference/coreFeatures.html), [testing](https://projectreactor.io/docs/core/release/reference/testing.html), [which operator do I need?](https://projectreactor.io/docs/core/release/reference/apdx-operatorChoice.html)
 - [`Flux`](https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Flux.html) and [`Mono`](https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Mono.html) Javadoc
-- [Reactive Streams specification](https://github.com/reactive-streams/reactive-streams-jvm/blob/master/README.md), [`java.util.concurrent.Flow`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/Flow.html)
+- [Reactive Streams specification](https://github.com/reactive-streams/reactive-streams-jvm/blob/a625d3aba756e9842ad1291a5b73f5db280b6168/README.md), [`java.util.concurrent.Flow`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/Flow.html)
 - .NET: [asynchronous streams](https://learn.microsoft.com/dotnet/csharp/asynchronous-programming/generate-consume-asynchronous-stream), [`System.Linq.AsyncEnumerable`](https://learn.microsoft.com/dotnet/api/system.linq.asyncenumerable), [Reactive Extensions for .NET](https://github.com/dotnet/reactive), [`FakeTimeProvider`](https://learn.microsoft.com/dotnet/api/microsoft.extensions.time.testing.faketimeprovider)

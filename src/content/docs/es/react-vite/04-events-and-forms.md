@@ -530,7 +530,7 @@ Seis confirmaciones: el montaje, y una por cada uno de los cinco caracteres de "
 ## Fuentes
 
 - React: [Responding to events](https://react.dev/learn/responding-to-events), [Reacting to input with state](https://react.dev/learn/reacting-to-input-with-state), [Sharing state between components](https://react.dev/learn/sharing-state-between-components), [You might not need an effect](https://react.dev/learn/you-might-not-need-an-effect), [`<input>`](https://react.dev/reference/react-dom/components/input), [Common components: the React event object](https://react.dev/reference/react-dom/components/common#react-event-object), [`<Profiler>`](https://react.dev/reference/react/Profiler)
-- [`@types/react` en DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/react)
+- [`@types/react` en DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/28fd9030495005fd55f5a7eb3523a84046af8a01/types/react)
 - Testing Library: [`user-event`](https://testing-library.com/docs/user-event/intro), [consultas por rol](https://testing-library.com/docs/queries/byrole); Vitest: [funciones mock](https://vitest.dev/api/mock)
 - MDN: [rol ARIA `slider`](https://developer.mozilla.org/docs/Web/Accessibility/ARIA/Reference/Roles/slider_role), [rol `alert`](https://developer.mozilla.org/docs/Web/Accessibility/ARIA/Reference/Roles/alert_role)
 - Microsoft: [Control de eventos de Blazor en ASP.NET Core](https://learn.microsoft.com/aspnet/core/blazor/components/event-handling), [enlace de datos](https://learn.microsoft.com/aspnet/core/blazor/components/data-binding), [formularios](https://learn.microsoft.com/aspnet/core/blazor/forms/)
