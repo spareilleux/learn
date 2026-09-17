@@ -1,0 +1,15 @@
+# Metadata in the format the Comfy Registry reads (https://docs.comfy.org/registry/specifications).
+# The pack is not published: it is the example of lesson 11 of the ComfyUI course.
+[project]
+name = "comfyui-ga-nodes"
+description = "Guitar Alchemist nodes: chord diagrams, fretboard control maps for ControlNet, and mode prompts."
+version = "0.1.0"
+requires-python = ">=3.10"
+# numpy and Pillow are already in ComfyUI's requirements.txt; the pack adds nothing to install.
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/spareilleux/learn/tree/main/code/comfyui/custom-nodes/ga"
+
+[tool.comfy]
+DisplayName = "Guitar Alchemist nodes (course example)"

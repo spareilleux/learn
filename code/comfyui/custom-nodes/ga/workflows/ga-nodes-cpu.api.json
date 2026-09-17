@@ -1,0 +1,9 @@
+{
+  "1": {"class_type": "GAChordDiagram", "inputs": {"chord": "Cmaj7", "size": 256}},
+  "2": {"class_type": "SaveImage", "inputs": {"filename_prefix": "ga/chord-Cmaj7", "images": ["1", 0]}},
+  "3": {"class_type": "PreviewAny", "inputs": {"source": ["1", 1]}},
+  "4": {"class_type": "GAFretboardControlMap", "inputs": {"source": "scale", "chord": "", "key": "E", "mode": "Phrygian", "fret_start": 0, "fret_end": 7, "width": 512, "height": 512, "line_width": 3}},
+  "5": {"class_type": "SaveImage", "inputs": {"filename_prefix": "ga/map-E-Phrygian", "images": ["4", 0]}},
+  "6": {"class_type": "GAScalePrompt", "inputs": {"key": "E", "mode": "Phrygian", "subject": "flamenco poster"}},
+  "7": {"class_type": "PreviewAny", "inputs": {"source": ["6", 0]}}
+}
