@@ -44,6 +44,10 @@ node 'Fret 12': mesh 0 translation (0.3240, 0.0006, 0.0000) scale (0.0024, 0.001
 in Blender: location (0.3240, 0.0000, 0.0006) scale (0.0024, 0.0520, 0.0012)
 root node 'Fretboard': rotation (0.0000, 0.0000, 0.0000, 1.0000) children 32
 
+== Modifiers and the exporter
+export_apply=False: POSITION count 24, indices 36
+export_apply=True: POSITION count 384, indices 576
+
 == Exercise 1: unlink the noise
 Rosewood pbrMetallicRoughness keys: ['baseColorTexture', 'metallicFactor', 'roughnessFactor'] | roughnessFactor 0.8000
 

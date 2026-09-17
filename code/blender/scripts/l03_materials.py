@@ -111,6 +111,24 @@ r("root node 'Fretboard': rotation", vec(nodes["Fretboard"].get("rotation", [0, 
   len(nodes["Fretboard"]["children"]))
 r("# .bin size in bytes:", os.path.getsize(os.path.join(gltf_dir, "fretboard.bin")))
 
+r.section("Modifiers and the exporter")
+bpy.ops.mesh.primitive_cube_add(size=0.05, location=(0, 0.1, 0))
+cube = bpy.context.object
+cube.modifiers.new("Subdivision", "SUBSURF").levels = 2
+bpy.ops.object.select_all(action="DESELECT")
+cube.select_set(True)
+os.makedirs(os.path.join(os.path.dirname(r.path), "l03-modifiers"), exist_ok=True)
+mod_path = os.path.join(os.path.dirname(r.path), "l03-modifiers", "cube.gltf")
+for apply in (False, True):
+    bpy.ops.export_scene.gltf(filepath=mod_path, export_format="GLTF_SEPARATE", use_selection=True, export_apply=apply)
+    with open(mod_path, encoding="utf-8") as fp:
+        doc = json.load(fp)
+    prim = doc["meshes"][0]["primitives"][0]
+    r(f"export_apply={apply}: POSITION count {doc['accessors'][prim['attributes']['POSITION']]['count']},"
+      f" indices {doc['accessors'][prim['indices']]['count']}")
+D.objects.remove(cube)
+bpy.ops.export_scene.gltf(filepath=gltf_path, export_format="GLTF_SEPARATE")
+
 r.section("Exercise 1: unlink the noise")
 rosewood.node_tree.links.remove(next(l for l in rosewood.node_tree.links if l.from_node.name == "Noise Texture"))
 bpy.ops.export_scene.gltf(filepath=gltf_path, export_format="GLTF_SEPARATE")
