@@ -119,6 +119,18 @@ Hello from 3.24.1 on 6.18.40.1-microsoft-standard-WSL2
 Container 2b900903f6c8 exited with code 0
 ```
 
+Le programme utilise les quatre objets dans l'ordre, et son bloc finally nettoie même quand le conteneur ne démarre pas.
+
+```mermaid
+flowchart TB
+    svc["WslcService : composants manquants, version"] --> sess["Session : démarrer, télécharger l'image"]
+    sess --> create["Session : créer le conteneur"]
+    create --> run["Container : démarrer le processus initial"]
+    run --> proc["Process : sortie et code de sortie, par événements"]
+    proc --> clean["finally : supprimer le conteneur, terminer la session"]
+    run -->|"Start échoue"| clean
+```
+
 Le programme complet, qui supprime aussi un conteneur laissé par une exécution plantée, est dans [`code/wsl-containers/wslc-host`](https://github.com/spareilleux/learn/tree/main/code/wsl-containers/wslc-host).
 
 :::caution[Pas de réseau par défaut]

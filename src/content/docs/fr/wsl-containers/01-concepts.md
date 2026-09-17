@@ -37,6 +37,27 @@ La nouveauté : avec WSL containers, **le moteur de conteneurs fait partie de WS
 1. **La CLI `wslc.exe`** — pour construire, lancer et inspecter des conteneurs depuis un terminal. Elle reprend les habitudes de la CLI Docker.
 2. **L'API WSL container** — un paquet NuGet ([`Microsoft.WSL.Containers`](https://www.nuget.org/packages/Microsoft.WSL.Containers)) qui permet à une **application Windows** d'utiliser des conteneurs Linux dans sa propre logique (C#, et C++/WinRT en préversion).
 
+Les deux composants pilotent des conteneurs Linux à travers WSL, dont la machine virtuelle légère fournit le noyau Linux.
+
+```mermaid
+flowchart LR
+    subgraph windows["Windows"]
+        cli["CLI wslc.exe"]
+        app["application Windows avec Microsoft.WSL.Containers"]
+    end
+    subgraph vm["WSL 2 : VM légère avec un vrai noyau Linux"]
+        engine["moteur de conteneurs, intégré à WSL"]
+        c1["conteneur"]
+        c2["conteneur"]
+    end
+    registry["registre, comme docker.io"]
+    cli --> engine
+    app --> engine
+    registry -->|"image"| engine
+    engine --> c1
+    engine --> c2
+```
+
 ## À retenir
 
 - Image = modèle ; conteneur = instance en cours d'exécution.

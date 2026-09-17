@@ -81,6 +81,23 @@ class InfoController {
 
 A `Containerfile` (same syntax as a `Dockerfile`) describes how to build the image. Both apps use a **multi-stage build**: a first stage with the full SDK compiles the application, a second stage with only the runtime receives the result. The build tools never reach the final image.
 
+The diagram follows the files through the two stages: only the published application reaches the final image.
+
+```mermaid
+flowchart LR
+    context["build context: the project folder"]
+    subgraph stage1["Stage 1: full SDK"]
+        restore["restore the dependencies"] --> publish["compile and publish"]
+    end
+    subgraph stage2["Stage 2: runtime only"]
+        app["published application"]
+    end
+    image["final image, without the build tools"]
+    context -->|"COPY"| restore
+    publish -->|"COPY --from=build"| app
+    stage2 --> image
+```
+
 **C#** — `csharp-api/Containerfile`:
 
 ```dockerfile

@@ -119,6 +119,18 @@ Hello from 3.24.1 on 6.18.40.1-microsoft-standard-WSL2
 Container 2b900903f6c8 exited with code 0
 ```
 
+The program uses the four objects in order, and its finally block cleans up even when the container fails to start.
+
+```mermaid
+flowchart TB
+    svc["WslcService: missing components, version"] --> sess["Session: start, pull the image"]
+    sess --> create["Session: create the container"]
+    create --> run["Container: start the init process"]
+    run --> proc["Process: output and exit code, as events"]
+    proc --> clean["finally: delete the container, terminate the session"]
+    run -->|"Start fails"| clean
+```
+
 The full program, which also removes a container left by a crashed run, is in [`code/wsl-containers/wslc-host`](https://github.com/spareilleux/learn/tree/main/code/wsl-containers/wslc-host).
 
 :::caution[No network by default]
