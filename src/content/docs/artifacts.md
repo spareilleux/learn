@@ -30,3 +30,9 @@ How [ComfyUI](https://docs.comfy.org/) image generation was wired into Demerzel 
 [Open the artifact](https://claude.ai/code/artifact/f685cdc7-8e42-4b1f-9711-c9abb14d378a) · French and English · 2026-08-20
 
 A 3D bench for placing two microphones on an acoustic guitar. Move the microphones and read the path difference, the time offset and the frequency of the first comb-filter notch when the two channels are summed to mono. It can overlay the model on a camera feed to check a real setup.
+
+### Atlas des Douze
+
+[Open the artifact](https://claude.ai/artifact/Qh4oMxFH5aPx9dYC4xGjyn) · French and English · 2026-09-17 · GA at `a826864`
+
+Eleven interactive 3D plates (three.js WebGPU) for the Music theory for Guitar Alchemist course: the twelve pitch classes set out as a workshop, a neck, a helix, bracelets, the seven modes, the interval vector, the circle of fifths, the chords of a key, a cadence machine, OPTIC-K and tunings. Each plate's side rail explains what it shows and where the course and GA diverge. Some stone and wood textures were generated with ComfyUI (SDXL base 1.0), and the page says so next to each one.

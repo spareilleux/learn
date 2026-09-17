@@ -30,3 +30,9 @@ Cómo se conectó la generación de imágenes de [ComfyUI](https://docs.comfy.or
 [Abrir el artefacto](https://claude.ai/code/artifact/f685cdc7-8e42-4b1f-9711-c9abb14d378a) · francés e inglés · 2026-08-20
 
 Un banco 3D para colocar dos micrófonos en una guitarra acústica. Mueve los micrófonos y lee la diferencia de recorrido, el desfase temporal y la frecuencia de la primera cancelación del filtro peine cuando los dos canales se suman en mono. Puede superponer el modelo a la imagen de una cámara para comprobar una instalación real.
+
+### Atlas des Douze
+
+[Abrir el artefacto](https://claude.ai/artifact/Qh4oMxFH5aPx9dYC4xGjyn) · francés e inglés · 2026-09-17 · GA en `a826864`
+
+Once láminas 3D interactivas (three.js WebGPU) para el curso Teoría musical para Guitar Alchemist: las doce clases de altura dispuestas como taller, mástil, hélice, brazaletes, los siete modos, el vector interválico, el círculo de quintas, los acordes de una tonalidad, una máquina de cadencias, OPTIC-K y afinaciones. El panel lateral de cada lámina explica lo que muestra y dónde divergen el curso y GA. Algunas texturas de piedra y madera se generaron con ComfyUI (SDXL base 1.0), y la página lo indica junto a cada una.
