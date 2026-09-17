@@ -9,13 +9,13 @@ Código: [`code/threejs/ga-lab`](https://github.com/spareilleux/learn/tree/c1336
 
 ## Objetivo
 
-Las lecciones 1 a 13 enseñaron three.js y portaron el mástil de GuitarAlchemist. Esta lección plantea las preguntas con las que se encontrará a continuación el código 3D de GA, y las responde midiendo en lugar de con reglas empíricas: cómo dibujar muchos mástiles, cómo animar cuerdas, cómo seleccionar entre 10 000 notas, cómo mostrar 313 047 voicings, cuánto cuestan las texturas, las sombras y el bloom, cómo tratan un motor de física y un casco una guitarra a tamaño real, y qué ocurre en una GPU débil.
+Las lecciones 1 a 13 enseñaron three.js y portaron el mástil de GuitarAlchemist. Esta lección plantea las preguntas con las que se encontrará a continuación el código 3D de GA, y las responde midiendo en lugar de con reglas empíricas: cómo dibujar muchos mástiles, cómo animar cuerdas, cómo seleccionar entre 10 000 notas, cómo mostrar 313 047 voicings, cuánto cuestan las texturas, las sombras y el bloom, cómo tratan un motor de física y un casco una guitarra a tamaño real, y qué ocurre en una GPU débil.
 
 Todos los experimentos siguen el mismo protocolo. Su archivo JSON en `experiments/` contiene una pregunta, una hipótesis y predicciones numéricas, escritas y confirmadas en un commit el 16 de septiembre de 2026, antes de la ejecución medida. La ejecución escribió `results/<experiment>/results.json` el 17 de septiembre. Los veredictos de abajo comparan ambos, y las predicciones que fallaron se quedan en las tablas: son la mayor parte de lo que enseñó este laboratorio.
 
 ## Cómo se hicieron las medidas
 
-**Máquina.** Windows 11 Pro 10.0.26200, Intel Core Ultra 9 285K, 64 GB, una GPU activada, una NVIDIA GeForce RTX 5080 (driver 610.88), Chromium 153.0.8010.12 de Playwright 1.63.0, Node.js 24.12, three.js r186. Cada `results.json` repite estos datos.
+**Máquina.** Windows 11 Pro 10.0.26200, Intel Core Ultra 9 285K, 64 GB, una GPU activada, una NVIDIA GeForce RTX 5080 (driver 610.88), Chromium 153.0.8010.12 de Playwright 1.63.0, Node.js 24.12, three.js r186. Cada `results.json` repite estos datos.
 
 **Fotogramas.** Una página no usa `requestAnimationFrame`: renderiza fotograma tras fotograma en un bucle, con Chromium iniciado con `--disable-gpu-vsync` y `--disable-frame-rate-limit`, de modo que la pantalla nunca marca su ritmo. Cada página renderiza a un tamaño fijo, y WebGPU y WebGL 2 se comparan al mismo tamaño. Tras 30 fotogramas de calentamiento, se miden 240 fotogramas (menos donde se indica), y las tablas dan medianas:
 
@@ -50,7 +50,7 @@ Los comandos son los mismos en Windows (Git Bash), Linux y macOS; `wood-ktx2.sh`
 
 | Estrategia | Draw calls, 1 mástil | CPU ms, 1 mástil | Draw calls, 16 mástiles | CPU ms, 16 mástiles | GPU ms, 16 mástiles |
 | --- | --- | --- | --- | --- | --- |
-| ga | 72 | 0.715 | 1 137 | 2.910 | 0.134 |
+| ga | 72 | 0.715 | 1 137 | 2.910 | 0.134 |
 | instanced | 7 | 0.405 | 97 | 1.155 | 0.026 |
 | batched | 44 | 0.385 | 689 | 0.415 | 0.023 |
 | merged | 4 | 0.315 | 19 | 0.360 | 0.025 |
@@ -90,84 +90,84 @@ Pixel ratio 3 de GA frente a 1, un mástil: 0.040 frente a 0.017 GPU ms. En WebG
 
 **Qué significa para GA.** Las cuerdas en TSL de la lección 13 son la elección correcta en tiempo de CPU, y cuestan algo más de tiempo de GPU que los vértices desplazados, ya que el desplazamiento se calcula por vértice en cada fotograma en lugar de subirse: aun así 0.05 ms para 600 cuerdas. Los morph targets en un `InstancedMesh` necesitaron dos arreglos, detallados más abajo: en r186 su target debe marcarse `morphTargetsRelative`, o la malla base encoge con la influencia, y un `InstancedMesh` de una sola instancia falla sin `morphTargetInfluences`, mientras que uno de varias instancias falla con ellas.
 
-## 3. Seleccionar una nota entre 10 000
+## 3. Seleccionar una nota entre 10 000
 
-**Hipótesis.** `Raycaster` prueba cada instancia en la CPU y crece con el número de notas; una pasada de IDs en la GPU cuesta una lectura de vuelta que no crece. Con 10 000 notas la selección en GPU es más rápida.
+**Hipótesis.** `Raycaster` prueba cada instancia en la CPU y crece con el número de notas; una pasada de IDs en la GPU cuesta una lectura de vuelta que no crece. Con 10 000 notas la selección en GPU es más rápida.
 
 **Montaje.** [`03-picking`](https://github.com/spareilleux/learn/blob/c1336fd/code/threejs/ga-lab/src/03-picking/main.ts) dispone notas como pequeños icosaedros de 80 triángulos en un único `InstancedMesh`, y selecciona 200 puntos pseudoaleatorios fijos dos veces: con `Raycaster.intersectObject`, y renderizando una vista de 1 × 1 píxel (`camera.setViewOffset`) de las instancias coloreadas por `instanceIndex + 1` en un render target, leído de vuelta con `readRenderTargetPixelsAsync`.
 
 | Notas | Raycaster ms por selección | Pasada de IDs en GPU ms por selección | Coincidencia |
 | --- | --- | --- | --- |
-| 1 000 | 0.070 | 3.000 | 200/200 |
-| 10 000 | 0.465 | 3.395 | 200/200 |
-| 100 000 | 4.475 | 3.925 | 200/200 |
-| 10 000, WebGL 2 | 0.495 | 16.925 | 200/200 |
+| 1 000 | 0.070 | 3.000 | 200/200 |
+| 10 000 | 0.465 | 3.395 | 200/200 |
+| 100 000 | 4.475 | 3.925 | 200/200 |
+| 10 000, WebGL 2 | 0.495 | 16.925 | 200/200 |
 
 | Predicción | Medido | Veredicto |
 | --- | --- | --- |
-| Raycaster, 10 000 notas: de 3 a 8 ms | 0.465 ms | incorrecta |
-| Pasada de IDs en GPU, 10 000 notas, WebGPU: de 1 a 3 ms | 3.4 ms | incorrecta, por poco |
+| Raycaster, 10 000 notas: de 3 a 8 ms | 0.465 ms | incorrecta |
+| Pasada de IDs en GPU, 10 000 notas, WebGPU: de 1 a 3 ms | 3.4 ms | incorrecta, por poco |
 | Coincidencia de al menos el 98 % | 100 % | correcta |
-| Raycaster, 1 000 notas: menos de una cuarta parte de 10 000 | 15 % | correcta |
+| Raycaster, 1 000 notas: menos de una cuarta parte de 10 000 | 15 % | correcta |
 
-**Qué significa para GA.** Conserva `Raycaster` para un diapasón: incluso 10 000 notas toman medio milisegundo, siete veces menos que la lectura de vuelta de la GPU, que paga un viaje de ida y vuelta a la GPU sea cual sea el número. Los dos se cruzan hacia las 100 000 notas. En WebGL 2 la lectura de vuelta tardó 17 ms, un fotograma: allí una pasada de IDs haría esperar un fotograma a cada clic.
+**Qué significa para GA.** Conserva `Raycaster` para un diapasón: incluso 10 000 notas toman medio milisegundo, siete veces menos que la lectura de vuelta de la GPU, que paga un viaje de ida y vuelta a la GPU sea cual sea el número. Los dos se cruzan hacia las 100 000 notas. En WebGL 2 la lectura de vuelta tardó 17 ms, un fotograma: allí una pasada de IDs haría esperar un fotograma a cada clic.
 
 ## 4. Brazaletes de clases de altura, transpuestos en la CPU o en TSL
 
-**Hipótesis.** Transponer 4 096 brazaletes en la CPU paga 49 152 matrices y su subida en cada fotograma; en TSL sube un solo número.
+**Hipótesis.** Transponer 4 096 brazaletes en la CPU paga 49 152 matrices y su subida en cada fotograma; en TSL sube un solo número.
 
 **Montaje.** [`04-bracelet`](https://github.com/spareilleux/learn/blob/c1336fd/code/threejs/ga-lab/src/04-bracelet/main.ts) dibuja cada conjunto de clases de altura como un anillo de 12 cuentas, iluminadas para sus miembros, y gira cada anillo un paso de transposición que cambia en cada fotograma: escribiendo las matrices del `InstancedMesh` (`cpu`), o con un uniform de paso en un `positionNode` sobre atributos por cuenta (`tsl`). La aritmética de conjuntos está en [`pcs.ts`](https://github.com/spareilleux/learn/blob/c1336fd/code/threejs/ga-lab/src/04-bracelet/pcs.ts), con pruebas unitarias.
 
 | Brazaletes | CPU ms, cpu | CPU ms, tsl | GPU ms, cpu | GPU ms, tsl |
 | --- | --- | --- | --- | --- |
 | 352 | 0.495 | 0.335 | 0.103 | 0.102 |
-| 4 096 | 2.455 | 0.290 | 1.012 | 1.024 |
+| 4 096 | 2.455 | 0.290 | 1.012 | 1.024 |
 
 | Predicción | Medido | Veredicto |
 | --- | --- | --- |
-| Ruta CPU, 4 096: al menos 4 ms | 2.5 ms | incorrecta |
-| Ruta TSL, 4 096: por debajo de 0.5 ms | 0.3 ms | correcta |
+| Ruta CPU, 4 096: al menos 4 ms | 2.5 ms | incorrecta |
+| Ruta TSL, 4 096: por debajo de 0.5 ms | 0.3 ms | correcta |
 | GPU dentro de un 30 % | dentro de un 1 % | correcta |
-| Píxeles que difieren entre las rutas: menos del 1 % | 0 píxeles, para 352 y para 4 096 | correcta |
+| Píxeles que difieren entre las rutas: menos del 1 % | 0 píxeles, para 352 y para 4 096 | correcta |
 | Clases bajo transposición, y con inversión: 352 y 224 | 352 y 224 (prueba unitaria) | correcta |
 
 ![Filas de anillos de doce pequeñas cuentas sobre un fondo oscuro, alejándose hacia el fondo, cada anillo con algunas cuentas iluminadas en amarillo.](https://raw.githubusercontent.com/spareilleux/learn/c1336fd/code/threejs/ga-lab/results/04-bracelet/tsl-352.webp)
 
-**Qué significa para GA.** Una animación que mueve todas las instancias de la misma manera pertenece al shader: 8 veces menos CPU para los 4 096 conjuntos. Para las 352 clases de transposición que mostraría una vista de GA, ambas rutas se quedan por debajo de medio milisegundo.
+**Qué significa para GA.** Una animación que mueve todas las instancias de la misma manera pertenece al shader: 8 veces menos CPU para los 4 096 conjuntos. Para las 352 clases de transposición que mostraría una vista de GA, ambas rutas se quedan por debajo de medio milisegundo.
 
-## 5. La nube de voicings de OPTIC-K, hasta 1 000 000 de puntos
+## 5. La nube de voicings de OPTIC-K, hasta 1 000 000 de puntos
 
-**Hipótesis.** Los puntos de un píxel siguen siendo baratos hasta 1 000 000; los octaedros se quedan atrás; animar 1 000 000 de puntos en la CPU está limitado por el bucle y la subida, que un compute shader elimina.
+**Hipótesis.** Los puntos de un píxel siguen siendo baratos hasta 1 000 000; los octaedros se quedan atrás; animar 1 000 000 de puntos en la CPU está limitado por el bucle y la subida, que un compute shader elimina.
 
-**Montaje.** [`scripts/optick-project.ts`](https://github.com/spareilleux/learn/blob/c1336fd/code/threejs/ga-lab/scripts/optick-project.ts) abre el índice OPTIC-K real de GA en solo lectura, con la disposición OPTK versión 4 de [`OptickIndexReader.cs`](https://github.com/GuitarAlchemist/ga/blob/66bdd049ad3f4b10f996e4cc6a9c6e58797cf30e/Common/GA.Business.ML/Search/OptickIndexReader.cs): 313 047 voicings (297 910 de guitarra, 7 795 de bajo, 7 342 de ukelele) de **124** dimensiones, no las 112 que suponía la pregunta del experimento. Un análisis de componentes principales de 62 610 de ellos da dos proyecciones 3D, componentes 1 a 3 (23.4 % de la varianza) y 4 a 6 (14.5 %), en 1.3 s. [`05-optick-cloud`](https://github.com/spareilleux/learn/blob/c1336fd/code/threejs/ga-lab/src/05-optick-cloud/main.ts) las dibuja a 1280 × 720 como `Points`, como octaedros con instancing, y funde una proyección en la otra en cada fotograma en la CPU o en un compute shader. Más allá de 313 047 puntos repite los voicings con un pequeño desplazamiento.
+**Montaje.** [`scripts/optick-project.ts`](https://github.com/spareilleux/learn/blob/c1336fd/code/threejs/ga-lab/scripts/optick-project.ts) abre el índice OPTIC-K real de GA en solo lectura, con la disposición OPTK versión 4 de [`OptickIndexReader.cs`](https://github.com/GuitarAlchemist/ga/blob/66bdd049ad3f4b10f996e4cc6a9c6e58797cf30e/Common/GA.Business.ML/Search/OptickIndexReader.cs): 313 047 voicings (297 910 de guitarra, 7 795 de bajo, 7 342 de ukelele) de **124** dimensiones, no las 112 que suponía la pregunta del experimento. Un análisis de componentes principales de 62 610 de ellos da dos proyecciones 3D, componentes 1 a 3 (23.4 % de la varianza) y 4 a 6 (14.5 %), en 1.3 s. [`05-optick-cloud`](https://github.com/spareilleux/learn/blob/c1336fd/code/threejs/ga-lab/src/05-optick-cloud/main.ts) las dibuja a 1280 × 720 como `Points`, como octaedros con instancing, y funde una proyección en la otra en cada fotograma en la CPU o en un compute shader. Más allá de 313 047 puntos repite los voicings con un pequeño desplazamiento.
 
 | Ejecución | CPU ms | GPU ms | Wall ms |
 | --- | --- | --- | --- |
-| Points, 1 000 | 0.330 | 0.013 | 3.595 |
-| Points, 313 000 | 0.260 | 0.067 | 3.365 |
-| Points, 1 000 000 | 0.300 | 0.173 | 3.565 |
-| Octaedros, 1 000 000 | 0.300 | 3.753 | 5.690 |
-| Morph en CPU, 1 000 000 | 4.055 | 0.170 | 9.430 |
-| Morph en compute, 1 000 000 | 0.335 | 0.511 | 3.580 |
-| Morph en compute, 1 000 000, WebGL 2 | 0.280 | 2.785 | 3.490 |
+| Points, 1 000 | 0.330 | 0.013 | 3.595 |
+| Points, 313 000 | 0.260 | 0.067 | 3.365 |
+| Points, 1 000 000 | 0.300 | 0.173 | 3.565 |
+| Octaedros, 1 000 000 | 0.300 | 3.753 | 5.690 |
+| Morph en CPU, 1 000 000 | 4.055 | 0.170 | 9.430 |
+| Morph en compute, 1 000 000 | 0.335 | 0.511 | 3.580 |
+| Morph en compute, 1 000 000, WebGL 2 | 0.280 | 2.785 | 3.490 |
 
 | Predicción | Medido | Veredicto |
 | --- | --- | --- |
-| Points, 1 000 000: GPU por debajo de 3 ms | 0.17 ms | correcta |
-| Octaedros, 1 000 000: al menos 5x Points | 22x | correcta |
-| Morph en CPU, 1 000 000: CPU de al menos 8 ms | 4.1 ms (wall 9.4 ms) | incorrecta |
-| Morph en compute, 1 000 000: CPU por debajo de 1 ms | 0.34 ms | correcta |
+| Points, 1 000 000: GPU por debajo de 3 ms | 0.17 ms | correcta |
+| Octaedros, 1 000 000: al menos 5x Points | 22x | correcta |
+| Morph en CPU, 1 000 000: CPU de al menos 8 ms | 4.1 ms (wall 9.4 ms) | incorrecta |
+| Morph en compute, 1 000 000: CPU por debajo de 1 ms | 0.34 ms | correcta |
 | Compute no se ejecuta en WebGL 2 | se ejecuta: 2 compute calls, 2.8 GPU ms | incorrecta |
 
 ![Una nube de cientos de miles de puntos diminutos sobre un fondo oscuro, estirada en bandas diagonales, coloreada del verde azulado al rosa pasando por el blanco.](https://raw.githubusercontent.com/spareilleux/learn/c1336fd/code/threejs/ga-lab/results/05-optick-cloud/points-313k.webp)
 
-**Qué significa para GA.** Todos los voicings de GA caben en un draw call de puntos a 0.07 GPU ms, y un morph de 1 000 000 de puntos en un compute shader cuesta medio milisegundo. r186 ejecuta el compute de TSL también en WebGL 2, mediante transform feedback, a 5 veces el tiempo de GPU: una vista basada en compute no tiene por qué recurrir a la CPU en máquinas sin WebGPU. Las dos primeras componentes principales contienen menos de una cuarta parte de la varianza: la forma de la nube es una vista, no un mapa de distancias, y una respuesta de vecino más cercano debe venir del índice, no de la imagen.
+**Qué significa para GA.** Todos los voicings de GA caben en un draw call de puntos a 0.07 GPU ms, y un morph de 1 000 000 de puntos en un compute shader cuesta medio milisegundo. r186 ejecuta el compute de TSL también en WebGL 2, mediante transform feedback, a 5 veces el tiempo de GPU: una vista basada en compute no tiene por qué recurrir a la CPU en máquinas sin WebGPU. Las dos primeras componentes principales contienen menos de una cuarta parte de la varianza: la forma de la nube es una vista, no un mapa de distancias, y una respuesta de vecino más cercano debe venir del índice, no de la imagen.
 
 ## 6. Madera del diapasón: texturas, KTX2 y una madera procedural
 
 **Hipótesis.** Una textura RGBA8 de 2048 × 2048 con mipmaps ocupa unos 22 MB; comprimida en KTX2 (BC7 en esta GPU), una cuarta parte; una madera procedural no ocupa nada pero cuesta ruido por píxel.
 
-**Montaje.** [`06-wood-textures`](https://github.com/spareilleux/learn/blob/c1336fd/code/threejs/ga-lab/src/06-wood-textures/main.ts) llena un fotograma de 1920 × 1080 con el diapasón, visto desde arriba, texturizado con un PNG de madera de 2048 × 2048 generado por [`wood-texture.ts`](https://github.com/spareilleux/learn/blob/c1336fd/code/threejs/ga-lab/scripts/wood-texture.ts) (1 217 318 bytes), el mismo comprimido por KTX-Software 4.4.2 a UASTC con zstd (1 018 936 bytes) y a Basis LZ (145 002 bytes), una madera en TSL hecha de `mx_noise_float`, o un color plano. Las maderas de ComfyUI (el experimento 4 del laboratorio GA de ComfyUI) no existían cuando se ejecutó esto: esa ejecución está **pendiente**. La memoria de texturas es `renderer.info.memory.texturesSize` menos los 23.73 MB de la ejecución de color plano, que son los render targets.
+**Montaje.** [`06-wood-textures`](https://github.com/spareilleux/learn/blob/c1336fd/code/threejs/ga-lab/src/06-wood-textures/main.ts) llena un fotograma de 1920 × 1080 con el diapasón, visto desde arriba, texturizado con un PNG de madera de 2048 × 2048 generado por [`wood-texture.ts`](https://github.com/spareilleux/learn/blob/c1336fd/code/threejs/ga-lab/scripts/wood-texture.ts) (1 217 318 bytes), el mismo comprimido por KTX-Software 4.4.2 a UASTC con zstd (1 018 936 bytes) y a Basis LZ (145 002 bytes), una madera en TSL hecha de `mx_noise_float`, o un color plano. Las maderas de ComfyUI (el experimento 4 del laboratorio GA de ComfyUI) no existían cuando se ejecutó esto: esa ejecución está **pendiente**. La memoria de texturas es `renderer.info.memory.texturesSize` menos los 23.73 MB de la ejecución de color plano, que son los render targets.
 
 | Ejecución | Texturas MB | GPU ms |
 | --- | --- | --- |
@@ -264,16 +264,16 @@ Pixel ratio 3 de GA frente a 1, un mástil: 0.040 frente a 0.017 GPU ms. En WebG
 
 ## 10. Una pared de guitarras: LOD y culling
 
-**Hipótesis.** La mayoría de 1 000 cuerpos están lejos o fuera de la vista: el LOD divide los triángulos por 10, y desactivar el culling los dibuja todos.
+**Hipótesis.** La mayoría de 1 000 cuerpos están lejos o fuera de la vista: el LOD divide los triángulos por 10, y desactivar el culling los dibuja todos.
 
-**Montaje.** [`guitar-body.ts`](https://github.com/spareilleux/learn/blob/c1336fd/code/threejs/ga-lab/scripts/guitar-body.ts) construye un cuerpo de guitarra de forma procedural, lo extruye y lo simplifica con meshoptimizer en un archivo glTF de tres niveles: 14 360, 3 590 y 718 triángulos. [`10-lod-culling`](https://github.com/spareilleux/learn/blob/c1336fd/code/threejs/ga-lab/src/10-lod-culling/main.ts) cuelga 1 000 de ellos en una pared, desplaza la cámara a lo largo de ella y promedia los contadores sobre los 240 fotogramas del recorrido.
+**Montaje.** [`guitar-body.ts`](https://github.com/spareilleux/learn/blob/c1336fd/code/threejs/ga-lab/scripts/guitar-body.ts) construye un cuerpo de guitarra de forma procedural, lo extruye y lo simplifica con meshoptimizer en un archivo glTF de tres niveles: 14 360, 3 590 y 718 triángulos. [`10-lod-culling`](https://github.com/spareilleux/learn/blob/c1336fd/code/threejs/ga-lab/src/10-lod-culling/main.ts) cuelga 1 000 de ellos en una pared, desplaza la cámara a lo largo de ella y promedia los contadores sobre los 240 fotogramas del recorrido.
 
 | Ejecución | Draw calls, media del recorrido | Triángulos, media del recorrido | CPU ms | GPU ms |
 | --- | --- | --- | --- | --- |
-| Detalle completo, culling activado | 334 | 4 780 804 | 0.970 | 0.210 |
-| LOD, culling activado | 334 | 428 091 | 2.365 | 0.068 |
-| Detalle completo, culling desactivado | 1 001 | 14 360 001 | 1.560 | 0.607 |
-| LOD, culling desactivado | 1 001 | 1 326 075 | 3.450 | 0.139 |
+| Detalle completo, culling activado | 334 | 4 780 804 | 0.970 | 0.210 |
+| LOD, culling activado | 334 | 428 091 | 2.365 | 0.068 |
+| Detalle completo, culling desactivado | 1 001 | 14 360 001 | 1.560 | 0.607 |
+| LOD, culling desactivado | 1 001 | 1 326 075 | 3.450 | 0.139 |
 
 | Predicción | Medido | Veredicto |
 | --- | --- | --- |
@@ -365,7 +365,7 @@ Estas son las ejecuciones con la CCD desactivada; con la CCD en la púa o en la 
 | CPU ms por fotograma | 0.400 | 0.355 |
 | Primer fotograma desde la navegación (servidor de desarrollo) | 958 ms | 528 ms |
 | Heap de JavaScript tras los fotogramas | 36.96 MB | 26.98 MB |
-| Draw calls, triángulos | 7, 11 919 | 7, 11 919 |
+| Draw calls, triángulos | 7, 11 919 | 7, 11 919 |
 | Bundle de producción, gzip | 565 kB | 210 kB |
 | Del cual no es three.js | 195 kB | 2 kB |
 
@@ -424,7 +424,7 @@ Controlador adaptativo en SwiftShader, pixel ratio en cada comprobación: 2 (111
 ## Ejercicios
 
 1. Comparte los materiales entre 16 mástiles `Fretboard3D` y predice los draw calls y los programas antes de medir con `run.mjs 01-neck --run instanced-16`.
-2. Demuestra el suelo de la pasada de IDs en GPU: ejecuta el experimento 3 con 1 000 000 de notas. Predice primero ambos tiempos de selección.
+2. Demuestra el suelo de la pasada de IDs en GPU: ejecuta el experimento 3 con 1 000 000 de notas. Predice primero ambos tiempos de selección.
 3. Añade en `vite.config.ts` un alias de `three` a `three/webgpu` para el build de R3F y vuelve a ejecutar `bundle-sizes.mjs`. ¿Cuánto debería desaparecer?
 4. ¿Por qué el controlador adaptativo se estabilizó en 0.655 y no en 0.8? Calcula el ratio con el que SwiftShader tardaría 15.9 ms, a partir de la tabla de ratios fijos.
 5. Explica por qué la CCD en la púa no la detuvo a 60 pasos por segundo, y cambia `e11-rapier-pick.ts` para que lo haga.
@@ -440,7 +440,7 @@ Los 16 mástiles tienen 97 draw calls y 73 programas porque cada mástil crea su
 <details>
 <summary>Solución 2</summary>
 
-`Raycaster` creció de forma más o menos lineal: 0.07, 0.465 y 4.475 ms para 1 000, 10 000 y 100 000 notas, así que unos 45 ms para 1 000 000. La pasada de IDs pasó de 3.0 a 3.9 ms, mientras su render crecía de 0.04 a 1.3 GPU ms: con 1 000 000 de notas el render de 1 píxel sigue dibujando todas las instancias, unos 13 ms de GPU, así que unos 16 ms por selección. La selección en GPU debería ganar por unas 3 veces. Ejecuta `node ga-lab/scripts/run.mjs 03-picking` tras añadir una ejecución con `notes=1000000`; los números de arriba son extrapolados (*por verificar*).
+`Raycaster` creció de forma más o menos lineal: 0.07, 0.465 y 4.475 ms para 1 000, 10 000 y 100 000 notas, así que unos 45 ms para 1 000 000. La pasada de IDs pasó de 3.0 a 3.9 ms, mientras su render crecía de 0.04 a 1.3 GPU ms: con 1 000 000 de notas el render de 1 píxel sigue dibujando todas las instancias, unos 13 ms de GPU, así que unos 16 ms por selección. La selección en GPU debería ganar por unas 3 veces. Ejecuta `node ga-lab/scripts/run.mjs 03-picking` tras añadir una ejecución con `notes=1000000`; los números de arriba son extrapolados (*por verificar*).
 
 </details>
 
