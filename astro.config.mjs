@@ -228,6 +228,18 @@ export default defineConfig({
 					],
 				},
 				{
+					label: '3D & graphics',
+					translations: { fr: '3D et graphisme', es: '3D y gráficos' },
+					items: [
+						{
+							label: 'Blender for developers',
+							translations: { fr: 'Blender pour les développeurs', es: 'Blender para desarrolladores' },
+							collapsed: true,
+							items: [{ autogenerate: { directory: 'blender' } }],
+						},
+					],
+				},
+				{
 					label: 'Music',
 					translations: { fr: 'Musique', es: 'Música' },
 					items: [
