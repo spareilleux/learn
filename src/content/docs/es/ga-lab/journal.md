@@ -14,7 +14,7 @@ sidebar:
 - [ ] P4, pasada de render con IA
 - [ ] P5, pulseras imprimibles en 3D
 - [ ] P6, cadena completa
-- [ ] P7, modelo de tocabilidad
+- [x] P7, modelo de tocabilidad
 
 ## QA
 
@@ -29,6 +29,10 @@ Lo que el laboratorio encontró en GuitarAlchemist/ga midiendo, no leyendo. Los 
 | El mismo commit exporta el mismo índice | La deduplicación conserva el voicing más barato de cada grupo, la generación es paralela y los empates van al primero que llega | [`OptickIndexWriter.cs`](https://github.com/GuitarAlchemist/ga/blob/66bdd049ad3f4b10f996e4cc6a9c6e58797cf30e/Demos/Music%20Theory/FretboardVoicingsCLI/OptickIndexWriter.cs) | Dos exportaciones de una misma compilación: todos los vectores comunes idénticos, 70 voicings presentes en una y ausentes de la otra | Reproducido. Lo que fija los datos es el hash del archivo, no el commit |
 | `--export-max N` muestrea el índice | La opción conserva los N primeros voicings en bruto en orden de generación, que empieza alto en el mástil | [`OptickIndexWriter.cs`](https://github.com/GuitarAlchemist/ga/blob/66bdd049ad3f4b10f996e4cc6a9c6e58797cf30e/Demos/Music%20Theory/FretboardVoicingsCLI/OptickIndexWriter.cs) | `--export-max 3000` produjo 2 641 vectores, 0 de ellos en el índice completo | Reproducido. Una exportación parcial no puede verificar una completa |
 | Un acorde con bajo nombra su bajo con la grafía de la tonalidad | Algunos nombres usan la enarmonía equivocada, por ejemplo `Gmaj7/Gb` en vez de `Gmaj7/F♯` | nombres de acordes del índice | Visto al leer los mayores grupos de duplicados | Reproducido, aún sin contar |
+| `barreRequired` es verdadero para un acorde con cejilla | Pide el mismo traste en tres cuerdas *adyacentes*, así que la cejilla de fa en forma de mi `133211` — cuerdas 1, 2 y 6 en el traste 1 — no es una cejilla, mientras que la forma de la `x13331` sí lo es | [`VoicingPhysicalAnalyzer.cs:219-233`](https://github.com/GuitarAlchemist/ga/blob/66bdd049ad3f4b10f996e4cc6a9c6e58797cf30e/Common/GA.Domain.Services/Fretboard/Voicings/Analysis/VoicingPhysicalAnalyzer.cs#L219-L233) | `133211` y el `xx3211` de cuatro cuerdas salen ambos a exactamente 4.50 | Reproducido (P7) |
+| `minimumFingers` cuenta dedos | Cuenta *trastes distintos*, con tope en 4 | [`VoicingPhysicalAnalyzer.cs:102-103`](https://github.com/GuitarAlchemist/ga/blob/66bdd049ad3f4b10f996e4cc6a9c6e58797cf30e/Common/GA.Domain.Services/Fretboard/Voicings/Analysis/VoicingPhysicalAnalyzer.cs#L102-L103) | Am `x02210` y Am7 `x02010` salen ambos a 2.29; lo mismo para E frente a E7 y D frente a Dsus4 | Reproducido (P7) |
+| La etiqueta `Difficulty` y el `DifficultyScore` coinciden | El rango «Beginner» de la etiqueta pide una separación de como mucho 64 mm, menos de dos trastes junto a la cejuela, así que el acorde de do al aire es «Intermediate»; y `141404`, etiquetado «Advanced», sale a 4.65, el percentil 26 del índice | [`VoicingPhysicalAnalyzer.cs:105-112`](https://github.com/GuitarAlchemist/ga/blob/66bdd049ad3f4b10f996e4cc6a9c6e58797cf30e/Common/GA.Domain.Services/Fretboard/Voicings/Analysis/VoicingPhysicalAnalyzer.cs#L105-L112) | 3.50 y «Intermediate» para `x32010` | Reproducido (P7) |
+| Un voicing que nadie puede tocar obtiene una puntuación alta | 101 967 voicings de guitarra de 297 883 (34.2 %) no tienen ninguna digitación legal bajo un modelo de mano de cuatro dedos, y la puntuación más alta que GA da a uno de ellos es 7.73, dentro del rango de los acordes corrientes, así que `maxDifficulty: 8` los devuelve | [`VoicingFilterService.cs:53-70`](https://github.com/GuitarAlchemist/ga/blob/66bdd049ad3f4b10f996e4cc6a9c6e58797cf30e/Apps/ga-server/GaApi/Services/VoicingFilterService.cs#L53-L70) | La búsqueda de [`fingering.mjs`](https://github.com/spareilleux/learn/blob/main/code/ga-protos/p7-playability/src/lib/fingering.mjs) sobre todo el índice | Reproducido (P7). El modelo de mano es mío y no tiene pulgar, así que el 34.2 % es una cota superior |
 
 ## Experimentos
 
@@ -42,6 +46,10 @@ Cada prototipo escribe sus hipótesis antes de que exista el script de medición
 | ¿La selección en CPU aguanta al tamaño del índice completo? | H6 esperaba más de 16 ms con 297 910 puntos | 0,2 ms para 30 000, 1,4 ms para 297 910, 14 ms para 3 millones | H6 refutada (2026-09-17) |
 | ¿Puede el navegador con el índice entero? | — | 156 MB cargados y decodificados en 341 ms, 180 MB de heap de JavaScript, 28 ms para encontrar los diez vecinos exactos | Sí, y la lección entrega ese modo (2026-09-17) |
 | ¿Un cromagrama en una página puede nombrar el acorde que tocas? | Ocho cifras predichas antes de grabar nada | El 79,3 % de los 624 rasgueos sintéticos nombrados exactamente — 89,1 % en estado fundamental, 50 % en las inversiones — y 11 de las 17 grabaciones CC0; estimar las notas antes del cromagrama valía 39 puntos | Siete de las ocho cifras se sostuvieron; el oráculo, las condiciones de ruido y los fallos grabados, no (2026-09-17) |
+| ¿Puede un modelo pequeño entrenado en un solo núcleo de CPU superar el coste de tocabilidad escrito a mano de GA? | Doce cifras commiteadas en [`hypotheses.md`](https://github.com/spareilleux/learn/blob/c6a9937/code/ga-protos/p7-playability/results/hypotheses.md) en `c6a9937` | El boosting de gradiente alcanza un Spearman de 0.964 contra el objetivo y un acierto por pares de 0.921, donde la puntuación de GA alcanza 0.596 y 0.715; una recta de mínimos cuadrados sobre la separación física sola alcanza 0.794 | Sí, pero el hallazgo es que los tres indicadores extra de GA le cuestan más de lo que le aportan (2026-09-17) |
+| ¿Cuántos de los voicings de guitarra de GA pueden tocar cuatro dedos? | H11: más del 98 % | El 65.8 %: la búsqueda no encuentra ninguna digitación legal para 101 967 de 297 883 | Gravemente refutada, y partió el prototipo en dos: una tarea de ordenación sobre lo que se puede tocar, una pregunta de sí o no sobre el resto (2026-09-17) |
+| ¿Separar por voicing en lugar de por acorde favorece al modelo? | H6: la separación ingenua sobrestima los árboles potenciados en 0.005 a 0.05 de Spearman | 0.0005; la separación por forma transportada lo mueve 0.002 | Refutada. La separación por grupo solo cuesta algo cuando el grupo lleva información que las variables no tienen, y aquí ambos lados se leen en el mismo diagrama (2026-09-17) |
+| ¿Es la búsqueda de digitación lo bastante cara como para valer la pena sustituirla por un modelo? | H12: el modelo puntúa un voicing al menos 50 veces más rápido | 3.8 veces: 0.0145 ms frente a 0.0558 ms | Refutada. La premisa del prototipo era falsa; lo que el modelo compra son 949 kB que se embarcan sin el modelo de mano (2026-09-17) |
 
 ## 2026-09-16 — P1: de dónde vienen los datos
 
@@ -85,7 +93,35 @@ Cada prototipo escribe sus hipótesis antes de que exista el script de medición
 
 - **P2 publicado.** El reconocedor nombra exactamente el 79,3 % de 624 rasgueos sintéticos (89,1 % en estado fundamental, 50 % en inversiones) y 11 de 17 grabaciones CC0; estimar las notas antes del cromagrama vale 39 puntos. Siete de ocho cifras previstas se cumplieron; el oráculo, las condiciones de ruido y los fallos grabados no. El sonido nunca sale de la página (connect-src 'none'). [Lección](../02-chord-universe/)
 
+## 2026-09-17 — P7: la etiqueta que no existe
+
+- La pregunta es si un modelo supera al `DifficultyScore` de GA, y la puntuación de GA no puede ser a la vez el solucionario. Por eso P7 construye un objetivo: [`fingering.mjs`](https://github.com/spareilleux/learn/blob/main/code/ga-protos/p7-playability/src/lib/fingering.mjs) enumera todas las formas legales de poner los dedos 1 a 4 sobre las notas pisadas — cualquier dedo puede hacer cejilla, una cejilla puede sujetar parte de un traste y pasar por debajo de notas más altas — y se queda con la más barata. La geometría de trastes y cuerdas es la de GA; cada peso es una constante que elegí yo y que está listada en `WEIGHTS`.
+- Tres comprobaciones sobre ese objetivo, y ninguna es una demostración: 32 juicios por parejas sobre formas canónicas en [`annotations.json`](https://github.com/spareilleux/learn/blob/main/code/ga-protos/p7-playability/results/annotations.json), cuyo anotador está nombrado en el fichero (este modelo, a partir de reglas escritas, no un guitarrista); una lista de lo que dicen los métodos; y la propia puntuación de GA. La búsqueda coincide con las 25 parejas de confianza alta de 25, GA con 22, la lista con 19. La puntuación perfecta de la búsqueda mide coherencia interna — la misma cabeza escribió el modelo de mano y el protocolo — y el fichero lo dice.
+- Leer las cinco líneas de GA antes de medir nada encontró cuatro cosas, todas en la tabla de QA de arriba: el indicador de cejilla falla con la cejilla de fa, `minimumFingers` cuenta trastes, una cejilla completa y un fa de cuatro cuerdas salen con la misma puntuación, y la etiqueta `Difficulty` contradice al `DifficultyScore`.
+
+## 2026-09-17 — P7: hipótesis
+
+- Doce predicciones numeradas en [`results/hypotheses.md`](https://github.com/spareilleux/learn/blob/c6a9937/code/ga-protos/p7-playability/results/hypotheses.md), commiteadas en `c6a9937` antes de que `train.mjs` se hubiera ejecutado sobre dato alguno, sintético o real.
+- H0 está marcada como «vista, no ciega»: la comprobación de las anotaciones ya se había ejecutado cuando se escribió el fichero, y sus tres números constan allí como mediciones, no como predicciones. No se movieron cuando después se generalizó la búsqueda.
+
+## 2026-09-17 — P7: lo que la búsqueda rechaza
+
+- La primera versión de la búsqueda solo dejaba hacer cejilla al índice, y solo sobre todas las notas del traste más bajo. Rechazaba el 61.9 % del índice de guitarra. Al dejar que cualquier dedo haga cejilla, sobre parte de un traste, pasando por debajo de notas más altas, se baja al 34.2 % — 101 967 voicings de 297 883 sin ninguna digitación legal.
+- Lo que queda es realmente intocable: `x12345` necesita cinco dedos en cinco trastes, y `103212` tiene dos notas en el traste 1 a ambos lados de una cuerda al aire, así que ninguna de las dos cejillas que haría falta es posible.
+- Esas filas no tienen rango, así que el experimento se parte en dos: la tarea de ordenación las descarta, y un segundo modelo responde a si un voicing se puede digitar siquiera. Separando por acorde, el boosting de gradiente alcanza un acierto de 0.903 frente a una referencia mayoritaria de 0.663, y un AUC de 0.973; la puntuación de GA, leída como ordenación para la misma pregunta, alcanza 0.677.
+
+## 2026-09-17 — P7: mediciones
+
+- Un núcleo de un Intel Core Ultra 9 285K, Node.js v24.12.0, sin GPU, sin dependencias. 297 883 voicings, 195 916 de ellos digitables, separados por acorde en 118 243 / 38 287 / 39 386. La ejecución completa — tres separaciones, seis predictores cada una, intervalos por bootstrap de 200 vueltas remuestreados por acorde, y el modelo de viabilidad — tardó 302 segundos; construir el conjunto de datos desde el índice de 183 MB tardó 7.8 segundos.
+- Spearman contra el objetivo, filas reservadas: boosting de gradiente 0.964, MLP 0.959, bosque aleatorio 0.957, ridge 0.906, una recta sobre la separación física sola 0.794, la puntuación de GA 0.596, la lista de reglas 0.449, la media 0. Acierto por pares entre acordes: 0.921 frente al 0.715 de GA.
+- Los árboles potenciados ponen 0.723 de su ganancia en `diagonalMm`, la pareja de notas pisadas más ancha medida *a través* de las cuerdas además de a lo largo del mástil — y no la separación a lo largo del mástil de GA, que retiene 0.028. El indicador de cejilla de GA retiene 0.011; el modelo reconstruye las cejillas a partir de `maxAtMinFret`, que cuenta las cuerdas del traste más bajo sin preguntar si son adyacentes, exactamente la prueba que el indicador de GA falla.
+- Tamaños: 949 kB para 300 árboles potenciados, 11.9 MB para 60 árboles de bosque profundos, 15.4 kB para el MLP, 1.24 kB para la ridge.
+- Cuatro predicciones falsas (H2, H6, H11, H12), dos acertadas a medias (H9, H10). [Lección](../07-playability-model/)
+- Un fallo que conviene recordar, encontrado por una separación que fallaba: el primer hash de grupo era un FNV-1a simple, cuyos bits altos apenas se mueven entre `chord0` y `chord39`. Una separación lee precisamente esos bits altos, así que los cuarenta acordes acababan en el conjunto de entrenamiento y el de prueba salía vacío. Un finalizador murmur3 lo arregló, y ahora una prueba comprueba que los tres lados reciben 60/20/20 de tres mil claves casi idénticas.
+
 ## Por verificar
 
 - El explorador en Safari y Firefox en macOS, con y sin WebGPU: probado solo en Chromium en Windows.
 - El sonido en navegadores móviles, que pueden bloquear el `AudioContext` hasta un toque.
+- El objetivo de P7: los 32 juicios por parejas los hizo este modelo a partir de reglas escritas, no un guitarrista, y las constantes del modelo de mano — separaciones cómodas, penalizaciones de cejilla y de apagado — están elegidas, no medidas sobre un intérprete. Un guitarrista ordenando unos cientos de parejas sustituiría a ambos.
+- El 34.2 % de voicings no digitables de P7 es una cota superior: la búsqueda no tiene pulgar por encima del mástil, ni cuerda apagada con la mano izquierda, ni nota sujeta por dos dedos.

@@ -37,7 +37,7 @@ Vous écrivez du C# ou du Java, vous avez suivi au moins un des cours sur GA, et
 | P4 | Passe de rendu IA | Une texture ou un éclairage générés améliorent-ils les scènes 3D de GA, mesurés face au rendu simple ? | prévu |
 | P5 | Bracelets imprimables en 3D | Un bracelet de classes de hauteur peut-il devenir un objet imprimable, des données de GA à un maillage qui passe un slicer ? | prévu |
 | P6 | Chaîne complète | Du micro à l'accord, au voicing, à l'image et à l'objet, d'une traite : où est-ce que ça casse ? | prévu |
-| P7 | Modèle de jouabilité | Un petit modèle entraîné sur le CPU prédit-il la difficulté d'un voicing mieux que le coût écrit à la main dans GA ? | prévu |
+| P7 | [Modèle de jouabilité](07-playability-model/) | Un petit modèle entraîné sur le CPU prédit-il la difficulté d'un voicing mieux que le coût écrit à la main dans GA ? | publié |
 | — | [Journal](journal/) | | |
 
 ## Ressources
