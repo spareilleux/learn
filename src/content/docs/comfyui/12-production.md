@@ -520,7 +520,7 @@ On the GPU, with SDXL and the ControlNet loaded, the command would be the same w
 
 1. Compute the delays between attempts with the defaults (4 attempts, 2 s base, 1 min cap) without jitter. With full jitter, what is the expected total wait of a job that fails every time?
 2. Swap steps 2 and 3 of an attempt: post first, then open the WebSocket. What can go wrong with a prompt that takes 50 ms, and what in the worker still saves the job?
-3. A job takes 90 minutes, and the claim lease is one hour. A second delivery of the job arrives at minute 70 on another worker. What happens, and how would you fix it?
+3. A worker runs with `--timeout-s 7200`, and a job takes 90 minutes. The claim lease is one hour, the default. A second delivery of the job arrives at minute 70 on another worker. What happens, and how would you fix it?
 4. With RabbitMQ, a worker writes `done.json`, then its container is killed before `basicAck`. Follow the job to the end. Then answer the same for a kill between the dead letter's publish and its ack.
 5. Change the scheduler so that a server whose queue already has `--max-queue` prompts or more isn't a candidate, and the job waits instead. Write the C# test first, with two fake servers and `Busy`.
 6. Add a column to `results.py` with each job's wall time, and say where the worker would have to record it.
@@ -543,7 +543,7 @@ The prompt can finish before the socket is open, and its `execution_start` and `
 <details>
 <summary>Solution 3</summary>
 
-At minute 60 the claim expires. At minute 70, the second worker checks `done.json` (absent), then `TryClaim`: the claim is expired, so it deletes it and takes it. If it picks the same server, the catch-up finds the prompt in `/queue` and follows it rather than posting it again. On another server, it posts the job: the prompt runs twice, and both workers write the same outputs. Fixes: make the lease longer than the job timeout times the attempts plus the delays, which the defaults don't guarantee (4 × 10 min + 14 s > 1 h); or renew the lease while the job runs, a heartbeat that rewrites `expires` every few minutes. A database claim would do the same with an `UPDATE … WHERE owner = @me`.
+At minute 60 the claim expires. At minute 70, the second worker checks `done.json` (absent), then `TryClaim`: the claim is expired, so it deletes it and takes it. If it picks the same server, the catch-up finds the prompt in `/queue` and follows it rather than posting it again. On another server, it posts the job: the prompt runs twice, and both workers write the same outputs. Fixes: make the lease longer than the attempts times the job timeout plus the delays. The defaults respect that, 4 × 10 min + 14 s is less than an hour, but a timeout of two hours needs a lease of more than 8 hours, which leaves a dead worker's job blocked that long. The better fix is to renew the lease while the job runs, with a heartbeat that rewrites `expires` every few minutes. A database claim would do the same with an `UPDATE … WHERE owner = @me`.
 
 </details>
 
