@@ -13,7 +13,7 @@ sidebar:
 - [x] Lección 2: el recolector de basura
 - [x] Lección 3: async y await por dentro
 - [x] Lección 4: rendimiento medido
-- [ ] Lección 5: genéricos en profundidad
+- [x] Lección 5: genéricos en profundidad
 - [x] Un nuevo plan en cuatro partes y 24 lecciones, con ASP.NET Core en profundidad y los equivalentes en Spring y Reactor
 - [x] Lección 6: canales
 - [x] Lección 7: TPL Dataflow
@@ -112,8 +112,32 @@ La lección 4 medía el código de GA tal cual. Este apéndice reescribe tres de
 - `ToNormalForm` y `PrimeForm` también están hechos, así que el apéndice demuestra ahora cinco miembros y no tres. Tabular la forma normal quitó los últimos 16 KB del `ClosestDiatonicKey` rápido, que ya no asigna nada: 1.615 veces más rápido, 175 KB por llamada eliminados. `PrimeForm`, que ya era aritmética de bits, solo dio 1,8 — el techo honesto de reescribir aritmética correcta, y merece estar al lado del 1.615.
 - Nada de esto se ha reportado aún aguas arriba.
 
+## 2026-09-16 — Lección 5: genéricos en profundidad
+
+- La lección 5 llena el hueco entre las lecciones 4 y 6, que se escribieron antes. Sus salidas proceden de la misma máquina y del mismo SDK que el resto del curso; commit del código [`378eec1`](https://github.com/spareilleux/learn/commit/378eec1333390889e29fd0c42af0fae47512035e).
+- Ejecución de CI [35173274425](https://github.com/spareilleux/learn/actions/runs/35173274425): verde en Linux, Windows y macOS. Las líneas que dependen de la máquina fueron las mismas en los tres runners que en mi máquina, incluido el de Arm64: 4592 bytes en el primer acceso a la caché de `Str`, y 1 y luego 0 métodos compilados para `Shared<string>` y luego `Shared<object>`.
+- **El propio resumen del JIT como prueba.** `DOTNET_JitDisasmSummary=1` y `DOTNET_JitStdOutFile` funcionan en el runtime publicado, así que `check.sh` compara la lista de compilaciones de `Shared<T>.Describe`: cuatro para seis argumentos de tipo, una de ellas sobre `System.__Canon`. Lanza `Advanced.dll` directamente: a través de `dotnet run`, el propio proceso del SDK heredaría las variables y escribiría en el mismo archivo.
+- **Lo que el runtime no comprueba.** `MakeGenericMethod` aceptó `(int, string)` para un parámetro `where T : unmanaged`; el compilador lo rechaza con CS8377. `notnull` no deja nada en `GenericParameterAttributes`.
+- **Un fragmento que esperaba que fallara compiló.** `IStaticReadonlyCollectionFromValues<TSelf>` de GA oculta el `Items` abstracto estático con una propiedad `new static` que tiene cuerpo. Esperaba que `T.Items`, sobre un parámetro de tipo restringido a esa interfaz, se rechazara; Roslyn 5.0 lo compiló. Quité el fragmento; a qué miembro se enlaza esa llamada queda *por verificar*.
+- **El desensamblado cambió mi lectura del benchmark.** En el código compartido, leer un campo estático de `Counter<T>` llama a `CORINFO_HELP_GET_NONGCSTATIC_BASE` en cada iteración, tanto en el nivel 1 como con la compilación por niveles desactivada, y aun así el bucle solo fue 1.46 veces más lento que la versión para `int`.
+- **De nuevo la PGO.** Un `foreach` sobre `PitchClass.Items` asigna 72 bytes en las primeras llamadas del programa y 40 bytes en el benchmark, después de la PGO dinámica.
+
+## 2026-09-16 — Dogfooding: las interfaces de objetos de valor de GA
+
+Nada de esto se ha notificado todavía aguas arriba.
+
+- [`ValueObjectUtils<TSelf>.Items`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Core/ValueObjects/ValueObjectUtils.cs#L10) crea un `ValueObjectCollection<TSelf>` nuevo de 32 bytes en cada lectura, aunque la interfaz documenta `Items` como memoizado; un `foreach` sobre él asigna 72 bytes (lección 5).
+- `Values` está declarado como `IReadOnlyList<int>` en [`IStaticValueObjectList<TSelf>`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Core/Collections/Abstractions/IStaticValueObjectList.cs#L57), y las implementaciones devuelven un `ImmutableArray<int>`: 24 bytes de boxing por lectura. Doce lecturas tardaron 41.8 ns y asignaron 288 bytes, frente a 3.1 ns y nada a través del `ImmutableArray` (lección 5).
+- [`ValueObjectCache<T>`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Core/ValueObjects/ValueObjectCache.cs#L38-L52) construye en su primer uso dos `FrozenSet` que nada lee en los tres proyectos descargados: 4592 bytes para los 26 valores de `Str` (lección 5).
+- [`IRangeValueObject<TSelf>.EnsureValueInRange`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Core/Abstractions/IRangeValueObject.cs#L55-L63) normaliza con un tamaño de rango de `max - min` en lugar de `max - min + 1`: 12 se convierte en 2 para una clase de altura. Ningún llamador de los proyectos descargados pasa `normalize: true`, así que el error está latente (lección 5).
+- `default(Str)`, `new Str[n]` y `new T()` dan la cuerda 0, que la comprobación de rango de `Str` prohíbe; lo mismo vale para todos los objetos de valor de GA cuyo mínimo es 1 (lección 5).
+- El `out` de `IStaticReadonlyCollection<out TSelf>` no tiene ningún efecto: 13 de sus 17 implementaciones son structs, y la interfaz no tiene miembros de instancia (lección 5).
+
 ## Por verificar
 
+- A qué miembro se enlaza `T.Items` cuando una interfaz derivada oculta una propiedad abstracta estática con una propiedad `new static` (lección 5).
+- Por qué una llamada auxiliar por iteración solo hizo 1.46 veces más lento el bucle compartido de `ReadStatic<string>` (lección 5).
+- Cuál de los dos objetos de un `foreach` sobre `PitchClass.Items` deja de asignar la PGO dinámica (lección 5).
 - Si `PoolingAsyncValueTaskMethodBuilder` elimina los 104 bytes de `ValueTaskAfterYield` (lección 3).
 - El IL de `GA.Core` compilado por Roslyn 4.11 frente al del Roslyn 5.0 del SDK.
 - Las lecciones se escribieron en x64; los resultados de Arm64 provienen solo de las líneas dependientes de la máquina del runner de macOS, nunca de un benchmark.

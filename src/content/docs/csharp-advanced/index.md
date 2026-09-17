@@ -51,7 +51,7 @@ Parts 1 and 2 measure GA's own code. Part 3 builds a small scales and chords ser
 | 2 | [The garbage collector](02-garbage-collector/) | generations, LOH and POH, workstation and server GC, DATAS, finalizers, `GC.GetGCMemoryInfo` | allocations of `ItemsSpan` with `[MemoryDiagnoser]` | G1 and ZGC, `Cleaner`, JMH's `-prof gc` |
 | 3 | [async and await under the hood](03-async-under-the-hood/) | the generated state machine, `ValueTask`, `SynchronizationContext`, `ConfigureAwait`, cancellation, `IAsyncEnumerable` | `Try.OfAsync`, `LazyWithExpiration` | assembly and subscription, `publishOn`, virtual threads |
 | 4 | [Measured performance](04-measured-performance/) | BenchmarkDotNet, tiered JIT and PGO, `SearchValues`, `FrozenDictionary`, `Vector<T>` | `PitchClass` subtraction, `SimdOps.Dot` | JMH, C1 and C2, the Vector API |
-| 5 | Generics in depth | constraints, static abstract members, generic math, `allows ref struct`, how the JIT shares generic code | GA's `IStaticValueObjectList<TSelf>` | erasure, and generics without primitives |
+| 5 | [Generics in depth](05-generics-in-depth/) | constraints, static abstract members, generic math, `allows ref struct`, how the JIT shares generic code | GA's `IStaticValueObjectList<TSelf>` | erasure, and generics without primitives |
 
 ### Part 2: concurrency and data flow
 
@@ -94,7 +94,7 @@ Parts 1 and 2 measure GA's own code. Part 3 builds a small scales and chords ser
 | 1 | [Five optimisations, proved then measured](appendix-benchmarks/) | rotations and `PopCount` on 12-bit sets, lookup tables, an equivalence proof over the whole input domain, stable sorts as a tie-break, and a benchmark that measured the JIT instead of the code | `IsClusterFree`, `IntervalClassVector`, `ClosestDiatonicKey`, `ToNormalForm`, `PrimeForm` |
 | — | [Journal](journal/) | | |
 
-Lessons 5 and 10 to 24 are planned and not written yet; lessons 6 to 9 were written before lesson 5, and don't depend on it.
+Lessons 10 to 24 are planned and not written yet. Lessons 6 to 9 were written before lesson 5, and don't depend on it.
 
 ## Prerequisites
 

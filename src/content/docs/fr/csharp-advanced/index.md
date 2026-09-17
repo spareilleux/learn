@@ -51,7 +51,7 @@ Les parties 1 et 2 mesurent le propre code de GA. La partie 3 construit un petit
 | 2 | [Le ramasse-miettes](02-garbage-collector/) | générations, LOH et POH, GC station de travail et serveur, DATAS, finaliseurs, `GC.GetGCMemoryInfo` | allocations d'`ItemsSpan` avec `[MemoryDiagnoser]` | G1 et ZGC, `Cleaner`, le `-prof gc` de JMH |
 | 3 | [async et await sous le capot](03-async-under-the-hood/) | la machine à états générée, `ValueTask`, `SynchronizationContext`, `ConfigureAwait`, annulation, `IAsyncEnumerable` | `Try.OfAsync`, `LazyWithExpiration` | assemblage et souscription, `publishOn`, threads virtuels |
 | 4 | [Performances mesurées](04-measured-performance/) | BenchmarkDotNet, JIT par niveaux et PGO, `SearchValues`, `FrozenDictionary`, `Vector<T>` | soustraction de `PitchClass`, `SimdOps.Dot` | JMH, C1 et C2, l'API Vector |
-| 5 | Les génériques en profondeur | contraintes, membres abstraits statiques, math générique, `allows ref struct`, comment le JIT partage le code générique | `IStaticValueObjectList<TSelf>` de GA | l'effacement, et des génériques sans primitifs |
+| 5 | [Les génériques en profondeur](05-generics-in-depth/) | contraintes, membres abstraits statiques, math générique, `allows ref struct`, comment le JIT partage le code générique | `IStaticValueObjectList<TSelf>` de GA | l'effacement, et des génériques sans primitifs |
 
 ### Partie 2 : concurrence et flux de données
 
@@ -94,7 +94,7 @@ Les parties 1 et 2 mesurent le propre code de GA. La partie 3 construit un petit
 | 1 | [Cinq optimisations, prouvées puis mesurées](appendix-benchmarks/) | rotations et `PopCount` sur des ensembles de 12 bits, des tables de correspondance, une preuve d'équivalence sur tout le domaine d'entrée, les tris stables comme règle de départage, et un benchmark qui mesurait le JIT au lieu du code | `IsClusterFree`, `IntervalClassVector`, `ClosestDiatonicKey`, `ToNormalForm`, `PrimeForm` |
 | — | [Journal](journal/) | | |
 
-Les leçons 5 et 10 à 24 sont prévues et pas encore écrites ; les leçons 6 à 9 ont été écrites avant la leçon 5, et n'en dépendent pas.
+Les leçons 10 à 24 sont prévues et pas encore écrites. Les leçons 6 à 9 ont été écrites avant la leçon 5, et n'en dépendent pas.
 
 ## Prérequis
 

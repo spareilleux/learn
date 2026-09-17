@@ -13,7 +13,7 @@ sidebar:
 - [x] Leçon 2 : le ramasse-miettes
 - [x] Leçon 3 : async et await sous le capot
 - [x] Leçon 4 : performances mesurées
-- [ ] Leçon 5 : les génériques en profondeur
+- [x] Leçon 5 : les génériques en profondeur
 - [x] Un nouveau plan en quatre parties et 24 leçons, avec ASP.NET Core en profondeur et les équivalents Spring et Reactor
 - [x] Leçon 6 : les channels
 - [x] Leçon 7 : TPL Dataflow
@@ -112,8 +112,32 @@ La leçon 4 mesurait le code de GA tel quel. Cette annexe réécrit trois de ses
 - `ToNormalForm` et `PrimeForm` sont faits aussi, donc l'annexe prouve maintenant cinq membres et non trois. Tabuler la forme normale a retiré les derniers 16 Ko du `ClosestDiatonicKey` rapide, qui n'alloue plus rien : 1 615 fois plus rapide, 175 Ko par appel disparus. `PrimeForm`, déjà de l'arithmétique sur les bits, n'a donné que 1,8 — le plafond honnête de la réécriture d'une arithmétique correcte, et il mérite d'être posé à côté du 1 615.
 - Rien de tout cela n'a encore été remonté en amont.
 
+## 2026-09-16 — Leçon 5 : les génériques en profondeur
+
+- La leçon 5 comble le vide entre les leçons 4 et 6, qui ont été écrites en premier. Ses sorties viennent de la même machine et du même SDK que le reste du cours ; commit du code [`378eec1`](https://github.com/spareilleux/learn/commit/378eec1333390889e29fd0c42af0fae47512035e).
+- Exécution CI [35173274425](https://github.com/spareilleux/learn/actions/runs/35173274425) : verte sous Linux, Windows et macOS. Les lignes dépendantes de la machine étaient les mêmes sur les trois runners que sur ma machine, celui en Arm64 compris : 4 592 octets pour le premier accès au cache de `Str`, et 1 puis 0 méthode compilée pour `Shared<string>` puis `Shared<object>`.
+- **Le résumé du JIT lui-même comme test.** `DOTNET_JitDisasmSummary=1` et `DOTNET_JitStdOutFile` fonctionnent dans le runtime livré, donc `check.sh` compare la liste des compilations de `Shared<T>.Describe` : quatre pour six arguments de type, dont une sur `System.__Canon`. Il lance `Advanced.dll` directement : avec `dotnet run`, le processus du SDK lui-même hériterait des variables et écrirait dans le même fichier.
+- **Ce que le runtime ne vérifie pas.** `MakeGenericMethod` a accepté `(int, string)` pour un paramètre `where T : unmanaged` ; le compilateur le rejette avec CS8377. `notnull` ne laisse rien dans `GenericParameterAttributes`.
+- **Un extrait que je croyais rejeté s'est compilé.** L'interface `IStaticReadonlyCollectionFromValues<TSelf>` de GA masque la propriété abstraite statique `Items` avec une propriété `new static` qui a un corps. Je m'attendais à ce que `T.Items` sur un paramètre de type contraint par cette interface soit rejeté ; Roslyn 5.0 l'a compilé. J'ai retiré l'extrait ; le membre auquel cet appel se lie est *à vérifier*.
+- **Le désassemblage a changé ma lecture du benchmark.** Dans le code partagé, lire un champ statique de `Counter<T>` appelle `CORINFO_HELP_GET_NONGCSTATIC_BASE` à chaque itération, au niveau 1 comme avec la compilation hiérarchisée désactivée, et pourtant la boucle n'était que 1,46 fois plus lente que la version `int`.
+- **Encore le PGO.** Un `foreach` sur `PitchClass.Items` alloue 72 octets lors des premiers appels du programme, et 40 octets dans le benchmark, après le PGO dynamique.
+
+## 2026-09-16 — Dogfooding : les interfaces d'objets valeurs de GA
+
+Rien de tout cela n'a encore été remonté en amont.
+
+- [`ValueObjectUtils<TSelf>.Items`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Core/ValueObjects/ValueObjectUtils.cs#L10) crée une nouvelle `ValueObjectCollection<TSelf>` de 32 octets à chaque lecture, bien que l'interface documente `Items` comme mémoïsée ; un `foreach` dessus alloue 72 octets (leçon 5).
+- `Values` est déclaré `IReadOnlyList<int>` dans [`IStaticValueObjectList<TSelf>`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Core/Collections/Abstractions/IStaticValueObjectList.cs#L57), et les types qui l'implémentent renvoient un `ImmutableArray<int>` : 24 octets de boxing par lecture. Douze lectures ont pris 41,8 ns et 288 octets, contre 3,1 ns et rien du tout à travers l'`ImmutableArray` (leçon 5).
+- [`ValueObjectCache<T>`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Core/ValueObjects/ValueObjectCache.cs#L38-L52) construit à sa première utilisation deux `FrozenSet` que rien ne lit dans les trois projets récupérés : 4 592 octets pour les 26 valeurs de `Str` (leçon 5).
+- [`IRangeValueObject<TSelf>.EnsureValueInRange`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Core/Abstractions/IRangeValueObject.cs#L55-L63) normalise avec une taille d'intervalle de `max - min` au lieu de `max - min + 1` : 12 devient 2 pour une classe de hauteurs. Aucun appelant des projets récupérés ne passe `normalize: true`, donc le bug est latent (leçon 5).
+- `default(Str)`, `new Str[n]` et `new T()` donnent la corde 0, que la vérification d'intervalle de `Str` interdit ; il en va de même pour tous les objets valeurs de GA dont le minimum est 1 (leçon 5).
+- Le `out` de `IStaticReadonlyCollection<out TSelf>` n'a aucun effet : 13 des 17 types qui l'implémentent sont des structs, et l'interface n'a aucun membre d'instance (leçon 5).
+
 ## À vérifier
 
+- Le membre auquel `T.Items` se lie quand une interface dérivée masque une propriété abstraite statique avec une propriété `new static` (leçon 5).
+- Pourquoi un appel de fonction d'assistance par itération n'a rendu la boucle partagée `ReadStatic<string>` que 1,46 fois plus lente (leçon 5).
+- Lequel des deux objets d'un `foreach` sur `PitchClass.Items` le PGO dynamique cesse d'allouer (leçon 5).
 - Si `PoolingAsyncValueTaskMethodBuilder` supprime les 104 octets de `ValueTaskAfterYield` (leçon 3).
 - L'IL de `GA.Core` compilé par Roslyn 4.11, comparé à celui qu'aurait produit le Roslyn 5.0 du SDK.
 - Les leçons ont été écrites sur x64 ; les résultats Arm64 viennent uniquement des lignes dépendantes de la machine du runner macOS, jamais d'un benchmark.

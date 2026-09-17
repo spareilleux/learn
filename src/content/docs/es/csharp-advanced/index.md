@@ -51,7 +51,7 @@ Las partes 1 y 2 miden el propio código de GA. La parte 3 construye un pequeño
 | 2 | [El recolector de basura](02-garbage-collector/) | generaciones, LOH y POH, GC de estación de trabajo y de servidor, DATAS, finalizadores, `GC.GetGCMemoryInfo` | asignaciones de `ItemsSpan` con `[MemoryDiagnoser]` | G1 y ZGC, `Cleaner`, el `-prof gc` de JMH |
 | 3 | [async y await bajo el capó](03-async-under-the-hood/) | la máquina de estados generada, `ValueTask`, `SynchronizationContext`, `ConfigureAwait`, cancelación, `IAsyncEnumerable` | `Try.OfAsync`, `LazyWithExpiration` | ensamblado y suscripción, `publishOn`, hilos virtuales |
 | 4 | [Rendimiento medido](04-measured-performance/) | BenchmarkDotNet, JIT por niveles y PGO, `SearchValues`, `FrozenDictionary`, `Vector<T>` | resta de `PitchClass`, `SimdOps.Dot` | JMH, C1 y C2, la API Vector |
-| 5 | Genéricos en profundidad | restricciones, miembros abstractos estáticos, matemáticas genéricas, `allows ref struct`, cómo comparte el JIT el código genérico | `IStaticValueObjectList<TSelf>` de GA | el borrado, y genéricos sin primitivos |
+| 5 | [Genéricos en profundidad](05-generics-in-depth/) | restricciones, miembros abstractos estáticos, matemáticas genéricas, `allows ref struct`, cómo comparte el JIT el código genérico | `IStaticValueObjectList<TSelf>` de GA | el borrado, y genéricos sin primitivos |
 
 ### Parte 2: concurrencia y flujo de datos
 
@@ -94,7 +94,7 @@ Las partes 1 y 2 miden el propio código de GA. La parte 3 construye un pequeño
 | 1 | [Cinco optimizaciones, demostradas y luego medidas](appendix-benchmarks/) | rotaciones y `PopCount` sobre conjuntos de 12 bits, tablas de consulta, una demostración de equivalencia sobre todo el dominio de entrada, los ordenamientos estables como desempate, y un benchmark que medía el JIT en lugar del código | `IsClusterFree`, `IntervalClassVector`, `ClosestDiatonicKey`, `ToNormalForm`, `PrimeForm` |
 | — | [Diario](journal/) | | |
 
-Las lecciones 5 y 10 a 24 están planificadas y aún no se han escrito; las lecciones 6 a 9 se escribieron antes que la lección 5, y no dependen de ella.
+Las lecciones 10 a 24 están planificadas y aún no se han escrito. Las lecciones 6 a 9 se escribieron antes que la lección 5, y no dependen de ella.
 
 ## Requisitos previos
 
