@@ -332,7 +332,7 @@ wslc image prune --all     # removes all images not used by a container (no conf
 ```
 
 :::caution
-In `wslc image prune`, `-f` means `--filter`, not `--force`. And pruning frees space **inside** the session's `storage.vhdx`, but the file doesn't shrink on the Windows side (measured in the [journal](../journal/)).
+In `wslc image prune`, `-f` means `--filter`, not `--force`. And pruning frees space **inside** the session's `storage.vhdx`, but the file doesn't shrink on the Windows side (measured in [lesson 6](../06-resources-and-limits/), with the way to compact it).
 :::
 
 ## Key takeaways

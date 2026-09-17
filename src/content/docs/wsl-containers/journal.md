@@ -17,6 +17,7 @@ sidebar:
 - [x] Check whether Docker and `wslc` images are shared
 - [x] Small C# program with `Microsoft.WSL.Containers`
 - [x] Go further: `WslcImage`, API networking, Kubernetes, extensions, GUI
+- [x] Lot 2: lessons 6 to 10 written from the entries below, lessons 1 to 5 extended
 
 ## 2026-09-12 — Taking stock
 
@@ -638,7 +639,7 @@ After `wslc-down.ps1`: no container, only the default `bridge`/`host`/`none` net
 
 ## 2026-09-13 — A C# program with `Microsoft.WSL.Containers`
 
-Goal: drive a container from a Windows application, without `wslc.exe`. The code is in [`code/wsl-containers/wslc-host`](https://github.com/spareilleux/learn/tree/main/code/wsl-containers/wslc-host); lesson 5 shows it.
+Goal: drive a container from a Windows application, without `wslc.exe`. The code is in [`code/wsl-containers/wslc-host`](https://github.com/spareilleux/learn/tree/main/code/wsl-containers/wslc-host); [lesson 9](../09-csharp-api/) shows it.
 
 ### The documented snippet doesn't compile
 
@@ -873,6 +874,40 @@ The pull itself works without it (it's done by the session, not by the container
 - The **WSL Settings** app (the only WSL app in the Start menu besides `WSL`) has no container page: its pages are `About`, `Developer`, `DistroManagement`, `DockerDesktopIntegration`, `FileSystem`, `General`, `GPUAcceleration`, `GUIApps`, `MemAndProc`, `Networking`, `NetworkingIntegration`, `OptionalFeatures`, `VSCodeIntegration`, `VSIntegration`, `WorkingAcrossFileSystems`.
 
 **Conclusion:** the `dotnet build` → `.tar` → `LoadImage` chain is the most original thing in the package, and it works. Around it, `wslc` 2.9.11 stays a runtime: no Compose, no Kubernetes, no extensions, no GUI. Cleanup: test images removed from the CLI session (`greeter`, `k3s`, `docker:cli`), test sessions' `storage.vhdx` deleted (336 MB + 81 MB).
+
+## 2026-09-16 — Lot 2: five new lessons
+
+The entries above held more verified material than the five lessons taught. They now have their own lessons: [6. Resources and limits](../06-resources-and-limits/), [7. Volumes and a real service](../07-volumes-and-a-real-service/), [8. Compose without Compose](../08-compose/), [9. Driving containers from C#](../09-csharp-api/) and [10. Networking, Kubernetes and GUI](../10-networking-kubernetes-gui/). The API section moved from lesson 5 to lesson 9; lesson 5 now covers the coexistence with Docker Desktop. The `compose.yaml` and its two `wslc` scripts are in [`code/wsl-containers/compose`](https://github.com/spareilleux/learn/tree/main/code/wsl-containers/compose), and CI runs the `compose.yaml` with Docker Compose.
+
+Three checks were run again for these lessons, with `wslc` 2.9.11 and the session at 8 CPUs and 16 GB.
+
+`wslc run --help` lists per-container limits and health checks, among others: `--cpus`, `-m`/`--memory`, `--health-cmd`, `--health-interval`, `--gpus`. Still no `--privileged` and no `--cap-add`.
+
+Per-container limits set the control group, but `nproc` and `free` still show the VM:
+
+```text
+> wslc run --rm --memory 512M --cpus 1.5 alpine sh -c 'echo nproc=$(nproc); cat /sys/fs/cgroup/memory.max /sys/fs/cgroup/cpu.max; free -m'
+wsl: Your kernel does not support swap limit capabilities or the cgroup is not mounted. Memory limited without swap.
+nproc=8
+536870912
+150000 100000
+              total        used        free      shared  buff/cache   available
+Mem:          15996         278       15439           3         280       15527
+Swap:         16384           0       16384
+```
+
+A CLI container has the same limits as the API containers of the `Privileged` test:
+
+```text
+> wslc run --rm alpine sh -c 'grep cgroup /proc/mounts; grep CapEff /proc/self/status; ls /dev | wc -l'
+cgroup /sys/fs/cgroup cgroup2 ro,nosuid,nodev,noexec,relatime 0 0
+CapEff:	00000000a80425fb
+15
+```
+
+Health checks work: `wslc run -d --name hc --health-cmd 'test -f /tmp/ready' --health-interval 2s alpine sh -c 'sleep 6; touch /tmp/ready; sleep 60'` showed `Up 3 seconds (health: starting)`, then `Up 11 seconds (healthy)` in `wslc container list`, and `container inspect` has a `"Health"` object. Container stopped and removed afterwards.
+
+**Still to verify:** `hostLoopback` (`host.wslc.internal`) from a container; whether `-p 0.0.0.0:…` is reachable from another machine; `wslc network connect` on a running container; the behavior of `volume create` and `network create` when the object exists; `PortMappings` on an API container without a network; the scripts of lesson 8 in Windows PowerShell 5.1.
 
 ## Open questions
 

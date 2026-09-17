@@ -53,7 +53,7 @@ The last test downloads the `hello-world` image and prints its welcome message. 
 $env:Path = [Environment]::GetEnvironmentVariable('Path','Machine') + ';' + [Environment]::GetEnvironmentVariable('Path','User')
 ```
 
-The same applies to an IDE opened before the update: MSBuild then fails with `WSLC0001` (see [lesson 5](../05-wslc-vs-docker/)).
+The same applies to an IDE opened before the update: MSBuild then fails with `WSLC0001` (see [lesson 9](../09-csharp-api/)).
 :::
 
 ## Troubleshooting: the installation fails (error 1921 / 1603)
@@ -132,6 +132,15 @@ TimeCreated               Id Message
 <summary>Solution</summary>
 
 Docker Desktop runs its own WSL distro, which keeps the `WSLService` service active. The installer can't replace the files of a service it can't stop.
+
+</details>
+
+3. You open a new tab in Windows Terminal after the update. `wsl --version` shows 2.9.11, but `Get-Command wslc` answers that the term `wslc` is not recognized. Explain, then give a fix that works in that tab and a fix that lasts.
+
+<details>
+<summary>Solution</summary>
+
+`wsl.exe` was already on the `PATH` before the update, `wslc.exe` wasn't. The Windows Terminal process started before the update, with the old `PATH`, and each new tab inherits a copy of it. In that tab, reload the `PATH` from the machine and user values with the `$env:Path = …` line above, or call the full path, `& "C:\Program Files\WSL\wslc.exe" --version`. The lasting fix is to close **every** Windows Terminal window, so that no `WindowsTerminal.exe` process is left, and start it again. In `cmd.exe`, the equivalent check is `where wslc`.
 
 </details>
 
