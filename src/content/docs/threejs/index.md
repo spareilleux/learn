@@ -7,7 +7,7 @@ sidebar:
 ---
 
 :::note[Version studied]
-[three.js](https://threejs.org/) **r186** (the npm package `three` 0.186.0, released on 8 September 2026), with [`@types/three`](https://www.npmjs.com/package/@types/three) 0.186.0, served and built by [Vite](https://vite.dev/) 8.3.0, checked with [TypeScript](https://www.typescriptlang.org/) 7.0.2, and measured in headless Chromium with [Playwright](https://playwright.dev/) 1.63.0 on [Node.js](https://nodejs.org/) 24. The course's scenes and scripts are in [`code/threejs`](https://github.com/spareilleux/learn/tree/8bf126b/code/threejs), with a `package.json` and lock file that also pin [glTF Transform](https://gltf-transform.dev/) 4.5.0. [`.github/workflows/threejs-examples.yml`](https://github.com/spareilleux/learn/blob/8bf126b/.github/workflows/threejs-examples.yml) runs [`check.sh`](https://github.com/spareilleux/learn/blob/8bf126b/code/threejs/check.sh) on Linux, Windows and macOS: it type-checks everything, runs the Node.js scripts, opens every lesson page in headless Chromium, builds the pages, and compares the outputs with the ones pasted in the lessons.
+[three.js](https://threejs.org/) **r186** (the npm package `three` 0.186.0, released on 8 September 2026), with [`@types/three`](https://www.npmjs.com/package/@types/three) 0.186.0, served and built by [Vite](https://vite.dev/) 8.3.0, checked with [TypeScript](https://www.typescriptlang.org/) 7.0.2, and measured in headless Chromium with [Playwright](https://playwright.dev/) 1.63.0 on [Node.js](https://nodejs.org/) 24. The course's scenes and scripts are in [`code/threejs`](https://github.com/spareilleux/learn/tree/eeca669/code/threejs), with a `package.json` and lock file that also pin [glTF Transform](https://gltf-transform.dev/) 4.5.0, and for lessons 9 to 13 [React](https://react.dev/) 19.2.8, [React Three Fiber](https://r3f.docs.pmnd.rs/) 9.7.0, [drei](https://drei.docs.pmnd.rs/) 10.7.8, [Rapier](https://rapier.rs/) 0.20.0, [IWER](https://github.com/meta-quest/immersive-web-emulation-runtime) 2.4.0, [Vitest](https://vitest.dev/) 5.0.1 and [pixelmatch](https://github.com/mapbox/pixelmatch) 7.2.0. [`.github/workflows/threejs-examples.yml`](https://github.com/spareilleux/learn/blob/eeca669/.github/workflows/threejs-examples.yml) runs [`check.sh`](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/check.sh) on Linux, Windows and macOS: it type-checks everything, runs the Node.js scripts and the component tests, opens every lesson page in headless Chromium, builds the pages, and compares the outputs with the ones pasted in the lessons.
 :::
 
 ## Why I'm learning this
@@ -63,12 +63,14 @@ The real code is [GuitarAlchemist/ga](https://github.com/GuitarAlchemist/ga) at 
 | 6 | [TSL and node materials](06-tsl-node-materials/) | HLSL effects, shader graphs |
 | 7 | [Post-processing with `RenderPipeline`](07-post-processing-renderpipeline/) | render targets, pixel shaders |
 | 8 | [Performance, measured: instancing, `BatchedMesh`, LOD, frustum culling](08-performance-instancing-batching-lod/) | instanced drawing, profilers |
-| 9 | React Three Fiber and drei (coming next) | WPF data binding, Blazor or React components |
-| 10 | Physics with Rapier in WebAssembly | BEPUphysics, physics engines in games |
-| 11 | WebXR | Windows Mixed Reality, OpenXR |
-| 12 | Tests and CI: headless rendering, compared screenshots, and their limits | UI automation, snapshot tests |
-| 13 | Project: GuitarAlchemist's 3D guitar neck, ported to WebGPU | |
+| 9 | [React Three Fiber and drei](09-react-three-fiber-drei/) | WPF data binding, Blazor or React components |
+| 10 | [Physics with Rapier in WebAssembly](10-physics-rapier-wasm/) | BEPUphysics, physics engines in games |
+| 11 | [WebXR](11-webxr/) | Windows Mixed Reality, OpenXR |
+| 12 | [Tests and CI: headless rendering, compared screenshots, and their limits](12-tests-and-ci/) | UI automation, snapshot tests |
+| 13 | [Project: GuitarAlchemist's 3D guitar neck, ported to WebGPU](13-project-ga-fretboard/) | the lessons before it |
 | — | [Journal](journal/) | |
+
+The course is complete: all 13 lessons were written and checked on 16 September 2026. What remains to try on real hardware, a VR headset, a phone, WebGPU on Linux, is listed in the journal.
 
 ## Resources
 
@@ -77,4 +79,6 @@ The real code is [GuitarAlchemist/ga](https://github.com/GuitarAlchemist/ga) at 
 - The source at the release tag: [mrdoob/three.js@r186](https://github.com/mrdoob/three.js/tree/r186)
 - [WebGPU](https://gpuweb.github.io/gpuweb/) and [WGSL](https://gpuweb.github.io/gpuweb/wgsl/) specifications, W3C
 - [glTF 2.0 specification](https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html), Khronos
-- [React Three Fiber](https://docs.pmnd.rs/react-three-fiber) and [drei](https://drei.docs.pmnd.rs/)
+- [React Three Fiber](https://r3f.docs.pmnd.rs/) and [drei](https://drei.docs.pmnd.rs/)
+- [Rapier's JavaScript guide](https://rapier.rs/docs/user_guides/javascript/getting_started_js/)
+- [WebXR Device API](https://www.w3.org/TR/webxr/), W3C, and Meta's [Immersive Web Emulation Runtime](https://github.com/meta-quest/immersive-web-emulation-runtime)

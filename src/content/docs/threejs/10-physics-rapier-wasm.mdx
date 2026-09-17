@@ -1,0 +1,226 @@
+---
+title: 10. Physics with Rapier in WebAssembly
+description: Guitar picks dropped onto the fretboard with Rapier 0.20 — a WebAssembly physics engine loaded as a 2.9 MB module, fixed and variable time steps measured against each other, an accumulator with interpolation for the render loop, one InstancedMesh fed from the rigid bodies, the deterministic build's state hash in Node.js and in the browser, snapshots, and continuous collision detection, compared with BEPUphysics, three.js's RapierPhysics addon, and GuitarAlchemist's hand-written physics.
+sidebar:
+  order: 10
+---
+
+Code: the world shared by the page and the script in [`src/10-physics/world.ts`](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/10-physics/world.ts), the page in [`src/10-physics/main.ts`](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/10-physics/main.ts), and the measurements without a browser in [`scripts/l10-rapier.ts`](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/scripts/l10-rapier.ts).
+
+## A physics engine next to the renderer
+
+three.js draws; it doesn't simulate. A physics engine keeps its own world of rigid bodies and colliders, advances it by a time step, and your loop copies each body's position and rotation to the mesh that shows it. [Rapier](https://rapier.rs/) is written in Rust by Dimforge, and published on npm compiled to WebAssembly. In .NET, the closest is [BEPUphysics v2](https://github.com/bepu/bepuphysics2), also a separate world that you step and read back.
+
+| | BEPUphysics v2 | Rapier (JavaScript) | three.js |
+|---|---|---|---|
+| World | `Simulation` | `World` | none: `Scene` holds only what is drawn |
+| Moving object | a body in `Bodies`, with a `BodyHandle` | `RigidBody`: dynamic, fixed, or kinematic | `Mesh`, whose transform you copy from the body |
+| Shape | `Box`, `Sphere`, `Capsule`, convex hulls, meshes | `Collider`: `cuboid`, `ball`, `capsule`, `convexHull`, `trimesh`, `heightfield` | its own `BufferGeometry`, unrelated to the collider |
+| Step | `Simulation.Timestep(dt)` | `world.step()`, with `world.timestep` | — |
+| Units | yours | meters, kilograms and seconds, by convention | yours |
+
+## Versions and builds
+
+[`@dimforge/rapier3d-compat`](https://www.npmjs.com/package/@dimforge/rapier3d-compat) 0.20.0, published on 8 August 2026, is the current version. The "compat" packages embed the WebAssembly module in their JavaScript, as base64, so they load in any bundler and in Node.js without a separate `.wasm` file; the non-compat packages need a bundler that handles WebAssembly imports.
+
+Rapier's README lists three builds: the standard one is "locally deterministic, on the same machine", but doesn't guarantee cross-platform determinism; a SIMD build is faster where the browser supports WebAssembly SIMD; and [`@dimforge/rapier3d-deterministic-compat`](https://www.npmjs.com/package/@dimforge/rapier3d-deterministic-compat) is "less optimized", with "a guarantee of a cross-platform deterministic execution", which lockstep networking and replays need. The course loads both.
+
+Two other ways to use Rapier with three.js pin older versions:
+
+- three.js's own [`RapierPhysics`](https://github.com/mrdoob/three.js/blob/r186/examples/jsm/physics/RapierPhysics.js) addon imports `rapier3d-compat@0.17.3` from skypack.dev at run time ([line 3](https://github.com/mrdoob/three.js/blob/r186/examples/jsm/physics/RapierPhysics.js#L3)), steps the world from `setInterval` at 60 Hz, and sets `world.timestep` to the measured delta each time ([lines 318-325](https://github.com/mrdoob/three.js/blob/r186/examples/jsm/physics/RapierPhysics.js#L318-L325) and [line 367](https://github.com/mrdoob/three.js/blob/r186/examples/jsm/physics/RapierPhysics.js#L367)): a variable step, which the measurements below show the cost of. It serves the examples; a project controls its own version and loop.
+- [`@react-three/rapier`](https://github.com/pmndrs/react-three-rapier) 2.2.0, the R3F components, depends on `rapier3d-compat` 0.19.2 exactly.
+
+## The world: picks on a fretboard
+
+[`world.ts`](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/10-physics/world.ts) imports nothing from the DOM or from three.js, so the page and a Node.js script share it. The fretboard is fixed colliders: the neck, and 12 frets standing 1.2 cm above it, as thin boxes a pick can catch on, then a floor ([lines 22-32](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/10-physics/world.ts#L22-L32)). A collider without a rigid body never moves. The 24 picks are dynamic bodies with a box collider each, placed on a grid whose first and last rows hang over the neck's edges ([lines 34-48](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/10-physics/world.ts#L34-L48)):
+
+```ts
+const body = world.createRigidBody(
+  RAPIER.RigidBodyDesc.dynamic()
+    .setTranslation(NUT_X + 0.3 + column * 0.55, NECK_TOP + 0.6 + row * 0.25, -0.33 + row * 0.22)
+    .setRotation(axisAngle(0.6, 0, 0.8, angle)),
+);
+world.createCollider(RAPIER.ColliderDesc.cuboid(PICK_SIZE.x / 2, PICK_SIZE.y / 2, PICK_SIZE.z / 2).setDensity(1400).setFriction(0.4), body);
+```
+
+`cuboid` takes half-extents, not sizes. The density, 1,400 kg/m³, is celluloid's; the collider gives the body its mass from its volume. Rapier's units are whatever you decide; gravity of 9.81 makes them meters, so this fretboard, 3.6 units long, is a giant's.
+
+## Three seconds, measured without a browser
+
+`l10-rapier.ts` loads both builds, steps the world 180 times at 1/60 s, and prints where the picks are each second:
+
+```text
+$ node scripts/l10-rapier.ts
+@dimforge/rapier3d-deterministic-compat 0.20.0: rapier.mjs is 2,893,506 bytes, loaded and initialized in N ms
+@dimforge/rapier3d-compat 0.20.0: rapier.mjs is 2,857,590 bytes, loaded and initialized in N ms
+
+fixed step of 0.01667 s, 24 picks, 38 colliders
+t = 1.0 s: 12 on the neck, 12 on the floor, 1 asleep, lowest y -0.99
+t = 2.0 s: 12 on the neck, 12 on the floor, 24 asleep, lowest y -0.99
+t = 3.0 s: 12 on the neck, 12 on the floor, 24 asleep, lowest y -0.99
+pick 0 at [-1.7, -0.99, -0.33]
+deterministic build, state hash after 180 steps: 68235a2bdba192f1
+```
+
+(`N ms` is how `check.sh` normalizes times; on the author's machine, the deterministic build loaded in 51 ms and the standard one in 30 ms.)
+
+38 colliders: the neck, 12 frets, the floor and 24 picks. After a second, half the picks rest on the neck and half fell off its edges onto the floor, whose top is at −1: a pick 2 cm thick rests at −0.99. After two seconds, all 24 are **asleep**: Rapier stops simulating a body whose velocity stayed under a threshold for a while, until something touches it. A resting pile costs almost nothing per step.
+
+The hash is SHA-256 over every pick's position and rotation, as 32-bit floats ([`stateBytes`, lines 58-67](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/10-physics/world.ts#L58-L67)), cut to 16 hex digits. `check.sh` compares it on the three OSes. The standard build's line is printed, not compared:
+
+```text
+standard build, state hash after 180 steps: 68235a2bdba192f1
+largest distance between a pick in the two builds: under 1 µm
+```
+
+On Windows x64, both builds gave the same bytes. In CI run [35175914560](https://github.com/spareilleux/learn/actions/runs/35175914560), the standard build's hash was also `68235a2bdba192f1` on Linux x64 and macOS arm64, in Node.js and in the browser. That is one scene on three machines, not a guarantee: the deterministic build's hash is the one the course relies on.
+
+## Fixed or variable time step
+
+A game loop gets frames of uneven length. Passing each frame's duration to the engine looks natural, and it's what `RapierPhysics` does. The script runs the same three seconds with steps drawn at random between 1/144 s and 1/30 s, from a fixed seed ([lines 51-67](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/scripts/l10-rapier.ts#L51-L67)):
+
+```text
+variable step, 157 steps for the same 3 s: 16 picks more than 1 cm away from the fixed-step run, the farthest 42.15 m, at y = -43.14
+```
+
+Two thirds of the picks ended somewhere else, and one fell through the floor: at y = −43, it is still falling. A solver's result depends on its step: contacts, friction and the resolution of penetrations are all computed per step, and a long step lets a thin object move far into another before the solver sees it. So the same inputs give a different pile with each frame rate, the result can't be replayed, and one long frame can push an object through a 20 cm floor.
+
+The page steps at a fixed 1/60 s whatever the frame rate, with an **accumulator** ([`main.ts`, lines 88-102](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/10-physics/main.ts#L88-L102)):
+
+```ts
+// The accumulator: real time goes in, whole steps of 1/60 s come out, and what's left decides the interpolation.
+// At most 5 steps per frame, so that a long pause (a background tab) doesn't freeze the page with hundreds of steps.
+const timer = new THREE.Timer();
+let accumulator = 0;
+renderer.setAnimationLoop((time) => {
+  if (probing) return;
+  timer.update(time);
+  accumulator = Math.min(accumulator + timer.getDelta(), 5 * STEP);
+  while (accumulator >= STEP) {
+    step();
+    accumulator -= STEP;
+  }
+  draw(accumulator / STEP);
+  renderer.render(scene, camera);
+});
+```
+
+On a 144 Hz screen, most frames run no step, and some run one; on a 30 Hz screen, each frame runs two. Drawing the last state would stutter, so `draw` places each pick between its state before and after the last step, by the fraction of a step left in the accumulator: `lerp` for positions, `slerp` for rotations ([lines 65-75](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/10-physics/main.ts#L65-L75)). The picture is at most one step behind the simulation. This is the loop from Glenn Fiedler's ["Fix Your Timestep!"](https://gafferongames.com/post/fix_your_timestep/), and what MonoGame's `Game` does with `IsFixedTimeStep`, without the interpolation.
+
+## Bodies to an InstancedMesh
+
+The 24 picks are one `InstancedMesh`, as lesson 8 recommends: one draw call, and a matrix per pick composed from its body's translation and rotation. `frustumCulled = false`, since the bounding sphere computed from the first matrices doesn't follow the picks ([lines 41-48](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/10-physics/main.ts#L41-L48)); lesson 8's alternative, `computeBoundingSphere()` after each update, costs a pass over the matrices per frame.
+
+When probed, the page steps 180 times without waiting for the clock, renders once, and hashes the state with the browser's `crypto.subtle`:
+
+```text
+$ node scripts/probe.mjs 10-physics
+{
+  "frame": 1,
+  "render": {
+    "calls": 2,
+    "drawCalls": 22,
+    "triangles": 1071
+  },
+  "memory": {
+    "geometries": 11,
+    "textures": 3,
+    "programs": 6
+  },
+  "rapier": "0.20.0",
+  "build": "deterministic",
+  "steps": 180,
+  "asleep": 24,
+  "stateHash": "68235a2bdba192f1",
+}
+```
+
+The same hash as Node.js: the same WebAssembly, fed the same numbers, gives the same bytes in V8 on the page and in V8 in Node.js. `?build=standard` gives it too on the author's machine. 22 draw calls: lesson 5's fretboard (19 meshes), the floor, the picks, and the output pass.
+
+![A dark brown neck with metal frets and strings, seen from the front and above, with orange picks lying flat or tilted between the frets, and more picks scattered on the dark floor in front of it.](../../../assets/threejs/l10-picks.webp)
+
+Loading and stepping, on the author's machine, as the page reported them (`check.sh` removes these fields from the compared output): the deterministic module took 83 ms to import and initialize in the page, and a step of the 24 picks 0.22 ms on average over the 180 steps, a third of them with every pick asleep. The WebAssembly module is loaded with a dynamic `import()`, so Vite puts it in its own chunk, fetched after the page's code (lesson 13's build lists it). Rapier's objects live in WebAssembly memory: `world.free()` releases a world when a page is done with it.
+
+## Snapshots
+
+`world.takeSnapshot()` serializes the whole world to bytes, and `World.restoreSnapshot(bytes)` rebuilds it:
+
+```text
+snapshot at step 60: 55,186 bytes
+step 180, continued: 68235a2bdba192f1; step 180, restored then stepped: 68235a2bdba192f1
+```
+
+The restored world, stepped the same 120 times, reached the same state as the original. With a deterministic build, a snapshot plus the inputs since then is a replay, or a rollback for networked games.
+
+## Fast and thin objects
+
+The script fires a ball of 1 cm diameter at 60 m/s toward a wall 2.4 cm thick, starting 2.5 m away: one step of 1/60 s moves the ball 1 m.
+
+```text
+fixed 2.4 cm wall, 1 cm ball at 60 m/s, CCD off: x = -1.5, -0.5, -0.02, -0.01, -0.01
+fixed 2.4 cm wall, 1 cm ball at 60 m/s, CCD on : x = -1.5, -0.5, -0.02, -0.01, -0.01
+dynamic 2.4 cm wall, 1 cm ball at 60 m/s, CCD off: x = -1.5, -0.5, 0.5, 1.5, 2.5
+dynamic 2.4 cm wall, 1 cm ball at 60 m/s, CCD on : x = -1.5, -0.5, -0.02, 0, -0.01
+```
+
+Against a dynamic wall without continuous collision detection (CCD), the ball goes from x = −0.5 to 0.5 in one step, and is never inside the wall at the end of a step: it **tunnels** through. With `setCcdEnabled(true)` on the ball, Rapier sweeps its motion during the step and stops it at the wall. Against a fixed wall, it stopped even without CCD in this run; why the fixed case differs is *to verify* in Rapier's source. CCD costs time per step: enable it on small fast bodies, not on everything.
+
+## In GuitarAlchemist/ga
+
+GA has no physics library: no Rapier, no cannon-es, no Ammo.
+
+- **Cheese Avalanche** simulates about 300 bodies by hand, with gravity, collisions against a heightfield, restitution and a rough spin: "intentionally hand-rolled (no cannon / rapier dep)" ([`CheeseAvalanche.tsx`, lines 16-18](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/CheeseAvalanche/CheeseAvalanche.tsx#L16-L18)). For that job, bodies against terrain and never against each other, it is a reasonable choice. Its step is the frame's delta, clamped to 1/30 s ([lines 561-562](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/CheeseAvalanche/CheeseAvalanche.tsx#L561-L562), called from the animation loop at [line 649](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/CheeseAvalanche/CheeseAvalanche.tsx#L649)): a variable step, so the avalanche plays differently at 60 and 144 Hz. It writes the bodies to two `InstancedMesh` objects ([lines 616-632](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/CheeseAvalanche/CheeseAvalanche.tsx#L616-L632)), as this lesson does, but allocates a `Vector3` for each rolling body on each step, inside a loop that otherwise reuses temporaries ([line 595](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/CheeseAvalanche/CheeseAvalanche.tsx#L595)).
+- **The lunar lander** does it the fixed way: an accumulator of steps of 1/120 s, at most 10 per frame, after clamping the frame's delta to 0.1 s ([`LunarLanderEngine.ts`, lines 3030-3040](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/PrimeRadiant/LunarLanderEngine.ts#L3030-L3040), with `PHYSICS_DT` at [line 66](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/PrimeRadiant/LunarLanderEngine.ts#L66)). It draws the last state, without interpolation, which at 1/120 s is rarely visible.
+
+## Key takeaways
+
+- A physics engine is a second world: step it, then copy each body's transform to what three.js draws.
+- Rapier's "compat" packages embed the WebAssembly module: 2.9 MB of JavaScript, to load with a dynamic `import()` and `init()`.
+- Step at a fixed rate with an accumulator, cap the steps per frame, and interpolate what you draw. A variable step changed where 16 of 24 picks landed, and dropped one through the floor.
+- The deterministic build gives the same bytes across platforms; the standard one promises that on the same machine only.
+- Sleeping bodies cost almost nothing; fast thin ones need CCD.
+- Snapshots serialize the world: with determinism, they are replays.
+
+## Exercises
+
+1. Throw a pick at the neck: on a click, set a pick's linear velocity toward the fretboard with `setLinvel`, and wake it with `wakeUp()`. Why does a sleeping body need that?
+2. Drop the cap of 5 steps per frame, and simulate a background tab: add 3 seconds to the accumulator in one frame. What happens, and what does the cap trade off?
+3. The standard build gave the same hash as the deterministic one on Windows. Name two things that can make it differ on another machine, and what the deterministic build does about them.
+
+<details>
+<summary>Solution 1</summary>
+
+```ts
+renderer.domElement.addEventListener('click', () => {
+  const body = picks[0];
+  body.setTranslation({ x: 0, y: 1.5, z: 1.5 }, true);
+  body.setLinvel({ x: 0, y: -2, z: -4 }, true);
+});
+```
+
+The second argument of `setTranslation` and `setLinvel`, `wakeUp`, wakes the body; `body.wakeUp()` does the same separately. A sleeping body is out of the simulation: changing its velocity without waking it leaves it where it is until something collides with it. After two seconds, all 24 picks were asleep, so every change from outside needs it. A sketch, not run in the course's page (*to verify*).
+
+</details>
+
+<details>
+<summary>Solution 2</summary>
+
+3 seconds are 180 steps, run in one frame before anything is drawn: the page freezes for the time those steps take, then the picks jump to where they would have been. If a frame's steps take longer than the frame, the next frame has even more time to catch up: the "spiral of death", where the simulation never catches up. The cap drops the extra time instead: the simulation runs slower than real time for a moment, which nobody sees in a background tab. three.js's `Timer` also has `connect(document)`, which uses the Page Visibility API "to avoid large time delta values" after a hidden tab ([`Timer.js`, lines 43-58](https://github.com/mrdoob/three.js/blob/r186/src/core/Timer.js#L43-L58)). A reasoning from the loop's code, not a measurement.
+
+</details>
+
+<details>
+<summary>Solution 3</summary>
+
+Rapier's README only says that the standard build is "locally deterministic, on the same machine", and that the deterministic build is "less optimized" and guarantees "a cross-platform deterministic execution". It doesn't say what differs. The usual causes in floating-point code are these: a compiler that fuses a multiplication and an addition into one instruction (FMA), which rounds differently; math functions such as `sin` or `sqrt` implemented differently on each platform; and sums whose order changes with SIMD or parallel code. WebAssembly's basic arithmetic is specified bit for bit, so what can vary is what the module calls outside it, and relaxed SIMD, whose results may differ by platform. Which of these the standard 0.20.0 build is exposed to, and what the deterministic build changes, is *to verify* in rapier.js's build scripts. The course's CI hashes both builds on three OSes: see the journal for what it found.
+
+</details>
+
+## Sources
+
+- Rapier: [JavaScript user guide](https://rapier.rs/docs/user_guides/javascript/getting_started_js/), [rigid bodies](https://rapier.rs/docs/user_guides/javascript/rigid_bodies/), [colliders](https://rapier.rs/docs/user_guides/javascript/colliders/), [determinism](https://rapier.rs/docs/user_guides/javascript/determinism/), [the dimforge/rapier.js repository](https://github.com/dimforge/rapier.js)
+- three.js source at r186: [`RapierPhysics.js`](https://github.com/mrdoob/three.js/blob/r186/examples/jsm/physics/RapierPhysics.js)
+- [@react-three/rapier](https://github.com/pmndrs/react-three-rapier)
+- Glenn Fiedler, ["Fix Your Timestep!"](https://gafferongames.com/post/fix_your_timestep/)
+- MonoGame: [`Game.IsFixedTimeStep`](https://docs.monogame.net/api/Microsoft.Xna.Framework.Game.html)
+- BEPUphysics v2: [repository and documentation](https://github.com/bepu/bepuphysics2)

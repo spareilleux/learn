@@ -1,6 +1,6 @@
 ---
 title: Journal
-description: Dated progress notes for the three.js course — pinning three.js r186, Vite 8.3 and Playwright 1.63, measuring WebGPU pages in headless Chromium on three OSes, what the CI runners really render with, surprises in @types/three and DRACOLoader, what the course found in GuitarAlchemist/ga's 3D code, and items to verify.
+description: Dated progress notes for the three.js course — pinning three.js r186, Vite 8.3, Playwright 1.63, React Three Fiber 9, Rapier 0.20 and IWER, measuring WebGPU pages in headless Chromium on three OSes, what the CI runners really render with, surprises in @types/three and DRACOLoader, what the course found in GuitarAlchemist/ga's 3D code, and items to verify.
 sidebar:
   order: 99
 ---
@@ -18,7 +18,12 @@ sidebar:
 - [x] Lesson 6: TSL and node materials
 - [x] Lesson 7: post-processing with `RenderPipeline`
 - [x] Lesson 8: performance, measured
-- [ ] Lesson 9: React Three Fiber and drei
+- [x] Lesson 9: React Three Fiber and drei
+- [x] Lesson 10: physics with Rapier in WebAssembly
+- [x] Lesson 11: WebXR, emulated
+- [x] Lesson 12: tests and CI
+- [x] Lesson 13: project, GuitarAlchemist's 3D guitar neck
+- [x] Course complete
 
 ## 2026-09-16 — Versions
 
@@ -88,6 +93,43 @@ The course reads GA at commit [`05c8eda`](https://github.com/GuitarAlchemist/ga/
 - Lesson 8's pages with 800,000 triangles timed out: the probe result arrived, but Playwright's screenshot waited more than 30 seconds behind the 60 timed frames still queued in the software rasterizer.
 - The fix: `check.sh` compares a probe with `expected/<name>.webgl.txt` when that file exists and the page ran on WebGL 2. The five files come from `chromium-headless-shell` on the author's machine, whose SwiftShader gave the same values as the runners. The GLSL line is compared, and the WGSL line only printed. Lesson 8 times 20 frames, and its probes wait up to 240 seconds (`PROBE_TIMEOUT`). Run [35124756498](https://github.com/spareilleux/learn/actions/runs/35124756498) passed on the three OSes.
 
+## 2026-09-16 — Lessons 9 to 13: versions
+
+- React 19.3.0 came out on 9 September 2026, but `@react-three/fiber` 9.7.0 declares `react` `>=19 <19.3`: the course pins React 19.2.8, with drei 10.7.8. R3F 10 and drei 11 are alphas. `@react-three/test-renderer` 9.1.1 and Vitest 5.0.1 test the components.
+- Rapier 0.20.0 was published on 8 August 2026. three.js r186's `RapierPhysics` addon still loads 0.17.3 from skypack.dev, and `@react-three/rapier` 2.2.0 pins 0.19.2. The course uses both `@dimforge/rapier3d-compat` and `@dimforge/rapier3d-deterministic-compat`; their classes have private members, so TypeScript refuses one module's type for the other without a cast.
+- IWER 2.4.0 emulates a Quest 3; pixelmatch 7.2.0 compares screenshots.
+
+## 2026-09-16 — Lessons 9 to 13: what the pages found
+
+- **R3F 9.7.0 warns on `WebGPURenderer` without being asked.** `<Canvas>`'s `shadows` defaults to `false`, and R3F sets `PCFSoftShadowMap` for any boolean; `WebGPURenderer` resets it with a warning, once per render of `<Canvas>`. Its store also creates a deprecated `THREE.Clock`.
+- **drei's `<Text>` draws a blank quad on `WebGPURenderer`**: troika-three-text injects its shader through `onBeforeCompile`, which the node-based renderer never calls.
+- **Render counts depend on the machine.** In `chromium-headless-shell`, 10 state updates one frame apart gave 6 renders instead of 11, and a 5-step mouse move fewer renders than on the GPU: React batches updates and the browser coalesces pointer events when frames are slow. The pages use `flushSync`, and report no counts after pointer actions.
+- **Chromium on Windows warns that `powerPreference` is ignored** whenever R3F passes it; the other OSes don't. `check.sh` filters the line.
+- **The deterministic and standard Rapier builds gave the same state hash on Windows x64**, in Node.js and in the browser. With a variable step between 1/144 and 1/30 s, 16 of 24 picks landed elsewhere and one fell through a 20 cm floor. A fast ball crossed a thin dynamic wall without CCD, but not a fixed one.
+- **IWER needs `forceInstall`** in Chromium, which already has a `navigator.xr`, **and `stereoEnabled`**, or the right eye's viewport is 0 pixels wide.
+- **The first WebXR probe hung for ten minutes** while holding the shared GPU lock: the WebGL 2 backend threw on every XR frame, the page waited for frames forever, and the run was stopped by hand. The cause is IWER's `XRWebGLLayer.framebuffer`, `null`, used as a `WeakMap` key in `WebGLState.drawBuffers`. The page now catches render errors and bounds its waits, and `probe.mjs` exits on its own after twice its timeout plus 30 seconds.
+- **In r186, `WebGPURenderer` enters a WebXR session on WebGPU only with `XRGPUBinding` and the `webgpu` feature**; its error message mentions a `VRButtonGPU` that doesn't exist. `WebGLXRFallback` switches renderers, but the controllers the page took from the first renderer stop receiving events. Only the classic `WebGLRenderer` rendered both eyes with IWER.
+- **An `InstancedMesh` ignores `setColorAt` if its first render had no instance colors**: the port's markers showed white until the attribute was allocated up front.
+- **`@react-three/test-renderer` needs `IS_REACT_ACT_ENVIRONMENT`**, or React warns on every update and R3F disposes later; its CommonJS build loads `three.cjs` next to the ES module build, without splitting the classes the scene uses.
+- **Pixels**: the same page twice gave identical bytes; WebGPU against ANGLE on the same GPU differed in 294 pixels, against SwiftShader in 10,330, none above pixelmatch's default threshold once anti-aliasing is left out.
+- **An image imported by a lesson must exist before the page does**: lesson 11 once imported a screenshot not yet converted, and the shared working tree's Astro build failed for the other sessions working in it until the image was added.
+
+## 2026-09-16 — Lessons 9 to 13 on the CI runners
+
+- Run [35175914560](https://github.com/spareilleux/learn/actions/runs/35175914560) passed on all three OSes the first time. The standard Rapier build gave the state hash `68235a2bdba192f1` on Linux x64 and macOS arm64 too, in Node.js and in the browser, the same as the deterministic build: for this scene, and not as a guarantee.
+- macOS ran the pages on WebGPU with the "apple" adapter; Linux and Windows on SwiftShader's WebGL 2, where GA's `ThreeFretboard` produced its 253 WebGL error lines and R3F warned 13 times about `PCFSoftShadowMap` instead of 14.
+- Before the push, the local check compared lesson 11's fallback page with its WebGL 2 output on the author's GPU: the page ends on WebGL 2 after starting on WebGPU. `check.sh` now uses the WebGL 2 output only when the page ran on WebGL 2 from the start.
+
+## 2026-09-16 — GuitarAlchemist/ga, lessons 9 to 13
+
+Nothing below has been reported to GA.
+
+- GA's React components use R3F 8, drei 9 and React 18, with `WebGLRenderer` in all 6 `<Canvas>` files; `ThreeFretboard.tsx` doesn't use R3F. The BSP explorer sets React state with a cloned camera position on every frame, and `GuitarAlchemistLogo3D.tsx` passes a new object in `args`, rebuilding its geometry on each render (lesson 9).
+- No physics library: Cheese Avalanche is hand-written with a variable step clamped to 1/30 s; the lunar lander uses a fixed 1/120 s step with an accumulator (lesson 10).
+- No WebXR code (lesson 11).
+- 22 Playwright spec files, of which the 7 outside the dashboard suite, 6 of them on 3D pages, run in no CI workflow; 3-second waits for WebGPU; a `toBeTruthy()` on a screenshot buffer; a black-canvas check that calls `getContext('2d')` on a WebGL canvas and can never pass; 13 committed test result files from a failed run (lesson 12).
+- `ThreeFretboard.tsx`, reproduced and measured: 69 draw calls and 32 textures for an empty neck; 10 renders of its parent with the same notes rebuild the scene 10 times and leak 29 sprite textures each time; a pixel ratio of up to 6; `samples: 8`, which draws nothing on SwiftShader's WebGL 2; strings twice as thick, since a gauge is used as a radius; and an `onPositionClick` prop that is never called. The port draws the same neck in 6 draw calls with 4 textures, and picks notes (lesson 13).
+
 ## To verify
 
 - Whether a scene modeled in centimeters needs lights 10,000 times stronger to look the same as in meters (lesson 2).
@@ -97,3 +139,10 @@ The course reads GA at commit [`05c8eda`](https://github.com/GuitarAlchemist/ga/
 - GPU time, not only CPU time, with WebGPU's `timestamp-query` (lesson 8).
 - Draco against meshopt on a large model and on many small ones, over a real network (lesson 4, exercise 3).
 - WebGPU on a Linux or Windows machine with a GPU, outside the author's.
+- `XRGPUBinding`: which browsers and headsets offer it, and `WebGPURenderer` in a real WebXR session (lesson 11).
+- The WebGL 2 backend and `WebGLXRFallback` on a real headset, whose layer framebuffer isn't `null` (lesson 11).
+- Frame rate, foveation and comfort of the WebXR page on a Quest (lesson 11).
+- Whether a WebGPU-ready troika-three-text exists for drei's `<Text>` (lesson 9).
+- How often GA's parents render `ThreeFretboard` and the BSP explorer in practice, with React's profiler (lessons 9 and 13).
+- `samples: 8` on real GPUs' WebGL 2, by `MAX_SAMPLES` (lesson 13).
+- Why Rapier stopped a fast ball at a thin fixed wall without CCD (lesson 10).

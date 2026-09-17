@@ -1,0 +1,201 @@
+---
+title: "12. Tests and CI: headless rendering, compared screenshots, and their limits"
+description: How this course tests 3D code on three OSes, and what it learned doing so — pure functions in Node.js, React Three Fiber components without a GPU with Vitest and @react-three/test-renderer, pages probed in headless Chromium through renderer.info, screenshots compared with pixelmatch, what the CI runners render with, and six ways a 3D test went flaky or hung in this course, compared with UI automation and snapshot tests in .NET and with GuitarAlchemist's Playwright specs.
+sidebar:
+  order: 12
+---
+
+Code: the component tests in [`tests/fretboard.test.tsx`](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/tests/fretboard.test.tsx), the pixel comparison in [`scripts/l12-pixels.ts`](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/scripts/l12-pixels.ts), the probe runner in [`scripts/probe.mjs`](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/scripts/probe.mjs), and the whole check in [`check.sh`](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/check.sh), run by [`.github/workflows/threejs-examples.yml`](https://github.com/spareilleux/learn/blob/eeca669/.github/workflows/threejs-examples.yml).
+
+## Four layers
+
+A 3D page mixes code that any test runner can check with code that needs a GPU, and a GPU is what CI machines usually lack. This course tests in four layers, from the cheapest to the least reliable:
+
+| Layer | What runs | Needs | In .NET terms | In this course |
+|---|---|---|---|---|
+| Pure logic | math, notes, physics | Node.js | xUnit on a class library | `fretAt`, `noteName`, rays in `l05-raycaster.ts`, Rapier in `l10-rapier.ts` |
+| Components | the scene graph a component builds, its props and events | Node.js, no GPU | a view model test; bUnit for Blazor | Vitest with `@react-three/test-renderer` |
+| Probed pages | the real renderer, in a real browser | a browser, a GPU or a software rasterizer | UI automation with FlaUI or Appium | `probe.mjs`: `renderer.info`, colors, hashes, pointer events |
+| Pixels | what the screen shows | the same GPU and driver, every time | screenshot comparison, snapshot tests with Verify | `l12-pixels.ts`, and the colors read in lessons 1 to 7 |
+
+The higher layers catch more and break more easily. The course compares the lower three everywhere, and pixels only where it can explain what differs.
+
+## Components without a GPU
+
+[`@react-three/test-renderer`](https://github.com/pmndrs/react-three-fiber/tree/master/packages/test-renderer) 9.1.1 runs R3F's reconciler in Node.js: `create(<Fretboard />)` builds the three.js scene graph from the component, with real `Mesh` and `BufferGeometry` objects, and nothing is drawn. [Vitest](https://vitest.dev/) 5.0.1 runs the tests, with Vite's transform, so the `.tsx` files need no separate build.
+
+The five tests check what lesson 9 measured in the browser ([`fretboard.test.tsx`](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/tests/fretboard.test.tsx)): the neck, 12 frets and 6 strings; one geometry shared by the frets, or 12 when they are inline; the markers computed once for the same array, and on every render for a new one; the note under the pointer; and 8 geometries disposed on unmount. The pointer test shows the limit of the layer: no ray is cast, the test supplies the intersection point R3F would have computed ([lines 60-69](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/tests/fretboard.test.tsx#L60-L69)):
+
+```tsx
+test('reports the note under the pointer', async () => {
+  const picks: Pick[] = [];
+  const renderer = await ReactThreeTestRenderer.create(<Fretboard onPick={(pick) => picks.push(pick)} />);
+  const group = renderer.scene.find((node) => node.props.name === 'fretboard');
+  // No raycaster runs here: the test supplies the intersection point that R3F would have computed
+  await renderer.fireEvent(group, 'onPointerMove', { point: pressPoint(3, 5), stopPropagation: () => {} });
+  expect(picks).toEqual([{ fret: 5, string: 3, note: 'C4' }]);
+  expect(renderer.scene.findAll((node) => node.props.name === 'hover')).toHaveLength(1);
+  await renderer.unmount();
+});
+```
+
+```text
+$ npx vitest run tests --reporter=verbose
+
+ RUN  v5.0.1 .
+
+(node:PID) [THREE_CJS_DEPRECATED] DeprecationWarning: `require("three")` is deprecated and will be removed.
+Replace `const THREE = require("three")` with `import * as THREE from "three"`.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+stderr | tests/fretboard.test.tsx > Fretboard > has a neck, 12 frets and 6 strings
+THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+...
+ ✓ tests/fretboard.test.tsx > Fretboard > has a neck, 12 frets and 6 strings
+ ✓ tests/fretboard.test.tsx > Fretboard > shares one geometry between the frets, unless they are written inline
+ ✓ tests/fretboard.test.tsx > Fretboard > computes the markers once for the same array, and on every render for a new one
+ ✓ tests/fretboard.test.tsx > Fretboard > reports the note under the pointer
+ ✓ tests/fretboard.test.tsx > Fretboard > disposes the geometries it created on unmount, including the shared one
+
+ Test Files  1 passed (1)
+      Tests  5 passed (5)
+   Start at  TIME
+   Duration  N
+```
+
+Three things in that output:
+
+- **`IS_REACT_ACT_ENVIRONMENT`.** The first version of the file printed "The current testing environment is not configured to support act(...)" 23 times, and its dispose test had to wait for R3F, which disposes removed objects at idle priority unless it runs under `act`. React reads a global flag to know it is in a test; the file now sets it ([lines 10-15](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/tests/fretboard.test.tsx#L10-L15)), the warnings are gone, and R3F disposes right away, so the test counts the calls without waiting.
+- **Two copies of three.js.** The deprecation warning comes from `@react-three/test-renderer`'s CommonJS build, which calls `require('three')` on its line 6 (found with `--trace-deprecation`): Node.js loads `three.cjs` next to the ES module build the tests and the component import. The scene's objects were instances of the ES module classes, checked with `instanceof` in a throwaway test, so the second copy costs load time without splitting the classes here.
+- **`THREE.Clock` again**, from R3F's store, as in lesson 9.
+
+`check.sh` runs `vitest run tests`: without the folder, Vitest also picked up a throwaway test left under `out/`, the course's ignored output folder, and failed.
+
+## Probed pages
+
+Every lesson page reports what the renderer did, and [`probe.mjs`](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/scripts/probe.mjs) prints it, as lesson 1 describes: counts from `renderer.info`, colors read from the screenshot, hashes, and what the page saw after real pointer events. `check.sh` normalizes the output and compares it with `expected/`. The counts are the backbone of this course's CI: most of them are the same on the author's GPU and on a software rasterizer, where colors and times are not.
+
+What the three runners render with, from the logs since lesson 1:
+
+| Runner | `WebGPURenderer` | `WebGLRenderer` and `forceWebGL` | `chromium-headless-shell` |
+|---|---|---|---|
+| `ubuntu-24.04` | WebGL 2 fallback, SwiftShader | SwiftShader | SwiftShader |
+| `windows-2025-vs2026` | WebGL 2 fallback, SwiftShader | SwiftShader | SwiftShader |
+| `macos-26-arm64` | WebGPU, Apple's paravirtualized GPU | ANGLE on Metal | SwiftShader |
+| The author's machine | WebGPU, NVIDIA RTX 5080 | ANGLE on Direct3D 11 | SwiftShader |
+
+So two of three runners never run the WebGPU backend. When an output depends on the backend, `check.sh` compares it with `expected/<name>.webgl.txt` when the page ran on WebGL 2 from the start ([lines 54-59](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/check.sh#L54-L59)), a file generated with `chromium-headless-shell` on the author's machine, whose SwiftShader has matched the runners' so far. "From the start" matters for lesson 11's fallback page: it starts on WebGPU and ends on WebGL 2, and on a GPU it must be compared with the WebGPU output. The WebGPU output itself is checked on the author's machine and on macOS only.
+
+## Screenshots, pixel by pixel
+
+[pixelmatch](https://github.com/mapbox/pixelmatch) 7.2.0 compares two images, counts the pixels whose color distance exceeds a threshold, in a perceptual color space (YIQ), and can leave out the pixels it detects as anti-aliasing. `l12-pixels.ts` prints that count, and before it the stricter one: pixels whose bytes differ at all.
+
+The same page, lesson 1's cube, probed twice on the same machine:
+
+```text
+$ node scripts/l12-pixels.ts out/shots/l01_probe.png out/shots/l12_probe_again.png
+l01_probe.png and l12_probe_again.png, 800x450:
+  pixels not byte-identical: 0 (0.00 %)
+  pixels over pixelmatch's threshold 0.1, anti-aliasing excluded: 0 (0.00 %)
+```
+
+`check.sh` compares this output on every OS: a page rendered twice by the same GPU and driver gives the same pixels. Across backends, it only prints the counts, since they depend on the machine. On the author's machine:
+
+```text
+     l01_probe.png and l01_probe_webgl.png, 800x450:
+       pixels not byte-identical: 294 (0.08 %)
+       pixels over pixelmatch's threshold 0.1, anti-aliasing excluded: 0 (0.00 %)
+     l01_probe.png and l01_probe_headless_shell.png, 800x450:
+       pixels not byte-identical: 10330 (2.87 %)
+       pixels over pixelmatch's threshold 0.1, anti-aliasing excluded: 0 (0.00 %)
+```
+
+WebGPU against ANGLE's WebGL 2 on the same NVIDIA GPU: 294 pixels differ. Against SwiftShader: 10,330, almost 3 % of the image. None of them exceed pixelmatch's default threshold once anti-aliasing is left out: the differences are rounding on the faces, one or two levels per channel, and edges rasterized differently.
+
+![A light gray cube on a light gray background, with a dotted yellow line along its outer edges where pixelmatch detected anti-aliased pixels that differ; the faces show no marked difference.](../../../assets/threejs/l12-pixel-diff.webp)
+
+A byte-exact comparison fails between any two of the three renderers; a thresholded one passes, and would also pass a real change of a few levels, like lesson 3's ACES color, 127 on the author's GPU and 128 in CI. The course reads specific colors at known positions with a tolerance of 2 per channel ([`compare.mjs`](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/scripts/compare.mjs)): a check of one number, which a reader can relate to a lesson. Full-image comparisons are right where the renderer is fixed: the same GPU, driver and browser, like a visual regression job on one dedicated machine, with the reference images regenerated there.
+
+## Six ways a test went wrong in this course
+
+Each of these made a check fail or hang before it was fixed, in lessons 1 to 13:
+
+1. **A promise replaced during a wait.** Lesson 1's first probe hung: the page replaced `window.probe` after `page.evaluate` had started to wait for the old promise. The pages now resolve one promise created once.
+2. **Work queued behind the result.** Lesson 8's pages with 800,000 triangles reported in time, then Playwright's screenshot waited more than 30 seconds behind the frames still queued in SwiftShader. Those probes time fewer frames, and wait up to 240 seconds.
+3. **A render loop that stops.** Lesson 11's page waited for XR frames that never came, since each one threw, and held the machine's shared GPU lock for ten minutes until it was stopped by hand. The page now catches render errors and gives up after 5 seconds, and `probe.mjs` exits on its own after twice its timeout plus 30 seconds ([lines 19-24](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/scripts/probe.mjs#L19-L24)).
+4. **React batching on a slow renderer.** Lesson 9's page counted 11 renders on the author's GPU and 6 in `chromium-headless-shell`: when frames are slow, several state updates arrive before React renders, and it batches them. `flushSync` commits each one.
+5. **Coalesced pointer events.** After a 5-step mouse move, the renders counted differed between machines: the browser merges `pointermove` events when frames are slow. The page no longer reports render counts after pointer actions, and no longer moves the pointer before unmounting.
+6. **Output that belongs to the OS.** Chromium on Windows warns "The powerPreference option is currently ignored" whenever R3F passes `powerPreference`; Linux and macOS don't. WebGL errors carry a context address, `[.WebGL-0x2afc00409400]`, different on every run. `check.sh` removes both from the compared output, and prints how many WebGL errors there were.
+
+The common thread: a 3D test waits on frames, and frames depend on the machine. Wait for a condition, not a duration; bound every wait; drive state changes synchronously; compare what doesn't depend on timing.
+
+## In GuitarAlchemist/ga
+
+GA's React components have 22 Playwright spec files under `tests/`: 15 in the dashboard suite, under `tests/dashboard/`, and 7 others, 6 of them on 3D pages (the seventh tests the tab converter).
+
+- **Waiting for a duration.** `fretboard.spec.ts` waits for the canvas, then 3 seconds "for WebGPU initialization" ([lines 22-27](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/tests/fretboard.spec.ts#L22-L27)), and calls `waitForTimeout` 25 times. On a slow runner, 3 seconds may not be enough; on the author's machine, it's 3 seconds lost per test. A page that sets a flag, or a `data-` attribute, when its first frame is rendered gives the test something to wait for.
+- **Assertions that can't fail, and one that can't pass.** `bsp-doom-explorer.spec.ts` takes a screenshot of the canvas and asserts `expect(screenshot).toBeTruthy()` ([lines 14-20](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/tests/bsp-doom-explorer.spec.ts#L14-L20)): a `Buffer` is always truthy, even for a black image. Later, two screenshots 2 seconds apart must differ ([lines 76-87](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/tests/bsp-doom-explorer.spec.ts#L76-L87)), which a blinking cursor or a timer would satisfy. `floor0-navigation.spec.ts` checks that the canvas isn't black by calling `getContext('2d')` on it ([lines 280-298](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/tests/floor0-navigation.spec.ts#L280-L298)); a canvas that already has a WebGL or WebGPU context returns `null` for a 2D one, the function returns `true`, "all black", and `expect(isBlack).toBe(false)` fails whatever the scene draws. Reading the canvas works with `toDataURL` from the same frame (with `preserveDrawingBuffer`), or with the page's screenshot, as `probe.mjs` does.
+- **Results committed, not run.** 13 files under `ReactComponents/ga-react-components/test-results/` are in the repository, including a `.last-run.json` whose status is `failed`, with 13 failed tests. The CI workflow that runs Playwright, `playwright-dashboard.yml`, runs only `tests/dashboard/`, against the live site, and none of the 3D specs.
+- **The runners' GPU, known.** GA's `deploy-banner.yml` explains why it stopped capturing its banner in CI: "GitHub runners have no GPU and SwiftShader renders WebGPU compute as black frames" ([lines 64-69](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/.github/workflows/deploy-banner.yml#L64-L69)). That matches this course's table: on Linux, WebGPU falls back to WebGL 2, and a compute shader has no fallback at all.
+
+## Key takeaways
+
+- Test 3D code in layers: pure logic and components without a GPU everywhere, probed pages through counts, pixels only on a fixed machine.
+- `@react-three/test-renderer` builds the real scene graph in Node.js; set `IS_REACT_ACT_ENVIRONMENT` in the test file.
+- `renderer.info`'s counts are the same on a GPU and on SwiftShader; colors and times are not.
+- Two of GitHub's three runners never run WebGPU: know what each renders with, and keep separate expected outputs per backend.
+- Byte-exact screenshots fail across renderers; a thresholded comparison hides small real changes. Read specific values instead, with a stated tolerance.
+- Never wait for a duration or for frames without a bound: wait for a condition, with a timeout, and drive state changes synchronously.
+
+## Exercises
+
+1. Write a component test for lesson 13's port that checks that 10 renders with a new `positions` array of the same content build the markers once. What does the test renderer not let you check about the port's strings?
+2. `floor0-navigation.spec.ts` wants to know whether a WebGL canvas is black. Write the check two ways: from Playwright's screenshot, and from inside the page.
+3. The course's pixel comparison passes at 10,330 differing bytes. Design a check that would catch lesson 3's tone mapping switched from ACES to AgX on any runner, without a byte-exact reference.
+
+<details>
+<summary>Solution 1</summary>
+
+```tsx
+test('builds the markers once for the same positions', async () => {
+  const positions = () => C_MAJOR.map((p) => ({ ...p }));
+  const renderer = await ReactThreeTestRenderer.create(<Fretboard3D positions={positions()} />);
+  for (let i = 0; i < 10; i++) await renderer.update(<Fretboard3D positions={positions()} />);
+  expect(portStats.markerBuilds).toBe(1);
+  await renderer.unmount();
+});
+```
+
+The strings move in their vertex shader, in TSL: the test renderer builds the `InstancedMesh` and its node material, but no shader is compiled or run, so the vibration can't be checked there. The port's `useLayoutEffect` also writes instance matrices, which the test can read with `getMatrixAt`. A sketch, not run: `Fretboard3D` imports `three/webgpu` and draws a canvas texture, which needs a `document` (*to verify* under Vitest's `jsdom` or `happy-dom` environment).
+
+</details>
+
+<details>
+<summary>Solution 2</summary>
+
+From Playwright, which captures what the page composited:
+
+```ts
+const png = PNG.sync.read(await page.locator('canvas').screenshot());
+let lit = 0;
+for (let i = 0; i < png.data.length; i += 4) if (png.data[i] > 10 || png.data[i + 1] > 10 || png.data[i + 2] > 10) lit++;
+expect(lit).toBeGreaterThan(1000);
+```
+
+From the page: draw the 3D canvas onto a 2D canvas, `ctx2d.drawImage(glCanvas, 0, 0)`, then `getImageData`. For a WebGL context, that reads the drawing buffer only in the same task as the frame, unless the context was created with `preserveDrawingBuffer: true`; otherwise the image is cleared, and black. The screenshot needs neither, which is why `probe.mjs` reads colors from it. Not run against GA (*to verify*).
+
+</details>
+
+<details>
+<summary>Solution 3</summary>
+
+Read what the tone mapping changes, not the whole image: lesson 3's probe already reads patches of known linear values. Choose the patches where the operators differ: at linear 0.18, ACES gives 127 and AgX 128, too close to tell apart across GPUs; at linear 1, ACES gives 227 and AgX 202, and at 0.05, 50 and 70 (lesson 3's table). Those differences are tens of levels, far above the 2 levels that separate GPUs, so a check of those patches, each with a tolerance of 2, catches the switch everywhere. For a whole-image check, compare against a reference made on the same runner type, and set pixelmatch's threshold between the runner's own noise (0 differing pixels for the same page twice) and the smallest change you care about, measured, not guessed.
+
+</details>
+
+## Sources
+
+- [@react-three/test-renderer](https://github.com/pmndrs/react-three-fiber/tree/master/packages/test-renderer); [Vitest](https://vitest.dev/guide/); React: [`act`](https://react.dev/reference/react/act) and `IS_REACT_ACT_ENVIRONMENT`, [`flushSync`](https://react.dev/reference/react-dom/flushSync)
+- [Playwright](https://playwright.dev/docs/screenshots): screenshots, [`page.mouse`](https://playwright.dev/docs/api/class-mouse)
+- [pixelmatch](https://github.com/mapbox/pixelmatch)
+- MDN: [`HTMLCanvasElement.getContext`](https://developer.mozilla.org/docs/Web/API/HTMLCanvasElement/getContext), [`preserveDrawingBuffer`](https://developer.mozilla.org/docs/Web/API/HTMLCanvasElement/getContext#preservedrawingbuffer), [pointer events coalescing](https://developer.mozilla.org/docs/Web/API/PointerEvent/getCoalescedEvents)
+- [SwiftShader](https://github.com/google/swiftshader); GitHub: [runner images](https://github.com/actions/runner-images)

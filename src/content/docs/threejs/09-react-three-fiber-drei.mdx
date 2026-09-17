@@ -1,0 +1,271 @@
+---
+title: 9. React Three Fiber and drei
+description: Lesson 5's fretboard as React components — R3F's JSX elements as three.js objects, WebGPURenderer passed to Canvas as an async factory, pointer events without a Raycaster, what a parent's re-render costs with shared and inline geometries, what R3F disposes and what it doesn't, drei's OrbitControls, Html and Text on WebGPU, measured in headless Chromium, compared with WPF's data binding and GuitarAlchemist's R3F 8 components.
+sidebar:
+  order: 9
+---
+
+Code: the component in [`src/09-r3f/Fretboard.tsx`](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/09-r3f/Fretboard.tsx), and the page that mounts it in [`src/09-r3f/main.tsx`](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/09-r3f/main.tsx).
+
+## A renderer for React
+
+[React Three Fiber](https://r3f.docs.pmnd.rs/) (R3F) is a React renderer, like `react-dom`, whose host elements are three.js objects instead of DOM nodes. `<mesh>` creates a `THREE.Mesh`, `<boxGeometry args={[1, 2, 3]} />` calls `new THREE.BoxGeometry(1, 2, 3)` and attaches it as the parent's `geometry`, and every other prop is assigned as a property: `position={[1, 0, 0]}` calls `position.set(1, 0, 0)`, `rotation-x={0.5}` sets `rotation.x`. React's reconciler decides what to create, update and remove; R3F applies it to the scene graph, and renders the scene in its own loop. [drei](https://drei.docs.pmnd.rs/) is a library of ready-made components on top: controls, HTML overlays, text, loaders, helpers.
+
+If you know WPF, the idea is familiar: a declarative tree, where a changed property updates one object instead of rebuilding the scene. The difference is how changes arrive. WPF binds properties to observable objects; React re-runs the component function and diffs its output.
+
+| | WPF 3D | three.js | React Three Fiber |
+|---|---|---|---|
+| Scene description | XAML: `<ModelVisual3D>`, `<GeometryModel3D>` | code: `new Mesh()`, `scene.add()` | JSX: `<mesh>`, `<group>` |
+| Updates | bindings to `INotifyPropertyChanged` | your code sets properties | a re-render; R3F diffs the props |
+| Constructor arguments | none: properties only | `new BoxGeometry(1, 2, 3)` | `args={[1, 2, 3]}`, and a new object when they change |
+| The loop | WPF's composition thread | `setAnimationLoop` | R3F's loop; `useFrame` runs a callback in it |
+| Hit testing | `VisualTreeHelper.HitTest` | `Raycaster` | `onClick`, `onPointerMove` on any object |
+| Disposal | the garbage collector | `dispose()`, yours to call | automatic on unmount, for what R3F created |
+
+## Versions
+
+The course pins [`@react-three/fiber`](https://www.npmjs.com/package/@react-three/fiber) 9.7.0 and [`@react-three/drei`](https://www.npmjs.com/package/@react-three/drei) 10.7.8. React 19.3.0 came out on 9 September 2026, but R3F 9.7.0 declares a peer dependency on `react` `>=19 <19.3`: the course pins `react` and `react-dom` 19.2.8. R3F 10 and drei 11 are in alpha (10.0.0-alpha.5 and 11.0.0-alpha.7), and not used here. R3F 8, which GuitarAlchemist uses, supports React 18 only.
+
+The course's [`tsconfig.json`](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/tsconfig.json) adds `"jsx": "react-jsx"`, which Vite's own transform follows too. R3F's element types come from its package: `<mesh>` is type-checked against `THREE.Mesh`'s properties.
+
+## The fretboard as a component
+
+[`Fretboard.tsx`](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/09-r3f/Fretboard.tsx) rebuilds lesson 5's neck, reusing its [`fretboard.ts`](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/05-picking/fretboard.ts) for the fret positions and notes. The neck is a mesh with its geometry and material as children ([lines 58-61](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/09-r3f/Fretboard.tsx#L58-L61)):
+
+```tsx
+<mesh name="neck" position={[NUT_X + NECK_LENGTH / 2, NECK_TOP - 0.06, 0]}>
+  <boxGeometry args={[NECK_LENGTH, 0.12, NECK_WIDTH]} />
+  <meshStandardMaterial color={0x4a2c1d} roughness={0.75} />
+</mesh>
+```
+
+The frets can be written two ways, chosen by the `frets` prop ([lines 62-71](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/09-r3f/Fretboard.tsx#L62-L71)): `'inline'` puts a `<cylinderGeometry>` and a `<meshStandardMaterial>` inside each of the 12 fret meshes, as a loop that writes JSX naturally does; `'shared'` passes one geometry and one material, created with `useMemo`, to all of them ([lines 30-39](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/09-r3f/Fretboard.tsx#L30-L39)):
+
+```tsx
+// Created once per component, not once per render; R3F doesn't dispose what it didn't create, so the effect does
+const fretGeometry = useMemo(() => new THREE.CylinderGeometry(0.012, 0.012, NECK_WIDTH, 12).rotateX(Math.PI / 2), []);
+const fretMaterial = useMemo(() => new THREE.MeshStandardMaterial({ color: 0xc9c5bd, metalness: 1, roughness: 0.3 }), []);
+useEffect(
+  () => () => {
+    fretGeometry.dispose();
+    fretMaterial.dispose();
+  },
+  [fretGeometry, fretMaterial],
+);
+```
+
+The markers of a C major chord are computed from the `markers` prop with `useMemo`, and a counter records each time that happens ([lines 41-45](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/09-r3f/Fretboard.tsx#L41-L45)). The page passes either a module constant, or, with `?markers=literal`, a new array with the same content on each render, as `<Fretboard markers={[...]} />` would.
+
+## WebGPURenderer in a Canvas
+
+`<Canvas>` creates a `WebGLRenderer` by default. R3F 9 accepts, as its `gl` prop, a function that returns a renderer or a promise of one; `WebGPURenderer` must be initialized before its first frame, so the function is `async` ([`main.tsx`, lines 40-52](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/09-r3f/main.tsx#L40-L52)):
+
+```tsx
+<Canvas
+  // R3F 9 accepts a function that returns a renderer, or a promise of one: WebGPURenderer must be initialized
+  gl={async (props) => {
+    const renderer = new THREE.WebGPURenderer({ ...(props as object), antialias: true, forceWebGL });
+    await renderer.init();
+    return renderer;
+  }}
+  camera={{ position: [-0.2, 2.4, 1.6], fov: 40 }}
+  onCreated={(state) => {
+    state.camera.lookAt(-0.2, 0.3, 0);
+    control.state = state;
+  }}
+>
+```
+
+The `props` hold the canvas R3F created. The page imports `three/webgpu`, while R3F and drei import `three`. Both entry points share their core classes, from `three.core.js`, so a `Mesh` from one is a `Mesh` for the other, and `WebGPURenderer` converts `MeshStandardMaterial` to its node version. But `three` also brings `WebGLRenderer` and its shader chunks into the page, which never uses them (lesson 13's build lists the chunks).
+
+Two warnings appear in the browser console on every run, both from R3F 9.7.0 and not from the page:
+
+- `THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.` R3F's store creates a `Clock` for `useFrame`'s `delta` ([`events-156d8d12.esm.js`, line 1016](https://unpkg.com/@react-three/fiber@9.7.0/dist/events-156d8d12.esm.js)).
+- `THREE.WebGPURenderer: PCFSoftShadowMap has been removed. Using PCFShadowMap instead.`, 14 times in one probe on the author's machine, 13 in `chromium-headless-shell`. `<Canvas>`'s `shadows` prop defaults to `false`, a boolean, and R3F sets `shadowMap.type = PCFSoftShadowMap` for any boolean, then `WebGPURenderer` resets it to `PCFShadowMap` with a warning ([`Renderer.js`, lines 1658-1664](https://github.com/mrdoob/three.js/blob/r186/src/renderers/common/Renderer.js#L1658-L1664)). R3F configures the renderer again each time `<Canvas>` renders, so every re-render of the page's `App` warns once more, and the count depends on how many pointer events arrived. `check.sh` removes the line from the compared output, and prints the count.
+
+## Measuring a re-render
+
+The page reports `renderer.info` and the two counters after three frames, then re-renders its `App` 10 times, one frame apart, then moves the pointer over string 3, fret 5, then unmounts the fretboard ([`main.tsx`, lines 117-155](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/09-r3f/main.tsx#L117-L155)). Each re-render goes through [`flushSync`](https://react.dev/reference/react-dom/flushSync), which renders and commits before it returns. Without it, React batches the state updates that arrive before it gets to render: in `chromium-headless-shell`, whose software renderer is slow, the 10 updates gave 6 renders of `Fretboard` instead of 11.
+
+```text
+$ node scripts/probe.mjs 09-r3f
+{
+  "frets": "shared",
+  "markers": "stable",
+  "first": {
+    "drawCalls": 23,
+    "triangles": 1453,
+    "geometries": 12,
+    "programs": 4,
+    "meshes": 22,
+    "fretboardRenders": 1,
+    "markerBuilds": 1
+  },
+  "afterTenParentRenders": {
+    "drawCalls": 23,
+    "triangles": 1453,
+    "geometries": 12,
+    "programs": 4,
+    "meshes": 22,
+    "fretboardRenders": 11,
+    "markerBuilds": 1
+  },
+```
+
+22 meshes: the neck, 12 frets, 6 strings and 3 markers; 23 draw calls with the output pass. 12 geometries: the neck's, the frets' shared one, 6 strings, 3 markers, and the output pass's triangle. The 10 parent renders re-ran `Fretboard` 10 times, since a React component re-renders with its parent unless it is wrapped in `memo`, and R3F compared the new props with the old ones: nothing changed in the scene.
+
+With `?frets=inline&markers=literal`:
+
+```text
+$ node scripts/probe.mjs 09-r3f --query "frets=inline&markers=literal"
+{
+  "frets": "inline",
+  "markers": "literal",
+  "first": {
+    "drawCalls": 23,
+    "triangles": 1453,
+    "geometries": 23,
+    "programs": 4,
+    "meshes": 22,
+    "fretboardRenders": 1,
+    "markerBuilds": 1
+  },
+  "afterTenParentRenders": {
+    "drawCalls": 23,
+    "triangles": 1453,
+    "geometries": 23,
+    "programs": 4,
+    "meshes": 22,
+    "fretboardRenders": 11,
+    "markerBuilds": 11
+  },
+```
+
+The same picture, with 23 geometries on the GPU instead of 12: one per fret. The draw calls don't change, since each fret was already its own mesh. `programs` stays at 4: identical materials share a shader. And the markers' `useMemo` ran again on each render, since its dependency was a new array each time. Here that recomputes three positions; R3F then compares the `position` arrays element by element and changes nothing. The cost grows when a new array rebuilds something expensive: a geometry, a texture, or, as lesson 13 shows in GuitarAlchemist, a whole scene.
+
+R3F compares props, but it compares `args` by reference, element by element ([`events-156d8d12.esm.js`, `commitUpdate`](https://unpkg.com/@react-three/fiber@9.7.0/dist/events-156d8d12.esm.js)): `<extrudeGeometry args={[shape, { depth: 0.3 }]} />` builds a new geometry on every render, because `{ depth: 0.3 }` is a new object each time. R3F 8.18.0 does the same comparison.
+
+## Pointer events without a Raycaster
+
+R3F raycasts from the pointer for you, and calls `onPointerMove`, `onClick` and the others on the objects hit, nearest first, with the hit in the event: `event.point`, `event.object`, `event.distance`. The group handles the event for all its children ([lines 47-54](https://github.com/spareilleux/learn/blob/eeca669/code/threejs/src/09-r3f/Fretboard.tsx#L47-L54)):
+
+```tsx
+function handlePointer(event: ThreeEvent<PointerEvent>) {
+  // R3F raycasts for us: event.point is where the ray hit, in world coordinates
+  event.stopPropagation();
+  setHover(event.point.clone());
+  const fret = fretAt(event.point.x);
+  const string = stringAt(event.point.z);
+  onPick?.({ fret, string, note: fret === null ? null : noteName(string, fret) });
+}
+```
+
+`stopPropagation()` stops the event at the nearest object, as lesson 5 took the first hit. The hover sphere has `raycast={() => null}`, so the ray passes through it, like lesson 5's `layers`. `event.point` is a vector R3F reuses, hence `clone()` before keeping it in state.
+
+After Playwright moves the real mouse over string 3, fret 5:
+
+```text
+  "after": {
+    "string 3, fret 5": {
+      "status": "parent renders: 10, pick: C4",
+      "label": "C4",
+      "drawCalls": 24,
+      "triangles": 1677,
+      "geometries": 13,
+      "programs": 4,
+      "meshes": 23
+    },
+```
+
+The counters are no longer reported after the pointer moves: the browser coalesces `pointermove` events when frames are slow, so the number of renders they cause differs between machines. The label is drei's [`<Html>`](https://drei.docs.pmnd.rs/misc/html): a `div` positioned over the canvas at a 3D point, and moved every frame. It isn't in the draw calls; the hover sphere is the 24th.
+
+![A dark brown neck seen from above at an angle, with metal frets and strings, three blue markers of a C major chord on the left, a small orange sphere under the pointer, and an orange label reading C4 above it; at the bottom, the text parent renders: 10, pick: C4.](../../../assets/threejs/l09-r3f.webp)
+
+## What unmounting disposes
+
+```text
+    "unmount the fretboard": {
+      "status": "parent renders: 10, pick: C4",
+      "label": "C4",
+      "drawCalls": 1,
+      "triangles": 1,
+      "geometries": 1,
+      "programs": 2,
+      "meshes": 0
+    }
+  }
+}
+```
+
+The label stays: it belongs to `App`, which keeps the last pick. One geometry is left, the output pass's. R3F disposed the geometries and materials it created from JSX: when an element is removed, it calls `dispose()` on its object and on its children's, at idle priority in a browser and right away in a test (the page waits 250 ms) ([`removeChild`](https://unpkg.com/@react-three/fiber@9.7.0/dist/events-156d8d12.esm.js)). It doesn't dispose objects passed in as props, like the shared fret geometry, or `<primitive object={...} />`, which can be owned elsewhere: the component's effect disposes those. Without that effect, the geometry count would stay at 2, and a component mounted and unmounted in a loop would leak one geometry each time. `dispose={null}` on an element opts it out.
+
+## drei on WebGPU
+
+drei's components are written for `WebGLRenderer`. Those used here work with `WebGPURenderer`: [`OrbitControls`](https://drei.docs.pmnd.rs/controls/introduction) only moves the camera, and `Html` is DOM. [`<Text>`](https://drei.docs.pmnd.rs/abstractions/text) doesn't. With `?text`, it draws a solid pale rectangle where the words "C major" should be, and the programs go from 4 to 6:
+
+![The same fretboard from closer, with a solid off-white quadrilateral at the top of the frame where a line of text should be.](../../../assets/threejs/l09-text.webp)
+
+`<Text>` uses troika-three-text 0.52.5, which draws glyphs with a signed distance field shader injected through `material.onBeforeCompile` ([`troika-three-utils`](https://github.com/protectwise/troika/blob/main/packages/troika-three-utils/src/DerivedMaterial.js)). `WebGPURenderer` never calls `onBeforeCompile`: it builds its shaders from nodes. The quad is the base material, without the text. On WebGPU, text needs another way: a canvas texture, `Html`, or a TSL material (*to verify*: whether a WebGPU-ready version of troika exists).
+
+## In GuitarAlchemist/ga
+
+- **R3F 8, React 18, WebGL.** GA's React components depend on `@react-three/fiber` `^8.18.0`, drei `^9.122.0` and React `^18.3.1` ([`package.json`, lines 43-65](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/package.json#L43-L65)). Six files render a `<Canvas>`, all with the default `WebGLRenderer`; 9 files use R3F, out of about 146 that use three.js. The rest, including `ThreeFretboard.tsx`, create their renderer in a `useEffect` and manage the scene by hand. Moving to R3F 9 means React 19 first.
+- **A state update on every frame.** The BSP explorer's `Player` calls `onPositionChange(camera.position)` at the end of its `useFrame`, whether the player moved or not ([`Player.tsx`, lines 121-144](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/BSP/v2/Player.tsx#L121-L144)), and `BSPDoomExplorerV2` answers with `setPlayerPosition(pos.clone())` ([`BSPDoomExplorerV2.tsx`, lines 77-79](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/BSP/v2/BSPDoomExplorerV2.tsx#L77-L79)): a new object in state, so React re-renders the explorer and its children 60 times per second. R3F's advice is to keep per-frame values in refs, and to set state only when something visible changes, here the region, which the same callback already detects. How much time those renders take is *to verify* with React's profiler.
+- **`args` with a new object.** `GuitarAlchemistLogo3D.tsx` declares its extrude settings as an object literal in the component body and passes it in `args` ([lines 31-42](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/Apps/ga-client/src/components/GuitarAlchemistLogo3D.tsx#L31-L42)): each render of the logo builds a new `ExtrudeGeometry`. The shape next to it is in a `useMemo`; the settings need one too, or a module constant.
+
+## Key takeaways
+
+- R3F's JSX elements are three.js objects: props become properties, `args` become constructor arguments, and a changed element of `args` builds a new object.
+- `<Canvas gl>` takes an async factory: that is how `WebGPURenderer` gets initialized before R3F renders.
+- A parent's re-render re-runs the component; R3F then changes only the props that differ. Count renders and rebuilds instead of guessing: 10 parent renders cost nothing in the scene here.
+- Inline geometries in a loop multiply the GPU buffers; share them with `useMemo`, and dispose them yourself, since R3F only disposes what it created.
+- `useMemo` with a new array as a dependency runs on every render: pass stable values, or compare contents.
+- drei's `Text` doesn't render on `WebGPURenderer` in drei 10.7.8.
+
+## Exercises
+
+1. The page's `App` passes `onPick={setPick}`. Wrap `Fretboard` in `memo` and count its renders after the 10 parent renders. What stops `memo` from working if the page passes `onPick={(pick) => setPick(pick)}` instead?
+2. Remove the `useEffect` that disposes the shared fret geometry and material, and predict the counts after the unmount. Then check with the probe.
+3. With `?markers=literal`, make `markerBuilds` stay at 1 without changing the page: compare the markers' contents instead of their identity.
+
+<details>
+<summary>Solution 1</summary>
+
+`const MemoFretboard = memo(Fretboard)`: `memo` skips a render when every prop is `Object.is`-equal to the previous one. `frets` is a string, `markers` the module constant, and `onPick` is `setPick`, a state setter, which React keeps stable. An arrow function written in the JSX is a new function on each render: `memo` sees a changed prop and renders every time. `useCallback` keeps it stable. With `?markers=literal`, the markers array is new on each render too, and `memo` doesn't help either.
+
+Checked with `@react-three/test-renderer` (lesson 12), in a throwaway test that re-renders a parent 10 times, not with the browser probe: `fretboardRenders` is 1 with `onPick={setPick}`, and 11 with `onPick={(pick) => setPick(pick)}`.
+
+</details>
+
+<details>
+<summary>Solution 2</summary>
+
+R3F still disposes the neck's and the strings' geometries, which it created from JSX. The shared fret geometry was passed as a prop, so nobody disposes it. Lesson 12's last test counts the calls to `BufferGeometry.dispose` after an unmount: 8 with the effect; in a throwaway copy of the component without it, 7. In the browser, `geometries` should then read 2 after the unmount instead of 1 (*to verify* with the probe). The material holds no GPU buffer of its own, so `renderer.info` doesn't show it; its pipeline stays cached while it lives. Mount and unmount the component in a loop, and the count grows by one each time: that is the leak lesson 13 finds in GA's sprites.
+
+</details>
+
+<details>
+<summary>Solution 3</summary>
+
+Derive a key from the content, and depend on it:
+
+```tsx
+const markersKey = markers.map(({ string, fret }) => `${string}:${fret}`).join(',');
+const markerPositions = useMemo(() => {
+  counters.markerBuilds++;
+  return markers.map(({ string, fret }) => pressPoint(string, fret).toArray());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, [markersKey]);
+```
+
+The lint rule complains, since `markers` is used without being a dependency; the key is what the memo depends on. In a throwaway test with this change, six renders with a new copy of the chord each time built the markers once, and a different chord built them a second time. Lesson 13's port does the same for GA's `positions`. The alternative is a stable array in the parent: a module constant, or a `useMemo` there.
+
+</details>
+
+## Sources
+
+- React Three Fiber: [introduction](https://r3f.docs.pmnd.rs/getting-started/introduction), [objects, properties and constructor arguments](https://r3f.docs.pmnd.rs/api/objects), [`Canvas`](https://r3f.docs.pmnd.rs/api/canvas), [events](https://r3f.docs.pmnd.rs/api/events), [performance pitfalls](https://r3f.docs.pmnd.rs/advanced/pitfalls), [v9 migration guide](https://r3f.docs.pmnd.rs/tutorials/v9-migration-guide)
+- drei: [`Html`](https://drei.docs.pmnd.rs/misc/html), [`Text`](https://drei.docs.pmnd.rs/abstractions/text), [controls](https://drei.docs.pmnd.rs/controls/introduction)
+- React: [`useMemo`](https://react.dev/reference/react/useMemo), [`memo`](https://react.dev/reference/react/memo), [`useCallback`](https://react.dev/reference/react/useCallback)
+- three.js source at r186: [`Renderer.js`](https://github.com/mrdoob/three.js/blob/r186/src/renderers/common/Renderer.js)
+- R3F 9.7.0's build, as published on npm: [`events-156d8d12.esm.js`](https://unpkg.com/@react-three/fiber@9.7.0/dist/events-156d8d12.esm.js)
