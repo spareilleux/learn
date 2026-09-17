@@ -58,7 +58,7 @@ CALLS = {
                 "http.client.HTTPConnection", "http.client.HTTPSConnection"},
     "download": {"huggingface_hub.hf_hub_download", "huggingface_hub.snapshot_download", "torch.hub.load",
                  "torch.hub.download_url_to_file", "torch.hub.load_state_dict_from_url", "wget.download",
-                 "gdown.download"},
+                 "gdown.download", "torchvision.datasets.utils.download_url"},
 }
 CALL_RULE = {name: rule for rule, names in CALLS.items() for name in names}
 
