@@ -124,7 +124,28 @@ c.use_denoising = False
 r.section("The same render, 8 bits after the view transform")
 png, _ = render("s16", 16, fmt="PNG")
 digest = hashlib.sha256(bytes(round(v * 255) for v in png)).hexdigest()
-r("# pixels sha256", digest)
+r("pixels sha256", digest)
 r("mean 8-bit RGB", vec([x * 255 for x in mean_rgb(png)], 1))
+
+r.section("Exercise 1: twice the key light")
+D.objects["Key"].data.energy *= 2
+brighter, _ = render("ex1-key-x2", 256)
+r("mean linear RGB at 256 samples: key 6 W", vec(mean_rgb(brighter), 3), "| key 3 W (reference)", vec(mean_rgb(reference), 3))
+D.objects["Key"].data.energy /= 2
+
+r.section("Exercise 2: adaptive sampling")
+c.use_adaptive_sampling = True
+c.adaptive_threshold = 0.01
+adaptive, seconds = render("ex2-adaptive", 4096)
+r("adaptive, threshold 0.01, at most 4096 samples: RMS difference from the reference", f(rms(adaptive, reference), 4))
+r("# adaptive render time", f(seconds, 2), "s | reference (4096 samples, no adaptive sampling) above")
+c.use_adaptive_sampling = False
+
+r.section("Exercise 3: the Standard view transform")
+vs.view_transform = "Standard"
+standard_png, _ = render("ex3-standard", 16, fmt="PNG")
+standard_exr, _ = render("ex3-standard", 16)
+r("mean 8-bit RGB: Standard", vec([x * 255 for x in mean_rgb(standard_png)], 1), "| AgX", vec([x * 255 for x in mean_rgb(png)], 1))
+r("the linear EXR is the same under both view transforms:", standard_exr == a)
 
 r.save()

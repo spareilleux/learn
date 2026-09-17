@@ -96,4 +96,26 @@ r("Object has", len(bpy.types.Object.bl_rna.properties), "RNA properties; Mesh h
   len(bpy.types.Mesh.bl_rna.properties))
 r("an ID's own properties:", [p.identifier for p in bpy.types.ID.bl_rna.properties][:8])
 
+r.section("Exercise 1: remove the Cube object, save, and reload")
+bpy.ops.wm.read_factory_settings(use_empty=False)
+D = bpy.data
+D.objects.remove(D.objects["Cube"])
+r("before saving: mesh 'Cube' users", D.meshes["Cube"].users, "| material 'Material' users", D.materials["Material"].users)
+path = os.path.abspath(os.path.join(os.path.dirname(r.path), "l01-ex1.blend"))
+bpy.ops.wm.save_as_mainfile(filepath=path)
+bpy.ops.wm.open_mainfile(filepath=path)
+D = bpy.data
+r("after reloading: meshes", sorted(m.name for m in D.meshes), "| materials", sorted((m.name, m.users) for m in D.materials))
+
+r.section("Exercise 2: who uses a data-block?")
+bpy.ops.wm.read_factory_settings(use_empty=False)
+D = bpy.data
+cube = D.objects["Cube"]
+twin = cube.copy()
+twin.name = "Twin"
+bpy.context.scene.collection.objects.link(twin)
+users = D.user_map(subset=[D.meshes["Cube"], D.materials["Material"]])
+for id_, used_by in sorted(users.items(), key=lambda kv: kv[0].name):
+    r(f"{id_!r} is used by {sorted(repr(u) for u in used_by)}")
+
 r.save()

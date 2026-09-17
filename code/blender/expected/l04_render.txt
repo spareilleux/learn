@@ -31,4 +31,15 @@ reference: 4096 samples, mean linear RGB (0.051, 0.036, 0.036)
 16 samples + OpenImageDenoise: RMS difference from the reference 0.0101 | without: 0.0122
 
 == The same render, 8 bits after the view transform
+pixels sha256 52b315b4edce59f3eaad17709705db365ed4cefa92c2c5a15053bef2d06be536
 mean 8-bit RGB (48.5, 42.5, 43.4)
+
+== Exercise 1: twice the key light
+mean linear RGB at 256 samples: key 6 W (0.063, 0.041, 0.039) | key 3 W (reference) (0.051, 0.036, 0.036)
+
+== Exercise 2: adaptive sampling
+adaptive, threshold 0.01, at most 4096 samples: RMS difference from the reference 0.0018
+
+== Exercise 3: the Standard view transform
+mean 8-bit RGB: Standard (54.5, 48.3, 49.8) | AgX (48.5, 42.5, 43.4)
+the linear EXR is the same under both view transforms: True

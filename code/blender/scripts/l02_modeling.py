@@ -1,4 +1,5 @@
 """Lesson 2: polygonal modeling from code, topology, and the non-destructive modifier stack."""
+import math
 import os
 import sys
 
@@ -127,5 +128,25 @@ r("objects", len(objs), "| vertices stored", sum(len(D.meshes[n].vertices) for n
 corners = [o.matrix_world @ Vector(c) for o in objs for c in o.bound_box]
 r("world bounds in mm", vec([min(c[i] for c in corners) * 1000 for i in range(3)], 1),
   vec([max(c[i] for c in corners) * 1000 for i in range(3)], 1))
+
+r.section("Exercise 1: the Euler characteristic of a torus")
+bpy.ops.mesh.primitive_torus_add(major_segments=48, minor_segments=12)
+r("torus:", counts(bpy.context.object.data), topology(bpy.context.object.data))
+
+r.section("Exercise 2: Subdivision then Bevel, without the angle limit")
+bpy.ops.mesh.primitive_cube_add(size=2)
+cube = bpy.context.object
+subsurf = cube.modifiers.new("Subdivision", "SUBSURF")
+subsurf.levels = 2
+bevel = cube.modifiers.new("Bevel", "BEVEL")
+bevel.width, bevel.segments = 0.1, 2
+r("limit_method", bevel.limit_method, "angle", f(math.degrees(bevel.angle_limit), 1), "| evaluated:", evaluated(cube))
+bevel.limit_method = "NONE"
+r("limit_method NONE | evaluated:", evaluated(cube))
+
+r.section("Exercise 3: the spacing of frets")
+gaps = [fretboard.fret_x(n + 1) - fretboard.fret_x(n) for n in range(fretboard.FRETS)]
+r("gap nut-1", f(gaps[0] * 1000, 3), "mm | gap 21-22", f(gaps[21] * 1000, 3), "mm | gap n / gap n+1",
+  sorted({f(gaps[n] / gaps[n + 1], 6) for n in range(fretboard.FRETS - 1)}), "| 2 ** (1/12)", f(2 ** (1 / 12), 6))
 
 r.save()

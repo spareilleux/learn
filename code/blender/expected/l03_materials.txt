@@ -25,6 +25,8 @@ top face: loops [4, 5, 6, 7] | UV bounds (0.124, 0.002) (0.241, 0.998)
 UV coordinates are stored per loop (face corner), not per vertex: 24 UVs for 8 vertices
 
 == An image texture made from code
+image 'Rosewood grain' size (256, 32) channels 4 packed True colorspace sRGB is_float False
+pixels[0] = 0.5 reads back as 0.5020 = 128 / 255
 Rosewood links: ['Image Texture.Color -> Principled BSDF.Base Color', 'Noise Texture.Factor -> Principled BSDF.Roughness', 'Principled BSDF.BSDF -> Material Output.Surface']
 
 == Exported to glTF 2.0
@@ -41,3 +43,12 @@ mesh 'Fretboard': attributes (count per accessor) {'NORMAL': 24, 'POSITION': 24,
 node 'Fret 12': mesh 0 translation (0.3240, 0.0006, 0.0000) scale (0.0024, 0.0012, 0.0520)
 in Blender: location (0.3240, 0.0000, 0.0006) scale (0.0024, 0.0520, 0.0012)
 root node 'Fretboard': rotation (0.0000, 0.0000, 0.0000, 1.0000) children 32
+
+== Exercise 1: unlink the noise
+Rosewood pbrMetallicRoughness keys: ['baseColorTexture', 'metallicFactor', 'roughnessFactor'] | roughnessFactor 0.8000
+
+== Exercise 2: one .glb file
+magic b'glTF' | version 2 | first chunk type b'JSON'
+
+== Exercise 3: without +Y up
+node 'Fret 12' translation (0.3240, 0.0000, 0.0006) scale (0.0024, 0.0520, 0.0012)

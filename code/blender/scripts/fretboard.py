@@ -118,9 +118,12 @@ def add_materials():
 
 
 def grain_image(width=256, height=32):
-    """A packed image of wavy stripes, darker and lighter than the rosewood color, computed pixel by pixel."""
+    """A packed image of wavy stripes, darker and lighter than the rosewood color, computed pixel by pixel.
+
+    The image is 8 bits per channel in the sRGB color space: pixels takes sRGB values, stored as bytes without conversion.
+    """
     image = bpy.data.images.new("Rosewood grain", width=width, height=height)
-    base = [srgb_to_linear(c / 255) for c in (74, 44, 29)]
+    base = [c / 255 for c in (90, 52, 34)]
     pixels = []
     for y in range(height):
         for x in range(width):

@@ -68,6 +68,10 @@ r("UV coordinates are stored per loop (face corner), not per vertex:", len(uv), 
 
 r.section("An image texture made from code")
 image = fretboard.grain_image()
+r("image", repr(image.name), "size", tuple(image.size), "channels", image.channels, "packed", image.packed_file is not None,
+  "colorspace", image.colorspace_settings.name, "is_float", image.is_float)
+image.pixels[0] = 0.5
+r("pixels[0] = 0.5 reads back as", f(image.pixels[0], 4), "=", round(image.pixels[0] * 255), "/ 255")
 tex = rosewood.node_tree.nodes.new("ShaderNodeTexImage")
 tex.image = image
 bsdf = rosewood.node_tree.nodes["Principled BSDF"]
@@ -106,5 +110,28 @@ r("in Blender: location", vec(D.objects["Fret 12"].location, 4), "scale", vec(D.
 r("root node 'Fretboard': rotation", vec(nodes["Fretboard"].get("rotation", [0, 0, 0, 1]), 4), "children",
   len(nodes["Fretboard"]["children"]))
 r("# .bin size in bytes:", os.path.getsize(os.path.join(gltf_dir, "fretboard.bin")))
+
+r.section("Exercise 1: unlink the noise")
+rosewood.node_tree.links.remove(next(l for l in rosewood.node_tree.links if l.from_node.name == "Noise Texture"))
+bpy.ops.export_scene.gltf(filepath=gltf_path, export_format="GLTF_SEPARATE")
+with open(gltf_path, encoding="utf-8") as fp:
+    mat = next(m for m in json.load(fp)["materials"] if m["name"] == "Rosewood")
+r("Rosewood pbrMetallicRoughness keys:", sorted(mat["pbrMetallicRoughness"]), "| roughnessFactor",
+  f(mat["pbrMetallicRoughness"]["roughnessFactor"], 4))
+
+r.section("Exercise 2: one .glb file")
+glb_path = os.path.join(os.path.dirname(r.path), "fretboard.glb")
+bpy.ops.export_scene.gltf(filepath=glb_path, export_format="GLB")
+with open(glb_path, "rb") as fp:
+    head = fp.read(20)
+r("magic", head[:4], "| version", int.from_bytes(head[4:8], "little"), "| first chunk type", head[16:20])
+separate = sum(os.path.getsize(os.path.join(gltf_dir, n)) for n in os.listdir(gltf_dir))
+r("# .glb", os.path.getsize(glb_path), "bytes | .gltf + .bin + .png", separate, "bytes")
+
+r.section("Exercise 3: without +Y up")
+bpy.ops.export_scene.gltf(filepath=gltf_path, export_format="GLTF_SEPARATE", export_yup=False)
+with open(gltf_path, encoding="utf-8") as fp:
+    fret = next(n for n in json.load(fp)["nodes"] if n["name"] == "Fret 12")
+r("node 'Fret 12' translation", vec(fret["translation"], 4), "scale", vec(fret["scale"], 4))
 
 r.save()

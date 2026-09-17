@@ -58,3 +58,11 @@ path_from_id('location'): location
 path_resolve('location'): Vector((0.0, 0.0, 0.0))
 Object has 141 RNA properties; Mesh has 71
 an ID's own properties: ['rna_type', 'name', 'name_full', 'id_type', 'session_uid', 'is_evaluated', 'original', 'users']
+
+== Exercise 1: remove the Cube object, save, and reload
+before saving: mesh 'Cube' users 0 | material 'Material' users 1
+after reloading: meshes [] | materials [('Material', 0)]
+
+== Exercise 2: who uses a data-block?
+bpy.data.meshes['Cube'] is used by ["bpy.data.objects['Cube']", "bpy.data.objects['Twin']"]
+bpy.data.materials['Material'] is used by ["bpy.data.meshes['Cube']"]
