@@ -182,6 +182,24 @@ while let Some(result) = set.join_next().await {
   finished slow: 40
 ```
 
+Les façons d'exécuter une future, côte à côte : l'attendre, la joindre à d'autres dans la tâche courante, ou la lancer comme une tâche à part entière.
+
+```mermaid
+flowchart LR
+    future["future : paresseuse, rien ne s'exécute encore"]
+    subgraph current["tâche courante"]
+        awaited[".await : une future après l'autre"]
+        joined["join! : plusieurs futures de façon concurrente"]
+    end
+    subgraph runtime["runtime tokio"]
+        task["tâche indépendante, peut s'exécuter sur un autre thread"]
+    end
+    future --> awaited
+    future --> joined
+    future -->|"tokio::spawn ou JoinSet::spawn"| task
+    task -->|"JoinHandle ou join_next"| result["résultat"]
+```
+
 ## Annuler, c'est détruire
 
 C# fait passer un [`CancellationToken`](https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken) à travers chaque appel. En Rust, une future **détruite** (dropped) s'arrête simplement à son `.await` en cours et ne reprend jamais. [`timeout`](https://docs.rs/tokio/latest/tokio/time/fn.timeout.html) et `select!` s'appuient là-dessus ([lignes 66-73](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l13_async.rs#L66-L73)) :

@@ -58,6 +58,21 @@ help: consider cloning the value if the performance cost is acceptable
 
 Pourquoi ? Si `a` et `b` possédaient tous deux le buffer, tous deux le libéreraient à la fin de la portée — une double libération. Le déplacement (move) rend « qui libère ceci » sans ambiguïté.
 
+La même affectation dans les deux langages : en C#, deux références partagent un objet ; en Rust, le buffer sur le tas a un seul propriétaire à la fois.
+
+```mermaid
+flowchart LR
+    subgraph csharp["C# : var b = a"]
+        ca["a"] --> cobj["objet string"]
+        cb["b"] --> cobj
+    end
+    subgraph rust["Rust : let b = a"]
+        ra["a : déplacé, inutilisable"]
+        rb["b : propriétaire, le libère à la fin de la portée"] --> rbuf["buffer sur le tas : hello"]
+    end
+    ra -.->|"possession déplacée"| rb
+```
+
 ## `clone` — une copie profonde explicite
 
 Extrait de [`examples/l03_ownership.rs`, lignes 26-27](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l03_ownership.rs#L26-L27) :

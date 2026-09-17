@@ -115,6 +115,15 @@ warning: unused `Result` that must be used
 
 `?` significa: *si es `Ok`/`Some`, extrae el valor; si no, devuelve inmediatamente el `Err`/`None` desde la función actual.* Es el equivalente explícito y visible de dejar que una excepción se propague.
 
+Los dos caminos que puede seguir un valor a través del operador de interrogación.
+
+```mermaid
+flowchart LR
+    expr["expr?"] --> check{"¿Ok o Some?"}
+    check -->|"sí"| value["extraer el valor y continuar"]
+    check -->|"no"| ret["devolver el Err o el None desde la función actual"]
+```
+
 De [`examples/l06_option_result.rs`, líneas 16-20](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l06_option_result.rs#L16-L20):
 
 ```rust

@@ -58,6 +58,21 @@ help: consider cloning the value if the performance cost is acceptable
 
 Why? If both `a` and `b` owned the buffer, both would free it at the end of the scope — a double free. Moving makes "who frees this" unambiguous.
 
+The same assignment in both languages: in C#, two references share one object; in Rust, the heap buffer has one owner at a time.
+
+```mermaid
+flowchart LR
+    subgraph csharp["C#: var b = a"]
+        ca["a"] --> cobj["string object"]
+        cb["b"] --> cobj
+    end
+    subgraph rust["Rust: let b = a"]
+        ra["a: moved, unusable"]
+        rb["b: owner, frees it at the end of the scope"] --> rbuf["heap buffer: hello"]
+    end
+    ra -.->|"ownership moved"| rb
+```
+
 ## `clone` — an explicit deep copy
 
 From [`examples/l03_ownership.rs`, lines 26-27](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l03_ownership.rs#L26-L27):

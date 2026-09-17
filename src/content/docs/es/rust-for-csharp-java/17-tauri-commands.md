@@ -295,6 +295,21 @@ Lo que se congela no es lo que espera un desarrollador WPF:
 
 La regla es la misma que con el [`Dispatcher`](https://learn.microsoft.com/dotnet/api/system.windows.threading.dispatcher) de WPF o el hilo de aplicación de JavaFX: nada lento en el hilo principal. En Tauri, eso significa `async` para todo lo que espera o calcula, y [`spawn_blocking`](https://docs.rs/tauri/2.11.5/tauri/async_runtime/fn.spawn_blocking.html) para el trabajo intensivo de CPU, para que tampoco ocupe uno de los workers del runtime (ejercicio 3).
 
+Dónde se ejecuta cada tipo de comando, y qué más tiene que hacer el hilo principal.
+
+```mermaid
+flowchart LR
+    page["página: invoke"]
+    subgraph core["proceso Rust"]
+        main["hilo principal: peticiones IPC, mensajes de la ventana nativa"]
+        worker["worker del runtime de tokio"]
+        pool["pool de hilos bloqueantes: trabajo intensivo en CPU"]
+    end
+    page -->|"comando sin async"| main
+    page -->|"comando async"| worker
+    worker -->|"spawn_blocking"| pool
+```
+
 ## Lo que comprueba la macro
 
 Como `#[tauri::command]` genera código, algunos errores se detectan al compilar, con mensajes que vienen de Tauri y no del lenguaje. Cada uno de los siguientes es un [doctest `compile_fail`](https://github.com/spareilleux/learn/blob/373237a/code/rust-for-csharp-java/l16-tauri/src-tauri/src/compile_fail.rs).

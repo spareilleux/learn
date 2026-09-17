@@ -182,6 +182,24 @@ while let Some(result) = set.join_next().await {
   finished slow: 40
 ```
 
+Las formas de ejecutar un future, una al lado de la otra: esperarlo, unirlo a otros dentro de la tarea actual, o lanzarlo como una tarea propia.
+
+```mermaid
+flowchart LR
+    future["future: perezoso, todavía no se ejecuta nada"]
+    subgraph current["tarea actual"]
+        awaited[".await: un future después de otro"]
+        joined["join!: varios futures de forma concurrente"]
+    end
+    subgraph runtime["runtime de tokio"]
+        task["tarea independiente, puede ejecutarse en otro hilo"]
+    end
+    future --> awaited
+    future --> joined
+    future -->|"tokio::spawn o JoinSet::spawn"| task
+    task -->|"JoinHandle o join_next"| result["resultado"]
+```
+
 ## Cancelar es liberar
 
 C# pasa un [`CancellationToken`](https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken) a través de cada llamada. En Rust, un future que se **libera** (drop) simplemente se detiene en su `.await` actual y nunca se reanuda. [`timeout`](https://docs.rs/tokio/latest/tokio/time/fn.timeout.html) y `select!` se basan en eso ([líneas 66-73](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l13_async.rs#L66-L73)):

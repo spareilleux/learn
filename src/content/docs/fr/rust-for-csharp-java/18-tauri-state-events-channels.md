@@ -385,6 +385,28 @@ cancelled search resolved with 19 after 381 ms
 
 La recherche s'est arrêtée après son cinquième lot, celui en cours quand le drapeau a été levé, et a renvoyé les 19 voicings trouvés jusque-là. Un drapeau pour toute l'application suffit pour une recherche à la fois ; l'exercice 2 en gère plusieurs.
 
+L'appel complet sous forme de séquence, de l'invoke de la page à la promesse résolue, avec le bouton Cancel en option.
+
+```mermaid
+sequenceDiagram
+    participant Page as page
+    participant Cmd as find_voicings
+    participant Search as thread bloquant
+    participant Cancel as cancel_search
+    Page->>Cmd: invoke avec symbol, maxSpan et le Channel
+    Cmd->>Search: spawn_blocking, le Channel y est déplacé
+    loop après chaque lot
+        Search-->>Page: messages voicings et progress
+    end
+    opt le bouton Cancel
+        Page->>Cancel: invoke
+        Cancel->>Search: met l'AtomicBool à true, lu entre deux lots
+    end
+    Search-->>Page: message finished
+    Search->>Cmd: nombre de voicings trouvés
+    Cmd-->>Page: la promesse d'invoke est résolue
+```
+
 ## Événement ou canal ?
 
 | | Événement | Canal |

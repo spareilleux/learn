@@ -58,6 +58,21 @@ help: consider cloning the value if the performance cost is acceptable
 
 ¿Por qué? Si `a` y `b` poseyeran ambos el buffer, ambos lo liberarían al final del ámbito — una doble liberación. El movimiento hace que «quién libera esto» no sea ambiguo.
 
+La misma asignación en los dos lenguajes: en C#, dos referencias comparten un objeto; en Rust, el buffer del montón tiene un solo propietario a la vez.
+
+```mermaid
+flowchart LR
+    subgraph csharp["C#: var b = a"]
+        ca["a"] --> cobj["objeto string"]
+        cb["b"] --> cobj
+    end
+    subgraph rust["Rust: let b = a"]
+        ra["a: movido, inutilizable"]
+        rb["b: propietario, lo libera al final del ámbito"] --> rbuf["buffer del montón: hello"]
+    end
+    ra -.->|"propiedad movida"| rb
+```
+
 ## `clone` — una copia profunda explícita
 
 De [`examples/l03_ownership.rs`, líneas 26-27](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l03_ownership.rs#L26-L27):

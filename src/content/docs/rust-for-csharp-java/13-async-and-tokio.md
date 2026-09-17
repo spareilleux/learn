@@ -182,6 +182,24 @@ while let Some(result) = set.join_next().await {
   finished slow: 40
 ```
 
+The ways to run a future, side by side: await it, join it with others inside the current task, or spawn it as a task of its own.
+
+```mermaid
+flowchart LR
+    future["future: lazy, nothing runs yet"]
+    subgraph current["current task"]
+        awaited[".await: one future after the other"]
+        joined["join!: several futures concurrently"]
+    end
+    subgraph runtime["tokio runtime"]
+        task["independent task, may run on another thread"]
+    end
+    future --> awaited
+    future --> joined
+    future -->|"tokio::spawn or JoinSet::spawn"| task
+    task -->|"JoinHandle or join_next"| result["result"]
+```
+
 ## Cancellation is dropping
 
 C# passes a [`CancellationToken`](https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken) through every call. In Rust, a future that is **dropped** simply stops at its current `.await` and never resumes. [`timeout`](https://docs.rs/tokio/latest/tokio/time/fn.timeout.html) and `select!` rely on that ([lines 66-73](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l13_async.rs#L66-L73)):

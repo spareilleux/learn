@@ -385,6 +385,28 @@ cancelled search resolved with 19 after 381 ms
 
 The search stopped after its fifth batch, the one running when the flag was set, and returned the 19 voicings found so far. One flag for the whole application is enough for one search at a time; exercise 2 handles several.
 
+The whole call as a sequence, from the page's invoke to the resolved promise, with the Cancel button as an option.
+
+```mermaid
+sequenceDiagram
+    participant Page as page
+    participant Cmd as find_voicings
+    participant Search as blocking thread
+    participant Cancel as cancel_search
+    Page->>Cmd: invoke with symbol, maxSpan and the Channel
+    Cmd->>Search: spawn_blocking, the Channel moves in
+    loop after each batch
+        Search-->>Page: voicings and progress messages
+    end
+    opt the Cancel button
+        Page->>Cancel: invoke
+        Cancel->>Search: sets the AtomicBool, read between two batches
+    end
+    Search-->>Page: finished message
+    Search->>Cmd: number of voicings found
+    Cmd-->>Page: the invoke promise resolves
+```
+
 ## Event or channel?
 
 | | Event | Channel |

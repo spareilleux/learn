@@ -385,6 +385,28 @@ cancelled search resolved with 19 after 381 ms
 
 La búsqueda se detuvo tras su quinto lote, el que se estaba ejecutando cuando se activó el indicador, y devolvió las 19 posiciones encontradas hasta entonces. Un indicador para toda la aplicación basta para una búsqueda a la vez; el ejercicio 2 gestiona varias.
 
+La llamada completa como secuencia, desde el invoke de la página hasta la promesa resuelta, con el botón Cancel como opción.
+
+```mermaid
+sequenceDiagram
+    participant Page as página
+    participant Cmd as find_voicings
+    participant Search as hilo bloqueante
+    participant Cancel as cancel_search
+    Page->>Cmd: invoke con symbol, maxSpan y el Channel
+    Cmd->>Search: spawn_blocking, el Channel se mueve dentro
+    loop después de cada lote
+        Search-->>Page: mensajes voicings y progress
+    end
+    opt el botón Cancel
+        Page->>Cancel: invoke
+        Cancel->>Search: pone el AtomicBool a true, leído entre dos lotes
+    end
+    Search-->>Page: mensaje finished
+    Search->>Cmd: número de voicings encontrados
+    Cmd-->>Page: la promesa de invoke se resuelve
+```
+
 ## ¿Evento o canal?
 
 | | Evento | Canal |

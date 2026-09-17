@@ -295,6 +295,21 @@ What freezes is not what a WPF developer expects:
 
 The rule is the same as for the WPF [`Dispatcher`](https://learn.microsoft.com/dotnet/api/system.windows.threading.dispatcher) or the JavaFX application thread: nothing slow on the main thread. In Tauri, that means `async` for anything that waits or computes, and [`spawn_blocking`](https://docs.rs/tauri/2.11.5/tauri/async_runtime/fn.spawn_blocking.html) for CPU-bound work, so that it does not occupy one of the runtime's workers either (exercise 3).
 
+Where each kind of command runs, and what the main thread also has to do.
+
+```mermaid
+flowchart LR
+    page["page: invoke"]
+    subgraph core["Rust process"]
+        main["main thread: IPC requests, native window messages"]
+        worker["tokio runtime worker"]
+        pool["blocking thread pool: CPU-bound work"]
+    end
+    page -->|"command without async"| main
+    page -->|"async command"| worker
+    worker -->|"spawn_blocking"| pool
+```
+
 ## What the macro checks
 
 Because `#[tauri::command]` generates code, some mistakes are caught at compile time, with messages that come from Tauri rather than from the language. Each one below is a [`compile_fail` doctest](https://github.com/spareilleux/learn/blob/373237a/code/rust-for-csharp-java/l16-tauri/src-tauri/src/compile_fail.rs).

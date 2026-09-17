@@ -115,6 +115,15 @@ warning: unused `Result` that must be used
 
 `?` means: *if this is `Ok`/`Some`, unwrap it; otherwise return the `Err`/`None` from the current function right now.* It is the explicit, visible equivalent of letting an exception propagate.
 
+The two paths a value can take through the question mark operator.
+
+```mermaid
+flowchart LR
+    expr["expr?"] --> check{"Ok or Some?"}
+    check -->|"yes"| value["unwrap the value and continue"]
+    check -->|"no"| ret["return the Err or None from the current function"]
+```
+
 From [`examples/l06_option_result.rs`, lines 16-20](https://github.com/spareilleux/learn/blob/93f6f82/code/rust-for-csharp-java/examples/l06_option_result.rs#L16-L20):
 
 ```rust
