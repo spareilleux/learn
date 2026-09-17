@@ -1,5 +1,5 @@
 ---
-title: '12. ComfyUI en production : un service, une file, plusieurs GPU'
+title: '12. ComfyUI en production : un service, une file d''attente, plusieurs GPU'
 description: 'Faire de ComfyUI un service de rendu — ce que son serveur fournit (un prompt à la fois, /prompt, /queue, /history, /interrupt, des identifiants de prompt jamais dédoublonnés) et ce qu''il ne fournit pas, puis un worker en C# et en Java qui prend des jobs dans une file, les exécute sur un pool de GPU choisis selon la longueur de leur file, réessaie avec backoff, envoie aux lettres mortes ce qui ne marchera jamais, interrompt à l''expiration du délai, rattrape une connexion WebSocket perdue et n''exécute chaque job qu''une fois ; testé contre un faux ComfyUI construit à partir de réponses enregistrées, sur trois OS et contre un vrai ComfyUI sur CPU, avec des notes de déploiement et l''expérience du labo GA sous forme de lot de jobs.'
 sidebar:
   order: 12
