@@ -1,0 +1,27 @@
+{
+  "name": "ga-p2-chord-universe",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Guitar Alchemist Lab, prototype 2: play a chord, see the universe. Chord recognition in the browser (chromagram, template matching over GA's chord qualities), a 3D neck and pitch-class bracelet in three.js, and a synthetic labelled corpus evaluated in Node.js with the same DSP code",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "test": "node --test tests/dsp.test.ts",
+    "eval": "node eval/evaluate.ts",
+    "check": "bash check.sh"
+  },
+  "dependencies": {
+    "three": "0.186.0"
+  },
+  "devDependencies": {
+    "@types/node": "24.13.4",
+    "@types/three": "0.186.0",
+    "playwright": "1.63.0",
+    "typescript": "7.0.2",
+    "vite": "8.3.0"
+  }
+}

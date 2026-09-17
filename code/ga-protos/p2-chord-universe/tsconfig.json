@@ -1,0 +1,22 @@
+{
+  // The app runs in the browser; the DSP, the corpus and the evaluation also run in Node.js (type stripping), so the
+  // code sticks to erasable TypeScript and imports with .ts extensions
+  "compilerOptions": {
+    "target": "es2023",
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "module": "esnext",
+    "types": ["vite/client", "node"],
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["src", "eval", "tests", "scripts", "vite.config.ts"]
+}
