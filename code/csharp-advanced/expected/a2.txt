@@ -1,0 +1,28 @@
+
+== Exhaustive check
+member                         agree                inputs
+ChordIntervalPattern.TryMatch  6,856,704/6,856,704  62 patterns x 4096 sets x 9 tolerances x 3 shapes
+CanonicalChordRecognizer       106,496/106,496      4096 sets x 13 basses x 2 passes
+IntervalClassVector.Id         4,096/4,096          4096 sets
+
+== Real corpus: guitar voicings from GA's generator
+voicings generated             667,125
+voicings checked               41,696               every 16th
+distinct pitch-class sets      2,482                of 4096
+chord name, canonical, slash   41,696/41,696
+
+== How often the same set comes back
+recognitions per distinct set  16.8                 in the sample
+in the whole corpus            265.9
+
+== A few voicings, as GA names them
+x-3-2-0-1-0                    C
+3-2-0-0-0-3                    G
+x-x-0-2-3-2                    D
+0-2-2-1-0-0                    E
+x-5-4-5-3-x                    D7(shell)
+
+== OPTIC-K reader: the dimension, read once
+compact dimension              124                  sum of the similarity partitions
+GetVector offset and length    313,047/313,047      one per indexed voicing
+exit 0

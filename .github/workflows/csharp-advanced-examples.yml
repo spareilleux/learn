@@ -36,3 +36,6 @@ jobs:
         env:
           BENCHMARKS_DRY: '1'
         run: dotnet run -c Release --project Benchmarks -- --filter '*' --job Dry --stopOnFirstError
+      - name: Appendix 2 benchmarks (dry run)
+        working-directory: code/csharp-advanced
+        run: dotnet run -c Release --project GaPerfBenchmarks -- --filter '*' --job Dry --stopOnFirstError

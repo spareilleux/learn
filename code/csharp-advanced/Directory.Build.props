@@ -8,5 +8,7 @@
     <InvariantGlobalization>true</InvariantGlobalization>
     <!-- The pinned Guitar Alchemist clone, fetched by fetch-ga.sh -->
     <GaRoot>$(MSBuildThisFileDirectory).ga/</GaRoot>
+    <!-- Appendix 2 reads GA's voicing-analysis path at a later commit, fetched into its own folder -->
+    <GaPerfRoot>$(MSBuildThisFileDirectory).ga-perf/</GaPerfRoot>
   </PropertyGroup>
 </Project>

@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Appendix 2: GA's voicing-analysis path against the versions in GaPerf/GaFast2.cs. One class at a time, with a filter such as
+         "*RecognitionBenchmarks*" (the command is in the appendix) -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <NoWarn>$(NoWarn);SKEXP0001;NU1605;NU1510;NU1902;NU1903;NU1904</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../GaPerf/GaPerf.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BenchmarkDotNet" Version="0.15.8" />
+  </ItemGroup>
+
+</Project>

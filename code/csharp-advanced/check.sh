@@ -9,6 +9,8 @@ bash fetch-ga.sh || exit 1
 dotnet tool restore > /dev/null || exit 1
 dotnet build Advanced -c Release -m:4 --nologo -v quiet "-clp:ErrorsOnly;NoSummary" || exit 1
 dotnet build CompileFail -c Release -m:4 --nologo -v quiet "-clp:ErrorsOnly;NoSummary" || exit 1
+# Appendix 2 builds against its own GA commit, in .ga-perf
+dotnet build GaPerf -c Release -m:4 --nologo -v quiet "-clp:ErrorsOnly;NoSummary" || exit 1
 # The same snippets built as Debug, for the class the compiler generates there (lesson 3)
 dotnet build Snippets -c Debug -m:4 --nologo -v quiet "-clp:ErrorsOnly;NoSummary" || exit 1
 status=0
@@ -60,6 +62,16 @@ run l7 l7
 run l8 l8
 run l9 l9
 run a1 a1
+
+# Appendix 2: the same comparison as run(), for the GaPerf program
+a2() {
+  dotnet run --project GaPerf -c Release --no-build -- a2 < /dev/null > out/a2.raw.txt 2>&1
+  local code=$?
+  grep '^# ' out/a2.raw.txt
+  { grep -v '^# ' out/a2.raw.txt; echo "exit $code"; } > out/a2.txt
+  compare a2
+}
+a2
 
 ilspy() {
   dotnet ilspycmd --disable-updatecheck "$@" 2>&1
