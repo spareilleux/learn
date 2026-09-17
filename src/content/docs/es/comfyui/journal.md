@@ -136,7 +136,7 @@ sidebar:
 - El primer intento de textura sin costuras, con una cruz de 160 píxeles, 64 píxeles de difuminado y un denoise de 0,7, redujo las costuras a la mitad (de 13,4 a 5,2 niveles en la fila central) pero dejó una línea moteada y un escalón de tono. Un denoise de 0,9 no ayudó; una cruz de 384 píxeles con 128 píxeles de difuminado, sí.
 - "Pale maple" (arce claro) dibujó hojas de arce talladas en la madera. "Pale maple wood, a planed board" (madera de arce clara, una tabla cepillada) dibujó una tabla.
 
-![Tres paneles. Una repetición 2 × 2 de una textura de palisandro, con líneas horizontales y verticales tenues a través de cada tesela. Un recorte del centro de esa textura, donde una fila de motas oscuras cruza la veta y la mitad inferior es más clara. Una repetición 2 × 2 de una madera clara con una gran hoja de arce tallada en cada tesela.](../../../../assets/comfyui/journal-l09-seamless-failures.webp)
+![Tres paneles. Una repetición 2 × 2 de una textura de palisandro, con líneas horizontales y verticales tenues a través de cada mosaico. Un recorte del centro de esa textura, donde una fila de motas oscuras cruza la veta y la mitad inferior es más clara. Una repetición 2 × 2 de una madera clara con una gran hoja de arce tallada en cada mosaico.](../../../../assets/comfyui/journal-l09-seamless-failures.webp)
 
 *Los fallos, antes de la corrección. ComfyUI v0.36.0: Z-Image-Turbo nvfp4 con Qwen3 4B fp4 mixed, semilla 42, 8 pasos, CFG 1, `res_multistep`, `simple`, workflow [`09-seamless.api.json`](https://github.com/spareilleux/learn/blob/d16b4d70b565257067309b7b8d7f51408cb81741/code/comfyui/workflows/09-seamless.api.json) con su cruz ajustada a 160 píxeles, 64 de difuminado y un denoise de 0,7. De izquierda a derecha: el palisandro repetido 2 × 2; los 512 × 512 píxeles centrales del palisandro; el prompt "flat top-down photograph of pale maple, subtle straight grain, even soft lighting, no shadows, wood texture" (foto cenital de arce claro, con veta fina y recta, luz suave y uniforme, sin sombras, textura de madera), repetido 2 × 2.*
 
@@ -152,7 +152,7 @@ sidebar:
 - Varios LoRA apilados en el otro orden: la misma imagen, y el mismo hash de píxeles o no.
 - La ruta emulada de nvfp4 y fp8 en una GPU sin sus kernels; la máquina del curso solo tiene una GPU de la serie RTX 50.
 - Por qué la red nvfp4 de Z-Image muestreaba más rápido con el codificador de texto bf16 que con el fp4.
-- Muestrear las teselas de `SplitImageToTileList` y unirlas con `ImageMergeTileList`: si se ven costuras con un denoise bajo.
+- Muestrear los mosaicos de `SplitImageToTileList` y unirlas con `ImageMergeTileList`: si se ven costuras con un denoise bajo.
 - Si `LoadImage` lista los archivos `.exr` en Linux y macOS, y si el `EXRLoader` de three.js lee en un navegador el EXR sin comprimir de ComfyUI.
 - Cómo muestran los navegadores el AVIF HLG de `SaveImageAdvanced`.
 - Qué hace la opción `convrot` de int8 en los kernels de comfy-kitchen.
