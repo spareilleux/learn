@@ -8,7 +8,8 @@ namespace Learn.Comfy;
 // ComfyUI's SaveImage stores the workflow as text chunks next to the pixels.
 public sealed record Chunk(string Type, byte[] Data);
 
-public sealed record Pixels(int Width, int Height, int Channels, byte[] Data);
+// 16-bit images keep two big-endian bytes per sample in Data.
+public sealed record Pixels(int Width, int Height, int Channels, byte[] Data, int BitDepth = 8);
 
 public static class Png
 {
@@ -57,18 +58,20 @@ public static class Png
         }
     }
 
-    // Decodes 8-bit RGB or RGBA images without interlacing, which is what ComfyUI writes.
+    // Decodes 8-bit or 16-bit RGB or RGBA images without interlacing, which is what ComfyUI writes
+    // (SaveImage writes 8 bits; SaveImageAdvanced can write 16).
     public static Pixels ReadPixels(IReadOnlyList<Chunk> chunks)
     {
         byte[] header = chunks[0].Data;
         int width = ReadBigEndian(header, 0), height = ReadBigEndian(header, 4);
         byte bitDepth = header[8], colorType = header[9], interlace = header[12];
-        if (bitDepth != 8 || colorType is not (2 or 6) || interlace != 0)
+        if (bitDepth is not (8 or 16) || colorType is not (2 or 6) || interlace != 0)
             throw new InvalidDataException($"unsupported PNG: bit depth {bitDepth}, color type {colorType}, interlace {interlace}");
         int channels = colorType == 2 ? 3 : 4;
 
         byte[] raw = Inflate(chunks.Where(c => c.Type == "IDAT").SelectMany(c => c.Data).ToArray());
-        int stride = width * channels;
+        int bytesPerPixel = channels * bitDepth / 8; // filters look back one pixel, in bytes
+        int stride = width * bytesPerPixel;
         var pixels = new byte[height * stride];
         for (int y = 0; y < height; y++)
         {
@@ -76,9 +79,9 @@ public static class Png
             int src = y * (stride + 1) + 1, dst = y * stride;
             for (int x = 0; x < stride; x++)
             {
-                int a = x >= channels ? pixels[dst + x - channels] : 0;
+                int a = x >= bytesPerPixel ? pixels[dst + x - bytesPerPixel] : 0;
                 int b = y > 0 ? pixels[dst + x - stride] : 0;
-                int c = x >= channels && y > 0 ? pixels[dst + x - stride - channels] : 0;
+                int c = x >= bytesPerPixel && y > 0 ? pixels[dst + x - stride - bytesPerPixel] : 0;
                 int predictor = filter switch
                 {
                     0 => 0,
@@ -91,7 +94,7 @@ public static class Png
                 pixels[dst + x] = (byte)(raw[src + x] + predictor);
             }
         }
-        return new Pixels(width, height, channels, pixels);
+        return new Pixels(width, height, channels, pixels, bitDepth);
     }
 
     public static string PixelHash(Pixels pixels) =>
@@ -160,6 +163,8 @@ public static class PngCommands
     {
         var a = Png.ReadPixels(Png.ReadChunks(first));
         var b = Png.ReadPixels(Png.ReadChunks(second));
+        if (a.BitDepth != 8 || b.BitDepth != 8)
+            throw new InvalidDataException("compare reads 8-bit images only");
         if (a.Width != b.Width || a.Height != b.Height)
         {
             Console.WriteLine($"different sizes: {a.Width} x {a.Height} and {b.Width} x {b.Height}");

@@ -1,0 +1,11 @@
+{
+  "1": {"class_type": "LoadImage", "inputs": {"image": "guitar.png"}, "_meta": {"title": "Starting image"}},
+  "2": {"class_type": "ImageCropV2", "inputs": {"image": ["1", 0], "crop_region": {"x": 384, "y": 384, "width": 256, "height": 256}}, "_meta": {"title": "A 256 × 256 detail"}},
+  "3": {"class_type": "ImageScaleBy", "inputs": {"image": ["2", 0], "upscale_method": "nearest-exact", "scale_by": 4.0}},
+  "4": {"class_type": "ImageScaleBy", "inputs": {"image": ["2", 0], "upscale_method": "lanczos", "scale_by": 4.0}},
+  "5": {"class_type": "UpscaleModelLoader", "inputs": {"model_name": "RealESRGAN_x4plus.safetensors"}},
+  "6": {"class_type": "ImageUpscaleWithModel", "inputs": {"upscale_model": ["5", 0], "image": ["2", 0]}},
+  "7": {"class_type": "SaveImage", "inputs": {"images": ["3", 0], "filename_prefix": "l09/up-nearest"}},
+  "8": {"class_type": "SaveImage", "inputs": {"images": ["4", 0], "filename_prefix": "l09/up-lanczos"}},
+  "9": {"class_type": "SaveImage", "inputs": {"images": ["6", 0], "filename_prefix": "l09/up-esrgan"}}
+}

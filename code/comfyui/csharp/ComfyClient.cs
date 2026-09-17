@@ -82,8 +82,15 @@ public static class ComfyClient
                 byte[] png = await http.GetByteArrayAsync($"view?{query}", cancel.Token);
                 string path = Path.Combine(outDir, image["filename"]!.GetValue<string>());
                 await File.WriteAllBytesAsync(path, png, cancel.Token);
+                if (!path.EndsWith(".png", StringComparison.OrdinalIgnoreCase))
+                {
+                    // SaveImageAdvanced also writes EXR and AVIF files, which this tool doesn't decode.
+                    Console.WriteLine($"GET /view node {node}: {image["subfolder"]}/{image["filename"]}, {png.Length} bytes");
+                    continue;
+                }
                 var pixels = Png.ReadPixels(Png.ReadChunks(path));
-                Console.WriteLine($"GET /view node {node}: {image["subfolder"]}/{image["filename"]}, {pixels.Width} x {pixels.Height}, pixel SHA-256 {Png.PixelHash(pixels)}");
+                string depth = pixels.BitDepth == 8 ? "" : $", {pixels.BitDepth}-bit";
+                Console.WriteLine($"GET /view node {node}: {image["subfolder"]}/{image["filename"]}, {pixels.Width} x {pixels.Height}{depth}, pixel SHA-256 {Png.PixelHash(pixels)}");
             }
         return 0;
     }

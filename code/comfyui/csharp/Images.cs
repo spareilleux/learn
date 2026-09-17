@@ -76,6 +76,7 @@ public static class ImageCommands
     public static int Cut(string input, string output, double cx, double cy, double rx, double ry, double feather)
     {
         var source = Png.ReadPixels(Png.ReadChunks(input));
+        if (source.BitDepth != 8) throw new InvalidDataException("cut reads 8-bit images only");
         var data = new byte[source.Width * source.Height * 4];
         int transparent = 0;
         for (int y = 0; y < source.Height; y++)

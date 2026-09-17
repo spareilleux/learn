@@ -1,0 +1,22 @@
+{
+  "1": {"class_type": "UNETLoader", "inputs": {"unet_name": "z_image_turbo_bf16.safetensors", "weight_dtype": "default"}, "_meta": {"title": "Diffusion model"}},
+  "2": {"class_type": "CLIPLoader", "inputs": {"clip_name": "qwen_3_4b.safetensors", "type": "lumina2", "device": "default"}, "_meta": {"title": "Text encoder"}},
+  "3": {"class_type": "VAELoader", "inputs": {"vae_name": "z_image_ae.safetensors"}},
+  "4": {"class_type": "ModelSamplingAuraFlow", "inputs": {"model": ["1", 0], "shift": 3.0}},
+  "5": {"class_type": "CLIPTextEncode", "inputs": {"text": "an acoustic guitar leaning against a brick wall in a small music shop, warm evening light, photograph", "clip": ["2", 0]}},
+  "6": {"class_type": "ConditioningZeroOut", "inputs": {"conditioning": ["5", 0]}, "_meta": {"title": "No negative prompt"}},
+  "7": {"class_type": "EmptySD3LatentImage", "inputs": {"width": 1024, "height": 1024, "batch_size": 1}},
+  "8": {"class_type": "KSampler", "inputs": {"seed": 42, "steps": 8, "cfg": 1.0, "sampler_name": "res_multistep", "scheduler": "simple", "denoise": 1.0, "model": ["4", 0], "positive": ["5", 0], "negative": ["6", 0], "latent_image": ["7", 0]}, "_meta": {"title": "First pass, 1024 × 1024"}},
+  "9": {"class_type": "VAEDecode", "inputs": {"samples": ["8", 0], "vae": ["3", 0]}},
+  "10": {"class_type": "SaveImage", "inputs": {"images": ["9", 0], "filename_prefix": "l09/base"}},
+  "11": {"class_type": "UpscaleModelLoader", "inputs": {"model_name": "RealESRGAN_x4plus.safetensors"}},
+  "12": {"class_type": "ImageUpscaleWithModel", "inputs": {"upscale_model": ["11", 0], "image": ["9", 0]}, "_meta": {"title": "4096 × 4096"}},
+  "13": {"class_type": "ImageScaleBy", "inputs": {"image": ["12", 0], "upscale_method": "lanczos", "scale_by": 0.5}, "_meta": {"title": "2048 × 2048"}},
+  "14": {"class_type": "SaveImage", "inputs": {"images": ["13", 0], "filename_prefix": "l09/esrgan-2x"}},
+  "15": {"class_type": "VAEEncode", "inputs": {"pixels": ["13", 0], "vae": ["3", 0]}},
+  "16": {"class_type": "KSampler", "inputs": {"seed": 42, "steps": 5, "cfg": 1.0, "sampler_name": "dpmpp_2m_sde", "scheduler": "beta", "denoise": 0.33, "model": ["4", 0], "positive": ["5", 0], "negative": ["6", 0], "latent_image": ["15", 0]}, "_meta": {"title": "Second pass, 2048 × 2048"}},
+  "17": {"class_type": "VAEDecodeTiled", "inputs": {"samples": ["16", 0], "vae": ["3", 0], "tile_size": 1024, "overlap": 64, "temporal_size": 64, "temporal_overlap": 8}},
+  "18": {"class_type": "SaveImage", "inputs": {"images": ["17", 0], "filename_prefix": "l09/hires"}},
+  "19": {"class_type": "ImageScaleBy", "inputs": {"image": ["9", 0], "upscale_method": "lanczos", "scale_by": 2.0}},
+  "20": {"class_type": "SaveImage", "inputs": {"images": ["19", 0], "filename_prefix": "l09/lanczos-2x"}}
+}

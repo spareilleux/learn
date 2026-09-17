@@ -1,0 +1,7 @@
+{
+  "1": {"class_type": "LoadImage", "inputs": {"image": "guitar.png"}, "_meta": {"title": "An 8-bit render"}},
+  "2": {"class_type": "SaveImageAdvanced", "inputs": {"images": ["1", 0], "filename_prefix": "l09/png16", "format": "png", "format.bit_depth": "16-bit", "format.input_color_space": "sRGB"}},
+  "3": {"class_type": "SaveImageAdvanced", "inputs": {"images": ["1", 0], "filename_prefix": "l09/linear", "format": "exr", "format.bit_depth": "32-bit float", "format.input_color_space": "sRGB"}, "_meta": {"title": "EXR, converted to linear light"}},
+  "4": {"class_type": "ImageColorSpace", "inputs": {"image": ["1", 0], "source": "sRGB", "destination": "HDR"}},
+  "5": {"class_type": "SaveImageAdvanced", "inputs": {"images": ["4", 0], "filename_prefix": "l09/hlg", "format": "avif", "format.bit_depth": "auto", "format.input_color_space": "HDR", "format.crf": 18, "format.save_mode": "still images"}, "_meta": {"title": "AVIF, HLG in Rec.2020"}}
+}

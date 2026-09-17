@@ -1,0 +1,14 @@
+{
+  "1": {"class_type": "UNETLoader", "inputs": {"unet_name": "z_image_turbo_bf16.safetensors", "weight_dtype": "default"}, "_meta": {"title": "Diffusion model"}},
+  "2": {"class_type": "CLIPLoader", "inputs": {"clip_name": "qwen_3_4b.safetensors", "type": "lumina2", "device": "default"}, "_meta": {"title": "Text encoder"}},
+  "3": {"class_type": "VAELoader", "inputs": {"vae_name": "z_image_ae.safetensors"}},
+  "4": {"class_type": "ModelSamplingAuraFlow", "inputs": {"model": ["1", 0], "shift": 3.0}},
+  "5": {"class_type": "CLIPTextEncode", "inputs": {"text": "an acoustic guitar leaning against a brick wall in a small music shop, warm evening light, photograph", "clip": ["2", 0]}},
+  "6": {"class_type": "ConditioningZeroOut", "inputs": {"conditioning": ["5", 0]}, "_meta": {"title": "No negative prompt"}},
+  "7": {"class_type": "EmptySD3LatentImage", "inputs": {"width": 1024, "height": 1024, "batch_size": 1}},
+  "8": {"class_type": "KSampler", "inputs": {"seed": 42, "steps": 8, "cfg": 1.0, "sampler_name": "res_multistep", "scheduler": "simple", "denoise": 1.0, "model": ["4", 0], "positive": ["5", 0], "negative": ["6", 0], "latent_image": ["7", 0]}, "_meta": {"title": "First pass, 1024 × 1024"}},
+  "9": {"class_type": "LatentUpscaleBy", "inputs": {"samples": ["8", 0], "upscale_method": "bislerp", "scale_by": 2.0}},
+  "10": {"class_type": "KSampler", "inputs": {"seed": 42, "steps": 8, "cfg": 1.0, "sampler_name": "res_multistep", "scheduler": "simple", "denoise": 0.55, "model": ["4", 0], "positive": ["5", 0], "negative": ["6", 0], "latent_image": ["9", 0]}, "_meta": {"title": "Second pass, 2048 × 2048"}},
+  "11": {"class_type": "VAEDecodeTiled", "inputs": {"samples": ["10", 0], "vae": ["3", 0], "tile_size": 1024, "overlap": 64, "temporal_size": 64, "temporal_overlap": 8}},
+  "12": {"class_type": "SaveImage", "inputs": {"images": ["11", 0], "filename_prefix": "l09/latent-hires"}}
+}
