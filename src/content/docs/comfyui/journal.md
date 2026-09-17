@@ -14,6 +14,7 @@ sidebar:
 - [x] Lesson 2: diffusion, and what makes an image reproducible
 - [x] Lesson 3: workflows as JSON
 - [x] Lesson 4: the HTTP and WebSocket API from C# and Java
+- [x] French and Spanish translations
 - [ ] Lesson 5: img2img, inpainting and outpainting
 
 ## 2026-09-16 — Versions and setup

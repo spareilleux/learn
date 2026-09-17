@@ -95,7 +95,7 @@ Unlike the initial noise, it is drawn on `x.device`, the GPU when there is one. 
 
 ### Seed and batch
 
-![Four renders side by side, all of a brass object on a workbench by a window. Seed 42: the ornate hourglass-like object. Seed 43: a pyramid-shaped object with a scale, closer to a metronome. Seed 7: a squat hourglass on a square base, with a curtain. The second image of a batch of two with seed 42: a tall conical object next to a wooden stand.](../../../assets/comfyui/l02-seeds.webp)
+![Four renders side by side, all of a brass object on a workbench by a window. Seed 42: the ornate hourglass-like object. Seed 43: a pyramid-shaped object with a graduated scale, closer to a metronome. Seed 7: a squat hourglass on a square base, with a curtain. The second image of a batch of two with seed 42: a tall conical object next to a wooden stand.](../../../assets/comfyui/l02-seeds.webp)
 
 *Seeds 42, 43 and 7; then the second image of a batch of two with seed 42 (`batch_size` 2).*
 
@@ -194,7 +194,7 @@ for i in range(unique_inds[-1]+1):
         noises.append(noise)
 ```
 
-It draws the noise for every index from 0 to the largest one, and keeps only the indexes of the batch. Drawing and discarding moves the generator forward, so image number 3 of a batch always gets the noise it would have had as the fourth image of the full batch. That makes it possible to render one image of a batch again on its own, with the same noise.
+It draws the noise for every index from 0 to the largest one, and keeps only the indexes of the batch. Drawing and discarding moves the generator forward, so the image at index 3 of a batch, counting from 0, always gets the noise it would have had as the fourth image of the full batch. That makes it possible to render one image of a batch again on its own, with the same noise.
 
 </details>
 

@@ -309,12 +309,12 @@ The `tEXt` chunk named `prompt` holds the API-format graph as JSON: open the PNG
 
 1. Queue the lesson's workflow twice with the same inputs, then once with `"seed": 43`. Compare the three entries of `/history`: which nodes ran each time?
 2. `GET /object_info/EmptyLatentImage` returns the declaration of a node. What are the minimum size and the step of `width`, and why would a latent image need a step?
-3. Change the negative prompt to an empty string and queue the workflow. Which node runs again, and why does `CLIPTextEncode` node 6 not?
+3. Change the negative prompt to an empty string and queue the workflow. Which nodes run again, and why does `CLIPTextEncode` node 6 not?
 
 <details>
 <summary>Solution 1</summary>
 
-The first run has `"execution_cached": {"nodes": []}`: every node ran. The second lists all seven nodes, `SaveImage` included, and writes no new file: its `outputs` name the same `metronome_00001_.png` as the first run. The third lists nodes 4, 5, 6 and 7: the checkpoint, the empty latent and both prompts are reused, and `KSampler`, `VAEDecode` and `SaveImage` run, because the seed is an input of `KSampler` and the others depend on its output.
+The first run has `"execution_cached": {"nodes": []}`: every node ran. The second lists all seven nodes, `SaveImage` included, and writes no new file: its `outputs` name the same `metronome_00001_.png` as the first run. The third lists nodes 4, 5, 6 and 7: the checkpoint, the empty latent and both prompts are reused, and `KSampler`, `VAEDecode` and `SaveImage` run, because the seed is an input of `KSampler` and the other two come after it in the graph.
 
 </details>
 

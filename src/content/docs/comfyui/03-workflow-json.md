@@ -190,7 +190,7 @@ text workflow: 3679 characters: {"id": "00000000-0000-0000-0000-000000000000", "
 image: 1024 x 1024, 3 channels, pixel SHA-256 5374ac40a393cf78
 ```
 
-The C# reader in [`Png.cs`](https://github.com/spareilleux/learn/blob/a1a9bffadaa7156b91ca9c2c2b8885e9e9862dd5/code/comfyui/csharp/Png.cs) checks each chunk's CRC, reads `tEXt` and `iTXt` chunks, and decodes the pixels itself, with `ZLibStream` and PNG's five row filters, so that the hash covers pixels and not file bytes. The IDAT line shows why. On the first CI run, the same 64 × 48 image was 84 compressed bytes on Linux and 88 on Windows and macOS: the zlib library that Pillow uses differs between the platforms' builds, most likely. The inflated size, 9,264 bytes, is the same everywhere, and so are the pixels.
+The C# reader in [`Png.cs`](https://github.com/spareilleux/learn/blob/a1a9bffadaa7156b91ca9c2c2b8885e9e9862dd5/code/comfyui/csharp/Png.cs) checks each chunk's CRC, reads `tEXt` and `iTXt` chunks, and decodes the pixels itself, with `ZLibStream` and PNG's five row filters, so that the hash covers pixels and not file bytes. The IDAT line shows why. On the first CI run, the same 64 × 48 image was 84 compressed bytes on Linux and 88 on Windows and macOS: most likely, the zlib library that Pillow uses differs between the platforms' builds. The inflated size, 9,264 bytes, is the same everywhere, and so are the pixels.
 
 Two cautions about this metadata:
 
