@@ -10,6 +10,10 @@ sidebar:
 Chaque tableau de sortie des leçons vient de [`code/music-theory-ga`](https://github.com/spareilleux/learn/tree/main/code/music-theory-ga), un programme .NET 10 qui calcule chaque notion à partir des définitions des manuels et demande la même réponse à [Guitar Alchemist](https://github.com/GuitarAlchemist/ga). Il est compilé contre le projet `GA.Domain.Core` de GA, cloné au commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6). [`.github/workflows/music-ga-examples.yml`](https://github.com/spareilleux/learn/blob/main/.github/workflows/music-ga-examples.yml) l'exécute sous Linux, Windows et macOS et compare la sortie, lignes `DIFF` comprises, avec les fichiers attendus. Le même programme dessine les diagrammes, bracelets, grilles d'accords, manches et cercles des quintes, sous forme de fichiers SVG, et la CI vérifie que les images enregistrées dans le dépôt sont à jour. Les sorties ont été capturées en septembre 2026.
 :::
 
+:::tip[En 3D]
+L'[Atlas des Douze](https://claude.ai/artifact/Qh4oMxFH5aPx9dYC4xGjyn) (français et anglais) met les idées de ce cours en onze planches 3D interactives : les douze classes de hauteurs sur un manche, une hélice et des bracelets, les sept modes, le vecteur d'intervalles, le cercle des quintes, les accords d'une tonalité, une machine à cadences, OPTIC-K et les accordages. C'est un instantané, qui ne fait pas partie du cours testé ; voir [Artefacts](../artifacts/).
+:::
+
 ## Pourquoi j'apprends ça
 
 [Guitar Alchemist](https://github.com/GuitarAlchemist/ga) (GA) est une grosse base de code C# et F# consacrée à la musique : notes, intervalles, gammes, modes, accords, voicings, classes d'ensembles, et des outils qui permettent à un assistant IA de raisonner dessus. Je sais lire le code. Ce que je ne sais pas faire, c'est dire si `ModalFamily`, `PrimeForm` ou `GetSymbolSuffix` calculent ce qu'un musicien entend par ces mots. Ce cours apprend la théorie dans des sources sérieuses, puis lit les types de GA avec cette théorie en main, et note chaque endroit où les deux divergent.

@@ -10,6 +10,10 @@ sidebar:
 Every table of output in the lessons comes from [`code/music-theory-ga`](https://github.com/spareilleux/learn/tree/main/code/music-theory-ga), a .NET 10 program that computes each concept from the textbook definitions and asks [Guitar Alchemist](https://github.com/GuitarAlchemist/ga) for the same answer. It builds against GA's `GA.Domain.Core` project, cloned at commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6). [`.github/workflows/music-ga-examples.yml`](https://github.com/spareilleux/learn/blob/main/.github/workflows/music-ga-examples.yml) runs it on Linux, Windows and macOS and compares the output, `DIFF` lines included, with the expected files. The same program draws the diagrams, bracelets, chord grids, fretboards and circles of fifths, as SVG files, and CI checks that the committed images are up to date. The outputs were captured in September 2026.
 :::
 
+:::tip[See it in 3D]
+The [Atlas des Douze](https://claude.ai/artifact/Qh4oMxFH5aPx9dYC4xGjyn) (French and English) sets the ideas of this course out as eleven interactive 3D plates: the twelve pitch classes on a neck, a helix and bracelets, the seven modes, the interval vector, the circle of fifths, the chords of a key, a cadence machine, OPTIC-K and tunings. It is a snapshot, not part of the tested course; see [Artifacts](../artifacts/).
+:::
+
 ## Why I'm learning this
 
 [Guitar Alchemist](https://github.com/GuitarAlchemist/ga) (GA) is a large C# and F# code base about music: notes, intervals, scales, modes, chords, voicings, set classes, and tools that let an AI assistant reason about them. I can read the code. What I can't do is tell whether `ModalFamily`, `PrimeForm` or `GetSymbolSuffix` compute what a musician means by those words. This course learns the theory from serious sources, then reads GA's types with that theory in hand, and writes down every place where the two disagree.

@@ -10,6 +10,10 @@ sidebar:
 Cada tabla de salida de las lecciones procede de [`code/music-theory-ga`](https://github.com/spareilleux/learn/tree/main/code/music-theory-ga), un programa .NET 10 que calcula cada concepto a partir de las definiciones de los libros de texto y le pide la misma respuesta a [Guitar Alchemist](https://github.com/GuitarAlchemist/ga). Se compila contra el proyecto `GA.Domain.Core` de GA, clonado en el commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6). [`.github/workflows/music-ga-examples.yml`](https://github.com/spareilleux/learn/blob/main/.github/workflows/music-ga-examples.yml) lo ejecuta en Linux, Windows y macOS y compara la salida, líneas `DIFF` incluidas, con los archivos esperados. El mismo programa dibuja las figuras, brazaletes, diagramas de acordes, mástiles y círculos de quintas, como archivos SVG, y la CI comprueba que las imágenes del repositorio están al día. Las salidas se capturaron en septiembre de 2026.
 :::
 
+:::tip[En 3D]
+El [Atlas des Douze](https://claude.ai/artifact/Qh4oMxFH5aPx9dYC4xGjyn) (en francés e inglés) presenta las ideas de este curso en once láminas 3D interactivas: las doce clases de altura en un mástil, una hélice y brazaletes, los siete modos, el vector interválico, el círculo de quintas, los acordes de una tonalidad, una máquina de cadencias, OPTIC-K y las afinaciones. Es una instantánea, no forma parte del curso probado; véase [Artefactos](../artifacts/).
+:::
+
 ## Por qué aprendo esto
 
 [Guitar Alchemist](https://github.com/GuitarAlchemist/ga) (GA) es una gran base de código C# y F# sobre música: notas, intervalos, escalas, modos, acordes, *voicings*, clases de conjuntos y herramientas que permiten a un asistente de IA razonar sobre ellos. Sé leer el código. Lo que no sé es decir si `ModalFamily`, `PrimeForm` o `GetSymbolSuffix` calculan lo que un músico entiende con esas palabras. Este curso aprende la teoría en fuentes serias, luego lee los tipos de GA con esa teoría en la mano y anota cada punto en que las dos no coinciden.
