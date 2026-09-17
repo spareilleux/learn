@@ -23,6 +23,7 @@ sidebar:
 - [x] Lección 9: escalado, texturas sin costuras y HDR
 - [ ] Lección 10: vídeo
 - [x] Lección 11: los nodos personalizados y su seguridad
+- [x] Lección 12: ComfyUI en producción
 
 ## 2026-09-16 — Versiones y configuración
 
@@ -120,6 +121,14 @@ sidebar:
 - El paquete de Guitar Alchemist (GA Chord Diagram, GA Fretboard Control Map, GA Scale Prompt) calcula a partir de las tablas de afinación y de escalas de GA en el commit `a826864f`, dibuja con Pillow sin fuentes, y pasa 14 pruebas unitarias solo con NumPy y Pillow. Cargado en un directorio base desechable, con el Python de la versión portable, en la CPU, se importó en 0,0 s, se ejecutó en 0,06 s, y `SaveImage` escribió los mismos píxeles que el PNG esperado de la prueba. `--disable-all-custom-nodes`, `--whitelist-custom-nodes ga` y una carpeta `.disabled` se comportaron como dice el código fuente.
 - El script de auditoría se ejecutó sobre seis paquetes fijados el 16 de septiembre de 2026: ComfyUI-GGUF, comfyui_controlnet_aux, ComfyUI-Impact-Pack, ComfyUI-VideoHelperSuite, rgthree-comfy y ComfyUI_essentials. Ningún hallazgo sugiere mala intención. Impact-Pack instala `onnxruntime` con pip la primera vez que se ejecuta un detector ONNX, y su `install.py` descarga un `.pth` de SAM. rgthree-comfy envía el SHA-256 de un archivo de modelo a Civitai cuando la interfaz pide su información. comfyui_controlnet_aux tiene 72 llamadas a `torch.load` sin `weights_only`, seguras por defecto solo con PyTorch 2.6 o posterior.
 - Un pickle cuya carga llama a `print` se ejecutó con `pickle.loads` y con `torch.load(weights_only=False)`; `torch.load(weights_only=True)` lo rechazó con PyTorch 2.13.
+
+## 2026-09-16 — ComfyUI en producción
+
+- Leído en ComfyUI v0.36.0: un único hilo `prompt_worker` ejecuta un prompt a la vez; un cliente puede elegir un `prompt_id`, que debe ser un UUID en minúsculas; el mismo identificador enviado dos veces se ejecuta dos veces y sobrescribe su entrada de historial; `execution_success` se envía antes de escribir el historial; `execution_interrupted` se difunde a todos; una reconexión no reproduce nada. Un script de grabación provocó estos casos en un servidor CPU y guardó las respuestas.
+- Un worker en C# y en Java con las mismas líneas de log: una cola en memoria (un `Channel` en C#, una `LinkedBlockingQueue` e hilos virtuales en Java) o RabbitMQ, el identificador del job como `prompt_id`, un archivo de reserva y `done.json` para la idempotencia, backoff exponencial con full jitter, los 400 y los errores de ejecución normales a las cartas muertas, las faltas de memoria y los 5xx reintentados, una interrupción al vencer el plazo, un pool de GPU que elige el servidor con menos prompts delante, y la gestión de SIGTERM con un periodo de gracia.
+- Un ComfyUI falso en ASP.NET Core reproduce las respuestas grabadas según un guion de fallos. Pasan 11 pruebas de xUnit y 9 de JUnit, y los dos workers imprimen las mismas transcripciones en Windows, Linux y macOS en la CI. Contra un ComfyUI real en CPU, el worker de C# ejecutó cuatro jobs (un duplicado, una carta muerta), y el de Java, en el mismo servidor, encontró los prompts terminados en el historial sin volver a ejecutarlos.
+- La primera ejecución de la CI se bloqueó en Linux y macOS: los servidores falsos sobrevivían a `kill`. Ahora esperan SIGTERM con `PosixSignalRegistration`.
+- El experimento «del acorde al mástil» del laboratorio GA se ejecuta como veinte jobs con un CSV de resultados contra el servidor falso. Los adaptadores de RabbitMQ, las notas de despliegue y una ejecución en GPU siguen por verificar.
 
 ## 2026-09-16 — Modelos para las lecciones 9 y 10
 

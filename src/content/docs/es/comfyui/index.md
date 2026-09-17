@@ -47,7 +47,7 @@ Escribes C# o Java. Conoces HTTP, JSON y el código asíncrono. No necesitas sab
 | 9 | [Escalado, texturas sin costuras y HDR](09-upscaling-seamless-hdr/) | — |
 | 10 | Vídeo | — |
 | 11 | [Los nodos personalizados y su seguridad](11-custom-nodes-and-security/) | paquetes NuGet o Maven que ejecutan código al instalarse |
-| 12 | ComfyUI en producción: un servicio, una cola, varias GPU | un worker detrás de una cola de trabajos |
+| 12 | [ComfyUI en producción: un servicio, una cola, varias GPU](12-production/) | un worker detrás de una cola de trabajos |
 | 13 | Proyecto: texturas para este sitio y para GuitarAlchemist | — |
 | — | [Diario](journal/) | |
 

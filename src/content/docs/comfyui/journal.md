@@ -23,6 +23,7 @@ sidebar:
 - [x] Lesson 9: upscaling, seamless textures and HDR
 - [ ] Lesson 10: video
 - [x] Lesson 11: custom nodes, and their security
+- [x] Lesson 12: ComfyUI in production
 
 ## 2026-09-16 — Versions and setup
 
@@ -120,6 +121,14 @@ sidebar:
 - The Guitar Alchemist pack (GA Chord Diagram, GA Fretboard Control Map, GA Scale Prompt) computes from GA's tuning and scale tables at `a826864f`, draws with Pillow without fonts, and passes 14 unit tests with only NumPy and Pillow. Loaded into a throwaway base directory with the portable build's Python on the CPU, it imported in 0.0 s, ran in 0.06 s, and `SaveImage` wrote the same pixels as the test's expected PNG. `--disable-all-custom-nodes`, `--whitelist-custom-nodes ga` and a `.disabled` folder behaved as the source says.
 - The audit script ran on six packs pinned on 16 September 2026: ComfyUI-GGUF, comfyui_controlnet_aux, ComfyUI-Impact-Pack, ComfyUI-VideoHelperSuite, rgthree-comfy and ComfyUI_essentials. None of the findings suggests bad intent. Impact-Pack installs `onnxruntime` with pip the first time an ONNX detector runs, and its `install.py` downloads a SAM `.pth`. rgthree-comfy sends a model file's SHA-256 to Civitai when the interface asks for its information. comfyui_controlnet_aux has 72 `torch.load` calls without `weights_only`, safe by default only on PyTorch 2.6 or later.
 - A pickle whose payload calls `print` ran with `pickle.loads` and with `torch.load(weights_only=False)`; `torch.load(weights_only=True)` refused it on PyTorch 2.13.
+
+## 2026-09-16 — ComfyUI in production
+
+- Read in ComfyUI v0.36.0: one `prompt_worker` thread runs one prompt at a time; a client may choose a `prompt_id`, which must be a lowercase UUID; the same id posted twice runs twice and overwrites its history entry; `execution_success` is sent before the history is written; `execution_interrupted` is broadcast; a reconnection replays nothing. A recording script provoked these cases on a CPU server and saved the answers.
+- A worker in C# and in Java with the same log lines: an in-memory queue (a `Channel` in C#, a `LinkedBlockingQueue` and virtual threads in Java) or RabbitMQ, the job id as `prompt_id`, a claim file and `done.json` for idempotency, exponential backoff with full jitter, 400s and ordinary execution errors to the dead letters, out-of-memory errors and 5xx retried, an interrupt on timeout, a GPU pool that picks the server with the fewest prompts ahead, and SIGTERM handling with a grace period.
+- A fake ComfyUI in ASP.NET Core replays the recorded shapes following a script of failures. 11 xUnit tests and 9 JUnit tests pass, and both workers print the same transcripts on Windows, Linux and macOS in CI. Against a real ComfyUI on the CPU, the C# worker ran four jobs (one duplicate, one dead letter), and the Java worker, on the same server, found the finished prompts in the history without running them again.
+- The first CI run hung on Linux and macOS: the fake servers outlived `kill`. They now wait for SIGTERM with `PosixSignalRegistration`.
+- The GA lab's chord-to-neck experiment runs as twenty jobs with a results CSV against the fake server. The RabbitMQ adapters, the deployment notes and a GPU run are still to verify.
 
 ## 2026-09-16 — Models for lessons 9 and 10
 

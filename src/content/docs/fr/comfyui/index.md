@@ -47,7 +47,7 @@ Tu écris du C# ou du Java. Tu connais HTTP, JSON et le code asynchrone. Tu n'as
 | 9 | [Agrandissement, textures raccordables et HDR](09-upscaling-seamless-hdr/) | — |
 | 10 | Vidéo | — |
 | 11 | [Les nœuds personnalisés, et leur sécurité](11-custom-nodes-and-security/) | des paquets NuGet ou Maven qui exécutent du code à l'installation |
-| 12 | ComfyUI en production : un service, une file d'attente, plusieurs GPU | un worker derrière une file de tâches |
+| 12 | [ComfyUI en production : un service, une file d'attente, plusieurs GPU](12-production/) | un worker derrière une file de tâches |
 | 13 | Projet : des textures pour ce site et pour GuitarAlchemist | — |
 | — | [Journal](journal/) | |
 
