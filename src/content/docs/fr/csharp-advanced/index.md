@@ -92,6 +92,7 @@ Les parties 1 et 2 mesurent le propre code de GA. La partie 3 construit un petit
 | # | Page | Sous le capot | Mesuré sur GA |
 |---|---|---|---|
 | 1 | [Cinq optimisations, prouvées puis mesurées](appendix-benchmarks/) | rotations et `PopCount` sur des ensembles de 12 bits, des tables de correspondance, une preuve d'équivalence sur tout le domaine d'entrée, les tris stables comme règle de départage, et un benchmark qui mesurait le JIT au lieu du code | `IsClusterFree`, `IntervalClassVector`, `ClosestDiatonicKey`, `ToNormalForm`, `PrimeForm` |
+| 2 | [GA, profilé, puis prouvé et mesuré](appendix-2-ga-performance/) | `dotnet-trace` sur un vrai pipeline, des masques de 12 bits au lieu d'ensembles de hachage, des énumérateurs boxés, un cache de 4096 cases indexé par l'ensemble lui-même, une propriété LINQ dans une boucle critique, et une preuve qui compare deux builds de GA octet par octet | `CanonicalChordRecognizer`, `ChordIntervalPattern.TryMatch`, `IntervalClassVector`, `OptickIndexReader` |
 | — | [Journal](journal/) | | |
 
 Les leçons 10 à 24 sont prévues et pas encore écrites. Les leçons 6 à 9 ont été écrites avant la leçon 5, et n'en dépendent pas.

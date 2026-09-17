@@ -20,6 +20,7 @@ sidebar:
 - [x] Lección 8: Rx.NET
 - [x] Lección 9: elegir un flujo
 - [x] Apéndice 1: cinco miembros de GA optimizados, demostrados sobre los 4096 conjuntos de clases de altura y luego medidos — con los benchmarks reescritos en cuanto se vio que medían el JIT
+- [x] Apéndice 2: el pipeline de indexación de GA perfilado, tres cambios demostrados contra la propia salida de GA y medidos, y enviados aguas arriba como pull requests
 
 ## 2026-09-14 — Configuración y la versión fijada de GA
 
@@ -133,8 +134,48 @@ Nada de esto se ha notificado todavía aguas arriba.
 - `default(Str)`, `new Str[n]` y `new T()` dan la cuerda 0, que la comprobación de rango de `Str` prohíbe; lo mismo vale para todos los objetos de valor de GA cuyo mínimo es 1 (lección 5).
 - El `out` de `IStaticReadonlyCollection<out TSelf>` no tiene ningún efecto: 13 de sus 17 implementaciones son structs, y la interfaz no tiene miembros de instancia (lección 5).
 
+## 2026-09-17 — Apéndice 2: perfilar GA, con pull requests
+
+El apéndice 1 eligió qué optimizar leyendo GA. Esta vez eligió un perfilador, sobre el propio pipeline de GA en el commit [`66bdd04`](https://github.com/GuitarAlchemist/ga/tree/66bdd049ad3f4b10f996e4cc6a9c6e58797cf30e), y cada cambio se envió aguas arriba. El trabajo fue de la noche del 2026-09-16 a la madrugada del 2026-09-17.
+
+- **Tres pull requests.**
+  - [#695](https://github.com/GuitarAlchemist/ga/pull/695): el reconocimiento de acordes con máscaras de 12 bits, calculado una sola vez por conjunto de clases de altura.
+  - [#694](https://github.com/GuitarAlchemist/ga/pull/694): el vector de clases de intervalo, calculado una sola vez por conjunto.
+  - [#693](https://github.com/GuitarAlchemist/ga/pull/693): `OptickIndexReader.Dimension`, leído una sola vez.
+
+  Cada una se hizo en su propia rama a partir de `main`. Las pruebas de GA pasaron antes de abrir cada PR: GA.Domain.Core.Tests 458/458 y 459/459, y las pruebas de acordes y voicings de GA.Business.Core.Tests 421/421 y 419/419. En GA.Business.ML.Tests, las pruebas de búsqueda y de esquema pasaron 227 de 228; la que falla lo hace de la misma manera en `main`.
+- **Adónde iba el tiempo.** `dotnet-trace` sobre el análisis de voicings situó alrededor del 52 % del subproceso principal en `CanonicalChordRecognizer.IdentifyChordSet`, la mayor parte construyendo `HashSet`. Un sondeo dio 173 µs y 347 KB por voicing para `VoicingAnalyzer.Analyze`, y 38 MB por consulta para una búsqueda OPTIC-K.
+- **La demostración compara dos compilaciones de GA, no dos métodos.** Un único programa de volcado se compila contra `main` y contra la rama, escribe cada respuesta, y `cmp` compara los archivos. Todos fueron idénticos byte a byte:
+  - `TryMatch`: 258.048 líneas;
+  - reconocimiento: 106.496 líneas, cada conjunto × 13 bajos × 2 pasadas;
+  - vectores de clases de intervalo: 8.192 líneas;
+  - los 667.125 voicings de guitarra a través de `VoicingAnalyzer.Analyze`;
+  - 2.048 búsquedas sobre el índice real de 313.047 entradas.
+
+  La demostración propia del curso, `GaPerf -- a2`, comprueba 6.856.704 llamadas a `TryMatch` y 106.496 reconocimientos, y se ejecuta en la CI.
+- **El hallazgo fue la caché, no las máscaras.** Los 667.125 voicings usan unos 2.500 conjuntos de clases de altura distintos, así que la búsqueda de patrones de cada conjunto se repetía 266 veces. Con un array de 4096 casillas, el reconocimiento es 7.600 veces más rápido en el benchmark del curso. En GA, con los dos cambios, `VoicingAnalyzer.Analyze` pasó de 234,34 ms y 759 MB a 8,94 ms y 22 MB para 2.000 voicings.
+- **Los 38 MB de la búsqueda no estaban en la búsqueda.** Un experimento con un recorrido secuencial asignó los mismos 38 MB que el paralelo, lo que descartó a `Parallel.For`. Los bytes venían de `GetVector`, que leía una propiedad que ejecuta un `Where` + `Sum` de LINQ sobre el registro de particiones: 626.094 consultas por búsqueda. Leída una sola vez, una búsqueda pasó de 4,986 ms y 38,25 MB a 2,162 ms y 41 KB.
+- **Dos resultados que no esperaba.**
+  - La primera versión con máscaras seguía asignando 72 bytes por llamada, por los enumeradores obtenidos a través de `IEnumerable<int>`. Distinguir `int[]` y `HashSet<int>` con un `switch` los eliminó, y la hizo otras 2,7 veces más rápida. La PGO dinámica no eliminó esta asignación, a diferencia de la de la lección 4; por qué no queda *por verificar*.
+  - El particionado por rangos de la búsqueda, que parecía un 8 % más rápido antes de la corrección, resultó un 22 % más lento después. Lo descarté.
+- **De extremo a extremo**, la exportación OPTIC-K se ejecutó cuatro veces, alternando el `main` de GA y una compilación con los dos cambios de análisis: 142,8 s frente a 62,9 s, y después 95,0 s frente a 38,3 s. Los archivos de índice fueron idénticos entrada a entrada.
+- **La máquina no estaba inactiva, y las cifras lo dicen.**
+  - Había otras sesiones en marcha. Cada compilación y cada serie de benchmarks tomó un bloqueo global de la máquina, y cada serie de BenchmarkDotNet tomó además el bloqueo de la GPU.
+  - Al principio de cada serie registré la RAM libre y los procesos más activos: entre 13,6 y 18,5 GB libres, entre el 32 % y el 100 % de CPU total, con Microsoft Defender, Docker y WSL a la cabeza.
+  - El mismo binario de exportación tardó 142,8 s, y luego 95,0 s.
+  - El coordinador informó de dos capturas de Chrome sin interfaz hechas por otra sesión entre las 00:47 y las 00:49. Ninguna de mis series se ejecutó en esa ventana: los benchmarks anteriores terminaron a las 00:42:38, y el siguiente empezó a las 00:50:22. Aun así, volví a ejecutar las series de GA que acababan de correr justo antes, con las mismas asignaciones y tiempos dentro de las barras de error.
+  - Las tablas de antes y después de GA usan `ShortRun`. Sus asignaciones son exactas; los tiempos, orientativos.
+  - Una ejecución de la serie de acordes no llegó a hacerse: mi script apuntaba a un worktree que no existía, y la volví a lanzar.
+- **Medido, y sin cambiar.**
+  - El camino paralelo de `VoicingGenerator` es el doble de lento que el secuencial (1.419 ms frente a 711 ms para 667.125 voicings), y `PitchClassSet.GetCompatibleKeys` ocupa el 13,5 % del perfil del análisis. Los dos archivos pertenecen a correcciones de GA en curso en otra sesión, así que estos hallazgos fueron allí como propuestas.
+  - `KeyIdentificationService.Identify` no está en el camino caliente: 25 µs, una vez por petición.
+  - Las asignaciones de los objetos de valor de la lección 5 no aparecen en este perfil.
+- **La exportación del índice no siempre es reproducible.** La primera exportación de la noche difiere de las posteriores en 266 de las 313.047 entradas, identificadas por instrumento y diagrama, aunque salió del mismo commit de GA. Todas las comparaciones de arriba se hacen entre exportaciones del mismo grupo; la causa queda *por verificar*.
+
 ## Por verificar
 
+- Por qué la PGO dinámica no eliminó los enumeradores encapsulados de la primera versión con máscaras de `TryMatch` (apéndice 2).
+- Por qué la exportación del índice OPTIC-K de GA difiere entre sesiones en 266 de las 313.047 entradas (apéndice 2).
 - A qué miembro se enlaza `T.Items` cuando una interfaz derivada oculta una propiedad abstracta estática con una propiedad `new static` (lección 5).
 - Por qué una llamada auxiliar por iteración solo hizo 1.46 veces más lento el bucle compartido de `ReadStatic<string>` (lección 5).
 - Cuál de los dos objetos de un `foreach` sobre `PitchClass.Items` deja de asignar la PGO dinámica (lección 5).

@@ -20,6 +20,7 @@ sidebar:
 - [x] Lesson 8: Rx.NET
 - [x] Lesson 9: choosing a stream
 - [x] Appendix 1: five GA members optimised, proved on all 4096 pitch-class sets, then measured — with the benchmarks rewritten once they turned out to be measuring the JIT
+- [x] Appendix 2: GA's indexing pipeline profiled, three changes proved against GA's own output and measured, and sent upstream as pull requests
 
 ## 2026-09-14 — Setup and the GA pin
 
@@ -133,8 +134,48 @@ None of these has been reported upstream yet.
 - `default(Str)`, `new Str[n]` and `new T()` give string 0, which `Str`'s range check forbids; the same holds for every GA value object whose minimum is 1 (lesson 5).
 - The `out` of `IStaticReadonlyCollection<out TSelf>` has no effect: 13 of its 17 implementers are structs, and the interface has no instance members (lesson 5).
 
+## 2026-09-17 — Appendix 2: profiling GA, with pull requests
+
+Appendix 1 chose what to optimise by reading GA. This time a profiler chose, on GA's own pipeline at commit [`66bdd04`](https://github.com/GuitarAlchemist/ga/tree/66bdd049ad3f4b10f996e4cc6a9c6e58797cf30e), and each change went upstream. The work ran from the evening of 2026-09-16 to the early hours of 2026-09-17.
+
+- **Three pull requests.**
+  - [#695](https://github.com/GuitarAlchemist/ga/pull/695): chord recognition with 12-bit masks, computed once per pitch-class set.
+  - [#694](https://github.com/GuitarAlchemist/ga/pull/694): the interval-class vector computed once per set.
+  - [#693](https://github.com/GuitarAlchemist/ga/pull/693): `OptickIndexReader.Dimension` read once.
+
+  Each was made on its own branch from `main`. The GA tests passed before each PR was opened: GA.Domain.Core.Tests 458/458 and 459/459, and the chord and voicing tests of GA.Business.Core.Tests 421/421 and 419/419. For GA.Business.ML.Tests, the search and schema tests passed 227 of 228; the failing test fails the same way on `main`.
+- **Where the time went.** `dotnet-trace` over voicing analysis put about 52% of the main thread in `CanonicalChordRecognizer.IdentifyChordSet`, most of it building `HashSet`s. A probe put `VoicingAnalyzer.Analyze` at 173 µs and 347 KB per voicing, and an OPTIC-K search at 38 MB per query.
+- **The proof compares two builds of GA, not two methods.** One dump program is built against `main` and against the branch, writes every answer, and `cmp` compares the files. All were byte-identical:
+  - `TryMatch`: 258,048 lines;
+  - recognition: 106,496 lines, every set × 13 basses × 2 passes;
+  - interval-class vectors: 8,192 lines;
+  - all 667,125 guitar voicings through `VoicingAnalyzer.Analyze`;
+  - 2,048 searches on the real 313,047-entry index.
+
+  The course's own proof, `GaPerf -- a2`, checks 6,856,704 `TryMatch` calls and 106,496 recognitions, and runs in CI.
+- **The cache was the finding, not the masks.** 667,125 voicings use about 2,500 distinct pitch-class sets, so each set's pattern search was repeated 266 times. With a 4096-slot array, recognition is 7,600 times faster in the course's benchmark. In GA, `VoicingAnalyzer.Analyze` went from 234.34 ms and 759 MB to 8.94 ms and 22 MB for 2,000 voicings with both changes.
+- **The search's 38 MB were not in the search.** An experiment with a sequential scan allocated the same 38 MB as the parallel one, which cleared `Parallel.For`. The bytes came from `GetVector`, which read a property that runs a LINQ `Where` + `Sum` over the partition registry: 626,094 queries per search. Read once, one search went from 4.986 ms and 38.25 MB to 2.162 ms and 41 KB.
+- **Two results I didn't expect.**
+  - The first mask version still allocated 72 bytes per call, from enumerators obtained through `IEnumerable<int>`. Switching on `int[]` and `HashSet<int>` removed them and made it 2.7 times faster again. Dynamic PGO didn't remove this allocation, unlike the one in lesson 4; why not is *to verify*.
+  - Range partitioning of the search, which looked 8% faster before the fix, was 22% slower after it. I dropped it.
+- **End to end**, the OPTIC-K export ran four times, alternating GA's `main` and a build with both analysis changes: 142.8 s against 62.9 s, then 95.0 s against 38.3 s. The index files were identical entry by entry.
+- **The machine was not idle, and the numbers say so.**
+  - Other sessions were running. Every build and benchmark series took a machine-wide lock, and each BenchmarkDotNet series also took the GPU lock.
+  - Free RAM and the busiest processes were logged at the start of each series: 13.6 to 18.5 GB free, 32% to 100% total CPU, with Microsoft Defender, Docker and WSL on top.
+  - The same export binary took 142.8 s, then 95.0 s.
+  - The coordinator reported two headless Chrome captures by another session between 00:47 and 00:49. None of my series ran in that window: the benchmarks before it ended at 00:42:38, and the next one started at 00:50:22. The GA series that had been running just before were rerun anyway, with the same allocations and times within the error bars.
+  - GA's before-and-after tables use `ShortRun`. Their allocations are exact; the times are indicative.
+  - One run of the chord series did not happen: my script pointed at a worktree that didn't exist, and it was rerun.
+- **Measured and not changed.**
+  - `VoicingGenerator`'s parallel path is twice as slow as its sequential one (1,419 ms against 711 ms for 667,125 voicings), and `PitchClassSet.GetCompatibleKeys` takes 13.5% of the analysis profile. Both files belong to GA fixes in progress in another session, so these went there as proposals.
+  - `KeyIdentificationService.Identify` is not on the hot path: 25 µs, once per request.
+  - Lesson 5's value-object allocations don't appear in this profile.
+- **The index export is not always reproducible.** The first export of the evening differs from the later ones in 266 of 313,047 entries, keyed by instrument and diagram, although it came from the same GA commit. Every comparison above is between exports of the same group; the cause is *to verify*.
+
 ## To verify
 
+- Why dynamic PGO didn't remove the boxed enumerators of the first mask version of `TryMatch` (appendix 2).
+- Why GA's OPTIC-K index export differs between sessions in 266 of 313,047 entries (appendix 2).
 - Which member `T.Items` binds to when a derived interface hides a static abstract property with a `new static` property (lesson 5).
 - Why a helper call per iteration made the shared `ReadStatic<string>` loop only 1.46 times slower (lesson 5).
 - Which of the two objects of a `foreach` over `PitchClass.Items` dynamic PGO stops allocating (lesson 5).

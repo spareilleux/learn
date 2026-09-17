@@ -92,6 +92,7 @@ Parts 1 and 2 measure GA's own code. Part 3 builds a small scales and chords ser
 | # | Page | Under the hood | Measured on GA |
 |---|---|---|---|
 | 1 | [Five optimisations, proved then measured](appendix-benchmarks/) | rotations and `PopCount` on 12-bit sets, lookup tables, an equivalence proof over the whole input domain, stable sorts as a tie-break, and a benchmark that measured the JIT instead of the code | `IsClusterFree`, `IntervalClassVector`, `ClosestDiatonicKey`, `ToNormalForm`, `PrimeForm` |
+| 2 | [GA, profiled, then proved and measured](appendix-2-ga-performance/) | `dotnet-trace` on a real pipeline, 12-bit masks instead of hash sets, boxed enumerators, a 4096-slot cache keyed by the set itself, a LINQ property in a hot loop, and a proof that compares two builds of GA byte for byte | `CanonicalChordRecognizer`, `ChordIntervalPattern.TryMatch`, `IntervalClassVector`, `OptickIndexReader` |
 | — | [Journal](journal/) | | |
 
 Lessons 10 to 24 are planned and not written yet. Lessons 6 to 9 were written before lesson 5, and don't depend on it.
