@@ -278,6 +278,10 @@ Les deux mêmes étapes sur une guitare entière, modélisée en code plutôt qu
 
 [Ouvrir en plein écran](../../../threejs-demos/demos/guitar.html). **À essayer** : cliquez sur une corde entre deux frettes ; le panneau gratte des accords, et `?view=body` ou `?view=headstock` démarre plus près. Le pointage ne touche pas les meshes des cordes, donc le problème de l'exercice 1 ne se pose pas ici : comparez les deux approches.
 
+## Expérience GA
+
+L'[expérience 3](../14-guitar-alchemist-lab/#3-sélectionner-une-note-parmi-10000) de la leçon 14 sélectionne une note parmi 10 000 : `Raycaster` prend une demi-milliseconde, sept fois moins qu'une passe d'identifiants sur le GPU avec sa relecture, et les deux se rejoignent vers 100 000 notes. En WebGL 2, la relecture seule a pris 17 ms.
+
 ## À retenir
 
 - `Raycaster.setFromCamera` prend des coordonnées normalisées de l'appareil : calculez-les à partir du `getBoundingClientRect()` du canvas, pas de la fenêtre.

@@ -196,6 +196,10 @@ Exercise 1 on a whole guitar: a click throws a pick from the camera, along the p
 
 [Open full screen](../../threejs-demos/demos/physics.html). **Try it**: click to throw picks at the neck, *drop 10* for a handful, and untick *CCD for new picks* before throwing more: whether they then pass through the frets is *to verify*.
 
+## GA experiment
+
+Lesson 14's [experiment 11](../14-guitar-alchemist-lab/#11-rapier-a-pick-striking-a-string) strikes a string with a pick: CCD didn't stop a kinematic pick from passing through, and a chain of joints stretched by a quarter at 240 steps per second. A playable string is better modeled as a spring equation, with Rapier only detecting the strike.
+
 ## Key takeaways
 
 - A physics engine is a second world: step it, then copy each body's transform to what three.js draws.

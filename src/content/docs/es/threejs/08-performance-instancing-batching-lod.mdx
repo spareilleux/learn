@@ -147,6 +147,10 @@ GA usa `InstancedMesh` en 9 archivos, y `BatchedMesh` y `THREE.LOD` en ninguno.
 - **Instancing bien hecho, culling desactivado.** `NodeInstancer.ts`, de Prime Radiant, dibuja los nodos de su grafo con un `InstancedMesh` por tipo de nodo, con colores por instancia y un material compartido ([líneas 160-180](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/PrimeRadiant/NodeInstancer.ts#L160-L180)), y asigna `frustumCulled = false` porque "force-graph moves nodes". La alternativa es `computeBoundingSphere()` después de que cambien las posiciones; con un grafo que suele estar entero en pantalla, la diferencia es pequeña. `frustumCulled = false` aparece en 15 archivos de GA.
 - **Pixel ratios.** 11 archivos llaman a `setPixelRatio(window.devicePixelRatio)` sin límite, y `ThreeFretboard.tsx` pide hasta 6 ([línea 204](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeFretboard.tsx#L204)). El número de píxeles crece con el cuadrado del ratio, y con él cada pasada a pantalla completa de la lección 7.
 
+## Experimento GA
+
+La lección 14 lleva los recuentos de esta lección a las escenas de GA: el [experimento 1](../14-guitar-alchemist-lab/#1-el-mástil-de-cuatro-maneras) dibuja 16 mástiles de cuatro maneras (72 draw calls por mástil en la estructura de GA, 4 fusionados, y `BatchedMesh` con una llamada por objeto en WebGPU), el [experimento 10](../14-guitar-alchemist-lab/#10-una-pared-de-guitarras-lod-y-culling) muestra que `LOD` ahorra tiempo de GPU pero cuesta tiempo de CPU en una pared de guitarras, y el [experimento 5](../14-guitar-alchemist-lab/#5-la-nube-de-voicings-de-optic-k-hasta-1000000-de-puntos) dibuja los 313 047 voicings de GA en un solo draw call de puntos.
+
 ## Puntos clave
 
 - Cuenta antes de optimizar: `renderer.info.render.drawCalls` y `triangles`, leídos una vez por fotograma de animación, y el tiempo de CPU de `renderer.render()`.

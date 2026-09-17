@@ -147,6 +147,10 @@ GA utilise `InstancedMesh` dans 9 fichiers, `BatchedMesh` et `THREE.LOD` dans au
 - **Un instancing bien fait, un culling désactivé.** Le `NodeInstancer.ts` de Prime Radiant dessine les nœuds de son graphe avec un `InstancedMesh` par type de nœud, avec des couleurs par instance et un matériau partagé ([lignes 160-180](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/PrimeRadiant/NodeInstancer.ts#L160-L180)), et règle `frustumCulled = false` parce que « force-graph moves nodes ». L'alternative est `computeBoundingSphere()` après le changement des positions ; avec un graphe qui est en général entièrement à l'écran, la différence est faible. `frustumCulled = false` apparaît dans 15 fichiers de GA.
 - **Le pixel ratio.** 11 fichiers appellent `setPixelRatio(window.devicePixelRatio)` sans plafond, et `ThreeFretboard.tsx` demande jusqu'à 6 ([ligne 204](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeFretboard.tsx#L204)). Le nombre de pixels croît avec le carré du ratio, et chaque passe plein écran de la leçon 7 avec lui.
 
+## Expérience GA
+
+La leçon 14 applique les comptes de cette leçon aux scènes de GA : l'[expérience 1](../14-guitar-alchemist-lab/#1-le-manche-de-quatre-façons) dessine 16 manches de quatre façons (72 draw calls par manche dans la structure de GA, 4 fusionnés, et `BatchedMesh` à un appel par objet sur WebGPU), l'[expérience 10](../14-guitar-alchemist-lab/#10-un-mur-de-guitares--lod-et-culling) montre que `LOD` économise du temps GPU mais coûte du temps CPU pour un mur de guitares, et l'[expérience 5](../14-guitar-alchemist-lab/#5-le-nuage-de-voicings-optic-k-jusquà-1000000-de-points) dessine les 313 047 voicings de GA en un seul draw call de points.
+
 ## À retenir
 
 - Comptez avant d'optimiser : `renderer.info.render.drawCalls` et `triangles`, lus une fois par image d'animation, et le temps CPU de `renderer.render()`.

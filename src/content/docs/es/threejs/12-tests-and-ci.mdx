@@ -139,6 +139,10 @@ Los componentes React de GA tienen 22 archivos de specs de Playwright bajo `test
 - **Resultados en el repositorio, no ejecutados.** 13 archivos bajo `ReactComponents/ga-react-components/test-results/` están en el repositorio, incluido un `.last-run.json` cuyo estado es `failed`, con 13 pruebas fallidas. El workflow de CI que ejecuta Playwright, `playwright-dashboard.yml`, solo ejecuta `tests/dashboard/`, contra el sitio en producción, y ninguna de las specs 3D.
 - **La GPU de los runners, conocida.** El `deploy-banner.yml` de GA explica por qué dejó de capturar su banner en CI: "GitHub runners have no GPU and SwiftShader renders WebGPU compute as black frames" ([líneas 64-69](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/.github/workflows/deploy-banner.yml#L64-L69)). Eso coincide con la tabla de este curso: en Linux, WebGPU recurre a WebGL 2, y un compute shader no tiene ninguna alternativa.
 
+## Experimento GA
+
+La lección 14 aplica la regla de esta lección a los tiempos: su CI solo compara los contadores de `renderer.info`, en tres sistemas operativos, y nunca un tiempo. [Cómo se hicieron sus medidas](../14-guitar-alchemist-lab/#cómo-se-hicieron-las-medidas) explica el resto: 240 fotogramas cronometrados sin `requestAnimationFrame` ni vsync, y los tiempos de GPU tomados de las consultas de marca de tiempo de WebGPU.
+
 ## Puntos clave
 
 - Prueba el código 3D por capas: lógica pura y componentes sin GPU en todas partes, páginas sondeadas mediante recuentos, píxeles solo en una máquina fija.

@@ -231,6 +231,10 @@ drei's components are written for `WebGLRenderer`. Those used here work with `We
 - **A state update on every frame.** The BSP explorer's `Player` calls `onPositionChange(camera.position)` at the end of its `useFrame`, whether the player moved or not ([`Player.tsx`, lines 121-144](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/BSP/v2/Player.tsx#L121-L144)), and `BSPDoomExplorerV2` answers with `setPlayerPosition(pos.clone())` ([`BSPDoomExplorerV2.tsx`, lines 77-79](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/BSP/v2/BSPDoomExplorerV2.tsx#L77-L79)): a new object in state, so React re-renders the explorer and its children 60 times per second. R3F's advice is to keep per-frame values in refs, and to set state only when something visible changes, here the region, which the same callback already detects. How much time those renders take is *to verify* with React's profiler.
 - **`args` with a new object.** `GuitarAlchemistLogo3D.tsx` declares its extrude settings as an object literal in the component body and passes it in `args` ([lines 31-42](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/Apps/ga-client/src/components/GuitarAlchemistLogo3D.tsx#L31-L42)): each render of the logo builds a new `ExtrudeGeometry`. The shape next to it is in a `useMemo`; the settings need one too, or a module constant.
 
+## GA experiment
+
+Lesson 14's [experiment 14](../14-guitar-alchemist-lab/#14-react-three-fiber-against-vanilla) draws the same scene with R3F and without: no cost per frame, but 430 ms more for the first render on the dev server, 10 MB of heap, and a bundle of 565 kB gzip against 210, since R3F also imports `three`, the WebGL build.
+
 ## Key takeaways
 
 - R3F's JSX elements are three.js objects: props become properties, `args` become constructor arguments, and a changed element of `args` builds a new object.

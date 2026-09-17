@@ -255,6 +255,10 @@ Les leçons 2, 3 et 7 réunies : une guitare sur un support, un projecteur avec 
 
 [Ouvrir en plein écran](../../../threejs-demos/demos/studio.html). **À essayer** : le panneau change l'exposition, l'intensité de la lumière principale et celle de l'environnement, la force et le seuil du bloom, et la couleur du néon. Mettez *bloom threshold* à 0, comme dans l'exercice 1, pour voir ce qui d'autre dépasse le seuil. Un clic sur le manche joue une note, comme sur la guitare de la leçon 5.
 
+## Expérience GA
+
+L'[expérience 9](../14-guitar-alchemist-lab/#9-du-bloom-sur-les-notes-actives) de la leçon 14 met du bloom sur les notes actives d'une touche : 0.14 ms par image 1080p sur le GPU de l'auteur, et un bloom sélectif par MRT coûte à peu près autant, tout en laissant le bois et les frettes nets.
+
 ## À retenir
 
 - Avec `WebGPURenderer`, le post-traitement, c'est `RenderPipeline` : un graphe de nœuds TSL qui commence par `pass(scene, camera)`, rendu par `pipeline.render()`. `PostProcessing` est son nom d'avant r183.

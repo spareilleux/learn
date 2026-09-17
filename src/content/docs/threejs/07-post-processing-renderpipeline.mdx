@@ -255,6 +255,10 @@ Lessons 2, 3 and 7 together: a guitar on a stand, a spotlight with a 2048 × 204
 
 [Open full screen](../../threejs-demos/demos/studio.html). **Try it**: the panel changes the exposure, the key light's intensity, the environment's, the bloom's strength and threshold, and the neon's color. Set *bloom threshold* to 0, as in exercise 1, to see what else crosses the threshold. Clicking the neck plays a note, as on lesson 5's guitar.
 
+## GA experiment
+
+Lesson 14's [experiment 9](../14-guitar-alchemist-lab/#9-bloom-on-active-notes) puts bloom on a fretboard's active notes: 0.14 ms per 1080p frame on the author's GPU, and selective bloom through MRT costs about the same while leaving the wood and the frets sharp.
+
 ## Key takeaways
 
 - With `WebGPURenderer`, post-processing is `RenderPipeline`: a graph of TSL nodes that starts with `pass(scene, camera)`, rendered by `pipeline.render()`. `PostProcessing` is its pre-r183 name.

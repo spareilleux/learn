@@ -221,6 +221,10 @@ Ce que cette leçon ajoute à ce code :
 - **Une seule texture joue quatre rôles.** Le `MeshStandardMaterial` de la touche ([lignes 805-819](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeFretboard.tsx#L805-L819)) utilise la même `woodTexture` comme `map`, `roughnessMap`, `normalMap` et `bumpMap`. Une roughness map lit son canal vert comme rugosité, et une normal map lit ses canaux rouge, vert et bleu comme une direction : une image couleur de bois ne donne ni l'une ni l'autre. La leçon 3 explique pourquoi une image de couleur et une image de données doivent aussi différer par leur espace colorimétrique.
 - Les cordes filées utilisent `MeshPhysicalMaterial` avec `metalness: 1`, `clearcoat`, `sheen`, une normal map et une normal map de vernis ([lignes 761-774](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeFretboard.tsx#L761-L774)) : trois couches d'ombrage sur chaque corde, chacune payée sur chaque pixel que couvrent les cordes.
 
+## Expérience GA
+
+L'[expérience 8](../14-guitar-alchemist-lab/#8-les-ombres-sous-les-cordes) de la leçon 14 met des ombres sous les cordes d'un manche entier : une shadow map de 4096 coûte à peu près autant qu'une de 1024, un manche immobile peut rendre son ombre une seule fois avec `shadow.autoUpdate = false`, et une texture précalculée supprime même ce rendu.
+
 ## À retenir
 
 - Une `BufferGeometry`, ce sont des tableaux typés : un sommet est une position, une normale et un UV ensemble, donc les arêtes vives dupliquent les sommets.

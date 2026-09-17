@@ -374,6 +374,10 @@ Dos puntos más del mismo archivo y del resto de los componentes React de GA:
 
 Estos hallazgos están en el [diario](../journal/).
 
+## Experimento GA
+
+El [experimento 15, una GPU débil](../14-guitar-alchemist-lab/#15-una-gpu-débil), en la lección 14, renderiza un mástil en SwiftShader: con el pixel ratio de 3 de GA, un fotograma tarda 208 ms, y un controlador que baja el pixel ratio a 0.655 lo devuelve a 60 fotogramas por segundo. También muestra que `powerPreference` no puede elegir la GPU en Windows.
+
 ## Puntos clave
 
 - Una página three.js es un renderer, una escena y una cámara; no se dibuja nada salvo que el bucle llame a `render()`.

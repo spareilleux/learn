@@ -257,6 +257,10 @@ What this lesson's measurements say about it:
 - **The wood texture has no color space.** `createWoodTexture` ([lines 563-654](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeFretboard.tsx#L563-L654)) paints the wood in `#4a3525` on a canvas and returns a `CanvasTexture` without setting `colorSpace`, and the material uses it as `map` (lesson 2). The measurement above predicts the result: the red byte 74 is taken for a linear 0.29, and shown as 147 before lighting, where `SRGBColorSpace` would keep it at 74. The fretboard is lighter and grayer than the color written in the code, which the material's `color` may have been tuned to hide (*to verify* in a browser).
 - `Guitar3D.tsx` builds its environment with `pmremGenerator.fromScene` on a scene that holds only an `AmbientLight` ([lines 171-187](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/Guitar3D/Guitar3D.tsx#L171-L187)). A light with nothing to light renders nothing: the environment is black, and glTF models loaded into that component get no reflections from it.
 
+## GA experiment
+
+Lesson 14's [experiment 7](../14-guitar-alchemist-lab/#7-a-pbr-grid-for-strings-and-frets) lights a grid of metal and plastic spheres, as for strings and frets: different metalness and roughness values don't add shader programs, since they are uniforms, and physical materials cost shading time, not compilation.
+
 ## Key takeaways
 
 - The working color space is linear; hex colors and images are sRGB, and three.js converts on the way in and out.

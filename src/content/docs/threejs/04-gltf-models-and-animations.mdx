@@ -227,6 +227,10 @@ GA loads glTF models in several components, and each one shows a point of this l
 - **Silenced errors.** `DemerzelFaceOverlay.tsx` replaces `console.error` while its face model loads, to hide the KTX2 errors ([lines 173-180](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/PrimeRadiant/DemerzelFaceOverlay.tsx#L173-L180)), and restores it afterwards. The model's KTX2 textures are skipped, which the comment accepts since the component replaces the materials; any other component that logs an error mentioning KTX2 during that time is silenced too. `setKTX2Loader` would remove the errors instead of hiding them.
 - **A mixer with nothing to play.** `HandAnimationTest.tsx` creates an `AnimationMixer` for the hand model ([line 231](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/pages/HandAnimationTest.tsx#L229-L232)) and updates it every frame ([line 157](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/pages/HandAnimationTest.tsx#L155-L158)), but never calls `clipAction`: a mixer without actions moves nothing. The page moves the hand's bones itself, by setting their rotations ([line 389](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/pages/HandAnimationTest.tsx#L389)).
 
+## GA experiment
+
+Lesson 14's [experiment 6](../14-guitar-alchemist-lab/#6-fretboard-wood-textures-ktx2-and-a-procedural-wood) compresses a fretboard wood texture to KTX2: Basis LZ ships it in 145 kB instead of 1.2 MB, and a procedural wood in TSL downloads nothing. The wood textures generated with ComfyUI are coming soon; the experiment uses a texture written by a script until then.
+
 ## Key takeaways
 
 - glTF 2.0 is the delivery format three.js is built around: a node tree, metallic-roughness materials with linear color factors, and animations as keyframe tracks.

@@ -170,6 +170,10 @@ GA está en plena migración: `ShaderMaterial` aparece en 15 archivos y `three/t
 - **No es TSL, pese al nombre.** `PrimeRadiant/shaders/MoebiusPassTSL.ts` dice en su cabecera que está "Implemented as a Three.js ShaderPass" ([línea 16](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/PrimeRadiant/shaders/MoebiusPassTSL.ts#L16)), y crea un `THREE.ShaderMaterial` ([línea 174](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/PrimeRadiant/shaders/MoebiusPassTSL.ts#L174)): GLSL, solo para `WebGLRenderer`.
 - **Buscar el material en cada fotograma.** `BSP/PortalDoor.tsx` actualiza el uniform `time` de su portal buscando un `ShaderMaterial` entre los hijos en cada fotograma ([líneas 218-228](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/BSP/PortalDoor.tsx#L218-L228)). Con TSL, el nodo integrado `time` no necesita ninguna actualización, y un `uniform` guardado en una variable no necesita búsqueda.
 
+## Experimento GA
+
+La lección 14 mide TSL dos veces sobre las necesidades de GA: el [experimento 2](../14-guitar-alchemist-lab/#2-una-cuerda-que-vibra-de-tres-maneras) hace vibrar 600 cuerdas en el vertex shader, frente a vértices desplazados y morph targets, y el [experimento 4](../14-guitar-alchemist-lab/#4-brazaletes-de-clases-de-altura-transpuestos-en-la-cpu-o-en-tsl) transpone 4 096 brazaletes de clases de altura en TSL, con 8 veces menos tiempo de CPU que en JavaScript.
+
 ## Puntos clave
 
 - `WebGPURenderer` no ejecuta cadenas GLSL: sus materiales son grafos de nodos, escritos en TSL y compilados a WGSL o GLSL para el backend que elige.

@@ -278,6 +278,10 @@ The same two steps on a whole guitar, modeled in code rather than loaded: the bo
 
 [Open full screen](../../threejs-demos/demos/guitar.html). **Try it**: click any string between two frets; the panel strums chords, and `?view=body` or `?view=headstock` starts closer. The pick doesn't hit the string meshes, so the problem of exercise 1 doesn't arise here: compare the two approaches.
 
+## GA experiment
+
+Lesson 14's [experiment 3](../14-guitar-alchemist-lab/#3-picking-one-note-among-10000) picks one note among 10,000: `Raycaster` takes half a millisecond, seven times less than a GPU ID pass with its readback, and the two meet around 100,000 notes. On WebGL 2, the readback alone took 17 ms.
+
 ## Key takeaways
 
 - `Raycaster.setFromCamera` takes normalized device coordinates: compute them from the canvas's `getBoundingClientRect()`, not from the window.

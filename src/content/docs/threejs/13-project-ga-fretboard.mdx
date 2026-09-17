@@ -287,6 +287,10 @@ The port in use: the panel picks one of 14 chords and one of its voicings, from 
 
 [Open full screen](../../threejs-demos/demos/voicing.html). **Try it**: pick a chord and a voicing, click a position to hear it, or *strum*. Before exercise 2, count the markers of a C major chord here, then predict the draw calls of the scale.
 
+## GA experiment
+
+Lesson 14 continues this project: [experiment 1](../14-guitar-alchemist-lab/#1-the-neck-four-ways) measures this lesson's port against GA's structure on 16 necks, where GA's takes 8 times the CPU of merged necks, and [experiment 13](../14-guitar-alchemist-lab/#13-webaudio-and-the-strings-vibration) syncs a string's vibration with its sound, which starts about 30 ms late without compensation.
+
 ## Key takeaways
 
 - Reproduce before porting: the measured baseline, 69 draw calls, 32 textures and 11 scene builds for 10 renders, is what makes the port's numbers mean something.

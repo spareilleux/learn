@@ -257,6 +257,10 @@ Ce que les mesures de cette leçon en disent :
 - **La texture de bois n'a pas d'espace colorimétrique.** `createWoodTexture` ([lignes 563-654](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeFretboard.tsx#L563-L654)) peint le bois en `#4a3525` sur un canvas et renvoie une `CanvasTexture` sans régler `colorSpace`, et le matériau l'utilise comme `map` (leçon 2). La mesure ci-dessus prédit le résultat : l'octet rouge 74 est pris pour un linéaire 0.29, et affiché à 147 avant éclairage, là où `SRGBColorSpace` le garderait à 74. Le manche est plus clair et plus gris que la couleur écrite dans le code, ce que la `color` du matériau a peut-être été ajustée pour masquer (*à vérifier* dans un navigateur).
 - `Guitar3D.tsx` construit son environnement avec `pmremGenerator.fromScene` sur une scène qui ne contient qu'une `AmbientLight` ([lignes 171-187](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/Guitar3D/Guitar3D.tsx#L171-L187)). Une lumière qui n'a rien à éclairer ne rend rien : l'environnement est noir, et les modèles glTF chargés dans ce composant n'en reçoivent aucun reflet.
 
+## Expérience GA
+
+L'[expérience 7](../14-guitar-alchemist-lab/#7-une-grille-pbr-pour-les-cordes-et-les-frettes) de la leçon 14 éclaire une grille de sphères en métal et en plastique, comme pour des cordes et des frettes : des valeurs de metalness et de roughness différentes n'ajoutent pas de programmes de shader, puisque ce sont des uniforms, et les matériaux physiques coûtent du temps d'ombrage, pas de compilation.
+
 ## À retenir
 
 - L'espace colorimétrique de travail est linéaire ; les couleurs hexadécimales et les images sont en sRGB, et three.js convertit à l'entrée et à la sortie.

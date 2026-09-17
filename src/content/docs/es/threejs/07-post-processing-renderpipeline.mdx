@@ -255,6 +255,10 @@ Las lecciones 2, 3 y 7 juntas: una guitarra en un soporte, un foco con un shadow
 
 [Abrir a pantalla completa](../../../threejs-demos/demos/studio.html). **Pruébalo**: el panel cambia la exposición, la intensidad de la luz principal y la del entorno, la fuerza y el umbral del bloom, y el color del neón. Pon *bloom threshold* en 0, como en el ejercicio 1, para ver qué más supera el umbral. Un clic en el mástil toca una nota, como en la guitarra de la lección 5.
 
+## Experimento GA
+
+El [experimento 9](../14-guitar-alchemist-lab/#9-bloom-en-las-notas-activas) de la lección 14 pone bloom en las notas activas de un diapasón: 0.14 ms por fotograma 1080p en la GPU del autor, y un bloom selectivo con MRT cuesta más o menos lo mismo, dejando nítidos la madera y los trastes.
+
 ## Puntos clave
 
 - Con `WebGPURenderer`, el posprocesado es `RenderPipeline`: un grafo de nodos TSL que empieza con `pass(scene, camera)`, renderizado por `pipeline.render()`. `PostProcessing` es su nombre anterior a r183.

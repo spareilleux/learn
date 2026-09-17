@@ -147,6 +147,10 @@ GA uses `InstancedMesh` in 9 files, `BatchedMesh` and `THREE.LOD` in none.
 - **Instancing done well, culling turned off.** Prime Radiant's `NodeInstancer.ts` draws its graph nodes with one `InstancedMesh` per node type, with per-instance colors and a shared material ([lines 160-180](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/PrimeRadiant/NodeInstancer.ts#L160-L180)), and sets `frustumCulled = false` because "force-graph moves nodes". The alternative is `computeBoundingSphere()` after the positions change; with a graph that is usually all on screen, the difference is small. `frustumCulled = false` appears in 15 files of GA.
 - **Pixel ratios.** 11 files call `setPixelRatio(window.devicePixelRatio)` without a cap, and `ThreeFretboard.tsx` asks for up to 6 ([line 204](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeFretboard.tsx#L204)). The pixel count grows with the square of the ratio, and every full-screen pass of lesson 7 with it.
 
+## GA experiment
+
+Lesson 14 takes this lesson's counts to GA's scenes: [experiment 1](../14-guitar-alchemist-lab/#1-the-neck-four-ways) draws 16 necks four ways (72 draw calls per neck in GA's structure, 4 merged, and `BatchedMesh` at one call per object on WebGPU), [experiment 10](../14-guitar-alchemist-lab/#10-a-wall-of-guitars-lod-and-culling) shows that `LOD` saves GPU time but costs CPU time for a wall of guitars, and [experiment 5](../14-guitar-alchemist-lab/#5-the-optic-k-voicing-cloud-up-to-1000000-points) draws GA's 313,047 voicings as one draw call of points.
+
 ## Key takeaways
 
 - Count before optimizing: `renderer.info.render.drawCalls` and `triangles`, read once per animation frame, and the CPU time of `renderer.render()`.

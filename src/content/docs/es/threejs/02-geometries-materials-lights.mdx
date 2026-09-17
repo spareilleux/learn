@@ -221,6 +221,10 @@ Lo que esta lección añade a ese código:
 - **Una textura cumple cuatro papeles.** El `MeshStandardMaterial` del diapasón ([líneas 805-819](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeFretboard.tsx#L805-L819)) usa la misma `woodTexture` como `map`, `roughnessMap`, `normalMap` y `bumpMap`. Un mapa de rugosidad lee su canal verde como rugosidad, y un mapa de normales lee sus canales rojo, verde y azul como una dirección: una imagen de color de madera no da ni lo uno ni lo otro. La lección 3 explica por qué una imagen de color y una imagen de datos también deben diferir en espacio de color.
 - Las cuerdas entorchadas usan `MeshPhysicalMaterial` con `metalness: 1`, `clearcoat`, `sheen`, un mapa de normales y un mapa de normales para la capa transparente ([líneas 761-774](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeFretboard.tsx#L761-L774)): tres capas de shading en cada cuerda, cada una pagada en cada píxel que cubren las cuerdas.
 
+## Experimento GA
+
+El [experimento 8](../14-guitar-alchemist-lab/#8-sombras-bajo-las-cuerdas) de la lección 14 pone sombras bajo las cuerdas de un mástil entero: un shadow map de 4096 cuesta más o menos lo mismo que uno de 1024, un mástil inmóvil puede renderizar su sombra una sola vez con `shadow.autoUpdate = false`, y una textura precalculada elimina incluso eso.
+
 ## Puntos clave
 
 - Una `BufferGeometry` son arrays tipados: un vértice es una posición, una normal y una UV juntas, así que las aristas vivas duplican vértices.

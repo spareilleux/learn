@@ -374,6 +374,10 @@ Two more points from the same file and from the rest of GA's React components:
 
 These findings are in the [journal](../journal/).
 
+## GA experiment
+
+Lesson 14's [experiment 15, a weak GPU](../14-guitar-alchemist-lab/#15-a-weak-gpu) renders a neck on SwiftShader: with GA's pixel ratio of 3, a frame takes 208 ms, and a controller that lowers the pixel ratio to 0.655 brings it back to 60 frames per second. It also shows that `powerPreference` can't pick the GPU on Windows.
+
 ## Key takeaways
 
 - A three.js page is a renderer, a scene and a camera; nothing is drawn unless the loop calls `render()`.

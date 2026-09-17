@@ -221,6 +221,10 @@ What this lesson adds to that code:
 - **One texture plays four roles.** The fretboard's `MeshStandardMaterial` ([lines 805-819](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeFretboard.tsx#L805-L819)) uses the same `woodTexture` as `map`, `roughnessMap`, `normalMap` and `bumpMap`. A roughness map reads its green channel as roughness, and a normal map reads its red, green and blue channels as a direction: a wood color image gives neither. Lesson 3 explains why a color image and a data image must also differ in color space.
 - The wound strings use `MeshPhysicalMaterial` with `metalness: 1`, `clearcoat`, `sheen`, a normal map and a clear-coat normal map ([lines 761-774](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeFretboard.tsx#L761-L774)): three layers of shading on every string, each paid for on every pixel the strings cover.
 
+## GA experiment
+
+Lesson 14's [experiment 8](../14-guitar-alchemist-lab/#8-shadows-under-the-strings) puts shadows under a whole neck's strings: a 4096 shadow map costs about what a 1024 one does, a static neck can render its shadow once with `shadow.autoUpdate = false`, and a baked texture removes even that.
+
 ## Key takeaways
 
 - A `BufferGeometry` is typed arrays: a vertex is a position, a normal and a UV together, so hard edges duplicate vertices.

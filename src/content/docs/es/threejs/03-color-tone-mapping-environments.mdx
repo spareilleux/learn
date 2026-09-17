@@ -257,6 +257,10 @@ Lo que dicen de él las mediciones de esta lección:
 - **La textura de madera no tiene espacio de color.** `createWoodTexture` ([líneas 563-654](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/ThreeFretboard.tsx#L563-L654)) pinta la madera en `#4a3525` sobre un canvas y devuelve una `CanvasTexture` sin asignar `colorSpace`, y el material la usa como `map` (lección 2). La medición de arriba predice el resultado: el byte rojo 74 se toma por un lineal 0.29, y se muestra como 147 antes de la iluminación, donde `SRGBColorSpace` lo mantendría en 74. El diapasón es más claro y más gris que el color escrito en el código, algo que el `color` del material quizá se ajustó para disimular (*por verificar* en un navegador).
 - `Guitar3D.tsx` construye su entorno con `pmremGenerator.fromScene` sobre una escena que solo contiene una `AmbientLight` ([líneas 171-187](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/Guitar3D/Guitar3D.tsx#L171-L187)). Una luz sin nada que iluminar no renderiza nada: el entorno es negro, y los modelos glTF cargados en ese componente no obtienen de él ningún reflejo.
 
+## Experimento GA
+
+El [experimento 7](../14-guitar-alchemist-lab/#7-una-cuadrícula-pbr-para-cuerdas-y-trastes) de la lección 14 ilumina una cuadrícula de esferas de metal y de plástico, como para cuerdas y trastes: valores distintos de metalness y roughness no añaden programas de shader, porque son uniforms, y los materiales físicos cuestan tiempo de sombreado, no de compilación.
+
 ## Puntos clave
 
 - El espacio de color de trabajo es lineal; los colores hexadecimales y las imágenes son sRGB, y three.js convierte a la entrada y a la salida.

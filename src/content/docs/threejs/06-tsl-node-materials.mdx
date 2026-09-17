@@ -170,6 +170,10 @@ GA is in the middle of this migration: `ShaderMaterial` appears in 15 files and 
 - **Not TSL, despite the name.** `PrimeRadiant/shaders/MoebiusPassTSL.ts` says in its header that it is "Implemented as a Three.js ShaderPass" ([line 16](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/PrimeRadiant/shaders/MoebiusPassTSL.ts#L16)), and creates a `THREE.ShaderMaterial` ([line 174](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/PrimeRadiant/shaders/MoebiusPassTSL.ts#L174)): GLSL, for `WebGLRenderer` only.
 - **Searching for the material every frame.** `BSP/PortalDoor.tsx` updates its portal's `time` uniform by searching the children for a `ShaderMaterial` on each frame ([lines 218-228](https://github.com/GuitarAlchemist/ga/blob/05c8eda013f2a4d11efaa52c4ca94674521ee684/ReactComponents/ga-react-components/src/components/BSP/PortalDoor.tsx#L218-L228)). With TSL, the built-in `time` node needs no update at all, and a `uniform` kept in a variable needs no search.
 
+## GA experiment
+
+Lesson 14 measures TSL on GA's needs twice: [experiment 2](../14-guitar-alchemist-lab/#2-a-vibrating-string-three-ways) vibrates 600 strings in the vertex shader, against displaced vertices and morph targets, and [experiment 4](../14-guitar-alchemist-lab/#4-pitch-class-bracelets-transposed-on-the-cpu-or-in-tsl) transposes 4,096 pitch-class bracelets in TSL for 8 times less CPU time than in JavaScript.
+
 ## Key takeaways
 
 - `WebGPURenderer` doesn't run GLSL strings: its materials are node graphs, written in TSL and compiled to WGSL or GLSL for the backend it picks.
