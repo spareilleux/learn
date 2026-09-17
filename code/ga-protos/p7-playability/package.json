@@ -1,0 +1,13 @@
+{
+  "name": "ga-p7-playability",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "GA Lab P7: can a small CPU-trained model predict how hard a guitar voicing is to play better than GA's hand-written cost?",
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "test": "node --test tests/",
+    "synth": "node scripts/synth-dataset.mjs --out out/synthetic.jsonl",
+    "ci": "node scripts/synth-dataset.mjs --out out/synthetic.jsonl && node scripts/train.mjs --data out/synthetic.jsonl --out out/ci-measurements.json --budget ci && node scripts/check-annotations.mjs --out out/ci-annotations.json"
+  }
+}
