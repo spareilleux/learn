@@ -13,7 +13,7 @@ from dataclasses import asdict, dataclass
 import numpy as np
 import trimesh
 
-from bracelet import HEIGHT, INNER_R, OUTER_R, pla_mass_g, radii
+from bracelet import HEIGHT, INNER_R, pla_mass_g, radii
 
 
 @dataclass
@@ -196,4 +196,4 @@ def measure_all(mesh: trimesh.Trimesh, positions_deg: list[float]) -> dict:
     return out
 
 
-__all__ = ["measure_all", "topology", "solidity", "fit", "walls", "overhangs", "OUTER_R"]
+__all__ = ["measure_all", "topology", "solidity", "fit", "walls", "overhangs"]

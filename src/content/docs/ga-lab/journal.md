@@ -12,7 +12,7 @@ sidebar:
 - [x] P2, play a chord, see the universe
 - [ ] P3, album covers
 - [ ] P4, AI render pass
-- [ ] P5, 3D-printable bracelets
+- [x] P5, 3D-printable bracelets
 - [ ] P6, full chain
 - [x] P7, playability model
 
@@ -34,6 +34,9 @@ What the lab found in GuitarAlchemist/ga while measuring, not while reading. Lin
 | The `Difficulty` label and the `DifficultyScore` agree | The label's "Beginner" band asks for a span of at most 64 mm, under two frets at the nut, so the open C chord is "Intermediate"; and `141404`, labelled "Advanced", scores 4.65, the 26th percentile of the index | [`VoicingPhysicalAnalyzer.cs:105-112`](https://github.com/GuitarAlchemist/ga/blob/66bdd049ad3f4b10f996e4cc6a9c6e58797cf30e/Common/GA.Domain.Services/Fretboard/Voicings/Analysis/VoicingPhysicalAnalyzer.cs#L105-L112) | 3.50 and "Intermediate" for `x32010` | Reproduced (P7) |
 | A voicing nobody can play scores high | 101,967 of 297,883 guitar voicings (34.2 %) have no legal fingering under a four-finger model, and the highest score GA gives one of them is 7.73, inside the range of ordinary chords, so `maxDifficulty: 8` returns them | [`VoicingFilterService.cs:53-70`](https://github.com/GuitarAlchemist/ga/blob/66bdd049ad3f4b10f996e4cc6a9c6e58797cf30e/Apps/ga-server/GaApi/Services/VoicingFilterService.cs#L53-L70) | The search of [`fingering.mjs`](https://github.com/spareilleux/learn/blob/main/code/ga-protos/p7-playability/src/lib/fingering.mjs) over the whole index | Reproduced (P7). The hand model is mine and has no thumb, so 34.2 % is an upper bound |
 
+| `ga_chord_to_set('Cdim7')` returns GA's own `diminished-7`, 0 3 6 9 | It returns 0 3 6 10, a half-diminished seventh, Forte 4-27; `ga_parse_chord('Cdim7')` gives quality `diminished` with component `ext:7`, so the seventh is added as a minor one | GA's running MCP server against [`CanonicalChordPatternCatalog.cs:66`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Harmony/CanonicalChordPatternCatalog.cs#L66) | The exchange in [`results/ga-check.json`](https://github.com/spareilleux/learn/blob/b171d57/code/ga-protos/p5-printable-bracelets/results/ga-check.json), 2026-09-17 | Reproduced (P5), not reported |
+| `ga_chord_to_set('Cm7b5')` returns GA's own `half-diminished-7`, 0 3 6 10 | It returns 0 3 7 10, a plain minor seventh: the `b5` alteration is dropped | GA's running MCP server against [`CanonicalChordPatternCatalog.cs:65`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Harmony/CanonicalChordPatternCatalog.cs#L65) | The same exchange; `get_scale_notes` and `Cmaj7` agree with the files, these two do not | Reproduced (P5), not reported |
+
 ## Experiments
 
 Each prototype writes its hypotheses before the measuring script exists, and they are committed first. A refuted hypothesis stays here: it is the result that cost the most to get.
@@ -50,6 +53,10 @@ Each prototype writes its hypotheses before the measuring script exists, and the
 | How many of GA's guitar voicings can four fingers play? | H11: more than 98 % | 65.8 %: the search finds no legal fingering for 101,967 of 297,883 | Badly refuted, and it split the prototype in two: a ranking task on what can be played, a yes-or-no question on the rest (2026-09-17) |
 | Does splitting by voicing instead of by chord flatter the model? | H6: the naive split overstates the boosted trees by 0.005 to 0.05 of Spearman | 0.0005; the split by transposed shape moves it by 0.002 | Refuted. Group splitting only costs you when the group carries information the features do not, and here both sides are read off the same diagram (2026-09-17) |
 | Is the fingering search expensive enough to be worth replacing with a model? | H12: the model scores a voicing at least 50 times faster | 3.8 times: 0.0145 ms against 0.0558 ms | Refuted. The premise of the prototype was wrong; what the model buys is 949 KB that ships without the hand model (2026-09-17) |
+| Can a pitch-class bracelet become an object a slicer accepts? | Twelve figures committed in [`hypotheses.md`](https://github.com/spareilleux/learn/blob/8a2ed53/code/ga-protos/p5-printable-bracelets/results/hypotheses.md) at `8a2ed53` | 30 solids out of 30 watertight, one body, Euler characteristic 0; 5.2473 cm3, bore 64.9913 mm, thinnest wall 1.9954 mm, no face below the 45-degree support threshold; PrusaSlicer 2.9.6 gives 6.42 g and 35 min 40 s | Yes, and four of the twelve predictions were refuted (2026-09-17) |
+| Does a mesh written without a boolean union fail its checks? | H2: the fourteen parts concatenated are not watertight | They are watertight, manifold3d accepts them, and they are 14 bodies; volume 2.6 % high, surface 10.8 % high, wall measured at 1.40 mm — and PrusaSlicer slices them to the same 6.42 g with no repair message | Refuted twice: neither the mesh checks nor the slicer notice (2026-09-17) |
+| How much of a bracelet needs support if its beads are spheres? | H6: between 3 % and 8 % of the surface | 0.35 %, worst slope 4.87 degrees | Refuted in magnitude, right that supports are needed (2026-09-17) |
+| Does the bead prototype 2 draws survive a 2 mm wall? | H4: the bore stays at 64.98 mm or more | A sphere of radius 3.0 mm centred on the outer surface takes the bore to 63.0287 mm, 1.96 mm lost | The spherical variant failed and is published as a failure; the cone ships (2026-09-17) |
 
 ## 2026-09-16 — P1: where the data comes from
 
