@@ -14,8 +14,8 @@ export const SPLIT_MODES = ['voicing', 'chord', 'shape'];
 
 export function groupKeyFor(mode, row, index) {
   if (mode === 'voicing') return `#${index}`;
-  if (mode === 'chord') return row.chord;
-  if (mode === 'shape') return row.shape;
+  if (mode === 'chord') return row.c;
+  if (mode === 'shape') return row.s;
   throw new Error(`unknown split mode ${mode}`);
 }
 

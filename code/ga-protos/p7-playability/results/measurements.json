@@ -1,0 +1,1054 @@
+{
+  "dataset": {
+    "path": "G:/learn-lab/ga-protos/p7/all.jsonl",
+    "rows": 195916,
+    "allRows": 297883,
+    "budget": "full",
+    "seed": 20260917,
+    "sample": 0,
+    "chords": 2498,
+    "shapes": 27238,
+    "infeasible": 101967,
+    "infeasibleShare": 0.3423
+  },
+  "splits": {
+    "voicing": {
+      "mode": "voicing",
+      "groups": 195916,
+      "train": 117422,
+      "val": 39330,
+      "test": 39164,
+      "models": [
+        {
+          "name": "ga-hand-written",
+          "spearman": 0.5966,
+          "spearmanCI": [
+            0.5889,
+            0.6041
+          ],
+          "kendall": 0.4291,
+          "mae": 1.6572,
+          "calibration": {
+            "a": 1.2127,
+            "b": -1.1711
+          },
+          "pairwise": 0.7156,
+          "pairwiseCI": [
+            0.7007,
+            0.7255
+          ],
+          "pairwisePairs": 20000,
+          "withinChordTieRate": 0.0448,
+          "trainMs": 0,
+          "sizeBytes": 0
+        },
+        {
+          "name": "rule-checklist",
+          "spearman": 0.4522,
+          "spearmanCI": [
+            0.4428,
+            0.4631
+          ],
+          "kendall": 0.3253,
+          "mae": 1.8989,
+          "calibration": {
+            "a": 0.6441,
+            "b": 2.699
+          },
+          "pairwise": 0.6592,
+          "pairwiseCI": [
+            0.6438,
+            0.6689
+          ],
+          "pairwisePairs": 20000,
+          "withinChordTieRate": 0.1254,
+          "trainMs": 0,
+          "sizeBytes": 0
+        },
+        {
+          "name": "baseline-mean",
+          "spearman": 0,
+          "spearmanCI": [
+            0,
+            0
+          ],
+          "kendall": 0,
+          "mae": 2.127,
+          "calibration": {
+            "a": 0.418,
+            "b": 3.2001
+          },
+          "pairwise": 0.5,
+          "pairwiseCI": [
+            0.5,
+            0.5
+          ],
+          "pairwisePairs": 20000,
+          "withinChordTieRate": 1,
+          "trainMs": 1,
+          "sizeBytes": 23
+        },
+        {
+          "name": "baseline-span-only",
+          "spearman": 0.7928,
+          "spearmanCI": [
+            0.7878,
+            0.7982
+          ],
+          "kendall": 0.6102,
+          "mae": 1.2947,
+          "calibration": {
+            "a": 1,
+            "b": 0
+          },
+          "pairwise": 0.8028,
+          "pairwiseCI": [
+            0.7907,
+            0.8119
+          ],
+          "pairwisePairs": 20000,
+          "withinChordTieRate": 0.0672,
+          "trainMs": 3,
+          "sizeBytes": 60,
+          "feature": "physicalSpanMm"
+        },
+        {
+          "name": "ridge",
+          "spearman": 0.9069,
+          "spearmanCI": [
+            0.9045,
+            0.9098
+          ],
+          "kendall": 0.7376,
+          "mae": 0.8756,
+          "calibration": {
+            "a": 1,
+            "b": -0.0003
+          },
+          "pairwise": 0.8721,
+          "pairwiseCI": [
+            0.8585,
+            0.8804
+          ],
+          "pairwisePairs": 20000,
+          "withinChordTieRate": 0,
+          "trainMs": 73,
+          "sizeBytes": 1239,
+          "lambda": 1
+        },
+        {
+          "name": "random-forest",
+          "spearman": 0.9583,
+          "spearmanCI": [
+            0.9571,
+            0.9599
+          ],
+          "kendall": 0.8292,
+          "mae": 0.5202,
+          "calibration": {
+            "a": 1.0214,
+            "b": -0.1187
+          },
+          "pairwise": 0.9139,
+          "pairwiseCI": [
+            0.9058,
+            0.9221
+          ],
+          "pairwisePairs": 20000,
+          "withinChordTieRate": 0,
+          "trainMs": 3819,
+          "sizeBytes": 12342254,
+          "hyper": {
+            "trees": 60,
+            "maxDepth": 12,
+            "minLeaf": 5,
+            "mtry": 7
+          }
+        },
+        {
+          "name": "gradient-boosting",
+          "spearman": 0.9641,
+          "spearmanCI": [
+            0.9631,
+            0.9655
+          ],
+          "kendall": 0.8426,
+          "mae": 0.4769,
+          "calibration": {
+            "a": 1.0056,
+            "b": -0.0307
+          },
+          "pairwise": 0.9218,
+          "pairwiseCI": [
+            0.914,
+            0.9287
+          ],
+          "pairwisePairs": 20000,
+          "withinChordTieRate": 0,
+          "trainMs": 14569,
+          "sizeBytes": 952161,
+          "hyper": {
+            "rounds": 300,
+            "maxDepth": 5,
+            "minLeaf": 20,
+            "learningRate": 0.08
+          }
+        },
+        {
+          "name": "mlp",
+          "spearman": 0.9613,
+          "spearmanCI": [
+            0.9603,
+            0.9628
+          ],
+          "kendall": 0.8345,
+          "mae": 0.5107,
+          "calibration": {
+            "a": 0.9798,
+            "b": 0.0553
+          },
+          "pairwise": 0.9181,
+          "pairwiseCI": [
+            0.9097,
+            0.9266
+          ],
+          "pairwisePairs": 20000,
+          "withinChordTieRate": 0,
+          "trainMs": 15572,
+          "sizeBytes": 15381,
+          "hyper": {
+            "hidden": 32,
+            "epochs": 60,
+            "batch": 128
+          }
+        }
+      ]
+    },
+    "chord": {
+      "mode": "chord",
+      "groups": 2498,
+      "train": 118243,
+      "val": 38287,
+      "test": 39386,
+      "models": [
+        {
+          "name": "ga-hand-written",
+          "spearman": 0.5956,
+          "spearmanCI": [
+            0.5836,
+            0.6073
+          ],
+          "kendall": 0.4275,
+          "mae": 1.6536,
+          "calibration": {
+            "a": 1.2255,
+            "b": -1.2292
+          },
+          "pairwise": 0.715,
+          "pairwiseCI": [
+            0.6995,
+            0.7248
+          ],
+          "pairwisePairs": 20000,
+          "withinChordTieRate": 0.0411,
+          "trainMs": 0,
+          "sizeBytes": 0
+        },
+        {
+          "name": "rule-checklist",
+          "spearman": 0.4489,
+          "spearmanCI": [
+            0.4369,
+            0.4646
+          ],
+          "kendall": 0.3224,
+          "mae": 1.888,
+          "calibration": {
+            "a": 0.6485,
+            "b": 2.6944
+          },
+          "pairwise": 0.6502,
+          "pairwiseCI": [
+            0.6388,
+            0.6633
+          ],
+          "pairwisePairs": 20000,
+          "withinChordTieRate": 0.1239,
+          "trainMs": 0,
+          "sizeBytes": 0
+        },
+        {
+          "name": "baseline-mean",
+          "spearman": 0,
+          "spearmanCI": [
+            0,
+            0
+          ],
+          "kendall": 0,
+          "mae": 2.112,
+          "calibration": {
+            "a": 0.351,
+            "b": 3.5774
+          },
+          "pairwise": 0.5,
+          "pairwiseCI": [
+            0.5,
+            0.5
+          ],
+          "pairwisePairs": 20000,
+          "withinChordTieRate": 1,
+          "trainMs": 2,
+          "sizeBytes": 23
+        },
+        {
+          "name": "baseline-span-only",
+          "spearman": 0.794,
+          "spearmanCI": [
+            0.7848,
+            0.8026
+          ],
+          "kendall": 0.6103,
+          "mae": 1.2947,
+          "calibration": {
+            "a": 1,
+            "b": 0
+          },
+          "pairwise": 0.7986,
+          "pairwiseCI": [
+            0.7855,
+            0.8133
+          ],
+          "pairwisePairs": 20000,
+          "withinChordTieRate": 0.0708,
+          "trainMs": 3,
+          "sizeBytes": 59,
+          "feature": "physicalSpanMm"
+        },
+        {
+          "name": "ridge",
+          "spearman": 0.9057,
+          "spearmanCI": [
+            0.9012,
+            0.9099
+          ],
+          "kendall": 0.7355,
+          "mae": 0.8817,
+          "calibration": {
+            "a": 1.0005,
+            "b": -0.0026
+          },
+          "pairwise": 0.8708,
+          "pairwiseCI": [
+            0.8568,
+            0.876
+          ],
+          "pairwisePairs": 20000,
+          "withinChordTieRate": 0.0008,
+          "trainMs": 64,
+          "sizeBytes": 1238,
+          "lambda": 10
+        },
+        {
+          "name": "random-forest",
+          "spearman": 0.9567,
+          "spearmanCI": [
+            0.9545,
+            0.9587
+          ],
+          "kendall": 0.8258,
+          "mae": 0.5264,
+          "calibration": {
+            "a": 1.021,
+            "b": -0.1166
+          },
+          "pairwise": 0.915,
+          "pairwiseCI": [
+            0.9055,
+            0.9205
+          ],
+          "pairwisePairs": 20000,
+          "withinChordTieRate": 0.0009,
+          "trainMs": 3400,
+          "sizeBytes": 11947829,
+          "hyper": {
+            "trees": 60,
+            "maxDepth": 12,
+            "minLeaf": 5,
+            "mtry": 7
+          }
+        },
+        {
+          "name": "gradient-boosting",
+          "spearman": 0.9636,
+          "spearmanCI": [
+            0.9615,
+            0.9655
+          ],
+          "kendall": 0.8412,
+          "mae": 0.4774,
+          "calibration": {
+            "a": 1.0055,
+            "b": -0.0304
+          },
+          "pairwise": 0.9214,
+          "pairwiseCI": [
+            0.912,
+            0.93
+          ],
+          "pairwisePairs": 20000,
+          "withinChordTieRate": 0.0009,
+          "trainMs": 15941,
+          "sizeBytes": 949448,
+          "hyper": {
+            "rounds": 300,
+            "maxDepth": 5,
+            "minLeaf": 20,
+            "learningRate": 0.08
+          }
+        },
+        {
+          "name": "mlp",
+          "spearman": 0.9594,
+          "spearmanCI": [
+            0.9573,
+            0.9613
+          ],
+          "kendall": 0.8312,
+          "mae": 0.5066,
+          "calibration": {
+            "a": 0.9793,
+            "b": 0.1923
+          },
+          "pairwise": 0.9159,
+          "pairwiseCI": [
+            0.9085,
+            0.9247
+          ],
+          "pairwisePairs": 20000,
+          "withinChordTieRate": 0.0008,
+          "trainMs": 19347,
+          "sizeBytes": 15395,
+          "hyper": {
+            "hidden": 32,
+            "epochs": 60,
+            "batch": 128
+          }
+        }
+      ],
+      "importance": [
+        {
+          "feature": "diagonalMm",
+          "share": 0.7231
+        },
+        {
+          "feature": "frettedCount",
+          "share": 0.057
+        },
+        {
+          "feature": "fingerSpreadMm",
+          "share": 0.0306
+        },
+        {
+          "feature": "physicalSpanMm",
+          "share": 0.0275
+        },
+        {
+          "feature": "maxAtMinFret",
+          "share": 0.0263
+        },
+        {
+          "feature": "lowStringPlayed",
+          "share": 0.017
+        },
+        {
+          "feature": "distinctFrets",
+          "share": 0.0164
+        },
+        {
+          "feature": "highStringPlayed",
+          "share": 0.0155
+        },
+        {
+          "feature": "innerMuted",
+          "share": 0.0151
+        },
+        {
+          "feature": "meanNeighbourFretJump",
+          "share": 0.0146
+        },
+        {
+          "feature": "barreAdjacent3",
+          "share": 0.0109
+        },
+        {
+          "feature": "stringSkips",
+          "share": 0.0107
+        },
+        {
+          "feature": "maxNeighbourFretJump",
+          "share": 0.0077
+        },
+        {
+          "feature": "mutedCount",
+          "share": 0.0066
+        },
+        {
+          "feature": "openCount",
+          "share": 0.0049
+        },
+        {
+          "feature": "maxFret",
+          "share": 0.0035
+        },
+        {
+          "feature": "meanPressMm",
+          "share": 0.0034
+        },
+        {
+          "feature": "fretSpan",
+          "share": 0.0033
+        },
+        {
+          "feature": "minStringSpacingMm",
+          "share": 0.0021
+        },
+        {
+          "feature": "playedCount",
+          "share": 0.0019
+        },
+        {
+          "feature": "minFret",
+          "share": 0.0019
+        }
+      ],
+      "disagreements": {
+        "gaHarderModelEasier": [
+          {
+            "diagram": "8-7-6-5-5-5",
+            "chart": "555678",
+            "quality": "Gmaj11/A",
+            "target": 2.5,
+            "ga": 7.896,
+            "model": 2.892,
+            "modelPercentile": 0.115,
+            "gaPercentile": 0.97,
+            "targetPercentile": 0.084,
+            "gap": -0.855
+          },
+          {
+            "diagram": "x-10-6-6-6-x",
+            "chart": "x-6-6-6-10-x",
+            "quality": "Absus4/Eb",
+            "target": 2.904,
+            "ga": 7.545,
+            "model": 2.603,
+            "modelPercentile": 0.084,
+            "gaPercentile": 0.939,
+            "targetPercentile": 0.132,
+            "gap": -0.855
+          },
+          {
+            "diagram": "4-4-4-5-6-7",
+            "chart": "765444",
+            "quality": "Abm(maj7)/B",
+            "target": 2.669,
+            "ga": 8.069,
+            "model": 3.033,
+            "modelPercentile": 0.133,
+            "gaPercentile": 0.976,
+            "targetPercentile": 0.098,
+            "gap": -0.843
+          },
+          {
+            "diagram": "x-3-3-3-6-x",
+            "chart": "x6333x",
+            "quality": "Bbadd11/Eb",
+            "target": 2.429,
+            "ga": 7.251,
+            "model": 2.536,
+            "modelPercentile": 0.076,
+            "gaPercentile": 0.909,
+            "targetPercentile": 0.074,
+            "gap": -0.832
+          },
+          {
+            "diagram": "10-9-8-7-7-7",
+            "chart": "7-7-7-8-9-10",
+            "quality": "Amaj11/B",
+            "target": 2.5,
+            "ga": 7.58,
+            "model": 2.882,
+            "modelPercentile": 0.114,
+            "gaPercentile": 0.941,
+            "targetPercentile": 0.084,
+            "gap": -0.827
+          },
+          {
+            "diagram": "7-9-10-8-8-8",
+            "chart": "8-8-8-10-9-7",
+            "quality": "Bb7sus2/C",
+            "target": 2.5,
+            "ga": 7.58,
+            "model": 2.904,
+            "modelPercentile": 0.116,
+            "gaPercentile": 0.941,
+            "targetPercentile": 0.084,
+            "gap": -0.824
+          },
+          {
+            "diagram": "8-8-8-7-9-10",
+            "chart": "10-9-7-8-8-8",
+            "quality": "Cm6/D",
+            "target": 2.5,
+            "ga": 7.58,
+            "model": 2.954,
+            "modelPercentile": 0.122,
+            "gaPercentile": 0.941,
+            "targetPercentile": 0.084,
+            "gap": -0.819
+          },
+          {
+            "diagram": "6-6-6-7-9-8",
+            "chart": "897666",
+            "quality": "Bbm(maj9)/C",
+            "target": 2.5,
+            "ga": 7.734,
+            "model": 3.163,
+            "modelPercentile": 0.151,
+            "gaPercentile": 0.965,
+            "targetPercentile": 0.084,
+            "gap": -0.814
+          },
+          {
+            "diagram": "x-13-13-13-9-x",
+            "chart": "x-9-13-13-13-x",
+            "quality": "Ab7/Gb",
+            "target": 2.8,
+            "ga": 6.981,
+            "model": 2.485,
+            "modelPercentile": 0.071,
+            "gaPercentile": 0.882,
+            "targetPercentile": 0.118,
+            "gap": -0.811
+          },
+          {
+            "diagram": "x-9-13-13-13-x",
+            "chart": "x-13-13-13-9-x",
+            "quality": "Ebsus4/Bb",
+            "target": 2.8,
+            "ga": 6.981,
+            "model": 2.485,
+            "modelPercentile": 0.071,
+            "gaPercentile": 0.882,
+            "targetPercentile": 0.118,
+            "gap": -0.811
+          }
+        ],
+        "gaEasierModelHarder": [
+          {
+            "diagram": "4-0-4-1-4-1",
+            "chart": "141404",
+            "quality": "Db9/F",
+            "target": 10.318,
+            "ga": 4.649,
+            "model": 10.856,
+            "modelPercentile": 0.946,
+            "gaPercentile": 0.256,
+            "targetPercentile": 0.922,
+            "gap": 0.691
+          },
+          {
+            "diagram": "1-4-1-4-0-4",
+            "chart": "404141",
+            "quality": "F7b9#9/Ab",
+            "target": 10.346,
+            "ga": 4.649,
+            "model": 10.856,
+            "modelPercentile": 0.946,
+            "gaPercentile": 0.256,
+            "targetPercentile": 0.923,
+            "gap": 0.691
+          },
+          {
+            "diagram": "1-4-1-4-0-1",
+            "chart": "104141",
+            "quality": "F7b9#9",
+            "target": 12,
+            "ga": 4.649,
+            "model": 9.958,
+            "modelPercentile": 0.916,
+            "gaPercentile": 0.256,
+            "targetPercentile": 0.982,
+            "gap": 0.66
+          },
+          {
+            "diagram": "1-4-1-0-4-1",
+            "chart": "140141",
+            "quality": "Dbadd9/F",
+            "target": 12,
+            "ga": 4.649,
+            "model": 9.958,
+            "modelPercentile": 0.916,
+            "gaPercentile": 0.256,
+            "targetPercentile": 0.982,
+            "gap": 0.66
+          },
+          {
+            "diagram": "1-0-1-4-1-4",
+            "chart": "414101",
+            "quality": "Abm13",
+            "target": 12,
+            "ga": 4.649,
+            "model": 9.911,
+            "modelPercentile": 0.914,
+            "gaPercentile": 0.256,
+            "targetPercentile": 0.982,
+            "gap": 0.658
+          },
+          {
+            "diagram": "4-0-1-4-1-1",
+            "chart": "114104",
+            "quality": "Abm13/F",
+            "target": 6.395,
+            "ga": 4.649,
+            "model": 9.639,
+            "modelPercentile": 0.901,
+            "gaPercentile": 0.256,
+            "targetPercentile": 0.705,
+            "gap": 0.645
+          },
+          {
+            "diagram": "4-1-1-0-4-1",
+            "chart": "140114",
+            "quality": "Dbmaj7/F",
+            "target": 12,
+            "ga": 4.649,
+            "model": 9.639,
+            "modelPercentile": 0.901,
+            "gaPercentile": 0.256,
+            "targetPercentile": 0.982,
+            "gap": 0.645
+          },
+          {
+            "diagram": "4-0-1-1-4-1",
+            "chart": "141104",
+            "quality": "Db9/F",
+            "target": 6.748,
+            "ga": 4.649,
+            "model": 9.639,
+            "modelPercentile": 0.901,
+            "gaPercentile": 0.256,
+            "targetPercentile": 0.736,
+            "gap": 0.645
+          },
+          {
+            "diagram": "4-0-4-4-1-1",
+            "chart": "114404",
+            "quality": "Abm13/F",
+            "target": 8.276,
+            "ga": 4.649,
+            "model": 9.599,
+            "modelPercentile": 0.899,
+            "gaPercentile": 0.256,
+            "targetPercentile": 0.836,
+            "gap": 0.643
+          },
+          {
+            "diagram": "1-0-4-4-1-4",
+            "chart": "414401",
+            "quality": "Abm13",
+            "target": 12,
+            "ga": 4.649,
+            "model": 9.599,
+            "modelPercentile": 0.899,
+            "gaPercentile": 0.256,
+            "targetPercentile": 0.982,
+            "gap": 0.643
+          }
+        ]
+      }
+    },
+    "shape": {
+      "mode": "shape",
+      "groups": 27238,
+      "train": 116947,
+      "val": 39386,
+      "test": 39583,
+      "models": [
+        {
+          "name": "ga-hand-written",
+          "spearman": 0.6016,
+          "spearmanCI": [
+            0.5931,
+            0.6105
+          ],
+          "kendall": 0.4336,
+          "mae": 1.6619,
+          "calibration": {
+            "a": 1.2224,
+            "b": -1.2079
+          },
+          "pairwise": 0.7157,
+          "pairwiseCI": [
+            0.6973,
+            0.7265
+          ],
+          "pairwisePairs": 20000,
+          "withinChordTieRate": 0.0407,
+          "trainMs": 0,
+          "sizeBytes": 0
+        },
+        {
+          "name": "rule-checklist",
+          "spearman": 0.4507,
+          "spearmanCI": [
+            0.4409,
+            0.4616
+          ],
+          "kendall": 0.3248,
+          "mae": 1.9117,
+          "calibration": {
+            "a": 0.645,
+            "b": 2.7104
+          },
+          "pairwise": 0.6523,
+          "pairwiseCI": [
+            0.6389,
+            0.6671
+          ],
+          "pairwisePairs": 20000,
+          "withinChordTieRate": 0.1277,
+          "trainMs": 0,
+          "sizeBytes": 0
+        },
+        {
+          "name": "baseline-mean",
+          "spearman": 0,
+          "spearmanCI": [
+            0,
+            0
+          ],
+          "kendall": 0,
+          "mae": 2.142,
+          "calibration": {
+            "a": 0.7036,
+            "b": 1.6341
+          },
+          "pairwise": 0.5,
+          "pairwiseCI": [
+            0.5,
+            0.5
+          ],
+          "pairwisePairs": 20000,
+          "withinChordTieRate": 1,
+          "trainMs": 2,
+          "sizeBytes": 24
+        },
+        {
+          "name": "baseline-span-only",
+          "spearman": 0.8035,
+          "spearmanCI": [
+            0.7982,
+            0.8085
+          ],
+          "kendall": 0.6214,
+          "mae": 1.2785,
+          "calibration": {
+            "a": 1,
+            "b": 0
+          },
+          "pairwise": 0.8026,
+          "pairwiseCI": [
+            0.794,
+            0.815
+          ],
+          "pairwisePairs": 20000,
+          "withinChordTieRate": 0.0754,
+          "trainMs": 4,
+          "sizeBytes": 59,
+          "feature": "physicalSpanMm"
+        },
+        {
+          "name": "ridge",
+          "spearman": 0.9104,
+          "spearmanCI": [
+            0.908,
+            0.913
+          ],
+          "kendall": 0.7424,
+          "mae": 0.8784,
+          "calibration": {
+            "a": 1.0001,
+            "b": -0.0003
+          },
+          "pairwise": 0.8685,
+          "pairwiseCI": [
+            0.863,
+            0.8798
+          ],
+          "pairwisePairs": 20000,
+          "withinChordTieRate": 0.0004,
+          "trainMs": 69,
+          "sizeBytes": 1240,
+          "lambda": 1
+        },
+        {
+          "name": "random-forest",
+          "spearman": 0.9604,
+          "spearmanCI": [
+            0.9592,
+            0.9618
+          ],
+          "kendall": 0.8327,
+          "mae": 0.5196,
+          "calibration": {
+            "a": 1.0216,
+            "b": -0.1197
+          },
+          "pairwise": 0.9156,
+          "pairwiseCI": [
+            0.9077,
+            0.924
+          ],
+          "pairwisePairs": 20000,
+          "withinChordTieRate": 0.0009,
+          "trainMs": 4645,
+          "sizeBytes": 12015713,
+          "hyper": {
+            "trees": 60,
+            "maxDepth": 12,
+            "minLeaf": 5,
+            "mtry": 7
+          }
+        },
+        {
+          "name": "gradient-boosting",
+          "spearman": 0.9655,
+          "spearmanCI": [
+            0.9644,
+            0.9667
+          ],
+          "kendall": 0.8452,
+          "mae": 0.4756,
+          "calibration": {
+            "a": 1.006,
+            "b": -0.0329
+          },
+          "pairwise": 0.9214,
+          "pairwiseCI": [
+            0.9135,
+            0.9285
+          ],
+          "pairwisePairs": 20000,
+          "withinChordTieRate": 0.0013,
+          "trainMs": 14662,
+          "sizeBytes": 943282,
+          "hyper": {
+            "rounds": 300,
+            "maxDepth": 5,
+            "minLeaf": 20,
+            "learningRate": 0.08
+          }
+        },
+        {
+          "name": "mlp",
+          "spearman": 0.9623,
+          "spearmanCI": [
+            0.9613,
+            0.9636
+          ],
+          "kendall": 0.837,
+          "mae": 0.5037,
+          "calibration": {
+            "a": 1.0327,
+            "b": -0.1469
+          },
+          "pairwise": 0.9172,
+          "pairwiseCI": [
+            0.9087,
+            0.9255
+          ],
+          "pairwisePairs": 20000,
+          "withinChordTieRate": 0.0004,
+          "trainMs": 17229,
+          "sizeBytes": 15303,
+          "hyper": {
+            "hidden": 32,
+            "epochs": 60,
+            "batch": 128
+          }
+        }
+      ]
+    }
+  },
+  "node": "v24.12.0",
+  "platform": "win32-x64",
+  "agreement": {
+    "targetVsGa": 0.593,
+    "targetVsRules": 0.4449,
+    "gaVsRules": 0.785,
+    "gaWithinChordTieRate": 0.0304,
+    "targetWithinChordTieRate": 0.003
+  },
+  "speed": {
+    "voicings": 2000,
+    "searchMsPerVoicing": 0.05578,
+    "modelMsPerVoicing": 0.01452,
+    "speedup": 3.84
+  },
+  "feasibility": {
+    "share": 0.3373,
+    "trainMs": 25758,
+    "sizeBytes": 953732,
+    "accuracy": 0.9033,
+    "majorityAccuracy": 0.6627,
+    "auc": 0.9726,
+    "gaAuc": 0.6773,
+    "gaMaxOnImpossible": 7.732
+  },
+  "leakage": {
+    "ga-hand-written": {
+      "byVoicing": 0.5966,
+      "byChord": 0.5956,
+      "byShape": 0.6016,
+      "naiveMinusChord": 0.001,
+      "chordMinusShape": -0.006
+    },
+    "baseline-span-only": {
+      "byVoicing": 0.7928,
+      "byChord": 0.794,
+      "byShape": 0.8035,
+      "naiveMinusChord": -0.0012,
+      "chordMinusShape": -0.0095
+    },
+    "ridge": {
+      "byVoicing": 0.9069,
+      "byChord": 0.9057,
+      "byShape": 0.9104,
+      "naiveMinusChord": 0.0012,
+      "chordMinusShape": -0.0047
+    },
+    "random-forest": {
+      "byVoicing": 0.9583,
+      "byChord": 0.9567,
+      "byShape": 0.9604,
+      "naiveMinusChord": 0.0016,
+      "chordMinusShape": -0.0037
+    },
+    "gradient-boosting": {
+      "byVoicing": 0.9641,
+      "byChord": 0.9636,
+      "byShape": 0.9655,
+      "naiveMinusChord": 0.0005,
+      "chordMinusShape": -0.0019
+    },
+    "mlp": {
+      "byVoicing": 0.9613,
+      "byChord": 0.9594,
+      "byShape": 0.9623,
+      "naiveMinusChord": 0.0019,
+      "chordMinusShape": -0.0029
+    }
+  },
+  "totalMs": 302303
+}

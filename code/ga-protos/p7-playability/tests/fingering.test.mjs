@@ -16,10 +16,11 @@ test('the search finds a fingering for the shapes a method book teaches', () => 
 
 test('the F barre is a barre, and the search says so even though GA\'s flag does not', () => {
   const best = bestFingering(parseChart('1-3-3-2-1-1'));
-  assert.ok(best.barre, 'the index finger holds fret 1');
-  assert.equal(best.barre.fret, 1);
-  assert.equal(best.barre.barred, 3);
-  // Three of the six notes sit at fret 1 and the index finger takes all three
+  assert.equal(best.barres.length, 1, 'one finger holds several strings');
+  assert.equal(best.barres[0].finger, 1, 'and it is the index finger');
+  assert.equal(best.barres[0].fret, 1);
+  assert.equal(best.barres[0].held, 3);
+  // Three of the six notes sit at fret 1 and the index finger takes all three; the other three take a finger each
   assert.equal(best.fingering.filter((f) => f === 1).length, 3);
   assert.equal(new Set(best.fingering).size, 4);
 });

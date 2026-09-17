@@ -96,3 +96,91 @@ jobs:
           node scripts/fake-mic.ts
           node scripts/browser-run.ts
           node -e "const r=require('./out/browser-run.json'); console.log(r.backend, r.sampleRate, r.frames, 'frames', r.inOrder, 'of', r.expected.length); if (r.error || r.frames < 1 || r.offsite.length) process.exit(1)"
+
+
+  # P7, the playability model: no GPU and no GA index on the runner. The unit tests, the cost functions checked
+  # against the committed scores of the annotated pairs, then a reduced experiment on a dataset the runner
+  # generates itself (2,880 voicings of 72 chords, small ensembles, few epochs) whose job is only to prove that
+  # the pipeline runs the same everywhere and still beats its trivial baselines. The published figures come from
+  # results/measurements.json, not from here. Nothing to install: the prototype is plain Node.js.
+  p7-playability:
+    name: P7 playability model (${{ matrix.os }})
+    timeout-minutes: 12
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+        working-directory: code/ga-protos/p7-playability
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Unit tests
+        run: node --test "tests/*.test.mjs"
+      - name: The three costs agree with the committed scores of the annotated pairs
+        run: node scripts/check-annotations.mjs --out out/annotation-scores.json --check
+      - name: A dataset the runner generates itself, with no GA index
+        run: |
+          node scripts/synth-dataset.mjs --out out/synthetic.jsonl
+          node -e "const l=require('fs').readFileSync('out/synthetic.jsonl','utf8').trim().split('\n'); if (l.length < 1000) { console.error(l.length, 'rows'); process.exit(1) } console.log(l.length, 'rows')"
+      - name: A reduced experiment on the CPU, under a short budget
+        run: node scripts/train.mjs --data out/synthetic.jsonl --out out/ci-measurements.json --budget ci
+      - name: The models still beat their baselines, and the run stays inside its budget
+        run: node scripts/check-ci-run.mjs --run out/ci-measurements.json
+
+
+  # P5, 3D-printable bracelets: no printer and no slicer on the runners, so this checks everything that can be checked
+  # without one. The pitch classes are re-read from the committed copy of GA's catalog and compared with prototype 2's
+  # port; the meshes are rebuilt with trimesh and manifold3d and compared with the figures the lesson quotes, including
+  # the two failures it publishes; and the keel's three shapes are measured again. The .stl and .3mf files live outside
+  # the repository, so nothing kept here is written by a run. PrusaSlicer's grams and minutes come from the author's
+  # machine and are not re-run here.
+  p5-printable-bracelets:
+    name: P5 printable bracelets (${{ matrix.os }})
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+        working-directory: code/ga-protos/p5-printable-bracelets
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - name: The pitch classes are still GA's, and still agree with prototype 2
+        run: |
+          node scripts/ga-sets.ts
+          node --test "tests/*.test.ts"
+      - name: Install trimesh, manifold3d and the rest, pinned
+        run: python -m pip install --disable-pip-version-check -r requirements.txt
+      - name: Unit tests, including the bore, the walls and the overhangs
+        run: python -m unittest discover -s tests -t . -v
+      - name: The same meshes come out here as on the author's machine, failures included
+        run: python mesh/check_ci.py --results results/measurements.json
+      - name: The keel's three shapes, measured again
+        run: |
+          python mesh/keel_sweep.py --results "$RUNNER_TEMP/keel-sweep.json" > /dev/null
+          python mesh/check_ci.py --keel results/keel-sweep.json "$RUNNER_TEMP/keel-sweep.json"
+      - name: One bracelet exported to a temporary folder, and small enough to send anywhere
+        run: |
+          python mesh/run.py --set "C major-triad" --bead cone --out "$RUNNER_TEMP/p5" --results "$RUNNER_TEMP/one.json"
+          python mesh/check_ci.py --export "$RUNNER_TEMP/one.json"
+      - name: The pictures the lesson shows stay small
+        working-directory: src/assets/ga-lab
+        run: |
+          bytes=$(find . -name 'p5-*' -type f -exec cat {} + | wc -c)
+          echo "src/assets/ga-lab, p5 renders: $bytes bytes"
+          test "$bytes" -le 2000000

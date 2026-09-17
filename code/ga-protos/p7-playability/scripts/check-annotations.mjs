@@ -80,6 +80,30 @@ for (const [costName, cost] of Object.entries(costs)) {
   };
 }
 
+// --check compares what this machine computes with the committed file, to the last decimal that matters:
+// the costs are pure arithmetic on the diagram, so every runner must agree with the published run.
+if (process.argv.includes('--check')) {
+  const committed = JSON.parse(readFileSync(resolve(here, '../results/annotation-scores.json'), 'utf8'));
+  const problems = [];
+  for (const [name, shape] of Object.entries(report.shapes)) {
+    const was = committed.shapes[name];
+    if (!was) problems.push(`${name}: missing from the committed file`);
+    else
+      for (const field of ['target', 'ga', 'rules'])
+        if (Math.abs(shape[field] - was[field]) > 1e-9) problems.push(`${name}.${field}: ${shape[field]} vs ${was[field]}`);
+  }
+  for (const [name, score] of Object.entries(report.scores)) {
+    const was = committed.scores[name];
+    if (Math.abs(score.highConfidence - was.highConfidence) > 1e-9 || Math.abs(score.allPairs - was.allPairs) > 1e-9)
+      problems.push(`${name}: ${score.highConfidence}/${score.allPairs} vs ${was.highConfidence}/${was.allPairs}`);
+  }
+  if (problems.length) {
+    console.error(`this machine disagrees with the committed scores:\n  ${problems.join('\n  ')}`);
+    process.exit(1);
+  }
+  console.log('every cost matches the committed results/annotation-scores.json');
+}
+
 writeFileSync(outPath, `${JSON.stringify(report, null, 2)}\n`);
 for (const [name, s] of Object.entries(report.scores)) {
   console.log(`${name}: ${s.highConfidence} on ${s.highConfidencePairs} high-confidence pairs, ${s.allPairs} on all ${s.pairs}`);

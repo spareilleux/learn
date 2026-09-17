@@ -37,7 +37,7 @@ You write C# or Java, you have followed at least one of the GA courses, and you 
 | P4 | AI render pass | Does a generated texture or lighting pass make GA's 3D scenes better, measured against the plain render? | planned |
 | P5 | 3D-printable bracelets | Can a pitch-class bracelet become a printable object, from GA's data to a mesh that passes a slicer? | planned |
 | P6 | Full chain | Microphone to chord to voicing to image to object, in one run: where does it break? | planned |
-| P7 | Playability model | Can a small model trained on the CPU predict how hard a voicing is to play better than GA's hand-written cost? | planned |
+| P7 | [Playability model](07-playability-model/) | Can a small model trained on the CPU predict how hard a voicing is to play better than GA's hand-written cost? | published |
 | — | [Journal](journal/) | | |
 
 ## Resources

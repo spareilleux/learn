@@ -15,6 +15,7 @@ import { splitRows, SPLIT_MODES } from '../src/lib/split.mjs';
 import { fitRidge, fitMean, fitSingleFeature } from '../src/lib/linear.mjs';
 import { buildBins, fitRandomForest, fitGradientBoosting } from '../src/lib/trees.mjs';
 import { fitMlp } from '../src/lib/mlp.mjs';
+import { mulberry32, shuffle } from '../src/lib/random.mjs';
 import {
   spearman,
   kendallTauB,
@@ -48,11 +49,17 @@ const CONFIG =
 
 mkdirSync(dirname(outPath), { recursive: true });
 const started = Date.now();
-const rows = readFileSync(dataPath, 'utf8')
+let allRows = readFileSync(dataPath, 'utf8')
   .split('\n')
   .filter((line) => line.length > 1)
   .map((line) => JSON.parse(line));
-console.log(`${rows.length} voicings from ${dataPath}`);
+const sample = Number(arg('sample', '0'));
+if (sample > 0 && sample < allRows.length) allRows = shuffle([...allRows], mulberry32(seed)).slice(0, sample);
+
+// The main task is a ranking task, and a voicing nobody can finger has no rank: those rows are set aside here
+// and answered on their own, further down, as a question of their own.
+const rows = allRows.filter((r) => r.f === 1);
+console.log(`${allRows.length} voicings from ${dataPath}, ${rows.length} of them with a legal fingering`);
 
 const X = rows.map((r) => features(parseDiagram(r.d)));
 const y = Float64Array.from(rows, (r) => r.t);
@@ -105,10 +112,16 @@ function scorePredictor(name, predTest, testIdx, trainIdx, { trainMs = 0, sizeBy
   };
 }
 
-const results = { dataset: { path: dataPath, rows: rows.length, budget, seed }, splits: {}, node: process.version, platform: `${process.platform}-${process.arch}` };
+const results = {
+  dataset: { path: dataPath, rows: rows.length, allRows: allRows.length, budget, seed, sample },
+  splits: {},
+  node: process.version,
+  platform: `${process.platform}-${process.arch}`,
+};
 results.dataset.chords = new Set(rows.map((r) => r.c)).size;
 results.dataset.shapes = new Set(rows.map((r) => r.s)).size;
-results.dataset.infeasible = rows.filter((r) => r.f === 0).length;
+results.dataset.infeasible = allRows.filter((r) => r.f === 0).length;
+results.dataset.infeasibleShare = round(results.dataset.infeasible / allRows.length);
 
 // How the three hand-written signals agree with each other, over the whole dataset
 results.agreement = {
@@ -265,6 +278,41 @@ for (const mode of SPLIT_MODES) {
     speedup: round(searchMs / modelMs, 2),
   };
   console.log(`\nspeed: search ${results.speed.searchMsPerVoicing} ms, model ${results.speed.modelMsPerVoicing} ms per voicing (x${results.speed.speedup})`);
+}
+
+// A second question, on the rows the ranking task had to set aside: can the same kind of model tell, from the
+// diagram alone, that a voicing has no legal fingering at all? GA's score cannot: it has no "impossible" branch.
+// Read as a ranking, pairwise accuracy across chords is the area under the ROC curve.
+{
+  const Xall = allRows.map((r) => features(parseDiagram(r.d)));
+  const yall = Float64Array.from(allRows, (r) => (r.f === 0 ? 1 : 0));
+  const split = splitRows(allRows, 'chord', { seed });
+  const Xtrain = split.train.map((i) => Xall[i]);
+  const ytrain = Float64Array.from(split.train, (i) => yall[i]);
+  const Xtest = split.test.map((i) => Xall[i]);
+  const ytest = Float64Array.from(split.test, (i) => yall[i]);
+  const groups = split.test.map((i) => allRows[i].c);
+  const t0 = Date.now();
+  const model = fitGradientBoosting(Xtrain, ytrain, { ...CONFIG.boosting, seed: seed + 5 });
+  const trainMs = Date.now() - t0;
+  const pred = Float64Array.from(Xtest, (row) => model.predict(row));
+  const gaOnTest = Float64Array.from(split.test, (i) => allRows[i].g);
+  const majority = ytrain.reduce((a, b) => a + b, 0) / ytrain.length > 0.5 ? 1 : 0;
+  let right = 0;
+  for (let i = 0; i < pred.length; i++) if ((pred[i] >= 0.5 ? 1 : 0) === ytest[i]) right++;
+  results.feasibility = {
+    share: round(ytest.reduce((a, b) => a + b, 0) / ytest.length),
+    trainMs,
+    sizeBytes: model.size(),
+    accuracy: round(right / pred.length),
+    majorityAccuracy: round(
+      [...ytest].filter((v) => v === majority).length / ytest.length,
+    ),
+    auc: round(pairwiseAccuracy(pred, ytest, groups, { pairs: CONFIG.pairs, seed: 13 }).accuracy),
+    gaAuc: round(pairwiseAccuracy(gaOnTest, ytest, groups, { pairs: CONFIG.pairs, seed: 13 }).accuracy),
+    gaMaxOnImpossible: round(Math.max(...split.test.filter((i) => allRows[i].f === 0).map((i) => allRows[i].g)), 3),
+  };
+  console.log(`\nfeasibility: accuracy ${results.feasibility.accuracy} (majority ${results.feasibility.majorityAccuracy}), AUC ${results.feasibility.auc}, GA's AUC ${results.feasibility.gaAuc}`);
 }
 
 // The leakage gap: the same model, the same data, only the wall moves

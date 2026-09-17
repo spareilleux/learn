@@ -101,10 +101,12 @@ test('the bootstrap resamples chords, not voicings', () => {
 });
 
 test('a split by chord never puts one chord on two sides', () => {
-  const rows = Array.from({ length: 500 }, (_, i) => ({ c: `chord${i % 40}`, s: `shape${i % 17}` }));
+  const rows = Array.from({ length: 500 }, (_, i) => ({ c: `chord${i % 40}`, s: `shape${i % 57}` }));
   for (const mode of ['chord', 'shape']) {
     const s = splitRows(rows, mode);
     const key = mode === 'chord' ? 'c' : 's';
+    assert.equal(s.groupCount, new Set(rows.map((r) => r[key])).size);
+    assert.ok(s.train.length > 0 && s.test.length > 0);
     const sideOf = new Map();
     for (const side of ['train', 'val', 'test'])
       for (const i of s[side]) {
@@ -116,4 +118,14 @@ test('a split by chord never puts one chord on two sides', () => {
   }
   const naive = splitRows(rows, 'voicing');
   assert.equal(naive.groupCount, rows.length);
+});
+
+test('keys that differ only in their last characters still land on all three sides', () => {
+  // The first version of hash32 had no finalizer: the high bits barely moved between "chord0" and "chord39",
+  // and every chord went to the training side.
+  const rows = Array.from({ length: 3000 }, (_, i) => ({ c: `chord${i}`, s: `shape${i}` }));
+  const s = splitRows(rows, 'chord');
+  assert.ok(Math.abs(s.train.length / rows.length - 0.6) < 0.03, `train ${s.train.length}`);
+  assert.ok(Math.abs(s.val.length / rows.length - 0.2) < 0.03, `val ${s.val.length}`);
+  assert.ok(Math.abs(s.test.length / rows.length - 0.2) < 0.03, `test ${s.test.length}`);
 });

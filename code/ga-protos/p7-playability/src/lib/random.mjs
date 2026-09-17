@@ -21,12 +21,22 @@ export function shuffle(array, rng) {
   return array;
 }
 
-// A stable 32-bit hash of a string (FNV-1a), used to place a group in a split without shuffling every group
+// A stable 32-bit hash of a string, used to place a group in a split without shuffling every group.
+//
+// FNV-1a alone is not enough here. Its high bits barely move between two keys that differ in their last
+// character, and a split reads exactly those high bits: with the plain FNV-1a, "chord0" to "chord39" all
+// landed below 0.6 and the whole test set came out empty. The murmur3 finalizer below spreads the bits before
+// anyone looks at them.
 export function hash32(text) {
   let h = 0x811c9dc5;
   for (let i = 0; i < text.length; i++) {
     h ^= text.charCodeAt(i);
     h = Math.imul(h, 0x01000193) >>> 0;
   }
+  h ^= h >>> 16;
+  h = Math.imul(h, 0x85ebca6b) >>> 0;
+  h ^= h >>> 13;
+  h = Math.imul(h, 0xc2b2ae35) >>> 0;
+  h ^= h >>> 16;
   return h >>> 0;
 }
