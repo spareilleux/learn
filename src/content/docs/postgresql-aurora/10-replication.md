@@ -140,6 +140,16 @@ ERROR:  cannot execute DELETE in a read-only transaction
 
 The script waits until `node2` has replayed the position `node1` had reached after the `INSERT`, then reads. Without that wait, a read on a standby can miss a write just committed on the primary: the lag lesson 3 described for Aurora Replicas.
 
+At this point, the two clusters work like this: writes go to node1, and node2 replays its WAL and answers read-only queries.
+
+```mermaid
+flowchart LR
+    writes["writes"] --> node1["node1: primary, port 5433"]
+    node1 -->|"WAL, streamed through slot node2"| node2["node2: hot standby, port 5434"]
+    reads["read-only queries"] --> node2
+    delete["DELETE on node2"] -.->|"refused"| node2
+```
+
 ## Synchronous replication
 
 By default a commit returns once the primary has written its WAL. [`synchronous_standby_names`](https://www.postgresql.org/docs/18/runtime-config-replication.html#GUC-SYNCHRONOUS-STANDBY-NAMES) makes it wait for standbys too ([lines 59-73](https://github.com/spareilleux/learn/blob/eb0303d795a88c25a467391c1f127befe75c98f8/code/postgresql-aurora/ops/10-replication.sh#L59-L73)):
@@ -307,6 +317,17 @@ CREATE SUBSCRIPTION
 - [`CREATE PUBLICATION`](https://www.postgresql.org/docs/18/sql-createpublication.html) on the publisher lists the tables, here with a [row filter](https://www.postgresql.org/docs/18/logical-replication-row-filter.html): only the runs of `main`.
 - [`CREATE SUBSCRIPTION`](https://www.postgresql.org/docs/18/sql-createsubscription.html) on the subscriber creates a logical replication slot on the publisher, copies the existing rows, then applies changes as they come. `pg_subscription_rel` shows each table's state; `r` means ready.
 - 125 runs of `main` on `node3`, and not the two others.
+
+After the failover, pg_rewind and the subscription, the three clusters are connected like this: physical replication from node2 to node1, logical replication from node2 to node3.
+
+```mermaid
+flowchart LR
+    node2["node2: primary, timeline 2"]
+    node1["node1: standby, after pg_rewind"]
+    node3["node3: independent cluster, subscription runs_from_node2"]
+    node2 -->|"physical: WAL through slot node1"| node1
+    node2 -->|"logical: rows of ci.runs on main, publication runs_on_main"| node3
+```
 
 The subscriber is a primary like any other, and nothing stops a write there ([lines 110-119](https://github.com/spareilleux/learn/blob/eb0303d795a88c25a467391c1f127befe75c98f8/code/postgresql-aurora/ops/10-replication.sh#L110-L119)):
 

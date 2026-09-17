@@ -43,6 +43,20 @@ La lección 3 presentó los endpoints ([endpoints de Aurora](https://docs.aws.am
 - El **reader endpoint** «balances connections to available Aurora Replicas in an Aurora DB cluster. It doesn't balance individual queries» ([reader endpoint](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Endpoints.Reader.html)). Un pool que abrió sus conexiones en el reader endpoint se queda en las réplicas a las que llegó.
 - Los **custom endpoints** agrupan instancias elegidas, «up to five custom endpoints for each provisioned Aurora cluster or Aurora serverless cluster» ([custom endpoints](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Endpoints.Custom.html)); los **instance endpoints** llegan a una sola instancia.
 
+El cluster, su volumen y sus endpoints, tal como los describe la documentación.
+
+```mermaid
+flowchart TB
+    clusterep["cluster endpoint: nombre DNS"] --> writer["instancia writer"]
+    readerep["reader endpoint: reparte las conexiones"] --> r1["Aurora Replica"]
+    readerep --> r2["Aurora Replica, hasta 15"]
+    volume[("volumen del cluster: copias en tres zonas de disponibilidad, seis nodos de almacenamiento")]
+    writer -->|"escrituras, replicadas de forma síncrona"| volume
+    r1 --> volume
+    r2 --> volume
+    r1 -.->|"promovida cuando falla el writer"| writer
+```
+
 Una conmutación por error cambia un registro DNS, y un cliente que guarda el DNS en caché sigue conectándose al antiguo writer. Las [prácticas recomendadas](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.BestPractices.html) de AWS: «If your client application is caching the Domain Name Service (DNS) data of your DB instances, set a time-to-live (TTL) value of less than 30 seconds.» La JVM guarda en caché las respuestas DNS por su cuenta; la [página de conmutación por error rápida para Java](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.BestPractices.FastFailover.html) de AWS fija `networkaddress.cache.ttl` a 1.
 
 ## Una conmutación por error desde C# y Java, en local

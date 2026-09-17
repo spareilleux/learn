@@ -43,6 +43,20 @@ La leçon 3 a présenté les endpoints ([endpoints Aurora](https://docs.aws.amaz
 - Le **reader endpoint** « balances connections to available Aurora Replicas in an Aurora DB cluster. It doesn't balance individual queries » ([reader endpoint](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Endpoints.Reader.html)). Un pool qui a ouvert ses connexions sur le reader endpoint reste sur les réplicas qu'il a atteints.
 - Les **custom endpoints** regroupent des instances choisies, « up to five custom endpoints for each provisioned Aurora cluster or Aurora serverless cluster » ([custom endpoints](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Endpoints.Custom.html)) ; les **instance endpoints** atteignent une instance.
 
+Le cluster, son volume et ses endpoints, tels que la documentation les décrit.
+
+```mermaid
+flowchart TB
+    clusterep["cluster endpoint : nom DNS"] --> writer["instance writer"]
+    readerep["reader endpoint : répartit les connexions"] --> r1["Aurora Replica"]
+    readerep --> r2["Aurora Replica, jusqu'à 15"]
+    volume[("volume de cluster : copies dans trois zones de disponibilité, six nœuds de stockage")]
+    writer -->|"écritures, répliquées de façon synchrone"| volume
+    r1 --> volume
+    r2 --> volume
+    r1 -.->|"promue quand le writer tombe"| writer
+```
+
 Un basculement change un enregistrement DNS, et un client qui met le DNS en cache continue de se connecter à l'ancien writer. Les [bonnes pratiques](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.BestPractices.html) d'AWS : « If your client application is caching the Domain Name Service (DNS) data of your DB instances, set a time-to-live (TTL) value of less than 30 seconds. » La JVM met elle-même les réponses DNS en cache ; la [page d'AWS sur le basculement rapide en Java](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.BestPractices.FastFailover.html) règle `networkaddress.cache.ttl` à 1.
 
 ## Un basculement depuis C# et Java, en local

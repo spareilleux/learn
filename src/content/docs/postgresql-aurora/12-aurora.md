@@ -43,6 +43,20 @@ Lesson 3 introduced the endpoints ([Aurora endpoints](https://docs.aws.amazon.co
 - The **reader endpoint** "balances connections to available Aurora Replicas in an Aurora DB cluster. It doesn't balance individual queries" ([reader endpoint](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Endpoints.Reader.html)). A pool that opened its connections on the reader endpoint stays on the replicas it reached.
 - **Custom endpoints** group chosen instances, "up to five custom endpoints for each provisioned Aurora cluster or Aurora serverless cluster" ([custom endpoints](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Endpoints.Custom.html)); **instance endpoints** reach one instance.
 
+The cluster, its volume and its endpoints, as the documentation describes them.
+
+```mermaid
+flowchart TB
+    clusterep["cluster endpoint: DNS name"] --> writer["writer instance"]
+    readerep["reader endpoint: balances connections"] --> r1["Aurora Replica"]
+    readerep --> r2["Aurora Replica, up to 15"]
+    volume[("cluster volume: copies across three Availability Zones, six storage nodes")]
+    writer -->|"writes, replicated synchronously"| volume
+    r1 --> volume
+    r2 --> volume
+    r1 -.->|"promoted when the writer fails"| writer
+```
+
 A failover changes a DNS record, and a client that caches DNS keeps connecting to the old writer. AWS's [best practices](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.BestPractices.html): "If your client application is caching the Domain Name Service (DNS) data of your DB instances, set a time-to-live (TTL) value of less than 30 seconds." The JVM caches DNS answers itself; AWS's [fast failover page for Java](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.BestPractices.FastFailover.html) sets `networkaddress.cache.ttl` to 1.
 
 ## A failover from C# and Java, locally

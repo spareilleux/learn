@@ -120,6 +120,15 @@ CREATE EXTENSION
 
 La ligne vit maintenant en `(0,22)`, créée par la transaction 2. [`pageinspect`](https://www.postgresql.org/docs/18/pageinspect.html) lit la page brute : l'élément 2, l'ancienne version, est toujours là, avec `xmax` 2 et un `t_ctid` qui pointe vers la nouvelle version. Une transaction qui a commencé avant la validation de la transaction 2 lit encore l'élément 2 ; les autres suivent la chaîne jusqu'à l'élément 22. C'est le [MVCC](https://www.postgresql.org/docs/18/mvcc-intro.html) : chaque transaction voit les versions qui étaient validées quand son instantané a été pris, et personne n'attend pour lire.
 
+La page après la mise à jour, en image : l'ancienne version pointe vers la nouvelle, et chaque transaction lit la version que son instantané peut voir.
+
+```mermaid
+flowchart LR
+    old["élément 2 : runs 1, xmin 1, xmax 2"] -->|"t_ctid (0,22)"| new["élément 22 : runs 2, xmin 2, xmax 0"]
+    txold["transaction commencée avant la validation de la transaction 2"] --> old
+    txnew["les autres transactions"] --> new
+```
+
 SQL Server avec `READ_COMMITTED_SNAPSHOT` fait la même chose avec une autre organisation : la ligne est modifiée sur place, et l'ancienne version est copiée dans le version store. PostgreSQL garde les anciennes versions là où elles étaient, ce qui rend un rollback instantané, et laisse le nettoyage pour plus tard.
 
 ## Versions mortes et VACUUM

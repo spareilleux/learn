@@ -140,6 +140,16 @@ ERROR:  cannot execute DELETE in a read-only transaction
 
 El script espera hasta que `node2` haya reproducido la posición que `node1` había alcanzado tras el `INSERT`, y después lee. Sin esa espera, una lectura en un standby puede no ver una escritura recién confirmada en el primario: el retraso que la lección 3 describió para las Aurora Replicas.
 
+En este punto, los dos clusters funcionan así: las escrituras van a node1, y node2 reproduce su WAL y responde a las consultas de solo lectura.
+
+```mermaid
+flowchart LR
+    writes["escrituras"] --> node1["node1: primario, puerto 5433"]
+    node1 -->|"WAL, en streaming por el slot node2"| node2["node2: hot standby, puerto 5434"]
+    reads["consultas de solo lectura"] --> node2
+    delete["DELETE en node2"] -.->|"rechazado"| node2
+```
+
 ## Replicación síncrona
 
 Por defecto, un commit vuelve en cuanto el primario ha escrito su WAL. [`synchronous_standby_names`](https://www.postgresql.org/docs/18/runtime-config-replication.html#GUC-SYNCHRONOUS-STANDBY-NAMES) hace que espere también a los standbys ([líneas 59-73](https://github.com/spareilleux/learn/blob/eb0303d795a88c25a467391c1f127befe75c98f8/code/postgresql-aurora/ops/10-replication.sh#L59-L73)):
@@ -307,6 +317,17 @@ CREATE SUBSCRIPTION
 - [`CREATE PUBLICATION`](https://www.postgresql.org/docs/18/sql-createpublication.html) en el publicador enumera las tablas, aquí con un [filtro de filas](https://www.postgresql.org/docs/18/logical-replication-row-filter.html): solo las ejecuciones de `main`.
 - [`CREATE SUBSCRIPTION`](https://www.postgresql.org/docs/18/sql-createsubscription.html) en el suscriptor crea un slot de replicación lógica en el publicador, copia las filas existentes, y después aplica los cambios a medida que llegan. `pg_subscription_rel` muestra el estado de cada tabla; `r` significa listo.
 - 125 ejecuciones de `main` en `node3`, y no las otras dos.
+
+Tras el failover, pg_rewind y la suscripción, los tres clusters quedan conectados así: replicación física de node2 a node1, replicación lógica de node2 a node3.
+
+```mermaid
+flowchart LR
+    node2["node2: primario, timeline 2"]
+    node1["node1: standby, tras pg_rewind"]
+    node3["node3: cluster independiente, suscripción runs_from_node2"]
+    node2 -->|"física: WAL por el slot node1"| node1
+    node2 -->|"lógica: filas de ci.runs en main, publicación runs_on_main"| node3
+```
 
 El suscriptor es un primario como cualquier otro, y nada impide escribir en él ([líneas 110-119](https://github.com/spareilleux/learn/blob/eb0303d795a88c25a467391c1f127befe75c98f8/code/postgresql-aurora/ops/10-replication.sh#L110-L119)):
 

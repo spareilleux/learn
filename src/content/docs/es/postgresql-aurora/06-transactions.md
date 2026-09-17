@@ -120,6 +120,15 @@ CREATE EXTENSION
 
 La fila vive ahora en `(0,22)`, creada por la transacción 2. [`pageinspect`](https://www.postgresql.org/docs/18/pageinspect.html) lee la página en bruto: el elemento 2, la versión antigua, sigue ahí, con `xmax` 2 y un `t_ctid` que apunta a la nueva versión. Una transacción que empezó antes de que la transacción 2 confirmara sigue leyendo el elemento 2; las demás siguen la cadena hasta el elemento 22. Esto es [MVCC](https://www.postgresql.org/docs/18/mvcc-intro.html): cada transacción ve las versiones que estaban confirmadas cuando se tomó su instantánea, y nadie espera para leer.
 
+La página después de la actualización, en imagen: la versión antigua apunta a la nueva, y cada transacción lee la versión que su instantánea puede ver.
+
+```mermaid
+flowchart LR
+    old["elemento 2: runs 1, xmin 1, xmax 2"] -->|"t_ctid (0,22)"| new["elemento 22: runs 2, xmin 2, xmax 0"]
+    txold["transacción que empezó antes de que la transacción 2 confirmara"] --> old
+    txnew["las demás transacciones"] --> new
+```
+
 SQL Server con `READ_COMMITTED_SNAPSHOT` hace lo mismo con otra disposición: la fila se actualiza en su sitio, y la versión antigua se copia al version store. PostgreSQL deja las versiones antiguas donde estaban, lo que hace instantáneo un rollback, y deja la limpieza para más tarde.
 
 ## Versiones muertas y VACUUM

@@ -140,6 +140,16 @@ ERROR:  cannot execute DELETE in a read-only transaction
 
 Le script attend que `node2` ait rejoué la position que `node1` avait atteinte après l'`INSERT`, puis lit. Sans cette attente, une lecture sur un standby peut manquer une écriture tout juste validée sur le primaire : le retard que la leçon 3 décrivait pour les Aurora Replicas.
 
+À ce stade, les deux clusters fonctionnent ainsi : les écritures vont à node1, et node2 rejoue son WAL et répond aux requêtes en lecture seule.
+
+```mermaid
+flowchart LR
+    writes["écritures"] --> node1["node1 : primaire, port 5433"]
+    node1 -->|"WAL, envoyé en flux par le slot node2"| node2["node2 : hot standby, port 5434"]
+    reads["requêtes en lecture seule"] --> node2
+    delete["DELETE sur node2"] -.->|"refusé"| node2
+```
+
 ## Réplication synchrone
 
 Par défaut, un commit revient une fois que le primaire a écrit son WAL. [`synchronous_standby_names`](https://www.postgresql.org/docs/18/runtime-config-replication.html#GUC-SYNCHRONOUS-STANDBY-NAMES) le fait aussi attendre des standbys ([lignes 59-73](https://github.com/spareilleux/learn/blob/eb0303d795a88c25a467391c1f127befe75c98f8/code/postgresql-aurora/ops/10-replication.sh#L59-L73)) :
@@ -307,6 +317,17 @@ CREATE SUBSCRIPTION
 - [`CREATE PUBLICATION`](https://www.postgresql.org/docs/18/sql-createpublication.html) sur l'éditeur liste les tables, ici avec un [filtre de lignes](https://www.postgresql.org/docs/18/logical-replication-row-filter.html) : seulement les exécutions de `main`.
 - [`CREATE SUBSCRIPTION`](https://www.postgresql.org/docs/18/sql-createsubscription.html) sur l'abonné crée un slot de réplication logique sur l'éditeur, copie les lignes existantes, puis applique les modifications au fil de l'eau. `pg_subscription_rel` montre l'état de chaque table ; `r` signifie prête.
 - 125 exécutions de `main` sur `node3`, et pas les deux autres.
+
+Après le failover, pg_rewind et l'abonnement, les trois clusters sont reliés ainsi : réplication physique de node2 vers node1, réplication logique de node2 vers node3.
+
+```mermaid
+flowchart LR
+    node2["node2 : primaire, timeline 2"]
+    node1["node1 : standby, après pg_rewind"]
+    node3["node3 : cluster indépendant, abonnement runs_from_node2"]
+    node2 -->|"physique : WAL par le slot node1"| node1
+    node2 -->|"logique : lignes de ci.runs sur main, publication runs_on_main"| node3
+```
 
 L'abonné est un primaire comme un autre, et rien n'y empêche une écriture ([lignes 110-119](https://github.com/spareilleux/learn/blob/eb0303d795a88c25a467391c1f127befe75c98f8/code/postgresql-aurora/ops/10-replication.sh#L110-L119)) :
 

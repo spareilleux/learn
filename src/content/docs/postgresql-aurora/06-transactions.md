@@ -120,6 +120,15 @@ CREATE EXTENSION
 
 The row now lives at `(0,22)`, created by transaction 2. [`pageinspect`](https://www.postgresql.org/docs/18/pageinspect.html) reads the raw page: item 2, the old version, is still there, with `xmax` 2 and a `t_ctid` that points to the new version. A transaction that started before transaction 2 committed still reads item 2; the others follow the chain to item 22. This is [MVCC](https://www.postgresql.org/docs/18/mvcc-intro.html): each transaction sees the versions that were committed when its snapshot was taken, and nobody waits to read.
 
+The page after the update, drawn: the old version points to the new one, and each transaction reads the version its snapshot can see.
+
+```mermaid
+flowchart LR
+    old["item 2: runs 1, xmin 1, xmax 2"] -->|"t_ctid (0,22)"| new["item 22: runs 2, xmin 2, xmax 0"]
+    txold["transaction that started before transaction 2 committed"] --> old
+    txnew["the other transactions"] --> new
+```
+
 SQL Server with `READ_COMMITTED_SNAPSHOT` does the same with a different layout: the row is updated in place, and the old version is copied to the version store. PostgreSQL keeps old versions where they were, which makes a rollback instant, and leaves the cleanup for later.
 
 ## Dead versions and VACUUM
