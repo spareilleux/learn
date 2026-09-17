@@ -22,6 +22,14 @@ from .wsclient import WebSocket, WebSocketClosed
 KNOWN_COMMITS = {"0.36.0": "ee71d5c4993f29086b27fde1629a945ae48425bf"}
 
 
+def relative(path, start):
+    """path relative to start with forward slashes, or absolute when they are on different Windows drives."""
+    try:
+        return os.path.relpath(path, start).replace("\\", "/")
+    except ValueError:
+        return os.path.abspath(path).replace("\\", "/")
+
+
 def now():
     return datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds")
 
@@ -100,7 +108,7 @@ class Run:
                 raise ExperimentError(f"{self.experiment.path}: input {name!r} is not prepared")
             hashed_sets[path] = "sha256:" + prepared[name]["sha256"]
             upload_sets[path] = f"galab-{prepared[name]['sha256'][:16]}.png"
-        rel = os.path.relpath(wf_path, os.path.dirname(os.path.dirname(os.path.abspath(__file__)))).replace("\\", "/")
+        rel = relative(wf_path, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
         key = item_key({"prompt": apply_sets(workflow, hashed_sets, rel)})
         prompt = apply_sets(workflow, upload_sets, rel)
         return key, rel, prompt, refs
@@ -217,7 +225,7 @@ class Run:
             "memory_rule": {"margin_gb": self.args.margin_gb, "extra_gb": exp.extra_memory_gb,
                             "min_free_vram_gb": self.args.min_free_vram_gb,
                             "method": "see runner/memory.py"},
-            "inputs": {k: {"file": os.path.relpath(v["path"], self.out).replace("\\", "/"), "sha256": v["sha256"]}
+            "inputs": {k: {"file": relative(v["path"], self.out), "sha256": v["sha256"]}
                        for k, v in prepared.items()},
             "runs": (previous or {}).get("runs", []),
             "items": [],
@@ -307,8 +315,8 @@ class Run:
                 outputs, texts = self.download(prompt_id, record["key"])
                 record.update(status="done", outputs=outputs, texts=texts, finished_at=now(), error=None)
                 for o in outputs:
-                    o["file"] = os.path.relpath(o["file"], self.out).replace("\\", "/") \
-                        if os.path.abspath(o["file"]).startswith(self.out) else o["file"]
+                    o["file"] = relative(o["file"], self.out) \
+                        if os.path.abspath(o["file"]).startswith(self.out + os.sep) else o["file"]
                 self.loaded |= needed
                 self.last_models = needed
                 log(f"  done in {wall:.2f} s, {len(outputs)} output(s)")

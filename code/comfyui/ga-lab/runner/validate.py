@@ -28,8 +28,8 @@ def problems(workflow, info, name):
             if key not in declared:
                 found.append(f"{name} node {node_id} ({cls}): no input {key!r}")
                 continue
-            if isinstance(value, list) or key in LOADERS.get(cls, {}):
-                continue
+            if isinstance(value, list) or key in LOADERS.get(cls, {}) or (key == "image" and cls.startswith("LoadImage")):
+                continue  # links, model files, and input images the runner uploads at run time
             kind = declared[key][0] if declared[key] else None
             options = kind if isinstance(kind, list) else (declared[key][1].get("options") if kind == "COMBO" and
                                                            len(declared[key]) > 1 else None)
