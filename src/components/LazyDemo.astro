@@ -1,5 +1,5 @@
 ---
-// A live demo that costs nothing until the reader asks for it: a screenshot and a button, replaced on click by an iframe
+// A screenshot and button load with the lesson; the live demo loads only on click, replacing them with an iframe
 // of a page built into public/. `path` is relative to the site's base (e.g. "ga-lab/p1/"), so it works under /learn/.
 interface Props {
 	path: string;
@@ -28,7 +28,8 @@ const shot = base + screenshot;
 	.lazy-demo { margin: 1.5rem 0; }
 	.lazy-demo-frame { position: relative; width: 100%; height: var(--demo-height); background: #0d1117; border-radius: 0.5rem; overflow: hidden; }
 	.lazy-demo-frame img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; }
-	.lazy-demo-frame iframe { width: 100%; height: 100%; border: 0; }
+	/* The click handler creates this element after Astro has applied its scope classes. */
+	.lazy-demo-frame :global(iframe) { width: 100%; height: 100%; border: 0; }
 	.lazy-demo button { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); padding: 0.6rem 1.2rem; font-size: 1rem; border-radius: 0.5rem; border: 0; background: var(--sl-color-accent); color: var(--sl-color-black); cursor: pointer; }
 	.lazy-demo figcaption { font-size: var(--sl-text-sm); color: var(--sl-color-gray-3); margin-top: 0.4rem; }
 	@media (max-width: 640px) { .lazy-demo-frame { height: 70vh; } }

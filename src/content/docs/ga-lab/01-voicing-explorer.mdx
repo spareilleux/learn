@@ -1,6 +1,6 @@
 ---
 title: "P1: Voicing space explorer"
-description: GA's 297,910 guitar voicings as a 3D point cloud you can orbit, hover, click and hear — a deterministic build step from GA's OPTIC-K index (PCA, a seeded sample, exact neighbours), a three.js WebGPU page, and measurements of what the picture keeps and what it hides.
+description: A fixed sample of 30,000 of GA's 297,910 guitar voicings as a 3D point cloud you can orbit, hover, click and hear — a deterministic build step from GA's OPTIC-K index (PCA, a seeded sample, exact neighbours), a three.js WebGPU page, and measurements of what the picture keeps and what it hides.
 sidebar:
   label: "P1: Voicing explorer"
   order: 1
@@ -8,7 +8,7 @@ sidebar:
 
 import LazyDemo from '../../../components/LazyDemo.astro';
 
-Guitar Alchemist keeps every guitar voicing it knows as a list of 124 numbers. This prototype turns 30,000 of them into a cloud of points you can turn around, point at and listen to, and then measures how much of the real space the picture shows. The short answer: a useful map, and a poor neighbourhood guide.
+The pinned Guitar Alchemist index stores each voicing as a compact vector of 124 numbers, extracted from the 240-dimensional OPTIC-K embedding. This prototype displays a fixed sample of 30,000 of its 297,910 guitar voicings as a cloud of points you can turn around, point at and listen to, and then measures how much of the real space the picture shows. The short answer: a useful map, and a poor neighbourhood guide.
 
 <LazyDemo
 	path="ga-lab/p1/"
@@ -16,8 +16,10 @@ Guitar Alchemist keeps every guitar voicing it knows as a list of 124 numbers. T
 	screenshot="ga-lab/p1-explorer.png"
 	alt="A cloud of coloured points on a dark background, with a panel showing an open chord diagram and its ten nearest voicings"
 	label="Load the explorer (3.7 MB)"
-	note="Nothing is downloaded until you click. Drag to orbit, hover to name a voicing, click to select and hear it. Full page:"
+	note="The preview image loads with the lesson; the explorer and its data load only after you click. The demo interface is in English. Drag to orbit, hover to name a voicing, click to select and hear it. Full page:"
 />
+
+In the published version, the ten neighbours are searched within the **30,000 sampled voicings**, not the whole index. Filters hide cloud points without recomputing that list; the selection and its highlighted neighbours can therefore remain visible despite a filter. On small screens, open the full page for more room. If WebGPU does not work, try the [WebGL 2 version](https://spareilleux.github.io/learn/ga-lab/p1/?webgl).
 
 The published page weighs 3.7 MB: 2.7 MB of voicings, 0.9 MB of JavaScript with three.js, and a manifest. Every number in this lesson comes from [`code/ga-protos/p1-voicing-explorer`](https://github.com/spareilleux/learn/tree/main/code/ga-protos/p1-voicing-explorer), and the hypotheses were [committed](https://github.com/spareilleux/learn/blob/03f2bbb/code/ga-protos/p1-voicing-explorer/results/hypotheses.md) before the measurements.
 

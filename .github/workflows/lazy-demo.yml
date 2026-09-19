@@ -1,0 +1,24 @@
+name: Lazy demo regression
+
+on:
+  push:
+    branches: [main]
+    paths: ['src/components/LazyDemo.astro', 'scripts/tests/lazy-demo.test.mjs', 'package.json', 'package-lock.json', '.github/workflows/lazy-demo.yml']
+  pull_request:
+    paths: ['src/components/LazyDemo.astro', 'scripts/tests/lazy-demo.test.mjs', 'package.json', 'package-lock.json', '.github/workflows/lazy-demo.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  lazy-demo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24.21.0
+          cache: npm
+      - run: npm ci
+      - run: node --test scripts/tests/lazy-demo.test.mjs
