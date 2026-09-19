@@ -1,6 +1,6 @@
 ---
 title: "P1 : explorateur de l'espace des voicings"
-description: Les 297 910 voicings de guitare de GA en nuage de points 3D qu'on peut faire tourner, survoler, cliquer et écouter — une étape de construction déterministe depuis l'index OPTIC-K de GA (ACP, échantillon à graine fixe, voisins exacts), une page three.js WebGPU, et des mesures de ce que l'image garde et de ce qu'elle cache.
+description: Un échantillon fixe de 30 000 des 297 910 voicings de guitare de GA en nuage de points 3D qu'on peut faire tourner, survoler, cliquer et écouter — une étape de construction déterministe depuis l'index OPTIC-K de GA (ACP, échantillon à graine fixe, voisins exacts), une page three.js WebGPU, et des mesures de ce que l'image garde et de ce qu'elle cache.
 sidebar:
   label: "P1 : explorateur de voicings"
   order: 1
@@ -8,7 +8,7 @@ sidebar:
 
 import LazyDemo from '../../../../components/LazyDemo.astro';
 
-Guitar Alchemist range chaque voicing de guitare qu'il connaît sous forme d'une liste de 124 nombres. Ce prototype en transforme 30 000 en un nuage de points qu'on peut faire tourner, pointer et écouter, puis mesure quelle part de l'espace réel l'image montre. La réponse courte : une bonne carte, et un mauvais guide du voisinage.
+L'index épinglé de Guitar Alchemist stocke chaque voicing sous forme d'un vecteur compact de 124 nombres, extrait du plongement OPTIC-K à 240 dimensions. Ce prototype affiche un échantillon fixe de 30 000 de ses 297 910 voicings de guitare dans un nuage de points qu'on peut faire tourner, pointer et écouter, puis mesure quelle part de l'espace réel l'image montre. La réponse courte : une bonne carte, et un mauvais guide du voisinage.
 
 <LazyDemo
 	path="ga-lab/p1/"
@@ -16,8 +16,10 @@ Guitar Alchemist range chaque voicing de guitare qu'il connaît sous forme d'une
 	screenshot="ga-lab/p1-explorer.png"
 	alt="Un nuage de points colorés sur fond sombre, avec un panneau qui montre un diagramme d'accord ouvert et ses dix voicings les plus proches"
 	label="Charger l'explorateur (3,7 Mo)"
-	note="Rien n'est téléchargé avant le clic. Faites glisser pour tourner, survolez pour nommer une voicing, cliquez pour la sélectionner et l'entendre. Page complète :"
+	note="L'image d'aperçu se charge avec la leçon ; l'explorateur et ses données ne se chargent qu'après le clic. L'interface de la démo est en anglais. Faites glisser pour tourner, survolez pour nommer un voicing, cliquez pour le sélectionner et l'entendre. Page complète :"
 />
+
+Dans la version publiée, les dix voisins sont recherchés parmi les **30 000 voicings de l'échantillon**, pas parmi tout l'index. Les filtres masquent des points du nuage sans recalculer cette liste ; la sélection et ses voisins surlignés peuvent donc rester visibles malgré un filtre. Sur petit écran, ouvrez la page complète pour disposer de plus de place. Si WebGPU ne fonctionne pas, essayez la [version WebGL 2](https://spareilleux.github.io/learn/ga-lab/p1/?webgl).
 
 La page publiée pèse 3,7 Mo : 2,7 Mo de voicings, 0,9 Mo de JavaScript avec three.js, et un manifeste. Chaque chiffre de cette leçon vient de [`code/ga-protos/p1-voicing-explorer`](https://github.com/spareilleux/learn/tree/main/code/ga-protos/p1-voicing-explorer), et les hypothèses ont été [commitées](https://github.com/spareilleux/learn/blob/03f2bbb/code/ga-protos/p1-voicing-explorer/results/hypotheses.md) avant les mesures.
 
