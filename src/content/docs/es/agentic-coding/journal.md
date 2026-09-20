@@ -13,8 +13,11 @@ sidebar:
 - [x] Lección 2: contexto de proyecto, `CLAUDE.md`, `AGENTS.md`, memoria y compactación
 - [x] Lección 3: hooks, skills y subagentes
 - [x] Lección 4: MCP, un servidor C# para ambos agentes
+- [x] Lección 5: skills de Matt Pocock y workflow de tracer bullets
+- [x] Lección 6: laboratorio acotado de aislamiento Sandcastle
+- [x] Lección 7: ciclo de Compound Engineering y aprendizaje duradero
 - [ ] Sesiones de Codex: todas las capturas que necesitan el modelo (límite de uso hasta el 2026-09-19)
-- [ ] Lección 5: trabajar en GuitarAlchemist/ga
+- [ ] Lección 8: trabajar en GuitarAlchemist/ga
 
 ## 2026-09-14 — Versiones e instalación
 
@@ -92,6 +95,13 @@ Hallazgos para el autor de ga; este curso no escribe en ga, y no se ha informado
 - **ModelContextProtocol 1.3.0** en `GaMcpServer.csproj`, subido desde 1.1.0 porque el paquete complementario de gobernanza depende de `>= 1.3.0`; la versión estable actual es la 2.2.0, que habla la revisión 2026-07-28.
 - **`Scripts/sync-agents-md.ps1`**: su ayuda dice que un aviso «do not edit» se «añade al principio», mientras que el código sustituye la línea de la nota; inofensivo, pero el comentario está desactualizado. `CLAUDE.md` nombra además la versión `2.1.126` de la extensión de Claude Code, 145 versiones de parche por detrás.
 
+## 2026-09-20 — Tutoriales de workflow agéntico
+
+- Versiones fijadas: skills de Matt Pocock `c55ee460`, Sandcastle `e99f832f` (paquete 0.12.0) y Compound Engineering `6be0932b` (plugin 3.27.0).
+- Lecciones 5–7 añadidas en inglés, francés y español a partir de fuentes upstream primarias.
+- No se usó ningún plugin, credencial ni proveedor de pago. Las ejecuciones Sandcastle y con modelo siguen siendo experimentos manuales.
+- Se documentó el conflicto upstream entre la antigua configuración Sandcastle en `config.json` y las plantillas TypeScript actuales, sin decidirlo en silencio.
+
 ## Por verificar
 
 - Los comandos de instalación de la lección 1 en Linux, WSL y macOS, para ambos agentes, y el instalador PowerShell de Codex.
@@ -105,3 +115,5 @@ Hallazgos para el autor de ga; este curso no escribe en ga, y no se ha informado
 - Si Claude Code y Codex toleran una línea no JSON en la stdout de un servidor, como hace el cliente del SDK.
 - Por qué el `AGENTS.md` releído llegó a la sesión solo con el siguiente mensaje entrante tras la compactación: repetir con un `CLAUDE.md` simple, sin importación, en 2.1.271.
 - `codex exec -o`: si el archivo lo escribe la CLI fuera del sandbox en modo `read-only`.
+- Una captura de instalación desechable para cada workflow, sin instalar suites solapadas en el mismo fixture.
+- Una ejecución Sandcastle con Docker, rama explícita, una iteración, sin merge y evidencia de pruebas controlada por el host.

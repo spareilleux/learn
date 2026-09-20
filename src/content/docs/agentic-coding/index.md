@@ -58,9 +58,12 @@ Sources: [how Claude Code works](https://code.claude.com/docs/en/how-claude-code
 | 2 | [Project context: `CLAUDE.md`, `AGENTS.md`, memory and compaction](02-project-context/) | `README.md`, `.editorconfig`, a wiki page nobody reads |
 | 3 | [Hooks, skills and subagents](03-hooks-skills-subagents/) | Git hooks, analyzers, scripts in `tools/` |
 | 4 | [MCP: a C# server for both agents](04-mcp/) | a JSON-RPC or gRPC service, dependency injection |
-| 5 | Working on GuitarAlchemist/ga: plan, build, test, review (coming next) | a pull request review |
-| 6 | Agents in CI, and several agents on one repository | GitHub Actions, branch protection |
-| 7 | Gaia and IX: agents that run other agents | orchestration, queues |
+| 5 | [Matt Pocock skills: executable engineering methods](05-matt-pocock-skills/) | runbooks, TDD, issue decomposition |
+| 6 | [Sandcastle: one isolated agent run](06-sandcastle/) | containers, branches, process isolation |
+| 7 | [Compound Engineering: close the learning loop](07-compound-engineering/) | delivery pipelines, postmortems, reusable documentation |
+| 8 | Working on GuitarAlchemist/ga: plan, build, test, review (coming next) | a pull request review |
+| 9 | Agents in CI, and several agents on one repository | GitHub Actions, branch protection |
+| 10 | Gaia and IX: agents that run other agents | orchestration, queues |
 | — | [Journal](journal/) | |
 
 ## Resources

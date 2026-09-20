@@ -58,9 +58,12 @@ Sources : [comment fonctionne Claude Code](https://code.claude.com/docs/en/how-c
 | 2 | [Le contexte du projet : `CLAUDE.md`, `AGENTS.md`, mémoire et compaction](02-project-context/) | `README.md`, `.editorconfig`, une page de wiki que personne ne lit |
 | 3 | [Hooks, skills et sous-agents](03-hooks-skills-subagents/) | les hooks Git, les analyseurs, les scripts dans `tools/` |
 | 4 | [MCP : un serveur C# pour les deux agents](04-mcp/) | un service JSON-RPC ou gRPC, l'injection de dépendances |
-| 5 | Travailler sur GuitarAlchemist/ga : planifier, compiler, tester, relire (à venir) | la revue d'une pull request |
-| 6 | Les agents en CI, et plusieurs agents sur un même dépôt | GitHub Actions, la protection de branche |
-| 7 | Gaia et IX : des agents qui lancent d'autres agents | l'orchestration, les files d'attente |
+| 5 | [Skills de Matt Pocock : des méthodes d’ingénierie exécutables](05-matt-pocock-skills/) | les runbooks, le TDD, le découpage en issues |
+| 6 | [Sandcastle : une exécution agent isolée](06-sandcastle/) | les conteneurs, les branches, l’isolation des processus |
+| 7 | [Compound Engineering : fermer la boucle d’apprentissage](07-compound-engineering/) | les pipelines de livraison, les postmortems, la documentation réutilisable |
+| 8 | Travailler sur GuitarAlchemist/ga : planifier, compiler, tester, relire (à venir) | la revue d'une pull request |
+| 9 | Les agents en CI, et plusieurs agents sur un même dépôt | GitHub Actions, la protection de branche |
+| 10 | Gaia et IX : des agents qui lancent d'autres agents | l'orchestration, les files d'attente |
 | — | [Journal](journal/) | |
 
 ## Ressources

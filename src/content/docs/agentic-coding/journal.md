@@ -13,8 +13,11 @@ sidebar:
 - [x] Lesson 2: project context, `CLAUDE.md`, `AGENTS.md`, memory and compaction
 - [x] Lesson 3: hooks, skills and subagents
 - [x] Lesson 4: MCP, a C# server for both agents
+- [x] Lesson 5: Matt Pocock skills and tracer-bullet workflow
+- [x] Lesson 6: Sandcastle bounded isolation lab
+- [x] Lesson 7: Compound Engineering lifecycle and durable learning
 - [ ] Codex sessions: every capture that needs the model (usage limit until 2026-09-19)
-- [ ] Lesson 5: working on GuitarAlchemist/ga
+- [ ] Lesson 8: working on GuitarAlchemist/ga
 
 ## 2026-09-14 — Versions and installation
 
@@ -92,6 +95,13 @@ Findings for the author of ga; this course doesn't write to ga, and nothing was 
 - **ModelContextProtocol 1.3.0** in `GaMcpServer.csproj`, raised from 1.1.0 because the governance companion package depends on `>= 1.3.0`; the current stable is 2.2.0, which speaks the 2026-07-28 revision.
 - **`Scripts/sync-agents-md.ps1`**: its help says a "do not edit" warning is "appended at the top", while the code replaces the note line; harmless, but the comment is out of date. `CLAUDE.md` also names the Claude Code extension version `2.1.126`, 145 patch versions behind.
 
+## 2026-09-20 — Agent workflow tutorials
+
+- Pinned Matt Pocock skills at `c55ee460`, Sandcastle at `e99f832f` (package 0.12.0), and Compound Engineering at `6be0932b` (plugin 3.27.0).
+- Added lessons 5–7 in English, French and Spanish from primary upstream sources.
+- No plugin, credential or paid provider was used. Sandcastle and model-backed plugin runs remain manual experiments.
+- Recorded the upstream Sandcastle conflict between the old `config.json` documentation and the current TypeScript templates instead of choosing silently.
+
 ## To verify
 
 - The install commands of lesson 1 on Linux, WSL and macOS, for both agents, and Codex's PowerShell installer.
@@ -105,3 +115,5 @@ Findings for the author of ga; this course doesn't write to ga, and nothing was 
 - Whether Claude Code and Codex tolerate a non-JSON line on a server's stdout, like the SDK client does.
 - Why the re-read `AGENTS.md` reached the session only with the next incoming message after compaction: repeat with a plain `CLAUDE.md`, without import, on 2.1.271.
 - `codex exec -o`: whether the file is written by the CLI outside the sandbox in `read-only` mode.
+- A disposable installation capture for each workflow, without installing overlapping suites in the same fixture.
+- A Sandcastle Docker run on an explicit branch with one iteration, no merge, and host-owned test evidence.
