@@ -149,6 +149,14 @@ sidebar:
 
 *Failures, before the fix. ComfyUI v0.36.0: Z-Image-Turbo nvfp4 with Qwen3 4B fp4 mixed, seed 42, 8 steps, CFG 1, `res_multistep`, `simple`, workflow [`09-seamless.api.json`](https://github.com/spareilleux/learn/blob/d16b4d70b565257067309b7b8d7f51408cb81741/code/comfyui/workflows/09-seamless.api.json) with its cross set to 160 pixels, 64 of feather and denoise 0.7. From left to right: rosewood repeated 2 × 2; the middle 512 × 512 pixels of the rosewood; the prompt "flat top-down photograph of pale maple, subtle straight grain, even soft lighting, no shadows, wood texture", repeated 2 × 2.*
 
+## 2026-09-19 — ComfyUI preflight for the orbital scene
+
+A separate CPU server (0.36.0, localhost:8193) confirmed all node classes of the course's Canny workflow, the installed SDXL checkpoint and union ControlNet. No prompt was submitted; GPU inference remained 0 s. The server was stopped after the check. Unexpectedly, `--base-directory` alone migrated the installation's legacy `user/comfyui.db` to a `.bak` and copied it into the test directory. The original file was restored from that backup without overwriting another file; both SHA-256 values matched. The backup was retained. Subsequent isolated probes must specify `--database-url sqlite:///:memory:` or an explicit task-local database URL. Inference and image quality remain to verify.
+
+## 2026-09-19 — Actual Blender-to-ComfyUI preprocessing
+
+The Blender v2 render was copied into the isolated ComfyUI input directory. `LoadImage → Canny → SaveImage` completed successfully on CPU in **3.731 s** (history timestamps); the output was visually inspected. Rings, pillars and causeway edges remain visible. This is a control image, not an SDXL-generated scene or new 3D geometry. Prompt ID: `7f26de5e-5d83-455c-97be-1e3401e9ba5f`. Output: `C:/tmp/blender-comfy-scenes-20260919/comfy-base/output/orbital-study/canny-edges_00001_.png`. The explicit in-memory database prevented the previous migration; the installation database hash remained unchanged. GPU time and paid API calls: **0**. SDXL inference was deferred rather than loading both models under limited available host RAM (about 10 GiB).
+
 ## To verify
 
 - SDXL on Linux with CUDA, and on Apple Silicon with MPS: the course's GPU machine runs Windows; CI only installs the CPU builds.

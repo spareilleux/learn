@@ -149,6 +149,14 @@ sidebar:
 
 *Los fallos, antes de la corrección. ComfyUI v0.36.0: Z-Image-Turbo nvfp4 con Qwen3 4B fp4 mixed, semilla 42, 8 pasos, CFG 1, `res_multistep`, `simple`, workflow [`09-seamless.api.json`](https://github.com/spareilleux/learn/blob/d16b4d70b565257067309b7b8d7f51408cb81741/code/comfyui/workflows/09-seamless.api.json) con su cruz ajustada a 160 píxeles, 64 de difuminado y un denoise de 0,7. De izquierda a derecha: el palisandro repetido 2 × 2; los 512 × 512 píxeles centrales del palisandro; el prompt "flat top-down photograph of pale maple, subtle straight grain, even soft lighting, no shadows, wood texture" (foto cenital de arce claro, con veta fina y recta, luz suave y uniforme, sin sombras, textura de madera), repetido 2 × 2.*
 
+## 2026-09-19 — Verificación de ComfyUI para la escena orbital
+
+Un servidor CPU separado (0.36.0, localhost:8193) confirmó las clases de nodos del workflow Canny del curso, el checkpoint SDXL y el ControlNet union instalados. No se envió ningún prompt; inferencia GPU: 0 s. Después se detuvo el servidor. Efecto inesperado: `--base-directory` por sí solo movió el antiguo `user/comfyui.db` de la instalación a un `.bak` y lo copió al directorio de prueba. Se restauró el archivo original desde esa copia sin sobrescribir otro archivo; ambos SHA-256 coinciden. Se conservó la copia. Las próximas pruebas aisladas deben indicar `--database-url sqlite:///:memory:` o una URL de base exclusiva de la prueba. La inferencia y la calidad de imagen siguen por verificar.
+
+## 2026-09-19 — Preprocesamiento real de Blender a ComfyUI
+
+El render Blender v2 se copió al directorio de entrada ComfyUI aislado. `LoadImage → Canny → SaveImage` terminó correctamente en CPU en **3.731 s** (marcas del historial); se inspeccionó la imagen. Se conservan los bordes de anillos, pilares y pasillo. Es una imagen de control, no una escena generada por SDXL ni geometría 3D nueva. ID: `7f26de5e-5d83-455c-97be-1e3401e9ba5f`. Salida: `C:/tmp/blender-comfy-scenes-20260919/comfy-base/output/orbital-study/canny-edges_00001_.png`. La base explícita en memoria evitó la migración anterior; el hash de la base de la instalación no cambió. Tiempo GPU y llamadas API de pago: **0**. Se aplazó la inferencia SDXL para no cargar ambos modelos con solo unos 10 GiB de RAM disponibles.
+
 ## Por verificar
 
 - SDXL en Linux con CUDA, y en Apple Silicon con MPS: la máquina con GPU del curso usa Windows; la CI solo instala las builds para CPU.

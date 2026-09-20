@@ -79,6 +79,19 @@ Lo que dijeron los informes:
 - **Detalles menores.** El metrónomo tenía un vértice sin ninguna cara: glTF lo descarta, así que el tamaño releído era menor que el escrito. El pipeline borra ahora esos vértices. El origen se vuelve a poner abajo tras el remesh sin volver a escalar, por lo que el metrónomo remallado mide 22,98 cm de alto en lugar de 23.
 - **Tiempo, en la máquina del autor.** De 17 a 29 s por modelo para todo el pipeline, importación y exportación incluidas; de 0,15 a 0,36 s por imagen de turntable a 512 × 512 px y 32 muestras, Cycles en la CPU. Los tamaños reales (23 cm y 60 cm de alto) son elecciones para esta prueba, no medidas.
 
+## 2026-09-19 — Catedral orbital: encuadre antes de la generación
+
+Este estudio procedural reutiliza `stage.aim` y `stage.area_light` del curso. Hipótesis previa: una vista previa en CPU con pocas muestras basta para evaluar el encuadre antes de usar la GPU para ComfyUI.
+
+- Windows, Blender 5.2.2 LTS, Cycles CPU, 8 hilos, 24 muestras, 1100 × 700 píxeles, 314 objetos.
+- Primer render: **6.698 s**. La cámara oblicua colocó pilares delante de los anillos; la inspección visual descartó ese encuadre.
+- Segundo render: **7.025 s**. La cámara centrada deja visibles los anillos y el pasillo. Ambos procesos terminaron con código 0; el script comprueba los objetos y la salida PNG.
+- Veredicto: confirmado para detectar este defecto de encuadre, no para la calidad final. Tiempo total de render: **13.723 s**; render en GPU: **0 s**.
+- Código: `code/blender/scripts/orbital_cathedral.py`. Evidencia local: `C:/tmp/blender-comfy-scenes-20260919/orbital-v1/` y `orbital-v2/`, cada una con PNG, blend editable e informe JSON. No se han publicado.
+- No se modificó la escena abierta del usuario. MCP no respondió; el estudio se creó en un proceso separado con configuración de fábrica.
+- ComfyUI no estaba disponible en el puerto 8188. No hubo inferencia ComfyUI, API de pago ni descarga de modelos. El código del artefacto Claude sigue sin leerse: es un estudio original, no una adaptación.
+- Advertencias no fatales: asignaciones `use_nodes` obsoletas y rutas de pinceles integrados que Blender no pudo convertir en relativas. Linux/macOS, portabilidad del blend, refinamiento de materiales y la etapa ComfyUI quedan **por verificar**.
+
 ## Por verificar
 
 - La instalación con winget, Snap y Flathub, y las versiones que ofrecen.
