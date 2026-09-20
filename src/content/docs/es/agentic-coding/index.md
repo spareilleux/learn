@@ -58,9 +58,12 @@ Fuentes: [cómo funciona Claude Code](https://code.claude.com/docs/en/how-claude
 | 2 | [Contexto de proyecto: `CLAUDE.md`, `AGENTS.md`, memoria y compactación](02-project-context/) | `README.md`, `.editorconfig`, una página de wiki que nadie lee |
 | 3 | [Hooks, skills y subagentes](03-hooks-skills-subagents/) | los hooks de Git, los analizadores, los scripts de `tools/` |
 | 4 | [MCP: un servidor C# para ambos agentes](04-mcp/) | un servicio JSON-RPC o gRPC, la inyección de dependencias |
-| 5 | Trabajar en GuitarAlchemist/ga: planificar, compilar, probar, revisar (próximamente) | la revisión de una pull request |
-| 6 | Agentes en la CI, y varios agentes en un mismo repositorio | GitHub Actions, la protección de ramas |
-| 7 | Gaia e IX: agentes que ejecutan otros agentes | orquestación, colas |
+| 5 | [Skills de Matt Pocock: métodos de ingeniería ejecutables](05-matt-pocock-skills/) | runbooks, TDD, división en issues |
+| 6 | [Sandcastle: una ejecución aislada de un agente](06-sandcastle/) | contenedores, ramas, aislamiento de procesos |
+| 7 | [Compound Engineering: cerrar el ciclo de aprendizaje](07-compound-engineering/) | pipelines de entrega, postmortems, documentación reutilizable |
+| 8 | Trabajar en GuitarAlchemist/ga: planificar, compilar, probar, revisar (próximamente) | la revisión de una pull request |
+| 9 | Agentes en la CI, y varios agentes en un mismo repositorio | GitHub Actions, la protección de ramas |
+| 10 | Gaia e IX: agentes que ejecutan otros agentes | orquestación, colas |
 | — | [Diario](journal/) | |
 
 ## Recursos
