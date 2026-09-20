@@ -17,6 +17,12 @@ Chaque artefact est daté et décrit un dépôt à un moment donné. Contraireme
 
 Les douze plays de l'[AI-Native SDLC Playbook](https://academy.claude.com/courses/ai-native-sdlc-playbook) d'Anthropic (plan, design, build, test, deploy, maintain), confrontés un par un à ce que font réellement les dépôts IX et Demerzel. Chaque play reçoit un verdict dans la logique hexavalente de l'écosystème, avec la preuve sur laquelle il repose et l'écart à combler. La page se termine par les cinq écarts prioritaires et quatre idées de leçons pour la série sur l'IA agentique : les tests verts qui ne testent rien, les hooks comme gates d'approbation, la séparation des rôles avec un agent, et décider avant d'implémenter.
 
+### Ce qui sert vraiment dans IX
+
+[Ouvrir l'artefact](https://claude.ai/code/artifact/e1d9e83e-608f-4b20-9061-0026025af1d5) · français, anglais et espagnol · 2026-09-13 · IX à `ed5e998` (v0.5.0)
+
+Un audit d'usage des 81 crates d'IX, classés selon ce qui les exécute réellement plutôt que selon ce que promettent leurs README : workflows planifiés, gates de PR, contrats consommés par d'autres dépôts, et commandes lancées par les agents sur neuf mois de sessions. Six tiers vont du porteur (12 crates) à l'orphelin (13), et un tiers du code n'est accessible que par un serveur MCP que les agents ont appelé deux fois. La page se termine par cinq décisions et la méthode derrière les chiffres.
+
 ### Demerzel × ComfyUI — Governed Asset Pipeline
 
 [Ouvrir l'artefact](https://claude.ai/code/artifact/cc15cb21-c3f9-486a-b758-4127000246c8) · anglais · 2026-07-18
