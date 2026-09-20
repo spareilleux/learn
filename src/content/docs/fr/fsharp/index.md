@@ -55,18 +55,18 @@ Chaque leçon part de ce que vous écririez en C# (et en Java quand c'est diffé
 | 2 | [Valeurs, fonctions et inférence de types](02-values-and-functions/) | `let`, immuabilité, `mutable`, inférence, curryfication, application partielle, `\|>` et `>>`, des expressions partout | `HarmonicTransformationService` de GA, `TextNormalizer` de TARS |
 | 3 | [Tuples, records, unions et options](03-records-unions-options/) | tuples, records et `with`, unions discriminées, `Option`, unions à un seul cas, `RequireQualifiedAccess` | `ChordAst` de GA, `Domain.fs` et `Primitives.fs` de TARS |
 | 4 | [Filtrage par motif](04-pattern-matching/) | `match`, gardes, motifs « ou », motifs de listes et de records, avertissements d'exhaustivité | `ChordRenderer`, `ChordParser` et `BinObj.fsx` de GA, `AgentWorkflow.fs` de TARS |
-| 5 | Listes, tableaux et séquences | modules `List`, `Array` et `Seq`, pipelines à côté de LINQ et des streams, évaluation paresseuse | |
-| 6 | Modules, espaces de noms et organisation d'un projet | modules, espaces de noms, `private` et `internal`, fichiers de signature | |
+| 5 | [Listes, tableaux et séquences](05-lists-arrays-sequences/) | modules `List`, `Array` et `Seq`, pipelines à côté de LINQ et des streams, évaluation paresseuse | |
+| 6 | [Modules, espaces de noms et organisation d'un projet](06-modules-namespaces/) | modules, espaces de noms, `private` et `internal`, fichiers de signature | |
 | | **Intermédiaire** | | |
-| 7 | Les erreurs avec `Result` | programmation orientée « rails », `Result` à côté des exceptions | |
-| 8 | Expressions de calcul | `seq`, `async`, `task`, un builder `result` écrit à la main | `asyncResult` de TARS |
+| 7 | [Les erreurs avec `Result`](07-result-errors/) | programmation orientée « rails », `Result` à côté des exceptions | |
+| 8 | [Expressions de calcul — un parseur pour un DSL](08-computation-expressions/) | `seq`, `async`, `task`, builders, `Bind`, `Return`, un parser CE et la fin explicite du texte | le DSL musical de GA |
 | 9 | Les objets en F# | classes, interfaces, expressions objet, appel de bibliothèques C# | |
 | 10 | Tests | xUnit, tests de propriétés avec FsCheck, Expecto | |
 | 11 | Parseurs | FParsec et combinateurs écrits à la main | le DSL musical de GA |
 | 12 | Modéliser un domaine | unités de mesure, types fantômes, rendre les états illégaux non représentables | `Budget` de TARS |
 | | **Avancé et expert** | | |
 | 13 | Expressions de calcul personnalisées | builders, `let!` et `and!`, ce que génère le compilateur | `AgentWorkflow` de TARS |
-| 14 | Fournisseurs de types, quotations et réflexion | | |
+| 14 | [Type providers — des données typées à partir d'un échantillon](14-type-providers/) | providers effacés et génératifs, inférence CSV et JSON, stabilité du schéma | FSharp.Data |
 | 15 | Performance | structs, `inline`, `Span`, `voption`, allocations mesurées avec BenchmarkDotNet | |
 | 16 | Concurrence | `MailboxProcessor`, `Async` à côté de `Task`, canaux | |
 | 17 | Métaprogrammation | Myriad, FSharp.Compiler.Service | le pool de sessions F# Interactive de GA |
@@ -75,7 +75,7 @@ Chaque leçon part de ce que vous écririez en C# (et en Java quand c'est diffé
 | 20 | Publier une bibliothèque F# pour C# | conception d'API, `[<CompiledName>]`, options et unions vues de C# | |
 | — | [Journal](journal/) | | |
 
-Les leçons 5 à 20 sont prévues et pas encore écrites.
+Les leçons 9 à 13 et 15 à 20 sont prévues et pas encore écrites.
 
 ## Prérequis
 

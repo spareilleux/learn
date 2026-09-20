@@ -13,7 +13,18 @@ sidebar:
 - [x] Leçon 2 : valeurs, fonctions et inférence de types
 - [x] Leçon 3 : tuples, records, unions et options
 - [x] Leçon 4 : filtrage par motif
-- [ ] Leçon 5 : listes, tableaux et séquences
+- [x] Leçon 5 : listes, tableaux et séquences
+- [x] Leçon 6 : modules, espaces de noms et organisation d'un projet
+- [x] Leçon 7 : les erreurs avec `Result`
+- [x] Leçon 8 : expressions de calcul appliquées au parsing d'un DSL
+- [x] Leçon 14 : type providers CSV et JSON avec FSharp.Data 8.2.0
+
+## Expériences
+
+| Question | Hypothèse | Résultat mesuré | Verdict | Preuve |
+|---|---|---|---|---|
+| Une expression de calcul minimale rend-elle la grammaire d'un DSL lisible sans masquer les erreurs ? | `Bind` et `Return` suffisent pour la grammaire séquentielle de notes. | Quatre cas passent, dont le rejet d'une lettre invalide et du texte restant. | Confirmée | [Entrée du 2026-09-20](#2026-09-20--expressions-de-calcul-et-type-providers), [`l08_parser_ce.fsx`](https://github.com/spareilleux/learn/blob/main/code/fsharp/examples/l08_parser_ce.fsx) |
+| FSharp.Data infère-t-il des membres CSV et JSON imbriqués utiles sous .NET 10 ? | FSharp.Data 8.2.0 exposera les colonnes et propriétés typées en F# 10. | Deux lignes CSV et un document JSON imbriqué compilent et affichent les valeurs typées attendues. | Confirmée | [Entrée du 2026-09-20](#2026-09-20--expressions-de-calcul-et-type-providers), [`l14_type_providers.fsx`](https://github.com/spareilleux/learn/blob/main/code/fsharp/examples/l14_type_providers.fsx) |
 
 ## 2026-09-15 — Le SDK et F# Interactive
 
@@ -71,6 +82,19 @@ La leçon 4 compare la vérification d'exhaustivité de F# à celle de C#. Les d
   ```
 
 Les deux programmes se sont quand même exécutés et ont affiché leur résultat.
+
+## 2026-09-20 — Collections, modules et `Result`
+
+- Ajout de la leçon 5 avec des comparaisons exécutables entre les transformations immédiates de `List` et `Array` et un pipeline `Seq` paresseux.
+- Ajout de la leçon 6 avec des modules imbriqués, une visibilité explicite et un petit exemple d'organisation qui garde une surface publique étroite.
+- Ajout de la leçon 7 avec un pipeline de validation fondé sur `Result`, la composition explicite des erreurs et la frontière entre les échecs attendus et les exceptions.
+- `dotnet fsi` a reproduit les sorties conservées pour `l05_collections.fsx`, `l06_modules.fsx` et `l07_result.fsx` avec le SDK .NET 10.0.112.
+
+## 2026-09-20 — Expressions de calcul et type providers
+
+- Ajout de la leçon 8 autour d'un vrai builder `Parser<'T>`. Le harness exécute les cas de succès, de token invalide et de texte restant ; ce dernier rend explicite l'invariant de fin d'entrée.
+- Ajout de la leçon 14 avec FSharp.Data 8.2.0, épinglé depuis NuGet. Les échantillons CSV et JSON sont des chaînes locales : le typage ne dépend pas d'un schéma distant.
+- `dotnet fsi` a produit les sorties conservées dans `expected/l08_parser_ce.txt` et `expected/l14_type_providers.txt` avec le SDK .NET 10.0.112.
 
 ## À vérifier
 
