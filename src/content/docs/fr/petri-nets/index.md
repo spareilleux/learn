@@ -7,7 +7,7 @@ sidebar:
 ---
 
 :::note[Sur quoi tourne ce cours]
-L'analyseur de ce cours est un projet C# dans [`code/petri-nets`](https://github.com/spareilleux/learn/tree/main/code/petri-nets), construit avec le [SDK .NET](https://dotnet.microsoft.com/download) **10.0.112** et exécuté sur .NET **10.0.12**, les versions installées sur ma machine le 2026-09-15. Il lit et écrit du [PNML](https://www.pnml.org/), applique la règle de tir, construit des graphes d'accessibilité et des arbres de couverture, et calcule les invariants de places et de transitions. [`check.sh`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/check.sh) lance les tests unitaires et chaque leçon, et compare la sortie avec [`expected`](https://github.com/spareilleux/learn/tree/main/code/petri-nets/expected) ; tous les listings de ces leçons sont collés depuis cette sortie. Les outils externes sont nommés et liés, jamais nécessaires. *À vérifier : le workflow CI pour les trois systèmes d'exploitation est écrit mais ne tourne pas encore, parce que le jeton utilisé ici ne peut pas pousser de fichiers de workflow.*
+L'analyseur de ce cours est un projet C# dans [`code/petri-nets`](https://github.com/spareilleux/learn/tree/main/code/petri-nets), construit avec le [SDK .NET](https://dotnet.microsoft.com/download) **10.0.112** et exécuté sur .NET **10.0.12**, les versions installées sur ma machine le 2026-09-15. Il lit et écrit du [PNML](https://www.pnml.org/), applique la règle de tir, construit des graphes d'accessibilité et des arbres de couverture, calcule les invariants de places et de transitions, décide les classes structurelles avec leurs siphons, trappes et circuits, et déplie un réseau coloré en un réseau ordinaire. [`check.sh`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/check.sh) lance les tests unitaires et chaque leçon, et compare la sortie avec [`expected`](https://github.com/spareilleux/learn/tree/main/code/petri-nets/expected) ; tous les listings de ces leçons sont collés depuis cette sortie. Les outils externes sont nommés et liés, jamais nécessaires. [`petri-nets-examples.yml`](https://github.com/spareilleux/learn/blob/main/.github/workflows/petri-nets-examples.yml) lance `check.sh` sur Ubuntu, Windows et macOS ; il a tourné pour la première fois le 2026-09-16 au commit `53ceefc` et il est passé sur les trois.
 :::
 
 ## Pourquoi j'apprends ça
@@ -85,11 +85,11 @@ Ce réseau a douze marquages accessibles, il ne s'interbloque jamais, et la plac
 | 2 | [La définition formelle et la matrice d'incidence](02-the-incidence-matrix/) | les vecteurs, un produit matriciel |
 | 3 | [Le graphe d'accessibilité](03-the-reachability-graph/) | un parcours en largeur, l'explosion d'une matrice de tests |
 | 4 | [Propriétés](04-properties/) | interblocage, famine, livelock |
-| 5 | Invariants *(à venir)* | un invariant de boucle, une quantité conservée |
-| 6 | Classes structurelles : machines à états, graphes marqués, réseaux à choix libre | |
-| 7 | Modéliser la concurrence : exclusion mutuelle, producteur-consommateur, lecteurs-rédacteurs, philosophes | `lock`, `SemaphoreSlim`, `Channel<T>`, `synchronized`, `ReentrantLock` |
-| 8 | Réseaux colorés | les génériques, un message typé |
-| 9 | Temps et probabilités : réseaux temporisés, stochastiques, GSPN | les percentiles, un modèle de files d'attente |
+| 5 | [Invariants](05-invariants/) | un invariant de boucle, une quantité conservée |
+| 6 | [Classes structurelles : machines à états, graphes marqués, réseaux à choix libre](06-structural-classes/) | |
+| 7 | [Modéliser la concurrence : exclusion mutuelle, producteur-consommateur, lecteurs-rédacteurs, philosophes](07-modelling-concurrency/) | `lock`, `SemaphoreSlim`, `Channel<T>`, `synchronized`, `ReentrantLock` |
+| 8 | [Réseaux colorés](08-coloured-nets/) | les génériques, un message typé |
+| 9 | Temps et probabilités : réseaux temporisés, stochastiques, GSPN *(à venir)* | les percentiles, un modèle de files d'attente |
 | 10 | Workflows : réseaux de workflow, *soundness*, BPMN, *process mining* | BPMN, un moteur de workflow |
 | 11 | Outils et interopérabilité : PNML, TINA, LoLA, Snoopy, PIPE, CPN Tools, GreatSPN, TAPAAL | un format d'échange XML |
 | 12 | Applications industrielles : ateliers flexibles, protocoles, matériel asynchrone, biochimie, sécurité | |

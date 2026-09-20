@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pnml xmlns="http://www.pnml.org/version-2009/grammar/pnml">
+  <net id="n1" type="http://www.pnml.org/version-2009/grammar/ptnet">
+    <name>
+      <text>lane-lock-unguarded</text>
+    </name>
+    <page id="page1">
+      <place id="free">
+        <name>
+          <text>free</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="taken">
+        <name>
+          <text>taken</text>
+        </name>
+      </place>
+      <place id="idle1">
+        <name>
+          <text>idle1</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="held1">
+        <name>
+          <text>held1</text>
+        </name>
+      </place>
+      <place id="failed1">
+        <name>
+          <text>failed1</text>
+        </name>
+      </place>
+      <place id="idle2">
+        <name>
+          <text>idle2</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="held2">
+        <name>
+          <text>held2</text>
+        </name>
+      </place>
+      <place id="failed2">
+        <name>
+          <text>failed2</text>
+        </name>
+      </place>
+      <transition id="take1">
+        <name>
+          <text>take1</text>
+        </name>
+      </transition>
+      <transition id="fail1">
+        <name>
+          <text>fail1</text>
+        </name>
+      </transition>
+      <transition id="release1">
+        <name>
+          <text>release1</text>
+        </name>
+      </transition>
+      <transition id="clean_hit1">
+        <name>
+          <text>clean_hit1</text>
+        </name>
+      </transition>
+      <transition id="clean_miss1">
+        <name>
+          <text>clean_miss1</text>
+        </name>
+      </transition>
+      <transition id="take2">
+        <name>
+          <text>take2</text>
+        </name>
+      </transition>
+      <transition id="fail2">
+        <name>
+          <text>fail2</text>
+        </name>
+      </transition>
+      <transition id="release2">
+        <name>
+          <text>release2</text>
+        </name>
+      </transition>
+      <transition id="clean_hit2">
+        <name>
+          <text>clean_hit2</text>
+        </name>
+      </transition>
+      <transition id="clean_miss2">
+        <name>
+          <text>clean_miss2</text>
+        </name>
+      </transition>
+      <arc id="a1" source="idle1" target="take1" />
+      <arc id="a2" source="free" target="take1" />
+      <arc id="a3" source="take1" target="held1" />
+      <arc id="a4" source="take1" target="taken" />
+      <arc id="a5" source="idle1" target="fail1" />
+      <arc id="a6" source="taken" target="fail1" />
+      <arc id="a7" source="fail1" target="failed1" />
+      <arc id="a8" source="fail1" target="taken" />
+      <arc id="a9" source="held1" target="release1" />
+      <arc id="a10" source="taken" target="release1" />
+      <arc id="a11" source="release1" target="idle1" />
+      <arc id="a12" source="release1" target="free" />
+      <arc id="a13" source="failed1" target="clean_hit1" />
+      <arc id="a14" source="taken" target="clean_hit1" />
+      <arc id="a15" source="clean_hit1" target="idle1" />
+      <arc id="a16" source="clean_hit1" target="free" />
+      <arc id="a17" source="failed1" target="clean_miss1" />
+      <arc id="a18" source="free" target="clean_miss1" />
+      <arc id="a19" source="clean_miss1" target="idle1" />
+      <arc id="a20" source="clean_miss1" target="free" />
+      <arc id="a21" source="idle2" target="take2" />
+      <arc id="a22" source="free" target="take2" />
+      <arc id="a23" source="take2" target="held2" />
+      <arc id="a24" source="take2" target="taken" />
+      <arc id="a25" source="idle2" target="fail2" />
+      <arc id="a26" source="taken" target="fail2" />
+      <arc id="a27" source="fail2" target="failed2" />
+      <arc id="a28" source="fail2" target="taken" />
+      <arc id="a29" source="held2" target="release2" />
+      <arc id="a30" source="taken" target="release2" />
+      <arc id="a31" source="release2" target="idle2" />
+      <arc id="a32" source="release2" target="free" />
+      <arc id="a33" source="failed2" target="clean_hit2" />
+      <arc id="a34" source="taken" target="clean_hit2" />
+      <arc id="a35" source="clean_hit2" target="idle2" />
+      <arc id="a36" source="clean_hit2" target="free" />
+      <arc id="a37" source="failed2" target="clean_miss2" />
+      <arc id="a38" source="free" target="clean_miss2" />
+      <arc id="a39" source="clean_miss2" target="idle2" />
+      <arc id="a40" source="clean_miss2" target="free" />
+    </page>
+  </net>
+</pnml>

@@ -1,0 +1,125 @@
+
+== The lock as the rule states it: remove the directory only if the owner file is yours ==
+net lane-lock-guarded
+places      free taken idle1 held1 failed1 idle2 held2 failed2
+transitions take1 fail1 release1 clean1 take2 fail2 release2 clean2
+M0          (1, 0, 1, 0, 0, 1, 0, 0) = free:1 idle1:1 idle2:1
+arc         idle1 -> take1
+arc         free -> take1
+arc         take1 -> held1
+arc         take1 -> taken
+arc         idle1 -> fail1
+arc         taken -> fail1
+arc         fail1 -> failed1
+arc         fail1 -> taken
+arc         held1 -> release1
+arc         taken -> release1
+arc         release1 -> idle1
+arc         release1 -> free
+arc         failed1 -> clean1
+arc         clean1 -> idle1
+arc         idle2 -> take2
+arc         free -> take2
+arc         take2 -> held2
+arc         take2 -> taken
+arc         idle2 -> fail2
+arc         taken -> fail2
+arc         fail2 -> failed2
+arc         fail2 -> taken
+arc         held2 -> release2
+arc         taken -> release2
+arc         release2 -> idle2
+arc         release2 -> free
+arc         failed2 -> clean2
+arc         clean2 -> idle2
+invariants of lane-lock-guarded
+  place invariants (5):
+    free + taken = 1
+    free + held1 + held2 = 1
+    taken + idle1 + failed1 + idle2 + failed2 = 2
+    idle1 + held1 + failed1 = 1
+    idle2 + held2 + failed2 = 1
+  transition invariants (4):
+    take1 + release1
+    fail1 + clean1
+    take2 + release2
+    fail2 + clean2
+markings: 7   safe: True   deadlock-free: True   live: True   reversible: True
+two lanes holding the lock at once: no marking out of 7 reaches that.
+
+== The same lock written mkdir "$lock" && work ; rm -r "$lock" ==
+The ';' does not look at what mkdir did, so a lane that lost the race
+still runs rm -r, on a directory the winner created.
+net lane-lock-unguarded
+places      free taken idle1 held1 failed1 idle2 held2 failed2
+transitions take1 fail1 release1 clean_hit1 clean_miss1 take2 fail2 release2 clean_hit2 clean_miss2
+M0          (1, 0, 1, 0, 0, 1, 0, 0) = free:1 idle1:1 idle2:1
+arc         idle1 -> take1
+arc         free -> take1
+arc         take1 -> held1
+arc         take1 -> taken
+arc         idle1 -> fail1
+arc         taken -> fail1
+arc         fail1 -> failed1
+arc         fail1 -> taken
+arc         held1 -> release1
+arc         taken -> release1
+arc         release1 -> idle1
+arc         release1 -> free
+arc         failed1 -> clean_hit1
+arc         taken -> clean_hit1
+arc         clean_hit1 -> idle1
+arc         clean_hit1 -> free
+arc         failed1 -> clean_miss1
+arc         free -> clean_miss1
+arc         clean_miss1 -> idle1
+arc         clean_miss1 -> free
+arc         idle2 -> take2
+arc         free -> take2
+arc         take2 -> held2
+arc         take2 -> taken
+arc         idle2 -> fail2
+arc         taken -> fail2
+arc         fail2 -> failed2
+arc         fail2 -> taken
+arc         held2 -> release2
+arc         taken -> release2
+arc         release2 -> idle2
+arc         release2 -> free
+arc         failed2 -> clean_hit2
+arc         taken -> clean_hit2
+arc         clean_hit2 -> idle2
+arc         clean_hit2 -> free
+arc         failed2 -> clean_miss2
+arc         free -> clean_miss2
+arc         clean_miss2 -> idle2
+arc         clean_miss2 -> free
+invariants of lane-lock-unguarded
+  place invariants (3):
+    free + taken = 1
+    idle1 + held1 + failed1 = 1
+    idle2 + held2 + failed2 = 1
+  transition invariants (4):
+    take1 + release1
+    fail1 + clean_miss1
+    take2 + release2
+    fail2 + clean_miss2
+markings: 10   safe: True   deadlock-free: True   live: False   reversible: False
+two lanes holding the lock at once: 1 markings out of 10.
+the shortest way there, from free:1 idle1:1 idle2:1:
+  take1
+  fail2
+  clean_hit2
+  take2
+leaves (0, 1, 0, 1, 0, 0, 1, 0)  taken:1 held1:1 held2:1
+
+== How the two shapes scale with the number of lanes ==
+lanes  markings  two holders at once  shortest way there
+    2         7  no                   -   (guarded)
+    2        10  yes, 1 markings      take1 fail2 clean_hit2 take2   (unguarded)
+    3        19  no                   -   (guarded)
+    3        38  yes, 10 markings     take1 fail2 clean_hit2 take2   (unguarded)
+    4        47  no                   -   (guarded)
+    4       130  yes, 55 markings     take1 fail2 clean_hit2 take2   (unguarded)
+    5       111  no                   -   (guarded)
+    5       422  yes, 236 markings    take1 fail2 clean_hit2 take2   (unguarded)

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pnml xmlns="http://www.pnml.org/version-2009/grammar/pnml">
+  <net id="n1" type="http://www.pnml.org/version-2009/grammar/ptnet">
+    <name>
+      <text>philosophers-one-fork-3</text>
+    </name>
+    <page id="page1">
+      <place id="thinking1">
+        <name>
+          <text>thinking1</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="holding1">
+        <name>
+          <text>holding1</text>
+        </name>
+      </place>
+      <place id="eating1">
+        <name>
+          <text>eating1</text>
+        </name>
+      </place>
+      <place id="fork1">
+        <name>
+          <text>fork1</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="thinking2">
+        <name>
+          <text>thinking2</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="holding2">
+        <name>
+          <text>holding2</text>
+        </name>
+      </place>
+      <place id="eating2">
+        <name>
+          <text>eating2</text>
+        </name>
+      </place>
+      <place id="fork2">
+        <name>
+          <text>fork2</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="thinking3">
+        <name>
+          <text>thinking3</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="holding3">
+        <name>
+          <text>holding3</text>
+        </name>
+      </place>
+      <place id="eating3">
+        <name>
+          <text>eating3</text>
+        </name>
+      </place>
+      <place id="fork3">
+        <name>
+          <text>fork3</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <transition id="take_first1">
+        <name>
+          <text>take_first1</text>
+        </name>
+      </transition>
+      <transition id="take_second1">
+        <name>
+          <text>take_second1</text>
+        </name>
+      </transition>
+      <transition id="put1">
+        <name>
+          <text>put1</text>
+        </name>
+      </transition>
+      <transition id="take_first2">
+        <name>
+          <text>take_first2</text>
+        </name>
+      </transition>
+      <transition id="take_second2">
+        <name>
+          <text>take_second2</text>
+        </name>
+      </transition>
+      <transition id="put2">
+        <name>
+          <text>put2</text>
+        </name>
+      </transition>
+      <transition id="take_first3">
+        <name>
+          <text>take_first3</text>
+        </name>
+      </transition>
+      <transition id="take_second3">
+        <name>
+          <text>take_second3</text>
+        </name>
+      </transition>
+      <transition id="put3">
+        <name>
+          <text>put3</text>
+        </name>
+      </transition>
+      <arc id="a1" source="thinking1" target="take_first1" />
+      <arc id="a2" source="fork1" target="take_first1" />
+      <arc id="a3" source="take_first1" target="holding1" />
+      <arc id="a4" source="holding1" target="take_second1" />
+      <arc id="a5" source="fork2" target="take_second1" />
+      <arc id="a6" source="take_second1" target="eating1" />
+      <arc id="a7" source="eating1" target="put1" />
+      <arc id="a8" source="put1" target="thinking1" />
+      <arc id="a9" source="put1" target="fork1" />
+      <arc id="a10" source="put1" target="fork2" />
+      <arc id="a11" source="thinking2" target="take_first2" />
+      <arc id="a12" source="fork2" target="take_first2" />
+      <arc id="a13" source="take_first2" target="holding2" />
+      <arc id="a14" source="holding2" target="take_second2" />
+      <arc id="a15" source="fork3" target="take_second2" />
+      <arc id="a16" source="take_second2" target="eating2" />
+      <arc id="a17" source="eating2" target="put2" />
+      <arc id="a18" source="put2" target="thinking2" />
+      <arc id="a19" source="put2" target="fork2" />
+      <arc id="a20" source="put2" target="fork3" />
+      <arc id="a21" source="thinking3" target="take_first3" />
+      <arc id="a22" source="fork3" target="take_first3" />
+      <arc id="a23" source="take_first3" target="holding3" />
+      <arc id="a24" source="holding3" target="take_second3" />
+      <arc id="a25" source="fork1" target="take_second3" />
+      <arc id="a26" source="take_second3" target="eating3" />
+      <arc id="a27" source="eating3" target="put3" />
+      <arc id="a28" source="put3" target="thinking3" />
+      <arc id="a29" source="put3" target="fork3" />
+      <arc id="a30" source="put3" target="fork1" />
+    </page>
+  </net>
+</pnml>

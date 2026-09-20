@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pnml xmlns="http://www.pnml.org/version-2009/grammar/pnml">
+  <net id="n1" type="http://www.pnml.org/version-2009/grammar/ptnet">
+    <name>
+      <text>connection</text>
+    </name>
+    <page id="page1">
+      <place id="disconnected">
+        <name>
+          <text>disconnected</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="connecting">
+        <name>
+          <text>connecting</text>
+        </name>
+      </place>
+      <place id="connected">
+        <name>
+          <text>connected</text>
+        </name>
+      </place>
+      <transition id="open">
+        <name>
+          <text>open</text>
+        </name>
+      </transition>
+      <transition id="established">
+        <name>
+          <text>established</text>
+        </name>
+      </transition>
+      <transition id="failed">
+        <name>
+          <text>failed</text>
+        </name>
+      </transition>
+      <transition id="close">
+        <name>
+          <text>close</text>
+        </name>
+      </transition>
+      <arc id="a1" source="disconnected" target="open" />
+      <arc id="a2" source="open" target="connecting" />
+      <arc id="a3" source="connecting" target="established" />
+      <arc id="a4" source="established" target="connected" />
+      <arc id="a5" source="connecting" target="failed" />
+      <arc id="a6" source="failed" target="disconnected" />
+      <arc id="a7" source="connected" target="close" />
+      <arc id="a8" source="close" target="disconnected" />
+    </page>
+  </net>
+</pnml>

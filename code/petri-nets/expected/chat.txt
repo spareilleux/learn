@@ -1,0 +1,73 @@
+
+== The buffered path, ProductionOrchestrator.AnswerAsync: every hook runs ==
+markings: 30   dead markings: 3, all of them turns that ended: True
+place invariant   gate_free + gate_held = 1
+place invariant   gate_free + init_held + admitted1 + executed1 + sent1 + admitted2 + executed2 + sent2 = 1
+place invariant   gate_free + admitted1 + routed1 + executed1 + sent1 + admitted2 + routed2 + executed2 + sent2 = 1
+place invariant   gate_held + request1 + done1 + rejected1 + request2 + done2 + rejected2 = 2
+place invariant   init_free + init_held = 1
+place invariant   init_free + routed1 + routed2 = 1
+place invariant   init_held + request1 + admitted1 + executed1 + sent1 + done1 + rejected1 + request2 + admitted2 + executed2 + sent2 + done2 + rejected2 = 2
+place invariant   init_held + request1 + admitted1 + executed1 + sent1 + done1 + rejected1 + request2 + admitted2 + executed2 + notified2 + rejected2 = 2
+place invariant   init_held + request1 + admitted1 + executed1 + notified1 + rejected1 + request2 + admitted2 + executed2 + sent2 + done2 + rejected2 = 2
+place invariant   init_held + request1 + admitted1 + executed1 + notified1 + rejected1 + request2 + admitted2 + executed2 + notified2 + rejected2 = 2
+place invariant   request1 + admitted1 + routed1 + executed1 + sent1 + done1 + rejected1 = 1
+place invariant   request1 + admitted1 + routed1 + executed1 + notified1 + rejected1 = 1
+place invariant   request2 + admitted2 + routed2 + executed2 + sent2 + done2 + rejected2 = 1
+place invariant   request2 + admitted2 + routed2 + executed2 + notified2 + rejected2 = 1
+turn 1 finished with its OnResponseSent hook never run: no marking out of 30.
+
+== The streaming path, AnswerStreamingAsync: OnRequestReceived and nothing else ==
+markings: 24   dead markings: 3, all of them turns that ended: True
+place invariant   gate_free + gate_held = 1
+place invariant   gate_free + init_held + admitted1 + executed1 + admitted2 + executed2 = 1
+place invariant   gate_free + admitted1 + routed1 + executed1 + admitted2 + routed2 + executed2 = 1
+place invariant   gate_held + request1 + done1 + rejected1 + request2 + done2 + rejected2 = 2
+place invariant   init_free + init_held = 1
+place invariant   init_free + routed1 + routed2 = 1
+place invariant   init_held + request1 + admitted1 + executed1 + done1 + rejected1 + request2 + admitted2 + executed2 + done2 + rejected2 = 2
+place invariant   request1 + admitted1 + routed1 + executed1 + done1 + rejected1 = 1
+place invariant   sent1 = 0
+place invariant   notified1 = 0
+place invariant   request2 + admitted2 + routed2 + executed2 + done2 + rejected2 = 1
+place invariant   sent2 = 0
+place invariant   notified2 = 0
+turn 1 finished with its OnResponseSent hook never run: 6 markings out of 24, that is every way the turn can end.
+
+== Does the gate refusing instead of waiting change anything? ==
+ChatIntake.cs:37 calls TryEnterAsync, which answers Busy rather than queueing.
+The comparison is the same pipeline with the refusal replaced by a wait.
+turns  refuses (as written)        wait instead
+    2     30 markings, 0 stuck      20 markings, 0 stuck
+    3    128 markings, 0 stuck      56 markings, 0 stuck
+    4    498 markings, 0 stuck     144 markings, 0 stuck
+
+The gate and the initialisation lock are always taken in that one order,
+so neither version can wedge: there is no second order to cycle against.
+
+== The F# session pool: one gate, two sessions, and an exception path with no finally ==
+place invariant   gate + in_gate1 + has_session1 + in_gate2 + has_session2 = 1
+place invariant   outside1 + in_gate1 + has_session1 + releasing1 = 1
+place invariant   outside2 + in_gate2 + has_session2 + releasing2 = 1
+
+"wedged" is the bug: dead markings the pool can never leave. The last column is
+not one — the evaluation ends at :140, so a second caller through the gate at
+:144 runs in its own session, which :13-20 allows. It is here for the contrast.
+
+leak  early gate  markings  wedged  two sessions in flight (allowed)
+yes   yes              24       2  3
+yes   no               13       2  0
+no    yes              12       0  3
+no    no                5       0  0
+
+The shortest way to a pool that can never serve anyone again:
+  enter1
+  acquire1
+  leak1
+  enter1
+  acquire1
+  leak1
+  enter1
+leaves in_gate1:1 outside2:1
+Both callers are inside the gate waiting for a session, and the pool is empty:
+acquireSession blocks synchronously on the channel, holding the gate.

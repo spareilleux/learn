@@ -7,7 +7,7 @@ sidebar:
 ---
 
 :::note[What this course runs on]
-The analyser of this course is a C# project in [`code/petri-nets`](https://github.com/spareilleux/learn/tree/main/code/petri-nets), built with the [.NET SDK](https://dotnet.microsoft.com/download) **10.0.112** and running on .NET **10.0.12**, the versions installed on my machine on 2026-09-15. It reads and writes [PNML](https://www.pnml.org/), applies the firing rule, builds reachability graphs and coverability trees, and computes place and transition invariants. [`check.sh`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/check.sh) runs the unit tests and every lesson, and compares the output with [`expected`](https://github.com/spareilleux/learn/tree/main/code/petri-nets/expected); every listing in these lessons is pasted from that output. External Petri net tools are named and linked, never required. *To verify: the CI workflow for the three operating systems is written but not yet running, because the token in use cannot push workflow files.*
+The analyser of this course is a C# project in [`code/petri-nets`](https://github.com/spareilleux/learn/tree/main/code/petri-nets), built with the [.NET SDK](https://dotnet.microsoft.com/download) **10.0.112** and running on .NET **10.0.12**, the versions installed on my machine on 2026-09-15. It reads and writes [PNML](https://www.pnml.org/), applies the firing rule, builds reachability graphs and coverability trees, computes place and transition invariants, decides the structural classes with their siphons, traps and circuits, and unfolds a coloured net into an ordinary one. [`check.sh`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/check.sh) runs the unit tests and every lesson, and compares the output with [`expected`](https://github.com/spareilleux/learn/tree/main/code/petri-nets/expected); every listing in these lessons is pasted from that output. External Petri net tools are named and linked, never required. [`petri-nets-examples.yml`](https://github.com/spareilleux/learn/blob/main/.github/workflows/petri-nets-examples.yml) runs `check.sh` on Ubuntu, Windows and macOS; it first ran on 2026-09-16 at commit `53ceefc` and passed on the three of them.
 :::
 
 ## Why I'm learning this
@@ -83,11 +83,11 @@ That net has twelve reachable markings, it never deadlocks, and the place `free`
 | 2 | [The formal definition and the incidence matrix](02-the-incidence-matrix/) | vectors, a matrix product |
 | 3 | [The reachability graph](03-the-reachability-graph/) | a breadth-first search, the state explosion of a test matrix |
 | 4 | [Properties](04-properties/) | deadlock, livelock, starvation |
-| 5 | Invariants *(coming next)* | a loop invariant, a conserved count |
-| 6 | Structural classes: state machines, marked graphs, free-choice nets | |
-| 7 | Modelling concurrency: mutual exclusion, producer/consumer, readers/writers, philosophers | `lock`, `SemaphoreSlim`, `Channel<T>`, `synchronized`, `ReentrantLock` |
-| 8 | Coloured nets | generics, a typed message |
-| 9 | Time and probability: timed nets, stochastic nets, GSPN | percentiles, a queueing model |
+| 5 | [Invariants](05-invariants/) | a loop invariant, a conserved count |
+| 6 | [Structural classes: state machines, marked graphs, free-choice nets](06-structural-classes/) | |
+| 7 | [Modelling concurrency: mutual exclusion, producer/consumer, readers/writers, philosophers](07-modelling-concurrency/) | `lock`, `SemaphoreSlim`, `Channel<T>`, `synchronized`, `ReentrantLock` |
+| 8 | [Coloured nets](08-coloured-nets/) | generics, a typed message |
+| 9 | Time and probability: timed nets, stochastic nets, GSPN *(coming next)* | percentiles, a queueing model |
 | 10 | Workflows: workflow nets, soundness, BPMN, process mining | BPMN, a workflow engine |
 | 11 | Tools and interoperability: PNML, TINA, LoLA, Snoopy, PIPE, CPN Tools, GreatSPN, TAPAAL | an XML exchange format |
 | 12 | Industrial applications: manufacturing, protocols, asynchronous hardware, biochemistry, security | |
