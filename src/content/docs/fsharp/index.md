@@ -55,18 +55,18 @@ Each lesson starts from what you would write in C# (and in Java when it differs)
 | 2 | [Values, functions and type inference](02-values-and-functions/) | `let`, immutability, `mutable`, inference, currying, partial application, `\|>` and `>>`, expressions everywhere | GA's `HarmonicTransformationService`, TARS's `TextNormalizer` |
 | 3 | [Tuples, records, unions and options](03-records-unions-options/) | tuples, records and `with`, discriminated unions, `Option`, single-case unions, `RequireQualifiedAccess` | GA's `ChordAst`, TARS's `Domain.fs` and `Primitives.fs` |
 | 4 | [Pattern matching](04-pattern-matching/) | `match`, guards, or-patterns, list and record patterns, exhaustiveness warnings | GA's `ChordRenderer`, `ChordParser` and `BinObj.fsx`, TARS's `AgentWorkflow.fs` |
-| 5 | Lists, arrays and sequences | `List`, `Array` and `Seq` modules, pipelines next to LINQ and streams, laziness | |
-| 6 | Modules, namespaces and project organization | modules, namespaces, `private` and `internal`, signature files | |
+| 5 | [Lists, arrays and sequences](05-lists-arrays-sequences/) | `List`, `Array` and `Seq` modules, pipelines next to LINQ and streams, laziness | |
+| 6 | [Modules, namespaces and project organization](06-modules-namespaces/) | modules, namespaces, `private` and `internal`, signature files | |
 | | **Intermediate** | | |
-| 7 | Errors with `Result` | railway-oriented programming, `Result` next to exceptions | |
-| 8 | Computation expressions | `seq`, `async`, `task`, a hand-written `result` builder | TARS's `asyncResult` |
+| 7 | [Errors with `Result`](07-result-errors/) | railway-oriented programming, `Result` next to exceptions | |
+| 8 | [Computation expressions — a parser for a DSL](08-computation-expressions/) | `seq`, `async`, `task`, builders, `Bind`, `Return`, a parser CE and explicit end-of-input | GA's music DSL |
 | 9 | Objects in F# | classes, interfaces, object expressions, calling C# libraries | |
 | 10 | Testing | xUnit, FsCheck property-based tests, Expecto | |
 | 11 | Parsers | FParsec and hand-written combinators | GA's music DSL |
 | 12 | Modeling a domain | units of measure, phantom types, making illegal states unrepresentable | TARS's `Budget` |
 | | **Advanced and expert** | | |
 | 13 | Custom computation expressions | builders, `let!` and `and!`, what the compiler generates | TARS's `AgentWorkflow` |
-| 14 | Type providers, quotations and reflection | | |
+| 14 | [Type providers — typed data from a sample](14-type-providers/) | erased and generative providers, CSV and JSON inference, schema stability | FSharp.Data |
 | 15 | Performance | structs, `inline`, `Span`, `voption`, allocations measured with BenchmarkDotNet | |
 | 16 | Concurrency | `MailboxProcessor`, `Async` next to `Task`, channels | |
 | 17 | Metaprogramming | Myriad, FSharp.Compiler.Service | GA's F# Interactive session pool |
@@ -75,7 +75,7 @@ Each lesson starts from what you would write in C# (and in Java when it differs)
 | 20 | Publishing an F# library for C# | API design, `[<CompiledName>]`, options and unions seen from C# | |
 | — | [Journal](journal/) | | |
 
-Lessons 5 to 20 are planned and not written yet.
+Lessons 9–13 and 15–20 are planned and not written yet.
 
 ## Prerequisites
 
