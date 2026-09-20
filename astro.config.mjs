@@ -178,6 +178,18 @@ export default defineConfig({
 							],
 						},
 						{
+							label: 'Architecture & design',
+							translations: { fr: 'Architecture et conception', es: 'Arquitectura y diseño' },
+							items: [
+								{
+									label: 'Hexagonal Architecture: Ports & Adapters',
+									translations: { fr: 'Architecture hexagonale : Ports et adaptateurs', es: 'Arquitectura hexagonal: Puertos y adaptadores' },
+									collapsed: true,
+									items: [{ autogenerate: { directory: 'hexagonal-architecture' } }],
+								},
+							],
+						},
+						{
 							label: 'AI-assisted development',
 							translations: { fr: 'Développement assisté par IA', es: 'Desarrollo asistido por IA' },
 							items: [
