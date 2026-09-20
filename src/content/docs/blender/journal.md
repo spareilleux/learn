@@ -79,6 +79,19 @@ What the reports said:
 - **Small things.** The metronome held one vertex without any face: glTF drops it, so the size read back was smaller than the size written. The pipeline now deletes such vertices. The origin is put back at the bottom after the remesh without scaling again, so the remeshed metronome is 22.98 cm tall instead of 23.
 - **Time, on the author's machine.** 17 to 29 s per model for the whole pipeline, including import and export; 0.15 to 0.36 s per turntable frame at 512 × 512 px and 32 samples, Cycles on the CPU. The real sizes (23 cm and 60 cm tall) are choices for this test, not measurements.
 
+## 2026-09-19 — Orbital cathedral: composition before generation
+
+A procedural Blender study reuses the course's `stage.aim` and `stage.area_light` helpers. Hypothesis before rendering: a low-sample CPU preview is sufficient to judge the composition before spending GPU time on ComfyUI.
+
+- Windows, Blender 5.2.2 LTS, Cycles CPU, 8 threads, 24 samples, 1100 × 700 pixels, 314 objects.
+- First render: **6.698 s**. The oblique camera put foreground pillars across the focal rings; visual inspection rejected that composition.
+- Second render: **7.025 s**. A centered camera reveals the rings and the processional causeway. Both render processes exited with code 0; the script checks the scene objects and the PNG output.
+- Verdict: confirmed for detecting this framing problem, not for final image quality. Total render time: **13.723 s**; GPU render time: **0 s**.
+- Source: `code/blender/scripts/orbital_cathedral.py`. Local evidence: `C:/tmp/blender-comfy-scenes-20260919/orbital-v1/` and `orbital-v2/`, each with a PNG, editable blend and JSON report. These files are not published.
+- The user's open Blender scene was not modified. The live MCP connection was unavailable; a separate factory-startup process produced the study.
+- ComfyUI on port 8188 was unavailable. No ComfyUI inference, paid API or model download occurred. The linked Claude artifact's source remains unread: this is an original study, not its adaptation.
+- Non-fatal warnings: deprecated `use_nodes` assignments and bundled brush paths that Blender could not make relative. Linux/macOS execution, portability of the blend, materials refinement and the ComfyUI stage remain **to verify**.
+
 ## To verify
 
 - Installing with winget, Snap and Flathub, and the versions they carry.

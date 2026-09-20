@@ -149,6 +149,14 @@ sidebar:
 
 *Les échecs, avant la correction. ComfyUI v0.36.0 : Z-Image-Turbo nvfp4 avec Qwen3 4B fp4 mixed, graine 42, 8 étapes, CFG 1, `res_multistep`, `simple`, workflow [`09-seamless.api.json`](https://github.com/spareilleux/learn/blob/d16b4d70b565257067309b7b8d7f51408cb81741/code/comfyui/workflows/09-seamless.api.json) avec sa croix réglée à 160 pixels, 64 de fondu et un denoise de 0,7. De gauche à droite : le palissandre répété 2 × 2 ; les 512 × 512 pixels du milieu du palissandre ; le prompt « flat top-down photograph of pale maple, subtle straight grain, even soft lighting, no shadows, wood texture » (photo à plat, vue de dessus, d'érable pâle au fil fin et droit, sous un éclairage doux et uniforme, sans ombres, texture de bois), répété 2 × 2.*
 
+## 2026-09-19 — Vérification ComfyUI pour la scène orbitale
+
+Un serveur CPU séparé (0.36.0, localhost:8193) a confirmé les classes de nœuds du workflow Canny du cours, le checkpoint SDXL et le ControlNet union installés. Aucun prompt soumis ; inférence GPU : 0 s. Le serveur a ensuite été arrêté. Effet inattendu : `--base-directory` seul a déplacé l'ancien `user/comfyui.db` de l'installation vers un `.bak` et l'a copié dans le répertoire de test. Le fichier d'origine a été restauré depuis cette sauvegarde, sans écraser un autre fichier ; les deux SHA-256 sont identiques. La sauvegarde est conservée. Les prochains tests isolés devront préciser `--database-url sqlite:///:memory:` ou une URL de base propre au test. L'inférence et la qualité d'image restent à vérifier.
+
+## 2026-09-19 — Prétraitement réel de Blender vers ComfyUI
+
+Le rendu Blender v2 a été copié dans le répertoire d'entrée ComfyUI isolé. `LoadImage → Canny → SaveImage` a réussi sur CPU en **3.731 s** (horodatages de l'historique) ; l'image a été inspectée. Les contours des anneaux, piliers et de l'allée restent visibles. C'est une image de contrôle, pas une scène générée par SDXL ni une nouvelle géométrie 3D. Identifiant : `7f26de5e-5d83-455c-97be-1e3401e9ba5f`. Sortie : `C:/tmp/blender-comfy-scenes-20260919/comfy-base/output/orbital-study/canny-edges_00001_.png`. La base explicitement en mémoire a empêché la migration précédente ; le hash de la base de l'installation est inchangé. Temps GPU et appels API payants : **0**. L'inférence SDXL a été différée pour ne pas charger les deux modèles avec seulement environ 10 Gio de RAM disponibles.
+
 ## À vérifier
 
 - SDXL sous Linux avec CUDA, et sur Apple Silicon avec MPS : la machine GPU du cours tourne sous Windows ; la CI n'installe que les versions CPU.

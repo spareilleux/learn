@@ -79,6 +79,19 @@ Ce qu'ont dit les rapports :
 - **Petites choses.** Le métronome portait un sommet sans aucune face : glTF l'abandonne, et la taille relue était donc plus petite que la taille écrite. Le pipeline supprime maintenant ces sommets. L'origine est remise en bas après le remesh sans remettre à l'échelle, si bien que le métronome remaillé mesure 22,98 cm de haut au lieu de 23.
 - **Temps, sur la machine de l'auteur.** 17 à 29 s par modèle pour tout le pipeline, import et export compris ; 0,15 à 0,36 s par image de turntable à 512 × 512 px et 32 échantillons, Cycles sur le CPU. Les tailles réelles (23 cm et 60 cm de haut) sont des choix pour cet essai, pas des mesures.
 
+## 2026-09-19 — Cathédrale orbitale : le cadrage avant la génération
+
+Cette étude procédurale réutilise les fonctions `stage.aim` et `stage.area_light` du cours. Hypothèse avant le rendu : un aperçu CPU à faible nombre d'échantillons suffit pour juger le cadrage avant de mobiliser le GPU pour ComfyUI.
+
+- Windows, Blender 5.2.2 LTS, Cycles CPU, 8 threads, 24 échantillons, 1100 × 700 pixels, 314 objets.
+- Premier rendu : **6.698 s**. La caméra oblique plaçait les piliers devant les anneaux ; l'inspection visuelle a conduit à rejeter ce cadrage.
+- Deuxième rendu : **7.025 s**. Une caméra centrée dégage les anneaux et l'allée. Les deux processus se sont terminés avec le code 0 ; le script vérifie les objets et la sortie PNG.
+- Verdict : hypothèse confirmée pour détecter ce défaut de cadrage, pas pour la qualité finale. Temps total de rendu : **13.723 s** ; rendu GPU : **0 s**.
+- Source : `code/blender/scripts/orbital_cathedral.py`. Preuves locales : `C:/tmp/blender-comfy-scenes-20260919/orbital-v1/` et `orbital-v2/`, avec un PNG, un blend éditable et un rapport JSON par version. Ces fichiers ne sont pas publiés.
+- La scène Blender ouverte par l'utilisateur n'a pas été modifiée. Le connecteur MCP était indisponible ; un processus séparé démarré avec la configuration d'usine a produit l'étude.
+- ComfyUI était indisponible sur le port 8188. Aucune inférence ComfyUI, API payante ou téléchargement de modèle. Le code de l'artefact Claude reste inaccessible : c'est une étude originale, pas son adaptation.
+- Avertissements non bloquants : affectations `use_nodes` obsolètes et chemins des brosses intégrées que Blender ne pouvait pas rendre relatifs. L'exécution Linux/macOS, la portabilité du blend, le raffinement des matériaux et l'étape ComfyUI restent **à vérifier**.
+
 ## À vérifier
 
 - L'installation avec winget, Snap et Flathub, et les versions qu'ils proposent.
