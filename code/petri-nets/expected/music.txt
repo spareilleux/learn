@@ -1,0 +1,62 @@
+
+== A chord is a marking: C major triad, three voices over twelve pitch classes ==
+M0 = (1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0)  =  C E G
+places: 12   transitions: 24 (one per ordered pair of pitch classes one semitone apart)
+invariants of voice-leading-CEG-step1
+  place invariants (1):
+    C + Cs + D + Ds + E + F + Fs + G + Gs + A + As + B = 3
+  transition invariants (14):
+    C_B + Cs_C + D_Cs + Ds_D + E_Ds + F_E + Fs_F + G_Fs + Gs_G + A_Gs + As_A + B_As
+    C_B + B_C
+    C_Cs + Cs_C
+    C_Cs + Cs_D + D_Ds + Ds_E + E_F + F_Fs + Fs_G + G_Gs + Gs_A + A_As + As_B + B_C
+    Cs_D + D_Cs
+    D_Ds + Ds_D
+    Ds_E + E_Ds
+    E_F + F_E
+    F_Fs + Fs_F
+    Fs_G + G_Fs
+    G_Gs + Gs_G
+    Gs_A + A_Gs
+    A_As + As_A
+    As_B + B_As
+The place invariant is the conservation of voices: no move creates or drops one,
+so every reachable marking is a three-note chord, and nothing else can be.
+The transition invariants are the closed voice leadings: the chromatic scale
+all the way round in either direction, and every move followed by its undo.
+
+== Widening the moves to a tone breaks the transition invariants, not the place one ==
+places: 12   transitions: 48   rank of C: 11
+place invariant   C + Cs + D + Ds + E + F + Fs + G + Gs + A + As + B = 3
+transition invariants: the solutions of C x = 0 form a cone of dimension 37 in 48 unknowns, and Farkas' elimination does not finish on it.
+Place invariants stay cheap because they live in one dimension per place.
+
+== Every chord a smooth voice leading can reach, and how far away it is ==
+reachable chords: 364   largest number of moves needed: 6
+  at 0 move(s): 1 chords
+  at 1 move(s): 12 chords
+  at 2 move(s): 59 chords
+  at 3 move(s): 140 chords
+  at 4 move(s): 112 chords
+  at 5 move(s): 34 chords
+  at 6 move(s): 6 chords
+
+== The same net inside a key, with a budget of one foreign note ==
+place invariant   C + Cs + D + Ds + E + F + Fs + G + Gs + A + As + B = 3
+place invariant   Cs + Ds + Fs + Gs + As + chromatic = 1
+The invariant carrying 'chromatic' is the budget: it says, with no search at all,
+that at most one voice sits outside C major in any chord this net can reach.
+reachable chords: 224  (against 364 with no key)
+most foreign notes found in any of them, by enumeration: 1
+
+== Shortest voice leading from C major to F major, read off the graph ==
+F major    C F A      2 move(s): E→F G→A
+G major    D G B      2 move(s): C→B E→D
+A minor    C E A      1 move(s): G→A
+Db major   C# F G#    3 move(s): C→C# E→F G→G#
+
+== The same four targets when the key allows only one foreign note ==
+F major    C F A      2 move(s)
+G major    D G B      2 move(s)
+A minor    C E A      1 move(s)
+Db major   C# F G#    outside the budget: 2 foreign notes, the invariant allows 1

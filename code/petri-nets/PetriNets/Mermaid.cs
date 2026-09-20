@@ -51,6 +51,41 @@ public static class Mermaid
         return text.ToString();
     }
 
+    /// <summary>
+    /// Draws a coloured net: each place carries the name of its colour set, each transition its guard,
+    /// and each arc the expression that says which colour it carries (lesson 8).
+    /// </summary>
+    public static string DrawColoured(ColouredNet net, string direction = "LR")
+    {
+        ArgumentNullException.ThrowIfNull(net);
+        var text = new StringBuilder();
+        text.AppendLine($"flowchart {direction}");
+
+        for (var p = 0; p < net.Places.Count; p++)
+        {
+            var place = net.Places[p];
+            var tokens = new List<string>();
+            for (var c = 0; c < place.Colours.Values.Count; c++)
+            {
+                if (net.InitialMarking[p, c] > 0) tokens.Add(place.Colours.IsUnit ? "●" : place.Colours.Values[c]);
+            }
+            var label = place.Colours.IsUnit ? place.Name : $"{place.Name}<br/>{place.Colours.Name}";
+            if (tokens.Count > 0) label += $"<br/>{string.Join(" ", tokens)}";
+            text.AppendLine($"    {Node(place.Id)}((\"{label}\"))");
+        }
+
+        foreach (var transition in net.Transitions)
+        {
+            var guard = transition.Guard.Text.Length == 0 ? "" : $"<br/>[{transition.Guard.Text}]";
+            text.AppendLine($"    {Node(transition.Id)}[\"{transition.Name}{guard}\"]");
+        }
+
+        foreach (var arc in net.Arcs)
+            text.AppendLine($"    {Node(arc.Source)} -->|\"{arc.Expression.Text}\"| {Node(arc.Target)}");
+
+        return text.ToString();
+    }
+
     /// <summary>Up to three tokens are drawn as dots, more as a number: a picture of ten dots says nothing.</summary>
     private static string Tokens(int count) => count switch
     {

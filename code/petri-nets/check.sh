@@ -43,6 +43,13 @@ run l1
 run l2
 run l3
 run l4
+run l5
+run l6
+run l7
+run l8
+run l14
+run music
+run chat
 
 # The PNML files the lessons show, regenerated from the same net definitions
 rm -rf out/nets

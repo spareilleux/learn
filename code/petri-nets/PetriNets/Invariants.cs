@@ -61,6 +61,79 @@ public static class Invariants
     }
 
     /// <summary>
+    /// The bound each place gets from the place invariants alone. From y·M = y·M0 with non-negative
+    /// weights, y[p]·M(p) is at most y·M0, so M(p) is at most y·M0 / y[p] for every invariant that
+    /// gives p a weight; the smallest of those bounds is kept. A place no invariant covers gets null,
+    /// which proves nothing either way — it is a missing proof, not a proof of unboundedness.
+    /// </summary>
+    public static int?[] PlaceBounds(PetriNet net)
+    {
+        ArgumentNullException.ThrowIfNull(net);
+        var bounds = new int?[net.Places.Count];
+        foreach (var invariant in Places(net))
+        {
+            var total = WeightedTokens(invariant, net.InitialMarking);
+            foreach (var p in invariant.Support)
+            {
+                var bound = total / invariant.Weights[p];
+                if (bounds[p] is null || bound < bounds[p]) bounds[p] = bound;
+            }
+        }
+        return bounds;
+    }
+
+    /// <summary>
+    /// The rank of the incidence matrix, by exact elimination over the integers. The solutions of
+    /// y·C = 0 form a space of dimension (number of places) − rank, so the rank says how many
+    /// independent conservation laws a net has before any of them is computed.
+    /// </summary>
+    public static int Rank(PetriNet net)
+    {
+        ArgumentNullException.ThrowIfNull(net);
+        var c = net.Incidence();
+        var rows = net.Places.Count;
+        var columns = net.Transitions.Count;
+        var matrix = new long[rows][];
+        for (var r = 0; r < rows; r++)
+        {
+            matrix[r] = new long[columns];
+            for (var c2 = 0; c2 < columns; c2++) matrix[r][c2] = c[r, c2];
+        }
+
+        var rank = 0;
+        for (var column = 0; column < columns && rank < rows; column++)
+        {
+            var pivot = -1;
+            for (var r = rank; r < rows && pivot < 0; r++)
+            {
+                if (matrix[r][column] != 0) pivot = r;
+            }
+            if (pivot < 0) continue;
+            (matrix[rank], matrix[pivot]) = (matrix[pivot], matrix[rank]);
+            for (var r = rank + 1; r < rows; r++)
+            {
+                if (matrix[r][column] == 0) continue;
+                var a = matrix[rank][column];
+                var b = matrix[r][column];
+                for (var c2 = 0; c2 < columns; c2++) matrix[r][c2] = checked(a * matrix[r][c2] - b * matrix[rank][c2]);
+                var divisor = matrix[r].Aggregate(0L, (g, v) => Gcd64(g, Math.Abs(v)));
+                if (divisor > 1)
+                {
+                    for (var c2 = 0; c2 < columns; c2++) matrix[r][c2] /= divisor;
+                }
+            }
+            rank++;
+        }
+        return rank;
+    }
+
+    private static long Gcd64(long a, long b)
+    {
+        while (b != 0) (a, b) = (b, a % b);
+        return a;
+    }
+
+    /// <summary>
     /// Farkas' elimination: start from the rows of the matrix, each tagged with the unit vector that
     /// produced it, then remove one column at a time by adding together pairs of rows of opposite sign.
     /// What is left are the non-negative generators; only those of minimal support are kept.

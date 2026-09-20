@@ -7,7 +7,7 @@ sidebar:
 ---
 
 :::note[Sobre qué se ejecuta este curso]
-El analizador de este curso es un proyecto de C# en [`code/petri-nets`](https://github.com/spareilleux/learn/tree/main/code/petri-nets), compilado con el [SDK de .NET](https://dotnet.microsoft.com/download) **10.0.112** y ejecutado sobre .NET **10.0.12**, las versiones instaladas en mi máquina el 2026-09-15. Lee y escribe [PNML](https://www.pnml.org/), aplica la regla de disparo, construye grafos de alcanzabilidad y árboles de cobertura, y calcula invariantes de plazas y de transiciones. [`check.sh`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/check.sh) ejecuta las pruebas unitarias y cada lección, y compara la salida con [`expected`](https://github.com/spareilleux/learn/tree/main/code/petri-nets/expected); todos los listados de estas lecciones están pegados desde esa salida. Las herramientas externas se nombran y se enlazan, nunca son necesarias. *Por verificar: el flujo de trabajo de CI para los tres sistemas operativos está escrito pero todavía no se ejecuta, porque el token disponible aquí no puede enviar archivos de flujo de trabajo.*
+El analizador de este curso es un proyecto de C# en [`code/petri-nets`](https://github.com/spareilleux/learn/tree/main/code/petri-nets), compilado con el [SDK de .NET](https://dotnet.microsoft.com/download) **10.0.112** y ejecutado sobre .NET **10.0.12**, las versiones instaladas en mi máquina el 2026-09-15. Lee y escribe [PNML](https://www.pnml.org/), aplica la regla de disparo, construye grafos de alcanzabilidad y árboles de cobertura, calcula invariantes de plazas y de transiciones, decide las clases estructurales con sus sifones, trampas y circuitos, y despliega una red coloreada en una ordinaria. [`check.sh`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/check.sh) ejecuta las pruebas unitarias y cada lección, y compara la salida con [`expected`](https://github.com/spareilleux/learn/tree/main/code/petri-nets/expected); todos los listados de estas lecciones están pegados desde esa salida. Las herramientas externas se nombran y se enlazan, nunca son necesarias. [`petri-nets-examples.yml`](https://github.com/spareilleux/learn/blob/main/.github/workflows/petri-nets-examples.yml) ejecuta `check.sh` en Ubuntu, Windows y macOS; se ejecutó por primera vez el 2026-09-16 en el commit `53ceefc` y pasó en los tres.
 :::
 
 ## Por qué estoy aprendiendo esto
@@ -85,11 +85,11 @@ Esta red tiene doce marcados alcanzables, nunca se interbloquea, y la plaza `fre
 | 2 | [La definición formal y la matriz de incidencia](02-the-incidence-matrix/) | los vectores, un producto de matrices |
 | 3 | [El grafo de alcanzabilidad](03-the-reachability-graph/) | un recorrido en anchura, la explosión de una matriz de pruebas |
 | 4 | [Propiedades](04-properties/) | interbloqueo, inanición, livelock |
-| 5 | Invariantes *(próximamente)* | un invariante de bucle, una cantidad conservada |
-| 6 | Clases estructurales: máquinas de estados, grafos marcados, redes de libre elección | |
-| 7 | Modelar la concurrencia: exclusión mutua, productor-consumidor, lectores-escritores, filósofos | `lock`, `SemaphoreSlim`, `Channel<T>`, `synchronized`, `ReentrantLock` |
-| 8 | Redes coloreadas | los genéricos, un mensaje tipado |
-| 9 | Tiempo y probabilidad: redes temporizadas, estocásticas, GSPN | los percentiles, un modelo de colas |
+| 5 | [Invariantes](05-invariants/) | un invariante de bucle, una cantidad conservada |
+| 6 | [Clases estructurales: máquinas de estados, grafos marcados, redes de libre elección](06-structural-classes/) | |
+| 7 | [Modelar la concurrencia: exclusión mutua, productor-consumidor, lectores-escritores, filósofos](07-modelling-concurrency/) | `lock`, `SemaphoreSlim`, `Channel<T>`, `synchronized`, `ReentrantLock` |
+| 8 | [Redes coloreadas](08-coloured-nets/) | los genéricos, un mensaje tipado |
+| 9 | Tiempo y probabilidad: redes temporizadas, estocásticas, GSPN *(próximamente)* | los percentiles, un modelo de colas |
 | 10 | Flujos de trabajo: redes de flujo de trabajo, *soundness*, BPMN, *process mining* | BPMN, un motor de flujos de trabajo |
 | 11 | Herramientas e interoperabilidad: PNML, TINA, LoLA, Snoopy, PIPE, CPN Tools, GreatSPN, TAPAAL | un formato de intercambio en XML |
 | 12 | Aplicaciones industriales: talleres flexibles, protocolos, hardware asíncrono, bioquímica, seguridad | |

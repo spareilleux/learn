@@ -1,0 +1,179 @@
+
+== Where the nets of this course sit ==
+net                 state machine  marked graph  free choice  ext. free choice  asym. choice  strongly conn.
+producer-consumer   no             yes           yes          yes               yes           yes
+unbounded-producer  no             yes           yes          yes               yes           no
+connection          yes            no            yes          yes               yes           yes
+start-once          yes            no            yes          yes               yes           no
+handshake           no             no            yes          yes               yes           no
+mutual-exclusion    no             no            no           no                yes           yes
+two-locks           no             no            no           no                yes           yes
+readers-writers     no             no            no           no                no            yes
+philosophers-3      no             no            no           no                no            yes
+
+== A marked graph: the producer and consumer ==
+structure of producer-consumer
+  ordinary (every arc weight 1):  yes
+  pure (no self-loop):            yes
+  strongly connected:             yes
+  state machine:                  no
+  marked graph:                   yes
+  free choice:                    yes
+  extended free choice:           yes
+  asymmetric choice:              yes
+circuits of producer-consumer: 3 circuits
+  {ready, produced}  tokens at M0: 1
+  {free, full}  tokens at M0: 2
+  {waiting, taken}  tokens at M0: 1
+marked graph theorem  live: True   safe: False   markings enumerated: 0
+reachability graph    live: True   safe: False   markings enumerated: 12
+
+== A state machine that is live, and one that is not ==
+net connection
+places      disconnected connecting connected
+transitions open established failed close
+M0          (1, 0, 0) = disconnected:1
+arc         disconnected -> open
+arc         open -> connecting
+arc         connecting -> established
+arc         established -> connected
+arc         connecting -> failed
+arc         failed -> disconnected
+arc         connected -> close
+arc         close -> disconnected
+structure of connection
+  ordinary (every arc weight 1):  yes
+  pure (no self-loop):            yes
+  strongly connected:             yes
+  state machine:                  yes
+  marked graph:                   no
+  free choice:                    yes
+  extended free choice:           yes
+  asymmetric choice:              yes
+state machine theorem  strongly connected: True   tokens at M0: 1
+                       live: True   safe: True
+reachability graph     live: True   safe: True   markings enumerated: 3
+
+net start-once
+places      stopped running serving
+transitions start accept finish
+M0          (1, 0, 0) = stopped:1
+arc         stopped -> start
+arc         start -> running
+arc         running -> accept
+arc         accept -> serving
+arc         serving -> finish
+arc         finish -> running
+structure of start-once
+  ordinary (every arc weight 1):  yes
+  pure (no self-loop):            yes
+  strongly connected:             no
+  state machine:                  yes
+  marked graph:                   no
+  free choice:                    yes
+  extended free choice:           yes
+  asymmetric choice:              yes
+state machine theorem  strongly connected: False   tokens at M0: 1
+                       live: False   safe: True
+reachability graph     live: False   safe: True   markings enumerated: 3
+
+
+== Free choice, siphons and traps ==
+siphons of producer-consumer: 3 minimal siphons
+  siphon {ready, produced}
+    largest trap inside it: {ready, produced}  marked at M0: yes
+  siphon {free, full}
+    largest trap inside it: {free, full}  marked at M0: yes
+  siphon {waiting, taken}
+    largest trap inside it: {waiting, taken}  marked at M0: yes
+  every siphon contains a marked trap: yes
+  minimal traps: {ready, produced} {free, full} {waiting, taken}
+free choice: True   every siphon contains a marked trap: True
+Commoner therefore says live: True
+the reachability graph says live: True
+
+siphons of start-once: 1 minimal siphon
+  siphon {stopped}
+    largest trap inside it: {}  marked at M0: no
+  every siphon contains a marked trap: no
+  minimal traps: {running, serving}
+free choice: True   every siphon contains a marked trap: False
+Commoner therefore says live: False
+the reachability graph says live: False
+
+siphons of handshake: 1 minimal siphon
+  siphon {request, response}
+    largest trap inside it: {request, response}  marked at M0: no
+  every siphon contains a marked trap: no
+  minimal traps: {served} {request, response}
+free choice: True   every siphon contains a marked trap: False
+Commoner therefore says live: False
+the reachability graph says live: False
+
+
+== A liveness decided where no reachability graph exists ==
+net handshake-started
+places      request response served
+transitions receive reply
+M0          (1, 0, 0) = request:1
+arc         request -> receive
+arc         receive -> response
+arc         receive -> served
+arc         response -> reply
+arc         reply -> request
+siphons of handshake-started: 1 minimal siphon
+  siphon {request, response}
+    largest trap inside it: {request, response}  marked at M0: yes
+  every siphon contains a marked trap: yes
+  minimal traps: {served} {request, response}
+free choice: True
+every siphon contains a marked trap: True
+Commoner: live
+the graph cannot say so: bounded: False, dead transitions: none
+reachability graph stopped after 500 markings, complete: False
+
+== Every dead marking empties a siphon ==
+dead marking (0, 1, 0, 1, 0, 0)  a_has_x:1 b_has_y:1
+  places holding nothing: {a_idle, b_idle, x, y}
+  that set is a siphon: True
+  largest trap inside it: {}
+siphons of two-locks: 5 minimal siphons
+  siphon {a_idle, a_has_x}
+    largest trap inside it: {a_idle, a_has_x}  marked at M0: yes
+  siphon {b_idle, b_has_y}
+    largest trap inside it: {b_idle, b_has_y}  marked at M0: yes
+  siphon {a_has_x, x}
+    largest trap inside it: {a_has_x, x}  marked at M0: yes
+  siphon {b_has_y, y}
+    largest trap inside it: {b_has_y, y}  marked at M0: yes
+  siphon {x, y}
+    largest trap inside it: {}  marked at M0: no
+  every siphon contains a marked trap: no
+  minimal traps: {a_idle, a_has_x} {b_idle, b_has_y} {a_has_x, x} {b_has_y, y}
+free choice: False  (so Commoner does not apply, and only the one-way implication does)
+
+== Where the classes stop: the place two transitions fight over ==
+mutual-exclusion   free choice: False, extended: False, asymmetric: True
+  mutex feeds enter1 and enter2, which do not read the same places
+two-locks          free choice: False, extended: False, asymmetric: True
+  x feeds a_take_x and b_take_x, which do not read the same places
+  y feeds a_take_y and b_take_y, which do not read the same places
+philosophers-3     free choice: False, extended: False, asymmetric: False
+  fork1 feeds take1 and take3, which do not read the same places
+  fork2 feeds take1 and take2, which do not read the same places
+  fork3 feeds take2 and take3, which do not read the same places
+
+== Exercise 1: the same net with both threads taking x first ==
+siphons of two-locks-ordered: 4 minimal siphons
+  siphon {y}
+    largest trap inside it: {y}  marked at M0: yes
+  siphon {a_idle, a_has_x}
+    largest trap inside it: {a_idle, a_has_x}  marked at M0: yes
+  siphon {b_idle, b_has_x}
+    largest trap inside it: {b_idle, b_has_x}  marked at M0: yes
+  siphon {a_has_x, b_has_x, x}
+    largest trap inside it: {a_has_x, b_has_x, x}  marked at M0: yes
+  every siphon contains a marked trap: yes
+  minimal traps: {y} {a_idle, a_has_x} {b_idle, b_has_x} {a_has_x, b_has_x, x}
+free choice: False
+deadlock-free by the graph: True

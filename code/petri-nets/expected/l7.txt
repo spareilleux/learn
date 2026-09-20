@@ -1,0 +1,150 @@
+
+== One lock, and the invariant that is the proof ==
+invariants of mutual-exclusion
+  place invariants (3):
+    idle1 + critical1 = 1
+    critical1 + critical2 + mutex = 1
+    idle2 + critical2 = 1
+  transition invariants (2):
+    enter1 + leave1
+    enter2 + leave2
+markings where both threads are inside: 0 out of 3
+
+== k permits instead of one: the counting semaphore ==
+threads  permits  states  greatest number inside at once  invariant
+      3        1       4                              1  permits + inside1 + inside2 + inside3 = 1
+      3        2       7                              2  permits + inside1 + inside2 + inside3 = 2
+      3        3       8                              3  permits + inside1 + inside2 + inside3 = 3
+
+== A bounded channel is the place free ==
+capacity  states  bound of full  invariant
+       1       8              1  free + full = 1
+       2      12              2  free + full = 2
+       3      16              3  free + full = 3
+       4      20              4  free + full = 4
+
+== Readers and writers, with one arc of weight 3 ==
+net readers-writers
+places      idle reading writing access
+transitions start_read stop_read start_write stop_write
+M0          (3, 0, 0, 3) = idle:3 access:3
+arc         idle -> start_read
+arc         access -> start_read
+arc         start_read -> reading
+arc         reading -> stop_read
+arc         stop_read -> idle
+arc         stop_read -> access
+arc         idle -> start_write
+arc         access -> start_write (weight 3)
+arc         start_write -> writing
+arc         writing -> stop_write
+arc         stop_write -> idle
+arc         stop_write -> access (weight 3)
+flowchart LR
+    idle(("idle<br/>● ● ●"))
+    reading(("reading"))
+    writing(("writing"))
+    access(("access<br/>● ● ●"))
+    start_read["start_read"]
+    stop_read["stop_read"]
+    start_write["start_write"]
+    stop_write["stop_write"]
+    idle --> start_read
+    access --> start_read
+    start_read --> reading
+    reading --> stop_read
+    stop_read --> idle
+    stop_read --> access
+    idle --> start_write
+    access -- 3 --> start_write
+    start_write --> writing
+    writing --> stop_write
+    stop_write --> idle
+    stop_write -- 3 --> access
+invariants of readers-writers
+  place invariants (2):
+    idle + reading + writing = 3
+    reading + 3*writing + access = 3
+  transition invariants (2):
+    start_read + stop_read
+    start_write + stop_write
+properties of readers-writers
+  bound of idle: 3
+  bound of reading: 3
+  bound of writing: 1
+  bound of access: 3
+  bounded:       yes (3-bounded)
+  safe:          no
+  deadlock-free: yes
+  live:          yes
+    start_read L4, live
+    stop_read  L4, live
+    start_write L4, live
+    stop_write L4, live
+  reversible:    yes
+  home states:   (3, 0, 0, 3) (2, 1, 0, 2) (2, 0, 1, 0) (1, 2, 0, 1) (0, 3, 0, 0)
+  persistent:    no
+markings with a writer and a reader at once: 0
+markings with two writers at once: 0
+
+== Live and starved at the same time ==
+start_write is live: True
+and yet the net can run for ever without ever firing it:
+  M3 = (1, 2, 0, 1)  --start_read-->
+  M4 = (0, 3, 0, 0)  --stop_read-->
+
+== The philosophers, with and without one fork at a time ==
+philosophers  both forks at once        one fork at a time       one of them reversed
+              states  deadlocks          states  deadlocks         states  deadlocks
+           2       3          0               6          1              5          0
+           3       4          0              14          1             12          0
+           4       7          0              34          1             29          0
+           5      11          0              82          1             70          0
+           6      18          0             198          1            169          0
+
+== The deadlock of five philosophers, and how to reach it ==
+dead markings: 1 out of 82
+M78 = holding1:1 holding2:1 holding3:1 holding4:1 holding5:1
+  reached by: take_first1, take_first2, take_first3, take_first4, take_first5
+  places holding nothing: 15 of 20, every fork among them
+  that set is a siphon: True
+  largest trap inside it: {}
+
+three philosophers, one fork at a time: 7 minimal siphons, 1 of them with no marked trap
+  {eating1, fork1, eating2, fork2, eating3, fork3}
+with one of them reversed: 6 minimal siphons, 0 of them with no marked trap
+
+== Exercise 2: the lock the first thread never gives back ==
+properties of mutual-exclusion-leaky
+  bound of idle1: 1
+  bound of critical1: 1
+  bound of idle2: 1
+  bound of critical2: 1
+  bound of mutex: 1
+  bounded:       yes (1-bounded)
+  safe:          yes
+  deadlock-free: no
+    dead marking (0, 1, 1, 0, 0)  critical1:1 idle2:1
+  live:          no
+    enter1     L1, can fire once
+    enter2     L2/L3, can fire for ever but not from everywhere
+    leave2     L2/L3, can fire for ever but not from everywhere
+  reversible:    no
+  home states:   (0, 1, 1, 0, 0)
+  persistent:    no
+invariants of mutual-exclusion-leaky
+  place invariants (3):
+    idle1 + critical1 = 1
+    critical1 + critical2 + mutex = 1
+    idle2 + critical2 = 1
+  transition invariants (1):
+    enter2 + leave2
+siphons of mutual-exclusion-leaky: 3 minimal siphons
+  siphon {idle1}
+    largest trap inside it: {}  marked at M0: no
+  siphon {idle2, critical2}
+    largest trap inside it: {idle2, critical2}  marked at M0: yes
+  siphon {critical2, mutex}
+    largest trap inside it: {}  marked at M0: no
+  every siphon contains a marked trap: no
+  minimal traps: {critical1} {idle2, critical2}

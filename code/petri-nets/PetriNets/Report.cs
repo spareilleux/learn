@@ -169,21 +169,139 @@ public static class Report
         text.AppendLine($"invariants of {net.Name}");
         var places = Invariants.Places(net);
         text.AppendLine($"  place invariants ({places.Count}):");
-        foreach (var invariant in places)
-        {
-            var terms = invariant.Support.Select(i =>
-                (invariant.Weights[i] == 1 ? "" : invariant.Weights[i] + "*") + net.Places[i].Name);
-            text.AppendLine($"    {string.Join(" + ", terms)} = {Invariants.WeightedTokens(invariant, net.InitialMarking)}");
-        }
+        foreach (var invariant in places) text.AppendLine($"    {PlaceInvariant(net, invariant)}");
         var transitions = Invariants.Transitions(net);
         text.AppendLine($"  transition invariants ({transitions.Count}):");
-        foreach (var invariant in transitions)
+        foreach (var invariant in transitions) text.AppendLine($"    {TransitionInvariant(net, invariant)}");
+        return text.ToString();
+    }
+
+    /// <summary>A place invariant as "free + full = 2": the weighted count, and what it equals at M0.</summary>
+    public static string PlaceInvariant(PetriNet net, Invariant invariant)
+    {
+        ArgumentNullException.ThrowIfNull(net);
+        ArgumentNullException.ThrowIfNull(invariant);
+        var terms = invariant.Support.Select(i =>
+            (invariant.Weights[i] == 1 ? "" : invariant.Weights[i] + "*") + net.Places[i].Name);
+        return $"{string.Join(" + ", terms)} = {Invariants.WeightedTokens(invariant, net.InitialMarking)}";
+    }
+
+    /// <summary>A transition invariant as "produce + deposit + take + consume": the firings that cancel out.</summary>
+    public static string TransitionInvariant(PetriNet net, Invariant invariant)
+    {
+        ArgumentNullException.ThrowIfNull(net);
+        ArgumentNullException.ThrowIfNull(invariant);
+        var terms = invariant.Support.Select(i =>
+            (invariant.Weights[i] == 1 ? "" : invariant.Weights[i] + "*") + net.Transitions[i].Name);
+        return string.Join(" + ", terms);
+    }
+
+    /// <summary>
+    /// The bound of each place as the invariants give it, next to the bound the reachability graph
+    /// gives it. The first column costs a matrix, the second one costs every marking of the net.
+    /// </summary>
+    public static string Bounds(PetriNet net, int limit = 100_000)
+    {
+        ArgumentNullException.ThrowIfNull(net);
+        var text = new StringBuilder();
+        var fromInvariants = Invariants.PlaceBounds(net);
+        var fromTree = CoverabilityTree.Build(net).PlaceBounds();
+        var graph = ReachabilityGraph.Build(net, limit);
+        var fromGraph = graph.PlaceBounds();
+        var width = net.Places.Max(p => p.Name.Length) + 2;
+        text.AppendLine($"bounds of {net.Name}");
+        text.AppendLine("place".PadRight(width) + "invariants".PadRight(24) + "coverability tree".PadRight(20) + "reachability graph");
+        for (var p = 0; p < net.Places.Count; p++)
         {
-            var terms = invariant.Support.Select(i =>
-                (invariant.Weights[i] == 1 ? "" : invariant.Weights[i] + "*") + net.Transitions[i].Name);
-            text.AppendLine($"    {string.Join(" + ", terms)}");
+            var invariant = fromInvariants[p] is { } b ? b.ToString() : "not covered";
+            var tree = fromTree[p] is { } c ? c.ToString() : "unbounded";
+            var enumerated = graph.IsComplete
+                ? (fromGraph[p] is { } g ? g.ToString() : "unbounded")
+                : $"still growing at {limit}";
+            text.AppendLine(net.Places[p].Name.PadRight(width) + invariant.PadRight(24) + tree.PadRight(20) + enumerated);
+        }
+        text.AppendLine($"  markings enumerated: 0 for the invariants, {(graph.IsComplete ? graph.States.Count : limit)} for the graph");
+        return text.ToString();
+    }
+
+    /// <summary>The structural classes of a net, one line each.</summary>
+    public static string Structure(PetriNet net)
+    {
+        ArgumentNullException.ThrowIfNull(net);
+        var classes = PetriNets.Structure.Classify(net);
+        var text = new StringBuilder();
+        text.AppendLine($"structure of {net.Name}");
+        text.AppendLine($"  ordinary (every arc weight 1):  {YesNo(classes.IsOrdinary)}");
+        text.AppendLine($"  pure (no self-loop):            {YesNo(classes.IsPure)}");
+        text.AppendLine($"  strongly connected:             {YesNo(classes.IsStronglyConnected)}");
+        text.AppendLine($"  state machine:                  {YesNo(classes.IsStateMachine)}");
+        text.AppendLine($"  marked graph:                   {YesNo(classes.IsMarkedGraph)}");
+        text.AppendLine($"  free choice:                    {YesNo(classes.IsFreeChoice)}");
+        text.AppendLine($"  extended free choice:           {YesNo(classes.IsExtendedFreeChoice)}");
+        text.AppendLine($"  asymmetric choice:              {YesNo(classes.IsAsymmetricChoice)}");
+        return text.ToString();
+    }
+
+    /// <summary>One line per net: which of the five classes it belongs to, so a reader can scan the course's nets.</summary>
+    public static string StructureTable(IEnumerable<PetriNet> nets)
+    {
+        ArgumentNullException.ThrowIfNull(nets);
+        var list = nets.ToList();
+        var width = list.Max(n => n.Name.Length) + 2;
+        var text = new StringBuilder();
+        text.AppendLine("net".PadRight(width) + "state machine  marked graph  free choice  ext. free choice  asym. choice  strongly conn.");
+        foreach (var net in list)
+        {
+            var c = PetriNets.Structure.Classify(net);
+            text.AppendLine(net.Name.PadRight(width)
+                            + YesNo(c.IsStateMachine).PadRight(15)
+                            + YesNo(c.IsMarkedGraph).PadRight(14)
+                            + YesNo(c.IsFreeChoice).PadRight(13)
+                            + YesNo(c.IsExtendedFreeChoice).PadRight(18)
+                            + YesNo(c.IsAsymmetricChoice).PadRight(14)
+                            + YesNo(c.IsStronglyConnected));
         }
         return text.ToString();
+    }
+
+    /// <summary>The elementary circuits of a net, with the tokens the initial marking puts on each one.</summary>
+    public static string Circuits(PetriNet net)
+    {
+        ArgumentNullException.ThrowIfNull(net);
+        var circuits = PetriNets.Structure.Circuits(net);
+        var text = new StringBuilder();
+        text.AppendLine($"circuits of {net.Name}: {Plural(circuits.Count, "circuit")}");
+        foreach (var circuit in circuits)
+            text.AppendLine($"  {{{string.Join(", ", circuit.Places.Select(p => net.Places[p].Name))}}}"
+                            + $"  tokens at M0: {circuit.Tokens(net.InitialMarking)}");
+        return text.ToString();
+    }
+
+    /// <summary>The minimal siphons, the largest trap inside each of them, and Commoner's verdict.</summary>
+    public static string Siphons(PetriNet net)
+    {
+        ArgumentNullException.ThrowIfNull(net);
+        var reports = PetriNets.Structure.SiphonsAndTraps(net);
+        var text = new StringBuilder();
+        text.AppendLine($"siphons of {net.Name}: {Plural(reports.Count, "minimal siphon")}");
+        foreach (var report in reports)
+        {
+            text.AppendLine($"  siphon {Set(net, report.Siphon)}");
+            text.AppendLine($"    largest trap inside it: {Set(net, report.MaximalTrap)}"
+                            + $"  marked at M0: {YesNo(report.TrapIsMarked)}");
+        }
+        text.AppendLine($"  every siphon contains a marked trap: {YesNo(reports.All(r => r.TrapIsMarked))}");
+        var traps = PetriNets.Structure.MinimalTraps(net);
+        text.AppendLine($"  minimal traps: {(traps.Count == 0 ? "none" : string.Join(" ", traps.Select(t => Set(net, t))))}");
+        return text.ToString();
+    }
+
+    /// <summary>A set of places, as "{a, b}", the form the siphon and trap listings use.</summary>
+    public static string Set(PetriNet net, IReadOnlyList<int> places)
+    {
+        ArgumentNullException.ThrowIfNull(net);
+        ArgumentNullException.ThrowIfNull(places);
+        return places.Count == 0 ? "{}" : "{" + string.Join(", ", places.Select(p => net.Places[p].Name)) + "}";
     }
 
     /// <summary>Lists the home states, or just counts them when there are too many to read.</summary>

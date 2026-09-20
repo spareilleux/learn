@@ -1,0 +1,104 @@
+
+== What the producer and consumer never stops conserving ==
+invariants of producer-consumer
+  place invariants (3):
+    ready + produced = 1
+    free + full = 2
+    waiting + taken = 1
+  transition invariants (1):
+    produce + deposit + take + consume
+places: 6   rank of C: 3   dimension of the solutions of y C = 0: 3
+
+== The proof that the buffer cannot overflow ==
+invariant     free + full = 2
+both counts are numbers of tokens, so free >= 0 and full >= 0
+therefore     full <= 2 at every reachable marking, and at every marking at all
+markings enumerated to get there: 0
+checking it anyway on the graph of lesson 3: 12 markings, invariant holds in all: True
+largest value of full among them: 2
+
+== The bound of every place, three ways ==
+bounds of producer-consumer
+place     invariants              coverability tree   reachability graph
+ready     1                       1                   1
+produced  1                       1                   1
+free      2                       2                   2
+full      2                       2                   2
+waiting   1                       1                   1
+taken     1                       1                   1
+  markings enumerated: 0 for the invariants, 12 for the graph
+
+== The same table on the net with the brake removed ==
+invariants of unbounded-producer
+  place invariants (2):
+    ready + produced = 1
+    waiting + taken = 1
+  transition invariants (1):
+    produce + deposit + take + consume
+bounds of unbounded-producer
+place     invariants              coverability tree   reachability graph
+ready     1                       1                   still growing at 500
+produced  1                       1                   still growing at 500
+full      not covered             unbounded           still growing at 500
+waiting   1                       1                   still growing at 500
+taken     1                       1                   still growing at 500
+  markings enumerated: 0 for the invariants, 500 for the graph
+
+== An invariant cannot exclude what the state equation accepts ==
+invariants of handshake
+  place invariants (1):
+    request + response = 0
+  transition invariants (0):
+spurious marking (0, 0, 1)  served:1  satisfies every place invariant: True
+spurious marking (0, 0, 2)  served:2  satisfies every place invariant: True
+
+== What invariants do not see: the deadlock of two locks ==
+invariants of two-locks
+  place invariants (4):
+    a_idle + a_has_x = 1
+    a_has_x + x = 1
+    b_idle + b_has_y = 1
+    b_has_y + y = 1
+  transition invariants (2):
+    a_take_x + a_take_y
+    b_take_y + b_take_x
+dead marking (0, 1, 0, 1, 0, 0)  a_has_x:1 b_has_y:1
+every place invariant above holds there too: True
+
+== Transition invariants: the firings that cancel out ==
+x = (1, 1, 1, 1)   produce + deposit + take + consume
+firing it once from M0 gives (1, 0, 2, 0, 1, 0), back to (1, 0, 2, 0, 1, 0): True
+
+two locks has two of them, and a marking from which neither can be fired at all:
+  x = (1, 1, 0, 0)   a_take_x + a_take_y
+  x = (0, 0, 1, 1)   b_take_y + b_take_x
+  transitions enabled at the dead marking: (nothing)
+
+the handshake has none at all, and that is a statement about its runs:
+  transition invariants of handshake: 0
+  transition invariants of handshake-started: 0
+  a marking it can reach twice: False
+  a marking the producer and consumer can reach twice: True
+
+== Exercise 2: the invariants of mutual exclusion and of the readers and writers ==
+invariants of mutual-exclusion
+  place invariants (3):
+    idle1 + critical1 = 1
+    critical1 + critical2 + mutex = 1
+    idle2 + critical2 = 1
+  transition invariants (2):
+    enter1 + leave1
+    enter2 + leave2
+invariants of readers-writers
+  place invariants (2):
+    idle + reading + writing = 3
+    reading + 3*writing + access = 3
+  transition invariants (2):
+    start_read + stop_read
+    start_write + stop_write
+
+== Exercise 4: the invariants of the emit loop ==
+invariants of emit-loop
+  place invariants (1):
+    ready = 1
+  transition invariants (0):

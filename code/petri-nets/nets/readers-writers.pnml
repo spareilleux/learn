@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pnml xmlns="http://www.pnml.org/version-2009/grammar/pnml">
+  <net id="n1" type="http://www.pnml.org/version-2009/grammar/ptnet">
+    <name>
+      <text>readers-writers</text>
+    </name>
+    <page id="page1">
+      <place id="idle">
+        <name>
+          <text>idle</text>
+        </name>
+        <initialMarking>
+          <text>3</text>
+        </initialMarking>
+      </place>
+      <place id="reading">
+        <name>
+          <text>reading</text>
+        </name>
+      </place>
+      <place id="writing">
+        <name>
+          <text>writing</text>
+        </name>
+      </place>
+      <place id="access">
+        <name>
+          <text>access</text>
+        </name>
+        <initialMarking>
+          <text>3</text>
+        </initialMarking>
+      </place>
+      <transition id="start_read">
+        <name>
+          <text>start_read</text>
+        </name>
+      </transition>
+      <transition id="stop_read">
+        <name>
+          <text>stop_read</text>
+        </name>
+      </transition>
+      <transition id="start_write">
+        <name>
+          <text>start_write</text>
+        </name>
+      </transition>
+      <transition id="stop_write">
+        <name>
+          <text>stop_write</text>
+        </name>
+      </transition>
+      <arc id="a1" source="idle" target="start_read" />
+      <arc id="a2" source="access" target="start_read" />
+      <arc id="a3" source="start_read" target="reading" />
+      <arc id="a4" source="reading" target="stop_read" />
+      <arc id="a5" source="stop_read" target="idle" />
+      <arc id="a6" source="stop_read" target="access" />
+      <arc id="a7" source="idle" target="start_write" />
+      <arc id="a8" source="access" target="start_write">
+        <inscription>
+          <text>3</text>
+        </inscription>
+      </arc>
+      <arc id="a9" source="start_write" target="writing" />
+      <arc id="a10" source="writing" target="stop_write" />
+      <arc id="a11" source="stop_write" target="idle" />
+      <arc id="a12" source="stop_write" target="access">
+        <inscription>
+          <text>3</text>
+        </inscription>
+      </arc>
+    </page>
+  </net>
+</pnml>

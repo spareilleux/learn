@@ -113,6 +113,49 @@ public sealed class ReachabilityGraph
         return path;
     }
 
+    /// <summary>
+    /// True when some reachable marking can be reached again. A net with no transition invariant has
+    /// no such marking, which is one of the few things a transition invariant decides on its own (lesson 5).
+    /// </summary>
+    public bool HasCycle => CycleAvoiding(-1) is not null;
+
+    /// <summary>
+    /// A cycle the net can run for ever without ever firing <paramref name="transition"/>, reachable
+    /// from the initial marking, or null when there is none. A live transition can still sit on the
+    /// wrong side of such a cycle: that is starvation, and liveness does not forbid it (lesson 7).
+    /// </summary>
+    public (IReadOnlyList<int> States, IReadOnlyList<int> Transitions)? CycleAvoiding(int transition)
+    {
+        var allowed = Steps.Where(s => s.Transition != transition).ToList();
+        var successors = new List<Step>[States.Count];
+        for (var s = 0; s < States.Count; s++) successors[s] = [];
+        foreach (var step in allowed) successors[step.From].Add(step);
+
+        var state = new int[States.Count]; // 0 unseen, 1 on the current path, 2 done
+        var path = new List<Step>();
+        return Walk(0);
+
+        (IReadOnlyList<int>, IReadOnlyList<int>)? Walk(int node)
+        {
+            state[node] = 1;
+            foreach (var step in successors[node])
+            {
+                if (state[step.To] == 1)
+                {
+                    var start = path.FindIndex(s => s.From == step.To);
+                    var cycle = start < 0 ? new List<Step> { step } : [.. path[start..], step];
+                    return ([.. cycle.Select(s => s.From)], [.. cycle.Select(s => s.Transition)]);
+                }
+                if (state[step.To] != 0) continue;
+                path.Add(step);
+                if (Walk(step.To) is { } found) return found;
+                path.RemoveAt(path.Count - 1);
+            }
+            state[node] = 2;
+            return null;
+        }
+    }
+
     /// <summary>The largest number of tokens seen in each place, or null when the graph is only a prefix.</summary>
     public int?[] PlaceBounds()
     {

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pnml xmlns="http://www.pnml.org/version-2009/grammar/pnml">
+  <net id="n1" type="http://www.pnml.org/version-2009/grammar/ptnet">
+    <name>
+      <text>counting-semaphore</text>
+    </name>
+    <page id="page1">
+      <place id="permits">
+        <name>
+          <text>permits</text>
+        </name>
+        <initialMarking>
+          <text>2</text>
+        </initialMarking>
+      </place>
+      <place id="idle1">
+        <name>
+          <text>idle1</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="inside1">
+        <name>
+          <text>inside1</text>
+        </name>
+      </place>
+      <place id="idle2">
+        <name>
+          <text>idle2</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="inside2">
+        <name>
+          <text>inside2</text>
+        </name>
+      </place>
+      <place id="idle3">
+        <name>
+          <text>idle3</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="inside3">
+        <name>
+          <text>inside3</text>
+        </name>
+      </place>
+      <transition id="acquire1">
+        <name>
+          <text>acquire1</text>
+        </name>
+      </transition>
+      <transition id="release1">
+        <name>
+          <text>release1</text>
+        </name>
+      </transition>
+      <transition id="acquire2">
+        <name>
+          <text>acquire2</text>
+        </name>
+      </transition>
+      <transition id="release2">
+        <name>
+          <text>release2</text>
+        </name>
+      </transition>
+      <transition id="acquire3">
+        <name>
+          <text>acquire3</text>
+        </name>
+      </transition>
+      <transition id="release3">
+        <name>
+          <text>release3</text>
+        </name>
+      </transition>
+      <arc id="a1" source="idle1" target="acquire1" />
+      <arc id="a2" source="permits" target="acquire1" />
+      <arc id="a3" source="acquire1" target="inside1" />
+      <arc id="a4" source="inside1" target="release1" />
+      <arc id="a5" source="release1" target="idle1" />
+      <arc id="a6" source="release1" target="permits" />
+      <arc id="a7" source="idle2" target="acquire2" />
+      <arc id="a8" source="permits" target="acquire2" />
+      <arc id="a9" source="acquire2" target="inside2" />
+      <arc id="a10" source="inside2" target="release2" />
+      <arc id="a11" source="release2" target="idle2" />
+      <arc id="a12" source="release2" target="permits" />
+      <arc id="a13" source="idle3" target="acquire3" />
+      <arc id="a14" source="permits" target="acquire3" />
+      <arc id="a15" source="acquire3" target="inside3" />
+      <arc id="a16" source="inside3" target="release3" />
+      <arc id="a17" source="release3" target="idle3" />
+      <arc id="a18" source="release3" target="permits" />
+    </page>
+  </net>
+</pnml>

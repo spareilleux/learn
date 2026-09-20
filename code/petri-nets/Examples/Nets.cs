@@ -341,6 +341,474 @@ public static class Nets
         return new PetriNet($"independent-{copies}", places, transitions, arcs, new Marking([.. marking]));
     }
 
+    /// <summary>
+    /// Lesson 7, exercise 2: the mutual exclusion net with "leave1" removed — a lock the first
+    /// thread takes and never releases. Not part of <see cref="All"/>: it exists to be broken.
+    /// </summary>
+    public static PetriNet MutualExclusionLeaky()
+    {
+        var net = MutualExclusion();
+        return new PetriNet(
+            "mutual-exclusion-leaky",
+            net.Places,
+            [.. net.Transitions.Where(t => t.Id != "leave1")],
+            [.. net.Arcs.Where(a => a.Source != "leave1" && a.Target != "leave1")],
+            net.InitialMarking);
+    }
+
+    /// <summary>
+    /// Lesson 6: a connection that opens, is established or fails, and closes. Every transition has
+    /// exactly one input and one output place, so this is a state machine; it is strongly connected
+    /// and holds one token, which is the whole hypothesis of the liveness theorem for that class.
+    /// </summary>
+    public static PetriNet Connection() => new(
+        "connection",
+        [
+            new Place("disconnected", "disconnected"),
+            new Place("connecting", "connecting"),
+            new Place("connected", "connected"),
+        ],
+        [
+            new Transition("open", "open"),
+            new Transition("established", "established"),
+            new Transition("failed", "failed"),
+            new Transition("close", "close"),
+        ],
+        [
+            new Arc("disconnected", "open"),
+            new Arc("open", "connecting"),
+            new Arc("connecting", "established"),
+            new Arc("established", "connected"),
+            new Arc("connecting", "failed"),
+            new Arc("failed", "disconnected"),
+            new Arc("connected", "close"),
+            new Arc("close", "disconnected"),
+        ],
+        new Marking(1, 0, 0));
+
+    /// <summary>
+    /// Lesson 6: the handshake of lesson 2 with the first request already in place. The structure is
+    /// unchanged and the net is now live — and unbounded, since "served" counts the exchanges for ever.
+    /// Its liveness is decided by Commoner's condition, on a net whose reachability graph does not exist.
+    /// </summary>
+    public static PetriNet HandshakeStarted()
+    {
+        var net = Handshake();
+        return new PetriNet("handshake-started", net.Places, net.Transitions, net.Arcs, new Marking(1, 0, 0));
+    }
+
+    /// <summary>
+    /// Lesson 7: readers and writers. The place "access" holds one permit per reader; a reader takes
+    /// one, a writer takes all of them at once through an arc of weight 3. That weighted arc is
+    /// exactly the difference between <c>SemaphoreSlim.Wait()</c> and a reader/writer lock.
+    /// </summary>
+    public static PetriNet ReadersWriters(int readers = 3) => new(
+        readers == 3 ? "readers-writers" : $"readers-writers-{readers}",
+        [
+            new Place("idle", "idle"),
+            new Place("reading", "reading"),
+            new Place("writing", "writing"),
+            new Place("access", "access"),
+        ],
+        [
+            new Transition("start_read", "start_read"),
+            new Transition("stop_read", "stop_read"),
+            new Transition("start_write", "start_write"),
+            new Transition("stop_write", "stop_write"),
+        ],
+        [
+            new Arc("idle", "start_read"),
+            new Arc("access", "start_read"),
+            new Arc("start_read", "reading"),
+            new Arc("reading", "stop_read"),
+            new Arc("stop_read", "idle"),
+            new Arc("stop_read", "access"),
+            new Arc("idle", "start_write"),
+            new Arc("access", "start_write", readers),
+            new Arc("start_write", "writing"),
+            new Arc("writing", "stop_write"),
+            new Arc("stop_write", "idle"),
+            new Arc("stop_write", "access", readers),
+        ],
+        new Marking(readers, 0, 0, readers));
+
+    /// <summary>
+    /// Lesson 7: a counting semaphore. <paramref name="permits"/> tokens in "permits" and
+    /// <paramref name="threads"/> threads competing for them, which is <c>new SemaphoreSlim(k)</c>
+    /// with the mutual exclusion net as the case k = 1.
+    /// </summary>
+    public static PetriNet CountingSemaphore(int threads = 3, int permits = 2)
+    {
+        var places = new List<Place> { new("permits", "permits") };
+        var marking = new List<int> { permits };
+        var transitions = new List<Transition>();
+        var arcs = new List<Arc>();
+        for (var i = 1; i <= threads; i++)
+        {
+            places.Add(new Place($"idle{i}", $"idle{i}"));
+            marking.Add(1);
+            places.Add(new Place($"inside{i}", $"inside{i}"));
+            marking.Add(0);
+            transitions.Add(new Transition($"acquire{i}", $"acquire{i}"));
+            transitions.Add(new Transition($"release{i}", $"release{i}"));
+            arcs.Add(new Arc($"idle{i}", $"acquire{i}"));
+            arcs.Add(new Arc("permits", $"acquire{i}"));
+            arcs.Add(new Arc($"acquire{i}", $"inside{i}"));
+            arcs.Add(new Arc($"inside{i}", $"release{i}"));
+            arcs.Add(new Arc($"release{i}", $"idle{i}"));
+            arcs.Add(new Arc($"release{i}", "permits"));
+        }
+        var name = threads == 3 && permits == 2 ? "counting-semaphore" : $"counting-semaphore-{threads}-{permits}";
+        return new PetriNet(name, places, transitions, arcs, new Marking([.. marking]));
+    }
+
+    /// <summary>
+    /// Lesson 7: the dining philosophers again, this time taking one fork at a time. Philosopher
+    /// <paramref name="count"/> reverses the order when <paramref name="ordered"/> is true, which is
+    /// the total order on locks of lesson 4 applied to a ring.
+    /// </summary>
+    public static PetriNet PhilosophersOneFork(int count, bool ordered = false)
+    {
+        ArgumentOutOfRangeException.ThrowIfLessThan(count, 2);
+        var places = new List<Place>();
+        var transitions = new List<Transition>();
+        var arcs = new List<Arc>();
+        var marking = new List<int>();
+
+        for (var i = 1; i <= count; i++)
+        {
+            places.Add(new Place($"thinking{i}", $"thinking{i}"));
+            marking.Add(1);
+            places.Add(new Place($"holding{i}", $"holding{i}"));
+            marking.Add(0);
+            places.Add(new Place($"eating{i}", $"eating{i}"));
+            marking.Add(0);
+            places.Add(new Place($"fork{i}", $"fork{i}"));
+            marking.Add(1);
+        }
+
+        for (var i = 1; i <= count; i++)
+        {
+            var right = i % count + 1;
+            // Everybody takes their left fork first, except the last one when the order is imposed.
+            var (first, second) = ordered && i == count ? (right, i) : (i, right);
+            transitions.Add(new Transition($"take_first{i}", $"take_first{i}"));
+            transitions.Add(new Transition($"take_second{i}", $"take_second{i}"));
+            transitions.Add(new Transition($"put{i}", $"put{i}"));
+            arcs.Add(new Arc($"thinking{i}", $"take_first{i}"));
+            arcs.Add(new Arc($"fork{first}", $"take_first{i}"));
+            arcs.Add(new Arc($"take_first{i}", $"holding{i}"));
+            arcs.Add(new Arc($"holding{i}", $"take_second{i}"));
+            arcs.Add(new Arc($"fork{second}", $"take_second{i}"));
+            arcs.Add(new Arc($"take_second{i}", $"eating{i}"));
+            arcs.Add(new Arc($"eating{i}", $"put{i}"));
+            arcs.Add(new Arc($"put{i}", $"thinking{i}"));
+            arcs.Add(new Arc($"put{i}", $"fork{i}"));
+            arcs.Add(new Arc($"put{i}", $"fork{right}"));
+        }
+
+        var name = ordered ? $"philosophers-ordered-{count}" : $"philosophers-one-fork-{count}";
+        return new PetriNet(name, places, transitions, arcs, new Marking([.. marking]));
+    }
+
+    /// <summary>
+    /// Lesson 14, on our own system: the lock several Claude sessions of this repository take
+    /// before running a heavy or a GPU job. The lock is a directory, taken with <c>mkdir</c>,
+    /// which succeeds for exactly one caller; a lane that loses writes its name in an
+    /// <c>owner</c> file and removes the directory when it is done.
+    ///
+    /// The lock is modelled by the complementary pair <c>free</c> / <c>taken</c> rather than one
+    /// place, because a lane that fails to take it has to *test* that it is held, and an ordinary
+    /// place/transition net has no inhibitor arc: the test becomes a self-loop on <c>taken</c>.
+    ///
+    /// <paramref name="guarded"/> is the whole question. The shell shape
+    /// <c>mkdir "$lock" &amp;&amp; work ; rm -r "$lock"</c> releases the lock whatever the
+    /// <c>mkdir</c> did, because <c>;</c> does not care: that is <c>guarded: false</c>, where
+    /// <c>clean_hit</c> removes a directory another lane created. The rule this repository
+    /// actually runs checks the owner file first, so a lane that never took the lock never
+    /// removes it: that is <c>guarded: true</c>, where <c>clean</c> touches neither place.
+    /// </summary>
+    public static PetriNet LaneLock(int lanes = 2, bool guarded = true)
+    {
+        ArgumentOutOfRangeException.ThrowIfLessThan(lanes, 2);
+        var places = new List<Place> { new("free", "free"), new("taken", "taken") };
+        var marking = new List<int> { 1, 0 };
+        var transitions = new List<Transition>();
+        var arcs = new List<Arc>();
+
+        for (var i = 1; i <= lanes; i++)
+        {
+            places.Add(new Place($"idle{i}", $"idle{i}"));
+            marking.Add(1);
+            places.Add(new Place($"held{i}", $"held{i}"));
+            marking.Add(0);
+            places.Add(new Place($"failed{i}", $"failed{i}"));
+            marking.Add(0);
+        }
+
+        for (var i = 1; i <= lanes; i++)
+        {
+            // mkdir succeeded: the lane holds the lock and the directory now exists.
+            transitions.Add(new Transition($"take{i}", $"take{i}"));
+            arcs.Add(new Arc($"idle{i}", $"take{i}"));
+            arcs.Add(new Arc("free", $"take{i}"));
+            arcs.Add(new Arc($"take{i}", $"held{i}"));
+            arcs.Add(new Arc($"take{i}", "taken"));
+
+            // mkdir failed: the directory exists, and the lane only read that fact.
+            transitions.Add(new Transition($"fail{i}", $"fail{i}"));
+            arcs.Add(new Arc($"idle{i}", $"fail{i}"));
+            arcs.Add(new Arc("taken", $"fail{i}"));
+            arcs.Add(new Arc($"fail{i}", $"failed{i}"));
+            arcs.Add(new Arc($"fail{i}", "taken"));
+
+            // The holder finishes and removes its own directory.
+            transitions.Add(new Transition($"release{i}", $"release{i}"));
+            arcs.Add(new Arc($"held{i}", $"release{i}"));
+            arcs.Add(new Arc("taken", $"release{i}"));
+            arcs.Add(new Arc($"release{i}", $"idle{i}"));
+            arcs.Add(new Arc($"release{i}", "free"));
+
+            if (guarded)
+            {
+                // The owner check fails, so the loser goes home without touching the lock.
+                transitions.Add(new Transition($"clean{i}", $"clean{i}"));
+                arcs.Add(new Arc($"failed{i}", $"clean{i}"));
+                arcs.Add(new Arc($"clean{i}", $"idle{i}"));
+            }
+            else
+            {
+                // rm -r runs anyway. It either removes the directory the holder is still using,
+                // or finds nothing there because the holder released first.
+                transitions.Add(new Transition($"clean_hit{i}", $"clean_hit{i}"));
+                arcs.Add(new Arc($"failed{i}", $"clean_hit{i}"));
+                arcs.Add(new Arc("taken", $"clean_hit{i}"));
+                arcs.Add(new Arc($"clean_hit{i}", $"idle{i}"));
+                arcs.Add(new Arc($"clean_hit{i}", "free"));
+
+                transitions.Add(new Transition($"clean_miss{i}", $"clean_miss{i}"));
+                arcs.Add(new Arc($"failed{i}", $"clean_miss{i}"));
+                arcs.Add(new Arc("free", $"clean_miss{i}"));
+                arcs.Add(new Arc($"clean_miss{i}", $"idle{i}"));
+                arcs.Add(new Arc($"clean_miss{i}", "free"));
+            }
+        }
+
+        var name = (guarded ? "lane-lock-guarded" : "lane-lock-unguarded") + (lanes == 2 ? "" : $"-{lanes}");
+        return new PetriNet(name, places, transitions, arcs, new Marking([.. marking]));
+    }
+
+    /// <summary>
+    /// Lesson 14, on Guitar Alchemist: one chat turn through the orchestrator, at commit
+    /// a826864. A turn is admitted only if the intake gate is free — <c>TryEnterAsync</c> in
+    /// ChatIntake.cs:37 refuses instead of waiting, so a refused turn leaves at once — and the
+    /// gate is held until the very end, ChatIntake.cs:51, which is why the embedding
+    /// initialisation lock of SemanticRouter is taken *inside* it.
+    ///
+    /// The place "notified" is marked only by the OnResponseSent hook. Whether a marking exists
+    /// with the turn finished and "notified" still empty is the whole question:
+    /// ProductionOrchestrator.cs:487 runs that hook on the buffered path, and
+    /// AnswerStreamingAsync (:154-302) does not.
+    ///
+    /// <paramref name="waits"/> replaces the refusal by a wait, which is the version this is
+    /// compared against: it is the same pipeline with one behaviour changed.
+    /// </summary>
+    public static PetriNet ChatTurn(bool streaming = false, bool waits = false, int turns = 2)
+    {
+        ArgumentOutOfRangeException.ThrowIfLessThan(turns, 1);
+        var places = new List<Place>
+        {
+            new("gate_free", "gate_free"),
+            new("gate_held", "gate_held"),
+            new("init_free", "init_free"),
+            new("init_held", "init_held"),
+        };
+        var marking = new List<int> { 1, 0, 1, 0 };
+        var transitions = new List<Transition>();
+        var arcs = new List<Arc>();
+
+        void Step(string name, params string[] io)
+        {
+            transitions.Add(new Transition(name, name));
+            foreach (var place in io)
+                arcs.Add(place.StartsWith('-') ? new Arc(place[1..], name) : new Arc(name, place));
+        }
+
+        for (var i = 1; i <= turns; i++)
+        {
+            foreach (var stage in (string[])["request", "admitted", "routed", "executed", "sent", "notified", "done", "rejected"])
+            {
+                places.Add(new Place($"{stage}{i}", $"{stage}{i}"));
+                marking.Add(stage == "request" ? 1 : 0);
+            }
+
+            // ChatIntake.cs:37. Without "waits", a turn that finds the gate held is answered Busy
+            // at once; with it, the turn simply stays in "request" until the gate frees up.
+            Step($"admit{i}", $"-request{i}", "-gate_free", $"admitted{i}", "gate_held");
+            if (!waits) Step($"refuse{i}", $"-request{i}", "-gate_held", $"rejected{i}", "gate_held");
+
+            // SemanticRouter.EnsureEmbeddingsInitializedAsync: a second lock, taken while the
+            // gate is still held, and always in that order.
+            Step($"take_init{i}", $"-admitted{i}", "-init_free", $"routed{i}", "init_held");
+            Step($"drop_init{i}", $"-routed{i}", "-init_held", $"executed{i}", "init_free");
+
+            if (streaming)
+            {
+                // AnswerStreamingAsync runs OnRequestReceived only: no OnBeforeSkill,
+                // OnAfterSkill or OnResponseSent, so nothing ever marks "notified".
+                Step($"finish{i}", $"-executed{i}", "-gate_held", $"done{i}", "gate_free");
+            }
+            else
+            {
+                // ProductionOrchestrator.cs:487. The hook both moves the turn on and drops a
+                // token in "notified", which nothing ever consumes: it is a witness that the
+                // hook ran, still readable once the turn is over.
+                Step($"on_response_sent{i}", $"-executed{i}", $"sent{i}", $"notified{i}");
+                Step($"finish{i}", $"-sent{i}", "-gate_held", $"done{i}", "gate_free");
+            }
+        }
+
+        var name = $"chat-turn{(streaming ? "-streaming" : "")}{(waits ? "-waiting" : "")}"
+                   + (turns == 2 ? "" : $"-{turns}");
+        return new PetriNet(name, places, transitions, arcs, new Marking([.. marking]));
+    }
+
+    /// <summary>
+    /// Lesson 14, on Guitar Alchemist: the F# interactive session pool, GaFsiSessionPool.fs at
+    /// commit a826864. Callers take the gate (one permit, :133) and then a session from a pool
+    /// of two (:134), always in that order — so there is no cycle to deadlock on. The net is
+    /// about the two other things the code does.
+    ///
+    /// <paramref name="leaks"/> is the exception path :159-162, which releases the gate and
+    /// never returns the session to the pool. There is no try/finally around the acquisition.
+    ///
+    /// <paramref name="earlyGateRelease"/> is the success path :140-150, which releases the gate
+    /// at :144 and the session only at :146. It leaves a window where a second caller is through
+    /// the gate while the first still holds a session, and the net finds it — but that window is
+    /// harmless here, and the net is what shows why: the evaluation itself finished at :140 and
+    /// its output was read at :143, so nothing is running concurrently inside a session. The
+    /// header at :13-20 serialises *evaluations* and explicitly allows several sessions to exist.
+    /// The parameter is kept because the contrast is what makes the leak legible.
+    /// </summary>
+    public static PetriNet SessionPool(
+        int callers = 2, int poolSize = 2, bool leaks = true, bool earlyGateRelease = true)
+    {
+        ArgumentOutOfRangeException.ThrowIfLessThan(callers, 1);
+        ArgumentOutOfRangeException.ThrowIfLessThan(poolSize, 1);
+        var places = new List<Place> { new("gate", "gate"), new("pool", "pool") };
+        var marking = new List<int> { 1, poolSize };
+        var transitions = new List<Transition>();
+        var arcs = new List<Arc>();
+
+        void Step(string name, params string[] io)
+        {
+            transitions.Add(new Transition(name, name));
+            foreach (var place in io)
+                arcs.Add(place.StartsWith('-') ? new Arc(place[1..], name) : new Arc(name, place));
+        }
+
+        for (var i = 1; i <= callers; i++)
+        {
+            foreach (var stage in (string[])["outside", "in_gate", "has_session", "releasing"])
+            {
+                places.Add(new Place($"{stage}{i}", $"{stage}{i}"));
+                marking.Add(stage == "outside" ? 1 : 0);
+            }
+
+            Step($"enter{i}", $"-outside{i}", "-gate", $"in_gate{i}");
+            Step($"acquire{i}", $"-in_gate{i}", "-pool", $"has_session{i}");
+
+            if (earlyGateRelease)
+            {
+                Step($"release_gate{i}", $"-has_session{i}", $"releasing{i}", "gate");
+                Step($"release_session{i}", $"-releasing{i}", $"outside{i}", "pool");
+            }
+            else
+            {
+                Step($"finish{i}", $"-has_session{i}", $"outside{i}", "gate", "pool");
+            }
+
+            // The "with ex" path: the gate comes back, the session does not.
+            if (leaks) Step($"leak{i}", $"-has_session{i}", $"outside{i}", "gate");
+        }
+
+        var name = "session-pool"
+                   + (leaks ? "" : "-nofinallyfix")
+                   + (earlyGateRelease ? "" : "-ordered")
+                   + (callers == 2 && poolSize == 2 ? "" : $"-{callers}x{poolSize}");
+        return new PetriNet(name, places, transitions, arcs, new Marking([.. marking]));
+    }
+
+    /// <summary>The twelve pitch classes, named with sharps, as the places of <see cref="VoiceLeading"/>.</summary>
+    public static readonly string[] PitchClasses =
+        ["C", "Cs", "D", "Ds", "E", "F", "Fs", "G", "Gs", "A", "As", "B"];
+
+    /// <summary>
+    /// Lesson 14, on Guitar Alchemist: voice leading as a net. One place per pitch class, one
+    /// token per voice, so a marking *is* a chord as a multiset of pitch classes — the same
+    /// object GA's chord-to-set conversion produces. A transition moves one voice from one pitch
+    /// class to another, by at most <paramref name="maxStep"/> semitones.
+    ///
+    /// Two invariants fall out of the structure rather than out of a search. The tokens are never
+    /// created or destroyed, so the number of voices is conserved. And when a
+    /// <paramref name="key"/> is given, the extra place "chromatic" is a budget: a voice moving
+    /// onto a pitch class outside the key spends one, a voice coming back returns it, so
+    /// chromatic + (voices outside the key) is constant. That bounds the foreign notes at
+    /// <paramref name="budget"/> for every reachable chord, without enumerating any of them.
+    /// </summary>
+    public static PetriNet VoiceLeading(
+        IReadOnlyList<int> chord, int maxStep = 2, IReadOnlyList<int>? key = null, int budget = 1)
+    {
+        ArgumentNullException.ThrowIfNull(chord);
+        ArgumentOutOfRangeException.ThrowIfLessThan(maxStep, 1);
+        ArgumentOutOfRangeException.ThrowIfGreaterThan(maxStep, 5);
+
+        var inKey = key is null ? null : new HashSet<int>(key);
+        var places = new List<Place>();
+        var marking = new int[inKey is null ? 12 : 13];
+        for (var pc = 0; pc < 12; pc++) places.Add(new Place(PitchClasses[pc], PitchClasses[pc]));
+        foreach (var pc in chord) marking[pc]++;
+        if (inKey is not null)
+        {
+            places.Add(new Place("chromatic", "chromatic"));
+            marking[12] = budget - chord.Count(pc => !inKey.Contains(pc));
+            ArgumentOutOfRangeException.ThrowIfNegative(marking[12], nameof(budget));
+        }
+
+        var transitions = new List<Transition>();
+        var arcs = new List<Arc>();
+        for (var from = 0; from < 12; from++)
+        {
+            for (var step = -maxStep; step <= maxStep; step++)
+            {
+                if (step == 0) continue;
+                var to = (from + step + 12) % 12;
+                var id = $"{PitchClasses[from]}_{PitchClasses[to]}";
+                transitions.Add(new Transition(id, id));
+                arcs.Add(new Arc(PitchClasses[from], id));
+                arcs.Add(new Arc(id, PitchClasses[to]));
+                if (inKey is null) continue;
+                // Leaving the key spends a unit of the budget; coming back returns it.
+                if (inKey.Contains(from) && !inKey.Contains(to)) arcs.Add(new Arc("chromatic", id));
+                if (!inKey.Contains(from) && inKey.Contains(to)) arcs.Add(new Arc(id, "chromatic"));
+            }
+        }
+
+        var name = "voice-leading-" + string.Join("", chord.Select(pc => PitchClasses[pc]))
+                   + $"-step{maxStep}" + (inKey is null ? "" : $"-key{budget}");
+        return new PetriNet(name, places, transitions, arcs, new Marking(marking));
+    }
+
+    /// <summary>A marking of <see cref="VoiceLeading"/> read back as a chord, low pitch class first.</summary>
+    public static string Chord(Marking marking)
+    {
+        ArgumentNullException.ThrowIfNull(marking);
+        var notes = new List<string>();
+        for (var pc = 0; pc < 12; pc++)
+            for (var n = 0; n < marking[pc]; n++) notes.Add(PitchClasses[pc].Replace("s", "#", StringComparison.Ordinal));
+        return string.Join(" ", notes);
+    }
+
     /// <summary>Every net of the course, in the order the lessons meet them.</summary>
     public static IReadOnlyList<PetriNet> All =>
     [
@@ -352,5 +820,14 @@ public static class Nets
         TwoLocksOrdered(),
         StartOnce(),
         EmitLoop(),
+        Connection(),
+        HandshakeStarted(),
+        ReadersWriters(),
+        CountingSemaphore(),
+        PhilosophersOneFork(3),
+        PhilosophersOneFork(3, ordered: true),
+        LaneLock(),
+        LaneLock(2, guarded: false),
+        ColouredNets.Retry().Unfold(),
     ];
 }

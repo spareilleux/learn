@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pnml xmlns="http://www.pnml.org/version-2009/grammar/pnml">
+  <net id="n1" type="http://www.pnml.org/version-2009/grammar/ptnet">
+    <name>
+      <text>retry</text>
+    </name>
+    <page id="page1">
+      <place id="pending_0">
+        <name>
+          <text>pending_0</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="pending_1">
+        <name>
+          <text>pending_1</text>
+        </name>
+      </place>
+      <place id="pending_2">
+        <name>
+          <text>pending_2</text>
+        </name>
+      </place>
+      <place id="failed_0">
+        <name>
+          <text>failed_0</text>
+        </name>
+      </place>
+      <place id="failed_1">
+        <name>
+          <text>failed_1</text>
+        </name>
+      </place>
+      <place id="failed_2">
+        <name>
+          <text>failed_2</text>
+        </name>
+      </place>
+      <place id="done">
+        <name>
+          <text>done</text>
+        </name>
+      </place>
+      <place id="dead">
+        <name>
+          <text>dead</text>
+        </name>
+      </place>
+      <transition id="succeed_0">
+        <name>
+          <text>succeed_0</text>
+        </name>
+      </transition>
+      <transition id="succeed_1">
+        <name>
+          <text>succeed_1</text>
+        </name>
+      </transition>
+      <transition id="succeed_2">
+        <name>
+          <text>succeed_2</text>
+        </name>
+      </transition>
+      <transition id="fail_0">
+        <name>
+          <text>fail_0</text>
+        </name>
+      </transition>
+      <transition id="fail_1">
+        <name>
+          <text>fail_1</text>
+        </name>
+      </transition>
+      <transition id="fail_2">
+        <name>
+          <text>fail_2</text>
+        </name>
+      </transition>
+      <transition id="retry_0">
+        <name>
+          <text>retry_0</text>
+        </name>
+      </transition>
+      <transition id="retry_1">
+        <name>
+          <text>retry_1</text>
+        </name>
+      </transition>
+      <transition id="giveup_2">
+        <name>
+          <text>giveup_2</text>
+        </name>
+      </transition>
+      <arc id="a1" source="pending_0" target="succeed_0" />
+      <arc id="a2" source="succeed_0" target="done" />
+      <arc id="a3" source="pending_1" target="succeed_1" />
+      <arc id="a4" source="succeed_1" target="done" />
+      <arc id="a5" source="pending_2" target="succeed_2" />
+      <arc id="a6" source="succeed_2" target="done" />
+      <arc id="a7" source="pending_0" target="fail_0" />
+      <arc id="a8" source="fail_0" target="failed_0" />
+      <arc id="a9" source="pending_1" target="fail_1" />
+      <arc id="a10" source="fail_1" target="failed_1" />
+      <arc id="a11" source="pending_2" target="fail_2" />
+      <arc id="a12" source="fail_2" target="failed_2" />
+      <arc id="a13" source="failed_0" target="retry_0" />
+      <arc id="a14" source="retry_0" target="pending_1" />
+      <arc id="a15" source="failed_1" target="retry_1" />
+      <arc id="a16" source="retry_1" target="pending_2" />
+      <arc id="a17" source="failed_2" target="giveup_2" />
+      <arc id="a18" source="giveup_2" target="dead" />
+    </page>
+  </net>
+</pnml>
