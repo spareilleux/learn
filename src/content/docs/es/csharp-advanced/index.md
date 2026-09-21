@@ -73,19 +73,20 @@ Las partes 1 y 2 miden el propio código de GA. La parte 3 construye un pequeño
 | 14 | [Minimal APIs y controladores](14-minimal-apis-controllers/) | manejadores de rutas y enlace de parámetros, filtros, validación, `TypedResults`, respuestas `IAsyncEnumerable` en streaming | `@RestController`, endpoints funcionales de [WebFlux](../spring-cloud-reactor/04-webflux/) |
 | 15 | [Servicios hospedados](15-hosted-services/) | `IHostedService`, `BackgroundService`, orden de arranque y de apagado, excepciones, colas con canales; los servicios hospedados de GA | `@Scheduled`, `SmartLifecycle` |
 | 16 | [Autenticación y autorización](16-authentication-authorization/) | esquemas, manejadores, JWT bearer, directivas y requisitos | Spring Security |
-| 17 | gRPC y SignalR | contratos protobuf, llamadas en streaming, hubs, backpressure a través de la red | Spring gRPC, WebSocket, RSocket |
-| 18 | Resiliencia, limitación de velocidad y caché de salida | `Microsoft.Extensions.Http.Resilience`, pipelines de Polly, limitadores de velocidad, directivas de caché de salida | Resilience4j, Spring Cloud Circuit Breaker |
-| 19 | OpenTelemetry y diagnóstico en producción | `System.Diagnostics.Metrics`, `ActivitySource`, exportadores de OpenTelemetry, `dotnet-counters`, `dotnet-trace`, `dotnet-dump` | Micrometer, Actuator |
-| 20 | Pruebas con `WebApplicationFactory` | el host de pruebas, sustituir servicios, autenticación en las pruebas, Testcontainers | `@SpringBootTest`, `WebTestClient` |
-| 21 | Native AOT y recorte | publicar una API con Native AOT, advertencias de recorte, el generador de delegados de solicitud, arranque y tamaño medidos | imágenes nativas de GraalVM |
+| 17 | [Oráculos de especificación Petri para pipelines C#](17-petri-pipeline-oracles/) | modelos finitos de ciclo de vida, alcanzabilidad completa, clasificación terminal, compuertas de ejecución deterministas; supuestos de Channel, Dataflow y Rx mantenidos por separado | el mismo método se aplica a Reactor solo después de modelar explícitamente su capacidad y sus schedulers |
+| 18 | gRPC y SignalR | contratos protobuf, llamadas en streaming, hubs, backpressure a través de la red | Spring gRPC, WebSocket, RSocket |
+| 19 | Resiliencia, limitación de velocidad y caché de salida | `Microsoft.Extensions.Http.Resilience`, pipelines de Polly, limitadores de velocidad, directivas de caché de salida | Resilience4j, Spring Cloud Circuit Breaker |
+| 20 | OpenTelemetry y diagnóstico en producción | `System.Diagnostics.Metrics`, `ActivitySource`, exportadores de OpenTelemetry, `dotnet-counters`, `dotnet-trace`, `dotnet-dump` | Micrometer, Actuator |
+| 21 | Pruebas con `WebApplicationFactory` | el host de pruebas, sustituir servicios, autenticación en las pruebas, Testcontainers | `@SpringBootTest`, `WebTestClient` |
+| 22 | Native AOT y recorte | publicar una API con Native AOT, advertencias de recorte, el generador de delegados de solicitud, arranque y tamaño medidos | imágenes nativas de GraalVM |
 
 ### Parte 4: metaprogramación y herramientas
 
 | # | Lección | Bajo el capó | Spring y Reactor |
 |---|---|---|---|
-| 22 | Árboles de expresión, reflexión y generadores de código fuente | en qué se compila una lambda, `Expression<T>`, el coste de la reflexión, generadores incrementales, `[GeneratedRegex]` | procesadores de anotaciones, [el motor AOT de Spring](https://docs.spring.io/spring-framework/reference/core/aot.html) |
-| 23 | Analizadores y correcciones de código de Roslyn | modelos sintácticos y semánticos, escribir un analizador y sus pruebas | [Error Prone](https://errorprone.info/), [SpotBugs](https://spotbugs.github.io/) |
-| 24 | Interoperabilidad y código no seguro | `[LibraryImport]`, punteros de función, `Unsafe`, `MemoryMarshal`, fijación | JNI, y la [API de funciones y memoria externas](https://openjdk.org/jeps/454) |
+| 23 | Árboles de expresión, reflexión y generadores de código fuente | en qué se compila una lambda, `Expression<T>`, el coste de la reflexión, generadores incrementales, `[GeneratedRegex]` | procesadores de anotaciones, [el motor AOT de Spring](https://docs.spring.io/spring-framework/reference/core/aot.html) |
+| 24 | Analizadores y correcciones de código de Roslyn | modelos sintácticos y semánticos, escribir un analizador y sus pruebas | [Error Prone](https://errorprone.info/), [SpotBugs](https://spotbugs.github.io/) |
+| 25 | Interoperabilidad y código no seguro | `[LibraryImport]`, punteros de función, `Unsafe`, `MemoryMarshal`, fijación | JNI, y la [API de funciones y memoria externas](https://openjdk.org/jeps/454) |
 
 ### Apéndices
 
@@ -96,7 +97,7 @@ Las partes 1 y 2 miden el propio código de GA. La parte 3 construye un pequeño
 | 3 | [Oráculo de ciclo de vida con redes de Petri](../petri-nets/14-on-our-systems/) | un pipeline acotado con éxito, fallo y cancelación explícitos; alcanzabilidad completa y ningún marcado muerto no terminal | las formas de fallo de Channel estudiadas en las lecciones 6 y 9 |
 | — | [Diario](journal/) | | |
 
-Las lecciones 17 a 24 están planificadas y aún no se han escrito. Las lecciones 6 a 9 se escribieron antes que la lección 5, y no dependen de ella.
+Las lecciones 18 a 25 están planificadas y aún no se han escrito. La lección 17 es un laboratorio avanzado de concurrencia añadido después de las lecciones de ASP.NET Core; las lecciones 6 a 9 se escribieron antes que la lección 5 y no dependen de ella.
 
 ## Requisitos previos
 

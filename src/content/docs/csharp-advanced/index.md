@@ -73,19 +73,20 @@ Parts 1 and 2 measure GA's own code. Part 3 builds a small scales and chords ser
 | 14 | [Minimal APIs and controllers](14-minimal-apis-controllers/) | route handlers and parameter binding, filters, validation, `TypedResults`, streaming `IAsyncEnumerable` responses | `@RestController`, [WebFlux](../spring-cloud-reactor/04-webflux/) functional endpoints |
 | 15 | [Hosted services](15-hosted-services/) | `IHostedService`, `BackgroundService`, startup and shutdown order, exceptions, queues with channels; GA's hosted services | `@Scheduled`, `SmartLifecycle` |
 | 16 | [Authentication and authorization](16-authentication-authorization/) | schemes, handlers, JWT bearer, policies and requirements | Spring Security |
-| 17 | gRPC and SignalR | protobuf contracts, streaming calls, hubs, backpressure over the network | Spring gRPC, WebSocket, RSocket |
-| 18 | Resilience, rate limiting and output caching | `Microsoft.Extensions.Http.Resilience`, Polly pipelines, rate limiters, output cache policies | Resilience4j, Spring Cloud Circuit Breaker |
-| 19 | OpenTelemetry and diagnostics in production | `System.Diagnostics.Metrics`, `ActivitySource`, OpenTelemetry exporters, `dotnet-counters`, `dotnet-trace`, `dotnet-dump` | Micrometer, Actuator |
-| 20 | Testing with `WebApplicationFactory` | the test host, replacing services, authentication in tests, Testcontainers | `@SpringBootTest`, `WebTestClient` |
-| 21 | Native AOT and trimming | publishing an API with Native AOT, trimming warnings, the request delegate generator, startup and size measured | GraalVM native images |
+| 17 | [Petri specification oracles for C# pipelines](17-petri-pipeline-oracles/) | finite lifecycle models, complete reachability, terminal classification, deterministic runtime gates; Channel, Dataflow and Rx assumptions kept distinct | the same method applies to Reactor only after its capacity and scheduler semantics are modeled explicitly |
+| 18 | gRPC and SignalR | protobuf contracts, streaming calls, hubs, backpressure over the network | Spring gRPC, WebSocket, RSocket |
+| 19 | Resilience, rate limiting and output caching | `Microsoft.Extensions.Http.Resilience`, Polly pipelines, rate limiters, output cache policies | Resilience4j, Spring Cloud Circuit Breaker |
+| 20 | OpenTelemetry and diagnostics in production | `System.Diagnostics.Metrics`, `ActivitySource`, OpenTelemetry exporters, `dotnet-counters`, `dotnet-trace`, `dotnet-dump` | Micrometer, Actuator |
+| 21 | Testing with `WebApplicationFactory` | the test host, replacing services, authentication in tests, Testcontainers | `@SpringBootTest`, `WebTestClient` |
+| 22 | Native AOT and trimming | publishing an API with Native AOT, trimming warnings, the request delegate generator, startup and size measured | GraalVM native images |
 
 ### Part 4: metaprogramming and tooling
 
 | # | Lesson | Under the hood | Spring and Reactor |
 |---|---|---|---|
-| 22 | Expression trees, reflection and source generators | what a lambda compiles to, `Expression<T>`, the cost of reflection, incremental generators, `[GeneratedRegex]` | annotation processors, [Spring's AOT engine](https://docs.spring.io/spring-framework/reference/core/aot.html) |
-| 23 | Roslyn analyzers and code fixes | syntax and semantic models, writing an analyzer and its tests | [Error Prone](https://errorprone.info/), [SpotBugs](https://spotbugs.github.io/) |
-| 24 | Interop and unsafe code | `[LibraryImport]`, function pointers, `Unsafe`, `MemoryMarshal`, pinning | JNI, and the [foreign function and memory API](https://openjdk.org/jeps/454) |
+| 23 | Expression trees, reflection and source generators | what a lambda compiles to, `Expression<T>`, the cost of reflection, incremental generators, `[GeneratedRegex]` | annotation processors, [Spring's AOT engine](https://docs.spring.io/spring-framework/reference/core/aot.html) |
+| 24 | Roslyn analyzers and code fixes | syntax and semantic models, writing an analyzer and its tests | [Error Prone](https://errorprone.info/), [SpotBugs](https://spotbugs.github.io/) |
+| 25 | Interop and unsafe code | `[LibraryImport]`, function pointers, `Unsafe`, `MemoryMarshal`, pinning | JNI, and the [foreign function and memory API](https://openjdk.org/jeps/454) |
 
 ### Appendices
 
@@ -96,7 +97,7 @@ Parts 1 and 2 measure GA's own code. Part 3 builds a small scales and chords ser
 | 3 | [Petri-net lifecycle oracle](../petri-nets/14-on-our-systems/) | one bounded pipeline with explicit success, failure and cancellation; complete reachability and no non-terminal dead marking | the Channel failure shapes studied in lessons 6 and 9 |
 | — | [Journal](journal/) | | |
 
-Lessons 17 to 24 are planned and not written yet. Lessons 6 to 9 were written before lesson 5, and don't depend on it.
+Lessons 18 to 25 are planned and not written yet. Lesson 17 is an advanced concurrency lab added after the ASP.NET Core lessons; lessons 6 to 9 were written before lesson 5 and don't depend on it.
 
 ## Prerequisites
 
