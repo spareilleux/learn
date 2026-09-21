@@ -61,16 +61,16 @@ Les parties 1 et 2 mesurent le propre code de GA. La partie 3 construit un petit
 | 7 | [TPL Dataflow](07-tpl-dataflow/) | blocs et liens, parallélisme et ordre, `BoundedCapacity`, échecs qui ne font que descendre, complétion ; la démo Dataflow de GA | `flatMap` avec concurrence, `buffer`, `publishOn` |
 | 8 | [Rx.NET](08-rx-net/) | `IObservable<T>`, froid et chaud, opérateurs en temps virtuel, schedulers, pas de backpressure, nouvelles tentatives ; la démo réactive de GA | `Flux`, `Sinks`, `publishOn`, `StepVerifier.withVirtualTime` |
 | 9 | [Choisir un flux](09-choosing-streams/) | `IAsyncEnumerable` et `System.Linq.AsyncEnumerable`, les quatre types de flux mesurés côte à côte, ponts, débit, un diagramme de décision | [Reactor : `Mono` et `Flux`](../spring-cloud-reactor/02-reactor-mono-and-flux/), [Reactor sous le capot](../spring-cloud-reactor/03-reactor-under-the-hood/) |
-| 10 | État partagé et pool de threads | `System.Threading.Lock`, `Interlocked`, collections concurrentes, `Parallel.ForEachAsync`, famine du pool de threads | `synchronized`, `ReentrantLock`, threads virtuels |
+| 10 | [État partagé et pool de threads](10-shared-state-and-thread-pool/) | `System.Threading.Lock`, `Interlocked`, collections concurrentes, `Parallel.ForEachAsync`, famine du pool de threads | `synchronized`, `ReentrantLock`, threads virtuels |
 
 ### Partie 3 : ASP.NET Core en profondeur
 
 | # | Leçon | Sous le capot | Spring et Reactor |
 |---|---|---|---|
-| 11 | Hébergement, `WebApplication` et Kestrel | l'hôte générique, le builder, les limites de connexions et de requêtes de Kestrel, l'arrêt en douceur | [Spring Boot vu depuis ASP.NET Core](../spring-cloud-reactor/01-spring-boot-from-aspnet-core/), Tomcat et Netty embarqués |
-| 12 | Le pipeline de middlewares | `Use`, `Map`, `Run`, ordre, courts-circuits, gestion des exceptions, routage des endpoints | filtres Servlet, `WebFilter` |
-| 13 | Injection de dépendances et options | durées de vie, dépendances captives, validation des portées, services à clé, `IOptions`, `IOptionsSnapshot`, `IOptionsMonitor`, validation | le conteneur Spring, `@ConfigurationProperties` |
-| 14 | Minimal APIs et contrôleurs | gestionnaires de routes et liaison des paramètres, filtres, validation, `TypedResults`, réponses `IAsyncEnumerable` en flux | `@RestController`, endpoints fonctionnels [WebFlux](../spring-cloud-reactor/04-webflux/) |
+| 11 | [Hébergement, `WebApplication` et Kestrel](11-hosting-webapplication-kestrel/) | l'hôte générique, le builder, les limites de connexions et de requêtes de Kestrel, l'arrêt en douceur | [Spring Boot vu depuis ASP.NET Core](../spring-cloud-reactor/01-spring-boot-from-aspnet-core/), Tomcat et Netty embarqués |
+| 12 | [Le pipeline de middlewares](12-middleware-pipeline/) | `Use`, `Map`, `Run`, ordre, courts-circuits, gestion des exceptions, routage des endpoints | filtres Servlet, `WebFilter` |
+| 13 | [Injection de dépendances et options](13-dependency-injection-options/) | durées de vie, dépendances captives, validation des portées, services à clé, `IOptions`, `IOptionsSnapshot`, `IOptionsMonitor`, validation | le conteneur Spring, `@ConfigurationProperties` |
+| 14 | [Minimal APIs et contrôleurs](14-minimal-apis-controllers/) | gestionnaires de routes et liaison des paramètres, filtres, validation, `TypedResults`, réponses `IAsyncEnumerable` en flux | `@RestController`, endpoints fonctionnels [WebFlux](../spring-cloud-reactor/04-webflux/) |
 | 15 | Services hébergés | `IHostedService`, `BackgroundService`, ordre de démarrage et d'arrêt, exceptions, files avec des channels ; les services hébergés de GA | `@Scheduled`, `SmartLifecycle` |
 | 16 | Authentification et autorisation | schémas, gestionnaires, JWT bearer, stratégies et exigences | Spring Security |
 | 17 | gRPC et SignalR | contrats protobuf, appels en flux, hubs, backpressure à travers le réseau | Spring gRPC, WebSocket, RSocket |

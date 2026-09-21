@@ -172,6 +172,15 @@ Appendix 1 chose what to optimise by reading GA. This time a profiler chose, on 
   - Lesson 5's value-object allocations don't appear in this profile.
 - **The index export is not always reproducible.** The first export of the evening differs from the later ones in 266 of 313,047 entries, keyed by instrument and diagram, although it came from the same GA commit. Every comparison above is between exports of the same group; the cause is *to verify*.
 
+## 2026-09-21 — Lessons 10-14: concurrency and the ASP.NET Core request path
+
+- Added five executable lessons against .NET 10.0.12: one deterministic lost-update schedule, `Lock` and `Interlocked`, `ConcurrentDictionary`, and a bounded `Parallel.ForEachAsync` probe.
+- Started real Kestrel instances on ephemeral loopback ports. Verified the host lifecycle, one successful request, graceful shutdown, middleware nesting, and a deliberate `429` short-circuit.
+- Verified singleton/scoped identity, captive-dependency rejection with scope validation, keyed services, and options validation.
+- Verified one Minimal API with route/query binding and an endpoint filter, one controller in the same routing table, and an `IAsyncEnumerable<string>` JSON response.
+- The portable output is checked in `expected/l10.txt` through `expected/l14.txt`. Thread-pool minimums remain machine-dependent evidence and are excluded with the existing `#` convention.
+- These are local protocol probes. They do not yet measure proxy buffering, production Kestrel limits, a real identity provider, or a remote dependency under thread-pool starvation.
+
 ## To verify
 
 - Why dynamic PGO didn't remove the boxed enumerators of the first mask version of `TryMatch` (appendix 2).

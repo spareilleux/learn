@@ -12,6 +12,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <!-- Lessons 11-14 run the real ASP.NET Core shared framework on an ephemeral loopback port. -->
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="../Snippets/Snippets.csproj" />
     <ProjectReference Include="$(GaRoot)Common/GA.Domain.Core/GA.Domain.Core.csproj" />
   </ItemGroup>

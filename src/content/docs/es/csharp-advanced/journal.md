@@ -172,6 +172,15 @@ El apéndice 1 eligió qué optimizar leyendo GA. Esta vez eligió un perfilador
   - Las asignaciones de los objetos de valor de la lección 5 no aparecen en este perfil.
 - **La exportación del índice no siempre es reproducible.** La primera exportación de la noche difiere de las posteriores en 266 de las 313.047 entradas, identificadas por instrumento y diagrama, aunque salió del mismo commit de GA. Todas las comparaciones de arriba se hacen entre exportaciones del mismo grupo; la causa queda *por verificar*.
 
+## 2026-09-21 — Lecciones 10-14: concurrencia y ruta de petición ASP.NET Core
+
+- Cinco lecciones ejecutables en .NET 10.0.12: lost update determinista, `Lock`, `Interlocked`, `ConcurrentDictionary` y `Parallel.ForEachAsync` limitado.
+- Servidores Kestrel reales en puertos loopback efímeros; se observaron ciclo de vida, petición, apagado graceful, orden de middleware y short-circuit `429`.
+- Se verificaron lifetimes singleton/scoped, rechazo de captive dependency, keyed services y validación de options.
+- Se verificaron una Minimal API, un controlador en la misma tabla de routing y una respuesta JSON `IAsyncEnumerable<string>`.
+- Las salidas portables están en `expected/l10.txt` a `expected/l14.txt`; los mínimos del thread pool dependen de la máquina.
+- Son pruebas locales: buffering de proxy, límites de producción, identity provider real y starvation ante una dependencia remota quedan por medir.
+
 ## Por verificar
 
 - Por qué la PGO dinámica no eliminó los enumeradores encapsulados de la primera versión con máscaras de `TryMatch` (apéndice 2).
