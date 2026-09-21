@@ -19,6 +19,9 @@ sidebar:
 - [x] Leçon 7 : TPL Dataflow
 - [x] Leçon 8 : Rx.NET
 - [x] Leçon 9 : choisir un flux
+- [x] Leçons 10 à 14 : état partagé et chemin d'une requête ASP.NET Core
+- [x] Leçon 15 : services hébergés et travail en arrière-plan
+- [x] Leçon 16 : authentification et autorisation
 - [x] Annexe 1 : cinq membres de GA optimisés, prouvés sur les 4096 ensembles de classes de hauteurs, puis mesurés — les benchmarks ayant été réécrits une fois qu'il est apparu qu'ils mesuraient le JIT
 - [x] Annexe 2 : le pipeline d'indexation de GA profilé, trois changements prouvés contre la sortie de GA elle-même et mesurés, puis envoyés en amont sous forme de pull requests
 
@@ -180,6 +183,14 @@ L'Annexe 1 choisissait quoi optimiser en lisant GA. Cette fois, c'est un profile
 - Vérification d'une Minimal API, d'un contrôleur dans la même table de routing et d'une réponse JSON `IAsyncEnumerable<string>`.
 - Les sorties portables sont conservées dans `expected/l10.txt` à `expected/l14.txt`. Les minimums du thread pool restent dépendants de la machine.
 - Ces résultats restent locaux : buffering des proxies, limites de production, identity provider réel et starvation face à une dépendance distante restent à mesurer.
+
+## 2026-09-21 — Leçons 15-16 : travail hébergé et autorisation locale
+
+- La preuve des services hébergés utilise des gates de terminaison plutôt que des délais. Un channel borné alimente un worker singleton et deux opérations résolvent des instances scoped distinctes (`scope-1` et `scope-2`). La cancellation de l'hôte est observée pendant que le worker attend du travail.
+- Un second hôte libère une faute volontaire et observe `ApplicationStopping` avec `BackgroundServiceExceptionBehavior.StopHost`. Cela prouve la stratégie de l'hôte, pas un retry ni une reprise.
+- La preuve d'authentification démarre Kestrel sur un port loopback éphémère. Les bearer tokens absent, mal formé, expiré et mal signé renvoient 401 ; une identité valide sans `scope=scales.read` renvoie 403 ; l'identité autorisée reçoit `200 C major`.
+- Les deux clés sont générées en mémoire pour un seul processus. La durée de validité utilise un instant fixe et aucune clé ni aucun token n'est affiché ou persisté.
+- `Advanced` a compilé localement sans avertissement, et les deux nouvelles sorties correspondent à `expected/l15.txt` et `expected/l16.txt`. La CI sur trois OS, un vrai serveur d'autorisation, découverte/rotation des clés et déploiement derrière un proxy restent à vérifier.
 
 ## À vérifier
 

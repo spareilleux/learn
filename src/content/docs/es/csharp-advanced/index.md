@@ -71,8 +71,8 @@ Las partes 1 y 2 miden el propio código de GA. La parte 3 construye un pequeño
 | 12 | [El pipeline de middlewares](12-middleware-pipeline/) | `Use`, `Map`, `Run`, orden, cortocircuitos, manejo de excepciones, enrutamiento de endpoints | filtros Servlet, `WebFilter` |
 | 13 | [Inyección de dependencias y opciones](13-dependency-injection-options/) | duraciones, dependencias cautivas, validación de ámbitos, servicios con clave, `IOptions`, `IOptionsSnapshot`, `IOptionsMonitor`, validación | el contenedor de Spring, `@ConfigurationProperties` |
 | 14 | [Minimal APIs y controladores](14-minimal-apis-controllers/) | manejadores de rutas y enlace de parámetros, filtros, validación, `TypedResults`, respuestas `IAsyncEnumerable` en streaming | `@RestController`, endpoints funcionales de [WebFlux](../spring-cloud-reactor/04-webflux/) |
-| 15 | Servicios hospedados | `IHostedService`, `BackgroundService`, orden de arranque y de apagado, excepciones, colas con canales; los servicios hospedados de GA | `@Scheduled`, `SmartLifecycle` |
-| 16 | Autenticación y autorización | esquemas, manejadores, JWT bearer, directivas y requisitos | Spring Security |
+| 15 | [Servicios hospedados](15-hosted-services/) | `IHostedService`, `BackgroundService`, orden de arranque y de apagado, excepciones, colas con canales; los servicios hospedados de GA | `@Scheduled`, `SmartLifecycle` |
+| 16 | [Autenticación y autorización](16-authentication-authorization/) | esquemas, manejadores, JWT bearer, directivas y requisitos | Spring Security |
 | 17 | gRPC y SignalR | contratos protobuf, llamadas en streaming, hubs, backpressure a través de la red | Spring gRPC, WebSocket, RSocket |
 | 18 | Resiliencia, limitación de velocidad y caché de salida | `Microsoft.Extensions.Http.Resilience`, pipelines de Polly, limitadores de velocidad, directivas de caché de salida | Resilience4j, Spring Cloud Circuit Breaker |
 | 19 | OpenTelemetry y diagnóstico en producción | `System.Diagnostics.Metrics`, `ActivitySource`, exportadores de OpenTelemetry, `dotnet-counters`, `dotnet-trace`, `dotnet-dump` | Micrometer, Actuator |
@@ -95,7 +95,7 @@ Las partes 1 y 2 miden el propio código de GA. La parte 3 construye un pequeño
 | 2 | [GA, perfilado, luego demostrado y medido](appendix-2-ga-performance/) | `dotnet-trace` sobre un pipeline real, máscaras de 12 bits en lugar de conjuntos hash, enumeradores encapsulados, una caché de 4096 casillas indexada por el propio conjunto, una propiedad LINQ en un bucle caliente, y una demostración que compara byte a byte dos compilaciones de GA | `CanonicalChordRecognizer`, `ChordIntervalPattern.TryMatch`, `IntervalClassVector`, `OptickIndexReader` |
 | — | [Diario](journal/) | | |
 
-Las lecciones 10 a 24 están planificadas y aún no se han escrito. Las lecciones 6 a 9 se escribieron antes que la lección 5, y no dependen de ella.
+Las lecciones 17 a 24 están planificadas y aún no se han escrito. Las lecciones 6 a 9 se escribieron antes que la lección 5, y no dependen de ella.
 
 ## Requisitos previos
 

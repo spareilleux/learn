@@ -1,0 +1,10 @@
+
+== The host starts one singleton worker and the queue owns the work
+startup observed: True
+queued results: C major@scope-1 | G major@scope-2
+fresh scope per item: True
+shutdown cancellation observed: True
+
+== A BackgroundService fault stops its host
+fault requested host stop: True
+exit 0
