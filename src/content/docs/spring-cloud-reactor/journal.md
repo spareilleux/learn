@@ -11,8 +11,8 @@ sidebar:
 - [x] Lesson 2 — Reactor: `Mono` and `Flux`
 - [x] Lesson 3 — Reactor under the hood
 - [x] Lesson 4 — WebFlux
-- [ ] Lesson 5 — Reactive data access with R2DBC and Spring Data
-- [ ] Lesson 6 — Spring Cloud Gateway
+- [x] Lesson 5 — Reactive data access with R2DBC and Spring Data
+- [x] Lesson 6 — Spring Cloud Gateway
 - [ ] Lesson 7 — Centralised configuration with Spring Cloud Config
 - [ ] Lesson 8 — Service discovery and client-side load balancing
 - [ ] Lesson 9 — Resilience with Resilience4j and Spring Cloud Circuit Breaker
@@ -50,9 +50,15 @@ sidebar:
 - A test started with `SpringApplication` logged Surefire's `ForkedBooter` as the application class until `setMainApplicationClass`.
 - My first draft of exercise 2 in lesson 3 asserted that eight lookups took less than 160 ms. Timing assertions fail on busy CI runners; the test now counts the lookups running at the same time.
 
+## 2026-09-21 — Lessons 5 and 6
+
+- Lesson 5 uses an in-memory H2 database through R2DBC. Two deterministic integration tests prove insert/query signal flow and transaction rollback without Docker or an external database.
+- Lesson 6 starts Spring Cloud Gateway and a Reactor Netty upstream on dynamic loopback ports. Two integration tests prove route matching, prefix stripping, header propagation and forwarding, plus the unmatched-path `404` case.
+- `mvn -B -pl l05-r2dbc,l06-gateway -am test` passed on Java 25 with four tests, no failures and no errors. Spring Cloud 2025.1.3 therefore supports this bounded Gateway scenario under the Spring Boot 4.1.1 parent; that is evidence for these routes, not a blanket compatibility claim.
+
 ## Open questions
 
-- Spring Cloud 2025.1.3's BOM declares Spring Boot 4.0.8: does any Spring Cloud module misbehave under Boot 4.1.1? *To verify* in lesson 6.
+- Spring Cloud 2025.1.3's BOM declares Spring Boot 4.0.8. The lesson 6 Gateway scenario passes under Boot 4.1.1; broader module compatibility remains *to verify*.
 - Throughput of the same endpoint on Spring MVC with virtual threads and on WebFlux, measured on this machine: *to verify* in lesson 11.
 - What the server sees when a `WebClient` subscriber cancels a server-sent event stream after two events: *to verify*.
 - The Initializr, `java -jar` and `curl` commands of lessons 1 and 4 ran on Windows only; on Linux and macOS they are *to verify*, while CI runs the equivalent tests there.

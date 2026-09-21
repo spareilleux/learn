@@ -11,8 +11,8 @@ sidebar:
 - [x] Lección 2 — Reactor: `Mono` y `Flux`
 - [x] Lección 3 — Reactor por dentro
 - [x] Lección 4 — WebFlux
-- [ ] Lección 5 — Acceso reactivo a datos con R2DBC y Spring Data
-- [ ] Lección 6 — Spring Cloud Gateway
+- [x] Lección 5 — Acceso reactivo a datos con R2DBC y Spring Data
+- [x] Lección 6 — Spring Cloud Gateway
 - [ ] Lección 7 — Configuración centralizada con Spring Cloud Config
 - [ ] Lección 8 — Descubrimiento de servicios y balanceo de carga del lado del cliente
 - [ ] Lección 9 — Resiliencia con Resilience4j y Spring Cloud Circuit Breaker
@@ -50,9 +50,15 @@ sidebar:
 - Una prueba arrancada con `SpringApplication` registraba el `ForkedBooter` de Surefire como clase de la aplicación hasta `setMainApplicationClass`.
 - Mi primer borrador del ejercicio 2 de la lección 3 afirmaba que ocho búsquedas tardaban menos de 160 ms. Las aserciones de tiempo fallan en los runners de CI cargados; la prueba ahora cuenta las búsquedas que se ejecutan al mismo tiempo.
 
+## 2026-09-21 — Lecciones 5 y 6
+
+- La lección 5 usa una base H2 en memoria mediante R2DBC. Dos pruebas de integración deterministas demuestran el flujo de señales de inserción y consulta y el rollback de una transacción, sin Docker ni una base externa.
+- La lección 6 arranca Spring Cloud Gateway y un servidor Reactor Netty de origen en puertos loopback dinámicos. Dos pruebas de integración demuestran el enrutamiento, la eliminación del prefijo, la propagación de cabeceras y el reenvío, además del caso `404` sin ruta.
+- `mvn -B -pl l05-r2dbc,l06-gateway -am test` pasa con Java 25: cuatro pruebas, sin fallos ni errores. Spring Cloud 2025.1.3 soporta por tanto este escenario Gateway acotado bajo el padre Spring Boot 4.1.1; no es una afirmación general de compatibilidad.
+
 ## Preguntas abiertas
 
-- El BOM de Spring Cloud 2025.1.3 declara Spring Boot 4.0.8: ¿algún módulo de Spring Cloud se comporta mal con Boot 4.1.1? *Por verificar* en la lección 6.
+- El BOM de Spring Cloud 2025.1.3 declara Spring Boot 4.0.8. El escenario Gateway de la lección 6 pasa con Boot 4.1.1; la compatibilidad de los demás módulos queda *por verificar*.
 - Rendimiento del mismo endpoint en Spring MVC con hilos virtuales y en WebFlux, medido en esta máquina: *por verificar* en la lección 11.
 - Lo que ve el servidor cuando un suscriptor de `WebClient` cancela un stream de server-sent events tras dos eventos: *por verificar*.
 - Los comandos de Initializr, `java -jar` y `curl` de las lecciones 1 y 4 solo se ejecutaron en Windows; en Linux y macOS están *por verificar*, mientras que la CI ejecuta allí las pruebas equivalentes.

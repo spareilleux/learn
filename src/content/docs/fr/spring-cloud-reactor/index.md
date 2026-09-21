@@ -56,8 +56,8 @@ Les leçons 1 à 4 construisent les deux premières boîtes de droite ; les leç
 | 2 | [Reactor : `Mono` et `Flux`](02-reactor-mono-and-flux/) | `Task`, `IAsyncEnumerable`, LINQ, Rx.NET |
 | 3 | [Reactor sous le capot](03-reactor-under-the-hood/) | le pool de threads, `ConfigureAwait`, les channels, Polly, `AsyncLocal` |
 | 4 | [WebFlux](04-webflux/) | minimal APIs, `HttpClient`, server-sent events |
-| 5 | Accès réactif aux données avec R2DBC et Spring Data *(à venir)* | Entity Framework Core, `IAsyncEnumerable` depuis un `DbContext` |
-| 6 | Spring Cloud Gateway | YARP |
+| 5 | [Accès réactif aux données avec R2DBC et Spring Data](05-r2dbc-and-spring-data/) | Entity Framework Core, `IAsyncEnumerable` depuis un `DbContext` |
+| 6 | [Spring Cloud Gateway](06-spring-cloud-gateway/) | YARP |
 | 7 | Configuration centralisée avec Spring Cloud Config | fournisseurs de configuration, Azure App Configuration |
 | 8 | Découverte de services et répartition de charge côté client | découverte de services de .NET Aspire, `IHttpClientFactory` |
 | 9 | Résilience avec Resilience4j et Spring Cloud Circuit Breaker | Polly, `Microsoft.Extensions.Http.Resilience` |
