@@ -5,6 +5,9 @@ template: splash
 hero:
   tagline: Cursos escritos mientras aprendo, publicados tal cual — con los errores, los callejones sin salida y lo que al final funcionó.
   actions:
+    - text: Skills de Matt Pocock
+      link: agentic-coding/05-matt-pocock-skills/
+      icon: rocket
     - text: Empieza por Contenedores WSL
       link: wsl-containers/
       icon: right-arrow
@@ -34,6 +37,26 @@ Son públicos para que otros puedan aprovecharlos — y corregirme.
 	<Card title="Fuentes" icon="external">
 		Cada afirmación importante enlaza a una fuente primaria (documentación oficial, repositorios).
 	</Card>
+</CardGrid>
+
+## Rutas destacadas de ingeniería agéntica
+
+<CardGrid>
+	<LinkCard
+		title="Skills de Matt Pocock"
+		description="Métodos de ingeniería ejecutables: tracer bullets, TDD, diseño de codebase, división en issues y revisión basada en evidencia."
+		href="agentic-coding/05-matt-pocock-skills/"
+	/>
+	<LinkCard
+		title="Sandcastle"
+		description="Ejecuta un agente de código dentro de límites explícitos de contenedor, rama e iteración, mientras el host controla la verificación."
+		href="agentic-coding/06-sandcastle/"
+	/>
+	<LinkCard
+		title="Compound Engineering"
+		description="Conecta planificación, implementación, revisión y aprendizaje duradero en un único ciclo de entrega inspeccionable."
+		href="agentic-coding/07-compound-engineering/"
+	/>
 </CardGrid>
 
 ## Cursos
@@ -180,8 +203,14 @@ Son públicos para que otros puedan aprovecharlos — y corregirme.
 />
 
 <LinkCard
+	title="TypeSafe AI System One y Jev"
+	description="Decisiones probabilísticas tipadas para software — Choice, Score y Noul, laboratorio determinista que empieza por un mock, una sonda en vivo opcional de coste acotado y usos sin autoridad para Gaia, GA, Demerzel, IX y TARS."
+	href="typesafe-ai-system-one/"
+/>
+
+<LinkCard
 	title="Gaia: coordinar agentes con evidencia"
-	description="Lo que viene después de un agente en un repositorio — un bus local y duradero cuyos seis verbos no pueden aprobar, fusionar ni hacer push, un registro de eventos solo de anexión que se reproduce y verifica, una fábrica que fija la identidad de un candidato antes de que un revisor lo vea, y un límite de carriles que cita sus propias evidencias. Cada salida ejecutada sobre una revisión fijada."
+	description="Coordinación con evidencia después de un agente — seis verbos sin privilegios, replay de solo anexión, recibos de fábrica, límites medidos y una artifact chain de continuidad acotada desde un wake exacto hasta la validación de solo lectura en Demerzel."
 	href="gaia/"
 />
 

@@ -1,15 +1,15 @@
 ---
 title: Gaia — Mission
-description: Gaia is a durable local coordination bus and an evidence-bearing software factory for Claude Code and Codex sessions — six non-privileged verbs, an append-only event log, and receipts nobody has to take on trust. This course explains what it is trying to accomplish, why privilege is prevented by absence rather than by a check, and what has actually been measured, with every output run on the pinned revision.
+description: Gaia is a durable local coordination bus and an evidence-bearing software factory for Claude Code and Codex sessions — six non-privileged verbs, an append-only event log, exact continuity replay, and receipts whose provenance is stated per lesson.
 sidebar:
   label: Mission
   order: 0
 ---
 
 :::note[Revision studied, and what is measured here]
-Gaia at commit [`d68e900`](https://github.com/GuitarAlchemist/gaia/tree/d68e90099ae2a6fbbec9d428617bfcd02095aac0) (2026-09-13), the head of `main`, on Windows 11 with [Node.js](https://nodejs.org/en) v24.12.0, on 2026-09-15. Gaia has **zero runtime dependencies**, so every command in this course runs from a clean checkout with no `npm install`.
+Lessons 1–5 study Gaia at commit [`d68e900`](https://github.com/GuitarAlchemist/gaia/tree/d68e90099ae2a6fbbec9d428617bfcd02095aac0) (2026-09-13), then the head of `main`, on Windows 11 with [Node.js](https://nodejs.org/en) v24.12.0. Lesson 6 separately studies an isolated issue-76 candidate on 2026-09-20 with the pinned Node 26.8.1. That candidate was not on `main`, merged or released when measured. Gaia has **zero runtime dependencies**, so commands run from clean worktrees with no `npm install`.
 
-Every output quoted in these lessons was produced by running the command on that revision, in a throwaway data directory, and pasted unedited apart from shortening long absolute paths. **No lesson in this course launches a billed model.** The one command that does — `factory:agent`, which spends a real Claude and a real Codex turn — is described from its code, its design document and its receipt schema, and is marked *to verify* where I have not run it.
+Every output quoted in lessons 1–5 was produced on `d68e900`; every issue-76 number in lesson 6 is labeled as candidate-worktree evidence. **No lesson in this course launches a billed model.** The one command that does — `factory:agent`, which spends a real Claude and a real Codex turn — is described from its code, its design document and its receipt schema, and is marked *to verify* where I have not run it.
 :::
 
 ## Why I am learning this
@@ -71,6 +71,7 @@ If you read only one part of that table, read the last three rows. *Delivered*, 
 - replay a log, verify it, and tell the three exit codes apart — refused, fail-closed, and ok;
 - read a factory receipt and state what it proves and what it leaves as a disclosed residual;
 - justify the four-lane limit from its evidence, and say what would raise it.
+- explain how one bounded successor continues reviewed work without duplicate wakes or inherited authority.
 
 ## Outline
 
@@ -81,6 +82,7 @@ If you read only one part of that table, read the last three rows. *Delivered*, 
 | 3 | [The event log: append-only, replayed, fail-closed](03-event-log-and-replay/) | event sourcing, a write-ahead log |
 | 4 | [The factory: candidates, reviewers and receipts](04-factory-and-receipts/) | a pull request, a build artifact |
 | 5 | [Limits, evidence and the ecosystem](05-limits-and-ecosystem/) | capacity planning, an integration decision |
+| 6 | [Continuity and the artifact chain](06-continuity-and-artifact-chain/) | idempotency, write-ahead logging, cross-repository contracts |
 | — | [Journal](journal/) | |
 
 ## Prerequisites

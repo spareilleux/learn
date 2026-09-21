@@ -13,6 +13,7 @@ sidebar:
 - [x] Lesson 3: the event log, the commit protocol, `verify`
 - [x] Lesson 4: the coordination tracer, the agent factory, receipts and the tree digest
 - [x] Lesson 5: the lane ladder and the ecosystem verdicts
+- [x] Lesson 6: bounded continuity, exact wake reconciliation and the Gaia-to-Demerzel receipt chain
 - [ ] `factory:agent` run end to end with real Claude and Codex turns
 - [x] French and Spanish mirrors
 - [ ] A lesson on the hosted pump — the GitHub Actions side — which `main` has grown and this course does not cover
@@ -57,6 +58,14 @@ The full three-actor exchange in lesson 2 came to **10 events and 3,617 bytes** 
 - I first quoted the repository's `AGENTS.md` for the "privilege is prevented by absence" rule. **That file does not exist at `d68e900`** — it was an untracked file in a local checkout of an older branch. The quote was replaced with the `README.md` statement and the operator module's own header, both verified present at the pinned revision. Every other quotation was re-checked against the pinned tree for the same reason.
 - The local working copy I started from sat on a branch from 2026-08-29 whose `README.md` differed from `main`'s, and which had no `ARCHITECTURE.md` or `CONTEXT.md`. Starting from a clean pinned worktree instead of the checkout that happened to be open is the habit that caught it.
 
+## 2026-09-20 — Issue 76 continuity candidate
+
+- Design Receipt v7.4 was reviewed independently before implementation. The candidate is deliberately bounded to one work identity, one successor slot and one generation-0-to-1 replacement.
+- The isolated Gaia candidate ran **2,261 tests: 2,259 passed, 0 failed, 2 skipped**; its focused continuity/bus regression ran **87/87**. `npm run verify` reported **37 passed, 0 failed**, and `npm run architecture:verify` passed.
+- The isolated Demerzel consumer ran **787 Python tests with 1 skipped** and **10/10 IXQL checks** while validating vendored Gaia schema/fixtures read-only.
+- Review/integration found and corrected four material weak shapes: persistence imported into the controller, decisions allowed before exact wake delivery, idempotency keys replaying changed inputs, and tests omitting the bus sidecar. A simplification pass also removed avoidable scans and allocations.
+- These are **candidate-worktree measurements**, not proof of publication, merge or release. The final formal review receipt, exact final commit gates and normal PR checks were still pending when this entry was written.
+
 ## To verify
 
 - **`factory:agent` end to end.** It spends a real Claude turn and a real Codex turn on the installed subscriptions. Lesson 4 describes it from `src/factory-agent.mjs`, its design document and its receipt schema; no claim in that lesson comes from an observed run. What to capture when it runs: the receipt shape with and without a repair, the `(not an ETA)` progress lines, and whether the reviewer-mutation check ever fires on ignored files in practice.
@@ -64,6 +73,7 @@ The full three-actor exchange in lesson 2 came to **10 events and 3,617 bytes** 
 - **Linux and macOS.** The commit protocol is written and tested Windows-first, and the repository says Linux is discovery rather than a gate. The lock-directory approach should behave the same; the Windows-specific release retries would simply not be exercised.
 - **A second concurrent lane against the same data directory.** All the outputs in these lessons came from sequential calls in one shell. The cross-process id-uniqueness property is what the suite asserts, not what I observed.
 - **The `authority-language-detected` flag.** I saw it fire on "Please merge this." I have not looked at what it matches, and a heuristic's false-negative rate is the interesting number.
+- **Issue 76 after final review.** Re-run the full Gaia and Demerzel gates on the exact reviewed commits, publish through normal PRs, and replace the candidate evidence above with immutable commit and receipt links.
 
 ## Open questions
 
