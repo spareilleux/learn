@@ -206,6 +206,12 @@ export default defineConfig({
 									items: [{ autogenerate: { directory: 'typesafe-ai-system-one' } }],
 								},
 								{
+									label: 'Repository Dogfooding Lab',
+									translations: { fr: 'Laboratoire de dogfooding des dépôts', es: 'Laboratorio de dogfooding de repositorios' },
+									collapsed: true,
+									items: [{ autogenerate: { directory: 'repository-dogfooding-lab' } }],
+								},
+								{
 									label: 'Gaia: coordinating agents with evidence',
 									translations: { fr: 'Gaia : coordonner des agents avec des preuves', es: 'Gaia: coordinar agentes con evidencia' },
 									collapsed: true,

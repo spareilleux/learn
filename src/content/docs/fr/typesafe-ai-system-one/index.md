@@ -7,7 +7,7 @@ sidebar:
 ---
 
 :::caution[Ce qui a été testé — et ce qui ne l'a pas été]
-Ce cours s'appuie sur la [documentation officielle de TypeSafe AI](https://docs.typesafe.ai/introduction), sa [référence API](https://docs.typesafe.ai/api), la [page des modèles](https://docs.typesafe.ai/models) et l'[annonce de Jev](https://typesafe.ai/blog/introducing-system-one-models-and-jev), consultées le 20 septembre 2026. Le laboratoire hors ligne dans [`code/typesafe-ai-system-one`](https://github.com/spareilleux/learn/tree/main/code/typesafe-ai-system-one) a été exécuté localement avec Python 3.14.2 : **14 tests réussis**, et le routage mock a refusé le dispatch faute d'autorité explicite.
+Ce cours s'appuie sur la [documentation officielle de TypeSafe AI](https://docs.typesafe.ai/introduction), sa [référence API](https://docs.typesafe.ai/api), la [page des modèles](https://docs.typesafe.ai/models) et l'[annonce de Jev](https://typesafe.ai/blog/introducing-system-one-models-and-jev), consultées le 20 septembre 2026. Le laboratoire hors ligne dans [`code/typesafe-ai-system-one`](https://github.com/spareilleux/learn/tree/main/code/typesafe-ai-system-one) a été exécuté localement avec Python 3.14.2 : **19 tests réussis**, le routage mock a refusé le dispatch faute d'autorité explicite et un plan de benchmark de 12 cas s'est terminé sans accès réseau.
 
 Aucun identifiant n'a été lu, aucune session console n'a été ouverte et aucun appel à l'API TypeSafe n'a été effectué. Tous les résultats live, temps de réponse, nombres de tokens, affirmations de calibration sur nos données et bénéfices propres à nos dépôts restent **à vérifier**.
 :::
@@ -40,6 +40,7 @@ Les agents de code savent produire du texte, des plans et des patchs. Nos dépô
 | 1 | [Des décisions, pas des chaînes](01-decisions-not-strings/) | Choisir entre Choice, Score et Noul sans confondre type et vérité |
 | 2 | [Une expérience reproductible au coût borné](02-bounded-experiment/) | Exécuter le point de référence hors ligne et comprendre la probe facultative à un appel |
 | 3 | [Cas d'usage dans nos dépôts](03-repository-use-cases/) | Choisir des seams utiles dans Gaia, GA, Demerzel, IX et TARS tout en préservant l'autorité |
+| 4 | [Benchmark du coût en tokens](04-token-cost-benchmark/) | Tester l'hypothèse d'une économie de 50 % contre la qualité, les retries et le coût déplacé |
 | — | [Journal](journal/) | Faits mesurés, questions ouvertes et travail live restant |
 
 ## Prérequis

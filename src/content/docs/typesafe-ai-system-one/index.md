@@ -7,7 +7,7 @@ sidebar:
 ---
 
 :::caution[What was and was not tested]
-This course was written from [TypeSafe AI's official documentation](https://docs.typesafe.ai/introduction), its [API reference](https://docs.typesafe.ai/api), [model page](https://docs.typesafe.ai/models), and the official [Jev launch post](https://typesafe.ai/blog/introducing-system-one-models-and-jev), read on 2026-09-20. The offline lab in [`code/typesafe-ai-system-one`](https://github.com/spareilleux/learn/tree/main/code/typesafe-ai-system-one) ran locally with Python 3.14.2: **14 tests passed** and the mock route refused dispatch because explicit authority was absent.
+This course was written from [TypeSafe AI's official documentation](https://docs.typesafe.ai/introduction), its [API reference](https://docs.typesafe.ai/api), [model page](https://docs.typesafe.ai/models), and the official [Jev launch post](https://typesafe.ai/blog/introducing-system-one-models-and-jev), read on 2026-09-20. The offline lab in [`code/typesafe-ai-system-one`](https://github.com/spareilleux/learn/tree/main/code/typesafe-ai-system-one) ran locally with Python 3.14.2: **19 tests passed**, the mock route refused dispatch because explicit authority was absent, and a 12-case benchmark plan completed without network access.
 
 No credential was read, no console session was opened, and no TypeSafe API request was made. Every live result, latency, token count, calibration claim on our data, and repository-specific benefit remains **to verify**.
 :::
@@ -46,6 +46,7 @@ The course's Python lab has two paths:
 | 1 | [Decisions, not strings](01-decisions-not-strings/) | Choose among Choice, Score and Noul without confusing types with truth |
 | 2 | [A reproducible, cost-bounded experiment](02-bounded-experiment/) | Run the offline baseline and understand the optional one-call probe |
 | 3 | [Use cases across our repositories](03-repository-use-cases/) | Select useful seams in Gaia, GA, Demerzel, IX and TARS while preserving authority |
+| 4 | [Token-cost benchmark](04-token-cost-benchmark/) | Test the 50% saving hypothesis against quality, retries and shifted cost |
 | — | [Journal](journal/) | Measured facts, open questions and live work still to verify |
 
 ## Prerequisites
