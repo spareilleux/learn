@@ -127,6 +127,12 @@ Se añadieron siete redes a las que exporta el lote 1 — `connection`, `handsha
 
 **Una cosa que es honestamente más débil de lo que parece.** Toda afirmación de «ningún marcado enumerado» de las lecciones 5 y 6 es cierta del *método*, y el mismo programa construye luego el grafo de alcanzabilidad de todas formas para comprobar el método. Ese es el orden correcto para un curso, y significa que ninguna de estas lecciones demuestra el método sobre una red donde la enumeración fallaría de verdad — salvo `handshake-started`, que es la única red de aquí cuyo grafo no existe.
 
+## 2026-09-21 — Primer oráculo ejecutable del ciclo de vida C#
+
+La lección 14 conecta ahora el modelo formal con las formas de fallo medidas en las lecciones 6 y 9 de C# avanzado. Añadí un pipeline finito de una plaza con lugares explícitos `succeeded`, `failed` y `cancelled`. Su grafo completo tiene ocho marcados y tres marcados muertos; todos son terminales intencionales, así que no hay marcados muertos no terminales. Cinco pruebas enfocadas preservan esa clasificación y el invariante de capacidad `free + queued = 1`, y el fixture PNML se regenera con el resto del curso.
+
+La corrección importante fue semántica: `DeadStates` significa que ninguna transición está habilitada, por lo que el final correcto de un workflow finito también está muerto. «Sin interbloqueo» es el oráculo equivocado para un pipeline que termina. El contrato ejecutable es, en cambio, un grafo completo cuyos marcados muertos contienen exactamente una marca terminal con nombre. La página también etiqueta honestamente los ejemplos Channel con forma de GA como reproducciones del mecanismo, no como pruebas de regresión de los binarios actuales. RabbitMQ, Redis y Kubernetes siguen siendo experimentos posteriores.
+
 ## Por verificar
 
 - Hack 1972, la fuente del teorema de Commoner, es de acceso abierto e ilegible para una descarga automatizada. Leerlo en un navegador permitiría que la lección 6 citara el teorema en vez de parafrasear una paráfrasis.

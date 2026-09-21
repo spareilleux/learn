@@ -93,6 +93,7 @@ Las partes 1 y 2 miden el propio código de GA. La parte 3 construye un pequeño
 |---|---|---|---|
 | 1 | [Cinco optimizaciones, demostradas y luego medidas](appendix-benchmarks/) | rotaciones y `PopCount` sobre conjuntos de 12 bits, tablas de consulta, una demostración de equivalencia sobre todo el dominio de entrada, los ordenamientos estables como desempate, y un benchmark que medía el JIT en lugar del código | `IsClusterFree`, `IntervalClassVector`, `ClosestDiatonicKey`, `ToNormalForm`, `PrimeForm` |
 | 2 | [GA, perfilado, luego demostrado y medido](appendix-2-ga-performance/) | `dotnet-trace` sobre un pipeline real, máscaras de 12 bits en lugar de conjuntos hash, enumeradores encapsulados, una caché de 4096 casillas indexada por el propio conjunto, una propiedad LINQ en un bucle caliente, y una demostración que compara byte a byte dos compilaciones de GA | `CanonicalChordRecognizer`, `ChordIntervalPattern.TryMatch`, `IntervalClassVector`, `OptickIndexReader` |
+| 3 | [Oráculo de ciclo de vida con redes de Petri](../petri-nets/14-on-our-systems/) | un pipeline acotado con éxito, fallo y cancelación explícitos; alcanzabilidad completa y ningún marcado muerto no terminal | las formas de fallo de Channel estudiadas en las lecciones 6 y 9 |
 | — | [Diario](journal/) | | |
 
 Las lecciones 17 a 24 están planificadas y aún no se han escrito. Las lecciones 6 a 9 se escribieron antes que la lección 5, y no dependen de ella.
