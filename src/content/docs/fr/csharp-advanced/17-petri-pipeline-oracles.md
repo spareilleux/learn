@@ -36,7 +36,7 @@ La première amélioration de conception consiste à ne plus appeler « pipeline
 | Mécanisme | Ce qui est borné | Ce que la place Petri `free` peut signifier | Ce qui doit rester explicite |
 |---|---|---|---|
 | [`Channel<T>`](https://learn.microsoft.com/dotnet/core/extensions/channels) | les items en file | une place disponible dans la file | la complétion du writer, la vidange de la file et la stabilisation du reader sont des observations distinctes |
-| [TPL Dataflow](https://learn.microsoft.com/dotnet/standard/parallel-programming/dataflow-task-parallel-library) | les items en file **et en cours d'exécution** dans un bloc d'exécution | pas la place `free` actuelle ; le modèle doit être raffiné | la complétion des blocs, les pannes propagées et les tâches de collecte externes |
+| [TPL Dataflow](https://learn.microsoft.com/dotnet/standard/parallel-programming/dataflow-task-parallel-library) | les items en file, en cours d'exécution et les sorties retenues dans un bloc d'exécution | pas la place `free` actuelle ; le modèle doit être raffiné | la complétion des blocs, la consommation des sorties, les pannes propagées et les tâches de collecte externes |
 | [Rx.NET](https://github.com/dotnet/reactive) | rien par défaut | aucun équivalent tant qu'un pont borné n'est pas ajouté | `OnCompleted`, `OnError`, la libération de la souscription et la stabilisation du travail planifié |
 
 Ainsi, `free + queued = 1` est un invariant utile pour une file Channel, pas une loi universelle de backpressure. Le recopier dans un test Dataflow ou Rx donnerait une preuve précise du mauvais système.
@@ -64,7 +64,7 @@ L'oracle améliore le test en rendant visibles les jetons restants. Si un marqua
 
 ### TPL Dataflow
 
-Ne réutilisez pas l'invariant de capacité de Channel. Le `BoundedCapacity` d'un bloc d'exécution inclut un item pendant l'exécution de son délégué. Modélisez des places `queued` et `executing` séparées, puis énoncez l'invariant du bloc réellement configuré.
+Ne réutilisez pas l'invariant de capacité de Channel. Le `BoundedCapacity` d'un bloc d'exécution inclut un item pendant l'exécution de son délégué. Un propagateur comme `TransformBlock<TInput,TOutput>` peut aussi retenir une sortie terminée jusqu'à ce qu'une cible l'accepte ou que le test la consomme. Modélisez des places `queued`, `executing` et `output_buffered` séparées, puis énoncez l'invariant du bloc réellement configuré.
 
 Distinguez aussi `PropagateCompletion` de la stabilisation de tout le pipeline. Attendez le `Completion` de chaque bloc et toute tâche de collecte située hors du graphe. Une cible liée peut se terminer alors qu'une tâche latérale possède encore du travail ; l'oracle doit donner sa propre place à ce participant.
 
@@ -92,7 +92,7 @@ Cette démarche est particulièrement utile pour les bugs de concurrence qui pas
 ## Exercices
 
 1. Étendez le modèle à deux écritures et dérivez un test Channel où le second writer est bloqué lorsque le consommateur échoue.
-2. Remplacez la correspondance Channel par un [`TransformBlock`](https://learn.microsoft.com/dotnet/api/system.threading.tasks.dataflow.transformblock-2) Dataflow. Définissez un invariant qui compte les items en file et en cours d'exécution.
+2. Remplacez la correspondance Channel par un [`TransformBlock`](https://learn.microsoft.com/dotnet/api/system.threading.tasks.dataflow.transformblock-2) Dataflow. Définissez un invariant qui compte les items en file, en cours d'exécution et les sorties retenues.
 3. Modélisez la libération Rx séparément de la complétion, puis écrivez un test en temps virtuel qui prouve quelle notification est observée.
 4. Choisissez un pipeline GA actuel. Notez sa révision exacte, son seam public, ses tâches possédées et ses observations terminales avant de proposer une correction.
 
@@ -100,7 +100,7 @@ Cette démarche est particulièrement utile pour les bugs de concurrence qui pas
 <summary>Pistes de solution</summary>
 
 1. Ajoutez un second jeton de travail et conservez un seul jeton `free`. Le chemin d'échec minimal doit remplir la place, démarrer la seconde écriture, faire échouer le consommateur et laisser le second writer non stabilisé jusqu'au déclenchement de la politique de panne.
-2. Séparez `queued` de `executing` et testez un invariant comme `free + queued + executing = configured capacity` seulement pour le bloc d'exécution dont la sémantique documentée correspond.
+2. Séparez `queued`, `executing` et `output_buffered`. Pour ce `TransformBlock` séquentiel, testez `free + queued + executing + output_buffered = configured capacity`, puis consommez la sortie avant d'attendre l'acceptation de l'entrée suivante. Si l'ordre ou le parallélisme change, raffinez de nouveau le modèle au lieu de réutiliser cette équation telle quelle.
 3. Donnez des places terminales différentes à `disposed` et `completed`. Avancez le temps virtuel jusqu'à la notification, puis vérifiez séparément que les tâches créées à l'extérieur se sont stabilisées.
 4. Un relevé suffisant nomme un SHA de commit, la méthode publique, chaque tâche ou souscription possédée, les portes forcées, le résultat terminal attendu et la commande qui le reproduit.
 
@@ -109,7 +109,7 @@ Cette démarche est particulièrement utile pour les bugs de concurrence qui pas
 ## À retenir
 
 - Le réseau de Petri est un oracle de spécification, pas l'exécution.
-- La capacité signifie les items en file pour le Channel modélisé, mais les items en file et en exécution pour un bloc Dataflow ; Rx est non borné tant que la conception n'ajoute pas de borne.
+- La capacité signifie les items en file pour le Channel modélisé, mais les items en file, en exécution et parfois les sorties retenues pour un bloc Dataflow ; Rx est non borné tant que la conception n'ajoute pas de borne.
 - Annulation demandée, complétion signalée, file vidée et stabilisation de chaque participant sont des faits distincts.
 - Dérivez des portes déterministes d'un contre-exemple minimal ; ne dépendez ni de pauses ni de la chance d'un stress test.
 - Pour GA, un modèle suggère l'ordonnancement de régression, tandis qu'un test sur une révision épinglée du dépôt apporte la preuve.

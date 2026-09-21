@@ -36,7 +36,7 @@ La primera mejora de diseño consiste en dejar de llamar «pipeline acotado» a 
 | Mecanismo | Qué está acotado | Qué puede significar la plaza Petri `free` | Qué debe seguir explícito |
 |---|---|---|---|
 | [`Channel<T>`](https://learn.microsoft.com/dotnet/core/extensions/channels) | elementos en cola | una plaza disponible en la cola | la finalización del writer, el vaciado de la cola y el asentamiento del reader son observaciones separadas |
-| [TPL Dataflow](https://learn.microsoft.com/dotnet/standard/parallel-programming/dataflow-task-parallel-library) | elementos en cola **y en ejecución** en un bloque de ejecución | no la plaza `free` actual; hay que refinar el modelo | finalización de bloques, fallos propagados y tareas recolectoras externas |
+| [TPL Dataflow](https://learn.microsoft.com/dotnet/standard/parallel-programming/dataflow-task-parallel-library) | elementos en cola, en ejecución y salidas retenidas en un bloque de ejecución | no la plaza `free` actual; hay que refinar el modelo | finalización de bloques, consumo de salidas, fallos propagados y tareas recolectoras externas |
 | [Rx.NET](https://github.com/dotnet/reactive) | nada por defecto | no hay equivalente hasta añadir un puente acotado | `OnCompleted`, `OnError`, liberación de la suscripción y asentamiento del trabajo planificado |
 
 Por tanto, `free + queued = 1` es un invariante útil de la cola Channel, no una ley universal de backpressure. Copiarlo en una prueba de Dataflow o Rx produciría una demostración precisa del sistema equivocado.
@@ -64,7 +64,7 @@ El oráculo mejora la prueba haciendo visibles los tokens restantes. Si un marca
 
 ### TPL Dataflow
 
-No reutilices el invariante de capacidad de Channel. El `BoundedCapacity` de un bloque de ejecución incluye un elemento mientras se ejecuta su delegado. Modela plazas separadas `queued` y `executing`, y expresa después el invariante del bloque realmente configurado.
+No reutilices el invariante de capacidad de Channel. El `BoundedCapacity` de un bloque de ejecución incluye un elemento mientras se ejecuta su delegado. Un propagador como `TransformBlock<TInput,TOutput>` también puede retener una salida terminada hasta que un destino la acepte o la prueba la consuma. Modela plazas separadas `queued`, `executing` y `output_buffered`, y expresa después el invariante del bloque realmente configurado.
 
 Distingue también `PropagateCompletion` del asentamiento de todo el pipeline. Espera el `Completion` de cada bloque y cualquier tarea recolectora fuera del grafo. Un destino enlazado puede terminar mientras una tarea lateral aún posee trabajo; el oráculo debe dar su propia plaza a ese participante.
 
@@ -92,7 +92,7 @@ Esto es especialmente útil para errores de concurrencia que superan miles de it
 ## Ejercicios
 
 1. Extiende el modelo a dos escrituras y deriva una prueba de Channel donde el segundo writer queda bloqueado cuando falla el consumidor.
-2. Sustituye el mapeo de Channel por un [`TransformBlock`](https://learn.microsoft.com/dotnet/api/system.threading.tasks.dataflow.transformblock-2) de Dataflow. Define un invariante que cuente elementos en cola y en ejecución.
+2. Sustituye el mapeo de Channel por un [`TransformBlock`](https://learn.microsoft.com/dotnet/api/system.threading.tasks.dataflow.transformblock-2) de Dataflow. Define un invariante que cuente elementos en cola, en ejecución y salidas retenidas.
 3. Modela la liberación de Rx por separado de la finalización y escribe una prueba de tiempo virtual que demuestre qué notificación se observa.
 4. Elige un pipeline actual de GA. Registra su revisión exacta, seam público, tareas poseídas y observaciones terminales antes de proponer una corrección.
 
@@ -100,7 +100,7 @@ Esto es especialmente útil para errores de concurrencia que superan miles de it
 <summary>Pistas de solución</summary>
 
 1. Añade un segundo token de trabajo y conserva un único token `free`. El camino de fallo mínimo debe llenar la plaza, iniciar la segunda escritura, hacer fallar al consumidor y dejar al segundo writer sin asentarse hasta que se active la política de fallo.
-2. Separa `queued` de `executing` y prueba un invariante como `free + queued + executing = configured capacity` solo para el bloque de ejecución cuyas semánticas documentadas coincidan.
+2. Separa `queued`, `executing` y `output_buffered`. Para este `TransformBlock` secuencial, prueba `free + queued + executing + output_buffered = configured capacity`, y consume la salida antes de esperar que se acepte la entrada siguiente. Si cambian el orden o el paralelismo, refina de nuevo el modelo en lugar de reutilizar esta ecuación sin cambios.
 3. Da plazas terminales distintas a `disposed` y `completed`. Avanza el tiempo virtual hasta la notificación y verifica por separado que las tareas creadas externamente se hayan asentado.
 4. Un registro suficiente nombra el SHA de commit, el método público, cada tarea o suscripción poseída, las compuertas forzadas, el resultado terminal esperado y el comando que lo reproduce.
 
@@ -109,7 +109,7 @@ Esto es especialmente útil para errores de concurrencia que superan miles de it
 ## Qué recordar
 
 - La red de Petri es un oráculo de especificación, no el runtime.
-- Capacidad significa elementos en cola para el Channel modelado, pero elementos en cola y en ejecución para un bloque Dataflow; Rx es ilimitado salvo que el diseño añada un límite.
+- Capacidad significa elementos en cola para el Channel modelado, pero elementos en cola, en ejecución y a veces salidas retenidas para un bloque Dataflow; Rx es ilimitado salvo que el diseño añada un límite.
 - Cancelación solicitada, finalización señalada, cola vacía y asentamiento de cada participante son hechos distintos.
 - Deriva compuertas deterministas de un contraejemplo mínimo; no dependas de pausas ni de la suerte de una prueba de estrés.
 - Para GA, un modelo sugiere el ordenamiento de regresión, mientras una prueba contra una revisión fijada del repositorio aporta la evidencia.

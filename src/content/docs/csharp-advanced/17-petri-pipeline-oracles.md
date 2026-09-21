@@ -36,7 +36,7 @@ The first design improvement is to stop calling three different things “a boun
 | Mechanism | What is bounded | What the Petri place `free` can mean | What must remain explicit |
 |---|---|---|---|
 | [`Channel<T>`](https://learn.microsoft.com/dotnet/core/extensions/channels) | queued items | one available queue slot | writer completion, queue drain and reader settlement are separate observations |
-| [TPL Dataflow](https://learn.microsoft.com/dotnet/standard/parallel-programming/dataflow-task-parallel-library) | queued **and executing** items in an execution block | not the current `free` place; the model must be refined | block completion, propagated faults and external collector tasks |
+| [TPL Dataflow](https://learn.microsoft.com/dotnet/standard/parallel-programming/dataflow-task-parallel-library) | queued, executing and retained-output items in an execution block | not the current `free` place; the model must be refined | block completion, output consumption, propagated faults and external collector tasks |
 | [Rx.NET](https://github.com/dotnet/reactive) | nothing by default | no equivalent until a bounded bridge is introduced | `OnCompleted`, `OnError`, disposal and scheduled-work settlement |
 
 So `free + queued = 1` is a useful Channel invariant, not a universal backpressure law. Copying it into a Dataflow or Rx test would produce a precise proof of the wrong system.
@@ -64,7 +64,7 @@ The oracle improves the test by making leftover tokens visible. If a terminal ma
 
 ### TPL Dataflow
 
-Do not reuse the Channel capacity invariant. An execution block's `BoundedCapacity` includes an item while its delegate is running. Model separate `queued` and `executing` places, then state the invariant for the block you actually configured.
+Do not reuse the Channel capacity invariant. An execution block's `BoundedCapacity` includes an item while its delegate is running. A propagator such as `TransformBlock<TInput,TOutput>` can also retain a completed output until a target accepts it or the test consumes it. Model separate `queued`, `executing` and `output_buffered` places, then state the invariant for the block you actually configured.
 
 Also distinguish `PropagateCompletion` from whole-pipeline settlement. Await every block's `Completion` and any collector task outside the graph. A linked target can complete while a side task still owns work; the oracle should give that participant its own place.
 
@@ -92,7 +92,7 @@ This is especially useful for concurrency bugs that pass thousands of stress ite
 ## Exercises
 
 1. Extend the model to two writes and derive a Channel test where the second writer is blocked when the consumer fails.
-2. Replace the Channel mapping with a Dataflow [`TransformBlock`](https://learn.microsoft.com/dotnet/api/system.threading.tasks.dataflow.transformblock-2). Define an invariant that counts both queued and executing items.
+2. Replace the Channel mapping with a Dataflow [`TransformBlock`](https://learn.microsoft.com/dotnet/api/system.threading.tasks.dataflow.transformblock-2). Define an invariant that counts queued, executing and retained-output items.
 3. Model Rx disposal separately from completion, then write a virtual-time test that proves which notification is observed.
 4. Pick one current GA pipeline. Record its exact revision, public seam, owned tasks and terminal observations before proposing a fix.
 
@@ -100,7 +100,7 @@ This is especially useful for concurrency bugs that pass thousands of stress ite
 <summary>Solution directions</summary>
 
 1. Add a second work token and retain one `free` token. The shortest failing path should fill the slot, start the second write, fail the consumer and leave the second writer unsettled until the failure policy fires.
-2. Split `queued` from `executing`, and test an invariant such as `free + queued + executing = configured capacity` only for the execution block whose documented semantics match it.
+2. Split `queued`, `executing` and `output_buffered`. For this one-at-a-time `TransformBlock`, test `free + queued + executing + output_buffered = configured capacity`, and consume the output before expecting the next input to be accepted. If ordering or parallelism is enabled, refine the model again instead of reusing this equation unchanged.
 3. Give `disposed` and `completed` different terminal places. Advance virtual time to the notification, then assert separately that externally created tasks settled.
 4. A sufficient record names a commit SHA, the public method, every task or subscription it owns, the forced gates, the expected terminal result and the command that reproduces it.
 
@@ -109,7 +109,7 @@ This is especially useful for concurrency bugs that pass thousands of stress ite
 ## What to remember
 
 - The Petri net is a specification oracle, not the runtime.
-- Capacity means queued items for the modeled Channel, but queued plus executing items for a Dataflow execution block; Rx is unbounded unless the design adds a bound.
+- Capacity means queued items for the modeled Channel, but queued, executing and possibly retained-output items for a Dataflow execution block; Rx is unbounded unless the design adds a bound.
 - Cancellation requested, completion signalled, queue drained and every participant settled are different facts.
 - Derive deterministic gates from a shortest counterexample; do not rely on sleeps or stress-test luck.
 - For GA, a model suggests the regression schedule, while a test against a pinned repository revision supplies the evidence.
