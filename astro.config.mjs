@@ -187,6 +187,12 @@ export default defineConfig({
 									collapsed: true,
 									items: [{ autogenerate: { directory: 'hexagonal-architecture' } }],
 								},
+								{
+									label: 'Architecture patterns: choosing boundaries',
+									translations: { fr: 'Patterns d’architecture : choisir les frontières', es: 'Patrones de arquitectura: elegir límites' },
+									collapsed: true,
+									items: [{ autogenerate: { directory: 'architecture-patterns' } }],
+								},
 							],
 						},
 						{
