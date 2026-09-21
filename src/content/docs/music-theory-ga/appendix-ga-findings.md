@@ -22,6 +22,10 @@ Forty rows, but not forty problems: they collapse into **19 distinct defects**, 
 Nothing here is an opinion about code style. Each row is a value computed twice and compared by a program, on three operating systems, at a pinned commit of GA. Clone this repository and run `bash code/music-theory-ga/check.sh`, or run one lesson with `dotnet run --project code/music-theory-ga/GaTheory -c Release -- l3`. GA is read at commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6) and never modified.
 :::
 
+:::tip[Upstream reconciliation]
+The original `a826864` snapshot remains the reproducible baseline for the 40 `DIFF` rows. The executable findings were reconciled in [GA #711](https://github.com/GuitarAlchemist/ga/pull/711), merged as [`b363c3f`](https://github.com/GuitarAlchemist/ga/commit/b363c3f086608f850be026546f85ef13c6e6bfb8) on 2026-09-21. Defects 1–5, 7–11 and 13–18 are fixed and covered by regression tests. Entries 6, 12 and 19 remain explicit design or representation boundaries rather than silent fixes.
+:::
+
 ## The 19 defects
 
 | # | Defect in GA | Rows | Lessons |

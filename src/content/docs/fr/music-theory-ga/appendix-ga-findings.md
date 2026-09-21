@@ -22,6 +22,10 @@ Quarante lignes, mais pas quarante problèmes : elles se ramènent à **19 défa
 Rien ici n'est un avis sur le style du code. Chaque ligne est une valeur calculée deux fois et comparée par un programme, sur trois systèmes d'exploitation, à un commit épinglé de GA. Clone ce dépôt et lance `bash code/music-theory-ga/check.sh`, ou exécute une leçon avec `dotnet run --project code/music-theory-ga/GaTheory -c Release -- l3`. GA est lu au commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6) et jamais modifié.
 :::
 
+:::tip[Rapprochement avec l’amont]
+Le snapshot d’origine `a826864` reste la référence reproductible des 40 lignes `DIFF`. Les constats exécutables ont été rapprochés dans [GA #711](https://github.com/GuitarAlchemist/ga/pull/711), fusionnée sous [`b363c3f`](https://github.com/GuitarAlchemist/ga/commit/b363c3f086608f850be026546f85ef13c6e6bfb8) le 21 septembre 2026. Les défauts 1 à 5, 7 à 11 et 13 à 18 sont corrigés et couverts par des tests de régression. Les entrées 6, 12 et 19 restent des limites explicites de conception ou de représentation, plutôt que des corrections silencieuses.
+:::
+
 ## Les 19 défauts
 
 | # | Défaut dans GA | Lignes | Leçons |

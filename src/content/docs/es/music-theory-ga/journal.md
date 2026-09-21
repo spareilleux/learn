@@ -23,6 +23,12 @@ sidebar:
 - [x] Apéndice C: un veredicto para cada línea `DIFF` de las lecciones 1 a 7
 - [ ] Lecciones 9 a 17 (ver el plan en la página de la misión)
 
+## 2026-09-21 — Conciliación upstream del apéndice C
+
+- [GA #711](https://github.com/GuitarAlchemist/ga/pull/711) concilió los hallazgos ejecutables del apéndice C y se fusionó como [`b363c3f`](https://github.com/GuitarAlchemist/ga/commit/b363c3f086608f850be026546f85ef13c6e6bfb8).
+- Los defectos 1–5, 7–11 y 13–18 están corregidos con cobertura de regresión. Las entradas 6, 12 y 19 siguen siendo límites documentados de diseño o representación.
+- El curso sigue fijado en `a826864` para que las 40 filas `DIFF` originales continúen siendo reproducibles; el apéndice ahora enlaza el resultado upstream más reciente sin reescribir esa evidencia histórica.
+
 ## 2026-09-15 — Un veredicto para cada divergencia, el ukelele y el bajo, tres apéndices
 
 - **Las 40 líneas `DIFF` de las lecciones 1 a 7 ya tienen un veredicto**, en el [apéndice C](../appendix-ga-findings/): 39 son un error de GA, una (`PitchClass.Parse("A")`) es una convención defendible con un fallo de precedencia debajo, y ninguna es un error del curso. Proceden de **19 defectos distintos** —una sola línea equivocada en `Note.Chromatic.ToAccidented` explica ocho líneas ella sola— y se reparten en tres familias: copiar y pegar dentro de un bloque de miembros casi idénticos, un tipo reducido al que se le pide la información que se construyó para descartar, y un `TryParse` que lanza una excepción.
