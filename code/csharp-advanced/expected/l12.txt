@@ -1,0 +1,7 @@
+
+== Middleware wraps the next delegate
+GET /ok: 200; outer:before -> endpoint -> outer:after
+
+== A short-circuit deliberately omits the endpoint
+GET /blocked: 429; outer:before -> gate:short-circuit -> outer:after
+exit 0

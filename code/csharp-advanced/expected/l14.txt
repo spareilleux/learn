@@ -1,0 +1,10 @@
+
+== Route and query binding plus an endpoint filter
+without key: 400; with key: 200 {"root":"C","notes":7}
+
+== A controller uses the same endpoint routing table
+controller: 200 {"symbol":"Cmaj7","characters":5}
+
+== IAsyncEnumerable is streamed as a JSON array
+stream: ["Dm7","G7","Cmaj7"]
+exit 0
