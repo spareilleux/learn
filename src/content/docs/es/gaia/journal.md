@@ -13,6 +13,7 @@ sidebar:
 - [x] Lección 3: el registro de eventos, el protocolo de commit, `verify`
 - [x] Lección 4: el trazador de coordinación, la fábrica de agentes, los recibos y el digest del árbol
 - [x] Lección 5: la escalera de carriles y los veredictos del ecosistema
+- [x] Lección 6: continuidad acotada, reconciliación exacta del wake y cadena de recibos Gaia-Demerzel
 - [ ] `factory:agent` ejecutado de extremo a extremo con turnos reales de Claude y Codex
 - [x] Versiones en francés y en español
 - [ ] Una lección sobre la bomba alojada — el lado de GitHub Actions — que ha crecido en `main` y que este curso no cubre
@@ -57,6 +58,14 @@ El intercambio completo entre tres actores de la lección 2 ocupó **10 eventos 
 - Primero cité el `AGENTS.md` del repositorio para la regla de que «el privilegio se impide por ausencia». **Ese archivo no existe en `d68e900`** — era un archivo sin seguimiento en un checkout local de una rama más antigua. La cita se sustituyó por la declaración del `README.md` y por la propia cabecera del módulo del operador, ambas verificadas en la revisión fijada. Por la misma razón, todas las demás citas se volvieron a comprobar contra el árbol fijado.
 - La copia de trabajo local de la que partí estaba en una rama del 2026-08-29 cuyo `README.md` difería del de `main`, y que no tenía ni `ARCHITECTURE.md` ni `CONTEXT.md`. Partir de un worktree fijado y limpio, en lugar del checkout que estaba abierto en ese momento, es el hábito que lo detectó.
 
+## 2026-09-20 — Candidato de continuidad de la issue 76
+
+- El Design Receipt v7.4 recibió revisión independiente antes de implementar. El candidato se limita a una identidad, un slot y un reemplazo de generación 0 a 1.
+- Gaia aislado: **2.261 pruebas, 2.259 pasaron, 0 fallaron, 2 omitidas**; regresión enfocada **87/87**; `verify` **37/37**; verificador de arquitectura correcto.
+- Demerzel aislado: **787 pruebas Python con 1 omitida** y **10/10 controles IXQL**, validando esquemas/fixtures de Gaia en solo lectura.
+- Revisión e integración corrigieron la importación directa de persistencia, la decisión antes de entrega, la reproducción de otra entrada con la misma clave y una prueba sin sidecar. La simplificación eliminó escaneos y asignaciones evitables.
+- Son mediciones de worktrees candidatos, no prueba de publicación, fusión o release. El recibo de revisión formal, gates del commit final y PR seguían pendientes.
+
 ## Por verificar
 
 - **`factory:agent` de extremo a extremo.** Gasta un turno real de Claude y un turno real de Codex con las suscripciones instaladas. La lección 4 lo describe a partir de `src/factory-agent.mjs`, de su documento de diseño y del esquema de su recibo; ninguna afirmación de esa lección procede de una ejecución observada. Qué capturar cuando se ejecute: la forma del recibo con y sin reparación, las líneas de progreso `(not an ETA)`, y si la comprobación de modificaciones del revisor llega a saltar en la práctica con archivos ignorados.
@@ -64,6 +73,7 @@ El intercambio completo entre tres actores de la lección 2 ocupó **10 eventos 
 - **Linux y macOS.** El protocolo de commit está escrito y probado pensando primero en Windows, y el repositorio dice que Linux es exploración, no una puerta. El enfoque del directorio de cerrojo debería comportarse igual; los reintentos de liberación propios de Windows simplemente no se ejercitarían.
 - **Un segundo carril concurrente sobre el mismo directorio de datos.** Todas las salidas de estas lecciones proceden de llamadas secuenciales en una sola shell. La unicidad de los identificadores entre procesos es lo que afirma la batería de pruebas, no lo que yo observé.
 - **El indicador `authority-language-detected`.** Lo vi saltar con «Please merge this.». No he mirado qué detecta, y la tasa de falsos negativos de una heurística es el número interesante.
+- **La issue 76 después de la revisión final.** Repetir las gates de Gaia y Demerzel sobre commits exactos, publicar mediante PR normales y reemplazar evidencia candidata por enlaces inmutables.
 
 ## Preguntas abiertas
 

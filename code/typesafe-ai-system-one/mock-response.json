@@ -1,0 +1,38 @@
+{
+  "model": "mock-jev-course/1",
+  "answers": {
+    "next_step": {
+      "type": "choice",
+      "choice": "design_review",
+      "confidence": 0.82,
+      "probabilities": {
+        "design_review": 0.88,
+        "bounded_implementation": 0.1,
+        "reject": 0.02
+      }
+    },
+    "delivery_risk": {
+      "type": "score",
+      "score": 1.2,
+      "confidence": 0.73,
+      "legend": {
+        "0": "Low and reversible",
+        "1": "Moderate or compensatable",
+        "2": "High or hard to reverse"
+      },
+      "probabilities": {
+        "0": 0.1,
+        "1": 0.6,
+        "2": 0.3
+      }
+    },
+    "authority_present": {
+      "type": "noul",
+      "noul": 0.2
+    }
+  },
+  "usage": {
+    "input_tokens": 0,
+    "output_tokens": 0
+  }
+}

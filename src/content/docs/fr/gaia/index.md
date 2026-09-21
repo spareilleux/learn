@@ -1,15 +1,15 @@
 ---
 title: Gaia — Mission
-description: "Gaia est un bus de coordination local et durable, et une usine logicielle qui apporte ses preuves, pour les sessions Claude Code et Codex : six verbes sans privilège, un journal d'événements en ajout seul, et des reçus que personne n'a à croire sur parole. Ce cours explique ce que Gaia cherche à accomplir, pourquoi le privilège y est empêché par son absence plutôt que par une vérification, et ce qui a réellement été mesuré, chaque sortie étant produite sur la révision épinglée."
+description: "Gaia est un bus de coordination local et durable et une usine logicielle avec preuves : six verbes sans privilège, un journal en ajout seul, l'exact replay de la continuité et des reçus dont la provenance est déclarée leçon par leçon."
 sidebar:
   label: Mission
   order: 0
 ---
 
 :::note[Révision étudiée, et ce qui est mesuré ici]
-Gaia au commit [`d68e900`](https://github.com/GuitarAlchemist/gaia/tree/d68e90099ae2a6fbbec9d428617bfcd02095aac0) (2026-09-13), la tête de `main`, sous Windows 11 avec [Node.js](https://nodejs.org/en) v24.12.0, le 15 septembre 2026. Gaia n'a **aucune dépendance d'exécution** : chaque commande de ce cours fonctionne donc depuis un clone propre, sans `npm install`.
+Les leçons 1 à 5 étudient Gaia au commit [`d68e900`](https://github.com/GuitarAlchemist/gaia/tree/d68e90099ae2a6fbbec9d428617bfcd02095aac0) (2026-09-13), alors tête de `main`, sous Windows 11 avec [Node.js](https://nodejs.org/en) v24.12.0. La leçon 6 étudie séparément un candidat isolé de l'issue 76 le 20 septembre avec Node 26.8.1 épinglé. Ce candidat n'était ni sur `main`, ni fusionné, ni livré lors des mesures. Gaia n'a **aucune dépendance d'exécution** : les commandes partent de worktrees propres, sans `npm install`.
 
-Chaque sortie citée dans ces leçons a été produite en lançant la commande sur cette révision, dans un répertoire de données jetable, et collée telle quelle, à part le raccourcissement de longs chemins absolus. **Aucune leçon de ce cours ne lance un modèle facturé.** La seule commande qui le fait, `factory:agent`, qui dépense un vrai tour de Claude et un vrai tour de Codex, est décrite à partir de son code, de son document de conception et du schéma de ses reçus, et marquée *à vérifier* là où je ne l'ai pas exécutée.
+Chaque sortie des leçons 1 à 5 vient de `d68e900`; chaque chiffre de l'issue 76 dans la leçon 6 est étiqueté comme preuve de worktree candidat. **Aucune leçon de ce cours ne lance un modèle facturé.** La seule commande qui le fait, `factory:agent`, qui dépense un vrai tour de Claude et un vrai tour de Codex, est décrite à partir de son code, de son document de conception et du schéma de ses reçus, et marquée *à vérifier* là où je ne l'ai pas exécutée.
 :::
 
 ## Pourquoi j'apprends cela
@@ -71,6 +71,7 @@ Si tu ne lis qu'une partie de ce tableau, lis les trois dernières lignes. *Remi
 - rejouer un journal, le vérifier, et distinguer les trois codes de sortie : refusé, fermé en cas d'échec, et ok ;
 - lire un reçu de l'usine et dire ce qu'il prouve et ce qu'il laisse comme résidu déclaré ;
 - justifier la limite de quatre voies par ses preuves, et dire ce qui permettrait de la relever.
+- expliquer comment un successeur borné continue un travail revu sans dupliquer le wake ni hériter d'autorité.
 
 ## Plan
 
@@ -81,6 +82,7 @@ Si tu ne lis qu'une partie de ce tableau, lis les trois dernières lignes. *Remi
 | 3 | [Le journal d'événements : en ajout seul, rejoué, fermé en cas d'échec](03-event-log-and-replay/) | l'event sourcing, un journal d'écriture anticipée |
 | 4 | [L'usine : candidats, relecteurs et reçus](04-factory-and-receipts/) | une pull request, un artefact de build |
 | 5 | [Limites, preuves et écosystème](05-limits-and-ecosystem/) | la planification de capacité, une décision d'intégration |
+| 6 | [Continuité et artifact chain](06-continuity-and-artifact-chain/) | l'idempotence, le write-ahead log, les contrats entre dépôts |
 | — | [Journal](journal/) | |
 
 ## Prérequis

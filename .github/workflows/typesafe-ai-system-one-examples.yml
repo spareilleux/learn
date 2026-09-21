@@ -1,0 +1,37 @@
+name: TypeSafe AI System One course examples
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'code/typesafe-ai-system-one/**'
+      - '.github/workflows/typesafe-ai-system-one-examples.yml'
+  pull_request:
+    paths:
+      - 'code/typesafe-ai-system-one/**'
+      - '.github/workflows/typesafe-ai-system-one-examples.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: test (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        working-directory: code/typesafe-ai-system-one
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.14'
+      - name: Run the deterministic mock
+        run: python typesafe_lab.py mock
+      - name: Run the warning-strict test suite
+        run: python -W error::ResourceWarning -m unittest -v

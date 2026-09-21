@@ -200,6 +200,12 @@ export default defineConfig({
 									items: [{ autogenerate: { directory: 'agentic-coding' } }],
 								},
 								{
+									label: 'TypeSafe AI System One and Jev',
+									translations: { fr: 'TypeSafe AI System One et Jev', es: 'TypeSafe AI System One y Jev' },
+									collapsed: true,
+									items: [{ autogenerate: { directory: 'typesafe-ai-system-one' } }],
+								},
+								{
 									label: 'Gaia: coordinating agents with evidence',
 									translations: { fr: 'Gaia : coordonner des agents avec des preuves', es: 'Gaia: coordinar agentes con evidencia' },
 									collapsed: true,
