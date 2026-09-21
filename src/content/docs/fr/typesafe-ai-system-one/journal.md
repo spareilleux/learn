@@ -9,18 +9,20 @@ sidebar:
 
 - [x] Documentation officielle sur introduction, primitives, modèle, prix, confiance, API et patterns
 - [x] Requête hors ligne, validateur de contrat et politique de routage sans autorité
-- [x] Runner mock et quatorze tests déterministes exécutés
+- [x] Runner mock, corpus de 12 cas et 19 tests déterministes exécutés
 - [x] Protocole live détaillé, à un appel, avec budget et conditions d'arrêt
 - [x] Hypothèses bornées pour Gaia, GA, Demerzel, IX et TARS
 - [x] Versions française et espagnole
 - [ ] Appel Jev live
-- [ ] Corpus étiqueté et étude de calibration
+- [x] Corpus étiqueté et harness de scoring hors ligne
+- [ ] Étude de calibration live
 
 ## Expériences
 
 | Question | Hypothèse avant mesure | Résultat mesuré | Verdict | Preuve |
 |---|---|---|---|---|
 | La politique peut-elle échouer proprement sans fournisseur? | Une réponse mock fermée doit exercer la validation et refuser le dispatch sans autorité | 14/14 tests réussis en 0,078 s; route `human_review:no_explicit_authority` | confirmé pour la politique locale seulement | [entrée du 20 septembre](#2026-09-20--point-de-référence-hors-ligne), [`code/typesafe-ai-system-one`](https://github.com/spareilleux/learn/tree/main/code/typesafe-ai-system-one) |
+| Un harness borné peut-il tester l'hypothèse d'une économie de 50 % avant toute dépense? | Un corpus fixe et un plan exact doivent exposer coût, qualité et retries sans contacter Jev | 12 cas, 13 appels planifiés, borne conservatrice de 17 663 tokens, borne de coût 0,000741846 $, 19/19 tests en 0,078 s | confirmé pour le plan; économie live non mesurée | [entrée benchmark](#2026-09-20--harness-du-benchmark-de-coût), [leçon 4](../04-token-cost-benchmark/) |
 
 ## 2026-09-20 — Revue des sources officielles
 
@@ -38,11 +40,17 @@ python typesafe_lab.py mock
 python -W error::ResourceWarning -m unittest -v
 ```
 
+## 2026-09-20 — Harness du benchmark de coût
+
+Ajout de 12 cas caviardés de GA, Gaia et Demerzel, dont une prompt injection. `plan` indique 13 appels, zéro retry, une borne conservatrice de 17 663 tokens, une borne de coût d'entrée de 0,000741846 $ et un plafond de 0,0021 $. La suite combinée passe 19/19 tests en 0,078 s.
+
+Le scorer mock affiche une exactitude parfaite de fixture, un Brier de 0,015 et un ratio entrées unitaires/batch de 2,4. Ces chiffres valident uniquement le scorer : la fixture est `mock-jev-benchmark/1`, aucun fournisseur n'a été appelé et ce ne sont pas des résultats Jev.
+
 ## À vérifier
 
 - Exécuter exactement un appel live après export de `TYPESAFE_API_KEY`, sans consigner le secret.
 - Confirmer le schéma de réponse et envisager un JSON Schema officiel.
-- Constituer un corpus étiqueté pour un dépôt avant toute modification de production.
+- Exécuter la calibration live de 13 appels uniquement après approbation explicite du plafond de 0,0021 $.
 - Mesurer exactitude, calibration, taux de revue, coût et latence face à un baseline déterministe.
 - Revérifier prix, modèles et limites juste avant l'appel.
 - La matrice CI Windows, Linux et macOS avec Python 3.14 est ajoutée; confirmer son premier résultat hébergé.

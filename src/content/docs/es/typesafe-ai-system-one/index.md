@@ -7,7 +7,7 @@ sidebar:
 ---
 
 :::caution[Qué se probó y qué no]
-Este curso se basa en la [documentación oficial de TypeSafe AI](https://docs.typesafe.ai/introduction), su [referencia de API](https://docs.typesafe.ai/api), la [página de modelos](https://docs.typesafe.ai/models) y el [anuncio de Jev](https://typesafe.ai/blog/introducing-system-one-models-and-jev), consultados el 20 de septiembre de 2026. El laboratorio sin conexión de [`code/typesafe-ai-system-one`](https://github.com/spareilleux/learn/tree/main/code/typesafe-ai-system-one) se ejecutó localmente con Python 3.14.2: **14 pruebas pasaron** y la ruta mock rechazó el despacho porque faltaba autoridad explícita.
+Este curso se basa en la [documentación oficial de TypeSafe AI](https://docs.typesafe.ai/introduction), su [referencia de API](https://docs.typesafe.ai/api), la [página de modelos](https://docs.typesafe.ai/models) y el [anuncio de Jev](https://typesafe.ai/blog/introducing-system-one-models-and-jev), consultados el 20 de septiembre de 2026. El laboratorio sin conexión de [`code/typesafe-ai-system-one`](https://github.com/spareilleux/learn/tree/main/code/typesafe-ai-system-one) se ejecutó localmente con Python 3.14.2: **19 pruebas pasaron**, la ruta mock rechazó el despacho porque faltaba autoridad explícita y un plan de benchmark de 12 casos terminó sin acceso de red.
 
 No se leyó ninguna credencial, no se abrió la consola y no se llamó a la API de TypeSafe. Todo resultado en vivo, latencia, número de tokens, afirmación de calibración sobre nuestros datos y beneficio específico para un repositorio queda **por verificar**.
 :::
@@ -40,6 +40,7 @@ Los agentes de programación producen texto, planes y parches. Nuestros reposito
 | 1 | [Decisiones, no cadenas](01-decisions-not-strings/) | Elegir entre Choice, Score y Noul sin confundir tipos con verdad |
 | 2 | [Un experimento reproducible y de coste acotado](02-bounded-experiment/) | Ejecutar la base sin conexión y entender la sonda opcional de una llamada |
 | 3 | [Casos de uso en nuestros repositorios](03-repository-use-cases/) | Elegir seams útiles en Gaia, GA, Demerzel, IX y TARS preservando la autoridad |
+| 4 | [Benchmark del coste en tokens](04-token-cost-benchmark/) | Probar la hipótesis de ahorro del 50 % frente a calidad, reintentos y coste desplazado |
 | — | [Diario](journal/) | Hechos medidos, preguntas abiertas y trabajo en vivo pendiente |
 
 ## Requisitos previos
