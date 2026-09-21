@@ -19,6 +19,9 @@ sidebar:
 - [x] Lección 7: TPL Dataflow
 - [x] Lección 8: Rx.NET
 - [x] Lección 9: elegir un flujo
+- [x] Lecciones 10-14: estado compartido y ruta de una petición ASP.NET Core
+- [x] Lección 15: servicios hospedados y trabajo en segundo plano
+- [x] Lección 16: autenticación y autorización
 - [x] Apéndice 1: cinco miembros de GA optimizados, demostrados sobre los 4096 conjuntos de clases de altura y luego medidos — con los benchmarks reescritos en cuanto se vio que medían el JIT
 - [x] Apéndice 2: el pipeline de indexación de GA perfilado, tres cambios demostrados contra la propia salida de GA y medidos, y enviados aguas arriba como pull requests
 
@@ -180,6 +183,14 @@ El apéndice 1 eligió qué optimizar leyendo GA. Esta vez eligió un perfilador
 - Se verificaron una Minimal API, un controlador en la misma tabla de routing y una respuesta JSON `IAsyncEnumerable<string>`.
 - Las salidas portables están en `expected/l10.txt` a `expected/l14.txt`; los mínimos del thread pool dependen de la máquina.
 - Son pruebas locales: buffering de proxy, límites de producción, identity provider real y starvation ante una dependencia remota quedan por medir.
+
+## 2026-09-21 — Lecciones 15-16: trabajo hospedado y autorización local
+
+- La prueba de servicios hospedados usa barreras de terminación en lugar de demoras. Un canal limitado alimenta un worker singleton y dos operaciones resuelven instancias scoped distintas (`scope-1` y `scope-2`). La cancelación del host se observa mientras el worker espera más trabajo.
+- Un segundo host libera un fallo deliberado y observa `ApplicationStopping` con `BackgroundServiceExceptionBehavior.StopHost`. Esto demuestra la política del host, no reintento ni recuperación.
+- La prueba de autenticación inicia Kestrel en un puerto loopback efímero. Los bearer tokens ausente, mal formado, caducado y con firma incorrecta devuelven 401; una identidad válida sin `scope=scales.read` devuelve 403; la identidad autorizada recibe `200 C major`.
+- Ambas claves se generan en memoria para un solo proceso. La vida útil usa un instante fijo y ninguna clave ni token se imprime ni persiste.
+- `Advanced` compiló localmente sin advertencias y las dos salidas nuevas coinciden con `expected/l15.txt` y `expected/l16.txt`. Quedan por verificar la CI en tres sistemas, un servidor de autorización real, descubrimiento/rotación de claves y despliegue detrás de proxy.
 
 ## Por verificar
 

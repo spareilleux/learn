@@ -21,6 +21,8 @@ var lessons = new Dictionary<string, Action>
     ["l12"] = Lesson12.Run,
     ["l13"] = Lesson13.Run,
     ["l14"] = Lesson14.Run,
+    ["l15"] = Lesson15.Run,
+    ["l16"] = Lesson16.Run,
     ["a1"] = Appendix1.Run,
 };
 

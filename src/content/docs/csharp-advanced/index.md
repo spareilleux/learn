@@ -71,8 +71,8 @@ Parts 1 and 2 measure GA's own code. Part 3 builds a small scales and chords ser
 | 12 | [The middleware pipeline](12-middleware-pipeline/) | `Use`, `Map`, `Run`, ordering, short-circuits, exception handling, endpoint routing | Servlet filters, `WebFilter` |
 | 13 | [Dependency injection and options](13-dependency-injection-options/) | lifetimes, captive dependencies, scope validation, keyed services, `IOptions`, `IOptionsSnapshot`, `IOptionsMonitor`, validation | the Spring container, `@ConfigurationProperties` |
 | 14 | [Minimal APIs and controllers](14-minimal-apis-controllers/) | route handlers and parameter binding, filters, validation, `TypedResults`, streaming `IAsyncEnumerable` responses | `@RestController`, [WebFlux](../spring-cloud-reactor/04-webflux/) functional endpoints |
-| 15 | Hosted services | `IHostedService`, `BackgroundService`, startup and shutdown order, exceptions, queues with channels; GA's hosted services | `@Scheduled`, `SmartLifecycle` |
-| 16 | Authentication and authorization | schemes, handlers, JWT bearer, policies and requirements | Spring Security |
+| 15 | [Hosted services](15-hosted-services/) | `IHostedService`, `BackgroundService`, startup and shutdown order, exceptions, queues with channels; GA's hosted services | `@Scheduled`, `SmartLifecycle` |
+| 16 | [Authentication and authorization](16-authentication-authorization/) | schemes, handlers, JWT bearer, policies and requirements | Spring Security |
 | 17 | gRPC and SignalR | protobuf contracts, streaming calls, hubs, backpressure over the network | Spring gRPC, WebSocket, RSocket |
 | 18 | Resilience, rate limiting and output caching | `Microsoft.Extensions.Http.Resilience`, Polly pipelines, rate limiters, output cache policies | Resilience4j, Spring Cloud Circuit Breaker |
 | 19 | OpenTelemetry and diagnostics in production | `System.Diagnostics.Metrics`, `ActivitySource`, OpenTelemetry exporters, `dotnet-counters`, `dotnet-trace`, `dotnet-dump` | Micrometer, Actuator |
@@ -95,7 +95,7 @@ Parts 1 and 2 measure GA's own code. Part 3 builds a small scales and chords ser
 | 2 | [GA, profiled, then proved and measured](appendix-2-ga-performance/) | `dotnet-trace` on a real pipeline, 12-bit masks instead of hash sets, boxed enumerators, a 4096-slot cache keyed by the set itself, a LINQ property in a hot loop, and a proof that compares two builds of GA byte for byte | `CanonicalChordRecognizer`, `ChordIntervalPattern.TryMatch`, `IntervalClassVector`, `OptickIndexReader` |
 | — | [Journal](journal/) | | |
 
-Lessons 15 to 24 are planned and not written yet. Lessons 6 to 9 were written before lesson 5, and don't depend on it.
+Lessons 17 to 24 are planned and not written yet. Lessons 6 to 9 were written before lesson 5, and don't depend on it.
 
 ## Prerequisites
 
