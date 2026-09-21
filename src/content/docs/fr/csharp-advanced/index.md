@@ -73,19 +73,20 @@ Les parties 1 et 2 mesurent le propre code de GA. La partie 3 construit un petit
 | 14 | [Minimal APIs et contrôleurs](14-minimal-apis-controllers/) | gestionnaires de routes et liaison des paramètres, filtres, validation, `TypedResults`, réponses `IAsyncEnumerable` en flux | `@RestController`, endpoints fonctionnels [WebFlux](../spring-cloud-reactor/04-webflux/) |
 | 15 | [Services hébergés](15-hosted-services/) | `IHostedService`, `BackgroundService`, ordre de démarrage et d'arrêt, exceptions, files avec des channels ; les services hébergés de GA | `@Scheduled`, `SmartLifecycle` |
 | 16 | [Authentification et autorisation](16-authentication-authorization/) | schémas, gestionnaires, JWT bearer, stratégies et exigences | Spring Security |
-| 17 | gRPC et SignalR | contrats protobuf, appels en flux, hubs, backpressure à travers le réseau | Spring gRPC, WebSocket, RSocket |
-| 18 | Résilience, limitation de débit et cache de sortie | `Microsoft.Extensions.Http.Resilience`, pipelines Polly, limiteurs de débit, stratégies de cache de sortie | Resilience4j, Spring Cloud Circuit Breaker |
-| 19 | OpenTelemetry et diagnostic en production | `System.Diagnostics.Metrics`, `ActivitySource`, exportateurs OpenTelemetry, `dotnet-counters`, `dotnet-trace`, `dotnet-dump` | Micrometer, Actuator |
-| 20 | Tester avec `WebApplicationFactory` | l'hôte de test, remplacer des services, l'authentification dans les tests, Testcontainers | `@SpringBootTest`, `WebTestClient` |
-| 21 | Native AOT et trimming | publier une API avec Native AOT, avertissements de trimming, le générateur de délégués de requête, démarrage et taille mesurés | images natives GraalVM |
+| 17 | [Oracles de spécification Petri pour les pipelines C#](17-petri-pipeline-oracles/) | modèles finis de cycle de vie, accessibilité complète, classification terminale, portes d'exécution déterministes ; files Channel, exécution/sorties retenues de Dataflow et hypothèses Rx gardées distinctes | la même méthode s'applique à Reactor seulement après avoir modélisé explicitement sa capacité et ses schedulers |
+| 18 | gRPC et SignalR | contrats protobuf, appels en flux, hubs, backpressure à travers le réseau | Spring gRPC, WebSocket, RSocket |
+| 19 | Résilience, limitation de débit et cache de sortie | `Microsoft.Extensions.Http.Resilience`, pipelines Polly, limiteurs de débit, stratégies de cache de sortie | Resilience4j, Spring Cloud Circuit Breaker |
+| 20 | OpenTelemetry et diagnostic en production | `System.Diagnostics.Metrics`, `ActivitySource`, exportateurs OpenTelemetry, `dotnet-counters`, `dotnet-trace`, `dotnet-dump` | Micrometer, Actuator |
+| 21 | Tester avec `WebApplicationFactory` | l'hôte de test, remplacer des services, l'authentification dans les tests, Testcontainers | `@SpringBootTest`, `WebTestClient` |
+| 22 | Native AOT et trimming | publier une API avec Native AOT, avertissements de trimming, le générateur de délégués de requête, démarrage et taille mesurés | images natives GraalVM |
 
 ### Partie 4 : métaprogrammation et outillage
 
 | # | Leçon | Sous le capot | Spring et Reactor |
 |---|---|---|---|
-| 22 | Arbres d'expressions, réflexion et générateurs de source | ce que devient une lambda une fois compilée, `Expression<T>`, le coût de la réflexion, générateurs incrémentiels, `[GeneratedRegex]` | processeurs d'annotations, [le moteur AOT de Spring](https://docs.spring.io/spring-framework/reference/core/aot.html) |
-| 23 | Analyseurs Roslyn et correctifs de code | modèles syntaxique et sémantique, écrire un analyseur et ses tests | [Error Prone](https://errorprone.info/), [SpotBugs](https://spotbugs.github.io/) |
-| 24 | Interop et code unsafe | `[LibraryImport]`, pointeurs de fonction, `Unsafe`, `MemoryMarshal`, épinglage | JNI, et l'[API des fonctions et de la mémoire étrangères](https://openjdk.org/jeps/454) |
+| 23 | Arbres d'expressions, réflexion et générateurs de source | ce que devient une lambda une fois compilée, `Expression<T>`, le coût de la réflexion, générateurs incrémentiels, `[GeneratedRegex]` | processeurs d'annotations, [le moteur AOT de Spring](https://docs.spring.io/spring-framework/reference/core/aot.html) |
+| 24 | Analyseurs Roslyn et correctifs de code | modèles syntaxique et sémantique, écrire un analyseur et ses tests | [Error Prone](https://errorprone.info/), [SpotBugs](https://spotbugs.github.io/) |
+| 25 | Interop et code unsafe | `[LibraryImport]`, pointeurs de fonction, `Unsafe`, `MemoryMarshal`, épinglage | JNI, et l'[API des fonctions et de la mémoire étrangères](https://openjdk.org/jeps/454) |
 
 ### Annexes
 
@@ -93,9 +94,10 @@ Les parties 1 et 2 mesurent le propre code de GA. La partie 3 construit un petit
 |---|---|---|---|
 | 1 | [Cinq optimisations, prouvées puis mesurées](appendix-benchmarks/) | rotations et `PopCount` sur des ensembles de 12 bits, des tables de correspondance, une preuve d'équivalence sur tout le domaine d'entrée, les tris stables comme règle de départage, et un benchmark qui mesurait le JIT au lieu du code | `IsClusterFree`, `IntervalClassVector`, `ClosestDiatonicKey`, `ToNormalForm`, `PrimeForm` |
 | 2 | [GA, profilé, puis prouvé et mesuré](appendix-2-ga-performance/) | `dotnet-trace` sur un vrai pipeline, des masques de 12 bits au lieu d'ensembles de hachage, des énumérateurs boxés, un cache de 4096 cases indexé par l'ensemble lui-même, une propriété LINQ dans une boucle critique, et une preuve qui compare deux builds de GA octet par octet | `CanonicalChordRecognizer`, `ChordIntervalPattern.TryMatch`, `IntervalClassVector`, `OptickIndexReader` |
+| 3 | [Oracle de cycle de vie par réseau de Petri](../petri-nets/14-on-our-systems/) | un pipeline borné avec succès, panne et annulation explicites ; accessibilité complète et aucun marquage mort non terminal | les formes de panne Channel étudiées aux leçons 6 et 9 |
 | — | [Journal](journal/) | | |
 
-Les leçons 17 à 24 sont prévues et pas encore écrites. Les leçons 6 à 9 ont été écrites avant la leçon 5, et n'en dépendent pas.
+Les leçons 18 à 25 sont prévues et pas encore écrites. La leçon 17 est un laboratoire avancé de concurrence ajouté après les leçons ASP.NET Core ; les leçons 6 à 9 ont été écrites avant la leçon 5 et n'en dépendent pas.
 
 ## Prérequis
 

@@ -22,6 +22,7 @@ sidebar:
 - [x] Lecciones 10-14: estado compartido y ruta de una petición ASP.NET Core
 - [x] Lección 15: servicios hospedados y trabajo en segundo plano
 - [x] Lección 16: autenticación y autorización
+- [x] Lección 17: traducción de un oráculo de especificación Petri acotado en diseño de pruebas deterministas para Channel, TPL Dataflow y Rx
 - [x] Apéndice 1: cinco miembros de GA optimizados, demostrados sobre los 4096 conjuntos de clases de altura y luego medidos — con los benchmarks reescritos en cuanto se vio que medían el JIT
 - [x] Apéndice 2: el pipeline de indexación de GA perfilado, tres cambios demostrados contra la propia salida de GA y medidos, y enviados aguas arriba como pull requests
 
@@ -192,8 +193,17 @@ El apéndice 1 eligió qué optimizar leyendo GA. Esta vez eligió un perfilador
 - Ambas claves se generan en memoria para un solo proceso. La vida útil usa un instante fijo y ninguna clave ni token se imprime ni persiste.
 - `Advanced` compiló localmente sin advertencias y las dos salidas nuevas coinciden con `expected/l15.txt` y `expected/l16.txt`. Quedan por verificar la CI en tres sistemas, un servidor de autorización real, descubrimiento/rotación de claves y despliegue detrás de proxy.
 
+## 2026-09-21 — Lección 17: oráculos Petri para pruebas de pipelines C#
+
+- Se reutilizó el ciclo de vida ejecutable de un elemento y una plaza de la [lección Petri 14](../../petri-nets/14-on-our-systems/) en vez de crear un segundo modelo. Su suite específica explora los ocho marcados alcanzables, clasifica los tres marcados muertos terminales y comprueba el invariante de cola Channel `free + queued = 1`.
+- Se registró la frontera entre modelo y ejecución. Las pruebas Petri validan la especificación finita; no ejecutan `Channel<T>`, TPL Dataflow ni Rx.NET y, por tanto, no demuestran la implementación actual de GA.
+- Cada camino del modelo se convirtió en una receta de prueba de ejecución determinista basada en compuertas en lugar de pausas. La receta exige el resultado público de excepción o finalización y el asentamiento de cada participante poseído.
+- Se mantuvieron separadas las semánticas de capacidad: Channel cuenta elementos en cola en este modelo, la capacidad de un bloque de ejecución Dataflow incluye el elemento en curso y Rx no tiene límite hasta que el diseño lo añade.
+- Se documentaron dos límites deliberados: la cancelación es atómica y anterior al inicio, y la red de un elemento no puede reproducir un productor ya bloqueado por backpressure tras el fallo del consumidor. Quedan por verificar un modelo de dos elementos y fixtures de ejecución.
+
 ## Por verificar
 
+- Ejecutar las recetas de la lección 17 contra fixtures fijadas de Channel, Dataflow y Rx, incluido un ordenamiento de dos elementos con productor bloqueado; la evidencia actual es solo el oráculo Petri.
 - Por qué la PGO dinámica no eliminó los enumeradores encapsulados de la primera versión con máscaras de `TryMatch` (apéndice 2).
 - Por qué la exportación del índice OPTIC-K de GA difiere entre sesiones en 266 de las 313.047 entradas (apéndice 2).
 - A qué miembro se enlaza `T.Items` cuando una interfaz derivada oculta una propiedad abstracta estática con una propiedad `new static` (lección 5).
