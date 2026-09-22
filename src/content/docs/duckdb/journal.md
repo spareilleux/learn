@@ -18,6 +18,39 @@ sidebar:
 - [x] Lesson 7: performance
 - [x] Lesson 8: persistence, transactions and concurrency
 
+## QA
+
+DuckDB 1.5.5, its .NET driver and its JDBC driver are somebody else's software. Two rows below lose data without saying so, which is why the Status column separates them from the rows that are documented behaviour a C# or Java habit walks into. Nothing here has been reported upstream.
+
+| Expected | What happens | Where | Measure | Status |
+|---|---|---|---|---|
+| DuckDB.NET fills a class from a `STRUCT` by property name | It ignores case but not underscores, so `StartedAt` silently keeps its default value while `Started_At` is filled | DuckDB.NET 1.5.5 | Silent, no exception. A positional record throws `MissingMethodException` instead | Reproduced, not reported [2026-09-14](#2026-09-14--surprises-while-writing-lessons-5-6) |
+| A `TIMESTAMPTZ` survives a round trip through the driver | It comes back as a `DateTime` holding the UTC value with `Kind` `Unspecified`, so `ToUniversalTime` shifts it a second time. In Java it is an `OffsetDateTime` in the JVM's zone, whatever `SET TimeZone` said | DuckDB.NET 1.5.5, duckdb_jdbc 1.5.5.1 | Wrong values, silently, on both drivers | Reproduced, not reported [2026-09-14](#2026-09-14--surprises-while-writing-lessons-5-6) |
+| A multi-statement string is atomic, as DuckDB's transactions page describes an implicit transaction | It is not: the first two rows stayed when the third statement failed, in the CLI and through JDBC | DuckDB 1.5.5 CLI and duckdb_jdbc | 2 of 3 rows kept, by `-c "a; b; c"` and by `statement.execute("a; b; c")`. `COMMIT` after an error prints no error and rolls back | Reproduced; documentation and behaviour disagree [2026-09-14](#2026-09-14--surprises-while-writing-lessons-7-8) |
+| A failed query leaves the `Statement` usable | The statement is closed, so a loop that catches the error and carries on fails every statement after it | duckdb_jdbc 1.5.5.1 | `Statement was closed` | Reproduced, not reported [2026-09-14](#2026-09-14--surprises-while-writing-lessons-5-6) |
+| The CSV sniffer reports a column it could not parse as asked | It silently reads `13/09/2026 15:53` as `VARCHAR`, and so does a wrong `timestampformat`; only an explicit type makes it fail | DuckDB 1.5.5 | Every later date comparison becomes a string comparison | Reproduced; the journal's own words: "This isn't an error" [2026-09-14](#2026-09-14--surprises-while-writing-lessons-1-4) |
+| A glob over files with different shapes warns or fails | `FROM 'data/*.json'` merges runs and jobs into one table without a word | DuckDB 1.5.5 | 20 columns out of two unrelated shapes | Reproduced, not reported [2026-09-14](#2026-09-14--surprises-while-writing-lessons-1-4) |
+| `approx_unique` in `SUMMARIZE` counts the distinct values | It over- and under-counts | DuckDB CLI 1.5.5 | 131 for 125 run ids, 17 for 21 workflow names | By design: HyperLogLog trades exactness for constant memory [2026-09-14](#2026-09-14--surprises-while-writing-lessons-1-4) |
+| `labels[0]` is an error | It returns `NULL`, as does any index past the end | DuckDB 1.5.5 | No error | By design: lists start at 1. A C# or Java habit that fails silently [2026-09-14](#2026-09-14--surprises-while-writing-lessons-1-4) |
+| The Parquet writer produces the same bytes for the same data | It does not — it writes with several threads | DuckDB 1.5.5 Parquet writer | 119,021,205 then 119,392,814 bytes locally for an 11-million-row file; 118,714,412 to 119,120,557 on the runners. On the first push the lesson-4 script failed on macOS alone: 8 column chunks differed by 1 to 6 bytes in `total_compressed_size` | Reproduced; a real CI failure, worked around by comparing `num_values` [2026-09-14](#2026-09-14--surprises-while-writing-lessons-7-8) |
+| Equivalent date predicates get equivalent plans | `started_at::DATE = …` and `date_trunc('day', started_at) = …` are rewritten into a range that skips row groups; `strftime(started_at, …) = …` stays an expression and reads every row | DuckDB 1.5.5 optimizer | 0.47 s against 0.003 s on the sorted file | Reproduced; a genuinely missed rewrite [2026-09-14](#2026-09-14--surprises-while-writing-lessons-7-8) |
+| A sort that does not fit in `memory_limit` spills to disk | It fails with 4 threads and succeeds with 1, and the failed `COPY` leaves a partial file behind | DuckDB 1.5.5 | 11 M rows at `memory_limit = '100MB'`; 6.3 to 9.9 s in the one-thread case | Reproduced, thread-count dependent [2026-09-14](#2026-09-14--surprises-while-writing-lessons-7-8) |
+| A read-only process can open a file another process holds | A process holding the file blocks every other process, read-only ones included, with a different message on each OS | DuckDB 1.5.5 | Three OSes, three messages; Linux and macOS add a hint about `-readonly` that Windows does not | Reproduced; by design [2026-09-14](#2026-09-14--surprises-while-writing-lessons-7-8) |
+| The JDBC jar and the .NET package carry what the platform needs | The jar is 85 MB with four native libraries and no Windows-on-Arm build | duckdb_jdbc 1.5.5.1, DuckDB.NET 1.5.5 | `DuckDB.NET.Data.Full` is 420 MB in the NuGet cache, 316 MB in `bin/Debug`, 69 MB published for `linux-x64` alone | Measured; the missing win-arm64 build is a real gap [2026-09-14](#2026-09-14--surprises-while-writing-lessons-5-6) |
+| The one-line install script covers the three systems | `curl -fsSL https://install.duckdb.org | sh` does not support Windows | install.duckdb.org | The workflow downloads `duckdb_cli-windows-amd64.zip` instead | Reproduced [2026-09-14](#2026-09-14--installing-duckdb) |
+| A JDBC batch is faster than single statements | It was not | duckdb_jdbc 1.5.5.1, in CI | 690 ms to 2.4 s for 10,000 rows, against the C# appender's 226 to 331 ms for 1,000,000 rows | Measured, cause not investigated [2026-09-14](#2026-09-14--surprises-while-writing-lessons-5-6) |
+
+## Experiments
+
+Four questions the course asked before it measured. None is a hypothesis the author invented and then tested — two rest on documentation read beforehand, one on a value read out of the file itself — and the table says so rather than dressing them up. The third is the one that came back refuted.
+
+| Question | Hypothesis | Result | Verdict | Where |
+|---|---|---|---|---|
+| Can `EXPLAIN` plans be compared by the CI across three runners? | The journal asks the question and draws its conclusion from the answer; no prediction written | The output does not depend on the number of threads, and the estimates were the same on the three runners | Confirmed: plans are comparable | [2026-09-14](#2026-09-14--surprises-while-writing-lessons-7-8) |
+| Can an older DuckDB read a file written by 1.5.5? | The file's own `storage_version=v1.0.0+` tag, read before the test | The 1.0.0 CLI read the default-written files. With `STORAGE_VERSION 'v1.5.0'` it refused them: `version number 68, can only read 64` | Confirmed, with its negative control | [2026-09-14](#2026-09-14--surprises-while-writing-lessons-7-8) |
+| Is a multi-statement string atomic? | Yes — DuckDB's own transactions page describes an implicit transaction. An external documented prior, cited before the test | `-c "a; b; c"` and `statement.execute("a; b; c")` both kept the first two rows when the third failed | Refuted | [2026-09-14](#2026-09-14--surprises-while-writing-lessons-7-8) |
+| Does the plan's prediction hold in wall-clock time? | The plan says `::DATE` and `date_trunc` skip row groups and `strftime` does not; lesson 7 reads the plans, then measures what they predict | 0.47 s against 0.003 s on the sorted file | Confirmed | [2026-09-14](#2026-09-14--surprises-while-writing-lessons-7-8) |
+
 ## 2026-09-14 — The data
 
 - `runs.json`: `gh run list --limit 1000 --json databaseId,workflowName,event,status,conclusion,createdAt,updatedAt,startedAt,headBranch,headSha,attempt`, exported around 14:04 UTC. 125 runs, the oldest from 2026-09-13 15:53.
