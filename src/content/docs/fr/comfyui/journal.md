@@ -205,6 +205,13 @@ Un serveur CPU séparé (0.36.0, localhost:8193) a confirmé les classes de nœu
 
 Le rendu Blender v2 a été copié dans le répertoire d'entrée ComfyUI isolé. `LoadImage → Canny → SaveImage` a réussi sur CPU en **3.731 s** (horodatages de l'historique) ; l'image a été inspectée. Les contours des anneaux, piliers et de l'allée restent visibles. C'est une image de contrôle, pas une scène générée par SDXL ni une nouvelle géométrie 3D. Identifiant : `7f26de5e-5d83-455c-97be-1e3401e9ba5f`. Sortie : `C:/tmp/blender-comfy-scenes-20260919/comfy-base/output/orbital-study/canny-edges_00001_.png`. La base explicitement en mémoire a empêché la migration précédente ; le hash de la base de l'installation est inchangé. Temps GPU et appels API payants : **0**. L'inférence SDXL a été différée pour ne pas charger les deux modèles avec seulement environ 10 Gio de RAM disponibles.
 
+## 2026-09-22 — Un workflow vérifié avant le GPU, et un défaut dans notre propre vérificateur
+
+- Les workflows de la leçon 10 étaient écrits mais jamais lancés : la machine n'a pas eu la mémoire libre pour Wan 2.2. Plutôt que d'attendre, un serveur ComfyUI a été démarré sans aucun modèle, sur le CPU, dans le seul but d'enregistrer son `/object_info` : 957 classes de nœuds, 1,85 Mo. Le serveur a été arrêté aussitôt.
+- Comparés à ce fichier, les 26 workflows du cours sont bons. `Wan22ImageToVideoLatent`, `CreateVideo`, `SaveVideo`, `FrameInterpolationModelLoader` et `FrameInterpolate` sont dans le cœur en v0.36.0, `film_net_fp16` figure dans la liste du chargeur, et les noms des fichiers Wan 2.2 sont ceux que voit le serveur — les chemins de modèles supplémentaires sont donc justes. La leçon 10 peut partir dès que la mémoire est là.
+- La vérification a d'abord annoncé que `SaveVideo` n'avait pas d'entrée `format.codec`, sur les trois workflows. Elle avait tort, et le défaut était le nôtre : [`Workflow.cs`](https://github.com/spareilleux/learn/blob/main/code/comfyui/csharp/Workflow.cs) ne lisait que les entrées `required` et `optional` de premier niveau, alors qu'un `COMFY_DYNAMICCOMBO_V3` porte ses enfants dans ses options. Il les parcourt maintenant, et contrôle aussi les clés d'options. La leçon 3 a [la section](../03-workflow-json/#des-entrées-avec-un-point-dans-le-nom), et `check.sh` un jeu d'essai avec les trois fautes possibles sur une entrée à point.
+- Un vérificateur qui n'a jamais échoué ne prouve rien. Celui-ci a désormais un fichier qui doit échouer, et les quatre nouvelles lignes d'`expected/03-validate.txt` sont ce qu'il doit imprimer.
+
 ## À vérifier
 
 - SDXL sous Linux avec CUDA, et sur Apple Silicon avec MPS : la machine GPU du cours tourne sous Windows ; la CI n'installe que les versions CPU.

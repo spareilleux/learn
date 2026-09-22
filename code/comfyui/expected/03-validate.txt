@@ -6,4 +6,8 @@ error: node 3 (KSampler) input steps: 0 is below the minimum 1
 error: node 3 (KSampler) input sampler_name: "euler_a" is not one of the 45 allowed values
 error: node 3 (KSampler) input negative: links to node 12, which doesn't exist
 error: node 3 (KSampler) input latent_image: expects LATENT, node 4 output 2 is VAE
+valid; the nodes can run in this order: 1 2 3
+error: node 2 (SaveImageAdvanced): no input named format.bit_depth
+error: node 3 (SaveImageAdvanced) input format: "tiff" is not one of the 2 allowed values
+error: node 4 (SaveImageAdvanced) input format.bit_depth: "24" is not one of the 2 allowed values
 exit code 1

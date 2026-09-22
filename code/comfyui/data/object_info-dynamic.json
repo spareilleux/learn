@@ -1,0 +1,31 @@
+{
+  "EmptyImage": {
+    "input": {
+      "required": {
+        "width": ["INT", { "default": 512, "min": 1, "max": 4096 }],
+        "height": ["INT", { "default": 512, "min": 1, "max": 4096 }]
+      }
+    },
+    "input_order": { "required": ["width", "height"] },
+    "output": ["IMAGE"],
+    "output_node": false,
+    "display_name": "EmptyImage"
+  },
+  "SaveImageAdvanced": {
+    "input": {
+      "required": {
+        "images": ["IMAGE", {}],
+        "format": ["COMFY_DYNAMICCOMBO_V3", {
+          "options": [
+            { "key": "png", "inputs": { "required": { "bit_depth": [["8", "16"], {}] } } },
+            { "key": "exr", "inputs": { "optional": { "input_color_space": [["sRGB", "linear"], {}] } } }
+          ]
+        }]
+      }
+    },
+    "input_order": { "required": ["images", "format"] },
+    "output": [],
+    "output_node": true,
+    "display_name": "Save Image (Advanced)"
+  }
+}

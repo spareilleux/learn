@@ -205,6 +205,13 @@ A separate CPU server (0.36.0, localhost:8193) confirmed all node classes of the
 
 The Blender v2 render was copied into the isolated ComfyUI input directory. `LoadImage → Canny → SaveImage` completed successfully on CPU in **3.731 s** (history timestamps); the output was visually inspected. Rings, pillars and causeway edges remain visible. This is a control image, not an SDXL-generated scene or new 3D geometry. Prompt ID: `7f26de5e-5d83-455c-97be-1e3401e9ba5f`. Output: `C:/tmp/blender-comfy-scenes-20260919/comfy-base/output/orbital-study/canny-edges_00001_.png`. The explicit in-memory database prevented the previous migration; the installation database hash remained unchanged. GPU time and paid API calls: **0**. SDXL inference was deferred rather than loading both models under limited available host RAM (about 10 GiB).
 
+## 2026-09-22 — A workflow checked before the GPU, and a bug in our own checker
+
+- The lesson 10 workflows were written but never run: the machine has not had the free memory for Wan 2.2. Rather than wait, a ComfyUI server was started with no model at all, on the CPU, only to save its `/object_info`: 957 node classes, 1.85 MB. The server was stopped straight away.
+- Against that file, all 26 workflows of the course check out. `Wan22ImageToVideoLatent`, `CreateVideo`, `SaveVideo`, `FrameInterpolationModelLoader` and `FrameInterpolate` are in the core at v0.36.0, `film_net_fp16` appears in the loader's list, and the Wan 2.2 file names are the ones the server sees — so the extra model paths are right. Lesson 10 can be run the moment the memory is there.
+- The check first reported that `SaveVideo` has no input `format.codec`, on all three workflows. It was wrong, and the bug was ours: [`Workflow.cs`](https://github.com/spareilleux/learn/blob/main/code/comfyui/csharp/Workflow.cs) read only the node's top-level `required` and `optional` inputs, and a `COMFY_DYNAMICCOMBO_V3` carries its children inside its options. It now walks them, and checks the option keys too. Lesson 3 has [the section](../03-workflow-json/#inputs-with-a-dot-in-their-name), and `check.sh` a fixture with three mistakes a dotted input can make.
+- A validator that has never failed proves nothing. This one now has a file that must fail, and the four new lines of `expected/03-validate.txt` are what it must print.
+
 ## To verify
 
 - SDXL on Linux with CUDA, and on Apple Silicon with MPS: the course's GPU machine runs Windows; CI only installs the CPU builds.

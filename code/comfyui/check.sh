@@ -44,6 +44,8 @@ offline() {
     comfy validate workflows/01-txt2img.api.json data/object_info.json
     comfy validate workflows/solid-color.api.json data/object_info.json
     comfy validate workflows/03-broken.api.json data/object_info.json
+    comfy validate workflows/03-dynamic-combo.api.json data/object_info-dynamic.json
+    comfy validate workflows/03-dynamic-broken.api.json data/object_info-dynamic.json
     echo "exit code $?"
   } > out/03-validate.txt 2>&1
   compare 03-validate

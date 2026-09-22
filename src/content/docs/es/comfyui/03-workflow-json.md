@@ -156,6 +156,25 @@ Enviado al servidor, el workflow roto se rechaza con un HTTP 400:
 
 El servidor informó de dos errores donde la comprobación sin conexión encontró cinco, y el segundo es extraño: está archivado bajo el nodo 3, pero su `extra_info` nombra la entrada `samples` y el nodo enlazado `["3", 0]`, que es la entrada del nodo 8. El código lo explica. El servidor valida desde cada nodo de salida, remontando sus enlaces. Para una entrada enlazada, [`validate_inputs`](https://github.com/Comfy-Org/ComfyUI/blob/ee71d5c4993f29086b27fde1629a945ae48425bf/execution.py#L933) lee `prompt[o_id]['class_type']` antes de su bloque `try`, así que el enlace del nodo 3 al nodo 12, que no existe, lanzó un `KeyError` que escapó a la validación del nodo 3. El nodo 8, `VAEDecode`, lo capturó al validar su entrada `samples`, y [lo guardó como resultado del nodo 3](https://github.com/Comfy-Org/ComfyUI/blob/ee71d5c4993f29086b27fde1629a945ae48425bf/execution.py#L962-L979). Las demás entradas del nodo 3 no llegaron a comprobarse, o solo algunas: `validate_inputs` recorre las entradas de un nodo en el orden de un conjunto de Python ([línea 896](https://github.com/Comfy-Org/ComfyUI/blob/ee71d5c4993f29086b27fde1629a945ae48425bf/execution.py#L896)), que cambia de un arranque del servidor a otro. La respuesta incluye además una traza de Python con la ruta de instalación del servidor, un motivo más para no exponer el puerto. Validar primero sin conexión da una lista de errores mejor; la respuesta del servidor sigue siendo la que decide.
 
+### Entradas con un punto en el nombre
+
+Algunos nodos recientes reciben sus opciones en forma de árbol. `SaveImageAdvanced` en la lección 9 y `SaveVideo` en la lección 10 declaran una entrada de tipo `COMFY_DYNAMICCOMBO_V3`: el valor elegido para `format` decide qué otras entradas existen, y el flujo las nombra con puntos.
+
+```json
+{"images": ["1", 0], "format": "png", "format.bit_depth": "16"}
+```
+
+`/object_info` describe esa entrada como una lista de opciones, cada una con sus propias entradas `required` y `optional`, anidadas tan hondo como el nodo necesite: el `format` de `SaveVideo` contiene un `codec`, que contiene un `encoding`, que contiene un `crf`. Un validador que solo lee los `required` y `optional` de primer nivel llama a `format.bit_depth` entrada desconocida. Ese era el fallo de este mismo curso, encontrado al revisar los flujos de la lección 10 antes de gastar en ellos una ventana de GPU. `validate` sigue ahora las opciones del valor que el flujo eligió:
+
+```text
+> comfy validate workflows/03-dynamic-broken.api.json data/object_info-dynamic.json
+error: node 2 (SaveImageAdvanced): no input named format.bit_depth
+error: node 3 (SaveImageAdvanced) input format: "tiff" is not one of the 2 allowed values
+error: node 4 (SaveImageAdvanced) input format.bit_depth: "24" is not one of the 2 allowed values
+```
+
+El primer error es el que conviene conocer: el nodo 2 pide `exr`, y `bit_depth` pertenece a `png`. El nombre existe en el nodo, pero no bajo la opción que ese nodo escogió, así que nada lo leerá. Queda *por verificar* si el servidor rechaza ese prompt o ignora en silencio la entrada sobrante; es un error en ambos casos.
+
 ## Los metadatos de los archivos PNG
 
 Un archivo PNG es una firma y una lista de chunks, cada uno con una longitud, un tipo de cuatro letras, unos datos y un CRC-32 ([especificación de PNG](https://www.w3.org/TR/png-3/#11tEXt)). `SaveImage` añade un chunk `tEXt` para el prompt, y uno por cada clave que el cliente envió en `extra_pnginfo`, en [`nodes.py`](https://github.com/Comfy-Org/ComfyUI/blob/ee71d5c4993f29086b27fde1629a945ae48425bf/nodes.py#L1701-L1707):

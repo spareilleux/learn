@@ -156,6 +156,25 @@ Posted to the server, the broken workflow is rejected with HTTP 400:
 
 The server reported two errors where the offline check found five, and the second one is odd: it is filed under node 3, but its `extra_info` names the input `samples` and the linked node `["3", 0]`, which is node 8's input. The code explains it. The server validates from each output node up through its links. For a linked input, [`validate_inputs`](https://github.com/Comfy-Org/ComfyUI/blob/ee71d5c4993f29086b27fde1629a945ae48425bf/execution.py#L933) reads `prompt[o_id]['class_type']` before its `try` block, so node 3's link to the missing node 12 raised a `KeyError` that escaped node 3's validation. Node 8, `VAEDecode`, caught it while validating its `samples` input, and [stored it as node 3's result](https://github.com/Comfy-Org/ComfyUI/blob/ee71d5c4993f29086b27fde1629a945ae48425bf/execution.py#L962-L979). Node 3's other inputs were never checked, or only some of them: `validate_inputs` walks the inputs of a node in the order of a Python set ([line 896](https://github.com/Comfy-Org/ComfyUI/blob/ee71d5c4993f29086b27fde1629a945ae48425bf/execution.py#L896)), which changes from one server start to the next. The answer also includes a Python traceback with the server's installation path, which is one more reason not to expose the port. Validating offline first gives a better error list; the server's answer is still the one that decides.
 
+### Inputs with a dot in their name
+
+Some recent nodes take their options as a tree. `SaveImageAdvanced` in lesson 9 and `SaveVideo` in lesson 10 declare an input of type `COMFY_DYNAMICCOMBO_V3`: the value chosen for `format` decides which other inputs exist, and the workflow names them with dots.
+
+```json
+{"images": ["1", 0], "format": "png", "format.bit_depth": "16"}
+```
+
+`/object_info` describes such an input as a list of options, each carrying its own `required` and `optional` inputs, nested as deep as the node needs: `SaveVideo`'s `format` holds a `codec`, which holds an `encoding`, which holds a `crf`. A validator that reads only the node's top-level `required` and `optional` calls `format.bit_depth` an unknown input. That was this course's own bug, found while checking the lesson 10 workflows before spending a GPU window on them. `validate` now follows the options of the value the workflow chose:
+
+```text
+> comfy validate workflows/03-dynamic-broken.api.json data/object_info-dynamic.json
+error: node 2 (SaveImageAdvanced): no input named format.bit_depth
+error: node 3 (SaveImageAdvanced) input format: "tiff" is not one of the 2 allowed values
+error: node 4 (SaveImageAdvanced) input format.bit_depth: "24" is not one of the 2 allowed values
+```
+
+The first error is the one worth knowing: node 2 asks for `exr`, and `bit_depth` belongs to `png`. The name exists on the node, but not under the option this node picked, so nothing will read it. Whether the server refuses that prompt or quietly ignores the extra input is *to verify*; it is a mistake either way.
+
 ## The metadata in PNG files
 
 A PNG file is a signature and a list of chunks, each with a length, a four-letter type, data and a CRC-32 ([PNG specification](https://www.w3.org/TR/png-3/#11tEXt)). `SaveImage` adds a `tEXt` chunk for the prompt, and one for each key the client sent in `extra_pnginfo`, in [`nodes.py`](https://github.com/Comfy-Org/ComfyUI/blob/ee71d5c4993f29086b27fde1629a945ae48425bf/nodes.py#L1701-L1707):

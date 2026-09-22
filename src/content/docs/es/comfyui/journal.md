@@ -205,6 +205,13 @@ Un servidor CPU separado (0.36.0, localhost:8193) confirmó las clases de nodos 
 
 El render Blender v2 se copió al directorio de entrada ComfyUI aislado. `LoadImage → Canny → SaveImage` terminó correctamente en CPU en **3.731 s** (marcas del historial); se inspeccionó la imagen. Se conservan los bordes de anillos, pilares y pasillo. Es una imagen de control, no una escena generada por SDXL ni geometría 3D nueva. ID: `7f26de5e-5d83-455c-97be-1e3401e9ba5f`. Salida: `C:/tmp/blender-comfy-scenes-20260919/comfy-base/output/orbital-study/canny-edges_00001_.png`. La base explícita en memoria evitó la migración anterior; el hash de la base de la instalación no cambió. Tiempo GPU y llamadas API de pago: **0**. Se aplazó la inferencia SDXL para no cargar ambos modelos con solo unos 10 GiB de RAM disponibles.
 
+## 2026-09-22 — Un flujo verificado antes de la GPU, y un fallo en nuestro propio verificador
+
+- Los flujos de la lección 10 estaban escritos pero nunca ejecutados: la máquina no ha tenido la memoria libre para Wan 2.2. En lugar de esperar, se arrancó un servidor de ComfyUI sin ningún modelo, en CPU, solo para guardar su `/object_info`: 957 clases de nodos, 1,85 MB. El servidor se detuvo enseguida.
+- Frente a ese archivo, los 26 flujos del curso están bien. `Wan22ImageToVideoLatent`, `CreateVideo`, `SaveVideo`, `FrameInterpolationModelLoader` y `FrameInterpolate` están en el núcleo en la v0.36.0, `film_net_fp16` aparece en la lista del cargador, y los nombres de los archivos de Wan 2.2 son los que ve el servidor: las rutas de modelos adicionales son correctas. La lección 10 puede lanzarse en cuanto haya memoria.
+- La verificación anunció primero que `SaveVideo` no tenía una entrada `format.codec`, en los tres flujos. Se equivocaba, y el fallo era nuestro: [`Workflow.cs`](https://github.com/spareilleux/learn/blob/main/code/comfyui/csharp/Workflow.cs) solo leía las entradas `required` y `optional` de primer nivel, mientras que un `COMFY_DYNAMICCOMBO_V3` lleva sus hijos dentro de sus opciones. Ahora las recorre, y comprueba también las claves de opción. La lección 3 tiene [la sección](../03-workflow-json/#entradas-con-un-punto-en-el-nombre), y `check.sh` un juego de pruebas con los tres errores posibles de una entrada con punto.
+- Un verificador que nunca ha fallado no demuestra nada. Este tiene ya un archivo que debe fallar, y las cuatro líneas nuevas de `expected/03-validate.txt` son lo que debe imprimir.
+
 ## Por verificar
 
 - SDXL en Linux con CUDA, y en Apple Silicon con MPS: la máquina con GPU del curso usa Windows; la CI solo instala las builds para CPU.

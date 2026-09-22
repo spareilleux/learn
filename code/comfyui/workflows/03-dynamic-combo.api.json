@@ -1,0 +1,17 @@
+{
+  "1": {
+    "inputs": { "width": 64, "height": 48 },
+    "class_type": "EmptyImage",
+    "_meta": { "title": "EmptyImage" }
+  },
+  "2": {
+    "inputs": { "images": ["1", 0], "format": "png", "format.bit_depth": "16" },
+    "class_type": "SaveImageAdvanced",
+    "_meta": { "title": "Save Image (Advanced)" }
+  },
+  "3": {
+    "inputs": { "images": ["1", 0], "format": "exr", "format.input_color_space": "linear" },
+    "class_type": "SaveImageAdvanced",
+    "_meta": { "title": "Save Image (Advanced)" }
+  }
+}
