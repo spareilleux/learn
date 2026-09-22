@@ -69,6 +69,8 @@ One row per measured experiment. The hypothesis column says what was predicted *
 | Is a 16-bit PNG or an EXR of a render actually HDR? | Not written in advance. The expectation under test is that a wider container carries more | 256 levels per channel in the 16-bit PNG of an 8-bit render, and no value above 1.0 in the EXR: the VAE clamps its output to 0 to 1 | Refuted: the container is HDR, the content is not | [Upscaling, seamless textures and HDR](#2026-09-16--upscaling-seamless-textures-and-hdr), [`09-exr.api.json`](https://github.com/spareilleux/learn/blob/main/code/comfyui/workflows/09-exr.api.json) |
 | Does tiled VAE decoding change the image? | Not written in advance | 0.93 levels of mean difference at 2048 × 2048, where a plain decode also fit on the GPU | Confirmed: small, and not nil — decode plainly when it fits | [Upscaling, seamless textures and HDR](#2026-09-16--upscaling-seamless-textures-and-hdr), [`09-hires-fix.api.json`](https://github.com/spareilleux/learn/blob/main/code/comfyui/workflows/09-hires-fix.api.json) |
 | Is the `Canny` node's output comparable across machines? | Written before CI ran: an edge filter with integer-looking output should give the same pixels everywhere | Four machines gave four pixel hashes; the three CI runners found 467 edge pixels, the author's machine 464 | Refuted: it is floating-point code. CI prints the numbers as information instead of comparing them | [Img2img, inpainting, ControlNet and LoRA](#2026-09-16--img2img-inpainting-controlnet-and-lora), [`check.sh`](https://github.com/spareilleux/learn/blob/main/code/comfyui/check.sh) |
+| Which step of Kornia's `canny` stops agreeing between machines? | Not written in advance: the lesson asked for the step without naming one | The input is identical on four machines; the Gaussian blur separates three groups, the spatial gradient all four, every magnitude differs — and the thresholded edges are identical, 1,461 pixels of 3,072 | Answered, in two halves: the divergence starts at the first convolution and is always there; it reaches the output only when pixels sit near a threshold | [`data/canny-steps.py`](https://github.com/spareilleux/learn/blob/main/code/comfyui/data/canny-steps.py), [lesson 6](../06-controlnet/#which-step-stops-agreeing) |
+| What does the `convrot` flag of an int8 checkpoint do? | Written in lesson 8 before the kernel was read: a rotation of groups of weights before quantizing, to spread large values so that one scale fits them better | comfy-kitchen 0.2.34 rotates each group of 256 input channels by a regular Hadamard matrix, symmetric and orthogonal: the weight offline, the activations online. On a weight with one outlier per row, the int8 round-trip error is 5.7 % plain and 0.76 % rotated | Confirmed, with a number. Being its own inverse, the matrix leaves the product alone; it only changes what int8 has to hold | [`data/convrot.py`](https://github.com/spareilleux/learn/blob/main/code/comfyui/data/convrot.py), [lesson 8](../08-recent-models-quantization/) |
 
 ## 2026-09-16 — Versions and setup
 
@@ -218,6 +220,13 @@ The Blender v2 render was copied into the isolated ComfyUI input directory. `Loa
 - A validator that has never failed proves nothing. This one now has a file that must fail, and the four new lines of `expected/03-validate.txt` are what it must print.
 - The same day, every written lesson got a "Your turn" section — lesson 9 was the only one that ended with something to do on your own machine — and the thirty images of the course were gathered in a [gallery](../gallery/), each with the workflow that made it, at the revision that made it.
 
+## 2026-09-22 — Where Canny stops agreeing, and what `convrot` rotates
+
+- Lesson 6's open question is answered. [`data/canny-steps.py`](https://github.com/spareilleux/learn/blob/main/code/comfyui/data/canny-steps.py) hashes each step of Kornia's filter on a 64 by 48 pattern built from integer arithmetic, and `check.sh` runs it on the three CI machines. The input is the same bytes everywhere. The Gaussian blur already separates the author's machine from the runners, and the Apple Silicon runner from the two x86 ones; the spatial gradient differs on all four, although Windows and Linux had agreed one step earlier — the same convolution takes a different path in a different build. Every magnitude differs, and their sum still prints 2729.489258.
+- The edges, though, are identical on the four machines: 1,461 pixels of 3,072, one hash. This pattern is flat areas and hard borders, so nothing sits near a threshold. That is the other half of the answer — the divergence is always there, from the first convolution; the image decides whether it shows. [Lesson 6](../06-controlnet/#which-step-stops-agreeing) has the table.
+- `convrot` was a guess written in lesson 8, "a rotation of groups of weights before quantizing". comfy-kitchen 0.2.34 confirms it and says which rotation: a regular Hadamard matrix, symmetric and orthogonal, on groups of 256 input channels — the weight offline, the activations online, fused into the row-wise quantizer. Being its own inverse, it leaves the product alone and only changes what int8 must hold. [`data/convrot.py`](https://github.com/spareilleux/learn/blob/main/code/comfyui/data/convrot.py) rebuilds it, identical to the library's at group sizes 16, 64 and 256, and measures the round-trip error on a weight with one outlier per row: 5.7 % plain, 0.76 % rotated.
+- Lesson 9's EXR bullet gained the consequence that matters for sharing: a workflow built where `.exr` has a MIME type names an image the next machine's list will not offer. The file stays valid; the run stops being reproducible.
+
 ## To verify
 
 - SDXL on Linux with CUDA, and on Apple Silicon with MPS: the course's GPU machine runs Windows; CI only installs the CPU builds.
@@ -225,7 +234,6 @@ The Blender v2 render was copied into the isolated ComfyUI input directory. `Loa
 - Whether an ancestral sampler gives the same image on the CPU and on the GPU for a seed: its step noise is drawn on the device.
 - Whether a perceptual hash would be stable across the cases of lesson 2.
 - ControlNet chains, `start_percent`, and the exact step where a percent's noise level falls, which the lesson computed but didn't render.
-- Kornia's `canny`: which step makes the edges differ between machines.
 - Training a LoRA with ComfyUI's experimental nodes, and how much of 16 GB it takes for SDXL.
 - Stacked LoRAs in the other order: same image, and same pixel hash or not.
 - The emulated path for nvfp4 and fp8 on a GPU without their kernels; the course's machine has an RTX 50 series GPU only.
@@ -233,6 +241,5 @@ The Blender v2 render was copied into the isolated ComfyUI input directory. `Loa
 - Sampling tiles from `SplitImageToTileList` and merging them with `ImageMergeTileList`: whether seams show at a low denoise.
 - Whether three.js's `EXRLoader` reads ComfyUI's uncompressed EXR in a browser.
 - How browsers show the HLG AVIF of `SaveImageAdvanced`.
-- What the `convrot` option of int8 does in comfy-kitchen's kernels.
 - Warm render times with `--disable-dynamic-vram`, on a machine with enough free RAM.
 - `execution_interrupted` as the clients print it, and `POST /interrupt` with a prompt id: the run to interrupt has to last long enough, which needs a model.

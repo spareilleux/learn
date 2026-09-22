@@ -76,6 +76,11 @@ offline() {
   # the step where they part company can be read from the logs. Information only.
   PYTHONDONTWRITEBYTECODE=1 "$py" data/canny-steps.py
 
+  # Lesson 8: the Hadamard rotation behind the convrot flag of an int8 checkpoint —
+  # that it is its own inverse, and what it saves on a weight with one outlier per
+  # row. Information only: the two error figures depend on the machine.
+  PYTHONDONTWRITEBYTECODE=1 "$py" data/convrot.py
+
   # Lesson 13: normal and roughness maps from a tileable pattern, with NumPy and Pillow (ComfyUI's requirements)
   mkdir -p out/textures
   {

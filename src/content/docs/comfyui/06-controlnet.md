@@ -117,7 +117,7 @@ Two observations on this image, which may not hold for others:
 
 A late `start_percent` does the opposite: the prompt chooses the layout, and the map only corrects it. *To verify*: not rendered for this lesson.
 
-## Canny in CI, and three different hashes
+## Canny in CI, and four different hashes
 
 CI runs the `Canny` node on the CPU, on the 64 by 48 test pattern of lesson 5, with thresholds 0.05 and 0.15. The first run compared its pixel hash like the other nodes' outputs, and failed on every OS. CI now prints the hash, and the number of pixels brighter than 127, as information:
 
@@ -128,7 +128,23 @@ CI runs the `Canny` node on the CPU, on the 64 by 48 test pattern of lesson 5, w
 | CI, `macos-latest` | `4db7c3194e9fe1e2` | 467 of 3072 |
 | CI, `windows-latest` | `8e3e55838a7c9d46` | 467 of 3072 |
 
-The same ComfyUI, PyTorch graph and pixels gave four different images. The three runners found the same number of edge pixels, but not in the same places. Canny smooths the image, computes gradients, thins the edges and keeps them by comparing values with thresholds. A gradient that falls just above a threshold in one floating-point computation and just below it in another adds or removes an edge pixel, and each CPU and math library rounds a little differently. Lesson 2 found the same kind of difference in the noise of two devices. *To verify*: which step of Kornia's `canny` diverges was not traced.
+The same ComfyUI, PyTorch graph and pixels gave four different images. The three runners found the same number of edge pixels, but not in the same places. Canny smooths the image, computes gradients, thins the edges and keeps them by comparing values with thresholds. A gradient that falls just above a threshold in one floating-point computation and just below it in another adds or removes an edge pixel, and each CPU and math library rounds a little differently. Lesson 2 found the same kind of difference in the noise of two devices.
+
+### Which step stops agreeing
+
+[`data/canny-steps.py`](https://github.com/spareilleux/learn/blob/main/code/comfyui/data/canny-steps.py) calls Kornia's own functions in the order `canny` applies them and prints a hash per step. Its 64 by 48 pattern is built from integer arithmetic, so the input is the same bytes on every machine — the first line of the table proves it. `check.sh` runs it on the three CI machines on every commit; the first column is the author's, whose PyTorch is the CUDA build, running on the CPU here.
+
+| Step | the author's, `2.13.0+cu130` | `windows-latest`, `+cpu` | `ubuntu-latest`, `+cpu` | `macos-latest`, `2.13.0` |
+|---|---|---|---|---|
+| input | `1907433ac4d80c9f` | `1907433ac4d80c9f` | `1907433ac4d80c9f` | `1907433ac4d80c9f` |
+| Gaussian blur | `769c45e000258c56` | `ee71eaac28f8cc27` | `ee71eaac28f8cc27` | `96d1452970dc7b72` |
+| spatial gradient | `b06a49b51ebc7fa1` | `bf069945ff2cd851` | `17564ac6064fd8d8` | `5d47abc9d0ba75f4` |
+| magnitude | `0af967b932bcb57c` | `bda4e821a72c09ed` | `208a0f39607e1ae0` | `bf05d8003b885379` |
+| edges | `08e9b5af22548246` | `08e9b5af22548246` | `08e9b5af22548246` | `08e9b5af22548246` |
+
+The divergence starts at the first floating-point step. The blur already separates the author's machine from the runners, and the Apple Silicon runner from the two x86 ones. The gradient then differs on all four, although Windows and Linux had agreed one step earlier: the same convolution takes a different path in a different build. Every magnitude differs, and yet their sum prints as 2729.489258 on all four — the differences are in the last bits.
+
+The last row is the surprise: the edges are identical everywhere, 1,461 pixels of 3,072, the same hash on the four machines. This pattern is flat areas and hard borders, so no gradient sits close enough to a threshold for a last-bit difference to flip it. A render has no such margin, which is why the pattern of lesson 5, put through `Canny` inside ComfyUI, gives four hashes. So the answer has two halves: floating point diverges at the first convolution, on every machine, always; whether that reaches the output depends on how many pixels the image leaves near the threshold.
 
 ## Key takeaways
 
@@ -137,7 +153,7 @@ The same ComfyUI, PyTorch graph and pixels gave four different images. The three
 - The core has `Canny` for edges and Lotus for depth. Other maps need a custom node or an image made elsewhere.
 - `start_percent` and `end_percent` are fractions of the noise range, not of the steps.
 - The layout is decided in the first steps: a ControlNet active only there kept almost the whole composition.
-- Image filters are floating-point code too: don't compare their output bit for bit across machines.
+- Image filters are floating-point code too: don't compare their output bit for bit across machines. The divergence starts at the first convolution; whether it reaches the output depends on how close the image sits to the threshold. The divergence starts at the first convolution; whether it reaches the output depends on how close the image sits to the threshold.
 
 ## Your turn
 
