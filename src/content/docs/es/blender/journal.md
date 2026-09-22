@@ -1,6 +1,6 @@
 ---
 title: Diario
-description: 'Notas de avance fechadas del curso de Blender — Blender 5.2.2 LTS fijado, una instalación portable, scripts ejecutados en segundo plano y comparados en CI en tres sistemas operativos, un render de Cycles con los mismos píxeles en Windows, Linux y macOS, un error de espacio de color en una textura generada, lo que el exportador glTF descarta u omite por defecto, dos modelos de Hunyuan3D salidos de ComfyUI limpiados en Blender con lo que falló, y puntos por verificar.'
+description: 'Notas de avance fechadas del curso de Blender — Blender 5.2.2 LTS fijado, una instalación portable, scripts ejecutados en segundo plano y comparados en CI en tres sistemas operativos, un render de Cycles con los mismos píxeles en Windows, Linux y macOS, un error de espacio de color en una textura generada, lo que el exportador glTF descarta u omite por defecto, dos objetos modelados en bpy frente a los dos mismos generados a partir de una imagen, dos modelos de Hunyuan3D salidos de ComfyUI limpiados en Blender con lo que falló, y puntos por verificar.'
 sidebar:
   order: 99
 ---
@@ -16,6 +16,7 @@ sidebar:
 - [x] Lección 4: luces, cámaras, y el render con EEVEE y Cycles
 - [x] Traducciones al francés y al español
 - [x] Un pipeline de limpieza para modelos `.glb` generados en ComfyUI, probado con dos modelos de Hunyuan3D
+- [x] Dos modelos procedurales en `bpy`, comparados con los generados
 - [ ] Lección 5: scripts con `bpy`
 
 ## 2026-09-16 — Versiones y configuración
@@ -89,6 +90,30 @@ Este estudio procedural reutiliza `stage.aim` y `stage.area_light` del curso. Hi
 - No se modificó la escena abierta del usuario. MCP no respondió; el estudio se creó en un proceso separado con configuración de fábrica.
 - ComfyUI no estaba disponible en el puerto 8188. No hubo inferencia ComfyUI, API de pago ni descarga de modelos. El código del artefacto Claude sigue sin leerse: es un estudio original, no una adaptación.
 - Advertencias no fatales: asignaciones `use_nodes` obsoletas y rutas de pinceles integrados que Blender no pudo convertir en relativas. Linux/macOS, portabilidad del blend, refinamiento de materiales y la etapa ComfyUI quedan **por verificar**.
+
+## 2026-09-22 — Modelar en bpy frente a imagen→3D
+
+Los mismos dos objetos, un metrónomo y un gramófono, se hicieron dos veces: generados desde una imagen de SDXL por Hunyuan3D 2.0 (la entrada anterior), y luego modelados en `bpy`. El segundo camino se eligió tras leer la licencia de Hunyuan3D, cuya cláusula 5.c prohíbe mostrar sus resultados fuera de un territorio que excluye la Unión Europea, el Reino Unido y Corea del Sur — el curso de ComfyUI cuenta esa cara en la [lección 8](../../comfyui/08-recent-models-quantization/#leer-la-licencia-antes-de-publicar-una-salida). Los scripts los escribió un agente de la sesión orquestadora; se conservan en el curso, en [`scripts/atlas/`](https://github.com/spareilleux/learn/blob/50da8f8/code/blender/scripts/atlas/), porque hacen concreta la comparación.
+
+![Dos modelos hechos en bpy, renderizados con Workbench: un metrónomo de madera con su escala graduada y su péndulo, y un gramófono con bocina de revolución, un disco y su etiqueta](../../../../assets/blender/atlas-bpy-models.webp)
+
+| | Hunyuan3D 2.0, ya limpiado | Modelado en `bpy` |
+|---|---|---|
+| Metrónomo: triángulos | 890.140, luego 43.302 tras Decimate, 20.000 tras un remesh de vóxeles | 3.370 |
+| Gramófono: triángulos | 1.017.760, luego 317.253, 20.000 tras un remesh | 5.950 |
+| `.glb` | 15,9 MB y 17,4 MB en bruto; 361 KB cada uno tras el remesh | 91.176 y 150.944 bytes |
+| Aristas no manifold | 19.084 y 189.748 | 0 y 0 |
+| Piezas, nombres | un solo bloque, `Material_0` | `corps`, `tige`, `poids`; `caisse`, `pavillon`, `disque`, `etiquette`, `repere` |
+| Animación | ninguna | péndulo ±19,99° en 1,5 s; disco 720° en 1,54 s |
+| Materiales | ninguno | un color Principled por pieza |
+| Escala y ejes | hay que darlos a mano después | 1 unidad de alto, base en el origen, frente hacia +Z |
+
+- **Lo que aporta el código.** Cada pieza es un objeto con nombre: la página que carga el modelo puede darle a cada una su material y animarla. El péndulo del metrónomo gira alrededor de un pivote, y el disco del gramófono alrededor de otro; ambas animaciones salen en el glTF y se repiten limpiamente. Nada queda a interpretación: la altura vale exactamente 1, la base está en el origen, el frente mira hacia +Z.
+- **Lo que cuesta.** Unas 510 líneas de modelado para los dos objetos, más 120 para la verificación, y el modelo es exactamente tan detallado como dice el código: la escala del metrónomo son doce marcas extruidas, no una placa grabada; la madera es un color, no una veta. Un modelo de imagen→3D da en un minuto una forma que llevaría una hora modelar, con los defectos descritos en la entrada anterior.
+- **Releer el archivo.** [`scripts/atlas_check.py`](https://github.com/spareilleux/learn/blob/50da8f8/code/blender/scripts/atlas_check.py) construye los dos modelos y luego abre cada `.glb` dos veces: una como bytes, analizando el bloque JSON para mostrar el árbol de nodos, los materiales y los muestreadores de animación, y otra por el importador, para los triángulos y la caja envolvente. La curva de rotación se desenrolla clave a clave, de modo que el informe muestra ángulos reales en lugar de cuaterniones: `0.000 s: 0.00 deg, 0.367 s: 19.99 deg, 0.750 s: 0.00 deg`, y si la primera clave es igual a la última. La CI compara todo el informe con `expected/`.
+- **Los ejes de glTF.** Blender trabaja con Z hacia arriba y el frente hacia −Y; el exportador escribe Y hacia arriba y el frente hacia +Z. La verificación muestra la caja envolvente en los ejes de glTF, que es lo que ve quien consume el archivo: `x [-0.2495, 0.2495], y [0.0000, 1.0000], z [-0.1747, 0.1747]`.
+- **Un detalle del exportador.** Los 720° del disco en 1,54 s se escriben en 155 claves, y no en dos claves con un número de vueltas: glTF guarda las rotaciones como cuaterniones, que no saben decir «dos vueltas». Un reproductor que interpola entre dos cuaterniones toma el camino corto, así que una vuelta completa hay que partirla en claves.
+- **Memoria.** Aquí Blender solo se inicia con al menos 12 GB de memoria libre. La víspera, un bake de Cycles de otra escena se cayó dentro de Embree mientras construía su BVH, con 1 GB libre en una máquina de 64 GB.
 
 ## Por verificar
 
