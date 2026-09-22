@@ -7,7 +7,7 @@ sidebar:
 
 En arquitectura de software no existen las soluciones mágicas. Todo diseño implica equilibrar fuerzas opuestas: mantenibilidad frente a carga mental, aislamiento frente a rendimiento bruto y flexibilidad frente a rapidez de desarrollo.
 
-La arquitectura hexagonal suele describirse como un ideal incuestionable. Para tomar decisiones de ingeniería fundamentadas, debemos evaluar tanto sus extraordinarias ventajas como sus costes reales — en particular en aplicaciones C# de cómputo intensivo como [Guitar Alchemist](../music-theory-ga/).
+La arquitectura hexagonal suele describirse como un ideal incuestionable. Para tomar decisiones de ingeniería fundamentadas, debemos evaluar tanto sus extraordinarias ventajas como sus costes reales — en particular en aplicaciones C# de cómputo intensivo como [Guitar Alchemist](../../music-theory-ga/).
 
 ---
 
@@ -132,7 +132,7 @@ flowchart TD
    Las operaciones vectoriales SIMD (`Vector256<float>`, AVX-512) exigen memoria contigua alineada a 32 o 64 bytes. Ocultar el acceso a datos tras un `IReadOnlyList<T>` introduce indirección de punteros, destruyendo la localidad de caché L1/L2 del procesador.
 
 ### Cómo neutralizar este peaje en C# moderno:
-Tal como exploramos en la [Lección 3](03-hexagonal-csharp-dotnet/), C# 14 y .NET 10 proporcionan mecanismos avanzados (`ReadOnlySpan<T>`, tipos `ref struct`, interfaces estáticas abstractas y memoria no administrada) que permiten construir límites hexagonales **sin coste de asignación en memoria**.
+Tal como exploramos en la [Lección 3](../03-hexagonal-csharp-dotnet/), C# 14 y .NET 10 proporcionan mecanismos avanzados (`ReadOnlySpan<T>`, tipos `ref struct`, interfaces estáticas abstractas y memoria no administrada) que permiten construir límites hexagonales **sin coste de asignación en memoria**.
 
 ---
 

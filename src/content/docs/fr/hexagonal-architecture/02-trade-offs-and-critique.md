@@ -7,7 +7,7 @@ sidebar:
 
 En architecture logicielle, rien n'est gratuit. Tout choix architectural consiste à équilibrer des tensions contradictoires : maintenabilité contre charge cognitive, isolation contre performances pures, et flexibilité contre vélocité de développement.
 
-L'architecture hexagonale est souvent parée de toutes les vertus. Pour prendre des décisions d'ingénierie éclairées, il convient de mesurer ses atouts incontestables tout comme ses coûts cachés — en particulier dans les applications C# à haute fréquence de calcul comme [Guitar Alchemist](../music-theory-ga/).
+L'architecture hexagonale est souvent parée de toutes les vertus. Pour prendre des décisions d'ingénierie éclairées, il convient de mesurer ses atouts incontestables tout comme ses coûts cachés — en particulier dans les applications C# à haute fréquence de calcul comme [Guitar Alchemist](../../music-theory-ga/).
 
 ---
 
@@ -132,7 +132,7 @@ flowchart TD
    Les calculs vectoriels SIMD (`Vector256<float>`, AVX-512) exigent une mémoire contiguë alignée sur 32 ou 64 octets. Masquer l'accès aux données derrière un `IReadOnlyList<T>` introduit une indirection de pointeurs qui détruit la localité de cache L1/L2.
 
 ### Comment éliminer ce coût en C# moderne :
-Comme nous le détaillons dans la [Leçon 3](03-hexagonal-csharp-dotnet/), C# 14 et .NET 10 offrent des primitives de pointe (`ReadOnlySpan<T>`, types `ref struct`, interfaces statiques abstraites, mémoire non gérée) permettant d'ériger des frontières hexagonales **à coût d'allocation nul**.
+Comme nous le détaillons dans la [Leçon 3](../03-hexagonal-csharp-dotnet/), C# 14 et .NET 10 offrent des primitives de pointe (`ReadOnlySpan<T>`, types `ref struct`, interfaces statiques abstraites, mémoire non gérée) permettant d'ériger des frontières hexagonales **à coût d'allocation nul**.
 
 ---
 

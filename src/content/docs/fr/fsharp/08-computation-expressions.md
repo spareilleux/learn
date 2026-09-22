@@ -99,7 +99,7 @@ ERROR note H2    -> expected note letter A-G, got 'H'
 ERROR note C#4 tail -> expected end of input, got " tail"
 ```
 
-`do! Parser.endOfInput` est essentiel. Sans lui, `note C#4 tail` réussirait en ignorant silencieusement le suffixe — exactement la classe de bug DSL relevée dans le parseur d'accords de GA dans le [journal](../journal/#2026-09-15--dogfooding-guitar-alchemist).
+`do! Parser.endOfInput` est essentiel. Sans lui, `note C#4 tail` réussirait en ignorant silencieusement le suffixe — exactement la classe de bug DSL relevée dans le parseur d'accords de GA dans le [journal](../journal/#2026-09-15--dogfooding--guitar-alchemist).
 
 ## Jusqu'où le construire soi-même
 

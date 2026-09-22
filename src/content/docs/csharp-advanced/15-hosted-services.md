@@ -9,7 +9,7 @@ An [`IHostedService`](https://learn.microsoft.com/dotnet/core/extensions/scoped-
 
 ## Prerequisites
 
-Complete [dependency injection and options](13-dependency-injection-options/) and [channels](06-channels/) first. You should already understand service lifetimes, cancellation tokens and asynchronous streams.
+Complete [dependency injection and options](../13-dependency-injection-options/) and [channels](../06-channels/) first. You should already understand service lifetimes, cancellation tokens and asynchronous streams.
 
 ## The host owns lifetime
 

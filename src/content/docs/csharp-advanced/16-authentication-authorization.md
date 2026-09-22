@@ -12,7 +12,7 @@ sidebar:
 
 ## Prerequisites
 
-Complete [minimal APIs and controllers](14-minimal-apis-controllers/) first. You should already understand HTTP status codes, middleware order and dependency injection.
+Complete [minimal APIs and controllers](../14-minimal-apis-controllers/) first. You should already understand HTTP status codes, middleware order and dependency injection.
 
 ## Validate a token; do not merely decode it
 

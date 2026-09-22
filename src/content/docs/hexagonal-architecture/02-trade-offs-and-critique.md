@@ -7,7 +7,7 @@ sidebar:
 
 No architecture is a free lunch. Software architecture is the art of balancing conflicting forces: maintainability against cognitive load, isolation against performance, and flexibility against implementation speed.
 
-Hexagonal Architecture is often presented as an unquestioned ideal. To make sound engineering decisions, we must evaluate both its profound superpowers and its tangible costs — particularly in high-throughput, low-latency C# systems like [Guitar Alchemist](../music-theory-ga/).
+Hexagonal Architecture is often presented as an unquestioned ideal. To make sound engineering decisions, we must evaluate both its profound superpowers and its tangible costs — particularly in high-throughput, low-latency C# systems like [Guitar Alchemist](../../music-theory-ga/).
 
 ---
 
@@ -132,7 +132,7 @@ flowchart TD
    SIMD vector operations (`Vector256<float>`, AVX-512) require contiguous memory aligned on 32-byte or 64-byte boundaries. Abstracting data access behind a generic `IReadOnlyList<T>` forces pointer indirection, destroying CPU L1/L2 cache locality.
 
 ### How to overcome this in .NET:
-As we explore in [Lesson 3](03-hexagonal-csharp-dotnet/), modern C# 14 and .NET 10 offer powerful primitives (`ReadOnlySpan<T>`, `ref struct`, static abstract interfaces, unmanaged memory) that allow us to enforce hexagonal boundaries **without paying the performance tax**.
+As we explore in [Lesson 3](../03-hexagonal-csharp-dotnet/), modern C# 14 and .NET 10 offer powerful primitives (`ReadOnlySpan<T>`, `ref struct`, static abstract interfaces, unmanaged memory) that allow us to enforce hexagonal boundaries **without paying the performance tax**.
 
 ---
 

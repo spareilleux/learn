@@ -21,7 +21,7 @@ sidebar:
 | Question | Hypothesis before measuring | Measured result | Verdict | Evidence |
 |---|---|---|---|---|
 | Can one registry generate several views without letting a score grant authority? | Deterministic rendering plus invariants can separate prioritization from promotion | 4 opportunities, 5 generated matrices, 6/6 tests passed in 0.002 s; scoring left status and authority unchanged | confirmed for the local tracer | [2026-09-20 entry](#2026-09-20--first-opportunity-matrix-tracer), [`code/repository-dogfooding-lab`](https://github.com/spareilleux/learn/tree/main/code/repository-dogfooding-lab) |
-| Can Jev reduce downstream token cost by 50% at equal quality? | A typed gate resolves enough cases to halve downstream input with zero false supports | Offline plan only: 12 cases, 13 calls, zero retries, $0.0021 hard ceiling; no live result | inconclusive | [TypeSafe benchmark](../typesafe-ai-system-one/04-token-cost-benchmark/) |
+| Can Jev reduce downstream token cost by 50% at equal quality? | A typed gate resolves enough cases to halve downstream input with zero false supports | Offline plan only: 12 cases, 13 calls, zero retries, $0.0021 hard ceiling; no live result | inconclusive | [TypeSafe benchmark](../../typesafe-ai-system-one/04-token-cost-benchmark/) |
 
 ## 2026-09-20 — First opportunity-matrix tracer
 

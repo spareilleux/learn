@@ -21,7 +21,7 @@ sidebar:
 | Question | Hypothèse avant mesure | Résultat mesuré | Verdict | Preuve |
 |---|---|---|---|---|
 | Un registre peut-il générer plusieurs vues sans laisser un score accorder l'autorité? | Renderer déterministe et invariants séparent priorité et promotion | 4 opportunities, 5 matrices, 6/6 tests en 0,002 s; score sans effet sur statut ni autorité | confirmé pour le tracer local | [entrée](#2026-09-20--premier-tracer-de-matrices), [`code/repository-dogfooding-lab`](https://github.com/spareilleux/learn/tree/main/code/repository-dogfooding-lab) |
-| Jev peut-il réduire de 50 % le coût aval à qualité égale? | Un gate typé résout assez de cas sans faux support | Plan hors ligne : 12 cas, 13 appels, zéro retry, plafond 0,0021 $; aucun résultat live | inconclusif | [benchmark TypeSafe](../typesafe-ai-system-one/04-token-cost-benchmark/) |
+| Jev peut-il réduire de 50 % le coût aval à qualité égale? | Un gate typé résout assez de cas sans faux support | Plan hors ligne : 12 cas, 13 appels, zéro retry, plafond 0,0021 $; aucun résultat live | inconclusif | [benchmark TypeSafe](../../typesafe-ai-system-one/04-token-cost-benchmark/) |
 
 ## 2026-09-20 — Premier tracer de matrices
 

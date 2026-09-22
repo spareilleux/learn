@@ -21,7 +21,7 @@ sidebar:
 | Pregunta | Hipótesis previa | Resultado medido | Veredicto | Evidencia |
 |---|---|---|---|---|
 | ¿Puede un registro generar vistas sin que una puntuación otorgue autoridad? | Renderer e invariantes separan prioridad y promoción | 4 oportunidades, 5 matrices, 6/6 pruebas en 0,002 s; sin cambiar estado ni autoridad | confirmado para el tracer local | [entrada](#2026-09-20--primer-tracer-de-matrices), [`code/repository-dogfooding-lab`](https://github.com/spareilleux/learn/tree/main/code/repository-dogfooding-lab) |
-| ¿Puede Jev reducir un 50 % el coste posterior a igual calidad? | Un gate tipado resuelve casos sin falsos soportes | Plan: 12 casos, 13 llamadas, cero reintentos, techo 0,0021 $; sin resultado en vivo | inconcluso | [benchmark TypeSafe](../typesafe-ai-system-one/04-token-cost-benchmark/) |
+| ¿Puede Jev reducir un 50 % el coste posterior a igual calidad? | Un gate tipado resuelve casos sin falsos soportes | Plan: 12 casos, 13 llamadas, cero reintentos, techo 0,0021 $; sin resultado en vivo | inconcluso | [benchmark TypeSafe](../../typesafe-ai-system-one/04-token-cost-benchmark/) |
 
 ## 2026-09-20 — Primer tracer de matrices
 
