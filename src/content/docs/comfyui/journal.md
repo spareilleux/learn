@@ -243,3 +243,11 @@ The Blender v2 render was copied into the isolated ComfyUI input directory. `Loa
 - How browsers show the HLG AVIF of `SaveImageAdvanced`.
 - Warm render times with `--disable-dynamic-vram`, on a machine with enough free RAM.
 - `execution_interrupted` as the clients print it, and `POST /interrupt` with a prompt id: the run to interrupt has to last long enough, which needs a model.
+
+## Open questions
+
+Not measurements waiting to be run — those are above — but decisions this course has not taken.
+
+- Is `LoadImage`'s dependence on the machine's MIME table worth an issue on ComfyUI, or is it working as intended? A call to `mimetypes.add_type` for the formats ComfyUI itself writes would fix it in a line, and would change what an existing installation lists.
+- Which part of two x86 builds of the same PyTorch version makes their convolutions differ — vectorization, threading, or the linear-algebra backend? The step probe shows *that* they differ from the very first one, not why.
+- When should the pin move? Every measurement here is tied to ComfyUI v0.36.0 at one commit, which is what makes the numbers mean something; nothing says what happens to them at v0.37.

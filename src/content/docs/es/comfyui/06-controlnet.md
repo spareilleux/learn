@@ -142,7 +142,7 @@ El mismo ComfyUI, el mismo grafo de PyTorch y los mismos píxeles dieron cuatro 
 | magnitud | `0af967b932bcb57c` | `bda4e821a72c09ed` | `208a0f39607e1ae0` | `bf05d8003b885379` |
 | contornos | `08e9b5af22548246` | `08e9b5af22548246` | `08e9b5af22548246` | `08e9b5af22548246` |
 
-La divergencia empieza en el primer paso en coma flotante. El desenfoque ya separa la máquina del autor de los runners, y el runner Apple Silicon de los dos x86. El gradiente difiere después en las cuatro, aunque Windows y Linux coincidían un paso antes: la misma convolución toma un camino distinto según la compilación. Todas las magnitudes difieren y, sin embargo, su suma se imprime como 2729.489258 en las cuatro: las diferencias están en los últimos bits.
+La divergencia empieza en el primer paso en coma flotante. El desenfoque ya separa la máquina del autor de los runners, y el runner Apple Silicon de los dos x86. El gradiente difiere después en las cuatro, aunque Windows y Linux coincidían un paso antes: la misma convolución toma un camino distinto según la compilación. Todas las magnitudes difieren y, sin embargo, su suma se imprime como 2729.489258 en las cuatro: las diferencias están en los últimos bits. Esa suma es una trampa en sí misma: impresa con seis decimales suma las diferencias y las borra, de modo que quien comparara sumas habría concluido que las cuatro máquinas coinciden y se habría detenido ahí. Un total no es un hash. Por eso todas las comprobaciones de este curso hashean bytes.
 
 La última fila es la sorpresa: los contornos son idénticos en todas partes, 1461 píxeles de 3072, el mismo hash en las cuatro máquinas. Este patrón son áreas planas y bordes duros, así que ningún gradiente queda lo bastante cerca de un umbral como para que una diferencia de último bit lo haga saltar. Un render no tiene ese margen, y por eso el patrón de la lección 5, pasado por `Canny` dentro de ComfyUI, da cuatro hashes. La respuesta tiene entonces dos mitades: la coma flotante diverge desde la primera convolución, en todas las máquinas, siempre; que eso llegue a la salida depende de cuántos píxeles deje la imagen cerca del umbral.
 
@@ -154,6 +154,7 @@ La última fila es la sorpresa: los contornos son idénticos en todas partes, 14
 - `start_percent` y `end_percent` son fracciones del rango de ruido, no de los pasos.
 - La composición se decide en los primeros pasos: un ControlNet activo solo en ellos conservó casi toda la composición.
 - Los filtros de imagen también son código en coma flotante: no compares su salida bit a bit entre máquinas. La divergencia empieza en la primera convolución; que llegue a la salida depende de lo cerca que la imagen quede del umbral.
+- Un total no es un hash: una suma agrega las diferencias que un hash mostraría.
 
 ## Tu turno
 

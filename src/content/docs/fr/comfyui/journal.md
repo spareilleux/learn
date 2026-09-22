@@ -243,3 +243,11 @@ Le rendu Blender v2 a été copié dans le répertoire d'entrée ComfyUI isolé.
 - Comment les navigateurs affichent l'AVIF HLG de `SaveImageAdvanced`.
 - Les temps de rendu à chaud avec `--disable-dynamic-vram`, sur une machine avec assez de RAM libre.
 - `execution_interrupted` tel que les clients l'affichent, et `POST /interrupt` avec un identifiant de prompt : il faut une exécution assez longue à interrompre, donc un modèle.
+
+## Questions ouvertes
+
+Pas des mesures en attente — elles sont au-dessus — mais des décisions que ce cours n'a pas prises.
+
+- La dépendance de `LoadImage` à la table MIME de la machine mérite-t-elle une issue sur ComfyUI, ou est-ce le comportement voulu ? Un appel à `mimetypes.add_type` pour les formats que ComfyUI écrit lui-même corrigerait cela en une ligne, et changerait ce qu'une installation existante liste.
+- Qu'est-ce qui, dans deux compilations x86 de la même version de PyTorch, fait différer leurs convolutions — la vectorisation, le parallélisme ou la bibliothèque d'algèbre linéaire ? La sonde par étapes montre *qu'*elles diffèrent dès la première, pas pourquoi.
+- Quand déplacer l'épinglage ? Toutes les mesures d'ici sont attachées à ComfyUI v0.36.0 à un commit précis, et c'est ce qui leur donne un sens ; rien ne dit ce qu'elles deviennent en v0.37.

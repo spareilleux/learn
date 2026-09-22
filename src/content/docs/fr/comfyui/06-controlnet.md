@@ -142,7 +142,7 @@ Le même ComfyUI, le même graphe PyTorch et les mêmes pixels ont donné quatre
 | magnitude | `0af967b932bcb57c` | `bda4e821a72c09ed` | `208a0f39607e1ae0` | `bf05d8003b885379` |
 | contours | `08e9b5af22548246` | `08e9b5af22548246` | `08e9b5af22548246` | `08e9b5af22548246` |
 
-La divergence commence dès la première étape en virgule flottante. Le flou sépare déjà la machine de l'auteur des runners, et le runner Apple Silicon des deux x86. Le gradient diffère ensuite sur les quatre, alors que Windows et Linux coïncidaient une étape plus tôt : la même convolution emprunte un chemin différent selon la compilation. Toutes les magnitudes diffèrent, et pourtant leur somme s'affiche 2729.489258 sur les quatre — les différences sont dans les derniers bits.
+La divergence commence dès la première étape en virgule flottante. Le flou sépare déjà la machine de l'auteur des runners, et le runner Apple Silicon des deux x86. Le gradient diffère ensuite sur les quatre, alors que Windows et Linux coïncidaient une étape plus tôt : la même convolution emprunte un chemin différent selon la compilation. Toutes les magnitudes diffèrent, et pourtant leur somme s'affiche 2729.489258 sur les quatre — les différences sont dans les derniers bits. Cette somme est un piège en soi : imprimée à six décimales, elle additionne les écarts et les efface, si bien que qui aurait comparé des sommes aurait conclu que les quatre machines coïncident et se serait arrêté là. Un total n'est pas une empreinte. C'est pourquoi tous les contrôles de ce cours hachent des octets.
 
 La dernière ligne est la surprise : les contours sont identiques partout, 1 461 pixels sur 3 072, la même empreinte sur les quatre machines. Ce motif n'est fait que d'aplats et de bords francs, donc aucun gradient ne passe assez près d'un seuil pour qu'une différence de dernier bit le fasse basculer. Un rendu n'a pas cette marge, et c'est pourquoi le motif de la leçon 5, passé dans `Canny` à l'intérieur de ComfyUI, donne quatre empreintes. La réponse a donc deux moitiés : la virgule flottante diverge dès la première convolution, sur toutes les machines, toujours ; que cela atteigne la sortie dépend du nombre de pixels que l'image laisse près du seuil.
 
@@ -153,7 +153,8 @@ La dernière ligne est la surprise : les contours sont identiques partout, 1 461
 - Le cœur a `Canny` pour les contours et Lotus pour la profondeur. Les autres cartes demandent un nœud personnalisé ou une image faite ailleurs.
 - `start_percent` et `end_percent` sont des fractions de la plage de bruit, pas des étapes.
 - La disposition se décide dans les premières étapes : un ControlNet actif seulement pendant celles-ci a gardé presque toute la composition.
-- Les filtres d'image sont du code en virgule flottante eux aussi : ne compare pas leur sortie bit à bit d'une machine à l'autre. La divergence commence à la première convolution ; qu'elle atteigne la sortie dépend de la proximité de l'image au seuil.
+- Les filtres d'image sont eux aussi du code en virgule flottante : ne compare pas leur sortie bit à bit d'une machine à l'autre. La divergence commence à la première convolution ; qu'elle atteigne la sortie dépend de la proximité de l'image au seuil.
+- Un total n'est pas une empreinte : une somme additionne les écarts qu'une empreinte montrerait.
 
 ## À toi de jouer
 
