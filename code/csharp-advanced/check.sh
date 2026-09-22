@@ -61,6 +61,13 @@ run l6 l6
 run l7 l7
 run l8 l8
 run l9 l9
+run l10 l10
+run l11 l11
+run l12 l12
+run l13 l13
+run l14 l14
+run l15 l15
+run l16 l16
 run a1 a1
 
 # Appendix 2: the same comparison as run(), for the GaPerf program

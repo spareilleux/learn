@@ -127,6 +127,12 @@ Sept réseaux se sont ajoutés à ceux qu'exporte le lot 1 — `connection`, `ha
 
 **Une chose qui est honnêtement plus faible qu'il n'y paraît.** Toute affirmation « aucun marquage énuméré » des leçons 5 et 6 est vraie de la *méthode*, et le même programme construit ensuite le graphe d'accessibilité quand même pour vérifier la méthode. C'est le bon sens pour un cours, et cela veut dire qu'aucune de ces leçons ne démontre la méthode sur un réseau où l'énumération échouerait réellement — sauf `handshake-started`, qui est le seul réseau ici dont le graphe n'existe pas.
 
+## 2026-09-21 — Premier oracle exécutable de cycle de vie C#
+
+La leçon 14 relie maintenant le modèle formel aux formes de panne mesurées dans les leçons 6 et 9 du C# avancé. J’ai ajouté un pipeline fini à une place avec des places explicites `succeeded`, `failed` et `cancelled`. Son graphe complet compte huit marquages et trois marquages morts ; chacun est une terminaison voulue, donc aucun marquage mort n’est non terminal. Cinq tests ciblés préservent cette classification et l’invariant de capacité `free + queued = 1`, et la fixture PNML est régénérée avec le reste du cours.
+
+La correction importante était sémantique : `DeadStates` signifie qu’aucune transition n’est activée ; la fin réussie d’un workflow fini est donc morte elle aussi. « Sans interblocage » est le mauvais oracle pour un pipeline qui se termine. Le contrat exécutable devient un graphe complet dont chaque marquage mort porte exactement un jeton terminal nommé. La page indique aussi honnêtement que les exemples Channel en forme de GA reproduisent des mécanismes et ne sont pas des tests de régression des binaires actuels. RabbitMQ, Redis et Kubernetes restent des expériences ultérieures.
+
 ## À vérifier
 
 - Hack 1972, la source du théorème de Commoner, est en accès libre et illisible par une requête automatisée. Le lire dans un navigateur permettrait à la leçon 6 de citer le théorème plutôt que de paraphraser une paraphrase.

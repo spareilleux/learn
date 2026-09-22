@@ -187,6 +187,12 @@ export default defineConfig({
 									collapsed: true,
 									items: [{ autogenerate: { directory: 'hexagonal-architecture' } }],
 								},
+								{
+									label: 'Architecture patterns: choosing boundaries',
+									translations: { fr: 'Patterns d’architecture : choisir les frontières', es: 'Patrones de arquitectura: elegir límites' },
+									collapsed: true,
+									items: [{ autogenerate: { directory: 'architecture-patterns' } }],
+								},
 							],
 						},
 						{
@@ -198,6 +204,18 @@ export default defineConfig({
 									translations: { fr: 'Programmation agentique avec Claude Code et Codex', es: 'Programación agéntica con Claude Code y Codex' },
 									collapsed: true,
 									items: [{ autogenerate: { directory: 'agentic-coding' } }],
+								},
+								{
+									label: 'TypeSafe AI System One and Jev',
+									translations: { fr: 'TypeSafe AI System One et Jev', es: 'TypeSafe AI System One y Jev' },
+									collapsed: true,
+									items: [{ autogenerate: { directory: 'typesafe-ai-system-one' } }],
+								},
+								{
+									label: 'Repository Dogfooding Lab',
+									translations: { fr: 'Laboratoire de dogfooding des dépôts', es: 'Laboratorio de dogfooding de repositorios' },
+									collapsed: true,
+									items: [{ autogenerate: { directory: 'repository-dogfooding-lab' } }],
 								},
 								{
 									label: 'Gaia: coordinating agents with evidence',

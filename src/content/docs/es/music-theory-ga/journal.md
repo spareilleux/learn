@@ -23,6 +23,12 @@ sidebar:
 - [x] Apéndice C: un veredicto para cada línea `DIFF` de las lecciones 1 a 7
 - [ ] Lecciones 9 a 17 (ver el plan en la página de la misión)
 
+## 2026-09-21 — Conciliación upstream del apéndice C
+
+- [GA #711](https://github.com/GuitarAlchemist/ga/pull/711) concilió los hallazgos ejecutables del apéndice C y se fusionó como [`b363c3f`](https://github.com/GuitarAlchemist/ga/commit/b363c3f086608f850be026546f85ef13c6e6bfb8).
+- Los defectos 1–5, 7–11 y 13–18 están corregidos con cobertura de regresión. Las entradas 6, 12 y 19 siguen siendo límites documentados de diseño o representación.
+- El curso sigue fijado en `a826864` para que las 40 filas `DIFF` originales continúen siendo reproducibles; el apéndice ahora enlaza el resultado upstream más reciente sin reescribir esa evidencia histórica.
+
 ## 2026-09-18 — Correcciones upstream en GA: resolución de las anomalías
 
 - **16 de los 19 defectos resueltos upstream en GA**:

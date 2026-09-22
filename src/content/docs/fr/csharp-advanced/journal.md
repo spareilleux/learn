@@ -19,6 +19,10 @@ sidebar:
 - [x] Leçon 7 : TPL Dataflow
 - [x] Leçon 8 : Rx.NET
 - [x] Leçon 9 : choisir un flux
+- [x] Leçons 10 à 14 : état partagé et chemin d'une requête ASP.NET Core
+- [x] Leçon 15 : services hébergés et travail en arrière-plan
+- [x] Leçon 16 : authentification et autorisation
+- [x] Leçon 17 : traduction d'un oracle de spécification Petri borné en conception de tests déterministes pour Channel, TPL Dataflow et Rx
 - [x] Annexe 1 : cinq membres de GA optimisés, prouvés sur les 4096 ensembles de classes de hauteurs, puis mesurés — les benchmarks ayant été réécrits une fois qu'il est apparu qu'ils mesuraient le JIT
 - [x] Annexe 2 : le pipeline d'indexation de GA profilé, trois changements prouvés contre la sortie de GA elle-même et mesurés, puis envoyés en amont sous forme de pull requests
 
@@ -172,8 +176,34 @@ L'Annexe 1 choisissait quoi optimiser en lisant GA. Cette fois, c'est un profile
   - Les allocations des objets valeurs de la leçon 5 n'apparaissent pas dans ce profil.
 - **L'export de l'index n'est pas toujours reproductible.** Le premier export de la soirée diffère des suivants sur 266 des 313 047 entrées, indexées par instrument et par diagramme, bien qu'il provienne du même commit de GA. Chaque comparaison ci-dessus porte sur des exports du même groupe ; la cause est *à vérifier*.
 
+## 2026-09-21 — Leçons 10 à 14 : concurrence et chemin d'une requête ASP.NET Core
+
+- Ajout de cinq leçons exécutables sur .NET 10.0.12 : lost update déterministe, `Lock`, `Interlocked`, `ConcurrentDictionary` et `Parallel.ForEachAsync` borné.
+- Démarrage de vrais serveurs Kestrel sur des ports loopback éphémères ; cycle de vie, requête, arrêt gracieux, ordre middleware et short-circuit `429` ont été observés.
+- Vérification des lifetimes singleton/scoped, du rejet d'une captive dependency, des keyed services et de la validation d'options.
+- Vérification d'une Minimal API, d'un contrôleur dans la même table de routing et d'une réponse JSON `IAsyncEnumerable<string>`.
+- Les sorties portables sont conservées dans `expected/l10.txt` à `expected/l14.txt`. Les minimums du thread pool restent dépendants de la machine.
+- Ces résultats restent locaux : buffering des proxies, limites de production, identity provider réel et starvation face à une dépendance distante restent à mesurer.
+
+## 2026-09-21 — Leçons 15-16 : travail hébergé et autorisation locale
+
+- La preuve des services hébergés utilise des gates de terminaison plutôt que des délais. Un channel borné alimente un worker singleton et deux opérations résolvent des instances scoped distinctes (`scope-1` et `scope-2`). La cancellation de l'hôte est observée pendant que le worker attend du travail.
+- Un second hôte libère une faute volontaire et observe `ApplicationStopping` avec `BackgroundServiceExceptionBehavior.StopHost`. Cela prouve la stratégie de l'hôte, pas un retry ni une reprise.
+- La preuve d'authentification démarre Kestrel sur un port loopback éphémère. Les bearer tokens absent, mal formé, expiré et mal signé renvoient 401 ; une identité valide sans `scope=scales.read` renvoie 403 ; l'identité autorisée reçoit `200 C major`.
+- Les deux clés sont générées en mémoire pour un seul processus. La durée de validité utilise un instant fixe et aucune clé ni aucun token n'est affiché ou persisté.
+- `Advanced` a compilé localement sans avertissement, et les deux nouvelles sorties correspondent à `expected/l15.txt` et `expected/l16.txt`. La CI sur trois OS, un vrai serveur d'autorisation, découverte/rotation des clés et déploiement derrière un proxy restent à vérifier.
+
+## 2026-09-21 — Leçon 17 : oracles Petri pour les tests de pipelines C#
+
+- Réutilisation du cycle de vie exécutable à un item et une place de la [leçon Petri 14](../../petri-nets/14-on-our-systems/) au lieu de créer un second modèle. Sa suite ciblée explore les huit marquages accessibles, classe les trois marquages morts terminaux et vérifie l'invariant de file Channel `free + queued = 1`.
+- Frontière explicite entre modèle et exécution : les tests Petri valident la spécification finie ; ils n'exécutent ni `Channel<T>`, ni TPL Dataflow, ni Rx.NET et ne prouvent donc pas l'implémentation GA actuelle.
+- Traduction de chaque chemin du modèle en recette de test d'exécution déterministe fondée sur des portes plutôt que sur des pauses. La recette exige le résultat public d'exception ou de complétion ainsi que la stabilisation de chaque participant possédé.
+- Sémantiques de capacité gardées distinctes : la capacité de Channel compte les items en file dans ce modèle, celle d'un bloc d'exécution Dataflow inclut l'item en cours, et Rx n'a aucune borne tant que la conception n'en ajoute pas.
+- Deux limites volontaires sont documentées : l'annulation est atomique et antérieure au démarrage, et le réseau à un item ne peut pas reproduire un producteur déjà bloqué par la backpressure après la panne du consommateur. Un modèle à deux items et des fixtures d'exécution restent à vérifier.
+
 ## À vérifier
 
+- Exécuter les recettes de la leçon 17 sur des fixtures Channel, Dataflow et Rx épinglées, dont un ordonnancement à deux items avec producteur bloqué ; la preuve actuelle est uniquement l'oracle Petri.
 - Pourquoi le PGO dynamique n'a pas supprimé les énumérateurs boxés de la première version à masques de `TryMatch` (annexe 2).
 - Pourquoi l'export de l'index OPTIC-K de GA diffère d'une session à l'autre sur 266 des 313 047 entrées (annexe 2).
 - Le membre auquel `T.Items` se lie quand une interface dérivée masque une propriété abstraite statique avec une propriété `new static` (leçon 5).

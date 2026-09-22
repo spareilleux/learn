@@ -1,0 +1,14 @@
+
+== A lost update is a schedule, not a rare hardware accident
+two increments without synchronization: 1
+
+== Lock protects an invariant; Interlocked protects one atomic update
+Lock count: 10000
+Interlocked count: 10000
+
+== ConcurrentDictionary makes one operation atomic, not a multi-step workflow
+AddOrUpdate count: 1000
+
+== Parallel.ForEachAsync bounds active asynchronous bodies
+configured degree: 2; maximum observed bodies: 2
+exit 0

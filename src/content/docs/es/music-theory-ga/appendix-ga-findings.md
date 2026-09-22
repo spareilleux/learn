@@ -22,6 +22,10 @@ Cuarenta líneas, pero no cuarenta problemas: se resumen en **19 defectos distin
 Nada de lo que hay aquí es una opinión sobre el estilo del código. Cada fila es un valor calculado dos veces y comparado por un programa, en tres sistemas operativos, en un commit fijado de GA. Clona este repositorio y ejecuta `bash code/music-theory-ga/check.sh`, o ejecuta una sola lección con `dotnet run --project code/music-theory-ga/GaTheory -c Release -- l3`. GA se lee en el commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6) y nunca se modifica. La columna **Estado upstream** es una segunda lectura, distinta: dice lo que contenía el `main` de GA el 22 de septiembre de 2026, en el commit [`05528dc`](https://github.com/GuitarAlchemist/ga/tree/05528dc12af4fd014cc1b135ad4ef5c9e108290a), con las dieciséis correcciones verificadas una a una en esa fuente. Los enlaces de la tabla siguen apuntando a `a826864`, donde el defecto es visible.
 :::
 
+:::tip[Conciliación con upstream]
+El snapshot original `a826864` sigue siendo la referencia reproducible para las 40 filas `DIFF`. Los hallazgos ejecutables se conciliaron en [GA #711](https://github.com/GuitarAlchemist/ga/pull/711), fusionada como [`b363c3f`](https://github.com/GuitarAlchemist/ga/commit/b363c3f086608f850be026546f85ef13c6e6bfb8) el 21 de septiembre de 2026. Los defectos 1–5, 7–11 y 13–18 están corregidos y cubiertos por pruebas de regresión. Las entradas 6, 12 y 19 siguen siendo límites explícitos de diseño o representación, en lugar de correcciones silenciosas.
+:::
+
 ## Los 19 defectos
 
 | # | Defecto en GA | Líneas | Lecciones | Estado upstream |

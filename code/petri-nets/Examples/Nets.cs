@@ -809,6 +809,75 @@ public static class Nets
         return string.Join(" ", notes);
     }
 
+    /// <summary>
+    /// A finite, single-item bounded pipeline used to connect the Petri-net course to the
+    /// Channel, Dataflow and Rx lifecycle experiments in Advanced C#. Success, failure and
+    /// cancellation are intentional terminal markings; any other dead marking is a defect.
+    /// </summary>
+    public static PetriNet PipelineLifecycle() => new(
+        "pipeline-lifecycle",
+        [
+            new Place("work", "work"),
+            new Place("producer", "producer"),
+            new Place("free", "free"),
+            new Place("queued", "queued"),
+            new Place("consumer", "consumer"),
+            new Place("processing", "processing"),
+            new Place("produced", "produced"),
+            new Place("consumed", "consumed"),
+            new Place("producer_faulted", "producer faulted"),
+            new Place("succeeded", "succeeded"),
+            new Place("failed", "failed"),
+            new Place("cancelled", "cancelled"),
+        ],
+        [
+            new Transition("write", "write"),
+            new Transition("producer_fail", "producer fails"),
+            new Transition("read", "read"),
+            new Transition("consume", "consume"),
+            new Transition("consumer_fail", "consumer fails"),
+            new Transition("settle_success", "settle success"),
+            new Transition("settle_producer_failure", "settle producer failure"),
+            new Transition("cancel", "cancel"),
+        ],
+        [
+            new Arc("work", "write"),
+            new Arc("producer", "write"),
+            new Arc("free", "write"),
+            new Arc("write", "queued"),
+            new Arc("write", "produced"),
+
+            new Arc("work", "producer_fail"),
+            new Arc("producer", "producer_fail"),
+            new Arc("producer_fail", "producer_faulted"),
+
+            new Arc("queued", "read"),
+            new Arc("consumer", "read"),
+            new Arc("read", "processing"),
+            new Arc("read", "free"),
+
+            new Arc("processing", "consume"),
+            new Arc("consume", "consumed"),
+
+            new Arc("processing", "consumer_fail"),
+            new Arc("produced", "consumer_fail"),
+            new Arc("consumer_fail", "failed"),
+
+            new Arc("produced", "settle_success"),
+            new Arc("consumed", "settle_success"),
+            new Arc("settle_success", "succeeded"),
+
+            new Arc("producer_faulted", "settle_producer_failure"),
+            new Arc("consumer", "settle_producer_failure"),
+            new Arc("settle_producer_failure", "failed"),
+
+            new Arc("work", "cancel"),
+            new Arc("producer", "cancel"),
+            new Arc("consumer", "cancel"),
+            new Arc("cancel", "cancelled"),
+        ],
+        new Marking(1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0));
+
     /// <summary>Every net of the course, in the order the lessons meet them.</summary>
     public static IReadOnlyList<PetriNet> All =>
     [
@@ -828,6 +897,7 @@ public static class Nets
         PhilosophersOneFork(3, ordered: true),
         LaneLock(),
         LaneLock(2, guarded: false),
+        PipelineLifecycle(),
         ColouredNets.Retry().Unfold(),
     ];
 }

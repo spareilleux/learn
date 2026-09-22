@@ -26,7 +26,7 @@ Those three questions are decided by a program in this course, on nets that mode
 
 You are a C# or Java developer. You have written concurrent code and modelled processes with state machines. You do not need any mathematics beyond adding vectors and multiplying a matrix by one; the course introduces what it uses, and the first matrix appears in lesson 2 only because it makes something concrete easier.
 
-The concurrency lessons lean on what you already know. Lesson 7 takes the backpressure of [lessons 6 to 9 of the Advanced C# course](../csharp-advanced/) — channels, TPL Dataflow, Rx — and models it instead of measuring it. Lesson 14 models a [RabbitMQ](../rabbitmq/) topology and a [Kubernetes](../kubernetes/) rolling update.
+The concurrency lessons lean on what you already know. Lesson 7 takes the backpressure of [lessons 6 to 9 of the Advanced C# course](../csharp-advanced/) — channels, TPL Dataflow, Rx — and models it instead of measuring it. Lesson 14 starts the repository dogfooding with one bounded C# lifecycle and an agent-lane lock; RabbitMQ and Kubernetes remain explicit follow-up experiments.
 
 ## The running example
 
@@ -92,7 +92,7 @@ That net has twelve reachable markings, it never deadlocks, and the place `free`
 | 11 | Tools and interoperability: PNML, TINA, LoLA, Snoopy, PIPE, CPN Tools, GreatSPN, TAPAAL | an XML exchange format |
 | 12 | Industrial applications: manufacturing, protocols, asynchronous hardware, biochemistry, security | |
 | 13 | Against other formalisms: statecharts, process algebras, timed automata, TLA+ | TLA+, model checking |
-| 14 | On our own systems: a `Channel<T>` pipeline, a RabbitMQ topology, a Kubernetes rolling update, an agent pipeline | [Advanced C#](../csharp-advanced/), [RabbitMQ](../rabbitmq/), [Kubernetes](../kubernetes/) |
+| 14 | [On our own systems: C# pipelines and agent lanes](14-on-our-systems/) | [Advanced C#](../csharp-advanced/); RabbitMQ and Kubernetes are follow-up experiments |
 | 15 | Limits and what comes next: undecidability, unfoldings, partial order reduction, extensions | |
 
 [Journal](journal/): what I tried, what surprised me, what I still need to verify.

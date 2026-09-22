@@ -17,7 +17,12 @@ const server = createServer((req, res) => {
   res.writeHead(200, { 'content-type': types[extname(file)] ?? 'application/octet-stream' });
   createReadStream(file).pipe(res);
 });
-await new Promise((r) => server.listen(5197, r));
+// Ask the OS for a free loopback port so concurrent checks and local dev servers cannot collide.
+await new Promise((resolve, reject) => {
+  server.once('error', reject);
+  server.listen(0, '127.0.0.1', resolve);
+});
+const { port } = server.address();
 const browser = await chromium.launch({ channel: process.env.PROBE_CHANNEL ?? 'chromium' });
 let failed = false;
 try {
@@ -27,7 +32,7 @@ try {
     failed = true;
   });
   page.on('response', (r) => r.status() >= 400 && console.log(`HTTP ${r.status()} ${r.url()}`));
-  await page.goto('http://localhost:5197/learn/ga-lab/p1/?probe&frames=5');
+  await page.goto(`http://127.0.0.1:${port}/learn/ga-lab/p1/?probe&frames=5`);
   const result = await page.evaluate(() => Promise.race([window.probe, new Promise((_, reject) => setTimeout(() => reject(new Error('no probe result')), 60000))]));
   console.log(JSON.stringify({ backend: result.backend, points: result.points, dataBytes: result.dataBytes }));
   if (result.points !== 30000 && !args.includes('--any-count')) failed = true;

@@ -19,6 +19,10 @@ sidebar:
 - [x] Lesson 7: TPL Dataflow
 - [x] Lesson 8: Rx.NET
 - [x] Lesson 9: choosing a stream
+- [x] Lessons 10-14: shared state and the ASP.NET Core request path
+- [x] Lesson 15: hosted services and background work
+- [x] Lesson 16: authentication and authorization
+- [x] Lesson 17: a bounded Petri specification oracle translated into deterministic Channel, TPL Dataflow and Rx test design
 - [x] Appendix 1: five GA members optimised, proved on all 4096 pitch-class sets, then measured — with the benchmarks rewritten once they turned out to be measuring the JIT
 - [x] Appendix 2: GA's indexing pipeline profiled, three changes proved against GA's own output and measured, and sent upstream as pull requests
 
@@ -172,8 +176,34 @@ Appendix 1 chose what to optimise by reading GA. This time a profiler chose, on 
   - Lesson 5's value-object allocations don't appear in this profile.
 - **The index export is not always reproducible.** The first export of the evening differs from the later ones in 266 of 313,047 entries, keyed by instrument and diagram, although it came from the same GA commit. Every comparison above is between exports of the same group; the cause is *to verify*.
 
+## 2026-09-21 — Lessons 10-14: concurrency and the ASP.NET Core request path
+
+- Added five executable lessons against .NET 10.0.12: one deterministic lost-update schedule, `Lock` and `Interlocked`, `ConcurrentDictionary`, and a bounded `Parallel.ForEachAsync` probe.
+- Started real Kestrel instances on ephemeral loopback ports. Verified the host lifecycle, one successful request, graceful shutdown, middleware nesting, and a deliberate `429` short-circuit.
+- Verified singleton/scoped identity, captive-dependency rejection with scope validation, keyed services, and options validation.
+- Verified one Minimal API with route/query binding and an endpoint filter, one controller in the same routing table, and an `IAsyncEnumerable<string>` JSON response.
+- The portable output is checked in `expected/l10.txt` through `expected/l14.txt`. Thread-pool minimums remain machine-dependent evidence and are excluded with the existing `#` convention.
+- These are local protocol probes. They do not yet measure proxy buffering, production Kestrel limits, a real identity provider, or a remote dependency under thread-pool starvation.
+
+## 2026-09-21 — Lessons 15-16: hosted work and local authorization
+
+- The hosted-service proof uses completion gates rather than delays. One bounded channel feeds a singleton worker, and two operations resolve different scoped-service instances (`scope-1` and `scope-2`). Host cancellation is observed while the worker is waiting for more work.
+- A second host releases a deliberate worker fault and observes `ApplicationStopping` under `BackgroundServiceExceptionBehavior.StopHost`. This proves the host policy, not retry or recovery.
+- The authentication proof starts Kestrel on an ephemeral loopback port. Missing, malformed, expired and wrongly signed bearer tokens return 401; a valid identity without `scope=scales.read` returns 403; the authorized identity returns `200 C major`.
+- Both signing keys are generated in memory for one process. The lifetime decision uses a fixed course instant, and no key or token is printed or persisted.
+- `Advanced` built locally with zero warnings, and both new transcripts matched `expected/l15.txt` and `expected/l16.txt`. Three-OS CI, a real authorization server, key discovery/rotation and deployment behind a proxy remain to verify.
+
+## 2026-09-21 — Lesson 17: Petri oracles for C# pipeline tests
+
+- Reused the executable one-item, one-slot lifecycle from [Petri lesson 14](../../petri-nets/14-on-our-systems/) rather than creating a second model. Its focused suite explores all eight reachable markings, classifies the three terminal dead markings and checks the Channel queue invariant `free + queued = 1`.
+- Recorded the boundary between the model and the runtime. The Petri tests validate the finite specification; they do not execute `Channel<T>`, TPL Dataflow or Rx.NET and therefore do not prove the current GA implementation.
+- Turned each model path into a deterministic runtime-test recipe based on gates rather than delays. The recipe requires the public exception or completion result and settlement of every owned participant.
+- Kept capacity semantics separate: Channel capacity counts queued items in this model, Dataflow execution-block capacity includes the running item, and Rx has no bound until the design adds one.
+- Documented two deliberate limits: cancellation is atomic and pre-start, and the one-item net cannot reproduce a producer already blocked by backpressure after consumer failure. A two-item model and runtime fixtures remain to verify.
+
 ## To verify
 
+- Execute the lesson 17 runtime recipes against pinned Channel, Dataflow and Rx fixtures, including a two-item blocked-producer schedule; the current evidence is the Petri oracle only.
 - Why dynamic PGO didn't remove the boxed enumerators of the first mask version of `TryMatch` (appendix 2).
 - Why GA's OPTIC-K index export differs between sessions in 266 of 313,047 entries (appendix 2).
 - Which member `T.Items` binds to when a derived interface hides a static abstract property with a `new static` property (lesson 5).

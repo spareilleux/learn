@@ -1,0 +1,13 @@
+
+== Singleton and scoped lifetimes are different ownership boundaries
+same scope returns same instance: True
+singleton returns same instance: True
+different scopes return different instances: True
+keyed services: Cmajor | chord=C major
+
+== Scope validation rejects a singleton that captures a scoped service
+captive scoped dependency rejected: True
+
+== Options validation rejects invalid configuration at the boundary
+invalid options rejected: True
+exit 0

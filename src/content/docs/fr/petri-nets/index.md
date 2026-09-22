@@ -26,7 +26,7 @@ Ces trois questions sont tranchées par un programme dans ce cours, sur des rés
 
 Vous êtes développeur C# ou Java. Vous avez écrit du code concurrent et modélisé des processus avec des machines à états. Vous n'avez besoin d'aucune mathématique au-delà de l'addition de vecteurs et de la multiplication d'une matrice par un vecteur ; le cours introduit ce qu'il utilise, et la première matrice n'apparaît qu'à la leçon 2, parce qu'elle rend quelque chose de concret plus facile.
 
-Les leçons sur la concurrence s'appuient sur ce que vous savez déjà. La leçon 7 reprend la contre-pression des [leçons 6 à 9 du cours C# avancé](../csharp-advanced/) — channels, TPL Dataflow, Rx — et la modélise au lieu de la mesurer. La leçon 14 modélise une topologie [RabbitMQ](../rabbitmq/) et une mise à jour progressive [Kubernetes](../kubernetes/).
+Les leçons sur la concurrence s'appuient sur ce que vous savez déjà. La leçon 7 reprend la contre-pression des [leçons 6 à 9 du cours C# avancé](../csharp-advanced/) — channels, TPL Dataflow, Rx — et la modélise au lieu de la mesurer. La leçon 14 commence le dogfooding du dépôt par un cycle de vie C# borné et un verrou de lane d'agents ; RabbitMQ et Kubernetes restent des expériences suivantes explicites.
 
 ## L'exemple fil rouge
 
@@ -94,7 +94,7 @@ Ce réseau a douze marquages accessibles, il ne s'interbloque jamais, et la plac
 | 11 | Outils et interopérabilité : PNML, TINA, LoLA, Snoopy, PIPE, CPN Tools, GreatSPN, TAPAAL | un format d'échange XML |
 | 12 | Applications industrielles : ateliers flexibles, protocoles, matériel asynchrone, biochimie, sécurité | |
 | 13 | Face aux autres formalismes : statecharts, algèbres de processus, automates temporisés, TLA+ | TLA+, le model checking |
-| 14 | Sur nos propres systèmes : un pipeline `Channel<T>`, une topologie RabbitMQ, une mise à jour progressive Kubernetes, un pipeline d'agents | [C# avancé](../csharp-advanced/), [RabbitMQ](../rabbitmq/), [Kubernetes](../kubernetes/) |
+| 14 | [Sur nos systèmes : pipelines C# et lanes d'agents](14-on-our-systems/) | [C# avancé](../csharp-advanced/) ; RabbitMQ et Kubernetes sont des expériences suivantes |
 | 15 | Limites et suite : indécidabilité, dépliages, réduction d'ordre partiel, extensions | |
 
 [Journal](journal/) : ce que j'ai essayé, ce qui m'a surpris, ce qu'il me reste à vérifier.

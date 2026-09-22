@@ -5,6 +5,9 @@ template: splash
 hero:
   tagline: Courses written while learning, published as they are — with the mistakes, the dead ends, and what finally worked.
   actions:
+    - text: Matt Pocock skills
+      link: agentic-coding/05-matt-pocock-skills/
+      icon: rocket
     - text: Start with WSL containers
       link: wsl-containers/
       icon: right-arrow
@@ -34,6 +37,26 @@ They are public so others can benefit from them — and correct me.
 	<Card title="Sources" icon="external">
 		Every important claim links to a primary source (official docs, repositories).
 	</Card>
+</CardGrid>
+
+## Featured agent engineering paths
+
+<CardGrid>
+	<LinkCard
+		title="Matt Pocock skills"
+		description="Executable engineering methods: tracer bullets, TDD, codebase design, issue decomposition and evidence-backed review."
+		href="agentic-coding/05-matt-pocock-skills/"
+	/>
+	<LinkCard
+		title="Sandcastle"
+		description="Run one coding agent in an explicit container, branch and iteration boundary, while the host owns verification."
+		href="agentic-coding/06-sandcastle/"
+	/>
+	<LinkCard
+		title="Compound Engineering"
+		description="Connect planning, implementation, review and durable learning into one inspectable delivery loop."
+		href="agentic-coding/07-compound-engineering/"
+	/>
 </CardGrid>
 
 ## Courses
@@ -166,6 +189,12 @@ They are public so others can benefit from them — and correct me.
 #### Architecture & design
 
 <LinkCard
+	title="Architecture patterns: choosing boundaries"
+	description="Compare layered, onion, clean, hexagonal and modular-monolith designs on one practice-plan use case, with failure exercises and evidence-bounded ecosystem decisions."
+	href="architecture-patterns/"
+/>
+
+<LinkCard
 	title="Hexagonal Architecture: Ports & Adapters"
 	description="Decouple business logic from frameworks and infrastructure in C# 14 and .NET 10 — inside vs outside, driving vs driven ports, zero-allocation Span<T> contracts, and an architectural case study on Guitar Alchemist."
 	href="hexagonal-architecture/"
@@ -180,8 +209,20 @@ They are public so others can benefit from them — and correct me.
 />
 
 <LinkCard
+	title="TypeSafe AI System One and Jev"
+	description="Typed probabilistic decisions for software — Choice, Score and Noul, a deterministic mock-first lab, one optional cost-bounded live probe, and authority-safe use cases for Gaia, GA, Demerzel, IX and TARS."
+	href="typesafe-ai-system-one/"
+/>
+
+<LinkCard
+	title="Repository Dogfooding Lab"
+	description="Turn courses and repository observations into falsifiable experiments, opportunity matrices, evidence-bearing incubation and measured adoption — across classical software engineering and agentic AI."
+	href="repository-dogfooding-lab/"
+/>
+
+<LinkCard
 	title="Gaia: coordinating agents with evidence"
-	description="What happens after one agent works in one repository — a durable local bus whose six verbs cannot approve, merge or push, an append-only log you replay and verify, a factory that binds a candidate's identity before a reviewer sees it, and a lane limit that names its own evidence. Every output run on a pinned revision."
+	description="Evidence-bearing coordination after one agent — six non-privileged bus verbs, append-only replay, factory receipts, measured lane limits, and a bounded continuity artifact chain from one exact successor wake to read-only Demerzel validation."
 	href="gaia/"
 />
 

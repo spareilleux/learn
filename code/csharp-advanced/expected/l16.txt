@@ -1,0 +1,11 @@
+
+== JWT bearer authentication rejects unusable credentials
+missing token: 401
+malformed token: 401
+expired token: 401
+wrong signature: 401
+
+== A policy distinguishes authenticated from authorized
+without required claim: 403
+with required claim: 200 C major
+exit 0

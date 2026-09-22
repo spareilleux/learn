@@ -1,0 +1,40 @@
+name: Repository dogfooding lab
+
+on:
+  push:
+    paths:
+      - 'code/repository-dogfooding-lab/**'
+      - 'src/content/docs/repository-dogfooding-lab/**'
+      - 'src/content/docs/fr/repository-dogfooding-lab/**'
+      - 'src/content/docs/es/repository-dogfooding-lab/**'
+      - 'src/content/docs/typesafe-ai-system-one/**'
+      - 'src/content/docs/fr/typesafe-ai-system-one/**'
+      - 'src/content/docs/es/typesafe-ai-system-one/**'
+      - '.github/workflows/repository-dogfooding-lab.yml'
+  pull_request:
+    paths:
+      - 'code/repository-dogfooding-lab/**'
+      - 'src/content/docs/repository-dogfooding-lab/**'
+      - 'src/content/docs/fr/repository-dogfooding-lab/**'
+      - 'src/content/docs/es/repository-dogfooding-lab/**'
+      - 'src/content/docs/typesafe-ai-system-one/**'
+      - 'src/content/docs/fr/typesafe-ai-system-one/**'
+      - 'src/content/docs/es/typesafe-ai-system-one/**'
+      - '.github/workflows/repository-dogfooding-lab.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+      - name: Validate matrices, mirrors and journals
+        working-directory: code/repository-dogfooding-lab
+        run: |
+          python dogfood.py check
+          python -m unittest -v

@@ -26,7 +26,7 @@ Esas tres preguntas las decide un programa en este curso, sobre redes que modela
 
 Eres desarrollador de C# o de Java. Has escrito código concurrente y modelado procesos con máquinas de estados. No necesitas más matemáticas que sumar vectores y multiplicar una matriz por uno; el curso introduce lo que usa, y la primera matriz aparece en la lección 2 solo porque hace más fácil algo concreto.
 
-Las lecciones sobre concurrencia se apoyan en lo que ya sabes. La lección 7 toma la contrapresión de las [lecciones 6 a 9 del curso de C# avanzado](../csharp-advanced/) — channels, TPL Dataflow, Rx — y la modela en lugar de medirla. La lección 14 modela una topología de [RabbitMQ](../rabbitmq/) y una actualización progresiva de [Kubernetes](../kubernetes/).
+Las lecciones sobre concurrencia se apoyan en lo que ya sabes. La lección 7 toma la contrapresión de las [lecciones 6 a 9 del curso de C# avanzado](../csharp-advanced/) — channels, TPL Dataflow, Rx — y la modela en lugar de medirla. La lección 14 inicia el dogfooding del repositorio con un ciclo de vida C# acotado y un bloqueo de lanes de agentes; RabbitMQ y Kubernetes quedan como experimentos posteriores explícitos.
 
 ## El ejemplo conductor
 
@@ -94,7 +94,7 @@ Esta red tiene doce marcados alcanzables, nunca se interbloquea, y la plaza `fre
 | 11 | Herramientas e interoperabilidad: PNML, TINA, LoLA, Snoopy, PIPE, CPN Tools, GreatSPN, TAPAAL | un formato de intercambio en XML |
 | 12 | Aplicaciones industriales: talleres flexibles, protocolos, hardware asíncrono, bioquímica, seguridad | |
 | 13 | Frente a otros formalismos: statecharts, álgebras de procesos, autómatas temporizados, TLA+ | TLA+, el model checking |
-| 14 | Sobre nuestros propios sistemas: una tubería `Channel<T>`, una topología de RabbitMQ, una actualización progresiva de Kubernetes, una tubería de agentes | [C# avanzado](../csharp-advanced/), [RabbitMQ](../rabbitmq/), [Kubernetes](../kubernetes/) |
+| 14 | [En nuestros sistemas: pipelines C# y lanes de agentes](14-on-our-systems/) | [C# avanzado](../csharp-advanced/); RabbitMQ y Kubernetes son experimentos posteriores |
 | 15 | Límites y qué viene después: indecidibilidad, desplegados, reducción de orden parcial, extensiones | |
 
 [Diario](journal/): lo que intenté, lo que me sorprendió, lo que me queda por verificar.

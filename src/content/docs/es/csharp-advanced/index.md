@@ -61,31 +61,32 @@ Las partes 1 y 2 miden el propio código de GA. La parte 3 construye un pequeño
 | 7 | [TPL Dataflow](07-tpl-dataflow/) | bloques y enlaces, paralelismo y orden, `BoundedCapacity`, errores que solo bajan, finalización; la demo de Dataflow de GA | `flatMap` con concurrencia, `buffer`, `publishOn` |
 | 8 | [Rx.NET](08-rx-net/) | `IObservable<T>`, frío y caliente, operadores en tiempo virtual, schedulers, sin backpressure, reintentos; la demo reactiva de GA | `Flux`, `Sinks`, `publishOn`, `StepVerifier.withVirtualTime` |
 | 9 | [Elegir un flujo](09-choosing-streams/) | `IAsyncEnumerable` y `System.Linq.AsyncEnumerable`, los cuatro tipos de flujo medidos lado a lado, puentes, rendimiento, un diagrama de decisión | [Reactor: `Mono` y `Flux`](../spring-cloud-reactor/02-reactor-mono-and-flux/), [Reactor por dentro](../spring-cloud-reactor/03-reactor-under-the-hood/) |
-| 10 | Estado compartido y el grupo de subprocesos | `System.Threading.Lock`, `Interlocked`, colecciones concurrentes, `Parallel.ForEachAsync`, inanición del grupo de subprocesos | `synchronized`, `ReentrantLock`, hilos virtuales |
+| 10 | [Estado compartido y el grupo de subprocesos](10-shared-state-and-thread-pool/) | `System.Threading.Lock`, `Interlocked`, colecciones concurrentes, `Parallel.ForEachAsync`, inanición del grupo de subprocesos | `synchronized`, `ReentrantLock`, hilos virtuales |
 
 ### Parte 3: ASP.NET Core en profundidad
 
 | # | Lección | Bajo el capó | Spring y Reactor |
 |---|---|---|---|
-| 11 | Hospedaje, `WebApplication` y Kestrel | el host genérico, el builder, los límites de conexión y de petición de Kestrel, el apagado ordenado | [Spring Boot visto desde ASP.NET Core](../spring-cloud-reactor/01-spring-boot-from-aspnet-core/), Tomcat y Netty embebidos |
-| 12 | El pipeline de middlewares | `Use`, `Map`, `Run`, orden, cortocircuitos, manejo de excepciones, enrutamiento de endpoints | filtros Servlet, `WebFilter` |
-| 13 | Inyección de dependencias y opciones | duraciones, dependencias cautivas, validación de ámbitos, servicios con clave, `IOptions`, `IOptionsSnapshot`, `IOptionsMonitor`, validación | el contenedor de Spring, `@ConfigurationProperties` |
-| 14 | Minimal APIs y controladores | manejadores de rutas y enlace de parámetros, filtros, validación, `TypedResults`, respuestas `IAsyncEnumerable` en streaming | `@RestController`, endpoints funcionales de [WebFlux](../spring-cloud-reactor/04-webflux/) |
-| 15 | Servicios hospedados | `IHostedService`, `BackgroundService`, orden de arranque y de apagado, excepciones, colas con canales; los servicios hospedados de GA | `@Scheduled`, `SmartLifecycle` |
-| 16 | Autenticación y autorización | esquemas, manejadores, JWT bearer, directivas y requisitos | Spring Security |
-| 17 | gRPC y SignalR | contratos protobuf, llamadas en streaming, hubs, backpressure a través de la red | Spring gRPC, WebSocket, RSocket |
-| 18 | Resiliencia, limitación de velocidad y caché de salida | `Microsoft.Extensions.Http.Resilience`, pipelines de Polly, limitadores de velocidad, directivas de caché de salida | Resilience4j, Spring Cloud Circuit Breaker |
-| 19 | OpenTelemetry y diagnóstico en producción | `System.Diagnostics.Metrics`, `ActivitySource`, exportadores de OpenTelemetry, `dotnet-counters`, `dotnet-trace`, `dotnet-dump` | Micrometer, Actuator |
-| 20 | Pruebas con `WebApplicationFactory` | el host de pruebas, sustituir servicios, autenticación en las pruebas, Testcontainers | `@SpringBootTest`, `WebTestClient` |
-| 21 | Native AOT y recorte | publicar una API con Native AOT, advertencias de recorte, el generador de delegados de solicitud, arranque y tamaño medidos | imágenes nativas de GraalVM |
+| 11 | [Hospedaje, `WebApplication` y Kestrel](11-hosting-webapplication-kestrel/) | el host genérico, el builder, los límites de conexión y de petición de Kestrel, el apagado ordenado | [Spring Boot visto desde ASP.NET Core](../spring-cloud-reactor/01-spring-boot-from-aspnet-core/), Tomcat y Netty embebidos |
+| 12 | [El pipeline de middlewares](12-middleware-pipeline/) | `Use`, `Map`, `Run`, orden, cortocircuitos, manejo de excepciones, enrutamiento de endpoints | filtros Servlet, `WebFilter` |
+| 13 | [Inyección de dependencias y opciones](13-dependency-injection-options/) | duraciones, dependencias cautivas, validación de ámbitos, servicios con clave, `IOptions`, `IOptionsSnapshot`, `IOptionsMonitor`, validación | el contenedor de Spring, `@ConfigurationProperties` |
+| 14 | [Minimal APIs y controladores](14-minimal-apis-controllers/) | manejadores de rutas y enlace de parámetros, filtros, validación, `TypedResults`, respuestas `IAsyncEnumerable` en streaming | `@RestController`, endpoints funcionales de [WebFlux](../spring-cloud-reactor/04-webflux/) |
+| 15 | [Servicios hospedados](15-hosted-services/) | `IHostedService`, `BackgroundService`, orden de arranque y de apagado, excepciones, colas con canales; los servicios hospedados de GA | `@Scheduled`, `SmartLifecycle` |
+| 16 | [Autenticación y autorización](16-authentication-authorization/) | esquemas, manejadores, JWT bearer, directivas y requisitos | Spring Security |
+| 17 | [Oráculos de especificación Petri para pipelines C#](17-petri-pipeline-oracles/) | modelos finitos de ciclo de vida, alcanzabilidad completa, clasificación terminal, compuertas de ejecución deterministas; colas Channel, ejecución/salidas retenidas de Dataflow y supuestos Rx mantenidos por separado | el mismo método se aplica a Reactor solo después de modelar explícitamente su capacidad y sus schedulers |
+| 18 | gRPC y SignalR | contratos protobuf, llamadas en streaming, hubs, backpressure a través de la red | Spring gRPC, WebSocket, RSocket |
+| 19 | Resiliencia, limitación de velocidad y caché de salida | `Microsoft.Extensions.Http.Resilience`, pipelines de Polly, limitadores de velocidad, directivas de caché de salida | Resilience4j, Spring Cloud Circuit Breaker |
+| 20 | OpenTelemetry y diagnóstico en producción | `System.Diagnostics.Metrics`, `ActivitySource`, exportadores de OpenTelemetry, `dotnet-counters`, `dotnet-trace`, `dotnet-dump` | Micrometer, Actuator |
+| 21 | Pruebas con `WebApplicationFactory` | el host de pruebas, sustituir servicios, autenticación en las pruebas, Testcontainers | `@SpringBootTest`, `WebTestClient` |
+| 22 | Native AOT y recorte | publicar una API con Native AOT, advertencias de recorte, el generador de delegados de solicitud, arranque y tamaño medidos | imágenes nativas de GraalVM |
 
 ### Parte 4: metaprogramación y herramientas
 
 | # | Lección | Bajo el capó | Spring y Reactor |
 |---|---|---|---|
-| 22 | Árboles de expresión, reflexión y generadores de código fuente | en qué se compila una lambda, `Expression<T>`, el coste de la reflexión, generadores incrementales, `[GeneratedRegex]` | procesadores de anotaciones, [el motor AOT de Spring](https://docs.spring.io/spring-framework/reference/core/aot.html) |
-| 23 | Analizadores y correcciones de código de Roslyn | modelos sintácticos y semánticos, escribir un analizador y sus pruebas | [Error Prone](https://errorprone.info/), [SpotBugs](https://spotbugs.github.io/) |
-| 24 | Interoperabilidad y código no seguro | `[LibraryImport]`, punteros de función, `Unsafe`, `MemoryMarshal`, fijación | JNI, y la [API de funciones y memoria externas](https://openjdk.org/jeps/454) |
+| 23 | Árboles de expresión, reflexión y generadores de código fuente | en qué se compila una lambda, `Expression<T>`, el coste de la reflexión, generadores incrementales, `[GeneratedRegex]` | procesadores de anotaciones, [el motor AOT de Spring](https://docs.spring.io/spring-framework/reference/core/aot.html) |
+| 24 | Analizadores y correcciones de código de Roslyn | modelos sintácticos y semánticos, escribir un analizador y sus pruebas | [Error Prone](https://errorprone.info/), [SpotBugs](https://spotbugs.github.io/) |
+| 25 | Interoperabilidad y código no seguro | `[LibraryImport]`, punteros de función, `Unsafe`, `MemoryMarshal`, fijación | JNI, y la [API de funciones y memoria externas](https://openjdk.org/jeps/454) |
 
 ### Apéndices
 
@@ -93,9 +94,10 @@ Las partes 1 y 2 miden el propio código de GA. La parte 3 construye un pequeño
 |---|---|---|---|
 | 1 | [Cinco optimizaciones, demostradas y luego medidas](appendix-benchmarks/) | rotaciones y `PopCount` sobre conjuntos de 12 bits, tablas de consulta, una demostración de equivalencia sobre todo el dominio de entrada, los ordenamientos estables como desempate, y un benchmark que medía el JIT en lugar del código | `IsClusterFree`, `IntervalClassVector`, `ClosestDiatonicKey`, `ToNormalForm`, `PrimeForm` |
 | 2 | [GA, perfilado, luego demostrado y medido](appendix-2-ga-performance/) | `dotnet-trace` sobre un pipeline real, máscaras de 12 bits en lugar de conjuntos hash, enumeradores encapsulados, una caché de 4096 casillas indexada por el propio conjunto, una propiedad LINQ en un bucle caliente, y una demostración que compara byte a byte dos compilaciones de GA | `CanonicalChordRecognizer`, `ChordIntervalPattern.TryMatch`, `IntervalClassVector`, `OptickIndexReader` |
+| 3 | [Oráculo de ciclo de vida con redes de Petri](../petri-nets/14-on-our-systems/) | un pipeline acotado con éxito, fallo y cancelación explícitos; alcanzabilidad completa y ningún marcado muerto no terminal | las formas de fallo de Channel estudiadas en las lecciones 6 y 9 |
 | — | [Diario](journal/) | | |
 
-Las lecciones 10 a 24 están planificadas y aún no se han escrito. Las lecciones 6 a 9 se escribieron antes que la lección 5, y no dependen de ella.
+Las lecciones 18 a 25 están planificadas y aún no se han escrito. La lección 17 es un laboratorio avanzado de concurrencia añadido después de las lecciones de ASP.NET Core; las lecciones 6 a 9 se escribieron antes que la lección 5 y no dependen de ella.
 
 ## Requisitos previos
 

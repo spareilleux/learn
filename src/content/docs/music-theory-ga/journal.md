@@ -23,6 +23,12 @@ sidebar:
 - [x] Appendix C: a verdict on every `DIFF` row of lessons 1 to 7
 - [ ] Lessons 9 to 17 (see the outline on the mission page)
 
+## 2026-09-21 — Appendix C reconciled upstream
+
+- [GA #711](https://github.com/GuitarAlchemist/ga/pull/711) reconciled the executable Appendix C findings and was merged as [`b363c3f`](https://github.com/GuitarAlchemist/ga/commit/b363c3f086608f850be026546f85ef13c6e6bfb8).
+- Defects 1–5, 7–11 and 13–18 are fixed with regression coverage. Entries 6, 12 and 19 remain documented design or representation boundaries.
+- The course stays pinned to `a826864` so the original 40 `DIFF` rows remain reproducible; the appendix now links the newer upstream outcome instead of rewriting that historical evidence.
+
 ## 2026-09-18 — Upstream GA fixes: resolving the findings
 
 - **16 of the 19 defects resolved upstream in GA**:

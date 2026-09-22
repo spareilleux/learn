@@ -127,6 +127,12 @@ Seven nets were added to the ones lot 1 exports — `connection`, `handshake-sta
 
 **One thing that is honestly weaker than it looks.** Every "no markings enumerated" claim in lessons 5 and 6 is true of the *method*, and the same program then builds the reachability graph anyway to check the method. That is the right way round for a course, and it means none of these lessons demonstrates the method on a net where enumeration would actually fail — except `handshake-started`, which is the one net here whose graph does not exist.
 
+## 2026-09-21 — First executable C# lifecycle oracle
+
+Lesson 14 now connects the formal model to the failure shapes measured in Advanced C# lessons 6 and 9. I added a finite one-slot pipeline with explicit `succeeded`, `failed` and `cancelled` places. Its complete graph has eight markings and three dead markings; every dead marking is an intended terminal, so there are zero non-terminal dead markings. Five focused tests preserve that classification and the capacity invariant `free + queued = 1`, and the PNML fixture is regenerated with the rest of the course.
+
+The important correction was semantic: `DeadStates` means that no transition is enabled, so a successful finite workflow is dead too. “Deadlock-free” is therefore the wrong oracle for a terminating pipeline. The executable contract is instead a complete graph whose dead markings each contain exactly one named terminal token. The page also labels the existing GA-shaped Channel examples honestly as mechanism reproductions rather than current-production regression tests. RabbitMQ, Redis and Kubernetes remain later experiments.
+
 ## To verify
 
 - Hack 1972, the source of Commoner's theorem, is open access and unreadable to an automated fetch. Reading it in a browser would let lesson 6 quote the theorem rather than paraphrase a paraphrase.

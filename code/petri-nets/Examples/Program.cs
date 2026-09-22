@@ -623,6 +623,32 @@ void Lesson14()
                               + $"   ({(guard ? "guarded" : "unguarded")})");
         }
     }
+
+    Title("One bounded C# pipeline, with success, failure and cancellation made explicit");
+    var pipeline = Nets.PipelineLifecycle();
+    var pipelineGraph = ReachabilityGraph.Build(pipeline);
+    var terminalNames = new[] { "succeeded", "failed", "cancelled" };
+    var terminalPlaces = terminalNames.Select(pipeline.PlaceIndex).ToArray();
+    var nonTerminalDead = pipelineGraph.DeadStates
+        .Where(state => terminalPlaces.Sum(place => pipelineGraph.States[state][place]) != 1)
+        .ToArray();
+    Console.WriteLine($"markings: {pipelineGraph.States.Count}   graph complete: {pipelineGraph.IsComplete}");
+    Console.WriteLine($"dead markings: {pipelineGraph.DeadStates.Count}   non-terminal dead markings: {nonTerminalDead.Length}");
+    Console.WriteLine("queue capacity invariant free + queued = 1: "
+                      + pipelineGraph.States.All(marking =>
+                          marking[pipeline.PlaceIndex("free")] + marking[pipeline.PlaceIndex("queued")] == 1));
+    foreach (var sequence in new[]
+             {
+                 new[] { "write", "read", "consume", "settle_success" },
+                 new[] { "producer_fail", "settle_producer_failure" },
+                 new[] { "write", "read", "consumer_fail" },
+                 new[] { "cancel" },
+             })
+    {
+        var final = pipeline.FireSequence(pipeline.InitialMarking, sequence)[^1];
+        var terminal = terminalNames.Single(name => final[pipeline.PlaceIndex(name)] == 1);
+        Console.WriteLine($"{string.Join(" -> ", sequence),-58} {terminal}");
+    }
 }
 
 // The markings where more than one lane believes it holds the lock: the property the lock exists for.

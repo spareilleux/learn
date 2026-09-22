@@ -5,6 +5,9 @@ template: splash
 hero:
   tagline: Des cours écrits en apprenant, publiés tels quels — avec les erreurs, les impasses et ce qui a fini par marcher.
   actions:
+    - text: Skills de Matt Pocock
+      link: agentic-coding/05-matt-pocock-skills/
+      icon: rocket
     - text: Commencer par WSL containers
       link: wsl-containers/
       icon: right-arrow
@@ -34,6 +37,26 @@ Ils sont publics pour que d'autres puissent en profiter — et me corriger.
 	<Card title="Sources" icon="external">
 		Chaque affirmation importante renvoie vers une source primaire (docs officielles, dépôts).
 	</Card>
+</CardGrid>
+
+## Parcours d’ingénierie agentique à découvrir
+
+<CardGrid>
+	<LinkCard
+		title="Skills de Matt Pocock"
+		description="Des méthodes d’ingénierie exécutables : tracer bullets, TDD, conception de codebase, découpage en issues et revue fondée sur des preuves."
+		href="agentic-coding/05-matt-pocock-skills/"
+	/>
+	<LinkCard
+		title="Sandcastle"
+		description="Exécuter un agent de code dans des limites explicites de conteneur, de branche et d’itération, avec une vérification contrôlée par le host."
+		href="agentic-coding/06-sandcastle/"
+	/>
+	<LinkCard
+		title="Compound Engineering"
+		description="Relier planification, implémentation, revue et apprentissage durable dans une seule boucle de livraison inspectable."
+		href="agentic-coding/07-compound-engineering/"
+	/>
 </CardGrid>
 
 ## Cours
@@ -166,6 +189,12 @@ Ils sont publics pour que d'autres puissent en profiter — et me corriger.
 #### Architecture et conception
 
 <LinkCard
+	title="Patterns d’architecture : choisir les frontières"
+	description="Comparer les architectures en couches, onion, clean, hexagonale et monolithe modulaire sur un même plan de pratique, avec des exercices de panne et des décisions fondées sur des preuves."
+	href="architecture-patterns/"
+/>
+
+<LinkCard
 	title="Architecture hexagonale : Ports et adaptateurs"
 	description="Découpler la logique métier des frameworks et de l'infrastructure en C# 14 et .NET 10 — intérieur vs extérieur, ports primaires et secondaires, contrats Span<T> à zéro allocation et étude de cas sur Guitar Alchemist."
 	href="hexagonal-architecture/"
@@ -180,8 +209,20 @@ Ils sont publics pour que d'autres puissent en profiter — et me corriger.
 />
 
 <LinkCard
+	title="TypeSafe AI System One et Jev"
+	description="Des décisions probabilistes typées pour le logiciel — Choice, Score et Noul, un laboratoire déterministe qui commence par un mock, une probe live facultative au coût borné et des usages sans autorité pour Gaia, GA, Demerzel, IX et TARS."
+	href="typesafe-ai-system-one/"
+/>
+
+<LinkCard
+	title="Laboratoire de dogfooding des dépôts"
+	description="Transformer cours et observations en expériences falsifiables, matrices d'opportunities, incubation avec preuves et adoption mesurée — en software engineering classique comme en IA agentique."
+	href="repository-dogfooding-lab/"
+/>
+
+<LinkCard
 	title="Gaia : coordonner des agents avec des preuves"
-	description="Ce qui se passe après un agent dans un dépôt — un bus local et durable dont les six verbes ne peuvent ni approuver, ni fusionner, ni pousser, un journal d'événements en ajout seul que l'on rejoue et vérifie, une usine qui fixe l'identité d'un candidat avant qu'un relecteur ne le voie, et une limite de voies qui cite ses propres preuves. Chaque sortie exécutée sur une révision épinglée."
+	description="La coordination avec preuves après un agent — six verbes de bus sans privilège, rejeu en ajout seul, reçus d'usine, limites de voies mesurées et artifact chain de continuité bornée, d'un wake exact jusqu'à la validation Demerzel en lecture seule."
 	href="gaia/"
 />
 

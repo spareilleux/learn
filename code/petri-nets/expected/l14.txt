@@ -123,3 +123,12 @@ lanes  markings  two holders at once  shortest way there
     4       130  yes, 55 markings     take1 fail2 clean_hit2 take2   (unguarded)
     5       111  no                   -   (guarded)
     5       422  yes, 236 markings    take1 fail2 clean_hit2 take2   (unguarded)
+
+== One bounded C# pipeline, with success, failure and cancellation made explicit ==
+markings: 8   graph complete: True
+dead markings: 3   non-terminal dead markings: 0
+queue capacity invariant free + queued = 1: True
+write -> read -> consume -> settle_success                 succeeded
+producer_fail -> settle_producer_failure                   failed
+write -> read -> consumer_fail                             failed
+cancel                                                     cancelled

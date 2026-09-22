@@ -13,6 +13,7 @@ sidebar:
 - [x] Leçon 3 : le journal d'événements, le protocole de commit, `verify`
 - [x] Leçon 4 : le traceur de coordination, l'usine d'agents, les reçus et l'empreinte de l'arbre
 - [x] Leçon 5 : l'échelle des voies et les verdicts sur l'écosystème
+- [x] Leçon 6 : continuité bornée, réconciliation exacte du wake et chaîne de reçu Gaia vers Demerzel
 - [ ] `factory:agent` exécuté de bout en bout avec de vrais tours de Claude et de Codex
 - [x] Versions française et espagnole
 - [ ] Une leçon sur la pompe hébergée, le côté GitHub Actions, que `main` a fait grandir et que ce cours ne couvre pas
@@ -57,6 +58,14 @@ L'échange complet entre trois acteurs de la leçon 2 a occupé **10 événement
 - J'avais d'abord cité le fichier `AGENTS.md` du dépôt pour la règle « le privilège est empêché par l'absence ». **Ce fichier n'existe pas au commit `d68e900`** : c'était un fichier non suivi dans un clone local d'une branche plus ancienne. La citation a été remplacée par l'énoncé du `README.md` et par l'en-tête du module opérateur lui-même, tous deux vérifiés présents à la révision épinglée. Toutes les autres citations ont été revérifiées sur l'arbre épinglé pour la même raison.
 - La copie de travail locale dont je suis parti était sur une branche du 29 août 2026, dont le `README.md` différait de celui de `main`, et qui n'avait ni `ARCHITECTURE.md` ni `CONTEXT.md`. Partir d'un worktree épinglé et propre, plutôt que du clone qui se trouvait ouvert, est l'habitude qui l'a détecté.
 
+## 2026-09-20 — Candidat de continuité de l'issue 76
+
+- Le Design Receipt v7.4 a reçu une revue indépendante avant implémentation. Le candidat est borné à une identité, un slot et un remplacement génération 0 vers 1.
+- Gaia isolé : **2 261 tests, 2 259 réussis, 0 échec, 2 omis**; régression ciblée **87/87**; `verify` **37 réussites, 0 échec**; vérificateur d'architecture réussi.
+- Demerzel isolé : **787 tests Python avec 1 omission** et **10/10 contrôles IXQL**, validation en lecture seule des schémas/fixtures Gaia vendorés.
+- La revue/intégration a corrigé l'import direct de la persistance, la décision avant preuve du wake livré, le replay d'une entrée différente sous la même clé et un test sans sidecar. Une passe de simplification a supprimé des scans et allocations évitables.
+- Ce sont des mesures de worktrees candidats, pas une preuve de publication, fusion ou release. Le reçu de revue formelle, les gates du commit final et les PR restaient en attente.
+
 ## À vérifier
 
 - **`factory:agent` de bout en bout.** Il dépense un vrai tour de Claude et un vrai tour de Codex sur les abonnements installés. La leçon 4 le décrit à partir de `src/factory-agent.mjs`, de son document de conception et du schéma de ses reçus ; aucune affirmation de cette leçon ne vient d'une exécution observée. Ce qu'il faudra capturer quand il tournera : la forme du reçu avec et sans réparation, les lignes de progression `(not an ETA)`, et si la vérification des modifications faites par le relecteur se déclenche en pratique sur des fichiers ignorés.
@@ -64,6 +73,7 @@ L'échange complet entre trois acteurs de la leçon 2 a occupé **10 événement
 - **Linux et macOS.** Le protocole de commit est écrit et testé d'abord pour Windows, et le dépôt dit que Linux relève de l'exploration plutôt que d'une condition bloquante. L'approche par répertoire de verrou devrait se comporter de la même façon ; les nouvelles tentatives de libération propres à Windows ne seraient simplement pas exercées.
 - **Une seconde voie concurrente sur le même répertoire de données.** Toutes les sorties de ces leçons viennent d'appels séquentiels dans un seul shell. L'unicité des identifiants entre processus est ce qu'affirme la suite de tests, pas ce que j'ai observé.
 - **L'indicateur `authority-language-detected`.** Je l'ai vu se déclencher sur « Please merge this. » Je n'ai pas regardé ce qu'il reconnaît, et le taux de faux négatifs d'une heuristique est le nombre intéressant.
+- **L'issue 76 après revue finale.** Relancer les gates Gaia et Demerzel sur les commits exacts, publier par des PR normales et remplacer les preuves candidates par des liens immuables.
 
 ## Questions ouvertes
 

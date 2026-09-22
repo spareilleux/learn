@@ -23,6 +23,12 @@ sidebar:
 - [x] Annexe C : un verdict sur chaque ligne `DIFF` des leçons 1 à 7
 - [ ] Leçons 9 à 17 (voir le plan sur la page de mission)
 
+## 2026-09-21 — Rapprochement amont de l’annexe C
+
+- [GA #711](https://github.com/GuitarAlchemist/ga/pull/711) a rapproché les constats exécutables de l’annexe C et a été fusionnée sous [`b363c3f`](https://github.com/GuitarAlchemist/ga/commit/b363c3f086608f850be026546f85ef13c6e6bfb8).
+- Les défauts 1 à 5, 7 à 11 et 13 à 18 sont corrigés avec une couverture de régression. Les entrées 6, 12 et 19 restent des limites documentées de conception ou de représentation.
+- Le cours reste épinglé sur `a826864` afin que les 40 lignes `DIFF` d’origine restent reproductibles ; l’annexe renvoie désormais au résultat amont plus récent sans réécrire cette preuve historique.
+
 ## 2026-09-18 — Corrections amont dans GA : résolution des anomalies
 
 - **16 des 19 défauts résolus en amont dans GA** :
