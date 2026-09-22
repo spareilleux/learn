@@ -16,7 +16,7 @@ sidebar:
 - [x] Leçon 7 — Modéliser la concurrence
 - [x] Leçon 8 — Réseaux colorés
 - [x] Leçon 9 — Temps et probabilités
-- [ ] Leçon 10 — Workflows
+- [x] Leçon 10 — Workflows
 - [ ] Leçon 11 — Outils et interopérabilité
 - [ ] Leçon 12 — Applications industrielles
 - [ ] Leçon 13 — Face aux autres formalismes
@@ -57,6 +57,9 @@ Un avertissement avant le tableau : contrairement au [GA Lab](../../ga-lab/journ
 | La couleur réduit-elle l'espace d'états ? | Non — elle ne replie que le modèle | 4 places et 4 transitions à toute limite de tentatives ; le dépliage et le nombre de marquages accessibles croissent tous deux linéairement, 8, 10, 14, 24, 44 marquages pour les limites 2, 3, 5, 10, 20 | Confirmée, et c'est le point principal de la leçon 8 (2026-09-17) |
 | La chaîne construite depuis le réseau s'accorde-t-elle avec la formule M/M/1/K ? | À environ 1e-12 près, puisque le réseau *est* cette file | Le plus grand écart sur les six états vaut 5,6e-17, cinq ordres de grandeur sous le 1e-12 que la vérification affirme | Confirmée, et c'est la seule vérification indépendante du solveur stochastique (2026-09-22) |
 | Où se tient une file finie quand les arrivées égalent exactement le service ? | Quelque part au milieu, les extrémités étant moins probables | **Uniforme** : chaque longueur de 0 à 5 a la probabilité 0,1667, vide aussi souvent que pleine | Réfutée, et c'est devenu le résultat le plus utile : à charge 1 il n'y a aucune tendance (2026-09-22) |
+| La soundness s'accorde-t-elle avec « le court-circuit est vivant et borné » ? | Sur les quatre réseaux workflow, puisque le théorème le dit | Accord sur les quatre, et un test paramétré échoue désormais si cela casse | Confirmée (2026-09-22) |
+| Le court-circuit du réseau ET-divergent/OU-convergent est-il borné mais non vivant ? | Borné : rien ne s'accumule dans un processus 1-sûr | **Non borné** : le jeton en trop de chaque cas s'accumule via t-star sans limite | Réfutée, et c'est ce qui a fait la leçon : un jeton laissé derrière et un court-circuit non borné sont le même défaut (2026-09-22) |
+| Combien de marquages une étape de facturation après la convergence ajoute-t-elle ? | Deux, un par branche du choix | **Un** : le marquage où le jeton est dans la nouvelle place | Réfutée ; une étape en séquence ajoute un état quoi qu'il y ait avant, seule la concurrence multiplie (2026-09-22) |
 
 ## 2026-09-15 — Leçons 1 à 4, et l'analyseur qui les fait tourner
 
@@ -146,6 +149,20 @@ Deux choses sont sorties de l'écriture sans que je les aie prévues. D'abord, l
 La loi de Little sert de troisième vérification indépendante plutôt que de résultat : elle vaut pour tout système stable sans hypothèses, donc si la chaîne la violait, ce serait la chaîne qui aurait tort.
 
 `check.sh` exécute désormais `l9` et le compare à `expected/l9.txt`. 57 tests passent, et `l1` à `l9`, `l14`, `music`, `chat` et `nets` correspondent tous.
+
+## 2026-09-22 — Leçon 10, et la soundness décidée deux fois
+
+La leçon 10 ajoute `Workflow.cs` : le contrôle structurel du réseau workflow, les trois conditions de soundness, et le court-circuit du théorème de van der Aalst. C'est le théorème qui rend la leçon digne d'être écrite — la soundness est décidée une fois sur ses propres conditions et une fois comme « le réseau court-circuité est vivant et borné », par du code de la leçon 4 qui ne sait rien des processus, et un test paramétré échoue si les deux cessent un jour de s'accorder sur les quatre réseaux d'exemple.
+
+Deux choses que je n'attendais pas, toutes deux désormais dans la leçon.
+
+La première : `order-and-xor` — le ET divergent converge par un OU exclusif, l'erreur la plus courante des processus dessinés — ne se coince pas seulement parfois. Son marquage final est **inaccessible depuis nulle part** : l'état final correct n'existe pas du tout dans le réseau. Toute tâche peut encore s'exécuter, donc une suite de tests qui exerce chaque tâche passe sur un processus qui ne peut jamais se terminer correctement. Le rapport a été changé pour dire cela en une ligne plutôt que lister les dix marquages comme « coincés », ce qui était vrai et inutile.
+
+La seconde : son court-circuit n'est **pas borné**. J'attendais « borné mais non vivant ». Le jeton en trop de chaque cas s'accumule via `t-star` sans limite, ce qui veut dire que « la terminaison propre échoue » et « le court-circuit n'est pas borné » sont le même défaut compté une fois par cas ou compté indéfiniment. Le réseau miroir, `order-xor-and`, est borné et non vivant — les deux moitiés du théorème sont donc chacune nécessaires à l'un des deux échecs d'exemple, ce qui est une meilleure démonstration que celle que j'avais prévue.
+
+Je me suis aussi trompé sur un exercice avant de le vérifier. En ajoutant une étape de facturation après la convergence, j'ai prédit que le nombre de marquages passerait de 6 à 8 ; l'analyseur a dit 7. Une étape en séquence ajoute un marquage quoi qu'il y ait avant, parce que seule la concurrence multiplie. La mauvaise prédiction est publiée avec la bonne réponse, et la raison est devenue le point de l'exercice.
+
+`check.sh` exécute `l10` ; 66 tests passent et l1 à l10, l14, music, chat et nets correspondent tous.
 
 ## À vérifier
 

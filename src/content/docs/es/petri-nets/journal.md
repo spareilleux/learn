@@ -16,7 +16,7 @@ sidebar:
 - [x] Lección 7 — Modelar la concurrencia
 - [x] Lección 8 — Redes coloreadas
 - [x] Lección 9 — Tiempo y probabilidad
-- [ ] Lección 10 — Flujos de trabajo
+- [x] Lección 10 — Flujos de trabajo
 - [ ] Lección 11 — Herramientas e interoperabilidad
 - [ ] Lección 12 — Aplicaciones industriales
 - [ ] Lección 13 — Frente a otros formalismos
@@ -57,6 +57,9 @@ Una advertencia antes de la tabla: a diferencia del [laboratorio GA](../../ga-la
 | ¿Encoge el color el espacio de estados? | No — solo pliega el modelo | 4 plazas y 4 transiciones a cualquier límite de intentos; el despliegue y el número de marcados alcanzables crecen los dos linealmente, 8, 10, 14, 24, 44 marcados para los límites 2, 3, 5, 10, 20 | Confirmada, y es el argumento central de la lección 8 (2026-09-17) |
 | ¿Coincide la cadena construida a partir de la red con la fórmula M/M/1/K? | Hasta unos 1e-12, ya que la red *es* esa cola | La mayor diferencia sobre los seis estados es 5,6e-17, cinco órdenes de magnitud por debajo del 1e-12 que afirma la comprobación | Confirmada, y es la única comprobación independiente que tiene el solucionador estocástico (2026-09-22) |
 | ¿Dónde se sitúa una cola finita cuando las llegadas igualan exactamente al servicio? | En algún punto intermedio, con los extremos menos probables | **Uniforme**: cada longitud de 0 a 5 tiene probabilidad 0,1667, vacía tan a menudo como llena | Refutada, y se convirtió en el resultado más útil: con carga 1 no hay tendencia alguna (2026-09-22) |
+| ¿Coincide la solidez con que el cortocircuito sea vivo y acotado? | En las cuatro redes de flujo de trabajo, porque lo dice el teorema | Coincidencia en las cuatro, y una prueba parametrizada falla ahora si se rompe | Confirmada (2026-09-22) |
+| ¿Está acotado pero no vivo el cortocircuito de la red bifurcación-Y/convergencia-O? | Acotado: nada se acumula en un proceso 1-seguro | **No acotado**: la marca sobrante de cada caso se acumula a través de t-star sin límite | Refutada, y es lo que hizo la lección: una marca dejada atrás y un cortocircuito no acotado son el mismo defecto (2026-09-22) |
+| ¿Cuántos marcados añade un paso de facturación tras la convergencia? | Dos, uno por rama de la elección | **Uno**: el marcado en que la marca está en la nueva plaza | Refutada; un paso en secuencia añade un estado venga lo que venga antes, solo la concurrencia multiplica (2026-09-22) |
 
 ## 2026-09-15 — Lecciones 1 a 4, y el analizador sobre el que se ejecutan
 
@@ -146,6 +149,20 @@ Dos cosas salieron de escribirla que no había previsto. Primero, la comprobaci�
 La ley de Little se usa como una tercera comprobación independiente y no como resultado: vale para todo sistema estable sin hipótesis, así que si la cadena la violara, la equivocada sería la cadena.
 
 `check.sh` ejecuta ahora `l9` y lo compara con `expected/l9.txt`. Pasan 57 pruebas, y `l1` a `l9`, `l14`, `music`, `chat` y `nets` coinciden todos.
+
+## 2026-09-22 — Lección 10, y la solidez decidida dos veces
+
+La lección 10 añade `Workflow.cs`: la comprobación estructural de la red de flujo de trabajo, las tres condiciones de solidez, y el cortocircuito del teorema de van der Aalst. Es el teorema lo que hace que la lección merezca escribirse — la solidez se decide una vez sobre sus propias condiciones y otra como «la red cortocircuitada es viva y acotada», con código de la lección 4 que no sabe nada de procesos, y una prueba parametrizada falla si alguna vez dejan de coincidir en las cuatro redes de ejemplo.
+
+Dos cosas que no esperaba, ambas ya en la lección.
+
+La primera: `order-and-xor` — la bifurcación Y convergida por una O exclusiva, el error más común de los procesos dibujados — no se atasca solo a veces. Su marcado final es **inalcanzable desde cualquier sitio**: el estado final correcto no existe en la red en absoluto. Toda tarea puede ejecutarse todavía, así que una batería de pruebas que ejercite cada tarea pasa sobre un proceso que nunca puede terminar correctamente. El informe se cambió para decir eso en una línea en vez de listar los diez marcados como «atascados», lo que era cierto e inútil.
+
+La segunda: su cortocircuito **no está acotado**. Yo esperaba «acotado pero no vivo». La marca sobrante de cada caso se acumula a través de `t-star` sin límite, lo que significa que «la terminación limpia falla» y «el cortocircuito no está acotado» son el mismo defecto contado una vez por caso o contado para siempre. La red espejo, `order-xor-and`, está acotada y no es viva — así que cada mitad del teorema la necesita uno de los dos fallos de ejemplo, lo que es mejor demostración que la que tenía planeada.
+
+También me equivoqué en un ejercicio antes de comprobarlo. Al añadir un paso de facturación tras la convergencia, predije que el número de marcados pasaría de 6 a 8; el analizador dijo 7. Un paso en secuencia añade un marcado venga lo que venga antes, porque solo la concurrencia multiplica. La predicción equivocada se publica con la respuesta correcta, y el motivo se ha convertido en el argumento del ejercicio.
+
+`check.sh` ejecuta `l10`; pasan 66 pruebas y l1 a l10, l14, music, chat y nets coinciden todos.
 
 ## Por verificar
 

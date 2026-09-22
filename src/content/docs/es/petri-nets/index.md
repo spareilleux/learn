@@ -90,7 +90,7 @@ Esta red tiene doce marcados alcanzables, nunca se interbloquea, y la plaza `fre
 | 7 | [Modelar la concurrencia: exclusión mutua, productor-consumidor, lectores-escritores, filósofos](07-modelling-concurrency/) | `lock`, `SemaphoreSlim`, `Channel<T>`, `synchronized`, `ReentrantLock` |
 | 8 | [Redes coloreadas](08-coloured-nets/) | los genéricos, un mensaje tipado |
 | 9 | [Tiempo y probabilidad: redes temporizadas, estocásticas, GSPN](09-time-and-probability/) | los percentiles, un modelo de colas |
-| 10 | Flujos de trabajo: redes de flujo de trabajo, *soundness*, BPMN, *process mining* | BPMN, un motor de flujos de trabajo |
+| 10 | [Flujos de trabajo: redes de flujo de trabajo, *soundness*, BPMN, *process mining*](10-workflows/) | BPMN, un motor de flujos de trabajo |
 | 11 | Herramientas e interoperabilidad: PNML, TINA, LoLA, Snoopy, PIPE, CPN Tools, GreatSPN, TAPAAL | un formato de intercambio en XML |
 | 12 | Aplicaciones industriales: talleres flexibles, protocolos, hardware asíncrono, bioquímica, seguridad | |
 | 13 | Frente a otros formalismos: statecharts, álgebras de procesos, autómatas temporizados, TLA+ | TLA+, el model checking |

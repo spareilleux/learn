@@ -64,6 +64,151 @@ public static class Nets
         new Marking([1, 0, 0]));
 
     /// <summary>
+    /// Lesson 10: an order handled by a workflow net. One token enters at "in", the registration
+    /// splits the case into a credit check and a stock check that run at the same time (an AND
+    /// split), and the two are joined by a choice between shipping and cancelling (an XOR split
+    /// on the joined state). It is the shape almost every BPMN diagram has, and it is sound.
+    /// </summary>
+    public static PetriNet OrderSound() => new(
+        "order-sound",
+        [
+            new Place("in", "in"),
+            new Place("credit", "credit"),
+            new Place("stock", "stock"),
+            new Place("credit-done", "credit-done"),
+            new Place("stock-done", "stock-done"),
+            new Place("out", "out"),
+        ],
+        [
+            new Transition("register", "register"),
+            new Transition("check-credit", "check-credit"),
+            new Transition("check-stock", "check-stock"),
+            new Transition("ship", "ship"),
+            new Transition("cancel", "cancel"),
+        ],
+        [
+            new Arc("in", "register"),
+            new Arc("register", "credit"),
+            new Arc("register", "stock"),
+            new Arc("credit", "check-credit"),
+            new Arc("check-credit", "credit-done"),
+            new Arc("stock", "check-stock"),
+            new Arc("check-stock", "stock-done"),
+            new Arc("credit-done", "ship"),
+            new Arc("stock-done", "ship"),
+            new Arc("ship", "out"),
+            new Arc("credit-done", "cancel"),
+            new Arc("stock-done", "cancel"),
+            new Arc("cancel", "out"),
+        ],
+        new Marking(1, 0, 0, 0, 0, 0));
+
+    /// <summary>
+    /// Lesson 10: the same order, with the AND split joined by an XOR. Either branch alone ends
+    /// the case, so the other one is still running when the case is declared finished. This is the
+    /// commonest modelling error in BPMN, and the net names it: proper completion fails.
+    /// </summary>
+    public static PetriNet OrderAndXor() => new(
+        "order-and-xor",
+        [
+            new Place("in", "in"),
+            new Place("credit", "credit"),
+            new Place("stock", "stock"),
+            new Place("credit-done", "credit-done"),
+            new Place("stock-done", "stock-done"),
+            new Place("out", "out"),
+        ],
+        [
+            new Transition("register", "register"),
+            new Transition("check-credit", "check-credit"),
+            new Transition("check-stock", "check-stock"),
+            new Transition("finish-credit", "finish-credit"),
+            new Transition("finish-stock", "finish-stock"),
+        ],
+        [
+            new Arc("in", "register"),
+            new Arc("register", "credit"),
+            new Arc("register", "stock"),
+            new Arc("credit", "check-credit"),
+            new Arc("check-credit", "credit-done"),
+            new Arc("stock", "check-stock"),
+            new Arc("check-stock", "stock-done"),
+            new Arc("credit-done", "finish-credit"),
+            new Arc("finish-credit", "out"),
+            new Arc("stock-done", "finish-stock"),
+            new Arc("finish-stock", "out"),
+        ],
+        new Marking(1, 0, 0, 0, 0, 0));
+
+    /// <summary>
+    /// Lesson 10: the mirror error. The registration chooses one branch (an XOR split) and the
+    /// shipment waits for both (an AND join), so the case stops for ever one step short of the
+    /// sink. Option to complete fails, and "ship" is a dead transition.
+    /// </summary>
+    public static PetriNet OrderXorAnd() => new(
+        "order-xor-and",
+        [
+            new Place("in", "in"),
+            new Place("credit", "credit"),
+            new Place("stock", "stock"),
+            new Place("credit-done", "credit-done"),
+            new Place("stock-done", "stock-done"),
+            new Place("out", "out"),
+        ],
+        [
+            new Transition("register-credit", "register-credit"),
+            new Transition("register-stock", "register-stock"),
+            new Transition("check-credit", "check-credit"),
+            new Transition("check-stock", "check-stock"),
+            new Transition("ship", "ship"),
+        ],
+        [
+            new Arc("in", "register-credit"),
+            new Arc("register-credit", "credit"),
+            new Arc("in", "register-stock"),
+            new Arc("register-stock", "stock"),
+            new Arc("credit", "check-credit"),
+            new Arc("check-credit", "credit-done"),
+            new Arc("stock", "check-stock"),
+            new Arc("check-stock", "stock-done"),
+            new Arc("credit-done", "ship"),
+            new Arc("stock-done", "ship"),
+            new Arc("ship", "out"),
+        ],
+        new Marking(1, 0, 0, 0, 0, 0));
+
+    /// <summary>
+    /// Lesson 10: a review that can send the case back for rework, for ever. The net is sound —
+    /// from every reachable marking the case can still finish — and it has an infinite run in
+    /// which it never does. Soundness is "always possible", exactly as liveness was in lesson 4.
+    /// </summary>
+    public static PetriNet OrderRework() => new(
+        "order-rework",
+        [
+            new Place("in", "in"),
+            new Place("drafted", "drafted"),
+            new Place("reviewed", "reviewed"),
+            new Place("out", "out"),
+        ],
+        [
+            new Transition("draft", "draft"),
+            new Transition("review", "review"),
+            new Transition("rework", "rework"),
+            new Transition("approve", "approve"),
+        ],
+        [
+            new Arc("in", "draft"),
+            new Arc("draft", "drafted"),
+            new Arc("drafted", "review"),
+            new Arc("review", "reviewed"),
+            new Arc("reviewed", "rework"),
+            new Arc("rework", "drafted"),
+            new Arc("reviewed", "approve"),
+            new Arc("approve", "out"),
+        ],
+        new Marking(1, 0, 0, 0));
+
+    /// <summary>
     /// Lesson 1: one producer, one consumer, and a buffer of two slots. The place "free" holds
     /// the slots that are still empty; it is the whole reason the buffer cannot overflow.
     /// </summary>
@@ -954,6 +1099,10 @@ public static class Nets
         PipelineLifecycle(),
         Queue(5),
         TwoServers(),
+        OrderSound(),
+        OrderAndXor(),
+        OrderXorAnd(),
+        OrderRework(),
         ColouredNets.Retry().Unfold(),
     ];
 }

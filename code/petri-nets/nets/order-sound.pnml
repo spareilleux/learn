@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pnml xmlns="http://www.pnml.org/version-2009/grammar/pnml">
+  <net id="n1" type="http://www.pnml.org/version-2009/grammar/ptnet">
+    <name>
+      <text>order-sound</text>
+    </name>
+    <page id="page1">
+      <place id="in">
+        <name>
+          <text>in</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="credit">
+        <name>
+          <text>credit</text>
+        </name>
+      </place>
+      <place id="stock">
+        <name>
+          <text>stock</text>
+        </name>
+      </place>
+      <place id="credit-done">
+        <name>
+          <text>credit-done</text>
+        </name>
+      </place>
+      <place id="stock-done">
+        <name>
+          <text>stock-done</text>
+        </name>
+      </place>
+      <place id="out">
+        <name>
+          <text>out</text>
+        </name>
+      </place>
+      <transition id="register">
+        <name>
+          <text>register</text>
+        </name>
+      </transition>
+      <transition id="check-credit">
+        <name>
+          <text>check-credit</text>
+        </name>
+      </transition>
+      <transition id="check-stock">
+        <name>
+          <text>check-stock</text>
+        </name>
+      </transition>
+      <transition id="ship">
+        <name>
+          <text>ship</text>
+        </name>
+      </transition>
+      <transition id="cancel">
+        <name>
+          <text>cancel</text>
+        </name>
+      </transition>
+      <arc id="a1" source="in" target="register" />
+      <arc id="a2" source="register" target="credit" />
+      <arc id="a3" source="register" target="stock" />
+      <arc id="a4" source="credit" target="check-credit" />
+      <arc id="a5" source="check-credit" target="credit-done" />
+      <arc id="a6" source="stock" target="check-stock" />
+      <arc id="a7" source="check-stock" target="stock-done" />
+      <arc id="a8" source="credit-done" target="ship" />
+      <arc id="a9" source="stock-done" target="ship" />
+      <arc id="a10" source="ship" target="out" />
+      <arc id="a11" source="credit-done" target="cancel" />
+      <arc id="a12" source="stock-done" target="cancel" />
+      <arc id="a13" source="cancel" target="out" />
+    </page>
+  </net>
+</pnml>

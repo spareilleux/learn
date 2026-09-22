@@ -17,12 +17,13 @@ switch (lesson)
     case "l7": Lesson7(); break;
     case "l8": Lesson8(); break;
     case "l9": Lesson9(); break;
+    case "l10": Lesson10(); break;
     case "l14": Lesson14(); break;
     case "music": Music(); break;
     case "chat": Chat(); break;
     case "nets": WriteNets(args.Length > 1 ? args[1] : "out/nets"); break;
     default:
-        Console.Error.WriteLine($"Unknown lesson '{lesson}'. Try l1 to l9, l14, or nets.");
+        Console.Error.WriteLine($"Unknown lesson '{lesson}'. Try l1 to l10, l14, or nets.");
         return 2;
 }
 
@@ -679,6 +680,95 @@ void Lesson9()
     Console.WriteLine($"at the fast server: {Stochastic.Format(fast / (fast + slow))}");
     Console.WriteLine($"at the slow server: {Stochastic.Format(slow / (fast + slow))}");
 }
+
+// Lesson 10: a workflow net is a net with one way in and one way out, and soundness is the
+// property a business process is supposed to have. Both are decided here twice: once on the
+// three conditions themselves, and once through the short-circuit of van der Aalst's theorem.
+void Lesson10()
+{
+    var sound = Nets.OrderSound();
+    Title("An order, as a workflow net");
+    Console.Write(Report.Net(sound));
+
+    Title("What makes it a workflow net");
+    var endpoints = Workflow.Endpoints(sound, out var whyNot);
+    Console.WriteLine($"source: {sound.Places[endpoints!.Value.Source].Name}");
+    Console.WriteLine($"sink:   {sound.Places[endpoints.Value.Sink].Name}");
+    Console.WriteLine($"why not: {whyNot ?? "(it is one)"}");
+    Console.WriteLine($"short-circuited net adds: {Workflow.ShortCircuit(sound).Transitions[^1].Name}");
+
+    Title("Soundness, condition by condition");
+    PrintCheck(Workflow.Check(sound));
+
+    Title("An AND split joined by an XOR: the case ends while a branch is still running");
+    var andXor = Nets.OrderAndXor();
+    PrintCheck(Workflow.Check(andXor));
+
+    Title("An XOR split joined by an AND: the case stops one step short");
+    var xorAnd = Nets.OrderXorAnd();
+    PrintCheck(Workflow.Check(xorAnd));
+
+    Title("A rework loop: sound, and able to run for ever without finishing");
+    var rework = Nets.OrderRework();
+    PrintCheck(Workflow.Check(rework));
+    var graph = ReachabilityGraph.Build(rework);
+    var cycle = graph.CycleAvoiding(rework.TransitionIndex("approve"));
+    Console.WriteLine(cycle is null
+        ? "no cycle avoids approve"
+        : $"a cycle that never approves: {string.Join(" ", cycle.Value.Transitions.Select(x => rework.Transitions[x].Name))}");
+
+    Title("The same four verdicts through the short circuit");
+    // Van der Aalst 1997: a workflow net is sound exactly when the net short-circuited from the
+    // sink back to the source is live and bounded. Two routes, one answer, no shared code.
+    Console.WriteLine("net              sound?  live?  bounded?  live and bounded?  agree?");
+    foreach (var net in new[] { sound, andXor, xorAnd, rework })
+    {
+        var direct = Workflow.Check(net).IsSound;
+        var (live, bounded) = Workflow.ShortCircuitVerdict(net);
+        var theorem = live && bounded;
+        Console.WriteLine($"{net.Name,-17}{YesNo(direct),-8}{YesNo(live),-7}{YesNo(bounded),-10}{YesNo(theorem),-19}{YesNo(direct == theorem)}");
+    }
+
+    Title("What the short circuit is doing");
+    // The theorem is not a coincidence: t-star turns "the case can always finish" into "every
+    // transition can always fire again", which is liveness, and "nothing is left behind" into
+    // boundedness of a net that now loops for ever.
+    var shorted = Workflow.ShortCircuit(andXor);
+    var properties = Behaviour.Analyse(shorted);
+    Console.WriteLine($"{shorted.Name}: bound {properties.Bound?.ToString(CultureInfo.InvariantCulture) ?? "unbounded"}");
+    for (var i = 0; i < shorted.Transitions.Count; i++)
+        Console.WriteLine($"  {shorted.Transitions[i].Name,-16}{properties.TransitionLiveness[i]}");
+}
+
+void PrintCheck(WorkflowCheck check)
+{
+    Console.WriteLine($"net: {check.Net}");
+    if (!check.IsWorkflowNet)
+    {
+        Console.WriteLine($"  not a workflow net: {check.WhyNotAWorkflowNet}");
+        return;
+    }
+    Console.WriteLine($"  reachable markings:  {check.States}");
+    Console.WriteLine($"  option to complete:  {YesNo(check.OptionToComplete)}");
+    if (!check.FinalReachable)
+        Console.WriteLine("    the final marking is never reached, from anywhere");
+    else if (check.Stuck.Count > 0)
+        Console.WriteLine($"    stuck at: {Markings(check.Stuck)}");
+    Console.WriteLine($"  proper completion:   {YesNo(check.ProperCompletion)}");
+    if (check.Improper.Count > 0)
+        Console.WriteLine($"    finishes with something left: {Markings(check.Improper)}");
+    Console.WriteLine($"  no dead transitions: {YesNo(check.DeadTransitions.Count == 0)}");
+    if (check.DeadTransitions.Count > 0)
+        Console.WriteLine($"    never enabled: {string.Join(", ", check.DeadTransitions)}");
+    Console.WriteLine($"  sound: {YesNo(check.IsSound)}");
+}
+
+string YesNo(bool value) => value ? "yes" : "no";
+
+// Three markings are enough to show the shape of a counter-example; the rest is noise in a lesson.
+string Markings(IReadOnlyList<Marking> markings) =>
+    string.Join("; ", markings.Take(3).Select(m => m.ToString()))
+    + (markings.Count > 3 ? $"; and {markings.Count - 3} more" : "");
 
 // Lesson 14, on our own systems: the lock the Claude sessions of this repository take before a
 // heavy or a GPU job, in the two shell shapes it has been written in.

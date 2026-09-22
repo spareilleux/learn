@@ -88,7 +88,7 @@ That net has twelve reachable markings, it never deadlocks, and the place `free`
 | 7 | [Modelling concurrency: mutual exclusion, producer/consumer, readers/writers, philosophers](07-modelling-concurrency/) | `lock`, `SemaphoreSlim`, `Channel<T>`, `synchronized`, `ReentrantLock` |
 | 8 | [Coloured nets](08-coloured-nets/) | generics, a typed message |
 | 9 | [Time and probability: timed nets, stochastic nets, GSPN](09-time-and-probability/) | percentiles, a queueing model |
-| 10 | Workflows: workflow nets, soundness, BPMN, process mining | BPMN, a workflow engine |
+| 10 | [Workflows: workflow nets, soundness, BPMN, process mining](10-workflows/) | BPMN, a workflow engine |
 | 11 | Tools and interoperability: PNML, TINA, LoLA, Snoopy, PIPE, CPN Tools, GreatSPN, TAPAAL | an XML exchange format |
 | 12 | Industrial applications: manufacturing, protocols, asynchronous hardware, biochemistry, security | |
 | 13 | Against other formalisms: statecharts, process algebras, timed automata, TLA+ | TLA+, model checking |

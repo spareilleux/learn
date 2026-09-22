@@ -16,7 +16,7 @@ sidebar:
 - [x] Lesson 7 — Modelling concurrency
 - [x] Lesson 8 — Coloured nets
 - [x] Lesson 9 — Time and probability
-- [ ] Lesson 10 — Workflows
+- [x] Lesson 10 — Workflows
 - [ ] Lesson 11 — Tools and interoperability
 - [ ] Lesson 12 — Industrial applications
 - [ ] Lesson 13 — Against other formalisms
@@ -57,6 +57,9 @@ One warning before the table: unlike the [GA Lab](../../ga-lab/journal/), this c
 | Does colour shrink the state space? | No — it folds the model only | 4 places and 4 transitions at every attempt limit; the unfolding and the number of reachable markings both grow linearly, 8, 10, 14, 24, 44 markings for limits 2, 3, 5, 10, 20 | Confirmed, and it is the main point of lesson 8 (2026-09-17) |
 | Does the chain built from the net agree with the M/M/1/K formula? | To about 1e-12, since the net *is* that queue | The largest gap over the six states is 5.6e-17, five orders of magnitude under the 1e-12 the check asserts | Confirmed, and it is the only independent check the stochastic solver has (2026-09-22) |
 | Where does a finite queue sit when arrivals exactly match service? | Somewhere in the middle, with the ends less likely | **Uniform**: every length from 0 to 5 has probability 0.1667, empty as often as full | Refuted, and it became the more useful result: at load 1 there is no tendency at all (2026-09-22) |
+| Does soundness agree with the short circuit being live and bounded? | On all four workflow nets, since the theorem says so | Agreement on all four, and a parameterised test now fails if it breaks | Confirmed (2026-09-22) |
+| Is the short circuit of the AND-split-XOR-join net bounded but not live? | Bounded: nothing accumulates in a 1-safe process | **Unbounded**: the leftover token of each case accumulates through t-star without limit | Refuted, and it made the lesson: a token left behind and an unbounded short circuit are the same defect (2026-09-22) |
+| How many markings does an invoicing step after the join add? | Two, one per branch of the choice | **One**: the marking where the token sits in the new place | Refuted; a step in sequence adds one state whatever precedes it, only concurrency multiplies (2026-09-22) |
 
 ## 2026-09-15 — Lessons 1 to 4, and the analyser they run on
 
@@ -146,6 +149,20 @@ Two things fell out of writing it that I did not plan. First, the lesson's own c
 Little's law is used as a third, independent check rather than as a result: it holds for every stable system without assumptions, so if the chain violated it the chain would be wrong.
 
 `check.sh` now runs `l9` and compares it with `expected/l9.txt`. 57 tests pass, and `l1` to `l9`, `l14`, `music`, `chat` and `nets` all match.
+
+## 2026-09-22 — Lesson 10, and soundness decided twice
+
+Lesson 10 adds `Workflow.cs`: the structural check for a workflow net, the three soundness conditions, and the short circuit of van der Aalst's theorem. The theorem is what makes the lesson worth writing — soundness is decided once on its own conditions and once as "the short-circuited net is live and bounded", by code from lesson 4 that knows nothing about processes, and a parameterised test fails if the two ever disagree on the four example nets.
+
+Two things I did not expect, both now in the lesson.
+
+The first is that `order-and-xor` — the AND split joined by an XOR, which is the commonest error in drawn processes — does not merely get stuck sometimes. Its final marking is **unreachable from anywhere**: the correct end state does not exist in the net at all. Every task can still run, so a test suite that exercises each task passes on a process that can never finish correctly. The report was changed to say that in one line rather than list all ten markings as "stuck", which was true and useless.
+
+The second is that its short circuit is **unbounded**. I expected "bounded but not live". The leftover token of each case accumulates through `t-star` without limit, which means "proper completion fails" and "the short circuit is unbounded" are the same defect counted once per case or counted for ever. The mirror net, `order-xor-and`, is bounded and not live — so the two halves of the theorem are each needed by one of the two example failures, which is a better demonstration than I had planned.
+
+I also got an exercise wrong before checking it. Adding an invoicing step after the join, I predicted the marking count would go from 6 to 8; the analyser said 7. A step in sequence adds one marking whatever precedes it, because only concurrency multiplies. The wrong prediction is published with the right answer, and the reason is now the point of the exercise.
+
+`check.sh` runs `l10`; 66 tests pass and l1 to l10, l14, music, chat and nets all match.
 
 ## To verify
 
