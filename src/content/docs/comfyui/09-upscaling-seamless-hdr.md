@@ -127,7 +127,7 @@ The deeper files hold the same 256 levels. A 16-bit PNG or a float EXR is useful
 Two traps:
 
 - `LatentOperationTonemapReinhard`, found by searching "hdr latent", tone-maps [the guidance vector](https://github.com/Comfy-Org/ComfyUI/blob/ee71d5c4993f29086b27fde1629a945ae48425bf/comfy_extras/nodes_latent.py#L373-L407), to tame high CFG. It makes no HDR pixels.
-- On Windows `LoadImage` doesn't list `.exr` files: Python's `mimetypes` has no type for them, so [the filter](https://github.com/Comfy-Org/ComfyUI/blob/ee71d5c4993f29086b27fde1629a945ae48425bf/folder_paths.py#L229-L253) drops them. Linux and macOS depend on the system's MIME database: *to verify*.
+- **`LoadImage` may not list the EXR it just saved, and that depends on the machine.** [The filter](https://github.com/Comfy-Org/ComfyUI/blob/ee71d5c4993f29086b27fde1629a945ae48425bf/folder_paths.py#L229-L253) asks Python's `mimetypes` for each file's type and keeps those that start with `image`, and `mimetypes` reads the operating system's table: the registry on Windows, files such as `/etc/mime.types` elsewhere. Measured by [`data/mime-info.py`](https://github.com/spareilleux/learn/blob/main/code/comfyui/data/mime-info.py) on three machines, all with Python 3.13: on this Windows machine and on the `macos-latest` runner, `.exr` has **no** MIME type, so the list drops it; on the `ubuntu-latest` runner it is `image/aces`, and the list keeps it. The same ComfyUI, the same workflow, a different list. `.glb` splits the same way, and `.flac` is `audio/flac` on that Linux and `audio/x-flac` on the other two — both start with `audio`, so that one changes nothing. If you must reload an EXR, pass it by path from your own node or add the type to the machine.
 
 ### In three.js
 
