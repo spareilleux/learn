@@ -65,12 +65,18 @@ offline() {
   } > out/03-workflows.txt 2>&1
   compare 03-workflows
 
-  # Lesson 13: normal and roughness maps from a tileable pattern, with NumPy and Pillow (ComfyUI's requirements)
   py=${COMFYUI_PYTHON:-${PYTHON:-python}}
 
   # Lesson 9: which files LoadImage and LoadVideo can list depends on the machine's
   # MIME table, not on ComfyUI. Printed on each OS, not compared.
   PYTHONDONTWRITEBYTECODE=1 "$py" data/mime-info.py
+
+  # Lesson 6: four machines gave four hashes for the same Canny node. This prints a
+  # hash per step of Kornia's filter, on a pattern that is identical everywhere, so
+  # the step where they part company can be read from the logs. Information only.
+  PYTHONDONTWRITEBYTECODE=1 "$py" data/canny-steps.py
+
+  # Lesson 13: normal and roughness maps from a tileable pattern, with NumPy and Pillow (ComfyUI's requirements)
   mkdir -p out/textures
   {
     PYTHONDONTWRITEBYTECODE=1 "$py" textures/test_maps.py 2>&1 | grep -v "^Ran "
