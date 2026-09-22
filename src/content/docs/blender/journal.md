@@ -117,7 +117,7 @@ The same two objects, a metronome and a gramophone, were made twice: generated f
 
 ## 2026-09-22 — Occlusion baked into vertices, and telling a real effect from a darker one
 
-The question came from another page of this project, the [Banc de Placement](../artifacts/#banc-de-placement): a room drawn by a hand-written WebGL2 renderer — a guitar, a desk, a rug, six point lights — where nothing quite sits on anything. Would occlusion baked in Blender and shipped as one byte per vertex be worth its weight in a page? Nothing in that page was changed: the bake, the patched shader and the three measurements below all ran on a local copy.
+The question came from another page of this project, the [Banc de Placement](../../artifacts/#banc-de-placement): a room drawn by a hand-written WebGL2 renderer — a guitar, a desk, a rug, six point lights — where nothing quite sits on anything. Would occlusion baked in Blender and shipped as one byte per vertex be worth its weight in a page? Nothing in that page was changed: the bake, the patched shader and the three measurements below all ran on a local copy.
 
 **The bake.** A headless capture of the page wrote out its draw calls — 803 draws over 518 meshes — of which 220 never move. Those were rebuilt in Blender and baked with Cycles into a point color attribute, `bpy.ops.object.bake(type="AO", target="VERTEX_COLORS")`: 21,533 vertices, 25.9 s for the ambient occlusion pass and 24.4 s for the indirect one. One byte per vertex is 21,533 bytes; carried as base64 inside the page's JSON it is 39,856. A patched copy of the page binds it as a vertex attribute and multiplies one term of its shader by it.
 
