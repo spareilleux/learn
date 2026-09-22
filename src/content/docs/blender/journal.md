@@ -43,18 +43,16 @@ sidebar:
 
 ## 2026-09-17 — Models generated in ComfyUI, cleaned in Blender
 
-The request: real 3D models from ComfyUI, brought into Blender and shown here with what went wrong. Atlas, another working session of this project, generated a metronome and a gramophone with ComfyUI (see the [ComfyUI course](../../comfyui/)), in two steps:
+The request: real 3D models from ComfyUI, brought into Blender and shown here with what went wrong. The generation is the work of Atlas, another working session of this project, with its script `objets.py` (not published): it made a metronome and a gramophone with ComfyUI (see the [ComfyUI course](../../comfyui/)), in two steps:
 
 1. [SDXL base 1.0](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0) drew each object alone on a white background, seen three-quarters from slightly above: 1024 × 1024 px, 30 steps, CFG 6.5, `dpmpp_2m` with the `karras` scheduler, seeds 5101 (metronome) and 5110 (gramophone).
 2. [Hunyuan3D 2.0](https://github.com/Tencent-Hunyuan/Hunyuan3D-2), with the fp16 weights repackaged by Comfy-Org ([`hunyuan3d-dit-v2_fp16`](https://huggingface.co/Comfy-Org/hunyuan3D_2.0_repackaged)) and ComfyUI's native nodes ([Comfy's tutorial](https://docs.comfy.org/tutorials/3d/hunyuan3D-2)), turned each image into a mesh: `ImageOnlyCheckpointLoader` → `CLIPVisionEncode` (crop `center`) → `Hunyuan3Dv2Conditioning` → `EmptyLatentHunyuan3Dv2` (resolution 3072) → `KSampler` (30 steps, CFG 5, `euler`/`normal`, seed 7) → `VAEDecodeHunyuan3D` (8000 chunks, octree resolution 380) → `VoxelToMesh` (surface net, threshold 0.6) → `SaveGLB`. ComfyUI v0.36.0.
 
-The Hunyuan3D 2.0 license states that it doesn't apply in the European Union, the United Kingdom and South Korea. Only renders of the models are published here; the `.glb` files stay out of the repository.
+The Hunyuan3D 2.0 license doesn't apply in the European Union, the United Kingdom and South Korea, and its clause 5.c forbids displaying outputs outside that territory. This site can be read there, so neither the models nor renders of them are published here: the findings below are described in words.
 
-Blender then ran [`scripts/glb_pipeline.py`](https://github.com/spareilleux/learn/blob/9480173/code/blender/scripts/glb_pipeline.py) in the background on each file. It merges vertices by distance, removes floating parts, recalculates normals, scales to a real size, decimates, reports the mesh before and after, renders a Cycles turntable, exports a `.glb` with modifiers applied, and reads it back. CI runs it on a small pick built in `bpy`, with the flaws of a generated mesh (`scripts/pipeline_check.py`), with and without a voxel remesh: the reports, remesh included, were identical on the three runners.
+The cleanup pipeline was written for this course by L2, the session that writes it. Blender ran [`scripts/glb_pipeline.py`](https://github.com/spareilleux/learn/blob/9480173/code/blender/scripts/glb_pipeline.py) in the background on each file. It merges vertices by distance, removes floating parts, recalculates normals, scales to a real size, decimates, reports the mesh before and after, renders a Cycles turntable, exports a `.glb` with modifiers applied, and reads it back. CI runs it on a small pick built in `bpy`, with the flaws of a generated mesh (`scripts/pipeline_check.py`), with and without a voxel remesh: the reports, remesh included, were identical on the three runners.
 
-![Metronome, left to right: the SDXL image; the mesh after the first cleanup, with the dial and pendulum turned into relief and a rough surface; after a 1.2 mm voxel remesh, smoother, with the same relief; the back after remeshing, a flat face the image never showed](../../../assets/blender/comfy3d-metronome.webp)
-
-![Gramophone, left to right: the SDXL image, with a floor line under the cabinet; the mesh after the first cleanup, its horn full of torn triangles and a slab under the cabinet; after a 3 mm voxel remesh, a closed horn, with a few fragments of the slab left on the ground; the side view after remeshing](../../../assets/blender/comfy3d-gramophone.webp)
+What the turntable renders showed. The metronome kept its pyramid, its base and its winding key; the dial, the scale markings and the pendulum of the image came out as relief on the front face, with a rough surface before the remesh and a smoother one after. The gramophone's horn was full of torn triangles before the remesh and closed after it, and a slab under the cabinet broke into a few fragments.
 
 What the reports said:
 
