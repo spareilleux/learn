@@ -6,4 +6,8 @@
   <ItemGroup>
     <ProjectReference Include="../PetriNets/PetriNets.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <!-- The firing rule TLC reads. Generated modules instantiate it, so it travels next to them. -->
+    <Content Include="../tla/PetriNet.tla" Link="tla/PetriNet.tla" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
 </Project>

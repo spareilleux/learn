@@ -19,7 +19,7 @@ sidebar:
 - [x] Leçon 10 — Workflows
 - [x] Leçon 11 — Outils et interopérabilité
 - [x] Leçon 12 — Applications industrielles
-- [ ] Leçon 13 — Face aux autres formalismes
+- [x] Leçon 13 — Face aux autres formalismes
 - [x] Leçon 14 — Sur nos propres systèmes
 - [ ] Leçon 15 — Limites et suite
 
@@ -39,6 +39,7 @@ Ce cours enseigne un formalisme et tourne sur un analyseur que j'ai écrit, il n
 | `{x, y}` est encore un siphon minimal une fois que les deux fils prennent `x` d'abord | Il n'est plus minimal : `{y}` seule devient un siphon, et `x` se trouve dans `{a_has_x, b_has_x, x}` | Leçon 6, exercice 1 | `two-locks-ordered` a 4 siphons minimaux, tous avec une trappe marquée | Corrigé avant publication, et la prédiction fausse est publiée avec la bonne réponse (2026-09-17) |
 | Le siphon sans trappe dans un verrou jamais relâché est `{critical1, critical2, mutex}` | Il y en a deux, `{idle1}` et `{critical2, mutex}` ; `{critical1}` se révèle être une trappe | Leçon 7, exercice 2 | `Report.Siphons(mutual-exclusion-leaky)` | Corrigé avant publication (2026-09-17) |
 | L'arbre de couverture d'un petit réseau borné est calculable | `CoverabilityTree.Build(Nets.Kanban(1))`, un réseau à 160 marquages accessibles, ne revient pas : plafonné à 2 Gio il lève `OutOfMemoryException` au bout de 15,5 s, sans plafond il a atteint 35,7 Go et douze minutes de CPU | [`CoverabilityTree.cs`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/PetriNets/CoverabilityTree.cs) | 160 marquages, aucun résultat ; l'arbre ne fusionne jamais deux branches arrivant au même marquage, donc sa taille suit le nombre de chemins | Ni un défaut ni corrigeable : la leçon 12 imprime deux colonnes de bornes au lieu de trois, et dit pourquoi (2026-09-22) |
+| Un model checker dit quand il n'a rien vérifié | TLC avec une contrainte d'état qui exclut le marquage initial imprime `Model checking completed. No error has been found.` et `0 distinct states found`, sans aucune ligne le distinguant d'une exécution complète | `tla2tools.jar` 2.19, [outils TLA+](https://github.com/tlaplus/tlaplus) | `queue_5.tla` avec `Cap == 2` face à un marquage initial de 5 jetons : 1 état engendré, 0 distinct, sortie 0 | Reproduit le 2026-09-22 ; non remonté en amont — le remonter demande l'accord de l'auteur. La leçon dérive le plafond des invariants de places à la place (2026-09-22) |
 
 ## Expériences
 
@@ -66,6 +67,10 @@ Un avertissement avant le tableau : contrairement au [GA Lab](../../ga-lab/journ
 | Un réseau Kanban rebâti à partir de sa description publiée donne-t-il la réponse du concours ? | Oui si la modélisation est juste ; c'est un test plus dur que lire le fichier du concours | 2 546 432 marquages et 24 460 016 arcs pour cinq cartes, exactement les nombres publiés | Confirmée : c'est la modélisation qui est validée, pas seulement le lecteur PNML (2026-09-22) |
 | Combien d'invariants de places a le réseau Kanban ? | Quatre, un par cellule | **Six** : les cellules 2 et 3 sont synchronisées, donc deux sommes croisées sont conservées aussi, et les invariants à support minimal ne forment pas une base d'espace vectoriel | Réfutée, et l'exercice demande au lecteur de dériver les deux de plus (2026-09-22) |
 | Où s'arrête l'énumération explicite, et qu'est-ce qui l'arrête ? | Vers dix millions de marquages, et ce sont les marquages | Ce sont les **arcs** : 3,4 M de marquages avec 13,6 M d'arcs passent, 11,5 M de marquages avec 1,2 milliard d'arcs lèvent `OutOfMemoryException` sur un tas de 8 Gio après 158 s | Réfutée dans sa cause ; `tedd` fait la même instance en 2,3 s parce qu'un diagramme de décision ne stocke pas d'arcs (2026-09-22) |
+| Un model checker écrit par d'autres trouve-t-il les mêmes espaces d'états ? | Oui sur les petits réseaux ; un décalage d'étiquetage quelque part ne m'étonnerait pas | **22 réseaux à espace d'états fini, trois nombres chacun, tous identiques** : les états distincts, états engendrés et profondeur de TLC égalent les marquages, les arcs + 1 et le plus long des plus courts chemins + 1 | Confirmée, sur une traduction dont le générateur ne contient aucune logique (2026-09-22) |
+| Le seul marquage atteint par deux transitions différentes casse-t-il `états engendrés = arcs + 1` ? | Oui : la relation de transition de TLA+ est un ensemble d'états, donc `order-sound` devrait imprimer 7 là où l'analyseur a 8 arcs | Il imprime 8. TLC compte un état engendré par disjoint évalué, pas par successeur conservé | Réfutée, et la raison est la différence entre un graphe étiqueté et une relation de transition (2026-09-22) |
+| Une contrainte d'état choisie à la main annonce-t-elle ce qu'elle a tronqué ? | Elle rapporte au moins un espace d'états plus petit | **Rien du tout** : un plafond sous le marquage initial donne `0 distinct states found` sous `No error has been found` | Réfutée ; c'est pour cela que le plafond de la leçon vient de `Invariants.PlaceBounds` (2026-09-22) |
+| Les réseaux que les invariants de places ne bornent pas sont-ils ceux sans espace d'états fini ? | Oui, c'est à cela que sert un invariant | Non : `handshake` n'a aucun invariant sur toutes ses places et exactement un marquage, parce qu'il est mort dès le départ | Réfutée avant publication par `TlaTests` ; un invariant de places prouve la bornitude et ne la réfute jamais (2026-09-22) |
 
 ## 2026-09-15 — Leçons 1 à 4, et l'analyseur qui les fait tourner
 
@@ -198,8 +203,29 @@ Deux choses que j'avais fausses, toutes deux publiées dans la leçon avec la r�
 
 Et une chose que la leçon a trouvée dans le code de ce dépôt : `CoverabilityTree.Build` ne termine pas utilement sur `kanban-1`, un réseau à **160 marquages accessibles**. Plafonné à 2 Gio il lève au bout de 15,5 s ; sans plafond il a atteint 35,7 Go et douze minutes de CPU sans revenir. Ce n'est pas un bogue — l'arbre ne fusionne jamais les branches, donc sa taille suit le nombre de chemins — mais cela veut dire que l'outil de la leçon 3 est inutilisable sur quoi que ce soit d'industriel, et la leçon le dit au lieu d'imprimer une troisième colonne.
 
+## 2026-09-22 — Leçon 13, et un espace d'états calculé deux fois
+
+La leçon 12 a emprunté les réponses des autres. La leçon 13 emprunte leur moteur : les 25 réseaux sont écrits en modules TLA+ et confiés à [TLC](https://github.com/tlaplus/tlaplus), qui énumère les mêmes espaces d'états depuis l'autre bord.
+
+La traduction tient finalement en une phrase. Faites de l'unique variable TLA+ une fonction des places vers les naturels et un état *est* un marquage ; la règle de franchissement tient alors en six lignes, écrites une fois à la main dans `tla/PetriNet.tla`, et `Tla.cs` ne génère que le réseau. Rien dans le générateur ne contient de logique, et c'est la seule raison pour laquelle sa sortie vaut la peine d'être comparée.
+
+TLC termine sur trois nombres. Avant d'en lancer un seul j'ai écrit ce que chacun devait valoir : états distincts = marquages, états engendrés = arcs + 1, profondeur = plus long des plus courts chemins + 1. **Vingt-deux réseaux à espace d'états fini, soixante-six nombres, aucun désaccord.**
+
+Deux des trois paris étaient justes pour la mauvaise raison, et la leçon garde les deux.
+
+`order-sound` est le seul réseau où deux transitions mènent d'un marquage au même marquage — `ship` et `cancel`. Le graphe d'un réseau de Petri est étiqueté et celui de TLA+ ne l'est pas, donc ce pas aurait dû disparaître du compte de TLC : 8 contre 7. C'est 8 contre 8, parce que TLC compte un état engendré par **disjoint évalué**, pas par successeur conservé. La règle survit à la collision par accident, et l'accident *est* la différence entre les formalismes : demandez ce qui peut arriver ensuite et TLA+ répond par des états, demandez ce qui peut arriver et un réseau répond par des transitions.
+
+La première exécution s'est arrêtée tôt sur `retry` — trois marquages sur huit — et sur `pipeline-lifecycle`. Pas un bogue de traduction : TLC appelle interblocage un état sans successeur et s'arrête, parce qu'une spécification TLA+ décrit quelque chose qui tourne pour toujours. Le marquage final d'un réseau de workflow est cet état, et la leçon 10 passe sa longueur à définir la solidité comme le fait de l'atteindre. `CHECK_DEADLOCK FALSE` est l'endroit où les deux formalismes ne s'accordent pas sur le fait que les systèmes finissent.
+
+Puis le nombre qui devrait inquiéter quiconque a déjà choisi une borne à la main. Mettez le plafond de `queue-5` à 2 — son marquage initial porte cinq jetons — et TLC jette l'état initial, ne vérifie rien, et imprime `Model checking completed. No error has been found.` avec `0 distinct states found`. Aucune ligne de cette sortie ne la distingue d'une exécution complète. C'est pour cela que le plafond de cette leçon est `Invariants.PlaceBounds`, et que la leçon imprime lesquels des quatre réseaux en ont reçu un qu'elle n'a pas su prouver.
+
+Et une affirmation de moi que les tests ont réfutée avant publication : j'avais écrit que les quatre réseaux que les invariants ne bornent pas sont les quatre sans graphe d'accessibilité fini. `handshake` n'a aucun invariant sur toutes ses places et exactement **un** marquage, parce qu'il est mort dès le départ. Un invariant de places prouve la bornitude et ne la réfute jamais.
+
+Statecharts, algèbres de processus et automates temporisés sont comparés en prose et signalés comme non exécutés. La seule chose à retenir est le compromis qu'ils font tous : une algèbre de processus compose, `P | Q` est un terme, et on peut raisonner sur `P` seul — alors qu'un réseau doit exister en entier avant qu'un siphon, une trappe ou un invariant ne veuille dire quoi que ce soit. C'est précisément pourquoi le réseau Kanban de la leçon 12 a dû être rebâti en entier plutôt qu'assemblé à partir de quatre copies d'une cellule.
+
 ## À vérifier
 
+- Rien dans les sections statecharts, algèbres de processus et automates temporisés de la leçon 13 n'a été exécuté. Aucun modèle UPPAAL n'a été construit et aucun graphe de classes d'états TINA calculé ; les références Harel et Milner sont confirmées par Crossref mais sont derrière un péage et non lues.
 - La littérature sur FMS annonce bien moins d'états que le concours pour le même modèle, parce que les comptes publiés sont les marquages *tangibles* d'un réseau stochastique généralisé alors que `FMS-PT-*` est un réseau P/T ordinaire. Les nombres précis sont cités de mémoire dans mes notes et ne figurent dans aucune leçon tant qu'une source n'a pas été lue.
 - La grammaire des réseaux P/T ne fait pas partie des fichiers RELAX NG publiés sur pnml.org, donc le PNML de l'analyseur n'a jamais été validé contre un schéma. `pnmlcoremodel.rng` existe et vérifierait la structure ; les spécificités P/T passent à travers sa règle `anyElement`.
 - Hack 1972, la source du théorème de Commoner, est en accès libre et illisible par une requête automatisée. Le lire dans un navigateur permettrait à la leçon 6 de citer le théorème plutôt que de paraphraser une paraphrase.
@@ -209,6 +235,7 @@ Et une chose que la leçon a trouvée dans le code de ce dépôt : `Coverability
 
 ## Questions ouvertes
 
+- La leçon 13 ne confie à TLC que l'espace d'états : le `.cfg` généré a une ligne `INVARIANT` et aucune ligne `PROPERTY`, donc aucune formule temporelle sous équité n'a été vérifiée. `[]<>Enabled(t) => []<>t` est ce que demande la question de famine de la leçon 7, et TLC y répondrait. Reste indécidé s'il faut générer des conditions d'équité par réseau, ou écrire un module à la main pour le seul réseau où la famine est le sujet.
 - La force brute sur les sous-ensembles de places plafonne l'analyseur à vingt places. Six philosophes prenant une fourchette à la fois en ont vingt-quatre, donc le verdict structurel ne peut pas être calculé pour le plus gros réseau du tableau de la leçon 7 elle-même. Une formulation pour solveur de contraintes réglerait cela et rendrait le cours dépendant d'un solveur.
 - Les réseaux colorés de la leçon 8 lient une variable par transition. Une transition qui joint deux messages a besoin d'un tuple, et le dépliage croîtrait comme un produit. La leçon 12 a contourné la question — le concours livre chaque modèle déjà déplié en P/T — donc elle reste ouverte, et la leçon 15 est le dernier endroit où y répondre.
 - La leçon 9 a enseigné le formalisme stochastique, ce qui laisse ouvert le déterministe : un réseau de Petri temporel au sens de Merlin, où une transition porte un intervalle plutôt qu'un taux, n'a pas de chaîne de Markov derrière lui et demande une construction par classes d'états que l'analyseur n'a pas. Reste indécidé si la leçon 13 en construit une ou confie le modèle à TINA, qui fait exactement cela.

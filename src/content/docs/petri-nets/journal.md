@@ -19,7 +19,7 @@ sidebar:
 - [x] Lesson 10 — Workflows
 - [x] Lesson 11 — Tools and interoperability
 - [x] Lesson 12 — Industrial applications
-- [ ] Lesson 13 — Against other formalisms
+- [x] Lesson 13 — Against other formalisms
 - [x] Lesson 14 — On our own systems
 - [ ] Lesson 15 — Limits and what comes next
 
@@ -39,6 +39,7 @@ This course teaches a formalism and runs on an analyser I wrote, so there is no 
 | `{x, y}` is still a minimal siphon once both threads take `x` first | It is not minimal any more: `{y}` alone becomes a siphon, and `x` sits in `{a_has_x, b_has_x, x}` | Lesson 6, exercise 1 | `two-locks-ordered` has 4 minimal siphons, all with a marked trap | Corrected before publication, and the wrong prediction is published with the right answer (2026-09-17) |
 | The siphon with no trap in a lock that is never released is `{critical1, critical2, mutex}` | There are two, `{idle1}` and `{critical2, mutex}`; `{critical1}` turns out to be a trap | Lesson 7, exercise 2 | `Report.Siphons(mutual-exclusion-leaky)` | Corrected before publication (2026-09-17) |
 | The coverability tree of a small bounded net is computable | `CoverabilityTree.Build(Nets.Kanban(1))`, a net with 160 reachable markings, does not return: capped at 2 GiB it throws `OutOfMemoryException` after 15.5 s, uncapped it reached 35.7 GB and twelve minutes of CPU | [`CoverabilityTree.cs`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/PetriNets/CoverabilityTree.cs) | 160 markings, no result; the tree never merges two branches reaching the same marking, so its size follows the number of paths | Not a defect and not fixable: lesson 12 prints two bound columns instead of three, and says why (2026-09-22) |
+| A model checker says when it checked nothing | TLC with a state constraint that excludes the initial marking prints `Model checking completed. No error has been found.` and `0 distinct states found`, with no line distinguishing it from a complete run | `tla2tools.jar` 2.19, [TLA+ tools](https://github.com/tlaplus/tlaplus) | `queue_5.tla` with `Cap == 2` against an initial marking of 5 tokens: 1 state generated, 0 distinct, exit 0 | Reproduced on 2026-09-22; not reported upstream — reporting it needs the author's go-ahead. The lesson derives the cap from the place invariants instead (2026-09-22) |
 
 ## Experiments
 
@@ -66,6 +67,10 @@ One warning before the table: unlike the [GA Lab](../../ga-lab/journal/), this c
 | Does a Kanban net rebuilt from its published description give the contest's answer? | Yes if the modelling is right; this is a harder test than reading the contest's file | 2 546 432 markings and 24 460 016 arcs for five cards, exactly the published numbers | Confirmed: the modelling is validated, not only the PNML reader (2026-09-22) |
 | How many place invariants does the Kanban net have? | Four, one per cell | **Six**: cells 2 and 3 are synchronised, so two crossed sums are conserved too, and minimal-support invariants are not a vector-space basis | Refuted, and the exercise asks the reader to derive the two extra ones (2026-09-22) |
 | Where does explicit enumeration stop, and what stops it? | Around ten million markings, and it is the markings | It is the **arcs**: 3.4 M markings with 13.6 M arcs fits, 11.5 M markings with 1.2 billion arcs throws `OutOfMemoryException` at an 8 GiB heap after 158 s | Refuted in its cause; `tedd` does the same instance in 2.3 s because a decision diagram stores no arcs (2026-09-22) |
+| Does a model checker written by other people find the same state spaces? | Yes on the small nets; a labelling mismatch somewhere would not surprise me | **22 nets with a finite state space, three numbers each, all identical**: TLC's distinct states, states generated and depth equal markings, arcs + 1 and longest-shortest-path + 1 | Confirmed, on a translation whose generator contains no logic (2026-09-22) |
+| Does the one marking reachable by two different transitions break `states generated = arcs + 1`? | Yes: TLA+'s next-state relation is a set of states, so `order-sound` should print 7 where the analyser has 8 arcs | It prints 8. TLC counts one state generated per disjunct it evaluates, not per successor it keeps | Refuted, and the reason is the difference between a labelled graph and a transition relation (2026-09-22) |
+| Does a state constraint chosen by hand announce what it truncated? | It at least reports a smaller state space | **Nothing at all**: a cap below the initial marking gives `0 distinct states found` under `No error has been found` | Refuted; the cap in the lesson comes from `Invariants.PlaceBounds` because of it (2026-09-22) |
+| Are the nets the place invariants fail to bound the nets with no finite state space? | Yes, that is what an invariant is for | No: `handshake` has no invariant over every place and exactly one marking, because it is dead on arrival | Refuted before publication by `TlaTests`; a place invariant proves boundedness and never disproves it (2026-09-22) |
 
 ## 2026-09-15 — Lessons 1 to 4, and the analyser they run on
 
@@ -198,8 +203,29 @@ Two things I got wrong, both published in the lesson with the measured answer. I
 
 And one thing the lesson found in this repository's own code: `CoverabilityTree.Build` does not terminate usefully on `kanban-1`, a net with **160 reachable markings**. Capped at 2 GiB it throws after 15.5 s; uncapped it reached 35.7 GB and twelve minutes of CPU without returning. It is not a bug — the tree never merges branches, so its size follows the number of paths — but it means lesson 3's tool is unusable on anything industrial, and the lesson says so instead of printing a third column.
 
+## 2026-09-22 — Lesson 13, and a state space computed twice
+
+Lesson 12 borrowed other people's answers. Lesson 13 borrows their engine: all 25 nets are written out as TLA+ modules and handed to [TLC](https://github.com/tlaplus/tlaplus), which enumerates the same state spaces from the other side.
+
+The translation turned out to be one sentence long. Make the single TLA+ variable a function from places to naturals and a state *is* a marking; the firing rule then fits in six lines, hand-written once in `tla/PetriNet.tla`, and `Tla.cs` generates only the net. Nothing in the generator contains logic, which is the only reason its output is worth comparing.
+
+TLC finishes with three numbers. Before running any of them I wrote down what each should equal: distinct states = markings, states generated = arcs + 1, depth = longest shortest path + 1. **Twenty-two nets with a finite state space, sixty-six numbers, no disagreement.**
+
+Two of the three predictions were right for the wrong reason, and the lesson keeps both.
+
+`order-sound` is the one net where two transitions lead from a marking to the same marking — `ship` and `cancel`. A Petri net's graph is labelled and TLA+'s is not, so that step should have gone missing from TLC's count: 8 against 7. It is 8 against 8, because TLC counts one state generated per **disjunct it evaluates**, not per successor it keeps. The rule survives the collision by accident, and the accident is the difference between the formalisms: ask what can happen next and TLA+ answers with states, ask what can happen and a net answers with transitions.
+
+The first run stopped early on `retry` — three markings out of eight — and on `pipeline-lifecycle`. Not a translation bug: TLC calls a state with no successor a deadlock and halts, because a TLA+ specification describes something that runs for ever. A workflow net's final marking is that state, and lesson 10 spends its length defining soundness as reaching it. `CHECK_DEADLOCK FALSE` is where the two formalisms disagree about whether systems end.
+
+Then the number that should worry anyone who has ever picked a bound by hand. Set `queue-5`'s cap to 2 — its initial marking holds five tokens — and TLC discards the initial state, checks nothing, and prints `Model checking completed. No error has been found.` with `0 distinct states found`. There is no line in that output to distinguish it from a complete run. That is why the cap in this lesson is `Invariants.PlaceBounds`, and why the lesson prints which four nets got one it could not prove.
+
+And a claim of mine the tests refuted before publication: I wrote that the four nets the invariants do not bound are the four with no finite reachability graph. `handshake` has no invariant over every place and exactly **one** marking, because it is dead on arrival. A place invariant proves boundedness and never disproves it.
+
+Statecharts, process algebras and timed automata are compared in prose and marked as not run. The one thing worth carrying forward is the trade they all make: a process algebra composes, `P | Q` is a term, and you may reason about `P` alone — while a net must exist in full before a siphon, a trap or an invariant means anything. That is precisely why lesson 12's Kanban net had to be rebuilt whole rather than assembled from four copies of one cell.
+
 ## To verify
 
+- Nothing in lesson 13's statechart, process algebra and timed automaton sections was run. No UPPAAL model was built and no TINA state-class graph was computed; the Harel and Milner references are confirmed through Crossref but are behind paywalls and unread.
 - The FMS literature reports far fewer states than the contest does for the same model, because the published counts are the *tangible* markings of a generalized stochastic net and `FMS-PT-*` is an ordinary P/T net. The specific numbers are quoted from memory in my notes and are not in any lesson until a source is read.
 - The P/T net grammar is not among the RELAX NG files published at pnml.org, so the analyser's PNML has never been validated against a schema. `pnmlcoremodel.rng` is there and would check the structure; the P/T specifics fall through its `anyElement` rule.
 - Hack 1972, the source of Commoner's theorem, is open access and unreadable to an automated fetch. Reading it in a browser would let lesson 6 quote the theorem rather than paraphrase a paraphrase.
@@ -209,6 +235,7 @@ And one thing the lesson found in this repository's own code: `CoverabilityTree.
 
 ## Open questions
 
+- Lesson 13 hands TLC the state space and nothing else: the generated `.cfg` has an `INVARIANT` line and no `PROPERTY` line, so no temporal formula under fairness has been checked. `[]<>Enabled(t) => []<>t` is what lesson 7's starvation question asks, and TLC would answer it. Whether to generate fairness conditions per net, or to write one module by hand for the one net where starvation is the point, is undecided.
 - The brute force over subsets of places caps the analyser at twenty places. Six philosophers taking one fork at a time have twenty-four, so the structural verdict cannot be computed for the largest net in lesson 7's own table. A constraint-solver formulation would fix it and would make the course depend on a solver.
 - The coloured nets of lesson 8 bind one variable per transition. A transition joining two messages needs a tuple, and the unfolding would grow as a product. Lesson 12 sidestepped this — the contest ships every model already unfolded to P/T — so the question is still open, and lesson 15 is the last place it can be answered.
 - Lesson 9 taught the stochastic formalism, which leaves the deterministic one open: a time Petri net in the sense of Merlin, where a transition carries an interval rather than a rate, has no Markov chain behind it and needs a state-class construction the analyser does not have. Whether lesson 13 builds one or hands the model to TINA, which does exactly this, is undecided.
