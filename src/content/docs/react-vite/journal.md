@@ -9,12 +9,34 @@ sidebar:
 
 - [x] React 19.3.0, Vite 8.3.0, TypeScript 7.0.2, Vitest 5.0.0, Testing Library and oxlint pinned in the course's own `package.json` and lock file
 - [x] `check.sh`: `create-vite`, the dev server, an HMR update, `tsc`, `vite build`, oxlint, every error snippet and every test, compared with `expected/`
-- [ ] CI on three OSes (see below)
+- [x] CI on three OSes: green since 2026-09-16 (see below)
 - [x] Lesson 1: a Vite project
 - [x] Lesson 2: components and JSX
 - [x] Lesson 3: state and rendering
 - [x] Lesson 4: events and forms
 - [ ] Lesson 5: effects
+
+## QA
+
+React 19.3.0, Vite 8.3.0, TypeScript 7.0.2 and Vitest 5.0.0, pinned in the course's own lock file. The first ten rows are the toolchain; the last two are GuitarAlchemist/ga at `8cc8c5a`, and, as the dated entry says, nothing there has been reported to GA.
+
+There is no Experiments table: every entry is a discovery written afterwards. The three *to verify* notes in this journal name what has not been measured; none of them predicts what the measurement will show.
+
+| Expected | What happens | Where | Measure | Status |
+|---|---|---|---|---|
+| Vite strips TypeScript types with esbuild | Vite 8 bundles with Rolldown and transforms with Oxc; `@vitejs/plugin-react` 6 has no Babel dependency, and Fast Refresh is done by Oxc too | Vite 8.3.0, `@vitejs/plugin-react` 6.1.1 | Read in the installed packages | By design, a changed toolchain. The TypeScript course's sentence about esbuild describes GuitarAlchemist/ga, which is on Vite 5, and stays true there [2026-09-15](#2026-09-15--versions) |
+| The dev server prints the same banner whether or not stdout is a terminal | With a non-TTY stdout Vite leaves out `press h + enter to show help`, so a script waiting for that line waits forever | Vite 8.3.0, `scripts/dev-start.mjs` | The first script never saw the line and left a server running on port 5199 | Reproduced; the script now waits for `use --host to expose` [2026-09-15](#2026-09-15--capturing-the-dev-server) |
+| `server.close()` on a dev server created through the JS API resolves after the last request | On Windows it never settles: the first module request started the dependency optimizer and left it running | Vite 8.3.0, Node.js 24.21.0, Windows, `scripts/dev-module.mjs` | `Detected unsettled top-level await`, and the process exits with code 13 | Reproduced, not reported; `waitForRequestsIdle()` before `close()` fixes it. Linux and macOS not checked, and Vite's tracker not searched [2026-09-15](#2026-09-15--capturing-the-dev-server) |
+| `--base /learn/react-vite/` reaches Vite as written | Git Bash rewrites any argument that starts with `/` into a Windows path | Git Bash (MSYS) on Windows, `check.sh` | The built pages asked for `/Program Files/Git/learn/react-vite/assets/…` | By design in MSYS; `MSYS_NO_PATHCONV=1` and module paths without a leading slash fix it [2026-09-15](#2026-09-15--capturing-the-dev-server) |
+| Testing Library unmounts what a test rendered, after each test | Only when the test framework exposes a global `afterEach`; Vitest does not unless `globals: true` | `@testing-library/react` 16.3.3, Vitest 5.0.0 | One test's DOM stayed into the next, and queries found two forms | By design, and documented; `setup.ts` calls `cleanup` in `afterEach` [2026-09-15](#2026-09-15--vitest-and-testing-library) |
+| A test reporter attributes console output to the test that printed it | Vitest's default reporter groups console output by timing, not by test, and the grouping changed between runs | Vitest 5.0.0 | Two runs of the same file grouped the same logs differently | Reproduced; a small custom reporter collects each log with its test, and `check.sh` runs one file per Vitest run [2026-09-15](#2026-09-15--vitest-and-testing-library) |
+| Vitest isolates tests, so module-level state resets between them | It isolates test files; a module-level counter kept counting from one test to the next | Vitest 5.0.0, lesson 3's first StrictMode test | The counter carried over | By design; the test now passes the mutated array as a prop [2026-09-15](#2026-09-15--vitest-and-testing-library) |
+| `FormEvent` and `FormEventHandler` are the types for React form handlers | `@types/react` 19.3.0 marks both `@deprecated` and points to `ChangeEvent`, `InputEvent` and `SubmitEvent` | `@types/react` 19.3.0 | The deprecation comment says "FormEvent doesn't actually exist"; `ChangeEvent` now takes two type parameters | By design; lesson 4 uses `SubmitEvent<HTMLFormElement>` [2026-09-15](#2026-09-15--typesreact-and-react-193) |
+| A component's return type is `ReactNode` | The 19.3 types accept async components, for Server Components | TypeScript 7.0.2, `@types/react` 19.3.0 | `tsc` prints `Promise<ReactNode> \| ReactNode` in its message | By design [2026-09-15](#2026-09-15--typesreact-and-react-193) |
+| StrictMode's double render on mount is invisible in the DOM | An impure component renders twice and the DOM keeps the second render's output | React 19.3.0, StrictMode | `Played so far: G G` | By design, and what lesson 3 uses to make an impurity visible [2026-09-15](#2026-09-15--typesreact-and-react-193) |
+| A token that can push code can push a workflow file | GitHub also requires the `workflow` scope to create a file under `.github/workflows` | GitHub, the push of `react-vite-examples.yml` | The first push was refused | Worked around by pushing the code without the workflow. The workflow reached `main` later: three runs on 2026-09-16 failed, then [run 35098302366](https://github.com/spareilleux/learn/actions/runs/35098302366), at `cd98475`, passed on Ubuntu, Windows and macOS [2026-09-15](#2026-09-15--the-ci) |
+| An expanded row stays expanded when the list is filtered or polled | `DynamicPanel` stores expanded rows as positions in the filtered, polled data, so any reorder expands a different row | GuitarAlchemist/ga at `8cc8c5a`, `DynamicPanel.tsx`, lines 76-120 | Reproduced in the course's `ExpandableList.tsx`; the panel's rows are `unknown[]`, with no identity field known | Reproduced, not reported [2026-09-15](#2026-09-15--what-the-course-found-in-guitaralchemistga) |
+| A child reporting its value to its parent from an effect settles after one round | `NotesSelector` calls `onNotesChange` from an effect that depends on it, and `ScaleSelector` passes a new handler at every render that stores a new array | GuitarAlchemist/ga at `8cc8c5a`, `NotesSelector.tsx` 15-18 and `ScaleSelector.tsx` 18-21 | The course's reduction in lesson 4 ends in `Maximum update depth exceeded`. Latent in GA: no application at that commit renders `ScaleSelector` | Reproduced in a reduction, not in GA's component; not reported [2026-09-15](#2026-09-15--what-the-course-found-in-guitaralchemistga) |
 
 ## 2026-09-15 — Versions
 
@@ -50,6 +72,7 @@ sidebar:
 
 - [`react-vite-examples.yml`](https://github.com/spareilleux/learn/blob/f6417a9/.github/workflows/react-vite-examples.yml) runs `npm ci` and `bash check.sh` on Ubuntu, Windows and macOS with Node.js 24.21.0. `check.sh` takes about 50 seconds on my Windows machine.
 - The first push was refused: the GitHub token used for pushing lacks the `workflow` scope, which GitHub requires to create a file under `.github/workflows`. The code was pushed without the workflow, and the three-OS run is still to do (*to verify*: cross-OS differences, such as the order of `create-vite`'s file list or oxlint's output format).
+- *Update 2026-09-22:* the workflow reached `main` afterwards. Three runs on 2026-09-16 failed, and [run 35098302366](https://github.com/spareilleux/learn/actions/runs/35098302366), at `cd98475` ("lint with oxlint --format agent"), passed on Ubuntu, Windows and macOS. What the three failures were is not recorded here.
 
 ## 2026-09-15 — What the course found in GuitarAlchemist/ga
 
@@ -68,4 +91,3 @@ At commit [`8cc8c5a`](https://github.com/GuitarAlchemist/ga/commit/8cc8c5a17c685
 - The `server.close()` hang on Linux and macOS, and whether Vite has an issue for it.
 - GA's `ScaleSelector` and `NotesSelector` mounted with Material UI, and the DemerzelCriticOverlay animation.
 - An identity field for `DynamicPanel`'s rows in GA's panel definitions.
-- The course's outputs on Linux and macOS, once the CI runs.
