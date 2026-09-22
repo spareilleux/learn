@@ -90,7 +90,7 @@ That net has twelve reachable markings, it never deadlocks, and the place `free`
 | 9 | [Time and probability: timed nets, stochastic nets, GSPN](09-time-and-probability/) | percentiles, a queueing model |
 | 10 | [Workflows: workflow nets, soundness, BPMN, process mining](10-workflows/) | BPMN, a workflow engine |
 | 11 | [Tools and interoperability: PNML, TINA, LoLA, Snoopy, PIPE, CPN Tools, GreatSPN, TAPAAL](11-tools-and-interoperability/) | an XML exchange format |
-| 12 | Industrial applications: manufacturing, protocols, asynchronous hardware, biochemistry, security | |
+| 12 | [Industrial applications: manufacturing, protocols, hardware, biochemistry, security](12-industrial-applications/) | a public benchmark, a state space |
 | 13 | Against other formalisms: statecharts, process algebras, timed automata, TLA+ | TLA+, model checking |
 | 14 | [On our own systems: C# pipelines and agent lanes](14-on-our-systems/) | [Advanced C#](../csharp-advanced/); RabbitMQ and Kubernetes are follow-up experiments |
 | 15 | Limits and what comes next: undecidability, unfoldings, partial order reduction, extensions | |

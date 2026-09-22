@@ -1077,6 +1077,64 @@ public static class Nets
         ],
         new Marking(1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0));
 
+    /// <summary>
+    /// Lesson 12: the Kanban manufacturing system of Ciardo and Tilgner, four cells and
+    /// <paramref name="cards"/> kanban cards per cell. Each cell has a place for its free cards, a
+    /// machine, a rework loop and an output buffer; "synch-in" splits the flow into cells 2 and 3,
+    /// "synch-out" joins it again. The shape follows the model the Model Checking Contest
+    /// distributes as Kanban-PT-*, so its reachability graph can be compared with the number the
+    /// contest publishes: 2 546 432 markings for five cards.
+    /// </summary>
+    public static PetriNet Kanban(int cards)
+    {
+        // Cells 4 and 1 are the ends of the line: work enters at 4, leaves at 1, and cells 2 and 3
+        // run in parallel between them.
+        string[] cells = ["1", "2", "3", "4"];
+        List<Place> places = [];
+        List<Transition> transitions = [];
+        List<Arc> arcs = [];
+        List<int> marking = [];
+        foreach (var c in cells)
+        {
+            places.AddRange([
+                new Place($"free{c}", $"free{c}"),       // kanban cards still available in the cell
+                new Place($"machine{c}", $"machine{c}"),
+                new Place($"rework{c}", $"rework{c}"),
+                new Place($"done{c}", $"done{c}"),
+            ]);
+            marking.AddRange([cards, 0, 0, 0]);
+            transitions.AddRange([
+                new Transition($"redo{c}", $"redo{c}"),
+                new Transition($"back{c}", $"back{c}"),
+                new Transition($"ok{c}", $"ok{c}"),
+            ]);
+            arcs.AddRange([
+                new Arc($"machine{c}", $"redo{c}"), new Arc($"redo{c}", $"rework{c}"),
+                new Arc($"rework{c}", $"back{c}"), new Arc($"back{c}", $"machine{c}"),
+                new Arc($"machine{c}", $"ok{c}"), new Arc($"ok{c}", $"done{c}"),
+            ]);
+        }
+
+        transitions.AddRange([
+            new Transition("in4", "in4"),
+            new Transition("out1", "out1"),
+            new Transition("synch-in", "synch-in"),
+            new Transition("synch-out", "synch-out"),
+        ]);
+        arcs.AddRange([
+            new Arc("free4", "in4"), new Arc("in4", "machine4"),
+            new Arc("done1", "out1"), new Arc("out1", "free1"),
+            // Cell 4 finishes a part and hands it to cells 2 and 3, which must both have a free card.
+            new Arc("done4", "synch-out"), new Arc("free2", "synch-out"), new Arc("free3", "synch-out"),
+            new Arc("synch-out", "free4"), new Arc("synch-out", "machine2"), new Arc("synch-out", "machine3"),
+            // Cells 2 and 3 both finish, and cell 1 takes the part.
+            new Arc("done2", "synch-in"), new Arc("done3", "synch-in"), new Arc("free1", "synch-in"),
+            new Arc("synch-in", "free2"), new Arc("synch-in", "free3"), new Arc("synch-in", "machine1"),
+        ]);
+
+        return new PetriNet($"kanban-{cards}", places, transitions, arcs, new Marking([.. marking]));
+    }
+
     /// <summary>Every net of the course, in the order the lessons meet them.</summary>
     public static IReadOnlyList<PetriNet> All =>
     [
@@ -1104,5 +1162,6 @@ public static class Nets
         OrderXorAnd(),
         OrderRework(),
         ColouredNets.Retry().Unfold(),
+        Kanban(1),
     ];
 }

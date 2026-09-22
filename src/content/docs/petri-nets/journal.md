@@ -18,7 +18,7 @@ sidebar:
 - [x] Lesson 9 — Time and probability
 - [x] Lesson 10 — Workflows
 - [x] Lesson 11 — Tools and interoperability
-- [ ] Lesson 12 — Industrial applications
+- [x] Lesson 12 — Industrial applications
 - [ ] Lesson 13 — Against other formalisms
 - [x] Lesson 14 — On our own systems
 - [ ] Lesson 15 — Limits and what comes next
@@ -38,6 +38,7 @@ This course teaches a formalism and runs on an analyser I wrote, so there is no 
 | `mutual-exclusion` is outside the asymmetric-choice class | It is **inside** it: `idle1•` and `idle2•` are each contained in `mutex•` | [`Structure.cs`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/PetriNets/Structure.cs) | A unit test asserting the opposite failed; the philosophers are the net that does fall out of the class | Test corrected to the measured answer (2026-09-17) |
 | `{x, y}` is still a minimal siphon once both threads take `x` first | It is not minimal any more: `{y}` alone becomes a siphon, and `x` sits in `{a_has_x, b_has_x, x}` | Lesson 6, exercise 1 | `two-locks-ordered` has 4 minimal siphons, all with a marked trap | Corrected before publication, and the wrong prediction is published with the right answer (2026-09-17) |
 | The siphon with no trap in a lock that is never released is `{critical1, critical2, mutex}` | There are two, `{idle1}` and `{critical2, mutex}`; `{critical1}` turns out to be a trap | Lesson 7, exercise 2 | `Report.Siphons(mutual-exclusion-leaky)` | Corrected before publication (2026-09-17) |
+| The coverability tree of a small bounded net is computable | `CoverabilityTree.Build(Nets.Kanban(1))`, a net with 160 reachable markings, does not return: capped at 2 GiB it throws `OutOfMemoryException` after 15.5 s, uncapped it reached 35.7 GB and twelve minutes of CPU | [`CoverabilityTree.cs`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/PetriNets/CoverabilityTree.cs) | 160 markings, no result; the tree never merges two branches reaching the same marking, so its size follows the number of paths | Not a defect and not fixable: lesson 12 prints two bound columns instead of three, and says why (2026-09-22) |
 
 ## Experiments
 
@@ -61,6 +62,10 @@ One warning before the table: unlike the [GA Lab](../../ga-lab/journal/), this c
 | Is the short circuit of the AND-split-XOR-join net bounded but not live? | Bounded: nothing accumulates in a 1-safe process | **Unbounded**: the leftover token of each case accumulates through t-star without limit | Refuted, and it made the lesson: a token left behind and an unbounded short circuit are the same defect (2026-09-22) |
 | How many markings does an invoicing step after the join add? | Two, one per branch of the choice | **One**: the marking where the token sits in the new place | Refuted; a step in sequence adds one state whatever precedes it, only concurrency multiplies (2026-09-22) |
 | Can the reader read a PNML file written by another tool? | Yes for the P/T ones; the awkward parts of the ISO sample are all handled | 2 of 16 read, 14 correctly refused by type — and the name, which sits on the page rather than the net, was lost | Refuted in part, and it is the only defect eleven lessons of self-checking output had not found (2026-09-22) |
+| Does this analyser agree with tools written by other people? | Yes on the small instances; a disagreement somewhere in the middle would not surprise me | **21 instances from the Model Checking Contest, four numbers each, all identical**, plus four larger ones agreed digit for digit | Confirmed, and it is the first external check this course has had (2026-09-22) |
+| Does a Kanban net rebuilt from its published description give the contest's answer? | Yes if the modelling is right; this is a harder test than reading the contest's file | 2 546 432 markings and 24 460 016 arcs for five cards, exactly the published numbers | Confirmed: the modelling is validated, not only the PNML reader (2026-09-22) |
+| How many place invariants does the Kanban net have? | Four, one per cell | **Six**: cells 2 and 3 are synchronised, so two crossed sums are conserved too, and minimal-support invariants are not a vector-space basis | Refuted, and the exercise asks the reader to derive the two extra ones (2026-09-22) |
+| Where does explicit enumeration stop, and what stops it? | Around ten million markings, and it is the markings | It is the **arcs**: 3.4 M markings with 13.6 M arcs fits, 11.5 M markings with 1.2 billion arcs throws `OutOfMemoryException` at an 8 GiB heap after 158 s | Refuted in its cause; `tedd` does the same instance in 2.3 s because a decision diagram stores no arcs (2026-09-22) |
 
 ## 2026-09-15 — Lessons 1 to 4, and the analyser they run on
 
@@ -179,8 +184,23 @@ Two things I could not do. The P/T grammar is **not** among the `.rng` files pub
 
 `check.sh` runs `l11`; 67 tests pass and l1 to l11, l14, music, chat and nets all match.
 
+## 2026-09-22 — Lesson 12, and the first time somebody else's answer was available
+
+Eleven lessons checked this analyser against itself. Lesson 12 checks it against the [Model Checking Contest](https://mcc.lip6.fr/), which publishes both a public collection of industrial models and the answers its entrants computed for them.
+
+The `StateSpace` examination asks four numbers per instance — markings, arcs, most tokens in a place, most tokens in a marking — and `raw-result-analysis.csv` carries an `estimated result` column with the value a majority of tools agree on, weighted by confidence. That is an oracle. I took the twenty-one P/T instances whose four numbers are published in full, from manufacturing, protocols, shared memory, biochemistry and one security model, and ran the analyser on all of them.
+
+**Twenty-one instances, eighty-four numbers, no disagreement.** Then four more above the published-in-full line — `FMS-PT-00005`, `Kanban-PT-00005`, `Peterson-PT-3`, `Dekker-PT-010` — using the digits several tools printed identically. Still no disagreement. That is the first external validation this course has had, and it was available the whole time.
+
+The Kanban net is rebuilt here rather than read from the contest's file, from the picture and place names in the contest's own model summary. It gives 2 546 432 markings and 24 460 016 arcs for five cards, which is what the contest publishes, so the modelling is right and not only the reader. `check.sh` runs it at three cards to stay fast.
+
+Two things I got wrong, both published in the lesson with the measured answer. I expected **four** place invariants, one per cell; there are **six**, because cells 2 and 3 are synchronised and the minimal-support basis is not a vector-space basis. And I expected the wall to be about the number of markings; it is about the number of **arcs**. `Peterson-PT-3` has 3.4 M markings and 13.6 M arcs and fits; `Dekker-PT-020` has 11.5 M markings and 1.2 **billion** arcs and throws `OutOfMemoryException` at an 8 GiB heap after 158 s. `tedd` does that same instance in 2.3 s and 1.2 GB, because a decision diagram never stores an arc.
+
+And one thing the lesson found in this repository's own code: `CoverabilityTree.Build` does not terminate usefully on `kanban-1`, a net with **160 reachable markings**. Capped at 2 GiB it throws after 15.5 s; uncapped it reached 35.7 GB and twelve minutes of CPU without returning. It is not a bug — the tree never merges branches, so its size follows the number of paths — but it means lesson 3's tool is unusable on anything industrial, and the lesson says so instead of printing a third column.
+
 ## To verify
 
+- The FMS literature reports far fewer states than the contest does for the same model, because the published counts are the *tangible* markings of a generalized stochastic net and `FMS-PT-*` is an ordinary P/T net. The specific numbers are quoted from memory in my notes and are not in any lesson until a source is read.
 - The P/T net grammar is not among the RELAX NG files published at pnml.org, so the analyser's PNML has never been validated against a schema. `pnmlcoremodel.rng` is there and would check the structure; the P/T specifics fall through its `anyElement` rule.
 - Hack 1972, the source of Commoner's theorem, is open access and unreadable to an automated fetch. Reading it in a browser would let lesson 6 quote the theorem rather than paraphrase a paraphrase.
 - Murata 1989 remains paywalled and unread; every attribution to it in lessons 1 to 8 is marked in the page.
@@ -190,5 +210,5 @@ Two things I could not do. The P/T grammar is **not** among the `.rng` files pub
 ## Open questions
 
 - The brute force over subsets of places caps the analyser at twenty places. Six philosophers taking one fork at a time have twenty-four, so the structural verdict cannot be computed for the largest net in lesson 7's own table. A constraint-solver formulation would fix it and would make the course depend on a solver.
-- The coloured nets of lesson 8 bind one variable per transition. A transition joining two messages needs a tuple, and the unfolding would grow as a product. Whether to implement that in lesson 12, where a real protocol appears, or to hand that model to CPN Tools and say so, is undecided.
+- The coloured nets of lesson 8 bind one variable per transition. A transition joining two messages needs a tuple, and the unfolding would grow as a product. Lesson 12 sidestepped this — the contest ships every model already unfolded to P/T — so the question is still open, and lesson 15 is the last place it can be answered.
 - Lesson 9 taught the stochastic formalism, which leaves the deterministic one open: a time Petri net in the sense of Merlin, where a transition carries an interval rather than a rate, has no Markov chain behind it and needs a state-class construction the analyser does not have. Whether lesson 13 builds one or hands the model to TINA, which does exactly this, is undecided.

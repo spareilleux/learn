@@ -18,7 +18,7 @@ sidebar:
 - [x] Lección 9 — Tiempo y probabilidad
 - [x] Lección 10 — Flujos de trabajo
 - [x] Lección 11 — Herramientas e interoperabilidad
-- [ ] Lección 12 — Aplicaciones industriales
+- [x] Lección 12 — Aplicaciones industriales
 - [ ] Lección 13 — Frente a otros formalismos
 - [x] Lección 14 — Sobre nuestros propios sistemas
 - [ ] Lección 15 — Límites y qué viene después
@@ -38,6 +38,7 @@ Este curso enseña un formalismo y se ejecuta sobre un analizador que escribí y
 | `mutual-exclusion` queda fuera de la clase de elección asimétrica | Queda **dentro**: `idle1•` e `idle2•` están cada uno contenidos en `mutex•` | [`Structure.cs`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/PetriNets/Structure.cs) | Una prueba unitaria que afirmaba lo contrario falló; los filósofos son la red que sí cae fuera de la clase | Prueba corregida a la respuesta medida (2026-09-17) |
 | `{x, y}` sigue siendo un sifón minimal cuando los dos hilos toman `x` primero | Ya no es minimal: `{y}` sola pasa a ser un sifón, y `x` queda en `{a_has_x, b_has_x, x}` | Lección 6, ejercicio 1 | `two-locks-ordered` tiene 4 sifones minimales, todos con una trampa marcada | Corregido antes de publicar, y la predicción equivocada se publica junto a la respuesta correcta (2026-09-17) |
 | El sifón sin trampa de un cerrojo que nunca se suelta es `{critical1, critical2, mutex}` | Hay dos, `{idle1}` y `{critical2, mutex}`; `{critical1}` resulta ser una trampa | Lección 7, ejercicio 2 | `Report.Siphons(mutual-exclusion-leaky)` | Corregido antes de publicar (2026-09-17) |
+| El árbol de cobertura de una red pequeña y acotada es calculable | `CoverabilityTree.Build(Nets.Kanban(1))`, una red con 160 marcados alcanzables, no vuelve: limitado a 2 GiB lanza `OutOfMemoryException` a los 15,5 s, sin límite llegó a 35,7 GB y doce minutos de CPU | [`CoverabilityTree.cs`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/PetriNets/CoverabilityTree.cs) | 160 marcados, ningún resultado; el árbol nunca fusiona dos ramas que llegan al mismo marcado, así que su tamaño sigue al número de caminos | Ni un defecto ni arreglable: la lección 12 imprime dos columnas de cotas en vez de tres, y dice por qué (2026-09-22) |
 
 ## Experimentos
 
@@ -61,6 +62,10 @@ Una advertencia antes de la tabla: a diferencia del [laboratorio GA](../../ga-la
 | ¿Está acotado pero no vivo el cortocircuito de la red bifurcación-Y/convergencia-O? | Acotado: nada se acumula en un proceso 1-seguro | **No acotado**: la marca sobrante de cada caso se acumula a través de t-star sin límite | Refutada, y es lo que hizo la lección: una marca dejada atrás y un cortocircuito no acotado son el mismo defecto (2026-09-22) |
 | ¿Cuántos marcados añade un paso de facturación tras la convergencia? | Dos, uno por rama de la elección | **Uno**: el marcado en que la marca está en la nueva plaza | Refutada; un paso en secuencia añade un estado venga lo que venga antes, solo la concurrencia multiplica (2026-09-22) |
 | ¿Sabe el lector leer un fichero PNML escrito por otra herramienta? | Sí para los P/T; las trampas del ejemplo de la ISO están todas tratadas | 2 de 16 leídos, 14 rechazados correctamente por el tipo — y el nombre, que está en la página y no en la red, se perdía | Refutada en parte, y es el único defecto que once lecciones de salida autocomprobada no habían encontrado (2026-09-22) |
+| ¿Coincide este analizador con herramientas escritas por otra gente? | Sí en las instancias pequeñas; un desacuerdo en algún punto intermedio no me sorprendería | **21 instancias del Model Checking Contest, cuatro números cada una, todas idénticas**, más cuatro mayores coincidiendo cifra a cifra | Confirmada, y es la primera comprobación externa que ha tenido este curso (2026-09-22) |
+| ¿Da una red Kanban reconstruida desde su descripción publicada la respuesta del concurso? | Sí si el modelado es correcto; es una prueba más dura que leer el fichero del concurso | 2 546 432 marcados y 24 460 016 arcos con cinco tarjetas, exactamente los números publicados | Confirmada: se valida el modelado, no solo el lector de PNML (2026-09-22) |
+| ¿Cuántos invariantes de plaza tiene la red Kanban? | Cuatro, uno por celda | **Seis**: las celdas 2 y 3 están sincronizadas, así que también se conservan dos sumas cruzadas, y los invariantes de soporte mínimo no son una base de espacio vectorial | Refutada, y el ejercicio pide al lector derivar los dos de más (2026-09-22) |
+| ¿Dónde se detiene la enumeración explícita, y qué la detiene? | Hacia diez millones de marcados, y son los marcados | Son los **arcos**: 3,4 M de marcados con 13,6 M de arcos caben, 11,5 M de marcados con 1 200 millones de arcos lanzan `OutOfMemoryException` con un montículo de 8 GiB a los 158 s | Refutada en su causa; `tedd` hace la misma instancia en 2,3 s porque un diagrama de decisión no almacena arcos (2026-09-22) |
 
 ## 2026-09-15 — Lecciones 1 a 4, y el analizador sobre el que se ejecutan
 
@@ -179,8 +184,23 @@ Dos cosas que no pude hacer. La gramática P/T **no** está entre los `.rng` pub
 
 `check.sh` ejecuta `l11`; pasan 67 pruebas y l1 a l11, l14, music, chat y nets coinciden todos.
 
+## 2026-09-22 — Lección 12, y la primera vez que había una respuesta de otros
+
+Once lecciones comprobaron este analizador contra sí mismo. La lección 12 lo comprueba contra el [Model Checking Contest](https://mcc.lip6.fr/), que publica tanto una colección pública de modelos industriales como las respuestas que sus participantes calcularon sobre ellos.
+
+El examen `StateSpace` pide cuatro números por instancia — marcados, arcos, marcas máximas en una plaza, marcas máximas en un marcado — y `raw-result-analysis.csv` lleva una columna `estimated result` con el valor en el que coincide una mayoría de herramientas, ponderada por la confianza. Eso es un oráculo. Tomé las veintiuna instancias P/T cuyos cuatro números se publican enteros — taller flexible, protocolos, memoria compartida, bioquímica, y un modelo de seguridad — y ejecuté el analizador sobre todas.
+
+**Veintiuna instancias, ochenta y cuatro números, ni un desacuerdo.** Luego cuatro más por encima de la línea de lo «publicado entero» — `FMS-PT-00005`, `Kanban-PT-00005`, `Peterson-PT-3`, `Dekker-PT-010` — usando las cifras que varias herramientas imprimieron idénticas. Sigue sin haber desacuerdo. Es la primera validación externa que ha tenido este curso, y estuvo disponible todo el tiempo.
+
+La red Kanban está reconstruida aquí en vez de leída del fichero del concurso, a partir de la imagen y los nombres de plazas de la propia ficha del concurso. Da 2 546 432 marcados y 24 460 016 arcos con cinco tarjetas, que es lo que el concurso publica, así que el modelado es correcto y no solo el lector. `check.sh` la ejecuta con tres tarjetas para seguir siendo rápido.
+
+Dos cosas en las que me equivoqué, ambas publicadas en la lección con la respuesta medida. Esperaba **cuatro** invariantes de plaza, uno por celda; hay **seis**, porque las celdas 2 y 3 están sincronizadas y la base de soporte mínimo no es una base de espacio vectorial. Y esperaba que el muro fuera el número de marcados; es el número de **arcos**. `Peterson-PT-3` tiene 3,4 M de marcados y 13,6 M de arcos y cabe; `Dekker-PT-020` tiene 11,5 M de marcados y 1 200 **millones** de arcos y lanza `OutOfMemoryException` con un montículo de 8 GiB a los 158 s. `tedd` hace esa misma instancia en 2,3 s y 1,2 GB, porque un diagrama de decisión nunca almacena un arco.
+
+Y una cosa que la lección encontró en el código de este repositorio: `CoverabilityTree.Build` no termina de forma útil con `kanban-1`, una red con **160 marcados alcanzables**. Limitado a 2 GiB lanza a los 15,5 s; sin límite llegó a 35,7 GB y doce minutos de CPU sin volver. No es un error — el árbol nunca fusiona ramas, así que su tamaño sigue al número de caminos — pero significa que la herramienta de la lección 3 es inutilizable en cualquier cosa industrial, y la lección lo dice en vez de imprimir una tercera columna.
+
 ## Por verificar
 
+- La literatura sobre FMS da muchos menos estados que el concurso para el mismo modelo, porque los recuentos publicados son los marcados *tangibles* de una red estocástica generalizada mientras que `FMS-PT-*` es una red P/T corriente. Las cifras concretas están citadas de memoria en mis notas y no aparecen en ninguna lección hasta que se lea una fuente.
 - La gramática de las redes P/T no está entre los ficheros RELAX NG publicados en pnml.org, así que el PNML del analizador nunca se ha validado contra un esquema. `pnmlcoremodel.rng` está y comprobaría la estructura; las particularidades P/T se cuelan por su regla `anyElement`.
 - Hack 1972, la fuente del teorema de Commoner, es de acceso abierto e ilegible para una descarga automatizada. Leerlo en un navegador permitiría que la lección 6 citara el teorema en vez de parafrasear una paráfrasis.
 - Murata 1989 sigue tras muro de pago y sin leer; toda atribución a él en las lecciones 1 a 8 está marcada en la página.
@@ -190,5 +210,5 @@ Dos cosas que no pude hacer. La gramática P/T **no** está entre los `.rng` pub
 ## Preguntas abiertas
 
 - La fuerza bruta sobre los subconjuntos de plazas limita el analizador a veinte plazas. Seis filósofos tomando un tenedor cada vez tienen veinticuatro, así que el veredicto estructural no se puede calcular para la mayor red de la propia tabla de la lección 7. Una formulación con un resolutor de restricciones lo arreglaría y haría que el curso dependiera de un resolutor.
-- Las redes coloreadas de la lección 8 enlazan una variable por transición. Una transición que une dos mensajes necesita una tupla, y el despliegue crecería como un producto. Si implementarlo en la lección 12, donde aparece un protocolo real, o entregarle ese modelo a CPN Tools y decirlo, está sin decidir.
+- Las redes coloreadas de la lección 8 enlazan una variable por transición. Una transición que une dos mensajes necesita una tupla, y el despliegue crecería como un producto. La lección 12 esquivó la cuestión — el concurso entrega cada modelo ya desplegado a P/T — así que sigue abierta, y la lección 15 es el último sitio donde responderla.
 - La lección 9 enseñó el formalismo estocástico, lo que deja abierto el determinista: una red de Petri temporal en el sentido de Merlin, donde una transición lleva un intervalo en vez de una tasa, no tiene detrás una cadena de Markov y necesita una construcción por clases de estados que el analizador no tiene. Si la lección 13 construye una o le entrega el modelo a TINA, que hace exactamente eso, está sin decidir.

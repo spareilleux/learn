@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pnml xmlns="http://www.pnml.org/version-2009/grammar/pnml">
+  <net id="n1" type="http://www.pnml.org/version-2009/grammar/ptnet">
+    <name>
+      <text>kanban-1</text>
+    </name>
+    <page id="page1">
+      <place id="free1">
+        <name>
+          <text>free1</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="machine1">
+        <name>
+          <text>machine1</text>
+        </name>
+      </place>
+      <place id="rework1">
+        <name>
+          <text>rework1</text>
+        </name>
+      </place>
+      <place id="done1">
+        <name>
+          <text>done1</text>
+        </name>
+      </place>
+      <place id="free2">
+        <name>
+          <text>free2</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="machine2">
+        <name>
+          <text>machine2</text>
+        </name>
+      </place>
+      <place id="rework2">
+        <name>
+          <text>rework2</text>
+        </name>
+      </place>
+      <place id="done2">
+        <name>
+          <text>done2</text>
+        </name>
+      </place>
+      <place id="free3">
+        <name>
+          <text>free3</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="machine3">
+        <name>
+          <text>machine3</text>
+        </name>
+      </place>
+      <place id="rework3">
+        <name>
+          <text>rework3</text>
+        </name>
+      </place>
+      <place id="done3">
+        <name>
+          <text>done3</text>
+        </name>
+      </place>
+      <place id="free4">
+        <name>
+          <text>free4</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="machine4">
+        <name>
+          <text>machine4</text>
+        </name>
+      </place>
+      <place id="rework4">
+        <name>
+          <text>rework4</text>
+        </name>
+      </place>
+      <place id="done4">
+        <name>
+          <text>done4</text>
+        </name>
+      </place>
+      <transition id="redo1">
+        <name>
+          <text>redo1</text>
+        </name>
+      </transition>
+      <transition id="back1">
+        <name>
+          <text>back1</text>
+        </name>
+      </transition>
+      <transition id="ok1">
+        <name>
+          <text>ok1</text>
+        </name>
+      </transition>
+      <transition id="redo2">
+        <name>
+          <text>redo2</text>
+        </name>
+      </transition>
+      <transition id="back2">
+        <name>
+          <text>back2</text>
+        </name>
+      </transition>
+      <transition id="ok2">
+        <name>
+          <text>ok2</text>
+        </name>
+      </transition>
+      <transition id="redo3">
+        <name>
+          <text>redo3</text>
+        </name>
+      </transition>
+      <transition id="back3">
+        <name>
+          <text>back3</text>
+        </name>
+      </transition>
+      <transition id="ok3">
+        <name>
+          <text>ok3</text>
+        </name>
+      </transition>
+      <transition id="redo4">
+        <name>
+          <text>redo4</text>
+        </name>
+      </transition>
+      <transition id="back4">
+        <name>
+          <text>back4</text>
+        </name>
+      </transition>
+      <transition id="ok4">
+        <name>
+          <text>ok4</text>
+        </name>
+      </transition>
+      <transition id="in4">
+        <name>
+          <text>in4</text>
+        </name>
+      </transition>
+      <transition id="out1">
+        <name>
+          <text>out1</text>
+        </name>
+      </transition>
+      <transition id="synch-in">
+        <name>
+          <text>synch-in</text>
+        </name>
+      </transition>
+      <transition id="synch-out">
+        <name>
+          <text>synch-out</text>
+        </name>
+      </transition>
+      <arc id="a1" source="machine1" target="redo1" />
+      <arc id="a2" source="redo1" target="rework1" />
+      <arc id="a3" source="rework1" target="back1" />
+      <arc id="a4" source="back1" target="machine1" />
+      <arc id="a5" source="machine1" target="ok1" />
+      <arc id="a6" source="ok1" target="done1" />
+      <arc id="a7" source="machine2" target="redo2" />
+      <arc id="a8" source="redo2" target="rework2" />
+      <arc id="a9" source="rework2" target="back2" />
+      <arc id="a10" source="back2" target="machine2" />
+      <arc id="a11" source="machine2" target="ok2" />
+      <arc id="a12" source="ok2" target="done2" />
+      <arc id="a13" source="machine3" target="redo3" />
+      <arc id="a14" source="redo3" target="rework3" />
+      <arc id="a15" source="rework3" target="back3" />
+      <arc id="a16" source="back3" target="machine3" />
+      <arc id="a17" source="machine3" target="ok3" />
+      <arc id="a18" source="ok3" target="done3" />
+      <arc id="a19" source="machine4" target="redo4" />
+      <arc id="a20" source="redo4" target="rework4" />
+      <arc id="a21" source="rework4" target="back4" />
+      <arc id="a22" source="back4" target="machine4" />
+      <arc id="a23" source="machine4" target="ok4" />
+      <arc id="a24" source="ok4" target="done4" />
+      <arc id="a25" source="free4" target="in4" />
+      <arc id="a26" source="in4" target="machine4" />
+      <arc id="a27" source="done1" target="out1" />
+      <arc id="a28" source="out1" target="free1" />
+      <arc id="a29" source="done4" target="synch-out" />
+      <arc id="a30" source="free2" target="synch-out" />
+      <arc id="a31" source="free3" target="synch-out" />
+      <arc id="a32" source="synch-out" target="free4" />
+      <arc id="a33" source="synch-out" target="machine2" />
+      <arc id="a34" source="synch-out" target="machine3" />
+      <arc id="a35" source="done2" target="synch-in" />
+      <arc id="a36" source="done3" target="synch-in" />
+      <arc id="a37" source="free1" target="synch-in" />
+      <arc id="a38" source="synch-in" target="free2" />
+      <arc id="a39" source="synch-in" target="free3" />
+      <arc id="a40" source="synch-in" target="machine1" />
+    </page>
+  </net>
+</pnml>

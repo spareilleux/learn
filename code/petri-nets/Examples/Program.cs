@@ -19,12 +19,13 @@ switch (lesson)
     case "l9": Lesson9(); break;
     case "l10": Lesson10(); break;
     case "l11": Lesson11(args.Length > 1 ? args[1] : null); break;
+    case "l12": Lesson12(args.Length > 1 ? args[1] : null); break;
     case "l14": Lesson14(); break;
     case "music": Music(); break;
     case "chat": Chat(); break;
     case "nets": WriteNets(args.Length > 1 ? args[1] : "out/nets"); break;
     default:
-        Console.Error.WriteLine($"Unknown lesson '{lesson}'. Try l1 to l11, l14, or nets.");
+        Console.Error.WriteLine($"Unknown lesson '{lesson}'. Try l1 to l12, l14, or nets.");
         return 2;
 }
 
@@ -834,6 +835,132 @@ string Short(string message) => message.Replace("http://www.pnml.org/version-200
 
 // Lesson 14, on our own systems: the lock the Claude sessions of this repository take before a
 // heavy or a GPU job, in the two shell shapes it has been written in.
+// Lesson 12: industrial nets. The course's own Kanban against the Model Checking Contest's answer,
+// what four invariants say that two and a half million markings also say, and where enumeration stops.
+// Pass a directory of MCC instances to compare against them directly; pass "big" for the five-card run.
+void Lesson12(string? mode)
+{
+    var directory = mode is not null && mode != "big" ? mode : null;
+
+    Title("A net from the shop floor");
+    var kanban = Nets.Kanban(1);
+    Console.Write(Report.Net(kanban));
+
+    Title("What enumerating it costs");
+    // No timings here: this block is compared line by line by check.sh, and a stopwatch never
+    // prints the same thing twice. The lesson quotes the seconds from a dated run instead.
+    Console.WriteLine($"{"cards",-8}{"markings",-16}{"arcs",-16}arcs per marking");
+    foreach (var cards in (int[])[1, 2, 3])
+    {
+        var graph = ReachabilityGraph.Build(Nets.Kanban(cards), 1_000_000);
+        Console.WriteLine($"{cards,-8}{graph.States.Count,-16}{graph.Steps.Count,-16}"
+                          + $"{(double)graph.Steps.Count / graph.States.Count:F1}");
+    }
+    var five = Mcc.Published.Single(i => i.Instance == "Kanban-PT-00005");
+    Console.WriteLine($"{5,-8}{five.Markings,-16}{five.Arcs,-16}{(double)five.Arcs / five.Markings:F1}"
+                      + "   published by the contest, not run here");
+
+    Title("Four invariants, and no graph at all");
+    // Lesson 5 on an industrial net: the bound holds for every number of cards, and costs a matrix.
+    Console.Write(Report.InvariantReport(Nets.Kanban(3)));
+
+    Title("The same bounds, paid for twice");
+    // Report.Bounds would add a third column from the coverability tree of lesson 3. It is left out
+    // here: on this net the tree does not come back in any time worth waiting for, which is its own
+    // lesson about industrial nets and is measured in the journal.
+    var two = Nets.Kanban(2);
+    var fromInvariants = Invariants.PlaceBounds(two);
+    var enumerated = ReachabilityGraph.Build(two, 1_000_000);
+    var fromGraph = enumerated.PlaceBounds();
+    Console.WriteLine($"{"place",-12}{"invariants",-14}reachability graph");
+    for (var p = 0; p < two.Places.Count; p++)
+        Console.WriteLine($"{two.Places[p].Name,-12}{(fromInvariants[p]?.ToString() ?? "not covered"),-14}{fromGraph[p]?.ToString() ?? "unbounded"}");
+    Console.WriteLine($"markings enumerated: 0 for the invariants, {enumerated.States.Count} for the graph");
+
+    Title("What kind of net a factory turns out to be");
+    Console.Write(Report.Structure(Nets.Kanban(1)));
+    Console.Write(Report.Properties(kanban, Behaviour.Analyse(kanban)));
+
+    Title("The contest's models, by industry");
+    Console.WriteLine(Mcc.Source);
+    Console.WriteLine($"{"instance",-32}{"markings",-12}{"arcs",-14}what it models");
+    foreach (var group in Mcc.Published.GroupBy(i => i.Domain))
+    {
+        Console.WriteLine($"-- {group.Key}");
+        foreach (var i in group)
+            Console.WriteLine($"{i.Instance,-32}{i.Markings,-12}{i.Arcs,-14}{i.What}");
+    }
+
+    Title("Just above the line");
+    Console.WriteLine($"{"instance",-24}{"markings",-14}{"arcs",-16}best time in the contest");
+    foreach (var (instance, markings, arcs, best) in Mcc.OutOfReach)
+        Console.WriteLine($"{instance,-24}{markings,-14}{arcs,-16}{best}");
+
+    if (mode == "big")
+    {
+        Title("Five cards");
+        var net = Nets.Kanban(5);
+        var watch = System.Diagnostics.Stopwatch.StartNew();
+        var graph = ReachabilityGraph.Build(net, 10_000_000);
+        watch.Stop();
+        Console.WriteLine($"{graph.States.Count} markings, {graph.Steps.Count} arcs, {watch.Elapsed.TotalSeconds:F1}s");
+        Console.WriteLine($"contest:  {five.Markings} markings, {five.Arcs} arcs");
+        Console.WriteLine($"agree: {(graph.States.Count == five.Markings && graph.Steps.Count == five.Arcs ? "yes" : "NO")}");
+    }
+
+    if (directory is null)
+    {
+        Title("Against the contest's own files");
+        Console.WriteLine("no directory given; see the lesson for a run against the contest's models");
+        return;
+    }
+
+    Title("Against the contest's own files");
+    var published = Mcc.Published.ToDictionary(i => i.Instance);
+    var refused = 0;
+    var skipped = 0;
+    Console.WriteLine($"{"instance",-32}{"markings",-12}{"arcs",-14}{"seconds",-10}agrees");
+    foreach (var path in Directory.GetFiles(directory, "*.pnml", SearchOption.AllDirectories)
+                                  .OrderBy(x => x, StringComparer.Ordinal))
+    {
+        PetriNet net;
+        // Every model ships twice: once as a P/T net and once as the coloured net it was drawn as.
+        // The coloured half is refused on its type, exactly as in lesson 11, and only counted here.
+        try { net = Pnml.Load(path); }
+        catch { refused++; continue; }
+        if (!published.TryGetValue(net.Name, out var answer)) { skipped++; continue; }
+        var watch = System.Diagnostics.Stopwatch.StartNew();
+        var graph = ReachabilityGraph.Build(net, 10_000_000);
+        watch.Stop();
+        var bounds = TokenBounds(net, graph);
+        var agrees = graph.IsComplete && graph.States.Count == answer.Markings && graph.Steps.Count == answer.Arcs
+                     && bounds.PerPlace == answer.MaxPerPlace && bounds.Total == answer.MaxTotal;
+        Console.WriteLine($"{net.Name,-32}{graph.States.Count,-12}{graph.Steps.Count,-14}"
+                          + $"{watch.Elapsed.TotalSeconds,-10:F2}{(agrees ? "yes" : "NO")}");
+    }
+    Console.WriteLine($"{refused} files refused on their net type: the same models as coloured nets");
+    Console.WriteLine($"{skipped} P/T files skipped: the contest rounds their answer, so there is nothing to compare");
+}
+
+// The contest's StateSpace examination asks for two more numbers than the graph's size: the most
+// tokens one place ever holds, and the most a whole marking ever holds.
+(int PerPlace, int Total) TokenBounds(PetriNet net, ReachabilityGraph graph)
+{
+    var perPlace = 0;
+    var total = 0;
+    foreach (var marking in graph.States)
+    {
+        var sum = 0;
+        for (var p = 0; p < net.Places.Count; p++)
+        {
+            perPlace = Math.Max(perPlace, marking[p]);
+            sum += marking[p];
+        }
+        total = Math.Max(total, sum);
+    }
+    return (perPlace, total);
+}
+
 void Lesson14()
 {
     var guarded = Nets.LaneLock();

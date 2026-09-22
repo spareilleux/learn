@@ -18,7 +18,7 @@ sidebar:
 - [x] Leçon 9 — Temps et probabilités
 - [x] Leçon 10 — Workflows
 - [x] Leçon 11 — Outils et interopérabilité
-- [ ] Leçon 12 — Applications industrielles
+- [x] Leçon 12 — Applications industrielles
 - [ ] Leçon 13 — Face aux autres formalismes
 - [x] Leçon 14 — Sur nos propres systèmes
 - [ ] Leçon 15 — Limites et suite
@@ -38,6 +38,7 @@ Ce cours enseigne un formalisme et tourne sur un analyseur que j'ai écrit, il n
 | `mutual-exclusion` est hors de la classe à choix asymétrique | Il est **dedans** : `idle1•` et `idle2•` sont chacun inclus dans `mutex•` | [`Structure.cs`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/PetriNets/Structure.cs) | Un test unitaire affirmant le contraire a échoué ; ce sont les philosophes qui tombent hors de la classe | Test corrigé sur la réponse mesurée (2026-09-17) |
 | `{x, y}` est encore un siphon minimal une fois que les deux fils prennent `x` d'abord | Il n'est plus minimal : `{y}` seule devient un siphon, et `x` se trouve dans `{a_has_x, b_has_x, x}` | Leçon 6, exercice 1 | `two-locks-ordered` a 4 siphons minimaux, tous avec une trappe marquée | Corrigé avant publication, et la prédiction fausse est publiée avec la bonne réponse (2026-09-17) |
 | Le siphon sans trappe dans un verrou jamais relâché est `{critical1, critical2, mutex}` | Il y en a deux, `{idle1}` et `{critical2, mutex}` ; `{critical1}` se révèle être une trappe | Leçon 7, exercice 2 | `Report.Siphons(mutual-exclusion-leaky)` | Corrigé avant publication (2026-09-17) |
+| L'arbre de couverture d'un petit réseau borné est calculable | `CoverabilityTree.Build(Nets.Kanban(1))`, un réseau à 160 marquages accessibles, ne revient pas : plafonné à 2 Gio il lève `OutOfMemoryException` au bout de 15,5 s, sans plafond il a atteint 35,7 Go et douze minutes de CPU | [`CoverabilityTree.cs`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/PetriNets/CoverabilityTree.cs) | 160 marquages, aucun résultat ; l'arbre ne fusionne jamais deux branches arrivant au même marquage, donc sa taille suit le nombre de chemins | Ni un défaut ni corrigeable : la leçon 12 imprime deux colonnes de bornes au lieu de trois, et dit pourquoi (2026-09-22) |
 
 ## Expériences
 
@@ -61,6 +62,10 @@ Un avertissement avant le tableau : contrairement au [GA Lab](../../ga-lab/journ
 | Le court-circuit du réseau ET-divergent/OU-convergent est-il borné mais non vivant ? | Borné : rien ne s'accumule dans un processus 1-sûr | **Non borné** : le jeton en trop de chaque cas s'accumule via t-star sans limite | Réfutée, et c'est ce qui a fait la leçon : un jeton laissé derrière et un court-circuit non borné sont le même défaut (2026-09-22) |
 | Combien de marquages une étape de facturation après la convergence ajoute-t-elle ? | Deux, un par branche du choix | **Un** : le marquage où le jeton est dans la nouvelle place | Réfutée ; une étape en séquence ajoute un état quoi qu'il y ait avant, seule la concurrence multiplie (2026-09-22) |
 | Le lecteur sait-il lire un fichier PNML écrit par un autre outil ? | Oui pour les P/T ; les pièges de l'exemple ISO sont tous traités | 2 sur 16 lus, 14 correctement refusés sur le type — et le nom, porté par la page plutôt que par le réseau, était perdu | Réfutée en partie, et c'est le seul défaut que onze leçons de sortie auto-vérifiée n'avaient pas trouvé (2026-09-22) |
+| Cet analyseur s'accorde-t-il avec des outils écrits par d'autres ? | Oui sur les petites instances ; un désaccord quelque part au milieu ne m'étonnerait pas | **21 instances du Model Checking Contest, quatre nombres chacune, toutes identiques**, plus quatre plus grandes accordées chiffre pour chiffre | Confirmée, et c'est la première vérification externe qu'ait eue ce cours (2026-09-22) |
+| Un réseau Kanban rebâti à partir de sa description publiée donne-t-il la réponse du concours ? | Oui si la modélisation est juste ; c'est un test plus dur que lire le fichier du concours | 2 546 432 marquages et 24 460 016 arcs pour cinq cartes, exactement les nombres publiés | Confirmée : c'est la modélisation qui est validée, pas seulement le lecteur PNML (2026-09-22) |
+| Combien d'invariants de places a le réseau Kanban ? | Quatre, un par cellule | **Six** : les cellules 2 et 3 sont synchronisées, donc deux sommes croisées sont conservées aussi, et les invariants à support minimal ne forment pas une base d'espace vectoriel | Réfutée, et l'exercice demande au lecteur de dériver les deux de plus (2026-09-22) |
+| Où s'arrête l'énumération explicite, et qu'est-ce qui l'arrête ? | Vers dix millions de marquages, et ce sont les marquages | Ce sont les **arcs** : 3,4 M de marquages avec 13,6 M d'arcs passent, 11,5 M de marquages avec 1,2 milliard d'arcs lèvent `OutOfMemoryException` sur un tas de 8 Gio après 158 s | Réfutée dans sa cause ; `tedd` fait la même instance en 2,3 s parce qu'un diagramme de décision ne stocke pas d'arcs (2026-09-22) |
 
 ## 2026-09-15 — Leçons 1 à 4, et l'analyseur qui les fait tourner
 
@@ -179,8 +184,23 @@ Deux choses que je n'ai pas pu faire. La grammaire P/T ne fait **pas** partie de
 
 `check.sh` exécute `l11` ; 67 tests passent et l1 à l11, l14, music, chat et nets correspondent tous.
 
+## 2026-09-22 — Leçon 12, et la première fois qu'une réponse venue d'ailleurs était disponible
+
+Onze leçons ont vérifié cet analyseur contre lui-même. La leçon 12 le vérifie contre le [Model Checking Contest](https://mcc.lip6.fr/), qui publie à la fois une collection publique de modèles industriels et les réponses que ses concurrents ont calculées dessus.
+
+L'examen `StateSpace` demande quatre nombres par instance — marquages, arcs, jetons max dans une place, jetons max dans un marquage — et `raw-result-analysis.csv` porte une colonne `estimated result` avec la valeur sur laquelle s'accorde une majorité d'outils, pondérée par la confiance. C'est un oracle. J'ai pris les vingt et une instances P/T dont les quatre nombres sont publiés en entier — atelier flexible, protocoles, mémoire partagée, biochimie, et un modèle de sécurité — et j'ai fait tourner l'analyseur sur toutes.
+
+**Vingt et une instances, quatre-vingt-quatre nombres, aucun désaccord.** Puis quatre de plus au-dessus de la ligne du « publié en entier » — `FMS-PT-00005`, `Kanban-PT-00005`, `Peterson-PT-3`, `Dekker-PT-010` — en utilisant les chiffres que plusieurs outils ont imprimés à l'identique. Toujours aucun désaccord. C'est la première validation externe qu'ait eue ce cours, et elle était disponible depuis le début.
+
+Le réseau Kanban est rebâti ici plutôt que lu depuis le fichier du concours, à partir de l'image et des noms de places de la fiche du concours lui-même. Il donne 2 546 432 marquages et 24 460 016 arcs pour cinq cartes, ce que le concours publie, donc c'est la modélisation qui est juste et pas seulement le lecteur. `check.sh` le lance à trois cartes pour rester rapide.
+
+Deux choses que j'avais fausses, toutes deux publiées dans la leçon avec la réponse mesurée. J'attendais **quatre** invariants de places, un par cellule ; il y en a **six**, parce que les cellules 2 et 3 sont synchronisées et que la base à support minimal n'est pas une base d'espace vectoriel. Et j'attendais que le mur porte sur le nombre de marquages ; il porte sur le nombre d'**arcs**. `Peterson-PT-3` a 3,4 M de marquages et 13,6 M d'arcs et passe ; `Dekker-PT-020` a 11,5 M de marquages et 1,2 **milliard** d'arcs et lève `OutOfMemoryException` sur un tas de 8 Gio après 158 s. `tedd` fait cette même instance en 2,3 s et 1,2 Go, parce qu'un diagramme de décision ne stocke jamais d'arc.
+
+Et une chose que la leçon a trouvée dans le code de ce dépôt : `CoverabilityTree.Build` ne termine pas utilement sur `kanban-1`, un réseau à **160 marquages accessibles**. Plafonné à 2 Gio il lève au bout de 15,5 s ; sans plafond il a atteint 35,7 Go et douze minutes de CPU sans revenir. Ce n'est pas un bogue — l'arbre ne fusionne jamais les branches, donc sa taille suit le nombre de chemins — mais cela veut dire que l'outil de la leçon 3 est inutilisable sur quoi que ce soit d'industriel, et la leçon le dit au lieu d'imprimer une troisième colonne.
+
 ## À vérifier
 
+- La littérature sur FMS annonce bien moins d'états que le concours pour le même modèle, parce que les comptes publiés sont les marquages *tangibles* d'un réseau stochastique généralisé alors que `FMS-PT-*` est un réseau P/T ordinaire. Les nombres précis sont cités de mémoire dans mes notes et ne figurent dans aucune leçon tant qu'une source n'a pas été lue.
 - La grammaire des réseaux P/T ne fait pas partie des fichiers RELAX NG publiés sur pnml.org, donc le PNML de l'analyseur n'a jamais été validé contre un schéma. `pnmlcoremodel.rng` existe et vérifierait la structure ; les spécificités P/T passent à travers sa règle `anyElement`.
 - Hack 1972, la source du théorème de Commoner, est en accès libre et illisible par une requête automatisée. Le lire dans un navigateur permettrait à la leçon 6 de citer le théorème plutôt que de paraphraser une paraphrase.
 - Murata 1989 reste payant et non lu ; chaque attribution qui lui est faite dans les leçons 1 à 8 est signalée dans la page.
@@ -190,5 +210,5 @@ Deux choses que je n'ai pas pu faire. La grammaire P/T ne fait **pas** partie de
 ## Questions ouvertes
 
 - La force brute sur les sous-ensembles de places plafonne l'analyseur à vingt places. Six philosophes prenant une fourchette à la fois en ont vingt-quatre, donc le verdict structurel ne peut pas être calculé pour le plus gros réseau du tableau de la leçon 7 elle-même. Une formulation pour solveur de contraintes réglerait cela et rendrait le cours dépendant d'un solveur.
-- Les réseaux colorés de la leçon 8 lient une variable par transition. Une transition qui joint deux messages a besoin d'un tuple, et le dépliage croîtrait comme un produit. Reste indécidé s'il faut l'implémenter à la leçon 12, où apparaît un vrai protocole, ou confier ce modèle à CPN Tools et le dire.
+- Les réseaux colorés de la leçon 8 lient une variable par transition. Une transition qui joint deux messages a besoin d'un tuple, et le dépliage croîtrait comme un produit. La leçon 12 a contourné la question — le concours livre chaque modèle déjà déplié en P/T — donc elle reste ouverte, et la leçon 15 est le dernier endroit où y répondre.
 - La leçon 9 a enseigné le formalisme stochastique, ce qui laisse ouvert le déterministe : un réseau de Petri temporel au sens de Merlin, où une transition porte un intervalle plutôt qu'un taux, n'a pas de chaîne de Markov derrière lui et demande une construction par classes d'états que l'analyseur n'a pas. Reste indécidé si la leçon 13 en construit une ou confie le modèle à TINA, qui fait exactement cela.
