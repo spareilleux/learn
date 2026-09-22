@@ -19,6 +19,23 @@ sidebar:
 - [x] Two procedural models in `bpy`, compared with the generated ones
 - [ ] Lesson 5: scripting with `bpy`
 
+## QA
+
+Blender 5.2.2 is somebody else's software, so unlike the analyser courses this table is about a product the course only uses. Each row was found while writing a lesson and is reproduced against the pinned build. None of it has been reported upstream; the last column says so rather than leaving it to be assumed.
+
+| Expected | What happens | Where | Measure | Status |
+|---|---|---|---|---|
+| winget offers the current LTS the day it ships | winget still offered 5.2.1 on the day 5.2.2 was released | winget package repository | 5.2.1 against 5.2.2, released 15 September 2026 | Reproduced, not reported [2026-09-16](#2026-09-16--versions-and-setup) |
+| `projects.blender.org` can be read with `curl` | Its pages answer `403`. Its API does not, and served the files at the pinned commit | `projects.blender.org` | `403` on the pages, `200` on `/api/v1/repos/blender/blender/raw/<path>?ref=<sha>` | Reproduced, worked around by using the API [2026-09-16](#2026-09-16--versions-and-setup) |
+| `Image.pixels` on an 8-bit sRGB image converts what it is given to the image's colorspace | It stores the values as bytes, unconverted | `bpy.types.Image.pixels`, 5.2.2 | The generated rosewood came out far too dark: the script had converted to linear first, so the conversion happened twice | Reproduced, root cause in the course's script, behaviour undocumented [2026-09-16](#2026-09-16--scripts-ci-and-what-they-showed) |
+| The glTF exporter says in its log when it drops a node setup it cannot express | It drops a Noise Texture wired to Roughness silently | `io_scene_gltf2`, 5.2.2 | glTF's default roughness of 1 in the exported file, no message in the log | Reproduced, not reported [2026-09-16](#2026-09-16--scripts-ci-and-what-they-showed) |
+| The glTF exporter applies modifiers | It skips them unless `export_apply` is set | `io_scene_gltf2`, 5.2.2 | Exported mesh without its modifiers | Reproduced, not reported [2026-09-16](#2026-09-16--scripts-ci-and-what-they-showed) |
+| `export_format="GLTF_EMBEDDED"` works, as the manual documents it | It is refused unless a preference of the add-on enables it | `io_scene_gltf2`, 5.2.2 | Export refused with the format the manual lists | Reproduced, manual and build disagree [2026-09-16](#2026-09-16--scripts-ci-and-what-they-showed) |
+| The enum of `RenderSettings.engine` read from the class lists every value that can be set | It lists `BLENDER_EEVEE` alone, while setting `BLENDER_WORKBENCH` or `CYCLES` works | `bpy.types.RenderSettings.engine`, 5.2.2 | One value enumerated, three accepted | Reproduced, not reported [2026-09-16](#2026-09-16--scripts-ci-and-what-they-showed) |
+| `Material.use_nodes` reads normally until its announced removal in 6.0 | Reading it already prints a `DeprecationWarning` in 5.2 | `bpy.types.Material.use_nodes`, 5.2.2 | Warning on read, two major versions before removal | Reproduced, deliberate on Blender's part [2026-09-16](#2026-09-16--scripts-ci-and-what-they-showed) |
+| A saved `.blend` holds what the outliner's *Blender File* view shows | Saving skips data-blocks with no users, so a material made and not yet assigned is gone after a save and reopen | `bpy.data`, saving — lesson 1 | `orphans_purge: {'FINISHED'} meshes left [('Cube', 2), ('Kept', 1)]`; the orphan was never written | By design: a reference-count collector, not a reachability one. Lesson 1 shows it |
+| The same script gives a byte-identical `.blend` on every OS | The sizes differ by a few bytes | The `.blend` writer, 5.2.2 | 96,061 bytes on the author's machine and the Linux runner, 96,053 on Windows, 96,055 on macOS | Reproduced, cause not looked for; `check.sh` does not compare the size [2026-09-16](#2026-09-16--scripts-ci-and-what-they-showed) |
+
 ## Experiments
 
 Each row is a question the course measured. The hypothesis is the one recorded before the measurement; where none was recorded, the row says so rather than inventing one after the fact. A refuted hypothesis is a result and stays here.

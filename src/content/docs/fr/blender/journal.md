@@ -19,6 +19,23 @@ sidebar:
 - [x] Deux modèles procéduraux en `bpy`, comparés aux modèles générés
 - [ ] Leçon 5 : scripter avec `bpy`
 
+## QA
+
+Blender 5.2.2 est le logiciel de quelqu'un d'autre : contrairement aux cours bâtis sur un analyseur maison, ce tableau porte sur un produit que le cours ne fait qu'utiliser. Chaque ligne a été trouvée en écrivant une leçon et se reproduit sur la version épinglée. Rien n'a été signalé en amont ; la dernière colonne le dit plutôt que de le laisser supposer.
+
+| Attendu | Ce qui se passe | Où | Mesure | État |
+|---|---|---|---|---|
+| winget propose la LTS courante le jour de sa sortie | winget proposait encore 5.2.1 le jour de la sortie de 5.2.2 | dépôt de paquets winget | 5.2.1 contre 5.2.2, sortie le 15 septembre 2026 | Reproduit, non signalé [2026-09-16](#2026-09-16--versions-et-installation) |
+| `projects.blender.org` se lit avec `curl` | Ses pages répondent `403`. Son API, non, et elle a servi les fichiers au commit épinglé | `projects.blender.org` | `403` sur les pages, `200` sur `/api/v1/repos/blender/blender/raw/<chemin>?ref=<sha>` | Reproduit, contourné en passant par l'API [2026-09-16](#2026-09-16--versions-et-installation) |
+| `Image.pixels` sur une image sRGB 8 bits convertit ce qu'on lui donne vers l'espace de l'image | Elle stocke les valeurs telles quelles, en octets, sans conversion | `bpy.types.Image.pixels`, 5.2.2 | Le palissandre généré est sorti beaucoup trop sombre : le script convertissait d'abord en linéaire, la conversion avait donc lieu deux fois | Reproduit, cause dans le script du cours, comportement non documenté [2026-09-16](#2026-09-16--scripts-ci-et-ce-quils-ont-montré) |
+| L'exportateur glTF signale dans son journal les montages de nœuds qu'il abandonne | Il abandonne sans rien dire une Noise Texture câblée sur la Roughness | `io_scene_gltf2`, 5.2.2 | Rugosité à 1, la valeur par défaut de glTF, dans le fichier exporté, et aucun message | Reproduit, non signalé [2026-09-16](#2026-09-16--scripts-ci-et-ce-quils-ont-montré) |
+| L'exportateur glTF applique les modificateurs | Il les ignore sauf si `export_apply` est passé | `io_scene_gltf2`, 5.2.2 | Maillage exporté sans ses modificateurs | Reproduit, non signalé [2026-09-16](#2026-09-16--scripts-ci-et-ce-quils-ont-montré) |
+| `export_format="GLTF_EMBEDDED"` fonctionne, comme le manuel le documente | Il est refusé tant qu'une préférence de l'add-on ne l'autorise pas | `io_scene_gltf2`, 5.2.2 | Export refusé avec le format que le manuel liste | Reproduit, le manuel et la version installée se contredisent [2026-09-16](#2026-09-16--scripts-ci-et-ce-quils-ont-montré) |
+| L'énumération de `RenderSettings.engine` lue depuis la classe liste toutes les valeurs assignables | Elle ne liste que `BLENDER_EEVEE`, alors que poser `BLENDER_WORKBENCH` ou `CYCLES` marche | `bpy.types.RenderSettings.engine`, 5.2.2 | Une valeur énumérée, trois acceptées | Reproduit, non signalé [2026-09-16](#2026-09-16--scripts-ci-et-ce-quils-ont-montré) |
+| `Material.use_nodes` se lit normalement jusqu'à son retrait annoncé en 6.0 | Sa simple lecture affiche déjà un `DeprecationWarning` en 5.2 | `bpy.types.Material.use_nodes`, 5.2.2 | Avertissement à la lecture, deux versions majeures avant le retrait | Reproduit, délibéré du côté de Blender [2026-09-16](#2026-09-16--scripts-ci-et-ce-quils-ont-montré) |
+| Un `.blend` enregistré contient ce que la vue *Blender File* de l'outliner montre | L'enregistrement saute les blocs de données sans utilisateur : un matériau créé et pas encore assigné a disparu après enregistrement et réouverture | `bpy.data`, l'enregistrement — leçon 1 | `orphans_purge: {'FINISHED'} meshes left [('Cube', 2), ('Kept', 1)]` ; l'orphelin n'a jamais été écrit | Par conception : un ramasse-miettes à compteur de références, pas à accessibilité. La leçon 1 le montre |
+| Le même script donne un `.blend` identique octet pour octet sur tous les OS | Les tailles diffèrent de quelques octets | l'écriture des `.blend`, 5.2.2 | 96 061 octets sur la machine de l'auteur et sur l'exécuteur Linux, 96 053 sous Windows, 96 055 sous macOS | Reproduit, cause non cherchée ; `check.sh` ne compare pas la taille [2026-09-16](#2026-09-16--scripts-ci-et-ce-quils-ont-montré) |
+
 ## Expériences
 
 Chaque ligne est une question que le cours a mesurée. L'hypothèse est celle qui était consignée avant la mesure ; là où aucune ne l'était, la ligne le dit plutôt que d'en inventer une après coup. Une hypothèse réfutée est un résultat et reste ici.

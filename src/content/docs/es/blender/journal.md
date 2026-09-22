@@ -19,6 +19,23 @@ sidebar:
 - [x] Dos modelos procedurales en `bpy`, comparados con los generados
 - [ ] Lección 5: scripts con `bpy`
 
+## QA
+
+Blender 5.2.2 es software de otros: a diferencia de los cursos construidos sobre un analizador propio, esta tabla trata de un producto que el curso solo usa. Cada fila se encontró al escribir una lección y se reproduce contra la versión fijada. Nada se ha reportado aguas arriba; la última columna lo dice en lugar de dejarlo suponer.
+
+| Esperado | Lo que pasa | Dónde | Medición | Estado |
+|---|---|---|---|---|
+| winget ofrece la LTS actual el día en que sale | winget seguía ofreciendo 5.2.1 el día del lanzamiento de 5.2.2 | repositorio de paquetes winget | 5.2.1 frente a 5.2.2, publicada el 15 de septiembre de 2026 | Reproducido, no reportado [2026-09-16](#2026-09-16--versiones-y-configuración) |
+| `projects.blender.org` se puede leer con `curl` | Sus páginas responden `403`. Su API no, y sirvió los archivos en el commit fijado | `projects.blender.org` | `403` en las páginas, `200` en `/api/v1/repos/blender/blender/raw/<ruta>?ref=<sha>` | Reproducido, sorteado usando la API [2026-09-16](#2026-09-16--versiones-y-configuración) |
+| `Image.pixels` sobre una imagen sRGB de 8 bits convierte lo que recibe al espacio de la imagen | Guarda los valores tal cual, como bytes, sin convertir | `bpy.types.Image.pixels`, 5.2.2 | El palo de rosa generado salió muchísimo más oscuro: el script convertía antes a lineal, así que la conversión ocurría dos veces | Reproducido, causa en el script del curso, comportamiento no documentado [2026-09-16](#2026-09-16--los-scripts-la-ci-y-lo-que-mostraron) |
+| El exportador glTF avisa en su registro cuando descarta un montaje de nodos | Descarta en silencio una Noise Texture conectada a la Roughness | `io_scene_gltf2`, 5.2.2 | Rugosidad 1, el valor por defecto de glTF, en el archivo exportado, y ningún mensaje | Reproducido, no reportado [2026-09-16](#2026-09-16--los-scripts-la-ci-y-lo-que-mostraron) |
+| El exportador glTF aplica los modificadores | Los omite salvo que se pase `export_apply` | `io_scene_gltf2`, 5.2.2 | Malla exportada sin sus modificadores | Reproducido, no reportado [2026-09-16](#2026-09-16--los-scripts-la-ci-y-lo-que-mostraron) |
+| `export_format="GLTF_EMBEDDED"` funciona, tal como lo documenta el manual | Se rechaza mientras una preferencia del add-on no lo habilite | `io_scene_gltf2`, 5.2.2 | Exportación rechazada con el formato que lista el manual | Reproducido, el manual y la versión instalada se contradicen [2026-09-16](#2026-09-16--los-scripts-la-ci-y-lo-que-mostraron) |
+| La enumeración de `RenderSettings.engine` leída desde la clase lista todos los valores asignables | Solo lista `BLENDER_EEVEE`, mientras que poner `BLENDER_WORKBENCH` o `CYCLES` funciona | `bpy.types.RenderSettings.engine`, 5.2.2 | Un valor enumerado, tres aceptados | Reproducido, no reportado [2026-09-16](#2026-09-16--los-scripts-la-ci-y-lo-que-mostraron) |
+| `Material.use_nodes` se lee con normalidad hasta su retirada anunciada en 6.0 | Su sola lectura ya imprime un `DeprecationWarning` en 5.2 | `bpy.types.Material.use_nodes`, 5.2.2 | Aviso al leer, dos versiones mayores antes de la retirada | Reproducido, deliberado por parte de Blender [2026-09-16](#2026-09-16--los-scripts-la-ci-y-lo-que-mostraron) |
+| Un `.blend` guardado contiene lo que muestra la vista *Blender File* del outliner | Al guardar se omiten los bloques de datos sin usuarios: un material creado y aún sin asignar desaparece tras guardar y reabrir | `bpy.data`, el guardado — lección 1 | `orphans_purge: {'FINISHED'} meshes left [('Cube', 2), ('Kept', 1)]`; el huérfano nunca se escribió | Por diseño: un recolector por conteo de referencias, no por alcanzabilidad. La lección 1 lo muestra |
+| El mismo script da un `.blend` idéntico byte a byte en todos los sistemas | Los tamaños difieren en unos pocos bytes | la escritura de `.blend`, 5.2.2 | 96 061 bytes en la máquina del autor y en el ejecutor Linux, 96 053 en Windows, 96 055 en macOS | Reproducido, causa no investigada; `check.sh` no compara el tamaño [2026-09-16](#2026-09-16--los-scripts-la-ci-y-lo-que-mostraron) |
+
 ## Experimentos
 
 Cada fila es una pregunta que el curso midió. La hipótesis es la que quedó consignada antes de la medición; donde no había ninguna, la fila lo dice en lugar de inventarla después. Una hipótesis refutada es un resultado y se queda aquí.

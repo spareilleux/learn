@@ -22,6 +22,45 @@ sidebar:
 - [ ] Lessons 9 to 21
 - [x] French and Spanish translations
 
+## QA
+
+IX is somebody else's library, pinned at `490c395`, and nineteen of its answers differ from the textbook or from scikit-learn. The journal lists them; what it does not say for each is what a reader arriving from scikit-learn would have expected, which is the first column here. None is filed as an IX issue. Several are defensible choices rather than defects, and the middle column says which.
+
+| Expected | What happens | Where | Measure | Status |
+|---|---|---|---|---|
+| The test rows take no part in shaping the preprocessing | With `normalize` on, the pipeline fits `StandardScaler` and PCA on all rows and splits afterwards | `ml_pipeline.rs` 190-203 | The first test row reads 1.440 against 1.042 when the split comes first | Reproduced, not filed [2026-09-14](#2026-09-14--where-ix-differs) |
+| A vector of integer labels is a regression target unless told otherwise | `infer_task_type` calls any non-negative integer vector with at most 20 distinct values a classification | `preprocessing.rs` 234-254 | Twenty distinct values is the whole rule | Reproduced, not filed [2026-09-14](#2026-09-14--where-ix-differs) |
+| A k-nearest-neighbour tie breaks as scikit-learn breaks it | `max_by_key` returns the last maximum, so a tie goes to the largest class index | `knn.rs` 53 | Accuracy 0.947 against 0.974 | Reproduced, not filed [2026-09-14](#2026-09-14--where-ix-differs) |
+| An empty k-means cluster is re-seeded, as scikit-learn re-seeds it | The centroid update starts from zeros and skips clusters with no rows, so the centroid stays at the origin | `kmeans.rs` 137-152 | `KMeans(3)` on `[5, 5, 9, 9]` gives `[5.0, 9.0, 0.0]` | Reproduced, not filed [2026-09-14](#2026-09-14--where-ix-differs) |
+| The silhouette of a row alone in its cluster is 0, as Rousseeuw and scikit-learn define it | `silhouette_score_exact` sets `a = 0`, so `s = 1` | `ix-voicings/lib.rs` 664-678 | 0.9296 against 0.5963 | Reproduced, not filed [2026-09-14](#2026-09-14--where-ix-differs) |
+| The tutorials' import lines compile | `use ix_unsupervised::{KMeans, Clusterer};` fails with `E0432`: the crate exports modules only | `ix-unsupervised/lib.rs` 5-14 | `E0432` | Reproduced, not filed [2026-09-14](#2026-09-14--where-ix-differs) |
+| `KMeans::fit` runs several starts and keeps the best | It runs a single k-means++ start; the `ix_kmeans` MCP tool also fixes the seed at 42 | `kmeans.rs`, `handlers.rs` 322 | One start | Reproduced, not filed [2026-09-14](#2026-09-14--where-ix-differs) |
+| `ix_voicings::cluster` compares the *k* it tries | It keeps `k = 5` as soon as its silhouette reaches 0.15, and only tries `k = 3` below that | `ix-voicings/lib.rs` 770-776 | A threshold, not a comparison | Reproduced, not filed [2026-09-14](#2026-09-14--where-ix-differs) |
+| A Gaussian mixture guards against a collapsing component | `GMM` floors each variance at `1e-6`, which lets a component collapse onto a point | `gmm.rs` 170-171 | `1e-6` | Reproduced, not filed [2026-09-14](#2026-09-14--where-ix-differs) |
+| `explained_variance_ratio` is a share of the total variance | Each eigenvalue is divided by the sum of the *kept* eigenvalues, so the ratios always sum to 1 | `pca.rs` 46-57 | `[0.5635, 0.4365]` against the true `[0.3867, 0.2996]`, which sums to 0.6863 | Reproduced, not filed [2026-09-15](#2026-09-15--where-ix-differs-continued) |
+| Power iteration finds the major axis | It starts from the fixed vector `(1, …, 1)/√n`, and can return the minor axis | `pca.rs` 107 | A start that is not random | Reproduced, not filed [2026-09-15](#2026-09-15--where-ix-differs-continued) |
+| The eigenvalues can be read back | `PCA::explained_variance` is private and the ratio is normalized as above, so `save_state()` is the only way out | `pca.rs` | One accessor, and it is a serializer | Reproduced, not filed [2026-09-15](#2026-09-15--where-ix-differs-continued) |
+| A random forest draws its features once per split, as its own doc comment promises | It draws them once per tree, before the tree is built | `random_forest.rs` 68-84 | With `max_features = 1`: hand-written 0.9474, IX 0.7632 | Reproduced, documentation and code disagree, not filed [2026-09-15](#2026-09-15--where-ix-differs-continued) |
+| A tie in the forest vote breaks as scikit-learn breaks it | `max_by` keeps the last maximum, so it goes to the largest class index | `random_forest.rs` 97 | Same shape as finding 3 | Reproduced, not filed [2026-09-15](#2026-09-15--where-ix-differs-continued) |
+| The analytic gradient equals a finite-difference gradient | `Dense::backward` divides by the batch size a second time: `grad_output` already carries the `1/n` that `mse_gradient` put there | `ix-nn/layer.rs` 40-52 | Ratio 65.0000 exactly against the finite-difference oracle | Reproduced, not filed [2026-09-15](#2026-09-15--where-ix-differs-continued) |
+| `mse_gradient` is the gradient of `mse_loss` | It is, for one output column. `mse_loss` averages over rows and columns; `mse_gradient` divides by the rows only | `ix-nn/loss.rs` 6-16 | Ratios 1, 2, 3, 4 for 1 to 4 columns | Reproduced, not filed [2026-09-15](#2026-09-15--where-ix-differs-continued) |
+| `Dense::new` can be seeded | It draws from the thread generator, so a network is not reproducible | `ix-nn/layer.rs` 27 | No seed parameter | Reproduced, not filed [2026-09-15](#2026-09-15--where-ix-differs-continued) |
+| A `Sequential` of two `Dense` layers can learn XOR | `Dense` is the only type implementing `Layer`, so there is no activation to put between two affine maps: the whole network is one affine map | `ix-nn` | The loss floors at 0.25 after 50,000 epochs and predicts 0.5 at all four corners | Reproduced, a missing feature rather than a defect, not filed [2026-09-15](#2026-09-15--where-ix-differs-continued) |
+| `minimize` tells a diverged run apart from one that ran out of iterations | It returns the caller's own starting point, labelled as the best seen, with the same `converged: false` as an ordinary non-convergence | `ix-optimize/gradient.rs` 124-165 | Rosenbrock at rate 0.01 reports `best f 24.200000`, the value at the start | Reproduced, not filed [2026-09-15](#2026-09-15--where-ix-differs-continued) |
+
+## Experiments
+
+A course that finds nineteen divergences has to show what it checked and found right, or the nineteen mean nothing. These six are those checks. The fifth is the one that failed, and it produced findings 15 and 16.
+
+| Question | Hypothesis | Result | Verdict | Where |
+|---|---|---|---|---|
+| Do IX's `SGD`, `Momentum` and `Adam` match hand-written implementations step for step? | A correct implementation should match exactly, not approximately | Same step counts — 5000, 4129, 2822 — the same final points and the same first step | Confirmed | [2026-09-15](#2026-09-15--what-agreed) |
+| Does IX's `PCA` eigendecomposition match Jacobi and scikit-learn's SVD? | Implied by the five variances it prints | Jacobi to 1.28e-10, scikit-learn to the printed digits | Confirmed — only the ratio and the fixed start are wrong | [2026-09-15](#2026-09-15--what-agreed) |
+| Does `GradientBoostedClassifier` match a hand-rolled and a numpy cross-check? | Implied | It matches on every test row at every round count, with the same smoothed log priors and the same first-round stumps | Confirmed | [2026-09-15](#2026-09-15--what-agreed) |
+| Can a replayable 64-bit xorshift stand in for IX's unreplayable `StdRng` in a bootstrap check? | Written in advance: a replayable generator used identically in Rust and Python lands on the same out-of-bag rows | The numpy check lands on the same 48 rows left out | Confirmed | [2026-09-15](#2026-09-15--what-agreed) |
+| Does `ix_nn`'s analytic gradient equal its finite-difference gradient? | Written in advance: the ratio should be 1 | 65.0000, and then 1, 2, 3, 4 by column count — findings 15 and 16 | Refuted | [2026-09-15](#2026-09-15--what-agreed) |
+| Does macOS-ARM float summation change any claim the lessons make? | Written in advance: only the sign of an already-zero value should differ | `-0.0000` against `0.0000` at two corners, every other value identical to four decimals (run 35039180659) | Confirmed | [2026-09-16](#2026-09-16--a-negative-zero-on-macos) |
+
 ## 2026-09-14 — IX, pinned
 
 - IX is cloned apart from my working copy, with `git clone --filter=blob:none`, and checked out at [`490c39533627d296bf9f8f050e6fafc14d7a20c2`](https://github.com/GuitarAlchemist/ix/tree/490c39533627d296bf9f8f050e6fafc14d7a20c2), a commit of `main` from 2026-09-14, 21:40 UTC. The workspace has 83 folders under `crates/` (its README says 81 crates); the course reads `ix-math`, `ix-supervised`, `ix-optimize`, `ix-unsupervised`, `ix-voicings`, `ix-io` and `ix-agent`, and depends on the first five.
