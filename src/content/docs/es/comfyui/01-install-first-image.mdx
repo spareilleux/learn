@@ -305,6 +305,10 @@ El chunk `tEXt` llamado `prompt` contiene el grafo en formato de la API, en JSON
 - Un checkpoint contiene una red de eliminación de ruido, codificadores de texto y un VAE. SDXL base 1.0 ocupa 6,9 GB, está bajo la licencia CreativeML Open RAIL++-M, y dibuja lo que sugieren sus datos de entrenamiento, no siempre lo que pediste.
 - El servidor no tiene autenticación: mantenlo en 127.0.0.1.
 
+## Tu turno
+
+Lleva tu máquina al mismo punto y luego haz que te lo diga. Arranca el servidor, pon en cola el grafo de la lección con `curl` y anota los tres números que anotó esta lección: cuánto tardó la primera imagen, cuánto la segunda con los modelos ya cargados, y cuánta memoria mostraba `nvidia-smi` mientras muestreaba. Cambia después la indicación por algo que te importe — un objeto de tu escritorio — y guarda la primera imagen que salga, por equivocada que esté. La lección 2 explica por qué está equivocada, y la comparación solo significa algo si tienes tu propio antes.
+
 ## Ejercicios
 
 1. Encola dos veces el workflow de la lección con las mismas entradas, y luego una vez con `"seed": 43`. Compara las tres entradas de `/history`: ¿qué nodos se ejecutaron cada vez?
