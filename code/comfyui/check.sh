@@ -67,6 +67,10 @@ offline() {
 
   # Lesson 13: normal and roughness maps from a tileable pattern, with NumPy and Pillow (ComfyUI's requirements)
   py=${COMFYUI_PYTHON:-${PYTHON:-python}}
+
+  # Lesson 9: which files LoadImage and LoadVideo can list depends on the machine's
+  # MIME table, not on ComfyUI. Printed on each OS, not compared.
+  PYTHONDONTWRITEBYTECODE=1 "$py" data/mime-info.py
   mkdir -p out/textures
   {
     PYTHONDONTWRITEBYTECODE=1 "$py" textures/test_maps.py 2>&1 | grep -v "^Ran "
