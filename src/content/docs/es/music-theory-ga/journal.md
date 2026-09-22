@@ -23,6 +23,14 @@ sidebar:
 - [x] Apéndice C: un veredicto para cada línea `DIFF` de las lecciones 1 a 7
 - [ ] Lecciones 9 a 17 (ver el plan en la página de la misión)
 
+## 2026-09-18 — Correcciones upstream en GA: resolución de las anomalías
+
+- **16 de los 19 defectos resueltos upstream en GA**:
+  - Notas y análisis de alturas: fábricas `Pitch.Flat` (`DFlat`, `FFlat`, `GFlat`, `EFlat`, `BFlat`) corregidas; regexes ancladas y precompiladas en `PitchParser`; `Note.Flat.TryParse` corregido para que B natural se analice en B (y no B♭) con soporte Unicode `♭`; separación de `PitchClass.TryParseSetNotation`; `SimpleIntervalSize.TryParse` y `CompoundIntervalSize.TryParse` devuelven `false` ante entradas erróneas sin lanzar excepciones.
+  - Acordes y voicings: clasificación de cualidades y sufijos de `ChordFormula` mejorada (separación de dim7 de extensiones de 6ª/13ª, `m7b5` y `dim7` preservados); transposición con ortografía correcta en el constructor de `Chord`; conservación de `Root` y `Formula` originales en inversiones; exclusión de cuerdas al aire (traste 0) en `Voicing.HasBarre()`.
+  - Tonalidades: `KeyTools.GetParallelKey` conserva la tónica con el modo opuesto; `KeyTools.GetNeighboringKeys` busca por recuento de armadura; `Key.GetInterval` restablece el orden tónica-a-nota; `Key.Major.TryParse` devuelve `false` con entrada no válida; adición de `HarmonicFunction.Subtonic`; corrección del número romano `iii` en `Cadences.yaml` en mi menor.
+  - El defecto 12 (empaquetado en base 12) permanece como limitación fijada para preservar el orden existente del catálogo; los defectos 6 (`ModalFamily`) y 19 (`ClosestDiatonicKey`) se mantienen documentados como compromisos de diseño / heurísticas.
+
 ## 2026-09-15 — Un veredicto para cada divergencia, el ukelele y el bajo, tres apéndices
 
 - **Las 40 líneas `DIFF` de las lecciones 1 a 7 ya tienen un veredicto**, en el [apéndice C](../appendix-ga-findings/): 39 son un error de GA, una (`PitchClass.Parse("A")`) es una convención defendible con un fallo de precedencia debajo, y ninguna es un error del curso. Proceden de **19 defectos distintos** —una sola línea equivocada en `Note.Chromatic.ToAccidented` explica ocho líneas ella sola— y se reparten en tres familias: copiar y pegar dentro de un bloque de miembros casi idénticos, un tipo reducido al que se le pide la información que se construyó para descartar, y un `TryParse` que lanza una excepción.

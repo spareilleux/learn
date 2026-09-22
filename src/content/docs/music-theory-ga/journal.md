@@ -23,6 +23,14 @@ sidebar:
 - [x] Appendix C: a verdict on every `DIFF` row of lessons 1 to 7
 - [ ] Lessons 9 to 17 (see the outline on the mission page)
 
+## 2026-09-18 — Upstream GA fixes: resolving the findings
+
+- **16 of the 19 defects resolved upstream in GA**:
+  - Notes & pitch parsing: `Pitch.Flat` factories (`DFlat`, `FFlat`, `GFlat`, `EFlat`, `BFlat`) corrected; `PitchParser` anchored regexes with compiled static patterns; `Note.Flat.TryParse` fixed so natural B parses as B (not B♭) and Unicode `♭` is handled without case mutation; `PitchClass.TryParseSetNotation` separated from `TryParse`; `SimpleIntervalSize.TryParse` and `CompoundIntervalSize.TryParse` return `false` on invalid inputs instead of throwing.
+  - Chords & voicings: `ChordFormula` quality and suffix classification updated (dim7 distinguished from 6th/13th, `m7b5` and `dim7` preserved); spelling-aware interval transposition added to `Chord` constructor; original `Root` and `Formula` preserved across chord inversions; `Voicing.HasBarre()` open strings (fret 0) excluded.
+  - Keys & tonality: `KeyTools.GetParallelKey` preserves tonic with opposite mode; `KeyTools.GetNeighboringKeys` uses signature count lookup; `Key.GetInterval` root-to-note argument order restored; `Key.Major.TryParse` returns `false` on invalid root; `HarmonicFunction.Subtonic` enum member added; `Cadences.yaml` `iii` Roman numeral fixed in E Minor.
+  - Defect 12 (ICV packing base 12) remains pinned to preserve existing catalog numbering; defect 6 (ModalFamily) and defect 19 (ClosestDiatonicKey tonic ambiguity) documented as design/heuristic limitations.
+
 ## 2026-09-15 — A verdict on every divergence, the ukulele and the bass, three appendices
 
 - **All 40 `DIFF` rows of lessons 1 to 7 now have a verdict**, in [Appendix C](../appendix-ga-findings/): 39 are GA's bug, one (`PitchClass.Parse("A")`) is a defensible convention with a precedence flaw underneath, and none is an error in the course. They come from **19 distinct defects** — one wrong line in `Note.Chromatic.ToAccidented` accounts for eight rows on its own — and they fall into three families: copy-paste inside a block of near-identical members, a reduced type asked for the information it was built to discard, and `TryParse` that throws.
