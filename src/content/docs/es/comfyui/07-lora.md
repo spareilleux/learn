@@ -160,6 +160,10 @@ El entrenamiento aprende A y B a partir de imágenes de ejemplo mientras el chec
 - Los LoRAs de pocos pasos vienen con su propio sampler, scheduler y CFG; tómalos de la ficha, y traduce la guía 0 de diffusers al CFG 1 de ComfyUI.
 - Los LoRAs apilados se suman, sea cual sea su orden.
 
+## Tu turno
+
+Toma un LoRA que hayas descargado y lee su cabecera antes de usarlo, con el lector de `safetensors` del curso: su rango y su alfa según los tensores, y luego según los metadatos, y comprueba si coinciden. Cárgalo con tres intensidades sobre el modelo base para el que se entrenó, después deliberadamente sobre otro, y busca en el registro la línea que dice cuántos parches se aplicaron: ese número es la diferencia entre un LoRA que actúa y uno que no hace nada en silencio.
+
 ## Ejercicios
 
 1. La cabecera de un LoRA muestra una capa con `lora_down.weight` de forma 16 por 640, `lora_up.weight` de forma 640 por 16, y `alpha` 8. Con `strength_model` 0,75, ¿por cuánto se multiplica B·A?

@@ -516,6 +516,10 @@ On the GPU, with SDXL and the ControlNet loaded, the command would be the same w
 - Pick the server with the fewest prompts ahead, and stop taking jobs on SIGTERM before the grace period ends.
 - A fake server that replays recorded shapes tests every failure on three OSes in minutes; a CPU server with model-free workflows checks the fake against the real thing.
 
+## Your turn
+
+Run the fake server and make your worker meet one failure for real: kill the ComfyUI process mid-prompt, or return a 500 on `/prompt`, and check that the job comes back exactly once — not zero times, not twice. Then queue two jobs with the same id and see whether your claim really stops the second. A queue is only as good as the day something crashes while holding a job.
+
 ## Exercises
 
 1. Compute the delays between attempts with the defaults (4 attempts, 2 s base, 1 min cap) without jitter. With full jitter, what is the expected total wait of a job that fails every time?

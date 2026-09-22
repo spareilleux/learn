@@ -207,6 +207,10 @@ El PNG encolado desde el navegador también muestra el widget de control en acci
 - Valida sin conexión para obtener una lista completa de errores; el servidor se detiene en el primer problema de un nodo, y puede responder con una traza.
 - Los archivos PNG llevan el prompt, y también el workflow cuando se encolan desde el navegador. Calcula el hash de los píxeles, no de los archivos.
 
+## Tu turno
+
+Construye un grafo pequeño en el navegador — un checkpoint, dos indicaciones, un muestreador, un guardado — y expórtalo en los dos formatos. Convierte el archivo de la UI con el conversor del curso y compara el resultado con la exportación API del propio frontend: deben coincidir. Rómpelo después a propósito, con un enlace a un nodo que ya no existe o un `steps` de `-1`, y compara lo que enumera el validador sin conexión con lo que responde el servidor cuando lo pones en cola.
+
 ## Ejercicios
 
 1. Añade un segundo nodo `SaveImage` a `01-txt2img.api.json`, alimentado por el nodo `VAEDecode`, con el prefijo `l03/copy`. Ejecuta `comfy validate` sobre él: ¿qué orden imprime?

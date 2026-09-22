@@ -212,6 +212,10 @@ Ce que la CI ne vérifie pas : les aperçus, les messages `progress`, que les n�
 - Les messages WebSocket binaires sont des aperçus : un type d'événement, un format d'image, et un JPEG ou un PNG.
 - Ne compte ni sur l'ordre des nœuds de sortie, ni sur le nombre de messages `status`, ni sur l'obtention de nouveaux fichiers lors d'une exécution en cache.
 
+## À toi de jouer
+
+Ajoute au client C# ou au client Java ce que cette leçon a laissé de côté : un affichage de progression alimenté par les messages `progress`, ou un `POST /interrupt` déclenché au clavier. Débranche ensuite le câble réseau — ou arrête le serveur — au milieu d'un rendu, et regarde ce que fait ton client. Un client qui attend indéfiniment sur une socket fermée est le bogue le plus courant de ce genre de code.
+
 ## Exercices
 
 1. Exécute le client C# deux fois sur le workflow de la leçon 1, avec `--set 9.filename_prefix="l04/again"` la seconde fois. Quels messages la seconde exécution affiche-t-elle, et écrit-elle un fichier ?

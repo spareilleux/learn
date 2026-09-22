@@ -161,6 +161,10 @@ Lu avec Pillow, le masque vaut 255 dans l'ellipse et 0 à l'extérieur, avec une
 - `VAEEncodeForInpaint` grise les pixels masqués et demande un `denoise` de 1. Un masque de bruit garde l'image qu'il recouvre. Un modèle d'inpainting, alimenté par `InpaintModelConditioning`, est celui qui peint quelque chose de nouveau en contexte.
 - Le VAE modifie les pixels partout : recolle le résultat avec `ImageCompositeMasked`.
 
+## À toi de jouer
+
+Prends une photo à toi et efface quelque chose avec chacune des trois voies, sur le même masque et la même graine. Compare les résultats hors du masque avec `compare` : la voie compte moins que de savoir quels pixels tu as gardés. Repeins ensuite la même zone à denoise 0,4, 0,7 et 1, et note où ton sujet cesse d'être reconnaissable.
+
 ## Exercices
 
 1. Avec 20 étapes et un `denoise` de 0,4, combien de niveaux de bruit `set_steps` calcule-t-il, combien en garde-t-il, et combien d'étapes s'exécutent ?

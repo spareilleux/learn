@@ -212,6 +212,10 @@ Lo que la CI no comprueba: las vistas previas, los mensajes `progress`, que los 
 - Los mensajes WebSocket binarios son vistas previas: un tipo de evento, un formato de imagen y un JPEG o un PNG.
 - No confíes en el orden de los nodos de salida, en el número de mensajes `status`, ni en obtener archivos nuevos de una ejecución en caché.
 
+## Tu turno
+
+Añade al cliente en C# o al de Java lo que esta lección dejó fuera: una barra de progreso alimentada por los mensajes `progress`, o un `POST /interrupt` lanzado desde el teclado. Desconecta luego el cable de red — o detén el servidor — en mitad de un render, y observa qué hace tu cliente. Un cliente que espera para siempre en un socket cerrado es el error más común de este tipo de código.
+
 ## Ejercicios
 
 1. Ejecuta dos veces el cliente C# sobre el workflow de la lección 1, con `--set 9.filename_prefix="l04/again"` la segunda vez. ¿Qué mensajes imprime la segunda ejecución, y escribe algún archivo?

@@ -139,6 +139,10 @@ Le même ComfyUI, le même graphe PyTorch et les mêmes pixels ont donné quatre
 - La disposition se décide dans les premières étapes : un ControlNet actif seulement pendant celles-ci a gardé presque toute la composition.
 - Les filtres d'image sont eux aussi du code en virgule flottante : ne compare pas leur sortie bit à bit d'une machine à l'autre.
 
+## À toi de jouer
+
+Dessine toi-même une mise en place grossière — trois boîtes et un horizon dans n'importe quel éditeur d'images — et sers-t'en comme image de contrôle. Passe-la au Canny avec deux paires de seuils, puis fais varier `strength` de 0,2 à 1,2 et trouve la valeur où ta mise en place cesse d'être suivie. Termine avec `end_percent` à 0,3 : la composition doit tenir pendant que le détail s'émancipe.
+
 ## Exercices
 
 1. Les seuils `Canny` d'une fiche de modèle sont 50 et 150, pour OpenCV. Quelles valeurs mettre dans le nœud ?

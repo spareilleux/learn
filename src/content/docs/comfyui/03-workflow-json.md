@@ -207,6 +207,10 @@ The PNG queued from the browser also shows the control widget at work. Its `work
 - Validate offline for a complete error list; the server stops at the first problem of a node, and may answer with a traceback.
 - PNG files carry the prompt, and the workflow when queued from the browser. Hash pixels, not files.
 
+## Your turn
+
+Build a small graph in the browser — a checkpoint, two prompts, a sampler, a save — and export it in both formats. Convert the UI file with the course's converter and diff the result against the frontend's own API export: they should match. Then break it on purpose, with a link to a node that no longer exists or a `steps` of `-1`, and compare what the offline validator lists with what the server answers when you queue it.
+
 ## Exercises
 
 1. Add a second `SaveImage` node to `01-txt2img.api.json`, fed by the `VAEDecode` node, with the prefix `l03/copy`. Run `comfy validate` on it: what order does it print?

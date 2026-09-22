@@ -207,6 +207,10 @@ Le PNG mis en file d'attente depuis le navigateur montre aussi le widget de cont
 - Valide hors ligne pour obtenir une liste d'erreurs complète ; le serveur s'arrête au premier problème d'un nœud, et peut répondre avec une trace d'appels.
 - Les fichiers PNG contiennent le prompt, et le workflow quand l'image a été mise en file d'attente depuis le navigateur. Hache les pixels, pas les fichiers.
 
+## À toi de jouer
+
+Construis un petit graphe dans le navigateur — un checkpoint, deux invites, un échantillonneur, une sauvegarde — et exporte-le dans les deux formats. Convertis le fichier UI avec le convertisseur du cours et compare le résultat à l'export API du frontend : ils doivent coïncider. Casse-le ensuite exprès, avec un lien vers un nœud qui n'existe plus ou un `steps` à `-1`, et compare ce que liste le validateur hors ligne à ce que répond le serveur quand tu mets le graphe en file.
+
 ## Exercices
 
 1. Ajoute un second nœud `SaveImage` à `01-txt2img.api.json`, alimenté par le nœud `VAEDecode`, avec le préfixe `l03/copy`. Exécute `comfy validate` dessus : quel ordre affiche-t-il ?

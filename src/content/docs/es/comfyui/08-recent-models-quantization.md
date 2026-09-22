@@ -79,7 +79,7 @@ El curso comparó tres maneras de obtener el modelo 3D de un objeto pequeño par
 |---|---|---|---|
 | Licencia | Tencent Hunyuan 3D Community License: no en la UE, el Reino Unido ni Corea del Sur, salidas no mostradas en esos territorios, solicitud a Tencent por encima de un millón de usuarios activos mensuales | [MIT](https://github.com/microsoft/TRELLIS.2/blob/75fbf0183001ed9876c8dbb35de6b68552ee08bd/LICENSE), pero su codificador de imagen es DINOv3, bajo la DINOv3 License: citar DINOv3 en una publicación (1.b.ii), entregar una copia de la licencia con los pesos (1.b.i), aceptar los cambios futuros al seguir usándolos (8) | Blender es GPL, y su [página de licencia](https://www.blender.org/about/license/) dice «What you create with Blender is your sole property.»: lo que creas con Blender es tuyo |
 | RAM y VRAM libres en esta máquina | 19 GB de RAM libre para la 2.0 con SDXL; 9,4 GB de VRAM medidos durante el muestreo | unos 23 GB de RAM libre para el modelo int8 con SDXL; el README original pide «at least 24GB» de VRAM, y 16 GB queda *por verificar* | no necesita GPU |
-| Calidad observada | 890 140 y 1 017 760 triángulos para dos objetos simples, 19 084 y 189 748 aristas no manifold, sin UV ni textura, un reverso inventado, detalle pintado leído como relieve, y la línea del suelo de la imagen convertida en una losa | no probado | 3370 triángulos para el metrónomo y 5950 para el gramófono, ninguna arista no manifold, piezas con nombre, materiales separados y animaciones en el glTF, con unas 510 líneas de código; el detalle se detiene donde se detiene el código |
+| Calidad observada | 890 140 y 1 017 760 triángulos para dos objetos simples, 19 084 y 189 748 aristas no manifold, sin UV ni textura, un reverso inventado, detalle pintado leído como relieve, y la línea del suelo de la imagen convertida en una losa | no probado | 3370 triángulos para el metrónomo y 5950 para el gramófono, ninguna arista no manifold al releer el glTF exportado, piezas con nombre, materiales separados y animaciones, con unas 510 líneas de modelado y 120 más que las verifican en cada commit; el detalle se detiene donde se detiene el código |
 | Publicable en este sitio | no | sí, citando DINOv3 | sí |
 
 El [paquete TRELLIS.2 de Comfy-Org](https://huggingface.co/Comfy-Org/TRELLIS.2) está etiquetado como MIT y distribuye `clip_vision/dino_v3_vit_l.safetensors` sin una copia de la DINOv3 License. La licencia del archivo se aplica igualmente: un reempaquetado no la cambia. Esto no es asesoramiento legal.
@@ -234,6 +234,10 @@ Las guías escritas para versiones antiguas de ComfyUI suelen recomendar archivo
 - Un formato solo se ejecuta de forma nativa en las GPUs que tienen sus kernels. En las demás, ComfyUI descuantiza en cada paso: el archivo sigue siendo pequeño, y se pierde la velocidad.
 - La VRAM dinámica, activada por defecto en NVIDIA, ejecuta modelos más grandes que la GPU. `nvidia-smi` muestra entonces lo que está libre, no lo que necesita el modelo, y `--lowvram` no hace nada.
 - Aquí, int8 mantuvo la imagen cerca de la de bf16; nvfp4 hizo otra imagen de la misma escena, al doble de la velocidad de bf16.
+
+## Tu turno
+
+Elige un modelo que de verdad pienses usar y haz las dos lecturas que hace esta lección. Lee su cabecera y cuenta los bytes por formato: cuánto hay en int8 o en fp4, cuánto se quedó en bf16 y cuánto se aleja el archivo del tamaño que sugiere su nombre. Lee después su licencia en la ficha del modelo original, para el tamaño exacto que descargaste — no para la familia — y decide antes de generar si lo que salga podrá publicarse donde piensas publicarlo.
 
 ## Ejercicios
 

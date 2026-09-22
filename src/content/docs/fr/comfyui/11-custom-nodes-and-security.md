@@ -356,6 +356,10 @@ Sa prochaine étape est un vrai rendu. La carte du manche entre dans le ControlN
 - Préfère `.safetensors` ; tout `torch.load` sans `weights_only=True`, ou sur un PyTorch antérieur à 2.6, peut exécuter du code.
 - Limite les dégâts : boucle locale uniquement, un environnement, un utilisateur sans droits, un conteneur, pas de trafic sortant, une liste blanche de packs, et un diff lu avant chaque mise à jour.
 
+## À toi de jouer
+
+Prends un pack que tu veux vraiment installer et audite-le avant qu'il n'approche ton ComfyUI. Lance le script du cours sur un clone, puis lis, de tes propres yeux, les trois fichiers qu'il désigne en premier : `__init__.py`, tout ce qui s'appelle `install`, et ce que sert le `WEB_DIRECTORY`. Note ce que le pack fait à l'import, ce qu'il télécharge et d'où. Si tu ne sais pas répondre à ces trois questions après lecture, c'est une réponse aussi.
+
 ## Exercices
 
 1. Écris un quatrième nœud GA, `GAVoicingNotes`, qui prend un voicing et renvoie une `STRING` avec les noms des notes depuis le mi grave, comme `C3 E3 G3 C4 E4` pour `x32010`. Écris son test d'abord.

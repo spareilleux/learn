@@ -161,6 +161,10 @@ Read with Pillow, the mask is 255 inside the ellipse and 0 outside, with a short
 - `VAEEncodeForInpaint` grays the masked pixels and needs `denoise` 1. A noise mask keeps the image under it. An inpainting model, fed by `InpaintModelConditioning`, is the one that paints something new in context.
 - The VAE changes pixels everywhere: paste the result back with `ImageCompositeMasked`.
 
+## Your turn
+
+Take a photograph of your own and remove something from it with each of the three routes, on the same mask and the same seed. Compare the results outside the mask with `compare`: the route matters less than knowing which pixels you kept. Then repaint the same area at denoise 0.4, 0.7 and 1, and note where your subject stops being recognisable.
+
 ## Exercises
 
 1. With 20 steps and `denoise` 0.4, how many noise levels does `set_steps` compute, how many does it keep, and how many steps run?

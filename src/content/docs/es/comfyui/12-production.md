@@ -516,6 +516,10 @@ En la GPU, con SDXL y el ControlNet cargados, el comando sería el mismo con la 
 - Elige el servidor con menos prompts delante, y deja de tomar jobs con SIGTERM antes de que acabe el periodo de gracia.
 - Un servidor falso que reproduce respuestas grabadas prueba cada fallo en tres sistemas operativos en minutos; un servidor CPU con workflows sin modelo contrasta el falso con el real.
 
+## Tu turno
+
+Arranca el servidor falso y haz que tu worker se enfrente a un fallo de verdad: mata el proceso de ComfyUI en mitad de un prompt, o devuelve un 500 en `/prompt`, y comprueba que el trabajo vuelve exactamente una vez, ni cero ni dos. Pon después dos trabajos en cola con el mismo identificador y mira si tu reserva detiene realmente al segundo. Una cola vale lo que vale el día en que algo se cae sosteniendo un trabajo.
+
 ## Ejercicios
 
 1. Calcula las esperas entre intentos con los valores por defecto (4 intentos, base de 2 s, tope de 1 minuto) sin jitter. Con full jitter, ¿cuál es la espera total media de un job que falla siempre?

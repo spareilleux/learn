@@ -516,6 +516,10 @@ Sur le GPU, avec SDXL et le ControlNet chargés, la commande serait la même ave
 - Choisissez le serveur qui a le moins de prompts devant, et arrêtez de prendre des jobs sur SIGTERM avant la fin du délai de grâce.
 - Un faux serveur qui rejoue des réponses enregistrées teste chaque panne sur trois OS en quelques minutes ; un serveur CPU avec des workflows sans modèle confronte le faux au vrai.
 
+## À toi de jouer
+
+Lance le faux serveur et fais rencontrer à ton worker une vraie panne : tue le processus ComfyUI au milieu d'un prompt, ou renvoie un 500 sur `/prompt`, et vérifie que le travail revient exactement une fois — pas zéro, pas deux. Mets ensuite deux travaux en file avec le même identifiant et regarde si ta prise d'exclusivité arrête vraiment le second. Une file ne vaut que ce qu'elle vaut le jour où quelque chose tombe en tenant un travail.
+
 ## Exercices
 
 1. Calculez les délais entre les tentatives avec les valeurs par défaut (4 tentatives, base de 2 s, plafond d'une minute) sans gigue. Avec la full jitter, quelle est l'attente totale moyenne d'un job qui échoue à chaque fois ?

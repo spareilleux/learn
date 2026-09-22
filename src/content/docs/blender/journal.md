@@ -115,6 +115,29 @@ The same two objects, a metronome and a gramophone, were made twice: generated f
 - **A detail of the exporter.** The record's 720° in 1.54 s are written as 155 keys, not as two keys with a turn count: glTF stores rotations as quaternions, which cannot say "two turns". A player interpolating between two quaternions takes the short way, so a full turn has to be cut into keys.
 - **Memory.** Blender is only started here when at least 12 GB of memory are free. The night before, a Cycles bake of another scene crashed inside Embree while building its BVH, with 1 GB free on a 64 GB machine.
 
+## 2026-09-22 — Occlusion baked into vertices, and telling a real effect from a darker one
+
+The question came from another page of this project, the [Banc de Placement](../artifacts/#banc-de-placement): a room drawn by a hand-written WebGL2 renderer — a guitar, a desk, a rug, six point lights — where nothing quite sits on anything. Would occlusion baked in Blender and shipped as one byte per vertex be worth its weight in a page? Nothing in that page was changed: the bake, the patched shader and the three measurements below all ran on a local copy.
+
+**The bake.** A headless capture of the page wrote out its draw calls — 803 draws over 518 meshes — of which 220 never move. Those were rebuilt in Blender and baked with Cycles into a point color attribute, `bpy.ops.object.bake(type="AO", target="VERTEX_COLORS")`: 21,533 vertices, 25.9 s for the ambient occlusion pass and 24.4 s for the indirect one. One byte per vertex is 21,533 bytes; carried as base64 inside the page's JSON it is 39,856. A patched copy of the page binds it as a vertex attribute and multiplies one term of its shader by it.
+
+**Two figures, three measurements.** The same three camera angles each time, and the same two numbers: the percentage of pixels whose Rec.601 luminance moves by more than 4.5/255, and the shift in mean luminance. The three views are called `default`, `low-left` and `high-right` below.
+
+| | changed pixels | mean shift | mean luminance | luminance spread |
+|---|---|---|---|---|
+| occlusion on the ambient term | 4.2, 5.0, 4.4 % | 1.23, 1.24, 1.30 | −0.4 | −0.16, −0.10, −0.07 |
+| also on what the six lights diffuse | 47.8, 35.6, 52.1 % | 6.98, 5.64, 6.84 | −6.1 | −1.27, −0.18, −0.57 |
+| the same, with the exposure put back | 58.3, 41.2, 59.7 % | 6.84, 6.25, 6.52 | 0.0 | +1.44, +1.82, +1.95 |
+
+- **The first path changes almost nothing.** Multiplying only the ambient term by the occlusion moves 4 to 5 % of the pixels by a mean of 1.2 on 255. In that shader the ambient coefficient runs from 0.026 to 0.105 depending on the material, so the term it scales is a small part of the final color: there was little there to take away. 40 kB for that is a bad trade.
+- **The second looked spectacular, and that was the problem.** Multiplying what the six lights diffuse by the occlusion darkens the whole image: the mean luminance falls 6.1 on 255, about 10 % of exposure. A flat 0.9 over the image would also "change 48 % of the pixels", and would show nothing at all. So the third measurement puts the mean luminance back where it was — one gain in linear light, the way an exposure change works, rather than on the sRGB bytes — and asks the same two questions again.
+- **The percentage of changed pixels went up, from 47.8 to 58.3 %.** Undoing the darkening was supposed to make it collapse. The gain alone pushes nearly every pixel past the threshold, so the figure was measuring exposure in both directions: it could never have answered the question. **A percentage of changed pixels means nothing without exposure control** — and a figure that rises when the confounder is removed is not a weak measurement, it is the wrong one.
+- **What answers it is the spread of the luminance.** A pure exposure change leaves the standard deviation alone once the gain is undone, and that is exactly what the ambient path does: +0.04, +0.09, +0.11, which is noise. The diffuse path widens it by 1.44, 1.82 and 1.95 while the mean stays fixed — the lit side rises while the hollows fall. That is what local contrast is. The criterion generalizes: to tell whether an effect is real or merely darker, hold the mean and look at the spread.
+- **The cross-check.** The mean shift barely moves when the exposure is put back, 6.98 → 6.84 on the first view: the darkening was not what produced it. Two figures react to the renormalization in opposite ways — one feeds on it, the other ignores it — and both point the same way. That is what makes the verdict hold.
+- **Verdict: confirmed.** Occlusion baked per vertex buys real contact shading here, for about 40 kB, but only on the second path: on the diffuse term, not on the ambient one alone.
+- **Where it stops, at the same level as the result.** Three views of a single scene. And only the 220 static draws are baked: a baked shadow is glued to its geometry, so an object moved over a baked floor neither carries its shadow nor receives one. The technique holds for what does not move, and a reader taking it up should know that before budgeting the bytes.
+- **Not published.** The bake, the patched page and the measurement script live outside the repository and are not published, and the artifact itself was left untouched.
+
 ## To verify
 
 - Installing with winget, Snap and Flathub, and the versions they carry.

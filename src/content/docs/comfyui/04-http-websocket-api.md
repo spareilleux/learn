@@ -212,6 +212,10 @@ What CI doesn't check: previews, `progress` messages, which the solid-color node
 - Binary WebSocket messages are previews: an event type, an image format, and a JPEG or PNG.
 - Don't rely on the order of output nodes, on the number of `status` messages, or on getting new files from a cached run.
 
+## Your turn
+
+Add to the C# or the Java client the one thing this lesson left out: a progress display fed by the `progress` messages, or a `POST /interrupt` triggered from the keyboard. Then unplug the network cable — or stop the server — in the middle of a run, and see what your client does. A client that hangs forever on a closed socket is the most common bug in this kind of code.
+
 ## Exercises
 
 1. Run the C# client twice on the lesson 1 workflow with `--set 9.filename_prefix="l04/again"` the second time. Which messages does the second run print, and does it write a file?

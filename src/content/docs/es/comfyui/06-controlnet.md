@@ -139,6 +139,10 @@ El mismo ComfyUI, el mismo grafo de PyTorch y los mismos píxeles dieron cuatro 
 - La composición se decide en los primeros pasos: un ControlNet activo solo en ellos conservó casi toda la composición.
 - Los filtros de imagen también son código en coma flotante: no compares su salida bit a bit entre máquinas.
 
+## Tu turno
+
+Dibuja tú mismo una disposición tosca — tres cajas y un horizonte en cualquier editor de imágenes — y úsala como imagen de control. Pásala por Canny con dos pares de umbrales, luego recorre `strength` de 0,2 a 1,2 y encuentra el valor en el que tu disposición deja de respetarse. Termina con `end_percent` en 0,3: la composición debe aguantar mientras el detalle se va por su cuenta.
+
 ## Ejercicios
 
 1. Los umbrales de `Canny` de una ficha de modelo son 50 y 150, para OpenCV. ¿Qué valores van en el nodo?

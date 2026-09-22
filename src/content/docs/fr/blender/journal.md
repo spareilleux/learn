@@ -115,6 +115,29 @@ Les deux mêmes objets, un métronome et un gramophone, ont été faits deux foi
 - **Un détail de l'exporteur.** Les 720° du disque en 1,54 s s'écrivent en 155 clés, et non en deux clés avec un nombre de tours : glTF range les rotations en quaternions, qui ne savent pas dire « deux tours ». Un lecteur qui interpole entre deux quaternions prend le chemin court : un tour complet doit donc être découpé en clés.
 - **Mémoire.** Blender n'est lancé ici qu'avec au moins 12 Go de mémoire libre. La veille, un bake Cycles d'une autre scène a planté dans Embree pendant la construction de son BVH, avec 1 Go libre sur une machine de 64 Go.
 
+## 2026-09-22 — Occlusion cuite dans les sommets, et distinguer un effet réel d'une image plus sombre
+
+La question vient d'une autre page de ce projet, le [Banc de Placement](../artifacts/#banc-de-placement) : une pièce dessinée par un moteur WebGL2 écrit à la main — une guitare, un bureau, un tapis, six lampes ponctuelles — où rien ne pose vraiment sur rien. Une occlusion cuite dans Blender et livrée à raison d'un octet par sommet vaudrait-elle son poids dans une page ? Rien n'a été modifié dans cette page : la cuisson, le shader rapiécé et les trois mesures ci-dessous ont tous tourné sur une copie locale.
+
+**La cuisson.** Une capture sans écran de la page a sorti ses appels de dessin — 803 dessins sur 518 maillages — dont 220 ne bougent jamais. Ceux-là ont été reconstruits dans Blender et cuits avec Cycles dans un attribut de couleur par point, `bpy.ops.object.bake(type="AO", target="VERTEX_COLORS")` : 21 533 sommets, 25,9 s pour la passe d'occlusion ambiante et 24,4 s pour l'indirecte. Un octet par sommet fait 21 533 octets ; porté en base64 dans le JSON de la page, 39 856. Une copie rapiécée de la page le lie comme attribut de sommet et multiplie par lui un terme de son shader.
+
+**Deux chiffres, trois mesures.** Les mêmes trois angles de caméra à chaque fois, et les mêmes deux nombres : le pourcentage de pixels dont la luminance Rec.601 bouge de plus de 4,5/255, et l'écart de luminance moyenne. Les trois vues s'appellent ci-dessous `default`, `low-left` et `high-right`.
+
+| | pixels changés | écart moyen | luminance moyenne | dispersion de la luminance |
+|---|---|---|---|---|
+| occlusion sur le terme ambiant | 4,2, 5,0, 4,4 % | 1,23, 1,24, 1,30 | −0,4 | −0,16, −0,10, −0,07 |
+| aussi sur ce que diffusent les six lampes | 47,8, 35,6, 52,1 % | 6,98, 5,64, 6,84 | −6,1 | −1,27, −0,18, −0,57 |
+| les mêmes, exposition remise en place | 58,3, 41,2, 59,7 % | 6,84, 6,25, 6,52 | 0,0 | +1,44, +1,82, +1,95 |
+
+- **La première piste ne change presque rien.** Ne multiplier que le terme ambiant par l'occlusion déplace 4 à 5 % des pixels, d'une moyenne de 1,2 sur 255. Dans ce shader, le coefficient ambiant va de 0,026 à 0,105 selon le matériau : le terme qu'il pondère ne pèse qu'une petite part de la couleur finale, il n'y avait donc pas grand-chose à en retirer. 40 Ko pour cela, c'est un mauvais marché.
+- **La seconde avait l'air spectaculaire, et c'était le problème.** Multiplier par l'occlusion ce que diffusent les six lampes assombrit toute l'image : la luminance moyenne perd 6,1 sur 255, soit environ 10 % d'exposition. Un 0,9 uniforme sur l'image entière « changerait » lui aussi 48 % des pixels, et ne montrerait rigoureusement rien. La troisième mesure remet donc la luminance moyenne là où elle était — un gain unique en lumière linéaire, comme fonctionne une exposition, et non sur les octets sRGB — puis repose les deux mêmes questions.
+- **Le pourcentage de pixels changés a monté, de 47,8 à 58,3 %.** Défaire l'assombrissement devait le faire s'effondrer. Le gain à lui seul pousse presque chaque pixel au-delà du seuil : ce chiffre mesurait l'exposition, dans les deux sens, et ne pouvait donc pas répondre à la question. **Un pourcentage de pixels changés ne veut rien dire sans contrôle d'exposition** — et un chiffre qui monte quand on retire le facteur parasite n'est pas une mesure faible, c'est la mauvaise mesure.
+- **Ce qui répond, c'est la dispersion de la luminance.** Une exposition pure laisse l'écart-type intact une fois le gain défait, et c'est exactement ce que fait la piste ambiante : +0,04, +0,09, +0,11, du bruit. La piste diffuse l'élargit de 1,44, 1,82 et 1,95 pendant que la moyenne reste fixe — le côté éclairé monte tandis que les creux descendent. C'est la définition du contraste local. Le critère se généralise : pour savoir si un effet est réel ou seulement plus sombre, on tient la moyenne et on regarde la dispersion.
+- **La vérification croisée.** L'écart moyen bouge à peine quand l'exposition est remise, 6,98 → 6,84 sur la première vue : l'assombrissement n'en était pas la cause. Deux chiffres réagissent au recalage en sens contraires — l'un s'en nourrit, l'autre l'ignore — et tous deux pointent dans la même direction. C'est ce qui rend le verdict solide.
+- **Verdict : confirmé.** L'occlusion cuite par sommet achète ici de vraies ombres de contact, pour environ 40 Ko, mais sur la seconde piste seulement : sur le terme diffus, pas sur le seul terme ambiant.
+- **Où cela s'arrête, au même niveau que le résultat.** Trois vues d'une seule scène. Et seuls les 220 dessins statiques sont cuits : une ombre cuite est collée à sa géométrie, si bien qu'un objet déplacé au-dessus d'un sol cuit n'emporte pas son ombre et n'en reçoit pas. La technique ne vaut que pour ce qui ne bouge pas, et qui la reprend doit le savoir avant d'en budgéter les octets.
+- **Non publié.** La cuisson, la page rapiécée et le script de mesure vivent hors du dépôt et ne sont pas publiés ; l'artefact lui-même n'a pas été touché.
+
 ## À vérifier
 
 - L'installation avec winget, Snap et Flathub, et les versions qu'ils proposent.

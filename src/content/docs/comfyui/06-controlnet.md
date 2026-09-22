@@ -139,6 +139,10 @@ The same ComfyUI, PyTorch graph and pixels gave four different images. The three
 - The layout is decided in the first steps: a ControlNet active only there kept almost the whole composition.
 - Image filters are floating-point code too: don't compare their output bit for bit across machines.
 
+## Your turn
+
+Draw a rough layout yourself — three boxes and a horizon in any image editor — and use it as a control image. Run Canny on it at two threshold pairs, then sweep `strength` from 0.2 to 1.2 and find the value where your layout stops being followed. Finish with `end_percent` at 0.3: the composition should hold while the detail goes its own way.
+
 ## Exercises
 
 1. `Canny` thresholds from a model card are 50 and 150, for OpenCV. What values go in the node?

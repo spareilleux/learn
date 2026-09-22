@@ -160,6 +160,10 @@ L'entraînement apprend A et B à partir d'images d'exemple pendant que le check
 - Les LoRA à peu d'étapes viennent avec leur propre sampler, scheduler et CFG ; prends-les dans la fiche, et traduis la guidance 0 de diffusers en CFG 1 dans ComfyUI.
 - Des LoRA empilés s'additionnent, quel que soit leur ordre.
 
+## À toi de jouer
+
+Prends un LoRA que tu as téléchargé et lis son en-tête avant de t'en servir, avec le lecteur `safetensors` du cours : son rang et son alpha d'après les tenseurs, puis d'après les métadonnées, et vois s'ils s'accordent. Charge-le à trois forces sur le modèle de base pour lequel il a été entraîné, puis délibérément sur un autre, et trouve dans le journal la ligne qui dit combien de patchs ont été attachés — ce nombre fait toute la différence entre un LoRA qui agit et un LoRA qui ne fait rien en silence.
+
 ## Exercices
 
 1. L'en-tête d'un LoRA montre une couche avec un `lora_down.weight` de forme 16 sur 640, un `lora_up.weight` de forme 640 sur 16, et un `alpha` de 8. Avec un `strength_model` de 0,75, par quoi B·A est-il multiplié ?

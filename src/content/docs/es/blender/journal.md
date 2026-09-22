@@ -115,6 +115,29 @@ Los mismos dos objetos, un metrónomo y un gramófono, se hicieron dos veces: ge
 - **Un detalle del exportador.** Los 720° del disco en 1,54 s se escriben en 155 claves, y no en dos claves con un número de vueltas: glTF guarda las rotaciones como cuaterniones, que no saben decir «dos vueltas». Un reproductor que interpola entre dos cuaterniones toma el camino corto, así que una vuelta completa hay que partirla en claves.
 - **Memoria.** Aquí Blender solo se inicia con al menos 12 GB de memoria libre. La víspera, un bake de Cycles de otra escena se cayó dentro de Embree mientras construía su BVH, con 1 GB libre en una máquina de 64 GB.
 
+## 2026-09-22 — Oclusión horneada en los vértices, y distinguir un efecto real de una imagen más oscura
+
+La pregunta viene de otra página de este proyecto, el [Banc de Placement](../artifacts/#banc-de-placement): una sala dibujada por un motor WebGL2 escrito a mano — una guitarra, un escritorio, una alfombra, seis luces puntuales — donde nada se apoya del todo en nada. ¿Valdría su peso en una página una oclusión horneada en Blender y entregada a razón de un byte por vértice? Nada se modificó en esa página: el horneado, el sombreador parcheado y las tres mediciones de abajo corrieron todos sobre una copia local.
+
+**El horneado.** Una captura sin pantalla de la página sacó sus llamadas de dibujo — 803 dibujos sobre 518 mallas — de las cuales 220 no se mueven nunca. Esas se reconstruyeron en Blender y se hornearon con Cycles en un atributo de color por punto, `bpy.ops.object.bake(type="AO", target="VERTEX_COLORS")`: 21.533 vértices, 25,9 s para la pasada de oclusión ambiental y 24,4 s para la indirecta. Un byte por vértice son 21.533 bytes; llevado en base64 dentro del JSON de la página, 39.856. Una copia parcheada de la página lo vincula como atributo de vértice y multiplica por él un término de su sombreador.
+
+**Dos cifras, tres mediciones.** Los mismos tres ángulos de cámara cada vez, y los mismos dos números: el porcentaje de píxeles cuya luminancia Rec.601 se mueve más de 4,5/255, y el desplazamiento de la luminancia media. Las tres vistas se llaman abajo `default`, `low-left` y `high-right`.
+
+| | píxeles cambiados | desplazamiento medio | luminancia media | dispersión de la luminancia |
+|---|---|---|---|---|
+| oclusión sobre el término ambiental | 4,2, 5,0, 4,4 % | 1,23, 1,24, 1,30 | −0,4 | −0,16, −0,10, −0,07 |
+| también sobre lo que difunden las seis luces | 47,8, 35,6, 52,1 % | 6,98, 5,64, 6,84 | −6,1 | −1,27, −0,18, −0,57 |
+| las mismas, con la exposición devuelta | 58,3, 41,2, 59,7 % | 6,84, 6,25, 6,52 | 0,0 | +1,44, +1,82, +1,95 |
+
+- **El primer camino casi no cambia nada.** Multiplicar solo el término ambiental por la oclusión mueve del 4 al 5 % de los píxeles, una media de 1,2 sobre 255. En ese sombreador el coeficiente ambiental va de 0,026 a 0,105 según el material: el término que pondera pesa poco en el color final, así que había poco que quitar. 40 KB por eso es un mal negocio.
+- **El segundo parecía espectacular, y ahí estaba el problema.** Multiplicar por la oclusión lo que difunden las seis luces oscurece toda la imagen: la luminancia media pierde 6,1 sobre 255, cerca del 10 % de exposición. Un 0,9 uniforme sobre la imagen entera también «cambiaría» el 48 % de los píxeles, y no mostraría absolutamente nada. La tercera medición devuelve entonces la luminancia media a donde estaba — una sola ganancia en luz lineal, como funciona una exposición, y no sobre los bytes sRGB — y vuelve a hacer las dos mismas preguntas.
+- **El porcentaje de píxeles cambiados subió, del 47,8 al 58,3 %.** Deshacer el oscurecimiento debía hacerlo caer. La ganancia por sí sola empuja casi cada píxel más allá del umbral: esa cifra medía la exposición, en los dos sentidos, y por tanto no podía responder a la pregunta. **Un porcentaje de píxeles cambiados no significa nada sin control de exposición** — y una cifra que sube cuando se quita el factor que estorba no es una medida débil, es la medida equivocada.
+- **Lo que responde es la dispersión de la luminancia.** Una exposición pura deja intacta la desviación típica una vez deshecha la ganancia, y eso es exactamente lo que hace el camino ambiental: +0,04, +0,09, +0,11, ruido. El camino difuso la ensancha en 1,44, 1,82 y 1,95 mientras la media se queda fija — el lado iluminado sube mientras los huecos bajan. Eso es el contraste local, por definición. El criterio se generaliza: para saber si un efecto es real o solo más oscuro, se fija la media y se mira la dispersión.
+- **La comprobación cruzada.** El desplazamiento medio apenas se mueve cuando se devuelve la exposición, 6,98 → 6,84 en la primera vista: el oscurecimiento no era su causa. Dos cifras reaccionan al reajuste en sentidos opuestos — una se alimenta de él, la otra lo ignora — y ambas apuntan en la misma dirección. Eso es lo que hace sólido el veredicto.
+- **Veredicto: confirmado.** La oclusión horneada por vértice compra aquí sombras de contacto reales, por unos 40 KB, pero solo en el segundo camino: sobre el término difuso, no sobre el ambiental solo.
+- **Dónde se detiene, al mismo nivel que el resultado.** Tres vistas de una sola escena. Y solo están horneados los 220 dibujos estáticos: una sombra horneada está pegada a su geometría, de modo que un objeto movido sobre un suelo horneado ni se lleva su sombra ni recibe ninguna. La técnica solo vale para lo que no se mueve, y quien la retome debe saberlo antes de presupuestar los bytes.
+- **Sin publicar.** El horneado, la página parcheada y el script de medición viven fuera del repositorio y no se publican; el artefacto mismo no se tocó.
+
 ## Por verificar
 
 - La instalación con winget, Snap y Flathub, y las versiones que ofrecen.

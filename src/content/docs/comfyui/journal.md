@@ -149,14 +149,6 @@ sidebar:
 
 *Failures, before the fix. ComfyUI v0.36.0: Z-Image-Turbo nvfp4 with Qwen3 4B fp4 mixed, seed 42, 8 steps, CFG 1, `res_multistep`, `simple`, workflow [`09-seamless.api.json`](https://github.com/spareilleux/learn/blob/d16b4d70b565257067309b7b8d7f51408cb81741/code/comfyui/workflows/09-seamless.api.json) with its cross set to 160 pixels, 64 of feather and denoise 0.7. From left to right: rosewood repeated 2 × 2; the middle 512 × 512 pixels of the rosewood; the prompt "flat top-down photograph of pale maple, subtle straight grain, even soft lighting, no shadows, wood texture", repeated 2 × 2.*
 
-## 2026-09-19 — ComfyUI preflight for the orbital scene
-
-A separate CPU server (0.36.0, localhost:8193) confirmed all node classes of the course's Canny workflow, the installed SDXL checkpoint and union ControlNet. No prompt was submitted; GPU inference remained 0 s. The server was stopped after the check. Unexpectedly, `--base-directory` alone migrated the installation's legacy `user/comfyui.db` to a `.bak` and copied it into the test directory. The original file was restored from that backup without overwriting another file; both SHA-256 values matched. The backup was retained. Subsequent isolated probes must specify `--database-url sqlite:///:memory:` or an explicit task-local database URL. Inference and image quality remain to verify.
-
-## 2026-09-19 — Actual Blender-to-ComfyUI preprocessing
-
-The Blender v2 render was copied into the isolated ComfyUI input directory. `LoadImage → Canny → SaveImage` completed successfully on CPU in **3.731 s** (history timestamps); the output was visually inspected. Rings, pillars and causeway edges remain visible. This is a control image, not an SDXL-generated scene or new 3D geometry. Prompt ID: `7f26de5e-5d83-455c-97be-1e3401e9ba5f`. Output: `C:/tmp/blender-comfy-scenes-20260919/comfy-base/output/orbital-study/canny-edges_00001_.png`. The explicit in-memory database prevented the previous migration; the installation database hash remained unchanged. GPU time and paid API calls: **0**. SDXL inference was deferred rather than loading both models under limited available host RAM (about 10 GiB).
-
 ## 2026-09-17 — A 3D model published before its license was read
 
 - On 16 September, the Atlas session generated a metronome and a gramophone as 3D meshes, from SDXL images, with Hunyuan3D 2.0 and ComfyUI's core nodes. The Blender course's journal published their renders at 00:23 on 17 September, in commit `a165915`.
@@ -164,6 +156,14 @@ The Blender v2 render was copied into the isolated ComfyUI input directory. `Loa
 - At 00:44 the user decided: Hunyuan3D stays on the local machine, and anything published uses TRELLIS.2 (MIT, with DINOv3 under its own license) or models built with code. The Blender course removed the two renders in commit `c8a5a33` and describes in words what they showed.
 - TRELLIS.2 needs about 23 GB of free RAM here, and upstream asks for 24 GB of VRAM; it hasn't run. The two objects are being remodelled with `bpy` instead: the Blender journal tells that side of the story, [before](../../blender/journal/#2026-09-17--models-generated-in-comfyui-cleaned-in-blender) and [after](../../blender/journal/#2026-09-22--modelling-in-bpy-against-image-to-3d).
 - Lesson 8 now has a section on [reading a license before publishing an output](../08-recent-models-quantization/#read-the-license-before-publishing-an-output), with the clauses and a comparison of the three routes. No Hunyuan3D image appears in this course.
+
+## 2026-09-19 — ComfyUI preflight for the orbital scene
+
+A separate CPU server (0.36.0, localhost:8193) confirmed all node classes of the course's Canny workflow, the installed SDXL checkpoint and union ControlNet. No prompt was submitted; GPU inference remained 0 s. The server was stopped after the check. Unexpectedly, `--base-directory` alone migrated the installation's legacy `user/comfyui.db` to a `.bak` and copied it into the test directory. The original file was restored from that backup without overwriting another file; both SHA-256 values matched. The backup was retained. Subsequent isolated probes must specify `--database-url sqlite:///:memory:` or an explicit task-local database URL. Inference and image quality remain to verify.
+
+## 2026-09-19 — Actual Blender-to-ComfyUI preprocessing
+
+The Blender v2 render was copied into the isolated ComfyUI input directory. `LoadImage → Canny → SaveImage` completed successfully on CPU in **3.731 s** (history timestamps); the output was visually inspected. Rings, pillars and causeway edges remain visible. This is a control image, not an SDXL-generated scene or new 3D geometry. Prompt ID: `7f26de5e-5d83-455c-97be-1e3401e9ba5f`. Output: `C:/tmp/blender-comfy-scenes-20260919/comfy-base/output/orbital-study/canny-edges_00001_.png`. The explicit in-memory database prevented the previous migration; the installation database hash remained unchanged. GPU time and paid API calls: **0**. SDXL inference was deferred rather than loading both models under limited available host RAM (about 10 GiB).
 
 ## To verify
 
