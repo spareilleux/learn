@@ -51,6 +51,7 @@ You write C# or Java. You know HTTP, JSON and asynchronous code. You don't need 
 | 13 | Project: textures for this site and for GuitarAlchemist | — |
 | 14 | Guitar Alchemist lab: measured experiments | a benchmark suite with recorded results |
 | 15 | [Audio: music, sound effects and speech](15-audio/) | a sample buffer and a sample rate, as in NAudio or `javax.sound` |
+| — | [Gallery](gallery/) | every image, with the workflow that made it |
 | — | [Journal](journal/) | |
 
 Lessons 5 to 13 are the plan; they will change as the first ones teach me what matters.
