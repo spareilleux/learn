@@ -50,6 +50,21 @@ offline() {
   } > out/03-validate.txt 2>&1
   compare 03-validate
 
+  # Every workflow the course ships, against node definitions captured from a
+  # model-free ComfyUI on the CPU (data/object_info-course.json): class names,
+  # input names including the dotted ones, links, output slots and values. No
+  # server and no GPU here. The two files that are wrong on purpose are left out.
+  {
+    for wf in workflows/*.api.json; do
+      # The 03-dynamic-* files belong to the hand-made fixture above, and two of
+      # the three are wrong on purpose.
+      case $wf in *03-broken.api.json | *03-dynamic-*.api.json) continue ;; esac
+      printf '%s: ' "$(basename "$wf")"
+      comfy validate "$wf" data/object_info-course.json | sed 's/;.*//'
+    done
+  } > out/03-workflows.txt 2>&1
+  compare 03-workflows
+
   # Lesson 13: normal and roughness maps from a tileable pattern, with NumPy and Pillow (ComfyUI's requirements)
   py=${COMFYUI_PYTHON:-${PYTHON:-python}}
   mkdir -p out/textures
