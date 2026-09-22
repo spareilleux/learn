@@ -21,7 +21,7 @@ sidebar:
 - [x] Lesson 12 — Industrial applications
 - [x] Lesson 13 — Against other formalisms
 - [x] Lesson 14 — On our own systems
-- [ ] Lesson 15 — Limits and what comes next
+- [x] Lesson 15 — Limits and what comes next
 
 ## QA
 
@@ -40,6 +40,7 @@ This course teaches a formalism and runs on an analyser I wrote, so there is no 
 | The siphon with no trap in a lock that is never released is `{critical1, critical2, mutex}` | There are two, `{idle1}` and `{critical2, mutex}`; `{critical1}` turns out to be a trap | Lesson 7, exercise 2 | `Report.Siphons(mutual-exclusion-leaky)` | Corrected before publication (2026-09-17) |
 | The coverability tree of a small bounded net is computable | `CoverabilityTree.Build(Nets.Kanban(1))`, a net with 160 reachable markings, does not return: capped at 2 GiB it throws `OutOfMemoryException` after 15.5 s, uncapped it reached 35.7 GB and twelve minutes of CPU | [`CoverabilityTree.cs`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/PetriNets/CoverabilityTree.cs) | 160 markings, no result; the tree never merges two branches reaching the same marking, so its size follows the number of paths | Not a defect and not fixable: lesson 12 prints two bound columns instead of three, and says why (2026-09-22) |
 | A model checker says when it checked nothing | TLC with a state constraint that excludes the initial marking prints `Model checking completed. No error has been found.` and `0 distinct states found`, with no line distinguishing it from a complete run | `tla2tools.jar` 2.19, [TLA+ tools](https://github.com/tlaplus/tlaplus) | `queue_5.tla` with `Cap == 2` against an initial marking of 5 tokens: 1 state generated, 0 distinct, exit 0 | Reproduced on 2026-09-22; not reported upstream — reporting it needs the author's go-ahead. The lesson derives the cap from the place invariants instead (2026-09-22) |
+| The coverability tree approximates, and errs on the safe side | On a net with one inhibitor arc it answers omega for a place that never holds two tokens. Karp and Miller's acceleration assumes the sequence reaching a covering marking can be repeated, which an inhibitor arc breaks | [`CoverabilityTree.cs`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/PetriNets/CoverabilityTree.cs), [`Inhibitor.cs`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/PetriNets/Inhibitor.cs) | `self-inhibited`: tree says unbounded, reachable set is 2 markings with p <= 1 | Not a defect and not fixable — boundedness is undecidable for these nets. `InhibitorNet` ships with no coverability counterpart, and `InhibitorTests` holds the contradiction so nobody adds one (2026-09-22) |
 
 ## Experiments
 
@@ -71,6 +72,9 @@ One warning before the table: unlike the [GA Lab](../../ga-lab/journal/), this c
 | Does the one marking reachable by two different transitions break `states generated = arcs + 1`? | Yes: TLA+'s next-state relation is a set of states, so `order-sound` should print 7 where the analyser has 8 arcs | It prints 8. TLC counts one state generated per disjunct it evaluates, not per successor it keeps | Refuted, and the reason is the difference between a labelled graph and a transition relation (2026-09-22) |
 | Does a state constraint chosen by hand announce what it truncated? | It at least reports a smaller state space | **Nothing at all**: a cap below the initial marking gives `0 distinct states found` under `No error has been found` | Refuted; the cap in the lesson comes from `Invariants.PlaceBounds` because of it (2026-09-22) |
 | Are the nets the place invariants fail to bound the nets with no finite state space? | Yes, that is what an invariant is for | No: `handshake` has no invariant over every place and exactly one marking, because it is dead on arrival | Refuted before publication by `TlaTests`; a place invariant proves boundedness and never disproves it (2026-09-22) |
+| How does the cost of enumeration grow as components are added? | Like the markings, which is what everyone quotes | Like the **arcs per marking**: 1.3 to 3.9 over six philosophers, 3.9 to 8.8 over four Kanban cards, because each component multiplies the ways every existing state can be left | Confirmed as a shape, and it flattens: the ratio is an average out-degree and cannot exceed the transition count (2026-09-22) |
+| What does atomicity cost in state space? | A constant factor | Philosophers taking both forks at once: 29 markings at seven. One fork at a time: 198 at six. The difference is interleaving, and it is what unfoldings remove | Measured; neither unfolding nor partial order reduction is implemented here, and the lesson says so (2026-09-22) |
+| Does the coverability tree stay a safe approximation when the net gains an inhibitor arc? | Yes — it over-approximates by construction, so it should answer omega too often, never wrongly | It answers omega for a place that never holds two tokens. `self-inhibited` has 2 reachable markings and the tree says unbounded | Refuted. The acceleration's premise fails, and it fails because boundedness is undecidable here, so there is nothing to fix (2026-09-22) |
 
 ## 2026-09-15 — Lessons 1 to 4, and the analyser they run on
 
@@ -223,8 +227,23 @@ And a claim of mine the tests refuted before publication: I wrote that the four 
 
 Statecharts, process algebras and timed automata are compared in prose and marked as not run. The one thing worth carrying forward is the trade they all make: a process algebra composes, `P | Q` is a term, and you may reason about `P` alone — while a net must exist in full before a siphon, a trap or an invariant means anything. That is precisely why lesson 12's Kanban net had to be rebuilt whole rather than assembled from four copies of one cell.
 
+## 2026-09-22 — Lesson 15, and an algorithm that is correct and still wrong
+
+The last lesson of the plan asks what the analyser cannot do. Three of the answers are measurements rather than arguments.
+
+**The growth has a shape.** Lesson 12 found that the memory wall is about arcs. This lesson watches the arcs per marking climb as components are added: 1.3 → 3.9 across six philosophers, 3.9 → 7.6 across three Kanban cards, 8.8 at four cards (454 475 markings, 3 979 850 arcs — the straight-line extrapolation said 8.9 and overshot, as it must, because the ratio is an average out-degree and `Nets.Kanban` has sixteen transitions at any number of cards). Each added component does not only bring its own states; it multiplies the ways every existing state can be left.
+
+**The interleaving is visible.** Philosophers taking both forks atomically: 29 markings at seven. Taking one fork at a time: 198 at six. Same formalism, same machine. The gap is exactly what unfoldings and partial order reduction exist to remove, and neither is implemented here — the lesson says so instead of implying otherwise.
+
+**And the finding the lesson is built on.** `PetriNets/Inhibitor.cs` adds inhibitor arcs: a transition that fires only while a place is empty. `flush(n)` then says *when every item has moved, finish* in n + 2 markings, where the ordinary net says *at some point, finish* in 2(n + 1). The extra markings are not complexity, they are wrong answers.
+
+The cost arrives immediately. `self-inhibited` is one place, one transition, and an arc from the place back to the transition that fills it. Karp and Miller's tree, run on the underlying ordinary net, answers ω. The reachable set is **two markings** and the place never holds more than one. The acceleration assumes the sequence between a marking and the ancestor it covers can be repeated; here the token that appeared is what now blocks the transition that produced it. The tree is not slow, it is wrong — and it has to be, because the zero test makes two places into the counters of a two-counter machine and boundedness undecidable. `InhibitorNet` therefore has a reachable-set builder with a limit and no coverability counterpart at all: incomplete means "not within the limit", never "unbounded".
+
+That is also the answer to why every other net in this repository is an ordinary place/transition net. It is not conservatism. It is the line past which the analyser's verdicts stop meaning anything.
+
 ## To verify
 
+- Lesson 15 names unfoldings, partial order reduction and decision diagrams and implements none of them. The claim that an unfolding is exponentially smaller for the philosopher family is the published result, not a measurement from this repository; the Karp–Miller and Araki–Kasami papers are confirmed through Crossref but paywalled and unread.
 - Nothing in lesson 13's statechart, process algebra and timed automaton sections was run. No UPPAAL model was built and no TINA state-class graph was computed; the Harel and Milner references are confirmed through Crossref but are behind paywalls and unread.
 - The FMS literature reports far fewer states than the contest does for the same model, because the published counts are the *tangible* markings of a generalized stochastic net and `FMS-PT-*` is an ordinary P/T net. The specific numbers are quoted from memory in my notes and are not in any lesson until a source is read.
 - The P/T net grammar is not among the RELAX NG files published at pnml.org, so the analyser's PNML has never been validated against a schema. `pnmlcoremodel.rng` is there and would check the structure; the P/T specifics fall through its `anyElement` rule.

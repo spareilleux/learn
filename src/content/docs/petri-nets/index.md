@@ -93,7 +93,7 @@ That net has twelve reachable markings, it never deadlocks, and the place `free`
 | 12 | [Industrial applications: manufacturing, protocols, hardware, biochemistry, security](12-industrial-applications/) | a public benchmark, a state space |
 | 13 | [Against other formalisms: TLA+, statecharts, process algebras, timed automata](13-against-other-formalisms/) | a second state space, computed elsewhere |
 | 14 | [On our own systems: C# pipelines and agent lanes](14-on-our-systems/) | [Advanced C#](../csharp-advanced/); RabbitMQ and Kubernetes are follow-up experiments |
-| 15 | Limits and what comes next: undecidability, unfoldings, partial order reduction, extensions | |
+| 15 | [Limits and what comes next: undecidability, unfoldings, partial order reduction, extensions](15-limits-and-what-comes-next/) | a wrong answer from a correct algorithm |
 
 [Journal](journal/): what I tried, what surprised me, what I still need to verify.
 

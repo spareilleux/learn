@@ -95,7 +95,7 @@ Ce réseau a douze marquages accessibles, il ne s'interbloque jamais, et la plac
 | 12 | [Applications industrielles : ateliers flexibles, protocoles, matériel, biochimie, sécurité](12-industrial-applications/) | un banc d'essai public, un espace d'états |
 | 13 | [Face aux autres formalismes : TLA+, statecharts, algèbres de processus, automates temporisés](13-against-other-formalisms/) | un second espace d'états, calculé ailleurs |
 | 14 | [Sur nos systèmes : pipelines C# et lanes d'agents](14-on-our-systems/) | [C# avancé](../csharp-advanced/) ; RabbitMQ et Kubernetes sont des expériences suivantes |
-| 15 | Limites et suite : indécidabilité, dépliages, réduction d'ordre partiel, extensions | |
+| 15 | [Limites et suite : indécidabilité, dépliages, réduction d'ordre partiel, extensions](15-limits-and-what-comes-next/) | une réponse fausse d'un algorithme correct |
 
 [Journal](journal/) : ce que j'ai essayé, ce qui m'a surpris, ce qu'il me reste à vérifier.
 

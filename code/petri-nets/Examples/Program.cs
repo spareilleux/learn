@@ -22,12 +22,13 @@ switch (lesson)
     case "l12": Lesson12(args.Length > 1 ? args[1] : null); break;
     case "l13": Lesson13(args.Length > 1 ? args[1] : null); break;
     case "l14": Lesson14(); break;
+    case "l15": Lesson15(); break;
     case "music": Music(); break;
     case "chat": Chat(); break;
     case "nets": WriteNets(args.Length > 1 ? args[1] : "out/nets"); break;
     case "tla": WriteTla(args.Length > 1 ? args[1] : "out/tla"); break;
     default:
-        Console.Error.WriteLine($"Unknown lesson '{lesson}'. Try l1 to l14, nets, or tla.");
+        Console.Error.WriteLine($"Unknown lesson '{lesson}'. Try l1 to l15, nets, or tla.");
         return 2;
 }
 
@@ -731,6 +732,90 @@ int Eccentricity(ReachabilityGraph graph)
             counts.Success ? int.Parse(counts.Groups[1].Value, CultureInfo.InvariantCulture) : -1,
             depth.Success ? int.Parse(depth.Groups[1].Value, CultureInfo.InvariantCulture) : -1);
 }
+
+// Lesson 15: where the analyser stops, measured rather than asserted — and what the extension that
+// would lift one limit costs in decidability.
+void Lesson15()
+{
+    Console.WriteLine("Limits, measured");
+    Console.WriteLine();
+
+    Console.WriteLine("How fast the state space grows");
+    Console.WriteLine();
+    Console.WriteLine($"  {"family",-24} {"n",3} {"markings",10} {"arcs",11} {"arcs/marking",13}");
+    foreach (var (family, build, sizes) in new (string, Func<int, PetriNet>, int[])[]
+             {
+                 ("philosophers", Nets.Philosophers, [2, 3, 4, 5, 6, 7]),
+                 ("philosophers-one-fork", n => Nets.PhilosophersOneFork(n), [2, 3, 4, 5, 6]),
+                 ("kanban", Nets.Kanban, [1, 2, 3]),
+             })
+    {
+        foreach (var n in sizes)
+        {
+            var graph = ReachabilityGraph.Build(build(n), limit: 2_000_000);
+            if (!graph.IsComplete)
+            {
+                Console.WriteLine($"  {family,-24} {n,3} {"> 2000000",10}");
+                break;
+            }
+            var ratio = (double)graph.Steps.Count / graph.States.Count;
+            Console.WriteLine($"  {family,-24} {n,3} {graph.States.Count,10} {graph.Steps.Count,11} {ratio,13:F1}");
+        }
+    }
+    Console.WriteLine();
+    Console.WriteLine("  Lesson 12 measured the wall at 1.216 G arcs on an 8 GiB heap. What this table adds is");
+    Console.WriteLine("  the shape of the approach: the number of arcs per marking climbs with n, so each extra");
+    Console.WriteLine("  component costs more than the markings it adds.");
+    Console.WriteLine();
+
+    Console.WriteLine("What the structure costs by comparison");
+    Console.WriteLine();
+    Console.WriteLine($"  {"net",-24} {"places",7} {"invariants",11} {"siphons",8} {"traps",7}");
+    foreach (var n in new[] { 3, 4, 5 })
+    {
+        var net = Nets.Philosophers(n);
+        var siphons = net.Places.Count <= 20 ? Structure.MinimalSiphons(net).Count.ToString(CultureInfo.InvariantCulture) : "> 20 places";
+        var traps = net.Places.Count <= 20 ? Structure.MinimalTraps(net).Count.ToString(CultureInfo.InvariantCulture) : "> 20 places";
+        Console.WriteLine($"  {net.Name,-24} {net.Places.Count,7} {Invariants.Places(net).Count,11} {siphons,8} {traps,7}");
+    }
+    Console.WriteLine();
+    Console.WriteLine("  The invariants are a matrix computation and keep answering. The siphons are the brute");
+    Console.WriteLine("  force of lesson 7, capped at twenty places, and that cap is this analyser's, not the");
+    Console.WriteLine("  theory's: the question is NP-hard, and a constraint solver would push it further.");
+    Console.WriteLine();
+
+    Console.WriteLine("The extension that lifts the limit, and what it costs");
+    Console.WriteLine();
+    var self = InhibitorNets.SelfInhibited();
+    var (selfStates, _, selfComplete) = self.Reachable();
+    var tree = CoverabilityTree.Build(self.Net);
+    Console.WriteLine("  self-inhibited: one place, one transition, one inhibitor arc.");
+    Console.WriteLine($"    as an ordinary net, the coverability tree says bounded = {tree.IsBounded}, p <= {Describe(tree.PlaceBounds()[0])}");
+    Console.WriteLine($"    with the inhibitor arc, the reachable set is {selfStates.Count} markings, p <= {self.PlaceBounds()[0]}, complete = {selfComplete}");
+    Console.WriteLine();
+    Console.WriteLine("  Karp and Miller accelerate on the argument that a sequence reaching a strictly greater");
+    Console.WriteLine("  marking can be repeated. An inhibitor arc breaks it: the token that appeared is exactly");
+    Console.WriteLine("  what now blocks the transition that produced it. The tree is not slow here, it is wrong.");
+    Console.WriteLine();
+    Console.WriteLine($"  {"flush(n)",-12} {"with the zero test",20} {"without it",14}");
+    foreach (var n in new[] { 1, 2, 4, 8 })
+    {
+        var flush = InhibitorNets.Flush(n);
+        var (states, _, _) = flush.Reachable();
+        var plain = ReachabilityGraph.Build(flush.Net);
+        Console.WriteLine($"  {"flush-" + n.ToString(CultureInfo.InvariantCulture),-12} {states.Count,20} {plain.States.Count,14}");
+    }
+    Console.WriteLine();
+    Console.WriteLine("  `finish` is blocked while `a` holds a token, so it fires once, after the last `move`.");
+    Console.WriteLine("  Drop the inhibitor arc and it fires at any point: 2(n+1) markings instead of n+2, and a");
+    Console.WriteLine("  model that no longer says what it was written to say.");
+    Console.WriteLine();
+    Console.WriteLine("  That zero test is what makes two places into the counters of a two-counter machine.");
+    Console.WriteLine("  Boundedness, reachability and liveness are all undecidable for these nets, which is why");
+    Console.WriteLine("  InhibitorNet has a reachable-set builder with a limit and no coverability counterpart.");
+}
+
+static string Describe(int? bound) => bound?.ToString(CultureInfo.InvariantCulture) ?? "omega";
 
 // Lesson 6: the liveness and safeness of a marked graph, read off its circuits, then checked on the graph.
 void MarkedGraphVerdict(PetriNet net)

@@ -21,7 +21,7 @@ sidebar:
 - [x] Lección 12 — Aplicaciones industriales
 - [x] Lección 13 — Frente a otros formalismos
 - [x] Lección 14 — Sobre nuestros propios sistemas
-- [ ] Lección 15 — Límites y qué viene después
+- [x] Lección 15 — Límites y qué viene después
 
 ## QA
 
@@ -40,6 +40,7 @@ Este curso enseña un formalismo y se ejecuta sobre un analizador que escribí y
 | El sifón sin trampa de un cerrojo que nunca se suelta es `{critical1, critical2, mutex}` | Hay dos, `{idle1}` y `{critical2, mutex}`; `{critical1}` resulta ser una trampa | Lección 7, ejercicio 2 | `Report.Siphons(mutual-exclusion-leaky)` | Corregido antes de publicar (2026-09-17) |
 | El árbol de cobertura de una red pequeña y acotada es calculable | `CoverabilityTree.Build(Nets.Kanban(1))`, una red con 160 marcados alcanzables, no vuelve: limitado a 2 GiB lanza `OutOfMemoryException` a los 15,5 s, sin límite llegó a 35,7 GB y doce minutos de CPU | [`CoverabilityTree.cs`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/PetriNets/CoverabilityTree.cs) | 160 marcados, ningún resultado; el árbol nunca fusiona dos ramas que llegan al mismo marcado, así que su tamaño sigue al número de caminos | Ni un defecto ni arreglable: la lección 12 imprime dos columnas de cotas en vez de tres, y dice por qué (2026-09-22) |
 | Un verificador de modelos dice cuándo no comprobó nada | TLC con una restricción de estado que excluye el marcado inicial imprime `Model checking completed. No error has been found.` y `0 distinct states found`, sin ninguna línea que lo distinga de una ejecución completa | `tla2tools.jar` 2.19, [herramientas TLA+](https://github.com/tlaplus/tlaplus) | `queue_5.tla` con `Cap == 2` frente a un marcado inicial de 5 marcas: 1 estado generado, 0 distintos, salida 0 | Reproducido el 2026-09-22; no comunicado aguas arriba — comunicarlo necesita el visto bueno del autor. La lección deduce el tope de los invariantes de plaza en su lugar (2026-09-22) |
+| El árbol de cobertura aproxima, y se equivoca del lado seguro | En una red con un arco inhibidor responde omega para una plaza que nunca lleva dos marcas. La aceleración de Karp y Miller supone que la secuencia que alcanza un marcado que cubre puede repetirse, y un arco inhibidor lo rompe | [`CoverabilityTree.cs`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/PetriNets/CoverabilityTree.cs), [`Inhibitor.cs`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/PetriNets/Inhibitor.cs) | `self-inhibited`: el árbol dice no acotada, el conjunto alcanzable son 2 marcados con p <= 1 | Ni un defecto ni arreglable — la acotación es indecidible para estas redes. `InhibitorNet` viene sin contrapartida de cobertura, e `InhibitorTests` conserva la contradicción para que nadie añada una (2026-09-22) |
 
 ## Experimentos
 
@@ -71,6 +72,9 @@ Una advertencia antes de la tabla: a diferencia del [laboratorio GA](../../ga-la
 | ¿Rompe `estados generados = arcos + 1` el único marcado alcanzado por dos transiciones distintas? | Sí: la relación de transición de TLA+ es un conjunto de estados, así que `order-sound` debería imprimir 7 donde el analizador tiene 8 arcos | Imprime 8. TLC cuenta un estado generado por disyunto evaluado, no por sucesor conservado | Refutada, y la razón es la diferencia entre un grafo etiquetado y una relación de transición (2026-09-22) |
 | ¿Anuncia una restricción de estado elegida a mano lo que recortó? | Al menos informa de un espacio de estados más pequeño | **Nada en absoluto**: un tope por debajo del marcado inicial da `0 distinct states found` bajo `No error has been found` | Refutada; por eso el tope de la lección viene de `Invariants.PlaceBounds` (2026-09-22) |
 | ¿Son las redes que los invariantes de plaza no acotan las que no tienen espacio de estados finito? | Sí, para eso sirve un invariante | No: `handshake` no tiene ningún invariante sobre todas sus plazas y tiene exactamente un marcado, porque está muerta de entrada | Refutada antes de publicarse por `TlaTests`; un invariante de plaza demuestra la acotación y nunca la refuta (2026-09-22) |
+| ¿Cómo crece el coste de la enumeración al añadir componentes? | Como los marcados, que es lo que todo el mundo cita | Como los **arcos por marcado**: de 1,3 a 3,9 en seis filósofos, de 3,9 a 8,8 en cuatro tarjetas Kanban, porque cada componente multiplica las maneras de abandonar cada estado existente | Confirmada como forma, y se aplana: la razón es un grado de salida medio y no puede superar el número de transiciones (2026-09-22) |
+| ¿Qué cuesta la atomicidad en espacio de estados? | Un factor constante | Filósofos tomando los dos tenedores de golpe: 29 marcados con siete. Un tenedor cada vez: 198 con seis. La diferencia es entrelazado, y es lo que quitan los desplegados | Medida; ni desplegado ni reducción de orden parcial está implementado aquí, y la lección lo dice (2026-09-22) |
+| ¿Sigue siendo el árbol de cobertura una aproximación segura cuando la red gana un arco inhibidor? | Sí — sobreaproxima por construcción, así que debería responder omega demasiado a menudo, nunca equivocadamente | Responde omega para una plaza que nunca lleva dos marcas. `self-inhibited` tiene 2 marcados alcanzables y el árbol dice no acotada | Refutada. La premisa de la aceleración falla, y falla porque la acotación es indecidible aquí, así que no hay nada que arreglar (2026-09-22) |
 
 ## 2026-09-15 — Lecciones 1 a 4, y el analizador sobre el que se ejecutan
 
@@ -223,8 +227,23 @@ Y una afirmación mía que las pruebas refutaron antes de publicarla: había esc
 
 Statecharts, álgebras de procesos y autómatas temporizados se comparan en prosa y se marcan como no ejecutados. Lo único que vale la pena llevarse es el canje que todos hacen: un álgebra de procesos compone, `P | Q` es un término, y puedes razonar sobre `P` solo — mientras que una red debe existir entera antes de que un sifón, una trampa o un invariante signifiquen algo. Es precisamente por eso que la red Kanban de la lección 12 tuvo que reconstruirse entera en vez de ensamblarse con cuatro copias de una celda.
 
+## 2026-09-22 — Lección 15, y un algoritmo correcto que aun así se equivoca
+
+La última lección del plan pregunta qué no sabe hacer el analizador. Tres de las respuestas son mediciones en vez de argumentos.
+
+**El crecimiento tiene forma.** La lección 12 encontró que el muro de memoria es de arcos. Esta lección ve subir los arcos por marcado a medida que se añaden componentes: 1,3 → 3,9 en seis filósofos, 3,9 → 7,6 en tres tarjetas Kanban, 8,8 con cuatro tarjetas (454 475 marcados, 3 979 850 arcos — la extrapolación lineal anunciaba 8,9 y se pasó, como debe, porque la razón es un grado de salida medio y `Nets.Kanban` tiene dieciséis transiciones con cualquier número de tarjetas). Cada componente añadido no solo trae sus propios estados; multiplica las maneras de abandonar cada estado existente.
+
+**El entrelazado se ve.** Filósofos tomando los dos tenedores de golpe: 29 marcados con siete. Un tenedor cada vez: 198 con seis. Mismo formalismo, misma máquina. La diferencia es exactamente lo que los desplegados y la reducción de orden parcial existen para quitar, y ninguno de los dos está implementado aquí — la lección lo dice en vez de dar a entender lo contrario.
+
+**Y el hallazgo sobre el que se construye la lección.** `PetriNets/Inhibitor.cs` añade los arcos inhibidores: una transición que solo se dispara mientras una plaza está vacía. `flush(n)` dice entonces *cuando todos los artículos se hayan movido, terminar* en n + 2 marcados, donde la red ordinaria dice *en algún momento, terminar* en 2(n + 1). Los marcados de más no son complejidad, son respuestas falsas.
+
+El coste llega de inmediato. `self-inhibited` es una plaza, una transición, y un arco de la plaza a la transición que la llena. El árbol de Karp y Miller, ejecutado sobre la red ordinaria subyacente, responde ω. El conjunto alcanzable es de **dos marcados** y la plaza nunca lleva más de una marca. La aceleración supone que la secuencia entre un marcado y el ancestro que cubre puede repetirse; aquí la marca que apareció es lo que ahora bloquea la transición que la produjo. El árbol no es lento, es falso — y tiene que serlo, porque la comprobación a cero convierte dos plazas en los contadores de una máquina de dos contadores y hace indecidible la acotación. `InhibitorNet` tiene por eso un constructor de conjunto alcanzable con un límite y ninguna contrapartida de cobertura: incompleto significa «no dentro del límite», nunca «no acotada».
+
+Esa es también la respuesta a por qué todas las demás redes de este repositorio son redes plaza/transición ordinarias. No es conservadurismo. Es la línea más allá de la cual los veredictos del analizador dejan de significar nada.
+
 ## Por verificar
 
+- La lección 15 nombra los desplegados, la reducción de orden parcial y los diagramas de decisión y no implementa ninguno de los tres. La afirmación de que un desplegado es exponencialmente más pequeño para la familia de los filósofos es el resultado publicado, no una medición de este repositorio; los artículos de Karp y Miller y de Araki y Kasami están confirmados por Crossref pero tras un muro de pago y sin leer.
 - Nada de las secciones de statecharts, álgebras de procesos y autómatas temporizados de la lección 13 se ejecutó. No se construyó ningún modelo UPPAAL ni se calculó ningún grafo de clases de estados de TINA; las referencias de Harel y Milner están confirmadas por Crossref pero están tras un muro de pago y sin leer.
 - La literatura sobre FMS da muchos menos estados que el concurso para el mismo modelo, porque los recuentos publicados son los marcados *tangibles* de una red estocástica generalizada mientras que `FMS-PT-*` es una red P/T corriente. Las cifras concretas están citadas de memoria en mis notas y no aparecen en ninguna lección hasta que se lea una fuente.
 - La gramática de las redes P/T no está entre los ficheros RELAX NG publicados en pnml.org, así que el PNML del analizador nunca se ha validado contra un esquema. `pnmlcoremodel.rng` está y comprobaría la estructura; las particularidades P/T se cuelan por su regla `anyElement`.

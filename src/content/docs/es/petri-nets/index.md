@@ -95,7 +95,7 @@ Esta red tiene doce marcados alcanzables, nunca se interbloquea, y la plaza `fre
 | 12 | [Aplicaciones industriales: talleres flexibles, protocolos, hardware, bioquímica, seguridad](12-industrial-applications/) | un banco de pruebas público, un espacio de estados |
 | 13 | [Frente a otros formalismos: TLA+, statecharts, álgebras de procesos, autómatas temporizados](13-against-other-formalisms/) | un segundo espacio de estados, calculado en otra parte |
 | 14 | [En nuestros sistemas: pipelines C# y lanes de agentes](14-on-our-systems/) | [C# avanzado](../csharp-advanced/); RabbitMQ y Kubernetes son experimentos posteriores |
-| 15 | Límites y qué viene después: indecidibilidad, desplegados, reducción de orden parcial, extensiones | |
+| 15 | [Límites y qué viene después: indecidibilidad, desplegados, reducción de orden parcial, extensiones](15-limits-and-what-comes-next/) | una respuesta falsa de un algoritmo correcto |
 
 [Diario](journal/): lo que intenté, lo que me sorprendió, lo que me queda por verificar.
 
