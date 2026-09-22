@@ -24,6 +24,10 @@ sidebar:
 - [ ] Leçon 10 : vidéo
 - [x] Leçon 11 : les nœuds personnalisés, et leur sécurité
 - [x] Leçon 12 : ComfyUI en production
+- [x] Leçon 15 : audio, lu dans le code source
+- [x] Une section « à toi de jouer » sur chaque leçon écrite, et une galerie des trente images
+- [ ] Leçon 13 : des textures pour ce site et pour GuitarAlchemist
+- [ ] Leçon 14 : le laboratoire Guitar Alchemist
 
 ## QA
 
@@ -211,6 +215,7 @@ Le rendu Blender v2 a été copié dans le répertoire d'entrée ComfyUI isolé.
 - Comparés à ce fichier, les 26 workflows du cours sont bons. `Wan22ImageToVideoLatent`, `CreateVideo`, `SaveVideo`, `FrameInterpolationModelLoader` et `FrameInterpolate` sont dans le cœur en v0.36.0, `film_net_fp16` figure dans la liste du chargeur, et les noms des fichiers Wan 2.2 sont ceux que voit le serveur — les chemins de modèles supplémentaires sont donc justes. La leçon 10 peut partir dès que la mémoire est là.
 - La vérification a d'abord annoncé que `SaveVideo` n'avait pas d'entrée `format.codec`, sur les trois workflows. Elle avait tort, et le défaut était le nôtre : [`Workflow.cs`](https://github.com/spareilleux/learn/blob/main/code/comfyui/csharp/Workflow.cs) ne lisait que les entrées `required` et `optional` de premier niveau, alors qu'un `COMFY_DYNAMICCOMBO_V3` porte ses enfants dans ses options. Il les parcourt maintenant, et contrôle aussi les clés d'options. La leçon 3 a [la section](../03-workflow-json/#des-entrées-avec-un-point-dans-le-nom), et `check.sh` un jeu d'essai avec les trois fautes possibles sur une entrée à point.
 - Un vérificateur qui n'a jamais échoué ne prouve rien. Celui-ci a désormais un fichier qui doit échouer, et les quatre nouvelles lignes d'`expected/03-validate.txt` sont ce qu'il doit imprimer.
+- Le même jour, chaque leçon écrite a reçu une section « à toi de jouer » — la 9 était la seule à finir par quelque chose à faire sur sa propre machine — et les trente images du cours ont été rassemblées dans une [galerie](../gallery/), chacune avec le workflow qui l'a faite, à la révision qui l'a faite.
 
 ## À vérifier
 

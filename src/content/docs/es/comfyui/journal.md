@@ -24,6 +24,10 @@ sidebar:
 - [ ] Lección 10: vídeo
 - [x] Lección 11: los nodos personalizados y su seguridad
 - [x] Lección 12: ComfyUI en producción
+- [x] Lección 15: audio, leído en el código fuente
+- [x] Una sección «tu turno» en cada lección escrita, y una galería de las treinta imágenes
+- [ ] Lección 13: texturas para este sitio y para GuitarAlchemist
+- [ ] Lección 14: el laboratorio Guitar Alchemist
 
 ## QA
 
@@ -211,6 +215,7 @@ El render Blender v2 se copió al directorio de entrada ComfyUI aislado. `LoadIm
 - Frente a ese archivo, los 26 flujos del curso están bien. `Wan22ImageToVideoLatent`, `CreateVideo`, `SaveVideo`, `FrameInterpolationModelLoader` y `FrameInterpolate` están en el núcleo en la v0.36.0, `film_net_fp16` aparece en la lista del cargador, y los nombres de los archivos de Wan 2.2 son los que ve el servidor: las rutas de modelos adicionales son correctas. La lección 10 puede lanzarse en cuanto haya memoria.
 - La verificación anunció primero que `SaveVideo` no tenía una entrada `format.codec`, en los tres flujos. Se equivocaba, y el fallo era nuestro: [`Workflow.cs`](https://github.com/spareilleux/learn/blob/main/code/comfyui/csharp/Workflow.cs) solo leía las entradas `required` y `optional` de primer nivel, mientras que un `COMFY_DYNAMICCOMBO_V3` lleva sus hijos dentro de sus opciones. Ahora las recorre, y comprueba también las claves de opción. La lección 3 tiene [la sección](../03-workflow-json/#entradas-con-un-punto-en-el-nombre), y `check.sh` un juego de pruebas con los tres errores posibles de una entrada con punto.
 - Un verificador que nunca ha fallado no demuestra nada. Este tiene ya un archivo que debe fallar, y las cuatro líneas nuevas de `expected/03-validate.txt` son lo que debe imprimir.
+- El mismo día, cada lección escrita recibió una sección «tu turno» — la 9 era la única que terminaba con algo que hacer en la propia máquina — y las treinta imágenes del curso se reunieron en una [galería](../gallery/), cada una con el flujo que la hizo, en la revisión que la hizo.
 
 ## Por verificar
 

@@ -24,6 +24,10 @@ sidebar:
 - [ ] Lesson 10: video
 - [x] Lesson 11: custom nodes, and their security
 - [x] Lesson 12: ComfyUI in production
+- [x] Lesson 15: audio, read in the source
+- [x] A "Your turn" section on every written lesson, and a gallery of the thirty images
+- [ ] Lesson 13: textures for this site and for GuitarAlchemist
+- [ ] Lesson 14: the Guitar Alchemist lab
 
 ## QA
 
@@ -211,6 +215,7 @@ The Blender v2 render was copied into the isolated ComfyUI input directory. `Loa
 - Against that file, all 26 workflows of the course check out. `Wan22ImageToVideoLatent`, `CreateVideo`, `SaveVideo`, `FrameInterpolationModelLoader` and `FrameInterpolate` are in the core at v0.36.0, `film_net_fp16` appears in the loader's list, and the Wan 2.2 file names are the ones the server sees — so the extra model paths are right. Lesson 10 can be run the moment the memory is there.
 - The check first reported that `SaveVideo` has no input `format.codec`, on all three workflows. It was wrong, and the bug was ours: [`Workflow.cs`](https://github.com/spareilleux/learn/blob/main/code/comfyui/csharp/Workflow.cs) read only the node's top-level `required` and `optional` inputs, and a `COMFY_DYNAMICCOMBO_V3` carries its children inside its options. It now walks them, and checks the option keys too. Lesson 3 has [the section](../03-workflow-json/#inputs-with-a-dot-in-their-name), and `check.sh` a fixture with three mistakes a dotted input can make.
 - A validator that has never failed proves nothing. This one now has a file that must fail, and the four new lines of `expected/03-validate.txt` are what it must print.
+- The same day, every written lesson got a "Your turn" section — lesson 9 was the only one that ended with something to do on your own machine — and the thirty images of the course were gathered in a [gallery](../gallery/), each with the workflow that made it, at the revision that made it.
 
 ## To verify
 
