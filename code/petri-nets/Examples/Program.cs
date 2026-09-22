@@ -18,12 +18,13 @@ switch (lesson)
     case "l8": Lesson8(); break;
     case "l9": Lesson9(); break;
     case "l10": Lesson10(); break;
+    case "l11": Lesson11(args.Length > 1 ? args[1] : null); break;
     case "l14": Lesson14(); break;
     case "music": Music(); break;
     case "chat": Chat(); break;
     case "nets": WriteNets(args.Length > 1 ? args[1] : "out/nets"); break;
     default:
-        Console.Error.WriteLine($"Unknown lesson '{lesson}'. Try l1 to l10, l14, or nets.");
+        Console.Error.WriteLine($"Unknown lesson '{lesson}'. Try l1 to l11, l14, or nets.");
         return 2;
 }
 
@@ -769,6 +770,67 @@ string YesNo(bool value) => value ? "yes" : "no";
 string Markings(IReadOnlyList<Marking> markings) =>
     string.Join("; ", markings.Take(3).Select(m => m.ToString()))
     + (markings.Count > 3 ? $"; and {markings.Count - 3} more" : "");
+
+// Lesson 11: PNML is the one thing every Petri net tool agrees on. This lesson checks that claim
+// in both directions - what we write can be read back unchanged, and what another tool wrote can
+// be read at all. Pass a directory to run the second half against files this repository does not
+// carry; check.sh runs it without one, so the comparison stays offline.
+void Lesson11(string? foreign)
+{
+    Title("What the writer emits");
+    var queue = Nets.Queue(2);
+    Console.Write(Pnml.Write(queue));
+
+    Title("Every net of the course, written and read back");
+    // Interoperability begins at home: if the writer and the reader disagree, no other tool matters.
+    var mismatch = 0;
+    foreach (var net in Nets.All)
+    {
+        var xml = Pnml.Write(net);
+        var back = Pnml.Parse(xml);
+        var same = Pnml.Write(back) == xml
+                   && ReachabilityGraph.Build(back).States.Count == ReachabilityGraph.Build(net).States.Count;
+        if (!same)
+        {
+            Console.WriteLine($"  DIFFERENT: {net.Name}");
+            mismatch++;
+        }
+    }
+    Console.WriteLine($"{Nets.All.Count} nets written, parsed and written again");
+    Console.WriteLine($"identical text and identical reachability graph: {(mismatch == 0 ? "all of them" : $"{mismatch} differ")}");
+
+    Title("What a round trip drops");
+    // PNML carries more than the analyser models. Reading a file and writing it back is lossless
+    // for the net and lossy for everything a drawing tool put around it.
+    Console.WriteLine("kept:    place and transition ids and names, arc weights, the initial marking");
+    Console.WriteLine("dropped: <graphics> positions and offsets, <toolspecific> blocks, page structure");
+    Console.WriteLine("refused: any <net type> that is not the P/T net type");
+
+    if (foreign is null)
+    {
+        Title("Reading another tool");
+        Console.WriteLine("no directory given; see the lesson for a run against the ePNK examples");
+        return;
+    }
+
+    Title("Reading another tool");
+    foreach (var path in Directory.GetFiles(foreign, "*.pnml").OrderBy(x => x, StringComparer.Ordinal))
+    {
+        var file = Path.GetFileName(path);
+        try
+        {
+            var net = Pnml.Load(path);
+            Console.WriteLine($"{file,-38}read: {net.Places.Count} places, {net.Transitions.Count} transitions, \"{net.Name}\"");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"{file,-38}refused: {Short(e.Message)}");
+        }
+    }
+}
+
+// The grammar URIs share a 41-character prefix that says nothing; the last segment is the answer.
+string Short(string message) => message.Replace("http://www.pnml.org/version-2009/grammar/", "");
 
 // Lesson 14, on our own systems: the lock the Claude sessions of this repository take before a
 // heavy or a GPU job, in the two shell shapes it has been written in.

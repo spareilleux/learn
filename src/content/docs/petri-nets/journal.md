@@ -17,7 +17,7 @@ sidebar:
 - [x] Lesson 8 — Coloured nets
 - [x] Lesson 9 — Time and probability
 - [x] Lesson 10 — Workflows
-- [ ] Lesson 11 — Tools and interoperability
+- [x] Lesson 11 — Tools and interoperability
 - [ ] Lesson 12 — Industrial applications
 - [ ] Lesson 13 — Against other formalisms
 - [x] Lesson 14 — On our own systems
@@ -60,6 +60,7 @@ One warning before the table: unlike the [GA Lab](../../ga-lab/journal/), this c
 | Does soundness agree with the short circuit being live and bounded? | On all four workflow nets, since the theorem says so | Agreement on all four, and a parameterised test now fails if it breaks | Confirmed (2026-09-22) |
 | Is the short circuit of the AND-split-XOR-join net bounded but not live? | Bounded: nothing accumulates in a 1-safe process | **Unbounded**: the leftover token of each case accumulates through t-star without limit | Refuted, and it made the lesson: a token left behind and an unbounded short circuit are the same defect (2026-09-22) |
 | How many markings does an invoicing step after the join add? | Two, one per branch of the choice | **One**: the marking where the token sits in the new place | Refuted; a step in sequence adds one state whatever precedes it, only concurrency multiplies (2026-09-22) |
+| Can the reader read a PNML file written by another tool? | Yes for the P/T ones; the awkward parts of the ISO sample are all handled | 2 of 16 read, 14 correctly refused by type — and the name, which sits on the page rather than the net, was lost | Refuted in part, and it is the only defect eleven lessons of self-checking output had not found (2026-09-22) |
 
 ## 2026-09-15 — Lessons 1 to 4, and the analyser they run on
 
@@ -164,8 +165,23 @@ I also got an exercise wrong before checking it. Adding an invoicing step after 
 
 `check.sh` runs `l10`; 66 tests pass and l1 to l10, l14, music, chat and nets all match.
 
+## 2026-09-22 — Lesson 11, and the first file this repository did not write
+
+Ten lessons had been checked against an analyser I wrote, on nets I wrote. Lesson 11 breaks that circle: it downloads the sixteen PNML examples shipped with [ePNK](http://www2.imm.dtu.dk/~eki/projects/ePNK/), the reference implementation of the standard's metamodel, and hands them to the reader.
+
+Fourteen were correctly refused — ten high-level nets, three symmetric nets, and one that deserves its own sentence. `simple-dot-net.pnml` is a plain P/T net written in the *high-level* grammar over the one-value colour set `dot`: same behaviour as every net of this course, different language, unreadable. "PNML" names a syntax plus a type URI, not a format.
+
+The two accepted files found the defect I was hoping for. The standard's own sample, as ePNK writes it, puts the net's name on the `<page>` rather than on the `<net>`, gives the transition no name at all, and puts a `<toolspecific>` block inside `<initialMarking>` before its `<text>`. The reader survived three of those and lost the name: the file came back called `n1`, its id. Three lines in `Pnml.cs` fixed it, and a unit test now carries the whole awkward shape as a string, so the fix cannot regress without the ePNK download.
+
+That is the whole argument of the lesson, and it cost three minutes: ten lessons of output that agreed with itself had found nothing, and the first foreign file found something.
+
+Two things I could not do. The P/T grammar is **not** among the `.rng` files published at pnml.org — `pnmlcoremodel.rng`, `anyElement.rng`, `conventions.rng` and the type-independent ones are there, `ptnet.rng` is a 404 — so the analyser's output has still never been validated against a schema. And the ePNK examples are EPL-1.0, so they are not vendored: `check.sh` runs `l11` without them and prints a pointer, and the foreign listing in the lesson is marked as coming from a dated manual run rather than from the comparison.
+
+`check.sh` runs `l11`; 67 tests pass and l1 to l11, l14, music, chat and nets all match.
+
 ## To verify
 
+- The P/T net grammar is not among the RELAX NG files published at pnml.org, so the analyser's PNML has never been validated against a schema. `pnmlcoremodel.rng` is there and would check the structure; the P/T specifics fall through its `anyElement` rule.
 - Hack 1972, the source of Commoner's theorem, is open access and unreadable to an automated fetch. Reading it in a browser would let lesson 6 quote the theorem rather than paraphrase a paraphrase.
 - Murata 1989 remains paywalled and unread; every attribution to it in lessons 1 to 8 is marked in the page.
 - Lesson 7, exercise 3: build the philosophers with a timeout and check that the net is deadlock-free and has an infinite run in which nobody eats.

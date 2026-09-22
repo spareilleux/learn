@@ -1,0 +1,51 @@
+
+== What the writer emits ==
+<?xml version="1.0" encoding="utf-8"?>
+<pnml xmlns="http://www.pnml.org/version-2009/grammar/pnml">
+  <net id="n1" type="http://www.pnml.org/version-2009/grammar/ptnet">
+    <name>
+      <text>queue-2</text>
+    </name>
+    <page id="page1">
+      <place id="room">
+        <name>
+          <text>room</text>
+        </name>
+        <initialMarking>
+          <text>2</text>
+        </initialMarking>
+      </place>
+      <place id="jobs">
+        <name>
+          <text>jobs</text>
+        </name>
+      </place>
+      <transition id="arrive">
+        <name>
+          <text>arrive</text>
+        </name>
+      </transition>
+      <transition id="serve">
+        <name>
+          <text>serve</text>
+        </name>
+      </transition>
+      <arc id="a1" source="room" target="arrive" />
+      <arc id="a2" source="arrive" target="jobs" />
+      <arc id="a3" source="jobs" target="serve" />
+      <arc id="a4" source="serve" target="room" />
+    </page>
+  </net>
+</pnml>
+
+== Every net of the course, written and read back ==
+24 nets written, parsed and written again
+identical text and identical reachability graph: all of them
+
+== What a round trip drops ==
+kept:    place and transition ids and names, arc weights, the initial marking
+dropped: <graphics> positions and offsets, <toolspecific> blocks, page structure
+refused: any <net type> that is not the P/T net type
+
+== Reading another tool ==
+no directory given; see the lesson for a run against the ePNK examples

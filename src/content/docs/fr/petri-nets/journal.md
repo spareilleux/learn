@@ -17,7 +17,7 @@ sidebar:
 - [x] Leçon 8 — Réseaux colorés
 - [x] Leçon 9 — Temps et probabilités
 - [x] Leçon 10 — Workflows
-- [ ] Leçon 11 — Outils et interopérabilité
+- [x] Leçon 11 — Outils et interopérabilité
 - [ ] Leçon 12 — Applications industrielles
 - [ ] Leçon 13 — Face aux autres formalismes
 - [x] Leçon 14 — Sur nos propres systèmes
@@ -60,6 +60,7 @@ Un avertissement avant le tableau : contrairement au [GA Lab](../../ga-lab/journ
 | La soundness s'accorde-t-elle avec « le court-circuit est vivant et borné » ? | Sur les quatre réseaux workflow, puisque le théorème le dit | Accord sur les quatre, et un test paramétré échoue désormais si cela casse | Confirmée (2026-09-22) |
 | Le court-circuit du réseau ET-divergent/OU-convergent est-il borné mais non vivant ? | Borné : rien ne s'accumule dans un processus 1-sûr | **Non borné** : le jeton en trop de chaque cas s'accumule via t-star sans limite | Réfutée, et c'est ce qui a fait la leçon : un jeton laissé derrière et un court-circuit non borné sont le même défaut (2026-09-22) |
 | Combien de marquages une étape de facturation après la convergence ajoute-t-elle ? | Deux, un par branche du choix | **Un** : le marquage où le jeton est dans la nouvelle place | Réfutée ; une étape en séquence ajoute un état quoi qu'il y ait avant, seule la concurrence multiplie (2026-09-22) |
+| Le lecteur sait-il lire un fichier PNML écrit par un autre outil ? | Oui pour les P/T ; les pièges de l'exemple ISO sont tous traités | 2 sur 16 lus, 14 correctement refusés sur le type — et le nom, porté par la page plutôt que par le réseau, était perdu | Réfutée en partie, et c'est le seul défaut que onze leçons de sortie auto-vérifiée n'avaient pas trouvé (2026-09-22) |
 
 ## 2026-09-15 — Leçons 1 à 4, et l'analyseur qui les fait tourner
 
@@ -164,8 +165,23 @@ Je me suis aussi trompé sur un exercice avant de le vérifier. En ajoutant une 
 
 `check.sh` exécute `l10` ; 66 tests passent et l1 à l10, l14, music, chat et nets correspondent tous.
 
+## 2026-09-22 — Leçon 11, et le premier fichier que ce dépôt n'a pas écrit
+
+Dix leçons avaient été vérifiées contre un analyseur que j'ai écrit, sur des réseaux que j'ai écrits. La leçon 11 brise ce cercle : elle télécharge les seize exemples PNML livrés avec [ePNK](http://www2.imm.dtu.dk/~eki/projects/ePNK/), l'implémentation de référence du métamodèle de la norme, et les donne au lecteur.
+
+Quatorze ont été correctement refusés — dix réseaux de haut niveau, trois réseaux symétriques, et un qui mérite sa phrase. `simple-dot-net.pnml` est un simple réseau P/T écrit dans la grammaire *de haut niveau* sur l'ensemble de couleurs à une valeur `dot` : même comportement que tous les réseaux de ce cours, autre langage, illisible. « PNML » nomme une syntaxe plus une URI de type, pas un format.
+
+Les deux fichiers acceptés ont trouvé le défaut que j'espérais. L'exemple de la norme elle-même, tel que l'ePNK l'écrit, met le nom du réseau sur la `<page>` plutôt que sur le `<net>`, ne donne aucun nom à la transition, et place un bloc `<toolspecific>` dans `<initialMarking>` avant son `<text>`. Le lecteur a survécu à trois de ces pièges et a perdu le nom : le fichier revenait appelé `n1`, son identifiant. Trois lignes dans `Pnml.cs` ont corrigé cela, et un test unitaire porte désormais toute la forme piégeuse sous forme de chaîne, de sorte que la correction ne peut pas régresser sans le téléchargement de l'ePNK.
+
+C'est tout l'argument de la leçon, et il a coûté trois minutes : dix leçons de sortie cohérente avec elle-même n'avaient rien trouvé, et le premier fichier étranger a trouvé quelque chose.
+
+Deux choses que je n'ai pas pu faire. La grammaire P/T ne fait **pas** partie des `.rng` publiés sur pnml.org — `pnmlcoremodel.rng`, `anyElement.rng`, `conventions.rng` et celles qui ne dépendent pas du type y sont, `ptnet.rng` renvoie un 404 — donc la sortie de l'analyseur n'a toujours jamais été validée contre un schéma. Et les exemples de l'ePNK sont sous EPL-1.0, donc ils ne sont pas embarqués : `check.sh` lance `l11` sans eux et imprime un renvoi, et le listing étranger de la leçon est marqué comme venant d'une exécution manuelle datée, pas de la comparaison.
+
+`check.sh` exécute `l11` ; 67 tests passent et l1 à l11, l14, music, chat et nets correspondent tous.
+
 ## À vérifier
 
+- La grammaire des réseaux P/T ne fait pas partie des fichiers RELAX NG publiés sur pnml.org, donc le PNML de l'analyseur n'a jamais été validé contre un schéma. `pnmlcoremodel.rng` existe et vérifierait la structure ; les spécificités P/T passent à travers sa règle `anyElement`.
 - Hack 1972, la source du théorème de Commoner, est en accès libre et illisible par une requête automatisée. Le lire dans un navigateur permettrait à la leçon 6 de citer le théorème plutôt que de paraphraser une paraphrase.
 - Murata 1989 reste payant et non lu ; chaque attribution qui lui est faite dans les leçons 1 à 8 est signalée dans la page.
 - Leçon 7, exercice 3 : construire les philosophes avec un délai d'expiration et vérifier que le réseau est sans interblocage et possède une exécution infinie dans laquelle personne ne mange.

@@ -17,7 +17,7 @@ sidebar:
 - [x] Lección 8 — Redes coloreadas
 - [x] Lección 9 — Tiempo y probabilidad
 - [x] Lección 10 — Flujos de trabajo
-- [ ] Lección 11 — Herramientas e interoperabilidad
+- [x] Lección 11 — Herramientas e interoperabilidad
 - [ ] Lección 12 — Aplicaciones industriales
 - [ ] Lección 13 — Frente a otros formalismos
 - [x] Lección 14 — Sobre nuestros propios sistemas
@@ -60,6 +60,7 @@ Una advertencia antes de la tabla: a diferencia del [laboratorio GA](../../ga-la
 | ¿Coincide la solidez con que el cortocircuito sea vivo y acotado? | En las cuatro redes de flujo de trabajo, porque lo dice el teorema | Coincidencia en las cuatro, y una prueba parametrizada falla ahora si se rompe | Confirmada (2026-09-22) |
 | ¿Está acotado pero no vivo el cortocircuito de la red bifurcación-Y/convergencia-O? | Acotado: nada se acumula en un proceso 1-seguro | **No acotado**: la marca sobrante de cada caso se acumula a través de t-star sin límite | Refutada, y es lo que hizo la lección: una marca dejada atrás y un cortocircuito no acotado son el mismo defecto (2026-09-22) |
 | ¿Cuántos marcados añade un paso de facturación tras la convergencia? | Dos, uno por rama de la elección | **Uno**: el marcado en que la marca está en la nueva plaza | Refutada; un paso en secuencia añade un estado venga lo que venga antes, solo la concurrencia multiplica (2026-09-22) |
+| ¿Sabe el lector leer un fichero PNML escrito por otra herramienta? | Sí para los P/T; las trampas del ejemplo de la ISO están todas tratadas | 2 de 16 leídos, 14 rechazados correctamente por el tipo — y el nombre, que está en la página y no en la red, se perdía | Refutada en parte, y es el único defecto que once lecciones de salida autocomprobada no habían encontrado (2026-09-22) |
 
 ## 2026-09-15 — Lecciones 1 a 4, y el analizador sobre el que se ejecutan
 
@@ -164,8 +165,23 @@ También me equivoqué en un ejercicio antes de comprobarlo. Al añadir un paso 
 
 `check.sh` ejecuta `l10`; pasan 66 pruebas y l1 a l10, l14, music, chat y nets coinciden todos.
 
+## 2026-09-22 — Lección 11, y el primer fichero que este repositorio no escribió
+
+Diez lecciones se habían comprobado contra un analizador que escribí yo, sobre redes que escribí yo. La lección 11 rompe ese círculo: descarga los dieciséis ejemplos PNML que acompañan a [ePNK](http://www2.imm.dtu.dk/~eki/projects/ePNK/), la implementación de referencia del metamodelo de la norma, y se los entrega al lector.
+
+Catorce fueron rechazados correctamente — diez redes de alto nivel, tres redes simétricas, y una que merece su propia frase. `simple-dot-net.pnml` es una red P/T corriente escrita en la gramática *de alto nivel* sobre el conjunto de colores de un solo valor `dot`: el mismo comportamiento que todas las redes de este curso, otro lenguaje, ilegible. «PNML» nombra una sintaxis más una URI de tipo, no un formato.
+
+Los dos ficheros aceptados encontraron el defecto que esperaba. El ejemplo de la propia norma, tal como lo escribe ePNK, pone el nombre de la red en la `<page>` y no en el `<net>`, no le da nombre alguno a la transición, y mete un bloque `<toolspecific>` dentro de `<initialMarking>` antes de su `<text>`. El lector sobrevivió a tres de esas trampas y perdió el nombre: el fichero volvía llamándose `n1`, su identificador. Tres líneas en `Pnml.cs` lo arreglaron, y una prueba unitaria lleva ahora toda la forma incómoda como cadena, de modo que la corrección no puede regresar sin la descarga de ePNK.
+
+Ese es todo el argumento de la lección, y costó tres minutos: diez lecciones de salida coherente consigo misma no habían encontrado nada, y el primer fichero ajeno encontró algo.
+
+Dos cosas que no pude hacer. La gramática P/T **no** está entre los `.rng` publicados en pnml.org — `pnmlcoremodel.rng`, `anyElement.rng`, `conventions.rng` y las que no dependen del tipo sí están, `ptnet.rng` devuelve un 404 — así que la salida del analizador sigue sin haberse validado nunca contra un esquema. Y los ejemplos de ePNK están bajo EPL-1.0, así que no se incluyen: `check.sh` ejecuta `l11` sin ellos e imprime un aviso, y el listado ajeno de la lección está marcado como procedente de una ejecución manual fechada, no de la comparación.
+
+`check.sh` ejecuta `l11`; pasan 67 pruebas y l1 a l11, l14, music, chat y nets coinciden todos.
+
 ## Por verificar
 
+- La gramática de las redes P/T no está entre los ficheros RELAX NG publicados en pnml.org, así que el PNML del analizador nunca se ha validado contra un esquema. `pnmlcoremodel.rng` está y comprobaría la estructura; las particularidades P/T se cuelan por su regla `anyElement`.
 - Hack 1972, la fuente del teorema de Commoner, es de acceso abierto e ilegible para una descarga automatizada. Leerlo en un navegador permitiría que la lección 6 citara el teorema en vez de parafrasear una paráfrasis.
 - Murata 1989 sigue tras muro de pago y sin leer; toda atribución a él en las lecciones 1 a 8 está marcada en la página.
 - Lección 7, ejercicio 3: construir los filósofos con un tiempo de espera y comprobar que la red está libre de interbloqueo y tiene una ejecución infinita en la que nadie come.

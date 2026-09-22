@@ -91,7 +91,7 @@ Ce réseau a douze marquages accessibles, il ne s'interbloque jamais, et la plac
 | 8 | [Réseaux colorés](08-coloured-nets/) | les génériques, un message typé |
 | 9 | [Temps et probabilités : réseaux temporisés, stochastiques, GSPN](09-time-and-probability/) | les percentiles, un modèle de files d'attente |
 | 10 | [Workflows : réseaux de workflow, *soundness*, BPMN, *process mining*](10-workflows/) | BPMN, un moteur de workflow |
-| 11 | Outils et interopérabilité : PNML, TINA, LoLA, Snoopy, PIPE, CPN Tools, GreatSPN, TAPAAL | un format d'échange XML |
+| 11 | [Outils et interopérabilité : PNML, TINA, LoLA, Snoopy, PIPE, CPN Tools, GreatSPN, TAPAAL](11-tools-and-interoperability/) | un format d'échange XML |
 | 12 | Applications industrielles : ateliers flexibles, protocoles, matériel asynchrone, biochimie, sécurité | |
 | 13 | Face aux autres formalismes : statecharts, algèbres de processus, automates temporisés, TLA+ | TLA+, le model checking |
 | 14 | [Sur nos systèmes : pipelines C# et lanes d'agents](14-on-our-systems/) | [C# avancé](../csharp-advanced/) ; RabbitMQ et Kubernetes sont des expériences suivantes |

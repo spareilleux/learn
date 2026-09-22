@@ -33,7 +33,12 @@ public static class Pnml
         if (type is not null && type != PtNetType)
             throw new NotSupportedException($"Net type {type} is not the P/T net type {PtNetType}.");
 
-        var name = Text(net.Element(ns + "name")) ?? (string?)net.Attribute("id") ?? "net";
+        // ISO/IEC 15909-2 lets a name sit on the <net> or on a <page>, and tools disagree about which.
+        // The standard's own sample file, as written by ePNK, names the page and leaves the net unnamed;
+        // reading only the <net> threw that name away and left the file identified by its id.
+        var name = Text(net.Element(ns + "name"))
+                   ?? net.Elements(ns + "page").Select(page => Text(page.Element(ns + "name"))).FirstOrDefault(x => x is not null)
+                   ?? (string?)net.Attribute("id") ?? "net";
 
         var places = new List<Place>();
         var initial = new List<int>();
