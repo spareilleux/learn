@@ -20,7 +20,7 @@ sidebar:
 - [ ] Lesson 11 — Tools and interoperability
 - [ ] Lesson 12 — Industrial applications
 - [ ] Lesson 13 — Against other formalisms
-- [ ] Lesson 14 — On our own systems
+- [x] Lesson 14 — On our own systems
 - [ ] Lesson 15 — Limits and what comes next
 
 ## QA

@@ -20,7 +20,7 @@ sidebar:
 - [ ] Leçon 11 — Outils et interopérabilité
 - [ ] Leçon 12 — Applications industrielles
 - [ ] Leçon 13 — Face aux autres formalismes
-- [ ] Leçon 14 — Sur nos propres systèmes
+- [x] Leçon 14 — Sur nos propres systèmes
 - [ ] Leçon 15 — Limites et suite
 
 ## QA
