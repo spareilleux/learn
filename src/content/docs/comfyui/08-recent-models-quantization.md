@@ -55,6 +55,35 @@ A model's license is a dependency's license. It says what you may do with the we
 
 Three traps show in this table. The license can change within a family: klein 4B and klein 9B don't share one. It can depend on who you are, as with Stability AI's revenue threshold. And a repackaged file, such as Comfy-Org's, comes under the original model's license, which you read on the original card. The course read each card when it downloaded the file, and its report lists every file with its license and SHA-256. This is not legal advice: read the license itself before shipping anything.
 
+### Read the license before publishing an output
+
+A license can restrict where its outputs may be seen, not only what you do with the weights. This course found out the hard way, with image-to-3D models; the [journal](../journal/) tells the story.
+
+ComfyUI v0.36.0 runs [Hunyuan3D 2](https://docs.comfy.org/tutorials/3d/hunyuan3D-2) with core nodes. Its [license](https://huggingface.co/tencent/Hunyuan3D-2/blob/9cd649ba6913f7a852e3286bad86bfa9a2d83dcf/LICENSE), the Tencent Hunyuan 3D 2.0 Community License, starts with:
+
+> THIS LICENSE AGREEMENT DOES NOT APPLY IN THE EUROPEAN UNION, UNITED KINGDOM AND SOUTH KOREA AND IS EXPRESSLY LIMITED TO THE TERRITORY, AS DEFINED BELOW.
+
+Clause 1.l defines the Territory: "the worldwide territory, excluding the territory of the European Union, United Kingdom and South Korea." Clause 5.c goes further:
+
+> You must not use, reproduce, modify, distribute, or display the Tencent Hunyuan 3D 2.0 Works, Output or results of the Tencent Hunyuan 3D 2.0 Works outside the Territory. Any such use outside the Territory is unlicensed and unauthorized under this Agreement.
+
+The [Hunyuan3D 2.1 license](https://huggingface.co/tencent/Hunyuan3D-2.1/blob/0b94677654c57bb9a6b6845cd7b704ccf551d327/LICENSE) has the same clauses. Three consequences for a public site:
+
+- **Where you are isn't enough.** Generating a mesh in a country inside the Territory is allowed. Putting it on a website isn't a use in that country only: a public page is displayed in the European Union, the United Kingdom and South Korea too.
+- **A render is an output.** "Output or results" covers more than the `.glb` file. A turntable image of the mesh, rendered in Blender, still displays the result.
+- **A license is a file with a date.** Read it at a pinned revision and keep its hash. The course reads the Hunyuan3D 2.0 license at commit `9cd649ba`, SHA-256 `eca02cc10abaf520…`. Some licenses change on their own: [DINOv3's](https://github.com/facebookresearch/dinov3/blob/ffb4bb89c6558ca3244655c25a3955d01788b732/LICENSE.md), dated August 19, 2025, says in clause 8 that "Your continued use of the DINO Materials after any modification to this Agreement constitutes your agreement to such modification."
+
+The course compared three ways to get a 3D model of a small object for its pages:
+
+| | Hunyuan3D 2.0 or 2.1, in ComfyUI | TRELLIS.2 4B, in ComfyUI | Procedural modelling with `bpy` in Blender |
+|---|---|---|---|
+| License | Tencent Hunyuan 3D Community License: not in the EU, the UK or South Korea, outputs not displayed there, a request to Tencent above 1 million monthly active users | [MIT](https://github.com/microsoft/TRELLIS.2/blob/75fbf0183001ed9876c8dbb35de6b68552ee08bd/LICENSE), but its image encoder is DINOv3, under the DINOv3 License: acknowledge DINOv3 in a publication (1.b.ii), give a copy of the license with the weights (1.b.i), accept later changes by using them (8) | Blender is GPL, and its [license page](https://www.blender.org/about/license/) says "What you create with Blender is your sole property." |
+| Free RAM and VRAM on this machine | 19 GB of free RAM for 2.0 with SDXL; 9.4 GB of VRAM measured while sampling | about 23 GB of free RAM for the int8 model with SDXL; the upstream README asks for "at least 24GB" of VRAM, and 16 GB is *to verify* | no GPU needed |
+| Quality observed | 890,140 and 1,017,760 triangles for two simple objects, 19,084 and 189,748 non-manifold edges, no UVs and no texture, an invented back, painted detail read as relief, and the image's floor line turned into a slab | not tested | clean by construction; the Blender course is measuring its counts, *to verify* |
+| Publishable on this site | no | yes, with DINOv3 acknowledged | yes |
+
+Comfy-Org's [TRELLIS.2 repackage](https://huggingface.co/Comfy-Org/TRELLIS.2) is tagged MIT and ships `clip_vision/dino_v3_vit_l.safetensors` without a copy of the DINOv3 License. The file's own license still applies: a repackage doesn't change it. This is not legal advice.
+
 ## What is inside a quantized file
 
 Z-Image-Turbo's 6 billion parameters take 12.3 GB in bf16, 2 bytes each, and the Qwen3 text encoder takes 8.0 GB more: 20.3 GB, for a 16 GB card. Comfy-Org publishes both in smaller formats. The course's tool reads their headers:
