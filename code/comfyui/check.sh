@@ -145,6 +145,23 @@ server() {
   } > out/04-run-java.txt 2>&1
   compare 04-run-java
 
+  # Lesson 4, around the happy path: a file that passes validation because it is in
+  # the input list and fails when the server opens it, then two calls that answer 200
+  # whether or not there was anything to act on. The server's own path is cut out of
+  # the message: it differs on every machine.
+  printf 'this is not a PNG file at all\n' > out/not-an-image.png
+  {
+    comfy run "$url" workflows/05-masks.api.json --image 1.image=out/not-an-image.png
+    echo "exit code $?"
+    echo "--- POST /interrupt with nothing running"
+    curl -s -o /dev/null -w "%{http_code}\n" -X POST "$url/interrupt"
+    echo "--- POST /queue, deleting a prompt id that is not in the queue"
+    curl -s -o /dev/null -w "%{http_code}\n" -X POST -H 'Content-Type: application/json' \
+      -d '{"delete":["00000000-0000-4000-8000-000000000000"]}' "$url/queue"
+  } > out/04-errors.full.txt 2>&1
+  sed "s|image file '.*[/\\\\]|image file '.../|" out/04-errors.full.txt > out/04-errors.txt
+  compare 04-errors
+
   {
     comfy png-info out/run-cs/solid_00001_.png
     comfy compare out/run-cs/solid_00001_.png out/run-java/solid_00002_.png

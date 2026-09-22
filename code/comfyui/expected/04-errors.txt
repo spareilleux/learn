@@ -1,0 +1,13 @@
+POST /upload/image not-an-image.png: 200, name not-an-image.png, subfolder "", type input
+POST /prompt: 200
+status: connected, queue_remaining 0
+execution_start
+execution_cached: []
+executing: node 1
+execution_error: node 1 (LoadImage): cannot identify image file '.../not-an-image.png'
+
+exit code 1
+--- POST /interrupt with nothing running
+200
+--- POST /queue, deleting a prompt id that is not in the queue
+200
