@@ -142,7 +142,9 @@ The same ComfyUI, PyTorch graph and pixels gave four different images. The three
 | magnitude | `0af967b932bcb57c` | `bda4e821a72c09ed` | `208a0f39607e1ae0` | `bf05d8003b885379` |
 | edges | `08e9b5af22548246` | `08e9b5af22548246` | `08e9b5af22548246` | `08e9b5af22548246` |
 
-The divergence starts at the first floating-point step. The blur already separates the author's machine from the runners, and the Apple Silicon runner from the two x86 ones. The gradient then differs on all four, although Windows and Linux had agreed one step earlier: the same convolution takes a different path in a different build. Every magnitude differs, and yet their sum prints as 2729.489258 on all four — the differences are in the last bits. That sum is a trap in itself: printed to six decimals it adds the differences up and erases them, so anyone comparing sums would have concluded that the four machines agree and stopped there. A total is not a fingerprint. It is why every check in this course hashes bytes. That sum is a trap in itself: printed to six decimals it adds the differences up and erases them, so anyone comparing sums would have concluded that the four machines agree and stopped there. A total is not a fingerprint. It is why every check in this course hashes bytes.
+The divergence starts at the first floating-point step. The blur already separates the author's machine from the runners, and the Apple Silicon runner from the two x86 ones. The gradient then differs on all four, although Windows and Linux had agreed one step earlier: the same convolution takes a different path in a different build. Every magnitude differs, and yet their sum prints as 2729.489258 on all four — the differences are in the last bits. That sum is a trap in itself: printed to six decimals it adds the differences up and erases them, so anyone comparing sums would have concluded that the four machines agree and stopped there. A total is not a fingerprint. It is why every check in this course hashes bytes.
+
+Precision is the other half of the story. The Hadamard probe of [lesson 8](../08-recent-models-quantization/) runs on the same three CI machines and works in float64: it prints the same five decimals on all three, `0.05674` and `0.00761`, and only its exactness bound moves, between 1.11e-14 and 1.20e-14. Divergence is not a fatality — it depends on the precision you work in, and diffusion works in float32 or narrower.
 
 The last row is the surprise: the edges are identical everywhere, 1,461 pixels of 3,072, the same hash on the four machines. This pattern is flat areas and hard borders, so no gradient sits close enough to a threshold for a last-bit difference to flip it. A render has no such margin, which is why the pattern of lesson 5, put through `Canny` inside ComfyUI, gives four hashes. So the answer has two halves: floating point diverges at the first convolution, on every machine, always; whether that reaches the output depends on how many pixels the image leaves near the threshold.
 
@@ -155,7 +157,6 @@ The last row is the surprise: the edges are identical everywhere, 1,461 pixels o
 - The layout is decided in the first steps: a ControlNet active only there kept almost the whole composition.
 - Image filters are floating-point code too: don't compare their output bit for bit across machines. The divergence starts at the first convolution; whether it reaches the output depends on how close the image sits to the threshold.
 - A sum is not a fingerprint: a total adds up the differences a hash would show.
-- A sum is not a fingerprint: a total adds up the differences a hash would show. The divergence starts at the first convolution; whether it reaches the output depends on how close the image sits to the threshold.
 
 ## Your turn
 
