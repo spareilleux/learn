@@ -10,6 +10,60 @@ namespace Examples;
 public static class Nets
 {
     /// <summary>
+    /// Lesson 9: a queue with one server and room for <paramref name="capacity"/> jobs. The place
+    /// "room" holds the free slots, so arrivals stop when it is empty - the same trick as the
+    /// buffer of lesson 1. With an exponential rate on each transition this net is exactly an
+    /// M/M/1/K queue, whose stationary distribution has a closed form to compare against.
+    /// </summary>
+    public static PetriNet Queue(int capacity) => new(
+        $"queue-{capacity}",
+        [
+            new Place("room", "room"),
+            new Place("jobs", "jobs"),
+        ],
+        [
+            new Transition("arrive", "arrive"),
+            new Transition("serve", "serve"),
+        ],
+        [
+            new Arc("room", "arrive"),
+            new Arc("arrive", "jobs"),
+            new Arc("jobs", "serve"),
+            new Arc("serve", "room"),
+        ],
+        new Marking([capacity, 0]));
+
+    /// <summary>
+    /// Lesson 9: one job, two servers, and a choice that takes no time. "to-fast" and "to-slow"
+    /// are immediate transitions: they fire the instant a job is waiting, and their weights split
+    /// the traffic. The state where the job waits is therefore vanishing - no time passes in it.
+    /// </summary>
+    public static PetriNet TwoServers() => new(
+        "two-servers",
+        [
+            new Place("waiting", "waiting"),
+            new Place("at-fast", "at-fast"),
+            new Place("at-slow", "at-slow"),
+        ],
+        [
+            new Transition("to-fast", "to-fast"),
+            new Transition("to-slow", "to-slow"),
+            new Transition("done-fast", "done-fast"),
+            new Transition("done-slow", "done-slow"),
+        ],
+        [
+            new Arc("waiting", "to-fast"),
+            new Arc("to-fast", "at-fast"),
+            new Arc("waiting", "to-slow"),
+            new Arc("to-slow", "at-slow"),
+            new Arc("at-fast", "done-fast"),
+            new Arc("done-fast", "waiting"),
+            new Arc("at-slow", "done-slow"),
+            new Arc("done-slow", "waiting"),
+        ],
+        new Marking([1, 0, 0]));
+
+    /// <summary>
     /// Lesson 1: one producer, one consumer, and a buffer of two slots. The place "free" holds
     /// the slots that are still empty; it is the whole reason the buffer cannot overflow.
     /// </summary>
@@ -898,6 +952,8 @@ public static class Nets
         LaneLock(),
         LaneLock(2, guarded: false),
         PipelineLifecycle(),
+        Queue(5),
+        TwoServers(),
         ColouredNets.Retry().Unfold(),
     ];
 }

@@ -89,7 +89,7 @@ Ce réseau a douze marquages accessibles, il ne s'interbloque jamais, et la plac
 | 6 | [Classes structurelles : machines à états, graphes marqués, réseaux à choix libre](06-structural-classes/) | |
 | 7 | [Modéliser la concurrence : exclusion mutuelle, producteur-consommateur, lecteurs-rédacteurs, philosophes](07-modelling-concurrency/) | `lock`, `SemaphoreSlim`, `Channel<T>`, `synchronized`, `ReentrantLock` |
 | 8 | [Réseaux colorés](08-coloured-nets/) | les génériques, un message typé |
-| 9 | Temps et probabilités : réseaux temporisés, stochastiques, GSPN *(à venir)* | les percentiles, un modèle de files d'attente |
+| 9 | [Temps et probabilités : réseaux temporisés, stochastiques, GSPN](09-time-and-probability/) | les percentiles, un modèle de files d'attente |
 | 10 | Workflows : réseaux de workflow, *soundness*, BPMN, *process mining* | BPMN, un moteur de workflow |
 | 11 | Outils et interopérabilité : PNML, TINA, LoLA, Snoopy, PIPE, CPN Tools, GreatSPN, TAPAAL | un format d'échange XML |
 | 12 | Applications industrielles : ateliers flexibles, protocoles, matériel asynchrone, biochimie, sécurité | |

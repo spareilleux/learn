@@ -16,12 +16,13 @@ switch (lesson)
     case "l6": Lesson6(); break;
     case "l7": Lesson7(); break;
     case "l8": Lesson8(); break;
+    case "l9": Lesson9(); break;
     case "l14": Lesson14(); break;
     case "music": Music(); break;
     case "chat": Chat(); break;
     case "nets": WriteNets(args.Length > 1 ? args[1] : "out/nets"); break;
     default:
-        Console.Error.WriteLine($"Unknown lesson '{lesson}'. Try l1 to l8, l14, or nets.");
+        Console.Error.WriteLine($"Unknown lesson '{lesson}'. Try l1 to l9, l14, or nets.");
         return 2;
 }
 
@@ -587,6 +588,96 @@ void StateMachineVerdict(PetriNet net)
     Console.WriteLine($"                       live: {classes.IsStronglyConnected && tokens >= 1}   safe: {tokens <= 1}");
     Console.WriteLine($"reachability graph     live: {properties.IsLive}   safe: {properties.IsSafe}   "
                       + $"markings enumerated: {graph.States.Count}");
+}
+
+// Lesson 9: rates turn the reachability graph into a Markov chain, and the chain answers
+// "how often" and "how long" - the two questions the untimed net refuses.
+void Lesson9()
+{
+    const int capacity = 5;
+    const double arrival = 3.0;
+    const double service = 4.0;
+
+    var queue = Nets.Queue(capacity);
+    var graph = ReachabilityGraph.Build(queue);
+    Title($"A queue with one server and room for {capacity}");
+    Console.Write(Report.Net(queue));
+    Console.WriteLine($"reachable markings: {graph.States.Count}");
+
+    Title("The same structure, now with a rate on each transition");
+    var timing = new Timing(new Dictionary<string, double>
+    {
+        ["arrive"] = arrival,
+        ["serve"] = service,
+    });
+    Console.WriteLine($"arrive: {Stochastic.Format(arrival)} per unit of time");
+    Console.WriteLine($"serve:  {Stochastic.Format(service)} per unit of time");
+    Console.WriteLine($"load:   {Stochastic.Format(arrival / service)}");
+
+    var steady = Stochastic.Solve(graph, timing);
+
+    Title("Stationary distribution, computed twice");
+    var formula = Stochastic.QueueFormula(arrival, service, capacity);
+    Console.WriteLine("jobs   from the net   from the formula");
+    var worst = 0.0;
+    for (var k = 0; k <= capacity; k++)
+    {
+        var fromNet = steady.ProbabilityOf("jobs", k);
+        worst = Math.Max(worst, Math.Abs(fromNet - formula[k]));
+        Console.WriteLine($"{k,-7}{Stochastic.Format(fromNet),-14}{Stochastic.Format(formula[k])}");
+    }
+    // The gap is around 1e-16 and its digits differ between machines, so the check prints a
+    // verdict against a threshold instead of a number that would never match three times.
+    Console.WriteLine($"every state agrees within 1e-12: {(worst < 1e-12 ? "ok" : "DIFFERENT")}");
+
+    Title("What the chain is worth asking");
+    var mean = steady.MeanTokens("jobs");
+    var thrArrive = steady.Throughput("arrive");
+    var thrServe = steady.Throughput("serve");
+    var lost = steady.ProbabilityOf("room", 0);
+    Console.WriteLine($"mean jobs in the system:   {Stochastic.Format(mean)}");
+    Console.WriteLine($"accepted arrivals:         {Stochastic.Format(thrArrive)} per unit of time");
+    Console.WriteLine($"completions:               {Stochastic.Format(thrServe)} per unit of time");
+    Console.WriteLine($"arrivals turned away:      {Stochastic.Format(lost)} of the time");
+    Console.WriteLine($"server busy:               {Stochastic.Format(1 - steady.ProbabilityOf("jobs", 0))} of the time");
+
+    Title("Little's law, as an independent check");
+    var wait = mean / thrArrive;
+    Console.WriteLine($"mean time in the system:   {Stochastic.Format(wait)}");
+    Console.WriteLine($"arrivals times that time:  {Stochastic.Format(thrArrive * wait)}");
+    Console.WriteLine($"mean jobs (above):         {Stochastic.Format(mean)}");
+    Console.WriteLine($"in and out balance: {(Math.Abs(thrArrive - thrServe) < 1e-12 ? "ok" : "DIFFERENT")}");
+
+    Title("Raising the load to 1 spreads the queue evenly");
+    var even = Stochastic.Solve(graph, new Timing(new Dictionary<string, double>
+    {
+        ["arrive"] = 4.0,
+        ["serve"] = 4.0,
+    }));
+    Console.WriteLine("jobs   probability");
+    for (var k = 0; k <= capacity; k++)
+        Console.WriteLine($"{k,-7}{Stochastic.Format(even.ProbabilityOf("jobs", k))}");
+
+    Title("A choice that takes no time: immediate transitions");
+    var servers = Nets.TwoServers();
+    var serverGraph = ReachabilityGraph.Build(servers);
+    Console.Write(Report.Net(servers));
+    var gspn = new Timing(
+        rates: new Dictionary<string, double> { ["done-fast"] = 2.0, ["done-slow"] = 1.0 },
+        weights: new Dictionary<string, double> { ["to-fast"] = 7.0, ["to-slow"] = 3.0 });
+    var split = Stochastic.Solve(serverGraph, gspn);
+    Console.WriteLine($"reachable markings: {serverGraph.States.Count}, of which tangible: {split.Tangible.Count}");
+    Console.WriteLine($"the job waits (vanishing state): {Stochastic.Format(split.ProbabilityOf("waiting", 1))} of the time");
+    Console.WriteLine($"at the fast server: {Stochastic.Format(split.ProbabilityOf("at-fast", 1))}");
+    Console.WriteLine($"at the slow server: {Stochastic.Format(split.ProbabilityOf("at-slow", 1))}");
+
+    Title("The same two numbers by hand");
+    // Seven jobs in ten go to a server that takes 1/2 a unit of time, three in ten to one that
+    // takes 1; the time spent at each is the share divided by the rate, then normalised.
+    var fast = 0.7 / 2.0;
+    var slow = 0.3 / 1.0;
+    Console.WriteLine($"at the fast server: {Stochastic.Format(fast / (fast + slow))}");
+    Console.WriteLine($"at the slow server: {Stochastic.Format(slow / (fast + slow))}");
 }
 
 // Lesson 14, on our own systems: the lock the Claude sessions of this repository take before a

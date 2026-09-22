@@ -15,7 +15,7 @@ sidebar:
 - [x] Leçon 6 — Classes structurelles
 - [x] Leçon 7 — Modéliser la concurrence
 - [x] Leçon 8 — Réseaux colorés
-- [ ] Leçon 9 — Temps et probabilités
+- [x] Leçon 9 — Temps et probabilités
 - [ ] Leçon 10 — Workflows
 - [ ] Leçon 11 — Outils et interopérabilité
 - [ ] Leçon 12 — Applications industrielles
@@ -55,6 +55,8 @@ Un avertissement avant le tableau : contrairement au [GA Lab](../../ga-lab/journ
 | Qu'est-ce qu'inverser un philosophe fait à la structure ? | Retire l'interblocage | Retire un **siphon** : trois philosophes ont 7 siphons minimaux, dont un — `{eating1, fork1, eating2, fork2, eating3, fork3}` — sans trappe marquée ; inversé, 6 siphons et aucun sans trappe marquée | Confirmée, et c'est l'énoncé structurel de « ordonnez vos verrous » (2026-09-17) |
 | Une transition vivante est-elle à l'abri de la famine ? | Non | `start_write` est L4 dans les lecteurs-rédacteurs, et le graphe contient un cycle à deux marquages, `start_read` puis `stop_read`, qui ne la tire jamais | Confirmée : la vivacité est « toujours possible », jamais « finit par arriver » (2026-09-17) |
 | La couleur réduit-elle l'espace d'états ? | Non — elle ne replie que le modèle | 4 places et 4 transitions à toute limite de tentatives ; le dépliage et le nombre de marquages accessibles croissent tous deux linéairement, 8, 10, 14, 24, 44 marquages pour les limites 2, 3, 5, 10, 20 | Confirmée, et c'est le point principal de la leçon 8 (2026-09-17) |
+| La chaîne construite depuis le réseau s'accorde-t-elle avec la formule M/M/1/K ? | À environ 1e-12 près, puisque le réseau *est* cette file | Le plus grand écart sur les six états vaut 5,6e-17, cinq ordres de grandeur sous le 1e-12 que la vérification affirme | Confirmée, et c'est la seule vérification indépendante du solveur stochastique (2026-09-22) |
+| Où se tient une file finie quand les arrivées égalent exactement le service ? | Quelque part au milieu, les extrémités étant moins probables | **Uniforme** : chaque longueur de 0 à 5 a la probabilité 0,1667, vide aussi souvent que pleine | Réfutée, et c'est devenu le résultat le plus utile : à charge 1 il n'y a aucune tendance (2026-09-22) |
 
 ## 2026-09-15 — Leçons 1 à 4, et l'analyseur qui les fait tourner
 
@@ -133,6 +135,18 @@ La leçon 14 relie maintenant le modèle formel aux formes de panne mesurées da
 
 La correction importante était sémantique : `DeadStates` signifie qu’aucune transition n’est activée ; la fin réussie d’un workflow fini est donc morte elle aussi. « Sans interblocage » est le mauvais oracle pour un pipeline qui se termine. Le contrat exécutable devient un graphe complet dont chaque marquage mort porte exactement un jeton terminal nommé. La page indique aussi honnêtement que les exemples Channel en forme de GA reproduisent des mécanismes et ne sont pas des tests de régression des binaires actuels. RabbitMQ, Redis et Kubernetes restent des expériences ultérieures.
 
+## 2026-09-22 — Leçon 9, et une file résolue deux fois
+
+La leçon 9 transforme le graphe d'accessibilité en une chaîne de Markov à temps continu. `Stochastic.cs` construit la matrice des taux à partir du graphe, élimine les états évanescents que crée une transition immédiate, et résout piQ = 0 par élimination de Gauss avec pivot partiel. La question ouverte du 2026-09-17 est tranchée par la leçon elle-même : le cours enseigne d'abord le formalisme **stochastique**, parce que c'est celui dont la sémantique découle du réseau non temporisé sans nouvelle règle de tir, et les délais déterministes de Merlin et de Ramchandani sont nommés comme la théorie plus difficile qu'ils sont.
+
+La décision de conception qui mérite d'être notée porte sur la vérification. Une file à une transition d'arrivée, une transition de service et des délais exponentiels *est* une file M/M/1/K, donc la même distribution peut être calculée deux fois par des chemins qui ne partagent aucun code : la chaîne construite à partir du réseau, et la forme close calculée à partir de rho. Les six probabilités s'accordent à environ 1e-16 près. Cet accord est la seule raison de faire confiance à l'analyseur sur les réseaux dont la réponse n'est pas connue sous forme close — c'est-à-dire tous, après cette leçon.
+
+Deux choses sont sorties de l'écriture sans que je les aie prévues. D'abord, la vérification de la leçon imprime un verdict plutôt que l'écart : les chiffres de l'écart dépendent de l'ordre dans lequel la machine a additionné les flottants, donc l'imprimer ferait échouer `check.sh` sur l'un des trois OS pour une raison étrangère aux réseaux de Petri. Ensuite, le cas à charge 1 est plus intéressant que celui à charge 0,75 — la file n'est pas concentrée au milieu, elle est uniforme sur toutes les longueurs, ce qui dit sur « dimensionné exactement à la capacité » quelque chose qu'aucune moyenne ne dirait.
+
+La loi de Little sert de troisième vérification indépendante plutôt que de résultat : elle vaut pour tout système stable sans hypothèses, donc si la chaîne la violait, ce serait la chaîne qui aurait tort.
+
+`check.sh` exécute désormais `l9` et le compare à `expected/l9.txt`. 57 tests passent, et `l1` à `l9`, `l14`, `music`, `chat` et `nets` correspondent tous.
+
 ## À vérifier
 
 - Hack 1972, la source du théorème de Commoner, est en accès libre et illisible par une requête automatisée. Le lire dans un navigateur permettrait à la leçon 6 de citer le théorème plutôt que de paraphraser une paraphrase.
@@ -144,4 +158,4 @@ La correction importante était sémantique : `DeadStates` signifie qu’aucune 
 
 - La force brute sur les sous-ensembles de places plafonne l'analyseur à vingt places. Six philosophes prenant une fourchette à la fois en ont vingt-quatre, donc le verdict structurel ne peut pas être calculé pour le plus gros réseau du tableau de la leçon 7 elle-même. Une formulation pour solveur de contraintes réglerait cela et rendrait le cours dépendant d'un solveur.
 - Les réseaux colorés de la leçon 8 lient une variable par transition. Une transition qui joint deux messages a besoin d'un tuple, et le dépliage croîtrait comme un produit. Reste indécidé s'il faut l'implémenter à la leçon 12, où apparaît un vrai protocole, ou confier ce modèle à CPN Tools et le dire.
-- La leçon 9 a besoin du temps, et le temps est l'endroit où un réseau cesse d'avoir une sémantique unique acceptée. Lequel des formalismes temporisés — les réseaux de Petri temporels au sens de Merlin, les réseaux temporisés au sens de Ramchandani, ou les stochastiques — ce cours enseigne en premier n'est pas tranché.
+- La leçon 9 a enseigné le formalisme stochastique, ce qui laisse ouvert le déterministe : un réseau de Petri temporel au sens de Merlin, où une transition porte un intervalle plutôt qu'un taux, n'a pas de chaîne de Markov derrière lui et demande une construction par classes d'états que l'analyseur n'a pas. Reste indécidé si la leçon 13 en construit une ou confie le modèle à TINA, qui fait exactement cela.

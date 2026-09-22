@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pnml xmlns="http://www.pnml.org/version-2009/grammar/pnml">
+  <net id="n1" type="http://www.pnml.org/version-2009/grammar/ptnet">
+    <name>
+      <text>two-servers</text>
+    </name>
+    <page id="page1">
+      <place id="waiting">
+        <name>
+          <text>waiting</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="at-fast">
+        <name>
+          <text>at-fast</text>
+        </name>
+      </place>
+      <place id="at-slow">
+        <name>
+          <text>at-slow</text>
+        </name>
+      </place>
+      <transition id="to-fast">
+        <name>
+          <text>to-fast</text>
+        </name>
+      </transition>
+      <transition id="to-slow">
+        <name>
+          <text>to-slow</text>
+        </name>
+      </transition>
+      <transition id="done-fast">
+        <name>
+          <text>done-fast</text>
+        </name>
+      </transition>
+      <transition id="done-slow">
+        <name>
+          <text>done-slow</text>
+        </name>
+      </transition>
+      <arc id="a1" source="waiting" target="to-fast" />
+      <arc id="a2" source="to-fast" target="at-fast" />
+      <arc id="a3" source="waiting" target="to-slow" />
+      <arc id="a4" source="to-slow" target="at-slow" />
+      <arc id="a5" source="at-fast" target="done-fast" />
+      <arc id="a6" source="done-fast" target="waiting" />
+      <arc id="a7" source="at-slow" target="done-slow" />
+      <arc id="a8" source="done-slow" target="waiting" />
+    </page>
+  </net>
+</pnml>

@@ -15,7 +15,7 @@ sidebar:
 - [x] Lesson 6 — Structural classes
 - [x] Lesson 7 — Modelling concurrency
 - [x] Lesson 8 — Coloured nets
-- [ ] Lesson 9 — Time and probability
+- [x] Lesson 9 — Time and probability
 - [ ] Lesson 10 — Workflows
 - [ ] Lesson 11 — Tools and interoperability
 - [ ] Lesson 12 — Industrial applications
@@ -55,6 +55,8 @@ One warning before the table: unlike the [GA Lab](../../ga-lab/journal/), this c
 | What does reversing one philosopher do to the structure? | Removes the deadlock | Removes a **siphon**: three philosophers have 7 minimal siphons, one of them — `{eating1, fork1, eating2, fork2, eating3, fork3}` — with no marked trap; reversed, 6 siphons and none without one | Confirmed, and it is the structural statement of "order your locks" (2026-09-17) |
 | Is a live transition safe from starvation? | No | `start_write` is L4 in the readers and writers, and the graph contains a two-marking cycle, `start_read` then `stop_read`, that never fires it | Confirmed: liveness is "always possible", never "eventually happens" (2026-09-17) |
 | Does colour shrink the state space? | No — it folds the model only | 4 places and 4 transitions at every attempt limit; the unfolding and the number of reachable markings both grow linearly, 8, 10, 14, 24, 44 markings for limits 2, 3, 5, 10, 20 | Confirmed, and it is the main point of lesson 8 (2026-09-17) |
+| Does the chain built from the net agree with the M/M/1/K formula? | To about 1e-12, since the net *is* that queue | The largest gap over the six states is 5.6e-17, five orders of magnitude under the 1e-12 the check asserts | Confirmed, and it is the only independent check the stochastic solver has (2026-09-22) |
+| Where does a finite queue sit when arrivals exactly match service? | Somewhere in the middle, with the ends less likely | **Uniform**: every length from 0 to 5 has probability 0.1667, empty as often as full | Refuted, and it became the more useful result: at load 1 there is no tendency at all (2026-09-22) |
 
 ## 2026-09-15 — Lessons 1 to 4, and the analyser they run on
 
@@ -133,6 +135,18 @@ Lesson 14 now connects the formal model to the failure shapes measured in Advanc
 
 The important correction was semantic: `DeadStates` means that no transition is enabled, so a successful finite workflow is dead too. “Deadlock-free” is therefore the wrong oracle for a terminating pipeline. The executable contract is instead a complete graph whose dead markings each contain exactly one named terminal token. The page also labels the existing GA-shaped Channel examples honestly as mechanism reproductions rather than current-production regression tests. RabbitMQ, Redis and Kubernetes remain later experiments.
 
+## 2026-09-22 — Lesson 9, and a queue solved twice
+
+Lesson 9 turns the reachability graph into a continuous-time Markov chain. `Stochastic.cs` builds the rate matrix from the graph, eliminates the vanishing states an immediate transition creates, and solves piQ = 0 by Gaussian elimination with partial pivoting. The open question of 2026-09-17 is settled by the lesson itself: the course teaches the **stochastic** formalism first, because it is the one whose semantics follows from the untimed net without a new firing rule, and the deterministic delays of Merlin and Ramchandani are named as the harder theory they are.
+
+The design decision worth recording is the one about checking. A queue with one arrival transition, one service transition and exponential delays *is* an M/M/1/K queue, so the same distribution can be computed twice by routes that share no code: the chain built from the net, and the closed form computed from rho. The six probabilities agree to about 1e-16. That agreement is the only reason to trust the analyser on the nets whose answer is not known in closed form — which is all of them, after this lesson.
+
+Two things fell out of writing it that I did not plan. First, the lesson's own check prints a verdict rather than the difference: the gap's digits depend on the order the machine added the floating-point numbers in, so printing it would make `check.sh` fail on one of the three OSes for a reason unrelated to Petri nets. Second, the load-1 case is more interesting than the load-0.75 one — the queue is not concentrated in the middle, it is uniform over every length, which says something about "sized exactly at capacity" that no mean would.
+
+Little's law is used as a third, independent check rather than as a result: it holds for every stable system without assumptions, so if the chain violated it the chain would be wrong.
+
+`check.sh` now runs `l9` and compares it with `expected/l9.txt`. 57 tests pass, and `l1` to `l9`, `l14`, `music`, `chat` and `nets` all match.
+
 ## To verify
 
 - Hack 1972, the source of Commoner's theorem, is open access and unreadable to an automated fetch. Reading it in a browser would let lesson 6 quote the theorem rather than paraphrase a paraphrase.
@@ -144,4 +158,4 @@ The important correction was semantic: `DeadStates` means that no transition is 
 
 - The brute force over subsets of places caps the analyser at twenty places. Six philosophers taking one fork at a time have twenty-four, so the structural verdict cannot be computed for the largest net in lesson 7's own table. A constraint-solver formulation would fix it and would make the course depend on a solver.
 - The coloured nets of lesson 8 bind one variable per transition. A transition joining two messages needs a tuple, and the unfolding would grow as a product. Whether to implement that in lesson 12, where a real protocol appears, or to hand that model to CPN Tools and say so, is undecided.
-- Lesson 9 needs time, and time is where a net stops having one accepted semantics. Which of the timed formalisms — time Petri nets in the sense of Merlin, timed nets in the sense of Ramchandani, or the stochastic ones — this course teaches first is not settled.
+- Lesson 9 taught the stochastic formalism, which leaves the deterministic one open: a time Petri net in the sense of Merlin, where a transition carries an interval rather than a rate, has no Markov chain behind it and needs a state-class construction the analyser does not have. Whether lesson 13 builds one or hands the model to TINA, which does exactly this, is undecided.
