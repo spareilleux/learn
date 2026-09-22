@@ -1,0 +1,42 @@
+== metronome
+nodes:
+- corps (mesh) t=[0, 0, 0]
+- pivot (empty) t=[0, 0.1617, 0.1347]
+  - poids (mesh) t=[0, 0, 0]
+  - tige (mesh) t=[0, 0, 0]
+materials: ['corps', 'poids', 'tige']
+animations: 1
+animation metronome_balancier: node pivot, rotation, LINEAR, 91 keys, 0.0000 s to 1.5000 s
+  axis [0.0, 0.0, -1.0], from 0.000 to -0.000 deg, min -19.991, max 19.991, first key equals last: True
+  0.000 s: 0.00 deg, 0.367 s: 19.99 deg, 0.750 s: 0.00 deg, 1.133 s: -19.99 deg, 1.500 s: -0.00 deg
+as imported:
+- corps: mesh, parent none, 2864 triangles, materials ['corps'], action None
+- pivot: empty, parent none, 0 triangles, materials [], action metronome_balancier
+- poids: mesh, parent pivot, 308 triangles, materials ['poids'], action None
+- tige: mesh, parent pivot, 198 triangles, materials ['tige'], action None
+triangles: 3370
+bounds in glTF axes: x [-0.2495, 0.2495], y [0.0000, 1.0000], z [-0.1747, 0.1747], height 1.0000
+
+== gramophone
+nodes:
+- caisse (mesh) t=[0, 0, 0]
+- pavillon (mesh) t=[0, 0, 0]
+- tourne (empty) t=[-0.0406, 0.2469, 0.0305]
+  - disque (mesh) t=[0, 0, 0]
+  - etiquette (mesh) t=[0, 0, 0]
+  - repere (mesh) t=[0, 0, 0]
+materials: ['caisse', 'pavillon', 'disque', 'etiquette', 'repere']
+animations: 1
+animation gramophone_tourne: node tourne, rotation, LINEAR, 155 keys, 0.0000 s to 1.5400 s
+  axis [0.0, 1.0, -0.0], from 0.000 to 720.000 deg, min 0.000, max 720.000, first key equals last: True
+  0.000 s: 0.00 deg, 0.380 s: 177.66 deg, 0.770 s: 360.00 deg, 1.160 s: 542.34 deg, 1.540 s: 720.00 deg
+as imported:
+- caisse: mesh, parent none, 948 triangles, materials ['caisse'], action None
+- disque: mesh, parent tourne, 628 triangles, materials ['disque'], action None
+- etiquette: mesh, parent tourne, 168 triangles, materials ['etiquette'], action None
+- pavillon: mesh, parent none, 4182 triangles, materials ['pavillon'], action None
+- repere: mesh, parent tourne, 24 triangles, materials ['repere'], action None
+- tourne: empty, parent none, 0 triangles, materials [], action gramophone_tourne
+triangles: 5950
+bounds in glTF axes: x [-0.2896, 0.3811], y [0.0000, 1.0000], z [-0.2896, 0.2896], height 1.0000
+

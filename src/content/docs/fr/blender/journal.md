@@ -1,6 +1,6 @@
 ---
 title: Journal
-description: 'Notes de progression datées du cours Blender — Blender 5.2.2 LTS épinglé, une installation portable, des scripts exécutés en arrière-plan et comparés en CI sur trois systèmes, un rendu Cycles aux mêmes pixels sous Windows, Linux et macOS, un bug d''espace colorimétrique dans une texture générée, ce que l''exporteur glTF abandonne ou ignore par défaut, deux modèles Hunyuan3D sortis de ComfyUI nettoyés dans Blender avec ce qui a échoué, et les points à vérifier.'
+description: 'Notes de progression datées du cours Blender — Blender 5.2.2 LTS épinglé, une installation portable, des scripts exécutés en arrière-plan et comparés en CI sur trois systèmes, un rendu Cycles aux mêmes pixels sous Windows, Linux et macOS, un bug d''espace colorimétrique dans une texture générée, ce que l''exporteur glTF abandonne ou ignore par défaut, deux objets modélisés en bpy face aux deux mêmes générés depuis une image, deux modèles Hunyuan3D sortis de ComfyUI nettoyés dans Blender avec ce qui a échoué, et les points à vérifier.'
 sidebar:
   order: 99
 ---
@@ -16,6 +16,7 @@ sidebar:
 - [x] Leçon 4 : lumières, caméras, et rendu avec EEVEE et Cycles
 - [x] Traductions française et espagnole
 - [x] Un pipeline de nettoyage pour les modèles `.glb` générés dans ComfyUI, essayé sur deux modèles Hunyuan3D
+- [x] Deux modèles procéduraux en `bpy`, comparés aux modèles générés
 - [ ] Leçon 5 : scripter avec `bpy`
 
 ## 2026-09-16 — Versions et installation
@@ -89,6 +90,30 @@ Cette étude procédurale réutilise les fonctions `stage.aim` et `stage.area_li
 - La scène Blender ouverte par l'utilisateur n'a pas été modifiée. Le connecteur MCP était indisponible ; un processus séparé démarré avec la configuration d'usine a produit l'étude.
 - ComfyUI était indisponible sur le port 8188. Aucune inférence ComfyUI, API payante ou téléchargement de modèle. Le code de l'artefact Claude reste inaccessible : c'est une étude originale, pas son adaptation.
 - Avertissements non bloquants : affectations `use_nodes` obsolètes et chemins des brosses intégrées que Blender ne pouvait pas rendre relatifs. L'exécution Linux/macOS, la portabilité du blend, le raffinement des matériaux et l'étape ComfyUI restent **à vérifier**.
+
+## 2026-09-22 — Modéliser en bpy face à l'image→3D
+
+Les deux mêmes objets, un métronome et un gramophone, ont été faits deux fois : générés depuis une image SDXL par Hunyuan3D 2.0 (l'entrée ci-dessus), puis modélisés en `bpy`. La seconde voie a été choisie après lecture de la licence de Hunyuan3D, dont la clause 5.c interdit d'afficher ses sorties hors d'un territoire qui exclut l'Union européenne, le Royaume-Uni et la Corée du Sud — le cours ComfyUI raconte ce versant dans la [leçon 8](../../comfyui/08-recent-models-quantization/#lire-la-licence-avant-de-publier-une-sortie). Les scripts ont été écrits par un agent de la session orchestratrice ; ils sont gardés dans le cours, dans [`scripts/atlas/`](https://github.com/spareilleux/learn/blob/50da8f8/code/blender/scripts/atlas/), parce qu'ils rendent la comparaison concrète.
+
+![Deux modèles faits en bpy, rendus avec Workbench : un métronome en bois avec sa graduation et son balancier, et un gramophone au pavillon de révolution, avec un disque et son étiquette](../../../../assets/blender/atlas-bpy-models.webp)
+
+| | Hunyuan3D 2.0, puis nettoyé | Modélisé en `bpy` |
+|---|---|---|
+| Métronome : triangles | 890 140, puis 43 302 après Decimate, 20 000 après un remesh voxel | 3 370 |
+| Gramophone : triangles | 1 017 760, puis 317 253, 20 000 après un remesh | 5 950 |
+| `.glb` | 15,9 Mo et 17,4 Mo bruts ; 361 Ko chacun après le remesh | 91 176 et 150 944 octets |
+| Arêtes non manifold | 19 084 et 189 748 | 0 et 0 |
+| Pièces, noms | un seul bloc, `Material_0` | `corps`, `tige`, `poids` ; `caisse`, `pavillon`, `disque`, `etiquette`, `repere` |
+| Animation | aucune | balancier ±19,99° en 1,5 s ; disque 720° en 1,54 s |
+| Matériaux | aucun | une couleur Principled par pièce |
+| Échelle et axes | à donner à la main après coup | 1 unité de haut, socle sur l'origine, face vers +Z |
+
+- **Ce que le code apporte.** Chaque pièce est un objet nommé : la page qui charge le modèle peut donner à chacune son matériau et l'animer. Le balancier du métronome tourne autour d'un pivot, le disque du gramophone autour d'un autre ; les deux animations partent dans le glTF et bouclent proprement. Rien n'est laissé à l'interprétation : la hauteur vaut exactement 1, le socle est sur l'origine, la face regarde +Z.
+- **Ce qu'il coûte.** Environ 510 lignes de modélisation pour les deux objets, plus 120 pour la vérification, et le modèle est exactement aussi détaillé que le dit le code : la graduation du métronome, ce sont douze traits extrudés, pas une plaque gravée ; le bois est une couleur, pas un fil. Un modèle image→3D donne en une minute une forme qu'il faudrait une heure à modéliser, avec les défauts décrits dans l'entrée ci-dessus.
+- **Relire le fichier.** [`scripts/atlas_check.py`](https://github.com/spareilleux/learn/blob/50da8f8/code/blender/scripts/atlas_check.py) construit les deux modèles, puis ouvre chaque `.glb` deux fois : une fois comme octets, en analysant le bloc JSON pour afficher l'arbre de nœuds, les matériaux et les échantillonneurs d'animation, et une fois par l'importeur, pour les triangles et la boîte englobante. La courbe de rotation est déroulée clé par clé, si bien que le rapport montre de vrais angles plutôt que des quaternions : `0.000 s: 0.00 deg, 0.367 s: 19.99 deg, 0.750 s: 0.00 deg`, et si la première clé égale la dernière. La CI compare tout le rapport avec `expected/`.
+- **Les axes de glTF.** Blender travaille en Z vers le haut avec la face vers −Y ; l'exporteur écrit Y vers le haut avec la face vers +Z. La vérification affiche la boîte englobante dans les axes de glTF, c'est-à-dire ce que voit celui qui consomme le fichier : `x [-0.2495, 0.2495], y [0.0000, 1.0000], z [-0.1747, 0.1747]`.
+- **Un détail de l'exporteur.** Les 720° du disque en 1,54 s s'écrivent en 155 clés, et non en deux clés avec un nombre de tours : glTF range les rotations en quaternions, qui ne savent pas dire « deux tours ». Un lecteur qui interpole entre deux quaternions prend le chemin court : un tour complet doit donc être découpé en clés.
+- **Mémoire.** Blender n'est lancé ici qu'avec au moins 12 Go de mémoire libre. La veille, un bake Cycles d'une autre scène a planté dans Embree pendant la construction de son BVH, avec 1 Go libre sur une machine de 64 Go.
 
 ## À vérifier
 

@@ -36,6 +36,6 @@ run() {
 if [ $# -gt 0 ]; then
   for name in "$@"; do run "$name"; done
 else
-  for script in scripts/l[0-9][0-9]_*.py scripts/pipeline_check.py; do run "$(basename "$script" .py)"; done
+  for script in scripts/l[0-9][0-9]_*.py scripts/pipeline_check.py scripts/atlas_check.py; do run "$(basename "$script" .py)"; done
 fi
 exit $status

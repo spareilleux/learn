@@ -1,6 +1,6 @@
 ---
 title: Journal
-description: Dated progress notes for the Blender course — pinning Blender 5.2.2 LTS, a portable install, scripts run in the background and compared in CI on three OSes, a Cycles render with the same pixels on Windows, Linux and macOS, a color-space bug in a generated texture, what the glTF exporter drops or skips by default, two Hunyuan3D models from ComfyUI cleaned in Blender with what failed, and items to verify.
+description: Dated progress notes for the Blender course — pinning Blender 5.2.2 LTS, a portable install, scripts run in the background and compared in CI on three OSes, a Cycles render with the same pixels on Windows, Linux and macOS, a color-space bug in a generated texture, what the glTF exporter drops or skips by default, two objects modelled in bpy against the same two generated from an image, two Hunyuan3D models from ComfyUI cleaned in Blender with what failed, and items to verify.
 sidebar:
   order: 99
 ---
@@ -16,6 +16,7 @@ sidebar:
 - [x] Lesson 4: lights, cameras, and rendering with EEVEE and Cycles
 - [x] French and Spanish translations
 - [x] A cleanup pipeline for `.glb` models generated in ComfyUI, tried on two Hunyuan3D models
+- [x] Two procedural models in `bpy`, compared with the generated ones
 - [ ] Lesson 5: scripting with `bpy`
 
 ## 2026-09-16 — Versions and setup
@@ -89,6 +90,30 @@ A procedural Blender study reuses the course's `stage.aim` and `stage.area_light
 - The user's open Blender scene was not modified. The live MCP connection was unavailable; a separate factory-startup process produced the study.
 - ComfyUI on port 8188 was unavailable. No ComfyUI inference, paid API or model download occurred. The linked Claude artifact's source remains unread: this is an original study, not its adaptation.
 - Non-fatal warnings: deprecated `use_nodes` assignments and bundled brush paths that Blender could not make relative. Linux/macOS execution, portability of the blend, materials refinement and the ComfyUI stage remain **to verify**.
+
+## 2026-09-22 — Modelling in bpy against image-to-3D
+
+The same two objects, a metronome and a gramophone, were made twice: generated from an SDXL image by Hunyuan3D 2.0 (the entry above), then modelled in `bpy`. The second way was chosen after reading the Hunyuan3D license, whose clause 5.c forbids displaying its outputs outside a territory that excludes the European Union, the United Kingdom and South Korea — the ComfyUI course tells that side of the story in [lesson 8](../../comfyui/08-recent-models-quantization/#read-the-license-before-publishing-an-output). The scripts were written by an agent of the orchestrator session; they are kept in the course, at [`scripts/atlas/`](https://github.com/spareilleux/learn/blob/50da8f8/code/blender/scripts/atlas/), because they make the comparison concrete.
+
+![Two models made in bpy, rendered with Workbench: a wooden metronome with its graduated scale and its pendulum, and a gramophone with a revolved horn, a record and its label](../../../assets/blender/atlas-bpy-models.webp)
+
+| | Hunyuan3D 2.0, then cleaned | Modelled in `bpy` |
+|---|---|---|
+| Metronome: triangles | 890,140, then 43,302 after Decimate, 20,000 after a voxel remesh | 3,370 |
+| Gramophone: triangles | 1,017,760, then 317,253, 20,000 after a remesh | 5,950 |
+| `.glb` | 15.9 MB and 17.4 MB raw; 361 KB each after the remesh | 91,176 and 150,944 bytes |
+| Non-manifold edges | 19,084 and 189,748 | 0 and 0 |
+| Parts, names | one block, `Material_0` | `corps`, `tige`, `poids`; `caisse`, `pavillon`, `disque`, `etiquette`, `repere` |
+| Animation | none | pendulum ±19.99° in 1.5 s; record 720° in 1.54 s |
+| Materials | none | one Principled color per part |
+| Scale and axes | to be given by hand after the fact | 1 unit tall, base on the origin, front towards +Z |
+
+- **What the code buys.** Each part is a named object, so the page that loads the model can give it its own material and animate it. The metronome's pendulum turns around a pivot, and the gramophone's record around another; both animations are exported to glTF and loop cleanly. Nothing is left to interpret: the height is exactly 1, the base sits on the origin, the front faces +Z.
+- **What it costs.** About 510 lines of modelling for the two objects, plus 120 for the check, and the model is exactly as detailed as the code says: the scale on the metronome is twelve extruded ticks, not an engraved plate; the wood is a color, not a grain. An image-to-3D model gives a shape in one minute that would take an hour to model, with the defects described in the entry above.
+- **Reading the file back.** [`scripts/atlas_check.py`](https://github.com/spareilleux/learn/blob/50da8f8/code/blender/scripts/atlas_check.py) builds both models, then opens each `.glb` twice: once as bytes, parsing the JSON chunk to print the node tree, the materials and the animation samplers, and once through the importer, for the triangle counts and the bounding box. The rotation curve is unwrapped key by key, so the report shows the real angles rather than quaternions: `0.000 s: 0.00 deg, 0.367 s: 19.99 deg, 0.750 s: 0.00 deg`, and whether the first key equals the last. CI compares the whole report with `expected/`.
+- **glTF's axes.** Blender works Z-up with the front towards −Y; the exporter writes Y-up with the front towards +Z. The check prints the bounding box in glTF axes, which is what the consumer of the file sees: `x [-0.2495, 0.2495], y [0.0000, 1.0000], z [-0.1747, 0.1747]`.
+- **A detail of the exporter.** The record's 720° in 1.54 s are written as 155 keys, not as two keys with a turn count: glTF stores rotations as quaternions, which cannot say "two turns". A player interpolating between two quaternions takes the short way, so a full turn has to be cut into keys.
+- **Memory.** Blender is only started here when at least 12 GB of memory are free. The night before, a Cycles bake of another scene crashed inside Embree while building its BVH, with 1 GB free on a 64 GB machine.
 
 ## To verify
 
