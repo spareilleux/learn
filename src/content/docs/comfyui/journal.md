@@ -157,6 +157,14 @@ A separate CPU server (0.36.0, localhost:8193) confirmed all node classes of the
 
 The Blender v2 render was copied into the isolated ComfyUI input directory. `LoadImage → Canny → SaveImage` completed successfully on CPU in **3.731 s** (history timestamps); the output was visually inspected. Rings, pillars and causeway edges remain visible. This is a control image, not an SDXL-generated scene or new 3D geometry. Prompt ID: `7f26de5e-5d83-455c-97be-1e3401e9ba5f`. Output: `C:/tmp/blender-comfy-scenes-20260919/comfy-base/output/orbital-study/canny-edges_00001_.png`. The explicit in-memory database prevented the previous migration; the installation database hash remained unchanged. GPU time and paid API calls: **0**. SDXL inference was deferred rather than loading both models under limited available host RAM (about 10 GiB).
 
+## 2026-09-17 — A 3D model published before its license was read
+
+- On 16 September, the Atlas session generated a metronome and a gramophone as 3D meshes, from SDXL images, with Hunyuan3D 2.0 and ComfyUI's core nodes. The Blender course's journal published their renders at 00:23 on 17 September, in commit `a165915`.
+- Reading the license for the GA lab's image-to-3D experiment, the learn-33 session found clause 5.c of the [Tencent Hunyuan 3D 2.0 Community License](https://huggingface.co/tencent/Hunyuan3D-2/blob/9cd649ba6913f7a852e3286bad86bfa9a2d83dcf/LICENSE): "You must not use, reproduce, modify, distribute, or display the Tencent Hunyuan 3D 2.0 Works, Output or results of the Tencent Hunyuan 3D 2.0 Works outside the Territory." The Territory excludes the European Union, the United Kingdom and South Korea, and this site is public. Our mistake: the renders were published before anyone had read clause 5.c.
+- At 00:44 the user decided: Hunyuan3D stays on the local machine, and anything published uses TRELLIS.2 (MIT, with DINOv3 under its own license) or models built with code. The Blender course removed the two renders in commit `c8a5a33` and describes in words what they showed.
+- TRELLIS.2 needs about 23 GB of free RAM here, and upstream asks for 24 GB of VRAM; it hasn't run. The two objects are being remodelled with `bpy` instead: the [Blender journal](../../blender/journal/#2026-09-17--models-generated-in-comfyui-cleaned-in-blender) tells that side of the story.
+- Lesson 8 now has a section on [reading a license before publishing an output](../08-recent-models-quantization/#read-the-license-before-publishing-an-output), with the clauses and a comparison of the three routes. No Hunyuan3D image appears in this course.
+
 ## To verify
 
 - SDXL on Linux with CUDA, and on Apple Silicon with MPS: the course's GPU machine runs Windows; CI only installs the CPU builds.

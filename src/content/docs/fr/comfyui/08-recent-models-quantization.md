@@ -55,6 +55,35 @@ La licence d'un modèle est la licence d'une dépendance. Elle dit ce que tu as 
 
 Ce tableau montre trois pièges. La licence peut changer au sein d'une même famille : klein 4B et klein 9B n'ont pas la même. Elle peut dépendre de qui tu es, comme avec le seuil de chiffre d'affaires de Stability AI. Et un fichier reconditionné, comme ceux de Comfy-Org, relève de la licence du modèle d'origine, que tu lis sur la fiche d'origine. Le cours a lu chaque fiche au moment de télécharger le fichier, et son rapport liste chaque fichier avec sa licence et son SHA-256. Ceci n'est pas un avis juridique : lis la licence elle-même avant de livrer quoi que ce soit.
 
+### Lire la licence avant de publier une sortie
+
+Une licence peut restreindre l'endroit où ses sorties peuvent être vues, et pas seulement ce que vous faites des poids. Ce cours l'a appris à ses dépens, avec les modèles image vers 3D ; le [journal](../journal/) raconte l'épisode.
+
+ComfyUI v0.36.0 exécute [Hunyuan3D 2](https://docs.comfy.org/tutorials/3d/hunyuan3D-2) avec les nœuds du cœur. Sa [licence](https://huggingface.co/tencent/Hunyuan3D-2/blob/9cd649ba6913f7a852e3286bad86bfa9a2d83dcf/LICENSE), la Tencent Hunyuan 3D 2.0 Community License, commence par :
+
+> THIS LICENSE AGREEMENT DOES NOT APPLY IN THE EUROPEAN UNION, UNITED KINGDOM AND SOUTH KOREA AND IS EXPRESSLY LIMITED TO THE TERRITORY, AS DEFINED BELOW.
+
+(« Le présent contrat de licence ne s'applique pas dans l'Union européenne, au Royaume-Uni ni en Corée du Sud, et est expressément limité au Territoire, tel que défini ci-dessous. ») La clause 1.l définit le Territoire : « the worldwide territory, excluding the territory of the European Union, United Kingdom and South Korea. », le territoire mondial à l'exclusion de l'Union européenne, du Royaume-Uni et de la Corée du Sud. La clause 5.c va plus loin :
+
+> You must not use, reproduce, modify, distribute, or display the Tencent Hunyuan 3D 2.0 Works, Output or results of the Tencent Hunyuan 3D 2.0 Works outside the Territory. Any such use outside the Territory is unlicensed and unauthorized under this Agreement.
+
+(« Vous ne devez pas utiliser, reproduire, modifier, distribuer ni afficher les Œuvres Tencent Hunyuan 3D 2.0, leurs Sorties ou leurs résultats en dehors du Territoire. Toute utilisation de ce type en dehors du Territoire n'est ni licenciée ni autorisée par le présent contrat. ») La [licence de Hunyuan3D 2.1](https://huggingface.co/tencent/Hunyuan3D-2.1/blob/0b94677654c57bb9a6b6845cd7b704ccf551d327/LICENSE) contient les mêmes clauses. Trois conséquences pour un site public :
+
+- **Être soi-même dans le Territoire ne suffit pas.** Générer un maillage depuis un pays du Territoire est permis. Le mettre sur un site web n'est pas un usage limité à ce pays : une page publique est affichée aussi dans l'Union européenne, au Royaume-Uni et en Corée du Sud.
+- **Un rendu est une sortie.** « Output or results » couvre plus que le fichier `.glb` : une image tournante du maillage, rendue dans Blender, affiche encore le résultat.
+- **Une licence est un fichier daté.** Lisez-la à une révision épinglée et gardez son empreinte. Le cours lit la licence de Hunyuan3D 2.0 au commit `9cd649ba`, SHA-256 `eca02cc10abaf520…`. Certaines licences changent d'elles-mêmes : celle de [DINOv3](https://github.com/facebookresearch/dinov3/blob/ffb4bb89c6558ca3244655c25a3955d01788b732/LICENSE.md), datée du 19 août 2025, dit à sa clause 8 que « Your continued use of the DINO Materials after any modification to this Agreement constitutes your agreement to such modification. », que continuer à utiliser les DINO Materials après une modification vaut acceptation de cette modification.
+
+Le cours a comparé trois façons d'obtenir le modèle 3D d'un petit objet pour ses pages :
+
+| | Hunyuan3D 2.0 ou 2.1, dans ComfyUI | TRELLIS.2 4B, dans ComfyUI | Modélisation procédurale avec `bpy` dans Blender |
+|---|---|---|---|
+| Licence | Tencent Hunyuan 3D Community License : pas dans l'UE, au Royaume-Uni ni en Corée du Sud, sorties non affichées dans ces territoires, demande à Tencent au-delà d'un million d'utilisateurs actifs mensuels | [MIT](https://github.com/microsoft/TRELLIS.2/blob/75fbf0183001ed9876c8dbb35de6b68552ee08bd/LICENSE), mais son encodeur d'image est DINOv3, sous la DINOv3 License : citer DINOv3 dans une publication (1.b.ii), fournir une copie de la licence avec les poids (1.b.i), accepter les modifications à venir en continuant de les utiliser (8) | Blender est sous GPL, et sa [page de licence](https://www.blender.org/about/license/) dit « What you create with Blender is your sole property. » : ce que vous créez avec Blender vous appartient |
+| RAM et VRAM libres sur cette machine | 19 Go de RAM libre pour la 2.0 avec SDXL ; 9,4 Go de VRAM mesurés pendant l'échantillonnage | environ 23 Go de RAM libre pour le modèle int8 avec SDXL ; le README amont demande « at least 24GB » de VRAM, et 16 Go reste *à vérifier* | aucun GPU nécessaire |
+| Qualité observée | 890 140 et 1 017 760 triangles pour deux objets simples, 19 084 et 189 748 arêtes non manifold, ni UV ni texture, un arrière inventé, du détail peint lu comme du relief, et la ligne de sol de l'image devenue une dalle | non testé | propre par construction ; le cours Blender en mesure les compteurs, *à vérifier* |
+| Publiable sur ce site | non | oui, avec DINOv3 cité | oui |
+
+Le [paquet TRELLIS.2 de Comfy-Org](https://huggingface.co/Comfy-Org/TRELLIS.2) est étiqueté MIT et distribue `clip_vision/dino_v3_vit_l.safetensors` sans copie de la DINOv3 License. La licence du fichier s'applique quand même : un reconditionnement ne la change pas. Ceci n'est pas un avis juridique.
+
 ## Ce que contient un fichier quantifié
 
 Les 6 milliards de paramètres de Z-Image-Turbo occupent 12,3 Go en bf16, 2 octets chacun, et l'encodeur de texte Qwen3 prend 8,0 Go de plus : 20,3 Go, pour une carte de 16 Go. Comfy-Org publie les deux dans des formats plus petits. L'outil du cours lit leurs en-têtes :
