@@ -19,6 +19,20 @@ sidebar:
 - [x] Deux modèles procéduraux en `bpy`, comparés aux modèles générés
 - [ ] Leçon 5 : scripter avec `bpy`
 
+## Expériences
+
+Chaque ligne est une question que le cours a mesurée, avec l'hypothèse telle qu'elle était écrite avant la mesure. Une hypothèse réfutée est un résultat et reste ici.
+
+| Question | Hypothèse, écrite d'abord | Résultat | Verdict | Où |
+|---|---|---|---|---|
+| Le même script `bpy` donne-t-il le même rapport sous Windows, Linux et macOS ? | Oui, avec Cycles sur le processeur et des graines fixes. | Les rapports sont identiques sur les trois exécuteurs, remesh voxel compris, et l'empreinte du rendu à 16 échantillons correspond sur x86-64 et sur Apple Silicon. | Confirmée | [2026-09-16](#2026-09-16--scripts-ci-et-ce-quils-ont-montré) · [`check.sh`](https://github.com/spareilleux/learn/blob/0c94215/code/blender/check.sh) |
+| Un modèle généré depuis une image porte-t-il son éclairage peint dans la texture ? | Oui — c'était l'échec attendu avant de lancer le pipeline. | Ce workflow ne sort que la forme : pas de carte UV, pas de texture, un matériau vide. L'échec attendu ne pouvait pas avoir lieu. | Réfutée | [2026-09-17](#2026-09-17--des-modèles-générés-dans-comfyui-nettoyés-dans-blender) · [`glb_pipeline.py`](https://github.com/spareilleux/learn/blob/0c94215/code/blender/scripts/glb_pipeline.py) |
+| Decimate en mode Collapse atteint-il une cible de 20 000 triangles sur un maillage de surface net ? | Oui, c'est à cela que sert le ratio. | 43 302 triangles sur le métronome et 317 253 sur le gramophone : manquée dans les deux cas, à cause de 19 084 et 189 748 arêtes non manifold. | Réfutée | [2026-09-17](#2026-09-17--des-modèles-générés-dans-comfyui-nettoyés-dans-blender) · [`glb_pipeline.py`](https://github.com/spareilleux/learn/blob/0c94215/code/blender/scripts/glb_pipeline.py) |
+| Un remesh voxel préalable donne-t-il un maillage que Decimate peut amener à la cible ? | Oui, au prix du détail plus petit qu'un voxel. | 20 000 triangles exactement dans les deux cas, 0 arête non manifold, aucun bord. Les parois minces se brisent en miettes, qu'un second passage du filtre d'îlots retire. | Confirmée | [2026-09-17](#2026-09-17--des-modèles-générés-dans-comfyui-nettoyés-dans-blender) · [`glb_pipeline.py`](https://github.com/spareilleux/learn/blob/0c94215/code/blender/scripts/glb_pipeline.py) |
+| Un aperçu processeur à peu d'échantillons suffit-il à juger un cadrage avant de dépenser du temps GPU ? | Oui. | 6,698 s et 7,025 s à 24 échantillons ; le premier cadrage mettait des piliers en travers des anneaux focaux et a été rejeté à vue. | Confirmée pour le cadrage, pas pour la qualité finale de l'image | [2026-09-19](#2026-09-19--cathédrale-orbitale--le-cadrage-avant-la-génération) · [`orbital_cathedral.py`](https://github.com/spareilleux/learn/blob/0c94215/code/blender/scripts/orbital_cathedral.py) |
+| Que rapporte la modélisation en `bpy` face à l'image→3D, pour les deux mêmes objets ? | Un maillage bien plus léger et propre, payé en détail et en lignes de code. | 3 370 et 5 950 triangles contre 890 140 et 1 017 760 ; 0 arête non manifold contre 19 084 et 189 748 ; pièces nommées, matériaux et animations, pour environ 510 lignes. | Confirmée | [2026-09-22](#2026-09-22--modéliser-en-bpy-face-à-limage3d) · [`atlas_check.py`](https://github.com/spareilleux/learn/blob/0c94215/code/blender/scripts/atlas_check.py) |
+| Une occlusion cuite par sommet vaut-elle ses 40 Ko dans une page temps réel ? | Oui : multiplier le terme ambiant par elle poserait les objets sur leurs surfaces. | Sur le terme ambiant, 4 à 5 % des pixels bougent d'une moyenne de 1,2/255 — rien. Sur le terme diffus, à exposition tenue fixe, la dispersion de la luminance croît de 1,44 à 1,95. | Réfutée sur le terme ambiant, confirmée sur le diffus | [2026-09-22](#2026-09-22--occlusion-cuite-dans-les-sommets-et-distinguer-un-effet-réel-dune-image-plus-sombre) · scripts non publiés |
+
 ## 2026-09-16 — Versions et installation
 
 - La page LTS de Blender liste 5.2.2 et 4.5.14, toutes deux publiées le 15 septembre 2026. Le cours épingle 5.2.2, tag `v5.2.2`, commit `d13f752e3b9c4f8c261cda552b1021f8bcc0382c`.

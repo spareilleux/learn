@@ -19,6 +19,20 @@ sidebar:
 - [x] Two procedural models in `bpy`, compared with the generated ones
 - [ ] Lesson 5: scripting with `bpy`
 
+## Experiments
+
+Each row is a question the course measured, with the hypothesis as it was written before the measurement. A refuted hypothesis is a result and stays here.
+
+| Question | Hypothesis, written first | Result | Verdict | Where |
+|---|---|---|---|---|
+| Does the same `bpy` script give the same report on Windows, Linux and macOS? | Yes, with Cycles on the CPU and fixed seeds. | The reports are identical on the three runners, the voxel remesh included, and the hash of the 16-sample render matches on x86-64 and on Apple Silicon. | Confirmed | [2026-09-16](#2026-09-16--scripts-ci-and-what-they-showed) · [`check.sh`](https://github.com/spareilleux/learn/blob/0c94215/code/blender/check.sh) |
+| Does a model generated from an image carry its lighting painted into the texture? | Yes — that was the failure expected before the pipeline was run. | This workflow outputs shape only: no UV map, no texture, one empty material. The expected failure could not happen. | Refuted | [2026-09-17](#2026-09-17--models-generated-in-comfyui-cleaned-in-blender) · [`glb_pipeline.py`](https://github.com/spareilleux/learn/blob/0c94215/code/blender/scripts/glb_pipeline.py) |
+| Does Decimate in Collapse mode reach a 20,000-triangle target on a surface-net mesh? | Yes, that is what the ratio is for. | 43,302 triangles on the metronome and 317,253 on the gramophone: missed on both, because of 19,084 and 189,748 non-manifold edges. | Refuted | [2026-09-17](#2026-09-17--models-generated-in-comfyui-cleaned-in-blender) · [`glb_pipeline.py`](https://github.com/spareilleux/learn/blob/0c94215/code/blender/scripts/glb_pipeline.py) |
+| Does a voxel remesh first give a mesh Decimate can bring to target? | Yes, at the cost of the detail below one voxel. | 20,000 triangles exactly on both, 0 non-manifold edges, no boundary. Thin walls break into crumbs, which a second floater pass removes. | Confirmed | [2026-09-17](#2026-09-17--models-generated-in-comfyui-cleaned-in-blender) · [`glb_pipeline.py`](https://github.com/spareilleux/learn/blob/0c94215/code/blender/scripts/glb_pipeline.py) |
+| Is a low-sample CPU preview enough to judge a composition before spending GPU time? | Yes. | 6.698 s and 7.025 s at 24 samples; the first framing put pillars across the focal rings and was rejected on sight. | Confirmed for framing, not for final image quality | [2026-09-19](#2026-09-19--orbital-cathedral-composition-before-generation) · [`orbital_cathedral.py`](https://github.com/spareilleux/learn/blob/0c94215/code/blender/scripts/orbital_cathedral.py) |
+| What does modelling in `bpy` buy against image-to-3D, for the same two objects? | A far lighter and cleaner mesh, paid for in detail and in lines of code. | 3,370 and 5,950 triangles against 890,140 and 1,017,760; 0 non-manifold edges against 19,084 and 189,748; named parts, materials and animations, for about 510 lines. | Confirmed | [2026-09-22](#2026-09-22--modelling-in-bpy-against-image-to-3d) · [`atlas_check.py`](https://github.com/spareilleux/learn/blob/0c94215/code/blender/scripts/atlas_check.py) |
+| Is occlusion baked per vertex worth its 40 kB in a real-time page? | Yes: multiplying the ambient term by it would settle the objects onto their surfaces. | On the ambient term, 4 to 5 % of pixels move by a mean of 1.2/255 — nothing. On the diffuse term, with the exposure held fixed, the luminance spread grows by 1.44 to 1.95. | Refuted on the ambient term, confirmed on the diffuse one | [2026-09-22](#2026-09-22--occlusion-baked-into-vertices-and-telling-a-real-effect-from-a-darker-one) · scripts not published |
+
 ## 2026-09-16 — Versions and setup
 
 - Blender's LTS page lists 5.2.2 and 4.5.14, both released on 15 September 2026. The course pins 5.2.2, tag `v5.2.2`, commit `d13f752e3b9c4f8c261cda552b1021f8bcc0382c`.
