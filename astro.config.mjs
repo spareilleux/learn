@@ -206,6 +206,12 @@ export default defineConfig({
 									items: [{ autogenerate: { directory: 'agentic-coding' } }],
 								},
 								{
+									label: 'SlashForge, workflow commands for Claude Code',
+									translations: { fr: 'SlashForge, des commandes de workflow pour Claude Code', es: 'SlashForge, comandos de flujo de trabajo para Claude Code' },
+									collapsed: true,
+									items: [{ autogenerate: { directory: 'slashforge' } }],
+								},
+								{
 									label: 'TypeSafe AI System One and Jev',
 									translations: { fr: 'TypeSafe AI System One et Jev', es: 'TypeSafe AI System One y Jev' },
 									collapsed: true,

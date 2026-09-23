@@ -1,0 +1,31 @@
+# A file path under commands/ becomes the name you type
+slashforge/setup.md            /slashforge:setup
+slashforge/code.md             /slashforge:code
+slashforge/investigate.md      /slashforge:investigate
+slashforge/review-pr.md        /slashforge:review-pr
+slashforge/brainstorm.md       /slashforge:brainstorm
+slashforge/plan.md             /slashforge:plan
+slashforge/debug.md            /slashforge:debug
+slashforge/tdd.md              /slashforge:tdd
+slashforge/verify.md           /slashforge:verify
+slashforge/review-feedback.md  /slashforge:review-feedback
+slashforge/request-review.md   /slashforge:request-review
+slashforge/worktree.md         /slashforge:worktree
+slashforge/parallel.md         /slashforge:parallel
+
+# The two install modes
+global   guides   /home/ada/.claude/setup/slashforge
+global   commands /home/ada/.claude/commands
+global   {{INSTALL_PATH}} = /home/ada/.claude/setup/slashforge
+project  guides   /src/app/.claude/setup/slashforge
+project  commands /src/app/.claude/commands
+project  {{INSTALL_PATH}} = .claude/setup/slashforge
+
+# What the frontmatter check refuses
+no opening fence: demo.md: missing opening '---' frontmatter fence
+no closing fence: demo.md: missing closing '---' frontmatter fence
+no description: demo.md: frontmatter missing required field 'description'
+a key with a space: demo.md: invalid frontmatter at line 3: "long description: d"
+a closing fence with a trailing space: demo.md: missing closing '---' frontmatter fence
+a folded YAML description: demo.md: invalid frontmatter at line 4: "  two lines"
+valid: ok {"name":"/demo","description":"d"}

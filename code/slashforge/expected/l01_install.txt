@@ -1,0 +1,15 @@
+
+✓ v4.4.3 installed
+✓ Guide files: ~/.claude/setup/slashforge
+✓ Command: ~/.claude/commands/slashforge/setup.md
+✓ Command: ~/.claude/commands/slashforge/code.md
+✓ Command: ~/.claude/commands/slashforge/investigate.md
+✓ Command: ~/.claude/commands/slashforge/review-pr.md
+
+Done! Open Claude Code in any repo:
+  • /slashforge:setup — one-time repo setup
+  • /slashforge:code — freeform end-to-end development workflow (full 10-phase, ~100–250k tokens)
+  • /slashforge:code -quick — lean mode for small changes (skips brainstorming + agent review, ~40–70k tokens)
+  • /slashforge:investigate [symptom] — read-only research, produces a findings report
+  • /slashforge:review-pr [number] — review a PR against this repo's rules, then comment or approve
+exit 0

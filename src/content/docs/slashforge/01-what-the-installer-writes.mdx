@@ -1,0 +1,310 @@
+---
+title: 1. What the installer writes
+description: Run SlashForge's installer into a throwaway home directory, read its dry run, its install and its file list side by side, find the eleven files the dry run doesn't announce, and see what project mode, status and uninstall do — compared with dotnet tool install, dotnet new install and PowerShell's -WhatIf.
+sidebar:
+  order: 1
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Code: [`code/slashforge/check.sh`](https://github.com/spareilleux/learn/blob/main/code/slashforge/check.sh), which produces every output of this lesson, and [`scripts/dry-run-vs-install.mjs`](https://github.com/spareilleux/learn/blob/main/code/slashforge/scripts/dry-run-vs-install.mjs). The outputs are in [`expected/`](https://github.com/spareilleux/learn/tree/main/code/slashforge/expected), compared on Linux, Windows and macOS.
+
+## One command, a folder of text
+
+SlashForge is installed the way its README says, with [`npx`](https://docs.npmjs.com/cli/commands/npx):
+
+```bash
+npx slashforge
+```
+
+`npx` downloads the [`slashforge` package](https://www.npmjs.com/package/slashforge) and runs the program its `package.json` declares as `bin`. The package ships two folders, `bin/` and `templates/`, and the program is a single file, [`bin/install.js`](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/bin/install.js), 676 lines of Node.js using nothing but `fs`, `path`, `os` and `readline`. It copies Markdown from `templates/` into `~/.claude/` and exits. It never runs again: from then on, Claude Code reads the files.
+
+The closest .NET equivalent is a template pack installed with [`dotnet new install`](https://learn.microsoft.com/dotnet/core/tools/dotnet-new-install): something lands in a folder under your profile, and a tool you already use picks it up. The difference is what lands. A template pack contains files that `dotnet new` expands; SlashForge contains *instructions* that a model reads and is asked to follow.
+
+## Trying it without touching your `~/.claude`
+
+Before running someone else's installer, decide where it may write. SlashForge takes its target from [`os.homedir()`](https://nodejs.org/api/os.html#oshomedir), which reads `USERPROFILE` on Windows and `HOME` elsewhere. Point that variable at an empty folder and your real `~/.claude/` is out of reach. This is what `check.sh` does:
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+In Git Bash, because `check.sh` is a Bash script. `USERPROFILE` needs a Windows path, which `cygpath -w` gives:
+
+```bash
+mkdir -p out/home
+export USERPROFILE=$(cygpath -w "$PWD/out/home") HOME="$PWD/out/home"
+node node_modules/slashforge/bin/install.js --dry-run
+```
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```bash
+mkdir -p out/home
+export HOME="$PWD/out/home"
+node node_modules/slashforge/bin/install.js --dry-run
+```
+
+</TabItem>
+<TabItem label="macOS">
+
+```bash
+mkdir -p out/home
+export HOME="$PWD/out/home"
+node node_modules/slashforge/bin/install.js --dry-run
+```
+
+</TabItem>
+</Tabs>
+
+The course installs the package with `npm ci` from its own [`package.json`](https://github.com/spareilleux/learn/blob/main/code/slashforge/package.json), which pins `4.4.3`, rather than with `npx`: the version stays the same until the course changes it. It also sets `SLASHFORGE_NO_UPDATE_CHECK=1`, because after an install the program asks the npm registry whether a newer release exists — the only network call it makes.
+
+In every output below, `check.sh` writes the throwaway home directory as `~`.
+
+## `--help`
+
+```
+Usage: slashforge [command] [options]
+
+Commands:
+  (default)    Install or update the kit
+  status       Show installed version and files without changing anything
+  uninstall    Remove the kit's guides and commands (use --project for ./.claude)
+
+Options:
+  --project    Install into ./.claude/ of the current repo (project mode)
+  --dry-run    Print planned file writes without touching the filesystem
+  --yes, -y    Non-interactive mode — auto-confirm the update prompt
+               (also enabled by SLASHFORGE_YES=1 or when stdin is not a TTY)
+  --help, -h   Show this help
+```
+
+Two lines deserve a second look. `--dry-run` promises to print the planned writes. And `--yes` is switched on by itself *when stdin is not a TTY* — in a script, in CI, or with input redirected from a file. We'll come back to both.
+
+## The dry run
+
+```
+Dry-run (no files written) — would install v4.4.3:
+
+  mkdir -p ~/.claude/setup/slashforge
+  mkdir -p ~/.claude/commands
+  copy   forge-instructions.md                → ~/.claude/setup/slashforge/forge-instructions.md
+  copy   forge-graph.md                       → ~/.claude/setup/slashforge/forge-graph.md
+  copy   forge-graph-summary.md               → ~/.claude/setup/slashforge/forge-graph-summary.md
+  copy   forge-coverage.md                    → ~/.claude/setup/slashforge/forge-coverage.md
+  copy   forge-workflow.md                    → ~/.claude/setup/slashforge/forge-workflow.md
+  copy   forge-workflow-investigation.md      → ~/.claude/setup/slashforge/forge-workflow-investigation.md
+  copy   forge-workflow-review-pr.md          → ~/.claude/setup/slashforge/forge-workflow-review-pr.md
+  copy   forge-workflow-agents.md             → ~/.claude/setup/slashforge/forge-workflow-agents.md
+  copy   forge-workflow-quick.md              → ~/.claude/setup/slashforge/forge-workflow-quick.md
+  copy   forge-rules.md                       → ~/.claude/setup/slashforge/forge-rules.md
+  copy   forge-skills.md                      → ~/.claude/setup/slashforge/forge-skills.md
+  copy   forge-agents.md                      → ~/.claude/setup/slashforge/forge-agents.md
+  copy   forge-commands.md                    → ~/.claude/setup/slashforge/forge-commands.md
+  copy   forge-hooks.md                       → ~/.claude/setup/slashforge/forge-hooks.md
+  copy   forge-claude-md.md                   → ~/.claude/setup/slashforge/forge-claude-md.md
+  copy   forge-memory.md                      → ~/.claude/setup/slashforge/forge-memory.md
+  render setup.md                             → ~/.claude/commands/slashforge/setup.md
+  render code.md                              → ~/.claude/commands/slashforge/code.md
+  render investigate.md                       → ~/.claude/commands/slashforge/investigate.md
+  render review-pr.md                         → ~/.claude/commands/slashforge/review-pr.md
+  write  meta.json                            → ~/.claude/setup/slashforge/meta.json
+
+Rerun without --dry-run to install.
+```
+
+Twenty-one files: sixteen guides under `setup/slashforge/`, four commands under `commands/slashforge/`, and a `meta.json`. `check.sh` also checks that the dry run kept its word about the filesystem: after it, the home directory is still empty.
+
+## The install
+
+Without `--dry-run`, and with stdin redirected from `/dev/null` as in CI:
+
+```
+✓ v4.4.3 installed
+✓ Guide files: ~/.claude/setup/slashforge
+✓ Command: ~/.claude/commands/slashforge/setup.md
+✓ Command: ~/.claude/commands/slashforge/code.md
+✓ Command: ~/.claude/commands/slashforge/investigate.md
+✓ Command: ~/.claude/commands/slashforge/review-pr.md
+
+Done! Open Claude Code in any repo:
+  • /slashforge:setup — one-time repo setup
+  • /slashforge:code — freeform end-to-end development workflow (full 10-phase, ~100–250k tokens)
+  • /slashforge:code -quick — lean mode for small changes (skips brainstorming + agent review, ~40–70k tokens)
+  • /slashforge:investigate [symptom] — read-only research, produces a findings report
+  • /slashforge:review-pr [number] — review a PR against this repo's rules, then comment or approve
+```
+
+And what is actually in the home directory afterwards, with `find . -type f`:
+
+```
+./.claude/commands/slashforge/brainstorm.md
+./.claude/commands/slashforge/code.md
+./.claude/commands/slashforge/debug.md
+./.claude/commands/slashforge/investigate.md
+./.claude/commands/slashforge/parallel.md
+./.claude/commands/slashforge/plan.md
+./.claude/commands/slashforge/request-review.md
+./.claude/commands/slashforge/review-feedback.md
+./.claude/commands/slashforge/review-pr.md
+./.claude/commands/slashforge/setup.md
+./.claude/commands/slashforge/tdd.md
+./.claude/commands/slashforge/verify.md
+./.claude/commands/slashforge/worktree.md
+./.claude/setup/slashforge/forge-agents.md
+./.claude/setup/slashforge/forge-claude-md.md
+./.claude/setup/slashforge/forge-commands.md
+./.claude/setup/slashforge/forge-coverage.md
+./.claude/setup/slashforge/forge-graph-summary.md
+./.claude/setup/slashforge/forge-graph.md
+./.claude/setup/slashforge/forge-hooks.md
+./.claude/setup/slashforge/forge-instructions.md
+./.claude/setup/slashforge/forge-memory.md
+./.claude/setup/slashforge/forge-open.sh
+./.claude/setup/slashforge/forge-report-shell.html
+./.claude/setup/slashforge/forge-rules.md
+./.claude/setup/slashforge/forge-skills.md
+./.claude/setup/slashforge/forge-workflow-agents.md
+./.claude/setup/slashforge/forge-workflow-investigation.md
+./.claude/setup/slashforge/forge-workflow-quick.md
+./.claude/setup/slashforge/forge-workflow-review-pr.md
+./.claude/setup/slashforge/forge-workflow.md
+./.claude/setup/slashforge/meta.json
+```
+
+Thirty-two files. The two folders have different jobs. Everything under `commands/` is something Claude Code loads by itself: a Markdown file in `~/.claude/commands/` is a [custom command](https://code.claude.com/docs/en/skills#where-skills-live), and a subfolder becomes a prefix, so `commands/slashforge/code.md` is typed `/slashforge:code`. Nothing in [Claude Code's description of the `.claude` directory](https://code.claude.com/docs/en/claude-directory) mentions `setup/`: the guides there are read only because a command tells the model to open them. Lesson 2 follows that chain.
+
+## What the dry run doesn't announce
+
+[`scripts/dry-run-vs-install.mjs`](https://github.com/spareilleux/learn/blob/main/code/slashforge/scripts/dry-run-vs-install.mjs) takes the two outputs above and compares them:
+
+```
+dry-run lists 21 files
+install wrote 32 files
+written but not in the dry-run (11):
+  ~/.claude/commands/slashforge/brainstorm.md
+  ~/.claude/commands/slashforge/debug.md
+  ~/.claude/commands/slashforge/parallel.md
+  ~/.claude/commands/slashforge/plan.md
+  ~/.claude/commands/slashforge/request-review.md
+  ~/.claude/commands/slashforge/review-feedback.md
+  ~/.claude/commands/slashforge/tdd.md
+  ~/.claude/commands/slashforge/verify.md
+  ~/.claude/commands/slashforge/worktree.md
+  ~/.claude/setup/slashforge/forge-open.sh
+  ~/.claude/setup/slashforge/forge-report-shell.html
+in the dry-run but not written (0):
+```
+
+A third of the install is missing from the preview: the nine skills, and the two files the investigation and review reports are built from. Nine of the eleven are slash commands, which is exactly what someone running `--dry-run` wants to know before installing.
+
+The cause is in the installer. The dry run [builds its own list](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/bin/install.js#L499-L528) from two arrays, `GUIDE_FILES` and `COMMAND_FILES`. The function that really writes, [`installFiles`](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/bin/install.js#L212-L279), walks four: those two plus `ASSET_FILES` and `SKILL_FILES`. According to the [changelog](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/CHANGELOG.md), `forge-report-shell.html` and the `ASSET_FILES` list arrived in 4.1.0, the skills and `forge-open.sh` in 4.2.0, the version that made the superpowers plugin optional; each time the real path was extended and the preview was not. The same drift shows in the labels: the dry run says `copy` for the guides, but the [4.4.1 changelog](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/CHANGELOG.md) says *"Guide files are rendered rather than copied"*, and `installFiles` does render them.
+
+It is the ordinary bug of any preview that is a second code path. PowerShell avoids it by construction: a cmdlet's [`-WhatIf`](https://learn.microsoft.com/powershell/scripting/learn/deep-dives/everything-about-shouldprocess) goes through the same `ShouldProcess` call that guards the real action, so the preview and the action cannot list different things. SlashForge's own changelog names the pattern elsewhere — in 4.4.2 it merged two descriptions of the investigation flow because *"the two could drift"*.
+
+## `meta.json` and `status`: four commands, on purpose
+
+The install ends by writing `meta.json`:
+
+```json
+{
+  "package": "slashforge",
+  "version": "4.4.3",
+  "installed_at": "<time>",
+  "mode": "global",
+  "commands": [
+    "/slashforge:setup",
+    "/slashforge:code",
+    "/slashforge:investigate",
+    "/slashforge:review-pr"
+  ]
+}
+```
+
+and `status` reads it back:
+
+```
+  Guide files:               16 (~/.claude/setup/slashforge)
+  ...
+  Installed commands:        4
+    • /slashforge:code
+    • /slashforge:investigate
+    • /slashforge:review-pr
+    • /slashforge:setup
+```
+
+Four, with thirteen files in `commands/slashforge/`. This one is deliberate, and the installer [says so in a comment](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/bin/install.js#L45-L50): the skills are kept out of `COMMAND_FILES` so that `status` reports *"the three entry points a user actually types, not every internal discipline the workflow invokes on their behalf"*. The comment says three; the list has had four since `/slashforge:review-pr` was added. The guide count is the other thing to read carefully: sixteen, because the two assets are not guides.
+
+## The prompts that don't appear
+
+Run the installer a second time and it finds the first install. With a terminal, it asks *"Update to v4.4.3? (y/n)"*. With stdin redirected, it doesn't:
+
+```
+slashforge is already installed. Updating to v4.4.3 (--yes).
+```
+
+The [argument parsing](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/bin/install.js#L628-L633) turns `--yes` on when stdin is not a TTY, and the same flag answers the uninstall question. `slashforge uninstall` in a script removes everything without asking:
+
+```
+✓ Uninstalled slashforge
+  removed ~/.claude/commands/slashforge/setup.md
+  removed ~/.claude/commands/slashforge/code.md
+  removed ~/.claude/commands/slashforge/investigate.md
+  removed ~/.claude/commands/slashforge/review-pr.md
+  removed ~/.claude/commands/slashforge/brainstorm.md
+  removed ~/.claude/commands/slashforge/plan.md
+  removed ~/.claude/commands/slashforge/debug.md
+  removed ~/.claude/commands/slashforge/tdd.md
+  removed ~/.claude/commands/slashforge/verify.md
+  removed ~/.claude/commands/slashforge/review-feedback.md
+  removed ~/.claude/commands/slashforge/request-review.md
+  removed ~/.claude/commands/slashforge/worktree.md
+  removed ~/.claude/commands/slashforge/parallel.md
+  removed ~/.claude/commands/slashforge
+  removed ~/.claude/setup/slashforge
+```
+
+That is documented — the help says stdin that is not a TTY enables `--yes` — but the help describes `--yes` as confirming *"the update prompt"*, and uninstall is not an update. The removal itself is careful: it deletes the files it knows by name and removes `commands/slashforge/` only once it is empty, so a command of your own in that folder survives. `setup/slashforge/`, on the other hand, is removed whole. A second `uninstall` finds nothing and says so.
+
+After it, the home directory holds no file at all.
+
+## Project mode
+
+`--project` installs into `./.claude/` of the current folder instead of your home:
+
+```
+✓ v4.4.3 installed
+✓ Guide files: <repo>/.claude/setup/slashforge
+✓ Command: <repo>/.claude/commands/slashforge/setup.md
+...
+```
+
+The same thirty-two files, with one difference that lesson 2 shows: the paths written inside the commands are relative to the repository instead of absolute. That is what makes the folder committable. A teammate who clones the repository gets `/slashforge:code` without installing anything, and `slashforge uninstall --project` removes it again.
+
+## The README's table
+
+The README's [*What gets installed*](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/README.md#L103-L112) still describes an older layout: commands in `~/.claude/commands/forge/`, three of them, and *"Commands live in a `forge/` subdirectory — that is what produces the `/slashforge:` namespace"*. The installer writes `commands/slashforge/`, four commands plus nine skills, and a `forge/` folder would produce `/forge:code`. The installer knows the old name only as [`LEGACY_COMMAND_NAMESPACE`](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/bin/install.js#L75-L76), kept so that `uninstall` can clean up after version 3. The rest of the README, and the changelog's account of the 4.0 rename, are right.
+
+## Key points
+
+- SlashForge's executable part is a 676-line installer; everything else is Markdown that Claude Code reads.
+- Point `HOME` (and `USERPROFILE` on Windows) at an empty folder to see what an installer writes before it writes to your profile.
+- `--dry-run` announces 21 of the 32 files that 4.4.3 writes: the nine skills and two report assets are missing, because the preview and the install use different lists.
+- Files under `commands/` become slash commands, their subfolder a prefix; files under `setup/` are read only when a command says so.
+- In a script, the installer and the uninstaller never ask.
+- `--project` writes the same files into the repository with relative paths, so they can be committed.
+
+## Exercises
+
+1. From the file list of the install, how many slash commands does SlashForge add to Claude Code, and how many of its files does Claude Code never load on its own?
+2. You want a team to use SlashForge on one repository without anyone changing their own `~/.claude`. Which commands do you run, what do you commit, and which of the committed files will change every time someone reinstalls?
+3. `check.sh` pins 4.4.3. The day SlashForge fixes its dry run and the course moves to that version, which checks fail, and what do you do about them?
+
+<details>
+<summary>Solution</summary>
+
+1. Thirteen: every file under `commands/slashforge/` is one, the four entry points and the nine skills. The other nineteen — sixteen guides, two assets and `meta.json` under `setup/slashforge/` — are loaded only when a command tells the model to read them. `status` says 4 because it counts entry points on purpose.
+2. In the repository, `npx slashforge --project`, then commit `.claude/`. `meta.json` changes on every reinstall, because it records `installed_at`; the rest changes only with the version. To remove it, `npx slashforge uninstall --project`, and commit the deletion.
+3. `l01_dry_run` and `l01_dry_run_vs_install` fail, each with a `diff` showing the eleven lines that appeared. Read the diff to check that the fix is what you think it is, regenerate with `UPDATE=1 bash check.sh`, and change the journal's QA row from *reproduced* to *fixed in* that version. A failing check that turns out to be good news is still a check doing its job.
+
+</details>
