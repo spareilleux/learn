@@ -154,7 +154,26 @@ Enviado al servidor, el workflow roto se rechaza con un HTTP 400:
         "details": "'12'", "extra_info": {…, "exception_type": "KeyError", "traceback": ["  File \"C:\\Users\\…\\ComfyUI\\execution.py\", line 933, in validate_inputs\n    o_class_type = prompt[o_id]['class_type']\n…"]}}], …}}}
 ```
 
-El servidor informó de dos errores donde la comprobación sin conexión encontró cinco, y el segundo es extraño: está archivado bajo el nodo 3, pero su `extra_info` nombra la entrada `samples` y el nodo enlazado `["3", 0]`, que es la entrada del nodo 8. El código lo explica. El servidor valida desde cada nodo de salida, remontando sus enlaces. Para una entrada enlazada, [`validate_inputs`](https://github.com/Comfy-Org/ComfyUI/blob/ee71d5c4993f29086b27fde1629a945ae48425bf/execution.py#L933) lee `prompt[o_id]['class_type']` antes de su bloque `try`, así que el enlace del nodo 3 al nodo 12, que no existe, lanzó un `KeyError` que escapó a la validación del nodo 3. El nodo 8, `VAEDecode`, lo capturó al validar su entrada `samples`, y [lo guardó como resultado del nodo 3](https://github.com/Comfy-Org/ComfyUI/blob/ee71d5c4993f29086b27fde1629a945ae48425bf/execution.py#L962-L979). Las demás entradas del nodo 3 no llegaron a comprobarse, o solo algunas: `validate_inputs` recorre las entradas de un nodo en el orden de un conjunto de Python ([línea 896](https://github.com/Comfy-Org/ComfyUI/blob/ee71d5c4993f29086b27fde1629a945ae48425bf/execution.py#L896)), que cambia de un arranque del servidor a otro. La respuesta incluye además una traza de Python con la ruta de instalación del servidor, un motivo más para no exponer el puerto. Validar primero sin conexión da una lista de errores mejor; la respuesta del servidor sigue siendo la que decide.
+El servidor informó de dos errores donde la comprobación sin conexión encontró cinco, y el segundo es extraño: está archivado bajo el nodo 3, pero su `extra_info` nombra la entrada `samples` y el nodo enlazado `["3", 0]`, que es la entrada del nodo 8. El código lo explica. El servidor valida desde cada nodo de salida, remontando sus enlaces. Para una entrada enlazada, [`validate_inputs`](https://github.com/Comfy-Org/ComfyUI/blob/ee71d5c4993f29086b27fde1629a945ae48425bf/execution.py#L933) lee `prompt[o_id]['class_type']` antes de su bloque `try`, así que el enlace del nodo 3 al nodo 12, que no existe, lanzó un `KeyError` que escapó a la validación del nodo 3. El nodo 8, `VAEDecode`, lo capturó al validar su entrada `samples`, y [lo guardó como resultado del nodo 3](https://github.com/Comfy-Org/ComfyUI/blob/ee71d5c4993f29086b27fde1629a945ae48425bf/execution.py#L962-L979). Las demás entradas del nodo 3 no llegaron a comprobarse, o solo algunas: `validate_inputs` recorre las entradas de un nodo en el orden de un conjunto de Python ([línea 896](https://github.com/Comfy-Org/ComfyUI/blob/ee71d5c4993f29086b27fde1629a945ae48425bf/execution.py#L896)), que cambia de un arranque del servidor a otro. La respuesta incluye además una traza de Python con la ruta de instalación del servidor, un motivo más para no exponer el puerto. Validar primero sin conexión da una lista de errores mejor; la respuesta del servidor sigue siendo la que decide. Todos los flujos que entrega este curso se validan así en cada commit, en los tres sistemas operativos, frente a definiciones de nodos capturadas una vez en un servidor sin modelos: [`data/object_info-course.json`](https://github.com/spareilleux/learn/blob/main/code/comfyui/data/object_info-course.json), 58 clases de nodos. No cuesta ni GPU ni modelo, y así se verificaron los flujos de la lección 10 antes de que hubiera memoria para ejecutarlos.
+
+### Entradas con un punto en el nombre
+
+Algunos nodos recientes reciben sus opciones en forma de árbol. `SaveImageAdvanced` en la lección 9 y `SaveVideo` en la lección 10 declaran una entrada de tipo `COMFY_DYNAMICCOMBO_V3`: el valor elegido para `format` decide qué otras entradas existen, y el flujo las nombra con puntos.
+
+```json
+{"images": ["1", 0], "format": "png", "format.bit_depth": "16"}
+```
+
+`/object_info` describe esa entrada como una lista de opciones, cada una con sus propias entradas `required` y `optional`, anidadas tan hondo como el nodo necesite: el `format` de `SaveVideo` contiene un `codec`, que contiene un `encoding`, que contiene un `crf`. Un validador que solo lee los `required` y `optional` de primer nivel llama a `format.bit_depth` entrada desconocida. Ese era el fallo de este mismo curso, encontrado al revisar los flujos de la lección 10 antes de gastar en ellos una ventana de GPU. `validate` sigue ahora las opciones del valor que el flujo eligió:
+
+```text
+> comfy validate workflows/03-dynamic-broken.api.json data/object_info-dynamic.json
+error: node 2 (SaveImageAdvanced): no input named format.bit_depth
+error: node 3 (SaveImageAdvanced) input format: "tiff" is not one of the 2 allowed values
+error: node 4 (SaveImageAdvanced) input format.bit_depth: "24" is not one of the 2 allowed values
+```
+
+El primer error es el que conviene conocer: el nodo 2 pide `exr`, y `bit_depth` pertenece a `png`. El nombre existe en el nodo, pero no bajo la opción que ese nodo escogió, así que nada lo leerá. Queda *por verificar* si el servidor rechaza ese prompt o ignora en silencio la entrada sobrante; es un error en ambos casos.
 
 ## Los metadatos de los archivos PNG
 
@@ -206,6 +225,10 @@ El PNG encolado desde el navegador también muestra el widget de control en acci
 - Revisa los cambios de workflows sobre el formato de la API, con un diff que compare los tipos de nodo y las entradas.
 - Valida sin conexión para obtener una lista completa de errores; el servidor se detiene en el primer problema de un nodo, y puede responder con una traza.
 - Los archivos PNG llevan el prompt, y también el workflow cuando se encolan desde el navegador. Calcula el hash de los píxeles, no de los archivos.
+
+## Tu turno
+
+Construye un grafo pequeño en el navegador — un checkpoint, dos indicaciones, un muestreador, un guardado — y expórtalo en los dos formatos. Convierte el archivo de la UI con el conversor del curso y compara el resultado con la exportación API del propio frontend: deben coincidir. Rómpelo después a propósito, con un enlace a un nodo que ya no existe o un `steps` de `-1`, y compara lo que enumera el validador sin conexión con lo que responde el servidor cuando lo pones en cola.
 
 ## Ejercicios
 

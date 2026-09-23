@@ -117,7 +117,7 @@ Dos observaciones sobre esta imagen, que quizá no valgan para otras:
 
 Un `start_percent` tardío hace lo contrario: el prompt elige la composición, y el mapa solo la corrige. *Por verificar*: no se renderizó para esta lección.
 
-## Canny en la CI, y tres hashes distintos
+## Canny en la CI, y cuatro hashes distintos
 
 La CI ejecuta el nodo `Canny` en la CPU, sobre el patrón de prueba de 64 por 48 de la lección 5, con los umbrales 0,05 y 0,15. La primera ejecución comparaba su hash de píxeles como las salidas de los demás nodos, y falló en todos los sistemas operativos. Ahora la CI imprime el hash, y el número de píxeles más claros que 127, a título informativo:
 
@@ -128,7 +128,25 @@ La CI ejecuta el nodo `Canny` en la CPU, sobre el patrón de prueba de 64 por 48
 | CI, `macos-latest` | `4db7c3194e9fe1e2` | 467 de 3072 |
 | CI, `windows-latest` | `8e3e55838a7c9d46` | 467 de 3072 |
 
-El mismo ComfyUI, el mismo grafo de PyTorch y los mismos píxeles dieron cuatro imágenes distintas. Los tres runners encontraron el mismo número de píxeles de borde, pero no en los mismos sitios. Canny suaviza la imagen, calcula gradientes, adelgaza los bordes y los conserva comparando valores con umbrales. Un gradiente que queda justo por encima de un umbral en un cálculo en coma flotante y justo por debajo en otro añade o quita un píxel de borde, y cada CPU y cada biblioteca matemática redondean de forma un poco distinta. La lección 2 encontró el mismo tipo de diferencia en el ruido de dos dispositivos. *Por verificar*: no se rastreó en qué paso del `canny` de Kornia divergen.
+El mismo ComfyUI, el mismo grafo de PyTorch y los mismos píxeles dieron cuatro imágenes distintas. Los tres runners encontraron el mismo número de píxeles de borde, pero no en los mismos sitios. Canny suaviza la imagen, calcula gradientes, adelgaza los bordes y los conserva comparando valores con umbrales. Un gradiente que queda justo por encima de un umbral en un cálculo en coma flotante y justo por debajo en otro añade o quita un píxel de borde, y cada CPU y cada biblioteca matemática redondean de forma un poco distinta. La lección 2 encontró el mismo tipo de diferencia en el ruido de dos dispositivos.
+
+### En qué paso dejan de coincidir
+
+[`data/canny-steps.py`](https://github.com/spareilleux/learn/blob/main/code/comfyui/data/canny-steps.py) llama a las funciones de Kornia en el orden en que `canny` las aplica e imprime un hash por paso. Su patrón de 64 por 48 está construido con aritmética entera, así que la entrada son los mismos bytes en todas las máquinas: la primera fila de la tabla lo demuestra. `check.sh` lo ejecuta en las tres máquinas de la CI en cada commit; la primera columna es la del autor, cuyo PyTorch es la compilación CUDA, que aquí corre en la CPU.
+
+| Paso | la del autor, `2.13.0+cu130` | `windows-latest`, `+cpu` | `ubuntu-latest`, `+cpu` | `macos-latest`, `2.13.0` |
+|---|---|---|---|---|
+| entrada | `1907433ac4d80c9f` | `1907433ac4d80c9f` | `1907433ac4d80c9f` | `1907433ac4d80c9f` |
+| desenfoque gaussiano | `769c45e000258c56` | `ee71eaac28f8cc27` | `ee71eaac28f8cc27` | `96d1452970dc7b72` |
+| gradiente espacial | `b06a49b51ebc7fa1` | `bf069945ff2cd851` | `17564ac6064fd8d8` | `5d47abc9d0ba75f4` |
+| magnitud | `0af967b932bcb57c` | `bda4e821a72c09ed` | `208a0f39607e1ae0` | `bf05d8003b885379` |
+| contornos | `08e9b5af22548246` | `08e9b5af22548246` | `08e9b5af22548246` | `08e9b5af22548246` |
+
+La divergencia empieza en el primer paso en coma flotante. El desenfoque ya separa la máquina del autor de los runners, y el runner Apple Silicon de los dos x86. El gradiente difiere después en las cuatro, aunque Windows y Linux coincidían un paso antes: la misma convolución toma un camino distinto según la compilación. Todas las magnitudes difieren y, sin embargo, su suma se imprime como 2729.489258 en las cuatro: las diferencias están en los últimos bits. Esa suma es una trampa en sí misma: impresa con seis decimales suma las diferencias y las borra, de modo que quien comparara sumas habría concluido que las cuatro máquinas coinciden y se habría detenido ahí. Un total no es un hash. Por eso todas las comprobaciones de este curso hashean bytes.
+
+La precisión es la otra mitad de la historia. La sonda de Hadamard de la [lección 8](../08-recent-models-quantization/) corre en las mismas tres máquinas de la CI y calcula en float64: imprime los mismos cinco decimales en las tres, `0.05674` y `0.00761`, y solo se mueve su cota de exactitud, entre 1,11e-14 y 1,20e-14. La divergencia no es una fatalidad: depende de la precisión con la que se trabaja, y la difusión trabaja en float32 o más estrecho.
+
+La última fila es la sorpresa: los contornos son idénticos en todas partes, 1461 píxeles de 3072, el mismo hash en las cuatro máquinas. Este patrón son áreas planas y bordes duros, así que ningún gradiente queda lo bastante cerca de un umbral como para que una diferencia de último bit lo haga saltar. Un render no tiene ese margen, y por eso el patrón de la lección 5, pasado por `Canny` dentro de ComfyUI, da cuatro hashes. La respuesta tiene entonces dos mitades: la coma flotante diverge desde la primera convolución, en todas las máquinas, siempre; que eso llegue a la salida depende de cuántos píxeles deje la imagen cerca del umbral.
 
 ## Puntos clave
 
@@ -137,7 +155,12 @@ El mismo ComfyUI, el mismo grafo de PyTorch y los mismos píxeles dieron cuatro 
 - El núcleo tiene `Canny` para los bordes y Lotus para la profundidad. Los demás mapas necesitan un nodo personalizado o una imagen hecha en otro sitio.
 - `start_percent` y `end_percent` son fracciones del rango de ruido, no de los pasos.
 - La composición se decide en los primeros pasos: un ControlNet activo solo en ellos conservó casi toda la composición.
-- Los filtros de imagen también son código en coma flotante: no compares su salida bit a bit entre máquinas.
+- Los filtros de imagen también son código en coma flotante: no compares su salida bit a bit entre máquinas. La divergencia empieza en la primera convolución; que llegue a la salida depende de lo cerca que la imagen quede del umbral.
+- Un total no es un hash: una suma agrega las diferencias que un hash mostraría.
+
+## Tu turno
+
+Dibuja tú mismo una disposición tosca — tres cajas y un horizonte en cualquier editor de imágenes — y úsala como imagen de control. Pásala por Canny con dos pares de umbrales, luego recorre `strength` de 0,2 a 1,2 y encuentra el valor en el que tu disposición deja de respetarse. Termina con `end_percent` en 0,3: la composición debe aguantar mientras el detalle se va por su cuenta.
 
 ## Ejercicios
 

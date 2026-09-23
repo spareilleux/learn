@@ -49,6 +49,9 @@ Escribes C# o Java. Conoces HTTP, JSON y el código asíncrono. No necesitas sab
 | 11 | [Los nodos personalizados y su seguridad](11-custom-nodes-and-security/) | paquetes NuGet o Maven que ejecutan código al instalarse |
 | 12 | [ComfyUI en producción: un servicio, una cola, varias GPU](12-production/) | un worker detrás de una cola de trabajos |
 | 13 | Proyecto: texturas para este sitio y para GuitarAlchemist | — |
+| 14 | Laboratorio Guitar Alchemist: experimentos medidos | una batería de mediciones con sus resultados registrados |
+| 15 | [Audio: música, efectos de sonido y voz](15-audio/) | un búfer de muestras y una frecuencia de muestreo, como en NAudio o `javax.sound` |
+| — | [Galería](gallery/) | todas las imágenes, con el flujo que las hizo |
 | — | [Diario](journal/) | |
 
 Las lecciones 5 a 13 son el plan; cambiarán a medida que las primeras me enseñen lo que importa.

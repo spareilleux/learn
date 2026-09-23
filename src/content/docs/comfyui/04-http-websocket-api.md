@@ -201,7 +201,8 @@ What CI doesn't check: previews, `progress` messages, which the solid-color node
 ## Around the happy path
 
 - **Timeouts.** A first SDXL run took 15 seconds here, and a large video workflow can take many minutes. The clients give up after 20 minutes without a message. A long-running service should rather keep the WebSocket open, reconnect with the same client id when it drops, and read `/history/{prompt_id}` to catch up.
-- **Interrupting.** `POST /interrupt` with no body stops what is running, whoever queued it; with `{"prompt_id": …}`, the v0.36.0 code stops it only if that prompt is the one running ([`server.py`, lines 1163 to 1193](https://github.com/Comfy-Org/ComfyUI/blob/ee71d5c4993f29086b27fde1629a945ae48425bf/server.py#L1163-L1193)). A prompt that hasn't started is removed from the queue with `POST /queue` and `{"delete": [prompt_id]}`. Neither was run for this lesson: *to verify*.
+- **Interrupting.** `POST /interrupt` with no body stops what is running, whoever queued it; with `{"prompt_id": …}`, the v0.36.0 code stops it only if that prompt is the one running ([`server.py`, lines 1163 to 1193](https://github.com/Comfy-Org/ComfyUI/blob/ee71d5c4993f29086b27fde1629a945ae48425bf/server.py#L1163-L1193)). A prompt that hasn't started is removed from the queue with `POST /queue` and `{"delete": [prompt_id]}`. Both answer `200` when there is nothing to stop and when the id is not in the queue: the status code says the call was accepted, not that it did anything. To know, read `/queue` and `/history` afterwards. [`check.sh`](https://github.com/spareilleux/learn/blob/main/code/comfyui/check.sh) runs both on the three operating systems.
+- **Errors while running.** Validation happens before the run, so a prompt can be accepted and fail anyway. The check uploads a file that is not an image under a `.png` name: `LoadImage` lists it, `POST /prompt` answers `200`, and the run ends with `execution_error: node 1 (LoadImage): cannot identify image file …`. Both clients print the node that raised it and exit 1. A worker must tell that apart from a network failure — it will fail the same way every time, so retrying it wastes the queue. Lesson 12 sorts the failures.
 - **One server, one queue.** Prompts run one at a time, in queue order, whatever client posted them. Two clients share the server's cache, which is why the Java run above reused the C# run's text encodings.
 - **No authentication.** Everything above works for anyone who can reach the port. Lesson 12, on production, puts the server behind something that checks who is calling.
 
@@ -211,6 +212,10 @@ What CI doesn't check: previews, `progress` messages, which the solid-color node
 - In C#, `HttpClient` and `ClientWebSocket` are enough; in Java, `java.net.http` and a JSON library. Both must reassemble messages that arrive in several frames.
 - Binary WebSocket messages are previews: an event type, an image format, and a JPEG or PNG.
 - Don't rely on the order of output nodes, on the number of `status` messages, or on getting new files from a cached run.
+
+## Your turn
+
+Add to the C# or the Java client the one thing this lesson left out: a progress display fed by the `progress` messages, or a `POST /interrupt` triggered from the keyboard. Then unplug the network cable — or stop the server — in the middle of a run, and see what your client does. A client that hangs forever on a closed socket is the most common bug in this kind of code.
 
 ## Exercises
 

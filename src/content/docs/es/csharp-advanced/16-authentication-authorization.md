@@ -12,7 +12,7 @@ La [autenticación](https://learn.microsoft.com/aspnet/core/security/authenticat
 
 ## Requisitos previos
 
-Completa primero [minimal APIs y controladores](14-minimal-apis-controllers/). Ya debes comprender los códigos HTTP, el orden del middleware y la inyección de dependencias.
+Completa primero [minimal APIs y controladores](../14-minimal-apis-controllers/). Ya debes comprender los códigos HTTP, el orden del middleware y la inyección de dependencias.
 
 ## Validar un token, no solo decodificarlo
 

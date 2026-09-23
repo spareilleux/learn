@@ -9,12 +9,34 @@ sidebar:
 
 - [x] React 19.3.0, Vite 8.3.0, TypeScript 7.0.2, Vitest 5.0.0, Testing Library y oxlint fijados en el propio `package.json` del curso y en su archivo de bloqueo
 - [x] `check.sh`: `create-vite`, el servidor de desarrollo, una actualización HMR, `tsc`, `vite build`, oxlint, cada fragmento de error y cada prueba, comparados con `expected/`
-- [ ] CI en tres sistemas operativos (ver más abajo)
+- [x] CI en tres sistemas operativos: en verde desde el 2026-09-16 (ver más abajo)
 - [x] Lección 1: un proyecto Vite
 - [x] Lección 2: componentes y JSX
 - [x] Lección 3: estado y renderizado
 - [x] Lección 4: eventos y formularios
 - [ ] Lección 5: efectos
+
+## QA
+
+React 19.3.0, Vite 8.3.0, TypeScript 7.0.2 y Vitest 5.0.0, fijados en el archivo de bloqueo del curso. Las diez primeras filas son de la cadena de herramientas; las dos últimas, de GuitarAlchemist/ga en `8cc8c5a`, y, como dice la entrada fechada, nada de eso se ha reportado a GA.
+
+No hay tabla de experimentos: cada entrada es un descubrimiento escrito después. Las tres notas *por verificar* de este diario nombran lo que no se ha medido; ninguna predice lo que mostrará la medición.
+
+| Esperado | Lo que pasa | Dónde | Medición | Estado |
+|---|---|---|---|---|
+| Vite quita los tipos de TypeScript con esbuild | Vite 8 empaqueta con Rolldown y transforma con Oxc; `@vitejs/plugin-react` 6 ya no depende de Babel, y el Fast Refresh también lo hace Oxc | Vite 8.3.0, `@vitejs/plugin-react` 6.1.1 | Leído en los paquetes instalados | Por diseño, cadena de herramientas cambiada. La frase del curso de TypeScript sobre esbuild describe GuitarAlchemist/ga, que está en Vite 5, y sigue siendo cierta allí [2026-09-15](#2026-09-15--versiones) |
+| El servidor de desarrollo imprime el mismo aviso tanto si stdout es un terminal como si no | Con un stdout que no es TTY, Vite omite `press h + enter to show help`, y un script que espera esa línea espera para siempre | Vite 8.3.0, `scripts/dev-start.mjs` | El primer script nunca vio la línea y dejó un servidor corriendo en el puerto 5199 | Reproducido; el script espera ahora `use --host to expose` [2026-09-15](#2026-09-15--capturar-el-servidor-de-desarrollo) |
+| `server.close()` en un servidor creado con la API de JS se resuelve tras la última petición | En Windows nunca termina: la primera petición de módulo arrancó el optimizador de dependencias y lo dejó en marcha | Vite 8.3.0, Node.js 24.21.0, Windows, `scripts/dev-module.mjs` | `Detected unsettled top-level await`, y el proceso sale con el código 13 | Reproducido, no reportado; `waitForRequestsIdle()` antes de `close()` lo resuelve. Linux y macOS sin comprobar, tracker de Vite sin buscar [2026-09-15](#2026-09-15--capturar-el-servidor-de-desarrollo) |
+| `--base /learn/react-vite/` llega a Vite tal como se escribió | Git Bash reescribe como ruta de Windows cualquier argumento que empiece por `/` | Git Bash (MSYS) en Windows, `check.sh` | Las páginas construidas pedían `/Program Files/Git/learn/react-vite/assets/…` | Por diseño en MSYS; `MSYS_NO_PATHCONV=1` y rutas de módulos sin barra inicial lo resuelven [2026-09-15](#2026-09-15--capturar-el-servidor-de-desarrollo) |
+| Testing Library desmonta lo que un test renderizó, tras cada test | Solo si el framework de tests expone un `afterEach` global; Vitest no lo hace sin `globals: true` | `@testing-library/react` 16.3.3, Vitest 5.0.0 | El DOM de un test se quedaba en el siguiente, y las consultas encontraban dos formularios | Por diseño, y documentado; `setup.ts` llama a `cleanup` en `afterEach` [2026-09-15](#2026-09-15--vitest-y-testing-library) |
+| Un reporter de tests atribuye la salida de consola al test que la produjo | El reporter por defecto de Vitest agrupa la salida de consola por momento, no por test, y la agrupación cambió entre ejecuciones | Vitest 5.0.0 | Dos ejecuciones del mismo archivo agruparon los mismos logs de forma distinta | Reproducido; un pequeño reporter propio guarda cada log con su test, y `check.sh` lanza un archivo por ejecución de Vitest [2026-09-15](#2026-09-15--vitest-y-testing-library) |
+| Vitest aísla los tests, así que el estado a nivel de módulo se reinicia entre ellos | Aísla archivos de test; un contador a nivel de módulo siguió contando de un test al siguiente | Vitest 5.0.0, primer test de StrictMode de la lección 3 | El contador se conservó | Por diseño; el test pasa ahora el array modificado como prop [2026-09-15](#2026-09-15--vitest-y-testing-library) |
+| `FormEvent` y `FormEventHandler` son los tipos de los manejadores de formularios de React | `@types/react` 19.3.0 marca ambos como `@deprecated` y remite a `ChangeEvent`, `InputEvent` y `SubmitEvent` | `@types/react` 19.3.0 | El comentario de obsolescencia dice "FormEvent doesn't actually exist"; `ChangeEvent` recibe ahora dos parámetros de tipo | Por diseño; la lección 4 usa `SubmitEvent<HTMLFormElement>` [2026-09-15](#2026-09-15--typesreact-y-react-193) |
+| El tipo de retorno de un componente es `ReactNode` | Los tipos de la 19.3 aceptan componentes asíncronos, para los Server Components | TypeScript 7.0.2, `@types/react` 19.3.0 | `tsc` imprime `Promise<ReactNode> \| ReactNode` en su mensaje | Por diseño [2026-09-15](#2026-09-15--typesreact-y-react-193) |
+| El doble renderizado de StrictMode al montar es invisible en el DOM | Un componente impuro se renderiza dos veces y el DOM conserva la salida del segundo renderizado | React 19.3.0, StrictMode | `Played so far: G G` | Por diseño, y es lo que la lección 3 usa para hacer visible una impureza [2026-09-15](#2026-09-15--typesreact-y-react-193) |
+| Un token que puede subir código puede subir un archivo de workflow | GitHub exige además el scope `workflow` para crear un archivo bajo `.github/workflows` | GitHub, el push de `react-vite-examples.yml` | El primer push fue rechazado | Sorteado subiendo el código sin el workflow. El workflow llegó a `main` más tarde: tres ejecuciones fallaron el 2026-09-16, y luego [la ejecución 35098302366](https://github.com/spareilleux/learn/actions/runs/35098302366), en `cd98475`, pasó en Ubuntu, Windows y macOS [2026-09-15](#2026-09-15--la-ci) |
+| Una fila desplegada sigue desplegada cuando la lista se filtra o se refresca | `DynamicPanel` guarda las filas desplegadas por su posición en los datos filtrados y refrescados: cualquier reordenación despliega otra fila | GuitarAlchemist/ga en `8cc8c5a`, `DynamicPanel.tsx`, líneas 76-120 | Reproducido en el `ExpandableList.tsx` del curso; las filas del panel son `unknown[]`, sin campo de identidad conocido | Reproducido, no reportado [2026-09-15](#2026-09-15--lo-que-el-curso-encontró-en-guitaralchemistga) |
+| Un hijo que informa de su valor al padre desde un efecto se estabiliza tras una vuelta | `NotesSelector` llama a `onNotesChange` desde un efecto que depende de él, y `ScaleSelector` pasa en cada renderizado un manejador nuevo que guarda un array nuevo | GuitarAlchemist/ga en `8cc8c5a`, `NotesSelector.tsx` 15-18 y `ScaleSelector.tsx` 18-21 | La reducción del curso, en la lección 4, acaba en `Maximum update depth exceeded`. Latente en GA: ninguna aplicación renderiza `ScaleSelector` en ese commit | Reproducido en una reducción, no en el componente de GA; no reportado [2026-09-15](#2026-09-15--lo-que-el-curso-encontró-en-guitaralchemistga) |
 
 ## 2026-09-15 — Versiones
 
@@ -50,6 +72,7 @@ sidebar:
 
 - [`react-vite-examples.yml`](https://github.com/spareilleux/learn/blob/f6417a9/.github/workflows/react-vite-examples.yml) ejecuta `npm ci` y `bash check.sh` en Ubuntu, Windows y macOS con Node.js 24.21.0. `check.sh` tarda unos 50 segundos en mi máquina Windows.
 - El primer push fue rechazado: el token de GitHub usado para el push no tiene el scope `workflow`, que GitHub exige para crear un archivo bajo `.github/workflows`. El código se subió sin el workflow, y la ejecución en tres sistemas operativos sigue pendiente (*por verificar*: diferencias entre sistemas, como el orden de la lista de archivos de `create-vite` o el formato de salida de oxlint).
+- *Actualización del 2026-09-22:* el workflow llegó a `main` después. Tres ejecuciones fallaron el 2026-09-16, y luego [la ejecución 35098302366](https://github.com/spareilleux/learn/actions/runs/35098302366), en `cd98475` («lint with oxlint --format agent»), pasó en Ubuntu, Windows y macOS. En qué consistieron los tres fallos no queda registrado aquí.
 
 ## 2026-09-15 — Lo que el curso encontró en GuitarAlchemist/ga
 
@@ -68,4 +91,3 @@ En el commit [`8cc8c5a`](https://github.com/GuitarAlchemist/ga/commit/8cc8c5a17c
 - El bloqueo de `server.close()` en Linux y macOS, y si Vite tiene una issue para ello.
 - El `ScaleSelector` y el `NotesSelector` de GA montados con Material UI, y la animación de DemerzelCriticOverlay.
 - Un campo de identidad para las filas de `DynamicPanel` en las definiciones de paneles de GA.
-- Las salidas del curso en Linux y macOS, cuando la CI se ejecute.

@@ -12,7 +12,7 @@ L'[authentification](https://learn.microsoft.com/aspnet/core/security/authentica
 
 ## Prérequis
 
-Suivez d'abord [les minimal APIs et les controllers](14-minimal-apis-controllers/). Vous devez déjà comprendre les codes HTTP, l'ordre des middlewares et l'injection de dépendances.
+Suivez d'abord [les minimal APIs et les controllers](../14-minimal-apis-controllers/). Vous devez déjà comprendre les codes HTTP, l'ordre des middlewares et l'injection de dépendances.
 
 ## Valider un token, pas seulement le décoder
 

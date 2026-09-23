@@ -1,0 +1,29 @@
+
+Dry-run (no files written) — would install v4.4.3:
+
+  mkdir -p ~/.claude/setup/slashforge
+  mkdir -p ~/.claude/commands
+  copy   forge-instructions.md                → ~/.claude/setup/slashforge/forge-instructions.md
+  copy   forge-graph.md                       → ~/.claude/setup/slashforge/forge-graph.md
+  copy   forge-graph-summary.md               → ~/.claude/setup/slashforge/forge-graph-summary.md
+  copy   forge-coverage.md                    → ~/.claude/setup/slashforge/forge-coverage.md
+  copy   forge-workflow.md                    → ~/.claude/setup/slashforge/forge-workflow.md
+  copy   forge-workflow-investigation.md      → ~/.claude/setup/slashforge/forge-workflow-investigation.md
+  copy   forge-workflow-review-pr.md          → ~/.claude/setup/slashforge/forge-workflow-review-pr.md
+  copy   forge-workflow-agents.md             → ~/.claude/setup/slashforge/forge-workflow-agents.md
+  copy   forge-workflow-quick.md              → ~/.claude/setup/slashforge/forge-workflow-quick.md
+  copy   forge-rules.md                       → ~/.claude/setup/slashforge/forge-rules.md
+  copy   forge-skills.md                      → ~/.claude/setup/slashforge/forge-skills.md
+  copy   forge-agents.md                      → ~/.claude/setup/slashforge/forge-agents.md
+  copy   forge-commands.md                    → ~/.claude/setup/slashforge/forge-commands.md
+  copy   forge-hooks.md                       → ~/.claude/setup/slashforge/forge-hooks.md
+  copy   forge-claude-md.md                   → ~/.claude/setup/slashforge/forge-claude-md.md
+  copy   forge-memory.md                      → ~/.claude/setup/slashforge/forge-memory.md
+  render setup.md                             → ~/.claude/commands/slashforge/setup.md
+  render code.md                              → ~/.claude/commands/slashforge/code.md
+  render investigate.md                       → ~/.claude/commands/slashforge/investigate.md
+  render review-pr.md                         → ~/.claude/commands/slashforge/review-pr.md
+  write  meta.json                            → ~/.claude/setup/slashforge/meta.json
+
+Rerun without --dry-run to install.
+exit 0

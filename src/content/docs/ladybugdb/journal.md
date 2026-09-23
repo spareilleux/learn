@@ -19,6 +19,22 @@ sidebar:
 - [x] Lesson 7: graph algorithms and full-text search
 - [x] Lesson 8: persistence, transactions and concurrency
 
+## QA
+
+LadybugDB 0.20.4 is somebody else's database, and writing eight lessons against it turned up nine findings. Six are silent bugs — no error, a wrong result — each with a reproduction that runs in an empty in-memory database; none of them had an upstream issue when the tracker was searched on 2026-09-14, and none has been reported. The last three come from the lessons themselves, and one of them was already open upstream.
+
+| Expected | What happens | Where | Measure | Status |
+|---|---|---|---|---|
+| `COPY` into a rel table from a subquery connects the nodes the `MATCH` found | It connects the wrong nodes: the keys are matched positionally rather than by the `MATCH` | `COPY … FROM (LOAD FROM … MATCH …)` | Reproduction 1 [2026-09-14](#2026-09-14--bugs-found-in-0204) | Reproduced, no upstream issue, not reported |
+| `count(DISTINCT …)` beside `sum(…)` leaves the sum alone | The `sum` comes back `NULL` when a `count(DISTINCT …)` precedes it | Aggregation | Reproduction 2 [2026-09-14](#2026-09-14--bugs-found-in-0204) | Reproduced, no upstream issue, not reported |
+| `ACYCLIC` drops every path that repeats a node | It keeps some of them | Recursive path patterns | Reproduction 3 [2026-09-14](#2026-09-14--bugs-found-in-0204) | Reproduced, no upstream issue, not reported |
+| A `COPY` that fails leaves the node table as it was | It corrupts the table | `COPY` into a node table | Reproduction 4 [2026-09-14](#2026-09-14--bugs-found-in-0204) | Reproduced, no upstream issue, not reported |
+| Grouping by a `COUNT` subquery keeps the group whose count is 0 | That group is dropped | `GROUP BY` over a subquery | Reproduction 5 [2026-09-14](#2026-09-14--bugs-found-in-0204) | Reproduced, no upstream issue, not reported |
+| `timestamp()` and `CAST(… AS TIMESTAMP)` honour the offset in the literal | Both ignore it | Temporal conversion | Reproduction 6 [2026-09-14](#2026-09-14--bugs-found-in-0204) | Reproduced, no upstream issue, not reported |
+| `INSTALL algo` fetches the build matching the CLI | The 0.20.4 CLI downloads the 0.20.0 build, and `LOAD algo` then fails on all three runners, with paths from LadybugDB's own build machine in the message | `algo` extension, CLI 0.20.4 | `libnetworkit.so: cannot open shared object file` on Linux, `Library not loaded: @rpath/libnetworkit.dylib` on macOS, `The specified module could not be found.` on Windows | Open upstream as [issue #857](https://github.com/LadybugDB/ladybug/issues/857), not opened by this course [2026-09-14](#2026-09-14--lesson-7-extensions-algorithms-and-full-text-search) |
+| Louvain gives the same communities for the same graph and the same thread count | The sizes differ from one process to the next, with `CALL threads = 1` set | `algo` extension, Louvain | `[27,20,17,14,14]` in one process, `[25,20,18,18,11]` in the next two; three calls inside one process agree. Nodes with no relationship get `louvain_id` -1 | Reproduced, not reported [2026-09-14](#2026-09-14--lesson-7-extensions-algorithms-and-full-text-search) |
+| A read-only process and a writer on one file behave as the documentation says | The [concurrency page](https://docs.ladybugdb.com/concurrency/) says the combination is not allowed, but it is what happens: a read-only process opens a writer's file on Linux and macOS and sees committed changes through the `.wal`; a writer opens and checkpoints a file a reader holds, on all three, and the reader keeps answering from the old state | [`storage_manager.cpp` 87-91](https://github.com/LadybugDB/ladybug/blob/v0.20.4/src/storage/storage_manager.cpp#L87-L91) | On Windows the writer's `LockFileEx` makes the read fail with `Error 33` instead | Reproduced; documentation and behaviour disagree [2026-09-14](#2026-09-14--lesson-8-transactions-files-and-processes) |
+
 ## 2026-09-14 — The data
 
 - [`extract.py`](https://github.com/spareilleux/learn/blob/main/code/ladybugdb/data/extract.py), run with the commit `cbcbb42` as argument, reads the Markdown files and the Git history at that commit, with `git ls-tree`, `git show` and `git log`, not the working copy: the CSV files don't change when the site does.

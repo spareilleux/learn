@@ -7,7 +7,7 @@ sidebar:
 ---
 
 :::caution[Evidencia actual]
-El primer tracer bullet es local y sin conexión: un registro JSON con cuatro oportunidades reales, renderer determinista, cinco matrices generadas y cinco pruebas de invariantes. Aún no se afirma integración, ahorro Jev, mejora arquitectónica ni beneficio de RabbitMQ.
+Los tracer bullets siguen siendo locales y sin conexión: un registro JSON con cinco oportunidades, cinco matrices generadas y una prueba sintética del límite de autoridad Jev × Petri. Aún no se afirma integración en producción, ahorro Jev real, mejora arquitectónica ni beneficio de RabbitMQ.
 :::
 
 ## Misión
@@ -38,6 +38,7 @@ Terminar un curso no es éxito. El resultado es adopción con pruebas o un recha
 | 2 | [Experimento y artifact chain](02-experiment-artifact-chain/) | Generar evidencia reproducible desde hipótesis hasta veredicto |
 | 3 | [Dogfood del método](03-course-method-dogfood/) | Mejorar ejemplos, diarios, paridad de idiomas y adopción |
 | 4 | [Incubar, integrar, rechazar](04-incubate-integrate-reject/) | Promover solo candidatos medidos y reversibles |
+| 5 | [Límite de autoridad Jev × Petri](05-jev-petri-authority/) | Mostrar por qué un consejo confiado no concede ningún efecto |
 | — | [Diario](journal/) | Experimentos detallados, rechazos y próximos gates |
 
 ```text

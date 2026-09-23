@@ -9,7 +9,7 @@ Un [`IHostedService`](https://learn.microsoft.com/dotnet/core/extensions/scoped-
 
 ## Requisitos previos
 
-Completa primero [inyección de dependencias y opciones](13-dependency-injection-options/) y [channels](06-channels/). Ya debes comprender los ciclos de vida de servicios, los cancellation tokens y los flujos asíncronos.
+Completa primero [inyección de dependencias y opciones](../13-dependency-injection-options/) y [channels](../06-channels/). Ya debes comprender los ciclos de vida de servicios, los cancellation tokens y los flujos asíncronos.
 
 ## El host posee el ciclo de vida
 

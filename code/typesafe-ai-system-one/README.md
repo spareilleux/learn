@@ -22,4 +22,12 @@ python jev_benchmark.py plan
 python jev_benchmark.py mock
 ```
 
-The live benchmark is a separate operation: one batched request plus the same twelve questions sent separately, exactly thirteen calls and no retries. It requires both `TYPESAFE_API_KEY` and `JEV_BENCHMARK_APPROVED=YES`. Inspect the plan and obtain explicit approval before setting the approval variable.
+The offline confidence-gate stress test deliberately plants two wrong `supported` answers. It makes no provider call and cannot grant authority:
+
+```bash
+python jev_gate_audit.py synthetic
+```
+
+After a separately approved live benchmark completes, `python jev_gate_audit.py record --input <receipt.json>` can audit its saved batch response without another call. The receipt must match the current request digests.
+
+The live benchmark is a separate operation: one batched request plus the same twelve questions sent separately over the **identical shared state**, exactly thirteen calls and no retries. It requires both `TYPESAFE_API_KEY` and `JEV_BENCHMARK_APPROVED=YES`. The plan counts UTF-8 request bytes and computes a cost **proxy**, not a guaranteed provider-billed token count or dollar ceiling. Inspect the plan, account billing controls and current price, then obtain explicit approval before setting the approval variable.

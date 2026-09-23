@@ -9,6 +9,7 @@
 | Petri net reachability on resource pipelines | `petri-nets` | classical-se | ga |
 | Jev typed decision gate | `typesafe-ai-system-one` | agentic-ai | ga, gaia, Demerzel |
 | Evidence-first multilingual course pipeline | `repository-dogfooding-lab` | both | learn |
+| Jev advisory evidence plus Petri authority boundary | `repository-dogfooding-lab` | both | gaia, ix |
 | Cross-check TARS grammar rules against Petri nets | `petri-nets` | both | ga, tars |
 | Hexagonal architecture seam audit | `hexagonal-architecture` | classical-se | ga, gaia, Demerzel |
 | RabbitMQ quorum, retry and dead-letter boundary | `rabbitmq` | classical-se | gaia, Demerzel |
@@ -22,6 +23,7 @@ The score orders investigation only. It never authorizes incubation or integrati
 | Petri net reachability on resource pipelines | 5 | 4 | 4 | 4 | 5 | 2 | 1 | 19 |
 | Jev typed decision gate | 4 | 4 | 5 | 4 | 5 | 1 | 3 | 18 |
 | Evidence-first multilingual course pipeline | 3 | 5 | 4 | 3 | 5 | 2 | 1 | 17 |
+| Jev advisory evidence plus Petri authority boundary | 4 | 4 | 4 | 2 | 5 | 1 | 3 | 15 |
 | Cross-check TARS grammar rules against Petri nets | 2 | 5 | 3 | 1 | 5 | 2 | 1 | 13 |
 | Hexagonal architecture seam audit | 2 | 4 | 3 | 1 | 4 | 3 | 2 | 9 |
 | RabbitMQ quorum, retry and dead-letter boundary | 2 | 2 | 3 | 1 | 3 | 4 | 3 | 4 |
@@ -34,6 +36,7 @@ Ordered by promotion state, not by score.
 |---|---|---|---|---|
 | Jev typed decision gate | incubating | promising | Run the fixed downstream A/B the hypothesis actually states, gated by Jev against ungated, on the same 12 cases. The 13-call calibration does not test it. | Human approves live spend and any integration; model output never grants effects. |
 | Petri net reachability on resource pipelines | incubating | promising | Maintainer triage of GuitarAlchemist/ga#700, #701 and #702. GA's own todo 047 already asks for the exception-safe release of #700, which is corroboration, not acceptance. | Read-only analysis at a pinned commit; the model proposes, a maintainer decides. No GA code was read outside the GitHub API and none was modified. |
+| Jev advisory evidence plus Petri authority boundary | experimenting | promising | Pin one Gaia or IX transition at an exact revision, map its real guards to places, replay a counterexample against the public seam, and obtain independent review before incubation. | Repository owner reviews the exact seam and replay; Jev never grants effects and this local model grants no production authority. |
 | Evidence-first multilingual course pipeline | experimenting | promising | Use this course to validate its own registry, generated matrices and locale parity in CI. | Course author records evidence; reviewer accepts or rejects publication claims. |
 | Hexagonal architecture seam audit | discovered | inconclusive | Choose one exact dependency boundary and capture a before metric; otherwise reject the candidate. | Repository maintainer selects the seam after reviewing evidence. |
 | RabbitMQ quorum, retry and dead-letter boundary | discovered | inconclusive | Identify one failure mode that existing artifact reconciliation cannot solve economically. | Architecture owner approves any infrastructure addition. |
@@ -45,8 +48,9 @@ Every path listed here is checked to exist; links are taken on trust.
 
 | Opportunity | Result | Evidence artifacts | Revisit |
 |---|---|---|---|
-| Jev typed decision gate | Live 13 calls at jev-1.13.0, 2026-09-23: batching the 12 questions over one shared state used 2487 input tokens against 14939 for the same 12 questions asked one at a time, 83.4% less, with the identical choice on all 12 cases, zero false supports and zero retries (accuracy 0.9167 both ways, Brier 0.1657 against 0.1645; 453 ms against 4451 ms). This measures amortizing shared state, not the hypothesis: no downstream model was called, so the 50% downstream saving is still unmeasured. | `../typesafe-ai-system-one/benchmark-corpus.json`, `../typesafe-ai-system-one/jev_benchmark.py`, `../typesafe-ai-system-one/evidence/jev-live.json` | 2026-10-04 |
+| Jev typed decision gate | Live 13 calls at jev-1.13.0, 2026-09-23: batching the 12 questions over one shared state used 2487 input tokens against 14939 for the same 12 questions asked one at a time, 83.4% less, with the identical choice on all 12 cases, zero false supports and zero retries (accuracy 0.9167 both ways, Brier 0.1657 against 0.1645; 453 ms against 4451 ms). This measures amortizing shared state, not the hypothesis: no downstream model was called, so the 50% downstream saving is still unmeasured. Token counts are the provider's reported usage, not billed cost, which stays unknown; the $0.0021 ceiling is a local byte proxy only. | `../typesafe-ai-system-one/benchmark-corpus.json`, `../typesafe-ai-system-one/jev_benchmark.py`, `../typesafe-ai-system-one/evidence/jev-live.json` | 2026-10-04 |
 | Petri net reachability on resource pipelines | Three defects found, each confirmed against the source before filing. GaFsiSessionPool.fs: the `with ex` handler releases the gate without returning the session; two exceptions wedge the process-wide pool for good, and the net gave the seven-firing sequence - one caller, no concurrency needed - before the code confirmed it. IndexVoicingsCommand: consumer catch outside the await foreach, bounded channel in FullMode.Wait, CancellationToken.None: total silent deadlock. VoicingGenerator: Complete() outside a finally, one-sided hang that swallows the producer exception. One claim was withdrawn before filing: the early gate release at :144 is not a bug, because the evaluation has already returned at :140. | `../petri-nets/Examples/Nets.cs`, `../petri-nets/expected/chat.txt`, `https://github.com/GuitarAlchemist/ga/issues/700`, `https://github.com/GuitarAlchemist/ga/issues/701`, `https://github.com/GuitarAlchemist/ga/issues/702` | 2026-09-29 |
+| Jev advisory evidence plus Petri authority boundary | Offline synthetic wrong support at 0.98: guarded model blocks effect without independently verified evidence and implementation authority; 3/3 focused Petri tests and fixture parity test pass. No repository integration or live Jev result. | `jev-petri-fixture.json`, `test_jev_petri_fixture.py`, `../petri-nets/Examples/JevEvidenceGate.cs`, `../petri-nets/Tests/JevEvidenceGateTests.cs` | 2026-09-29 |
 | Evidence-first multilingual course pipeline | Registry, renderer and invariant tests implemented as the first tracer bullet. | `opportunities.json`, `dogfood.py`, `test_dogfood.py`, `matrices.md` | 2026-09-27 |
 | Hexagonal architecture seam audit | No repository-specific experiment yet. | none yet | 2026-10-04 |
 | RabbitMQ quorum, retry and dead-letter boundary | Local course examples exist; no repository adoption evidence. | `../rabbitmq` | 2026-10-11 |

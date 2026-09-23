@@ -44,12 +44,44 @@ offline() {
     comfy validate workflows/01-txt2img.api.json data/object_info.json
     comfy validate workflows/solid-color.api.json data/object_info.json
     comfy validate workflows/03-broken.api.json data/object_info.json
+    comfy validate workflows/03-dynamic-combo.api.json data/object_info-dynamic.json
+    comfy validate workflows/03-dynamic-broken.api.json data/object_info-dynamic.json
     echo "exit code $?"
   } > out/03-validate.txt 2>&1
   compare 03-validate
 
-  # Lesson 13: normal and roughness maps from a tileable pattern, with NumPy and Pillow (ComfyUI's requirements)
+  # Every workflow the course ships, against node definitions captured from a
+  # model-free ComfyUI on the CPU (data/object_info-course.json): class names,
+  # input names including the dotted ones, links, output slots and values. No
+  # server and no GPU here. The two files that are wrong on purpose are left out.
+  {
+    for wf in workflows/*.api.json; do
+      # The 03-dynamic-* files belong to the hand-made fixture above, and two of
+      # the three are wrong on purpose.
+      case $wf in *03-broken.api.json | *03-dynamic-*.api.json) continue ;; esac
+      printf '%s: ' "$(basename "$wf")"
+      comfy validate "$wf" data/object_info-course.json | sed 's/;.*//'
+    done
+  } > out/03-workflows.txt 2>&1
+  compare 03-workflows
+
   py=${COMFYUI_PYTHON:-${PYTHON:-python}}
+
+  # Lesson 9: which files LoadImage and LoadVideo can list depends on the machine's
+  # MIME table, not on ComfyUI. Printed on each OS, not compared.
+  PYTHONDONTWRITEBYTECODE=1 "$py" data/mime-info.py
+
+  # Lesson 6: four machines gave four hashes for the same Canny node. This prints a
+  # hash per step of Kornia's filter, on a pattern that is identical everywhere, so
+  # the step where they part company can be read from the logs. Information only.
+  PYTHONDONTWRITEBYTECODE=1 "$py" data/canny-steps.py
+
+  # Lesson 8: the Hadamard rotation behind the convrot flag of an int8 checkpoint —
+  # that it is its own inverse, and what it saves on a weight with one outlier per
+  # row. Information only: the two error figures depend on the machine.
+  PYTHONDONTWRITEBYTECODE=1 "$py" data/convrot.py
+
+  # Lesson 13: normal and roughness maps from a tileable pattern, with NumPy and Pillow (ComfyUI's requirements)
   mkdir -p out/textures
   {
     PYTHONDONTWRITEBYTECODE=1 "$py" textures/test_maps.py 2>&1 | grep -v "^Ran "
@@ -123,6 +155,23 @@ server() {
     echo "exit code $?"
   } > out/04-run-java.txt 2>&1
   compare 04-run-java
+
+  # Lesson 4, around the happy path: a file that passes validation because it is in
+  # the input list and fails when the server opens it, then two calls that answer 200
+  # whether or not there was anything to act on. The server's own path is cut out of
+  # the message: it differs on every machine.
+  printf 'this is not a PNG file at all\n' > out/not-an-image.png
+  {
+    comfy run "$url" workflows/05-masks.api.json --image 1.image=out/not-an-image.png
+    echo "exit code $?"
+    echo "--- POST /interrupt with nothing running"
+    curl -s -o /dev/null -w "%{http_code}\n" -X POST "$url/interrupt"
+    echo "--- POST /queue, deleting a prompt id that is not in the queue"
+    curl -s -o /dev/null -w "%{http_code}\n" -X POST -H 'Content-Type: application/json' \
+      -d '{"delete":["00000000-0000-4000-8000-000000000000"]}' "$url/queue"
+  } > out/04-errors.full.txt 2>&1
+  sed "s|image file '.*[/\\\\]|image file '.../|" out/04-errors.full.txt > out/04-errors.txt
+  compare 04-errors
 
   {
     comfy png-info out/run-cs/solid_00001_.png

@@ -22,13 +22,13 @@ class TypeSafeLabTests(unittest.TestCase):
 
     def assert_reservation(self, output: Path) -> None:
         payload = typesafe_lab.request_payload()
-        estimated_tokens, estimated_cost = typesafe_lab.estimated_budget(payload)
+        payload_bytes, cost_proxy = typesafe_lab.estimated_budget(payload)
         self.assertEqual(
             {
                 "status": "reserved-before-call",
                 "model": typesafe_lab.MODEL,
-                "estimated_input_tokens_before_call": estimated_tokens,
-                "estimated_input_cost_usd_before_call": estimated_cost,
+                "payload_utf8_bytes_before_call": payload_bytes,
+                "input_cost_proxy_usd_before_call": cost_proxy,
                 "request_sha256": typesafe_lab.run_mock()["request_sha256"],
             },
             json.loads(output.read_text(encoding="utf-8")),
@@ -153,10 +153,10 @@ class TypeSafeLabTests(unittest.TestCase):
         with self.assertRaisesRegex(typesafe_lab.ContractError, "non-negative integers"):
             typesafe_lab.validate_response(response)
 
-    def test_estimated_budget_is_below_the_hard_ceiling(self) -> None:
-        tokens, cost = typesafe_lab.estimated_budget(typesafe_lab.request_payload())
-        self.assertLessEqual(tokens, typesafe_lab.MAX_ESTIMATED_INPUT_TOKENS)
-        self.assertLessEqual(cost, typesafe_lab.MAX_ESTIMATED_INPUT_COST_USD)
+    def test_payload_proxy_is_below_the_local_limit(self) -> None:
+        payload_bytes, cost_proxy = typesafe_lab.estimated_budget(typesafe_lab.request_payload())
+        self.assertLessEqual(payload_bytes, typesafe_lab.MAX_PAYLOAD_UTF8_BYTES)
+        self.assertLessEqual(cost_proxy, typesafe_lab.MAX_INPUT_COST_PROXY_USD)
 
     def test_live_path_rejects_model_substitution_before_writing(self) -> None:
         response = copy.deepcopy(self.response)

@@ -10,6 +10,205 @@ namespace Examples;
 public static class Nets
 {
     /// <summary>
+    /// Lesson 9: a queue with one server and room for <paramref name="capacity"/> jobs. The place
+    /// "room" holds the free slots, so arrivals stop when it is empty - the same trick as the
+    /// buffer of lesson 1. With an exponential rate on each transition this net is exactly an
+    /// M/M/1/K queue, whose stationary distribution has a closed form to compare against.
+    /// </summary>
+    public static PetriNet Queue(int capacity) => new(
+        $"queue-{capacity}",
+        [
+            new Place("room", "room"),
+            new Place("jobs", "jobs"),
+        ],
+        [
+            new Transition("arrive", "arrive"),
+            new Transition("serve", "serve"),
+        ],
+        [
+            new Arc("room", "arrive"),
+            new Arc("arrive", "jobs"),
+            new Arc("jobs", "serve"),
+            new Arc("serve", "room"),
+        ],
+        new Marking([capacity, 0]));
+
+    /// <summary>
+    /// Lesson 9: one job, two servers, and a choice that takes no time. "to-fast" and "to-slow"
+    /// are immediate transitions: they fire the instant a job is waiting, and their weights split
+    /// the traffic. The state where the job waits is therefore vanishing - no time passes in it.
+    /// </summary>
+    public static PetriNet TwoServers() => new(
+        "two-servers",
+        [
+            new Place("waiting", "waiting"),
+            new Place("at-fast", "at-fast"),
+            new Place("at-slow", "at-slow"),
+        ],
+        [
+            new Transition("to-fast", "to-fast"),
+            new Transition("to-slow", "to-slow"),
+            new Transition("done-fast", "done-fast"),
+            new Transition("done-slow", "done-slow"),
+        ],
+        [
+            new Arc("waiting", "to-fast"),
+            new Arc("to-fast", "at-fast"),
+            new Arc("waiting", "to-slow"),
+            new Arc("to-slow", "at-slow"),
+            new Arc("at-fast", "done-fast"),
+            new Arc("done-fast", "waiting"),
+            new Arc("at-slow", "done-slow"),
+            new Arc("done-slow", "waiting"),
+        ],
+        new Marking([1, 0, 0]));
+
+    /// <summary>
+    /// Lesson 10: an order handled by a workflow net. One token enters at "in", the registration
+    /// splits the case into a credit check and a stock check that run at the same time (an AND
+    /// split), and the two are joined by a choice between shipping and cancelling (an XOR split
+    /// on the joined state). It is the shape almost every BPMN diagram has, and it is sound.
+    /// </summary>
+    public static PetriNet OrderSound() => new(
+        "order-sound",
+        [
+            new Place("in", "in"),
+            new Place("credit", "credit"),
+            new Place("stock", "stock"),
+            new Place("credit-done", "credit-done"),
+            new Place("stock-done", "stock-done"),
+            new Place("out", "out"),
+        ],
+        [
+            new Transition("register", "register"),
+            new Transition("check-credit", "check-credit"),
+            new Transition("check-stock", "check-stock"),
+            new Transition("ship", "ship"),
+            new Transition("cancel", "cancel"),
+        ],
+        [
+            new Arc("in", "register"),
+            new Arc("register", "credit"),
+            new Arc("register", "stock"),
+            new Arc("credit", "check-credit"),
+            new Arc("check-credit", "credit-done"),
+            new Arc("stock", "check-stock"),
+            new Arc("check-stock", "stock-done"),
+            new Arc("credit-done", "ship"),
+            new Arc("stock-done", "ship"),
+            new Arc("ship", "out"),
+            new Arc("credit-done", "cancel"),
+            new Arc("stock-done", "cancel"),
+            new Arc("cancel", "out"),
+        ],
+        new Marking(1, 0, 0, 0, 0, 0));
+
+    /// <summary>
+    /// Lesson 10: the same order, with the AND split joined by an XOR. Either branch alone ends
+    /// the case, so the other one is still running when the case is declared finished. This is the
+    /// commonest modelling error in BPMN, and the net names it: proper completion fails.
+    /// </summary>
+    public static PetriNet OrderAndXor() => new(
+        "order-and-xor",
+        [
+            new Place("in", "in"),
+            new Place("credit", "credit"),
+            new Place("stock", "stock"),
+            new Place("credit-done", "credit-done"),
+            new Place("stock-done", "stock-done"),
+            new Place("out", "out"),
+        ],
+        [
+            new Transition("register", "register"),
+            new Transition("check-credit", "check-credit"),
+            new Transition("check-stock", "check-stock"),
+            new Transition("finish-credit", "finish-credit"),
+            new Transition("finish-stock", "finish-stock"),
+        ],
+        [
+            new Arc("in", "register"),
+            new Arc("register", "credit"),
+            new Arc("register", "stock"),
+            new Arc("credit", "check-credit"),
+            new Arc("check-credit", "credit-done"),
+            new Arc("stock", "check-stock"),
+            new Arc("check-stock", "stock-done"),
+            new Arc("credit-done", "finish-credit"),
+            new Arc("finish-credit", "out"),
+            new Arc("stock-done", "finish-stock"),
+            new Arc("finish-stock", "out"),
+        ],
+        new Marking(1, 0, 0, 0, 0, 0));
+
+    /// <summary>
+    /// Lesson 10: the mirror error. The registration chooses one branch (an XOR split) and the
+    /// shipment waits for both (an AND join), so the case stops for ever one step short of the
+    /// sink. Option to complete fails, and "ship" is a dead transition.
+    /// </summary>
+    public static PetriNet OrderXorAnd() => new(
+        "order-xor-and",
+        [
+            new Place("in", "in"),
+            new Place("credit", "credit"),
+            new Place("stock", "stock"),
+            new Place("credit-done", "credit-done"),
+            new Place("stock-done", "stock-done"),
+            new Place("out", "out"),
+        ],
+        [
+            new Transition("register-credit", "register-credit"),
+            new Transition("register-stock", "register-stock"),
+            new Transition("check-credit", "check-credit"),
+            new Transition("check-stock", "check-stock"),
+            new Transition("ship", "ship"),
+        ],
+        [
+            new Arc("in", "register-credit"),
+            new Arc("register-credit", "credit"),
+            new Arc("in", "register-stock"),
+            new Arc("register-stock", "stock"),
+            new Arc("credit", "check-credit"),
+            new Arc("check-credit", "credit-done"),
+            new Arc("stock", "check-stock"),
+            new Arc("check-stock", "stock-done"),
+            new Arc("credit-done", "ship"),
+            new Arc("stock-done", "ship"),
+            new Arc("ship", "out"),
+        ],
+        new Marking(1, 0, 0, 0, 0, 0));
+
+    /// <summary>
+    /// Lesson 10: a review that can send the case back for rework, for ever. The net is sound —
+    /// from every reachable marking the case can still finish — and it has an infinite run in
+    /// which it never does. Soundness is "always possible", exactly as liveness was in lesson 4.
+    /// </summary>
+    public static PetriNet OrderRework() => new(
+        "order-rework",
+        [
+            new Place("in", "in"),
+            new Place("drafted", "drafted"),
+            new Place("reviewed", "reviewed"),
+            new Place("out", "out"),
+        ],
+        [
+            new Transition("draft", "draft"),
+            new Transition("review", "review"),
+            new Transition("rework", "rework"),
+            new Transition("approve", "approve"),
+        ],
+        [
+            new Arc("in", "draft"),
+            new Arc("draft", "drafted"),
+            new Arc("drafted", "review"),
+            new Arc("review", "reviewed"),
+            new Arc("reviewed", "rework"),
+            new Arc("rework", "drafted"),
+            new Arc("reviewed", "approve"),
+            new Arc("approve", "out"),
+        ],
+        new Marking(1, 0, 0, 0));
+
+    /// <summary>
     /// Lesson 1: one producer, one consumer, and a buffer of two slots. The place "free" holds
     /// the slots that are still empty; it is the whole reason the buffer cannot overflow.
     /// </summary>
@@ -878,6 +1077,64 @@ public static class Nets
         ],
         new Marking(1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0));
 
+    /// <summary>
+    /// Lesson 12: the Kanban manufacturing system of Ciardo and Tilgner, four cells and
+    /// <paramref name="cards"/> kanban cards per cell. Each cell has a place for its free cards, a
+    /// machine, a rework loop and an output buffer; "synch-in" splits the flow into cells 2 and 3,
+    /// "synch-out" joins it again. The shape follows the model the Model Checking Contest
+    /// distributes as Kanban-PT-*, so its reachability graph can be compared with the number the
+    /// contest publishes: 2 546 432 markings for five cards.
+    /// </summary>
+    public static PetriNet Kanban(int cards)
+    {
+        // Cells 4 and 1 are the ends of the line: work enters at 4, leaves at 1, and cells 2 and 3
+        // run in parallel between them.
+        string[] cells = ["1", "2", "3", "4"];
+        List<Place> places = [];
+        List<Transition> transitions = [];
+        List<Arc> arcs = [];
+        List<int> marking = [];
+        foreach (var c in cells)
+        {
+            places.AddRange([
+                new Place($"free{c}", $"free{c}"),       // kanban cards still available in the cell
+                new Place($"machine{c}", $"machine{c}"),
+                new Place($"rework{c}", $"rework{c}"),
+                new Place($"done{c}", $"done{c}"),
+            ]);
+            marking.AddRange([cards, 0, 0, 0]);
+            transitions.AddRange([
+                new Transition($"redo{c}", $"redo{c}"),
+                new Transition($"back{c}", $"back{c}"),
+                new Transition($"ok{c}", $"ok{c}"),
+            ]);
+            arcs.AddRange([
+                new Arc($"machine{c}", $"redo{c}"), new Arc($"redo{c}", $"rework{c}"),
+                new Arc($"rework{c}", $"back{c}"), new Arc($"back{c}", $"machine{c}"),
+                new Arc($"machine{c}", $"ok{c}"), new Arc($"ok{c}", $"done{c}"),
+            ]);
+        }
+
+        transitions.AddRange([
+            new Transition("in4", "in4"),
+            new Transition("out1", "out1"),
+            new Transition("synch-in", "synch-in"),
+            new Transition("synch-out", "synch-out"),
+        ]);
+        arcs.AddRange([
+            new Arc("free4", "in4"), new Arc("in4", "machine4"),
+            new Arc("done1", "out1"), new Arc("out1", "free1"),
+            // Cell 4 finishes a part and hands it to cells 2 and 3, which must both have a free card.
+            new Arc("done4", "synch-out"), new Arc("free2", "synch-out"), new Arc("free3", "synch-out"),
+            new Arc("synch-out", "free4"), new Arc("synch-out", "machine2"), new Arc("synch-out", "machine3"),
+            // Cells 2 and 3 both finish, and cell 1 takes the part.
+            new Arc("done2", "synch-in"), new Arc("done3", "synch-in"), new Arc("free1", "synch-in"),
+            new Arc("synch-in", "free2"), new Arc("synch-in", "free3"), new Arc("synch-in", "machine1"),
+        ]);
+
+        return new PetriNet($"kanban-{cards}", places, transitions, arcs, new Marking([.. marking]));
+    }
+
     /// <summary>Every net of the course, in the order the lessons meet them.</summary>
     public static IReadOnlyList<PetriNet> All =>
     [
@@ -898,6 +1155,13 @@ public static class Nets
         LaneLock(),
         LaneLock(2, guarded: false),
         PipelineLifecycle(),
+        Queue(5),
+        TwoServers(),
+        OrderSound(),
+        OrderAndXor(),
+        OrderXorAnd(),
+        OrderRework(),
         ColouredNets.Retry().Unfold(),
+        Kanban(1),
     ];
 }

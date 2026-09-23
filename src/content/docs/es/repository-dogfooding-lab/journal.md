@@ -25,6 +25,7 @@ sidebar:
 | ¿Agrupar 12 preguntas sobre un estado compartido reduce los tokens de entrada sin cambiar ninguna respuesta? | El plan sin red predecía un 79 % menos de bytes; si los tokens siguen a los bytes, el ahorro supera el 50 %, con la calidad sin probar | 2487 tokens de entrada frente a 14939, un 83,4 % menos, y la misma elección en los 12 casos: exactitud 0,9167 en ambos, cero falsos soportes, Brier 0,1657 frente a 0,1645, 453 ms frente a 4451 ms | confirmado para este corpus con n=12, una sola ejecución | [entrada](#2026-09-23--el-banco-en-vivo-mide-algo-distinto-de-su-pregunta), [benchmark TypeSafe](../../typesafe-ai-system-one/04-token-cost-benchmark/) |
 | ¿Las puertas llamadas «exige pruebas» y «veredicto confirmado» rechazan un candidato fabricado? | Comprueban la prueba, así que una entrada con campos vacíos y un artefacto inexistente se rechaza | No rechazaron nada: la entrada llegó a `adopted`/`confirmed` con cero errores. Las puertas comprobaban que las claves estuvieran presentes, nunca su contenido | refutada, luego corregida | [entrada](#2026-09-23--una-lectura-adversaria-rompe-las-puertas-del-laboratorio), [`dogfood.py`](https://github.com/spareilleux/learn/blob/main/code/repository-dogfooding-lab/dogfood.py) |
 | ¿Una red de Petri encuentra en un repositorio defectos de concurrencia que su propia suite de pruebas no ve? | Buscar marcados muertos en un grafo de alcanzabilidad encuentra al menos un defecto real, solo de lectura | Tres encontrados en GA en el commit `a826864`, cada uno confirmado línea por línea antes de publicarlo, y una afirmación retirada antes de publicarla; reportados en [ga#700](https://github.com/GuitarAlchemist/ga/issues/700), [#701](https://github.com/GuitarAlchemist/ga/issues/701), [#702](https://github.com/GuitarAlchemist/ga/issues/702) | prometedor — ningún mantenedor las ha triado aún | [`petri-nets`](../../petri-nets/), [entrada](#2026-09-23--una-lectura-adversaria-rompe-las-puertas-del-laboratorio) |
+| ¿Expone un oráculo Petri sin conexión el salto inseguro de consejo Jev a autoridad? | El flujo basado solo en consejo alcanza un efecto; el protegido exige evidencia independiente y concesión de implementación | Soporte falso sintético de 0,98; pasan 3/3 pruebas C# y 1/1 prueba de paridad de la fixture; sin replay en un repositorio real | prometedor localmente, no integrado | [entrada fechada](#jev-petri-2026-09-22), [lección](../05-jev-petri-authority/), [`JevEvidenceGateTests.cs`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/Tests/JevEvidenceGateTests.cs) |
 
 ## 2026-09-20 — Primer tracer de matrices
 
@@ -37,6 +38,14 @@ python -m unittest -v
 ```
 
 Resultado: `validated=4 matrices=current mirrors=current`; 6/6 pruebas en 0,002 s. Se rechaza promoción sin artefactos y adopción sin veredicto confirmado, y se comprueba paridad EN/FR/ES y estructura del diario. Sin red externa ni mutación de repositorios.
+
+<a id="jev-petri-2026-09-22"></a>
+
+## 2026-09-22 — Límite de autoridad Jev × Petri sintético
+
+Hipótesis previa: si una clasificación Jev muy confiada conduce directamente a un efecto, un falso `supported` puede autorizar trabajo; tokens separados de evidencia verificada y concesión de implementación bloquean esa ruta. Baseline: el caso sintético fijado `gaia_design_authority` devuelve `supported` con 0,98 cuando se espera `contradicted`.
+
+La prueba Python vincula la fixture JSON compartida a la respuesta sintética. La prueba C# reproduce `classify → authorize_from_advisory` en la red insegura y explora completamente la red protegida para las tres combinaciones donde falta al menos uno de los tokens independientes. Una ruta válida sigue siendo posible con ambos tokens. Resultado local: pasan 3/3 pruebas C# y 1/1 prueba de paridad; tras regenerar, `dogfood.py check` informa `validated=5 matrices=current mirrors=current`. Sin llamadas al proveedor, tokens facturados, efectos en producción ni replay de Gaia/IX sobre una revisión exacta. Veredicto: experimento de especificación prometedor, todavía no apto para incubación.
 
 ## 2026-09-23 — Una lectura adversaria rompe las puertas del laboratorio
 
@@ -92,6 +101,7 @@ La ejecución completa, cada hash de petición y cada respuesta, está commitead
 - Leer el cuerpo de las cinco reglas TARS `ga.*`, no solo sus pesos, antes de afirmar que los dos codificados coinciden o divergen.
 - Que un mantenedor tríe ga#700, #701 y #702; el agente automático falló en las cinco issues, así que ninguna ha sido juzgada.
 - Ejecutar el A/B posterior con modelo fijo antes de afirmar que Jev reduce el coste posterior. La calibración en vivo no llamó a ningún modelo posterior, y n=12 en un corpus y una ejecución no sostiene ninguna cifra general.
+- Asociar la red protegida con un seam público Gaia o IX en una revisión exacta, reproducir el testigo inseguro y comparar con una prueba determinista sencilla.
 - Elegir un seam hexagonal exacto o rechazar la oportunidad.
 
 ## Preguntas abiertas

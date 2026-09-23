@@ -161,6 +161,10 @@ Leída con Pillow, la máscara vale 255 dentro de la elipse y 0 fuera, con una r
 - `VAEEncodeForInpaint` pone en gris los píxeles enmascarados y necesita `denoise` 1. Una máscara de ruido conserva la imagen que hay debajo. Un modelo de inpainting, alimentado por `InpaintModelConditioning`, es el que pinta algo nuevo acorde con el contexto.
 - El VAE cambia píxeles en todas partes: vuelve a pegar el resultado con `ImageCompositeMasked`.
 
+## Tu turno
+
+Toma una fotografía tuya y borra algo de ella por cada una de las tres vías, con la misma máscara y la misma semilla. Compara los resultados fuera de la máscara con `compare`: importa menos la vía que saber qué píxeles conservaste. Repinta después la misma zona con denoise 0,4, 0,7 y 1, y anota dónde deja de reconocerse tu sujeto.
+
 ## Ejercicios
 
 1. Con 20 pasos y `denoise` 0,4, ¿cuántos niveles de ruido calcula `set_steps`, cuántos conserva y cuántos pasos se ejecutan?

@@ -1,0 +1,14 @@
+Usage: slashforge [command] [options]
+
+Commands:
+  (default)    Install or update the kit
+  status       Show installed version and files without changing anything
+  uninstall    Remove the kit's guides and commands (use --project for ./.claude)
+
+Options:
+  --project    Install into ./.claude/ of the current repo (project mode)
+  --dry-run    Print planned file writes without touching the filesystem
+  --yes, -y    Non-interactive mode — auto-confirm the update prompt
+               (also enabled by SLASHFORGE_YES=1 or when stdin is not a TTY)
+  --help, -h   Show this help
+exit 0

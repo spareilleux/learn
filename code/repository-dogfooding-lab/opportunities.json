@@ -43,7 +43,7 @@
       },
       "authority": "Human approves live spend and any integration; model output never grants effects.",
       "next_gate": "Run the fixed downstream A/B the hypothesis actually states, gated by Jev against ungated, on the same 12 cases. The 13-call calibration does not test it.",
-      "result": "Live 13 calls at jev-1.13.0, 2026-09-23: batching the 12 questions over one shared state used 2487 input tokens against 14939 for the same 12 questions asked one at a time, 83.4% less, with the identical choice on all 12 cases, zero false supports and zero retries (accuracy 0.9167 both ways, Brier 0.1657 against 0.1645; 453 ms against 4451 ms). This measures amortizing shared state, not the hypothesis: no downstream model was called, so the 50% downstream saving is still unmeasured.",
+      "result": "Live 13 calls at jev-1.13.0, 2026-09-23: batching the 12 questions over one shared state used 2487 input tokens against 14939 for the same 12 questions asked one at a time, 83.4% less, with the identical choice on all 12 cases, zero false supports and zero retries (accuracy 0.9167 both ways, Brier 0.1657 against 0.1645; 453 ms against 4451 ms). This measures amortizing shared state, not the hypothesis: no downstream model was called, so the 50% downstream saving is still unmeasured. Token counts are the provider's reported usage, not billed cost, which stays unknown; the $0.0021 ceiling is a local byte proxy only.",
       "verdict": "promising",
       "artifacts": [
         "../typesafe-ai-system-one/benchmark-corpus.json",
@@ -87,6 +87,43 @@
         "matrices.md"
       ],
       "revisit": "2026-09-27"
+    },
+    {
+      "id": "jev-petri-authority-boundary",
+      "technique": "Jev advisory evidence plus Petri authority boundary",
+      "course": "repository-dogfooding-lab",
+      "axis": "both",
+      "repositories": [
+        "gaia",
+        "ix"
+      ],
+      "observed_pain": "A high-confidence text classification can be mistaken for an implementation grant, while concurrent lifecycle safety is hard to infer from one execution trace.",
+      "hypothesis": "A Petri oracle can expose a reachable unauthorized effect when Jev advisory support is treated as authority, and prove that the bounded guarded model blocks it without independent evidence and an explicit grant.",
+      "baseline": "Confidence-only threshold 0.95 on the pinned synthetic Jev case, with an unsafe advisory-to-effect net.",
+      "success_metric": "Reproducible unsafe witness; complete guarded reachability with no effect unless both independent proof and grant tokens are present; no provider call or production effect.",
+      "falsifier": "Any guarded reachable effect without both tokens, incomplete reachability claimed as proof, or model assumptions that do not match a pinned repository seam.",
+      "simpler_alternative": "A deterministic authority check and one focused replay test may suffice without a Petri net or Jev.",
+      "status": "experimenting",
+      "scores": {
+        "pain": 4,
+        "fit": 4,
+        "expected_value": 4,
+        "evidence": 2,
+        "reversibility": 5,
+        "cost": 1,
+        "risk": 3
+      },
+      "authority": "Repository owner reviews the exact seam and replay; Jev never grants effects and this local model grants no production authority.",
+      "next_gate": "Pin one Gaia or IX transition at an exact revision, map its real guards to places, replay a counterexample against the public seam, and obtain independent review before incubation.",
+      "result": "Offline synthetic wrong support at 0.98: guarded model blocks effect without independently verified evidence and implementation authority; 3/3 focused Petri tests and fixture parity test pass. No repository integration or live Jev result.",
+      "verdict": "promising",
+      "artifacts": [
+        "jev-petri-fixture.json",
+        "test_jev_petri_fixture.py",
+        "../petri-nets/Examples/JevEvidenceGate.cs",
+        "../petri-nets/Tests/JevEvidenceGateTests.cs"
+      ],
+      "revisit": "2026-09-29"
     },
     {
       "id": "hexagonal-seam-audit",

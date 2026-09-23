@@ -162,6 +162,10 @@ What reproducibility means in practice:
 - Steps, CFG, sampler, scheduler and seed each change the image, not just its quality; ancestral samplers add seeded noise at every step, drawn on the GPU.
 - On one machine, the same graph and seed gave identical pixels across restarts, but a different image when the text encoders ran after the UNet was loaded, and in a batch. Record the whole environment, and compare pixels with a tolerance.
 
+## Your turn
+
+Take a prompt of your own and measure, rather than look. Render it once, restart the server, render it again with the same seed, and compare the two PNG files with `compare` from the course's C# tool: the numbers, not your eyes, say whether anything moved. Then render the same seed inside a batch of four and compare the batch's first image with the single one. Write down what your machine does, the way this lesson does — it is your machine's answer, not this one's, that you will rely on later.
+
 ## Exercises
 
 1. A 1344 × 768 image has the same number of pixels as 1024 × 1024, give or take. What is the size of its latent, and is the ratio of values the same?

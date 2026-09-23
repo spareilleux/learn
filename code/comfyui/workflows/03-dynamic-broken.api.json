@@ -1,0 +1,22 @@
+{
+  "1": {
+    "inputs": { "width": 64, "height": 48 },
+    "class_type": "EmptyImage",
+    "_meta": { "title": "EmptyImage" }
+  },
+  "2": {
+    "inputs": { "images": ["1", 0], "format": "exr", "format.bit_depth": "16" },
+    "class_type": "SaveImageAdvanced",
+    "_meta": { "title": "a child of another option" }
+  },
+  "3": {
+    "inputs": { "images": ["1", 0], "format": "tiff" },
+    "class_type": "SaveImageAdvanced",
+    "_meta": { "title": "an option the node doesn't have" }
+  },
+  "4": {
+    "inputs": { "images": ["1", 0], "format": "png", "format.bit_depth": "24" },
+    "class_type": "SaveImageAdvanced",
+    "_meta": { "title": "a value the child doesn't allow" }
+  }
+}

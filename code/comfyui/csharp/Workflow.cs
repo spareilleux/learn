@@ -53,7 +53,7 @@ public static class Workflow
 
             foreach (var (name, input) in inputs)
             {
-                JsonArray? spec = InputSpec(definition, name);
+                JsonArray? spec = InputSpec(definition, name, inputs);
                 if (IsLink(input, out string source, out int output))
                 {
                     dependencies[id].Add(source);
@@ -112,8 +112,40 @@ public static class Workflow
         return (errors, order);
     }
 
-    static JsonArray? InputSpec(JsonObject? definition, string name) =>
-        (definition?["input"]?["required"]?[name] ?? definition?["input"]?["optional"]?[name]) as JsonArray;
+    static JsonArray? InputSpec(JsonObject? definition, string name) => InputSpec(definition, name, []);
+
+    // A COMFY_DYNAMICCOMBO_V3 input carries a set of nested inputs per option, and a
+    // workflow names them with dots: "format", then "format.codec" for the child that
+    // the chosen format declares. SaveImageAdvanced and SaveVideo take their options
+    // that way, so a validator that only looks at the top level rejects valid files.
+    static JsonArray? InputSpec(JsonObject? definition, string name, JsonObject inputs)
+    {
+        var declared = (definition?["input"]?["required"]?[name] ?? definition?["input"]?["optional"]?[name]) as JsonArray;
+        if (declared is not null || !name.Contains('.')) return declared;
+
+        string[] parts = name.Split('.');
+        var spec = (definition?["input"]?["required"]?[parts[0]] ?? definition?["input"]?["optional"]?[parts[0]]) as JsonArray;
+        for (int i = 1; i < parts.Length && spec is not null; i++)
+            spec = ChildSpec(spec, inputs[string.Join('.', parts.Take(i))], parts[i]);
+        return spec;
+    }
+
+    // The child under the option the workflow chose; under any option when it chose
+    // none, since the server then fills the default.
+    static JsonArray? ChildSpec(JsonArray parent, JsonNode? chosen, string child)
+    {
+        if (!IsDynamicCombo(parent) || parent[1]?["options"] is not JsonArray options) return null;
+        string? key = chosen?.GetValueKind() == JsonValueKind.String ? chosen.GetValue<string>() : null;
+        foreach (var option in options.OfType<JsonObject>())
+        {
+            if (key is not null && option["key"]?.GetValue<string>() != key) continue;
+            if ((option["inputs"]?["required"]?[child] ?? option["inputs"]?["optional"]?[child]) is JsonArray spec) return spec;
+        }
+        return null;
+    }
+
+    static bool IsDynamicCombo(JsonArray spec) =>
+        spec.Count > 1 && spec[0]?.GetValueKind() == JsonValueKind.String && spec[0]!.GetValue<string>() == "COMFY_DYNAMICCOMBO_V3";
 
     static string? CheckValue(JsonArray spec, JsonNode? value)
     {
@@ -132,6 +164,10 @@ public static class Workflow
                 return value?.GetValueKind() == JsonValueKind.String ? null : $"expects a string, got {value?.ToJsonString(Compact)}";
             case "BOOLEAN":
                 return value?.GetValueKind() is JsonValueKind.True or JsonValueKind.False ? null : $"expects true or false, got {value?.ToJsonString(Compact)}";
+            case "COMFY_DYNAMICCOMBO_V3":
+                var keys = (options?["options"] as JsonArray ?? []).OfType<JsonObject>().Select(o => o["key"]).ToList();
+                return keys.Count == 0 || keys.Any(k => JsonNode.DeepEquals(k, value))
+                    ? null : $"{value?.ToJsonString(Compact)} is not one of the {keys.Count} allowed values";
             default:
                 return null;
         }

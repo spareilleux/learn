@@ -1,0 +1,172 @@
+---
+title: 3. /slashforge:setup frente a /init
+description: Ejecutar el setup de SlashForge y el propio /init de Claude Code sobre el mismo repositorio público, en un laboratorio desechable con un tope en cada ejecución, y comparar lo que escribe cada uno, lo que pregunta y lo que cuesta — una ejecución capturada, no reproducible.
+sidebar:
+  order: 3
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Código: [`code/slashforge/lab/prepare.sh`](https://github.com/spareilleux/learn/blob/main/code/slashforge/lab/prepare.sh) y [`lab/run.sh`](https://github.com/spareilleux/learn/blob/main/code/slashforge/lab/run.sh). Las ejecuciones de esta lección y de las dos siguientes están registradas en el [diario](../journal/#experimentos), con sus hipótesis, escritas antes de las ejecuciones.
+
+:::caution[Una captura, no una prueba]
+Las lecciones 1 y 2 las comprobaba la CI. A partir de aquí, los comandos pasan por un modelo, y una segunda ejecución no daría el mismo texto ni el mismo coste. Todo lo que sigue es una sola ejecución, el 2026-09-22, con Claude Code 2.1.280 y el modelo `claude-opus-5-5[1m]` (el predeterminado de la cuenta). Los costes son los que Claude Code calculó para la sesión, no importes facturados.
+:::
+
+## Un laboratorio que no alcanza nada
+
+Setup escribe una docena de archivos en un repositorio, y las lecciones siguientes pueden hacer push de ramas y publicar revisiones. Nada de eso debería ocurrirle a un repositorio real, ni a tu propio `~/.claude`, mientras aprendes. `lab/prepare.sh` construye un laboratorio en el directorio que elijas:
+
+- un directorio personal, un directorio de configuración de Claude Code (`CLAUDE_CONFIG_DIR`), un directorio para la CLI de GitHub (`GH_CONFIG_DIR`) y una configuración de git, todo dentro del laboratorio;
+- un clon del propio [SlashForge](https://github.com/rajdeepratan/SlashForge) en `v4.4.3`, en una rama `lab`, sin remote y con un hook pre-push que rechaza;
+- SlashForge instalado de forma global en el directorio personal del laboratorio, de modo que el repositorio queda exactamente como se clonó.
+
+El repositorio es SlashForge porque es público, pequeño y no tiene dependencias, y porque el curso ya conoce sus bugs: será interesante ver si los comandos los encuentran.
+
+```bash
+cd code/slashforge
+npm ci
+bash lab/prepare.sh ../../../sf-lab
+```
+
+```
+lab:        …/sf-lab
+repository: bd75a4f release: 4.4.3 (#64) (v4.4.3, branch lab, no remote)
+kit:        "version": "4.4.3" in …\sf-lab\home\.claude
+remotes:    0
+```
+
+El Claude Code del laboratorio no tiene sesión iniciada, y una ejecución que lo intenta de todos modos se detiene antes de llamar al modelo: la ejecución e0 del diario gastó 0 tokens. Iniciar la sesión necesita a una persona, porque la página de inicio de sesión da un código para pegar en la terminal. Apunta `CLAUDE_CONFIG_DIR` al laboratorio para ese único comando:
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+```powershell
+$env:CLAUDE_CONFIG_DIR = "$PWD\..\..\..\sf-lab\home\.claude"
+claude auth login --claudeai
+Remove-Item Env:CLAUDE_CONFIG_DIR
+```
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```bash
+CLAUDE_CONFIG_DIR="$PWD/../../../sf-lab/home/.claude" claude auth login --claudeai
+```
+
+</TabItem>
+<TabItem label="macOS">
+
+```bash
+CLAUDE_CONFIG_DIR="$PWD/../../../sf-lab/home/.claude" claude auth login --claudeai
+```
+
+</TabItem>
+</Tabs>
+
+`--claudeai` usa tu suscripción; `--console` facturaría la API. Tu propio `~/.claude` sigue con su sesión iniciada y sin tocar.
+
+## Una ejecución, un tope
+
+`lab/run.sh` ejecuta un prompt con [`claude -p`](https://code.claude.com/docs/en/headless) y se niega a arrancar sin un tope:
+
+```bash
+bash lab/run.sh <lab> <name> <max-usd> <max-turns> "<prompt>"
+```
+
+Pasa `--max-budget-usd` y `--max-turns`, se detiene a los 900 s, y registra los turnos, los tokens, el coste, los permisos denegados y cada ruta que cambió. Dos decisiones determinan lo que puede hacer una ejecución:
+
+- **Headless significa que la primera pregunta termina la ejecución.** `claude -p` no tiene a nadie que responda, así que cuando un comando de SlashForge llega a una puerta, pregunta, y la ejecución termina. El laboratorio mide cada comando hasta su primera decisión, nunca más allá.
+- **Las ediciones solo se aceptan dentro del repositorio.** La ejecución usa `--permission-mode acceptEdits` y permite git de solo lectura, `ls` y las pruebas. El push, `gh`, `curl` y la web se rechazan. Una versión anterior también listaba `Edit` y `Write` entre las herramientas permitidas. Eso las preaprueba *en todas partes*, y la lección 5 muestra lo que un modelo hizo con ello.
+
+## `/init`: un archivo, de inmediato
+
+[`/init`](https://code.claude.com/docs/en/memory) es el propio comando de Claude Code para un repositorio nuevo. Ejecución e2b, con un tope de 0.50 USD y 20 turnos:
+
+```
+exit:      0
+wall:      92 s
+turns:     9
+tokens:    in 16, cache write 24664, cache read 252589, out 3555
+cost:      0.3189938 USD (as computed by Claude Code)
+changed:   1 path(s) in the lab repository
+```
+
+La única ruta es un `CLAUDE.md` de 50 líneas, escrito sin ninguna pregunta: qué es el paquete, los comandos (pruebas, dry run, el sitio de documentación), la arquitectura de las plantillas y sus cuatro listas, los releases. Termina con una sección que el curso no pidió:
+
+```markdown
+## Known drift
+
+The README's "What gets installed" table still shows `commands/forge/`; the code installs to `commands/slashforge/`. Trust `bin/install.js`.
+```
+
+Es la tabla obsoleta del README que la [lección 1](../01-what-the-installer-writes/) encontró comparando el README con la salida del instalador. `/init` la encontró leyendo.
+
+## `/slashforge:setup`: primero las preguntas
+
+Ejecución e2, sobre el mismo clon, con 0.75 USD y 20 turnos:
+
+```
+exit:      0
+wall:      56 s
+turns:     6
+tokens:    in 6, cache write 25541, cache read 86674, out 2190
+cost:      0.2654868 USD (as computed by Claude Code)
+changed:   0 path(s) in the lab repository
+```
+
+Nada escrito. [`setup.md`](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/templates/slashforge/setup.md) dice por qué: *"Collect every user decision in Phase 1, then run the rest without interrupting the user. Do not write any file until Phase 3."* La fase 1 exploró el repositorio y terminó en seis preguntas:
+
+```
+Questions before I write anything
+
+1. Layout: should I treat this as one app, with a single root `CLAUDE.md` and rules that cover `docs/` as a sub-area? Or do you want a separate `CLAUDE.md` for `docs/`?
+2. Common tasks: my guess is that most day-to-day work is (a) editing or adding a template or skill, (b) changing the installer logic, (c) updating the docs site, and (d) cutting a release. Is that right, and is anything missing?
+3. Template rules: …
+4. Releases: …
+5. Agents: I plan to create `installer-developer` (Node CLI and tests), `template-author` (the prompt and guide Markdown), `docs-developer` (Astro), and a `code-reviewer`. Does that split work for you?
+6. Hooks and commands: …
+```
+
+La pregunta que el curso esperaba primero, la oferta de instalar [Graphify](https://github.com/safishamsi/graphify), no llegó nunca. La guía de setup aplica una puerta de adecuación del lenguaje: cuando menos del 70% del código fuente es código que Graphify puede indexar, omite la oferta en silencio. SlashForge es sobre todo Markdown y archivos `.astro`, y la ejecución lo dijo en una línea: *"Graphify: skipped."* La hipótesis escrita antes de la ejecución esperaba un archivo y una pregunta sobre Graphify, y quedó refutada en ambos puntos.
+
+## Lado a lado
+
+| | `/init` | `/slashforge:setup` |
+|---|---|---|
+| Pregunta antes de escribir | no | seis preguntas |
+| Archivos escritos en la ejecución | `CLAUDE.md` | ninguno todavía; `CLAUDE.md` al final, después de los agentes, las reglas, los hooks y los comandos |
+| Turnos, tiempo real | 9, 92 s | 6, 56 s |
+| Coste de la ejecución | 0.32 USD | 0.27 USD, y las respuestas todavía están por venir |
+| Estimación del README | — | *"~50–120k tokens, paid once"* para todo el setup |
+
+Los recuentos de tokens son difíciles de comparar con los del README, porque la mayor parte de la entrada se sirve desde la caché de prompts: la ejecución de setup leyó 86,674 tokens de ella y escribió 25,541. Si el rango del README cuenta la entrada en caché, no lo dice.
+
+Claude Code tiene su propia versión de la entrevista. Con `CLAUDE_CODE_NEW_INIT=1`, [`/init`](https://code.claude.com/docs/en/memory) pregunta qué artefactos configurar (archivos `CLAUDE.md`, skills, hooks), explora con un subagente, hace preguntas de seguimiento y *"presents a reviewable proposal before writing any files"*. El laboratorio no ejecutó ese modo; compararlo con setup es el ejercicio 4.
+
+Es la diferencia entre `dotnet new` y un consultor. La plantilla escribe un valor por defecto sensato de inmediato; el consultor te entrevista primero y escribe algo que encaja, a un precio, y solo cuando has respondido. Para un repositorio que conoces bien, `/init` y diez minutos de edición pueden bastar. Para un equipo, las preguntas de setup son la parte útil: son las decisiones que alguien tiene que tomar de todos modos.
+
+## Puntos clave
+
+- Un laboratorio con su propio directorio personal, su configuración de Claude Code, de `gh` y de git, y un clon sin remote, permite ejecutar un workflow sin tocar nada real.
+- `claude -p` termina en la primera pregunta, así que una ejecución headless mide un comando hasta su primera puerta y nunca la responde.
+- Listar `Edit` o `Write` en `--allowedTools` las preaprueba en todas partes; `acceptEdits` por sí solo las acepta únicamente en el directorio de trabajo.
+- `/init` escribe `CLAUDE.md` de inmediato. `/slashforge:setup` explora, hace primero todas las preguntas y no escribe nada antes de que respondas.
+- La oferta de Graphify de setup solo aparece cuando la mayor parte del repositorio es código que Graphify puede leer.
+
+## Ejercicios
+
+1. En el laboratorio, ejecuta `/init` una segunda vez, cuando ya existe el primer `CLAUDE.md`. ¿Qué esperas que haga, y qué dice la documentación de `/init`?
+2. La fase 1 de setup termina con preguntas, y la ejecución headless se detiene ahí. ¿Cómo le darías las respuestas sin una sesión interactiva?
+3. Encuentra la frase de `setup.md` que le hace escribir `CLAUDE.md` al final, y da una razón para ese orden.
+4. Ejecuta `/init` en el laboratorio con `CLAUDE_CODE_NEW_INIT=1` y un tope. ¿Dónde se detiene, comparado con las seis preguntas de setup?
+
+<details>
+<summary>Solución</summary>
+
+1. La [documentación de la memoria](https://code.claude.com/docs/en/memory) dice: *"If a CLAUDE.md already exists, `/init` suggests improvements rather than overwriting it."* Pruébalo y compara el diff con lo que esperabas; después, restaura el repositorio del laboratorio con `git checkout -- .` y `git clean -fd`.
+2. Continúa la misma conversación: `claude -p --resume <session-id> "<answers>"`, con el id de sesión de `result.json`. Cada respuesta es una nueva ejecución, con su propio tope, y la siguiente puerta la vuelve a terminar. Esa es la idea: cada decisión sigue siendo un paso separado y deliberado.
+3. El paso 9 del flujo nuevo de una sola aplicación: *"Create `CLAUDE.md` in the repo root last"*. Los pasos anteriores escriben los agentes, las reglas, las skills, los comandos y los hooks, de modo que `CLAUDE.md` puede describir y enlazar lo que ya existe. Escrito primero, describiría archivos que todavía no están ahí, y un fallo a mitad de camino dejaría un `CLAUDE.md` que apunta a nada. La integración de Graphify, que añade texto a `CLAUDE.md`, se ejecuta después del paso 9 por la misma razón.
+4. No medido por el curso: es una ejecución del modelo, así que anota tu propio tope, tus turnos y tu coste. La diferencia documentada es que pregunta *qué* artefactos crear antes de explorar, mientras que setup decide la lista por sí mismo y te pide que la confirmes.
+
+</details>

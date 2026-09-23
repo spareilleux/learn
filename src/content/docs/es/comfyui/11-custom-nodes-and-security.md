@@ -356,6 +356,10 @@ Su siguiente paso es un render real. El mapa del mástil entra en el ControlNet 
 - Prefiere `.safetensors`; cualquier `torch.load` sin `weights_only=True`, o con PyTorch anterior a la 2.6, puede ejecutar código.
 - Limita los daños: solo bucle local, un entorno propio, un usuario sin derechos, un contenedor, sin tráfico saliente, una lista blanca de paquetes, y un diff leído antes de cada actualización.
 
+## Tu turno
+
+Toma un paquete que de verdad quieras instalar y audítalo antes de que se acerque a tu ComfyUI. Ejecuta el script del curso sobre un clon y lee después, con tus propios ojos, los tres archivos que señala primero: `__init__.py`, cualquier cosa llamada `install` y lo que sirva el `WEB_DIRECTORY`. Anota qué hace el paquete al importarse, qué descarga y desde dónde. Si al terminar de leer no sabes responder a esas tres preguntas, eso también es una respuesta.
+
 ## Ejercicios
 
 1. Escribe un cuarto nodo de GA, `GAVoicingNotes`, que reciba una digitación y devuelva un `STRING` con los nombres de las notas desde el Mi grave, como `C3 E3 G3 C4 E4` para `x32010`. Escribe primero su prueba.

@@ -15,13 +15,13 @@ sidebar:
 - [x] Lección 6 — Clases estructurales
 - [x] Lección 7 — Modelar la concurrencia
 - [x] Lección 8 — Redes coloreadas
-- [ ] Lección 9 — Tiempo y probabilidad
-- [ ] Lección 10 — Flujos de trabajo
-- [ ] Lección 11 — Herramientas e interoperabilidad
-- [ ] Lección 12 — Aplicaciones industriales
-- [ ] Lección 13 — Frente a otros formalismos
+- [x] Lección 9 — Tiempo y probabilidad
+- [x] Lección 10 — Flujos de trabajo
+- [x] Lección 11 — Herramientas e interoperabilidad
+- [x] Lección 12 — Aplicaciones industriales
+- [x] Lección 13 — Frente a otros formalismos
 - [x] Lección 14 — Sobre nuestros propios sistemas
-- [ ] Lección 15 — Límites y qué viene después
+- [x] Lección 15 — Límites y qué viene después
 
 ## QA
 
@@ -38,6 +38,9 @@ Este curso enseña un formalismo y se ejecuta sobre un analizador que escribí y
 | `mutual-exclusion` queda fuera de la clase de elección asimétrica | Queda **dentro**: `idle1•` e `idle2•` están cada uno contenidos en `mutex•` | [`Structure.cs`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/PetriNets/Structure.cs) | Una prueba unitaria que afirmaba lo contrario falló; los filósofos son la red que sí cae fuera de la clase | Prueba corregida a la respuesta medida (2026-09-17) |
 | `{x, y}` sigue siendo un sifón minimal cuando los dos hilos toman `x` primero | Ya no es minimal: `{y}` sola pasa a ser un sifón, y `x` queda en `{a_has_x, b_has_x, x}` | Lección 6, ejercicio 1 | `two-locks-ordered` tiene 4 sifones minimales, todos con una trampa marcada | Corregido antes de publicar, y la predicción equivocada se publica junto a la respuesta correcta (2026-09-17) |
 | El sifón sin trampa de un cerrojo que nunca se suelta es `{critical1, critical2, mutex}` | Hay dos, `{idle1}` y `{critical2, mutex}`; `{critical1}` resulta ser una trampa | Lección 7, ejercicio 2 | `Report.Siphons(mutual-exclusion-leaky)` | Corregido antes de publicar (2026-09-17) |
+| El árbol de cobertura de una red pequeña y acotada es calculable | `CoverabilityTree.Build(Nets.Kanban(1))`, una red con 160 marcados alcanzables, no vuelve: limitado a 2 GiB lanza `OutOfMemoryException` a los 15,5 s, sin límite llegó a 35,7 GB y doce minutos de CPU | [`CoverabilityTree.cs`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/PetriNets/CoverabilityTree.cs) | 160 marcados, ningún resultado; el árbol nunca fusiona dos ramas que llegan al mismo marcado, así que su tamaño sigue al número de caminos | Ni un defecto ni arreglable: la lección 12 imprime dos columnas de cotas en vez de tres, y dice por qué (2026-09-22) |
+| Un verificador de modelos dice cuándo no comprobó nada | TLC con una restricción de estado que excluye el marcado inicial imprime `Model checking completed. No error has been found.` y `0 distinct states found`, sin ninguna línea que lo distinga de una ejecución completa | `tla2tools.jar` 2.19, [herramientas TLA+](https://github.com/tlaplus/tlaplus) | `queue_5.tla` con `Cap == 2` frente a un marcado inicial de 5 marcas: 1 estado generado, 0 distintos, salida 0 | Reproducido el 2026-09-22; no comunicado aguas arriba — comunicarlo necesita el visto bueno del autor. La lección deduce el tope de los invariantes de plaza en su lugar (2026-09-22) |
+| El árbol de cobertura aproxima, y se equivoca del lado seguro | En una red con un arco inhibidor responde omega para una plaza que nunca lleva dos marcas. La aceleración de Karp y Miller supone que la secuencia que alcanza un marcado que cubre puede repetirse, y un arco inhibidor lo rompe | [`CoverabilityTree.cs`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/PetriNets/CoverabilityTree.cs), [`Inhibitor.cs`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/PetriNets/Inhibitor.cs) | `self-inhibited`: el árbol dice no acotada, el conjunto alcanzable son 2 marcados con p <= 1 | Ni un defecto ni arreglable — la acotación es indecidible para estas redes. `InhibitorNet` viene sin contrapartida de cobertura, e `InhibitorTests` conserva la contradicción para que nadie añada una (2026-09-22) |
 
 ## Experimentos
 
@@ -55,6 +58,23 @@ Una advertencia antes de la tabla: a diferencia del [laboratorio GA](../../ga-la
 | ¿Qué le hace a la estructura invertir un filósofo? | Quita el interbloqueo | Quita un **sifón**: tres filósofos tienen 7 sifones minimales, uno de ellos — `{eating1, fork1, eating2, fork2, eating3, fork3}` — sin trampa marcada; invertido, 6 sifones y ninguno sin ella | Confirmada, y es el enunciado estructural de «ordena tus cerrojos» (2026-09-17) |
 | ¿Está una transición viva a salvo de la inanición? | No | `start_write` es L4 en lectores y escritores, y el grafo contiene un ciclo de dos marcados, `start_read` y luego `stop_read`, que no la dispara nunca | Confirmada: la vivacidad es «siempre posible», nunca «acaba ocurriendo» (2026-09-17) |
 | ¿Encoge el color el espacio de estados? | No — solo pliega el modelo | 4 plazas y 4 transiciones a cualquier límite de intentos; el despliegue y el número de marcados alcanzables crecen los dos linealmente, 8, 10, 14, 24, 44 marcados para los límites 2, 3, 5, 10, 20 | Confirmada, y es el argumento central de la lección 8 (2026-09-17) |
+| ¿Coincide la cadena construida a partir de la red con la fórmula M/M/1/K? | Hasta unos 1e-12, ya que la red *es* esa cola | La mayor diferencia sobre los seis estados es 5,6e-17, cinco órdenes de magnitud por debajo del 1e-12 que afirma la comprobación | Confirmada, y es la única comprobación independiente que tiene el solucionador estocástico (2026-09-22) |
+| ¿Dónde se sitúa una cola finita cuando las llegadas igualan exactamente al servicio? | En algún punto intermedio, con los extremos menos probables | **Uniforme**: cada longitud de 0 a 5 tiene probabilidad 0,1667, vacía tan a menudo como llena | Refutada, y se convirtió en el resultado más útil: con carga 1 no hay tendencia alguna (2026-09-22) |
+| ¿Coincide la solidez con que el cortocircuito sea vivo y acotado? | En las cuatro redes de flujo de trabajo, porque lo dice el teorema | Coincidencia en las cuatro, y una prueba parametrizada falla ahora si se rompe | Confirmada (2026-09-22) |
+| ¿Está acotado pero no vivo el cortocircuito de la red bifurcación-Y/convergencia-O? | Acotado: nada se acumula en un proceso 1-seguro | **No acotado**: la marca sobrante de cada caso se acumula a través de t-star sin límite | Refutada, y es lo que hizo la lección: una marca dejada atrás y un cortocircuito no acotado son el mismo defecto (2026-09-22) |
+| ¿Cuántos marcados añade un paso de facturación tras la convergencia? | Dos, uno por rama de la elección | **Uno**: el marcado en que la marca está en la nueva plaza | Refutada; un paso en secuencia añade un estado venga lo que venga antes, solo la concurrencia multiplica (2026-09-22) |
+| ¿Sabe el lector leer un fichero PNML escrito por otra herramienta? | Sí para los P/T; las trampas del ejemplo de la ISO están todas tratadas | 2 de 16 leídos, 14 rechazados correctamente por el tipo — y el nombre, que está en la página y no en la red, se perdía | Refutada en parte, y es el único defecto que once lecciones de salida autocomprobada no habían encontrado (2026-09-22) |
+| ¿Coincide este analizador con herramientas escritas por otra gente? | Sí en las instancias pequeñas; un desacuerdo en algún punto intermedio no me sorprendería | **21 instancias del Model Checking Contest, cuatro números cada una, todas idénticas**, más cuatro mayores coincidiendo cifra a cifra | Confirmada, y es la primera comprobación externa que ha tenido este curso (2026-09-22) |
+| ¿Da una red Kanban reconstruida desde su descripción publicada la respuesta del concurso? | Sí si el modelado es correcto; es una prueba más dura que leer el fichero del concurso | 2 546 432 marcados y 24 460 016 arcos con cinco tarjetas, exactamente los números publicados | Confirmada: se valida el modelado, no solo el lector de PNML (2026-09-22) |
+| ¿Cuántos invariantes de plaza tiene la red Kanban? | Cuatro, uno por celda | **Seis**: las celdas 2 y 3 están sincronizadas, así que también se conservan dos sumas cruzadas, y los invariantes de soporte mínimo no son una base de espacio vectorial | Refutada, y el ejercicio pide al lector derivar los dos de más (2026-09-22) |
+| ¿Dónde se detiene la enumeración explícita, y qué la detiene? | Hacia diez millones de marcados, y son los marcados | Son los **arcos**: 3,4 M de marcados con 13,6 M de arcos caben, 11,5 M de marcados con 1 200 millones de arcos lanzan `OutOfMemoryException` con un montículo de 8 GiB a los 158 s | Refutada en su causa; `tedd` hace la misma instancia en 2,3 s porque un diagrama de decisión no almacena arcos (2026-09-22) |
+| ¿Encuentra los mismos espacios de estados un verificador escrito por otra gente? | Sí en las redes pequeñas; un desajuste de etiquetado en algún punto no me sorprendería | **22 redes con espacio de estados finito, tres números cada una, todos idénticos**: los estados distintos, estados generados y profundidad de TLC igualan los marcados, los arcos + 1 y el camino más corto más largo + 1 | Confirmada, sobre una traducción cuyo generador no contiene lógica (2026-09-22) |
+| ¿Rompe `estados generados = arcos + 1` el único marcado alcanzado por dos transiciones distintas? | Sí: la relación de transición de TLA+ es un conjunto de estados, así que `order-sound` debería imprimir 7 donde el analizador tiene 8 arcos | Imprime 8. TLC cuenta un estado generado por disyunto evaluado, no por sucesor conservado | Refutada, y la razón es la diferencia entre un grafo etiquetado y una relación de transición (2026-09-22) |
+| ¿Anuncia una restricción de estado elegida a mano lo que recortó? | Al menos informa de un espacio de estados más pequeño | **Nada en absoluto**: un tope por debajo del marcado inicial da `0 distinct states found` bajo `No error has been found` | Refutada; por eso el tope de la lección viene de `Invariants.PlaceBounds` (2026-09-22) |
+| ¿Son las redes que los invariantes de plaza no acotan las que no tienen espacio de estados finito? | Sí, para eso sirve un invariante | No: `handshake` no tiene ningún invariante sobre todas sus plazas y tiene exactamente un marcado, porque está muerta de entrada | Refutada antes de publicarse por `TlaTests`; un invariante de plaza demuestra la acotación y nunca la refuta (2026-09-22) |
+| ¿Cómo crece el coste de la enumeración al añadir componentes? | Como los marcados, que es lo que todo el mundo cita | Como los **arcos por marcado**: de 1,3 a 3,9 en seis filósofos, de 3,9 a 8,8 en cuatro tarjetas Kanban, porque cada componente multiplica las maneras de abandonar cada estado existente | Confirmada como forma, y se aplana: la razón es un grado de salida medio y no puede superar el número de transiciones (2026-09-22) |
+| ¿Qué cuesta la atomicidad en espacio de estados? | Un factor constante | Filósofos tomando los dos tenedores de golpe: 29 marcados con siete. Un tenedor cada vez: 198 con seis. La diferencia es entrelazado, y es lo que quitan los desplegados | Medida; ni desplegado ni reducción de orden parcial está implementado aquí, y la lección lo dice (2026-09-22) |
+| ¿Sigue siendo el árbol de cobertura una aproximación segura cuando la red gana un arco inhibidor? | Sí — sobreaproxima por construcción, así que debería responder omega demasiado a menudo, nunca equivocadamente | Responde omega para una plaza que nunca lleva dos marcas. `self-inhibited` tiene 2 marcados alcanzables y el árbol dice no acotada | Refutada. La premisa de la aceleración falla, y falla porque la acotación es indecidible aquí, así que no hay nada que arreglar (2026-09-22) |
 
 ## 2026-09-15 — Lecciones 1 a 4, y el analizador sobre el que se ejecutan
 
@@ -133,8 +153,100 @@ La lección 14 conecta ahora el modelo formal con las formas de fallo medidas en
 
 La corrección importante fue semántica: `DeadStates` significa que ninguna transición está habilitada, por lo que el final correcto de un workflow finito también está muerto. «Sin interbloqueo» es el oráculo equivocado para un pipeline que termina. El contrato ejecutable es, en cambio, un grafo completo cuyos marcados muertos contienen exactamente una marca terminal con nombre. La página también etiqueta honestamente los ejemplos Channel con forma de GA como reproducciones del mecanismo, no como pruebas de regresión de los binarios actuales. RabbitMQ, Redis y Kubernetes siguen siendo experimentos posteriores.
 
+## 2026-09-22 — Lección 9, y una cola resuelta dos veces
+
+La lección 9 convierte el grafo de alcanzabilidad en una cadena de Markov de tiempo continuo. `Stochastic.cs` construye la matriz de tasas a partir del grafo, elimina los estados evanescentes que crea una transición inmediata, y resuelve piQ = 0 por eliminación de Gauss con pivoteo parcial. La pregunta abierta del 2026-09-17 la zanja la propia lección: el curso enseña primero el formalismo **estocástico**, porque es aquel cuya semántica se sigue de la red no temporizada sin una nueva regla de disparo, y los retardos deterministas de Merlin y de Ramchandani quedan nombrados como la teoría más difícil que son.
+
+La decisión de diseño que merece anotarse es la de la comprobación. Una cola con una transición de llegada, una de servicio y retardos exponenciales *es* una cola M/M/1/K, así que la misma distribución puede calcularse dos veces por caminos que no comparten código: la cadena construida a partir de la red, y la forma cerrada calculada a partir de rho. Las seis probabilidades coinciden con unos 1e-16. Esa coincidencia es la única razón para fiarse del analizador en las redes cuya respuesta no se conoce en forma cerrada — es decir, todas, después de esta lección.
+
+Dos cosas salieron de escribirla que no había previsto. Primero, la comprobación de la lección imprime un veredicto en lugar de la diferencia: las cifras de la diferencia dependen del orden en que la máquina sumó los números en coma flotante, así que imprimirla haría fallar `check.sh` en uno de los tres sistemas operativos por un motivo ajeno a las redes de Petri. Segundo, el caso de carga 1 es más interesante que el de carga 0,75 — la cola no se concentra en el medio, es uniforme sobre todas las longitudes, lo que dice sobre «dimensionado exactamente a capacidad» algo que ninguna media diría.
+
+La ley de Little se usa como una tercera comprobación independiente y no como resultado: vale para todo sistema estable sin hipótesis, así que si la cadena la violara, la equivocada sería la cadena.
+
+`check.sh` ejecuta ahora `l9` y lo compara con `expected/l9.txt`. Pasan 57 pruebas, y `l1` a `l9`, `l14`, `music`, `chat` y `nets` coinciden todos.
+
+## 2026-09-22 — Lección 10, y la solidez decidida dos veces
+
+La lección 10 añade `Workflow.cs`: la comprobación estructural de la red de flujo de trabajo, las tres condiciones de solidez, y el cortocircuito del teorema de van der Aalst. Es el teorema lo que hace que la lección merezca escribirse — la solidez se decide una vez sobre sus propias condiciones y otra como «la red cortocircuitada es viva y acotada», con código de la lección 4 que no sabe nada de procesos, y una prueba parametrizada falla si alguna vez dejan de coincidir en las cuatro redes de ejemplo.
+
+Dos cosas que no esperaba, ambas ya en la lección.
+
+La primera: `order-and-xor` — la bifurcación Y convergida por una O exclusiva, el error más común de los procesos dibujados — no se atasca solo a veces. Su marcado final es **inalcanzable desde cualquier sitio**: el estado final correcto no existe en la red en absoluto. Toda tarea puede ejecutarse todavía, así que una batería de pruebas que ejercite cada tarea pasa sobre un proceso que nunca puede terminar correctamente. El informe se cambió para decir eso en una línea en vez de listar los diez marcados como «atascados», lo que era cierto e inútil.
+
+La segunda: su cortocircuito **no está acotado**. Yo esperaba «acotado pero no vivo». La marca sobrante de cada caso se acumula a través de `t-star` sin límite, lo que significa que «la terminación limpia falla» y «el cortocircuito no está acotado» son el mismo defecto contado una vez por caso o contado para siempre. La red espejo, `order-xor-and`, está acotada y no es viva — así que cada mitad del teorema la necesita uno de los dos fallos de ejemplo, lo que es mejor demostración que la que tenía planeada.
+
+También me equivoqué en un ejercicio antes de comprobarlo. Al añadir un paso de facturación tras la convergencia, predije que el número de marcados pasaría de 6 a 8; el analizador dijo 7. Un paso en secuencia añade un marcado venga lo que venga antes, porque solo la concurrencia multiplica. La predicción equivocada se publica con la respuesta correcta, y el motivo se ha convertido en el argumento del ejercicio.
+
+`check.sh` ejecuta `l10`; pasan 66 pruebas y l1 a l10, l14, music, chat y nets coinciden todos.
+
+## 2026-09-22 — Lección 11, y el primer fichero que este repositorio no escribió
+
+Diez lecciones se habían comprobado contra un analizador que escribí yo, sobre redes que escribí yo. La lección 11 rompe ese círculo: descarga los dieciséis ejemplos PNML que acompañan a [ePNK](http://www2.imm.dtu.dk/~eki/projects/ePNK/), la implementación de referencia del metamodelo de la norma, y se los entrega al lector.
+
+Catorce fueron rechazados correctamente — diez redes de alto nivel, tres redes simétricas, y una que merece su propia frase. `simple-dot-net.pnml` es una red P/T corriente escrita en la gramática *de alto nivel* sobre el conjunto de colores de un solo valor `dot`: el mismo comportamiento que todas las redes de este curso, otro lenguaje, ilegible. «PNML» nombra una sintaxis más una URI de tipo, no un formato.
+
+Los dos ficheros aceptados encontraron el defecto que esperaba. El ejemplo de la propia norma, tal como lo escribe ePNK, pone el nombre de la red en la `<page>` y no en el `<net>`, no le da nombre alguno a la transición, y mete un bloque `<toolspecific>` dentro de `<initialMarking>` antes de su `<text>`. El lector sobrevivió a tres de esas trampas y perdió el nombre: el fichero volvía llamándose `n1`, su identificador. Tres líneas en `Pnml.cs` lo arreglaron, y una prueba unitaria lleva ahora toda la forma incómoda como cadena, de modo que la corrección no puede regresar sin la descarga de ePNK.
+
+Ese es todo el argumento de la lección, y costó tres minutos: diez lecciones de salida coherente consigo misma no habían encontrado nada, y el primer fichero ajeno encontró algo.
+
+Dos cosas que no pude hacer. La gramática P/T **no** está entre los `.rng` publicados en pnml.org — `pnmlcoremodel.rng`, `anyElement.rng`, `conventions.rng` y las que no dependen del tipo sí están, `ptnet.rng` devuelve un 404 — así que la salida del analizador sigue sin haberse validado nunca contra un esquema. Y los ejemplos de ePNK están bajo EPL-1.0, así que no se incluyen: `check.sh` ejecuta `l11` sin ellos e imprime un aviso, y el listado ajeno de la lección está marcado como procedente de una ejecución manual fechada, no de la comparación.
+
+`check.sh` ejecuta `l11`; pasan 67 pruebas y l1 a l11, l14, music, chat y nets coinciden todos.
+
+## 2026-09-22 — Lección 12, y la primera vez que había una respuesta de otros
+
+Once lecciones comprobaron este analizador contra sí mismo. La lección 12 lo comprueba contra el [Model Checking Contest](https://mcc.lip6.fr/), que publica tanto una colección pública de modelos industriales como las respuestas que sus participantes calcularon sobre ellos.
+
+El examen `StateSpace` pide cuatro números por instancia — marcados, arcos, marcas máximas en una plaza, marcas máximas en un marcado — y `raw-result-analysis.csv` lleva una columna `estimated result` con el valor en el que coincide una mayoría de herramientas, ponderada por la confianza. Eso es un oráculo. Tomé las veintiuna instancias P/T cuyos cuatro números se publican enteros — taller flexible, protocolos, memoria compartida, bioquímica, y un modelo de seguridad — y ejecuté el analizador sobre todas.
+
+**Veintiuna instancias, ochenta y cuatro números, ni un desacuerdo.** Luego cuatro más por encima de la línea de lo «publicado entero» — `FMS-PT-00005`, `Kanban-PT-00005`, `Peterson-PT-3`, `Dekker-PT-010` — usando las cifras que varias herramientas imprimieron idénticas. Sigue sin haber desacuerdo. Es la primera validación externa que ha tenido este curso, y estuvo disponible todo el tiempo.
+
+La red Kanban está reconstruida aquí en vez de leída del fichero del concurso, a partir de la imagen y los nombres de plazas de la propia ficha del concurso. Da 2 546 432 marcados y 24 460 016 arcos con cinco tarjetas, que es lo que el concurso publica, así que el modelado es correcto y no solo el lector. `check.sh` la ejecuta con tres tarjetas para seguir siendo rápido.
+
+Dos cosas en las que me equivoqué, ambas publicadas en la lección con la respuesta medida. Esperaba **cuatro** invariantes de plaza, uno por celda; hay **seis**, porque las celdas 2 y 3 están sincronizadas y la base de soporte mínimo no es una base de espacio vectorial. Y esperaba que el muro fuera el número de marcados; es el número de **arcos**. `Peterson-PT-3` tiene 3,4 M de marcados y 13,6 M de arcos y cabe; `Dekker-PT-020` tiene 11,5 M de marcados y 1 200 **millones** de arcos y lanza `OutOfMemoryException` con un montículo de 8 GiB a los 158 s. `tedd` hace esa misma instancia en 2,3 s y 1,2 GB, porque un diagrama de decisión nunca almacena un arco.
+
+Y una cosa que la lección encontró en el código de este repositorio: `CoverabilityTree.Build` no termina de forma útil con `kanban-1`, una red con **160 marcados alcanzables**. Limitado a 2 GiB lanza a los 15,5 s; sin límite llegó a 35,7 GB y doce minutos de CPU sin volver. No es un error — el árbol nunca fusiona ramas, así que su tamaño sigue al número de caminos — pero significa que la herramienta de la lección 3 es inutilizable en cualquier cosa industrial, y la lección lo dice en vez de imprimir una tercera columna.
+
+## 2026-09-22 — Lección 13, y un espacio de estados calculado dos veces
+
+La lección 12 tomó prestadas las respuestas de otros. La lección 13 toma prestado su motor: las 25 redes se escriben como módulos TLA+ y se le entregan a [TLC](https://github.com/tlaplus/tlaplus), que enumera los mismos espacios de estados desde el otro lado.
+
+La traducción resultó caber en una frase. Haz que la única variable TLA+ sea una función de las plazas a los naturales y un estado *es* un marcado; la regla de disparo cabe entonces en seis líneas, escritas una vez a mano en `tla/PetriNet.tla`, y `Tla.cs` genera solo la red. Nada del generador contiene lógica, y esa es la única razón por la que su salida merece compararse.
+
+TLC termina con tres números. Antes de ejecutar ninguno anoté lo que cada uno debía valer: estados distintos = marcados, estados generados = arcos + 1, profundidad = el más largo de los caminos más cortos + 1. **Veintidós redes con espacio de estados finito, sesenta y seis números, ni un desacuerdo.**
+
+Dos de las tres apuestas acertaron por la razón equivocada, y la lección conserva ambas.
+
+`order-sound` es la única red donde dos transiciones llevan de un marcado al mismo marcado — `ship` y `cancel`. El grafo de una red de Petri está etiquetado y el de TLA+ no, así que ese paso debería haber desaparecido del recuento de TLC: 8 frente a 7. Es 8 frente a 8, porque TLC cuenta un estado generado por **disyunto evaluado**, no por sucesor conservado. La regla sobrevive a la colisión por accidente, y el accidente *es* la diferencia entre los formalismos: pregunta qué puede pasar a continuación y TLA+ responde con estados, pregunta qué puede pasar y una red responde con transiciones.
+
+La primera ejecución se detuvo pronto en `retry` — tres marcados de ocho — y en `pipeline-lifecycle`. No era un fallo de traducción: TLC llama interbloqueo a un estado sin sucesor y se para, porque una especificación TLA+ describe algo que funciona para siempre. El marcado final de una red de flujo de trabajo es ese estado, y la lección 10 se pasa entera definiendo la solidez como alcanzarlo. `CHECK_DEADLOCK FALSE` es el punto donde los dos formalismos no coinciden en si los sistemas terminan.
+
+Luego el número que debería inquietar a cualquiera que haya elegido una cota a mano. Pon el tope de `queue-5` en 2 — su marcado inicial lleva cinco marcas — y TLC descarta el estado inicial, no comprueba nada, e imprime `Model checking completed. No error has been found.` con `0 distinct states found`. No hay ninguna línea en esa salida que la distinga de una ejecución completa. Por eso el tope de esta lección es `Invariants.PlaceBounds`, y por eso la lección imprime cuáles de las cuatro redes recibieron uno que no supo demostrar.
+
+Y una afirmación mía que las pruebas refutaron antes de publicarla: había escrito que las cuatro redes que los invariantes no acotan son las cuatro sin grafo de alcanzabilidad finito. `handshake` no tiene ningún invariante sobre todas sus plazas y tiene exactamente **un** marcado, porque está muerta de entrada. Un invariante de plaza demuestra la acotación y nunca la refuta.
+
+Statecharts, álgebras de procesos y autómatas temporizados se comparan en prosa y se marcan como no ejecutados. Lo único que vale la pena llevarse es el canje que todos hacen: un álgebra de procesos compone, `P | Q` es un término, y puedes razonar sobre `P` solo — mientras que una red debe existir entera antes de que un sifón, una trampa o un invariante signifiquen algo. Es precisamente por eso que la red Kanban de la lección 12 tuvo que reconstruirse entera en vez de ensamblarse con cuatro copias de una celda.
+
+## 2026-09-22 — Lección 15, y un algoritmo correcto que aun así se equivoca
+
+La última lección del plan pregunta qué no sabe hacer el analizador. Tres de las respuestas son mediciones en vez de argumentos.
+
+**El crecimiento tiene forma.** La lección 12 encontró que el muro de memoria es de arcos. Esta lección ve subir los arcos por marcado a medida que se añaden componentes: 1,3 → 3,9 en seis filósofos, 3,9 → 7,6 en tres tarjetas Kanban, 8,8 con cuatro tarjetas (454 475 marcados, 3 979 850 arcos — la extrapolación lineal anunciaba 8,9 y se pasó, como debe, porque la razón es un grado de salida medio y `Nets.Kanban` tiene dieciséis transiciones con cualquier número de tarjetas). Cada componente añadido no solo trae sus propios estados; multiplica las maneras de abandonar cada estado existente.
+
+**El entrelazado se ve.** Filósofos tomando los dos tenedores de golpe: 29 marcados con siete. Un tenedor cada vez: 198 con seis. Mismo formalismo, misma máquina. La diferencia es exactamente lo que los desplegados y la reducción de orden parcial existen para quitar, y ninguno de los dos está implementado aquí — la lección lo dice en vez de dar a entender lo contrario.
+
+**Y el hallazgo sobre el que se construye la lección.** `PetriNets/Inhibitor.cs` añade los arcos inhibidores: una transición que solo se dispara mientras una plaza está vacía. `flush(n)` dice entonces *cuando todos los artículos se hayan movido, terminar* en n + 2 marcados, donde la red ordinaria dice *en algún momento, terminar* en 2(n + 1). Los marcados de más no son complejidad, son respuestas falsas.
+
+El coste llega de inmediato. `self-inhibited` es una plaza, una transición, y un arco de la plaza a la transición que la llena. El árbol de Karp y Miller, ejecutado sobre la red ordinaria subyacente, responde ω. El conjunto alcanzable es de **dos marcados** y la plaza nunca lleva más de una marca. La aceleración supone que la secuencia entre un marcado y el ancestro que cubre puede repetirse; aquí la marca que apareció es lo que ahora bloquea la transición que la produjo. El árbol no es lento, es falso — y tiene que serlo, porque la comprobación a cero convierte dos plazas en los contadores de una máquina de dos contadores y hace indecidible la acotación. `InhibitorNet` tiene por eso un constructor de conjunto alcanzable con un límite y ninguna contrapartida de cobertura: incompleto significa «no dentro del límite», nunca «no acotada».
+
+Esa es también la respuesta a por qué todas las demás redes de este repositorio son redes plaza/transición ordinarias. No es conservadurismo. Es la línea más allá de la cual los veredictos del analizador dejan de significar nada.
+
 ## Por verificar
 
+- La lección 15 nombra los desplegados, la reducción de orden parcial y los diagramas de decisión y no implementa ninguno de los tres. La afirmación de que un desplegado es exponencialmente más pequeño para la familia de los filósofos es el resultado publicado, no una medición de este repositorio; los artículos de Karp y Miller y de Araki y Kasami están confirmados por Crossref pero tras un muro de pago y sin leer.
+- Nada de las secciones de statecharts, álgebras de procesos y autómatas temporizados de la lección 13 se ejecutó. No se construyó ningún modelo UPPAAL ni se calculó ningún grafo de clases de estados de TINA; las referencias de Harel y Milner están confirmadas por Crossref pero están tras un muro de pago y sin leer.
+- La literatura sobre FMS da muchos menos estados que el concurso para el mismo modelo, porque los recuentos publicados son los marcados *tangibles* de una red estocástica generalizada mientras que `FMS-PT-*` es una red P/T corriente. Las cifras concretas están citadas de memoria en mis notas y no aparecen en ninguna lección hasta que se lea una fuente.
+- La gramática de las redes P/T no está entre los ficheros RELAX NG publicados en pnml.org, así que el PNML del analizador nunca se ha validado contra un esquema. `pnmlcoremodel.rng` está y comprobaría la estructura; las particularidades P/T se cuelan por su regla `anyElement`.
 - Hack 1972, la fuente del teorema de Commoner, es de acceso abierto e ilegible para una descarga automatizada. Leerlo en un navegador permitiría que la lección 6 citara el teorema en vez de parafrasear una paráfrasis.
 - Murata 1989 sigue tras muro de pago y sin leer; toda atribución a él en las lecciones 1 a 8 está marcada en la página.
 - Lección 7, ejercicio 3: construir los filósofos con un tiempo de espera y comprobar que la red está libre de interbloqueo y tiene una ejecución infinita en la que nadie come.
@@ -142,6 +254,7 @@ La corrección importante fue semántica: `DeadStates` significa que ninguna tra
 
 ## Preguntas abiertas
 
+- La lección 13 le entrega a TLC solo el espacio de estados: el `.cfg` generado tiene una línea `INVARIANT` y ninguna línea `PROPERTY`, así que no se ha comprobado ninguna fórmula temporal bajo equidad. `[]<>Enabled(t) => []<>t` es lo que pregunta la cuestión de la inanición de la lección 7, y TLC la respondería. Si generar condiciones de equidad por red, o escribir un módulo a mano para la única red donde la inanición es el tema, está sin decidir.
 - La fuerza bruta sobre los subconjuntos de plazas limita el analizador a veinte plazas. Seis filósofos tomando un tenedor cada vez tienen veinticuatro, así que el veredicto estructural no se puede calcular para la mayor red de la propia tabla de la lección 7. Una formulación con un resolutor de restricciones lo arreglaría y haría que el curso dependiera de un resolutor.
-- Las redes coloreadas de la lección 8 enlazan una variable por transición. Una transición que une dos mensajes necesita una tupla, y el despliegue crecería como un producto. Si implementarlo en la lección 12, donde aparece un protocolo real, o entregarle ese modelo a CPN Tools y decirlo, está sin decidir.
-- La lección 9 necesita el tiempo, y el tiempo es donde una red deja de tener una única semántica aceptada. Cuál de los formalismos temporizados — las redes de Petri temporales en el sentido de Merlin, las redes temporizadas en el sentido de Ramchandani, o las estocásticas — enseña primero este curso no está zanjado.
+- Las redes coloreadas de la lección 8 enlazan una variable por transición. Una transición que une dos mensajes necesita una tupla, y el despliegue crecería como un producto. La lección 12 esquivó la cuestión — el concurso entrega cada modelo ya desplegado a P/T — así que sigue abierta, y la lección 15 es el último sitio donde responderla.
+- La lección 9 enseñó el formalismo estocástico, lo que deja abierto el determinista: una red de Petri temporal en el sentido de Merlin, donde una transición lleva un intervalo en vez de una tasa, no tiene detrás una cadena de Markov y necesita una construcción por clases de estados que el analizador no tiene. Si la lección 13 construye una o le entrega el modelo a TINA, que hace exactamente eso, está sin decidir.

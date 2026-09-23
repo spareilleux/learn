@@ -201,7 +201,8 @@ Ce que la CI ne vérifie pas : les aperçus, les messages `progress`, que les n�
 ## Autour du cas nominal
 
 - **Délais d'attente.** Une première exécution de SDXL a pris 15 secondes ici, et un gros workflow vidéo peut prendre de nombreuses minutes. Les clients abandonnent après 20 minutes sans message. Un service de longue durée devrait plutôt garder le WebSocket ouvert, se reconnecter avec le même identifiant de client quand la connexion tombe, et lire `/history/{prompt_id}` pour rattraper son retard.
-- **Interrompre.** `POST /interrupt` sans corps arrête ce qui s'exécute, quel que soit celui qui l'a mis en file d'attente ; avec `{"prompt_id": …}`, le code de la v0.36.0 ne l'arrête que si ce prompt est celui en cours ([`server.py`, lignes 1163 à 1193](https://github.com/Comfy-Org/ComfyUI/blob/ee71d5c4993f29086b27fde1629a945ae48425bf/server.py#L1163-L1193)). Un prompt qui n'a pas démarré se retire de la file d'attente avec `POST /queue` et `{"delete": [prompt_id]}`. Aucun des deux n'a été exécuté pour cette leçon : *à vérifier*.
+- **Interrompre.** `POST /interrupt` sans corps arrête ce qui s'exécute, quel que soit celui qui l'a mis en file d'attente ; avec `{"prompt_id": …}`, le code de la v0.36.0 ne l'arrête que si ce prompt est celui en cours ([`server.py`, lignes 1163 à 1193](https://github.com/Comfy-Org/ComfyUI/blob/ee71d5c4993f29086b27fde1629a945ae48425bf/server.py#L1163-L1193)). Un prompt qui n'a pas démarré se retire de la file d'attente avec `POST /queue` et `{"delete": [prompt_id]}`. Les deux répondent `200` quand il n'y a rien à arrêter et quand l'identifiant n'est pas dans la file : le code de statut dit que l'appel a été accepté, pas qu'il a fait quelque chose. Pour le savoir, relire `/queue` et `/history` ensuite. [`check.sh`](https://github.com/spareilleux/learn/blob/main/code/comfyui/check.sh) exécute les deux sur les trois systèmes.
+- **Les erreurs pendant l'exécution.** La validation a lieu avant le rendu, donc un prompt peut être accepté et échouer quand même. Le contrôle téléverse un fichier qui n'est pas une image sous un nom en `.png` : `LoadImage` le liste, `POST /prompt` répond `200`, et le rendu se termine par `execution_error: node 1 (LoadImage): cannot identify image file …`. Les deux clients affichent le nœud fautif et sortent avec le code 1. Un worker doit distinguer cela d'une panne réseau — l'échec se reproduira à l'identique, donc le réessayer gaspille la file. La leçon 12 trie les échecs.
 - **Un serveur, une file d'attente.** Les prompts s'exécutent un par un, dans l'ordre de la file, quel que soit le client qui les a envoyés. Deux clients partagent le cache du serveur, c'est pourquoi l'exécution Java ci-dessus a réutilisé les encodages de texte de l'exécution C#.
 - **Pas d'authentification.** Tout ce qui précède fonctionne pour quiconque peut atteindre le port. La leçon 12, sur la production, place le serveur derrière quelque chose qui vérifie qui appelle.
 
@@ -211,6 +212,10 @@ Ce que la CI ne vérifie pas : les aperçus, les messages `progress`, que les n�
 - En C#, `HttpClient` et `ClientWebSocket` suffisent ; en Java, `java.net.http` et une bibliothèque JSON. Les deux doivent réassembler les messages qui arrivent en plusieurs trames.
 - Les messages WebSocket binaires sont des aperçus : un type d'événement, un format d'image, et un JPEG ou un PNG.
 - Ne compte ni sur l'ordre des nœuds de sortie, ni sur le nombre de messages `status`, ni sur l'obtention de nouveaux fichiers lors d'une exécution en cache.
+
+## À toi de jouer
+
+Ajoute au client C# ou au client Java ce que cette leçon a laissé de côté : un affichage de progression alimenté par les messages `progress`, ou un `POST /interrupt` déclenché au clavier. Débranche ensuite le câble réseau — ou arrête le serveur — au milieu d'un rendu, et regarde ce que fait ton client. Un client qui attend indéfiniment sur une socket fermée est le bogue le plus courant de ce genre de code.
 
 ## Exercices
 

@@ -1,6 +1,6 @@
 ---
 title: "2. Une expérience reproductible au coût borné"
-description: Exécuter d'abord la fixture déterministe, examiner les tests du contrat et du routage, puis préparer un appel Jev facultatif avec budget local dur, conditions d'arrêt et dossier de preuve.
+description: Exécuter d'abord la fixture déterministe, examiner les tests du contrat et du routage, puis préparer un appel Jev facultatif avec garde locale sur la taille de requête, conditions d'arrêt et dossier de preuve.
 sidebar:
   order: 2
 ---
@@ -47,17 +47,17 @@ Le script :
 
 - refuse avant tout accès réseau si la variable manque;
 - construit une seule requête pour `jev-1.13.0`;
-- utilise le nombre d'octets UTF-8 comme estimation locale volontairement large des tokens;
-- refuse au-delà de 2 500 tokens estimés ou de **0,000105 $** au prix officiel de 0,042 $/Mtok;
+- compte les octets UTF-8 de la requête comme proxy local de taille, pas comme estimation des tokens facturés;
+- refuse au-delà de 2 500 octets ou de son **proxy de coût par octets de 0,000105 $** au tarif consulté le 22 septembre 2026;
 - envoie exactement une requête avec un timeout de 20 secondes;
 - refuse les redirections afin de garder le bearer token lié à l'origine API configurée;
 - ne réessaie jamais automatiquement après 429, 529, timeout ou panne réseau;
 - n'imprime ni n'écrit l'en-tête d'autorisation;
 - valide la réponse et exige le modèle épinglé exact avant le routage;
 - exige une autorité prouvée par le code local de confiance, jamais par la réponse Noul du modèle;
-- consigne date, modèle concret, usage, digest, coût estimé et décision, mais pas la réponse complète du fournisseur.
+- consigne date, modèle concret, usage, digest, proxy avant appel et décision, mais pas la réponse complète du fournisseur.
 
-L'estimation par octets privilégie une borne locale plus sûre plutôt que la précision; elle reste un garde-fou, pas une facture ni une preuve du tokenizer. Le coût observé doit utiliser `usage.input_tokens` et le prix officiel au moment de l'appel.
+Le comptage des octets limite la taille locale de la requête. Ce n'est **pas** une borne démontrée des tokens ni des dollars facturés : le cadrage côté serveur et les contrôles de dépenses du compte sont distincts. Le coût observé doit utiliser `usage.input_tokens` et le prix officiel au moment de l'appel. Un appel payant exige une autorisation séparée.
 
 :::caution[Probe live non exécutée]
 La probe live est **à vérifier**. Aucun appel API n'a été fait pendant la rédaction; aucune latence, réponse, consommation, dépense ni calibration n'est donc mesurée.
@@ -65,7 +65,7 @@ La probe live est **à vérifier**. Aucun appel API n'a été fait pendant la r�
 
 ## Conditions d'arrêt
 
-Arrêtez immédiatement si la clé manque ou apparaît dans une sortie, si le plafond local est dépassé, si le contrat est invalide, si le fournisseur renvoie 401/422/429/529 ou un statut inattendu, si le modèle concret diffère, si la décision pourrait autoriser/fusionner/déployer/publier/supprimer, ou si l'entrée contient un secret ou des données non approuvées.
+Arrêtez immédiatement si la clé manque ou apparaît dans une sortie, si la limite locale d'octets/proxy est dépassée, si le contrat est invalide, si le fournisseur renvoie 401/422/429/529 ou un statut inattendu, si le modèle concret diffère, si la décision pourrait autoriser/fusionner/déployer/publier/supprimer, ou si l'entrée contient un secret ou des données non approuvées. La limite d'un appel ne garantit aucun plafond en dollars.
 
 ## Tableau de preuves à remplir
 

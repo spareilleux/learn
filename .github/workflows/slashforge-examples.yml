@@ -1,0 +1,41 @@
+# SlashForge course: run the pinned slashforge installer into a throwaway home directory and a throwaway repository
+# on three OSes, and compare everything it prints and writes with the outputs pasted in the lessons
+name: SlashForge course examples
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['code/slashforge/**', '.github/workflows/slashforge-examples.yml']
+  pull_request:
+    paths: ['code/slashforge/**', '.github/workflows/slashforge-examples.yml']
+
+permissions:
+  contents: read
+
+env:
+  NODE_VERSION: 24.21.0
+
+jobs:
+  slashforge:
+    name: slashforge (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+        working-directory: code/slashforge
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Toolchain
+        run: node --version && npm --version
+      - name: Install the pinned slashforge
+        run: npm ci
+      - name: Installer outputs and files, compared with expected/
+        run: bash check.sh

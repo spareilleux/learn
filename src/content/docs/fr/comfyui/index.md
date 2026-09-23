@@ -49,6 +49,9 @@ Tu écris du C# ou du Java. Tu connais HTTP, JSON et le code asynchrone. Tu n'as
 | 11 | [Les nœuds personnalisés, et leur sécurité](11-custom-nodes-and-security/) | des paquets NuGet ou Maven qui exécutent du code à l'installation |
 | 12 | [ComfyUI en production : un service, une file d'attente, plusieurs GPU](12-production/) | un worker derrière une file de tâches |
 | 13 | Projet : des textures pour ce site et pour GuitarAlchemist | — |
+| 14 | Laboratoire Guitar Alchemist : des expériences mesurées | une suite de mesures dont les résultats sont consignés |
+| 15 | [Audio : musique, effets sonores et parole](15-audio/) | un tampon d'échantillons et une fréquence d'échantillonnage, comme dans NAudio ou `javax.sound` |
+| — | [Galerie](gallery/) | toutes les images, avec le workflow qui les a faites |
 | — | [Journal](journal/) | |
 
 Les leçons 5 à 13 sont le plan ; elles changeront à mesure que les premières m'apprendront ce qui compte.

@@ -305,6 +305,10 @@ The `tEXt` chunk named `prompt` holds the API-format graph as JSON: open the PNG
 - A checkpoint holds a denoising network, text encoders and a VAE. SDXL base 1.0 is 6.9 GB, under the CreativeML Open RAIL++-M License, and draws what its training data suggests, not always what you asked for.
 - The server has no authentication: keep it on 127.0.0.1.
 
+## Your turn
+
+Get your own machine to the same place, then make it say so. Start the server, queue the lesson's graph with `curl`, and read the three numbers this lesson read: how long the first image took, how long the second took with the models already loaded, and how much memory `nvidia-smi` showed while it sampled. Then change the prompt to something you care about — an object on your desk — and keep the first image you get, however wrong it is. Lesson 2 explains why it is wrong, and the comparison only means something if you have your own before.
+
 ## Exercises
 
 1. Queue the lesson's workflow twice with the same inputs, then once with `"seed": 43`. Compare the three entries of `/history`: which nodes ran each time?

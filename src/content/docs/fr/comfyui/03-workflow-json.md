@@ -154,7 +154,26 @@ Envoyé au serveur, le workflow cassé est refusé avec un HTTP 400 :
         "details": "'12'", "extra_info": {…, "exception_type": "KeyError", "traceback": ["  File \"C:\\Users\\…\\ComfyUI\\execution.py\", line 933, in validate_inputs\n    o_class_type = prompt[o_id]['class_type']\n…"]}}], …}}}
 ```
 
-Le serveur a signalé deux erreurs là où la vérification hors ligne en a trouvé cinq, et la seconde est étrange : elle est rangée sous le nœud 3, mais son `extra_info` nomme l'entrée `samples` et le nœud lié `["3", 0]`, ce qui est l'entrée du nœud 8. Le code l'explique. Le serveur valide en partant de chaque nœud de sortie et en remontant par ses liens. Pour une entrée liée, [`validate_inputs`](https://github.com/Comfy-Org/ComfyUI/blob/ee71d5c4993f29086b27fde1629a945ae48425bf/execution.py#L933) lit `prompt[o_id]['class_type']` avant son bloc `try`, donc le lien du nœud 3 vers le nœud 12 manquant a levé une `KeyError` qui a échappé à la validation du nœud 3. Le nœud 8, `VAEDecode`, l'a attrapée en validant son entrée `samples`, et [l'a enregistrée comme résultat du nœud 3](https://github.com/Comfy-Org/ComfyUI/blob/ee71d5c4993f29086b27fde1629a945ae48425bf/execution.py#L962-L979). Les autres entrées du nœud 3 n'ont jamais été vérifiées, ou seulement certaines d'entre elles : `validate_inputs` parcourt les entrées d'un nœud dans l'ordre d'un ensemble Python ([ligne 896](https://github.com/Comfy-Org/ComfyUI/blob/ee71d5c4993f29086b27fde1629a945ae48425bf/execution.py#L896)), qui change d'un démarrage du serveur à l'autre. La réponse contient aussi une trace d'appels Python avec le chemin d'installation du serveur, ce qui est une raison de plus de ne pas exposer le port. Valider hors ligne d'abord donne une meilleure liste d'erreurs ; c'est quand même la réponse du serveur qui tranche.
+Le serveur a signalé deux erreurs là où la vérification hors ligne en a trouvé cinq, et la seconde est étrange : elle est rangée sous le nœud 3, mais son `extra_info` nomme l'entrée `samples` et le nœud lié `["3", 0]`, ce qui est l'entrée du nœud 8. Le code l'explique. Le serveur valide en partant de chaque nœud de sortie et en remontant par ses liens. Pour une entrée liée, [`validate_inputs`](https://github.com/Comfy-Org/ComfyUI/blob/ee71d5c4993f29086b27fde1629a945ae48425bf/execution.py#L933) lit `prompt[o_id]['class_type']` avant son bloc `try`, donc le lien du nœud 3 vers le nœud 12 manquant a levé une `KeyError` qui a échappé à la validation du nœud 3. Le nœud 8, `VAEDecode`, l'a attrapée en validant son entrée `samples`, et [l'a enregistrée comme résultat du nœud 3](https://github.com/Comfy-Org/ComfyUI/blob/ee71d5c4993f29086b27fde1629a945ae48425bf/execution.py#L962-L979). Les autres entrées du nœud 3 n'ont jamais été vérifiées, ou seulement certaines d'entre elles : `validate_inputs` parcourt les entrées d'un nœud dans l'ordre d'un ensemble Python ([ligne 896](https://github.com/Comfy-Org/ComfyUI/blob/ee71d5c4993f29086b27fde1629a945ae48425bf/execution.py#L896)), qui change d'un démarrage du serveur à l'autre. La réponse contient aussi une trace d'appels Python avec le chemin d'installation du serveur, ce qui est une raison de plus de ne pas exposer le port. Valider hors ligne d'abord donne une meilleure liste d'erreurs ; c'est quand même la réponse du serveur qui tranche. Tous les workflows livrés par ce cours sont validés ainsi à chaque commit, sur les trois systèmes, contre des définitions de nœuds capturées une fois sur un serveur sans modèle : [`data/object_info-course.json`](https://github.com/spareilleux/learn/blob/main/code/comfyui/data/object_info-course.json), 58 classes de nœuds. Cela ne coûte ni GPU ni modèle, et c'est ainsi que les workflows de la leçon 10 ont été vérifiés avant qu'il y ait la mémoire pour les lancer.
+
+### Des entrées avec un point dans le nom
+
+Certains nœuds récents prennent leurs options en arbre. `SaveImageAdvanced` à la leçon 9 et `SaveVideo` à la leçon 10 déclarent une entrée de type `COMFY_DYNAMICCOMBO_V3` : la valeur choisie pour `format` décide quelles autres entrées existent, et le workflow les nomme avec des points.
+
+```json
+{"images": ["1", 0], "format": "png", "format.bit_depth": "16"}
+```
+
+`/object_info` décrit une telle entrée comme une liste d'options, chacune portant ses propres entrées `required` et `optional`, imbriquées aussi profond que le nœud en a besoin : le `format` de `SaveVideo` contient un `codec`, qui contient un `encoding`, qui contient un `crf`. Un validateur qui ne lit que les `required` et `optional` de premier niveau déclare `format.bit_depth` entrée inconnue. C'était le défaut de ce cours lui-même, trouvé en vérifiant les workflows de la leçon 10 avant d'y dépenser une fenêtre GPU. `validate` suit maintenant les options de la valeur choisie par le workflow :
+
+```text
+> comfy validate workflows/03-dynamic-broken.api.json data/object_info-dynamic.json
+error: node 2 (SaveImageAdvanced): no input named format.bit_depth
+error: node 3 (SaveImageAdvanced) input format: "tiff" is not one of the 2 allowed values
+error: node 4 (SaveImageAdvanced) input format.bit_depth: "24" is not one of the 2 allowed values
+```
+
+La première erreur est celle qui compte : le nœud 2 demande `exr`, et `bit_depth` appartient à `png`. Le nom existe sur le nœud, mais pas sous l'option que ce nœud a retenue, donc rien ne le lira. Reste *à vérifier* si le serveur refuse ce prompt ou ignore silencieusement l'entrée en trop ; c'est une erreur dans les deux cas.
 
 ## Les métadonnées des fichiers PNG
 
@@ -206,6 +225,10 @@ Le PNG mis en file d'attente depuis le navigateur montre aussi le widget de cont
 - Relis les changements de workflow sur le format de l'API, avec une comparaison qui porte sur les types de nœuds et les entrées.
 - Valide hors ligne pour obtenir une liste d'erreurs complète ; le serveur s'arrête au premier problème d'un nœud, et peut répondre avec une trace d'appels.
 - Les fichiers PNG contiennent le prompt, et le workflow quand l'image a été mise en file d'attente depuis le navigateur. Hache les pixels, pas les fichiers.
+
+## À toi de jouer
+
+Construis un petit graphe dans le navigateur — un checkpoint, deux invites, un échantillonneur, une sauvegarde — et exporte-le dans les deux formats. Convertis le fichier UI avec le convertisseur du cours et compare le résultat à l'export API du frontend : ils doivent coïncider. Casse-le ensuite exprès, avec un lien vers un nœud qui n'existe plus ou un `steps` à `-1`, et compare ce que liste le validateur hors ligne à ce que répond le serveur quand tu mets le graphe en file.
 
 ## Exercices
 

@@ -9,7 +9,7 @@ Un [`IHostedService`](https://learn.microsoft.com/dotnet/core/extensions/scoped-
 
 ## Prérequis
 
-Suivez d'abord [l'injection de dépendances et les options](13-dependency-injection-options/) ainsi que [les channels](06-channels/). Vous devez déjà comprendre les durées de vie des services, les cancellation tokens et les flux asynchrones.
+Suivez d'abord [l'injection de dépendances et les options](../13-dependency-injection-options/) ainsi que [les channels](../06-channels/). Vous devez déjà comprendre les durées de vie des services, les cancellation tokens et les flux asynchrones.
 
 ## L'hôte possède le cycle de vie
 

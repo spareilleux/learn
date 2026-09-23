@@ -41,6 +41,7 @@ Los agentes de programación producen texto, planes y parches. Nuestros reposito
 | 2 | [Un experimento reproducible y de coste acotado](02-bounded-experiment/) | Ejecutar la base sin conexión y entender la sonda opcional de una llamada |
 | 3 | [Casos de uso en nuestros repositorios](03-repository-use-cases/) | Elegir seams útiles en Gaia, GA, Demerzel, IX y TARS preservando la autoridad |
 | 4 | [Benchmark del coste en tokens](04-token-cost-benchmark/) | Probar la hipótesis de ahorro del 50 % frente a calidad, reintentos y coste desplazado |
+| 5 | [Prueba de estrés del gate de confianza](05-confidence-gate-stress/) | Medir falsos soportes y carga de revisión con una fixture local deliberadamente errónea |
 | — | [Diario](journal/) | Hechos medidos, preguntas abiertas y trabajo en vivo pendiente |
 
 ## Requisitos previos

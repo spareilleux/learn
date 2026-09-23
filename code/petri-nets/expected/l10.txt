@@ -1,0 +1,78 @@
+
+== An order, as a workflow net ==
+net order-sound
+places      in credit stock credit-done stock-done out
+transitions register check-credit check-stock ship cancel
+M0          (1, 0, 0, 0, 0, 0) = in:1
+arc         in -> register
+arc         register -> credit
+arc         register -> stock
+arc         credit -> check-credit
+arc         check-credit -> credit-done
+arc         stock -> check-stock
+arc         check-stock -> stock-done
+arc         credit-done -> ship
+arc         stock-done -> ship
+arc         ship -> out
+arc         credit-done -> cancel
+arc         stock-done -> cancel
+arc         cancel -> out
+
+== What makes it a workflow net ==
+source: in
+sink:   out
+why not: (it is one)
+short-circuited net adds: t-star
+
+== Soundness, condition by condition ==
+net: order-sound
+  reachable markings:  6
+  option to complete:  yes
+  proper completion:   yes
+  no dead transitions: yes
+  sound: yes
+
+== An AND split joined by an XOR: the case ends while a branch is still running ==
+net: order-and-xor
+  reachable markings:  10
+  option to complete:  no
+    the final marking is never reached, from anywhere
+  proper completion:   no
+    finishes with something left: (0, 0, 1, 0, 0, 1); (0, 1, 0, 0, 0, 1); (0, 0, 0, 0, 1, 1); and 2 more
+  no dead transitions: yes
+  sound: no
+
+== An XOR split joined by an AND: the case stops one step short ==
+net: order-xor-and
+  reachable markings:  5
+  option to complete:  no
+    the final marking is never reached, from anywhere
+  proper completion:   yes
+  no dead transitions: no
+    never enabled: ship
+  sound: no
+
+== A rework loop: sound, and able to run for ever without finishing ==
+net: order-rework
+  reachable markings:  4
+  option to complete:  yes
+  proper completion:   yes
+  no dead transitions: yes
+  sound: yes
+a cycle that never approves: review rework
+
+== The same four verdicts through the short circuit ==
+net              sound?  live?  bounded?  live and bounded?  agree?
+order-sound      yes     yes    yes       yes                yes
+order-and-xor    no      no     no        no                 yes
+order-xor-and    no      no     yes       no                 yes
+order-rework     yes     yes    yes       yes                yes
+
+== What the short circuit is doing ==
+order-and-xor-short-circuited: bound unbounded
+  register        L1
+  check-credit    L1
+  check-stock     L1
+  finish-credit   L1
+  finish-stock    L1
+  t-star          L1

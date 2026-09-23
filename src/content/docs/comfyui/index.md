@@ -49,6 +49,9 @@ You write C# or Java. You know HTTP, JSON and asynchronous code. You don't need 
 | 11 | [Custom nodes, and their security](11-custom-nodes-and-security/) | NuGet or Maven packages that run code at install |
 | 12 | [ComfyUI in production: a service, a queue, several GPUs](12-production/) | a worker behind a job queue |
 | 13 | Project: textures for this site and for GuitarAlchemist | — |
+| 14 | Guitar Alchemist lab: measured experiments | a benchmark suite with recorded results |
+| 15 | [Audio: music, sound effects and speech](15-audio/) | a sample buffer and a sample rate, as in NAudio or `javax.sound` |
+| — | [Gallery](gallery/) | every image, with the workflow that made it |
 | — | [Journal](journal/) | |
 
 Lessons 5 to 13 are the plan; they will change as the first ones teach me what matters.

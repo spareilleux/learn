@@ -162,6 +162,10 @@ Ce que la reproductibilité veut dire en pratique :
 - Les étapes, le CFG, le sampler, le scheduler et la graine changent chacun l'image, pas seulement sa qualité ; les samplers ancestraux ajoutent à chaque étape un bruit issu de la graine, tiré sur le GPU.
 - Sur une machine, le même graphe et la même graine ont donné des pixels identiques d'un redémarrage à l'autre, mais une image différente quand les encodeurs de texte s'exécutaient après le chargement de l'UNet, et dans un lot. Note tout l'environnement, et compare les pixels avec une tolérance.
 
+## À toi de jouer
+
+Prends une invite à toi et mesure, au lieu de regarder. Fais un rendu, redémarre le serveur, refais le rendu avec la même graine, et compare les deux PNG avec `compare` de l'outil C# du cours : ce sont les chiffres, pas tes yeux, qui disent si quelque chose a bougé. Refais ensuite la même graine dans un lot de quatre et compare la première image du lot à l'image seule. Note ce que fait ta machine, comme le fait cette leçon — c'est la réponse de ta machine, pas celle d'ici, sur laquelle tu t'appuieras plus tard.
+
 ## Exercices
 
 1. Une image de 1344 × 768 a à peu près le même nombre de pixels qu'une de 1024 × 1024. Quelle est la taille de son latent, et le rapport entre les nombres de valeurs est-il le même ?

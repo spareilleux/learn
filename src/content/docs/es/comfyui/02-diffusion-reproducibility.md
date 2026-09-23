@@ -162,6 +162,10 @@ Qué significa la reproducibilidad en la práctica:
 - Los pasos, el CFG, el sampler, el scheduler y la semilla cambian cada uno la imagen, no solo su calidad; los samplers ancestrales añaden en cada paso ruido derivado de la semilla, generado en la GPU.
 - En una máquina, el mismo grafo y la misma semilla dieron píxeles idénticos tras los reinicios, pero una imagen distinta cuando los codificadores de texto se ejecutaron con la UNet ya cargada, y dentro de un lote. Anota todo el entorno y compara los píxeles con una tolerancia.
 
+## Tu turno
+
+Toma una indicación tuya y mide, en lugar de mirar. Haz un render, reinicia el servidor, repite el render con la misma semilla y compara los dos PNG con `compare`, la herramienta en C# del curso: son los números, no tus ojos, los que dicen si algo se movió. Repite luego la misma semilla dentro de un lote de cuatro y compara la primera imagen del lote con la imagen suelta. Anota lo que hace tu máquina, como hace esta lección: es la respuesta de tu máquina, no la de esta, en la que te apoyarás después.
+
 ## Ejercicios
 
 1. Una imagen de 1344 × 768 tiene más o menos el mismo número de píxeles que una de 1024 × 1024. ¿Qué tamaño tiene su latente, y es igual la proporción de valores?

@@ -117,7 +117,7 @@ Deux observations sur cette image, qui peuvent ne pas valoir pour d'autres :
 
 Un `start_percent` tardif fait l'inverse : le prompt choisit la disposition, et la carte ne fait que la corriger. *À vérifier* : pas rendu pour cette leçon.
 
-## Canny en CI, et trois empreintes différentes
+## Canny en CI, et quatre empreintes différentes
 
 La CI exécute le nœud `Canny` sur le CPU, sur la mire de 64 sur 48 de la leçon 5, avec des seuils de 0,05 et 0,15. La première exécution comparait son empreinte de pixels comme les sorties des autres nœuds, et a échoué sur chaque système. La CI affiche maintenant l'empreinte, et le nombre de pixels plus clairs que 127, à titre d'information :
 
@@ -128,7 +128,25 @@ La CI exécute le nœud `Canny` sur le CPU, sur la mire de 64 sur 48 de la leço
 | CI, `macos-latest` | `4db7c3194e9fe1e2` | 467 sur 3072 |
 | CI, `windows-latest` | `8e3e55838a7c9d46` | 467 sur 3072 |
 
-Le même ComfyUI, le même graphe PyTorch et les mêmes pixels ont donné quatre images différentes. Les trois runners ont trouvé le même nombre de pixels de contour, mais pas aux mêmes endroits. Canny lisse l'image, calcule des gradients, amincit les contours et les garde en comparant des valeurs à des seuils. Un gradient qui tombe juste au-dessus d'un seuil dans un calcul en virgule flottante et juste en dessous dans un autre ajoute ou retire un pixel de contour, et chaque CPU et chaque bibliothèque mathématique arrondit un peu différemment. La leçon 2 a trouvé le même genre de différence dans le bruit de deux périphériques. *À vérifier* : l'étape de la fonction `canny` de Kornia qui diverge n'a pas été retrouvée.
+Le même ComfyUI, le même graphe PyTorch et les mêmes pixels ont donné quatre images différentes. Les trois runners ont trouvé le même nombre de pixels de contour, mais pas aux mêmes endroits. Canny lisse l'image, calcule des gradients, amincit les contours et les garde en comparant des valeurs à des seuils. Un gradient qui tombe juste au-dessus d'un seuil dans un calcul en virgule flottante et juste en dessous dans un autre ajoute ou retire un pixel de contour, et chaque CPU et chaque bibliothèque mathématique arrondit un peu différemment. La leçon 2 a trouvé le même genre de différence dans le bruit de deux périphériques.
+
+### L'étape où ça cesse de coïncider
+
+[`data/canny-steps.py`](https://github.com/spareilleux/learn/blob/main/code/comfyui/data/canny-steps.py) appelle les fonctions de Kornia dans l'ordre où `canny` les applique et affiche une empreinte par étape. Son motif de 64 sur 48 est construit en arithmétique entière, donc l'entrée fait les mêmes octets sur toutes les machines — la première ligne du tableau le montre. `check.sh` l'exécute sur les trois machines de CI à chaque commit ; la première colonne est celle de l'auteur, dont PyTorch est la version CUDA, qui tourne ici sur le CPU.
+
+| Étape | celle de l'auteur, `2.13.0+cu130` | `windows-latest`, `+cpu` | `ubuntu-latest`, `+cpu` | `macos-latest`, `2.13.0` |
+|---|---|---|---|---|
+| entrée | `1907433ac4d80c9f` | `1907433ac4d80c9f` | `1907433ac4d80c9f` | `1907433ac4d80c9f` |
+| flou gaussien | `769c45e000258c56` | `ee71eaac28f8cc27` | `ee71eaac28f8cc27` | `96d1452970dc7b72` |
+| gradient spatial | `b06a49b51ebc7fa1` | `bf069945ff2cd851` | `17564ac6064fd8d8` | `5d47abc9d0ba75f4` |
+| magnitude | `0af967b932bcb57c` | `bda4e821a72c09ed` | `208a0f39607e1ae0` | `bf05d8003b885379` |
+| contours | `08e9b5af22548246` | `08e9b5af22548246` | `08e9b5af22548246` | `08e9b5af22548246` |
+
+La divergence commence dès la première étape en virgule flottante. Le flou sépare déjà la machine de l'auteur des runners, et le runner Apple Silicon des deux x86. Le gradient diffère ensuite sur les quatre, alors que Windows et Linux coïncidaient une étape plus tôt : la même convolution emprunte un chemin différent selon la compilation. Toutes les magnitudes diffèrent, et pourtant leur somme s'affiche 2729.489258 sur les quatre — les différences sont dans les derniers bits. Cette somme est un piège en soi : imprimée à six décimales, elle additionne les écarts et les efface, si bien que qui aurait comparé des sommes aurait conclu que les quatre machines coïncident et se serait arrêté là. Un total n'est pas une empreinte. C'est pourquoi tous les contrôles de ce cours hachent des octets.
+
+La précision est l'autre moitié de l'histoire. La sonde de Hadamard de la [leçon 8](../08-recent-models-quantization/) tourne sur les mêmes trois machines de CI et calcule en float64 : elle affiche les mêmes cinq décimales sur les trois, `0.05674` et `0.00761`, et seule sa borne d'exactitude bouge, entre 1,11e-14 et 1,20e-14. La divergence n'est pas une fatalité — elle dépend de la précision où l'on travaille, et la diffusion travaille en float32 ou plus étroit.
+
+La dernière ligne est la surprise : les contours sont identiques partout, 1 461 pixels sur 3 072, la même empreinte sur les quatre machines. Ce motif n'est fait que d'aplats et de bords francs, donc aucun gradient ne passe assez près d'un seuil pour qu'une différence de dernier bit le fasse basculer. Un rendu n'a pas cette marge, et c'est pourquoi le motif de la leçon 5, passé dans `Canny` à l'intérieur de ComfyUI, donne quatre empreintes. La réponse a donc deux moitiés : la virgule flottante diverge dès la première convolution, sur toutes les machines, toujours ; que cela atteigne la sortie dépend du nombre de pixels que l'image laisse près du seuil.
 
 ## Points clés
 
@@ -137,7 +155,12 @@ Le même ComfyUI, le même graphe PyTorch et les mêmes pixels ont donné quatre
 - Le cœur a `Canny` pour les contours et Lotus pour la profondeur. Les autres cartes demandent un nœud personnalisé ou une image faite ailleurs.
 - `start_percent` et `end_percent` sont des fractions de la plage de bruit, pas des étapes.
 - La disposition se décide dans les premières étapes : un ControlNet actif seulement pendant celles-ci a gardé presque toute la composition.
-- Les filtres d'image sont eux aussi du code en virgule flottante : ne compare pas leur sortie bit à bit d'une machine à l'autre.
+- Les filtres d'image sont eux aussi du code en virgule flottante : ne compare pas leur sortie bit à bit d'une machine à l'autre. La divergence commence à la première convolution ; qu'elle atteigne la sortie dépend de la proximité de l'image au seuil.
+- Un total n'est pas une empreinte : une somme additionne les écarts qu'une empreinte montrerait.
+
+## À toi de jouer
+
+Dessine toi-même une mise en place grossière — trois boîtes et un horizon dans n'importe quel éditeur d'images — et sers-t'en comme image de contrôle. Passe-la au Canny avec deux paires de seuils, puis fais varier `strength` de 0,2 à 1,2 et trouve la valeur où ta mise en place cesse d'être suivie. Termine avec `end_percent` à 0,3 : la composition doit tenir pendant que le détail s'émancipe.
 
 ## Exercices
 

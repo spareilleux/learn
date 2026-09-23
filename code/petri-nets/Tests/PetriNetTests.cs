@@ -579,4 +579,42 @@ public class PnmlTests
         var xml = Pnml.Write(Nets.Handshake()).Replace(Pnml.PtNetType, "http://www.pnml.org/version-2009/grammar/symmetricnet");
         Assert.Throws<NotSupportedException>(() => Pnml.Parse(xml));
     }
+
+    /// <summary>
+    /// Lesson 11. The shape of the P/T net sample of ISO/IEC 15909-2 as ePNK writes it: the name is
+    /// on the page and not on the net, the transition has no name at all, and the marking carries a
+    /// toolspecific block before its text. Reading only the net element threw the name away.
+    /// </summary>
+    [Fact]
+    public void A_name_on_the_page_is_read_when_the_net_has_none()
+    {
+        const string xml = """
+            <pnml xmlns="http://www.pnml.org/version-2009/grammar/pnml">
+              <net type="http://www.pnml.org/version-2009/grammar/ptnet" id="n1">
+                <page id="top-level">
+                  <name><text>An example P/T-net</text></name>
+                  <place id="p1">
+                    <name><graphics><offset y="-10.0"/></graphics><text>ready</text></name>
+                    <initialMarking>
+                      <toolspecific tool="org.pnml.tool" version="1.0"><tokengraphics/></toolspecific>
+                      <text>3</text>
+                    </initialMarking>
+                  </place>
+                  <transition id="t1"><graphics><position x="60.0" y="20.0"/></graphics></transition>
+                  <arc id="a1" source="p1" target="t1">
+                    <inscription><graphics><offset y="5.0"/></graphics><text>2</text></inscription>
+                  </arc>
+                </page>
+              </net>
+            </pnml>
+            """;
+
+        var net = Pnml.Parse(xml);
+
+        Assert.Equal("An example P/T-net", net.Name);
+        Assert.Equal("ready", net.Places[0].Name);
+        Assert.Equal("t1", net.Transitions[0].Name);   // no name element: the id stands in
+        Assert.Equal(3, net.InitialMarking[0]);        // the toolspecific block is not the marking
+        Assert.Equal(2, net.Pre[0, 0]);                // nor is the inscription's graphics the weight
+    }
 }

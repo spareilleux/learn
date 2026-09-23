@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pnml xmlns="http://www.pnml.org/version-2009/grammar/pnml">
+  <net id="n1" type="http://www.pnml.org/version-2009/grammar/ptnet">
+    <name>
+      <text>order-rework</text>
+    </name>
+    <page id="page1">
+      <place id="in">
+        <name>
+          <text>in</text>
+        </name>
+        <initialMarking>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <place id="drafted">
+        <name>
+          <text>drafted</text>
+        </name>
+      </place>
+      <place id="reviewed">
+        <name>
+          <text>reviewed</text>
+        </name>
+      </place>
+      <place id="out">
+        <name>
+          <text>out</text>
+        </name>
+      </place>
+      <transition id="draft">
+        <name>
+          <text>draft</text>
+        </name>
+      </transition>
+      <transition id="review">
+        <name>
+          <text>review</text>
+        </name>
+      </transition>
+      <transition id="rework">
+        <name>
+          <text>rework</text>
+        </name>
+      </transition>
+      <transition id="approve">
+        <name>
+          <text>approve</text>
+        </name>
+      </transition>
+      <arc id="a1" source="in" target="draft" />
+      <arc id="a2" source="draft" target="drafted" />
+      <arc id="a3" source="drafted" target="review" />
+      <arc id="a4" source="review" target="reviewed" />
+      <arc id="a5" source="reviewed" target="rework" />
+      <arc id="a6" source="rework" target="drafted" />
+      <arc id="a7" source="reviewed" target="approve" />
+      <arc id="a8" source="approve" target="out" />
+    </page>
+  </net>
+</pnml>

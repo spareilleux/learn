@@ -89,13 +89,13 @@ Esta red tiene doce marcados alcanzables, nunca se interbloquea, y la plaza `fre
 | 6 | [Clases estructurales: máquinas de estados, grafos marcados, redes de libre elección](06-structural-classes/) | |
 | 7 | [Modelar la concurrencia: exclusión mutua, productor-consumidor, lectores-escritores, filósofos](07-modelling-concurrency/) | `lock`, `SemaphoreSlim`, `Channel<T>`, `synchronized`, `ReentrantLock` |
 | 8 | [Redes coloreadas](08-coloured-nets/) | los genéricos, un mensaje tipado |
-| 9 | Tiempo y probabilidad: redes temporizadas, estocásticas, GSPN *(próximamente)* | los percentiles, un modelo de colas |
-| 10 | Flujos de trabajo: redes de flujo de trabajo, *soundness*, BPMN, *process mining* | BPMN, un motor de flujos de trabajo |
-| 11 | Herramientas e interoperabilidad: PNML, TINA, LoLA, Snoopy, PIPE, CPN Tools, GreatSPN, TAPAAL | un formato de intercambio en XML |
-| 12 | Aplicaciones industriales: talleres flexibles, protocolos, hardware asíncrono, bioquímica, seguridad | |
-| 13 | Frente a otros formalismos: statecharts, álgebras de procesos, autómatas temporizados, TLA+ | TLA+, el model checking |
+| 9 | [Tiempo y probabilidad: redes temporizadas, estocásticas, GSPN](09-time-and-probability/) | los percentiles, un modelo de colas |
+| 10 | [Flujos de trabajo: redes de flujo de trabajo, *soundness*, BPMN, *process mining*](10-workflows/) | BPMN, un motor de flujos de trabajo |
+| 11 | [Herramientas e interoperabilidad: PNML, TINA, LoLA, Snoopy, PIPE, CPN Tools, GreatSPN, TAPAAL](11-tools-and-interoperability/) | un formato de intercambio en XML |
+| 12 | [Aplicaciones industriales: talleres flexibles, protocolos, hardware, bioquímica, seguridad](12-industrial-applications/) | un banco de pruebas público, un espacio de estados |
+| 13 | [Frente a otros formalismos: TLA+, statecharts, álgebras de procesos, autómatas temporizados](13-against-other-formalisms/) | un segundo espacio de estados, calculado en otra parte |
 | 14 | [En nuestros sistemas: pipelines C# y lanes de agentes](14-on-our-systems/) | [C# avanzado](../csharp-advanced/); RabbitMQ y Kubernetes son experimentos posteriores |
-| 15 | Límites y qué viene después: indecidibilidad, desplegados, reducción de orden parcial, extensiones | |
+| 15 | [Límites y qué viene después: indecidibilidad, desplegados, reducción de orden parcial, extensiones](15-limits-and-what-comes-next/) | una respuesta falsa de un algoritmo correcto |
 
 [Diario](journal/): lo que intenté, lo que me sorprendió, lo que me queda por verificar.
 

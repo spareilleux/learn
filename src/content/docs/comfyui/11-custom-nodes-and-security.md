@@ -356,6 +356,10 @@ Its next step is a real render. The fretboard map goes into lesson 6's ControlNe
 - Prefer `.safetensors`; any `torch.load` without `weights_only=True`, or on PyTorch before 2.6, can run code.
 - Limit the damage: loopback only, one environment, a user without rights, a container, no outbound traffic, a whitelist of packs, and a read diff before each update.
 
+## Your turn
+
+Take a pack you actually want to install and audit it before it goes anywhere near your ComfyUI. Run the course's script on a clone, then read, with your own eyes, the three files it points at first: `__init__.py`, anything named `install`, and whatever the `WEB_DIRECTORY` serves. Write down what the pack does at import time, what it downloads and where from. If you cannot answer those three questions after reading, that is an answer too.
+
 ## Exercises
 
 1. Write a fourth GA node, `GAVoicingNotes`, that takes a voicing and returns a `STRING` with the note names from the low E, like `C3 E3 G3 C4 E4` for `x32010`. Write its test first.

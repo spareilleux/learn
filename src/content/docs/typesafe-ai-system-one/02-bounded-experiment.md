@@ -1,6 +1,6 @@
 ---
 title: "2. A reproducible, cost-bounded experiment"
-description: Run the deterministic fixture first, inspect the contract and routing tests, then prepare one optional live Jev call with a hard local budget, explicit stop conditions and an evidence record.
+description: Run the deterministic fixture first, inspect the contract and routing tests, then prepare one optional live Jev call with a local request-size guard, explicit stop conditions and an evidence record.
 sidebar:
   order: 2
 ---
@@ -56,17 +56,17 @@ The script:
 
 - refuses before network access if the environment variable is absent;
 - builds one request for the pinned `jev-1.13.0` model;
-- uses the UTF-8 byte count as a deliberately loose local token upper estimate;
-- refuses if that estimate exceeds 2,500 tokens or **$0.000105** at the official $0.042/Mtok input price;
+- counts UTF-8 request bytes as a local size proxy, not a billed-token estimate;
+- refuses if the payload exceeds 2,500 bytes or its **$0.000105 byte-based cost proxy** at the rate reviewed on 2026-09-22;
 - sends exactly one request with a 20-second timeout;
 - refuses redirects so the bearer token stays bound to the configured API origin;
 - performs no automatic retry on 429, 529, timeout or network failure;
 - never prints or writes the authorization header;
 - validates the response and requires the exact pinned model before routing it;
 - requires authority from trusted local code rather than from the model's Noul answer;
-- records time, concrete model ID, provider usage, request digest, estimated pre-call cost and decision, but not the full provider response.
+- records time, concrete model ID, provider usage, request digest, byte-based pre-call proxy and decision, but not the full provider response.
 
-The byte-count estimate deliberately sacrifices precision for a safer local bound; it is still a guardrail, not the provider's invoice or a tokenizer proof. The response's `usage.input_tokens` is the quantity to multiply by the then-current official input price.
+The byte count limits local request size. It is **not** a proven upper bound on billed tokens or dollars: server-side framing and account billing controls are separate. The response's `usage.input_tokens` is the quantity to multiply by the then-current official input price. Obtain separate approval before a paid call.
 
 :::caution[Live probe not run]
 The live probe is **to verify**. No API request was made while writing this course. There is no measured latency, token count, answer, cost or calibration result to report yet.
@@ -77,11 +77,11 @@ The live probe is **to verify**. No API request was made while writing this cour
 Stop the experiment immediately when any condition is true:
 
 - the key is absent or appears in output;
-- the local estimated ceiling is exceeded;
+- the local byte/proxy limit is exceeded;
 - the response does not match the closed contract;
 - the provider returns 401, 422, 429, 529, a timeout, or any unexpected status;
 - the concrete model differs from the pinned version;
-- the decision would authorize, merge, deploy, publish, delete or spend beyond the one-call ceiling;
+- the decision would authorize, merge, deploy, publish or delete; the one-call limit does not guarantee a dollar ceiling;
 - the input contains a secret, personal data, proprietary content without approval, or more repository context than the question needs.
 
 ## Evidence table to fill after the live run

@@ -19,6 +19,37 @@ sidebar:
 - [x] Go further: `WslcImage`, API networking, Kubernetes, extensions, GUI
 - [x] Lot 2: lessons 6 to 10 written from the entries below, lessons 1 to 5 extended
 
+## QA
+
+`wslc`, its C# SDK and Docker Desktop are all somebody else's software, and `wslc` is new enough that most of what follows is about the tool rather than about containers. Two rows are documentation that does not match the build shipped. None of it has been reported upstream.
+
+| Expected | What happens | Where | Measure | Status |
+|---|---|---|---|---|
+| Microsoft Learn's `Microsoft.WSL.Containers` snippet compiles against the package | Five compiler errors: `ComponentFlags`, `SessionSettings.MemoryMB`, `ProcessSettings.CmdLine` and `DeleteContainerFlags` do not exist. The package calls them `IReadOnlyList<Component>`, `MemorySizeInMB`, `CommandLine` and `DeleteContainerOption` | `Microsoft.WSL.Containers` 2.9.9 | Five name pairs, documentation against package | Reproduced, not reported [2026-09-13](#2026-09-13--a-c-program-with-microsoftwslcontainers) |
+| The package's target framework matches the SDK it was built against | `wslcsdkcs.dll` was built against `Microsoft.Windows.SDK.NET` 10.0.26100.79, which is not on nuget.org at all — the nearest is 10.0.26100.80 — so referencing it gives CS1705 | `Microsoft.WSL.Containers` 2.9.9 | CS1705, and an SDK version that cannot be restored | Reproduced, worked around by pinning `WindowsSdkPackageVersion` [2026-09-13](#2026-09-13--a-c-program-with-microsoftwslcontainers) |
+| A container is cleaned up when `Start()` throws | It survives in `storage.vhdx`, and the next `Start()` with the same name fails | `Microsoft.WSL.Containers` 2.9.9 | `COMException`, "name already in use" | Reproduced, worked around with `Delete(Force)` in a `finally` and a cleanup at startup [2026-09-13](#2026-09-13--a-c-program-with-microsoftwslcontainers) |
+| A container created through the API has network access, as `wslc run` gives it | With `ContainerSettings.NetworkingMode` unset it gets `NetworkMode: none` and no internet; it needs an explicit `Bridged` | `Microsoft.WSL.Containers`, 2.9.11 | `ip -4 addr` and `wget` before and after | Reproduced, defensible default, undocumented [2026-09-13](#2026-09-13--going-further-wslcimage-networking-kubernetes-gui) |
+| `wslc` has a Compose subcommand, as `docker compose` does | `Unrecognized command: 'compose'` — there is none in 2.9.11 | `wslc` 2.9.11 | `wslc --help` | Reproduced; the course writes its own runner instead [2026-09-13](#2026-09-13--compose-with-wslc) |
+| `wslc image prune -f` forces, as `docker`'s `-f` does | `-f` means `--filter`, and `--force` does not exist | `wslc` 2.9.11 CLI | A flag that reads like `--force` and takes a filter | Reproduced, a trap the lesson keeps [2026-09-13](#2026-09-13--remaining-open-questions) |
+| A bind mount's source is read as a path inside the container | It is parsed as a Windows path, so `-v /var/run/docker.sock:/var/run/docker.sock` silently creates a real empty folder `C:\var\run\docker.sock\` | `wslc` 2.9.11 | A directory created on the host, no error | Reproduced, not reported [2026-09-13](#2026-09-13--compose-with-wslc) |
+| Removing images and terminating a session give disk space back | `storage.vhdx` only grows | `%LocalAppData%\wslc\sessions\<session>\storage.vhdx` | 814 → 1070 → 1550 MB across a pull, a remove, a prune, a terminate and a re-pull | Reproduced; `Optimize-VHD -Mode Full` reclaims part of it, 3995 → 2789 MB in 10 s [2026-09-13](#2026-09-13--remaining-open-questions) |
+| Two engines publishing the same host port conflict, or at least warn | `wslc` and Docker Desktop both bind 8080 in silence, and which one you reach depends on the name you use | Windows networking, `wslc` 2.9.11 against Docker Desktop 4.61 | `127.0.0.1` always reached `wslc` and `localhost` always Docker, in all four start-order and explicit-address variants | Reproduced, no error in any variant [2026-09-13](#2026-09-13--remaining-open-questions) |
+| `ContainerSettings.Privileged = true` gives a privileged container, as `docker run --privileged` does | It changes nothing: capabilities, cgroups and `mount` come back identical to `Privileged = false`, in an administrator session too. `wslcsdk.h` declares `WSLC_CONTAINER_FLAG_PRIVILEGED = 0x4`, which is not applied | `wslc` 2.9.11 and its SDK | `CapEff` masks and cgroup mount tables, before and after; k3s still dies with `failed to evacuate root cgroup: read-only file system` | Reproduced, not reported. There is no Kubernetes on `wslc` because of it [2026-09-13](#2026-09-13--going-further-wslcimage-networking-kubernetes-gui) |
+
+## Experiments
+
+Seven questions the course measured rather than assumed. Where the hypothesis was a line of documentation — `settings.yaml`'s own comments, for instance — the row quotes it, because that is what was being tested.
+
+| Question | Hypothesis | Result | Verdict | Where |
+|---|---|---|---|---|
+| Do `cpuCount` and `memorySize` in `settings.yaml` change what a container sees? | The file's own comments say so: "Number of virtual CPUs allocated to the session… default: all" and "Memory limit… default: half of available memory" | Defaults gave 24 CPUs and 31,946 MB. `cpuCount: 4, memorySize: 4GB` gave `nproc` 4, 3919 MB of RAM and 4096 MB of swap | Confirmed | [2026-09-13](#2026-09-13--limiting-the-cpu-and-memory-of-a-wslc-session) |
+| Does editing `settings.yaml` reach a session that is already running? | Implicit: a saved setting takes effect | The first measurement after the edit still showed 24 CPUs; the session has to be terminated first | Refuted | [2026-09-13](#2026-09-13--limiting-the-cpu-and-memory-of-a-wslc-session) |
+| When is an idle session's VM torn down? | At the configured `idleTimeout` of 30 s | Running at 0 s, gone at 35 s, polling every 5 s: between 30 and 35 s | Confirmed | [2026-09-13](#2026-09-13--limiting-the-cpu-and-memory-of-a-wslc-session) |
+| Is `memorySize` a reservation or a ceiling, and is memory given back when a container stops? | Not written as a prediction; the table was the point | Idle VM about 921 MB. Holding 6 GB: 7069 MB. Ten seconds after stopping and removing: 2776 MB. Later: 902 MB | A ceiling, not a reservation, and released gradually rather than at once | [2026-09-13](#2026-09-13--limiting-the-cpu-and-memory-of-a-wslc-session) |
+| Can `Optimize-VHD` reclaim what `storage.vhdx` will not give back? | Not written as a prediction | 3995 MB to 2789 MB in 10 s — still above the 1.9 GB actually used inside | Partly: it reclaims some, not all | [2026-09-13](#2026-09-13--remaining-open-questions) |
+| Can `wslc` and Docker Desktop both publish port 8080, and which client reaches which? | Not written as a prediction: the question was whether it would even be allowed | No error in any of four variants. `127.0.0.1` reached `wslc` every time, `localhost` reached Docker every time | Confirmed, and worth knowing | [2026-09-13](#2026-09-13--remaining-open-questions) |
+| Do the per-container `--memory` and `--cpus` flags constrain the container or the VM? | Written in advance: they should show up in the container's own view | `memory.max=536870912` and `cpu.max=150000 100000` match the flags exactly, but `nproc` still says 8 and `free -m` still says 15,996 MB | Confirmed in the cgroup, refuted in what the container sees | [2026-09-16](#2026-09-16--lot-2-five-new-lessons) |
+
 ## 2026-09-12 — Taking stock
 
 - Machine: Windows 11 Pro build 26200, WSL **2.6.3**.

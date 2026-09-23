@@ -8,7 +8,7 @@ sidebar:
 ## Progress
 
 - [x] Course code: scripts, F# Interactive sessions, rejected snippets, exercise solutions and three small projects, compared with their expected output by `check.sh`
-- [ ] CI on Linux, Windows and macOS: the workflow is written but not pushed yet (see below)
+- [ ] CI on Linux, Windows and macOS: pushed, green on 2026-09-16, red since 2026-09-20 on three expected files (see 2026-09-22)
 - [x] Lesson 1: scripts, F# Interactive and projects
 - [x] Lesson 2: values, functions and type inference
 - [x] Lesson 3: tuples, records, unions and options
@@ -18,6 +18,28 @@ sidebar:
 - [x] Lesson 7: errors with `Result`
 - [x] Lesson 8: computation expressions applied to a DSL parser
 - [x] Lesson 14: CSV and JSON type providers with FSharp.Data 8.2.0
+
+## QA
+
+The .NET 10 SDK (10.0.112), F# 10 and `dotnet fsi` 14.0.112.0; TARS at `87464ce` and GuitarAlchemist/ga at `32f143c` for the practical cases. The first row is the course's own: it is why the CI has been red since 2026-09-20. Nothing here has been reported upstream. The existing Experiments table below is unchanged.
+
+| Expected | What happens | Where | Measure | Status |
+|---|---|---|---|---|
+| The expected outputs committed with lessons 5-8 are what the examples print | Three of them end with one blank line more than the examples print, so the CI fails on the three OSes | `code/fsharp/expected/l05_collections.txt`, `l06_modules.txt`, `l07_result.txt`, commit `69a02c4` | `FAIL l05_collections`, `FAIL l06_modules`, `FAIL l07_result` on each OS in [run 35528402823](https://github.com/spareilleux/learn/actions/runs/35528402823); the files end in `exit 0` followed by two newlines | Reproduced; diagnosed, not fixed yet [2026-09-22](#2026-09-22--ci-on-three-oses) |
+| A script runs top to bottom, so a `printfn` above a later error prints | The whole script is type-checked first, so nothing prints | `l01_format_type.fsx`, `dotnet fsi` 14.0.112.0, F# 10.0 | The `printfn` above the error prints nothing | By design [2026-09-15](#2026-09-15--the-sdk-and-f-interactive) |
+| A compiler reports every independent error of a file in one pass | F# Interactive reports one error per run | F# Interactive 14.0.112.0, lesson 2's exercise 3 | Three independent mistakes take four runs to clear | Reproduced; whether `dotnet build` batches them is still *to verify* [2026-09-15](#2026-09-15--the-sdk-and-f-interactive) |
+| `dotnet fsi` and `dotnet build` report a diagnostic the same way | `fsi` prints the bare file name; `dotnet build` prints the full path, appends ` [project.fsproj]`, prints each error twice, and leaves trailing spaces in FS0001's text | SDK 10.0.112 | The same error, two shapes | Reproduced; `check.sh` strips the path, the suffix, the duplicates and the trailing spaces [2026-09-15](#2026-09-15--the-sdk-and-f-interactive) |
+| An equality used as a statement warns wherever it appears | `strings = 7` raises FS0020 inside a function and nothing at the top level of a script | `dotnet fsi`, SDK 10.0.112 | FS0020 inside a function; no warning at the top level | Reproduced, not reported [2026-09-15](#2026-09-15--the-sdk-and-f-interactive) |
+| A tab is whitespace, so tab-indented code compiles | The compiler rejects it | F# Interactive, SDK 10.0.112 | `error FS1161: TABs are not allowed in F# code unless the #indent "off" option is used` | By design [2026-09-15](#2026-09-15--the-sdk-and-f-interactive) |
+| A C# `switch` with one arm per `sealed` subclass of an `abstract record` is exhaustive | Roslyn still warns; the program compiles and runs | `hierarchy.cs(3,42)`, SDK 10.0.112 | `warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive).` | By design: C# has no closed hierarchies, which is what the comparison shows [2026-09-15](#2026-09-15--c-comparisons) |
+| A C# `switch` over the three named values of an `enum` is exhaustive | Roslyn warns about an unnamed value outside the declared set | `enumswitch.cs(3,41)`, SDK 10.0.112 | `warning CS8524: … For example, the pattern '(Accidental)3' is not covered.` | By design [2026-09-15](#2026-09-15--c-comparisons) |
+| `.fs` files in the active source tree are compiled by some project | Nine `.fs` files in `v2/src` are in no `.fsproj`, and one project is missing from the solution, so the CI never builds it | GuitarAlchemist/tars at `87464ce`, `v2/src`; `Tars.LSP.fsproj` absent from `v2/Tars.sln` | `Fibonacci.fs`, `LintRunner.fs`, `OllamaClient.fs`, `ToolFactory.fs` and five more; two of them 95 and 3 bytes long | Reproduced; used in lesson 1 [2026-09-15](#2026-09-15--dogfooding-tars) |
+| The README's "License: MIT" badge links to a `LICENSE` file | There is no `LICENSE` file at this commit | GuitarAlchemist/tars at `87464ce`, the README's link to `./LICENSE` | A broken link | Reproduced, not reported [2026-09-15](#2026-09-15--dogfooding-tars) |
+| A bare `Error` in F# means `Result.Error` | Two unions declared without `[<RequireQualifiedAccess>]` shadow it, so every later file must qualify it | [`Domain.fs`, lines 62-78](https://github.com/GuitarAlchemist/tars/blob/87464ce583c42cd11c3d76836e05842377455b24/v2/src/Tars.Core/Domain.fs#L62-L78) | 342 occurrences of `Result.Error` in `v2/src`; `ArcTypes.fs` goes as far as `FSharp.Core.Result.Error` | Reproduced in `compile_fail/l03_case_shadowing.fsx` and shown in lesson 3; a fix upstream would be a breaking change [2026-09-15](#2026-09-15--dogfooding-tars) |
+| A text normalizer keeps the meaningful characters of its input | Its `[^a-z0-9\s]` pattern strips `#` and every accented letter, and no test covers either | [`TextNormalizer.fs`, lines 51-58](https://github.com/GuitarAlchemist/tars/blob/87464ce583c42cd11c3d76836e05842377455b24/v2/src/Tars.Core/TextNormalizer.fs#L51-L58) | `"learn F#"` gives the keywords `learn` and `f`; `café` gives `caf` | Reproduced; shown in lesson 2 [2026-09-15](#2026-09-15--dogfooding-tars) |
+| A type documented as thread-safe reads its mutable state under its lock | `Remaining` takes the lock; the `Consumed` property returns the `mutable consumed` field without it | [`Budget.fs`, lines 133-150](https://github.com/GuitarAlchemist/tars/blob/87464ce583c42cd11c3d76836e05842377455b24/v2/src/Tars.Core/Budget.fs#L133-L150), `BudgetGovernor` | Read in the code | Not reproduced: this row is a code reading. Held for lesson 16 [2026-09-15](#2026-09-15--dogfooding-tars) |
+| A parser that returns `Ok` consumed its whole input | `pChord` is not followed by `eof`, so it stops at the first character it does not know and returns `Ok` for the prefix | GuitarAlchemist/ga at `32f143c`, `ChordParser.parse`, inherited by `ChordDslService` and the chatbot's `ResponseValidator` | `C7sus4` parses as `C7`; `Am(maj7)` as `Am` | Reproduced in `examples/l04_ga_parse.fsx` and shown in lesson 4; a fix is proposed there, not submitted [2026-09-15](#2026-09-15--dogfooding-guitar-alchemist) |
+| Normal form does not depend on transposition | `List.minBy fst` keeps the first rotation of equal span instead of comparing the inner intervals, so the answer moves with the transposition | GuitarAlchemist/ga at `32f143c`, `HarmonicTransformationService.GetNormalForm` | `{0, 4, 7, 8}` gives `[0; 4; 7; 8]`; the same set transposed by 8 gives `[0; 3; 4; 8]` | Reproduced in `examples/l02_ga_transformations.fsx`; no caller found, and no test covers it [2026-09-15](#2026-09-15--dogfooding-guitar-alchemist) |
 
 ## Experiments
 
@@ -96,9 +118,15 @@ Both programs still ran and printed their result.
 - Added lesson 14 with FSharp.Data 8.2.0, pinned from NuGet. The CSV and JSON samples are local strings, so type checking does not depend on a remote schema.
 - `dotnet fsi` produced the outputs stored in `expected/l08_parser_ce.txt` and `expected/l14_type_providers.txt` on .NET SDK 10.0.112.
 
+## 2026-09-22 — CI on three OSes
+
+- The 2026-09-15 entry says the workflow isn't pushed. It was pushed afterwards: [run 35097250880](https://github.com/spareilleux/learn/actions/runs/35097250880), on 2026-09-16, passed on `ubuntu-latest`, `windows-latest` and `macos-latest`.
+- [Run 35528402823](https://github.com/spareilleux/learn/actions/runs/35528402823), on 2026-09-20, the first after lessons 5 to 8 and 14, failed on all three. Most of its log is `ok` lines, which made it look like a failure with no failing check. It has one: `FAIL l05_collections`, `FAIL l06_modules` and `FAIL l07_result`, once per OS, each followed by a `diff` that removes one empty line at the end. The three expected files end with `exit 0` and two newlines; the other expected files end with one. `check.sh` sets `status=1` on a mismatch and carries on, so every later check still prints `ok` and the script exits with 1 at the end. The diagnosis is auggie's, checked against the log and the files; how the extra lines got into the commit is not known.
+- The fix is to remove one trailing newline from each of the three files. It is not applied yet.
+- The same run settles two *to verify* notes: `l04_ga_parse`, with `EbΔ9` and FParsec's `‘…’`, prints `ok` on the Windows runner, and every lesson prints the same output on Linux, macOS and Windows apart from those three files.
+
 ## To verify
 
-- The whole course on Linux and macOS, and on the Windows runner, once the workflow is pushed.
 - The build output folders of lesson 1 on Linux and macOS (`Hello` executable, resource folders).
 - <kbd>Alt</kbd>+<kbd>Enter</kbd> to send code to F# Interactive in VS Code with Ionide, Rider and Visual Studio.
 - Whether `dotnet build` reports several independent errors of one file in a single run, where F# Interactive reported one.

@@ -25,6 +25,7 @@ sidebar:
 | Does batching 12 questions over one shared state cut input tokens without changing any answer? | The offline plan predicted 79% fewer payload bytes; if tokens follow bytes the saving clears 50%, with quality untested | 2487 input tokens against 14939, 83.4% less, and the identical choice on all 12 cases: accuracy 0.9167 both ways, zero false supports, Brier 0.1657 against 0.1645, 453 ms against 4451 ms | confirmed for this corpus at n=12, one run | [2026-09-23 entry](#2026-09-23--the-live-benchmark-measures-something-other-than-its-question), [TypeSafe benchmark](../../typesafe-ai-system-one/04-token-cost-benchmark/) |
 | Do the gates named "requires evidence" and "confirmed verdict" refuse a fabricated candidate? | They check evidence, so an entry with empty evidence fields and an artifact that does not exist is refused | Refused nothing: the entry reached `adopted`/`confirmed` with zero errors. The gates checked that keys were present, never that they said anything | refuted, then fixed | [2026-09-23 entry](#2026-09-23--an-adversarial-review-breaks-the-gates-of-the-lab), [`dogfood.py`](https://github.com/spareilleux/learn/blob/main/code/repository-dogfooding-lab/dogfood.py) |
 | Does a Petri net find concurrency defects in a repository that its own test suite misses? | Searching a reachability graph for dead markings finds at least one real defect from a read-only reading | Three found in GA at `a826864`, each confirmed line by line before filing, and one claim withdrawn before filing; reported as [ga#700](https://github.com/GuitarAlchemist/ga/issues/700), [#701](https://github.com/GuitarAlchemist/ga/issues/701), [#702](https://github.com/GuitarAlchemist/ga/issues/702) | promising — no maintainer has triaged them yet | [`petri-nets`](../../petri-nets/), [2026-09-23 entry](#2026-09-23--an-adversarial-review-breaks-the-gates-of-the-lab) |
+| Can an offline Petri oracle expose a false Jev-advice-to-authority step? | Unsafe advice-only flow reaches an effect; a guarded flow needs independently verified evidence and an implementation grant | Synthetic 0.98 wrong support; 3/3 focused C# tests and 1/1 fixture-parity test pass; no real-repository replay | promising locally, not integrated | [dated entry](#jev-petri-2026-09-22), [lesson](../05-jev-petri-authority/), [`JevEvidenceGateTests.cs`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/Tests/JevEvidenceGateTests.cs) |
 
 ## 2026-09-20 — First opportunity-matrix tracer
 
@@ -39,6 +40,14 @@ python -m unittest -v
 ```
 
 Measured result: `validated=4 matrices=current mirrors=current`; 6/6 tests passed in 0.002 s. Tests reject promoted candidates without artifacts and adoption without a confirmed verdict, and check EN/FR/ES file parity plus journal structure. No external network or repository mutation occurred.
+
+<a id="jev-petri-2026-09-22"></a>
+
+## 2026-09-22 — Synthetic Jev × Petri authority boundary
+
+Predeclared hypothesis: if a high-confidence Jev classification is wired directly to an effect, a deliberately wrong `supported` result can authorize work; requiring separate verified-evidence and implementation-authority tokens blocks that path. Baseline: the pinned `gaia_design_authority` synthetic case returns wrong `supported` at 0.98 against expected `contradicted`.
+
+The Python parity test binds the shared JSON fixture to the synthetic response. The C# Petri test replays `classify → authorize_from_advisory` in the unsafe net, then exhaustively checks the guarded net under all three combinations where at least one independent token is absent. A separate valid path remains fireable when both tokens exist. Local result: 3/3 focused C# tests and 1/1 fixture-parity test passed; `dogfood.py check` reported `validated=5 matrices=current mirrors=current` after regeneration. No provider call, paid token, production effect or exact-revision Gaia/IX replay. Verdict: promising as a specification experiment, not eligible for incubation yet.
 
 ## 2026-09-23 — An adversarial review breaks the gates of the lab
 
@@ -94,6 +103,7 @@ The full run, every request hash and every response, is committed at `code/types
 - Read the five `ga.*` TARS rule bodies, not only their weights, before claiming the two encodings agree or disagree.
 - Have the maintainer triage ga#700, #701 and #702; the automated agent failed on all five issues, so none has been judged.
 - Run the fixed downstream A/B before any claim that Jev cuts downstream cost. The live calibration called no downstream model, and n=12 on one corpus in one run supports no general figure.
+- Map the guarded net to an exact-revision public Gaia or IX seam and replay the unsafe witness; compare with one simpler deterministic guard test.
 - Select one exact hexagonal seam from current repository evidence or reject that opportunity.
 
 ## Open questions

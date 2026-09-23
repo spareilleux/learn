@@ -160,6 +160,10 @@ Training learns A and B from example images while the checkpoint stays frozen. T
 - Few-step LoRAs come with their own sampler, scheduler and CFG; take them from the card, and translate diffusers' guidance 0 to ComfyUI's CFG 1.
 - Stacked LoRAs add up, whatever their order.
 
+## Your turn
+
+Take a LoRA you downloaded and read its header before using it, with the course's `safetensors` reader: its rank and alpha from the tensors, then from the metadata, and see whether they agree. Load it at three strengths on the base model it was trained for, then deliberately on another one, and find in the log the line that says how many patches were attached — that number is the difference between a LoRA that works and one that silently does nothing.
+
 ## Exercises
 
 1. A LoRA's header shows a layer with `lora_down.weight` of shape 16 by 640, `lora_up.weight` of shape 640 by 16, and `alpha` 8. With `strength_model` 0.75, what multiplies B·A?
