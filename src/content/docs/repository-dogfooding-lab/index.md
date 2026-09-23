@@ -7,7 +7,7 @@ sidebar:
 ---
 
 :::caution[Current evidence]
-The first tracer bullet is local and offline: a JSON registry with four real opportunities, a deterministic renderer, five generated matrices and five invariant tests. No repository integration, Jev saving, architecture improvement or RabbitMQ benefit is claimed yet. Those candidates remain `discovered` or `experimenting` until their own gates pass.
+The tracer bullets are local and offline: a JSON registry with five opportunities, five generated matrices, and a synthetic Jev × Petri authority-boundary test. No production repository integration, live Jev saving, architecture improvement or RabbitMQ benefit is claimed yet. Those candidates remain `discovered` or `experimenting` until their own gates pass.
 :::
 
 ## Mission
@@ -44,6 +44,7 @@ A finished course is not success. Success is a retained result: adoption with ev
 | 2 | [Experiment and artifact chain](02-experiment-artifact-chain/) | Produce replayable evidence from hypothesis to verdict |
 | 3 | [Dogfood the course method](03-course-method-dogfood/) | Improve examples, journals, locale parity and adoption feedback |
 | 4 | [Incubate, integrate, reject](04-incubate-integrate-reject/) | Promote only measured, reversible candidates |
+| 5 | [Jev × Petri authority boundary](05-jev-petri-authority/) | Show why high-confidence advice cannot grant an effect |
 | — | [Journal](journal/) | Detailed experiments, rejected ideas and next gates |
 
 ## Run the lab

@@ -8,6 +8,7 @@
 |---|---|---|---|
 | Evidence-first multilingual course pipeline | `repository-dogfooding-lab` | both | learn |
 | Jev typed decision gate | `typesafe-ai-system-one` | agentic-ai | ga, gaia, Demerzel |
+| Jev advisory evidence plus Petri authority boundary | `repository-dogfooding-lab` | both | gaia, ix |
 | Hexagonal architecture seam audit | `hexagonal-architecture` | classical-se | ga, gaia, Demerzel |
 | RabbitMQ quorum, retry and dead-letter boundary | `rabbitmq` | classical-se | gaia, Demerzel |
 
@@ -19,6 +20,7 @@ The score orders investigation only. It never authorizes incubation or integrati
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
 | Evidence-first multilingual course pipeline | 3 | 5 | 4 | 3 | 5 | 2 | 1 | 17 |
 | Jev typed decision gate | 4 | 4 | 5 | 2 | 5 | 1 | 3 | 16 |
+| Jev advisory evidence plus Petri authority boundary | 4 | 4 | 4 | 2 | 5 | 1 | 3 | 15 |
 | Hexagonal architecture seam audit | 2 | 4 | 3 | 1 | 4 | 3 | 2 | 9 |
 | RabbitMQ quorum, retry and dead-letter boundary | 2 | 2 | 3 | 1 | 3 | 4 | 3 | 4 |
 
@@ -28,6 +30,7 @@ The score orders investigation only. It never authorizes incubation or integrati
 |---|---|---|---|---|
 | Evidence-first multilingual course pipeline | experimenting | promising | Use this course to validate its own registry, generated matrices and locale parity in CI. | Course author records evidence; reviewer accepts or rejects publication claims. |
 | Jev typed decision gate | experimenting | inconclusive | Run the bounded 13-call calibration, then a fixed downstream A/B only if quality passes. | Human approves live spend and any integration; model output never grants effects. |
+| Jev advisory evidence plus Petri authority boundary | experimenting | promising | Pin one Gaia or IX transition at an exact revision, map its real guards to places, replay a counterexample against the public seam, and obtain independent review before incubation. | Repository owner reviews the exact seam and replay; Jev never grants effects and this local model grants no production authority. |
 | Hexagonal architecture seam audit | discovered | inconclusive | Choose one exact dependency boundary and capture a before metric; otherwise reject the candidate. | Repository maintainer selects the seam after reviewing evidence. |
 | RabbitMQ quorum, retry and dead-letter boundary | discovered | inconclusive | Identify one failure mode that existing artifact reconciliation cannot solve economically. | Architecture owner approves any infrastructure addition. |
 
@@ -36,7 +39,8 @@ The score orders investigation only. It never authorizes incubation or integrati
 | Opportunity | Result | Evidence artifacts | Revisit |
 |---|---|---|---|
 | Evidence-first multilingual course pipeline | Registry, renderer and invariant tests implemented as the first tracer bullet. | `opportunities.json`, `dogfood.py`, `test_dogfood.py`, `matrices.md` | 2026-09-27 |
-| Jev typed decision gate | Offline plan: 12 cases, 13 calls, zero retries, $0.0021 hard ceiling. No live Jev result yet. | `../typesafe-ai-system-one/benchmark-corpus.json`, `../typesafe-ai-system-one/jev_benchmark.py` | 2026-09-27 |
+| Jev typed decision gate | Offline plan: 12 cases, 13 calls, zero retries, $0.0021 local byte-proxy ceiling only; provider-billed cost is unknown until usage is returned. No live Jev result yet. | `../typesafe-ai-system-one/benchmark-corpus.json`, `../typesafe-ai-system-one/jev_benchmark.py` | 2026-09-27 |
+| Jev advisory evidence plus Petri authority boundary | Offline synthetic wrong support at 0.98: guarded model blocks effect without independently verified evidence and implementation authority; 3/3 focused Petri tests and fixture parity test pass. No repository integration or live Jev result. | `jev-petri-fixture.json`, `test_jev_petri_fixture.py`, `../petri-nets/Examples/JevEvidenceGate.cs`, `../petri-nets/Tests/JevEvidenceGateTests.cs` | 2026-09-29 |
 | Hexagonal architecture seam audit | No repository-specific experiment yet. | none yet | 2026-10-04 |
 | RabbitMQ quorum, retry and dead-letter boundary | Local course examples exist; no repository adoption evidence. | `../rabbitmq` | 2026-10-11 |
 

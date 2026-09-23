@@ -18,8 +18,8 @@ from urllib.request import HTTPRedirectHandler, Request, build_opener
 API_URL = "https://api.typesafe.ai/v1/systemone"
 MODEL = "jev-1.13.0"
 INPUT_PRICE_PER_MILLION_USD = 0.042
-MAX_ESTIMATED_INPUT_TOKENS = 2_500
-MAX_ESTIMATED_INPUT_COST_USD = 0.000105
+MAX_PAYLOAD_UTF8_BYTES = 2_500
+MAX_INPUT_COST_PROXY_USD = 0.000105
 TIMEOUT_SECONDS = 20
 DEFAULT_LIVE_RESULT_PATH = Path(__file__).with_name("live-result.json")
 
@@ -181,9 +181,9 @@ def encode_payload(payload: dict[str, Any]) -> bytes:
 
 def estimated_budget(payload: dict[str, Any]) -> tuple[int, float]:
     encoded = encode_payload(payload)
-    estimated_tokens = len(encoded)
-    estimated_cost = estimated_tokens / 1_000_000 * INPUT_PRICE_PER_MILLION_USD
-    return estimated_tokens, estimated_cost
+    payload_bytes = len(encoded)
+    cost_proxy = payload_bytes / 1_000_000 * INPUT_PRICE_PER_MILLION_USD
+    return payload_bytes, cost_proxy
 
 
 def run_mock() -> dict[str, Any]:
@@ -250,17 +250,17 @@ def run_live(out_path: Path, *, open_request=open_once) -> dict[str, Any]:
         raise SystemExit("Refusing live probe: TYPESAFE_API_KEY is not set.")
 
     payload = request_payload()
-    estimated_tokens, estimated_cost = estimated_budget(payload)
-    if estimated_tokens > MAX_ESTIMATED_INPUT_TOKENS or estimated_cost > MAX_ESTIMATED_INPUT_COST_USD:
-        raise SystemExit("Refusing live probe: local input-cost ceiling exceeded.")
+    payload_bytes, cost_proxy = estimated_budget(payload)
+    if payload_bytes > MAX_PAYLOAD_UTF8_BYTES or cost_proxy > MAX_INPUT_COST_PROXY_USD:
+        raise SystemExit("Refusing live probe: local byte/cost proxy limit exceeded.")
 
     body = encode_payload(payload)
     request_digest = hashlib.sha256(body).hexdigest()
     reservation = {
         "status": "reserved-before-call",
         "model": MODEL,
-        "estimated_input_tokens_before_call": estimated_tokens,
-        "estimated_input_cost_usd_before_call": estimated_cost,
+        "payload_utf8_bytes_before_call": payload_bytes,
+        "input_cost_proxy_usd_before_call": cost_proxy,
         "request_sha256": request_digest,
     }
     reserve_output(out_path, reservation)
@@ -295,8 +295,8 @@ def run_live(out_path: Path, *, open_request=open_once) -> dict[str, Any]:
         "decision": route(response, authority_verified=False),
         "elapsed_ms": elapsed_ms,
         "usage": response.get("usage"),
-        "estimated_input_tokens_before_call": estimated_tokens,
-        "estimated_input_cost_usd_before_call": estimated_cost,
+        "payload_utf8_bytes_before_call": payload_bytes,
+        "input_cost_proxy_usd_before_call": cost_proxy,
         "request_sha256": request_digest,
     }
     publish_result(out_path, record)

@@ -15,6 +15,7 @@ sidebar:
 - [x] Versions française et espagnole
 - [ ] Appel Jev live
 - [x] Corpus étiqueté et harness de scoring hors ligne
+- [x] Plan de batching à état identique corrigé; fixture synthétique de résistance du gate et 23 tests exécutés
 - [ ] Étude de calibration live
 
 ## Expériences
@@ -22,7 +23,8 @@ sidebar:
 | Question | Hypothèse avant mesure | Résultat mesuré | Verdict | Preuve |
 |---|---|---|---|---|
 | La politique peut-elle échouer proprement sans fournisseur? | Une réponse mock fermée doit exercer la validation et refuser le dispatch sans autorité | 14/14 tests réussis en 0,078 s; route `human_review:no_explicit_authority` | confirmé pour la politique locale seulement | [entrée du 20 septembre](#2026-09-20--point-de-référence-hors-ligne), [`code/typesafe-ai-system-one`](https://github.com/spareilleux/learn/tree/main/code/typesafe-ai-system-one) |
-| Un harness borné peut-il tester l'hypothèse d'une économie de 50 % avant toute dépense? | Un corpus fixe et un plan exact doivent exposer coût, qualité et retries sans contacter Jev | 12 cas, 13 appels planifiés, borne conservatrice de 17 663 tokens, borne de coût 0,000741846 $, 19/19 tests en 0,078 s | confirmé pour le plan; économie live non mesurée | [entrée benchmark](#2026-09-20--harness-du-benchmark-de-coût), [leçon 4](../04-token-cost-benchmark/) |
+| Un harness borné peut-il tester l'hypothèse d'une économie de 50 % avant toute dépense ? | Un corpus fixe et un plan exact doivent exposer coût, qualité et retries sans contacter Jev | Plan historique : 12 cas, 13 appels, 17 663 octets UTF-8, 19/19 tests; il nommait ces octets « tokens » et changeait l'état entre les bras | invalidé comme borne de tokens/coût; [corrigé ci-dessous](#2026-09-22--correction-du-protocole-de-batching-et-test-du-gate) | [entrée du 20 septembre](#2026-09-20--harness-du-benchmark-de-coût), [leçon 4](../04-token-cost-benchmark/) |
+| Un seuil de confiance suffit-il à éviter les faux supports ? | Un support erroné très confiant doit encore passer un seuil, tandis que relever celui-ci réduit la couverture | Fixture synthétique : à 0,95, 1/12 passe et il est faux; plan corrigé de 13 appels à 46 318 octets; 23/23 tests en 0,086 s | hypothèse du gate fondé seulement sur la confiance réfutée; ni qualité Jev ni coût facturé mesurés | [entrée du 22 septembre](#2026-09-22--correction-du-protocole-de-batching-et-test-du-gate), [leçon 5](../05-confidence-gate-stress/) |
 
 ## 2026-09-20 — Revue des sources officielles
 
@@ -42,9 +44,15 @@ python -W error::ResourceWarning -m unittest -v
 
 ## 2026-09-20 — Harness du benchmark de coût
 
-Ajout de 12 cas caviardés de GA, Gaia et Demerzel, dont une prompt injection. `plan` indique 13 appels, zéro retry, une borne conservatrice de 17 663 tokens, une borne de coût d'entrée de 0,000741846 $ et un plafond de 0,0021 $. La suite combinée passe 19/19 tests en 0,078 s.
+Ajout de 12 cas caviardés de GA, Gaia et Demerzel, dont une prompt injection. Le `plan` historique indiquait 13 appels, zéro retry, 17 663 octets UTF-8 de requête appelés à tort borne de tokens, un proxy de coût fondé sur ces octets de 0,000741846 $ appelé à tort borne de coût et une limite locale de proxy de 0,0021 $ appelée à tort plafond strict. La suite combinée passait 19/19 tests en 0,078 s. Ces libellés et le protocole de batching ont été corrigés le 22 septembre 2026.
 
 Le scorer mock affiche une exactitude parfaite de fixture, un Brier de 0,015 et un ratio entrées unitaires/batch de 2,4. Ces chiffres valident uniquement le scorer : la fixture est `mock-jev-benchmark/1`, aucun fournisseur n'a été appelé et ce ne sont pas des résultats Jev.
+
+## 2026-09-22 — Correction du protocole de batching et test du gate
+
+La revue des sources primaires a montré que l'ancien batch et les appels unitaires utilisaient des états de tailles différentes : leur ratio n'isolait donc pas le batching. Le plan corrigé garde le même état de 12 cas partout : 8 034 octets UTF-8 pour le batch, 38 284 pour 12 appels à une question, 46 318 au total. Au tarif consulté, 0,001945356 $ est un **proxy fondé sur les octets**, pas une facture fournisseur garantie. L'ancien ratio mock de 2,4 provenait d'une fixture arbitraire et a été retiré de la sortie actuelle.
+
+Hypothèse écrite avant mesure : un seuil de confiance élevé ne suffira pas à éviter un faux `supported`. La fixture synthétique volontairement erronée confirme cette limite du gate : à 0,95, 1/12 passe et il est faux; à 0,99, aucun ne passe et les 12 partent en revue. `python jev_benchmark.py plan`, `python jev_gate_audit.py synthetic` et `python -W error::ResourceWarning -m unittest -v` ont été exécutés localement; 23/23 tests réussis en 0,086 s. Aucune clé lue, aucun appel Jev, aucune économie réelle de tokens mesurée. Voir la [note de recherche primaire](https://github.com/spareilleux/learn/blob/main/docs/research/2026-09-22-jev-experiment-design-primary-sources.md).
 
 ## À vérifier
 

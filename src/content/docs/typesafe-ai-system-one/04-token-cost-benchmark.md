@@ -23,11 +23,11 @@ python jev_benchmark.py mock
 python -W error::ResourceWarning -m unittest -v
 ```
 
-- `plan` performs no network call and prints the exact call count and conservative budget.
+- `plan` performs no network call and prints the exact call count and a request-byte cost proxy.
 - `mock` validates scoring with a fixture that explicitly identifies itself as non-Jev.
-- `live` is a separately authorized experiment: one batch plus 12 single-case calls, pinned to `jev-1.13.0`, with zero retries.
+- `live` is a separately authorized experiment: one batch plus 12 single-question calls over the **same 12-case state**, pinned to `jev-1.13.0`, with zero retries. Holding state constant isolates batching; a per-case-state quality experiment remains separate.
 
-The local plan measured 13 calls and a 17,663-token **upper bound** obtained from UTF-8 bytes. That is deliberately conservative; it is not a provider tokenizer count. At the price checked on 2026-09-20, the estimated input-cost upper bound was $0.000741846 and the local hard ceiling is $0.0021.
+The corrected local plan measured 13 calls: 8,034 UTF-8 bytes for the batch and 38,284 for the single-question requests, 46,318 bytes total. Multiplying that byte count by the rate checked on 2026-09-22 gives a **$0.001945356 cost proxy**, below the local $0.0021 proxy limit. Bytes are not reported/billed tokens, and server-side framing is unknown: **this does not guarantee an actual dollar ceiling**. Verify account-level spending controls and obtain separate approval before any live run.
 
 ## Compare categories, not unlike tokenizers
 
@@ -43,7 +43,7 @@ The primary result is dollars per accepted result under the same quality gate. A
 
 ## Live A/B protocol
 
-The live path requires both `TYPESAFE_API_KEY` and `JEV_BENCHMARK_APPROVED=YES`. It reserves its evidence file before the first call and updates it after every response, so interruption cannot erase consumed work. It never retries automatically.
+The live path requires both `TYPESAFE_API_KEY` and `JEV_BENCHMARK_APPROVED=YES`. It reserves its evidence file before the first call and updates it after every response, so interruption cannot erase consumed work. It never retries automatically. Its local proxy guard is **not** a provider-side spending cap.
 
 ```text
 python jev_benchmark.py live --out evidence/jev-live.json
@@ -51,10 +51,13 @@ python jev_benchmark.py live --out evidence/jev-live.json
 
 The next experiment, if this calibration passes, is a downstream gate: compare a fixed expensive model on every case against the same model invoked only when Jev does not safely resolve the case. That is where a real 50% saving can be confirmed or refuted.
 
+Before making any paid call, try the [offline confidence-gate stress test](../05-confidence-gate-stress/): it demonstrates why a high score alone cannot be treated as authority.
+
 ## Primary sources
 
 - [Jev models and current pricing](https://docs.typesafe.ai/models)
 - [Parallel questions](https://docs.typesafe.ai/cookbooks/parallel_questions)
+- [Jev 1.13 jaggedness](https://docs.typesafe.ai/model-jaggedness/jev-1.13)
 - [Software-development cascade](https://docs.typesafe.ai/cookbooks/sde_cascade)
 - [OpenAI token usage categories](https://platform.openai.com/docs/api-reference/responses/object#responses/object-usage)
 - [Anthropic prompt caching](https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching)
