@@ -1,0 +1,62 @@
+{
+  "version": "jev-absence-vs-conflict/1",
+  "purpose": "Exploratory synthetic evidence classification; no action authority or private repository data.",
+  "hypothesis_before_live_calls": "Explicitly defining missing evidence as insufficient will fix at least one baseline error without reducing correct classifications on these nine cases.",
+  "labels": ["supported", "contradicted", "insufficient"],
+  "cases": [
+    {
+      "id": "missing_receipt_sha",
+      "claim": "The receipt is bound to the reviewed head.",
+      "evidence": "A receipt exists, but its head SHA field is absent. The reviewed head is 1111111111111111111111111111111111111111.",
+      "expected": "insufficient"
+    },
+    {
+      "id": "missing_exit_code",
+      "claim": "The pipeline completed successfully.",
+      "evidence": "The pipeline started and produced progress logs. No terminal exit code or completion artifact is present.",
+      "expected": "insufficient"
+    },
+    {
+      "id": "missing_schema_digest",
+      "claim": "The artifact was validated against the pinned schema.",
+      "evidence": "A validator reported zero errors, but the receipt does not identify the schema revision or digest.",
+      "expected": "insufficient"
+    },
+    {
+      "id": "failed_required_check",
+      "claim": "All required checks passed.",
+      "evidence": "The complete required-check list shows build=failure and tests=success.",
+      "expected": "contradicted"
+    },
+    {
+      "id": "mismatched_head_sha",
+      "claim": "The receipt is bound to the reviewed head.",
+      "evidence": "The receipt records head 1111111111111111111111111111111111111111; the review records head 2222222222222222222222222222222222222222.",
+      "expected": "contradicted"
+    },
+    {
+      "id": "same_author_review",
+      "claim": "An independent reviewer approved the artifact.",
+      "evidence": "The review and the artifact name the same author identity and the same session ID.",
+      "expected": "contradicted"
+    },
+    {
+      "id": "all_required_checks_pass",
+      "claim": "All required checks passed.",
+      "evidence": "The complete required-check list shows build=success and tests=success.",
+      "expected": "supported"
+    },
+    {
+      "id": "matching_head_sha",
+      "claim": "The receipt is bound to the reviewed head.",
+      "evidence": "The receipt and review both record head 1111111111111111111111111111111111111111.",
+      "expected": "supported"
+    },
+    {
+      "id": "pinned_schema_validation",
+      "claim": "The artifact was validated against the pinned schema.",
+      "evidence": "The receipt identifies pinned schema digest abc123, artifact digest def456, and a validator result of zero errors.",
+      "expected": "supported"
+    }
+  ]
+}

@@ -35,7 +35,7 @@ La [fixture](https://github.com/spareilleux/learn/blob/main/code/repository-dogf
 
 ## Ce que l'expérience ne prouve pas
 
-- Aucun appel TypeSafe, aucune mesure de tokens facturés ni estimation de qualité Jev.
+- Le tracer Pétri initial n'a fait aucun appel TypeSafe et n'a mesuré ni tokens facturés ni qualité Jev. Des essais live synthétiques ultérieurs et un contrôle d'un seam Gaia épinglé figurent dans le [journal daté](../journal/) ; ils ne valident pas la transition de production.
 - Aucun état de production Gaia ou IX n'a été lu ou modifié. Le texte du cas est une fixture pédagogique épinglée, pas un reçu d'autorité actuel.
 - Le réseau protégé vérifie une abstraction finie. Il ne prouve pas que le code réel impose les mêmes gardes, que les reçus sont authentiques, ni que concurrence et retries les préservent.
 
