@@ -31,25 +31,26 @@
       "success_metric": "At least 50% lower downstream input cost per accepted result, zero false supports, and no material calibration regression.",
       "falsifier": "Any false support, lower acceptance quality, or human-review and retry cost that erases the saving.",
       "simpler_alternative": "Deterministic rules or repository search before any model call.",
-      "status": "experimenting",
+      "status": "incubating",
       "scores": {
         "pain": 4,
         "fit": 4,
         "expected_value": 5,
-        "evidence": 2,
+        "evidence": 4,
         "reversibility": 5,
         "cost": 1,
         "risk": 3
       },
       "authority": "Human approves live spend and any integration; model output never grants effects.",
-      "next_gate": "Run the bounded 13-call calibration, then a fixed downstream A/B only if quality passes.",
-      "result": "Offline plan: 12 cases, 13 calls, zero retries, $0.0021 hard ceiling. No live Jev result yet.",
-      "verdict": "inconclusive",
+      "next_gate": "Run the fixed downstream A/B the hypothesis actually states, gated by Jev against ungated, on the same 12 cases. The 13-call calibration does not test it.",
+      "result": "Live 13 calls at jev-1.13.0, 2026-09-23: batching the 12 questions over one shared state used 2487 input tokens against 14939 for the same 12 questions asked one at a time, 83.4% less, with the identical choice on all 12 cases, zero false supports and zero retries (accuracy 0.9167 both ways, Brier 0.1657 against 0.1645; 453 ms against 4451 ms). This measures amortizing shared state, not the hypothesis: no downstream model was called, so the 50% downstream saving is still unmeasured.",
+      "verdict": "promising",
       "artifacts": [
         "../typesafe-ai-system-one/benchmark-corpus.json",
-        "../typesafe-ai-system-one/jev_benchmark.py"
+        "../typesafe-ai-system-one/jev_benchmark.py",
+        "../typesafe-ai-system-one/evidence/jev-live.json"
       ],
-      "revisit": "2026-09-27"
+      "revisit": "2026-10-04"
     },
     {
       "id": "learn-evidence-first-course-method",

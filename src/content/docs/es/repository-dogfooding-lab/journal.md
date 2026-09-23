@@ -14,14 +14,15 @@ sidebar:
 - [x] Método del curso como oportunidad
 - [x] Checks CI de paridad y estructura del diario
 - [ ] Primera revisión adversaria independiente
-- [ ] Primer candidato promovido o rechazado con evidencia de repositorio
+- [x] Primer candidato promovido o rechazado con evidencia de repositorio
 
 ## Experimentos
 
 | Pregunta | Hipótesis previa | Resultado medido | Veredicto | Evidencia |
 |---|---|---|---|---|
 | ¿Puede un registro generar vistas sin que una puntuación otorgue autoridad? | Renderer e invariantes separan prioridad y promoción | 4 oportunidades, 5 matrices, 6/6 pruebas en 0,002 s; sin cambiar estado ni autoridad | confirmado para el tracer local | [entrada](#2026-09-20--primer-tracer-de-matrices), [`code/repository-dogfooding-lab`](https://github.com/spareilleux/learn/tree/main/code/repository-dogfooding-lab) |
-| ¿Puede Jev reducir un 50 % el coste posterior a igual calidad? | Un gate tipado resuelve casos sin falsos soportes | Plan: 12 casos, 13 llamadas, cero reintentos, techo 0,0021 $; sin resultado en vivo | inconcluso | [benchmark TypeSafe](../../typesafe-ai-system-one/04-token-cost-benchmark/) |
+| ¿Puede Jev reducir un 50 % el coste posterior a igual calidad? | Un gate tipado resuelve casos sin falsos soportes | Sigue sin medirse. La calibración de 13 llamadas se ejecutó en vivo el 2026-09-23 y no llamó a ningún modelo posterior, así que no puede responderla | inconcluso | [entrada](#2026-09-23--el-banco-en-vivo-mide-algo-distinto-de-su-pregunta), [`evidence/jev-live.json`](https://github.com/spareilleux/learn/blob/main/code/typesafe-ai-system-one/evidence/jev-live.json) |
+| ¿Agrupar 12 preguntas sobre un estado compartido reduce los tokens de entrada sin cambiar ninguna respuesta? | El plan sin red predecía un 79 % menos de bytes; si los tokens siguen a los bytes, el ahorro supera el 50 %, con la calidad sin probar | 2487 tokens de entrada frente a 14939, un 83,4 % menos, y la misma elección en los 12 casos: exactitud 0,9167 en ambos, cero falsos soportes, Brier 0,1657 frente a 0,1645, 453 ms frente a 4451 ms | confirmado para este corpus con n=12, una sola ejecución | [entrada](#2026-09-23--el-banco-en-vivo-mide-algo-distinto-de-su-pregunta), [benchmark TypeSafe](../../typesafe-ai-system-one/04-token-cost-benchmark/) |
 | ¿Las puertas llamadas «exige pruebas» y «veredicto confirmado» rechazan un candidato fabricado? | Comprueban la prueba, así que una entrada con campos vacíos y un artefacto inexistente se rechaza | No rechazaron nada: la entrada llegó a `adopted`/`confirmed` con cero errores. Las puertas comprobaban que las claves estuvieran presentes, nunca su contenido | refutada, luego corregida | [entrada](#2026-09-23--una-lectura-adversaria-rompe-las-puertas-del-laboratorio), [`dogfood.py`](https://github.com/spareilleux/learn/blob/main/code/repository-dogfooding-lab/dogfood.py) |
 | ¿Una red de Petri encuentra en un repositorio defectos de concurrencia que su propia suite de pruebas no ve? | Buscar marcados muertos en un grafo de alcanzabilidad encuentra al menos un defecto real, solo de lectura | Tres encontrados en GA en el commit `a826864`, cada uno confirmado línea por línea antes de publicarlo, y una afirmación retirada antes de publicarla; reportados en [ga#700](https://github.com/GuitarAlchemist/ga/issues/700), [#701](https://github.com/GuitarAlchemist/ga/issues/701), [#702](https://github.com/GuitarAlchemist/ga/issues/702) | prometedor — ningún mantenedor las ha triado aún | [`petri-nets`](../../petri-nets/), [entrada](#2026-09-23--una-lectura-adversaria-rompe-las-puertas-del-laboratorio) |
 
@@ -63,13 +64,34 @@ Resultado medido: `validated=6 matrices=current mirrors=current`, 9/9 pruebas en
 
 **Y el candidato añadido hoy pasó por las puertas antiguas.** Su estado `incubating` lo otorgó una comprobación que igualmente habría sellado la entrada fabricada de arriba. Lo que lo sostiene es la verificación línea por línea contra la fuente de GA, no la aprobación de este registro, que es justamente el argumento para endurecer las puertas antes de confiar en ninguna, incluida la nuestra.
 
+## 2026-09-23 — El banco en vivo mide algo distinto de su pregunta
+
+Las trece llamadas aprobadas salieron contra `jev-1.13.0`. Devuelven un resultado limpio y amplio, y ese resultado no responde a la pregunta que el registro había escrito encima.
+
+**Lo que se midió.** Los mismos doce casos etiquetados, planteados una vez como un solo lote sobre un estado compartido y luego doce veces de uno en uno sobre el estado idéntico byte a byte:
+
+| | Tokens de entrada | Exactitud | Falsos soportes | Brier | Latencia |
+|---|---:|---:|---:|---:|---:|
+| Lote, 1 llamada | 2487 | 0,9167 | 0 | 0,1657 | 453 ms |
+| Aisladas, 12 llamadas | 14939 | 0,9167 | 0 | 0,1645 | 4451 ms |
+
+Agrupar cuesta un **83,4 % menos de tokens de entrada**, muy por encima del 79 % que el plan sin red predecía a partir de los bytes, y no cambió **ninguna respuesta**: las doce elecciones coinciden caso por caso, no solo en agregado. Cero reintentos, cero falsos soportes por ambos lados, y toda la ejecución se mantuvo bajo el techo proxy de 0,0021 $.
+
+**Lo que no se midió, y la entrada daba a entender que sí.** El `next_gate` del registro decía «ejecutar la calibración acotada de 13 llamadas y luego un A/B posterior con modelo fijo solo si la calidad pasa» — escrito como si superar la calibración pesara sobre la hipótesis. No es así. La hipótesis dice que un gate tipado *reduce lo que se envía a un modelo posterior caro*. El banco nunca llama a un modelo posterior; llama a Jev trece veces y solo varía cómo se empaquetan las preguntas. Amortizar un estado compartido entre doce preguntas es un ahorro real y útil, y es una magnitud distinta de la que nombra el criterio de éxito.
+
+Así que la fila de Jev sigue **inconclusa** para su propia pregunta, y una segunda fila registra la afirmación realmente probada. La oportunidad pasa a `incubating` con esa evidencia, no a `adopted`: su `next_gate` es ahora el A/B posterior, nombrado como aquello que la calibración no sustituye.
+
+**Un error, y ambos brazos lo cometieron.** `demerzel_immutable` afirma que un artefacto está direccionado por contenido donde la evidencia ofrece una ruta y una marca de tiempo pero ningún digest — la etiqueta esperada es `insufficient`, y tanto el lote como la llamada aislada respondieron `contradicted`. La ausencia de digest se leyó como conflicto y no como silencio. Idéntico en ambos brazos, así que el empaquetado no es la causa; es el caso de doce que explica el 0,9167.
+
+La ejecución completa, cada hash de petición y cada respuesta, está commiteada en `code/typesafe-ai-system-one/evidence/jev-live.json`, para que las cifras de arriba puedan recalcularse sin confiar en esta entrada.
+
 ## Por verificar
 
 - Confirmar la primera ejecución CI alojada para matrices, paridad y diarios.
 - Medir tiempo de autoría antes de afirmar menor coste. No existe ningún valor de referencia, así que la métrica de éxito actual de `learn-evidence-first-course-method` es irrefutable tal como está escrita.
 - Leer el cuerpo de las cinco reglas TARS `ga.*`, no solo sus pesos, antes de afirmar que los dos codificados coinciden o divergen.
 - Que un mantenedor tríe ga#700, #701 y #702; el agente automático falló en las cinco issues, así que ninguna ha sido juzgada.
-- Calibración Jev solo con aprobación explícita de gasto.
+- Ejecutar el A/B posterior con modelo fijo antes de afirmar que Jev reduce el coste posterior. La calibración en vivo no llamó a ningún modelo posterior, y n=12 en un corpus y una ejecución no sostiene ninguna cifra general.
 - Elegir un seam hexagonal exacto o rechazar la oportunidad.
 
 ## Preguntas abiertas
