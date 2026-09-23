@@ -41,6 +41,7 @@ Les agents de code savent produire du texte, des plans et des patchs. Nos dépô
 | 2 | [Une expérience reproductible au coût borné](02-bounded-experiment/) | Exécuter le point de référence hors ligne et comprendre la probe facultative à un appel |
 | 3 | [Cas d'usage dans nos dépôts](03-repository-use-cases/) | Choisir des seams utiles dans Gaia, GA, Demerzel, IX et TARS tout en préservant l'autorité |
 | 4 | [Benchmark du coût en tokens](04-token-cost-benchmark/) | Tester l'hypothèse d'une économie de 50 % contre la qualité, les retries et le coût déplacé |
+| 5 | [Test de résistance du gate de confiance](05-confidence-gate-stress/) | Mesurer les faux supports et la charge de revue sur une fixture hors ligne volontairement erronée |
 | — | [Journal](journal/) | Faits mesurés, questions ouvertes et travail live restant |
 
 ## Prérequis

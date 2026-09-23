@@ -1,6 +1,6 @@
 ---
 title: "2. Un experimento reproducible y de coste acotado"
-description: Ejecutar primero la fixture determinista, revisar las pruebas del contrato y la política, y preparar una llamada opcional a Jev con presupuesto local duro, condiciones de parada y registro de evidencia.
+description: Ejecutar primero la fixture determinista, revisar las pruebas del contrato y la política, y preparar una llamada opcional a Jev con límite local del tamaño de solicitud, condiciones de parada y registro de evidencia.
 sidebar:
   order: 2
 ---
@@ -47,17 +47,17 @@ El script:
 
 - se niega antes de la red si falta la variable;
 - construye una sola solicitud para `jev-1.13.0`;
-- usa el número de bytes UTF-8 como estimación local deliberadamente amplia de tokens;
-- se niega por encima de 2.500 tokens estimados o **0,000105 $** al precio oficial de 0,042 $/Mtok;
+- cuenta bytes UTF-8 de solicitud como proxy local de tamaño, no como estimación de tokens facturados;
+- se niega por encima de 2.500 bytes o de su **proxy de coste por bytes de 0,000105 $** con la tarifa consultada el 22 de septiembre de 2026;
 - envía exactamente una solicitud con timeout de 20 segundos;
 - rechaza redirecciones para mantener el bearer token ligado al origen API configurado;
 - no reintenta automáticamente tras 429, 529, timeout o error de red;
 - nunca imprime ni escribe el encabezado de autorización;
 - valida la respuesta y exige el modelo fijado exacto antes de enrutar;
 - exige autoridad verificada por código local de confianza, nunca por la respuesta Noul del modelo;
-- registra fecha, modelo concreto, uso, digest, coste estimado y decisión, pero no la respuesta completa del proveedor.
+- registra fecha, modelo concreto, uso, digest, proxy previo y decisión, pero no la respuesta completa del proveedor.
 
-La estimación por bytes favorece un límite local más seguro sobre la precisión; sigue siendo una barrera, no una factura ni una prueba del tokenizer. El coste observado debe usar `usage.input_tokens` y el precio oficial vigente.
+El conteo de bytes limita el tamaño local de la solicitud. **No** es un límite demostrado de tokens o dólares facturados: el encuadre del servidor y los controles de gasto de la cuenta son distintos. El coste observado debe usar `usage.input_tokens` y el precio oficial vigente. Una llamada de pago requiere autorización separada.
 
 :::caution[Sonda en vivo no ejecutada]
 La sonda queda **por verificar**. No se llamó a la API al escribir el curso, así que no hay latencia, respuesta, tokens, coste ni calibración medidos.
@@ -65,7 +65,7 @@ La sonda queda **por verificar**. No se llamó a la API al escribir el curso, as
 
 ## Condiciones de parada
 
-Detente si falta la clave o aparece en una salida, se supera el techo, el contrato es inválido, llega 401/422/429/529 o un estado inesperado, cambia el modelo concreto, la decisión podría autorizar/fusionar/desplegar/publicar/eliminar, o la entrada contiene secretos o datos no aprobados.
+Detente si falta la clave o aparece en una salida, se supera el límite local de bytes/proxy, el contrato es inválido, llega 401/422/429/529 o un estado inesperado, cambia el modelo concreto, la decisión podría autorizar/fusionar/desplegar/publicar/eliminar, o la entrada contiene secretos o datos no aprobados. Una sola llamada no garantiza un techo en dólares.
 
 ## Tabla de evidencia pendiente
 

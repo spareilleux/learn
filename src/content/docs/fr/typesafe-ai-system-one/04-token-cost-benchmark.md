@@ -23,11 +23,11 @@ python jev_benchmark.py mock
 python -W error::ResourceWarning -m unittest -v
 ```
 
-- `plan` n'appelle aucun réseau et affiche le nombre exact d'appels et le budget conservateur;
+- `plan` n'appelle aucun réseau et affiche le nombre exact d'appels et un proxy de coût fondé sur les octets de la requête;
 - `mock` valide le scoring avec une fixture explicitement non-Jev;
-- `live` est une expérience autorisée séparément : un batch plus 12 appels unitaires, `jev-1.13.0` épinglé, zéro retry.
+- `live` est une expérience autorisée séparément : un batch plus 12 appels à une question sur **le même état de 12 cas**, `jev-1.13.0` épinglé, zéro retry. Garder l'état constant isole l'effet du batching; l'essai de qualité avec un état par cas reste distinct.
 
-Le plan local mesure 13 appels et une borne supérieure de 17 663 tokens, calculée à partir des octets UTF-8. C'est volontairement conservateur, pas un comptage du tokenizer fournisseur. Au prix vérifié le 20 septembre 2026, la borne de coût d'entrée est 0,000741846 $ et le plafond local 0,0021 $.
+Le plan local corrigé mesure 13 appels : 8 034 octets UTF-8 pour le batch et 38 284 pour les appels unitaires, soit 46 318 octets. Multipliés par le tarif vérifié le 22 septembre 2026, ces octets donnent un **proxy de coût de 0,001945356 $**, sous la limite locale de proxy de 0,0021 $. Les octets ne sont pas les tokens facturés, et le cadrage côté serveur est inconnu : **ceci ne garantit pas un plafond réel en dollars**. Vérifiez les contrôles de dépenses du compte et obtenez une autorisation distincte avant tout appel live.
 
 ## Comparer les catégories, pas des tokenizers différents
 
@@ -43,7 +43,7 @@ Le résultat principal est le coût en dollars par résultat accepté sous le m�
 
 ## Protocole A/B live
 
-Le mode live exige `TYPESAFE_API_KEY` et `JEV_BENCHMARK_APPROVED=YES`. Il réserve le fichier de preuve avant le premier appel, l'actualise après chaque réponse et ne retente jamais automatiquement.
+Le mode live exige `TYPESAFE_API_KEY` et `JEV_BENCHMARK_APPROVED=YES`. Il réserve le fichier de preuve avant le premier appel, l'actualise après chaque réponse et ne retente jamais automatiquement. Sa garde locale fondée sur un proxy n'est **pas** un plafond de dépenses imposé par le fournisseur.
 
 ```text
 python jev_benchmark.py live --out evidence/jev-live.json
@@ -51,10 +51,13 @@ python jev_benchmark.py live --out evidence/jev-live.json
 
 Si la calibration passe, l'expérience suivante sera un gate aval : comparer un modèle coûteux fixe appelé sur tous les cas au même modèle appelé seulement quand Jev ne résout pas le cas sans risque. C'est là qu'une économie réelle de 50 % pourra être confirmée ou réfutée.
 
+Avant un appel payant, essayez le [test hors ligne du gate de confiance](../05-confidence-gate-stress/) : un score élevé ne constitue pas une autorité.
+
 ## Sources primaires
 
 - [Modèles Jev et prix actuels](https://docs.typesafe.ai/models)
 - [Questions parallèles](https://docs.typesafe.ai/cookbooks/parallel_questions)
+- [Limites documentées de Jev 1.13](https://docs.typesafe.ai/model-jaggedness/jev-1.13)
 - [Cascade de développement logiciel](https://docs.typesafe.ai/cookbooks/sde_cascade)
 - [Catégories de tokens OpenAI](https://platform.openai.com/docs/api-reference/responses/object#responses/object-usage)
 - [Prompt caching Anthropic](https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching)

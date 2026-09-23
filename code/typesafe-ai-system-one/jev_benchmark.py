@@ -2,7 +2,9 @@
 
 `plan` and `mock` never use the network. `live` makes exactly thirteen calls:
 one request containing all questions and twelve requests containing one question
-each. It never retries and requires a separate approval environment variable.
+each, all over the identical shared state. It never retries and requires a
+separate approval environment variable. The local size/cost proxy is not a
+guarantee of provider-billed tokens or charges.
 """
 
 from __future__ import annotations
@@ -25,8 +27,8 @@ import typesafe_lab
 CORPUS_PATH = Path(__file__).with_name("benchmark-corpus.json")
 DEFAULT_OUTPUT_PATH = Path(__file__).with_name("jev-benchmark-live.json")
 MAX_CALLS = 13
-MAX_ESTIMATED_INPUT_TOKENS = 50_000
-MAX_ESTIMATED_INPUT_COST_USD = 0.0021
+MAX_PAYLOAD_UTF8_BYTES = 50_000
+MAX_INPUT_COST_PROXY_USD = 0.0021
 APPROVAL_ENV = "JEV_BENCHMARK_APPROVED"
 
 
@@ -86,16 +88,27 @@ def payload(cases: list[dict[str, Any]]) -> dict[str, Any]:
 
 def requests_for(corpus: dict[str, Any]) -> list[tuple[str, dict[str, Any]]]:
     cases = corpus["cases"]
+    shared_state = state(cases)
     return [("batch", payload(cases))] + [
-        (f"single:{case['id']}", payload([case])) for case in cases
+        (
+            f"single:{case['id']}",
+            {
+                "model": typesafe_lab.MODEL,
+                "state": shared_state,
+                "questions": {case["id"]: question(case)},
+            },
+        )
+        for case in cases
     ]
 
 
 def plan() -> dict[str, Any]:
     corpus = load_corpus()
     requests = requests_for(corpus)
-    estimated_tokens = sum(len(typesafe_lab.encode_payload(item)) for _, item in requests)
-    estimated_cost = estimated_tokens / 1_000_000 * typesafe_lab.INPUT_PRICE_PER_MILLION_USD
+    batch_bytes = len(typesafe_lab.encode_payload(requests[0][1]))
+    single_bytes = sum(len(typesafe_lab.encode_payload(item)) for _, item in requests[1:])
+    payload_bytes = batch_bytes + single_bytes
+    cost_proxy = payload_bytes / 1_000_000 * typesafe_lab.INPUT_PRICE_PER_MILLION_USD
     if len(requests) != MAX_CALLS:
         raise ValueError("The live call count changed.")
     return {
@@ -103,9 +116,12 @@ def plan() -> dict[str, Any]:
         "corpus": corpus["version"],
         "cases": len(corpus["cases"]),
         "calls": len(requests),
-        "estimated_input_token_upper_bound": estimated_tokens,
-        "estimated_input_cost_upper_bound_usd": estimated_cost,
-        "hard_cost_ceiling_usd": MAX_ESTIMATED_INPUT_COST_USD,
+        "batch_payload_utf8_bytes": batch_bytes,
+        "single_payload_utf8_bytes": single_bytes,
+        "total_payload_utf8_bytes": payload_bytes,
+        "input_cost_proxy_usd": cost_proxy,
+        "local_cost_proxy_ceiling_usd": MAX_INPUT_COST_PROXY_USD,
+        "actual_billed_cost_guaranteed": False,
         "retries": 0,
     }
 
@@ -188,16 +204,12 @@ def run_mock() -> dict[str, Any]:
     corpus = load_corpus()
     cases = corpus["cases"]
     batch = mock_response(cases, input_tokens=1_000)
-    singles = [mock_response([case], input_tokens=200) for case in cases]
     batch_score = score(batch, cases)
-    single_input = sum(score(response, [case])["input_tokens"] for response, case in zip(singles, cases))
     return {
         "mode": "mock",
         "fixture_model": batch["model"],
         "cases": len(cases),
         "batch": batch_score,
-        "single_input_tokens": single_input,
-        "single_to_batch_input_ratio": single_input / batch_score["input_tokens"],
         "provider_called": False,
     }
 
@@ -255,10 +267,10 @@ def run_live(out_path: Path) -> dict[str, Any]:
     plan_record = plan()
     if (
         plan_record["calls"] > MAX_CALLS or
-        plan_record["estimated_input_token_upper_bound"] > MAX_ESTIMATED_INPUT_TOKENS or
-        plan_record["estimated_input_cost_upper_bound_usd"] > MAX_ESTIMATED_INPUT_COST_USD
+        plan_record["total_payload_utf8_bytes"] > MAX_PAYLOAD_UTF8_BYTES or
+        plan_record["input_cost_proxy_usd"] > MAX_INPUT_COST_PROXY_USD
     ):
-        raise SystemExit("Refusing live benchmark: hard local budget exceeded.")
+        raise SystemExit("Refusing live benchmark: local byte/cost proxy limit exceeded.")
 
     corpus = load_corpus()
     requests = requests_for(corpus)

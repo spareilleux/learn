@@ -14,13 +14,22 @@ class JevBenchmarkTests(unittest.TestCase):
         self.assertEqual(result["calls"], 13)
         self.assertEqual(result["retries"], 0)
         self.assertLessEqual(
-            result["estimated_input_token_upper_bound"],
-            jev_benchmark.MAX_ESTIMATED_INPUT_TOKENS,
+            result["total_payload_utf8_bytes"],
+            jev_benchmark.MAX_PAYLOAD_UTF8_BYTES,
         )
         self.assertLessEqual(
-            result["estimated_input_cost_upper_bound_usd"],
-            jev_benchmark.MAX_ESTIMATED_INPUT_COST_USD,
+            result["input_cost_proxy_usd"],
+            jev_benchmark.MAX_INPUT_COST_PROXY_USD,
         )
+        self.assertFalse(result["actual_billed_cost_guaranteed"])
+
+    def test_batch_and_single_requests_share_identical_state(self) -> None:
+        requests = jev_benchmark.requests_for(jev_benchmark.load_corpus())
+        shared_state = requests[0][1]["state"]
+        self.assertEqual(len(requests), 13)
+        for _, request in requests[1:]:
+            self.assertEqual(request["state"], shared_state)
+            self.assertEqual(len(request["questions"]), 1)
 
     def test_mock_exercises_scoring_without_claiming_jev(self) -> None:
         result = jev_benchmark.run_mock()
@@ -28,7 +37,6 @@ class JevBenchmarkTests(unittest.TestCase):
         self.assertFalse(result["provider_called"])
         self.assertEqual(result["batch"]["accuracy"], 1.0)
         self.assertEqual(result["batch"]["false_supports"], 0)
-        self.assertEqual(result["single_to_batch_input_ratio"], 2.4)
 
     def test_response_rejects_missing_case(self) -> None:
         corpus = jev_benchmark.load_corpus()

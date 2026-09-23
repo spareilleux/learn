@@ -11,4 +11,7 @@
     <ProjectReference Include="../PetriNets/PetriNets.csproj" />
     <ProjectReference Include="../Examples/Examples.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="../../repository-dogfooding-lab/jev-petri-fixture.json" Link="jev-petri-fixture.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
 </Project>

@@ -23,11 +23,11 @@ python jev_benchmark.py mock
 python -W error::ResourceWarning -m unittest -v
 ```
 
-- `plan` no usa la red y muestra llamadas y presupuesto;
+- `plan` no usa la red y muestra el número de llamadas y un proxy de coste basado en bytes de solicitud;
 - `mock` valida el scoring con una fixture explícitamente no-Jev;
-- `live` es un experimento autorizado aparte: un batch más 12 llamadas individuales, `jev-1.13.0` fijado y cero reintentos.
+- `live` es un experimento autorizado aparte: un batch más 12 llamadas de una pregunta sobre **el mismo estado de 12 casos**, `jev-1.13.0` fijado y cero reintentos. Mantener el estado constante aísla el efecto del batching; el ensayo de calidad con estado por caso es distinto.
 
-El plan local mide 13 llamadas y un límite superior de 17.663 tokens calculado desde bytes UTF-8. Es conservador, no un conteo del tokenizer del proveedor. Con el precio comprobado el 20 de septiembre de 2026, el límite estimado de entrada es 0,000741846 $ y el techo local 0,0021 $.
+El plan local corregido mide 13 llamadas: 8.034 bytes UTF-8 para el lote y 38.284 para las llamadas individuales, 46.318 bytes en total. Multiplicarlos por la tarifa comprobada el 22 de septiembre de 2026 da un **proxy de coste de 0,001945356 $**, por debajo del límite local de proxy de 0,0021 $. Los bytes no son tokens facturados y se desconoce el encuadre del servidor: **esto no garantiza un techo real en dólares**. Comprueba los controles de gasto de la cuenta y solicita autorización separada antes de una ejecución en vivo.
 
 ## Comparar categorías, no tokenizers distintos
 
@@ -43,7 +43,7 @@ El resultado principal es dólares por resultado aceptado bajo el mismo quality 
 
 ## Protocolo A/B en vivo
 
-El modo live exige `TYPESAFE_API_KEY` y `JEV_BENCHMARK_APPROVED=YES`. Reserva la evidencia antes de llamar, la actualiza tras cada respuesta y no reintenta automáticamente.
+El modo live exige `TYPESAFE_API_KEY` y `JEV_BENCHMARK_APPROVED=YES`. Reserva la evidencia antes de llamar, la actualiza tras cada respuesta y no reintenta automáticamente. Su guardia local basada en un proxy **no** es un límite de gasto impuesto por el proveedor.
 
 ```text
 python jev_benchmark.py live --out evidence/jev-live.json
@@ -51,10 +51,13 @@ python jev_benchmark.py live --out evidence/jev-live.json
 
 Si la calibración pasa, el siguiente experimento será un gate posterior: comparar un modelo costoso fijo en todos los casos con el mismo modelo invocado solo cuando Jev no resuelva el caso con seguridad. Ahí podrá confirmarse o refutarse un ahorro real del 50 %.
 
+Antes de llamar a un proveedor de pago, prueba el [test sin conexión del gate de confianza](../05-confidence-gate-stress/): una puntuación alta no equivale a autoridad.
+
 ## Fuentes primarias
 
 - [Modelos Jev y precios actuales](https://docs.typesafe.ai/models)
 - [Preguntas paralelas](https://docs.typesafe.ai/cookbooks/parallel_questions)
+- [Limitaciones documentadas de Jev 1.13](https://docs.typesafe.ai/model-jaggedness/jev-1.13)
 - [Cascada de desarrollo de software](https://docs.typesafe.ai/cookbooks/sde_cascade)
 - [Categorías de tokens OpenAI](https://platform.openai.com/docs/api-reference/responses/object#responses/object-usage)
 - [Prompt caching de Anthropic](https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching)

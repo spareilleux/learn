@@ -47,6 +47,7 @@ The course's Python lab has two paths:
 | 2 | [A reproducible, cost-bounded experiment](02-bounded-experiment/) | Run the offline baseline and understand the optional one-call probe |
 | 3 | [Use cases across our repositories](03-repository-use-cases/) | Select useful seams in Gaia, GA, Demerzel, IX and TARS while preserving authority |
 | 4 | [Token-cost benchmark](04-token-cost-benchmark/) | Test the 50% saving hypothesis against quality, retries and shifted cost |
+| 5 | [Confidence-gate stress test](05-confidence-gate-stress/) | Measure false support and review load on a deliberately wrong offline fixture |
 | — | [Journal](journal/) | Measured facts, open questions and live work still to verify |
 
 ## Prerequisites

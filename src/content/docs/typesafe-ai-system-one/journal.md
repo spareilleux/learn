@@ -15,6 +15,7 @@ sidebar:
 - [x] French and Spanish mirrors
 - [ ] Live Jev call
 - [x] Labeled repository corpus and offline scoring harness
+- [x] Shared-state batching plan corrected; offline confidence-gate stress fixture and 23 tests run
 - [ ] Live calibration study
 
 ## Experiments
@@ -22,7 +23,8 @@ sidebar:
 | Question | Hypothesis before measuring | Measured result | Verdict | Evidence |
 |---|---|---|---|---|
 | Can the policy fail closed without a provider? | A closed mock response can exercise validation and refuse dispatch when authority is absent | 14/14 tests passed in 0.078 s; route was `human_review:no_explicit_authority` | confirmed for the local policy only | [2026-09-20 entry](#2026-09-20--offline-baseline), [`code/typesafe-ai-system-one`](https://github.com/spareilleux/learn/tree/main/code/typesafe-ai-system-one) |
-| Can a bounded harness test the 50% token-saving hypothesis before spending? | A fixed corpus and exact call plan can expose cost, quality and retry guardrails without contacting Jev | 12 cases, 13 planned calls, 17,663-token conservative upper bound, $0.000741846 estimated input-cost upper bound, 19/19 tests in 0.078 s | confirmed for planning; live saving remains unmeasured | [benchmark entry](#2026-09-20--token-cost-benchmark-harness), [lesson 4](../04-token-cost-benchmark/) |
+| Can a bounded harness test the 50% token-saving hypothesis before spending? | A fixed corpus and exact call plan can expose cost, quality and retry guardrails without contacting Jev | Historical plan: 12 cases, 13 calls, 17,663 UTF-8 bytes, 19/19 tests; it mislabeled bytes as tokens and changed state between arms | invalidated as a token/cost bound; [corrected below](#2026-09-22--batching-protocol-correction-and-gate-stress-test) | [2026-09-20 entry](#2026-09-20--token-cost-benchmark-harness), [lesson 4](../04-token-cost-benchmark/) |
+| Can a confidence threshold alone prevent false support? | A deliberately wrong high-confidence support should still pass a threshold while lower thresholds trade review load for coverage | Synthetic fixture: at 0.95, 1/12 passes and it is false; corrected 13-call plan totals 46,318 request bytes; 23/23 tests in 0.086 s | refuted for confidence-only gating; no Jev quality or billed cost measured | [2026-09-22 entry](#2026-09-22--batching-protocol-correction-and-gate-stress-test), [lesson 5](../05-confidence-gate-stress/) |
 
 ## 2026-09-20 — Official-source review
 
@@ -45,9 +47,15 @@ Measured: request digest `67c1ee4bcd36b497f60872c0715d435b364c3b7743ad06f9be5430
 
 ## 2026-09-20 — Token-cost benchmark harness
 
-Added 12 sanitized GA, Gaia and Demerzel cases, including a prompt-injection counterexample. `plan` reported 13 calls, zero retries, a conservative 17,663-token input upper bound, a $0.000741846 estimated input-cost upper bound and a $0.0021 hard ceiling. The combined suite passed 19/19 tests in 0.078 s.
+Added 12 sanitized GA, Gaia and Demerzel cases, including a prompt-injection counterexample. The historical `plan` reported 13 calls, zero retries, 17,663 UTF-8 request bytes incorrectly labeled a token upper bound, a $0.000741846 byte-based cost proxy incorrectly labeled a cost upper bound, and a $0.0021 local proxy ceiling incorrectly labeled hard. The combined suite passed 19/19 tests in 0.078 s. These labels and the batching design were corrected on 2026-09-22.
 
 The mock scorer produced perfect fixture accuracy, Brier 0.015 and a 2.4 single-to-batch input ratio. Those numbers validate the scorer only: the fixture is `mock-jev-benchmark/1`, no provider was called, and none of them is a Jev result.
+
+## 2026-09-22 — Batching protocol correction and gate stress test
+
+Primary-source review found that the old batch and singleton requests had different state sizes, so their ratio could not isolate batching. The corrected plan holds the same 12-case state in every request: 8,034 UTF-8 bytes for the batch, 38,284 for 12 single-question requests, 46,318 total. At the reviewed rate this is a $0.001945356 **byte-based proxy**, not a guaranteed provider bill. The old mock 2.4 ratio was arbitrary fixture data and has been removed from the current output.
+
+Pre-registered hypothesis: a high confidence threshold alone will not prevent a false `supported`. The deliberately wrong synthetic fixture confirms this gate limitation: at 0.95, 1/12 passes and it is false; at 0.99, none pass and all 12 require review. Commands `python jev_benchmark.py plan`, `python jev_gate_audit.py synthetic`, and `python -W error::ResourceWarning -m unittest -v` completed locally; 23/23 tests passed in 0.086 s. No API key was read, no Jev request was sent and no actual token saving was measured. See the [primary-source addendum](https://github.com/spareilleux/learn/blob/main/docs/research/2026-09-22-jev-experiment-design-primary-sources.md).
 
 ## To verify
 
