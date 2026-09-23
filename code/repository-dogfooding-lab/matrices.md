@@ -6,8 +6,10 @@
 
 | Opportunity | Course | Axis | Repositories |
 |---|---|---|---|
+| Petri net reachability on resource pipelines | `petri-nets` | classical-se | ga |
 | Evidence-first multilingual course pipeline | `repository-dogfooding-lab` | both | learn |
 | Jev typed decision gate | `typesafe-ai-system-one` | agentic-ai | ga, gaia, Demerzel |
+| Cross-check TARS grammar rules against Petri nets | `petri-nets` | both | ga, tars |
 | Hexagonal architecture seam audit | `hexagonal-architecture` | classical-se | ga, gaia, Demerzel |
 | RabbitMQ quorum, retry and dead-letter boundary | `rabbitmq` | classical-se | gaia, Demerzel |
 
@@ -17,28 +19,38 @@ The score orders investigation only. It never authorizes incubation or integrati
 
 | Opportunity | Pain | Fit | Value | Evidence | Reversible | Cost | Risk | Score |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
+| Petri net reachability on resource pipelines | 5 | 4 | 4 | 4 | 5 | 2 | 1 | 19 |
 | Evidence-first multilingual course pipeline | 3 | 5 | 4 | 3 | 5 | 2 | 1 | 17 |
 | Jev typed decision gate | 4 | 4 | 5 | 2 | 5 | 1 | 3 | 16 |
+| Cross-check TARS grammar rules against Petri nets | 2 | 5 | 3 | 1 | 5 | 2 | 1 | 13 |
 | Hexagonal architecture seam audit | 2 | 4 | 3 | 1 | 4 | 3 | 2 | 9 |
 | RabbitMQ quorum, retry and dead-letter boundary | 2 | 2 | 3 | 1 | 3 | 4 | 3 | 4 |
 
 ## Promotion state
 
+Ordered by promotion state, not by score.
+
 | Opportunity | Status | Verdict | Next gate | Accountable authority |
 |---|---|---|---|---|
-| Evidence-first multilingual course pipeline | experimenting | promising | Use this course to validate its own registry, generated matrices and locale parity in CI. | Course author records evidence; reviewer accepts or rejects publication claims. |
+| Petri net reachability on resource pipelines | incubating | promising | Maintainer triage of GuitarAlchemist/ga#700, #701 and #702. GA's own todo 047 already asks for the exception-safe release of #700, which is corroboration, not acceptance. | Read-only analysis at a pinned commit; the model proposes, a maintainer decides. No GA code was read outside the GitHub API and none was modified. |
 | Jev typed decision gate | experimenting | inconclusive | Run the bounded 13-call calibration, then a fixed downstream A/B only if quality passes. | Human approves live spend and any integration; model output never grants effects. |
+| Evidence-first multilingual course pipeline | experimenting | promising | Use this course to validate its own registry, generated matrices and locale parity in CI. | Course author records evidence; reviewer accepts or rejects publication claims. |
 | Hexagonal architecture seam audit | discovered | inconclusive | Choose one exact dependency boundary and capture a before metric; otherwise reject the candidate. | Repository maintainer selects the seam after reviewing evidence. |
 | RabbitMQ quorum, retry and dead-letter boundary | discovered | inconclusive | Identify one failure mode that existing artifact reconciliation cannot solve economically. | Architecture owner approves any infrastructure addition. |
+| Cross-check TARS grammar rules against Petri nets | discovered | inconclusive | Read the five ga.* rule definitions, not only their weights, and put ga.hook_lifecycle_fsm next to the chat-turn net, whose place invariant sent = 0 says the streaming path cannot run the hooks - GuitarAlchemist/ga#703. | Read-only on both repositories. No grammar weight may gate a promotion in this registry: an evolved weight is the score-as-authority failure this lab exists to refuse, arrived at by a longer road. |
 
 ## Results and evidence
 
+Every path listed here is checked to exist; links are taken on trust.
+
 | Opportunity | Result | Evidence artifacts | Revisit |
 |---|---|---|---|
-| Evidence-first multilingual course pipeline | Registry, renderer and invariant tests implemented as the first tracer bullet. | `opportunities.json`, `dogfood.py`, `test_dogfood.py`, `matrices.md` | 2026-09-27 |
+| Petri net reachability on resource pipelines | Three defects found, each confirmed against the source before filing. GaFsiSessionPool.fs: the `with ex` handler releases the gate without returning the session; two exceptions wedge the process-wide pool for good, and the net gave the seven-firing sequence - one caller, no concurrency needed - before the code confirmed it. IndexVoicingsCommand: consumer catch outside the await foreach, bounded channel in FullMode.Wait, CancellationToken.None: total silent deadlock. VoicingGenerator: Complete() outside a finally, one-sided hang that swallows the producer exception. One claim was withdrawn before filing: the early gate release at :144 is not a bug, because the evaluation has already returned at :140. | `../petri-nets/Examples/Nets.cs`, `../petri-nets/expected/chat.txt`, `https://github.com/GuitarAlchemist/ga/issues/700`, `https://github.com/GuitarAlchemist/ga/issues/701`, `https://github.com/GuitarAlchemist/ga/issues/702` | 2026-09-29 |
 | Jev typed decision gate | Offline plan: 12 cases, 13 calls, zero retries, $0.0021 hard ceiling. No live Jev result yet. | `../typesafe-ai-system-one/benchmark-corpus.json`, `../typesafe-ai-system-one/jev_benchmark.py` | 2026-09-27 |
+| Evidence-first multilingual course pipeline | Registry, renderer and invariant tests implemented as the first tracer bullet. | `opportunities.json`, `dogfood.py`, `test_dogfood.py`, `matrices.md` | 2026-09-27 |
 | Hexagonal architecture seam audit | No repository-specific experiment yet. | none yet | 2026-10-04 |
 | RabbitMQ quorum, retry and dead-letter boundary | Local course examples exist; no repository adoption evidence. | `../rabbitmq` | 2026-10-11 |
+| Cross-check TARS grammar rules against Petri nets | Nothing measured yet: the rule weights were read, the rule bodies were not. | none yet | 2026-10-06 |
 
 ## Course-method dogfooding
 
