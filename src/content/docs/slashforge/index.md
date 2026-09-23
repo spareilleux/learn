@@ -51,9 +51,9 @@ The last two rows are the ones to keep in mind. A branch policy is enforced by t
 |---|---|---|
 | 1 | [What the installer writes](01-what-the-installer-writes/) | `dotnet tool install`, `dotnet new install`, a package that drops files |
 | 2 | [Inside the files: commands, skills, guides](02-inside-the-files/) | template parameters, routing by folder, a validator that is stricter than the runtime |
-| 3 | `/slashforge:setup` against `/init`, on a real repository (coming next) | a project template, an onboarding checklist |
-| 4 | `/slashforge:code`: ten phases and four gates | branch policies, a pull request template |
-| 5 | `-quick`, `/slashforge:investigate` and `/slashforge:review-pr` | a hotfix process, a bug report, a code review |
+| 3 | [`/slashforge:setup` against `/init`](03-setup-against-init/) | a project template, an onboarding checklist |
+| 4 | [`/slashforge:code`: ten phases and four gates](04-code-phases-and-gates/) | branch policies, a pull request template |
+| 5 | [`/slashforge:investigate` and `/slashforge:review-pr`](05-investigate-and-review-pr/) | a hotfix process, a bug report, a code review |
 | 6 | Making it yours: rules, verification commands, a team install | `.editorconfig`, a shared build configuration |
 | — | [Journal](journal/) | |
 

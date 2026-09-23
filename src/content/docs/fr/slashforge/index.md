@@ -51,9 +51,9 @@ Ce sont les deux dernières lignes qu'il faut garder en tête. Une politique de 
 |---|---|---|
 | 1 | [Ce qu'écrit l'installeur](01-what-the-installer-writes/) | `dotnet tool install`, `dotnet new install`, un paquet qui dépose des fichiers |
 | 2 | [Dans les fichiers : commandes, skills, guides](02-inside-the-files/) | les paramètres de modèle, le routage par dossier, un validateur plus strict que le runtime |
-| 3 | `/slashforge:setup` face à `/init`, sur un vrai dépôt (à venir) | un modèle de projet, une checklist d'intégration |
-| 4 | `/slashforge:code` : dix phases et quatre points de contrôle | les politiques de branche, un modèle de pull request |
-| 5 | `-quick`, `/slashforge:investigate` et `/slashforge:review-pr` | un processus de correctif urgent, un rapport de bug, une revue de code |
+| 3 | [`/slashforge:setup` face à `/init`](03-setup-against-init/) | un modèle de projet, une checklist d'intégration |
+| 4 | [`/slashforge:code` : dix phases et quatre points de contrôle](04-code-phases-and-gates/) | les politiques de branche, un modèle de pull request |
+| 5 | [`/slashforge:investigate` et `/slashforge:review-pr`](05-investigate-and-review-pr/) | un processus de correctif urgent, un rapport de bug, une revue de code |
 | 6 | Se l'approprier : règles, commandes de vérification, installation d'équipe | `.editorconfig`, une configuration de build partagée |
 | — | [Journal](journal/) | |
 

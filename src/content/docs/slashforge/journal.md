@@ -14,9 +14,9 @@ sidebar:
 - [x] Lessons 1 and 2 re-run from a fresh export of the course code: 19 of 19 outputs match
 - [x] A throwaway lab for lessons 3 to 5: `code/slashforge/lab/prepare.sh` and `lab/run.sh`, with a ceiling on every run
 - [x] Lessons 3 to 5 tested in the lab, headless, each up to its first gate: six runs, 1.83 USD in all (see Experiments)
-- [ ] Lesson 3 page: `/slashforge:setup` against `/init`
-- [ ] Lesson 4 page: `/slashforge:code`, ten phases and four gates
-- [ ] Lesson 5 page: `-quick`, `/slashforge:investigate` and `/slashforge:review-pr`
+- [x] Lesson 3 page: `/slashforge:setup` against `/init`
+- [x] Lesson 4 page: `/slashforge:code`, ten phases and four gates, with `-quick`
+- [x] Lesson 5 page: `/slashforge:investigate` and `/slashforge:review-pr`
 - [ ] Lesson 6: making it yours
 
 ## QA
@@ -105,7 +105,7 @@ Total: 1.83 USD. No run reached its dollar ceiling. After e2b, the lab repositor
 
 **`/init` against `/slashforge:setup`.** `/init` wrote a 50-line `CLAUDE.md` straight away, and found on its own the README drift that this course's QA table lists ("Known drift: the README's *What gets installed* table still shows `commands/forge/`"). Setup read more and wrote nothing: it proposed four agents, asked about hooks, commands, release rules and layout, and said it would write `CLAUDE.md` last. The Graphify offer, which the hypothesis expected as the first gate, didn't appear: most of the repository is Markdown and `.astro`, under Graphify's 70% language threshold, and setup skips it silently in that case, as its file says.
 
-**The gates.** Each command stopped where its file says a person decides, and none went past one. One deviation: `/slashforge:code -quick` asked for the plan (Phase 3) and the branch (Phase 4) in the same message, while `forge-workflow.md` says *"Do not combine phases"*.
+**The gates.** Each command stopped where its file says a person decides, and none went past one. One deviation: `/slashforge:code -quick` asked for the plan (Phase 3) and the branch (Phase 4) in the same message, while `code.md` says *"Do not combine phases"*.
 
 **Limits.** One run per command, one repository, one model. Costs are computed by Claude Code for the subscription session, not billed amounts. The `-quick` token comparison with the README is loose, because the README doesn't say whether its range counts cached input. The turn limit behaved differently in two runs: e1 reported 15 turns with `--max-turns 10` and finished normally, and e1b stopped at 11 with `error_max_turns`. The cause is to verify.
 

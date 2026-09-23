@@ -14,9 +14,9 @@ sidebar:
 - [x] Leçons 1 et 2 relancées depuis un export neuf du code du cours : 19 sorties sur 19 identiques
 - [x] Un labo jetable pour les leçons 3 à 5 : `code/slashforge/lab/prepare.sh` et `lab/run.sh`, avec un plafond sur chaque exécution
 - [x] Leçons 3 à 5 testées dans le labo, sans interface, chacune jusqu'à son premier point de contrôle : six exécutions, 1.83 USD en tout (voir Expériences)
-- [ ] Page de la leçon 3 : `/slashforge:setup` face à `/init`
-- [ ] Page de la leçon 4 : `/slashforge:code`, dix phases et quatre points de contrôle
-- [ ] Page de la leçon 5 : `-quick`, `/slashforge:investigate` et `/slashforge:review-pr`
+- [x] Page de la leçon 3 : `/slashforge:setup` face à `/init`
+- [x] Page de la leçon 4 : `/slashforge:code`, dix phases et quatre points de contrôle, avec `-quick`
+- [x] Page de la leçon 5 : `/slashforge:investigate` et `/slashforge:review-pr`
 - [ ] Leçon 6 : se l'approprier
 
 ## QA
@@ -105,7 +105,7 @@ Total : 1.83 USD. Aucune exécution n'a atteint son plafond en dollars. Après e
 
 **`/init` face à `/slashforge:setup`.** `/init` a écrit un `CLAUDE.md` de 50 lignes d'emblée, et a trouvé de lui-même l'écart du README que liste le tableau QA de ce cours ("Known drift: the README's *What gets installed* table still shows `commands/forge/`"). Setup a lu davantage et n'a rien écrit : il a proposé quatre agents, posé des questions sur les hooks, les commandes, les règles de release et l'organisation, et dit qu'il écrirait `CLAUDE.md` en dernier. La proposition Graphify, que l'hypothèse attendait comme premier point de contrôle, n'est pas apparue : l'essentiel du dépôt est du Markdown et du `.astro`, sous le seuil de langage de 70% de Graphify, et setup le saute alors en silence, comme le dit son fichier.
 
-**Les points de contrôle.** Chaque commande s'est arrêtée là où son fichier dit qu'une personne décide, et aucune n'en a franchi un. Un écart : `/slashforge:code -quick` a demandé le plan (phase 3) et la branche (phase 4) dans le même message, alors que `forge-workflow.md` dit *"Do not combine phases"*.
+**Les points de contrôle.** Chaque commande s'est arrêtée là où son fichier dit qu'une personne décide, et aucune n'en a franchi un. Un écart : `/slashforge:code -quick` a demandé le plan (phase 3) et la branche (phase 4) dans le même message, alors que `code.md` dit *"Do not combine phases"*.
 
 **Limites.** Une exécution par commande, un dépôt, un modèle. Les coûts sont calculés par Claude Code pour la session d'abonnement, ce ne sont pas des montants facturés. La comparaison des tokens de `-quick` avec le README est approximative, parce que le README ne dit pas si sa fourchette compte l'entrée en cache. La limite de tours s'est comportée différemment dans deux exécutions : e1 a indiqué 15 tours avec `--max-turns 10` et s'est terminée normalement, et e1b s'est arrêtée à 11 avec `error_max_turns`. La cause reste à vérifier.
 

@@ -1,0 +1,172 @@
+---
+title: 3. /slashforge:setup against /init
+description: Run SlashForge's setup and Claude Code's own /init on the same public repository, in a throwaway lab with a ceiling on every run, and compare what each writes, what each asks, and what it costs — a captured run, not a reproducible one.
+sidebar:
+  order: 3
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Code: [`code/slashforge/lab/prepare.sh`](https://github.com/spareilleux/learn/blob/main/code/slashforge/lab/prepare.sh) and [`lab/run.sh`](https://github.com/spareilleux/learn/blob/main/code/slashforge/lab/run.sh). The runs of this lesson and the two that follow are recorded in the [journal](../journal/#experiments), with their hypotheses, written before the runs.
+
+:::caution[A capture, not a test]
+Lessons 1 and 2 were checked by CI. From here on, the commands run through a model, and a second run would not give the same text or the same cost. Everything below is one run, on 2026-09-22, with Claude Code 2.1.280 and the model `claude-opus-5-5[1m]` (the account's default). The costs are the ones Claude Code computed for the session, not billed amounts.
+:::
+
+## A lab that can't reach anything
+
+Setup writes a dozen files into a repository, and the later lessons can push branches and post reviews. None of that should happen to a real repository, or to your own `~/.claude`, while you learn. `lab/prepare.sh` builds a lab in a directory of your choice:
+
+- a home directory, a Claude Code configuration directory (`CLAUDE_CONFIG_DIR`), a GitHub CLI directory (`GH_CONFIG_DIR`) and a git configuration, all inside the lab;
+- a clone of [SlashForge](https://github.com/rajdeepratan/SlashForge) itself at `v4.4.3`, on a branch `lab`, with its remote removed and a pre-push hook that refuses;
+- SlashForge installed globally into the lab's home, so the repository stays exactly as cloned.
+
+SlashForge is the repository because it is public, small and has no dependencies, and because the course already knows its bugs: it will be interesting to see whether the commands find them.
+
+```bash
+cd code/slashforge
+npm ci
+bash lab/prepare.sh ../../../sf-lab
+```
+
+```
+lab:        …/sf-lab
+repository: bd75a4f release: 4.4.3 (#64) (v4.4.3, branch lab, no remote)
+kit:        "version": "4.4.3" in …\sf-lab\home\.claude
+remotes:    0
+```
+
+The lab's Claude Code is not logged in, and a run that tries anyway stops before the model is called: the journal's run e0 spent 0 tokens. Logging it in takes a person, because the login page gives a code to paste into the terminal. Point `CLAUDE_CONFIG_DIR` at the lab for that one command:
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+```powershell
+$env:CLAUDE_CONFIG_DIR = "$PWD\..\..\..\sf-lab\home\.claude"
+claude auth login --claudeai
+Remove-Item Env:CLAUDE_CONFIG_DIR
+```
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```bash
+CLAUDE_CONFIG_DIR="$PWD/../../../sf-lab/home/.claude" claude auth login --claudeai
+```
+
+</TabItem>
+<TabItem label="macOS">
+
+```bash
+CLAUDE_CONFIG_DIR="$PWD/../../../sf-lab/home/.claude" claude auth login --claudeai
+```
+
+</TabItem>
+</Tabs>
+
+`--claudeai` uses your subscription; `--console` would bill the API. Your own `~/.claude` stays logged in and untouched.
+
+## One run, one ceiling
+
+`lab/run.sh` runs one prompt through [`claude -p`](https://code.claude.com/docs/en/headless) and refuses to start without a ceiling:
+
+```bash
+bash lab/run.sh <lab> <name> <max-usd> <max-turns> "<prompt>"
+```
+
+It passes `--max-budget-usd` and `--max-turns`, stops after 900 s, and records turns, tokens, cost, the permission denials and every path that changed. Two choices shape what a run can do:
+
+- **Headless means the first question ends the run.** `claude -p` has no one to answer, so when a SlashForge command reaches a gate, it asks, and the run is over. The lab measures each command up to its first decision, never past it.
+- **Edits are accepted inside the repository only.** The run uses `--permission-mode acceptEdits` and allows read-only git, `ls` and the tests. Push, `gh`, `curl` and the web are refused. An earlier version also listed `Edit` and `Write` among the allowed tools. That pre-approves them *everywhere*, and lesson 5 shows what a model did with it.
+
+## `/init`: a file, at once
+
+[`/init`](https://code.claude.com/docs/en/memory) is Claude Code's own command for a new repository. Run e2b, with a ceiling of 0.50 USD and 20 turns:
+
+```
+exit:      0
+wall:      92 s
+turns:     9
+tokens:    in 16, cache write 24664, cache read 252589, out 3555
+cost:      0.3189938 USD (as computed by Claude Code)
+changed:   1 path(s) in the lab repository
+```
+
+The one path is a 50-line `CLAUDE.md`, written without a question: what the package is, the commands (tests, dry run, the docs site), the architecture of the templates and their four lists, releases. It ends with a section the course didn't ask for:
+
+```markdown
+## Known drift
+
+The README's "What gets installed" table still shows `commands/forge/`; the code installs to `commands/slashforge/`. Trust `bin/install.js`.
+```
+
+That is the stale README table that [lesson 1](../01-what-the-installer-writes/) found by comparing the README with the installer's output. `/init` found it by reading.
+
+## `/slashforge:setup`: questions first
+
+Run e2, on the same clone, with 0.75 USD and 20 turns:
+
+```
+exit:      0
+wall:      56 s
+turns:     6
+tokens:    in 6, cache write 25541, cache read 86674, out 2190
+cost:      0.2654868 USD (as computed by Claude Code)
+changed:   0 path(s) in the lab repository
+```
+
+Nothing written. [`setup.md`](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/templates/slashforge/setup.md) says why: *"Collect every user decision in Phase 1, then run the rest without interrupting the user. Do not write any file until Phase 3."* Phase 1 explored the repository and ended in six questions:
+
+```
+Questions before I write anything
+
+1. Layout: should I treat this as one app, with a single root `CLAUDE.md` and rules that cover `docs/` as a sub-area? Or do you want a separate `CLAUDE.md` for `docs/`?
+2. Common tasks: my guess is that most day-to-day work is (a) editing or adding a template or skill, (b) changing the installer logic, (c) updating the docs site, and (d) cutting a release. Is that right, and is anything missing?
+3. Template rules: …
+4. Releases: …
+5. Agents: I plan to create `installer-developer` (Node CLI and tests), `template-author` (the prompt and guide Markdown), `docs-developer` (Astro), and a `code-reviewer`. Does that split work for you?
+6. Hooks and commands: …
+```
+
+The question the course expected first, the offer to install [Graphify](https://github.com/safishamsi/graphify), never came. Setup's guide applies a language-fit gate: when less than 70% of the source is code Graphify can index, it skips the offer silently. SlashForge is mostly Markdown and `.astro` files, and the run said so in one line: *"Graphify: skipped."* The hypothesis written before the run expected a file and a Graphify question, and it was refuted on both counts.
+
+## Side by side
+
+| | `/init` | `/slashforge:setup` |
+|---|---|---|
+| Asks before writing | no | six questions |
+| Files written in the run | `CLAUDE.md` | none yet; `CLAUDE.md` last, then agents, rules, hooks, commands |
+| Turns, wall time | 9, 92 s | 6, 56 s |
+| Cost of the run | 0.32 USD | 0.27 USD, and the answers are still to come |
+| README's estimate | — | *"~50–120k tokens, paid once"* for the whole setup |
+
+The token counts are hard to compare with the README's, because most of the input is served from the prompt cache: setup's run read 86,674 tokens from it and wrote 25,541. Whether the README's range counts cached input, it doesn't say.
+
+Claude Code has its own version of the interview. With `CLAUDE_CODE_NEW_INIT=1` set, [`/init`](https://code.claude.com/docs/en/memory) asks which artifacts to set up (`CLAUDE.md` files, skills, hooks), explores with a subagent, asks follow-up questions and *"presents a reviewable proposal before writing any files"*. The lab didn't run that mode; comparing it with setup is exercise 4.
+
+It is the difference between `dotnet new` and a consultant. The template writes a sensible default at once; the consultant interviews you first and writes something that fits, at a price, and only once you've answered. For a repository you know well, `/init` and ten minutes of editing may be enough. For a team, setup's questions are the useful part: they are the decisions somebody has to make anyway.
+
+## Key points
+
+- A lab with its own home, Claude Code configuration, `gh` and git configuration, and a clone with no remote, lets a workflow run without touching anything real.
+- `claude -p` ends at the first question, so a headless run measures a command up to its first gate and never answers it.
+- Listing `Edit` or `Write` in `--allowedTools` pre-approves them everywhere; `acceptEdits` alone accepts them in the working directory only.
+- `/init` writes `CLAUDE.md` at once. `/slashforge:setup` explores, asks every question first and writes nothing before you answer.
+- Setup's Graphify offer only appears when most of the repository is code Graphify can read.
+
+## Exercises
+
+1. In the lab, run `/init` a second time, after the first `CLAUDE.md` exists. What do you expect it to do, and what does the documentation of `/init` say?
+2. Setup's Phase 1 ends with questions, and the headless run stops there. How would you give it the answers without an interactive session?
+3. Find the sentence of `setup.md` that makes it write `CLAUDE.md` last, and give a reason for that order.
+4. Run `/init` in the lab with `CLAUDE_CODE_NEW_INIT=1` and a ceiling. Where does it stop, compared with setup's six questions?
+
+<details>
+<summary>Solution</summary>
+
+1. The [memory documentation](https://code.claude.com/docs/en/memory) says: *"If a CLAUDE.md already exists, `/init` suggests improvements rather than overwriting it."* Try it and compare the diff with your expectation; restore the lab repository with `git checkout -- .` and `git clean -fd` afterwards.
+2. Continue the same conversation: `claude -p --resume <session-id> "<answers>"`, with the session id from `result.json`. Each answer is a new run, with its own ceiling, and the next gate ends it again. That is the point: every decision stays a separate, deliberate step.
+3. Step 9 of the fresh single-app flow: *"Create `CLAUDE.md` in the repo root last"*. The steps before it write the agents, rules, skills, commands and hooks, so `CLAUDE.md` can describe and link what now exists. Written first, it would describe files that aren't there yet, and a failure halfway would leave a `CLAUDE.md` pointing at nothing. Graphify's hook-in, which appends to `CLAUDE.md`, runs after step 9 for the same reason.
+4. Not measured by the course: it is a model run, so record your own ceiling, turns and cost. The documented difference is that it asks *which* artifacts to create before exploring, where setup decides the list itself and asks you to confirm it.
+
+</details>

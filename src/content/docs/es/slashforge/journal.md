@@ -14,9 +14,9 @@ sidebar:
 - [x] Lecciones 1 y 2 repetidas desde un export limpio del código del curso: 19 de 19 salidas coinciden
 - [x] Un laboratorio desechable para las lecciones 3 a 5: `code/slashforge/lab/prepare.sh` y `lab/run.sh`, con un tope en cada ejecución
 - [x] Lecciones 3 a 5 probadas en el laboratorio, en modo headless, cada una hasta su primera puerta: seis ejecuciones, 1.83 USD en total (ver Experimentos)
-- [ ] Página de la lección 3: `/slashforge:setup` frente a `/init`
-- [ ] Página de la lección 4: `/slashforge:code`, diez fases y cuatro puertas
-- [ ] Página de la lección 5: `-quick`, `/slashforge:investigate` y `/slashforge:review-pr`
+- [x] Página de la lección 3: `/slashforge:setup` frente a `/init`
+- [x] Página de la lección 4: `/slashforge:code`, diez fases y cuatro puertas, con `-quick`
+- [x] Página de la lección 5: `/slashforge:investigate` y `/slashforge:review-pr`
 - [ ] Lección 6: hacerlo tuyo
 
 ## QA
@@ -105,7 +105,7 @@ Total: 1.83 USD. Ninguna ejecución alcanzó su tope en dólares. Después de e2
 
 **`/init` frente a `/slashforge:setup`.** `/init` escribió un `CLAUDE.md` de 50 líneas de inmediato, y encontró por sí solo la desviación del README que recoge la tabla de QA de este curso ("Known drift: the README's *What gets installed* table still shows `commands/forge/`"). Setup leyó más y no escribió nada: propuso cuatro agentes, preguntó por los hooks, los comandos, las reglas de release y la estructura, y dijo que escribiría `CLAUDE.md` al final. La oferta de Graphify, que la hipótesis esperaba como primera puerta, no apareció: la mayor parte del repositorio es Markdown y `.astro`, por debajo del umbral de lenguaje del 70% de Graphify, y en ese caso setup lo omite en silencio, como dice su archivo.
 
-**Las puertas.** Cada comando se detuvo donde su archivo dice que decide una persona, y ninguno pasó de una. Una desviación: `/slashforge:code -quick` pidió el plan (fase 3) y la rama (fase 4) en el mismo mensaje, mientras que `forge-workflow.md` dice *"Do not combine phases"*.
+**Las puertas.** Cada comando se detuvo donde su archivo dice que decide una persona, y ninguno pasó de una. Una desviación: `/slashforge:code -quick` pidió el plan (fase 3) y la rama (fase 4) en el mismo mensaje, mientras que `code.md` dice *"Do not combine phases"*.
 
 **Límites.** Una ejecución por comando, un repositorio, un modelo. Los costes los calcula Claude Code para la sesión de suscripción, no son importes facturados. La comparación de tokens de `-quick` con el README es aproximada, porque el README no dice si su rango cuenta la entrada en caché. El límite de turnos se comportó de forma distinta en dos ejecuciones: e1 informó 15 turnos con `--max-turns 10` y terminó con normalidad, y e1b se detuvo en 11 con `error_max_turns`. La causa queda por verificar.
 

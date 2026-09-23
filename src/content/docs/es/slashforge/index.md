@@ -51,9 +51,9 @@ Las dos últimas filas son las que hay que tener presentes. Una política de ram
 |---|---|---|
 | 1 | [Lo que escribe el instalador](01-what-the-installer-writes/) | `dotnet tool install`, `dotnet new install`, un paquete que deja archivos |
 | 2 | [Dentro de los archivos: comandos, skills, guías](02-inside-the-files/) | los parámetros de plantilla, el enrutamiento por carpeta, un validador más estricto que el runtime |
-| 3 | `/slashforge:setup` frente a `/init`, en un repositorio real (próximamente) | una plantilla de proyecto, una checklist de incorporación |
-| 4 | `/slashforge:code`: diez fases y cuatro puertas | las políticas de rama, una plantilla de pull request |
-| 5 | `-quick`, `/slashforge:investigate` y `/slashforge:review-pr` | un proceso de hotfix, un informe de bug, una revisión de código |
+| 3 | [`/slashforge:setup` frente a `/init`](03-setup-against-init/) | una plantilla de proyecto, una checklist de incorporación |
+| 4 | [`/slashforge:code`: diez fases y cuatro puertas](04-code-phases-and-gates/) | las políticas de rama, una plantilla de pull request |
+| 5 | [`/slashforge:investigate` y `/slashforge:review-pr`](05-investigate-and-review-pr/) | un proceso de hotfix, un informe de bug, una revisión de código |
 | 6 | Hacerlo tuyo: reglas, comandos de verificación, una instalación de equipo | `.editorconfig`, una configuración de compilación compartida |
 | — | [Diario](journal/) | |
 
