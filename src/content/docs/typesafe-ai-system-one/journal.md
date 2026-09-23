@@ -57,6 +57,10 @@ Primary-source review found that the old batch and singleton requests had differ
 
 Pre-registered hypothesis: a high confidence threshold alone will not prevent a false `supported`. The deliberately wrong synthetic fixture confirms this gate limitation: at 0.95, 1/12 passes and it is false; at 0.99, none pass and all 12 require review. Commands `python jev_benchmark.py plan`, `python jev_gate_audit.py synthetic`, and `python -W error::ResourceWarning -m unittest -v` completed locally; 23/23 tests passed in 0.086 s. No API key was read, no Jev request was sent and no actual token saving was measured. See the [primary-source addendum](https://github.com/spareilleux/learn/blob/main/docs/research/2026-09-22-jev-experiment-design-primary-sources.md).
 
+## 2026-09-22 — Python 3.10 to 3.14, offline
+
+Hypothesis before running: the offline suite uses only the standard library, so it passes unchanged from Python 3.10 to 3.14. Command, on a fresh export of `code/typesafe-ai-system-one` at `b3a9c16`, one interpreter at a time through uv 0.10.4: `uv run --no-project --python <v> python -W error::ResourceWarning -m unittest`. Result on Windows 11: 23/23 tests pass on 3.10.19, 3.11.14, 3.12.12, 3.13.12 and 3.14.3, in 0.104 to 0.132 s. The hosted CI for the same commit ([run 35804194871](https://github.com/spareilleux/learn/actions/runs/35804194871)) passes on Ubuntu, Windows and macOS with Python 3.14. Verdict: confirmed for the offline suite; CI still tests 3.14 only. No API key was read and no provider was called: the live call and the 13-call calibration still wait for the operator's `TYPESAFE_API_KEY` and an explicit approval of the ceiling, which are human decisions.
+
 ## To verify
 
 - Run exactly one live call after the operator exports `TYPESAFE_API_KEY`; record concrete model, usage, cost and latency without recording the secret.
@@ -64,7 +68,6 @@ Pre-registered hypothesis: a high confidence threshold alone will not prevent a 
 - Run the 13-call live calibration only after explicit approval of the $0.0021 ceiling.
 - Measure accuracy, calibration, abstention/human-review rate, cost and latency against a deterministic baseline.
 - Recheck price, model IDs and limits immediately before a live run.
-- Verify Python 3.10–3.13 and Linux/macOS execution in CI.
 
 ## Open questions
 

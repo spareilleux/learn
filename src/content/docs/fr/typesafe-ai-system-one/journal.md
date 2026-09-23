@@ -54,6 +54,10 @@ La revue des sources primaires a montré que l'ancien batch et les appels unitai
 
 Hypothèse écrite avant mesure : un seuil de confiance élevé ne suffira pas à éviter un faux `supported`. La fixture synthétique volontairement erronée confirme cette limite du gate : à 0,95, 1/12 passe et il est faux; à 0,99, aucun ne passe et les 12 partent en revue. `python jev_benchmark.py plan`, `python jev_gate_audit.py synthetic` et `python -W error::ResourceWarning -m unittest -v` ont été exécutés localement; 23/23 tests réussis en 0,086 s. Aucune clé lue, aucun appel Jev, aucune économie réelle de tokens mesurée. Voir la [note de recherche primaire](https://github.com/spareilleux/learn/blob/main/docs/research/2026-09-22-jev-experiment-design-primary-sources.md).
 
+## 2026-09-22 — Python 3.10 à 3.14, hors ligne
+
+Hypothèse avant l'essai : la suite hors ligne n'utilise que la bibliothèque standard, donc elle passe telle quelle de Python 3.10 à 3.14. Commande, sur un export neuf de `code/typesafe-ai-system-one` à `b3a9c16`, un interpréteur à la fois via uv 0.10.4 : `uv run --no-project --python <v> python -W error::ResourceWarning -m unittest`. Résultat sous Windows 11 : 23/23 tests passent sur 3.10.19, 3.11.14, 3.12.12, 3.13.12 et 3.14.3, en 0,104 à 0,132 s. La CI hébergée pour le même commit ([run 35804194871](https://github.com/spareilleux/learn/actions/runs/35804194871)) passe sur Ubuntu, Windows et macOS avec Python 3.14. Verdict : confirmé pour la suite hors ligne ; la CI ne teste toujours que 3.14. Aucune clé d'API n'a été lue et aucun fournisseur appelé : l'appel live et la calibration de 13 appels attendent toujours la `TYPESAFE_API_KEY` de l'opérateur et une approbation explicite du plafond, qui sont des décisions humaines.
+
 ## À vérifier
 
 - Exécuter exactement un appel live après export de `TYPESAFE_API_KEY`, sans consigner le secret.
@@ -61,7 +65,6 @@ Hypothèse écrite avant mesure : un seuil de confiance élevé ne suffira pas �
 - Exécuter la calibration live de 13 appels uniquement après approbation explicite du plafond de 0,0021 $.
 - Mesurer exactitude, calibration, taux de revue, coût et latence face à un baseline déterministe.
 - Revérifier prix, modèles et limites juste avant l'appel.
-- La matrice CI Windows, Linux et macOS avec Python 3.14 est ajoutée; confirmer son premier résultat hébergé.
 
 ## Questions ouvertes
 

@@ -54,6 +54,10 @@ La revisión de fuentes primarias mostró que el lote anterior y las llamadas in
 
 Hipótesis previa: un umbral de confianza alto no impedirá un falso `supported`. La fixture sintética deliberadamente errónea confirma esta limitación del gate: con 0,95 pasa 1/12 y es falso; con 0,99 no pasa ninguno y los 12 van a revisión. Se ejecutaron localmente `python jev_benchmark.py plan`, `python jev_gate_audit.py synthetic` y `python -W error::ResourceWarning -m unittest -v`; 23/23 pruebas en 0,086 s. No se leyó ninguna clave, no se llamó a Jev y no se midió ningún ahorro real de tokens. Véase la [nota de fuentes primarias](https://github.com/spareilleux/learn/blob/main/docs/research/2026-09-22-jev-experiment-design-primary-sources.md).
 
+## 2026-09-22 — Python 3.10 a 3.14, sin conexión
+
+Hipótesis previa: la suite sin conexión solo usa la biblioteca estándar, así que pasa sin cambios de Python 3.10 a 3.14. Comando, sobre una exportación limpia de `code/typesafe-ai-system-one` en `b3a9c16`, un intérprete cada vez mediante uv 0.10.4: `uv run --no-project --python <v> python -W error::ResourceWarning -m unittest`. Resultado en Windows 11: 23/23 pruebas pasan en 3.10.19, 3.11.14, 3.12.12, 3.13.12 y 3.14.3, en 0,104 a 0,132 s. La CI alojada para el mismo commit ([run 35804194871](https://github.com/spareilleux/learn/actions/runs/35804194871)) pasa en Ubuntu, Windows y macOS con Python 3.14. Veredicto: confirmado para la suite sin conexión; la CI sigue probando solo 3.14. No se leyó ninguna clave de API ni se llamó a ningún proveedor: la llamada en vivo y la calibración de 13 llamadas siguen esperando la `TYPESAFE_API_KEY` del operador y una aprobación explícita del techo, que son decisiones humanas.
+
 ## Por verificar
 
 - Ejecutar una llamada tras exportar `TYPESAFE_API_KEY`, sin registrar el secreto.
@@ -61,7 +65,6 @@ Hipótesis previa: un umbral de confianza alto no impedirá un falso `supported`
 - Ejecutar la calibración en vivo de 13 llamadas solo tras aprobar explícitamente el techo de 0,0021 $.
 - Medir precisión, calibración, revisión humana, coste y latencia contra una base determinista.
 - Revisar precio, modelos y límites justo antes de llamar.
-- Se añadió la matriz CI para Windows, Linux y macOS con Python 3.14; falta confirmar su primer resultado alojado.
 
 ## Preguntas abiertas
 
