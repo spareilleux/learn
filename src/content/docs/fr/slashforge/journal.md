@@ -13,9 +13,10 @@ sidebar:
 - [x] Leçon 2 : dans les fichiers — commandes, skills, guides
 - [x] Leçons 1 et 2 relancées depuis un export neuf du code du cours : 19 sorties sur 19 identiques
 - [x] Un labo jetable pour les leçons 3 à 5 : `code/slashforge/lab/prepare.sh` et `lab/run.sh`, avec un plafond sur chaque exécution
-- [ ] Leçon 3 : `/slashforge:setup` face à `/init` — **bloquée, non testée** : le Claude Code du labo n'est pas connecté
-- [ ] Leçon 4 : `/slashforge:code`, dix phases et quatre points de contrôle — **bloquée, non testée**, même raison
-- [ ] Leçon 5 : `-quick`, `/slashforge:investigate` et `/slashforge:review-pr` — **bloquée, non testée**, même raison
+- [x] Leçons 3 à 5 testées dans le labo, sans interface, chacune jusqu'à son premier point de contrôle : six exécutions, 1.83 USD en tout (voir Expériences)
+- [ ] Page de la leçon 3 : `/slashforge:setup` face à `/init`
+- [ ] Page de la leçon 4 : `/slashforge:code`, dix phases et quatre points de contrôle
+- [ ] Page de la leçon 5 : `-quick`, `/slashforge:investigate` et `/slashforge:review-pr`
 - [ ] Leçon 6 : se l'approprier
 
 ## QA
@@ -34,15 +35,15 @@ Chaque ligne ci-dessous est reproduite par `check.sh` ou lue dans l'installeur a
 
 ## Expériences
 
-Les leçons 3 à 5 font exécuter les commandes par le modèle, donc chaque exécution a une hypothèse écrite avant elle et un plafond (`lab/run.sh` n'a pas de budget par défaut). Seule la première a tourné. Elle s'est arrêtée avant l'appel au modèle, et les autres lignes sont des hypothèses qui attendent une connexion, pas des résultats.
+Les leçons 3 à 5 font exécuter les commandes par le modèle, donc chaque exécution a une hypothèse écrite avant elle et un plafond (`lab/run.sh` n'a pas de budget par défaut). Les hypothèses de L3 à L5 ont été écrites quand le labo n'était pas encore connecté ; les exécutions sont venues après que l'auteur a connecté le labo. Chaque exécution est sans interface et se termine à la première question que pose le workflow. Les coûts sont ceux que calcule Claude Code pour le modèle qu'il a utilisé, `claude-opus-5-5[1m]`, celui du compte par défaut : ils seraient plus bas avec un modèle plus petit. Ce sont des exécutions uniques, pas des moyennes.
 
 | Question | Hypothèse (écrite avant l'exécution) | Résultat | Verdict | Entrée, code |
 |---|---|---|---|---|
 | e0 — Le labo peut-il lancer une commande sans toucher au vrai `~/.claude` ? | Un Claude Code dont le répertoire de configuration est vide n'est pas connecté, et s'arrête avant tout appel au modèle, sans rien dépenser | `Not logged in · Please run /login`, code de sortie 1, 1 tour, 114 ms, 0 token en entrée et en sortie, 0 USD, 0 fichier modifié. Plafond : 0.25 USD, 3 tours | Confirmée : le labo est isolé, et il ne peut pas aller plus loin sans connexion | [2026-09-22](#2026-09-22--le-labo-des-leçons-3-à-5-et-où-il-sarrête), `lab/run.sh` |
-| L3 — Qu'écrit `/slashforge:setup` sur un dépôt sans `.claude/`, comparé à `/init` ? | Il écrit `CLAUDE.md` et `.claude/rules/`, et s'arrête à la proposition Graphify (un oui/non) avant de provisionner quoi que ce soit | Non mesuré | Bloquée : pas de connexion | idem |
-| L4 — Jusqu'où va `/slashforge:code -quick` sans interface sur un petit changement ? | Il s'arrête au point de contrôle de la phase 3 (confirmer le plan) sans modifier le dépôt, sous 70,000 tokens, le haut de la fourchette du README pour `-quick` | Non mesuré | Bloquée : pas de connexion | idem |
-| L5a — `/slashforge:investigate` reste-t-il en lecture seule ? | Il ne modifie aucun fichier suivi et écrit un rapport HTML sous `docs/slashforge/` | Non mesuré | Bloquée : pas de connexion | idem |
-| L5b — Que fait `/slashforge:review-pr` sans connexion GitHub ? | Il s'arrête à sa vérification préalable de l'étape 0 et demande `gh auth login`, comme le dit son fichier, sans lancer d'autre commande | Non mesuré | Bloquée : pas de connexion | idem |
+| L3 — Qu'écrit `/slashforge:setup` sur un dépôt sans `.claude/`, comparé à `/init` ? | Il écrit `CLAUDE.md` et `.claude/rules/`, et s'arrête à la proposition Graphify (un oui/non) avant de provisionner quoi que ce soit | e2 : rien d'écrit. Graphify sauté sans demander (sous son seuil de 70%) ; arrêt sur six questions de clarification. 6 tours, 56 s, 0.27 USD. e2b, `/init` sur le même clone : un `CLAUDE.md` de 50 lignes écrit d'emblée, sans question, 9 tours, 92 s, 0.32 USD | Réfutée : setup demande avant d'écrire, et le point de contrôle Graphify ne s'est jamais déclenché | [2026-09-22](#2026-09-22--les-leçons-3-à-5-exécutées-dans-le-labo), `lab/run.sh` |
+| L4 — Jusqu'où va `/slashforge:code -quick` sans interface sur un petit changement ? | Il s'arrête au point de contrôle de la phase 3 (confirmer le plan) sans modifier le dépôt, sous 70,000 tokens, le haut de la fourchette du README pour `-quick` | e3 : un plan sobre (un `plannedWrites` exporté, un test qui le compare à `installFiles`), puis un arrêt, aucun fichier modifié. Il a posé les questions des phases 3 et 4 (branche) dans un seul message. 6 tours, 57 s, 0.25 USD ; 1,720 tokens en entrée et en sortie, 23,433 écrits dans le cache, 158,847 lus depuis le cache | Confirmée pour le point de contrôle et pour « aucune modification » ; la partie tokens dépend de ce qu'on compte : les lectures du cache seules dépassent 70,000 | [2026-09-22](#2026-09-22--les-leçons-3-à-5-exécutées-dans-le-labo) |
+| L5a — `/slashforge:investigate` reste-t-il en lecture seule ? | Il ne modifie aucun fichier suivi et écrit un rapport HTML sous `docs/slashforge/` | e1 et e1b : aucun fichier modifié dans le dépôt, la bonne cause racine, et pas de rapport, parce que le construire demande du code `node` que le labo refuse. Dans e1, où le labo pré-approuvait `Write`, le modèle a écrit son générateur de rapport dans `%TEMP%` à la place. e1 : 15 tours, 0.45 USD ; e1b : arrêté par la limite de tours à 11, 0.38 USD | Confirmée pour le dépôt ; la moitié rapport n'est pas testée ; et un `Write` pré-approuvé n'est pas confiné au dépôt | [2026-09-22](#2026-09-22--les-leçons-3-à-5-exécutées-dans-le-labo) |
+| L5b — Que fait `/slashforge:review-pr` sans connexion GitHub ? | Il s'arrête à sa vérification préalable de l'étape 0 et demande `gh auth login`, comme le dit son fichier, sans lancer d'autre commande | e4 : `gh auth status` a échoué, la commande s'est arrêtée et a dit à l'utilisateur de lancer `gh auth login` ; rien de lu ni d'écrit sur GitHub. 4 tours, 35 s, 0.17 USD | Confirmée | [2026-09-22](#2026-09-22--les-leçons-3-à-5-exécutées-dans-le-labo) |
 
 ## 2026-09-22 — L'installeur, lu et exécuté
 
@@ -81,15 +82,42 @@ Deux d'entre eux demandent une autorité que ce labo n'a pas et ne doit pas rece
 
 **Les propres tests de SlashForge, dans le labo.** `node --test` sur le clone a terminé avec le code 0 mais a pris 523 s. Je n'ai pas relevé le nombre de tests réussis, parce que mon filtre attendait des lignes TAP et que le reporter par défaut affiche autre chose. J'ai soupçonné le test de `forge-open.sh`, qui lance `start` sous Git Bash. Lancé seul, il passe en 20 s, et j'en ai d'abord conclu qu'il n'était pas en cause. C'était faux : ici, un test vert ne prouve rien. [`test/install.test.js:527`](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/test/install.test.js#L527) appelle le helper avec `/tmp/definitely-does-not-exist-slashforge.html`, et sous Windows [`forge-open.sh`](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/templates/forge-open.sh#L37-L40) lance `start`, avale l'erreur et renvoie 0. Le test est donc vert quoi que fasse `start` : c'est un faux positif. Une capture d'écran de l'auteur montre qu'il affiche une boîte de dialogue d'erreur Windows sur le bureau. Les 20 s n'excluent pas non plus le helper comme cause des 523 s. Je n'ai pas relancé le test, puisqu'il ouvre une fenêtre. La cause des 523 s reste à vérifier.
 
+## 2026-09-22 — Les leçons 3 à 5, exécutées dans le labo
+
+L'auteur a connecté le répertoire de configuration propre au labo avec `claude auth login` (abonnement, pas de facturation à l'API), dans son propre terminal : la page de connexion donne un code à coller, ce qu'une tâche en arrière-plan ne peut pas faire. `claude auth status` dans le labo a ensuite répondu `"loggedIn": true, "authMethod": "claude.ai"`, et le vrai `~/.claude` n'a pas été concerné.
+
+Versions : Claude Code 2.1.280, modèle `claude-opus-5-5[1m]` (celui par défaut ; aucun `--model` n'a été passé), SlashForge 4.4.3 sur son propre dépôt au tag `v4.4.3`. Six exécutions, chacune avec son plafond, une à la fois :
+
+| Exécution | Prompt | Plafond | Tours | Durée | Coût | Arrêtée à |
+|---|---|---|---|---|---|---|
+| e1 | `/slashforge:investigate` sur la trouvaille de l'exécution à blanc | 0.50 USD, 10 tours | 15 | 76 s | 0.45 USD | l'étape du rapport, refusée (voir plus bas) |
+| e2 | `/slashforge:setup` | 0.75 USD, 20 tours | 6 | 56 s | 0.27 USD | six questions de clarification |
+| e2b | `/init` | 0.50 USD, 20 tours | 9 | 92 s | 0.32 USD | terminé : `CLAUDE.md` écrit |
+| e3 | `/slashforge:code -quick` + la correction de l'exécution à blanc | 0.75 USD, 20 tours | 6 | 57 s | 0.25 USD | phases 3 et 4 ensemble |
+| e4 | `/slashforge:review-pr` | 0.25 USD, 5 tours | 4 | 35 s | 0.17 USD | étape 0 : `gh` non connecté |
+| e1b | e1 à nouveau, avec le labo corrigé | 0.50 USD, 10 tours | 11 | 58 s | 0.38 USD | la limite de tours |
+
+Total : 1.83 USD. Aucune exécution n'a atteint son plafond en dollars. Après e2b, le dépôt du labo a été restauré (son `CLAUDE.md` est conservé avec les fichiers de l'exécution) ; toutes les autres exécutions l'ont laissé inchangé.
+
+**Ce qu'a trouvé l'investigation.** Les deux exécutions ont donné la cause racine que donne la leçon 1 : l'exécution à blanc construit sa propre liste à partir de `GUIDE_FILES` et `COMMAND_FILES`, et `installFiles` écrit aussi `ASSET_FILES` et `SKILL_FILES`, 21 + 2 + 9 = 32. e1 a ajouté deux choses que le cours n'avait pas écrites : que les guides sont étiquetés `copy` bien que rendus (la leçon 1 le dit), et que l'exécution à blanc ne mentionne pas les `REMOVED_GUIDE_FILES` périmés qu'elle supprime. Il a proposé la correction que suggère la leçon 1, une seule fonction de planification partagée par les deux chemins, avec un test qui les compare.
+
+**Une écriture sortie du dépôt.** Dans e1, `lab/run.sh` listait `Edit` et `Write` parmi les outils autorisés. Cela les pré-approuve partout, pas seulement dans le répertoire de travail, et le modèle s'en est servi : `node` lui étant refusé pour le rapport, il a écrit un script de 4,175 octets dans `%TEMP%\sf-splice.js` et a dit à l'utilisateur de le lancer. Le fichier est conservé avec l'exécution, et le labo est corrigé. `Edit` et `Write` ne sont plus listés, donc `acceptEdits` n'accepte les modifications qu'à l'intérieur du dépôt, et `run.sh` liste tout fichier qui apparaît dans le dossier temporaire pendant une exécution. e1b et e2 à e4 n'ont rien écrit à l'extérieur ; le seul fichier listé après e2b était une image écrite par un autre programme.
+
+**`/init` face à `/slashforge:setup`.** `/init` a écrit un `CLAUDE.md` de 50 lignes d'emblée, et a trouvé de lui-même l'écart du README que liste le tableau QA de ce cours ("Known drift: the README's *What gets installed* table still shows `commands/forge/`"). Setup a lu davantage et n'a rien écrit : il a proposé quatre agents, posé des questions sur les hooks, les commandes, les règles de release et l'organisation, et dit qu'il écrirait `CLAUDE.md` en dernier. La proposition Graphify, que l'hypothèse attendait comme premier point de contrôle, n'est pas apparue : l'essentiel du dépôt est du Markdown et du `.astro`, sous le seuil de langage de 70% de Graphify, et setup le saute alors en silence, comme le dit son fichier.
+
+**Les points de contrôle.** Chaque commande s'est arrêtée là où son fichier dit qu'une personne décide, et aucune n'en a franchi un. Un écart : `/slashforge:code -quick` a demandé le plan (phase 3) et la branche (phase 4) dans le même message, alors que `forge-workflow.md` dit *"Do not combine phases"*.
+
+**Limites.** Une exécution par commande, un dépôt, un modèle. Les coûts sont calculés par Claude Code pour la session d'abonnement, ce ne sont pas des montants facturés. La comparaison des tokens de `-quick` avec le README est approximative, parce que le README ne dit pas si sa fourchette compte l'entrée en cache. La limite de tours s'est comportée différemment dans deux exécutions : e1 a indiqué 15 tours avec `--max-turns 10` et s'est terminée normalement, et e1b s'est arrêtée à 11 avec `error_max_turns`. La cause reste à vérifier.
+
 ## À vérifier
 
 - Pourquoi le `node --test` de SlashForge prend 523 s sous Windows avec Git Bash, y compris la part du test de `forge-open.sh`. Ne pas relancer ce test dans une session de bureau : il ouvre une boîte de dialogue d'erreur (voir l'entrée du labo).
-- Si `--max-budget-usd` arrête une exécution sous une connexion par abonnement, comme il le fait avec une clé d'API (leçon 3 et suivantes).
+- Si `--max-budget-usd` arrête une exécution sous une connexion par abonnement : aucune exécution n'a atteint son plafond, il n'a donc jamais été mis à l'épreuve.
+- Pourquoi e1 a indiqué 15 tours sous `--max-turns 10` et s'est terminée normalement, alors que e1b s'est arrêtée à 11.
 - Si le modèle trouve `.claude/setup/slashforge/…` quand Claude Code est démarré dans un sous-dossier d'un dépôt avec une installation de projet (leçon 2).
-- Le coût en tokens de chaque commande, qu'estime le README, sur un dépôt public (leçons 3 à 5).
+- Le coût d'un workflow complet au-delà de ses points de contrôle. Le labo s'arrête au premier point de contrôle par conception ; aller plus loin suppose d'y répondre, ce qui est la décision de l'auteur.
 - Si un skill écrit comme un fichier dans `commands/` est jamais choisi par le modèle de lui-même, ou seulement quand un guide le nomme.
 
 ## Questions ouvertes
 
-- Comment connecter le labo : `claude auth login` avec `CLAUDE_CONFIG_DIR` pointant sur le labo, ou un token de `claude setup-token` dans `CLAUDE_CODE_OAUTH_TOKEN`. Dans les deux cas c'est la décision de l'auteur, tout comme le budget de L3 à L5.
 - L'amont accepterait-il une exécution à blanc construite à partir d'`installFiles` lui-même, comme le `-WhatIf` de PowerShell passe par le même `ShouldProcess` que l'action ? Pas proposé : rien ne sort de ce dépôt sans l'accord de l'auteur.
