@@ -5,7 +5,7 @@ sidebar:
   order: 5
 ---
 
-Este experimento conecta dos cursos sin poner un modelo en la ruta de control de producción. [Jev](../../typesafe-ai-system-one/05-confidence-gate-stress/) proporciona una **clasificación consultiva sintética**; el [motor de redes de Petri](../../petri-nets/14-on-our-systems/) enumera lo que permitiría un flujo de control propuesto. Ninguno verifica por sí solo una transición real de Gaia o IX.
+Este experimento conecta dos cursos sin poner un modelo en la ruta de control de producción. [Jev](https://docs.typesafe.ai/models) proporciona una **clasificación consultiva sintética** en nuestro [laboratorio del confidence gate](../../typesafe-ai-system-one/05-confidence-gate-stress/); el [motor de redes de Petri](../../petri-nets/14-on-our-systems/) enumera lo que permitiría un flujo de control propuesto. Ninguno verifica por sí solo una transición real de Gaia o IX.
 
 ## Pregunta y baseline
 
@@ -42,3 +42,14 @@ La [fixture](https://github.com/spareilleux/learn/blob/main/code/repository-dogf
 ## Próximo gate de dogfooding
 
 Fijar una transición real de Gaia o IX y su revisión. Asociar los campos del recibo autorizado con los lugares de la red; inyectar evidencia ausente o falsificada; reproducir el testigo inseguro en un seam público. Comparar con una prueba sencilla de guarda determinista. Incubar solo si el modelo descubre un fallo que esa prueba no detecta y una revisión independiente acepta la correspondencia. De lo contrario, conservar la prueba sencilla y rechazar este modelo adicional.
+
+## Ejercicio
+
+En una copia temporal de la red protegida, elimina el arco `implementation_authority → authorize`. Predice qué prueba de token ausente fallará y ejecuta las pruebas C# específicas. Después restaura el arco.
+
+<details>
+<summary>Solución</summary>
+
+Con evidencia verificada pero sin concesión de implementación, `authorize` queda habilitada después de `confirm`. La prueba que explora `(verified=true, authority=false)` encuentra un `effect` alcanzable y falla. Es un contraejemplo del modelo, no un defecto observado en Gaia.
+
+</details>

@@ -5,7 +5,7 @@ sidebar:
   order: 5
 ---
 
-Cette expérience relie deux cours sans placer le modèle sur le chemin de contrôle en production. [Jev](../../typesafe-ai-system-one/05-confidence-gate-stress/) fournit une **classification consultative synthétique** ; le [moteur de réseaux de Pétri](../../petri-nets/14-on-our-systems/) énumère ce qu'un contrôle proposé permettrait. Aucun des deux ne vérifie à lui seul une transition réelle de Gaia ou d'IX.
+Cette expérience relie deux cours sans placer le modèle sur le chemin de contrôle en production. [Jev](https://docs.typesafe.ai/models) fournit une **classification consultative synthétique** dans notre [labo du confidence gate](../../typesafe-ai-system-one/05-confidence-gate-stress/) ; le [moteur de réseaux de Pétri](../../petri-nets/14-on-our-systems/) énumère ce qu'un contrôle proposé permettrait. Aucun des deux ne vérifie à lui seul une transition réelle de Gaia ou d'IX.
 
 ## Question et baseline
 
@@ -42,3 +42,14 @@ La [fixture](https://github.com/spareilleux/learn/blob/main/code/repository-dogf
 ## Prochain gate de dogfooding
 
 Épingler une vraie transition Gaia ou IX et sa révision. Associer les champs du reçu faisant autorité aux places du réseau ; injecter une preuve manquante ou falsifiée ; rejouer le témoin dangereux sur un seam public. Comparer avec un simple test de garde déterministe. Incuber seulement si le modèle révèle un défaut que ce test manque et si une revue indépendante accepte la correspondance. Sinon, garder le test simple et rejeter ce modèle supplémentaire.
+
+## Exercice
+
+Dans une copie temporaire du réseau protégé, retirez l'arc `implementation_authority → authorize`. Prédisez quel test de jeton manquant échouera, puis lancez les tests C# ciblés. Restaurez ensuite l'arc.
+
+<details>
+<summary>Solution</summary>
+
+Avec une preuve vérifiée mais sans mandat d'implémentation, `authorize` devient activable après `confirm`. Le test qui explore `(verified=true, authority=false)` trouve un `effect` atteignable et échoue. C'est un contre-exemple du modèle, pas un défaut constaté dans Gaia.
+
+</details>

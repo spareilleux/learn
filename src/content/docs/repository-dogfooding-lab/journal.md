@@ -22,7 +22,7 @@ sidebar:
 |---|---|---|---|---|
 | Can one registry generate several views without letting a score grant authority? | Deterministic rendering plus invariants can separate prioritization from promotion | 4 opportunities, 5 generated matrices, 6/6 tests passed in 0.002 s; scoring left status and authority unchanged | confirmed for the local tracer | [2026-09-20 entry](#2026-09-20--first-opportunity-matrix-tracer), [`code/repository-dogfooding-lab`](https://github.com/spareilleux/learn/tree/main/code/repository-dogfooding-lab) |
 | Can Jev reduce downstream token cost by 50% at equal quality? | A typed gate resolves enough cases to halve downstream input with zero false supports | Offline plan only: 12 cases, 13 calls, zero retries, $0.0021 local byte-proxy limit—not a provider-billed cost cap; no live result | inconclusive | [TypeSafe benchmark](../../typesafe-ai-system-one/04-token-cost-benchmark/) |
-| Can an offline Petri oracle expose a false Jev-advice-to-authority step? | Unsafe advice-only flow reaches an effect; a guarded flow needs independently verified evidence and an implementation grant | Synthetic 0.98 wrong support; 3/3 focused C# tests and 1/1 fixture-parity test pass; no real-repository replay | promising locally, not integrated | [lesson](05-jev-petri-authority/), [`JevEvidenceGateTests.cs`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/Tests/JevEvidenceGateTests.cs) |
+| Can an offline Petri oracle expose a false Jev-advice-to-authority step? | Unsafe advice-only flow reaches an effect; a guarded flow needs independently verified evidence and an implementation grant | Synthetic 0.98 wrong support; 3/3 focused C# tests and 1/1 fixture-parity test pass; no real-repository replay | promising locally, not integrated | [dated entry](#jev-petri-2026-09-22), [lesson](../05-jev-petri-authority/), [`JevEvidenceGateTests.cs`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/Tests/JevEvidenceGateTests.cs) |
 
 ## 2026-09-20 — First opportunity-matrix tracer
 
@@ -37,6 +37,8 @@ python -m unittest -v
 ```
 
 Measured result: `validated=4 matrices=current mirrors=current`; 6/6 tests passed in 0.002 s. Tests reject promoted candidates without artifacts and adoption without a confirmed verdict, and check EN/FR/ES file parity plus journal structure. No external network or repository mutation occurred.
+
+<a id="jev-petri-2026-09-22"></a>
 
 ## 2026-09-22 — Synthetic Jev × Petri authority boundary
 

@@ -5,7 +5,7 @@ sidebar:
   order: 5
 ---
 
-This experiment connects two courses without putting a model on the production control path. [Jev](../../typesafe-ai-system-one/05-confidence-gate-stress/) supplies a **synthetic advisory classification**; the [Petri-net engine](../../petri-nets/14-on-our-systems/) enumerates what a proposed control flow would permit. Neither alone verifies a real Gaia or IX transition.
+This experiment connects two courses without putting a model on the production control path. [Jev](https://docs.typesafe.ai/models) supplies a **synthetic advisory classification** in our [confidence-gate lab](../../typesafe-ai-system-one/05-confidence-gate-stress/); the [Petri-net engine](../../petri-nets/14-on-our-systems/) enumerates what a proposed control flow would permit. Neither alone verifies a real Gaia or IX transition.
 
 ## Question and baseline
 
@@ -42,3 +42,14 @@ The [fixture](https://github.com/spareilleux/learn/blob/main/code/repository-dog
 ## Next dogfooding gate
 
 Pin one actual Gaia or IX transition and its revision. Map its source-of-truth receipt fields to the net's places; seed missing and forged evidence; replay the unsafe witness through a public test seam. Compare against a simple deterministic guard test. Incubate only if the model catches an otherwise missed defect and an independent reviewer accepts the mapping. Otherwise retain the simpler test and reject this extra model.
+
+## Exercise
+
+In a disposable copy of the guarded net, remove the `implementation_authority → authorize` arc. Predict which missing-token test will fail, then run the focused C# tests. Restore the arc afterwards.
+
+<details>
+<summary>Solution</summary>
+
+With verified evidence present but no implementation grant, `authorize` becomes enabled after `confirm`. The test that explores `(verified=true, authority=false)` finds a reachable `effect` and fails. This is a model counterexample, not a real Gaia defect.
+
+</details>
