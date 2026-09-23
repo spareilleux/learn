@@ -17,7 +17,7 @@ sidebar:
 - [x] Página de la lección 3: `/slashforge:setup` frente a `/init`
 - [x] Página de la lección 4: `/slashforge:code`, diez fases y cuatro puertas, con `-quick`
 - [x] Página de la lección 5: `/slashforge:investigate` y `/slashforge:review-pr`
-- [ ] Lección 6: hacerlo tuyo
+- [x] Lección 6: hacerlo tuyo — reglas, verificación, una instalación de equipo; `check.sh` compara ahora 20 salidas
 
 ## QA
 
@@ -32,6 +32,8 @@ Cada fila de abajo está reproducida por `check.sh` o leída en el instalador en
 | `--yes`, que la ayuda asocia a *"the update prompt"*, no responde a otras preguntas | Con un stdin que no es una terminal está activado, y `uninstall` lo borra todo sin preguntar | [`#L628-L633`](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/bin/install.js#L628-L633) | `l01_uninstall`: 15 borrados, exit 0, ninguna pregunta | Reproducido; documentado en parte |
 | Una plantilla que Claude Code acepta, el instalador la acepta | El instalador lee el frontmatter línea a línea: una `description: >` plegada de YAML se rechaza, y un `---` de cierre seguido de un espacio no se encuentra, aunque al delimitador de apertura sí se le quitan los espacios | [`#L113-L137`](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/bin/install.js#L113-L137) | `l02_installer_functions`: 6 rechazos de 7 muestras | Reproducido; solo afecta a las plantillas que añadas tú |
 | El campo `name` que exige el instalador da nombre al comando | Claude Code ignora `name` en un archivo bajo `commands/`; es la ruta la que da nombre al comando | [Claude Code, skills](https://code.claude.com/docs/en/skills#where-skills-live) | — | Documentado por ambos lados; una trampa al renombrar (lección 2, ejercicio 1) |
+| Las guías del kit coinciden sobre dónde va una skill y cuánto puede medir | `forge-instructions.md` dice `.claude/skills/*.md` y *"Every `.md` file … under 200 lines"*; `forge-skills.md` dice una carpeta con `SKILL.md`, por debajo de 500 líneas. La documentación de Claude Code solo lista la forma de carpeta | [`forge-instructions.md#L14-L34`](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/templates/forge-instructions.md#L14-L34), [`forge-skills.md#L27-L51`](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/templates/forge-skills.md#L27-L51) | Dos contradicciones en guías que el modelo lee en la misma ejecución | Leído, no reportado [2026-09-22](#2026-09-22--lección-6-dos-reglamentos-y-qué-copia-se-ejecuta) |
+| El paso de verificación de setup detecta un archivo de más de 200 líneas | `wc -l CLAUDE.md .claude/**/*.md` en bash sin `globstar` se queda a una carpeta de profundidad, así que el `SKILL.md` de una skill nunca se cuenta | [`forge-instructions.md` Step 9](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/templates/forge-instructions.md#L126-L139) | `l06_verify_glob`: un `SKILL.md` de 300 líneas ausente del recuento, en Linux, Windows y macOS | Reproducido, no reportado [2026-09-22](#2026-09-22--lección-6-dos-reglamentos-y-qué-copia-se-ejecuta) |
 
 ## Experimentos
 
@@ -44,6 +46,7 @@ Las lecciones 3 a 5 ejecutan los comandos a través del modelo, así que cada ej
 | L4 — ¿Hasta dónde llega `/slashforge:code -quick` en modo headless con un cambio pequeño? | Se detiene en la puerta de la fase 3 (confirmar el plan) sin editar el repositorio, por debajo de 70,000 tokens, el extremo alto del rango del README para `-quick` | e3: un plan escueto (un `plannedWrites` exportado, una prueba que lo compara con `installFiles`), y luego una parada, ningún archivo cambiado. Preguntó la fase 3 y la fase 4 (rama) en un solo mensaje. 6 turnos, 57 s, 0.25 USD; 1,720 tokens de entrada y de salida, 23,433 escritos en la caché, 158,847 leídos de ella | Confirmada para la puerta y para «ninguna edición»; la parte de tokens depende de lo que se cuente: solo las lecturas de caché superan 70,000 | [2026-09-22](#2026-09-22--las-lecciones-3-a-5-ejecutadas-en-el-laboratorio) |
 | L5a — ¿Se queda `/slashforge:investigate` en solo lectura? | No edita ningún archivo versionado y escribe un informe HTML bajo `docs/slashforge/` | e1 y e1b: ningún archivo cambiado en el repositorio, la causa raíz correcta, y ningún informe, porque construirlo necesita código `node` que el laboratorio rechaza. En e1, donde el laboratorio preaprobaba `Write`, el modelo escribió su generador de informes en `%TEMP%` en su lugar. e1: 15 turnos, 0.45 USD; e1b: detenida por el límite de turnos en 11, 0.38 USD | Confirmada para el repositorio; la mitad del informe queda sin probar; y un `Write` preaprobado no se limita al repositorio | [2026-09-22](#2026-09-22--las-lecciones-3-a-5-ejecutadas-en-el-laboratorio) |
 | L5b — ¿Qué hace `/slashforge:review-pr` sin sesión en GitHub? | Se detiene en su comprobación previa del paso 0 y pide `gh auth login`, como dice su archivo, sin ejecutar ningún otro comando | e4: `gh auth status` falló, el comando se detuvo y le dijo al usuario que ejecutara `gh auth login`; nada leído ni escrito en GitHub. 4 turnos, 35 s, 0.17 USD | Confirmada | [2026-09-22](#2026-09-22--las-lecciones-3-a-5-ejecutadas-en-el-laboratorio) |
+| e5 — Cuando un comando existe a la vez en `~/.claude` y en el proyecto, ¿cuál se ejecuta? | El personal, como dice la documentación de Claude Code (*"personal over project"*) | e5b: `GLOBAL`, 1 turno, 0.09 USD. e5, con un tope de 0.10 USD, se detuvo con `error_max_budget_usd` en 0.103 USD antes de devolver su respuesta | Confirmada; y el tope funciona con un inicio de sesión por suscripción, comprobado después de cada llamada | [2026-09-22](#2026-09-22--lección-6-dos-reglamentos-y-qué-copia-se-ejecuta) |
 
 ## 2026-09-22 — Leer y ejecutar el instalador
 
@@ -109,10 +112,17 @@ Total: 1.83 USD. Ninguna ejecución alcanzó su tope en dólares. Después de e2
 
 **Límites.** Una ejecución por comando, un repositorio, un modelo. Los costes los calcula Claude Code para la sesión de suscripción, no son importes facturados. La comparación de tokens de `-quick` con el README es aproximada, porque el README no dice si su rango cuenta la entrada en caché. El límite de turnos se comportó de forma distinta en dos ejecuciones: e1 informó 15 turnos con `--max-turns 10` y terminó con normalidad, y e1b se detuvo en 11 con `error_max_turns`. La causa queda por verificar.
 
+## 2026-09-22 — Lección 6: dos reglamentos, y qué copia se ejecuta
+
+La mayor parte de la lección 6 es lectura, y de ella salieron dos hallazgos. Las dos guías que el modelo lee durante setup no coinciden: `forge-instructions.md` lista las skills como `.claude/skills/*.md` bajo una regla de oro de 200 líneas, y `forge-skills.md` pide una carpeta con un `SKILL.md` de menos de 500 líneas. Y el paso de verificación al final de setup, `wc -l CLAUDE.md .claude/**/*.md`, no mira dentro de las carpetas de skills en el modo por defecto de bash. `check.sh` construye ahora un pequeño repositorio con un `SKILL.md` de 300 líneas y compara las dos listas de archivos (`l06_verify_glob`), así que la CI lo muestra en los tres sistemas; en zsh, donde `**` es recursivo por defecto, la misma línea vería el archivo.
+
+Una ejecución del modelo, para zanjar lo que significa una instalación de equipo. La hipótesis, escrita a partir de la documentación de Claude Code antes de la ejecución: con `/lab:which` a la vez en el `commands/` personal del laboratorio y en el `.claude/commands/` del repositorio, se ejecuta el personal. e5, con un tope de 0.10 USD, se detuvo con `error_max_budget_usd` en 0.103 USD: el tope funciona con un inicio de sesión por suscripción, y se comprueba después de la llamada, no antes. e5b, con 0.30 USD, respondió `GLOBAL` por 0.09 USD. Los dos archivos de prueba se guardan con la ejecución, y el laboratorio se restauró. Así que un compañero con una instalación global ejecuta su propia versión de `/slashforge:code`, no la que el equipo versionó.
+
+Límite: el comportamiento de setup en una nueva ejecución — actualizar, preguntar o no tocar según la marca `generated_by` — se describe a partir de la guía, no se ha probado; probarlo implica ejecutar setup más allá de sus preguntas dos veces.
+
 ## Por verificar
 
 - Por qué el `node --test` de SlashForge tarda 523 s en Windows con Git Bash, incluida la parte de la prueba de `forge-open.sh`. No volver a ejecutar esa prueba en una sesión de escritorio: abre un cuadro de diálogo de error (ver la entrada del laboratorio).
-- Si `--max-budget-usd` detiene una ejecución con un inicio de sesión por suscripción: ninguna ejecución alcanzó su tope, así que nunca se puso a prueba.
 - Por qué e1 informó 15 turnos con `--max-turns 10` y terminó con normalidad, cuando e1b se detuvo en 11.
 - Si el modelo encuentra `.claude/setup/slashforge/…` cuando Claude Code se inicia en una subcarpeta de un repositorio con una instalación de proyecto (lección 2).
 - El coste de un workflow completo más allá de sus puertas. El laboratorio se detiene en la primera puerta por diseño; ir más lejos implica responder a las puertas, y eso lo decide el autor.
@@ -120,4 +130,5 @@ Total: 1.83 USD. Ninguna ejecución alcanzó su tope en dólares. Después de e2
 
 ## Preguntas abiertas
 
+- ¿Respeta la nueva ejecución de setup las marcas `generated_by` como dice su guía: actualizar los archivos de la versión actual, preguntar por los más antiguos, no tocar los editados?
 - ¿Aceptaría upstream un dry run construido a partir del propio `installFiles`, como el `-WhatIf` de PowerShell pasa por el mismo `ShouldProcess` que la acción? No propuesto: nada sale de este repositorio sin la aprobación del autor.

@@ -17,7 +17,7 @@ sidebar:
 - [x] Lesson 3 page: `/slashforge:setup` against `/init`
 - [x] Lesson 4 page: `/slashforge:code`, ten phases and four gates, with `-quick`
 - [x] Lesson 5 page: `/slashforge:investigate` and `/slashforge:review-pr`
-- [ ] Lesson 6: making it yours
+- [x] Lesson 6: making it yours — rules, verification, a team install; `check.sh` now compares 20 outputs
 
 ## QA
 
@@ -32,6 +32,8 @@ Every row below is reproduced by `check.sh` or read in the installer at tag `v4.
 | `--yes`, which the help ties to *"the update prompt"*, doesn't answer other questions | With stdin not a terminal it is on, and `uninstall` removes everything without asking | [`#L628-L633`](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/bin/install.js#L628-L633) | `l01_uninstall`: 15 removals, exit 0, no prompt | Reproduced; documented in part |
 | A template Claude Code accepts, the installer accepts | The installer reads frontmatter line by line: a folded YAML `description: >` is refused, and a closing `---` followed by a space is not found, although the opening fence is trimmed | [`#L113-L137`](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/bin/install.js#L113-L137) | `l02_installer_functions`: 6 refusals out of 7 samples | Reproduced; affects only templates you add |
 | The `name` field the installer requires names the command | Claude Code ignores `name` in a file under `commands/`; the path names the command | [Claude Code, skills](https://code.claude.com/docs/en/skills#where-skills-live) | — | Documented on both sides; a trap when renaming (lesson 2, exercise 1) |
+| The kit's guides agree on where a skill goes and how long it may be | `forge-instructions.md` says `.claude/skills/*.md` and *"Every `.md` file … under 200 lines"*; `forge-skills.md` says a folder with `SKILL.md`, under 500 lines. Claude Code's documentation only lists the folder form | [`forge-instructions.md#L14-L34`](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/templates/forge-instructions.md#L14-L34), [`forge-skills.md#L27-L51`](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/templates/forge-skills.md#L27-L51) | Two contradictions in guides the model reads in the same run | Read, not reported [2026-09-22](#2026-09-22--lesson-6-two-rulebooks-and-which-copy-runs) |
+| Setup's verify step catches a file over 200 lines | `wc -l CLAUDE.md .claude/**/*.md` in bash without `globstar` stops one folder deep, so a skill's `SKILL.md` is never counted | [`forge-instructions.md` Step 9](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/templates/forge-instructions.md#L126-L139) | `l06_verify_glob`: a 300-line `SKILL.md` missing from the count, on Linux, Windows and macOS | Reproduced, not reported [2026-09-22](#2026-09-22--lesson-6-two-rulebooks-and-which-copy-runs) |
 
 ## Experiments
 
@@ -44,6 +46,7 @@ Lessons 3 to 5 run the commands through the model, so each run has a hypothesis 
 | L4 — How far does `/slashforge:code -quick` get headless on a small change? | It stops at the Phase 3 gate (confirm plan) with no edit to the repository, under 70,000 tokens, the high end of the README's range for `-quick` | e3: a lean plan (one exported `plannedWrites`, a test comparing it with `installFiles`), then a stop, no file changed. It asked Phase 3 and Phase 4 (branch) in one message. 6 turns, 57 s, 0.25 USD; 1,720 tokens in and out, 23,433 written to the cache, 158,847 read from it | Confirmed for the gate and for "no edit"; the token part depends on what is counted: cache reads alone exceed 70,000 | [2026-09-22](#2026-09-22--lessons-3-to-5-run-in-the-lab) |
 | L5a — Does `/slashforge:investigate` stay read-only? | It edits no tracked file and writes one HTML report under `docs/slashforge/` | e1 and e1b: no file changed in the repository, the right root cause, and no report, because building it needs `node` code the lab refuses. In e1, where the lab pre-approved `Write`, the model wrote its report builder to `%TEMP%` instead. e1: 15 turns, 0.45 USD; e1b: stopped by the turn limit at 11, 0.38 USD | Confirmed for the repository; the report half is untested; and a pre-approved `Write` is not confined to the repository | [2026-09-22](#2026-09-22--lessons-3-to-5-run-in-the-lab) |
 | L5b — What does `/slashforge:review-pr` do with no GitHub login? | It stops at its Step 0 preflight and asks for `gh auth login`, as its file says, with no other command run | e4: `gh auth status` failed, the command stopped and told the user to run `gh auth login`; nothing read from or written to GitHub. 4 turns, 35 s, 0.17 USD | Confirmed | [2026-09-22](#2026-09-22--lessons-3-to-5-run-in-the-lab) |
+| e5 — When a command exists both in `~/.claude` and in the project, which runs? | The personal one, as Claude Code's documentation says (*"personal over project"*) | e5b: `GLOBAL`, 1 turn, 0.09 USD. e5, with a 0.10 USD ceiling, stopped with `error_max_budget_usd` at 0.103 USD before its answer was returned | Confirmed; and the ceiling works under a subscription login, checked after each call | [2026-09-22](#2026-09-22--lesson-6-two-rulebooks-and-which-copy-runs) |
 
 ## 2026-09-22 — The installer, read and run
 
@@ -109,10 +112,17 @@ Total: 1.83 USD. No run reached its dollar ceiling. After e2b, the lab repositor
 
 **Limits.** One run per command, one repository, one model. Costs are computed by Claude Code for the subscription session, not billed amounts. The `-quick` token comparison with the README is loose, because the README doesn't say whether its range counts cached input. The turn limit behaved differently in two runs: e1 reported 15 turns with `--max-turns 10` and finished normally, and e1b stopped at 11 with `error_max_turns`. The cause is to verify.
 
+## 2026-09-22 — Lesson 6: two rulebooks, and which copy runs
+
+Most of lesson 6 is reading, and two findings came out of it. The two guides the model reads during setup disagree: `forge-instructions.md` lists skills as `.claude/skills/*.md` under a 200-line golden rule, and `forge-skills.md` asks for a folder with a `SKILL.md` under 500 lines. And the verify step at the end of setup, `wc -l CLAUDE.md .claude/**/*.md`, doesn't look inside skill folders in bash's default mode. `check.sh` now builds a small repository with a 300-line `SKILL.md` and compares the two file lists (`l06_verify_glob`), so CI shows it on the three systems; in zsh, where `**` is recursive by default, the same line would see the file.
+
+One model run, to settle what a team install means. The hypothesis, written from Claude Code's documentation before the run: with `/lab:which` both in the lab's personal `commands/` and in the repository's `.claude/commands/`, the personal one runs. e5, with a ceiling of 0.10 USD, was stopped with `error_max_budget_usd` at 0.103 USD: the ceiling works under a subscription login, and it is checked after the call, not before. e5b, with 0.30 USD, answered `GLOBAL` for 0.09 USD. Both probe files are kept with the run, and the lab was restored. So a teammate with a global install runs their own version of `/slashforge:code`, not the one the team committed.
+
+Limit: the re-run behaviour of setup — refresh, ask, or leave alone according to the `generated_by` marker — is described from the guide, not tested; testing it means running setup past its questions twice.
+
 ## To verify
 
 - Why SlashForge's `node --test` takes 523 s on Windows with Git Bash, including how much of it is the `forge-open.sh` test. Don't re-run that test on a desktop session: it opens an error dialog (see the lab entry).
-- Whether `--max-budget-usd` stops a run under a subscription login: no run reached its ceiling, so it was never exercised.
 - Why e1 reported 15 turns under `--max-turns 10` and finished normally, when e1b stopped at 11.
 - Whether the model finds `.claude/setup/slashforge/…` when Claude Code is started in a subfolder of a repository with a project install (lesson 2).
 - The cost of a full workflow past its gates. The lab stops at the first gate by design; going further means answering the gates, which is the author's decision.
@@ -120,4 +130,5 @@ Total: 1.83 USD. No run reached its dollar ceiling. After e2b, the lab repositor
 
 ## Open questions
 
+- Does setup's re-run respect the `generated_by` markers as its guide says: refresh the current version's files, ask about older ones, leave edited ones alone?
 - Would upstream take a dry run built from `installFiles` itself, the way PowerShell's `-WhatIf` goes through the same `ShouldProcess` as the action? Not proposed: nothing leaves this repository without the author's approval.

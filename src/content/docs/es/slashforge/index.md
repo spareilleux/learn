@@ -54,7 +54,7 @@ Las dos últimas filas son las que hay que tener presentes. Una política de ram
 | 3 | [`/slashforge:setup` frente a `/init`](03-setup-against-init/) | una plantilla de proyecto, una checklist de incorporación |
 | 4 | [`/slashforge:code`: diez fases y cuatro puertas](04-code-phases-and-gates/) | las políticas de rama, una plantilla de pull request |
 | 5 | [`/slashforge:investigate` y `/slashforge:review-pr`](05-investigate-and-review-pr/) | un proceso de hotfix, un informe de bug, una revisión de código |
-| 6 | Hacerlo tuyo: reglas, comandos de verificación, una instalación de equipo | `.editorconfig`, una configuración de compilación compartida |
+| 6 | [Hacerlo tuyo: reglas, verificación, una instalación de equipo](06-making-it-yours/) | `.editorconfig`, una configuración de compilación compartida |
 | — | [Diario](journal/) | |
 
 ## Recursos

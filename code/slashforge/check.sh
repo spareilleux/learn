@@ -139,4 +139,22 @@ HOME="$BROKEN_HOME" run l02_broken_template node out/broken-pkg/bin/install.js
 if command -v cygpath > /dev/null; then USERPROFILE=$(cygpath -w "$HOME_DIR"); fi
 files l02_broken_template_files "$BROKEN_HOME"
 
+# --- Lesson 6: making it yours ---------------------------------------------------------------------------------
+
+# Setup's verify step checks that no file exceeds 200 lines with `wc -l CLAUDE.md .claude/**/*.md`. A repository laid
+# out as the kit's own forge-skills.md asks — a skill is a folder with a SKILL.md — and one oversized skill:
+FIX="$PWD/out/l06-repo"
+mkdir -p "$FIX/.claude/rules" "$FIX/.claude/skills/add-endpoint"
+printf '# Project\n' > "$FIX/CLAUDE.md"
+printf -- '---\nname: api\ndescription: API rules\n---\n\n- rule\n' > "$FIX/.claude/rules/api.md"
+{ printf -- '---\nname: add-endpoint\ndescription: Add an endpoint\n---\n'; for i in $(seq 1 296); do echo "step $i"; done; } \
+  > "$FIX/.claude/skills/add-endpoint/SKILL.md"
+{
+  echo "# the files, as find sees them"
+  (cd "$FIX" && find CLAUDE.md .claude -name '*.md' | LC_ALL=C sort | xargs wc -l | awk '$2 != "total" { print $1, $2 }')
+  echo "# the files the verify step counts: wc -l CLAUDE.md .claude/**/*.md, in bash without globstar"
+  (cd "$FIX" && bash -c 'wc -l CLAUDE.md .claude/**/*.md' | awk '$2 != "total" { print $1, $2 }')
+} > out/l06_verify_glob.txt
+compare l06_verify_glob
+
 exit $status
