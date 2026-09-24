@@ -1,0 +1,232 @@
+---
+title: "Lesson 4: Case study — GA's chatbot writes VexTab"
+description: Guitar Alchemist asks its chatbot for vextab blocks, adds them to answers, traces them, draws them in a pre, and has an F# parser and generator for VexTab. This lesson runs every block and every parser against VexTab 4.0.5 and reports what agrees.
+sidebar:
+  label: 4. Case study — GA's chatbot
+  order: 4
+---
+
+import OpenC from '../../../assets/vexflow-vextab/l04-open-c-chord.svg';
+
+[Guitar Alchemist](https://github.com/GuitarAlchemist/ga) (GA) speaks VexTab in five places: the chatbot's prompt, a formatter that adds `vextab` blocks to its answers, a trace that counts them, the React component that shows them, and an F# parser and generator with an EBNF grammar. Lessons 1 to 3 give us a reference to hold them against: the real parser, VexTab 4.0.5, run in CI. This lesson does that, on GA's commit [`17ccee6`](https://github.com/GuitarAlchemist/ga/tree/17ccee6885851e4b460ebd14d7f4cfb838f5541e); every GA link below points to it.
+
+It is a code review with a test harness, and what it finds are findings about GA, not about VexTab. None of them has been reported to GA yet.
+
+## Where the blocks come from
+
+The prompt that grounds the chatbot's answers includes `PlayableNotationFormatter.PromptGuidance` ([`GroundedPromptBuilder.cs:76`](https://github.com/GuitarAlchemist/ga/blob/17ccee6885851e4b460ebd14d7f4cfb838f5541e/Common/GA.Business.Core.Orchestration/Services/GroundedPromptBuilder.cs#L76)). It says, in full ([`PlayableNotationFormatter.cs:15-25`](https://github.com/GuitarAlchemist/ga/blob/17ccee6885851e4b460ebd14d7f4cfb838f5541e/Common/GA.Business.ML/Notation/PlayableNotationFormatter.cs#L15-L25)):
+
+````text
+Playable notation:
+- When you include exact playable guitar frets, include a fenced `vextab` block immediately after the shape.
+- Use GA VexTab token format `string/fret`, with string 6 = low E and string 1 = high E.
+- Example:
+  ```vextab
+  5/3 4/2 3/0 2/1 1/0
+  ```
+- Only emit a `vextab` block when the frets are known. Do not invent exact tabs.
+````
+
+Put it next to lesson 1: VexTab writes `fret/string`, and a line of notes starts with `notes`, under a `tabstave`. The "GA VexTab token format" is the same numbers the other way round, with neither keyword. For the example, an open C chord, `x-3-2-0-1-0`, VexTab reads `5/3` as fret 5 on string 3, and nothing at all, since the text doesn't start with a stave.
+
+The model doesn't have to get it right on its own. After it answers, `AugmentMarkdownWithVexTabFences` ([`PlayableNotationFormatter.cs:94`](https://github.com/GuitarAlchemist/ga/blob/17ccee6885851e4b460ebd14d7f4cfb838f5541e/Common/GA.Business.ML/Notation/PlayableNotationFormatter.cs#L94)) looks for chord diagrams such as `x-3-2-0-1-0` in the text and adds a block after each one that has none. The block is built by the same rule ([lines 59-71](https://github.com/GuitarAlchemist/ga/blob/17ccee6885851e4b460ebd14d7f4cfb838f5541e/Common/GA.Business.ML/Notation/PlayableNotationFormatter.cs#L59-L71)): one `string/fret` token per sounding string, lowest string first, muted strings left out.
+
+```cs
+tokens.Add(FormattableString.Invariant($"{guitarString}/{fret}"));
+```
+
+[`BeginnerChordsSkill`](https://github.com/GuitarAlchemist/ga/blob/17ccee6885851e4b460ebd14d7f4cfb838f5541e/Common/GA.Business.ML/Agents/Skills/BeginnerChordsSkill.cs#L40-L42) answers "show me some easy beginner chords" with eight diagrams, so eight blocks are added. The chatbot's golden traces record it: the answer's `notation.vextab` step says ([`OrchestratedChatApplicationService.cs:328-337`](https://github.com/GuitarAlchemist/ga/blob/17ccee6885851e4b460ebd14d7f4cfb838f5541e/Apps/GaChatbot.Api/Services/OrchestratedChatApplicationService.cs#L328-L337)):
+
+```json
+"notation.vextab.added_count": 8,
+"notation.renderer": "vexflow",
+"notation.format": "vextab",
+"notation.diagram.count": 8
+```
+
+That trace is [`show-me-some-easy-beginner-chords`](https://github.com/GuitarAlchemist/ga/blob/17ccee6885851e4b460ebd14d7f4cfb838f5541e/state/quality/chatbot-qa/golden-traces/show-me-some-easy-beginner-chords/_canonical.json#L53-L61); the other 44 golden traces add none. `"notation.renderer": "vexflow"` is a constant written by the service, not a fact about the answer. The traces keep counts, not the blocks' text, so the harness below rebuilds the blocks from the skill's diagrams with the formatter itself.
+
+## Where the blocks go
+
+In the React client, `ChatMessage` sends every `language-vextab` code block to `MemoizedVexTab` ([`ChatMessage.tsx:46-49`](https://github.com/GuitarAlchemist/ga/blob/17ccee6885851e4b460ebd14d7f4cfb838f5541e/Apps/ga-client/src/components/Chat/ChatMessage.tsx#L46-L49)). Here is that component, whole ([`MemoizedVexTab.tsx:7-28`](https://github.com/GuitarAlchemist/ga/blob/17ccee6885851e4b460ebd14d7f4cfb838f5541e/Apps/ga-client/src/components/Chat/MemoizedVexTab.tsx#L7-L28)):
+
+```tsx
+/**
+ * Memoized VexTab component to prevent unnecessary re-renders
+ * VexTab rendering can be expensive, so we memoize it
+ */
+const MemoizedVexTab: React.FC<MemoizedVexTabProps> = memo(
+  ({ content }) => {
+    return (
+      <pre
+        style={{
+          backgroundColor: 'rgba(255,255,255,0.08)',
+          padding: '12px',
+          borderRadius: 8,
+          overflowX: 'auto',
+        }}
+      >
+        {content}
+      </pre>
+    );
+  },
+  // Custom comparison function - only re-render if content changes
+  (prevProps, nextProps) => prevProps.content === nextProps.content
+);
+```
+
+It prints the text. Neither VexTab nor VexFlow is called; the comment and the name describe a renderer that isn't there. The tests expect one. The Playwright spec [`vextab-rendering.spec.ts`](https://github.com/GuitarAlchemist/ga/blob/17ccee6885851e4b460ebd14d7f4cfb838f5541e/Apps/ga-client/tests/e2e/vextab-rendering.spec.ts) puts a message with a `vextab` block in local storage, reloads, and asserts:
+
+```ts
+// Should NOT show raw VexTab code (code blocks are replaced with viewer)
+await expect(page.getByText('6/0 5/2 4/2')).not.toBeVisible();
+
+// Should show rendered VexTab as SVG
+const svg = page.locator('svg').first();
+await expect(svg).toBeVisible();
+```
+
+([lines 94-99](https://github.com/GuitarAlchemist/ga/blob/17ccee6885851e4b460ebd14d7f4cfb838f5541e/Apps/ga-client/tests/e2e/vextab-rendering.spec.ts#L94-L99)). With a `<pre>`, the raw text is visible, so the first assertion should fail. The second can pass for the wrong reason: `svg.first()` is any SVG on the page, an icon included. The unit test that would catch the missing renderer is skipped ([`ChatMessage.test.tsx:67`](https://github.com/GuitarAlchemist/ga/blob/17ccee6885851e4b460ebd14d7f4cfb838f5541e/Apps/ga-client/src/test/ChatMessage.test.tsx#L67-L77)). Whether the e2e spec runs in GA's CI at all is *to verify*; I haven't found a workflow that runs `ga-client`'s Playwright tests, and I haven't run them.
+
+Other components in GA do draw: [`VexTabViewer.tsx`](https://github.com/GuitarAlchemist/ga/blob/17ccee6885851e4b460ebd14d7f4cfb838f5541e/ReactComponents/ga-react-components/src/components/VexTabViewer.tsx#L37-L39) splits the same `string/fret` tokens and builds VexFlow `TabNote`s itself, without VexTab, with VexFlow `^4.2.5` ([`package.json:67`](https://github.com/GuitarAlchemist/ga/blob/17ccee6885851e4b460ebd14d7f4cfb838f5541e/ReactComponents/ga-react-components/package.json#L67)). So GA's "VexTab" is two languages: VexTab proper, which its F# code models, and a token list that only GA's own components read.
+
+## The harness
+
+To know what VexTab makes of each of these texts, and what GA's F# parser makes of them, the course's code runs both. [`fetch-ga.sh`](https://github.com/spareilleux/learn/blob/20497783691a7e4f4134be79c5531ea7754934e3/code/vexflow-vextab/fetch-ga.sh) makes a blobless sparse clone of GA at `17ccee6` with only the files needed. [`ga/GaNotation`](https://github.com/spareilleux/learn/tree/20497783691a7e4f4134be79c5531ea7754934e3/code/vexflow-vextab/ga/GaNotation) compiles `PlayableNotationFormatter.cs` alone; [`ga/GaVexTab`](https://github.com/spareilleux/learn/tree/20497783691a7e4f4134be79c5531ea7754934e3/code/vexflow-vextab/ga/GaVexTab) compiles GA's [`VexTabTypes.fs`](https://github.com/GuitarAlchemist/ga/blob/17ccee6885851e4b460ebd14d7f4cfb838f5541e/Common/GA.Business.DSL/Types/VexTabTypes.fs), [`VexTabParser.fs`](https://github.com/GuitarAlchemist/ga/blob/17ccee6885851e4b460ebd14d7f4cfb838f5541e/Common/GA.Business.DSL/Parsers/VexTabParser.fs) and [`VexTabGenerator.fs`](https://github.com/GuitarAlchemist/ga/blob/17ccee6885851e4b460ebd14d7f4cfb838f5541e/Common/GA.Business.DSL/Generators/VexTabGenerator.fs) unchanged, with [FParsec](https://www.quanttec.com/fparsec/) 1.1.1 as GA references it, on .NET 10. [`Program.fs`](https://github.com/spareilleux/learn/blob/20497783691a7e4f4134be79c5531ea7754934e3/code/vexflow-vextab/ga/GaVexTab/Program.fs) collects 32 texts:
+
+- the eight beginner chords, formatted by GA's own `TryFormatChordDiagramAsMarkdownFence` from the skill's diagrams, and the prompt's example;
+- the `vextab` blocks of GA's end-to-end, unit and performance tests;
+- the four examples in GA's grammar, [`VexTab.ebnf`](https://github.com/GuitarAlchemist/ga/blob/17ccee6885851e4b460ebd14d7f4cfb838f5541e/Common/GA.Business.DSL/Grammars/VexTab.ebnf#L302-L322);
+- fourteen short texts of the course, in [`ga/cases`](https://github.com/spareilleux/learn/tree/20497783691a7e4f4134be79c5531ea7754934e3/code/vexflow-vextab/ga/cases), each probing one feature of lessons 1 to 3.
+
+For each, it calls GA's `parse`, and when that succeeds, GA's `generate`, then `parse` again on the generated text. `render.cjs` then gives VexTab 4.0.5 the original and the generated text. `check.sh` compares all of it with [`expected/`](https://github.com/spareilleux/learn/tree/20497783691a7e4f4134be79c5531ea7754934e3/code/vexflow-vextab/expected) on the three OSes, and [`ga/table.cjs`](https://github.com/spareilleux/learn/blob/20497783691a7e4f4134be79c5531ea7754934e3/code/vexflow-vextab/ga/table.cjs) writes the table below from the results, so the table is also checked in CI.
+
+## The results
+
+| Case | Text | GA `parse` | VexTab 4.0.5 | GA `generate`, read back by GA / by VexTab |
+|---|---|---|---|---|
+| beginner-c-major | `5/3 4/2 3/0 2/1 1/0` | error, line 1 col. 1 | error, line 1 | — |
+| beginner-g-major | `6/3 5/2 4/0 3/0 2/0 1/3` | error, line 1 col. 1 | error, line 1 | — |
+| beginner-d-major | `4/0 3/2 2/3 1/2` | error, line 1 col. 1 | error, line 1 | — |
+| beginner-a-major | `5/0 4/2 3/2 2/2 1/0` | error, line 1 col. 1 | error, line 1 | — |
+| beginner-e-major | `6/0 5/2 4/2 3/1 2/0 1/0` | error, line 1 col. 1 | error, line 1 | — |
+| beginner-a-minor | `5/0 4/2 3/2 2/1 1/0` | error, line 1 col. 1 | error, line 1 | — |
+| beginner-e-minor | `6/0 5/2 4/2 3/0 2/0 1/0` | error, line 1 col. 1 | error, line 1 | — |
+| beginner-d-minor | `4/0 3/2 2/3 1/1` | error, line 1 col. 1 | error, line 1 | — |
+| prompt-example | `5/3 4/2 3/0 2/1 1/0` | error, line 1 col. 1 | error, line 1 | — |
+| e2e-1 | `6/0 5/2 4/2 4/0 3/2 2/0 2/1 1/0` | error, line 1 col. 1 | error, line 1 | — |
+| e2e-2 | `6/0 5/2 4/2` | error, line 1 col. 1 | error, line 1 | — |
+| e2e-3 | `1/0 2/1 3/2` | error, line 1 col. 1 | error, line 1 | — |
+| unit-1 | `tabstave notation=true`<br/>`notes :q (0/6.3/6)` | ok | ok | error, line 1 col. 51 / ok |
+| perf-1 | `tabstave notation=true`<br/>`notes :q 4/4 5/5` | ok | ok | error, line 1 col. 51 / ok |
+| ebnf-1 | `tabstave notation=true key=C time=4/4`<br/>`notes :q (C/4.E/4.G/4) (D/4.F/4.A/4) (E/4.G/4.B/4) (F/4.A/4.C/5)` | error, line 1 col. 30 | ok | — |
+| ebnf-2 | `tabstave`<br/>`notes 5h6-7/5 ^3^ :8 7/4 6/3 5/2 3v/1` | error, line 2 col. 7 | ok | — |
+| ebnf-3 | `tabstave notation=true key=G`<br/>`notes :q (G/4.B/4.D/5) (C/4.E/4.G/4) (D/4.F#/4.A/4) (G/4.B/4.D/5)`<br/>`text :q, G, C, D, G` | error, line 2 col. 2 | ok | — |
+| ebnf-4 | `tabstave`<br/>`notes :8 5/3 7b9b7/3 :q 10s12/2 :8 12v/1` | error, line 2 col. 1 | ok | — |
+| annotation | `tabstave`<br/>`notes :q 5/5 $Am$` | error, line 2 col. 1 | ok | — |
+| articulation | `tabstave notation=true`<br/>`notes :q C/4 $.a./top.$` | error, line 2 col. 10 | ok | — |
+| duration-mid-line | `tabstave`<br/>`notes :q 5/3 :8 7/3 5/3` | error, line 2 col. 1 | ok | — |
+| flat-at | `tabstave notation=true tablature=false`<br/>`notes :q B@/4` | error, line 2 col. 10 | ok | — |
+| flat-b | `tabstave notation=true tablature=false`<br/>`notes :q Bb/4` | ok | error, line 2 | error, line 1 col. 52 / error, line 2 |
+| fret-run | `tabstave`<br/>`notes 4-5-6/3` | error, line 2 col. 7 | ok | — |
+| key-minor | `tabstave notation=true key=Am`<br/>`notes :q C/4` | error, line 1 col. 29 | ok | — |
+| key-time | `tabstave notation=true key=G time=4/4`<br/>`notes :q 5/3` | error, line 1 col. 30 | ok | — |
+| open-c-chord | `tabstave notation=true`<br/>`notes :w (0/1.1/2.0/3.2/4.3/5)` | ok | ok | error, line 1 col. 51 / ok |
+| tap-prefix | `tabstave`<br/>`notes t12p7p5h7/4` | error, line 2 col. 7 | ok | — |
+| technique-ga-order-dash | `tabstave`<br/>`notes 5/3h7-7/3b9b7` | ok | error, line 2 | error, line 1 col. 51 / error, line 2 |
+| technique-ga-order | `tabstave`<br/>`notes 5/3h7 7/3b9b7` | error, line 2 col. 13 | error, line 2 | — |
+| technique-vextab-order | `tabstave`<br/>`notes 5h7/3 7b9b7/3` | error, line 2 col. 7 | ok | — |
+| text-line | `tabstave notation=true`<br/>`notes :h 5/5 7/5`<br/>`text :h,G,C` | ok | ok | error, line 1 col. 51 / ok |
+
+Every error message is in [`expected/ga-fsharp.txt`](https://github.com/spareilleux/learn/blob/20497783691a7e4f4134be79c5531ea7754934e3/code/vexflow-vextab/expected/ga-fsharp.txt) and `expected/ga-js/`. Four things come out of it.
+
+**1. None of the twelve blocks GA emits or tests is VexTab.** The eight chords, the prompt's example and the three end-to-end blocks are rejected by VexTab at the first character, `got 'WORD'`, and by GA's own parser too. That is by design of the token format, not an accident of one chord. What the chatbot means by the open C chord is, in VexTab:
+
+```vextab
+tabstave notation=true
+notes :w (3/5.2/4.0/3.1/2.0/1)
+```
+
+**2. GA's parser and VexTab disagree on the syntax of lessons 1 and 2.** The grammar and the parser put techniques after the string, `5/3h7` ([`VexTab.ebnf:129`](https://github.com/GuitarAlchemist/ga/blob/17ccee6885851e4b460ebd14d7f4cfb838f5541e/Common/GA.Business.DSL/Grammars/VexTab.ebnf#L129), [`VexTabParser.fs:239-244`](https://github.com/GuitarAlchemist/ga/blob/17ccee6885851e4b460ebd14d7f4cfb838f5541e/Common/GA.Business.DSL/Parsers/VexTabParser.fs#L239-L244)), where VexTab puts them between frets, `5h7/3` ([lesson 2](../02-guitar-techniques/)). They write a flat `b`, `Bb/4` ([`VexTabParser.fs:85`](https://github.com/GuitarAlchemist/ga/blob/17ccee6885851e4b460ebd14d7f4cfb838f5541e/Common/GA.Business.DSL/Parsers/VexTabParser.fs#L85)), where VexTab writes `B@/4`. So each accepts what the other refuses: `flat-b` and `technique-ga-order-dash` pass GA and fail VexTab, `flat-at` and `technique-vextab-order` the other way round. GA's parser also refuses a duration in the middle of a line, a fret run `4-5-6/3`, a tap `t12`, an annotation (the parser for it exists but isn't among the choices of `noteItem`, [lines 413-420](https://github.com/GuitarAlchemist/ga/blob/17ccee6885851e4b460ebd14d7f4cfb838f5541e/Common/GA.Business.DSL/Parsers/VexTabParser.fs#L413-L420)), and `key=Am`.
+
+**3. GA's parser rejects its own grammar's examples and its generator's output.** None of the four EBNF examples parses. Most failures, and all the round trips, come from three helpers at the top of the parser ([`VexTabParser.fs:22-29`](https://github.com/GuitarAlchemist/ga/blob/17ccee6885851e4b460ebd14d7f4cfb838f5541e/Common/GA.Business.DSL/Parsers/VexTabParser.fs#L22-L29)):
+
+```fsharp
+/// Parse a specific string with optional trailing whitespace
+let str s = pstring s .>> ws
+
+/// Parse a specific character with optional trailing whitespace
+let ch c = pchar c .>> ws
+
+/// Parse an integer
+let pint: Parser<int, unit> = pint32 .>> ws
+```
+
+Each eats the whitespace after it, and `ws` is FParsec's `spaces`, which includes newlines. But the separators are whitespace too: a tabstave option must start with a space ([line 330](https://github.com/GuitarAlchemist/ga/blob/17ccee6885851e4b460ebd14d7f4cfb838f5541e/Common/GA.Business.DSL/Parsers/VexTabParser.fs#L330)). Once `clef=treble` has eaten the space after it, the next option has no space to start with, `many` stops, and the parser expects the end of the line at the `t` of `tuning=`. That is column 51 of what GA's generator writes for every stave, since the default options it fills in include `clef` and `tuning` ([`VexTabTypes.fs:284-287`](https://github.com/GuitarAlchemist/ga/blob/17ccee6885851e4b460ebd14d7f4cfb838f5541e/Common/GA.Business.DSL/Types/VexTabTypes.fs#L284-L287)):
+
+```text
+tabstave notation=true tablature=true clef=treble tuning=standard
+notes:w (0/1.1/2.0/3.2/4.3/5)
+```
+
+The same helpers make `key=C time=4/4` fail at column 30 (`ebnf-1`), a technique followed by a space fail (`technique-ga-order`, column 13), and `parseNotes`, the entry point for a bare list of notes, fail on the space between two notes.
+
+**4. VexTab reads GA's generator output.** Every generated text GA writes from a text VexTab accepts is accepted and drawn the same, `notes:w` without a space and `text:h ,G,C` with a leading comma included. The generator is closer to VexTab than the parser that should read it back. Here is `open-c-chord` from GA's generator, drawn by VexTab 4.0.5; the SVG of the original text is byte for byte the same:
+
+<OpenC role="img" aria-label="An open C chord as a whole note, on notation and tab: frets 0, 1, 0, 2, 3 on strings 1 to 5." />
+
+## What a fix would look like
+
+This lesson doesn't fix GA; that belongs to GA's repository and its owner. The findings point in one direction, though:
+
+- **Pick one language.** Either the blocks are VexTab, and the formatter writes `tabstave`/`notes` and `fret/string` (the chord above), or they are GA's token list, and the fence should have another name, so that no tool, reader or model takes them for VexTab.
+- **Draw them.** `MemoizedVexTab` can call VexTab in an effect, as `render.cjs` does in lesson 1, and keep the `<pre>` as the fallback on a parse error. Lesson 7, in the second batch, does this in React.
+- **Test against the real parser.** A test that feeds every block the formatter can emit to VexTab would have failed on the first chord. The same for the F# parser: a round trip through its own generator, and its grammar's examples, as unit tests.
+- **Stop eating separators.** The FParsec idiom is to consume whitespace in one place, after tokens or before them, and to keep newlines out of it where they matter.
+
+## Key takeaways
+
+- GA's chatbot blocks use a `string/fret` token list with no stave; VexTab and GA's own parser both reject all of them.
+- The client prints them in a `<pre>`; the e2e test expects an SVG and asserts that the raw text is not visible, which a `<pre>` contradicts (the test was not run here).
+- GA's F# parser differs from VexTab on techniques, flats, durations, runs, taps, annotations and minor keys, and can't read back its generator's output because its token parsers eat the whitespace that separates options.
+- VexTab 4.0.5 draws GA's generator output as it draws the original.
+
+## Exercises
+
+1. Write the eight beginner chords of the table as VexTab, in one stave of four bars, two chords per bar, with their names on a text line. Muted strings are left out.
+
+<details>
+<summary>Solution</summary>
+
+Reverse each token, `s/f` becomes `f/s`, and group the tokens of a chord in parentheses with dots:
+
+```vextab
+tabstave notation=true time=4/4
+notes :h (3/5.2/4.0/3.1/2.0/1) (3/6.2/5.0/4.0/3.0/2.3/1) | (0/4.2/3.3/2.2/1) (0/5.2/4.2/3.2/2.0/1) | (0/6.2/5.2/4.1/3.0/2.0/1) (0/5.2/4.2/3.1/2.0/1) | (0/6.2/5.2/4.0/3.0/2.0/1) (0/4.2/3.3/2.1/1)
+text :h,C,G,|,D,A,|,E,Am,|,Em,Dm
+```
+
+The text line is where chord names belong, not annotations ([lesson 2](../02-guitar-techniques/#annotations)). Two chords per bar as half notes; CI renders it as [`l04-ex-beginner-chords`](https://github.com/spareilleux/learn/blob/20497783691a7e4f4134be79c5531ea7754934e3/code/vexflow-vextab/expected/ex/l04-ex-beginner-chords.svg).
+
+</details>
+
+2. The `key-time` row of the table says GA's parser stops at column 30 of `tabstave notation=true key=G time=4/4`. Before reading the error message, explain why.
+
+<details>
+<summary>Solution</summary>
+
+An error at the `t` of `time=`, column 30: `key=G` goes through a parser that ends with `.>> ws` and eats the space, so `time=` has no leading space and isn't read as an option. It is the same failure as `ebnf-1`, `key=C time=4/4`, at the same column. The harness runs this text too, as the `key-time` row of the table:
+
+```text
+parse: error Error in Ln: 1 Col: 30 | tabstave notation=true key=G time=4/4 | ^ | Expecting: end of input, newline, '	', ' ', '#', '##', 'b', 'bb', 'major', | 'minor', 'n', 'x', '♭', '♮' or '♯'
+```
+
+FParsec lists `' '` among the expected characters: the space was there, but already consumed.
+
+</details>
+
+## Sources
+
+- GuitarAlchemist/ga at [`17ccee6`](https://github.com/GuitarAlchemist/ga/tree/17ccee6885851e4b460ebd14d7f4cfb838f5541e): the files linked above.
+- [FParsec documentation](https://www.quanttec.com/fparsec/), in particular its [tutorial](https://www.quanttec.com/fparsec/tutorial.html) on handling whitespace.
+- The course's harness: [`code/vexflow-vextab`](https://github.com/spareilleux/learn/tree/20497783691a7e4f4134be79c5531ea7754934e3/code/vexflow-vextab).

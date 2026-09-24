@@ -1,0 +1,239 @@
+---
+title: "Lesson 3: Keys, times, clefs and tunings"
+description: The options of a VexTab stave — key and time signatures, clefs, tunings, the number of strings, text lines and the options line — which of them change the notation and which the tab, two defects found on the way, and transposition by hand since VexTab has no capo.
+sidebar:
+  label: 3. Keys, times, clefs and tunings
+  order: 3
+---
+
+import Keys from '../../../assets/vexflow-vextab/l03-keys.svg';
+import Tuning from '../../../assets/vexflow-vextab/l03-tuning.svg';
+import Strings from '../../../assets/vexflow-vextab/l03-strings.svg';
+import Text from '../../../assets/vexflow-vextab/l03-text.svg';
+import TransposeG from '../../../assets/vexflow-vextab/l03-transpose-g.svg';
+import TransposeA from '../../../assets/vexflow-vextab/l03-transpose-a.svg';
+
+Everything after `tabstave` on the first line is an option, `name=value`. [`VexTabParser.ts:41-95`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/vextab/VexTabParser.ts#L41-L95) checks each one before any drawing: `notation` and `tablature`, `key`, `clef`, `voice`, `time`, `tuning` and `strings`. Anything else is refused. Some checks ask VexFlow (is this a key it knows? can it build this time signature?); one only looks as if it checked, and that is the second half of this lesson.
+
+The rule to keep in mind: the tab shows frets, and frets don't depend on the key or the tuning. **Key, time and clef change the notation stave; tuning changes the pitches VexTab computes for it; the tab stays the same.**
+
+## Key signatures
+
+`key=` takes a major key, `A`, `Eb`, `F#`, or a minor one, `Am`, `C#m`, in VexFlow's spelling, with `b` for flat here (unlike note names, which take `@`).
+
+```vextab
+tabstave notation=true key=A time=4/4
+notes :q 2/3 4/3 6/3 7/3 | :q 4/2 5/2 7/2 :q 9/2
+
+tabstave notation=true key=Eb time=3/4
+notes :q 1/3 3/3 4/3 | :h 1/2 :q 3/2
+```
+
+<Keys role="img" aria-label="Two systems. In A major with three sharps, the notes A, B, C sharp and D carry no accidental, and in the second bar D sharp gets a sharp. In E flat major with three flats and 3/4, the B natural of fret 4 gets a natural sign." />
+
+VexTab computes the pitch of each fret, then VexFlow compares it with the key: C♯ in A major needs no sign, D♯ does. In E♭ major, fret 4 of the G string is B♮ and gets its natural. The tab is identical to what it would be in C. An unknown key is an error, from `Vex.Flow.hasKeySignature`:
+
+```text
+error ParseError: [RuntimeError] ParseError: Invalid key signature 'H' in line 1 column 23
+```
+
+## Time signatures
+
+`time=` takes a fraction, or `C` for common time and `C|` for cut time. VexTab checks it by building a VexFlow `TimeSignature` and catching the error.
+
+```vextab
+tabstave notation=true time=C
+notes :q 5/5 7/5 5/4 7/4
+tabstave notation=true time=C|
+notes :h 5/5 7/5
+tabstave notation=true time=6/8
+notes :8 5/5 7/5 5/4 7/4 5/3 7/3
+```
+
+The signature is drawn, and that is all: as [lesson 1](../01-first-stave/#durations-and-bar-lines) showed, VexTab doesn't count the beats of a bar against it.
+
+## Clefs, and notation without tab
+
+`clef=` takes `treble` (the default), `bass`, `tenor`, `alto`, `percussion` or `none`. With `tablature=false` there is no tab, and notes are written as note names, as in lesson 1:
+
+```vextab
+tabstave notation=true tablature=false clef=bass key=G
+notes :q G/2 B/2 D/3 G/3
+tabstave notation=true tablature=false clef=alto
+notes :q C/4 D/4 E/4 F/4
+```
+
+For guitar the clef stays `treble`: guitar music is written an octave above its sound on a treble clef. A clef only moves where notes sit on the staff; the pitch VexTab computes from a fret is the same.
+
+## Tunings
+
+`tuning=` takes one of VexFlow's names or a list of notes from the first string (the highest) to the last. The names are in VexFlow's [`tuning.ts:12-18`](https://github.com/vexflow/vexflow/blob/0ca6f889545c33cce851b420c24945f6eb685aeb/src/tuning.ts#L12-L18):
+
+| Name | Strings 1 to 6 | What it is |
+|---|---|---|
+| `standard` | `E/5,B/4,G/4,D/4,A/3,E/3` | E A D G B E, written an octave up |
+| `dropd` | `E/5,B/4,G/4,D/4,A/3,D/3` | drop D |
+| `dagdad` | `D/5,A/4,G/4,D/4,A/3,D/3` | DADGAD |
+| `eb` | `Eb/5,Bb/4,Gb/4,Db/4,Ab/3,Db/3` | meant as everything a half step down |
+| `standardBanjo` | `D/5,B/4,G/4,D/4,G/5` | five-string banjo |
+
+VexTab passes the value to `new Vex.Flow.Tuning(value)` and reports failure as an invalid tuning. The same three open strings in three tunings:
+
+```vextab
+tabstave notation=true tuning=standard
+notes :w (0/6.0/5.0/4)
+tabstave notation=true tuning=dropd
+notes :w (0/6.0/5.0/4)
+tabstave notation=true tuning=eb
+notes :w (0/6.0/5.0/4)
+```
+
+<Tuning role="img" aria-label="Three systems with the same tab, zeros on strings 6, 5 and 4. The notation shows E, A, D in standard tuning, D, A, D in drop D, and C sharp, G sharp, C sharp in the eb tuning." />
+
+The tab is the same three zeros; the notation follows the tuning. Now read the `eb` line. A half step down from standard is E♭ A♭ D♭ G♭ B♭ E♭, and the sixth string should be `Eb/3`. VexFlow's table says `Db/3`, a whole step down, so the open low string of the third system is drawn as C♯, the same note as D♭, where E♭ was meant. Strings 1 to 5 are right. The line is the same on VexFlow's main branch; the file was last changed in 2023. The workaround is to spell the tuning out:
+
+```text
+tabstave notation=true tuning=Eb/5,Bb/4,Gb/4,Db/4,Ab/3,Eb/3
+```
+
+With it, the low string is drawn as D♯3, the same pitch as E♭3: without a flat key signature, VexTab spells the pitches it computes with sharps.
+
+An unknown name is refused:
+
+```text
+error ParseError: [RuntimeError] ParseError: Invalid tuning: 'drop-c' in line 1 column 23
+```
+
+## The number of strings
+
+`strings=` is for instruments other than six-string guitar: a bass, a seven-string guitar. VexTab accepts 4 to 8 ([`VexTabParser.ts:86-91`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/vextab/VexTabParser.ts#L86-L91)) and needs a tuning with as many notes. A four-string bass in E:
+
+```vextab
+tabstave notation=true clef=bass tuning=G/3,D/3,A/2,E/2 strings=4
+notes :q 0/4 2/4 4/4 5/4 | :h 0/3 2/3
+```
+
+<Strings role="img" aria-label="A bass clef stave and a four-line tab with six notes, followed by a large empty area: the drawing is several times taller than its content." />
+
+The music is right: four tab lines, E, F♯, G♯, A, then A and B. The drawing is 712 pixels tall, where a six-string stave with notation is 270, and the extra height is empty. Lesson 1 noted that option values stay strings all the way through; here is where it matters. `VexTabParser` checks the number with `parseInt`, but keeps the text; `StaveBuilder` then hands the text `"4"` to VexFlow's `TabStave.setNumLines` ([`StaveBuilder.ts:141`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/artist/StaveBuilder.ts#L141)). VexFlow computes the stave's height as ([`stave.ts:142`](https://github.com/vexflow/vexflow/blob/0ca6f889545c33cce851b420c24945f6eb685aeb/src/stave.ts#L142)):
+
+```ts
+this.height = (this.options.numLines + this.options.spaceAboveStaffLn) * this.options.spacingBetweenLinesPx;
+```
+
+With `numLines = "4"` and `spaceAboveStaffLn = 4`, `+` concatenates: `"44" * 13 = 572` pixels instead of `8 * 13 = 104`. The loop that draws the lines, `i < this.options.numLines`, compares numerically and draws four lines, so nothing looks wrong but the size. `strings=5` gives 842 pixels, `strings=7` gives 1102; Chrome draws the same sizes (see the [journal](../journal/)). Until VexTab converts the value, crop the SVG, or set its `viewBox` height yourself.
+
+## Text lines
+
+A `text` line under `notes` writes text in time with the music: chord names, lyrics, fingering. Items are separated by commas; a duration sets how much room each text takes; `|` is a bar.
+
+```vextab
+options space=20
+tabstave notation=true time=4/4
+notes :q (0/1.1/2.0/3.2/4.3/5) (0/1.1/2.2/3.2/4.0/5) | :q (3/1.0/2.0/3.0/4.2/5.3/6) (2/1.3/2.2/3.0/4)
+text :h,C,Am,|,G,D
+```
+
+<Text role="img" aria-label="Four chords, C, A minor, G and D, two per bar, with their names printed below the tab, each under its chord." />
+
+The names sit under their chords, and `C`, `G` and `D` are drawn as text: a text line doesn't go through the note-name test that turns annotations into fret numbers ([lesson 2](../02-guitar-techniques/#annotations)). It is the better place for chord names. [`VexTabParser.ts:222-257`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/vextab/VexTabParser.ts#L222-L257) lists the rest: `.font=Face-size-style`, `.left`, `.right` and `.center`, `.N` for the line the text sits on, `++` for a second line of text, and `#name` for a VexFlow glyph.
+
+## The options line
+
+A line starting with `options` changes the whole drawing. The keys are those of the Artist's customizations ([`Artist.ts:173-191`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/artist/Artist.ts#L173-L191)): `width`, `scale`, `space` (pixels added before the next stave), `stave-distance`, `font-face`, `font-size`, `font-style`, `tab-stems` and a few more.
+
+```vextab
+options width=400 scale=0.8 space=10
+tabstave notation=true key=G
+notes :q 3/6 5/6 2/5 3/5 | :h 5/5 2/4
+```
+
+This one is drawn at 400 pixels of layout width and scaled by 0.8: the SVG is 320 × 224 with a `viewBox` of 400 × 280. There is no `capo`:
+
+```text
+error ParseError: [RuntimeError] ParseError: Invalid option 'capo' in line 1 column 23
+```
+
+## Transposing by hand
+
+With no capo and no transpose option, moving a passage to another key is your job. On guitar that is often easy: a shape moved up the neck keeps its fingering. A G major scale and a G chord, both from fret 3 of the low E string:
+
+```vextab
+tabstave notation=true key=G time=4/4
+notes :8 3/6 5/6 2/5 3/5 5/5 2/4 4/4 5/4 | :w (3/6.2/5.0/4.0/3.0/2.3/1)
+```
+
+<TransposeG role="img" aria-label="A G major scale in eighth notes and an open G chord, with one sharp in the key signature." />
+
+Up a whole step, to A: add 2 to every fret and change the key. The open strings of the G chord become fret 2, which turns the open chord into a barre shape; the scale keeps its fingering.
+
+```vextab
+tabstave notation=true key=A time=4/4
+notes :8 5/6 7/6 4/5 5/5 7/5 4/4 6/4 7/4 | :w (5/6.4/5.2/4.2/3.2/2.5/1)
+```
+
+<TransposeA role="img" aria-label="The same scale and chord in A major, three sharps, every fret two higher." />
+
+VexTab recomputes the pitches from the new frets, and VexFlow spells them against the new key: C♯, F♯ and G♯ carry no sign in A major. A capo is the same operation: with a capo on fret 2, the fret numbers you write are counted from the nut, as above, since VexTab has no way to say the capo is there.
+
+## Key takeaways
+
+- Stave options are checked before drawing; `key` and `time` are checked by asking VexFlow, `tuning` by building a VexFlow `Tuning`.
+- The tab shows frets; key, time and clef change only the notation stave, and the tuning changes the pitches VexTab computes for it.
+- VexFlow 5's `eb` tuning has its sixth string at D♭, a whole step low: spell the tuning out.
+- `strings=N` works, but the drawing's height comes out as if N were followed by a 4; crop it.
+- For chord names, use a `text` line, not annotations. For another key, add to the frets and change `key=`.
+
+## Exercises
+
+1. Write an open D major chord in drop D tuning with all six strings: the low string open, the D, G, B and E strings as in the usual open D chord, and the A string open. Which notes does the notation show?
+
+<details>
+<summary>Solution</summary>
+
+```vextab
+tabstave notation=true tuning=dropd
+notes :w (0/6.0/5.0/4.2/3.3/2.2/1)
+```
+
+D3, A3, D4, A4, D5, F♯5 in written pitch, an octave above the sound: D A D A D F♯, a D chord from the lowest string. The tab has nothing to say about the tuning; only the notation shows the low D ([`l03-ex-dropd`](https://github.com/spareilleux/learn/blob/20497783691a7e4f4134be79c5531ea7754934e3/code/vexflow-vextab/expected/ex/l03-ex-dropd.svg)).
+
+</details>
+
+2. Transpose the G major example above to B♭ major.
+
+<details>
+<summary>Solution</summary>
+
+B♭ is a minor third, three frets, above G. Add 3 to every fret and set `key=Bb`:
+
+```vextab
+tabstave notation=true key=Bb time=4/4
+notes :8 6/6 8/6 5/5 6/5 8/5 5/4 7/4 8/4 | :w (6/6.5/5.3/4.3/3.3/2.6/1)
+```
+
+The notation reads B♭ C D E♭ F G A B♭, with two flats in the key signature and none on the notes ([`l03-ex-transpose-bb`](https://github.com/spareilleux/learn/blob/20497783691a7e4f4134be79c5531ea7754934e3/code/vexflow-vextab/expected/ex/l03-ex-transpose-bb.svg)).
+
+</details>
+
+3. Lesson 1's first exercise ended with `String number must be between 1 and 6:7`. Write fret 0, 2 and 3 on the low B string of a seven-string guitar tuned B E A D G B E, then the open low E string. How tall is the drawing?
+
+<details>
+<summary>Solution</summary>
+
+A seventh string needs both a seventh note in the tuning and `strings=7`:
+
+```vextab
+tabstave notation=true tuning=E/5,B/4,G/4,D/4,A/3,E/3,B/2 strings=7
+notes :q 0/7 2/7 3/7 0/6
+```
+
+The notation shows B2, C♯3, D3 and E3, written pitches. The drawing is 1102 pixels tall, for the reason of [the number of strings](#the-number-of-strings): `("7" + 4) * 13 = 962` for the tab alone ([`l03-ex-seven-strings`](https://github.com/spareilleux/learn/blob/20497783691a7e4f4134be79c5531ea7754934e3/code/vexflow-vextab/expected/ex/l03-ex-seven-strings.svg)). Without `strings=7`, VexTab keeps six lines and draws the seventh string's notes outside them; without the seventh tuning note, it is lesson 1's error again.
+
+</details>
+
+## Sources
+
+- Mohit Cheppudira, [The VexTab Tutorial](https://vexflow.com/vextab/tutorial.html), steps 12 to 16.
+- vextab at `3a5e00d`: [`src/vextab/VexTabParser.ts`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/vextab/VexTabParser.ts), [`src/artist/StaveBuilder.ts`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/artist/StaveBuilder.ts), [`src/artist/Artist.ts`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/artist/Artist.ts).
+- VexFlow at `0ca6f88`: [`src/tuning.ts`](https://github.com/vexflow/vexflow/blob/0ca6f889545c33cce851b420c24945f6eb685aeb/src/tuning.ts), [`src/stave.ts`](https://github.com/vexflow/vexflow/blob/0ca6f889545c33cce851b420c24945f6eb685aeb/src/stave.ts).

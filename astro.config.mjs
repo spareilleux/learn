@@ -291,6 +291,12 @@ export default defineConfig({
 							collapsed: true,
 							items: [{ autogenerate: { directory: 'ga-lab' } }],
 						},
+						{
+							label: 'VexTab & VexFlow: notation and tablature in the browser',
+							translations: { fr: 'VexTab et VexFlow : notation et tablature dans le navigateur', es: 'VexTab y VexFlow: notación y tablatura en el navegador' },
+							collapsed: true,
+							items: [{ autogenerate: { directory: 'vexflow-vextab' } }],
+						},
 					],
 				},
 				{
