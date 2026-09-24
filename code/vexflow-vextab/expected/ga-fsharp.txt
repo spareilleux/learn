@@ -118,6 +118,11 @@ parseNotes: error Error in Ln: 1 Col: 1 | tabstave | ^ | Expecting: end of input
    notes :q C/4
 parse: error Error in Ln: 1 Col: 29 | tabstave notation=true key=Am | ^ | Expecting: end of input, newline, '\t', ' ', '#', '##', 'b', 'bb', 'major', | 'minor', 'n', 'x', '♭', '♮' or '♯'
 parseNotes: error Error in Ln: 1 Col: 1 | tabstave notation=true key=Am | ^ | Expecting: end of input, integer number (32-bit, signed), '#', '(', '=::', | '=:|', '=|:', '=|=', '=||', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'X', '^' or '|'
+== key-time (course)
+   tabstave notation=true key=G time=4/4
+   notes :q 5/3
+parse: error Error in Ln: 1 Col: 30 | tabstave notation=true key=G time=4/4 | ^ | Expecting: end of input, newline, '\t', ' ', '#', '##', 'b', 'bb', 'major', | 'minor', 'n', 'x', '♭', '♮' or '♯'
+parseNotes: error Error in Ln: 1 Col: 1 | tabstave notation=true key=G time=4/4 | ^ | Expecting: end of input, integer number (32-bit, signed), '#', '(', '=::', | '=:|', '=|:', '=|=', '=||', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'X', '^' or '|'
 == open-c-chord (course)
    tabstave notation=true
    notes :w (0/1.1/2.0/3.2/4.3/5)
@@ -155,4 +160,4 @@ parse: ok, 3 line(s)
 generate: tabstave notation=true tablature=true clef=treble tuning=standard | notes:h 5/5 7/5 | text:h ,G,C
 round trip: error Error in Ln: 1 Col: 51 | tabstave notation=true tablature=true clef=treble tuning=standard | ^ | Expecting: end of input, newline, '\t' or ' '
 parseNotes: error Error in Ln: 1 Col: 1 | tabstave notation=true | ^ | Expecting: end of input, integer number (32-bit, signed), '#', '(', '=::', | '=:|', '=|:', '=|=', '=||', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'X', '^' or '|'
-31 cases
+32 cases

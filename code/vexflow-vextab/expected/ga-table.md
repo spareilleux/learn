@@ -25,6 +25,7 @@
 | flat-b | `tabstave notation=true tablature=false`<br/>`notes :q Bb/4` | ok | error, line 2 | error, line 1 col. 52 / error, line 2 |
 | fret-run | `tabstave`<br/>`notes 4-5-6/3` | error, line 2 col. 7 | ok | — |
 | key-minor | `tabstave notation=true key=Am`<br/>`notes :q C/4` | error, line 1 col. 29 | ok | — |
+| key-time | `tabstave notation=true key=G time=4/4`<br/>`notes :q 5/3` | error, line 1 col. 30 | ok | — |
 | open-c-chord | `tabstave notation=true`<br/>`notes :w (0/1.1/2.0/3.2/4.3/5)` | ok | ok | error, line 1 col. 51 / ok |
 | tap-prefix | `tabstave`<br/>`notes t12p7p5h7/4` | error, line 2 col. 7 | ok | — |
 | technique-ga-order-dash | `tabstave`<br/>`notes 5/3h7-7/3b9b7` | ok | error, line 2 | error, line 1 col. 51 / error, line 2 |
