@@ -116,7 +116,7 @@ notes :q (3/5.2/4.0/3.1/2) $Am$ 5/5 $.italic.let ring$ 7/4 $.big.P.M.$ :q 5/3
 
 Two things are not what they seem.
 
-**`let ring` is not italic.** VexTab passes `italic` to VexFlow as the third argument of `setFont` ([`ArticulationBuilder.ts:298-302`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/artist/ArticulationBuilder.ts#L298-L302)). In VexFlow 5 the third argument is the weight and the style is the fourth ([`element.ts:392`](https://github.com/vexflow/vexflow/blob/0ca6f889545c33cce851b420c24945f6eb685aeb/src/element.ts#L392)), so the SVG says `font-weight="italic"`, which a browser ignores. The `vexflow.com` logo is set the same way ([`ArtistRenderer.ts:265`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/artist/ArtistRenderer.ts#L265)) and is upright too. Before VexFlow 5, the third argument was a free-form weight string; the call did not change when VexTab moved.
+**`let ring` is not italic.** VexTab passes `italic` to VexFlow as the third argument of `setFont` ([`ArticulationBuilder.ts:298-302`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/artist/ArticulationBuilder.ts#L298-L302)). In VexFlow 5 the third argument is the weight and the style is the fourth ([`element.ts:392`](https://github.com/vexflow/vexflow/blob/0ca6f889545c33cce851b420c24945f6eb685aeb/src/element.ts#L392)), so the SVG says `font-weight="italic"`, which a browser ignores. The `vexflow.com` logo is set the same way ([`ArtistRenderer.ts:265`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/artist/ArtistRenderer.ts#L265)) and is upright too.
 
 **A chord name can replace a fret.** Annotate three chords with their names:
 
