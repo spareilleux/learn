@@ -13,6 +13,20 @@ MATRICES = ROOT / "matrices.md"
 STATUSES = {"discovered", "experimenting", "incubating", "integrating", "adopted", "rejected", "retired"}
 VERDICTS = {"promising", "confirmed", "refuted", "inconclusive"}
 SCORE_KEYS = {"pain", "fit", "expected_value", "evidence", "reversibility", "cost", "risk"}
+# A rejection has to carry its evidence too, or the registry cannot stop anyone repeating the
+# idea: lesson 1 promises exactly that, so "rejected" belongs with the promoted states here.
+EVIDENCE_STATUSES = {"incubating", "integrating", "adopted", "rejected"}
+# The order the promotion and result tables are read in. Deliberately not the score: the score
+# ranks investigation, and a reader who meets the best-scored row first in a promotion table is
+# being told something the data does not say.
+STATUS_ORDER = ["adopted", "integrating", "incubating", "experimenting", "discovered", "rejected", "retired"]
+
+
+def artifact_is_present(artifact: str) -> bool:
+    """A link is taken on trust; a path in this repository has to be on disk."""
+    if artifact.startswith(("http://", "https://")):
+        return True
+    return (ROOT / artifact).exists()
 
 
 def load_registry(path: Path = REGISTRY) -> dict[str, Any]:
@@ -55,10 +69,33 @@ def validate(data: dict[str, Any]) -> list[str]:
             errors.append(f"{identifier}: scores must contain exactly {sorted(SCORE_KEYS)}")
         elif any(type(value) is not int or not 0 <= value <= 5 for value in scores.values()):
             errors.append(f"{identifier}: every score must be an integer from 0 to 5")
-        if item["status"] in {"incubating", "integrating", "adopted"} and not item["artifacts"]:
-            errors.append(f"{identifier}: promoted status requires evidence artifacts")
+        # Presence of a key proves nothing: an entry whose evidence fields are empty strings
+        # used to pass every gate below and reach "adopted".
+        blank = sorted(key for key in required if isinstance(item[key], str) and not item[key].strip())
+        if blank:
+            errors.append(f"{identifier}: these fields must not be blank: {', '.join(blank)}")
+
+        artifacts = item["artifacts"]
+        if not isinstance(artifacts, list) or any(
+            not isinstance(artifact, str) or not artifact.strip() for artifact in artifacts
+        ):
+            errors.append(f"{identifier}: artifacts must be a list of non-blank strings")
+        else:
+            absent = [a for a in artifacts if not artifact_is_present(a)]
+            if absent:
+                errors.append(f"{identifier}: artifact does not exist: {', '.join(absent)}")
+            if item["status"] in EVIDENCE_STATUSES:
+                if not artifacts:
+                    errors.append(f"{identifier}: status {item['status']} requires evidence artifacts")
+                elif all(a.startswith(("http://", "https://")) for a in artifacts):
+                    errors.append(
+                        f"{identifier}: status {item['status']} needs at least one artifact in this "
+                        "repository, not links alone"
+                    )
         if item["status"] == "adopted" and item["verdict"] != "confirmed":
             errors.append(f"{identifier}: adopted status requires a confirmed verdict")
+        if item["status"] == "rejected" and item["verdict"] not in {"refuted", "inconclusive"}:
+            errors.append(f"{identifier}: rejected status requires a refuted or inconclusive verdict")
 
     checks = data.get("method_checks")
     if not isinstance(checks, list) or not checks:
@@ -98,8 +135,17 @@ def validate_course_mirrors(courses: tuple[str, ...] = ("repository-dogfooding-l
     return errors
 
 
+def by_status(item: dict[str, Any]) -> tuple[int, str]:
+    order = STATUS_ORDER.index(item["status"]) if item["status"] in STATUS_ORDER else len(STATUS_ORDER)
+    return order, item["id"]
+
+
 def render(data: dict[str, Any]) -> str:
     items = sorted(data["opportunities"], key=lambda item: (-opportunity_score(item), item["id"]))
+    # The tables about promotion are read in promotion order. Sorting them by score too would
+    # put the best-scored candidate first everywhere, which is the same authority the score is
+    # not supposed to have - exercised on the reader's attention instead of on the data.
+    staged = sorted(data["opportunities"], key=by_status)
     lines = [
         "# Generated dogfooding opportunity matrices",
         "",
@@ -133,20 +179,24 @@ def render(data: dict[str, Any]) -> str:
         "",
         "## Promotion state",
         "",
+        "Ordered by promotion state, not by score.",
+        "",
         "| Opportunity | Status | Verdict | Next gate | Accountable authority |",
         "|---|---|---|---|---|",
     ]
-    for item in items:
+    for item in staged:
         lines.append(f"| {item['technique']} | {item['status']} | {item['verdict']} | {item['next_gate']} | {item['authority']} |")
 
     lines += [
         "",
         "## Results and evidence",
         "",
+        "Every path listed here is checked to exist; links are taken on trust.",
+        "",
         "| Opportunity | Result | Evidence artifacts | Revisit |",
         "|---|---|---|---|",
     ]
-    for item in items:
+    for item in staged:
         artifacts = ", ".join(f"`{artifact}`" for artifact in item["artifacts"]) or "none yet"
         lines.append(f"| {item['technique']} | {item['result']} | {artifacts} | {item['revisit']} |")
 

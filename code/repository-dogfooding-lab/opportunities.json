@@ -1,8 +1,17 @@
 {
   "version": 1,
   "scoring": {
-    "positive": ["pain", "fit", "expected_value", "evidence", "reversibility"],
-    "negative": ["cost", "risk"],
+    "positive": [
+      "pain",
+      "fit",
+      "expected_value",
+      "evidence",
+      "reversibility"
+    ],
+    "negative": [
+      "cost",
+      "risk"
+    ],
     "range": "Each dimension is an integer from 0 to 5. Score is positive sum minus negative sum."
   },
   "opportunities": [
@@ -11,28 +20,46 @@
       "technique": "Jev typed decision gate",
       "course": "typesafe-ai-system-one",
       "axis": "agentic-ai",
-      "repositories": ["ga", "gaia", "Demerzel"],
+      "repositories": [
+        "ga",
+        "gaia",
+        "Demerzel"
+      ],
       "observed_pain": "Provider cost is discussed, but cost per accepted repository decision has not been measured on a fixed corpus.",
       "hypothesis": "A Jev gate cuts downstream expensive-provider input by at least 50% with unchanged acceptance criteria and zero false supported decisions.",
       "baseline": "Run the same fixed downstream model on all 12 labeled cases.",
       "success_metric": "At least 50% lower downstream input cost per accepted result, zero false supports, and no material calibration regression.",
       "falsifier": "Any false support, lower acceptance quality, or human-review and retry cost that erases the saving.",
       "simpler_alternative": "Deterministic rules or repository search before any model call.",
-      "status": "experimenting",
-      "scores": {"pain": 4, "fit": 4, "expected_value": 5, "evidence": 2, "reversibility": 5, "cost": 1, "risk": 3},
+      "status": "incubating",
+      "scores": {
+        "pain": 4,
+        "fit": 4,
+        "expected_value": 5,
+        "evidence": 4,
+        "reversibility": 5,
+        "cost": 1,
+        "risk": 3
+      },
       "authority": "Human approves live spend and any integration; model output never grants effects.",
-      "next_gate": "Run the bounded 13-call calibration, then a fixed downstream A/B only if quality passes.",
-      "result": "Offline plan: 12 cases, 13 calls, zero retries, $0.0021 local byte-proxy ceiling only; provider-billed cost is unknown until usage is returned. No live Jev result yet.",
-      "verdict": "inconclusive",
-      "artifacts": ["../typesafe-ai-system-one/benchmark-corpus.json", "../typesafe-ai-system-one/jev_benchmark.py"],
-      "revisit": "2026-09-27"
+      "next_gate": "Run the fixed downstream A/B the hypothesis actually states, gated by Jev against ungated, on the same 12 cases. The 13-call calibration does not test it.",
+      "result": "Live 13 calls at jev-1.13.0, 2026-09-23: batching the 12 questions over one shared state used 2487 input tokens against 14939 for the same 12 questions asked one at a time, 83.4% less, with the identical choice on all 12 cases, zero false supports and zero retries (accuracy 0.9167 both ways, Brier 0.1657 against 0.1645; 453 ms against 4451 ms). This measures amortizing shared state, not the hypothesis: no downstream model was called, so the 50% downstream saving is still unmeasured. Token counts are the provider's reported usage, not billed cost, which stays unknown; the $0.0021 ceiling is a local byte proxy only.",
+      "verdict": "promising",
+      "artifacts": [
+        "../typesafe-ai-system-one/benchmark-corpus.json",
+        "../typesafe-ai-system-one/jev_benchmark.py",
+        "../typesafe-ai-system-one/evidence/jev-live.json"
+      ],
+      "revisit": "2026-10-04"
     },
     {
       "id": "learn-evidence-first-course-method",
       "technique": "Evidence-first multilingual course pipeline",
       "course": "repository-dogfooding-lab",
       "axis": "both",
-      "repositories": ["learn"],
+      "repositories": [
+        "learn"
+      ],
       "observed_pain": "Course prose, runnable examples, three locale mirrors and journals can drift because their relationship is mostly checked manually.",
       "hypothesis": "A machine-readable opportunity registry plus executable journal checks reduces drift and unsupported claims without making authoring slower.",
       "baseline": "Current manual review of prose, code, journal evidence and EN/FR/ES mirrors.",
@@ -40,12 +67,25 @@
       "falsifier": "Generated structure becomes busywork, misses semantic translation drift, or increases lead time without finding defects.",
       "simpler_alternative": "A small publication checklist enforced in PR review.",
       "status": "experimenting",
-      "scores": {"pain": 3, "fit": 5, "expected_value": 4, "evidence": 3, "reversibility": 5, "cost": 2, "risk": 1},
+      "scores": {
+        "pain": 3,
+        "fit": 5,
+        "expected_value": 4,
+        "evidence": 3,
+        "reversibility": 5,
+        "cost": 2,
+        "risk": 1
+      },
       "authority": "Course author records evidence; reviewer accepts or rejects publication claims.",
       "next_gate": "Use this course to validate its own registry, generated matrices and locale parity in CI.",
       "result": "Registry, renderer and invariant tests implemented as the first tracer bullet.",
       "verdict": "promising",
-      "artifacts": ["opportunities.json", "dogfood.py", "test_dogfood.py", "matrices.md"],
+      "artifacts": [
+        "opportunities.json",
+        "dogfood.py",
+        "test_dogfood.py",
+        "matrices.md"
+      ],
       "revisit": "2026-09-27"
     },
     {
@@ -53,7 +93,10 @@
       "technique": "Jev advisory evidence plus Petri authority boundary",
       "course": "repository-dogfooding-lab",
       "axis": "both",
-      "repositories": ["gaia", "ix"],
+      "repositories": [
+        "gaia",
+        "ix"
+      ],
       "observed_pain": "A high-confidence text classification can be mistaken for an implementation grant, while concurrent lifecycle safety is hard to infer from one execution trace.",
       "hypothesis": "A Petri oracle can expose a reachable unauthorized effect when Jev advisory support is treated as authority, and prove that the bounded guarded model blocks it without independent evidence and an explicit grant.",
       "baseline": "Confidence-only threshold 0.95 on the pinned synthetic Jev case, with an unsafe advisory-to-effect net.",
@@ -61,12 +104,25 @@
       "falsifier": "Any guarded reachable effect without both tokens, incomplete reachability claimed as proof, or model assumptions that do not match a pinned repository seam.",
       "simpler_alternative": "A deterministic authority check and one focused replay test may suffice without a Petri net or Jev.",
       "status": "experimenting",
-      "scores": {"pain": 4, "fit": 4, "expected_value": 4, "evidence": 2, "reversibility": 5, "cost": 1, "risk": 3},
+      "scores": {
+        "pain": 4,
+        "fit": 4,
+        "expected_value": 4,
+        "evidence": 2,
+        "reversibility": 5,
+        "cost": 1,
+        "risk": 3
+      },
       "authority": "Repository owner reviews the exact seam and replay; Jev never grants effects and this local model grants no production authority.",
       "next_gate": "Pin one Gaia or IX transition at an exact revision, map its real guards to places, replay a counterexample against the public seam, and obtain independent review before incubation.",
       "result": "Offline synthetic wrong support at 0.98: guarded model blocks effect without independently verified evidence and implementation authority; 3/3 focused Petri tests and fixture parity test pass. No repository integration or live Jev result.",
       "verdict": "promising",
-      "artifacts": ["jev-petri-fixture.json", "test_jev_petri_fixture.py", "../petri-nets/Examples/JevEvidenceGate.cs", "../petri-nets/Tests/JevEvidenceGateTests.cs"],
+      "artifacts": [
+        "jev-petri-fixture.json",
+        "test_jev_petri_fixture.py",
+        "../petri-nets/Examples/JevEvidenceGate.cs",
+        "../petri-nets/Tests/JevEvidenceGateTests.cs"
+      ],
       "revisit": "2026-09-29"
     },
     {
@@ -74,7 +130,11 @@
       "technique": "Hexagonal architecture seam audit",
       "course": "hexagonal-architecture",
       "axis": "classical-se",
-      "repositories": ["ga", "gaia", "Demerzel"],
+      "repositories": [
+        "ga",
+        "gaia",
+        "Demerzel"
+      ],
       "observed_pain": "Infrastructure coupling is suspected at some orchestration boundaries, but no current cross-repository inventory is attached.",
       "hypothesis": "One evidence-backed port around a frequently changed external dependency reduces test setup and change surface.",
       "baseline": "Measure callers, dependency fan-in, test setup and files changed for one real boundary before refactoring.",
@@ -82,7 +142,15 @@
       "falsifier": "The port only renames an existing interface or increases indirection without reducing coupled changes.",
       "simpler_alternative": "Keep the current interface and add one focused contract test.",
       "status": "discovered",
-      "scores": {"pain": 2, "fit": 4, "expected_value": 3, "evidence": 1, "reversibility": 4, "cost": 3, "risk": 2},
+      "scores": {
+        "pain": 2,
+        "fit": 4,
+        "expected_value": 3,
+        "evidence": 1,
+        "reversibility": 4,
+        "cost": 3,
+        "risk": 2
+      },
       "authority": "Repository maintainer selects the seam after reviewing evidence.",
       "next_gate": "Choose one exact dependency boundary and capture a before metric; otherwise reject the candidate.",
       "result": "No repository-specific experiment yet.",
@@ -95,7 +163,10 @@
       "technique": "RabbitMQ quorum, retry and dead-letter boundary",
       "course": "rabbitmq",
       "axis": "classical-se",
-      "repositories": ["gaia", "Demerzel"],
+      "repositories": [
+        "gaia",
+        "Demerzel"
+      ],
       "observed_pain": "Cross-process reliability is important, but no evidence yet shows RabbitMQ is simpler than the existing artifact and GitHub contracts.",
       "hypothesis": "A bounded broker tracer improves recoverable delivery for one high-contention path without replacing durable repository artifacts.",
       "baseline": "Measure loss, duplicate handling and recovery time in the current path.",
@@ -103,20 +174,129 @@
       "falsifier": "The broker duplicates existing durable contracts or adds an always-on dependency without a measured reliability gain.",
       "simpler_alternative": "Keep append-only artifacts and improve reconciliation.",
       "status": "discovered",
-      "scores": {"pain": 2, "fit": 2, "expected_value": 3, "evidence": 1, "reversibility": 3, "cost": 4, "risk": 3},
+      "scores": {
+        "pain": 2,
+        "fit": 2,
+        "expected_value": 3,
+        "evidence": 1,
+        "reversibility": 3,
+        "cost": 4,
+        "risk": 3
+      },
       "authority": "Architecture owner approves any infrastructure addition.",
       "next_gate": "Identify one failure mode that existing artifact reconciliation cannot solve economically.",
       "result": "Local course examples exist; no repository adoption evidence.",
       "verdict": "inconclusive",
-      "artifacts": ["../rabbitmq"],
+      "artifacts": [
+        "../rabbitmq"
+      ],
       "revisit": "2026-10-11"
+    },
+    {
+      "id": "petri-net-pipeline-soundness",
+      "technique": "Petri net reachability on resource pipelines",
+      "course": "petri-nets",
+      "axis": "classical-se",
+      "repositories": [
+        "ga"
+      ],
+      "observed_pain": "Concurrency defects in GA live on exception paths the test suite never takes, so they are found in production rather than in CI.",
+      "hypothesis": "Modelling a pipeline that holds a scarce resource as a place/transition net and searching its reachability graph for dead markings finds real defects the existing tests miss, from a read-only reading of the source.",
+      "baseline": "GA's own suite at a826864f3a012cad88e415954bf57eca0ce12aa6: none of the three defects below is covered by a test.",
+      "success_metric": "At least one defect confirmed line by line against the source and accepted by the maintainer.",
+      "falsifier": "The issues are closed as not-a-bug, shown to be already covered by a test, or the firing sequence the net produces turns out not to be reachable in the real code.",
+      "simpler_alternative": "Reading the exception paths by hand, which is what missed them, or a linter for 'acquire outside try', which would catch GaFsiSessionPool but not the two producer/consumer hangs - those need the state space.",
+      "status": "incubating",
+      "scores": {
+        "pain": 5,
+        "fit": 4,
+        "expected_value": 4,
+        "evidence": 4,
+        "reversibility": 5,
+        "cost": 2,
+        "risk": 1
+      },
+      "authority": "Read-only analysis at a pinned commit; the model proposes, a maintainer decides. No GA code was read outside the GitHub API and none was modified.",
+      "next_gate": "Maintainer triage of GuitarAlchemist/ga#700, #701 and #702. GA's own todo 047 already asks for the exception-safe release of #700, which is corroboration, not acceptance.",
+      "result": "Three defects found, each confirmed against the source before filing. GaFsiSessionPool.fs: the `with ex` handler releases the gate without returning the session; two exceptions wedge the process-wide pool for good, and the net gave the seven-firing sequence - one caller, no concurrency needed - before the code confirmed it. IndexVoicingsCommand: consumer catch outside the await foreach, bounded channel in FullMode.Wait, CancellationToken.None: total silent deadlock. VoicingGenerator: Complete() outside a finally, one-sided hang that swallows the producer exception. One claim was withdrawn before filing: the early gate release at :144 is not a bug, because the evaluation has already returned at :140.",
+      "verdict": "promising",
+      "artifacts": [
+        "../petri-nets/Examples/Nets.cs",
+        "../petri-nets/expected/chat.txt",
+        "https://github.com/GuitarAlchemist/ga/issues/700",
+        "https://github.com/GuitarAlchemist/ga/issues/701",
+        "https://github.com/GuitarAlchemist/ga/issues/702"
+      ],
+      "revisit": "2026-09-29"
+    },
+    {
+      "id": "tars-petri-independent-encodings",
+      "technique": "Cross-check TARS grammar rules against Petri nets",
+      "course": "petri-nets",
+      "axis": "both",
+      "repositories": [
+        "ga",
+        "tars"
+      ],
+      "observed_pain": "GA's orchestration is encoded twice, independently: as five weighted rules in the TARS grammar ecosystem (ga.orchestrator_pipeline, ga.routing_fallback_cascade, ga.hook_lifecycle_fsm, ga.domain_skill_fastpath, ga.confidence_evidence_response) and as Petri nets in the petri-nets course. Nobody has compared them.",
+      "hypothesis": "Two independent encodings of the same pipelines disagree somewhere, and every disagreement is a place where one of them is wrong about GA - decidable against the source, as the three defects of petri-net-pipeline-soundness were.",
+      "baseline": "The five ga.* rules as they stand on 2026-09-23: SuccessRate 1.0 on SelectionCount 4, Confidence 0.278. A success rate of 1 on four draws is not evidence of anything, which is itself the first thing to check.",
+      "success_metric": "Every disagreement between the two encodings resolved against the pinned source, and at least one of them corrected as a result.",
+      "falsifier": "The two encodings agree everywhere, or their disagreements cannot be decided against the source because the grammar rules describe intent rather than control flow. Either outcome retires the candidate.",
+      "simpler_alternative": "Read GA's orchestrator once and trust that reading, which is what both encodings already did separately.",
+      "status": "discovered",
+      "scores": {
+        "pain": 2,
+        "fit": 5,
+        "expected_value": 3,
+        "evidence": 1,
+        "reversibility": 5,
+        "cost": 2,
+        "risk": 1
+      },
+      "authority": "Read-only on both repositories. No grammar weight may gate a promotion in this registry: an evolved weight is the score-as-authority failure this lab exists to refuse, arrived at by a longer road.",
+      "next_gate": "Read the five ga.* rule definitions, not only their weights, and put ga.hook_lifecycle_fsm next to the chat-turn net, whose place invariant sent = 0 says the streaming path cannot run the hooks - GuitarAlchemist/ga#703.",
+      "result": "Nothing measured yet: the rule weights were read, the rule bodies were not.",
+      "verdict": "inconclusive",
+      "artifacts": [],
+      "revisit": "2026-10-06"
     }
   ],
   "method_checks": [
-    {"dimension": "Executable examples", "baseline": "Commands copied manually into journals", "target": "CI command and exact output linked from every measured claim", "current": "partial", "next_test": "Reject a deliberately stale output fixture"},
-    {"dimension": "Journal evidence", "baseline": "Free-form dated notes", "target": "Hypothesis, baseline, result, verdict and artifact for every experiment", "current": "partial", "next_test": "Lint an entry missing its pre-measurement hypothesis"},
-    {"dimension": "Locale parity", "baseline": "Matching names checked manually", "target": "Identical EN/FR/ES file sets plus semantic review", "current": "partial", "next_test": "CI parity check and human translation spot-check"},
-    {"dimension": "Adoption feedback", "baseline": "Course completion is treated as success", "target": "Track discovered, rejected, incubated and integrated repository outcomes", "current": "new", "next_test": "Follow one Jev candidate through a live verdict"},
-    {"dimension": "Agentic efficiency", "baseline": "Tokens and activity can be mistaken for progress", "target": "Cost per accepted result with quality, escalation and retry guardrails", "current": "new", "next_test": "Run the bounded Jev A/B"}
+    {
+      "dimension": "Executable examples",
+      "baseline": "Commands copied manually into journals",
+      "target": "CI command and exact output linked from every measured claim",
+      "current": "partial",
+      "next_test": "Reject a deliberately stale output fixture"
+    },
+    {
+      "dimension": "Journal evidence",
+      "baseline": "Free-form dated notes",
+      "target": "Hypothesis, baseline, result, verdict and artifact for every experiment",
+      "current": "partial",
+      "next_test": "Lint an entry missing its pre-measurement hypothesis"
+    },
+    {
+      "dimension": "Locale parity",
+      "baseline": "Matching names checked manually",
+      "target": "Identical EN/FR/ES file sets plus semantic review",
+      "current": "partial",
+      "next_test": "CI parity check and human translation spot-check"
+    },
+    {
+      "dimension": "Adoption feedback",
+      "baseline": "Course completion is treated as success",
+      "target": "Track discovered, rejected, incubated and integrated repository outcomes",
+      "current": "new",
+      "next_test": "Follow one Jev candidate through a live verdict"
+    },
+    {
+      "dimension": "Agentic efficiency",
+      "baseline": "Tokens and activity can be mistaken for progress",
+      "target": "Cost per accepted result with quality, escalation and retry guardrails",
+      "current": "new",
+      "next_test": "Run the bounded Jev A/B"
+    }
   ]
 }
