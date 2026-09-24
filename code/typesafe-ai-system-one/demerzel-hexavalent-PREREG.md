@@ -81,3 +81,63 @@ share a labeling standard and a model family, so agreement measures consistency,
 not truth. No real Demerzel belief files are sent. Even `ADVISORY_USEFUL` grants
 nothing: a Jev value would be one input to Demerzel's deterministic confidence
 ladder, never a verdict, and a `C` would still escalate to a human.
+
+---
+
+## Results — 2026-09-24 (appended after the run; the section above is unchanged since f45e928)
+
+120/120 calls answered, all `jev-1.13.0`, 0 invalid, no retry. Reported usage:
+63,486 input and 8,013 output tokens, **$0.0027** computed at $0.042/M (not a
+bill). Mean latency 392 ms, max 563 ms. Receipt:
+`evidence/demerzel-hexavalent-live.json` (no key, no raw response bodies);
+`python demerzel_hexavalent.py score --out evidence/demerzel-hexavalent-live.json`
+reproduces the verdict from it.
+
+| Metric (N = 58 agreed) | canonical | reversed | keyword baseline |
+|---|---|---|---|
+| correct | 41 (70.7 %) | 41 (70.7 %) | 12 |
+| false_true | **0** | **0** | 5 |
+| absence_as_refutation (of 10 U) | **7** | **7** | 0 |
+| invalid | 0 | 0 | — |
+| verdict | INCONCLUSIVE | INCONCLUSIVE | KILL |
+
+**Overall verdict: `INCONCLUSIVE`** — above the KILL line and with zero false T,
+but below 0.75·N and far over the absence rule.
+
+Confusion (canonical; reversed differs on 2 cases only, h35 and h50):
+
+| label → predicted | T | P | U | D | F | C |
+|---|---|---|---|---|---|---|
+| T (10) | 8 | 1 | 1 | | | |
+| P (10) | | 7 | 3 | | | |
+| U (10) | | | 3 | 2 | 5 | |
+| D (8)  | | | | 8 | | |
+| F (10) | | | 1 | | 9 | |
+| C (10) | | | | | 4 | 6 |
+
+What the pre-registered hypothesis was about, answered:
+
+1. **Absence is still read as refutation.** 7 of 10 U cases came back F or D in
+   both arms (h02, h13, h23, h29, h36, h41, h48), with the same answer under
+   reversed option order — this is systematic, not noise. It is the
+   `demerzel_immutable` error of 2026-09-22 again, now at 70 % of the U class.
+   Demerzel's one-line definition ("insufficient evidence to determine") does
+   not stop Jev from treating a missing artefact or an unrun check as evidence
+   against.
+2. **Conflict collapses to F.** 4 of 10 C cases (h04, h11, h25, h49) came back
+   F: two strong opposing records are resolved toward the negative one instead
+   of escalating.
+3. **The error direction is conservative.** 0 false T in either arm; T and P
+   errors fall *down* the lattice (to P or U). The three prompt injections did
+   not produce a T (h09 → F, correct; h45 → P, correct; h29 → F, wrong but for
+   the absence reason).
+4. **Errors are low-confidence, but not separably so.** Wrong answers carry
+   0.21–0.72 confidence; the highest-confidence absence error is h02 at 0.72.
+   No threshold was pre-registered, so none is claimed.
+
+Split cases (not scored): h39 and h57 (author D, blind U) — Jev said U on both.
+
+Next experiment, to pre-register separately: the same corpus with the labeling
+standard's absence rule added to the U and C criteria text. It tests whether the
+failure is in the definitions Demerzel ships or in the model — the question that
+decides whether the fix belongs in `logic/hexavalent-logic.md`.
