@@ -218,7 +218,7 @@ La línea de texto es donde van los nombres de acorde, no las anotaciones ([lecc
 Un error en la `t` de `time=`, columna 30: `key=G` pasa por un parser que termina en `.>> ws` y se come el espacio, así que `time=` no tiene espacio delante y no se lee como una opción. Es el mismo fallo que `ebnf-1`, `key=C time=4/4`, en la misma columna. El banco de pruebas también ejecuta este texto, como la fila `key-time` de la tabla:
 
 ```text
-parse: error Error in Ln: 1 Col: 30 | tabstave notation=true key=G time=4/4 | ^ | Expecting: end of input, newline, '	', ' ', '#', '##', 'b', 'bb', 'major', | 'minor', 'n', 'x', '♭', '♮' or '♯'
+parse: error Error in Ln: 1 Col: 30 | tabstave notation=true key=G time=4/4 | ^ | Expecting: end of input, newline, '\t', ' ', '#', '##', 'b', 'bb', 'major', | 'minor', 'n', 'x', '♭', '♮' or '♯'
 ```
 
 FParsec incluye `' '` entre los caracteres esperados: el espacio estaba ahí, pero ya consumido.

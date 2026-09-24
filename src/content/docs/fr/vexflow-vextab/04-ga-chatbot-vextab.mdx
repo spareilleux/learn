@@ -218,7 +218,7 @@ La ligne de texte est la place des noms d'accords, pas les annotations ([leçon 
 Une erreur sur le `t` de `time=`, colonne 30 : `key=G` passe par un analyseur qui se termine par `.>> ws` et mange l'espace, si bien que `time=` n'a plus d'espace devant lui et n'est pas lu comme une option. C'est le même échec que `ebnf-1`, `key=C time=4/4`, à la même colonne. Le banc de test exécute aussi ce texte, c'est la ligne `key-time` du tableau :
 
 ```text
-parse: error Error in Ln: 1 Col: 30 | tabstave notation=true key=G time=4/4 | ^ | Expecting: end of input, newline, '	', ' ', '#', '##', 'b', 'bb', 'major', | 'minor', 'n', 'x', '♭', '♮' or '♯'
+parse: error Error in Ln: 1 Col: 30 | tabstave notation=true key=G time=4/4 | ^ | Expecting: end of input, newline, '\t', ' ', '#', '##', 'b', 'bb', 'major', | 'minor', 'n', 'x', '♭', '♮' or '♯'
 ```
 
 FParsec compte `' '` parmi les caractères attendus : l'espace était là, mais déjà consommée.

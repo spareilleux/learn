@@ -218,7 +218,7 @@ The text line is where chord names belong, not annotations ([lesson 2](../02-gui
 An error at the `t` of `time=`, column 30: `key=G` goes through a parser that ends with `.>> ws` and eats the space, so `time=` has no leading space and isn't read as an option. It is the same failure as `ebnf-1`, `key=C time=4/4`, at the same column. The harness runs this text too, as the `key-time` row of the table:
 
 ```text
-parse: error Error in Ln: 1 Col: 30 | tabstave notation=true key=G time=4/4 | ^ | Expecting: end of input, newline, '	', ' ', '#', '##', 'b', 'bb', 'major', | 'minor', 'n', 'x', '♭', '♮' or '♯'
+parse: error Error in Ln: 1 Col: 30 | tabstave notation=true key=G time=4/4 | ^ | Expecting: end of input, newline, '\t', ' ', '#', '##', 'b', 'bb', 'major', | 'minor', 'n', 'x', '♭', '♮' or '♯'
 ```
 
 FParsec lists `' '` among the expected characters: the space was there, but already consumed.
