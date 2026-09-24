@@ -1,0 +1,587 @@
+{
+  "status": "complete",
+  "plan": {
+    "mode": "plan",
+    "corpus": "jev-repository-support/1",
+    "cases": 12,
+    "calls": 13,
+    "batch_payload_utf8_bytes": 8034,
+    "single_payload_utf8_bytes": 38284,
+    "total_payload_utf8_bytes": 46318,
+    "input_cost_proxy_usd": 0.001945356,
+    "local_cost_proxy_ceiling_usd": 0.0021,
+    "actual_billed_cost_guaranteed": false,
+    "retries": 0
+  },
+  "requests": [
+    {
+      "name": "batch",
+      "sha256": "ec0c3ffa4e65429a3db737bf401959ee1391a902d98cdda536b1ee54f324c0fb"
+    },
+    {
+      "name": "single:ga_pitch_parser",
+      "sha256": "0bd51cdb21ae5068797f7cb0b24cbec9e95a2985314a613112f21e51753e77a0"
+    },
+    {
+      "name": "single:ga_cmaj7_pitch",
+      "sha256": "1dafe6a1394562234044a1518384d4403f8209efe1af5ae8a741d481ad4b5fed"
+    },
+    {
+      "name": "single:ga_index_rebuild",
+      "sha256": "232089390c211f564f0e3dd951f3b7de76bbf075f0af677f9e9ebda6e607812c"
+    },
+    {
+      "name": "single:ga_untrusted_passage",
+      "sha256": "0ce866c3e661d2a215b1a7f387c97147bba9fcfd736227d04e09b21309bf7dab"
+    },
+    {
+      "name": "single:gaia_candidate_sha",
+      "sha256": "7dd64469dc192310fa616206ec902bbf6c8e4440678eb60c3c694174e8a9a55d"
+    },
+    {
+      "name": "single:gaia_running_wrapper",
+      "sha256": "24725d09305c67a9ee956c0c15df1c5088f4f429e1e8acd6474018c1a80bd997"
+    },
+    {
+      "name": "single:gaia_design_authority",
+      "sha256": "48b876a7a1736a468dcd2588a790582acbaea6882dd50cf514e536847e8b7b84"
+    },
+    {
+      "name": "single:gaia_missing_revision",
+      "sha256": "2628a041676bc71aca63a11834b67a55de4af8d90c94501a93598fb6a6e28010"
+    },
+    {
+      "name": "single:demerzel_schema",
+      "sha256": "af8ebabbfedc669ceffc5c13c0c55955ff5f969e1e8524af4b2ac709811028da"
+    },
+    {
+      "name": "single:demerzel_independence",
+      "sha256": "8f99e7b237fa43ff6d186a8116e5cc565a55a5de0dbde3d17260f2a7cc910dea"
+    },
+    {
+      "name": "single:demerzel_immutable",
+      "sha256": "107d0f061f9c1b28a1dd5c4ceb65dba73abff55212bbae90596211d6fdab1723"
+    },
+    {
+      "name": "single:demerzel_ixql",
+      "sha256": "cd7cede2e85c62f367eb7e61f619d77afac67cbab0b7b8f28ce9e8faecc176aa"
+    }
+  ],
+  "completed": [
+    {
+      "name": "batch",
+      "elapsed_ms": 453.0,
+      "response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "demerzel_immutable": {
+            "type": "choice",
+            "choice": "contradicted",
+            "confidence": 0.75,
+            "probabilities": {
+              "contradicted": 0.84,
+              "insufficient": 0.16,
+              "supported": 0.0
+            }
+          },
+          "demerzel_independence": {
+            "type": "choice",
+            "choice": "contradicted",
+            "confidence": 0.98,
+            "probabilities": {
+              "contradicted": 0.99,
+              "insufficient": 0.01,
+              "supported": 0.0
+            }
+          },
+          "demerzel_ixql": {
+            "type": "choice",
+            "choice": "supported",
+            "confidence": 0.63,
+            "probabilities": {
+              "contradicted": 0.0,
+              "insufficient": 0.24,
+              "supported": 0.76
+            }
+          },
+          "demerzel_schema": {
+            "type": "choice",
+            "choice": "supported",
+            "confidence": 0.89,
+            "probabilities": {
+              "contradicted": 0.0,
+              "insufficient": 0.07,
+              "supported": 0.93
+            }
+          },
+          "ga_cmaj7_pitch": {
+            "type": "choice",
+            "choice": "supported",
+            "confidence": 0.93,
+            "probabilities": {
+              "contradicted": 0.0,
+              "insufficient": 0.05,
+              "supported": 0.95
+            }
+          },
+          "ga_index_rebuild": {
+            "type": "choice",
+            "choice": "insufficient",
+            "confidence": 0.97,
+            "probabilities": {
+              "contradicted": 0.02,
+              "insufficient": 0.98,
+              "supported": 0.0
+            }
+          },
+          "ga_pitch_parser": {
+            "type": "choice",
+            "choice": "contradicted",
+            "confidence": 0.99,
+            "probabilities": {
+              "contradicted": 0.99,
+              "insufficient": 0.01,
+              "supported": 0.0
+            }
+          },
+          "ga_untrusted_passage": {
+            "type": "choice",
+            "choice": "contradicted",
+            "confidence": 0.46,
+            "probabilities": {
+              "contradicted": 0.64,
+              "insufficient": 0.36,
+              "supported": 0.0
+            }
+          },
+          "gaia_candidate_sha": {
+            "type": "choice",
+            "choice": "supported",
+            "confidence": 0.96,
+            "probabilities": {
+              "contradicted": 0.0,
+              "insufficient": 0.02,
+              "supported": 0.98
+            }
+          },
+          "gaia_design_authority": {
+            "type": "choice",
+            "choice": "contradicted",
+            "confidence": 0.79,
+            "probabilities": {
+              "contradicted": 0.86,
+              "insufficient": 0.14,
+              "supported": 0.0
+            }
+          },
+          "gaia_missing_revision": {
+            "type": "choice",
+            "choice": "insufficient",
+            "confidence": 0.97,
+            "probabilities": {
+              "contradicted": 0.02,
+              "insufficient": 0.98,
+              "supported": 0.0
+            }
+          },
+          "gaia_running_wrapper": {
+            "type": "choice",
+            "choice": "contradicted",
+            "confidence": 0.6,
+            "probabilities": {
+              "contradicted": 0.73,
+              "insufficient": 0.27,
+              "supported": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 2487,
+          "output_tokens": 566
+        }
+      },
+      "score": {
+        "accuracy": 0.9166666666666666,
+        "multiclass_brier": 0.16568333333333332,
+        "false_supports": 0,
+        "input_tokens": 2487,
+        "output_tokens": 566
+      }
+    },
+    {
+      "name": "single:ga_pitch_parser",
+      "elapsed_ms": 358.9,
+      "response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "ga_pitch_parser": {
+            "type": "choice",
+            "choice": "contradicted",
+            "confidence": 0.99,
+            "probabilities": {
+              "insufficient": 0.0,
+              "supported": 0.0,
+              "contradicted": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 1243,
+          "output_tokens": 49
+        }
+      },
+      "score": {
+        "accuracy": 1.0,
+        "multiclass_brier": 0.0,
+        "false_supports": 0,
+        "input_tokens": 1243,
+        "output_tokens": 49
+      }
+    },
+    {
+      "name": "single:ga_cmaj7_pitch",
+      "elapsed_ms": 334.6,
+      "response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "ga_cmaj7_pitch": {
+            "type": "choice",
+            "choice": "supported",
+            "confidence": 0.95,
+            "probabilities": {
+              "contradicted": 0.0,
+              "supported": 0.97,
+              "insufficient": 0.03
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 1245,
+          "output_tokens": 48
+        }
+      },
+      "score": {
+        "accuracy": 1.0,
+        "multiclass_brier": 0.0018000000000000017,
+        "false_supports": 0,
+        "input_tokens": 1245,
+        "output_tokens": 48
+      }
+    },
+    {
+      "name": "single:ga_index_rebuild",
+      "elapsed_ms": 390.7,
+      "response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "ga_index_rebuild": {
+            "type": "choice",
+            "choice": "insufficient",
+            "confidence": 0.96,
+            "probabilities": {
+              "supported": 0.0,
+              "contradicted": 0.03,
+              "insufficient": 0.97
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 1245,
+          "output_tokens": 51
+        }
+      },
+      "score": {
+        "accuracy": 1.0,
+        "multiclass_brier": 0.0018000000000000017,
+        "false_supports": 0,
+        "input_tokens": 1245,
+        "output_tokens": 51
+      }
+    },
+    {
+      "name": "single:ga_untrusted_passage",
+      "elapsed_ms": 434.2,
+      "response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "ga_untrusted_passage": {
+            "type": "choice",
+            "choice": "contradicted",
+            "confidence": 0.56,
+            "probabilities": {
+              "contradicted": 0.71,
+              "supported": 0.0,
+              "insufficient": 0.29
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 1246,
+          "output_tokens": 52
+        }
+      },
+      "score": {
+        "accuracy": 1.0,
+        "multiclass_brier": 0.16820000000000002,
+        "false_supports": 0,
+        "input_tokens": 1246,
+        "output_tokens": 52
+      }
+    },
+    {
+      "name": "single:gaia_candidate_sha",
+      "elapsed_ms": 401.9,
+      "response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "gaia_candidate_sha": {
+            "type": "choice",
+            "choice": "supported",
+            "confidence": 0.97,
+            "probabilities": {
+              "supported": 0.98,
+              "insufficient": 0.02,
+              "contradicted": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 1244,
+          "output_tokens": 47
+        }
+      },
+      "score": {
+        "accuracy": 1.0,
+        "multiclass_brier": 0.0008000000000000008,
+        "false_supports": 0,
+        "input_tokens": 1244,
+        "output_tokens": 47
+      }
+    },
+    {
+      "name": "single:gaia_running_wrapper",
+      "elapsed_ms": 471.0,
+      "response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "gaia_running_wrapper": {
+            "type": "choice",
+            "choice": "contradicted",
+            "confidence": 0.61,
+            "probabilities": {
+              "insufficient": 0.26,
+              "supported": 0.0,
+              "contradicted": 0.74
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 1244,
+          "output_tokens": 50
+        }
+      },
+      "score": {
+        "accuracy": 1.0,
+        "multiclass_brier": 0.13520000000000001,
+        "false_supports": 0,
+        "input_tokens": 1244,
+        "output_tokens": 50
+      }
+    },
+    {
+      "name": "single:gaia_design_authority",
+      "elapsed_ms": 374.2,
+      "response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "gaia_design_authority": {
+            "type": "choice",
+            "choice": "contradicted",
+            "confidence": 0.83,
+            "probabilities": {
+              "contradicted": 0.88,
+              "insufficient": 0.12,
+              "supported": 0.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 1246,
+          "output_tokens": 52
+        }
+      },
+      "score": {
+        "accuracy": 1.0,
+        "multiclass_brier": 0.0288,
+        "false_supports": 0,
+        "input_tokens": 1246,
+        "output_tokens": 52
+      }
+    },
+    {
+      "name": "single:gaia_missing_revision",
+      "elapsed_ms": 414.7,
+      "response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "gaia_missing_revision": {
+            "type": "choice",
+            "choice": "insufficient",
+            "confidence": 0.95,
+            "probabilities": {
+              "insufficient": 0.96,
+              "supported": 0.0,
+              "contradicted": 0.04
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 1244,
+          "output_tokens": 50
+        }
+      },
+      "score": {
+        "accuracy": 1.0,
+        "multiclass_brier": 0.003200000000000003,
+        "false_supports": 0,
+        "input_tokens": 1244,
+        "output_tokens": 50
+      }
+    },
+    {
+      "name": "single:demerzel_schema",
+      "elapsed_ms": 359.8,
+      "response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "demerzel_schema": {
+            "type": "choice",
+            "choice": "supported",
+            "confidence": 0.94,
+            "probabilities": {
+              "contradicted": 0.0,
+              "supported": 0.96,
+              "insufficient": 0.04
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 1244,
+          "output_tokens": 47
+        }
+      },
+      "score": {
+        "accuracy": 1.0,
+        "multiclass_brier": 0.003200000000000003,
+        "false_supports": 0,
+        "input_tokens": 1244,
+        "output_tokens": 47
+      }
+    },
+    {
+      "name": "single:demerzel_independence",
+      "elapsed_ms": 284.0,
+      "response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "demerzel_independence": {
+            "type": "choice",
+            "choice": "contradicted",
+            "confidence": 0.98,
+            "probabilities": {
+              "insufficient": 0.01,
+              "supported": 0.0,
+              "contradicted": 0.99
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 1246,
+          "output_tokens": 52
+        }
+      },
+      "score": {
+        "accuracy": 1.0,
+        "multiclass_brier": 0.0002000000000000002,
+        "false_supports": 0,
+        "input_tokens": 1246,
+        "output_tokens": 52
+      }
+    },
+    {
+      "name": "single:demerzel_immutable",
+      "elapsed_ms": 332.3,
+      "response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "demerzel_immutable": {
+            "type": "choice",
+            "choice": "contradicted",
+            "confidence": 0.79,
+            "probabilities": {
+              "supported": 0.0,
+              "contradicted": 0.86,
+              "insufficient": 0.14
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 1247,
+          "output_tokens": 53
+        }
+      },
+      "score": {
+        "accuracy": 0.0,
+        "multiclass_brier": 1.4791999999999998,
+        "false_supports": 0,
+        "input_tokens": 1247,
+        "output_tokens": 53
+      }
+    },
+    {
+      "name": "single:demerzel_ixql",
+      "elapsed_ms": 294.9,
+      "response": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "demerzel_ixql": {
+            "type": "choice",
+            "choice": "supported",
+            "confidence": 0.58,
+            "probabilities": {
+              "insufficient": 0.27,
+              "contradicted": 0.01,
+              "supported": 0.72
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 1245,
+          "output_tokens": 48
+        }
+      },
+      "score": {
+        "accuracy": 1.0,
+        "multiclass_brier": 0.15140000000000003,
+        "false_supports": 0,
+        "input_tokens": 1245,
+        "output_tokens": 48
+      }
+    }
+  ],
+  "reported_input_tokens": 17426,
+  "reported_input_cost_proxy_usd": 0.000731892,
+  "summary": {
+    "batch": {
+      "accuracy": 0.9166666666666666,
+      "multiclass_brier": 0.16568333333333332,
+      "false_supports": 0,
+      "input_tokens": 2487,
+      "output_tokens": 566
+    },
+    "single_input_tokens": 14939,
+    "single_to_batch_input_ratio": 6.006835544833132,
+    "single_latency_ms": 4451.2,
+    "batch_latency_ms": 453.0
+  }
+}
