@@ -1,0 +1,45 @@
+# VexTab & VexFlow course: render every lesson example with VexTab 4.0.5 and its bundled VexFlow 5.0.0 under Node
+# (jsdom, text measured with opentype.js), run lesson 4's texts through GA's F# parser pinned on one commit and through
+# VexTab, and compare every SVG, error message and table with expected/ on three OSes
+name: VexTab & VexFlow course examples
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['code/vexflow-vextab/**', 'src/assets/vexflow-vextab/**', '.github/workflows/vexflow-vextab-examples.yml']
+  pull_request:
+    paths: ['code/vexflow-vextab/**', 'src/assets/vexflow-vextab/**', '.github/workflows/vexflow-vextab-examples.yml']
+
+permissions:
+  contents: read
+
+env:
+  NODE_VERSION: 24.21.0
+
+jobs:
+  vexflow-vextab:
+    name: vexflow-vextab (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+        working-directory: code/vexflow-vextab
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: code/vexflow-vextab/global.json
+      - name: Toolchain
+        run: node --version && npm --version && dotnet --version
+      - name: Install the pinned vextab, vexflow, jsdom, opentype.js and fonts
+        run: npm ci
+      - name: Render, parse and compare
+        run: bash check.sh

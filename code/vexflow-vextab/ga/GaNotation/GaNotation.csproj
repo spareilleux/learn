@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- GA's PlayableNotationFormatter, compiled alone from the pinned checkout in ../../.ga (bash fetch-ga.sh) -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../.ga/Common/GA.Business.ML/Notation/PlayableNotationFormatter.cs" />
+  </ItemGroup>
+</Project>

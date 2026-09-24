@@ -1,0 +1,21 @@
+{
+  "name": "vexflow-vextab",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Examples of the course VexTab & VexFlow: each .vextab file is parsed by VexTab and rendered to SVG by VexFlow under jsdom, then compared with expected/ by check.sh",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "check": "bash check.sh"
+  },
+  "dependencies": {
+    "@vexflow-fonts/academico": "1.0.1",
+    "@vexflow-fonts/bravura": "1.0.2",
+    "jsdom": "30.1.1",
+    "opentype.js": "2.0.0",
+    "vexflow": "5.0.0",
+    "vextab": "4.0.5"
+  }
+}
