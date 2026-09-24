@@ -1,0 +1,78 @@
+---
+title: Journal
+description: Notes datées du cours VexTab et VexFlow — ce que VexTab 4.0.5 et VexFlow 5.0.0 se sont révélés faire, ce que fait le code VexTab de Guitar Alchemist face à eux, et à quelle distance de Chrome se trouve le rendu sans navigateur, avec les hypothèses écrites avant de mesurer.
+sidebar:
+  order: 99
+---
+
+## Progression
+
+- [x] Mission et plan
+- [x] Code du cours : rendu sans navigateur, `check.sh`, CI sous Linux, Windows et macOS
+- [x] Leçon 1 : première portée, première tablature
+- [x] Leçon 2 : techniques de guitare
+- [x] Leçon 3 : armures, chiffrages, clés et accordages
+- [x] Leçon 4 : étude de cas, le chatbot de GA écrit du VexTab
+- [ ] Leçon 5 : les objets de VexFlow lui-même, une voix stricte
+- [ ] Leçon 6 : `TabStave` et `TabNote`
+- [ ] Leçon 7 : rendre en React, tester avec Playwright
+- [ ] Leçon 8 : passer GA de VexFlow 4 à 5
+
+## QA
+
+Ce que le cours a trouvé dans les logiciels qu'il enseigne, et dans le code de Guitar Alchemist qui les utilise. Les liens VexTab pointent sur [`3a5e00d`](https://github.com/0xfe/vextab/tree/3a5e00d858ae98934ba545f9bef5eb923e17e402), le commit à partir duquel la 4.0.5 de npm a été construite ; les liens VexFlow sur [`0ca6f88`](https://github.com/vexflow/vexflow/tree/0ca6f889545c33cce851b420c24945f6eb685aeb), la 5.0.0 qu'elle embarque ; les liens GA sur [`17ccee6`](https://github.com/GuitarAlchemist/ga/tree/17ccee6885851e4b460ebd14d7f4cfb838f5541e). Chaque mesure est une sortie de `check.sh`, comparée en CI. Rien n'a encore été signalé en amont ; une recherche dans les issues de VexTab et de VexFlow n'a trouvé aucun signalement existant de ces constats.
+
+| Attendu | Ce qui se passe | Où | Mesure | Statut |
+|---|---|---|---|---|
+| `strings=4` dimensionne le dessin pour quatre lignes de tablature | L'option reste une chaîne ; VexFlow calcule la hauteur de la portée comme `("4" + 4) * 13` | [`StaveBuilder.ts:141`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/artist/StaveBuilder.ts#L141), [`VexTabParser.ts:86-89`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/vextab/VexTabParser.ts#L86-L89), VexFlow [`stave.ts:142`](https://github.com/vexflow/vexflow/blob/0ca6f889545c33cce851b420c24945f6eb685aeb/src/stave.ts#L142) | Dessin de 712 px de haut pour `strings=4`, 842 pour 5, 1102 pour 7, contre 270 pour six cordes ; pareil dans Chrome | Reproduit sous Node et dans Chrome ([leçon 3](../03-keys-time-tunings/#le-nombre-de-cordes)) |
+| `$G$` après un accord dessine le texte G | Tout texte qui correspond à un nom de note remplace le numéro de frette de la corde la plus grave de l'accord, et aucune annotation n'est dessinée | [`ArticulationBuilder.ts:362`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/artist/ArticulationBuilder.ts#L362), [`:461`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/artist/ArticulationBuilder.ts#L461) | `$G$ $C$ $D$` sur trois accords : 0 annotation, 3 numéros de frette remplacés ; `$.big.G$` et `$D $` sont dessinés comme du texte | Reproduit. Documenté comme une fonctionnalité pour les notes seules ; un piège pour les noms d'accords ([leçon 2](../02-guitar-techniques/#annotations)) |
+| `$.italic.let ring$` est en italique | VexTab passe le style comme troisième argument de VexFlow 5, la graisse | [`ArticulationBuilder.ts:298-302`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/artist/ArticulationBuilder.ts#L298-L302), VexFlow [`element.ts:392`](https://github.com/vexflow/vexflow/blob/0ca6f889545c33cce851b420c24945f6eb685aeb/src/element.ts#L392) | Le SVG dit `font-weight="italic"`, sans `font-style` | Reproduit |
+| Le logo `vexflow.com` est centré et en italique | Mesuré avant que sa police soit fixée, il est placé avec la largeur de la mauvaise police, et composé droit pour la même raison que ci-dessus | [`ArtistRenderer.ts:262-266`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/artist/ArtistRenderer.ts#L262-L266) | x = 187,78 sur un dessin de 600 px avec notation (Chrome : 188,52) | Reproduit sous Node et dans Chrome (H2) |
+| `X/6` est une note étouffée sur la corde 6 | L'analyseur lexical lit `X` comme un nom de note, donc 6 devient une octave : la notation dessine une tête de note en x là où serait si6, à y = 0, à moitié hors du dessin | [`vextab.jison:84`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/vextab.jison#L84), [`NoteBuilder.ts:264-266`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/artist/NoteBuilder.ts#L264-L266) | Même position dans Chrome, à 0,67 px près | Reproduit sous Node et dans Chrome (H3). La tablature est juste |
+| L'accordage `eb` de VexFlow est l'accordage standard un demi-ton plus bas | La corde 6 est `Db/3`, un ton plus bas | VexFlow [`tuning.ts:16`](https://github.com/vexflow/vexflow/blob/0ca6f889545c33cce851b420c24945f6eb685aeb/src/tuning.ts#L16) | Corde 6 à vide dessinée comme do♯3 (écrit), là où mi♭3 était voulu ; la ligne est inchangée sur la branche `main` de VexFlow | Reproduit ([leçon 3](../03-keys-time-tunings/#accordages)) |
+| `V` dessine un vibrato dur | VexTab n'appelle `setHarsh` que s'il existe, et le `Vibrato` de VexFlow 5 n'en a pas | [`ArticulationBuilder.ts:635-640`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/artist/ArticulationBuilder.ts#L635-L640), VexFlow [`vibrato.ts`](https://github.com/vexflow/vexflow/blob/0ca6f889545c33cce851b420c24945f6eb685aeb/src/vibrato.ts#L86) | `7v` et `8V` dessinent les trois mêmes glyphes U+EAB0 | Reproduit |
+| Cinq noires dans une mesure à 4/4 sont refusées | Elles sont dessinées : les voix de VexTab sont en mode souple | [`ArtistRenderer.ts:67`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/artist/ArtistRenderer.ts#L67) | `l01-overfull` se rend | Reproduit. Voulu, pour autant que le code le dise ([leçon 1](../01-first-stave/#durées-et-barres-de-mesure)) |
+| Les blocs `vextab` du chatbot de GA sont du VexTab | Ils utilisent un format de jetons propre à GA, `corde/frette`, sans `tabstave` ni `notes` | GA [`PlayableNotationFormatter.cs:15-25`](https://github.com/GuitarAlchemist/ga/blob/17ccee6885851e4b460ebd14d7f4cfb838f5541e/Common/GA.Business.ML/Notation/PlayableNotationFormatter.cs#L15-L25), [`:59-71`](https://github.com/GuitarAlchemist/ga/blob/17ccee6885851e4b460ebd14d7f4cfb838f5541e/Common/GA.Business.ML/Notation/PlayableNotationFormatter.cs#L59-L71) | 12 blocs sur 12 (8 accords pour débutants, l'exemple du prompt, 3 tests de bout en bout) rejetés par VexTab 4.0.5 et par l'analyseur F# de GA | Reproduit, non signalé à GA ([leçon 4](../04-ga-chatbot-vextab/#les-résultats)) |
+| Le client de chat de GA dessine les blocs `vextab`, comme l'affirme son test de bout en bout | `MemoizedVexTab` les affiche dans un `<pre>` | GA [`MemoizedVexTab.tsx:11-28`](https://github.com/GuitarAlchemist/ga/blob/17ccee6885851e4b460ebd14d7f4cfb838f5541e/Apps/ga-client/src/components/Chat/MemoizedVexTab.tsx#L11-L28), [`vextab-rendering.spec.ts:94-99`](https://github.com/GuitarAlchemist/ga/blob/17ccee6885851e4b460ebd14d7f4cfb838f5541e/Apps/ga-client/tests/e2e/vextab-rendering.spec.ts#L94-L99) | Lu, pas exécuté ; le test unitaire est en `it.skip` | Lu dans le code, pas exécuté. Savoir si la spec de bout en bout tourne dans la CI de GA est *à vérifier* |
+| Le champ de trace `notation.renderer` de GA dit ce qui a dessiné la notation | C'est la constante `"vexflow"` | GA [`OrchestratedChatApplicationService.cs:336`](https://github.com/GuitarAlchemist/ga/blob/17ccee6885851e4b460ebd14d7f4cfb838f5541e/Apps/GaChatbot.Api/Services/OrchestratedChatApplicationService.cs#L336) | 45 traces de référence : 44 avec `added_count` 0, une avec 8 | Lu dans le code et les traces |
+| L'analyseur F# de GA lit ce qu'écrit son générateur, et les exemples de sa grammaire | `str`, `ch` et `pint` mangent les blancs qui les suivent, y compris l'espace qui commence l'option de tabstave suivante | GA [`VexTabParser.fs:22-29`](https://github.com/GuitarAlchemist/ga/blob/17ccee6885851e4b460ebd14d7f4cfb838f5541e/Common/GA.Business.DSL/Parsers/VexTabParser.fs#L22-L29), [`:330`](https://github.com/GuitarAlchemist/ga/blob/17ccee6885851e4b460ebd14d7f4cfb838f5541e/Common/GA.Business.DSL/Parsers/VexTabParser.fs#L330) | L'aller-retour échoue à la colonne 51 ou 52 pour 6 textes analysables sur 6 ; 0 exemple de l'EBNF sur 4 s'analyse | Reproduit avec les fichiers de GA compilés tels quels, non signalé à GA |
+| L'analyseur F# de GA accepte le VexTab | Il diffère sur les techniques (après la corde), les bémols (`b`), les durées en milieu de ligne, les suites de frettes, les taps, les annotations et les tonalités mineures | GA [`VexTabParser.fs:85`](https://github.com/GuitarAlchemist/ga/blob/17ccee6885851e4b460ebd14d7f4cfb838f5541e/Common/GA.Business.DSL/Parsers/VexTabParser.fs#L85), [`:239-244`](https://github.com/GuitarAlchemist/ga/blob/17ccee6885851e4b460ebd14d7f4cfb838f5541e/Common/GA.Business.DSL/Parsers/VexTabParser.fs#L239-L244), [`:413-420`](https://github.com/GuitarAlchemist/ga/blob/17ccee6885851e4b460ebd14d7f4cfb838f5541e/Common/GA.Business.DSL/Parsers/VexTabParser.fs#L413-L420) | Sur 32 textes, l'analyseur de GA en accepte 6 et VexTab 17 ; ils s'accordent sur « ok » pour 4 | Reproduit, non signalé à GA |
+
+## Expériences
+
+| Question | Hypothèse, écrite avant de mesurer | Résultat | Verdict |
+|---|---|---|---|
+| Le rendu sans navigateur (jsdom, texte mesuré avec opentype.js) place-t-il les glyphes là où Chrome les place ? | H1 : à 1,0 px près en x et en y pour chaque élément de texte de `l01-notation`, `l02-chords` et `l03-keys`, si Chrome charge Bravura et Academico ([`hypotheses.md`](https://github.com/spareilleux/learn/blob/20497783691a7e4f4134be79c5531ea7754934e3/code/vexflow-vextab/results/hypotheses.md), commité dans `284eb7e` avant tout passage dans un navigateur) | 157 éléments de texte sur cinq dessins : \|dx\| max 0,74 px, \|dy\| max 0,67 px, tailles égales ([`browser-2026-09-24.txt`](https://github.com/spareilleux/learn/blob/20497783691a7e4f4134be79c5531ea7754934e3/code/vexflow-vextab/results/browser-2026-09-24.txt)). Les deux premiers essais étaient faux, voir [l'entrée](#2026-09-24--sans-navigateur-contre-chrome) | Confirmée |
+| Le logo décentré est-il un artefact du rendu sans navigateur ? | H2 : Chrome le dessine à x à 1 px près de 187,78. Pas à l'aveugle | Chrome : 188,52 | Confirmée |
+| Chrome dessine-t-il lui aussi `X/6` à l'octave 6 ? | H3 : oui, au même y. Pas à l'aveugle | Même position, à 0,67 px près comme ci-dessus | Confirmée |
+| Le dessin de 712 px de `strings=4` est-il un artefact de jsdom ? | H4 : le SVG de Chrome fait 712 px de haut. Pas à l'aveugle | 600 × 712 | Confirmée |
+
+## 2026-09-24 — Quel VexTab, quel VexFlow
+
+Le `vextab` 4.0.5 de npm a été publié le 2026-01-18 ; ses sources sont identiques au commit `3a5e00d` de `0xfe/vextab` (vérifié fichier par fichier avec SHA-1). Son `dist/main.prod.js` embarque VexFlow 5.0.0, `Vex.Flow.BUILD.ID` `0ca6f889…`, et recrée par-dessus l'espace de noms `Vex.Flow` de VexFlow 4. Installer `vexflow` à côté ne change rien pour VexTab ; le cours épingle quand même `vexflow` 5.0.0, pour la leçon 5. GA, de son côté, utilise VexFlow `^4.2.5`, et embarque un `vexflow.js` 4.2.5 pour l'API de son chatbot.
+
+## 2026-09-24 — Rendre sans navigateur
+
+Le bundle veut `window`, `self`, `document` et `getComputedStyle` ; jsdom les fournit. Ce qu'il ne fournit pas, c'est la mesure du texte : VexFlow mesure chaque glyphe avec un canvas. Premier essai, node-canvas 3.2.3 avec `registerFont` sur les fichiers OTF de Bravura et d'Academico : sous Windows, il ne charge pas ces polices à contours CFF et mesure en silence avec une police sans empattement de repli. Remplacé par un petit contexte qui mesure avec [opentype.js](https://opentype.js.org/) à partir des mêmes fichiers OTF ([`lib/env.cjs`](https://github.com/spareilleux/learn/blob/20497783691a7e4f4134be79c5531ea7754934e3/code/vexflow-vextab/lib/env.cjs)), passé à VexFlow avec `Element.setTextMeasurementCanvas`. La sortie est la même sur les trois OS de la CI, donc les SVG peuvent être comparés octet par octet après renumérotation des identifiants et arrondi à deux décimales.
+
+## 2026-09-24 — Sans navigateur contre Chrome
+
+Hypothèses écrites et commitées d'abord (`284eb7e`). Puis les cinq mêmes fichiers passés par le bundle navigateur dans Chrome 153 sans interface, en relisant chaque `<text>` ([`browser/`](https://github.com/spareilleux/learn/tree/20497783691a7e4f4134be79c5531ea7754934e3/code/vexflow-vextab/browser)).
+
+Le premier essai a donné un écart de 204 px sur le logo et des glyphes illisibles : la page de test n'avait pas de `<meta charset="utf-8">`, Chrome a décodé le bundle en Windows-1252, et chaque point de code SMuFL qu'il contient est devenu du mojibake. Une erreur de mesure, pas un résultat. Le deuxième essai était décalé d'un élément sur `l02-vibrato-mute` : `compare.mjs` ignorait les éléments `<text>` sans attribut `y`, et VexFlow n'en écrit pas quand y vaut 0, ce qui est le cas pour le glyphe de la note étouffée. Corrigé en lisant chaque attribut séparément, un attribut absent valant 0. Le troisième essai est celui du tableau : 0,74 px au plus, sur le logo.
+
+## 2026-09-24 — Le VexTab de GA, exécuté
+
+Clone partiel sans blobs de GA à `17ccee6`, neuf fichiers. Le formateur C# se compile seul ; les trois fichiers F# se compilent tels quels avec FParsec 1.1.1 sur .NET 10, comme GA le référence. Résultats dans la [leçon 4](../04-ga-chatbot-vextab/). Ce que j'attendais en commençant : que les blocs du chatbot utilisent peut-être un ancien dialecte de VexTab. Ce qui en est sorti : ils n'utilisent aucun dialecte de VexTab, le client ne les dessine pas, et l'analyseur de GA rejette la sortie de son propre générateur. VexTab, lui, lit sans difficulté la sortie du générateur de GA. Rien n'a été envoyé à GA : les constats sont dans le rapport à l'utilisateur, qui décide.
+
+## À vérifier
+
+- Si les specs Playwright de `ga-client` tournent dans la CI de GA ; si oui, `vextab-rendering.spec.ts` devrait échouer sur `not.toBeVisible()`. Pas exécuté ici.
+- L'accordage `eb` dans un navigateur : la valeur est dans la table de VexFlow et le dessin sans navigateur montre do♯3, mais la comparaison avec le navigateur n'incluait pas `l03-tuning`.
+- Firefox et Safari : la comparaison avec le navigateur n'a tourné que dans Chrome sans interface, sous Windows.
+- Si VexFlow 4, tel que GA l'utilise, a l'ordre d'arguments de `setFont` qui faisait d'`italic` un style : pas vérifié, puisque le cours épingle VexFlow 5.
+
+## Questions ouvertes
+
+- Le remplacement de frette par les annotations en forme de nom de note est-il censé s'appliquer aux accords, ou seulement aux notes seules ? Le code l'applique à la corde la plus grave de n'importe quel groupe de notes.
+- VexTab devrait-il convertir `strings=` en nombre et passer ce nombre ? Un `parseInt` existe déjà, une ligne au-dessus de celle qui l'oublie.

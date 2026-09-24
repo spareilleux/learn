@@ -1,0 +1,239 @@
+---
+title: "Lección 3: Armaduras, compases, claves y afinaciones"
+description: Las opciones de un pentagrama VexTab — armaduras y compases, claves, afinaciones, el número de cuerdas, las líneas de texto y la línea de opciones — cuáles cambian la notación y cuáles la tablatura, dos defectos encontrados por el camino, y la transposición a mano, ya que VexTab no tiene cejilla.
+sidebar:
+  label: 3. Armaduras, compases, claves y afinaciones
+  order: 3
+---
+
+import Keys from '../../../../assets/vexflow-vextab/l03-keys.svg';
+import Tuning from '../../../../assets/vexflow-vextab/l03-tuning.svg';
+import Strings from '../../../../assets/vexflow-vextab/l03-strings.svg';
+import Text from '../../../../assets/vexflow-vextab/l03-text.svg';
+import TransposeG from '../../../../assets/vexflow-vextab/l03-transpose-g.svg';
+import TransposeA from '../../../../assets/vexflow-vextab/l03-transpose-a.svg';
+
+Todo lo que va después de `tabstave` en la primera línea es una opción, `name=value`. [`VexTabParser.ts:41-95`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/vextab/VexTabParser.ts#L41-L95) comprueba cada una antes de dibujar nada: `notation` y `tablature`, `key`, `clef`, `voice`, `time`, `tuning` y `strings`. Cualquier otra se rechaza. Algunas comprobaciones le preguntan a VexFlow (¿conoce esta tonalidad? ¿sabe construir este compás?); una solo aparenta comprobar, y esa es la segunda mitad de esta lección.
+
+La regla que conviene tener presente: la tablatura muestra trastes, y los trastes no dependen de la tonalidad ni de la afinación. **La armadura, el compás y la clave cambian el pentagrama de notación; la afinación cambia las alturas que VexTab calcula para él; la tablatura sigue igual.**
+
+## Armaduras
+
+`key=` admite una tonalidad mayor, `A`, `Eb`, `F#`, o una menor, `Am`, `C#m`, con la ortografía de VexFlow, con `b` para el bemol aquí (a diferencia de los nombres de nota, que usan `@`).
+
+```vextab
+tabstave notation=true key=A time=4/4
+notes :q 2/3 4/3 6/3 7/3 | :q 4/2 5/2 7/2 :q 9/2
+
+tabstave notation=true key=Eb time=3/4
+notes :q 1/3 3/3 4/3 | :h 1/2 :q 3/2
+```
+
+<Keys role="img" aria-label="Dos sistemas. En la mayor, con tres sostenidos, las notas la, si, do sostenido y re no llevan alteración, y en el segundo compás el re sostenido lleva un sostenido. En mi bemol mayor, con tres bemoles y en 3/4, el si natural del traste 4 lleva un becuadro." />
+
+VexTab calcula la altura de cada traste, y después VexFlow la compara con la armadura: do♯ en la mayor no necesita signo, re♯ sí. En mi♭ mayor, el traste 4 de la cuerda de Sol es si♮ y lleva su becuadro. La tablatura es idéntica a la que sería en do. Una tonalidad desconocida es un error, de `Vex.Flow.hasKeySignature`:
+
+```text
+error ParseError: [RuntimeError] ParseError: Invalid key signature 'H' in line 1 column 23
+```
+
+## Compases
+
+`time=` admite una fracción, o `C` para el compasillo y `C|` para el compás partido. VexTab lo comprueba construyendo un `TimeSignature` de VexFlow y capturando el error.
+
+```vextab
+tabstave notation=true time=C
+notes :q 5/5 7/5 5/4 7/4
+tabstave notation=true time=C|
+notes :h 5/5 7/5
+tabstave notation=true time=6/8
+notes :8 5/5 7/5 5/4 7/4 5/3 7/3
+```
+
+Se dibuja la indicación de compás, y nada más: como mostró la [lección 1](../01-first-stave/#duraciones-y-barras-de-compás), VexTab no cuenta con ella los tiempos de un compás.
+
+## Claves, y notación sin tablatura
+
+`clef=` admite `treble` (la predeterminada), `bass`, `tenor`, `alto`, `percussion` o `none`. Con `tablature=false` no hay tablatura, y las notas se escriben como nombres de nota, como en la lección 1:
+
+```vextab
+tabstave notation=true tablature=false clef=bass key=G
+notes :q G/2 B/2 D/3 G/3
+tabstave notation=true tablature=false clef=alto
+notes :q C/4 D/4 E/4 F/4
+```
+
+Para la guitarra la clave sigue siendo `treble`, clave de sol: la música para guitarra se escribe en clave de sol una octava por encima de como suena. Una clave solo mueve el lugar de las notas en el pentagrama; la altura que VexTab calcula a partir de un traste es la misma.
+
+## Afinaciones
+
+`tuning=` admite uno de los nombres de VexFlow o una lista de notas desde la primera cuerda (la más aguda) hasta la última. Los nombres están en [`tuning.ts:12-18`](https://github.com/vexflow/vexflow/blob/0ca6f889545c33cce851b420c24945f6eb685aeb/src/tuning.ts#L12-L18) de VexFlow:
+
+| Nombre | Cuerdas 1 a 6 | Qué es |
+|---|---|---|
+| `standard` | `E/5,B/4,G/4,D/4,A/3,E/3` | Mi La Re Sol Si Mi, escrita una octava más arriba |
+| `dropd` | `E/5,B/4,G/4,D/4,A/3,D/3` | drop D |
+| `dagdad` | `D/5,A/4,G/4,D/4,A/3,D/3` | DADGAD |
+| `eb` | `Eb/5,Bb/4,Gb/4,Db/4,Ab/3,Db/3` | pensada como todo medio tono más bajo |
+| `standardBanjo` | `D/5,B/4,G/4,D/4,G/5` | banjo de cinco cuerdas |
+
+VexTab pasa el valor a `new Vex.Flow.Tuning(value)` e informa de un fallo como una afinación no válida. Las mismas tres cuerdas al aire en tres afinaciones:
+
+```vextab
+tabstave notation=true tuning=standard
+notes :w (0/6.0/5.0/4)
+tabstave notation=true tuning=dropd
+notes :w (0/6.0/5.0/4)
+tabstave notation=true tuning=eb
+notes :w (0/6.0/5.0/4)
+```
+
+<Tuning role="img" aria-label="Tres sistemas con la misma tablatura, ceros en las cuerdas 6, 5 y 4. La notación muestra mi, la, re en la afinación estándar, re, la, re en drop D, y do sostenido, sol sostenido, do sostenido en la afinación eb." />
+
+La tablatura son los mismos tres ceros; la notación sigue a la afinación. Ahora lee la línea `eb`. Medio tono por debajo de la estándar es Mi♭ La♭ Re♭ Sol♭ Si♭ Mi♭, y la sexta cuerda debería ser `Eb/3`. La tabla de VexFlow dice `Db/3`, un tono por debajo, así que la cuerda grave al aire del tercer sistema se dibuja como do♯, la misma nota que re♭, donde se quería mi♭. Las cuerdas 1 a 5 están bien. La línea es la misma en la rama principal de VexFlow; el archivo se modificó por última vez en 2023. La solución es escribir la afinación completa:
+
+```text
+tabstave notation=true tuning=Eb/5,Bb/4,Gb/4,Db/4,Ab/3,Eb/3
+```
+
+Con ella, la cuerda grave se dibuja como re♯3, la misma altura que mi♭3: sin una armadura con bemoles, VexTab escribe con sostenidos las alturas que calcula.
+
+Un nombre desconocido se rechaza:
+
+```text
+error ParseError: [RuntimeError] ParseError: Invalid tuning: 'drop-c' in line 1 column 23
+```
+
+## El número de cuerdas
+
+`strings=` es para instrumentos distintos de la guitarra de seis cuerdas: un bajo, una guitarra de siete cuerdas. VexTab acepta de 4 a 8 ([`VexTabParser.ts:86-91`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/vextab/VexTabParser.ts#L86-L91)) y necesita una afinación con otras tantas notas. Un bajo de cuatro cuerdas en Mi:
+
+```vextab
+tabstave notation=true clef=bass tuning=G/3,D/3,A/2,E/2 strings=4
+notes :q 0/4 2/4 4/4 5/4 | :h 0/3 2/3
+```
+
+<Strings role="img" aria-label="Un pentagrama en clave de fa y una tablatura de cuatro líneas con seis notas, seguidos de una gran zona vacía: el dibujo es varias veces más alto que su contenido." />
+
+La música es correcta: cuatro líneas de tablatura, mi, fa♯, sol♯, la, y después la y si. El dibujo mide 712 píxeles de alto, cuando un pentagrama de seis cuerdas con notación mide 270, y la altura de más está vacía. La lección 1 señaló que los valores de las opciones siguen siendo cadenas durante todo el recorrido; aquí es donde importa. `VexTabParser` comprueba el número con `parseInt`, pero conserva el texto; después `StaveBuilder` pasa el texto `"4"` a `TabStave.setNumLines` de VexFlow ([`StaveBuilder.ts:141`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/artist/StaveBuilder.ts#L141)). VexFlow calcula la altura del pentagrama así ([`stave.ts:142`](https://github.com/vexflow/vexflow/blob/0ca6f889545c33cce851b420c24945f6eb685aeb/src/stave.ts#L142)):
+
+```ts
+this.height = (this.options.numLines + this.options.spaceAboveStaffLn) * this.options.spacingBetweenLinesPx;
+```
+
+Con `numLines = "4"` y `spaceAboveStaffLn = 4`, `+` concatena: `"44" * 13 = 572` píxeles en lugar de `8 * 13 = 104`. El bucle que dibuja las líneas, `i < this.options.numLines`, compara numéricamente y dibuja cuatro líneas, así que nada parece estar mal salvo el tamaño. `strings=5` da 842 píxeles, `strings=7` da 1102; Chrome dibuja los mismos tamaños (mira el [diario](../journal/)). Hasta que VexTab convierta el valor, recorta el SVG o fija tú mismo la altura de su `viewBox`.
+
+## Líneas de texto
+
+Una línea `text` bajo `notes` escribe texto a tiempo con la música: nombres de acordes, letra, digitación. Los elementos se separan con comas; una duración fija cuánto sitio ocupa cada texto; `|` es una barra de compás.
+
+```vextab
+options space=20
+tabstave notation=true time=4/4
+notes :q (0/1.1/2.0/3.2/4.3/5) (0/1.1/2.2/3.2/4.0/5) | :q (3/1.0/2.0/3.0/4.2/5.3/6) (2/1.3/2.2/3.0/4)
+text :h,C,Am,|,G,D
+```
+
+<Text role="img" aria-label="Cuatro acordes, do, la menor, sol y re, dos por compás, con sus nombres impresos bajo la tablatura, cada uno bajo su acorde." />
+
+Los nombres quedan bajo sus acordes, y `C`, `G` y `D` se dibujan como texto: una línea de texto no pasa por la prueba de nombre de nota que convierte las anotaciones en números de traste ([lección 2](../02-guitar-techniques/#anotaciones)). Es el mejor sitio para los nombres de acorde. [`VexTabParser.ts:222-257`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/vextab/VexTabParser.ts#L222-L257) enumera el resto: `.font=Face-size-style`, `.left`, `.right` y `.center`, `.N` para la línea en la que se sitúa el texto, `++` para una segunda línea de texto, y `#name` para un glifo de VexFlow.
+
+## La línea de opciones
+
+Una línea que empieza por `options` cambia todo el dibujo. Las claves son las de las personalizaciones del Artist ([`Artist.ts:173-191`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/artist/Artist.ts#L173-L191)): `width`, `scale`, `space` (píxeles añadidos antes del siguiente pentagrama), `stave-distance`, `font-face`, `font-size`, `font-style`, `tab-stems` y algunas más.
+
+```vextab
+options width=400 scale=0.8 space=10
+tabstave notation=true key=G
+notes :q 3/6 5/6 2/5 3/5 | :h 5/5 2/4
+```
+
+Este se dibuja con 400 píxeles de ancho de disposición y una escala de 0,8: el SVG mide 320 × 224 con un `viewBox` de 400 × 280. No existe `capo`:
+
+```text
+error ParseError: [RuntimeError] ParseError: Invalid option 'capo' in line 1 column 23
+```
+
+## Transponer a mano
+
+Sin cejilla y sin opción de transposición, llevar un pasaje a otra tonalidad es cosa tuya. En la guitarra suele ser fácil: una forma desplazada por el mástil conserva su digitación. Una escala de sol mayor y un acorde de sol, ambos desde el traste 3 de la sexta cuerda:
+
+```vextab
+tabstave notation=true key=G time=4/4
+notes :8 3/6 5/6 2/5 3/5 5/5 2/4 4/4 5/4 | :w (3/6.2/5.0/4.0/3.0/2.3/1)
+```
+
+<TransposeG role="img" aria-label="Una escala de sol mayor en corcheas y un acorde de sol abierto, con un sostenido en la armadura." />
+
+Un tono más arriba, a la: suma 2 a cada traste y cambia la tonalidad. Las cuerdas al aire del acorde de sol pasan a ser el traste 2, lo que convierte el acorde abierto en una forma con cejilla; la escala conserva su digitación.
+
+```vextab
+tabstave notation=true key=A time=4/4
+notes :8 5/6 7/6 4/5 5/5 7/5 4/4 6/4 7/4 | :w (5/6.4/5.2/4.2/3.2/2.5/1)
+```
+
+<TransposeA role="img" aria-label="La misma escala y el mismo acorde en la mayor, tres sostenidos, cada traste dos más arriba." />
+
+VexTab vuelve a calcular las alturas a partir de los nuevos trastes, y VexFlow las escribe según la nueva armadura: do♯, fa♯ y sol♯ no llevan signo en la mayor. Una cejilla es la misma operación: con una cejilla en el traste 2, los números de traste que escribes se cuentan desde la cejuela, como más arriba, porque VexTab no tiene forma de decir que la cejilla está ahí.
+
+## Lo esencial
+
+- Las opciones del pentagrama se comprueban antes de dibujar; `key` y `time` se comprueban preguntándole a VexFlow, `tuning` construyendo un `Tuning` de VexFlow.
+- La tablatura muestra trastes; la armadura, el compás y la clave solo cambian el pentagrama de notación, y la afinación cambia las alturas que VexTab calcula para él.
+- La afinación `eb` de VexFlow 5 tiene la sexta cuerda en re♭, un tono demasiado baja: escribe la afinación completa.
+- `strings=N` funciona, pero la altura del dibujo sale como si N fuera seguido de un 4; recórtalo.
+- Para los nombres de acorde, usa una línea `text`, no anotaciones. Para otra tonalidad, suma a los trastes y cambia `key=`.
+
+## Ejercicios
+
+1. Escribe un acorde de re mayor abierto en afinación drop D con las seis cuerdas: la cuerda grave al aire, las cuerdas de Re, Sol, Si y Mi como en el acorde de re abierto habitual, y la cuerda de La al aire. ¿Qué notas muestra la notación?
+
+<details>
+<summary>Solución</summary>
+
+```vextab
+tabstave notation=true tuning=dropd
+notes :w (0/6.0/5.0/4.2/3.3/2.2/1)
+```
+
+Re3, La3, Re4, La4, Re5, Fa♯5 en altura escrita, una octava por encima del sonido: re la re la re fa♯, un acorde de re desde la cuerda más grave. La tablatura no tiene nada que decir sobre la afinación; solo la notación muestra el re grave ([`l03-ex-dropd`](https://github.com/spareilleux/learn/blob/20497783691a7e4f4134be79c5531ea7754934e3/code/vexflow-vextab/expected/ex/l03-ex-dropd.svg)).
+
+</details>
+
+2. Transporta el ejemplo en sol mayor de más arriba a si♭ mayor.
+
+<details>
+<summary>Solución</summary>
+
+Si♭ está una tercera menor, tres trastes, por encima de sol. Suma 3 a cada traste y pon `key=Bb`:
+
+```vextab
+tabstave notation=true key=Bb time=4/4
+notes :8 6/6 8/6 5/5 6/5 8/5 5/4 7/4 8/4 | :w (6/6.5/5.3/4.3/3.3/2.6/1)
+```
+
+La notación dice si♭ do re mi♭ fa sol la si♭, con dos bemoles en la armadura y ninguno en las notas ([`l03-ex-transpose-bb`](https://github.com/spareilleux/learn/blob/20497783691a7e4f4134be79c5531ea7754934e3/code/vexflow-vextab/expected/ex/l03-ex-transpose-bb.svg)).
+
+</details>
+
+3. El primer ejercicio de la lección 1 terminaba con `String number must be between 1 and 6:7`. Escribe los trastes 0, 2 y 3 en la cuerda grave de Si de una guitarra de siete cuerdas afinada Si Mi La Re Sol Si Mi, y después la sexta cuerda al aire. ¿Qué altura tiene el dibujo?
+
+<details>
+<summary>Solución</summary>
+
+Una séptima cuerda necesita a la vez una séptima nota en la afinación y `strings=7`:
+
+```vextab
+tabstave notation=true tuning=E/5,B/4,G/4,D/4,A/3,E/3,B/2 strings=7
+notes :q 0/7 2/7 3/7 0/6
+```
+
+La notación muestra Si2, Do♯3, Re3 y Mi3, alturas escritas. El dibujo mide 1102 píxeles de alto, por la razón explicada en [el número de cuerdas](#el-número-de-cuerdas): `("7" + 4) * 13 = 962` solo para la tablatura ([`l03-ex-seven-strings`](https://github.com/spareilleux/learn/blob/20497783691a7e4f4134be79c5531ea7754934e3/code/vexflow-vextab/expected/ex/l03-ex-seven-strings.svg)). Sin `strings=7`, VexTab mantiene seis líneas y dibuja las notas de la séptima cuerda fuera de ellas; sin la séptima nota de afinación, vuelve a ser el error de la lección 1.
+
+</details>
+
+## Fuentes
+
+- Mohit Cheppudira, [The VexTab Tutorial](https://vexflow.com/vextab/tutorial.html), pasos 12 a 16.
+- vextab en `3a5e00d`: [`src/vextab/VexTabParser.ts`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/vextab/VexTabParser.ts), [`src/artist/StaveBuilder.ts`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/artist/StaveBuilder.ts), [`src/artist/Artist.ts`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/artist/Artist.ts).
+- VexFlow en `0ca6f88`: [`src/tuning.ts`](https://github.com/vexflow/vexflow/blob/0ca6f889545c33cce851b420c24945f6eb685aeb/src/tuning.ts), [`src/stave.ts`](https://github.com/vexflow/vexflow/blob/0ca6f889545c33cce851b420c24945f6eb685aeb/src/stave.ts).

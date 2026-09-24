@@ -1,0 +1,217 @@
+---
+title: "Lección 2: Técnicas de guitarra"
+description: Acordes, bends, slides, hammer-ons y pull-offs, taps, vibrato, notas apagadas, golpes de púa, silencios, grupos irregulares, ligaduras, anotaciones y articulaciones en VexTab — qué dibuja cada uno, dos trampas de las anotaciones, y lo que VexTab no sabe escribir en absoluto.
+sidebar:
+  label: 2. Técnicas de guitarra
+  order: 2
+---
+
+import Chords from '../../../../assets/vexflow-vextab/l02-chords.svg';
+import Bends from '../../../../assets/vexflow-vextab/l02-bends.svg';
+import Legato from '../../../../assets/vexflow-vextab/l02-legato.svg';
+import VibratoMute from '../../../../assets/vexflow-vextab/l02-vibrato-mute.svg';
+import Rests from '../../../../assets/vexflow-vextab/l02-rests.svg';
+import Tuplets from '../../../../assets/vexflow-vextab/l02-tuplets.svg';
+import Annotations from '../../../../assets/vexflow-vextab/l02-annotations.svg';
+import AnnotationPitfall from '../../../../assets/vexflow-vextab/l02-annotation-pitfall.svg';
+import Articulations from '../../../../assets/vexflow-vextab/l02-articulations.svg';
+
+La tablatura es para guitarristas porque dice *cómo* tocar, no solo qué: qué cuerda, qué dedo hace el trabajo, dónde se dobla la altura. Esta lección escribe las técnicas que lleva una tablatura de guitarra, en el orden en que un guitarrista se las encuentra, y mira qué dice el dibujo de cada una. Termina con aquello para lo que VexTab no tiene sintaxis.
+
+La gramática pone la mayoría de las técnicas en un mismo sitio: entre dos trastes de la misma cuerda, antes del `/string` ([`vextab.jison:289`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/vextab.jison#L289) y [`vextab.jison:383-392`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/vextab.jison#L383-L392)). `5h7/3` es «traste 5, hammer-on al traste 7, ambos en la cuerda 3». La cuerda va al final porque se aplica a toda la serie.
+
+## Acordes
+
+Un acorde es una lista de `fret/string` entre paréntesis, separados por puntos. El orden interior no importa.
+
+```vextab
+tabstave notation=true
+notes :q (0/1.1/2.0/3.2/4.3/5) (3/1.0/2.0/3.0/4.2/5.3/6) :h (2/1.3/2.2/3.0/4)
+```
+
+<Chords role="img" aria-label="Tres acordes en notación y tablatura: do, sol y re abiertos, el último en blanca." />
+
+Do abierto, sol abierto, re abierto. Una cuerda que no suena simplemente se omite; no hay `x` dentro de un acorde (mira las [notas apagadas](#vibrato-notas-apagadas-y-golpes-de-púa) para la `X` que sí existe). La notación apila las alturas y añade por sí sola el sostenido del fa♯ del acorde de re.
+
+## Bends
+
+`b` entre dos trastes es un bend: `7b9` estira el traste 7 hasta la altura del traste 9, un tono. Un tercer traste lo suelta: `7b9b7`. En un acorde, cada nota puede estirarse por su cuenta.
+
+```vextab
+tabstave notation=true
+notes :q 7b9/3 7b9b7/3 :h 10b12/2 | :q 12b14v/1 :h (8/2.7b9b7/3)
+```
+
+<Bends role="img" aria-label="Cinco bends. La tablatura muestra una flecha con la etiqueta Full para cada bend de un tono, una segunda flecha y 'Bend to 7' para cada liberación, y los trastes de destino entre paréntesis." />
+
+La tablatura dibuja una flecha con la etiqueta `Full` para un tono y escribe el traste de destino entre paréntesis; una liberación añade una segunda flecha con la etiqueta `Bend to 7`. Un bend de medio tono, `7b8`, lleva la etiqueta `1/2`. El pentagrama de notación solo muestra el traste que pulsas; el bend vive en la tablatura.
+
+## Slides, hammer-ons, pull-offs y taps
+
+`s` es un slide, `h` un hammer-on, `p` un pull-off. `t` antes de un traste es un tap con la mano derecha. Se encadenan: `5h7p5` es una figura a modo de trino pulsada una sola vez.
+
+```vextab
+tabstave notation=true
+notes :8 5h7/3 7p5/3 5h7p5/3 :q 7s9/3 | :8 t12p7p5h7/4 :q 7s5/4 :h 5/5
+```
+
+<Legato role="img" aria-label="Hammer-ons y pull-offs dibujados como arcos con las etiquetas H y P entre trastes, los slides como una línea corta con la etiqueta sl., y un tap marcado con T bajo la tablatura." />
+
+Los arcos y sus letras, `H`, `P`, `sl.`, se dibujan sobre la tablatura, uno por cada par de trastes; la `T` del tap va debajo. Una duración puede cambiar en medio de una serie así con `:duration:` delante del traste, como en el `t:16:9s:8:3s:16:0/4` del tutorial.
+
+## Vibrato, notas apagadas y golpes de púa
+
+Después de un traste, antes de la `/`, un **decorador**: `v` para el vibrato, `V` para el «harsh vibrato» de la gramática, `u` y `d` para los golpes hacia arriba y hacia abajo. Un decorador después del paréntesis de cierre de un acorde se aplica al acorde. Una nota apagada es `X` en lugar del traste.
+
+```vextab
+tabstave notation=true
+notes :q 7v/2 8V/1 X/6 X/5 | :8 5d-5u-5d-5u/3 :h (5/2.5/3.5/4)v
+```
+
+<VibratoMute role="img" aria-label="El vibrato se dibuja como la misma línea ondulada sobre la tablatura para v y para V. Las dos notas apagadas son cruces en la tablatura, pero en el pentagrama de notación son cabezas de nota en x por encima del pentagrama, la primera cortada por la mitad por el borde superior del dibujo. Los golpes hacia abajo y hacia arriba se dibujan como signos de arco bajo los dos pentagramas." />
+
+`v` y `V` dibujan la misma línea. VexTab pide la variante áspera solo si VexFlow la ofrece, `if (typeof modifier.setHarsh === 'function')` ([`ArticulationBuilder.ts:635-640`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/artist/ArticulationBuilder.ts#L635-L640)), y el `Vibrato` de VexFlow 5 no tiene `setHarsh`: tiene `setVibratoCode` para otro glifo ([`vibrato.ts:86`](https://github.com/vexflow/vexflow/blob/0ca6f889545c33cce851b420c24945f6eb685aeb/src/vibrato.ts#L86)). La comprobación falla en silencio, así que `V` se queda en `v`.
+
+Mira la notación de las dos notas apagadas: cabezas de nota en forma de x por encima del pentagrama, y la primera queda cortada por la mitad por el borde superior del dibujo. Para el analizador léxico, `X` no es un traste sino un nombre de nota, de la misma clase que `A` a `G` ([`vextab.jison:84`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/vextab.jison#L84)), y para un nombre de nota el número después de la barra es una octava ([`NoteBuilder.ts:264-271`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/artist/NoteBuilder.ts#L264-L271)). `X/5` se dibuja donde iría si5, `X/6` una octava más arriba, donde iría si6: en y = 0 en el SVG, así que la mitad queda fuera. La tablatura es correcta; la notación coloca una sexta cuerda apagada en la quinta línea adicional por encima del pentagrama. Chrome la dibuja en el mismo sitio (mira el [diario](../journal/)). Si la notación importa, deja las notas apagadas fuera de ella: escríbelas en un `tabstave notation=false`, u omítelas.
+
+`d` y `u` se dibujan como los signos de arco de los instrumentos de cuerda frotada, ⊓ y V. Para acordes rasgueados, la anotación `$.stroke/bd.$` o `$.stroke/bu.$` dibuja en su lugar una flecha de rasgueo ([`ArticulationBuilder.ts:237-259`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/artist/ArticulationBuilder.ts#L237-L259)).
+
+## Silencios, grupos irregulares y ligaduras
+
+`##` es un silencio en la notación, colocado por VexFlow; `#5#` lo desplaza. VexTab convierte el número n en la altura del traste (n + 5) × 2 de la sexta cuerda y cuelga ahí el silencio, así que cada paso es un tono y `#0#` equivale a `##` ([`NoteBuilder.ts:182-196`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/artist/NoteBuilder.ts#L182-L196)); `#-2#` baja. En la tablatura, un silencio es simplemente espacio: VexTab añade una `GhostNote`.
+
+```vextab
+tabstave notation=true
+notes :q 5/3 ## 7/3 ## | :8 5/3 #5# 7/3 #0# :h 5/2
+```
+
+<Rests role="img" aria-label="Silencios de negra después de dos negras, y después silencios de corchea, uno de ellos subido a la posición 5." />
+
+`^3^` convierte en tresillo las tres notas anteriores; `-` entre trastes repite la cuerda para una serie de notas.
+
+```vextab
+tabstave notation=true time=4/4
+notes :8 5-7-8/3 ^3^ 5-7-8/2 ^3^ :q 5/1 7/1 | :16 5-7-8-7/1 :8 5/1 :h 7/2
+```
+
+<Tuplets role="img" aria-label="Dos tresillos de corcheas marcados con 3, dos negras, y después semicorcheas unidas en un grupo de cuatro." />
+
+`T` entre dos trastes de una misma cuerda los liga: la segunda nota se mantiene, no se pulsa. Los dos pentagramas dibujan un arco entre las dos notas; la tablatura sigue imprimiendo el segundo traste, sin letra sobre el arco.
+
+```vextab
+tabstave notation=true
+notes :h 5/3 :q 5T5/3 7/3 | :w 5/2
+```
+
+## Anotaciones
+
+Un texto entre signos de dólar se une a la nota anterior, por defecto bajo la tablatura; las comas separan los textos de varias notas. Un prefijo entre puntos cambia el estilo: `.big.`, `.medium.`, `.italic.`, o `.Face-size-style.` para cualquier fuente.
+
+```vextab
+tabstave notation=true
+notes :q (3/5.2/4.0/3.1/2) $Am$ 5/5 $.italic.let ring$ 7/4 $.big.P.M.$ :q 5/3
+```
+
+<Annotations role="img" aria-label="Tres anotaciones bajo la tablatura: 'Am', 'let ring' en la misma fuente serif recta que el logotipo, y 'P.M.' en negrita." />
+
+Dos cosas no son lo que parecen.
+
+**`let ring` no está en cursiva.** VexTab pasa `italic` a VexFlow como tercer argumento de `setFont` ([`ArticulationBuilder.ts:298-302`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/artist/ArticulationBuilder.ts#L298-L302)). En VexFlow 5 el tercer argumento es el grosor y el estilo es el cuarto ([`element.ts:392`](https://github.com/vexflow/vexflow/blob/0ca6f889545c33cce851b420c24945f6eb685aeb/src/element.ts#L392)), así que el SVG dice `font-weight="italic"`, que un navegador ignora. El logotipo `vexflow.com` se configura de la misma forma ([`ArtistRenderer.ts:265`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/artist/ArtistRenderer.ts#L265)) y también sale recto.
+
+**Un nombre de acorde puede sustituir a un traste.** Anota tres acordes con sus nombres:
+
+```vextab
+tabstave notation=true
+notes :q (3/6.2/5.0/4.0/3) $G$ (3/5.2/4.0/3.1/2) $C$ (0/4.2/3.3/2) $D$ :q 0/1
+```
+
+<AnnotationPitfall role="img" aria-label="Los nombres de acorde G, C y D aparecen dentro de la tablatura, cada uno en lugar del número de traste de la cuerda más grave del acorde, y no se dibuja ninguna anotación bajo la tablatura." />
+
+No se dibuja ningún texto bajo la tablatura. `G`, `C` y `D` ocuparon el lugar del número de traste de la cuerda más grave de cada acorde: el 3 de la sexta cuerda del acorde de sol se convirtió en `G`. Antes de crear una anotación, VexTab intenta leer el texto como un nombre de nota, `^([A-G])([#@n]{1,2})?(~?)(\d+)?(?:_(\d+)\/(\d+))?$`, y si coincide, *sustituye el texto del traste* en su lugar ([`ArticulationBuilder.ts:362`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/artist/ArticulationBuilder.ts#L362), usado en la [línea 461](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/artist/ArticulationBuilder.ts#L461)). La función existe para imprimir un nombre de nota en la tablatura; atrapa cualquier acorde mayor nombrado con una sola letra, y también `C#` o `B@`. `Am` y `G7` no coinciden y son anotaciones. El ejercicio 2 recupera los nombres.
+
+## Articulaciones
+
+Una anotación de la forma `$.a./bottom.$` es una articulación del pentagrama de notación: `a.` staccato, `a>` acento, `a-` tenuto, `a^` marcato, `a@a` y `a@u` calderones, y algunos signos de cuerda, colocados en `top` o `bottom`.
+
+```vextab
+tabstave notation=true
+notes :q 5/3 $.a./bottom.$ 7/3 $.a>/bottom.$ 5/2 $.a-/bottom.$ :q 7/2 $.a@a/top.$
+```
+
+<Articulations role="img" aria-label="Un punto de staccato, un acento y una línea de tenuto bajo las notas, y un calderón sobre la última nota; la tablatura los repite." />
+
+## Lo que VexTab no sabe escribir
+
+La gramática es pequeña, y algunas cosas que conoce cualquier lector de tablaturas no tienen token:
+
+- **Armónicos.** No existe `<12>` ni `*12`; `<` no es un carácter que conozca el analizador léxico:
+
+  ```text
+  error Error: Parse error on line 2:
+  ...ation=truenotes :q <12>/3
+  ----------------------^
+  Expecting 'EOF', 'OPTIONS', 'TABSTAVE', 'STAVE', 'VOICE', 'TEXT', 'NOTES', 'SLUR', '=', '[', ']', '|', ':', '(', 'NUMBER', 'h', 'd', 'S', '-', 's', 't', 'T', 'b', 'p', '^', '$', '!', '#', 'ABC', got 'INVALID'
+  ```
+
+- **Palm muting y let ring** como indicaciones con una extensión discontinua. `PM` falla de la misma forma (`got 'INVALID'` en la `P`); lo que queda es una anotación sobre una nota, `$.big.P.M.$`, como más arriba.
+- **Notas de adorno, caídas con la palanca, pre-bends dibujados como tales, trinos sobre un tramo.** VexFlow tiene clases para las notas de adorno y para algunas de estas cosas; VexTab no las expone. Ahí empieza la lección 5 a escribir VexFlow directamente.
+- **Comprobaciones de lo que escribiste.** Un bend hacia un traste más bajo, `9b7`, o un hammer-on al mismo traste, `5h5`, se dibujan sin queja.
+
+## Lo esencial
+
+- Las técnicas van entre dos trastes de una misma cuerda: `h`, `p`, `s`, `b`, `t`, `T` y `-`; los decoradores `v`, `V`, `u`, `d` van después de un traste o de un acorde, y con VexFlow 5 `V` dibuja lo mismo que `v`.
+- Un acorde es `(fret/string.fret/string…)`; una `X` en lugar de un traste es un nombre de nota, y su notación cae en la octava del número de cuerda.
+- Las anotaciones admiten un prefijo de estilo, pero `italic` llega a VexFlow 5 como un grosor, y un nombre de acorde de una letra sustituye a un número de traste.
+- Los armónicos y el palm muting no tienen sintaxis; la salida es VexFlow directamente.
+
+## Ejercicios
+
+1. Escribe un bend de un tono con liberación en el traste 7 de la cuerda de Sol, con vibrato, después un pull-off de 7 a 5 en corcheas, después el traste 7 de la cuerda de Re y una blanca en el traste 5 de la cuerda de Re.
+
+<details>
+<summary>Solución</summary>
+
+```vextab
+tabstave notation=true
+notes :q 7b9b7v/3 :8 7p5/3 7/4 :h 5/4
+```
+
+El decorador de vibrato va después del último traste del bend, antes de la `/`. Renderizado como [`l02-ex-bend-pull`](https://github.com/spareilleux/learn/blob/20497783691a7e4f4134be79c5531ea7754934e3/code/vexflow-vextab/expected/ex/l02-ex-bend-pull.svg).
+
+</details>
+
+2. Haz que los nombres de acorde `G`, `C` y `D` de la trampa anterior aparezcan como anotaciones bajo la tablatura, sin tocar los números de traste.
+
+<details>
+<summary>Solución</summary>
+
+Sirve cualquier cosa que impida que el texto coincida con el patrón de nombre de nota. Un prefijo de estilo lo consigue, porque el patrón está anclado al principio del texto; un espacio al final también:
+
+```vextab
+tabstave notation=true
+notes :q (3/6.2/5.0/4.0/3) $.big.G$ (3/5.2/4.0/3.1/2) $.italic.C$ (0/4.2/3.3/2) $D $ :q 0/1
+```
+
+Los tres nombres se dibujan bajo la tablatura y los trastes siguen siendo 3, 3 y 0 ([`l02-ex-chord-names`](https://github.com/spareilleux/learn/blob/20497783691a7e4f4134be79c5531ea7754934e3/code/vexflow-vextab/expected/ex/l02-ex-chord-names.svg)). Las líneas `text` de la lección 3 son la respuesta más limpia para los nombres de acorde de todo un compás.
+
+</details>
+
+3. Escribe un tresillo de corcheas que pulse el traste 5 de la cuerda de Sol, haga un hammer-on al 7 y un pull-off al 5, seguido de dos corcheas y una blanca, en 4/4.
+
+<details>
+<summary>Solución</summary>
+
+```vextab
+tabstave notation=true time=4/4
+notes :8 5h7p5/3 ^3^ 7/3 5/3 :h 7/4
+```
+
+`^3^` toma las tres notas anteriores, estén como estén conectadas. Renderizado como [`l02-ex-triplet`](https://github.com/spareilleux/learn/blob/20497783691a7e4f4134be79c5531ea7754934e3/code/vexflow-vextab/expected/ex/l02-ex-triplet.svg).
+
+</details>
+
+## Fuentes
+
+- Mohit Cheppudira, [The VexTab Tutorial](https://vexflow.com/vextab/tutorial.html), pasos 5 a 11.
+- vextab en `3a5e00d`: [`src/vextab.jison`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/vextab.jison), [`src/artist/ArticulationBuilder.ts`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/artist/ArticulationBuilder.ts), [`src/artist/NoteBuilder.ts`](https://github.com/0xfe/vextab/blob/3a5e00d858ae98934ba545f9bef5eb923e17e402/src/artist/NoteBuilder.ts).
+- VexFlow en `0ca6f88`: [`Element.setFont`](https://github.com/vexflow/vexflow/blob/0ca6f889545c33cce851b420c24945f6eb685aeb/src/element.ts#L392).
