@@ -31,9 +31,13 @@ jobs:
         run: |
           git clone --depth 1 https://github.com/GuitarAlchemist/ga.git code/music-theory-ga/.ga-main
           git -C code/music-theory-ga/.ga-main log -1 --format='GA main at %h (%cs): %s'
+      # Built apart: the build's warnings go to standard output and would land in the comparison
+      - name: Build the probe
+        working-directory: code/music-theory-ga/recheck
+        run: dotnet build probe.cs
       - name: Run the probe
         working-directory: code/music-theory-ga/recheck
-        run: dotnet run probe.cs > results.actual
+        run: dotnet run --no-build probe.cs > results.actual
       - name: Compare with results.txt
         working-directory: code/music-theory-ga/recheck
         run: diff -u results.txt results.actual

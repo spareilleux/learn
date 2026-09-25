@@ -9,7 +9,8 @@
 // difference, so a finding that comes back, or a fix that changes an answer, shows up.
 //
 //   git clone https://github.com/GuitarAlchemist/ga.git ../.ga-main
-//   dotnet run probe.cs > results.txt
+//   dotnet build probe.cs
+//   dotnet run --no-build probe.cs > results.txt
 //
 // The last two properties turn off the file-based app defaults (AOT, source-generated JSON) that
 // GaMcpServer's reflection-based JsonSerializer calls do not support.
