@@ -36,6 +36,17 @@ class DemerzelHexavalentTests(unittest.TestCase):
         self.assertEqual(list(canonical_criteria), list(reversed(list(reversed_criteria))))
         self.assertEqual(canonical["state"], reversed_["state"])
 
+    def test_explicit_definitions_change_only_u_and_c(self) -> None:
+        case = hx.load_corpus()["cases"][0]
+        base = hx.payload(case, "canonical")
+        explicit = hx.payload(case, "canonical", "explicit")
+        base_criteria = base["questions"]["truth_value"]["criteria"]
+        explicit_criteria = explicit["questions"]["truth_value"]["criteria"]
+        changed = {key for key in base_criteria if base_criteria[key] != explicit_criteria[key]}
+        self.assertEqual(changed, {"unknown", "contradictory"})
+        self.assertEqual(list(base_criteria), list(explicit_criteria))
+        self.assertEqual(base["state"], explicit["state"])
+
     def test_labels_are_not_in_the_state(self) -> None:
         for case in hx.load_corpus()["cases"]:
             state = hx.payload(case, "canonical")["state"]
