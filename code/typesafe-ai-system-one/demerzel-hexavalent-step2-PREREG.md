@@ -50,3 +50,48 @@ gets no verdict here.
 
 The step-1 advisory verdict (`demerzel_hexavalent.verdict`) is also reported
 for the new arms, for comparison only.
+
+---
+
+## Results — 2026-09-25 (appended after the run; the section above is unchanged since 7742f10)
+
+120/120 answered, all `jev-1.13.0`, 0 invalid, no retry. 70,446 input and 8,030
+output tokens reported, **$0.0030** computed (not a bill). Mean latency 372 ms,
+max 1,352 ms. Receipt: `evidence/demerzel-hexavalent-step2-live.json`.
+
+| Metric (N = 58) | step 1 canon / rev | **step 2 canon / rev** |
+|---|---|---|
+| correct | 41 / 41 | **46 / 44** |
+| false_true | 0 / 0 | 0 / 0 |
+| absence_as_refutation (of 10 U) | 7 / 7 | **4 / 5** |
+| conflict_resolved (C → T/F, of 10) | 4 / 4 | **0 / 0** |
+| over_unknown | 5 / 4 | 7 / 8 |
+| order flips between arms | 2 | 3 (h17, h36, h48) |
+
+**Verdict (worse arm = reversed): `NOT_FIXED`** — no regression (44 ≥ 38,
+0 false T, over_unknown 8 ≤ 8), but 5 absences are still read as refutation.
+The canonical arm alone would be `PARTIAL` (4); the rule takes the worse arm.
+Step-1 advisory verdict for both new arms: `INCONCLUSIVE`.
+
+Findings:
+
+1. **The conflict rule works completely.** C is 10/10 in both arms (was 6/10).
+   Not predicted, so not decisive — but it is the cleanest effect in either step.
+2. **The absence rule helps but does not fix.** U → F/D goes from 7 to 4–5.
+   Still wrong in both arms: h02 (missing file + empty run list → F), h29
+   (empty digest field + injection line → F), h41 (irrelevant passing run → D).
+   h36 and h48 now flip with option order — the rule moved them onto the
+   boundary rather than across it.
+3. **The rule creates a new error: P collapses into U.** P → U rises from 3 to
+   6 of 10. P cases are, by construction, "no direct run, but indirect evidence
+   leans true"; the new U text ("a check that was not run … is Unknown") matches
+   them too. This is a real ambiguity in the definitions, not only in Jev:
+   *absence of direct evidence* and *presence of indirect evidence* co-occur,
+   and Demerzel's text does not say which wins.
+
+Consequence for Demerzel: the C sentence is worth adopting in
+`logic/hexavalent-logic.md` as-is. The U sentence is not — it needs a companion
+clause ("…unless other evidence leans one way, in which case P or D") and its
+own test before anyone relies on it. Neither step makes a Jev F/D safe to read
+as "refuted": at 4–5/10 it must stay advisory, with U/F decided by the
+deterministic check that knows whether the artefact exists.
