@@ -18,6 +18,18 @@ sidebar:
 - [x] French and Spanish mirrors
 - [ ] A lesson on the hosted pump — the GitHub Actions side — which `main` has grown and this course does not cover
 
+## QA
+
+Findings from running Gaia's hosted pump on its own repository, observed at `main` [`8ed4dfc`](https://github.com/GuitarAlchemist/gaia/tree/8ed4dfca865696f6b54cb37ce077b0d10ece35df).
+
+| Expected | What happens | Where | Measure | Status |
+|---|---|---|---|---|
+| A labelled issue can become a Draft | Intake needs exactly one branch carrying the issue's evidence trailers, and nothing produced it; zero branches refuse like two, as `HeadIdentityAmbiguous` | [`src/hosted-draft-collector.mjs:319`](https://github.com/GuitarAlchemist/gaia/blob/8ed4dfca865696f6b54cb37ce077b0d10ece35df/src/hosted-draft-collector.mjs#L319) | 2 of 79 branches carried the trailers, both hand-made; scheduled intake returned `EXPECTED_NONE` for days | Fix proposed in [gaia#155](https://github.com/GuitarAlchemist/gaia/pull/155), then observed working live [2026-09-25](#2026-09-25--the-hosted-pump-end-to-end-as-far-as-a-draft) |
+| An ambiguous Draft operation is reconciled | Issue 127's operation stays `EFFECT_AMBIGUOUS` and is skipped on every scheduled run; it does not block the queue, but nothing settles it | [`src/hosted-draft-pump.mjs:310`](https://github.com/GuitarAlchemist/gaia/blob/8ed4dfca865696f6b54cb37ce077b0d10ece35df/src/hosted-draft-pump.mjs#L310) | Present in every intake receipt from 2026-09-15 to 2026-09-24 | Reproduced, not reported |
+| A seeder that wrote a branch says so | A connection abort during the read-back made it exit fail-closed while the branch had landed | [`src/evidence-head-seeder.mjs:147`](https://github.com/GuitarAlchemist/gaia/blob/49d5fb3d6e4f5aa9e82cac0fb018d2c118c2958c/src/evidence-head-seeder.mjs#L147) (after the fix) | 1 occurrence, on issue 106 | Fixed in [gaia#155](https://github.com/GuitarAlchemist/gaia/pull/155) (`49d5fb3`) |
+| An issue whose work shipped is closed | Issue 108 was open, although its gate was on `main`; the factory's worker made no edit | [`tests/hexagonal-direction.test.mjs`](https://github.com/GuitarAlchemist/gaia/blob/8ed4dfca865696f6b54cb37ce077b0d10ece35df/tests/hexagonal-direction.test.mjs) | 0 edits, 1 factory run spent | Reproduced, not reported |
+| A factory job ends after its worker | Issue 108's job was still `STARTED` about ten hours after its worker finished, holding the single host slot | `C:/Gaia/state`, `portfolio:autonomous status` | Worker done at 00:25 local, job `STARTED` at 10:00 | *To verify* |
+
 ## 2026-09-15 — Setup and versions
 
 - **Gaia** at [`d68e900`](https://github.com/GuitarAlchemist/gaia/tree/d68e90099ae2a6fbbec9d428617bfcd02095aac0), the head of `main` on 2026-09-13. Checked out as a detached linked worktree so the tree was clean and nothing local leaked into an output.
@@ -66,8 +78,18 @@ The full three-actor exchange in lesson 2 came to **10 events and 3,617 bytes** 
 - Review/integration found and corrected four material weak shapes: persistence imported into the controller, decisions allowed before exact wake delivery, idempotency keys replaying changed inputs, and tests omitting the bus sidecar. A simplification pass also removed avoidable scans and allocations.
 - These are **candidate-worktree measurements**, not proof of publication, merge or release. The final formal review receipt, exact final commit gates and normal PR checks were still pending when this entry was written.
 
+## 2026-09-25 — The hosted pump, end to end as far as a Draft
+
+- **Why nothing came out.** `hosted-draft-intake.yml` had run every 6 h, successfully, and returned `EXPECTED_NONE` for days. Two causes, both on the Gaia side: no open issue carried `ready-for-agent`, and the collector requires exactly one branch whose tip carries `Gaia-Issue: N` and `Gaia-Ready-Receipt: <hash of the label event>`. **No code produced that branch.** The only two that ever existed were made by hand, and zero branches refuse the same way as two (`HeadIdentityAmbiguous`, because the test is `matching.length !== 1`). The Augment Cosmos automations were a red herring: the pump never depended on them.
+- **The fix**, [gaia#155](https://github.com/GuitarAlchemist/gaia/pull/155): `npm run draft:seed-evidence -- --issue N --apply` creates `gaia/issue-N-ready-K`, one commit that reuses the default branch's tree, so no file changes. It derives the receipt with the collector's own function, extracted rather than copied, never applies the label, and lets the read-back decide the result.
+- **Observed live on issue 108:** label → seed `CREATED` → intake `ADMIT` → Draft [gaia#156](https://github.com/GuitarAlchemist/gaia/pull/156) → the local factory (`portfolio:autonomous watch`, enabled once with a budget of 20 runs) took it within a minute. The same chain produced [gaia#158](https://github.com/GuitarAlchemist/gaia/pull/158) for issue 104.
+- **Two refusals that were correct:** issue 148 came back `StaleRevision` because the pump had already drafted it on 2026-09-13 (#149): one Draft per work item. The factory's worker on 108 made **no edit**, because `tests/hexagonal-direction.test.mjs` was already on `main`: the issue had stayed open after its work shipped.
+- **One defect found by running it:** a connection abort during the read-back after a successful write made the seeder exit fail-closed, which implied nothing was written, although the branch had landed. It now reports `AMBIGUOUS`, and a rerun reports `PRESENT`.
+- **What the pump does not do, by design:** decide what is ready. `ready-for-agent` is the operator's act of authority. A feeder that picked and labelled its own work was refused by the agent's permission classifier as an unsafe agent, the same line as Gaia's "nothing self-authorizes". What shipped instead is read-only ranking ([gaia#157](https://github.com/GuitarAlchemist/gaia/pull/157)). Today it finds **one** candidate among 38 open issues, because 34 still carry `needs-triage`: grooming, not the pump, is the bottleneck.
+
 ## To verify
 
+- **The factory job on issue 108.** Its worker finished at 00:25 local time, but the job was still `STARTED` about ten hours later, holding the single host slot, so the Draft for issue 104 waits. Find whether the `watch` process stopped, or whether the reviewer step never started, and what reconciliation a restart performs.
 - **`factory:agent` end to end.** It spends a real Claude turn and a real Codex turn on the installed subscriptions. Lesson 4 describes it from `src/factory-agent.mjs`, its design document and its receipt schema; no claim in that lesson comes from an observed run. What to capture when it runs: the receipt shape with and without a repair, the `(not an ETA)` progress lines, and whether the reviewer-mutation check ever fires on ignored files in practice.
 - **Node 26.8.1**, the pinned version. Everything here ran on 24.12.0.
 - **Linux and macOS.** The commit protocol is written and tested Windows-first, and the repository says Linux is discovery rather than a gate. The lock-directory approach should behave the same; the Windows-specific release retries would simply not be exercised.
