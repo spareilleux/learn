@@ -4,7 +4,8 @@ import { englishRanges, sayCode, sayEnglish, type Segment } from './english';
 
 const BLOCKS = 'h1, h2, h3, h4, h5, h6, p, li, dt, dd, blockquote, figcaption, summary';
 // exercise solutions (<details>) are read too: the player opens them
-export const SKIP = 'pre, .expressive-code, table, script, style, .sl-anchor-link, .speech-from-here, [role="tablist"], [hidden], .sr-only';
+// .reader-library: the list of the reader's own bookmarks and notes (my-notes.mdx) is an interface, not text to read
+export const SKIP = 'pre, .expressive-code, table, script, style, .sl-anchor-link, .speech-from-here, [role="tablist"], [hidden], .sr-only, .reader-library';
 const NESTED = `${BLOCKS}, ${SKIP}, ul, ol`;
 const MAX_SENTENCE = 180; // Chrome cuts utterances after ~15 s
 

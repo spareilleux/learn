@@ -1,0 +1,262 @@
+---
+// The list page of the reader's bookmarks and notes (my-notes.mdx in each locale), drawn in the browser from
+// localStorage (src/scripts/reader/store.ts). Export downloads everything as JSON; import merges such a file back.
+import { readerStrings } from '../scripts/reader/strings';
+
+const t = readerStrings(Astro.locals.starlightRoute.lang);
+---
+
+<div class="reader-library not-content">
+	<p class="reader-library__blocked" hidden>{t.storageBlocked}</p>
+	<div class="reader-library__actions" hidden>
+		<button type="button" class="reader-library__export">{t.export}</button>
+		<label class="reader-library__import">
+			{t.import}
+			<input type="file" accept="application/json,.json" />
+		</label>
+		<button type="button" class="reader-library__clear">{t.clear}</button>
+		<p class="reader-library__message" aria-live="polite"></p>
+	</div>
+	<h2 id="bookmarks">{t.bookmarks}</h2>
+	<div class="reader-library__bookmarks"></div>
+	<h2 id="notes">{t.notes}</h2>
+	<div class="reader-library__notes"></div>
+</div>
+
+<script>
+	import { load, save, onChange, merge, sanitize, splitPath, localHref, type Bookmark } from '../scripts/reader/store';
+	import { readerStrings } from '../scripts/reader/strings';
+
+	const root = document.querySelector<HTMLElement>('.reader-library')!;
+	const lang = document.documentElement.lang;
+	const t = readerStrings(lang);
+	const { locale } = splitPath(location.pathname);
+	const bookmarksBox = root.querySelector<HTMLElement>('.reader-library__bookmarks')!;
+	const notesBox = root.querySelector<HTMLElement>('.reader-library__notes')!;
+	const message = root.querySelector<HTMLElement>('.reader-library__message')!;
+	const date = (iso: string) => new Date(iso).toLocaleDateString(lang, { year: 'numeric', month: 'long', day: 'numeric' });
+
+	const element = <K extends keyof HTMLElementTagNameMap>(tag: K, className: string, text = '') => {
+		const node = document.createElement(tag);
+		if (className) node.className = className;
+		if (text) node.textContent = text;
+		return node;
+	};
+
+	const removeButton = (label: string, onClick: () => void) => {
+		const button = element('button', 'reader-library__remove', t.remove);
+		button.type = 'button';
+		button.setAttribute('aria-label', `${t.remove} ${t.quote[0]}${label}${t.quote[1]}`);
+		button.addEventListener('click', onClick);
+		return button;
+	};
+
+	/** Entries grouped by course, courses and entries in alphabetical order */
+	const byCourse = <T extends { course: string }>(entries: T[], order: (a: T, b: T) => number) => {
+		const groups = new Map<string, T[]>();
+		for (const entry of entries) groups.set(entry.course, [...(groups.get(entry.course) ?? []), entry]);
+		return [...groups.entries()].sort(([a], [b]) => a.localeCompare(b, lang)).map(([course, list]) => [course, list.sort(order)] as const);
+	};
+
+	// A page bookmark opens the page in the reader's current language; a section one keeps its language and anchor
+	const bookmarkHref = (b: Bookmark) => (b.hash ? `${b.path}#${b.hash}` : localHref(splitPath(b.path).key, locale));
+
+	const render = () => {
+		const data = load();
+		bookmarksBox.replaceChildren();
+		notesBox.replaceChildren();
+		if (!data) return;
+
+		const bookmarks = Object.values(data.bookmarks);
+		if (bookmarks.length === 0) bookmarksBox.append(element('p', 'reader-library__empty', t.noBookmarks));
+		for (const [course, list] of byCourse(bookmarks, (a, b) => a.page.localeCompare(b.page, lang) || a.section.localeCompare(b.section, lang))) {
+			if (course) bookmarksBox.append(element('h3', '', course));
+			const ul = element('ul', 'reader-library__list');
+			for (const b of list) {
+				const li = element('li', '');
+				const link = element('a', '', b.section ? `${b.page} › ${b.section}` : b.page);
+				link.href = bookmarkHref(b);
+				li.append(link, element('span', 'reader-library__date', `${t.added} ${date(b.added)}`));
+				li.append(
+					removeButton(link.textContent ?? '', () => {
+						const fresh = load();
+						if (!fresh) return;
+						delete fresh.bookmarks[b.key];
+						save(fresh);
+					}),
+				);
+				ul.append(li);
+			}
+			bookmarksBox.append(ul);
+		}
+
+		const notes = Object.entries(data.notes).map(([key, note]) => ({ key, ...note }));
+		if (notes.length === 0) notesBox.append(element('p', 'reader-library__empty', t.noNotes));
+		for (const [course, list] of byCourse(notes, (a, b) => a.page.localeCompare(b.page, lang))) {
+			if (course) notesBox.append(element('h3', '', course));
+			for (const note of list) {
+				const article = element('article', 'reader-library__note');
+				const head = element('div', 'reader-library__note-head');
+				const link = element('a', '', note.page);
+				link.href = `${localHref(note.key, locale)}#reader-notes`;
+				head.append(link, element('span', 'reader-library__date', `${t.updated} ${date(note.updated)}`));
+				head.append(
+					removeButton(note.page, () => {
+						if (!confirm(t.confirmDeleteNote)) return;
+						const fresh = load();
+						if (!fresh) return;
+						delete fresh.notes[note.key];
+						save(fresh);
+					}),
+				);
+				article.append(head, element('p', 'reader-library__note-text', note.text));
+				notesBox.append(article);
+			}
+		}
+	};
+
+	if (load()) {
+		root.querySelector<HTMLElement>('.reader-library__actions')!.hidden = false;
+
+		root.querySelector('.reader-library__export')!.addEventListener('click', () => {
+			const data = load();
+			if (!data) return;
+			const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+			const link = document.createElement('a');
+			link.href = URL.createObjectURL(blob);
+			link.download = `learn-notes-${new Date().toISOString().slice(0, 10)}.json`;
+			link.click();
+			URL.revokeObjectURL(link.href);
+		});
+
+		const input = root.querySelector<HTMLInputElement>('.reader-library__import input')!;
+		input.addEventListener('change', async () => {
+			const file = input.files?.[0];
+			input.value = '';
+			if (!file) return;
+			let imported = null;
+			try {
+				imported = sanitize(JSON.parse(await file.text()));
+			} catch {}
+			const data = load();
+			if (!imported || !data) {
+				message.textContent = t.importFailed;
+				return;
+			}
+			const count = merge(data, imported);
+			save(data);
+			message.textContent = t.imported.replace('{bookmarks}', String(count.bookmarks)).replace('{notes}', String(count.notes));
+		});
+
+		root.querySelector('.reader-library__clear')!.addEventListener('click', () => {
+			if (confirm(t.confirmClear)) save({ version: 1, bookmarks: {}, notes: {} });
+		});
+
+		render();
+		onChange(render);
+	} else {
+		root.querySelector<HTMLElement>('.reader-library__blocked')!.hidden = false;
+	}
+</script>
+
+<style>
+	.reader-library__actions {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.5rem;
+	}
+	.reader-library__actions[hidden] {
+		display: none;
+	}
+	.reader-library__actions button,
+	.reader-library__import {
+		padding: 0.375rem 0.875rem;
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: 0.375rem;
+		background: transparent;
+		color: var(--sl-color-white);
+		font: inherit;
+		font-size: var(--sl-text-sm);
+		cursor: pointer;
+	}
+	.reader-library__actions button:hover,
+	.reader-library__import:hover {
+		border-color: var(--sl-color-gray-3);
+	}
+	.reader-library__import:focus-within,
+	.reader-library__actions button:focus-visible {
+		outline: 2px solid var(--sl-color-accent);
+		outline-offset: 2px;
+	}
+	/* The file input stays focusable for keyboards and screen readers, but only its label shows */
+	.reader-library__import input {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		opacity: 0;
+	}
+	.reader-library__clear {
+		margin-inline-start: auto;
+	}
+	.reader-library__message {
+		flex-basis: 100%;
+		margin: 0;
+		font-size: var(--sl-text-sm);
+		color: var(--sl-color-gray-2);
+	}
+	.reader-library h2 {
+		margin-block: 2rem 0.75rem;
+		font-size: var(--sl-text-h3);
+		color: var(--sl-color-white);
+	}
+	.reader-library :global(h3) {
+		margin-block: 1.25rem 0.5rem;
+		font-size: var(--sl-text-lg);
+		color: var(--sl-color-white);
+	}
+	.reader-library :global(.reader-library__list) {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	.reader-library :global(.reader-library__list li),
+	.reader-library :global(.reader-library__note-head) {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		gap: 0.25rem 0.75rem;
+		padding-block: 0.375rem;
+		border-bottom: 1px solid var(--sl-color-hairline);
+	}
+	.reader-library :global(.reader-library__date) {
+		font-size: var(--sl-text-xs);
+		color: var(--sl-color-gray-3);
+	}
+	.reader-library :global(.reader-library__remove) {
+		margin-inline-start: auto;
+		padding: 0.125rem 0.5rem;
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: 0.25rem;
+		background: transparent;
+		color: var(--sl-color-gray-2);
+		font: inherit;
+		font-size: var(--sl-text-xs);
+		cursor: pointer;
+	}
+	.reader-library :global(.reader-library__remove:hover) {
+		color: var(--sl-color-white);
+	}
+	.reader-library :global(.reader-library__note) {
+		margin-block-end: 1rem;
+	}
+	.reader-library :global(.reader-library__note-text) {
+		margin: 0.5rem 0 0;
+		white-space: pre-wrap;
+		overflow-wrap: anywhere;
+		color: var(--sl-color-gray-2);
+	}
+	.reader-library :global(.reader-library__empty) {
+		color: var(--sl-color-gray-3);
+	}
+</style>

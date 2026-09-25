@@ -1,0 +1,297 @@
+---
+// The reader's own bookmarks and notes, kept in this browser only (src/scripts/reader/store.ts).
+// part="bar", above the content: bookmark the page, jump to the notes, open the page that lists everything.
+// part="notes", below the content: a notes box saved as the reader types. The script also puts a bookmark button
+// next to each h2 and h3 anchor link. Both parts render nothing on splash pages and on the list page itself.
+import { readerStrings } from '../scripts/reader/strings';
+
+interface Props {
+	part: 'bar' | 'notes';
+}
+
+type SidebarEntry = { type: 'link'; isCurrent: boolean } | { type: 'group'; label: string; entries: SidebarEntry[] };
+
+const { part } = Astro.props;
+const route = Astro.locals.starlightRoute;
+const slug = route.locale && route.id.startsWith(`${route.locale}/`) ? route.id.slice(route.locale.length + 1) : route.id;
+const show = route.entry.data.template !== 'splash' && !route.entry.data.hero && slug !== 'my-notes' && slug !== '404';
+const t = readerStrings(route.lang);
+const library = `${import.meta.env.BASE_URL.replace(/\/$/, '')}${route.locale ? `/${route.locale}` : ''}/my-notes/`;
+
+// The innermost sidebar group holding this page names its course, in the page's language
+const courseOf = (entries: SidebarEntry[], group: string): string | undefined => {
+	for (const entry of entries) {
+		if (entry.type === 'link' && entry.isCurrent) return group;
+		if (entry.type === 'group') {
+			const found = courseOf(entry.entries, entry.label);
+			if (found !== undefined) return found;
+		}
+	}
+	return undefined;
+};
+const course = courseOf(route.sidebar as SidebarEntry[], '') ?? '';
+---
+
+{
+	show && part === 'bar' && (
+		<div class="reader-bar not-content print:hidden" data-page={route.entry.data.title} data-course={course} hidden>
+			<button type="button" class="reader-bar__bookmark" aria-pressed="false" data-add={t.bookmarkPage} data-remove={t.unbookmarkPage} title={t.bookmarkPage}>
+				<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
+					<path d="M6 3h12v18l-6-4-6 4z" />
+				</svg>
+				<span class="reader-bar__bookmark-text" data-on={t.bookmarked} data-off={t.bookmarkPage}>{t.bookmarkPage}</span>
+			</button>
+			<a class="reader-bar__notes" href="#reader-notes">
+				<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<path d="M4 20h4L19 9l-4-4L4 16z" />
+					<path d="M13 7l4 4" />
+				</svg>
+				{t.notes}
+				<span class="reader-bar__dot" hidden />
+			</a>
+			<a class="reader-bar__library" href={library}>{t.library}</a>
+		</div>
+	)
+}
+{
+	show && part === 'notes' && (
+		<details class="reader-notes not-content print:hidden" id="reader-notes" hidden>
+			<summary>{t.notesTitle}</summary>
+			<textarea class="reader-notes__text" rows="6" aria-label={t.notesTitle} placeholder={t.notesPlaceholder} />
+			<p class="reader-notes__status" aria-live="polite" data-saved={t.savedAt} data-failed={t.notSaved} />
+		</details>
+	)
+}
+
+<script>
+	import { load, save, onChange, splitPath, sectionKey } from '../scripts/reader/store';
+	import { readerStrings } from '../scripts/reader/strings';
+
+	const bar = document.querySelector<HTMLElement>('.reader-bar');
+	const notes = document.querySelector<HTMLDetailsElement>('.reader-notes');
+	const t = readerStrings(document.documentElement.lang);
+	const { key: pageKey } = splitPath(location.pathname);
+	const page = bar?.dataset.page ?? document.title;
+	const course = bar?.dataset.course ?? '';
+	const now = () => new Date().toISOString();
+
+	// Nothing is shown when the browser refuses localStorage: a button that can't keep its state would mislead
+	if (bar && notes && load()) {
+		bar.hidden = false;
+		notes.hidden = false;
+
+		const pageButton = bar.querySelector<HTMLButtonElement>('.reader-bar__bookmark')!;
+		const pageText = bar.querySelector<HTMLElement>('.reader-bar__bookmark-text')!;
+		const dot = bar.querySelector<HTMLElement>('.reader-bar__dot')!;
+		const text = notes.querySelector<HTMLTextAreaElement>('.reader-notes__text')!;
+		const status = notes.querySelector<HTMLElement>('.reader-notes__status')!;
+
+		const toggle = (key: string, hash: string, section: string) => {
+			const data = load();
+			if (!data) return;
+			if (data.bookmarks[key]) delete data.bookmarks[key];
+			else data.bookmarks[key] = { key, path: location.pathname, hash, section, page, course, added: now() };
+			save(data);
+		};
+
+		pageButton.addEventListener('click', () => toggle(pageKey, '', ''));
+
+		// A bookmark button after each h2 and h3 anchor link of the lesson
+		const sections = [...document.querySelectorAll<HTMLElement>('.sl-markdown-content .sl-heading-wrapper:is(.level-h2, .level-h3)')].flatMap((wrapper) => {
+			const heading = wrapper.querySelector<HTMLElement>('h2, h3');
+			if (!heading?.id) return [];
+			const button = document.createElement('button');
+			button.type = 'button';
+			button.className = 'reader-section';
+			button.setAttribute('aria-pressed', 'false');
+			button.innerHTML =
+				'<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M6 3h12v18l-6-4-6 4z"/></svg>';
+			wrapper.append(button);
+			const key = sectionKey(location.pathname, heading.id);
+			const title = heading.textContent?.trim() ?? '';
+			button.addEventListener('click', () => toggle(key, heading.id, title));
+			return [{ button, key, title }];
+		});
+
+		const render = () => {
+			const data = load();
+			if (!data) return;
+			const marked = Boolean(data.bookmarks[pageKey]);
+			pageButton.setAttribute('aria-pressed', String(marked));
+			pageButton.title = marked ? (pageButton.dataset.remove ?? '') : (pageButton.dataset.add ?? '');
+			pageText.textContent = (marked ? pageText.dataset.on : pageText.dataset.off) ?? '';
+			for (const { button, key, title } of sections) {
+				const on = Boolean(data.bookmarks[key]);
+				button.setAttribute('aria-pressed', String(on));
+				const label = `${on ? t.unbookmarkSection : t.bookmarkSection} ${t.quote[0]}${title}${t.quote[1]}`;
+				button.setAttribute('aria-label', label);
+				button.title = label;
+			}
+			const note = data.notes[pageKey]?.text ?? '';
+			dot.hidden = note.trim() === '';
+			// Another tab edited this note: take its text unless the reader is typing here
+			if (document.activeElement !== text && text.value !== note) text.value = note;
+		};
+
+		let timer: number | undefined;
+		const saveNote = () => {
+			window.clearTimeout(timer);
+			const data = load();
+			const value = text.value;
+			let ok = false;
+			if (data) {
+				if (value.trim() === '') delete data.notes[pageKey];
+				else data.notes[pageKey] = { text: value, path: location.pathname, page, course, updated: now() };
+				ok = save(data);
+			}
+			status.textContent = ok ? `${status.dataset.saved} ${new Date().toLocaleTimeString(document.documentElement.lang, { hour: '2-digit', minute: '2-digit' })}` : (status.dataset.failed ?? '');
+		};
+		text.addEventListener('input', () => {
+			window.clearTimeout(timer);
+			timer = window.setTimeout(saveNote, 500);
+		});
+		text.addEventListener('blur', () => {
+			if (timer !== undefined) saveNote();
+			timer = undefined;
+		});
+
+		bar.querySelector('.reader-bar__notes')!.addEventListener('click', () => {
+			notes.open = true;
+			// Focus after the browser has scrolled to the box
+			requestAnimationFrame(() => text.focus({ preventScroll: true }));
+		});
+
+		render();
+		if (text.value.trim() !== '') notes.open = true;
+		onChange(render);
+	}
+</script>
+
+<style>
+	.reader-bar {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.5rem 1rem;
+		margin-block: 0 1.5rem;
+		font-size: var(--sl-text-sm);
+	}
+	.reader-bar__bookmark,
+	.reader-bar__notes {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.375rem;
+		padding: 0.25rem 0.625rem;
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: 999rem;
+		background: transparent;
+		color: var(--sl-color-gray-2);
+		font: inherit;
+		text-decoration: none;
+		cursor: pointer;
+	}
+	.reader-bar__bookmark:hover,
+	.reader-bar__notes:hover {
+		color: var(--sl-color-white);
+		border-color: var(--sl-color-gray-3);
+	}
+	.reader-bar__bookmark[aria-pressed='true'] {
+		color: var(--sl-color-accent-high);
+		border-color: var(--sl-color-accent);
+	}
+	.reader-bar__bookmark[aria-pressed='true'] svg {
+		fill: currentColor;
+	}
+	.reader-bar__dot {
+		width: 0.4rem;
+		height: 0.4rem;
+		border-radius: 50%;
+		background: var(--sl-color-accent);
+	}
+	.reader-bar__dot[hidden] {
+		display: none;
+	}
+	.reader-bar__library {
+		color: var(--sl-color-gray-2);
+	}
+	.reader-bar__library:hover {
+		color: var(--sl-color-white);
+	}
+	.reader-notes {
+		margin-block-start: 3rem;
+		padding: 0.75rem 1rem;
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: 0.5rem;
+		scroll-margin-top: calc(var(--sl-nav-height) + 1rem);
+	}
+	.reader-notes summary {
+		font-weight: 600;
+		color: var(--sl-color-white);
+		cursor: pointer;
+	}
+	.reader-notes__text {
+		display: block;
+		box-sizing: border-box;
+		width: 100%;
+		margin-block-start: 0.75rem;
+		padding: 0.5rem 0.75rem;
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: 0.375rem;
+		background: var(--sl-color-black);
+		color: var(--sl-color-white);
+		font: inherit;
+		line-height: 1.5;
+		resize: vertical;
+	}
+	.reader-notes__text:focus-visible,
+	.reader-bar__bookmark:focus-visible,
+	.reader-bar__notes:focus-visible {
+		outline: 2px solid var(--sl-color-accent);
+		outline-offset: 2px;
+	}
+	.reader-notes__status {
+		min-height: 1.25rem;
+		margin-block: 0.375rem 0;
+		font-size: var(--sl-text-xs);
+		color: var(--sl-color-gray-3);
+	}
+</style>
+
+<style is:global>
+	/* Built by the script next to Starlight's anchor link: shown with it on hover, always once the section is bookmarked */
+	.sl-markdown-content .reader-section {
+		display: inline-flex;
+		align-items: center;
+		align-self: center;
+		margin-inline-start: 0.25rem;
+		padding: 0.125rem;
+		border: 0;
+		border-radius: 0.25rem;
+		background: transparent;
+		color: var(--sl-color-gray-3);
+		cursor: pointer;
+		opacity: 0;
+	}
+	.sl-markdown-content .sl-heading-wrapper:hover .reader-section,
+	.sl-markdown-content .reader-section:focus-visible,
+	.sl-markdown-content .reader-section[aria-pressed='true'] {
+		opacity: 1;
+	}
+	.sl-markdown-content .reader-section:hover {
+		color: var(--sl-color-white);
+	}
+	.sl-markdown-content .reader-section[aria-pressed='true'] {
+		color: var(--sl-color-accent-high);
+	}
+	.sl-markdown-content .reader-section[aria-pressed='true'] svg {
+		fill: currentColor;
+	}
+	.sl-markdown-content .reader-section:focus-visible {
+		outline: 2px solid var(--sl-color-accent);
+	}
+	@media (hover: none) {
+		.sl-markdown-content .reader-section {
+			opacity: 1;
+		}
+	}
+</style>
