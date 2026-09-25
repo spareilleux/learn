@@ -78,3 +78,10 @@ Documents:
 22. GA's `CLAUDE.md` says ix produces `optick.index`; in GA's code and in its `optic-k-rebuild` skill, `FretboardVoicingsCLI` writes it. `CLAUDE.md` names `GA.Business.Core.Harmony` and `GA.Business.Core.Fretboard` as layer 3; the voicing generator and analyzer live in `GA.Domain.Services`.
 
 Leads not checked by the course, noted earlier from reading GA's documents (*to verify*): `GaChatbotCli` may fail to resolve its services; the backlog and the roadmap disagree on some statuses; GA's documents give several sizes for the live index (161, 168, 175, 176 and 660 MB).
+
+## 2026-09-24 — Upstream fixes
+
+Most of the 22 differences of 2026-09-14 were fixed upstream by [#689](https://github.com/GuitarAlchemist/ga/pull/689), merged 2026-09-23, which also carries the commits merged again as [#686](https://github.com/GuitarAlchemist/ga/pull/686) and [#688](https://github.com/GuitarAlchemist/ga/pull/688) on 2026-09-24. The code fixes come with tests in GA. This course hasn't re-run them: it stays pinned to `a826864` (*to verify*).
+
+- Fixed: 1 and 4 (voicing documents built from the chord root, the lowest note and the analyzer's named fields), 2 (roots read as note names), 3 (named arguments), 5 (HIERARCHY and ATONAL_MODAL constants aligned with the partitions), 6 (`RootVectorService`'s summary), 8 (the 112/216/228 and v1.3.1 comments), 9 (MODAL slots looked up by the mode catalogue's names), 11 (the chord filter compares root, quality and optional bass), the query half of 12 (the query's interval-class vector is encoded), 13 (the diagram string order is explicit), 14 and 15 (the schema tool reads `EmbeddingSchema`), 16 (keyword fallback, and an "unavailable" answer instead of HTTP 500), 17, 18, 19, 21 and 22.
+- Unchanged: 7, which isn't a bug; the other half of 12, `FindSimilarVoicingsAsync`, still returns an empty list, as its comment says; 20, listed by #688 as found and not changed. 10 wasn't measured again, and fixes 5 and 9 touch dimensions it counted.
