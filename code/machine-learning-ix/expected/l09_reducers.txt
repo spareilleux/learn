@@ -1,0 +1,22 @@
+== classical MDS: square from distances alone
+  hand and IX recover all six distances: true
+
+== kernel PCA: concentric rings
+  mean gap on linear axis: 0.0000
+  mean gap on RBF axis 1: 0.0000
+  mean gap on RBF axis 4: 0.5798
+  linear axis separates ring means: false
+  fourth RBF axis separates ring means: true
+
+== NMF: CI timings, 186 jobs x 5 features
+  rank 2 reconstruction MSE: 0.505
+  standardized input rejected: true
+
+== LDA: runner OS labels
+  three OS classes allow at most two axes: true
+  projection finite: true
+
+== t-SNE: first 12 standardized jobs
+  12 x 2 finite embedding: true
+  transform ignores its input: true
+exit 0
