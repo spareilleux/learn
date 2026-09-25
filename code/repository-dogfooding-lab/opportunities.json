@@ -260,6 +260,48 @@
       "verdict": "inconclusive",
       "artifacts": [],
       "revisit": "2026-10-06"
+    },
+    {
+      "id": "jev-demerzel-hexavalent-annotator",
+      "technique": "Jev as an advisory hexavalent annotator",
+      "course": "typesafe-ai-system-one",
+      "axis": "agentic-ai",
+      "repositories": [
+        "Demerzel"
+      ],
+      "observed_pain": "Demerzel classifies evidence into six truth values (T/P/U/D/F/C) by hand; the one live Jev error on Demerzel evidence (2026-09-22) read a missing digest as a conflict.",
+      "hypothesis": "Given only Demerzel's own definitions, Jev classifies synthetic governance evidence at >= 75% exact match with at most one false T and at most one absence read as refutation.",
+      "baseline": "Fixed substring cues (keyword baseline): 12/58, 5 false T.",
+      "success_metric": "Pre-registered ADVISORY_USEFUL on both option orders over the 58 blind-agreed cases.",
+      "falsifier": "Under 60% exact match or more than three false T (KILL); or absence still read as refutation after the definitions spell out the absence rule (step 2 NOT_FIXED).",
+      "simpler_alternative": "A deterministic existence check decides U vs F whenever the artefact can be looked up; the model only ranks what remains.",
+      "status": "experimenting",
+      "scores": {
+        "pain": 3,
+        "fit": 4,
+        "expected_value": 3,
+        "evidence": 4,
+        "reversibility": 5,
+        "cost": 1,
+        "risk": 2
+      },
+      "authority": "Advisory only: a Jev value is one input to Demerzel's deterministic confidence ladder, never a verdict; C still escalates to a human.",
+      "next_gate": "Merge the correction https://github.com/GuitarAlchemist/Demerzel/pull/1128 (T/P is a recorded sufficiency judgement; existence predicates can be F); revisit only if a repository builds a model-on-evidence seam (gaia#159).",
+      "result": "Step 1 (Demerzel definitions, 120 calls, $0.0027 computed): 41/58 both orders, 0 false T, 7/10 absences read as F/D in both orders, 4/10 conflicts collapsed to F: INCONCLUSIVE. Step 2 (explicit U and C criteria, 120 calls, $0.0030): 46/58 and 44/58, 0 false T, conflicts 10/10, absences 4 and 5/10, but P fell into U 6/10: NOT_FIXED. Synthetic, English, agent-authored corpus; costs are reported usage times list price, not bills. Step 3 (U yields to leaning evidence, 120 calls, $0.0031): 48/58 both orders, P 9/10, C 10/10, but absences back to 7/10: NOT_FIXED. Real beliefs (8 at Demerzel 50d1163, 16 calls, $0.0007): no F/D/C, but two P answered T: FAIL; b02's file does not say what verification is missing, so its P is not readable from evidence (a first explanation blaming the confidence ladder was wrong: confidence measures the assignment, the ladder governs action). Gaia has no model-on-evidence route (gaia#159 filed); IX uses Jev on no hexavalent value.",
+      "verdict": "inconclusive",
+      "artifacts": [
+        "../typesafe-ai-system-one/demerzel-hexavalent-PREREG.md",
+        "../typesafe-ai-system-one/demerzel-hexavalent-step2-PREREG.md",
+        "../typesafe-ai-system-one/demerzel-hexavalent-corpus.json",
+        "../typesafe-ai-system-one/evidence/demerzel-hexavalent-live.json",
+        "../typesafe-ai-system-one/evidence/demerzel-hexavalent-step2-live.json",
+        "../typesafe-ai-system-one/demerzel-hexavalent-step3-PREREG.md",
+        "../typesafe-ai-system-one/demerzel-real-beliefs-PREREG.md",
+        "../typesafe-ai-system-one/evidence/demerzel-hexavalent-step3-live.json",
+        "../typesafe-ai-system-one/evidence/demerzel-real-beliefs-live.json",
+        "https://github.com/GuitarAlchemist/gaia/issues/159"
+      ],
+      "revisit": "2026-10-09"
     }
   ],
   "method_checks": [

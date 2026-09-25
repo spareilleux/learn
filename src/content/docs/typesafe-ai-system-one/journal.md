@@ -25,6 +25,7 @@ sidebar:
 | Can the policy fail closed without a provider? | A closed mock response can exercise validation and refuse dispatch when authority is absent | 14/14 tests passed in 0.078 s; route was `human_review:no_explicit_authority` | confirmed for the local policy only | [2026-09-20 entry](#2026-09-20--offline-baseline), [`code/typesafe-ai-system-one`](https://github.com/spareilleux/learn/tree/main/code/typesafe-ai-system-one) |
 | Can a bounded harness test the 50% token-saving hypothesis before spending? | A fixed corpus and exact call plan can expose cost, quality and retry guardrails without contacting Jev | Historical plan: 12 cases, 13 calls, 17,663 UTF-8 bytes, 19/19 tests; it mislabeled bytes as tokens and changed state between arms | invalidated as a token/cost bound; [corrected below](#2026-09-22--batching-protocol-correction-and-gate-stress-test) | [2026-09-20 entry](#2026-09-20--token-cost-benchmark-harness), [lesson 4](../04-token-cost-benchmark/) |
 | Can a confidence threshold alone prevent false support? | A deliberately wrong high-confidence support should still pass a threshold while lower thresholds trade review load for coverage | Synthetic fixture: at 0.95, 1/12 passes and it is false; corrected 13-call plan totals 46,318 request bytes; 23/23 tests in 0.086 s | refuted for confidence-only gating; no Jev quality or billed cost measured | [2026-09-22 entry](#2026-09-22--batching-protocol-correction-and-gate-stress-test), [lesson 5](../05-confidence-gate-stress/) |
+| Can Jev classify Demerzel evidence into T/P/U/D/F/C and keep absence apart from refutation? | Pre-registered: ADVISORY_USEFUL needs ≥ 75% exact, ≤ 1 false T, ≤ 1 absence read as F/D | Step 1: 41/58, 0 false T, 7/10 absences read as F/D. Step 2 (explicit U and C text): 46/58 and 44/58, conflicts 10/10, absences 4–5/10, but P fell into U 6/10 | INCONCLUSIVE, then NOT_FIXED | [entry](#2026-09-25--demerzel-hexavalent-classification-with-jev), [pre-registration](https://github.com/spareilleux/learn/blob/main/code/typesafe-ai-system-one/demerzel-hexavalent-PREREG.md) |
 
 ## 2026-09-20 — Official-source review
 
@@ -61,8 +62,47 @@ Pre-registered hypothesis: a high confidence threshold alone will not prevent a 
 
 Hypothesis before running: the offline suite uses only the standard library, so it passes unchanged from Python 3.10 to 3.14. Command, on a fresh export of `code/typesafe-ai-system-one` at `b3a9c16`, one interpreter at a time through uv 0.10.4: `uv run --no-project --python <v> python -W error::ResourceWarning -m unittest`. Result on Windows 11: 23/23 tests pass on 3.10.19, 3.11.14, 3.12.12, 3.13.12 and 3.14.3, in 0.104 to 0.132 s. The hosted CI for the same commit ([run 35804194871](https://github.com/spareilleux/learn/actions/runs/35804194871)) passes on Ubuntu, Windows and macOS with Python 3.14. Verdict: confirmed for the offline suite; CI still tests 3.14 only. No API key was read and no provider was called: the live call and the 13-call calibration still wait for the operator's `TYPESAFE_API_KEY` and an explicit approval of the ceiling, which are human decisions.
 
+## 2026-09-25 — Demerzel hexavalent classification with Jev
+
+Question, pre-registered in [`demerzel-hexavalent-PREREG.md`](https://github.com/spareilleux/learn/blob/main/code/typesafe-ai-system-one/demerzel-hexavalent-PREREG.md) and committed before the first call: given only Demerzel's own one-line definitions from `logic/hexavalent-logic.md`, does `jev-1.13.0` classify governance evidence into True, Probable, Unknown, Doubtful, False or Contradictory, and does it keep *absence of evidence* (U) apart from *refutation* (F/D)? That second half is the `demerzel_immutable` error of 2026-09-22.
+
+Corpus: 60 synthetic cases, 10 per value, written by one agent under an explicit standard and labeled blind by a second. They agree on 58; h39 and h57 (D against U) are excluded from scoring. No label word appears in any evidence, and three cases carry a prompt injection. Two arms per step: canonical option order and reversed. One call per case, no retries, a stop at $0.05 of reported input.
+
+| N = 58 | Keyword baseline | Step 1: Demerzel text | Step 2: explicit U and C |
+|---|---:|---:|---:|
+| Exact (canonical / reversed) | 12 | 41 / 41 | 46 / 44 |
+| False T | 5 | 0 / 0 | 0 / 0 |
+| Absence read as F/D (of 10 U) | 0 | **7 / 7** | 4 / 5 |
+| Conflict resolved to one side (of 10 C) | — | 4 / 4 | **0 / 0** |
+| Non-U read as U | — | 5 / 4 | 7 / 8 |
+| Computed cost (not billed) | — | $0.0027 | $0.0030 |
+
+240/240 answers were valid, all `jev-1.13.0`; mean latency 372–392 ms. Verdicts, by the pre-registered rules: step 1 **INCONCLUSIVE** (above the kill line, zero false T, but under 75% and far over the absence limit); step 2 **NOT_FIXED** (worse arm still 5/10).
+
+What it shows:
+
+- **The errors run down the lattice, never up.** No false T in 240 calls, and none of the injections produced a T.
+- **Absence becomes refutation, systematically.** In step 1 the seven U errors are identical in both option orders. Spelling out "absence is Unknown, not evidence against" halves them and no more: h02, h29 and h41 stay wrong in both orders, and h36 and h48 now flip with option order.
+- **The conflict sentence works completely.** "At least two strong, direct records point opposite ways; do not resolve such a conflict by picking a side" took C from 6/10 to 10/10 in both orders.
+- **The absence sentence creates a new error.** P falls into U 6/10 (from 3): the P cases are "no direct run, but indirect evidence leans true", which the new U text also describes. The ambiguity is in the definitions, not only in the model.
+
+A test caught a bug before any call: with a tolerance of 0.01, a two-decimal sum of exactly 0.99 was still rejected, because float error puts the gap just above 0.01. That is the trap that failed the French arm of [ix#355](https://github.com/GuitarAlchemist/ix/pull/355); the harness now adds an epsilon. Receipts: [step 1](https://github.com/spareilleux/learn/blob/main/code/typesafe-ai-system-one/evidence/demerzel-hexavalent-live.json), [step 2](https://github.com/spareilleux/learn/blob/main/code/typesafe-ai-system-one/evidence/demerzel-hexavalent-step2-live.json); `python demerzel_hexavalent.py score --out <receipt>` recomputes each verdict. Running total against the $1 operator cap: about $0.027 computed.
+
+## 2026-09-25 — Demerzel hexavalent, continued: step 3, real beliefs, and where each boundary lives
+
+**Step 3** ([pre-registration](https://github.com/spareilleux/learn/blob/main/code/typesafe-ai-system-one/demerzel-hexavalent-step3-PREREG.md)) kept step 2's conflict sentence and changed only U, so that it yields to leaning evidence ("…if other indirect evidence leans one way, choose Probable or Doubtful instead"). The result was 48/58 in both orders, the best of the three steps: P recovered to 9/10, C held at 10/10, and nothing was falsely T. But absence was read as F or D in **7/10 again**, so the verdict is `NOT_FIXED`. Taken together, the three steps settle the question: U and P trade against each other, and no wording makes a Jev F/D mean "refuted". Cost: $0.0031 computed.
+
+**Real beliefs** ([pre-registration](https://github.com/spareilleux/learn/blob/main/code/typesafe-ai-system-one/demerzel-real-beliefs-PREREG.md)): all 8 belief files published in Demerzel at `50d1163` (3 T, 5 P), 16 calls, $0.0007. Jev never answered F, D or C, but it answered T for two beliefs recorded P, in both orders. The pre-registered verdict is therefore **FAIL**. The explanation, noted after the fact and changing no verdict: b02 holds three supporting records and no contradicting one, and its file does not say what verification is missing, so the P cannot be read from the evidence. (A first version of this entry blamed its confidence of 0.82 and the ladder's T threshold. That is wrong: confidence measures the assignment, the ladder governs action, and Demerzel holds T beliefs at 0.80 and P beliefs at 0.92. The Codex review of Demerzel#1127 caught it.) A correction: an earlier version of this entry reported an encoding defect in that file. There is none; the file holds a correct em dash, and the `â€”` came from reading it through a console pipe decoded as cp1252.
+
+**Where it lands.** The four runs support a division of labour rather than a new definition. An existence check decides U against F/D, except that an exhaustive lookup refutes a proposition asserting existence. T against P is a recorded sufficiency judgement, and resolving a C is an explicit, recorded transition. A model's label is advice between those boundaries. The rule was merged into Demerzel's `logic/hexavalent-logic.md` in [Demerzel#1127](https://github.com/GuitarAlchemist/Demerzel/pull/1127) and corrected after review in [Demerzel#1128](https://github.com/GuitarAlchemist/Demerzel/pull/1128).
+
+**The other repositories, checked by their own sessions:**
+- **Gaia** has no step where a model's answer on evidence drives a route. Its "insufficient" outcomes are deterministic, and absence already reads as unknown or refused, never as contradiction (main `8ed4dfc`). The rule for any future Jev step is filed as [gaia#159](https://github.com/GuitarAlchemist/gaia/issues/159).
+- **IX** uses Jev only in the offline intent-routing spike, never on hexavalent values. Its tolerance is 1e-3, so the 0.99 trap would only bite if it were relaxed to 0.01 without an epsilon.
+
 ## To verify
 
+- Merge the division-of-labour rule into Demerzel ([Demerzel#1127](https://github.com/GuitarAlchemist/Demerzel/pull/1127)); revisit Jev on evidence only when a repository builds a model-on-evidence seam ([gaia#159](https://github.com/GuitarAlchemist/gaia/issues/159)).
 - Run exactly one live call after the operator exports `TYPESAFE_API_KEY`; record concrete model, usage, cost and latency without recording the secret.
 - Confirm the response schema against the live service and decide whether the validator should adopt an official JSON Schema.
 - Run the 13-call live calibration only after explicit approval of the $0.0021 ceiling.
