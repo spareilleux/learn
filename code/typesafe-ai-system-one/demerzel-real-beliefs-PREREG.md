@@ -49,8 +49,12 @@ T threshold of its own confidence ladder (`logic/confidence-thresholds.yaml`),
 not because the evidence leans only partly. Jev sees the evidence, not the
 ladder, and says T. b03's T carries 0.29 confidence — no decision at all.
 In Demerzel, the step from P to T is a threshold, not a label a model can
-read off the evidence. Side finding: b02's third claim contains mojibake
-(`â€”` for an em dash) in the published file.
+read off the evidence.
+
+*Correction (2026-09-25, after c428fbd):* this section first reported mojibake
+in b02's third claim. There is none: the file and this corpus hold a correct
+U+2014 em dash; the `â€”` came from the reviewer's console pipe decoded as
+cp1252. Nothing sent to Jev was affected.
 
 Consequence: the conflict sentence is not proposed on this evidence alone.
 What the four runs support is a division of labour, not a new definition: a
