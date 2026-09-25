@@ -71,8 +71,8 @@ DEFINITIONS["leaning"] = {
 }
 
 
-def load_corpus(path: Path = CORPUS_PATH) -> dict[str, Any]:
-    corpus = json.loads(path.read_text(encoding="utf-8"))
+def load_corpus(path: Path | None = None) -> dict[str, Any]:
+    corpus = json.loads((path or CORPUS_PATH).read_text(encoding="utf-8"))
     cases = corpus.get("cases")
     if not isinstance(cases, list) or not cases:
         raise ValueError("The corpus needs a non-empty case list.")
@@ -391,9 +391,13 @@ def run_score(receipt_path: Path) -> dict[str, Any]:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("mode", choices=("plan", "mock", "baseline", "live", "score"), nargs="?", default="plan")
+    parser.add_argument("--corpus", type=Path, default=None)
     parser.add_argument("--definitions", choices=tuple(DEFINITIONS), default="demerzel")
     parser.add_argument("--out", type=Path, default=Path(__file__).with_name("demerzel-hexavalent-live.json"))
     args = parser.parse_args()
+    if args.corpus:
+        global CORPUS_PATH
+        CORPUS_PATH = args.corpus
     result = {
         "plan": lambda: plan(args.definitions),
         "mock": run_mock,
