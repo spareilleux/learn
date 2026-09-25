@@ -1,0 +1,19 @@
+ga_chord_to_set('Cdim7') -> Pitch set: {C, Eb, F#, A} (4 tones); Forte: 4-28; Prime form: 0 3 6 9
+ga_chord_to_set('Cm7b5') -> Pitch set: {C, Eb, F#, Bb} (4 tones); Forte: 4-27; Prime form: 0 2 5 8
+ga_set_class_subs('Am') -> [maj] C C# D Eb E F F# G Ab A Bb B | [m] Cm C#m Dm Ebm Em Fm F#m Gm Abm Bbm Bm
+ga_set_class_subs('G7') -> [7] C7 C#7 D7 Eb7 E7 F7 F#7 Ab7 A7 Bb7 B7 | [m7b5] Cm7b5 C#m7b5 Dm7b5 Ebm7b5 Em7b5 Fm7b5 F#m7b5 Gm7b5 Abm7b5 Am7b5 Bbm7b5 Bm7b5
+ga_icv_neighbors('C', 1) -> No other set class within distance 1 of C (sets of the same size are at least 2 apart)
+ga_scale_by_id(2741) -> Name: Major; Forte Number: 7-35
+ga_scale_by_name('Dorian') -> Name: Dorian; Binary Scale ID: 1709; Forte Number: 7-35
+get_neighboring_keys('Key of C') -> {"Previous":"Key of F","Current":"Key of C","Next":"Key of G"}
+ChordParser.parse('C7sus4') -> Ok { Root = "C" RootAccidental = Natural Quality = None Components = [Extension "7"; Extension "sus4"] Bass = None }
+ChordParser.parse('Am(maj7)') -> Error Ln: 1 Col: 3
+ChordParser.parse('Cmaj7') -> Ok { Root = "C" RootAccidental = Natural Quality = None Components = [Extension "maj7"] Bass = None }
+ga_key_from_progression([Am,F,C,G]) -> best A minor | A minor 4/4 (100%); C major 4/4 (100%); F major 3/4 (75%)
+ga_key_from_progression([C,G,Am,F]) -> best C major | C major 4/4 (100%); A minor 4/4 (100%); F major 3/4 (75%)
+ga_key_from_progression([Dm7,G7,Cmaj7]) -> best C major | C major 3/3 (100%); A minor 3/3 (100%); D minor 2/3 (66%)
+ga_key_from_progression([Am,Dm,E7,Am]) -> best A minor | A minor 4/4 (100%); C major 3/4 (75%); F major 3/4 (75%)
+ga_key_from_progression([D,C#7,F#m]) -> best F# minor | F# minor 3/3 (100%); D major 2/3 (66%); A major 2/3 (66%)
+ga_analyze_progression("Am Dm E7 Am") -> Key: A minor (confidence 4/4) Am Dm E7 Am i iv V i
+ga_analyze_progression("Dm7 G7 Cmaj7") -> Key: C major (confidence 3/3) Dm7 G7 Cmaj7 ii V I
+ga_analyze_progression("Am F C G") -> Key: A minor (confidence 4/4) Am F C G i VI III VII
