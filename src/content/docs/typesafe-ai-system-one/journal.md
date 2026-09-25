@@ -88,9 +88,21 @@ What it shows:
 
 A test caught a bug before any call: with a tolerance of 0.01, a two-decimal sum of exactly 0.99 was still rejected, because float error puts the gap just above 0.01. That is the trap that failed the French arm of [ix#355](https://github.com/GuitarAlchemist/ix/pull/355); the harness now adds an epsilon. Receipts: [step 1](https://github.com/spareilleux/learn/blob/main/code/typesafe-ai-system-one/evidence/demerzel-hexavalent-live.json), [step 2](https://github.com/spareilleux/learn/blob/main/code/typesafe-ai-system-one/evidence/demerzel-hexavalent-step2-live.json); `python demerzel_hexavalent.py score --out <receipt>` recomputes each verdict. Running total against the $1 operator cap: about $0.027 computed.
 
+## 2026-09-25 — Demerzel hexavalent, continued: step 3, real beliefs, and where each boundary lives
+
+**Step 3** ([pre-registration](https://github.com/spareilleux/learn/blob/main/code/typesafe-ai-system-one/demerzel-hexavalent-step3-PREREG.md)) kept step 2's conflict sentence and changed only U, so that it yields to leaning evidence ("…if other indirect evidence leans one way, choose Probable or Doubtful instead"). The result was 48/58 in both orders, the best of the three steps: P recovered to 9/10, C held at 10/10, and nothing was falsely T. But absence was read as F or D in **7/10 again**, so the verdict is `NOT_FIXED`. Taken together, the three steps settle the question: U and P trade against each other, and no wording makes a Jev F/D mean "refuted". Cost: $0.0031 computed.
+
+**Real beliefs** ([pre-registration](https://github.com/spareilleux/learn/blob/main/code/typesafe-ai-system-one/demerzel-real-beliefs-PREREG.md)): all 8 belief files published in Demerzel at `50d1163` (3 T, 5 P), 16 calls, $0.0007. Jev never answered F, D or C, but it answered T for two beliefs recorded P, in both orders. The pre-registered verdict is therefore **FAIL**. The explanation, noted after the fact and changing no verdict: b02 holds three supporting records and no contradicting one, and Demerzel keeps it at P because its confidence of 0.82 is below its ladder's T threshold. In Demerzel, moving from P to T is a threshold, not a label readable from the evidence. The check also surfaced an encoding defect in that file (`â€”` for an em dash).
+
+**Where it lands.** The four runs support a division of labour rather than a new definition. An existence check decides U against F/D, the confidence ladder decides T against P, and resolving a C is an explicit, recorded transition. A model's label is advice between those boundaries. That rule is proposed for Demerzel's `logic/hexavalent-logic.md` in [a Demerzel PR](https://github.com/GuitarAlchemist/Demerzel/pull/1127).
+
+**The other repositories, checked by their own sessions:**
+- **Gaia** has no step where a model's answer on evidence drives a route. Its "insufficient" outcomes are deterministic, and absence already reads as unknown or refused, never as contradiction (main `8ed4dfc`). The rule for any future Jev step is filed as [gaia#159](https://github.com/GuitarAlchemist/gaia/issues/159).
+- **IX** uses Jev only in the offline intent-routing spike, never on hexavalent values. Its tolerance is 1e-3, so the 0.99 trap would only bite if it were relaxed to 0.01 without an epsilon.
+
 ## To verify
 
-- Re-run Demerzel hexavalent with a U definition that yields to leaning evidence (P or D), pre-registered, and test the conflict sentence on real Demerzel belief files before proposing it upstream.
+- Merge the division-of-labour rule into Demerzel ([Demerzel#1127](https://github.com/GuitarAlchemist/Demerzel/pull/1127)); revisit Jev on evidence only when a repository builds a model-on-evidence seam ([gaia#159](https://github.com/GuitarAlchemist/gaia/issues/159)).
 - Run exactly one live call after the operator exports `TYPESAFE_API_KEY`; record concrete model, usage, cost and latency without recording the secret.
 - Confirm the response schema against the live service and decide whether the validator should adopt an official JSON Schema.
 - Run the 13-call live calibration only after explicit approval of the $0.0021 ceiling.

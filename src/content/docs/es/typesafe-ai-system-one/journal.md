@@ -85,9 +85,21 @@ Lo que muestra:
 
 Una prueba encontró un fallo antes de cualquier llamada: con tolerancia 0,01, una suma de dos decimales igual a 0,99 seguía rechazándose, porque el error de coma flotante deja la diferencia justo por encima de 0,01. Es la trampa que hizo fallar el brazo francés de [ix#355](https://github.com/GuitarAlchemist/ix/pull/355); el harness añade ahora un epsilon. Recibos: [paso 1](https://github.com/spareilleux/learn/blob/main/code/typesafe-ai-system-one/evidence/demerzel-hexavalent-live.json), [paso 2](https://github.com/spareilleux/learn/blob/main/code/typesafe-ai-system-one/evidence/demerzel-hexavalent-step2-live.json); `python demerzel_hexavalent.py score --out <recibo>` recalcula cada veredicto. Acumulado frente al tope de 1 $ del operador: unos 0,027 $ calculados.
 
+## 2026-09-25 — Hexavalente de Demerzel, continuación: paso 3, creencias reales y dónde vive cada frontera
+
+**Paso 3** ([prerregistro](https://github.com/spareilleux/learn/blob/main/code/typesafe-ai-system-one/demerzel-hexavalent-step3-PREREG.md)) mantiene la frase sobre conflictos del paso 2 y cambia solo U, para que ceda ante indicios que inclinan («…si otros indicios indirectos inclinan hacia un lado, elige Probable o Dudoso»). El resultado fue 48/58 en ambos órdenes, el mejor de los tres pasos: P vuelve a 9/10, C se mantiene en 10/10 y ningún T es falso. Pero la ausencia vuelve a leerse como F o D en **7/10** casos, así que el veredicto es `NOT_FIXED`. Juntos, los tres pasos zanjan la pregunta: U y P se intercambian, y ninguna redacción hace que un F/D de Jev signifique «refutado». Costo: 0,0031 $ calculados.
+
+**Creencias reales** ([prerregistro](https://github.com/spareilleux/learn/blob/main/code/typesafe-ai-system-one/demerzel-real-beliefs-PREREG.md)): los 8 archivos de creencias publicados en Demerzel en `50d1163` (3 T, 5 P), 16 llamadas, 0,0007 $. Jev nunca responde F, D o C, pero responde T para dos creencias registradas como P, en ambos órdenes. Por eso el veredicto prerregistrado es **FAIL**. La explicación, anotada a posteriori y sin cambiar el veredicto: b02 tiene tres registros a favor y ninguno en contra, y Demerzel la mantiene en P porque su confianza de 0,82 queda por debajo del umbral T de su escala. En Demerzel, pasar de P a T es un umbral, no una etiqueta legible en la evidencia. La verificación también reveló un defecto de codificación en ese archivo (`â€”` en lugar de una raya).
+
+**Dónde queda.** Las cuatro ejecuciones respaldan un reparto de papeles, no una definición nueva. Una comprobación de existencia decide U frente a F/D, la escala de confianza decide T frente a P, y resolver una C es una transición explícita y registrada. La etiqueta del modelo es solo un consejo entre esas fronteras. Esa regla se propone para `logic/hexavalent-logic.md` en [un PR de Demerzel](https://github.com/GuitarAlchemist/Demerzel/pull/1127).
+
+**Los otros repositorios, verificados por sus propias sesiones:**
+- **Gaia** no tiene ningún paso donde la respuesta de un modelo sobre evidencia decida una ruta. Sus «insuficiente» son deterministas, y la ausencia ya se lee como desconocida o rechazada, nunca como contradicción (main `8ed4dfc`). La regla para un futuro paso con Jev quedó registrada como [gaia#159](https://github.com/GuitarAlchemist/gaia/issues/159).
+- **IX** usa Jev solo en el spike de enrutamiento de intenciones, fuera de línea, nunca sobre valores hexavalentes. Su tolerancia es 1e-3, así que la trampa del 0,99 solo aparecería si se relajara a 0,01 sin épsilon.
+
 ## Por verificar
 
-- Repetir el hexavalente de Demerzel con una definición U que ceda ante indicios que inclinan (P o D), prerregistrada, y probar la frase sobre conflictos con archivos de creencias reales de Demerzel antes de proponerla aguas arriba.
+- Fusionar la regla de reparto de papeles en Demerzel ([Demerzel#1127](https://github.com/GuitarAlchemist/Demerzel/pull/1127)); volver a Jev sobre evidencia solo si un repositorio construye un paso donde un modelo juzgue evidencia ([gaia#159](https://github.com/GuitarAlchemist/gaia/issues/159)).
 - Ejecutar una llamada tras exportar `TYPESAFE_API_KEY`, sin registrar el secreto.
 - Confirmar el esquema vivo y valorar un JSON Schema oficial.
 - Ejecutar la calibración en vivo de 13 llamadas solo tras aprobar explícitamente el techo de 0,0021 $.

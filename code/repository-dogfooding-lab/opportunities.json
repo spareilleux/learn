@@ -286,15 +286,20 @@
         "risk": 2
       },
       "authority": "Advisory only: a Jev value is one input to Demerzel's deterministic confidence ladder, never a verdict; C still escalates to a human.",
-      "next_gate": "Pre-register a U definition with a companion clause (\"unless other evidence leans one way, then P or D\") and re-run; separately, test the C sentence on real Demerzel belief files before proposing it for logic/hexavalent-logic.md.",
-      "result": "Step 1 (Demerzel definitions, 120 calls, $0.0027 computed): 41/58 both orders, 0 false T, 7/10 absences read as F/D in both orders, 4/10 conflicts collapsed to F: INCONCLUSIVE. Step 2 (explicit U and C criteria, 120 calls, $0.0030): 46/58 and 44/58, 0 false T, conflicts 10/10, absences 4 and 5/10, but P fell into U 6/10: NOT_FIXED. Synthetic, English, agent-authored corpus; costs are reported usage times list price, not bills.",
+      "next_gate": "Merge the division-of-labour rule into Demerzel's logic/hexavalent-logic.md (https://github.com/GuitarAlchemist/Demerzel/pull/1127); revisit only if a repository builds a model-on-evidence seam (gaia#159).",
+      "result": "Step 1 (Demerzel definitions, 120 calls, $0.0027 computed): 41/58 both orders, 0 false T, 7/10 absences read as F/D in both orders, 4/10 conflicts collapsed to F: INCONCLUSIVE. Step 2 (explicit U and C criteria, 120 calls, $0.0030): 46/58 and 44/58, 0 false T, conflicts 10/10, absences 4 and 5/10, but P fell into U 6/10: NOT_FIXED. Synthetic, English, agent-authored corpus; costs are reported usage times list price, not bills. Step 3 (U yields to leaning evidence, 120 calls, $0.0031): 48/58 both orders, P 9/10, C 10/10, but absences back to 7/10: NOT_FIXED. Real beliefs (8 at Demerzel 50d1163, 16 calls, $0.0007): no F/D/C, but two P answered T: FAIL, because Demerzel's T is a confidence-ladder threshold. Gaia has no model-on-evidence route (gaia#159 filed); IX uses Jev on no hexavalent value.",
       "verdict": "inconclusive",
       "artifacts": [
         "../typesafe-ai-system-one/demerzel-hexavalent-PREREG.md",
         "../typesafe-ai-system-one/demerzel-hexavalent-step2-PREREG.md",
         "../typesafe-ai-system-one/demerzel-hexavalent-corpus.json",
         "../typesafe-ai-system-one/evidence/demerzel-hexavalent-live.json",
-        "../typesafe-ai-system-one/evidence/demerzel-hexavalent-step2-live.json"
+        "../typesafe-ai-system-one/evidence/demerzel-hexavalent-step2-live.json",
+        "../typesafe-ai-system-one/demerzel-hexavalent-step3-PREREG.md",
+        "../typesafe-ai-system-one/demerzel-real-beliefs-PREREG.md",
+        "../typesafe-ai-system-one/evidence/demerzel-hexavalent-step3-live.json",
+        "../typesafe-ai-system-one/evidence/demerzel-real-beliefs-live.json",
+        "https://github.com/GuitarAlchemist/gaia/issues/159"
       ],
       "revisit": "2026-10-09"
     }

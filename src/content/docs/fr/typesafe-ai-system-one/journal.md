@@ -85,9 +85,21 @@ Ce que cela montre :
 
 Un test a trouvé un bogue avant tout appel : avec une tolérance de 0,01, une somme à deux décimales valant exactement 0,99 était encore rejetée, car l'erreur flottante place l'écart juste au-dessus de 0,01. C'est le piège qui a fait échouer le volet français d'[ix#355](https://github.com/GuitarAlchemist/ix/pull/355) ; le harness ajoute maintenant un epsilon. Reçus : [étape 1](https://github.com/spareilleux/learn/blob/main/code/typesafe-ai-system-one/evidence/demerzel-hexavalent-live.json), [étape 2](https://github.com/spareilleux/learn/blob/main/code/typesafe-ai-system-one/evidence/demerzel-hexavalent-step2-live.json) ; `python demerzel_hexavalent.py score --out <reçu>` recalcule chaque verdict. Cumul face au plafond opérateur de 1 $ : environ 0,027 $ calculés.
 
+## 2026-09-25 — Hexavalent Demerzel, suite : étape 3, croyances réelles et place de chaque frontière
+
+**Étape 3** ([pré-inscription](https://github.com/spareilleux/learn/blob/main/code/typesafe-ai-system-one/demerzel-hexavalent-step3-PREREG.md)) : la phrase sur les conflits de l'étape 2 est conservée, et seule U change pour céder devant des indices qui penchent (« …si d'autres indices indirects penchent d'un côté, choisissez plutôt Probable ou Douteux »). Résultat : 48/58 dans les deux ordres, le meilleur des trois essais. P remonte à 9/10, C tient à 10/10 et aucun T n'est faux. Mais l'absence est de nouveau lue F ou D dans **7/10** des cas, d'où le verdict `NOT_FIXED`. Mises ensemble, les trois étapes tranchent la question : U et P s'échangent, et aucune formulation ne fait d'un F/D de Jev une « réfutation ». Coût : 0,0031 $ calculés.
+
+**Croyances réelles** ([pré-inscription](https://github.com/spareilleux/learn/blob/main/code/typesafe-ai-system-one/demerzel-real-beliefs-PREREG.md)) : les 8 fichiers de croyances publiés dans Demerzel à `50d1163` (3 T, 5 P), 16 appels, 0,0007 $. Jev ne répond jamais F, D ou C, mais répond T pour deux croyances enregistrées P, dans les deux ordres. Le verdict pré-enregistré est donc **FAIL**. L'explication, notée après coup et sans changer le verdict : b02 a trois éléments favorables et aucun contraire, et Demerzel la garde à P parce que sa confiance de 0,82 reste sous le seuil T de son échelle. Chez Demerzel, passer de P à T est un seuil, pas une étiquette lisible dans les preuves. La vérification a aussi révélé un défaut d'encodage dans ce fichier (`â€”` au lieu d'un tiret cadratin).
+
+**Ce qu'on en retient.** Les quatre exécutions justifient une répartition des rôles plutôt qu'une nouvelle définition. Un contrôle d'existence tranche U contre F/D, l'échelle de confiance tranche T contre P, et la résolution d'un C est une transition explicite et consignée. L'étiquette du modèle n'est qu'un avis entre ces frontières. Cette règle est proposée pour `logic/hexavalent-logic.md` dans [une PR Demerzel](https://github.com/GuitarAlchemist/Demerzel/pull/1127).
+
+**Les autres dépôts, vérifiés par leurs propres sessions :**
+- **Gaia** n'a aucune étape où la réponse d'un modèle sur des preuves décide d'une route. Ses « insuffisant » sont déterministes, et l'absence s'y lit déjà comme inconnue ou refusée, jamais comme contradiction (main `8ed4dfc`). La règle applicable à une future étape Jev est déposée en [gaia#159](https://github.com/GuitarAlchemist/gaia/issues/159).
+- **IX** n'utilise Jev que dans le spike hors ligne de routage d'intentions, jamais sur des valeurs hexavalentes. Sa tolérance est de 1e-3, donc le piège du 0,99 ne mordrait que si elle passait à 0,01 sans epsilon.
+
 ## À vérifier
 
-- Relancer l'hexavalent Demerzel avec une définition U qui cède devant des indices qui penchent (P ou D), pré-enregistrée, et tester la phrase sur les conflits sur de vrais fichiers de croyances de Demerzel avant de la proposer en amont.
+- Fusionner la règle de répartition des rôles dans Demerzel ([Demerzel#1127](https://github.com/GuitarAlchemist/Demerzel/pull/1127)) ; ne revenir à Jev sur des preuves que si un dépôt construit une étape où un modèle juge des preuves ([gaia#159](https://github.com/GuitarAlchemist/gaia/issues/159)).
 - Exécuter exactement un appel live après export de `TYPESAFE_API_KEY`, sans consigner le secret.
 - Confirmer le schéma de réponse et envisager un JSON Schema officiel.
 - Exécuter la calibration live de 13 appels uniquement après approbation explicite du plafond de 0,0021 $.

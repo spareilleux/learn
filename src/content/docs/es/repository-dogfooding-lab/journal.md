@@ -106,9 +106,21 @@ La octava oportunidad pasó de una línea del curso TypeSafe («Demerzel — cla
 
 Registro: `jev-demerzel-hexavalent-annotator`, `experimenting`, veredicto `inconclusive`. La siguiente compuerta es una definición U con una cláusula complementaria para indicios que inclinan, prerregistrada aparte. No se modificó ningún archivo de Demerzel: una frase propuesta para `logic/hexavalent-logic.md` necesita antes una prueba con archivos de creencias reales.
 
+## 2026-09-25 — Seguir una oportunidad de un repositorio a otro hasta que cada uno responda
+
+La instrucción del usuario era asegurarse de que la oportunidad se implementara, se verificara y quedara en el diario en todos los lugares donde aplicaba. Preguntar a las sesiones propietarias respondió más de lo que habría respondido leer su código:
+
+| Repositorio | Pregunta | Respuesta, y quién la verificó | Resultado |
+|---|---|---|---|
+| Demerzel | ¿Algún cambio de definición corrige la ausencia leída como refutación? | Esta sesión: tres pasos prerregistrados más 8 creencias reales, 376 llamadas, unos 0,009 $ calculados | No. La regla entra en Demerzel como un reparto de papeles ([PR de Demerzel](https://github.com/GuitarAlchemist/Demerzel/pull/1127)) |
+| Gaia | ¿Un veredicto de modelo sobre evidencia decide una ruta? | La sesión de Gaia, en main `8ed4dfc` | No; el invariante ya se cumple, y la regla para pasos futuros quedó registrada como [gaia#159](https://github.com/GuitarAlchemist/gaia/issues/159) |
+| IX | ¿Toca Jev valores hexavalentes, y está activa la trampa del 0,99? | La sesión de IX, con grep sobre `crates/` | No, y no: la tolerancia es 1e-3 |
+
+La lección de método: una oportunidad no queda «adoptada» porque un repositorio la haya medido. Aquí el resultado honesto es una regla escrita (Demerzel), una guarda registrada para un paso que aún no existe (Gaia) y una no-utilización explícita (IX). La entrada del registro sigue en `experimenting`/`inconclusive`: la regla obtenida es una frontera que mantiene fuera al modelo, no una adopción del modelo.
+
 ## Por verificar
 
-- Repetir el hexavalente de Demerzel con una definición U que ceda ante indicios que inclinan (P o D), prerregistrada, y probar la frase sobre conflictos con archivos de creencias reales de Demerzel antes de proponerla aguas arriba.
+- Fusionar la regla de reparto de papeles en Demerzel ([Demerzel#1127](https://github.com/GuitarAlchemist/Demerzel/pull/1127)); volver a Jev sobre evidencia solo si un repositorio construye un paso donde un modelo juzgue evidencia ([gaia#159](https://github.com/GuitarAlchemist/gaia/issues/159)).
 - Confirmar la primera ejecución CI alojada para matrices, paridad y diarios.
 - Medir tiempo de autoría antes de afirmar menor coste. No existe ningún valor de referencia, así que la métrica de éxito actual de `learn-evidence-first-course-method` es irrefutable tal como está escrita.
 - Leer el cuerpo de las cinco reglas TARS `ga.*`, no solo sus pesos, antes de afirmar que los dos codificados coinciden o divergen.

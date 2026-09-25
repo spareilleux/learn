@@ -108,9 +108,21 @@ The eighth opportunity moved from a line in the TypeSafe course ("Demerzel — t
 
 Registry: `jev-demerzel-hexavalent-annotator`, `experimenting`, verdict `inconclusive`. Its next gate is a U definition with a companion clause for leaning evidence, pre-registered separately. No Demerzel file was changed: a sentence proposed for `logic/hexavalent-logic.md` needs a test on real belief files first.
 
+## 2026-09-25 — Following an opportunity across repositories until each one answers
+
+The user's instruction was to make sure the opportunity was implemented, verified and journaled everywhere it applied. Asking the owning sessions answered more than reading their code would have:
+
+| Repository | Question | Answer, and who checked | Outcome |
+|---|---|---|---|
+| Demerzel | Does any definition change fix absence-as-refutation? | This session: three pre-registered steps plus 8 real beliefs, 376 calls, about $0.009 computed | No. The rule moves into Demerzel as a division of labour ([Demerzel PR](https://github.com/GuitarAlchemist/Demerzel/pull/1127)) |
+| Gaia | Does a model verdict on evidence drive a route? | The Gaia session, on main `8ed4dfc` | No; the invariant already holds, and the rule for future steps is filed as [gaia#159](https://github.com/GuitarAlchemist/gaia/issues/159) |
+| IX | Does Jev touch hexavalent values, and is the 0.99 trap live? | The IX session, by grep of `crates/` | No, and no: tolerance is 1e-3 |
+
+The method lesson: an opportunity is not "adopted" because one repository measured it. Here the honest outcome is one rule written down (Demerzel), one guard filed for a seam that does not exist yet (Gaia), and one explicit non-use (IX). The registry entry stays `experimenting`/`inconclusive`: the rule it produced is a boundary that keeps the model out, not an adoption of the model.
+
 ## To verify
 
-- Re-run Demerzel hexavalent with a U definition that yields to leaning evidence (P or D), pre-registered, and test the conflict sentence on real Demerzel belief files before proposing it upstream.
+- Merge the division-of-labour rule into Demerzel ([Demerzel#1127](https://github.com/GuitarAlchemist/Demerzel/pull/1127)); revisit Jev on evidence only when a repository builds a model-on-evidence seam ([gaia#159](https://github.com/GuitarAlchemist/gaia/issues/159)).
 - Confirm the first hosted CI run for matrices, locale parity and journal structure.
 - Measure authoring lead time before claiming the new method is cheaper. No baseline value exists, so the current success metric of `learn-evidence-first-course-method` cannot be refuted as written.
 - Read the five `ga.*` TARS rule bodies, not only their weights, before claiming the two encodings agree or disagree.
