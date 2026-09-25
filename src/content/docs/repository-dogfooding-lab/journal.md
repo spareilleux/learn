@@ -114,7 +114,7 @@ The user's instruction was to make sure the opportunity was implemented, verifie
 
 | Repository | Question | Answer, and who checked | Outcome |
 |---|---|---|---|
-| Demerzel | Does any definition change fix absence-as-refutation? | This session: three pre-registered steps plus 8 real beliefs, 376 calls, about $0.009 computed | No. The rule moves into Demerzel as a division of labour ([Demerzel PR](https://github.com/GuitarAlchemist/Demerzel/pull/1127)) |
+| Demerzel | Does any definition change fix absence-as-refutation? | This session: three pre-registered steps plus 8 real beliefs, 376 calls, about $0.009 computed | No. The rule moves into Demerzel as a division of labour ([Demerzel PR](https://github.com/GuitarAlchemist/Demerzel/pull/1127), corrected in [#1128](https://github.com/GuitarAlchemist/Demerzel/pull/1128)) |
 | Gaia | Does a model verdict on evidence drive a route? | The Gaia session, on main `8ed4dfc` | No; the invariant already holds, and the rule for future steps is filed as [gaia#159](https://github.com/GuitarAlchemist/gaia/issues/159) |
 | IX | Does Jev touch hexavalent values, and is the 0.99 trap live? | The IX session, by grep of `crates/` | No, and no: tolerance is 1e-3 |
 

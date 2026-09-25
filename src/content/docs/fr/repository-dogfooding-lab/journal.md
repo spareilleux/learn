@@ -112,7 +112,7 @@ La consigne de l'utilisateur était de s'assurer que l'opportunité soit implém
 
 | Dépôt | Question | Réponse, et qui a vérifié | Résultat |
 |---|---|---|---|
-| Demerzel | Un changement de définition corrige-t-il l'absence lue comme réfutation ? | Cette session : trois étapes pré-enregistrées plus 8 croyances réelles, 376 appels, environ 0,009 $ calculés | Non. La règle entre dans Demerzel sous la forme d'une répartition des rôles ([PR Demerzel](https://github.com/GuitarAlchemist/Demerzel/pull/1127)) |
+| Demerzel | Un changement de définition corrige-t-il l'absence lue comme réfutation ? | Cette session : trois étapes pré-enregistrées plus 8 croyances réelles, 376 appels, environ 0,009 $ calculés | Non. La règle entre dans Demerzel sous la forme d'une répartition des rôles ([PR Demerzel](https://github.com/GuitarAlchemist/Demerzel/pull/1127), corrigée par [#1128](https://github.com/GuitarAlchemist/Demerzel/pull/1128)) |
 | Gaia | Un verdict de modèle sur des preuves décide-t-il d'une route ? | La session Gaia, sur main `8ed4dfc` | Non ; l'invariant tient déjà, et la règle pour les étapes futures est déposée en [gaia#159](https://github.com/GuitarAlchemist/gaia/issues/159) |
 | IX | Jev touche-t-il des valeurs hexavalentes, et le piège du 0,99 est-il actif ? | La session IX, par grep sur `crates/` | Non, et non : la tolérance est de 1e-3 |
 

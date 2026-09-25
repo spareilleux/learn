@@ -44,12 +44,15 @@ beliefs recorded P were answered T in both orders.
 
 Explanation (post hoc, so it changes no verdict): b02's evidence is three
 supporting records at reliability 0.95–0.99 and an empty `contradicting` list.
-Demerzel keeps it at P because its recorded confidence, 0.82, sits under the
-T threshold of its own confidence ladder (`logic/confidence-thresholds.yaml`),
-not because the evidence leans only partly. Jev sees the evidence, not the
-ladder, and says T. b03's T carries 0.29 confidence — no decision at all.
-In Demerzel, the step from P to T is a threshold, not a label a model can
-read off the evidence.
+The file does not say what verification is missing, so the P cannot be
+recovered from the evidence, by Jev or by a reader. b03's T carries 0.29
+confidence — no decision at all.
+
+*Correction (2026-09-25, after 767518a):* this paragraph first explained b02's
+P by its confidence, 0.82, sitting under the ladder's T threshold. That is
+wrong. `confidence` measures the assignment and the ladder governs action;
+Demerzel's master holds T beliefs at 0.80 and 0.82 and P beliefs at 0.90 and
+0.92. The Codex review of Demerzel#1127 caught it.
 
 *Correction (2026-09-25, after c428fbd):* this section first reported mojibake
 in b02's third claim. There is none: the file and this corpus hold a correct
@@ -58,5 +61,6 @@ cp1252. Nothing sent to Jev was affected.
 
 Consequence: the conflict sentence is not proposed on this evidence alone.
 What the four runs support is a division of labour, not a new definition: a
-deterministic existence check decides U against F/D, Demerzel's confidence
-ladder decides T against P, and a model's label is advice between them.
+deterministic existence check decides U against F/D (except that an exhaustive
+lookup refutes a proposition asserting existence), T against P is a recorded
+sufficiency judgement, and a model's label is advice between them.

@@ -112,7 +112,7 @@ La instrucción del usuario era asegurarse de que la oportunidad se implementara
 
 | Repositorio | Pregunta | Respuesta, y quién la verificó | Resultado |
 |---|---|---|---|
-| Demerzel | ¿Algún cambio de definición corrige la ausencia leída como refutación? | Esta sesión: tres pasos prerregistrados más 8 creencias reales, 376 llamadas, unos 0,009 $ calculados | No. La regla entra en Demerzel como un reparto de papeles ([PR de Demerzel](https://github.com/GuitarAlchemist/Demerzel/pull/1127)) |
+| Demerzel | ¿Algún cambio de definición corrige la ausencia leída como refutación? | Esta sesión: tres pasos prerregistrados más 8 creencias reales, 376 llamadas, unos 0,009 $ calculados | No. La regla entra en Demerzel como un reparto de papeles ([PR de Demerzel](https://github.com/GuitarAlchemist/Demerzel/pull/1127), corregida en [#1128](https://github.com/GuitarAlchemist/Demerzel/pull/1128)) |
 | Gaia | ¿Un veredicto de modelo sobre evidencia decide una ruta? | La sesión de Gaia, en main `8ed4dfc` | No; el invariante ya se cumple, y la regla para pasos futuros quedó registrada como [gaia#159](https://github.com/GuitarAlchemist/gaia/issues/159) |
 | IX | ¿Toca Jev valores hexavalentes, y está activa la trampa del 0,99? | La sesión de IX, con grep sobre `crates/` | No, y no: la tolerancia es 1e-3 |
 
