@@ -47,6 +47,12 @@ class DemerzelHexavalentTests(unittest.TestCase):
         self.assertEqual(list(base_criteria), list(explicit_criteria))
         self.assertEqual(base["state"], explicit["state"])
 
+    def test_leaning_definitions_change_only_u_from_explicit(self) -> None:
+        case = hx.load_corpus()["cases"][0]
+        explicit = hx.payload(case, "canonical", "explicit")["questions"]["truth_value"]["criteria"]
+        leaning = hx.payload(case, "canonical", "leaning")["questions"]["truth_value"]["criteria"]
+        self.assertEqual({key for key in explicit if explicit[key] != leaning[key]}, {"unknown"})
+
     def test_labels_are_not_in_the_state(self) -> None:
         for case in hx.load_corpus()["cases"]:
             state = hx.payload(case, "canonical")["state"]

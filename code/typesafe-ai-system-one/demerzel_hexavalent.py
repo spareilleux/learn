@@ -59,6 +59,16 @@ DEFINITIONS = {
         ),
     },
 }
+# Step 3 changes only U again: absence is not evidence against, but leaning evidence wins.
+DEFINITIONS["leaning"] = {
+    **DEFINITIONS["explicit"],
+    "U": (
+        "Insufficient evidence to determine: nothing bears on the claim either way. A missing "
+        "artefact, field or log, or a check that was not run or does not bear on the claim, is "
+        "not evidence against. If other indirect evidence leans one way, choose Probable or "
+        "Doubtful instead."
+    ),
+}
 
 
 def load_corpus(path: Path = CORPUS_PATH) -> dict[str, Any]:
