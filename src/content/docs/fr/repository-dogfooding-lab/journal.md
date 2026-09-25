@@ -26,6 +26,7 @@ sidebar:
 | Les portes nommées « exige des preuves » et « verdict confirmé » refusent-elles un candidat fabriqué? | Elles vérifient la preuve, donc une entrée aux champs vides et à l'artefact inexistant est refusée | Elles n'ont rien refusé : l'entrée a atteint `adopted`/`confirmed` avec zéro erreur. Les portes vérifiaient la présence des clés, jamais leur contenu | réfutée, puis corrigée | [entrée](#2026-09-23--une-relecture-adverse-casse-les-portes-du-labo), [`dogfood.py`](https://github.com/spareilleux/learn/blob/main/code/repository-dogfooding-lab/dogfood.py) |
 | Un réseau de Petri trouve-t-il dans un dépôt des défauts de concurrence que sa propre suite de tests manque? | Chercher les marquages morts d'un graphe d'accessibilité trouve au moins un défaut réel, en lecture seule | Trois trouvés dans GA au commit `a826864`, chacun confirmé ligne par ligne avant dépôt, et une affirmation retirée avant dépôt ; signalés en [ga#700](https://github.com/GuitarAlchemist/ga/issues/700), [#701](https://github.com/GuitarAlchemist/ga/issues/701), [#702](https://github.com/GuitarAlchemist/ga/issues/702) | prometteur — aucun mainteneur ne les a encore triées | [`petri-nets`](../../petri-nets/), [entrée](#2026-09-23--une-relecture-adverse-casse-les-portes-du-labo) |
 | Un oracle de Pétri hors ligne expose-t-il le saut dangereux entre avis Jev et autorité ? | Le flux fondé sur le seul avis atteint un effet ; le flux protégé exige preuve indépendante et mandat d'implémentation | Faux support synthétique à 0,98 ; 3/3 tests C# ciblés et 1/1 test de parité de la fixture passent ; aucun replay sur un vrai dépôt | prometteur localement, non intégré | [entrée datée](#jev-petri-2026-09-22), [leçon](../05-jev-petri-authority/), [`JevEvidenceGateTests.cs`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/Tests/JevEvidenceGateTests.cs) |
+| Jev est-il un annotateur consultatif utilisable pour les six valeurs de Demerzel ? | ≥ 75 % exact sur des cas synthétiques d'accord aveugle, ≤ 1 faux T, ≤ 1 absence lue comme réfutation, dans les deux ordres | Aucun faux T sur 240 appels ; mais absence lue comme réfutation 7/10, puis 4–5/10 avec une règle explicite qui a aussi poussé P vers U 6/10 | inconclusive — `experimenting` | [entrée](#2026-09-25--demerzel-et-jev--la-pré-inscription-attrape-ce-que-le-modèle-cache), [`opportunities.json`](https://github.com/spareilleux/learn/blob/main/code/repository-dogfooding-lab/opportunities.json) |
 
 ## 2026-09-20 — Premier tracer de matrices
 
@@ -94,8 +95,20 @@ La ligne Jev reste donc **inconclusive** pour sa propre question, et une seconde
 
 L'exécution complète, chaque hash de requête et chaque réponse, est commitée dans `code/typesafe-ai-system-one/evidence/jev-live.json`, pour que les chiffres ci-dessus soient recalculables sans faire confiance à cette entrée.
 
+## 2026-09-25 — Demerzel et Jev : la pré-inscription attrape ce que le modèle cache
+
+La huitième opportunité est passée d'une ligne du cours TypeSafe (« Demerzel — trier les preuves sans interpréter la constitution ») à deux exécutions mesurées en une journée. Les chiffres sont dans le [journal TypeSafe](../../typesafe-ai-system-one/journal/#2026-09-25--logique-hexavalente-de-demerzel-avec-jev) ; cette entrée consigne ce qu'a fait la méthode.
+
+- **La règle a été écrite avant les données, et elle a tenu.** Le modèle paraissait bon en agrégé (41/58, 71 %, zéro faux T) ; sans la limite d'absence pré-enregistrée, cela se lit comme un succès avec réserve. Avec elle, l'exécution est INCONCLUSIVE, parce que la pré-inscription nommait l'échec cherché : l'absence lue comme réfutation. Il était là, à 7/10.
+- **Deux annotateurs, pas un.** Les étiquettes de l'auteur ont été contrôlées par un second agent qui ne les voyait pas. Ils divergent sur 2 cas sur 60 (tous deux D contre U, précisément la frontière testée), exclus plutôt qu'arbitrés après coup.
+- **La seconde étape a répondu à une autre question que prévu.** Le correctif devait montrer si la faute venait du modèle ou des définitions de Demerzel. Il a montré les deux : la phrase sur les conflits a entièrement corrigé C, et celle sur l'absence a révélé une ambiguïté dans les définitions elles-mêmes, puisque les cas P n'ont pas non plus d'exécution directe.
+- **Un test bon marché a fait plus que l'exécution live.** Un test unitaire « une somme d'exactement 0,99 est acceptée » a échoué avant tout appel. C'était le piège de l'erreur flottante qui avait déjà fait tomber un bras IX.
+
+Registre : `jev-demerzel-hexavalent-annotator`, `experimenting`, verdict `inconclusive`. La prochaine gate est une définition U avec une clause complémentaire pour les indices qui penchent, pré-enregistrée à part. Aucun fichier de Demerzel n'a été modifié : une phrase proposée pour `logic/hexavalent-logic.md` doit d'abord être testée sur de vrais fichiers de croyances.
+
 ## À vérifier
 
+- Relancer l'hexavalent Demerzel avec une définition U qui cède devant des indices qui penchent (P ou D), pré-enregistrée, et tester la phrase sur les conflits sur de vrais fichiers de croyances de Demerzel avant de la proposer en amont.
 - Confirmer le premier run CI hébergé des matrices, de la parité et des journaux.
 - Mesurer le temps d'écriture avant d'affirmer que la méthode coûte moins cher. Aucune valeur de référence n'existe, donc le critère de succès actuel de `learn-evidence-first-course-method` est irréfutable tel qu'il est écrit.
 - Lire le corps des cinq règles TARS `ga.*`, pas seulement leurs poids, avant d'affirmer que les deux encodages s'accordent ou divergent.

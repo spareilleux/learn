@@ -26,6 +26,7 @@ sidebar:
 | Do the gates named "requires evidence" and "confirmed verdict" refuse a fabricated candidate? | They check evidence, so an entry with empty evidence fields and an artifact that does not exist is refused | Refused nothing: the entry reached `adopted`/`confirmed` with zero errors. The gates checked that keys were present, never that they said anything | refuted, then fixed | [2026-09-23 entry](#2026-09-23--an-adversarial-review-breaks-the-gates-of-the-lab), [`dogfood.py`](https://github.com/spareilleux/learn/blob/main/code/repository-dogfooding-lab/dogfood.py) |
 | Does a Petri net find concurrency defects in a repository that its own test suite misses? | Searching a reachability graph for dead markings finds at least one real defect from a read-only reading | Three found in GA at `a826864`, each confirmed line by line before filing, and one claim withdrawn before filing; reported as [ga#700](https://github.com/GuitarAlchemist/ga/issues/700), [#701](https://github.com/GuitarAlchemist/ga/issues/701), [#702](https://github.com/GuitarAlchemist/ga/issues/702) | promising — no maintainer has triaged them yet | [`petri-nets`](../../petri-nets/), [2026-09-23 entry](#2026-09-23--an-adversarial-review-breaks-the-gates-of-the-lab) |
 | Can an offline Petri oracle expose a false Jev-advice-to-authority step? | Unsafe advice-only flow reaches an effect; a guarded flow needs independently verified evidence and an implementation grant | Synthetic 0.98 wrong support; 3/3 focused C# tests and 1/1 fixture-parity test pass; no real-repository replay | promising locally, not integrated | [dated entry](#jev-petri-2026-09-22), [lesson](../05-jev-petri-authority/), [`JevEvidenceGateTests.cs`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/Tests/JevEvidenceGateTests.cs) |
+| Is Jev a usable advisory annotator for Demerzel's six truth values? | ≥ 75% exact on blind-agreed synthetic cases, ≤ 1 false T, ≤ 1 absence read as refutation, in both option orders | Never a false T in 240 calls; but absence read as refutation 7/10, then 4–5/10 with an explicit rule that also pushed P into U 6/10 | inconclusive — `experimenting` | [entry](#2026-09-25--demerzel-and-jev-pre-registration-catches-what-the-model-hides), [`opportunities.json`](https://github.com/spareilleux/learn/blob/main/code/repository-dogfooding-lab/opportunities.json) |
 
 ## 2026-09-20 — First opportunity-matrix tracer
 
@@ -96,8 +97,20 @@ So the Jev row stays **inconclusive** for its own question, and a second row rec
 
 The full run, every request hash and every response, is committed at `code/typesafe-ai-system-one/evidence/jev-live.json` so the numbers above can be recomputed without trusting this entry.
 
+## 2026-09-25 — Demerzel and Jev: pre-registration catches what the model hides
+
+The eighth opportunity moved from a line in the TypeSafe course ("Demerzel — triage evidence without interpreting the constitution") to two measured runs in a day. The numbers are in the [TypeSafe journal](../../typesafe-ai-system-one/journal/#2026-09-25--demerzel-hexavalent-classification-with-jev); this entry records what the method did.
+
+- **The rule was written before the data, and it held.** The model looked good in aggregate (41/58, 71%, zero false T), and without the pre-registered absence limit that reads as a pass with a caveat. With it, the run is INCONCLUSIVE, because the pre-registration named the failure it was looking for: absence read as refutation. It was there at 7/10.
+- **Two annotators, not one.** The author's labels were checked by a second agent that never saw them. They disagreed on 2 of 60 cases (both D against U, the same boundary under test), which were excluded rather than adjudicated after the fact.
+- **The second step answered a different question than hoped.** The fix was meant to show whether the fault lay in the model or in Demerzel's definitions. It showed both: the conflict sentence fixed C completely, and the absence sentence exposed an ambiguity in the definitions themselves, since P cases also lack a direct run.
+- **A cheap test did more than the live run.** A unit test for "a sum of exactly 0.99 is accepted" failed before any call. It was the float-error trap that had already killed an IX arm.
+
+Registry: `jev-demerzel-hexavalent-annotator`, `experimenting`, verdict `inconclusive`. Its next gate is a U definition with a companion clause for leaning evidence, pre-registered separately. No Demerzel file was changed: a sentence proposed for `logic/hexavalent-logic.md` needs a test on real belief files first.
+
 ## To verify
 
+- Re-run Demerzel hexavalent with a U definition that yields to leaning evidence (P or D), pre-registered, and test the conflict sentence on real Demerzel belief files before proposing it upstream.
 - Confirm the first hosted CI run for matrices, locale parity and journal structure.
 - Measure authoring lead time before claiming the new method is cheaper. No baseline value exists, so the current success metric of `learn-evidence-first-course-method` cannot be refuted as written.
 - Read the five `ga.*` TARS rule bodies, not only their weights, before claiming the two encodings agree or disagree.
