@@ -33,3 +33,35 @@ Step-2 values (canonical / reversed) in brackets.
 `logic/hexavalent-logic.md`, still subject to a check on real belief files.
 Anything less means the U sentence stays out and U-versus-F remains a
 deterministic existence check.
+
+---
+
+## Results — 2026-09-25 (appended after the run; the section above is unchanged since 682c713)
+
+120/120 answered, all `jev-1.13.0`, 0 invalid, no retry. 72,726 input and 8,054
+output tokens reported, **$0.0031** computed (not a bill). Mean latency 400 ms.
+Receipt: `evidence/demerzel-hexavalent-step3-live.json`.
+
+| Metric (N = 58), canonical / reversed | step 1 | step 2 | **step 3** |
+|---|---|---|---|
+| correct | 41 / 41 | 46 / 44 | **48 / 48** |
+| false_true | 0 / 0 | 0 / 0 | 0 / 0 |
+| absence_as_refutation (of 10 U) | 7 / 7 | 4 / 5 | **7 / 7** |
+| conflict_resolved (of 10 C) | 4 / 4 | 0 / 0 | 0 / 0 |
+| over_unknown | 5 / 4 | 7 / 8 | **2 / 2** |
+| order flips | 2 | 3 | 1 (h36) |
+
+**Verdict: `NOT_FIXED`** — no regression and the best accuracy of the three
+steps (P back to 9/10, C still 10/10), but absence is read as F/D in 7/10
+again, in both orders.
+
+The three steps together answer the question step 2 was meant to answer. U and
+P trade against each other: the wording that stops absence reading as
+refutation also swallows P (step 2), and the wording that restores P lets
+absence slide back to F/D (step 3). No definition tried makes a Jev F/D mean
+"refuted". The conflict sentence, in contrast, held at 10/10 across two
+different U wordings and four arms.
+
+Consequence: U versus F/D is decided by a deterministic existence check before
+any model; the model ranks only among T/P/D/F once evidence is present, and
+the C sentence is the one definition change worth carrying to Demerzel.
