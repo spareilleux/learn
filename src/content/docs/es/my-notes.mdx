@@ -1,0 +1,15 @@
+---
+title: Mis marcadores y notas
+description: Las páginas y secciones que marcó y las notas que escribió sobre las lecciones, guardadas solo en este navegador.
+tableOfContents: false
+---
+
+import ReaderLibrary from '../../../components/ReaderLibrary.astro';
+
+Cada lección tiene un botón de marcador bajo su título, un botón de marcador junto a cada título de sección (aparece al pasar el ratón por el título) y un bloque de notas al final de la página. Esta página los reúne.
+
+Se guardan en el [almacenamiento local](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) de su navegador y nunca salen de él: sin cuenta, sin servidor. Otro navegador u otro dispositivo no los ve, y borrar los datos de este sitio los elimina. Expórtelos para guardar una copia e importe el archivo en otro dispositivo para recuperarlos.
+
+Un marcador de página y una nota de página le siguen de un idioma a otro. Un marcador de sección se queda en el idioma en que lo añadió, porque las anclas de las secciones cambian de un idioma a otro.
+
+<ReaderLibrary />
