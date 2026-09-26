@@ -29,6 +29,14 @@ Un audit d'usage des 81 crates d'IX, classés selon ce qui les exécute réellem
 
 Comment la génération d'images [ComfyUI](https://docs.comfy.org/) a été branchée dans Demerzel comme fournisseur gouverné : chaque demande de texture passe par une gate budgétaire, s'exécute localement sur le GPU et laisse un enregistrement de provenance (seed, hash du workflow, prompt, consommateur). La gate budgétaire est interactive : choisissez un fournisseur et un coût, et voyez-la autoriser, bloquer ou échouer en mode fermé.
 
+## 3D et graphisme
+
+### GA Ocean — TSL/WebGPU
+
+[Ouvrir l'artefact](https://claude.ai/artifact/P5JPUkCRR1cYc4herNiR9F) · accès par lien partagé vérifié sans connexion le 2026-09-26
+
+La démo Ocean dispose d'un Artifact Claude autonome : mer calme, tempête, coucher de soleil, nuit et arrière-plan de Saint-Malo. Il complète le [cours three.js](../threejs/). Le rendu nécessite un navigateur compatible WebGPU ; ouvrir la page partagée n'est pas un test de rendu multi-navigateurs ni de performance. L'Artifact indique l'auteur et la licence de sa photo de Saint-Malo.
+
 ## Musique et guitare
 
 ### Banc de Placement
