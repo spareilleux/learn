@@ -9,6 +9,12 @@
 set -uo pipefail
 cd "$(dirname "$0")/.."
 VERSION=${1:?usage: bash retest/retest.sh <slashforge version>}
+# The version becomes part of a folder this script deletes: accept a plain release number only, and refuse anything
+# else before touching the file system.
+if ! [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+  echo "refusing: '$VERSION' is not a release number like 4.5.0" >&2
+  exit 2
+fi
 DIR="out/retest-$VERSION"
 rm -rf "$DIR" && mkdir -p "$DIR"
 cp -r check.sh expected scripts "$DIR/"
