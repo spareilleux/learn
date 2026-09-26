@@ -15,6 +15,7 @@ sidebar:
 - [x] Checks CI de parité des langues et de structure du journal
 - [ ] Première revue contradictoire indépendante
 - [x] Premier candidat promu ou rejeté sur preuve de dépôt
+- [x] Tests de mutation et de propriétés sur un vrai fichier de GA, pré-inscrits ([leçon 6](../06-mutation-property-testing/))
 
 ## Expériences
 
@@ -27,6 +28,7 @@ sidebar:
 | Un réseau de Petri trouve-t-il dans un dépôt des défauts de concurrence que sa propre suite de tests manque? | Chercher les marquages morts d'un graphe d'accessibilité trouve au moins un défaut réel, en lecture seule | Trois trouvés dans GA au commit `a826864`, chacun confirmé ligne par ligne avant dépôt, et une affirmation retirée avant dépôt ; signalés en [ga#700](https://github.com/GuitarAlchemist/ga/issues/700), [#701](https://github.com/GuitarAlchemist/ga/issues/701), [#702](https://github.com/GuitarAlchemist/ga/issues/702) | prometteur — aucun mainteneur ne les a encore triées | [`petri-nets`](../../petri-nets/), [entrée](#2026-09-23--une-relecture-adverse-casse-les-portes-du-labo) |
 | Un oracle de Pétri hors ligne expose-t-il le saut dangereux entre avis Jev et autorité ? | Le flux fondé sur le seul avis atteint un effet ; le flux protégé exige preuve indépendante et mandat d'implémentation | Faux support synthétique à 0,98 ; 3/3 tests C# ciblés et 1/1 test de parité de la fixture passent ; aucun replay sur un vrai dépôt | prometteur localement, non intégré | [entrée datée](#jev-petri-2026-09-22), [leçon](../05-jev-petri-authority/), [`JevEvidenceGateTests.cs`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/Tests/JevEvidenceGateTests.cs) |
 | Jev est-il un annotateur consultatif utilisable pour les six valeurs de Demerzel ? | ≥ 75 % exact sur des cas synthétiques d'accord aveugle, ≤ 1 faux T, ≤ 1 absence lue comme réfutation, dans les deux ordres | Aucun faux T sur 240 appels ; mais absence lue comme réfutation 7/10, puis 4–5/10 avec une règle explicite qui a aussi poussé P vers U 6/10 | inconclusive — `experimenting` | [entrée](#2026-09-25--demerzel-et-jev--la-pré-inscription-attrape-ce-que-le-modèle-cache), [`opportunities.json`](https://github.com/spareilleux/learn/blob/main/code/repository-dogfooding-lab/opportunities.json) |
+| Les tests de GA laissent-ils des mutants de `PitchParser.cs` en vie, et une petite suite de propriétés passant par l'API publique en tue-t-elle ? | H1 : des mutants restent Survived ou NoCoverage. H2 : les propriétés en tuent au moins un. H3 : aucune entrée ne lève d'exception sur 10 000 cas | B : 25 Killed, 5 NoCoverage, 0 Survived sur 39 (83,33 %). T avec les propriétés : exactement pareil. P exploratoire, propriétés seules : les mêmes 25. Aucune exception ; le témoin négatif échoue et se rejoue à l'identique | H1 confirmée, H2 réfutée, H3 tient pour une graine | [entrée](#2026-09-26--tests-de-mutation-et-de-propriétés-sur-pitchparser-de-ga), [`test-quality`](https://github.com/spareilleux/learn/tree/main/code/repository-dogfooding-lab/test-quality) |
 
 ## 2026-09-20 — Premier tracer de matrices
 
@@ -118,8 +120,35 @@ La consigne de l'utilisateur était de s'assurer que l'opportunité soit implém
 
 La leçon de méthode : une opportunité n'est pas « adoptée » parce qu'un dépôt l'a mesurée. Ici, le résultat honnête est une règle écrite (Demerzel), une garde déposée pour une étape qui n'existe pas encore (Gaia) et une non-utilisation explicite (IX). L'entrée du registre reste `experimenting`/`inconclusive` : la règle obtenue est une frontière qui tient le modèle à l'écart, pas une adoption du modèle.
 
+## 2026-09-26 — Tests de mutation et de propriétés sur `PitchParser` de GA
+
+La question : les tests déterministes de GA laissent-ils des fautes non détectées dans un petit parseur réel, et un petit test génératif passant par l'API publique en détecte-t-il ? La jointure a été confirmée par l'utilisateur : `PitchParser.TryParse` seulement, via `Pitch.Sharp.TryParse` et `Pitch.Flat.TryParse`, sans modification de production.
+
+Pré-inscription : [`results/preregistration.md`](https://github.com/spareilleux/learn/blob/main/code/repository-dogfooding-lab/test-quality/results/preregistration.md), écrite et hachée à 12 h 19 EDT avant la première compilation (SHA-256 `fd86962a…`, conservé hors du dépôt). Trois modifications ultérieures sont listées dans sa propre section :
+- un bogue de générateur attrapé avant toute exécution (préfixer `b` donne `bb3`, un bémol valide) ;
+- le `[Property]` de FsCheck.NUnit 3.4.0 ignore le `[Explicit]` de NUnit, ce qui a fait tourner le témoin négatif avec les autres ; il vit désormais dans une catégorie ;
+- l'exécution P, déclarée exploratoire avant son lancement.
+
+GA à `aa22f91`, extraction partielle de 12 Mo. SDK .NET 10.0.112, Stryker.NET 5.0.0, FsCheck 3.4.0, Windows 11. Chaque exécution ne mutait que `PitchParser.cs`, en concurrence 2, sous le verrou lourd partagé.
+
+| Exécution | Killed | Survived | NoCoverage | Ignored | Timeout | Score | Durée |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Référence déterministe, `dotnet test` | 706/706 réussis | | | | | | 35 s |
+| B — tests de GA | 25 | 0 | 5 | 9 | 0 | 83,33 % | 109 s |
+| T — tests de GA + 6 tests de propriétés | 25 | 0 | 5 | 9 | 0 | 83,33 % | 142 s |
+| P — 6 tests de propriétés seuls (exploratoire) | 25 | 0 | 5 | 9 | 0 | 83,33 % | 93 s |
+
+Les cinq mutants NoCoverage changent `return false` en `return true` dans les branches défensives qui suivent une correspondance réussie de la regex (lignes 38, 43, 49, 58, 67). Aucune entrée décrite par le contrat public ne les atteint. La lecture de `FlatAccidental.TryParse`, qui met en minuscules avant de comparer, suggère que même `CB4` n'atteint pas la ligne 58. Ce n'est pas exécuté.
+
+Propriétés : 10 000 cas chacune avec la graine fixe `(20260926,7)`, et aucun contre-exemple. Témoin négatif (dièses et bémols acceptent les mêmes textes) : `Falsifiable, after 2 tests (2 shrinks)`, réduit à `a#-1`, et une sortie identique sur deux exécutions.
+
+Verdict : H1 confirmée ; H2 réfutée ; H3 tient pour cette graine. La lecture honnête est que les tests de GA tuent déjà tout mutant de ce fichier atteignable depuis l'extérieur. Six propriétés les ont égalés sur ce fichier, ce qui est un constat sur un petit parseur piloté par une regex, pas sur les tests de propriétés en général. Aucune modification de production ni issue chez GA : garder les branches défensives relève du mainteneur.
+
 ## À vérifier
 
+- Exécuter le labo test-quality sous Linux et macOS, et le brancher en CI ; il n'a tourné que sous Windows 11, à la main.
+- Exécuter `Pitch.Flat.TryParse("CB4")` pour confirmer que la ligne 58 de `PitchParser.cs` est inatteignable ; réconcilier les 710 tests du rapport Stryker de T avec 706 + 6.
+- Muter un second fichier de GA, dont le contrat dépend moins d'une regex, avant toute conclusion sur les tests de propriétés à cet endroit.
 - Fusionner la règle de répartition des rôles dans Demerzel ([Demerzel#1127](https://github.com/GuitarAlchemist/Demerzel/pull/1127)) ; ne revenir à Jev sur des preuves que si un dépôt construit une étape où un modèle juge des preuves ([gaia#159](https://github.com/GuitarAlchemist/gaia/issues/159)).
 - Confirmer le premier run CI hébergé des matrices, de la parité et des journaux.
 - Mesurer le temps d'écriture avant d'affirmer que la méthode coûte moins cher. Aucune valeur de référence n'existe, donc le critère de succès actuel de `learn-evidence-first-course-method` est irréfutable tel qu'il est écrit.

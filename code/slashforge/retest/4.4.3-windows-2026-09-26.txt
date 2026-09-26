@@ -1,0 +1,102 @@
+# bash retest/retest.sh 4.4.3 — Windows 11, Git Bash, Node v24.12.0, 2026-09-26
+v24.12.0
+slashforge 4.4.3
+ok   l01_help
+ok   l01_dry_run
+ok   l01_install
+ok   l01_files
+ok   l01_dry_run_vs_install
+ok   l01_meta
+ok   l01_status
+ok   l01_reinstall
+ok   l01_project
+ok   l01_project_files
+ok   l01_uninstall
+ok   l01_after_uninstall
+ok   l01_uninstall_again
+ok   l02_installer_functions
+ok   l02_render
+ok   l02_global_vs_project
+ok   l02_sizes
+ok   l02_broken_template
+ok   l02_broken_template_files
+ok   l06_verify_glob
+check.sh exit 0
+--- l01_dry_run_vs_install
+dry-run lists 21 files
+install wrote 32 files
+written but not in the dry-run (11):
+  ~/.claude/commands/slashforge/brainstorm.md
+  ~/.claude/commands/slashforge/debug.md
+  ~/.claude/commands/slashforge/parallel.md
+  ~/.claude/commands/slashforge/plan.md
+  ~/.claude/commands/slashforge/request-review.md
+  ~/.claude/commands/slashforge/review-feedback.md
+  ~/.claude/commands/slashforge/tdd.md
+  ~/.claude/commands/slashforge/verify.md
+  ~/.claude/commands/slashforge/worktree.md
+  ~/.claude/setup/slashforge/forge-open.sh
+  ~/.claude/setup/slashforge/forge-report-shell.html
+in the dry-run but not written (0):
+--- l01_uninstall
+
+✓ Uninstalled slashforge
+  removed ~/.claude/commands/slashforge/setup.md
+  removed ~/.claude/commands/slashforge/code.md
+  removed ~/.claude/commands/slashforge/investigate.md
+  removed ~/.claude/commands/slashforge/review-pr.md
+  removed ~/.claude/commands/slashforge/brainstorm.md
+  removed ~/.claude/commands/slashforge/plan.md
+  removed ~/.claude/commands/slashforge/debug.md
+  removed ~/.claude/commands/slashforge/tdd.md
+  removed ~/.claude/commands/slashforge/verify.md
+  removed ~/.claude/commands/slashforge/review-feedback.md
+  removed ~/.claude/commands/slashforge/request-review.md
+  removed ~/.claude/commands/slashforge/worktree.md
+  removed ~/.claude/commands/slashforge/parallel.md
+  removed ~/.claude/commands/slashforge
+  removed ~/.claude/setup/slashforge
+exit 0
+--- l02_installer_functions
+# A file path under commands/ becomes the name you type
+slashforge/setup.md            /slashforge:setup
+slashforge/code.md             /slashforge:code
+slashforge/investigate.md      /slashforge:investigate
+slashforge/review-pr.md        /slashforge:review-pr
+slashforge/brainstorm.md       /slashforge:brainstorm
+slashforge/plan.md             /slashforge:plan
+slashforge/debug.md            /slashforge:debug
+slashforge/tdd.md              /slashforge:tdd
+slashforge/verify.md           /slashforge:verify
+slashforge/review-feedback.md  /slashforge:review-feedback
+slashforge/request-review.md   /slashforge:request-review
+slashforge/worktree.md         /slashforge:worktree
+slashforge/parallel.md         /slashforge:parallel
+
+# The two install modes
+global   guides   /home/ada/.claude/setup/slashforge
+global   commands /home/ada/.claude/commands
+global   {{INSTALL_PATH}} = /home/ada/.claude/setup/slashforge
+project  guides   /src/app/.claude/setup/slashforge
+project  commands /src/app/.claude/commands
+project  {{INSTALL_PATH}} = .claude/setup/slashforge
+
+# What the frontmatter check refuses
+no opening fence: demo.md: missing opening '---' frontmatter fence
+no closing fence: demo.md: missing closing '---' frontmatter fence
+no description: demo.md: frontmatter missing required field 'description'
+a key with a space: demo.md: invalid frontmatter at line 3: "long description: d"
+a closing fence with a trailing space: demo.md: missing closing '---' frontmatter fence
+a folded YAML description: demo.md: invalid frontmatter at line 4: "  two lines"
+valid: ok {"name":"/demo","description":"d"}
+--- dry-run labels
+     16   copy 
+      4   render 
+--- shadowing warning on a project install
+(none)
+--- templates running inline node -e
+4
+--- Step 9 on three repositories
+ok: 4.4.3 glob sees 0 skill file(s); 4.5.0 find exits 0 
+big: 4.4.3 glob sees 0 skill file(s); 4.5.0 find exits 1 (over 500:  600 .claude/skills/add/SKILL.md)
+nested: 4.4.3 glob sees 0 skill file(s); 4.5.0 find exits 1 (over 200: 250 .claude/skills/add/ref/notes.md)
