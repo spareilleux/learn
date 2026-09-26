@@ -18,22 +18,23 @@ sidebar:
 - [x] Lesson 4 page: `/slashforge:code`, ten phases and four gates, with `-quick`
 - [x] Lesson 5 page: `/slashforge:investigate` and `/slashforge:review-pr`
 - [x] Lesson 6: making it yours — rules, verification, a team install; `check.sh` now compares 20 outputs
+- [x] Lesson 7: contributing back, and a retest of 4.5.0 on Windows
 
 ## QA
 
-Every row below is reproduced by `check.sh` or read in the installer at tag `v4.4.3`. None has been reported upstream: the repository had no issue open or closed on 2026-09-22, and its tests don't cover the dry run.
+Every row below is reproduced by `check.sh` or read in the installer at tag `v4.4.3`. None has been reported upstream: the repository had no issue open or closed on 2026-09-22, and its tests don't cover the dry run. On 2026-09-26 the author acknowledged these findings and announced fixes([entry](#2026-09-26--the-authors-response-and-how-to-check-a-release)), and release 4.5.0 fixes the eight installer and guide rows, retested on Windows ([retest](#2026-09-26--retest-on-slashforge-450)).
 
 | Expected | What happens | Where | Measure | Status |
 |---|---|---|---|---|
-| `--dry-run` lists what the install writes | It lists 21 files; the install writes 32. The nine skills, `forge-open.sh` and `forge-report-shell.html` are missing | [`bin/install.js#L499-L528`](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/bin/install.js#L499-L528) builds its own list from two of the four arrays | `l01_dry_run_vs_install`: 11 written, not announced; 0 announced, not written | Reproduced, not reported [2026-09-22](#2026-09-22--the-installer-read-and-run) |
-| The dry run labels each file with what the install does to it | It says `copy` for every guide. Guides are rendered since 4.4.1 | same lines | `l02_global_vs_project`: two guides differ between the global and the project install, which a copy could not do | Reproduced, not reported [2026-09-22](#2026-09-22--the-installer-read-and-run) |
-| The README's *What gets installed* describes 4.4.3 | It describes three commands in `commands/forge/`; 4.4.3 writes four commands and nine skills in `commands/slashforge/` | [`README.md#L103-L112`](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/README.md#L103-L112) | `l01_files` | Reproduced, not reported [2026-09-22](#2026-09-22--the-installer-read-and-run) |
-| The installer's comments describe its code | Three are older than it: *"the three entry points"* above a list of four; `'forge/setup.md' -> '/slashforge:setup'` above `commandName`; *"a namespace subdirectory (forge/)"* where it writes `slashforge/` | [`#L45-L50`](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/bin/install.js#L45-L50), [`#L182-L183`](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/bin/install.js#L182-L183), [`#L259-L260`](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/bin/install.js#L259-L260) | `l02_installer_functions`: `commandName('slashforge/setup.md')` gives `/slashforge:setup` | Read; comments only, no behaviour affected |
-| `--yes`, which the help ties to *"the update prompt"*, doesn't answer other questions | With stdin not a terminal it is on, and `uninstall` removes everything without asking | [`#L628-L633`](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/bin/install.js#L628-L633) | `l01_uninstall`: 15 removals, exit 0, no prompt | Reproduced; documented in part |
-| A template Claude Code accepts, the installer accepts | The installer reads frontmatter line by line: a folded YAML `description: >` is refused, and a closing `---` followed by a space is not found, although the opening fence is trimmed | [`#L113-L137`](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/bin/install.js#L113-L137) | `l02_installer_functions`: 6 refusals out of 7 samples | Reproduced; affects only templates you add |
+| `--dry-run` lists what the install writes | It lists 21 files; the install writes 32. The nine skills, `forge-open.sh` and `forge-report-shell.html` are missing | [`bin/install.js#L499-L528`](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/bin/install.js#L499-L528) builds its own list from two of the four arrays | `l01_dry_run_vs_install`: 11 written, not announced; 0 announced, not written | Reproduced, not reported [2026-09-22](#2026-09-22--the-installer-read-and-run) · Fixed in v4.5.0, retested on Windows ([2026-09-26](#2026-09-26--retest-on-slashforge-450)) |
+| The dry run labels each file with what the install does to it | It says `copy` for every guide. Guides are rendered since 4.4.1 | same lines | `l02_global_vs_project`: two guides differ between the global and the project install, which a copy could not do | Reproduced, not reported [2026-09-22](#2026-09-22--the-installer-read-and-run) · Fixed in v4.5.0, retested on Windows ([2026-09-26](#2026-09-26--retest-on-slashforge-450)) |
+| The README's *What gets installed* describes 4.4.3 | It describes three commands in `commands/forge/`; 4.4.3 writes four commands and nine skills in `commands/slashforge/` | [`README.md#L103-L112`](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/README.md#L103-L112) | `l01_files` | Reproduced, not reported [2026-09-22](#2026-09-22--the-installer-read-and-run) · Fixed in v4.5.0, retested on Windows ([2026-09-26](#2026-09-26--retest-on-slashforge-450)) |
+| The installer's comments describe its code | Three are older than it: *"the three entry points"* above a list of four; `'forge/setup.md' -> '/slashforge:setup'` above `commandName`; *"a namespace subdirectory (forge/)"* where it writes `slashforge/` | [`#L45-L50`](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/bin/install.js#L45-L50), [`#L182-L183`](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/bin/install.js#L182-L183), [`#L259-L260`](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/bin/install.js#L259-L260) | `l02_installer_functions`: `commandName('slashforge/setup.md')` gives `/slashforge:setup` | Read; comments only, no behaviour affected · Fixed in v4.5.0, retested on Windows ([2026-09-26](#2026-09-26--retest-on-slashforge-450)) |
+| `--yes`, which the help ties to *"the update prompt"*, doesn't answer other questions | With stdin not a terminal it is on, and `uninstall` removes everything without asking | [`#L628-L633`](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/bin/install.js#L628-L633) | `l01_uninstall`: 15 removals, exit 0, no prompt | Reproduced; documented in part · Fixed in v4.5.0, retested on Windows ([2026-09-26](#2026-09-26--retest-on-slashforge-450)) |
+| A template Claude Code accepts, the installer accepts | The installer reads frontmatter line by line: a folded YAML `description: >` is refused, and a closing `---` followed by a space is not found, although the opening fence is trimmed | [`#L113-L137`](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/bin/install.js#L113-L137) | `l02_installer_functions`: 6 refusals out of 7 samples | Reproduced; affects only templates you add · Fixed in v4.5.0, retested on Windows ([2026-09-26](#2026-09-26--retest-on-slashforge-450)) |
 | The `name` field the installer requires names the command | Claude Code ignores `name` in a file under `commands/`; the path names the command | [Claude Code, skills](https://code.claude.com/docs/en/skills#where-skills-live) | — | Documented on both sides; a trap when renaming (lesson 2, exercise 1) |
-| The kit's guides agree on where a skill goes and how long it may be | `forge-instructions.md` says `.claude/skills/*.md` and *"Every `.md` file … under 200 lines"*; `forge-skills.md` says a folder with `SKILL.md`, under 500 lines. Claude Code's documentation only lists the folder form | [`forge-instructions.md#L14-L34`](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/templates/forge-instructions.md#L14-L34), [`forge-skills.md#L27-L51`](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/templates/forge-skills.md#L27-L51) | Two contradictions in guides the model reads in the same run | Read, not reported [2026-09-22](#2026-09-22--lesson-6-two-rulebooks-and-which-copy-runs) |
-| Setup's verify step catches a file over 200 lines | `wc -l CLAUDE.md .claude/**/*.md` in bash without `globstar` stops one folder deep, so a skill's `SKILL.md` is never counted | [`forge-instructions.md` Step 9](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/templates/forge-instructions.md#L126-L139) | `l06_verify_glob`: a 300-line `SKILL.md` missing from the count, on Linux, Windows and macOS | Reproduced, not reported [2026-09-22](#2026-09-22--lesson-6-two-rulebooks-and-which-copy-runs) |
+| The kit's guides agree on where a skill goes and how long it may be | `forge-instructions.md` says `.claude/skills/*.md` and *"Every `.md` file … under 200 lines"*; `forge-skills.md` says a folder with `SKILL.md`, under 500 lines. Claude Code's documentation only lists the folder form | [`forge-instructions.md#L14-L34`](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/templates/forge-instructions.md#L14-L34), [`forge-skills.md#L27-L51`](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/templates/forge-skills.md#L27-L51) | Two contradictions in guides the model reads in the same run | Read, not reported [2026-09-22](#2026-09-22--lesson-6-two-rulebooks-and-which-copy-runs) · Fixed in v4.5.0, retested on Windows ([2026-09-26](#2026-09-26--retest-on-slashforge-450)) |
+| Setup's verify step catches a file over 200 lines | `wc -l CLAUDE.md .claude/**/*.md` in bash without `globstar` stops one folder deep, so a skill's `SKILL.md` is never counted | [`forge-instructions.md` Step 9](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/templates/forge-instructions.md#L126-L139) | `l06_verify_glob`: a 300-line `SKILL.md` missing from the count, on Linux, Windows and macOS | Reproduced, not reported [2026-09-22](#2026-09-22--lesson-6-two-rulebooks-and-which-copy-runs) · Fixed in v4.5.0, retested on Windows ([2026-09-26](#2026-09-26--retest-on-slashforge-450)) |
 
 ## Experiments
 
@@ -120,8 +121,77 @@ One model run, to settle what a team install means. The hypothesis, written from
 
 Limit: the re-run behaviour of setup — refresh, ask, or leave alone according to the `generated_by` marker — is described from the guide, not tested; testing it means running setup past its questions twice.
 
+## 2026-09-26 — The author's response, and how to check a release
+
+A reply attributed to SlashForge's author, [Rajdeep Singh Ratan](https://www.linkedin.com/in/rajdeepratan/), was posted on LinkedIn and pasted into this course's working notes on 2026-09-26. The post's permalink and publication date have not been checked; the link above is the author's profile, not the post. In short, the author went through the findings of this journal, agreed with them, and said they will inform upcoming releases, including one manifest shared by the dry run and the install, and guides and checks that agree with each other.
+
+Status when this entry was written: **author acknowledgement, fixes announced, not fixed and not retested.** Later the same day, this course found that release 4.5.0 already shipped the fixes, and retested it: see the [next entry](#2026-09-26--retest-on-slashforge-450). Nothing below changes a measured result. Every row still describes `v4.4.3` at `bd75a4f`, and becomes *fixed* only after the checklist that follows has been run on a named release.
+
+| What the author acknowledged | Where this journal measured it |
+|---|---|
+| The dry run lists 21 files, the install writes 32 | QA, first row (`l01_dry_run_vs_install`) |
+| The preview says guides are copied when they are rendered | QA, second row (`l02_global_vs_project`) |
+| The README is stale after the rename | QA, third row |
+| Installer comments are stale | QA, fourth row (read, comments only) |
+| Non-interactive auto-yes also covers `uninstall` | QA, fifth row (`l01_uninstall`) |
+| Template validation is stricter than Claude Code's own rules | QA, sixth row (`l02_installer_functions`) |
+| Two guides disagree on a skill's location and length | QA, row on the two guides ([lesson 6 entry](#2026-09-22--lesson-6-two-rulebooks-and-which-copy-runs)) |
+| The bash 200-line check misses nested skills | QA, row on the verify step (`l06_verify_glob`) |
+| A Windows test passes whatever happens and opens an error dialog | [Lab entry](#2026-09-22--the-lab-for-lessons-3-to-5-and-where-it-stops) and *To verify* |
+| Building the report with inline `node` is awkward to authorize safely | Experiment L5a, and "A write that left the repository" in the [lessons 3 to 5 entry](#2026-09-22--lessons-3-to-5-run-in-the-lab) |
+| Each command costs money before its first checkpoint | Experiments L3 to L5b: 0.17 to 0.45 USD per run, computed by Claude Code, not billed |
+| Whether cached input counts in the token figures is ambiguous | Experiment L4: cache reads alone exceed the README's 70,000 |
+| A stale global copy silently wins over the kit committed in the project | Experiment e5: `GLOBAL` |
+
+**Release-verification checklist.** To run on the first release that claims these fixes, before any row changes status:
+
+1. Name the release: its tag and the exact commit SHA it points to, read from the repository, not from a changelog.
+2. Rerun the same reproductions (`check.sh`, the `l01`, `l02` and `l06` checks) at that commit, on every operating system the release claims: Linux, Windows and macOS.
+3. Compare the dry run's list with the files the install actually writes, file by file, and record both exit codes.
+4. Keep the negative controls. A check that finds nothing on the old commit proves nothing on the new one, so run each check on `bd75a4f` too and confirm that it still fails there.
+5. With stdin not a terminal, check that `uninstall` no longer removes files without an explicit confirmation or flag, and that `--yes` is documented as covering it if it still does.
+6. Read how the README now defines per-command cost and whether cached input counts. Rerun one command with a dollar ceiling to compare.
+7. Rerun e5 with a personal and a project copy, and record which one runs, and whether the kit now warns about it.
+8. Update each QA row: *fixed in `<tag>`, retested on `<OS list>`*, or *still open in `<tag>`*. Keep the original measurement and its date in the row.
+
+No outreach from this course: nothing was posted, filed or sent upstream.
+
+## 2026-09-26 — Retest on SlashForge 4.5.0
+
+Checking upstream before calling anything open showed a release the course had not seen: tag `v4.5.0` at `10d3d916b30323598515aa27aef43a8527e7e967`, dated 2026-09-25. Its [CHANGELOG](https://github.com/rajdeepratan/SlashForge/blob/10d3d916b30323598515aa27aef43a8527e7e967/CHANGELOG.md) lists a fix for every installer and guide row of the QA table, and for the Windows helper test and the inline `node` reports, and adds a warning when a global install shadows a project one. It credits this course.
+
+`code/slashforge/retest/retest.sh` installs a given release into a throwaway folder and reruns `check.sh` against the 4.4.3 expectations. It ran on Windows 11 with Git Bash and Node 24.12.0:
+
+| | 4.4.3 (negative control) | 4.5.0 |
+|---|---|---|
+| `check.sh` against the 4.4.3 expectations | exit 0, 20/20 | exit 1, 16 differ: the expectations are 4.4.3's |
+| Dry run against install | 21 listed, 32 written, 11 missing | 34 and 34, none missing |
+| Dry-run labels | 16 `copy`, 4 `render` | 29 `render`, 4 `copy` |
+| `uninstall` with no terminal | 15 removals, exit 0 | refused, exit 1 |
+| Folded YAML, trailing-space fence | both refused | both accepted; 4 real errors still refused |
+| Shadowing warning on `--project` | none | printed |
+| Templates with inline `node -e '` | 4 | 0 |
+| Step 9 on three throwaway repositories (`verify-step9.sh`) | the glob sees no skill file | a 600-line `SKILL.md` and a nested 250-line file flagged; a 300-line `SKILL.md` passes |
+
+Read, not run:
+- the README and the guides now agree;
+- the three stale comments are gone;
+- the npm package 4.5.0 equals the tag's `bin/` and `templates/`, ignoring line endings;
+- the new helper test stubs the openers on Linux and macOS and returns early on Windows. So Windows no longer gets a dialog, and gets no assertion either.
+
+The README now says its token ranges don't separate cache reads from fresh input: a clarification, not a split.
+
+Verdict: the eight installer and guide rows are **fixed in 4.5.0, retested on Windows**. Each row keeps its 4.4.3 measurement. Not retested:
+- Linux, macOS and WSL;
+- any model-backed run on 4.5.0.
+
+The lessons still describe 4.4.3, and CI still pins it. [Lesson 7](../07-contributing-back/) tells the story and lists what is still open.
+
 ## To verify
 
+- Rerun `retest/retest.sh 4.5.0` on Linux and macOS, and in WSL; only Windows 11 was retested.
+- Rerun one model-backed command on 4.5.0 (cost figures, gates, which copy runs) before saying anything about run-time behaviour after the fixes.
+- Run the release-verification checklist of the 2026-09-26 entry on the first release that claims the announced fixes, before changing any QA status.
 - Why SlashForge's `node --test` takes 523 s on Windows with Git Bash, including how much of it is the `forge-open.sh` test. Don't re-run that test on a desktop session: it opens an error dialog (see the lab entry).
 - Why e1 reported 15 turns under `--max-turns 10` and finished normally, when e1b stopped at 11.
 - Whether the model finds `.claude/setup/slashforge/…` when Claude Code is started in a subfolder of a repository with a project install (lesson 2).

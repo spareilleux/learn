@@ -39,6 +39,7 @@ Terminar un curso no es éxito. El resultado es adopción con pruebas o un recha
 | 3 | [Dogfood del método](03-course-method-dogfood/) | Mejorar ejemplos, diarios, paridad de idiomas y adopción |
 | 4 | [Incubar, integrar, rechazar](04-incubate-integrate-reject/) | Promover solo candidatos medidos y reversibles |
 | 5 | [Límite de autoridad Jev × Petri](05-jev-petri-authority/) | Mostrar por qué un consejo confiado no concede ningún efecto |
+| 6 | [Pruebas de mutación y de propiedades](06-mutation-property-testing/) | Medir qué fallos detectan las pruebas de un parser real, con un prerregistro y un control negativo |
 | — | [Diario](journal/) | Experimentos detallados, rechazos y próximos gates |
 
 ```text

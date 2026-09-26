@@ -1,0 +1,56 @@
+
+   _____ _              _               _   _ ______ _______  
+  / ____| |            | |             | \ | |  ____|__   __| 
+ | (___ | |_ _ __ _   _| | _____ _ __  |  \| | |__     | |    
+  \___ \| __| '__| | | | |/ / _ \ '__| | . ` |  __|    | |    
+  ____) | |_| |  | |_| |   <  __/ |    | |\  | |____   | |    
+ |_____/ \__|_|   \__, |_|\_\___|_| (_)|_| \_|______|  |_|    
+                   __/ |                                      
+                  |___/                                       
+
+
+Version: 5.0.0
+
+[13:04:39 INF] Stryker will use a max of 2 parallel testsessions.
+[13:04:39 INF] Analysis starting.
+[13:04:39 INF] Analyzing 2 test project(s).
+[13:04:44 WRN] Project .ga\Tests\GA.Domain.Core.Tests\GA.Domain.Core.Tests.csproj simulated build failed. Trying again with a nuget restore.
+[13:04:47 WRN] Analysis of project .ga\Tests\GA.Domain.Core.Tests\GA.Domain.Core.Tests.csproj succeeded.
+[13:04:47 INF] Picking net10.0 for project C:\tmp\learn-vexflow-vextab\code\repository-dogfooding-lab\test-quality\.ga\Common\GA.Domain.Core\GA.Domain.Core.csproj. 
+[13:04:47 INF] Found project C:\tmp\learn-vexflow-vextab\code\repository-dogfooding-lab\test-quality\.ga\Common\GA.Domain.Core\GA.Domain.Core.csproj to mutate.
+[13:04:47 INF] Analysis complete.
+[13:04:47 INF] Building test project C:\tmp\learn-vexflow-vextab\code\repository-dogfooding-lab\test-quality\.ga\Tests\GA.Domain.Core.Tests\GA.Domain.Core.Tests.csproj (1/2)
+[13:04:48 INF] Building project GA.Domain.Core.Tests.csproj using dotnet build GA.Domain.Core.Tests.csproj -c Debug --property:Platform=AnyCPU (directory C:\tmp\learn-vexflow-vextab\code\repository-dogfooding-lab\test-quality\.ga\Tests\GA.Domain.Core.Tests.)
+[13:04:58 INF] Building test project C:\tmp\learn-vexflow-vextab\code\repository-dogfooding-lab\test-quality\PitchParserProperties\PitchParserProperties.csproj (2/2)
+[13:05:00 INF] Building project PitchParserProperties.csproj using dotnet build PitchParserProperties.csproj -c Debug --property:Platform=AnyCPU (directory C:\tmp\learn-vexflow-vextab\code\repository-dogfooding-lab\test-quality\PitchParserProperties.)
+[13:05:59 INF] Number of tests found: 711 for project C:\tmp\learn-vexflow-vextab\code\repository-dogfooding-lab\test-quality\.ga\Common\GA.Domain.Core\GA.Domain.Core.csproj. Initial test run started.
+[13:06:13 WRN] An unidentified mutation in C:\tmp\learn-vexflow-vextab\code\repository-dogfooding-lab\test-quality\.ga\Common\GA.Domain.Core\Instruments\Primitives\RelativeFretVector.cs resulted in a compile error (at 31:38) with id: CS0411, message: The type arguments for method 'Enumerable.Select<TSource, TResult>(IEnumerable<TSource>, Func<TSource, int, TResult>)' cannot be inferred from the usage. Try specifying the type arguments explicitly. (Source code: Select)
+[13:06:13 INF] Safe Mode! Stryker will remove all mutations in ToFretVector and mark them as 'compile error'.
+[13:06:13 WRN] An unidentified mutation in C:\tmp\learn-vexflow-vextab\code\repository-dogfooding-lab\test-quality\.ga\Common\GA.Domain.Core\Theory\Harmony\ChordTemplate.cs resulted in a compile error (at 78:24) with id: CS0411, message: The type arguments for method 'Enumerable.Select<TSource, TResult>(IEnumerable<TSource>, Func<TSource, int, TResult>)' cannot be inferred from the usage. Try specifying the type arguments explicitly. (Source code: Select)
+[13:06:13 INF] Safe Mode! Stryker will remove all mutations in FromPitchClassSet and mark them as 'compile error'.
+[13:06:13 WRN] An unidentified mutation in C:\tmp\learn-vexflow-vextab\code\repository-dogfooding-lab\test-quality\.ga\Common\GA.Domain.Core\Theory\Harmony\ChordTemplate.cs resulted in a compile error (at 78:152) with id: CS0411, message: The type arguments for method 'Enumerable.Select<TSource, TResult>(IEnumerable<TSource>, Func<TSource, int, TResult>)' cannot be inferred from the usage. Try specifying the type arguments explicitly. (Source code: Select)
+[13:06:13 INF] Safe Mode! Stryker will remove all mutations in FromPitchClassSet and mark them as 'compile error'.
+[13:06:14 WRN] An unidentified mutation in C:\tmp\learn-vexflow-vextab\code\repository-dogfooding-lab\test-quality\.ga\Common\GA.Domain.Core\Theory\Atonal\ModalFamily.cs resulted in a compile error (at 116:45) with id: CS0411, message: The type arguments for method 'Enumerable.ToLookup<TSource, TKey>(IEnumerable<TSource>, Func<TSource, TKey>)' cannot be inferred from the usage. Try specifying the type arguments explicitly. (Source code: ToLookup)
+[13:06:14 INF] Safe Mode! Stryker will remove all mutations in GetEnumerator and mark them as 'compile error'.
+[13:06:18 INF] 4781 mutants created
+[13:06:18 INF] Capture mutant coverage using 'CoverageBasedTest' mode.
+[13:06:40 INF] 2     mutants got status CompileError. Reason: Could not be injected in code.
+[13:06:40 INF] 301   mutants got status CompileError. Reason: Mutant caused compile errors
+[13:06:40 INF] 5     mutants got status NoCoverage.   Reason: Not covered by any test.
+[13:06:40 INF] 9     mutants got status Ignored.      Reason: Removed by block already covered filter
+[13:06:40 INF] 4439  mutants got status Ignored.      Reason: Removed by mutate filter
+[13:06:40 INF] 4756  total mutants are skipped for the above mentioned reasons
+[13:06:40 INF] 25    total mutants will be tested
+
+
+All mutants have been tested, and your mutation score has been calculated
+…
+Your json report has been generated at:
+file://C:/tmp/learn-vexflow-vextab/code/repository-dogfooding-lab/test-quality/o
+ut/stryker-T/reports/mutation-report.json
+
+Your Markdown summary has been generated at:
+file://C:/tmp/learn-vexflow-vextab/code/repository-dogfooding-lab/test-quality/o
+ut/stryker-T/reports/mutation-report.md
+[13:06:52 INF] Time Elapsed 00:02:13.1577554
+[13:06:52 INF] The final mutation score is 83.33 %
