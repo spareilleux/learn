@@ -65,7 +65,7 @@ Cada enlace a código de IX en las lecciones apunta a ese commit, así que los n
 
 ## Plan
 
-Las lecciones 1 a 8 están escritas. El resto es el plan, una lección por familia de algoritmos que IX implementa, y cada una se publicará con su código y su comprobación cruzada como las demás.
+Las lecciones 1 a 9 están escritas. El resto es el plan, una lección por familia de algoritmos que IX implementa, y cada una se publicará con su código y su comprobación cruzada como las demás.
 
 | # | Lección | Crates de IX | Si conoces ML.NET |
 |---|---|---|---|
@@ -77,7 +77,7 @@ Las lecciones 1 a 8 están escritas. El resto es el plan, una lección por famil
 | 6 | [Conjuntos: bagging, bosques aleatorios y gradient boosting](06-ensembles/) | `ix-ensemble` | `FastForest`, `LightGbm` |
 | 7 | [Redes neuronales, y las diferencias finitas como juez](07-neural-networks/) | `ix-nn` | — |
 | 8 | [Optimización: descenso, momento, Adam y búsquedas sin gradiente](08-optimization/) | `ix-optimize`, `ix-math` | — |
-| 9 | Los demás reductores: t-SNE, MDS, ACP con núcleo, NMF, LDA | `ix-unsupervised` | — |
+| 9 | [Los demás reductores: MDS, ACP con núcleo, NMF, LDA, t-SNE](09-other-reducers/) | `ix-unsupervised` | — |
 | 10 | Secuencias: cadenas de Markov, modelos ocultos de Markov y Viterbi | `ix-graph` | — |
 | 11 | Contar sin contar: filtros de Bloom, HyperLogLog, count-min, cuco | `ix-probabilistic` | — |
 | 12 | Diferenciación automática: la cinta de Wengert | `ix-autograd` | — |

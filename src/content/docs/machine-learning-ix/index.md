@@ -65,7 +65,7 @@ Every link to IX code in the lessons points to that commit, so the line numbers 
 
 ## Outline
 
-Lessons 1 to 8 are written. The rest is the plan, one lesson per family of algorithms IX implements, and each will be published with its code and its cross-check like the others.
+Lessons 1 to 9 are written. The rest is the plan, one lesson per family of algorithms IX implements, and each will be published with its code and its cross-check like the others.
 
 | # | Lesson | IX crates | If you know ML.NET |
 |---|---|---|---|
@@ -77,7 +77,7 @@ Lessons 1 to 8 are written. The rest is the plan, one lesson per family of algor
 | 6 | [Ensembles: bagging, random forests and gradient boosting](06-ensembles/) | `ix-ensemble` | `FastForest`, `LightGbm` |
 | 7 | [Neural networks, and finite differences as the judge](07-neural-networks/) | `ix-nn` | — |
 | 8 | [Optimization: descent, momentum, Adam, and searches without a gradient](08-optimization/) | `ix-optimize`, `ix-math` | — |
-| 9 | The other reducers: t-SNE, MDS, kernel PCA, NMF, LDA | `ix-unsupervised` | — |
+| 9 | [The other reducers: MDS, kernel PCA, NMF, LDA, t-SNE](09-other-reducers/) | `ix-unsupervised` | — |
 | 10 | Sequences: Markov chains, hidden Markov models and Viterbi | `ix-graph` | — |
 | 11 | Counting without counting: Bloom filters, HyperLogLog, count-min, cuckoo | `ix-probabilistic` | — |
 | 12 | Automatic differentiation: the Wengert tape | `ix-autograd` | — |
