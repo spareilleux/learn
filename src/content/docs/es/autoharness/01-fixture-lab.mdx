@@ -1,0 +1,351 @@
+---
+title: 1. Un laboratorio de fixtures — seis promesas probadas sin instalar
+description: Ejecutar las partes de AutoHarness que no necesitan modelo — su promotor, su cola de intenciones, su almacén de skills y su redactor de secretos — en subprocesos aislados con un directorio personal desechable, frente a seis fixtures escritas antes de la primera ejecución, y ver dónde se rompe su promesa de dejar en paz tus skills.
+sidebar:
+  order: 1
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Código: [`code/autoharness/fixtures.py`](https://github.com/spareilleux/learn/blob/main/code/autoharness/fixtures.py), que produce todos los resultados de esta lección, y [`redact_probe.py`](https://github.com/spareilleux/learn/blob/main/code/autoharness/redact_probe.py) para los ejercicios. Las predicciones están en [`results/preregistration.md`](https://github.com/spareilleux/learn/blob/main/code/autoharness/results/preregistration.md), la salida en bruto en [`results/fixtures-run.jsonl`](https://github.com/spareilleux/learn/blob/main/code/autoharness/results/fixtures-run.jsonl). Medido en Windows 11 con Python 3.14.2; Linux y macOS están *por verificar*.
+
+## Lo que funciona sin modelo
+
+[AutoHarness](https://github.com/tigerless-labs/autoharness) es un plugin de Claude Code. Su [`hooks.json`](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/hooks/hooks.json#L1-L16) registra el mismo comando, `python3 -m autoharness.hook.dispatch`, en cuatro [eventos de hook](https://code.claude.com/docs/en/hooks): `SessionStart`, `PreToolUse`, `Stop` y `SessionEnd`. Todo lo demás se deriva de ahí.
+
+```mermaid
+flowchart LR
+    Hooks["Hooks<br/>SessionStart, PreToolUse,<br/>Stop, SessionEnd"] --> Dispatch["dispatch.py"]
+    Dispatch -- "cada 50 llamadas a herramientas,<br/>y al final de la sesión" --> Reflector["Reflector<br/>claude -p con Haiku"]
+    Reflector -- "stage_skill (MCP)" --> Queue["Cola de intenciones<br/>intents/run-id.jsonl"]
+    Queue --> Promoter["Promotor<br/>validar y luego escribir"]
+    Dispatch -- "en cada Stop" --> Promoter
+    Promoter --> Skills[".claude/skills/name/<br/>SKILL.md + .sidecar.json"]
+    Skills -- "siguiente SessionStart" --> Index["Índice de skills inyectado<br/>en la nueva sesión"]
+```
+
+Solo una caja implica un modelo. El *reflector* es un `claude -p --agent autoharness:reflector --dangerously-skip-permissions` en segundo plano ([`spawn.py`, líneas 90-96](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/hook/spawn.py#L90-L96)) con Haiku ([`reflector.md`](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/agents/reflector.md#L1-L6)). Lee la parte reciente del transcript y *propone* cambios: cada propuesta, una **intención** (*intent*), es una línea JSON como `{"action": "create", "name": "…", "level": "project", "body": "…"}` añadida a una cola. Sus herramientas son `Read`, `Grep`, `Glob` y la herramienta de encolado: no escribe skills por sí mismo.
+
+El **promotor** decide qué llega al disco. Lee la cola, comprueba cada intención, escribe `SKILL.md` y un `.sidecar.json` que dice de quién es la skill, y vacía la cola. Se ejecuta cuando termina cada reflector y en cada `Stop` de tu propia sesión ([`dispatch.py`, línea 97](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/hook/dispatch.py#L93-L99)), sin preguntar a nadie.
+
+El promotor, la cola, el almacén de skills y el redactor son Python corriente, que solo usa la biblioteca estándar. Reciben sus carpetas como argumentos. Esa es la parte que ejecuta este laboratorio: proponga lo que proponga el modelo, son estas funciones las que deciden qué pasa en el disco, y se pueden llamar con una intención escrita a mano. El equivalente en .NET es probar un manejador de mensajes dándole un mensaje, sin el bus de servicio.
+
+## Conseguir el espécimen sin instalarlo
+
+Instalar el plugin registraría sus hooks en tu Claude Code. Un clon no: es una carpeta de archivos mientras nada los importe. Clónalo y fija el commit que estudió este curso:
+
+```bash
+git clone https://github.com/tigerless-labs/autoharness.git autoharness-ca39a72
+git -C autoharness-ca39a72 checkout --detach ca39a72e4353ebef11b7de13c1fc7fa5f4df421b
+```
+
+El clon puede estar en cualquier sitio; los comandos de abajo suponen que está junto a `fixtures.py`, en `code/autoharness/`. Desde ahí, imprime la huella de las entradas de cada fixture. Esto no importa nada de AutoHarness:
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+```bash
+python fixtures.py --hashes
+```
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```bash
+python3 fixtures.py --hashes
+```
+
+</TabItem>
+<TabItem label="macOS">
+
+```bash
+python3 fixtures.py --hashes
+```
+
+</TabItem>
+</Tabs>
+
+```
+F0 83539d1aa8d00fc436994ec02255b94eef38f8e246556a023e68e130823585c0
+F1 6b2a45a43418ce1421db9fa41d2f150ab6f76d8441f1fc0fce4c81a2740fce03
+F2 3c80d64fa379c4ccd426a66cebe88845cc29ca9b4be78596606695b1157dd419
+F3 fcb3d2e95a180ff89626b5a254e4a7f3d4c6239e09689b72359239314c3d6c9a
+F4 b60a8e5ecd1e33355b3fa90b76f8f45052fa391261ebbcf7448e928fb825bae3
+F5 6b895ca2e28a6f8a0de9c1eeb179e1d2dae0449076781b831d9d0bdad4d0cb47
+```
+
+Cada huella es el SHA-256 de las entradas de una fixture: son los seis valores que la prerregistración anotó antes de la primera ejecución. Si tus números difieren, no estás ejecutando las mismas fixtures, y los resultados de abajo no se aplican a ti. AutoHarness necesita [Python](https://www.python.org/downloads/) 3.11 o posterior; no se instala nada más.
+
+## Un entorno construido desde cero
+
+Un subproceso normalmente hereda todas las variables de entorno de su padre. Para este espécimen, eso importa por tres motivos:
+- AutoHarness lee sus ajustes de variables `AUTOHARNESS_*` en el momento en que se importa;
+- encuentra la carpeta global de skills mediante [`Path.home()`](https://docs.python.org/3/library/pathlib.html), que lee `USERPROFILE` en Windows y `HOME` en los demás sistemas ([`layer.py`, líneas 54-58](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/lib/layer.py#L54-L58));
+- su propio lanzador copia todo el entorno del padre en el reflector ([`spawn.py`, líneas 99-104](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/hook/spawn.py#L99-L104)), credenciales incluidas.
+
+Así que `fixtures.py` nunca deja que una fixture herede nada. Cada una se ejecuta en un [subproceso](https://docs.python.org/3/library/subprocess.html) nuevo cuyo entorno se construye aquí, clave por clave:
+
+```python
+def minimal_env(clone, home, utf8):
+    env = {"PATH": str(Path(sys.executable).parent), "PYTHONPATH": str(Path(clone) / "src"),
+           "HOME": str(home), "USERPROFILE": str(home), "TEMP": str(home), "TMP": str(home),
+           "PYTHONDONTWRITEBYTECODE": "1", "PYTHONIOENCODING": "utf-8"}
+    if os.name == "nt":
+        env["SYSTEMROOT"] = os.environ.get("SYSTEMROOT", r"C:\Windows")  # el intérprete no arranca sin ella
+    if utf8 is not None:
+        env["PYTHONUTF8"] = utf8
+    return env
+```
+
+El directorio personal es una [carpeta temporal](https://docs.python.org/3/library/tempfile.html), creada para cada fixture y borrada después, y el directorio de trabajo está dentro de ella. Cada llamada recibe carpetas explícitas (`roots={"global": …, "project": …}`), así que ninguna ruta se deriva del directorio personal real ni de un repositorio. El hijo solo importa `hook.promoter` y `lib.*`. Nunca importa `hook.spawn`, el módulo que lanza `claude`: no se puede llamar a ningún modelo, ni siquiera por accidente.
+
+Cada fixture lleva dos comprobaciones, porque un aislamiento que solo se pretende no es aislamiento:
+- después de la fixture, se lista el directorio personal desechable: `home_writes` debe estar vacío;
+- antes y después de toda la ejecución, el padre comprueba si existe el `~/.claude/autoharness` real. Las dos respuestas deben coincidir.
+
+El [curso de SlashForge](../../slashforge/01-what-the-installer-writes/) usó el mismo truco de `HOME` y `USERPROFILE` con un instalador. La diferencia aquí es que el código probado se importa, así que las variables que podría leer deben eliminarse, no solo redirigirse.
+
+## Escribir primero la predicción
+
+Cada fixture se escribió antes de ejecutar nada, en [`preregistration.md`](https://github.com/spareilleux/learn/blob/main/code/autoharness/results/preregistration.md), con:
+- la pregunta, y una hipótesis sacada de leer el código, con las líneas;
+- la huella de las entradas;
+- un **control**, que debe comportarse como el código pretende, para que un fallo del tratamiento signifique algo;
+- el resultado esperado si la hipótesis se sostiene, y el **falsador**: el resultado que demostraría que es falsa.
+
+El archivo se hasheó a las 15:29:21 EDT, antes de la primera ejecución (SHA-256 `b9dc7b7d…`). Todo lo que está antes de su título *Post-measurement edits* sigue siendo idéntico byte a byte a esa versión. Los cambios hechos después de la ejecución figuran allí, con su hora y su motivo. Es la práctica que el [Laboratorio de dogfooding de repositorios](../../repository-dogfooding-lab/) aplica a los experimentos entre repositorios: una hipótesis escrita después del resultado siempre se puede ajustar para que encaje.
+
+## Las seis fixtures
+
+Ejecútalas todas:
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+```bash
+python fixtures.py --clone autoharness-ca39a72
+```
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```bash
+python3 fixtures.py --clone autoharness-ca39a72
+```
+
+</TabItem>
+<TabItem label="macOS">
+
+```bash
+python3 fixtures.py --clone autoharness-ca39a72
+```
+
+</TabItem>
+</Tabs>
+
+`fixtures.py` rechaza un clon en cualquier otro commit. Ejecuta de F0 a F5, luego F4 otra vez con el modo UTF-8 activado, e imprime una línea JSON por ejecución. Todo tardó 14 segundos. Abajo, cada línea se reduce a sus mediciones y se sangra para leerla mejor. Los campos que también lleva cada línea valían `"exit": 0`, `"stderr_tail": ""` y `"home_writes": []` en todas, además de `pythonutf8` y la huella mostrada arriba.
+
+### F0 — el control positivo
+
+Un `create` válido con un nombre nuevo debe llegar al disco. Si no, el arnés no estaría alcanzando al promotor, y todos los demás resultados serían nulos.
+
+```json
+{"fixture": "F0", "ok": true, "findings": [], "agent_created": true}
+```
+
+### F1 — un `create` con el nombre de tu skill
+
+El README dice que AutoHarness toca *«only the skills it wrote itself»* (solo las skills que escribió él mismo, [línea 10](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/README.md#L8-L11)), y *«Yours are never touched»* (las tuyas nunca se tocan, [línea 229](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/README.md#L229-L230)). El código lo hace cumplir con el sidecar, pero solo para algunas acciones:
+- la comprobación de propiedad, *target live skill not created_by:agent*, se aplica a `update`, `patch`, `remove_file` y `delete` ([`validate.py`, líneas 211-212](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/lib/validate.py#L211-L212), [`promoter.py`, línea 158](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/hook/promoter.py#L158));
+- para `create`, el nivel de destino es simplemente el de la intención ([líneas 51-53](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/hook/promoter.py#L51-L53)), y nada comprueba si ya existe una skill con ese nombre;
+- al escribir, se guarda el cuerpo y luego se estampa un sidecar nuevo ([líneas 129-133](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/hook/promoter.py#L129-L133)).
+
+La fixture escribe una skill hecha a mano llamada `notes`, cuyo cuerpo contiene la línea `HAND-WRITTEN SENTINEL 7f3a`, sin sidecar. El control va primero: un `update` de `notes` debe rechazarse. Después viene el tratamiento: un `create` llamado `notes`.
+
+```json
+{"fixture": "F1",
+ "control_update": {"ok": false, "findings": ["self_produced"], "body_unchanged": true},
+ "create": {"ok": true, "findings": [], "sentinel_survives": false,
+            "agent_created_after": true, "archived_copy": false}}
+```
+
+La protección existe: el `update` se rechaza y el cuerpo queda intacto. El `create` la esquiva. El texto escrito a mano ha desaparecido sin copia archivada, y el sidecar dice ahora que la skill es del agente. A partir de ahí, el promotor la trata como propia: puede actualizarla, parchearla y archivarla cuando deje de usarse. **Confirmada.**
+
+Lo que la fixture no dice es con qué frecuencia un reflector propondría un `create` así. Eso depende del modelo y de los nombres de tus skills, y es el primer punto de la evidencia que falta en la evaluación.
+
+### F2 — una línea truncada en la cola
+
+`drain` barre, lee toda la cola, promueve cada intención, lleva la cuenta y luego vacía la cola ([`promoter.py`, líneas 231-240](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/hook/promoter.py#L231-L240)). La lectura analiza cada línea con [`json.loads`](https://docs.python.org/3/library/json.html) antes de promover nada ([`intent_queue.py`, línea 33](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/lib/intent_queue.py#L29-L33)). La predicción: una línea truncada, del tipo que deja una caída a mitad de una escritura, lo detiene todo, cada vez.
+
+El control vacía dos veces una cola con dos intenciones válidas. El tratamiento pone `{"action": "create", "name": "gam` entre dos intenciones válidas, y vacía dos veces.
+
+```json
+{"fixture": "F2",
+ "control": {"attempts": [{"raised": null, "landed": 2}, {"raised": null, "landed": 0}], "queue_left": false},
+ "treatment": {"attempts": [{"raised": "JSONDecodeError"}, {"raised": "JSONDecodeError"}],
+               "queue_left": true, "landed_names": []}}
+```
+
+Ninguna de las dos intenciones válidas llega al disco, y el archivo de la cola se queda, así que el siguiente vaciado falla igual. Nada reintenta ni se salta la línea: queda atascado hasta que alguien borre el archivo. **Confirmada.** En una sesión real, `dispatch` captura todas las excepciones y las convierte en un campo `error` de su respuesta ([`dispatch.py`, líneas 128-129](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/hook/dispatch.py#L128-L129)), así que la sesión sigue como si nada. Esa parte se ha leído en el código, no se ha ejecutado.
+
+### F3 — lo que el redactor deja pasar
+
+Antes de entregar una ventana del transcript al reflector, AutoHarness la pasa por diez expresiones regulares ([`redaction_rules.toml`](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/lib/redaction_rules.toml)). Dos de ellas facilitaban las predicciones:
+- `api_key_assignment` admite una comilla opcional *después* del `:` o del `=`, pero ninguna entre la clave y los dos puntos ([línea 27](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/lib/redaction_rules.toml#L25-L27)). La forma JSON `"api_key": "…"` tiene una justo ahí, y un transcript está hecho de líneas JSON;
+- `private_key_block` solo reconoce la línea `-----BEGIN … PRIVATE KEY-----` ([línea 11](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/lib/redaction_rules.toml#L10-L11)), no el material de la clave debajo.
+
+La fixture usa un canario inventado, `CANARYabcdefghij0123456789`. El control es la forma para la que se escribió la regla, `api_key = CANARY…`.
+
+```json
+{"fixture": "F3", "results": {
+ "assignment":  {"canary_survives": false, "redacted": "[REDACTED:secret:api_key_assignment]"},
+ "json_quoted": {"canary_survives": true,  "redacted": "{\"api_key\": \"CANARYabcdefghij0123456789\"}"},
+ "pem":         {"canary_survives": true,  "redacted": "[REDACTED:[REDACTED:secret:api_key_assignment]]\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCCANARYabcdefghij0123456789\n-----END PRIVATE KEY-----"}}}
+```
+
+**Confirmada** para los dos tratamientos. La línea PEM muestra algo que no estaba previsto: la cabecera se redactó dos veces. `private_key_block` escribió `[REDACTED:secret:private_key_block]`, y luego `api_key_assignment` reconoció `secret:private_key_block` dentro de esa etiqueta. El nombre de la regla que se activó primero se pierde. Queda anotado como exploratorio, porque no se escribió ninguna hipótesis para ello.
+
+### F4 — una skill no ASCII en Windows
+
+Esta hipótesis surgió al releer el código mientras se escribía la prerregistración:
+- AutoHarness siempre escribe en UTF-8 ([`atomic.py`, líneas 31-32](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/lib/atomic.py#L31-L32));
+- lee con [`read_text()`](https://docs.python.org/3/library/pathlib.html#pathlib.Path.read_text) sin codificación ([`skill_store.py`, línea 28](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/lib/skill_store.py#L26-L28), y lo mismo en `intent_queue.py`, `sidecar.py` y `ledger.py`);
+- sin codificación, Python usa la de la configuración regional, que en esta máquina es cp1252.
+
+La fixture escribe una skill titulada `# Café Á`. El control es la misma fixture con el [modo UTF-8](https://docs.python.org/3/library/os.html#utf8-mode) de Python activado (`PYTHONUTF8=1`).
+
+```json
+{"fixture": "F4", "read_back": {"raised": "UnicodeDecodeError", "detail": "'charmap' codec can't decode byte 0x81 in position 79: character maps to <undefined>"}, "ok": true, "bytes_are_utf8": true, "utf8_mode": 0}
+{"fixture": "F4", "read_back": {"raised": null, "equal": true, "title_line": "# Café Á"}, "ok": true, "bytes_are_utf8": true, "utf8_mode": 1}
+```
+
+`Á` es `C3 81` en UTF-8, y 0x81 no tiene significado en cp1252: la skill que AutoHarness acaba de escribir no se puede volver a leer. **Confirmada**, solo en Windows. El badge de plataformas del README dice *Linux | macOS* ([línea 5](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/README.md#L5)), así que queda fuera de lo que el proyecto dice soportar. Importa a quien use Claude Code en Windows de todos modos. La [PEP 686](https://peps.python.org/pep-0686/) hace del modo UTF-8 el predeterminado a partir de Python 3.15, lo que debería hacer desaparecer F4 allí: *por verificar*.
+
+### F5 — el barrido y tu `draft.tmp`
+
+Cada `drain` empieza barriendo los archivos temporales que hayan quedado ([`promoter.py`, líneas 199-204](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/hook/promoter.py#L199-L204)), y ese barrido borra todos los `*.tmp` bajo la carpeta de skills, recursivamente ([`skill_store.py`, líneas 82-90](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/lib/skill_store.py#L82-L90)). Los archivos temporales de AutoHarness terminan en `.tmp`, pero los tuyos también pueden. La fixture pone `draft.tmp` dentro de la skill escrita a mano `notes`, con `draft.txt` al lado como control, y vacía una cola vacía.
+
+```json
+{"fixture": "F5", "tmp_survives": false, "control_survives": true, "skill_survives": true}
+```
+
+Un vaciado en vacío, sin nada que promover, borró un archivo de una skill que no es de AutoHarness. **Confirmada.**
+
+### La comprobación de aislamiento
+
+La última línea de la ejecución:
+
+```json
+{"real_state_dir_existed_before": false, "exists_after": false}
+```
+
+Junto con `"home_writes": []` en cada fixture, esta es la evidencia de que la ejecución se quedó en su sandbox. La ejecución se repitió, y la segunda es igual a la primera, línea por línea.
+
+## Lo que muestran estos resultados, y lo que no
+
+Muestran que **nada en el código impide** estos desenlaces, cada vez frente a un control que se comportó como se pretendía. Tres de ellos contradicen directamente el README: F1 y F5 su promesa central sobre tus skills, F2 su promesa implícita de que el bucle sigue funcionando. F3 muestra un límite que el *«redacts at egress»* (redacta a la salida) del README ([línea 147](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/README.md#L147)) no menciona.
+
+No muestran:
+- **con qué frecuencia** ocurre. F1 necesita que el reflector proponga un `create` cuyo nombre choque con una skill tuya, y solo una ejecución con un modelo diría con qué frecuencia lo hace;
+- nada sobre **Linux y macOS**. F0–F3 y F5 no dependen del sistema operativo en el código leído, pero eso está *por verificar*, no medido;
+- nada sobre las **skills** que escribe el reflector, ni sobre lo que cuesta una sesión. No se llamó a ningún modelo.
+
+Las pruebas de upstream se leyeron antes de ejecutar nada. `test_update_requires_agent_created` cubre el control de F1, y `test_drain_sweeps_orphan_tmp` cubre el barrido, con un `.tmp` que es de AutoHarness. Ninguna prueba crea encima de una skill escrita a mano ni da a `drain` una línea inválida: así es como todo esto pasa su CI.
+
+## El arnés se equivocó dos veces
+
+Un laboratorio también puede tener errores, y este tuvo dos. Ambos se encontraron después de la ejecución, ambos constan en los *Post-measurement edits* de la prerregistración, y ninguno cambió un resultado.
+
+1. **El error de F4, en el arnés.** La salida de la primera ejecución se redirigió a un archivo, y el stdout del padre usaba cp1252: la misma clase de error que F4. Solo afectó a cómo se mostraba una cadena. `fixtures.py` llama ahora a `sys.stdout.reconfigure(encoding="utf-8")`, y una segunda ejecución se decodifica en las mismas ocho líneas.
+2. **Una comprobación que no podía fallar.** Al repetir los comandos del README del código desde un clon nuevo con una ruta `--clone` *relativa*, fallaron todos los hijos: `PYTHONPATH` no se resolvía desde el directorio de trabajo temporal del hijo. El padre salió igualmente con 0. Ahora:
+   - la ruta se vuelve absoluta;
+   - la línea de un hijo que falló sigue nombrando su fixture;
+   - el padre sale con 1 si algún hijo falló.
+
+   La nueva ejecución es idéntica byte a byte a la salida registrada.
+
+La segunda es la lección más útil. Un arnés que sale con 0 pase lo que pase anuncia un éxito en una ejecución donde no se midió nada. El arreglo no es solo la ruta: es hacer visible el fallo en el código de salida y luego comprobar que lo es — `run_fixture("C:/nonexistent-clone", "F0")` devuelve ahora `exit: 1`.
+
+## Puntos clave
+
+- En AutoHarness, un modelo propone y un promotor determinista escribe. El promotor se puede probar sin el modelo dándole intenciones.
+- Aísla el código importado construyendo su entorno desde cero, no editando el del padre: un `HOME` y un `USERPROFILE` desechables, carpetas explícitas, y ningún import del módulo que lanza `claude`.
+- Escribe la pregunta, la hipótesis, el control y el falsador antes de la ejecución, hashea el archivo y anota cada cambio posterior con su motivo.
+- En `ca39a72`:
+  - un `create` sustituye una skill escrita a mano y se la apropia (F1);
+  - un vaciado en vacío borra tus `*.tmp` (F5);
+  - una sola línea inválida en la cola detiene la promoción para siempre (F2);
+  - el redactor deja pasar claves JSON y cuerpos PEM (F3);
+  - las skills no ASCII fallan en Windows (F4).
+- Una fixture muestra lo que nada impide, no con qué frecuencia ocurre.
+- Un arnés tiene que poder fallar: comprueba su código de salida en una ejecución que sabes rota.
+
+## Ejercicios
+
+1. Lee las reglas `bearer_token`, `api_key_assignment` y `email` ([líneas 22-31](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/lib/redaction_rules.toml#L22-L31)). Predice qué devuelve el redactor para cada una de estas cinco cadenas inventadas. Luego ejecuta `redact_probe.py` con ellas, con el comando que aparece después de los ejercicios.
+   - `password: hunter2hunter2`
+   - `{"password": "hunter2hunter2"}`
+   - `Authorization: Bearer abcdefghijklmnopqrstuvwxyz0123`
+   - `{"headers": {"Authorization": "Bearer abcdefghijklmnopqrstuvwxyz0123"}}`
+   - `postgres://admin:hunter2hunter2@db.example.com/prod`
+2. F1 ejecuta un `update` sobre la skill escrita a mano antes del `create`. ¿Qué habría mostrado F1 si ese `update` se hubiera aceptado, y por qué importa el orden?
+3. Escribe la prerregistración de una fixture nueva para esta afirmación del README: AutoHarness *«archives, never deletes»* (archiva, nunca borra). Parte de [`skill_store.archive`, líneas 56-65](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/lib/skill_store.py#L56-L65). Da la pregunta, la hipótesis con sus líneas, un control, el resultado esperado y el falsador.
+4. Vuelves a ejecutar `fixtures.py` en Linux con una configuración regional UTF-8. ¿Qué esperas de la primera línea de F4, y qué significaría que lanzara `UnicodeDecodeError` de todos modos?
+
+El comando del ejercicio 1, desde `code/autoharness/`:
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+En Git Bash, para que las comillas se comporten como en los otros sistemas:
+
+```bash
+python redact_probe.py --clone autoharness-ca39a72 "password: hunter2hunter2" '{"password": "hunter2hunter2"}' "Authorization: Bearer abcdefghijklmnopqrstuvwxyz0123" '{"headers": {"Authorization": "Bearer abcdefghijklmnopqrstuvwxyz0123"}}' "postgres://admin:hunter2hunter2@db.example.com/prod"
+```
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```bash
+python3 redact_probe.py --clone autoharness-ca39a72 "password: hunter2hunter2" '{"password": "hunter2hunter2"}' "Authorization: Bearer abcdefghijklmnopqrstuvwxyz0123" '{"headers": {"Authorization": "Bearer abcdefghijklmnopqrstuvwxyz0123"}}' "postgres://admin:hunter2hunter2@db.example.com/prod"
+```
+
+</TabItem>
+<TabItem label="macOS">
+
+```bash
+python3 redact_probe.py --clone autoharness-ca39a72 "password: hunter2hunter2" '{"password": "hunter2hunter2"}' "Authorization: Bearer abcdefghijklmnopqrstuvwxyz0123" '{"headers": {"Authorization": "Bearer abcdefghijklmnopqrstuvwxyz0123"}}' "postgres://admin:hunter2hunter2@db.example.com/prod"
+```
+
+</TabItem>
+</Tabs>
+
+<details>
+<summary>Solución</summary>
+
+1. La salida registrada ([`redact-probe.jsonl`](https://github.com/spareilleux/learn/blob/main/code/autoharness/results/redact-probe.jsonl)), un par `[input, output]` (entrada, salida) por línea:
+
+   ```json
+   ["password: hunter2hunter2", "[REDACTED:secret:api_key_assignment]"]
+   ["{\"password\": \"hunter2hunter2\"}", "{\"password\": \"hunter2hunter2\"}"]
+   ["Authorization: Bearer abcdefghijklmnopqrstuvwxyz0123", "Authorization: [REDACTED:[REDACTED:secret:api_key_assignment]]"]
+   ["{\"headers\": {\"Authorization\": \"Bearer abcdefghijklmnopqrstuvwxyz0123\"}}", "{\"headers\": {\"Authorization\": \"[REDACTED:[REDACTED:secret:api_key_assignment]]\"}}"]
+   ["postgres://admin:hunter2hunter2@db.example.com/prod", "postgres://admin:[REDACTED:pii:email]/prod"]
+   ```
+
+   - Las dos primeras son F3 otra vez: la misma contraseña se detecta en la forma `key: value` y se escapa en JSON.
+   - `Bearer` se detecta incluso dentro de JSON, porque a `bearer_token` no le importa lo que rodea al token. Su etiqueta la redacta después `api_key_assignment`, como en el caso PEM de F3, así que la salida ya no dice qué regla se activó.
+   - La URL es la sorpresa. Ninguna regla apunta a credenciales en una URL, pero `hunter2hunter2@db.example.com` parece una dirección de correo: la regla **email** quita la contraseña por accidente, junto con el host. El usuario `admin` se queda.
+
+   Quien lee el texto redactado no puede distinguir un correo filtrado de una contraseña filtrada.
+2. El `update` habría llegado al disco, y `body_unchanged` sería falso. Eso significaría que la comprobación de propiedad falta o está rota para todas las acciones, y el resultado del `create` no diría nada específico de `create`. Ejecutar primero el control, sobre la misma skill, es lo que permite a la fixture concluir que la protección existe y que `create` la esquiva. Si se ejecutara después, un `create` que ya hubiera estampado un sidecar haría que el `update` se aceptara legítimamente: el control estaría midiendo el efecto secundario del tratamiento.
+3. Por ejemplo:
+   - **Pregunta:** ¿archivar una skill por segunda vez conserva el primer archivo?
+   - **Hipótesis:** `archive` mueve `skills/<name>` a `.archive/<name>`, pero si `.archive/<name>` ya existe, antes llama a `shutil.rmtree` sobre él (líneas 62-63). Archivar, volver a crear y archivar de nuevo deja, por tanto, solo la segunda versión.
+   - **Control:** archivar dos skills con nombres distintos. Deben existir los dos archivos, lo que muestra que la carpeta de archivo funciona.
+   - **Esperado si la hipótesis se sostiene:** tras `create A1 → archive → create A2 → archive`, `.archive/<name>/SKILL.md` contiene el centinela de A2, y el de A1 no existe en ningún lugar del proyecto.
+   - **Falsador:** el centinela de A1 sobrevive en algún sitio, por ejemplo en un archivo numerado o fechado.
+   - **Condiciones de parada:** las mismas que para las demás fixtures. Añade una huella de las entradas y no ejecutes nada hasta que el archivo esté guardado y hasheado. Es H11 en la evaluación, prevista para la lección 4.
+4. Con una configuración regional UTF-8, `read_text()` sin codificación decodifica UTF-8: la primera línea de F4 debería parecerse al control, `raised: null`, `equal: true`. Si aun así lanzara la excepción, la hipótesis *«la causa es la codificación regional»* sería falsa, porque otra cosa estaría decodificando con otro códec. El resultado iría al diario como una refutación, con su salida. Por eso F4 está marcada *solo Windows* y no *corregida en otros sistemas*: la ejecución en Linux no ha ocurrido.
+
+</details>

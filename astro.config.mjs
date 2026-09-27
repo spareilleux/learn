@@ -229,6 +229,12 @@ export default defineConfig({
 									collapsed: true,
 									items: [{ autogenerate: { directory: 'gaia' } }],
 								},
+								{
+									label: 'AutoHarness, self-writing skills for Claude Code',
+									translations: { fr: "AutoHarness, des skills qui s'écrivent seuls pour Claude Code", es: 'AutoHarness, skills que se escriben solas para Claude Code' },
+									collapsed: true,
+									items: [{ autogenerate: { directory: 'autoharness' } }],
+								},
 							],
 						},
 					],
