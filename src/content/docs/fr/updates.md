@@ -12,6 +12,7 @@ Demandé, délégué, réalisé localement, fusionné, déployé et vérifié pu
 | Publication vérifiée | Publication ou vérification restante | Demandé, non livré |
 | --- | --- | --- |
 | [Leçon 9 de LadybugDB, laboratoire de graphe](../ladybugdb/09-graph-lab/) : PR #25 fusionnée en `438b320`, déploiement Pages réussi, leçon et entrée de journal EN/FR/ES relues anonymement | [Streeling MAT-003](../streeling/mathematics/) : source fusionnée dans Demerzel (`89a1bdb`) ; PR #26 du générateur fusionnée en `67ffd4e` et PR #24 du laboratoire Learn en `00ae641` ; synchronisation canonique en attente de revue | Modules de mathématiques Streeling au-delà de MAT-001 et MAT-003 : aucun n'existe encore dans la source canonique ; MAT-002 et MAT-004 sont en file d'attente |
+| | [Tracer-bullet Rust avancé](../rust-advanced/) : mission, première leçon mesurée et journal trilingue préparés sur `codex/rust-advanced-tracer-20260927` ; PR, CI, fusion, déploiement Pages et relecture anonyme en attente | |
 
 Ce tableau ajoute ce qui a été réglé ou ouvert le 2026-09-27 ; celui du 2026-09-26 ci-dessous est inchangé.
 
@@ -50,6 +51,12 @@ La [PR Learn #25](https://github.com/spareilleux/learn/pull/25) a été fusionn�
 Le module, l'index des mathématiques, l'[entrée du journal Streeling](../streeling/journal/) et le tableau du 2026-09-27 ci-dessus ont été relus anonymement dans les trois langues. Ce tableau est un état pris avant ces fusions, et il reste tel qu'il a été écrit.
 
 Ces deux éléments passent donc de « restant » à « vérifié ». Le catalogue de mathématiques compte toujours deux modules, MAT-001 et MAT-003.
+
+## 2026-09-27 — Tracer-bullet Rust avancé préparé
+
+Le [cours Rust avancé](../rust-advanced/) possède désormais un plan de douze leçons fondées sur des preuves et une première tranche verticale complète : disposition mémoire et représentation, crate Cargo indépendante, sortie capturée et contrat compile-fail. La mission, la leçon et le [journal du cours](../rust-advanced/journal/) existent en anglais, français et espagnol.
+
+Le gate local a réussi sous Windows avec Rust 1.94.0. C'est un candidat, pas une publication : la branche doit encore passer par une pull request, la CI hébergée sur trois systèmes, une fusion, un déploiement Pages et une relecture publique anonyme. Le tableau de livraison le conserve donc dans **Publication ou vérification restante**.
 
 ## À vérifier
 

@@ -1,0 +1,50 @@
+name: Advanced Rust course examples
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'code/rust-advanced/**'
+      - 'src/content/docs/rust-advanced/**'
+      - 'src/content/docs/fr/rust-advanced/**'
+      - 'src/content/docs/es/rust-advanced/**'
+      - '.github/workflows/rust-advanced-examples.yml'
+  pull_request:
+    paths:
+      - 'code/rust-advanced/**'
+      - 'src/content/docs/rust-advanced/**'
+      - 'src/content/docs/fr/rust-advanced/**'
+      - 'src/content/docs/es/rust-advanced/**'
+      - '.github/workflows/rust-advanced-examples.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  rust:
+    name: rust-advanced (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+        working-directory: code/rust-advanced
+    steps:
+      - uses: actions/checkout@v7
+      - name: Rust 1.94.0 toolchain
+        run: |
+          rustup toolchain install 1.94.0 --profile minimal --component rustfmt,clippy
+          rustup override set 1.94.0
+          rustup show active-toolchain
+          cargo --version
+      - name: Formatting, clippy, tests and captured output
+        run: bash check.sh
+      - name: Compile-fail error code on nightly
+        if: runner.os == 'Linux'
+        run: |
+          rustup toolchain install nightly --profile minimal
+          cargo +nightly test --doc
