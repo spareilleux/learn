@@ -12,3 +12,4 @@ sidebar:
 ## Modules
 
 - [MAT-001 · Proof Strategies — How to Prove Things](mat-001-proof-strategies/)
+- [MAT-003 · Floating-Point Arithmetic and Conditioning — When a Computer Loses Digits](mat-003-floating-point-conditioning/)

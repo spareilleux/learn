@@ -52,6 +52,8 @@ Marca un módulo una vez estudiado. En **Notas**, añade una entrada fechada: lo
 
 - [ ] [MAT-001 · Estrategias de demostración](../mathematics/mat-001-proof-strategies/) <!-- mat-001-proof-strategies -->
 
+- [ ] [MAT-003 · Aritmética de punto flotante y condicionamiento](../mathematics/mat-003-floating-point-conditioning/) <!-- mat-003-floating-point-conditioning -->
+
 ### Música
 
 - [ ] [MUS-001 · ¿Qué es un acorde?](../music/mus-001-what-is-a-chord/) <!-- mus-001-what-is-a-chord -->
@@ -98,3 +100,11 @@ Marca un módulo una vez estudiado. En **Notas**, añade una entrada fechada: lo
 ## Notas
 
 <!-- ## AAAA-MM-DD — CÓDIGO · Título -->
+
+## 2026-09-27 — MAT-003 · Aritmética de punto flotante y condicionamiento
+
+Sincronizado desde Demerzel en el commit [`89a1bdb`](https://github.com/GuitarAlchemist/Demerzel/commit/89a1bdb2801d32424dd17287ba67185572610277) (PR n.º 1134). Los números del módulo vienen del laboratorio de Learn [`code/streeling-mathematics`](https://github.com/spareilleux/learn/tree/c8135fa508fcb9d35593e8dedbb925c44282b3a2/code/streeling-mathematics), que fija `ix-math` de IX en `e35138b9` y comprueba las matrices de Hilbert H_2 a H_16 contra su inversa entera exacta. Se midieron en Windows 11 x86-64; la CI alojada reprodujo la salida impresa en Linux, Windows y macOS.
+
+- La función `inverse` de IX responde `Singular` por primera vez en n = 11. Multiplicar H por 2^-20 adelanta ese umbral a n = 6; multiplicarla por 2^20 lo elimina hasta n = 16, y una inversa aceptada en n = 14 tiene un error hacia delante de 1,04 (ningún dígito correcto).
+- Error encontrado y corregido antes de publicar: el κ₂ de IX cae por debajo de κ∞/n desde n = 10, y una primera lectura lo tomó como prueba de una SVD errónea. La banda κ∞/n ≤ κ₂ ≤ κ∞ vale para una sola matriz, y el laboratorio comparaba la H_n exacta con la fl(H_n) almacenada: es una observación, no un defecto.
+- Sigue abierto: multiplicar fl(H) por una potencia de dos exacta cambia el κ₂ de IX (bits idénticos en las tres escalas para 5 de 15 tamaños), así que al menos dos de las tres respuestas no son el κ₂ de su entrada. Cuál es la correcta no está establecido.

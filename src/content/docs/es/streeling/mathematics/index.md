@@ -12,3 +12,4 @@ sidebar:
 ## Módulos
 
 - [MAT-001 · Estrategias de demostracion — Como probar cosas](mat-001-proof-strategies/)
+- [MAT-003 · Aritmética de punto flotante y condicionamiento — Cuando una computadora pierde dígitos](mat-003-floating-point-conditioning/)

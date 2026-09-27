@@ -52,6 +52,8 @@ Tick a module once studied. Under **Notes**, add a dated entry: what I understoo
 
 - [ ] [MAT-001 · Proof Strategies](../mathematics/mat-001-proof-strategies/) <!-- mat-001-proof-strategies -->
 
+- [ ] [MAT-003 · Floating-Point Arithmetic and Conditioning](../mathematics/mat-003-floating-point-conditioning/) <!-- mat-003-floating-point-conditioning -->
+
 ### Music
 
 - [ ] [MUS-001 · What Is a Chord?](../music/mus-001-what-is-a-chord/) <!-- mus-001-what-is-a-chord -->
@@ -98,3 +100,11 @@ Tick a module once studied. Under **Notes**, add a dated entry: what I understoo
 ## Notes
 
 <!-- ## YYYY-MM-DD — CODE · Title -->
+
+## 2026-09-27 — MAT-003 · Floating-Point Arithmetic and Conditioning
+
+Synced from Demerzel at [`89a1bdb`](https://github.com/GuitarAlchemist/Demerzel/commit/89a1bdb2801d32424dd17287ba67185572610277) (PR #1134). The module's numbers come from the Learn lab [`code/streeling-mathematics`](https://github.com/spareilleux/learn/tree/c8135fa508fcb9d35593e8dedbb925c44282b3a2/code/streeling-mathematics), which pins IX `ix-math` at `e35138b9` and checks the Hilbert matrices H_2 to H_16 against their exact integer inverse. They were measured on Windows 11 x86-64; hosted CI reproduced the printed output on Linux, Windows and macOS.
+
+- IX's `inverse` first answers `Singular` at n = 11. Multiplying H by 2^-20 moves that to n = 6; multiplying it by 2^20 removes it up to n = 16, and an inverse accepted at n = 14 has a forward error of 1.04 (no correct digit).
+- Error found and corrected before publication: IX's κ₂ falls below κ∞/n from n = 10, and a first reading took that as proof of a wrong SVD. The band κ∞/n ≤ κ₂ ≤ κ∞ holds for one matrix, and the lab compared the exact H_n with the stored fl(H_n): an observation, not a defect.
+- Still open: multiplying fl(H) by an exact power of two changes IX's κ₂ (identical bits at the three scales for 5 sizes out of 15), so at least two of the three answers are not κ₂ of their input. Which one is right is not established.

@@ -7,6 +7,14 @@ description: Publications, preuves de livraison et demandes non terminées.
 
 Demandé, délégué, réalisé localement, fusionné, déployé et vérifié publiquement sont des états distincts. Un agent actif ou une PR ouverte n'est pas une livraison. Chaque entrée vérifiée doit indiquer une révision, des preuves de validation et une destination publique. Ce journal est un état daté, pas une connexion en direct à GitHub ou wmux.
 
+## Tableau de livraison — 2026-09-27
+
+| Publication vérifiée | Publication ou vérification restante | Demandé, non livré |
+| --- | --- | --- |
+| [Leçon 9 de LadybugDB, laboratoire de graphe](../ladybugdb/09-graph-lab/) : PR #25 fusionnée en `438b320`, déploiement Pages réussi, leçon et entrée de journal EN/FR/ES relues anonymement | [Streeling MAT-003](../streeling/mathematics/) : source fusionnée dans Demerzel (`89a1bdb`) ; PR #24 du laboratoire Learn, PR #26 du générateur et synchronisation canonique en attente de revue | Modules de mathématiques Streeling au-delà de MAT-001 et MAT-003 : aucun n'existe encore dans la source canonique ; MAT-002 et MAT-004 sont en file d'attente |
+
+Ce tableau ajoute ce qui a été réglé ou ouvert le 2026-09-27 ; celui du 2026-09-26 ci-dessous est inchangé.
+
 ## Tableau de livraison — 2026-09-26
 
 | Publication vérifiée | Publication ou vérification restante | Demandé, non livré |
