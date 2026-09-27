@@ -96,6 +96,7 @@ Esta red tiene doce marcados alcanzables, nunca se interbloquea, y la plaza `fre
 | 13 | [Frente a otros formalismos: TLA+, statecharts, álgebras de procesos, autómatas temporizados](13-against-other-formalisms/) | un segundo espacio de estados, calculado en otra parte |
 | 14 | [En nuestros sistemas: pipelines C# y lanes de agentes](14-on-our-systems/) | [C# avanzado](../csharp-advanced/); RabbitMQ y Kubernetes son experimentos posteriores |
 | 15 | [Límites y qué viene después: indecidibilidad, desplegados, reducción de orden parcial, extensiones](15-limits-and-what-comes-next/) | una respuesta falsa de un algoritmo correcto |
+| 16 | [Interoperabilidad: preservar el comportamiento, no solo el dibujo](16-interoperability-lab/) | una prueba de ida y vuelta, un fichero que valida y aun así pierde datos |
 
 [Diario](journal/): lo que intenté, lo que me sorprendió, lo que me queda por verificar.
 

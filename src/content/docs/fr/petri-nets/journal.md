@@ -22,6 +22,7 @@ sidebar:
 - [x] Leçon 13 — Face aux autres formalismes
 - [x] Leçon 14 — Sur nos propres systèmes
 - [x] Leçon 15 — Limites et suite
+- [x] Leçon 16 — Interopérabilité : préserver le comportement, pas seulement le dessin (son volet TINA est une recette en attente)
 
 ## QA
 
@@ -41,6 +42,8 @@ Ce cours enseigne un formalisme et tourne sur un analyseur que j'ai écrit, il n
 | L'arbre de couverture d'un petit réseau borné est calculable | `CoverabilityTree.Build(Nets.Kanban(1))`, un réseau à 160 marquages accessibles, ne revient pas : plafonné à 2 Gio il lève `OutOfMemoryException` au bout de 15,5 s, sans plafond il a atteint 35,7 Go et douze minutes de CPU | [`CoverabilityTree.cs`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/PetriNets/CoverabilityTree.cs) | 160 marquages, aucun résultat ; l'arbre ne fusionne jamais deux branches arrivant au même marquage, donc sa taille suit le nombre de chemins | Ni un défaut ni corrigeable : la leçon 12 imprime deux colonnes de bornes au lieu de trois, et dit pourquoi (2026-09-22) |
 | Un model checker dit quand il n'a rien vérifié | TLC avec une contrainte d'état qui exclut le marquage initial imprime `Model checking completed. No error has been found.` et `0 distinct states found`, sans aucune ligne le distinguant d'une exécution complète | `tla2tools.jar` 2.19, [outils TLA+](https://github.com/tlaplus/tlaplus) | `queue_5.tla` avec `Cap == 2` face à un marquage initial de 5 jetons : 1 état engendré, 0 distinct, sortie 0 | Reproduit le 2026-09-22 ; non remonté en amont — le remonter demande l'accord de l'auteur. La leçon dérive le plafond des invariants de places à la place (2026-09-22) |
 | L'arbre de couverture approxime, et se trompe du bon côté | Sur un réseau à un arc inhibiteur, il répond oméga pour une place qui ne porte jamais deux jetons. L'accélération de Karp et Miller suppose que la séquence atteignant un marquage couvrant peut être répétée, ce qu'un arc inhibiteur casse | [`CoverabilityTree.cs`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/PetriNets/CoverabilityTree.cs), [`Inhibitor.cs`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/PetriNets/Inhibitor.cs) | `self-inhibited` : l'arbre dit non borné, l'ensemble accessible fait 2 marquages avec p <= 1 | Ni un défaut ni corrigeable — la bornitude est indécidable pour ces réseaux. `InhibitorNet` est livré sans contrepartie de couverture, et `InhibitorTests` garde la contradiction pour que personne n'en ajoute une (2026-09-22) |
+| Un arc PNML que le lecteur P/T ne modélise pas est refusé | Un arc marqué `<type value="inhibitor"/>` était lu comme un arc ordinaire qui consomme : le réseau d'admission de la leçon 16 devenait un réseau qui n'admet personne, sans erreur | [`Pnml.cs`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/PetriNets/Pnml.cs) | `l16` avant la correction : `READ: 3 states`, mort avec les deux jobs testés. `PnmlTests` : 1 sur 5 échouait, puis 5 sur 5 | Reproduit, corrigé localement (2026-09-27) ; pas vérifié indépendamment |
+| Un marquage refusé nomme sa place | `FormatException: The input string 'two' was not in a correct format.`, le message d'`int.Parse` | [`Pnml.cs`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/PetriNets/Pnml.cs) | `l16`, E3 | Observé, non corrigé (2026-09-27) |
 
 ## Expériences
 
@@ -75,6 +78,10 @@ Un avertissement avant le tableau : contrairement au [GA Lab](../../ga-lab/journ
 | Comment croît le coût de l'énumération quand on ajoute des composants ? | Comme les marquages, c'est ce que tout le monde cite | Comme les **arcs par marquage** : 1,3 à 3,9 sur six philosophes, 3,9 à 8,8 sur quatre cartes Kanban, parce que chaque composant multiplie les façons de quitter chaque état existant | Confirmée comme forme, et elle s'aplatit : le rapport est un degré sortant moyen et ne peut pas dépasser le nombre de transitions (2026-09-22) |
 | Que coûte l'atomicité en espace d'états ? | Un facteur constant | Philosophes prenant les deux fourchettes d'un coup : 29 marquages à sept. Une fourchette à la fois : 198 à six. La différence est de l'entrelacement, et c'est ce que les dépliages enlèvent | Mesurée ; ni dépliage ni réduction d'ordre partiel n'est implémenté ici, et la leçon le dit (2026-09-22) |
 | L'arbre de couverture reste-t-il une approximation sûre quand le réseau gagne un arc inhibiteur ? | Oui — il sur-approxime par construction, donc il devrait répondre oméga trop souvent, jamais à tort | Il répond oméga pour une place qui ne porte jamais deux jetons. `self-inhibited` a 2 marquages accessibles et l'arbre dit non borné | Réfutée. La prémisse de l'accélération tombe, et elle tombe parce que la bornitude est indécidable ici, donc il n'y a rien à corriger (2026-09-22) |
+| Un réseau PNML écrit à la main garde-t-il son comportement à travers une lecture, une écriture et une relecture ? | Oui : mêmes identifiants, marquage, poids et transitions franchissables, 9 marquages, un marquage mort, `running<=1` ; les positions abandonnées | Exactement cela, et la seconde écriture est identique octet pour octet à la première ; 9 positions en entrée, 0 en sortie | Confirmé, pré-enregistré dans un fichier (2026-09-27) |
+| Que fait l'oubli de la libération ? | 7 marquages, et un marquage mort avec un job testé jamais admis, à 4 franchissements | `waiting=0 tested=1 capacity=0 running=0 done=1` après `test test admit finish` | Confirmé (2026-09-27) |
+| Les fichiers malformés sont-ils refusés ? | Les deux : un arc vers un nœud absent, et un marquage écrit `two` | Refusés, par `ArgumentException` et `FormatException` | Confirmé (2026-09-27) |
+| Un type d'arc que le lecteur ne modélise pas est-il refusé ? | Non : d'après la lecture de `Pnml.Parse`, un arc inhibiteur est lu comme un arc ordinaire, ce qui donne 3 marquages | `READ: 3 states`, mort avec `tested=2` | Confirmé, et c'était un défaut : ces arcs sont désormais refusés (2026-09-27) |
 
 ## 2026-09-15 — Leçons 1 à 4, et l'analyseur qui les fait tourner
 
@@ -241,6 +248,31 @@ Le coût arrive tout de suite. `self-inhibited` est une place, une transition, e
 
 C'est aussi la réponse à la question de savoir pourquoi tous les autres réseaux de ce dépôt sont des réseaux place/transition ordinaires. Ce n'est pas du conservatisme. C'est la ligne au-delà de laquelle les verdicts de l'analyseur cessent de vouloir dire quoi que ce soit.
 
+## 2026-09-27 — Leçon 16, et un fichier qui se lisait et voulait dire autre chose
+
+La question venait de l'extérieur du cours : un réseau garde-t-il son **comportement** d'un outil à l'autre, et pas seulement son dessin ? Tout a tourné à `e3cb4be`, avec le seul analyseur de ce cours. TINA, pm4py et Graphviz ne sont pas installés sur cette machine, donc le volet TINA de la leçon est une recette, et il le dit.
+
+Pour une fois, les prédictions sont allées dans un fichier avant la première exécution : `interop/preregistration.md`, haché à 10:54:11 EDT (SHA-256 `44fd0d02…`). Quatre expériences, chacune avec ses nombres écrits d'abord :
+
+- **E1, l'aller-retour d'un réseau d'admission écrit à la main.** Reproduit comme prévu :
+  - 9 marquages, et un marquage mort, qui est la fin prévue ;
+  - `running<=1` ;
+  - le même sens après avoir écrit le réseau et l'avoir relu ;
+  - 9 positions abandonnées.
+- **E2, la libération oubliée.** Reproduit : 7 marquages, et un marquage mort après 4 franchissements, `test test admit finish`.
+- **E3, deux fichiers malformés :** un arc vers un nœud absent, et un marquage écrit `two`.
+  - Les deux sont refusés. **Reproduit.**
+  - Le second refus est le message d'`int.Parse`, qui ne nomme pas la place. **Observé**, laissé tel quel.
+- **E4, un arc inhibiteur marqué `<type value="inhibitor"/>`.**
+  - Prévu, d'après la lecture de `Pnml.Parse`, pour être lu comme un arc ordinaire. Il l'a été : `READ: 3 states`, un réseau qui n'admet personne. **Reproduit.**
+  - Puis **corrigé localement** : le lecteur refuse désormais tout type d'arc autre que `normal`.
+  - Le test unitaire a d'abord échoué (1 des 5 tests PNML) puis passé après la correction (5 sur 5). `check.sh` passe 92 tests et 19 sorties comparées, `l16` compris.
+
+Durées : le build d'Examples a pris 5 s, chaque exécution de `l16` moins d'une seconde, et le `check.sh` complet 47 s.
+
+Limites : c'est l'espace d'états d'un réseau de 9 marquages. Ce n'est ni une exécution de vrais jobs, ni une preuve d'équité. Rien de cela n'est encore **vérifié indépendamment** ni **publié**.
+
+
 ## À vérifier
 
 - La leçon 15 nomme les dépliages, la réduction d'ordre partiel et les diagrammes de décision et n'implémente aucun des trois. L'affirmation qu'un dépliage est exponentiellement plus petit pour la famille des philosophes est le résultat publié, pas une mesure de ce dépôt ; les articles de Karp et Miller et d'Araki et Kasami sont confirmés par Crossref mais sont derrière un péage et non lus.
@@ -251,6 +283,9 @@ C'est aussi la réponse à la question de savoir pourquoi tous les autres résea
 - Murata 1989 reste payant et non lu ; chaque attribution qui lui est faite dans les leçons 1 à 8 est signalée dans la page.
 - Leçon 7, exercice 3 : construire les philosophes avec un délai d'expiration et vérifier que le réseau est sans interblocage et possède une exécution infinie dans laquelle personne ne mange.
 - L'affirmation que l'énumération des siphons minimaux est NP-difficile est énoncée dans la leçon 6 d'après des connaissances générales et n'est rattachée à aucun article.
+- Le volet TINA de la leçon 16. `tina -R interop/admission.pnml` devrait annoncer 9 marquages et un marquage mort ; TINA n'est pas installé ici. De même pour `inhibitor-arc.pnml`, que TINA modélise, avec et sans `-inh`.
+- Quels outils écrivent la sorte d'un arc sous la forme `<type value="…"/>` en PNML n'est rattaché à aucune source. La leçon 16 dit « les outils qui modélisent plus que les réseaux P/T » et n'en nomme aucun.
+- Un journal XES d'exécutions simulées du réseau d'admission, comparé au modèle, et un export DOT. Ni pm4py ni Graphviz ne sont installés ici.
 
 ## Questions ouvertes
 

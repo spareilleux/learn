@@ -617,4 +617,32 @@ public class PnmlTests
         Assert.Equal(3, net.InitialMarking[0]);        // the toolspecific block is not the marking
         Assert.Equal(2, net.Pre[0, 0]);                // nor is the inscription's graphics the weight
     }
+
+    /// <summary>
+    /// Lesson 16. An inhibitor arc is not in the P/T grammar. Read as an ordinary arc, it turns "admit
+    /// only when nothing runs" into "admit needs something running": a different net, with no warning.
+    /// </summary>
+    [Fact]
+    public void An_arc_the_reader_does_not_model_is_refused_not_read_as_an_ordinary_arc()
+    {
+        static string Net(string arcType) => $"""
+            <pnml xmlns="http://www.pnml.org/version-2009/grammar/pnml">
+              <net type="http://www.pnml.org/version-2009/grammar/ptnet" id="n1">
+                <page id="p1">
+                  <place id="running"/>
+                  <place id="tested"><initialMarking><text>1</text></initialMarking></place>
+                  <transition id="admit"/>
+                  <arc id="a1" source="tested" target="admit"/>
+                  <arc id="a2" source="running" target="admit">{arcType}</arc>
+                  <arc id="a3" source="admit" target="running"/>
+                </page>
+              </net>
+            </pnml>
+            """;
+
+        var refused = Assert.Throws<NotSupportedException>(() => Pnml.Parse(Net("""<type value="inhibitor"/>""")));
+        Assert.Contains("inhibitor", refused.Message);
+        // Control: an arc that says it is an ordinary one is read as one.
+        Assert.Equal(1, Pnml.Parse(Net("""<type value="normal"/>""")).Pre[0, 0]);
+    }
 }

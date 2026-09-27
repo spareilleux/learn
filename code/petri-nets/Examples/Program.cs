@@ -23,12 +23,13 @@ switch (lesson)
     case "l13": Lesson13(args.Length > 1 ? args[1] : null); break;
     case "l14": Lesson14(); break;
     case "l15": Lesson15(); break;
+    case "l16": Lesson16(args.Length > 1 ? args[1] : "interop"); break;
     case "music": Music(); break;
     case "chat": Chat(); break;
     case "nets": WriteNets(args.Length > 1 ? args[1] : "out/nets"); break;
     case "tla": WriteTla(args.Length > 1 ? args[1] : "out/tla"); break;
     default:
-        Console.Error.WriteLine($"Unknown lesson '{lesson}'. Try l1 to l15, nets, or tla.");
+        Console.Error.WriteLine($"Unknown lesson '{lesson}'. Try l1 to l16, nets, or tla.");
         return 2;
 }
 
@@ -1083,6 +1084,75 @@ void Lesson11(string? foreign)
 
 // The grammar URIs share a 41-character prefix that says nothing; the last segment is the answer.
 string Short(string message) => message.Replace("http://www.pnml.org/version-2009/grammar/", "");
+
+// Lesson 16: interoperability judged on behaviour. A hand-written PNML file, read, analysed, written and
+// read again; the same model with its release forgotten; two malformed files; and a feature the reader
+// does not support. The files and the predictions written before the first run are in interop/.
+void Lesson16(string directory)
+{
+    string Show(PetriNet net, Marking m) => string.Join(" ", net.Places.Select((p, i) => $"{p.Id}={m[i]}"));
+
+    // What a net means, as lines that can be compared: the drawing is deliberately absent.
+    List<string> Meaning(PetriNet net)
+    {
+        var graph = ReachabilityGraph.Build(net);
+        var lines = new List<string>
+        {
+            $"places:      {string.Join(" ", net.Places.Select(p => p.Id))}",
+            $"transitions: {string.Join(" ", net.Transitions.Select(t => t.Id))}",
+            $"initial:     {Show(net, net.InitialMarking)}",
+            $"arcs:        {string.Join(", ", net.Arcs.Select(a => a.Weight == 1 ? $"{a.Source}->{a.Target}" : $"{a.Source}->{a.Target} x{a.Weight}"))}",
+            $"enabled:     {Enabled(net, net.InitialMarking)}",
+            $"states:      {graph.States.Count}{(graph.IsComplete ? "" : " (incomplete)")}",
+        };
+        foreach (var dead in graph.DeadStates)
+        {
+            var path = graph.PathTo(dead)!.Select(t => net.Transitions[t].Id);
+            lines.Add($"dead:        {Show(net, graph.States[dead])}  after {string.Join(" ", path)}");
+        }
+        var bounds = graph.PlaceBounds();
+        lines.Add($"bounds:      {string.Join(" ", net.Places.Select((p, i) => $"{p.Id}<={Describe(bounds[i])}"))}");
+        return lines;
+    }
+
+    Title("E1: the admission net, read, written and read again");
+    var input = File.ReadAllText(Path.Combine(directory, "admission.pnml"));
+    var first = Pnml.Parse(input);
+    var meaning = Meaning(first);
+    meaning.ForEach(Console.WriteLine);
+    var capacity = first.PlaceIndex("capacity");
+    var running = first.PlaceIndex("running");
+    var conserved = ReachabilityGraph.Build(first).States.All(m => m[capacity] + 2 * m[running] == 2);
+    Console.WriteLine($"capacity + 2*running = 2 in every state: {(conserved ? "yes" : "no")}");
+
+    var written = Pnml.Write(first);
+    var second = Pnml.Parse(written);
+    var differences = Meaning(second).Zip(meaning).Where(pair => pair.First != pair.Second).ToList();
+    Console.WriteLine($"after the round trip, same meaning: {(differences.Count == 0 ? "yes" : $"no, {differences.Count} lines differ")}");
+    differences.ForEach(pair => Console.WriteLine($"  was: {pair.Second}\n  now: {pair.First}"));
+    Console.WriteLine($"second write identical to the first: {(Pnml.Write(second) == written ? "yes" : "no")}");
+    // Layout may change without changing the net; counting the positions shows what was dropped.
+    int Positions(string xml) => xml.Split("<position ").Length - 1;
+    Console.WriteLine($"positions in the input: {Positions(input)}, in the output: {Positions(written)}");
+
+    Title("E2: the same net with the release forgotten");
+    Meaning(Pnml.Load(Path.Combine(directory, "admission-no-release.pnml"))).Skip(5).ToList().ForEach(Console.WriteLine);
+
+    Title("E3 and E4: files the reader must not accept as they are");
+    foreach (var file in new[] { "malformed-arc.pnml", "malformed-marking.pnml", "inhibitor-arc.pnml" })
+    {
+        try
+        {
+            var net = Pnml.Load(Path.Combine(directory, file));
+            var graph = ReachabilityGraph.Build(net);
+            Console.WriteLine($"{file,-24}READ: {graph.States.Count} states, dead: {string.Join("; ", graph.DeadStates.Select(d => Show(net, graph.States[d])))}");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"{file,-24}refused: {e.GetType().Name}: {Short(e.Message)}");
+        }
+    }
+}
 
 // Lesson 14, on our own systems: the lock the Claude sessions of this repository take before a
 // heavy or a GPU job, in the two shell shapes it has been written in.

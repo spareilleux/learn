@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Written by hand for lesson 16, the way a drawing tool would: positions on every node, the name on the page. -->
+<pnml xmlns="http://www.pnml.org/version-2009/grammar/pnml">
+  <net id="admission" type="http://www.pnml.org/version-2009/grammar/ptnet">
+    <page id="p0">
+      <name><text>Agent admission</text></name>
+      <place id="waiting">
+        <name><text>waiting</text></name>
+        <graphics><position x="40" y="100"/></graphics>
+        <initialMarking><text>2</text></initialMarking>
+      </place>
+      <place id="tested">
+        <name><text>tested</text></name>
+        <graphics><position x="200" y="100"/></graphics>
+      </place>
+      <place id="capacity">
+        <name><text>capacity</text></name>
+        <graphics><position x="360" y="20"/></graphics>
+        <initialMarking><text>2</text></initialMarking>
+      </place>
+      <place id="running">
+        <name><text>running</text></name>
+        <graphics><position x="360" y="100"/></graphics>
+      </place>
+      <place id="done">
+        <name><text>done</text></name>
+        <graphics><position x="520" y="100"/></graphics>
+      </place>
+      <transition id="test">
+        <name><text>test</text></name>
+        <graphics><position x="120" y="100"/></graphics>
+      </transition>
+      <transition id="admit">
+        <name><text>admit</text></name>
+        <graphics><position x="280" y="100"/></graphics>
+      </transition>
+      <transition id="finish">
+        <name><text>finish</text></name>
+        <graphics><position x="440" y="100"/></graphics>
+      </transition>
+      <arc id="w-test" source="waiting" target="test"/>
+      <arc id="test-t" source="test" target="tested"/>
+      <arc id="t-admit" source="tested" target="admit"/>
+      <arc id="c-admit" source="capacity" target="admit">
+        <inscription><text>2</text></inscription>
+      </arc>
+      <arc id="admit-r" source="admit" target="running"/>
+      <arc id="r-finish" source="running" target="finish"/>
+      <arc id="finish-d" source="finish" target="done"/>
+      <arc id="finish-c" source="finish" target="capacity">
+        <inscription><text>2</text></inscription>
+        <graphics><position x="440" y="20"/></graphics>
+      </arc>
+    </page>
+  </net>
+</pnml>

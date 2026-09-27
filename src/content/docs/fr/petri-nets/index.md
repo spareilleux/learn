@@ -96,6 +96,7 @@ Ce réseau a douze marquages accessibles, il ne s'interbloque jamais, et la plac
 | 13 | [Face aux autres formalismes : TLA+, statecharts, algèbres de processus, automates temporisés](13-against-other-formalisms/) | un second espace d'états, calculé ailleurs |
 | 14 | [Sur nos systèmes : pipelines C# et lanes d'agents](14-on-our-systems/) | [C# avancé](../csharp-advanced/) ; RabbitMQ et Kubernetes sont des expériences suivantes |
 | 15 | [Limites et suite : indécidabilité, dépliages, réduction d'ordre partiel, extensions](15-limits-and-what-comes-next/) | une réponse fausse d'un algorithme correct |
+| 16 | [Interopérabilité : préserver le comportement, pas seulement le dessin](16-interoperability-lab/) | un test d'aller-retour, un fichier qui se valide et perd quand même des données |
 
 [Journal](journal/) : ce que j'ai essayé, ce qui m'a surpris, ce qu'il me reste à vérifier.
 
