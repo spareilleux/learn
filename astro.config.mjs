@@ -65,6 +65,12 @@ export default defineConfig({
 									items: [{ autogenerate: { directory: 'rust-for-csharp-java' } }],
 								},
 								{
+									label: 'Advanced Rust',
+									translations: { fr: 'Rust avancé', es: 'Rust avanzado' },
+									collapsed: true,
+									items: [{ autogenerate: { directory: 'rust-advanced' } }],
+								},
+								{
 									label: 'Java for C# developers',
 									translations: { fr: 'Java pour développeurs C#', es: 'Java para desarrolladores C#' },
 									collapsed: true,

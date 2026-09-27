@@ -3,9 +3,9 @@ name: Rust course examples
 on:
   push:
     branches: [main]
-    paths: ['code/**', '.github/workflows/rust-examples.yml']
+    paths: ['code/rust-for-csharp-java/**', '.github/workflows/rust-examples.yml']
   pull_request:
-    paths: ['code/**', '.github/workflows/rust-examples.yml']
+    paths: ['code/rust-for-csharp-java/**', '.github/workflows/rust-examples.yml']
   workflow_dispatch:
 
 jobs:

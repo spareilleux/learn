@@ -12,6 +12,7 @@ Solicitado, delegado, realizado localmente, fusionado, desplegado y verificado p
 | Publicación verificada | Publicación o verificación pendiente | Solicitado, no entregado |
 | --- | --- | --- |
 | [Lección 9 de LadybugDB, laboratorio de grafos](../ladybugdb/09-graph-lab/): PR #25 fusionada como `438b320`, despliegue Pages correcto, lección y entrada del diario EN/FR/ES leídas de forma anónima | [Streeling MAT-003](../streeling/mathematics/): fuente fusionada en Demerzel (`89a1bdb`); PR #26 del generador fusionada como `67ffd4e` y PR #24 del laboratorio de Learn como `00ae641`; sincronización canónica pendiente de revisión | Módulos de matemáticas de Streeling más allá de MAT-001 y MAT-003: ninguno existe aún en la fuente canónica; MAT-002 y MAT-004 están en cola |
+| | [Tracer-bullet de Rust avanzado](../rust-advanced/): misión, primera lección medida y diario trilingüe preparados en `codex/rust-advanced-tracer-20260927`; pendientes PR, CI, fusión, despliegue Pages y lectura anónima | |
 
 Este tablero añade lo resuelto o abierto el 2026-09-27; el del 2026-09-26, más abajo, no cambia.
 
@@ -50,6 +51,12 @@ La [PR de Learn #25](https://github.com/spareilleux/learn/pull/25) se fusionó c
 El módulo, el índice de matemáticas, la [entrada del diario de Streeling](../streeling/journal/) y el tablero del 2026-09-27 de arriba se leyeron de forma anónima en los tres idiomas. Ese tablero es una instantánea tomada antes de estas fusiones, y se deja tal como se escribió.
 
 Estos dos elementos pasan así de pendientes a verificados. El catálogo de matemáticas sigue teniendo dos módulos, MAT-001 y MAT-003.
+
+## 2026-09-27 — Tracer-bullet de Rust avanzado preparado
+
+El [curso Rust avanzado](../rust-advanced/) tiene ahora un plan de doce lecciones basadas en pruebas y una primera porción vertical completa: disposición de memoria y representación, crate Cargo independiente, salida capturada y contrato compile-fail. La misma misión, lección y [diario del curso](../rust-advanced/journal/) existen en inglés, francés y español.
+
+El gate local pasó en Windows con Rust 1.94.0. Es un candidato, no una publicación: la rama aún necesita pull request, CI alojada en tres sistemas operativos, fusión, despliegue Pages y lectura pública anónima. Por tanto, el tablero lo mantiene en **Publicación o verificación pendiente**.
 
 ## Por verificar
 
