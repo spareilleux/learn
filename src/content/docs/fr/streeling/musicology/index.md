@@ -12,4 +12,4 @@ sidebar:
 ## Modules
 
 - [MCL-001 · Comment la musique évolue — Brève histoire de la musique occidentale](mcl-001-how-music-evolves/)
-- [MCL-002 · Musical Form and Structure — How Music Is Built](mcl-002-musical-form/)
+- [MCL-002 · Musical Form and Structure — How Music Is Built](mcl-002-musical-form/) *(en anglais)*

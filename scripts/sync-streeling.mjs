@@ -5,6 +5,7 @@
 //   npm run sync:streeling                      # default branch from GitHub (sparse clone in .cache/)
 //   npm run sync:streeling -- --ref <sha|tag>   # pin a Demerzel revision
 //   npm run sync:streeling -- --source <dir>    # use an existing Demerzel checkout
+//   node scripts/sync-streeling.mjs --source <dir> --out <dir>   # write under another root (the tests do)
 //
 // Generated (overwritten on every run): src/content/docs/{,fr/,es/}streeling/** except journal.md,
 // src/streeling-sidebar.json and streeling.lock.json. Journals are created once and never touched again.
@@ -20,11 +21,12 @@ const REPO = 'GuitarAlchemist/Demerzel';
 const STREELING = 'state/streeling';
 const COURSES = `${STREELING}/courses`;
 
-const OUT = {
-	en: path.join(ROOT, 'src/content/docs/streeling'),
-	fr: path.join(ROOT, 'src/content/docs/fr/streeling'),
-	es: path.join(ROOT, 'src/content/docs/es/streeling'),
-};
+const outDirs = (root) => ({
+	en: path.join(root, 'src/content/docs/streeling'),
+	fr: path.join(root, 'src/content/docs/fr/streeling'),
+	es: path.join(root, 'src/content/docs/es/streeling'),
+});
+let OUT = outDirs(ROOT);
 
 // English is the source; each translation is read from `<dept>/<lang>/<stem>.<lang>.md` when Demerzel provides it.
 const LANGS = ['en', 'fr', 'es'];
@@ -109,6 +111,7 @@ const T = {
 		noModules: "Aucun module produit pour l'instant.",
 		catalog: 'Catalogue de cours (prévu)',
 		domain: 'Domaine',
+		englishOnly: 'en anglais',
 	},
 	es: {
 		overview: 'Presentación',
@@ -121,6 +124,7 @@ const T = {
 		noModules: 'Todavía no se ha producido ningún módulo.',
 		catalog: 'Catálogo de cursos (previsto)',
 		domain: 'Dominio',
+		englishOnly: 'en inglés',
 	},
 };
 
@@ -132,10 +136,11 @@ function git(cwd, ...args) {
 }
 
 function parseArgs(argv) {
-	const args = { ref: 'HEAD', source: null };
+	const args = { ref: 'HEAD', source: null, out: null };
 	for (let i = 0; i < argv.length; i++) {
 		if (argv[i] === '--ref') args.ref = argv[++i];
 		else if (argv[i] === '--source') args.source = path.resolve(argv[++i]);
+		else if (argv[i] === '--out') args.out = path.resolve(argv[++i]);
 		else throw new Error(`Unknown argument: ${argv[i]}`);
 	}
 	return args;
@@ -206,7 +211,13 @@ function shortTitle(title, code) {
 // ---------------------------------------------------------------------------
 // Link rewriting
 
-function rewriteLinks(body, { srcRepoPath, moduleIndex, sha }) {
+// A module with no page in `lang` keeps its URL in that locale: Starlight serves the English page there, with its own
+// "not translated" notice. Every link to it carries this label, so the reader knows before clicking.
+function englishOnlyLabel(lang, mod) {
+	return lang !== 'en' && !mod[lang] ? ` *(${T[lang].englishOnly})*` : '';
+}
+
+function rewriteLinks(body, { srcRepoPath, moduleIndex, sha, lang }) {
 	const stats = { internal: 0, github: 0 };
 	let fence = null;
 	const out = body.split('\n').map((line) => {
@@ -224,7 +235,7 @@ function rewriteLinks(body, { srcRepoPath, moduleIndex, sha }) {
 			const known = target.startsWith(`${COURSES}/`) && moduleIndex.get(stem.toLowerCase());
 			if (known) {
 				stats.internal++;
-				return `](../../${known.dept}/${known.id}/${anchor})`;
+				return `](../../${known.dept}/${known.id}/${anchor})${englishOnlyLabel(lang, known)}`;
 			}
 			stats.github++;
 			return `](https://github.com/${REPO}/blob/${sha}/${target}${anchor})`;
@@ -269,7 +280,7 @@ function banner(lang, mod, dept, sourceUrl, moduleIndex) {
 	if (prereqs.length) {
 		const items = prereqs.map((p) => {
 			const known = moduleIndex.get(String(p).toLowerCase());
-			return known ? `[${moduleCode(known.id)}](../../${known.dept}/${known.id}/)` : String(p);
+			return known ? `[${moduleCode(known.id)}](../../${known.dept}/${known.id}/)${englishOnlyLabel(lang, known)}` : String(p);
 		});
 		lines.push('', `${t.prerequisites}: ${items.join(', ')}`);
 	}
@@ -282,6 +293,8 @@ function banner(lang, mod, dept, sourceUrl, moduleIndex) {
 
 function main() {
 	const args = parseArgs(process.argv.slice(2));
+	const outRoot = args.out ?? ROOT;
+	OUT = outDirs(outRoot);
 	const src = checkout(args);
 	const sha = git(src, 'rev-parse', 'HEAD');
 	const commitDate = git(src, 'log', '-1', '--format=%cI');
@@ -341,7 +354,7 @@ function main() {
 				const srcFile = lang === 'en' ? `${mod.stem}.md` : `${mod.stem}.${lang}.md`;
 				const srcRepoPath = `${COURSES}/${dept.id}/${lang}/${srcFile}`;
 				const sourceUrl = `https://github.com/${REPO}/blob/${sha}/${srcRepoPath}`;
-				const { body, stats } = rewriteLinks(parsed.body, { srcRepoPath, moduleIndex, sha });
+				const { body, stats } = rewriteLinks(parsed.body, { srcRepoPath, moduleIndex, sha, lang });
 				totals.internal += stats.internal;
 				totals.github += stats.github;
 				const title = parsed.title ?? mod.en.title ?? mod.code;
@@ -373,7 +386,7 @@ function main() {
 			if (dept.modules.length) {
 				for (const mod of dept.modules) {
 					const title = (lang !== 'en' && mod[lang]?.title) || mod.en.title || mod.code;
-					parts.push(`- [${mod.code} · ${title}](${mod.id}/)`);
+					parts.push(`- [${mod.code} · ${title}](${mod.id}/)${englishOnlyLabel(lang, mod)}`);
 				}
 				parts.push('');
 			} else {
@@ -386,7 +399,7 @@ function main() {
 
 	writeOverview(university, departments, sha, commitDate);
 	writeJournals(departments);
-	writeSidebar(departments);
+	writeSidebar(departments, outRoot);
 
 	const lock = {
 		repo: REPO,
@@ -397,7 +410,7 @@ function main() {
 		departments: departments.length,
 		modules: Object.fromEntries(LANGS.map((lang) => [lang, totals[lang]])),
 	};
-	write(path.join(ROOT, 'streeling.lock.json'), JSON.stringify(lock, null, 2) + '\n');
+	write(path.join(outRoot, 'streeling.lock.json'), JSON.stringify(lock, null, 2) + '\n');
 
 	console.log(`Streeling @ ${sha.slice(0, 7)} (${commitDate})`);
 	console.log(`  departments: ${departments.length}, modules: ${LANGS.map((lang) => `${totals[lang]} ${lang}`).join(' / ')}`);
@@ -467,7 +480,7 @@ function writeJournals(departments) {
 			.map((d) => {
 				const items = d.modules.map((m) => {
 					const title = (lang !== 'en' && m[lang]?.title) || m.en.title || m.code;
-					return `- [ ] [${m.code} · ${shortTitle(title, m.code)}](../${d.id}/${m.id}/) <!-- ${m.id} -->`;
+					return `- [ ] [${m.code} · ${shortTitle(title, m.code)}](../${d.id}/${m.id}/)${englishOnlyLabel(lang, m)} <!-- ${m.id} -->`;
 				});
 				return `### ${d.label[lang]}\n\n${items.join('\n')}`;
 			})
@@ -497,7 +510,7 @@ function writeJournals(departments) {
 	}
 }
 
-function writeSidebar(departments) {
+function writeSidebar(departments, outRoot) {
 	const sidebar = [
 		{ label: 'Overview', translations: { fr: T.fr.overview, es: T.es.overview }, slug: 'streeling' },
 		{ label: 'Journal', translations: { es: T.es.journal }, slug: 'streeling/journal' },
@@ -508,7 +521,7 @@ function writeSidebar(departments) {
 			items: [{ autogenerate: { directory: `streeling/${d.id}` } }],
 		})),
 	];
-	write(path.join(ROOT, 'src/streeling-sidebar.json'), JSON.stringify(sidebar, null, 2) + '\n');
+	write(path.join(outRoot, 'src/streeling-sidebar.json'), JSON.stringify(sidebar, null, 2) + '\n');
 }
 
 main();
