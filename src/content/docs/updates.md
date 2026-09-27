@@ -11,7 +11,7 @@ Requested, delegated, implemented locally, merged, deployed and publicly verifie
 
 | Verified publication | Awaiting publication or verification | Requested, not delivered |
 | --- | --- | --- |
-| [LadybugDB lesson 9, graph lab](../ladybugdb/09-graph-lab/): PR #25 merged as `438b320`, Pages deployment succeeded, EN/FR/ES lesson and journal entry read back anonymously | [Streeling MAT-003](../streeling/mathematics/): source merged in Demerzel (`89a1bdb`); generator PR #26 merged as `67ffd4e`; Learn lab PR #24 and the canonical sync await review | Streeling mathematics modules beyond MAT-001 and MAT-003: none exists in the canonical source yet; MAT-002 and MAT-004 are queued |
+| [LadybugDB lesson 9, graph lab](../ladybugdb/09-graph-lab/): PR #25 merged as `438b320`, Pages deployment succeeded, EN/FR/ES lesson and journal entry read back anonymously | [Streeling MAT-003](../streeling/mathematics/): source merged in Demerzel (`89a1bdb`); generator PR #26 merged as `67ffd4e` and Learn lab PR #24 as `00ae641`; the canonical sync awaits review | Streeling mathematics modules beyond MAT-001 and MAT-003: none exists in the canonical source yet; MAT-002 and MAT-004 are queued |
 
 This board adds what was settled or opened on 2026-09-27; the 2026-09-26 board below is unchanged.
 

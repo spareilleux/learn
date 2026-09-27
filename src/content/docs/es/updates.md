@@ -11,7 +11,7 @@ Solicitado, delegado, realizado localmente, fusionado, desplegado y verificado p
 
 | Publicación verificada | Publicación o verificación pendiente | Solicitado, no entregado |
 | --- | --- | --- |
-| [Lección 9 de LadybugDB, laboratorio de grafos](../ladybugdb/09-graph-lab/): PR #25 fusionada como `438b320`, despliegue Pages correcto, lección y entrada del diario EN/FR/ES leídas de forma anónima | [Streeling MAT-003](../streeling/mathematics/): fuente fusionada en Demerzel (`89a1bdb`); PR #26 del generador fusionada como `67ffd4e`; PR #24 del laboratorio de Learn y sincronización canónica pendientes de revisión | Módulos de matemáticas de Streeling más allá de MAT-001 y MAT-003: ninguno existe aún en la fuente canónica; MAT-002 y MAT-004 están en cola |
+| [Lección 9 de LadybugDB, laboratorio de grafos](../ladybugdb/09-graph-lab/): PR #25 fusionada como `438b320`, despliegue Pages correcto, lección y entrada del diario EN/FR/ES leídas de forma anónima | [Streeling MAT-003](../streeling/mathematics/): fuente fusionada en Demerzel (`89a1bdb`); PR #26 del generador fusionada como `67ffd4e` y PR #24 del laboratorio de Learn como `00ae641`; sincronización canónica pendiente de revisión | Módulos de matemáticas de Streeling más allá de MAT-001 y MAT-003: ninguno existe aún en la fuente canónica; MAT-002 y MAT-004 están en cola |
 
 Este tablero añade lo resuelto o abierto el 2026-09-27; el del 2026-09-26, más abajo, no cambia.
 
