@@ -1,0 +1,119 @@
+{
+ "1": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "z_image_turbo_bf16.safetensors",
+   "weight_dtype": "default"
+  },
+  "_meta": {
+   "title": "Diffusion model"
+  }
+ },
+ "2": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen_3_4b.safetensors",
+   "type": "lumina2",
+   "device": "default"
+  },
+  "_meta": {
+   "title": "Text encoder"
+  }
+ },
+ "3": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "z_image_ae.safetensors"
+  }
+ },
+ "4": {
+  "class_type": "ModelSamplingAuraFlow",
+  "inputs": {
+   "model": [
+    "1",
+    0
+   ],
+   "shift": 3.0
+  }
+ },
+ "5": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "text": "A single coherent scene: the interior of a vast circular research observatory at night, a galactic library of knowledge. Concentric galleries of tall bookshelves and softly glowing crystal archives rise in ordered rings around a central atrium, a geometric knowledge architecture like a map of history. Dark stone arches are covered in flowing silver engravings of elegant vine-like alchemical diagrams: interlaced curves, orbits, crescents and concentric circles, purely ornamental, without any writing. Thin vertical streams of soft green computational light fall like rain between the columns. At the centre of the atrium stands a weathered steel research box, a room-sized cube with its door ajar, warm light spilling from an endless corridor of doors inside. Cinematic volumetric light, deep blue and emerald palette with warm gold accents, awe, calm, highly detailed digital matte painting, wide shot.",
+   "clip": [
+    "2",
+    0
+   ]
+  }
+ },
+ "6": {
+  "class_type": "ConditioningZeroOut",
+  "inputs": {
+   "conditioning": [
+    "5",
+    0
+   ]
+  },
+  "_meta": {
+   "title": "No negative prompt"
+  }
+ },
+ "7": {
+  "class_type": "EmptySD3LatentImage",
+  "inputs": {
+   "width": 1344,
+   "height": 768,
+   "batch_size": 1
+  }
+ },
+ "8": {
+  "class_type": "KSampler",
+  "inputs": {
+   "seed": 20260927,
+   "steps": 8,
+   "cfg": 1.0,
+   "sampler_name": "res_multistep",
+   "scheduler": "simple",
+   "denoise": 1.0,
+   "model": [
+    "4",
+    0
+   ],
+   "positive": [
+    "5",
+    0
+   ],
+   "negative": [
+    "6",
+    0
+   ],
+   "latent_image": [
+    "7",
+    0
+   ]
+  }
+ },
+ "9": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "8",
+    0
+   ],
+   "vae": [
+    "3",
+    0
+   ]
+  }
+ },
+ "10": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "filename_prefix": "visuals/home-20260927",
+   "images": [
+    "9",
+    0
+   ]
+  }
+ }
+}
