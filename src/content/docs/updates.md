@@ -38,6 +38,19 @@ The retest keeps the earlier 4.4.3 measurements and records the Windows 4.5.0 re
 
 The [GA Ocean artifact](https://claude.ai/artifact/P5JPUkCRR1cYc4herNiR9F) opened with a visible sign-in link rather than requiring sign-in, and showed the four preset controls and Saint-Malo attribution. It is now referenced in the [artifact catalog](../artifacts/). This establishes shared-page access, not WebGPU performance on every device.
 
+## 2026-09-27 — LadybugDB lesson 9 and Streeling MAT-003 published
+
+[Learn PR #25](https://github.com/spareilleux/learn/pull/25) merged as `438b320`, and its [Pages deployment](https://github.com/spareilleux/learn/actions/runs/36341917142) succeeded. The [LadybugDB lesson 9](../ladybugdb/09-graph-lab/) and its [journal entry](../ladybugdb/journal/) were read back anonymously in the three languages. The lab's two scripts passed the course CI on Linux, Windows and macOS; the measurements themselves were taken on Windows.
+
+[Streeling MAT-003](../streeling/mathematics/mat-003-floating-point-conditioning/) arrived through three merges:
+- the Learn lab ([PR #24](https://github.com/spareilleux/learn/pull/24), `00ae641`);
+- the generator's English-only labels ([PR #26](https://github.com/spareilleux/learn/pull/26), `67ffd4e`);
+- the canonical sync at Demerzel `89a1bdb` ([PR #27](https://github.com/spareilleux/learn/pull/27), `ce6021f`), whose [Pages deployment](https://github.com/spareilleux/learn/actions/runs/36343842316) succeeded.
+
+The module, the mathematics index, the [Streeling journal entry](../streeling/journal/) and the 2026-09-27 board above were read back anonymously in the three languages. That board is a snapshot taken before these merges, and it is left as written.
+
+These two items therefore move from awaiting to verified. The mathematics catalogue still has two modules, MAT-001 and MAT-003.
+
 ## To verify
 
 - Check this update's public URLs and catalog after deployment; keep the deploy receipt with the integration record.

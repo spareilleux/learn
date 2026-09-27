@@ -38,6 +38,19 @@ El retest conserva las mediciones de 4.4.3 y separa los resultados Windows de 4.
 
 El [Artifact GA Ocean](https://claude.ai/artifact/P5JPUkCRR1cYc4herNiR9F) se abrió con un enlace de inicio de sesión opcional, sin exigir autenticación, y mostró los cuatro presets y la atribución de Saint-Malo. Ahora está referenciado en el [catálogo de Artifacts](../artifacts/). Esto confirma el acceso a la página compartida, no el rendimiento WebGPU en todos los dispositivos.
 
+## 2026-09-27 — Lección 9 de LadybugDB y Streeling MAT-003 publicadas
+
+La [PR de Learn #25](https://github.com/spareilleux/learn/pull/25) se fusionó como `438b320`, y su [despliegue Pages](https://github.com/spareilleux/learn/actions/runs/36341917142) fue correcto. La [lección 9 de LadybugDB](../ladybugdb/09-graph-lab/) y su [entrada del diario](../ladybugdb/journal/) se leyeron de forma anónima en los tres idiomas. Los dos scripts del laboratorio pasaron la CI del curso en Linux, Windows y macOS; las mediciones en sí se tomaron en Windows.
+
+[Streeling MAT-003](../streeling/mathematics/mat-003-floating-point-conditioning/) llegó mediante tres fusiones:
+- el laboratorio de Learn ([PR #24](https://github.com/spareilleux/learn/pull/24), `00ae641`);
+- las etiquetas «en inglés» del generador ([PR #26](https://github.com/spareilleux/learn/pull/26), `67ffd4e`);
+- la sincronización canónica en el commit de Demerzel `89a1bdb` ([PR #27](https://github.com/spareilleux/learn/pull/27), `ce6021f`), cuyo [despliegue Pages](https://github.com/spareilleux/learn/actions/runs/36343842316) fue correcto.
+
+El módulo, el índice de matemáticas, la [entrada del diario de Streeling](../streeling/journal/) y el tablero del 2026-09-27 de arriba se leyeron de forma anónima en los tres idiomas. Ese tablero es una instantánea tomada antes de estas fusiones, y se deja tal como se escribió.
+
+Estos dos elementos pasan así de pendientes a verificados. El catálogo de matemáticas sigue teniendo dos módulos, MAT-001 y MAT-003.
+
 ## Por verificar
 
 - Comprobar las URL públicas de esta actualización y el catálogo tras el despliegue; conservar su recibo en el registro de integración.
