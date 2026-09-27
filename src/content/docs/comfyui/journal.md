@@ -269,6 +269,8 @@ The work: the hero of the home page and the illustration at the top of the [IX c
 
 They are in [PR #23](https://github.com/spareilleux/learn/pull/23), which is **open, not merged**, so neither image is on the public site yet.
 
+*Update, 2026-09-27:* PR #23 was merged as [`3c8c1de`](https://github.com/spareilleux/learn/commit/3c8c1dee1d2d6be41cf93a7db8f520bfb4b7b022), and both images are served on the public home page and on the IX course page (anonymous check at 15:11 EDT).
+
 The settings:
 - **Model:** Z-Image-Turbo bf16, with the `qwen_3_4b` text encoder and `z_image_ae`, under Apache 2.0.
 - **Graph:** the one from [lesson 8](../08-recent-models-quantization/) (8 steps, cfg 1, `res_multistep`, shift 3, no negative prompt), at 1344 × 768.

@@ -269,6 +269,8 @@ El trabajo: la imagen de cabecera de la página de inicio y la ilustración de l
 
 Están en la [PR #23](https://github.com/spareilleux/learn/pull/23), que está **abierta, sin fusionar**: ninguna de las dos imágenes está todavía en el sitio público.
 
+*Actualización, 2026-09-27:* la PR #23 se fusionó como [`3c8c1de`](https://github.com/spareilleux/learn/commit/3c8c1dee1d2d6be41cf93a7db8f520bfb4b7b022), y las dos imágenes se sirven en la página de inicio pública y en la del curso de IX (comprobación anónima a las 15:11 EDT).
+
 Los ajustes:
 - **Modelo:** Z-Image-Turbo bf16, con el codificador de texto `qwen_3_4b` y `z_image_ae`, bajo Apache 2.0.
 - **Grafo:** el de la [lección 8](../08-recent-models-quantization/) (8 pasos, cfg 1, `res_multistep`, shift 3, sin prompt negativo), a 1344 × 768.

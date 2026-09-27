@@ -269,6 +269,8 @@ Le travail : l'image d'en-tête de la page d'accueil et l'illustration en haut d
 
 Elles sont dans la [PR #23](https://github.com/spareilleux/learn/pull/23), qui est **ouverte, pas fusionnée** : aucune des deux images n'est encore sur le site public.
 
+*Mise à jour, 2026-09-27 :* la PR #23 a été fusionnée en [`3c8c1de`](https://github.com/spareilleux/learn/commit/3c8c1dee1d2d6be41cf93a7db8f520bfb4b7b022), et les deux images sont servies sur la page d'accueil publique et sur celle du cours IX (vérification anonyme à 15 h 11 EDT).
+
 Les réglages :
 - **Modèle :** Z-Image-Turbo bf16, avec l'encodeur de texte `qwen_3_4b` et `z_image_ae`, sous Apache 2.0.
 - **Graphe :** celui de la [leçon 8](../08-recent-models-quantization/) (8 pas, cfg 1, `res_multistep`, shift 3, sans prompt négatif), en 1344 × 768.
