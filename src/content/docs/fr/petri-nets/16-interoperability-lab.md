@@ -56,7 +56,7 @@ Contrairement aux leçons précédentes du cours, les prédictions ont été enr
 
 ## E1 : lire, analyser, écrire, relire
 
-Le programme calcule ce que le réseau **signifie**, sous forme de lignes comparables. Il le fait après la première lecture, puis de nouveau après avoir écrit le réseau et l'avoir relu :
+Le programme calcule ce que le réseau **signifie**, sous forme de lignes comparables. Il le fait après la première lecture, puis de nouveau après avoir écrit le réseau et l'avoir relu. Les deux listes sont comparées en entier : une ligne que l'une a et l'autre n'a pas compte comme une différence :
 
 ```text
 == E1: the admission net, read, written and read again ==
@@ -134,23 +134,30 @@ inhibitor-arc.pnml      READ: 3 states, dead: waiting=0 tested=2 running=0 done=
 
 Il n'y avait ni erreur ni avertissement. C'est la pire issue possible d'un échange : un fichier qui se lit, et qui veut dire autre chose.
 
-Le lecteur refuse désormais tout arc dont le type n'est pas `normal`, et dit pourquoi ([`Pnml.cs`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/PetriNets/Pnml.cs)) :
+Le lecteur refuse désormais un arc dont le genre n'est pas `normal`, et dit pourquoi ([`Pnml.cs`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/PetriNets/Pnml.cs)). Il cherche ce genre dans un enfant `<type>` ou `<arctype>`, écrit en attribut (`<type value="inhibitor"/>`) ou en étiquette (`<type><text>inhibitor</text></type>`), et refuse aussi un tel enfant qui ne dit rien :
 
 ```csharp
-var kind = (string?)element.Element(ns + "type")?.Attribute("value");
-if (kind is not null && kind != "normal")
-    throw new NotSupportedException($"Arc {(string?)element.Attribute("id") ?? $"{source} -> {target}"} is of type {kind}; the P/T reader reads ordinary arcs only.");
+foreach (var marker in element.Elements().Where(child => child.Name.LocalName is "type" or "arctype"))
+{
+    var kind = (string?)marker.Attribute("value") ?? Text(marker);
+    if (kind != "normal")
+        throw new NotSupportedException($"Arc {(string?)element.Attribute("id") ?? $"{source} -> {target}"} is of type {kind ?? "(unstated)"}; the P/T reader reads ordinary arcs only.");
+}
 ```
 
 ```text
 inhibitor-arc.pnml      refused: NotSupportedException: Arc r-inhibits-admit is of type inhibitor; the P/T reader reads ordinary arcs only.
 ```
 
+**C'est tout ce qu'il reconnaît.** Un genre noté autrement, dans un bloc `<toolspecific>` par exemple, lui échappe, et l'arc est encore lu comme un arc ordinaire.
+
 Un test unitaire, `An_arc_the_reader_does_not_model_is_refused_not_read_as_an_ordinary_arc`, fixe la correction :
 - il échouait avant la correction (1 des 5 tests PNML) ;
 - il passe après (5 sur 5), et tout le cours aussi (92 tests, 19 sorties comparées).
 
 Un arc typé `normal` est toujours lu : il dit que l'arc est ordinaire, et le test le vérifie comme contrôle.
+
+**La revue a trouvé la première version trop étroite :** elle ne lisait que la forme attribut de `<type>`. `An_arc_kind_given_as_a_label_or_an_arctype_is_refused_too` couvre la forme étiquette, l'enfant `<arctype>` sous ses deux formes et un `<type/>` vide. Ses 4 cas échouaient avant la seconde correction et passent après. Son contrôle, `An_arc_kind_that_says_normal_is_read_as_an_ordinary_arc`, passe des deux côtés. Tout le cours compte désormais 99 tests et 19 sorties comparées.
 
 ## Ce qui n'a pas été exécuté ici
 

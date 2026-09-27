@@ -56,7 +56,7 @@ Unlike the earlier lessons of this course, the predictions were committed to a f
 
 ## E1: read, analyse, write, read again
 
-The program computes what the net **means**, as lines that can be compared. It does that after the first parse, and again after writing the net and parsing it back:
+The program computes what the net **means**, as lines that can be compared. It does that after the first parse, and again after writing the net and parsing it back. The two listings are compared in full, so a line that only one of them has counts as a difference:
 
 ```text
 == E1: the admission net, read, written and read again ==
@@ -134,23 +134,30 @@ inhibitor-arc.pnml      READ: 3 states, dead: waiting=0 tested=2 running=0 done=
 
 There was no error and no warning. This is the worst outcome an exchange can have: a file that parses, and means something else.
 
-The reader now refuses any arc whose type is not `normal`, and says why ([`Pnml.cs`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/PetriNets/Pnml.cs)):
+The reader now refuses an arc whose kind is not `normal`, and says why ([`Pnml.cs`](https://github.com/spareilleux/learn/blob/main/code/petri-nets/PetriNets/Pnml.cs)). It looks for the kind in a `<type>` or an `<arctype>` child, written as an attribute (`<type value="inhibitor"/>`) or as a label (`<type><text>inhibitor</text></type>`), and a child that states no kind is refused too:
 
 ```csharp
-var kind = (string?)element.Element(ns + "type")?.Attribute("value");
-if (kind is not null && kind != "normal")
-    throw new NotSupportedException($"Arc {(string?)element.Attribute("id") ?? $"{source} -> {target}"} is of type {kind}; the P/T reader reads ordinary arcs only.");
+foreach (var marker in element.Elements().Where(child => child.Name.LocalName is "type" or "arctype"))
+{
+    var kind = (string?)marker.Attribute("value") ?? Text(marker);
+    if (kind != "normal")
+        throw new NotSupportedException($"Arc {(string?)element.Attribute("id") ?? $"{source} -> {target}"} is of type {kind ?? "(unstated)"}; the P/T reader reads ordinary arcs only.");
+}
 ```
 
 ```text
 inhibitor-arc.pnml      refused: NotSupportedException: Arc r-inhibits-admit is of type inhibitor; the P/T reader reads ordinary arcs only.
 ```
 
+**That is all it recognises.** A kind recorded any other way, inside a `<toolspecific>` block for instance, is not seen, and such an arc is still read as an ordinary one.
+
 A unit test, `An_arc_the_reader_does_not_model_is_refused_not_read_as_an_ordinary_arc`, pins the fix:
 - it failed before the fix (1 of the 5 PNML tests failed);
 - it passes after (5 of 5), and so does the whole course (92 tests, 19 compared outputs).
 
 An arc typed `normal` is still read: it says the arc is ordinary, and the test checks that as a control.
+
+**The review found the first version too narrow:** it read only the attribute form of `<type>`. `An_arc_kind_given_as_a_label_or_an_arctype_is_refused_too` covers the label form, the `<arctype>` child in both forms and an empty `<type/>`. Its 4 cases failed before the second fix and pass after. Its control, `An_arc_kind_that_says_normal_is_read_as_an_ordinary_arc`, passes on both sides. The whole course now runs 99 tests and 19 compared outputs.
 
 ## What was not run here
 

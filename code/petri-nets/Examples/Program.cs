@@ -1127,9 +1127,10 @@ void Lesson16(string directory)
 
     var written = Pnml.Write(first);
     var second = Pnml.Parse(written);
-    var differences = Meaning(second).Zip(meaning).Where(pair => pair.First != pair.Second).ToList();
+    var differences = Report.LineDifferences(meaning, Meaning(second));
     Console.WriteLine($"after the round trip, same meaning: {(differences.Count == 0 ? "yes" : $"no, {differences.Count} lines differ")}");
-    differences.ForEach(pair => Console.WriteLine($"  was: {pair.Second}\n  now: {pair.First}"));
+    foreach (var (was, now) in differences)
+        Console.WriteLine($"  was: {was ?? "(absent)"}\n  now: {now ?? "(absent)"}");
     Console.WriteLine($"second write identical to the first: {(Pnml.Write(second) == written ? "yes" : "no")}");
     // Layout may change without changing the net; counting the positions shows what was dropped.
     int Positions(string xml) => xml.Split("<position ").Length - 1;
