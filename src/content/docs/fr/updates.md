@@ -38,6 +38,19 @@ Le retest conserve les mesures 4.4.3 et présente séparément les résultats Wi
 
 L'[Artifact GA Ocean](https://claude.ai/artifact/P5JPUkCRR1cYc4herNiR9F) s'est ouvert avec un lien de connexion facultatif, sans exiger de connexion, et a affiché les quatre presets et l'attribution de Saint-Malo. Il est désormais référencé dans le [catalogue des Artifacts](../artifacts/). Cela confirme l'accès à la page partagée, pas les performances WebGPU sur tous les appareils.
 
+## 2026-09-27 — Leçon 9 de LadybugDB et Streeling MAT-003 publiées
+
+La [PR Learn #25](https://github.com/spareilleux/learn/pull/25) a été fusionnée en `438b320`, et son [déploiement Pages](https://github.com/spareilleux/learn/actions/runs/36341917142) a réussi. La [leçon 9 de LadybugDB](../ladybugdb/09-graph-lab/) et son [entrée de journal](../ladybugdb/journal/) ont été relues anonymement dans les trois langues. Les deux scripts du laboratoire ont passé la CI du cours sous Linux, Windows et macOS ; les mesures elles-mêmes ont été prises sous Windows.
+
+[Streeling MAT-003](../streeling/mathematics/mat-003-floating-point-conditioning/) est arrivé par trois fusions :
+- le laboratoire Learn ([PR #24](https://github.com/spareilleux/learn/pull/24), `00ae641`) ;
+- les libellés « en anglais » du générateur ([PR #26](https://github.com/spareilleux/learn/pull/26), `67ffd4e`) ;
+- la synchronisation canonique au commit Demerzel `89a1bdb` ([PR #27](https://github.com/spareilleux/learn/pull/27), `ce6021f`), dont le [déploiement Pages](https://github.com/spareilleux/learn/actions/runs/36343842316) a réussi.
+
+Le module, l'index des mathématiques, l'[entrée du journal Streeling](../streeling/journal/) et le tableau du 2026-09-27 ci-dessus ont été relus anonymement dans les trois langues. Ce tableau est un état pris avant ces fusions, et il reste tel qu'il a été écrit.
+
+Ces deux éléments passent donc de « restant » à « vérifié ». Le catalogue de mathématiques compte toujours deux modules, MAT-001 et MAT-003.
+
 ## À vérifier
 
 - Contrôler les URL publiques de cette mise à jour et le catalogue après déploiement ; conserver le reçu de déploiement avec le compte rendu d'intégration.
