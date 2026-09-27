@@ -52,6 +52,8 @@ Coche un module une fois étudié. Sous **Notes**, ajoute une entrée datée : c
 
 - [ ] [MAT-001 · Stratégies de démonstration](../mathematics/mat-001-proof-strategies/) <!-- mat-001-proof-strategies -->
 
+- [ ] [MAT-003 · Arithmétique flottante et conditionnement](../mathematics/mat-003-floating-point-conditioning/) <!-- mat-003-floating-point-conditioning -->
+
 ### Musique
 
 - [ ] [MUS-001 · Qu'est-ce qu'un accord ?](../music/mus-001-what-is-a-chord/) <!-- mus-001-what-is-a-chord -->
@@ -98,3 +100,11 @@ Coche un module une fois étudié. Sous **Notes**, ajoute une entrée datée : c
 ## Notes
 
 <!-- ## AAAA-MM-JJ — CODE · Titre -->
+
+## 2026-09-27 — MAT-003 · Arithmétique flottante et conditionnement
+
+Synchronisé depuis Demerzel au commit [`89a1bdb`](https://github.com/GuitarAlchemist/Demerzel/commit/89a1bdb2801d32424dd17287ba67185572610277) (PR n° 1134). Les nombres du module viennent du laboratoire Learn [`code/streeling-mathematics`](https://github.com/spareilleux/learn/tree/c8135fa508fcb9d35593e8dedbb925c44282b3a2/code/streeling-mathematics), qui épingle `ix-math` d'IX à `e35138b9` et vérifie les matrices de Hilbert H_2 à H_16 contre leur inverse entière exacte. Ils ont été mesurés sous Windows 11 x86-64 ; la CI hébergée a reproduit la sortie imprimée sous Linux, Windows et macOS.
+
+- La fonction `inverse` d'IX répond `Singular` pour la première fois à n = 11. Multiplier H par 2^-20 ramène ce seuil à n = 6 ; la multiplier par 2^20 le supprime jusqu'à n = 16, et une inverse acceptée à n = 14 a une erreur directe de 1,04 (aucun chiffre juste).
+- Erreur trouvée et corrigée avant publication : le κ₂ d'IX passe sous κ∞/n dès n = 10, et une première lecture y voyait la preuve d'une SVD fausse. La bande κ∞/n ≤ κ₂ ≤ κ∞ vaut pour une seule matrice, et le laboratoire comparait la H_n exacte à la fl(H_n) stockée : c'est une observation, pas un défaut.
+- Encore ouvert : multiplier fl(H) par une puissance de deux exacte change le κ₂ d'IX (bits identiques aux trois échelles pour 5 tailles sur 15), donc au moins deux des trois réponses ne sont pas le κ₂ de leur entrée. Laquelle est juste n'est pas établi.
