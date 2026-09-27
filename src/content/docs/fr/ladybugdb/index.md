@@ -68,6 +68,7 @@ Les leçons 5 et 6 interrogent un autre dépôt : les projets .NET de [GuitarAlc
 | 6 | [LadybugDB depuis Java](06-java/) | JDBC |
 | 7 | [Algorithmes de graphe et recherche plein texte](07-algorithms/) | index plein texte, `CONTAINSTABLE` |
 | 8 | [Persistance, transactions et concurrence](08-persistence/) | isolation, verrous, journal des transactions |
+| 9 | [Un laboratoire de graphe : traductions, cycles de prérequis, atteignabilité bornée](09-graph-lab/) | jeux d'essai, CTE récursive bornée |
 | — | [Journal](journal/) | |
 
 ## Ressources
