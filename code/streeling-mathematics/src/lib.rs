@@ -145,6 +145,9 @@ pub struct Measurement {
 }
 
 impl Measurement {
+    /// Whether IX's kappa_2, computed on the stored fl(scale * H_n), lies in the band kappa_inf / n <= kappa_2 <=
+    /// kappa_inf of the exact H_n. The two sides describe different matrices, so `false` is a measurement, not
+    /// proof of an svd defect (README, note of 2026-09-27).
     pub fn band_holds(&self) -> bool {
         self.kappa_inf / self.n as f64 <= self.kappa2 && self.kappa2 <= self.kappa_inf
     }

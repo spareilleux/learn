@@ -28,10 +28,13 @@ fn p0_the_exact_inverse_is_exact_and_the_check_can_fail() {
 }
 
 // P1 was pre-registered as "the band holds up to n = 11". Refuted on the first run: IX's kappa_2 leaves the
-// band at n = 10, far below 1/u, and stays near 1e12 while the true value keeps growing. The test now pins
-// what was measured, still judged by the theorem's band and not by a snapshot.
+// band at n = 10, far below 1/u, and stays near 1e12 while kappa_inf of the exact H_n keeps growing. The test
+// pins what was measured, judged by that band and not by a snapshot.
+// Qualified 2026-09-27, after review: the band bounds kappa_2 of the exact H_n, while IX computes kappa_2 of
+// the stored fl(H_n), a different matrix. Falling below it is an observation, not proof of an svd defect
+// (README, note of 2026-09-27). The test was renamed accordingly; no assertion changed.
 #[test]
-fn p1_kappa_2_lies_in_the_theorem_band_up_to_9_and_ix_underestimates_it_from_10() {
+fn p1_ix_kappa_2_of_fl_h_is_inside_the_exact_h_band_up_to_9_and_below_it_from_10() {
     for n in 2..=9 {
         let m = measure(n, 1.0);
         assert!(
@@ -111,7 +114,9 @@ fn p4_the_refusal_measures_scale_not_conditioning() {
 
 // P5 had two halves. The inverse half held: scaling by 2^k is bit-exact through `inverse`. The svd half, a
 // hypothesis from reading svd.rs, was refuted: kappa_2 changes with the scale, and at n = 10 only 2^20 H
-// puts it back inside the theorem's band.
+// puts it back inside the band of the exact H_n.
+// Qualified 2026-09-27: 2^k fl(H) are exact multiples of fl(H), so their exact kappa_2 are equal. Three
+// different answers mean at least two are not kappa_2 of their input; this does not say which one is right.
 #[test]
 fn p5_scaling_is_bit_exact_through_inverse_but_changes_the_svd_answer() {
     for k in [-20, 20] {

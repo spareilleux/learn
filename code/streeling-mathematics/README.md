@@ -20,6 +20,8 @@ Two predictions were refuted on the first run, and the tests keep them visible:
 
 **Note, 2026-09-27, after review.** The band κ∞/n ≤ κ₂ ≤ κ∞ holds for one matrix. Here κ∞ comes from the exact rational H_n, while IX computes κ₂ on fl(H_n), the matrix stored in binary64: two different inputs. So P1 records a measurement, IX's κ₂ against the band of the exact H_n. **It does not prove that IX's `svd` is wrong.** That would need a same-input oracle, meaning κ of fl(H_n) itself in higher precision, or a checked perturbation bound. The P1 test name and comment say "underestimates"; read them as "falls below the band of the exact matrix".
 
+**Update, later on 2026-09-27.** The P1 test is renamed `p1_ix_kappa_2_of_fl_h_is_inside_the_exact_h_band_up_to_9_and_below_it_from_10`. Its comment, P5's comment and the doc of `band_holds` now say the same thing. No assertion, expected value or preregistration changed.
+
 P5b does not depend on the band. 2^±20·fl(H) are exact multiples of fl(H), so their κ₂ are equal in exact arithmetic, and three different answers mean at least two are not κ₂ of the input. That still does not say which one is right.
 
 The expected file was produced on Windows x86-64. CI runs `check.sh` on Linux, Windows and macOS: a diff there would be a measured cross-platform difference.
