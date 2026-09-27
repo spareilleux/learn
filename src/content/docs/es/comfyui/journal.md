@@ -35,7 +35,7 @@ Lo que este curso encontró en ComfyUI v0.36.0, en su documentación y en los ar
 
 | Esperado | Lo que pasa | Dónde | Medición | Estado |
 |---|---|---|---|---|
-| Una carpeta base nueva arranca el servidor | El arranque se detiene con `FileNotFoundError`: el servidor lista `custom_nodes` en la carpeta nueva antes de que nada la cree | [`main.py:198-201`](https://github.com/Comfy-Org/ComfyUI/blob/ee71d5c4993f29086b27fde1629a945ae48425bf/main.py#L198-L201) | Reproducido en cada carpeta base nueva | Reproducido; [`server.sh`](https://github.com/spareilleux/learn/blob/main/code/comfyui/server.sh) crea primero la carpeta vacía |
+| Una carpeta base nueva arranca el servidor | El arranque se detiene con `FileNotFoundError`: el servidor lista `custom_nodes` en la carpeta nueva antes de que nada la cree | [`main.py:198-201`](https://github.com/Comfy-Org/ComfyUI/blob/ee71d5c4993f29086b27fde1629a945ae48425bf/main.py#L198-L201) | Reproducido en cada carpeta base nueva | Reproducido; [`server.sh`](https://github.com/spareilleux/learn/blob/main/code/comfyui/server.sh) crea primero la carpeta vacía. Volvió a ocurrir con un servidor lanzado sin él ([2026-09-26](#2026-09-26--dos-ilustraciones-para-este-sitio-con-z-image-turbo)) |
 | `--base-directory` no toca la instalación | Migró la base `user/comfyui.db` heredada de la instalación, dejó un `.bak` al lado y copió la base en la carpeta de prueba | `--base-directory` sin `--database-url` | El original se restauró desde la copia; ambos SHA-256 coincidían | Reproducido; se evita con `--database-url sqlite:///:memory:` ([Verificación de ComfyUI para la escena orbital](#2026-09-19--verificación-de-comfyui-para-la-escena-orbital)) |
 | El tutorial de inicio describe `EmptyLatentImage` | Dice que el nodo crea un latente de ruido. El nodo crea ceros, y es `KSampler` quien hace el ruido | [`nodes.py`](https://github.com/Comfy-Org/ComfyUI/blob/ee71d5c4993f29086b27fde1629a945ae48425bf/nodes.py), frente al [tutorial de texto a imagen](https://docs.comfy.org/get_started/first_generation) | Leído en el código del nodo en el commit fijado | Reproducido. La documentación es falsa, el comportamiento es correcto |
 | El mismo grafo y la misma semilla dan los mismos píxeles | La imagen cambia cuando la indicación negativa se vuelve a codificar con la UNet ya cargada | [`nodes.py`](https://github.com/Comfy-Org/ComfyUI/blob/ee71d5c4993f29086b27fde1629a945ae48425bf/nodes.py), `CLIPTextEncode` y `KSampler` | `698e7867…` en un servidor recién arrancado, `5374ac40…` en caliente: 0,92 niveles de diferencia media, 2,63 % de los píxeles por encima de 8. `--deterministic` no cambió nada | Reproducido. La operación responsable sigue sin identificarse ([Una semilla, dos imágenes](#2026-09-16--una-semilla-dos-imágenes)) |
@@ -256,6 +256,40 @@ Cinco hallazgos de los primeros días vivían solo en el informe de la vía, nun
 - **`--lowvram` no cambia nada frente al estado normal.** El indicador fija `VRAMState.LOW_VRAM`, pero el presupuesto de carga parcial toma la misma rama para `LOW_VRAM` y para `NORMAL_VRAM`, y calcula la misma cantidad a partir de la memoria libre en ambos casos. Los renders del 16 de septiembre no midieron ninguna diferencia; el código dice por qué. `--novram` es otra cosa: fija el presupuesto en 0,1.
 - **comfy-cli envía los comandos a Comfy Cloud en cuanto existe una credencial.** Su propio `where.py` expone el orden de precedencia, y la última regla es una detección automática: cloud si hay alguna credencial de cloud configurada, clave de API o sesión OAuth activa, y si no, local. Iniciar sesión una vez cambia el destino de los comandos siguientes, sin que la línea de comandos lo diga. Leído hoy en `main`; comfy-cli no está anclado por este curso.
 - **El que caducó.** Una nota del 16 de septiembre decía que la página de instalación portable solo anuncia NVIDIA o CPU, mientras que la v0.36.0 publica builds de AMD e Intel. La versión sí publica cuatro archivos de Windows —amd, intel, nvidia y nvidia_cu126— pero la página leída hoy documenta los tres fabricantes, con un archivo de comandos para cada uno. Dijera lo que dijera entonces, ya no lo dice, y no hay ninguna captura que pruebe el estado anterior. La nota se retira en vez de publicarse: un reproche a una documentación, sin prueba del texto reprochado, no es un hallazgo.
+
+## 2026-09-26 — Dos ilustraciones para este sitio con Z-Image-Turbo
+
+*Observación retrospectiva: las imágenes eran un trabajo de producción, no un experimento, y no se escribió ninguna predicción antes.*
+
+El trabajo: la imagen de cabecera de la página de inicio y la ilustración de la parte superior del [curso de IX](../../machine-learning-ix/). Ambas se generaron en la máquina del curso con ComfyUI 0.36.0 portable y modelos que ya estaban en el disco, sin descargas ni servicios de pago. [`code/site-visuals/`](https://github.com/spareilleux/learn/tree/e4baaa6e3adae5ad7b41269c9e6c1286347bdb37/code/site-visuals) conserva:
+- los prompts;
+- los grafos exactos enviados;
+- los tiempos;
+- el script que convierte las dos salidas en los archivos WebP del sitio, byte a byte.
+
+Están en la [PR #23](https://github.com/spareilleux/learn/pull/23), que está **abierta, sin fusionar**: ninguna de las dos imágenes está todavía en el sitio público.
+
+Los ajustes:
+- **Modelo:** Z-Image-Turbo bf16, con el codificador de texto `qwen_3_4b` y `z_image_ae`, bajo Apache 2.0.
+- **Grafo:** el de la [lección 8](../08-recent-models-quantization/) (8 pasos, cfg 1, `res_multistep`, shift 3, sin prompt negativo), a 1344 × 768.
+- **Ejecuciones:** dos semillas por imagen, un job cada vez.
+
+| Job | Semilla | Tiempo real, de la cola al resultado | Conservada |
+|---|---|---:|---|
+| inicio | 20260926 | 443,1 s | no |
+| inicio | 20260927 | 72,2 s | sí |
+| IX | 20260926 | 253,5 s | no |
+| IX | 20260927 | 37,1 s | sí |
+
+- **La diferencia es la carga, no el muestreo.** El registro muestra 8 pasos en unos 6 s. El modelo de difusión de 12 GB y el codificador de texto de 8 GB no caben juntos en 16 GB, así que cada job los volvió a colocar, y el primero los leyó del disco en frío. Es la misma lección que la fila del arranque en frío de la tabla de experimentos.
+- **El prompt decía «sin ningún texto», y el modelo escribió igualmente.**
+  - La imagen de inicio conservada tenía un «5» legible en lo alto de su cúpula, eliminado recortando las 48 filas superiores.
+  - La imagen de IX conservada tenía tres marcas parecidas a glifos en un panel de 36 × 20 píxeles, que se difuminaron.
+  - Ambos retoques se indican en los pies de imagen. Son dos imágenes, no una tasa: sin prompt negativo, la única defensa era mirar cada región a tamaño real.
+- **La primera fila de QA volvió a ocurrir.** El servidor se lanzó a mano, sin el `server.sh` del curso, sobre una carpeta base nueva, y se detuvo con el mismo `FileNotFoundError` en `custom_nodes`. Crear las carpetas lo resolvió.
+  - La fila siguiente advierte que `--base-directory` sin `--database-url` ya migró una vez la base de datos de la instalación.
+  - Esta ejecución tampoco pasó `--database-url`. Su registro muestra una base nueva creada en su propia carpeta base, y la carpeta `user/` de la instalación conserva sus fechas del 2026-09-16. Así que esta vez no se tocó nada allí, pero la opción debía estar en la línea de comandos.
+- **No es Blender.** Son imágenes 2D planas de un modelo de difusión, no geometría renderizada. No afirman nada sobre el software que decoran.
 
 ## Por verificar
 

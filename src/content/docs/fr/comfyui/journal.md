@@ -35,7 +35,7 @@ Ce que ce cours a trouvé dans ComfyUI v0.36.0, dans sa documentation et dans le
 
 | Attendu | Ce qui se passe | Où | Mesure | État |
 |---|---|---|---|---|
-| Un dossier de base neuf démarre le serveur | Le démarrage s'arrête sur `FileNotFoundError` : le serveur liste `custom_nodes` dans le nouveau dossier avant que quoi que ce soit ne le crée | [`main.py:198-201`](https://github.com/Comfy-Org/ComfyUI/blob/ee71d5c4993f29086b27fde1629a945ae48425bf/main.py#L198-L201) | Reproduit à chaque dossier de base neuf | Reproduit ; [`server.sh`](https://github.com/spareilleux/learn/blob/main/code/comfyui/server.sh) crée le dossier vide d'abord |
+| Un dossier de base neuf démarre le serveur | Le démarrage s'arrête sur `FileNotFoundError` : le serveur liste `custom_nodes` dans le nouveau dossier avant que quoi que ce soit ne le crée | [`main.py:198-201`](https://github.com/Comfy-Org/ComfyUI/blob/ee71d5c4993f29086b27fde1629a945ae48425bf/main.py#L198-L201) | Reproduit à chaque dossier de base neuf | Reproduit ; [`server.sh`](https://github.com/spareilleux/learn/blob/main/code/comfyui/server.sh) crée le dossier vide d'abord. Rencontré à nouveau par un serveur lancé sans lui ([2026-09-26](#2026-09-26--deux-illustrations-pour-ce-site-avec-z-image-turbo)) |
 | `--base-directory` ne touche pas à l'installation | Il a migré la base `user/comfyui.db` héritée de l'installation, laissé un `.bak` à côté et copié la base dans le dossier de test | `--base-directory` sans `--database-url` | L'original a été restauré depuis la sauvegarde ; les deux SHA-256 concordaient | Reproduit ; évité avec `--database-url sqlite:///:memory:` ([Vérification ComfyUI pour la scène orbitale](#2026-09-19--vérification-comfyui-pour-la-scène-orbitale)) |
 | Le tutoriel de démarrage décrit `EmptyLatentImage` | Il dit que le nœud fabrique un latent de bruit. Le nœud fabrique des zéros, et c'est `KSampler` qui fait le bruit | [`nodes.py`](https://github.com/Comfy-Org/ComfyUI/blob/ee71d5c4993f29086b27fde1629a945ae48425bf/nodes.py), contre le [tutoriel text-to-image](https://docs.comfy.org/get_started/first_generation) | Lu dans le code du nœud au commit épinglé | Reproduit. La documentation est fausse, le comportement est juste |
 | Le même graphe et la même graine donnent les mêmes pixels | L'image change quand l'invite négative est réencodée alors que l'UNet est déjà chargé | [`nodes.py`](https://github.com/Comfy-Org/ComfyUI/blob/ee71d5c4993f29086b27fde1629a945ae48425bf/nodes.py), `CLIPTextEncode` et `KSampler` | `698e7867…` sur un serveur neuf, `5374ac40…` à chaud : 0,92 niveau d'écart moyen, 2,63 % des pixels au-delà de 8. `--deterministic` n'a rien changé | Reproduit. L'opération responsable n'est toujours pas identifiée ([Une graine, deux images](#2026-09-16--une-graine-deux-images)) |
@@ -256,6 +256,40 @@ Cinq constats des premiers jours ne vivaient que dans le rapport de voie, jamais
 - **`--lowvram` ne change rien par rapport à l'état normal.** Le drapeau met `VRAMState.LOW_VRAM`, mais le budget de chargement partiel prend la même branche pour `LOW_VRAM` et pour `NORMAL_VRAM`, et calcule le même montant à partir de la mémoire libre dans les deux cas. Les rendus du 16 septembre n'ont mesuré aucune différence ; le code dit pourquoi. `--novram` est autre chose : il fixe le budget à 0,1.
 - **comfy-cli envoie les commandes vers Comfy Cloud dès qu'un identifiant existe.** Son propre `where.py` expose l'ordre de priorité, et la dernière règle est une détection automatique : cloud si un identifiant cloud est configuré, clé d'API ou session OAuth active, sinon local. Se connecter une fois change la destination des commandes suivantes, sans que la ligne de commande le dise. Lu aujourd'hui sur `main` ; comfy-cli n'est pas épinglé par ce cours.
 - **Celui qui a expiré.** Une note du 16 septembre disait que la page d'installation portable n'annonce que NVIDIA ou CPU, alors que la v0.36.0 publie des builds AMD et Intel. La version publie bien quatre archives Windows — amd, intel, nvidia et nvidia_cu126 — mais la page lue aujourd'hui documente les trois fabricants, avec un fichier de commandes chacun. Quoi qu'elle ait dit alors, elle ne le dit plus, et aucune capture ne prouve l'état antérieur. La note est retirée plutôt que publiée : un reproche fait à une documentation, sans preuve du texte reproché, n'est pas un constat.
+
+## 2026-09-26 — Deux illustrations pour ce site avec Z-Image-Turbo
+
+*Observation rétrospective : les images étaient un travail de production, pas une expérience, et aucune prédiction n'a été écrite d'abord.*
+
+Le travail : l'image d'en-tête de la page d'accueil et l'illustration en haut du [cours IX](../../machine-learning-ix/). Toutes deux ont été générées sur la machine du cours avec ComfyUI 0.36.0 portable et des modèles déjà sur le disque, sans téléchargement ni service payant. [`code/site-visuals/`](https://github.com/spareilleux/learn/tree/e4baaa6e3adae5ad7b41269c9e6c1286347bdb37/code/site-visuals) conserve :
+- les prompts ;
+- les graphes exacts envoyés ;
+- les temps ;
+- le script qui transforme les deux sorties en fichiers WebP du site, octet pour octet.
+
+Elles sont dans la [PR #23](https://github.com/spareilleux/learn/pull/23), qui est **ouverte, pas fusionnée** : aucune des deux images n'est encore sur le site public.
+
+Les réglages :
+- **Modèle :** Z-Image-Turbo bf16, avec l'encodeur de texte `qwen_3_4b` et `z_image_ae`, sous Apache 2.0.
+- **Graphe :** celui de la [leçon 8](../08-recent-models-quantization/) (8 pas, cfg 1, `res_multistep`, shift 3, sans prompt négatif), en 1344 × 768.
+- **Exécutions :** deux graines par image, un job à la fois.
+
+| Job | Graine | Durée réelle, de la file au résultat | Gardée |
+|---|---|---:|---|
+| accueil | 20260926 | 443,1 s | non |
+| accueil | 20260927 | 72,2 s | oui |
+| IX | 20260926 | 253,5 s | non |
+| IX | 20260927 | 37,1 s | oui |
+
+- **L'écart vient du chargement, pas de l'échantillonnage.** Le journal montre 8 pas en 6 s environ. Le modèle de diffusion de 12 Go et l'encodeur de texte de 8 Go ne tiennent pas ensemble dans 16 Go, donc chaque job les a remis en place, et le premier les a lus à froid sur le disque. C'est la même leçon que la ligne du démarrage à froid dans la table des expériences.
+- **Le prompt disait « sans aucune écriture », et le modèle a écrit quand même.**
+  - L'image d'accueil gardée avait un « 5 » lisible au sommet de son dôme, retiré en rognant les 48 lignes du haut.
+  - L'image IX gardée avait trois marques semblables à des glyphes sur un panneau de 36 × 20 pixels, qui ont été floutées.
+  - Les deux retouches sont indiquées dans les légendes. Ce sont deux images, pas un taux : sans prompt négatif, la seule défense était de regarder chaque région en taille réelle.
+- **La première ligne de QA s'est reproduite.** Le serveur a été lancé à la main, sans le `server.sh` du cours, sur un dossier de base neuf, et il s'est arrêté avec la même `FileNotFoundError` sur `custom_nodes`. Créer les dossiers a réglé le problème.
+  - La ligne suivante prévient que `--base-directory` sans `--database-url` a déjà migré la base de données de l'installation.
+  - Cette exécution n'a pas passé `--database-url` non plus. Son journal montre une nouvelle base créée dans son propre dossier de base, et le dossier `user/` de l'installation porte toujours ses dates du 2026-09-16. Rien n'y a donc été touché cette fois, mais l'option avait sa place sur la ligne de commande.
+- **Pas Blender.** Ce sont des images 2D plates issues d'un modèle de diffusion, pas une géométrie rendue. Elles n'affirment rien sur les logiciels qu'elles décorent.
 
 ## À vérifier
 
