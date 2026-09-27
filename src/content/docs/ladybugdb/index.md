@@ -68,6 +68,7 @@ Lessons 5 and 6 query another repository: the .NET projects of [GuitarAlchemist/
 | 6 | [LadybugDB from Java](06-java/) | JDBC |
 | 7 | [Graph algorithms and full-text search](07-algorithms/) | full-text indexes, `CONTAINSTABLE` |
 | 8 | [Persistence, transactions and concurrency](08-persistence/) | isolation, locks, the transaction log |
+| 9 | [A graph lab: translations, prerequisite cycles, bounded reachability](09-graph-lab/) | test fixtures, a recursive CTE with a bound |
 | — | [Journal](journal/) | |
 
 ## Resources

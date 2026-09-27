@@ -68,6 +68,7 @@ Las lecciones 5 y 6 consultan otro repositorio: los proyectos .NET de [GuitarAlc
 | 6 | [LadybugDB desde Java](06-java/) | JDBC |
 | 7 | [Algoritmos de grafos y búsqueda de texto completo](07-algorithms/) | índices de texto completo, `CONTAINSTABLE` |
 | 8 | [Persistencia, transacciones y concurrencia](08-persistence/) | aislamiento, bloqueos, el registro de transacciones |
+| 9 | [Un laboratorio de grafos: traducciones, ciclos de prerrequisitos, alcanzabilidad acotada](09-graph-lab/) | datos de prueba, una CTE recursiva acotada |
 | — | [Diario](journal/) | |
 
 ## Recursos
