@@ -36,6 +36,7 @@ Otros tres cursos de este sitio cubren el trasfondo, y este enlaza con ellos en 
 - leer un vector OPTIC-K partición por partición, calcular a mano la similitud ponderada de dos voicings y decir a qué es invariante el vector y a qué no;
 - abrir un archivo de índice OPTK, explicar su cabecera y predecir qué devuelve una búsqueda y por qué;
 - seguir un mensaje de chat a través de los hooks, las guardas deterministas, el enrutador de intenciones y los agentes de GA, y explicar por qué algunas preguntas funcionan sin modelo y otras fallan;
+- calificar las respuestas musicales de una skill determinista con un pequeño oráculo propio, y decir hasta dónde llega ese oráculo;
 - distinguir, en la IA de GA, lo que funciona hoy, lo que se está construyendo y lo que solo está planeado.
 
 ## Plan
@@ -46,6 +47,7 @@ Otros tres cursos de este sitio cubren el trasfondo, y este enlaza con ellos en 
 | 2 | [Embeddings OPTIC-K](02-optic-k-embeddings/) | `EmbeddingSchema`, `MusicalEmbeddingGenerator`, `VoicingAnalyzer` | records posicionales, `TensorPrimitives` |
 | 3 | [El índice y la búsqueda](03-index-and-search/) | `OptickIndexWriter`, `OptickIndexReader`, `OptickSearchStrategy`, `MusicalQueryEncoder` | formatos binarios, archivos proyectados en memoria, montículos top-k |
 | 4 | [El chatbot y sus agentes](04-chatbot-and-agents/) | `ProductionOrchestrator`, `SemanticIntentRouter`, `SemanticRouter`, skills, hooks | servicios hospedados, respaldos, probar un host dentro del proceso |
+| 5 | [La skill de improvisación](05-improvisation-skill/) | `ImprovisationSkill` frente a la teoría acorde–escala, issue #744 | expresiones regulares con generador de código fuente, leer `AgentResponse.Data`, escribir un oráculo de pruebas |
 | — | [Diario](journal/) | | |
 
 ## Requisitos previos

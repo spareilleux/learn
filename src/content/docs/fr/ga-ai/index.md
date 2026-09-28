@@ -36,6 +36,7 @@ Trois autres cours de ce site couvrent les bases, et celui-ci renvoie vers eux a
 - lire un vecteur OPTIC-K partition par partition, calculer à la main la similarité pondérée de deux voicings, et dire à quoi le vecteur est invariant et à quoi il ne l'est pas ;
 - ouvrir un fichier d'index OPTK, expliquer son en-tête, et prédire ce que renvoie une recherche et pourquoi ;
 - suivre un message de chat à travers les hooks, les gardes déterministes, le routeur d'intentions et les agents de GA, et expliquer pourquoi certaines questions fonctionnent sans modèle et d'autres échouent ;
+- évaluer les réponses musicales d'un skill déterministe avec un petit oracle écrit de ma main, et dire où cet oracle s'arrête ;
 - distinguer, dans l'IA de GA, ce qui fonctionne aujourd'hui, ce qui est en construction, et ce qui n'est que prévu.
 
 ## Plan
@@ -46,6 +47,7 @@ Trois autres cours de ce site couvrent les bases, et celui-ci renvoie vers eux a
 | 2 | [Les embeddings OPTIC-K](02-optic-k-embeddings/) | `EmbeddingSchema`, `MusicalEmbeddingGenerator`, `VoicingAnalyzer` | records positionnels, `TensorPrimitives` |
 | 3 | [L'index et la recherche](03-index-and-search/) | `OptickIndexWriter`, `OptickIndexReader`, `OptickSearchStrategy`, `MusicalQueryEncoder` | formats binaires, fichiers mappés en mémoire, tas top-k |
 | 4 | [Le chatbot et ses agents](04-chatbot-and-agents/) | `ProductionOrchestrator`, `SemanticIntentRouter`, `SemanticRouter`, skills, hooks | services hébergés, replis, tester un hôte dans le processus |
+| 5 | [Le skill d'improvisation](05-improvisation-skill/) | `ImprovisationSkill` face à la théorie accord–gamme, ticket #744 | expressions régulières générées par source, lire `AgentResponse.Data`, écrire un oracle de test |
 | — | [Journal](journal/) | | |
 
 ## Prérequis
