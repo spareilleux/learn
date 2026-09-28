@@ -33,6 +33,14 @@ reflections no longer smear into vertical streaks. Under Compatibility the
 steel also gets a warmer albedo, since that renderer lights it with the cool
 keys and a blue ambient only.
 
+The next revision shelves every course of the site: a face-out volume per
+course on the ground floor, one bay per area with a plaque, a card for the
+aimed volume, and a catalogue on L; a click or Enter opens the course in a new
+tab. The course list is demos/observatory/courses.json, which the site
+generates from its sidebar (src/pages/demos/observatory/courses.json.ts); the
+scene fetches it at start-up and carries the copy listed below for when it
+cannot.
+
 Native Compatibility GPU time, RTX 5080, 1600x900, 240 frames per view: 0.44 to
 0.52 ms for the previous web scene, 0.64 to 1.44 ms with the detail pass; up to
 1.55 million primitives in the overview, against 0.46 million before. With the
@@ -47,7 +55,8 @@ main.tscn fb6245c960d3625ca05920116c58351d9dbeb255beae59175d89c06d47049564
 export_presets.cfg 8b44717dc35a46dff0ba18370dfa5d9989bea04b73c4e455b404284998f06571
 scripts/fly_camera.gd 2e5cdd15ca7bdcfa30ec129e354a309f3ff7296f6fbf54ac144984ed9aa9f8e7
 scripts/capture.gd 52ea2b5e40db2f1f4cdbd7658074ef60bd117e1f4110c1b8995590a4196748d0
-scripts/observatory.gd 3473e093d271bea58501add64622ca0d93c35279556fff8a350c4e00483245ac
+scripts/observatory.gd 0922d3ecfba4516278df16e453870a533a89bacdc8cb1aaf2008eaaa343389de
+scripts/course_library.gd f03dbed1756993a90411b9e20d5417a7818c6ed61dbb7380648117d24fcda581
 scripts/steel_cube.gd f28e71fffcd151663bc9a98b3c135cc7b805490e8298d3cf01029455c973f94c
 assets/steel_portal.glb 009ec4dd8f85b74f47839d25095fbe9e087b222addccf13643639c4b98402b21
 assets/stone_marble.png a71f21a971a1a0b2b897ed42dd64f2ece500f34b246bb758d9ff7ae843e68bd3
@@ -63,13 +72,15 @@ assets/book_spines.gdshader 41f558247edef52fcff31c511de1ef40c321aeb339e40e41eb51
 assets/stone_relief.gdshader 82f26919a4a0a2742eee8ddbef9b2be09ee9a4df8273fe6845d9dd919cfe7958
 assets/steel_brushed.gdshader cff19989eb4793ddb5dc001fd3d25473080c51d250a4a5cfc168762b435ba8fd
 assets/stained_glass.gdshader 1366183601743cfb42791f5efd38e4b26e6c6d10eb8ce1ac4e9e8c7a3db6d77a
+assets/course_cover.gdshader 33ef9c5f7dbdcb200655a5f18912f8649a43f7b1675197ddee2d181ea1697ec6
+assets/courses.json a4a97ab7fffa250c62ca71fe7f6b5885e3c3ab31054cf8aa9b180ea67aae9bfc
 
 SHA-256 output files:
-index.pck 5582e318240e4c1a8ecf3eea9fd9dad6208076be40563b3a1be3dc3ded42d689
+index.pck fda001c72a395e49f2d6c2e5b4a3b2edcc87ecb800db8a682c080db50cfac45d
 index.wasm 99962b29677e42f3ba0258bd90fdc52ad90295954c4473e816ad02cfe5ff1d4f
 index.js e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981
 
 This directory contains a prebuilt binary export. Re-export only for deliberate
 scene changes. A scene re-export leaves the engine files (index.wasm, index.js)
 byte-identical, so git keeps a single copy; each scene revision adds its
-index.pck (13.1 MB here) to the binary history.
+index.pck (13.2 MB here) to the binary history.
