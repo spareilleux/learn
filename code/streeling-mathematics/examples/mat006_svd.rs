@@ -6,9 +6,10 @@ use ix_math::svd::svd;
 use ndarray::Array2;
 use std::time::Instant;
 use streeling_mathematics::mat006::*;
+use streeling_mathematics::max_or_nan;
 
 fn max(values: &[f64]) -> f64 {
-    values.iter().copied().fold(0.0, f64::max)
+    values.iter().copied().fold(0.0, max_or_nan)
 }
 
 fn zero_columns(flags: &[bool]) -> String {

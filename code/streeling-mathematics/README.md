@@ -64,10 +64,10 @@ Eight predictions held on the first run:
 - **Cost of scale (P3), one machine:** 20,000 calls of `svd` on 10^6·A take 10.10 times as long as on A; the ratio is 8.77 for M. Measured once, with the fastest of 5 runs, on an Intel Core Ultra 9 285K under Windows 11 Pro. CI does not time anything.
 
 One prediction was partly refuted, and the test keeps it visible:
-- **MAT-003's puzzle (P4):** capped at k sweeps, `svd_with_opts(2^20·fl(H_n), k, 1e-12)` reproduces bit for bit both `svd(fl(H_n))` and `svd(2^-20·fl(H_n))`, for every n from 2 to 16, as the module's explanation needs. For n = 6 to 16, the smallest such k is the predicted one. For n = 2 to 5, it is lower: 1 and 1 for n = 2, 2 and 2 for n = 3, 3 and 3 for n = 4 and 5.
+- **MAT-003's puzzle (P4):** capped at k sweeps, the singular values of `svd_with_opts(2^20·fl(H_n), k, 1e-12)`, divided by 2^20, equal bit for bit those of `svd(fl(H_n))`, and those of `svd(2^-20·fl(H_n))` divided by 2^-20, for every n from 2 to 16, as the module's explanation needs. Only the singular values are compared, not U or V. For n = 6 to 16, the smallest such k is the predicted one. For n = 2 to 5, it is lower: 1 and 1 for n = 2, 2 and 2 for n = 3, 3 and 3 for n = 4 and 5.
 
 Measured without a prediction, and only reported:
-- **Post hoc, P4:** at the predicted k, the capped result also reproduces both results, for every n. So the module's sweep counts hold. For n = 2 to 5, the extra sweeps change no bit.
+- **Post hoc, P4:** at the predicted k, the capped singular values also equal both results, for every n. For n = 2 to 5, the sweeps after the first matching k change no bit. This is consistent with the module's sweep counts but does not verify them: the lab does not count the sweeps the uncapped calls execute, and several caps give the same bits.
 - **Scale 1 against scale down:** the singular values differ for 11 of the 15 sizes. MAT-003 had reported that κ₂ changes for 10 of 15 across three scales, a different measure.
 - **M at 10^-12 and 10^-11:** the singular values are off by 3.4e-9, neither accurate nor wrong by 100%. The error of `reconstruct` is 0.0515 at 10^-13 and 10^-12.
 - **Step 1 at full rank:** the tail of an empty list of singular values prints as `-0.000000e0`. Rust's `f64` sum of nothing is −0.0, and its square root is −0.0.
