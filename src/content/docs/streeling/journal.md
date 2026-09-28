@@ -260,7 +260,7 @@ The Learn lab [`code/streeling-mathematics`](https://github.com/spareilleux/lear
 
 ## 2026-09-28 — MAT-002 · The lab
 
-The Learn lab [`code/streeling-mathematics`](https://github.com/spareilleux/learn/tree/3cce4fe7bdc56534394295b83d8e8e18404d4595/code/streeling-mathematics) ran the experiment in MAT-002's section 7, with two readings of its sections 4 and 6, against IX `ix-bracelet` and `ix-petri` pinned at `e35138b9`. The predictions are the module's own, quoted in a [pre-registration](https://github.com/spareilleux/learn/blob/9b685e4480e9e01a89980693e77b297abe96eac6/code/streeling-mathematics/preregistration-mat002.md) committed on its own before any code of this part existed, which also sets one hypothesis of the lab's own. The measurements were made on Windows 11 x86-64; hosted CI on Linux, Windows and macOS is *to verify*.
+The Learn lab [`code/streeling-mathematics`](https://github.com/spareilleux/learn/tree/3cce4fe7bdc56534394295b83d8e8e18404d4595/code/streeling-mathematics) ran the experiment in MAT-002's section 7, with two readings of its sections 4 and 6, against IX `ix-bracelet` and `ix-petri` pinned at `e35138b9`. The predictions are the module's own, quoted in a [pre-registration](https://github.com/spareilleux/learn/blob/9b685e4480e9e01a89980693e77b297abe96eac6/code/streeling-mathematics/preregistration-mat002.md) committed on its own before any code of this part existed, which also sets one hypothesis of the lab's own. The measurements were made on Windows 11 x86-64; hosted CI [reproduced the printed output](https://github.com/spareilleux/learn/actions/runs/36480884071) on Linux, Windows and macOS.
 
 - **Every prediction held** (tables above).
   - IX's D12 product is associative on all 13,824 triples.
