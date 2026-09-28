@@ -54,6 +54,7 @@ Coche un module une fois étudié. Sous **Notes**, ajoute une entrée datée : c
 - [ ] [MAT-002 · Contre-exemples, témoins et vérifications exhaustives](../mathematics/mat-002-counterexamples-and-exhaustive-checks/) <!-- mat-002-counterexamples-and-exhaustive-checks -->
 - [ ] [MAT-003 · Arithmétique flottante et conditionnement](../mathematics/mat-003-floating-point-conditioning/) <!-- mat-003-floating-point-conditioning -->
 - [ ] [MAT-004 · Vecteurs, matrices, normes et applications linéaires](../mathematics/mat-004-vectors-matrices-norms/) <!-- mat-004-vectors-matrices-norms -->
+- [ ] [MAT-005 · Problèmes aux valeurs propres symétriques](../mathematics/mat-005-symmetric-eigenproblems/) <!-- mat-005-symmetric-eigenproblems -->
 
 ### Musique
 
@@ -130,4 +131,15 @@ Synchronisé depuis Demerzel à [`d451c90`](https://github.com/GuitarAlchemist/D
 Rien n'y a été exécuté ici.
 
 - **L'expérience de sa section 7 est seulement proposée.** Elle tournerait dans un laboratoire Learn, avec des prédictions écrites avant toute exécution : l'inégalité triangulaire sur les 15 625 triplets d'une grille de 5 × 5 points pour quatre distances ; `minkowski` avec p = 1/2, p = ∞ et p = 1000 ; le coût de `determinant` pour n = 2 à 11, et sa règle du produit sur des matrices 3 × 3 à coefficients entiers. Aucun laboratoire de ce genre n'existe encore, et rien dans le module n'est une mesure.
+- **Il n'a pas été étudié ici,** donc sa case ci-dessus reste vide.
+
+## 2026-09-27 — MAT-005 · Problèmes aux valeurs propres symétriques
+
+Synchronisé depuis Demerzel à [`8bd026f`](https://github.com/GuitarAlchemist/Demerzel/commit/8bd026f9e48065c482faeae5cacf8e4808fff4cc) ([PR #1138](https://github.com/GuitarAlchemist/Demerzel/pull/1138) ; avant la fusion, une revue Codex n'a trouvé aucun problème majeur sur le dernier commit de sa branche, `4ac3ca6`). Le module lit le code d'IX à [`e35138b9`](https://github.com/GuitarAlchemist/ix/tree/e35138b9d4c707d48f802649a7fcb3f7fc94934d) et traite deux questions :
+- le contrat du solveur symétrique d'IX, `symmetric_eigen`, une méthode de Jacobi cyclique : il ne vérifie pas la symétrie et ne signale pas la convergence ;
+- pourquoi l'ACP simple d'IX n'utilise pas ce solveur : elle extrait ses composantes par la méthode de la puissance et par déflation, depuis un vecteur de départ fixe.
+
+Rien n'y a été exécuté ici.
+
+- **L'expérience de sa section 8 est seulement proposée.** Elle tournerait dans un laboratoire Learn, avec des prédictions écrites avant toute exécution : les invariants A v = λ v, VᵀV = I et A = V Λ Vᵀ sur quatre matrices ; le sous-espace propre d'une valeur propre multiple ; `symmetric_eigen` et `ix_eigen` sur une matrice non symétrique ; et l'ACP sur six points dont elle devrait manquer l'axe principal. Aucun laboratoire de ce genre n'existe encore, et rien dans le module n'est une mesure.
 - **Il n'a pas été étudié ici,** donc sa case ci-dessus reste vide.

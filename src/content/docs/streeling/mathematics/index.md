@@ -15,3 +15,4 @@ sidebar:
 - [MAT-002 · Counterexamples, Witnesses and Exhaustive Checks — When Checking Cases Is a Proof](mat-002-counterexamples-and-exhaustive-checks/)
 - [MAT-003 · Floating-Point Arithmetic and Conditioning — When a Computer Loses Digits](mat-003-floating-point-conditioning/)
 - [MAT-004 · Vectors, Matrices, Norms and Linear Maps — What a Matrix Does to Space](mat-004-vectors-matrices-norms/)
+- [MAT-005 · Symmetric Eigenproblems — The Directions a Matrix Only Stretches](mat-005-symmetric-eigenproblems/)

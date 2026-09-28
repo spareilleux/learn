@@ -85,6 +85,15 @@ La [PR Demerzel #1137](https://github.com/GuitarAlchemist/Demerzel/pull/1137) a 
 
 MAT-004 reste **en attente de vérification** jusqu'à ce que ce changement soit fusionné, que son déploiement réussisse et que les pages soient relues sans authentification.
 
+## 2026-09-27 — Streeling MAT-005 synchronisé, en attente de vérification
+
+La [PR Demerzel #1138](https://github.com/GuitarAlchemist/Demerzel/pull/1138) a été fusionnée en `8bd026f`, après l'épingle de MAT-004. Cette mise à jour la synchronise dans Learn :
+- le [module MAT-005](../streeling/mathematics/mat-005-symmetric-eigenproblems/) dans les trois langues ;
+- l'index des mathématiques ;
+- l'[entrée du journal Streeling](../streeling/journal/).
+
+MAT-005 reste **en attente de vérification** jusqu'à ce que ce changement soit fusionné, que son déploiement réussisse et que les pages soient relues sans authentification.
+
 ## À vérifier
 
 - Contrôler les URL publiques de cette mise à jour et le catalogue après déploiement ; conserver le reçu de déploiement avec le compte rendu d'intégration.
