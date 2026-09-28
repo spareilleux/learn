@@ -8,6 +8,8 @@ description = "Executable experiments behind the Streeling mathematics modules, 
 # IX pinned on one commit of main, the commit the Streeling curriculum plan read:
 # https://github.com/GuitarAlchemist/ix/commit/e35138b9d4c707d48f802649a7fcb3f7fc94934d
 [dependencies]
+ix-bracelet = { git = "https://github.com/GuitarAlchemist/ix", rev = "e35138b9d4c707d48f802649a7fcb3f7fc94934d" }
+ix-petri = { git = "https://github.com/GuitarAlchemist/ix", rev = "e35138b9d4c707d48f802649a7fcb3f7fc94934d" }
 ix-math = { git = "https://github.com/GuitarAlchemist/ix", rev = "e35138b9d4c707d48f802649a7fcb3f7fc94934d" }
 ix-supervised = { git = "https://github.com/GuitarAlchemist/ix", rev = "e35138b9d4c707d48f802649a7fcb3f7fc94934d" }
 ix-unsupervised = { git = "https://github.com/GuitarAlchemist/ix", rev = "e35138b9d4c707d48f802649a7fcb3f7fc94934d" }
