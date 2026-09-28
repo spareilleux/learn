@@ -36,7 +36,7 @@ This part also uses IX `ix-supervised`, pinned to the same commit.
   - the same fit on the centered feature;
   - the SVD route: `pseudo_inverse` of [x | 1] at 4·σ₁·ε, times y.
 - `examples/mat007_least_squares.rs` prints the offset sweep for c = 10^0…10^7, the centered fit, and the normal equations against the SVD for N = 10^0…10^7.
-- `tests/mat007.rs` has one test per prediction, M7-P1a to M7-P2d, and the negative controls.
+- `tests/mat007.rs` has one test per prediction, M7-P1a to M7-P2d, and the negative controls. Among them, a NaN weight or bias must fail every check: the errors are folded with `max_or_nan`, because `f64::max` drops a NaN operand.
 
 All nine predictions held on the first run, including the ones stated bit for bit:
 - **Offset sweep:** at c = 10^5, `fit` returns the slope 2 − 2^-18 and the bias 1.5. At c = 10^6, it returns the slope 2 + 2^-11 and the bias 0, with no error and a largest miss of 487.3. At c = 10^7, it panics with "X^T X is singular".
