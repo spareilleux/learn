@@ -274,6 +274,11 @@ export default defineConfig({
 					translations: { fr: '3D et graphisme', es: '3D y gráficos' },
 					items: [
 						{
+							label: 'Playable observatory',
+							translations: { fr: 'Observatoire interactif', es: 'Observatorio interactivo' },
+							slug: 'observatory',
+						},
+						{
 							label: 'Blender for developers',
 							translations: { fr: 'Blender pour les développeurs', es: 'Blender para desarrolladores' },
 							collapsed: true,
