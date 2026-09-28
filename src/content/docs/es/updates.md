@@ -51,6 +51,15 @@ El módulo, el índice de matemáticas, la [entrada del diario de Streeling](../
 
 Estos dos elementos pasan así de pendientes a verificados. El catálogo de matemáticas sigue teniendo dos módulos, MAT-001 y MAT-003.
 
+## 2026-09-27 — Streeling MAT-002 sincronizado, pendiente de verificación
+
+La [PR de Demerzel #1136](https://github.com/GuitarAlchemist/Demerzel/pull/1136) se revisó de forma independiente en `5e6b733` y se fusionó como `a3a07df`. Esta actualización la sincroniza en Learn:
+- el [módulo MAT-002](../streeling/mathematics/mat-002-counterexamples-and-exhaustive-checks/) en los tres idiomas;
+- el índice de matemáticas;
+- la [entrada del diario de Streeling](../streeling/journal/).
+
+MAT-002 sigue **pendiente de verificación** hasta que este cambio se fusione, su despliegue sea correcto y las páginas se lean sin autenticación. MAT-004 sigue en cola en la fuente canónica.
+
 ## Por verificar
 
 - Comprobar las URL públicas de esta actualización y el catálogo tras el despliegue; conservar su recibo en el registro de integración.

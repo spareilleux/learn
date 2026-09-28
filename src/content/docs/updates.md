@@ -51,6 +51,15 @@ The module, the mathematics index, the [Streeling journal entry](../streeling/jo
 
 These two items therefore move from awaiting to verified. The mathematics catalogue still has two modules, MAT-001 and MAT-003.
 
+## 2026-09-27 — Streeling MAT-002 synced, awaiting verification
+
+[Demerzel PR #1136](https://github.com/GuitarAlchemist/Demerzel/pull/1136) was reviewed independently at `5e6b733` and merged as `a3a07df`. This update syncs it into Learn:
+- the [MAT-002 module](../streeling/mathematics/mat-002-counterexamples-and-exhaustive-checks/) in the three languages;
+- the mathematics index;
+- the [Streeling journal entry](../streeling/journal/).
+
+MAT-002 stays **awaiting verification** until this change is merged, its deployment succeeds and the pages are read back anonymously. MAT-004 is still queued in the canonical source.
+
 ## To verify
 
 - Check this update's public URLs and catalog after deployment; keep the deploy receipt with the integration record.

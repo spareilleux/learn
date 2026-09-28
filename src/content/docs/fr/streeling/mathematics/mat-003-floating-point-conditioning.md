@@ -3,13 +3,13 @@ title: Arithmétique flottante et conditionnement — Quand un ordinateur perd d
 description: Arithmétique flottante et conditionnement — Mathématiques
 sidebar:
   label: MAT-003 · Arithmétique flottante et conditionnement
-  order: 2
+  order: 3
 ---
 
 :::note[Streeling University]
 **MAT-003** · Arithmétique flottante et conditionnement · intermédiaire · 45 minutes
 
-Généré par le département *Mathématiques* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/89a1bdb2801d32424dd17287ba67185572610277/state/streeling/courses/mathematics/fr/mat-003-floating-point-conditioning.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Mathématiques* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/a3a07df103c1f13a4dec45514fe775bfd4f76e77/state/streeling/courses/mathematics/fr/mat-003-floating-point-conditioning.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MAT-001](../../mathematics/mat-001-proof-strategies/)
 :::

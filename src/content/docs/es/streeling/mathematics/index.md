@@ -12,4 +12,5 @@ sidebar:
 ## Módulos
 
 - [MAT-001 · Estrategias de demostracion — Como probar cosas](mat-001-proof-strategies/)
+- [MAT-002 · Contraejemplos, testigos y comprobaciones exhaustivas — Cuando comprobar casos es una demostración](mat-002-counterexamples-and-exhaustive-checks/)
 - [MAT-003 · Aritmética de punto flotante y condicionamiento — Cuando una computadora pierde dígitos](mat-003-floating-point-conditioning/)

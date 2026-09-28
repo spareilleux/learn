@@ -51,7 +51,7 @@ Marca un módulo una vez estudiado. En **Notas**, añade una entrada fechada: lo
 ### Matemáticas
 
 - [ ] [MAT-001 · Estrategias de demostración](../mathematics/mat-001-proof-strategies/) <!-- mat-001-proof-strategies -->
-
+- [ ] [MAT-002 · Contraejemplos, testigos y comprobaciones exhaustivas](../mathematics/mat-002-counterexamples-and-exhaustive-checks/) <!-- mat-002-counterexamples-and-exhaustive-checks -->
 - [ ] [MAT-003 · Aritmética de punto flotante y condicionamiento](../mathematics/mat-003-floating-point-conditioning/) <!-- mat-003-floating-point-conditioning -->
 
 ### Música
@@ -108,3 +108,14 @@ Sincronizado desde Demerzel en el commit [`89a1bdb`](https://github.com/GuitarAl
 - La función `inverse` de IX responde `Singular` por primera vez en n = 11. Multiplicar H por 2^-20 adelanta ese umbral a n = 6; multiplicarla por 2^20 lo elimina hasta n = 16, y una inversa aceptada en n = 14 tiene un error hacia delante de 1,04 (ningún dígito correcto).
 - Error encontrado y corregido antes de publicar: el κ₂ de IX cae por debajo de κ∞/n desde n = 10, y una primera lectura lo tomó como prueba de una SVD errónea. La banda κ∞/n ≤ κ₂ ≤ κ∞ vale para una sola matriz, y el laboratorio comparaba la H_n exacta con la fl(H_n) almacenada: es una observación, no un defecto.
 - Sigue abierto: multiplicar fl(H) por una potencia de dos exacta cambia el κ₂ de IX (bits idénticos en las tres escalas para 5 de 15 tamaños), así que al menos dos de las tres respuestas no son el κ₂ de su entrada. Cuál es la correcta no está establecido.
+
+## 2026-09-27 — MAT-002 · Contraejemplos, testigos y comprobaciones exhaustivas
+
+Sincronizado desde Demerzel en [`a3a07df`](https://github.com/GuitarAlchemist/Demerzel/commit/a3a07df103c1f13a4dec45514fe775bfd4f76e77) ([PR #1136](https://github.com/GuitarAlchemist/Demerzel/pull/1136), revisada de forma independiente en `5e6b733` antes de su fusión). El módulo lee el código de IX en [`e35138b9`](https://github.com/GuitarAlchemist/ix/tree/e35138b9d4c707d48f802649a7fcb3f7fc94934d) y trata dos cuestiones:
+- lo que establecen las pruebas exhaustivas del grupo diédrico D12;
+- por qué el analizador de redes de Petri puede señalar un interbloqueo a partir de una búsqueda inacabada, pero no su ausencia.
+
+Aquí no se ejecutó nada de él.
+
+- **El experimento de su sección 7 solo está propuesto.** Se ejecutaría en un laboratorio de Learn, con predicciones escritas antes de cualquier ejecución: la asociatividad del `compose` de IX sobre los 13 824 triples, dos reglas de producto erróneas como controles negativos, y la reproducción de un testigo de interbloqueo. Ese laboratorio aún no existe, y nada en el módulo es una medición.
+- **No se ha estudiado aquí,** así que su casilla de arriba sigue vacía.
