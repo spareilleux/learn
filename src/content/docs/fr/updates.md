@@ -103,7 +103,7 @@ Codex a fusionné les trois synchronisations canoniques, et chaque déploiement 
 
 Les trois modules, l'index des mathématiques, le [journal Streeling](../streeling/journal/) et leurs entrées dans ce journal ont été relus sans authentification dans les trois langues. Lors de cette relecture, après #37, les pages servies renvoyaient à leur source à `8bd026f` ; cette mise à jour les réépingle à `0b13b9d`.
 
-Ces trois modules passent donc d'en attente de vérification à vérifiés ; leurs entrées ci-dessus restent telles qu'écrites. Le catalogue de mathématiques compte maintenant cinq modules, de MAT-001 à MAT-005. Publié ne veut pas dire étudié : aucun n'a été exécuté ni étudié ici, et leurs expériences restent proposées.
+Ces trois modules passent donc d'en attente de vérification à vérifiés ; leurs entrées ci-dessus restent telles qu'écrites. Lors de la même relecture, le catalogue de mathématiques comptait cinq modules, de MAT-001 à MAT-005 ; cette mise à jour ajoute MAT-006, le sixième. Publié ne veut pas dire étudié : aucun n'a été exécuté ni étudié ici, et leurs expériences restent proposées.
 
 ## 2026-09-27 — Streeling MAT-006 synchronisé, en attente de vérification
 

@@ -103,7 +103,7 @@ Codex merged the three canonical syncs, and each Pages deployment succeeded:
 
 The three modules, the mathematics index, the [Streeling journal](../streeling/journal/) and their entries in this journal were read back anonymously in the three languages. At that readback, after #37, the pages served linked their source at `8bd026f`; this update repins them to `0b13b9d`.
 
-These three modules therefore move from awaiting verification to verified; their entries above are left as written. The mathematics catalogue now has five modules, MAT-001 to MAT-005. Published is not studied: none of them has been run or studied here, and their experiments remain proposed.
+These three modules therefore move from awaiting verification to verified; their entries above are left as written. At the same readback, the mathematics catalogue had five modules, MAT-001 to MAT-005; this update adds MAT-006, the sixth. Published is not studied: none of them has been run or studied here, and their experiments remain proposed.
 
 ## 2026-09-27 — Streeling MAT-006 synced, awaiting verification
 
