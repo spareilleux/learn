@@ -74,7 +74,7 @@ La [PR de Demerzel #1136](https://github.com/GuitarAlchemist/Demerzel/pull/1136)
 - el índice de matemáticas;
 - la [entrada del diario de Streeling](../streeling/journal/).
 
-MAT-002 sigue **pendiente de verificación** hasta que este cambio se fusione, su despliegue sea correcto y las páginas se lean sin autenticación. MAT-004 sigue en cola en la fuente canónica.
+MAT-002 sigue **pendiente de verificación** hasta que este cambio se fusione, su despliegue sea correcto y las páginas se lean sin autenticación. MAT-004 se fusionó en Demerzel después de esta fijación (`d451c90`, [PR #1137](https://github.com/GuitarAlchemist/Demerzel/pull/1137)); no está sincronizado aquí.
 
 ## Por verificar
 

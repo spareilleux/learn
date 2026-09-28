@@ -74,7 +74,7 @@ La [PR Demerzel #1136](https://github.com/GuitarAlchemist/Demerzel/pull/1136) a 
 - l'index des mathématiques ;
 - l'[entrée du journal Streeling](../streeling/journal/).
 
-MAT-002 reste **en attente de vérification** jusqu'à ce que ce changement soit fusionné, que son déploiement réussisse et que les pages soient relues sans authentification. MAT-004 est toujours en file dans la source canonique.
+MAT-002 reste **en attente de vérification** jusqu'à ce que ce changement soit fusionné, que son déploiement réussisse et que les pages soient relues sans authentification. MAT-004 a été fusionné dans Demerzel après cette épingle (`d451c90`, [PR #1137](https://github.com/GuitarAlchemist/Demerzel/pull/1137)) ; il n'est pas synchronisé ici.
 
 ## À vérifier
 

@@ -74,7 +74,7 @@ These are the two ComfyUI images the 2026-09-26 board lists as requested. That b
 - the mathematics index;
 - the [Streeling journal entry](../streeling/journal/).
 
-MAT-002 stays **awaiting verification** until this change is merged, its deployment succeeds and the pages are read back anonymously. MAT-004 is still queued in the canonical source.
+MAT-002 stays **awaiting verification** until this change is merged, its deployment succeeds and the pages are read back anonymously. MAT-004 was merged in Demerzel after this pin (`d451c90`, [PR #1137](https://github.com/GuitarAlchemist/Demerzel/pull/1137)); it is not synced here.
 
 ## To verify
 
