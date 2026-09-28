@@ -51,6 +51,22 @@ Le module, l'index des mathématiques, l'[entrée du journal Streeling](../stree
 
 Ces deux éléments passent donc de « restant » à « vérifié ». Le catalogue de mathématiques compte toujours deux modules, MAT-001 et MAT-003.
 
+## 2026-09-27 — Illustrations de l'accueil et d'IX publiées
+
+La [PR Learn #23](https://github.com/spareilleux/learn/pull/23) a été fusionnée en `3c8c1de`, et son [déploiement Pages](https://github.com/spareilleux/learn/actions/runs/36299159809) a réussi. La [page d'accueil](../) et l'[introduction du cours IX](../machine-learning-ix/) montrent désormais les deux images générées localement avec ComfyUI et des modèles en cache. Dans les trois langues, chacune est présentée comme de l'art conceptuel, pas un schéma. Les six pages ont répondu 200 sans authentification, et les deux images étaient identiques, octet pour octet, à un build local.
+
+Ce sont les deux images ComfyUI que le tableau du 2026-09-26 range dans les demandes. Ce tableau reste tel qu'il a été écrit.
+
+## 2026-09-27 — Leçon 16 des réseaux de Petri et cours AutoHarness publiés
+
+La [PR Learn #28](https://github.com/spareilleux/learn/pull/28) a été fusionnée en `e5a4ddd`, et la [PR #29](https://github.com/spareilleux/learn/pull/29) en `c406126`, dont le [déploiement Pages](https://github.com/spareilleux/learn/actions/runs/36368118824) a réussi. La [leçon 16 des réseaux de Petri](../petri-nets/16-interoperability-lab/), son [journal](../petri-nets/journal/), le [cours AutoHarness](../autoharness/) et son [journal](../autoharness/journal/) ont été relus sans authentification dans les trois langues.
+
+- **Les deux PR ont été réparées après la revue.** La revue de Codex demandait des changements à chacune :
+  - la comparaison d'aller-retour de la leçon 16 et sa garde sur le genre d'arc ont été corrigées, avec des tests qui échouaient d'abord, et ses liens QA pointent désormais vers un commit fixe ;
+  - les fixtures d'AutoHarness tournent désormais en CI sous Linux, Windows et macOS.
+- **Les têtes réparées ont été fusionnées à la demande de l'utilisateur,** sans seconde revue indépendante.
+- **Ce qui reste non mesuré.** Les analyseurs externes de la leçon 16 (TINA, pm4py, Graphviz) sont des recettes qui n'ont pas été exécutées. AutoHarness a été évalué sans être installé, et son verdict est « ne pas adopter » à `ca39a72`.
+
 ## 2026-09-27 — Streeling MAT-002 synchronisé, en attente de vérification
 
 La [PR Demerzel #1136](https://github.com/GuitarAlchemist/Demerzel/pull/1136) a été relue indépendamment à `5e6b733` et fusionnée en `a3a07df`. Cette mise à jour la synchronise dans Learn :
@@ -63,7 +79,6 @@ MAT-002 reste **en attente de vérification** jusqu'à ce que ce changement soit
 ## À vérifier
 
 - Contrôler les URL publiques de cette mise à jour et le catalogue après déploiement ; conserver le reçu de déploiement avec le compte rendu d'intégration.
-- Publier et inspecter les deux images ComfyUI demandées ; un prompt ou une tâche en attente n'est pas une image.
 - Examiner l'historique TARS à des révisions précises avant d'expliquer l'évolution de v1.
 - Ajouter un calendrier seulement après établissement des responsables, dépendances et estimations. Aucune date de fin fictive.
 

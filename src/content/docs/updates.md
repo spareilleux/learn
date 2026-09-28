@@ -51,6 +51,22 @@ The module, the mathematics index, the [Streeling journal entry](../streeling/jo
 
 These two items therefore move from awaiting to verified. The mathematics catalogue still has two modules, MAT-001 and MAT-003.
 
+## 2026-09-27 — The homepage and IX illustrations published
+
+[Learn PR #23](https://github.com/spareilleux/learn/pull/23) merged as `3c8c1de`, and its [Pages deployment](https://github.com/spareilleux/learn/actions/runs/36299159809) succeeded. The [home page](../) and the [IX course introduction](../machine-learning-ix/) now show the two images generated locally with ComfyUI and cached models. In the three languages, each is labelled conceptual art, not a diagram. The six pages answered 200 anonymously, and both images were byte-identical to a local build.
+
+These are the two ComfyUI images the 2026-09-26 board lists as requested. That board is left as written.
+
+## 2026-09-27 — Petri nets lesson 16 and the AutoHarness course published
+
+[Learn PR #28](https://github.com/spareilleux/learn/pull/28) merged as `e5a4ddd`, and [PR #29](https://github.com/spareilleux/learn/pull/29) as `c406126`, whose [Pages deployment](https://github.com/spareilleux/learn/actions/runs/36368118824) succeeded. [Petri nets lesson 16](../petri-nets/16-interoperability-lab/), its [journal](../petri-nets/journal/), the [AutoHarness course](../autoharness/) and its [journal](../autoharness/journal/) were read back anonymously in the three languages.
+
+- **Both PRs were repaired after review.** Codex's review asked for changes to each:
+  - lesson 16's round-trip comparison and arc-kind guard were fixed with tests that failed first, and its QA links now point at a fixed commit;
+  - the AutoHarness fixtures now run in CI on Linux, Windows and macOS.
+- **The repaired heads were merged at the user's request,** without a second independent review.
+- **What stays unmeasured.** Lesson 16's external analysers (TINA, pm4py, Graphviz) are recipes that were not run. AutoHarness was evaluated without being installed, and its verdict is "do not adopt" at `ca39a72`.
+
 ## 2026-09-27 — Streeling MAT-002 synced, awaiting verification
 
 [Demerzel PR #1136](https://github.com/GuitarAlchemist/Demerzel/pull/1136) was reviewed independently at `5e6b733` and merged as `a3a07df`. This update syncs it into Learn:
@@ -63,7 +79,6 @@ MAT-002 stays **awaiting verification** until this change is merged, its deploym
 ## To verify
 
 - Check this update's public URLs and catalog after deployment; keep the deploy receipt with the integration record.
-- Publish and inspect the two requested ComfyUI images rather than counting a prompt or queued task as an image.
 - Review TARS history at pinned revisions before explaining why v1 approaches changed.
 - Add scheduling only after owners, dependencies and estimates are established. No fictional completion dates.
 
