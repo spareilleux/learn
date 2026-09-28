@@ -101,6 +101,20 @@ Marca un módulo una vez estudiado. En **Notas**, añade una entrada fechada: lo
 
 - [ ] [WML-001 · La guitarra alrededor del mundo](../world-music-languages/wml-001-guitar-around-the-world/) <!-- wml-001-guitar-around-the-world -->
 
+## QA
+
+| Esperado | Lo que ocurre | Dónde | Medida | Estado |
+|---|---|---|---|---|
+| Un ajuste por mínimos cuadrados de una matriz de diseño de rango completo devuelve el ajuste, o un error | `LinearRegression::fit` de IX devuelve una recta errónea sin ningún error en c = 10^6, para y = 2x + 1 sobre x = c + (0, 1, 2), y entra en pánico en c = 10^7 | [`linear_regression.rs:68`](https://github.com/GuitarAlchemist/ix/blob/e35138b9d4c707d48f802649a7fcb3f7fc94934d/crates/ix-supervised/src/linear_regression.rs#L68), [`linalg.rs:110`](https://github.com/GuitarAlchemist/ix/blob/e35138b9d4c707d48f802649a7fcb3f7fc94934d/crates/ix-math/src/linalg.rs#L110) en `e35138b9` | En c = 10^6: pendiente 2 + 2^-11, sesgo 0, mayor desviación 487,3. En c = 10^7: el pánico `X^T X is singular: Singular`. Centrar la variable da la respuesta exacta para todo c | Reproducido en el [laboratorio MAT-007](#2026-09-28--mat-007--el-laboratorio-pasos-1-y-2) (Windows 11 x86-64); no comunicado a IX |
+
+## Experimentos
+
+| Pregunta | Hipótesis, escrita antes de medir | Resultado | Veredicto | Enlaces |
+|---|---|---|---|---|
+| ¿Dónde falla el ajuste de IX por ecuaciones normales con datos desplazados x = c + (0, 1, 2)? | MAT-007 §6: pendiente a menos de 10^-9 de 2 hasta c = 10^3; pendiente 2 − 2^-18 y sesgo 1,5 en 10^5; pendiente 2 + 2^-11 y sesgo 0 en 10^6; un pánico en 10^7 | Las cuatro, bit a bit cuando el valor es exacto; mayor desviación 487,3 en 10^6 | Confirmada | [entrada](#2026-09-28--mat-007--el-laboratorio-pasos-1-y-2), [código](https://github.com/spareilleux/learn/tree/41f70224075dcfc3d6155485672eff102c22d547/code/streeling-mathematics) |
+| ¿Centrar la variable lo corrige? | Pendiente exactamente 2 y sesgo 2c + 3 con un error relativo de 10^-15 como máximo, para todo c | Exacto para todo c hasta 10^7 | Confirmada | [entrada](#2026-09-28--mat-007--el-laboratorio-pasos-1-y-2), [código](https://github.com/spareilleux/learn/tree/41f70224075dcfc3d6155485672eff102c22d547/code/streeling-mathematics) |
+| ¿Cuánto pierden las ecuaciones normales frente a la SVD con un diseño casi colineal? | Error por debajo de 10^-9 hasta N = 10^3, unos 3 × 10^-5 en 10^5, unos 0,25 en 10^7 sin error; vía SVD por debajo de 10^-7 | Como máximo 3,3 × 10^-10, luego 3,05 × 10^-5 y 0,250; vía SVD como máximo 1,5 × 10^-8 | Confirmada | [entrada](#2026-09-28--mat-007--el-laboratorio-pasos-1-y-2), [código](https://github.com/spareilleux/learn/tree/41f70224075dcfc3d6155485672eff102c22d547/code/streeling-mathematics) |
+
 ## Notas
 
 <!-- ## AAAA-MM-DD — CÓDIGO · Título -->
@@ -169,3 +183,12 @@ Aquí no se ejecutó nada de él.
 
 - **El experimento de su sección 6 solo está propuesto.** Se ejecutaría en un laboratorio de Learn, con predicciones escritas antes de cualquier ejecución: un barrido de desplazamientos de c = 1 a 10^7; las ecuaciones normales frente a la vía SVD; el servidor MCP tras un pánico, solo en un proceso desechable; y la clave `"X"` del esquema de entrada frente a la clave `"x"` que lee el manejador. Ese laboratorio aún no existe, y nada en el módulo es una medición.
 - **No se ha estudiado aquí,** así que su casilla de arriba sigue vacía.
+
+## 2026-09-28 — MAT-007 · El laboratorio, pasos 1 y 2
+
+El laboratorio de Learn [`code/streeling-mathematics`](https://github.com/spareilleux/learn/tree/41f70224075dcfc3d6155485672eff102c22d547/code/streeling-mathematics) ejecutó los pasos 1 y 2 del experimento de la sección 6 de MAT-007, contra `ix-supervised` e `ix-math` de IX fijados en `e35138b9`. Las predicciones son las del propio módulo. Se citan en un [prerregistro](https://github.com/spareilleux/learn/blob/d269063dc904d2e2c5d1e74e2e2334cc8a2b5a34/code/streeling-mathematics/preregistration-mat007.md), guardado en un commit aparte antes de que existiera código del laboratorio, que también fijó los márgenes de los valores aproximados del módulo antes de ejecutar. Las medidas se hicieron en Windows 11 x86-64; la CI alojada en Linux, Windows y macOS está *por verificar*.
+
+- **Las nueve predicciones se cumplieron en la primera ejecución** (tablas de arriba), las exactas bit a bit. En c = 10^6, `fit` de IX devuelve la pendiente 2 + 2^-11 y el sesgo 0 sin error, y se desvía de los datos hasta 487,3; en c = 10^7 entra en pánico.
+- **Medido sin predicción, y solo se informa:** en c = 10^4, la pendiente es 2 + 2^-24 y el sesgo 1 − 2^-11. En N = 10^2, el error de la vía SVD, 1,29 × 10^-10, supera el de las ecuaciones normales, 2,05 × 10^-11. La causa no está establecida.
+- **No ejecutado:** los pasos 3 y 4, el servidor MCP tras un pánico y el esquema de entrada. Necesitan `ix-agent` y un proceso `ix-mcp` desechable, y siguen propuestos.
+- **El módulo, en `8c14336`, dice que su experimento no se ha ejecutado.** Incluir estos resultados en él corresponde a su fuente en Demerzel. Su casilla de arriba sigue vacía: ejecutar el laboratorio no es estudiar el módulo.
