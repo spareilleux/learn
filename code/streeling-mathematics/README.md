@@ -98,3 +98,30 @@ Measured without a prediction, and only reported:
 - **The same check fails on right answers at large scale.** From s = 10^7 up, the eigenvalues are right, but the largest entry of A v − λ v exceeds 1e-9. It is 7.5e-9 at 10^7 and 1.8e-4 at 10^12, which is about 3e-17 of 6s. An absolute tolerance is too loose below one scale and too strict above another.
 
 The `ix_eigen` half of step 3 is not run: it goes through the MCP server.
+
+## MAT-004 · Vectors, matrices, norms and linear maps
+
+- `preregistration-mat004.md` quotes the predictions of the module's §7 ([Demerzel `d451c90`](https://github.com/GuitarAlchemist/Demerzel/blob/d451c909f69d9774901bdd99195ead8444098320/state/streeling/courses/mathematics/en/mat-004-vectors-matrices-norms.md)), of its §6 exercise and of two §6 readings, and sets how each is judged. It also fixes, before the run, the choices the module leaves open: the matrices, the generator and the band for "roughly n". It adds one hypothesis of the lab's own, M4-L1. It was committed on its own, before any code of this part existed, with SHA-256 `5b1d5821…fa87e3`.
+- `src/mat004.rs` holds the grid, the fixtures, the product-rule pairs and the checks.
+- `examples/mat004_norms.rs` prints steps 1 to 5, the §6 readings, M4-L1 and the negative controls. Step 5's timing prints to stderr, and only when `MAT004_TIMING` is set.
+- `tests/mat004.rs` has one test per prediction, M4-P1 to M4-P7 except the timing, M4-L1, and the negative controls.
+
+Every prediction asserted in CI held on the first run:
+- **Triangle inequality (P1):** on the 15,625 triples of the grid, no violation larger than 10^-12 for `manhattan`, `euclidean`, `chebyshev` or `minkowski` with p = 3.
+- **p = 1/2 (P2):** `minkowski` refuses it on the three pairs of the §5 exercise, with "p must be >= 1".
+- **p = ∞ (P3):** `minkowski` returns 1 for (0, 0)-(0, 0) and for (0, 0)-(3, 4), where `chebyshev` returns 0 and 4.
+- **p = 1000 (P4):** `minkowski` returns ∞.
+- **The product rule (P5b):** det(AB) equals det A · det B exactly for all 1,000 pairs. 144 pairs have a singular factor, and the largest |det(AB)| is 2,940.
+- **`cosine_distance` (P6):** d(x, z) = 1, against d(x, y) + d(y, z) = 2 − √2.
+- **p = NaN (P7):** the guard lets it through, and `minkowski` returns `Ok(NaN)` on (0, 0)-(3, 4) and on (0, 0)-(0, 0).
+
+The lab's own hypothesis held too:
+- **M4-L1:** `minkowski([0], [1], NaN)` returns `Ok(1.0)`, since 1^NaN = 1. A p that is not a number yields a finite answer.
+
+One prediction was partly refuted:
+- **The cost of cofactor expansion (P5a), one machine.** From n = 4 to 11, each step multiplies the time by 5.3 to 11.0, within the band [n/2, 2n]; from n = 6 on, by 6.1, 7.0, 8.0, 9.0, 10.0 and 11.0, close to n itself. From n = 2 to 3, the time grows by 38. The band there is [1.5, 6], so "from n = 3 on" is refuted at its first step. At n = 2, `det_recursive` returns ad − bc directly. At n = 3, it builds three minor matrices, each a new allocation, which the count n!/2 of 2 × 2 determinants leaves out. That this explains the jump is a reading of the code, not a measurement. Measured once in the release profile, the profile of MAT-006's timing, with the fastest of 5 runs, on an Intel Core Ultra 9 285K under Windows 11 Pro. The pre-registration did not fix the profile. In the debug profile, the step to n = 3 is 18.8, also outside the band, and the steps from n = 4 to 11 are 5.3 to 11.1, inside it. CI does not time anything.
+
+Measured without a prediction, and only reported:
+- **Last-bit violations:** `euclidean` exceeds the triangle inequality in 8 of the 15,625 triples, by at most 8.9e-16. These are the "last bits" the module expects where the exact values are equal. The other three distances show none.
+
+Nothing in §7 needs MCP, so every step ran.
