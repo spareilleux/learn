@@ -101,7 +101,7 @@ Codex fusionó las tres sincronizaciones canónicas, y cada despliegue de Pages 
 - [MAT-004](../streeling/mathematics/mat-004-vectors-matrices-norms/), Demerzel `d451c90`: [PR #36](https://github.com/spareilleux/learn/pull/36), fusionada como `b0f4380`, [despliegue](https://github.com/spareilleux/learn/actions/runs/36372857458);
 - [MAT-005](../streeling/mathematics/mat-005-symmetric-eigenproblems/), Demerzel `8bd026f`: [PR #37](https://github.com/spareilleux/learn/pull/37), fusionada como `36d4d17`, [despliegue](https://github.com/spareilleux/learn/actions/runs/36373405733).
 
-Los tres módulos, el índice de matemáticas, el [diario de Streeling](../streeling/journal/) y sus entradas en este diario se leyeron sin autenticación en los tres idiomas. Las páginas servidas enlazan ahora su fuente en `8bd026f`, la fijación de la última sincronización.
+Los tres módulos, el índice de matemáticas, el [diario de Streeling](../streeling/journal/) y sus entradas en este diario se leyeron sin autenticación en los tres idiomas. En esa lectura, después de #37, las páginas servidas enlazaban su fuente en `8bd026f`; esta actualización las fija de nuevo en `0b13b9d`.
 
 Estos tres módulos pasan así de pendientes de verificación a verificados; sus entradas de arriba quedan tal como se escribieron. El catálogo de matemáticas tiene ahora cinco módulos, de MAT-001 a MAT-005. Publicado no es estudiado: ninguno se ha ejecutado ni estudiado aquí, y sus experimentos siguen propuestos.
 

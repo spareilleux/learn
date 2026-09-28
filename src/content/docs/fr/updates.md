@@ -101,7 +101,7 @@ Codex a fusionné les trois synchronisations canoniques, et chaque déploiement 
 - [MAT-004](../streeling/mathematics/mat-004-vectors-matrices-norms/), Demerzel `d451c90` : [PR #36](https://github.com/spareilleux/learn/pull/36), fusionnée en `b0f4380`, [déploiement](https://github.com/spareilleux/learn/actions/runs/36372857458) ;
 - [MAT-005](../streeling/mathematics/mat-005-symmetric-eigenproblems/), Demerzel `8bd026f` : [PR #37](https://github.com/spareilleux/learn/pull/37), fusionnée en `36d4d17`, [déploiement](https://github.com/spareilleux/learn/actions/runs/36373405733).
 
-Les trois modules, l'index des mathématiques, le [journal Streeling](../streeling/journal/) et leurs entrées dans ce journal ont été relus sans authentification dans les trois langues. Les pages servies renvoient désormais à leur source à `8bd026f`, l'épingle de la dernière synchronisation.
+Les trois modules, l'index des mathématiques, le [journal Streeling](../streeling/journal/) et leurs entrées dans ce journal ont été relus sans authentification dans les trois langues. Lors de cette relecture, après #37, les pages servies renvoyaient à leur source à `8bd026f` ; cette mise à jour les réépingle à `0b13b9d`.
 
 Ces trois modules passent donc d'en attente de vérification à vérifiés ; leurs entrées ci-dessus restent telles qu'écrites. Le catalogue de mathématiques compte maintenant cinq modules, de MAT-001 à MAT-005. Publié ne veut pas dire étudié : aucun n'a été exécuté ni étudié ici, et leurs expériences restent proposées.
 

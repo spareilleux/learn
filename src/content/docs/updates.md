@@ -101,7 +101,7 @@ Codex merged the three canonical syncs, and each Pages deployment succeeded:
 - [MAT-004](../streeling/mathematics/mat-004-vectors-matrices-norms/), Demerzel `d451c90`: [PR #36](https://github.com/spareilleux/learn/pull/36), merged as `b0f4380`, [deployment](https://github.com/spareilleux/learn/actions/runs/36372857458);
 - [MAT-005](../streeling/mathematics/mat-005-symmetric-eigenproblems/), Demerzel `8bd026f`: [PR #37](https://github.com/spareilleux/learn/pull/37), merged as `36d4d17`, [deployment](https://github.com/spareilleux/learn/actions/runs/36373405733).
 
-The three modules, the mathematics index, the [Streeling journal](../streeling/journal/) and their entries in this journal were read back anonymously in the three languages. The pages served now link their source at `8bd026f`, the pin of the last sync.
+The three modules, the mathematics index, the [Streeling journal](../streeling/journal/) and their entries in this journal were read back anonymously in the three languages. At that readback, after #37, the pages served linked their source at `8bd026f`; this update repins them to `0b13b9d`.
 
 These three modules therefore move from awaiting verification to verified; their entries above are left as written. The mathematics catalogue now has five modules, MAT-001 to MAT-005. Published is not studied: none of them has been run or studied here, and their experiments remain proposed.
 
