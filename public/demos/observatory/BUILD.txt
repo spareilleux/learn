@@ -25,17 +25,21 @@ without these changes.
 A later revision, the same day, reworks the steel box, which still looked like
 a cartoon. The seam bands, ribs, door frame, door panels and vents were
 near-black and outlined every plate; they are now brushed steel in a darker
-tone, with bevelled edges. The 426 chrome-ball rivets become 832 low domed
-heads. The shader gives each plate its own tone and roughness, a contact
-shadow beside the bands, grime running down from under them and dust near the
-plinth. Under Compatibility the steel also gets a warmer albedo, since that
-renderer lights it with the cool keys and a blue ambient only.
+tone, with bevelled edges. The 426 chrome-ball rivets become 736 low domed
+heads in even rows. The shader gives each plate its own tone and roughness, a
+contact shadow beside the bands, grime running down from under them and dust
+near the plinth; the brushing is finer and the sheet more satin, so
+reflections no longer smear into vertical streaks. Under Compatibility the
+steel also gets a warmer albedo, since that renderer lights it with the cool
+keys and a blue ambient only.
 
 Native Compatibility GPU time, RTX 5080, 1600x900, 240 frames per view: 0.44 to
 0.52 ms for the previous web scene, 0.64 to 1.44 ms with the detail pass; up to
 1.55 million primitives in the overview, against 0.46 million before. With the
-reworked box, the view of the box goes from 0.79 to 0.95 ms, and the other
-views stay within 0.56 to 1.34 ms.
+reworked box, the view of the box measured 0.95 ms (first version) and
+1.02 ms (this one), against 0.87 and 1.04 ms for a view of a pier in the same
+runs: the box stays in line with the rest of the scene, and whole runs vary
+by about 15 percent.
 
 SHA-256 source inputs of the exported project:
 project.godot eb7d53597517c711d564943e467cce2926699c2422b073079737325c3400692e
@@ -44,8 +48,8 @@ export_presets.cfg 8b44717dc35a46dff0ba18370dfa5d9989bea04b73c4e455b404284998f06
 scripts/fly_camera.gd 2e5cdd15ca7bdcfa30ec129e354a309f3ff7296f6fbf54ac144984ed9aa9f8e7
 scripts/capture.gd 52ea2b5e40db2f1f4cdbd7658074ef60bd117e1f4110c1b8995590a4196748d0
 scripts/observatory.gd 3473e093d271bea58501add64622ca0d93c35279556fff8a350c4e00483245ac
-scripts/steel_cube.gd f22a181bfe2e49b7e831e47b3c14c0a36620c46f71e816c2682ea567f5fb01d2
-assets/steel_portal.glb 9f427d9fe067e6f177f30a8574f89ed834ab065b38349698e8ffc16a2a9af01b
+scripts/steel_cube.gd f28e71fffcd151663bc9a98b3c135cc7b805490e8298d3cf01029455c973f94c
+assets/steel_portal.glb 009ec4dd8f85b74f47839d25095fbe9e087b222addccf13643639c4b98402b21
 assets/stone_marble.png a71f21a971a1a0b2b897ed42dd64f2ece500f34b246bb758d9ff7ae843e68bd3
 assets/pier_ornament.png 6494443545711367205f83f532a67592c412065ffb2d00bd7c10c50b6fa7b22c
 assets/pier_ornament_normal.png 354c568a20f7fa58e9aeba23e41bc2b1c5c6cecf55ff2a56b5a89d9f3badf940
@@ -57,15 +61,15 @@ assets/glass_elven_tree.png 344edc31aa4fc0cff546272d7afa287fe4195809d4b1eec901df
 assets/glass_alembic.png bdf7fe6eaf71abf1d062c6ef2bbe1f77d7eb20e6b834937fd79f92582e5e5d9a
 assets/book_spines.gdshader 41f558247edef52fcff31c511de1ef40c321aeb339e40e41eb517dc4f34f6a62
 assets/stone_relief.gdshader 82f26919a4a0a2742eee8ddbef9b2be09ee9a4df8273fe6845d9dd919cfe7958
-assets/steel_brushed.gdshader b0ad2b624908c01d4ebd801460bb657d9375455ee99ef794c7b7db0d56ed7511
+assets/steel_brushed.gdshader cff19989eb4793ddb5dc001fd3d25473080c51d250a4a5cfc168762b435ba8fd
 assets/stained_glass.gdshader 1366183601743cfb42791f5efd38e4b26e6c6d10eb8ce1ac4e9e8c7a3db6d77a
 
 SHA-256 output files:
-index.pck 7a3d2e839a3a3eb2981088b7aeae11b473618244a30ca8f7214cdd9d98e9bf71
+index.pck 5582e318240e4c1a8ecf3eea9fd9dad6208076be40563b3a1be3dc3ded42d689
 index.wasm 99962b29677e42f3ba0258bd90fdc52ad90295954c4473e816ad02cfe5ff1d4f
 index.js e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981
 
 This directory contains a prebuilt binary export. Re-export only for deliberate
 scene changes. A scene re-export leaves the engine files (index.wasm, index.js)
 byte-identical, so git keeps a single copy; each scene revision adds its
-index.pck (13.3 MB here) to the binary history.
+index.pck (13.1 MB here) to the binary history.
