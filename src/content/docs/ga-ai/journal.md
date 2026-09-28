@@ -107,6 +107,7 @@ Most of the 22 differences of 2026-09-14 were fixed upstream by [#689](https://g
 - `ImprovisationSkill.cs` is identical at `a826864` and on GA's `main` at [`8cd5042`](https://github.com/GuitarAlchemist/ga/commit/8cd5042b91e38eb9949566dc3584fa0a42089788) (`git diff --stat` between the two is empty), so the pinned skill is still the one the chatbot runs. Whether the deployed router sends every prompt of the lesson to this skill is not checked by the course (*to verify*); the tracer saw it do so for Am F C G.
 - The progression path never calls the skill's `IMusicalQueryExtractor`, the one dependency that needs a model. The course passes an extractor that throws, so a change in GA that made the path call a model would fail the run.
 - The oracle's tables have to cover every scale name the skill can return; a missing name throws. One progression was run once and not kept in the program: Bb Gm Cm F, for the solution of the first exercise.
+- CI run [36425151971](https://github.com/spareilleux/learn/actions/runs/36425151971), for commit `c2ab348`: green on the three systems, 1 min 42 s on Linux, 2 min 4 s on macOS, 2 min 59 s on Windows, clone and build included.
 
 ## To verify
 

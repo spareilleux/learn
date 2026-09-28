@@ -107,6 +107,7 @@ La plupart des 22 différences du 2026-09-14 ont été corrigées en amont par [
 - `ImprovisationSkill.cs` est identique à `a826864` et sur le `main` de GA au commit [`8cd5042`](https://github.com/GuitarAlchemist/ga/commit/8cd5042b91e38eb9949566dc3584fa0a42089788) (`git diff --stat` entre les deux est vide) : le skill épinglé est donc toujours celui qu'exécute le chatbot. Que le routeur déployé envoie chaque prompt de la leçon à ce skill, le cours ne le vérifie pas (*à vérifier*) ; le tracer l'a vu le faire pour Am F C G.
 - Le chemin des progressions n'appelle jamais l'`IMusicalQueryExtractor` du skill, la seule dépendance qui a besoin d'un modèle. Le cours passe un extracteur qui lève une exception : une modification de GA qui ferait appeler un modèle par ce chemin ferait échouer l'exécution.
 - Les tables de l'oracle doivent couvrir chaque nom de gamme que le skill peut renvoyer ; un nom manquant lève une exception. Une progression a été exécutée une fois sans être gardée dans le programme : Bb Gm Cm F, pour la solution du premier exercice.
+- Exécution de CI [36425151971](https://github.com/spareilleux/learn/actions/runs/36425151971), pour le commit `c2ab348` : verte sur les trois systèmes, 1 min 42 s sous Linux, 2 min 4 s sous macOS, 2 min 59 s sous Windows, clone et compilation compris.
 
 ## À vérifier
 
