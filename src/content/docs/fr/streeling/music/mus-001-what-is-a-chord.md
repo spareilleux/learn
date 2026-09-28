@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **MUS-001** · Fondements de la théorie musicale · débutant · 25 minutes
 
-Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/a3a07df103c1f13a4dec45514fe775bfd4f76e77/state/streeling/courses/music/fr/mus-001-what-is-a-chord.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/d451c909f69d9774901bdd99195ead8444098320/state/streeling/courses/music/fr/mus-001-what-is-a-chord.fr.md) · [Mon journal](../../journal/)
 :::
 
 > **Département de musique** | Stade : Nigredo (Débutant) | Durée : 25 minutes

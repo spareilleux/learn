@@ -53,6 +53,7 @@ Marca un módulo una vez estudiado. En **Notas**, añade una entrada fechada: lo
 - [ ] [MAT-001 · Estrategias de demostración](../mathematics/mat-001-proof-strategies/) <!-- mat-001-proof-strategies -->
 - [ ] [MAT-002 · Contraejemplos, testigos y comprobaciones exhaustivas](../mathematics/mat-002-counterexamples-and-exhaustive-checks/) <!-- mat-002-counterexamples-and-exhaustive-checks -->
 - [ ] [MAT-003 · Aritmética de punto flotante y condicionamiento](../mathematics/mat-003-floating-point-conditioning/) <!-- mat-003-floating-point-conditioning -->
+- [ ] [MAT-004 · Vectores, matrices, normas y aplicaciones lineales](../mathematics/mat-004-vectors-matrices-norms/) <!-- mat-004-vectors-matrices-norms -->
 
 ### Música
 
@@ -118,4 +119,15 @@ Sincronizado desde Demerzel en [`a3a07df`](https://github.com/GuitarAlchemist/De
 Aquí no se ejecutó nada de él.
 
 - **El experimento de su sección 7 solo está propuesto.** Se ejecutaría en un laboratorio de Learn, con predicciones escritas antes de cualquier ejecución: la asociatividad del `compose` de IX sobre los 13 824 triples, dos reglas de producto erróneas como controles negativos, y la reproducción de un testigo de interbloqueo. Ese laboratorio aún no existe, y nada en el módulo es una medición.
+- **No se ha estudiado aquí,** así que su casilla de arriba sigue vacía.
+
+## 2026-09-27 — MAT-004 · Vectores, matrices, normas y aplicaciones lineales
+
+Sincronizado desde Demerzel en [`d451c90`](https://github.com/GuitarAlchemist/Demerzel/commit/d451c909f69d9774901bdd99195ead8444098320) ([PR #1137](https://github.com/GuitarAlchemist/Demerzel/pull/1137)). El módulo lee el código de IX en [`e35138b9`](https://github.com/GuitarAlchemist/ix/tree/e35138b9d4c707d48f802649a7fcb3f7fc94934d) y trata dos cuestiones:
+- lo que calculan las funciones de álgebra lineal de IX, entre ellas un determinante por desarrollo en cofactores, y que `linalg.rs` no tiene ninguna función que devuelva una norma matricial;
+- cuáles de las distancias de IX son métricas: `minkowski` rechaza todo p menor que 1 pero deja pasar p = ∞, y `cosine_distance` no cumple la desigualdad triangular.
+
+Aquí no se ejecutó nada de él.
+
+- **El experimento de su sección 7 solo está propuesto.** Se ejecutaría en un laboratorio de Learn, con predicciones escritas antes de cualquier ejecución: la desigualdad triangular sobre las 15 625 ternas de una cuadrícula de 5 × 5 puntos para cuatro distancias; `minkowski` con p = 1/2, p = ∞ y p = 1000; el coste de `determinant` para n = 2 a 11, y su regla del producto en matrices 3 × 3 de enteros. Ese laboratorio aún no existe, y nada en el módulo es una medición.
 - **No se ha estudiado aquí,** así que su casilla de arriba sigue vacía.

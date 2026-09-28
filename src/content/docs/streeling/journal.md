@@ -53,6 +53,7 @@ Tick a module once studied. Under **Notes**, add a dated entry: what I understoo
 - [ ] [MAT-001 · Proof Strategies](../mathematics/mat-001-proof-strategies/) <!-- mat-001-proof-strategies -->
 - [ ] [MAT-002 · Counterexamples, Witnesses and Exhaustive Checks](../mathematics/mat-002-counterexamples-and-exhaustive-checks/) <!-- mat-002-counterexamples-and-exhaustive-checks -->
 - [ ] [MAT-003 · Floating-Point Arithmetic and Conditioning](../mathematics/mat-003-floating-point-conditioning/) <!-- mat-003-floating-point-conditioning -->
+- [ ] [MAT-004 · Vectors, Matrices, Norms and Linear Maps](../mathematics/mat-004-vectors-matrices-norms/) <!-- mat-004-vectors-matrices-norms -->
 
 ### Music
 
@@ -118,4 +119,15 @@ Synced from Demerzel at [`a3a07df`](https://github.com/GuitarAlchemist/Demerzel/
 Nothing in it was run here.
 
 - **The experiment in its section 7 is only proposed.** It would run in a Learn lab, with predictions written before any run: associativity of IX's `compose` over the 13,824 triples, two faulty product rules as negative controls, and the replay of a deadlock witness. No such lab exists yet, and nothing in the module is a measurement.
+- **It has not been studied here,** so its checkbox above stays empty.
+
+## 2026-09-27 — MAT-004 · Vectors, Matrices, Norms and Linear Maps
+
+Synced from Demerzel at [`d451c90`](https://github.com/GuitarAlchemist/Demerzel/commit/d451c909f69d9774901bdd99195ead8444098320) ([PR #1137](https://github.com/GuitarAlchemist/Demerzel/pull/1137)). The module reads IX's code at [`e35138b9`](https://github.com/GuitarAlchemist/ix/tree/e35138b9d4c707d48f802649a7fcb3f7fc94934d) and covers two things:
+- what IX's linear-algebra functions compute, among them a determinant by cofactor expansion, and that `linalg.rs` has no function that returns a matrix norm;
+- which of IX's distances are metrics: `minkowski` rejects every p below 1 but lets p = ∞ through, and `cosine_distance` does not satisfy the triangle inequality.
+
+Nothing in it was run here.
+
+- **The experiment in its section 7 is only proposed.** It would run in a Learn lab, with predictions written before any run: the triangle inequality over the 15,625 triples of a 5 × 5 grid for four distances; `minkowski` with p = 1/2, p = ∞ and p = 1000; the cost of `determinant` for n = 2 to 11, and its product rule on 3 × 3 integer matrices. No such lab exists yet, and nothing in the module is a measurement.
 - **It has not been studied here,** so its checkbox above stays empty.
