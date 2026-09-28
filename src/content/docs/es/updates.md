@@ -94,6 +94,26 @@ La [PR de Demerzel #1138](https://github.com/GuitarAlchemist/Demerzel/pull/1138)
 
 MAT-005 sigue **pendiente de verificación** hasta que este cambio se fusione, su despliegue sea correcto y las páginas se lean sin autenticación.
 
+## 2026-09-27 — Streeling MAT-002, MAT-004 y MAT-005 publicados
+
+Codex fusionó las tres sincronizaciones canónicas, y cada despliegue de Pages fue correcto:
+- [MAT-002](../streeling/mathematics/mat-002-counterexamples-and-exhaustive-checks/), Demerzel `a3a07df`: [PR #35](https://github.com/spareilleux/learn/pull/35), fusionada como `1b4ec84`, [despliegue](https://github.com/spareilleux/learn/actions/runs/36371547922);
+- [MAT-004](../streeling/mathematics/mat-004-vectors-matrices-norms/), Demerzel `d451c90`: [PR #36](https://github.com/spareilleux/learn/pull/36), fusionada como `b0f4380`, [despliegue](https://github.com/spareilleux/learn/actions/runs/36372857458);
+- [MAT-005](../streeling/mathematics/mat-005-symmetric-eigenproblems/), Demerzel `8bd026f`: [PR #37](https://github.com/spareilleux/learn/pull/37), fusionada como `36d4d17`, [despliegue](https://github.com/spareilleux/learn/actions/runs/36373405733).
+
+Los tres módulos, el índice de matemáticas, el [diario de Streeling](../streeling/journal/) y sus entradas en este diario se leyeron sin autenticación en los tres idiomas. En esa lectura, después de #37, las páginas servidas enlazaban su fuente en `8bd026f`; esta actualización las fija de nuevo en `0b13b9d`.
+
+Estos tres módulos pasan así de pendientes de verificación a verificados; sus entradas de arriba quedan tal como se escribieron. En la misma lectura, el catálogo de matemáticas tenía cinco módulos, de MAT-001 a MAT-005; esta actualización añade MAT-006, el sexto. Publicado no es estudiado: ninguno se ha ejecutado ni estudiado aquí, y sus experimentos siguen propuestos.
+
+## 2026-09-27 — Streeling MAT-006 sincronizado, pendiente de verificación
+
+La [PR de Demerzel #1139](https://github.com/GuitarAlchemist/Demerzel/pull/1139) se fusionó como `0b13b9d`, después de la fijación de MAT-005. Esta actualización la sincroniza en Learn:
+- el [módulo MAT-006](../streeling/mathematics/mat-006-svd-low-rank-approximation/) en los tres idiomas;
+- el índice de matemáticas;
+- la [entrada del diario de Streeling](../streeling/journal/).
+
+MAT-006 sigue **pendiente de verificación** hasta que este cambio se fusione, su despliegue sea correcto y las páginas se lean sin autenticación.
+
 ## Por verificar
 
 - Comprobar las URL públicas de esta actualización y el catálogo tras el despliegue; conservar su recibo en el registro de integración.

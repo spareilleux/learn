@@ -55,6 +55,7 @@ Tick a module once studied. Under **Notes**, add a dated entry: what I understoo
 - [ ] [MAT-003 · Floating-Point Arithmetic and Conditioning](../mathematics/mat-003-floating-point-conditioning/) <!-- mat-003-floating-point-conditioning -->
 - [ ] [MAT-004 · Vectors, Matrices, Norms and Linear Maps](../mathematics/mat-004-vectors-matrices-norms/) <!-- mat-004-vectors-matrices-norms -->
 - [ ] [MAT-005 · Symmetric Eigenproblems](../mathematics/mat-005-symmetric-eigenproblems/) <!-- mat-005-symmetric-eigenproblems -->
+- [ ] [MAT-006 · Singular Value Decomposition and Low-Rank Approximation](../mathematics/mat-006-svd-low-rank-approximation/) <!-- mat-006-svd-low-rank-approximation -->
 
 ### Music
 
@@ -142,4 +143,17 @@ Synced from Demerzel at [`8bd026f`](https://github.com/GuitarAlchemist/Demerzel/
 Nothing in it was run here.
 
 - **The experiment in its section 8 is only proposed.** It would run in a Learn lab, with predictions written before any run: the invariants A v = λ v, VᵀV = I and A = V Λ Vᵀ on four matrices; the eigenspace of a repeated eigenvalue; `symmetric_eigen` and `ix_eigen` on a non-symmetric matrix; and PCA on six points whose main axis it is predicted to miss. No such lab exists yet, and nothing in the module is a measurement.
+- **It has not been studied here,** so its checkbox above stays empty.
+
+## 2026-09-27 — MAT-006 · Singular Value Decomposition and Low-Rank Approximation
+
+Synced from Demerzel at [`0b13b9d`](https://github.com/GuitarAlchemist/Demerzel/commit/0b13b9d56cc4b657cde6f3ce958c162610065c2f) ([PR #1139](https://github.com/GuitarAlchemist/Demerzel/pull/1139); before the merge, a Codex review found no major issues on its final head, `4839e89`). Its prerequisites, MAT-004 and MAT-005, are already on this site. The module reads IX's code at [`e35138b9`](https://github.com/GuitarAlchemist/ix/tree/e35138b9d4c707d48f802649a7fcb3f7fc94934d) and covers two things:
+- the contract of IX's `svd`, a one-sided Jacobi method: its stopping test is not scale-invariant, although its comment says it is; it returns `Ok` after 50 sweeps whether or not that test was met; and a column of U stays zero when its singular value is below the absolute threshold 10^-12;
+- the rank tolerance, which `rank` and `pseudo_inverse` leave to the caller.
+
+It also offers an explanation for the question the MAT-003 entry above leaves open: multiplying fl(H) by a power of two is exact, so only the number of sweeps can change IX's κ₂. That is the module's analysis, made on a Python transcription of `svd`, not an IX run. The MAT-003 item stays open until the lab runs the check.
+
+Nothing in it was run here.
+
+- **The experiment in its section 7 is only proposed.** It would run in a Learn lab, with predictions written before any run: Eckart–Young for every k on two matrices; a scale sweep from 10^-14 to 10^12; the cost of scale; MAT-003's puzzle with `svd_with_opts`; two rank conventions; and the bound that one of IX's tests checks. No such lab exists yet, and nothing in the module is a measurement.
 - **It has not been studied here,** so its checkbox above stays empty.

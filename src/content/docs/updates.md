@@ -94,6 +94,26 @@ MAT-004 stays **awaiting verification** until this change is merged, its deploym
 
 MAT-005 stays **awaiting verification** until this change is merged, its deployment succeeds and the pages are read back anonymously.
 
+## 2026-09-27 — Streeling MAT-002, MAT-004 and MAT-005 published
+
+Codex merged the three canonical syncs, and each Pages deployment succeeded:
+- [MAT-002](../streeling/mathematics/mat-002-counterexamples-and-exhaustive-checks/), Demerzel `a3a07df`: [PR #35](https://github.com/spareilleux/learn/pull/35), merged as `1b4ec84`, [deployment](https://github.com/spareilleux/learn/actions/runs/36371547922);
+- [MAT-004](../streeling/mathematics/mat-004-vectors-matrices-norms/), Demerzel `d451c90`: [PR #36](https://github.com/spareilleux/learn/pull/36), merged as `b0f4380`, [deployment](https://github.com/spareilleux/learn/actions/runs/36372857458);
+- [MAT-005](../streeling/mathematics/mat-005-symmetric-eigenproblems/), Demerzel `8bd026f`: [PR #37](https://github.com/spareilleux/learn/pull/37), merged as `36d4d17`, [deployment](https://github.com/spareilleux/learn/actions/runs/36373405733).
+
+The three modules, the mathematics index, the [Streeling journal](../streeling/journal/) and their entries in this journal were read back anonymously in the three languages. At that readback, after #37, the pages served linked their source at `8bd026f`; this update repins them to `0b13b9d`.
+
+These three modules therefore move from awaiting verification to verified; their entries above are left as written. At the same readback, the mathematics catalogue had five modules, MAT-001 to MAT-005; this update adds MAT-006, the sixth. Published is not studied: none of them has been run or studied here, and their experiments remain proposed.
+
+## 2026-09-27 — Streeling MAT-006 synced, awaiting verification
+
+[Demerzel PR #1139](https://github.com/GuitarAlchemist/Demerzel/pull/1139) was merged as `0b13b9d`, after the MAT-005 pin. This update syncs it into Learn:
+- the [MAT-006 module](../streeling/mathematics/mat-006-svd-low-rank-approximation/) in the three languages;
+- the mathematics index;
+- the [Streeling journal entry](../streeling/journal/).
+
+MAT-006 stays **awaiting verification** until this change is merged, its deployment succeeds and the pages are read back anonymously.
+
 ## To verify
 
 - Check this update's public URLs and catalog after deployment; keep the deploy receipt with the integration record.

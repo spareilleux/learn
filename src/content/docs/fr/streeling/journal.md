@@ -55,6 +55,7 @@ Coche un module une fois étudié. Sous **Notes**, ajoute une entrée datée : c
 - [ ] [MAT-003 · Arithmétique flottante et conditionnement](../mathematics/mat-003-floating-point-conditioning/) <!-- mat-003-floating-point-conditioning -->
 - [ ] [MAT-004 · Vecteurs, matrices, normes et applications linéaires](../mathematics/mat-004-vectors-matrices-norms/) <!-- mat-004-vectors-matrices-norms -->
 - [ ] [MAT-005 · Problèmes aux valeurs propres symétriques](../mathematics/mat-005-symmetric-eigenproblems/) <!-- mat-005-symmetric-eigenproblems -->
+- [ ] [MAT-006 · Décomposition en valeurs singulières et approximation de rang faible](../mathematics/mat-006-svd-low-rank-approximation/) <!-- mat-006-svd-low-rank-approximation -->
 
 ### Musique
 
@@ -142,4 +143,17 @@ Synchronisé depuis Demerzel à [`8bd026f`](https://github.com/GuitarAlchemist/D
 Rien n'y a été exécuté ici.
 
 - **L'expérience de sa section 8 est seulement proposée.** Elle tournerait dans un laboratoire Learn, avec des prédictions écrites avant toute exécution : les invariants A v = λ v, VᵀV = I et A = V Λ Vᵀ sur quatre matrices ; le sous-espace propre d'une valeur propre multiple ; `symmetric_eigen` et `ix_eigen` sur une matrice non symétrique ; et l'ACP sur six points dont elle devrait manquer l'axe principal. Aucun laboratoire de ce genre n'existe encore, et rien dans le module n'est une mesure.
+- **Il n'a pas été étudié ici,** donc sa case ci-dessus reste vide.
+
+## 2026-09-27 — MAT-006 · Décomposition en valeurs singulières et approximation de rang faible
+
+Synchronisé depuis Demerzel à [`0b13b9d`](https://github.com/GuitarAlchemist/Demerzel/commit/0b13b9d56cc4b657cde6f3ce958c162610065c2f) ([PR #1139](https://github.com/GuitarAlchemist/Demerzel/pull/1139) ; avant la fusion, une revue Codex n'a trouvé aucun problème majeur sur le dernier commit de sa branche, `4839e89`). Ses prérequis, MAT-004 et MAT-005, sont déjà sur ce site. Le module lit le code d'IX à [`e35138b9`](https://github.com/GuitarAlchemist/ix/tree/e35138b9d4c707d48f802649a7fcb3f7fc94934d) et traite deux questions :
+- le contrat de `svd` d'IX, une méthode de Jacobi unilatérale : son test d'arrêt n'est pas invariant d'échelle, bien que son commentaire l'affirme ; elle renvoie `Ok` après 50 balayages, que ce test soit satisfait ou non ; et une colonne de U reste nulle quand sa valeur singulière est inférieure au seuil absolu de 10^-12 ;
+- la tolérance de rang, que `rank` et `pseudo_inverse` laissent à l'appelant.
+
+Il propose aussi une explication à la question que l'entrée MAT-003 ci-dessus laisse ouverte : multiplier fl(H) par une puissance de deux est exact, donc seul le nombre de balayages peut changer le κ₂ d'IX. C'est l'analyse du module, faite sur une transcription de `svd` en Python, pas une exécution d'IX. Le point MAT-003 reste ouvert tant que le laboratoire n'a pas fait la vérification.
+
+Rien n'y a été exécuté ici.
+
+- **L'expérience de sa section 7 est seulement proposée.** Elle tournerait dans un laboratoire Learn, avec des prédictions écrites avant toute exécution : Eckart–Young pour chaque k sur deux matrices ; un balayage d'échelles de 10^-14 à 10^12 ; le coût de l'échelle ; l'énigme de MAT-003 avec `svd_with_opts` ; deux conventions de rang ; et la borne que vérifie l'un des tests d'IX. Aucun laboratoire de ce genre n'existe encore, et rien dans le module n'est une mesure.
 - **Il n'a pas été étudié ici,** donc sa case ci-dessus reste vide.
