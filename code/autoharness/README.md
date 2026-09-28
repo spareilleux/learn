@@ -8,6 +8,7 @@ Fixtures that exercise [tigerless-labs/autoharness](https://github.com/tigerless
 | File | What it does |
 |---|---|
 | `fixtures.py` | Runs fixtures F0–F5 from `results/preregistration.md`, each in its own subprocess with an environment built from nothing, a disposable `HOME` and explicit skill roots. Prints one JSON line per fixture |
+| `check.py` | Runs `fixtures.py` and compares every line with `results/fixtures-run.jsonl`. Off Windows, F4's first run is expected to read back equal, as the journal predicted. [`autoharness-examples.yml`](../../.github/workflows/autoharness-examples.yml) runs it on Linux, Windows and macOS |
 | `redact_probe.py` | Runs the pinned redactor on strings you pass. Use made-up values only |
 | `results/preregistration.md` | Hypotheses, controls, falsifiers and input hashes, written before the first run |
 | `results/fixtures-run.jsonl` | The measured run (Windows 11, Python 3.14.2) |
@@ -24,6 +25,7 @@ git clone https://github.com/tigerless-labs/autoharness.git autoharness-ca39a72
 git -C autoharness-ca39a72 checkout --detach ca39a72e4353ebef11b7de13c1fc7fa5f4df421b
 python fixtures.py --hashes                          # input hashes; imports nothing from AutoHarness
 python fixtures.py --clone autoharness-ca39a72       # F0..F5, then F4 again with PYTHONUTF8=1
+python check.py --clone autoharness-ca39a72          # the same run, compared with results/fixtures-run.jsonl
 ```
 
 On Linux and macOS, use `python3`. `fixtures.py` refuses a clone at any other commit.
