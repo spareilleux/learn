@@ -4,8 +4,9 @@
 //! inverted by `ix_math::linalg::inverse` and pseudo-inverted through `ix_math::svd`, and every result
 //! is judged against the exact inverse, computed here in integers without IX.
 //!
-//! MAT-007, least squares: the module `mat007`.
+//! MAT-006, the SVD: the module `mat006`. MAT-007, least squares: the module `mat007`.
 
+pub mod mat006;
 pub mod mat007;
 
 use ix_math::error::MathError;
