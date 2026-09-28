@@ -1,0 +1,26 @@
+Observatory Web export provenance
+
+Built 2026-09-27 with the official non-.NET Godot 4.6.1-stable Web export
+template. Godot renderer: gl_compatibility (WebGL 2). The Web export disables
+SSR, SSIL and volumetric fog from the native Forward+ scene. It is separate
+from the higher-quality native build and does not use hardware ray tracing.
+
+SHA-256 source inputs of the exported project:
+project.godot eb7d53597517c711d564943e467cce2926699c2422b073079737325c3400692e
+main.tscn fb6245c960d3625ca05920116c58351d9dbeb255beae59175d89c06d47049564
+export_presets.cfg 8b44717dc35a46dff0ba18370dfa5d9989bea04b73c4e455b404284998f06571
+scripts/fly_camera.gd 2e5cdd15ca7bdcfa30ec129e354a309f3ff7296f6fbf54ac144984ed9aa9f8e7
+scripts/capture.gd 52ea2b5e40db2f1f4cdbd7658074ef60bd117e1f4110c1b8995590a4196748d0
+scripts/observatory.gd d7b6bf0d6e36893783d7ff6f279fabd0d97d216d176831978a0f0baaa89395e4
+scripts/steel_cube.gd 2f4422385e536dfb6b0c884c2d60d531a44e2c48bcd7db621797df2ac4ffd745
+assets/steel_portal.glb 7874fe442f87086e757dca0ef3ba8fdac17dbeba0dd6be05182de4f8e89077dc
+assets/stone_marble.png a71f21a971a1a0b2b897ed42dd64f2ece500f34b246bb758d9ff7ae843e68bd3
+assets/pier_ornament.png 6494443545711367205f83f532a67592c412065ffb2d00bd7c10c50b6fa7b22c
+
+SHA-256 output files:
+index.pck 962f9bbcd883102b3ccc1eab1b17f9919eec2bc2830320d4de63144fb96f53c7
+index.wasm 99962b29677e42f3ba0258bd90fdc52ad90295954c4473e816ad02cfe5ff1d4f
+index.js e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981
+
+This directory contains a prebuilt binary export. Re-export only for deliberate
+scene changes; each revision adds roughly 46 MB of binary history to git.
