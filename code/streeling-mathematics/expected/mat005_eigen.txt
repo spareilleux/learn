@@ -1,0 +1,59 @@
+MAT-005: ix-math symmetric_eigen and ix-unsupervised PCA at e35138b9, IEEE 754 binary64
+
+Step 1: invariants, largest |entry| of A v - lambda v, V^T V - I and V Lambda V^T - A
+  B      | eigenvalues 6.000000000000, 1.000000000000 | predicted 6.000000000000, 1.000000000000 | 1.665e-16 | 1.110e-16 | 0.000e0
+  T      | eigenvalues 6.831254430698, 3.072223952005, 2.096521617297 | predicted none | 8.882e-16 | 4.441e-16 | 1.776e-15
+  I+J(3) | eigenvalues 4.000000000000, 1.000000000000, 1.000000000000 | predicted 4.000000000000, 1.000000000000, 1.000000000000 | 2.220e-16 | 2.220e-16 | 4.441e-16
+  I+J(4) | eigenvalues 5.000000000000, 1.000000000000, 1.000000000000, 1.000000000000 | predicted 5.000000000000, 1.000000000000, 1.000000000000, 1.000000000000 | 3.331e-16 | 2.220e-16 | 4.441e-16
+
+Step 2: I+J(3), columns with eigenvalue 1: [1, 2]; largest |entry| of u u^T + w w^T - (I - J/3): 2.220e-16
+
+Step 3: symmetric_eigen([[1, 2], [3, 4]]) = Ok, eigenvalues [5.0, 0.0] (bits 4014000000000000, 0000000000000000)
+  vector for 5: 0.447213595500, 0.894427191000 | distance to (1, 2)/sqrt 5, up to sign: 0.000e0 | ||A v - lambda v|| = 0.447213595500 (1/sqrt 5 = 0.447213595500)
+  ix_eigen over MCP: not run
+
+Step 4: PCA::new(2) on the six points
+  component 1 = (0.707106781187, 0.707106781187) | distance to (1, 1)/sqrt 2, up to sign: 1.110e-16 | variance 0.400000000000 | ratio 1
+  component 2 = (0.707106781187, 0.707106781187) | distance to (1, 1)/sqrt 2, up to sign: 1.110e-16 | variance 0.000000000000 | ratio 0
+  dot product of the two components: 1.000000000000
+  symmetric_eigen of the same covariance: 1.200000000000, 0.400000000000 | share of the variance the components miss: 0.750000000000
+
+Section 7 reading: eigenvectors of I_4 equal I_4 bit for bit: true; of I+J(4): false
+
+M5-L1, the lab's own: symmetric_eigen(10^e B); eigenvalues / 10^e against (6, 1), and whether they are
+  the diagonal of 10^e B with V = I, bit for bit
+  e = -14 | eigenvalues / 10^e 5.000000000000, 2.000000000000 | relative errors 1.667e-1, 1.000e0 | diagonal returned: true  | largest |A v - lambda v| 2.000e-14
+  e = -13 | eigenvalues / 10^e 5.000000000000, 2.000000000000 | relative errors 1.667e-1, 1.000e0 | diagonal returned: true  | largest |A v - lambda v| 2.000e-13
+  e = -12 | eigenvalues / 10^e 6.000000000000, 1.000000000000 | relative errors 0.000e0, 0.000e0 | diagonal returned: false | largest |A v - lambda v| 4.039e-28
+  e = -11 | eigenvalues / 10^e 6.000000000000, 1.000000000000 | relative errors 0.000e0, 0.000e0 | diagonal returned: false | largest |A v - lambda v| 6.462e-27
+  e = -10 | eigenvalues / 10^e 6.000000000000, 1.000000000000 | relative errors 0.000e0, 0.000e0 | diagonal returned: false | largest |A v - lambda v| 2.585e-26
+  e =  -9 | eigenvalues / 10^e 6.000000000000, 1.000000000000 | relative errors 0.000e0, 0.000e0 | diagonal returned: false | largest |A v - lambda v| 8.272e-25
+  e =  -8 | eigenvalues / 10^e 6.000000000000, 1.000000000000 | relative errors 1.480e-16, 0.000e0 | diagonal returned: false | largest |A v - lambda v| 6.617e-24
+  e =  -7 | eigenvalues / 10^e 6.000000000000, 1.000000000000 | relative errors 0.000e0, 0.000e0 | diagonal returned: false | largest |A v - lambda v| 5.294e-23
+  e =  -6 | eigenvalues / 10^e 6.000000000000, 1.000000000000 | relative errors 0.000e0, 0.000e0 | diagonal returned: false | largest |A v - lambda v| 4.235e-22
+  e =  -5 | eigenvalues / 10^e 6.000000000000, 1.000000000000 | relative errors 0.000e0, 0.000e0 | diagonal returned: false | largest |A v - lambda v| 3.388e-21
+  e =  -4 | eigenvalues / 10^e 6.000000000000, 1.000000000000 | relative errors 0.000e0, 0.000e0 | diagonal returned: false | largest |A v - lambda v| 0.000e0
+  e =  -3 | eigenvalues / 10^e 6.000000000000, 1.000000000000 | relative errors 0.000e0, 0.000e0 | diagonal returned: false | largest |A v - lambda v| 8.674e-19
+  e =  -2 | eigenvalues / 10^e 6.000000000000, 1.000000000000 | relative errors 0.000e0, 0.000e0 | diagonal returned: false | largest |A v - lambda v| 6.939e-18
+  e =  -1 | eigenvalues / 10^e 6.000000000000, 1.000000000000 | relative errors 1.480e-16, 0.000e0 | diagonal returned: false | largest |A v - lambda v| 1.110e-16
+  e =   0 | eigenvalues / 10^e 6.000000000000, 1.000000000000 | relative errors 0.000e0, 0.000e0 | diagonal returned: false | largest |A v - lambda v| 1.665e-16
+  e =   1 | eigenvalues / 10^e 6.000000000000, 1.000000000000 | relative errors 0.000e0, 0.000e0 | diagonal returned: false | largest |A v - lambda v| 7.105e-15
+  e =   2 | eigenvalues / 10^e 6.000000000000, 1.000000000000 | relative errors 0.000e0, 0.000e0 | diagonal returned: false | largest |A v - lambda v| 5.684e-14
+  e =   3 | eigenvalues / 10^e 6.000000000000, 1.000000000000 | relative errors 0.000e0, 0.000e0 | diagonal returned: false | largest |A v - lambda v| 9.095e-13
+  e =   4 | eigenvalues / 10^e 6.000000000000, 1.000000000000 | relative errors 0.000e0, 0.000e0 | diagonal returned: false | largest |A v - lambda v| 0.000e0
+  e =   5 | eigenvalues / 10^e 6.000000000000, 1.000000000000 | relative errors 0.000e0, 0.000e0 | diagonal returned: false | largest |A v - lambda v| 2.183e-11
+  e =   6 | eigenvalues / 10^e 6.000000000000, 1.000000000000 | relative errors 0.000e0, 0.000e0 | diagonal returned: false | largest |A v - lambda v| 0.000e0
+  e =   7 | eigenvalues / 10^e 6.000000000000, 1.000000000000 | relative errors 0.000e0, 0.000e0 | diagonal returned: false | largest |A v - lambda v| 7.451e-9
+  e =   8 | eigenvalues / 10^e 6.000000000000, 1.000000000000 | relative errors 0.000e0, 0.000e0 | diagonal returned: false | largest |A v - lambda v| 5.960e-8
+  e =   9 | eigenvalues / 10^e 6.000000000000, 1.000000000000 | relative errors 0.000e0, 0.000e0 | diagonal returned: false | largest |A v - lambda v| 4.768e-7
+  e =  10 | eigenvalues / 10^e 6.000000000000, 1.000000000000 | relative errors 0.000e0, 0.000e0 | diagonal returned: false | largest |A v - lambda v| 7.629e-6
+  e =  11 | eigenvalues / 10^e 6.000000000000, 1.000000000000 | relative errors 0.000e0, 0.000e0 | diagonal returned: false | largest |A v - lambda v| 3.052e-5
+  e =  12 | eigenvalues / 10^e 6.000000000000, 1.000000000000 | relative errors 0.000e0, 0.000e0 | diagonal returned: false | largest |A v - lambda v| 1.831e-4
+
+Negative controls:
+  B with its two eigenvalues swapped: largest |A v - lambda v| 4.472e0
+  eigenspace built from the vector for 4 and one for 1: 6.667e-1
+  distance from (1, 1)/sqrt 2 to (1, -1)/sqrt 2, up to sign: 1.414e0
+
+raw-bits digest of every computed value: 09a3f706e085444d
+exit 0
