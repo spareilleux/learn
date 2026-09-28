@@ -3,13 +3,13 @@ title: Aritmética de punto flotante y condicionamiento — Cuando una computado
 description: Aritmética de punto flotante y condicionamiento — Matemáticas
 sidebar:
   label: MAT-003 · Aritmética de punto flotante y condicionamiento
-  order: 2
+  order: 3
 ---
 
 :::note[Streeling University]
 **MAT-003** · Aritmética de punto flotante y condicionamiento · intermedio · 45 minutes
 
-Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/89a1bdb2801d32424dd17287ba67185572610277/state/streeling/courses/mathematics/es/mat-003-floating-point-conditioning.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/a3a07df103c1f13a4dec45514fe775bfd4f76e77/state/streeling/courses/mathematics/es/mat-003-floating-point-conditioning.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MAT-001](../../mathematics/mat-001-proof-strategies/)
 :::

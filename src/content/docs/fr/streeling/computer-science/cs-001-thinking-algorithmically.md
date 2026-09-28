@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **CS-001** · Fondements de l'informatique · débutant · 25 minutes
 
-Généré par le département *Informatique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/89a1bdb2801d32424dd17287ba67185572610277/state/streeling/courses/computer-science/fr/cs-001-thinking-algorithmically.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Informatique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/a3a07df103c1f13a4dec45514fe775bfd4f76e77/state/streeling/courses/computer-science/fr/cs-001-thinking-algorithmically.fr.md) · [Mon journal](../../journal/)
 :::
 
 > **Département d'informatique** | Stade : Nigredo (Débutant) | Durée : 25 minutes

@@ -28,7 +28,7 @@ Ces modules ont été écrits par des départements IA et **n'ont pas été relu
 | [Guitar Alchemist Academy](guitar-alchemist-academy/) | 3 | 1 | 1 |
 | [Études de guitare](guitar-studies/) | 2 | 2 | 2 |
 | [Théorie de l'information](information-theory/) | 1 | 0 | 0 |
-| [Mathématiques](mathematics/) | 2 | 2 | 2 |
+| [Mathématiques](mathematics/) | 3 | 3 | 3 |
 | [Musique](music/) | 6 | 1 | 1 |
 | [Musicologie](musicology/) | 2 | 1 | 1 |
 | [Science des réseaux](network-science/) | 1 | 0 | 0 |
@@ -42,5 +42,5 @@ Ces modules ont été écrits par des départements IA et **n'ont pas été relu
 
 ## Provenance
 
-- Source : [`GuitarAlchemist/Demerzel` → `state/streeling/courses`](https://github.com/GuitarAlchemist/Demerzel/tree/89a1bdb2801d32424dd17287ba67185572610277/state/streeling/courses) au commit `89a1bdb` (2026-09-27), licence MIT.
+- Source : [`GuitarAlchemist/Demerzel` → `state/streeling/courses`](https://github.com/GuitarAlchemist/Demerzel/tree/a3a07df103c1f13a4dec45514fe775bfd4f76e77/state/streeling/courses) au commit `a3a07df` (2026-09-27), licence MIT.
 - Importé avec `npm run sync:streeling` ; ne pas modifier ces pages à la main — seul `journal.md` est conservé entre deux synchronisations.

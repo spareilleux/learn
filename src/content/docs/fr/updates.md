@@ -67,6 +67,15 @@ La [PR Learn #28](https://github.com/spareilleux/learn/pull/28) a été fusionn�
 - **Les têtes réparées ont été fusionnées à la demande de l'utilisateur,** sans seconde revue indépendante.
 - **Ce qui reste non mesuré.** Les analyseurs externes de la leçon 16 (TINA, pm4py, Graphviz) sont des recettes qui n'ont pas été exécutées. AutoHarness a été évalué sans être installé, et son verdict est « ne pas adopter » à `ca39a72`.
 
+## 2026-09-27 — Streeling MAT-002 synchronisé, en attente de vérification
+
+La [PR Demerzel #1136](https://github.com/GuitarAlchemist/Demerzel/pull/1136) a été relue indépendamment à `5e6b733` et fusionnée en `a3a07df`. Cette mise à jour la synchronise dans Learn :
+- le [module MAT-002](../streeling/mathematics/mat-002-counterexamples-and-exhaustive-checks/) dans les trois langues ;
+- l'index des mathématiques ;
+- l'[entrée du journal Streeling](../streeling/journal/).
+
+MAT-002 reste **en attente de vérification** jusqu'à ce que ce changement soit fusionné, que son déploiement réussisse et que les pages soient relues sans authentification. MAT-004 a été fusionné dans Demerzel après cette épingle (`d451c90`, [PR #1137](https://github.com/GuitarAlchemist/Demerzel/pull/1137)) ; il n'est pas synchronisé ici.
+
 ## À vérifier
 
 - Contrôler les URL publiques de cette mise à jour et le catalogue après déploiement ; conserver le reçu de déploiement avec le compte rendu d'intégration.

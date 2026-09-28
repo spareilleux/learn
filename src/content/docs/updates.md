@@ -67,6 +67,15 @@ These are the two ComfyUI images the 2026-09-26 board lists as requested. That b
 - **The repaired heads were merged at the user's request,** without a second independent review.
 - **What stays unmeasured.** Lesson 16's external analysers (TINA, pm4py, Graphviz) are recipes that were not run. AutoHarness was evaluated without being installed, and its verdict is "do not adopt" at `ca39a72`.
 
+## 2026-09-27 — Streeling MAT-002 synced, awaiting verification
+
+[Demerzel PR #1136](https://github.com/GuitarAlchemist/Demerzel/pull/1136) was reviewed independently at `5e6b733` and merged as `a3a07df`. This update syncs it into Learn:
+- the [MAT-002 module](../streeling/mathematics/mat-002-counterexamples-and-exhaustive-checks/) in the three languages;
+- the mathematics index;
+- the [Streeling journal entry](../streeling/journal/).
+
+MAT-002 stays **awaiting verification** until this change is merged, its deployment succeeds and the pages are read back anonymously. MAT-004 was merged in Demerzel after this pin (`d451c90`, [PR #1137](https://github.com/GuitarAlchemist/Demerzel/pull/1137)); it is not synced here.
+
 ## To verify
 
 - Check this update's public URLs and catalog after deployment; keep the deploy receipt with the integration record.
