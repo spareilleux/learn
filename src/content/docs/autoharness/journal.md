@@ -15,7 +15,7 @@ sidebar:
 - [ ] Lesson 3: why use is not quality — counters, maturity, capacity (H1, H5)
 - [ ] Lesson 4: crashes, concurrency and history (H8, H9, H11)
 - [ ] Lesson 5: the evaluation and an adoption checklist
-- [ ] The fixtures on Linux and macOS
+- [x] The fixtures on Linux and macOS: the same results, and CI now runs them on the three OSes
 
 ## QA
 
@@ -29,7 +29,7 @@ Every row is reproduced by [`fixtures.py`](https://github.com/spareilleux/learn/
 | Secrets are redacted before a window reaches the reflector | A key written as JSON, `{"api_key": "…"}`, and the body of a PEM private key pass through; so does `{"password": "…"}` | [`redaction_rules.toml#L10-L11`](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/lib/redaction_rules.toml#L10-L11), [`#L25-L27`](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/lib/redaction_rules.toml#L25-L27) | F3: the canary survives in 2 of 3 forms; control `api_key = …` redacted. Probe: the JSON `password` survives | Reproduced, not reported ([2026-09-26](#2026-09-26--six-fixtures-run-in-isolation)) |
 | A redaction says which rule fired | A label can be redacted again by `api_key_assignment`, because it contains `secret:`: `[REDACTED:[REDACTED:secret:api_key_assignment]]` | [`redaction_rules.toml#L25-L27`](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/lib/redaction_rules.toml#L25-L27) | F3's PEM header, and `Bearer …` in the probe | Reproduced, exploratory (not pre-registered) |
 | Credentials in a URL are redacted | No rule targets them. In `postgres://admin:…@db.example.com/prod`, the email rule removes password and host together, by accident, and keeps the user name | [`redaction_rules.toml#L29-L31`](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/lib/redaction_rules.toml#L29-L31) | Probe: `postgres://admin:[REDACTED:pii:email]/prod` | Reproduced, exploratory |
-| A skill AutoHarness writes, it can read back | On Windows with a cp1252 locale, a non-ASCII body is written as UTF-8 and read back with the locale's codec: `UnicodeDecodeError` on byte 0x81 | [`atomic.py#L31-L32`](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/lib/atomic.py#L31-L32), [`skill_store.py#L26-L28`](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/lib/skill_store.py#L26-L28) | F4: raises with UTF-8 mode off; control `PYTHONUTF8=1` reads it back equal | Reproduced on Windows only, which the README's platform badge does not list |
+| A skill AutoHarness writes, it can read back | On Windows with a cp1252 locale, a non-ASCII body is written as UTF-8 and read back with the locale's codec: `UnicodeDecodeError` on byte 0x81 | [`atomic.py#L31-L32`](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/lib/atomic.py#L31-L32), [`skill_store.py#L26-L28`](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/lib/skill_store.py#L26-L28) | F4: raises with UTF-8 mode off; control `PYTHONUTF8=1` reads it back equal | Reproduced on Windows only, which the README's platform badge does not list; reproduced again on GitHub's `windows-latest` runner ([2026-09-27](#2026-09-27--the-fixtures-on-linux-windows-and-macos)) |
 | Self-authored skills carry *"a `self-authored` ledger marker"* (README, lines 85-86) | Ownership is a `.sidecar.json` with `"created_by": "agent"`; the ledger is never consulted for it | [`sidecar.py#L47-L51`](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/lib/sidecar.py#L47-L51), [`#L75-L76`](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/lib/sidecar.py#L75-L76) | — | Read in the source, not run ([2026-09-26](#2026-09-26--reading-the-pinned-source)) |
 
 ## Experiments
@@ -44,6 +44,7 @@ Each hypothesis was written in [`preregistration.md`](https://github.com/spareil
 | F3 (H13) — Does the redactor catch a JSON-quoted key and a PEM body? | No: the rule allows no quote before the colon, and the PEM rule matches the header only | Control redacted; the canary survives in `json_quoted` and in `pem` | Confirmed | same |
 | F4 (new) — Does a non-ASCII skill survive a round trip on Windows? | No: written as UTF-8, read with cp1252, `UnicodeDecodeError` at 0x81; the `PYTHONUTF8=1` control reads it back equal | Exactly that | Confirmed, Windows only | same |
 | F5 (H3) — Does the sweep delete a user's `*.tmp`? | Yes: every `*.tmp` under the skills folder, whoever wrote it; the `draft.txt` control survives | `draft.tmp` deleted; `draft.txt` and `SKILL.md` intact | Confirmed | same |
+| F0–F5 on Linux and macOS — the same results? | Yes for F0–F3 and F5; F4's first run reads back equal, like its control, on a UTF-8 locale | WSL Ubuntu, Python 3.14.4: 0 differences, F4 equal with `utf8_mode: 1`. CI run [36364810915](https://github.com/spareilleux/learn/actions/runs/36364810915): `check.py` passes on `ubuntu-latest`, `windows-latest` and `macos-latest` | Confirmed; the reason was incomplete: the fixture's environment has no locale, and Python turns UTF-8 mode on in the C locale | [2026-09-27](#2026-09-27--the-fixtures-on-linux-windows-and-macos), [`check.py`](https://github.com/spareilleux/learn/blob/main/code/autoharness/check.py) |
 
 ## 2026-09-26 — Reading the pinned source
 
@@ -115,9 +116,19 @@ The fixes:
 
 The mission, lesson 1 and this journal were written in English, French and Spanish from the recorded outputs, and the course was added to the sidebar and the home pages. `fixtures.py --hashes` was rerun and gave the six pre-registered hashes. `redact_probe.py` now sets `sys.dont_write_bytecode` before it imports `fixtures.py`, so it no longer leaves a `__pycache__` folder in the course directory; its rerun is byte-identical to `redact-probe.jsonl`. No fixture was rerun, and no result changed.
 
+## 2026-09-27 — The fixtures on Linux, Windows and macOS
+
+Codex's review of the PR asked for the course code to run in CI on the three OSes, as the repository's conventions require. [`check.py`](https://github.com/spareilleux/learn/blob/main/code/autoharness/check.py) reruns `fixtures.py` and compares every line with `fixtures-run.jsonl`. The one exception was written before any run elsewhere: off Windows, F4's first run must read back equal, as the "To verify" list predicted.
+
+- **This machine.** On Windows 11 with Python 3.14.2: 0 differences. Under WSL, on Ubuntu with Python 3.14.4: 0 differences, and F4's first run read back equal with UTF-8 mode on (`utf8_mode: 1`).
+- **The negative control.** A copy of the expected file with one value changed (`tmp_survives`) makes `check.py` print that difference and exit 1.
+- **CI.** The [`autoharness-examples`](https://github.com/spareilleux/learn/blob/main/.github/workflows/autoharness-examples.yml) workflow passed on `ubuntu-latest`, `windows-latest` and `macos-latest` ([run 36364810915](https://github.com/spareilleux/learn/actions/runs/36364810915)). It fetches AutoHarness by its pinned SHA, installs nothing and calls no model. On GitHub's Windows runner F4 reproduces exactly: the same `UnicodeDecodeError` at byte 0x81.
+
+The prediction held, but its reason was incomplete. The fixture's environment is built from nothing, so it has no locale, and in the C locale Python turns UTF-8 mode on ([PEP 540](https://peps.python.org/pep-0540/)). That was measured under WSL. The macOS runner's value is in its log, which was not read here.
+
 ## To verify
 
-- `fixtures.py` on Linux and macOS: F0–F3 and F5 should give the same results, and F4 should read back equal on a UTF-8 locale.
+- Why F4 reads back equal on the macOS runner: UTF-8 mode, as under WSL, or the locale's codec. `check.py` prints it in the job's log.
 - F4 on Windows with Python 3.15, where [PEP 686](https://peps.python.org/pep-0686/) makes UTF-8 mode the default.
 - The hypotheses not yet run:
   - H1: the index is not bounded by capacity;

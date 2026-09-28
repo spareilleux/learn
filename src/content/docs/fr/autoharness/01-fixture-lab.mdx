@@ -247,7 +247,7 @@ Ils montrent que **rien dans le code n'empêche** ces issues, chaque fois face �
 
 Ils ne montrent pas :
 - **à quelle fréquence** cela arrive. F1 suppose que le reflector propose un `create` dont le nom entre en collision avec un de tes skills, et seule une exécution avec un modèle dirait à quelle fréquence il le fait ;
-- quoi que ce soit sur **Linux et macOS**. F0–F3 et F5 ne dépendent pas du système d'exploitation dans le code lu, mais c'est *à vérifier*, pas mesuré ;
+- quoi que ce soit sur **Linux et macOS** dans cette exécution. Ils ont été mesurés ensuite, en CI : F0–F3 et F5 y donnent les mêmes résultats, et F4 y relit un contenu égal ([journal](../journal/#2026-09-27--les-fixtures-sous-linux-windows-et-macos)) ;
 - quoi que ce soit sur les **skills** qu'écrit le reflector, ni sur ce que coûte une session. Aucun modèle n'a été appelé.
 
 Les tests amont ont été lus avant toute exécution. `test_update_requires_agent_created` couvre le témoin de F1, et `test_drain_sweeps_orphan_tmp` couvre le balayage, avec un `.tmp` qui appartient à AutoHarness. Aucun test ne crée par-dessus un skill écrit à la main ni ne donne une ligne invalide à `drain` : c'est ainsi que tout cela passe leur CI.

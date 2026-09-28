@@ -15,7 +15,7 @@ sidebar:
 - [ ] Leçon 3 : pourquoi l'usage n'est pas la qualité — compteurs, maturité, capacité (H1, H5)
 - [ ] Leçon 4 : plantages, concurrence et historique (H8, H9, H11)
 - [ ] Leçon 5 : l'évaluation et une liste de contrôle d'adoption
-- [ ] Les fixtures sous Linux et macOS
+- [x] Les fixtures sous Linux et macOS : les mêmes résultats, et la CI les exécute désormais sur les trois OS
 
 ## QA
 
@@ -29,7 +29,7 @@ Chaque ligne est reproduite par [`fixtures.py`](https://github.com/spareilleux/l
 | Les secrets sont masqués avant qu'une fenêtre n'atteigne le reflector | Une clé écrite en JSON, `{"api_key": "…"}`, et le corps d'une clé privée PEM passent ; `{"password": "…"}` aussi | [`redaction_rules.toml#L10-L11`](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/lib/redaction_rules.toml#L10-L11), [`#L25-L27`](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/lib/redaction_rules.toml#L25-L27) | F3 : le canari survit dans 2 formes sur 3 ; le témoin `api_key = …` est masqué. Sonde : le `password` JSON survit | Reproduit, non signalé ([2026-09-26](#2026-09-26--six-fixtures-exécutées-en-isolation)) |
 | Un masquage dit quelle règle s'est déclenchée | Une étiquette peut être masquée à nouveau par `api_key_assignment`, parce qu'elle contient `secret:` : `[REDACTED:[REDACTED:secret:api_key_assignment]]` | [`redaction_rules.toml#L25-L27`](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/lib/redaction_rules.toml#L25-L27) | L'en-tête PEM de F3, et `Bearer …` dans la sonde | Reproduit, exploratoire (non préinscrit) |
 | Les identifiants dans une URL sont masqués | Aucune règle ne les vise. Dans `postgres://admin:…@db.example.com/prod`, la règle email retire le mot de passe et l'hôte ensemble, par accident, et garde le nom d'utilisateur | [`redaction_rules.toml#L29-L31`](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/lib/redaction_rules.toml#L29-L31) | Sonde : `postgres://admin:[REDACTED:pii:email]/prod` | Reproduit, exploratoire |
-| Un skill qu'AutoHarness écrit, il peut le relire | Sous Windows avec une locale cp1252, un corps non ASCII est écrit en UTF-8 et relu avec le codec de la locale : `UnicodeDecodeError` sur l'octet 0x81 | [`atomic.py#L31-L32`](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/lib/atomic.py#L31-L32), [`skill_store.py#L26-L28`](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/lib/skill_store.py#L26-L28) | F4 : l'exception est levée sans le mode UTF-8 ; le témoin `PYTHONUTF8=1` relit un contenu égal | Reproduit sous Windows seulement, que le badge de plateformes du README ne liste pas |
+| Un skill qu'AutoHarness écrit, il peut le relire | Sous Windows avec une locale cp1252, un corps non ASCII est écrit en UTF-8 et relu avec le codec de la locale : `UnicodeDecodeError` sur l'octet 0x81 | [`atomic.py#L31-L32`](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/lib/atomic.py#L31-L32), [`skill_store.py#L26-L28`](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/lib/skill_store.py#L26-L28) | F4 : l'exception est levée sans le mode UTF-8 ; le témoin `PYTHONUTF8=1` relit un contenu égal | Reproduit sous Windows seulement, que le badge de plateformes du README ne liste pas ; reproduit à nouveau sur le runner `windows-latest` de GitHub ([2026-09-27](#2026-09-27--les-fixtures-sous-linux-windows-et-macos)) |
 | Les skills écrits par l'outil portent *« a `self-authored` ledger marker »* (README, lignes 85-86) | La propriété est un `.sidecar.json` avec `"created_by": "agent"` ; le registre (*ledger*) n'est jamais consulté pour cela | [`sidecar.py#L47-L51`](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/lib/sidecar.py#L47-L51), [`#L75-L76`](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/lib/sidecar.py#L75-L76) | — | Lu dans le source, non exécuté ([2026-09-26](#2026-09-26--lire-le-source-épinglé)) |
 
 ## Expériences
@@ -44,6 +44,7 @@ Chaque hypothèse a été écrite dans [`preregistration.md`](https://github.com
 | F3 (H13) — Le masqueur attrape-t-il une clé JSON entre guillemets et un corps PEM ? | Non : la règle n'admet aucun guillemet avant les deux-points, et la règle PEM ne reconnaît que l'en-tête | Témoin masqué ; le canari survit dans `json_quoted` et dans `pem` | Confirmée | idem |
 | F4 (nouvelle) — Un skill non ASCII survit-il à un aller-retour sous Windows ? | Non : écrit en UTF-8, lu en cp1252, `UnicodeDecodeError` à 0x81 ; le témoin `PYTHONUTF8=1` le relit à l'identique | Exactement cela | Confirmée, Windows seulement | idem |
 | F5 (H3) — Le balayage supprime-t-il le `*.tmp` d'un utilisateur ? | Oui : tous les `*.tmp` sous le dossier des skills, quel qu'en soit l'auteur ; le témoin `draft.txt` survit | `draft.tmp` supprimé ; `draft.txt` et `SKILL.md` intacts | Confirmée | idem |
+| F0–F5 sous Linux et macOS — les mêmes résultats ? | Oui pour F0–F3 et F5 ; la première exécution de F4 relit un contenu égal, comme son témoin, avec une locale UTF-8 | WSL Ubuntu, Python 3.14.4 : 0 différence, F4 égal avec `utf8_mode: 1`. Exécution CI [36364810915](https://github.com/spareilleux/learn/actions/runs/36364810915) : `check.py` passe sur `ubuntu-latest`, `windows-latest` et `macos-latest` | Confirmée ; la raison était incomplète : l'environnement de la fixture n'a pas de locale, et Python active le mode UTF-8 dans la locale C | [2026-09-27](#2026-09-27--les-fixtures-sous-linux-windows-et-macos), [`check.py`](https://github.com/spareilleux/learn/blob/main/code/autoharness/check.py) |
 
 ## 2026-09-26 — Lire le source épinglé
 
@@ -115,9 +116,19 @@ Les corrections :
 
 La mission, la leçon 1 et ce journal ont été écrits en anglais, en français et en espagnol à partir des sorties enregistrées, et le cours a été ajouté à la barre latérale et aux pages d'accueil. `fixtures.py --hashes` a été relancé et a donné les six empreintes préinscrites. `redact_probe.py` règle maintenant `sys.dont_write_bytecode` avant d'importer `fixtures.py`, pour ne plus laisser de dossier `__pycache__` dans le répertoire du cours ; sa nouvelle exécution est identique octet pour octet à `redact-probe.jsonl`. Aucune fixture n'a été relancée, et aucun résultat n'a changé.
 
+## 2026-09-27 — Les fixtures sous Linux, Windows et macOS
+
+La revue de Codex sur la PR demandait que le code du cours tourne en CI sur les trois OS, comme l'exigent les conventions du dépôt. [`check.py`](https://github.com/spareilleux/learn/blob/main/code/autoharness/check.py) relance `fixtures.py` et compare chaque ligne à `fixtures-run.jsonl`. La seule exception a été écrite avant toute exécution ailleurs : hors Windows, la première exécution de F4 doit relire un contenu égal, comme le prédisait la liste « À vérifier ».
+
+- **Cette machine.** Sous Windows 11 avec Python 3.14.2 : 0 différence. Sous WSL, sur Ubuntu avec Python 3.14.4 : 0 différence, et la première exécution de F4 a relu un contenu égal avec le mode UTF-8 actif (`utf8_mode: 1`).
+- **Le témoin négatif.** Une copie du fichier attendu où une valeur est changée (`tmp_survives`) fait afficher cette différence à `check.py`, qui sort avec 1.
+- **La CI.** Le workflow [`autoharness-examples`](https://github.com/spareilleux/learn/blob/main/.github/workflows/autoharness-examples.yml) passe sur `ubuntu-latest`, `windows-latest` et `macos-latest` ([exécution 36364810915](https://github.com/spareilleux/learn/actions/runs/36364810915)). Il récupère AutoHarness par son SHA épinglé, n'installe rien et n'appelle aucun modèle. Sur le runner Windows de GitHub, F4 se reproduit à l'identique : la même `UnicodeDecodeError` sur l'octet 0x81.
+
+La prédiction a tenu, mais sa raison était incomplète. L'environnement de la fixture est construit à partir de rien : il n'a donc pas de locale, et dans la locale C Python active le mode UTF-8 ([PEP 540](https://peps.python.org/pep-0540/)). C'est mesuré sous WSL. La valeur du runner macOS est dans son journal d'exécution, qui n'a pas été lu ici.
+
 ## À vérifier
 
-- `fixtures.py` sous Linux et macOS : F0–F3 et F5 devraient donner les mêmes résultats, et F4 devrait relire un contenu égal avec une locale UTF-8.
+- Pourquoi F4 relit un contenu égal sur le runner macOS : le mode UTF-8, comme sous WSL, ou le codec de la locale. `check.py` l'affiche dans le journal d'exécution du job.
 - F4 sous Windows avec Python 3.15, où la [PEP 686](https://peps.python.org/pep-0686/) fait du mode UTF-8 le défaut.
 - Les hypothèses pas encore exécutées :
   - H1 : l'index n'est pas borné par la capacité ;

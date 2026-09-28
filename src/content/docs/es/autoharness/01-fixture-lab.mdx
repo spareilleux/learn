@@ -247,7 +247,7 @@ Muestran que **nada en el código impide** estos desenlaces, cada vez frente a u
 
 No muestran:
 - **con qué frecuencia** ocurre. F1 necesita que el reflector proponga un `create` cuyo nombre choque con una skill tuya, y solo una ejecución con un modelo diría con qué frecuencia lo hace;
-- nada sobre **Linux y macOS**. F0–F3 y F5 no dependen del sistema operativo en el código leído, pero eso está *por verificar*, no medido;
+- nada sobre **Linux y macOS** en esta ejecución. Se midieron después, en CI: F0–F3 y F5 dan allí los mismos resultados, y F4 relee igual ([diario](../journal/#2026-09-27--las-fixtures-en-linux-windows-y-macos));
 - nada sobre las **skills** que escribe el reflector, ni sobre lo que cuesta una sesión. No se llamó a ningún modelo.
 
 Las pruebas de upstream se leyeron antes de ejecutar nada. `test_update_requires_agent_created` cubre el control de F1, y `test_drain_sweeps_orphan_tmp` cubre el barrido, con un `.tmp` que es de AutoHarness. Ninguna prueba crea encima de una skill escrita a mano ni da a `drain` una línea inválida: así es como todo esto pasa su CI.

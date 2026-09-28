@@ -247,7 +247,7 @@ They show that **nothing in the code stops** these outcomes, each time against a
 
 They do not show:
 - **how often** it happens. F1 needs the reflector to propose a `create` whose name collides with a skill of yours, and only a model run would say how often it does;
-- anything about **Linux and macOS**. F0–F3 and F5 don't depend on the operating system in the code read, but that is *to verify*, not measured;
+- anything about **Linux and macOS** in this run. They were measured afterwards, in CI: F0–F3 and F5 give the same results there, and F4 reads back equal ([journal](../journal/#2026-09-27--the-fixtures-on-linux-windows-and-macos));
 - anything about the **skills** the reflector writes, or what a session costs. No model was called.
 
 The upstream tests were read before running anything. `test_update_requires_agent_created` covers F1's control, and `test_drain_sweeps_orphan_tmp` covers the sweep, with a `.tmp` that is AutoHarness's own. No test creates over an existing hand-written skill or feeds `drain` a bad line, which is how all of this passes their CI.
