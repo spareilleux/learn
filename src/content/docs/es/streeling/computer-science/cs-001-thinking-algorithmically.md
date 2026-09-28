@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **CS-001** · Fundamentos de Ciencias de la Computacion · principiante · 25 minutes
 
-Generado por el departamento *Ciencias de la computación* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/0b13b9d56cc4b657cde6f3ce958c162610065c2f/state/streeling/courses/computer-science/es/cs-001-thinking-algorithmically.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ciencias de la computación* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/8c14336ecd9601615e08c20dca696cd0e021563e/state/streeling/courses/computer-science/es/cs-001-thinking-algorithmically.es.md) · [Mi diario](../../journal/)
 :::
 
 > **Departamento de Ciencias de la Computacion** | Etapa: Nigredo (Principiante) | Duracion: 25 minutos

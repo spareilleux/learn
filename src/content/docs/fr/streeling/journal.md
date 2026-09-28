@@ -56,6 +56,7 @@ Coche un module une fois étudié. Sous **Notes**, ajoute une entrée datée : c
 - [ ] [MAT-004 · Vecteurs, matrices, normes et applications linéaires](../mathematics/mat-004-vectors-matrices-norms/) <!-- mat-004-vectors-matrices-norms -->
 - [ ] [MAT-005 · Problèmes aux valeurs propres symétriques](../mathematics/mat-005-symmetric-eigenproblems/) <!-- mat-005-symmetric-eigenproblems -->
 - [ ] [MAT-006 · Décomposition en valeurs singulières et approximation de rang faible](../mathematics/mat-006-svd-low-rank-approximation/) <!-- mat-006-svd-low-rank-approximation -->
+- [ ] [MAT-007 · Moindres carrés, régularisation et identifiabilité](../mathematics/mat-007-least-squares-regularisation/) <!-- mat-007-least-squares-regularisation -->
 
 ### Musique
 
@@ -156,4 +157,15 @@ Il propose aussi une explication à la question que l'entrée MAT-003 ci-dessus 
 Rien n'y a été exécuté ici.
 
 - **L'expérience de sa section 7 est seulement proposée.** Elle tournerait dans un laboratoire Learn, avec des prédictions écrites avant toute exécution : Eckart–Young pour chaque k sur deux matrices ; un balayage d'échelles de 10^-14 à 10^12 ; le coût de l'échelle ; l'énigme de MAT-003 avec `svd_with_opts` ; deux conventions de rang ; et la borne que vérifie l'un des tests d'IX. Aucun laboratoire de ce genre n'existe encore, et rien dans le module n'est une mesure.
+- **Il n'a pas été étudié ici,** donc sa case ci-dessus reste vide.
+
+## 2026-09-27 — MAT-007 · Moindres carrés, régularisation et identifiabilité
+
+Synchronisé depuis Demerzel à [`8c14336`](https://github.com/GuitarAlchemist/Demerzel/commit/8c14336ecd9601615e08c20dca696cd0e021563e) ([PR #1140](https://github.com/GuitarAlchemist/Demerzel/pull/1140) ; avant la fusion, une revue Codex n'a trouvé aucun problème majeur sur le dernier commit de sa branche, `cc6788d`). Ses prérequis, MAT-003 et MAT-006, sont déjà synchronisés ici. Le module lit le code d'IX à [`e35138b9`](https://github.com/GuitarAlchemist/ix/tree/e35138b9d4c707d48f802649a7fcb3f7fc94934d) et traite deux questions :
+- ce que fait `LinearRegression::fit` d'IX : il résout les équations normales avec un inverse explicite, donc il élève le conditionnement au carré, son verdict dépend de l'échelle et du décalage des données, et il panique quand `inverse` répond `Singular` ;
+- ce que cette panique fait à ses appelants : `ix-duck` l'intercepte, le gestionnaire MCP de `ix_linear_regression` non, et le module prédit, à la lecture du code, qu'une seule requête de ce genre empoisonne un mutex et laisse ensuite les appels qui passent par le registre sans réponse jusqu'au redémarrage du serveur.
+
+Rien n'y a été exécuté ici.
+
+- **L'expérience de sa section 6 est seulement proposée.** Elle tournerait dans un laboratoire Learn, avec des prédictions écrites avant toute exécution : un balayage des décalages de c = 1 à 10^7 ; les équations normales contre la voie SVD ; le serveur MCP après une panique, dans un processus jetable uniquement ; et la clé `"X"` du schéma d'entrée contre la clé `"x"` que lit le gestionnaire. Aucun laboratoire de ce genre n'existe encore, et rien dans le module n'est une mesure.
 - **Il n'a pas été étudié ici,** donc sa case ci-dessus reste vide.

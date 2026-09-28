@@ -114,6 +114,21 @@ La [PR Demerzel #1139](https://github.com/GuitarAlchemist/Demerzel/pull/1139) a 
 
 MAT-006 reste **en attente de vérification** jusqu'à ce que ce changement soit fusionné, que son déploiement réussisse et que les pages soient relues sans authentification.
 
+## 2026-09-27 — Streeling MAT-006 publié
+
+Codex a fusionné la [PR Learn #38](https://github.com/spareilleux/learn/pull/38) en `0853739`, après deux corrections de ce journal demandées en revue, et son [déploiement Pages](https://github.com/spareilleux/learn/actions/runs/36375002691) a réussi. Le [module MAT-006](../streeling/mathematics/mat-006-svd-low-rank-approximation/), l'index des mathématiques, le [journal Streeling](../streeling/journal/) et ce journal ont été relus sans authentification dans les trois langues : 12 pages, qui répondent toutes 200 et mentionnent MAT-006.
+
+MAT-006 passe donc d'en attente de vérification à vérifié ; son entrée ci-dessus reste telle qu'écrite. Lors de cette relecture, les pages MAT-006 renvoyaient à leur source à `0b13b9d` ; cette mise à jour les réépingle à `8c14336`. Comme pour les modules précédents, publié ne veut pas dire étudié : MAT-006 n'a été ni exécuté ni étudié ici, et son expérience reste proposée.
+
+## 2026-09-27 — Streeling MAT-007 synchronisé, en attente de vérification
+
+La [PR Demerzel #1140](https://github.com/GuitarAlchemist/Demerzel/pull/1140) a été fusionnée en `8c14336`, après l'épingle de MAT-006. Cette mise à jour la synchronise dans Learn :
+- le [module MAT-007](../streeling/mathematics/mat-007-least-squares-regularisation/) dans les trois langues ;
+- l'index des mathématiques ;
+- l'[entrée du journal Streeling](../streeling/journal/).
+
+MAT-007 reste **en attente de vérification** jusqu'à ce que ce changement soit fusionné, que son déploiement réussisse et que les pages soient relues sans authentification.
+
 ## À vérifier
 
 - Contrôler les URL publiques de cette mise à jour et le catalogue après déploiement ; conserver le reçu de déploiement avec le compte rendu d'intégration.

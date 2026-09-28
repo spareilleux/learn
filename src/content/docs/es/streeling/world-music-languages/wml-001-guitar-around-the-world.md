@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **WML-001** · Fundamentos de musica del mundo y lenguas · principiante · 30 minutes
 
-Generado por el departamento *Músicas y lenguas del mundo* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/0b13b9d56cc4b657cde6f3ce958c162610065c2f/state/streeling/courses/world-music-languages/es/wml-001-guitar-around-the-world.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Músicas y lenguas del mundo* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/8c14336ecd9601615e08c20dca696cd0e021563e/state/streeling/courses/world-music-languages/es/wml-001-guitar-around-the-world.es.md) · [Mi diario](../../journal/)
 :::
 
 > **Departamento de Musica del Mundo y Lenguas** | Nivel: Principiante | Duracion: 30 minutos

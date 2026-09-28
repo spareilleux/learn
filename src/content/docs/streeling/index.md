@@ -28,7 +28,7 @@ These modules were written by AI departments and have **not been reviewed**. Unl
 | [Guitar Alchemist Academy](guitar-alchemist-academy/) | 3 | 1 | 1 |
 | [Guitar Studies](guitar-studies/) | 2 | 2 | 2 |
 | [Information Theory](information-theory/) | 1 | 0 | 0 |
-| [Mathematics](mathematics/) | 6 | 6 | 6 |
+| [Mathematics](mathematics/) | 7 | 7 | 7 |
 | [Music](music/) | 6 | 1 | 1 |
 | [Musicology](musicology/) | 2 | 1 | 1 |
 | [Network Science](network-science/) | 1 | 0 | 0 |
@@ -42,5 +42,5 @@ These modules were written by AI departments and have **not been reviewed**. Unl
 
 ## Provenance
 
-- Source: [`GuitarAlchemist/Demerzel` → `state/streeling/courses`](https://github.com/GuitarAlchemist/Demerzel/tree/0b13b9d56cc4b657cde6f3ce958c162610065c2f/state/streeling/courses) at commit `0b13b9d` (2026-09-27), MIT license.
+- Source: [`GuitarAlchemist/Demerzel` → `state/streeling/courses`](https://github.com/GuitarAlchemist/Demerzel/tree/8c14336ecd9601615e08c20dca696cd0e021563e/state/streeling/courses) at commit `8c14336` (2026-09-27), MIT license.
 - Imported with `npm run sync:streeling`; do not edit these pages by hand — only `journal.md` is kept between syncs.

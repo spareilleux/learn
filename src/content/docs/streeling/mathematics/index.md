@@ -17,3 +17,4 @@ sidebar:
 - [MAT-004 · Vectors, Matrices, Norms and Linear Maps — What a Matrix Does to Space](mat-004-vectors-matrices-norms/)
 - [MAT-005 · Symmetric Eigenproblems — The Directions a Matrix Only Stretches](mat-005-symmetric-eigenproblems/)
 - [MAT-006 · Singular Value Decomposition and Low-Rank Approximation — The Best Simplification of a Matrix](mat-006-svd-low-rank-approximation/)
+- [MAT-007 · Least Squares, Regularisation and Identifiability — When the Data Cannot Pin the Parameters Down](mat-007-least-squares-regularisation/)

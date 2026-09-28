@@ -56,6 +56,7 @@ Marca un módulo una vez estudiado. En **Notas**, añade una entrada fechada: lo
 - [ ] [MAT-004 · Vectores, matrices, normas y aplicaciones lineales](../mathematics/mat-004-vectors-matrices-norms/) <!-- mat-004-vectors-matrices-norms -->
 - [ ] [MAT-005 · Problemas de valores propios simétricos](../mathematics/mat-005-symmetric-eigenproblems/) <!-- mat-005-symmetric-eigenproblems -->
 - [ ] [MAT-006 · Descomposición en valores singulares y aproximación de bajo rango](../mathematics/mat-006-svd-low-rank-approximation/) <!-- mat-006-svd-low-rank-approximation -->
+- [ ] [MAT-007 · Mínimos cuadrados, regularización e identificabilidad](../mathematics/mat-007-least-squares-regularisation/) <!-- mat-007-least-squares-regularisation -->
 
 ### Música
 
@@ -156,4 +157,15 @@ También propone una explicación para la pregunta que la entrada MAT-003 de arr
 Aquí no se ejecutó nada de él.
 
 - **El experimento de su sección 7 solo está propuesto.** Se ejecutaría en un laboratorio de Learn, con predicciones escritas antes de cualquier ejecución: Eckart–Young para cada k en dos matrices; un barrido de escalas de 10^-14 a 10^12; el coste de la escala; el enigma de MAT-003 con `svd_with_opts`; dos convenciones de rango; y la cota que comprueba una de las pruebas de IX. Ese laboratorio aún no existe, y nada en el módulo es una medición.
+- **No se ha estudiado aquí,** así que su casilla de arriba sigue vacía.
+
+## 2026-09-27 — MAT-007 · Mínimos cuadrados, regularización e identificabilidad
+
+Sincronizado desde Demerzel en [`8c14336`](https://github.com/GuitarAlchemist/Demerzel/commit/8c14336ecd9601615e08c20dca696cd0e021563e) ([PR #1140](https://github.com/GuitarAlchemist/Demerzel/pull/1140); antes de la fusión, una revisión de Codex no encontró ningún problema importante en el último commit de su rama, `cc6788d`). Sus requisitos previos, MAT-003 y MAT-006, ya están sincronizados aquí. El módulo lee el código de IX en [`e35138b9`](https://github.com/GuitarAlchemist/ix/tree/e35138b9d4c707d48f802649a7fcb3f7fc94934d) y trata dos cuestiones:
+- lo que hace `LinearRegression::fit` de IX: resuelve las ecuaciones normales con una inversa explícita, así que eleva al cuadrado el número de condición, su veredicto depende de la escala y del desplazamiento de los datos, y entra en pánico cuando `inverse` responde `Singular`;
+- lo que ese pánico hace a quienes lo llaman: `ix-duck` lo captura, el manejador MCP de `ix_linear_regression` no, y el módulo predice, a partir de la lectura del código, que una sola petición así envenena un mutex y deja después sin respuesta las llamadas que pasan por el registro hasta que el servidor se reinicia.
+
+Aquí no se ejecutó nada de él.
+
+- **El experimento de su sección 6 solo está propuesto.** Se ejecutaría en un laboratorio de Learn, con predicciones escritas antes de cualquier ejecución: un barrido de desplazamientos de c = 1 a 10^7; las ecuaciones normales frente a la vía SVD; el servidor MCP tras un pánico, solo en un proceso desechable; y la clave `"X"` del esquema de entrada frente a la clave `"x"` que lee el manejador. Ese laboratorio aún no existe, y nada en el módulo es una medición.
 - **No se ha estudiado aquí,** así que su casilla de arriba sigue vacía.
