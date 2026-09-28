@@ -16,3 +16,4 @@ sidebar:
 - [MAT-003 · Floating-Point Arithmetic and Conditioning — When a Computer Loses Digits](mat-003-floating-point-conditioning/)
 - [MAT-004 · Vectors, Matrices, Norms and Linear Maps — What a Matrix Does to Space](mat-004-vectors-matrices-norms/)
 - [MAT-005 · Symmetric Eigenproblems — The Directions a Matrix Only Stretches](mat-005-symmetric-eigenproblems/)
+- [MAT-006 · Singular Value Decomposition and Low-Rank Approximation — The Best Simplification of a Matrix](mat-006-svd-low-rank-approximation/)

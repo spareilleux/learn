@@ -55,6 +55,7 @@ Marca un módulo una vez estudiado. En **Notas**, añade una entrada fechada: lo
 - [ ] [MAT-003 · Aritmética de punto flotante y condicionamiento](../mathematics/mat-003-floating-point-conditioning/) <!-- mat-003-floating-point-conditioning -->
 - [ ] [MAT-004 · Vectores, matrices, normas y aplicaciones lineales](../mathematics/mat-004-vectors-matrices-norms/) <!-- mat-004-vectors-matrices-norms -->
 - [ ] [MAT-005 · Problemas de valores propios simétricos](../mathematics/mat-005-symmetric-eigenproblems/) <!-- mat-005-symmetric-eigenproblems -->
+- [ ] [MAT-006 · Descomposición en valores singulares y aproximación de bajo rango](../mathematics/mat-006-svd-low-rank-approximation/) <!-- mat-006-svd-low-rank-approximation -->
 
 ### Música
 
@@ -142,4 +143,17 @@ Sincronizado desde Demerzel en [`8bd026f`](https://github.com/GuitarAlchemist/De
 Aquí no se ejecutó nada de él.
 
 - **El experimento de su sección 8 solo está propuesto.** Se ejecutaría en un laboratorio de Learn, con predicciones escritas antes de cualquier ejecución: los invariantes A v = λ v, VᵀV = I y A = V Λ Vᵀ en cuatro matrices; el subespacio propio de un valor propio múltiple; `symmetric_eigen` e `ix_eigen` sobre una matriz no simétrica; y el PCA sobre seis puntos cuyo eje principal debería pasar por alto. Ese laboratorio aún no existe, y nada en el módulo es una medición.
+- **No se ha estudiado aquí,** así que su casilla de arriba sigue vacía.
+
+## 2026-09-27 — MAT-006 · Descomposición en valores singulares y aproximación de bajo rango
+
+Sincronizado desde Demerzel en [`0b13b9d`](https://github.com/GuitarAlchemist/Demerzel/commit/0b13b9d56cc4b657cde6f3ce958c162610065c2f) ([PR #1139](https://github.com/GuitarAlchemist/Demerzel/pull/1139); antes de la fusión, una revisión de Codex no encontró ningún problema importante en el último commit de su rama, `4839e89`). Sus requisitos previos, MAT-004 y MAT-005, ya están en este sitio. El módulo lee el código de IX en [`e35138b9`](https://github.com/GuitarAlchemist/ix/tree/e35138b9d4c707d48f802649a7fcb3f7fc94934d) y trata dos cuestiones:
+- el contrato de `svd` de IX, un método de Jacobi unilateral: su criterio de parada no es invariante de escala, aunque su comentario lo afirme; devuelve `Ok` tras 50 barridos, se cumpla o no ese criterio; y una columna de U queda a cero cuando su valor singular es menor que el umbral absoluto 10^-12;
+- la tolerancia de rango, que `rank` y `pseudo_inverse` dejan a quien llama.
+
+También propone una explicación para la pregunta que la entrada MAT-003 de arriba deja abierta: multiplicar fl(H) por una potencia de dos es exacto, así que solo el número de barridos puede cambiar el κ₂ de IX. Es el análisis del módulo, hecho sobre una transcripción de `svd` en Python, no una ejecución de IX. El punto de MAT-003 sigue abierto hasta que el laboratorio haga la comprobación.
+
+Aquí no se ejecutó nada de él.
+
+- **El experimento de su sección 7 solo está propuesto.** Se ejecutaría en un laboratorio de Learn, con predicciones escritas antes de cualquier ejecución: Eckart–Young para cada k en dos matrices; un barrido de escalas de 10^-14 a 10^12; el coste de la escala; el enigma de MAT-003 con `svd_with_opts`; dos convenciones de rango; y la cota que comprueba una de las pruebas de IX. Ese laboratorio aún no existe, y nada en el módulo es una medición.
 - **No se ha estudiado aquí,** así que su casilla de arriba sigue vacía.

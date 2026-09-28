@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **AUD-001** · Fundamentos de compresion — ratio, threshold, attack, release · intermedio · 35 minutes
 
-Generado por el departamento *Ingeniería de audio* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/8bd026f9e48065c482faeae5cacf8e4808fff4cc/state/streeling/courses/audio-engineering/es/aud-001-eq-compression-order.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ingeniería de audio* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/0b13b9d56cc4b657cde6f3ce958c162610065c2f/state/streeling/courses/audio-engineering/es/aud-001-eq-compression-order.es.md) · [Mi diario](../../journal/)
 :::
 
 > **Departamento de Ingenieria de Audio** | Nivel: Intermedio | Duracion: 35 minutos
