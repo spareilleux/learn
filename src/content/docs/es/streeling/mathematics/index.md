@@ -17,3 +17,4 @@ sidebar:
 - [MAT-004 · Vectores, matrices, normas y aplicaciones lineales — Lo que una matriz le hace al espacio](mat-004-vectors-matrices-norms/)
 - [MAT-005 · Problemas de valores propios simétricos — Las direcciones que una matriz solo estira](mat-005-symmetric-eigenproblems/)
 - [MAT-006 · Descomposición en valores singulares y aproximación de bajo rango — La mejor simplificación de una matriz](mat-006-svd-low-rank-approximation/)
+- [MAT-007 · Mínimos cuadrados, regularización e identificabilidad — Cuando los datos no bastan para fijar los parámetros](mat-007-least-squares-regularisation/)

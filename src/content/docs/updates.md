@@ -114,6 +114,21 @@ These three modules therefore move from awaiting verification to verified; their
 
 MAT-006 stays **awaiting verification** until this change is merged, its deployment succeeds and the pages are read back anonymously.
 
+## 2026-09-27 — Streeling MAT-006 published
+
+Codex merged [Learn PR #38](https://github.com/spareilleux/learn/pull/38) as `0853739`, after two corrections to this journal asked for in review, and its [Pages deployment](https://github.com/spareilleux/learn/actions/runs/36375002691) succeeded. The [MAT-006 module](../streeling/mathematics/mat-006-svd-low-rank-approximation/), the mathematics index, the [Streeling journal](../streeling/journal/) and this journal were read back anonymously in the three languages: 12 pages, each answering 200 and mentioning MAT-006.
+
+MAT-006 therefore moves from awaiting verification to verified; its entry above is left as written. At that readback, the MAT-006 pages linked their source at `0b13b9d`; this update repins them to `8c14336`. As for the modules before it, published is not studied: MAT-006 has not been run or studied here, and its experiment remains proposed.
+
+## 2026-09-27 — Streeling MAT-007 synced, awaiting verification
+
+[Demerzel PR #1140](https://github.com/GuitarAlchemist/Demerzel/pull/1140) was merged as `8c14336`, after the MAT-006 pin. This update syncs it into Learn:
+- the [MAT-007 module](../streeling/mathematics/mat-007-least-squares-regularisation/) in the three languages;
+- the mathematics index;
+- the [Streeling journal entry](../streeling/journal/).
+
+MAT-007 stays **awaiting verification** until this change is merged, its deployment succeeds and the pages are read back anonymously.
+
 ## To verify
 
 - Check this update's public URLs and catalog after deployment; keep the deploy receipt with the integration record.

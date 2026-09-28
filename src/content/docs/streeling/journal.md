@@ -56,6 +56,7 @@ Tick a module once studied. Under **Notes**, add a dated entry: what I understoo
 - [ ] [MAT-004 · Vectors, Matrices, Norms and Linear Maps](../mathematics/mat-004-vectors-matrices-norms/) <!-- mat-004-vectors-matrices-norms -->
 - [ ] [MAT-005 · Symmetric Eigenproblems](../mathematics/mat-005-symmetric-eigenproblems/) <!-- mat-005-symmetric-eigenproblems -->
 - [ ] [MAT-006 · Singular Value Decomposition and Low-Rank Approximation](../mathematics/mat-006-svd-low-rank-approximation/) <!-- mat-006-svd-low-rank-approximation -->
+- [ ] [MAT-007 · Least Squares, Regularisation and Identifiability](../mathematics/mat-007-least-squares-regularisation/) <!-- mat-007-least-squares-regularisation -->
 
 ### Music
 
@@ -156,4 +157,15 @@ It also offers an explanation for the question the MAT-003 entry above leaves op
 Nothing in it was run here.
 
 - **The experiment in its section 7 is only proposed.** It would run in a Learn lab, with predictions written before any run: Eckart–Young for every k on two matrices; a scale sweep from 10^-14 to 10^12; the cost of scale; MAT-003's puzzle with `svd_with_opts`; two rank conventions; and the bound that one of IX's tests checks. No such lab exists yet, and nothing in the module is a measurement.
+- **It has not been studied here,** so its checkbox above stays empty.
+
+## 2026-09-27 — MAT-007 · Least Squares, Regularisation and Identifiability
+
+Synced from Demerzel at [`8c14336`](https://github.com/GuitarAlchemist/Demerzel/commit/8c14336ecd9601615e08c20dca696cd0e021563e) ([PR #1140](https://github.com/GuitarAlchemist/Demerzel/pull/1140); before the merge, a Codex review found no major issues on its final head, `cc6788d`). Its prerequisites, MAT-003 and MAT-006, are already synced here. The module reads IX's code at [`e35138b9`](https://github.com/GuitarAlchemist/ix/tree/e35138b9d4c707d48f802649a7fcb3f7fc94934d) and covers two things:
+- what IX's `LinearRegression::fit` does: it solves the normal equations with an explicit inverse, so it squares the condition number, its verdict depends on the scale and offset of the data, and it panics when `inverse` answers `Singular`;
+- what that panic does to its callers: `ix-duck` catches it, the MCP handler of `ix_linear_regression` does not, and the module predicts, from reading the code, that one such request poisons a mutex and leaves the later registry-backed calls without a response until the server restarts.
+
+Nothing in it was run here.
+
+- **The experiment in its section 6 is only proposed.** It would run in a Learn lab, with predictions written before any run: an offset sweep from c = 1 to 10^7; the normal equations against the SVD route; the MCP server after a panic, in a disposable process only; and the input schema's `"X"` key against the `"x"` the handler reads. No such lab exists yet, and nothing in the module is a measurement.
 - **It has not been studied here,** so its checkbox above stays empty.

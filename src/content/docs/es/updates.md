@@ -114,6 +114,21 @@ La [PR de Demerzel #1139](https://github.com/GuitarAlchemist/Demerzel/pull/1139)
 
 MAT-006 sigue **pendiente de verificación** hasta que este cambio se fusione, su despliegue sea correcto y las páginas se lean sin autenticación.
 
+## 2026-09-27 — Streeling MAT-006 publicado
+
+Codex fusionó la [PR de Learn #38](https://github.com/spareilleux/learn/pull/38) como `0853739`, tras dos correcciones de este diario pedidas en la revisión, y su [despliegue de Pages](https://github.com/spareilleux/learn/actions/runs/36375002691) fue correcto. El [módulo MAT-006](../streeling/mathematics/mat-006-svd-low-rank-approximation/), el índice de matemáticas, el [diario de Streeling](../streeling/journal/) y este diario se leyeron sin autenticación en los tres idiomas: 12 páginas, que respondieron todas 200 y mencionan MAT-006.
+
+MAT-006 pasa así de pendiente de verificación a verificado; su entrada de arriba queda tal como se escribió. En esa lectura, las páginas de MAT-006 enlazaban su fuente en `0b13b9d`; esta actualización las fija de nuevo en `8c14336`. Como en los módulos anteriores, publicado no es estudiado: MAT-006 no se ha ejecutado ni estudiado aquí, y su experimento sigue propuesto.
+
+## 2026-09-27 — Streeling MAT-007 sincronizado, pendiente de verificación
+
+La [PR de Demerzel #1140](https://github.com/GuitarAlchemist/Demerzel/pull/1140) se fusionó como `8c14336`, después de la fijación de MAT-006. Esta actualización la sincroniza en Learn:
+- el [módulo MAT-007](../streeling/mathematics/mat-007-least-squares-regularisation/) en los tres idiomas;
+- el índice de matemáticas;
+- la [entrada del diario de Streeling](../streeling/journal/).
+
+MAT-007 sigue **pendiente de verificación** hasta que este cambio se fusione, su despliegue sea correcto y las páginas se lean sin autenticación.
+
 ## Por verificar
 
 - Comprobar las URL públicas de esta actualización y el catálogo tras el despliegue; conservar su recibo en el registro de integración.
