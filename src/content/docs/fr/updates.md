@@ -76,6 +76,15 @@ La [PR Demerzel #1136](https://github.com/GuitarAlchemist/Demerzel/pull/1136) a 
 
 MAT-002 reste **en attente de vérification** jusqu'à ce que ce changement soit fusionné, que son déploiement réussisse et que les pages soient relues sans authentification. MAT-004 a été fusionné dans Demerzel après cette épingle (`d451c90`, [PR #1137](https://github.com/GuitarAlchemist/Demerzel/pull/1137)) ; il n'est pas synchronisé ici.
 
+## 2026-09-27 — Streeling MAT-004 synchronisé, en attente de vérification
+
+La [PR Demerzel #1137](https://github.com/GuitarAlchemist/Demerzel/pull/1137) a été fusionnée en `d451c90`, après l'épingle de MAT-002. Cette mise à jour la synchronise dans Learn :
+- le [module MAT-004](../streeling/mathematics/mat-004-vectors-matrices-norms/) dans les trois langues ;
+- l'index des mathématiques ;
+- l'[entrée du journal Streeling](../streeling/journal/).
+
+MAT-004 reste **en attente de vérification** jusqu'à ce que ce changement soit fusionné, que son déploiement réussisse et que les pages soient relues sans authentification.
+
 ## À vérifier
 
 - Contrôler les URL publiques de cette mise à jour et le catalogue après déploiement ; conserver le reçu de déploiement avec le compte rendu d'intégration.
