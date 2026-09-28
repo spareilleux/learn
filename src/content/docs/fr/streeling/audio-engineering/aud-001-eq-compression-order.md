@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **AUD-001** · Fondamentaux de la compression — ratio, seuil, attaque, relâchement · intermédiaire · 35 minutes
 
-Généré par le département *Ingénierie audio* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/d451c909f69d9774901bdd99195ead8444098320/state/streeling/courses/audio-engineering/fr/aud-001-eq-compression-order.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Ingénierie audio* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/8bd026f9e48065c482faeae5cacf8e4808fff4cc/state/streeling/courses/audio-engineering/fr/aud-001-eq-compression-order.fr.md) · [Mon journal](../../journal/)
 :::
 
 > **Département d'ingénierie audio** | Niveau : Intermédiaire | Durée : 35 minutes

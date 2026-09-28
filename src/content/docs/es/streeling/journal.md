@@ -54,6 +54,7 @@ Marca un módulo una vez estudiado. En **Notas**, añade una entrada fechada: lo
 - [ ] [MAT-002 · Contraejemplos, testigos y comprobaciones exhaustivas](../mathematics/mat-002-counterexamples-and-exhaustive-checks/) <!-- mat-002-counterexamples-and-exhaustive-checks -->
 - [ ] [MAT-003 · Aritmética de punto flotante y condicionamiento](../mathematics/mat-003-floating-point-conditioning/) <!-- mat-003-floating-point-conditioning -->
 - [ ] [MAT-004 · Vectores, matrices, normas y aplicaciones lineales](../mathematics/mat-004-vectors-matrices-norms/) <!-- mat-004-vectors-matrices-norms -->
+- [ ] [MAT-005 · Problemas de valores propios simétricos](../mathematics/mat-005-symmetric-eigenproblems/) <!-- mat-005-symmetric-eigenproblems -->
 
 ### Música
 
@@ -130,4 +131,15 @@ Sincronizado desde Demerzel en [`d451c90`](https://github.com/GuitarAlchemist/De
 Aquí no se ejecutó nada de él.
 
 - **El experimento de su sección 7 solo está propuesto.** Se ejecutaría en un laboratorio de Learn, con predicciones escritas antes de cualquier ejecución: la desigualdad triangular sobre las 15 625 ternas de una cuadrícula de 5 × 5 puntos para cuatro distancias; `minkowski` con p = 1/2, p = ∞ y p = 1000; el coste de `determinant` para n = 2 a 11, y su regla del producto en matrices 3 × 3 de enteros. Ese laboratorio aún no existe, y nada en el módulo es una medición.
+- **No se ha estudiado aquí,** así que su casilla de arriba sigue vacía.
+
+## 2026-09-27 — MAT-005 · Problemas de valores propios simétricos
+
+Sincronizado desde Demerzel en [`8bd026f`](https://github.com/GuitarAlchemist/Demerzel/commit/8bd026f9e48065c482faeae5cacf8e4808fff4cc) ([PR #1138](https://github.com/GuitarAlchemist/Demerzel/pull/1138); antes de la fusión, una revisión de Codex no encontró ningún problema importante en el último commit de su rama, `4ac3ca6`). El módulo lee el código de IX en [`e35138b9`](https://github.com/GuitarAlchemist/ix/tree/e35138b9d4c707d48f802649a7fcb3f7fc94934d) y trata dos cuestiones:
+- el contrato del solucionador simétrico de IX, `symmetric_eigen`, un método de Jacobi cíclico: no comprueba la simetría ni informa de la convergencia;
+- por qué el PCA simple de IX no usa ese solucionador: extrae sus componentes con el método de la potencia y deflación, desde un vector de partida fijo.
+
+Aquí no se ejecutó nada de él.
+
+- **El experimento de su sección 8 solo está propuesto.** Se ejecutaría en un laboratorio de Learn, con predicciones escritas antes de cualquier ejecución: los invariantes A v = λ v, VᵀV = I y A = V Λ Vᵀ en cuatro matrices; el subespacio propio de un valor propio múltiple; `symmetric_eigen` e `ix_eigen` sobre una matriz no simétrica; y el PCA sobre seis puntos cuyo eje principal debería pasar por alto. Ese laboratorio aún no existe, y nada en el módulo es una medición.
 - **No se ha estudiado aquí,** así que su casilla de arriba sigue vacía.

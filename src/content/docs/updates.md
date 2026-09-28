@@ -85,6 +85,15 @@ MAT-002 stays **awaiting verification** until this change is merged, its deploym
 
 MAT-004 stays **awaiting verification** until this change is merged, its deployment succeeds and the pages are read back anonymously.
 
+## 2026-09-27 — Streeling MAT-005 synced, awaiting verification
+
+[Demerzel PR #1138](https://github.com/GuitarAlchemist/Demerzel/pull/1138) was merged as `8bd026f`, after the MAT-004 pin. This update syncs it into Learn:
+- the [MAT-005 module](../streeling/mathematics/mat-005-symmetric-eigenproblems/) in the three languages;
+- the mathematics index;
+- the [Streeling journal entry](../streeling/journal/).
+
+MAT-005 stays **awaiting verification** until this change is merged, its deployment succeeds and the pages are read back anonymously.
+
 ## To verify
 
 - Check this update's public URLs and catalog after deployment; keep the deploy receipt with the integration record.

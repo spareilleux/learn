@@ -54,6 +54,7 @@ Tick a module once studied. Under **Notes**, add a dated entry: what I understoo
 - [ ] [MAT-002 · Counterexamples, Witnesses and Exhaustive Checks](../mathematics/mat-002-counterexamples-and-exhaustive-checks/) <!-- mat-002-counterexamples-and-exhaustive-checks -->
 - [ ] [MAT-003 · Floating-Point Arithmetic and Conditioning](../mathematics/mat-003-floating-point-conditioning/) <!-- mat-003-floating-point-conditioning -->
 - [ ] [MAT-004 · Vectors, Matrices, Norms and Linear Maps](../mathematics/mat-004-vectors-matrices-norms/) <!-- mat-004-vectors-matrices-norms -->
+- [ ] [MAT-005 · Symmetric Eigenproblems](../mathematics/mat-005-symmetric-eigenproblems/) <!-- mat-005-symmetric-eigenproblems -->
 
 ### Music
 
@@ -130,4 +131,15 @@ Synced from Demerzel at [`d451c90`](https://github.com/GuitarAlchemist/Demerzel/
 Nothing in it was run here.
 
 - **The experiment in its section 7 is only proposed.** It would run in a Learn lab, with predictions written before any run: the triangle inequality over the 15,625 triples of a 5 × 5 grid for four distances; `minkowski` with p = 1/2, p = ∞ and p = 1000; the cost of `determinant` for n = 2 to 11, and its product rule on 3 × 3 integer matrices. No such lab exists yet, and nothing in the module is a measurement.
+- **It has not been studied here,** so its checkbox above stays empty.
+
+## 2026-09-27 — MAT-005 · Symmetric Eigenproblems
+
+Synced from Demerzel at [`8bd026f`](https://github.com/GuitarAlchemist/Demerzel/commit/8bd026f9e48065c482faeae5cacf8e4808fff4cc) ([PR #1138](https://github.com/GuitarAlchemist/Demerzel/pull/1138); before the merge, a Codex review found no major issues on its final head, `4ac3ca6`). The module reads IX's code at [`e35138b9`](https://github.com/GuitarAlchemist/ix/tree/e35138b9d4c707d48f802649a7fcb3f7fc94934d) and covers two things:
+- the contract of IX's symmetric solver, `symmetric_eigen`, a cyclic Jacobi method: it does not check symmetry and does not report convergence;
+- why plain PCA in IX does not use that solver: it extracts its components by power iteration and deflation, from a fixed start vector.
+
+Nothing in it was run here.
+
+- **The experiment in its section 8 is only proposed.** It would run in a Learn lab, with predictions written before any run: the invariants A v = λ v, VᵀV = I and A = V Λ Vᵀ on four matrices; the eigenspace of a repeated eigenvalue; `symmetric_eigen` and `ix_eigen` on a non-symmetric matrix; and PCA on six points whose main axis it is predicted to miss. No such lab exists yet, and nothing in the module is a measurement.
 - **It has not been studied here,** so its checkbox above stays empty.

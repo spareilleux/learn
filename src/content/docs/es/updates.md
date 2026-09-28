@@ -85,6 +85,15 @@ La [PR de Demerzel #1137](https://github.com/GuitarAlchemist/Demerzel/pull/1137)
 
 MAT-004 sigue **pendiente de verificación** hasta que este cambio se fusione, su despliegue sea correcto y las páginas se lean sin autenticación.
 
+## 2026-09-27 — Streeling MAT-005 sincronizado, pendiente de verificación
+
+La [PR de Demerzel #1138](https://github.com/GuitarAlchemist/Demerzel/pull/1138) se fusionó como `8bd026f`, después de la fijación de MAT-004. Esta actualización la sincroniza en Learn:
+- el [módulo MAT-005](../streeling/mathematics/mat-005-symmetric-eigenproblems/) en los tres idiomas;
+- el índice de matemáticas;
+- la [entrada del diario de Streeling](../streeling/journal/).
+
+MAT-005 sigue **pendiente de verificación** hasta que este cambio se fusione, su despliegue sea correcto y las páginas se lean sin autenticación.
+
 ## Por verificar
 
 - Comprobar las URL públicas de esta actualización y el catálogo tras el despliegue; conservar su recibo en el registro de integración.
