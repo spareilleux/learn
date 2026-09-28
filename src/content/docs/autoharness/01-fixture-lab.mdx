@@ -1,0 +1,351 @@
+---
+title: 1. A fixture lab — six promises tested without installing
+description: Run the parts of AutoHarness that need no model — its promoter, intent queue, skill store and redactor — in isolated subprocesses with a disposable home, against six fixtures written down before the first run, and see where its promise to leave your skills alone breaks.
+sidebar:
+  order: 1
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Code: [`code/autoharness/fixtures.py`](https://github.com/spareilleux/learn/blob/main/code/autoharness/fixtures.py), which produces every result of this lesson, and [`redact_probe.py`](https://github.com/spareilleux/learn/blob/main/code/autoharness/redact_probe.py) for the exercises. The predictions are in [`results/preregistration.md`](https://github.com/spareilleux/learn/blob/main/code/autoharness/results/preregistration.md), the raw output in [`results/fixtures-run.jsonl`](https://github.com/spareilleux/learn/blob/main/code/autoharness/results/fixtures-run.jsonl). Measured on Windows 11 with Python 3.14.2; Linux and macOS are *to verify*.
+
+## What runs without a model
+
+[AutoHarness](https://github.com/tigerless-labs/autoharness) is a Claude Code plugin. Its [`hooks.json`](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/hooks/hooks.json#L1-L16) registers the same command, `python3 -m autoharness.hook.dispatch`, on four [hook events](https://code.claude.com/docs/en/hooks): `SessionStart`, `PreToolUse`, `Stop` and `SessionEnd`. Everything else follows from there.
+
+```mermaid
+flowchart LR
+    Hooks["Hooks<br/>SessionStart, PreToolUse,<br/>Stop, SessionEnd"] --> Dispatch["dispatch.py"]
+    Dispatch -- "every 50 tool calls,<br/>and at session end" --> Reflector["Reflector<br/>claude -p on Haiku"]
+    Reflector -- "stage_skill (MCP)" --> Queue["Intent queue<br/>intents/run-id.jsonl"]
+    Queue --> Promoter["Promoter<br/>validate, then land"]
+    Dispatch -- "every Stop" --> Promoter
+    Promoter --> Skills[".claude/skills/name/<br/>SKILL.md + .sidecar.json"]
+    Skills -- "next SessionStart" --> Index["Skill index injected<br/>into the new session"]
+```
+
+Only one box involves a model. The reflector is a background `claude -p --agent autoharness:reflector --dangerously-skip-permissions` ([`spawn.py`, lines 90-96](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/hook/spawn.py#L90-L96)) on Haiku ([`reflector.md`](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/agents/reflector.md#L1-L6)). It reads the recent transcript and *proposes* changes: each proposal, an **intent**, is a JSON line such as `{"action": "create", "name": "…", "level": "project", "body": "…"}` appended to a queue. Its tools are `Read`, `Grep`, `Glob` and the staging tool: it does not write skills itself.
+
+The **promoter** decides what lands. It reads the queue, checks each intent, writes `SKILL.md` and a `.sidecar.json` that says who owns the skill, and clears the queue. It runs after each reflector exits and at every `Stop` of your own session ([`dispatch.py`, line 97](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/hook/dispatch.py#L93-L99)), with no one asked.
+
+The promoter, the queue, the skill store and the redactor are ordinary Python using the standard library only. They take their folders as arguments. That is the part this lab runs: whatever the model might propose, these functions decide what happens on disk, and they can be called with a hand-written intent. The .NET equivalent is testing a message handler by feeding it a message, without the service bus.
+
+## Getting the specimen without installing it
+
+Installing the plugin would register its hooks in your Claude Code. A clone doesn't: it is a folder of files until something imports them. Clone it and pin the commit this course studied:
+
+```bash
+git clone https://github.com/tigerless-labs/autoharness.git autoharness-ca39a72
+git -C autoharness-ca39a72 checkout --detach ca39a72e4353ebef11b7de13c1fc7fa5f4df421b
+```
+
+The clone can live anywhere; the commands below assume it sits next to `fixtures.py`, in `code/autoharness/`. From there, print the input hash of each fixture. This imports nothing from AutoHarness:
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+```bash
+python fixtures.py --hashes
+```
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```bash
+python3 fixtures.py --hashes
+```
+
+</TabItem>
+<TabItem label="macOS">
+
+```bash
+python3 fixtures.py --hashes
+```
+
+</TabItem>
+</Tabs>
+
+```
+F0 83539d1aa8d00fc436994ec02255b94eef38f8e246556a023e68e130823585c0
+F1 6b2a45a43418ce1421db9fa41d2f150ab6f76d8441f1fc0fce4c81a2740fce03
+F2 3c80d64fa379c4ccd426a66cebe88845cc29ca9b4be78596606695b1157dd419
+F3 fcb3d2e95a180ff89626b5a254e4a7f3d4c6239e09689b72359239314c3d6c9a
+F4 b60a8e5ecd1e33355b3fa90b76f8f45052fa391261ebbcf7448e928fb825bae3
+F5 6b895ca2e28a6f8a0de9c1eeb179e1d2dae0449076781b831d9d0bdad4d0cb47
+```
+
+Each hash is the SHA-256 of a fixture's inputs, the same six values the pre-registration recorded before the first run. If your numbers differ, you are not running the same fixtures, and the results below don't apply to you. AutoHarness needs [Python](https://www.python.org/downloads/) 3.11 or later; nothing else is installed.
+
+## An environment built from nothing
+
+A subprocess normally inherits every environment variable of its parent. For this specimen that matters three times over:
+- AutoHarness reads its settings from `AUTOHARNESS_*` variables when it is imported;
+- it finds the global skill folder through [`Path.home()`](https://docs.python.org/3/library/pathlib.html), which reads `USERPROFILE` on Windows and `HOME` elsewhere ([`layer.py`, lines 54-58](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/lib/layer.py#L54-L58));
+- its own launcher copies the whole parent environment into the reflector ([`spawn.py`, lines 99-104](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/hook/spawn.py#L99-L104)), credentials included.
+
+So `fixtures.py` never lets a fixture inherit anything. Each one runs in a fresh [subprocess](https://docs.python.org/3/library/subprocess.html) whose environment is built here, key by key:
+
+```python
+def minimal_env(clone, home, utf8):
+    env = {"PATH": str(Path(sys.executable).parent), "PYTHONPATH": str(Path(clone) / "src"),
+           "HOME": str(home), "USERPROFILE": str(home), "TEMP": str(home), "TMP": str(home),
+           "PYTHONDONTWRITEBYTECODE": "1", "PYTHONIOENCODING": "utf-8"}
+    if os.name == "nt":
+        env["SYSTEMROOT"] = os.environ.get("SYSTEMROOT", r"C:\Windows")  # the interpreter cannot start without it
+    if utf8 is not None:
+        env["PYTHONUTF8"] = utf8
+    return env
+```
+
+The home is a [temporary directory](https://docs.python.org/3/library/tempfile.html), created per fixture and deleted after it, and the working directory is inside it. Every call receives explicit folders (`roots={"global": …, "project": …}`), so no path is derived from the real home or from a repository. The child imports `hook.promoter` and `lib.*` only. It never imports `hook.spawn`, the module that starts `claude`, so no model can be called even by accident.
+
+Two checks run with every fixture, because isolation that is only intended is not isolation:
+- after the fixture, the disposable home is listed: `home_writes` must be empty;
+- before and after the whole run, the parent checks whether the real `~/.claude/autoharness` exists. The two answers must be the same.
+
+The [SlashForge course](../../slashforge/01-what-the-installer-writes/) used the same `HOME` and `USERPROFILE` trick on an installer. The difference here is that the code under test is imported, so the variables it could read must be removed, not just redirected.
+
+## Writing the prediction down first
+
+Each fixture was written down before anything ran, in [`preregistration.md`](https://github.com/spareilleux/learn/blob/main/code/autoharness/results/preregistration.md), with:
+- the question, and a hypothesis taken from reading the code, with the lines;
+- the input hash;
+- a **control**, which must behave as the code intends, so that a failure of the treatment means something;
+- the result expected if the hypothesis holds, and the **falsifier**: the result that would prove it wrong.
+
+The file was hashed at 15:29:21 EDT, before the first run (SHA-256 `b9dc7b7d…`). Everything above its *Post-measurement edits* heading is still byte-identical to that version. The edits made after the run are listed there with their times and reasons. This is the practice the [Repository Dogfooding Lab](../../repository-dogfooding-lab/) applies to experiments across repositories: a hypothesis written after the result can always be made to fit it.
+
+## The six fixtures
+
+Run them all:
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+```bash
+python fixtures.py --clone autoharness-ca39a72
+```
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```bash
+python3 fixtures.py --clone autoharness-ca39a72
+```
+
+</TabItem>
+<TabItem label="macOS">
+
+```bash
+python3 fixtures.py --clone autoharness-ca39a72
+```
+
+</TabItem>
+</Tabs>
+
+`fixtures.py` refuses a clone at any other commit. It runs F0 to F5, then F4 once more with UTF-8 mode on, and prints one JSON line per run. The whole run took 14 seconds. Below, each line is trimmed to its measurements and indented for reading. The fields every line also carries were `"exit": 0`, `"stderr_tail": ""` and `"home_writes": []` on all of them, plus `pythonutf8` and the input hash shown above.
+
+### F0 — the positive control
+
+A valid `create` on a new name must land. If it didn't, the harness would not be reaching the promoter, and every other result would be void.
+
+```json
+{"fixture": "F0", "ok": true, "findings": [], "agent_created": true}
+```
+
+### F1 — a `create` named like your skill
+
+The README says AutoHarness touches *"only the skills it wrote itself"* ([line 10](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/README.md#L8-L11)), and *"Yours are never touched"* ([line 229](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/README.md#L229-L230)). The code enforces that with the sidecar, but only for some actions:
+- the ownership check, *target live skill not created_by:agent*, runs for `update`, `patch`, `remove_file` and `delete` ([`validate.py`, lines 211-212](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/lib/validate.py#L211-L212), [`promoter.py`, line 158](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/hook/promoter.py#L158));
+- for `create`, the target level is simply the intent's ([lines 51-53](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/hook/promoter.py#L51-L53)), and nothing checks whether a skill of that name already exists;
+- landing writes the body, then stamps a new sidecar ([lines 129-133](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/hook/promoter.py#L129-L133)).
+
+The fixture writes a hand-made skill called `notes` whose body contains the line `HAND-WRITTEN SENTINEL 7f3a`, with no sidecar. The control goes first: an `update` of `notes` must be refused. Then comes the treatment: a `create` named `notes`.
+
+```json
+{"fixture": "F1",
+ "control_update": {"ok": false, "findings": ["self_produced"], "body_unchanged": true},
+ "create": {"ok": true, "findings": [], "sentinel_survives": false,
+            "agent_created_after": true, "archived_copy": false}}
+```
+
+The protection exists: the `update` is refused and the body is untouched. The `create` goes through it. The hand-written text is gone with no archived copy, and the sidecar now says the skill is the agent's. From then on the promoter treats it as its own: it may update it, patch it, and archive it when it stops being used. **Confirmed.**
+
+What the fixture does not say is how often a reflector would propose such a `create`. That depends on the model and on your skill names, and it is the first item of the evaluation's missing evidence.
+
+### F2 — one truncated line in the queue
+
+`drain` sweeps, reads the whole queue, promotes every intent, accounts, and then clears the queue ([`promoter.py`, lines 231-240](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/hook/promoter.py#L231-L240)). Reading parses every line with [`json.loads`](https://docs.python.org/3/library/json.html) before anything is promoted ([`intent_queue.py`, line 33](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/lib/intent_queue.py#L29-L33)). The prediction: one truncated line, the kind a crash in the middle of an append leaves, stops everything, every time.
+
+The control drains two valid intents, twice. The treatment puts `{"action": "create", "name": "gam` between two valid intents, and drains twice.
+
+```json
+{"fixture": "F2",
+ "control": {"attempts": [{"raised": null, "landed": 2}, {"raised": null, "landed": 0}], "queue_left": false},
+ "treatment": {"attempts": [{"raised": "JSONDecodeError"}, {"raised": "JSONDecodeError"}],
+               "queue_left": true, "landed_names": []}}
+```
+
+Neither valid intent lands, and the queue file stays, so the next drain fails the same way. Nothing retries or skips it: it stays stuck until someone deletes the file. **Confirmed.** In a real session, `dispatch` catches every exception and turns it into an `error` field of its reply ([`dispatch.py`, lines 128-129](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/hook/dispatch.py#L128-L129)), so the session goes on as if nothing had happened. That part is read in the code, not run.
+
+### F3 — what the redactor misses
+
+Before a transcript window is handed to the reflector, AutoHarness runs it through ten regular expressions ([`redaction_rules.toml`](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/lib/redaction_rules.toml)). Two of them made predictions easy:
+- `api_key_assignment` allows an optional quote *after* the `:` or `=`, but none between the key and the colon ([line 27](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/lib/redaction_rules.toml#L25-L27)). The JSON form `"api_key": "…"` has one there, and a transcript is JSON lines;
+- `private_key_block` matches the `-----BEGIN … PRIVATE KEY-----` line only ([line 11](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/lib/redaction_rules.toml#L10-L11)), not the key material under it.
+
+The fixture uses a made-up canary, `CANARYabcdefghij0123456789`. The control is the form the rule was written for, `api_key = CANARY…`.
+
+```json
+{"fixture": "F3", "results": {
+ "assignment":  {"canary_survives": false, "redacted": "[REDACTED:secret:api_key_assignment]"},
+ "json_quoted": {"canary_survives": true,  "redacted": "{\"api_key\": \"CANARYabcdefghij0123456789\"}"},
+ "pem":         {"canary_survives": true,  "redacted": "[REDACTED:[REDACTED:secret:api_key_assignment]]\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCCANARYabcdefghij0123456789\n-----END PRIVATE KEY-----"}}}
+```
+
+**Confirmed** for both treatments. The PEM line shows something that was not predicted: the header was redacted twice. `private_key_block` wrote `[REDACTED:secret:private_key_block]`, and `api_key_assignment` then matched `secret:private_key_block` inside that label. The name of the rule that fired first is lost. This is recorded as exploratory, because no hypothesis was written for it.
+
+### F4 — a non-ASCII skill on Windows
+
+This hypothesis came from re-reading the code while writing the pre-registration:
+- AutoHarness always writes UTF-8 ([`atomic.py`, lines 31-32](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/lib/atomic.py#L31-L32));
+- it reads with [`read_text()`](https://docs.python.org/3/library/pathlib.html#pathlib.Path.read_text) and no encoding ([`skill_store.py`, line 28](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/lib/skill_store.py#L26-L28), and the same in `intent_queue.py`, `sidecar.py` and `ledger.py`);
+- with no encoding, Python uses the locale's, which on this machine is cp1252.
+
+The fixture lands a skill titled `# Café Á`. The control is the same fixture with Python's [UTF-8 mode](https://docs.python.org/3/library/os.html#utf8-mode) on (`PYTHONUTF8=1`).
+
+```json
+{"fixture": "F4", "read_back": {"raised": "UnicodeDecodeError", "detail": "'charmap' codec can't decode byte 0x81 in position 79: character maps to <undefined>"}, "ok": true, "bytes_are_utf8": true, "utf8_mode": 0}
+{"fixture": "F4", "read_back": {"raised": null, "equal": true, "title_line": "# Café Á"}, "ok": true, "bytes_are_utf8": true, "utf8_mode": 1}
+```
+
+`Á` is `C3 81` in UTF-8, and 0x81 has no meaning in cp1252, so the skill AutoHarness has just written cannot be read back. **Confirmed**, on Windows only. The README's platform badge says *Linux | macOS* ([line 5](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/README.md#L5)), so this is outside what the project claims to support. It matters to anyone who runs Claude Code on Windows anyway. [PEP 686](https://peps.python.org/pep-0686/) makes UTF-8 mode the default from Python 3.15, which should make F4 disappear there: *to verify*.
+
+### F5 — the sweep and your `draft.tmp`
+
+Every `drain` starts with a sweep of leftover temporary files ([`promoter.py`, lines 199-204](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/hook/promoter.py#L199-L204)), and the sweep deletes every `*.tmp` under the skills folder, recursively ([`skill_store.py`, lines 82-90](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/lib/skill_store.py#L82-L90)). AutoHarness's own temporary files end in `.tmp`, but so can yours. The fixture puts `draft.tmp` inside the hand-written skill `notes`, with `draft.txt` next to it as the control, and drains an empty queue.
+
+```json
+{"fixture": "F5", "tmp_survives": false, "control_survives": true, "skill_survives": true}
+```
+
+An empty drain, with nothing to promote, deleted a file in a skill AutoHarness does not own. **Confirmed.**
+
+### The isolation check
+
+The last line of the run:
+
+```json
+{"real_state_dir_existed_before": false, "exists_after": false}
+```
+
+Together with `"home_writes": []` on every fixture, this is the evidence that the run stayed in its sandbox. The run was repeated, and run 2 equals run 1, line for line.
+
+## What these results show, and what they don't
+
+They show that **nothing in the code stops** these outcomes, each time against a control that behaved as intended. Three of them contradict the README directly: F1 and F5 its central promise about your skills, F2 its implicit promise that the loop keeps working. F3 shows a limit that the README's *"redacts at egress"* ([line 147](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/README.md#L147)) doesn't mention.
+
+They do not show:
+- **how often** it happens. F1 needs the reflector to propose a `create` whose name collides with a skill of yours, and only a model run would say how often it does;
+- anything about **Linux and macOS** in this run. They were measured afterwards, in CI: F0–F3 and F5 give the same results there, and F4 reads back equal ([journal](../journal/#2026-09-27--the-fixtures-on-linux-windows-and-macos));
+- anything about the **skills** the reflector writes, or what a session costs. No model was called.
+
+The upstream tests were read before running anything. `test_update_requires_agent_created` covers F1's control, and `test_drain_sweeps_orphan_tmp` covers the sweep, with a `.tmp` that is AutoHarness's own. No test creates over an existing hand-written skill or feeds `drain` a bad line, which is how all of this passes their CI.
+
+## The harness was wrong twice
+
+A lab can have bugs too, and this one had two. Both were found after the run, both are recorded in the pre-registration's *Post-measurement edits*, and neither changed a result.
+
+1. **The F4 bug, in the harness.** The first run's output was redirected to a file, and the parent's stdout used cp1252: the same class of bug as F4. Only the display of one string was affected. `fixtures.py` now calls `sys.stdout.reconfigure(encoding="utf-8")`, and a second run decodes to the same eight lines.
+2. **A check that could not fail.** Replaying the code README from a fresh clone with a *relative* `--clone` path made every child fail: `PYTHONPATH` did not resolve from the child's temporary working directory. The parent still exited 0. Now:
+   - the path is made absolute;
+   - a crashed child's line still names its fixture;
+   - the parent exits 1 if any child failed.
+
+   The rerun is byte-identical to the recorded output.
+
+The second one is the more useful lesson. A harness that exits 0 whatever happens reports success on a run where nothing was measured. The fix is not only the path: it is making failure visible in the exit code, then checking that it is — `run_fixture("C:/nonexistent-clone", "F0")` now returns `exit: 1`.
+
+## Key points
+
+- In AutoHarness, a model proposes and a deterministic promoter lands. The promoter can be tested without the model by handing it intents.
+- Isolate imported code by building its environment from nothing, not by editing the parent's: a disposable `HOME` and `USERPROFILE`, explicit folders, and no import of the module that starts `claude`.
+- Write the question, hypothesis, control and falsifier before the run, hash the file, and list every later edit with its reason.
+- At `ca39a72`:
+  - a `create` replaces a hand-written skill and adopts it (F1);
+  - an empty drain deletes your `*.tmp` (F5);
+  - one bad queue line stops promotion for good (F2);
+  - the redactor misses JSON keys and PEM bodies (F3);
+  - non-ASCII skills break on Windows (F4).
+- A fixture shows what nothing prevents, not how often it happens.
+- A harness must be able to fail: check its exit code on a run you know is broken.
+
+## Exercises
+
+1. Read the rules `bearer_token`, `api_key_assignment` and `email` ([lines 22-31](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/lib/redaction_rules.toml#L22-L31)). Predict what the redactor returns for each of these five made-up strings. Then run `redact_probe.py` on them, with the command given after the exercises.
+   - `password: hunter2hunter2`
+   - `{"password": "hunter2hunter2"}`
+   - `Authorization: Bearer abcdefghijklmnopqrstuvwxyz0123`
+   - `{"headers": {"Authorization": "Bearer abcdefghijklmnopqrstuvwxyz0123"}}`
+   - `postgres://admin:hunter2hunter2@db.example.com/prod`
+2. F1 runs an `update` on the hand-written skill before the `create`. What would F1 have shown if that `update` had been accepted, and why does the order matter?
+3. Write the pre-registration of a new fixture for this claim from the README: AutoHarness *"archives, never deletes"*. Start from [`skill_store.archive`, lines 56-65](https://github.com/tigerless-labs/autoharness/blob/ca39a72e4353ebef11b7de13c1fc7fa5f4df421b/src/autoharness/lib/skill_store.py#L56-L65). Give the question, the hypothesis with its lines, a control, the expected result and the falsifier.
+4. You rerun `fixtures.py` on Linux with a UTF-8 locale. What do you expect from F4's first line, and what would it mean if it raised `UnicodeDecodeError` anyway?
+
+The command for exercise 1, from `code/autoharness/`:
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+In Git Bash, so the quotes behave as on the other systems:
+
+```bash
+python redact_probe.py --clone autoharness-ca39a72 "password: hunter2hunter2" '{"password": "hunter2hunter2"}' "Authorization: Bearer abcdefghijklmnopqrstuvwxyz0123" '{"headers": {"Authorization": "Bearer abcdefghijklmnopqrstuvwxyz0123"}}' "postgres://admin:hunter2hunter2@db.example.com/prod"
+```
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```bash
+python3 redact_probe.py --clone autoharness-ca39a72 "password: hunter2hunter2" '{"password": "hunter2hunter2"}' "Authorization: Bearer abcdefghijklmnopqrstuvwxyz0123" '{"headers": {"Authorization": "Bearer abcdefghijklmnopqrstuvwxyz0123"}}' "postgres://admin:hunter2hunter2@db.example.com/prod"
+```
+
+</TabItem>
+<TabItem label="macOS">
+
+```bash
+python3 redact_probe.py --clone autoharness-ca39a72 "password: hunter2hunter2" '{"password": "hunter2hunter2"}' "Authorization: Bearer abcdefghijklmnopqrstuvwxyz0123" '{"headers": {"Authorization": "Bearer abcdefghijklmnopqrstuvwxyz0123"}}' "postgres://admin:hunter2hunter2@db.example.com/prod"
+```
+
+</TabItem>
+</Tabs>
+
+<details>
+<summary>Solution</summary>
+
+1. The recorded output ([`redact-probe.jsonl`](https://github.com/spareilleux/learn/blob/main/code/autoharness/results/redact-probe.jsonl)), one `[input, output]` pair per line:
+
+   ```json
+   ["password: hunter2hunter2", "[REDACTED:secret:api_key_assignment]"]
+   ["{\"password\": \"hunter2hunter2\"}", "{\"password\": \"hunter2hunter2\"}"]
+   ["Authorization: Bearer abcdefghijklmnopqrstuvwxyz0123", "Authorization: [REDACTED:[REDACTED:secret:api_key_assignment]]"]
+   ["{\"headers\": {\"Authorization\": \"Bearer abcdefghijklmnopqrstuvwxyz0123\"}}", "{\"headers\": {\"Authorization\": \"[REDACTED:[REDACTED:secret:api_key_assignment]]\"}}"]
+   ["postgres://admin:hunter2hunter2@db.example.com/prod", "postgres://admin:[REDACTED:pii:email]/prod"]
+   ```
+
+   - The first two are F3 again: the same password is caught in `key: value` form and missed in JSON.
+   - `Bearer` is caught even inside JSON, because `bearer_token` doesn't care what surrounds the token. Its label then gets redacted by `api_key_assignment`, as in F3's PEM case, so the output no longer says which rule fired.
+   - The URL is the surprise. No rule targets credentials in a URL, but `hunter2hunter2@db.example.com` looks like an email address, so the **email** rule removes the password by accident, along with the host. The user name `admin` stays.
+
+   A reader of the redacted text cannot tell a leaked email from a leaked password.
+2. The `update` would have landed, and `body_unchanged` would be false. That would mean the ownership check is missing or broken for every action, and the `create` result would say nothing specific about `create`. Running the control first, on the same skill, is what lets the fixture conclude that the protection exists and that `create` goes around it. Run it after, and a `create` that had stamped a sidecar would make the `update` legitimately accepted: the control would be measuring the treatment's side effect.
+3. For example:
+   - **Question:** does archiving a skill a second time keep the first archive?
+   - **Hypothesis:** `archive` moves `skills/<name>` to `.archive/<name>`, but if `.archive/<name>` already exists it calls `shutil.rmtree` on it first (lines 62-63). So archiving, recreating and archiving again leaves only the second version.
+   - **Control:** archive two skills with different names. Both archives must exist, which shows the archive folder works.
+   - **Expected if the hypothesis holds:** after `create A1 → archive → create A2 → archive`, `.archive/<name>/SKILL.md` contains A2's sentinel, and A1's sentinel exists nowhere under the project.
+   - **Falsifier:** A1's sentinel survives anywhere, for instance in a numbered or dated archive.
+   - **Stop conditions:** as for the other fixtures. Add an input hash, and run nothing until the file is saved and hashed. This is H11 in the evaluation, planned for lesson 4.
+4. On a UTF-8 locale, `read_text()` without an encoding decodes UTF-8, so the first F4 line should be like the control: `raised: null`, `equal: true`. If it raised anyway, the hypothesis *"the locale encoding is the cause"* would be wrong, because something else would be decoding with another codec. The result would go into the journal as a refutation, with its output. That is why F4 is marked *Windows only* and not *fixed elsewhere*: the Linux run hasn't happened.
+
+</details>
