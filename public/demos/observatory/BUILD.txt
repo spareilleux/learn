@@ -1,9 +1,30 @@
 Observatory Web export provenance
 
-Built 2026-09-27 with the official non-.NET Godot 4.6.1-stable Web export
+Built 2026-09-28 with the official non-.NET Godot 4.6.1-stable Web export
 template. Godot renderer: gl_compatibility (WebGL 2). The Web export disables
 SSR, SSIL and volumetric fog from the native Forward+ scene. It is separate
 from the higher-quality native build and does not use hardware ray tracing.
+
+This revision adds the detail pass: shaded book bindings (40,250 books), dressed
+stone with a tooled relief, turned bronze balusters under a walnut handrail, a
+brushed steel shader for the box and 24 stained-glass lancets. Its textures were
+generated locally with ComfyUI and SDXL 1.0 base: book_grain, stone_relief,
+steel_grime and the three glass_* panels. pier_ornament_normal is computed from
+pier_ornament.
+
+Under Compatibility the scripts change three things:
+- the book shader skips its sRGB-to-linear conversion, because Compatibility
+  shades in sRGB space and writes the result out unconverted;
+- the stained glass throws no spot lights: there is no volumetric fog to show
+  their shafts, and 24 more lights would crowd the per-object light limit;
+- the books get a warm emissive fill, and the bronze and steel less metallic
+  finishes, in place of the missing SDFGI, SSIL and SSR.
+Forward+ is unaffected: its shelf close-ups are pixel-identical with and
+without these changes.
+
+Native Compatibility GPU time, RTX 5080, 1600x900, 240 frames per view: 0.44 to
+0.52 ms for the previous web scene, 0.64 to 1.44 ms with the detail pass; up to
+1.55 million primitives in the overview, against 0.46 million before.
 
 SHA-256 source inputs of the exported project:
 project.godot eb7d53597517c711d564943e467cce2926699c2422b073079737325c3400692e
@@ -11,16 +32,29 @@ main.tscn fb6245c960d3625ca05920116c58351d9dbeb255beae59175d89c06d47049564
 export_presets.cfg 8b44717dc35a46dff0ba18370dfa5d9989bea04b73c4e455b404284998f06571
 scripts/fly_camera.gd 2e5cdd15ca7bdcfa30ec129e354a309f3ff7296f6fbf54ac144984ed9aa9f8e7
 scripts/capture.gd 52ea2b5e40db2f1f4cdbd7658074ef60bd117e1f4110c1b8995590a4196748d0
-scripts/observatory.gd d7b6bf0d6e36893783d7ff6f279fabd0d97d216d176831978a0f0baaa89395e4
-scripts/steel_cube.gd 2f4422385e536dfb6b0c884c2d60d531a44e2c48bcd7db621797df2ac4ffd745
+scripts/observatory.gd 3473e093d271bea58501add64622ca0d93c35279556fff8a350c4e00483245ac
+scripts/steel_cube.gd 2e265c8dcd45e162ceb15cf632ba3552dbb95e3ef349008ebb447ce5eaec40d1
 assets/steel_portal.glb 7874fe442f87086e757dca0ef3ba8fdac17dbeba0dd6be05182de4f8e89077dc
 assets/stone_marble.png a71f21a971a1a0b2b897ed42dd64f2ece500f34b246bb758d9ff7ae843e68bd3
 assets/pier_ornament.png 6494443545711367205f83f532a67592c412065ffb2d00bd7c10c50b6fa7b22c
+assets/pier_ornament_normal.png 354c568a20f7fa58e9aeba23e41bc2b1c5c6cecf55ff2a56b5a89d9f3badf940
+assets/book_grain.png c7f2ee7b34a9e8a229da1f2db08e819003016e7f5f9505c5d985846db0538edc
+assets/stone_relief.png c982fac4fd835293e85726b4c6bfa514aa9882257e3da2ccf3594dc42bc3167d
+assets/steel_grime.png 3383502576071b76ef94967c845086675ebe2ccaea376a45836574b9e4eafeb8
+assets/glass_sun_moon.png da2c1200103cc07e4680d2e80cf8c278d437a3d0088662f8e5cd851f340ed886
+assets/glass_elven_tree.png 344edc31aa4fc0cff546272d7afa287fe4195809d4b1eec901dfbb340fd2623e
+assets/glass_alembic.png bdf7fe6eaf71abf1d062c6ef2bbe1f77d7eb20e6b834937fd79f92582e5e5d9a
+assets/book_spines.gdshader 41f558247edef52fcff31c511de1ef40c321aeb339e40e41eb517dc4f34f6a62
+assets/stone_relief.gdshader 82f26919a4a0a2742eee8ddbef9b2be09ee9a4df8273fe6845d9dd919cfe7958
+assets/steel_brushed.gdshader f8f38df4aa0a42806978a56ad23fef528bb58219db7fc18c18b8a49b15b74d87
+assets/stained_glass.gdshader 1366183601743cfb42791f5efd38e4b26e6c6d10eb8ce1ac4e9e8c7a3db6d77a
 
 SHA-256 output files:
-index.pck 962f9bbcd883102b3ccc1eab1b17f9919eec2bc2830320d4de63144fb96f53c7
+index.pck 9a767b54989472b32e9899f2d2ee33987fe7fee69969935189d741c0d5b1a3f9
 index.wasm 99962b29677e42f3ba0258bd90fdc52ad90295954c4473e816ad02cfe5ff1d4f
 index.js e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981
 
 This directory contains a prebuilt binary export. Re-export only for deliberate
-scene changes; each revision adds roughly 46 MB of binary history to git.
+scene changes. A scene re-export leaves the engine files (index.wasm, index.js)
+byte-identical, so git keeps a single copy; each scene revision adds its
+index.pck (12.6 MB here) to the binary history.
