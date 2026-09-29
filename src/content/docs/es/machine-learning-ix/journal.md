@@ -197,7 +197,7 @@ Merece anotarse junto a los hallazgos, porque las lecciones hasta ahora han enco
   - las tasas de acierto y los números de rachas de ambos decodificadores;
   - las dos respuestas del modelo de tres estados.
 
-  No se escribió ninguna hipótesis antes de esta ejecución: son comparaciones con versiones escritas a mano y con numpy, no experimentos prerregistrados. El CI en tres sistemas para la lección 10 sigue pendiente.
+  No se escribió ninguna hipótesis antes de esta ejecución: son comparaciones con versiones escritas a mano y con numpy, no experimentos prerregistrados. La ejecución de CI [36645993165](https://github.com/spareilleux/learn/actions/runs/36645993165) pasó en Windows, Linux y macOS: cada línea de la lección 10, log-verosimilitudes incluidas, coincide byte a byte con `expected/`, y la comprobación cruzada en Linux coincide con `expected/crosscheck.txt`.
 
 ## Por verificar
 
@@ -215,5 +215,4 @@ Merece anotarse junto a los hallazgos, porque las lecciones hasta ahora han enco
 - El mapa de API cuenta declaraciones `pub`, no las alcanzables; cuánto se separan ambos números está sin medir.
 - Los valores impresos por un `println!("{:.6}")` directo y no a través de `fmt_vec` — el `intercept -0.000000` de la lección 8 es uno — llevan el mismo riesgo de cero con signo y no están normalizados. Ese coincidió en los tres sistemas en la ejecución 35039180659; los demás no se han enumerado.
 - Repetir las salidas numéricas de la lección 9 en CI Linux y macOS; comprobar si el error NMF y la separación del cuarto eje RBF se redondean igual. Medir por separado cómo escala el tiempo de t-SNE antes de asignarle un coste.
-- Las log-verosimilitudes impresas por la lección 10 y sus parámetros de Baum–Welch en CI Linux y macOS: pasan por `ln` y `exp`, cuyos últimos bits pueden diferir entre las bibliotecas matemáticas de los tres sistemas.
 - Si `baum_welch` de IX, desde varios puntos de partida y con secuencias más largas, recupera los parámetros del casino; la lección 10 hizo un solo arranque, con 1000 tiradas.

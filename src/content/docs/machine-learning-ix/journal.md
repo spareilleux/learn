@@ -197,7 +197,7 @@ Worth recording next to the findings, because the lessons so far have mostly fou
   - both decoders' agreements and run counts;
   - the three-state model's two answers.
 
-  No hypothesis was written before this run: these are comparisons with hand implementations and with numpy, not preregistered experiments. Three-OS CI for lesson 10 is still pending.
+  No hypothesis was written before this run: these are comparisons with hand implementations and with numpy, not preregistered experiments. CI run [36645993165](https://github.com/spareilleux/learn/actions/runs/36645993165) passed on Windows, Linux and macOS: every line of lesson 10, log-likelihoods included, matched `expected/` byte for byte, and the Linux cross-check matched `expected/crosscheck.txt`.
 
 ## To verify
 
@@ -215,5 +215,4 @@ Worth recording next to the findings, because the lessons so far have mostly fou
 - The API map counts `pub` declarations, not reachable ones; how far apart the two numbers are is unmeasured.
 - The values printed by a direct `println!("{:.6}")` rather than through `fmt_vec` — lesson 8's `intercept -0.000000` is one — carry the same signed-zero hazard and are not normalized. That one agreed on the three systems in run 35039180659; the others have not been enumerated.
 - Repeat lesson 9's numeric snapshots on Linux and macOS CI; check whether IX's NMF MSE and the RBF fourth-axis gap round identically there. Benchmark t-SNE's scaling separately before assigning a runtime cost.
-- Lesson 10's printed log-likelihoods and Baum–Welch parameters on Linux and macOS CI: they go through `ln` and `exp`, whose last bits can differ between the three systems' math libraries.
 - Whether IX's `baum_welch`, from several starts and on longer sequences, recovers the casino's parameters; lesson 10 ran one start on 1,000 rolls.

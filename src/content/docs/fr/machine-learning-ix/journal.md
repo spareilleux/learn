@@ -197,7 +197,7 @@ Cela mérite d'être consigné à côté des constats, car les leçons ont surto
   - les taux d'accord et les nombres de séquences des deux décodeurs ;
   - les deux réponses du modèle à trois états.
 
-  Aucune hypothèse n'a été écrite avant cette exécution : ce sont des comparaisons avec des versions écrites à la main et avec numpy, pas des expériences pré-enregistrées. La CI sur trois systèmes pour la leçon 10 reste à faire.
+  Aucune hypothèse n'a été écrite avant cette exécution : ce sont des comparaisons avec des versions écrites à la main et avec numpy, pas des expériences pré-enregistrées. Le run CI [36645993165](https://github.com/spareilleux/learn/actions/runs/36645993165) est passé sous Windows, Linux et macOS : chaque ligne de la leçon 10, log-vraisemblances comprises, correspond octet pour octet à `expected/`, et le contrôle croisé sous Linux correspond à `expected/crosscheck.txt`.
 
 ## À vérifier
 
@@ -215,5 +215,4 @@ Cela mérite d'être consigné à côté des constats, car les leçons ont surto
 - La carte d'API compte les déclarations `pub`, pas celles qui sont atteignables ; l'écart entre les deux nombres n'est pas mesuré.
 - Les valeurs affichées par un `println!("{:.6}")` direct plutôt que par `fmt_vec` — l'`intercept -0.000000` de la leçon 8 en est une — portent le même risque de zéro signé et ne sont pas normalisées. Celle-là concordait sur les trois systèmes dans l'exécution 35039180659 ; les autres n'ont pas été recensées.
 - Rejouer les sorties numériques de la leçon 9 sur les CI Linux et macOS ; vérifier que l'erreur NMF et l'écart du quatrième axe RBF s'arrondissent de la même façon. Mesurer séparément l'évolution du temps de t-SNE avant d'en chiffrer le coût.
-- Les log-vraisemblances affichées par la leçon 10 et ses paramètres Baum–Welch sur les CI Linux et macOS : ils passent par `ln` et `exp`, dont les derniers bits peuvent différer d'une bibliothèque mathématique à l'autre.
 - Si `baum_welch` d'IX, depuis plusieurs départs et sur des séquences plus longues, retrouve les paramètres du casino ; la leçon 10 n'a fait qu'un départ, sur 1 000 lancers.
