@@ -138,6 +138,7 @@ Most of the 22 differences of 2026-09-14 were fixed upstream by [#689](https://g
 - #749 changed two files of `GA.Business.ML`, `InvalidChordNames.cs`, new, and `ImprovisationSkill.cs`; the third file the lesson compiles, `ChordIntentMatching.cs`, is the same at both commits. #749's other changes are in `ProductionOrchestrator.cs` and in tests, so the skill and the guard run as they do on `main`; the orchestrator's call to the guard is read, not run.
 - The first corpus had one Unicode case, `B♭ E♭ F`. Checking an exercise, normalizing `♭` and `♯` still left `F#` read as F: the plain ASCII sharp root is misread too, by the final `\b` of the skill's expression. The corpus gained rows 10 to 12, with `C+` and `Bø7`, the other symbols that end where `\b` can't follow.
 - The solutions of exercises 1 and 2 were checked by editing the course program and #749's file for one run; `fetch-ga.sh` restores the file once `.ga-fix/SHA` is deleted.
+- CI run [36518749257](https://github.com/spareilleux/learn/actions/runs/36518749257), for commit `226fbb0`: green on the three systems, 1 min 28 s on Linux, 1 min 36 s on macOS, 3 min 20 s on Windows, clone, the fetch of #749's files and build included.
 
 ## To verify
 
