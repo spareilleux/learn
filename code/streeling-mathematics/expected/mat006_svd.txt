@@ -1,0 +1,101 @@
+MAT-006: ix-math svd at e35138b9 (one-sided Jacobi, 50 sweeps, tol 1e-12), IEEE 754 binary64
+
+Step 1: Eckart-Young, ||X - X_k||_F from truncated_svd against sqrt(sigma_k+1^2 + ...)
+  A, ||A||_F = 9.539392e0
+    k = 0 | truncation 9.539392e0 | tail 9.539392e0 | difference 1.776e-15
+    k = 1 | truncation 5.143006e-1 | tail 5.143006e-1 | difference 1.110e-16
+    k = 2 | truncation 3.833084e-15 | tail -0.000000e0 | difference 3.833e-15
+  M, ||M||_F = 1.743560e1
+    k = 0 | truncation 1.743560e1 | tail 1.743560e1 | difference 3.553e-15
+    k = 1 | truncation 8.970306e-1 | tail 8.970306e-1 | difference 1.110e-16
+    k = 2 | truncation 1.968665e-1 | tail 1.968665e-1 | difference 9.159e-16
+    k = 3 | truncation 4.788138e-15 | tail -0.000000e0 | difference 4.788e-15
+
+Step 2: scale sweep, s = 10^e; sigma error is max_i |sigma_i(sX)/s - sigma_i(X)| / sigma_i(X)
+  U columns: 0 = exactly zero, x = filled
+  A:
+    e = -14 | sigma error 2.159e-16 | reconstruct error   1.000e0 | U columns 00
+    e = -13 | sigma error 3.730e-16 | reconstruct error   1.000e0 | U columns 00
+    e = -12 | sigma error 2.159e-16 | reconstruct error  5.391e-2 | U columns x0
+    e = -11 | sigma error 6.476e-16 | reconstruct error 3.601e-16 | U columns xx
+    e = -10 | sigma error 3.730e-16 | reconstruct error 2.271e-16 | U columns xx
+    e =  -9 | sigma error 3.730e-16 | reconstruct error 1.245e-16 | U columns xx
+    e =  -8 | sigma error 1.079e-15 | reconstruct error 6.937e-17 | U columns xx
+    e =  -7 | sigma error   0.000e0 | reconstruct error 5.012e-16 | U columns xx
+    e =  -6 | sigma error 3.730e-16 | reconstruct error 1.421e-16 | U columns xx
+    e =  -5 | sigma error 3.730e-16 | reconstruct error 1.020e-16 | U columns xx
+    e =  -4 | sigma error 2.159e-16 | reconstruct error 5.858e-17 | U columns xx
+    e =  -3 | sigma error 2.159e-16 | reconstruct error 2.582e-16 | U columns xx
+    e =  -2 | sigma error 2.159e-16 | reconstruct error 2.752e-16 | U columns xx
+    e =  -1 | sigma error 6.476e-16 | reconstruct error 6.506e-17 | U columns xx
+    e =   0 | sigma error   0.000e0 | reconstruct error 4.018e-16 | U columns xx
+    e =   1 | sigma error 4.317e-16 | reconstruct error 4.359e-16 | U columns xx
+    e =   2 | sigma error 2.159e-16 | reconstruct error 4.052e-16 | U columns xx
+    e =   3 | sigma error 4.317e-16 | reconstruct error 3.345e-16 | U columns xx
+    e =   4 | sigma error   0.000e0 | reconstruct error 4.000e-16 | U columns xx
+    e =   5 | sigma error 2.159e-16 | reconstruct error 5.441e-16 | U columns xx
+    e =   6 | sigma error 6.476e-16 | reconstruct error 4.894e-16 | U columns xx
+    e =   7 | sigma error 2.159e-16 | reconstruct error 3.536e-16 | U columns xx
+    e =   8 | sigma error   0.000e0 | reconstruct error 4.171e-16 | U columns xx
+    e =   9 | sigma error 4.317e-16 | reconstruct error 3.519e-16 | U columns xx
+    e =  10 | sigma error   0.000e0 | reconstruct error 5.027e-16 | U columns xx
+    e =  11 | sigma error 4.317e-16 | reconstruct error 2.442e-16 | U columns xx
+    e =  12 | sigma error 2.159e-16 | reconstruct error 4.127e-16 | U columns xx
+  M:
+    e = -14 | sigma error   1.956e0 | reconstruct error   1.000e0 | U columns 000
+    e = -13 | sigma error   1.956e0 | reconstruct error  5.146e-2 | U columns x00
+    e = -12 | sigma error  3.430e-9 | reconstruct error  5.145e-2 | U columns x00
+    e = -11 | sigma error  3.430e-9 | reconstruct error 4.479e-16 | U columns xxx
+    e = -10 | sigma error 6.626e-15 | reconstruct error 1.933e-16 | U columns xxx
+    e =  -9 | sigma error 1.128e-15 | reconstruct error 2.431e-16 | U columns xxx
+    e =  -8 | sigma error 1.128e-15 | reconstruct error 2.624e-16 | U columns xxx
+    e =  -7 | sigma error 1.128e-15 | reconstruct error 4.985e-16 | U columns xxx
+    e =  -6 | sigma error 5.639e-16 | reconstruct error 2.121e-16 | U columns xxx
+    e =  -5 | sigma error 5.217e-15 | reconstruct error 2.111e-16 | U columns xxx
+    e =  -4 | sigma error 1.692e-15 | reconstruct error 2.970e-16 | U columns xxx
+    e =  -3 | sigma error 3.525e-15 | reconstruct error 2.437e-16 | U columns xxx
+    e =  -2 | sigma error 4.653e-15 | reconstruct error 4.959e-16 | U columns xxx
+    e =  -1 | sigma error 1.974e-15 | reconstruct error 2.488e-16 | U columns xxx
+    e =   0 | sigma error   0.000e0 | reconstruct error 2.746e-16 | U columns xxx
+    e =   1 | sigma error 5.498e-15 | reconstruct error 3.010e-16 | U columns xxx
+    e =   2 | sigma error 1.269e-15 | reconstruct error 3.916e-16 | U columns xxx
+    e =   3 | sigma error 7.049e-16 | reconstruct error 3.111e-16 | U columns xxx
+    e =   4 | sigma error 3.384e-15 | reconstruct error 2.575e-16 | U columns xxx
+    e =   5 | sigma error 3.666e-15 | reconstruct error 2.803e-16 | U columns xxx
+    e =   6 | sigma error 5.357e-15 | reconstruct error 2.117e-16 | U columns xxx
+    e =   7 | sigma error 2.679e-15 | reconstruct error 3.981e-16 | U columns xxx
+    e =   8 | sigma error 1.833e-15 | reconstruct error 3.714e-16 | U columns xxx
+    e =   9 | sigma error 2.256e-15 | reconstruct error 5.019e-16 | U columns xxx
+    e =  10 | sigma error 2.961e-15 | reconstruct error 4.506e-16 | U columns xxx
+    e =  11 | sigma error 3.102e-15 | reconstruct error 1.558e-16 | U columns xxx
+    e =  12 | sigma error 3.666e-15 | reconstruct error 2.683e-16 | U columns xxx
+
+Step 4: svd_with_opts(2^20 fl(H_n), k, 1e-12) / 2^20 for k = 1..6, first k equal bit for bit to
+  svd(fl(H_n)) (scale 1) and to svd(2^-20 fl(H_n)) / 2^-20 (scale down); predicted in brackets
+  n =  2 | scale 1: k =    1 [2] | scale down: k =    1 [2] | scale 1 == scale down: true | predicted k matches too: true, true
+  n =  3 | scale 1: k =    2 [4] | scale down: k =    2 [3] | scale 1 == scale down: true | predicted k matches too: true, true
+  n =  4 | scale 1: k =    3 [4] | scale down: k =    3 [3] | scale 1 == scale down: true | predicted k matches too: true, true
+  n =  5 | scale 1: k =    3 [4] | scale down: k =    3 [3] | scale 1 == scale down: true | predicted k matches too: true, true
+  n =  6 | scale 1: k =    4 [4] | scale down: k =    3 [3] | scale 1 == scale down: false | predicted k matches too: true, true
+  n =  7 | scale 1: k =    5 [5] | scale down: k =    4 [4] | scale 1 == scale down: false | predicted k matches too: true, true
+  n =  8 | scale 1: k =    5 [5] | scale down: k =    4 [4] | scale 1 == scale down: false | predicted k matches too: true, true
+  n =  9 | scale 1: k =    5 [5] | scale down: k =    4 [4] | scale 1 == scale down: false | predicted k matches too: true, true
+  n = 10 | scale 1: k =    5 [5] | scale down: k =    4 [4] | scale 1 == scale down: false | predicted k matches too: true, true
+  n = 11 | scale 1: k =    5 [5] | scale down: k =    4 [4] | scale 1 == scale down: false | predicted k matches too: true, true
+  n = 12 | scale 1: k =    5 [5] | scale down: k =    4 [4] | scale 1 == scale down: false | predicted k matches too: true, true
+  n = 13 | scale 1: k =    5 [5] | scale down: k =    4 [4] | scale 1 == scale down: false | predicted k matches too: true, true
+  n = 14 | scale 1: k =    5 [5] | scale down: k =    4 [4] | scale 1 == scale down: false | predicted k matches too: true, true
+  n = 15 | scale 1: k =    6 [6] | scale down: k =    4 [4] | scale 1 == scale down: false | predicted k matches too: true, true
+  n = 16 | scale 1: k =    6 [6] | scale down: k =    4 [4] | scale 1 == scale down: false | predicted k matches too: true, true
+
+Step 5: svd(1e-12 I_3): rank(1e-10) = 0, rank(3 sigma_1 eps) = 3 (ix_svd over MCP: not run)
+
+Step 6: relative error of truncated_svd(A, 1) = 0.053913; IX's test accepts anything below 0.10
+
+Negative controls:
+  Eckart-Young with sigma_2 left out of the tail, k = 0: difference 1.387e-2
+  relative error of A against itself: 0e0; of the zero matrix against A: 1e0
+  sizes whose scale-1 and scale-down singular values differ: 11
+
+raw-bits digest of every computed value: 7e4ddf4fc645c3ec
+exit 0

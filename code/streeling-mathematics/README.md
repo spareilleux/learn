@@ -47,3 +47,29 @@ Two things were measured without a prediction, and are only reported:
 - **The SVD route's error:** at N = 10^2 it is 1.29e-10, about 1,200 times κ₂·u (κ₂ = 949, u = 2^-53, so κ₂·u ≈ 1.05e-13). There it is larger than the normal equations' error, 2.05e-11. From N = 10^2 to 10^5 it stays between 8.0e-11 and 2.4e-10. The cause is not established here.
 
 Steps 3 and 4 of §6, the MCP server after a panic and the input schema, are not run: they need `ix-agent` and a disposable `ix-mcp` process.
+
+## MAT-006 · The SVD and low-rank approximation
+
+- `preregistration-mat006.md` quotes the predictions of the module's §7 and of its §6 exercise ([Demerzel `0b13b9d`](https://github.com/GuitarAlchemist/Demerzel/blob/0b13b9d56cc4b657cde6f3ce958c162610065c2f/state/streeling/courses/mathematics/en/mat-006-svd-low-rank-approximation.md)), and sets how each is judged. It was committed on its own, before any code of this part existed, with SHA-256 `3937cc1a…f7a4d3`.
+- `src/mat006.rs` holds the two matrices of IX's tests, A = [[1, 2], [3, 4], [5, 6]] and M = [[1, 2, 3], [4, 5, 6], [7, 8, 10]], and the checks. Norms and errors are plain loops, without IX. Powers of ten are parsed from text, and powers of two are built from their bits.
+- `examples/mat006_svd.rs` prints steps 1, 2, 4, 5 and 6, and the negative controls. Step 3 is timing: it prints to stderr, and only when `MAT006_TIMING` is set, so it never enters `expected/`.
+- `tests/mat006.rs` has one test per prediction, M6-P1 to M6-P6 except P3, and the negative controls.
+
+Eight predictions held on the first run:
+- **Eckart–Young (P1):** for A and M, at every k, the error of `truncated_svd` equals the tail of the singular values within 4.8e-15.
+- **Scale sweep, A (P2a–P2c):** the singular values stay within 1.1e-15 at every scale from 10^-14 to 10^12. The error of `reconstruct` is below 6e-16 from 10^-11 up, 0.0539 at 10^-12, and exactly 1 at 10^-13 and 10^-14, where both columns of U are zero.
+- **Scale sweep, M (P2d):** the singular values stay within 6.6e-15 from 10^-10 up. At 10^-13 and below, the worst is off by 196%.
+- **Rank (P5):** for 10^-12·I₃, `rank(1e-10)` is 0 and `rank(3·σ₁·ε)` is 3.
+- **The bound of IX's test (P6):** the rank-1 truncation of A has the relative error 0.053913, against the 0.10 the test accepts.
+- **Cost of scale (P3), one machine:** 20,000 calls of `svd` on 10^6·A take 10.10 times as long as on A; the ratio is 8.77 for M. Measured once, with the fastest of 5 runs, on an Intel Core Ultra 9 285K under Windows 11 Pro. CI does not time anything.
+
+One prediction was partly refuted, and the test keeps it visible:
+- **MAT-003's puzzle (P4):** capped at k sweeps, the singular values of `svd_with_opts(2^20·fl(H_n), k, 1e-12)`, divided by 2^20, equal bit for bit those of `svd(fl(H_n))`, and those of `svd(2^-20·fl(H_n))` divided by 2^-20, for every n from 2 to 16, as the module's explanation needs. Only the singular values are compared, not U or V. For n = 6 to 16, the smallest such k is the predicted one. For n = 2 to 5, it is lower: 1 and 1 for n = 2, 2 and 2 for n = 3, 3 and 3 for n = 4 and 5.
+
+Measured without a prediction, and only reported:
+- **Post hoc, P4:** at the predicted k, the capped singular values also equal both results, for every n. For n = 2 to 5, the sweeps after the first matching k change no bit. This is consistent with the module's sweep counts but does not verify them: the lab does not count the sweeps the uncapped calls execute, and several caps give the same bits.
+- **Scale 1 against scale down:** the singular values differ for 11 of the 15 sizes. MAT-003 had reported that κ₂ changes for 10 of 15 across three scales, a different measure.
+- **M at 10^-12 and 10^-11:** the singular values are off by 3.4e-9, neither accurate nor wrong by 100%. The error of `reconstruct` is 0.0515 at 10^-13 and 10^-12.
+- **Step 1 at full rank:** the tail of an empty list of singular values prints as `-0.000000e0`. Rust's `f64` sum of nothing is −0.0, and its square root is −0.0.
+
+The `ix_svd` half of step 5 is not run: it goes through the MCP server.
