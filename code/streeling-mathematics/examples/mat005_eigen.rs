@@ -5,6 +5,7 @@
 use ndarray::Array2;
 use std::f64::consts::FRAC_1_SQRT_2;
 use streeling_mathematics::mat005::*;
+use streeling_mathematics::max_or_nan;
 
 fn list(values: &[f64]) -> String {
     values
@@ -150,7 +151,7 @@ fn main() {
         .iter()
         .zip(eigenspace_projector().iter())
         .map(|(x, y)| (x - y).abs())
-        .fold(0.0, f64::max);
+        .fold(0.0, max_or_nan);
     println!("  eigenspace built from the vector for 4 and one for 1: {wrong_err:.3e}");
     println!(
         "  distance from (1, 1)/sqrt 2 to (1, -1)/sqrt 2, up to sign: {:.3e}",

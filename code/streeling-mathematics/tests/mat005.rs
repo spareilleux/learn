@@ -5,6 +5,7 @@
 use ndarray::Array2;
 use std::f64::consts::FRAC_1_SQRT_2;
 use streeling_mathematics::mat005::*;
+use streeling_mathematics::max_or_nan;
 
 const ONE_OVER_ROOT_2: [f64; 2] = [FRAC_1_SQRT_2, FRAC_1_SQRT_2];
 
@@ -150,6 +151,15 @@ fn controls_every_check_can_fail() {
         vectors: good.vectors.clone(),
     };
     assert!(max_eigen_residual(&b, &swapped) > 1e-9);
+    // A NaN eigenpair must fail every check, not vanish in the reduction.
+    let nan = Eigen {
+        values: vec![f64::NAN, 1.0],
+        vectors: good.vectors.clone(),
+    };
+    assert!(max_eigen_residual(&b, &nan).is_nan());
+    assert!(max_reconstruction_error(&b, &nan).is_nan());
+    assert!(max_orthonormality_error(&Array2::from_elem((2, 2), f64::NAN)).is_nan());
+    assert!(distance_up_to_sign(&[f64::NAN, 0.0], &ONE_OVER_ROOT_2).is_nan());
 
     let ipj = eigen(&identity_plus_ones(3));
     let wrong = projector_from(&ipj.vectors, &[0, 1]);
@@ -157,7 +167,7 @@ fn controls_every_check_can_fail() {
         .iter()
         .zip(eigenspace_projector().iter())
         .map(|(x, y)| (x - y).abs())
-        .fold(0.0, f64::max);
+        .fold(0.0, max_or_nan);
     assert!(err > 1e-9);
 
     assert!(distance_up_to_sign(&ONE_OVER_ROOT_2, &[FRAC_1_SQRT_2, -FRAC_1_SQRT_2]) > 0.5);
