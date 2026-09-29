@@ -4,9 +4,10 @@
 //! inverted by `ix_math::linalg::inverse` and pseudo-inverted through `ix_math::svd`, and every result
 //! is judged against the exact inverse, computed here in integers without IX.
 //!
-//! MAT-005, symmetric eigenproblems: the module `mat005`. MAT-006, the SVD: the module `mat006`. MAT-007,
-//! least squares: the module `mat007`.
+//! MAT-004, vectors, matrices and norms: the module `mat004`. MAT-005, symmetric eigenproblems: the module
+//! `mat005`. MAT-006, the SVD: the module `mat006`. MAT-007, least squares: the module `mat007`.
 
+pub mod mat004;
 pub mod mat005;
 pub mod mat006;
 pub mod mat007;

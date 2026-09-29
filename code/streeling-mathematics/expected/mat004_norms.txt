@@ -1,0 +1,32 @@
+MAT-004: ix-math distances and determinant at e35138b9, IEEE 754 binary64
+
+Step 1: triangle inequality on the 25 grid points, largest d(x, z) - (d(x, y) + d(y, z))
+  manhattan       | 15625 triples | largest excess 0.000e0 | strictly positive in 0
+  euclidean       | 15625 triples | largest excess 8.882e-16 | strictly positive in 8
+  chebyshev       | 15625 triples | largest excess 0.000e0 | strictly positive in 0
+  minkowski p = 3 | 15625 triples | largest excess 0.000e0 | strictly positive in 0
+
+Step 2: minkowski with p = 1/2 on (x, y), (y, z), (x, z) of the section 5 exercise:
+  Err(invalid parameter: p must be >= 1)
+  Err(invalid parameter: p must be >= 1)
+  Err(invalid parameter: p must be >= 1)
+
+Step 3: minkowski with p = inf: (0, 0)-(0, 0) Ok(1.0), (0, 0)-(3, 4) Ok(1.0); chebyshev: Ok(0.0), Ok(4.0)
+
+Step 4: minkowski with p = 1000 on (0, 0)-(3, 4): Ok(inf)
+
+Step 5: det(AB) == det A * det B for 1000 of 1000 pairs; 144 pairs have a singular factor; largest |det(AB)| 2940
+  timing: only with MAT004_TIMING, on stderr
+
+Section 6: cosine_distance d(x, z) = 1.000000000000, d(x, y) + d(y, z) = 0.585786437627 (2 - sqrt 2 = 0.585786437627)
+Section 6: minkowski with p = NaN: (0, 0)-(3, 4) Ok(NaN), (0, 0)-(0, 0) Ok(NaN)
+
+M4-L1, the lab's own: minkowski([0], [1], NaN) = Ok(1.0)
+
+Negative controls:
+  p = 1/2 by hand on the exercise points: largest excess 2, strictly positive in 2 triples
+  det(AB) == det A + det B fails for 995 of 1000 pairs
+  NaN is not NaN? false; 1.0 is NaN? false; inf is NaN? false
+
+raw-bits digest of every computed value: 8138987c966a5ddd
+exit 0
