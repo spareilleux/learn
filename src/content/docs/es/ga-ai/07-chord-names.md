@@ -147,7 +147,7 @@ La respuesta nombra los tokens, dice qué forma tiene un nombre de acorde y vuel
 ## Comunicado upstream
 
 - Los nombres de acorde no válidos que llegan al modelo: issue de GA [#745](https://github.com/GuitarAlchemist/ga/issues/745), corregida por la pull request [#749](https://github.com/GuitarAlchemist/ga/pull/749), fusionada el 2026-09-28. Las filas 1 a 4 son esa corrección.
-- Las filas 5, 6, 9 a 12 y 13, los nombres en minúsculas, la cualidad desconocida, los signos de bemol, la fundamental con sostenido sin cualidad, `C+`, `Bø7` y el descarte silencioso: no se habían comunicado upstream cuando se escribió esta lección. Están listadas en el [diario](../journal/).
+- Las filas 5, 6, 9 a 12 y 13, los nombres en minúsculas, la cualidad desconocida, los signos de bemol, la fundamental con sostenido sin cualidad, `C+`, `Bø7` y el descarte silencioso: se comunicaron después de escribir esta lección, los símbolos mal leídos o descartados en la issue de GA [#757](https://github.com/GuitarAlchemist/ga/issues/757) y las peticiones que la guarda deja pasar en la [#759](https://github.com/GuitarAlchemist/ga/issues/759). Están listadas en el [diario](../journal/).
 
 ## Ejercicios
 

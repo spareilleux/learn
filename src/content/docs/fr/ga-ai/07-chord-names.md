@@ -147,7 +147,7 @@ La réponse nomme les mots, dit à quoi ressemble un nom d'accord, et redemande,
 ## Signalé en amont
 
 - Les noms d'accords invalides qui atteignent le modèle : ticket de GA [#745](https://github.com/GuitarAlchemist/ga/issues/745), corrigé par la pull request [#749](https://github.com/GuitarAlchemist/ga/pull/749), fusionnée le 2026-09-28. Les lignes 1 à 4 sont ce correctif.
-- Les lignes 5, 6, 9 à 12 et 13, à savoir les noms en minuscules, la qualité inconnue, les bémols, la fondamentale diésée sans qualité, `C+`, `Bø7` et l'abandon silencieux : non signalées en amont au moment où cette leçon a été écrite. Elles sont listées dans le [journal](../journal/).
+- Les lignes 5, 6, 9 à 12 et 13, à savoir les noms en minuscules, la qualité inconnue, les bémols, la fondamentale diésée sans qualité, `C+`, `Bø7` et l'abandon silencieux : signalées après l'écriture de cette leçon, les symboles mal lus ou abandonnés dans le ticket de GA [#757](https://github.com/GuitarAlchemist/ga/issues/757) et les demandes que la garde laisse passer dans [#759](https://github.com/GuitarAlchemist/ga/issues/759). Elles sont listées dans le [journal](../journal/).
 
 ## Exercices
 

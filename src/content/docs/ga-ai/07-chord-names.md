@@ -147,7 +147,7 @@ The answer names the tokens, says what a chord name looks like, and asks again, 
 ## Reported upstream
 
 - Invalid chord names reaching the model: GA issue [#745](https://github.com/GuitarAlchemist/ga/issues/745), fixed by pull request [#749](https://github.com/GuitarAlchemist/ga/pull/749), merged on 2026-09-28. Rows 1 to 4 are that fix.
-- Rows 5, 6, 9 to 12 and 13, the lowercase names, the unknown quality, the flat signs, the bare sharp root, `C+`, `Bø7` and the silent drop: not reported upstream when this lesson was written. They are listed in the [journal](../journal/).
+- Rows 5, 6, 9 to 12 and 13, the lowercase names, the unknown quality, the flat signs, the bare sharp root, `C+`, `Bø7` and the silent drop: reported after this lesson was written, the misread and dropped symbols as GA issue [#757](https://github.com/GuitarAlchemist/ga/issues/757) and the requests the guard lets through as [#759](https://github.com/GuitarAlchemist/ga/issues/759). They are listed in the [journal](../journal/).
 
 ## Exercises
 

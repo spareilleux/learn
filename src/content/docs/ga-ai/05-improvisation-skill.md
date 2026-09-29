@@ -216,7 +216,7 @@ The oracle doesn't check the rest of chord–scale theory either: tensions and a
 ## Reported upstream
 
 - The key-blind scales of the progression path: GA issue [#744](https://github.com/GuitarAlchemist/ga/issues/744), filed on 2026-09-28 from a tracer run against the public chatbot, with the Am F C G and C A Dm G cases of this lesson.
-- The defects of "One chord at a time", the tokenizer, the order of `InferQuality`, the unknown suspended and power chords and the `m6` arpeggio: not reported upstream when this lesson was written. They are listed in the [journal](../journal/).
+- The defects of "One chord at a time", the tokenizer, the order of `InferQuality`, the unknown suspended and power chords and the `m6` arpeggio: reported after this lesson was written, the tokenizer as GA issue [#757](https://github.com/GuitarAlchemist/ga/issues/757) and the others as [#758](https://github.com/GuitarAlchemist/ga/issues/758). They are listed in the [journal](../journal/).
 
 ## Exercises
 
