@@ -3,7 +3,8 @@
 //! own, written before the run. Step 5's timing (M4-P5a) is not asserted here.
 
 use ix_math::distance::{chebyshev, minkowski};
-use ndarray::array;
+use ix_math::error::MathError;
+use ndarray::{Array1, array};
 use streeling_mathematics::mat004::*;
 
 #[test]
@@ -88,4 +89,13 @@ fn controls_every_check_can_fail() {
     assert!(f64::NAN.is_nan());
     assert!(!1.0f64.is_nan() && !f64::INFINITY.is_nan());
     assert!(!is_p_refusal(&Ok(1.0)));
+
+    // A NaN distance must fail the triangle check, not vanish in the reduction: with p = NaN, minkowski
+    // returns NaN between most points of the grid (M4-P7).
+    let (worst, _, _) = triangle(minkowski_nan, &grid());
+    assert!(worst.is_nan(), "{worst}");
+}
+
+fn minkowski_nan(a: &Array1<f64>, b: &Array1<f64>) -> Result<f64, MathError> {
+    minkowski(a, b, f64::NAN)
 }

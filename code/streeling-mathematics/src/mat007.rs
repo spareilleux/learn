@@ -2,6 +2,7 @@
 //! and nearly collinear designs, against the SVD route through `pseudo_inverse`. Pre-registered in
 //! preregistration-mat007.md; every fixture has its exact answer in closed form, so no oracle needs IX.
 
+use crate::max_or_nan;
 use ix_math::svd::svd;
 use ix_supervised::linear_regression::LinearRegression;
 use ix_supervised::traits::Regressor;
@@ -103,7 +104,7 @@ pub fn max_fit_error(x: &Array2<f64>, y: &Array1<f64>, weights: &[f64], bias: f6
             let fitted: f64 = (0..x.ncols()).map(|j| weights[j] * x[[i, j]]).sum::<f64>() + bias;
             (fitted - y[i]).abs()
         })
-        .fold(0.0, f64::max)
+        .fold(0.0, max_or_nan)
 }
 
 /// N = 10^0 … 10^7, the scales of step 2.
@@ -127,7 +128,7 @@ pub fn param_error(weights: &[f64], bias: f64) -> f64 {
     weights
         .iter()
         .map(|w| (w - 1.0).abs())
-        .fold((bias - 1.0).abs(), f64::max)
+        .fold((bias - 1.0).abs(), max_or_nan)
 }
 
 /// The SVD route of step 2, and IX's kappa_2 of the design.

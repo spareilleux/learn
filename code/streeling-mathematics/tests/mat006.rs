@@ -4,6 +4,7 @@
 
 use ndarray::Array2;
 use streeling_mathematics::mat006::*;
+use streeling_mathematics::max_or_nan;
 
 fn matrices() -> [(&'static str, Array2<f64>); 2] {
     [("A", matrix_a()), ("M", matrix_m())]
@@ -81,7 +82,7 @@ fn m6_p2d_m_is_accurate_from_1e_10_and_wrong_by_over_100_percent_from_1e_13_down
             .sigma_relative_errors
             .iter()
             .copied()
-            .fold(0.0, f64::max);
+            .fold(0.0, max_or_nan);
         if e >= -10 {
             assert!(worst <= 1e-12, "e = {e}: {worst:e}");
         } else if e <= -13 {
@@ -90,38 +91,29 @@ fn m6_p2d_m_is_accurate_from_1e_10_and_wrong_by_over_100_percent_from_1e_13_down
     }
 }
 
-// M6-P4 was pre-registered as "the smallest matching k is the module's predicted pair for every n".
-// Partly refuted on the first run: for n = 2 to 5 the smallest k is lower than predicted (n = 2: 1 and 1,
-// predicted 2 and 2; n = 3: 2 and 2, predicted 4 and 3; n = 4 and 5: 3 and 3, predicted 4 and 3); for
-// n = 6 to 16 it is exactly the predicted pair. What the module's explanation needs does hold for every n:
-// some k <= 6 at scale 2^20 reproduces both uncapped results bit for bit. The test pins what was measured.
-// Post hoc, not pre-registered: at the predicted k the capped result also reproduces both, for every n, so
-// the module's sweep counts hold; for n = 2 to 5 the sweeps after the first matching k change no bit.
+// M6-P4, as pre-registered: for each n, the smallest k in 1 ... 6 whose capped singular values (divided
+// by 2^20) equal those at scale 1 bit for bit is the module's first value, and the smallest equal to those
+// at 2^-20 (divided by 2^-20) is its second; if no k up to 6 matches, the prediction is refuted for that n.
+// Partly refuted on the first run: some k <= 6 matches both for every n, and the smallest is the predicted
+// pair for n = 6 to 16, but lower for n = 2 to 5 (1 and 1, 2 and 2, 3 and 3, 3 and 3). The test judges that
+// criterion for every n and keeps the verdict visible. The measured k, and the post hoc observation that the
+// predicted k also matches, are printed in expected/mat006_svd.txt and are not asserted here.
 #[test]
 fn m6_p4_capped_sweeps_reproduce_both_results_and_the_first_k_is_as_predicted_from_n_6() {
-    let measured_below_6 = [(2, 1, 1), (3, 2, 2), (4, 3, 3), (5, 3, 3)];
     for n in 2..=16 {
         let row = puzzle(n);
-        let (first, second) = match measured_below_6.iter().find(|(m, _, _)| *m == n) {
-            Some(&(_, a, b)) => (a, b),
-            None => predicted_puzzle(n),
-        };
-        assert_eq!(row.k_matching_scale_1, Some(first), "n = {n}, scale 1");
+        assert!(
+            row.k_matching_scale_1.is_some() && row.k_matching_scale_down.is_some(),
+            "n = {n}: no k up to 6 matches"
+        );
+        let (first, second) = predicted_puzzle(n);
+        let holds =
+            row.k_matching_scale_1 == Some(first) && row.k_matching_scale_down == Some(second);
         assert_eq!(
-            row.k_matching_scale_down,
-            Some(second),
-            "n = {n}, scale 2^-20"
+            holds,
+            n >= 6,
+            "n = {n}: the prediction holds only from n = 6"
         );
-    }
-    for (n, a, b) in measured_below_6 {
-        assert_ne!(
-            (a, b),
-            predicted_puzzle(n),
-            "n = {n} is recorded as refuted"
-        );
-    }
-    for n in 2..=16 {
-        assert_eq!(puzzle(n).predicted_k_also_matches, (true, true), "n = {n}");
     }
 }
 
@@ -149,4 +141,12 @@ fn controls_every_check_can_fail() {
     assert!((2..=16).any(|n| !puzzle(n).scale_1_equals_scale_down));
     assert_eq!(two_to(-20) * two_to(20), 1.0);
     assert_eq!(ten_to(-12), 1e-12);
+    // A NaN relative error must reach the P2d bounds, where both comparisons fail, not vanish in the fold.
+    assert!(
+        [1e-16, f64::NAN]
+            .iter()
+            .copied()
+            .fold(0.0, max_or_nan)
+            .is_nan()
+    );
 }

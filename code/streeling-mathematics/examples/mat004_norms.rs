@@ -7,6 +7,7 @@ use ix_math::linalg::determinant;
 use ndarray::array;
 use std::time::Instant;
 use streeling_mathematics::mat004::*;
+use streeling_mathematics::max_or_nan;
 
 fn show(r: &Result<f64, ix_math::error::MathError>) -> String {
     match r {
@@ -83,7 +84,7 @@ fn main() {
         .iter()
         .filter(|p| p.det_a == 0.0 || p.det_b == 0.0)
         .count();
-    let largest = pairs.iter().map(|p| p.det_ab.abs()).fold(0.0, f64::max);
+    let largest = pairs.iter().map(|p| p.det_ab.abs()).fold(0.0, max_or_nan);
     for p in &pairs {
         raw.extend([p.det_a, p.det_b, p.det_ab]);
     }

@@ -112,6 +112,11 @@ fn m7_p2d_the_svd_route_stays_below_1e_7_at_every_n() {
 #[test]
 fn controls_every_check_can_fail() {
     assert!(param_error(&[1.0, 1.0], 0.0) >= 1.0);
+    // A NaN result must fail every check, not vanish in the reduction.
+    assert!(param_error(&[f64::NAN, 1.0], 1.0).is_nan());
+    assert!(param_error(&[1.0], f64::NAN).is_nan());
+    let (x, y) = offset_data(1.0);
+    assert!(max_fit_error(&x, &y, &[f64::NAN], 1.0).is_nan());
     assert_ne!((2.0 - 2f64.powi(-18)).to_bits(), 2f64.to_bits());
     assert!(matches!(fit_offset(1.0), Fit::Params { .. }));
     silence_fit_panics();
