@@ -164,6 +164,7 @@ La plupart des 22 différences du 2026-09-14 ont été corrigées en amont par [
 - L'hôte du cours tournait sans le dossier `skills/` de GA depuis la leçon 4. `SkillMdPlugin` le cherche à la racine du dépôt git qui contient le programme en cours d'exécution, ici le dépôt du cours. `fetch-ga.sh` l'extrait maintenant, et l'hôte définit `SKILLMD_SKILLS_PATH` ; les sorties des leçons 1 à 7 sont les mêmes. Avant ce changement, le texte de l'enveloppe faisait signaler les sept prompts d'accords diatoniques comme backend dégradé ; depuis, ils échouent comme des réponses ordinaires : c'est la ligne 42.
 - Une clé présente dans l'environnement aurait atteint Anthropic : lancé avec une fausse `ANTHROPIC_API_KEY`, l'hôte a reçu `AnthropicUnauthorizedException`. L'hôte fixe maintenant `Anthropic:ApiKey` à une chaîne vide, et la sortie avec la fausse clé est la même que sans elle.
 - Les solutions des exercices 1 et 2 ont été vérifiées en modifiant le programme du cours le temps d'une exécution ; celles des exercices 3 et 4 ont été résolues à la main.
+- Exécution de CI [36584340462](https://github.com/spareilleux/learn/actions/runs/36584340462), pour le commit `a305edf` : verte sur les trois systèmes, 1 min 58 s sous Linux, 2 min 24 s sous macOS, 6 min 41 s sous Windows, clone, extraction de `skills/`, récupération du corpus et compilation compris.
 
 ## À vérifier
 

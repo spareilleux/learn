@@ -164,6 +164,7 @@ Most of the 22 differences of 2026-09-14 were fixed upstream by [#689](https://g
 - The course's host had been running without GA's `skills/` folder since lesson 4. `SkillMdPlugin` looks for it at the root of the git repository that holds the running program, here the course's repository. `fetch-ga.sh` now checks it out, and the host sets `SKILLMD_SKILLS_PATH`; the outputs of lessons 1 to 7 are the same. Before the change, the seven diatonic prompts were flagged as a degraded backend by the wrapper's text; after it, they fail as ordinary answers, which is row 42.
 - A key in the environment would have reached Anthropic: run with a fake `ANTHROPIC_API_KEY`, the host got `AnthropicUnauthorizedException`. The host now sets `Anthropic:ApiKey` to an empty string, and the output with the fake key is the same as without it.
 - The solutions of exercises 1 and 2 were checked by editing the course program for one run; 3 and 4 were worked by hand.
+- CI run [36584340462](https://github.com/spareilleux/learn/actions/runs/36584340462), for commit `a305edf`: green on the three systems, 1 min 58 s on Linux, 2 min 24 s on macOS, 6 min 41 s on Windows, clone, the checkout of `skills/`, the corpus fetch and build included.
 
 ## To verify
 
