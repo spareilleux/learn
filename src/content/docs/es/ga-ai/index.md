@@ -37,6 +37,7 @@ Otros tres cursos de este sitio cubren el trasfondo, y este enlaza con ellos en 
 - abrir un archivo de índice OPTK, explicar su cabecera y predecir qué devuelve una búsqueda y por qué;
 - seguir un mensaje de chat a través de los hooks, las guardas deterministas, el enrutador de intenciones y los agentes de GA, y explicar por qué algunas preguntas funcionan sin modelo y otras fallan;
 - calificar las respuestas musicales de una skill determinista con un pequeño oráculo propio, y decir hasta dónde llega ese oráculo;
+- leer un flujo de eventos enviados por el servidor como lo hace el estándar HTML, y comprobar que el texto que reconstruye un cliente es el texto que calculó el servidor;
 - distinguir, en la IA de GA, lo que funciona hoy, lo que se está construyendo y lo que solo está planeado.
 
 ## Plan
@@ -48,6 +49,7 @@ Otros tres cursos de este sitio cubren el trasfondo, y este enlaza con ellos en 
 | 3 | [El índice y la búsqueda](03-index-and-search/) | `OptickIndexWriter`, `OptickIndexReader`, `OptickSearchStrategy`, `MusicalQueryEncoder` | formatos binarios, archivos proyectados en memoria, montículos top-k |
 | 4 | [El chatbot y sus agentes](04-chatbot-and-agents/) | `ProductionOrchestrator`, `SemanticIntentRouter`, `SemanticRouter`, skills, hooks | servicios hospedados, respaldos, probar un host dentro del proceso |
 | 5 | [La skill de improvisación](05-improvisation-skill/) | `ImprovisationSkill` frente a la teoría acorde–escala, issue #744 | expresiones regulares con generador de código fuente, leer `AgentResponse.Data`, escribir un oráculo de pruebas |
+| 6 | [La respuesta en el cable](06-answer-on-the-wire/) | `SseChunker`, los dos `WriteSseLineAsync`, los lectores de la página y de ga-client, #743 y #746 | eventos enviados por el servidor, `Regex.Split` y aserciones de búsqueda (lookarounds), portar un cliente para probarlo |
 | — | [Diario](journal/) | | |
 
 ## Requisitos previos
