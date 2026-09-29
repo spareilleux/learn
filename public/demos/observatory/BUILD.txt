@@ -42,7 +42,7 @@ generates from its sidebar (src/pages/demos/observatory/courses.json.ts); the
 scene fetches it at start-up and carries the copy listed below for when it
 cannot.
 
-The last revision puts the courses in the shelves themselves, in the row at eye
+The next revision puts the courses in the shelves themselves, in the row at eye
 height: each area is a series in its own cloth between two brass bookends,
 with its name on a card in a brass holder on the shelf edge, among ordinary
 books. The course books share the other books' mesh, bindings shader and
@@ -54,6 +54,20 @@ full screen (3819x1959 canvas), a frame took 28 to 30 ms with 4x MSAA and
 36 ms with 2x, against 2.2 to 3.0 ms without MSAA, and the scene now holds
 60 fps where it held 25 to 34. A bare WebGL 2 page at the same size takes
 0.3 ms, so the cost was the multisample resolve in the export, not the browser.
+
+The last revision adds a marble statue of Hari Seldon in the hall, in front of
+the Streeling University bay, on a dark pedestal with a gilt inscription whose
+era follows the page's language; that bay's data-rain beam is left out. The
+capitals, pier bases, carved panels, arches, entablature, drum and ceiling ribs
+gain gilt mouldings, merged into four meshes, and the floor is paved in 18
+rings of pale and dark marble around a compass rose (a shader, with darker
+stand-in tints under Compatibility). The figure was generated locally:
+Z-Image-Turbo (Apache-2.0) drew the concept, TRELLIS.2 4B int8 (MIT; its image
+encoder is DINOv3, under the DINOv3 License) turned it into a 3.57 million face
+mesh in 38 s on the RTX 5080, ComfyUI's RemeshMesh and DecimateMesh brought it
+to 59,905 faces, and Blender normalised it (seldon_statue.glb, 1.08 MB). In
+Chrome for Testing 153 on the same machine, full screen (3840x1872 canvas)
+without vsync, a frame takes 1.9 to 2.2 ms in five views.
 
 Native Compatibility GPU time, RTX 5080, 1600x900, 240 frames per view: 0.44 to
 0.52 ms for the previous web scene, 0.64 to 1.44 ms with the detail pass; up to
@@ -69,9 +83,11 @@ main.tscn fb6245c960d3625ca05920116c58351d9dbeb255beae59175d89c06d47049564
 export_presets.cfg 8b44717dc35a46dff0ba18370dfa5d9989bea04b73c4e455b404284998f06571
 scripts/fly_camera.gd 2e5cdd15ca7bdcfa30ec129e354a309f3ff7296f6fbf54ac144984ed9aa9f8e7
 scripts/capture.gd 52ea2b5e40db2f1f4cdbd7658074ef60bd117e1f4110c1b8995590a4196748d0
-scripts/observatory.gd 894e14440b37dc7c72bd932a9587c1dc3df7d410947910dd9473305627d52773
+scripts/observatory.gd 460792d863061b014ff57e4e5e253ebf52c222ef0665aa47c6f4a4f1f69f2e94
 scripts/course_library.gd 32ca0c129ab8b09db5ce1574ddaaad8384697893ca292f95c0919042a57ead45
 scripts/steel_cube.gd f28e71fffcd151663bc9a98b3c135cc7b805490e8298d3cf01029455c973f94c
+scripts/seldon_statue.gd 4e41b282aa2cc4de794296586b65f5f4d39688312673ddc46226fd3906cf4b27
+assets/seldon_statue.glb 41f7e4c667711b0097132025bdf5edbd03b44de0793445db1f118d69e145c8ec
 assets/steel_portal.glb 009ec4dd8f85b74f47839d25095fbe9e087b222addccf13643639c4b98402b21
 assets/stone_marble.png a71f21a971a1a0b2b897ed42dd64f2ece500f34b246bb758d9ff7ae843e68bd3
 assets/pier_ornament.png 6494443545711367205f83f532a67592c412065ffb2d00bd7c10c50b6fa7b22c
@@ -86,14 +102,16 @@ assets/book_spines.gdshader eb0641b8a3ce571d3a0644e7da28ec9b407d8e5d4bb3338c7b95
 assets/stone_relief.gdshader 82f26919a4a0a2742eee8ddbef9b2be09ee9a4df8273fe6845d9dd919cfe7958
 assets/steel_brushed.gdshader cff19989eb4793ddb5dc001fd3d25473080c51d250a4a5cfc168762b435ba8fd
 assets/stained_glass.gdshader 1366183601743cfb42791f5efd38e4b26e6c6d10eb8ce1ac4e9e8c7a3db6d77a
+assets/floor_paving.gdshader 3af46cce1c77b139efdf60559ffeac882fa60b8e9334b36a09c6d1f6e49e418c
+assets/statue_marble.gdshader ec3f14f662487f3dae14a398fe91ea7183d88214bd2bf266359da89d79b94452
 assets/courses.json a4a97ab7fffa250c62ca71fe7f6b5885e3c3ab31054cf8aa9b180ea67aae9bfc
 
 SHA-256 output files:
-index.pck 29b57628cc88ec0182dce5601423ea5dbe24eb74ec74e0c22d21c43b20137668
+index.pck 20cf27fc853b47252971cdec8b43e7f5abd0a229db74feb1c63f67020f7e8f57
 index.wasm 99962b29677e42f3ba0258bd90fdc52ad90295954c4473e816ad02cfe5ff1d4f
 index.js e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981
 
 This directory contains a prebuilt binary export. Re-export only for deliberate
 scene changes. A scene re-export leaves the engine files (index.wasm, index.js)
 byte-identical, so git keeps a single copy; each scene revision adds its
-index.pck (13.2 MB here) to the binary history.
+index.pck (14.9 MB here) to the binary history.
