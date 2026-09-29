@@ -36,6 +36,7 @@ Three other courses on this site cover the background, and this one links to the
 - read an OPTIC-K vector partition by partition, compute the weighted similarity of two voicings by hand, and say what the vector is and isn't invariant to;
 - open an OPTK index file, explain its header, and predict what a search returns and why;
 - follow a chat message through GA's hooks, deterministic guards, intent router and agents, and explain why some questions work without a model and others fail;
+- grade a deterministic skill's musical answers with a small oracle of my own, and say where the oracle stops;
 - tell apart, in GA's AI, what works today, what is being built, and what is only planned.
 
 ## Outline
@@ -46,6 +47,7 @@ Three other courses on this site cover the background, and this one links to the
 | 2 | [OPTIC-K embeddings](02-optic-k-embeddings/) | `EmbeddingSchema`, `MusicalEmbeddingGenerator`, `VoicingAnalyzer` | positional records, `TensorPrimitives` |
 | 3 | [The index and search](03-index-and-search/) | `OptickIndexWriter`, `OptickIndexReader`, `OptickSearchStrategy`, `MusicalQueryEncoder` | binary formats, memory-mapped files, top-k heaps |
 | 4 | [The chatbot and its agents](04-chatbot-and-agents/) | `ProductionOrchestrator`, `SemanticIntentRouter`, `SemanticRouter`, skills, hooks | hosted services, fallbacks, testing a host in process |
+| 5 | [The improvisation skill](05-improvisation-skill/) | `ImprovisationSkill` against chord–scale theory, issue #744 | source-generated regexes, reading `AgentResponse.Data`, writing a test oracle |
 | — | [Journal](journal/) | | |
 
 ## Prerequisites

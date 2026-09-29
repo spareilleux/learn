@@ -13,7 +13,22 @@ sidebar:
 - [x] Lesson 2: OPTIC-K embeddings
 - [x] Lesson 3: the index and search
 - [x] Lesson 4: the chatbot and its agents
+- [x] Lesson 5: the improvisation skill and chord–scale theory
 - [ ] Run the chatbot with Ollama and capture what the agents answer (dated, outside CI)
+
+## QA
+
+Findings 1 to 22, from lessons 1 to 4, are numbered in the entry of [2026-09-14](#2026-09-14--differences-found-in-gas-code-commit-a826864), with their upstream status in the entry of [2026-09-24](#2026-09-24--upstream-fixes). This table starts at lesson 5. `ImprovisationSkill.cs` is identical at `a826864` and on GA's `main` at `8cd5042` (2026-09-28), so every row also describes the deployed skill.
+
+| Expected | What happens | Where | Measure | Status |
+|---|---|---|---|---|
+| 23. A run of chord symbols is read as written | `Cmaj7#5` is read as `Cmaj7`; `C7sus4` and `CmMaj7` are dropped without a word, though `mMaj7` is the skill's own arpeggio label | [`ImprovisationSkill.cs` lines 453-462](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/ImprovisationSkill.cs#L453-L462) | `l5`: 15 of 17 chords read, 1 of them cut short | Reproduced; not reported upstream |
+| 24. `Cm7#5` is a minor chord | Classified augmented: arpeggio `Caug`, an E against the chord's E♭; neither scale on offer holds the E♭ | [line 343](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/ImprovisationSkill.cs#L343) | `l5`, one-chord table | Reproduced; not reported upstream |
+| 25. The arpeggio of `Cm6` spells C E♭ G A | `CmMaj7`, which plays B instead of A; the scale, melodic minor, is fine | [line 346](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/ImprovisationSkill.cs#L346) | `l5`, one-chord table | Reproduced; not reported upstream |
+| 26. `C7#11` leads with a scale that holds F♯ | Mixolydian, with F natural; Lydian dominant is the second choice | [lines 360-436](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/ImprovisationSkill.cs#L360-L436) | `l5`, one-chord table | Reproduced; not reported upstream |
+| 27. Suspended and power chords keep their own tones | "unknown": the arpeggio label is the bare root, a major triad, E against the sus4's F and the sus2's D | [line 283](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/ImprovisationSkill.cs#L283) | `l5`, one-chord table | Reproduced; not reported upstream |
+| 28. A progression's lead scales stay in its key, or say the key is ambiguous | Ionian on major triads, Aeolian on minor triads, whatever their degree: B♭ on F and F♯ on G over Am F C G, F♯ G♯ on A in C A Dm G, F♯ C♯ D♯ on E in Am Dm E; C G isn't flagged as ambiguous | [lines 212-261](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/ImprovisationSkill.cs#L212-L261) | `l5`: of 23 chords in 7 progressions (the borrowed chord left out), 11 same, 10 DIFF, 2 right in one of two keys | Reported as [#744](https://github.com/GuitarAlchemist/ga/issues/744) |
+| The oracle gives a taught scale for every chord | For a borrowed chord, F minor in C, its rule gives F G A♭ B C D E, not a taught scale; the usual answer is F Dorian | `code/ga-ai/GaAi/Lesson5.cs`, `Textbook` | `l5`, C Fm G C | A limit of the course's oracle, not of GA; documented in lesson 5 |
 
 ## 2026-09-14 — Why this course
 
@@ -85,3 +100,21 @@ Most of the 22 differences of 2026-09-14 were fixed upstream by [#689](https://g
 
 - Fixed: 1 and 4 (voicing documents built from the chord root, the lowest note and the analyzer's named fields), 2 (roots read as note names), 3 (named arguments), 5 (HIERARCHY and ATONAL_MODAL constants aligned with the partitions), 6 (`RootVectorService`'s summary), 8 (the 112/216/228 and v1.3.1 comments), 9 (MODAL slots looked up by the mode catalogue's names), 11 (the chord filter compares root, quality and optional bass), the query half of 12 (the query's interval-class vector is encoded), 13 (the diagram string order is explicit), 14 and 15 (the schema tool reads `EmbeddingSchema`), 16 (keyword fallback, and an "unavailable" answer instead of HTTP 500), 17, 18, 19, 21 and 22.
 - Unchanged: 7, which isn't a bug; the other half of 12, `FindSimilarVoicingsAsync`, still returns an empty list, as its comment says; 20, listed by #688 as found and not changed. 10 wasn't measured again, and fixes 5 and 9 touch dimensions it counted.
+
+## 2026-09-28 — Lesson 5: the improvisation skill
+
+- The request, on 2026-09-28: more lessons that help GA's chatbot. The same day, a tracer run against the public chatbot had found that "which arpeggio fits Am F C G" gets F Ionian and G Ionian, filed as GA issue [#744](https://github.com/GuitarAlchemist/ga/issues/744). Lesson 5 reproduces that finding offline, in the course's CI, and extends it to single chords.
+- `ImprovisationSkill.cs` is identical at `a826864` and on GA's `main` at [`8cd5042`](https://github.com/GuitarAlchemist/ga/commit/8cd5042b91e38eb9949566dc3584fa0a42089788) (`git diff --stat` between the two is empty), so the pinned skill is still the one the chatbot runs. Whether the deployed router sends every prompt of the lesson to this skill is not checked by the course (*to verify*); the tracer saw it do so for Am F C G.
+- The progression path never calls the skill's `IMusicalQueryExtractor`, the one dependency that needs a model. The course passes an extractor that throws, so a change in GA that made the path call a model would fail the run.
+- The oracle's tables have to cover every scale name the skill can return; a missing name throws. One progression was run once and not kept in the program: Bb Gm Cm F, for the solution of the first exercise.
+- CI run [36425151971](https://github.com/spareilleux/learn/actions/runs/36425151971), for commit `c2ab348`: green on the three systems, 1 min 42 s on Linux, 2 min 4 s on macOS, 2 min 59 s on Windows, clone and build included.
+
+## To verify
+
+- Whether the deployed chatbot routes every prompt of lesson 5 to `ImprovisationSkill`; the tracer of 2026-09-28 saw it do so for Am F C G.
+- The Berklee names of lesson 5, Mixolydian ♭13 for V7/II and Mixolydian ♭9 ♭13 for a dominant in minor, and F Dorian for a borrowed iv, against Nettles and Graf, *The Chord Scale Theory & Jazz Harmony*, which the course hasn't read.
+- The solutions of lesson 5's exercises 2 and 3, not compiled against GA.
+
+## Open questions
+
+- Which key-inference rule should GA's improvisation skill use? #744 leaves it open: the count of chord tones outside each major scale used by lesson 5, or GA's existing key-identification services.

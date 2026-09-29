@@ -13,7 +13,22 @@ sidebar:
 - [x] Leçon 2 : les embeddings OPTIC-K
 - [x] Leçon 3 : l'index et la recherche
 - [x] Leçon 4 : le chatbot et ses agents
+- [x] Leçon 5 : le skill d'improvisation et la théorie accord–gamme
 - [ ] Exécuter le chatbot avec Ollama et capturer ce que répondent les agents (daté, hors CI)
+
+## QA
+
+Les constats 1 à 22, des leçons 1 à 4, sont numérotés dans l'entrée du [2026-09-14](#2026-09-14--différences-trouvées-dans-le-code-de-ga-commit-a826864), et leur état en amont dans celle du [2026-09-24](#2026-09-24--correctifs-en-amont). Ce tableau commence à la leçon 5. `ImprovisationSkill.cs` est identique à `a826864` et sur le `main` de GA à `8cd5042` (2026-09-28) : chaque ligne décrit donc aussi le skill déployé.
+
+| Attendu | Ce qui se passe | Où | Mesure | État |
+|---|---|---|---|---|
+| 23. Une suite de symboles d'accords est lue telle qu'elle est écrite | `Cmaj7#5` est lu `Cmaj7` ; `C7sus4` et `CmMaj7` disparaissent sans un mot, alors que `mMaj7` est l'étiquette d'arpège du skill lui-même | [`ImprovisationSkill.cs` lignes 453-462](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/ImprovisationSkill.cs#L453-L462) | `l5` : 15 accords lus sur 17, dont 1 tronqué | Reproduit ; non signalé en amont |
+| 24. `Cm7#5` est un accord mineur | Classé augmenté : arpège `Caug`, un E contre le E♭ de l'accord ; aucune des deux gammes proposées ne contient le E♭ | [ligne 343](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/ImprovisationSkill.cs#L343) | `l5`, tableau accord par accord | Reproduit ; non signalé en amont |
+| 25. L'arpège de `Cm6` épelle C E♭ G A | `CmMaj7`, qui joue B au lieu de A ; la gamme, le mineur mélodique, convient | [ligne 346](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/ImprovisationSkill.cs#L346) | `l5`, tableau accord par accord | Reproduit ; non signalé en amont |
+| 26. `C7#11` commence par une gamme qui contient F♯ | Le mixolydien, avec F bécarre ; le lydien dominant est le deuxième choix | [lignes 360-436](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/ImprovisationSkill.cs#L360-L436) | `l5`, tableau accord par accord | Reproduit ; non signalé en amont |
+| 27. Les accords suspendus et les power chords gardent leurs propres notes | « unknown » : l'étiquette d'arpège est la fondamentale seule, une triade majeure, E contre le F du sus4 et le D du sus2 | [ligne 283](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/ImprovisationSkill.cs#L283) | `l5`, tableau accord par accord | Reproduit ; non signalé en amont |
+| 28. Les gammes principales d'une progression restent dans sa tonalité, ou la réponse dit que la tonalité est ambiguë | L'ionien sur les triades majeures, l'éolien sur les triades mineures, quel que soit leur degré : B♭ sur F et F♯ sur G dans Am F C G, F♯ G♯ sur A dans C A Dm G, F♯ C♯ D♯ sur E dans Am Dm E ; C G n'est pas signalée comme ambiguë | [lignes 212-261](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/ImprovisationSkill.cs#L212-L261) | `l5` : sur 23 accords dans 7 progressions (l'accord d'emprunt mis à part), 11 identiques, 10 DIFF, 2 justes dans une seule des deux tonalités | Signalé dans [#744](https://github.com/GuitarAlchemist/ga/issues/744) |
+| L'oracle donne une gamme enseignée pour chaque accord | Pour un accord d'emprunt, F mineur en C, sa règle donne F G A♭ B C D E, qui n'est pas une gamme enseignée ; la réponse habituelle est F dorien | `code/ga-ai/GaAi/Lesson5.cs`, `Textbook` | `l5`, C Fm G C | Une limite de l'oracle du cours, pas de GA ; documentée dans la leçon 5 |
 
 ## 2026-09-14 — Pourquoi ce cours
 
@@ -85,3 +100,21 @@ La plupart des 22 différences du 2026-09-14 ont été corrigées en amont par [
 
 - Corrigées : 1 et 4 (documents de voicing construits à partir de la fondamentale de l'accord, de la note la plus grave et des champs nommés de l'analyseur), 2 (fondamentales lues comme des noms de notes), 3 (arguments nommés), 5 (constantes HIERARCHY et ATONAL_MODAL alignées sur les partitions), 6 (le résumé de `RootVectorService`), 8 (les commentaires 112/216/228 et v1.3.1), 9 (cases MODAL cherchées sous les noms du catalogue des modes), 11 (le filtre d'accord compare fondamentale, qualité et basse éventuelle), la moitié « requête » de 12 (le vecteur d'intervalles de la requête est encodé), 13 (l'ordre des cordes des diagrammes est explicite), 14 et 15 (l'outil de schéma lit `EmbeddingSchema`), 16 (repli sur les mots-clés, et une réponse « indisponible » au lieu d'un HTTP 500), 17, 18, 19, 21 et 22.
 - Inchangées : 7, qui n'est pas un bogue ; l'autre moitié de 12, `FindSimilarVoicingsAsync`, rend toujours une liste vide, comme le dit son commentaire ; 20, listée par #688 comme trouvée et non modifiée. 10 n'a pas été remesurée, et les correctifs 5 et 9 touchent des dimensions qu'elle comptait.
+
+## 2026-09-28 — Leçon 5 : le skill d'improvisation
+
+- La demande, le 2026-09-28 : d'autres leçons qui aident le chatbot de GA. Le même jour, un tracer lancé contre le chatbot public avait trouvé que « which arpeggio fits Am F C G » reçoit F ionien et G ionien, ce qui a donné le ticket de GA [#744](https://github.com/GuitarAlchemist/ga/issues/744). La leçon 5 reproduit ce constat hors ligne, dans la CI du cours, et l'étend aux accords isolés.
+- `ImprovisationSkill.cs` est identique à `a826864` et sur le `main` de GA au commit [`8cd5042`](https://github.com/GuitarAlchemist/ga/commit/8cd5042b91e38eb9949566dc3584fa0a42089788) (`git diff --stat` entre les deux est vide) : le skill épinglé est donc toujours celui qu'exécute le chatbot. Que le routeur déployé envoie chaque prompt de la leçon à ce skill, le cours ne le vérifie pas (*à vérifier*) ; le tracer l'a vu le faire pour Am F C G.
+- Le chemin des progressions n'appelle jamais l'`IMusicalQueryExtractor` du skill, la seule dépendance qui a besoin d'un modèle. Le cours passe un extracteur qui lève une exception : une modification de GA qui ferait appeler un modèle par ce chemin ferait échouer l'exécution.
+- Les tables de l'oracle doivent couvrir chaque nom de gamme que le skill peut renvoyer ; un nom manquant lève une exception. Une progression a été exécutée une fois sans être gardée dans le programme : Bb Gm Cm F, pour la solution du premier exercice.
+- Exécution de CI [36425151971](https://github.com/spareilleux/learn/actions/runs/36425151971), pour le commit `c2ab348` : verte sur les trois systèmes, 1 min 42 s sous Linux, 2 min 4 s sous macOS, 2 min 59 s sous Windows, clone et compilation compris.
+
+## À vérifier
+
+- Si le chatbot déployé envoie chaque prompt de la leçon 5 à `ImprovisationSkill` ; le tracer du 2026-09-28 l'a vu le faire pour Am F C G.
+- Les noms de Berklee de la leçon 5, mixolydien ♭13 pour V7/II et mixolydien ♭9 ♭13 pour une dominante en mineur, et F dorien pour un iv d'emprunt, à confronter à Nettles et Graf, *The Chord Scale Theory & Jazz Harmony*, que le cours n'a pas lu.
+- Les solutions des exercices 2 et 3 de la leçon 5, non compilées contre GA.
+
+## Questions ouvertes
+
+- Quelle règle d'inférence de la tonalité le skill d'improvisation de GA devrait-il suivre ? #744 laisse la question ouverte : le décompte des notes d'accord hors de chaque gamme majeure, utilisé par la leçon 5, ou les services d'identification de tonalité qui existent déjà dans GA.
