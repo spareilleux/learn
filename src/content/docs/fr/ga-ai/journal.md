@@ -122,6 +122,7 @@ La plupart des 22 différences du 2026-09-14 ont été corrigées en amont par [
 - La trace de l'événement de routage contient des durées qui changent à chaque exécution ; le programme affiche l'événement coupé à une virgule.
 - `ChatStreamAsync` attend la réponse entière avant le premier événement : le flux s'affiche phrase par phrase, mais la première phrase ne part que lorsque la dernière est connue.
 - L'émetteur de GaApi (#746) est latent à `a826864` : `git grep` ne trouve aucun appelant de `sendChatMessageStream` ni de `streamChat` dans `Apps/ga-client/src`, et le chat React parle AG-UI, dont les événements JSON échappent les sauts de ligne.
+- Exécution de CI [36509333842](https://github.com/spareilleux/learn/actions/runs/36509333842), pour le commit `ed723b9` : verte sur les trois systèmes, 1 min 47 s sous Linux, 1 min 13 s sous macOS, 3 min 6 s sous Windows, clone et compilation compris.
 
 ## À vérifier
 
