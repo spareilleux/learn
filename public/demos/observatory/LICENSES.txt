@@ -27,9 +27,22 @@ https://github.com/godotengine/godot/blob/4.6.1-stable/COPYRIGHT.txt
 The marble texture was generated locally with the SDXL 1.0 model, licensed
 under CreativeML Open RAIL++-M:
 https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/blob/main/LICENSE.md
+The book-binding grain, tooled stone relief, steel grime and the three
+stained-glass panels were generated locally with the same SDXL 1.0 model.
 
 The pier ornament was generated locally with SDXL 1.0 and ControlNet Union
 SDXL, licensed Apache-2.0:
 https://huggingface.co/xinsir/controlnet-union-sdxl-1.0
+
+The Hari Seldon statue was generated locally. Z-Image-Turbo drew the concept,
+with its Qwen3 4B text encoder, both licensed Apache-2.0:
+https://huggingface.co/Tongyi-MAI/Z-Image-Turbo
+https://huggingface.co/Qwen/Qwen3-4B
+BiRefNet (MIT) removed the background: https://github.com/ZhengPeng7/BiRefNet
+TRELLIS.2 (MIT) turned the image into a mesh:
+https://github.com/microsoft/TRELLIS.2/blob/75fbf0183001ed9876c8dbb35de6b68552ee08bd/LICENSE
+Built with DINOv3. TRELLIS.2's image encoder is Meta's DINOv3, licensed under
+the DINOv3 License:
+https://github.com/facebookresearch/dinov3/blob/ffb4bb89c6558ca3244655c25a3955d01788b732/LICENSE.md
 
 No model weights are included in this distribution.
