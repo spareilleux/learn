@@ -90,7 +90,7 @@ pub fn norm_inf(a: &Array2<f64>) -> f64 {
     a.rows()
         .into_iter()
         .map(|r| r.iter().map(|x| x.abs()).sum::<f64>())
-        .fold(0.0, f64::max)
+        .fold(0.0, max_or_nan)
 }
 
 /// Plain triple loop, so the order of the sums is fixed and the checker does not depend on IX.
@@ -204,4 +204,23 @@ pub fn raw_values(m: &Measurement) -> Vec<f64> {
     v.extend(m.pinv_mcp.iter());
     v.push(m.pinv0_forward_error);
     v
+}
+
+/// The larger of `a` and `b`, or NaN when either is NaN. `f64::max` returns the other operand when one is
+/// NaN, so a check that folds its errors with it would pass on a NaN result.
+pub fn max_or_nan(a: f64, b: f64) -> f64 {
+    if a.is_nan() || b.is_nan() {
+        f64::NAN
+    } else {
+        a.max(b)
+    }
+}
+
+/// The smaller of `a` and `b`, or NaN when either is NaN, for the same reason as `max_or_nan`.
+pub fn min_or_nan(a: f64, b: f64) -> f64 {
+    if a.is_nan() || b.is_nan() {
+        f64::NAN
+    } else {
+        a.min(b)
+    }
 }
