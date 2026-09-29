@@ -2,6 +2,7 @@
 //! at p = 1/2, infinity, 1000 and NaN, `cosine_distance` against the triangle inequality, and the product rule
 //! of `determinant`. Pre-registered in preregistration-mat004.md.
 
+use crate::max_or_nan;
 use ix_math::distance::{chebyshev, cosine_distance, euclidean, manhattan, minkowski};
 use ix_math::error::MathError;
 use ix_math::linalg::{determinant, matmul};
@@ -49,7 +50,7 @@ pub fn triangle(d: Distance, points: &[Array1<f64>]) -> (f64, usize, usize) {
         for y in 0..n {
             for z in 0..n {
                 let excess = table[x][z] - (table[x][y] + table[y][z]);
-                worst = worst.max(excess);
+                worst = max_or_nan(worst, excess);
                 if excess > 0.0 {
                     positive += 1;
                 }

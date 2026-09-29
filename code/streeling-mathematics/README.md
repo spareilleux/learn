@@ -110,7 +110,7 @@ Every prediction asserted in CI held on the first run:
 - **Triangle inequality (P1):** on the 15,625 triples of the grid, no violation larger than 10^-12 for `manhattan`, `euclidean`, `chebyshev` or `minkowski` with p = 3.
 - **p = 1/2 (P2):** `minkowski` refuses it on the three pairs of the §5 exercise, with "p must be >= 1".
 - **p = ∞ (P3):** `minkowski` returns 1 for (0, 0)-(0, 0) and for (0, 0)-(3, 4), where `chebyshev` returns 0 and 4.
-- **p = 1000 (P4):** `minkowski` returns ∞.
+- **p = 1000 (P4):** `minkowski` returns ∞ for (0, 0)-(3, 4), the pair the module names. No other pair was tested.
 - **The product rule (P5b):** det(AB) equals det A · det B exactly for all 1,000 pairs. 144 pairs have a singular factor, and the largest |det(AB)| is 2,940.
 - **`cosine_distance` (P6):** d(x, z) = 1, against d(x, y) + d(y, z) = 2 − √2.
 - **p = NaN (P7):** the guard lets it through, and `minkowski` returns `Ok(NaN)` on (0, 0)-(3, 4) and on (0, 0)-(0, 0).
