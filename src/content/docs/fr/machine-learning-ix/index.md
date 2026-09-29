@@ -82,7 +82,7 @@ Les leçons 1 à 9 sont écrites. Le reste est le plan, une leçon par famille d
 | 7 | [Réseaux de neurones, et les différences finies comme juge](07-neural-networks/) | `ix-nn` | — |
 | 8 | [Optimisation : descente, momentum, Adam, et recherches sans gradient](08-optimization/) | `ix-optimize`, `ix-math` | — |
 | 9 | [Les autres réducteurs : MDS, ACP à noyau, NMF, LDA, t-SNE](09-other-reducers/) | `ix-unsupervised` | — |
-| 10 | Séquences : chaînes de Markov, modèles de Markov cachés et Viterbi | `ix-graph` | — |
+| 10 | [Séquences : chaînes de Markov, modèles de Markov cachés et Viterbi](10-sequences/) | `ix-graph` | — |
 | 11 | Compter sans compter : filtres de Bloom, HyperLogLog, count-min, coucou | `ix-probabilistic` | — |
 | 12 | Différentiation automatique : le ruban de Wengert | `ix-autograd` | — |
 | 13 | Attention, normalisation de couche et un bloc transformeur | `ix-nn` | — |

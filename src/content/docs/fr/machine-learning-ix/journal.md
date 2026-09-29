@@ -1,6 +1,6 @@
 ---
 title: "Journal"
-description: "Notes d'avancement datées — IX épinglé à 490c395, données et contrôles du cours, dix-neuf constats antérieurs et deux nouveaux constats d'API ou de documentation, carte d'API et points à vérifier."
+description: "Notes d'avancement datées — IX épinglé à 490c395, données et contrôles du cours, dix-neuf constats antérieurs, puis deux de la leçon 9 et trois de la leçon 10, carte d'API et points à vérifier."
 sidebar:
   order: 99
 ---
@@ -19,13 +19,14 @@ sidebar:
 - [x] Leçon 7 : réseaux de neurones
 - [x] Leçon 8 : optimisation
 - [x] Leçon 9 : cinq autres réducteurs, avec une MDS écrite à la main et des contrôles indépendants
+- [x] Leçon 10 : chaînes de Markov et modèles de Markov cachés, à la main, avec IX et avec numpy
 - [x] Annexe : la carte d'API, générée depuis le commit épinglé
-- [ ] Leçons 10 à 21
+- [ ] Leçons 11 à 21
 - [x] Traductions française et espagnole
 
 ## QA
 
-IX est la bibliothèque de quelqu'un d'autre, épinglée à `490c395`. Les leçons précédentes ont recensé dix-neuf constats ; la leçon 9 ajoute deux constats d'API ou de documentation. La première colonne indique ce qu'attendrait un appelant. Aucun constat n'est déclaré comme ticket IX. Plusieurs sont des choix défendables plutôt que des défauts, et la colonne du milieu dit lesquels.
+IX est la bibliothèque de quelqu'un d'autre, épinglée à `490c395`. Les leçons précédentes ont recensé dix-neuf constats ; la leçon 9 ajoute deux constats d'API ou de documentation, et la leçon 10 trois de plus. La première colonne indique ce qu'attendrait un appelant. Aucun constat n'est déclaré comme ticket IX. Plusieurs sont des choix défendables plutôt que des défauts, et la colonne du milieu dit lesquels.
 
 | Attendu | Ce qui se passe | Où | Mesure | État |
 |---|---|---|---|---|
@@ -50,6 +51,9 @@ IX est la bibliothèque de quelqu'un d'autre, épinglée à `490c395`. Les leço
 | `minimize` distingue une exécution divergée d'une exécution à court d'itérations | Il rend le point de départ de l'appelant, étiqueté comme le meilleur vu, avec le même `converged: false` qu'une non-convergence ordinaire | `ix-optimize/gradient.rs` 124-165 | Rosenbrock au pas 0,01 rapporte `best f 24.200000`, la valeur au départ | Reproduit, non déclaré [2026-09-15](#2026-09-15--là-où-ix-diffère-suite) |
 | `TSNE::transform(new_rows)` place ces lignes sur la carte ajustée | L'argument est ignoré : la méthode rend l'embedding `12 × 2` mémorisé même pour une entrée `1 × 1` | [`tsne.rs` 249-253](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-unsupervised/src/tsne.rs#L249-L253) | La sortie est exactement l'embedding d'origine | Reproduit, non déclaré [2026-09-24](#2026-09-24--cinq-réducteurs-trois-entrées) |
 | L'en-tête Barnes-Hut du module t-SNE décrit l'implémentation | `compute_q` et le gradient parcourent toutes les paires de points | [`tsne.rs` 160-178, 205-217](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-unsupervised/src/tsne.rs#L160-L217) | Boucles quadratiques visibles dans le code ; débit non mesuré | Confirmé dans le code, non déclaré [2026-09-24](#2026-09-24--cinq-réducteurs-trois-entrées) |
+| Un temps moyen de premier passage est la moyenne sur toutes les marches | `mean_first_passage` ne moyenne que les marches qui atteignent la cible en `max_steps` pas au plus, et ne signale ni qu'il en a écarté, ni combien | `markov.rs` 94-131 | De haussier à stagnant, 31,43 exactement : 31,650 avec `max_steps = 1000`, 9,836 avec 20, 3,030 avec 5 | Reproduit, non déclaré [2026-09-29](#2026-09-29--chaînes-de-markov-et-un-casino-malhonnête) |
+| `backward` renvoie des log-probabilités, comme le dit son commentaire | Il renvoie β divisé par les facteurs d'échelle du forward : des nombres positifs, pas des logarithmes | `hmm.rs` 196-197 | Tous les coefficients de `backward` sur dix lancers sont positifs | Reproduit, non déclaré [2026-09-29](#2026-09-29--chaînes-de-markov-et-un-casino-malhonnête) |
+| Une observation hors de l'alphabet est une erreur | `new` valide les trois tables, mais pas les observations ; `forward` lit au-delà de la table d'émission | `hmm.rs` 117, 133 | `forward(&[0, 6])` sur un modèle à six symboles provoque une panique | Reproduit, non déclaré [2026-09-29](#2026-09-29--chaînes-de-markov-et-un-casino-malhonnête) |
 
 ## Expériences
 
@@ -175,6 +179,26 @@ Cela mérite d'être consigné à côté des constats, car les leçons ont surto
 - La NMF de rang deux reconstruit la matrice brute des durées avec une erreur quadratique moyenne de `0.505` secondes carrées par cellule et refuse les entrées standardisées négatives. La LDA produit deux axes finis pour trois étiquettes de système d'exploitation, **sans prétention de classification hors échantillon**. t-SNE avec graine donne un arrangement fini de taille `12 × 2`, mais `transform` renvoie exactement le même arrangement avec une entrée sans rapport de taille `1 × 1`.
 - Le contrôle indépendant numpy/scikit-learn 1.8.0 confirme les distances du carré, le résultat des axes des anneaux, la reconstruction NMF finie, les deux axes LDA et l'embedding t-SNE fini. Ce sont des contrôles d'invariants, pas une égalité des facteurs NMF ni des coordonnées t-SNE entre implémentations. Les hypothèses n'ont pas été consignées avant l'exécution : il s'agit de résultats exploratoires, non de confirmations pré-enregistrées. La CI sur trois systèmes pour la leçon 9 reste à faire.
 
+## 2026-09-29 — Chaînes de Markov et un casino malhonnête
+
+- [`l10_sequences.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/examples/l10_sequences.rs) a tourné sous Windows avec le commit IX épinglé ; [`sequence.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/src/sequence.rs) contient les versions écrites à la main. La distribution stationnaire de la chaîne à trois états vaut (0,6250 ; 0,3125 ; 0,0625), par le système linéaire comme par l'itération de puissance d'IX, à `1e-12` près. Les temps moyens exacts de premier passage vers le troisième état valent 31,4286, 28,5714 et 16, soit 1/π₂, comme le dit le lemme de Kac.
+- Avec 20 000 marches, `mean_first_passage` d'IX a donné 31,650 depuis le premier état avec `max_steps = 1000`, 9,836 avec 20 et 3,030 avec 5. Il ne moyenne que les marches arrivées (constat 22).
+- Le générateur xorshift du cours (graine 10) a tiré 1 000 lancers du casino malhonnête.
+  - **Forward :** dans l'espace des probabilités, la récurrence a donné 8,832e-233 à 300 lancers et 0 à 1 000. Le forward écrit à la main en log et la fonction `forward` d'IX ont tous deux donné ln P = −1761,7121.
+  - **Décodage :** le chemin de Viterbi écrit à la main est identique à celui d'IX. Il trouve le vrai dé sur 86,9 % des lancers, avec 6 séquences pipées. Le décodage a posteriori le trouve sur 87,6 %, avec 16 séquences. La vérité en compte 23.
+  - **Un modèle construit exprès :** `map_estimate` renvoie [0, 1], un chemin de probabilité 0, alors que Viterbi renvoie [0, 2], de probabilité 0,4.
+- **Baum–Welch** est parti d'une estimation fausse, pour exactement k = 1 à 10 itérations avec `tol = 0`.
+  - La vraisemblance n'a jamais diminué, de −1775,9589 à −1758,2618.
+  - À partir de la sixième itération, elle dépasse celle des vrais paramètres, alors que les paramètres en restent loin : rester honnête 0,8505, rester pipé 0,8271, P(six | pipé) 0,4060.
+- **Le contrôle croisé numpy 2.4.2** a rejoué le générateur. Il a reproduit :
+  - les réponses exactes de la chaîne ;
+  - les 259 lancers pipés du casino en 23 séquences, avec 239 six ;
+  - ln P = −1761,7121 ;
+  - les taux d'accord et les nombres de séquences des deux décodeurs ;
+  - les deux réponses du modèle à trois états.
+
+  Aucune hypothèse n'a été écrite avant cette exécution : ce sont des comparaisons avec des versions écrites à la main et avec numpy, pas des expériences pré-enregistrées. La CI sur trois systèmes pour la leçon 10 reste à faire.
+
 ## À vérifier
 
 - L'outil `ix_ml_pipeline` de bout en bout : l'ordre de mise à l'échelle du constat 1, l'inférence de tâche du constat 2 sur un fichier CSV, et l'erreur `All rows contain NaN values` pour un fichier avec une colonne texte. Les trois sont lus dans le code, pas exécutés.
@@ -191,3 +215,5 @@ Cela mérite d'être consigné à côté des constats, car les leçons ont surto
 - La carte d'API compte les déclarations `pub`, pas celles qui sont atteignables ; l'écart entre les deux nombres n'est pas mesuré.
 - Les valeurs affichées par un `println!("{:.6}")` direct plutôt que par `fmt_vec` — l'`intercept -0.000000` de la leçon 8 en est une — portent le même risque de zéro signé et ne sont pas normalisées. Celle-là concordait sur les trois systèmes dans l'exécution 35039180659 ; les autres n'ont pas été recensées.
 - Rejouer les sorties numériques de la leçon 9 sur les CI Linux et macOS ; vérifier que l'erreur NMF et l'écart du quatrième axe RBF s'arrondissent de la même façon. Mesurer séparément l'évolution du temps de t-SNE avant d'en chiffrer le coût.
+- Les log-vraisemblances affichées par la leçon 10 et ses paramètres Baum–Welch sur les CI Linux et macOS : ils passent par `ln` et `exp`, dont les derniers bits peuvent différer d'une bibliothèque mathématique à l'autre.
+- Si `baum_welch` d'IX, depuis plusieurs départs et sur des séquences plus longues, retrouve les paramètres du casino ; la leçon 10 n'a fait qu'un départ, sur 1 000 lancers.
