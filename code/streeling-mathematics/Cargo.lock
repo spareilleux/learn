@@ -33,6 +33,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8f42a60cbdf9a97f5d2305f08a87dc4e09308d1276d28c869c684d7777685682"
 
 [[package]]
+name = "ix-bracelet"
+version = "0.1.0"
+source = "git+https://github.com/GuitarAlchemist/ix?rev=e35138b9d4c707d48f802649a7fcb3f7fc94934d#e35138b9d4c707d48f802649a7fcb3f7fc94934d"
+dependencies = [
+ "ix-search",
+ "thiserror",
+]
+
+[[package]]
 name = "ix-math"
 version = "0.1.0"
 source = "git+https://github.com/GuitarAlchemist/ix?rev=e35138b9d4c707d48f802649a7fcb3f7fc94934d#e35138b9d4c707d48f802649a7fcb3f7fc94934d"
@@ -54,6 +63,26 @@ dependencies = [
  "rand",
  "rand_distr",
  "thiserror",
+]
+
+[[package]]
+name = "ix-petri"
+version = "0.1.0"
+source = "git+https://github.com/GuitarAlchemist/ix?rev=e35138b9d4c707d48f802649a7fcb3f7fc94934d#e35138b9d4c707d48f802649a7fcb3f7fc94934d"
+dependencies = [
+ "serde",
+ "serde_json",
+ "thiserror",
+]
+
+[[package]]
+name = "ix-search"
+version = "0.1.0"
+source = "git+https://github.com/GuitarAlchemist/ix?rev=e35138b9d4c707d48f802649a7fcb3f7fc94934d#e35138b9d4c707d48f802649a7fcb3f7fc94934d"
+dependencies = [
+ "ndarray",
+ "rand",
+ "rand_distr",
 ]
 
 [[package]]
@@ -307,7 +336,9 @@ dependencies = [
 name = "streeling-mathematics"
 version = "0.1.0"
 dependencies = [
+ "ix-bracelet",
  "ix-math",
+ "ix-petri",
  "ix-supervised",
  "ix-unsupervised",
  "ndarray",

@@ -125,3 +125,37 @@ Measured without a prediction, and only reported:
 - **Last-bit violations:** `euclidean` exceeds the triangle inequality in 8 of the 15,625 triples, by at most 8.9e-16. These are the "last bits" the module expects where the exact values are equal. The other three distances show none.
 
 Nothing in §7 needs MCP, so every step ran.
+
+## MAT-002 · Counterexamples, witnesses and exhaustive checks
+
+This part uses IX `ix-bracelet`, with `ix-search`, and `ix-petri`, all three pinned to the same commit.
+
+- `preregistration-mat002.md` quotes the predictions of the module's §7 ([Demerzel `a3a07df`](https://github.com/GuitarAlchemist/Demerzel/blob/a3a07df103c1f13a4dec45514fe775bfd4f76e77/state/streeling/courses/mathematics/en/mat-002-counterexamples-and-exhaustive-checks.md)) and of two readings, in §4 and §6. It sets how each is judged and adds one hypothesis of the lab's own, M2-L1. It was committed on its own, before any code of this part existed, with SHA-256 `be884e1a…4e82c7`.
+- `src/mat002.rs` holds the product rules and the checks:
+  - IX's `compose`;
+  - the faults S and F of the §4 and §6 exercises;
+  - Z, without the sign flip;
+  - two controls;
+  - IX's two D12 tests, restated as checks A and B of any product rule;
+  - the Petri net of IX's witness test.
+- `examples/mat002_checks.rs` prints every step. All its values are integers or sets, so it needs no bits digest.
+- `tests/mat002.rs` has one test per prediction, M2-P1 to M2-P6 and M2-L1, and the controls.
+
+All the module's predictions held:
+- **Associativity (P1):** IX's `compose` fails on none of the 13,824 triples.
+- **Negative controls (P2):** rule S fails on 8,640 triples, and rule F on 90. Each set of failures includes the triple found by hand.
+- **What IX's tests detect (P3):** IX's `compose` passes checks A and B. Rule F passes A and fails B. Rule S fails both, and A fails first at e · g = g, for g = (1, 1), with (11, 1).
+- **The Petri witness (P4):** deadlock freedom is `Fails`, the witness is `a_short`, and replaying it with `fire` reaches the reported marking, `end=1`.
+- **The triad (P5):** the 24 images of {0, 4, 7} are distinct. The rotations give the 12 major triads, and the reflections give the 12 minor triads.
+- **No sign flip (P6):** rule Z fails on none of the 13,824 triples. Yet (s · r) · s is (1, 0) under Z, not r⁻¹ = (11, 0), which IX's `compose` returns.
+
+The lab's own hypothesis held too:
+- **M2-L1:** check B catches rule F on exactly 5 of the 5,184 (pair, set) combinations. All five are on the pair ((1, 1), (2, 1)), with the sets {0, 4, 7}, {0, 3, 7}, the C major scale, {0, 1, 4, 6} and {0}. The four sets that rotation by 6 fixes never show the fault. IX's action test catches a one-entry fault through five of its nine sample sets.
+
+A test corrected before it was committed:
+- **The P5 test.** Its first version compared the 12 images by the reflections with the transpositions of {0, 3, 7} index by index, and failed at (0, 1). The pre-registration says the 12 images "are the transpositions", a comparison of sets. (0, 1) sends {0, 4, 7} to {0, 5, 8}, which is {0, 3, 7} transposed by 5. The test now compares sets, as pre-registered. The measured images did not change: they are printed in `expected/`.
+
+Measured without a prediction, and only reported:
+- **Failure counts:** rule S fails on 8,640 triples and rule F on 90. Rules S and Z each fail check B on 1,392 of the 5,184 combinations.
+- **Rule Z and check A:** rule Z also fails check A, first at g · g⁻¹ = e for g = (1, 1), where it returns (2, 0). Check A uses IX's `inverse`, which is the inverse for the true product, not for Z's.
+- **The identity rule:** it fails check A first at e · g = g, for g = (1, 0).

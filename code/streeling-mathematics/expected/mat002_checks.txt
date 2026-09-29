@@ -1,0 +1,55 @@
+MAT-002: ix-bracelet D12 and ix-petri at e35138b9
+
+Steps 1 and 2: associativity over the 13,824 triples, count of failures and the first one
+  IX compose                   |     0 failures | first none
+  rule S (section 4 exercise)  |  8640 failures | first ((0, 0), (0, 0), (1, 1))
+  rule F (section 6 exercise)  |    90 failures | first ((1, 0), (0, 1), (2, 1))
+  rule Z (no sign flip)        |     0 failures | first none
+  hand-found triples among the failures: rule S ((0, 0), (1, 0), (0, 1)) true, rule F ((1, 0), (0, 1), (2, 1)) true
+
+Step 3: IX's two tests restated as checks A (group law) and B (action), on each rule
+  IX compose                   | A passes | B 0 failing (pair, set) of 5184
+  rule S (section 4 exercise)  | A fails first at "e . g = g" for g = (1, 1), got (11, 1) | B 1392 failing (pair, set) of 5184
+  rule F (section 6 exercise)  | A passes | B 5 failing (pair, set) of 5184
+  rule Z (no sign flip)        | A fails first at "g . g^-1 = e" for g = (1, 1), got (2, 0) | B 1392 failing (pair, set) of 5184
+  rule F, every failing (pair, set) of check B:
+    (1, 1) . (2, 1) on {0, 4, 7}
+    (1, 1) . (2, 1) on {0, 3, 7}
+    (1, 1) . (2, 1) on {0, 2, 4, 5, 7, 9, 11}
+    (1, 1) . (2, 1) on {0, 1, 4, 6}
+    (1, 1) . (2, 1) on {0}
+
+Step 4: deadlock freedom Fails: true; witness ["a_short"]; reported "end=1"; replayed "end=1"
+
+Section 6: {0, 4, 7} under the 24 elements: 24 distinct sets
+  (0, 0) -> {0, 4, 7}
+  (1, 0) -> {1, 5, 8}
+  (2, 0) -> {2, 6, 9}
+  (3, 0) -> {3, 7, 10}
+  (4, 0) -> {4, 8, 11}
+  (5, 0) -> {0, 5, 9}
+  (6, 0) -> {1, 6, 10}
+  (7, 0) -> {2, 7, 11}
+  (8, 0) -> {0, 3, 8}
+  (9, 0) -> {1, 4, 9}
+  (10, 0) -> {2, 5, 10}
+  (11, 0) -> {3, 6, 11}
+  (0, 1) -> {0, 5, 8}
+  (1, 1) -> {1, 6, 9}
+  (2, 1) -> {2, 7, 10}
+  (3, 1) -> {3, 8, 11}
+  (4, 1) -> {0, 4, 9}
+  (5, 1) -> {1, 5, 10}
+  (6, 1) -> {2, 6, 11}
+  (7, 1) -> {0, 3, 7}
+  (8, 1) -> {1, 4, 8}
+  (9, 1) -> {2, 5, 9}
+  (10, 1) -> {3, 6, 10}
+  (11, 1) -> {4, 7, 11}
+
+Section 4: (s . r) . s = (1, 0) under rule Z, (11, 0) under IX compose; r^-1 = (11, 0)
+
+Negative controls:
+  rule (i - k, a xor b): 11520 associativity failures (11,520 predicted)
+  rule returning the identity: check A fails first at "e . g = g" for g = (1, 0), got (0, 0)
+exit 0
