@@ -71,6 +71,21 @@ dependencies = [
 ]
 
 [[package]]
+name = "ix-unsupervised"
+version = "0.1.0"
+source = "git+https://github.com/GuitarAlchemist/ix?rev=e35138b9d4c707d48f802649a7fcb3f7fc94934d#e35138b9d4c707d48f802649a7fcb3f7fc94934d"
+dependencies = [
+ "ix-math",
+ "ndarray",
+ "ndarray-rand",
+ "rand",
+ "rand_distr",
+ "serde",
+ "serde_json",
+ "thiserror",
+]
+
+[[package]]
 name = "libc"
 version = "0.2.189"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -294,6 +309,7 @@ version = "0.1.0"
 dependencies = [
  "ix-math",
  "ix-supervised",
+ "ix-unsupervised",
  "ndarray",
 ]
 

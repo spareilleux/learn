@@ -73,3 +73,28 @@ Measured without a prediction, and only reported:
 - **Step 1 at full rank:** the tail of an empty list of singular values prints as `-0.000000e0`. Rust's `f64` sum of nothing is −0.0, and its square root is −0.0.
 
 The `ix_svd` half of step 5 is not run: it goes through the MCP server.
+
+## MAT-005 · Symmetric eigenproblems
+
+This part also uses IX `ix-unsupervised`, pinned to the same commit.
+
+- `preregistration-mat005.md` quotes the predictions of the module's §8 ([Demerzel `8bd026f`](https://github.com/GuitarAlchemist/Demerzel/blob/8bd026f9e48065c482faeae5cacf8e4808fff4cc/state/streeling/courses/mathematics/en/mat-005-symmetric-eigenproblems.md)), of its §7 and §8 exercises and of one §7 reading, and sets how each is judged. It adds one hypothesis of the lab's own, M5-L1, from reading `eigen.rs:82`. It was committed on its own, before any code of this part existed, with SHA-256 `7acea840…90afd28`.
+- `src/mat005.rs` holds the matrices, the six points of §7 and the checks. Residuals and products are plain loops, without IX.
+- `examples/mat005_eigen.rs` prints steps 1 to 4 of §8, the §7 reading, the scale sweep of M5-L1 and the negative controls.
+- `tests/mat005.rs` has one test per prediction, M5-P1 to M5-P5 and M5-L1a to M5-L1c, and the negative controls.
+
+All the module's predictions held on the first run:
+- **Invariants (P1):** on B = [[5, 2], [2, 2]], on IX's 3 × 3 test matrix and on I + J of sizes 3 and 4, the largest entry of A v − λ v, VᵀV − I and V Λ Vᵀ − A is 1.8e-15. The eigenvalues are 6 and 1, 4, 1, 1, and 5, 1, 1, 1, as predicted.
+- **The eigenspace (P2):** for I + J of size 3, uuᵀ + wwᵀ equals I − J/3 within 2.2e-16.
+- **Asymmetric input (P3):** `symmetric_eigen([[1, 2], [3, 4]])` returns `Ok` and exactly (5, 0), the eigenvalues of [[1, 2], [2, 4]]. The vector for 5 is (1, 2)/√5, and ‖A v − 5 v‖ = 1/√5.
+- **PCA's blind spot (P4):** both components are (1, 1)/√2, with the variances 0.4 and 0, the ratios 1 and 0, and a dot product of 1. On the same covariance, `symmetric_eigen` finds 1.2 and 0.4. The components miss 0.75 of the variance.
+- **The identity test (P5):** the eigenvectors of I₄ are I₄ bit for bit; those of I + J of size 4 are not.
+
+The lab's own hypothesis held too:
+- **M5-L1, the absolute stopping test:** for s·B with s = 10^-14 and 10^-13, `symmetric_eigen` returns `Ok`, the diagonal (5s, 2s) bit for bit and V = I. It rotates nothing, and the smaller eigenvalue is off by 100%. From s = 10^-12 to 10^12, the eigenvalues divided by s are within a relative 1.5e-16 of (6, 1).
+- **The check of IX's tests passes on that wrong answer:** at s = 10^-13, the largest entry of A v − λ v is 2.0e-13, within the absolute 1e-9.
+
+Measured without a prediction, and only reported:
+- **The same check fails on right answers at large scale.** From s = 10^7 up, the eigenvalues are right, but the largest entry of A v − λ v exceeds 1e-9. It is 7.5e-9 at 10^7 and 1.8e-4 at 10^12, which is about 3e-17 of 6s. An absolute tolerance is too loose below one scale and too strict above another.
+
+The `ix_eigen` half of step 3 is not run: it goes through the MCP server.
