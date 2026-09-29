@@ -3,7 +3,7 @@
 //! whose main axis it is predicted to miss. Pre-registered in preregistration-mat005.md. Products, norms and
 //! residuals are computed here with plain loops, without IX.
 
-use crate::matmul;
+use crate::{matmul, max_or_nan, min_or_nan};
 use ix_math::eigen::symmetric_eigen;
 use ix_unsupervised::pca::PCA;
 use ix_unsupervised::traits::DimensionReducer;
@@ -66,7 +66,7 @@ pub fn max_eigen_residual(a: &Array2<f64>, e: &Eigen) -> f64 {
     let av = matmul(a, &e.vectors);
     let mut worst: f64 = 0.0;
     for ((i, j), x) in av.indexed_iter() {
-        worst = worst.max((x - e.values[j] * e.vectors[[i, j]]).abs());
+        worst = max_or_nan(worst, (x - e.values[j] * e.vectors[[i, j]]).abs());
     }
     worst
 }
@@ -76,7 +76,7 @@ pub fn max_orthonormality_error(v: &Array2<f64>) -> f64 {
     let vtv = matmul(&v.t().to_owned(), v);
     let mut worst: f64 = 0.0;
     for ((i, j), x) in vtv.indexed_iter() {
-        worst = worst.max((x - if i == j { 1.0 } else { 0.0 }).abs());
+        worst = max_or_nan(worst, (x - if i == j { 1.0 } else { 0.0 }).abs());
     }
     worst
 }
@@ -89,7 +89,7 @@ pub fn max_reconstruction_error(a: &Array2<f64>, e: &Eigen) -> f64 {
     r.iter()
         .zip(a.iter())
         .map(|(x, y)| (x - y).abs())
-        .fold(0.0, f64::max)
+        .fold(0.0, max_or_nan)
 }
 
 /// One matrix of step 1.
@@ -157,7 +157,7 @@ pub fn eigenspace() -> (Vec<usize>, f64) {
         .iter()
         .zip(eigenspace_projector().iter())
         .map(|(x, y)| (x - y).abs())
-        .fold(0.0, f64::max);
+        .fold(0.0, max_or_nan);
     (columns, err)
 }
 
@@ -182,9 +182,9 @@ pub fn distance_up_to_sign(x: &[f64], y: &[f64]) -> f64 {
             x.iter()
                 .zip(y)
                 .map(|(a, b)| (a - s * b).abs())
-                .fold(0.0, f64::max)
+                .fold(0.0, max_or_nan)
         })
-        .fold(f64::INFINITY, f64::min)
+        .fold(f64::INFINITY, min_or_nan)
 }
 
 /// What `PCA::new(2)` returned on the six points.

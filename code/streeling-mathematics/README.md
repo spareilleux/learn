@@ -91,7 +91,7 @@ All the module's predictions held on the first run:
 - **The identity test (P5):** the eigenvectors of I₄ are I₄ bit for bit; those of I + J of size 4 are not.
 
 The lab's own hypothesis held too:
-- **M5-L1, the absolute stopping test:** for s·B with s = 10^-14 and 10^-13, `symmetric_eigen` returns `Ok`, the diagonal (5s, 2s) bit for bit and V = I. It rotates nothing, and the smaller eigenvalue is off by 100%. From s = 10^-12 to 10^12, the eigenvalues divided by s are within 1.5e-16 of (6, 1).
+- **M5-L1, the absolute stopping test:** for s·B with s = 10^-14 and 10^-13, `symmetric_eigen` returns `Ok`, the diagonal (5s, 2s) bit for bit and V = I. It rotates nothing, and the smaller eigenvalue is off by 100%. From s = 10^-12 to 10^12, the eigenvalues divided by s are within a relative 1.5e-16 of (6, 1).
 - **The check of IX's tests passes on that wrong answer:** at s = 10^-13, the largest entry of A v − λ v is 2.0e-13, within the absolute 1e-9.
 
 Measured without a prediction, and only reported:
