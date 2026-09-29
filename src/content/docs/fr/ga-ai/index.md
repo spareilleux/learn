@@ -38,6 +38,7 @@ Trois autres cours de ce site couvrent les bases, et celui-ci renvoie vers eux a
 - suivre un message de chat à travers les hooks, les gardes déterministes, le routeur d'intentions et les agents de GA, et expliquer pourquoi certaines questions fonctionnent sans modèle et d'autres échouent ;
 - évaluer les réponses musicales d'un skill déterministe avec un petit oracle écrit de ma main, et dire où cet oracle s'arrête ;
 - lire un flux d'événements envoyés par le serveur comme le fait le standard HTML, et vérifier que le texte qu'un client reconstruit est bien celui que le serveur a calculé ;
+- exécuter, à côté du code épinglé, un correctif absent du commit épinglé, et tester une garde avec des entrées pour lesquelles elle n'a pas été écrite ;
 - distinguer, dans l'IA de GA, ce qui fonctionne aujourd'hui, ce qui est en construction, et ce qui n'est que prévu.
 
 ## Plan
@@ -50,6 +51,7 @@ Trois autres cours de ce site couvrent les bases, et celui-ci renvoie vers eux a
 | 4 | [Le chatbot et ses agents](04-chatbot-and-agents/) | `ProductionOrchestrator`, `SemanticIntentRouter`, `SemanticRouter`, skills, hooks | services hébergés, replis, tester un hôte dans le processus |
 | 5 | [Le skill d'improvisation](05-improvisation-skill/) | `ImprovisationSkill` face à la théorie accord–gamme, ticket #744 | expressions régulières générées par source, lire `AgentResponse.Data`, écrire un oracle de test |
 | 6 | [La réponse sur le fil](06-answer-on-the-wire/) | `SseChunker`, les deux `WriteSseLineAsync`, les lecteurs de la page et de ga-client, #743 et #746 | événements envoyés par le serveur, `Regex.Split` et assertions de voisinage, porter un client pour le tester |
+| 7 | [Les noms d'accords qu'il ne lit pas](07-chord-names/) | `InvalidChordNames` (#749), les expressions d'accords de `ImprovisationSkill`, ticket #745 | alias extern et CS0436, limites de mot dans les expressions régulières |
 | — | [Journal](journal/) | | |
 
 ## Prérequis

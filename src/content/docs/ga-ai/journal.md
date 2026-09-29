@@ -15,11 +15,12 @@ sidebar:
 - [x] Lesson 4: the chatbot and its agents
 - [x] Lesson 5: the improvisation skill and chord–scale theory
 - [x] Lesson 6: the chatbot's answer on the wire
+- [x] Lesson 7: chord names the chatbot can't read
 - [ ] Run the chatbot with Ollama and capture what the agents answer (dated, outside CI)
 
 ## QA
 
-Findings 1 to 22, from lessons 1 to 4, are numbered in the entry of [2026-09-14](#2026-09-14--differences-found-in-gas-code-commit-a826864), with their upstream status in the entry of [2026-09-24](#2026-09-24--upstream-fixes). This table starts at lesson 5. `ImprovisationSkill.cs` is identical at `a826864` and on GA's `main` at `8cd5042` (2026-09-28), so rows 23 to 28 also describe the deployed skill. Rows 29 to 32, from lesson 6, give their state on `main` in the last column.
+Findings 1 to 22, from lessons 1 to 4, are numbered in the entry of [2026-09-14](#2026-09-14--differences-found-in-gas-code-commit-a826864), with their upstream status in the entry of [2026-09-24](#2026-09-24--upstream-fixes). This table starts at lesson 5. `ImprovisationSkill.cs` is identical at `a826864` and on GA's `main` at `8cd5042` (2026-09-28), so rows 23 to 28 also describe the deployed skill. Rows 29 to 32, from lesson 6, give their state on `main` in the last column. Rows 33 to 38, from lesson 7, also hold on `main` at `f4f4d30`: the files they cite are unchanged there since #749.
 
 | Expected | What happens | Where | Measure | Status |
 |---|---|---|---|---|
@@ -34,6 +35,13 @@ Findings 1 to 22, from lessons 1 to 4, are numbered in the entry of [2026-09-14]
 | 31. Every line of text survives GaApi's stream | `data: {chunk}` with no prefix on the chunk's other lines: a blank line inside a chunk ends the event, and the line after it is lost for every reader | [GaApi `ChatbotController.cs` lines 318-322](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Apps/ga-server/GaApi/Controllers/ChatbotController.cs#L318-L322) | `l6`, pairs table: 1 of 6 lines and 8 line breaks missing, both splits | Reported upstream: [#746](https://github.com/GuitarAlchemist/ga/issues/746), open; unchanged on `main` at `8621c3e`. Latent: no ga-client component reads that stream |
 | 32. ga-client's SSE client keeps every line of an event | `parseSseBuffer` keeps the first `data:` line of each event and trims it, so it loses a line and every line break even from GaChatbot.Api's writer | [`chatService.ts` lines 41-48](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Apps/ga-client/src/services/chatService.ts#L41-L48) | `l6`, pairs table | Client half of #746's acceptance; no caller at `a826864` |
 | The oracle gives a taught scale for every chord | For a borrowed chord, F minor in C, its rule gives F G A♭ B C D E, not a taught scale; the usual answer is F Dorian | `code/ga-ai/GaAi/Lesson5.cs`, `Textbook` | `l5`, C Fm G C | A limit of the course's oracle, not of GA; documented in lesson 5 |
+| 33. A request with lowercase chord names is declined, or the answer says it can't read them | `which arpeggio fits hm q7` passes #749's guard, whose roots are uppercase H to Z, and goes on to the model | [`InvalidChordNames.cs` line 97](https://github.com/GuitarAlchemist/ga/blob/d7efd4142908542d469e0b1a9e6dd3dceba8ecc5/Common/GA.Business.ML/Agents/Skills/InvalidChordNames.cs#L97) | `l7`, row 5 | Not reported upstream |
+| 34. An unknown quality on a valid root is flagged | `Cq7` passes the guard and goes on to the model | [`InvalidChordNames.cs` lines 41-59](https://github.com/GuitarAlchemist/ga/blob/d7efd4142908542d469e0b1a9e6dd3dceba8ecc5/Common/GA.Business.ML/Agents/Skills/InvalidChordNames.cs#L41-L59) | `l7`, row 6 | Out of scope in #749's description; not reported upstream |
+| 35. An invalid chord next to valid ones is named in the answer | `Am F Q7 G` is answered for Am, F and G, and Q7 is dropped without a word; `C and Q7` goes on to the model | [`InvalidChordNames.cs` lines 41-59](https://github.com/GuitarAlchemist/ga/blob/d7efd4142908542d469e0b1a9e6dd3dceba8ecc5/Common/GA.Business.ML/Agents/Skills/InvalidChordNames.cs#L41-L59), [`ExtractChordRun`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/ImprovisationSkill.cs#L196-L210) | `l7`, rows 13 and 14 | By design in #749 ("keeps its route"); not reported upstream |
+| 36. Flat and sharp signs are read | `B♭ E♭ F` is answered as B, E and F: B Ionian for B♭. The skill's expressions allow `[#b]` only; GA's capo and alternate-tuning skills accept `♭` and `♯` | [`ImprovisationSkill.cs` lines 447-462](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/ImprovisationSkill.cs#L447-L462) | `l7`, row 9 | Not reported upstream |
+| 37. A symbol that ends on `#`, `+` or `°` is read whole | `F#` is read as F and `C+` as C: `ChordTokenRegex` ends with `\b`, and no word boundary follows those characters, so the match backtracks to the bare root | [line 461](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/ImprovisationSkill.cs#L461) | `l7`, rows 10 and 11 | Not reported upstream |
+| 38. `Bø7` is read | Left out of the run without a word: the list has `°7` but no `ø7`, and `ø` is a letter, so no boundary separates it from the `7` | [line 461](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/ImprovisationSkill.cs#L461) | `l7`, row 12 | Not reported upstream |
+| The course's recognizer reads every word of a message right | It reads the interjection that opens "Hm, which mode is brightest?" as a broken chord symbol; GA's guard skips it, which is right | `code/ga-ai/GaAi/Lesson7.cs`, `Read` | `l7`, row 15 | A limit of the course's recognizer, not of GA; documented in lesson 7 |
 
 ## 2026-09-14 — Why this course
 
@@ -124,14 +132,24 @@ Most of the 22 differences of 2026-09-14 were fixed upstream by [#689](https://g
 - GaApi's writer (#746) is latent at `a826864`: `git grep` finds no caller of `sendChatMessageStream` or `streamChat` in `Apps/ga-client/src`, and the React chat talks AG-UI, whose JSON events escape line breaks.
 - CI run [36509333842](https://github.com/spareilleux/learn/actions/runs/36509333842), for commit `ed723b9`: green on the three systems, 1 min 47 s on Linux, 1 min 13 s on macOS, 3 min 6 s on Windows, clone and build included.
 
+## 2026-09-28 — Lesson 7: chord names the chatbot can't read
+
+- The request: the next lesson, on #745. By the time it was prepared, pull request #749 had merged (2026-09-28, 23:32 UTC) and closed #745. Moving the course's pin would change every lesson's output, so lesson 7 compiles #749's three files of `GA.Business.ML` next to the pinned assembly instead, in the project `GaFix749`, and reaches their `ImprovisationSkill` through the extern alias `fix749`. `fetch-ga.sh` takes the files out of the blobless clone with `git show`, and fetches the commit when an older clone lacks it.
+- #749 changed two files of `GA.Business.ML`, `InvalidChordNames.cs`, new, and `ImprovisationSkill.cs`; the third file the lesson compiles, `ChordIntentMatching.cs`, is the same at both commits. #749's other changes are in `ProductionOrchestrator.cs` and in tests, so the skill and the guard run as they do on `main`; the orchestrator's call to the guard is read, not run.
+- The first corpus had one Unicode case, `B♭ E♭ F`. Checking an exercise, normalizing `♭` and `♯` still left `F#` read as F: the plain ASCII sharp root is misread too, by the final `\b` of the skill's expression. The corpus gained rows 10 to 12, with `C+` and `Bø7`, the other symbols that end where `\b` can't follow.
+- The solutions of exercises 1 and 2 were checked by editing the course program and #749's file for one run; `fetch-ga.sh` restores the file once `.ga-fix/SHA` is deleted.
+
 ## To verify
 
 - Whether the deployed chatbot routes every prompt of lesson 5 to `ImprovisationSkill`; the tracer of 2026-09-28 saw it do so for Am F C G.
 - The Berklee names of lesson 5, Mixolydian ♭13 for V7/II and Mixolydian ♭9 ♭13 for a dominant in minor, and F Dorian for a borrowed iv, against Nettles and Graf, *The Chord Scale Theory & Jazz Harmony*, which the course hasn't read.
 - The solutions of lesson 5's exercises 2 and 3, not compiled against GA.
+- Whether the public chatbot runs a build that has #749, and what a model answers to lesson 7's rows 5, 6, 13 and 14.
+- The solution of lesson 7's exercise 4, not compiled against GA.
 - How GaChatbot.Api's page shows an error event in a browser: lesson 6 runs a C# port of its reader, not the page. The same for the solution of lesson 6's exercise 3.
 
 ## Open questions
 
 - Which key-inference rule should GA's improvisation skill use? #744 leaves it open: the count of chord tones outside each major scale used by lesson 5, or GA's existing key-identification services.
 - Should GA's streams mark an error as such, with an `event: error` field or a `type` in the JSON, and end with `[DONE]` or its own terminal event? At `a826864`, each client has to guess from the JSON's shape.
+- Should GA's guard also decline lowercase names and unknown qualities, at the price of the false positives of lesson 7's exercise 3, or should a request that mixes valid and invalid chords get an answer that names the invalid ones?

@@ -15,11 +15,12 @@ sidebar:
 - [x] Lección 4: el chatbot y sus agentes
 - [x] Lección 5: la skill de improvisación y la teoría acorde–escala
 - [x] Lección 6: la respuesta del chatbot en el cable
+- [x] Lección 7: nombres de acorde que el chatbot no sabe leer
 - [ ] Ejecutar el chatbot con Ollama y capturar lo que responden los agentes (con fecha, fuera de la CI)
 
 ## QA
 
-Los hallazgos 1 a 22, de las lecciones 1 a 4, están numerados en la entrada del [2026-09-14](#2026-09-14--diferencias-encontradas-en-el-código-de-ga-commit-a826864), y su estado upstream en la del [2026-09-24](#2026-09-24--correcciones-upstream). Esta tabla empieza en la lección 5. `ImprovisationSkill.cs` es idéntico en `a826864` y en el `main` de GA en `8cd5042` (2026-09-28), así que las filas 23 a 28 describen también la skill desplegada. Las filas 29 a 32, de la lección 6, dan su estado en `main` en la última columna.
+Los hallazgos 1 a 22, de las lecciones 1 a 4, están numerados en la entrada del [2026-09-14](#2026-09-14--diferencias-encontradas-en-el-código-de-ga-commit-a826864), y su estado upstream en la del [2026-09-24](#2026-09-24--correcciones-upstream). Esta tabla empieza en la lección 5. `ImprovisationSkill.cs` es idéntico en `a826864` y en el `main` de GA en `8cd5042` (2026-09-28), así que las filas 23 a 28 describen también la skill desplegada. Las filas 29 a 32, de la lección 6, dan su estado en `main` en la última columna. Las filas 33 a 38, de la lección 7, valen también para `main` en `f4f4d30`: los archivos que citan no han cambiado allí desde la #749.
 
 | Esperado | Lo que pasa | Dónde | Medición | Estado |
 |---|---|---|---|---|
@@ -34,6 +35,13 @@ Los hallazgos 1 a 22, de las lecciones 1 a 4, están numerados en la entrada del
 | 31. Todas las líneas de texto sobreviven al flujo de GaApi | `data: {chunk}` sin prefijo en las demás líneas del fragmento: una línea en blanco dentro de un fragmento termina el evento, y la línea siguiente se pierde para todos los lectores | [GaApi `ChatbotController.cs` líneas 318-322](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Apps/ga-server/GaApi/Controllers/ChatbotController.cs#L318-L322) | `l6`, tabla de parejas: se pierden 1 de 6 líneas y 8 saltos de línea, con las dos divisiones | Comunicado upstream: [#746](https://github.com/GuitarAlchemist/ga/issues/746), abierta; sin cambios en `main` en `8621c3e`. Latente: ningún componente de ga-client lee ese flujo |
 | 32. El cliente SSE de ga-client conserva todas las líneas de un evento | `parseSseBuffer` conserva la primera línea `data:` de cada evento y la recorta, así que pierde una línea y todos los saltos de línea incluso con el escritor de GaChatbot.Api | [`chatService.ts` líneas 41-48](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Apps/ga-client/src/services/chatService.ts#L41-L48) | `l6`, tabla de parejas | La mitad cliente de los criterios de aceptación de la #746; ningún llamador en `a826864` |
 | El oráculo da una escala enseñada para cada acorde | Para un acorde prestado, F menor en C, su regla da F G A♭ B C D E, que no es una escala enseñada; la respuesta habitual es F dórico | `code/ga-ai/GaAi/Lesson5.cs`, `Textbook` | `l5`, C Fm G C | Un límite del oráculo del curso, no de GA; documentado en la lección 5 |
+| 33. Una petición con nombres de acorde en minúsculas se rechaza, o la respuesta dice que no sabe leerlos | `which arpeggio fits hm q7` pasa la guarda de la #749, cuyas fundamentales son las mayúsculas de H a Z, y sigue hasta el modelo | [`InvalidChordNames.cs` línea 97](https://github.com/GuitarAlchemist/ga/blob/d7efd4142908542d469e0b1a9e6dd3dceba8ecc5/Common/GA.Business.ML/Agents/Skills/InvalidChordNames.cs#L97) | `l7`, fila 5 | No comunicado upstream |
+| 34. Se señala una cualidad desconocida sobre una fundamental válida | `Cq7` pasa la guarda y sigue hasta el modelo | [`InvalidChordNames.cs` líneas 41-59](https://github.com/GuitarAlchemist/ga/blob/d7efd4142908542d469e0b1a9e6dd3dceba8ecc5/Common/GA.Business.ML/Agents/Skills/InvalidChordNames.cs#L41-L59) | `l7`, fila 6 | Fuera de alcance según la descripción de la #749; no comunicado upstream |
+| 35. Un acorde no válido junto a otros válidos se nombra en la respuesta | `Am F Q7 G` se responde para Am, F y G, y Q7 desaparece sin aviso; `C and Q7` sigue hasta el modelo | [`InvalidChordNames.cs` líneas 41-59](https://github.com/GuitarAlchemist/ga/blob/d7efd4142908542d469e0b1a9e6dd3dceba8ecc5/Common/GA.Business.ML/Agents/Skills/InvalidChordNames.cs#L41-L59), [`ExtractChordRun`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/ImprovisationSkill.cs#L196-L210) | `l7`, filas 13 y 14 | Por diseño en la #749 ("keeps its route", conserva su ruta); no comunicado upstream |
+| 36. Se leen los signos de bemol y de sostenido | `B♭ E♭ F` se responde como B, E y F: B jónico para B♭. Las expresiones de la skill solo admiten `[#b]`; las skills de cejilla y de afinaciones alternativas de GA aceptan `♭` y `♯` | [`ImprovisationSkill.cs` líneas 447-462](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/ImprovisationSkill.cs#L447-L462) | `l7`, fila 9 | No comunicado upstream |
+| 37. Un cifrado que termina en `#`, `+` o `°` se lee entero | `F#` se lee como F y `C+` como C: `ChordTokenRegex` termina en `\b`, y tras esos caracteres no hay límite de palabra, así que la coincidencia retrocede hasta la fundamental sola | [línea 461](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/ImprovisationSkill.cs#L461) | `l7`, filas 10 y 11 | No comunicado upstream |
+| 38. Se lee `Bø7` | Queda fuera de la serie sin aviso: la lista tiene `°7` pero no `ø7`, y `ø` es una letra, así que ningún límite lo separa del `7` | [línea 461](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/ImprovisationSkill.cs#L461) | `l7`, fila 12 | No comunicado upstream |
+| El reconocedor del curso lee bien todas las palabras de un mensaje | Lee la interjección con la que empieza "Hm, which mode is brightest?" como un cifrado de acorde roto; la guarda de GA se la salta, que es lo correcto | `code/ga-ai/GaAi/Lesson7.cs`, `Read` | `l7`, fila 15 | Un límite del reconocedor del curso, no de GA; documentado en la lección 7 |
 
 ## 2026-09-14 — Por qué este curso
 
@@ -124,14 +132,24 @@ La mayoría de las 22 diferencias del 2026-09-14 se corrigieron upstream en [#68
 - El escritor de GaApi (#746) está latente en `a826864`: `git grep` no encuentra ningún llamador de `sendChatMessageStream` ni de `streamChat` en `Apps/ga-client/src`, y el chat de React habla AG-UI, cuyos eventos JSON escapan los saltos de línea.
 - Ejecución de CI [36509333842](https://github.com/spareilleux/learn/actions/runs/36509333842), para el commit `ed723b9`: verde en los tres sistemas, 1 min 47 s en Linux, 1 min 13 s en macOS, 3 min 6 s en Windows, con el clon y la compilación incluidos.
 
+## 2026-09-28 — Lección 7: nombres de acorde que el chatbot no sabe leer
+
+- La petición: la lección siguiente, sobre la #745. Cuando se preparó, la pull request #749 ya se había fusionado (2026-09-28, 23:32 UTC) y había cerrado la #745. Cambiar el commit fijado del curso cambiaría la salida de todas las lecciones, así que la lección 7 compila en su lugar los tres archivos de `GA.Business.ML` de la #749 junto al ensamblado fijado, en el proyecto `GaFix749`, y llega a su `ImprovisationSkill` mediante el extern alias `fix749`. `fetch-ga.sh` extrae los archivos del clon sin blobs con `git show`, y descarga el commit cuando un clon más antiguo no lo tiene.
+- La #749 cambió dos archivos de `GA.Business.ML`: `InvalidChordNames.cs`, nuevo, e `ImprovisationSkill.cs`; el tercer archivo que compila la lección, `ChordIntentMatching.cs`, es igual en los dos commits. Los demás cambios de la #749 están en `ProductionOrchestrator.cs` y en tests, así que la skill y la guarda se ejecutan como en `main`; la llamada del orquestador a la guarda se ha leído, no ejecutado.
+- El primer corpus tenía un solo caso Unicode, `B♭ E♭ F`. Al comprobar un ejercicio, normalizar `♭` y `♯` seguía dejando `F#` leído como F: la fundamental con sostenido en ASCII puro también se lee mal, por el `\b` final de la expresión de la skill. El corpus ganó las filas 10 a 12, con `C+` y `Bø7`, los otros cifrados que terminan donde no puede haber un `\b`.
+- Las soluciones de los ejercicios 1 y 2 se comprobaron editando el programa del curso y el archivo de la #749 para una sola ejecución; `fetch-ga.sh` restaura el archivo una vez borrado `.ga-fix/SHA`.
+
 ## Por verificar
 
 - Si el chatbot desplegado envía cada prompt de la lección 5 a `ImprovisationSkill`; el tracer del 2026-09-28 lo vio hacerlo con Am F C G.
 - Los nombres de Berklee de la lección 5, mixolidio ♭13 para V7/II y mixolidio ♭9 ♭13 para una dominante en menor, y F dórico para un iv prestado, contra Nettles y Graf, *The Chord Scale Theory & Jazz Harmony*, que el curso no ha leído.
 - Las soluciones de los ejercicios 2 y 3 de la lección 5, no compiladas contra GA.
+- Si el chatbot público ejecuta una compilación que incluye la #749, y qué responde un modelo a las filas 5, 6, 13 y 14 de la lección 7.
+- La solución del ejercicio 4 de la lección 7, no compilada contra GA.
 - Cómo muestra un evento de error la página de GaChatbot.Api en un navegador: la lección 6 ejecuta una versión portada a C# de su lector, no la página. Lo mismo vale para la solución del ejercicio 3 de la lección 6.
 
 ## Preguntas abiertas
 
 - ¿Qué regla de inferencia de la tonalidad debería seguir la skill de improvisación de GA? #744 la deja abierta: el recuento de notas del acorde fuera de cada escala mayor, que usa la lección 5, o los servicios de identificación de tonalidad que ya existen en GA.
 - ¿Deberían los flujos de GA marcar un error como tal, con un campo `event: error` o un `type` en el JSON, y terminar con `[DONE]` o con su propio evento final? En `a826864`, cada cliente tiene que deducirlo de la forma del JSON.
+- ¿Debería la guarda de GA rechazar también los nombres en minúsculas y las cualidades desconocidas, a costa de los falsos positivos del ejercicio 3 de la lección 7, o debería una petición que mezcla acordes válidos y no válidos recibir una respuesta que nombre los no válidos?

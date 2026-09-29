@@ -6,7 +6,7 @@ cd "$(dirname "$0")"
 bash fetch-ga.sh
 dotnet build GaAi -c Release -m:2 --nologo -v quiet
 status=0
-for lesson in l1 l2 l3 l4 l5 l6; do
+for lesson in l1 l2 l3 l4 l5 l6 l7; do
   if dotnet run --project GaAi -c Release --no-build -- "$lesson" | diff --strip-trailing-cr "expected/$lesson.txt" -; then
     echo "ok   $lesson"
   else

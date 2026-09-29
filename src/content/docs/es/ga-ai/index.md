@@ -38,6 +38,7 @@ Otros tres cursos de este sitio cubren el trasfondo, y este enlaza con ellos en 
 - seguir un mensaje de chat a través de los hooks, las guardas deterministas, el enrutador de intenciones y los agentes de GA, y explicar por qué algunas preguntas funcionan sin modelo y otras fallan;
 - calificar las respuestas musicales de una skill determinista con un pequeño oráculo propio, y decir hasta dónde llega ese oráculo;
 - leer un flujo de eventos enviados por el servidor como lo hace el estándar HTML, y comprobar que el texto que reconstruye un cliente es el texto que calculó el servidor;
+- ejecutar junto al código fijado una corrección que no está en el commit fijado, y poner a prueba una guarda con entradas para las que no se escribió;
 - distinguir, en la IA de GA, lo que funciona hoy, lo que se está construyendo y lo que solo está planeado.
 
 ## Plan
@@ -50,6 +51,7 @@ Otros tres cursos de este sitio cubren el trasfondo, y este enlaza con ellos en 
 | 4 | [El chatbot y sus agentes](04-chatbot-and-agents/) | `ProductionOrchestrator`, `SemanticIntentRouter`, `SemanticRouter`, skills, hooks | servicios hospedados, respaldos, probar un host dentro del proceso |
 | 5 | [La skill de improvisación](05-improvisation-skill/) | `ImprovisationSkill` frente a la teoría acorde–escala, issue #744 | expresiones regulares con generador de código fuente, leer `AgentResponse.Data`, escribir un oráculo de pruebas |
 | 6 | [La respuesta en el cable](06-answer-on-the-wire/) | `SseChunker`, los dos `WriteSseLineAsync`, los lectores de la página y de ga-client, #743 y #746 | eventos enviados por el servidor, `Regex.Split` y aserciones de búsqueda (lookarounds), portar un cliente para probarlo |
+| 7 | [Nombres de acorde que no sabe leer](07-chord-names/) | `InvalidChordNames` (#749), las expresiones de acordes de `ImprovisationSkill`, issue #745 | extern alias y CS0436, límites de palabra en expresiones regulares |
 | — | [Diario](journal/) | | |
 
 ## Requisitos previos
