@@ -1,6 +1,6 @@
 ---
 title: "Lesson 6: The chatbot's answer on the wire"
-description: Guitar Alchemist's chat answers streamed as server-sent events from the real host, read back with a reader written from the HTML standard, and checked against the answer GA computed — the failure case the page shows as an answer, the sentence splitter that collapsed markdown lists until GA #743, and the GaApi writer of issue #746 that loses whole lines.
+description: "Guitar Alchemist's chat answers streamed as server-sent events from the real host, read back with a reader written from the HTML standard, and checked against the answer GA computed — the failure case the page shows as an answer, the sentence splitter that collapsed markdown lists until GA #743, and the GaApi writer of issue #746 that loses whole lines."
 sidebar:
   label: 6. The answer on the wire
   order: 6

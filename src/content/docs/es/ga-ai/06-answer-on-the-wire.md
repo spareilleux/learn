@@ -1,6 +1,6 @@
 ---
 title: "Lección 6: La respuesta del chatbot en el cable"
-description: Las respuestas del chat de Guitar Alchemist, transmitidas desde el host real como eventos enviados por el servidor (server-sent events), leídas de nuevo con un lector escrito a partir del estándar HTML y comparadas con la respuesta que calculó GA — el caso de fallo que la página muestra como una respuesta, el divisor de frases que fundía las listas markdown en una sola viñeta hasta la #743 de GA, y el escritor de GaApi de la issue #746, que pierde líneas enteras.
+description: "Las respuestas del chat de Guitar Alchemist, transmitidas desde el host real como eventos enviados por el servidor (server-sent events), leídas de nuevo con un lector escrito a partir del estándar HTML y comparadas con la respuesta que calculó GA — el caso de fallo que la página muestra como una respuesta, el divisor de frases que fundía las listas markdown en una sola viñeta hasta la #743 de GA, y el escritor de GaApi de la issue #746, que pierde líneas enteras."
 sidebar:
   label: 6. La respuesta en el cable
   order: 6

@@ -1,6 +1,6 @@
 ---
 title: "Leçon 6 : la réponse du chatbot sur le fil"
-description: Les réponses du chat de Guitar Alchemist diffusées en événements envoyés par le serveur depuis le vrai hôte, relues avec un lecteur écrit d'après le standard HTML et comparées à la réponse calculée par GA — l'échec que la page affiche comme une réponse, le découpage en phrases qui écrasait les listes markdown jusqu'à GA #743, et l'émetteur de GaApi du ticket #746, qui perd des lignes entières.
+description: "Les réponses du chat de Guitar Alchemist diffusées en événements envoyés par le serveur depuis le vrai hôte, relues avec un lecteur écrit d'après le standard HTML et comparées à la réponse calculée par GA — l'échec que la page affiche comme une réponse, le découpage en phrases qui écrasait les listes markdown jusqu'à GA #743, et l'émetteur de GaApi du ticket #746, qui perd des lignes entières."
 sidebar:
   label: 6. La réponse sur le fil
   order: 6
