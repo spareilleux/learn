@@ -1,0 +1,36 @@
+== Bloom filter: new(10000, 0.01)
+  hand sizing: m = 95851 bits, k = 7 hashes
+  10000 inserted, IX m = 95851, k = 7: 0 false negatives, 1041 false positives in 100000 queries, rate 0.01041; theory 0.01004; estimated_fp_rate 0.01001
+  20000 inserted, IX m = 95851, k = 7: 0 false negatives, 15616 false positives in 100000 queries, rate 0.15616; theory 0.15745; estimated_fp_rate 0.15898
+
+== HyperLogLog, p = 10 (1024 registers): 100 disjoint sets of 100000 integers
+  predicted standard error 1.04 / sqrt(1024) = 0.0325
+  IX, DefaultHasher: RMS relative error 0.0354, mean 0.0028, worst 0.1038
+  hand, splitmix64 : RMS relative error 0.0340, mean 0.0076, worst 0.1016
+
+== HyperLogLog across cardinalities, p = 10, 100 sets each (not preregistered)
+  n =    500: IX mean  0.0001, RMS 0.0225; hand mean -0.0011, RMS 0.0235
+  n =   2000: IX mean  0.0020, RMS 0.0304; hand mean  0.0034, RMS 0.0289
+  n =   2560: IX mean  0.0244, RMS 0.0402; hand mean  0.0234, RMS 0.0421
+  n =   3000: IX mean  0.0118, RMS 0.0280; hand mean  0.0148, RMS 0.0289
+  n =   4000: IX mean  0.0055, RMS 0.0257; hand mean  0.0052, RMS 0.0334
+  n =   6000: IX mean  0.0031, RMS 0.0271; hand mean  0.0010, RMS 0.0321
+  n =  10000: IX mean  0.0050, RMS 0.0296; hand mean  0.0026, RMS 0.0341
+  n = 100000: IX mean  0.0028, RMS 0.0354; hand mean  0.0076, RMS 0.0340
+  HyperLogLog::standard(): memory_bytes 16384, error_rate 0.0081
+
+== count-min sketch: new(100, 3), 10000 integers added 10 times each
+  N = 100000; underestimates 0; mean overcount 911.3; max overcount 1180
+  share above N/width = 1000: 0.0992 (binomial model 0.1058; the doc allows 0.0498)
+  share above e N/width = 2718: 0.0000
+  with_error(0.01, 0.05): width 272, depth 3
+
+== cuckoo filter: new(4096), integers 0, 1, 2, ... until an insert fails
+  4096 slots; first failure inserting 3730, load factor 0.9106
+  earlier integers no longer found: 1 [2498]; the failed integer found: true
+  false positives on 100000 integers never inserted: 14, rate 0.00014
+  a second filter on the same sequence: same failure true, contains disagreements 0
+
+== cuckoo filter: the same integer inserted again and again
+  insert(42) ten times: [true, true, true, true, true, true, true, true, false, false]; len 8
+exit 0

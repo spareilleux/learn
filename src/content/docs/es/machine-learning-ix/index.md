@@ -83,7 +83,7 @@ Las lecciones 1 a 9 están escritas. El resto es el plan, una lección por famil
 | 8 | [Optimización: descenso, momento, Adam y búsquedas sin gradiente](08-optimization/) | `ix-optimize`, `ix-math` | — |
 | 9 | [Los demás reductores: MDS, ACP con núcleo, NMF, LDA, t-SNE](09-other-reducers/) | `ix-unsupervised` | — |
 | 10 | [Secuencias: cadenas de Markov, modelos ocultos de Markov y Viterbi](10-sequences/) | `ix-graph` | — |
-| 11 | Contar sin contar: filtros de Bloom, HyperLogLog, count-min, cuco | `ix-probabilistic` | — |
+| 11 | [Contar sin contar: filtros de Bloom, HyperLogLog, count-min, cuco](11-probabilistic/) | `ix-probabilistic` | — |
 | 12 | Diferenciación automática: la cinta de Wengert | `ix-autograd` | — |
 | 13 | Atención, normalización de capa y un bloque transformer | `ix-nn` | — |
 | 14 | Aprendizaje por refuerzo: bandidos y Q-learning | `ix-rl` | — |

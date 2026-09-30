@@ -1,6 +1,6 @@
 ---
 title: "Diario"
-description: "Notas de avance fechadas — IX fijado en 490c395, datos y comprobaciones del curso, diecinueve hallazgos anteriores, luego dos de la lección 9 y tres de la lección 10, mapa de API y puntos por verificar."
+description: "Notas de avance fechadas — IX fijado en 490c395, datos y comprobaciones del curso, diecinueve hallazgos anteriores, luego dos de la lección 9, tres de la lección 10 y cuatro de la lección 11, mapa de API y puntos por verificar."
 sidebar:
   order: 99
 ---
@@ -20,13 +20,14 @@ sidebar:
 - [x] Lección 8: optimización
 - [x] Lección 9: cinco reductores más, con MDS escrita a mano y comprobaciones independientes
 - [x] Lección 10: cadenas de Markov y modelos ocultos de Markov, a mano, con IX y con numpy
+- [x] Lección 11: estructuras probabilísticas, siete predicciones escritas antes de la primera ejecución
 - [x] Apéndice: el mapa de API, generado desde el commit fijado
-- [ ] Lecciones 11 a 21
+- [ ] Lecciones 12 a 21
 - [x] Traducciones al francés y al español
 
 ## QA
 
-IX es la biblioteca de otros, fijada en `490c395`. Las lecciones anteriores registraron diecinueve hallazgos; la lección 9 añade dos hallazgos de API o documentación, y la lección 10 tres más. La primera columna indica lo que esperaría quien llama. Ninguno se ha reportado como incidencia de IX. Varias son decisiones defendibles más que defectos, y la columna del medio dice cuáles.
+IX es la biblioteca de otros, fijada en `490c395`. Las lecciones anteriores registraron diecinueve hallazgos; la lección 9 añade dos hallazgos de API o documentación, la lección 10 tres más, y la lección 11 cuatro más. La primera columna indica lo que esperaría quien llama. Ninguno se ha reportado como incidencia de IX. Varias son decisiones defendibles más que defectos, y la columna del medio dice cuáles.
 
 | Esperado | Lo que pasa | Dónde | Medición | Estado |
 |---|---|---|---|---|
@@ -54,10 +55,14 @@ IX es la biblioteca de otros, fijada en `490c395`. Las lecciones anteriores regi
 | Un tiempo medio de primer paso es la media sobre todos los recorridos | `mean_first_passage` solo promedia los recorridos que alcanzan el objetivo en como mucho `max_steps` pasos, y no indica ni que descartó alguno ni cuántos | [`markov.rs` 94-131](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-graph/src/markov.rs#L94-L131) | De alcista a estancado, 31,43 exacto: 31,650 con `max_steps = 1000`, 9,836 con 20, 3,030 con 5 | Reproducido, no reportado [2026-09-29](#2026-09-29--cadenas-de-markov-y-un-casino-deshonesto) |
 | `backward` devuelve log-probabilidades, como dice su comentario | Devuelve β dividido por los factores de escala del forward: números positivos, no logaritmos | [`hmm.rs` 196-197](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-graph/src/hmm.rs#L196-L197) | Todos los coeficientes de `backward` sobre diez tiradas son positivos | Reproducido, no reportado [2026-09-29](#2026-09-29--cadenas-de-markov-y-un-casino-deshonesto) |
 | Una observación fuera del alfabeto es un error | `new` valida las tres tablas, pero no las observaciones; `forward` lee más allá de la tabla de emisión | [`hmm.rs` 117, 133](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-graph/src/hmm.rs#L117-L133) | `forward(&[0, 6])` en un modelo de seis símbolos provoca un pánico | Reproducido, no reportado [2026-09-29](#2026-09-29--cadenas-de-markov-y-un-casino-deshonesto) |
+| El comentario de `CountMinSketch::new` da la cota de error: como mucho total_count / width con probabilidad de al menos 1 − (1/e)^depth | Ese es el sobreconteo esperado de una fila, superado aproximadamente la mitad de las veces. La cota de Cormode y Muthukrishnan es e · total_count / width, la que usa `with_error` | [`count_min.rs` 22-23](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-probabilistic/src/count_min.rs#L22-L23) | `new(100, 3)`, 10 000 elementos × 10: 0,0992 de los elementos superan 1000, donde se permite 0,0498; ninguno supera 2718 | Reproducido, no reportado [2026-09-29](#2026-09-29--lección-11-medida) |
+| Un `CuckooFilter::insert` que falla deja el filtro como estaba: "Returns false if the filter is full" | Conserva la nueva huella y pierde la desplazada en el último desplazamiento, como el algoritmo 1 de Fan et al.; un elemento insertado antes parece entonces ausente. La implementación de referencia de los autores guarda esa huella en una caché de víctima; ni el comentario ni `CONTRACTS.md` mencionan la pérdida | [`cuckoo.rs` 36, 54-75](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-probabilistic/src/cuckoo.rs#L36-L75) | `new(4096)`: la inserción de 3730 falla con una carga de 0,9106; después 3730 se encuentra y 2498 ya no | Reproducido, no reportado [2026-09-29](#2026-09-29--lección-11-medida) |
+| `CONTRACTS.md` describe `CuckooFilter` | Dice que las víctimas se eligen con `rand::random()`, así que las ejecuciones no son deterministas, y nombra un `CuckooFilter::delete`. El código elige `fingerprint % len`, el crate no depende de `rand` y el método se llama `remove` | [`CONTRACTS.md` 17, 32](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-probabilistic/CONTRACTS.md?plain=1#L17-L32), [`cuckoo.rs` 60](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-probabilistic/src/cuckoo.rs#L60) | Dos filtros alimentados con la misma secuencia fallan en el mismo insert y discrepan en 0 de 100 000 sondeos | Reproducido, no reportado [2026-09-29](#2026-09-29--lección-11-medida) |
+| La cabecera del módulo `hyperloglog` indica su memoria | "~1.6KB memory"; `standard()` (p = 14) ocupa 16 384 bytes, y ninguna precisión ocupa 1,6 KB | [`hyperloglog.rs` 1, 34-37](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-probabilistic/src/hyperloglog.rs#L1-L37) | `memory_bytes()` = 16384 | Reproducido, no reportado [2026-09-29](#2026-09-29--lección-11-medida) |
 
 ## Experimentos
 
-Un curso que encuentra divergencias debe mostrar qué comprobó y halló correcto. Las seis comprobaciones iniciales siguen abajo; la quinta falló y produjo los hallazgos 15 y 16. La lección 9 añade dos comprobaciones geométricas exploratorias, no prerregistradas.
+Un curso que encuentra divergencias debe mostrar qué comprobó y halló correcto. Las seis comprobaciones iniciales siguen abajo; la quinta falló y produjo los hallazgos 15 y 16. La lección 9 añade dos comprobaciones geométricas exploratorias, no prerregistradas. La lección 11 añade siete predicciones escritas antes de su primera ejecución, todas confirmadas, y una comprobación exploratoria.
 
 | Pregunta | Hipótesis | Resultado | Veredicto | Dónde |
 |---|---|---|---|---|
@@ -69,6 +74,14 @@ Un curso que encuentra divergencias debe mostrar qué comprobó y halló correct
 | ¿Cambia la suma en coma flotante en macOS-ARM alguna afirmación de las lecciones? | Escrita de antemano: solo debe diferir el signo de un valor que ya era cero | `-0.0000` frente a `0.0000` en dos esquinas, todos los demás valores idénticos a cuatro decimales (ejecución 35039180659) | Confirmada | [2026-09-16](#2026-09-16--un-cero-negativo-en-macos) |
 | ¿Conserva la MDS clásica escrita a mano las mismas distancias del cuadrado que IX? | Ambas deberían recuperar las seis distancias, independientemente de la orientación de los ejes | Error máximo menor de `1e-10` en ambas; numpy coincide | Confirmada, exploratoria | [2026-09-24](#2026-09-24--cinco-reductores-tres-entradas), [`l09_reducers.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/examples/l09_reducers.rs) |
 | ¿Separa el primer eje de PCA con núcleo RBF dos anillos concéntricos? | La similitud no lineal debería poner primero el contraste radial | IX y scikit-learn lo sitúan en el eje 4; separación de `0.5798` en IX, cero en el eje 1 | Refutada, exploratoria | [2026-09-24](#2026-09-24--cinco-reductores-tres-entradas), [`l09_reducers.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/examples/l09_reducers.rs) |
+| ¿Cumple el filtro de Bloom de IX su tasa de falsos positivos a su capacidad? | Escrita de antemano (P1): en [0,00909; 0,01098], alrededor de (1 − e^(−kn/m))^k = 0,01004 | 0,01041 sobre 100 000 enteros nunca insertados; ningún falso negativo | Confirmada | [predicción](#2026-09-29--lección-11-predicha-antes-de-medir), [resultado](#2026-09-29--lección-11-medida), [`sketch.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/src/sketch.rs) |
+| ¿Y al doble de su capacidad? | Escrita de antemano (P2): en [0,1540; 0,1609], alrededor de 0,15745 | 0,15616 | Confirmada | [predicción](#2026-09-29--lección-11-predicha-antes-de-medir), [resultado](#2026-09-29--lección-11-medida), [`sketch.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/src/sketch.rs) |
+| ¿Coincide el error de HyperLogLog con 1,04/√m, en IX y a mano? | Escrita de antemano (P3): con p = 10 y 100 conjuntos de 100 000, error cuadrático medio en [0,0256; 0,0394] y media a ±0,00975 | IX 0,0354 y 0,0028; a mano 0,0340 y 0,0076 | Confirmada | [predicción](#2026-09-29--lección-11-predicha-antes-de-medir), [resultado](#2026-09-29--lección-11-medida), [`sketch.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/src/sketch.rs) |
+| ¿Se cumple la cota documentada del count-min? | Escrita de antemano (P4): más de 0,0498 de los elementos por encima de N/width, en [0,07; 0,20]; menos de 0,0498 por encima de e·N/width | 0,0992 y 0,0000 | Confirmada: la cota documentada falla (hallazgo 25) | [predicción](#2026-09-29--lección-11-predicha-antes-de-medir), [resultado](#2026-09-29--lección-11-medida), [`sketch.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/src/sketch.rs) |
+| ¿Con qué carga rechaza un filtro cuco una inserción? | Escrita de antemano (P5): al menos 0,90 de los huecos | 0,9106, por debajo del 95 % de Fan et al. | Confirmada | [predicción](#2026-09-29--lección-11-predicha-antes-de-medir), [resultado](#2026-09-29--lección-11-medida), [`sketch.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/src/sketch.rs) |
+| ¿Pierde un elemento insertado antes una inserción cuco que falla? | Escrita de antemano (P6), leyendo `insert`: al menos uno | Uno, 2498 (hallazgo 26) | Confirmada | [predicción](#2026-09-29--lección-11-predicha-antes-de-medir), [resultado](#2026-09-29--lección-11-medida), [`sketch.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/src/sketch.rs) |
+| ¿Es determinista el filtro cuco, en contra de `CONTRACTS.md`? | Escrita de antemano (P7): el mismo fallo y las mismas respuestas | Mismo fallo; 0 de 100 000 respuestas difieren (hallazgo 27) | Confirmada | [predicción](#2026-09-29--lección-11-predicha-antes-de-medir), [resultado](#2026-09-29--lección-11-medida), [`sketch.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/src/sketch.rs) |
+| ¿Dónde es menos preciso HyperLogLog? | No escrita de antemano | Error medio +0,0244 (IX) y +0,0234 (a mano) en n = 2560 = 2,5 m, unos siete errores estándar; a ±0,008 en las demás cardinalidades probadas, salvo n = 3000 | Exploratoria | [resultado](#2026-09-29--lección-11-medida), [`sketch.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/src/sketch.rs) |
 
 ## 2026-09-14 — IX, fijado
 
@@ -215,6 +228,21 @@ Escrito antes de que ningún código de la lección 11 se ejecutara contra el cr
 
 Fuentes de las constantes: [Bloom (1970)](https://doi.org/10.1145/362686.362692), [Flajolet et al. (2007)](https://dmtcs.episciences.org/3545), [Cormode y Muthukrishnan (2005)](https://doi.org/10.1016/j.jalgor.2003.12.001), [Fan et al. (2014)](https://doi.org/10.1145/2674005.2674994).
 
+## 2026-09-29 — Lección 11, medida
+
+- **Orden de los hechos:** la entrada de predicciones de arriba se commiteó sola, como `6b220c5`, a las 23:10 hora local (UTC−4), antes de que existiera ningún código de la lección 11. [`l11_sketches.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/examples/l11_sketches.rs) se ejecutó por primera vez a las 23:13 en Windows, con el commit de IX fijado. [`sketch.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/src/sketch.rs) contiene los experimentos, y una prueba por predicción comprueba el intervalo escrito de antemano. Las siete predicciones se cumplieron en esa primera ejecución, y no se cambió ningún intervalo.
+- **Bloom:** 1041 falsos positivos de 100 000 a la capacidad (0,01041; teoría 0,01004), y 15 616 al doble de la capacidad (0,15616; teoría 0,15745). Ningún falso negativo. `new(10_000, 0.01)` de IX coincide con el dimensionamiento a mano, m = 95 851 y k = 7.
+- **HyperLogLog, p = 10:** errores relativos cuadráticos medios 0,0354 (IX) y 0,0340 (a mano, splitmix64), medias 0,0028 y 0,0076, frente a 1,04/√1024 = 0,0325.
+- **Count-min, `new(100, 3)`:** 0,0992 de los elementos superan N/width = 1000, la cota que su comentario da con probabilidad 0,9502. Ninguno supera e·N/width = 2718 (hallazgo 25).
+- **Cuco, `new(4096)`:** la primera inserción que falla es la de 3730, con una carga de 0,9106. Después, 2498 ya no se encuentra, mientras que 3730 sí (hallazgo 26). Un segundo filtro alimentado con la misma secuencia falla en el mismo insert y da las mismas respuestas en 100 000 sondeos, en contra del `rand::random()` de `CONTRACTS.md` (hallazgo 27).
+- **No prerregistrado:** la tabla de cardinalidades.
+  - La primera ejecución usaba 20 conjuntos por punto y ya mostraba un pico en n = 2560 (errores medios +0,0265 para IX, +0,0356 a mano).
+  - La lección imprime 100 conjuntos por punto. Ahí el pico es de +0,0244 y +0,0234, unos siete errores estándar, en el paso del conteo lineal al estimador bruto.
+  - `HyperLogLog::standard()` indica 16 384 bytes, frente a los "~1.6KB" de la cabecera del módulo (hallazgo 28).
+- **La comprobación cruzada con numpy 2.4.2** recalcula m, k, las dos tasas teóricas y el modelo binomial (0,1058). También reproduce el HyperLogLog escrito a mano y obtiene el mismo error cuadrático medio, la misma media y el mismo peor error, y las mismas medias y errores en cada cardinalidad. No reproduce el `DefaultHasher` de IX.
+
+  El CI en tres sistemas para la lección 11 sigue pendiente.
+
 ## Por verificar
 
 - La herramienta `ix_ml_pipeline` de principio a fin: el orden del escalado del hallazgo 1, la inferencia de tarea del hallazgo 2 sobre un archivo CSV, y el error `All rows contain NaN values` para un archivo con una columna de texto. Los tres están leídos en el código, no ejecutados.
@@ -232,3 +260,6 @@ Fuentes de las constantes: [Bloom (1970)](https://doi.org/10.1145/362686.362692)
 - Los valores impresos por un `println!("{:.6}")` directo y no a través de `fmt_vec` — el `intercept -0.000000` de la lección 8 es uno — llevan el mismo riesgo de cero con signo y no están normalizados. Ese coincidió en los tres sistemas en la ejecución 35039180659; los demás no se han enumerado.
 - Repetir las salidas numéricas de la lección 9 en CI Linux y macOS; comprobar si el error NMF y la separación del cuarto eje RBF se redondean igual. Medir por separado cómo escala el tiempo de t-SNE antes de asignarle un coste.
 - Si `baum_welch` de IX, desde varios puntos de partida y con secuencias más largas, recupera los parámetros del casino; la lección 10 hizo un solo arranque, con 1000 tiradas.
+- La lección 11 en CI Linux y macOS: `DefaultHasher` es SipHash-1-3 con claves fijas y aplica el hash a los enteros en el orden de bytes nativo, así que los tres runners little-endian deberían imprimir los mismos recuentos.
+- Si la elección determinista de la víctima explica que el filtro cuco de IX se detenga en el 91 % y no en el 95 % de Fan et al.: la lección 11 midió un solo filtro y una sola secuencia. Comparar con una elección aleatoria sobre varias secuencias.
+- Si las funciones SQL `ix_cuckoo_*` de `ix-duck`, que envuelven el mismo `insert`, pueden exponer el hallazgo 26.
