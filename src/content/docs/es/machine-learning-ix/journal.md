@@ -595,7 +595,7 @@ Puntuada frente a las ocho predicciones de la entrada anterior, registrada sola 
 - **P8, el envenenamiento (hallazgos 73 y 75).** `influence_function` es idéntica bit a bit tras 100 inversiones. `detect_label_flips` con k = 5 encontró 99 de las 100 etiquetas invertidas y marcó otros 11 puntos. La defensa espectral marcó 9 y 9 en el percentil 90, y luego 10 y 9 con los 5 puntos desplazados, los 5 entre ellos. La votación de vecinos y `eigh` de numpy dan los mismos recuentos.
 - **Exploratorio.** `jsma` devuelve el mismo punto para los objetivos 0 y 1 (hallazgo 74). `lipschitz_estimate` de una aplicación de constante 10 en dimensión 100 da de 2,617 a 3,838 con 20 semillas, mediana 3,021.
 
-El CI en tres sistemas para la lección 18 sigue pendiente.
+La primera ejecución del CI, [36761432222](https://github.com/spareilleux/learn/actions/runs/36761432222) sobre `d8774f9`, pasó en Windows, Linux y macOS: cada salida de la lección 18 coincide byte a byte con `expected/`, hasta los errores relativos de P4, del orden de `1e-14`, y el probit de P7, que pasa por `ln` y `sqrt`, y el control cruzado en Linux coincide con `expected/crosscheck.txt`.
 
 ## Por verificar
 

@@ -595,7 +595,7 @@ Notée face aux huit prédictions de l'entrée ci-dessus, commitée seule sous `
 - **P8, l'empoisonnement (constats 73 et 75).** `influence_function` est identique bit à bit après 100 inversions. `detect_label_flips` avec k = 5 a trouvé 99 des 100 étiquettes inversées et signalé 11 autres points. La défense spectrale a signalé 9 et 9 au 90ᵉ centile, puis 10 et 9 avec les 5 points décalés, les 5 en faisant partie. Le vote des voisins et `eigh` de numpy donnent les mêmes comptes.
 - **Exploratoire.** `jsma` renvoie le même point pour les cibles 0 et 1 (constat 74). `lipschitz_estimate` d'une application de constante 10 en dimension 100 donne 2,617 à 3,838 sur 20 graines, médiane 3,021.
 
-La CI sur trois systèmes pour la leçon 18 reste à faire.
+Le premier run de CI, [36761432222](https://github.com/spareilleux/learn/actions/runs/36761432222) sur `d8774f9`, est passé sous Windows, Linux et macOS : chaque sortie de la leçon 18 correspond octet pour octet à `expected/`, jusqu'aux erreurs relatives de P4, de l'ordre de `1e-14`, et au probit de P7, qui passe par `ln` et `sqrt`, et le contrôle croisé sous Linux correspond à `expected/crosscheck.txt`.
 
 ## À vérifier
 

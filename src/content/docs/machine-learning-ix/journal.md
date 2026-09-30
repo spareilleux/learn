@@ -595,7 +595,7 @@ Scored against the eight predictions of the entry above, committed alone as `719
 - **P8, poisoning (findings 73 and 75).** `influence_function` is bit for bit the same after 100 flips. `detect_label_flips` with k = 5 found 99 of the 100 flipped labels and flagged 11 other points. The spectral defence flagged 9 and 9 at the 90th percentile, then 10 and 9 with the 5 shifted points, all 5 among them. numpy's neighbour vote and `eigh` give the same counts.
 - **Exploratory.** `jsma` returns the same point for targets 0 and 1 (finding 74). `lipschitz_estimate` of a map with constant 10 in 100 dimensions gives 2.617 to 3.838 over 20 seeds, median 3.021.
 
-Three-OS CI for lesson 18 is still pending.
+The first CI run, [36761432222](https://github.com/spareilleux/learn/actions/runs/36761432222) on `d8774f9`, passed on Windows, Linux and macOS: every lesson 18 output matched `expected/` byte for byte, down to P4's relative errors of order `1e-14` and P7's probit, which goes through `ln` and `sqrt`, and the Linux cross-check matched `expected/crosscheck.txt`.
 
 ## To verify
 
