@@ -16,11 +16,12 @@ sidebar:
 - [x] Lesson 5: the improvisation skill and chord–scale theory
 - [x] Lesson 6: the chatbot's answer on the wire
 - [x] Lesson 7: chord names the chatbot can't read
+- [x] Lesson 8: the chatbot's own exam
 - [ ] Run the chatbot with Ollama and capture what the agents answer (dated, outside CI)
 
 ## QA
 
-Findings 1 to 22, from lessons 1 to 4, are numbered in the entry of [2026-09-14](#2026-09-14--differences-found-in-gas-code-commit-a826864), with their upstream status in the entry of [2026-09-24](#2026-09-24--upstream-fixes). This table starts at lesson 5. `ImprovisationSkill.cs` is identical at `a826864` and on GA's `main` at `8cd5042` (2026-09-28), so rows 23 to 28 also describe the deployed skill. Rows 29 to 32, from lesson 6, give their state on `main` in the last column. Rows 33 to 38, from lesson 7, also hold on `main` at `f4f4d30`: the files they cite are unchanged there since #749.
+Findings 1 to 22, from lessons 1 to 4, are numbered in the entry of [2026-09-14](#2026-09-14--differences-found-in-gas-code-commit-a826864), with their upstream status in the entry of [2026-09-24](#2026-09-24--upstream-fixes). This table starts at lesson 5. `ImprovisationSkill.cs` is identical at `a826864` and on GA's `main` at `8cd5042` (2026-09-28), so rows 23 to 28 also describe the deployed skill. Rows 29 to 32, from lesson 6, give their state on `main` in the last column. Rows 33 to 38, from lesson 7, also hold on `main` at `f4f4d30`: the files they cite are unchanged there since #749. Rows 39 to 45, from lesson 8, cite files that are unchanged on `main` at `fc76ad6` (2026-09-29), except the corpus, which has grown from 68 prompts to 75 without changing the entries they cite.
 
 | Expected | What happens | Where | Measure | Status |
 |---|---|---|---|---|
@@ -42,6 +43,14 @@ Findings 1 to 22, from lessons 1 to 4, are numbered in the entry of [2026-09-14]
 | 37. A symbol that ends on `#`, `+` or `°` is read whole | `F#` is read as F and `C+` as C: `ChordTokenRegex` ends with `\b`, and no word boundary follows those characters, so the match backtracks to the bare root | [line 461](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/ImprovisationSkill.cs#L461) | `l7`, rows 10 and 11 | Reported as [#757](https://github.com/GuitarAlchemist/ga/issues/757) |
 | 38. `Bø7` is read | Left out of the run without a word: the list has `°7` but no `ø7`, and `ø` is a letter, so no boundary separates it from the `7` | [line 461](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/ImprovisationSkill.cs#L461) | `l7`, row 12 | Reported as [#757](https://github.com/GuitarAlchemist/ga/issues/757) |
 | The course's recognizer reads every word of a message right | It reads the interjection that opens "Hm, which mode is brightest?" as a broken chord symbol; GA's guard skips it, which is right | `code/ga-ai/GaAi/Lesson7.cs`, `Read` | `l7`, row 15 | A limit of the course's recognizer, not of GA; documented in lesson 7 |
+| 39. A wrong answer fails the corpus's check | #26, "modes of melodi minor", gets the major scale's modes and passes: its `contains_any` is satisfied by the suggestion line every family answer ends with | [`prompts.yaml` lines 270-276](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Tests/Apps/GaChatbot.Api.Tests/Corpus/prompts.yaml#L270-L276), [`ModesSkill.cs` line 449](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/ModesSkill.cs#L449) | `l8`, #26 | Reported as [#763](https://github.com/GuitarAlchemist/ga/issues/763) |
+| 40. A misspelled family is answered for, or the answer says it wasn't recognized | "melodi minor" falls to the default branch, which lists the major scale's modes without a word | [`ModesSkill.cs` lines 202-207](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/ModesSkill.cs#L202-L207) | `l8`, #26 | Reported as [#765](https://github.com/GuitarAlchemist/ga/issues/765) |
+| 41. An error message fails the corpus's check | #31 passes on "I encountered an error processing your request. Please try again.": its `contains_any` holds `G`, which is in "processing" | [`prompts.yaml` lines 316-322](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Tests/Apps/GaChatbot.Api.Tests/Corpus/prompts.yaml#L316-L322), [`PromptCorpusTests.cs` lines 367-379](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Tests/Apps/GaChatbot.Api.Tests/Corpus/PromptCorpusTests.cs#L367-L379) | `l8`, #31 | Reported as [#763](https://github.com/GuitarAlchemist/ga/issues/763) |
+| 42. A skill that can't reach its model is flagged as a degraded backend | A Path B skill without a model answers with `SkillMdDrivenSkill`'s error text, which isn't one of `BackendDegradedMarkers`: six failures and one pass instead of seven times "no signal" | [`SkillMdDrivenSkill.cs` lines 204-226](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/SkillMdDrivenSkill.cs#L204-L226), [`PromptCorpusTests.cs` lines 54-75](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Tests/Apps/GaChatbot.Api.Tests/Corpus/PromptCorpusTests.cs#L54-L75) | `l8`, #10 and the first table | Reported as [#764](https://github.com/GuitarAlchemist/ga/issues/764); GA's daily runs *to verify* |
+| 43. A skill's log says what happened | `DiatonicChordsSkill` logs that the model "produced an answer without invoking ga_dsl_eval" when no model was reached | [`SkillMdDrivenWrapperBase.cs` lines 107-136](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/SkillMdDrivenWrapperBase.cs#L107-L136) | `l8`, #10 | Reported as [#764](https://github.com/GuitarAlchemist/ga/issues/764) |
+| 44. The corpus's checks tell an answer from the answer to another question | Case-insensitive substrings, 84 of the 224 one character long: the passing prompts accept 169 of the other answers, and 6 of 15 answers moved a semitone higher, among them Drop C# for drop C | [`PromptCorpusTests.cs` lines 367-379](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Tests/Apps/GaChatbot.Api.Tests/Corpus/PromptCorpusTests.cs#L367-L379) | `l8`, first semitone table | Reported as [#763](https://github.com/GuitarAlchemist/ga/issues/763); the course's stricter reading accepts 69 and 4 |
+| 45. A scale's formula spells its notes | Formulas are computed by position against C major: `#6` for the whole-tone scale's B♭, and `1 b2 b3 b4 b5 bb6 bb7 bb8` for C D♭ E♭ E F♯ G A B♭ | [`ModesSkill.cs` lines 779-811](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/ModesSkill.cs#L779-L811) | `l8`, #38 and #39 | Reported as [#765](https://github.com/GuitarAlchemist/ga/issues/765) |
+| The course's semitone test makes every answer wrong | Only for a prompt that names a pitch; for the others the moved answer is still right, and the table says n/a. The course recognizes a note name in the question only when it is capitalized, so #30, "notes in c major", also says n/a | `code/ga-ai/GaAi/Lesson8.cs`, `Transpose` | `l8` | A limit of the course's test, not of GA; documented in lesson 8 |
 
 ## 2026-09-14 — Why this course
 
@@ -149,6 +158,15 @@ Most of the 22 differences of 2026-09-14 were fixed upstream by [#689](https://g
   - [#760](https://github.com/GuitarAlchemist/ga/issues/760): GaChatbot.Api's page renders the stream's error event as the answer, and keeps it in the history (row 29).
 - The code they cite is unchanged on `main` at `fc76ad6` (2026-09-29), except for the interjection separators of #749's guard (`2d9c5e3`), which don't change its rows.
 
+## 2026-09-29 — Lesson 8: the chatbot's own exam
+
+- The request: more lessons that help GA's chatbot. GA's own oracle, the prompt corpus, hadn't been run by the course. It is outside the sparse checkout, so `fetch-ga.sh` copies it with `git show` into `.ga-files/`.
+- The course's host had been running without GA's `skills/` folder since lesson 4. `SkillMdPlugin` looks for it at the root of the git repository that holds the running program, here the course's repository. `fetch-ga.sh` now checks it out, and the host sets `SKILLMD_SKILLS_PATH`; the outputs of lessons 1 to 7 are the same. Before the change, the seven diatonic prompts were flagged as a degraded backend by the wrapper's text; after it, they fail as ordinary answers, which is row 42.
+- A key in the environment would have reached Anthropic: run with a fake `ANTHROPIC_API_KEY`, the host got `AnthropicUnauthorizedException`. The host now sets `Anthropic:ApiKey` to an empty string, and the output with the fake key is the same as without it.
+- The solutions of exercises 1 and 2 were checked by editing the course program for one run; 3 and 4 were worked by hand.
+- CI run [36584340462](https://github.com/spareilleux/learn/actions/runs/36584340462), for commit `a305edf`: green on the three systems, 1 min 58 s on Linux, 2 min 24 s on macOS, 6 min 41 s on Windows, clone, the checkout of `skills/`, the corpus fetch and build included.
+- Reported upstream the same day: [#763](https://github.com/GuitarAlchemist/ga/issues/763) for rows 39, 41 and 44, [#764](https://github.com/GuitarAlchemist/ga/issues/764) for rows 42 and 43, [#765](https://github.com/GuitarAlchemist/ga/issues/765) for rows 40 and 45.
+
 ## To verify
 
 - Whether the deployed chatbot routes every prompt of lesson 5 to `ImprovisationSkill`; the tracer of 2026-09-28 saw it do so for Am F C G.
@@ -156,6 +174,8 @@ Most of the 22 differences of 2026-09-14 were fixed upstream by [#689](https://g
 - The solutions of lesson 5's exercises 2 and 3, not compiled against GA.
 - Whether the public chatbot runs a build that has #749, and what a model answers to lesson 7's rows 5, 6, 13 and 14.
 - The solution of lesson 7's exercise 4, not compiled against GA.
+- Whether GA's daily corpus runs, which have an Ollama endpoint and no Anthropic key, score the seven diatonic prompts as six failures and one pass; the snapshots of 2026-09-25 to 2026-09-29 are marked degraded and don't list failures by prompt.
+- The solution of lesson 8's exercise 4, a formula derived from each note's letter, not compiled against GA.
 - How GaChatbot.Api's page shows an error event in a browser: lesson 6 runs a C# port of its reader, not the page. The same for the solution of lesson 6's exercise 3.
 
 ## Open questions
@@ -163,3 +183,4 @@ Most of the 22 differences of 2026-09-14 were fixed upstream by [#689](https://g
 - Which key-inference rule should GA's improvisation skill use? #744 leaves it open: the count of chord tones outside each major scale used by lesson 5, or GA's existing key-identification services.
 - Should GA's streams mark an error as such, with an `event: error` field or a `type` in the JSON, and end with `[DONE]` or its own terminal event? At `a826864`, each client has to guess from the JSON's shape.
 - Should GA's guard also decline lowercase names and unknown qualities, at the price of the false positives of lesson 7's exercise 3, or should a request that mixes valid and invalid chords get an answer that names the invalid ones?
+- Should the corpus check a chord's or a scale's notes as a set, with a structured invariant, rather than as strings? Lesson 8's stricter reading of the same strings still accepts 69 foreign answers.
