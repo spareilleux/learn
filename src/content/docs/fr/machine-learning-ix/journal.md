@@ -199,6 +199,22 @@ Cela mérite d'être consigné à côté des constats, car les leçons ont surto
 
   Aucune hypothèse n'a été écrite avant cette exécution : ce sont des comparaisons avec des versions écrites à la main et avec numpy, pas des expériences pré-enregistrées. Le run CI [36645993165](https://github.com/spareilleux/learn/actions/runs/36645993165) est passé sous Windows, Linux et macOS : chaque ligne de la leçon 10, log-vraisemblances comprises, correspond octet pour octet à `expected/`, et le contrôle croisé sous Linux correspond à `expected/crosscheck.txt`.
 
+## 2026-09-29 — Leçon 11, prédite avant de mesurer
+
+Écrit avant qu'aucun code de la leçon 11 n'ait tourné contre la crate [`ix-probabilistic`](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-probabilistic) d'IX au commit épinglé. Les nombres ci-dessous viennent de formules et de la lecture du code source, pas d'une exécution. Une fois la leçon écrite, chaque prédiction aura son test dans `code/machine-learning-ix`. Une prédiction qui échoue reste dans le tableau des expériences, marquée réfutée.
+
+- **P1, filtre de Bloom à sa capacité.** `BloomFilter::new(10_000, 0.01)` se dimensionne à m = 95 851 bits et k = 7 hachages. On insère les entiers 0 à 9 999, puis on interroge les 100 000 entiers 10 000 à 109 999. Le taux de faux positifs est compris dans [0,00909 ; 0,01098], soit trois écarts-types autour de (1 − e^(−kn/m))^k = 0,01004.
+- **P2, filtre de Bloom au double de sa capacité.** On insère 0 à 19 999 dans un filtre du même type, puis on interroge 20 000 à 119 999. Le taux est compris dans [0,1540 ; 0,1609], autour de 0,15745.
+- **P3, HyperLogLog.** Avec p = 10 (1 024 registres) et 100 ensembles disjoints de 100 000 éléments distincts, l'erreur relative quadratique moyenne de `count()` est comprise dans [0,0256 ; 0,0394], autour de 1,04/√1024 = 0,0325. L'erreur relative moyenne reste à ±0,00975 de zéro. Il en va de même pour un HyperLogLog écrit à la main qui hache avec splitmix64 au lieu de `DefaultHasher`.
+- **P4, count-min sketch.** `CountMinSketch::new(100, 3)` reçoit 10 000 éléments distincts, 10 fois chacun (N = 100 000). Le commentaire de `new` promet une erreur d'au plus N/width = 1 000 avec une probabilité d'au moins 1 − e^(−3) = 0,9502.
+  - **Prédiction :** plus de 0,0498 des éléments ont un surcompte supérieur à 1 000. Un modèle binomial des charges des cases donne 0,106, et la fraction devrait se situer dans [0,07 ; 0,20].
+  - **Contrôle :** moins de 0,0498 ont un surcompte supérieur à e·N/width = 2 718, la borne de Cormode et Muthukrishnan.
+- **P5, charge du filtre coucou.** `CuckooFilter::new(4096)` a 1 024 cases de 4 emplacements. On insère les entiers 0, 1, 2, … jusqu'au premier `insert` qui renvoie false. Le taux de remplissage à ce moment est d'au moins 0,90 ; Fan et al. rapportent environ 95 % pour des cases de 4.
+- **P6, filtre coucou après un échec.** Quand `insert` abandonne après 500 déplacements, il perd l'empreinte délogée par le dernier déplacement ([`cuckoo.rs` 54-75](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-probabilistic/src/cuckoo.rs#L54-L75)). Prédiction : après le premier échec, `contains` ne retrouve plus au moins un élément dont l'`insert` avait renvoyé true.
+- **P7, déterminisme du filtre coucou.** `CONTRACTS.md` dit qu'`insert` choisit sa victime avec `rand::random()` et n'est pas déterministe. Le code choisit `fingerprint % len`, et la crate ne dépend pas de `rand`. Prédiction : deux filtres alimentés par la même séquence échouent au même insert et répondent identiquement à `contains` sur 100 000 sondes.
+
+Sources des constantes : [Bloom (1970)](https://doi.org/10.1145/362686.362692), [Flajolet et al. (2007)](https://dmtcs.episciences.org/3545), [Cormode et Muthukrishnan (2005)](https://doi.org/10.1016/j.jalgor.2003.12.001), [Fan et al. (2014)](https://doi.org/10.1145/2674005.2674994).
+
 ## À vérifier
 
 - L'outil `ix_ml_pipeline` de bout en bout : l'ordre de mise à l'échelle du constat 1, l'inférence de tâche du constat 2 sur un fichier CSV, et l'erreur `All rows contain NaN values` pour un fichier avec une colonne texte. Les trois sont lus dans le code, pas exécutés.

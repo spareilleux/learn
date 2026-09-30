@@ -199,6 +199,22 @@ Worth recording next to the findings, because the lessons so far have mostly fou
 
   No hypothesis was written before this run: these are comparisons with hand implementations and with numpy, not preregistered experiments. CI run [36645993165](https://github.com/spareilleux/learn/actions/runs/36645993165) passed on Windows, Linux and macOS: every line of lesson 10, log-likelihoods included, matched `expected/` byte for byte, and the Linux cross-check matched `expected/crosscheck.txt`.
 
+## 2026-09-29 — Lesson 11, predicted before measuring
+
+Written before any lesson 11 code ran against IX's [`ix-probabilistic`](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-probabilistic) at the pinned commit. The numbers below come from formulas and from reading the source, not from a run. Once the lesson is written, each prediction gets one test in `code/machine-learning-ix`. A prediction that fails stays in the Experiments table as refuted.
+
+- **P1, Bloom filter at capacity.** `BloomFilter::new(10_000, 0.01)` sizes itself to m = 95,851 bits and k = 7 hashes. Insert the integers 0 to 9,999, then query the 100,000 integers 10,000 to 109,999. The false-positive rate lies in [0.00909, 0.01098], three standard deviations around (1 − e^(−kn/m))^k = 0.01004.
+- **P2, Bloom filter at twice its capacity.** Insert 0 to 19,999 into the same kind of filter, then query 20,000 to 119,999. The rate lies in [0.1540, 0.1609], around 0.15745.
+- **P3, HyperLogLog.** Use p = 10 (1,024 registers) and 100 disjoint sets of 100,000 distinct items. The root-mean-square relative error of `count()` lies in [0.0256, 0.0394], around 1.04/√1024 = 0.0325. The mean relative error lies within ±0.00975 of zero. The same holds for a hand-written HyperLogLog that hashes with splitmix64 instead of `DefaultHasher`.
+- **P4, count-min sketch.** `CountMinSketch::new(100, 3)` receives 10,000 distinct items, 10 times each (N = 100,000). The doc comment of `new` promises an error of at most N/width = 1,000 with probability at least 1 − e^(−3) = 0.9502.
+  - **Prediction:** more than 0.0498 of the items have an overcount above 1,000. A binomial model of the bucket loads gives 0.106, and the fraction should lie in [0.07, 0.20].
+  - **Control:** fewer than 0.0498 have an overcount above e·N/width = 2,718, the bound of Cormode and Muthukrishnan.
+- **P5, cuckoo filter load.** `CuckooFilter::new(4096)` has 1,024 buckets of 4 slots. Insert the integers 0, 1, 2, … until the first `insert` returns false. The load factor at that point is at least 0.90; Fan et al. report about 95% for buckets of 4.
+- **P6, cuckoo filter after a failure.** When `insert` gives up after 500 kicks, it drops the fingerprint displaced by the last kick ([`cuckoo.rs` 54-75](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-probabilistic/src/cuckoo.rs#L54-L75)). Prediction: after the first failure, `contains` no longer finds at least one item whose `insert` returned true.
+- **P7, cuckoo determinism.** `CONTRACTS.md` says `insert` picks its victim with `rand::random()` and is not deterministic. The code picks `fingerprint % len`, and the crate has no `rand` dependency. Prediction: two filters fed the same sequence fail at the same insert and answer `contains` identically on 100,000 probes.
+
+Sources for the constants: [Bloom (1970)](https://doi.org/10.1145/362686.362692), [Flajolet et al. (2007)](https://dmtcs.episciences.org/3545), [Cormode and Muthukrishnan (2005)](https://doi.org/10.1016/j.jalgor.2003.12.001), [Fan et al. (2014)](https://doi.org/10.1145/2674005.2674994).
+
 ## To verify
 
 - The `ix_ml_pipeline` tool end to end: the scaling order of finding 1, the task inference of finding 2 on a CSV file, and the `All rows contain NaN values` error for a file with a text column. All three are read in the code, not run.

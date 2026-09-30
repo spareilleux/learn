@@ -199,6 +199,22 @@ Merece anotarse junto a los hallazgos, porque las lecciones hasta ahora han enco
 
   No se escribió ninguna hipótesis antes de esta ejecución: son comparaciones con versiones escritas a mano y con numpy, no experimentos prerregistrados. La ejecución de CI [36645993165](https://github.com/spareilleux/learn/actions/runs/36645993165) pasó en Windows, Linux y macOS: cada línea de la lección 10, log-verosimilitudes incluidas, coincide byte a byte con `expected/`, y la comprobación cruzada en Linux coincide con `expected/crosscheck.txt`.
 
+## 2026-09-29 — Lección 11, predicha antes de medir
+
+Escrito antes de que ningún código de la lección 11 se ejecutara contra el crate [`ix-probabilistic`](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-probabilistic) de IX en el commit fijado. Los números de abajo salen de fórmulas y de la lectura del código fuente, no de una ejecución. Una vez escrita la lección, cada predicción tendrá su prueba en `code/machine-learning-ix`. Una predicción que falle se queda en la tabla de experimentos, marcada como refutada.
+
+- **P1, filtro de Bloom a su capacidad.** `BloomFilter::new(10_000, 0.01)` se dimensiona a m = 95 851 bits y k = 7 funciones hash. Se insertan los enteros 0 a 9999 y después se consultan los 100 000 enteros 10 000 a 109 999. La tasa de falsos positivos está en [0,00909; 0,01098], tres desviaciones típicas alrededor de (1 − e^(−kn/m))^k = 0,01004.
+- **P2, filtro de Bloom al doble de su capacidad.** Se insertan 0 a 19 999 en un filtro del mismo tipo y después se consultan 20 000 a 119 999. La tasa está en [0,1540; 0,1609], alrededor de 0,15745.
+- **P3, HyperLogLog.** Con p = 10 (1024 registros) y 100 conjuntos disjuntos de 100 000 elementos distintos, el error relativo cuadrático medio de `count()` está en [0,0256; 0,0394], alrededor de 1,04/√1024 = 0,0325. El error relativo medio queda a ±0,00975 de cero. Lo mismo vale para un HyperLogLog escrito a mano que usa splitmix64 como hash en lugar de `DefaultHasher`.
+- **P4, count-min sketch.** `CountMinSketch::new(100, 3)` recibe 10 000 elementos distintos, 10 veces cada uno (N = 100 000). El comentario de `new` promete un error de como mucho N/width = 1000 con probabilidad de al menos 1 − e^(−3) = 0,9502.
+  - **Predicción:** más de 0,0498 de los elementos tienen un sobreconteo superior a 1000. Un modelo binomial de las cargas de las celdas da 0,106, y la fracción debería estar en [0,07; 0,20].
+  - **Control:** menos de 0,0498 tienen un sobreconteo superior a e·N/width = 2718, la cota de Cormode y Muthukrishnan.
+- **P5, carga del filtro cuco.** `CuckooFilter::new(4096)` tiene 1024 celdas de 4 huecos. Se insertan los enteros 0, 1, 2, … hasta que el primer `insert` devuelva false. El factor de carga en ese momento es de al menos 0,90; Fan et al. informan de alrededor del 95 % con celdas de 4.
+- **P6, filtro cuco tras un fallo.** Cuando `insert` se rinde tras 500 desplazamientos, pierde la huella desplazada en el último desplazamiento ([`cuckoo.rs` 54-75](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-probabilistic/src/cuckoo.rs#L54-L75)). Predicción: tras el primer fallo, `contains` deja de encontrar al menos un elemento cuyo `insert` había devuelto true.
+- **P7, determinismo del filtro cuco.** `CONTRACTS.md` dice que `insert` elige su víctima con `rand::random()` y no es determinista. El código elige `fingerprint % len`, y el crate no depende de `rand`. Predicción: dos filtros alimentados con la misma secuencia fallan en el mismo insert y responden igual a `contains` en 100 000 sondeos.
+
+Fuentes de las constantes: [Bloom (1970)](https://doi.org/10.1145/362686.362692), [Flajolet et al. (2007)](https://dmtcs.episciences.org/3545), [Cormode y Muthukrishnan (2005)](https://doi.org/10.1016/j.jalgor.2003.12.001), [Fan et al. (2014)](https://doi.org/10.1145/2674005.2674994).
+
 ## Por verificar
 
 - La herramienta `ix_ml_pipeline` de principio a fin: el orden del escalado del hallazgo 1, la inferencia de tarea del hallazgo 2 sobre un archivo CSV, y el error `All rows contain NaN values` para un archivo con una columna de texto. Los tres están leídos en el código, no ejecutados.
