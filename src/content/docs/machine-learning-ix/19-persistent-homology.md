@@ -121,16 +121,16 @@ Early exaggeration multiplies P by 12 at the start, so that clusters form and mo
 ```text
 == P7, early exaggeration, the same points, seed 7, KL(P||Q) against P at perplexity 30
   200 iterations, default: the same as with_early_exaggeration(12.0, 200), bit for bit: yes
-  KL after 200 iterations: default 1.452, exaggeration for the first 50 0.246
+  KL after 200 iterations: default above exaggeration for the first 50: yes
 ```
 
-With 200 iterations, the default is the exaggerated run, bit for bit, and its KL is 1.452, about six times that of the documented quarter, 0.246. A second exploratory check runs the default 1,000 iterations, with exaggeration for the first 250:
+With 200 iterations, the default is the exaggerated run, bit for bit, and its KL is about six times that of the documented quarter: 1.452 against 0.246 on the author's Windows machine and on CI's Windows runner, 1.540 against 0.249 on CI's Ubuntu, 1.466 against 0.247 on its macOS. The same seed doesn't give the same map on the three systems: it fixes the ChaCha8 random stream, not the floating-point functions that follow. Rust documents the precision of `f64::exp`, `ln` and `powi` as "non-deterministic", varying "by platform, Rust version" ([`f64::exp`](https://doc.rust-lang.org/std/primitive.f64.html#method.exp)), and IX's own separation test lowered its threshold after Linux gave other ratios than Windows on the same seed ([`lib.rs` 485-493](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-manifold/src/lib.rs#L485-L493)). The lesson didn't isolate which call diverges first. So the example prints the comparison, which holds on all three, rather than the values: the first CI run printed them, and failed on Ubuntu and macOS. A second exploratory check runs the default 1,000 iterations, with exaggeration for the first 250:
 
 ```text
-  the default 1000 iterations, exaggeration for the first 250: KL 0.241
+  the default 1000 iterations, exaggeration for the first 250: KL within 0.05 of 200 iterations with the first 50: yes
 ```
 
-50 exaggerated iterations out of 200 get within 0.005 of the default 1,000. A caller who shortens `n_iter` to save time, as the lesson did, gets a map fitted to the wrong target unless they also shorten `early_exaggeration_iters`.
+The 1,000 iterations reach 0.241 on Windows, 0.237 on Ubuntu and 0.243 on macOS: 50 exaggerated iterations out of 200 get within about 0.01 of the default 1,000. A caller who shortens `n_iter` to save time, as the lesson did, gets a map fitted to the wrong target unless they also shorten `early_exaggeration_iters`.
 
 ## 9. The skill's import, and the features left out
 
@@ -154,10 +154,10 @@ The feature it ranks first is the last gap to close in the ring, a component tha
 | P4 | IX at least the exact distance in 1,000 of 1,000 pairs for both, above by more than 10⁻⁹ in at least 900 | 1,000 and 999 for the bottleneck, 1,000 and 982 for W₁ | Confirmed |
 | P5 | Exact bottleneck at most 0.02 in 50 of 50 clouds; IX's above 0.02 in at least 5 | 50 of 50, largest 0.0195; 24, largest 0.2526 | Confirmed |
 | P6 | Two Barnes–Hut runs with seed 7 differ by more than 10⁻³; two exact runs identical; both Barnes–Hut maps vote right for at least 95% | Differ, identical; votes 0.267 and 0.347 | Refuted in part |
-| P7 | 200 iterations: default equal to exaggeration for all 200, bit for bit; its KL higher than with exaggeration for the first 50 | Equal; 1.452 against 0.246 | Confirmed |
+| P7 | 200 iterations: default equal to exaggeration for all 200, bit for bit; its KL higher than with exaggeration for the first 50 | Equal; 1.452 against 0.246 (1.540 and 0.249 on Ubuntu, 1.466 and 0.247 on macOS) | Confirmed |
 | P8 | The skill's import fails with E0432; the same line with `simplex` compiles | As predicted | Confirmed |
 
-Seven held on the first run and one was refuted in part. No interval was changed afterwards. The refuted part came from a gap in the reading, not in the arithmetic: the prediction read `ix-manifold` and stopped at the call into bhtsne, whose bandwidth search it assumed was right. The test pins what the first run measured, and the scale check that explains it is marked exploratory, since it was chosen after seeing the result. The controls show that the other checks can fail: the exact distance does satisfy the stability bound, the lesson's reduction built one dimension higher does find the right H₂, and the exact `Tsne` is reproducible.
+Seven held on the first run and one was refuted in part. No interval was changed afterwards. The refuted part came from a gap in the reading, not in the arithmetic: the prediction read `ix-manifold` and stopped at the call into bhtsne, whose bandwidth search it assumed was right. The test pins what the first run measured, and the scale check that explains it is marked exploratory, since it was chosen after seeing the result. The controls show that the other checks can fail: the exact distance does satisfy the stability bound, the lesson's reduction built one dimension higher does find the right H₂, and the exact `Tsne` is reproducible on one system.
 
 ## What to use for our repositories
 
@@ -166,7 +166,7 @@ Seven held on the first run and one was refuted in part. No interval was changed
 - **`bottleneck_distance` and `wasserstein_distance`:** upper bounds, not the distances their doc comments name, and without the stability that makes diagrams comparable. For a threshold or a regression test, use an exact matching: the lesson's bisection and Hungarian algorithm are a few dozen lines, and SciPy's `linear_sum_assignment` does it in Python. Count essential points separately; IX's distances ignore them.
 - **`most_persistent_features`:** add the essential pairs yourself, first.
 - **`BarnesHutTsne`:** not reproducible, whatever seed you pass, and at the pinned bhtsne 0.5.3 its bandwidth search diverges unless the nearest distances are small. Scale the data so that it doesn't, check the map with a neighbour vote as the lesson does, or use the exact `Tsne` below a few thousand points.
-- **`Tsne`:** with fewer than 1,000 iterations, set `early_exaggeration_iters` to a quarter of `n_iter` yourself.
+- **`Tsne`:** with fewer than 1,000 iterations, set `early_exaggeration_iters` to a quarter of `n_iter` yourself. Its seed reproduces a map on one system, not across Windows, Linux and macOS: from one system to another, compare maps with a tolerance or a neighbour vote, not bit for bit.
 - **The `ix-topo` skill:** import from `ix_topo::simplex`.
 
 ## Exercises
@@ -201,3 +201,4 @@ Seven held on the first run and one was refuted in part. No interval was changed
 - H. W. Kuhn, ["The Hungarian method for the assignment problem"](https://doi.org/10.1002/nav.3800020109), Naval Research Logistics Quarterly 2, 1955. J. B. Kruskal, ["On the shortest spanning subtree of a graph and the traveling salesman problem"](https://doi.org/10.1090/S0002-9939-1956-0078686-7), Proceedings of the AMS 7, 1956.
 - L. van der Maaten and G. Hinton, ["Visualizing data using t-SNE"](https://jmlr.org/papers/v9/vandermaaten08a.html), JMLR 9, 2008. L. van der Maaten, ["Accelerating t-SNE using tree-based algorithms"](https://jmlr.org/papers/v15/vandermaaten14a.html), JMLR 15, 2014.
 - SciPy: [`maximum_bipartite_matching`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csgraph.maximum_bipartite_matching.html), [`linear_sum_assignment`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linear_sum_assignment.html), [`minimum_spanning_tree`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csgraph.minimum_spanning_tree.html).
+- Rust: the precision of [`f64::exp`](https://doc.rust-lang.org/std/primitive.f64.html#method.exp), [`ln`](https://doc.rust-lang.org/std/primitive.f64.html#method.ln) and [`powi`](https://doc.rust-lang.org/std/primitive.f64.html#method.powi).

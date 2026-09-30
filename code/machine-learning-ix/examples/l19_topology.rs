@@ -142,9 +142,11 @@ fn main() {
         "  200 iterations, default: the same as with_early_exaggeration(12.0, 200), bit for bit: {}",
         yes(e.never_ends)
     );
+    // The KL values differ between Windows, Linux and macOS (Rust leaves the precision of exp and ln to the
+    // platform): print the comparisons, which hold on all three.
     println!(
-        "  KL after 200 iterations: default {:.3}, exaggeration for the first 50 {:.3}",
-        e.kl_default, e.kl_quarter
+        "  KL after 200 iterations: default above exaggeration for the first 50: {}",
+        yes(e.kl_default > e.kl_quarter)
     );
 
     println!("\n== exploratory");
@@ -153,8 +155,8 @@ fn main() {
         yes(sd.scaled_votes.0 >= 0.95 && sd.scaled_votes.1 >= 0.95)
     );
     println!(
-        "  the default 1000 iterations, exaggeration for the first 250: KL {:.3}",
-        e.kl_1000
+        "  the default 1000 iterations, exaggeration for the first 250: KL within 0.05 of 200 iterations with the first 50: {}",
+        yes((e.kl_1000 - e.kl_quarter).abs() < 0.05)
     );
     let (loops, dimension, persistence) = truncated_loop();
     println!(

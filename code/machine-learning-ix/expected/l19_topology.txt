@@ -34,10 +34,10 @@
 
 == P7, early exaggeration, the same points, seed 7, KL(P||Q) against P at perplexity 30
   200 iterations, default: the same as with_early_exaggeration(12.0, 200), bit for bit: yes
-  KL after 200 iterations: default 1.452, exaggeration for the first 50 0.246
+  KL after 200 iterations: default above exaggeration for the first 50: yes
 
 == exploratory
   Barnes-Hut on the same points scaled by 0.3, twice: vote at least 95% in both runs: yes
-  the default 1000 iterations, exaggeration for the first 250: KL 0.241
+  the default 1000 iterations, exaggeration for the first 250: KL within 0.05 of 200 iterations with the first 50: yes
   the circle at max_radius 1.0: essential H1 pairs 1; most_persistent_features ranks first a pair of dimension 0, persistence 0.3057
 exit 0

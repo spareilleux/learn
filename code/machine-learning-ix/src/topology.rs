@@ -854,7 +854,7 @@ pub struct Exaggeration {
     /// `Tsne::new().with_n_iter(200)` equals `.with_early_exaggeration(12.0, 200)`, bit for bit
     pub never_ends: bool,
     /// KL(P‖Q) with the default, with exaggeration for the first 50 of 200 iterations, and exploratory, with
-    /// the default 1,000 iterations
+    /// the default 1,000 iterations; the values differ between Windows, Linux and macOS
     pub kl_default: f64,
     pub kl_quarter: f64,
     pub kl_1000: f64,

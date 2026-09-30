@@ -121,16 +121,16 @@ La exageración temprana multiplica P por 12 al principio, para que los grupos s
 ```text
 == P7, early exaggeration, the same points, seed 7, KL(P||Q) against P at perplexity 30
   200 iterations, default: the same as with_early_exaggeration(12.0, 200), bit for bit: yes
-  KL after 200 iterations: default 1.452, exaggeration for the first 50 0.246
+  KL after 200 iterations: default above exaggeration for the first 50: yes
 ```
 
-Con 200 iteraciones, el valor por defecto es la ejecución exagerada, bit a bit, y su KL vale 1,452, unas seis veces la del cuarto documentado, 0,246. Una segunda comprobación exploratoria ejecuta las 1000 iteraciones por defecto, con exageración durante las 250 primeras:
+Con 200 iteraciones, el valor por defecto es la ejecución exagerada, bit a bit, y su KL vale unas seis veces la del cuarto documentado: 1,452 frente a 0,246 en la máquina Windows del autor y en el runner Windows del CI, 1,540 frente a 0,249 en el Ubuntu del CI, 1,466 frente a 0,247 en su macOS. La misma semilla no da el mismo mapa en los tres sistemas: fija el flujo aleatorio ChaCha8, no las funciones de coma flotante que vienen después. Rust documenta la precisión de `f64::exp`, `ln` y `powi` como «non-deterministic», variable «by platform, Rust version» ([`f64::exp`](https://doc.rust-lang.org/std/primitive.f64.html#method.exp)), y la propia prueba de separación de IX bajó su umbral después de que Linux diera otras razones que Windows con la misma semilla ([`lib.rs` 485-493](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-manifold/src/lib.rs#L485-L493)). La lección no aisló qué llamada diverge primero. Por eso el ejemplo imprime la comparación, que se cumple en los tres, y no los valores: la primera ejecución del CI los imprimía, y falló en Ubuntu y macOS. Una segunda comprobación exploratoria ejecuta las 1000 iteraciones por defecto, con exageración durante las 250 primeras:
 
 ```text
-  the default 1000 iterations, exaggeration for the first 250: KL 0.241
+  the default 1000 iterations, exaggeration for the first 250: KL within 0.05 of 200 iterations with the first 50: yes
 ```
 
-50 iteraciones exageradas de 200 quedan a 0,005 de las 1000 por defecto. Quien acorte `n_iter` para ahorrar tiempo, como hizo la lección, obtiene un mapa ajustado al objetivo equivocado, salvo que acorte también `early_exaggeration_iters`.
+Las 1000 iteraciones llegan a 0,241 en Windows, 0,237 en Ubuntu y 0,243 en macOS: 50 iteraciones exageradas de 200 quedan a unos 0,01 de las 1000 por defecto. Quien acorte `n_iter` para ahorrar tiempo, como hizo la lección, obtiene un mapa ajustado al objetivo equivocado, salvo que acorte también `early_exaggeration_iters`.
 
 ## 9. El import de la skill, y las características que quedan fuera
 
@@ -154,10 +154,10 @@ La característica que clasifica primera es el último hueco que se cierra en el
 | P4 | IX al menos igual a la distancia exacta en 1000 pares de 1000 para las dos, por encima en más de 10⁻⁹ en al menos 900 | 1000 y 999 para el bottleneck, 1000 y 982 para W₁ | Confirmada |
 | P5 | Bottleneck exacto como mucho 0,02 en 50 nubes de 50; el de IX por encima de 0,02 en al menos 5 | 50 de 50, el mayor 0,0195; 24, el mayor 0,2526 | Confirmada |
 | P6 | Dos ejecuciones de Barnes–Hut con la semilla 7 difieren en más de 10⁻³; dos ejecuciones exactas idénticas; los dos mapas de Barnes–Hut votan bien para al menos el 95 % | Distintas, idénticas; votos 0,267 y 0,347 | Refutada en parte |
-| P7 | 200 iteraciones: valor por defecto igual a la exageración durante las 200, bit a bit; su KL mayor que con exageración durante las 50 primeras | Igual; 1,452 frente a 0,246 | Confirmada |
+| P7 | 200 iteraciones: valor por defecto igual a la exageración durante las 200, bit a bit; su KL mayor que con exageración durante las 50 primeras | Igual; 1,452 frente a 0,246 (1,540 y 0,249 en Ubuntu, 1,466 y 0,247 en macOS) | Confirmada |
 | P8 | El import de la skill falla con E0432; la misma línea con `simplex` compila | Como se predijo | Confirmada |
 
-Siete se cumplieron en la primera ejecución y una quedó refutada en parte. No se cambió ningún intervalo después. La parte refutada vino de un hueco en la lectura, no en la aritmética: la predicción leyó `ix-manifold` y se detuvo en la llamada a bhtsne, cuya búsqueda del ancho de banda dio por correcta. La prueba fija lo que midió la primera ejecución, y la comprobación de escala que lo explica está marcada como exploratoria, puesto que se eligió después de ver el resultado. Los controles muestran que las demás comprobaciones pueden fallar: la distancia exacta sí cumple la cota de estabilidad, la reducción de la lección construida una dimensión más arriba sí encuentra el H₂ correcto, y el `Tsne` exacto es reproducible.
+Siete se cumplieron en la primera ejecución y una quedó refutada en parte. No se cambió ningún intervalo después. La parte refutada vino de un hueco en la lectura, no en la aritmética: la predicción leyó `ix-manifold` y se detuvo en la llamada a bhtsne, cuya búsqueda del ancho de banda dio por correcta. La prueba fija lo que midió la primera ejecución, y la comprobación de escala que lo explica está marcada como exploratoria, puesto que se eligió después de ver el resultado. Los controles muestran que las demás comprobaciones pueden fallar: la distancia exacta sí cumple la cota de estabilidad, la reducción de la lección construida una dimensión más arriba sí encuentra el H₂ correcto, y el `Tsne` exacto es reproducible en un mismo sistema.
 
 ## Qué usar en nuestros repositorios
 
@@ -166,7 +166,7 @@ Siete se cumplieron en la primera ejecución y una quedó refutada en parte. No 
 - **`bottleneck_distance` y `wasserstein_distance`:** cotas superiores, no las distancias que nombran sus comentarios de documentación, y sin la estabilidad que hace comparables los diagramas. Para un umbral o una prueba de regresión, usa un emparejamiento exacto: la bisección y el algoritmo húngaro de la lección caben en unas decenas de líneas, y `linear_sum_assignment` de SciPy lo hace en Python. Cuenta los puntos esenciales aparte; las distancias de IX los ignoran.
 - **`most_persistent_features`:** añade tú mismo los pares esenciales, al principio.
 - **`BarnesHutTsne`:** no reproducible, pases la semilla que pases, y con bhtsne 0.5.3 fijado su búsqueda del ancho de banda diverge salvo que las distancias a los vecinos más cercanos sean pequeñas. Pon los datos a una escala donde no diverja, comprueba el mapa con un voto de vecinos como hace la lección, o usa el `Tsne` exacto por debajo de unos miles de puntos.
-- **`Tsne`:** con menos de 1000 iteraciones, fija tú mismo `early_exaggeration_iters` en un cuarto de `n_iter`.
+- **`Tsne`:** con menos de 1000 iteraciones, fija tú mismo `early_exaggeration_iters` en un cuarto de `n_iter`. Su semilla reproduce un mapa en un mismo sistema, no entre Windows, Linux y macOS: de un sistema a otro, compara los mapas con una tolerancia o un voto de vecinos, no bit a bit.
 - **La skill `ix-topo`:** importa desde `ix_topo::simplex`.
 
 ## Ejercicios
@@ -201,3 +201,4 @@ Siete se cumplieron en la primera ejecución y una quedó refutada en parte. No 
 - H. W. Kuhn, [«The Hungarian method for the assignment problem»](https://doi.org/10.1002/nav.3800020109), Naval Research Logistics Quarterly 2, 1955. J. B. Kruskal, [«On the shortest spanning subtree of a graph and the traveling salesman problem»](https://doi.org/10.1090/S0002-9939-1956-0078686-7), Proceedings of the AMS 7, 1956.
 - L. van der Maaten y G. Hinton, [«Visualizing data using t-SNE»](https://jmlr.org/papers/v9/vandermaaten08a.html), JMLR 9, 2008. L. van der Maaten, [«Accelerating t-SNE using tree-based algorithms»](https://jmlr.org/papers/v15/vandermaaten14a.html), JMLR 15, 2014.
 - SciPy: [`maximum_bipartite_matching`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csgraph.maximum_bipartite_matching.html), [`linear_sum_assignment`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linear_sum_assignment.html), [`minimum_spanning_tree`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csgraph.minimum_spanning_tree.html).
+- Rust: la precisión de [`f64::exp`](https://doc.rust-lang.org/std/primitive.f64.html#method.exp), [`ln`](https://doc.rust-lang.org/std/primitive.f64.html#method.ln) y [`powi`](https://doc.rust-lang.org/std/primitive.f64.html#method.powi).
