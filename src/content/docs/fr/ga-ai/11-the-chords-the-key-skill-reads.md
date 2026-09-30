@@ -265,7 +265,7 @@ Les instructions qui suivent demandent au modèle d'expliquer dans quelle tonali
 
 ## Signalé en amont
 
-- Pas encore signalés en amont au moment de l'écriture de cette leçon : les accords de septième ignorés au commit épinglé et les chiffrages que `main` ignore encore, les dièses perdus, les égalités entre tonalités qui ont les mêmes classes de hauteurs, les accords répétés que supprime `ExtractChords`, le groupe de tête formé par décompte, les tonalités relatives, et l'exemple à un seul candidat du SKILL.md. Ils sont listés dans le [journal](../journal/).
+- Signalés après l'écriture de cette leçon : les chiffrages que `main` ignore encore, les dièses perdus et les accords répétés que supprime `ExtractChords`, dans le ticket de GA [#771](https://github.com/GuitarAlchemist/ga/issues/771) ; les égalités entre tonalités qui ont les mêmes classes de hauteurs, le groupe de tête formé par décompte, les tonalités relatives et l'exemple à un seul candidat du SKILL.md, dans [#772](https://github.com/GuitarAlchemist/ga/issues/772). Depuis [#625](https://github.com/GuitarAlchemist/ga/pull/625), `main` lit les accords de septième qu'ignore le commit épinglé. Tous sont listés dans le [journal](../journal/).
 
 ## Exercices
 

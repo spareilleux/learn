@@ -265,7 +265,7 @@ The instructions that follow ask the model to explain which key "(or keys)" the 
 
 ## Reported upstream
 
-- Not reported upstream when this lesson was written: the skipped seventh chords at the pin and the symbols `main` still skips, the dropped sharps, the ties between keys with the same pitch classes, the repeated chords `ExtractChords` drops, the top matches grouped by count, the relative keys, and the SKILL.md's single-candidate example. They are listed in the [journal](../journal/).
+- Reported after this lesson was written: the symbols `main` still skips, the dropped sharps and the repeated chords `ExtractChords` drops, as GA issue [#771](https://github.com/GuitarAlchemist/ga/issues/771); the ties between keys with the same pitch classes, the top matches grouped by count, the relative keys and the SKILL.md's single-candidate example, as [#772](https://github.com/GuitarAlchemist/ga/issues/772). The seventh chords skipped at the pin are read on `main` since [#625](https://github.com/GuitarAlchemist/ga/pull/625). All are listed in the [journal](../journal/).
 
 ## Exercises
 
