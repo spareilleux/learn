@@ -387,7 +387,7 @@ Puntuada frente a las ocho predicciones de la entrada anterior, registrada sola 
 - **P8, el muestreo de Thompson (hallazgo 43).** Pagando 0 o 100, un brazo recibe más del 99 % de las tiradas en las 100 ejecuciones, y no es el mejor en 67. Pagando 0 o 1, ninguna ejecución se fija, y el mejor brazo es el más tirado en las 100.
 - **Exploratorio, no predicho.** El resto de la tabla Q no converge con el camino: el mayor |Q − Q\*| es 8,484. Con 10^4 pasos ε-voraz va por delante de UCB1, y el muestreo de Thompson de IX tiene el menor regret en los dos horizontes (85,4 y 141,9). De los 12 recorridos de SARSA sin camino, 9 se quedan en una casilla contra una pared y 3 van y vienen entre dos casillas. La explicación de la lección, un paso constante de 0,5 que deja la tabla en movimiento, no está medida.
 
-El CI en tres sistemas para la lección 14 sigue pendiente.
+La primera ejecución del CI, [36740082936](https://github.com/spareilleux/learn/actions/runs/36740082936) sobre `c639e9a`, pasó en Windows, Linux y macOS: cada salida de la lección 14 coincide byte a byte con `expected/`, así que ningún casi empate se inclinó en el `ln` de UCB1 ni en el generador normal de `rand_distr`, y la comprobación cruzada en Linux coincide con `expected/crosscheck.txt`.
 
 ## 2026-09-30 — Lección 15, predicha antes de medir
 
@@ -427,5 +427,4 @@ Fuentes: [Welch (1967)](https://doi.org/10.1109/TAU.1967.1161901) para el period
 - La comprobación cruzada con JAX que `ix-autograd` pide antes de activar `fft-autograd` por defecto; la lección 12 comparó con diferencias finitas y numpy.
 - La afirmación del ejemplo de que un algoritmo genético necesita de 5000 a 10 000 evaluaciones en este objetivo: la lección 17 puede ejecutar `ix-evolution` sobre él.
 - Si `TransformerClassifier` llega a aprender sus pesos de atención cuando su paso es batch × seq veces menor que el de su cabeza: la lección 13 midió un paso, no un entrenamiento.
-- La lección 14 en CI Linux y macOS: el índice de UCB1 pasa por `ln`, y el muestreo de Thompson de IX saca muestras del generador normal de `rand_distr`; los últimos bits de una plataforma podrían inclinar un casi empate y cambiar la tabla de regrets.
 - Por qué el recorrido voraz de SARSA no encuentra camino en 12 de 50 ejecuciones: si la explicación de la lección es correcta, un paso decreciente, o uno constante más pequeño, debería hacer desaparecer los bucles.
