@@ -287,6 +287,47 @@ emulation (95th percentile 33.8 ms), with no exception. The Streeling bay,
 captured with the site's catalogue next to the build, shows the 37 books.
 Real phones and the vault in a browser: to verify.
 
+The fifth revision, the same day, takes the lift on to the roof.
+- Lift (scripts/lift.gd): a fourth landing, on the roof, level with the lead
+  at the kiosk's door (21.443 m). The ceiling's slab is cut round the shaft,
+  as the walkways are (scripts/observatory.gd); a brass plate edges the cut
+  under the ceiling, and a brass throat lines it up to the kiosk's sill. On
+  the roof, a kiosk of bronze and glass round the shaft: clear glass round
+  all but the door, which faces the drum (assets/kiosk_glass.gdshader), a base
+  band, a frieze, mullions, a cornice, a glass dome over the wheel on eight
+  ribs, and the lift's green lamp on top. Outside it draws as Upperside does,
+  lit by the galactic core; a warm lantern inside lights the cage. The kiosk
+  shows only once the camera is within a metre of the ceiling or above it.
+  The roof's gate folds up under the frieze instead of rising. Riding through
+  the ceiling, the view dips to black and back: black while the eye is within
+  35 cm of the throat's middle, clear 1.1 m away; the first climb builds
+  Upperside in the dark.
+- Walking (scripts/walk_physics.gd): the roof's lead is a floor, the cone of
+  scripts/upperside.gd, which now gives its measures to the lift and the
+  walker. On the roof, the walker keeps 30 cm from the drum and from a
+  bronze balustrade 35 cm inside the eave (99 posts, a handrail 1.05 m over
+  the lead, two lower rails); no gallery rail, no vault. The camera keeps
+  itself within 17 m of the centre as it moves (fly_camera.gd, unchanged);
+  on the roof the walker widens that to the balustrade, and puts it back
+  everywhere else.
+- Roof (scripts/upperside.gd, assets/upperside.gdshader): a round hole in the
+  lead and its seams round the kiosk, and the balustrade.
+index.pck is now 21,707,500 bytes; index.html changes only that size, and
+index.wasm and index.js are unchanged.
+Native tests (Godot 4.6.1): 34 runs under Compatibility and Forward+ pass with
+no script error, the 32 before and the roof test in both renderers: the cage
+rides from the hall to the roof with Space; the view dips fully black
+through the ceiling, and Upperside is built while it is black; the walker
+steps out onto the lead, stops 30 cm from the drum (10.86 m) and from the
+balustrade (18.65 m), walks round the roof with no fall, jumps at the
+balustrade without vaulting, rides back down with Ctrl, and calls the cage
+to the roof by walking against its gate and with E; the roof view (9) still
+holds the camera, and 1 leaves it. A first run failed the corridor test: the
+walker put the camera radius back every frame, over the corridor's own
+(scripts/multiverse.gd). It now puts back only the radius it widened.
+Web: exported; this revision was not run in a browser. The roof in a
+browser, and real phones: to verify.
+
 Native Compatibility GPU time, RTX 5080, 1600x900, 240 frames per view: 0.44 to
 0.52 ms for the previous web scene, 0.64 to 1.44 ms with the detail pass; up to
 1.55 million primitives in the overview, against 0.46 million before. With the
@@ -301,12 +342,12 @@ main.tscn fb6245c960d3625ca05920116c58351d9dbeb255beae59175d89c06d47049564
 export_presets.cfg 1bd7171d93c9a378f1b328e945be2a7960478e89d34ae269f013ef83c306588f
 scripts/fly_camera.gd 2e5cdd15ca7bdcfa30ec129e354a309f3ff7296f6fbf54ac144984ed9aa9f8e7
 scripts/capture.gd 52ea2b5e40db2f1f4cdbd7658074ef60bd117e1f4110c1b8995590a4196748d0
-scripts/observatory.gd 13759e420110a72a1b0cc97d1a31adc237e318a9aeac0d07c5b50f3617ef59a5
+scripts/observatory.gd f6a3e67bb61ea23d46fcf93229075568b52f0e2cc2ed888264cebc513f20de54
 scripts/course_library.gd ae13939d53454cf8bbcefbb0c2b5fae0ce3fb138283730564f555310ed9134a9
 scripts/steel_cube.gd f28e71fffcd151663bc9a98b3c135cc7b805490e8298d3cf01029455c973f94c
 scripts/seldon_statue.gd 4e41b282aa2cc4de794296586b65f5f4d39688312673ddc46226fd3906cf4b27
 scripts/touch_controls.gd 4b94ea15cb329d6409385799a3ff307fd35740b68d09e0f7f8ed2e2c010ae744
-scripts/walk_physics.gd c294aba30f816eed8fb92cc4c4276b302658fb821bf1db731d55ececb4d0d4cd
+scripts/walk_physics.gd a147b6165153005ec49a39cb93adad582cd6b7b64d0c3413c74d49213ddcd271
 scripts/view_fit.gd 04968e0b9c220c12490b258677a7331f07671b37d2951581a03868d8c992c65e
 scripts/view_move.gd 9a39222118edb283e594c21faf2963d767e42449b01d11fac29188b9b1b65aca
 scripts/multiverse.gd 0de3cece747a87c742ba6b26c8fac27a6a7dcdd18286f30957899becb2dfb34d
@@ -331,17 +372,18 @@ assets/statue_marble.gdshader ec3f14f662487f3dae14a398fe91ea7183d88214bd2bf26635
 assets/world_glimpse.gdshader a06fc85ca086fc3e4d9297039be0b6549132bbffafeaedfbda0ffea3eb918d6d
 assets/courses.json 407817e268f2c0d37ce28ae0d873f08b87a514479d6a73545b75d1dfbb71823b
 scripts/extra_views.gd cd6f1a22e9cca5015611121a271aa145a6100e843d200e7e57eebf85d6610a56
-scripts/upperside.gd d18d9ce9ee8d15201d5f21fba51afa957d18e9a70b2df8b49cad10a555f8cd22
+scripts/upperside.gd b6e5a199de5737ffaa294c1f9a6be8d21fc4817ac600118dead14f0fc8fc486c
 assets/night_sky.gdshader 67421b4338debb80d8b6cec071bb37001d9d5493d240be53c0a107ad17cb5cec
-assets/upperside.gdshader c6b25b186470b50d7c228f0c99d946a5c6daa6c7a90887c4baf6c7661041c6da
+assets/upperside.gdshader f119593a603bc623de218054ec142b8732330785fe0d61ba5a3dcc13124f96e3
 assets/sky_milky_way_eso.jpg b17e19bf2d5e7e9efa03b602450f5189dc77f85251e704d99b6f14632cff3495
 assets/exterior_ashlar_albedo.png c0cff260c039e1e1528920f86070266ac20ba2a3e36e99a53654c2ed18cdef94
 assets/exterior_ashlar_normal.png 0dc3b0023534b21c7d383bbca468f057cc65ba1a9526303c7b3084587138f029
-scripts/lift.gd dab60e28fef23f72ca3f8e8a6cc60ffdcdb90b41b97cb9e3d258fcf723087a50
+scripts/lift.gd b3030cc84808c80c98fd55168c357997f03aa8567559618345c842561a1277d9
 assets/sky_core_cap.png a110fdfa1b79cc41eec119265aeb89bc211d0b8e0eb6c759b45c25496f2daabe
+assets/kiosk_glass.gdshader 76226f17e5884a042b85e5fc544a4b71012ea6e389b9743c1cac65083a06bc44
 
 SHA-256 output files:
-index.pck f9a21c56e63c73ea8488cd486adc38f93371d894b60badbbc0bf182c12eb909d
+index.pck a87a023dd09ffc1d0aaa0f8f6d0b40a024095f150eb6e0859ed39c331faf271a
 index.wasm 99962b29677e42f3ba0258bd90fdc52ad90295954c4473e816ad02cfe5ff1d4f
 index.js e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981
 
