@@ -126,4 +126,13 @@ least squares: w [ 0.499818 -0.3       0.800182], b 0.089990, w0 + w2 = 1.300000
 at w = 0, b = 0: loss 0.724417, dL/dw [-0.959694  0.656138 -0.96151 ], dL/db -0.032640
 Adam, 200 steps: w [ 0.64994  -0.300002  0.650065], b 0.098315, loss below 0.01 first at step 31
 FFT loss, numpy: dL/dx first four [-4.429396 -6.277916 -0.459292 -5.058516], central differences within 1e-6: True
+
+== lesson 13
+attention, batch 0, query 0: weights [0.255277 0.255466 0.217414 0.271842], output [-0.338191 -0.187914  0.504304]
+layer norm, token 0: [ 0.136528  0.65296  -2.171448  0.100933  0.573105  0.707922]
+d 4: var(q.k) 4.0, largest of 16 weights unscaled 0.413, scaled 0.226
+d 16: var(q.k) 15.7, largest of 16 weights unscaled 0.679, scaled 0.238
+d 64: var(q.k) 63.8, largest of 16 weights unscaled 0.847, scaled 0.247
+d 256: var(q.k) 259.7, largest of 16 weights unscaled 0.925, scaled 0.247
+numpy's own U(-1, 1), a million draws: std 0.5776, 1/sqrt(3) = 0.5774
 exit 0
