@@ -231,7 +231,7 @@ Ocho de los ejemplos de `IntervalSkill`, cinco definiciones y tres preguntas com
 
 ## Comunicado upstream
 
-- No se habían comunicado upstream cuando se escribió esta lección: el sostenido que se pierde, los `♯` y `♭` que no se reconocen, los unísonos rebajados y la rama por defecto, las cualidades abreviadas, las tonalidades relativas de `ScaleInfoSkill`, las armaduras de `RelativeKeySkill` por encima de siete alteraciones y su rechazo de C♭, y los prompts de ejemplo que las skills no saben responder. Están listados en el [diario](../journal/).
+- Se comunicaron después de escribir esta lección: el sostenido que se pierde, los `♯` y `♭` que no se reconocen, las cualidades abreviadas y los prompts de ejemplo de `IntervalSkill`, en la issue de GA [#767](https://github.com/GuitarAlchemist/ga/issues/767); los unísonos rebajados y la rama por defecto, en la [#768](https://github.com/GuitarAlchemist/ga/issues/768); las tonalidades relativas de `ScaleInfoSkill`, las armaduras de `RelativeKeySkill` por encima de siete alteraciones y su rechazo de C♭, en la [#769](https://github.com/GuitarAlchemist/ga/issues/769). Los tres prompts de ejemplo que `ScaleInfoSkill` no sabe responder no se han comunicado. Están listados en el [diario](../journal/).
 
 ## Ejercicios
 

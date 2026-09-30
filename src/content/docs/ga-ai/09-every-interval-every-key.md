@@ -231,7 +231,7 @@ Eight of `IntervalSkill`'s examples, five definitions and three questions such a
 
 ## Reported upstream
 
-- Not reported upstream when this lesson was written: the dropped sharp, the unrecognized `♯` and `♭`, the lowered unisons and the default arm, the abbreviated qualities, `ScaleInfoSkill`'s relative keys, `RelativeKeySkill`'s signatures past seven accidentals and its refusal of C♭, and the example prompts the skills can't answer. They are listed in the [journal](../journal/).
+- Reported after this lesson was written: the dropped sharp, the unrecognized `♯` and `♭`, the abbreviated qualities and `IntervalSkill`'s example prompts as GA issue [#767](https://github.com/GuitarAlchemist/ga/issues/767); the lowered unisons and the default arm as [#768](https://github.com/GuitarAlchemist/ga/issues/768); `ScaleInfoSkill`'s relative keys, `RelativeKeySkill`'s signatures past seven accidentals and its refusal of C♭ as [#769](https://github.com/GuitarAlchemist/ga/issues/769). The three example prompts `ScaleInfoSkill` can't answer are not reported. They are listed in the [journal](../journal/).
 
 ## Exercises
 
