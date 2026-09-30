@@ -442,7 +442,7 @@ Puntuada frente a las nueve predicciones de la entrada anterior, registrada sola
 - **P9, casos límite (hallazgos 49 a 52).** `hanning`, `hamming`, `blackman`, `bartlett` y `gaussian` de longitud 1 valen NaN, `kaiser(1, 5)` vale 0,0367, y las cinco ventanas de longitud 1 de numpy valen 1,0. `fft(&[])` devuelve un cero. `normalized_cross_correlation` de las dos rampas vale 0,6667 en el desfase 0, donde Pearson vale −1, y nunca es negativa. `autocorrelation([1, 2, 3, 4])` vale exactamente 1 en el desfase 0.
 - **Exploratorio, no predicho.** El error de la FFT de IX en Windows es 1,8 × 10^-15, 9,6 × 10^-15, 2,9 × 10^-14, 1,3 × 10^-13 y 5,4 × 10^-13 de 2^8 a 2^16 en factores de 4: lineal en N. Los coeficientes del paso bajo suman 1,000041082, como los del `firwin` sin escalar de SciPy. El `firwin` de SciPy rechaza un paso alto de 32 coeficientes con `ValueError`.
 
-El CI en tres sistemas para la lección 15 sigue pendiente.
+La primera ejecución del CI, [36745177137](https://github.com/spareilleux/learn/actions/runs/36745177137) sobre `b604996`, pasó en Windows, Linux y macOS: cada salida de la lección 15 coincide byte a byte con `expected/`, así que el error de la FFT de IX se quedó en las décadas impresas con el `cos` y el `sin` de las tres plataformas, y la comprobación cruzada en Linux coincide con `expected/crosscheck.txt`.
 
 ## 2026-09-30 — Lección 16, predicha antes de medir
 
@@ -482,5 +482,4 @@ Fuentes: [Hart, Nilsson y Raphael (1968)](https://doi.org/10.1109/TSSC.1968.3001
 - La afirmación del ejemplo de que un algoritmo genético necesita de 5000 a 10 000 evaluaciones en este objetivo: la lección 17 puede ejecutar `ix-evolution` sobre él.
 - Si `TransformerClassifier` llega a aprender sus pesos de atención cuando su paso es batch × seq veces menor que el de su cabeza: la lección 13 midió un paso, no un entrenamiento.
 - Por qué el recorrido voraz de SARSA no encuentra camino en 12 de 50 ejecuciones: si la explicación de la lección es correcta, un paso decreciente, o uno constante más pequeño, debería hacer desaparecer los bucles.
-- La lección 15 en CI Linux y macOS: el error de la FFT de IX viene del `cos` y el `sin` de la plataforma, y las décadas impresas con 2^8, 2^12 y 2^16 quedan a 1,8, 2,9 y 1,85 veces de sus límites en Windows; una plataforma cuyo `cos` redondee de otra forma podría cruzar uno.
 - Si `spectrogram` etiqueta mal una ventana que no es potencia de dos, como `welch_psd`: conserva las mismas window_size/2 + 1 bandas de la transformada rellenada, lo que sale de leer el código, no de una medida.

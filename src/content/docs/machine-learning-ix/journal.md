@@ -442,7 +442,7 @@ Scored against the nine predictions of the entry above, committed alone as `ece2
 - **P9, edge cases (findings 49 to 52).** `hanning`, `hamming`, `blackman`, `bartlett` and `gaussian` of length 1 are NaN, `kaiser(1, 5)` is 0.0367, and numpy's five windows of length 1 are 1.0. `fft(&[])` returns one zero. `normalized_cross_correlation` of the two ramps is 0.6667 at lag 0, where Pearson is −1, and never negative. `autocorrelation([1, 2, 3, 4])` is exactly 1 at lag 0.
 - **Exploratory, not predicted.** IX's FFT error on Windows is 1.8 × 10^-15, 9.6 × 10^-15, 2.9 × 10^-14, 1.3 × 10^-13 and 5.4 × 10^-13 at 2^8 to 2^16 in factors of 4: linear in N. The low-pass's taps sum to 1.000041082, as SciPy's unscaled `firwin`. SciPy's `firwin` refuses a 32-tap high-pass with `ValueError`.
 
-Three-OS CI for lesson 15 is still pending.
+The first CI run, [36745177137](https://github.com/spareilleux/learn/actions/runs/36745177137) on `b604996`, passed on Windows, Linux and macOS: every lesson 15 output matched `expected/` byte for byte, so IX's FFT error stayed in the printed decades on the three platforms' `cos` and `sin`, and the Linux cross-check matched `expected/crosscheck.txt`.
 
 ## 2026-09-30 — Lesson 16, predicted before measuring
 
@@ -482,5 +482,4 @@ Sources: [Hart, Nilsson and Raphael (1968)](https://doi.org/10.1109/TSSC.1968.30
 - The example's claim that a genetic algorithm needs 5,000 to 10,000 evaluations on this objective: lesson 17 can run `ix-evolution` on it.
 - Whether `TransformerClassifier` learns its attention weights at all when they step batch × seq times less than its head: lesson 13 measured one step, not a training run.
 - Why SARSA's greedy walk finds no path in 12 of 50 runs: if the lesson's explanation is right, a decreasing step, or a smaller constant one, should make the loops disappear.
-- Lesson 15 on Linux and macOS CI: IX's FFT error comes from the platform's `cos` and `sin`, and the decades printed at 2^8, 2^12 and 2^16 sit 1.8, 2.9 and 1.85 times inside their bounds on Windows; a platform whose `cos` rounds differently could cross one.
 - Whether `spectrogram` mislabels a window that is not a power of two as `welch_psd` does: it keeps the same window_size/2 + 1 bins of the padded transform, which comes from reading the code, not from a measurement.
