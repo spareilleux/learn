@@ -3,9 +3,9 @@ Observatory Web export provenance
 Built 2026-09-30 with the official non-.NET Godot 4.6.1-stable Web export
 template. Godot renderer: gl_compatibility (WebGL 2). The Web export disables
 SSR, SSIL and volumetric fog from the native Forward+ scene, and replaces its
-4x MSAA with the anti-aliasing that the page picks (see the last revision). It
-is separate from the higher-quality native build and does not use hardware ray
-tracing.
+4x MSAA with the anti-aliasing that the page picks (see the revision that
+makes walk mode a body). It is separate from the higher-quality native build
+and does not use hardware ray tracing.
 
 This revision adds the detail pass: shaded book bindings (40,250 books), dressed
 stone with a tooled relief, turned bronze balusters under a walnut handrail, a
@@ -85,7 +85,7 @@ catalogue; a book opens with two taps. In Chrome for Testing 153 on the RTX
 walk, look, fly, change view and open and close the catalogue; a real phone
 is still to verify.
 
-The last revision, 2026-09-30, makes walk mode a body, turns the viewpoints
+The next revision, 2026-09-30, makes walk mode a body, turns the viewpoints
 into short flights, marks the course bays, adds a language selector and a
 corridor behind the box, widens the view on a phone held upright, and gives
 the Web build the anti-aliasing it lacked. It ships only scripts, one shader
@@ -160,6 +160,14 @@ Real phones and tablets are still to verify: whether Safari's WebGL applies
 the MSAA and what it costs, the frame rate, the wider field, the flights and
 the double tap.
 
+The last revision, the same day, fixes the lettering of the bay banners
+(scripts/course_library.gd). It was sized so that the widest word filled the
+banner exactly, and the label then wrapped that word inside itself: the
+English banner read "INFRASTRUCTUR" over "E". The widest word now takes at
+most 92 percent of the width, and all 27 banners (9 areas, 3 languages) wrap
+between words, under Compatibility and Forward+. index.pck keeps its size;
+index.html, index.wasm and index.js are unchanged.
+
 Native Compatibility GPU time, RTX 5080, 1600x900, 240 frames per view: 0.44 to
 0.52 ms for the previous web scene, 0.64 to 1.44 ms with the detail pass; up to
 1.55 million primitives in the overview, against 0.46 million before. With the
@@ -175,7 +183,7 @@ export_presets.cfg 1bd7171d93c9a378f1b328e945be2a7960478e89d34ae269f013ef83c3065
 scripts/fly_camera.gd 2e5cdd15ca7bdcfa30ec129e354a309f3ff7296f6fbf54ac144984ed9aa9f8e7
 scripts/capture.gd 52ea2b5e40db2f1f4cdbd7658074ef60bd117e1f4110c1b8995590a4196748d0
 scripts/observatory.gd 026eba6c86383a3df55930d9b3369a5c9de0640ff6ded1be5ba89d9fe06c93b5
-scripts/course_library.gd bb6cc84b96a12117c0dabee3ed3e49e23ed97ea315a0b316ce4ec3d58408fab1
+scripts/course_library.gd cb7c82e0893750c007b98611a84b4af2d7715ef6f1edb33e5fc5a3607983d9dd
 scripts/steel_cube.gd f28e71fffcd151663bc9a98b3c135cc7b805490e8298d3cf01029455c973f94c
 scripts/seldon_statue.gd 4e41b282aa2cc4de794296586b65f5f4d39688312673ddc46226fd3906cf4b27
 scripts/touch_controls.gd e9e1a18705024a1f7cbc36b59fd3cee0d2d8891dd7b928b9b48c170a39e0f501
@@ -205,7 +213,7 @@ assets/world_glimpse.gdshader a06fc85ca086fc3e4d9297039be0b6549132bbffafeaedfbda
 assets/courses.json a4a97ab7fffa250c62ca71fe7f6b5885e3c3ab31054cf8aa9b180ea67aae9bfc
 
 SHA-256 output files:
-index.pck 8fe230153b70e940c7bf1ac5f93b06050ab6aa3efcc30d736af1e857907f9a61
+index.pck 0a443f2d25e23666bb6e3c0d8e47a2f3f9ee3d8bb22b5ef23c49394af0b9b4a9
 index.wasm 99962b29677e42f3ba0258bd90fdc52ad90295954c4473e816ad02cfe5ff1d4f
 index.js e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981
 
