@@ -64,16 +64,29 @@ export const GET: APIRoute = async () => {
 		return { id: dir, title: translate(group), description, lessons, unit: auto ? 'lessons' : 'pages', url };
 	}
 
+	// The departments of a course that nests them (Streeling University), each one a course of its
+	// own: shelved as a single course, the university was a single book in its bay. A department
+	// with no module yet in English stays off the shelf rather than show "0 pages".
+	function departments(group: Item) {
+		return (group.items ?? []).flatMap((item) => {
+			const dir = item.items?.find((sub) => sub.autogenerate)?.autogenerate?.directory;
+			const found = dir ? course(item, { dir, auto: false }) : null;
+			return found && found.lessons.en > 0 ? [found] : [];
+		});
+	}
+
 	// Walk the sidebar: a course joins the area named by its ancestors, and a course at the top level
-	// (Streeling University) is an area of its own. Plain pages (Method, Artifacts, the observatory)
-	// and links are not courses.
+	// (Streeling University) is an area of its own, whose departments are its books. Plain pages
+	// (Method, Artifacts, the observatory) and links are not courses.
 	function walk(items: Item[], path: Item[]) {
 		const courses: object[] = [];
 		for (const item of items) {
 			if (!item.items) continue;
 			const found = courseDir(item);
-			if (found && path.length === 0) areas.push({ label: translate(item), courses: [course(item, found)] });
-			else if (found) courses.push(course(item, found));
+			if (found && path.length === 0) {
+				const nested = found.auto ? [] : departments(item);
+				areas.push({ label: translate(item), courses: nested.length > 0 ? nested : [course(item, found)] });
+			} else if (found) courses.push(course(item, found));
 			else walk(item.items, [...path, item]);
 		}
 		if (courses.length === 0) return;
