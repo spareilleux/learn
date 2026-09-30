@@ -10,13 +10,16 @@ FIX_FILES="InvalidChordNames.cs ImprovisationSkill.cs ChordIntentMatching.cs"
 # 6baf32e, against the pinned domain
 KEYS_SHA=6baf32ed9b35c9b8a1645cb8d6836aafd0713a40
 KEYS_FILE=Common/GA.Domain.Services/Tonal/KeyIdentificationService.cs
+# Lesson 13 also compiles GA's DSL closures at the same commit, where domain.analyzeProgression
+# takes its key from that service; the file is unchanged on main since
+DSL_FILE=Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs
 # Lesson 8 reads GA's prompt corpus, outside the sparse checkout, at the pinned commit
 CORPUS=Tests/Apps/GaChatbot.Api.Tests/Corpus/prompts.yaml
 cd "$(dirname "$0")"
 if [ "$(git -C .ga rev-parse HEAD 2>/dev/null || true)" = "$GA_SHA" ]; then
   echo "ga   $GA_SHA already here"
 else
-  rm -rf .ga .ga-fix .ga-keys .ga-files
+  rm -rf .ga .ga-fix .ga-keys .ga-dsl .ga-files
   git clone --quiet --filter=blob:none --no-checkout https://github.com/GuitarAlchemist/ga.git .ga
   git -C .ga config core.longpaths true
   # GA.Business.ML and its project references, the CLI that writes the OPTIC-K index,
@@ -56,6 +59,14 @@ if [ "$(cat .ga-keys/SHA 2>/dev/null || true)" != "$KEYS_SHA" ]; then
   echo "$KEYS_SHA" > .ga-keys/SHA
 fi
 echo "keys $KEYS_SHA"
+if [ "$(cat .ga-dsl/SHA 2>/dev/null || true)" != "$KEYS_SHA" ]; then
+  git -C .ga cat-file -e "$KEYS_SHA^{commit}" 2>/dev/null || git -C .ga fetch --quiet --filter=blob:none origin "$KEYS_SHA"
+  rm -rf .ga-dsl
+  mkdir .ga-dsl
+  git -C .ga show "$KEYS_SHA:$DSL_FILE" > .ga-dsl/DomainClosures.fs
+  echo "$KEYS_SHA" > .ga-dsl/SHA
+fi
+echo "dsl  $KEYS_SHA"
 if [ ! -s .ga-files/prompts.yaml ]; then
   mkdir -p .ga-files
   git -C .ga show "$GA_SHA:$CORPUS" > .ga-files/prompts.yaml.tmp
