@@ -272,7 +272,7 @@ A cadence in a minor key usually takes its dominant from the harmonic minor: E o
 
 ## Reported upstream
 
-- Not reported upstream when this lesson was written: the brighten test, the two texts' chords, the lists taken from the first key by name, the lists spelled from the enharmonic key, the dominant missing from a minor key's list, the prompt's example, the SKILL.md's example and the keyword tests. The dropped sharps are [#771](https://github.com/GuitarAlchemist/ga/issues/771), and the order of keys with the same pitch classes has the same cause as [#772](https://github.com/GuitarAlchemist/ga/issues/772). All are listed in the [journal](../journal/).
+- Reported after this lesson was written: the brighten test, the two texts' chords and the mood skill's keyword test, as GA issue [#773](https://github.com/GuitarAlchemist/ga/issues/773); the lists spelled from the enharmonic key, the dominant missing from a minor key's list, the prompt's example, the SKILL.md's example and the completion skill's keyword test, as [#774](https://github.com/GuitarAlchemist/ga/issues/774). The lists taken from the first key by name are fixed on `main` by [#729](https://github.com/GuitarAlchemist/ga/pull/729). The dropped sharps are [#771](https://github.com/GuitarAlchemist/ga/issues/771), and the order of keys with the same pitch classes has the same cause as [#772](https://github.com/GuitarAlchemist/ga/issues/772). All are listed in the [journal](../journal/).
 
 ## Exercises
 

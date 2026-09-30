@@ -272,7 +272,7 @@ En mineur, une cadence prend d'ordinaire sa dominante dans le mineur harmonique 
 
 ## Signalé en amont
 
-- Non signalés en amont au moment où cette leçon a été écrite : le test d'éclaircissement, les accords des deux textes, les listes prises dans la première tonalité par ordre de nom, les listes écrites depuis la tonalité enharmonique, la dominante absente de la liste d'une tonalité mineure, l'exemple du prompt, l'exemple du SKILL.md et les tests par mots-clés. Les dièses perdus relèvent de [#771](https://github.com/GuitarAlchemist/ga/issues/771), et l'ordre des tonalités qui ont les mêmes classes de hauteurs a la même cause que [#772](https://github.com/GuitarAlchemist/ga/issues/772). Tous sont listés dans le [journal](../journal/).
+- Signalés après l'écriture de cette leçon : le test d'éclaircissement, les accords des deux textes et le test par mots-clés du skill d'ambiance, dans le ticket de GA [#773](https://github.com/GuitarAlchemist/ga/issues/773) ; les listes écrites depuis la tonalité enharmonique, la dominante absente de la liste d'une tonalité mineure, l'exemple du prompt, l'exemple du SKILL.md et le test par mots-clés du skill de complétion, dans [#774](https://github.com/GuitarAlchemist/ga/issues/774). Les listes prises dans la première tonalité par ordre de nom sont corrigées sur `main` par [#729](https://github.com/GuitarAlchemist/ga/pull/729). Les dièses perdus relèvent de [#771](https://github.com/GuitarAlchemist/ga/issues/771), et l'ordre des tonalités qui ont les mêmes classes de hauteurs a la même cause que [#772](https://github.com/GuitarAlchemist/ga/issues/772). Tous sont listés dans le [journal](../journal/).
 
 ## Exercices
 

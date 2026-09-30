@@ -272,7 +272,7 @@ Una cadencia en una tonalidad menor suele tomar la dominante de la menor armóni
 
 ## Comunicado upstream
 
-- No se habían comunicado upstream cuando se escribió esta lección: la prueba de luminosidad, los acordes de los dos textos, las listas tomadas de la primera tonalidad por nombre, las listas escritas a partir de la tonalidad enarmónica, la dominante que falta en la lista de una tonalidad menor, el ejemplo del prompt, el ejemplo del SKILL.md y las pruebas de palabras clave. Los sostenidos perdidos son la [#771](https://github.com/GuitarAlchemist/ga/issues/771), y el orden de las tonalidades con las mismas clases de altura tiene la misma causa que la [#772](https://github.com/GuitarAlchemist/ga/issues/772). Todos están listados en el [diario](../journal/).
+- Se comunicaron después de escribir esta lección: la prueba de luminosidad, los acordes de los dos textos y la prueba de palabras clave de la skill de ambiente, en la issue de GA [#773](https://github.com/GuitarAlchemist/ga/issues/773); las listas escritas a partir de la tonalidad enarmónica, la dominante que falta en la lista de una tonalidad menor, el ejemplo del prompt, el ejemplo del SKILL.md y la prueba de palabras clave de la skill de continuación, en la [#774](https://github.com/GuitarAlchemist/ga/issues/774). Las listas tomadas de la primera tonalidad por nombre están corregidas en `main` por la [#729](https://github.com/GuitarAlchemist/ga/pull/729). Los sostenidos perdidos son la [#771](https://github.com/GuitarAlchemist/ga/issues/771), y el orden de las tonalidades con las mismas clases de altura tiene la misma causa que la [#772](https://github.com/GuitarAlchemist/ga/issues/772). Todos están listados en el [diario](../journal/).
 
 ## Ejercicios
 
