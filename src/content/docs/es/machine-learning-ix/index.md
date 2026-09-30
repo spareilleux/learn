@@ -69,7 +69,7 @@ Cada enlace a código de IX en las lecciones apunta a ese commit, así que los n
 
 ## Plan
 
-Las lecciones 1 a 9 están escritas. El resto es el plan, una lección por familia de algoritmos que IX implementa, y cada una se publicará con su código y su comprobación cruzada como las demás.
+Las lecciones 1 a 19 están escritas. El resto es el plan, una lección por familia de algoritmos que IX implementa, y cada una se publicará con su código y su comprobación cruzada como las demás.
 
 | # | Lección | Crates de IX | Si conoces ML.NET |
 |---|---|---|---|
@@ -91,7 +91,7 @@ Las lecciones 1 a 9 están escritas. El resto es el plan, una lección por famil
 | 16 | [Búsqueda: A\*, búsqueda en árbol de Monte-Carlo, búsqueda local](16-search/) | `ix-search`, `ix-graph` | — |
 | 17 | [Evolución: algoritmos genéticos, evolución diferencial, frentes de Pareto](17-evolution/) | `ix-evolution` | — |
 | 18 | [Ejemplos adversarios, envenenamiento y las defensas](18-adversarial/) | `ix-adversarial` | — |
-| 19 | La forma de los datos: homología persistente | `ix-topo`, `ix-manifold` | — |
+| 19 | [La forma de los datos: homología persistente](19-persistent-homology/) | `ix-topo`, `ix-manifold` | — |
 | 20 | En la GPU: productos de matrices, distancias y k vecinos más cercanos en WGSL | `ix-gpu` | — |
 | 21 | Pipelines de principio a fin, y las herramientas MCP que llama un asistente | `ix-pipeline`, `ix-agent` | `MLContext` |
 | — | [Cada crate y cada función pública](api-map/) | los 80 con superficie pública | — |

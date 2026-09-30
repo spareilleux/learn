@@ -36,6 +36,7 @@ pub mod search;
 pub mod sequence;
 pub mod signal;
 pub mod sketch;
+pub mod topology;
 pub mod transformer;
 
 use ndarray::{Array1, Array2};
