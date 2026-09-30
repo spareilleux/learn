@@ -14,11 +14,12 @@ sidebar:
 - [x] Lesson 3: the index and search
 - [x] Lesson 4: the chatbot and its agents
 - [x] Lesson 5: the improvisation skill and chord–scale theory
+- [x] Lesson 6: the chatbot's answer on the wire
 - [ ] Run the chatbot with Ollama and capture what the agents answer (dated, outside CI)
 
 ## QA
 
-Findings 1 to 22, from lessons 1 to 4, are numbered in the entry of [2026-09-14](#2026-09-14--differences-found-in-gas-code-commit-a826864), with their upstream status in the entry of [2026-09-24](#2026-09-24--upstream-fixes). This table starts at lesson 5. `ImprovisationSkill.cs` is identical at `a826864` and on GA's `main` at `8cd5042` (2026-09-28), so every row also describes the deployed skill.
+Findings 1 to 22, from lessons 1 to 4, are numbered in the entry of [2026-09-14](#2026-09-14--differences-found-in-gas-code-commit-a826864), with their upstream status in the entry of [2026-09-24](#2026-09-24--upstream-fixes). This table starts at lesson 5. `ImprovisationSkill.cs` is identical at `a826864` and on GA's `main` at `8cd5042` (2026-09-28), so rows 23 to 28 also describe the deployed skill. Rows 29 to 32, from lesson 6, give their state on `main` in the last column.
 
 | Expected | What happens | Where | Measure | Status |
 |---|---|---|---|---|
@@ -28,6 +29,10 @@ Findings 1 to 22, from lessons 1 to 4, are numbered in the entry of [2026-09-14]
 | 26. `C7#11` leads with a scale that holds F♯ | Mixolydian, with F natural; Lydian dominant is the second choice | [lines 360-436](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/ImprovisationSkill.cs#L360-L436) | `l5`, one-chord table | Reproduced; not reported upstream |
 | 27. Suspended and power chords keep their own tones | "unknown": the arpeggio label is the bare root, a major triad, E against the sus4's F and the sus2's D | [line 283](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/ImprovisationSkill.cs#L283) | `l5`, one-chord table | Reproduced; not reported upstream |
 | 28. A progression's lead scales stay in its key, or say the key is ambiguous | Ionian on major triads, Aeolian on minor triads, whatever their degree: B♭ on F and F♯ on G over Am F C G, F♯ G♯ on A in C A Dm G, F♯ C♯ D♯ on E in Am Dm E; C G isn't flagged as ambiguous | [lines 212-261](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/ImprovisationSkill.cs#L212-L261) | `l5`: of 23 chords in 7 progressions (the borrowed chord left out), 11 same, 10 DIFF, 2 right in one of two keys | Reported as [#744](https://github.com/GuitarAlchemist/ga/issues/744) |
+| 29. A client tells a failed request from an answer | The stream answers HTTP 200 and sends `{"error": …}` as an ordinary event, with no `[DONE]`. GaChatbot.Api's page renders that JSON as the assistant's answer and stores it in the conversation history, which the next request sends back | [`index.html` lines 740-809](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Apps/GaChatbot.Api/wwwroot/index.html#L740-L809), [line 984](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Apps/GaChatbot.Api/wwwroot/index.html#L984) | `l6`, failure table, through the course's port of the page | Reproduced in the port, not in a browser; not reported upstream |
+| 30. Streamed chunks join back into the answer | `SseChunker` splits on `(?<=[.!?])\s+`, which removes the whitespace between sentences: the improvisation answer loses 6 of its 8 line breaks and its list renders as one bullet | [`SseChunker.cs` lines 19-29](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Core.Orchestration/Helpers/SseChunker.cs#L19-L29) | `l6`, sentences: 552 of 558 characters | Fixed upstream by [#743](https://github.com/GuitarAlchemist/ga/pull/743), merged on 2026-09-28; the course runs the pinned version and a copy of the fix |
+| 31. Every line of text survives GaApi's stream | `data: {chunk}` with no prefix on the chunk's other lines: a blank line inside a chunk ends the event, and the line after it is lost for every reader | [GaApi `ChatbotController.cs` lines 318-322](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Apps/ga-server/GaApi/Controllers/ChatbotController.cs#L318-L322) | `l6`, pairs table: 1 of 6 lines and 8 line breaks missing, both splits | Reported upstream: [#746](https://github.com/GuitarAlchemist/ga/issues/746), open; unchanged on `main` at `8621c3e`. Latent: no ga-client component reads that stream |
+| 32. ga-client's SSE client keeps every line of an event | `parseSseBuffer` keeps the first `data:` line of each event and trims it, so it loses a line and every line break even from GaChatbot.Api's writer | [`chatService.ts` lines 41-48](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Apps/ga-client/src/services/chatService.ts#L41-L48) | `l6`, pairs table | Client half of #746's acceptance; no caller at `a826864` |
 | The oracle gives a taught scale for every chord | For a borrowed chord, F minor in C, its rule gives F G A♭ B C D E, not a taught scale; the usual answer is F Dorian | `code/ga-ai/GaAi/Lesson5.cs`, `Textbook` | `l5`, C Fm G C | A limit of the course's oracle, not of GA; documented in lesson 5 |
 
 ## 2026-09-14 — Why this course
@@ -109,12 +114,24 @@ Most of the 22 differences of 2026-09-14 were fixed upstream by [#689](https://g
 - The oracle's tables have to cover every scale name the skill can return; a missing name throws. One progression was run once and not kept in the program: Bb Gm Cm F, for the solution of the first exercise.
 - CI run [36425151971](https://github.com/spareilleux/learn/actions/runs/36425151971), for commit `c2ab348`: green on the three systems, 1 min 42 s on Linux, 2 min 4 s on macOS, 2 min 59 s on Windows, clone and build included.
 
+## 2026-09-28 — Lesson 6: the answer on the wire
+
+- The tracer run of 2026-09-28 saw the public page render the improvisation answer's list as one bullet. #743 fixed the cause, `SseChunker`, the same day, and #746 recorded a second defect, in GaApi's writer. Lesson 6 checks the whole wire offline, in the course's CI: the real host's stream, read by a reader written from the HTML standard, then two writers and three readers on the pinned and the fixed splits.
+- The program has copies of both writers and ports of two JavaScript readers, the page's `consumeSseStream` and ga-client's `parseSseBuffer`. The copy of GaChatbot.Api's writer is checked against the host's bytes on every run; GaApi's writer and the two readers are not run in their own runtime, so a port that drifts from its source would go unnoticed.
+- GA builds its answers with `StringBuilder.AppendLine`, so `/chat` returns CRLF line breaks on Windows. The first run of `l6` printed "no" where the text events and `/chat` differed only by CR, and counts that changed with the system. The program now compares with LF line breaks. The host's stream is the same on every system: its writer strips CR.
+- The routing event's trace holds timings that change on every run; the program prints the event cut at a comma.
+- `ChatStreamAsync` awaits the whole answer before the first event: the stream renders sentence by sentence, but the first sentence leaves when the last is known.
+- GaApi's writer (#746) is latent at `a826864`: `git grep` finds no caller of `sendChatMessageStream` or `streamChat` in `Apps/ga-client/src`, and the React chat talks AG-UI, whose JSON events escape line breaks.
+- CI run [36509333842](https://github.com/spareilleux/learn/actions/runs/36509333842), for commit `ed723b9`: green on the three systems, 1 min 47 s on Linux, 1 min 13 s on macOS, 3 min 6 s on Windows, clone and build included.
+
 ## To verify
 
 - Whether the deployed chatbot routes every prompt of lesson 5 to `ImprovisationSkill`; the tracer of 2026-09-28 saw it do so for Am F C G.
 - The Berklee names of lesson 5, Mixolydian ♭13 for V7/II and Mixolydian ♭9 ♭13 for a dominant in minor, and F Dorian for a borrowed iv, against Nettles and Graf, *The Chord Scale Theory & Jazz Harmony*, which the course hasn't read.
 - The solutions of lesson 5's exercises 2 and 3, not compiled against GA.
+- How GaChatbot.Api's page shows an error event in a browser: lesson 6 runs a C# port of its reader, not the page. The same for the solution of lesson 6's exercise 3.
 
 ## Open questions
 
 - Which key-inference rule should GA's improvisation skill use? #744 leaves it open: the count of chord tones outside each major scale used by lesson 5, or GA's existing key-identification services.
+- Should GA's streams mark an error as such, with an `event: error` field or a `type` in the JSON, and end with `[DONE]` or its own terminal event? At `a826864`, each client has to guess from the JSON's shape.
