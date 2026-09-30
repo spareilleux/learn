@@ -1,6 +1,6 @@
 ---
 title: "Journal"
-description: "Dated progress notes — IX pinned at 490c395, CI data and course checks, nineteen earlier findings, then two from lesson 9, three from lesson 10 and four from lesson 11, what agreed, the generated API map, and items to verify."
+description: "Dated progress notes — IX pinned at 490c395, CI data and course checks, nineteen earlier findings, then two from lesson 9, three from lesson 10, four from lesson 11 and five from lesson 12, what agreed, the generated API map, and items to verify."
 sidebar:
   order: 99
 ---
@@ -21,13 +21,14 @@ sidebar:
 - [x] Lesson 9: five other reducers, with a hand MDS and independent cross-checks
 - [x] Lesson 10: Markov chains and hidden Markov models, by hand, with IX and with numpy
 - [x] Lesson 11: probabilistic structures, seven predictions written before the first run
+- [x] Lesson 12: automatic differentiation, eight predictions written before the first run
 - [x] Appendix: the API map, generated from the pinned commit
-- [ ] Lessons 12 to 21
+- [ ] Lessons 13 to 21
 - [x] French and Spanish translations
 
 ## QA
 
-IX is somebody else's library, pinned at `490c395`. The earlier lessons recorded nineteen findings; lesson 9 adds two API or documentation findings, lesson 10 three more, and lesson 11 four more. The first column says what a caller would expect. None is filed as an IX issue. Several are defensible choices rather than defects, and the middle column says which.
+IX is somebody else's library, pinned at `490c395`. The earlier lessons recorded nineteen findings; lesson 9 adds two API or documentation findings, lesson 10 three more, lesson 11 four more, and lesson 12 five more. The first column says what a caller would expect. None is filed as an IX issue. Several are defensible choices rather than defects, and the middle column says which.
 
 | Expected | What happens | Where | Measure | Status |
 |---|---|---|---|---|
@@ -59,10 +60,15 @@ IX is somebody else's library, pinned at `490c395`. The earlier lessons recorded
 | A failed `CuckooFilter::insert` leaves the filter as it was: "Returns false if the filter is full" | It keeps the new fingerprint and drops the one displaced by the last kick, as Algorithm 1 of Fan et al. does, so an item inserted earlier reads as absent. The authors' reference implementation keeps that fingerprint in a victim cache; neither the doc comment nor `CONTRACTS.md` mentions the loss | [`cuckoo.rs` 36, 54-75](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-probabilistic/src/cuckoo.rs#L36-L75) | `new(4096)`: inserting 3,730 fails at load 0.9106; afterwards 3,730 is found and 2,498 is not | Reproduced, not filed [2026-09-29](#2026-09-29--lesson-11-measured) |
 | `CONTRACTS.md` describes `CuckooFilter` | It says victims are picked with `rand::random()`, so runs are not deterministic, and names a `CuckooFilter::delete`. The code picks `fingerprint % len`, the crate has no `rand` dependency, and the method is `remove` | [`CONTRACTS.md` 17, 32](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-probabilistic/CONTRACTS.md?plain=1#L17-L32), [`cuckoo.rs` 60](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-probabilistic/src/cuckoo.rs#L60) | Two filters fed the same sequence fail at the same insert and disagree on 0 of 100,000 probes | Reproduced, not filed [2026-09-29](#2026-09-29--lesson-11-measured) |
 | The `hyperloglog` module header states its memory | "~1.6KB memory"; `standard()` (p = 14) takes 16,384 bytes, and no precision takes 1.6 KB | [`hyperloglog.rs` 1, 34-37](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-probabilistic/src/hyperloglog.rs#L1-L37) | `memory_bytes()` = 16384 | Reproduced, not filed [2026-09-29](#2026-09-29--lesson-11-measured) |
+| A leaf built with `requires_grad` false, such as a target, gets no gradient, as `Tensor`'s doc implies | No op and not the reverse walk read the flag: `backward` returns a gradient for every leaf on the path to the loss, y and x included. `LinearRegressionTool::backward` drops y's by hand | [`tensor.rs` 28-32](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-autograd/src/tensor.rs#L28-L32), [`ops.rs` 382-454](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-autograd/src/ops.rs#L382-L454) | y's gradient equals −(2/n)r below 10^-12; x, also flagged false, gets its 20 × 3 gradient | Reproduced, not filed [2026-09-30](#2026-09-30--lesson-12-measured) |
+| `add`, `sub` and `mul` report incompatible shapes through their `Result`, as `add`'s comment says ("errors if incompatible") | ndarray 0.17's `&a + &b` panics when the shapes do not broadcast, so the ops panic and never return `ShapeMismatch` | [`ops.rs` 78, 121, 264](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-autograd/src/ops.rs#L78-L264) | `add`, `sub` and `mul` on [2, 3] and [3, 2] all panic: "ShapeError/IncompatibleShape: incompatible shapes" | Reproduced, not filed [2026-09-30](#2026-09-30--lesson-12-measured) |
+| IX's `minimize_linreg_mse` example recovers its true parameters, as its "Final w" and "True w" lines invite a reader to check | Column 2 of its features is column 0 plus 0.0554, give or take 6·10^-5, so only w0 + w2 and b are determined. Adam ends at w = [0.64994, −0.30000, 0.65006] against the true [0.5, −0.3, 0.8], and the example prints PASS: its criterion is the loss alone | [`minimize_linreg_mse.rs` 41-47](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-autograd/examples/minimize_linreg_mse.rs#L41-L47), [155-181](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-autograd/examples/minimize_linreg_mse.rs#L155-L181) | ‖w − w*‖ = 0.21204; condition number of [x 1] 51,251 (numpy); least squares lands at [0.499818, −0.3, 0.800182] | Reproduced with the example itself, not filed [2026-09-30](#2026-09-30--lesson-12-measured) |
+| The example's noise makes the final loss non-zero, as its comment says | For rows 0 to 19 the noise is −0.01 + k·6.1·10^-7 with k = 0, 1 or 2: a constant, which the intercept absorbs | [`minimize_linreg_mse.rs` 56-60](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-autograd/examples/minimize_linreg_mse.rs#L56-L60) | Least squares: b = 0.089990, mean squared error below 10^-12; Adam: loss 2.35·10^-11 after 200 steps | Reproduced, not filed [2026-09-30](#2026-09-30--lesson-12-measured) |
+| The speedup the example prints is measured | It is 7500 divided by Adam's step count. 7500 is the midpoint of the "~5000-10000 fitness evaluations" the example says a genetic algorithm typically needs, and no genetic algorithm runs | [`minimize_linreg_mse.rs` 173-181](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-autograd/examples/minimize_linreg_mse.rs#L173-L181) | "242x" at step 31 | Reproduced, not filed [2026-09-30](#2026-09-30--lesson-12-measured) |
 
 ## Experiments
 
-A course that finds divergences must show what it checked and found right. The original six checks remain below; the fifth failed and produced findings 15 and 16. Lesson 9 adds two exploratory geometry checks, not preregistered experiments. Lesson 11 adds seven predictions written before its first run, all confirmed, and one exploratory check.
+A course that finds divergences must show what it checked and found right. The original six checks remain below; the fifth failed and produced findings 15 and 16. Lesson 9 adds two exploratory geometry checks, not preregistered experiments. Lesson 11 adds seven predictions written before its first run, all confirmed, and one exploratory check. Lesson 12 adds eight, all confirmed, and one exploratory check.
 
 | Question | Hypothesis | Result | Verdict | Where |
 |---|---|---|---|---|
@@ -82,6 +88,15 @@ A course that finds divergences must show what it checked and found right. The o
 | Does a failed cuckoo insert lose an item inserted earlier? | Written in advance (P6), from reading `insert`: at least one | One, 2,498 (finding 26) | Confirmed | [prediction](#2026-09-29--lesson-11-predicted-before-measuring), [result](#2026-09-29--lesson-11-measured), [`sketch.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/src/sketch.rs) |
 | Is the cuckoo filter deterministic, against `CONTRACTS.md`? | Written in advance (P7): the same failure and the same answers | Same failure; 0 of 100,000 answers differ (finding 27) | Confirmed | [prediction](#2026-09-29--lesson-11-predicted-before-measuring), [result](#2026-09-29--lesson-11-measured), [`sketch.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/src/sketch.rs) |
 | Where is HyperLogLog least accurate? | Not written in advance | Mean error +0.0244 (IX) and +0.0234 (hand) at n = 2,560 = 2.5 m, about seven standard errors; within ±0.008 at the other cardinalities tested except n = 3,000 | Exploratory | [result](#2026-09-29--lesson-11-measured), [`sketch.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/src/sketch.rs) |
+| Does IX's tape record the graph its source describes? | Written in advance (P1): 10 nodes for the linear regression, in a stated order; 6 more for `variance` | 10 and 6, in that order | Confirmed | [prediction](#2026-09-29--lesson-12-predicted-before-measuring), [result](#2026-09-30--lesson-12-measured), [`autodiff.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/src/autodiff.rs) |
+| Are IX's gradients exact? | Written in advance (P2): within 10^-12 of the closed forms at w = 0 and at a random point, and equal to a hand-written scalar tape | Below 10^-12 for w, b and x at both points | Confirmed: finding 15's double division has no counterpart here | [prediction](#2026-09-29--lesson-12-predicted-before-measuring), [result](#2026-09-30--lesson-12-measured), [`autodiff.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/src/autodiff.rs) |
+| Does `requires_grad` false stop a gradient? | Written in advance (P3): no, y still gets −(2/n)r | It does not stop it (finding 29) | Confirmed | [prediction](#2026-09-29--lesson-12-predicted-before-measuring), [result](#2026-09-30--lesson-12-measured), [`autodiff.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/src/autodiff.rs) |
+| Do mismatched shapes come back as an error? | Written in advance (P4): no, `add`, `sub` and `mul` panic | All three panic (finding 30) | Confirmed | [prediction](#2026-09-29--lesson-12-predicted-before-measuring), [result](#2026-09-30--lesson-12-measured), [`autodiff.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/src/autodiff.rs) |
+| Is a central difference on a quadratic exact? | Written in advance (P5): at most 10^-12 at ε = 0.1, at least 10^-9 at ε = 10^-10 | Below 10^-12 for ε ≥ 10^-5; 6·10^-7 at 10^-10 | Confirmed | [prediction](#2026-09-29--lesson-12-predicted-before-measuring), [result](#2026-09-30--lesson-12-measured), [`autodiff.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/src/autodiff.rs) |
+| Where is the best ε on a non-polynomial loss? | Written in advance (P6): in [10^-6, 10^-3], with ε = 10^-1 and 10^-10 each at least 100 times worse | 10^-5 (4·10^-9); 10^6 and 10^5 times worse | Confirmed | [prediction](#2026-09-29--lesson-12-predicted-before-measuring), [result](#2026-09-30--lesson-12-measured), [`autodiff.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/src/autodiff.rs) |
+| Is IX's FFT-magnitude backward right? | Written in advance (P7): within 10^-6 of central differences at ε = 10^-5 on 20 signals | 8·10^-9; numpy's FFT gives the same gradient | Confirmed | [prediction](#2026-09-29--lesson-12-predicted-before-measuring), [result](#2026-09-30--lesson-12-measured), [`autodiff.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/src/autodiff.rs) |
+| Is the example's noise a constant? | Written in advance (P8): least squares gives b in [0.0899, 0.0901] and a mean squared error below 10^-11 | 0.089990; below 10^-12 (finding 32) | Confirmed | [prediction](#2026-09-29--lesson-12-predicted-before-measuring), [result](#2026-09-30--lesson-12-measured), [`autodiff.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/src/autodiff.rs) |
+| Does Adam recover the example's weights? | Not written in advance | No: w = [0.649940, −0.300002, 0.650065] against [0.5, −0.3, 0.8]. Columns 0 and 2 differ by a constant 0.0554, and [x 1] has condition number 51,251 (finding 31) | Exploratory | [result](#2026-09-30--lesson-12-measured), [`autodiff.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/src/autodiff.rs) |
 
 ## 2026-09-14 — IX, pinned
 
@@ -258,6 +273,23 @@ Written before any lesson 12 code ran against IX's [`ix-autograd`](https://githu
 
 Sources: [Baydin et al. (2018)](https://jmlr.org/papers/v18/17-468.html) for forward and reverse mode, [Griewank and Walther (2008)](https://doi.org/10.1137/1.9780898717761) for the tape, [Nocedal and Wright (2006)](https://doi.org/10.1007/978-0-387-40065-5), section 8.1, for the finite-difference error.
 
+## 2026-09-30 — Lesson 12, measured
+
+- **Order of events:** the predictions entry above was committed alone as `bf5c3fc` at 23:51 local time (UTC−4) on 2026-09-29, before any lesson 12 code existed, and pushed at once. [`autodiff.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/src/autodiff.rs) and its eight tests were written next; all eight passed on their first run. [`l12_autodiff.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/examples/l12_autodiff.rs) first printed its output at 23:57 on Windows, with the pinned IX commit. No interval was changed.
+- **The tape (P1, P2):** 10 nodes for the linear regression and 6 for `variance`. Every gradient agrees with its closed form below 10^-12 at w = 0 and at a random point, and so does the 265-entry scalar tape written by hand. This answers the to-verify item about finding 15: unlike `ix_nn`'s `Dense::backward`, the tape divides by n once.
+- **What it does not check (P3, P4):** y and x, both built with `requires_grad` false, get gradients (finding 29). `add`, `sub` and `mul` on [2, 3] and [3, 2] panic inside ndarray rather than return `ShapeMismatch` (finding 30).
+- **Central differences (P5, P6):** on the quadratic, below 10^-12 from ε = 10^-1 to 10^-5, then from 6·10^-11 at 10^-6 up to 6·10^-5 at 10^-12. On Σ c_k |FFT(x)_k|, a V with its bottom at ε = 10^-5 (4·10^-9), 5·10^-3 at 10^-1 and 5·10^-4 at 10^-10.
+- **The FFT backward (P7):** worst error 8·10^-9 over 20 signals and 1,280 components. numpy's FFT, through N·Re(ifft(c·Y/|Y|)), gives the same first four components: −4.429396, −6.277916, −0.459292 and −5.058516.
+- **IX's example (P8):** the noise is −0.01 + k·6.1·10^-7, with k = 0 for rows 0 to 8, 1 for rows 9 to 16 and 2 for rows 17 to 19. Least squares gives b = 0.089990 and a mean squared error below 10^-12 (finding 32).
+- **Not preregistered:** the weights. On the first run, Adam ended at w = [0.649940, −0.300002, 0.650065] and least squares at [0.499818, −0.300000, 0.800182], both at a loss near 10^-11.
+  - Column 2 minus column 0 lies between 0.055422 and 0.055483 on every row: every two indices, the hash moves by +908 or +909 out of 32,767.
+  - numpy puts the singular values of [x 1] at 4.557, 3.947, 1.872 and 8.9·10^-5, a condition number of 51,251. Only w0 + w2 = 1.3 and b are determined.
+  - IX's example, compiled verbatim from the pinned commit in a scratch crate outside this repository, prints the same trajectory, a final w of [0.64994, −0.30000, 0.65006] against the true [0.5, −0.3, 0.8], ‖w − w*‖ = 0.21204, and "PASS" (finding 31). Its speedup is 7500/31 = 242, with 7500 a constant (finding 33).
+  - P8 explained the intercept and missed this.
+- **The numpy 2.4.2 cross-check** rebuilds the data and finds the same column gap, least-squares fit and gradient at w = 0. It replays the example's Adam loop to the same six decimals (w [0.64994, −0.300002, 0.650065], b 0.098315, first below 0.01 at step 31), and checks numpy's FFT gradient against its own central differences.
+
+  Three-OS CI for lesson 12 is still pending.
+
 ## To verify
 
 - The `ix_ml_pipeline` tool end to end: the scaling order of finding 1, the task inference of finding 2 on a CSV file, and the `All rows contain NaN values` error for a file with a text column. All three are read in the code, not run.
@@ -269,7 +301,6 @@ Sources: [Baydin et al. (2018)](https://jmlr.org/papers/v18/17-468.html) for for
 - The examples on Linux ARM runners: CI covers `ubuntu-latest` (x64), `windows-latest` and `macos-latest` (ARM) only.
 - Whether `PCA` ever returns unsorted variances on real data, rather than on the constructed cloud of finding 11.
 - Whether a `Sequential` deeper than two `Dense` layers is used anywhere in IX, where finding 18 would bite.
-- `ix-autograd`: its tape is the crate that should make finding 15 unnecessary, and lesson 12 will measure it.
 - Whether findings 10 to 19 are already known upstream: I still have not searched IX issues.
 - The API map counts `pub` declarations, not reachable ones; how far apart the two numbers are is unmeasured.
 - The values printed by a direct `println!("{:.6}")` rather than through `fmt_vec` — lesson 8's `intercept -0.000000` is one — carry the same signed-zero hazard and are not normalized. That one agreed on the three systems in run 35039180659; the others have not been enumerated.
@@ -277,3 +308,7 @@ Sources: [Baydin et al. (2018)](https://jmlr.org/papers/v18/17-468.html) for for
 - Whether IX's `baum_welch`, from several starts and on longer sequences, recovers the casino's parameters; lesson 10 ran one start on 1,000 rolls.
 - Whether the deterministic victim choice is why IX's cuckoo filter stops at 91% rather than the 95% of Fan et al.: lesson 11 measured one filter and one sequence. Compare with a random choice over several sequences.
 - Whether `ix-duck`'s `ix_cuckoo_*` SQL functions, which wrap the same `insert`, can surface finding 26.
+- Lesson 12 on Linux and macOS CI: the FFT goes through `cos` and `sin` of six angles, and the rounding noise printed in the central-difference tables depends on their last bits.
+- IX's FFT backward at a bin whose magnitude is zero in exact arithmetic: the 10^-15 threshold is absolute, and such a zero can round to either side of it. Lesson 12 tested only signals without such a bin.
+- The JAX cross-check that `ix-autograd` asks for before turning `fft-autograd` on by default; lesson 12 compared with finite differences and numpy.
+- The example's claim that a genetic algorithm needs 5,000 to 10,000 evaluations on this objective: lesson 17 can run `ix-evolution` on it.

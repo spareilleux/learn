@@ -1,0 +1,87 @@
+== f(x1, x2) = ln(x1) + x1*x2 - sin(x2) at (2, 5)
+  forward mode, one pass per input:  f = 11.6521, df/dx1 = 5.5000, df/dx2 = 1.7163
+  reverse mode, one backward walk:   f = 11.6521, df/dx1 = 5.5000, df/dx2 = 1.7163
+  entry 0: Input      value   2.0000   adjoint  5.5000
+  entry 1: Input      value   5.0000   adjoint  1.7163
+  entry 2: Ln(0)      value   0.6931   adjoint  1.0000
+  entry 3: Mul(0, 1)  value  10.0000   adjoint  1.0000
+  entry 4: Sin(1)     value  -0.9589   adjoint -1.0000
+  entry 5: Add(2, 3)  value  10.6931   adjoint  1.0000
+  entry 6: Sub(5, 4)  value  11.6521   adjoint  1.0000
+
+== IX's tape for the linear regression of `minimize_linreg_mse` (20 rows, 3 features)
+  10 nodes: input, input, input, input, matmul, add, sub, mul, sum, div_scalar
+  ops::variance adds 6: sum, div_scalar, sub, mul, sum, div_scalar
+  w = 0, b = 0: loss 0.724417, dL/dw [-0.959694, 0.656138, -0.961510], dL/db -0.032640
+    largest difference from the closed forms: w < 1e-12, b < 1e-12, x < 1e-12
+    hand-written scalar tape, 265 entries: loss < 1e-12, w < 1e-12, b < 1e-12
+  random w, b : loss 0.312636, dL/dw [-0.439221, 0.390372, -0.475970], dL/db -0.662593
+    largest difference from the closed forms: w < 1e-12, b < 1e-12, x < 1e-12
+    hand-written scalar tape, 265 entries: loss < 1e-12, w < 1e-12, b < 1e-12
+
+== What the tape does not check
+  y has requires_grad = false, and backward returned a gradient for it; largest difference from -(2/n)r: < 1e-12
+  x, also built with requires_grad = false, gets one too: true
+  add on [2, 3] and [3, 2]: Panic("called `Result::unwrap()` on an `Err` value: ShapeError/IncompatibleShape: incompatible shapes")
+  sub on [2, 3] and [3, 2]: Panic("called `Result::unwrap()` on an `Err` value: ShapeError/IncompatibleShape: incompatible shapes")
+  mul on [2, 3] and [3, 2]: Panic("called `Result::unwrap()` on an `Err` value: ShapeError/IncompatibleShape: incompatible shapes")
+
+== Central differences against the tape
+  mean squared error at w = 0 (quadratic in w), worst of the 3 components of dL/dw:
+    eps 1e-1: < 1e-12
+    eps 1e-2: < 1e-12
+    eps 1e-3: < 1e-12
+    eps 1e-4: < 1e-12
+    eps 1e-5: < 1e-12
+    eps 1e-6: 6e-11
+    eps 1e-7: 8e-10
+    eps 1e-8: 2e-8
+    eps 1e-9: 7e-8
+    eps 1e-10: 6e-7
+    eps 1e-11: 7e-6
+    eps 1e-12: 6e-5
+  L = sum c_k |FFT(x)_k|, 64 samples, worst of the 64 components of dL/dx:
+    eps 1e-1: 5e-3
+    eps 1e-2: 5e-5
+    eps 1e-3: 5e-7
+    eps 1e-4: 6e-9
+    eps 1e-5: 4e-9
+    eps 1e-6: 4e-8
+    eps 1e-7: 5e-7
+    eps 1e-8: 6e-6
+    eps 1e-9: 5e-5
+    eps 1e-10: 5e-4
+  IX's dL/dx, first four components: [-4.429396, -6.277916, -0.459292, -5.058516]
+  smallest at eps 1e-5; eps 1e-1 is 1e6 times that, eps 1e-10 1e5 times
+
+== IX's FFT-magnitude backward (feature fft-autograd)
+  20 signals of 64 samples, each with its own weights, eps 1e-5: worst error over 1280 components 8e-9
+
+== IX's `minimize_linreg_mse`, replayed
+  k in the noise -0.01 + k*0.02/32767, rows 0 to 19: 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 2 2 2
+  x[i, 2] - x[i, 0] over the 20 rows: min 0.055422, max 0.055483
+  least squares: w [0.499818, -0.300000, 0.800182], b 0.089990, w0 + w2 = 1.300000, mean squared error < 1e-12
+  Adam step   1: loss 7.24e-1
+  Adam step  10: loss 4.97e-2
+  Adam step  20: loss 4.70e-2
+  Adam step  30: loss 1.01e-2
+  Adam step  40: loss 4.38e-3
+  Adam step  50: loss 1.26e-3
+  Adam step  60: loss 9.15e-4
+  Adam step  70: loss 4.99e-5
+  Adam step  80: loss 1.38e-4
+  Adam step  90: loss 1.07e-5
+  Adam step 100: loss 9.91e-6
+  Adam step 110: loss 5.94e-6
+  Adam step 120: loss 2.67e-7
+  Adam step 130: loss 4.22e-7
+  Adam step 140: loss 2.88e-7
+  Adam step 150: loss 3.74e-8
+  Adam step 160: loss 5.52e-9
+  Adam step 170: loss 9.65e-9
+  Adam step 180: loss 4.55e-9
+  Adam step 190: loss 6.52e-10
+  Adam step 200: loss 2.35e-11
+  after 200 steps: w [0.649940, -0.300002, 0.650065], b 0.098315, w0 + w2 = 1.300005, loss 2.35e-11
+  loss below 0.01 first at step 31; the example prints 7500 / 31 = 242x as its speedup over a genetic algorithm
+exit 0
