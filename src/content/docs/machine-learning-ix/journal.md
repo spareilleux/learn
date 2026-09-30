@@ -492,7 +492,7 @@ Scored against the eight predictions of the entry above, committed alone as `eab
 - **P8, the 8 queens.** On 1,000 random boards, `hill_climbing` solves 144 (14.4%), in 4.08 steps on average when it succeeds and 3.10 when it gets stuck. With 20 restarts, `random_restart_hill_climbing` solves 94 of 100 runs. The cross-check replays steepest ascent with the same tie-break on the same boards and finds 144, 4.08, 3.10 and 94.
 - **Exploratory, not predicted.** A larger weight expanded a few fewer nodes each time on these mazes: 145.3, 140.3 and 132.6. The worst cost / optimum was 1.1724 at w = 1.5 and 2, and 1.4138 at w = 5.
 
-Three-OS CI for lesson 16 is still pending.
+The first CI run, [36749656298](https://github.com/spareilleux/learn/actions/runs/36749656298) on `23aa85b`, passed on Windows, Linux and macOS: every lesson 16 output matched `expected/` byte for byte, so the MCTS counts came out the same with the three platforms' `ln`, and the Linux cross-check matched `expected/crosscheck.txt`.
 
 ## To verify
 
@@ -518,6 +518,5 @@ Three-OS CI for lesson 16 is still pending.
 - Whether `TransformerClassifier` learns its attention weights at all when they step batch × seq times less than its head: lesson 13 measured one step, not a training run.
 - Why SARSA's greedy walk finds no path in 12 of 50 runs: if the lesson's explanation is right, a decreasing step, or a smaller constant one, should make the loops disappear.
 - Whether `spectrogram` mislabels a window that is not a power of two as `welch_psd` does: it keeps the same window_size/2 + 1 bins of the padded transform, which comes from reading the code, not from a measurement.
-- Lesson 16 on Linux and macOS CI: UCB1, in `mcts_search` and in the course's negamax MCTS, takes a `ln`, and a platform whose `ln` rounds differently could break a near-tie another way. The counts printed are 20 of 20, so only a systematic change would show; the mazes and the 8 queens use no transcendental function.
 - Whether `bidirectional_astar`'s f = g + h(parent) ([`astar.rs` 334 and 366](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-search/src/astar.rs#L334-L366)) costs optimality or only expansions with a nonzero heuristic: lesson 16 read it and measured only h = 0.
 - Whether `qstar_bounded` keeps a (1 + ε) bound: its doc comment describes focal search with OPEN and FOCAL lists and the function calls `qstar_weighted` ([`qstar.rs` 292-303](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-search/src/qstar.rs#L292-L303)), which comes from reading the code; lesson 16 didn't run it.

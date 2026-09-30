@@ -492,7 +492,7 @@ Notée face aux huit prédictions de l'entrée ci-dessus, commitée seule sous `
 - **P8, les 8 reines.** Sur 1 000 échiquiers aléatoires, `hill_climbing` en résout 144 (14,4 %), en 4,08 pas en moyenne en cas de succès et 3,10 en cas de blocage. Avec 20 redémarrages, `random_restart_hill_climbing` résout 94 exécutions sur 100. Le contrôle croisé rejoue la plus forte pente avec le même départage sur les mêmes échiquiers et trouve 144, 4,08, 3,10 et 94.
 - **Exploratoire, non prédit.** Un poids plus grand a développé quelques nœuds de moins à chaque fois sur ces labyrinthes : 145,3, 140,3 et 132,6. Le pire coût / optimum valait 1,1724 à w = 1,5 et 2, et 1,4138 à w = 5.
 
-La CI sur trois systèmes pour la leçon 16 reste à faire.
+Le premier run de CI, [36749656298](https://github.com/spareilleux/learn/actions/runs/36749656298) sur `23aa85b`, est passé sous Windows, Linux et macOS : chaque sortie de la leçon 16 correspond octet pour octet à `expected/`, donc les comptes de MCTS sont les mêmes avec le `ln` des trois plateformes, et le contrôle croisé sous Linux correspond à `expected/crosscheck.txt`.
 
 ## À vérifier
 
@@ -518,6 +518,5 @@ La CI sur trois systèmes pour la leçon 16 reste à faire.
 - Si `TransformerClassifier` apprend seulement ses poids d'attention quand leur pas est batch × seq fois plus petit que celui de sa tête : la leçon 13 a mesuré un pas, pas un entraînement.
 - Pourquoi la marche gloutonne de SARSA ne trouve pas de chemin dans 12 exécutions sur 50 : si l'explication de la leçon est juste, un pas décroissant, ou un pas constant plus petit, devrait faire disparaître les boucles.
 - Si `spectrogram` étiquette mal une fenêtre qui n'est pas une puissance de deux, comme `welch_psd` : elle garde les mêmes window_size/2 + 1 raies de la transformée complétée, ce qui vient de la lecture du code, pas d'une mesure.
-- La leçon 16 sur les CI Linux et macOS : UCB1, dans `mcts_search` et dans le MCTS negamax du cours, prend un `ln`, et une plateforme dont le `ln` arrondit autrement pourrait départager une quasi-égalité autrement. Les comptes imprimés sont de 20 sur 20, si bien que seul un changement systématique se verrait ; les labyrinthes et les 8 reines n'utilisent aucune fonction transcendante.
 - Si le f = g + h(parent) de `bidirectional_astar` ([`astar.rs` 334 et 366](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-search/src/astar.rs#L334-L366)) coûte l'optimalité ou seulement des développements avec une heuristique non nulle : la leçon 16 l'a lu et n'a mesuré que h = 0.
 - Si `qstar_bounded` garde une borne (1 + ε) : son commentaire décrit une recherche focale avec des listes OPEN et FOCAL et la fonction appelle `qstar_weighted` ([`qstar.rs` 292-303](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-search/src/qstar.rs#L292-L303)), ce qui vient de la lecture du code ; la leçon 16 ne l'a pas exécutée.
