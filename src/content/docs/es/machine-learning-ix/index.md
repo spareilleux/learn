@@ -86,7 +86,7 @@ Las lecciones 1 a 9 están escritas. El resto es el plan, una lección por famil
 | 11 | [Contar sin contar: filtros de Bloom, HyperLogLog, count-min, cuco](11-probabilistic/) | `ix-probabilistic` | — |
 | 12 | [Diferenciación automática: la cinta de Wengert](12-autodiff/) | `ix-autograd` | — |
 | 13 | [Atención, normalización de capa y un bloque transformer](13-transformer/) | `ix-nn` | — |
-| 14 | Aprendizaje por refuerzo: bandidos y Q-learning | `ix-rl` | — |
+| 14 | [Aprendizaje por refuerzo: bandidos y Q-learning](14-reinforcement-learning/) | `ix-rl` | — |
 | 15 | Señales: la transformada de Fourier, ondículas, filtros y Kalman | `ix-signal` | — |
 | 16 | Búsqueda: A\*, búsqueda en árbol de Monte-Carlo, búsqueda local | `ix-search`, `ix-graph` | — |
 | 17 | Evolución: algoritmos genéticos, evolución diferencial, frentes de Pareto | `ix-evolution` | — |
