@@ -38,6 +38,7 @@ Three other courses on this site cover the background, and this one links to the
 - follow a chat message through GA's hooks, deterministic guards, intent router and agents, and explain why some questions work without a model and others fail;
 - grade a deterministic skill's musical answers with a small oracle of my own, and say where the oracle stops;
 - read a server-sent event stream as the HTML standard does, and check that the text a client rebuilds is the text the server computed;
+- run a fix that isn't in the pinned commit next to the pinned code, and test a guard with input it wasn't written for;
 - tell apart, in GA's AI, what works today, what is being built, and what is only planned.
 
 ## Outline
@@ -50,6 +51,7 @@ Three other courses on this site cover the background, and this one links to the
 | 4 | [The chatbot and its agents](04-chatbot-and-agents/) | `ProductionOrchestrator`, `SemanticIntentRouter`, `SemanticRouter`, skills, hooks | hosted services, fallbacks, testing a host in process |
 | 5 | [The improvisation skill](05-improvisation-skill/) | `ImprovisationSkill` against chord–scale theory, issue #744 | source-generated regexes, reading `AgentResponse.Data`, writing a test oracle |
 | 6 | [The answer on the wire](06-answer-on-the-wire/) | `SseChunker`, the two `WriteSseLineAsync`, the page's and ga-client's readers, #743 and #746 | server-sent events, `Regex.Split` and lookarounds, porting a client to test it |
+| 7 | [Chord names it can't read](07-chord-names/) | `InvalidChordNames` (#749), the chord expressions of `ImprovisationSkill`, issue #745 | extern alias and CS0436, word boundaries in regular expressions |
 | — | [Journal](journal/) | | |
 
 ## Prerequisites

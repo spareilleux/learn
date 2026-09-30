@@ -1,0 +1,49 @@
+# l7
+
+== What each message holds, read as chord symbols are written
+#   message                            chords       not chord symbols
+1   which arpeggio fits Hm Q7          -            Hm (root H), Q7 (root Q)
+2   which arpeggio fits X7alt          -            X7alt (root X)
+3   Q7, which arpeggio should I use?   -            Q7 (root Q)
+4   which arpeggio fits H7             -            H7 (root H)
+5   which arpeggio fits hm q7          -            hm (lowercase root), q7 (lowercase root)
+6   which arpeggio fits Cq7            -            Cq7 (quality q7)
+7   which arpeggio fits Am F C G       Am F C G     -
+8   which arpeggio fits Bb Eb F        Bb Eb F      -
+9   which arpeggio fits B♭ E♭ F        Bb Eb F      -
+10  which arpeggio fits B F# G#m E     B F# G#m E   -
+11  which arpeggio fits C C+ F         C C+ F       -
+12  which arpeggio fits Bø7 E7 Am      Bø7 E7 Am    -
+13  which arpeggio fits Am F Q7 G      Am F G       Q7 (root Q)
+14  which arpeggio fits C and Q7       C            Q7 (root Q)
+15  Hm, which mode is brightest?       -            Hm (root H)
+16  which arpeggio fits V7             -            V7 (Roman numeral)
+
+== What GA does with them
+#   skill at a826864       #749 guard   #749 skill             verdict (#749)
+1   needs the model        Hm Q7        declines               same
+2   needs the model        X7alt        declines               same
+3   needs the model        Q7           declines               same
+4   needs the model        H7           declines               same
+5   needs the model        -            needs the model        DIFF reaches the model
+6   needs the model        -            needs the model        DIFF reaches the model
+7   answers Am F C G       -            answers Am F C G       same
+8   answers Bb Eb F        -            answers Bb Eb F        same
+9   answers B E F          -            answers B E F          DIFF reads Bb as B, Eb as E
+10  answers B F G#m E      -            answers B F G#m E      DIFF reads F# as F
+11  answers C C F          -            answers C C F          DIFF reads C+ as C
+12  answers E7 Am          -            answers E7 Am          DIFF drops Bø7 without a word
+13  answers Am F G         -            answers Am F G         DIFF drops Q7 without a word
+14  needs the model        -            needs the model        DIFF reaches the model
+15  needs the model        -            needs the model        DIFF reaches the model
+16  needs the model        -            needs the model        n/a
+
+== #749's skill on "which arpeggio fits Hm Q7"
+confidence 0.9
+  | I don't recognize "Hm" and "Q7" as chord names, so I can't suggest arpeggios or scales for them. A chord name starts with a root letter from A to G, optionally followed by # or b, then the chord quality: for example 'Bm', 'G7' or 'Cmaj7'. In German notation H is B: "Hm" is written "Bm" here. Name the chords again and I'll give the arpeggio and scales for each.
+assumption: Not chord names (root outside A-G): Hm, Q7.
+
+== #749's skill on "which arpeggio fits H7"
+confidence 0.9
+  | I don't recognize "H7" as a chord name, so I can't suggest arpeggios or scales for it. A chord name starts with a root letter from A to G, optionally followed by # or b, then the chord quality: for example 'Bm', 'G7' or 'Cmaj7'. In German notation H is B: "H7" is written "B7" here. Name the chords again and I'll give the arpeggio and scales for each.
+assumption: Not chord names (root outside A-G): H7.

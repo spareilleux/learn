@@ -216,7 +216,7 @@ L'oracle ne vérifie pas non plus le reste de la théorie accord–gamme : les t
 ## Signalé en amont
 
 - Les gammes aveugles à la tonalité du chemin des progressions : ticket de GA [#744](https://github.com/GuitarAlchemist/ga/issues/744), ouvert le 2026-09-28 à la suite d'un tracer lancé contre le chatbot public, avec les cas Am F C G et C A Dm G de cette leçon.
-- Les défauts vus dans « Un accord à la fois », à savoir le tokenizer, l'ordre de `InferQuality`, les accords suspendus et le power chord inconnus, et l'arpège de `m6` : non signalés en amont au moment où cette leçon a été écrite. Ils sont listés dans le [journal](../journal/).
+- Les défauts vus dans « Un accord à la fois », à savoir le tokenizer, l'ordre de `InferQuality`, les accords suspendus et le power chord inconnus, et l'arpège de `m6` : signalés après l'écriture de cette leçon, le tokenizer dans le ticket de GA [#757](https://github.com/GuitarAlchemist/ga/issues/757) et les autres dans [#758](https://github.com/GuitarAlchemist/ga/issues/758). Ils sont listés dans le [journal](../journal/).
 
 ## Exercices
 
