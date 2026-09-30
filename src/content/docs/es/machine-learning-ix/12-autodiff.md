@@ -186,7 +186,7 @@ Las dos llegan a una pérdida cercana a 10⁻¹¹. El ejemplo imprime el w final
 | P4 | `add`, `sub` y `mul` entran en pánico con [2, 3] y [3, 2] | Las tres entran en pánico | Confirmada |
 | P5 | Cuadrática: error de como mucho 10⁻¹² con ε = 0,1, de al menos 10⁻⁹ con ε = 10⁻¹⁰ | Menos de 10⁻¹²; 6 × 10⁻⁷ | Confirmada |
 | P6 | Pérdida FFT: el mejor ε está en [10⁻⁶; 10⁻³], y ε = 10⁻¹ y 10⁻¹⁰ son cada uno al menos 100 veces peores | 10⁻⁵; 10⁶ y 10⁵ veces peores | Confirmada |
-| P7 | Backward de la FFT a menos de 10⁻⁶ de las diferencias centradas con ε = 10⁻⁵, en 20 señales | 8 × 10⁻⁹ | Confirmada |
+| P7 | Backward de la FFT a menos de 10⁻⁶ de las diferencias centradas con ε = 10⁻⁵, en 20 señales | 8 × 10⁻⁹ en Windows, 9 × 10⁻⁹ en Linux y macOS | Confirmada |
 | P8 | Mínimos cuadrados con los datos del ejemplo: b en [0,0899; 0,0901], error cuadrático medio inferior a 10⁻¹¹ | 0,089990; inferior a 10⁻¹² | Confirmada |
 
 Las ocho predicciones se cumplieron en la primera ejecución, y ninguna se ajustó después. P3, P4 y P8 se escribieron para detectar una diferencia entre la documentación de IX y su código, encontrada leyéndolo primero, y las tres la encontraron. Las variables colineales, el resultado que más importa aquí, no estaban predichas: P8 explicaba el término independiente y no vio los pesos. El diario las registra como exploratorias.
