@@ -33,6 +33,8 @@
     <ProjectReference Include="$(GaRoot)Demos/Music Theory/FretboardVoicingsCLI/FretboardVoicingsCLI.csproj" />
     <!-- GA pull request #749's version of the improvisation skill, for lesson 7 only -->
     <ProjectReference Include="../GaFix749/GaFix749.csproj" Aliases="fix749" />
+    <!-- GA's key identification service on main, for lesson 11 only -->
+    <ProjectReference Include="../GaKeysMain/GaKeysMain.csproj" Aliases="keysmain" />
   </ItemGroup>
 
 </Project>

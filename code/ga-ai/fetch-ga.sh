@@ -6,13 +6,17 @@ GA_SHA=a826864f3a012cad88e415954bf57eca0ce12aa6
 # Lesson 7 also compiles three files of GA pull request #749, at its merge commit
 FIX_SHA=d7efd4142908542d469e0b1a9e6dd3dceba8ecc5
 FIX_FILES="InvalidChordNames.cs ImprovisationSkill.cs ChordIntentMatching.cs"
+# Lesson 11 also compiles GA's key identification service as it is on main, after #625 and
+# 6baf32e, against the pinned domain
+KEYS_SHA=6baf32ed9b35c9b8a1645cb8d6836aafd0713a40
+KEYS_FILE=Common/GA.Domain.Services/Tonal/KeyIdentificationService.cs
 # Lesson 8 reads GA's prompt corpus, outside the sparse checkout, at the pinned commit
 CORPUS=Tests/Apps/GaChatbot.Api.Tests/Corpus/prompts.yaml
 cd "$(dirname "$0")"
 if [ "$(git -C .ga rev-parse HEAD 2>/dev/null || true)" = "$GA_SHA" ]; then
   echo "ga   $GA_SHA already here"
 else
-  rm -rf .ga .ga-fix .ga-files
+  rm -rf .ga .ga-fix .ga-keys .ga-files
   git clone --quiet --filter=blob:none --no-checkout https://github.com/GuitarAlchemist/ga.git .ga
   git -C .ga config core.longpaths true
   # GA.Business.ML and its project references, the CLI that writes the OPTIC-K index,
@@ -44,6 +48,14 @@ if [ "$(cat .ga-fix/SHA 2>/dev/null || true)" != "$FIX_SHA" ]; then
   echo "$FIX_SHA" > .ga-fix/SHA
 fi
 echo "fix  $FIX_SHA"
+if [ "$(cat .ga-keys/SHA 2>/dev/null || true)" != "$KEYS_SHA" ]; then
+  git -C .ga cat-file -e "$KEYS_SHA^{commit}" 2>/dev/null || git -C .ga fetch --quiet --filter=blob:none origin "$KEYS_SHA"
+  rm -rf .ga-keys
+  mkdir .ga-keys
+  git -C .ga show "$KEYS_SHA:$KEYS_FILE" > .ga-keys/KeyIdentificationService.cs
+  echo "$KEYS_SHA" > .ga-keys/SHA
+fi
+echo "keys $KEYS_SHA"
 if [ ! -s .ga-files/prompts.yaml ]; then
   mkdir -p .ga-files
   git -C .ga show "$GA_SHA:$CORPUS" > .ga-files/prompts.yaml.tmp
