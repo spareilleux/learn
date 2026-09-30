@@ -229,6 +229,7 @@ Most of the 22 differences of 2026-09-14 were fixed upstream by [#689](https://g
 - The request: more lessons that help GA's chatbot, on progression analysis. The chatbot has no analysis skill: `skills-dev/_pending-tools/progression-analysis/DRAFT.md` is blocked on a tool, at the pin and on `main`. The lesson covers the two skills that take a progression, `ProgressionMoodSkill` and `ProgressionCompletionSkill`. The DSL's `domain.analyzeProgression`, which GaMcpServer calls and no chatbot skill does, is left for a later lesson.
 - The mood skill is run through its intent in GaChatbot.Api, with no model. The completion skill's prompt is read by calling its private `BuildPrompt` by reflection; for `main`, its lines are applied to the service at `6baf32e` (project `GaKeysMain` of lesson 11), and for the pin they are checked against `BuildPrompt` on all 36 questions.
 - The solutions of the exercises were worked by hand from the code and the output.
+- CI run [36777958134](https://github.com/spareilleux/learn/actions/runs/36777958134), for commit `e002d6d`: green on the three systems, 2 min 05 s on Linux, 2 min 16 s on macOS, 7 min 24 s on Windows, clone and build included.
 
 ## To verify
 

@@ -229,6 +229,7 @@ La plupart des 22 différences du 2026-09-14 ont été corrigées en amont par [
 - La demande : d'autres leçons qui aident le chatbot de GA, sur l'analyse de progressions. Le chatbot n'a pas de skill d'analyse : `skills-dev/_pending-tools/progression-analysis/DRAFT.md` est bloqué sur un outil, au commit épinglé comme sur `main`. La leçon porte sur les deux skills qui prennent une progression, `ProgressionMoodSkill` et `ProgressionCompletionSkill`. La closure `domain.analyzeProgression` du DSL, qu'appelle GaMcpServer et qu'aucun skill du chatbot n'appelle, est laissée à une leçon ultérieure.
 - Le skill d'ambiance est exécuté par son intention dans GaChatbot.Api, sans modèle. Le prompt du skill de complétion est lu en appelant par réflexion sa méthode privée `BuildPrompt` ; pour `main`, ses lignes sont appliquées au service à `6baf32e` (projet `GaKeysMain` de la leçon 11), et pour le commit épinglé, elles sont confrontées à `BuildPrompt` sur les 36 questions.
 - Les solutions des exercices ont été résolues à la main à partir du code et de la sortie.
+- Exécution de CI [36777958134](https://github.com/spareilleux/learn/actions/runs/36777958134), pour le commit `e002d6d` : verte sur les trois systèmes, 2 min 05 s sous Linux, 2 min 16 s sous macOS, 7 min 24 s sous Windows, clone et compilation compris.
 
 ## À vérifier
 
