@@ -231,7 +231,7 @@ Huit des exemples de `IntervalSkill`, cinq définitions et trois questions comme
 
 ## Signalé en amont
 
-- Pas encore signalés en amont au moment de l'écriture de cette leçon : le dièse perdu, les `♯` et `♭` non reconnus, les unissons abaissés et la branche par défaut, les qualités abrégées, les tonalités relatives de `ScaleInfoSkill`, les armures de `RelativeKeySkill` au-delà de sept altérations et son refus de C♭, et les prompts d'exemple auxquels les skills ne savent pas répondre. Ils sont listés dans le [journal](../journal/).
+- Signalés après l'écriture de cette leçon : le dièse perdu, les `♯` et `♭` non reconnus, les qualités abrégées et les prompts d'exemple de `IntervalSkill` dans le ticket de GA [#767](https://github.com/GuitarAlchemist/ga/issues/767) ; les unissons abaissés et la branche par défaut dans [#768](https://github.com/GuitarAlchemist/ga/issues/768) ; les tonalités relatives de `ScaleInfoSkill`, les armures de `RelativeKeySkill` au-delà de sept altérations et son refus de C♭ dans [#769](https://github.com/GuitarAlchemist/ga/issues/769). Les trois prompts d'exemple auxquels `ScaleInfoSkill` ne sait pas répondre ne sont pas signalés. Ils sont listés dans le [journal](../journal/).
 
 ## Exercices
 
