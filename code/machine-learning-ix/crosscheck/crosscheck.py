@@ -648,3 +648,63 @@ except ValueError:
     print("scipy.signal.firwin refuses a 32-tap high-pass: ValueError")
 ones15 = [float(f(1)[0]) for f in (np.hanning, np.hamming, np.blackman, np.bartlett)] + [float(np.kaiser(1, 5)[0])]
 print(f"numpy windows of length 1 (hanning, hamming, blackman, bartlett, kaiser 5): {ones15}")
+
+print("\n== lesson 16")
+from scipy.sparse import coo_matrix  # noqa: E402
+from scipy.sparse.csgraph import shortest_path  # noqa: E402
+
+# The mazes of lesson 16, rebuilt from the course's Rng: a cell is a wall when its draw is below 0.25, cells
+# row by row, corners kept open. SciPy's breadth-first shortest paths replace ix-graph's Dijkstra.
+size16 = 30
+reachable16, total16 = 0, 0.0
+for index16 in range(100):
+    open16 = rng13(16_000 + index16, size16 * size16) >= 0.25
+    open16[0] = open16[-1] = True
+    cells16 = np.arange(size16 * size16).reshape(size16, size16)
+    pairs16 = np.concatenate([
+        np.stack([cells16[:, :-1].ravel(), cells16[:, 1:].ravel()], axis=1),
+        np.stack([cells16[:-1, :].ravel(), cells16[1:, :].ravel()], axis=1),
+    ])
+    pairs16 = pairs16[open16[pairs16[:, 0]] & open16[pairs16[:, 1]]]
+    graph16 = coo_matrix((np.ones(len(pairs16)), (pairs16[:, 0], pairs16[:, 1])), shape=(size16 ** 2, size16 ** 2))
+    d16 = shortest_path(graph16, directed=False, unweighted=True, indices=0)[-1]
+    if np.isfinite(d16):
+        reachable16 += 1
+        total16 += d16
+print(f"100 mazes of 30 x 30, walls 0.25: far corner reachable {reachable16}, total optimal cost {total16:.0f}")
+
+
+def attacking16(rows):
+    return sum(1 for i in range(8) for j in range(i + 1, 8)
+               if rows[i] == rows[j] or abs(rows[i] - rows[j]) == j - i)
+
+
+def climb16(rows):
+    """Steepest ascent as IX's hill_climbing: the last best of the 56 neighbours, moved to only if strictly
+    better. Returns (attacking pairs at the end, steps)."""
+    rows, h, steps = list(rows), attacking16(rows), 0
+    while True:
+        best, best_h = None, None
+        for column in range(8):
+            for row in range(8):
+                if row != rows[column]:
+                    candidate = rows.copy()
+                    candidate[column] = row
+                    ch = attacking16(candidate)
+                    if best_h is None or ch <= best_h:
+                        best, best_h = candidate, ch
+        if best_h < h:
+            rows, h, steps = best, best_h, steps + 1
+        else:
+            return h, steps
+
+
+boards16 = np.floor(rng13(16_800, 8 * 1000) * 8).astype(int).reshape(1000, 8)
+runs16 = [climb16(b) for b in boards16]
+solved16 = [s for h, s in runs16 if h == 0]
+stuck16 = [s for h, s in runs16 if h > 0]
+print(f"8 queens, 1000 boards, steepest ascent with the last best neighbour: solved {len(solved16)}, "
+      f"mean steps {np.mean(solved16):.2f} when solved, {np.mean(stuck16):.2f} when stuck")
+restart16 = np.floor(rng13(16_900, 8 * 21 * 100) * 8).astype(int).reshape(100, 21, 8)
+wins16 = sum(any(climb16(b)[0] == 0 for b in run[1:]) for run in restart16)
+print(f"8 queens, 100 runs of 20 restarts: solved {wins16}")

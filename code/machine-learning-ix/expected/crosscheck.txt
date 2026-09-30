@@ -152,4 +152,9 @@ scipy.linalg.solve_discrete_are, q 0.01, r 1: prior variance 0.105124922, gain 0
 scipy.signal.firwin(65, 0.2, hamming, unscaled): centre tap 0.200000000, sum of the taps 1.000041082
 scipy.signal.firwin refuses a 32-tap high-pass: ValueError
 numpy windows of length 1 (hanning, hamming, blackman, bartlett, kaiser 5): [1.0, 1.0, 1.0, 1.0, 1.0]
+
+== lesson 16
+100 mazes of 30 x 30, walls 0.25: far corner reachable 84, total optimal cost 5046
+8 queens, 1000 boards, steepest ascent with the last best neighbour: solved 144, mean steps 4.08 when solved, 3.10 when stuck
+8 queens, 100 runs of 20 restarts: solved 94
 exit 0

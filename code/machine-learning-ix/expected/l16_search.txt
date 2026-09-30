@@ -1,0 +1,47 @@
+== A*, S→A 1, S→C 3, A→C 1, C→G 3
+  h(A) = 4, 0 elsewhere  cost 6, path S C G, 3 expansions
+  h = 0                  cost 5, path S A C G, 3 expansions
+  h = h*                 cost 5, path S A C G, 3 expansions
+  ix-graph Dijkstra       5
+
+== 100 mazes of 30 x 30, walls with probability 0.25, Manhattan h
+  far corner reachable:                84
+  astar None exactly when unreachable: true
+  astar cost = Dijkstra's everywhere:  true
+  total optimal cost:                  5046
+  A*:          mean expansions 383.7
+  w = 1.5      mean expansions 145.3, over the bound 0, worst cost / optimum 1.1724
+  w = 2        mean expansions 140.3, over the bound 0, worst cost / optimum 1.1724
+  w = 5        mean expansions 132.6, over the bound 0, worst cost / optimum 1.4138
+
+== bidirectional_astar, h = 0
+  directed cycle S→A→G→S: bidirectional cost 1, path S G; astar cost 2, path S A G
+  path 0-1-2-3-4: bidirectional path [0, 1, 2, 3, 4], cost 4
+    bidirectional actions (0, 1) (1, 2) (3, 2) (4, 3)
+    astar actions         (0, 1) (1, 2) (2, 3) (3, 4)
+
+== S→A→G and 100 dead ends S→D→X: (cost, expansions, heuristic calls)
+  astar           2, 2, 103
+  qstar_search    2, 102, 103
+  qstar_two_head  2, 2, 103
+
+== A (the opponent picks win or loss) or B (a draw), 2000 iterations, exploration 1.41, 20 seeds
+  ix mcts_search chooses A:  20 of 20
+  negamax MCTS chooses B:    20 of 20
+  ix minimax:                B, value 0
+
+== 3 moves to a draw, 3 iterations, 20 seeds
+  mcts_search returns the last expanded child 20 times, the first 0 times
+
+== local search on -(x - 10)^2 from x = 10
+  beam_search, beam 1,   1 steps: x = 11, value -1
+  beam_search, beam 1,   2 steps: x = 10, value 0
+  beam_search, beam 1, 101 steps: x = 11, value -1
+  hill_climbing: x = 10, value 0; tabu_search: x = 10, value 0
+  random_restart_hill_climbing from 3, 0 restarts: x = 3, value -inf, 1 generator calls
+  random_restart_hill_climbing from 3, 5 restarts: x = 10, value 0, 6 generator calls
+
+== 8 queens, IX's hill_climbing
+  1000 random boards: solved 144 (14.4%), mean steps 4.08 when solved, 3.10 when stuck
+  random_restart_hill_climbing, 20 restarts: solved 94 of 100 runs
+exit 0
