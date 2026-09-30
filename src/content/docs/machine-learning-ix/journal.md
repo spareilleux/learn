@@ -339,7 +339,7 @@ Scored against the nine predictions of the entry above, committed alone as `2cea
 - **Exploratory: the 1/√d_k scaling.** Over 2,000 queries of 16 keys, var(q·k) is 4.0, 15.7, 63.8 and 259.7 at d = 4, 16, 64 and 256, and the largest weight averages 0.413, 0.679, 0.847 and 0.925 unscaled, 0.226, 0.238, 0.247 and 0.247 scaled.
 - **The numpy 2.4.2 cross-check** reproduces the attention, the first token's normalization [0.136528, 0.65296, −2.171448, 0.100933, 0.573105, 0.707922] and the whole scaling table to the printed digits.
 
-Three-OS CI for lesson 13 is still pending.
+The first CI run, [36735996940](https://github.com/spareilleux/learn/actions/runs/36735996940) on `f6882f5`, passed on Windows, Linux and macOS: every lesson 13 output matched `expected/` byte for byte, and the Linux cross-check matched `expected/crosscheck.txt`.
 
 ## 2026-09-30 — Lesson 14, predicted before measuring
 
@@ -377,5 +377,4 @@ Sources: [Sutton and Barto (2018)](http://incompleteideas.net/book/the-book-2nd.
 - IX's FFT backward at a bin whose magnitude is zero in exact arithmetic: the 10^-15 threshold is absolute, and such a zero can round to either side of it. Lesson 12 tested only signals without such a bin.
 - The JAX cross-check that `ix-autograd` asks for before turning `fft-autograd` on by default; lesson 12 compared with finite differences and numpy.
 - The example's claim that a genetic algorithm needs 5,000 to 10,000 evaluations on this objective: lesson 17 can run `ix-evolution` on it.
-- Lesson 13 on Linux and macOS CI: its outputs go through `exp` and `tanh`, and print differences as bounds and values to three or six decimals, which the platform's last bits should not reach.
 - Whether `TransformerClassifier` learns its attention weights at all when they step batch × seq times less than its head: lesson 13 measured one step, not a training run.

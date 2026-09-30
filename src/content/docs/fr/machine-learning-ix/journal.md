@@ -339,7 +339,7 @@ Notée face aux neuf prédictions de l'entrée ci-dessus, commitée seule sous `
 - **Exploratoire : la mise à l'échelle 1/√d_k.** Sur 2 000 requêtes de 16 clés, var(q·k) vaut 4,0, 15,7, 63,8 et 259,7 à d = 4, 16, 64 et 256, et le plus grand poids vaut en moyenne 0,413, 0,679, 0,847 et 0,925 sans mise à l'échelle, 0,226, 0,238, 0,247 et 0,247 avec.
 - **Le contrôle croisé numpy 2.4.2** retrouve l'attention, la normalisation du premier jeton [0,136528 ; 0,65296 ; −2,171448 ; 0,100933 ; 0,573105 ; 0,707922] et tout le tableau de mise à l'échelle aux chiffres affichés.
 
-La CI sur trois systèmes pour la leçon 13 reste à faire.
+Le premier run de CI, [36735996940](https://github.com/spareilleux/learn/actions/runs/36735996940) sur `f6882f5`, est passé sous Windows, Linux et macOS : chaque sortie de la leçon 13 correspond octet pour octet à `expected/`, et le contrôle croisé sous Linux correspond à `expected/crosscheck.txt`.
 
 ## 2026-09-30 — Leçon 14, prédite avant de mesurer
 
@@ -377,5 +377,4 @@ Sources : [Sutton et Barto (2018)](http://incompleteideas.net/book/the-book-2nd.
 - Le backward de la FFT d'IX sur une fréquence dont la magnitude est nulle en arithmétique exacte : le seuil de 10^-15 est absolu, et un tel zéro peut s'arrondir de part ou d'autre. La leçon 12 n'a testé que des signaux sans une telle fréquence.
 - La vérification croisée avec JAX qu'`ix-autograd` demande avant d'activer `fft-autograd` par défaut ; la leçon 12 a comparé avec les différences finies et numpy.
 - L'affirmation de l'exemple selon laquelle un algorithme génétique demande 5 000 à 10 000 évaluations sur cet objectif : la leçon 17 pourra y lancer `ix-evolution`.
-- La leçon 13 sur les CI Linux et macOS : ses sorties passent par `exp` et `tanh`, et affichent les écarts comme des bornes et les valeurs à trois ou six décimales, ce que les derniers bits de la plateforme ne devraient pas atteindre.
 - Si `TransformerClassifier` apprend seulement ses poids d'attention quand leur pas est batch × seq fois plus petit que celui de sa tête : la leçon 13 a mesuré un pas, pas un entraînement.
