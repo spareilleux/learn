@@ -181,6 +181,7 @@ La plupart des 22 différences du 2026-09-14 ont été corrigées en amont par [
 - La demande : d'autres leçons qui aident le chatbot de GA. Après le corpus de prompts, les trois skills qui répondent sans modèle à des questions qui n'ont qu'une bonne réponse : les intervalles, les gammes et les tonalités relatives. L'oracle du cours est le calcul par lettres d'un manuel, dans `Lesson9.cs`.
 - Les intervalles du domaine ont été vérifiés une fois contre le `main` de GA à `53b7253`, hors du cours : `GA.Core`, `GA.Domain.Core`, `GA.Business.Config` et `IntervalNaming.cs`, pris avec `git archive` dans un dossier de travail, puis exécutés sur les 441 paires avec des notes correctement lues. Les 21 unissons et les 5 autres intervalles faux donnent le même résultat, de même que l'intervalle de C à B#, une septième augmentée qu'il donne comme majeure.
 - La solution de l'exercice 1 a été vérifiée avec le moteur d'expressions régulières de .NET, et celle de l'exercice 4 en posant ses deux questions le temps d'une exécution ; celles des exercices 2 et 3 ont été résolues à la main.
+- Exécution de CI [36666224042](https://github.com/spareilleux/learn/actions/runs/36666224042), pour le commit `73fd84d` : verte sur les trois systèmes, 1 min 52 s sous Linux, 1 min 48 s sous macOS, 6 min 38 s sous Windows, clone et compilation compris.
 
 ## À vérifier
 

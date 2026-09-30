@@ -181,6 +181,7 @@ Most of the 22 differences of 2026-09-14 were fixed upstream by [#689](https://g
 - The request: more lessons that help GA's chatbot. After the prompt corpus, the three skills that answer, without a model, questions with one right answer: intervals, scales and relative keys. The course's oracle is a textbook's letter arithmetic in `Lesson9.cs`.
 - The domain's intervals were checked once against GA's `main` at `53b7253`, outside the course: `GA.Core`, `GA.Domain.Core`, `GA.Business.Config` and `IntervalNaming.cs` taken with `git archive` into a scratch folder and run on the 441 pairs with the notes read right. The 21 unisons and the 5 other wrong intervals come out the same, and so does C to B#, an augmented seventh it calls major.
 - The solution of exercise 1 was checked with .NET's regex engine, and exercise 4 by asking its two questions for one run; 2 and 3 were worked by hand.
+- CI run [36666224042](https://github.com/spareilleux/learn/actions/runs/36666224042), for commit `73fd84d`: green on the three systems, 1 min 52 s on Linux, 1 min 48 s on macOS, 6 min 38 s on Windows, clone and build included.
 
 ## To verify
 
