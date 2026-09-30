@@ -160,13 +160,20 @@ Real phones and tablets are still to verify: whether Safari's WebGL applies
 the MSAA and what it costs, the frame rate, the wider field, the flights and
 the double tap.
 
-The last revision, the same day, fixes the lettering of the bay banners
-(scripts/course_library.gd). It was sized so that the widest word filled the
-banner exactly, and the label then wrapped that word inside itself: the
-English banner read "INFRASTRUCTUR" over "E". The widest word now takes at
-most 92 percent of the width, and all 27 banners (9 areas, 3 languages) wrap
-between words, under Compatibility and Forward+. index.pck keeps its size;
-index.html, index.wasm and index.js are unchanged.
+The last revision, the same day, fixes two things the previous one shipped.
+- Banners (scripts/course_library.gd): the lettering was sized so that the
+  widest word filled the banner exactly, and the label then wrapped that word
+  inside itself: the English banner read "INFRASTRUCTUR" over "E". The widest
+  word now takes at most 92 percent of the width, and all 27 banners (9 areas,
+  3 languages) wrap between words, under Compatibility and Forward+.
+- Walking (scripts/walk_physics.gd) has no head bob. It rose and fell once
+  per 0.85 m stride, and the camera walks at 6 m/s: the eye bounced about
+  seven times a second (a 6.6 cm range over half a second of walking), and the
+  author found it annoying. The eye now stays level; the landing dip, the
+  sprint's wider field and the slide's roll stay, and reduced motion still
+  turns them off.
+index.pck is 272 bytes smaller (14,949,916); index.html changes only that
+size, and index.wasm and index.js are unchanged.
 
 Native Compatibility GPU time, RTX 5080, 1600x900, 240 frames per view: 0.44 to
 0.52 ms for the previous web scene, 0.64 to 1.44 ms with the detail pass; up to
@@ -187,7 +194,7 @@ scripts/course_library.gd cb7c82e0893750c007b98611a84b4af2d7715ef6f1edb33e5fc5a3
 scripts/steel_cube.gd f28e71fffcd151663bc9a98b3c135cc7b805490e8298d3cf01029455c973f94c
 scripts/seldon_statue.gd 4e41b282aa2cc4de794296586b65f5f4d39688312673ddc46226fd3906cf4b27
 scripts/touch_controls.gd e9e1a18705024a1f7cbc36b59fd3cee0d2d8891dd7b928b9b48c170a39e0f501
-scripts/walk_physics.gd 07cb15a3a4a02045803514db79d4f501501b304412501423041cc9eab3ddff9d
+scripts/walk_physics.gd 63227f6bd097745f1b80a588e343d9631fd4d3f9d7dafc01026d541a6c305650
 scripts/view_fit.gd 04968e0b9c220c12490b258677a7331f07671b37d2951581a03868d8c992c65e
 scripts/view_move.gd 9a39222118edb283e594c21faf2963d767e42449b01d11fac29188b9b1b65aca
 scripts/multiverse.gd 0de3cece747a87c742ba6b26c8fac27a6a7dcdd18286f30957899becb2dfb34d
@@ -213,7 +220,7 @@ assets/world_glimpse.gdshader a06fc85ca086fc3e4d9297039be0b6549132bbffafeaedfbda
 assets/courses.json a4a97ab7fffa250c62ca71fe7f6b5885e3c3ab31054cf8aa9b180ea67aae9bfc
 
 SHA-256 output files:
-index.pck 0a443f2d25e23666bb6e3c0d8e47a2f3f9ee3d8bb22b5ef23c49394af0b9b4a9
+index.pck 16902ce7d7cf0f0bee949249ed0de8213fe22d657525bb784413384c41d316db
 index.wasm 99962b29677e42f3ba0258bd90fdc52ad90295954c4473e816ad02cfe5ff1d4f
 index.js e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981
 
