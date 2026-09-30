@@ -1,9 +1,9 @@
 Observatory Web export provenance
 
-Built 2026-09-28 with the official non-.NET Godot 4.6.1-stable Web export
+Built 2026-09-30 with the official non-.NET Godot 4.6.1-stable Web export
 template. Godot renderer: gl_compatibility (WebGL 2). The Web export disables
 SSR, SSIL and volumetric fog from the native Forward+ scene, and replaces its
-4x MSAA with FXAA (see the revision that puts the courses in the shelves). It
+4x MSAA with the anti-aliasing that the page picks (see the last revision). It
 is separate from the higher-quality native build and does not use hardware ray
 tracing.
 
@@ -70,7 +70,7 @@ to 59,905 faces, and Blender normalised it (seldon_statue.glb, 1.08 MB). In
 Chrome for Testing 153 on the same machine, full screen (3840x1872 canvas)
 without vsync, a frame takes 1.9 to 2.2 ms in five views.
 
-The last revision adds shadows and touch controls. A cool moonlight spot
+The next revision adds shadows and touch controls. A cool moonlight spot
 inside the oculus drum, 24 degrees off the vertical at the box, lights the
 floor, the steel box and the statue and casts their shadows, and the piers',
 across the paving. Its shadow map is 32-bit, since a 16-bit one striped the
@@ -85,6 +85,81 @@ catalogue; a book opens with two taps. In Chrome for Testing 153 on the RTX
 walk, look, fly, change view and open and close the catalogue; a real phone
 is still to verify.
 
+The last revision, 2026-09-30, makes walk mode a body, turns the viewpoints
+into short flights, marks the course bays, adds a language selector and a
+corridor behind the box, widens the view on a phone held upright, and gives
+the Web build the anti-aliasing it lacked. It ships only scripts, one shader
+and the page's head: no new texture or model.
+- Walking (scripts/walk_physics.gd): the box, the piers, the pedestal and the
+  shelves stop the visitor; Space jumps 0.85 m, C crouches, C while sprinting
+  slides. Keys 1 to 7 and the Views button fly to their viewpoint in 0.9 to
+  1.6 s, rising up to 6 m and widening the field up to 9 degrees on the way,
+  after GTA V's view switch (scripts/view_move.gd). With the browser's
+  reduced-motion setting the views cut at once, and walking has no bob, dip,
+  roll or change of field.
+- Courses (scripts/course_library.gd): each bay has a banner in its area's
+  colour under the gallery and, at eye level, a lacquered sign with the
+  area's name and course count under a brass lamp. An EN / FR / ES selector,
+  or T, switches titles, signs, cards, catalogue and course links; English
+  is the default unless the visitor came from a French or Spanish page, and
+  the address keeps the choice.
+- Touch (scripts/touch_controls.gd): on an iPhone in Safari the stick walked
+  but a drag did not turn the view (the author's report). A look drag used to
+  send mouse events to the fly camera, which asks the browser for a pointer
+  lock; it now turns the camera itself, per touch, and a drag whose index
+  matches no press goes to the nearest touch. This replaces a hotfix of
+  2026-09-29 that was never published. The stick sprints past its rim, and
+  the arrow buttons jump and crouch, or rise and descend in flight. The help
+  wraps clear of the Courses button and the language selector. A screen held
+  upright gets a wider field (scripts/view_fit.gd): on an iPhone 50 degrees
+  across instead of 32 (90 vertically), on an iPad 60 instead of 47.
+- The multiverse corridor (scripts/multiverse.gd,
+  assets/world_glimpse.gdshader): a double click on the box, or a double tap,
+  fades into an endless row of numbered steel doors, each glowing with one
+  of twelve procedural worlds, after Blake Crouch's novel Dark Matter; no
+  frame, set or asset of any adaptation is used. The Leave button, Esc or
+  the lit doorway behind the visitor lead back. The hall is hidden meanwhile.
+- Anti-aliasing: under Compatibility, FXAA and SMAA change no pixel (60 to
+  64 percent of them under Forward+), so the published build had none. Two
+  scripts in the page's head now choose: 4x MSAA on touch screens, and on
+  computers a canvas 1.5 times finer than the screen, which the browser
+  scales down. Each steps down when the median frame exceeds 22 ms: MSAA
+  from 4x to 2x to none, the supersampling from 1.5 to 1. ?msaa=0|2|4 and
+  ?ss= fix them. Shimmer was measured in Chrome emulations with the camera
+  moved a quarter of a pixel per frame along four paths, as the mean second
+  temporal difference of luma after a blur of one CSS pixel. Against the
+  published build it drops by 9 to 59 percent on an iPad and an iPhone, held
+  either way, and by 13 to 42 percent on a computer at 1600x900. On a
+  computer, thin lights far off, like the 4 cm rain beams, look fainter.
+- The Prime Radiant and a metal gilt remain experiments: the export's
+  exclude_filter leaves out their files, and the scene keeps the published
+  centre beam and gilt.
+- In the same emulations, with Chrome's CPU throttled six-fold, a phone's
+  MSAA went from 4x to 2x after 3.8 s and to none after 8.8 s (a median frame
+  of 33 ms); throttled thirty-fold, a computer's supersampling fell to 1
+  after 6.3 s. At full speed both kept their level. With the browser's
+  reduced-motion setting, key 3 cut to its view instead of a 1.34 s flight.
+- scripts/camera_follow.gd ships too, asleep unless the address carries
+  ?follow=1: it lets a test harness place the camera frame by frame.
+
+In Chrome for Testing 153 on the RTX 5080, full screen (2546x1250 CSS pixels
+at 1.5x) without vsync, a frame takes 3.6 to 5.3 ms in five views with the
+supersampling (a 5728x2812 canvas), and 2.6 to 4.5 ms without it (?ss=1,
+3819x1875), against 2.1 to 3.2 ms for the published build at 3819x1875 in
+the same session. index.pck grows by 69,044 bytes; index.wasm and index.js
+are unchanged.
+
+Native GPU time, RTX 5080, 1600x900, 240 frames per view, published build
+then this one: under Compatibility 1.39 and 1.29 ms at the start view, 0.65
+to 0.68 and 0.58 to 0.66 ms at three course bays; under Forward+ 2.51 and
+2.74 ms at the start, 0.68 to 0.86 and 0.68 to 0.87 ms at the bays. The
+banners, signs and lamps raise the start view's draw calls from 303 to 355
+under Compatibility.
+
+Real phones and tablets are still to verify: whether Safari's WebGL applies
+the MSAA and what it costs, the frame rate, the wider field, the flights and
+the double tap.
+
 Native Compatibility GPU time, RTX 5080, 1600x900, 240 frames per view: 0.44 to
 0.52 ms for the previous web scene, 0.64 to 1.44 ms with the detail pass; up to
 1.55 million primitives in the overview, against 0.46 million before. With the
@@ -96,14 +171,19 @@ by about 15 percent.
 SHA-256 source inputs of the exported project:
 project.godot eb7d53597517c711d564943e467cce2926699c2422b073079737325c3400692e
 main.tscn fb6245c960d3625ca05920116c58351d9dbeb255beae59175d89c06d47049564
-export_presets.cfg 8b44717dc35a46dff0ba18370dfa5d9989bea04b73c4e455b404284998f06571
+export_presets.cfg 1bd7171d93c9a378f1b328e945be2a7960478e89d34ae269f013ef83c306588f
 scripts/fly_camera.gd 2e5cdd15ca7bdcfa30ec129e354a309f3ff7296f6fbf54ac144984ed9aa9f8e7
 scripts/capture.gd 52ea2b5e40db2f1f4cdbd7658074ef60bd117e1f4110c1b8995590a4196748d0
-scripts/observatory.gd 159c98f64b08b5564cda76073aa742cf71b78a6e3817e0a5ab8ef32e3b2fe6cd
-scripts/course_library.gd 46e0f1684f405838f1b09540f799878e038c661f73af5e3a8abb4a338652398b
+scripts/observatory.gd 026eba6c86383a3df55930d9b3369a5c9de0640ff6ded1be5ba89d9fe06c93b5
+scripts/course_library.gd bb6cc84b96a12117c0dabee3ed3e49e23ed97ea315a0b316ce4ec3d58408fab1
 scripts/steel_cube.gd f28e71fffcd151663bc9a98b3c135cc7b805490e8298d3cf01029455c973f94c
 scripts/seldon_statue.gd 4e41b282aa2cc4de794296586b65f5f4d39688312673ddc46226fd3906cf4b27
-scripts/touch_controls.gd b5e5f091df670bc1e45397ebb5f1320be0984b4d4981e32c5424055f83df50d2
+scripts/touch_controls.gd e9e1a18705024a1f7cbc36b59fd3cee0d2d8891dd7b928b9b48c170a39e0f501
+scripts/walk_physics.gd 07cb15a3a4a02045803514db79d4f501501b304412501423041cc9eab3ddff9d
+scripts/view_fit.gd 04968e0b9c220c12490b258677a7331f07671b37d2951581a03868d8c992c65e
+scripts/view_move.gd 9a39222118edb283e594c21faf2963d767e42449b01d11fac29188b9b1b65aca
+scripts/multiverse.gd 0de3cece747a87c742ba6b26c8fac27a6a7dcdd18286f30957899becb2dfb34d
+scripts/camera_follow.gd dc63643772a7dceb41583169aeec3d3053d8555a20540fd29a1c9cbade2a712d
 assets/seldon_statue.glb 41f7e4c667711b0097132025bdf5edbd03b44de0793445db1f118d69e145c8ec
 assets/steel_portal.glb 009ec4dd8f85b74f47839d25095fbe9e087b222addccf13643639c4b98402b21
 assets/stone_marble.png a71f21a971a1a0b2b897ed42dd64f2ece500f34b246bb758d9ff7ae843e68bd3
@@ -121,10 +201,11 @@ assets/steel_brushed.gdshader cff19989eb4793ddb5dc001fd3d25473080c51d250a4a5cfc1
 assets/stained_glass.gdshader 1366183601743cfb42791f5efd38e4b26e6c6d10eb8ce1ac4e9e8c7a3db6d77a
 assets/floor_paving.gdshader 23187f024d276b897635ee0cc3e543c5852c4a9b5175cbe56ec59f5a998dc0e7
 assets/statue_marble.gdshader ec3f14f662487f3dae14a398fe91ea7183d88214bd2bf266359da89d79b94452
+assets/world_glimpse.gdshader a06fc85ca086fc3e4d9297039be0b6549132bbffafeaedfbda0ffea3eb918d6d
 assets/courses.json a4a97ab7fffa250c62ca71fe7f6b5885e3c3ab31054cf8aa9b180ea67aae9bfc
 
 SHA-256 output files:
-index.pck f6d5e0a642b1b496f09734c7e25f9adf5f194f06a97829ab3e5264de9d6e6ba2
+index.pck 8fe230153b70e940c7bf1ac5f93b06050ab6aa3efcc30d736af1e857907f9a61
 index.wasm 99962b29677e42f3ba0258bd90fdc52ad90295954c4473e816ad02cfe5ff1d4f
 index.js e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981
 

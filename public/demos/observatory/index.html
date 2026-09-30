@@ -92,7 +92,72 @@ body {
 		</style>
 		<link id="-gd-engine-icon" rel="icon" type="image/png" href="index.icon.png" />
 <link rel="apple-touch-icon" href="index.apple-touch-icon.png"/>
-
+<script>
+/* Observatory: supersampling for the 3D view (artpass/aa/NOTES.md). Godot sizes its canvas by
+   window.devicePixelRatio; reporting a larger ratio makes it render finer than the screen, and
+   the browser filters the canvas down. 1.5 on computers, 1 on touch screens; ?ss=<factor>
+   overrides. If frames then come slower than about 45 per second, it falls back to 1.
+   observatory.gd reads window.__obsSS to keep the HUD's size. */
+(function () {
+  var q = new URLSearchParams(location.search);
+  var touch = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+  var fixed = q.has('ss');
+  var ss = parseFloat(q.get('ss') || (touch ? '1' : '1.5'));
+  if (!(ss >= 1 && ss <= 3)) ss = 1;
+  window.__obsSS = ss;
+  var d = Object.getOwnPropertyDescriptor(window, 'devicePixelRatio') || Object.getOwnPropertyDescriptor(Window.prototype, 'devicePixelRatio');
+  var get = d && d.get;
+  Object.defineProperty(window, 'devicePixelRatio', { configurable: true, get: function () { return (get ? get.call(window) : 1) * window.__obsSS; } });
+  if (fixed || ss === 1) return;
+  // observatory.gd sets __obsRunning once the scene is built; skip 2 s of shader compiles, then
+  // take the median frame interval over 90 frames.
+  var times = [], last = 0, start = 0;
+  function tick(t) {
+    if (!window.__obsRunning) { requestAnimationFrame(tick); return; }
+    if (!start) start = t;
+    if (t - start > 2000) { if (last) times.push(t - last); last = t; }
+    if (times.length < 90) { requestAnimationFrame(tick); return; }
+    times.sort(function (a, b) { return a - b; });
+    window.__obsFrameMedian = times[45];
+    if (times[45] > 22) { window.__obsSS = 1; window.dispatchEvent(new Event('resize')); }
+  }
+  requestAnimationFrame(tick);
+})();
+</script>
+<script>
+/* Observatory: MSAA for the 3D view (artpass/motion/NOTES.md). Under Godot's Compatibility
+   renderer, the web export's, FXAA and SMAA change no pixel; MSAA is the only anti-aliasing there.
+   4x on touch screens, where it cut the visible shimmer by 30 to 43 % in emulation; none on
+   computers, where Chrome's ANGLE made it ten times slower and the 1.5x supersampling above does
+   the work. Its cost on a real phone is not measured yet: if frames come slower than about 45 a
+   second, it steps down to 2x, then off. ?msaa=0|2|4 fixes it.
+   observatory.gd applies window.__obsMSAA once a second. */
+(function () {
+  var q = new URLSearchParams(location.search);
+  var touch = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+  var fixed = q.has('msaa');
+  var m = parseInt(q.get('msaa') || (touch ? '4' : '0'), 10);
+  if ([0, 2, 4].indexOf(m) < 0) m = 0;
+  window.__obsMSAA = m;
+  if (fixed || m === 0) return;
+  var times = [], last = 0, start = 0;
+  function tick(t) {
+    if (!window.__obsRunning || window.__obsMSAA === 0) { if (window.__obsMSAA !== 0) requestAnimationFrame(tick); return; }
+    if (!start) start = t;
+    // Skip 2 s (shader compiles, or the last change settling), then 90 frames.
+    if (t - start > 2000) { if (last) times.push(t - last); last = t; }
+    if (times.length < 90) { requestAnimationFrame(tick); return; }
+    times.sort(function (a, b) { return a - b; });
+    window.__obsMSAAMedian = times[45];
+    if (times[45] > 22) {
+      window.__obsMSAA = window.__obsMSAA === 4 ? 2 : 0;
+      times = []; last = 0; start = 0;
+      requestAnimationFrame(tick);
+    }
+  }
+  requestAnimationFrame(tick);
+})();
+</script>
 	</head>
 	<body>
 		<canvas id="canvas">
@@ -111,7 +176,7 @@ body {
 
 		<script src="index.js"></script>
 		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":14881144,"index.wasm":37685705},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":14950188,"index.wasm":37685705},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
 const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
 
