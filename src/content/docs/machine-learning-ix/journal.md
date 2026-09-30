@@ -541,7 +541,7 @@ Scored against the eight predictions of the entry above, committed alone as `9ab
 - **P8, the frontier's error (finding 64).** Rows "min" then "Max": `UnknownDirection` "min"; reversed: "Max". Control: a valid table of 300 rows gives 21 frontier rows and the same CSV for 50 of 50 shuffles, and IX's defect table the same error, "candidate a in rev-a/t repeats metric cost", for 50 of 50.
 - **Read, not run (finding 65).** The crate header and the package description announce genetic programming; none of the six modules implements it.
 
-Three-OS CI for lesson 17 is still pending.
+The first CI run, [36754739271](https://github.com/spareilleux/learn/actions/runs/36754739271) on `c2298f2`, passed on Windows, Linux and macOS: every lesson 17 output matched `expected/` byte for byte, so the GA's medians, 916 and the values printed for P3 and P4, came out the same with the three platforms' `exp` and `ln`, and the Linux cross-check matched `expected/crosscheck.txt`.
 
 ## To verify
 
@@ -568,5 +568,4 @@ Three-OS CI for lesson 17 is still pending.
 - Whether `spectrogram` mislabels a window that is not a power of two as `welch_psd` does: it keeps the same window_size/2 + 1 bins of the padded transform, which comes from reading the code, not from a measurement.
 - Whether `bidirectional_astar`'s f = g + h(parent) ([`astar.rs` 334 and 366](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-search/src/astar.rs#L334-L366)) costs optimality or only expansions with a nonzero heuristic: lesson 16 read it and measured only h = 0.
 - Whether `qstar_bounded` keeps a (1 + ε) bound: its doc comment describes focal search with OPEN and FOCAL lists and the function calls `qstar_weighted` ([`qstar.rs` 292-303](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-search/src/qstar.rs#L292-L303)), which comes from reading the code; lesson 16 didn't run it.
-- Lesson 17 on Linux and macOS CI: IX's `mutate` draws from rand_distr's `Normal`, whose ziggurat sampler calls f64's `exp` and `ln` (rand_distr 0.5.1, `normal.rs` 64 and 81-82), and a platform whose `exp` or `ln` rounds differently could change one draw and then the rest of a GA run. The values printed for P3 and P4 and the GA's median of 916, which P5's test pins, could then move. DE draws only uniforms, and the selection, crossover and Pareto checks use no transcendental function.
 - Why IX's GA gets below 0.01 on `minimize_linreg_mse` in about 8 generations, where P5's model allowed 20 to 60. The lesson's explanation, that lesson 12's collinear features make the region below 0.01 a long slab rather than a small ball, is not measured: rerunning P5 on features that are not collinear would test it.

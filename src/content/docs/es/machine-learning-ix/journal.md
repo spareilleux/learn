@@ -541,7 +541,7 @@ Puntuada frente a las ocho predicciones de la entrada anterior, registrada sola 
 - **P8, el error de la frontera (hallazgo 64).** Filas «min» y luego «Max»: `UnknownDirection` «min»; al revés: «Max». Control: una tabla válida de 300 filas da 21 filas de frontera y el mismo CSV con 50 mezclas de 50, y la tabla con defectos de IX el mismo error, «candidate a in rev-a/t repeats metric cost», con 50 de 50.
 - **Leído, no ejecutado (hallazgo 65).** La cabecera del crate y la descripción del paquete anuncian programación genética; ninguno de los seis módulos la implementa.
 
-El CI en tres sistemas para la lección 17 sigue pendiente.
+La primera ejecución del CI, [36754739271](https://github.com/spareilleux/learn/actions/runs/36754739271) sobre `c2298f2`, pasó en Windows, Linux y macOS: cada salida de la lección 17 coincide byte a byte con `expected/`, así que las medianas del AG, 916 y los valores impresos para P3 y P4, salieron iguales con el `exp` y el `ln` de las tres plataformas, y el control cruzado en Linux coincide con `expected/crosscheck.txt`.
 
 ## Por verificar
 
@@ -568,5 +568,4 @@ El CI en tres sistemas para la lección 17 sigue pendiente.
 - Si `spectrogram` etiqueta mal una ventana que no es potencia de dos, como `welch_psd`: conserva las mismas window_size/2 + 1 bandas de la transformada rellenada, lo que sale de leer el código, no de una medida.
 - Si el f = g + h(padre) de `bidirectional_astar` ([`astar.rs` 334 y 366](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-search/src/astar.rs#L334-L366)) cuesta la optimalidad o solo expansiones con una heurística no nula: la lección 16 lo leyó y solo midió h = 0.
 - Si `qstar_bounded` mantiene una cota (1 + ε): su comentario describe una búsqueda focal con listas OPEN y FOCAL y la función llama a `qstar_weighted` ([`qstar.rs` 292-303](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-search/src/qstar.rs#L292-L303)), lo que sale de leer el código; la lección 16 no la ejecutó.
-- La lección 17 en CI Linux y macOS: el `mutate` de IX extrae de la `Normal` de rand_distr, cuyo muestreador ziggurat llama a `exp` y `ln` de f64 (rand_distr 0.5.1, `normal.rs` 64 y 81-82), y una plataforma cuyo `exp` o `ln` redondee de otra forma podría cambiar una extracción y después todo el resto de una ejecución del AG. Los valores impresos para P3 y P4 y la mediana de 916 del AG, que fija el test de P5, podrían entonces moverse. DE solo extrae uniformes, y las comprobaciones de selección, cruce y Pareto no usan ninguna función trascendente.
 - Por qué el AG de IX baja de 0,01 en `minimize_linreg_mse` en unas 8 generaciones, donde el modelo de P5 concedía de 20 a 60. La explicación de la lección, que las variables colineales de la lección 12 hacen de la región por debajo de 0,01 una losa alargada más que una bola pequeña, no está medida: repetir P5 con variables no colineales la pondría a prueba.
