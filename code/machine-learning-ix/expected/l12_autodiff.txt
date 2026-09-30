@@ -46,16 +46,16 @@
     eps 1e-3: 5e-7
     eps 1e-4: 6e-9
     eps 1e-5: 4e-9
-    eps 1e-6: 4e-8
-    eps 1e-7: 5e-7
-    eps 1e-8: 6e-6
-    eps 1e-9: 5e-5
-    eps 1e-10: 5e-4
+    eps 1e-6: 1e-8 to 1e-7
+    eps 1e-7: 1e-7 to 1e-6
+    eps 1e-8: 1e-6 to 1e-5
+    eps 1e-9: 1e-5 to 1e-4
+    eps 1e-10: 1e-4 to 1e-3
   IX's dL/dx, first four components: [-4.429396, -6.277916, -0.459292, -5.058516]
-  smallest at eps 1e-5; eps 1e-1 is 1e6 times that, eps 1e-10 1e5 times
+  smallest at eps 1e-5; eps 1e-1 is 1e6 times that; eps 1e-1 and 1e-10 both at least 100 times: true
 
 == IX's FFT-magnitude backward (feature fft-autograd)
-  20 signals of 64 samples, each with its own weights, eps 1e-5: worst error over 1280 components 8e-9
+  20 signals of 64 samples, each with its own weights, eps 1e-5: worst error over 1280 components below 1e-7: true
 
 == IX's `minimize_linreg_mse`, replayed
   k in the noise -0.01 + k*0.02/32767, rows 0 to 19: 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 2 2 2

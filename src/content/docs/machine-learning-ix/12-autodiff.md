@@ -107,16 +107,16 @@ A quadratic has f‴ = 0, so only rounding is left (P5). The second loss, L = Σ
     eps 1e-3: 5e-7
     eps 1e-4: 6e-9
     eps 1e-5: 4e-9
-    eps 1e-6: 4e-8
-    eps 1e-7: 5e-7
-    eps 1e-8: 6e-6
-    eps 1e-9: 5e-5
-    eps 1e-10: 5e-4
+    eps 1e-6: 1e-8 to 1e-7
+    eps 1e-7: 1e-7 to 1e-6
+    eps 1e-8: 1e-6 to 1e-5
+    eps 1e-9: 1e-5 to 1e-4
+    eps 1e-10: 1e-4 to 1e-3
   IX's dL/dx, first four components: [-4.429396, -6.277916, -0.459292, -5.058516]
-  smallest at eps 1e-5; eps 1e-1 is 1e6 times that, eps 1e-10 1e5 times
+  smallest at eps 1e-5; eps 1e-1 is 1e6 times that; eps 1e-1 and 1e-10 both at least 100 times: true
 ```
 
-On the quadratic, every ε from 10⁻¹ down to 10⁻⁵ is exact to 10⁻¹², and below that the error grows about tenfold per decade: rounding alone. On the FFT loss, the error falls a hundredfold per decade down to 10⁻⁴, the ε² of truncation, and rises tenfold per decade below 10⁻⁵, the 1/ε of rounding. A smaller ε is not a safer one. The central differences of the mean squared error use a copy of the loss written as plain loops in a fixed order, so the rounding noise in the table is the same on every OS.
+On the quadratic, every ε from 10⁻¹ down to 10⁻⁵ is exact to 10⁻¹², and below that the error grows about tenfold per decade: rounding alone. On the FFT loss, the error falls a hundredfold per decade down to 10⁻⁴, the ε² of truncation, and rises tenfold per decade below 10⁻⁵, the 1/ε of rounding. A smaller ε is not a safer one. The central differences of the mean squared error use a copy of the loss written as plain loops in a fixed order, so the rounding noise in the table is the same on every OS. The FFT loss is not: IX's FFT takes one `cos` and one `sin` per stage from the platform's maths library, and to the right of the minimum the table shows their last bits. On the first CI run, Linux and macOS printed 4e-6, 7e-5 and 4e-4 for the last three rows where Windows printed 6e-6, 5e-5 and 5e-4 ([journal](../journal/#2026-09-30--lesson-12-measured)). On that side the table therefore prints only the decade, and P6's two conditions as one check.
 
 IX's own verifier, [`tests/finite_diff.rs`](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-autograd/tests/finite_diff.rs), uses ε = 10⁻⁶ and checks each op under `sum`, which weighs every output alike. A random weight per output, as c_k does here, also checks that each output's gradient reaches the right inputs.
 
@@ -128,10 +128,10 @@ The crate keeps this op behind the `fft-autograd` feature, off by default, "unti
 
 ```text
 == IX's FFT-magnitude backward (feature fft-autograd)
-  20 signals of 64 samples, each with its own weights, eps 1e-5: worst error over 1280 components 8e-9
+  20 signals of 64 samples, each with its own weights, eps 1e-5: worst error over 1280 components below 1e-7: true
 ```
 
-numpy's own FFT, through the same formula, gives the same first four components, −4.429396, −6.277916, −0.459292 and −5.058516, and agrees with numpy's central differences below 10⁻⁶. That is a check against finite differences and numpy, not the JAX comparison the crate asks for. A bin whose magnitude is below 10⁻¹⁵ gets a zero gradient, a valid choice where |·| has a kink; this lesson did not test a signal with such a bin.
+The worst error was 8·10⁻⁹ on Windows and 9·10⁻⁹ on Linux and macOS, rounding again, so the line prints a bound. numpy's own FFT, through the same formula, gives the same first four components, −4.429396, −6.277916, −0.459292 and −5.058516, and agrees with numpy's central differences below 10⁻⁶. That is a check against finite differences and numpy, not the JAX comparison the crate asks for. A bin whose magnitude is below 10⁻¹⁵ gets a zero gradient, a valid choice where |·| has a kink; this lesson did not test a signal with such a bin.
 
 ## 6. IX's own example, replayed
 

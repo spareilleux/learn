@@ -13,6 +13,13 @@ fn fmt_err(e: f64) -> String {
     }
 }
 
+/// The decade an error falls in: past the best eps of the FFT loss the digits are rounding noise,
+/// and they depend on the platform's `sin` and `cos`, which IX's FFT calls for its twiddle factors
+fn fmt_decade(e: f64) -> String {
+    let low = e.log10().floor() as i32;
+    format!("1e{low} to 1e{}", low + 1)
+}
+
 fn main() {
     println!("== f(x1, x2) = ln(x1) + x1*x2 - sin(x2) at (2, 5)");
     let (f, g) = baydin_forward(2.0, 5.0);
@@ -108,25 +115,31 @@ fn main() {
     }
     let (xs, c) = signal_and_weights(2026, 64);
     let errors = fft_fd_errors(&xs, &c, &decades(10));
+    let (best, min) = best_eps(&errors);
     println!("  L = sum c_k |FFT(x)_k|, 64 samples, worst of the 64 components of dL/dx:");
     for &(eps, err) in &errors {
-        println!("    eps {eps:.0e}: {}", fmt_err(err));
+        let shown = if eps >= best {
+            fmt_err(err)
+        } else {
+            fmt_decade(err)
+        };
+        println!("    eps {eps:.0e}: {shown}");
     }
     println!(
         "  IX's dL/dx, first four components: {}",
         fmt_vec(ix_fft_gradient(&xs, &c).into_iter().take(4), 6)
     );
-    let (best, min) = best_eps(&errors);
     println!(
-        "  smallest at eps {best:.0e}; eps 1e-1 is {:.0e} times that, eps 1e-10 {:.0e} times",
+        "  smallest at eps {best:.0e}; eps 1e-1 is {:.0e} times that; eps 1e-1 and 1e-10 both at least 100 times: {}",
         errors[0].1 / min,
-        errors[9].1 / min
+        errors[0].1 >= 100.0 * min && errors[9].1 >= 100.0 * min
     );
 
     println!("\n== IX's FFT-magnitude backward (feature fft-autograd)");
+    let worst = fft_fd_check(20, 64, 1e-5);
     println!(
-        "  20 signals of 64 samples, each with its own weights, eps 1e-5: worst error over 1280 components {}",
-        fmt_err(fft_fd_check(20, 64, 1e-5))
+        "  20 signals of 64 samples, each with its own weights, eps 1e-5: worst error over 1280 components below 1e-7: {}",
+        worst < 1e-7
     );
 
     println!("\n== IX's `minimize_linreg_mse`, replayed");

@@ -107,16 +107,16 @@ Una cuadrática tiene f‴ = 0, así que solo queda el redondeo (P5). La segunda
     eps 1e-3: 5e-7
     eps 1e-4: 6e-9
     eps 1e-5: 4e-9
-    eps 1e-6: 4e-8
-    eps 1e-7: 5e-7
-    eps 1e-8: 6e-6
-    eps 1e-9: 5e-5
-    eps 1e-10: 5e-4
+    eps 1e-6: 1e-8 to 1e-7
+    eps 1e-7: 1e-7 to 1e-6
+    eps 1e-8: 1e-6 to 1e-5
+    eps 1e-9: 1e-5 to 1e-4
+    eps 1e-10: 1e-4 to 1e-3
   IX's dL/dx, first four components: [-4.429396, -6.277916, -0.459292, -5.058516]
-  smallest at eps 1e-5; eps 1e-1 is 1e6 times that, eps 1e-10 1e5 times
+  smallest at eps 1e-5; eps 1e-1 is 1e6 times that; eps 1e-1 and 1e-10 both at least 100 times: true
 ```
 
-En la cuadrática, cada ε de 10⁻¹ a 10⁻⁵ es exacto hasta 10⁻¹², y por debajo el error crece alrededor de diez veces por década: es solo redondeo. En la pérdida FFT, el error baja cien veces por década hasta 10⁻⁴, el ε² del truncamiento, y sube diez veces por década por debajo de 10⁻⁵, el 1/ε del redondeo. Un ε más pequeño no es más seguro. Las diferencias centradas del error cuadrático medio usan una copia de la pérdida escrita con bucles simples en un orden fijo, así que el ruido de redondeo de la tabla es el mismo en todos los sistemas.
+En la cuadrática, cada ε de 10⁻¹ a 10⁻⁵ es exacto hasta 10⁻¹², y por debajo el error crece alrededor de diez veces por década: es solo redondeo. En la pérdida FFT, el error baja cien veces por década hasta 10⁻⁴, el ε² del truncamiento, y sube diez veces por década por debajo de 10⁻⁵, el 1/ε del redondeo. Un ε más pequeño no es más seguro. Las diferencias centradas del error cuadrático medio usan una copia de la pérdida escrita con bucles simples en un orden fijo, así que el ruido de redondeo de la tabla es el mismo en todos los sistemas. No ocurre lo mismo con la pérdida FFT: la FFT de IX toma un `cos` y un `sin` por etapa de la biblioteca matemática de la plataforma, y a la derecha del mínimo la tabla muestra sus últimos bits. En la primera ejecución de CI, Linux y macOS imprimieron 4e-6, 7e-5 y 4e-4 en las tres últimas filas, donde Windows imprimió 6e-6, 5e-5 y 5e-4 ([diario](../journal/#2026-09-30--lección-12-medida)). Por eso, de ese lado la tabla solo imprime la década, y las dos condiciones de P6 en una sola comprobación.
 
 El propio verificador de IX, [`tests/finite_diff.rs`](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-autograd/tests/finite_diff.rs), usa ε = 10⁻⁶ y comprueba cada operación bajo `sum`, que pondera todas las salidas por igual. Un peso aleatorio por salida, como los c_k aquí, comprueba además que el gradiente de cada salida llega a las entradas correctas.
 
@@ -128,10 +128,10 @@ El crate mantiene esta operación tras la feature `fft-autograd`, desactivada po
 
 ```text
 == IX's FFT-magnitude backward (feature fft-autograd)
-  20 signals of 64 samples, each with its own weights, eps 1e-5: worst error over 1280 components 8e-9
+  20 signals of 64 samples, each with its own weights, eps 1e-5: worst error over 1280 components below 1e-7: true
 ```
 
-La FFT de numpy, con la misma fórmula, da las mismas cuatro primeras componentes, −4,429396, −6,277916, −0,459292 y −5,058516, y coincide con las diferencias centradas de numpy con una diferencia menor que 10⁻⁶. Es una comprobación frente a diferencias finitas y numpy, no la comparación con JAX que pide el crate. Una frecuencia cuya magnitud es menor que 10⁻¹⁵ recibe un gradiente nulo, una elección válida donde |·| tiene un pico; esta lección no probó ninguna señal con una frecuencia así.
+El peor error fue de 8·10⁻⁹ en Windows y de 9·10⁻⁹ en Linux y macOS, otra vez redondeo, así que la línea imprime una cota. La FFT de numpy, con la misma fórmula, da las mismas cuatro primeras componentes, −4,429396, −6,277916, −0,459292 y −5,058516, y coincide con las diferencias centradas de numpy con una diferencia menor que 10⁻⁶. Es una comprobación frente a diferencias finitas y numpy, no la comparación con JAX que pide el crate. Una frecuencia cuya magnitud es menor que 10⁻¹⁵ recibe un gradiente nulo, una elección válida donde |·| tiene un pico; esta lección no probó ninguna señal con una frecuencia así.
 
 ## 6. El propio ejemplo de IX, reproducido
 

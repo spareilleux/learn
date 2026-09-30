@@ -107,16 +107,16 @@ Une quadratique a f‴ = 0, donc il ne reste que l'arrondi (P5). La seconde pert
     eps 1e-3: 5e-7
     eps 1e-4: 6e-9
     eps 1e-5: 4e-9
-    eps 1e-6: 4e-8
-    eps 1e-7: 5e-7
-    eps 1e-8: 6e-6
-    eps 1e-9: 5e-5
-    eps 1e-10: 5e-4
+    eps 1e-6: 1e-8 to 1e-7
+    eps 1e-7: 1e-7 to 1e-6
+    eps 1e-8: 1e-6 to 1e-5
+    eps 1e-9: 1e-5 to 1e-4
+    eps 1e-10: 1e-4 to 1e-3
   IX's dL/dx, first four components: [-4.429396, -6.277916, -0.459292, -5.058516]
-  smallest at eps 1e-5; eps 1e-1 is 1e6 times that, eps 1e-10 1e5 times
+  smallest at eps 1e-5; eps 1e-1 is 1e6 times that; eps 1e-1 and 1e-10 both at least 100 times: true
 ```
 
-Sur la quadratique, chaque ε de 10⁻¹ à 10⁻⁵ est exact à 10⁻¹² près, et en dessous l'erreur grandit d'environ un facteur dix par décade : c'est l'arrondi seul. Sur la perte FFT, l'erreur baisse d'un facteur cent par décade jusqu'à 10⁻⁴, le ε² de la troncature, et remonte d'un facteur dix par décade sous 10⁻⁵, le 1/ε de l'arrondi. Un ε plus petit n'est pas plus sûr. Les différences centrées de l'erreur quadratique moyenne utilisent une copie de la perte écrite en boucles simples dans un ordre fixe, si bien que le bruit d'arrondi du tableau est le même sur tous les systèmes.
+Sur la quadratique, chaque ε de 10⁻¹ à 10⁻⁵ est exact à 10⁻¹² près, et en dessous l'erreur grandit d'environ un facteur dix par décade : c'est l'arrondi seul. Sur la perte FFT, l'erreur baisse d'un facteur cent par décade jusqu'à 10⁻⁴, le ε² de la troncature, et remonte d'un facteur dix par décade sous 10⁻⁵, le 1/ε de l'arrondi. Un ε plus petit n'est pas plus sûr. Les différences centrées de l'erreur quadratique moyenne utilisent une copie de la perte écrite en boucles simples dans un ordre fixe, si bien que le bruit d'arrondi du tableau est le même sur tous les systèmes. Il n'en va pas de même pour la perte FFT : la FFT d'IX prend un `cos` et un `sin` par étage à la bibliothèque mathématique de la plateforme, et à droite du minimum le tableau montre leurs derniers bits. Au premier run de CI, Linux et macOS ont affiché 4e-6, 7e-5 et 4e-4 pour les trois dernières lignes, là où Windows affichait 6e-6, 5e-5 et 5e-4 ([journal](../journal/#2026-09-30--leçon-12-mesurée)). De ce côté, le tableau n'affiche donc que la décade, et les deux conditions de P6 en une seule vérification.
 
 Le vérificateur d'IX lui-même, [`tests/finite_diff.rs`](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-autograd/tests/finite_diff.rs), prend ε = 10⁻⁶ et teste chaque opération sous `sum`, qui pèse toutes les sorties de la même façon. Un poids aléatoire par sortie, comme les c_k ici, vérifie en plus que le gradient de chaque sortie atteint les bonnes entrées.
 
@@ -128,10 +128,10 @@ La crate garde cette opération derrière la feature `fft-autograd`, désactivé
 
 ```text
 == IX's FFT-magnitude backward (feature fft-autograd)
-  20 signals of 64 samples, each with its own weights, eps 1e-5: worst error over 1280 components 8e-9
+  20 signals of 64 samples, each with its own weights, eps 1e-5: worst error over 1280 components below 1e-7: true
 ```
 
-La FFT de numpy, par la même formule, donne les mêmes quatre premières composantes, −4,429396, −6,277916, −0,459292 et −5,058516, et concorde avec les différences centrées de numpy à moins de 10⁻⁶. C'est une vérification face aux différences finies et à numpy, pas la comparaison avec JAX que demande la crate. Une fréquence dont la magnitude est inférieure à 10⁻¹⁵ reçoit un gradient nul, un choix valable là où |·| fait un coude ; cette leçon n'a pas testé de signal ayant une telle fréquence.
+Le pire écart est de 8·10⁻⁹ sous Windows et de 9·10⁻⁹ sous Linux et macOS, encore l'arrondi, si bien que la ligne affiche une borne. La FFT de numpy, par la même formule, donne les mêmes quatre premières composantes, −4,429396, −6,277916, −0,459292 et −5,058516, et concorde avec les différences centrées de numpy à moins de 10⁻⁶. C'est une vérification face aux différences finies et à numpy, pas la comparaison avec JAX que demande la crate. Une fréquence dont la magnitude est inférieure à 10⁻¹⁵ reçoit un gradient nul, un choix valable là où |·| fait un coude ; cette leçon n'a pas testé de signal ayant une telle fréquence.
 
 ## 6. L'exemple d'IX, rejoué
 
