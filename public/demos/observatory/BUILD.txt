@@ -208,6 +208,46 @@ Web, headless Chrome on the local GPU, at 1600x900 and in an emulated
 iPhone: the start, the roof and the glass view hold 60 frames a second
 (median frame 16.7 ms), with no exception. Real phones: to verify.
 
+The next revision, the same day, adds a lift and walkable galleries, reworks
+the keys and draws the galactic core.
+- Lift (scripts/lift.gd): a bronze cage on steel rails in bay 3, behind the
+  start view, climbs from the hall (0 m) to the galleries (6.2 and 12.6 m).
+  In the cage, Space goes up a floor, Ctrl or C down, E up or back down from
+  the top; at a landing, E or walking against the closed gate calls it. A gate
+  closes each landing while the cage is elsewhere, and the cage's own gate
+  while it moves. observatory.gd cuts each gallery's walkway round the shaft,
+  and a brass collar covers the cut.
+- Walking (scripts/walk_physics.gd): the body stands on the hall, on a
+  gallery's walkway or in the cage, steps up to 0.3 m and falls from higher;
+  a rail stops it at the galleries' inner edge. A step from the gallery view
+  lands on the second gallery. Ctrl crouches as C does, Caps Lock walks at
+  half speed, Alt with A/D leans 0.38 m with a roll, and Alt with W/S rises
+  or ducks.
+- Sky (assets/night_sky.gdshader, assets/sky_core_cap.png): within 80 degrees
+  of the core, an image drawn locally by Z-Image-Turbo (bf16, 8 steps,
+  2048 x 2048, cached weights) replaces the magnified photograph. It is mapped
+  azimuthal equidistant round the core, its x axis along the Galaxy's plane,
+  and fades into ESO's panorama over its outer 35 percent. The panorama is
+  magnified 2 times instead of 5.
+- Courses (assets/courses.json): the bundled fallback lists 55 courses, a book
+  per Streeling University department; the site's courses.json does the same
+  from this change on.
+index.pck grows to 21,663,464 bytes; index.html changes only that size, and
+index.wasm and index.js are unchanged.
+Native tests (Godot 4.6.1): 28 runs under Compatibility and Forward+ pass with
+no script error: self-test, fly, walk, the new lift test (the cage, the
+galleries, the rail, the gates, Ctrl, Caps Lock and the lean; in both
+renderers), fit, flights, views (three ways), touch, languages, courses,
+corridor, phone HUD and the 27 banners. A first pass caught two regressions
+of the new walking code, both fixed before this export: the lean's clamp to
+the shelves pulled a walker out of the multiverse corridor, and Space jumped
+from the gallery view.
+Web, headless Chrome on the local GPU, at 1600x900 and in an emulated
+iPhone: the start, the roof and the glass view hold 60 frames a second on the
+computer (median frame 16.7 ms) and a median of 16.7 ms on the phone
+emulation (95th percentile 33.7 ms, as before), with no exception. The lift
+was not driven in the browser. Real phones: to verify.
+
 Native Compatibility GPU time, RTX 5080, 1600x900, 240 frames per view: 0.44 to
 0.52 ms for the previous web scene, 0.64 to 1.44 ms with the detail pass; up to
 1.55 million primitives in the overview, against 0.46 million before. With the
@@ -222,12 +262,12 @@ main.tscn fb6245c960d3625ca05920116c58351d9dbeb255beae59175d89c06d47049564
 export_presets.cfg 1bd7171d93c9a378f1b328e945be2a7960478e89d34ae269f013ef83c306588f
 scripts/fly_camera.gd 2e5cdd15ca7bdcfa30ec129e354a309f3ff7296f6fbf54ac144984ed9aa9f8e7
 scripts/capture.gd 52ea2b5e40db2f1f4cdbd7658074ef60bd117e1f4110c1b8995590a4196748d0
-scripts/observatory.gd a4b4d62c871c8e2778941d5f1f03e6da37a187f6ff01aa3af8773597fb9a1ffc
+scripts/observatory.gd ee9bf4ecf62d9ac48a7fcddca8b6279e52eecba728aa6aba07339bd848d53e3e
 scripts/course_library.gd cb7c82e0893750c007b98611a84b4af2d7715ef6f1edb33e5fc5a3607983d9dd
 scripts/steel_cube.gd f28e71fffcd151663bc9a98b3c135cc7b805490e8298d3cf01029455c973f94c
 scripts/seldon_statue.gd 4e41b282aa2cc4de794296586b65f5f4d39688312673ddc46226fd3906cf4b27
 scripts/touch_controls.gd 4b94ea15cb329d6409385799a3ff307fd35740b68d09e0f7f8ed2e2c010ae744
-scripts/walk_physics.gd ba6b9871950932dfe28193996559ca0f4e9892c797ba3c56b32e9b2b82e5ae16
+scripts/walk_physics.gd 181e4f89b74656b0ffb7091642450b27a509d2d242b407bed9a55df3d480129a
 scripts/view_fit.gd 04968e0b9c220c12490b258677a7331f07671b37d2951581a03868d8c992c65e
 scripts/view_move.gd 9a39222118edb283e594c21faf2963d767e42449b01d11fac29188b9b1b65aca
 scripts/multiverse.gd 0de3cece747a87c742ba6b26c8fac27a6a7dcdd18286f30957899becb2dfb34d
@@ -250,21 +290,23 @@ assets/stained_glass.gdshader 1366183601743cfb42791f5efd38e4b26e6c6d10eb8ce1ac4e
 assets/floor_paving.gdshader 23187f024d276b897635ee0cc3e543c5852c4a9b5175cbe56ec59f5a998dc0e7
 assets/statue_marble.gdshader ec3f14f662487f3dae14a398fe91ea7183d88214bd2bf266359da89d79b94452
 assets/world_glimpse.gdshader a06fc85ca086fc3e4d9297039be0b6549132bbffafeaedfbda0ffea3eb918d6d
-assets/courses.json a4a97ab7fffa250c62ca71fe7f6b5885e3c3ab31054cf8aa9b180ea67aae9bfc
+assets/courses.json d7c007844c88794f3c5abe32e08f54a80659b6d85bea1f6cf5af3945f71f30f6
 scripts/extra_views.gd cd6f1a22e9cca5015611121a271aa145a6100e843d200e7e57eebf85d6610a56
 scripts/upperside.gd d18d9ce9ee8d15201d5f21fba51afa957d18e9a70b2df8b49cad10a555f8cd22
-assets/night_sky.gdshader f9e5e5c20c2931c391e58f7ddaf4ec818e72859b82aa192a12ecb40529d5ea3e
+assets/night_sky.gdshader 67421b4338debb80d8b6cec071bb37001d9d5493d240be53c0a107ad17cb5cec
 assets/upperside.gdshader c6b25b186470b50d7c228f0c99d946a5c6daa6c7a90887c4baf6c7661041c6da
 assets/sky_milky_way_eso.jpg b17e19bf2d5e7e9efa03b602450f5189dc77f85251e704d99b6f14632cff3495
 assets/exterior_ashlar_albedo.png c0cff260c039e1e1528920f86070266ac20ba2a3e36e99a53654c2ed18cdef94
 assets/exterior_ashlar_normal.png 0dc3b0023534b21c7d383bbca468f057cc65ba1a9526303c7b3084587138f029
+scripts/lift.gd dab60e28fef23f72ca3f8e8a6cc60ffdcdb90b41b97cb9e3d258fcf723087a50
+assets/sky_core_cap.png a110fdfa1b79cc41eec119265aeb89bc211d0b8e0eb6c759b45c25496f2daabe
 
 SHA-256 output files:
-index.pck 14d4eddaa9254430ab9d63a576ddb0e9de1dd049bccec8570816471a2dbc3275
+index.pck 90d6ef38ef963edbc479768e499bb3516cb6ec61819931381069cbea61e4988d
 index.wasm 99962b29677e42f3ba0258bd90fdc52ad90295954c4473e816ad02cfe5ff1d4f
 index.js e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981
 
 This directory contains a prebuilt binary export. Re-export only for deliberate
 scene changes. A scene re-export leaves the engine files (index.wasm, index.js)
 byte-identical, so git keeps a single copy; each scene revision adds its
-index.pck (20.6 MB here) to the binary history.
+index.pck (21.7 MB here) to the binary history.
