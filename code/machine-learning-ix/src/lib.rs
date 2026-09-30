@@ -29,6 +29,7 @@ pub mod linear;
 pub mod net;
 pub mod optimize;
 pub mod reduce;
+pub mod rl;
 pub mod sequence;
 pub mod sketch;
 pub mod transformer;

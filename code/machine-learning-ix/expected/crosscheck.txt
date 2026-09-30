@@ -135,4 +135,10 @@ d 16: var(q.k) 15.7, largest of 16 weights unscaled 0.679, scaled 0.238
 d 64: var(q.k) 63.8, largest of 16 weights unscaled 0.847, scaled 0.247
 d 256: var(q.k) 259.7, largest of 16 weights unscaled 0.925, scaled 0.247
 numpy's own U(-1, 1), a million draws: std 0.5776, 1/sqrt(3) = 0.5774
+
+== lesson 14
+value iteration, 5 x 5 GridWorld, gamma 0.99: V*(start) 2.527188
+testbed, 2000 tasks from the course's Rng: mean of the best arm's mean 1.538
+Auer et al. bound at T = 10000: 1106.5
+Auer et al. bound at T = 100000: 1382.8
 exit 0

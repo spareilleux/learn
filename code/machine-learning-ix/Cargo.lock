@@ -829,6 +829,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "ix-rl"
+version = "0.1.0"
+source = "git+https://github.com/GuitarAlchemist/ix?rev=490c39533627d296bf9f8f050e6fafc14d7a20c2#490c39533627d296bf9f8f050e6fafc14d7a20c2"
+dependencies = [
+ "ix-math",
+ "ndarray",
+ "rand 0.9.5",
+ "rand_distr 0.5.1",
+ "thiserror",
+]
+
+[[package]]
 name = "ix-search"
 version = "0.1.0"
 source = "git+https://github.com/GuitarAlchemist/ix?rev=490c39533627d296bf9f8f050e6fafc14d7a20c2#490c39533627d296bf9f8f050e6fafc14d7a20c2"
@@ -1052,6 +1064,7 @@ dependencies = [
  "ix-nn",
  "ix-optimize",
  "ix-probabilistic",
+ "ix-rl",
  "ix-signal",
  "ix-supervised",
  "ix-unsupervised",

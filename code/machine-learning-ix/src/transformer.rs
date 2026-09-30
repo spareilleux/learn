@@ -449,7 +449,7 @@ pub fn uneven_heads_change(col: usize, seed: u64) -> f64 {
     max_diff(&before, &block.forward(&x, None))
 }
 
-fn panic_message(payload: Box<dyn Any + Send>) -> String {
+pub(crate) fn panic_message(payload: Box<dyn Any + Send>) -> String {
     payload
         .downcast_ref::<String>()
         .cloned()
