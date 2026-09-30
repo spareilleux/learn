@@ -689,6 +689,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "ix-evolution"
+version = "0.1.0"
+source = "git+https://github.com/GuitarAlchemist/ix?rev=490c39533627d296bf9f8f050e6fafc14d7a20c2#490c39533627d296bf9f8f050e6fafc14d7a20c2"
+dependencies = [
+ "ix-math",
+ "ix-optimize",
+ "ndarray",
+ "rand 0.9.5",
+ "rand_distr 0.5.1",
+ "thiserror",
+]
+
+[[package]]
 name = "ix-gpu"
 version = "0.1.0"
 source = "git+https://github.com/GuitarAlchemist/ix?rev=490c39533627d296bf9f8f050e6fafc14d7a20c2#490c39533627d296bf9f8f050e6fafc14d7a20c2"
@@ -1059,6 +1072,7 @@ dependencies = [
  "csv",
  "ix-autograd",
  "ix-ensemble",
+ "ix-evolution",
  "ix-graph",
  "ix-math",
  "ix-nn",
@@ -1071,6 +1085,7 @@ dependencies = [
  "ix-unsupervised",
  "ix-voicings",
  "ndarray",
+ "rand 0.9.5",
  "serde_json",
 ]
 
