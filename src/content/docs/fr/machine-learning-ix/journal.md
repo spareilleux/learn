@@ -241,7 +241,7 @@ Sources des constantes : [Bloom (1970)](https://doi.org/10.1145/362686.362692), 
   - `HyperLogLog::standard()` indique 16 384 octets, contre « ~1.6KB » dans l'en-tête du module (constat 28).
 - **Le contrôle croisé numpy 2.4.2** recalcule m, k, les deux taux théoriques et le modèle binomial (0,1058). Il rejoue aussi le HyperLogLog écrit à la main et retrouve la même erreur quadratique moyenne, la même moyenne et le même pire écart, ainsi que les mêmes moyennes et erreurs à chaque cardinalité. Il ne rejoue pas le `DefaultHasher` d'IX.
 
-  La CI sur trois systèmes pour la leçon 11 reste à faire.
+  Le run CI [36665337751](https://github.com/spareilleux/learn/actions/runs/36665337751) est passé sous Windows, Linux et macOS : chaque compte affiché par la leçon 11, y compris ceux du `DefaultHasher` d'IX, correspond octet pour octet à `expected/`, et le contrôle croisé sous Linux correspond à `expected/crosscheck.txt`.
 
 ## À vérifier
 
@@ -260,6 +260,5 @@ Sources des constantes : [Bloom (1970)](https://doi.org/10.1145/362686.362692), 
 - Les valeurs affichées par un `println!("{:.6}")` direct plutôt que par `fmt_vec` — l'`intercept -0.000000` de la leçon 8 en est une — portent le même risque de zéro signé et ne sont pas normalisées. Celle-là concordait sur les trois systèmes dans l'exécution 35039180659 ; les autres n'ont pas été recensées.
 - Rejouer les sorties numériques de la leçon 9 sur les CI Linux et macOS ; vérifier que l'erreur NMF et l'écart du quatrième axe RBF s'arrondissent de la même façon. Mesurer séparément l'évolution du temps de t-SNE avant d'en chiffrer le coût.
 - Si `baum_welch` d'IX, depuis plusieurs départs et sur des séquences plus longues, retrouve les paramètres du casino ; la leçon 10 n'a fait qu'un départ, sur 1 000 lancers.
-- La leçon 11 sur les CI Linux et macOS : `DefaultHasher` est SipHash-1-3 à clés fixes et hache les entiers dans l'ordre d'octets natif, donc les trois runners petit-boutistes devraient afficher les mêmes comptes.
 - Si le choix déterministe de la victime explique que le filtre coucou d'IX s'arrête à 91 % plutôt qu'aux 95 % de Fan et al. : la leçon 11 a mesuré un seul filtre et une seule séquence. Comparer avec un choix aléatoire sur plusieurs séquences.
 - Si les fonctions SQL `ix_cuckoo_*` d'`ix-duck`, qui enveloppent le même `insert`, peuvent exposer le constat 26.

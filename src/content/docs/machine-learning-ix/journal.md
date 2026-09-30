@@ -241,7 +241,7 @@ Sources for the constants: [Bloom (1970)](https://doi.org/10.1145/362686.362692)
   - `HyperLogLog::standard()` reports 16,384 bytes against the module header's "~1.6KB" (finding 28).
 - **The numpy 2.4.2 cross-check** recomputes m, k, both theoretical rates and the binomial model (0.1058). It also replays the hand HyperLogLog and finds the same RMS, mean and worst errors, and the same means and RMS errors at every cardinality. It does not replay IX's `DefaultHasher`.
 
-  Three-OS CI for lesson 11 is still pending.
+  CI run [36665337751](https://github.com/spareilleux/learn/actions/runs/36665337751) passed on Windows, Linux and macOS: every count lesson 11 prints, IX's `DefaultHasher` ones included, matched `expected/` byte for byte, and the Linux cross-check matched `expected/crosscheck.txt`.
 
 ## To verify
 
@@ -260,6 +260,5 @@ Sources for the constants: [Bloom (1970)](https://doi.org/10.1145/362686.362692)
 - The values printed by a direct `println!("{:.6}")` rather than through `fmt_vec` — lesson 8's `intercept -0.000000` is one — carry the same signed-zero hazard and are not normalized. That one agreed on the three systems in run 35039180659; the others have not been enumerated.
 - Repeat lesson 9's numeric snapshots on Linux and macOS CI; check whether IX's NMF MSE and the RBF fourth-axis gap round identically there. Benchmark t-SNE's scaling separately before assigning a runtime cost.
 - Whether IX's `baum_welch`, from several starts and on longer sequences, recovers the casino's parameters; lesson 10 ran one start on 1,000 rolls.
-- Lesson 11 on Linux and macOS CI: `DefaultHasher` is SipHash-1-3 with fixed keys and hashes integers in native byte order, so the three little-endian runners should print the same counts.
 - Whether the deterministic victim choice is why IX's cuckoo filter stops at 91% rather than the 95% of Fan et al.: lesson 11 measured one filter and one sequence. Compare with a random choice over several sequences.
 - Whether `ix-duck`'s `ix_cuckoo_*` SQL functions, which wrap the same `insert`, can surface finding 26.

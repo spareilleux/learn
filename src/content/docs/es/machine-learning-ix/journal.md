@@ -241,7 +241,7 @@ Fuentes de las constantes: [Bloom (1970)](https://doi.org/10.1145/362686.362692)
   - `HyperLogLog::standard()` indica 16 384 bytes, frente a los "~1.6KB" de la cabecera del módulo (hallazgo 28).
 - **La comprobación cruzada con numpy 2.4.2** recalcula m, k, las dos tasas teóricas y el modelo binomial (0,1058). También reproduce el HyperLogLog escrito a mano y obtiene el mismo error cuadrático medio, la misma media y el mismo peor error, y las mismas medias y errores en cada cardinalidad. No reproduce el `DefaultHasher` de IX.
 
-  El CI en tres sistemas para la lección 11 sigue pendiente.
+  La ejecución de CI [36665337751](https://github.com/spareilleux/learn/actions/runs/36665337751) pasó en Windows, Linux y macOS: cada recuento que imprime la lección 11, incluidos los del `DefaultHasher` de IX, coincide byte a byte con `expected/`, y la comprobación cruzada en Linux coincide con `expected/crosscheck.txt`.
 
 ## Por verificar
 
@@ -260,6 +260,5 @@ Fuentes de las constantes: [Bloom (1970)](https://doi.org/10.1145/362686.362692)
 - Los valores impresos por un `println!("{:.6}")` directo y no a través de `fmt_vec` — el `intercept -0.000000` de la lección 8 es uno — llevan el mismo riesgo de cero con signo y no están normalizados. Ese coincidió en los tres sistemas en la ejecución 35039180659; los demás no se han enumerado.
 - Repetir las salidas numéricas de la lección 9 en CI Linux y macOS; comprobar si el error NMF y la separación del cuarto eje RBF se redondean igual. Medir por separado cómo escala el tiempo de t-SNE antes de asignarle un coste.
 - Si `baum_welch` de IX, desde varios puntos de partida y con secuencias más largas, recupera los parámetros del casino; la lección 10 hizo un solo arranque, con 1000 tiradas.
-- La lección 11 en CI Linux y macOS: `DefaultHasher` es SipHash-1-3 con claves fijas y aplica el hash a los enteros en el orden de bytes nativo, así que los tres runners little-endian deberían imprimir los mismos recuentos.
 - Si la elección determinista de la víctima explica que el filtro cuco de IX se detenga en el 91 % y no en el 95 % de Fan et al.: la lección 11 midió un solo filtro y una sola secuencia. Comparar con una elección aleatoria sobre varias secuencias.
 - Si las funciones SQL `ix_cuckoo_*` de `ix-duck`, que envuelven el mismo `insert`, pueden exponer el hallazgo 26.
