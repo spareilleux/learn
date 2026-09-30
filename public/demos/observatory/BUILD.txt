@@ -175,6 +175,39 @@ The last revision, the same day, fixes two things the previous one shipped.
 index.pck is 272 bytes smaller (14,949,916); index.html changes only that
 size, and index.wasm and index.js are unchanged.
 
+The next revision, the same day, changes the sky and opens the roof.
+- Sky (assets/night_sky.gdshader): the painted cap over the oculus becomes
+  Trantor's night sky, drawn at infinity. The Milky Way is ESO's panorama
+  eso0932a (ESO/S. Brunier, CC BY 4.0), reduced to 4096 x 2048 and imported as
+  lossy WebP (quality 0.85), seen through a stereographic zoom of 5 about the
+  galactic core, as if from nearer the centre, with sharp stars over it. The
+  core stands where the oculus light comes from; there is no moon. The
+  orrery's rings are brass and its bodies ivory.
+- Views (scripts/extra_views.gd): key 8 climbs to the stained glass in the
+  drum, key 9 cuts to the roof. On the roof the view turns but the camera
+  stays; keys 1 to 8, the Views button or Back inside return. ?preset=glass or
+  ?preset=roof opens there. fly_camera.gd keeps its seven presets; the Views
+  button now steps through nine.
+- Outside (scripts/upperside.gd, assets/upperside.gdshader), built on the first
+  climb and hidden inside: a lead roof with standing seams, the drum's outer
+  face with its 24 lancets, and Trantor's Upperside, a plated deck to 3 km with
+  581 domes and 201 red beacons, lit by the core in the shader, with no added
+  light. The drum and the cornices are dressed limestone banded with brushed
+  steel: Blender modelled a 4 m x 1 m tile of chamfered blocks, joints, bolted
+  bands and slotted plates, and cached SDXL 1.0 drew the limestone and the
+  brushed steel (exterior_ashlar_albedo.png, exterior_ashlar_normal.png).
+  Under Compatibility the shader converts its output to sRGB and decodes its
+  uniform colours, as that renderer does neither.
+index.pck grows to 20,623,752 bytes: 2.7 MB of sky and 2.9 MB of stone maps.
+index.html changes only that size, and index.wasm and index.js are unchanged.
+Native tests (Godot 4.6.1): 26 runs under Compatibility and Forward+ pass with
+no script error: self-test, fly, walk, fit, flights, the new views (three
+ways), touch, languages, courses, corridor, phone HUD and the 27 banners. One
+banner run under Forward+ stopped at start-up and passed when rerun.
+Web, headless Chrome on the local GPU, at 1600x900 and in an emulated
+iPhone: the start, the roof and the glass view hold 60 frames a second
+(median frame 16.7 ms), with no exception. Real phones: to verify.
+
 Native Compatibility GPU time, RTX 5080, 1600x900, 240 frames per view: 0.44 to
 0.52 ms for the previous web scene, 0.64 to 1.44 ms with the detail pass; up to
 1.55 million primitives in the overview, against 0.46 million before. With the
@@ -189,12 +222,12 @@ main.tscn fb6245c960d3625ca05920116c58351d9dbeb255beae59175d89c06d47049564
 export_presets.cfg 1bd7171d93c9a378f1b328e945be2a7960478e89d34ae269f013ef83c306588f
 scripts/fly_camera.gd 2e5cdd15ca7bdcfa30ec129e354a309f3ff7296f6fbf54ac144984ed9aa9f8e7
 scripts/capture.gd 52ea2b5e40db2f1f4cdbd7658074ef60bd117e1f4110c1b8995590a4196748d0
-scripts/observatory.gd 026eba6c86383a3df55930d9b3369a5c9de0640ff6ded1be5ba89d9fe06c93b5
+scripts/observatory.gd a4b4d62c871c8e2778941d5f1f03e6da37a187f6ff01aa3af8773597fb9a1ffc
 scripts/course_library.gd cb7c82e0893750c007b98611a84b4af2d7715ef6f1edb33e5fc5a3607983d9dd
 scripts/steel_cube.gd f28e71fffcd151663bc9a98b3c135cc7b805490e8298d3cf01029455c973f94c
 scripts/seldon_statue.gd 4e41b282aa2cc4de794296586b65f5f4d39688312673ddc46226fd3906cf4b27
-scripts/touch_controls.gd e9e1a18705024a1f7cbc36b59fd3cee0d2d8891dd7b928b9b48c170a39e0f501
-scripts/walk_physics.gd 63227f6bd097745f1b80a588e343d9631fd4d3f9d7dafc01026d541a6c305650
+scripts/touch_controls.gd 4b94ea15cb329d6409385799a3ff307fd35740b68d09e0f7f8ed2e2c010ae744
+scripts/walk_physics.gd ba6b9871950932dfe28193996559ca0f4e9892c797ba3c56b32e9b2b82e5ae16
 scripts/view_fit.gd 04968e0b9c220c12490b258677a7331f07671b37d2951581a03868d8c992c65e
 scripts/view_move.gd 9a39222118edb283e594c21faf2963d767e42449b01d11fac29188b9b1b65aca
 scripts/multiverse.gd 0de3cece747a87c742ba6b26c8fac27a6a7dcdd18286f30957899becb2dfb34d
@@ -218,13 +251,20 @@ assets/floor_paving.gdshader 23187f024d276b897635ee0cc3e543c5852c4a9b5175cbe56ec
 assets/statue_marble.gdshader ec3f14f662487f3dae14a398fe91ea7183d88214bd2bf266359da89d79b94452
 assets/world_glimpse.gdshader a06fc85ca086fc3e4d9297039be0b6549132bbffafeaedfbda0ffea3eb918d6d
 assets/courses.json a4a97ab7fffa250c62ca71fe7f6b5885e3c3ab31054cf8aa9b180ea67aae9bfc
+scripts/extra_views.gd cd6f1a22e9cca5015611121a271aa145a6100e843d200e7e57eebf85d6610a56
+scripts/upperside.gd d18d9ce9ee8d15201d5f21fba51afa957d18e9a70b2df8b49cad10a555f8cd22
+assets/night_sky.gdshader f9e5e5c20c2931c391e58f7ddaf4ec818e72859b82aa192a12ecb40529d5ea3e
+assets/upperside.gdshader c6b25b186470b50d7c228f0c99d946a5c6daa6c7a90887c4baf6c7661041c6da
+assets/sky_milky_way_eso.jpg b17e19bf2d5e7e9efa03b602450f5189dc77f85251e704d99b6f14632cff3495
+assets/exterior_ashlar_albedo.png c0cff260c039e1e1528920f86070266ac20ba2a3e36e99a53654c2ed18cdef94
+assets/exterior_ashlar_normal.png 0dc3b0023534b21c7d383bbca468f057cc65ba1a9526303c7b3084587138f029
 
 SHA-256 output files:
-index.pck 16902ce7d7cf0f0bee949249ed0de8213fe22d657525bb784413384c41d316db
+index.pck 14d4eddaa9254430ab9d63a576ddb0e9de1dd049bccec8570816471a2dbc3275
 index.wasm 99962b29677e42f3ba0258bd90fdc52ad90295954c4473e816ad02cfe5ff1d4f
 index.js e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981
 
 This directory contains a prebuilt binary export. Re-export only for deliberate
 scene changes. A scene re-export leaves the engine files (index.wasm, index.js)
 byte-identical, so git keeps a single copy; each scene revision adds its
-index.pck (14.9 MB here) to the binary history.
+index.pck (20.6 MB here) to the binary history.
