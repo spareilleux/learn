@@ -88,7 +88,7 @@ Lessons 1 to 9 are written. The rest is the plan, one lesson per family of algor
 | 13 | [Attention, layer normalization and a transformer block](13-transformer/) | `ix-nn` | — |
 | 14 | [Reinforcement learning: bandits and Q-learning](14-reinforcement-learning/) | `ix-rl` | — |
 | 15 | [Signals: the Fourier transform, wavelets, filters and Kalman](15-signals/) | `ix-signal` | — |
-| 16 | Search: A\*, Monte-Carlo tree search, local search | `ix-search`, `ix-graph` | — |
+| 16 | [Search: A\*, Monte-Carlo tree search, local search](16-search/) | `ix-search`, `ix-graph` | — |
 | 17 | Evolution: genetic algorithms, differential evolution, Pareto fronts | `ix-evolution` | — |
 | 18 | Adversarial examples, poisoning and the defences | `ix-adversarial` | — |
 | 19 | The shape of data: persistent homology | `ix-topo`, `ix-manifold` | — |
