@@ -328,6 +328,25 @@ walker put the camera radius back every frame, over the corridor's own
 Web: exported; this revision was not run in a browser. The roof in a
 browser, and real phones: to verify.
 
+The sixth revision, the same day, sets Streeling University's departments
+apart on the shelf; the author found the 37 books one run of identical
+spines.
+- Courses (scripts/course_library.gd): in a series with departments, each
+  department has a cloth of its own, never the display's lining and never
+  its neighbour's; a gap of 7 cm with a brass bookend in it stands between
+  two departments; and a card under each department's books, in a brass
+  holder, gives its code, the part of its courses' numbers before the dash
+  (AUD, COG, CS... MAT). The series' single card is left out there.
+index.pck is now 21,708,956 bytes; index.html changes only that size, and
+index.wasm and index.js are unchanged.
+Native tests (Godot 4.6.1): 36 runs under Compatibility and Forward+ pass with
+no script error, the 34 before and the department test in both renderers:
+18 department cards with their codes; 17 changes of cloth, one at each
+boundary between departments and none inside one; every gap between two
+departments over 6 cm (the smallest 7.3 cm).
+Web: exported; this revision was not run in a browser. Real phones: to
+verify.
+
 Native Compatibility GPU time, RTX 5080, 1600x900, 240 frames per view: 0.44 to
 0.52 ms for the previous web scene, 0.64 to 1.44 ms with the detail pass; up to
 1.55 million primitives in the overview, against 0.46 million before. With the
@@ -343,7 +362,7 @@ export_presets.cfg 1bd7171d93c9a378f1b328e945be2a7960478e89d34ae269f013ef83c3065
 scripts/fly_camera.gd 2e5cdd15ca7bdcfa30ec129e354a309f3ff7296f6fbf54ac144984ed9aa9f8e7
 scripts/capture.gd 52ea2b5e40db2f1f4cdbd7658074ef60bd117e1f4110c1b8995590a4196748d0
 scripts/observatory.gd f6a3e67bb61ea23d46fcf93229075568b52f0e2cc2ed888264cebc513f20de54
-scripts/course_library.gd ae13939d53454cf8bbcefbb0c2b5fae0ce3fb138283730564f555310ed9134a9
+scripts/course_library.gd ed3fe65bcc6ed0cd27e6ca891dce8b461c637a862c852be92e98cf476c8faf60
 scripts/steel_cube.gd f28e71fffcd151663bc9a98b3c135cc7b805490e8298d3cf01029455c973f94c
 scripts/seldon_statue.gd 4e41b282aa2cc4de794296586b65f5f4d39688312673ddc46226fd3906cf4b27
 scripts/touch_controls.gd 4b94ea15cb329d6409385799a3ff307fd35740b68d09e0f7f8ed2e2c010ae744
@@ -383,7 +402,7 @@ assets/sky_core_cap.png a110fdfa1b79cc41eec119265aeb89bc211d0b8e0eb6c759b45c2549
 assets/kiosk_glass.gdshader 76226f17e5884a042b85e5fc544a4b71012ea6e389b9743c1cac65083a06bc44
 
 SHA-256 output files:
-index.pck a87a023dd09ffc1d0aaa0f8f6d0b40a024095f150eb6e0859ed39c331faf271a
+index.pck 05cb1e2528c26418ef3aee7834ffce5d85e0a2f1cf46391e56c0fd0a15855f63
 index.wasm 99962b29677e42f3ba0258bd90fdc52ad90295954c4473e816ad02cfe5ff1d4f
 index.js e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981
 
