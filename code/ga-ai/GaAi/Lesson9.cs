@@ -10,18 +10,18 @@ using static Report;
 // arithmetic of a textbook: an interval's number counts letters, its quality counts semitones.
 public static class Lesson9
 {
-    const string Letters = "CDEFGAB";
-    static readonly int[] Natural = [0, 2, 4, 5, 7, 9, 11];
-    static readonly int[] MajorSteps = [0, 2, 4, 5, 7, 9, 11];
-    static readonly int[] MinorSteps = [0, 2, 3, 5, 7, 8, 10];
+    internal const string Letters = "CDEFGAB";
+    internal static readonly int[] Natural = [0, 2, 4, 5, 7, 9, 11];
+    internal static readonly int[] MajorSteps = [0, 2, 4, 5, 7, 9, 11];
+    internal static readonly int[] MinorSteps = [0, 2, 3, 5, 7, 8, 10];
     static readonly string[] Sizes = ["unison", "second", "third", "fourth", "fifth", "sixth", "seventh"];
 
     // The 21 names a letter and at most one sharp or flat can spell
-    static readonly string[] Names = [.. Letters.SelectMany(l => new[] { $"{l}b", $"{l}", $"{l}#" })];
+    internal static readonly string[] Names = [.. Letters.SelectMany(l => new[] { $"{l}b", $"{l}", $"{l}#" })];
 
     // The fifteen keys of each mode that have at most seven sharps or flats
-    static readonly string[] MajorKeys = ["Cb", "Gb", "Db", "Ab", "Eb", "Bb", "F", "C", "G", "D", "A", "E", "B", "F#", "C#"];
-    static readonly string[] MinorKeys = ["Ab", "Eb", "Bb", "F", "C", "G", "D", "A", "E", "B", "F#", "C#", "G#", "D#", "A#"];
+    internal static readonly string[] MajorKeys = ["Cb", "Gb", "Db", "Ab", "Eb", "Bb", "F", "C", "G", "D", "A", "E", "B", "F#", "C#"];
+    internal static readonly string[] MinorKeys = ["Ab", "Eb", "Bb", "F", "C", "G", "D", "A", "E", "B", "F#", "C#", "G#", "D#", "A#"];
 
     public static void Run()
     {
@@ -41,8 +41,8 @@ public static class Lesson9
 
     // ---- The textbook ----
 
-    static int Accidental(string name) => name[1..] switch { "b" => -1, "bb" => -2, "#" => 1, "##" => 2, _ => 0 };
-    static int Pitch(string name) => Natural[Letters.IndexOf(name[0])] + Accidental(name);
+    internal static int Accidental(string name) => name[1..] switch { "b" => -1, "bb" => -2, "#" => 1, "##" => 2, _ => 0 };
+    internal static int Pitch(string name) => Natural[Letters.IndexOf(name[0])] + Accidental(name);
 
     // The interval from a up to b: its number from the letters, its quality from the semitones
     static (string Short, string Long, int Semitones) Interval(string a, string b)
@@ -72,7 +72,7 @@ public static class Lesson9
     };
 
     // A key's seven notes, each letter once, spelled from the tonic
-    static string[] Scale(string tonic, bool minor)
+    internal static string[] Scale(string tonic, bool minor)
     {
         var steps = minor ? MinorSteps : MajorSteps;
         return [.. Enumerable.Range(0, 7).Select(i =>

@@ -56,6 +56,7 @@ Otros tres cursos de este sitio cubren el trasfondo, y este enlaza con ellos en 
 | 7 | [Nombres de acorde que no sabe leer](07-chord-names/) | `InvalidChordNames` (#749), las expresiones de acordes de `ImprovisationSkill`, issue #745 | extern alias y CS0436, límites de palabra en expresiones regulares |
 | 8 | [El propio examen del chatbot](08-the-chatbots-own-exam/) | `prompts.yaml` y `PromptCorpusTests`, `DiatonicChordsSkill` (Path B), `ModesSkill` | YamlDotNet, `StringComparison`, poner a prueba un conjunto de pruebas con respuestas erróneas |
 | 9 | [Cada intervalo, cada tonalidad](09-every-interval-every-key/) | `IntervalSkill`, `ScaleInfoSkill`, `RelativeKeySkill`, `KeyNaming`, el `DetermineQuality` del dominio | pruebas exhaustivas, `\b` y búsqueda hacia delante en expresiones regulares, ramas por defecto de un switch |
+| 10 | [En qué se le dice al modelo que confíe](10-what-the-model-is-told-to-trust/) | `ga_dsl_eval`, las closures `domain.diatonicChords`, `domain.transposeChord` y `domain.commonTones`, los SKILL.md de las tres skills de Path B | llamar a la herramienta de un modelo sin el modelo, una letra por grado, reutilizar un oráculo de una lección a otra |
 | — | [Diario](journal/) | | |
 
 ## Requisitos previos
