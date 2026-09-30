@@ -377,6 +377,38 @@ the hall, 29.5 at the first gallery).
 Web: exported; this revision was not run in a browser. Real phones: to
 verify.
 
+Version 17, exported 2026-09-30 23:23:49 UTC, is the first to show its number:
+under the language selector the scene shows its version, when it was built and
+its age in days:hours:minutes by the viewer's clock (scripts/build_info.gd,
+written by artpass/publish/stamp_build.py just before the export;
+window.__obsBuild on the Web). Counting the commits on main that changed
+index.pck, the page served version 13 (the Streeling books); versions 14 to 16
+are the roof terrace, the departments and the lift's art pass above.
+- Gates (scripts/lift.gd): the cage's gate and every landing's are folding
+  lattice gates, bars joined by crossed straps in three rows of lozenges,
+  folding to the right of the opening; a landing's gate hangs from a brass
+  track. A landing's gate now opens and closes with the cage's at the landing
+  the cage stands at: it used to follow the landing the cage was sent to, so
+  the gate left behind shut at once and the one ahead moved while the cage
+  closed.
+- Sounds (scripts/lift_sounds.gd, synthesized when the lift is built, nothing
+  recorded or downloaded): the motor's 50 Hz hum, looping, louder and higher
+  as the cage goes faster; a small bell on C6 at the landing on every arrival;
+  the gates' rattle as they close and open. Positional
+  (AudioStreamPlayer3D); built in about 22 ms natively.
+index.pck is now 21,724,804 bytes; index.html changes only that size, and
+index.wasm and index.js are unchanged.
+Native tests (Godot 4.6.1): 38 runs under Compatibility and Forward+ pass with
+no script error, the lift's art-pass test extended in both renderers: a
+folding gate for the cage and one per landing, spread across the opening
+closed (96.6 degrees) and 19.3 degrees wide folded at its right; the hall's
+gate following the cage's while it closes and the next landing's shut; all
+shut during the ride and the first gallery's open on arrival; two rattles,
+one bell and one hum per ride, the hum looping and stopping on arrival; and
+the version line matching v17, its time and its age.
+Web: exported; this version was not run in a browser, and its sounds were not
+heard there. Real phones: to verify.
+
 Native Compatibility GPU time, RTX 5080, 1600x900, 240 frames per view: 0.44 to
 0.52 ms for the previous web scene, 0.64 to 1.44 ms with the detail pass; up to
 1.55 million primitives in the overview, against 0.46 million before. With the
@@ -392,7 +424,7 @@ export_presets.cfg 1bd7171d93c9a378f1b328e945be2a7960478e89d34ae269f013ef83c3065
 scripts/fly_camera.gd 2e5cdd15ca7bdcfa30ec129e354a309f3ff7296f6fbf54ac144984ed9aa9f8e7
 scripts/capture.gd 52ea2b5e40db2f1f4cdbd7658074ef60bd117e1f4110c1b8995590a4196748d0
 scripts/observatory.gd 1c0df54cd433533c305700578abde1044f01efde1bef614e1bf5ede1c2ae6c76
-scripts/course_library.gd ed3fe65bcc6ed0cd27e6ca891dce8b461c637a862c852be92e98cf476c8faf60
+scripts/course_library.gd 254fdf26c4b3e82e54eed17146f0296b164769d77407ecb48be68601705b4187
 scripts/steel_cube.gd f28e71fffcd151663bc9a98b3c135cc7b805490e8298d3cf01029455c973f94c
 scripts/seldon_statue.gd 4e41b282aa2cc4de794296586b65f5f4d39688312673ddc46226fd3906cf4b27
 scripts/touch_controls.gd 4b94ea15cb329d6409385799a3ff307fd35740b68d09e0f7f8ed2e2c010ae744
@@ -427,12 +459,14 @@ assets/upperside.gdshader f119593a603bc623de218054ec142b8732330785fe0d61ba5a3dcc
 assets/sky_milky_way_eso.jpg b17e19bf2d5e7e9efa03b602450f5189dc77f85251e704d99b6f14632cff3495
 assets/exterior_ashlar_albedo.png c0cff260c039e1e1528920f86070266ac20ba2a3e36e99a53654c2ed18cdef94
 assets/exterior_ashlar_normal.png 0dc3b0023534b21c7d383bbca468f057cc65ba1a9526303c7b3084587138f029
-scripts/lift.gd 1ecf5aa587e8c3e206bfcec16716b52f042e023886b57bd21916ee8c59d67ec9
+scripts/lift.gd 67b74bdc64d31242f31e636211219ff137dd81b35250602d4fb3e8d161f701b9
 assets/sky_core_cap.png a110fdfa1b79cc41eec119265aeb89bc211d0b8e0eb6c759b45c25496f2daabe
 assets/kiosk_glass.gdshader 76226f17e5884a042b85e5fc544a4b71012ea6e389b9743c1cac65083a06bc44
+scripts/lift_sounds.gd 4daed5e380396a3711fc7ff2f1f72b877b9efbdaff6d6fa428c595b1dad7b244
+scripts/build_info.gd a12771a82aec3ea70f33e0fa60516b800c4c5e391502bc15116c1223577d9ad7
 
 SHA-256 output files:
-index.pck 1594ed80acbe8b7f0735d634f2a5c75d6f2e927d3dba46f6636c6892d232e0e7
+index.pck 6c34869f63c85aeb3e4f3b01886e991f5552d53af8acd539e4c85c5cce25d481
 index.wasm 99962b29677e42f3ba0258bd90fdc52ad90295954c4473e816ad02cfe5ff1d4f
 index.js e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981
 
