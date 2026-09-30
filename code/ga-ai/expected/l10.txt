@@ -1,0 +1,118 @@
+# l10
+
+== ga_dsl_eval "domain.diatonicChords" on the 30 keys with at most seven sharps or flats
+Cb major   GA       B Dbm Ebm E Gb Abm Bbdim
+           textbook Cb Dbm Ebm Fb Gb Abm Bbdim
+Gb major   GA       Gb Abm Bbm B Db Ebm Fdim
+           textbook Gb Abm Bbm Cb Db Ebm Fdim
+F# major   GA       F# G#m A#m B C# D#m Fdim
+           textbook F# G#m A#m B C# D#m E#dim
+C# major   GA       C# D#m Fm F# G# A#m Cdim
+           textbook C# D#m E#m F# G# A#m B#dim
+Ab minor   GA       Abm Bbdim B Dbm Ebm E Gb
+           textbook Abm Bbdim Cb Dbm Ebm Fb Gb
+Eb minor   GA       Ebm Fdim Gb Abm Bbm B Db
+           textbook Ebm Fdim Gb Abm Bbm Cb Db
+C minor    GA       Cm Ddim D# Fm Gm G# A#
+           textbook Cm Ddim Eb Fm Gm Ab Bb
+G minor    GA       Gm Adim A# Cm Dm D# F
+           textbook Gm Adim Bb Cm Dm Eb F
+D minor    GA       Dm Edim F Gm Am A# C
+           textbook Dm Edim F Gm Am Bb C
+D# minor   GA       D#m Fdim F# G#m A#m B C#
+           textbook D#m E#dim F# G#m A#m B C#
+A# minor   GA       A#m Cdim C# D#m Fm F# G#
+           textbook A#m B#dim C# D#m E#m F# G#
+
+30 keys: 19 right, 11 with a chord on another letter
+
+== The results diatonic-chords' SKILL.md gives for the closure
+C major   GA       ["C","Dm","Em","F","G","Am","Bdim"]
+          SKILL.md ["C", "Dm", "Em", "F", "G", "Am", "B°"]
+A minor   GA       ["Am","Bdim","C","Dm","Em","F","G"]
+          SKILL.md ["Am", "B°", "C", "Dm", "Em", "F", "G"]
+Bb major  GA       ["Bb","Cm","Dm","Eb","F","Gm","Adim"]
+          SKILL.md ["Bb","Cm","Dm","Eb","F","Gm","A°"]
+Gb major  GA       ["Gb","Abm","Bbm","B","Db","Ebm","Fdim"]
+          SKILL.md Gb major returns Cm, not B#m
+F# minor  GA       ["F#m","G#dim","A","Bm","C#m","D","E"]
+          SKILL.md F# minor returns G#°, not Ab°
+
+== ga_dsl_eval "domain.transposeChord": the 21 note names up each interval of transpose's SKILL.md but the tritone
+. right   ~ right pitch, another letter   d the textbook needs a double sharp or flat   x wrong pitch
+
+note    P1 m2 M2 m3 M3 P4 P5 m6 M6 m7 M7 P8
+Cb      ~  d  .  d  .  ~  .  d  .  d  .  ~ 
+C       .  ~  .  ~  .  .  .  ~  .  ~  .  . 
+C#      .  .  .  .  ~  .  .  .  .  .  ~  . 
+Db      .  d  .  ~  .  .  .  d  .  ~  .  . 
+D       .  ~  .  .  .  .  .  ~  .  .  .  . 
+D#      .  .  ~  .  d  .  .  .  ~  .  d  . 
+Eb      .  ~  .  .  .  .  .  ~  .  .  .  . 
+E       .  .  .  .  .  .  .  .  .  .  .  . 
+E#      ~  .  d  .  d  .  ~  .  d  .  d  ~ 
+Fb      ~  d  .  d  .  d  ~  d  .  d  .  ~ 
+F       .  .  .  .  .  .  .  .  .  .  .  . 
+F#      .  .  .  .  .  .  .  .  .  .  ~  . 
+Gb      .  d  .  d  .  ~  .  d  .  ~  .  . 
+G       .  ~  .  ~  .  .  .  ~  .  .  .  . 
+G#      .  .  .  .  ~  .  .  .  ~  .  d  . 
+Ab      .  d  .  ~  .  .  .  ~  .  .  .  . 
+A       .  ~  .  .  .  .  .  .  .  .  .  . 
+A#      .  .  ~  .  d  .  ~  .  d  .  d  . 
+Bb      .  ~  .  .  .  .  .  .  .  .  .  . 
+B       .  .  .  .  .  .  .  .  .  .  .  . 
+B#      ~  .  d  .  d  ~  d  .  d  .  d  ~ 
+
+252 questions: 182 right, 40 on another letter, 30 where the textbook needs a double accidental, 0 wrong pitch
+
+== Transpose's example prompts, with the arguments its SKILL.md maps them to, one call per chord
+prompt                                symbol    semitones  GA           textbook
+Transpose Cmaj7 up a perfect fourth   Cmaj7             5  Fmaj7        Fmaj7
+Move this F chord down a minor third  F                -3  D            D
+What's Dm7 up a whole step?           Dm7               2  Em7          Em7
+Transpose G7 to Eb                    G7                8  D#7          Eb7
+                                      G7               -4  D#7          Eb7
+Shift Am7 up a fifth                  Am7               7  Em7          Em7
+transpose C-Am-F-G to G major         C Am F G          7  G Em C D     G Em C D
+transpose C-Am-F-G to Eb major        C Am F G          3  D# Cm Ab A#  Eb Cm Ab Bb
+
+Bb up a whole step, then back down: C, then A#
+
+== The chord symbols the closures return, passed back in
+B° up a semitone             Cdim
+Bdim up a semitone           Cdim
+
+== ga_dsl_eval "domain.commonTones" on every pair of triads in each of the 30 keys
+key        misspelled pairs  the key's note as GA writes it
+Cb major   9 of 21           Cb as B, Fb as E, Gb as F#
+Gb major   6 of 21           Cb as B, Gb as F#
+Db major   3 of 21           Gb as F#
+D major    3 of 21           C# as Db
+A major    6 of 21           C# as Db, G# as Ab
+E major    9 of 21           C# as Db, D# as Eb, G# as Ab
+B major    11 of 21          A# as Bb, C# as Db, D# as Eb, G# as Ab
+F# major   12 of 21          A# as Bb, C# as Db, D# as Eb, E# as F, G# as Ab
+C# major   13 of 21          A# as Bb, B# as C, C# as Db, D# as Eb, E# as F, G# as Ab
+Ab minor   9 of 21           Cb as B, Fb as E, Gb as F#
+Eb minor   6 of 21           Cb as B, Gb as F#
+Bb minor   3 of 21           Gb as F#
+B minor    3 of 21           C# as Db
+F# minor   6 of 21           C# as Db, G# as Ab
+C# minor   9 of 21           C# as Db, D# as Eb, G# as Ab
+G# minor   11 of 21          A# as Bb, C# as Db, D# as Eb, G# as Ab
+D# minor   12 of 21          A# as Bb, C# as Db, D# as Eb, E# as F, G# as Ab
+A# minor   13 of 21          A# as Bb, B# as C, C# as Db, D# as Eb, E# as F, G# as Ab
+
+630 pairs: shared notes right 630, spelled as the key spells them 486
+
+== Common-tones' SKILL.md example, and a pair from A major
+Cmaj7 and Am7
+  | Common tones (3):
+  |   C (P1 in Cmaj7, m3 in Am7)
+  |   E (M3 in Cmaj7, P5 in Am7)
+  |   G (P5 in Cmaj7, m7 in Am7)
+A and C#m
+  | Common tones (2):
+  |   Db (M3 in A, P1 in C#m)
+  |   E (P5 in A, m3 in C#m)
