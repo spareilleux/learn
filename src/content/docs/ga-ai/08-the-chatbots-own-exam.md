@@ -348,7 +348,7 @@ What it can't do is read what the invariants don't name. #14, #15, #49 and #50 s
 
 ## Reported upstream
 
-- Not reported upstream when this lesson was written: the degraded detector that misses a Path B skill's error, the wrapper's misleading log line, the typo that gets the major scale silently, the positional formulas of #38 and #39, and the case-insensitive substrings. They are listed in the [journal](../journal/).
+- Reported after this lesson was written: the case-insensitive substrings, with the typo prompt and the error message they let through, as GA issue [#763](https://github.com/GuitarAlchemist/ga/issues/763); the degraded detector that misses a Path B skill's error and the wrapper's misleading log line as [#764](https://github.com/GuitarAlchemist/ga/issues/764); the typo that gets the major scale silently and the positional formulas of #38 and #39 as [#765](https://github.com/GuitarAlchemist/ga/issues/765). They are listed in the [journal](../journal/).
 
 ## Exercises
 

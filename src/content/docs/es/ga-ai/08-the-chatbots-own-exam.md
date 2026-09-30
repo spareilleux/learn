@@ -348,7 +348,7 @@ Lo que no puede hacer es leer lo que los invariantes no nombran. Los #14, #15, #
 
 ## Comunicado upstream
 
-- No se habían comunicado upstream cuando se escribió esta lección: el detector de backend degradado que no ve el error de una skill de Path B, la línea de log engañosa del envoltorio, la errata que recibe en silencio la escala mayor, las fórmulas posicionales del #38 y del #39, y las subcadenas que no distinguen mayúsculas de minúsculas. Están listados en el [diario](../journal/).
+- Se comunicaron después de escribir esta lección: las subcadenas que no distinguen mayúsculas de minúsculas, con el prompt con errata y el mensaje de error que dejan pasar, en la issue de GA [#763](https://github.com/GuitarAlchemist/ga/issues/763); el detector de backend degradado que no ve el error de una skill de Path B y la línea de log engañosa del envoltorio en la [#764](https://github.com/GuitarAlchemist/ga/issues/764); la errata que recibe en silencio la escala mayor y las fórmulas posicionales del #38 y del #39 en la [#765](https://github.com/GuitarAlchemist/ga/issues/765). Están listados en el [diario](../journal/).
 
 ## Ejercicios
 

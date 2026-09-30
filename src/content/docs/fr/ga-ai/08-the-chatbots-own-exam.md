@@ -348,7 +348,7 @@ Ce qu'elle ne peut pas faire, c'est lire ce que les invariants ne nomment pas. #
 
 ## Signalé en amont
 
-- Pas encore signalés en amont au moment de l'écriture de cette leçon : le détecteur de dégradation qui rate l'erreur d'un skill Path B, la ligne de journal trompeuse de l'enveloppe, la faute de frappe qui reçoit en silence la gamme majeure, les formules positionnelles de #38 et #39, et les sous-chaînes insensibles à la casse. Ils sont listés dans le [journal](../journal/).
+- Signalés après l'écriture de cette leçon : les sous-chaînes insensibles à la casse, avec le prompt mal orthographié et le message d'erreur qu'elles laissent passer, dans le ticket de GA [#763](https://github.com/GuitarAlchemist/ga/issues/763) ; le détecteur de dégradation qui rate l'erreur d'un skill Path B et la ligne de journal trompeuse de l'enveloppe dans [#764](https://github.com/GuitarAlchemist/ga/issues/764) ; la faute de frappe qui reçoit en silence la gamme majeure et les formules positionnelles de #38 et #39 dans [#765](https://github.com/GuitarAlchemist/ga/issues/765). Ils sont listés dans le [journal](../journal/).
 
 ## Exercices
 
