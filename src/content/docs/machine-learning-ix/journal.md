@@ -387,7 +387,7 @@ Scored against the eight predictions of the entry above, committed alone as `0bd
 - **P8, Thompson sampling (finding 43).** Paying 0 or 100, one arm gets more than 99 % of the pulls in all 100 runs, and it is not the best arm in 67. Paying 0 or 1, no run locks, and the best arm is the most pulled in all 100.
 - **Exploratory, not predicted.** The rest of the Q-table doesn't converge with the path: the largest |Q − Q\*| is 8.484. At 10^4 steps ε-greedy is ahead of UCB1, and IX's Thompson sampling has the lowest regret at both horizons (85.4 and 141.9). Of SARSA's 12 walks with no path, 9 stay in one cell against a wall and 3 go back and forth between two cells. The lesson's explanation, a constant step of 0.5 that leaves the table in motion, is not measured.
 
-Three-OS CI for lesson 14 is still pending.
+The first CI run, [36740082936](https://github.com/spareilleux/learn/actions/runs/36740082936) on `c639e9a`, passed on Windows, Linux and macOS: every lesson 14 output matched `expected/` byte for byte, so no near tie in UCB1's `ln` or in `rand_distr`'s normal sampler flipped, and the Linux cross-check matched `expected/crosscheck.txt`.
 
 ## To verify
 
@@ -411,5 +411,4 @@ Three-OS CI for lesson 14 is still pending.
 - The JAX cross-check that `ix-autograd` asks for before turning `fft-autograd` on by default; lesson 12 compared with finite differences and numpy.
 - The example's claim that a genetic algorithm needs 5,000 to 10,000 evaluations on this objective: lesson 17 can run `ix-evolution` on it.
 - Whether `TransformerClassifier` learns its attention weights at all when they step batch × seq times less than its head: lesson 13 measured one step, not a training run.
-- Lesson 14 on Linux and macOS CI: UCB1's index takes `ln`, and IX's Thompson sampling draws from `rand_distr`'s normal sampler, so a platform's last bits could flip a near tie and change the regret table.
 - Why SARSA's greedy walk finds no path in 12 of 50 runs: if the lesson's explanation is right, a decreasing step, or a smaller constant one, should make the loops disappear.

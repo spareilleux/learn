@@ -387,7 +387,7 @@ Notée face aux huit prédictions de l'entrée ci-dessus, commitée seule sous `
 - **P8, l'échantillonnage de Thompson (constat 43).** Avec des gains de 0 ou 100, un bras reçoit plus de 99 % des tirages dans les 100 exécutions, et ce n'est pas le meilleur dans 67. Avec des gains de 0 ou 1, aucune exécution ne se fige, et le meilleur bras est le plus tiré dans les 100.
 - **Exploratoire, non prédit.** Le reste de la table Q ne converge pas avec le chemin : le plus grand |Q − Q\*| vaut 8,484. À 10^4 pas, l'ε-glouton devance UCB1, et l'échantillonnage de Thompson d'IX a le plus faible regret aux deux horizons (85,4 et 141,9). Des 12 marches de SARSA sans chemin, 9 restent sur une case contre un mur et 3 font des allers-retours entre deux cases. L'explication de la leçon, un pas constant de 0,5 qui laisse la table en mouvement, n'est pas mesurée.
 
-La CI sur trois systèmes pour la leçon 14 reste à faire.
+Le premier run de CI, [36740082936](https://github.com/spareilleux/learn/actions/runs/36740082936) sur `c639e9a`, est passé sous Windows, Linux et macOS : chaque sortie de la leçon 14 correspond octet pour octet à `expected/`, donc aucune quasi-égalité n'a basculé dans le `ln` d'UCB1 ni dans le générateur de loi normale de `rand_distr`, et le contrôle croisé sous Linux correspond à `expected/crosscheck.txt`.
 
 ## À vérifier
 
@@ -411,5 +411,4 @@ La CI sur trois systèmes pour la leçon 14 reste à faire.
 - La vérification croisée avec JAX qu'`ix-autograd` demande avant d'activer `fft-autograd` par défaut ; la leçon 12 a comparé avec les différences finies et numpy.
 - L'affirmation de l'exemple selon laquelle un algorithme génétique demande 5 000 à 10 000 évaluations sur cet objectif : la leçon 17 pourra y lancer `ix-evolution`.
 - Si `TransformerClassifier` apprend seulement ses poids d'attention quand leur pas est batch × seq fois plus petit que celui de sa tête : la leçon 13 a mesuré un pas, pas un entraînement.
-- La leçon 14 sur les CI Linux et macOS : l'indice d'UCB1 passe par `ln`, et l'échantillonnage de Thompson d'IX tire du générateur de loi normale de `rand_distr` ; les derniers bits d'une plateforme pourraient faire basculer une quasi-égalité et changer le tableau des regrets.
 - Pourquoi la marche gloutonne de SARSA ne trouve pas de chemin dans 12 exécutions sur 50 : si l'explication de la leçon est juste, un pas décroissant, ou un pas constant plus petit, devrait faire disparaître les boucles.
