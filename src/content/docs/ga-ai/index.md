@@ -40,6 +40,7 @@ Three other courses on this site cover the background, and this one links to the
 - read a server-sent event stream as the HTML standard does, and check that the text a client rebuilds is the text the server computed;
 - run a fix that isn't in the pinned commit next to the pinned code, and test a guard with input it wasn't written for;
 - test a test suite: apply its checks to answers they weren't written for and to answers that are wrong on purpose, and read what passes;
+- test a skill on every input it can be given, with a textbook's arithmetic as the oracle, and run a skill's own example prompts against it;
 - tell apart, in GA's AI, what works today, what is being built, and what is only planned.
 
 ## Outline
@@ -54,6 +55,7 @@ Three other courses on this site cover the background, and this one links to the
 | 6 | [The answer on the wire](06-answer-on-the-wire/) | `SseChunker`, the two `WriteSseLineAsync`, the page's and ga-client's readers, #743 and #746 | server-sent events, `Regex.Split` and lookarounds, porting a client to test it |
 | 7 | [Chord names it can't read](07-chord-names/) | `InvalidChordNames` (#749), the chord expressions of `ImprovisationSkill`, issue #745 | extern alias and CS0436, word boundaries in regular expressions |
 | 8 | [The chatbot's own exam](08-the-chatbots-own-exam/) | `prompts.yaml` and `PromptCorpusTests`, `DiatonicChordsSkill` (Path B), `ModesSkill` | YamlDotNet, `StringComparison`, testing a test suite with wrong answers |
+| 9 | [Every interval, every key](09-every-interval-every-key/) | `IntervalSkill`, `ScaleInfoSkill`, `RelativeKeySkill`, `KeyNaming`, the domain's `DetermineQuality` | exhaustive tests, `\b` and lookahead in regular expressions, switch default arms |
 | — | [Journal](journal/) | | |
 
 ## Prerequisites

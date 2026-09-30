@@ -40,6 +40,7 @@ Otros tres cursos de este sitio cubren el trasfondo, y este enlaza con ellos en 
 - leer un flujo de eventos enviados por el servidor como lo hace el estándar HTML, y comprobar que el texto que reconstruye un cliente es el texto que calculó el servidor;
 - ejecutar junto al código fijado una corrección que no está en el commit fijado, y poner a prueba una guarda con entradas para las que no se escribió;
 - poner a prueba un conjunto de pruebas: aplicar sus comprobaciones a respuestas para las que no se escribieron y a respuestas erróneas a propósito, y leer lo que pasa;
+- poner a prueba una skill con todas las entradas que puede recibir, con la aritmética de un manual como oráculo, y ejecutar contra ella sus propios prompts de ejemplo;
 - distinguir, en la IA de GA, lo que funciona hoy, lo que se está construyendo y lo que solo está planeado.
 
 ## Plan
@@ -54,6 +55,7 @@ Otros tres cursos de este sitio cubren el trasfondo, y este enlaza con ellos en 
 | 6 | [La respuesta en el cable](06-answer-on-the-wire/) | `SseChunker`, los dos `WriteSseLineAsync`, los lectores de la página y de ga-client, #743 y #746 | eventos enviados por el servidor, `Regex.Split` y aserciones de búsqueda (lookarounds), portar un cliente para probarlo |
 | 7 | [Nombres de acorde que no sabe leer](07-chord-names/) | `InvalidChordNames` (#749), las expresiones de acordes de `ImprovisationSkill`, issue #745 | extern alias y CS0436, límites de palabra en expresiones regulares |
 | 8 | [El propio examen del chatbot](08-the-chatbots-own-exam/) | `prompts.yaml` y `PromptCorpusTests`, `DiatonicChordsSkill` (Path B), `ModesSkill` | YamlDotNet, `StringComparison`, poner a prueba un conjunto de pruebas con respuestas erróneas |
+| 9 | [Cada intervalo, cada tonalidad](09-every-interval-every-key/) | `IntervalSkill`, `ScaleInfoSkill`, `RelativeKeySkill`, `KeyNaming`, el `DetermineQuality` del dominio | pruebas exhaustivas, `\b` y búsqueda hacia delante en expresiones regulares, ramas por defecto de un switch |
 | — | [Diario](journal/) | | |
 
 ## Requisitos previos

@@ -40,6 +40,7 @@ Trois autres cours de ce site couvrent les bases, et celui-ci renvoie vers eux a
 - lire un flux d'événements envoyés par le serveur comme le fait le standard HTML, et vérifier que le texte qu'un client reconstruit est bien celui que le serveur a calculé ;
 - exécuter, à côté du code épinglé, un correctif absent du commit épinglé, et tester une garde avec des entrées pour lesquelles elle n'a pas été écrite ;
 - tester une suite de tests : appliquer ses vérifications à des réponses pour lesquelles elles n'ont pas été écrites et à des réponses fausses exprès, et lire ce qui passe ;
+- tester un skill sur toutes les entrées qu'il peut recevoir, avec le calcul d'un manuel pour oracle, et lui faire passer ses propres prompts d'exemple ;
 - distinguer, dans l'IA de GA, ce qui fonctionne aujourd'hui, ce qui est en construction, et ce qui n'est que prévu.
 
 ## Plan
@@ -54,6 +55,7 @@ Trois autres cours de ce site couvrent les bases, et celui-ci renvoie vers eux a
 | 6 | [La réponse sur le fil](06-answer-on-the-wire/) | `SseChunker`, les deux `WriteSseLineAsync`, les lecteurs de la page et de ga-client, #743 et #746 | événements envoyés par le serveur, `Regex.Split` et assertions de voisinage, porter un client pour le tester |
 | 7 | [Les noms d'accords qu'il ne lit pas](07-chord-names/) | `InvalidChordNames` (#749), les expressions d'accords de `ImprovisationSkill`, ticket #745 | alias extern et CS0436, limites de mot dans les expressions régulières |
 | 8 | [L'examen maison du chatbot](08-the-chatbots-own-exam/) | `prompts.yaml` et `PromptCorpusTests`, `DiatonicChordsSkill` (Path B), `ModesSkill` | YamlDotNet, `StringComparison`, tester une suite de tests avec des réponses fausses |
+| 9 | [Tous les intervalles, toutes les tonalités](09-every-interval-every-key/) | `IntervalSkill`, `ScaleInfoSkill`, `RelativeKeySkill`, `KeyNaming`, le `DetermineQuality` du domaine | tests exhaustifs, `\b` et assertion avant dans les expressions régulières, branches par défaut des switch |
 | — | [Journal](journal/) | | |
 
 ## Prérequis
