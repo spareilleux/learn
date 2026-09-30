@@ -731,3 +731,105 @@ for alpha17 in (0.5, (np.sqrt(3) - 1) / 2):
     child17 = g17.uniform(np.minimum(a17, b17) - alpha17 * d17, np.maximum(a17, b17) + alpha17 * d17)
     print(f"BLX-{alpha17:.3f}, 10^6 children of N(0, 1) parents: variance {child17.var():.3f}, "
           f"formula {0.5 + (1 + 2 * alpha17) ** 2 / 6:.3f}")
+
+print("\n== lesson 18")
+from scipy.stats import norm  # noqa: E402
+
+
+def irwin18(u):
+    """The course's approximate normal from its last axis of 12 uniforms, summed in order as Rust's sum does"""
+    s = np.zeros(u.shape[:-1])
+    for k in range(12):
+        s = s + u[..., k]
+    return s - 6
+
+
+# The test set of lesson 18, rebuilt from Rng(18_100) point by point: x = y mu + n in 100 dimensions,
+# classes alternating +1 and -1, and the linear model w = mu = 0.2. FGSM from the loss gradient's sign.
+y18 = np.where(np.arange(2000) % 2 == 0, 1.0, -1.0)
+x18 = y18[:, None] * 0.2 + irwin18(rng13(18_100, 2000 * 100 * 12).reshape(2000, 100, 12))
+w18 = np.full(100, 0.2)
+m18 = y18 * (x18 @ w18)
+g18 = (-y18 / (1 + np.exp(m18)))[:, None] * w18[None, :]
+accuracy18 = [float(np.mean(y18 * ((x18 + eps * np.sign(g18)) @ w18) > 0)) for eps in (0.0, 0.1, 0.2, 0.3)]
+print(f"FGSM against w = mu, numpy: accuracy at eps 0, 0.1, 0.2, 0.3: {' '.join(f'{a:.4f}' for a in accuracy18)}")
+
+# cw_attack on this model as a scalar recurrence: the perturbation stays t times the unit vector -y w/|w|, so
+# the margin is m - 2t, the objective |t| + c max(m - 2t, 0), and a step subtracts lr (sign(t) - 2c [m - 2t > 0]).
+mc18 = m18[m18 > 0]
+for c18 in (0.25, 1.0, 0.75):
+    t18 = np.zeros_like(mc18)
+    best18, best_t18 = np.full_like(mc18, np.inf), np.zeros_like(mc18)
+    for _ in range(2000):
+        loss18 = np.abs(t18) + c18 * np.maximum(mc18 - 2 * t18, 0)
+        better18 = loss18 < best18
+        best18, best_t18 = np.where(better18, loss18, best18), np.where(better18, t18, best_t18)
+        t18 = t18 - 0.01 * (np.sign(t18) - 2 * c18 * (mc18 - 2 * t18 > 0))
+    print(f"Carlini-Wagner as a scalar recurrence, c = {c18}: {len(mc18)} points, {int(np.sum(best_t18 == 0))} unchanged, "
+          f"misclassified {np.mean(mc18 - 2 * best_t18 < 0):.4f}")
+
+# Feature squeezing: Rng(18_600) values, Rng(18_601) signs, rounding half away from zero as Rust's f64::round
+v18 = rng13(18_600, 100_000)
+s18 = rng13(18_601, 100_000)
+for bits18, eps18 in ((3, 0.05), (5, 0.01)):
+    levels18 = 2 ** bits18 - 1
+    moved18 = v18 + np.where(s18 < 0.5, -eps18, eps18)
+    d18 = (np.floor(np.clip(moved18, 0, 1) * levels18 + 0.5) - np.floor(np.clip(v18, 0, 1) * levels18 + 0.5)) / levels18
+    print(f"squeezing to {bits18} bits, eps {eps18}: changed {np.mean(d18 != 0):.4f}, mean |change| {np.mean(np.abs(d18)):.5f}, "
+          f"root mean square {np.sqrt(np.mean(d18 ** 2)):.5f}")
+
+
+# IX's probit, formula 26.2.23 of Abramowitz and Stegun, against scipy's norm.ppf
+def probit18(p):
+    t = np.sqrt(-2 * np.log(np.where(p < 0.5, p, 1 - p)))
+    value = t - (2.515517 + 0.802853 * t + 0.010328 * t * t) / (1 + 1.432788 * t + 0.189269 * t * t + 0.001308 * t ** 3)
+    return np.where(p < 0.5, -value, value)
+
+
+pa18 = np.arange(501, 1000) / 1000
+error18 = np.abs((probit18(pa18) - probit18(1 - pa18)) / 2 - (norm.ppf(pa18) - norm.ppf(1 - pa18)) / 2)
+print(f"certified radius, sigma 1, p_A = 0.501 to 0.999: largest error against scipy {error18.max():.2e} "
+      f"at p_A = {pa18[error18.argmax()]:.3f}")
+clamped18 = np.array([1 - 1e-10, 1e-10])
+print(f"logits (2, -1) clamped: IX's formula {(probit18(clamped18[:1]) - probit18(clamped18[1:]))[0] / 2:.4f}, "
+      f"scipy {(norm.ppf(clamped18[0]) - norm.ppf(clamped18[1])) / 2:.4f}")
+
+# Label flips: Rng(18_800) points around (-2, -2) and (2, 2), 100 labels picked by the first 100 places of a
+# Fisher-Yates shuffle from Rng(18_801), and the k = 5 majority vote with ties in distance broken by index
+f18 = irwin18(rng13(18_800, 1000 * 2 * 12).reshape(1000, 2, 12)) + np.where(np.arange(1000) % 2 == 1, 2.0, -2.0)[:, None]
+labels18 = (np.arange(1000) % 2).astype(float)
+order18 = np.arange(1000)
+for i18, u18 in enumerate(rng13(18_801, 100)):
+    j18 = i18 + int(u18 * (1000 - i18))
+    order18[i18], order18[j18] = order18[j18], order18[i18]
+noisy18 = labels18.copy()
+noisy18[order18[:100]] = 1 - noisy18[order18[:100]]
+dist18 = np.sqrt(((f18[:, None, :] - f18[None, :, :]) ** 2).sum(axis=2))
+np.fill_diagonal(dist18, np.inf)
+votes18 = noisy18[np.argsort(dist18, axis=1, kind="stable")[:, :5]].sum(axis=1)
+flagged18 = (votes18 >= 5 - votes18) != (noisy18 >= 0.5)
+found18 = int(flagged18[order18[:100]].sum())
+print(f"label flips, numpy's 5 nearest neighbours: {found18} of 100 flipped labels found, {int(flagged18.sum()) - found18} others")
+
+# Spectral signatures: Rng(18_802) rows of 10 features, 100 of class 0, 100 of class 1 moved by 3 on the first
+# feature, then 5 of class 0 moved by 6 on the last; numpy's eigh for the top direction of each class
+rows18 = irwin18(rng13(18_802, 205 * 10 * 12).reshape(205, 10, 12))
+rows18[100:200, 0] += 3
+rows18[200:, 9] += 6
+classes18 = np.array([0] * 100 + [1] * 100 + [0] * 5)
+
+
+def spectral18(n):
+    flagged = []
+    for c in (0, 1):
+        idx = np.flatnonzero(classes18[:n] == c)
+        centred = rows18[idx] - rows18[idx].mean(axis=0)
+        scores = np.abs(centred @ np.linalg.eigh(centred.T @ centred)[1][:, -1])
+        cutoff = np.sort(scores)[min(int(0.9 * len(idx)), len(idx) - 1)]
+        flagged.append(idx[scores > cutoff])
+    return flagged
+
+
+clean18, poisoned18 = spectral18(200), spectral18(205)
+print(f"spectral signatures with numpy's eigh: flagged per class {[len(f) for f in clean18]}; with the 5 shifted "
+      f"points {[len(f) for f in poisoned18]}, shifted among them {int(np.sum(poisoned18[0] >= 200))}")
