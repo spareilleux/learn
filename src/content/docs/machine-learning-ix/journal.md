@@ -709,7 +709,7 @@ Scored against the eight predictions of the entry above, committed alone as `4f4
 - **P8, the speed-ups (finding 94).** Median of 5 calls after a warm-up. First run: 10³ 0.001 ms against 0.600 ms; 64³ 0.093 against 0.454; 256 × 768 × 1024 169.902 against 3.145, 54.0x; 1024³ 1,159.711 against 8.456, 137.1x. Second run: 0.001 against 0.490; 0.086 against 0.448; 179.753 against 2.908, 61.8x; 2,133.655 against 8.722, 244.6x. The two middle sizes had no prediction.
 - **Exploratory (findings 90 and 93).** With fused multiply-adds, the CPU's matrix product equals the GPU's in 65,536 of 65,536 elements; the distances still differ in 168,810 of 1,000,000. `similarity_matrix(Some(&ctx), …)` gives 0 for a and b and 0 on the zero vector's diagonal, where the CPU path gives 1 twice. `GpuContext::new()` took 1,316 ms in the first run and 532 ms in the second, and three more contexts in the second run's process a median of 274 ms. The formula at other sizes: 0.1444 for N = 2,000, 0.1593 for N = 10,000; 0.0291 for k = 5 and 0.4371 for k = 20 at N = 1,000.
 
-All eight held. The GPU part ran on one adapter and one backend, and CI can't run it: the lesson quotes `local/l20_on_gpu.txt`, the second run. Three-OS CI for lesson 20 is still pending.
+All eight held. The GPU part ran on one adapter and one backend, and CI can't run it: the lesson quotes `local/l20_on_gpu.txt`, the second run. The three-OS CI run, [36777671380](https://github.com/spareilleux/learn/actions/runs/36777671380) on `c7dce93`, passed on Windows, Linux and macOS, and so did the Linux cross-check: the 126 tests passed and the five GPU tests stayed ignored on each system, and every output matched `expected/`, `l20_wgsl`'s included.
 
 ## To verify
 
