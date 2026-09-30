@@ -31,6 +31,7 @@ pub mod optimize;
 pub mod reduce;
 pub mod rl;
 pub mod sequence;
+pub mod signal;
 pub mod sketch;
 pub mod transformer;
 
