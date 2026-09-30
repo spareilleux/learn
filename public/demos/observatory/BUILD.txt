@@ -347,6 +347,36 @@ departments over 6 cm (the smallest 7.3 cm).
 Web: exported; this revision was not run in a browser. Real phones: to
 verify.
 
+The seventh revision, the same day, is the lift's art pass; the author found
+the lift schematic and plain.
+- Frame (scripts/lift.gd): four round columns of dark bronze on gilt bases,
+  with a gilt collar at every ring, in place of the square steel rails; brass
+  rings; and over the opening at each landing a lintel carrying a dial.
+- Cage: a walnut floor with a brass inlay; a walnut wainscot with brass
+  mouldings and panel frames; brass bars with a middle ring; a frieze of gilt
+  rosettes; a low brass dome with a gilt cresting, a finial and the green
+  lamp. Inside, the green ring dimmed, a warm ceiling lamp whose light reaches
+  only the cage (its own render layer), and a control column with a lever.
+- Motion: the six-spoked sheave turns a cable's length per radian as the cage
+  rides, and every dial's needle follows the cage, from the hall at the left
+  to the top landing at the right.
+- A fix outside the lift (scripts/observatory.gd, _merge): once one part of a
+  merge was indexed, SurfaceTool.append_from drew only the indexed parts;
+  every part is now deindexed first. In the scene this restores the gilt ring
+  round the oculus (GiltRibs drew 384 of its 3,456 vertices); the ring was
+  not seen in a still.
+index.pck is now 21,715,852 bytes; index.html changes only that size, and
+index.wasm and index.js are unchanged.
+Native tests (Godot 4.6.1): 38 runs under Compatibility and Forward+ pass with
+no script error, the 36 before and the lift's art-pass test in both
+renderers: the cage's parts, a dial per landing and the sheave built; no
+merged mesh in the lift leaving vertices out; the cage lamp's cull mask on
+the cage alone; a ride to the first gallery turning the sheave by rise over
+radius (11.481 rad) and bringing every needle to the landing (70 degrees at
+the hall, 29.5 at the first gallery).
+Web: exported; this revision was not run in a browser. Real phones: to
+verify.
+
 Native Compatibility GPU time, RTX 5080, 1600x900, 240 frames per view: 0.44 to
 0.52 ms for the previous web scene, 0.64 to 1.44 ms with the detail pass; up to
 1.55 million primitives in the overview, against 0.46 million before. With the
@@ -361,7 +391,7 @@ main.tscn fb6245c960d3625ca05920116c58351d9dbeb255beae59175d89c06d47049564
 export_presets.cfg 1bd7171d93c9a378f1b328e945be2a7960478e89d34ae269f013ef83c306588f
 scripts/fly_camera.gd 2e5cdd15ca7bdcfa30ec129e354a309f3ff7296f6fbf54ac144984ed9aa9f8e7
 scripts/capture.gd 52ea2b5e40db2f1f4cdbd7658074ef60bd117e1f4110c1b8995590a4196748d0
-scripts/observatory.gd f6a3e67bb61ea23d46fcf93229075568b52f0e2cc2ed888264cebc513f20de54
+scripts/observatory.gd 1c0df54cd433533c305700578abde1044f01efde1bef614e1bf5ede1c2ae6c76
 scripts/course_library.gd ed3fe65bcc6ed0cd27e6ca891dce8b461c637a862c852be92e98cf476c8faf60
 scripts/steel_cube.gd f28e71fffcd151663bc9a98b3c135cc7b805490e8298d3cf01029455c973f94c
 scripts/seldon_statue.gd 4e41b282aa2cc4de794296586b65f5f4d39688312673ddc46226fd3906cf4b27
@@ -397,12 +427,12 @@ assets/upperside.gdshader f119593a603bc623de218054ec142b8732330785fe0d61ba5a3dcc
 assets/sky_milky_way_eso.jpg b17e19bf2d5e7e9efa03b602450f5189dc77f85251e704d99b6f14632cff3495
 assets/exterior_ashlar_albedo.png c0cff260c039e1e1528920f86070266ac20ba2a3e36e99a53654c2ed18cdef94
 assets/exterior_ashlar_normal.png 0dc3b0023534b21c7d383bbca468f057cc65ba1a9526303c7b3084587138f029
-scripts/lift.gd b3030cc84808c80c98fd55168c357997f03aa8567559618345c842561a1277d9
+scripts/lift.gd 1ecf5aa587e8c3e206bfcec16716b52f042e023886b57bd21916ee8c59d67ec9
 assets/sky_core_cap.png a110fdfa1b79cc41eec119265aeb89bc211d0b8e0eb6c759b45c25496f2daabe
 assets/kiosk_glass.gdshader 76226f17e5884a042b85e5fc544a4b71012ea6e389b9743c1cac65083a06bc44
 
 SHA-256 output files:
-index.pck 05cb1e2528c26418ef3aee7834ffce5d85e0a2f1cf46391e56c0fd0a15855f63
+index.pck 1594ed80acbe8b7f0735d634f2a5c75d6f2e927d3dba46f6636c6892d232e0e7
 index.wasm 99962b29677e42f3ba0258bd90fdc52ad90295954c4473e816ad02cfe5ff1d4f
 index.js e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981
 
