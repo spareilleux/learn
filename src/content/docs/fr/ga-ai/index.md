@@ -58,6 +58,7 @@ Trois autres cours de ce site couvrent les bases, et celui-ci renvoie vers eux a
 | 9 | [Tous les intervalles, toutes les tonalités](09-every-interval-every-key/) | `IntervalSkill`, `ScaleInfoSkill`, `RelativeKeySkill`, `KeyNaming`, le `DetermineQuality` du domaine | tests exhaustifs, `\b` et assertion avant dans les expressions régulières, branches par défaut des switch |
 | 10 | [Ce à quoi le modèle doit se fier](10-what-the-model-is-told-to-trust/) | `ga_dsl_eval`, les closures `domain.diatonicChords`, `domain.transposeChord` et `domain.commonTones`, les fichiers SKILL.md des trois skills Path B | appeler l'outil d'un modèle sans le modèle, une lettre par degré, réutiliser un oracle d'une leçon à l'autre |
 | 11 | [Les accords que lit le skill des tonalités](11-the-chords-the-key-skill-reads/) | `KeyIdentificationService` au commit épinglé et sur `main`, `ga_key_identify`, `KeyIdentificationSkill`, le SKILL.md de key-identification | extraire des chiffrages d'un texte, un classement et la sélection bâtie dessus, appeler des méthodes privées par réflexion |
+| 12 | [Ce que répondent les skills de progression](12-what-the-progression-skills-answer/) | `ProgressionMoodSkill`, `ProgressionCompletionSkill`, leurs fichiers SKILL.md, `KeyIdentificationService` au commit épinglé et sur `main` | un test sur les mots qui choisit une réponse fixe, un modèle restreint à une liste calculée, le routage de repli par mots-clés |
 | — | [Journal](journal/) | | |
 
 ## Prérequis
