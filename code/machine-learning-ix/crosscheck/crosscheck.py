@@ -1090,3 +1090,32 @@ b20 = np.float32(2) * a20
 z20 = np.zeros(3, dtype=np.float32)
 print(f"thresholds, numpy float32: cosine {cosine20(a20, b20):.6f}, batch {batch20(a20, b20):.6f}, cosine of zero {cosine20(z20, z20):.6f}")
 print(f"limits: largest n with 4 n^2 <= 128 MiB {math.isqrt((128 << 20) // 4)}; 10000 x 10000 x 4 = {4 * 10000 ** 2} bytes")
+
+# Lesson 21: scikit-learn's macro average against the tool's, FNV-1a 64 of the lock file's canonical args, and a
+# linear regression's predictions after the scaler is fitted on all rows or on the training rows only
+print("\n== lesson 21")
+y21 = [1, 2, 1, 2, 2]
+p, r, f, _ = precision_recall_fscore_support(y21, y21, average="macro")
+print(f"labels 1 and 2, all right: scikit-learn macro {p:.16g} {r:.16g} {f:.16g}")
+p, r, f, _ = precision_recall_fscore_support(y21, y21, labels=[0, 1, 2], average="macro", zero_division=0)
+print(f"the same with labels=[0, 1, 2], as the tool counts them: {p:.16g} {r:.16g} {f:.16g}")
+
+
+def fnv1a64(data):
+    h = 0xcbf29ce484222325
+    for b in data:
+        h = ((h ^ b) * 0x100000001b3) % (1 << 64)
+    return h
+
+
+canon21 = b'{"data":[1.0,2.0]}'
+print(f"FNV-1a 64 of {canon21.decode()}: fnv1a64:{fnv1a64(canon21):016x}")
+whole21 = sorted({int(s) for s in seconds})
+print(f"build_seconds: {len(whole21)} distinct whole values, largest {whole21[-1]}: the tool counts {whole21[-1] + 1} classes")
+raw21 = LinearRegression().fit(pages[train], seconds[train]).predict(pages[test])
+all21 = StandardScaler().fit(pages)
+fit21 = StandardScaler().fit(pages[train])
+gap21 = max(
+    np.abs(LinearRegression().fit(s.transform(pages[train]), seconds[train]).predict(s.transform(pages[test])) - raw21).max()
+    for s in (all21, fit21))
+print(f"linear regression, chronological split: predictions after either scaler within 1e-9 of the raw feature's: {'yes' if gap21 < 1e-9 else 'no'}")
