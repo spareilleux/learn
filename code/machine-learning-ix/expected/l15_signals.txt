@@ -1,0 +1,57 @@
+== Welch's density, 16,384 samples of unit-variance noise, fs 1000, segments 512
+  integral / variance, as IX returns it:     0.503
+  bins 1 to 255 doubled (one-sided):         1.002
+
+== welch_psd on sines, fs 1000, 8,192 samples
+  200 Hz, segments of 300: 151 bins, peak at index 102, labelled 340.0 Hz
+  400 Hz, segments of 300: 151 bins, peak at index 149, labelled 496.7 Hz
+  200 Hz, segments of 256: 129 bins, peak at index 51, labelled 199.2 Hz
+  400 Hz, segments of 256: 129 bins, peak at index 102, labelled 398.4 Hz
+  segments of 300: largest value of the 400 Hz sine / the 200 Hz peak: 1e-11 to 1e-10
+
+== IX's FFT against a reference whose twiddles are computed one by one
+  N = 2^8   relative RMS error 1e-15 to 1e-14
+  N = 2^12  relative RMS error 1e-14 to 1e-13
+  N = 2^16  relative RMS error 1e-13 to 1e-12
+  error at 2^16 / error at 2^8: at least 16: true
+  N = 2^10, the reference against the DFT by its definition: 1e-16 to 1e-15
+
+== Second-order Butterworth, fc 0.1
+  b [0.067455274, 0.134910548, 0.067455274]
+  a [1.000000000, -1.142980503, 0.412801598]
+  gain at DC 1.000000000000, at fc 0.707106781187, at Nyquist 0
+  a sine at fc through IirFilter::apply: amplitude 0.7071
+
+== Kalman filter of a random walk, q 0.01, r 1
+  steady-state gain from the Riccati equation:   0.095124922
+  IX's variance after 200 steps:                 0.095124922
+  largest |state - ewma(K)|, steps 300 to 1000:  1e-13 to 1e-12
+  mean squared error / (K r), 200 runs:          1.004
+  KalmanFilter::new(2, 1) as built, 100 measurements of 5: largest |state| 0, first variance 2.000000
+
+== Haar wavelets
+  12 samples, 3 levels: approximation 1, details [6, 3, 1], haar_idwt returns 8, wavelet_denoise returns 8
+  16 samples, 4 levels: round trip within 1e-12: true
+  blocks of 64, sigma 0.5, 5 levels, universal threshold, 20 draws (15 jumps)
+    jumps on multiples of 64: MSE / sigma^2 0.0360
+    shifted by 16:            MSE / sigma^2 0.1953 (5.4 times)
+
+== FIR filters
+  highpass(0.25, 31) at f 0.05: gain 0.1569
+  highpass(0.25, 32) at f 0.05: gain 0.00046
+  lowpass(0.1, 64): gain on [0, 0.05] 0.9995 to 1.0003, largest on [0.15, 0.5] 0.00184
+  lowpass(0.1, 64): centre tap 0.200000000, sum of the taps 1.000041082
+  lowpass(0.1, 64) on a sine at 0.02: largest |y[n] - x[n - 32]| after 64 samples 0.0002
+
+== Edge cases
+  hanning        of length 1: NaN
+  hamming        of length 1: NaN
+  blackman       of length 1: NaN
+  bartlett       of length 1: NaN
+  gaussian(0.4)  of length 1: NaN
+  kaiser(5)      of length 1: 0.0367
+  fft(&[]): 1 value(s), [(0.0, 0.0)]
+  normalized_cross_correlation([1.0, 2.0, 3.0, 4.0], [4.0, 3.0, 2.0, 1.0]): [0.0333, 0.1333, 0.3333, 0.6667, 0.8333, 0.8000, 0.5333]
+  Pearson at lag 0: -1.0000
+  autocorrelation([1.0, 2.0, 3.0, 4.0]): [0.1333, 0.3667, 0.6667, 1.0000, 0.6667, 0.3667, 0.1333]
+exit 0
