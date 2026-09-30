@@ -248,7 +248,7 @@ Le domaine de GA orthographie correctement les tonalités. Dans la leçon 9, `Sc
 
 ## Signalé en amont
 
-- Pas encore signalées en amont au moment de l'écriture de cette leçon : l'orthographe de `diatonicChords`, de `transposeChord` et de `commonTones`, et les affirmations du SKILL.md de diatonic-chords. Elles sont listées dans le [journal](../journal/).
+- Signalées après l'écriture de cette leçon : l'orthographe de `diatonicChords`, de `transposeChord` et de `commonTones`, et les affirmations du SKILL.md de diatonic-chords, dans le ticket de GA [#770](https://github.com/GuitarAlchemist/ga/issues/770). Elles sont listées dans le [journal](../journal/).
 
 ## Exercices
 

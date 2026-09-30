@@ -248,7 +248,7 @@ El dominio de GA deletrea bien las tonalidades. En la lección 9, `ScaleInfoSkil
 
 ## Comunicado upstream
 
-- No se habían comunicado upstream cuando se escribió esta lección: la ortografía de `diatonicChords`, `transposeChord` y `commonTones`, y las afirmaciones del SKILL.md de diatonic-chords. Están listadas en el [diario](../journal/).
+- Se comunicaron después de escribir esta lección: la ortografía de `diatonicChords`, `transposeChord` y `commonTones`, y las afirmaciones del SKILL.md de diatonic-chords, en la issue de GA [#770](https://github.com/GuitarAlchemist/ga/issues/770). Están listadas en el [diario](../journal/).
 
 ## Ejercicios
 

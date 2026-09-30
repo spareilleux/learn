@@ -248,7 +248,7 @@ GA's domain spells keys right. In lesson 9, `ScaleInfoSkill` gave the notes of a
 
 ## Reported upstream
 
-- Not reported upstream when this lesson was written: the spelling of `diatonicChords`, `transposeChord` and `commonTones`, and the claims of the diatonic-chords SKILL.md. They are listed in the [journal](../journal/).
+- Reported after this lesson was written: the spelling of `diatonicChords`, `transposeChord` and `commonTones`, and the claims of the diatonic-chords SKILL.md, as GA issue [#770](https://github.com/GuitarAlchemist/ga/issues/770). They are listed in the [journal](../journal/).
 
 ## Exercises
 
