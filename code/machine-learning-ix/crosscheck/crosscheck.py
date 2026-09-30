@@ -708,3 +708,26 @@ print(f"8 queens, 1000 boards, steepest ascent with the last best neighbour: sol
 restart16 = np.floor(rng13(16_900, 8 * 21 * 100) * 8).astype(int).reshape(100, 21, 8)
 wins16 = sum(any(climb16(b)[0] == 0 for b in run[1:]) for run in restart16)
 print(f"8 queens, 100 runs of 20 restarts: solved {wins16}")
+
+print("\n== lesson 17")
+# The Pareto sets of lesson 17, rebuilt from the course's Rng: 100 sets of 200 points, drawn point by point,
+# Rng(17_702) in 2 dimensions and Rng(17_703) in 3. Front 0 by brute force: the points no other point
+# dominates, every objective minimized.
+for dims17 in (2, 3):
+    sets17 = rng13(17_700 + dims17, 100 * 200 * dims17).reshape(100, 200, dims17)
+    sizes17 = []
+    for p17 in sets17:
+        le17 = (p17[:, None, :] <= p17[None, :, :]).all(axis=2)
+        lt17 = (p17[:, None, :] < p17[None, :, :]).any(axis=2)
+        sizes17.append(int((~(le17 & lt17).any(axis=0)).sum()))
+    print(f"{dims17} dimensions, 100 sets of 200 uniform points: mean size of front 0 {np.mean(sizes17):.3f}")
+
+# BLX-alpha on independent standard normal parents, with numpy's own generator: the child's variance is
+# 1/2 + (1 + 2 alpha)^2 / 6, 7/6 at alpha = 0.5 and 1 at alpha = (sqrt(3) - 1) / 2.
+g17 = np.random.default_rng(17)
+a17, b17 = g17.standard_normal(1_000_000), g17.standard_normal(1_000_000)
+for alpha17 in (0.5, (np.sqrt(3) - 1) / 2):
+    d17 = np.abs(a17 - b17)
+    child17 = g17.uniform(np.minimum(a17, b17) - alpha17 * d17, np.maximum(a17, b17) + alpha17 * d17)
+    print(f"BLX-{alpha17:.3f}, 10^6 children of N(0, 1) parents: variance {child17.var():.3f}, "
+          f"formula {0.5 + (1 + 2 * alpha17) ** 2 / 6:.3f}")
