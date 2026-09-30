@@ -90,7 +90,7 @@ Las lecciones 1 a 9 están escritas. El resto es el plan, una lección por famil
 | 15 | [Señales: la transformada de Fourier, ondículas, filtros y Kalman](15-signals/) | `ix-signal` | — |
 | 16 | [Búsqueda: A\*, búsqueda en árbol de Monte-Carlo, búsqueda local](16-search/) | `ix-search`, `ix-graph` | — |
 | 17 | [Evolución: algoritmos genéticos, evolución diferencial, frentes de Pareto](17-evolution/) | `ix-evolution` | — |
-| 18 | Ejemplos adversarios, envenenamiento y las defensas | `ix-adversarial` | — |
+| 18 | [Ejemplos adversarios, envenenamiento y las defensas](18-adversarial/) | `ix-adversarial` | — |
 | 19 | La forma de los datos: homología persistente | `ix-topo`, `ix-manifold` | — |
 | 20 | En la GPU: productos de matrices, distancias y k vecinos más cercanos en WGSL | `ix-gpu` | — |
 | 21 | Pipelines de principio a fin, y las herramientas MCP que llama un asistente | `ix-pipeline`, `ix-agent` | `MLContext` |

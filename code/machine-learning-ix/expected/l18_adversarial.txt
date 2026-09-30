@@ -1,0 +1,56 @@
+== the model under attack
+2000 test points, 1000 per class, in 100 dimensions; w = mu = 0.2 everywhere, |w|_2 = 2.000, |w|_1 = 20.000
+clean accuracy 0.9780   (Phi(2) = 0.9772)
+
+== P1, FGSM: every margin falls by eps |w|_1 = 20 eps
+  eps   accuracy   Phi(2 - 10 eps)   changed class   exactly those with 0 < m < 20 eps   margins within 1e-12
+  0.0   0.9780     0.9772               0            yes                                 yes
+  0.1   0.8460     0.8413             264            yes                                 yes
+  0.2   0.4780     0.5000            1000            yes                                 yes
+  0.3   0.1470     0.1587            1662            yes                                 yes
+
+== P2, PGD and f64::signum (eps 0.2, alpha 0.05, 10 steps), largest distance from the expected point
+  gradient +0.0 everywhere: pgd from x +0.2 0.000, adversarial_training_augment from x +0.2 0.000, fgsm from x 0.000
+  gradient -0.0 everywhere: pgd from x -0.2 0.000, adversarial_training_augment from x -0.2 0.000, fgsm from x 0.000
+  model with w_j = 0 for the last 50 features, over the 2000 points (fewest, most):
+    pgd:  features moved (100, 100), perturbation norm (2.0000, 2.0000), accuracy 0.4865
+    fgsm: features moved (50, 50), perturbation norm (1.4142, 1.4142), accuracy 0.4865
+  control, the full model: largest distance between pgd's point and fgsm's 0.000
+
+== P3, cw_attack with the hinge loss max(m, 0), lr 0.01, 2000 steps, on the correctly classified points
+  c = 0.25 (c|w| = 0.5): 1956 points, 1956 returned unchanged, misclassified 0.0000 (predicted every result x), largest | |delta| - m/|w| | 5.8712
+  c = 1.00 (c|w| = 2.0): 1956 points, 1 returned unchanged, misclassified 0.5072 (predicted [0.464, 0.536]), largest | |delta| - m/|w| | 0.0050
+  c = 0.75 (c|w| = 1.5): 1956 points, 1 returned unchanged, misclassified 0.3522 (predicted [0.299, 0.367]), largest | |delta| - m/|w| | 0.0033
+
+== P4, universal_perturbation on one correctly classified point, one iteration, loss = m
+  1956 points, largest relative error of the new margin against
+    m(1 - |w|) = -m with the fooling direction -y w:   8.8e-14
+    m(1 + |w|) = 3m with the loss's gradient +y w:     1.2e-14
+    m'(1 - |w|/4) = m'/2 with w/4, m' = m/4:           9.7e-14
+  length of the w/4 perturbation against a quarter of the full one: 0.0e0
+
+== P5, detect_adversarial, sigma 0.1, 50 samples, the 2000 clean points and their FGSM versions at eps 0.2
+  outputs (z, -z): score of the first input 0.0353 (expectation 0.04); 4000 of 4000 inputs have it to within 1e-12
+  flagged at threshold 0.015: 4000; at 0.09: 0
+  control, outputs (p, 1 - p): score nearest the boundary 2.16e-3, farthest 2.25e-12; more than 10 times: yes
+
+== P6, feature_squeezing of 100000 uniform values moved by +-eps
+  3 bits, eps 0.05: changed 0.3510, mean |change| 0.05014, root mean square 0.08463   (formula 0.350, 0.05000, 0.08452)
+  5 bits, eps 0.01: changed 0.3094, mean |change| 0.00998, root mean square 0.01794   (formula 0.310, 0.01000, 0.01796)
+  0 bits: [NaN, NaN, NaN, NaN]
+
+== P7, certified_radius at sigma 1 against the exact radius (AS 241)
+  p_A = 0.501 to 0.999, p_B = 1 - p_A: largest error 4.44e-4, at p_A = 0.642
+  p_A = 0.9: IX 1.281729, exact 1.281552
+  logits (2, -1): 6.3609; logits (3, 1): 0.0000
+
+== P8, poisoning
+  1000 points in 2 dimensions, 100 labels flipped: influence_function unchanged bit for bit: yes
+  detect_label_flips, k = 5: 99 flipped labels found, 11 other points flagged
+  spectral_signature_defense, 90th percentile, 100 points per class in 10 dimensions: flagged per class [9, 9]
+  with 5 points shifted by 6 added to class 0: flagged per class [10, 9], shifted points among them 5
+
+== exploratory
+  jsma returns the same point for targets 0 and 1: yes
+  lipschitz_estimate of x -> (10 x_0, x_1, ..., x_99), constant 10, 200 samples, 20 seeds: lowest 2.617, median 3.021, highest 3.838
+exit 0
