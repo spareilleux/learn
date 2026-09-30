@@ -1,0 +1,124 @@
+# l13
+
+== What ga_dsl_list_closures and ga_dsl_get_closure_schema show the model
+15 closures listed, among them domain.analyzeProgression (Domain): Infer the key of a progression and label each chord with a Roman numeral.
+input  chords: string — space-separated chord symbols
+output string (formatted key + Roman numeral analysis)
+
+== The four examples of skills-dev/_pending-tools/progression-analysis/DRAFT.md
+"C Am F G": the draft expects C major, I vi IV V
+  a826864  Key: C major  (confidence 4/4)
+           C      Am     F      G
+           I      vi     IV     V
+  6baf32e  Key: C major  (confidence 4/4)
+           C      Am     F      G
+           I      vi     IV     V
+"Dm7 G7 Cmaj7": the draft expects C major, ii V I
+  a826864  Key: D minor  (confidence 3/3)
+           Dm7    G7     Cmaj7
+           i      iv     VII
+  6baf32e  Key: C major  (confidence 3/3)
+           Dm7    G7     Cmaj7
+           ii     V      I
+"D A Bm G": the draft expects D major, I V vi IV
+  a826864  Key: D major  (confidence 4/4)
+           D      A      Bm     G
+           I      V      vi     IV
+  6baf32e  Key: D major  (confidence 4/4)
+           D      A      Bm     G
+           I      V      vi     IV
+"Fm Bbm C7 Fm": the draft expects F minor, i iv V i
+  a826864  Key: F major  (confidence 4/4)
+           Fm     Bbm    C7     Fm
+           I      IV     V      I
+  6baf32e  Key: F minor  (confidence 4/4)
+           Fm     Bbm    C7     Fm
+           i      iv     V      i
+
+== Eight textbook progressions in the 30 keys
+
+major keys             Cb Gb Db Ab Eb Bb F  C  G  D  A  E  B  F# C#
+I IV V I      a826864  e  e  =  =  =  =  =  =  =  =  =  =  =  =  e
+I IV V I      6baf32e  e  e  e  =  =  =  =  =  =  =  =  =  =  =  =
+IV V I        a826864  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x
+IV V I        6baf32e  e  e  e  =  =  =  =  =  =  =  =  =  =  =  =
+I vi IV V     a826864  e  e  =  =  =  =  =  =  =  =  =  =  =  =  e
+I vi IV V     6baf32e  e  e  e  =  =  =  =  =  =  =  =  =  =  =  =
+ii7 V7 Imaj7  a826864  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x
+ii7 V7 Imaj7  6baf32e  e  e  e  =  =  =  =  =  =  =  =  =  =  =  =
+
+minor keys             Ab Eb Bb F  C  G  D  A  E  B  F# C# G# D# A#
+i iv V i      a826864  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x
+i iv V i      6baf32e  =  e  e  =  =  =  =  =  =  =  =  =  e  =  =
+i iv v i      a826864  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x
+i iv v i      6baf32e  =  e  e  =  =  =  =  =  =  =  =  =  e  =  =
+iiø7 V7 i     a826864  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x
+iiø7 V7 i     6baf32e  =  e  e  =  =  =  =  =  =  =  =  =  e  =  =
+i iv vii°7 i  a826864  x  x  x  x  x  x  x  x  x  x  x  x  x  x  x
+i iv vii°7 i  6baf32e  n  n  n  n  n  n  n  n  n  n  n  n  n  n  n
+
+= the textbook key, spelled as the question, and the textbook numerals; e the same key under its
+enharmonic name, the textbook numerals; n the key, other numerals; x another key
+a826864: 120 questions, = 24, e 6, n 0, x 90; confidence below the chord count: none
+6baf32e: 120 questions, = 84, e 21, n 15, x 0; confidence below the chord count: iiø7 V7 i in 15 keys, i iv vii°7 i in 12 keys
+
+Bb major, IV V I: "Eb F Bb"
+  a826864  Key: Eb major (3/3), I ii V
+  6baf32e  Key: Bb major (3/3), IV V I
+Gb major, ii7 V7 Imaj7: "Abm7 Db7 Gbmaj7"
+  a826864  Key: Ab minor (3/3), i iv VII
+  6baf32e  Key: F# major (3/3), ii V I
+G# minor, i iv v i: "G#m C#m D#m G#m"
+  a826864  Key: Ab major (4/4), I IV V I
+  6baf32e  Key: Ab minor (4/4), i iv v i
+D minor, i iv vii°7 i: "Dm Gm C#dim7 Dm"
+  a826864  Key: D major (4/4), I IV vii° I
+  6baf32e  Key: D minor (3/4), i iv ? i
+
+== Chords borrowed from the parallel minor, and the harmonic minor's V and vii°
+"C Ab G C": the textbook reads C major, I bVI V I
+  a826864  Key: C minor  (confidence 4/4)
+           C      Ab     G      C
+           i      VI     v      i
+  6baf32e  Key: C major  (confidence 3/4)
+           C      Ab     G      C
+           I      ?      V      I
+"C Eb F C": the textbook reads C major, I bIII IV I
+  a826864  Key: C minor  (confidence 4/4)
+           C      Eb     F      C
+           i      III    iv     i
+  6baf32e  Key: C major  (confidence 3/4)
+           C      Eb     F      C
+           I      ?      IV     I
+"C Bb F C": the textbook reads C major, I bVII IV I
+  a826864  Key: C minor  (confidence 4/4)
+           C      Bb     F      C
+           i      VII    iv     i
+  6baf32e  Key: F major  (confidence 4/4)
+           C      Bb     F      C
+           V      IV     I      V
+"C Ab Bb C": the textbook reads C major, I bVI bVII I
+  a826864  Key: C minor  (confidence 4/4)
+           C      Ab     Bb     C
+           i      VI     VII    i
+  6baf32e  Key: Eb major  (confidence 2/4)
+           C      Ab     Bb     C
+           VI     IV     V      VI
+"Am G#dim7 Am": the textbook reads A minor, i vii° i
+  a826864  Key: A major  (confidence 3/3)
+           Am     G#dim7 Am
+           I      vii°   I
+  6baf32e  Key: A minor  (confidence 2/3)
+           Am     G#dim7 Am
+           i      ?      i
+"Bm7b5 E7 Am": the textbook reads A minor, iiø V i
+  a826864  Key: B minor  (confidence 3/3)
+           Bm7b5  E7     Am
+           i      iv     VII
+  6baf32e  Key: A minor  (confidence 2/3)
+           Bm7b5  E7     Am
+           iiø    V      i
+KeyIdentificationService.Identify on main, "C Bb F C": F major 3/3, D minor 3/3, C major 2/3
+KeyIdentificationService.Identify on main, "C Ab Bb C": Eb major 2/3, F major 2/3, C minor 2/3
+KeyIdentificationService.IsChordDiatonic("A minor", ...) on main: Am yes, Bdim yes, Bm7b5 no, E yes, E7 yes, G#dim7 no
+KeyIdentificationService.IsChordDiatonic("G# minor", ...) on main: G#m yes, D#7 yes, F# yes, F##dim7 yes
