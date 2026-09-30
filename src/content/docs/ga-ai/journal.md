@@ -245,6 +245,7 @@ Most of the 22 differences of 2026-09-14 were fixed upstream by [#689](https://g
 - The pin's closure is called through `DslEvalMcpTools.EvalClosure`, as a skill would call it. `main`'s is compiled from `DomainClosures.fs` at `6baf32e`, unchanged, in an F# project, `GaDslMain`, against the pinned `GA.Business.DSL` and the service of `GaKeysMain`; `fetch-ga.sh` puts the file in `.ga-dsl/`, and the program reaches the assembly through the extern alias `dslmain`.
 - `main`'s chord parser changed after the pin, in [#686](https://github.com/GuitarAlchemist/ga/pull/686) and `3707b72`, for symbols the lesson doesn't use; that comes from reading the diff, not from a run.
 - The solutions of the exercises were worked by hand from the code and the output.
+- CI run [36784699663](https://github.com/spareilleux/learn/actions/runs/36784699663), for commit `0ace36e`: green on the three systems, 1 min 40 s on Linux, 1 min 25 s on macOS, 7 min 15 s on Windows, clone and build included.
 
 ## To verify
 

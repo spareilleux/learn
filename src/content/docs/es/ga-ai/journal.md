@@ -245,6 +245,7 @@ La mayoría de las 22 diferencias del 2026-09-14 se corrigieron upstream en [#68
 - La closure del commit fijado se llama a través de `DslEvalMcpTools.EvalClosure`, como la llamaría una skill. La de `main` se compila a partir de `DomainClosures.fs` en `6baf32e`, sin cambios, en un proyecto F#, `GaDslMain`, contra el `GA.Business.DSL` fijado y el servicio de `GaKeysMain`; `fetch-ga.sh` deja el archivo en `.ga-dsl/`, y el programa llega al ensamblado a través del alias externo `dslmain`.
 - El analizador de acordes de `main` cambió después del commit fijado, en la [#686](https://github.com/GuitarAlchemist/ga/pull/686) y en `3707b72`, para símbolos que la lección no usa; eso sale de leer el diff, no de una ejecución.
 - Las soluciones de los ejercicios se resolvieron a mano a partir del código y de la salida.
+- Ejecución de CI [36784699663](https://github.com/spareilleux/learn/actions/runs/36784699663), para el commit `0ace36e`: verde en los tres sistemas, 1 min 40 s en Linux, 1 min 25 s en macOS, 7 min 15 s en Windows, con el clon y la compilación incluidos.
 
 ## Por verificar
 
