@@ -212,6 +212,7 @@ La plupart des 22 différences du 2026-09-14 ont été corrigées en amont par [
 - La détection de la tonalité a changé sur le `main` de GA depuis le commit épinglé (#625, #729), après que le cours de théorie musicale a testé les outils du serveur MCP de GA, qui ne prennent que les accords. La leçon compile le service de `main` à `6baf32e` contre le domaine épinglé (projet `GaKeysMain`, alias extern `keysmain`) et pose la question du chatbot, une phrase. Sur `main` à `5c3a52a`, le service n'a pas changé depuis `6baf32e`.
 - Les réponses épinglées sont vérifiées contre `ga_key_identify` lui-même, sur les 99 questions. Le parseur du service et le `BuildPrompt` du skill sont privés ; le programme les appelle par réflexion.
 - La solution de l'exercice 1 a été vérifiée avec le moteur d'expressions régulières de .NET sur les 90 questions de la leçon ; les autres ont été résolues à la main à partir du code.
+- Exécution de CI [36758614173](https://github.com/spareilleux/learn/actions/runs/36758614173), pour le commit `8c2221d` : verte sur les trois systèmes, 1 min 54 s sous Linux, 2 min 24 s sous macOS, 6 min 41 s sous Windows, clone et compilation compris.
 
 ## À vérifier
 

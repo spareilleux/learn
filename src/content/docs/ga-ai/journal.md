@@ -212,6 +212,7 @@ Most of the 22 differences of 2026-09-14 were fixed upstream by [#689](https://g
 - Key detection has changed on GA's `main` since the pin (#625, #729), after the music-theory-ga course tested GA's MCP server tools, which take the chords alone. The lesson compiles `main`'s service at `6baf32e` against the pinned domain (project `GaKeysMain`, extern alias `keysmain`) and asks the chatbot's question, a sentence. On `main` at `5c3a52a`, the service is unchanged since `6baf32e`.
 - The pinned answers are checked against `ga_key_identify` itself, on all 99 questions. The service's parser and the skill's `BuildPrompt` are private; the program calls them by reflection.
 - The solution of exercise 1 was checked with .NET's regex engine on the lesson's 90 questions; the others were worked by hand from the code.
+- CI run [36758614173](https://github.com/spareilleux/learn/actions/runs/36758614173), for commit `8c2221d`: green on the three systems, 1 min 54 s on Linux, 2 min 24 s on macOS, 6 min 41 s on Windows, clone and build included.
 
 ## To verify
 
