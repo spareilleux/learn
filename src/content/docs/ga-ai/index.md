@@ -60,6 +60,7 @@ Three other courses on this site cover the background, and this one links to the
 | 11 | [The chords the key skill reads](11-the-chords-the-key-skill-reads/) | `KeyIdentificationService` at the pin and on `main`, `ga_key_identify`, `KeyIdentificationSkill`, the key-identification SKILL.md | reading symbols out of prose, a ranking and the selection built on it, calling private methods by reflection |
 | 12 | [What the progression skills answer](12-what-the-progression-skills-answer/) | `ProgressionMoodSkill`, `ProgressionCompletionSkill`, their SKILL.md files, `KeyIdentificationService` at the pin and on `main` | a word test that picks a fixed answer, a model restricted to a computed list, keyword fallback routing |
 | 13 | [What the progression analysis answers](13-what-the-progression-analysis-answers/) | the closure `domain.analyzeProgression` at the pin and on `main`, `ga_dsl_list_closures`, the progression-analysis draft, `KeyIdentificationService.IsChordDiatonic` | compiling another commit's F# file against the pinned project, a draft's examples as a test, Roman numerals from the scale and from the chord |
+| 14 | [What the substitution skill answers](14-what-the-substitution-skill-answers/) | `ChordSubstitutionSkill`, `ga_chord_substitutions` and `ga_chord_compare`, `GrothendieckService.FindNearby`, `GrothendieckDelta`, the closure `domain.chordSubstitutions` | a distance under which a whole set class ties, a tie broken by storage order, optional inputs a tool requires |
 | — | [Journal](journal/) | | |
 
 ## Prerequisites
