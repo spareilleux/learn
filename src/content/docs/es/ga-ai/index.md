@@ -58,6 +58,7 @@ Otros tres cursos de este sitio cubren el trasfondo, y este enlaza con ellos en 
 | 9 | [Cada intervalo, cada tonalidad](09-every-interval-every-key/) | `IntervalSkill`, `ScaleInfoSkill`, `RelativeKeySkill`, `KeyNaming`, el `DetermineQuality` del dominio | pruebas exhaustivas, `\b` y búsqueda hacia delante en expresiones regulares, ramas por defecto de un switch |
 | 10 | [En qué se le dice al modelo que confíe](10-what-the-model-is-told-to-trust/) | `ga_dsl_eval`, las closures `domain.diatonicChords`, `domain.transposeChord` y `domain.commonTones`, los SKILL.md de las tres skills de Path B | llamar a la herramienta de un modelo sin el modelo, una letra por grado, reutilizar un oráculo de una lección a otra |
 | 11 | [Los acordes que lee la skill de tonalidad](11-the-chords-the-key-skill-reads/) | `KeyIdentificationService` en el commit fijado y en `main`, `ga_key_identify`, `KeyIdentificationSkill`, el SKILL.md de key-identification | sacar símbolos de un texto en prosa, una clasificación y la selección construida sobre ella, llamar a métodos privados por reflexión |
+| 12 | [Lo que responden las skills de progresión](12-what-the-progression-skills-answer/) | `ProgressionMoodSkill`, `ProgressionCompletionSkill`, sus SKILL.md, `KeyIdentificationService` en el commit fijado y en `main` | una prueba de palabras que elige una respuesta fija, un modelo restringido a una lista calculada, enrutamiento de respaldo por palabras clave |
 | — | [Diario](journal/) | | |
 
 ## Requisitos previos

@@ -58,6 +58,7 @@ Three other courses on this site cover the background, and this one links to the
 | 9 | [Every interval, every key](09-every-interval-every-key/) | `IntervalSkill`, `ScaleInfoSkill`, `RelativeKeySkill`, `KeyNaming`, the domain's `DetermineQuality` | exhaustive tests, `\b` and lookahead in regular expressions, switch default arms |
 | 10 | [What the model is told to trust](10-what-the-model-is-told-to-trust/) | `ga_dsl_eval`, the closures `domain.diatonicChords`, `domain.transposeChord` and `domain.commonTones`, the SKILL.md files of the three Path B skills | calling a model's tool without the model, one letter per degree, reusing an oracle across lessons |
 | 11 | [The chords the key skill reads](11-the-chords-the-key-skill-reads/) | `KeyIdentificationService` at the pin and on `main`, `ga_key_identify`, `KeyIdentificationSkill`, the key-identification SKILL.md | reading symbols out of prose, a ranking and the selection built on it, calling private methods by reflection |
+| 12 | [What the progression skills answer](12-what-the-progression-skills-answer/) | `ProgressionMoodSkill`, `ProgressionCompletionSkill`, their SKILL.md files, `KeyIdentificationService` at the pin and on `main` | a word test that picks a fixed answer, a model restricted to a computed list, keyword fallback routing |
 | — | [Journal](journal/) | | |
 
 ## Prerequisites
