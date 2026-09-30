@@ -265,7 +265,7 @@ Las instrucciones que siguen piden al modelo que explique en qué tonalidad "(or
 
 ## Comunicado upstream
 
-- No se habían comunicado upstream cuando se escribió esta lección: los acordes de séptima que se salta el commit fijado y los símbolos que `main` todavía se salta, los sostenidos perdidos, los empates entre tonalidades con las mismas clases de altura, los acordes repetidos que descarta `ExtractChords`, las coincidencias principales agrupadas por recuento, las tonalidades relativas y el ejemplo de un solo candidato del SKILL.md. Están listados en el [diario](../journal/).
+- Se comunicaron después de escribir esta lección: los símbolos que `main` todavía se salta, los sostenidos perdidos y los acordes repetidos que descarta `ExtractChords`, en la issue de GA [#771](https://github.com/GuitarAlchemist/ga/issues/771); los empates entre tonalidades con las mismas clases de altura, las coincidencias principales agrupadas por recuento, las tonalidades relativas y el ejemplo de un solo candidato del SKILL.md, en la [#772](https://github.com/GuitarAlchemist/ga/issues/772). Desde la [#625](https://github.com/GuitarAlchemist/ga/pull/625), `main` lee los acordes de séptima que se salta el commit fijado. Todos están listados en el [diario](../journal/).
 
 ## Ejercicios
 
