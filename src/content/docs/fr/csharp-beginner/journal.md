@@ -13,7 +13,7 @@ sidebar:
 - [x] Leçon 2 : variables, types et saisie
 - [x] Leçon 3 : conditions et boucles
 - [x] Leçon 4 : méthodes, tableaux et listes
-- [ ] Leçon 5 : classes et objets
+- [x] Leçon 5 : classes et objets (en local ; CI sur trois OS à vérifier)
 
 ## 2026-09-14 — Le SDK et les applications basées sur des fichiers
 
@@ -41,7 +41,15 @@ sidebar:
 
 - Les exemples utilisent Guitar Alchemist comme petites données : l'accordage standard de [`Tuning.Default`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Instruments/Tuning.cs#L20-L23) au commit `a826864`, et douze noms de projets de `code/ladybugdb/data/ga/projects.csv`, extraits au commit `a26a7893`. Rien dans ces leçons n'a révélé de problème dans GA.
 
+## 2026-09-29 — Classes et objets
+
+- La leçon 5 présente la construction, l'identité des instances, les champs privés, les propriétés publiques, les méthodes et un compteur `static` partagé, puis propose de créer une classe `PracticeSession`. Les pages anglaise, française et espagnole contiennent les mêmes extraits C# testés et les mêmes sorties du compilateur.
+- Sous Windows, avec le SDK 10.0.112, `C:/Program Files/Git/bin/bash.exe check.sh` a réussi pour les exemples, les solutions et les extraits refusés du cours, y compris les nouveaux fichiers `l05_*`. Les deux nouveaux extraits refusés ont produit respectivement CS0122 et CS0200. Le `bash` par défaut de la machine était celui de WSL et ne trouvait pas le `dotnet` Windows : ce premier échec venait de l'environnement de test, pas du code.
+- Ce résultat local ne remplace pas une nouvelle CI sur trois OS et ne prouve pas que la leçon est publiée. Les leçons 6 à 12 restent au stade de plan.
+
 ## À vérifier
+
+- Les exemples et diagnostics de la nouvelle leçon 5 dans la CI Linux, Windows et macOS, après l'ouverture d'une PR.
 
 - Les commandes d'installation pour Linux et macOS : seul le `setup-dotnet` de la CI a tourné sur ces OS.
 - La démonstration du débogueur de la leçon 3 dans VS Code, Visual Studio et Rider, pour une application basée sur un fichier et pour un projet. VS Code 1.118 et Rider sont installés sur ma machine ; Visual Studio ne l'est pas.

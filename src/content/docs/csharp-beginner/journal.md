@@ -13,7 +13,7 @@ sidebar:
 - [x] Lesson 2: variables, types and input
 - [x] Lesson 3: conditions and loops
 - [x] Lesson 4: methods, arrays and lists
-- [ ] Lesson 5: classes and objects
+- [x] Lesson 5: classes and objects (local; cross-OS CI still to verify)
 
 ## 2026-09-14 — The SDK and file-based apps
 
@@ -41,7 +41,15 @@ sidebar:
 
 - The examples use Guitar Alchemist as small data: the standard tuning of [`Tuning.Default`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Instruments/Tuning.cs#L20-L23) at commit `a826864`, and twelve project names of `code/ladybugdb/data/ga/projects.csv`, extracted at commit `a26a7893`. Nothing in these lessons revealed a problem in GA.
 
+## 2026-09-29 — Classes and objects
+
+- Lesson 5 now teaches construction, instance identity, private fields, public properties, methods and a shared `static` count, then asks the reader to build a `PracticeSession` class. The English, French and Spanish pages share the same tested C# snippets and compiler output.
+- On Windows, SDK 10.0.112, `C:/Program Files/Git/bin/bash.exe check.sh` passed the course's examples, exercise solutions and rejected snippets, including the new `l05_*` files. The two new rejected snippets produced CS0122 and CS0200, respectively. The host's default `bash` was WSL and could not find the Windows `dotnet`; that first run failed because of the test environment, not the source.
+- This local result is not a new three-OS CI run and is not proof that the lesson is publicly deployed. Lessons 6–12 remain only in the outline.
+
 ## To verify
+
+- The new lesson 5 examples and diagnostics in CI on Linux, Windows and macOS, after a PR is opened.
 
 - The installation commands for Linux and macOS: only the CI's `setup-dotnet` ran on those OSes.
 - The debugger walkthrough of lesson 3 in VS Code, Visual Studio and Rider, for a file-based app and for a project. VS Code 1.118 and Rider are installed on my machine; Visual Studio isn't.
