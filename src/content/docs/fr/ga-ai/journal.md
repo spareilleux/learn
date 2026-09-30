@@ -263,6 +263,7 @@ La plupart des 22 différences du 2026-09-14 ont été corrigées en amont par [
 - Le programme atteint le skill comme à la leçon 12, par les intents de l'hôte du chatbot, et construit les outils avec l'`IGrothendieckService` de l'hôte. La closure est appelée au commit épinglé par `DslEvalMcpTools.EvalClosure` et sur `main` par `GaDslMain`, comme à la leçon 13. Les projets du cours et `fetch-ga.sh` sont inchangés.
 - Le programme relit les réponses du skill dans leur Markdown avec des expressions régulières : un changement de format l'arrêterait au lieu de changer un décompte. Les substituts de manuel, deux par qualité, sont un choix du cours, écrit dans `Lesson14.cs`.
 - Les solutions des exercices 1, 2 et 4 ont été résolues à la main ; le décompte de l'exercice 3 a été vérifié avec les expressions régulières de .NET, hors du programme du cours.
+- Exécution de CI [36788871032](https://github.com/spareilleux/learn/actions/runs/36788871032), pour le commit `b9aec40` : verte sur les trois systèmes, 2 min 11 s sous Linux, 1 min 24 s sous macOS, 7 min 16 s sous Windows, clone et compilation compris.
 
 ## À vérifier
 

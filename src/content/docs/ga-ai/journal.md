@@ -263,6 +263,7 @@ Most of the 22 differences of 2026-09-14 were fixed upstream by [#689](https://g
 - The skill is reached as in lesson 12, through the intents of the chatbot's host, and the tools are built with the host's `IGrothendieckService`. The closure is called at the pin through `DslEvalMcpTools.EvalClosure` and on `main` through `GaDslMain`, as in lesson 13. The course's projects and `fetch-ga.sh` are unchanged.
 - The program reads the skill's answers back from their Markdown with regular expressions: a change of format would stop it rather than change a count. The textbook substitutes, two per quality, are the course's choice, written in `Lesson14.cs`.
 - The solutions of exercises 1, 2 and 4 were worked by hand; exercise 3's count was checked with .NET's regular expressions, outside the course program.
+- CI run [36788871032](https://github.com/spareilleux/learn/actions/runs/36788871032), for commit `b9aec40`: green on the three systems, 2 min 11 s on Linux, 1 min 24 s on macOS, 7 min 16 s on Windows, clone and build included.
 
 ## To verify
 
