@@ -1,6 +1,7 @@
 # Machine learning course: the results of the Rust examples that don't depend on IX's random numbers, recomputed with
 # numpy and scikit-learn. Run from code/machine-learning-ix: python crosscheck/crosscheck.py
 import csv
+import math
 import warnings
 
 import numpy as np
@@ -413,3 +414,64 @@ trap_obs = np.array([0, 0])
 trap_gamma = log_alpha(trap_obs, trap_i, trap_t, trap_e) + log_beta(trap_obs, trap_t, trap_e)
 print(f"trap: posterior argmax {np.argmax(trap_gamma, axis=1).tolist()}, "
       f"Viterbi {viterbi(trap_obs, trap_i, trap_t, trap_e).tolist()}")
+
+# Lesson 11: the sizing formulas and the count-min binomial model recomputed, and the hand HyperLogLog replayed:
+# splitmix64 and the estimator are plain arithmetic, so numpy lands on the same estimates as Rust. IX's
+# structures hash with Rust's DefaultHasher, which this check does not replay.
+print("\n== lesson 11")
+bits11 = math.ceil(-10_000 * math.log(0.01) / math.log(2) ** 2)
+hashes11 = math.ceil(bits11 / 10_000 * math.log(2))
+theory11 = [(1 - math.exp(-hashes11 * n / bits11)) ** hashes11 for n in (10_000, 20_000)]
+print(f"Bloom sizing: m = {bits11}, k = {hashes11}; theory at 1x and 2x capacity {theory11[0]:.5f}, {theory11[1]:.5f}")
+
+
+def log_binomial_pmf(n, q, j):
+    return math.lgamma(n + 1) - math.lgamma(j + 1) - math.lgamma(n - j + 1) + j * math.log(q) + (n - j) * math.log1p(-q)
+
+
+row_tail = sum(math.exp(log_binomial_pmf(9_999, 0.01, j)) for j in range(101, 10_000))
+print(f"count-min binomial model: {row_tail ** 3:.4f}")
+
+U64 = np.uint64
+
+
+def splitmix64(x):
+    with np.errstate(over="ignore"):
+        z = x + U64(0x9E3779B97F4A7C15)
+        z = (z ^ (z >> U64(30))) * U64(0xBF58476D1CE4E5B9)
+        z = (z ^ (z >> U64(27))) * U64(0x94D049BB133111EB)
+    return z ^ (z >> U64(31))
+
+
+def bit_length(x):
+    # exact for every uint64, unlike a float log2
+    length = np.zeros(x.shape, dtype=np.int64)
+    x = x.copy()
+    for shift in (32, 16, 8, 4, 2, 1):
+        big = x >= (U64(1) << U64(shift))
+        length[big] += shift
+        x[big] >>= U64(shift)
+    return length + (x > 0)
+
+
+def hll_count(hashes, p=10):
+    m = 1 << p
+    registers = np.zeros(m, dtype=np.int64)
+    rank = 64 - p - bit_length(hashes >> U64(p)) + 1
+    np.maximum.at(registers, (hashes & U64(m - 1)).astype(np.int64), rank)
+    raw = 0.7213 / (1 + 1.079 / m) * m * m / np.sum(2.0 ** -registers)
+    zeros = int(np.sum(registers == 0))
+    return m * math.log(m / zeros) if raw <= 2.5 * m and zeros > 0 else raw
+
+
+def hll_errors(sets, per_set):
+    return np.array([hll_count(splitmix64(np.arange(t * per_set, (t + 1) * per_set, dtype=U64))) / per_set - 1
+                     for t in range(sets)])
+
+
+errors11 = hll_errors(100, 100_000)
+print(f"hand HyperLogLog, 100 sets of 100000: RMS {np.sqrt(np.mean(errors11 ** 2)):.4f}, "
+      f"mean {np.mean(errors11):.4f}, worst {np.max(np.abs(errors11)):.4f}")
+for n in (500, 2_000, 2_560, 3_000, 4_000, 6_000, 10_000):
+    errors11 = hll_errors(100, n)
+    print(f"  n = {n:>6}: mean {np.mean(errors11):>7.4f}, RMS {np.sqrt(np.mean(errors11 ** 2)):.4f}")

@@ -751,6 +751,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "ix-probabilistic"
+version = "0.1.0"
+source = "git+https://github.com/GuitarAlchemist/ix?rev=490c39533627d296bf9f8f050e6fafc14d7a20c2#490c39533627d296bf9f8f050e6fafc14d7a20c2"
+dependencies = [
+ "serde",
+ "thiserror",
+]
+
+[[package]]
 name = "ix-registry"
 version = "0.1.0"
 source = "git+https://github.com/GuitarAlchemist/ix?rev=490c39533627d296bf9f8f050e6fafc14d7a20c2#490c39533627d296bf9f8f050e6fafc14d7a20c2"
@@ -974,6 +983,7 @@ dependencies = [
  "ix-math",
  "ix-nn",
  "ix-optimize",
+ "ix-probabilistic",
  "ix-supervised",
  "ix-unsupervised",
  "ix-voicings",

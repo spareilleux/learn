@@ -29,6 +29,7 @@ pub mod net;
 pub mod optimize;
 pub mod reduce;
 pub mod sequence;
+pub mod sketch;
 
 use ndarray::{Array1, Array2};
 
