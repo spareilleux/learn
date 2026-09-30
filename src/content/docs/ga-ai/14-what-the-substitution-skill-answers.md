@@ -328,7 +328,7 @@ symbol=F#7, key=B, scale=major
 
 ## Reported upstream
 
-- Not reported upstream when this lesson was written: the list that depends only on the chord's quality, the distance of 1 between equal vectors, the labels that don't separate relative triads from triads a tritone apart, the minor v called a secondary dominant, the ignored relation and the symbols read from key names and articles, `CanHandle`'s stems, and the optional inputs `ga_dsl_eval` requires. The shared notes spelled with flats in a sharp key have the same cause as [#770](https://github.com/GuitarAlchemist/ga/issues/770), and B♭ read as B the same as [#757](https://github.com/GuitarAlchemist/ga/issues/757). All are listed in the [journal](../journal/).
+- Reported after this lesson was written: GA issue [#777](https://github.com/GuitarAlchemist/ga/issues/777) for the list that depends only on the chord's quality, the labels that don't separate relative triads from triads a tritone apart, the minor v called a secondary dominant, the ignored relation, the symbols read from key names and articles, and `CanHandle`'s stems; [#776](https://github.com/GuitarAlchemist/ga/issues/776) for the distance of 1 between equal vectors; [#778](https://github.com/GuitarAlchemist/ga/issues/778) for the optional inputs `ga_dsl_eval` requires, the closure's default key and the description of GaMcpServer's tool. The shared notes spelled with flats in a sharp key have the same cause as [#770](https://github.com/GuitarAlchemist/ga/issues/770), and B♭ read as B the same as [#757](https://github.com/GuitarAlchemist/ga/issues/757). All are listed in the [journal](../journal/).
 
 ## Exercises
 
