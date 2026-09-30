@@ -248,6 +248,45 @@ computer (median frame 16.7 ms) and a median of 16.7 ms on the phone
 emulation (95th percentile 33.7 ms, as before), with no exception. The lift
 was not driven in the browser. Real phones: to verify.
 
+The next revision, the same day, shelves each Streeling course, lets a
+walker vault a gallery's rail, and mends striped plinths.
+- Courses (scripts/course_library.gd, assets/courses.json): the site's
+  catalogue lists each page of a Streeling department as a course, with its
+  department, its number (AUD-001) and a short spine title; 74 courses in all,
+  37 of them Streeling's. The series keeps them in department order with a
+  brass divider between two departments; the card names the department after
+  the area and shows the course's number; the catalogue (L) gives each
+  department a subheading. A one-page course reads "1 page".
+- Vault (scripts/walk_physics.gd): at a gallery's rail, facing the hall (by
+  the keys held, or by the view when standing), Space vaults the handrail:
+  6.4 m/s up, so the feet rise 1.28 m over the walkway, clear of the
+  handrail's 1.07 m, and 2.4 m/s towards the hall. The body falls to the hall
+  and lands unhurt: a landing dips the eye as if from no faster than 7 m/s,
+  so a drop from the upper gallery (12.6 m) dips it 8 cm, as a plain jump's
+  landing does. Facing the shelves, Space is a plain jump.
+- Plinths (scripts/observatory.gd): the gilt fillet round each pier's base,
+  and the gilt band round each capital, had their tops flush with the
+  stone's; in the browser the two faces fought for the depth test and
+  striped the plinths gold and black (the author's capture). Both now stop
+  6 mm under the stone they wrap. Seen again in headless Chrome from four
+  views of a plinth: striped before, clean after.
+index.pck is now 21,696,984 bytes; index.html changes only that size, and
+index.wasm and index.js are unchanged.
+Native tests (Godot 4.6.1): 32 runs under Compatibility and Forward+ pass with
+no script error, the 28 before and two new tests in both renderers: the
+Streeling card (a book per course, 37; the card's department in English and
+French; the course's number; the short spine title; 18 department
+subheadings in the catalogue) and the vault (the rail still stops a walk;
+facing the shelves Space jumps; facing the hall it vaults, the feet 1.23 m
+over the walkway, and lands in the hall from either gallery with the eye
+dipping 8 cm, no fall counted).
+Web, headless Chrome on the local GPU, at 1600x900 and in an emulated
+iPhone: the start, the roof and the glass view hold 60 frames a second on the
+computer (median frame 16.7 ms) and a median of 16.7 ms on the phone
+emulation (95th percentile 33.8 ms), with no exception. The Streeling bay,
+captured with the site's catalogue next to the build, shows the 37 books.
+Real phones and the vault in a browser: to verify.
+
 Native Compatibility GPU time, RTX 5080, 1600x900, 240 frames per view: 0.44 to
 0.52 ms for the previous web scene, 0.64 to 1.44 ms with the detail pass; up to
 1.55 million primitives in the overview, against 0.46 million before. With the
@@ -262,12 +301,12 @@ main.tscn fb6245c960d3625ca05920116c58351d9dbeb255beae59175d89c06d47049564
 export_presets.cfg 1bd7171d93c9a378f1b328e945be2a7960478e89d34ae269f013ef83c306588f
 scripts/fly_camera.gd 2e5cdd15ca7bdcfa30ec129e354a309f3ff7296f6fbf54ac144984ed9aa9f8e7
 scripts/capture.gd 52ea2b5e40db2f1f4cdbd7658074ef60bd117e1f4110c1b8995590a4196748d0
-scripts/observatory.gd ee9bf4ecf62d9ac48a7fcddca8b6279e52eecba728aa6aba07339bd848d53e3e
-scripts/course_library.gd cb7c82e0893750c007b98611a84b4af2d7715ef6f1edb33e5fc5a3607983d9dd
+scripts/observatory.gd 13759e420110a72a1b0cc97d1a31adc237e318a9aeac0d07c5b50f3617ef59a5
+scripts/course_library.gd ae13939d53454cf8bbcefbb0c2b5fae0ce3fb138283730564f555310ed9134a9
 scripts/steel_cube.gd f28e71fffcd151663bc9a98b3c135cc7b805490e8298d3cf01029455c973f94c
 scripts/seldon_statue.gd 4e41b282aa2cc4de794296586b65f5f4d39688312673ddc46226fd3906cf4b27
 scripts/touch_controls.gd 4b94ea15cb329d6409385799a3ff307fd35740b68d09e0f7f8ed2e2c010ae744
-scripts/walk_physics.gd 181e4f89b74656b0ffb7091642450b27a509d2d242b407bed9a55df3d480129a
+scripts/walk_physics.gd c294aba30f816eed8fb92cc4c4276b302658fb821bf1db731d55ececb4d0d4cd
 scripts/view_fit.gd 04968e0b9c220c12490b258677a7331f07671b37d2951581a03868d8c992c65e
 scripts/view_move.gd 9a39222118edb283e594c21faf2963d767e42449b01d11fac29188b9b1b65aca
 scripts/multiverse.gd 0de3cece747a87c742ba6b26c8fac27a6a7dcdd18286f30957899becb2dfb34d
@@ -290,7 +329,7 @@ assets/stained_glass.gdshader 1366183601743cfb42791f5efd38e4b26e6c6d10eb8ce1ac4e
 assets/floor_paving.gdshader 23187f024d276b897635ee0cc3e543c5852c4a9b5175cbe56ec59f5a998dc0e7
 assets/statue_marble.gdshader ec3f14f662487f3dae14a398fe91ea7183d88214bd2bf266359da89d79b94452
 assets/world_glimpse.gdshader a06fc85ca086fc3e4d9297039be0b6549132bbffafeaedfbda0ffea3eb918d6d
-assets/courses.json d7c007844c88794f3c5abe32e08f54a80659b6d85bea1f6cf5af3945f71f30f6
+assets/courses.json 407817e268f2c0d37ce28ae0d873f08b87a514479d6a73545b75d1dfbb71823b
 scripts/extra_views.gd cd6f1a22e9cca5015611121a271aa145a6100e843d200e7e57eebf85d6610a56
 scripts/upperside.gd d18d9ce9ee8d15201d5f21fba51afa957d18e9a70b2df8b49cad10a555f8cd22
 assets/night_sky.gdshader 67421b4338debb80d8b6cec071bb37001d9d5493d240be53c0a107ad17cb5cec
@@ -302,7 +341,7 @@ scripts/lift.gd dab60e28fef23f72ca3f8e8a6cc60ffdcdb90b41b97cb9e3d258fcf723087a50
 assets/sky_core_cap.png a110fdfa1b79cc41eec119265aeb89bc211d0b8e0eb6c759b45c25496f2daabe
 
 SHA-256 output files:
-index.pck 90d6ef38ef963edbc479768e499bb3516cb6ec61819931381069cbea61e4988d
+index.pck f9a21c56e63c73ea8488cd486adc38f93371d894b60badbbc0bf182c12eb909d
 index.wasm 99962b29677e42f3ba0258bd90fdc52ad90295954c4473e816ad02cfe5ff1d4f
 index.js e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981
 
