@@ -242,7 +242,7 @@ KeyIdentificationService.IsChordDiatonic("G# minor", ...) on main: G#m yes, D#7 
 
 ## Reported upstream
 
-- Not reported upstream when this lesson was written: the numerals missing for a minor key's vii° and for chords borrowed from the parallel minor, the key moved by borrowed chords, and the confidence that counts a half-diminished ii as foreign. The keys named by their enharmonic spelling on `main` have the same cause as [#772](https://github.com/GuitarAlchemist/ga/issues/772). The pin's key and numerals read from the roots alone were fixed on `main` by [#625](https://github.com/GuitarAlchemist/ga/pull/625) and `6baf32e`. All are listed in the [journal](../journal/).
+- Reported after this lesson was written, as GA issue [#775](https://github.com/GuitarAlchemist/ga/issues/775): the numerals missing for a minor key's vii° and for chords borrowed from the parallel minor, the key moved by borrowed chords, and the confidence that counts a half-diminished ii as foreign. The keys named by their enharmonic spelling on `main` have the same cause as [#772](https://github.com/GuitarAlchemist/ga/issues/772). The pin's key and numerals read from the roots alone were fixed on `main` by [#625](https://github.com/GuitarAlchemist/ga/pull/625) and `6baf32e`. All are listed in the [journal](../journal/).
 
 ## Exercises
 

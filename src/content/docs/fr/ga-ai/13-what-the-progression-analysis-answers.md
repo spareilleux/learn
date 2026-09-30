@@ -242,7 +242,7 @@ KeyIdentificationService.IsChordDiatonic("G# minor", ...) on main: G#m yes, D#7 
 
 ## Signalé en amont
 
-- Non signalés en amont au moment de l'écriture de cette leçon : les chiffres romains absents pour le vii° d'une tonalité mineure et pour les accords empruntés au mineur homonyme, la tonalité déplacée par des accords d'emprunt, et la confiance qui compte un ii demi-diminué comme étranger à la tonalité. Les tonalités nommées par leur orthographe enharmonique sur `main` ont la même cause que [#772](https://github.com/GuitarAlchemist/ga/issues/772). La tonalité et les chiffres romains que le commit épinglé tire des seules fondamentales sont corrigés sur `main` par [#625](https://github.com/GuitarAlchemist/ga/pull/625) et `6baf32e`. Tous sont listés dans le [journal](../journal/).
+- Signalés après l'écriture de cette leçon, dans le ticket de GA [#775](https://github.com/GuitarAlchemist/ga/issues/775) : les chiffres romains absents pour le vii° d'une tonalité mineure et pour les accords empruntés au mineur homonyme, la tonalité déplacée par des accords d'emprunt, et la confiance qui compte un ii demi-diminué comme étranger à la tonalité. Les tonalités nommées par leur orthographe enharmonique sur `main` ont la même cause que [#772](https://github.com/GuitarAlchemist/ga/issues/772). La tonalité et les chiffres romains que le commit épinglé tire des seules fondamentales sont corrigés sur `main` par [#625](https://github.com/GuitarAlchemist/ga/pull/625) et `6baf32e`. Tous sont listés dans le [journal](../journal/).
 
 ## Exercices
 

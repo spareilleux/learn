@@ -242,7 +242,7 @@ KeyIdentificationService.IsChordDiatonic("G# minor", ...) on main: G#m yes, D#7 
 
 ## Comunicado upstream
 
-- Sin comunicar upstream cuando se escribió esta lección: los números romanos que faltan para el vii° de una tonalidad menor y para los acordes prestados de la menor homónima, la tonalidad desplazada por los acordes prestados y la confianza que cuenta un ii semidisminuido como ajeno a la tonalidad. Las tonalidades nombradas por su grafía enarmónica en `main` tienen la misma causa que la [#772](https://github.com/GuitarAlchemist/ga/issues/772). La tonalidad y los números romanos que el commit fijado leía solo a partir de las fundamentales están corregidos en `main` por la [#625](https://github.com/GuitarAlchemist/ga/pull/625) y `6baf32e`. Todos están listados en el [diario](../journal/).
+- Se comunicaron después de escribir esta lección, en la issue de GA [#775](https://github.com/GuitarAlchemist/ga/issues/775): los números romanos que faltan para el vii° de una tonalidad menor y para los acordes prestados de la menor homónima, la tonalidad desplazada por los acordes prestados y la confianza que cuenta un ii semidisminuido como ajeno a la tonalidad. Las tonalidades nombradas por su grafía enarmónica en `main` tienen la misma causa que la [#772](https://github.com/GuitarAlchemist/ga/issues/772). La tonalidad y los números romanos que el commit fijado leía solo a partir de las fundamentales están corregidos en `main` por la [#625](https://github.com/GuitarAlchemist/ga/pull/625) y `6baf32e`. Todos están listados en el [diario](../journal/).
 
 ## Ejercicios
 
