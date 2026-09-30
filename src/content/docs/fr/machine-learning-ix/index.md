@@ -84,7 +84,7 @@ Les leçons 1 à 9 sont écrites. Le reste est le plan, une leçon par famille d
 | 9 | [Les autres réducteurs : MDS, ACP à noyau, NMF, LDA, t-SNE](09-other-reducers/) | `ix-unsupervised` | — |
 | 10 | [Séquences : chaînes de Markov, modèles de Markov cachés et Viterbi](10-sequences/) | `ix-graph` | — |
 | 11 | [Compter sans compter : filtres de Bloom, HyperLogLog, count-min, coucou](11-probabilistic/) | `ix-probabilistic` | — |
-| 12 | Différentiation automatique : le ruban de Wengert | `ix-autograd` | — |
+| 12 | [Différentiation automatique : le ruban de Wengert](12-autodiff/) | `ix-autograd` | — |
 | 13 | Attention, normalisation de couche et un bloc transformeur | `ix-nn` | — |
 | 14 | Apprentissage par renforcement : bandits et Q-learning | `ix-rl` | — |
 | 15 | Signaux : transformée de Fourier, ondelettes, filtres et Kalman | `ix-signal` | — |

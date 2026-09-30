@@ -475,3 +475,54 @@ print(f"hand HyperLogLog, 100 sets of 100000: RMS {np.sqrt(np.mean(errors11 ** 2
 for n in (500, 2_000, 2_560, 3_000, 4_000, 6_000, 10_000):
     errors11 = hll_errors(100, n)
     print(f"  n = {n:>6}: mean {np.mean(errors11):>7.4f}, RMS {np.sqrt(np.mean(errors11 ** 2)):.4f}")
+
+# Lesson 12: IX's linear regression example rebuilt, its least-squares fit and conditioning, the closed-form
+# gradient at w = 0, the example's Adam loop, and the gradient of sum c_k |FFT(x)_k| from numpy's FFT.
+print("\n== lesson 12")
+x12 = np.array([[((((i * 3 + j) * 1103515245 + 12345) >> 16) & 0x7FFF) / 32767.0 * 2 - 1 for j in range(3)]
+                for i in range(20)])
+noise12 = np.array([((((i * 7919 + 31) >> 16) & 0x7FFF) / 32767.0 - 0.5) * 0.02 for i in range(20)])
+y12 = np.array([0.1 + sum(x12[i, j] * wj for j, wj in enumerate((0.5, -0.3, 0.8))) + noise12[i] for i in range(20)])
+gap12 = x12[:, 2] - x12[:, 0]
+print(f"x[i, 2] - x[i, 0]: min {gap12.min():.6f}, max {gap12.max():.6f}")
+design12 = np.hstack([x12, np.ones((20, 1))])
+sv12 = np.linalg.svd(design12, compute_uv=False)
+print(f"singular values of [x 1]: {np.array2string(sv12, precision=6)}, condition number {sv12[0] / sv12[-1]:.0f}")
+theta12 = np.linalg.lstsq(design12, y12, rcond=None)[0]
+mse12 = np.mean((design12 @ theta12 - y12) ** 2)
+print(f"least squares: w {np.array2string(theta12[:3], precision=6)}, b {theta12[3]:.6f}, "
+      f"w0 + w2 = {theta12[0] + theta12[2]:.6f}, mean squared error below 1e-12: {mse12 < 1e-12}")
+r12 = -y12
+print(f"at w = 0, b = 0: loss {np.mean(r12 ** 2):.6f}, dL/dw {np.array2string(2 / 20 * x12.T @ r12, precision=6)}, "
+      f"dL/db {2 / 20 * r12.sum():.6f}")
+
+
+def adam12(steps=200, rate=0.05, b1=0.9, b2=0.999, eps=1e-8):
+    theta, m, v, first = np.zeros(4), np.zeros(4), np.zeros(4), None
+    for step in range(1, steps + 1):
+        r = design12 @ theta - y12
+        if first is None and np.mean(r ** 2) < 0.01:
+            first = step
+        g = 2 / 20 * design12.T @ r
+        m = b1 * m + (1 - b1) * g
+        v = b2 * v + (1 - b2) * g * g
+        theta = theta - rate * (m / (1 - b1 ** step)) / (np.sqrt(v / (1 - b2 ** step)) + eps)
+    return theta, first
+
+
+theta12, first12 = adam12()
+print(f"Adam, 200 steps: w {np.array2string(theta12[:3], precision=6)}, b {theta12[3]:.6f}, "
+      f"loss below 0.01 first at step {first12}")
+u12 = (splitmix64(np.arange(2027, 2027 + 128, dtype=U64)) >> U64(11)).astype(np.float64) / 2.0 ** 53
+sig12, c12 = u12[:64] * 2 - 1, u12[64:]
+spec12 = np.fft.fft(sig12)
+grad12 = 64 * np.real(np.fft.ifft(c12 * spec12 / np.abs(spec12)))
+
+
+def fft_loss12(s):
+    return np.sum(c12 * np.abs(np.fft.fft(s)))
+
+
+fd12 = np.array([(fft_loss12(sig12 + 1e-5 * e) - fft_loss12(sig12 - 1e-5 * e)) / 2e-5 for e in np.eye(64)])
+print(f"FFT loss, numpy: dL/dx first four {np.array2string(grad12[:4], precision=6)}, "
+      f"central differences within 1e-6: {np.max(np.abs(fd12 - grad12)) < 1e-6}")
