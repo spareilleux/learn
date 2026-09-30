@@ -183,4 +183,9 @@ unit square at 1.5, Python sets: built to edges [1, 3], to triangles [1, 0, 1], 
 hand-made, scipy: bottleneck IX 10.0000, exact 1.0000; W1 IX 16.0000, exact 2.0000; W2 IX 11.3137, exact 1.4142; (0, inf) against nothing: IX 0.0000, exact inf
 random diagrams, scipy: bottleneck, IX at least exact 1000, above 999; W1, IX at least exact 1000, above 982
 stability, Python sets and scipy: exact bottleneck at most 0.02 in 50 of 50, IX's above 0.02 in 24
+
+== lesson 20
+kNN shader loop, numpy float32: P(wrong) 0.1253; queries that differ 135, k = 1 0, first 256 references 0; neighbours recovered 9855 of 10000
+thresholds, numpy float32: cosine 1.000000, batch 0.000000, cosine of zero 0.000000
+limits: largest n with 4 n^2 <= 128 MiB 5792; 10000 x 10000 x 4 = 400000000 bytes
 exit 0

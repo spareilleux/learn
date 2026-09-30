@@ -1,0 +1,34 @@
+== the adapter
+  NVIDIA GeForce RTX 5080 (Vulkan); GpuContext::new() took 532 ms
+
+== P1 on the GPU
+  dot_product_gpu, in a process of its own: returns: no; message starts with "wgpu error": yes; contains naga's "name `shared` is a reserved keyword": yes
+  cosine_similarity_gpu against cosine_similarity_cpu, 1000 components: gap 3.7e-9
+
+== P5 on the GPU, each call in a process of its own
+  similarity_matrix, 5792 vectors of dimension 8: returned
+  similarity_matrix, 5793 vectors of dimension 8: panics; "wgpu error": yes; last line: Buffer binding 2 range 134235396 exceeds `max_*_buffer_binding_size` limit 134217728
+  similarity_matrix, 10000 vectors of dimension 768: panics; "wgpu error": yes; last line: Buffer size 400000000 is greater than the maximum buffer size (268435456)
+  batch_knn_gpu, 65535 queries: returned
+  batch_knn_gpu, 65536 queries: panics; "wgpu error": yes; last line: Each current dispatch group size dimension ([65536, 1, 1]) must be less or equal to 65535
+
+== P6, batch_knn_gpu on P2's data, k = 10
+  queries whose 10 indices equal the port's, in order: 1000 of 1000; largest distance gap 1.2e-7
+  queries whose 10 nearest differ from batch_knn_cpu's: GPU 135, port 135
+  the first 256 of the 1000 references: equal to batch_knn_cpu's, in order, for 1000 of 1000
+
+== P7, the GPU's sums against the CPU's
+  matmul 256 x 256 x 256: elements that differ 53438 of 65536, largest gap 5.7e-6
+  pairwise distances of the 1000 references: elements that differ 264496 of 1000000, largest gap 2.4e-7, zero diagonal: yes
+
+== P8, matmul_cpu against matmul_gpu, median of 5 calls after a warm-up
+  10 x 10 x 10: cpu 0.001 ms, gpu 0.490 ms, gpu faster by 0.0x
+  64 x 64 x 64: cpu 0.086 ms, gpu 0.448 ms, gpu faster by 0.2x
+  256 x 768 x 1024: cpu 179.753 ms, gpu 2.908 ms, gpu faster by 61.8x
+  1024 x 1024 x 1024: cpu 2133.655 ms, gpu 8.722 ms, gpu faster by 244.6x
+
+== exploratory
+  P7's loops on the CPU with fused multiply-adds: matmul elements that differ from the GPU 0 of 65536; distances 168810 of 1000000
+  P3's vectors with a context: similarity_matrix(Some(&ctx), [a, b])[0][1] 0.000000; similarity_matrix(Some(&ctx), [z, b])[0][0] 0.000000
+  GpuContext::new() three more times in this process: median 274 ms
+exit 0
