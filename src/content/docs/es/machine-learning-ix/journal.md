@@ -339,7 +339,7 @@ Puntuada frente a las nueve predicciones de la entrada anterior, registrada sola
 - **Exploratorio: el escalado 1/√d_k.** En 2000 consultas de 16 claves, var(q·k) vale 4,0, 15,7, 63,8 y 259,7 con d = 4, 16, 64 y 256, y el mayor peso vale de media 0,413, 0,679, 0,847 y 0,925 sin escalar, y 0,226, 0,238, 0,247 y 0,247 escalado.
 - **La comprobación cruzada con numpy 2.4.2** reproduce la atención, la normalización del primer token [0,136528; 0,65296; −2,171448; 0,100933; 0,573105; 0,707922] y toda la tabla de escalado con los dígitos impresos.
 
-El CI en tres sistemas para la lección 13 sigue pendiente.
+La primera ejecución del CI, [36735996940](https://github.com/spareilleux/learn/actions/runs/36735996940) sobre `f6882f5`, pasó en Windows, Linux y macOS: cada salida de la lección 13 coincide byte a byte con `expected/`, y la comprobación cruzada en Linux coincide con `expected/crosscheck.txt`.
 
 ## Por verificar
 
@@ -362,5 +362,4 @@ El CI en tres sistemas para la lección 13 sigue pendiente.
 - El backward de la FFT de IX en una frecuencia cuya magnitud es cero en aritmética exacta: el umbral de 10^-15 es absoluto, y ese cero puede redondearse a uno u otro lado. La lección 12 solo probó señales sin una frecuencia así.
 - La comprobación cruzada con JAX que `ix-autograd` pide antes de activar `fft-autograd` por defecto; la lección 12 comparó con diferencias finitas y numpy.
 - La afirmación del ejemplo de que un algoritmo genético necesita de 5000 a 10 000 evaluaciones en este objetivo: la lección 17 puede ejecutar `ix-evolution` sobre él.
-- La lección 13 en CI Linux y macOS: sus salidas pasan por `exp` y `tanh`, e imprimen las diferencias como cotas y los valores con tres o seis decimales, a donde los últimos bits de la plataforma no deberían llegar.
 - Si `TransformerClassifier` llega a aprender sus pesos de atención cuando su paso es batch × seq veces menor que el de su cabeza: la lección 13 midió un paso, no un entrenamiento.
