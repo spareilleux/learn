@@ -194,6 +194,7 @@ Most of the 22 differences of 2026-09-14 were fixed upstream by [#689](https://g
 - `DomainClosures.fs` has changed on GA's `main` at `53b7253`, so the code the lesson calls was compared function by function between `a826864` and `main`: the two arrays of names, `preferFlat`, `transposeChord`, `diatonicChords`, `conventionalKeyName` and the line where `commonTones` names a note are identical. `ChordParser.fs` has changed there for forms the lesson doesn't send.
 - `Lesson9.cs`'s textbook helpers became `internal` so that lesson 10 reuses them; `l9`'s output is unchanged.
 - The solutions of the exercises were worked by hand from the code.
+- CI run [36668901083](https://github.com/spareilleux/learn/actions/runs/36668901083), for commit `6f91f88`: green on the three systems, 2 min 01 s on Linux, 2 min 19 s on macOS, 6 min 29 s on Windows, clone and build included.
 
 ## To verify
 
