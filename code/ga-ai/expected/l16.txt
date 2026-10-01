@@ -1,0 +1,79 @@
+# l16
+
+== The skill's example prompts: CanHandle, and the chord TypedMusicalQueryExtractor reads
+prompt                           CanHandle  chord read             also read
+voicings for Cmaj7               yes        Cmaj7: C E G B         tags for
+show me Dm7 voicings             yes        Dm7: C D F A
+shapes for F major               yes        F: C F A               mode major, tags for
+fingerings for G7                yes        G7: D F G B            tags for
+Cmaj9 voicings                   yes        Cmaj9: C D E G B
+drop2 voicings of Cmaj7          yes        Cmaj7: C E G B         tags drop2
+shell voicing for Dm7            yes        Dm7: C D F A           tags shell for
+rootless A7 voicings             yes        A7: C# E G A           tags rootless
+quartal voicings in C            no         C: C E G               tags quartal
+all C major voicings on guitar   yes        C: C E G               mode major, tags all, instrument guitar
+open chord shape for E minor     yes        E: E G# B              mode minor, tags open for
+barre voicings for Bb major      yes        Bb: D F A#             mode major, tags for
+
+== Other phrasings
+prompt                           CanHandle  chord read             also read
+voicings for C                   no         C: C E G               tags for
+G chord shapes                   no         G: D G B
+how do I play a D chord          no         D: D F# A
+voicings for A minor             yes        A: C# E A              mode minor, tags for
+voicings for Am                  yes        Am: C E A              tags for
+voicings for am                  no         no chord               tags for
+Bb voicings please               no         Bb: D F A#
+voicings for F#m7b5              yes        F#m7b5: C E F# A       tags for
+voicings for C7(b9)              yes        C7(b9): C C# E G A#    tags for
+voicings for C/G                 no         C/G: C E G             tags for
+
+== The 51 symbols of lesson 15, asked as "voicings for C…"
+read as a textbook spells them: 47 of 51
+  Cdom7: no chord, a textbook's C E G A#
+  Cma7: no chord, a textbook's C E G B
+  C-7: C-7: C E G A#, a textbook's C D# G A#
+  C7+5: no chord, a textbook's C E G# A#
+symbols ChordPitchClasses and ChordVocabulary read as different chords: 5: Cdom7 Cma7 CΔ7 C-7 C7+5
+
+== The 31 spelled-out qualities, asked as "voicings for C …"
+CanHandle accepts 13 of 31; read as a textbook spells them: 1
+  read as C: C E G: 31, major, minor, diminished, augmented, power, dominant, …
+
+== The example prompts' answers, at the pin: what each voicing plays
+prompt                           voicings   exact  more   part   other
+voicings for Cmaj7               2          2      0      0      0
+show me Dm7 voicings             1          0      0      0      1
+shapes for F major               8          8      0      0      0
+fingerings for G7                8          1      0      7      0
+Cmaj9 voicings                   8          0      0      8      0
+drop2 voicings of Cmaj7          2          2      0      0      0
+shell voicing for Dm7            1          0      0      0      1
+rootless A7 voicings             5          0      0      5      0
+quartal voicings in C            8          0      0      0      8
+all C major voicings on guitar   8          2      0      3      3
+open chord shape for E minor     8          0      0      0      8
+barre voicings for Bb major      8          6      0      2      0
+
+== A grid of 144 chords, at the pin: "voicings for <chord>" on 12 roots
+For each quality, the roots whose answer has only voicings that play the chord, some, or none;
+the corpus holds every chord of the grid. Then what the voicings that aren't the chord play.
+quality  all    some   none   the other voicings play
+major    2      9      1      other 20, part 15
+m        1      9      2      other 20, part 8
+7        0      5      7      other 7, part 38
+maj7     1      8      3      more 2, other 9, part 26
+m7       0      6      6      other 12, part 26
+dim      3      8      1      more 11, other 10, part 1
+aug      8      4      0      more 1, other 2, part 1
+sus4     2      5      5      more 2, other 12, part 34
+m7b5     0      6      6      other 5, part 32
+dim7     6      1      5      other 1, part 46
+6        0      2      10     more 1, other 1, part 84
+9        1      1      10     other 7, part 70
+voicings returned: 841; exact 337, more 17, part 381, other 106
+
+== "show me Dm7 voicings": the answer, and what each voicing plays (asked: C D F A)
+Found 1 voicing:
+name             diagram          score    plays
+Bm7(shell)/D     x-0-2-0-x-x      0.342    D A B            other
