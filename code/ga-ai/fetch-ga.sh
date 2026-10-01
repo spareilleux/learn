@@ -13,6 +13,9 @@ KEYS_FILE=Common/GA.Domain.Services/Tonal/KeyIdentificationService.cs
 # Lesson 13 also compiles GA's DSL closures at the same commit, where domain.analyzeProgression
 # takes its key from that service; the file is unchanged on main since
 DSL_FILE=Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs
+# Lesson 16 also builds GA's voicing pipeline as it is on main, from the generator to the chord
+# voicings skill, in a second clone: most of the voicing files changed after the pin
+MAIN_SHA=f4f5b4af881f3970c6fdc25fa61a30ef9d23458a
 # Lesson 8 reads GA's prompt corpus, outside the sparse checkout, at the pinned commit
 CORPUS=Tests/Apps/GaChatbot.Api.Tests/Corpus/prompts.yaml
 cd "$(dirname "$0")"
@@ -73,3 +76,20 @@ if [ ! -s .ga-files/prompts.yaml ]; then
   mv .ga-files/prompts.yaml.tmp .ga-files/prompts.yaml
 fi
 echo "file $CORPUS"
+if [ "$(git -C .ga-main rev-parse HEAD 2>/dev/null || true)" = "$MAIN_SHA" ]; then
+  echo "main $MAIN_SHA already here"
+else
+  rm -rf .ga-main
+  git clone --quiet --filter=blob:none --no-checkout https://github.com/GuitarAlchemist/ga.git .ga-main
+  git -C .ga-main config core.longpaths true
+  # GA.Business.ML and its project references, and the CLI that writes the OPTIC-K index
+  MSYS_NO_PATHCONV=1 git -C .ga-main sparse-checkout set --no-cone \
+    /Directory.Build.props /Directory.Build.targets \
+    /Common/GA.Core/ /Common/GA.Domain.Core/ /Common/GA.Domain.Repositories/ /Common/GA.Domain.Services/ \
+    /Common/GA.Business.Config/ /Common/GA.Business.Core/ /Common/GA.Business.Assets/ /Common/GA.Business.DSL/ \
+    /Common/GA.Business.ML/ '!/Common/GA.Business.ML/Documentation/Papers/' \
+    /Common/GA.Providers.Anthropic/ /GA.Data.MongoDB/ /GuitarAlchemist.Registry/ \
+    '/Demos/Music Theory/FretboardVoicingsCLI/'
+  git -C .ga-main -c advice.detachedHead=false checkout --quiet "$MAIN_SHA"
+  echo "main $MAIN_SHA"
+fi

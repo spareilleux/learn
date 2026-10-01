@@ -18,6 +18,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <!-- Lesson 16's questions, compiled here and into GaMain -->
+    <Compile Include="../Shared/*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <!-- Where WebApplicationFactory finds the chatbot host's content root -->
     <AssemblyAttribute Include="Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute">
       <_Parameter1>GaChatbot.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</_Parameter1>

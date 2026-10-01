@@ -62,6 +62,7 @@ Three other courses on this site cover the background, and this one links to the
 | 13 | [What the progression analysis answers](13-what-the-progression-analysis-answers/) | the closure `domain.analyzeProgression` at the pin and on `main`, `ga_dsl_list_closures`, the progression-analysis draft, `KeyIdentificationService.IsChordDiatonic` | compiling another commit's F# file against the pinned project, a draft's examples as a test, Roman numerals from the scale and from the chord |
 | 14 | [What the substitution skill answers](14-what-the-substitution-skill-answers/) | `ChordSubstitutionSkill`, `ga_chord_substitutions` and `ga_chord_compare`, `GrothendieckService.FindNearby`, `GrothendieckDelta`, the closure `domain.chordSubstitutions` | a distance under which a whole set class ties, a tie broken by storage order, optional inputs a tool requires |
 | 15 | [The notes of a chord](15-the-notes-of-a-chord/) | `ChordInfoSkill`, `ChordVocabulary`, `ChordSpelling`, `ga_chord_info` and the chord-info SKILL.md | the leftmost match of a regular expression, `ToLowerInvariant` beyond ASCII, a round trip as a test |
+| 16 | [The voicings of a chord](16-the-voicings-of-a-chord/) | `ChordVoicingsSkill`, `TypedMusicalQueryExtractor`, `ChordPitchClasses`, `OptickSearchStrategy` and ADR-0002, at the pin and on `main` | a second clone of a dependency at another commit, checking an answer by playing it, a filter on names, a filter dropped without a word in the answer |
 | — | [Journal](journal/) | | |
 
 ## Prerequisites

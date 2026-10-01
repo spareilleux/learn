@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- GA's voicing pipeline on main, from the generator to the chord voicings skill, built from the
+       second clone that ../fetch-ga.sh checks out at MAIN_SHA. It runs as its own program because
+       its GA assemblies have the same names as the pinned ones GaAi loads -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <!-- GA.Business.ML marks its whole assembly [Experimental("SKEXP0001")] -->
+    <NoWarn>$(NoWarn);SKEXP0001</NoWarn>
+    <GaRoot>$(MSBuildThisFileDirectory)../.ga-main/</GaRoot>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="../GaAi/Report.cs" />
+    <Compile Include="../Shared/*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(GaRoot)Common/GA.Business.ML/GA.Business.ML.csproj" />
+    <ProjectReference Include="$(GaRoot)Demos/Music Theory/FretboardVoicingsCLI/FretboardVoicingsCLI.csproj" />
+  </ItemGroup>
+
+</Project>
