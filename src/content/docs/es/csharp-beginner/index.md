@@ -47,7 +47,7 @@ Los ejemplos usan datos pequeños y reales cuando ayudan: las notas de una guita
 | 4 | [Métodos, arrays y listas](04-methods-arrays-lists/) | parámetros, valores de retorno, arrays, `List<T>`, primeros pasos con `null` |
 | 5 | [Clases y objetos](05-classes-and-objects/) | campos, propiedades, constructores, métodos, `static` |
 | 6 | [Records, structs y enums](06-records-structs-enums/) | tipos de valor y de referencia, igualdad, `enum` |
-| 7 | Interfaces y herencia | `interface`, `abstract`, `override`, polimorfismo |
+| 7 | [Interfaces y herencia](07-interfaces-and-inheritance/) | `interface`, `abstract`, `override`, polimorfismo |
 | 8 | Excepciones y seguridad frente a null | `try`/`catch`/`finally`, `throw`, tipos de referencia que aceptan valores null |
 | 9 | Colecciones y LINQ | `Dictionary<TKey, TValue>`, `HashSet<T>`, `Where`, `Select`, `OrderBy` |
 | 10 | Archivos y texto | `File`, `Path`, leer un archivo CSV de los proyectos de Guitar Alchemist |
@@ -55,7 +55,7 @@ Los ejemplos usan datos pequeños y reales cuando ayudan: las notas de una guita
 | 12 | Un pequeño proyecto | una solución con una biblioteca, una app de consola y pruebas, un paquete NuGet, un primer vistazo a `async` |
 | — | [Diario](journal/) | |
 
-Las lecciones 7 a 12 están planificadas y aún no se han escrito.
+Las lecciones 8 a 12 están planificadas y aún no se han escrito.
 
 ## Requisitos previos
 

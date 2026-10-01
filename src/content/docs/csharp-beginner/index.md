@@ -47,7 +47,7 @@ The examples use small, real data where it helps: the notes of a guitar, the tun
 | 4 | [Methods, arrays and lists](04-methods-arrays-lists/) | parameters, return values, arrays, `List<T>`, first steps with `null` |
 | 5 | [Classes and objects](05-classes-and-objects/) | fields, properties, constructors, methods, `static` |
 | 6 | [Records, structs and enums](06-records-structs-enums/) | value and reference types, equality, `enum` |
-| 7 | Interfaces and inheritance | `interface`, `abstract`, `override`, polymorphism |
+| 7 | [Interfaces and inheritance](07-interfaces-and-inheritance/) | `interface`, `abstract`, `override`, polymorphism |
 | 8 | Exceptions and null safety | `try`/`catch`/`finally`, `throw`, nullable reference types |
 | 9 | Collections and LINQ | `Dictionary<TKey, TValue>`, `HashSet<T>`, `Where`, `Select`, `OrderBy` |
 | 10 | Files and text | `File`, `Path`, reading a CSV file of Guitar Alchemist's projects |
@@ -55,7 +55,7 @@ The examples use small, real data where it helps: the notes of a guitar, the tun
 | 12 | A small project | a solution with a library, a console app and tests, a NuGet package, a first look at `async` |
 | — | [Journal](journal/) | |
 
-Lessons 7 to 12 are planned and not written yet.
+Lessons 8 to 12 are planned and not written yet.
 
 ## Prerequisites
 
