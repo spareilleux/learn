@@ -76,6 +76,20 @@ Sixteen things this batch found, each shown by compiled code in the course unles
 15. **`hf-hub`**: Candle 0.11.0's workspace asks for `hf-hub` 0.5.0 while crates.io's latest is 1.0.0. For lesson 6 (*to verify* what changed).
 16. **The Candle book installs from Git**: `cargo add --git https://github.com/huggingface/candle.git candle-core` follows `main`, so a book example can depend on code that isn't released ([lesson 1](../01-why-candle/)).
 
+## 2026-09-30 — Lesson 5: predictions before the first run
+
+Written from `candle-nn` 0.11.0's sources, before the lesson's code existed; the results entry will quote each one against what the programs print. The data set is Iris, from the UCI Machine Learning Repository (Fisher, 1936, [doi:10.24432/C56C76](https://doi.org/10.24432/C56C76), CC BY 4.0), in its corrected version `bezdekIris.data`; the archive also holds `iris.data`, whose rows 35 and 38 differ from Fisher's paper.
+
+1. **Initialization.** [`linear`](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-nn/src/linear.rs#L84-L94) draws its weights from a normal distribution of standard deviation √(2 / in), Kaiming with the ReLU gain ([`init.rs`](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-nn/src/init.rs#L105-L109)), and its biases uniformly in ±1/√in. On a 512 → 512 layer, the measured weight standard deviation should be within 1 % of 0.0625, √6 ≈ 2.45 times PyTorch's default for `nn.Linear` (uniform in ±1/√in, standard deviation 1/√(3 · in)), and every bias within ±0.0442, as in PyTorch.
+2. **Reproducibility.** Two `VarMap`s filled by the same `linear` calls get different weights, because the CPU generator can't be seeded (finding 4). The course will overwrite every variable with values from its own seeded generator.
+3. **Cross-entropy.** `loss::cross_entropy` should equal the mean of −log softmax at the target, computed by hand, to 1e-12 in `f64`, and stay finite for logits of 1000, where softmax-then-log written naively (without subtracting the maximum) gives NaN.
+4. **Binary cross-entropy with logits.** [`binary_cross_entropy_with_logit`](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-nn/src/loss.rs#L64-L74) takes the sigmoid, then logarithms of `p` and `1 − p`, so a confident and *correct* prediction should give NaN: in `f32`, a logit of 17 with target 1 (16 stays finite) and a logit of −100 with target 0; in `f64`, a logit of 37 with target 1 (36 stays finite). The stable form `max(x, 0) − x·y + log(1 + e^−|x|)` stays finite everywhere. [Issue #2561](https://github.com/huggingface/candle/issues/2561) has reported the instability since 2024.
+5. **Optimizers.** An [`SGD`](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-nn/src/optim.rs#L31-L70) step equals `θ − lr · g` bit for bit (there is no momentum). Three [`AdamW`](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-nn/src/optim.rs#L117-L183) steps equal PyTorch's AdamW algorithm written by hand (decoupled decay `θ · (1 − lr · λ)`, bias-corrected moments, ε outside the square root) to 1e-12 in `f64`.
+6. **Integer variables.** Both optimizers silently drop variables whose type isn't a float: an `SGD` built from a `u32` `Var` and an `f32` `Var` holds one variable.
+7. **Iris.** A 4 → 16 → 3 network with ReLU, trained on 120 rows (40 per species, standardized with the training set's means and deviations) for 300 full-batch epochs of `AdamW` with a learning rate of 0.01, classifies at least 28 of the 30 held-out rows correctly, and any errors are between versicolor and virginica, none on setosa.
+8. **`f32` against `f64`.** The same training in `f32` gives the same 30 test predictions, and a final training loss within 1e-4 of the `f64` one.
+9. **`SGD` against `AdamW`.** Plain `SGD` with a learning rate of 0.1, from the same weights for the same 300 epochs, ends with a higher training loss than `AdamW` at 0.01.
+
 ## To verify
 
 - The workflow's first run on the three systems, and the `f32` outputs on macOS ARM.
