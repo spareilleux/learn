@@ -312,7 +312,7 @@ E                x-x-2-1-0-0      0.632    E G# B           other
 
 ## Signalé en amont
 
-- Non signalés en amont à l'écriture de cette leçon : « minor » et les qualités en toutes lettres lus comme une triade majeure, les accords sans suffixe que rejette `CanHandle`, les quatre symboles de `ChordPitchClasses`, les noms de l'index que le filtre ne trouve pas, et les techniques abandonnées sans un mot dans la réponse. Tous sont listés dans le [journal](../journal/).
+- Signalés après l'écriture de cette leçon : dans le ticket de GA [#785](https://github.com/GuitarAlchemist/ga/issues/785), « minor » et les qualités en toutes lettres lus comme une triade majeure, les accords sans suffixe que rejette `CanHandle` et les quatre symboles de `ChordPitchClasses` ; dans [#784](https://github.com/GuitarAlchemist/ga/issues/784), les noms de l'index que le filtre ne trouve pas et les techniques abandonnées sans un mot dans la réponse. Tous sont listés dans le [journal](../journal/).
 
 ## Exercices
 

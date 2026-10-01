@@ -312,7 +312,7 @@ E                x-x-2-1-0-0      0.632    E G# B           other
 
 ## Comunicado upstream
 
-- No se habían comunicado upstream cuando se escribió esta lección: "minor" y las cualidades en palabras leídas como una tríada mayor, los acordes sin sufijo que rechaza `CanHandle`, los cuatro cifrados que `ChordPitchClasses` lee mal, los nombres del índice que el filtro no encuentra y las técnicas descartadas sin que la respuesta diga nada. Todos están listados en el [diario](../journal/).
+- Se comunicaron después de escribir esta lección: en la issue de GA [#785](https://github.com/GuitarAlchemist/ga/issues/785), "minor" y las cualidades en palabras leídas como una tríada mayor, los acordes sin sufijo que rechaza `CanHandle` y los cuatro cifrados que `ChordPitchClasses` lee mal; en la [#784](https://github.com/GuitarAlchemist/ga/issues/784), los nombres del índice que el filtro no encuentra y las técnicas descartadas sin que la respuesta diga nada. Todos están listados en el [diario](../journal/).
 
 ## Ejercicios
 

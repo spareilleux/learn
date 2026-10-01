@@ -312,7 +312,7 @@ E                x-x-2-1-0-0      0.632    E G# B           other
 
 ## Reported upstream
 
-- Not reported upstream when this lesson was written: "minor" and the spelled-out qualities read as a major triad, `CanHandle`'s bare chords, `ChordPitchClasses`'s four symbols, the index's names that the filter can't find, and the techniques dropped without a word in the answer. All are listed in the [journal](../journal/).
+- Reported after this lesson was written: GA issue [#785](https://github.com/GuitarAlchemist/ga/issues/785) for "minor" and the spelled-out qualities read as a major triad, `CanHandle`'s bare chords and `ChordPitchClasses`'s four symbols; [#784](https://github.com/GuitarAlchemist/ga/issues/784) for the index's names that the filter can't find and the techniques dropped without a word in the answer. All are listed in the [journal](../journal/).
 
 ## Exercises
 
