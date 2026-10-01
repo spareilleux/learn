@@ -181,7 +181,7 @@ gradient for a u32 Var: None
 - **Se rechaza un valor que comparte el buffer de la variable**, y `detach` lo comparte. `w - lr · grad` es un tensor nuevo, así que un paso de descenso pasa.
 - **La forma y el tipo de elemento deben coincidir**; el error de dtype nombra `copy_strided`, la operación interna, con `lhs` y `rhs` en el orden inverso al de `set`.
 
-[Los optimizadores de `candle-nn`](https://docs.rs/candle-nn/0.11.0/candle_nn/optim/index.html) hacen ese mismo `set` por ti (lección 5). Esta lección escribe el paso a mano, para compararlo con el curso de IX.
+[Los optimizadores de `candle-nn`](https://docs.rs/candle-nn/0.11.0/candle_nn/optim/index.html) hacen ese mismo `set` por ti ([lección 5](../05-candle-nn/)). Esta lección escribe el paso a mano, para compararlo con el curso de IX.
 
 ## La regresión lineal del curso de IX
 
@@ -283,7 +283,7 @@ F64: ws 2.605694, bs 17.384615 -> w 0.041707, b 9.708880, gap to the closed form
 F32: ws 2.605694, bs 17.384611 -> w 0.041707, b 9.708877, gap to the closed form 2.8e-6
 ```
 
-`f64` cae en los `ws 2.605694, bs 17.384615` del curso de IX. `f32` falla `b` en el sexto decimal: sus unos siete dígitos significativos no alcanzan para `17.384615` más el redondeo de 52 errores al cuadrado. Para un modelo de tiempos de build, no importa; para comparar dos implementaciones hasta `1e-9`, como arriba, usa `f64`. La suma `f32` de los mismos números también puede redondearse de otra forma en otro procesador (*por verificar* en macOS ARM, donde el CI del curso aún no se ha ejecutado).
+`f64` cae en los `ws 2.605694, bs 17.384615` del curso de IX. `f32` falla `b` en el sexto decimal: sus unos siete dígitos significativos no alcanzan para `17.384615` más el redondeo de 52 errores al cuadrado. Para un modelo de tiempos de build, no importa; para comparar dos implementaciones hasta `1e-9`, como arriba, usa `f64`. La suma `f32` de los mismos números podría redondearse de otra forma en otro procesador; el CI del curso dio estos dígitos también en macOS ARM.
 
 ## Puntos clave
 

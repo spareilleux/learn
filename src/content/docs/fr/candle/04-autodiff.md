@@ -181,7 +181,7 @@ gradient for a u32 Var: None
 - **Une valeur qui partage le tampon de la variable est refusée**, et `detach` le partage. `w - lr · grad` est un nouveau tenseur, donc un pas de descente passe.
 - **La forme et le type des éléments doivent correspondre** ; l'erreur de type nomme `copy_strided`, l'opération interne, avec `lhs` et `rhs` dans l'ordre inverse de `set`.
 
-[Les optimiseurs de `candle-nn`](https://docs.rs/candle-nn/0.11.0/candle_nn/optim/index.html) font ce même `set` pour toi (leçon 5). Cette leçon écrit le pas à la main, pour le comparer au cours IX.
+[Les optimiseurs de `candle-nn`](https://docs.rs/candle-nn/0.11.0/candle_nn/optim/index.html) font ce même `set` pour toi ([leçon 5](../05-candle-nn/)). Cette leçon écrit le pas à la main, pour le comparer au cours IX.
 
 ## La régression linéaire du cours IX
 
@@ -283,7 +283,7 @@ F64: ws 2.605694, bs 17.384615 -> w 0.041707, b 9.708880, gap to the closed form
 F32: ws 2.605694, bs 17.384611 -> w 0.041707, b 9.708877, gap to the closed form 2.8e-6
 ```
 
-`f64` tombe sur les `ws 2.605694, bs 17.384615` du cours IX. `f32` rate `b` à la sixième décimale : ses quelque sept chiffres significatifs ne suffisent pas à `17.384615` plus l'arrondi de 52 erreurs au carré. Pour un modèle de temps de build, cela ne compte pas ; pour comparer deux implémentations à `1e-9`, comme plus haut, utilise `f64`. La somme en `f32` des mêmes nombres peut aussi s'arrondir différemment sur un autre processeur (*à vérifier* sur macOS ARM, où la CI du cours n'a pas encore tourné).
+`f64` tombe sur les `ws 2.605694, bs 17.384615` du cours IX. `f32` rate `b` à la sixième décimale : ses quelque sept chiffres significatifs ne suffisent pas à `17.384615` plus l'arrondi de 52 erreurs au carré. Pour un modèle de temps de build, cela ne compte pas ; pour comparer deux implémentations à `1e-9`, comme plus haut, utilise `f64`. La somme en `f32` des mêmes nombres pourrait s'arrondir différemment sur un autre processeur ; la CI du cours a donné ces chiffres sur macOS ARM aussi.
 
 ## À retenir
 

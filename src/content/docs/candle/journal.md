@@ -1,6 +1,6 @@
 ---
 title: Journal
-description: Dated progress notes — Candle 0.11.0 pinned, the course code and how it is checked, the measurements, whether GA, IX and TARS use Candle, sixteen findings about Candle, its documentation and IX's, and items to verify.
+description: Dated progress notes — Candle 0.11.0 pinned, the course code and how it is checked, the measurements, whether GA, IX and TARS use Candle, sixteen findings about Candle, its documentation and IX's, lesson 5's predictions, results and QA table, and items to verify.
 sidebar:
   order: 99
 ---
@@ -8,15 +8,43 @@ sidebar:
 ## Progress
 
 - [x] Candle read at the tag `0.11.0`, commit `31f35b1`; the course code depends on `candle-core` and `candle-nn` 0.11.0
-- [x] Course code: examples, `expected/` outputs, seven `compile_fail` doctests, `check.sh`
+- [x] Course code: examples, `expected/` outputs, nine `compile_fail` doctests, `check.sh`
 - [x] Same outputs on Windows and on Linux (a `rust:1.94.0` container)
-- [ ] CI on GitHub: the workflow is written, not pushed yet
+- [x] CI on GitHub: Linux, Windows and macOS ARM, first run on 2026-09-16
 - [x] Lesson 1: why Candle
 - [x] Lesson 2: tensors
 - [x] Lesson 3: CPU compute and performance
 - [x] Lesson 4: automatic differentiation
-- [ ] Lessons 5 to 12
-- [x] French and Spanish translations of lessons 1 to 4
+- [x] Lesson 5: a first network with `candle-nn`
+- [ ] Lessons 6 to 12
+- [x] French and Spanish translations of lessons 1 to 5
+
+## QA
+
+What the course found in Candle from lesson 5 on; findings 1 to 16 are listed in the [2026-09-15 entry](#2026-09-15--findings). Links point to Candle `0.11.0`, commit `31f35b1`; `main` was read at [`5ba5d5b`](https://github.com/huggingface/candle/tree/5ba5d5b468b5b1df40e82dd3d556987bedeea041) (September 28, 2026).
+
+| # | Expected | What happens | Where | Measurement | Status |
+|---|---|---|---|---|---|
+| 17 | `binary_cross_entropy_with_logit` gives a finite loss and gradient for any logit | It takes the sigmoid, then `log p` and `log(1 − p)`: NaN when a confident prediction is right, infinity when it is wrong, a NaN gradient in both cases | [`loss.rs:64-74`](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-nn/src/loss.rs#L64-L74) | `f32`: logit 17, target 1 → NaN (16 → `1.192e-7`); −100, target 0 → NaN. `f64`: 37 → NaN (36 → `2.220e-16`). The stable form is finite in all eight cases ([lesson 5](../05-candle-nn/)) | Reproduced; reported upstream as [issue #2561](https://github.com/huggingface/candle/issues/2561) (October 14, 2024, open); same code on `main` |
+| 18 | The target type the documentation gives works | The documentation of `binary_cross_entropy_with_logit` calls the target "a tensor of u32"; `u32` targets fail | [`loss.rs:60`](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-nn/src/loss.rs#L60) | `dtype mismatch in mul, lhs: U32, rhs: F32` | Reproduced; same text on `main`; not reported |
+| 19 | An error about an index type names the index type | `gather` reports the type of the tensor it reads from | [`cpu_backend/mod.rs:2883-2890`](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-core/src/cpu_backend/mod.rs#L2883-L2890); `index_select`, `scatter`, `scatter_add`, `index_add` at lines 2879, 2905, 2924, 2973 (read, not run) | `f32` targets for `f64` logits: `unsupported dtype F64 for op gather` | Reproduced for `gather`; same code on `main`; no issue found |
+| 20 | `cross_entropy` rejects a target of `u32::MAX`, or documents what it does | `gather` writes 0 for its type's maximum, a rule since [PR #2940](https://github.com/huggingface/candle/pull/2940): the row adds nothing, but `nll` still divides by the batch size. Neither documentation says so | [`cpu_backend/mod.rs:623-626`](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-core/src/cpu_backend/mod.rs#L623-L626), [`loss.rs:14-30`](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-nn/src/loss.rs#L14-L30) | `0.1725049744` = (row 1 + row 3) / 3; PyTorch's `ignore_index` averages over the other rows: `0.2587574616` | Reproduced; not reported |
+| 21 | `linear` initializes like PyTorch's `nn.Linear` | A Kaiming normal, standard deviation `√(2 / in)`: `√6 ≈ 2.449` times `nn.Linear`'s | [`linear.rs:84-94`](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-nn/src/linear.rs#L84-L94), [`init.rs:105-109`](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-nn/src/init.rs#L105-L109) | 512 × 512: standard deviation within 1% of 0.0625, 4.55% of the weights beyond two standard deviations | Confirmed; a design choice, not a defect, to know when porting a model |
+| 22 | An optimizer given a variable it won't update says so | Non-float variables are dropped and variables without a gradient skipped, without an error | [`optim.rs:44-47`](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-nn/src/optim.rs#L44-L47), [`optim.rs:123`](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-nn/src/optim.rs#L123), [`optim.rs:58-65`](https://github.com/huggingface/candle/blob/31f35b147389700ed2a178ee66a91c3cc25cc80d/candle-nn/src/optim.rs#L58-L65) | `SGD::new` with a `U32` and an `F32` variable keeps 1; a variable outside the loss stays unchanged | Reproduced; by design, not documented |
+
+## Experiments
+
+| Question | Hypothesis, written on 2026-09-30 before the code | Result | Verdict | Entry, code |
+|---|---|---|---|---|
+| How does `linear` initialize? | Weight standard deviation within 1% of 0.0625 on 512 → 512, `√6` times PyTorch's; biases within ±0.0442 | Within 1%; ratio 2.449; every bias within ±0.0442; 4.55% beyond two standard deviations, as a normal distribution | Confirmed | [2026-10-01](#2026-10-01--lesson-5-results-against-the-predictions), [`l05_modules.rs`](https://github.com/spareilleux/learn/blob/40470dc/code/candle/course/examples/l05_modules.rs#L94-L125) |
+| Are two `VarMap`s filled by the same calls equal? | No, the CPU generator can't be seeded | Different; equal after `reseed(…, 5)` | Confirmed | [2026-10-01](#2026-10-01--lesson-5-results-against-the-predictions), [`l05_modules.rs`](https://github.com/spareilleux/learn/blob/40470dc/code/candle/course/examples/l05_modules.rs#L127-L152) |
+| Does `cross_entropy` match the formula and survive large logits? | Equal to `1e-12` in `f64`; finite at 1000 where naive softmax-then-log gives NaN | `0.2458859914` both ways; 0, 1000 and 2000 for logits 1000, 0, −1000; naive: `[NaN, -inf, -inf]` | Confirmed | [2026-10-01](#2026-10-01--lesson-5-results-against-the-predictions), [`l05_losses.rs`](https://github.com/spareilleux/learn/blob/40470dc/code/candle/course/examples/l05_losses.rs#L32-L68) |
+| Where does `binary_cross_entropy_with_logit` break? | NaN at `f32` logit 17 (16 finite), at −100 for target 0, at `f64` logit 37 (36 finite); stable form finite | Exactly those thresholds; a confident wrong prediction gives infinity; the gradient is NaN in all six failing cases | Confirmed | [2026-10-01](#2026-10-01--lesson-5-results-against-the-predictions), [`l05_losses.rs`](https://github.com/spareilleux/learn/blob/40470dc/code/candle/course/examples/l05_losses.rs#L93-L137) |
+| Do `SGD` and `AdamW` match their algorithms? | SGD bit for bit; three AdamW steps to `1e-12` in `f64` | SGD bit for bit; AdamW bit for bit too, at each of the three steps | Confirmed, beyond the hypothesis | [2026-10-01](#2026-10-01--lesson-5-results-against-the-predictions), [`l05_optimizers.rs`](https://github.com/spareilleux/learn/blob/40470dc/code/candle/course/examples/l05_optimizers.rs#L19-L72) |
+| What does an optimizer do with a `u32` variable? | `SGD` built from a `u32` and an `f32` `Var` holds one | Holds 1; `AdamW::new` accepts both without an error | Confirmed | [2026-10-01](#2026-10-01--lesson-5-results-against-the-predictions), [`l05_optimizers.rs`](https://github.com/spareilleux/learn/blob/40470dc/code/candle/course/examples/l05_optimizers.rs#L74-L95) |
+| How well does 4 → 16 → 3 classify Iris? | At least 28 of 30 test flowers after 300 AdamW epochs at 0.01; errors only between versicolor and virginica | 29 of 30; the error is a virginica (row 120) taken for a versicolor; training 118 of 120 | Confirmed | [2026-10-01](#2026-10-01--lesson-5-results-against-the-predictions), [`l05_iris.rs`](https://github.com/spareilleux/learn/blob/40470dc/code/candle/course/examples/l05_iris.rs#L52-L98) |
+| Does `f32` change the result? | Same 30 test predictions; final loss within `1e-4` of `f64` | Same predictions; same loss to four decimals at all six reported epochs | Confirmed | [2026-10-01](#2026-10-01--lesson-5-results-against-the-predictions), [`l05_iris.rs`](https://github.com/spareilleux/learn/blob/40470dc/code/candle/course/examples/l05_iris.rs#L100-L112) |
+| SGD at 0.1 against AdamW at 0.01? | SGD ends with a higher training loss | 0.0846 against 0.0355, same 29 of 30; SGD was ahead at epoch 10 (0.6089 against 0.9078) | Confirmed | [2026-10-01](#2026-10-01--lesson-5-results-against-the-predictions), [`l05_iris.rs`](https://github.com/spareilleux/learn/blob/40470dc/code/candle/course/examples/l05_iris.rs#L114-L126) |
 
 ## 2026-09-15 — Candle, pinned
 
@@ -90,9 +118,27 @@ Written from `candle-nn` 0.11.0's sources, before the lesson's code existed; the
 8. **`f32` against `f64`.** The same training in `f32` gives the same 30 test predictions, and a final training loss within 1e-4 of the `f64` one.
 9. **`SGD` against `AdamW`.** Plain `SGD` with a learning rate of 0.1, from the same weights for the same 300 epochs, ends with a higher training loss than `AdamW` at 0.01.
 
+## 2026-10-01 — Lesson 5: results against the predictions
+
+The five examples ran on Windows 11 with Rust 1.94.0; `check.sh` passed (formatting, clippy, 9 doctests, 18 examples, the 11 outputs compared before this lesson unchanged), and the nightly doctests (1.97.0) confirmed `E0599` for the two new `compile_fail` snippets. The code is commit [`40470dc`](https://github.com/spareilleux/learn/tree/40470dc/code/candle).
+
+1. **Initialization**: confirmed. On 262,144 weights, the standard deviation is within 1% of 0.0625 and 4.55% of the weights lie beyond two standard deviations, as for a normal distribution; ratio to PyTorch's `nn.Linear`, 2.449; every bias within ±0.0442. The program prints checks, not the random values.
+2. **Reproducibility**: confirmed. Two `VarMap`s differ; `reseed` makes them equal, with uniform draws whose standard deviation matches `linear`'s.
+3. **Cross-entropy**: confirmed, `0.2458859914` by Candle and by hand. Logits of 1000 give 0, 1000 and 2000; the naive version gives `[NaN, -inf, -inf]`.
+4. **Binary cross-entropy with logits**: confirmed at every threshold predicted. Not predicted: a confident *wrong* prediction gives infinity rather than NaN, and the gradient is NaN in all six failing cases.
+5. **Optimizers**: confirmed, and more: the three AdamW steps match the transcription bit for bit, not only to `1e-12`, because it repeats `optim.rs`'s order of operations. PyTorch 2.14 orders them differently ([`adam.py`, lines 533-546](https://github.com/pytorch/pytorch/blob/v2.14.0/torch/optim/adam.py#L533-L546)).
+6. **Integer variables**: confirmed, `SGD` keeps 1 of 2. A variable outside the loss is also left alone without an error.
+7. **Iris**: confirmed, 29 of 30 held-out flowers. The error is row 120 of `bezdekIris.data`, a virginica of 6.0, 2.2, 5.0 and 1.5 cm taken for a versicolor; no setosa error.
+8. **`f32`**: confirmed, the same 30 predictions and the same losses to four decimals.
+9. **SGD**: confirmed at the end, 0.0846 against 0.0355. Not predicted: SGD was ahead at epoch 10.
+
+All nine hypotheses held. Most were read from `candle-nn`'s sources, so the run mostly confirmed the reading; the findings came from what wasn't predicted, rows 18 to 20 of the QA table: the documented `u32` target that fails, the error that names the wrong type, and the `u32::MAX` target that is skipped but counted. The CI that ran on 2026-09-16 ([run 35096038472](https://github.com/spareilleux/learn/actions/runs/35096038472), commit `f922f5d`) passed on Linux, Windows and macOS on an `arm64` image, which settles the earlier *to verify* about `f32` on macOS ARM for lessons 1 to 4. The CI of lesson 5's pull request is *to verify*.
+
 ## To verify
 
-- The workflow's first run on the three systems, and the `f32` outputs on macOS ARM.
+- The lesson 5 outputs on Linux and macOS, in the pull request's CI run.
+- Whether training on `iris.data` instead of `bezdekIris.data` changes the lesson 5 results (row 35 is a test flower).
+- PyTorch's AdamW against the lesson 5 numbers: equal to rounding, by hypothesis, not to the bit.
 - The C compiler requirement after the next Candle release.
 - `default_num_threads` on Apple Silicon, which counts performance cores only.
 - `CANDLE_GRAD_DO_NOT_DETACH` and second derivatives.
