@@ -362,7 +362,7 @@ The tool returns the notes its description gives for 5 of its 5 examples
 
 ## Reported upstream
 
-- Not reported upstream when this lesson was written: the article and "am" read as roots, the example prompts and suffixes the skill doesn't read, the symbols read in part, the double accidentals and the formulas missing from the reading of notes, the altered dominant's flat fifth, the vocabulary's `Δ7`, and the tool that reads 14 symbols. B♭ read as B is the same as [#757](https://github.com/GuitarAlchemist/ga/issues/757). All are listed in the [journal](../journal/).
+- Reported after this lesson was written: GA issue [#782](https://github.com/GuitarAlchemist/ga/issues/782) for the article and "am" read as roots, the example prompts and suffixes the skill doesn't read, the symbols read in part, and the double accidentals and the formulas missing from the reading of notes; [#783](https://github.com/GuitarAlchemist/ga/issues/783) for the altered dominant's flat fifth, the vocabulary's `Δ7`, and the tool that reads 14 symbols. B♭ read as B is the same as [#757](https://github.com/GuitarAlchemist/ga/issues/757). All are listed in the [journal](../journal/).
 
 ## Exercises
 

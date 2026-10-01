@@ -362,7 +362,7 @@ The tool returns the notes its description gives for 5 of its 5 examples
 
 ## Comunicado upstream
 
-- No se habían comunicado upstream al escribir esta lección: el artículo y "am" leídos como fundamentales, los prompts de ejemplo y los sufijos que la skill no lee, los cifrados leídos en parte, las alteraciones dobles y las fórmulas que faltan en la lectura de notas, la quinta bemol de la dominante alterada, el `Δ7` del vocabulario y la herramienta que lee 14 cifrados. B♭ leído como B es lo mismo que la [#757](https://github.com/GuitarAlchemist/ga/issues/757). Todos están listados en el [diario](../journal/).
+- Se comunicaron después de escribir esta lección: en la issue de GA [#782](https://github.com/GuitarAlchemist/ga/issues/782), el artículo y "am" leídos como fundamentales, los prompts de ejemplo y los sufijos que la skill no lee, los cifrados leídos en parte, las alteraciones dobles y las fórmulas que faltan en la lectura de notas; en la [#783](https://github.com/GuitarAlchemist/ga/issues/783), la quinta bemol de la dominante alterada, el `Δ7` del vocabulario y la herramienta que lee 14 cifrados. B♭ leído como B es lo mismo que la [#757](https://github.com/GuitarAlchemist/ga/issues/757). Todos están listados en el [diario](../journal/).
 
 ## Ejercicios
 

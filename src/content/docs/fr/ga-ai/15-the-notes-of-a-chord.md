@@ -362,7 +362,7 @@ The tool returns the notes its description gives for 5 of its 5 examples
 
 ## Signalé en amont
 
-- Non signalés en amont au moment où cette leçon a été écrite : l'article et « am » lus comme des fondamentales, les prompts d'exemple et les suffixes que le skill ne lit pas, les chiffrages lus en partie, les doubles altérations et les formules absentes de la lecture des notes, la quinte bémol de la dominante altérée, le `Δ7` du vocabulaire, et l'outil qui ne lit que 14 symboles. B♭ lu comme B, c'est la même lecture que [#757](https://github.com/GuitarAlchemist/ga/issues/757). Tous sont listés dans le [journal](../journal/).
+- Signalés après l'écriture de cette leçon : dans le ticket de GA [#782](https://github.com/GuitarAlchemist/ga/issues/782), l'article et « am » lus comme des fondamentales, les prompts d'exemple et les suffixes que le skill ne lit pas, les chiffrages lus en partie, les doubles altérations et les formules absentes de la lecture des notes ; dans [#783](https://github.com/GuitarAlchemist/ga/issues/783), la quinte bémol de la dominante altérée, le `Δ7` du vocabulaire et l'outil qui ne lit que 14 symboles. B♭ lu comme B, c'est la même lecture que [#757](https://github.com/GuitarAlchemist/ga/issues/757). Tous sont listés dans le [journal](../journal/).
 
 ## Exercices
 
