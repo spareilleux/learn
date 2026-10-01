@@ -14,6 +14,7 @@ sidebar:
 - [x] Leçon 3 : conditions et boucles
 - [x] Leçon 4 : méthodes, tableaux et listes
 - [x] Leçon 5 : classes et objets
+- [x] Leçon 6 : records, structs et enums (en local ; CI sur trois OS à vérifier)
 
 ## 2026-09-14 — Le SDK et les applications basées sur des fichiers
 
@@ -51,8 +52,21 @@ sidebar:
 
 - Le [run 36664604662](https://github.com/spareilleux/learn/actions/runs/36664604662) du workflow *C# for beginners examples*, sur le commit `669d42a` de la [PR #60](https://github.com/spareilleux/learn/pull/60), a réussi sous `ubuntu-latest`, `windows-latest` et `macos-latest`. Dans la sortie de chaque job, `check.sh` affiche `ok` pour `l05_objects`, `l05_ex_practice`, `l05_get_only_property` et `l05_private_field` : les sorties et les diagnostics CS0122 et CS0200 correspondent à `expected/` sur les trois OS.
 
+## 2026-10-01 — Records, structs et enums
+
+- La leçon 6 compare une structure et une classe (copie à l'affectation, copie en argument, `Equals`), puis présente les records (`==` sur les données, `ToString`, `with`, `readonly record struct`) et les énumérations (numérotées à partir de 0, valeur par défaut, casts, `Enum.IsDefined`, `Enum.Parse`). Elle compte quatre exemples, trois exercices et cinq extraits refusés, dont les diagnostics sont CS0019, CS1612, CS8852 (trois fois dans deux fichiers) et CS0266. Un script a vérifié que les trois langues partagent les mêmes blocs de code, commentaires mis à part, et que chaque bloc correspond à son fichier dans `code/csharp-beginner` et `expected/`.
+- Sous Windows, avec le SDK 10.0.112 et Git Bash, `check.sh` s'est terminé avec le code 0 et 75 lignes `ok`, dont les 12 fichiers `l06_*`. Ce n'est pas encore une exécution de la CI sur trois OS.
+- Surprises, toutes reprises dans la leçon : CS8524 avertit pour une expression `switch` qui a une branche par nom, et son exemple est `(ChordQuality)5` alors que le programme échoue sur 7 ; le littéral `0` se convertit en énumération sans cast, alors que `2` donne CS0266 ; une `List<T>` de structures modifiables refuse `shape[0].Fret = 5` avec CS1612.
+- Un brouillon de l'exercice 3 disait que `shape[i].Fret += 2` sur une liste de `readonly record struct` donne le même CS1612. Une sonde compilée avant publication a donné CS8852 ; le texte a été corrigé, et `compile_fail/l06_readonly_position.cs` conserve désormais les deux lignes CS8852. Deux autres phrases reposent sur des sondes restées hors du code du cours : ranger une copie modifiée avec `shape[0] = position;` a affiché 5, et `List<T>.Contains` sur une classe sans égalité propre a répondu `False`.
+- Dogfooding : au commit `5c3a52a` de GA, [`ChordQuality`](https://github.com/GuitarAlchemist/ga/blob/5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26/Common/GA.Domain.Core/Theory/Harmony/ChordQuality.cs#L10-L23) commence par `Other`, et `PositionLocation`, `Str` et `Fret` sont des types `readonly record struct`. Rien dans cette leçon n'a révélé de problème dans GA.
+
 ## À vérifier
 
+- Les exemples et diagnostics de la leçon 6 dans la CI Linux, Windows et macOS, après l'ouverture d'une PR.
 - Les commandes d'installation pour Linux et macOS : seul le `setup-dotnet` de la CI a tourné sur ces OS.
 - La démonstration du débogueur de la leçon 3 dans VS Code, Visual Studio et Rider, pour une application basée sur un fichier et pour un projet. VS Code 1.118 et Rider sont installés sur ma machine ; Visual Studio ne l'est pas.
 - Les conditions de licence des trois éditeurs, au moment de la lecture.
+
+## Questions ouvertes
+
+- Les `Str` et `Fret` de GA déclarent chacun une conversion implicite depuis `int` ([Str.cs:45](https://github.com/GuitarAlchemist/ga/blob/5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26/Common/GA.Domain.Core/Instruments/Primitives/Str.cs#L45), [Fret.cs:72](https://github.com/GuitarAlchemist/ga/blob/5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26/Common/GA.Domain.Core/Instruments/Primitives/Fret.cs#L72)). `new PositionLocation(3, 5)`, avec la corde et la frette inversées sous forme de simples nombres, compile-t-il sans avertissement ? Non exécuté.

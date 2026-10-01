@@ -1,0 +1,7 @@
+first: string 6, fret 3
+second: string 6, fret 5
+marker: string 6, fret 5
+after the methods: first at fret 3, marker at fret 17
+first.Equals(new FretPosition(6, 3)): True
+marker.Equals(new FretMarker(6, 17)): False
+exit 0

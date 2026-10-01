@@ -160,4 +160,4 @@ The two objects have separate `_minutes` fields. `Topic` is set by the construct
 - An instance member belongs to one object; a `static` member belongs to the type.
 - Assigning one class variable to another copies the reference, not the object.
 
-Next: [records, structs and enums](../#outline) will contrast classes with value-oriented types.
+Next: [records, structs and enums](../06-records-structs-enums/) will contrast classes with value-oriented types.

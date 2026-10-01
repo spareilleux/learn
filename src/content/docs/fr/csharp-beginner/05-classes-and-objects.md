@@ -160,4 +160,4 @@ Les deux objets ont chacun leur propre champ `_minutes`. Le constructeur fixe `T
 - Un membre d'instance appartient à un objet ; un membre `static` appartient au type.
 - Affecter une variable de type classe à une autre copie la référence, pas l'objet.
 
-La suite, [records, structures et énumérations](../#plan), comparera les classes aux types pensés comme des valeurs.
+La suite, [records, structures et énumérations](../06-records-structs-enums/), comparera les classes aux types pensés comme des valeurs.
