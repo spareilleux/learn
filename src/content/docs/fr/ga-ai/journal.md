@@ -298,6 +298,7 @@ La plupart des 22 différences du 2026-09-14 ont été corrigées en amont par [
 - `GaMain` construit le skill et l'index de la leçon 3 avec les classes de `main`, comme le fait le câblage de l'hôte ; l'hôte lui-même n'est pas exécuté sur `main`.
 - Les voicings faux du commit épinglé, dus au filtre par sous-chaîne de la différence 11 et à l'ordre des diagrammes de la différence 13, sont corrigés sur `main` : chaque voicing que renvoie le skill de `main` joue l'accord qu'il a lu.
 - Les solutions des quatre exercices ont été vérifiées en exécutant le skill de `GaMain` et le `CanHandle` du commit épinglé, hors de la sortie attendue du cours.
+- Exécution de CI [36870600319](https://github.com/spareilleux/learn/actions/runs/36870600319), pour le commit `6d647b1` : verte sur les trois systèmes, 3 min 14 s sous Linux, 2 min 56 s sous macOS, 8 min 40 s sous Windows, clone et compilation compris.
 
 ## À vérifier
 

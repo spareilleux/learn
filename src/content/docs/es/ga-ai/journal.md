@@ -298,6 +298,7 @@ La mayoría de las 22 diferencias del 2026-09-14 se corrigieron upstream en [#68
 - `GaMain` construye la skill y el índice de la lección 3 con las clases de `main`, como lo hace el cableado del host; el host en sí no se ejecuta en `main`.
 - Los voicings erróneos del commit fijado, debidos al filtro por subcadena de la diferencia 11 y al orden de los diagramas de la diferencia 13, están corregidos en `main`: cada voicing que devuelve la skill de `main` toca el acorde que ha leído.
 - Las soluciones de los cuatro ejercicios se comprobaron ejecutando la skill de `GaMain` y el `CanHandle` del commit fijado, fuera de la salida esperada del curso.
+- Ejecución de CI [36870600319](https://github.com/spareilleux/learn/actions/runs/36870600319), para el commit `6d647b1`: verde en los tres sistemas, 3 min 14 s en Linux, 2 min 56 s en macOS, 8 min 40 s en Windows, con el clon y la compilación incluidos.
 
 ## Por verificar
 

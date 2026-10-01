@@ -298,6 +298,7 @@ Most of the 22 differences of 2026-09-14 were fixed upstream by [#689](https://g
 - `GaMain` builds the skill and lesson 3's index with `main`'s classes, as the host's wiring does; the host itself isn't run on `main`.
 - The pin's wrong voicings, from the substring filter of difference 11 and the diagram order of difference 13, are fixed on `main`: every voicing `main`'s skill returns plays the chord it read.
 - The solutions of the four exercises were checked by running `GaMain`'s skill and the pinned `CanHandle` outside the course's expected output.
+- CI run [36870600319](https://github.com/spareilleux/learn/actions/runs/36870600319), for commit `6d647b1`: green on the three systems, 3 min 14 s on Linux, 2 min 56 s on macOS, 8 min 40 s on Windows, clone and build included.
 
 ## To verify
 
