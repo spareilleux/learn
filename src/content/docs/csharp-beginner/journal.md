@@ -13,7 +13,7 @@ sidebar:
 - [x] Lesson 2: variables, types and input
 - [x] Lesson 3: conditions and loops
 - [x] Lesson 4: methods, arrays and lists
-- [x] Lesson 5: classes and objects (local; cross-OS CI still to verify)
+- [x] Lesson 5: classes and objects
 
 ## 2026-09-14 — The SDK and file-based apps
 
@@ -47,9 +47,11 @@ sidebar:
 - On Windows, SDK 10.0.112, `C:/Program Files/Git/bin/bash.exe check.sh` passed the course's examples, exercise solutions and rejected snippets, including the new `l05_*` files. The two new rejected snippets produced CS0122 and CS0200, respectively. The host's default `bash` was WSL and could not find the Windows `dotnet`; that first run failed because of the test environment, not the source.
 - This local result is not a new three-OS CI run and is not proof that the lesson is publicly deployed. Lessons 6–12 remain only in the outline.
 
-## To verify
+## 2026-09-30 — Lesson 5 in CI on three OSes
 
-- The new lesson 5 examples and diagnostics in CI on Linux, Windows and macOS, after a PR is opened.
+- [Run 36664604662](https://github.com/spareilleux/learn/actions/runs/36664604662) of the *C# for beginners examples* workflow, on commit `669d42a` of [PR #60](https://github.com/spareilleux/learn/pull/60), passed on `ubuntu-latest`, `windows-latest` and `macos-latest`. In each job's output, `check.sh` prints `ok` for `l05_objects`, `l05_ex_practice`, `l05_get_only_property` and `l05_private_field`: the outputs and the CS0122 and CS0200 diagnostics match `expected/` on the three OSes.
+
+## To verify
 
 - The installation commands for Linux and macOS: only the CI's `setup-dotnet` ran on those OSes.
 - The debugger walkthrough of lesson 3 in VS Code, Visual Studio and Rider, for a file-based app and for a project. VS Code 1.118 and Rider are installed on my machine; Visual Studio isn't.

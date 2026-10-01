@@ -13,7 +13,7 @@ sidebar:
 - [x] Leçon 2 : variables, types et saisie
 - [x] Leçon 3 : conditions et boucles
 - [x] Leçon 4 : méthodes, tableaux et listes
-- [x] Leçon 5 : classes et objets (en local ; CI sur trois OS à vérifier)
+- [x] Leçon 5 : classes et objets
 
 ## 2026-09-14 — Le SDK et les applications basées sur des fichiers
 
@@ -47,9 +47,11 @@ sidebar:
 - Sous Windows, avec le SDK 10.0.112, `C:/Program Files/Git/bin/bash.exe check.sh` a réussi pour les exemples, les solutions et les extraits refusés du cours, y compris les nouveaux fichiers `l05_*`. Les deux nouveaux extraits refusés ont produit respectivement CS0122 et CS0200. Le `bash` par défaut de la machine était celui de WSL et ne trouvait pas le `dotnet` Windows : ce premier échec venait de l'environnement de test, pas du code.
 - Ce résultat local ne remplace pas une nouvelle CI sur trois OS et ne prouve pas que la leçon est publiée. Les leçons 6 à 12 restent au stade de plan.
 
-## À vérifier
+## 2026-09-30 — La leçon 5 dans la CI sur trois OS
 
-- Les exemples et diagnostics de la nouvelle leçon 5 dans la CI Linux, Windows et macOS, après l'ouverture d'une PR.
+- Le [run 36664604662](https://github.com/spareilleux/learn/actions/runs/36664604662) du workflow *C# for beginners examples*, sur le commit `669d42a` de la [PR #60](https://github.com/spareilleux/learn/pull/60), a réussi sous `ubuntu-latest`, `windows-latest` et `macos-latest`. Dans la sortie de chaque job, `check.sh` affiche `ok` pour `l05_objects`, `l05_ex_practice`, `l05_get_only_property` et `l05_private_field` : les sorties et les diagnostics CS0122 et CS0200 correspondent à `expected/` sur les trois OS.
+
+## À vérifier
 
 - Les commandes d'installation pour Linux et macOS : seul le `setup-dotnet` de la CI a tourné sur ces OS.
 - La démonstration du débogueur de la leçon 3 dans VS Code, Visual Studio et Rider, pour une application basée sur un fichier et pour un projet. VS Code 1.118 et Rider sont installés sur ma machine ; Visual Studio ne l'est pas.
