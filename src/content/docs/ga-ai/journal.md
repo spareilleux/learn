@@ -282,6 +282,7 @@ Most of the 22 differences of 2026-09-14 were fixed upstream by [#689](https://g
 - The skill is reached as in lessons 12 and 14, through the intents of the chatbot's host. The program reads what the skill understood from its evidence lines, `Root:`, `Quality:` and `Notes:`, and reads its 19 formulas for lists of notes by reflection: a change in either would show in the output. The course's projects and `fetch-ga.sh` are unchanged.
 - The textbook spellings come from degrees written in `Lesson15.cs`. The round trip gives the skill its own spellings back and needs no oracle.
 - The solutions of the four exercises were checked by calling GA's compiled skill, vocabulary and regular expressions from PowerShell, outside the course program.
+- CI run [36793871229](https://github.com/spareilleux/learn/actions/runs/36793871229), for commit `829eaea`: green on the three systems, 2 min 19 s on Linux, 2 min 42 s on macOS, 7 min 12 s on Windows, clone and build included.
 
 ## To verify
 

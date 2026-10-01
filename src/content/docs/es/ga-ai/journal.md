@@ -282,6 +282,7 @@ La mayoría de las 22 diferencias del 2026-09-14 se corrigieron upstream en [#68
 - El programa llega a la skill como en las lecciones 12 y 14, a través de los intents del host del chatbot. Lee lo que la skill entendió en sus líneas de evidencia, `Root:`, `Quality:` y `Notes:`, y lee por reflexión sus 19 fórmulas para listas de notas: un cambio en unas u otras se vería en la salida. Los proyectos del curso y `fetch-ga.sh` no cambian.
 - Las grafías de manual salen de grados escritos en `Lesson15.cs`. El viaje de ida y vuelta devuelve a la skill sus propias grafías y no necesita oráculo.
 - Las soluciones de los cuatro ejercicios se comprobaron llamando desde PowerShell a la skill, el vocabulario y las expresiones regulares compilados de GA, fuera del programa del curso.
+- Ejecución de CI [36793871229](https://github.com/spareilleux/learn/actions/runs/36793871229), para el commit `829eaea`: verde en los tres sistemas, 2 min 19 s en Linux, 2 min 42 s en macOS, 7 min 12 s en Windows, con el clon y la compilación incluidos.
 
 ## Por verificar
 
