@@ -307,6 +307,9 @@ public static class Diagrams
             ["l7-ii-v-i.svg"] = ChordGrids(("xx0211", "Dm7"), ("320001", "G7"), ("x32000", "Cmaj7")),
             ["l7-bracelet-g7-c.svg"] = Bracelets(
                 ([Set(Id(7, 11, 2, 5), 1), Set(cMajorTriad)], Labels.Notes, null, null)),
+            ["l9-bracelet-c-f.svg"] = Bracelets(
+                ([Set(cMajorTriad), Set(Id(5, 9, 0), 1)], Labels.Notes, null, null)),
+            ["l9-g7-c.svg"] = ChordGrids(("320001", "G7"), ("x32010", "C")),
         };
     }
 

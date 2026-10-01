@@ -16,4 +16,12 @@
     <ProjectReference Include="$(GaRoot)Common/GA.Business.Config/GA.Business.Config.fsproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <!-- Lesson 9 compiles four files of GA.Domain.Services as they are, without the project and its dependencies -->
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Atonal/VoiceLeadingSpace.cs" Link="Ga/VoiceLeadingSpace.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Atonal/SetClassOpticIndex.cs" Link="Ga/SetClassOpticIndex.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Voicings/Analysis/ProgressionVoiceLeadingAnalyzer.cs" Link="Ga/ProgressionVoiceLeadingAnalyzer.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Voicings/Analysis/ProgressionVoiceLeadingReport.cs" Link="Ga/ProgressionVoiceLeadingReport.cs" />
+  </ItemGroup>
+
 </Project>
