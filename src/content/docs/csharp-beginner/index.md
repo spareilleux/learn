@@ -57,6 +57,19 @@ The examples use small, real data where it helps: the notes of a guitar, the tun
 
 Lessons 8 to 12 are planned and not written yet.
 
+## Highlights from the journal
+
+The [journal](journal/) records what writing and testing this course turned up. These are the findings that change how you write or run a program; each row links to the lesson that teaches it and to the journal entry with the measurement.
+
+| What the journal found | Why it matters | See |
+|---|---|---|
+| A misspelled `Writeline` (CS0117) is reported only once the missing `;` and quote of the same program are fixed: syntax errors hide the others | Fixing an error can make new ones appear; that is progress, not a step back | [Lesson 1](01-first-program/), [journal](journal/#2026-09-14--the-sdk-and-file-based-apps) |
+| `double.TryParse("1.5")` depends on the culture: `true` and 15 in `es-ES`, where the dot separates thousands, `false` in `fr-FR` | The same program reads a different number on a Spanish or a French machine | [Lesson 2](02-variables-and-types/), [journal](journal/#2026-09-14--the-sdk-and-file-based-apps) |
+| Warnings are printed only when the SDK compiles: a second `dotnet run` of an unchanged file prints none, even with `--no-cache`; `dotnet clean` brings them back | A warning that is gone on the next run has not been fixed | [Lesson 3](03-conditions-and-loops/), [journal](journal/#2026-09-14--the-sdk-and-file-based-apps) |
+| The literal `0` converts to an enum without a cast, and CS8524 warns about a `switch` expression that has an arm for every name | An enum variable can hold a number that has no name: the lesson's program fails on 7 | [Lesson 6](06-records-structs-enums/), [journal](journal/#2026-10-01--records-structs-and-enums) |
+| A draft said that `shape[i].Fret += 2` on a list of `readonly record struct` gives CS1612; a probe compiled before publishing gave CS8852 | Every output and error message in the course is pasted from a run, never written from memory | [Lesson 6](06-records-structs-enums/), [journal](journal/#2026-10-01--records-structs-and-enums) |
+| In Guitar Alchemist, `ChordTemplate`'s `ToString() => Name` is not `sealed`, so its derived records print all their properties instead of the chord's name | The `override` of lesson 7 meets the records of lesson 6 in real code; one GA call site logs the dump. Not reported to GA yet | [Lesson 7](07-interfaces-and-inheritance/), [QA table](journal/#qa) |
+
 ## Prerequisites
 
 - A computer with Windows 10 or 11, a recent Linux distribution (or WSL), or macOS 14 or later.
