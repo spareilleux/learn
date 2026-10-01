@@ -15,7 +15,7 @@ sidebar:
 - [x] Lección 4: métodos, arrays y listas
 - [x] Lección 5: clases y objetos
 - [x] Lección 6: records, structs y enums
-- [x] Lección 7: interfaces y herencia (en local; CI en tres sistemas por verificar)
+- [x] Lección 7: interfaces y herencia
 
 ## QA
 
@@ -72,12 +72,12 @@ sidebar:
 
 - La lección 7 construye `Guitar` y `Ukulele` sobre una clase base `StringInstrument` (`base(...)`, `virtual`, `override`, `base.Describe()`, `ToString`), después una clase abstracta `Instrument` con un método abstracto `Play`, y después una interfaz `IHasRange` que implementan tanto una clase como un record. Tiene cuatro ejemplos, uno de los cuales compila con la advertencia CS0114, tres ejercicios y cinco fragmentos rechazados, cuyos diagnósticos son CS0506, CS0509, CS0144, CS0534 y CS0535. El script usado para la lección 6 comprobó los 20 bloques de código de los tres idiomas contra `code/csharp-beginner` y `expected/`.
 - En Windows, con el SDK 10.0.112 y Git Bash, `check.sh` terminó con código 0 y 87 líneas `ok`, incluidos los 12 archivos `l07_*`. Todavía no es una ejecución de la CI en tres sistemas.
+- Después, en la CI: la [ejecución 36893689911](https://github.com/spareilleux/learn/actions/runs/36893689911) del workflow *C# for beginners examples*, sobre el commit `b347f7d` de la [PR #95](https://github.com/spareilleux/learn/pull/95), pasó en `ubuntu-latest`, `windows-latest` y `macos-latest`. Cada job imprime `ok` para los 12 archivos `l07_*`; los jobs cuentan 88 líneas `ok` en Linux y macOS y 87 en Windows, por la misma razón que en la lección 6.
 - Dos frases del borrador no se apoyaban en ninguna ejecución y cambiaron antes de publicar. Que solo una variable de tipo `Ukulele` encuentre un método que oculta es ahora una línea de `examples/l07_hiding_warning.cs`, que muestra `a ukulele`. «Los números MIDI son los de la lección 4, donde do4 vale 60» era falso, ya que la lección 4 no da ningún número MIDI; la frase dice ahora que los números MIDI cuentan semitonos, 12 por octava.
 - Dogfooding: en el commit `5c3a52a` de GA, [`ChordTemplate`](https://github.com/GuitarAlchemist/ga/blob/5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26/Common/GA.Domain.Core/Theory/Harmony/ChordTemplate.cs#L15-L18) es un record abstracto cuyos records derivados `TonalModal` y `Analytical` redefinen `Name`, y cuyo propio [`ToString() => Name`](https://github.com/GuitarAlchemist/ga/blob/5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26/Common/GA.Domain.Core/Theory/Harmony/ChordTemplate.cs#L84) no es `sealed`. La página de los records dice que un `ToString` `sealed` impide que el compilador sintetice uno en los records derivados ([formato integrado para la presentación](https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/record#built-in-formatting-for-display)); este debía quedar, pues, oculto. Una sonda lo confirmó: un proyecto de consola que referencia GA.Domain.Core y GA.Domain.Services en el commit `5c3a52a`, compilado con el SDK 10.0.112, mostró `TonalModal { Name = Major 7th, PitchClassSet = 0 4 7 E, … }` para `ToString()` y para `$"{template}"` en un `TonalModal`, en un `Analytical` y en `ChordTemplateFactory.CreateModalChords(...).First()`, y la reflexión señaló el record derivado como el tipo que declara `ToString`. Una réplica de la misma forma con `public sealed override string ToString() => Name` mostró `maj7`. Un solo punto de llamada depende de ello: [ContextualChordsController.cs:301](https://github.com/GuitarAlchemist/ga/blob/5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26/Apps/ga-server/GA.Fretboard.Service/Controllers/ContextualChordsController.cs#L301) pasa `template.ToString()` a `GetVoicingsForChordAsync`, que lo registra ([FretboardServices.cs:536](https://github.com/GuitarAlchemist/ga/blob/5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26/Apps/ga-server/GA.Fretboard.Service/Services/FretboardServices.cs#L536)); la respuesta HTTP toma el nombre del acorde de la ruta, no de esta cadena. El hallazgo está en la tabla QA; no se ha comunicado a GA.
 
 ## Por verificar
 
-- Los ejemplos y diagnósticos de la lección 7 en la CI de Linux, Windows y macOS, tras abrir una PR.
 - Los comandos de instalación para Linux y macOS: en esos sistemas operativos solo se ejecutó el `setup-dotnet` de la CI.
 - El recorrido del depurador de la lección 3 en VS Code, Visual Studio y Rider, para una aplicación basada en archivos y para un proyecto. VS Code 1.118 y Rider están instalados en mi máquina; Visual Studio no.
 - Las condiciones de licencia de los tres editores, en el momento de leerlas.

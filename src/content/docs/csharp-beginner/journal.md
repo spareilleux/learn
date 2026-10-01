@@ -15,7 +15,7 @@ sidebar:
 - [x] Lesson 4: methods, arrays and lists
 - [x] Lesson 5: classes and objects
 - [x] Lesson 6: records, structs and enums
-- [x] Lesson 7: interfaces and inheritance (local; cross-OS CI still to verify)
+- [x] Lesson 7: interfaces and inheritance
 
 ## QA
 
@@ -72,12 +72,12 @@ sidebar:
 
 - Lesson 7 builds `Guitar` and `Ukulele` on a `StringInstrument` base class (`base(...)`, `virtual`, `override`, `base.Describe()`, `ToString`), then an abstract `Instrument` with an abstract `Play`, then an `IHasRange` interface that a class and a record both implement. It has four examples, one of which compiles with warning CS0114, three exercises and five rejected snippets, whose diagnostics are CS0506, CS0509, CS0144, CS0534 and CS0535. The script used for lesson 6 checked the 20 code blocks of the three locales against `code/csharp-beginner` and `expected/`.
 - On Windows, SDK 10.0.112, under Git Bash, `check.sh` exited 0 with 87 `ok` lines, the 12 `l07_*` files included. This is not yet a three-OS CI run.
+- Then in CI: [run 36893689911](https://github.com/spareilleux/learn/actions/runs/36893689911) of the *C# for beginners examples* workflow, on commit `b347f7d` of [PR #95](https://github.com/spareilleux/learn/pull/95), passed on `ubuntu-latest`, `windows-latest` and `macos-latest`. Each job prints `ok` for the 12 `l07_*` files; the jobs count 88 `ok` lines on Linux and macOS and 87 on Windows, for the same reason as in lesson 6.
 - Two sentences of the draft had no run behind them and changed before publishing. That only a variable of type `Ukulele` finds a hiding method is now a line of `examples/l07_hiding_warning.cs`, which prints `a ukulele`. "The MIDI numbers are those of lesson 4, where C4 is 60" was wrong, since lesson 4 gives no MIDI number; the sentence now says that MIDI numbers count semitones, 12 per octave.
 - Dogfooding: at GA commit `5c3a52a`, [`ChordTemplate`](https://github.com/GuitarAlchemist/ga/blob/5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26/Common/GA.Domain.Core/Theory/Harmony/ChordTemplate.cs#L15-L18) is an abstract record whose derived records `TonalModal` and `Analytical` override `Name`, and whose own [`ToString() => Name`](https://github.com/GuitarAlchemist/ga/blob/5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26/Common/GA.Domain.Core/Theory/Harmony/ChordTemplate.cs#L84) is not `sealed`. The records page says that a `sealed` `ToString` stops the compiler from synthesizing one in derived records ([built-in formatting for display](https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/record#built-in-formatting-for-display)), so this one should be shadowed. A probe confirmed it: a console project referencing GA.Domain.Core and GA.Domain.Services at `5c3a52a`, built with SDK 10.0.112, printed `TonalModal { Name = Major 7th, PitchClassSet = 0 4 7 E, … }` for `ToString()` and for `$"{template}"` on a `TonalModal`, on an `Analytical` and on `ChordTemplateFactory.CreateModalChords(...).First()`, and reflection named the derived record as the type that declares `ToString`. A replica of the same shape with `public sealed override string ToString() => Name` printed `maj7`. One call site depends on it: [ContextualChordsController.cs:301](https://github.com/GuitarAlchemist/ga/blob/5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26/Apps/ga-server/GA.Fretboard.Service/Controllers/ContextualChordsController.cs#L301) passes `template.ToString()` to `GetVoicingsForChordAsync`, which logs it ([FretboardServices.cs:536](https://github.com/GuitarAlchemist/ga/blob/5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26/Apps/ga-server/GA.Fretboard.Service/Services/FretboardServices.cs#L536)); the HTTP response takes the chord name from the route, not from this string. The finding is in the QA table; it has not been reported to GA.
 
 ## To verify
 
-- Lesson 7's examples and diagnostics in CI on Linux, Windows and macOS, after a PR is opened.
 - The installation commands for Linux and macOS: only the CI's `setup-dotnet` ran on those OSes.
 - The debugger walkthrough of lesson 3 in VS Code, Visual Studio and Rider, for a file-based app and for a project. VS Code 1.118 and Rider are installed on my machine; Visual Studio isn't.
 - The license terms of the three editors, at the time of reading.
