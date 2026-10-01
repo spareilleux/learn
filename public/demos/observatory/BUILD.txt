@@ -438,6 +438,45 @@ the screen, at least a tenth of its shorter side tall, out of the stick's
 reach and clear of the other buttons.
 Web: exported; this version was not run in a browser. Real phones: to verify,
 first an Android phone in Chrome, where the lift lacked these buttons.
+Version 19, exported 2026-10-01 16:46:17 UTC, answers three reports from the
+author on an Android phone: the lift failed to go up to the roof, the roof
+terrace could not be reached on foot from the roof view, and the flights
+between views moved abruptly.
+- The cage carries its rider however far it rises in one frame
+  (scripts/lift.gd, support). The walking body looks for the cage's floor
+  before the lift moves it, and took it only within a step (0.3 m) above its
+  feet: at 10 frames a second the cage rose 0.33 m in a frame, and a frame
+  stalled while the first climb builds Upperside lifts it further, so the body
+  fell back down the shaft. Now a body that stood where the cage's floor was
+  before its last move rides with it.
+- The roof view leads onto the terrace (scripts/extra_views.gd): walking, the
+  first step goes down onto the lead at the drum's foot, under the view, from
+  where the lift's kiosk is a walk away; flying still holds the view. A view
+  inside taken from the terrace is a cut, not a flight through the roof. The
+  roof view's hint says so.
+- Flights between views (scripts/view_move.gd) are paced along the path's
+  length and turn over nearly all of it, and last 1.4 to 2.4 s instead of 0.9
+  to 1.6 s; a slow frame slows a flight rather than skipping part of it.
+  Overview to gallery, at 60 frames a second: 1.86 s instead of 1.34 s, a peak
+  speed of 18.5 m/s (1.88 times the mean) instead of 34.5 m/s (2.52 times),
+  and a peak turn of 98 degrees a second instead of 149.
+index.pck is now 21,731,268 bytes; index.html changes only that size, and
+index.wasm and index.js are unchanged.
+Native tests (Godot 4.6.1): 47 runs under Compatibility and Forward+ pass with
+no script error. Among them: a roof probe with real frame times
+(artpass/roof/roofprobe.gd), whose three cases left the walker behind before
+the fix (10 frames a second from the hall, a 1.5 s stall from the hall, a 0.8
+s stall at 30 frames a second from the second gallery) and now carry it to the
+roof; a test from the roof view to the lift on foot
+(artpass/roof/terracetest.gd), in both renderers with flights on: down onto
+the terrace, a view inside as a cut, round the roof to the kiosk with no fall,
+the cage called up with E, in, and down to the hall with the hall's touch
+button; the view test, where walking from the roof view now steps down onto
+the terrace and flying holds the view; and the flight test, whose two new
+checks (a peak speed under twice the mean, a turn under 120 degrees a second)
+fail with the old flight.
+Web: exported; this version was not run in a browser. Real phones: to verify,
+first the author's Android phone in Chrome, on the ride to the roof.
 
 Native Compatibility GPU time, RTX 5080, 1600x900, 240 frames per view: 0.44 to
 0.52 ms for the previous web scene, 0.64 to 1.44 ms with the detail pass; up to
@@ -460,7 +499,7 @@ scripts/seldon_statue.gd 4e41b282aa2cc4de794296586b65f5f4d39688312673ddc46226fd3
 scripts/touch_controls.gd c486b6055fa111862ea2bc8e2fcb4d35effb27a1f7780c695b05e26e0879af0e
 scripts/walk_physics.gd a147b6165153005ec49a39cb93adad582cd6b7b64d0c3413c74d49213ddcd271
 scripts/view_fit.gd 04968e0b9c220c12490b258677a7331f07671b37d2951581a03868d8c992c65e
-scripts/view_move.gd 9a39222118edb283e594c21faf2963d767e42449b01d11fac29188b9b1b65aca
+scripts/view_move.gd 558a4059815cb3a8a202d205d8cfada17653fb533e7e056bfe9e8a434dac0431
 scripts/multiverse.gd 0de3cece747a87c742ba6b26c8fac27a6a7dcdd18286f30957899becb2dfb34d
 scripts/camera_follow.gd dc63643772a7dceb41583169aeec3d3053d8555a20540fd29a1c9cbade2a712d
 assets/seldon_statue.glb 41f7e4c667711b0097132025bdf5edbd03b44de0793445db1f118d69e145c8ec
@@ -482,21 +521,21 @@ assets/floor_paving.gdshader 23187f024d276b897635ee0cc3e543c5852c4a9b5175cbe56ec
 assets/statue_marble.gdshader ec3f14f662487f3dae14a398fe91ea7183d88214bd2bf266359da89d79b94452
 assets/world_glimpse.gdshader a06fc85ca086fc3e4d9297039be0b6549132bbffafeaedfbda0ffea3eb918d6d
 assets/courses.json 407817e268f2c0d37ce28ae0d873f08b87a514479d6a73545b75d1dfbb71823b
-scripts/extra_views.gd cd6f1a22e9cca5015611121a271aa145a6100e843d200e7e57eebf85d6610a56
+scripts/extra_views.gd 441471f2f885f435b001c98db584a71a496ea2a64105507265cd46b90388f7bb
 scripts/upperside.gd b6e5a199de5737ffaa294c1f9a6be8d21fc4817ac600118dead14f0fc8fc486c
 assets/night_sky.gdshader 67421b4338debb80d8b6cec071bb37001d9d5493d240be53c0a107ad17cb5cec
 assets/upperside.gdshader f119593a603bc623de218054ec142b8732330785fe0d61ba5a3dcc13124f96e3
 assets/sky_milky_way_eso.jpg b17e19bf2d5e7e9efa03b602450f5189dc77f85251e704d99b6f14632cff3495
 assets/exterior_ashlar_albedo.png c0cff260c039e1e1528920f86070266ac20ba2a3e36e99a53654c2ed18cdef94
 assets/exterior_ashlar_normal.png 0dc3b0023534b21c7d383bbca468f057cc65ba1a9526303c7b3084587138f029
-scripts/lift.gd c73a7b358920f90dd5be03d494f09c18f5d6e75fe5ac5f4a1388cbe01c10c1a5
+scripts/lift.gd f140051b9128fdc65ea6934a86160e665dc40726117918b694c618e5724cb778
 assets/sky_core_cap.png a110fdfa1b79cc41eec119265aeb89bc211d0b8e0eb6c759b45c25496f2daabe
 assets/kiosk_glass.gdshader 76226f17e5884a042b85e5fc544a4b71012ea6e389b9743c1cac65083a06bc44
 scripts/lift_sounds.gd 4daed5e380396a3711fc7ff2f1f72b877b9efbdaff6d6fa428c595b1dad7b244
-scripts/build_info.gd fec89a858d3c1ce44b0852eb1f3aa6ca0cef0ba041c441fb45f47888dda53655
+scripts/build_info.gd 441a2e3bcf142e5dfc86a8f0e07bc2a5f402e402f7374a87028065a5bb10e000
 
 SHA-256 output files:
-index.pck 3dcfdb540f5a494772967e3e2a263d8988662dbd1863202fcffbdf813cb2ddcb
+index.pck 0173d4df17bf35efcd9801b6faee06d47c83bc75058d71808e3a1ec0743d1444
 index.wasm 99962b29677e42f3ba0258bd90fdc52ad90295954c4473e816ad02cfe5ff1d4f
 index.js e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981
 
