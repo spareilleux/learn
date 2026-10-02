@@ -129,6 +129,12 @@ La [PR Demerzel #1140](https://github.com/GuitarAlchemist/Demerzel/pull/1140) a 
 
 MAT-007 reste **en attente de vérification** jusqu'à ce que ce changement soit fusionné, que son déploiement réussisse et que les pages soient relues sans authentification.
 
+## 2026-09-28 — Streeling MAT-007 publié
+
+La [PR Learn #39](https://github.com/spareilleux/learn/pull/39) a été fusionnée en `0436325`, et son [déploiement Pages](https://github.com/spareilleux/learn/actions/runs/36377803965) a réussi. Le [module MAT-007](../streeling/mathematics/mat-007-least-squares-regularisation/), l'index des mathématiques, le [journal Streeling](../streeling/journal/) et ce journal ont été relus sans authentification dans les trois langues : 12 pages, qui répondent toutes 200 et mentionnent MAT-007. Les pages françaises et espagnoles sont des traductions, pas la version anglaise de repli.
+
+MAT-007 passe donc d'en attente de vérification à vérifié ; son entrée ci-dessus reste telle qu'écrite. Lors de cette relecture, les pages MAT-007 renvoyaient à leur source à `8c14336`. Comme pour les modules précédents, publié ne veut pas dire étudié : MAT-007 n'a été ni exécuté ni étudié ici, et son expérience reste proposée.
+
 ## À vérifier
 
 - Contrôler les URL publiques de cette mise à jour et le catalogue après déploiement ; conserver le reçu de déploiement avec le compte rendu d'intégration.
