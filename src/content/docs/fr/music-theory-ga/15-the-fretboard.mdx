@@ -1,0 +1,387 @@
+---
+title: "Leçon 15 : le manche — CAGED, doigtés et jouabilité"
+description: Où vont les frettes, jusqu'où va une main, les formes du CAGED, l'effort d'une forme et les accordages ouverts, comparés avec la géométrie du manche de Guitar Alchemist, ses trois mesures de jouabilité, ses fichiers d'accordages et la table derrière son outil ga_easier_voicings.
+sidebar:
+  label: 15. Le manche
+  order: 15
+---
+
+import CagedC from '../../../../assets/music-theory-ga/l15-caged-c.svg';
+
+Les leçons 1 et 8 plaçaient les notes sur le manche, et la leçon 14 les disposait en voicings. Cette leçon regarde le manche comme un objet physique : où sont les frettes, combien une main en couvre, les cinq formes d'accord du système CAGED qui glissent le long du manche, et les accordages qui le changent. [Guitar Alchemist](https://github.com/GuitarAlchemist/ga) (GA) mesure tout cela : deux classes calculent les distances entre frettes, trois mesures notent la difficulté d'une forme, un fichier de configuration liste des accordages, et un outil de son serveur MCP propose des voicings plus faciles au guitariste qui n'arrive pas à jouer un barré. Le programme du cours calcule les mêmes grandeurs à partir de leurs définitions et compare.
+
+Tous les liens vers GA pointent sur le commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6). Les sorties viennent de la commande ci-dessous ; le point d'entrée est `l17`.
+
+```bash
+dotnet run --project code/music-theory-ga/GaTheory -c Release -- l17
+```
+
+## Où vont les frettes
+
+### L'idée
+
+Wikipédia : "the ratio of the distances of two consecutive frets to the bridge is … (the twelfth root of two), or approximately 1.059463", et "Theoretically, the twelfth fret should divide the string in two exact halves" ([Fret](https://en.wikipedia.org/wiki/Fret)). Le module Streeling [MUS-009 · Accordage et géométrie du manche](../../streeling/music/mus-009-tuning-fretboard-geometry/) établit la distance du sillet à la frette *n*, d(n) = L · (1 − 2^(−n/12)), où L est le diapason, la longueur vibrante de la corde à vide, et donne des chiffres : "On a 648 mm scale, frets 1, 5, 7, 12 and 24 lie 36.4, 162.5, 215.5, 324 and 486 mm from the nut" ([`mus-009-tuning-fretboard-geometry.md#L84`](https://github.com/GuitarAlchemist/Demerzel/blob/d459d8e5f0210cbad00f49c49196fc61160aba76/state/streeling/courses/music/en/mus-009-tuning-fretboard-geometry.md#L84)). Les frettes se resserrent en montant. Au-dessus de la 12e frette, le manche est une copie à demi-échelle de la partie du bas : les mêmes cinq frettes mesurent deux fois moins à partir de la frette 12 qu'à partir du sillet.
+
+### Dans GA : deux calculateurs, et un document
+
+[`FretboardGeometry`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Analysis/FretboardGeometry.cs#L7-L32), dont le résumé dit "Implements standard logarithmic fret spacing", calcule 2^(−bas/12) − 2^(−haut/12), une fraction de la corde, et la multiplie par un diapason de 647,7 mm, "(25.5 inches)" ([`BiomechanicsConstants.cs#L10-L11`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Instruments/Biomechanics/BiomechanicsConstants.cs#L10-L11)). [`PhysicalFretboardCalculator`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Analysis/PhysicalFretboardCalculator.cs#L35-L58), qu'appellent les analyseurs de la leçon 14, travaille sur 648 mm, sa valeur par défaut "Electric guitar (Fender)" ([`#L327-L334`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Analysis/PhysicalFretboardCalculator.cs#L327-L334)). Le programme interroge les deux ([`Lesson17.cs#L185-L198`](https://github.com/spareilleux/learn/blob/7b2b01e/code/music-theory-ga/GaTheory/Lesson17.cs#L185-L198)) :
+
+```text
+== Distance from the nut to fret n, the course's d(n) = L(1 − 2^(−n/12)), against FretboardGeometry.CalculateSpanMm(0, n) on its 647.7 mm and PhysicalFretboardCalculator.CalculateFretPositionMm(n) on its 648 mm (GA.Domain.Services, compiled)
+fret  course, 647.7  CalculateSpanMm  check  course, 648  CalculateFretPositionMm  check
+1     36.35          36.35            ok     36.37        36.37                    ok
+2     70.66          70.66            ok     70.70        70.70                    ok
+3     103.05         103.05           ok     103.10       103.10                   ok
+4     133.62         133.62           ok     133.68       133.68                   ok
+5     162.47         162.47           ok     162.55       162.55                   ok
+7     215.41         215.41           ok     215.51       215.51                   ok
+12    323.85         323.85           ok     324.00       324.00                   ok
+17    405.09         405.09           ok     405.27       405.27                   ok
+19    431.56         431.56           ok     431.76       431.76                   ok
+24    485.78         485.78           ok     486.00       486.00                   ok
+the length left to the saddle, fret n against fret n + 1, for n from 0 to 23: 1.059463 each time, the twelfth root of two: True
+MUS-009's frets 1, 5, 7, 12 and 24 on 648 mm, "36.4, 162.5, 215.5, 324 and 486": the calculator gives 36.4, 162.5, 215.5, 324, 486
+```
+
+Les deux s'accordent avec la formule à chaque frette, le rapport vaut la racine douzième de deux aux 24 frettes, et les chiffres de MUS-009 sortent.
+
+À côté de ces classes, GA garde un document, `PHYSICAL_PLAYABILITY_IMPROVEMENTS.md`, qui donne un "5-fret span at different positions" ([`#L45-L50`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Analysis/PHYSICAL_PLAYABILITY_IMPROVEMENTS.md#L45-L50)) et cite la sortie d'un test, "Difference (low vs high): 50.02mm (71.4% larger)" ([`#L155-L161`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Analysis/PHYSICAL_PLAYABILITY_IMPROVEMENTS.md#L155-L161)). Le test imprime ces lignes à partir de `CalculateFretDistanceMm` ([`PhysicalFretboardCalculatorTests.cs#L36-L54`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Tests/Common/GA.Business.Core.Tests/Fretboard/PhysicalFretboardCalculatorTests.cs#L36-L54)), dans un fichier que le projet de tests de GA retire de la compilation ([`GA.Business.Core.Tests.csproj#L47`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Tests/Common/GA.Business.Core.Tests/GA.Business.Core.Tests.csproj#L47)), comme l'a noté MUS-009 ([`mus-009-tuning-fretboard-geometry.md#L109`](https://github.com/GuitarAlchemist/Demerzel/blob/d459d8e5f0210cbad00f49c49196fc61160aba76/state/streeling/courses/music/en/mus-009-tuning-fretboard-geometry.md#L109)). Le programme calcule les trois écarts ([`Lesson17.cs#L200-L210`](https://github.com/spareilleux/learn/blob/7b2b01e/code/music-theory-ga/GaTheory/Lesson17.cs#L200-L210)) :
+
+```text
+== The 5-fret spans quoted in GA's PHYSICAL_PLAYABILITY_IMPROVEMENTS.md, against PhysicalFretboardCalculator.CalculateFretDistanceMm on 648 mm and the course
+frets   the document  GA       course   check
+0-5     120.11        162.55   162.55   DIFF
+7-12    85.42         108.49   108.49   DIFF
+12-17   70.09         81.27    81.27    DIFF
+frets 0-5 against 12-17: the document says "50.02mm (71.4% larger)"; GA's distances differ by 81.27 mm, 100.0% larger
+```
+
+Aucun des chiffres du document n'est ce que renvoie le calculateur de GA. Avec la formule, les frettes 12 à 17 mesurent exactement la moitié des frettes 0 à 5 : l'écart du bas est plus grand de 100,0 % que celui du haut, pas de 71,4 %.
+
+## Jusqu'où va une main
+
+### L'idée
+
+Wikipédia décrit la position de base de la main gauche : "each of the four fingers of the fretting hand controlling one of the first four frets (index finger on fret 1, little finger on fret 4, etc.)" ([Guitar tunings](https://en.wikipedia.org/wiki/Guitar_tunings)). Quatre doigts, quatre frettes : la première position. Comme les frettes se resserrent, la même main couvre plus de frettes en montant. Mesurée en millimètres, une extension est une longueur fixe, pas un nombre fixe de frettes.
+
+### Dans GA : une extension mesurée depuis le sillet
+
+`BiomechanicsConstants.ComfortableReachScaleUnits` vaut 0,21, sous le commentaire "Practical finger reach (approx 4-fret span at the nut) in relative scale units. (1 - 2^(-4/12)) approx 0.206" ([`BiomechanicsConstants.cs#L24-L28`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Instruments/Biomechanics/BiomechanicsConstants.cs#L24-L28)) : la distance du sillet à la frette 4, la place qu'il faut à quatre doigts pour les frettes 1 à 4. [`PhysicalCostService`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Analysis/PhysicalCostService.cs#L27-L38) la compare à l'écart d'une forme, mesuré par `FretboardGeometry.CalculatePhysicalSpan`, qui "Considers only fingered notes (fret > 0)" ([`FretboardGeometry.cs#L34-L57`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Analysis/FretboardGeometry.cs#L34-L57)), de la frette appuyée la plus basse à la plus haute. Le programme demande, à partir de chaque frette de départ, la frette la plus haute encore à portée ([`Lesson17.cs#L214-L226`](https://github.com/spareilleux/learn/blob/7b2b01e/code/music-theory-ga/GaTheory/Lesson17.cs#L214-L226)) :
+
+```text
+== GA's comfortable reach, BiomechanicsConstants.ComfortableReachScaleUnits (GA.Domain.Core), against the 1 − 2^(−4/12) of its comment, and how far it reaches from each fret, measured with FretboardGeometry.CalculatePhysicalSpan as PhysicalCostService measures a shape (GA.Domain.Services, compiled)
+  ComfortableReachScaleUnits = 0.21; 1 − 2^(−4/12) = 0.2063, the nut to fret 4; on 647.7 mm, 136.0 mm and 133.6 mm
+lowest fret  highest within reach  frets held  mm, 647.7
+1            5                     5           126.1
+2            6                     5           119.0
+3            7                     5           112.4
+5            10                    6           121.7
+7            13                    7           126.6
+9            16                    8           128.1
+12           21                    10          131.3
+15           24                    10          110.4
+  the first position, index finger on fret 1 and little finger on fret 4: CalculatePhysicalSpan 0.1502, within reach: True
+  the default PlayerProfile: HandSize Medium, MaxComfortableStretchMm 129.0
+```
+
+La constante dépasse un peu la distance du sillet à la frette 4 : 136,0 mm contre 133,6 mm. Mais elle mesure quatre intervalles de frettes, et l'écart entre notes appuyées en compte un de moins : les frettes 1 à 4 mesurent 0,1502. Ainsi, depuis la frette 1, l'extension couvre les frettes 1 à 5, une frette de plus que les quatre doigts de la première position, et depuis la frette 12 elle couvre dix frettes, de 12 à 21. En millimètres, elle reste entre 110,4 et 131,3 mm. Le `PlayerProfile` par défaut porte une `HandSize`, Medium, et un `MaxComfortableStretchMm` de 129,0 mm, "approx 130mm" dans son commentaire ([`PlayerProfile.cs#L14-L17`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Core/Context/PlayerProfile.cs#L14-L17)) ; aucune des mesures ci-dessous ne lit l'un ou l'autre.
+
+## Le CAGED
+
+### L'idée
+
+Un accord barré est "a type of chord on a guitar or other stringed instrument played by using one finger to press down multiple strings across a single fret of the fingerboard". "The CAGED system is an acronym for the chords C, A, G, E, and D." "By replacing the nut with a full bar, a player can use the chord shapes for C, A, G, E, and D anywhere on the fret board to play any major chord in any key." La forme doit laisser la place au barré : on peut construire des accords mobiles "provided that the shape leaves the first finger free to create the barre, and that the chord does not require the fingers to extend beyond a four fret range". Et l'ordre : "CAGED is also a mnemonic for the sequence that a chord appears in as it moves up the neck; for example, C Major can be played as an open C-shape chord at the nut, as an A-shape chord barred at the third fret, as a G-shape barred at the fifth fret, as an E-shape barred at the eighth fret, and as a D-shape barred at the 10th fret" ([Bar chord](https://en.wikipedia.org/wiki/Bar_chord)).
+
+Le module Streeling [GTR-002 · La géométrie du CAGED](../../streeling/guitar-studies/gtr-002-caged-geometry/) donne les cinq formes ouvertes avec le degré de chaque note ([`gtr-002-caged-geometry.md#L31-L59`](https://github.com/GuitarAlchemist/Demerzel/blob/d459d8e5f0210cbad00f49c49196fc61160aba76/state/streeling/courses/guitar-studies/en/gtr-002-caged-geometry.md#L31-L59)). Le cours les vérifie, puis monte chaque forme jusqu'à ce que sa fondamentale soit C ([`Lesson17.cs#L230-L263`](https://github.com/spareilleux/learn/blob/7b2b01e/code/music-theory-ga/GaTheory/Lesson17.cs#L230-L263)) :
+
+```text
+== GTR-002's five open shapes in standard tuning: the notes from string 6 to string 1, and each one's degree above the root
+shape  frets    notes                course        GTR-002       check
+C      x32010   C3 E3 G3 C4 E4       R 3 5 R 3     R 3 5 R 3     ok
+A      x02220   A2 E3 A3 C♯4 E4      R 5 R 3 5     R 5 R 3 5     ok
+G      320003   G2 B2 D3 G3 B3 G4    R 3 5 R 3 R   R 3 5 R 3 R   ok
+E      022100   E2 B2 E3 G♯3 B3 E4   R 5 R 3 5 R   R 5 R 3 5 R   ok
+D      xx0232   D3 A3 D4 F♯4         R 5 R 3       R 5 R 3       ok
+
+== C major in the five shapes: each open shape raised by the semitones from its root up to C, a barre in place of the nut
+shape  barre  frets           notes                C E G only  frets held  strings playing C
+C      0      x32010          C3 E3 G3 C4 E4       yes         3           5 2
+A      3      x35553          C3 G3 C4 E4 G4       yes         3           5 3
+G      5      875558          C3 E3 G3 C4 E4 C5    yes         4           6 3 1
+E      8      8-10-10-9-8-8   C3 G3 C4 E4 G4 C5    yes         3           6 4 1
+D      10     x-x-10-12-13-12 C4 G4 C5 E5          yes         4           4 2
+barre frets  course               GA                   check
+Wikipedia    0 3 5 8 10           0 3 5 8 10           ok
+  C on string 2: C shape, fret 1; D shape, fret 13; string 2 in the other shapes: A shape, E4; G shape, E4; E shape, G4
+```
+
+<CagedC role="img" aria-label="Cinq diagrammes d'accords de C majeur. x32010, la forme de C au sillet. x35553, la forme de A à la troisième case. 875558, la forme de G à la cinquième case. 8-10-10-9-8-8, la forme de E barrée à la huitième case. x-x-10-12-13-12, la forme de D à la dixième case." />
+
+Les degrés de GTR-002 sont justes pour les cinq formes. Montées en C, elles se placent aux frettes 0, 3, 5, 8 et 10, celles de Wikipédia, et chacune ne joue que C, E et G, sur trois ou quatre frettes. Le troisième exercice de GTR-002 dit : "On string 2 alone, play the note C in each of the five CAGED positions. Notice how each shape places C on a different fret of that string" ([`#L138-L139`](https://github.com/GuitarAlchemist/Demerzel/blob/d459d8e5f0210cbad00f49c49196fc61160aba76/state/streeling/courses/guitar-studies/en/gtr-002-caged-geometry.md#L138-L139)). Deux formes seulement ont un C sur la corde 2 : la forme de C, case 1, et la forme de D, case 13. Les formes de A et de G y jouent E, la forme de E y joue G.
+
+Dans les autres tonalités, les formes gardent leur ordre et partent d'une autre lettre ([`Lesson17.cs#L265-L278`](https://github.com/spareilleux/learn/blob/7b2b01e/code/music-theory-ga/GaTheory/Lesson17.cs#L265-L278)) :
+
+```text
+== The five shapes in order up the neck, in each major key: the barre fret of each shape, from the lowest
+C   C A G E D at 0 3 5 8 10
+D♭  C A G E D at 1 4 6 9 11
+D   D C A G E at 0 2 5 7 10
+E♭  D C A G E at 1 3 6 8 11
+E   E D C A G at 0 2 4 7 9
+F   E D C A G at 1 3 5 8 10
+F♯  E D C A G at 2 4 6 9 11
+G   G E D C A at 0 3 5 7 10
+A♭  G E D C A at 1 4 6 8 11
+A   A G E D C at 0 2 5 7 9
+B♭  A G E D C at 1 3 6 8 10
+B   A G E D C at 2 4 7 9 11
+every order is C A G E D read round from one of its letters: True
+key          course                 GA                     check
+G, Wikipedia G E D C A at 0 3 5 7 10 G E D C A at 0 3 5 7 10 ok
+```
+
+Dans chaque tonalité, l'ordre est C A G E D lu en boucle à partir d'une de ses lettres, et en G c'est celui de Wikipédia : "G Major can be played as an open G-shaped chord and the next shape … E-shape (barred at the third fret), followed by the D-shape (barred at the 5th fret); … C-shape barred at the 7th fret, an A-shape at the 10th fret". GTR-002 dessine la séquence "for key of E major" ([`#L94-L98`](https://github.com/GuitarAlchemist/Demerzel/blob/d459d8e5f0210cbad00f49c49196fc61160aba76/state/streeling/courses/guitar-studies/en/gtr-002-caged-geometry.md#L94-L98)) :
+
+```text
+Fret:  0    3    5    7    8    10   12
+       |--E--|--D--|--C--|--A--|--G--|--E--|
+       (shapes shown for key of E major)
+```
+
+Les lettres sont dans l'ordre du programme, mais en E le programme place les formes aux frettes 0, 2, 4, 7 et 9, et 2, 4 et 9 ne figurent pas sur l'échelle de la figure.
+
+### Dans GA : une forme sur cinq, lue à l'envers
+
+`VoicingPhysicalAnalyzer.CalculatePlayability` remplit un `CagedShape` ([`VoicingPhysicalAnalyzer.cs#L114-L115`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Voicings/Analysis/VoicingPhysicalAnalyzer.cs#L114-L115)) à partir de [`DetectCagedShape`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Voicings/Analysis/VoicingPhysicalAnalyzer.cs#L253-L343). Ses commentaires lisent la première position comme la corde 6 : "For E-shape, base is the fret on string 6 (Index 0)." ([`#L263`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Voicings/Analysis/VoicingPhysicalAnalyzer.cs#L263)). `ExtractPhysicalLayout` la numérote corde 1 ([`#L27`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Voicings/Analysis/VoicingPhysicalAnalyzer.cs#L27)), l'ordre des voicings de GA, dont le générateur part de la corde 1 ([`VoicingGenerator.cs#L167`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Voicings/Generation/VoicingGenerator.cs#L167)). Et `if (baseFret < 0) return null; // Root must be on string 6` ([`#L264-L265`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Voicings/Analysis/VoicingPhysicalAnalyzer.cs#L264-L265)) renvoie avant les tests de la forme de A et de la forme de C, qui demandent tous deux cette première position étouffée ([`#L297`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Voicings/Analysis/VoicingPhysicalAnalyzer.cs#L297), [`#L323`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Voicings/Analysis/VoicingPhysicalAnalyzer.cs#L323)). Le programme interroge dans les deux ordres ([`Lesson17.cs#L280-L300`](https://github.com/spareilleux/learn/blob/7b2b01e/code/music-theory-ga/GaTheory/Lesson17.cs#L280-L300)) :
+
+```text
+== VoicingPhysicalAnalyzer.CalculatePlayability (GA.Domain.Services, compiled): the CagedShape of each shape, with its positions in GA's string order (string 1 first, as ExtractPhysicalLayout numbers them) and reversed (string 6 first, as the comments of DetectCagedShape read them)
+frets           course           GA's order  reversed
+x32010          C shape, C       (none)      (none)
+x02220          A shape, A       (none)      (none)
+320003          G shape, G       (none)      (none)
+022100          E shape, E       (none)      E-Shape
+xx0232          D shape, D       (none)      (none)
+x35553          A shape, C       (none)      (none)
+875558          G shape, C       (none)      (none)
+8-10-10-9-8-8   E shape, C       (none)      E-Shape
+x-x-10-12-13-12 D shape, C       (none)      (none)
+133211          E shape, F       (none)      E-Shape
+x13331          A shape, B♭      (none)      (none)
+001220          (none)           E-Shape     (none)
+  the C shape barred at frets 0 to 12: "E-Shape" 0 times in GA's order, 0 reversed; any other answer: 0
+  the A shape barred at frets 0 to 12: "E-Shape" 0 times in GA's order, 0 reversed; any other answer: 0
+  the G shape barred at frets 0 to 12: "E-Shape" 0 times in GA's order, 0 reversed; any other answer: 0
+  the E shape barred at frets 0 to 12: "E-Shape" 0 times in GA's order, 13 reversed; any other answer: 0
+  the D shape barred at frets 0 to 12: "E-Shape" 0 times in GA's order, 0 reversed; any other answer: 0
+  001220, string 6 to string 1: E2 A2 D♯3 A3 C♯4 E4
+  the tag GeneratePhysicalTags writes for the reversed E shape: e-shape; with "CAGED-E" or "E shape" in it, the test of VoicingFilterEngine for CagedShape "E": False
+```
+
+Dans l'ordre de GA, aucune forme du cours n'est reconnue. Le seul motif qui l'est, 001220 écrit depuis la corde 6, est la forme de E à l'envers : E2 A2 D♯3 A3 C♯4 E4. Inversée, la forme de E est reconnue à chaque frette de 0 à 12, et rien d'autre ne l'est jamais : « A-Shape » et « C-Shape » ne peuvent pas être renvoyés. L'étiquette que `GeneratePhysicalTags` en tire, `e-shape` ([`#L203`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Voicings/Analysis/VoicingPhysicalAnalyzer.cs#L203)), ne passerait pas le test que `VoicingFilterEngine` applique pour un filtre `CagedShape`, qui cherche « CAGED-E » ou « E shape » ([`VoicingFilterEngine.cs#L61-L66`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Search/VoicingFilterEngine.cs#L61-L66)). Lu, pas exécuté : `MusicalEmbeddingGenerator` ajoute « -shape » au `CagedShape` mis en minuscules ([`MusicalEmbeddingGenerator.cs#L110-L113`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Embeddings/MusicalEmbeddingGenerator.cs#L110-L113)), ce qui donne `e-shape-shape`.
+
+## L'effort d'une forme
+
+### L'idée
+
+Qu'est-ce qui rend une forme difficile à jouer ? Le cours mesure ce qu'une règle peut vérifier : les frettes tenues, de la plus basse à la plus haute ; leur écart en millimètres sur 647,7 mm ; et le nombre de notes appuyées. Une forme de plus de quatre notes appuyées demande un barré, puisque la main n'a que quatre doigts pour elles. Le "four fret range" de l'article sur les accords barrés est l'autre limite.
+
+### Dans GA : un coût et deux analyseurs
+
+`PhysicalCostService.CalculateStaticCost` "Calculates the "effort" required to play a specific static shape", et la classe est "Used to rank multiple ways of playing the same notes" ([`PhysicalCostService.cs#L6-L17`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Analysis/PhysicalCostService.cs#L6-L17)). Elle additionne cinq termes : un étirement au-delà de l'extension ci-dessus ([`#L27-L48`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Analysis/PhysicalCostService.cs#L27-L48)) ; les « gros doigts » au-dessus de la frette 17 ([`#L53-L59`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Analysis/PhysicalCostService.cs#L53-L59)) ; un terme de registre, qui retire 0,5 par corde à vide et, avec le profil par défaut, ajoute une pénalité quand la frette moyenne est sous 3 ou au-dessus de 9 ([`#L62-L99`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Analysis/PhysicalCostService.cs#L62-L99)) ; les cordes sautées ([`#L102-L119`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Analysis/PhysicalCostService.cs#L102-L119)) ; et une tension d'environ 0,1 par corde appuyée, davantage sur les cordes graves ([`#L122-L131`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Analysis/PhysicalCostService.cs#L122-L131)). La somme est divisée par la racine carrée du nombre de cordes jouées ([`#L136-L138`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Analysis/PhysicalCostService.cs#L136-L138)). Le programme l'applique à six accords ouverts, à F, aux quatre formes de C montées et à la forme de E aux frettes 5 et 12 ([`Lesson17.cs#L304-L320`](https://github.com/spareilleux/learn/blob/7b2b01e/code/music-theory-ga/GaTheory/Lesson17.cs#L304-L320)) :
+
+```text
+== The course's measures of each shape, and PhysicalCostService.CalculateStaticCost with the default PlayerProfile (GA.Domain.Services, compiled): its total and the terms that are not zero
+frets              chord  frets held  span, mm  fretted  barre  total  terms
+x32010             C      3           66.7      3        no     -0.23  Register -0.82 Tension 0.30
+x02210             Am     2           34.3      3        no     -0.23  Register -0.80 Tension 0.29
+022000             Em     1           0.0       2        no     -0.63  Register -1.77 Tension 0.22
+022100             E      2           34.3      3        no     -0.40  Register -1.28 Tension 0.32
+320003             G      2           32.4      3        no     -0.42  Register -1.33 Tension 0.32
+xx0232             D      2           32.4      3        no     -0.06  Register -0.38 Tension 0.26
+133211             F      3           66.7      6        yes    0.29   Register 0.12 Tension 0.60
+x35553             C      3           59.4      5        yes    0.21   Tension 0.48
+875558             C      4           77.2      6        yes    0.24   Tension 0.60
+8-10-10-9-8-8      C      3           44.5      6        yes    0.24   Tension 0.60
+x-x-10-12-13-12    C      4           57.8      4        no     0.59   Register 0.83 Tension 0.36
+577655             A      3           52.9      6        yes    0.24   Tension 0.60
+12-14-14-13-12-12  E      3           35.3      6        yes    0.66   Register 1.01 Tension 0.60
+```
+
+Les accords ouverts coûtent moins que rien, parce que chaque corde à vide retire 0,5 : le moins cher est Em, qui en a quatre. F, six notes appuyées sous un barré, coûte 0,29, à peu près ce que coûtent les formes de A, G et E en C, 0,21, 0,24 et 0,24. Aucun terme ne compte le barré, et aucune forme ici n'est assez large pour le terme d'étirement. Les deux coûts les plus hauts, la forme de D en C, 0,59, et la forme de E à la frette 12, 0,66, viennent du terme de registre, qui croît au-dessus de la frette 9.
+
+GA a deux autres mesures. `VoicingPhysicalAnalyzer.CalculatePlayability` divise l'écart des notes appuyées, en millimètres sur 648 mm, par 80 ([`VoicingPhysicalAnalyzer.cs#L88-L93`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Voicings/Analysis/VoicingPhysicalAnalyzer.cs#L88-L93)) ; « Beginner » demande au plus 0,8, pas de barré et une corde à vide ([`#L105-L112`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Voicings/Analysis/VoicingPhysicalAnalyzer.cs#L105-L112)), et son barré est la même frette sur trois cordes voisines ([`#L219-L233`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Voicings/Analysis/VoicingPhysicalAnalyzer.cs#L219-L233)). `BiomechanicalAnalyzer.AnalyzeChordPlayability` fait la moyenne de cinq notes ([`BiomechanicalAnalyzer.cs#L17-L77`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Biomechanics/BiomechanicalAnalyzer.cs#L17-L77)) ; il mesure l'écart depuis la frette jouée la plus basse, cordes à vide comprises ([`#L94-L128`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Biomechanics/BiomechanicalAnalyzer.cs#L94-L128)), et voit un barré partout où trois notes partagent une frette ([`#L153`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Biomechanics/BiomechanicalAnalyzer.cs#L153)). Le programme exécute les deux ([`Lesson17.cs#L322-L335`](https://github.com/spareilleux/learn/blob/7b2b01e/code/music-theory-ga/GaTheory/Lesson17.cs#L322-L335)) :
+
+```text
+== The same shapes through VoicingPhysicalAnalyzer.CalculatePlayability (Difficulty, DifficultyScore, BarreRequired) and BiomechanicalAnalyzer.AnalyzeChordPlayability (OverallScore, Difficulty, HasBarreChord) (GA.Domain.Services, compiled)
+frets              chord  Difficulty    Score  Barre  Overall  Difficulty  Barre
+x32010             C      Intermediate  3.50   no     0.82     Easy        no
+x02210             Am     Beginner      2.29   no     0.89     Easy        no
+022000             Em     Beginner      1.00   no     0.92     Very Easy   yes
+022100             E      Beginner      2.29   no     0.92     Very Easy   yes
+320003             G      Beginner      2.22   no     0.85     Easy        yes
+xx0232             D      Beginner      2.22   no     0.78     Easy        no
+133211             F      Intermediate  4.50   no     0.92     Very Easy   yes
+x35553             C      Intermediate  6.23   yes    0.89     Easy        yes
+875558             C      Intermediate  6.90   yes    0.83     Easy        yes
+8-10-10-9-8-8      C      Intermediate  3.67   no     0.90     Very Easy   yes
+x-x-10-12-13-12    C      Intermediate  4.17   no     0.72     Easy        no
+577655             A      Intermediate  3.99   no     0.90     Very Easy   yes
+12-14-14-13-12-12  E      Intermediate  3.33   no     0.77     Easy        yes
+BiomechanicalAnalyzer gives the same analysis to every shape for each HandSize (Small, Medium, Large, ExtraLarge): True
+PhysicalCostService gives the same total to every shape with a PlayerProfile of each HandSize and a MaxComfortableStretchMm of 80: True
+```
+
+`VoicingPhysicalAnalyzer` classe le C ouvert « Intermediate » : les frettes 1 à 3 s'étendent sur 66,7 mm, plus que 0,8 × 80 = 64 mm. Il trouve un barré dans x35553 et 875558, qui tiennent la frette 5 sur trois cordes voisines, et pas dans F ni dans les formes de E : dans 133211, la frette 1 est sur les cordes 6, 2 et 1, jamais trois voisines. Le prototype [P7 : modèle de jouabilité](../../ga-lab/07-playability-model/) du Laboratoire Guitar Alchemist a trouvé les deux au commit `66bdd04` de GA. `BiomechanicalAnalyzer` en trouve un dans Em, E et G, sur leurs cordes à vide, et note F 0,92, « Very Easy », au-dessus du C ouvert, 0,82 : le C ouvert s'étend des frettes 0 à 3 une fois ses cordes à vide comptées, F seulement des frettes 1 à 3, et les six notes de F reçoivent la note maximale de stabilité ([`#L279-L284`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Biomechanics/BiomechanicalAnalyzer.cs#L279-L284)). L'analyseur prend une `HandSize` et la garde dans un champ que rien ne lit ([`#L10-L12`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Biomechanics/BiomechanicalAnalyzer.cs#L10-L12)) ; `PhysicalCostService` ne lit ni la `HandSize` ni le `MaxComfortableStretchMm` de son profil. Lu, pas exécuté : les tests de GA qui comparent les tailles de main appellent un `BiomechanicalAnalyzer.CreateForHandSize` que la classe n'a pas ([`BiomechanicalAnalyzerTests.cs#L224-L244`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Tests/Common/GA.Business.Core.Tests/Fretboard/Biomechanics/BiomechanicalAnalyzerTests.cs#L224-L244)), et le projet de tests retire le fichier de la compilation ([`GA.Business.Core.Tests.csproj#L49`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Tests/Common/GA.Business.Core.Tests/GA.Business.Core.Tests.csproj#L49)).
+
+Ce qu'un profil change, c'est le coût. `PlayerProfile.Beginner()` double le poids de l'étirement, double celui des cordes sautées et préfère les frettes jusqu'à 5 ; `Jazz()` préfère les frettes 5 à 12 et rend les cordes sautées bon marché ([`PlayerProfile.cs#L20-L52`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Core/Context/PlayerProfile.cs#L20-L52)). Sur les cinq formes de C ([`Lesson17.cs#L337-L345`](https://github.com/spareilleux/learn/blob/7b2b01e/code/music-theory-ga/GaTheory/Lesson17.cs#L337-L345)) :
+
+```text
+== PhysicalCostService.CalculateStaticCost under GA's three PlayerProfiles (GA.Business.Core, compiled), on the five shapes of C
+frets           shape  Default  Beginner  Jazz
+x32010          C      -0.23    -0.23     -0.14
+x35553          A      0.21     0.21      0.25
+875558          G      0.24     0.51      0.24
+8-10-10-9-8-8   E      0.24     0.66      0.24
+x-x-10-12-13-12 D      0.59     1.04      0.18
+```
+
+Le profil débutant rend les formes de G, E et D plus chères, par le terme de registre ; le profil jazz rend le C ouvert plus cher et la forme de D à la frette 10, 0,18, moins chère que les formes de A, G et E.
+
+## Les accordages ouverts
+
+### L'idée
+
+"An open tuning allows the guitarist to play a chord by strumming the open strings (no strings fretted)." Le tableau de Wikipédia donne open C comme "C–G–C–G–C–E", open D comme "D–A–D–F♯–A–D", open E comme "E–B–E–G♯–B–E" et open G comme "D–G–D–G–B-D". Le même article explique pourquoi l'accordage standard demande plusieurs formes pour un même accord : "The irregular major third breaks the fingering patterns of scales and chords, so that guitarists have to memorize multiple chord shapes for each chord." Il dit aussi dans quel sens réaccorder : "tuning down the open string from E to D or C reduces the risk of breaking strings, which is associated with tuning strings up to a higher pitch" ([Guitar tunings](https://en.wikipedia.org/wiki/Guitar_tunings)). GTR-002 ajoute : "CAGED is specific to standard tuning. Change the tuning, and the shapes change" ([`#L120`](https://github.com/GuitarAlchemist/Demerzel/blob/d459d8e5f0210cbad00f49c49196fc61160aba76/state/streeling/courses/guitar-studies/en/gtr-002-caged-geometry.md#L120)). MUS-009 a trouvé deux erreurs d'octave dans `Instruments.yaml` de GA : la corde 2 d'open C et d'open A une octave trop bas ([`mus-009-tuning-fretboard-geometry.md#L111-L114`](https://github.com/GuitarAlchemist/Demerzel/blob/d459d8e5f0210cbad00f49c49196fc61160aba76/state/streeling/courses/music/en/mus-009-tuning-fretboard-geometry.md#L111-L114)).
+
+### Dans GA : `Tunings.toml`, que rien ne lit
+
+Le plan du cours nommait `Tunings.toml` pour cette leçon. `GA.Business.Config` le copie à côté de chaque programme qui le référence ([`GA.Business.Config.fsproj#L63-L65`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/GA.Business.Config.fsproj#L63-L65)), et aucun code C# ou F# de GA ne le lit. La seule mention dans du code est un commentaire du composant React `HarmonicNavigator3D`, `Optional: <HarmonicNavigator3D dataUrls={{ modes: "/Modes.yaml", tunings: "/Tunings.toml" }} />` ([`HarmonicNavigator3D.tsx#L17`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/ReactComponents/ga-react-components/src/components/BSP/HarmonicNavigator3D.tsx#L17)), et le composant renomme les deux propriétés en des noms qu'il n'utilise jamais, `tunings: _tunings` et `dataUrls: _dataUrls` ([`#L128-L131`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/ReactComponents/ga-react-components/src/components/BSP/HarmonicNavigator3D.tsx#L128-L131)). Le programme lit le fichier comme du texte ([`Lesson17.cs#L349-L370`](https://github.com/spareilleux/learn/blob/7b2b01e/code/music-theory-ga/GaTheory/Lesson17.cs#L349-L370)) :
+
+```text
+== The guitar entries of Tunings.toml, read as text (GA.Business.Config copies it next to the program), against Instruments.yaml, which GA reads; each six-string tuning as a change from standard, in semitones, and the notes of its open strings
+entry          Tuning                                 Instruments.yaml  string 6 to 1        largest  open strings
+Standard       E2 A2 D3 G3 B3 E4                      the same          0 0 0 0 0 0          0        D E G A B
+DADGAD         D2 A2 D3 G3 A3 D4                      the same          -2 0 0 0 -2 -2       2        D G A
+Double Drop D  D2 A2 D3 G3 B3 D4                      the same          -2 0 0 0 0 -2        2        D G A B
+DropD          D2 A2 D3 G3 B3 E4                      the same          -2 0 0 0 0 0         2        D E G A B
+OpenCMajor     C2 G2 C3 G3 C3 E4                      the same          -4 -2 -2 0 -11 0     11       C major
+OpenDMajor     D2 A2 D3 F#3 A3 D4                     the same          -2 0 0 -1 -2 -2      2        D major
+OpenEMajorV1   E2 B2 E3 G#3 B3 E4                     the same          0 2 2 1 0 0          2        E major
+OpenEMajorV2   E2 B2 E3 G3 B3 E4                      the same          0 2 2 0 0 0          2        E minor
+OpenGMajorV1   D2 G2 D3 G3 B3 D4                      the same          -2 -2 0 0 0 -2       2        G major
+OpenGMinorV2   D2 G2 D3 G3 Bb3 D4                     the same          -2 -2 0 0 -1 -2      2        G minor
+OpenAMajor     E2 A2 E3 A3 C#3 E4                     the same          0 0 2 2 -10 0        10       A major
+Renaissance    G3 G4 C4 C4 E4 E4 A4                   the same
+Baroque1       A3 A3 D4 D4 G3 G3 B3 B3 E4 E4          the same
+Baroque2       A3 A3 D4 D3 G3 G3 B3 B3 E4 E4          the same
+TwelveStrings  E2 E3 A2 A3 D3 D4 G3 G4 B3 B3 E4 E4    the same
+entry          Wikipedia      Tunings.toml   check
+OpenCMajor     C G C G C E    C G C G C E    ok
+OpenDMajor     D A D F♯ A D   D A D F♯ A D   ok
+OpenEMajorV1   E B E G♯ B E   E B E G♯ B E   ok
+OpenGMajorV1   D G D G B D    D G D G B D    ok
+```
+
+Les 15 entrées de guitare sont celles d'`Instruments.yaml`, erreurs d'octave comprises : le C3 d'OpenCMajor descend la corde 2 de 11 demi-tons et le C#3 d'OpenAMajor de 10 ([`Tunings.toml#L364-L366`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/Tunings.toml#L364-L366), [`#L388-L390`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/Tunings.toml#L388-L390)), alors que les neuf autres accordages à six cordes ne bougent aucune corde de plus de 2. Chaque accordage ouvert sonne l'accord que donne son nom complet : OpenEMajorV2, malgré sa clé, est E mineur, comme le dit son nom complet, "Open E - 2 Minor" ([`#L376-L378`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/Tunings.toml#L376-L378)). Les quatre ordres de cordes de Wikipédia concordent, parce qu'ils comparent des lettres : l'erreur d'octave ne se voit pas dans les noms de notes.
+
+## Ce que propose `ga_easier_voicings`
+
+Le serveur MCP de GA a un outil pour les guitaristes qui peinent sur les barrés : "Find easier, beginner-friendly alternative voicings for a chord — ideal when barre chords are painful or difficult. … Example: F with no-barre → Fmaj7 (103210), Fsus2 (133011), or C/F alternatives at a simpler fret span." ([`GuitaristProblemTools.cs#L574-L577`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaMcpServer/Tools/GuitaristProblemTools.cs#L574-L577)). Il répond à partir d'une table de 41 voicings, "frets per string E-A-D-G-B-e" ([`#L503-L562`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaMcpServer/Tools/GuitaristProblemTools.cs#L503-L562)). Le programme lit la table comme du texte et joue chaque forme en accordage standard ([`Lesson17.cs#L374-L391`](https://github.com/spareilleux/learn/blob/7b2b01e/code/music-theory-ga/GaTheory/Lesson17.cs#L374-L391)) :
+
+```text
+== The 41 voicings of ga_easier_voicings (GaMcpServer/Tools/GuitaristProblemTools.cs, read as text): each shape read in standard tuning, against its Notes; HasBarre and Difficulty as written
+symbol  frets   notes, string 6 to 1  Notes           not in Notes  not played  fretted  HasBarre  Difficulty
+C       x32010  C E G C E             C, E, G         -             -           3        False     1
+D       xx0232  D A D F♯              D, F♯, A        -             -           3        False     1
+E       022100  E B E G♯ B E          E, G♯, B        -             -           3        False     1
+G       320003  G B D G B G           G, B, D         -             -           3        False     1
+A       x02220  A E A C♯ E            A, C♯, E        -             -           3        False     1
+F       133211  F C F A C F           F, A, C         -             -           6        True      3
+Bb      x13331  B♭ F B♭ D F           B♭, D, F        -             -           5        True      3
+B       x24442  B F♯ B D♯ F♯          B, D♯, F♯       -             -           5        True      3
+Am      x02210  A E A C E             A, C, E         -             -           3        False     1
+Em      022000  E B E G B E           E, G, B         -             -           2        False     1
+Dm      xx0231  D A D F               D, F, A         -             -           3        False     1
+Bm      x24432  B F♯ B D F♯           B, D, F♯        -             -           5        True      3
+E7      020100  E B D G♯ B E          E, G♯, B, D     -             -           2        False     1
+A7      x02020  A E G C♯ E            A, C♯, E, G     -             -           2        False     1
+D7      xx0212  D A C F♯              D, F♯, A, C     -             -           3        False     1
+G7      320001  G B D G B F           G, B, D, F      -             -           3        False     2
+C7      x32310  C E B♭ C E            C, E, G, B♭     -             G           4        False     2
+B7      x21202  B D♯ A B F♯           B, D♯, F♯, A    -             -           4        False     2
+Cmaj7   x32000  C E G B E             C, E, G, B      -             -           2        False     1
+Gmaj7   320002  G B D G B F♯          G, B, D, F♯     -             -           3        False     1
+Amaj7   x02120  A E G♯ C♯ E           A, C♯, E, G♯    -             -           3        False     1
+Dmaj7   xx0222  D A C♯ F♯             D, F♯, A, C♯    -             -           3        False     1
+Emaj7   021100  E B D♯ G♯ B E         E, G♯, B, D♯    -             -           3        False     2
+Fmaj7   103210  F A F A C E           F, A, C, E      -             -           4        False     2
+Am7     x02010  A E G C E             A, C, E, G      -             -           2        False     1
+Em7     020000  E B D G B E           E, G, B, D      -             -           1        False     1
+Dm7     xx0211  D A C F               D, F, A, C      -             -           3        False     1
+Dsus2   xx0230  D A D E               D, E, A         -             -           2        False     1
+Asus2   x02200  A E A B E             A, B, E         -             -           2        False     1
+Esus2   024400  E B F♯ B B E          E, F♯, B        -             -           3        False     2
+Dsus4   xx0233  D A D G               D, G, A         -             -           3        False     1
+Asus4   x02230  A E A D E             A, D, E         -             -           3        False     1
+Esus4   022200  E B E A B E           E, A, B         -             -           3        False     1
+Gsus4   310013  G B♭ D G C G          G, C, D         B♭            -           4        False     2
+C5      x3500x  C G G B               C, G            B             -           2        False     1
+D5      xx023x  D A D                 D, A            -             -           2        False     1
+E5      022xxx  E B E                 E, B            -             -           2        False     1
+G5      3500xx  G D D G               G, D            -             -           2        False     1
+A5      x022xx  A E A                 A, E            -             -           2        False     1
+B5      x244xx  B F♯ B                B, F♯           -             -           3        False     2
+F5      133xxx  F C F                 F, C            -             -           3        True      2
+Notes are the notes of the symbol: 41 of 41; a note outside the Notes: Gsus4, C5; a note of the Notes not played: C7
+HasBarre: F, Bb, B, Bm, F5; more than four fretted notes: F, Bb, B, Bm
+```
+
+Chaque champ `Notes` liste les notes de son symbole, mais deux formes jouent une note en dehors. Gsus4, 310013, joue B♭ à la première case de la corde 5 ([`#L552`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaMcpServer/Tools/GuitaristProblemTools.cs#L552)) ; C5, x3500x, joue la corde de B à vide ([`#L555`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaMcpServer/Tools/GuitaristProblemTools.cs#L555)). C7, x32310, omet sa quinte, comme le fait d'habitude ce doigté ([`#L529`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaMcpServer/Tools/GuitaristProblemTools.cs#L529)). Cinq voicings sont marqués `HasBarre` ; quatre ont plus de quatre notes appuyées, et F5, 133xxx, en a trois.
+
+Avec sa contrainte par défaut, « no-barre », l'outil garde les voicings de la table sur la même fondamentale, moins l'accord demandé et ceux marqués `HasBarre` ([`#L611-L646`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaMcpServer/Tools/GuitaristProblemTools.cs#L611-L646)), et les trie, du plus facile au plus difficile ([`#L649-L652`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaMcpServer/Tools/GuitaristProblemTools.cs#L649-L652)) ; les substitutions qu'il demande à GA n'entrent dans la réponse que comme texte ([`#L670-L678`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaMcpServer/Tools/GuitaristProblemTools.cs#L670-L678)). Le programme applique ce filtre à chaque voicing marqué `HasBarre` ([`Lesson17.cs#L393-L404`](https://github.com/spareilleux/learn/blob/7b2b01e/code/music-theory-ga/GaTheory/Lesson17.cs#L393-L404)) :
+
+```text
+== What ga_easier_voicings offers for each voicing marked HasBarre, under its default constraint "no-barre": the table's other voicings on the same root without HasBarre, easiest first (the course's reading of lines 611 to 652)
+  F [133211]: Fmaj7 [103210], all of F's notes
+  Bb [x13331]: nothing
+  B [x24442]: B7 [x21202], all of B's notes; B5 [x244xx], not all of B's notes
+  Bm [x24432]: B7 [x21202], not all of Bm's notes; B5 [x244xx], not all of Bm's notes
+  F5 [133xxx]: Fmaj7 [103210], all of F5's notes
+  the description's example, "F with no-barre → Fmaj7 (103210), Fsus2 (133011), or C/F": Fsus2 in the table False, C/F False; 133011 plays F2 C3 F3 G3 C4 F4, 5 fretted notes
+```
+
+Pour F, l'outil propose Fmaj7, qui contient toutes les notes de F et un E. Pour Bm, il propose B7, un accord majeur avec D♯, et B5, qui n'a pas de tierce : aucun ne joue le D de B mineur. Pour B♭, il ne propose rien, puisque la table n'a pas d'autre voicing sur B♭, ni sur A♯. Le Fsus2 et le C/F de la description ne sont pas dans la table, et 133011 a cinq notes appuyées.
+
+## Exercices
+
+1. La constante d'extension de GA admet les frettes 1 à 5 depuis la frette 1. Combien de frettes admet-elle depuis la frette 12, et pourquoi davantage ?
+2. En C majeur, quelle note la forme de A, x35553, joue-t-elle sur la corde 2, et sur quelles cordes joue-t-elle C ?
+3. Pourquoi `DetectCagedShape` ne peut-il jamais répondre « A-Shape » ou « C-Shape » ?
+4. Pourquoi `BiomechanicalAnalyzer` juge-t-il F, 133211, plus facile que le C ouvert, x32010 ?
+5. Que propose `ga_easier_voicings` pour Bm avec « no-barre », et pourquoi aucun des deux voicings ne joue-t-il B mineur ?
+
+<details>
+<summary>Solutions</summary>
+
+1. Dix, les frettes 12 à 21. La constante est une fraction de la corde entière, et au-dessus de la frette 12 les frettes sont deux fois plus rapprochées qu'au sillet.
+2. E, à la cinquième case de la corde 2. Elle joue C sur les cordes 5 et 3.
+3. La ligne 265 renvoie null quand la première position est étouffée, et les deux tests la demandent étouffée (lignes 297 et 323). Seul le test de la forme de E, qui demande cette position jouée, peut réussir.
+4. Il mesure l'écart depuis la frette jouée la plus basse, cordes à vide comprises : le C ouvert va des frettes 0 à 3, F des frettes 1 à 3. Les six notes de F reçoivent aussi la note maximale de stabilité. Résultat : 0,92 pour F, 0,82 pour C.
+5. B7, x21202, qui joue B D♯ A B F♯, un accord majeur ; et B5, x244xx, B F♯ B, sans tierce. B mineur demande D.
+
+</details>
+
+## À retenir
+
+- La frette *n* est à L(1 − 2^(−n/12)) du sillet. Les deux calculateurs de GA s'accordent avec la formule à chaque frette, sur 647,7 et 648 mm ; le document posé à côté cite des écarts de cinq frettes qu'aucun des deux ne donne. Cinq frettes à partir de la frette 12 mesurent exactement la moitié de cinq frettes à partir du sillet.
+- L'extension confortable de GA est la distance du sillet à la frette 4, mais elle est comparée à l'écart entre notes appuyées : elle admet cinq frettes depuis la frette 1 et dix depuis la frette 12. Aucune mesure ne lit la taille de la main du joueur.
+- Les cinq formes du CAGED en C sont aux frettes 0, 3, 5, 8 et 10, et dans chaque tonalité leur ordre est C A G E D lu à partir d'une de ses lettres. Le détecteur de formes de GA ne peut répondre que « E-Shape », et seulement pour un voicing écrit depuis la corde 6, l'inverse de l'ordre de GA lui-même.
+- Des trois mesures de jouabilité de GA, le coût n'a pas de terme pour le barré, un analyseur classe le C ouvert « Intermediate », et l'autre note F « Very Easy ».
+- `Tunings.toml` répète `Instruments.yaml`, erreurs d'octave comprises, et rien ne le lit. `ga_easier_voicings` répond à partir d'une table de 41 formes, dont deux jouent une note hors de leur accord, et propose B7 ou B5 pour Bm.
+
+## Sources
+
+- Wikipédia : [Fret](https://en.wikipedia.org/wiki/Fret) (la racine douzième de deux, la douzième frette), [Bar chord](https://en.wikipedia.org/wiki/Bar_chord) (les accords barrés, le système CAGED et son ordre), [Guitar tunings](https://en.wikipedia.org/wiki/Guitar_tunings) (la première position, les accordages ouverts, la tierce majeure irrégulière).
+- Streeling : [GTR-002 · La géométrie du CAGED](../../streeling/guitar-studies/gtr-002-caged-geometry/), [MUS-009 · Accordage et géométrie du manche](../../streeling/music/mus-009-tuning-fretboard-geometry/), et pour la physique de la corde, [PHY-001 · La science du son de la guitare](../../streeling/physics/phy-001-science-of-guitar-sound/).
+- GuitarAlchemist/ga au commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6) : `Common/GA.Domain.Services/Fretboard/Analysis/FretboardGeometry.cs`, `PhysicalFretboardCalculator.cs`, `PhysicalCostService.cs`, `PHYSICAL_PLAYABILITY_IMPROVEMENTS.md`, `Fretboard/Voicings/Analysis/VoicingPhysicalAnalyzer.cs`, `Fretboard/Voicings/Generation/VoicingGenerator.cs`, `Fretboard/Biomechanics/BiomechanicalAnalyzer.cs`, `Common/GA.Domain.Core/Instruments/Biomechanics/BiomechanicsConstants.cs`, `Common/GA.Business.Core/Context/PlayerProfile.cs`, `Common/GA.Business.ML/Search/VoicingFilterEngine.cs`, `Embeddings/MusicalEmbeddingGenerator.cs`, `Common/GA.Business.Config/Tunings.toml`, `GA.Business.Config.fsproj`, `ReactComponents/ga-react-components/src/components/BSP/HarmonicNavigator3D.tsx`, `GaMcpServer/Tools/GuitaristProblemTools.cs`, `Tests/Common/GA.Business.Core.Tests/GA.Business.Core.Tests.csproj`, `Fretboard/PhysicalFretboardCalculatorTests.cs`, `Fretboard/Biomechanics/BiomechanicalAnalyzerTests.cs`.
