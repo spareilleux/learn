@@ -202,7 +202,7 @@ Locrian #2             C D Eb F Gb Ab Bb        <2 5 4 4 4 2>
 Altered                C Db Eb Fb Gb Ab Bb      <2 5 4 4 4 2>
 
 == ModesConfig.TryGetModeByIntervalClassVector, the "Scale:" line of ga_chord_to_set, with the vectors GA computes
-course: the entry of Modes.yaml whose notes are the set; GA: what the lookup returns
+course: the Modes.yaml entry that names the scale or chord (written on C); GA: what the lookup returns
 set                course                     GA                         check
 C major            Ionian                     Ionian                     ok
 A harmonic minor   Harmonic Minor             (none)                     DIFF
