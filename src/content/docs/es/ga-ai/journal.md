@@ -351,6 +351,7 @@ La mayoría de las 22 diferencias del 2026-09-14 se corrigieron upstream en [#68
 - "no fifth" es el veredicto del curso para un acorde de séptima al que solo le falta la quinta justa, y cuenta como correcto, igual que "exact".
 - `Lesson16.Corpus` ahora es `internal`, para que `Lesson19` cuente los voicings exactos de cada acorde en el corpus.
 - La solución del cuarto ejercicio se comprobó ejecutando la herramienta del commit fijado, fuera de la salida esperada del curso; las otras tres se leen en la salida esperada.
+- Ejecución de CI [36964238674](https://github.com/spareilleux/learn/actions/runs/36964238674), para el commit `e8394cd`: verde en los tres sistemas, 3 min 17 s en Linux, 2 min 29 s en macOS, 8 min 42 s en Windows, con el clon y la compilación incluidos.
 
 ## Por verificar
 

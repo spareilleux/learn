@@ -351,6 +351,7 @@ La plupart des 22 différences du 2026-09-14 ont été corrigées en amont par [
 - « no fifth » est le verdict du cours pour un accord de septième auquel ne manque que sa quinte juste ; il compte comme juste, au même titre que « exact ».
 - `Lesson16.Corpus` est désormais `internal`, pour que `Lesson19` compte les voicings exacts de chaque accord dans le corpus.
 - La solution du quatrième exercice a été vérifiée en exécutant l'outil du commit épinglé, hors de la sortie attendue du cours ; les trois autres se lisent dans la sortie attendue.
+- Exécution de CI [36964238674](https://github.com/spareilleux/learn/actions/runs/36964238674), pour le commit `e8394cd` : verte sur les trois systèmes, 3 min 17 s sous Linux, 2 min 29 s sous macOS, 8 min 42 s sous Windows, clone et compilation compris.
 
 ## À vérifier
 

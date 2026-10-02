@@ -351,6 +351,7 @@ Most of the 22 differences of 2026-09-14 were fixed upstream by [#689](https://g
 - "no fifth" is the course's verdict for a seventh chord that lacks only its perfect fifth, and counts as right, like "exact".
 - `Lesson16.Corpus` is now `internal`, so that `Lesson19` counts the exact voicings of each chord in the corpus.
 - The solution of the fourth exercise was checked by running the pinned tool outside the course's expected output; the three others read the expected output.
+- CI run [36964238674](https://github.com/spareilleux/learn/actions/runs/36964238674), for commit `e8394cd`: green on the three systems, 3 min 17 s on Linux, 2 min 29 s on macOS, 8 min 42 s on Windows, clone and build included.
 
 ## To verify
 
