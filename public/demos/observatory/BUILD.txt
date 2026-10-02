@@ -541,6 +541,75 @@ touch screen): it started and reported running, with the touch screen
 detected; the panel was hidden, so no frame was seen or captured. Real phones:
 to verify, first the author's Android phone in Chrome, held upright and
 sideways.
+Version 21, exported 2026-10-02 02:12:04 UTC, adds the curio wheel the author
+asked for: a pastiche of a shooter's weapon wheel, for a library, holding
+"surprising and hilarious" things, a wooden wand, an ankh and a pointing
+finger, then a monocle, a magnifier or a lamp (scripts/curio_wheel.gd, added
+by scripts/observatory.gd).
+- Tab held slows time to a quarter and opens the wheel round the screen's
+  centre; the pointer, or the captured mouse, picks a slot, and letting go of
+  Tab, or a click, holds that curio. The left button uses it once the mouse
+  looks. The keyboard hint names Tab (scripts/walk_physics.gd).
+- Seven curios: bare hands, which open books as before; the Index, a white
+  glove whose gilt label names what it points at; a monocle, which held closes
+  the view in two and a half times inside a brass rim, through a zoom that
+  scripts/view_fit.gd applies last; a banker's lamp with a beam; a wooden wand
+  whose one spell is a puff of gilt and a duck, both larger the farther they
+  land, up to four times a rubber duck, so that the duck stays the same size
+  on the screen, and 4 m ahead past 12 m; a rubber duck, thrown, that bounces,
+  squeaks and stays where it lands, 24 at most; and an ankh, which brings the
+  ducks back to life to waddle home and vanish at your feet. The magnifier was
+  left out: the monocle already magnifies.
+- On a touch screen, a button above the stick shows the curio in hand and
+  opens the wheel; a tap on a slot holds that curio, a tap elsewhere shuts the
+  wheel, and with a curio held a tap on the scene uses it there instead of
+  aiming a book; the monocle and the lamp stay on until a second tap. The
+  touch help names the button, and goes while the wheel is open
+  (scripts/touch_controls.gd).
+- Every model is built in code from Godot's own meshes and every sound is
+  synthesized there (the quack is a sawtooth falling from 520 to 330 Hz
+  through one nasal resonance near 1.1 kHz); nothing is copied, and no model
+  was generated.
+index.pck is now 21,783,496 bytes; index.html changes only that size, and
+index.wasm and index.js are unchanged.
+Native runs (Godot 4.6.1): 62 under Compatibility and Forward+
+(artpass/publish/regress-pub12.sh), with no script error; 61 passed. Among
+them, the curio test (artpass/curios/curiotest.gd) with keys at 1600x900 in
+both renderers and at 10 frames a second, and with touches on a phone held
+upright (390x844, in French, and under Forward+) and sideways (844x390, and in
+Spanish under Forward+): the walking hint names Tab, which opens the wheel at
+a quarter speed and holds the slot picked; the Index names the steel box, a
+pier and the floor; the monocle closes the view from 64 to 28 degrees and
+back; the lamp switches on and off; the wand's duck and a thrown duck land and
+rest, the thrown one inside the shelves, and squeak; the ankh brings both
+home, quacking. On a touch screen the button stands clear of the others and
+above the stick's reach; a tap on it opens the wheel, a tap on a slot holds
+that curio, and a tap on a book with the wand casts there instead of aiming
+the book. From the hall's entrance, a tap on the steel box's door, 7.7 m away,
+makes a duck 42 pixels tall upright and 19 sideways, 4.9% of the screen's
+height (2.5% required), and a tap at the far gallery makes one 3.85 m ahead.
+The one failure was the test's: sideways in Spanish its far tap landed on the
+help, whose fourth line reaches lower, and put the help away; aimed at the
+screen's centre, the seven curio runs pass on the same build
+(regress-pub12-curios.sh). The lean, phone help, lift and roof tests pass as
+in version 20. On the prototype, the ducks kept hopping on the floor at 10
+frames a second, where each frame's gravity bounced back exceeded the speed at
+which a duck rests; that threshold now allows for it. One run of the keys lean
+test on the prototype failed in French, its reading stopping early, while
+another test window ran at the same time; alone it passed three times, and it
+passes in this build's regression and in the first build's (62 of 62).
+Web: exported, and run from a local server in headless Chrome posing as an
+Android phone with a touch screen, upright (390x844) and sideways (844x390),
+with screenshots (artpass/publish/curio-web.mjs): it started, reported version
+21 and the touch screen, and logged no error; a tap on the curio button opened
+the wheel, a tap on the wand's slot held the wand, and upright a tap on the
+steel box's door conjured a duck that came to rest in front of it, in view.
+Sideways, from the hall's entrance, the floor in front of the box is below the
+frame and the duck fell out of sight. The first build of this version, checked
+the same way, cast the duck where it was aimed but kept it a rubber duck's 11
+cm: 5 pixels tall at the box on that screen. A debug export with prints in the
+tap's path, not published, showed that the taps did cast. Real phones: to
+verify, first the author's Android phone in Chrome.
 
 Native Compatibility GPU time, RTX 5080, 1600x900, 240 frames per view: 0.44 to
 0.52 ms for the previous web scene, 0.64 to 1.44 ms with the detail pass; up to
@@ -556,13 +625,13 @@ main.tscn fb6245c960d3625ca05920116c58351d9dbeb255beae59175d89c06d47049564
 export_presets.cfg 1bd7171d93c9a378f1b328e945be2a7960478e89d34ae269f013ef83c306588f
 scripts/fly_camera.gd 2e5cdd15ca7bdcfa30ec129e354a309f3ff7296f6fbf54ac144984ed9aa9f8e7
 scripts/capture.gd 52ea2b5e40db2f1f4cdbd7658074ef60bd117e1f4110c1b8995590a4196748d0
-scripts/observatory.gd 1c0df54cd433533c305700578abde1044f01efde1bef614e1bf5ede1c2ae6c76
+scripts/observatory.gd 1a15f441c7298009cf94a5740c63a1e56bd097b79ac8a799fd202c30838b8e2d
 scripts/course_library.gd 97fe489119e211ffd180b04a2d4042c20c4f937c03fe5cbae0b7c444e69dd1f4
 scripts/steel_cube.gd f28e71fffcd151663bc9a98b3c135cc7b805490e8298d3cf01029455c973f94c
 scripts/seldon_statue.gd 4e41b282aa2cc4de794296586b65f5f4d39688312673ddc46226fd3906cf4b27
-scripts/touch_controls.gd 6bb1c5a864a845daf137b4bcf86694565713754698a9ff84156fec5706842893
-scripts/walk_physics.gd 21ec9c5f0b5afb2f85547fe7e77c5d4f38b645c0ab84c79fcc7102b0b2c7f227
-scripts/view_fit.gd c38b92ecdce35d49985e3535923ea1504cd1cc44241e03314ff69319bc067a95
+scripts/touch_controls.gd 825e771291e660d47d820c976532b1a14bddcb2ac5329793783af190dbf531cb
+scripts/walk_physics.gd bc17f09222fd9b865c6ad509b9f3c376bbea9bc8c6146f50f326e8c19c297a7c
+scripts/view_fit.gd f574c7949a5b324f91f062df9982366c123271804069b507206f88ad7062fe4c
 scripts/view_move.gd 558a4059815cb3a8a202d205d8cfada17653fb533e7e056bfe9e8a434dac0431
 scripts/multiverse.gd 0de3cece747a87c742ba6b26c8fac27a6a7dcdd18286f30957899becb2dfb34d
 scripts/camera_follow.gd dc63643772a7dceb41583169aeec3d3053d8555a20540fd29a1c9cbade2a712d
@@ -596,14 +665,15 @@ scripts/lift.gd 14ef3214d63cb89bb286894783b27181afb65bd9c0fb6441550b7946931f711d
 assets/sky_core_cap.png a110fdfa1b79cc41eec119265aeb89bc211d0b8e0eb6c759b45c25496f2daabe
 assets/kiosk_glass.gdshader 76226f17e5884a042b85e5fc544a4b71012ea6e389b9743c1cac65083a06bc44
 scripts/lift_sounds.gd 4daed5e380396a3711fc7ff2f1f72b877b9efbdaff6d6fa428c595b1dad7b244
-scripts/build_info.gd ecdaec23b2c4d9249c8be3a5f21429c36b445d2df9d26e714f46a78b8c8833b0
+scripts/curio_wheel.gd 545cac2ee37b1ad60cd54971885c9d4804fa1b2803a30a73ae3c79ca667ac8c7
+scripts/build_info.gd 5fc420d3b2709065ec3e377f3146303e708f677cb893d7d1cc8aafb73444f49d
 
 SHA-256 output files:
-index.pck 2fa459f14536b1b2df25b8cd72a939ff6e7ae72497ed09e20024849802b4c986
+index.pck 14df6c9cf1a5e7a3104ed412d4540cb50bf9eed6ecdfdcdc63eb932edbeb2f42
 index.wasm 99962b29677e42f3ba0258bd90fdc52ad90295954c4473e816ad02cfe5ff1d4f
 index.js e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981
 
 This directory contains a prebuilt binary export. Re-export only for deliberate
 scene changes. A scene re-export leaves the engine files (index.wasm, index.js)
 byte-identical, so git keeps a single copy; each scene revision adds its
-index.pck (21.7 MB here) to the binary history.
+index.pck (21.8 MB here) to the binary history.
