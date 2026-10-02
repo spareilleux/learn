@@ -317,6 +317,7 @@ La mayoría de las 22 diferencias del 2026-09-14 se corrigieron upstream en [#68
 - Una "grafía teórica" es la prueba del curso: una tonalidad o un acorde, mayor o menor, que con esa fundamental y esa cualidad no tiene armadura.
 - La lección 7 y la fila 36 decían que las skills de cejilla y de afinaciones aceptan `♭` y `♯`. Sus expresiones prevén los dos signos, pero a menudo los pierden (filas 103 y 106); la frase de la lección 7 y la fila 36 ahora lo dicen.
 - Las soluciones de los cuatro ejercicios se comprobaron ejecutando las skills del commit fijado, fuera de la salida esperada del curso.
+- Ejecución de CI [36944575536](https://github.com/spareilleux/learn/actions/runs/36944575536), para el commit `5bbae97`: verde en los tres sistemas, 2 min 45 s en Linux, 3 min 49 s en macOS, 8 min 34 s en Windows, con el clon y la compilación incluidos.
 
 ## Por verificar
 

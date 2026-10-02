@@ -317,6 +317,7 @@ Most of the 22 differences of 2026-09-14 were fixed upstream by [#689](https://g
 - A "theoretical spelling" is the course's test: a major or minor key or chord whose root no key signature writes with that quality.
 - Lesson 7 and row 36 said that the capo and tuning skills accept `♭` and `♯`. Their expressions list both signs, but often drop them (rows 103 and 106); the sentence of lesson 7 and row 36 now say so.
 - The solutions of the four exercises were checked by running the pinned skills outside the course's expected output.
+- CI run [36944575536](https://github.com/spareilleux/learn/actions/runs/36944575536), for commit `5bbae97`: green on the three systems, 2 min 45 s on Linux, 3 min 49 s on macOS, 8 min 34 s on Windows, clone and build included.
 
 ## To verify
 

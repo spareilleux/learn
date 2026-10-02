@@ -317,6 +317,7 @@ La plupart des 22 différences du 2026-09-14 ont été corrigées en amont par [
 - Une « orthographe théorique » est le critère du cours : une tonalité ou un accord, majeur ou mineur, dont aucune armure n'écrit la fondamentale avec cette qualité.
 - La leçon 7 et la ligne 36 disaient que les skills du capodastre et des accordages acceptent `♭` et `♯`. Leurs expressions prévoient les deux signes, mais les laissent souvent tomber (lignes 103 et 106) ; la phrase de la leçon 7 et la ligne 36 le disent désormais.
 - Les solutions des quatre exercices ont été vérifiées en exécutant les skills du commit épinglé, hors de la sortie attendue du cours.
+- Exécution de CI [36944575536](https://github.com/spareilleux/learn/actions/runs/36944575536), pour le commit `5bbae97` : verte sur les trois systèmes, 2 min 45 s sous Linux, 3 min 49 s sous macOS, 8 min 34 s sous Windows, clone et compilation compris.
 
 ## À vérifier
 
