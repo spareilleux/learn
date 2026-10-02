@@ -22,6 +22,15 @@
     <Compile Include="$(GaRoot)Common/GA.Domain.Services/Atonal/SetClassOpticIndex.cs" Link="Ga/SetClassOpticIndex.cs" />
     <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Voicings/Analysis/ProgressionVoiceLeadingAnalyzer.cs" Link="Ga/ProgressionVoiceLeadingAnalyzer.cs" />
     <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Voicings/Analysis/ProgressionVoiceLeadingReport.cs" Link="Ga/ProgressionVoiceLeadingReport.cs" />
+    <!-- Lesson 10 compiles the ICV distance, the chord template factory and the GaApi service behind get_borrowed_chords, as they are,
+         with the global usings of GA.Domain.Services that the first four rely on -->
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/GlobalUsings.cs" Link="Ga/GlobalUsings.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Atonal/Grothendieck/GrothendieckDelta.cs" Link="Ga/GrothendieckDelta.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Atonal/Grothendieck/GrothendieckService.cs" Link="Ga/GrothendieckService.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Atonal/Grothendieck/IGrothendieckService.cs" Link="Ga/IGrothendieckService.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Chords/ChordTemplateFactory.cs" Link="Ga/ChordTemplateFactory.cs" />
+    <Compile Include="$(GaRoot)Apps/ga-server/GaApi/Services/ContextualChordService.cs" Link="Ga/ContextualChordService.cs" />
+    <Compile Include="$(GaRoot)Apps/ga-server/GaApi/Models/ContextualChords.cs" Link="Ga/ContextualChords.cs" />
   </ItemGroup>
 
 </Project>

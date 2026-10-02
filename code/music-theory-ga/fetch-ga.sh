@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Music theory for Guitar Alchemist: fetch the three GA projects the course program references,
-# and the four files of GA.Domain.Services it compiles directly, pinned on one commit of
+# and the files of GA.Domain.Services and GaApi it compiles directly, pinned on one commit of
 # GuitarAlchemist/ga (blobless clone, sparse checkout)
 set -euo pipefail
 GA_SHA=a826864f3a012cad88e415954bf57eca0ce12aa6
@@ -11,10 +11,18 @@ PATHS=(
   /Common/GA.Domain.Services/Atonal/SetClassOpticIndex.cs
   /Common/GA.Domain.Services/Fretboard/Voicings/Analysis/ProgressionVoiceLeadingAnalyzer.cs
   /Common/GA.Domain.Services/Fretboard/Voicings/Analysis/ProgressionVoiceLeadingReport.cs
+  # lesson 10: the ICV distance behind the chatbot's substitutions, and the service behind get_borrowed_chords
+  /Common/GA.Domain.Services/GlobalUsings.cs
+  /Common/GA.Domain.Services/Atonal/Grothendieck/GrothendieckDelta.cs
+  /Common/GA.Domain.Services/Atonal/Grothendieck/GrothendieckService.cs
+  /Common/GA.Domain.Services/Atonal/Grothendieck/IGrothendieckService.cs
+  /Common/GA.Domain.Services/Chords/ChordTemplateFactory.cs
+  /Apps/ga-server/GaApi/Services/ContextualChordService.cs
+  /Apps/ga-server/GaApi/Models/ContextualChords.cs
 )
 cd "$(dirname "$0")"
 if [ "$(git -C .ga rev-parse HEAD 2>/dev/null || true)" = "$GA_SHA" ]; then
-  # a clone made before lesson 9 lacks its files: widening the sparse checkout fetches only those
+  # a clone made before lessons 9 and 10 lacks their files: widening the sparse checkout fetches only those
   MSYS_NO_PATHCONV=1 git -C .ga sparse-checkout set --no-cone "${PATHS[@]}"
   echo "ga   $GA_SHA already here"
   exit 0
