@@ -8,6 +8,7 @@ using GA.Domain.Core.Theory.Tonal.Modes.Symmetric;
 using GA.Domain.Core.Theory.Tonal.Scales;
 using GA.Domain.Services.Chords.Analysis.Atonal;
 using GA.Domain.Services.Unified;
+using Microsoft.FSharp.Core;
 using static GaTheory.Report;
 
 namespace GaTheory;
@@ -326,6 +327,34 @@ public static class Lesson14
         })
         {
             Plain(name, Fixing(id), Mirrors(id).Length);
+        }
+
+        // Added after the first run, in its own commit: the first run showed AtonalModalFamilies.yaml calling the family of
+        // Messiaen's fourth mode "Major Bebop Family"
+        Title("Added after the first run: what GA's two mode catalogs call the fifteen classes");
+        Line("AtonalModalFamilies.yaml: the family with GA's vector; ModesConfig: TryGetModeByIntervalClassVector, the \"Scale:\" line of ga_chord_to_set");
+        Console.WriteLine($"{"class",-30} {"AtonalModalFamilies.yaml",-30} ModesConfig");
+        foreach (var id in fifteen)
+        {
+            var icv = GaSets[id].IntervalClassVector.ToString();
+            var family = AtonalModalFamiliesConfig.TryGetByIntervalClassVector(icv);
+            var mode = ModesConfig.TryGetModeByIntervalClassVector(icv);
+            var label = NameOf(id) != "" ? NameOf(id) : PrimeText(id);
+            var familyName = FSharpOption<AtonalModalFamiliesConfig.AtonalModalFamily>.get_IsSome(family) ? family.Value.FamilyName : "(none)";
+            var modeName = FSharpOption<ModesConfig.ModeInfo>.get_IsSome(mode) ? mode.Value.Name : "(none)";
+            Console.WriteLine($"{label,-30} {familyName,-30} {modeName}");
+        }
+        Line();
+        Line("The modes of Modes.yaml whose notes form one of the fifteen classes:");
+        foreach (var mode in ModesConfig.GetAllModes())
+        {
+            var id = Theory.SetId(mode.Notes.Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(Theory.PitchClassOf));
+            var match = fifteen.Where(c => TranspositionForm(c) == TranspositionForm(id)).ToList();
+            if (match.Count == 1)
+            {
+                var name = NameOf(match[0]) != "" ? NameOf(match[0]) : PrimeText(match[0]);
+                Line($"  {mode.Name,-44} {mode.Notes,-22} {name}");
+            }
         }
     }
 }
