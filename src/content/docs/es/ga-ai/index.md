@@ -64,6 +64,7 @@ Otros tres cursos de este sitio cubren el trasfondo, y este enlaza con ellos en 
 | 15 | [Las notas de un acorde](15-the-notes-of-a-chord/) | `ChordInfoSkill`, `ChordVocabulary`, `ChordSpelling`, `ga_chord_info` y el SKILL.md chord-info | la primera coincidencia de una expresión regular, `ToLowerInvariant` más allá del ASCII, un viaje de ida y vuelta como prueba |
 | 16 | [Los voicings de un acorde](16-the-voicings-of-a-chord/) | `ChordVoicingsSkill`, `TypedMusicalQueryExtractor`, `ChordPitchClasses`, `OptickSearchStrategy` y ADR-0002, en el commit fijado y en `main` | un segundo clon de una dependencia en otro commit, comprobar una respuesta tocándola, un filtro por nombres, un filtro descartado sin decirlo en la respuesta |
 | 17 | [La cejilla y las afinaciones](17-the-capo-and-the-tunings/) | `CapoSkill`, `AlternateTuningsSkill` y el respaldo sin conexión, en el commit fijado y en `main` | comprobar la aritmética contra un manual en cada tonalidad y cada traste, un límite de palabra detrás de una alteración, un sentido leído en la formulación, la grafía como parte de la respuesta |
+| 18 | [La conducción de voces](18-voice-leading/) | `VoiceLeadingSkill` y el respaldo sin conexión | comprobar contra una búsqueda exhaustiva una respuesta que se dice óptima, una duplicación elegida sin búsqueda, una tabla de cifrados detrás de una expresión más estrecha, una búsqueda de un bemol que no distingue mayúsculas de minúsculas |
 | — | [Diario](journal/) | | |
 
 ## Requisitos previos

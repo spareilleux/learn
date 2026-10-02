@@ -37,7 +37,7 @@ public static class Lesson17
         TuningsProbe.Others(tunings, "at the pin");
     }
 
-    static IOrchestratorSkill? SkillOf(IIntent intent) =>
+    internal static IOrchestratorSkill? SkillOf(IIntent intent) =>
         intent.GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Instance)
             .Select(f => f.GetValue(intent)).OfType<IOrchestratorSkill>().FirstOrDefault();
 
