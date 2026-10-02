@@ -331,6 +331,8 @@ public static class Diagrams
                 ([Set(augmented, 2)], Labels.Numbers, Axes(augmented), "2457")),
             ["l13-extended-voicings.svg"] = ChordGrids(
                 ("x3233x", "C9", "C3 E3 B♭3 D4"), ("x32335", "C13", "C3 E3 B♭3 D4 A4"), ("x3234x", "C7♯9", "C3 E3 B♭3 D♯4")),
+            // lesson 14: Cmaj7 close (MUS-005's "Drop-2"), drop 2 and drop 3, and a G7 shell
+            ["l14-drop-voicings.svg"] = ChordGrids(("x3200x", "x3200x"), ("x3545x", "x3545x"), ("8x998x", "8x998x"), ("3x34xx", "3x34xx")),
         };
     }
 

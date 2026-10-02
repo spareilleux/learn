@@ -27,6 +27,21 @@ PATHS=(
   /Common/GA.Domain.Services/Chords/Parsing/ChordSymbolParser.cs
   /Common/GA.Domain.Services/Chords/BasicChordExtensionsService.cs
   /Common/GA.Domain.Services/Chords/ChordAlterationService.cs
+  # lesson 14: the voicing generator, analyzers and filters, the chord recognizer and fret distances they call,
+  # and the analysis records of GA.Business.Core they return
+  /Common/GA.Business.Core/Analysis/
+  /Common/GA.Domain.Services/Chords/CanonicalChordRecognizer.cs
+  /Common/GA.Domain.Services/Fretboard/Analysis/PhysicalFretboardCalculator.cs
+  /Common/GA.Domain.Services/Fretboard/Voicings/Analysis/VoicingAnalyzer.cs
+  /Common/GA.Domain.Services/Fretboard/Voicings/Analysis/VoicingHarmonicAnalyzer.cs
+  /Common/GA.Domain.Services/Fretboard/Voicings/Analysis/VoicingPhysicalAnalyzer.cs
+  /Common/GA.Domain.Services/Fretboard/Voicings/Analysis/VoicingTagEnricher.cs
+  /Common/GA.Domain.Services/Fretboard/Voicings/Analysis/ChordClassificationEngine.cs
+  /Common/GA.Domain.Services/Fretboard/Voicings/Analysis/ChordClassificationContext.cs
+  /Common/GA.Domain.Services/Fretboard/Voicings/Generation/VoicingGenerator.cs
+  /Common/GA.Domain.Services/Fretboard/Voicings/Generation/VoicingDecomposer.cs
+  /Common/GA.Domain.Services/Fretboard/Voicings/Filtering/VoicingFilters.cs
+  /Common/GA.Domain.Services/Fretboard/Voicings/Filtering/VoicingFilterCriteria.cs
 )
 cd "$(dirname "$0")"
 if [ "$(git -C .ga rev-parse HEAD 2>/dev/null || true)" = "$GA_SHA" ]; then

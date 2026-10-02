@@ -39,6 +39,21 @@
     <Compile Include="$(GaRoot)Common/GA.Domain.Services/Chords/Parsing/ChordSymbolParser.cs" Link="Ga/ChordSymbolParser.cs" />
     <Compile Include="$(GaRoot)Common/GA.Domain.Services/Chords/BasicChordExtensionsService.cs" Link="Ga/BasicChordExtensionsService.cs" />
     <Compile Include="$(GaRoot)Common/GA.Domain.Services/Chords/ChordAlterationService.cs" Link="Ga/ChordAlterationService.cs" />
+    <!-- Lesson 14 compiles GA's voicing generator, analyzers and filters, as they are, with the chord recognizer and the fret
+         distances they call, and the analysis records of GA.Business.Core they return -->
+    <Compile Include="$(GaRoot)Common/GA.Business.Core/Analysis/**/*.cs" Link="Ga/Analysis/%(RecursiveDir)%(Filename)%(Extension)" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Chords/CanonicalChordRecognizer.cs" Link="Ga/CanonicalChordRecognizer.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Analysis/PhysicalFretboardCalculator.cs" Link="Ga/PhysicalFretboardCalculator.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Voicings/Analysis/VoicingAnalyzer.cs" Link="Ga/VoicingAnalyzer.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Voicings/Analysis/VoicingHarmonicAnalyzer.cs" Link="Ga/VoicingHarmonicAnalyzer.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Voicings/Analysis/VoicingPhysicalAnalyzer.cs" Link="Ga/VoicingPhysicalAnalyzer.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Voicings/Analysis/VoicingTagEnricher.cs" Link="Ga/VoicingTagEnricher.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Voicings/Analysis/ChordClassificationEngine.cs" Link="Ga/ChordClassificationEngine.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Voicings/Analysis/ChordClassificationContext.cs" Link="Ga/ChordClassificationContext.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Voicings/Generation/VoicingGenerator.cs" Link="Ga/VoicingGenerator.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Voicings/Generation/VoicingDecomposer.cs" Link="Ga/VoicingDecomposer.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Voicings/Filtering/VoicingFilters.cs" Link="Ga/VoicingFilters.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Voicings/Filtering/VoicingFilterCriteria.cs" Link="Ga/VoicingFilterCriteria.cs" />
   </ItemGroup>
 
 </Project>

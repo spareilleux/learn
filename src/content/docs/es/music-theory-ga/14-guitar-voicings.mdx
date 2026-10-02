@@ -1,0 +1,349 @@
+---
+title: "Lección 14: Los voicings de guitarra — shells, drop 2 y drop 3"
+description: Los voicings cerrados y drop, los voicings sin fundamental, los shells y las notas guía, comparados con el generador de voicings de Guitar Alchemist, sus analizadores y sus filtros, y las recetas de acompañamiento de sus archivos de configuración.
+sidebar:
+  label: 14. Los voicings de guitarra
+  order: 14
+---
+
+import DropVoicings from '../../../../assets/music-theory-ga/l14-drop-voicings.svg';
+
+La lección 3 nombraba un voicing de guitarra por su acorde. Esta lección lo nombra por la manera en que se disponen sus notas: cerrado o drop, con o sin su fundamental, un shell de tres notas, y las notas guía que llevan una progresión. [Guitar Alchemist](https://github.com/GuitarAlchemist/ga) (GA) etiqueta los voicings que guarda con las mismas palabras: un generador lista todos los voicings del mástil, unos analizadores etiquetan cada uno `Drop-2`, `rootless` o `shell-voicing`, unos filtros eligen los voicings por esas etiquetas, y un archivo de configuración contiene recetas de acompañamiento que su chatbot puede recuperar. El programa del curso construye 128 voicings drop a partir de la definición, toma del generador de GA todos los voicings de un acorde de séptima sobre C, y compara las etiquetas.
+
+Todos los enlaces a GA apuntan al commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6). Las salidas proceden del comando de abajo; el punto de entrada es `l16`.
+
+```bash
+dotnet run --project code/music-theory-ga/GaTheory -c Release -- l16
+```
+
+## Los voicings cerrados y drop
+
+### La idea
+
+Wikipedia muestra tres voicings de una tríada de C mayor: "The first is in close position (the most compact voicing), while the second and third are in open position (that is, with wider spacing)." Los arreglistas nombran algunas posiciones abiertas por las notas que mueven: "One nomenclature for describing certain classes of voicings is the "drop-n" terminology, such as drop-2 voicings, drop-4 voicings, etc." En ese sistema, "The implicit, non-dropped, default voicing in this system has all voices in the same octave, with individual voices numbered from the top down", y "A drop-2 voicing lowers the second voice by an octave." Pueden bajar varias voces: "There are four drop-2-and-4 voicings for G 7. Reading down from the top voice, they are G D F B, B F G D, D G B F, and F B D G." El sistema "doesn't provide a term for more than one voice on the same pitch", y "doesn't cover the dropping of voices by two or more octaves" ([Voicing (music)](https://en.wikipedia.org/wiki/Voicing_(music))). Esa sección del artículo no cita ninguna fuente, y lo dice; el módulo de Streeling [MUS-005 · Armonía de jazz para guitarra](../../streeling/music/mus-005-jazz-harmony/) da la misma definición: "Take a close-position four-note chord and "drop" the second-highest note down an octave."
+
+Los guitarristas lo necesitan. Wikipedia otra vez: "the perfect fourth intervals between the guitar's strings typically make most close position chords cumbersome and impractical to play", mientras que "the fingerings used for drop voicings on guitar are easily moved horizontally and vertically around the fingerboard".
+
+El curso sigue la definición al pie de la letra ([`Lesson16.cs#L43-L68`](https://github.com/spareilleux/learn/blob/1d58ba8/code/music-theory-ga/GaTheory/Lesson16.cs#L43-L68)). Bajo una nota superior, coloca cada otra nota del acorde tan alta como puede ir, lo que da la posición cerrada; baja las voces 2, 3 o 4 una octava, solas o juntas; y vuelve a nombrar cualquier voicing comparando cada nota con su lugar en la posición cerrada bajo la misma nota superior. Una nota a más de una octava por debajo de ese lugar es "beyond drop-n", y un voicing que dobla una clase de altura es "doubled, not named".
+
+### En GA: una sola etiqueta, «Drop-2»
+
+[`VoicingHarmonicAnalyzer.Analyze`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Voicings/Analysis/VoicingHarmonicAnalyzer.cs#L10-L44) devuelve un registro [`VoicingCharacteristics`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Core/Analysis/Voicings/VoicingCharacteristics.cs#L3-L15), cuyo `DropVoicing` procede de [`DetectDropVoicing`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Voicings/Analysis/VoicingHarmonicAnalyzer.cs#L46-L58): a partir de cuatro notas, subir la más grave una octava; si las notas caben entonces en una octava, la respuesta es «Drop-2», si no, nada. Su comentario la llama "General Drop-2 detection". En el mismo registro, `Analyze` pasa `intervalSpread > 12` como `IsRootless` y `false` como `IsOpenVoicing` ([`#L38-L40`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Voicings/Analysis/VoicingHarmonicAnalyzer.cs#L38-L40)). [`ChordClassificationEngine`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Voicings/Analysis/ChordClassificationEngine.cs#L154-L174), que escribe las etiquetas que lee la búsqueda de GA, convierte esos tres campos en `rootless`, `closed-voicing` u `open-voicing`, y `drop-2-voicings`. El programa construye los ocho voicings de Cmaj7 bajo B y pregunta a GA ([`Lesson16.cs#L173-L182`](https://github.com/spareilleux/learn/blob/1d58ba8/code/music-theory-ga/GaTheory/Lesson16.cs#L173-L182)):
+
+```text
+== Drop voicings of Cmaj7 under B, built from the definition: the course names each one back, GA's VoicingHarmonicAnalyzer.Analyze labels it (GA.Domain.Services, compiled)
+dropped              notes, low to high   spread  course               DropVoicing  IsRootless  IsOpenVoicing  tags (ChordClassificationEngine)
+close                C5 E5 G5 B5          11      close                Drop-2       False       False          closed-voicing drop-2-voicings
+drop-2               G4 C5 E5 B5          16      drop-2               Drop-2       True        False          rootless closed-voicing drop-2-voicings
+drop-3               E4 C5 G5 B5          19      drop-3               Drop-2       True        False          rootless closed-voicing drop-2-voicings
+drop-4               C4 E5 G5 B5          23      drop-4               Drop-2       True        False          rootless closed-voicing drop-2-voicings
+drop-2-and-3         E4 G4 C5 B5          19      drop-2-and-3         (none)       True        False          rootless closed-voicing
+drop-2-and-4         C4 G4 E5 B5          23      drop-2-and-4         (none)       True        False          rootless closed-voicing
+drop-3-and-4         C4 E4 G5 B5          23      drop-3-and-4         (none)       True        False          rootless closed-voicing
+drop-2-and-3-and-4   C4 E4 G4 B5          23      drop-2-and-3-and-4   (none)       True        False          rootless closed-voicing
+```
+
+El curso vuelve a nombrar los ocho. GA llama «Drop-2» a cuatro de ellos: la posición cerrada, el drop 2, el drop 3 y el drop 4. Eso se sigue de la prueba. Subir la nota más grave de una posición cerrada da otra posición cerrada, una inversión. En un voicing con una voz bajada, la voz bajada es la más grave, y subirla la devuelve a su lugar. Con dos voces bajadas, la segunda se queda una octava más abajo, y las notas abarcan más de una octava. Así que el «Drop-2» de GA significa «cerrado, o una voz bajada», y ningún voicing es nunca «Drop-3». Los siete voicings que abarcan más de una octava son «rootless», aunque los ocho tienen su C; ninguno es abierto; la posición cerrada, de 11 semitonos, recibe `drop-2-voicings` con los demás. Lo mismo vale para los cuatro acordes de séptima, cada uno bajo sus cuatro notas superiores ([`Lesson16.cs#L184-L198`](https://github.com/spareilleux/learn/blob/1d58ba8/code/music-theory-ga/GaTheory/Lesson16.cs#L184-L198)):
+
+```text
+== All 128: four seventh chords on C × four close positions (one per top note) × eight sets of dropped voices
+dropped              voicings  course right  "Drop-2"  (none)  other  IsRootless  IsOpenVoicing  with the root
+close                16        16            16        0       0      0           0              16
+drop-2               16        16            16        0       0      16          0              16
+drop-3               16        16            16        0       0      16          0              16
+drop-4               16        16            16        0       0      16          0              16
+drop-2-and-3         16        16            0         16      0      16          0              16
+drop-2-and-4         16        16            0         16      0      16          0              16
+drop-3-and-4         16        16            0         16      0      16          0              16
+drop-2-and-3-and-4   16        16            0         16      0      16          0              16
+all                  128       128           64        64      0      112         0              128
+GA says "Drop-2" exactly when at most one voice is dropped: True
+```
+
+64 «Drop-2», exactamente los voicings que tienen como mucho una voz bajada; 112 «rootless», teniendo los 128 su fundamental; ninguno abierto. Los propios ejemplos de Wikipedia, reconstruidos por el curso y leídos de arriba abajo ([`Lesson16.cs#L200-L215`](https://github.com/spareilleux/learn/blob/1d58ba8/code/music-theory-ga/GaTheory/Lesson16.cs#L200-L215)):
+
+```text
+== Wikipedia's examples, rebuilt by the course and read down from the top, with GA's label
+Wikipedia  course     check  DropVoicing
+-- drop-2 voicings of the C major triad
+C E G      C E G      ok     (none)
+G C E      G C E      ok     (none)
+E G C      E G C      ok     (none)
+-- drop-2-and-4 voicings of G7
+G D F B    G D F B    ok     (none)
+B F G D    B F G D    ok     (none)
+D G B F    D G B F    ok     (none)
+F B D G    F B D G    ok     (none)
+```
+
+El curso encuentra los siete tal como están escritos. GA no nombra ninguno: una tríada tiene tres notas, y la prueba necesita cuatro ([`#L48`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Voicings/Analysis/VoicingHarmonicAnalyzer.cs#L48)); los voicings de G7 bajan dos voces.
+
+## En la guitarra: los acordes abiertos, y el drop 2 de MUS-005
+
+### La idea
+
+En la guitarra, «abierto» tiene otro sentido. "While open chords are the most commonly employed voicings on the guitar and other fretted instruments for the volume and resonance they produce", dice el mismo artículo: acordes con cuerdas al aire, como los de la lección 3. Cada uno de ellos dobla una nota: x32010 toca C E G C E, fuera de un sistema que "doesn't provide a term for more than one voice on the same pitch". Un voicing sin fundamental deja fuera la fundamental, por una razón que da Open Music Theory: "if there is a bass player in the performing ensemble, you may deliberately omit the root in the other voices" ([Open Music Theory, "Jazz Voicings"](https://viva.pressbooks.pub/openmusictheory/chapter/jazz-voicings/)).
+
+MUS-005 mostraba un "Drop-2 Cmaj7 (string set 5-4-3-2)": x3200x, cuyo E era "the 3rd — dropped from close position" ([`mus-005-jazz-harmony.md#L214-L223`](https://github.com/GuitarAlchemist/Demerzel/blob/6aef19b3a7c0ceac400f89f5585f4c033d61c99c/state/streeling/courses/music/en/mus-005-jazz-harmony.md#L214-L223), tal como decía el módulo hasta que [Demerzel #1098](https://github.com/GuitarAlchemist/Demerzel/pull/1098) lo corrigió). Sus notas, C3 E3 G3 B3, caben en una octava: es una posición cerrada. Bajo su nota superior, B, no se ha bajado nada. El drop 2 con C en el bajo en esas cuerdas, que el módulo muestra ahora, es x3545x, C3 G3 B3 E4: bajo la nota superior E4, la posición cerrada es G3 B3 C4 E4, y bajar C4, la segunda voz desde arriba, lo da. La figura muestra los dos, con un drop 3 de Cmaj7 y un shell de G7, el tema de la sección siguiente:
+
+<DropVoicings role="img" aria-label="Cuatro diagramas de acordes. x3200x, C E G B, Cmaj7 en posición cerrada, que MUS-005 llamaba un drop 2. x3545x, C G B E, un drop 2 desde el tercer traste. 8x998x, C B E G, un drop 3 desde el octavo traste. 3x34xx, G F B, un shell de G7." />
+
+### En GA: `VoicingAnalyzer`
+
+[`VoicingAnalyzer.Analyze`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Voicings/Analysis/VoicingAnalyzer.cs#L91-L96) llama a `AnalyzeEnhanced`, el análisis que el indexador de GA ejecuta sobre cada voicing ([`VoicingIndexingService.cs#L236-L240`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Search/VoicingIndexingService.cs#L236-L240)): el mismo análisis armónico, más uno físico. El programa le pasa los siete acordes abiertos de la lección 3 y las dos formas de Cmaj7, escritas desde la cuerda 6 ([`Lesson16.cs#L219-L232`](https://github.com/spareilleux/learn/blob/1d58ba8/code/music-theory-ga/GaTheory/Lesson16.cs#L219-L232)):
+
+```text
+== Guitar shapes through VoicingAnalyzer.Analyze (GA.Domain.Services, compiled): lesson 3's open chords, MUS-005's "Drop-2 Cmaj7" and a drop 2
+shape    chord  notes, low to high    spread  course               root  DropVoicing  IsRootless  IsOpenVoicing  tags (ChordClassificationEngine)
+x32010   C      C3 E3 G3 C4 E4        16      doubled, not named   yes   Drop-2       True        False          rootless closed-voicing drop-2-voicings shell-voicing
+032010   C/E    E2 C3 E3 G3 C4 E4     24      doubled, not named   yes   (none)       True        False          rootless closed-voicing shell-voicing
+x02210   Am     A2 E3 A3 C4 E4        19      doubled, not named   yes   Drop-2       True        False          rootless closed-voicing drop-2-voicings shell-voicing
+022100   E      E2 B2 E3 A♭3 B3 E4    24      doubled, not named   yes   (none)       True        False          rootless closed-voicing shell-voicing
+320003   G      G2 B2 D3 G3 B3 G4     24      doubled, not named   yes   (none)       True        False          rootless closed-voicing shell-voicing
+xx0232   D      D3 A3 D4 F♯4          16      doubled, not named   yes   Drop-2       True        False          rootless closed-voicing drop-2-voicings shell-voicing
+133211   F      F2 C3 F3 A3 C4 F4     24      doubled, not named   yes   (none)       True        False          rootless closed-voicing shell-voicing
+x3200x   Cmaj7  C3 E3 G3 B3           11      close                yes   Drop-2       False       False          closed-voicing drop-2-voicings
+x3545x   Cmaj7  C3 G3 B3 E4           16      drop-2               yes   Drop-2       True        False          rootless closed-voicing drop-2-voicings
+```
+
+Los siete acordes abiertos son «rootless», cada uno con su fundamental, seis de ellos con la fundamental en el bajo. Tres son «Drop-2»: x32010, x02210 y xx0232 caben en una octava una vez subido su bajo. GA coincide con la primera versión de MUS-005 en que x3200x es «Drop-2», y llama al verdadero drop 2, x3545x, «rootless», con su C en el bajo. El motor etiqueta también los siete acordes abiertos `shell-voicing`; la sección siguiente explica por qué.
+
+## Los shells
+
+### La idea
+
+MUS-005: "The root, 3rd, and 7th are the **essential tones** that define a chord's quality and function. The 5th is almost always omitted (it adds no harmonic information unless altered)." Freddie Green, en la orquesta de Count Basie, los tocaba "almost always on strings 6-4-3 (or 5-4-3). Only three notes — root (or shell bass note), 3rd, 7th." Open Music Theory, para dos voces sobre el bajo: "you should typically use the third and seventh of the chord (omitting the fifth)". El curso los toca en esas cuerdas: G7, Gmaj7 y Gm7 con la fundamental en la sexta cuerda, la séptima bajo la tercera (3x34xx, 3x44xx, 3x33xx), y C7, Cmaj7 y Cm7 con la fundamental en la quinta, la tercera bajo la séptima (x323xx, x324xx, x313xx). Luego pregunta a GA por las formas de la sección anterior ([`Lesson16.cs#L236-L252`](https://github.com/spareilleux/learn/blob/1d58ba8/code/music-theory-ga/GaTheory/Lesson16.cs#L236-L252)).
+
+### En GA: tres reglas
+
+```text
+== Shells, root, third and seventh on MUS-005's Freddie Green strings, then the shapes above: three rules that name a shell
+shape    chord  degrees, low to high  spread  IsRootless  ShellFamily      physical tag  engine tag    ShellVoicings filter
+3x34xx   G7     1 ♭7 3                16      True        3-4 note shell   shell-voicing shell-voicing True
+3x44xx   Gmaj7  1 7 3                 16      True        3-4 note shell   shell-voicing shell-voicing True
+3x33xx   Gm7    1 ♭7 ♭3               15      True        3-4 note shell   shell-voicing shell-voicing True
+x323xx   C7     1 3 ♭7                10      False       3-4 note shell   shell-voicing -             False
+x324xx   Cmaj7  1 3 7                 11      False       3-4 note shell   shell-voicing -             False
+x313xx   Cm7    1 ♭3 ♭7               10      False       3-4 note shell   shell-voicing -             False
+x32010   C      1 3 5 1 3             16      True        (none)           -             shell-voicing False
+032010   C/E    3 1 3 5 1 3           24      True        (none)           -             shell-voicing False
+x02210   Am     1 5 1 ♭3 5            19      True        (none)           -             shell-voicing False
+022100   E      1 5 1 3 5 1           24      True        (none)           -             shell-voicing False
+320003   G      1 3 5 1 3 1           24      True        (none)           -             shell-voicing False
+xx0232   D      1 5 1 3               16      True        3-4 note shell   shell-voicing shell-voicing False
+133211   F      1 5 1 3 5 1           24      True        (none)           -             shell-voicing False
+x3200x   Cmaj7  1 3 5 7               11      False       3-4 note shell   shell-voicing -             False
+x3545x   Cmaj7  1 5 7 3               16      True        3-4 note shell   shell-voicing -             False
+```
+
+GA tiene tres reglas para un shell, y ninguna mira las notas del acorde. [`VoicingPhysicalAnalyzer`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Voicings/Analysis/VoicingPhysicalAnalyzer.cs#L126-L131) da la `ShellFamily` «3-4 note shell» a cualquier voicing en tres o cuatro cuerdas, y con ella la etiqueta `shell-voicing` ([`#L204`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Voicings/Analysis/VoicingPhysicalAnalyzer.cs#L204)): los seis shells, xx0232 y las dos formas de Cmaj7. `ChordClassificationEngine` etiqueta `shell-voicing` cualquier voicing «rootless» de tres clases de altura ([`ChordClassificationEngine.cs#L169-L173`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Voicings/Analysis/ChordClassificationEngine.cs#L169-L173)): los shells en la sexta cuerda y las siete tríadas abiertas, no los shells en la quinta. El filtro `ShellVoicings` de [`VoicingFilters`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Voicings/Filtering/VoicingFilters.cs#L118-L119) guarda un voicing «rootless» de tres notas distintas: los tres shells en la sexta cuerda y nada más. Entre G7 y C7, decide «rootless», es decir, la extensión: con la séptima bajo la tercera, 15 o 16 semitonos separan el bajo de la nota superior; con la tercera bajo la séptima, 10 u 11. Los seis shells tienen su fundamental en el bajo.
+
+## Todos los voicings del mástil
+
+### La idea
+
+¿Cuántos voicings tiene una guitarra? La respuesta de GA se sigue de sus reglas, y se pueden contar. [`VoicingGenerator`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Voicings/Generation/VoicingGenerator.cs#L156-L279) desliza una ventana de cinco trastes a lo largo del mástil de 24 trastes, empezando en los trastes 0 a 20. En cada ventana, cada cuerda está apagada o toca uno de los cinco trastes, y un voicing necesita al menos dos notas ([`#L18-L144`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Voicings/Generation/VoicingGenerator.cs#L18-L144)). Eso da 6⁶ = 46 656 combinaciones por ventana, menos la silenciosa y las 30 de una sola nota: 46 625. Dos ventanas vecinas comparten cuatro trastes, así que 5⁶ − 1 − 24 = 15 600 voicings, que el generador guarda una sola vez comparando los diagramas ([`#L250-L278`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Voicings/Generation/VoicingGenerator.cs#L250-L278)). El programa lo ejecuta en secuencia ([`Lesson16.cs#L256-L265`](https://github.com/spareilleux/learn/blob/1d58ba8/code/music-theory-ga/GaTheory/Lesson16.cs#L256-L265)):
+
+```text
+== VoicingGenerator.GenerateAllVoicings (GA.Domain.Services, compiled) on GA's standard guitar, run in sequence
+                       course       GA           check
+voicings               667125       667125       ok
+the course: 21 windows × 46625 − 20 shared × 15600
+```
+
+### En GA: los acordes de séptima entre ellos
+
+El curso guarda los voicings que tocan las cuatro notas de Cmaj7, C7, Cm7 o Cm7♭5, una por cuerda, y nombra cada uno ([`Lesson16.cs#L267-L285`](https://github.com/spareilleux/learn/blob/1d58ba8/code/music-theory-ga/GaTheory/Lesson16.cs#L267-L285)):
+
+```text
+== Those that play the four notes of a seventh chord on C on four strings: the course's name against GA's label
+voicings: 687
+course               voicings  "Drop-2"  (none)  other
+close                15        15        0       0
+drop-2               111       111       0       0
+drop-3               92        92        0       0
+drop-4               46        46        0       0
+drop-2-and-3         78        0         78      0
+drop-2-and-4         143       0         143     0
+drop-3-and-4         39        0         39      0
+drop-2-and-3-and-4   22        0         22      0
+beyond drop-n        141       0         141     0
+named otherwise: 0
+GA says "Drop-2" exactly on the course's close, drop-2, drop-3 and drop-4 voicings: True
+```
+
+687 voicings: 15 cerrados, 249 con una voz bajada, 282 con dos o tres, y 141 con una voz a más de una octava por debajo de su lugar, que el sistema de los drops no nombra. La etiqueta de GA coincide como en los 128: «Drop-2» en los voicings cerrados, drop 2, drop 3 y drop 4, nada en los demás.
+
+MUS-005 enumera tres grupos de cuerdas para los drop 2, 6-5-4-3, 5-4-3-2 y 4-3-2-1, bajo una frase que decía "Drop-2 voicings exist on four string sets" hasta Demerzel #1098 ([`mus-005-jazz-harmony.md#L225`](https://github.com/GuitarAlchemist/Demerzel/blob/6aef19b3a7c0ceac400f89f5585f4c033d61c99c/state/streeling/courses/music/en/mus-005-jazz-harmony.md#L225)), y cuenta "48 drop-2 voicings to internalize (4 qualities x 4 inversions x 3 string sets)"; sus drop 3 están en "6-4-3-2 and 5-3-2-1". El programa los busca entre los voicings de GA ([`Lesson16.cs#L287-L301`](https://github.com/spareilleux/learn/blob/1d58ba8/code/music-theory-ga/GaTheory/Lesson16.cs#L287-L301)):
+
+```text
+== The string sets of the drop-2 voicings found
+  6-5-4-3: 28
+  6-5-4-2: 5
+  6-4-3-2: 2
+  5-4-3-2: 31
+  5-4-3-1: 8
+  5-3-2-1: 5
+  4-3-2-1: 32
+```
+
+```text
+== MUS-005's shapes: quality × inversion (the chord tone in the bass) × string set, found among GA's voicings
+  drop-2 on 6-5-4-3, 5-4-3-2, 4-3-2-1: 48 of 48 shapes, the widest spans 4 frets
+  drop-3 on 6-4-3-2, 5-3-2-1: 32 of 32 shapes, the widest spans 4 frets
+```
+
+Los drop 2 están en siete grupos de cuerdas: los tres de MUS-005 contienen 91 de los 111, y cuatro grupos que saltan una cuerda contienen los otros 20. Las 48 formas drop 2 y las 32 formas drop 3 del módulo están todas entre los voicings de GA; la más ancha abarca cuatro trastes, el límite del generador (`maxFretSpan = 4`). La más grave de cada una, para Cmaj7 ([`Lesson16.cs#L303-L311`](https://github.com/spareilleux/learn/blob/1d58ba8/code/music-theory-ga/GaTheory/Lesson16.cs#L303-L311)):
+
+```text
+== Cmaj7 in each inversion: the lowest drop-2 on strings 5-4-3-2 and the lowest drop-3 on strings 6-4-3-2, written from string 6
+bass  drop-2, 5-4-3-2        drop-3, 6-4-3-2
+1     x-3-5-4-5-x C G B E    8-x-9-9-8-x C B E G
+3     x-7-9-5-8-x E B C G    12-x-10-12-12-x E C G B
+5     x-10-10-9-12-x G C E B 3-x-2-4-1-x G E B C
+7     x-2-2-0-1-x B E G C    7-x-5-5-5-x B G C E
+```
+
+Con C en el bajo, x-3-5-4-5-x y 8-x-9-9-8-x son el drop 2 y el drop 3 de la figura. Con B en el bajo, el drop 2 hace sonar la cuerda de G al aire: x-2-2-0-1-x.
+
+### En GA: los filtros
+
+`VoicingFilters.MatchesCriteria` elige voicings por un `VoicingTypeFilter` ([`VoicingFilters.cs#L101-L124`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Voicings/Filtering/VoicingFilters.cs#L101-L124)), y `VoicingIndexingService` lo aplica a cada voicing antes de indexarlo ([`VoicingIndexingService.cs#L240-L247`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Search/VoicingIndexingService.cs#L240-L247)). El programa ejecuta cada filtro sobre los 687 voicings, frente a lo que su nombre significa para el curso ([`Lesson16.cs#L313-L333`](https://github.com/spareilleux/learn/blob/1d58ba8/code/music-theory-ga/GaTheory/Lesson16.cs#L313-L333)):
+
+```text
+== VoicingFilters.MatchesCriteria (GA.Domain.Services, compiled) on these voicings, one VoicingTypeFilter at a time, against what each name means to the course
+filter          course   GA       check
+Drop2           111      264      DIFF
+Drop3           92       0        DIFF
+Drop2And4       143      0        DIFF
+Rootless        0        672      DIFF
+ShellVoicings   0        0        ok
+ClosedPosition  15       687      DIFF
+OpenPosition    672      0        DIFF
+course: Rootless, no C; ShellVoicings, root, third and seventh alone; ClosedPosition, close; OpenPosition, the others
+GA's Drop2 keeps exactly the course's close, drop-2, drop-3 and drop-4 voicings: True
+GA's Rootless keeps exactly those spread over more than an octave: True
+ShellFamily "3-4 note shell" on all of them: True
+```
+
+`Drop2` guarda 264 voicings, los cerrados con los drop 2, drop 3 y drop 4, porque compara `DropVoicing` con «Drop-2». `Drop3` y `Drop2And4` lo comparan con «Drop-3» y «Drop-2+4» ([`VoicingFilters.cs#L114-L116`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Voicings/Filtering/VoicingFilters.cs#L114-L116)), que `DetectDropVoicing` nunca devuelve: no guardan nada. `Rootless` guarda los 672 voicings que abarcan más de una octava, aunque cada uno tiene su C. `ClosedPosition` guarda los 687 y `OpenPosition` ninguno, porque `IsOpenVoicing` es siempre falso ([`#L120-L121`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Voicings/Filtering/VoicingFilters.cs#L120-L121)). Solo `ShellVoicings` coincide, en nada: estos voicings tienen cuatro notas.
+
+## Las notas guía
+
+### La idea
+
+MUS-005: "The **3rd** and **7th** of each chord are called **guide tones**", y en un ii–V–I "The guide tones **exchange roles**: the 3rd of one chord becomes the 7th of the next, and vice versa. This creates a two-voice counterpoint that descends chromatically: C-B, F-E." Open Music Theory lo dice de dos acordes cualesquiera a distancia de quinta: "one voice will alternate between the third and the seventh of the chord, and the other voice will do the same but in the opposite order". El curso comprueba cuatro movimientos en cada tonalidad: las terceras de ii y de V se quedan, como séptimas de V y de I, y las séptimas de ii y de V bajan un semitono, hacia la tercera siguiente.
+
+### En GA: la tabla de transposición, y un inventario vacío
+
+El archivo `ChordProgressions.yaml` de GA da el ii–V–I mayor en doce tonalidades ([`ChordProgressions.yaml#L580-L618`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/ChordProgressions.yaml#L580-L618)). El programa deletrea la tercera y la séptima de cada acorde y comprueba los movimientos ([`Lesson16.cs#L337-L365`](https://github.com/spareilleux/learn/blob/1d58ba8/code/music-theory-ga/GaTheory/Lesson16.cs#L337-L365)):
+
+```text
+== Guide tones in GA's TransposeTables (ChordProgressions.yaml): third and seventh of each chord, and the four moves of a ii–V–I
+-- ii–V–I (Major) — 12 keys
+key  chords               thirds     sevenths   line 1     line 2     moves
+C    Dm7 G7 Cmaj7         F B E      C F B      F F E      C B B      ok
+Db   Ebm7 Ab7 Dbmaj7      Gb C F     Db Gb C    Gb Gb F    Db C C     ok
+D    Em7 A7 Dmaj7         G C# F#    D G C#     G G F#     D C# C#    ok
+Eb   Fm7 Bb7 Ebmaj7       Ab D G     Eb Ab D    Ab Ab G    Eb D D     ok
+E    F#m7 B7 Emaj7        A D# G#    E A D#     A A G#     E D# D#    ok
+F    Gm7 C7 Fmaj7         Bb E A     F Bb E     Bb Bb A    F E E      ok
+Gb   Abm7 Db7 Gbmaj7      Cb F Bb    Gb Cb F    Cb Cb Bb   Gb F F     ok
+G    Am7 D7 Gmaj7         C F# B     G C F#     C C B      G F# F#    ok
+Ab   Bbm7 Eb7 Abmaj7      Db G C     Ab Db G    Db Db C    Ab G G     ok
+A    Bm7 E7 Amaj7         D G# C#    A D G#     D D C#     A G# G#    ok
+Bb   Cm7 F7 Bbmaj7        Eb A D     Bb Eb A    Eb Eb D    Bb A A     ok
+B    C#m7 F#7 Bmaj7       E A# D#    B E A#     E E D#     B A# A#    ok
+rows with the four moves: 12 of 12
+```
+
+Doce filas, doce con los cuatro movimientos. En C, las dos líneas son F F E y C B B: el "C-B, F-E" de MUS-005, con las notas que se quedan.
+
+El análisis de GA tiene un lugar para las notas guía: cada `MusicalVoicingAnalysis` lleva un [`ToneInventory`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Core/Analysis/Voicings/ToneInventory.cs#L3) con `Tones`, `HasGuideTones`, `OmittedTones` y `DoubledTones`. `AnalyzeEnhanced` lo rellena con `new ToneInventory([], false, [], [])` ([`VoicingAnalyzer.cs#L155`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Fretboard/Voicings/Analysis/VoicingAnalyzer.cs#L155)). Sobre todos los análisis de esta lección ([`Lesson16.cs#L367-L369`](https://github.com/spareilleux/learn/blob/1d58ba8/code/music-theory-ga/GaTheory/Lesson16.cs#L367-L369)):
+
+```text
+== GA's tone inventory: every MusicalVoicingAnalysis of this lesson, from VoicingAnalyzer.AnalyzeEnhanced
+  analyses: 711; HasGuideTones true: 0; Tones not empty: 0; OmittedTones not empty: 0
+```
+
+711 análisis, los shells entre ellos, y ninguno tiene notas guía. Leído, no ejecutado: [`VoicingDocumentFactory`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Rag/VoicingDocumentFactory.cs#L39-L42) copia `HasGuideTones` y `OmittedTones` en cada documento de voicing que GA indexa, con `DropVoicing` como `VoicingType`; [`AutoTaggingService`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Musical/Enrichment/AutoTaggingService.cs#L106-L115) solo etiqueta un documento «Shell» si tiene notas guía y no tiene quinta, lo que en estos documentos no ocurre nunca.
+
+## Lo que el chatbot puede recuperar: las recetas de acompañamiento
+
+`ChordProgressions.yaml` contiene también seis [`GuitarCompingRecipes`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/ChordProgressions.yaml#L461-L577), con digitaciones en grupos de cuerdas con nombre. Sus convenciones dicen "StringSet: which 4 strings the voicing uses (low→high)" ([`#L464`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/ChordProgressions.yaml#L464)). El cargador tipado solo lee las progresiones ([`ChordProgressionsConfigLoader.cs#L41-L44`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/Configuration/ChordProgressionsConfigLoader.cs#L41-L44)), pero [`YamlKnowledgeLoader`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/YamlKnowledgeLoader.fs#L25-L31), que usó la lección 13, se salta cinco archivos y no este, de modo que las recetas llegan a la recuperación ([`Lesson16.cs#L373-L382`](https://github.com/spareilleux/learn/blob/1d58ba8/code/music-theory-ga/GaTheory/Lesson16.cs#L373-L382)):
+
+```text
+== GA's GuitarCompingRecipes (ChordProgressions.yaml) through YamlKnowledgeLoader (GA.Business.Config, compiled)
+  36 entries from ChordProgressions.yaml
+  ii–V–I (Major) — Rootless Drop-2 set: an entry with 3 of its 3 fingerings
+  iiø–V–i (Minor) — Rootless Drop-2 set: an entry with 3 of its 3 fingerings
+  12-Bar Blues — Guide-tone shells: an entry with 0 of its 0 fingerings
+  Pop Loop I–V–vi–IV — Triad + 2/9 color: an entry with 4 of its 4 fingerings
+  Mixolydian Rock I–bVII–IV — Quartal/Power: an entry with 3 of its 3 fingerings
+  So What Vamp — Quartal planing: an entry with 2 of its 2 fingerings
+```
+
+El programa lee cada digitación de grave a agudo en su grupo de cuerdas, en afinación estándar, y compara sus notas con las de su nombre y, cuando la receta lo da, de su orden de grados ([`Lesson16.cs#L384-L408`](https://github.com/spareilleux/learn/blob/1d58ba8/code/music-theory-ga/GaTheory/Lesson16.cs#L384-L408)):
+
+```text
+== Each fingering read low to high on its string set, standard tuning (the file's conventions, line 464); the notes of its name and degree order
+strings  fingering                    notes, low to high   intervals   name's notes  degree order's notes
+-- ii–V–I (Major) — Rootless Drop-2 set
+6-4-3-2  Dm9: x-5-5-5                 G C E                5 4         no            no
+6-4-3-2  G7(13,#9): x-5-4-6           G B F                4 6         no            no
+6 to 2*  Cmaj9: 8-x-9-9-10            C B E A              11 5 5      no            no
+-- iiø–V–i (Minor) — Rootless Drop-2 set
+5-4-3-2  Dm7b5(11): 5-6-5-6           D A♭ C F             6 4 5       no            no
+5-4-3-2  G7(b9,#9): 5-4-5-5           D F♯ C E             4 6 4       no            no
+5-4-3-2  Cm(maj9): 3-5-4-5            C G B E              7 4 5       no            no
+-- 12-Bar Blues — Guide-tone shells
+-- Pop Loop I–V–vi–IV — Triad + 2/9 color
+5-4-3-2  G(add9): 10-12-12-10         G D G A              7 5 2       no            -
+5-4-3-2  D(add9)/A: 12-11-11-12       A C♯ F♯ B            4 5 5       no            -
+5-4-3-2  Em(add9): 7-9-9-7            E B E F♯             7 5 2       no            -
+5-4-3-2  C(add9)/G: 10-10-9-10        G C E A              5 4 5       no            -
+-- Mixolydian Rock I–bVII–IV — Quartal/Power
+6-5-4-3  A5(add2): 5-7-7-7            A E A D              7 5 5       no            -
+6-5-4-3  Gsus2: 3-5-5-5               G D G C              7 5 5       no            -
+6-5-4-3  Dsus2/F#: 2-5-7-7            F♯ D A D             8 7 5       no            -
+-- So What Vamp — Quartal planing
+5-4-3-2  Dm11: 5-7-9-10               D A E A              7 7 5       no            -
+5-4-3-2  Ebm11: 6-8-10-11             E♭ B♭ F B♭           7 7 5       no            -
+  * five frets for a four-string set: read from string 6 to string 2
+-- 12-Bar Blues — Guide-tone shells, E7: 7th on D string, 3rd on G string
+  the seventh of E7, D: fret 0 of string 4 (D); the third, G♯: fret 1 of string 3 (G)
+```
+
+Ninguna digitación toca las notas de su nombre. La primera receta, un "Rootless Drop-2 set", está en 6-4-3-2, uno de los grupos de cuerdas drop 3 de MUS-005. Su "Dm9: x-5-5-5" es G C E; su "G7(13,#9): x-5-4-6", bajo el orden de grados "3-b7-#9-13", es G B F, un shell de G7 con su fundamental; su "Cmaj9: 8-x-9-9-10" tiene cinco trastes para cuatro cuerdas y, leído desde la sexta cuerda, da C B E A. En la receta menor, "Dm7b5(11)" es un drop 2 de Dm7♭5 con su fundamental y sin oncena, "G7(b9,#9)" es D F♯ C E, un D9 sin su quinta, y "Cm(maj9)" es C G B E, el drop 2 de Cmaj7 de la figura. Ningún acorde pop tiene todas las notas de su nombre: a G(add9) le falta su B, a Em(add9) su G, a C(add9)/G su D, con un A en su lugar, y D(add9)/A es A C♯ F♯ B, sin D ni E. El "Gsus2" de la receta de rock es un Gsus4 y su "Dsus2/F#" una tríada de D mayor sobre F♯, y los acordes de "So What", "Stacked 4ths (no 3rd)" en el archivo, forman una quinta, una quinta y una cuarta. Solo la receta de blues, que no da trastes, es correcta: la séptima de E7 es la cuerda de D al aire, y su tercera el primer traste de la cuerda de G.
+
+## Ejercicios
+
+1. ¿Por qué GA llama «Drop-2» a Cmaj7 en posición cerrada, C E G B?
+2. El voicing drop-2-and-4 de G7 de Wikipedia que se lee G D F B desde arriba: ¿qué responde `DetectDropVoicing`, y por qué?
+3. ¿Qué shells de los seis guarda el filtro `ShellVoicings`, y por qué no x324xx?
+4. Lee "Cm(maj9): 3-5-4-5" en las cuerdas 5-4-3-2. ¿Qué notas son, y qué voicing de esta lección es?
+
+<details>
+<summary>Soluciones</summary>
+
+1. Subir C una octava da E G B C, que cabe en una octava: «Drop-2». Toda posición cerrada pasa la prueba, ya que subir su nota más grave da otra posición cerrada.
+2. De grave a agudo, es B3 F4 D5 G5. Subir B3 da F4 B4 D5 G5, de 14 semitonos: nada. Hay dos voces bajadas, y la segunda, F, se queda una octava por debajo de su lugar.
+3. 3x34xx, 3x44xx y 3x33xx. x324xx, C E B, abarca 11 semitonos, así que `IsRootless` es falso, y el filtro solo guarda voicings «rootless» de tres notas.
+4. C3 G3 B3 E4: ni E♭ ni D. Es Cmaj7, x3545x, el drop 2 de la figura.
+
+</details>
+
+## Puntos clave
+
+- Un voicing drop-*n* baja una octava la voz *n* de una posición cerrada, contando desde arriba. La prueba única de GA responde «Drop-2» para una posición cerrada y para cualquier voicing con una voz bajada, y nada para los demás, de modo que sus filtros `Drop3` y `Drop2And4` no guardan nada.
+- En GA, «rootless» significa extendido sobre más de una octava, y ningún voicing es abierto: 672 de los 687 acordes de séptima en cuatro cuerdas son «rootless», cada uno con su fundamental.
+- GA tiene tres reglas para un shell: tres o cuatro cuerdas; más de una octava y tres clases de altura; más de una octava y tres notas. Ninguna comprueba que haya una fundamental, una tercera y una séptima.
+- El generador de GA lista 667 125 voicings, como dice la aritmética de las ventanas; entre ellos están todas las formas drop 2 y drop 3 de MUS-005, y drop 2 en otros cuatro grupos de cuerdas.
+- Las notas guía de las doce filas ii–V–I de GA se mueven como dice MUS-005, pero el análisis de GA nunca registra notas guía, y ninguna de las quince digitaciones de sus recetas de acompañamiento toca el acorde que nombra.
+
+## Fuentes
+
+- Wikipedia: [Voicing (music)](https://en.wikipedia.org/wiki/Voicing_(music)) (posiciones cerrada y abierta, voicings drop; la sección sobre los voicings drop no cita fuentes).
+- Mark Gotham et al., [*Open Music Theory*](https://viva.pressbooks.pub/openmusictheory/), versión 2, 2023, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/): [Jazz Voicings](https://viva.pressbooks.pub/openmusictheory/chapter/jazz-voicings/) (omitir la fundamental; la tercera y la séptima sobre el bajo).
+- Streeling: [MUS-005 · Armonía de jazz para guitarra](../../streeling/music/mus-005-jazz-harmony/).
+- GuitarAlchemist/ga en el commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6): `Common/GA.Domain.Services/Fretboard/Voicings/Analysis/VoicingHarmonicAnalyzer.cs`, `VoicingAnalyzer.cs`, `VoicingPhysicalAnalyzer.cs`, `ChordClassificationEngine.cs`, `Fretboard/Voicings/Generation/VoicingGenerator.cs`, `Fretboard/Voicings/Filtering/VoicingFilters.cs`, `Common/GA.Business.Core/Analysis/Voicings/VoicingCharacteristics.cs`, `ToneInventory.cs`, `Common/GA.Business.ML/Search/VoicingIndexingService.cs`, `Rag/VoicingDocumentFactory.cs`, `Musical/Enrichment/AutoTaggingService.cs`, `Common/GA.Business.Config/ChordProgressions.yaml`, `Configuration/ChordProgressionsConfigLoader.cs`, `YamlKnowledgeLoader.fs`.
