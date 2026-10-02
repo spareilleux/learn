@@ -7,7 +7,7 @@ sidebar:
 ---
 
 :::note[Cómo se prueba este curso]
-Cada resultado de este curso lo imprime un programa en [`code/candle`](https://github.com/spareilleux/learn/tree/main/code/candle): un workspace de Cargo que depende de `candle-core` y `candle-nn` **0.11.0**, fijados con `=`, solo en CPU. `check.sh` ejecuta `cargo fmt`, `clippy`, las pruebas (con un doctest `compile_fail` por cada fragmento que una lección muestra rechazado) y cada ejemplo, y compara cada salida con el archivo de `expected/`. Las salidas de las lecciones se capturaron con Rust 1.94.0 en Windows 11 en septiembre de 2026, y `check.sh` dio las mismas salidas en Linux, en un contenedor `rust:1.94.0`. Un workflow, `candle-examples.yml`, ejecuta el mismo script en Linux, Windows y macOS; todavía no está en GitHub, así que macOS queda *por verificar*.
+Cada resultado de este curso lo imprime un programa en [`code/candle`](https://github.com/spareilleux/learn/tree/main/code/candle): un workspace de Cargo que depende de `candle-core` y `candle-nn` **0.11.0**, fijados con `=`, solo en CPU. `check.sh` ejecuta `cargo fmt`, `clippy`, las pruebas (con un doctest `compile_fail` por cada fragmento que una lección muestra rechazado) y cada ejemplo, y compara cada salida con el archivo de `expected/`. Las salidas de las lecciones se capturaron con Rust 1.94.0 en Windows 11 en septiembre de 2026, y `check.sh` dio las mismas salidas en Linux, en un contenedor `rust:1.94.0`. Un workflow, `candle-examples.yml`, ejecuta el mismo script en Linux, Windows y macOS (ARM); su primera ejecución, el 16 de septiembre de 2026, dio las mismas salidas en los tres.
 :::
 
 ## Por qué aprendo esto
@@ -65,7 +65,7 @@ Cuando `main` ya ha corregido algo con lo que se topan las lecciones, lo dicen, 
 | 2 | [Tensores](02-tensors/) | `torch.tensor`, `view`, indexación, broadcasting |
 | 3 | [Cálculo y rendimiento en CPU](03-cpu-performance/) | `contiguous()`, `torch.set_num_threads` |
 | 4 | [Diferenciación automática](04-autodiff/) | `requires_grad`, `backward()`, `.grad` |
-| 5 | `candle-nn`: módulos, capas, optimizadores, una red pequeña entrenada con un conjunto de datos público | `nn.Module`, `nn.Linear`, `torch.optim` |
+| 5 | [Una primera red con `candle-nn`](05-candle-nn/): módulos, pérdidas, optimizadores, Iris | `nn.Module`, `nn.Linear`, `torch.optim` |
 | 6 | Formatos y el Hub: `safetensors`, `VarBuilder`, `hf-hub`, la caché, las licencias de los modelos | `torch.load`, `from_pretrained` |
 | 7 | Transformers en inferencia: un modelo de embeddings, tokenizadores, similitud, comparado con los embeddings de GA | `transformers.AutoModel` |
 | 8 | LLM cuantizados: GGUF, tensores cuantizados, un modelo pequeño, muestreo | `llama.cpp`, `bitsandbytes` |
@@ -75,7 +75,7 @@ Cuando `main` ya ha corregido algo con lo que se topan las lecciones, lo dicen, 
 | 12 | Escribir tu propio modelo: portar un modelo pequeño de PyTorch y comparar las salidas | — |
 | — | [Diario](journal/) | |
 
-Las lecciones 5 a 12 son el plan; cambiarán a medida que las primeras me enseñen lo que importa. La lección 9 se queda en teoría porque la GPU de la máquina en la que se escribe este curso está reservada para otro trabajo.
+Las lecciones 1 a 5 están escritas; las lecciones 6 a 12 son el plan, y cambiarán a medida que las primeras me enseñen lo que importa. La lección 9 se queda en teoría porque la GPU de la máquina en la que se escribe este curso está reservada para otro trabajo.
 
 ## Recursos
 
