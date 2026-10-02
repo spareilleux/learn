@@ -1,0 +1,217 @@
+# l14
+
+== Limited transposition: the 4096 sets, by how many of the twelve transpositions map each onto itself
+fixing  transpositions  sets   transposition classes
+1       12              4020   335
+2       6               54     9
+3       4               12     3
+4       3               6      2
+6       2               2      1
+12      1               2      2
+
+sets with limited transpositions: 76, in 17 transposition classes
+without the empty set and the chromatic scale: 15 classes, 14 set classes
+
+== The fifteen classes: notes from 0, steps, distinct transpositions and modes, mirror axes
+prime form         pitch classes        steps                transp.  modes  mirrors  name
+(02468T) 6-35      0 2 4 6 8 T          2 2 2 2 2 2          2        1      6        whole-tone scale, Messiaen 1
+(0369) 4-28        0 3 6 9              3 3 3 3              3        1      4        diminished seventh
+(0134679T) 8-28    0 1 3 4 6 7 9 T      1 2 1 2 1 2 1 2      3        2      4        octatonic scale, Messiaen 2
+(048) 3-12         0 4 8                4 4 4                4        1      3        augmented triad
+(014589) 6-20      0 1 4 5 8 9          1 3 1 3 1 3          4        2      3        augmented scale
+(01245689T) 9-12   0 1 2 4 5 6 8 9 T    1 1 2 1 1 2 1 1 2    4        3      3        Messiaen 3
+(06) 2-6           0 6                  6 6                  6        1      2        tritone
+(0167) 4-9         0 1 6 7              1 5 1 5              6        2      2
+(0268) 4-25        0 2 6 8              2 4 2 4              6        2      2
+(012678) 6-7       0 1 2 6 7 8          1 1 4 1 1 4          6        3      2        Messiaen 5
+(013679) 6-30      0 1 3 6 7 9          1 2 3 1 2 3          6        3      0        tritone scale, inverted
+(013679) 6-30      0 2 3 6 8 9          2 1 3 2 1 3          6        3      0        tritone scale
+(01236789) 8-9     0 1 2 3 6 7 8 9      1 1 1 3 1 1 1 3      6        4      2        Messiaen 4
+(0124678T) 8-25    0 1 2 4 6 7 8 T      1 1 2 2 1 1 2 2      6        4      2        Messiaen 6
+(012346789T) 10-6  0 1 2 3 4 6 7 8 9 T  1 1 1 1 2 1 1 1 1 2  6        5      2        Messiaen 7
+
+== Messiaen's seven modes, from Wikipedia's intervals: the course's counts against his list
+mode  steps                transp.  modes  his list  check
+1     2 2 2 2 2 2          2        1      2 1       ok
+2     1 2 1 2 1 2 1 2      3        2      3 2       ok
+3     2 1 1 2 1 1 2 1 1    4        3      4 3       ok
+4     1 1 3 1 1 1 3 1      6        4      6 4       ok
+5     1 4 1 1 4 1          6        3      6 3       ok
+6     2 2 1 1 2 2 1 1      6        4      6 4       ok
+7     1 1 1 2 1 1 1 1 2 1  6        5      6 5       ok
+
+== UnifiedModeService (GA.Domain.Services, compiled): IsSymmetricSet over the 4096 sets, through FromPitchClassSet
+                       course   GA       check
+sets                   76       76       ok
+agree                  4096     4096     ok
+sets FromPitchClassSet throws on: 0
+
+== UnifiedModeService.Describe(...).MessiaenModeIndex for Messiaen's seven modes, with each prime form's id
+mode             course   GA       check
+1 (1365)         1        1        ok
+2 (1755)         2        2        ok
+3 (1911)         3        3        ok
+4 (975)          4        (none)   DIFF
+5 (455)          5        (none)   DIFF
+6 (1495)         6        (none)   DIFF
+7 (2015)         7        (none)   DIFF
+
+The ids IdentifyMessiaenMode compares the prime form with (UnifiedModeService.cs, lines 298-341):
+GA's mode  id     pitch classes          the course's mode  prime form
+1          1365   0 2 4 6 8 T            1                  yes
+2          1755   0 1 3 4 6 7 9 T        2                  yes
+2          2925   0 2 3 5 6 8 9 E        2                  no, 1755
+3          1911   0 1 2 4 5 6 8 9 T      3                  yes
+4          2535   0 1 2 5 6 7 8 E        4                  no, 975
+5          2275   0 1 5 6 7 E            5                  no, 455
+6          3315   0 1 4 5 6 7 T E        4                  no, 975
+7          3055   0 1 2 3 5 6 7 8 9 E    7                  no, 2015
+
+== WholeToneScaleMode: GA's 6 modes, each moved to C, against the course's count
+degree  GA's Name                notes                      steps             set on C
+1       Whole-tone               C D E F# G# A#             2 2 2 2 2 2       1365
+2       Whole-tone 2             D E F# G# A# C             2 2 2 2 2 2       1365
+3       Whole-tone 3             E F# G# A# C D             2 2 2 2 2 2       1365
+4       Whole-tone 4             F# G# A# C D E             2 2 2 2 2 2       1365
+5       Whole-tone 5             G# A# C D E F#             2 2 2 2 2 2       1365
+6       Whole-tone 6             A# C D E F# G#             2 2 2 2 2 2       1365
+
+                 course   GA       check
+transpositions   2        2        ok
+limited          True     True     ok
+distinct modes   1        1        ok
+
+== DiminishedScaleMode: GA's 8 modes, each moved to C, against the course's count
+degree  GA's Name                notes                      steps             set on C
+1       Half-whole diminished    C D Eb F Gb Ab A B         2 1 2 1 2 1 2 1   2925
+2       Whole-half diminished    D Eb F Gb Ab A B C         1 2 1 2 1 2 1 2   1755
+3       Diminished mode 3        Eb F Gb Ab A B C D         2 1 2 1 2 1 2 1   2925
+4       Diminished mode 4        F Gb Ab A B C D Eb         1 2 1 2 1 2 1 2   1755
+5       Diminished mode 5        Gb Ab A B C D Eb F         2 1 2 1 2 1 2 1   2925
+6       Diminished mode 6        Ab A B C D Eb F Gb         1 2 1 2 1 2 1 2   1755
+7       Diminished mode 7        A B C D Eb F Gb Ab         2 1 2 1 2 1 2 1   2925
+8       Diminished mode 8        B C D Eb F Gb Ab A         1 2 1 2 1 2 1 2   1755
+
+                 course   GA       check
+transpositions   3        3        ok
+limited          True     True     ok
+distinct modes   2        2        ok
+
+== AugmentedScaleMode: GA's 6 modes, each moved to C, against the course's count
+degree  GA's Name                notes                      steps             set on C
+1       Augmented                C D# E G G# B              3 1 3 1 3 1       2457
+2       Augmented inversed       D# E G G# B C              1 3 1 3 1 3       819
+3       Augmented dominant       E G G# B C D#              3 1 3 1 3 1       2457
+4       Augmented Lydian         G G# B C D# E              1 3 1 3 1 3       819
+5       Augmented mode 5         G# B C D# E G              3 1 3 1 3 1       2457
+6       Augmented mode 6         B C D# E G G#              1 3 1 3 1 3       819
+
+                 course   GA       check
+transpositions   4        4        ok
+limited          True     True     ok
+distinct modes   2        2        ok
+
+== DiminishedScaleMode: GA's names for degrees 1 and 2 against the name of their step pattern
+degree   course                   GA                       check
+1        Whole-half diminished    Half-whole diminished    DIFF
+2        Half-whole diminished    Whole-half diminished    DIFF
+
+== Scale.Tritone against the tritone scale, C D♭ E G♭ G B♭
+                       Scale.Tritone          tritone scale
+notes                  C Db E F# G A          C Db E Gb G Bb
+pitch classes          0 1 4 6 7 9            0 1 4 6 7 T
+steps                  1 3 2 1 2 3            1 3 2 1 3 2
+prime form             (014679) 6-Z50         (013679) 6-30
+vector, course         <2 2 4 2 3 2>          <2 2 4 2 2 3>
+vector, GA             <2 2 4 2 3 2>          <2 2 4 2 2 3>
+transpositions         12                     6
+modes                  6                      3
+GA's IsSymmetricSet    False                  True
+
+TritoneScaleMode.Items: 6 modes, 6 distinct sets on C
+
+== Three tests GA calls symmetric, over the 4096 sets, against limited transposition
+test                                         sets   limited  not limited  limited, not flagged
+course: limited transpositions               76     76       0            0
+UnifiedModeService.IsSymmetricSet            76     76       0            0
+PitchClassSet.IsMonomodal                    29     17       12           59
+AtonalChordAnalysisService.IsSymmetricalSet  156    16       140          60
+
+IsMonomodal, by number of notes: 0: 1, 1: 12, 2: 6, 3: 4, 4: 3, 6: 2, 12: 1
+IsSymmetricalSet: C D E True, B♭ C D False
+sets whose SetClass.IsModal is false, the only way into GenerateAtonalName's symmetry branch: 0
+
+== AtonalModalFamilies.yaml (GA.Business.Config, read by AtonalModalFamiliesConfig): IsSymmetric against limited transposition
+families: 200; IsSymmetric: 6; with limited transpositions: 15
+
+first mode, family                                   course   GA       check
+0  Family-1-1                                        False    True     DIFF
+0 6  Family-2-1                                      True     True     ok
+0 4 8  Augmented Triad Family                        True     True     ok
+0 3 6 9  Major Seventh Chord Family                  True     True     ok
+0 2 6 8  Family-4-4                                  True     False    DIFF
+0 1 6 7  Family-4-21                                 True     False    DIFF
+0 2 4 6 8 T  Whole Tone Family                       True     True     ok
+0 1 3 6 7 9  Family-6-6                              True     False    DIFF
+0 1 4 5 8 9  Augmented (Hexatonic) Family            True     False    DIFF
+0 1 2 6 7 8  Family-6-41                             True     False    DIFF
+0 1 3 4 6 7 9 T  Diminished Family                   True     False    DIFF
+0 1 2 4 6 7 8 T  Family-8-4                          True     False    DIFF
+0 1 2 3 6 7 8 9  Major Bebop Family                  True     False    DIFF
+0 1 2 4 5 6 8 9 T  Family-9-1                        True     False    DIFF
+0 1 2 3 4 6 7 8 9 T  Family-10-1                     True     False    DIFF
+0 1 2 3 4 5 6 7 8 9 T E  Chromatic Family            True     True     ok
+
+== ModesSkill's answer to "modes of limited transposition" (GA.Business.ML, not compiled), rebuilt from its format and the same data
+**6 symmetric / modes-of-limited-transposition families** in the atonal catalog:
+
+- **Family-1-1** — ICV `<0 0 0 0 0 0>` — 1 notes (Forte 1-1)
+- **Family-2-1** — ICV `<0 0 0 0 0 1>` — 2 notes (Forte 2-1)
+- **Augmented Triad Family** — ICV `<0 0 0 3 0 0>` — 3 notes (Forte 3-1)
+- **Major Seventh Chord Family** — ICV `<0 0 4 0 0 2>` — 4 notes (Forte 4-1)
+- **Whole Tone Family** — ICV `<0 6 0 6 0 3>` — 6 notes (Forte 6-1)
+- **Chromatic Family** — ICV `<1 1 1 1 0 6>` — 12 notes (Forte 12-1)
+
+These are Messiaen's classical category — scales that repeat under rotation by fewer than 12 transpositions. The whole-tone scale (2 transpositions), octatonic (3), and hexatonic (4) are the most common in jazz / film vocabulary.
+
+== The Forte labels of AtonalModalFamilies.yaml against GA's ForteCatalog (CanonicalForteCatalog, lesson 4)
+notes  families  same labels
+1      1         1
+2      6         0
+3      12        0
+4      28        0
+5      35        0
+6      35        1
+7      35        0
+8      28        0
+9      12        0
+10     6         0
+11     1         1
+12     1         1
+all    200       4
+
+symmetric family       ForteCatalog  the file  check
+0                      1-1           1-1       ok
+0 6                    2-6           2-1       DIFF
+0 4 8                  3-12          3-1       DIFF
+0 3 6 9                4-28          4-1       DIFF
+0 2 4 6 8 T            6-35          6-1       DIFF
+0 1 2 3 4 5 6 7 8 9 T E 12-1          12-1      ok
+
+== Mirror symmetry: TranspositionClass.IsInversionallySymmetric (GA.Domain.Core) against the course's mirror axes
+                         course   GA       check
+transposition classes    352      352      ok
+mirror-symmetric         96       96       ok
+agree                    352      352      ok
+
+sets with mirror axes but not as many as the transpositions that fix them: 0
+
+scale              fixing transpositions  mirror axes
+major              1                      1
+harmonic minor     1                      0
+melodic minor      1                      1
+whole-tone         6                      6
+octatonic          4                      4
+augmented scale    3                      3
+tritone scale      2                      0
+Scale.Tritone      1                      1

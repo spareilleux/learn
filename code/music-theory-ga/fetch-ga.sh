@@ -21,6 +21,8 @@ PATHS=(
   /Apps/ga-server/GaApi/Models/ContextualChords.cs
   # lesson 11: the ranking of a modal family's members by brightness
   /Common/GA.Domain.Services/Unified/UnifiedModeService.cs
+  # lesson 12: the atonal chord analysis and its test of a symmetrical set
+  /Common/GA.Domain.Services/Chords/Analysis/Atonal/AtonalChordAnalysisService.cs
 )
 cd "$(dirname "$0")"
 if [ "$(git -C .ga rev-parse HEAD 2>/dev/null || true)" = "$GA_SHA" ]; then

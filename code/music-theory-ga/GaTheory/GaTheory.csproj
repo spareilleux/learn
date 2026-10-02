@@ -33,6 +33,8 @@
     <Compile Include="$(GaRoot)Apps/ga-server/GaApi/Models/ContextualChords.cs" Link="Ga/ContextualChords.cs" />
     <!-- Lesson 11 compiles the service that ranks the modes of a family by brightness, as it is -->
     <Compile Include="$(GaRoot)Common/GA.Domain.Services/Unified/UnifiedModeService.cs" Link="Ga/UnifiedModeService.cs" />
+    <!-- Lesson 12 compiles the atonal chord analysis, as it is, to call its private symmetry test -->
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Chords/Analysis/Atonal/AtonalChordAnalysisService.cs" Link="Ga/AtonalChordAnalysisService.cs" />
   </ItemGroup>
 
 </Project>

@@ -276,6 +276,11 @@ public static class Diagrams
         var major = Theory.FromSteps(Theory.MajorSteps);
         var dorian = Theory.FromSteps(Theory.MajorSteps.Skip(1).Concat(Theory.MajorSteps.Take(1)));
         var cMajorTriad = Id(0, 4, 7);
+        // lesson 12: each inversion In that maps a set onto itself is a mirror axis through pitch class n/2 and n/2 + 6
+        double[] Axes(int id) => [.. Lesson14.Mirrors(id).Select(n => n / 2.0)];
+        var wholeTone = Theory.FromSteps([2, 2, 2, 2, 2, 2]);
+        var octatonic = Theory.FromSteps([2, 1, 2, 1, 2, 1, 2, 1]);
+        var augmented = Theory.FromSteps([3, 1, 3, 1, 3, 1]);
 
         return new SortedDictionary<string, string>(StringComparer.Ordinal)
         {
@@ -310,6 +315,13 @@ public static class Diagrams
             ["l9-bracelet-c-f.svg"] = Bracelets(
                 ([Set(cMajorTriad), Set(Id(5, 9, 0), 1)], Labels.Notes, null, null)),
             ["l9-g7-c.svg"] = ChordGrids(("320001", "G7"), ("x32010", "C")),
+            ["l12-bracelet-tritone.svg"] = Bracelets(
+                ([Set(Id(0, 1, 4, 6, 7, 10))], Labels.Numbers, null, "1235"),
+                ([Set(Id(0, 1, 4, 6, 7, 9), 1)], Labels.Numbers, null, "723")),
+            ["l12-bracelet-mirrors.svg"] = Bracelets(
+                ([Set(wholeTone)], Labels.Numbers, Axes(wholeTone), "1365"),
+                ([Set(octatonic, 1)], Labels.Numbers, Axes(octatonic), "2925"),
+                ([Set(augmented, 2)], Labels.Numbers, Axes(augmented), "2457")),
         };
     }
 
