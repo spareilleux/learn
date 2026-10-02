@@ -19,6 +19,7 @@ sidebar:
 - [ ] Sesiones de Codex: todas las capturas que necesitan el modelo (límite de uso hasta el 2026-09-19)
 - [ ] Lección 8: trabajar en GuitarAlchemist/ga
 - [x] Un formato de observación para ejecuciones de modelos, skills y subagentes, y su primera observación (2026-09-26)
+- [x] Tres observaciones retrospectivas registradas: los tiempos agotados de los hooks (2026-09-26), una recuperación tras una caída de wmux y la fusión anticipada de GA #740 (2026-09-27)
 
 ## QA
 
@@ -194,6 +195,82 @@ Esa comparación está *propuesta, no realizada*.
 | Tokens y coste | *Desconocido*. No se leyó ninguna factura ni recibo de uso. No se llamó a ninguna API de pago |
 | Límites | Una sesión, un día, un coordinador; no es muestra de nada |
 
+## 2026-09-26 — Tres hooks que agotaron su tiempo, y un host lento
+
+*Observación retrospectiva: no se escribió ninguna hipótesis antes de estas mediciones.* La evidencia es local: un arnés y sus registros, guardados en la carpeta de traspaso del coordinador, no en este repositorio.
+
+**El síntoma.** En cada prompt, tres hooks `UserPromptSubmit` agotaban su tiempo y su salida se descartaba. Los tres pertenecen a un mismo plugin de terceros, [claude-octopus](https://github.com/nyldn/claude-octopus) 9.56.1, instalado en el commit [`cb2677b`](https://github.com/nyldn/claude-octopus/tree/cb2677b2bd442bcc501489cc6110ab54fb14e701). Su [`hooks.json`](https://github.com/nyldn/claude-octopus/blob/cb2677b2bd442bcc501489cc6110ab54fb14e701/hooks/hooks.json#L300-L325) da 5 s a dos de ellos y 8 s al tercero. Los scripts se leyeron antes de ejecutar nada:
+- son inyectores de contexto consultivos, no controles de seguridad;
+- cada uno empieza leyendo stdin con `timeout 3 cat` ([`done-criteria.sh`, línea 26](https://github.com/nyldn/claude-octopus/blob/cb2677b2bd442bcc501489cc6110ab54fb14e701/hooks/done-criteria.sh#L26));
+- el de GitHub solo actúa dentro del propio repositorio del plugin.
+
+**La medición.** Un arnés ejecutó cada hook fuera de Claude Code:
+- `env -i`, un `HOME` temporal vacío, un prompt sintético, los umbrales originales;
+- una ejecución de cada uno, el 2026-09-26 hacia las 13:00 EDT, en Git Bash sobre Windows 11;
+- ninguna llamada de red y ningún proveedor lanzado, y el `HOME` temporal seguía vacío después.
+
+| Comando | Salida | Tiempo real |
+|---|---|---|
+| `bash -c true` | 0 | 2829 ms |
+| `bash -lc true` | 0 | 25 457 ms |
+| `timeout 3 cat </dev/null` | 0 | 7031 ms |
+| `python3 -c pass` | 0 | 10 357 ms |
+| `python -c pass` | 0 | 1539 ms |
+| `done-criteria.sh` (5 s) | 124, tiempo agotado | 9546 ms, 0 bytes de salida |
+| `user-prompt-submit.sh` (5 s) | 124, tiempo agotado | 11 690 ms, 0 bytes de salida |
+| `github-work-queue-watch.sh` (8 s) | 124, tiempo agotado | 15 298 ms, 0 bytes de salida |
+
+**Lo que esto muestra.**
+- El síntoma se reproduce fuera de Claude Code.
+- No es la lógica de los hooks lo que gasta el presupuesto. El camino más barato por `done-criteria.sh` es un `bash` nuevo y luego `timeout 3 cat` sobre una entrada que ya llegó a su final. Esos dos pasos solos cuestan 2,8 s + 7,0 s, más que los 5 s completos.
+- En ese host, en ese momento, *lanzar cualquier proceso* tardaba segundos.
+
+**Lo que no muestra.** La causa es *muy probablemente* una latencia de creación de procesos en todo el host, y no está aislada. Los candidatos son:
+- la carga: había unos 40 procesos `bash`, 65 `node` y 13 `claude` en marcha;
+- el análisis antivirus de cada lanzamiento;
+- un perfil de inicio de sesión costoso, si los hooks se lanzan a través de uno. No he comprobado qué modo de shell usa Claude Code.
+
+Los límites: mediciones únicas, ninguna comparación en un momento tranquilo, y los tres hooks lanzados uno tras otro cuando Claude Code los lanza juntos. La diferencia entre `python3` y `python` descansa en una medición de cada uno, con una carga variable. En los términos del [formato de observación de arriba](#2026-09-26--un-formato-de-observación-para-modelos-skills-y-subagentes), es un fallo de **entorno**, no del modelo.
+
+**No se cambió nada.** El plugin tiene interruptores (`OCTO_DONE_CRITERIA=off`, `OCTOPUS_GITHUB_WORK_QUEUE=off`); activarlos es un cambio de configuración que necesita la aprobación del usuario. Subir los tiempos límite ocultaría la latencia y añadiría segundos a cada prompt.
+
+Una idea de parche upstream sigue siendo un borrador, sin probar y sin enviar:
+- leer stdin con un comando interno de bash;
+- hacer una sola llamada a `jq` en lugar de varias a `python3`;
+- salir antes de lanzar `git` fuera del repositorio del plugin.
+
+## 2026-09-27 — Tras una caída de wmux: reanudado no es entregado
+
+*Observación retrospectiva.* La evidencia es la nota de recuperación del coordinador, guardada localmente, y lo que esta sesión vio de sí misma. Se omiten los identificadores de sesiones y de superficies.
+
+- **Qué pasó.** El multiplexor de terminal que aloja los paneles de los agentes (wmux) se cayó. Con la autorización del usuario, el coordinador:
+  - relanzó la versión 1.1.1, que se cerró durante su propia actualización sin crear ningún agente;
+  - vio después la 2.13.1, que el usuario instaló, responder y restaurar sus espacios de trabajo;
+  - reanudó seis carriles (IX, Learn, TARS, Demerzel, Gaia, Music) por sus conversaciones históricas exactas.
+  No hubo reinicio, borrado de datos, elusión de permisos, edición de repositorios, reinicio de servidores ni llamada de pago.
+- **«Reanudado» es un estado de la interfaz, no una entrega.** La nota de recuperación registra, para cada carril, lo que se observó: un resumen reanudado, un diff anterior, un prompt. Su propia regla es que *«agent labels/running alone are not delivery evidence»* (una etiqueta de agente o un agente en marcha no prueban una entrega). En los estados del [formato de observación](#2026-09-26--un-formato-de-observación-para-modelos-skills-y-subagentes), un panel reanudado está *visible*. Pasa a *aceptado* cuando el carril acusa recibo de una tarea, y a *completado* solo con un recibo.
+- **Lo que abarató la recuperación.** Cada carril había escrito su estado en archivos antes de la caída, no solo en su conversación. Esos archivos nombraban el checkout exacto, la cabeza y las rutas sin commit, y daban la acción siguiente.
+  - Esta sesión de Learn se reanudó desde uno de esos archivos. Después esperó la autoridad de publicación, como decía el archivo, en lugar de actuar según su resumen.
+  - El carril IX encontró de la misma manera una modificación de workflow sin commit, cuyo commit y push había cortado la caída. Preguntó al usuario antes de publicarla.
+  - Un resumen de conversación no basta para esto. Dice lo que se pretendía, no qué comando se ejecutó de verdad.
+- **Los identificadores cambiaron.** Los identificadores de espacios de trabajo y de superficies eran nuevos tras el reinicio, así que cualquier monitor tenía que releer la correspondencia antes de enviar teclas a un panel. Es un fallo de orquestación en potencia, y aquí se evitó.
+
+## 2026-09-27 — GA #740 fusionada antes de su revisión independiente
+
+*Observación retrospectiva*, registrada con el formato de observación. Los hechos públicos se leyeron con `gh`. El resto viene de recibos locales —los del carril IX, del coordinador y de la revisión posterior a la fusión— que este curso ha leído sin reejecutarlos.
+
+| Campo | Observación |
+|---|---|
+| Repositorio | [GuitarAlchemist/ga#740](https://github.com/GuitarAlchemist/ga/pull/740), *editor de pipelines: tema del sistema, comprobación de tipos de argumentos, pipeline de ejemplo de GA*. Fusionada el 2026-09-27T02:50:43Z como [`d67d04b`](https://github.com/GuitarAlchemist/ga/commit/d67d04bdb04742ba338518e28197e6035cb80e90). La cabeza fusionada, [`984192e`](https://github.com/GuitarAlchemist/ga/commit/984192e970746dbed9e56255616360f56d9eed62), se fijó con `--match-head-commit` |
+| Roles | La sesión del agente IX era la autora, y fusionó con las credenciales del propietario del repositorio. Codex debía ser el integrador, tras una revisión independiente de esa cabeza exacta |
+| Qué salió mal | El turno del usuario «pousse tout ce qui est green» («publica todo lo que esté en verde») llegó primero a la sesión autora, que lo leyó como autoridad para fusionar las PR en verde. Comprobó los comentarios del bot de Codex (ningún P0/P1 abierto en esa cabeza) y una CI en verde, y fusionó. La instrucción de que Codex revisara la cabeza antes de cualquier fusión llegó después de la fusión |
+| Categoría de fallo | **Orquestación o propiedad**: dos instrucciones con autoridad distinta llegaron a un mismo agente en el orden equivocado. Ninguna herramienta falló y ningún paso de razonamiento era erróneo con lo que el agente había visto, pero la barrera no se aplicó |
+| Evidencia en el momento de la fusión | Pública: todos los checks de GitHub de la PR pasan. Informado por Codex tras la fusión: sincronización del tema generado comprobada, y tres suites de pruebas dirigidas, 35 de 35 superadas. No es una cobertura completa de HTTP, navegador, build o backend |
+| Revisión posterior a la fusión | De solo lectura, por una sesión distinta, con el recibo guardado localmente; este curso no la reejecutó. Confirmó, cada vez con un caso de fallo reproducido: las rutas de propuestas que añade la PR admiten más que su límite cuando los cuerpos llegan tarde (29 pendientes para 20, mientras que los envíos en serie lo respetan); clics simultáneos superan el límite de gasto del asesor (8 llamadas admitidas donde solo cabía una, API simulada, sin gasto; las llamadas en serie lo respetan); un cuerpo mal formado recibe un «invalid JSON body» engañoso; una línea corrupta del registro lanza una excepción fuera de cualquier `try`. Según el código fuente: una propuesta sin revisión base se trata como actual. La descripción de la PR no menciona ni la API de pago del asesor ni las rutas de propuestas en las que pueden escribir los agentes. Las barreras manuales Accept y Run se mantienen, y la revisión no indica ningún revert |
+| Estado | La fusión está *completada*, y la revisión también. Una corrección de los cinco hallazgos sobre el código está *enviada* a Codex: una rama local, sin commit, con primero una prueba que falla para cada uno (5 fallos antes de la corrección, y 42 de 42 superadas después, en 4 archivos). Codex reejecutó esos 4 archivos: 42 de 42. La corrección no está integrada, y quedan su revisión completa, una comprobación en un navegador y un build completo. Así que todavía no hay ningún defecto cerrado en `main` |
+| Respuesta | Ningún revert. La integración sigue en manos de Codex. Los residuos que la propia corrección nombra siguen abiertos: dos servidores de desarrollo que comparten un registro aún pueden competir, la comprobación de gasto usa una estimación y no una cota superior garantizada, y los cuerpos de petición por encima del límite de tamaño se siguen guardando en memoria, como antes de la PR |
+| Seguimiento | La decisión de Codex sobre la corrección, luego su PR y su CI, y después el estado de esta entrada |
+
 ## Por verificar
 
 - Aplicar el formato de observación a una segunda delegación independiente, y que alguien distinto de su autor compruebe una ficha contra su evidencia.
@@ -210,3 +287,5 @@ Esa comparación está *propuesta, no realizada*.
 - `codex exec -o`: si el archivo lo escribe la CLI fuera del sandbox en modo `read-only`.
 - Una captura de instalación desechable para cada workflow, sin instalar suites solapadas en el mismo fixture.
 - Una ejecución Sandcastle con Docker, rama explícita, una iteración, sin merge y evidencia de pruebas controlada por el host.
+- Los tiempos agotados de los hooks: tres ejecuciones de cada hook en un momento tranquilo y tres bajo carga, los tres hooks lanzados juntos como los lanza Claude Code, y si Claude Code lanza los hooks a través de un shell de inicio de sesión.
+- GA #740: si la corrección de los cinco hallazgos de la revisión sobre el código llega a `main` con sus pruebas de regresión, y una comprobación del editor en un navegador, que ni la revisión ni la corrección hicieron.

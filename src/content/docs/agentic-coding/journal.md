@@ -19,6 +19,7 @@ sidebar:
 - [ ] Codex sessions: every capture that needs the model (usage limit until 2026-09-19)
 - [ ] Lesson 8: working on GuitarAlchemist/ga
 - [x] An observation format for model, skill and subagent runs, and its first observation (2026-09-26)
+- [x] Three retrospective observations recorded: the hook timeouts (2026-09-26), a wmux crash recovery and GA #740's early merge (2026-09-27)
 
 ## QA
 
@@ -194,6 +195,82 @@ That comparison is *proposed, not performed*.
 | Tokens and cost | *Unknown*. No provider bill or usage receipt was read. No paid API was called |
 | Limits | One session, one day, one coordinator; not a sample of anything |
 
+## 2026-09-26 — Three hooks that timed out, and a slow host
+
+*Retrospective observation: no hypothesis was written before these measurements.* The evidence is local: a harness and its logs kept in the coordinator's handoff folder, not in this repository.
+
+**The symptom.** Every prompt reported three `UserPromptSubmit` hooks timing out, and their output was discarded. All three belong to one third-party plugin, [claude-octopus](https://github.com/nyldn/claude-octopus) 9.56.1, installed at commit [`cb2677b`](https://github.com/nyldn/claude-octopus/tree/cb2677b2bd442bcc501489cc6110ab54fb14e701). Its [`hooks.json`](https://github.com/nyldn/claude-octopus/blob/cb2677b2bd442bcc501489cc6110ab54fb14e701/hooks/hooks.json#L300-L325) gives two of them 5 s and the third 8 s. The scripts were read before anything ran:
+- they are advisory context injectors, not safety checks;
+- each one starts by reading stdin with `timeout 3 cat` ([`done-criteria.sh`, line 26](https://github.com/nyldn/claude-octopus/blob/cb2677b2bd442bcc501489cc6110ab54fb14e701/hooks/done-criteria.sh#L26));
+- the GitHub one acts only inside the plugin's own repository.
+
+**The measurement.** A harness ran each hook outside Claude Code:
+- `env -i`, an empty temporary `HOME`, a synthetic prompt, the original thresholds;
+- one run each, on 2026-09-26 around 13:00 EDT, in Git Bash on Windows 11;
+- no network call and no provider launched, and the temporary `HOME` was still empty afterwards.
+
+| Command | Exit | Wall time |
+|---|---|---|
+| `bash -c true` | 0 | 2,829 ms |
+| `bash -lc true` | 0 | 25,457 ms |
+| `timeout 3 cat </dev/null` | 0 | 7,031 ms |
+| `python3 -c pass` | 0 | 10,357 ms |
+| `python -c pass` | 0 | 1,539 ms |
+| `done-criteria.sh` (5 s) | 124, timeout | 9,546 ms, 0 bytes out |
+| `user-prompt-submit.sh` (5 s) | 124, timeout | 11,690 ms, 0 bytes out |
+| `github-work-queue-watch.sh` (8 s) | 124, timeout | 15,298 ms, 0 bytes out |
+
+**What this shows.**
+- The symptom reproduces outside Claude Code.
+- The hooks' logic is not what spends the budget. The cheapest path through `done-criteria.sh` is a fresh `bash` and then `timeout 3 cat` on an input already at its end. Those two steps alone cost 2.8 s + 7.0 s, more than the whole 5 s.
+- On that host, at that moment, *starting any process* took seconds.
+
+**What it does not show.** The cause is *most likely* host-wide process-creation latency, and that is not isolated. The candidates are:
+- load: about 40 `bash`, 65 `node` and 13 `claude` processes were running;
+- antivirus scanning of each launch;
+- a costly login profile, if hooks are started through one. I have not checked which shell mode Claude Code uses.
+
+The limits: single samples, no quiet-moment comparison, and the three hooks run one after another where Claude Code runs them together. The `python3` against `python` gap is one sample each, under varying load. In the terms of the [observation format above](#2026-09-26--an-observation-format-for-models-skills-and-subagents), this is an **environment** failure, not a model failure.
+
+**Nothing was changed.** The plugin has kill switches (`OCTO_DONE_CRITERIA=off`, `OCTOPUS_GITHUB_WORK_QUEUE=off`); setting them is a configuration change that needs the user's approval. Raising the timeouts would hide the latency and add seconds to every prompt.
+
+An upstream patch idea stays a draft, untested and not sent:
+- read stdin with a bash builtin;
+- make one `jq` call instead of several `python3` calls;
+- exit before spawning `git` outside the plugin's repository.
+
+## 2026-09-27 — After a wmux crash: resumed is not delivered
+
+*Retrospective observation.* The evidence is the coordinator's recovery note, kept locally, plus what this session saw of itself. Session and surface identifiers are left out.
+
+- **What happened.** The terminal multiplexer that hosts the agent panes (wmux) crashed. With the user's authorization, the coordinator:
+  - relaunched version 1.1.1, which quit during its own update and created no agent;
+  - then saw 2.13.1, which the user installed, answer and restore its workspaces;
+  - resumed six lanes (IX, Learn, TARS, Demerzel, Gaia, Music) by their exact historical conversations.
+  There was no reboot, data reset, permission bypass, repository edit, server restart or paid call.
+- **"Resumed" is a UI state, not a delivery.** The recovery note records, for each lane, what was observed: a resumed recap, a prior diff, a prompt. Its own rule is that *"agent labels/running alone are not delivery evidence"*. In the [observation format's](#2026-09-26--an-observation-format-for-models-skills-and-subagents) states, a resumed pane is *visible*. It becomes *accepted* when the lane acknowledges a task, and *completed* only with a receipt.
+- **What made recovery cheap.** Each lane had written its state into files before the crash, not only into its conversation. Those files named the exact checkout, head and uncommitted paths, and gave the next action.
+  - This Learn session resumed from such a file. It then waited for publication authority, as the file said, instead of acting on its recap.
+  - The IX lane found, the same way, one uncommitted workflow edit whose commit and push the crash had cut off. It asked the user before pushing it.
+  - A conversation summary is not enough for this. It says what was intended, not which command actually ran.
+- **Identifiers changed.** Workspace and surface IDs were new after the restart, so any monitor had to re-read the mapping before sending keys to a pane. That is an orchestration failure waiting to happen, and here it was caught.
+
+## 2026-09-27 — GA #740 merged before its independent review
+
+*Retrospective observation*, recorded with the observation format. The public facts were read with `gh`. The rest comes from local receipts — the IX lane's, the coordinator's and the post-merge review's — which this course has read but not re-run.
+
+| Field | Observation |
+|---|---|
+| Repository | [GuitarAlchemist/ga#740](https://github.com/GuitarAlchemist/ga/pull/740), *pipeline editor: OS theme, argument type checks, GA example pipeline*. Merged 2026-09-27T02:50:43Z as [`d67d04b`](https://github.com/GuitarAlchemist/ga/commit/d67d04bdb04742ba338518e28197e6035cb80e90). The merged head, [`984192e`](https://github.com/GuitarAlchemist/ga/commit/984192e970746dbed9e56255616360f56d9eed62), was pinned with `--match-head-commit` |
+| Roles | The IX agent session was the author, and it merged with the repository owner's credentials. Codex was meant to be the integrator, after an independent review of that exact head |
+| What went wrong | The user's turn "pousse tout ce qui est green" ("push everything that is green") reached the author first, and it read that as merge authority for green PRs. It checked the Codex bot comments (no open P0/P1 at that head) and green CI, then merged. The instruction that Codex must review the head before any merge arrived after the merge |
+| Failure category | **Orchestration or ownership**: two instructions with different authority reached one agent in the wrong order. No tool failed and no reasoning step was wrong given what the agent had seen, but the gate did not run |
+| Evidence at the merge | Public: every GitHub check on the PR passes. Reported by Codex after the merge: generated-theme synchronization checked, and three targeted test suites, 35 of 35 passed. That is not full HTTP, browser, build or backend coverage |
+| Post-merge review | Read-only, by a separate session, with its receipt kept locally; this course did not re-run it. It confirmed, each with a reproduced failing case: the proposal routes the PR adds admit more than their cap when bodies arrive late (29 pending against 20, while serial posts respect it); concurrent clicks pass the advisor's spend cap (8 calls admitted where one fitted, API mocked, no money spent; serial calls respect it); a malformed body gets a misleading "invalid JSON body"; a corrupt ledger line throws outside any `try`. From the source: a proposal with no base revision is treated as current. The PR body mentions neither the paid advisor API nor the proposal routes agents can write to. The manual Accept and Run gates hold, and the review indicates no revert |
+| State | The merge is *completed*, and so is the review. A fix for the five code findings is *submitted* to Codex: a local branch, not committed, with a failing test first for each (5 failed before the fix, and 42 of 42 pass after it, over 4 files). Codex re-ran those 4 files: 42 of 42. The fix is not integrated, and its full review, a browser check and a full build remain. So no defect is closed on `main` yet |
+| Response | No revert. Integration stays with Codex. Residuals the fix names itself stay open: two dev servers sharing a ledger can still race, the spend check uses an estimate rather than a guaranteed upper bound, and request bodies past the size limit are still buffered, as before the PR |
+| Follow-up | Codex's decision on the fix, then its PR and CI, then this entry's status |
+
 ## To verify
 
 - Apply the observation format to a second, independent delegation, and have someone other than its author check one record against its evidence.
@@ -210,3 +287,5 @@ That comparison is *proposed, not performed*.
 - `codex exec -o`: whether the file is written by the CLI outside the sandbox in `read-only` mode.
 - A disposable installation capture for each workflow, without installing overlapping suites in the same fixture.
 - A Sandcastle Docker run on an explicit branch with one iteration, no merge, and host-owned test evidence.
+- The hook timeouts: three runs of each hook at a quiet moment and three under load, the three hooks run together as Claude Code runs them, and whether Claude Code starts hooks through a login shell.
+- GA #740: whether the fix for the review's five code findings reaches `main` with its regression tests, and a browser check of the editor, which neither the review nor the fix ran.
