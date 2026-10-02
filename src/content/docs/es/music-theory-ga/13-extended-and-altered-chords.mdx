@@ -374,7 +374,7 @@ El acorde de trecena de [`ExtendedChords.yaml`](https://github.com/GuitarAlchemi
 
 ## Añadido después de la primera ejecución: el D♭/C de MUS-005
 
-Al escribir esta lección, la sección de MUS-005 sobre los acordes con barra llamó la atención: "`Db/C` = Db triad over C bass (creates a Cmaj7#11 sound)". El programa imprimió entonces los dos acordes con barra y Cmaj7♯11, en un commit propio después de la primera ejecución ([`Lesson15.cs#L451-L463`](https://github.com/spareilleux/learn/blob/ac620ce/code/music-theory-ga/GaTheory/Lesson15.cs#L451-L463)):
+Al escribir esta lección, la sección de MUS-005 sobre los acordes con barra llamó la atención: "`Db/C` = Db triad over C bass (creates a Cmaj7#11 sound)" ([`mus-005-jazz-harmony.md#L88`](https://github.com/GuitarAlchemist/Demerzel/blob/6aef19b3a7c0ceac400f89f5585f4c033d61c99c/state/streeling/courses/music/en/mus-005-jazz-harmony.md#L88), tal como decía el módulo hasta que [Demerzel #1098](https://github.com/GuitarAlchemist/Demerzel/pull/1098) lo corrigió para nombrar `D/C`). El programa imprimió entonces los dos acordes con barra y Cmaj7♯11, en un commit propio después de la primera ejecución ([`Lesson15.cs#L451-L463`](https://github.com/spareilleux/learn/blob/ac620ce/code/music-theory-ga/GaTheory/Lesson15.cs#L451-L463)):
 
 ```text
 == Added after the first run: MUS-005's slash chord D♭/C against Cmaj7♯11, and D/C
@@ -409,7 +409,7 @@ D♭/C es C D♭ F A♭: una ♭9, una oncena y una ♭13 sobre C, sin tercera n
 - `Chord.FromSymbol` lee bien 14 de 41 cifrados y rechaza los acordes alterados y la mayoría de las grafías de los manuales; `ChordSymbolParser` no rechaza nada, lee bien 17 y convierte todo lo que no conoce, palabras inglesas incluidas, en una tríada mayor. Los dos leen `CM7` como una séptima menor.
 - Las clases de altura no distinguen ♯11 de ♭5 ni ♭13 de ♯5; el servicio de alteraciones de GA elige siempre ♭5 y ♯5, lee ♯9 como una tercera menor, y no vuelve a nombrar ninguno de sus propios nueve acordes alterados. Una alteración hace de una dominante un «alt».
 - Sobre C7, doce tríadas evitan la oncena y la séptima mayor: las nueve estructuras superiores de Wikipedia y tres sencillas. GA no tiene ningún patrón para ellas.
-- El propio ejemplo de `ga_polychord` nombra el conjunto equivocado, `AdvancedHarmony.yaml` cuenta doce alturas donde el acorde de Petrushka tiene seis, y el D♭/C de MUS-005 no es un sonido Cmaj7♯11.
+- El propio ejemplo de `ga_polychord` nombra el conjunto equivocado, `AdvancedHarmony.yaml` cuenta doce alturas donde el acorde de Petrushka tiene seis, y D♭/C, que MUS-005 llamaba un sonido Cmaj7♯11 hasta Demerzel #1098, no lo es.
 
 ## Fuentes
 

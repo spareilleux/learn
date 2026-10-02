@@ -374,7 +374,7 @@ Two lines of the card need a word. "Modal fam." is lesson 2's family, every set 
 
 ## Added after the first run: MUS-005's D♭/C
 
-While writing this lesson, MUS-005's section on slash chords caught the eye: "`Db/C` = Db triad over C bass (creates a Cmaj7#11 sound)". The program then printed the two slash chords and Cmaj7♯11, in a commit of its own after the first run ([`Lesson15.cs#L451-L463`](https://github.com/spareilleux/learn/blob/ac620ce/code/music-theory-ga/GaTheory/Lesson15.cs#L451-L463)):
+While writing this lesson, MUS-005's section on slash chords caught the eye: "`Db/C` = Db triad over C bass (creates a Cmaj7#11 sound)" ([`mus-005-jazz-harmony.md#L88`](https://github.com/GuitarAlchemist/Demerzel/blob/6aef19b3a7c0ceac400f89f5585f4c033d61c99c/state/streeling/courses/music/en/mus-005-jazz-harmony.md#L88), as the module read until [Demerzel #1098](https://github.com/GuitarAlchemist/Demerzel/pull/1098) corrected it to name `D/C`). The program then printed the two slash chords and Cmaj7♯11, in a commit of its own after the first run ([`Lesson15.cs#L451-L463`](https://github.com/spareilleux/learn/blob/ac620ce/code/music-theory-ga/GaTheory/Lesson15.cs#L451-L463)):
 
 ```text
 == Added after the first run: MUS-005's slash chord D♭/C against Cmaj7♯11, and D/C
@@ -409,7 +409,7 @@ D♭/C is C D♭ F A♭: a ♭9, an eleventh and a ♭13 over C, no third and no
 - `Chord.FromSymbol` reads 14 of 41 symbols right and rejects the altered chords and most textbook spellings; `ChordSymbolParser` rejects nothing, reads 17 right and turns everything it does not know, English words included, into a major triad. Both read `CM7` as a minor seventh.
 - Pitch classes cannot tell ♯11 from ♭5 or ♭13 from ♯5; GA's alteration service always picks ♭5 and ♯5, reads ♯9 as a minor third, and names none of its own nine altered chords back. One alteration makes a dominant "alt".
 - Over C7, twelve triads avoid the eleventh and the major seventh: Wikipedia's nine upper structures and three plain ones. GA has no pattern for them.
-- `ga_polychord`'s own example names the wrong set, `AdvancedHarmony.yaml` counts twelve pitches where the Petrushka chord has six, and MUS-005's D♭/C is not a Cmaj7♯11 sound.
+- `ga_polychord`'s own example names the wrong set, `AdvancedHarmony.yaml` counts twelve pitches where the Petrushka chord has six, and D♭/C, which MUS-005 called a Cmaj7♯11 sound until Demerzel #1098, is not one.
 
 ## Sources
 

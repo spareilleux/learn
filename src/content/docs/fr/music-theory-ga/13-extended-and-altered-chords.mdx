@@ -374,7 +374,7 @@ L'accord de treizième d'[`ExtendedChords.yaml`](https://github.com/GuitarAlchem
 
 ## Ajouté après la première exécution : le D♭/C de MUS-005
 
-En écrivant cette leçon, la section de MUS-005 sur les accords à basse imposée a retenu l'attention : "`Db/C` = Db triad over C bass (creates a Cmaj7#11 sound)". Le programme a alors imprimé les deux accords à basse imposée et Cmaj7♯11, dans un commit à part après la première exécution ([`Lesson15.cs#L451-L463`](https://github.com/spareilleux/learn/blob/ac620ce/code/music-theory-ga/GaTheory/Lesson15.cs#L451-L463)) :
+En écrivant cette leçon, la section de MUS-005 sur les accords à basse imposée a retenu l'attention : "`Db/C` = Db triad over C bass (creates a Cmaj7#11 sound)" ([`mus-005-jazz-harmony.md#L88`](https://github.com/GuitarAlchemist/Demerzel/blob/6aef19b3a7c0ceac400f89f5585f4c033d61c99c/state/streeling/courses/music/en/mus-005-jazz-harmony.md#L88), tel que le module se lisait jusqu'à ce que [Demerzel #1098](https://github.com/GuitarAlchemist/Demerzel/pull/1098) le corrige pour nommer `D/C`). Le programme a alors imprimé les deux accords à basse imposée et Cmaj7♯11, dans un commit à part après la première exécution ([`Lesson15.cs#L451-L463`](https://github.com/spareilleux/learn/blob/ac620ce/code/music-theory-ga/GaTheory/Lesson15.cs#L451-L463)) :
 
 ```text
 == Added after the first run: MUS-005's slash chord D♭/C against Cmaj7♯11, and D/C
@@ -409,7 +409,7 @@ D♭/C est C D♭ F A♭ : une ♭9, une onzième et une ♭13 sur C, ni tierce 
 - `Chord.FromSymbol` lit juste 14 chiffrages sur 41 et rejette les accords altérés et la plupart des graphies des manuels ; `ChordSymbolParser` ne rejette rien, en lit juste 17 et change tout ce qu'il ne connaît pas, mots anglais compris, en triade majeure. Les deux lisent `CM7` comme une septième mineure.
 - Les classes de hauteurs ne distinguent pas ♯11 de ♭5 ni ♭13 de ♯5 ; le service d'altérations de GA choisit toujours ♭5 et ♯5, lit ♯9 comme une tierce mineure, et ne renomme aucun de ses propres neuf accords altérés. Une altération fait d'une dominante un « alt ».
 - Sur C7, douze triades évitent la onzième et la septième majeure : les neuf structures supérieures de Wikipédia et trois simples. GA n'a aucun motif pour elles.
-- L'exemple de `ga_polychord` nomme le mauvais ensemble, `AdvancedHarmony.yaml` compte douze hauteurs là où l'accord de Petrouchka en a six, et le D♭/C de MUS-005 n'est pas un son Cmaj7♯11.
+- L'exemple de `ga_polychord` nomme le mauvais ensemble, `AdvancedHarmony.yaml` compte douze hauteurs là où l'accord de Petrouchka en a six, et D♭/C, que MUS-005 appelait un son Cmaj7♯11 jusqu'à Demerzel #1098, n'en est pas un.
 
 ## Sources
 
