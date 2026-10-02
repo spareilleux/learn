@@ -477,6 +477,70 @@ checks (a peak speed under twice the mean, a turn under 120 degrees a second)
 fail with the old flight.
 Web: exported; this version was not run in a browser. Real phones: to verify,
 first the author's Android phone in Chrome, on the ride to the roof.
+Version 20, exported 2026-10-01 23:48:39 UTC, adds three requests from the
+author: Return to Castle Wolfenstein's lean on Q and E, leaning to read a
+course book's spine comfortably, on every device, and a phone's screen less
+full.
+- Q and E (A and E on AZERTY: the same keys) lean left and right, the body
+  standing still, as Alt with A or D still does (scripts/walk_physics.gd). The
+  fly camera also steps left on Q; the body drops that step. Near the lift E
+  stays the lift's (scripts/lift.gd, uses_e). The keyboard hint names the
+  keys.
+- Leaning the way an aimed course book's title reads (right in English and
+  Spanish, left in French) turns the head to the spine, tilts it until the
+  title is level, left to right, and closes the field of view in until the
+  spine's length spans 65% of the screen's width; letting go brings all back.
+  The book stays aimed and its card steps aside meanwhile
+  (scripts/course_library.gd, aimed_spine and hold_aim); the card names the
+  key. Reduced motion keeps this tilt and zoom, which the reader holds, and
+  still drops the plain lean's roll.
+- On a touch screen, two figures leaning left and right appear at a tapped
+  book, between the stick and the arrows, or over the arrows where that row is
+  too narrow (a phone held upright); held, they lean, and the one that leans
+  the way the title reads reads its spine (scripts/touch_controls.gd). The
+  course card stands above them; in the lift's cage or near it, the lift's
+  buttons take their place.
+- The phone's screen, which the author found too full: the touch help
+  (main.tscn's controls panel) goes 6 seconds after the first touch, and while
+  a book's card shows; a ? button in its corner brings it back, and a tap on
+  it puts it away. Beside the Courses button and the language selector it
+  wraps a line more where it must (a phone held sideways), and where it would
+  be a narrow column (a phone held upright) it stands under them, across the
+  screen. The shelves' book hint goes and comes with it
+  (scripts/course_library.gd, help_shown).
+- Two fixes found on the way: the shelves now aim after everything that moves
+  the camera (process priority 900), so the step Q takes left no longer aims
+  at a book's neighbour for a frame; and on a narrow screen, where
+  scripts/view_fit.gd widens the field, the reading zoom starts from and
+  returns to the widened field instead of being undone by it (walk_physics.gd
+  holds_fov).
+index.pck is now 21,741,812 bytes; index.html changes only that size, and
+index.wasm and index.js are unchanged.
+Native tests (Godot 4.6.1): 55 runs under Compatibility and Forward+ pass with
+no script error (artpass/publish/regress-pub11.sh). Among them, the lean test
+(artpass/lean/leantest.gd) with keys in both renderers at 1600x900, also at 10
+frames a second, and with touches on a phone held sideways (844x390) and
+upright (390x844), in both renderers and with a 0.8 s stall at 30 frames a
+second: Q and E lean with the body standing, E at the lift calls it, E at an
+aimed English spine levels its title (a roll of -90 degrees) across 65% of the
+screen's width, within 6 points, at its centre, and all comes back on release;
+Q there is a plain lean; reduced motion keeps the reading and drops the plain
+lean's roll; in French Q reads. On a touch screen: no figures in the hall; at
+a tapped book the figures stand clear of the other buttons and under the card,
+the help gives way to the card, the right figure reads, and in the lift's cage
+its buttons replace the figures. The phone help test
+(artpass/touch/hudtest.gd), upright and sideways: the help clear of the
+Courses button and the language selector, gone 6 s after the first touch, back
+with ?, put away by a tap. The landscape lean run failed 8 times in 8 on an
+earlier build of this version that placed the help under the selector, across
+the middle of the screen, where it caught the tap meant for a book; this build
+keeps the help at the top of a phone held sideways.
+Web: exported, and loaded once from a local server in a Chromium browser
+panel, framed at 390x844 and posing as an Android phone (its user agent and a
+touch screen): it started and reported running, with the touch screen
+detected; the panel was hidden, so no frame was seen or captured. Real phones:
+to verify, first the author's Android phone in Chrome, held upright and
+sideways.
 
 Native Compatibility GPU time, RTX 5080, 1600x900, 240 frames per view: 0.44 to
 0.52 ms for the previous web scene, 0.64 to 1.44 ms with the detail pass; up to
@@ -493,12 +557,12 @@ export_presets.cfg 1bd7171d93c9a378f1b328e945be2a7960478e89d34ae269f013ef83c3065
 scripts/fly_camera.gd 2e5cdd15ca7bdcfa30ec129e354a309f3ff7296f6fbf54ac144984ed9aa9f8e7
 scripts/capture.gd 52ea2b5e40db2f1f4cdbd7658074ef60bd117e1f4110c1b8995590a4196748d0
 scripts/observatory.gd 1c0df54cd433533c305700578abde1044f01efde1bef614e1bf5ede1c2ae6c76
-scripts/course_library.gd 254fdf26c4b3e82e54eed17146f0296b164769d77407ecb48be68601705b4187
+scripts/course_library.gd 97fe489119e211ffd180b04a2d4042c20c4f937c03fe5cbae0b7c444e69dd1f4
 scripts/steel_cube.gd f28e71fffcd151663bc9a98b3c135cc7b805490e8298d3cf01029455c973f94c
 scripts/seldon_statue.gd 4e41b282aa2cc4de794296586b65f5f4d39688312673ddc46226fd3906cf4b27
-scripts/touch_controls.gd c486b6055fa111862ea2bc8e2fcb4d35effb27a1f7780c695b05e26e0879af0e
-scripts/walk_physics.gd a147b6165153005ec49a39cb93adad582cd6b7b64d0c3413c74d49213ddcd271
-scripts/view_fit.gd 04968e0b9c220c12490b258677a7331f07671b37d2951581a03868d8c992c65e
+scripts/touch_controls.gd 6bb1c5a864a845daf137b4bcf86694565713754698a9ff84156fec5706842893
+scripts/walk_physics.gd 21ec9c5f0b5afb2f85547fe7e77c5d4f38b645c0ab84c79fcc7102b0b2c7f227
+scripts/view_fit.gd c38b92ecdce35d49985e3535923ea1504cd1cc44241e03314ff69319bc067a95
 scripts/view_move.gd 558a4059815cb3a8a202d205d8cfada17653fb533e7e056bfe9e8a434dac0431
 scripts/multiverse.gd 0de3cece747a87c742ba6b26c8fac27a6a7dcdd18286f30957899becb2dfb34d
 scripts/camera_follow.gd dc63643772a7dceb41583169aeec3d3053d8555a20540fd29a1c9cbade2a712d
@@ -528,14 +592,14 @@ assets/upperside.gdshader f119593a603bc623de218054ec142b8732330785fe0d61ba5a3dcc
 assets/sky_milky_way_eso.jpg b17e19bf2d5e7e9efa03b602450f5189dc77f85251e704d99b6f14632cff3495
 assets/exterior_ashlar_albedo.png c0cff260c039e1e1528920f86070266ac20ba2a3e36e99a53654c2ed18cdef94
 assets/exterior_ashlar_normal.png 0dc3b0023534b21c7d383bbca468f057cc65ba1a9526303c7b3084587138f029
-scripts/lift.gd f140051b9128fdc65ea6934a86160e665dc40726117918b694c618e5724cb778
+scripts/lift.gd 14ef3214d63cb89bb286894783b27181afb65bd9c0fb6441550b7946931f711d
 assets/sky_core_cap.png a110fdfa1b79cc41eec119265aeb89bc211d0b8e0eb6c759b45c25496f2daabe
 assets/kiosk_glass.gdshader 76226f17e5884a042b85e5fc544a4b71012ea6e389b9743c1cac65083a06bc44
 scripts/lift_sounds.gd 4daed5e380396a3711fc7ff2f1f72b877b9efbdaff6d6fa428c595b1dad7b244
-scripts/build_info.gd 441a2e3bcf142e5dfc86a8f0e07bc2a5f402e402f7374a87028065a5bb10e000
+scripts/build_info.gd ecdaec23b2c4d9249c8be3a5f21429c36b445d2df9d26e714f46a78b8c8833b0
 
 SHA-256 output files:
-index.pck 0173d4df17bf35efcd9801b6faee06d47c83bc75058d71808e3a1ec0743d1444
+index.pck 2fa459f14536b1b2df25b8cd72a939ff6e7ae72497ed09e20024849802b4c986
 index.wasm 99962b29677e42f3ba0258bd90fdc52ad90295954c4473e816ad02cfe5ff1d4f
 index.js e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981
 
