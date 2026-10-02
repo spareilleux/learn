@@ -19,6 +19,8 @@ var lessons = new Dictionary<string, Action>
     ["l12"] = Lesson12.Run,
     // lesson 11
     ["l13"] = Lesson13.Run,
+    // lesson 12
+    ["l14"] = Lesson14.Run,
 };
 
 Console.OutputEncoding = System.Text.Encoding.UTF8;
