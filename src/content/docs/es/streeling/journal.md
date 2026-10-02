@@ -27,7 +27,7 @@ Marca un módulo una vez estudiado. En **Notas**, añade una entrada fechada: lo
 
 - [ ] [CYB-001 · Correspondencia entre el modelo de sistema viable y la gobernanza de la IA](../cybernetics/cyb-001-vsm-ai-governance-mapping/) <!-- cyb-001-vsm-ai-governance-mapping -->
 - [ ] [CYB-002 · Mecanismos de amortiguación activa para controlar la oscilación entre repositorios](../cybernetics/cyb-002-active-dampening-cross-repo-oscillation/) <!-- cyb-002-active-dampening-cross-repo-oscillation -->
-- [ ] [CYB-003 · Measuring the Variety Ratio Quantitatively](../cybernetics/cyb-003-measuring-variety-ratio-quantitatively/) <!-- cyb-003-measuring-variety-ratio-quantitatively -->
+- [ ] [CYB-003 · Measuring the Variety Ratio Quantitatively](../cybernetics/cyb-003-measuring-variety-ratio-quantitatively/) *(en inglés)* <!-- cyb-003-measuring-variety-ratio-quantitatively -->
 
 ### Futurología
 

@@ -27,7 +27,7 @@ Coche un module une fois étudié. Sous **Notes**, ajoute une entrée datée : c
 
 - [ ] [CYB-001 · Correspondance entre le modèle du système viable et la gouvernance de l'IA](../cybernetics/cyb-001-vsm-ai-governance-mapping/) <!-- cyb-001-vsm-ai-governance-mapping -->
 - [ ] [CYB-002 · Mécanismes d'amortissement actif pour maîtriser l'oscillation entre dépôts](../cybernetics/cyb-002-active-dampening-cross-repo-oscillation/) <!-- cyb-002-active-dampening-cross-repo-oscillation -->
-- [ ] [CYB-003 · Measuring the Variety Ratio Quantitatively](../cybernetics/cyb-003-measuring-variety-ratio-quantitatively/) <!-- cyb-003-measuring-variety-ratio-quantitatively -->
+- [ ] [CYB-003 · Measuring the Variety Ratio Quantitatively](../cybernetics/cyb-003-measuring-variety-ratio-quantitatively/) *(en anglais)* <!-- cyb-003-measuring-variety-ratio-quantitatively -->
 
 ### Futurologie
 
@@ -200,7 +200,7 @@ Synchronisé depuis Demerzel à [`e203e5a`](https://github.com/GuitarAlchemist/D
 - musique : MUS-007 ([#1172](https://github.com/GuitarAlchemist/Demerzel/pull/1172)), MUS-008 ([#1173](https://github.com/GuitarAlchemist/Demerzel/pull/1173)), MUS-009 ([#1174](https://github.com/GuitarAlchemist/Demerzel/pull/1174)), MUS-018 ([#1167](https://github.com/GuitarAlchemist/Demerzel/pull/1167)), MUS-020 ([#1171](https://github.com/GuitarAlchemist/Demerzel/pull/1171)).
 
 Elle apporte aussi :
-- des pages françaises et espagnoles pour quinze modules qui n'avaient ici qu'une page anglaise : CS-002, CYB-001, CYB-002, GAA-002, GAA-003, INF-001, MUS-003, MUS-004, MUS-005, MCL-002, NET-001, PSY-002, SEM-001, venus de [#1098](https://github.com/GuitarAlchemist/Demerzel/pull/1098), qui a aussi corrigé leur texte anglais, et MUS-002 et MUS-006, venus de [#1091](https://github.com/GuitarAlchemist/Demerzel/pull/1091) ;
+- des pages françaises et espagnoles pour quinze modules qui n'avaient ici qu'une page anglaise : CS-002, CYB-001, CYB-002, GAA-002, GAA-003, INF-001, MUS-003, MUS-004, MUS-005, MCL-002, NET-001, PSY-002, SEM-001, venues de [#1098](https://github.com/GuitarAlchemist/Demerzel/pull/1098), qui a aussi corrigé leur texte anglais, et MUS-002 et MUS-006, venues de [#1091](https://github.com/GuitarAlchemist/Demerzel/pull/1091) ;
 - des corrections de MUS-002, MUS-006 et GTR-002 dans toutes les langues où ils existent ([#1091](https://github.com/GuitarAlchemist/Demerzel/pull/1091)) ;
 - les accents rétablis dans les pages espagnoles de douze modules ([#1120](https://github.com/GuitarAlchemist/Demerzel/pull/1120)).
 
