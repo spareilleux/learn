@@ -28,6 +28,7 @@ pub mod linear;
 pub mod net;
 pub mod optimize;
 pub mod reduce;
+pub mod sequence;
 
 use ndarray::{Array1, Array2};
 
