@@ -480,7 +480,7 @@ Each warning gets its own fix. `Song` is always there, so it becomes `required`.
 - A nullable warning shows where `null` gets in, which isn't always where the program crashes. Fix it with `??`, `required`, `string?` or an `if`; `!` only hides it.
 - `WarningsAsErrors` set to `nullable` turns the nullable warnings into errors.
 
-Next: [collections and LINQ](../#outline), to store and query many values at once.
+Next: [collections and LINQ](../09-collections-and-linq/), to store and query many values at once.
 
 ## Sources
 

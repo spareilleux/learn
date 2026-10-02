@@ -49,13 +49,13 @@ Les exemples utilisent de petites données réelles quand ça aide : les notes d
 | 6 | [Records, structs et enums](06-records-structs-enums/) | types valeur et types référence, égalité, `enum` |
 | 7 | [Interfaces et héritage](07-interfaces-and-inheritance/) | `interface`, `abstract`, `override`, polymorphisme |
 | 8 | [Exceptions et sécurité face à null](08-exceptions-and-null-safety/) | `try`/`catch`/`finally`, `throw`, types référence nullables |
-| 9 | Collections et LINQ | `Dictionary<TKey, TValue>`, `HashSet<T>`, `Where`, `Select`, `OrderBy` |
+| 9 | [Collections et LINQ](09-collections-and-linq/) | `Dictionary<TKey, TValue>`, `HashSet<T>`, `Where`, `Select`, `OrderBy` |
 | 10 | Fichiers et texte | `File`, `Path`, lire un fichier CSV des projets de Guitar Alchemist |
 | 11 | Tests unitaires | xUnit, `dotnet test`, tester les méthodes des leçons précédentes |
 | 12 | Un petit projet | une solution avec une bibliothèque, une application console et des tests, un package NuGet, un premier regard sur `async` |
 | — | [Journal](journal/) | |
 
-Les leçons 9 à 12 sont prévues et pas encore écrites.
+Les leçons 10 à 12 sont prévues et pas encore écrites.
 
 ## Les points marquants du journal
 
@@ -71,6 +71,8 @@ Le [journal](journal/) consigne ce que l'écriture et les tests de ce cours ont 
 | Dans Guitar Alchemist, le `ToString() => Name` de `ChordTemplate` n'est pas `sealed` : ses records dérivés affichent toutes leurs propriétés au lieu du nom de l'accord | L'`override` de la leçon 7 rencontre les records de la leçon 6 dans du vrai code ; un site d'appel de GA journalise le dump. Pas encore signalé à GA | [Leçon 7](07-interfaces-and-inheritance/), [tableau QA](journal/#qa) |
 | Un avertissement de nullabilité désigne l'endroit où `null` entre, pas celui où le programme plante : CS8618 se trouve sur la déclaration de la propriété, et la ligne qui plante n'a aucun avertissement | Corrige chaque avertissement là où il est, même loin du plantage | [Leçon 8](08-exceptions-and-null-safety/), [journal](journal/#2026-10-02--exceptions-et-sécurité-face-à-null) |
 | Guitar Alchemist fait taire quinze avertissements de nullabilité dans `NoWarn`, deux fois. Son code n'en a aucun à cacher, mais un fichier de test contenant sept erreurs de nullabilité a compilé sans avertissement | Faire taire un avertissement fait aussi taire les erreurs à venir. Pas encore signalé à GA | [Leçon 8](08-exceptions-and-null-safety/), [tableau QA](journal/#qa) |
+| Le `foreach` d'un dictionnaire suit l'ordre d'ajout seulement jusqu'au premier `Remove` : une clé ajoutée ensuite prend la place de la clé retirée | Un résultat trié rangé dans un `Dictionary` reste trié par hasard ; trie quand l'ordre compte | [Leçon 9](09-collections-and-linq/), [journal](journal/#2026-10-02--collections-et-linq) |
+| Trois des quatre fichiers YAML que lisent les services de connaissances musicales de Guitar Alchemist ne se chargent pas ; chaque chargeur attrape l'exception et continue avec un seul élément par défaut | Un `catch` qui se contente d'afficher cache le bogue : GA compte 16 artistes, et rien n'échoue. Pas encore signalé à GA | [Leçon 9](09-collections-and-linq/), [tableau QA](journal/#qa) |
 
 ## Prérequis
 

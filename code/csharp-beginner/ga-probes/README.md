@@ -1,6 +1,6 @@
 # Guitar Alchemist probes
 
-Measurements of [Guitar Alchemist](https://github.com/GuitarAlchemist/ga) at commit `5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26`, for lesson 8 of *C# for beginners*. The journal's 2026-10-02 entry and its Experiments table record the hypotheses, written before measuring, and the results. `check.sh` doesn't run these files: they need a partial GA worktree in `../.ga`, which git ignores.
+Measurements of [Guitar Alchemist](https://github.com/GuitarAlchemist/ga) at commit `5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26`, for lessons 8 and 9 of *C# for beginners*. The journal's 2026-10-02 entry and its Experiments table record the hypotheses, written before measuring, and the results. `check.sh` doesn't run these files: they need a partial GA worktree in `../.ga`, which git ignores.
 
 ```
 git -C <ga clone> worktree add --no-checkout --detach ../.ga 5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26
@@ -34,3 +34,15 @@ cp orig/* ../.ga/ && rm ../.ga/Common/GA.Domain.Core/ZzNullableCanary.cs
 ```
 
 `lift_nullable_nowarn.py` expects the CRLF line endings of a Windows checkout. With SDK 10.0.112: 0 nullable warnings with GA's configuration; 7 without the two lists (CS8600 ×2, CS8602 ×3, CS8618, CS8625), all of them in `ZzNullableCanary.cs`. GA.Domain.Core and GA.Core have none of their own.
+
+## Lesson 9: `artists.cs`
+
+Which artists `MusicalKnowledgeService.GetArtistBreakdown()` keeps with `GetAllArtists().Take(20)`, and in what order its dictionary comes out. This probe needs more of GA than lesson 8's. It is extracted from the commit with `git archive`, which adds no worktree to the GA clone:
+
+```
+git -C <ga clone> archive 5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26 Directory.Build.props Directory.Build.targets global.json .editorconfig Common/GA.Domain.Services Common/GA.Business.Config Common/GA.Core Common/GA.Domain.Core Common/GA.Domain.Repositories Common/GA.Business.Core | tar -x -C ../.ga
+dotnet build artists.cs
+dotnet run --no-build artists.cs | diff --strip-trailing-cr artists-results.txt -
+```
+
+With SDK 10.0.112, the build's only warning is IDE0028 in GA's `ScaleMetadataRegistry.cs`. Three of the four services print `Error loading ...` and keep a one-item default, because their YAML file doesn't deserialize; `GetAllArtists()` returns 16 artists, and none is left out. The first line of the output is the machine's culture, which `OrderBy(a => a)` sorts with; it was `en-CA` here.
