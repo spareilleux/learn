@@ -19,6 +19,8 @@ PATHS=(
   /Common/GA.Domain.Services/Chords/ChordTemplateFactory.cs
   /Apps/ga-server/GaApi/Services/ContextualChordService.cs
   /Apps/ga-server/GaApi/Models/ContextualChords.cs
+  # lesson 11: the ranking of a modal family's members by brightness
+  /Common/GA.Domain.Services/Unified/UnifiedModeService.cs
 )
 cd "$(dirname "$0")"
 if [ "$(git -C .ga rev-parse HEAD 2>/dev/null || true)" = "$GA_SHA" ]; then
