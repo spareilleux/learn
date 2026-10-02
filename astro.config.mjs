@@ -26,12 +26,13 @@ export default defineConfig({
 				PageTitle: './src/components/PageTitle.astro',
 				// Button that hides or shows the left sidebar on wide screens
 				SiteTitle: './src/components/SiteTitle.astro',
-				// Renders ```mermaid code blocks as diagrams
+				// Renders ```mermaid code blocks as diagrams, and puts the reader's bookmarks and notes around the content
 				MarkdownContent: './src/components/MarkdownContent.astro',
 			},
 			sidebar: [
 				{ label: 'Method', translations: { fr: 'Méthode', es: 'Método' }, slug: 'method' },
 				{ label: 'Artifacts', translations: { fr: 'Artefacts', es: 'Artefactos' }, slug: 'artifacts' },
+				{ label: 'My bookmarks and notes', translations: { fr: 'Mes favoris et notes', es: 'Mis marcadores y notas' }, slug: 'my-notes' },
 				{
 					label: 'Software Engineering',
 					translations: { fr: 'Génie logiciel', es: 'Ingeniería de software' },
