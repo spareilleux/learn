@@ -231,12 +231,12 @@ class Song
 ```
 
 ```text
-l08_null_warnings.cs(9,19): warning CS8618: Non-nullable property 'Title' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable.
 l08_null_warnings.cs(2,16): warning CS8600: Converting null literal or possible null value to non-nullable type.
+l08_null_warnings.cs(9,19): warning CS8618: Non-nullable property 'Title' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable.
 Unhandled exception. System.NullReferenceException: Object reference not set to an instance of an object.
 ```
 
-Deux avertissements, deux problèmes différents :
+Le compilateur les donne dans l'ordre des lignes sous Linux, mais Windows et macOS affichent l'avertissement CS8618 en premier : l'ordre peut changer, pas les avertissements. Deux avertissements, deux problèmes différents :
 
 - **CS8600** à la ligne 2 : `answer` peut être `null`, et `title` est un `string`, un type qui promet de ne pas contenir `null`. La promesse est rompue là où la valeur entre.
 - **CS8618** à la ligne 9 : `Title` est un `string`, mais aucun constructeur ne lui donne de valeur, donc un nouveau `Song` a un `Title` qui vaut `null`. L'avertissement se trouve sur la déclaration de la propriété. La ligne qui lit `song.Title.Length` n'en reçoit aucun, parce que le compilateur y fait confiance au type `string`, et c'est la ligne qui plante.
@@ -428,10 +428,10 @@ class Practice
 ```
 
 ```text
-l08_ex_null_start.cs(12,19): warning CS8618: Non-nullable property 'Song' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable.
-l08_ex_null_start.cs(13,19): warning CS8618: Non-nullable property 'Notes' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable.
 l08_ex_null_start.cs(6,15): warning CS8600: Converting null literal or possible null value to non-nullable type.
 l08_ex_null_start.cs(7,39): warning CS8602: Dereference of a possibly null reference.
+l08_ex_null_start.cs(12,19): warning CS8618: Non-nullable property 'Song' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable.
+l08_ex_null_start.cs(13,19): warning CS8618: Non-nullable property 'Notes' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable.
 Unhandled exception. System.NullReferenceException: Object reference not set to an instance of an object.
 ```
 
