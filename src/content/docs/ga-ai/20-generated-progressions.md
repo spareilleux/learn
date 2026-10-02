@@ -232,6 +232,10 @@ I-V-vi-IV, the least joined path: x-x-2-0-1-x C/E → x-x-0-0-0-x G/D → x-x-2-
 - **The joined path is the course's search,** with the tool's own distance; lesson 19 showed that this distance pairs the lowest notes when the sizes differ.
 - **The program calls the tools' methods directly,** not through an MCP client and GA's server.
 
+## Reported upstream
+
+- Reported after this lesson was written, in GA issue [#792](https://github.com/GuitarAlchemist/ga/issues/792): the spelling from twelve names, the key read as a chord symbol, the unbounded length, the stitching that gives no path and the parked skill draft.
+
 ## Exercises
 
 1. In the roots table, "C" writes the andalusian in C minor with sharps and "C7b9" with flats. Which line of the code makes the difference, and why is no root read as C spelled with flats otherwise?

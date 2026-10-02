@@ -232,6 +232,10 @@ I-V-vi-IV, the least joined path: x-x-2-0-1-x C/E → x-x-0-0-0-x G/D → x-x-2-
 - **Le chemin continu est la recherche du cours,** avec la distance de l'outil lui-même ; la leçon 19 a montré que cette distance apparie les notes les plus graves quand les tailles diffèrent.
 - **Le programme appelle directement les méthodes des outils,** et non par un client MCP et le serveur de GA.
 
+## Signalé en amont
+
+- Signalés après l'écriture de cette leçon, dans le ticket de GA [#792](https://github.com/GuitarAlchemist/ga/issues/792) : l'orthographe tirée de douze noms, la tonalité lue comme un chiffrage, la longueur sans limite, le raccord qui ne donne pas de chemin continu et le brouillon de skill en attente.
+
 ## Exercices
 
 1. Dans le tableau des toniques, « C » écrit l'andalusian en C mineur avec des dièses, et « C7b9 » avec des bémols. Quelle ligne du code fait la différence, et pourquoi, sinon, aucune tonique lue comme C n'est-elle écrite en bémols ?

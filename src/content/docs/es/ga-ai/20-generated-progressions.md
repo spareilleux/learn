@@ -232,6 +232,10 @@ I-V-vi-IV, the least joined path: x-x-2-0-1-x C/E → x-x-0-0-0-x G/D → x-x-2-
 - **El camino continuo es una búsqueda del curso,** con la propia distancia de la herramienta; la lección 19 mostró que esa distancia empareja las notas más graves cuando el número de notas difiere.
 - **El programa llama directamente a los métodos de las herramientas,** no a través de un cliente MCP y del servidor de GA.
 
+## Comunicado upstream
+
+- Se comunicaron después de escribir esta lección, en la issue de GA [#792](https://github.com/GuitarAlchemist/ga/issues/792): la grafía a partir de doce nombres, la tonalidad leída como un cifrado, la longitud sin límite, el enlace que no da un camino continuo y el borrador de skill en espera.
+
 ## Ejercicios
 
 1. En la tabla de fundamentales, "C" escribe la plantilla andalusian en C menor con sostenidos, y "C7b9", con bemoles. ¿Qué línea del código marca la diferencia, y por qué, fuera de ese caso, ninguna fundamental leída como C se escribe con bemoles?
