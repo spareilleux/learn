@@ -42,7 +42,7 @@ El lado de la programación te resultará familiar: value objects, records, camp
 
 ## Plan
 
-El curso sigue los conceptos que usan el código, los archivos de configuración y las herramientas MCP de GA, desde la nota aislada hasta las transformaciones neorriemannianas. Las lecciones 1 a 12 están escritas; las demás son el plan, y su columna «En GA» nombra los tipos, archivos y herramientas que leerá cada una.
+El curso sigue los conceptos que usan el código, los archivos de configuración y las herramientas MCP de GA, desde la nota aislada hasta las transformaciones neorriemannianas. Las lecciones 1 a 13 están escritas; las demás son el plan, y su columna «En GA» nombra los tipos, archivos y herramientas que leerá cada una.
 
 | # | Lección | Teoría | En GA | Si escribes C# |
 |---|---|---|---|---|
@@ -58,7 +58,7 @@ El curso sigue los conceptos que usan el código, los archivos de configuración
 | 10 | [Sustituciones y mezcla modal](10-substitutions-and-modal-mixture/) | sustitución por la relativa y por tritono, acordes prestados | `ChordSubstitutionSkill`, `ModalInterchange.yaml`, `get_borrowed_chords`, `ga_chord_substitutions`, `GrothendieckDelta` | clasificación de candidatos |
 | 11 | [Los modos en profundidad](11-modes-in-depth/) | modos de la menor melódica y de la menor armónica, brillo, familias modales | `MelodicMinorMode`, `HarmonicMinorMode`, `IScaleDegreeNaming`, `PitchClassSet.StepBrightness`, `UnifiedModeService`, `Modes.yaml`, `get_mode_info` | genéricos sobre grados de la escala |
 | 12 | [La simetría y los modos de transposición limitada](12-symmetry-and-limited-transposition/) | modos de transposición limitada, modos de Messiaen, escala de tritono, ejes especulares | `SymmetricScaleMode`, `WholeToneScaleMode`, `DiminishedScaleMode`, `AugmentedScaleMode`, `UnifiedModeService`, `AtonalModalFamilies.yaml`, `TranspositionClass` | invariantes por rotación |
-| 13 | Acordes extendidos y alterados | novenas, oncenas, trecenas, alteraciones, estructuras superiores, poliacordes | `ChordAlterationService`, `ExtendedChords.yaml`, `ga_polychord` | parsers con partes opcionales |
+| 13 | [Los acordes extendidos y alterados](13-extended-and-altered-chords/) | novenas, oncenas, trecenas, alteraciones, estructuras superiores, poliacordes | `Chord.FromSymbol`, `ChordSymbolParser`, `BasicChordExtensionsService`, `ChordAlterationService`, `ChordTemplateFactory`, `ExtendedChords.yaml`, `ga_polychord` | parsers con partes opcionales |
 | 14 | Voicings de guitarra: shells, drop 2 y drop 3 | voicings shell, voicings cerrados y drop, notas guía | `VoicingAnalyzer`, `VoicingDecomposer`, `VoicingGenerator`, `ga_search_voicings` | generación combinatoria |
 | 15 | El mástil: CAGED, digitación y tocabilidad | formas CAGED, geometría del mástil, digitación, afinaciones alternativas | `FretboardGeometry`, `PhysicalCostService`, `Biomechanics`, `Tunings.toml`, `ga_easier_voicings` | funciones de coste |
 | 16 | Arpegios, teoría acorde–escala e improvisación | arpegios, pares acorde–escala, notas fuera de la escala | `ImprovisationConcepts.yaml`, `OutsideNotesSkill`, `ga_arpeggio_suggestions` | tablas de correspondencia |
@@ -80,7 +80,7 @@ Los módulos de [Streeling](../streeling/), generados a partir de [GuitarAlchemi
 
 - [MUS-001 · ¿Qué es un acorde?](../streeling/music/mus-001-what-is-a-chord/) y [MUS-002 · Más allá de la tonalidad](../streeling/music/mus-002-beyond-tonality/) (lecciones 3 y 4);
 - [MUS-006 · El universo de las escalas](../streeling/music/mus-006-the-scale-universe/) (lecciones 2, 4, 11 y 12);
-- [MUS-003 · Cómo funciona la armonía](../streeling/music/mus-003-functional-harmony/) (lecciones 5, 6, 7 y 10) y [MUS-005 · Armonía de jazz para guitarra](../streeling/music/mus-005-jazz-harmony/) (lecciones 7, 9, 10 y 11);
+- [MUS-003 · Cómo funciona la armonía](../streeling/music/mus-003-functional-harmony/) (lecciones 5, 6, 7 y 10) y [MUS-005 · Armonía de jazz para guitarra](../streeling/music/mus-005-jazz-harmony/) (lecciones 7, 9, 10, 11 y 13);
 - [GTR-001 · El mapa del mástil](../streeling/guitar-studies/gtr-001-the-fretboard-map/), [GTR-002 · Geometría CAGED](../streeling/guitar-studies/gtr-002-caged-geometry/) y [GAA-001 · Tu primer acorde](../streeling/guitar-alchemist-academy/gaa-001-your-first-chord/) (lecciones 1 y 3).
 
 ## Recursos

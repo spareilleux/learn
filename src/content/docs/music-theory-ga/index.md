@@ -42,7 +42,7 @@ The programming side stays familiar: value objects, records, bit fields, `switch
 
 ## Outline
 
-The course follows the concepts that GA's code, configuration files and MCP tools use, from the single note to the neo-Riemannian transformations. Lessons 1 to 12 are written; the others are the plan, and their GA column names the types, files and tools each one will read.
+The course follows the concepts that GA's code, configuration files and MCP tools use, from the single note to the neo-Riemannian transformations. Lessons 1 to 13 are written; the others are the plan, and their GA column names the types, files and tools each one will read.
 
 | # | Lesson | Theory | In GA | If you write C# |
 |---|---|---|---|---|
@@ -58,7 +58,7 @@ The course follows the concepts that GA's code, configuration files and MCP tool
 | 10 | [Substitutions and modal mixture](10-substitutions-and-modal-mixture/) | relative and tritone substitution, borrowed chords | `ChordSubstitutionSkill`, `ModalInterchange.yaml`, `get_borrowed_chords`, `ga_chord_substitutions`, `GrothendieckDelta` | ranking candidates |
 | 11 | [Modes in depth](11-modes-in-depth/) | modes of melodic and harmonic minor, brightness, modal families | `MelodicMinorMode`, `HarmonicMinorMode`, `IScaleDegreeNaming`, `PitchClassSet.StepBrightness`, `UnifiedModeService`, `Modes.yaml`, `get_mode_info` | generics over scale degrees |
 | 12 | [Symmetry and modes of limited transposition](12-symmetry-and-limited-transposition/) | modes of limited transposition, Messiaen's modes, the tritone scale, mirror axes | `SymmetricScaleMode`, `WholeToneScaleMode`, `DiminishedScaleMode`, `AugmentedScaleMode`, `UnifiedModeService`, `AtonalModalFamilies.yaml`, `TranspositionClass` | invariants under rotation |
-| 13 | Extended and altered chords | ninths, elevenths, thirteenths, alterations, upper structures, polychords | `ChordAlterationService`, `ExtendedChords.yaml`, `ga_polychord` | parsers with optional parts |
+| 13 | [Extended and altered chords](13-extended-and-altered-chords/) | ninths, elevenths, thirteenths, alterations, upper structures, polychords | `Chord.FromSymbol`, `ChordSymbolParser`, `BasicChordExtensionsService`, `ChordAlterationService`, `ChordTemplateFactory`, `ExtendedChords.yaml`, `ga_polychord` | parsers with optional parts |
 | 14 | Guitar voicings: shells, drop 2 and drop 3 | shell voicings, close and drop voicings, guide tones | `VoicingAnalyzer`, `VoicingDecomposer`, `VoicingGenerator`, `ga_search_voicings` | combinatorial generation |
 | 15 | The fretboard: CAGED, fingering and playability | CAGED shapes, fretboard geometry, fingering, alternate tunings | `FretboardGeometry`, `PhysicalCostService`, `Biomechanics`, `Tunings.toml`, `ga_easier_voicings` | cost functions |
 | 16 | Arpeggios, chord–scale theory and improvisation | arpeggios, chord–scale pairs, outside notes | `ImprovisationConcepts.yaml`, `OutsideNotesSkill`, `ga_arpeggio_suggestions` | mapping tables |
@@ -80,7 +80,7 @@ The [Streeling](../streeling/) modules, generated from [GuitarAlchemist/Demerzel
 
 - [MUS-001 · What Is a Chord?](../streeling/music/mus-001-what-is-a-chord/) and [MUS-002 · Beyond Tonality](../streeling/music/mus-002-beyond-tonality/) (lessons 3 and 4);
 - [MUS-006 · The Scale Universe](../streeling/music/mus-006-the-scale-universe/) (lessons 2, 4, 11 and 12);
-- [MUS-003 · How Harmony Works](../streeling/music/mus-003-functional-harmony/) (lessons 5, 6, 7 and 10) and [MUS-005 · Jazz Harmony for Guitar](../streeling/music/mus-005-jazz-harmony/) (lessons 7, 9, 10 and 11);
+- [MUS-003 · How Harmony Works](../streeling/music/mus-003-functional-harmony/) (lessons 5, 6, 7 and 10) and [MUS-005 · Jazz Harmony for Guitar](../streeling/music/mus-005-jazz-harmony/) (lessons 7, 9, 10, 11 and 13);
 - [GTR-001 · The Fretboard Map](../streeling/guitar-studies/gtr-001-the-fretboard-map/), [GTR-002 · CAGED Geometry](../streeling/guitar-studies/gtr-002-caged-geometry/) and [GAA-001 · Your First Chord](../streeling/guitar-alchemist-academy/gaa-001-your-first-chord/) (lessons 1 and 3).
 
 ## Resources
