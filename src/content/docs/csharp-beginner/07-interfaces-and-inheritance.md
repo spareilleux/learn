@@ -459,7 +459,7 @@ MIDI 75: Alto
 - An abstract class can't be instantiated, and its abstract members must be overridden.
 - An interface is a contract without code; a class has one base class but can implement several interfaces.
 
-Next: [exceptions and null safety](../#outline), for when a method can't do what it's asked.
+Next: [exceptions and null safety](../08-exceptions-and-null-safety/), for when a method can't do what it's asked.
 
 ## Sources
 

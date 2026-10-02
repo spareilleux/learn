@@ -257,7 +257,7 @@ Unmatched value was 7.
    at Program.<Main>$(String[] args) in C:\Users\spare\source\repos\learn\code\csharp-beginner\examples\l03_switch_warning.cs:line 4
 ```
 
-A **warning**, unlike an error, doesn't stop the build: the program runs, and here it stops with an **exception**, an error that happens while the program runs. The lines starting with `at` are the *stack trace*: where the program was. The last one points to line 4 of the file. [Lesson 8](../#outline) is about exceptions.
+A **warning**, unlike an error, doesn't stop the build: the program runs, and here it stops with an **exception**, an error that happens while the program runs. The lines starting with `at` are the *stack trace*: where the program was. The last one points to line 4 of the file. [Lesson 8](../08-exceptions-and-null-safety/) is about exceptions.
 
 Two things to know about warnings. First, read them: this one announced the crash. Second, `dotnet run` shows them only when it compiles; if you run the same unchanged file again, it doesn't compile, and the warning isn't printed again. `dotnet clean l03_switch_warning.cs` forgets the compiled program, and the next run shows the warning again. The course's `check.sh` does that before every run.
 

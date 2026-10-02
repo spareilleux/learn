@@ -48,14 +48,14 @@ Les exemples utilisent de petites données réelles quand ça aide : les notes d
 | 5 | [Classes et objets](05-classes-and-objects/) | champs, propriétés, constructeurs, méthodes, `static` |
 | 6 | [Records, structs et enums](06-records-structs-enums/) | types valeur et types référence, égalité, `enum` |
 | 7 | [Interfaces et héritage](07-interfaces-and-inheritance/) | `interface`, `abstract`, `override`, polymorphisme |
-| 8 | Exceptions et sécurité face à null | `try`/`catch`/`finally`, `throw`, types référence nullables |
+| 8 | [Exceptions et sécurité face à null](08-exceptions-and-null-safety/) | `try`/`catch`/`finally`, `throw`, types référence nullables |
 | 9 | Collections et LINQ | `Dictionary<TKey, TValue>`, `HashSet<T>`, `Where`, `Select`, `OrderBy` |
 | 10 | Fichiers et texte | `File`, `Path`, lire un fichier CSV des projets de Guitar Alchemist |
 | 11 | Tests unitaires | xUnit, `dotnet test`, tester les méthodes des leçons précédentes |
 | 12 | Un petit projet | une solution avec une bibliothèque, une application console et des tests, un package NuGet, un premier regard sur `async` |
 | — | [Journal](journal/) | |
 
-Les leçons 8 à 12 sont prévues et pas encore écrites.
+Les leçons 9 à 12 sont prévues et pas encore écrites.
 
 ## Les points marquants du journal
 
@@ -69,6 +69,8 @@ Le [journal](journal/) consigne ce que l'écriture et les tests de ce cours ont 
 | Le littéral `0` se convertit en énumération sans cast, et CS8524 avertit pour une expression `switch` qui a une branche par nom | Une variable d'énumération peut contenir un nombre sans nom : le programme de la leçon échoue sur 7 | [Leçon 6](06-records-structs-enums/), [journal](journal/#2026-10-01--records-structs-et-enums) |
 | Un brouillon disait que `shape[i].Fret += 2` sur une liste de `readonly record struct` donne CS1612 ; une sonde compilée avant publication a donné CS8852 | Chaque sortie et chaque message d'erreur du cours est collé depuis une exécution, jamais écrit de mémoire | [Leçon 6](06-records-structs-enums/), [journal](journal/#2026-10-01--records-structs-et-enums) |
 | Dans Guitar Alchemist, le `ToString() => Name` de `ChordTemplate` n'est pas `sealed` : ses records dérivés affichent toutes leurs propriétés au lieu du nom de l'accord | L'`override` de la leçon 7 rencontre les records de la leçon 6 dans du vrai code ; un site d'appel de GA journalise le dump. Pas encore signalé à GA | [Leçon 7](07-interfaces-and-inheritance/), [tableau QA](journal/#qa) |
+| Un avertissement de nullabilité désigne l'endroit où `null` entre, pas celui où le programme plante : CS8618 se trouve sur la déclaration de la propriété, et la ligne qui plante n'a aucun avertissement | Corrige chaque avertissement là où il est, même loin du plantage | [Leçon 8](08-exceptions-and-null-safety/), [journal](journal/#2026-10-02--exceptions-et-sécurité-face-à-null) |
+| Guitar Alchemist fait taire quinze avertissements de nullabilité dans `NoWarn`, deux fois. Son code n'en a aucun à cacher, mais un fichier de test contenant sept erreurs de nullabilité a compilé sans avertissement | Faire taire un avertissement fait aussi taire les erreurs à venir. Pas encore signalé à GA | [Leçon 8](08-exceptions-and-null-safety/), [tableau QA](journal/#qa) |
 
 ## Prérequis
 

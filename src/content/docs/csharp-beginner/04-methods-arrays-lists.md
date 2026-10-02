@@ -92,7 +92,7 @@ Three conveniences:
 - **Named arguments**, `times: 2, text: "do"`, say which parameter gets which value, in any order.
 - When the body is a single expression, `=>` replaces the braces and the `return`: that's an [expression-bodied member](https://learn.microsoft.com/dotnet/csharp/programming-guide/statements-expressions-operators/expression-bodied-members). `Enumerable.Repeat(text, times)` makes a sequence of `times` copies of `text`, and `string.Concat` joins them.
 
-In a file with top-level statements, the methods can be declared after the lines that call them, as here. The C# documentation calls them [local functions](https://learn.microsoft.com/dotnet/csharp/programming-guide/classes-and-structs/local-functions): they belong to the program's top-level code. [Lesson 5](../#outline) puts methods inside classes, the usual place in larger programs.
+In a file with top-level statements, the methods can be declared after the lines that call them, as here. The C# documentation calls them [local functions](https://learn.microsoft.com/dotnet/csharp/programming-guide/classes-and-structs/local-functions): they belong to the program's top-level code. [Lesson 5](../05-classes-and-objects/) puts methods inside classes, the usual place in larger programs.
 
 ### What the compiler checks
 
@@ -186,7 +186,7 @@ After AddOctave: 5
 After AddOctaveToAll: 12 14 14 13 12 12
 ```
 
-A parameter receives a **copy** of the argument. Changing `value` inside `AddOctave` doesn't change `fret`. But an array variable doesn't hold the array itself: it holds a *reference*, the address where the array lives. The copy is a copy of the address, so `values` and `frets` point to the same array, and the method changes it. The E major chord moved up an octave, to the 12th fret. Types that behave like `int` are **value types**; types that behave like arrays are **reference types**. [Lesson 6](../#outline) comes back to the difference.
+A parameter receives a **copy** of the argument. Changing `value` inside `AddOctave` doesn't change `fret`. But an array variable doesn't hold the array itself: it holds a *reference*, the address where the array lives. The copy is a copy of the address, so `values` and `frets` point to the same array, and the method changes it. The E major chord moved up an octave, to the 12th fret. Types that behave like `int` are **value types**; types that behave like arrays are **reference types**. [Lesson 6](../06-records-structs-enums/) comes back to the difference.
 
 ## Arrays
 
@@ -426,7 +426,7 @@ string Longest(string[] values)
 Longest name: GA.Business.ProbabilisticGrammar
 ```
 
-Each method does one thing and has a name that says what: count, filter, find the longest. `ProjectsIn` uses a `for` instead of a `foreach` because it needs the index `i` to read the same position in both arrays. Two arrays that must stay in step are fragile: add a name and forget its language, and every language after it is wrong. [Lesson 5](../#outline) replaces them with one list of projects, each with a name and a language. [Lesson 10](../#outline) reads the whole CSV file instead of copying it by hand.
+Each method does one thing and has a name that says what: count, filter, find the longest. `ProjectsIn` uses a `for` instead of a `foreach` because it needs the index `i` to read the same position in both arrays. Two arrays that must stay in step are fragile: add a name and forget its language, and every language after it is wrong. [Lesson 5](../05-classes-and-objects/) replaces them with one list of projects, each with a name and a language. [Lesson 10](../#outline) reads the whole CSV file instead of copying it by hand.
 
 ## `null`: no value at all
 
@@ -506,7 +506,7 @@ Unhandled exception. System.NullReferenceException: Object reference not set to 
    at Program.<Main>$(String[] args) in C:\Users\spare\source\repos\learn\code\csharp-beginner\examples\l04_null_warning.cs:line 11
 ```
 
-It's only a warning, so the program runs, and crashes on line 11. The fix is to handle the `null` case, for example `tuning?.Length ?? 0`, or an `if (tuning is null)` before using it. In the first example, `capo.Length` after `capo ??= "fret 2"` gets no warning: the compiler understood that `capo` can't be `null` any more. [Lesson 8](../#outline) covers exceptions and null safety in depth.
+It's only a warning, so the program runs, and crashes on line 11. The fix is to handle the `null` case, for example `tuning?.Length ?? 0`, or an `if (tuning is null)` before using it. In the first example, `capo.Length` after `capo ??= "fret 2"` gets no warning: the compiler understood that `capo` can't be `null` any more. [Lesson 8](../08-exceptions-and-null-safety/) covers exceptions and null safety in depth.
 
 ## Key takeaways
 
