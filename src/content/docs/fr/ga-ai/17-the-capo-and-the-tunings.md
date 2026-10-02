@@ -333,6 +333,10 @@ what is standard tuning                      E A D G B E         declined       
 - **L'orthographe théorique est le critère du cours :** une tonalité ou un accord, majeur ou mineur, dont aucune armure n'écrit la fondamentale avec cette qualité. Un guitariste qui lit une grille d'accords peut accepter A♯ pour B♭ ; une armure, non.
 - **Le skill du capodastre n'est exécuté qu'au commit épinglé.** Sur `main`, `CapoSkill` n'en diffère que par l'indicateur `Declined` de son refus, ce qu'on sait en lisant le diff.
 
+## Signalé en amont
+
+- Signalés après l'écriture de cette leçon : dans le ticket de GA [#787](https://github.com/GuitarAlchemist/ga/issues/787), le sens du calcul, les altérations, les refus et l'orthographe du skill du capodastre, ainsi que son `CanHandle` ; dans [#788](https://github.com/GuitarAlchemist/ga/issues/788), la lecture des six notes par le skill des accordages, les accordages ouverts mineurs et la mise en garde promise pour le drop D.
+
 ## Exercices
 
 1. Pourquoi « song in Em, capo 2, what shape » est-il refusé ? Que répond le skill du commit épinglé à « song in E min, capo 2, what shape » ?

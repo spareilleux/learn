@@ -333,6 +333,10 @@ what is standard tuning                      E A D G B E         declined       
 - **The theoretical spelling is the course's test:** a major or minor key or chord whose root no key signature writes with that quality. A guitarist reading a chord chart may accept A♯ for B♭; a key signature can't.
 - **The capo runs at the pin only.** On `main`, `CapoSkill` differs by the `Declined` flag of its refusal, read from the diff.
 
+## Reported upstream
+
+- Reported after this lesson was written: GA issue [#787](https://github.com/GuitarAlchemist/ga/issues/787) for the capo's direction, accidentals, refusals and spelling, and its `CanHandle`; [#788](https://github.com/GuitarAlchemist/ga/issues/788) for the tunings' reading of six notes, the minor open tunings and the promised drop D caveat.
+
 ## Exercises
 
 1. Why is "song in Em, capo 2, what shape" declined? What does the pinned skill answer to "song in E min, capo 2, what shape"?

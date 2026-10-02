@@ -333,6 +333,10 @@ what is standard tuning                      E A D G B E         declined       
 - **La grafía teórica es la prueba del curso:** una tonalidad o un acorde, mayor o menor, que con esa fundamental y esa cualidad no tiene armadura. Un guitarrista que lee una hoja de acordes puede aceptar A♯ por B♭; una armadura, no.
 - **La skill de cejilla solo se ejecuta en el commit fijado.** En `main`, `CapoSkill` difiere en el indicador `Declined` de su rechazo, según se lee en el diff.
 
+## Comunicado upstream
+
+- Se comunicaron después de escribir esta lección: en la issue de GA [#787](https://github.com/GuitarAlchemist/ga/issues/787), el sentido de la pregunta, las alteraciones, los rechazos y la grafía de la skill de cejilla, y su `CanHandle`; en la [#788](https://github.com/GuitarAlchemist/ga/issues/788), la lectura de las seis notas por la skill de afinaciones, las afinaciones abiertas menores y la advertencia prometida para drop D.
+
 ## Ejercicios
 
 1. ¿Por qué se rechaza "song in Em, capo 2, what shape"? ¿Qué responde la skill del commit fijado a "song in E min, capo 2, what shape"?
