@@ -1,0 +1,218 @@
+# l12
+
+== Diatonic substitutes in C major, by the notes they share (GA: ga_chord_substitutions, the closure rewritten)
+chord      course                               GA                                   check
+Am         C 2, F 2, Dm 1, Em 1                 C 2, F 2, Dm 1, Em 1                 ok
+Em         C 2, G 2, Am 1, Bdim 1               C 2, G 2, Am 1, Bdim 1               ok
+F          Dm 2, Am 2, C 1, Bdim 1              Dm 2, Am 2, C 1, Bdim 1              ok
+C          Em 2, Am 2, F 1, G 1                 Em 2, Am 2, F 1, G 1                 ok
+G7         Bdim 3, Dm 2, Em 2, C 1, F 1         Bdim 3, Dm 2, Em 2, C 1, F 1         ok
+Cmaj7      Em 3, G 2, Am 2, F 1, Bdim 1         Em 3, G 2, Am 2, F 1, Bdim 1         ok
+Bm7b5      Dm 3, F 2, G 2, Em 1, Am 1           Dm 2, G 2, Bdim 2, Em 1, F 1, Am 1   DIFF
+  the course's Bm7b5: B D F A; the closure's: B D F# A
+
+== The closure's answer for Am in C major, and the example in the tool's description (GaDslTool.cs line 212)
+  Substitutions for Am in key of C major:
+    ★★  C      — 2 shared: C(m3/P1) E(P5/M3)
+    ★★  F      — 2 shared: A(P1/M3) C(m3/P5)
+    ★   Dm     — 1 shared: A(P1/P5)
+    ★   Em     — 1 shared: E(P5/P1)
+  description: Am in key of C major → C (★★★, relative major), Em (★★, shared E/B), F (★, shared A)
+
+== Without a key, the closure uses the chord's root letter as a major key (line 558)
+chord      GA's key     GA's ranking
+Am         A major      A 2, C#m 1, D 1, E 1, F#m 1
+Bb7        B major      C#m 1, D#m 1, E 1, F# 1, G#m 1, A#dim 1; tritone E7
+F#m        F major      F 1, Am 1, Dm 1
+Eb         E major      G#m 1, B 1, D#dim 1
+
+== The tritone substitute: the course's dominant chords, and the closure's test for M3 and m7 (lines 603-609)
+chord      course       GA           check
+G7         Db7          Db7          ok
+D7         Ab7          Ab7          ok
+E7         Bb7          Bb7          ok
+C7         Gb7          Gb7          ok
+G9         Db7          (none)       DIFF
+G13        Db7          (none)       DIFF
+Gm7        (none)       (none)       ok
+Cmaj7      (none)       (none)       ok
+
+== GA's chatbot skill: what its own twelve example prompts parse to (ChordSubstitutionSkill.cs lines 146-160)
+  Tritone substitution for G7                    lists substitutes for G7
+  What can I substitute for Cmaj7 in a ii-V-I?   lists substitutes for Cmaj7
+  Reharmonize Dm7 in a jazz context              lists substitutes for Dm7
+  Alternative chord for F major in C             compares F with C
+  What's the secondary dominant of Am?           lists substitutes for Am
+  Show me a backdoor dominant for C major        lists substitutes for C
+  Alternative chord for Cmaj7                    lists substitutes for Cmaj7
+  What can replace Dm7?                          lists substitutes for Dm7
+  Swap chord for G7                              lists substitutes for G7
+  Modal interchange substitutes for C major      lists substitutes for C
+  Borrow a chord from parallel minor             no chord: "Could not identify a chord symbol in your message."
+  Modal interchange options in F major           lists substitutes for F
+
+== The skill's list for one chord: GA's FindNearby, then the first five of the same size, by cost
+course: the other chords of the same size with the same ICV; GA: the chords at the lowest cost it lists
+chord      course     GA         check
+G7         23         23         ok
+  - **Dm7b5** — harmonic cost 0.60 (Δ L1=1)   id  293, 2 notes in common with G7
+  - **Ab7** — harmonic cost 0.60 (Δ L1=1)     id  329, 0 notes in common with G7
+  - **F7** — harmonic cost 0.60 (Δ L1=1)      id  553, 1 note in common with G7
+  - **D7** — harmonic cost 0.60 (Δ L1=1)      id  581, 1 note in common with G7
+  - **Ebm7b5** — harmonic cost 0.60 (Δ L1=1)  id  586, 0 notes in common with G7
+  textbook Db7: number 19 of the 155 it lists, cost 0.60
+Am         23         23         ok
+  - **Cm** — harmonic cost 0.60 (Δ L1=1)      id  137, 1 note in common with Am
+  - **C** — harmonic cost 0.60 (Δ L1=1)       id  145, 2 notes in common with Am
+  - **Ab** — harmonic cost 0.60 (Δ L1=1)      id  265, 1 note in common with Am
+  - **Dbm** — harmonic cost 0.60 (Δ L1=1)     id  274, 1 note in common with Am
+  - **Fm** — harmonic cost 0.60 (Δ L1=1)      id  289, 1 note in common with Am
+  textbook C: number 2 of the 95 it lists, cost 0.60
+  textbook F: number 8 of the 95 it lists, cost 0.60
+C          23         23         ok
+  - **Cm** — harmonic cost 0.60 (Δ L1=1)      id  137, 2 notes in common with C
+  - **Ab** — harmonic cost 0.60 (Δ L1=1)      id  265, 1 note in common with C
+  - **Dbm** — harmonic cost 0.60 (Δ L1=1)     id  274, 1 note in common with C
+  - **Fm** — harmonic cost 0.60 (Δ L1=1)      id  289, 1 note in common with C
+  - **Db** — harmonic cost 0.60 (Δ L1=1)      id  290, 0 notes in common with C
+  textbook Am: number 6 of the 95 it lists, cost 0.60
+  textbook Em: number 21 of the 95 it lists, cost 0.60
+Cmaj7      11         11         ok
+  - **Dbmaj7** — harmonic cost 0.60 (Δ L1=1)  id  291, 1 note in common with Cmaj7
+  - **Abmaj7** — harmonic cost 0.60 (Δ L1=1)  id  393, 2 notes in common with Cmaj7
+  - **Fmaj7** — harmonic cost 0.60 (Δ L1=1)   id  561, 2 notes in common with Cmaj7
+  - **Dmaj7** — harmonic cost 0.60 (Δ L1=1)   id  582, 0 notes in common with Cmaj7
+  - **Amaj7** — harmonic cost 0.60 (Δ L1=1)   id  786, 1 note in common with Cmaj7
+  textbook Em7: not listed (Δ L1=4, beyond 3)
+  textbook Am7: not listed (Δ L1=4, beyond 3)
+Dm7        11         11         ok
+  - **Fm7** — harmonic cost 0.60 (Δ L1=1)     id  297, 2 notes in common with Dm7
+  - **F#m7** — harmonic cost 0.60 (Δ L1=1)    id  594, 1 note in common with Dm7
+  - **Am7** — harmonic cost 0.60 (Δ L1=1)     id  657, 2 notes in common with Dm7
+  - **Ebm7** — harmonic cost 0.60 (Δ L1=1)    id 1098, 0 notes in common with Dm7
+  - **Cm7** — harmonic cost 0.60 (Δ L1=1)     id 1161, 1 note in common with Dm7
+  textbook Fmaj7: not listed (Δ L1=4, beyond 3)
+
+== Over the twelve roots of each chord type, the skill's lists of five
+type     different chords   first suggestion, and for how many roots
+major    6                  Cm 12
+m        6                  C 1, Cm 11
+dim      6                  Dbdim 1, Cdim 11
+aug      4                  Dbaug 3, Caug 9
+7        6                  Dm7b5 12
+maj7     6                  Dbmaj7 11, Abmaj7 1
+m7       6                  Fm7 11, Dm7 1
+m7b5     6                  Dm7b5 11, Ab7 1
+dim7     3                  Dbdim7 4, Cdim7 8
+
+== Two chords: the course's reading and the skill's labels (ClassifySubstitution, lines 246-298)
+G7 Db7     DIFF
+  course: Tritone Substitution, Set-Class Equivalent, ICV Neighbor (L1 = 0)
+  GA:     Tritone Substitution, Set-Class Equivalent, ICV Neighbor (L1 = 1)
+G7 C       ok
+  course and GA: Secondary Dominant
+D7 G       ok
+  course and GA: Secondary Dominant
+Dm G       DIFF
+  course: Set-Class Equivalent, ICV Neighbor (L1 = 0)
+  GA:     Secondary Dominant, Set-Class Equivalent, ICV Neighbor (L1 = 1)
+F# Bdim    DIFF
+  course: Harmonic Distance
+  GA:     Secondary Dominant
+C C        DIFF
+  course: Set-Class Equivalent, ICV Neighbor (L1 = 0)
+  GA:     Set-Class Equivalent, ICV Neighbor (L1 = 1)
+C Am       DIFF
+  course: Set-Class Equivalent, ICV Neighbor (L1 = 0)
+  GA:     Set-Class Equivalent, ICV Neighbor (L1 = 1)
+Bb7 C      ok
+  course and GA: Backdoor Dominant
+
+== Borrowed chords for C major: GA's get_borrowed_chords (ContextualChordService, compiled as it is), chord by chord
+GA's mode    course             GA                 check
+Dorian       i Cm               i Cm               ok
+  notes: course C Eb G, GA C D♯ G
+Dorian       bIII Eb            III D#             DIFF
+  notes: course Eb G Bb, GA D♯ G A♯
+Dorian       v Gm               v Gm               ok
+  notes: course G Bb D, GA G A♯ D
+Dorian       vi° Adim           vi° Adim           ok
+  notes: course A C Eb, GA A C D♯
+Dorian       bVII Bb            VII A#             DIFF
+  notes: course Bb D F, GA A♯ D F
+Phrygian     bII Db             II C#              DIFF
+  notes: course Db F Ab, GA C♯ F G♯
+Phrygian     iv Fm              iv Fm              ok
+  notes: course F Ab C, GA F G♯ C
+Phrygian     v° Gdim            v° Gdim            ok
+  notes: course G Bb Db, GA G A♯ C♯
+Phrygian     bVI Ab             VI G#              DIFF
+  notes: course Ab C Eb, GA G♯ C D♯
+Phrygian     bvii Bbm           vii A#m            DIFF
+  notes: course Bb Db F, GA A♯ C♯ F
+Lydian       II D               II D               ok
+Lydian       #iv° F#dim         iv° F#dim          DIFF
+Lydian       vii Bm             vii Bm             ok
+Mixolydian   iii° Edim          iii° Edim          ok
+  notes: course E G Bb, GA E G A♯
+Aeolian      ii° Ddim           ii° Ddim           ok
+  notes: course D F Ab, GA D F G♯
+Locrian      i° Cdim            i° Cdim            ok
+  notes: course C Eb Gb, GA C D♯ F♯
+Locrian      biii Ebm           iii D#m            DIFF
+  notes: course Eb Gb Bb, GA D♯ F♯ A♯
+Locrian      bV Gb              V F#               DIFF
+  notes: course Gb Bb Db, GA F♯ A♯ C♯
+
+== The course's borrowed chords, mode by mode: every triad of the parallel mode that C major lacks
+mode         chords
+Dorian       i Cm, bIII Eb, v Gm, vi° Adim, bVII Bb
+Phrygian     i Cm, bII Db, bIII Eb, iv Fm, v° Gdim, bVI Ab, bvii Bbm
+Lydian       II D, #iv° F#dim, vii Bm
+Mixolydian   iii° Edim, v Gm, bVII Bb
+Aeolian      i Cm, ii° Ddim, bIII Eb, iv Fm, v Gm, bVI Ab, bVII Bb
+Locrian      i° Cdim, bII Db, biii Ebm, iv Fm, bV Gb, bVI Ab, bvii Bbm
+count              course   GA       check
+distinct chords    18       18       ok
+
+== GA's ModalInterchange.yaml: each chord spelled from its numeral in its source mode
+entry, numeral           course           GA               check
+Parallel Minor bVI       Ab major         Ab major         ok
+Parallel Minor bVII      Bb major         Bb major         ok
+Parallel Minor iv        F minor          F minor          ok
+Parallel Minor ii°       D diminished     D diminished     ok
+Parallel Major VI        F# minor         F major          DIFF
+  F major is already a chord of A natural minor: nothing is borrowed
+Parallel Major VII       G# diminished    G major          DIFF
+  G major is already a chord of A natural minor: nothing is borrowed
+Parallel Major III       C# minor         C major          DIFF
+  C major is already a chord of A natural minor: nothing is borrowed
+Dorian IV                D major          D major          ok
+Dorian ii                B minor          B minor          ok
+Phrygian bII             Bb major         Bb major         ok
+Phrygian bii°            Bb major         Bb diminished    DIFF
+Mixolydian bVII          Bb major         Bb major         ok
+Mixolydian v             G minor          G minor          ok
+
+== Its chromatic numerals, read in C: the chord on that degree of the mode
+mode, numeral            course     GA         check
+Harmonic Minor V7        V7         V7         ok
+  G B D F
+Harmonic Minor vii°7     vii°7      vii°7      ok
+  B D F Ab
+Harmonic Minor bVI+      bVI        bVI+       DIFF
+  Ab C Eb
+Melodic Minor iv+        IV         iv+        DIFF
+  F A C
+Melodic Minor V7         V7         V7         ok
+  G B D F
+Melodic Minor vii°7      viiø7      vii°7      DIFF
+  B D F A
+
+== Exercise solutions
+question               course                   GA                       check
+1. Dm in F major       F 2, Bb 2, Gm 1, Am 1    F 2, Bb 2, Gm 1, Am 1    ok
+2. A7, tritone         Eb7                      Eb7                      ok
+  A7: A C# E G; Eb7: Eb G Bb Db
+3. chatbot, A7         Eb7                      Dm7b5                    DIFF
+4. G minor in G        Gm Adim Bb Cm Dm Eb F    Gm Adim A# Cm Dm D# F    DIFF
