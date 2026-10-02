@@ -84,9 +84,9 @@ The course finds the seven as written. GA names none: a triad has three notes, a
 
 On the guitar, "open" has another meaning. "While open chords are the most commonly employed voicings on the guitar and other fretted instruments for the volume and resonance they produce", says the same article: chords with open strings, such as lesson 3's. Each of those doubles a note: x32010 plays C E G C E, outside a system that "doesn't provide a term for more than one voice on the same pitch". A rootless voicing leaves out the root, for a reason Open Music Theory gives: "if there is a bass player in the performing ensemble, you may deliberately omit the root in the other voices" ([Open Music Theory, "Jazz Voicings"](https://viva.pressbooks.pub/openmusictheory/chapter/jazz-voicings/)).
 
-MUS-005 shows a "Drop-2 Cmaj7 (string set 5-4-3-2)": x3200x, whose E is "the 3rd — dropped from close position". Its notes, C3 E3 G3 B3, lie within an octave: it is a close position. Under its top note B, nothing is dropped. The drop 2 with C in the bass on those strings is x3545x, C3 G3 B3 E4: under the top note E4, the close position is G3 B3 C4 E4, and lowering C4, the second voice from the top, gives it. The figure shows both, with a drop 3 of Cmaj7 and a G7 shell, the subject of the next section:
+MUS-005 showed a "Drop-2 Cmaj7 (string set 5-4-3-2)": x3200x, whose E was "the 3rd — dropped from close position" ([`mus-005-jazz-harmony.md#L214-L223`](https://github.com/GuitarAlchemist/Demerzel/blob/6aef19b3a7c0ceac400f89f5585f4c033d61c99c/state/streeling/courses/music/en/mus-005-jazz-harmony.md#L214-L223), as the module read until [Demerzel #1098](https://github.com/GuitarAlchemist/Demerzel/pull/1098) corrected it). Its notes, C3 E3 G3 B3, lie within an octave: it is a close position. Under its top note B, nothing is dropped. The drop 2 with C in the bass on those strings, which the module now shows, is x3545x, C3 G3 B3 E4: under the top note E4, the close position is G3 B3 C4 E4, and lowering C4, the second voice from the top, gives it. The figure shows both, with a drop 3 of Cmaj7 and a G7 shell, the subject of the next section:
 
-<DropVoicings role="img" aria-label="Four chord grids. x3200x, C E G B, Cmaj7 in close position, which MUS-005 calls a drop 2. x3545x, C G B E, a drop 2 from the third fret. 8x998x, C B E G, a drop 3 from the eighth fret. 3x34xx, G F B, a G7 shell." />
+<DropVoicings role="img" aria-label="Four chord grids. x3200x, C E G B, Cmaj7 in close position, which MUS-005 called a drop 2. x3545x, C G B E, a drop 2 from the third fret. 8x998x, C B E G, a drop 3 from the eighth fret. 3x34xx, G F B, a G7 shell." />
 
 ### In GA: `VoicingAnalyzer`
 
@@ -106,7 +106,7 @@ x3200x   Cmaj7  C3 E3 G3 B3           11      close                yes   Drop-2 
 x3545x   Cmaj7  C3 G3 B3 E4           16      drop-2               yes   Drop-2       True        False          rootless closed-voicing drop-2-voicings
 ```
 
-All seven open chords are "rootless", each with its root, six of them with the root in the bass. Three are "Drop-2": x32010, x02210 and xx0232 fit within an octave once their bass is raised. GA agrees with MUS-005 that x3200x is "Drop-2", and calls the real drop 2, x3545x, rootless, with its C in the bass. The engine also tags the seven open chords `shell-voicing`; the next section explains why.
+All seven open chords are "rootless", each with its root, six of them with the root in the bass. Three are "Drop-2": x32010, x02210 and xx0232 fit within an octave once their bass is raised. GA agrees with MUS-005's first version that x3200x is "Drop-2", and calls the real drop 2, x3545x, rootless, with its C in the bass. The engine also tags the seven open chords `shell-voicing`; the next section explains why.
 
 ## Shells
 
@@ -174,7 +174,7 @@ GA says "Drop-2" exactly on the course's close, drop-2, drop-3 and drop-4 voicin
 
 687 voicings: 15 close, 249 with one dropped voice, 282 with two or three, and 141 with a voice more than an octave below its place, which the drop system does not name. GA's label matches as it did on the 128: "Drop-2" on the close, drop-2, drop-3 and drop-4 voicings, nothing elsewhere.
 
-MUS-005 says "Drop-2 voicings exist on four string sets", lists three, 6-5-4-3, 5-4-3-2 and 4-3-2-1, and counts "48 drop-2 voicings to internalize (4 qualities x 4 inversions x 3 string sets)"; its drop 3s are on "6-4-3-2 and 5-3-2-1". The program looks for them among GA's voicings ([`Lesson16.cs#L287-L301`](https://github.com/spareilleux/learn/blob/1d58ba8/code/music-theory-ga/GaTheory/Lesson16.cs#L287-L301)):
+MUS-005 lists three string sets for drop 2s, 6-5-4-3, 5-4-3-2 and 4-3-2-1, under a sentence that said "Drop-2 voicings exist on four string sets" until Demerzel #1098 ([`mus-005-jazz-harmony.md#L225`](https://github.com/GuitarAlchemist/Demerzel/blob/6aef19b3a7c0ceac400f89f5585f4c033d61c99c/state/streeling/courses/music/en/mus-005-jazz-harmony.md#L225)), and counts "48 drop-2 voicings to internalize (4 qualities x 4 inversions x 3 string sets)"; its drop 3s are on "6-4-3-2 and 5-3-2-1". The program looks for them among GA's voicings ([`Lesson16.cs#L287-L301`](https://github.com/spareilleux/learn/blob/1d58ba8/code/music-theory-ga/GaTheory/Lesson16.cs#L287-L301)):
 
 ```text
 == The string sets of the drop-2 voicings found
