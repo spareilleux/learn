@@ -1,6 +1,6 @@
 ---
 title: "Lesson 20: Generated progressions"
-description: "Guitar Alchemist's MCP server writes chord progressions from nine templates with ga_generate_progression, without a model; the chatbot doesn't call it. Every chord has the right notes, and 712 of 750 are spelled as a textbook spells them in the 15 keys of each mode: D, G and C minor get sharps, and twelve names per spelling can't write Cb, Fb or E#. GA's own twelve-key table writes the same B for the IV of Gb. A chord symbol passes as a key, a lowercase b turns B major to flats, and the length has no limit: 100000 chords make 18,500,223 characters. Stitched with ga_voice_leading_pair, as the answer suggests, the first pairs meet at 17 of 32 places on main."
+description: "Guitar Alchemist's MCP server writes chord progressions from nine templates with ga_generate_progression, without a model; the chatbot doesn't call it. Every chord has the right notes, and 712 of 750 are spelled as a textbook spells them in the 15 keys of each mode: D, G and C minor get sharps, and twelve names per spelling can't write Cb, Fb or E#. GA's own twelve-key table writes the same B for the IV of Gb. A chord symbol passes as a key, a lowercase b turns B major to flats, and the length has no limit: 100000 chords make 17,300,216 characters. Stitched with ga_voice_leading_pair, as the answer suggests, the first pairs meet at 17 of 32 places on main."
 sidebar:
   label: 20. Generated progressions
   order: 20
@@ -161,16 +161,16 @@ Cmaj7      ii-V-I         Dm7 G7 Cmaj7
 ```text
 == The length, at the pin
 length   template       chords    last chord, characters of JSON
-(none)   12-bar-blues   12        V7 G7, 2439
-0        12-bar-blues   12        V7 G7, 2439
--1       12-bar-blues   12        V7 G7, 2439
-4        12-bar-blues   4         I7 C7, 958
-13       12-bar-blues   13        I7 C7, 2624
-100000   12-bar-blues   100000    I7 C7, 18500223
+(none)   12-bar-blues   12        V7 G7, 2288
+0        12-bar-blues   12        V7 G7, 2288
+-1       12-bar-blues   12        V7 G7, 2288
+4        12-bar-blues   4         I7 C7, 903
+13       12-bar-blues   13        I7 C7, 2461
+100000   12-bar-blues   100000    I7 C7, 17300216
 ```
 
 - **0 and a negative length give the template's own length,** without a warning.
-- **A length of 100000 returns 100000 chords, 18,500,223 characters of JSON,** one answer far larger than an agent's context window.
+- **A length of 100000 returns 100000 chords, 17,300,216 characters of JSON,** one answer far larger than an agent's context window.
 
 ## Stitching the progression
 

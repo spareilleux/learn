@@ -1,6 +1,6 @@
 ---
 title: "Lección 20: Las progresiones generadas"
-description: "El servidor MCP de Guitar Alchemist escribe progresiones de acordes sin modelo, a partir de nueve plantillas, con la herramienta ga_generate_progression; el chatbot no la llama. Todos los acordes tienen las notas correctas, y 712 de 750 se escriben como los escribe un manual en las 15 tonalidades de cada modo: D, G y C menor reciben sostenidos, y con doce nombres por grafía no se pueden escribir Cb, Fb ni E#. La propia tabla de doce tonalidades de GA escribe el mismo B para el IV de Gb. Un cifrado se acepta como tonalidad, una b minúscula pasa B mayor a bemoles y la longitud no tiene límite: 100000 acordes ocupan 18.500.223 caracteres. Al enlazar los acordes con ga_voice_leading_pair, como sugiere la respuesta, los primeros pares empalman en 17 de 32 puntos en main."
+description: "El servidor MCP de Guitar Alchemist escribe progresiones de acordes sin modelo, a partir de nueve plantillas, con la herramienta ga_generate_progression; el chatbot no la llama. Todos los acordes tienen las notas correctas, y 712 de 750 se escriben como los escribe un manual en las 15 tonalidades de cada modo: D, G y C menor reciben sostenidos, y con doce nombres por grafía no se pueden escribir Cb, Fb ni E#. La propia tabla de doce tonalidades de GA escribe el mismo B para el IV de Gb. Un cifrado se acepta como tonalidad, una b minúscula pasa B mayor a bemoles y la longitud no tiene límite: 100000 acordes ocupan 17.300.216 caracteres. Al enlazar los acordes con ga_voice_leading_pair, como sugiere la respuesta, los primeros pares empalman en 17 de 32 puntos en main."
 sidebar:
   label: 20. Las progresiones generadas
   order: 20
@@ -161,16 +161,16 @@ Cmaj7      ii-V-I         Dm7 G7 Cmaj7
 ```text
 == The length, at the pin
 length   template       chords    last chord, characters of JSON
-(none)   12-bar-blues   12        V7 G7, 2439
-0        12-bar-blues   12        V7 G7, 2439
--1       12-bar-blues   12        V7 G7, 2439
-4        12-bar-blues   4         I7 C7, 958
-13       12-bar-blues   13        I7 C7, 2624
-100000   12-bar-blues   100000    I7 C7, 18500223
+(none)   12-bar-blues   12        V7 G7, 2288
+0        12-bar-blues   12        V7 G7, 2288
+-1       12-bar-blues   12        V7 G7, 2288
+4        12-bar-blues   4         I7 C7, 903
+13       12-bar-blues   13        I7 C7, 2461
+100000   12-bar-blues   100000    I7 C7, 17300216
 ```
 
 - **0 y una longitud negativa dan la longitud propia de la plantilla,** sin ninguna advertencia.
-- **Una longitud de 100000 devuelve 100000 acordes, 18.500.223 caracteres de JSON,** una sola respuesta mucho mayor que la ventana de contexto de un agente.
+- **Una longitud de 100000 devuelve 100000 acordes, 17.300.216 caracteres de JSON,** una sola respuesta mucho mayor que la ventana de contexto de un agente.
 
 ## Enlazar la progresión
 

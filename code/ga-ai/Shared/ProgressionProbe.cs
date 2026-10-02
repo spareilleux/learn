@@ -28,10 +28,12 @@ public static class ProgressionProbe
         var json = CompositionTools.GaGenerateProgression(root, template, length);
         using var doc = JsonDocument.Parse(json);
         var r = doc.RootElement;
-        if (r.TryGetProperty("error", out var error)) return ([], error.GetString(), json.Length);
+        // The indented JSON ends its lines with the system's newline: one character each, as on Linux
+        var characters = json.ReplaceLineEndings("\n").Length;
+        if (r.TryGetProperty("error", out var error)) return ([], error.GetString(), characters);
         return ([.. r.GetProperty("chords").EnumerateArray().Select(c => new Chord(
             c.GetProperty("roman").GetString()!, c.GetProperty("symbol").GetString()!, c.GetProperty("degree").GetInt32(),
-            [.. c.GetProperty("pitchClasses").EnumerateArray().Select(p => p.GetInt32())]))], null, json.Length);
+            [.. c.GetProperty("pitchClasses").EnumerateArray().Select(p => p.GetInt32())]))], null, characters);
     }
 
     // ---- A textbook's spelling ----

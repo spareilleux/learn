@@ -1,6 +1,6 @@
 ---
 title: "Leçon 20 : les progressions générées"
-description: "Le serveur MCP de Guitar Alchemist écrit des progressions d'accords à partir de neuf gabarits, avec ga_generate_progression et sans modèle ; le chatbot ne l'appelle pas. Chaque accord a les bonnes notes, et 712 sur 750 s'écrivent comme dans un manuel, dans les 15 tonalités de chaque mode : D, G et C mineur reçoivent des dièses, et douze noms par orthographe ne peuvent écrire ni Cb, ni Fb, ni E#. La table à douze tonalités de GA écrit, elle aussi, B pour le IV de Gb. Un chiffrage passe pour une tonalité, un b minuscule fait passer B majeur aux bémols, et la longueur n'a pas de limite : 100000 accords font 18 500 223 caractères. Raccordées avec ga_voice_leading_pair, comme le suggère la réponse, les premières paires se rejoignent sur main à 17 endroits sur 32."
+description: "Le serveur MCP de Guitar Alchemist écrit des progressions d'accords à partir de neuf gabarits, avec ga_generate_progression et sans modèle ; le chatbot ne l'appelle pas. Chaque accord a les bonnes notes, et 712 sur 750 s'écrivent comme dans un manuel, dans les 15 tonalités de chaque mode : D, G et C mineur reçoivent des dièses, et douze noms par orthographe ne peuvent écrire ni Cb, ni Fb, ni E#. La table à douze tonalités de GA écrit, elle aussi, B pour le IV de Gb. Un chiffrage passe pour une tonalité, un b minuscule fait passer B majeur aux bémols, et la longueur n'a pas de limite : 100000 accords font 17 300 216 caractères. Raccordées avec ga_voice_leading_pair, comme le suggère la réponse, les premières paires se rejoignent sur main à 17 endroits sur 32."
 sidebar:
   label: 20. Les progressions générées
   order: 20
@@ -161,16 +161,16 @@ Cmaj7      ii-V-I         Dm7 G7 Cmaj7
 ```text
 == The length, at the pin
 length   template       chords    last chord, characters of JSON
-(none)   12-bar-blues   12        V7 G7, 2439
-0        12-bar-blues   12        V7 G7, 2439
--1       12-bar-blues   12        V7 G7, 2439
-4        12-bar-blues   4         I7 C7, 958
-13       12-bar-blues   13        I7 C7, 2624
-100000   12-bar-blues   100000    I7 C7, 18500223
+(none)   12-bar-blues   12        V7 G7, 2288
+0        12-bar-blues   12        V7 G7, 2288
+-1       12-bar-blues   12        V7 G7, 2288
+4        12-bar-blues   4         I7 C7, 903
+13       12-bar-blues   13        I7 C7, 2461
+100000   12-bar-blues   100000    I7 C7, 17300216
 ```
 
 - **0 et une longueur négative donnent la longueur du gabarit lui-même,** sans avertissement.
-- **Une longueur de 100000 renvoie 100000 accords, soit 18 500 223 caractères de JSON,** une seule réponse, bien plus grande que la fenêtre de contexte d'un agent.
+- **Une longueur de 100000 renvoie 100000 accords, soit 17 300 216 caractères de JSON,** une seule réponse, bien plus grande que la fenêtre de contexte d'un agent.
 
 ## Raccorder la progression
 
