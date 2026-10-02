@@ -7,7 +7,7 @@ sidebar:
 ---
 
 :::note[Cómo se prueba este curso]
-Cada tabla de salida de las lecciones procede de [`code/music-theory-ga`](https://github.com/spareilleux/learn/tree/main/code/music-theory-ga), un programa .NET 10 que calcula cada concepto a partir de las definiciones de los libros de texto y le pide la misma respuesta a [Guitar Alchemist](https://github.com/GuitarAlchemist/ga). Se compila contra el proyecto `GA.Domain.Core` de GA, clonado en el commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6). La lección 9 compila además cuatro archivos de `GA.Domain.Services`, tal cual. [`.github/workflows/music-ga-examples.yml`](https://github.com/spareilleux/learn/blob/main/.github/workflows/music-ga-examples.yml) lo ejecuta en Linux, Windows y macOS y compara la salida, líneas `DIFF` incluidas, con los archivos esperados. El mismo programa dibuja las figuras, brazaletes, diagramas de acordes, mástiles y círculos de quintas, como archivos SVG, y la CI comprueba que las imágenes del repositorio están al día. Las salidas se capturaron en septiembre de 2026.
+Cada tabla de salida de las lecciones procede de [`code/music-theory-ga`](https://github.com/spareilleux/learn/tree/main/code/music-theory-ga), un programa .NET 10 que calcula cada concepto a partir de las definiciones de los libros de texto y le pide la misma respuesta a [Guitar Alchemist](https://github.com/GuitarAlchemist/ga). Se compila contra el proyecto `GA.Domain.Core` de GA, clonado en el commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6). Las lecciones 9 y 10 compilan además archivos de `GA.Domain.Services`, y la lección 10 un servicio de la API web de GA, tal cual. [`.github/workflows/music-ga-examples.yml`](https://github.com/spareilleux/learn/blob/main/.github/workflows/music-ga-examples.yml) lo ejecuta en Linux, Windows y macOS y compara la salida, líneas `DIFF` incluidas, con los archivos esperados. El mismo programa dibuja las figuras, brazaletes, diagramas de acordes, mástiles y círculos de quintas, como archivos SVG, y la CI comprueba que las imágenes del repositorio están al día. Las salidas se capturaron en septiembre de 2026.
 :::
 
 :::tip[En 3D]
@@ -42,7 +42,7 @@ El lado de la programación te resultará familiar: value objects, records, camp
 
 ## Plan
 
-El curso sigue los conceptos que usan el código, los archivos de configuración y las herramientas MCP de GA, desde la nota aislada hasta las transformaciones neorriemannianas. Las lecciones 1 a 9 están escritas; las demás son el plan, y su columna «En GA» nombra los tipos, archivos y herramientas que leerá cada una.
+El curso sigue los conceptos que usan el código, los archivos de configuración y las herramientas MCP de GA, desde la nota aislada hasta las transformaciones neorriemannianas. Las lecciones 1 a 10 están escritas; las demás son el plan, y su columna «En GA» nombra los tipos, archivos y herramientas que leerá cada una.
 
 | # | Lección | Teoría | En GA | Si escribes C# |
 |---|---|---|---|---|
@@ -55,7 +55,7 @@ El curso sigue los conceptos que usan el código, los archivos de configuración
 | 7 | [Cadencias, ii–V–I y la tonalidad de una progresión](07-cadences-and-progressions/) | cadencias, movimientos plagal y de engaño, ii–V–I, resolución de V⁷, encontrar la tonalidad | `Cadences.yaml`, `PitchClassSet.ClosestDiatonicKey`, `ga_analyze_progression`, `ga_key_from_progression` | puntuación y desempate |
 | 8 | [El ukelele y el bajo](08-ukulele-and-bass/) | afinaciones reentrantes, afinaciones por cuartas, numeración de las cuerdas | `Tuning.Ukulele`, `Tuning.Bass`, `Str`, `Fretboard`, `Instruments.yaml` | deducir a partir de los datos, y cuándo no hacerlo |
 | 9 | [Conducción de voces y notas comunes](09-voice-leading-and-common-tones/) | notas comunes, conducción de voces fluida, distancia de conducción de voces, quintas y octavas paralelas, distancias OPTIC | `VoiceLeadingSpace`, `SetClassOpticIndex`, `ProgressionVoiceLeadingAnalyzer`, `VoiceLeadingSkill`, `ga_common_tones`, `ga_voice_leading_pair` | métricas de distancia |
-| 10 | Sustituciones y mezcla modal | sustitución por la relativa y por tritono, acordes prestados | `ChordSubstitutionSkill`, `ModalInterchange.yaml`, `get_borrowed_chords`, `ga_chord_substitutions`, `GrothendieckDelta` | clasificación de candidatos |
+| 10 | [Sustituciones y mezcla modal](10-substitutions-and-modal-mixture/) | sustitución por la relativa y por tritono, acordes prestados | `ChordSubstitutionSkill`, `ModalInterchange.yaml`, `get_borrowed_chords`, `ga_chord_substitutions`, `GrothendieckDelta` | clasificación de candidatos |
 | 11 | Los modos en profundidad | modos de la menor melódica y de la menor armónica, brillo, familias modales | `MelodicMinorMode`, `HarmonicMinorMode`, `Modes.yaml`, `PitchClassSet.StepBrightness` | genéricos sobre grados de la escala |
 | 12 | Simetría: modos de transposición limitada | escalas de tonos enteros, octatónica y aumentada, brazaletes simétricos | `SymmetricScaleMode`, `WholeToneScaleMode`, `DiminishedScaleMode`, `AugmentedScaleMode` | invariantes por rotación |
 | 13 | Acordes extendidos y alterados | novenas, oncenas, trecenas, alteraciones, estructuras superiores, poliacordes | `ChordAlterationService`, `ExtendedChords.yaml`, `ga_polychord` | parsers con partes opcionales |
@@ -71,7 +71,7 @@ El curso sigue los conceptos que usan el código, los archivos de configuración
 ## Requisitos previos
 
 - El [SDK de .NET 10](https://dotnet.microsoft.com/download/dotnet/10.0) y [Git](https://git-scm.com/downloads). En Windows, ejecuta los scripts del curso desde Git Bash.
-- Menos de 20 MB de disco para el clon parcial de GA, salida de compilación incluida: el script descarga solo los archivos de los tres proyectos contra los que se compila el programa, y cuatro archivos de un cuarto.
+- Unos 35 MB de disco para el clon parcial de GA y la salida de compilación: el script descarga solo los archivos de los tres proyectos contra los que se compila el programa, y algunos archivos de otros dos.
 - Una guitarra ayuda: todos los ejemplos se pueden tocar.
 
 ## Módulos relacionados en este sitio
@@ -80,7 +80,7 @@ Los módulos de [Streeling](../streeling/), generados a partir de [GuitarAlchemi
 
 - [MUS-001 · ¿Qué es un acorde?](../streeling/music/mus-001-what-is-a-chord/) y [MUS-002 · Más allá de la tonalidad](../streeling/music/mus-002-beyond-tonality/) (lecciones 3 y 4);
 - [MUS-006 · El universo de las escalas](../streeling/music/mus-006-the-scale-universe/) (lecciones 2 y 4);
-- [MUS-003 · Cómo funciona la armonía](../streeling/music/mus-003-functional-harmony/) (lecciones 5, 6 y 7) y [MUS-005 · Armonía de jazz para guitarra](../streeling/music/mus-005-jazz-harmony/) (lecciones 7 y 9);
+- [MUS-003 · Cómo funciona la armonía](../streeling/music/mus-003-functional-harmony/) (lecciones 5, 6, 7 y 10) y [MUS-005 · Armonía de jazz para guitarra](../streeling/music/mus-005-jazz-harmony/) (lecciones 7, 9 y 10);
 - [GTR-001 · El mapa del mástil](../streeling/guitar-studies/gtr-001-the-fretboard-map/), [GTR-002 · Geometría CAGED](../streeling/guitar-studies/gtr-002-caged-geometry/) y [GAA-001 · Tu primer acorde](../streeling/guitar-alchemist-academy/gaa-001-your-first-chord/) (lecciones 1 y 3).
 
 ## Recursos
