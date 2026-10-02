@@ -210,7 +210,7 @@ Nothing in them was run here.
 
 ## 2026-10-02 — PHY-001 · The Science of Guitar Sound, corrected
 
-Synced from Demerzel at [`d459d8e`](https://github.com/GuitarAlchemist/Demerzel/commit/d459d8e5f0210cbad00f49c49196fc61160aba76) ([PR #1179](https://github.com/GuitarAlchemist/Demerzel/pull/1179)). The module's exercise said to measure from the nut to fret 7 and expect about 2/3 of the string length. The 2/3 is the length that vibrates, from fret 7 to the saddle; the nut-to-fret-7 stretch is the remaining third. The correction is in all six languages of the module, three of which are on this site. Every other page changes only its pinned source link, from `e203e5a` to `d459d8e`.
+Synced from Demerzel at [`d459d8e`](https://github.com/GuitarAlchemist/Demerzel/commit/d459d8e5f0210cbad00f49c49196fc61160aba76) ([PR #1179](https://github.com/GuitarAlchemist/Demerzel/pull/1179)). The module's exercise said to measure from the nut to fret 7 and expect about 2/3 of the string length. The 2/3 is the length that vibrates, from fret 7 to the saddle; the nut-to-fret-7 stretch is the remaining third. The correction is in all six languages of the module, three of which are on this site. Every other page changes only its pinned references to Demerzel, from `e203e5a` to `d459d8e`.
 
 Nothing in it was run here.
 

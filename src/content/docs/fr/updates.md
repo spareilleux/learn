@@ -156,12 +156,12 @@ Les index des mathématiques et de la musique, le [journal Streeling](../streeli
 ## 2026-10-02 — Leçons 9 à 14 de théorie musicale publiées
 
 Chaque leçon a été fusionnée après le succès de sa CI et une revue indépendante de son dernier commit qui n'a rien laissé d'ouvert :
-- [Leçon 9](../music-theory-ga/09-voice-leading-and-common-tones/): [PR #90](https://github.com/spareilleux/learn/pull/90), fusionnée en `c547150`;
-- [Leçon 10](../music-theory-ga/10-substitutions-and-modal-mixture/): [PR #99](https://github.com/spareilleux/learn/pull/99), fusionnée en `9722af8`;
-- [Leçon 11](../music-theory-ga/11-modes-in-depth/): [PR #100](https://github.com/spareilleux/learn/pull/100), fusionnée en `c0abd0e`;
-- [Leçon 12](../music-theory-ga/12-symmetry-and-limited-transposition/): [PR #104](https://github.com/spareilleux/learn/pull/104), fusionnée en `641df75`;
-- [Leçon 13](../music-theory-ga/13-extended-and-altered-chords/): [PR #108](https://github.com/spareilleux/learn/pull/108), fusionnée en `e2ce788`;
-- [Leçon 14](../music-theory-ga/14-guitar-voicings/): [PR #111](https://github.com/spareilleux/learn/pull/111), fusionnée en `1364ba4`.
+- [Leçon 9](../music-theory-ga/09-voice-leading-and-common-tones/) : [PR #90](https://github.com/spareilleux/learn/pull/90), fusionnée en `c547150` ;
+- [Leçon 10](../music-theory-ga/10-substitutions-and-modal-mixture/) : [PR #99](https://github.com/spareilleux/learn/pull/99), fusionnée en `9722af8` ;
+- [Leçon 11](../music-theory-ga/11-modes-in-depth/) : [PR #100](https://github.com/spareilleux/learn/pull/100), fusionnée en `c0abd0e` ;
+- [Leçon 12](../music-theory-ga/12-symmetry-and-limited-transposition/) : [PR #104](https://github.com/spareilleux/learn/pull/104), fusionnée en `641df75` ;
+- [Leçon 13](../music-theory-ga/13-extended-and-altered-chords/) : [PR #108](https://github.com/spareilleux/learn/pull/108), fusionnée en `e2ce788` ;
+- [Leçon 14](../music-theory-ga/14-guitar-voicings/) : [PR #111](https://github.com/spareilleux/learn/pull/111), fusionnée en `1364ba4`.
 
 Le [déploiement Pages](https://github.com/spareilleux/learn/actions/runs/37070289373) de `1364ba4` a réussi, comme le suivant, celui de #114. Les six leçons ont répondu 200 sans authentification dans les trois langues, 18 pages en tout.
 

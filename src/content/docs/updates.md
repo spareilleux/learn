@@ -147,7 +147,7 @@ These modules and translations stay **awaiting verification** until this change 
 
 ## 2026-10-02 — Streeling MAT-008 to MAT-025, five music modules and fifteen translations published
 
-[Learn PR #114](https://github.com/spareilleux/learn/pull/114) was merged as `48d4e74`, after two journal wordings were corrected in an independent review, and its [Pages deployment](https://github.com/spareilleux/learn/actions/runs/37070579523) succeeded. The pages were then read back anonymously in the three languages, 99 module pages in all, each answering 200, naming its module and linking its source at `e203e5a`:
+[Learn PR #114](https://github.com/spareilleux/learn/pull/114) was merged as `48d4e74`, after two corrections to the Streeling journal asked for in an independent review, and its [Pages deployment](https://github.com/spareilleux/learn/actions/runs/37070579523) succeeded. The pages were then read back anonymously in the three languages, 99 module pages in all, each answering 200, naming its module and linking its source at `e203e5a`:
 - the 23 new modules, [MAT-008 to MAT-025](../streeling/mathematics/) and, in [music](../streeling/music/), MUS-007, MUS-008, MUS-009, MUS-018 and MUS-020, in English, French and Spanish;
 - the French and Spanish pages of the fifteen newly translated modules.
 
