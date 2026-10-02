@@ -169,7 +169,7 @@ public static class Lesson16
     }
 
     // Lesson 3's corpus: GA's voicing generator on the first three frets, as in the index
-    static List<Shape> Corpus()
+    internal static List<Shape> Corpus()
     {
         var fretboard = new Fretboard(Tuning.Default, Lesson3.FretCount);
         return [.. VoicingGenerator.GenerateAllVoicingsAsync(fretboard, Lesson3.WindowSize, Lesson3.MinPlayedNotes, parallel: false)

@@ -65,6 +65,7 @@ Three other courses on this site cover the background, and this one links to the
 | 16 | [The voicings of a chord](16-the-voicings-of-a-chord/) | `ChordVoicingsSkill`, `TypedMusicalQueryExtractor`, `ChordPitchClasses`, `OptickSearchStrategy` and ADR-0002, at the pin and on `main` | a second clone of a dependency at another commit, checking an answer by playing it, a filter on names, a filter dropped without a word in the answer |
 | 17 | [The capo and the tunings](17-the-capo-and-the-tunings/) | `CapoSkill`, `AlternateTuningsSkill` and the offline fallback, at the pin and on `main` | checking arithmetic against a textbook on every key and fret, a word boundary after an accidental, a direction read from the phrasing, spelling as part of the answer |
 | 18 | [Voice leading](18-voice-leading/) | `VoiceLeadingSkill` and the offline fallback | checking a claim of optimality against an exhaustive search, a doubling chosen without a search, a table of symbols behind a narrower expression, a case-insensitive search for a flat |
+| 19 | [Voice-leading pairs](19-voice-leading-pairs/) | `ga_voice_leading_pair` in `GaMcpServer`, its search at the pin and on `main`, and the parked voice-leading skill | a ranking that never checks what it ranks, more candidates that make the answer worse, a sorted matching that is the least only for equal sizes, a string order that one consumer fixed and another passes on |
 | — | [Journal](journal/) | | |
 
 ## Prerequisites

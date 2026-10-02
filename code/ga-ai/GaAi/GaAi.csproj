@@ -20,6 +20,9 @@
   <ItemGroup>
     <!-- Lessons 16 and 17's questions, compiled here and into GaMain -->
     <Compile Include="../Shared/*.cs" />
+    <!-- GaMcpServer's composition tools, for lesson 19; ../Shared/VoicingSearchTool.cs stands in for
+         the class they read their search strategy from -->
+    <Compile Include="$(GaRoot)GaMcpServer/Tools/CompositionTools.cs" />
   </ItemGroup>
 
   <ItemGroup>
