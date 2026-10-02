@@ -63,6 +63,7 @@ Trois autres cours de ce site couvrent les bases, et celui-ci renvoie vers eux a
 | 14 | [Ce que répond le skill de substitution](14-what-the-substitution-skill-answers/) | `ChordSubstitutionSkill`, `ga_chord_substitutions` et `ga_chord_compare`, `GrothendieckService.FindNearby`, `GrothendieckDelta`, la closure `domain.chordSubstitutions` | une distance sous laquelle toute une classe d'ensembles est à égalité, une égalité départagée par l'ordre de stockage, des entrées optionnelles qu'un outil exige |
 | 15 | [Les notes d'un accord](15-the-notes-of-a-chord/) | `ChordInfoSkill`, `ChordVocabulary`, `ChordSpelling`, `ga_chord_info` et le SKILL.md chord-info | la première correspondance d'une expression régulière, `ToLowerInvariant` au-delà de l'ASCII, un aller-retour comme test |
 | 16 | [Les voicings d'un accord](16-the-voicings-of-a-chord/) | `ChordVoicingsSkill`, `TypedMusicalQueryExtractor`, `ChordPitchClasses`, `OptickSearchStrategy` et ADR-0002, au commit épinglé et sur `main` | un second clone d'une dépendance à un autre commit, vérifier une réponse en la jouant, un filtre sur les noms, un filtre abandonné sans un mot dans la réponse |
+| 17 | [Le capodastre et les accordages](17-the-capo-and-the-tunings/) | `CapoSkill`, `AlternateTuningsSkill` et le repli hors ligne, au commit épinglé et sur `main` | vérifier un calcul contre un manuel sur chaque tonalité et chaque case, une limite de mot après une altération, un sens de calcul tiré de la formulation, l'orthographe comme partie de la réponse |
 | — | [Journal](journal/) | | |
 
 ## Prérequis
