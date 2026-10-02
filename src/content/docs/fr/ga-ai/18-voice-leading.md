@@ -316,6 +316,10 @@ how do I voice lead Bb to Eb                   Bb → Eb                Bb → E
 - **Le mouvement minimal est le critère du cours :** toutes les notes des deux accords jouées, autant de voix que le plus grand des deux. Un manuel peut aussi omettre la quinte d'un accord de septième, ce qui demanderait encore moins de mouvement, et il place les voix dans des registres. Le skill et le cours travaillent tous deux sur des classes de hauteurs : un « voicing » n'a donc ici ni octave ni case.
 - **Un autre chemin de GA conduit de vrais voicings.** L'outil MCP `ga_voice_leading_pair` apparie des voicings jouables de l'index OPTIC-K avec « a greedy sorted-pitch matching », « not a formal Hungarian-optimal assignment » ([`CompositionTools.cs` lignes 179-186](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaMcpServer/Tools/CompositionTools.cs#L179-L186)). Le cours ne l'exécute pas.
 
+## Signalé en amont
+
+- Signalés après l'écriture de cette leçon, dans le ticket de GA [#789](https://github.com/GuitarAlchemist/ga/issues/789) : la doublure de la fondamentale et la réponse qui se dit optimale, les chiffrages, les altérations, l'orthographe des notes, les formulations et `CanHandle`.
+
 ## Exercices
 
 1. « voice leading from C to F# » reçoit C → F. Donnez deux façons d'écrire la question pour que le skill conduise C vers F♯ majeur.

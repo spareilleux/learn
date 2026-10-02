@@ -316,6 +316,10 @@ how do I voice lead Bb to Eb                   Bb → Eb                Bb → E
 - **The least motion is the course's test:** every note of both chords sounded, as many voices as the larger chord. A textbook may also drop the fifth of a seventh chord, which would move even less, and it places the voices in registers. The skill and the course both work on pitch classes, so a "voicing" here has no octave and no fret.
 - **Another path in GA moves real voicings.** The MCP tool `ga_voice_leading_pair` pairs playable voicings of the OPTIC-K index with "a greedy sorted-pitch matching", "not a formal Hungarian-optimal assignment" ([`CompositionTools.cs` lines 179-186](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaMcpServer/Tools/CompositionTools.cs#L179-L186)). The course doesn't run it.
 
+## Reported upstream
+
+- Reported after this lesson was written, in GA issue [#789](https://github.com/GuitarAlchemist/ga/issues/789): the root doubling and the claim of an optimal answer, the chord symbols, the accidentals, the spelling of the notes, the phrasings and `CanHandle`.
+
 ## Exercises
 
 1. "voice leading from C to F#" gets C → F. Give two ways to write the question so that the skill moves C to F♯ major.
