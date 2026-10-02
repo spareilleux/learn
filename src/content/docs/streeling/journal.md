@@ -101,6 +101,20 @@ Tick a module once studied. Under **Notes**, add a dated entry: what I understoo
 
 - [ ] [WML-001 · Guitar Around the World](../world-music-languages/wml-001-guitar-around-the-world/) <!-- wml-001-guitar-around-the-world -->
 
+## QA
+
+| Expected | What happens | Where | Measurement | Status |
+|---|---|---|---|---|
+| A least-squares fit of a full-rank design returns the fit, or an error | IX's `LinearRegression::fit` returns a wrong line without any error at c = 10^6, for y = 2x + 1 on x = c + (0, 1, 2), and panics at c = 10^7 | [`linear_regression.rs:68`](https://github.com/GuitarAlchemist/ix/blob/e35138b9d4c707d48f802649a7fcb3f7fc94934d/crates/ix-supervised/src/linear_regression.rs#L68), [`linalg.rs:110`](https://github.com/GuitarAlchemist/ix/blob/e35138b9d4c707d48f802649a7fcb3f7fc94934d/crates/ix-math/src/linalg.rs#L110) at `e35138b9` | At c = 10^6: slope 2 + 2^-11, bias 0, largest miss 487.3. At c = 10^7: the panic `X^T X is singular: Singular`. Centering the feature gives the exact answer at every c | Reproduced in the [MAT-007 lab](#2026-09-28--mat-007--the-lab-steps-1-and-2) (Windows 11 x86-64); not reported to IX |
+
+## Experiments
+
+| Question | Hypothesis, written before measuring | Result | Verdict | Links |
+|---|---|---|---|---|
+| Where does IX's normal-equation fit fail on offset data x = c + (0, 1, 2)? | MAT-007 §6: slope within 10^-9 of 2 up to c = 10^3; slope 2 − 2^-18 and bias 1.5 at 10^5; slope 2 + 2^-11 and bias 0 at 10^6; a panic at 10^7 | All four, bit for bit where the value is exact; largest miss 487.3 at 10^6 | Confirmed | [entry](#2026-09-28--mat-007--the-lab-steps-1-and-2), [code](https://github.com/spareilleux/learn/tree/41f70224075dcfc3d6155485672eff102c22d547/code/streeling-mathematics) |
+| Does centering the feature fix it? | Slope exactly 2 and bias 2c + 3 within a relative 10^-15, at every c | Exact at every c up to 10^7 | Confirmed | [entry](#2026-09-28--mat-007--the-lab-steps-1-and-2), [code](https://github.com/spareilleux/learn/tree/41f70224075dcfc3d6155485672eff102c22d547/code/streeling-mathematics) |
+| How much do the normal equations lose against the SVD on a nearly collinear design? | Error below 10^-9 up to N = 10^3, about 3 × 10^-5 at 10^5, about 0.25 at 10^7 with no error raised; SVD route below 10^-7 | At most 3.3 × 10^-10, then 3.05 × 10^-5 and 0.250; SVD route at most 1.5 × 10^-8 | Confirmed | [entry](#2026-09-28--mat-007--the-lab-steps-1-and-2), [code](https://github.com/spareilleux/learn/tree/41f70224075dcfc3d6155485672eff102c22d547/code/streeling-mathematics) |
+
 ## Notes
 
 <!-- ## YYYY-MM-DD — CODE · Title -->
@@ -169,3 +183,12 @@ Nothing in it was run here.
 
 - **The experiment in its section 6 is only proposed.** It would run in a Learn lab, with predictions written before any run: an offset sweep from c = 1 to 10^7; the normal equations against the SVD route; the MCP server after a panic, in a disposable process only; and the input schema's `"X"` key against the `"x"` the handler reads. No such lab exists yet, and nothing in the module is a measurement.
 - **It has not been studied here,** so its checkbox above stays empty.
+
+## 2026-09-28 — MAT-007 · The lab, steps 1 and 2
+
+The Learn lab [`code/streeling-mathematics`](https://github.com/spareilleux/learn/tree/41f70224075dcfc3d6155485672eff102c22d547/code/streeling-mathematics) ran steps 1 and 2 of the experiment in MAT-007's section 6, against IX `ix-supervised` and `ix-math` pinned at `e35138b9`. The predictions are the module's own. They are quoted in a [pre-registration](https://github.com/spareilleux/learn/blob/d269063dc904d2e2c5d1e74e2e2334cc8a2b5a34/code/streeling-mathematics/preregistration-mat007.md), committed on its own before any code of the lab existed, which also set the margins for the module's approximate values before the run. The measurements were made on Windows 11 x86-64; hosted CI [reproduced the printed output](https://github.com/spareilleux/learn/actions/runs/36475256549) on Linux, Windows and macOS.
+
+- **All nine predictions held on the first run** (tables above), the exact ones bit for bit. At c = 10^6, IX's `fit` returns the slope 2 + 2^-11 and the bias 0 with no error, and misses the data by up to 487.3; at c = 10^7, it panics.
+- **Measured without a prediction, and only reported:** at c = 10^4, the slope is 2 + 2^-24 and the bias 1 − 2^-11. At N = 10^2, the SVD route's error, 1.29 × 10^-10, is larger than the normal equations' error, 2.05 × 10^-11. The cause is not established.
+- **Not run:** steps 3 and 4, the MCP server after a panic and the input schema. They need `ix-agent` and a disposable `ix-mcp` process, and they stay proposed.
+- **The module at `8c14336` says its experiment has not been run.** Reporting these results in it is for its Demerzel source. Its checkbox above stays empty: running the lab is not studying the module.

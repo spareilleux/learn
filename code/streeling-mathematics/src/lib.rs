@@ -3,6 +3,10 @@
 //! MAT-003, floating-point arithmetic and conditioning: Hilbert matrices H_n[i][j] = 1/(i+j-1) are
 //! inverted by `ix_math::linalg::inverse` and pseudo-inverted through `ix_math::svd`, and every result
 //! is judged against the exact inverse, computed here in integers without IX.
+//!
+//! MAT-007, least squares: the module `mat007`.
+
+pub mod mat007;
 
 use ix_math::error::MathError;
 use ix_math::linalg::inverse;
@@ -204,4 +208,23 @@ pub fn raw_values(m: &Measurement) -> Vec<f64> {
     v.extend(m.pinv_mcp.iter());
     v.push(m.pinv0_forward_error);
     v
+}
+
+/// The larger of `a` and `b`, or NaN when either is NaN. `f64::max` returns the other operand when one is
+/// NaN, so a check that folds its errors with it would pass on a NaN result.
+pub fn max_or_nan(a: f64, b: f64) -> f64 {
+    if a.is_nan() || b.is_nan() {
+        f64::NAN
+    } else {
+        a.max(b)
+    }
+}
+
+/// The smaller of `a` and `b`, or NaN when either is NaN, for the same reason as `max_or_nan`.
+pub fn min_or_nan(a: f64, b: f64) -> f64 {
+    if a.is_nan() || b.is_nan() {
+        f64::NAN
+    } else {
+        a.min(b)
+    }
 }
