@@ -667,6 +667,13 @@ public static partial class Lesson12
             Line($"  {Join(chord)}");
         }
 
+        Title("Who reads the file: GA's YamlKnowledgeLoader (GA.Business.Config, compiled), which flattens every content YAML");
+        var entries = GA.Business.Config.YamlKnowledgeLoader.LoadAllKnowledgeEntries().Where(e => e.SourceFile == "ModalInterchange").ToList();
+        Line($"  {entries.Count} entries from ModalInterchange.yaml:");
+        foreach (var entry in entries) Line($"    {entry.Name}");
+        foreach (var claim in new[] { "InKeyOfAm: F major", "InKeyOfAm: Bb diminished", "bVI+", "iv+" })
+            Line($"  \"{claim}\" in their text: {(entries.Any(e => e.Content.Contains(claim)) ? "yes" : "no")}");
+
         Title("Exercise solutions");
         Columns("question", 22, 24);
         Row("1. Dm in F major", Ranked(CourseSubstitutes("Dm", "F", false)), Ranked(GaSubstitutions("Dm", "F").Subs));
