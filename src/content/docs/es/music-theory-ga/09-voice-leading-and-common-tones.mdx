@@ -79,7 +79,7 @@ ga_common_tones C6 Am7     Common tones (3): C (P1 in C6, m3 in Am7), E (M3 in C
 ga_common_tones C9 Gm7     Common tones (2): G (P5 in C9, P1 in Gm7), D (M9 in C9, P5 in Gm7)
 ```
 
-Las dos primeras son correctas. Cada una de las otras cinco pierde una nota: F, la ♭5 de Bm7♭5, una alteración; B, porque «maj9» solo añade la novena; A, porque el «7» de Cdim7 es una séptima menor y el acorde sale C E♭ G♭ B♭; A otra vez, porque «6» no está en la tabla; B♭, porque «9» no trae su séptima. El analizador de GA lee bien estos acordes: `ga_parse_chord("Bm7b5")` responde `"components":["ext:7","alt:b5"]`. Las notas se pierden después. La misma tabla dio a `ga_chord_to_set` sus grafías erróneas, un hallazgo de la [tabla QA del diario](../journal/#qa), y [GA #681](https://github.com/GuitarAlchemist/ga/pull/681), fusionada el 2026-09-23, sustituyó la tabla por una función que apila el acorde por terceras, sobrentiende la séptima bajo 9, 11 y 13 y aplica las alteraciones ([`chordTones`](https://github.com/GuitarAlchemist/ga/blob/5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26/Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs#L125-L129) en la rama `main` de GA, `5c3a52a`). `domain.commonTones` también toma sus notas y sus papeles de esa función ([`#L446-L450`](https://github.com/GuitarAlchemist/ga/blob/5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26/Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs#L446-L450), [`#L580-L620`](https://github.com/GuitarAlchemist/ga/blob/5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26/Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs#L580-L620)). Esto está leído en el código, no ejecutado: el servidor que respondió arriba era anterior a la corrección.
+Las dos primeras son correctas. Cada una de las otras cinco pierde una nota: F, la ♭5 de Bm7♭5, una alteración; B, porque «maj9» solo añade la novena; A, porque el «7» de Cdim7 es una séptima menor y el acorde sale C E♭ G♭ B♭; A otra vez, porque «6» no está en la tabla; B♭, porque «9» no trae su séptima. El analizador de GA lee bien estos acordes: `ga_parse_chord("Bm7b5")` responde `"components":["ext:7","alt:b5"]`. Las notas se pierden después. La misma tabla dio a `ga_chord_to_set` sus grafías erróneas, un hallazgo de la [tabla QA del diario](../journal/#qa), y [GA #681](https://github.com/GuitarAlchemist/ga/pull/681), fusionada el 2026-09-23, sustituyó la tabla por una función que apila el acorde por terceras, sobrentiende la séptima bajo 9, 11 y 13 y aplica las alteraciones ([`chordTones`](https://github.com/GuitarAlchemist/ga/blob/5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26/Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs#L125-L185) en la rama `main` de GA, `5c3a52a`). `domain.commonTones` también toma sus notas y sus papeles de esa función ([`#L446-L450`](https://github.com/GuitarAlchemist/ga/blob/5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26/Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs#L446-L450), [`#L580-L620`](https://github.com/GuitarAlchemist/ga/blob/5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26/Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs#L580-L620)). Esto está leído en el código, no ejecutado: el servidor que respondió arriba era anterior a la corrección.
 
 ## La conducción de voces más pequeña
 
@@ -121,7 +121,7 @@ Fmaj7 Bm7b5    3      3      ok
   course: F->F 0, A->A 0, C->B -1, E->D -2
 ```
 
-De C a A menor, una voz se mueve un tono. C y D menor no comparten nada, así que todas las voces se mueven. De C a F♯, a un tritono, cuesta seis semitonos, y sin embargo ninguna voz se mueve más de tres. Cada cambio del ii–V–I mueve dos voces por grado conjunto y mantiene las otras dos: otra vez las notas guía. G7 a C tiene cuatro voces para tres notas, así que dos de ellas se juntan en C: B sube, D baja.
+De C a A menor, una voz se mueve un tono. C y D menor no comparten nada, así que todas las voces se mueven. De C a F♯, a un tritono, cuesta seis semitonos, y sin embargo ninguna voz se mueve más de tres. Cada cambio del ii–V–I mueve dos voces por grado conjunto y mantiene las otras dos; de las notas guía, la tercera se queda para ser la séptima siguiente, y la séptima baja un semitono hasta la tercera siguiente. G7 a C tiene cuatro voces para tres notas, así que dos de ellas se juntan en C: B sube, D baja.
 
 ### En GA: la habilidad del chatbot
 
@@ -207,7 +207,7 @@ G7 -> C open       5ths -; 8ves 5-2               5ths -; 8ves 5-2              
 Am -> Dm open      5ths -; 8ves -                 5ths -; 8ves -                 ok
 ```
 
-Coinciden en cada par. El acorde con cejilla contiene tres quintas y cuatro octavas, y las siete se mueven juntas. Los dos cambios de acordes abiertos esconden cada uno un par de octavas paralelas, en las cuerdas 5 y 2. En el G7 abierto de abajo, B2 y B3 son la misma nota, la sensible, duplicada: las dos suben a C, C3 y C4. Un manual de armonía no duplicaría la sensible por esa razón; la forma abierta lo hace.
+Coinciden en cada par. El acorde con cejilla contiene tres quintas y cuatro octavas, y las siete se mueven juntas. Dos de los tres cambios de acordes abiertos, C → G y G7 → C, esconden cada uno un par de octavas paralelas, en las cuerdas 5 y 2. En el G7 abierto de abajo, B2 y B3 son la misma nota, la sensible, duplicada: las dos suben a C, C3 y C4. Un manual de armonía no duplicaría la sensible por esa razón; la forma abierta lo hace.
 
 <GridsG7C role="img" aria-label="Dos diagramas de acorde. G7, 320001: G2 B2 D3 G3 B3 F4. C, x32010: C3 E3 G3 C4 E4." />
 
@@ -251,7 +251,7 @@ sets           ordered pairs  GA differs from the course
 4 notes, OPT   245025         0
 ```
 
-Sin equivalencia de octava es incorrecto. La transposición prueba entonces solo desplazamientos de 0 a 11 semitonos, hacia arriba ([`#L46-L61`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Atonal/VoiceLeadingSpace.cs#L46-L61)), de modo que el segundo acorde nunca puede bajar al encuentro del primero:
+Sin equivalencia de octava, es la transposición la que falla: prueba solo desplazamientos de 0 a 11 semitonos, hacia arriba ([`#L46-L61`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Atonal/VoiceLeadingSpace.cs#L46-L61)), de modo que el segundo acorde nunca puede bajar al encuentro del primero:
 
 ```text
 == Without octave equivalence, with transposition: GA only shifts upward, by 0 to 11 semitones
@@ -315,7 +315,7 @@ question             course       GA           check
 - El tamaño de una conducción de voces es la suma de los semitonos que recorre cada voz, por el camino más corto. Entre acordes de tamaños distintos, importa qué nota se duplica: duplicar siempre la fundamental se aleja del mínimo en el 43,8 % de los pares tríada–séptima.
 - Con voicings reales, las octavas cuentan. Emparejar las notas en orden es óptimo cuando los dos voicings tienen las mismas notas en número; la herramienta MCP de GA empareja desde abajo cuando no es así, y cobra demasiado por un bajo quitado o añadido.
 - El analizador de quintas paralelas de GA sigue la regla de los manuales, cuerda por cuerda. Las formas con cejilla y los power chords rompen la regla por construcción, y el rock no les pide que la sigan.
-- El atajo de `VoiceLeadingSpace` es correcto con equivalencia de octava e incorrecto sin ella; `SetClassOpticIndex` deja que varias voces compartan una nota, así que su distancia cambia con el orden. El núcleo de GA encuentra bien las notas comunes; la closure de F# detrás de `ga_common_tones` perdía notas en el commit `a826864`.
+- El atajo de `VoiceLeadingSpace` es correcto, pero sin equivalencia de octava su transposición solo desplaza hacia arriba, así que la distancia cambia con el orden; `SetClassOpticIndex` deja que varias voces compartan una nota, así que su distancia cambia con el orden. El núcleo de GA encuentra bien las notas comunes; la closure de F# detrás de `ga_common_tones` perdía notas en el commit `a826864`.
 
 ## Fuentes
 
