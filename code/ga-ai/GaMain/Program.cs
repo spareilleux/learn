@@ -2,6 +2,7 @@
 namespace GaAi;
 
 using FretboardVoicingsCLI;
+using GaMcpServer.Tools;
 using GA.Business.ML.Agents.Skills;
 using GA.Business.ML.Embeddings;
 using GA.Business.ML.Embeddings.Services;
@@ -28,10 +29,27 @@ public static class Entry
             case ["l17"]:
                 Lesson17();
                 return 0;
+            case ["l19"]:
+                Lesson19();
+                return 0;
             default:
-                Console.Error.WriteLine("usage: GaMain l16|l17");
+                Console.Error.WriteLine("usage: GaMain l16|l17|l19");
                 return 2;
         }
+    }
+
+    // Lesson 19: GaMcpServer's ga_voice_leading_pair is the same on main, but the search it calls
+    // changed; the same questions, against lesson 3's index built with main's code
+    static void Lesson19()
+    {
+        Console.WriteLine("# l19, GA's main");
+        var indexPath = Path.Combine(AppContext.BaseDirectory, "out", "optick-mini-main.index");
+        var corpus = WriteIndex(indexPath, print: false);
+        VoicingSearchTool.IndexPath = indexPath;
+        VoiceLeadingPairProbe.CandidatesTable(corpus, "on main");
+        VoiceLeadingPairProbe.PairsTable(corpus, "on main");
+        VoiceLeadingPairProbe.MoreCandidates("on main");
+        VoiceLeadingPairProbe.DistanceCheck("on main");
     }
 
     // Lesson 17: on main, AlternateTuningsSkill's name patterns reject a sharp or flat after the
@@ -67,7 +85,7 @@ public static class Entry
             NullLogger<LlmMusicalQueryExtractor>.Instance));
 
     // Lesson 3's corpus and index, built with main's generator, analysis, embedding and writer
-    static List<Shape> WriteIndex(string path)
+    static List<Shape> WriteIndex(string path, bool print = true)
     {
         var fretboard = new Fretboard(Tuning.Default, 3);
         var voicings = VoicingGenerator.GenerateAllVoicingsAsync(fretboard, 3, 3, parallel: false).ToBlockingEnumerable().ToList();
@@ -85,6 +103,7 @@ public static class Entry
             writer.WriteIndex(entries);
         }
 
+        if (!print) return [.. voicings.Select(v => Shape.FromHighFirst(v.Diagram))];
         Report.Title("Corpus on main: GA's VoicingGenerator, standard tuning, 3 frets, window 3, at least 3 notes");
         Report.Line($"voicings                 {entries.Count}");
         Report.Line("the names main's analysis gives the voicings of five chords, with their counts:");
