@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **MAT-024** · Sistemas dinámicos, estabilidad y realimentación · intermedio · 60 minutes
 
-Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/e203e5a25e10b85b8d22ece9a700e12447f4a236/state/streeling/courses/mathematics/es/mat-024-dynamical-systems-stability-feedback.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/d459d8e5f0210cbad00f49c49196fc61160aba76/state/streeling/courses/mathematics/es/mat-024-dynamical-systems-stability-feedback.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MAT-005](../../mathematics/mat-005-symmetric-eigenproblems/), [MAT-006](../../mathematics/mat-006-svd-low-rank-approximation/)
 :::

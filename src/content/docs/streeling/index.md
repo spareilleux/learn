@@ -42,5 +42,5 @@ These modules were written by AI departments and have **not been reviewed**. Unl
 
 ## Provenance
 
-- Source: [`GuitarAlchemist/Demerzel` → `state/streeling/courses`](https://github.com/GuitarAlchemist/Demerzel/tree/e203e5a25e10b85b8d22ece9a700e12447f4a236/state/streeling/courses) at commit `e203e5a` (2026-10-02), MIT license.
+- Source: [`GuitarAlchemist/Demerzel` → `state/streeling/courses`](https://github.com/GuitarAlchemist/Demerzel/tree/d459d8e5f0210cbad00f49c49196fc61160aba76/state/streeling/courses) at commit `d459d8e` (2026-10-02), MIT license.
 - Imported with `npm run sync:streeling`; do not edit these pages by hand — only `journal.md` is kept between syncs.
