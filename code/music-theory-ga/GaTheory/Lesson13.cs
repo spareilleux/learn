@@ -19,14 +19,14 @@ public static class Lesson13
 {
     // ---- The course's side: a scale is a step pattern, its modes are the rotations of the pattern
 
-    static readonly int[] MelodicMinorSteps = [2, 1, 2, 2, 2, 2, 1];
-    static readonly int[] HarmonicMajorSteps = [2, 2, 1, 2, 1, 3, 1];
+    internal static readonly int[] MelodicMinorSteps = [2, 1, 2, 2, 2, 2, 1];
+    internal static readonly int[] HarmonicMajorSteps = [2, 2, 1, 2, 1, 3, 1];
 
     // The textbook names: Wikipedia, "Jazz scale", "Harmonic minor scale" and "Harmonic major scale"
-    static readonly string[] MajorNames = ["Ionian", "Dorian", "Phrygian", "Lydian", "Mixolydian", "Aeolian", "Locrian"];
-    static readonly string[] MelodicMinorNames = ["melodic minor", "Dorian ♭2", "Lydian augmented", "Lydian dominant", "Mixolydian ♭6", "Locrian ♮2", "altered"];
-    static readonly string[] HarmonicMinorNames = ["harmonic minor", "Locrian ♮6", "Ionian ♯5", "Dorian ♯4", "Phrygian dominant", "Lydian ♯2", "altered ♭♭7"];
-    static readonly string[] HarmonicMajorNames = ["harmonic major", "Dorian ♭5", "Phrygian ♭4", "Lydian ♭3", "Mixolydian ♭2", "Lydian augmented ♯2", "Locrian ♭♭7"];
+    internal static readonly string[] MajorNames = ["Ionian", "Dorian", "Phrygian", "Lydian", "Mixolydian", "Aeolian", "Locrian"];
+    internal static readonly string[] MelodicMinorNames = ["melodic minor", "Dorian ♭2", "Lydian augmented", "Lydian dominant", "Mixolydian ♭6", "Locrian ♮2", "altered"];
+    internal static readonly string[] HarmonicMinorNames = ["harmonic minor", "Locrian ♮6", "Ionian ♯5", "Dorian ♯4", "Phrygian dominant", "Lydian ♯2", "altered ♭♭7"];
+    internal static readonly string[] HarmonicMajorNames = ["harmonic major", "Dorian ♭5", "Phrygian ♭4", "Lydian ♭3", "Mixolydian ♭2", "Lydian augmented ♯2", "Locrian ♭♭7"];
 
     static int[] Rotate(int[] steps, int k) => [.. Enumerable.Range(0, steps.Length).Select(i => steps[(k + i) % steps.Length])];
 

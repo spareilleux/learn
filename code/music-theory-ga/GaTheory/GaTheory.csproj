@@ -35,6 +35,10 @@
     <Compile Include="$(GaRoot)Common/GA.Domain.Services/Unified/UnifiedModeService.cs" Link="Ga/UnifiedModeService.cs" />
     <!-- Lesson 12 compiles the atonal chord analysis, as it is, to call its private symmetry test -->
     <Compile Include="$(GaRoot)Common/GA.Domain.Services/Chords/Analysis/Atonal/AtonalChordAnalysisService.cs" Link="Ga/AtonalChordAnalysisService.cs" />
+    <!-- Lesson 13 compiles GA's second chord-symbol parser and the services that name extensions and alterations, as they are -->
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Chords/Parsing/ChordSymbolParser.cs" Link="Ga/ChordSymbolParser.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Chords/BasicChordExtensionsService.cs" Link="Ga/BasicChordExtensionsService.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Chords/ChordAlterationService.cs" Link="Ga/ChordAlterationService.cs" />
   </ItemGroup>
 
 </Project>
