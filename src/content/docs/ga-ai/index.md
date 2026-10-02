@@ -66,6 +66,7 @@ Three other courses on this site cover the background, and this one links to the
 | 17 | [The capo and the tunings](17-the-capo-and-the-tunings/) | `CapoSkill`, `AlternateTuningsSkill` and the offline fallback, at the pin and on `main` | checking arithmetic against a textbook on every key and fret, a word boundary after an accidental, a direction read from the phrasing, spelling as part of the answer |
 | 18 | [Voice leading](18-voice-leading/) | `VoiceLeadingSkill` and the offline fallback | checking a claim of optimality against an exhaustive search, a doubling chosen without a search, a table of symbols behind a narrower expression, a case-insensitive search for a flat |
 | 19 | [Voice-leading pairs](19-voice-leading-pairs/) | `ga_voice_leading_pair` in `GaMcpServer`, its search at the pin and on `main`, and the parked voice-leading skill | a ranking that never checks what it ranks, more candidates that make the answer worse, a sorted matching that is the least only for equal sizes, a string order that one consumer fixed and another passes on |
+| 20 | [Generated progressions](20-generated-progressions/) | `ga_generate_progression` in `GaMcpServer`, GA's twelve-key tables, the stitching with `ga_voice_leading_pair` at the pin and on `main`, and the parked progression skill | spelling from a key signature rather than a name, two sources that agree on a wrong chord, a parameter without a limit, answers for single moves that don't make a path |
 | — | [Journal](journal/) | | |
 
 ## Prerequisites

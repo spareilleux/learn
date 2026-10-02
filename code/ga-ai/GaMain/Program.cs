@@ -32,10 +32,24 @@ public static class Entry
             case ["l19"]:
                 Lesson19();
                 return 0;
+            case ["l20"]:
+                Lesson20();
+                return 0;
             default:
-                Console.Error.WriteLine("usage: GaMain l16|l17|l19");
+                Console.Error.WriteLine("usage: GaMain l16|l17|l19|l20");
                 return 2;
         }
+    }
+
+    // Lesson 20: ga_generate_progression and the parser it calls are the same on main; only the
+    // stitching with ga_voice_leading_pair depends on main's search
+    static void Lesson20()
+    {
+        Console.WriteLine("# l20, GA's main");
+        var indexPath = Path.Combine(AppContext.BaseDirectory, "out", "optick-mini-main.index");
+        WriteIndex(indexPath, print: false);
+        VoicingSearchTool.IndexPath = indexPath;
+        ProgressionProbe.StitchTable("on main");
     }
 
     // Lesson 19: GaMcpServer's ga_voice_leading_pair is the same on main, but the search it calls
