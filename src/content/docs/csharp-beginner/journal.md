@@ -17,7 +17,7 @@ sidebar:
 - [x] Lesson 6: records, structs and enums
 - [x] Lesson 7: interfaces and inheritance
 - [x] Lesson 8: exceptions and null safety
-- [x] Lesson 9: collections and LINQ (local; cross-OS CI still to verify)
+- [x] Lesson 9: collections and LINQ
 
 ## QA
 
@@ -110,6 +110,7 @@ sidebar:
 - Lesson 9 covers `Dictionary<TKey, TValue>`: the indexer, `Add`, `TryGetValue`, counting with `GetValueOrDefault`, and the order of a `foreach`. It covers `HashSet<T>`, with its set operations on copies and `SetEquals`. It introduces lambdas, then LINQ on lesson 4's GA projects, now records: `Count`, `Where`, `Select`, `OrderBy`, `ThenBy`, `First`, `FirstOrDefault`, `Any`, `All`, `Take` and `ToList`. It ends with deferred execution, and with changing a collection inside its own `foreach`. It has ten examples, four exercises and four rejected snippets: CS1503, CS0021, CS0266, and CS0029 with CS1662 on the same column. The block checker matched the 37 code blocks of each locale with `code/csharp-beginner` and `expected/`.
 - Lesson 4 said that lesson 5 would replace its two arrays of projects with one list; lesson 5 didn't. Lesson 9 does, and lesson 4 now points to it.
 - On Windows, SDK 10.0.112, under Git Bash, `check.sh` exited 0 with 120 `ok` lines, the 18 `l09_*` files included. This is not yet a three-OS CI run.
+- Then in CI: [run 37061776660](https://github.com/spareilleux/learn/actions/runs/37061776660) of the *C# for beginners examples* workflow, on commit `690201d` of [PR #113](https://github.com/spareilleux/learn/pull/113), passed on `ubuntu-latest`, `windows-latest` and `macos-latest`. Each job prints `ok` for the 18 `l09_*` files; the jobs count 121 `ok` lines on Linux and macOS and 120 on Windows, for the same reason as in lesson 6.
 - Measured before writing:
   - C# 14 has no dictionary expression. `Dictionary<string, int> d = ["C": 0, "E": 4];` gives CS1003 and eight other syntax errors, so the lesson uses an index initializer, `{ ["C"] = 0 }`.
   - `First` with no match throws `Sequence contains no matching element`. This probe stayed out of the course code.
@@ -124,7 +125,6 @@ sidebar:
 
 ## To verify
 
-- Lesson 9's examples and diagnostics in CI on Linux, Windows and macOS, after a PR is opened.
 - How many artists GA would count once its three YAML files load. A PyYAML script over the raw files, outside the course code, estimates 63. By the same estimate, `Take(20)` would leave out 8 artists that have more entries than the smallest count kept, The Beatles (3 entries) among them.
 - The installation commands for Linux and macOS: only the CI's `setup-dotnet` ran on those OSes.
 - The debugger walkthrough of lesson 3 in VS Code, Visual Studio and Rider, for a file-based app and for a project. VS Code 1.118 and Rider are installed on my machine; Visual Studio isn't.

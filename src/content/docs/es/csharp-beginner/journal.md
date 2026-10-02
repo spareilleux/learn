@@ -17,7 +17,7 @@ sidebar:
 - [x] Lección 6: records, structs y enums
 - [x] Lección 7: interfaces y herencia
 - [x] Lección 8: excepciones y seguridad frente a null
-- [x] Lección 9: colecciones y LINQ (en local; CI en tres sistemas por verificar)
+- [x] Lección 9: colecciones y LINQ
 
 ## QA
 
@@ -110,6 +110,7 @@ sidebar:
 - La lección 9 cubre `Dictionary<TKey, TValue>`: el indexador, `Add`, `TryGetValue`, contar con `GetValueOrDefault` y el orden de un `foreach`. Cubre `HashSet<T>`, con sus operaciones de conjunto sobre copias y `SetEquals`. Presenta las lambdas y luego LINQ sobre los proyectos de GA de la lección 4, ahora records: `Count`, `Where`, `Select`, `OrderBy`, `ThenBy`, `First`, `FirstOrDefault`, `Any`, `All`, `Take` y `ToList`. Termina con la ejecución diferida y con la modificación de una colección dentro de su propio `foreach`. Tiene diez ejemplos, cuatro ejercicios y cuatro fragmentos rechazados: CS1503, CS0021, CS0266, y CS0029 con CS1662 en la misma columna. El comprobador de bloques hizo corresponder los 37 bloques de código de cada idioma con `code/csharp-beginner` y `expected/`.
 - La lección 4 anunciaba que la lección 5 sustituiría sus dos arrays de proyectos por una sola lista; la lección 5 no lo hizo. La lección 9 lo hace, y la lección 4 remite ahora a ella.
 - En Windows, con el SDK 10.0.112 y Git Bash, `check.sh` terminó con código 0 y 120 líneas `ok`, incluidos los 18 archivos `l09_*`. Todavía no es una ejecución de la CI en tres sistemas.
+- Después, en la CI: la [ejecución 37061776660](https://github.com/spareilleux/learn/actions/runs/37061776660) del workflow *C# for beginners examples*, sobre el commit `690201d` de la [PR #113](https://github.com/spareilleux/learn/pull/113), pasó en `ubuntu-latest`, `windows-latest` y `macos-latest`. Cada job imprime `ok` para los 18 archivos `l09_*`; los jobs cuentan 121 líneas `ok` en Linux y macOS y 120 en Windows, por la misma razón que en la lección 6.
 - Medido antes de escribir:
   - C# 14 no tiene expresiones de diccionario. `Dictionary<string, int> d = ["C": 0, "E": 4];` da CS1003 y otros ocho errores de sintaxis, así que la lección usa un inicializador de índice, `{ ["C"] = 0 }`.
   - `First` sin coincidencia lanza `Sequence contains no matching element`. Esta sonda quedó fuera del código del curso.
@@ -124,7 +125,6 @@ sidebar:
 
 ## Por verificar
 
-- Los ejemplos y diagnósticos de la lección 9 en la CI de Linux, Windows y macOS, tras abrir una PR.
 - Cuántos artistas contaría GA una vez cargados sus tres archivos YAML. Un script de PyYAML sobre los archivos en bruto, fuera del código del curso, estima 63. Según la misma estimación, `Take(20)` dejaría fuera a 8 artistas con más entradas que el menor número conservado, entre ellos The Beatles (3 entradas).
 - Los comandos de instalación para Linux y macOS: en esos sistemas operativos solo se ejecutó el `setup-dotnet` de la CI.
 - El recorrido del depurador de la lección 3 en VS Code, Visual Studio y Rider, para una aplicación basada en archivos y para un proyecto. VS Code 1.118 y Rider están instalados en mi máquina; Visual Studio no.
