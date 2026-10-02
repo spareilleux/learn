@@ -259,7 +259,7 @@ public static class Lesson13
         }
 
         Title("ModesConfig.TryGetModeByIntervalClassVector, the \"Scale:\" line of ga_chord_to_set, with the vectors GA computes");
-        Line("course: the entry of Modes.yaml whose notes are the set; GA: what the lookup returns");
+        Line("course: the Modes.yaml entry that names the scale or chord (written on C); GA: what the lookup returns");
         Columns("set", 18, 26);
         (string Label, string Notes, string Entry)[] lookups =
         [
