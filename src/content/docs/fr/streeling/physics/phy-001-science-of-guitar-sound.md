@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **PHY-001** · Acoustique et physique des ondes · débutant · 25 minutes
 
-Généré par le département *Physique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/e203e5a25e10b85b8d22ece9a700e12447f4a236/state/streeling/courses/physics/fr/phy-001-science-of-guitar-sound.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Physique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/d459d8e5f0210cbad00f49c49196fc61160aba76/state/streeling/courses/physics/fr/phy-001-science-of-guitar-sound.fr.md) · [Mon journal](../../journal/)
 :::
 
 > **Département de physique** | Stade : Nigredo (Débutant) | Durée : 25 minutes
@@ -128,7 +128,7 @@ Le tempérament égal ajuste légèrement ces rapports pour que toutes les tonal
 
 ### Exercice pratique
 
-Mesurez la distance du sillet à la 12e frette sur votre guitare, puis mesurez de la 12e frette au chevalet. Elles devraient être presque exactement égales — confirmant que la 12e frette divise la longueur de la corde par deux, doublant la fréquence (une octave). Maintenant mesurez du sillet à la frette 7 : cela devrait représenter environ 2/3 de la longueur totale de la corde, correspondant au rapport 3:2 d'une quinte juste.
+Mesurez la distance du sillet à la 12e frette sur votre guitare, puis mesurez de la 12e frette au chevalet. Elles devraient être presque exactement égales — confirmant que la 12e frette divise la longueur de la corde par deux, doublant la fréquence (une octave). Maintenant mesurez de la frette 7 au chevalet : cela devrait représenter environ 2/3 de la longueur totale de la corde (la distance du sillet à la frette 7 en est le tiers restant), correspondant au rapport 3:2 d'une quinte juste.
 
 ---
 

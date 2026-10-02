@@ -145,6 +145,34 @@ Demerzel's `master` reached [`e203e5a`](https://github.com/GuitarAlchemist/Demer
 
 These modules and translations stay **awaiting verification** until this change is merged, its deployment succeeds and the pages are read back anonymously.
 
+## 2026-10-02 — Streeling MAT-008 to MAT-025, five music modules and fifteen translations published
+
+[Learn PR #114](https://github.com/spareilleux/learn/pull/114) was merged as `48d4e74`, after two corrections to the Streeling journal asked for in an independent review, and its [Pages deployment](https://github.com/spareilleux/learn/actions/runs/37070579523) succeeded. The pages were then read back anonymously in the three languages, 99 module pages in all, each answering 200, naming its module and linking its source at `e203e5a`:
+- the 23 new modules, [MAT-008 to MAT-025](../streeling/mathematics/) and, in [music](../streeling/music/), MUS-007, MUS-008, MUS-009, MUS-018 and MUS-020, in English, French and Spanish;
+- the French and Spanish pages of the fifteen newly translated modules.
+
+The mathematics and music indexes, the [Streeling journal](../streeling/journal/) and this journal answered 200 as well. These modules and translations therefore move from awaiting verification to verified; their entry above is left as written. This update repins their source links to `d459d8e`. Published is not studied: none of them has been run or studied here, and their experiments remain proposed.
+
+## 2026-10-02 — Music theory lessons 9 to 14 published
+
+Each lesson was merged after its CI passed and an independent review of its final head found nothing left open:
+- [Lesson 9](../music-theory-ga/09-voice-leading-and-common-tones/): [PR #90](https://github.com/spareilleux/learn/pull/90), merged as `c547150`;
+- [Lesson 10](../music-theory-ga/10-substitutions-and-modal-mixture/): [PR #99](https://github.com/spareilleux/learn/pull/99), merged as `9722af8`;
+- [Lesson 11](../music-theory-ga/11-modes-in-depth/): [PR #100](https://github.com/spareilleux/learn/pull/100), merged as `c0abd0e`;
+- [Lesson 12](../music-theory-ga/12-symmetry-and-limited-transposition/): [PR #104](https://github.com/spareilleux/learn/pull/104), merged as `641df75`;
+- [Lesson 13](../music-theory-ga/13-extended-and-altered-chords/): [PR #108](https://github.com/spareilleux/learn/pull/108), merged as `e2ce788`;
+- [Lesson 14](../music-theory-ga/14-guitar-voicings/): [PR #111](https://github.com/spareilleux/learn/pull/111), merged as `1364ba4`.
+
+The [Pages deployment](https://github.com/spareilleux/learn/actions/runs/37070289373) of `1364ba4` succeeded, and so did the later one for #114. All six lessons answered 200 anonymously in the three languages, 18 pages in all.
+
+## 2026-10-02 — Streeling PHY-001 correction synced, awaiting verification
+
+[Demerzel PR #1179](https://github.com/GuitarAlchemist/Demerzel/pull/1179) was merged as `d459d8e`, after the `e203e5a` pin. This update syncs it into Learn:
+- the corrected exercise of the [PHY-001 module](../streeling/physics/phy-001-science-of-guitar-sound/), in the three languages: the 2/3 of a perfect fifth is measured from fret 7 to the saddle, not from the nut;
+- the [Streeling journal entry](../streeling/journal/).
+
+PHY-001's correction stays **awaiting verification** until this change is merged, its deployment succeeds and the pages are read back anonymously.
+
 ## To verify
 
 - Check this update's public URLs and catalog after deployment; keep the deploy receipt with the integration record.

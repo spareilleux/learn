@@ -207,3 +207,11 @@ Elle apporte aussi :
 Rien n'y a été exécuté ici.
 
 - **Ils n'ont pas été étudiés ici,** donc leurs cases ci-dessus restent vides.
+
+## 2026-10-02 — PHY-001 · La science du son de la guitare, corrigé
+
+Synchronisé depuis Demerzel à [`d459d8e`](https://github.com/GuitarAlchemist/Demerzel/commit/d459d8e5f0210cbad00f49c49196fc61160aba76) ([PR #1179](https://github.com/GuitarAlchemist/Demerzel/pull/1179)). L'exercice du module disait de mesurer du sillet à la frette 7 et d'y trouver environ 2/3 de la longueur de la corde. Les 2/3 sont la longueur qui vibre, de la frette 7 au chevalet ; le segment du sillet à la frette 7 en est le tiers restant. La correction est faite dans les six langues du module, dont trois sont sur ce site. Toutes les autres pages ne changent que par leurs références épinglées à Demerzel, de `e203e5a` à `d459d8e`.
+
+Rien n'y a été exécuté ici.
+
+- **Il n'a pas été étudié ici,** donc sa case ci-dessus reste vide.

@@ -207,3 +207,11 @@ También trae:
 Aquí no se ejecutó nada de ellos.
 
 - **No se han estudiado aquí,** así que sus casillas de arriba siguen vacías.
+
+## 2026-10-02 — PHY-001 · La ciencia del sonido de la guitarra, corregido
+
+Sincronizado desde Demerzel en [`d459d8e`](https://github.com/GuitarAlchemist/Demerzel/commit/d459d8e5f0210cbad00f49c49196fc61160aba76) ([PR #1179](https://github.com/GuitarAlchemist/Demerzel/pull/1179)). El ejercicio del módulo decía que se midiera desde la cejuela hasta el traste 7 y que saldrían unos 2/3 de la longitud de la cuerda. Los 2/3 son la longitud que vibra, desde el traste 7 hasta la selleta; el tramo de la cejuela al traste 7 es el tercio restante. La corrección está en los seis idiomas del módulo, tres de los cuales están en este sitio. Todas las demás páginas solo cambian sus referencias fijadas a Demerzel, de `e203e5a` a `d459d8e`.
+
+Aquí no se ejecutó nada de él.
+
+- **No se ha estudiado aquí,** así que su casilla de arriba sigue vacía.

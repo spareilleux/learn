@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **GAA-002** · Cours formel : Éducation de l'oreille · intermédiaire · 45 minutes
 
-Généré par le département *Guitar Alchemist Academy* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/e203e5a25e10b85b8d22ece9a700e12447f4a236/state/streeling/courses/guitar-alchemist-academy/fr/gaa-002-training-your-ear.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Guitar Alchemist Academy* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/d459d8e5f0210cbad00f49c49196fc61160aba76/state/streeling/courses/guitar-alchemist-academy/fr/gaa-002-training-your-ear.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [GAA-001](../../guitar-alchemist-academy/gaa-001-your-first-chord/)
 :::
