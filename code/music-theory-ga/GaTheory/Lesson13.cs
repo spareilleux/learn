@@ -293,5 +293,39 @@ public static class Lesson13
         var kept = ModesConfig.GetModalFamilies().Sum(family => family.Modes.Sum(mode => mode.AlternateNames.Count));
         var withAlternates = all.Count(mode => FSharpOption<IReadOnlyList<string>>.get_IsSome(mode.AlternateNames));
         Line($"alternate names: GetModalFamilies keeps {kept}; GetAllModes keeps them on {withAlternates} of {all.Count} modes");
+
+        // Added after the first run, in its own commit: the two things the first run showed without a test
+        Title("Added after the first run: the names written in Modes.yaml against the names ModesConfig returns");
+        Line("course: the name as the file writes it; GA: the name the loader returns (YAML reads \" #\" as the start of a comment)");
+        var lines = File.ReadAllLines(ModesConfig.getConfigPath().Value);
+        var written = Enumerable.Range(0, lines.Length)
+            .Where(i => lines[i].StartsWith("      - Name:", StringComparison.Ordinal))
+            .Select(i => (Line: i + 1, Name: Unquote(lines[i]["      - Name:".Length..].Trim())))
+            .ToList();
+        Columns("line", 6, 34);
+        var truncated = 0;
+        foreach (var (entry, mode) in written.Zip(all))
+        {
+            if (entry.Name != mode.Name)
+            {
+                Row($"{entry.Line}", entry.Name, mode.Name);
+                truncated++;
+            }
+        }
+        Line($"names that differ: {truncated} of {written.Count}");
+        var repeated = all.GroupBy(mode => mode.Name).Where(group => group.Count() > 1).ToList();
+        Line($"names ModesConfig returns more than once: {repeated.Count}");
+        foreach (var group in repeated)
+        {
+            Line($"  {group.Key}: {string.Join(", ", group.Select(mode => mode.FamilyName.Value.Replace(" Family", "")))}");
+        }
+        Line();
+        Line("The modes whose vector GA's PitchClassSet and the course disagree on:");
+        foreach (var mode in all.Where(mode => GaIcv(mode.Notes) != CourseIcv(mode.Notes)))
+        {
+            Line($"  {mode.Name}: {mode.Notes}, GA {GaIcv(mode.Notes)}, course {CourseIcv(mode.Notes)}");
+        }
     }
+
+    static string Unquote(string value) => value.Length > 1 && value[0] == '\'' && value[^1] == '\'' ? value[1..^1] : value;
 }

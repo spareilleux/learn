@@ -235,3 +235,27 @@ Spanish Phrygian       not found
 Ultralocrian           Ultralocrian (Harmonic Minor Family)
 GA's names found: 9 of 14
 alternate names: GetModalFamilies keeps 104; GetAllModes keeps them on 0 of 165 modes
+
+== Added after the first run: the names written in Modes.yaml against the names ModesConfig returns
+course: the name as the file writes it; GA: the name the loader returns (YAML reads " #" as the start of a comment)
+line   course                             GA                                 check
+631    Lydian Augmented #2                Lydian Augmented                   DIFF
+639    Lydian #2 #6                       Lydian                             DIFF
+655    Ionian Augmented #2                Ionian Augmented                   DIFF
+663    Lydian #6                          Lydian                             DIFF
+667    Aeolian #4 (Lydian Diminished)     Aeolian                            DIFF
+671    Ionian #2                          Ionian                             DIFF
+679    Lydian Augmented #6                Lydian Augmented                   DIFF
+681    Lydian Dominant #5                 Lydian Dominant                    DIFF
+names that differ: 8 of 165
+names ModesConfig returns more than once: 7
+  Ionian: Major Scale, Neapolitan Minor
+  Lydian: Major Scale, Double Harmonic, Neapolitan Minor
+  Aeolian: Major Scale, Neapolitan Minor
+  Lydian Augmented: Melodic Minor, Harmonic Major, Neapolitan Major
+  Lydian Dominant: Melodic Minor, Neapolitan Major
+  Minor Seventh: Major Second, Major Seventh Chord
+  Major Seventh: Minor Second, Major Seventh Chord
+
+The modes whose vector GA's PitchClassSet and the course disagree on:
+  Chromatic: C C# D D# E F F# G G# A A# B, GA <1 1 1 1 0 6>, course <12 12 12 12 12 6>
