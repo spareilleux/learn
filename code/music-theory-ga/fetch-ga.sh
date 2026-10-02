@@ -23,6 +23,10 @@ PATHS=(
   /Common/GA.Domain.Services/Unified/UnifiedModeService.cs
   # lesson 12: the atonal chord analysis and its test of a symmetrical set
   /Common/GA.Domain.Services/Chords/Analysis/Atonal/AtonalChordAnalysisService.cs
+  # lesson 13: the chord-symbol parser of GA.Domain.Services, and the services that name extensions and alterations
+  /Common/GA.Domain.Services/Chords/Parsing/ChordSymbolParser.cs
+  /Common/GA.Domain.Services/Chords/BasicChordExtensionsService.cs
+  /Common/GA.Domain.Services/Chords/ChordAlterationService.cs
 )
 cd "$(dirname "$0")"
 if [ "$(git -C .ga rev-parse HEAD 2>/dev/null || true)" = "$GA_SHA" ]; then

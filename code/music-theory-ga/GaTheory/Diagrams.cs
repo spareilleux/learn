@@ -108,10 +108,13 @@ public static class Diagrams
 
     static readonly string[] Standard = ["E2", "A2", "D3", "G3", "B3", "E4"]; // string 6 to string 1
 
-    static string ChordGrid(double left, string shape, string caption)
+    // notes: the names of the sounding notes, low to high, for a chord the sharp names would misspell
+    static string ChordGrid(double left, string shape, string caption, string? notes = null)
     {
         const double top = 40, stringGap = 24, fretGap = 30, frets = 4;
         var svg = new StringBuilder();
+        var names = notes?.Split(' ');
+        var sounding = 0;
         var fretted = shape.Where(char.IsDigit).Select(ch => ch - '0').Where(f => f > 0).ToArray();
         var lowest = fretted.Length == 0 ? 1 : fretted.Min();
         var first = fretted.Length == 0 || fretted.Max() <= frets ? 1 : lowest; // first fret shown
@@ -158,20 +161,24 @@ public static class Diagrams
             if (ch != 'x')
             {
                 var midi = Theory.MidiOf(Standard[s]) + ch - '0';
-                svg.Append($"  <text x=\"{F(X(s))}\" y=\"{F(Y((int)frets) + 16)}\" font-size=\"11\" text-anchor=\"middle\" dominant-baseline=\"central\" fill=\"{Ink}\">{Theory.PitchName(midi).Replace("#", "♯")}</text>\n");
+                var name = names?[sounding++] ?? Theory.PitchName(midi).Replace("#", "♯");
+                svg.Append($"  <text x=\"{F(X(s))}\" y=\"{F(Y((int)frets) + 16)}\" font-size=\"11\" text-anchor=\"middle\" dominant-baseline=\"central\" fill=\"{Ink}\">{name}</text>\n");
             }
         }
         svg.Append($"  <text x=\"{F(X(0) + stringGap * 2.5)}\" y=\"{F(Y((int)frets) + 42)}\" font-size=\"15\" font-weight=\"700\" text-anchor=\"middle\" fill=\"{Ink}\">{caption}</text>\n");
         return svg.ToString();
     }
 
-    static string ChordGrids(params (string Shape, string Caption)[] grids)
+    static string ChordGrids(params (string Shape, string Caption)[] grids) =>
+        ChordGrids([.. grids.Select(grid => (grid.Shape, grid.Caption, (string?)null))]);
+
+    static string ChordGrids(params (string Shape, string Caption, string? Notes)[] grids)
     {
         const double panel = 175;
         var svg = new StringBuilder(Open(panel * grids.Length, 228));
         for (var i = 0; i < grids.Length; i++)
         {
-            svg.Append(ChordGrid(panel * i + 30, grids[i].Shape, grids[i].Caption));
+            svg.Append(ChordGrid(panel * i + 30, grids[i].Shape, grids[i].Caption, grids[i].Notes));
         }
         return svg.Append(Close).ToString();
     }
@@ -322,6 +329,8 @@ public static class Diagrams
                 ([Set(wholeTone)], Labels.Numbers, Axes(wholeTone), "1365"),
                 ([Set(octatonic, 1)], Labels.Numbers, Axes(octatonic), "2925"),
                 ([Set(augmented, 2)], Labels.Numbers, Axes(augmented), "2457")),
+            ["l13-extended-voicings.svg"] = ChordGrids(
+                ("x3233x", "C9", "C3 E3 B♭3 D4"), ("x32335", "C13", "C3 E3 B♭3 D4 A4"), ("x3234x", "C7♯9", "C3 E3 B♭3 D♯4")),
         };
     }
 

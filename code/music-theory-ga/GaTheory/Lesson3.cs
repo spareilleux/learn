@@ -37,7 +37,7 @@ public static class Lesson3
     static readonly string[] Standard = ["E4", "B3", "G3", "D3", "A2", "E2"];
 
     // A shape such as "x32010" (string 6 first) -> MIDI notes of the played strings, low to high
-    static int[] Played(string shape) =>
+    internal static int[] Played(string shape) =>
         [.. shape.Select((ch, i) => ch == 'x' ? -1 : Theory.MidiOf(Standard[5 - i]) + ch - '0').Where(m => m >= 0)];
 
     // Name a voicing: try the bass as the root first, then the other notes (slash chord)
