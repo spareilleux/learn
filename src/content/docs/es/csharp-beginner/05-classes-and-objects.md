@@ -160,4 +160,4 @@ Los dos objetos tienen campos `_minutes` independientes. El constructor fija `To
 - Un miembro de instancia pertenece a un objeto; un miembro `static` pertenece al tipo.
 - Asignar una variable de tipo clase a otra copia la referencia, no el objeto.
 
-La siguiente lección, [records, estructuras y enumeraciones](../#plan), comparará las clases con tipos orientados a valores.
+La siguiente lección, [records, estructuras y enumeraciones](../06-records-structs-enums/), comparará las clases con tipos orientados a valores.
