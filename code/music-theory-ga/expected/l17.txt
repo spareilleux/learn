@@ -1,0 +1,214 @@
+# l17
+
+== Distance from the nut to fret n, the course's d(n) = L(1 − 2^(−n/12)), against FretboardGeometry.CalculateSpanMm(0, n) on its 647.7 mm and PhysicalFretboardCalculator.CalculateFretPositionMm(n) on its 648 mm (GA.Domain.Services, compiled)
+fret  course, 647.7  CalculateSpanMm  check  course, 648  CalculateFretPositionMm  check
+1     36.35          36.35            ok     36.37        36.37                    ok
+2     70.66          70.66            ok     70.70        70.70                    ok
+3     103.05         103.05           ok     103.10       103.10                   ok
+4     133.62         133.62           ok     133.68       133.68                   ok
+5     162.47         162.47           ok     162.55       162.55                   ok
+7     215.41         215.41           ok     215.51       215.51                   ok
+12    323.85         323.85           ok     324.00       324.00                   ok
+17    405.09         405.09           ok     405.27       405.27                   ok
+19    431.56         431.56           ok     431.76       431.76                   ok
+24    485.78         485.78           ok     486.00       486.00                   ok
+the length left to the saddle, fret n against fret n + 1, for n from 0 to 23: 1.059463 each time, the twelfth root of two: True
+MUS-009's frets 1, 5, 7, 12 and 24 on 648 mm, "36.4, 162.5, 215.5, 324 and 486": the calculator gives 36.4, 162.5, 215.5, 324, 486
+
+== The 5-fret spans quoted in GA's PHYSICAL_PLAYABILITY_IMPROVEMENTS.md, against PhysicalFretboardCalculator.CalculateFretDistanceMm on 648 mm and the course
+frets   the document  GA       course   check
+0-5     120.11        162.55   162.55   DIFF
+7-12    85.42         108.49   108.49   DIFF
+12-17   70.09         81.27    81.27    DIFF
+frets 0-5 against 12-17: the document says "50.02mm (71.4% larger)"; GA's distances differ by 81.27 mm, 100.0% larger
+
+== GA's comfortable reach, BiomechanicsConstants.ComfortableReachScaleUnits (GA.Domain.Core), against the 1 − 2^(−4/12) of its comment, and how far it reaches from each fret, measured with FretboardGeometry.CalculatePhysicalSpan as PhysicalCostService measures a shape (GA.Domain.Services, compiled)
+  ComfortableReachScaleUnits = 0.21; 1 − 2^(−4/12) = 0.2063, the nut to fret 4; on 647.7 mm, 136.0 mm and 133.6 mm
+lowest fret  highest within reach  frets held  mm, 647.7
+1            5                     5           126.1
+2            6                     5           119.0
+3            7                     5           112.4
+5            10                    6           121.7
+7            13                    7           126.6
+9            16                    8           128.1
+12           21                    10          131.3
+15           24                    10          110.4
+  the first position, index finger on fret 1 and little finger on fret 4: CalculatePhysicalSpan 0.1502, within reach: True
+  the default PlayerProfile: HandSize Medium, MaxComfortableStretchMm 129.0
+
+== GTR-002's five open shapes in standard tuning: the notes from string 6 to string 1, and each one's degree above the root
+shape  frets    notes                course        GTR-002       check
+C      x32010   C3 E3 G3 C4 E4       R 3 5 R 3     R 3 5 R 3     ok
+A      x02220   A2 E3 A3 C♯4 E4      R 5 R 3 5     R 5 R 3 5     ok
+G      320003   G2 B2 D3 G3 B3 G4    R 3 5 R 3 R   R 3 5 R 3 R   ok
+E      022100   E2 B2 E3 G♯3 B3 E4   R 5 R 3 5 R   R 5 R 3 5 R   ok
+D      xx0232   D3 A3 D4 F♯4         R 5 R 3       R 5 R 3       ok
+
+== C major in the five shapes: each open shape raised by the semitones from its root up to C, a barre in place of the nut
+shape  barre  frets           notes                C E G only  frets held  strings playing C
+C      0      x32010          C3 E3 G3 C4 E4       yes         3           5 2
+A      3      x35553          C3 G3 C4 E4 G4       yes         3           5 3
+G      5      875558          C3 E3 G3 C4 E4 C5    yes         4           6 3 1
+E      8      8-10-10-9-8-8   C3 G3 C4 E4 G4 C5    yes         3           6 4 1
+D      10     x-x-10-12-13-12 C4 G4 C5 E5          yes         4           4 2
+barre frets  course               GA                   check
+Wikipedia    0 3 5 8 10           0 3 5 8 10           ok
+  C on string 2: C shape, fret 1; D shape, fret 13; string 2 in the other shapes: A shape, E4; G shape, E4; E shape, G4
+
+== The five shapes in order up the neck, in each major key: the barre fret of each shape, from the lowest
+C   C A G E D at 0 3 5 8 10
+D♭  C A G E D at 1 4 6 9 11
+D   D C A G E at 0 2 5 7 10
+E♭  D C A G E at 1 3 6 8 11
+E   E D C A G at 0 2 4 7 9
+F   E D C A G at 1 3 5 8 10
+F♯  E D C A G at 2 4 6 9 11
+G   G E D C A at 0 3 5 7 10
+A♭  G E D C A at 1 4 6 8 11
+A   A G E D C at 0 2 5 7 9
+B♭  A G E D C at 1 3 6 8 10
+B   A G E D C at 2 4 7 9 11
+every order is C A G E D read round from one of its letters: True
+key          course                 GA                     check
+G, Wikipedia G E D C A at 0 3 5 7 10 G E D C A at 0 3 5 7 10 ok
+
+== VoicingPhysicalAnalyzer.CalculatePlayability (GA.Domain.Services, compiled): the CagedShape of each shape, with its positions in GA's string order (string 1 first, as ExtractPhysicalLayout numbers them) and reversed (string 6 first, as the comments of DetectCagedShape read them)
+frets           course           GA's order  reversed
+x32010          C shape, C       (none)      (none)
+x02220          A shape, A       (none)      (none)
+320003          G shape, G       (none)      (none)
+022100          E shape, E       (none)      E-Shape
+xx0232          D shape, D       (none)      (none)
+x35553          A shape, C       (none)      (none)
+875558          G shape, C       (none)      (none)
+8-10-10-9-8-8   E shape, C       (none)      E-Shape
+x-x-10-12-13-12 D shape, C       (none)      (none)
+133211          E shape, F       (none)      E-Shape
+x13331          A shape, B♭      (none)      (none)
+001220          (none)           E-Shape     (none)
+  the C shape barred at frets 0 to 12: "E-Shape" 0 times in GA's order, 0 reversed; any other answer: 0
+  the A shape barred at frets 0 to 12: "E-Shape" 0 times in GA's order, 0 reversed; any other answer: 0
+  the G shape barred at frets 0 to 12: "E-Shape" 0 times in GA's order, 0 reversed; any other answer: 0
+  the E shape barred at frets 0 to 12: "E-Shape" 0 times in GA's order, 13 reversed; any other answer: 0
+  the D shape barred at frets 0 to 12: "E-Shape" 0 times in GA's order, 0 reversed; any other answer: 0
+  001220, string 6 to string 1: E2 A2 D♯3 A3 C♯4 E4
+  the tag GeneratePhysicalTags writes for the reversed E shape: e-shape; with "CAGED-E" or "E shape" in it, the test of VoicingFilterEngine for CagedShape "E": False
+
+== The course's measures of each shape, and PhysicalCostService.CalculateStaticCost with the default PlayerProfile (GA.Domain.Services, compiled): its total and the terms that are not zero
+frets              chord  frets held  span, mm  fretted  barre  total  terms
+x32010             C      3           66.7      3        no     -0.23  Register -0.82 Tension 0.30
+x02210             Am     2           34.3      3        no     -0.23  Register -0.80 Tension 0.29
+022000             Em     1           0.0       2        no     -0.63  Register -1.77 Tension 0.22
+022100             E      2           34.3      3        no     -0.40  Register -1.28 Tension 0.32
+320003             G      2           32.4      3        no     -0.42  Register -1.33 Tension 0.32
+xx0232             D      2           32.4      3        no     -0.06  Register -0.38 Tension 0.26
+133211             F      3           66.7      6        yes    0.29   Register 0.12 Tension 0.60
+x35553             C      3           59.4      5        yes    0.21   Tension 0.48
+875558             C      4           77.2      6        yes    0.24   Tension 0.60
+8-10-10-9-8-8      C      3           44.5      6        yes    0.24   Tension 0.60
+x-x-10-12-13-12    C      4           57.8      4        no     0.59   Register 0.83 Tension 0.36
+577655             A      3           52.9      6        yes    0.24   Tension 0.60
+12-14-14-13-12-12  E      3           35.3      6        yes    0.66   Register 1.01 Tension 0.60
+
+== The same shapes through VoicingPhysicalAnalyzer.CalculatePlayability (Difficulty, DifficultyScore, BarreRequired) and BiomechanicalAnalyzer.AnalyzeChordPlayability (OverallScore, Difficulty, HasBarreChord) (GA.Domain.Services, compiled)
+frets              chord  Difficulty    Score  Barre  Overall  Difficulty  Barre
+x32010             C      Intermediate  3.50   no     0.82     Easy        no
+x02210             Am     Beginner      2.29   no     0.89     Easy        no
+022000             Em     Beginner      1.00   no     0.92     Very Easy   yes
+022100             E      Beginner      2.29   no     0.92     Very Easy   yes
+320003             G      Beginner      2.22   no     0.85     Easy        yes
+xx0232             D      Beginner      2.22   no     0.78     Easy        no
+133211             F      Intermediate  4.50   no     0.92     Very Easy   yes
+x35553             C      Intermediate  6.23   yes    0.89     Easy        yes
+875558             C      Intermediate  6.90   yes    0.83     Easy        yes
+8-10-10-9-8-8      C      Intermediate  3.67   no     0.90     Very Easy   yes
+x-x-10-12-13-12    C      Intermediate  4.17   no     0.72     Easy        no
+577655             A      Intermediate  3.99   no     0.90     Very Easy   yes
+12-14-14-13-12-12  E      Intermediate  3.33   no     0.77     Easy        yes
+BiomechanicalAnalyzer gives the same analysis to every shape for each HandSize (Small, Medium, Large, ExtraLarge): True
+PhysicalCostService gives the same total to every shape with a PlayerProfile of each HandSize and a MaxComfortableStretchMm of 80: True
+
+== PhysicalCostService.CalculateStaticCost under GA's three PlayerProfiles (GA.Business.Core, compiled), on the five shapes of C
+frets           shape  Default  Beginner  Jazz
+x32010          C      -0.23    -0.23     -0.14
+x35553          A      0.21     0.21      0.25
+875558          G      0.24     0.51      0.24
+8-10-10-9-8-8   E      0.24     0.66      0.24
+x-x-10-12-13-12 D      0.59     1.04      0.18
+
+== The guitar entries of Tunings.toml, read as text (GA.Business.Config copies it next to the program), against Instruments.yaml, which GA reads; each six-string tuning as a change from standard, in semitones, and the notes of its open strings
+entry          Tuning                                 Instruments.yaml  string 6 to 1        largest  open strings
+Standard       E2 A2 D3 G3 B3 E4                      the same          0 0 0 0 0 0          0        D E G A B
+DADGAD         D2 A2 D3 G3 A3 D4                      the same          -2 0 0 0 -2 -2       2        D G A
+Double Drop D  D2 A2 D3 G3 B3 D4                      the same          -2 0 0 0 0 -2        2        D G A B
+DropD          D2 A2 D3 G3 B3 E4                      the same          -2 0 0 0 0 0         2        D E G A B
+OpenCMajor     C2 G2 C3 G3 C3 E4                      the same          -4 -2 -2 0 -11 0     11       C major
+OpenDMajor     D2 A2 D3 F#3 A3 D4                     the same          -2 0 0 -1 -2 -2      2        D major
+OpenEMajorV1   E2 B2 E3 G#3 B3 E4                     the same          0 2 2 1 0 0          2        E major
+OpenEMajorV2   E2 B2 E3 G3 B3 E4                      the same          0 2 2 0 0 0          2        E minor
+OpenGMajorV1   D2 G2 D3 G3 B3 D4                      the same          -2 -2 0 0 0 -2       2        G major
+OpenGMinorV2   D2 G2 D3 G3 Bb3 D4                     the same          -2 -2 0 0 -1 -2      2        G minor
+OpenAMajor     E2 A2 E3 A3 C#3 E4                     the same          0 0 2 2 -10 0        10       A major
+Renaissance    G3 G4 C4 C4 E4 E4 A4                   the same
+Baroque1       A3 A3 D4 D4 G3 G3 B3 B3 E4 E4          the same
+Baroque2       A3 A3 D4 D3 G3 G3 B3 B3 E4 E4          the same
+TwelveStrings  E2 E3 A2 A3 D3 D4 G3 G4 B3 B3 E4 E4    the same
+entry          Wikipedia      Tunings.toml   check
+OpenCMajor     C G C G C E    C G C G C E    ok
+OpenDMajor     D A D F♯ A D   D A D F♯ A D   ok
+OpenEMajorV1   E B E G♯ B E   E B E G♯ B E   ok
+OpenGMajorV1   D G D G B D    D G D G B D    ok
+
+== The 41 voicings of ga_easier_voicings (GaMcpServer/Tools/GuitaristProblemTools.cs, read as text): each shape read in standard tuning, against its Notes; HasBarre and Difficulty as written
+symbol  frets   notes, string 6 to 1  Notes           not in Notes  not played  fretted  HasBarre  Difficulty
+C       x32010  C E G C E             C, E, G         -             -           3        False     1
+D       xx0232  D A D F♯              D, F♯, A        -             -           3        False     1
+E       022100  E B E G♯ B E          E, G♯, B        -             -           3        False     1
+G       320003  G B D G B G           G, B, D         -             -           3        False     1
+A       x02220  A E A C♯ E            A, C♯, E        -             -           3        False     1
+F       133211  F C F A C F           F, A, C         -             -           6        True      3
+Bb      x13331  B♭ F B♭ D F           B♭, D, F        -             -           5        True      3
+B       x24442  B F♯ B D♯ F♯          B, D♯, F♯       -             -           5        True      3
+Am      x02210  A E A C E             A, C, E         -             -           3        False     1
+Em      022000  E B E G B E           E, G, B         -             -           2        False     1
+Dm      xx0231  D A D F               D, F, A         -             -           3        False     1
+Bm      x24432  B F♯ B D F♯           B, D, F♯        -             -           5        True      3
+E7      020100  E B D G♯ B E          E, G♯, B, D     -             -           2        False     1
+A7      x02020  A E G C♯ E            A, C♯, E, G     -             -           2        False     1
+D7      xx0212  D A C F♯              D, F♯, A, C     -             -           3        False     1
+G7      320001  G B D G B F           G, B, D, F      -             -           3        False     2
+C7      x32310  C E B♭ C E            C, E, G, B♭     -             G           4        False     2
+B7      x21202  B D♯ A B F♯           B, D♯, F♯, A    -             -           4        False     2
+Cmaj7   x32000  C E G B E             C, E, G, B      -             -           2        False     1
+Gmaj7   320002  G B D G B F♯          G, B, D, F♯     -             -           3        False     1
+Amaj7   x02120  A E G♯ C♯ E           A, C♯, E, G♯    -             -           3        False     1
+Dmaj7   xx0222  D A C♯ F♯             D, F♯, A, C♯    -             -           3        False     1
+Emaj7   021100  E B D♯ G♯ B E         E, G♯, B, D♯    -             -           3        False     2
+Fmaj7   103210  F A F A C E           F, A, C, E      -             -           4        False     2
+Am7     x02010  A E G C E             A, C, E, G      -             -           2        False     1
+Em7     020000  E B D G B E           E, G, B, D      -             -           1        False     1
+Dm7     xx0211  D A C F               D, F, A, C      -             -           3        False     1
+Dsus2   xx0230  D A D E               D, E, A         -             -           2        False     1
+Asus2   x02200  A E A B E             A, B, E         -             -           2        False     1
+Esus2   024400  E B F♯ B B E          E, F♯, B        -             -           3        False     2
+Dsus4   xx0233  D A D G               D, G, A         -             -           3        False     1
+Asus4   x02230  A E A D E             A, D, E         -             -           3        False     1
+Esus4   022200  E B E A B E           E, A, B         -             -           3        False     1
+Gsus4   310013  G B♭ D G C G          G, C, D         B♭            -           4        False     2
+C5      x3500x  C G G B               C, G            B             -           2        False     1
+D5      xx023x  D A D                 D, A            -             -           2        False     1
+E5      022xxx  E B E                 E, B            -             -           2        False     1
+G5      3500xx  G D D G               G, D            -             -           2        False     1
+A5      x022xx  A E A                 A, E            -             -           2        False     1
+B5      x244xx  B F♯ B                B, F♯           -             -           3        False     2
+F5      133xxx  F C F                 F, C            -             -           3        True      2
+Notes are the notes of the symbol: 41 of 41; a note outside the Notes: Gsus4, C5; a note of the Notes not played: C7
+HasBarre: F, Bb, B, Bm, F5; more than four fretted notes: F, Bb, B, Bm
+
+== What ga_easier_voicings offers for each voicing marked HasBarre, under its default constraint "no-barre": the table's other voicings on the same root without HasBarre, easiest first (the course's reading of lines 611 to 652)
+  F [133211]: Fmaj7 [103210], all of F's notes
+  Bb [x13331]: nothing
+  B [x24442]: B7 [x21202], all of B's notes; B5 [x244xx], not all of B's notes
+  Bm [x24432]: B7 [x21202], not all of Bm's notes; B5 [x244xx], not all of Bm's notes
+  F5 [133xxx]: Fmaj7 [103210], all of F5's notes
+  the description's example, "F with no-barre → Fmaj7 (103210), Fsus2 (133011), or C/F": Fsus2 in the table False, C/F False; 133011 plays F2 C3 F3 G3 C4 F4, 5 fretted notes

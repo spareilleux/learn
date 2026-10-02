@@ -54,6 +54,21 @@
     <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Voicings/Generation/VoicingDecomposer.cs" Link="Ga/VoicingDecomposer.cs" />
     <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Voicings/Filtering/VoicingFilters.cs" Link="Ga/VoicingFilters.cs" />
     <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Voicings/Filtering/VoicingFilterCriteria.cs" Link="Ga/VoicingFilterCriteria.cs" />
+    <!-- Lesson 15 compiles GA's fret geometry, the static cost of a shape with the player profile it reads, and the biomechanical
+         analyzer with its records, as they are -->
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Analysis/FretboardGeometry.cs" Link="Ga/FretboardGeometry.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Analysis/PhysicalCostService.cs" Link="Ga/PhysicalCostService.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Analysis/FretboardPositionMapper.cs" Link="Ga/FretboardPositionMapper.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Analysis/IMlNaturalnessRanker.cs" Link="Ga/IMlNaturalnessRanker.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Business.Core/Context/PlayerProfile.cs" Link="Ga/PlayerProfile.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Biomechanics/BiomechanicalAnalyzer.cs" Link="Ga/BiomechanicalAnalyzer.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Biomechanics/BiomechanicalPlayabilityAnalysis.cs" Link="Ga/BiomechanicalPlayabilityAnalysis.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Biomechanics/FingeringEfficiency.cs" Link="Ga/FingeringEfficiency.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Lesson 15 reads the table of the ga_easier_voicings MCP tool from its source, as text, next to the program -->
+    <None Include="$(GaRoot)GaMcpServer/Tools/GuitaristProblemTools.cs" Link="GuitaristProblemTools.cs" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>

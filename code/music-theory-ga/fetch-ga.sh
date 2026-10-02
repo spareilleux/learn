@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Music theory for Guitar Alchemist: fetch the three GA projects the course program references,
-# and the files of GA.Domain.Services and GaApi it compiles directly, pinned on one commit of
-# GuitarAlchemist/ga (blobless clone, sparse checkout)
+# the files of GA.Domain.Services, GA.Business.Core and GaApi it compiles directly, and one file of
+# GaMcpServer it reads, pinned on one commit of GuitarAlchemist/ga (blobless clone, sparse checkout)
 set -euo pipefail
 GA_SHA=a826864f3a012cad88e415954bf57eca0ce12aa6
 PATHS=(
@@ -42,6 +42,17 @@ PATHS=(
   /Common/GA.Domain.Services/Fretboard/Voicings/Generation/VoicingDecomposer.cs
   /Common/GA.Domain.Services/Fretboard/Voicings/Filtering/VoicingFilters.cs
   /Common/GA.Domain.Services/Fretboard/Voicings/Filtering/VoicingFilterCriteria.cs
+  # lesson 15: fret geometry, the static cost of a shape and the player profiles it reads, the biomechanical analyzer,
+  # and the source of the ga_easier_voicings tool, read as text
+  /Common/GA.Domain.Services/Fretboard/Analysis/FretboardGeometry.cs
+  /Common/GA.Domain.Services/Fretboard/Analysis/PhysicalCostService.cs
+  /Common/GA.Domain.Services/Fretboard/Analysis/FretboardPositionMapper.cs
+  /Common/GA.Domain.Services/Fretboard/Analysis/IMlNaturalnessRanker.cs
+  /Common/GA.Business.Core/Context/PlayerProfile.cs
+  /Common/GA.Domain.Services/Fretboard/Biomechanics/BiomechanicalAnalyzer.cs
+  /Common/GA.Domain.Services/Fretboard/Biomechanics/BiomechanicalPlayabilityAnalysis.cs
+  /Common/GA.Domain.Services/Fretboard/Biomechanics/FingeringEfficiency.cs
+  /GaMcpServer/Tools/GuitaristProblemTools.cs
 )
 cd "$(dirname "$0")"
 if [ "$(git -C .ga rev-parse HEAD 2>/dev/null || true)" = "$GA_SHA" ]; then
