@@ -129,6 +129,22 @@ La [PR Demerzel #1140](https://github.com/GuitarAlchemist/Demerzel/pull/1140) a 
 
 MAT-007 reste **en attente de vérification** jusqu'à ce que ce changement soit fusionné, que son déploiement réussisse et que les pages soient relues sans authentification.
 
+## 2026-10-02 — Streeling MAT-007 publié
+
+La [PR Learn #39](https://github.com/spareilleux/learn/pull/39) a été fusionnée en `0436325`, et son [déploiement Pages](https://github.com/spareilleux/learn/actions/runs/36377803965) a réussi. Le 2026-10-02, avec `main` à `c547150` et son [déploiement](https://github.com/spareilleux/learn/actions/runs/37065792242) réussi, le [module MAT-007](../streeling/mathematics/mat-007-least-squares-regularisation/), l'index des mathématiques, le [journal Streeling](../streeling/journal/) et ce journal ont été relus sans authentification dans les trois langues : 12 pages, qui répondent toutes 200 et mentionnent MAT-007.
+
+MAT-007 passe donc d'en attente de vérification à vérifié ; son entrée ci-dessus reste telle qu'écrite. Lors de cette relecture, les pages MAT-007 renvoyaient à leur source à `8c14336` ; cette mise à jour les réépingle à `e203e5a`. Comme pour les modules précédents, publié ne veut pas dire étudié : MAT-007 n'a été ni exécuté ni étudié ici, et son expérience reste proposée.
+
+## 2026-10-02 — Streeling MAT-008 à MAT-025 et cinq modules de musique synchronisés, en attente de vérification
+
+Le `master` de Demerzel a atteint [`e203e5a`](https://github.com/GuitarAlchemist/Demerzel/commit/e203e5a25e10b85b8d22ece9a700e12447f4a236), après l'épingle de MAT-007. Cette mise à jour le synchronise dans Learn :
+- 23 nouveaux modules dans les trois langues : [MAT-008 à MAT-025](../streeling/mathematics/) et, en [musique](../streeling/music/), MUS-007, MUS-008, MUS-009, MUS-018 et MUS-020 ;
+- des pages françaises et espagnoles pour quinze modules qui n'avaient ici que l'anglais, et les corrections et accents espagnols rétablis fusionnés dans Demerzel depuis `8c14336` ;
+- les index des départements ;
+- l'[entrée du journal Streeling](../streeling/journal/).
+
+Ces modules et traductions restent **en attente de vérification** jusqu'à ce que ce changement soit fusionné, que son déploiement réussisse et que les pages soient relues sans authentification.
+
 ## À vérifier
 
 - Contrôler les URL publiques de cette mise à jour et le catalogue après déploiement ; conserver le reçu de déploiement avec le compte rendu d'intégration.

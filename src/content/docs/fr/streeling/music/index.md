@@ -12,8 +12,13 @@ sidebar:
 ## Modules
 
 - [MUS-001 · Qu'est-ce qu'un accord ?](mus-001-what-is-a-chord/)
-- [MUS-002 · Beyond Tonality: Post-Tonal Theory for Guitarists](mus-002-beyond-tonality/) *(en anglais)*
-- [MUS-003 · How Harmony Works — Functional Harmony for Guitarists](mus-003-functional-harmony/) *(en anglais)*
-- [MUS-004 · Rhythm, Meter, and Groove: The Time Dimension of Music](mus-004-rhythm-and-groove/) *(en anglais)*
-- [MUS-005 · Jazz Harmony for Guitar: From ii-V-I to Coltrane Changes](mus-005-jazz-harmony/) *(en anglais)*
-- [MUS-006 · The Scale Universe: 4,096 Possibilities From 12 Notes](mus-006-the-scale-universe/) *(en anglais)*
+- [MUS-002 · Au-delà de la tonalité : théorie post-tonale pour guitaristes](mus-002-beyond-tonality/)
+- [MUS-003 · Comment fonctionne l'harmonie — L'harmonie fonctionnelle pour guitaristes](mus-003-functional-harmony/)
+- [MUS-004 · Rythme, mesure et groove : la dimension temporelle de la musique](mus-004-rhythm-and-groove/)
+- [MUS-005 · Harmonie jazz pour la guitare : du ii-V-I aux Coltrane Changes](mus-005-jazz-harmony/)
+- [MUS-006 · L'univers des gammes : 4 096 possibilités à partir de 12 notes](mus-006-the-scale-universe/)
+- [MUS-007 · Hauteur, orthographe et identité enharmonique — Un son, plusieurs noms](mus-007-pitch-spelling-enharmonic-identity/)
+- [MUS-008 · Intervalles, renversements et intervalles composés — Compter au-delà de l'octave](mus-008-intervals-inversion-compound/)
+- [MUS-009 · Accordage et géométrie du manche — Une hauteur, plusieurs emplacements](mus-009-tuning-fretboard-geometry/)
+- [MUS-018 · Identification de la tonalité, chiffres romains et cadences — Ce qu'un décompte d'accords peut trancher, et ce qu'il ne peut pas](mus-018-key-finding-roman-numerals-cadences/)
+- [MUS-020 · Classes d'ensembles, vecteurs d'intervalles, relation Z et formes premières — Deux tassements, un catalogue](mus-020-set-classes-interval-vectors-prime-forms/)

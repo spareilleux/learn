@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **GTR-002** · Disposicion del diapason y sistema CAGED · intermedio · 45 minutes
 
-Generado por el departamento *Estudios de guitarra* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/8c14336ecd9601615e08c20dca696cd0e021563e/state/streeling/courses/guitar-studies/es/gtr-002-caged-geometry.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Estudios de guitarra* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/e203e5a25e10b85b8d22ece9a700e12447f4a236/state/streeling/courses/guitar-studies/es/gtr-002-caged-geometry.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [GTR-001](../../guitar-studies/gtr-001-the-fretboard-map/)
 :::
@@ -28,15 +28,17 @@ Requisitos previos: [GTR-001](../../guitar-studies/gtr-001-the-fretboard-map/)
 
 Todo guitarrista aprende estos cinco acordes mayores abiertos al principio. Cada uno tiene una huella geometrica distinta:
 
+Los diagramas se leen de la cuerda 6 (Mi grave) a la cuerda 1 (Mi agudo); `x` marca una cuerda que no se toca.
+
 ### Forma C (Do)
 ```
-x 3 2 0 1 0    Cuerdas: 5-4-3-2-1
+x 3 2 0 1 0    Cuerdas: 6-5-4-3-2-1
   T 3 5 T 3    Intervalos: Tonica-3M-5J-Tonica-3M
 ```
 
 ### Forma A (La)
 ```
-x 0 2 2 2 0    Cuerdas: 5-4-3-2-1
+x 0 2 2 2 0    Cuerdas: 6-5-4-3-2-1
   T 5 T 3 5    Intervalos: Tonica-5J-Tonica-3M-5J
 ```
 
@@ -54,8 +56,8 @@ T 5 T 3 5 T    Intervalos: Tonica-5J-Tonica-3M-5J-Tonica
 
 ### Forma D (Re)
 ```
-x x 0 2 3 2    Cuerdas: 4-3-2-1
-  T 5 T 3      Intervalos: Tonica-5J-Tonica-3M
+x x 0 2 3 2    Cuerdas: 6-5-4-3-2-1
+    T 5 T 3    Intervalos: Tonica-5J-Tonica-3M
 ```
 
 **Observacion clave:** Cada forma contiene solo tres clases de notas: Tonica, Tercera mayor y Quinta justa. Las diferencias estan en la *disposicion* -- en que octava aparece cada nota y que cuerdas las llevan.

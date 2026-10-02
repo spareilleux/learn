@@ -129,6 +129,22 @@ MAT-006 therefore moves from awaiting verification to verified; its entry above 
 
 MAT-007 stays **awaiting verification** until this change is merged, its deployment succeeds and the pages are read back anonymously.
 
+## 2026-10-02 — Streeling MAT-007 published
+
+[Learn PR #39](https://github.com/spareilleux/learn/pull/39) was merged as `0436325`, and its [Pages deployment](https://github.com/spareilleux/learn/actions/runs/36377803965) succeeded. On 2026-10-02, with `main` at `c547150` and its [deployment](https://github.com/spareilleux/learn/actions/runs/37065792242) succeeded, the [MAT-007 module](../streeling/mathematics/mat-007-least-squares-regularisation/), the mathematics index, the [Streeling journal](../streeling/journal/) and this journal were read back anonymously in the three languages: 12 pages, each answering 200 and mentioning MAT-007.
+
+MAT-007 therefore moves from awaiting verification to verified; its entry above is left as written. At that readback, the MAT-007 pages linked their source at `8c14336`; this update repins them to `e203e5a`. As for the modules before it, published is not studied: MAT-007 has not been run or studied here, and its experiment remains proposed.
+
+## 2026-10-02 — Streeling MAT-008 to MAT-025 and five music modules synced, awaiting verification
+
+Demerzel's `master` reached [`e203e5a`](https://github.com/GuitarAlchemist/Demerzel/commit/e203e5a25e10b85b8d22ece9a700e12447f4a236), after the MAT-007 pin. This update syncs it into Learn:
+- 23 new modules in the three languages: [MAT-008 to MAT-025](../streeling/mathematics/) and, in [music](../streeling/music/), MUS-007, MUS-008, MUS-009, MUS-018 and MUS-020;
+- French and Spanish pages for fifteen modules that had only English here, and the corrections and restored Spanish accents merged in Demerzel since `8c14336`;
+- the department indexes;
+- the [Streeling journal entry](../streeling/journal/).
+
+These modules and translations stay **awaiting verification** until this change is merged, its deployment succeeds and the pages are read back anonymously.
+
 ## To verify
 
 - Check this update's public URLs and catalog after deployment; keep the deploy receipt with the integration record.
