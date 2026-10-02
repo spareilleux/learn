@@ -218,7 +218,7 @@ public static class Lesson17
         foreach (var k in new[] { 1, 2, 3, 5, 7, 9, 12, 15 })
         {
             var h = Enumerable.Range(k, 25 - k).Last(f => FretboardGeometry.CalculatePhysicalSpan(new List<int> { k, f }) <= reach);
-            Console.WriteLine($"{k,-12} {h,-21} {h - k + 1,-11} {F(FretboardGeometry.CalculateSpanMm(k, h), "F1")}");
+            Console.WriteLine($"{k,-12} {(h == 24 ? "24, the last fret" : $"{h}"),-21} {h - k + 1,-11} {F(FretboardGeometry.CalculateSpanMm(k, h), "F1")}");
         }
         var firstPosition = FretboardGeometry.CalculatePhysicalSpan(new List<int> { 1, 4 });
         Line($"  the first position, index finger on fret 1 and little finger on fret 4: CalculatePhysicalSpan {F(firstPosition, "F4")}, within reach: {firstPosition <= reach}");
@@ -257,8 +257,9 @@ public static class Lesson17
             Console.WriteLine($"{name,-6} {barre,-6} {Shape(frets),-15} {Pitches(midi),-20} {Yes(midi.Select(Theory.Mod12).Distinct().Order().SequenceEqual([0, 4, 7])),-11} " +
                 $"{held.Max() - held.Min() + 1,-11} {string.Join(" ", playingC)}");
         }
-        Columns("barre frets", 12, 20);
-        Row("Wikipedia", "0 3 5 8 10", string.Join(" ", cShapes.Select(s => s.Barre)));
+        var barres = string.Join(" ", cShapes.Select(s => s.Barre));
+        Console.WriteLine($"{"barre frets",-12} {"Wikipedia",-20} {"course",-20} check");
+        Console.WriteLine($"{"C",-12} {"0 3 5 8 10",-20} {barres,-20} {(barres == "0 3 5 8 10" ? "ok" : "DIFF")}");
         Line($"  C on string 2: {string.Join("; ", cShapes.Where(s => s.Frets[4] is { } f && Theory.Mod12(Theory.MidiOf("B3") + f) == 0).Select(s => $"{s.Name} shape, fret {s.Frets[4]}"))}; " +
             $"string 2 in the other shapes: {string.Join("; ", cShapes.Where(s => !(s.Frets[4] is { } f && Theory.Mod12(Theory.MidiOf("B3") + f) == 0)).Select(s => $"{s.Name} shape, {Theory.PitchName(Theory.MidiOf("B3") + s.Frets[4]!.Value)}"))}");
 
@@ -274,8 +275,9 @@ public static class Lesson17
             Console.WriteLine($"{keys[key],-3} {orders[key]}");
         }
         Line($"every order is C A G E D read round from one of its letters: {everyRotation}");
-        Columns("key", 12, 22);
-        Row("G, Wikipedia", "G E D C A at 0 3 5 7 10", orders[7]);
+        const string wikipediaG = "G E D C A at 0 3 5 7 10";
+        Console.WriteLine($"{"key",-12} {"Wikipedia",-22} {"course",-22} check");
+        Console.WriteLine($"{"G",-12} {wikipediaG,-22} {orders[7],-22} {(orders[7] == wikipediaG ? "ok" : "DIFF")}");
 
         Title("VoicingPhysicalAnalyzer.CalculatePlayability (GA.Domain.Services, compiled): the CagedShape of each shape, with its positions in GA's string order (string 1 first, as ExtractPhysicalLayout numbers them) and reversed (string 6 first, as the comments of DetectCagedShape read them)");
         Console.WriteLine($"{"frets",-15} {"course",-16} {"GA's order",-11} reversed");
@@ -346,7 +348,7 @@ public static class Lesson17
 
         // ---- 5. Open tunings
 
-        Title("The guitar entries of Tunings.toml, read as text (GA.Business.Config copies it next to the program), against Instruments.yaml, which GA reads; each six-string tuning as a change from standard, in semitones, and the notes of its open strings");
+        Title("The guitar entries of Tunings.toml, read as text (GA.Business.Config copies it next to the program), against Instruments.yaml, read with the course's parser (GA's loader looks for an Instruments: key the file does not have); each six-string tuning as a change from standard, in semitones, and the notes of its open strings");
         var toml = TomlGuitars(Path.Combine(AppContext.BaseDirectory, "Tunings.toml"));
         var yaml = Instruments.Read().Where(e => e.Instrument == "Guitar").ToDictionary(e => e.Variant);
         Console.WriteLine($"{"entry",-14} {"Tuning",-38} {"Instruments.yaml",-17} {"string 6 to 1",-20} {"largest",-8} open strings");
