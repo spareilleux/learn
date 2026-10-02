@@ -129,6 +129,22 @@ La [PR de Demerzel #1140](https://github.com/GuitarAlchemist/Demerzel/pull/1140)
 
 MAT-007 sigue **pendiente de verificación** hasta que este cambio se fusione, su despliegue sea correcto y las páginas se lean sin autenticación.
 
+## 2026-10-02 — Streeling MAT-007 publicado
+
+La [PR de Learn #39](https://github.com/spareilleux/learn/pull/39) se fusionó como `0436325`, y su [despliegue de Pages](https://github.com/spareilleux/learn/actions/runs/36377803965) fue correcto. El 2026-10-02, con `main` en `c547150` y su [despliegue](https://github.com/spareilleux/learn/actions/runs/37065792242) correcto, el [módulo MAT-007](../streeling/mathematics/mat-007-least-squares-regularisation/), el índice de matemáticas, el [diario de Streeling](../streeling/journal/) y este diario se leyeron sin autenticación en los tres idiomas: 12 páginas, que respondieron todas 200 y mencionan MAT-007.
+
+MAT-007 pasa así de pendiente de verificación a verificado; su entrada de arriba queda tal como se escribió. En esa lectura, las páginas de MAT-007 enlazaban su fuente en `8c14336`; esta actualización las fija de nuevo en `e203e5a`. Como en los módulos anteriores, publicado no es estudiado: MAT-007 no se ha ejecutado ni estudiado aquí, y su experimento sigue propuesto.
+
+## 2026-10-02 — Streeling MAT-008 a MAT-025 y cinco módulos de música sincronizados, pendientes de verificación
+
+El `master` de Demerzel llegó a [`e203e5a`](https://github.com/GuitarAlchemist/Demerzel/commit/e203e5a25e10b85b8d22ece9a700e12447f4a236), después de la fijación de MAT-007. Esta actualización lo sincroniza en Learn:
+- 23 módulos nuevos en los tres idiomas: [MAT-008 a MAT-025](../streeling/mathematics/) y, en [música](../streeling/music/), MUS-007, MUS-008, MUS-009, MUS-018 y MUS-020;
+- páginas en francés y en español para quince módulos que aquí solo tenían inglés, y las correcciones y los acentos españoles restaurados fusionados en Demerzel desde `8c14336`;
+- los índices de los departamentos;
+- la [entrada del diario de Streeling](../streeling/journal/).
+
+Estos módulos y traducciones siguen **pendientes de verificación** hasta que este cambio se fusione, su despliegue sea correcto y las páginas se lean sin autenticación.
+
 ## Por verificar
 
 - Comprobar las URL públicas de esta actualización y el catálogo tras el despliegue; conservar su recibo en el registro de integración.
