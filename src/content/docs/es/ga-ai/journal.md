@@ -368,6 +368,7 @@ La mayoría de las 22 diferencias del 2026-09-14 se corrigieron upstream en [#68
 - `GaMain` gana un modo, `l20`, que solo enlaza: la herramienta y su parser no han cambiado en `main`, la búsqueda sí.
 - El camino continuo es la búsqueda del curso sobre los mismos 15 candidatos por acorde, con la distancia de la herramienta: un voicing por acorde, elegido por programación dinámica.
 - La solución del cuarto ejercicio se comprobó ejecutando la herramienta del commit fijado, fuera de la salida esperada del curso; las otras tres se leen en la salida esperada y en el código de la herramienta.
+- Ejecución de CI [37045152172](https://github.com/spareilleux/learn/actions/runs/37045152172), para el commit `2db1270`: verde en los tres sistemas, 3 min 14 s en Linux, 4 min 23 s en macOS, 9 min 46 s en Windows, con el clon y la compilación incluidos.
 
 ## Por verificar
 

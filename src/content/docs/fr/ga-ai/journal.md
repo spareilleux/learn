@@ -368,6 +368,7 @@ La plupart des 22 différences du 2026-09-14 ont été corrigées en amont par [
 - `GaMain` gagne un mode, `l20`, qui ne fait que le raccord : l'outil et son lecteur sont inchangés sur `main`, mais pas la recherche.
 - Le chemin continu est une recherche du cours sur les mêmes 15 candidats par accord, avec la distance de l'outil : un voicing par accord, choisi par programmation dynamique.
 - La solution du quatrième exercice a été vérifiée en exécutant l'outil du commit épinglé, hors de la sortie attendue du cours ; les trois autres se lisent dans la sortie attendue et dans le code de l'outil.
+- Exécution de CI [37045152172](https://github.com/spareilleux/learn/actions/runs/37045152172), pour le commit `2db1270` : verte sur les trois systèmes, 3 min 14 s sous Linux, 4 min 23 s sous macOS, 9 min 46 s sous Windows, clone et compilation compris.
 
 ## À vérifier
 

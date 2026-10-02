@@ -368,6 +368,7 @@ Most of the 22 differences of 2026-09-14 were fixed upstream by [#689](https://g
 - `GaMain` gains a mode, `l20`, that only stitches: the tool and its parser are unchanged on `main`, the search isn't.
 - The joined path is the course's search over the same 15 candidates per chord, with the tool's distance: one voicing per chord, chosen by dynamic programming.
 - The solution of the fourth exercise was checked by running the pinned tool outside the course's expected output; the three others read the expected output and the tool's code.
+- CI run [37045152172](https://github.com/spareilleux/learn/actions/runs/37045152172), for commit `2db1270`: green on the three systems, 3 min 14 s on Linux, 4 min 23 s on macOS, 9 min 46 s on Windows, clone and build included.
 
 ## To verify
 
