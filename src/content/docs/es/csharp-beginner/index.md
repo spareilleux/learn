@@ -47,7 +47,7 @@ Los ejemplos usan datos pequeños y reales cuando ayudan: las notas de una guita
 | 4 | [Métodos, arrays y listas](04-methods-arrays-lists/) | parámetros, valores de retorno, arrays, `List<T>`, primeros pasos con `null` |
 | 5 | [Clases y objetos](05-classes-and-objects/) | campos, propiedades, constructores, métodos, `static` |
 | 6 | [Records, structs y enums](06-records-structs-enums/) | tipos de valor y de referencia, igualdad, `enum` |
-| 7 | Interfaces y herencia | `interface`, `abstract`, `override`, polimorfismo |
+| 7 | [Interfaces y herencia](07-interfaces-and-inheritance/) | `interface`, `abstract`, `override`, polimorfismo |
 | 8 | Excepciones y seguridad frente a null | `try`/`catch`/`finally`, `throw`, tipos de referencia que aceptan valores null |
 | 9 | Colecciones y LINQ | `Dictionary<TKey, TValue>`, `HashSet<T>`, `Where`, `Select`, `OrderBy` |
 | 10 | Archivos y texto | `File`, `Path`, leer un archivo CSV de los proyectos de Guitar Alchemist |
@@ -55,7 +55,20 @@ Los ejemplos usan datos pequeños y reales cuando ayudan: las notas de una guita
 | 12 | Un pequeño proyecto | una solución con una biblioteca, una app de consola y pruebas, un paquete NuGet, un primer vistazo a `async` |
 | — | [Diario](journal/) | |
 
-Las lecciones 7 a 12 están planificadas y aún no se han escrito.
+Las lecciones 8 a 12 están planificadas y aún no se han escrito.
+
+## Lo más destacado del diario
+
+El [diario](journal/) recoge lo que la escritura y las pruebas de este curso sacaron a la luz. Estos son los hallazgos que cambian la forma de escribir o ejecutar un programa; cada fila enlaza con la lección que lo enseña y con la entrada del diario que contiene la medición.
+
+| Lo que encontró el diario | Por qué importa | Ver |
+|---|---|---|
+| Un `Writeline` mal escrito (CS0117) solo se señala una vez corregidos el `;` y las comillas que faltan en el mismo programa: los errores de sintaxis ocultan los demás | Corregir un error puede hacer aparecer otros nuevos; es un avance, no un retroceso | [Lección 1](01-first-program/), [diario](journal/#2026-09-14--el-sdk-y-las-aplicaciones-basadas-en-archivos) |
+| `double.TryParse("1.5")` depende de la cultura: `true` y 15 en `es-ES`, donde el punto separa los miles, `false` en `fr-FR` | El mismo programa lee un número distinto en una máquina española o francesa | [Lección 2](02-variables-and-types/), [diario](journal/#2026-09-14--el-sdk-y-las-aplicaciones-basadas-en-archivos) |
+| Las advertencias solo se muestran cuando el SDK compila: un segundo `dotnet run` de un archivo sin cambios no muestra ninguna, ni siquiera con `--no-cache`; `dotnet clean` las hace volver | Una advertencia que desaparece en la ejecución siguiente no está corregida | [Lección 3](03-conditions-and-loops/), [diario](journal/#2026-09-14--el-sdk-y-las-aplicaciones-basadas-en-archivos) |
+| El literal `0` se convierte en una enumeración sin cast, y CS8524 avisa de una expresión `switch` que tiene un brazo por nombre | Una variable de enumeración puede contener un número sin nombre: el programa de la lección falla con 7 | [Lección 6](06-records-structs-enums/), [diario](journal/#2026-10-01--records-structs-y-enums) |
+| Un borrador decía que `shape[i].Fret += 2` sobre una lista de `readonly record struct` da CS1612; una sonda compilada antes de publicar dio CS8852 | Cada salida y cada mensaje de error del curso se pega desde una ejecución, nunca se escribe de memoria | [Lección 6](06-records-structs-enums/), [diario](journal/#2026-10-01--records-structs-y-enums) |
+| En Guitar Alchemist, el `ToString() => Name` de `ChordTemplate` no es `sealed`: sus records derivados muestran todas sus propiedades en lugar del nombre del acorde | El `override` de la lección 7 se encuentra con los records de la lección 6 en código real; un punto de llamada de GA registra el volcado. Aún no comunicado a GA | [Lección 7](07-interfaces-and-inheritance/), [tabla QA](journal/#qa) |
 
 ## Requisitos previos
 

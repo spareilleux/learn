@@ -431,7 +431,7 @@ readonly record struct Position(int StringNumber, int Fret);
 - Une énumération nomme un ensemble fixe de choix ; chaque nom représente un nombre, et la valeur par défaut est 0.
 - Un cast vers une énumération accepte n'importe quel nombre : vérifie avec `Enum.IsDefined`, et donne une branche `_` à une expression `switch`.
 
-La suite, [interfaces et héritage](../#plan), montrera des classes qui partagent un comportement.
+La suite, [interfaces et héritage](../07-interfaces-and-inheritance/), montrera des classes qui partagent un comportement.
 
 ## Sources
 

@@ -47,7 +47,7 @@ Les exemples utilisent de petites données réelles quand ça aide : les notes d
 | 4 | [Méthodes, tableaux et listes](04-methods-arrays-lists/) | paramètres, valeurs de retour, tableaux, `List<T>`, premiers pas avec `null` |
 | 5 | [Classes et objets](05-classes-and-objects/) | champs, propriétés, constructeurs, méthodes, `static` |
 | 6 | [Records, structs et enums](06-records-structs-enums/) | types valeur et types référence, égalité, `enum` |
-| 7 | Interfaces et héritage | `interface`, `abstract`, `override`, polymorphisme |
+| 7 | [Interfaces et héritage](07-interfaces-and-inheritance/) | `interface`, `abstract`, `override`, polymorphisme |
 | 8 | Exceptions et sécurité face à null | `try`/`catch`/`finally`, `throw`, types référence nullables |
 | 9 | Collections et LINQ | `Dictionary<TKey, TValue>`, `HashSet<T>`, `Where`, `Select`, `OrderBy` |
 | 10 | Fichiers et texte | `File`, `Path`, lire un fichier CSV des projets de Guitar Alchemist |
@@ -55,7 +55,20 @@ Les exemples utilisent de petites données réelles quand ça aide : les notes d
 | 12 | Un petit projet | une solution avec une bibliothèque, une application console et des tests, un package NuGet, un premier regard sur `async` |
 | — | [Journal](journal/) | |
 
-Les leçons 7 à 12 sont prévues et pas encore écrites.
+Les leçons 8 à 12 sont prévues et pas encore écrites.
+
+## Les points marquants du journal
+
+Le [journal](journal/) consigne ce que l'écriture et les tests de ce cours ont fait apparaître. Voici les constats qui changent la façon d'écrire ou d'exécuter un programme ; chaque ligne renvoie à la leçon qui l'enseigne et à l'entrée du journal qui contient la mesure.
+
+| Ce que le journal a trouvé | Pourquoi c'est important | Voir |
+|---|---|---|
+| Un `Writeline` mal orthographié (CS0117) n'est signalé qu'une fois corrigés le `;` et le guillemet manquants du même programme : les erreurs de syntaxe cachent les autres | Corriger une erreur peut en faire apparaître de nouvelles ; c'est un progrès, pas un recul | [Leçon 1](01-first-program/), [journal](journal/#2026-09-14--le-sdk-et-les-applications-basées-sur-des-fichiers) |
+| `double.TryParse("1.5")` dépend de la culture : `true` et 15 en `es-ES`, où le point sépare les milliers, `false` en `fr-FR` | Le même programme lit un nombre différent sur une machine espagnole ou française | [Leçon 2](02-variables-and-types/), [journal](journal/#2026-09-14--le-sdk-et-les-applications-basées-sur-des-fichiers) |
+| Les avertissements ne s'affichent que lorsque le SDK compile : un second `dotnet run` d'un fichier inchangé n'en affiche aucun, même avec `--no-cache` ; `dotnet clean` les fait revenir | Un avertissement disparu à l'exécution suivante n'est pas corrigé pour autant | [Leçon 3](03-conditions-and-loops/), [journal](journal/#2026-09-14--le-sdk-et-les-applications-basées-sur-des-fichiers) |
+| Le littéral `0` se convertit en énumération sans cast, et CS8524 avertit pour une expression `switch` qui a une branche par nom | Une variable d'énumération peut contenir un nombre sans nom : le programme de la leçon échoue sur 7 | [Leçon 6](06-records-structs-enums/), [journal](journal/#2026-10-01--records-structs-et-enums) |
+| Un brouillon disait que `shape[i].Fret += 2` sur une liste de `readonly record struct` donne CS1612 ; une sonde compilée avant publication a donné CS8852 | Chaque sortie et chaque message d'erreur du cours est collé depuis une exécution, jamais écrit de mémoire | [Leçon 6](06-records-structs-enums/), [journal](journal/#2026-10-01--records-structs-et-enums) |
+| Dans Guitar Alchemist, le `ToString() => Name` de `ChordTemplate` n'est pas `sealed` : ses records dérivés affichent toutes leurs propriétés au lieu du nom de l'accord | L'`override` de la leçon 7 rencontre les records de la leçon 6 dans du vrai code ; un site d'appel de GA journalise le dump. Pas encore signalé à GA | [Leçon 7](07-interfaces-and-inheritance/), [tableau QA](journal/#qa) |
 
 ## Prérequis
 

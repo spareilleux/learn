@@ -431,7 +431,7 @@ readonly record struct Position(int StringNumber, int Fret);
 - An enum names a fixed set of choices; each name stands for a number, and the default is 0.
 - A cast to an enum accepts any number: check with `Enum.IsDefined`, and give a `switch` expression a `_` arm.
 
-Next: [interfaces and inheritance](../#outline), where classes start sharing behavior.
+Next: [interfaces and inheritance](../07-interfaces-and-inheritance/), where classes start sharing behavior.
 
 ## Sources
 
