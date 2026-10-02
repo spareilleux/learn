@@ -134,9 +134,12 @@ The five examples ran on Windows 11 with Rust 1.94.0; `check.sh` passed (formatt
 
 All nine hypotheses held. Most were read from `candle-nn`'s sources, so the run mostly confirmed the reading; the findings came from what wasn't predicted, rows 18 to 20 of the QA table: the documented `u32` target that fails, the error that names the wrong type, and the `u32::MAX` target that is skipped but counted. The CI that ran on 2026-09-16 ([run 35096038472](https://github.com/spareilleux/learn/actions/runs/35096038472), commit `f922f5d`) passed on Linux, Windows and macOS on an `arm64` image, which settles the earlier *to verify* about `f32` on macOS ARM for lessons 1 to 4. The CI of lesson 5's pull request is *to verify*.
 
+## 2026-10-02 — Lesson 5 on CI
+
+The pull request's CI ([run 36865098140](https://github.com/spareilleux/learn/actions/runs/36865098140), commit `fd3359e`, October 1) passed on the three systems: on Ubuntu 24.04, on Windows (image `windows-2025-vs2026`) and on macOS on an `arm64` image (`macos-26-arm64`), the five lesson 5 examples matched the outputs in `expected/` line for line, the 11 outputs compared before them too, and the nine doctests passed; on Linux, the nightly toolchain also confirmed `E0599` for the two new `compile_fail` snippets. The outputs that could have depended on the platform held: the losses to four decimals, the `f32` training, the subnormal gradient printed `4e-44`, the seeded weights and the initialization checks. This settles the *to verify* above.
+
 ## To verify
 
-- The lesson 5 outputs on Linux and macOS, in the pull request's CI run.
 - Whether training on `iris.data` instead of `bezdekIris.data` changes the lesson 5 results (row 35 is a test flower).
 - PyTorch's AdamW against the lesson 5 numbers: equal to rounding, by hypothesis, not to the bit.
 - The C compiler requirement after the next Candle release.

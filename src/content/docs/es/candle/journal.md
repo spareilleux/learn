@@ -134,9 +134,12 @@ Los cinco ejemplos se ejecutaron en Windows 11 con Rust 1.94.0; `check.sh` pasó
 
 Las nueve hipótesis se sostuvieron. La mayoría salía de leer las fuentes de `candle-nn`, así que la ejecución sobre todo confirmó la lectura; los hallazgos vinieron de lo que no se había predicho, las filas 18 a 20 de la tabla QA: el objetivo `u32` documentado que falla, el error que nombra el tipo equivocado, y el objetivo `u32::MAX` que se salta pero se cuenta. El CI que se ejecutó el 2026-09-16 ([run 35096038472](https://github.com/spareilleux/learn/actions/runs/35096038472), commit `f922f5d`) pasó en Linux, Windows y macOS sobre una imagen `arm64`, lo que resuelve el *por verificar* anterior sobre `f32` en macOS ARM para las lecciones 1 a 4. El CI del pull request de la lección 5 queda *por verificar*.
 
+## 2026-10-02 — Lección 5 en el CI
+
+El CI del pull request ([run 36865098140](https://github.com/spareilleux/learn/actions/runs/36865098140), commit `fd3359e`, 1 de octubre) pasó en los tres sistemas: en Ubuntu 24.04, en Windows (imagen `windows-2025-vs2026`) y en macOS sobre una imagen `arm64` (`macos-26-arm64`), los cinco ejemplos de la lección 5 reprodujeron línea por línea las salidas de `expected/`, también las 11 salidas comparadas antes que ellos, y los nueve doctests pasaron; en Linux, la toolchain nightly confirmó además `E0599` para los dos nuevos fragmentos `compile_fail`. Las salidas que podían depender de la plataforma se sostuvieron: las pérdidas con cuatro decimales, el entrenamiento en `f32`, el gradiente subnormal impreso `4e-44`, los pesos con semilla y las comprobaciones de la inicialización. Esto resuelve el *por verificar* de arriba.
+
 ## Por verificar
 
-- Las salidas de la lección 5 en Linux y macOS, en la ejecución del CI del pull request.
 - Si entrenar con `iris.data` en lugar de `bezdekIris.data` cambia los resultados de la lección 5 (la fila 35 es una flor de prueba).
 - El AdamW de PyTorch frente a los números de la lección 5: igual salvo redondeo, por hipótesis, no bit a bit.
 - El requisito del compilador de C tras la próxima versión de Candle.

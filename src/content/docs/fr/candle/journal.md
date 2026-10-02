@@ -134,9 +134,12 @@ Les cinq exemples ont tourné sous Windows 11 avec Rust 1.94.0 ; `check.sh` est 
 
 Les neuf hypothèses ont tenu. La plupart venaient de la lecture des sources de `candle-nn`, donc l'exécution a surtout confirmé la lecture ; les constats sont venus de ce qui n'était pas prédit, les lignes 18 à 20 du tableau QA : la cible `u32` documentée qui échoue, l'erreur qui nomme le mauvais type, et la cible `u32::MAX` sautée mais comptée. La CI qui a tourné le 2026-09-16 ([run 35096038472](https://github.com/spareilleux/learn/actions/runs/35096038472), commit `f922f5d`) est passée sous Linux, Windows et macOS sur une image `arm64`, ce qui règle le précédent *à vérifier* sur `f32` sous macOS ARM pour les leçons 1 à 4. La CI de la pull request de la leçon 5 est *à vérifier*.
 
+## 2026-10-02 — Leçon 5 en CI
+
+La CI de la pull request ([run 36865098140](https://github.com/spareilleux/learn/actions/runs/36865098140), commit `fd3359e`, 1er octobre) est passée sur les trois systèmes : sous Ubuntu 24.04, sous Windows (image `windows-2025-vs2026`) et sous macOS sur une image `arm64` (`macos-26-arm64`), les cinq exemples de la leçon 5 ont reproduit ligne pour ligne les sorties de `expected/`, les 11 sorties comparées avant eux aussi, et les neuf doctests sont passés ; sous Linux, la toolchain nightly a aussi confirmé `E0599` pour les deux nouveaux extraits `compile_fail`. Les sorties qui auraient pu dépendre de la plateforme ont tenu : les pertes à quatre décimales, l'entraînement en `f32`, le gradient sous-normal affiché `4e-44`, les poids à graine et les contrôles de l'initialisation. Cela règle le *à vérifier* ci-dessus.
+
 ## À vérifier
 
-- Les sorties de la leçon 5 sous Linux et macOS, dans l'exécution de la CI de la pull request.
 - Si l'entraînement sur `iris.data` au lieu de `bezdekIris.data` change les résultats de la leçon 5 (la ligne 35 est une fleur de test).
 - L'AdamW de PyTorch face aux nombres de la leçon 5 : égal à l'arrondi près, par hypothèse, pas au bit près.
 - L'exigence d'un compilateur C après la prochaine version de Candle.
