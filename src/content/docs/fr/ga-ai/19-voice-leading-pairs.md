@@ -255,6 +255,10 @@ prompts whose first pair would move less with the least over every choice of not
 - **Les verdicts lisent des classes de hauteurs.** Le cours compte comme juste un accord de septième sans quinte, quelle que soit la note qu'il double, et ne juge ni le doigté ni le registre.
 - **Seule la première paire est vérifiée en détail.** Le programme compte les paires justes parmi les cinq, mais ne mesure pas comment le défaut de la distance les réordonne.
 
+## Signalé en amont
+
+- Signalés après l'écriture de cette leçon, dans le ticket de GA [#791](https://github.com/GuitarAlchemist/ga/issues/791) : les voicings que l'outil ne vérifie jamais, la distance entre voicings de tailles différentes, l'ordre des diagrammes et le brouillon de skill en attente.
+
 ## Exercices
 
 1. Avec 50 candidats, au commit épinglé, l'outil répond à C → Am par `0-x-2-x-x-0` des deux côtés, pour 0 demi-ton. Que joue ce voicing, et pourquoi une distance de 0 n'est-elle pas une réponse ici ?

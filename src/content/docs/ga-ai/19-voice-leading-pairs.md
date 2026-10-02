@@ -255,6 +255,10 @@ prompts whose first pair would move less with the least over every choice of not
 - **The verdicts read pitch classes.** The course counts a seventh chord without its fifth as right, whatever note it doubles, and doesn't judge the fingering or the register.
 - **Only the first pair is checked in detail.** The program counts the right pairs among the five, but doesn't measure how the distance's fault reorders them.
 
+## Reported upstream
+
+- Reported after this lesson was written, in GA issue [#791](https://github.com/GuitarAlchemist/ga/issues/791): the voicings the tool never checks, the distance between voicings of different sizes, the order of the diagrams and the parked skill draft.
+
 ## Exercises
 
 1. With 50 candidates at the pin, the tool answers C → Am with `0-x-2-x-x-0` on both sides, at 0 semitones. What does that voicing play, and why is a distance of 0 no answer here?
