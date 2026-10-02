@@ -763,6 +763,65 @@ error, 31 passed. The two curio runs died while an NVIDIA driver was being
 installed on the machine ("Could not create D3D11 device", then a segmentation
 fault); run again on the same build, both passed
 (artpass/publish/rerun-curio-pub16.sh).
+Version 26, exported 2026-10-02 22:55:25 UTC, brings four things. The wand's
+small TARS: out of the wand's puff steps a TARS, four slabs on a hinge, which
+walks off as the film's does, a pair of slabs planted while the other swings
+round it; the ankh calls them back to you; eight at most (scripts/tars.gd,
+scripts/curio_wheel.gd). Seldon's pedestal: its top gilt fillet sunk 6 mm
+under the cornice, whose top it shared, so the top no longer flickers gold and
+black (scripts/seldon_statue.gd); its mouldings and the hall's gilt profiles
+and ornament (eggs, darts, beads, reels) come from scripts/observatory.gd,
+drawn flat here as before. IX pipelines as holograms over Seldon's statue: a
+look held on the sphere in his hands, H, a click or a tap opens one, and it
+replays a real local run of one of IX's five showcase pipelines, step by step
+in its run order, each panel with a chart of the step's result
+(scripts/hologram_ix.gd, assets/holo_*.gdshader; assets/ix_pipelines.json
+baked from the runs by artpass/holo/run_ix_pipelines.py and bake_ix_holo.py).
+And adaptive quality, after the author asked that it work on a weak GPU as
+well as on the RTX: scripts/quality.gd times frames and, while they come
+slower than about 36 a second, steps down a ladder of five levels:
+anti-aliasing; glow and the gilt ornament; 3D at 0.75 with the shelved books
+drawn as boxes and the balusters on 6 sides (3.1 million triangles to 0.9);
+0.6 with no shadows and the far lamps faded; 0.5. ?quality=0 to 5 in the
+address fixes a level. The page's supersampling fallback now only lowers the
+resolution, so it cannot undo a lower level
+(artpass/publish/patch_head_ss.py). The rim lamps under the dome lost 130,000
+triangles they did not show (artpass/perf/NOTES.md).
+index.pck is now 21,871,884 bytes; index.html changes that size and the
+supersampling fallback's one line, and index.wasm and index.js are unchanged.
+Web: the export served locally (artpass/publish/gzip_server.py, the build's
+own course list, gzip-encoded), in headless Chrome at 1600x900
+(artpass/publish/quality-web.mjs). With the RTX 5080 (ANGLE on Direct3D 11),
+version 26 started, ran at 60 frames a second on its 2400x1350 canvas and
+stayed at quality level 0. With SwiftShader, Chrome's CPU renderer, standing
+in for the weakest GPU, a frame took 1.55 s; quality.gd reached level 5 within
+11 s of the scene's start, and frames then took 0.42 s on an 800x450 canvas. A
+first build of version 26, which counted 45 frames per measurement and timed
+its waits by Godot's delta, took 90 s to reach level 2 there. In both runs H
+opened the IX hologram over Seldon's statue, and the page logged no error and
+no exception. The final build, rebuilt for tars.gd (below), started the same
+way with the RTX, at level 0 and 60 frames a second, H opened the hologram,
+and nothing was logged. Real weak GPUs, phones and other browsers: to verify.
+Native runs (Godot 4.6.1) on the exported project, 38 of them
+(artpass/publish/regress-pub17.sh): version 25's 33, every test that reads,
+aims or taps a book, walks or uses the touch controls, the curios, the drone,
+the roof, the terrace, the lift and the corridor; then the TARS test at 60 and
+10 frames a second, the hologram probe and the quality ladder at 12 and 3
+frames a second. All passed, but the TARS and curio runs logged a script error
+at every step a TARS took: tars.gd's _stance_feet returned a ternary of two
+array literals, an untyped Array where Array[Vector3] was declared, so the
+planted feet were never measured and the check that they do not slide passed
+on nothing. Measured, they slid 2.5 cm a step, the whole body turning on the
+outer pair's feet, 11 cm apart. The turn now rides on the swinging pair, which
+comes round to the new heading while the planted pair keeps its own. Rebuilt,
+the seven runs that load tars.gd passed with no script error, the planted feet
+moving less than a micrometre (artpass/publish/rerun-tars-pub17.sh). The
+hologram probe opened the first pipeline with a look held on the sphere for
+1.0 s; from the hall's start view, all 16 panels of the longest pipeline were
+on screen. The quality ladder, frames held to 12 a second, went to levels 2, 4
+and 5 at 5.4, 9.9 and 14.4 s; at 3 a second, straight to 5 at 6.3 s. Native
+GPU time per level, Compatibility at 1600x900 on the RTX 5080: 1.60, 1.38,
+1.16, 0.99, 0.93 and 0.91 ms.
 
 Native Compatibility GPU time, RTX 5080, 1600x900, 240 frames per view: 0.44 to
 0.52 ms for the previous web scene, 0.64 to 1.44 ms with the detail pass; up to
@@ -775,14 +834,14 @@ by about 15 percent.
 SHA-256 source inputs of the exported project:
 project.godot eb7d53597517c711d564943e467cce2926699c2422b073079737325c3400692e
 main.tscn fb6245c960d3625ca05920116c58351d9dbeb255beae59175d89c06d47049564
-export_presets.cfg 1bd7171d93c9a378f1b328e945be2a7960478e89d34ae269f013ef83c306588f
+export_presets.cfg e67d9e3fc0e8b0d9cab2672e3f730f209e81619d356b52a7079f7d19f7342dc0
 scripts/fly_camera.gd 2e5cdd15ca7bdcfa30ec129e354a309f3ff7296f6fbf54ac144984ed9aa9f8e7
 scripts/capture.gd 52ea2b5e40db2f1f4cdbd7658074ef60bd117e1f4110c1b8995590a4196748d0
-scripts/observatory.gd c98ef50522a4c748feba26e418b7e1988933f66cc93bd5fd933b2075da7b2254
+scripts/observatory.gd 5a7bd949d0af2ae710103fbf4db3c3ebf57fd4c48a58a0dfa7856422e1371733
 scripts/course_library.gd b2bf3fe3723d8a6f2a2392199fbf276d8bab752259eab6f4f6398503c5e88b42
 scripts/steel_cube.gd f28e71fffcd151663bc9a98b3c135cc7b805490e8298d3cf01029455c973f94c
-scripts/seldon_statue.gd 4e41b282aa2cc4de794296586b65f5f4d39688312673ddc46226fd3906cf4b27
-scripts/touch_controls.gd c3bd66bfb9555381a22bf983dc43c7f9be64710c5f6fcb490e26e41a4f63b9d6
+scripts/seldon_statue.gd 3fa754ef1ab9650168478088cb65aad59a98c1657ba5dd704ac67fff3d2e6d1f
+scripts/touch_controls.gd 981e296f1d34229136cc38ca9fb7c618f78d27c7c936bcd0049573a19309ca83
 scripts/walk_physics.gd 156fc6e18103d2b8cc211697c5e1b8c519bc41707f95c44b52afcdc87e850ea2
 scripts/view_fit.gd f574c7949a5b324f91f062df9982366c123271804069b507206f88ad7062fe4c
 scripts/view_move.gd 558a4059815cb3a8a202d205d8cfada17653fb533e7e056bfe9e8a434dac0431
@@ -818,16 +877,23 @@ scripts/lift.gd 14ef3214d63cb89bb286894783b27181afb65bd9c0fb6441550b7946931f711d
 assets/sky_core_cap.png a110fdfa1b79cc41eec119265aeb89bc211d0b8e0eb6c759b45c25496f2daabe
 assets/kiosk_glass.gdshader 76226f17e5884a042b85e5fc544a4b71012ea6e389b9743c1cac65083a06bc44
 scripts/lift_sounds.gd 4daed5e380396a3711fc7ff2f1f72b877b9efbdaff6d6fa428c595b1dad7b244
-scripts/curio_wheel.gd dc11593f537a9099a1f55f19be41886eeb91c3c8701473be3fd58d977a98703b
+scripts/curio_wheel.gd ff3de55b72cd54d3b5fa85bed26fa0b7fadcf30629787467a4ded7ed110ab22b
 scripts/drone.gd e3735898c9710ca19190d7d2713230c1f40595bb0fea7181909a78f395c0e7b9
-scripts/build_info.gd a41814f6e01fa735bba00f21c49c2ace7ee65a363c274c91c60b6f198131d421
+scripts/tars.gd 747a7c313a37c0731b4a9c8b5f78d364cbc6a6181b25623cd919a0a5b19a09d0
+scripts/hologram_ix.gd 436dbdf897703f448abdbcd583aaff88086f6385923e30d71ff7f7449afeff90
+scripts/quality.gd 5e5c8099eb468fd39b646fc58338fb86a03ff19ad6caa64f5d01c7c052f9c128
+assets/holo_panel.gdshader 1a77f62f3bd53c29c95341058baa0d19613737ab2a98f24c6fd4edc150637c08
+assets/holo_edge.gdshader 029b74b7147bdc55e8b1042c3274b3018892217653e47458ca58f0115229f8e7
+assets/holo_ring.gdshader d26ffba2fe3939856488751ef42d4064efddf4f9f530d8d558397cfcd96ed5ce
+assets/ix_pipelines.json 180cb180625664b027f3c7e01d855533c757e4e5525c506bd2a6f26ecc73f947
+scripts/build_info.gd 4a841d8de1417414cb41d3ba21fdebd553e6cfb02cdae88032f42b63136f0385
 
 SHA-256 output files:
-index.pck 36564b2a4e4bd2f17d9fb1a62b64781876c108c81c004b5e281e82d8270d6abd
+index.pck b3d3c86d64d7dccaf6100b9dc5cd86c59ca6fdf1a9df60ce6d9f1edd4b26c456
 index.wasm 99962b29677e42f3ba0258bd90fdc52ad90295954c4473e816ad02cfe5ff1d4f
 index.js e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981
 
 This directory contains a prebuilt binary export. Re-export only for deliberate
 scene changes. A scene re-export leaves the engine files (index.wasm, index.js)
 byte-identical, so git keeps a single copy; each scene revision adds its
-index.pck (21.8 MB here) to the binary history.
+index.pck (21.9 MB here) to the binary history.

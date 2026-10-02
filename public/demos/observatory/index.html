@@ -119,7 +119,8 @@ body {
     if (times.length < 90) { requestAnimationFrame(tick); return; }
     times.sort(function (a, b) { return a - b; });
     window.__obsFrameMedian = times[45];
-    if (times[45] > 22) { window.__obsSS = 1; window.dispatchEvent(new Event('resize')); }
+    // Only ever down: scripts/quality.gd may have taken it under 1 already, on a slow GPU.
+    if (times[45] > 22 && window.__obsSS > 1) { window.__obsSS = 1; window.dispatchEvent(new Event('resize')); }
   }
   requestAnimationFrame(tick);
 })();
@@ -176,7 +177,7 @@ body {
 
 		<script src="index.js"></script>
 		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":21793592,"index.wasm":37685705},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":21871884,"index.wasm":37685705},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
 const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
 
