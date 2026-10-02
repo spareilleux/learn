@@ -63,6 +63,7 @@ Three other courses on this site cover the background, and this one links to the
 | 14 | [What the substitution skill answers](14-what-the-substitution-skill-answers/) | `ChordSubstitutionSkill`, `ga_chord_substitutions` and `ga_chord_compare`, `GrothendieckService.FindNearby`, `GrothendieckDelta`, the closure `domain.chordSubstitutions` | a distance under which a whole set class ties, a tie broken by storage order, optional inputs a tool requires |
 | 15 | [The notes of a chord](15-the-notes-of-a-chord/) | `ChordInfoSkill`, `ChordVocabulary`, `ChordSpelling`, `ga_chord_info` and the chord-info SKILL.md | the leftmost match of a regular expression, `ToLowerInvariant` beyond ASCII, a round trip as a test |
 | 16 | [The voicings of a chord](16-the-voicings-of-a-chord/) | `ChordVoicingsSkill`, `TypedMusicalQueryExtractor`, `ChordPitchClasses`, `OptickSearchStrategy` and ADR-0002, at the pin and on `main` | a second clone of a dependency at another commit, checking an answer by playing it, a filter on names, a filter dropped without a word in the answer |
+| 17 | [The capo and the tunings](17-the-capo-and-the-tunings/) | `CapoSkill`, `AlternateTuningsSkill` and the offline fallback, at the pin and on `main` | checking arithmetic against a textbook on every key and fret, a word boundary after an accidental, a direction read from the phrasing, spelling as part of the answer |
 | — | [Journal](journal/) | | |
 
 ## Prerequisites

@@ -14,7 +14,8 @@ KEYS_FILE=Common/GA.Domain.Services/Tonal/KeyIdentificationService.cs
 # takes its key from that service; the file is unchanged on main since
 DSL_FILE=Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs
 # Lesson 16 also builds GA's voicing pipeline as it is on main, from the generator to the chord
-# voicings skill, in a second clone: most of the voicing files changed after the pin
+# voicings skill, in a second clone: most of the voicing files changed after the pin. Lesson 17
+# asks main's tunings skill from the same clone
 MAIN_SHA=f4f5b4af881f3970c6fdc25fa61a30ef9d23458a
 # Lesson 8 reads GA's prompt corpus, outside the sparse checkout, at the pinned commit
 CORPUS=Tests/Apps/GaChatbot.Api.Tests/Corpus/prompts.yaml

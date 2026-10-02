@@ -19,13 +19,33 @@ public static class Entry
 {
     public static int Main(string[] args)
     {
-        if (args is not ["l16"])
-        {
-            Console.Error.WriteLine("usage: GaMain l16");
-            return 2;
-        }
-
         Console.OutputEncoding = System.Text.Encoding.UTF8;
+        switch (args)
+        {
+            case ["l16"]:
+                Lesson16();
+                return 0;
+            case ["l17"]:
+                Lesson17();
+                return 0;
+            default:
+                Console.Error.WriteLine("usage: GaMain l16|l17");
+                return 2;
+        }
+    }
+
+    // Lesson 17: on main, AlternateTuningsSkill's name patterns reject a sharp or flat after the
+    // letter; the reading of six notes is the pin's
+    static void Lesson17()
+    {
+        Console.WriteLine("# l17, GA's main");
+        var skill = new AlternateTuningsSkill(NullLogger<AlternateTuningsSkill>.Instance);
+        TuningsProbe.ByNotes(skill, "on main");
+        TuningsProbe.Others(skill, "on main");
+    }
+
+    static void Lesson16()
+    {
         Console.WriteLine("# l16, GA's main");
         var indexPath = Path.Combine(AppContext.BaseDirectory, "out", "optick-mini-main.index");
         var corpus = WriteIndex(indexPath);
@@ -38,7 +58,6 @@ public static class Entry
         ChordVoicingsProbe.Answers(skill, highFirst: false, corpus, "on main");
         ChordVoicingsProbe.TechniqueAnswers(skill, highFirst: false, corpus, "on main");
         ChordVoicingsProbe.FullAnswer(skill, "open chord shape for E minor", highFirst: false);
-        return 0;
     }
 
     // The chatbot host's extractor: the typed tier, then a model that is never reached here
