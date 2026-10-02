@@ -11,4 +11,4 @@ sidebar:
 
 ## Módulos
 
-- [AUD-001 · EQ y compresion: por que importa el orden en la cadena de senal](aud-001-eq-compression-order/)
+- [AUD-001 · EQ y compresión: por qué importa el orden en la cadena de señal](aud-001-eq-compression-order/)

@@ -11,4 +11,4 @@ sidebar:
 
 ## Módulos
 
-- [COG-001 · Tu cerebro te miente — Sesgos cognitivos que todos deberian conocer](cog-001-your-brain-lies-to-you/)
+- [COG-001 · Tu cerebro te miente — Sesgos cognitivos que todos deberían conocer](cog-001-your-brain-lies-to-you/)

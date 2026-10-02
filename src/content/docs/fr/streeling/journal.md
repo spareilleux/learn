@@ -21,12 +21,12 @@ Coche un module une fois étudié. Sous **Notes**, ajoute une entrée datée : c
 ### Informatique
 
 - [ ] [CS-001 · Penser algorithmiquement](../computer-science/cs-001-thinking-algorithmically/) <!-- cs-001-thinking-algorithmically -->
-- [ ] [CS-002 · Governing Agentic Loops](../computer-science/cs-002-governing-agentic-loops/) <!-- cs-002-governing-agentic-loops -->
+- [ ] [CS-002 · Gouverner les boucles agentiques](../computer-science/cs-002-governing-agentic-loops/) <!-- cs-002-governing-agentic-loops -->
 
 ### Cybernétique
 
-- [ ] [CYB-001 · Viable System Model Mapping to AI Governance](../cybernetics/cyb-001-vsm-ai-governance-mapping/) <!-- cyb-001-vsm-ai-governance-mapping -->
-- [ ] [CYB-002 · Active Dampening Mechanisms for Cross-Repo Oscillation Control](../cybernetics/cyb-002-active-dampening-cross-repo-oscillation/) <!-- cyb-002-active-dampening-cross-repo-oscillation -->
+- [ ] [CYB-001 · Correspondance entre le modèle du système viable et la gouvernance de l'IA](../cybernetics/cyb-001-vsm-ai-governance-mapping/) <!-- cyb-001-vsm-ai-governance-mapping -->
+- [ ] [CYB-002 · Mécanismes d'amortissement actif pour maîtriser l'oscillation entre dépôts](../cybernetics/cyb-002-active-dampening-cross-repo-oscillation/) <!-- cyb-002-active-dampening-cross-repo-oscillation -->
 - [ ] [CYB-003 · Measuring the Variety Ratio Quantitatively](../cybernetics/cyb-003-measuring-variety-ratio-quantitatively/) <!-- cyb-003-measuring-variety-ratio-quantitatively -->
 
 ### Futurologie
@@ -36,8 +36,8 @@ Coche un module une fois étudié. Sous **Notes**, ajoute une entrée datée : c
 ### Guitar Alchemist Academy
 
 - [ ] [GAA-001 · Votre Premier Accord](../guitar-alchemist-academy/gaa-001-your-first-chord/) <!-- gaa-001-your-first-chord -->
-- [ ] [GAA-002 · Training Your Ear](../guitar-alchemist-academy/gaa-002-training-your-ear/) <!-- gaa-002-training-your-ear -->
-- [ ] [GAA-003 · Improvisation Foundations](../guitar-alchemist-academy/gaa-003-improvisation-foundations/) <!-- gaa-003-improvisation-foundations -->
+- [ ] [GAA-002 · Éduquer votre oreille](../guitar-alchemist-academy/gaa-002-training-your-ear/) <!-- gaa-002-training-your-ear -->
+- [ ] [GAA-003 · Fondements de l'improvisation](../guitar-alchemist-academy/gaa-003-improvisation-foundations/) <!-- gaa-003-improvisation-foundations -->
 
 ### Études de guitare
 
@@ -46,7 +46,7 @@ Coche un module une fois étudié. Sous **Notes**, ajoute une entrée datée : c
 
 ### Théorie de l'information
 
-- [ ] [INF-001 · The Entropy of Governance](../information-theory/inf-001-entropy-of-governance/) <!-- inf-001-entropy-of-governance -->
+- [ ] [INF-001 · L'entropie de la gouvernance](../information-theory/inf-001-entropy-of-governance/) <!-- inf-001-entropy-of-governance -->
 
 ### Mathématiques
 
@@ -57,24 +57,47 @@ Coche un module une fois étudié. Sous **Notes**, ajoute une entrée datée : c
 - [ ] [MAT-005 · Problèmes aux valeurs propres symétriques](../mathematics/mat-005-symmetric-eigenproblems/) <!-- mat-005-symmetric-eigenproblems -->
 - [ ] [MAT-006 · Décomposition en valeurs singulières et approximation de rang faible](../mathematics/mat-006-svd-low-rank-approximation/) <!-- mat-006-svd-low-rank-approximation -->
 - [ ] [MAT-007 · Moindres carrés, régularisation et identifiabilité](../mathematics/mat-007-least-squares-regularisation/) <!-- mat-007-least-squares-regularisation -->
+- [ ] [MAT-008 · Probabilités et raisonnement conditionnel](../mathematics/mat-008-probability-conditional-reasoning/) <!-- mat-008-probability-conditional-reasoning -->
+- [ ] [MAT-009 · Estimation, incertitude et échantillonnage reproductible](../mathematics/mat-009-estimation-uncertainty-sampling/) <!-- mat-009-estimation-uncertainty-sampling -->
+- [ ] [MAT-010 · Entropie, divergences et information mutuelle](../mathematics/mat-010-information-entropy-divergences/) <!-- mat-010-information-entropy-divergences -->
+- [ ] [MAT-011 · Gradients et différentiation automatique en mode inverse](../mathematics/mat-011-gradients-reverse-mode-autodiff/) <!-- mat-011-gradients-reverse-mode-autodiff -->
+- [ ] [MAT-012 · Optimisation itérative](../mathematics/mat-012-iterative-optimisation/) <!-- mat-012-iterative-optimisation -->
+- [ ] [MAT-013 · Distances, noyaux et matrices semi-définies positives](../mathematics/mat-013-distances-kernels-psd/) <!-- mat-013-distances-kernels-psd -->
+- [ ] [MAT-014 · L'ACP comme préservation de la variance](../mathematics/mat-014-pca-variance-preservation/) <!-- mat-014-pca-variance-preservation -->
+- [ ] [MAT-015 · MDS classique et préservation des distances](../mathematics/mat-015-classical-mds-distance-preservation/) <!-- mat-015-classical-mds-distance-preservation -->
+- [ ] [MAT-016 · ACP à noyau et projections trompeuses](../mathematics/mat-016-kernel-pca-misleading-projections/) <!-- mat-016-kernel-pca-misleading-projections -->
+- [ ] [MAT-017 · Factorisation en matrices non négatives](../mathematics/mat-017-nonnegative-matrix-factorisation/) <!-- mat-017-nonnegative-matrix-factorisation -->
+- [ ] [MAT-018 · Partitionnement, densité et validité des clusters](../mathematics/mat-018-clustering-density-validity/) <!-- mat-018-clustering-density-validity -->
+- [ ] [MAT-019 · Graphes, centralité et structure spectrale](../mathematics/mat-019-graphs-centrality-spectral/) <!-- mat-019-graphs-centrality-spectral -->
+- [ ] [MAT-020 · Chaînes de Markov et modèles de Markov cachés](../mathematics/mat-020-markov-chains-hmm/) <!-- mat-020-markov-chains-hmm -->
+- [ ] [MAT-021 · Analyse de Fourier et signaux](../mathematics/mat-021-fourier-analysis-signals/) <!-- mat-021-fourier-analysis-signals -->
+- [ ] [MAT-022 · Symétrie, groupes et invariants](../mathematics/mat-022-symmetry-groups-invariants/) <!-- mat-022-symmetry-groups-invariants -->
+- [ ] [MAT-023 · Réseaux de Petri et accessibilité](../mathematics/mat-023-petri-nets-reachability/) <!-- mat-023-petri-nets-reachability -->
+- [ ] [MAT-024 · Systèmes dynamiques, stabilité et rétroaction](../mathematics/mat-024-dynamical-systems-stability-feedback/) <!-- mat-024-dynamical-systems-stability-feedback -->
+- [ ] [MAT-025 · Allocation sous contraintes, jeux, bandits et pénalités](../mathematics/mat-025-allocation-games-bandits-penalties/) <!-- mat-025-allocation-games-bandits-penalties -->
 
 ### Musique
 
 - [ ] [MUS-001 · Qu'est-ce qu'un accord ?](../music/mus-001-what-is-a-chord/) <!-- mus-001-what-is-a-chord -->
-- [ ] [MUS-002 · Beyond Tonality](../music/mus-002-beyond-tonality/) <!-- mus-002-beyond-tonality -->
-- [ ] [MUS-003 · How Harmony Works](../music/mus-003-functional-harmony/) <!-- mus-003-functional-harmony -->
-- [ ] [MUS-004 · Rhythm, Meter, and Groove](../music/mus-004-rhythm-and-groove/) <!-- mus-004-rhythm-and-groove -->
-- [ ] [MUS-005 · Jazz Harmony for Guitar](../music/mus-005-jazz-harmony/) <!-- mus-005-jazz-harmony -->
-- [ ] [MUS-006 · The Scale Universe](../music/mus-006-the-scale-universe/) <!-- mus-006-the-scale-universe -->
+- [ ] [MUS-002 · Au-delà de la tonalité](../music/mus-002-beyond-tonality/) <!-- mus-002-beyond-tonality -->
+- [ ] [MUS-003 · Comment fonctionne l'harmonie](../music/mus-003-functional-harmony/) <!-- mus-003-functional-harmony -->
+- [ ] [MUS-004 · Rythme, mesure et groove](../music/mus-004-rhythm-and-groove/) <!-- mus-004-rhythm-and-groove -->
+- [ ] [MUS-005 · Harmonie jazz pour la guitare](../music/mus-005-jazz-harmony/) <!-- mus-005-jazz-harmony -->
+- [ ] [MUS-006 · L'univers des gammes](../music/mus-006-the-scale-universe/) <!-- mus-006-the-scale-universe -->
+- [ ] [MUS-007 · Hauteur, orthographe et identité enharmonique](../music/mus-007-pitch-spelling-enharmonic-identity/) <!-- mus-007-pitch-spelling-enharmonic-identity -->
+- [ ] [MUS-008 · Intervalles, renversements et intervalles composés](../music/mus-008-intervals-inversion-compound/) <!-- mus-008-intervals-inversion-compound -->
+- [ ] [MUS-009 · Accordage et géométrie du manche](../music/mus-009-tuning-fretboard-geometry/) <!-- mus-009-tuning-fretboard-geometry -->
+- [ ] [MUS-018 · Identification de la tonalité, chiffres romains et cadences](../music/mus-018-key-finding-roman-numerals-cadences/) <!-- mus-018-key-finding-roman-numerals-cadences -->
+- [ ] [MUS-020 · Classes d'ensembles, vecteurs d'intervalles, relation Z et formes premières](../music/mus-020-set-classes-interval-vectors-prime-forms/) <!-- mus-020-set-classes-interval-vectors-prime-forms -->
 
 ### Musicologie
 
 - [ ] [MCL-001 · Comment la musique évolue](../musicology/mcl-001-how-music-evolves/) <!-- mcl-001-how-music-evolves -->
-- [ ] [MCL-002 · Musical Form and Structure](../musicology/mcl-002-musical-form/) <!-- mcl-002-musical-form -->
+- [ ] [MCL-002 · Forme et structure musicales](../musicology/mcl-002-musical-form/) <!-- mcl-002-musical-form -->
 
 ### Science des réseaux
 
-- [ ] [NET-001 · Scale-Free Tool Networks](../network-science/net-001-scale-free-tool-networks/) <!-- net-001-scale-free-tool-networks -->
+- [ ] [NET-001 · Réseaux d'outils sans échelle](../network-science/net-001-scale-free-tool-networks/) <!-- net-001-scale-free-tool-networks -->
 
 ### Philosophie
 
@@ -91,11 +114,11 @@ Coche un module une fois étudié. Sous **Notes**, ajoute une entrée datée : c
 ### Psychohistoire
 
 - [ ] [PSY-001 · Introduction à la Capitalisation Fractale](../psychohistory/psy-001-intro-fractal-compounding/) <!-- psy-001-intro-fractal-compounding -->
-- [ ] [PSY-002 · Governance Phase Transitions](../psychohistory/psy-002-governance-phase-transitions/) <!-- psy-002-governance-phase-transitions -->
+- [ ] [PSY-002 · Les transitions de phase de la gouvernance](../psychohistory/psy-002-governance-phase-transitions/) <!-- psy-002-governance-phase-transitions -->
 
 ### Sémiotique
 
-- [ ] [SEM-001 · Signs in Governance](../semiotics/sem-001-signs-in-governance/) <!-- sem-001-signs-in-governance -->
+- [ ] [SEM-001 · Les signes dans la gouvernance](../semiotics/sem-001-signs-in-governance/) <!-- sem-001-signs-in-governance -->
 
 ### Musiques et langues du monde
 
@@ -169,3 +192,18 @@ Rien n'y a été exécuté ici.
 
 - **L'expérience de sa section 6 est seulement proposée.** Elle tournerait dans un laboratoire Learn, avec des prédictions écrites avant toute exécution : un balayage des décalages de c = 1 à 10^7 ; les équations normales contre la voie SVD ; le serveur MCP après une panique, dans un processus jetable uniquement ; et la clé `"X"` du schéma d'entrée contre la clé `"x"` que lit le gestionnaire. Aucun laboratoire de ce genre n'existe encore, et rien dans le module n'est une mesure.
 - **Il n'a pas été étudié ici,** donc sa case ci-dessus reste vide.
+
+## 2026-10-02 — MAT-008 à MAT-025, MUS-007, MUS-008, MUS-009, MUS-018, MUS-020, et quinze traductions
+
+Synchronisé depuis Demerzel à [`e203e5a`](https://github.com/GuitarAlchemist/Demerzel/commit/e203e5a25e10b85b8d22ece9a700e12447f4a236). Depuis l'entrée MAT-007 ci-dessus, la synchronisation apporte 23 nouveaux modules, chacun en anglais, en français et en espagnol :
+- mathématiques : MAT-008 ([#1141](https://github.com/GuitarAlchemist/Demerzel/pull/1141)), MAT-009 ([#1147](https://github.com/GuitarAlchemist/Demerzel/pull/1147)), MAT-010 ([#1148](https://github.com/GuitarAlchemist/Demerzel/pull/1148)), MAT-011 ([#1149](https://github.com/GuitarAlchemist/Demerzel/pull/1149)), MAT-012 ([#1150](https://github.com/GuitarAlchemist/Demerzel/pull/1150)), MAT-013 ([#1151](https://github.com/GuitarAlchemist/Demerzel/pull/1151)), MAT-014 ([#1152](https://github.com/GuitarAlchemist/Demerzel/pull/1152)), MAT-015 ([#1153](https://github.com/GuitarAlchemist/Demerzel/pull/1153)), MAT-016 ([#1154](https://github.com/GuitarAlchemist/Demerzel/pull/1154)), MAT-017 ([#1155](https://github.com/GuitarAlchemist/Demerzel/pull/1155)), MAT-018 ([#1156](https://github.com/GuitarAlchemist/Demerzel/pull/1156)), MAT-019 ([#1157](https://github.com/GuitarAlchemist/Demerzel/pull/1157)), MAT-020 ([#1158](https://github.com/GuitarAlchemist/Demerzel/pull/1158)), MAT-021 ([#1159](https://github.com/GuitarAlchemist/Demerzel/pull/1159)), MAT-022 ([#1162](https://github.com/GuitarAlchemist/Demerzel/pull/1162)), MAT-023 ([#1163](https://github.com/GuitarAlchemist/Demerzel/pull/1163)), MAT-024 ([#1165](https://github.com/GuitarAlchemist/Demerzel/pull/1165)), MAT-025 ([#1166](https://github.com/GuitarAlchemist/Demerzel/pull/1166)) ;
+- musique : MUS-007 ([#1172](https://github.com/GuitarAlchemist/Demerzel/pull/1172)), MUS-008 ([#1173](https://github.com/GuitarAlchemist/Demerzel/pull/1173)), MUS-009 ([#1174](https://github.com/GuitarAlchemist/Demerzel/pull/1174)), MUS-018 ([#1167](https://github.com/GuitarAlchemist/Demerzel/pull/1167)), MUS-020 ([#1171](https://github.com/GuitarAlchemist/Demerzel/pull/1171)).
+
+Elle apporte aussi :
+- des pages françaises et espagnoles pour quinze modules qui n'avaient ici qu'une page anglaise : CS-002, CYB-001, CYB-002, GAA-002, GAA-003, INF-001, MUS-003, MUS-004, MUS-005, MCL-002, NET-001, PSY-002, SEM-001, venus de [#1098](https://github.com/GuitarAlchemist/Demerzel/pull/1098), qui a aussi corrigé leur texte anglais, et MUS-002 et MUS-006, venus de [#1091](https://github.com/GuitarAlchemist/Demerzel/pull/1091) ;
+- des corrections de MUS-002, MUS-006 et GTR-002 dans toutes les langues où ils existent ([#1091](https://github.com/GuitarAlchemist/Demerzel/pull/1091)) ;
+- les accents rétablis dans les pages espagnoles de douze modules ([#1120](https://github.com/GuitarAlchemist/Demerzel/pull/1120)).
+
+Rien n'y a été exécuté ici.
+
+- **Ils n'ont pas été étudiés ici,** donc leurs cases ci-dessus restent vides.
