@@ -384,6 +384,7 @@ Most of the 22 differences of 2026-09-14 were fixed upstream by [#689](https://g
 - A rootless voicing is the course's test: three notes or more, all of them the chord's, none of them its root.
 - "The same answer" compares the ten voicings and their scores; the table of modes compares the voicings only.
 - The solution of the second exercise is arithmetic on the printed scores; the three others read the expected output and the tools' code.
+- CI run [37070292367](https://github.com/spareilleux/learn/actions/runs/37070292367), for commit `92e8d13`: green on the three systems, 3 min 51 s on Linux, 4 min 23 s on macOS, 9 min 3 s on Windows, clone and build included.
 
 ## To verify
 

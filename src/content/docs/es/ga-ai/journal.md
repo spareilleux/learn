@@ -384,6 +384,7 @@ La mayoría de las 22 diferencias del 2026-09-14 se corrigieron upstream en [#68
 - El voicing rootless es la prueba del curso: tres notas o más, todas del acorde y ninguna su fundamental.
 - "La misma respuesta" compara los diez voicings y sus puntuaciones; la tabla de los modos solo compara los voicings.
 - La solución del segundo ejercicio es aritmética sobre las puntuaciones impresas; las otras tres se leen en la salida esperada y en el código de las herramientas.
+- Ejecución de CI [37070292367](https://github.com/spareilleux/learn/actions/runs/37070292367), para el commit `92e8d13`: verde en los tres sistemas, 3 min 51 s en Linux, 4 min 23 s en macOS, 9 min 3 s en Windows, con el clon y la compilación incluidos.
 
 ## Por verificar
 
