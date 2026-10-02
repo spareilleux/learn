@@ -13,7 +13,7 @@ sidebar:
 - [x] Leçon 2 : variables, types et saisie
 - [x] Leçon 3 : conditions et boucles
 - [x] Leçon 4 : méthodes, tableaux et listes
-- [ ] Leçon 5 : classes et objets
+- [x] Leçon 5 : classes et objets
 
 ## 2026-09-14 — Le SDK et les applications basées sur des fichiers
 
@@ -40,6 +40,16 @@ sidebar:
 ## 2026-09-14 — Dogfooding
 
 - Les exemples utilisent Guitar Alchemist comme petites données : l'accordage standard de [`Tuning.Default`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Instruments/Tuning.cs#L20-L23) au commit `a826864`, et douze noms de projets de `code/ladybugdb/data/ga/projects.csv`, extraits au commit `a26a7893`. Rien dans ces leçons n'a révélé de problème dans GA.
+
+## 2026-09-29 — Classes et objets
+
+- La leçon 5 présente la construction, l'identité des instances, les champs privés, les propriétés publiques, les méthodes et un compteur `static` partagé, puis propose de créer une classe `PracticeSession`. Les pages anglaise, française et espagnole contiennent les mêmes extraits C# testés et les mêmes sorties du compilateur.
+- Sous Windows, avec le SDK 10.0.112, `C:/Program Files/Git/bin/bash.exe check.sh` a réussi pour les exemples, les solutions et les extraits refusés du cours, y compris les nouveaux fichiers `l05_*`. Les deux nouveaux extraits refusés ont produit respectivement CS0122 et CS0200. Le `bash` par défaut de la machine était celui de WSL et ne trouvait pas le `dotnet` Windows : ce premier échec venait de l'environnement de test, pas du code.
+- Ce résultat local ne remplace pas une nouvelle CI sur trois OS et ne prouve pas que la leçon est publiée. Les leçons 6 à 12 restent au stade de plan.
+
+## 2026-09-30 — La leçon 5 dans la CI sur trois OS
+
+- Le [run 36664604662](https://github.com/spareilleux/learn/actions/runs/36664604662) du workflow *C# for beginners examples*, sur le commit `669d42a` de la [PR #60](https://github.com/spareilleux/learn/pull/60), a réussi sous `ubuntu-latest`, `windows-latest` et `macos-latest`. Dans la sortie de chaque job, `check.sh` affiche `ok` pour `l05_objects`, `l05_ex_practice`, `l05_get_only_property` et `l05_private_field` : les sorties et les diagnostics CS0122 et CS0200 correspondent à `expected/` sur les trois OS.
 
 ## À vérifier
 

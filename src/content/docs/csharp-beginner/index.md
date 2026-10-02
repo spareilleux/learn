@@ -45,7 +45,7 @@ The examples use small, real data where it helps: the notes of a guitar, the tun
 | 2 | [Variables, types and input](02-variables-and-types/) | `int`, `double`, `decimal`, `string`, `bool`, `var`, conversions, interpolation, `Console.ReadLine` |
 | 3 | [Conditions and loops](03-conditions-and-loops/) | `if`, `switch`, `for`, `foreach`, `while`, `break`, the debugger |
 | 4 | [Methods, arrays and lists](04-methods-arrays-lists/) | parameters, return values, arrays, `List<T>`, first steps with `null` |
-| 5 | Classes and objects | fields, properties, constructors, methods, `static` |
+| 5 | [Classes and objects](05-classes-and-objects/) | fields, properties, constructors, methods, `static` |
 | 6 | Records, structs and enums | value and reference types, equality, `enum` |
 | 7 | Interfaces and inheritance | `interface`, `abstract`, `override`, polymorphism |
 | 8 | Exceptions and null safety | `try`/`catch`/`finally`, `throw`, nullable reference types |
@@ -55,7 +55,7 @@ The examples use small, real data where it helps: the notes of a guitar, the tun
 | 12 | A small project | a solution with a library, a console app and tests, a NuGet package, a first look at `async` |
 | — | [Journal](journal/) | |
 
-Lessons 5 to 12 are planned and not written yet.
+Lessons 6 to 12 are planned and not written yet.
 
 ## Prerequisites
 

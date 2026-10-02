@@ -13,7 +13,7 @@ sidebar:
 - [x] Lesson 2: variables, types and input
 - [x] Lesson 3: conditions and loops
 - [x] Lesson 4: methods, arrays and lists
-- [ ] Lesson 5: classes and objects
+- [x] Lesson 5: classes and objects
 
 ## 2026-09-14 — The SDK and file-based apps
 
@@ -40,6 +40,16 @@ sidebar:
 ## 2026-09-14 — Dogfooding
 
 - The examples use Guitar Alchemist as small data: the standard tuning of [`Tuning.Default`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Instruments/Tuning.cs#L20-L23) at commit `a826864`, and twelve project names of `code/ladybugdb/data/ga/projects.csv`, extracted at commit `a26a7893`. Nothing in these lessons revealed a problem in GA.
+
+## 2026-09-29 — Classes and objects
+
+- Lesson 5 now teaches construction, instance identity, private fields, public properties, methods and a shared `static` count, then asks the reader to build a `PracticeSession` class. The English, French and Spanish pages share the same tested C# snippets and compiler output.
+- On Windows, SDK 10.0.112, `C:/Program Files/Git/bin/bash.exe check.sh` passed the course's examples, exercise solutions and rejected snippets, including the new `l05_*` files. The two new rejected snippets produced CS0122 and CS0200, respectively. The host's default `bash` was WSL and could not find the Windows `dotnet`; that first run failed because of the test environment, not the source.
+- This local result is not a new three-OS CI run and is not proof that the lesson is publicly deployed. Lessons 6–12 remain only in the outline.
+
+## 2026-09-30 — Lesson 5 in CI on three OSes
+
+- [Run 36664604662](https://github.com/spareilleux/learn/actions/runs/36664604662) of the *C# for beginners examples* workflow, on commit `669d42a` of [PR #60](https://github.com/spareilleux/learn/pull/60), passed on `ubuntu-latest`, `windows-latest` and `macos-latest`. In each job's output, `check.sh` prints `ok` for `l05_objects`, `l05_ex_practice`, `l05_get_only_property` and `l05_private_field`: the outputs and the CS0122 and CS0200 diagnostics match `expected/` on the three OSes.
 
 ## To verify
 

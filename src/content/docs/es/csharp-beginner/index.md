@@ -45,7 +45,7 @@ Los ejemplos usan datos pequeños y reales cuando ayudan: las notas de una guita
 | 2 | [Variables, tipos y entrada](02-variables-and-types/) | `int`, `double`, `decimal`, `string`, `bool`, `var`, conversiones, interpolación, `Console.ReadLine` |
 | 3 | [Condiciones y bucles](03-conditions-and-loops/) | `if`, `switch`, `for`, `foreach`, `while`, `break`, el depurador |
 | 4 | [Métodos, arrays y listas](04-methods-arrays-lists/) | parámetros, valores de retorno, arrays, `List<T>`, primeros pasos con `null` |
-| 5 | Clases y objetos | campos, propiedades, constructores, métodos, `static` |
+| 5 | [Clases y objetos](05-classes-and-objects/) | campos, propiedades, constructores, métodos, `static` |
 | 6 | Records, structs y enums | tipos de valor y de referencia, igualdad, `enum` |
 | 7 | Interfaces y herencia | `interface`, `abstract`, `override`, polimorfismo |
 | 8 | Excepciones y seguridad frente a null | `try`/`catch`/`finally`, `throw`, tipos de referencia que aceptan valores null |
@@ -55,7 +55,7 @@ Los ejemplos usan datos pequeños y reales cuando ayudan: las notas de una guita
 | 12 | Un pequeño proyecto | una solución con una biblioteca, una app de consola y pruebas, un paquete NuGet, un primer vistazo a `async` |
 | — | [Diario](journal/) | |
 
-Las lecciones 5 a 12 están planificadas y aún no se han escrito.
+Las lecciones 6 a 12 están planificadas y aún no se han escrito.
 
 ## Requisitos previos
 

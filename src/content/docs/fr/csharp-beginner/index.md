@@ -45,7 +45,7 @@ Les exemples utilisent de petites données réelles quand ça aide : les notes d
 | 2 | [Variables, types et saisie](02-variables-and-types/) | `int`, `double`, `decimal`, `string`, `bool`, `var`, conversions, interpolation, `Console.ReadLine` |
 | 3 | [Conditions et boucles](03-conditions-and-loops/) | `if`, `switch`, `for`, `foreach`, `while`, `break`, le débogueur |
 | 4 | [Méthodes, tableaux et listes](04-methods-arrays-lists/) | paramètres, valeurs de retour, tableaux, `List<T>`, premiers pas avec `null` |
-| 5 | Classes et objets | champs, propriétés, constructeurs, méthodes, `static` |
+| 5 | [Classes et objets](05-classes-and-objects/) | champs, propriétés, constructeurs, méthodes, `static` |
 | 6 | Records, structs et enums | types valeur et types référence, égalité, `enum` |
 | 7 | Interfaces et héritage | `interface`, `abstract`, `override`, polymorphisme |
 | 8 | Exceptions et sécurité face à null | `try`/`catch`/`finally`, `throw`, types référence nullables |
@@ -55,7 +55,7 @@ Les exemples utilisent de petites données réelles quand ça aide : les notes d
 | 12 | Un petit projet | une solution avec une bibliothèque, une application console et des tests, un package NuGet, un premier regard sur `async` |
 | — | [Journal](journal/) | |
 
-Les leçons 5 à 12 sont prévues et pas encore écrites.
+Les leçons 6 à 12 sont prévues et pas encore écrites.
 
 ## Prérequis
 

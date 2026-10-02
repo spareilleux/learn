@@ -13,7 +13,7 @@ sidebar:
 - [x] Lección 2: variables, tipos y entrada
 - [x] Lección 3: condiciones y bucles
 - [x] Lección 4: métodos, arrays y listas
-- [ ] Lección 5: clases y objetos
+- [x] Lección 5: clases y objetos
 
 ## 2026-09-14 — El SDK y las aplicaciones basadas en archivos
 
@@ -40,6 +40,16 @@ sidebar:
 ## 2026-09-14 — Dogfooding
 
 - Los ejemplos usan Guitar Alchemist como datos pequeños: la afinación estándar de [`Tuning.Default`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Instruments/Tuning.cs#L20-L23) en el commit `a826864`, y doce nombres de proyectos de `code/ladybugdb/data/ga/projects.csv`, extraídos en el commit `a26a7893`. Nada en estas lecciones reveló un problema en GA.
+
+## 2026-09-29 — Clases y objetos
+
+- La lección 5 presenta la construcción, la identidad de las instancias, los campos privados, las propiedades públicas, los métodos y un contador `static` compartido; después propone crear una clase `PracticeSession`. Las páginas inglesa, francesa y española comparten los mismos fragmentos C# probados y las mismas salidas del compilador.
+- En Windows, con el SDK 10.0.112, `C:/Program Files/Git/bin/bash.exe check.sh` pasó para los ejemplos, soluciones y fragmentos rechazados del curso, incluidos los nuevos archivos `l05_*`. Los dos nuevos fragmentos rechazados produjeron CS0122 y CS0200, respectivamente. El `bash` predeterminado del equipo era WSL y no encontraba el `dotnet` de Windows: aquel primer fallo era del entorno de pruebas, no del código.
+- Este resultado local no sustituye una nueva CI en tres sistemas ni demuestra que la lección esté publicada. Las lecciones 6–12 siguen solo en el plan.
+
+## 2026-09-30 — La lección 5 en la CI de tres sistemas
+
+- La [ejecución 36664604662](https://github.com/spareilleux/learn/actions/runs/36664604662) del workflow *C# for beginners examples*, sobre el commit `669d42a` de la [PR #60](https://github.com/spareilleux/learn/pull/60), pasó en `ubuntu-latest`, `windows-latest` y `macos-latest`. En la salida de cada job, `check.sh` imprime `ok` para `l05_objects`, `l05_ex_practice`, `l05_get_only_property` y `l05_private_field`: las salidas y los diagnósticos CS0122 y CS0200 coinciden con `expected/` en los tres sistemas.
 
 ## Por verificar
 
