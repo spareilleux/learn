@@ -447,5 +447,19 @@ public static class Lesson15
                 Line($"    IconicChords.yaml, Petrushka Chord, {line}");
             }
         }
+
+        // Added after the first run, in its own commit: the Streeling module MUS-005 says that "Db/C = Db triad over C bass"
+        // creates "a Cmaj7#11 sound"
+        Title("Added after the first run: MUS-005's slash chord D♭/C against Cmaj7♯11, and D/C");
+        Console.WriteLine($"{"chord",-22} {"pitch classes",-16} {"degrees over C",-18} the 28 modes on C that contain it");
+        foreach (var (label, pcs) in new (string, int[])[]
+        {
+            ("D♭ triad over C bass", [0, 1, 5, 8]),
+            ("D triad over C bass", [0, 2, 6, 9]),
+            ("Cmaj7♯11", [0, 4, 6, 7, 11]),
+        })
+        {
+            Console.WriteLine($"{label,-22} {Theory.Format(pcs),-16} {DegreesOf(pcs),-18} {string.Join(", ", ModesContaining(Theory.SetId(pcs), 0))}");
+        }
     }
 }
