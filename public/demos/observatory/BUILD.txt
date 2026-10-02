@@ -610,6 +610,37 @@ the same way, cast the duck where it was aimed but kept it a rubber duck's 11
 cm: 5 pixels tall at the box on that screen. A debug export with prints in the
 tap's path, not published, showed that the taps did cast. Real phones: to
 verify, first the author's Android phone in Chrome.
+Version 22, exported 2026-10-02 03:14:01 UTC, takes the live course list on
+GitHub Pages. The scene fetches the site's courses.json when it starts, so
+that a new course reaches the shelves without a new build
+(scripts/course_library.gd, _fetch_live); but Pages serves it gzip-encoded,
+the browser decompresses the body and keeps its Content-Encoding header, and
+Godot's HTTPRequest, accepting gzip, decompressed it again, failed
+(core/io/stream_peer_gzip.cpp:115, in the browser's console) and kept the list
+built into the scene. Found in the live check of version 21, when both lists
+held the same 74 courses, so nothing showed. The request no longer accepts
+gzip.
+index.pck is now 21,783,320 bytes; index.html changes only that size, and
+index.wasm and index.js are unchanged.
+Web: exported, and served locally with a courses.json of 75 courses, the live
+list and one more, gzip-encoded as Pages serves it
+(artpass/publish/gzip_server.py), in headless Chrome at 1600x900
+(artpass/publish/catalogue-web.mjs). Version 21 logged the gzip error and its
+hint counted 74 courses, the list built in; the same list served uncompressed,
+75. Version 22, gzip-encoded, counts 75 and logs no error. The phone check
+(artpass/publish/curio-web.mjs) on version 22, served the same way: it
+started, reported version 22, logged no error, and the curio wheel opened.
+Real phones: to verify, first the author's Android phone in Chrome.
+Native runs (Godot 4.6.1): the change runs only in a web build, so natively
+the scene is version 21's, whose 62 runs passed. 13 runs again
+(artpass/publish/regress-pub13.sh): the self test, the shelves' tests
+(courses, languages, departments, Streeling), a curio run with keys and one
+with touches, and a lean run, under Compatibility and Forward+ where they ran
+so before; no script error, 12 passed. The course test under Forward+ once
+found the fly camera still after W was held for ten frames, a check version 21
+passed; run three times again on the same build, it passed each time
+(rerun-coursetest-pub13.sh). It is the second check of a held key to fail once
+on a windowed run today, after one lean run on the prototype.
 
 Native Compatibility GPU time, RTX 5080, 1600x900, 240 frames per view: 0.44 to
 0.52 ms for the previous web scene, 0.64 to 1.44 ms with the detail pass; up to
@@ -626,7 +657,7 @@ export_presets.cfg 1bd7171d93c9a378f1b328e945be2a7960478e89d34ae269f013ef83c3065
 scripts/fly_camera.gd 2e5cdd15ca7bdcfa30ec129e354a309f3ff7296f6fbf54ac144984ed9aa9f8e7
 scripts/capture.gd 52ea2b5e40db2f1f4cdbd7658074ef60bd117e1f4110c1b8995590a4196748d0
 scripts/observatory.gd 1a15f441c7298009cf94a5740c63a1e56bd097b79ac8a799fd202c30838b8e2d
-scripts/course_library.gd 97fe489119e211ffd180b04a2d4042c20c4f937c03fe5cbae0b7c444e69dd1f4
+scripts/course_library.gd d78dddc42b49e20b51ae99ec4fc5b8ca5a3b06ee1d0e10b2ee00c39f1be8aa9d
 scripts/steel_cube.gd f28e71fffcd151663bc9a98b3c135cc7b805490e8298d3cf01029455c973f94c
 scripts/seldon_statue.gd 4e41b282aa2cc4de794296586b65f5f4d39688312673ddc46226fd3906cf4b27
 scripts/touch_controls.gd 825e771291e660d47d820c976532b1a14bddcb2ac5329793783af190dbf531cb
@@ -666,10 +697,10 @@ assets/sky_core_cap.png a110fdfa1b79cc41eec119265aeb89bc211d0b8e0eb6c759b45c2549
 assets/kiosk_glass.gdshader 76226f17e5884a042b85e5fc544a4b71012ea6e389b9743c1cac65083a06bc44
 scripts/lift_sounds.gd 4daed5e380396a3711fc7ff2f1f72b877b9efbdaff6d6fa428c595b1dad7b244
 scripts/curio_wheel.gd 545cac2ee37b1ad60cd54971885c9d4804fa1b2803a30a73ae3c79ca667ac8c7
-scripts/build_info.gd 5fc420d3b2709065ec3e377f3146303e708f677cb893d7d1cc8aafb73444f49d
+scripts/build_info.gd 25e67ea7e106d0357f365e7520e098b8f1128e39476d34bf4df7a18c1ced5f51
 
 SHA-256 output files:
-index.pck 14df6c9cf1a5e7a3104ed412d4540cb50bf9eed6ecdfdcdc63eb932edbeb2f42
+index.pck 32d720eaa493baa75038e774e01c6ef8decbad35828272bc8b29455c27664d5b
 index.wasm 99962b29677e42f3ba0258bd90fdc52ad90295954c4473e816ad02cfe5ff1d4f
 index.js e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981
 
