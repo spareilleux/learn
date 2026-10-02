@@ -16,7 +16,7 @@ sidebar:
 - [x] Lesson 5: classes and objects
 - [x] Lesson 6: records, structs and enums
 - [x] Lesson 7: interfaces and inheritance
-- [x] Lesson 8: exceptions and null safety (local; cross-OS CI still to verify)
+- [x] Lesson 8: exceptions and null safety
 
 ## QA
 
@@ -91,6 +91,7 @@ sidebar:
 - Lesson 8 catches exceptions with `try` and `catch`, with a diagram of the exception classes; runs `finally` after a `return`, after a `catch` and before an exception leaves the method; throws an `ArgumentOutOfRangeException` with `nameof`; then returns to `null`: CS8600 and CS8618, `required`, the `!` operator, and `WarningsAsErrors=nullable` set with `#:property`. It has six examples, four exercise files (one of them the starting point of exercise 3, with four warnings) and five rejected snippets, whose diagnostics are CS0160, CS0165, CS0029, CS9035 and CS8602 as an error. The script used for lessons 6 and 7 checked the 28 code blocks of the three locales against `code/csharp-beginner` and `expected/`.
 - On Windows, SDK 10.0.112, under Git Bash, `check.sh` exited 0 with 102 `ok` lines, the 15 `l08_*` files included. This is not yet a three-OS CI run.
 - The first CI run of [PR #109](https://github.com/spareilleux/learn/pull/109) failed on Linux only ([run 36968274101](https://github.com/spareilleux/learn/actions/runs/36968274101)): the Linux runner printed the warnings of `l08_null_warnings.cs` and `l08_ex_null_start.cs` in line order, while Windows, locally and in CI, and macOS printed CS8618 first. The messages themselves were identical. `check.sh` now puts the compiler messages first, errors before warnings, each group sorted by line and column, and the lesson shows that order. No expected file of lessons 1 to 7 changed: their messages already came in that order.
+- Then, with that fix: [run 37009963497](https://github.com/spareilleux/learn/actions/runs/37009963497) of the *C# for beginners examples* workflow, on commit `e2a95ef` of [PR #109](https://github.com/spareilleux/learn/pull/109), passed on `ubuntu-latest`, `windows-latest` and `macos-latest`. Each job prints `ok` for the 15 `l08_*` files; the jobs count 103 `ok` lines on Linux and macOS and 102 on Windows, for the same reason as in lesson 6.
 - Surprises, each kept in the lesson: `throw "fret out of range";` gives CS0029, a conversion error, where I expected CS0155 (*The type caught or thrown must be derived from System.Exception*); `string capo = null;` on a local variable gives CS8600, not CS8625, while GA's test file below got CS8625 for a `null` argument; in `l08_null_warnings.cs`, CS8618 sits on the property's declaration and the line that crashes has no warning; `tuner off` is printed before the value that `Tune` returns.
 - One sentence rests on a probe that stayed out of the course code: without its check, `NoteOfString(standard, 7)` fails with an `IndexOutOfRangeException`.
 - Dogfooding at GA commit `5c3a52a`, with the hypotheses written before measuring in the Experiments table, and the probes and their instructions in [`code/csharp-beginner/ga-probes`](https://github.com/spareilleux/learn/tree/main/code/csharp-beginner/ga-probes):
@@ -100,7 +101,6 @@ sidebar:
 
 ## To verify
 
-- Lesson 8's examples and diagnostics in CI on Linux, Windows and macOS, after a PR is opened.
 - The installation commands for Linux and macOS: only the CI's `setup-dotnet` ran on those OSes.
 - The debugger walkthrough of lesson 3 in VS Code, Visual Studio and Rider, for a file-based app and for a project. VS Code 1.118 and Rider are installed on my machine; Visual Studio isn't.
 - The license terms of the three editors, at the time of reading.
