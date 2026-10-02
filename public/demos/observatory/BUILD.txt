@@ -713,6 +713,56 @@ French and sideways in Spanish; no script error, 28 passed. The course test
 under Forward+ again once found the fly camera still after W was held for ten
 frames, as on version 22; run three times again on the same build, it passed
 each time (artpass/publish/rerun-coursetest-pub15.sh).
+Version 25, exported 2026-10-02 05:01:00 UTC, makes a book easier to choose
+with the head tilted, after the author's report that turning the head made it
+very hard. Reading a spine, the head was held on it: on version 24, forty
+mouse motions of 6 pixels up the screen moved the view 0.17 degrees and the
+aim stayed on the same spine (artpass/lean/browse_before.gd); on version 25
+the same motions go from spine 3 to spine 12, the series' last, the head
+tilted throughout. The mouse moves the gaze along the shelf in the tilted
+screen's own directions, the spine it meets read in turn, across the gap
+between two departments and no further than the series' last spine; A and D,
+the arrows and the wheel step a spine at a time (scripts/walk_physics.gd). On
+a touch screen a drag does the same, and its release is no tap, which would
+read or open the spine under the finger (scripts/touch_controls.gd); a tap on
+another spine reads it. Aiming without reading, a spine keeps the aim 8 mm
+past its edge, and a ray that meets none takes a spine within 15 mm, between
+two or just over one (scripts/course_library.gd); the card's hint names the
+browsing.
+index.pck is now 21,793,592 bytes; index.html changes only that size, and
+index.wasm and index.js are unchanged.
+Web: served as before (artpass/publish/gzip_server.py, 75 courses,
+gzip-encoded), in headless Chrome on an emulated Android phone, upright and
+sideways (artpass/publish/lean-web.mjs), the page's view facing the spine the
+lean test reads (artpass/lean/bookview.gd). Version 25 started, ran at 60
+frames a second and logged no error; a tap aimed the spine, a finger held on
+the figure leaning right read it with the head tilted, a second finger's drag
+of 12 pixels went on to the next spine, and a tap two spines further read that
+one; let go, its card showed. CDP cannot lift one finger of several (a finger
+left out of a touch event stays down), so the page's canvas got those two
+lifts as a browser sends them, and the page's log of touch events showed each.
+The mouse and keys in a computer's browser, real phones and other browsers: to
+verify.
+Native runs (Godot 4.6.1): the lean test (artpass/lean/leantest.gd) now
+browses. Reading a spine with keys, mouse motions go along the shelf with the
+head still tilted and the spine they meet is read; D and the wheel step to the
+next spine and A back; the series' last spine stops it; let go, the browsed
+spine stays aimed. Aiming without reading, a ray 8 mm past a spine's edge
+keeps it, one further on takes the next, and one in the 3 mm gap between two
+spines or just over one takes a spine. With touches, a drag goes along the
+shelf and its release is no tap, and a tap on another spine reads it. The
+mouse before and after (artpass/lean/browse_before.gd), forty motions of 6
+pixels up the screen while spine 3 is read: on version 24's exported project
+the aim stayed on it and the view turned 0.17 degrees; on version 25's it went
+on to spine 12, the series' last, the tilt unchanged. 33 runs on the exported
+project (artpass/publish/regress-pub16.sh): every test that reads, aims or
+taps a book, walks or uses the touch controls, the lean test with keys in both
+renderers and at 10 frames a second and with touches at both orientations, the
+curios, the drone, the roof, the terrace, the lift and the corridor; no script
+error, 31 passed. The two curio runs died while an NVIDIA driver was being
+installed on the machine ("Could not create D3D11 device", then a segmentation
+fault); run again on the same build, both passed
+(artpass/publish/rerun-curio-pub16.sh).
 
 Native Compatibility GPU time, RTX 5080, 1600x900, 240 frames per view: 0.44 to
 0.52 ms for the previous web scene, 0.64 to 1.44 ms with the detail pass; up to
@@ -729,11 +779,11 @@ export_presets.cfg 1bd7171d93c9a378f1b328e945be2a7960478e89d34ae269f013ef83c3065
 scripts/fly_camera.gd 2e5cdd15ca7bdcfa30ec129e354a309f3ff7296f6fbf54ac144984ed9aa9f8e7
 scripts/capture.gd 52ea2b5e40db2f1f4cdbd7658074ef60bd117e1f4110c1b8995590a4196748d0
 scripts/observatory.gd c98ef50522a4c748feba26e418b7e1988933f66cc93bd5fd933b2075da7b2254
-scripts/course_library.gd d78dddc42b49e20b51ae99ec4fc5b8ca5a3b06ee1d0e10b2ee00c39f1be8aa9d
+scripts/course_library.gd b2bf3fe3723d8a6f2a2392199fbf276d8bab752259eab6f4f6398503c5e88b42
 scripts/steel_cube.gd f28e71fffcd151663bc9a98b3c135cc7b805490e8298d3cf01029455c973f94c
 scripts/seldon_statue.gd 4e41b282aa2cc4de794296586b65f5f4d39688312673ddc46226fd3906cf4b27
-scripts/touch_controls.gd 74bf1ddfa04dbb403449d88f2b05a85fa89ac3522f2e47ad5dbe40851b2df528
-scripts/walk_physics.gd bc17f09222fd9b865c6ad509b9f3c376bbea9bc8c6146f50f326e8c19c297a7c
+scripts/touch_controls.gd c3bd66bfb9555381a22bf983dc43c7f9be64710c5f6fcb490e26e41a4f63b9d6
+scripts/walk_physics.gd 156fc6e18103d2b8cc211697c5e1b8c519bc41707f95c44b52afcdc87e850ea2
 scripts/view_fit.gd f574c7949a5b324f91f062df9982366c123271804069b507206f88ad7062fe4c
 scripts/view_move.gd 558a4059815cb3a8a202d205d8cfada17653fb533e7e056bfe9e8a434dac0431
 scripts/multiverse.gd 0de3cece747a87c742ba6b26c8fac27a6a7dcdd18286f30957899becb2dfb34d
@@ -770,10 +820,10 @@ assets/kiosk_glass.gdshader 76226f17e5884a042b85e5fc544a4b71012ea6e389b9743c1cac
 scripts/lift_sounds.gd 4daed5e380396a3711fc7ff2f1f72b877b9efbdaff6d6fa428c595b1dad7b244
 scripts/curio_wheel.gd dc11593f537a9099a1f55f19be41886eeb91c3c8701473be3fd58d977a98703b
 scripts/drone.gd e3735898c9710ca19190d7d2713230c1f40595bb0fea7181909a78f395c0e7b9
-scripts/build_info.gd c394c08d62777586762a0fa4cc68d769f9e201c24fdbd7e8301a53733c986119
+scripts/build_info.gd a41814f6e01fa735bba00f21c49c2ace7ee65a363c274c91c60b6f198131d421
 
 SHA-256 output files:
-index.pck cce0448cb2c643e6324ae1cfc70352b887324adaf0fdd6c22ec011e7c083d1cb
+index.pck 36564b2a4e4bd2f17d9fb1a62b64781876c108c81c004b5e281e82d8270d6abd
 index.wasm 99962b29677e42f3ba0258bd90fdc52ad90295954c4473e816ad02cfe5ff1d4f
 index.js e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981
 
