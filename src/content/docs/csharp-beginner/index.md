@@ -48,14 +48,14 @@ The examples use small, real data where it helps: the notes of a guitar, the tun
 | 5 | [Classes and objects](05-classes-and-objects/) | fields, properties, constructors, methods, `static` |
 | 6 | [Records, structs and enums](06-records-structs-enums/) | value and reference types, equality, `enum` |
 | 7 | [Interfaces and inheritance](07-interfaces-and-inheritance/) | `interface`, `abstract`, `override`, polymorphism |
-| 8 | Exceptions and null safety | `try`/`catch`/`finally`, `throw`, nullable reference types |
+| 8 | [Exceptions and null safety](08-exceptions-and-null-safety/) | `try`/`catch`/`finally`, `throw`, nullable reference types |
 | 9 | Collections and LINQ | `Dictionary<TKey, TValue>`, `HashSet<T>`, `Where`, `Select`, `OrderBy` |
 | 10 | Files and text | `File`, `Path`, reading a CSV file of Guitar Alchemist's projects |
 | 11 | Unit tests | xUnit, `dotnet test`, testing the methods of earlier lessons |
 | 12 | A small project | a solution with a library, a console app and tests, a NuGet package, a first look at `async` |
 | — | [Journal](journal/) | |
 
-Lessons 8 to 12 are planned and not written yet.
+Lessons 9 to 12 are planned and not written yet.
 
 ## Highlights from the journal
 
@@ -69,6 +69,8 @@ The [journal](journal/) records what writing and testing this course turned up. 
 | The literal `0` converts to an enum without a cast, and CS8524 warns about a `switch` expression that has an arm for every name | An enum variable can hold a number that has no name: the lesson's program fails on 7 | [Lesson 6](06-records-structs-enums/), [journal](journal/#2026-10-01--records-structs-and-enums) |
 | A draft said that `shape[i].Fret += 2` on a list of `readonly record struct` gives CS1612; a probe compiled before publishing gave CS8852 | Every output and error message in the course is pasted from a run, never written from memory | [Lesson 6](06-records-structs-enums/), [journal](journal/#2026-10-01--records-structs-and-enums) |
 | In Guitar Alchemist, `ChordTemplate`'s `ToString() => Name` is not `sealed`, so its derived records print all their properties instead of the chord's name | The `override` of lesson 7 meets the records of lesson 6 in real code; one GA call site logs the dump. Not reported to GA yet | [Lesson 7](07-interfaces-and-inheritance/), [QA table](journal/#qa) |
+| A nullable warning points where `null` gets in, not where the program crashes: CS8618 sits on the property's declaration, and the line that crashes has no warning | Fix each warning where it is, even far from the crash | [Lesson 8](08-exceptions-and-null-safety/), [journal](journal/#2026-10-02--exceptions-and-null-safety) |
+| Guitar Alchemist silences fifteen nullable warnings in `NoWarn`, twice. Its code has none to hide, but a test file with seven nullable mistakes compiled without a warning | Silencing a warning also silences the mistakes still to come. Not reported to GA yet | [Lesson 8](08-exceptions-and-null-safety/), [QA table](journal/#qa) |
 
 ## Prerequisites
 

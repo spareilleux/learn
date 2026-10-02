@@ -459,7 +459,7 @@ MIDI 75: Alto
 - Une classe abstraite ne peut pas être instanciée, et ses membres abstraits doivent être redéfinis.
 - Une interface est un contrat sans code ; une classe a une seule classe de base mais peut implémenter plusieurs interfaces.
 
-La suite, [exceptions et sécurité face à null](../#plan), traitera des cas où une méthode ne peut pas faire ce qu'on lui demande.
+La suite, [exceptions et sécurité face à null](../08-exceptions-and-null-safety/), traitera des cas où une méthode ne peut pas faire ce qu'on lui demande.
 
 ## Sources
 

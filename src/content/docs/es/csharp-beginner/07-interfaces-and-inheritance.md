@@ -459,7 +459,7 @@ MIDI 75: Alto
 - Una clase abstracta no se puede instanciar, y sus miembros abstractos deben redefinirse.
 - Una interfaz es un contrato sin código; una clase tiene una sola clase base pero puede implementar varias interfaces.
 
-La siguiente lección, [excepciones y seguridad frente a null](../#plan), tratará los casos en que un método no puede hacer lo que se le pide.
+La siguiente lección, [excepciones y seguridad frente a null](../08-exceptions-and-null-safety/), tratará los casos en que un método no puede hacer lo que se le pide.
 
 ## Fuentes
 

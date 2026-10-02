@@ -92,7 +92,7 @@ Trois commodités :
 - Les **arguments nommés**, `times: 2, text: "do"`, disent quel paramètre reçoit quelle valeur, dans n'importe quel ordre.
 - Quand le corps est une seule expression, `=>` remplace les accolades et le `return` : c'est un [membre expression-bodied](https://learn.microsoft.com/dotnet/csharp/programming-guide/statements-expressions-operators/expression-bodied-members) (corps d'expression). `Enumerable.Repeat(text, times)` produit une suite de `times` copies de `text`, et `string.Concat` les colle.
 
-Dans un fichier avec des instructions de niveau supérieur, les méthodes peuvent être déclarées après les lignes qui les appellent, comme ici. La documentation C# les appelle [fonctions locales](https://learn.microsoft.com/dotnet/csharp/programming-guide/classes-and-structs/local-functions) : elles appartiennent au code de niveau supérieur du programme. La [leçon 5](../#plan) place les méthodes dans des classes, leur place habituelle dans les programmes plus gros.
+Dans un fichier avec des instructions de niveau supérieur, les méthodes peuvent être déclarées après les lignes qui les appellent, comme ici. La documentation C# les appelle [fonctions locales](https://learn.microsoft.com/dotnet/csharp/programming-guide/classes-and-structs/local-functions) : elles appartiennent au code de niveau supérieur du programme. La [leçon 5](../05-classes-and-objects/) place les méthodes dans des classes, leur place habituelle dans les programmes plus gros.
 
 ### Ce que vérifie le compilateur
 
@@ -186,7 +186,7 @@ After AddOctave: 5
 After AddOctaveToAll: 12 14 14 13 12 12
 ```
 
-Un paramètre reçoit une **copie** de l'argument. Modifier `value` dans `AddOctave` ne modifie pas `fret`. Mais une variable de tableau ne contient pas le tableau lui-même : elle contient une *référence*, l'adresse où se trouve le tableau. La copie est une copie de l'adresse, donc `values` et `frets` désignent le même tableau, et la méthode le modifie. L'accord de mi majeur est monté d'une octave, à la 12e case. Les types qui se comportent comme `int` sont des **types valeur** ; ceux qui se comportent comme les tableaux sont des **types référence**. La [leçon 6](../#plan) revient sur la différence.
+Un paramètre reçoit une **copie** de l'argument. Modifier `value` dans `AddOctave` ne modifie pas `fret`. Mais une variable de tableau ne contient pas le tableau lui-même : elle contient une *référence*, l'adresse où se trouve le tableau. La copie est une copie de l'adresse, donc `values` et `frets` désignent le même tableau, et la méthode le modifie. L'accord de mi majeur est monté d'une octave, à la 12e case. Les types qui se comportent comme `int` sont des **types valeur** ; ceux qui se comportent comme les tableaux sont des **types référence**. La [leçon 6](../06-records-structs-enums/) revient sur la différence.
 
 ## Tableaux
 
@@ -426,7 +426,7 @@ string Longest(string[] values)
 Longest name: GA.Business.ProbabilisticGrammar
 ```
 
-Chaque méthode fait une seule chose et porte un nom qui dit laquelle : compter, filtrer, trouver le plus long. `ProjectsIn` utilise un `for` au lieu d'un `foreach` parce qu'elle a besoin de l'indice `i` pour lire la même position dans les deux tableaux. Deux tableaux qui doivent rester alignés sont fragiles : ajoute un nom en oubliant son langage, et tous les langages suivants sont faux. La [leçon 5](../#plan) les remplace par une seule liste de projets, chacun avec un nom et un langage. La [leçon 10](../#plan) lit le fichier CSV entier au lieu de le recopier à la main.
+Chaque méthode fait une seule chose et porte un nom qui dit laquelle : compter, filtrer, trouver le plus long. `ProjectsIn` utilise un `for` au lieu d'un `foreach` parce qu'elle a besoin de l'indice `i` pour lire la même position dans les deux tableaux. Deux tableaux qui doivent rester alignés sont fragiles : ajoute un nom en oubliant son langage, et tous les langages suivants sont faux. La [leçon 5](../05-classes-and-objects/) les remplace par une seule liste de projets, chacun avec un nom et un langage. La [leçon 10](../#plan) lit le fichier CSV entier au lieu de le recopier à la main.
 
 ## `null` : aucune valeur
 
@@ -506,7 +506,7 @@ Unhandled exception. System.NullReferenceException: Object reference not set to 
    at Program.<Main>$(String[] args) in C:\Users\spare\source\repos\learn\code\csharp-beginner\examples\l04_null_warning.cs:line 11
 ```
 
-Ce n'est qu'un avertissement, donc le programme s'exécute, et plante à la ligne 11. La correction consiste à traiter le cas `null`, par exemple avec `tuning?.Length ?? 0`, ou avec un `if (tuning is null)` avant de l'utiliser. Dans le premier exemple, `capo.Length` après `capo ??= "fret 2"` ne déclenche aucun avertissement : le compilateur a compris que `capo` ne peut plus être `null`. La [leçon 8](../#plan) traite en profondeur des exceptions et de la sécurité face à null.
+Ce n'est qu'un avertissement, donc le programme s'exécute, et plante à la ligne 11. La correction consiste à traiter le cas `null`, par exemple avec `tuning?.Length ?? 0`, ou avec un `if (tuning is null)` avant de l'utiliser. Dans le premier exemple, `capo.Length` après `capo ??= "fret 2"` ne déclenche aucun avertissement : le compilateur a compris que `capo` ne peut plus être `null`. La [leçon 8](../08-exceptions-and-null-safety/) traite en profondeur des exceptions et de la sécurité face à null.
 
 ## À retenir
 

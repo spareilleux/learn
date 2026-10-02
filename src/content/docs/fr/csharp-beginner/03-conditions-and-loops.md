@@ -257,7 +257,7 @@ Unmatched value was 7.
    at Program.<Main>$(String[] args) in C:\Users\spare\source\repos\learn\code\csharp-beginner\examples\l03_switch_warning.cs:line 4
 ```
 
-Un **avertissement**, contrairement à une erreur, n'empêche pas la compilation : le programme s'exécute, et ici il s'arrête sur une **exception**, une erreur qui se produit pendant l'exécution. Les lignes qui commencent par `at` forment la *pile d'appels* (*stack trace*) : où en était le programme. La dernière indique la ligne 4 du fichier. La [leçon 8](../#plan) porte sur les exceptions.
+Un **avertissement**, contrairement à une erreur, n'empêche pas la compilation : le programme s'exécute, et ici il s'arrête sur une **exception**, une erreur qui se produit pendant l'exécution. Les lignes qui commencent par `at` forment la *pile d'appels* (*stack trace*) : où en était le programme. La dernière indique la ligne 4 du fichier. La [leçon 8](../08-exceptions-and-null-safety/) porte sur les exceptions.
 
 Deux choses à savoir sur les avertissements. D'abord, lis-les : celui-ci annonçait le plantage. Ensuite, `dotnet run` ne les affiche que quand il compile ; si tu exécutes à nouveau le même fichier inchangé, il ne compile pas, et l'avertissement ne s'affiche plus. `dotnet clean l03_switch_warning.cs` oublie le programme compilé, et l'exécution suivante affiche à nouveau l'avertissement. Le `check.sh` du cours le fait avant chaque exécution.
 
