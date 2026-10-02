@@ -67,6 +67,7 @@ Three other courses on this site cover the background, and this one links to the
 | 18 | [Voice leading](18-voice-leading/) | `VoiceLeadingSkill` and the offline fallback | checking a claim of optimality against an exhaustive search, a doubling chosen without a search, a table of symbols behind a narrower expression, a case-insensitive search for a flat |
 | 19 | [Voice-leading pairs](19-voice-leading-pairs/) | `ga_voice_leading_pair` in `GaMcpServer`, its search at the pin and on `main`, and the parked voice-leading skill | a ranking that never checks what it ranks, more candidates that make the answer worse, a sorted matching that is the least only for equal sizes, a string order that one consumer fixed and another passes on |
 | 20 | [Generated progressions](20-generated-progressions/) | `ga_generate_progression` in `GaMcpServer`, GA's twelve-key tables, the stitching with `ga_voice_leading_pair` at the pin and on `main`, and the parked progression skill | spelling from a key signature rather than a name, two sources that agree on a wrong chord, a parameter without a limit, answers for single moves that don't make a path |
+| 21 | [The voicing search](21-the-voicing-search/) | `ga_search_voicings` and `ga_voicing_vocabulary` in `GaMcpServer`, GA's query reader, tag registry and voicing-search skill, at the pin and on `main`, and the parked voicing-search skill | a word read and then dropped, many tags on few bits, a tag that isn't a filter, words matched by substring, a score range out of reach |
 | — | [Journal](journal/) | | |
 
 ## Prerequisites

@@ -18,9 +18,11 @@
   <ItemGroup>
     <Compile Include="../GaAi/Report.cs" />
     <Compile Include="../Shared/*.cs" />
-    <!-- GaMcpServer's composition tools, for lesson 19; ../Shared/VoicingSearchTool.cs stands in for
-         the class they read their search strategy from -->
+    <!-- GaMcpServer's tools, outside the projects they reference: the composition tools for lessons
+         19 and 20, the voicing search they read their strategy from and its vocabulary for lesson 21 -->
     <Compile Include="$(GaRoot)GaMcpServer/Tools/CompositionTools.cs" />
+    <Compile Include="$(GaRoot)GaMcpServer/Tools/VoicingSearchTool.cs" />
+    <Compile Include="$(GaRoot)GaMcpServer/Tools/VoicingVocabularyTool.cs" />
   </ItemGroup>
 
   <ItemGroup>

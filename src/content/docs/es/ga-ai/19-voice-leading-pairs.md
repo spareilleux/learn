@@ -43,7 +43,7 @@ dotnet run --project code/ga-ai/GaMain -c Release -- l19
     }
 ```
 
-La consulta no nombra ningún acorde: cuando no se indica instrumento, los candidatos son los voicings cuyos vectores están más cerca de la consulta, toquen lo que toquen. `GetStrategy` toma la búsqueda de `VoicingSearchTool`, la herramienta de búsqueda del servidor, leyendo su campo privado `Strategy` ([líneas 300-310](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaMcpServer/Tools/CompositionTools.cs#L300-L310)). Esa clase encuentra el índice mediante `GA_OPTICK_INDEX_PATH` o en `state/voicings/` ([`VoicingSearchTool.cs` líneas 64-83](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaMcpServer/Tools/VoicingSearchTool.cs#L64-L83)). El curso compila un sustituto con el mismo nombre y el mismo campo, que lee el índice de la lección 3 (`code/ga-ai/Shared/VoicingSearchTool.cs`).
+La consulta no nombra ningún acorde: cuando no se indica instrumento, los candidatos son los voicings cuyos vectores están más cerca de la consulta, toquen lo que toquen. `GetStrategy` toma la búsqueda de `VoicingSearchTool`, la herramienta de búsqueda del servidor, leyendo su campo privado `Strategy` ([líneas 300-310](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaMcpServer/Tools/CompositionTools.cs#L300-L310)). Esa clase encuentra el índice mediante `GA_OPTICK_INDEX_PATH` o en `state/voicings/` ([`VoicingSearchTool.cs` líneas 64-83](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaMcpServer/Tools/VoicingSearchTool.cs#L64-L83)). El curso compila esa clase a partir del código fuente de GA y la dirige al índice de la lección 3 mediante `GA_OPTICK_INDEX_PATH` (`code/ga-ai/Shared/SearchIndex.cs`).
 
 La herramienta mide cada par de candidatos con `VoiceLeadingDistance` ([líneas 312-336](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaMcpServer/Tools/CompositionTools.cs#L312-L336)):
 
@@ -251,7 +251,7 @@ prompts whose first pair would move less with the least over every choice of not
 ## Hasta dónde llega el curso
 
 - **El corpus es el de la lección 3,** 15.360 voicings en tres trastes, no el índice de producción. Entre más voicings, los candidatos y los pares podrían ser otros (*por verificar*).
-- **El programa llama directamente al método de la herramienta,** con un sustituto de `VoicingSearchTool`, no a través de un cliente MCP y del servidor de GA.
+- **El programa llama directamente al método de la herramienta,** no a través de un cliente MCP y del servidor de GA.
 - **Los veredictos leen clases de altura.** El curso da por correcto un acorde de séptima sin quinta, duplique la nota que duplique, y no juzga ni la digitación ni el registro.
 - **Solo se comprueba en detalle el primer par.** El programa cuenta los pares correctos entre los cinco, pero no mide cómo los reordena el fallo de la distancia.
 
@@ -288,4 +288,4 @@ prompts whose first pair would move less with the least over every choice of not
 
 - GuitarAlchemist/ga en [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6): `GaMcpServer/Tools/CompositionTools.cs`, `GaMcpServer/Tools/VoicingSearchTool.cs`, `skills-dev/_pending-tools/voice-leading/DRAFT.md`, `skills-dev/_pending-tools/README.md`.
 - GuitarAlchemist/ga en [`f4f5b4a`](https://github.com/GuitarAlchemist/ga/tree/f4f5b4af881f3970c6fdc25fa61a30ef9d23458a): la misma herramienta y los mismos borradores, la búsqueda de la lección 16, `Common/GA.Business.ML/Agents/Skills/ChordVoicingsSkill.cs`.
-- Los programas del curso: `code/ga-ai/GaAi/Lesson19.cs`, `code/ga-ai/GaMain/Program.cs`, `code/ga-ai/Shared/VoiceLeadingPairProbe.cs`, `code/ga-ai/Shared/VoicingSearchTool.cs`.
+- Los programas del curso: `code/ga-ai/GaAi/Lesson19.cs`, `code/ga-ai/GaMain/Program.cs`, `code/ga-ai/Shared/VoiceLeadingPairProbe.cs`, `code/ga-ai/Shared/SearchIndex.cs`.
