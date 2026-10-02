@@ -31,6 +31,8 @@
     <Compile Include="$(GaRoot)Common/GA.Domain.Services/Chords/ChordTemplateFactory.cs" Link="Ga/ChordTemplateFactory.cs" />
     <Compile Include="$(GaRoot)Apps/ga-server/GaApi/Services/ContextualChordService.cs" Link="Ga/ContextualChordService.cs" />
     <Compile Include="$(GaRoot)Apps/ga-server/GaApi/Models/ContextualChords.cs" Link="Ga/ContextualChords.cs" />
+    <!-- Lesson 11 compiles the service that ranks the modes of a family by brightness, as it is -->
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Unified/UnifiedModeService.cs" Link="Ga/UnifiedModeService.cs" />
   </ItemGroup>
 
 </Project>
