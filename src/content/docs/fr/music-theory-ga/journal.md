@@ -489,7 +489,7 @@ Observations, pas des tests :
 
 ## 2026-10-02 — Leçon 14 : résultats face aux prédictions
 
-Le programme est [`Lesson16.cs`](https://github.com/spareilleux/learn/blob/1d58ba8/code/music-theory-ga/GaTheory/Lesson16.cs) (point d'entrée `l16`), sa sortie [`expected/l16.txt`](https://github.com/spareilleux/learn/blob/1d58ba8/code/music-theory-ga/expected/l16.txt) ; `check.sh` passe pour les leçons 1 à 16 et les 22 diagrammes. Il compile tels quels douze fichiers de plus de `GA.Domain.Services`, le générateur, les analyseurs et les filtres de voicings avec le reconnaisseur d'accords et les distances de cases qu'ils appellent, et les treize enregistrements d'analyse de `GA.Business.Core` qu'ils renvoient ; `fetch-ga.sh` les ajoute maintenant à son extraction partielle. La compilation signale un avertissement, CS8604, dans le `VoicingAnalyzer.cs` de GA lui-même (ligne 198), où un `ModeInfo` qui peut être nul passe à un paramètre qui n'accepte pas nul. Aucun outil MCP ni aucun chatbot n'a été appelé, et aucun test n'a été ajouté après la première exécution.
+Le programme est [`Lesson16.cs`](https://github.com/spareilleux/learn/blob/1d58ba8/code/music-theory-ga/GaTheory/Lesson16.cs) (point d'entrée `l16`), sa sortie [`expected/l16.txt`](https://github.com/spareilleux/learn/blob/1d58ba8/code/music-theory-ga/expected/l16.txt) ; `check.sh` passe pour les leçons 1 à 16 et les 22 diagrammes. Il compile tels quels douze fichiers de plus de `GA.Domain.Services`, le générateur, les analyseurs et les filtres de voicings avec le reconnaisseur d'accords et les distances de cases qu'ils appellent, et treize fichiers de `GA.Business.Core`, les douze enregistrements d'analyse qu'ils renvoient et une classe de constantes ; `fetch-ga.sh` les ajoute maintenant à son extraction partielle. La compilation signale un avertissement, CS8604, dans le `VoicingAnalyzer.cs` de GA lui-même (ligne 198), où un `ModeInfo` qui peut être nul passe à un paramètre qui n'accepte pas nul. Aucun outil MCP ni aucun chatbot n'a été appelé, et aucun test n'a été ajouté après la première exécution.
 
 1. Confirmée : 64 « Drop-2 », 64 rien, aucune autre étiquette ; « Drop-2 » exactement quand au plus une voix est descendue. Les sept exemples de Wikipédia sont reconstruits comme écrit, et GA n'en nomme aucun.
 2. Confirmée : 112 « rootless », aucun ouvert, les 128 avec leur fondamentale ; chaque voicing étiqueté `closed-voicing`, chaque « Drop-2 » `drop-2-voicings`, les serrés compris. Sur les formes, les sept accords ouverts de la leçon 3 sont « rootless », et x32010, x02210 et xx0232 « Drop-2 » ; x3200x est « Drop-2 » et pas « rootless », x3545x « Drop-2 » et « rootless ».
@@ -500,8 +500,8 @@ Le programme est [`Lesson16.cs`](https://github.com/spareilleux/learn/blob/1d58b
 
 Observations, pas des tests :
 
-- `InterpretationService`, qui étiquette les voicings quand le corpus est indexé, cherche « drop 2 » et « drop 3 » avec une espace (`InterpretationService.cs`, lignes 41-46), alors que `DropVoicing` contient « Drop-2 » : ses étiquettes de drop ne se déclenchent jamais. Lu, pas exécuté.
-- MUS-005 appelle x3200x, une position serrée, un "Drop-2 Cmaj7" ; il dit "Drop-2 voicings exist on four string sets" au-dessus d'un tableau de trois lignes ; ses diagrammes de shells montrent une note par accord.
+- `InterpretationService`, dont le seul appelant, `IndexVoicingsCommand` de GaCLI, est exclu de la compilation (`GaCLI.csproj`, ligne 18), cherche « drop 2 » et « drop 3 » avec une espace (`InterpretationService.cs`, lignes 41-46), alors que `DropVoicing` contient « Drop-2 » : ses étiquettes de drop ne se déclenchent jamais. Lu, pas exécuté.
+- MUS-005, tel qu'il se lisait à Demerzel [`6aef19b`](https://github.com/GuitarAlchemist/Demerzel/blob/6aef19b3a7c0ceac400f89f5585f4c033d61c99c/state/streeling/courses/music/en/mus-005-jazz-harmony.md) jusqu'à ce que Demerzel #1098 le corrige, appelait x3200x, une position serrée, un "Drop-2 Cmaj7" ; il disait "Drop-2 voicings exist on four string sets" au-dessus d'un tableau de trois lignes ; ses diagrammes de shells montraient une note par accord.
 - La section sur les voicings drop de l'article "Voicing (music)" de Wikipédia porte la mention "This section does not cite any sources".
 
 ## À vérifier
@@ -525,5 +525,5 @@ Observations, pas des tests :
 - Le `ga_polychord` en marche sur B sur C et C sur F♯, face à la copie de son code par le cours.
 - Le reconnaisseur d'accords complet de GA, pas `TryFindExact` seul, sur les voicings x3233x, x32335 et x3234x.
 - Le `ga_search_voicings` en marche sur « drop2 », « shell » et « rootless » : quels voicings l'index renvoie pour chaque étiquette.
-- Les étiquettes de drop d'`InterpretationService` et l'étiquette « Shell » d'`AutoTaggingService` sur le corpus indexé, exécutées plutôt que lues.
+- L'étiquette « Shell » d'`AutoTaggingService` sur le corpus indexé, exécutée plutôt que lue, et si une version ultérieure de GA recompile `IndexVoicingsCommand`, ce qui rendrait atteignables les étiquettes de drop d'`InterpretationService`.
 - Ce que répond le chatbot quand on lui demande des voicings drop 3, puisque GA n'en étiquette aucun.

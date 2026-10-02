@@ -489,7 +489,7 @@ Written from GA's code at `a826864`, before the lesson's program existed; the re
 
 ## 2026-10-02 — Lesson 14: results against the predictions
 
-The program is [`Lesson16.cs`](https://github.com/spareilleux/learn/blob/1d58ba8/code/music-theory-ga/GaTheory/Lesson16.cs) (entry `l16`), its output [`expected/l16.txt`](https://github.com/spareilleux/learn/blob/1d58ba8/code/music-theory-ga/expected/l16.txt); `check.sh` passes for lessons 1 to 16 and the 22 diagrams. It compiles, as they are, twelve more files of `GA.Domain.Services`, the voicing generator, analyzers and filters with the chord recognizer and fret distances they call, and the thirteen analysis records of `GA.Business.Core` they return; `fetch-ga.sh` now adds them to its sparse checkout. The build reports one warning, CS8604, in GA's own `VoicingAnalyzer.cs` (line 198), where a `ModeInfo` that can be null goes to a parameter that does not accept null. No MCP tool and no chatbot was called, and no test was added after the first run.
+The program is [`Lesson16.cs`](https://github.com/spareilleux/learn/blob/1d58ba8/code/music-theory-ga/GaTheory/Lesson16.cs) (entry `l16`), its output [`expected/l16.txt`](https://github.com/spareilleux/learn/blob/1d58ba8/code/music-theory-ga/expected/l16.txt); `check.sh` passes for lessons 1 to 16 and the 22 diagrams. It compiles, as they are, twelve more files of `GA.Domain.Services`, the voicing generator, analyzers and filters with the chord recognizer and fret distances they call, and thirteen files of `GA.Business.Core`, the twelve analysis records they return and a class of constants; `fetch-ga.sh` now adds them to its sparse checkout. The build reports one warning, CS8604, in GA's own `VoicingAnalyzer.cs` (line 198), where a `ModeInfo` that can be null goes to a parameter that does not accept null. No MCP tool and no chatbot was called, and no test was added after the first run.
 
 1. Confirmed: 64 "Drop-2", 64 nothing, no other label; "Drop-2" exactly when at most one voice is dropped. Wikipedia's seven examples are rebuilt as written, and GA names none.
 2. Confirmed: 112 "rootless", none open, all 128 with their root; every voicing tagged `closed-voicing`, every "Drop-2" `drop-2-voicings`, the close ones included. On the shapes, lesson 3's seven open chords are "rootless", and x32010, x02210 and xx0232 "Drop-2"; x3200x is "Drop-2" and not rootless, x3545x "Drop-2" and rootless.
@@ -500,8 +500,8 @@ The program is [`Lesson16.cs`](https://github.com/spareilleux/learn/blob/1d58ba8
 
 Observations, not tests:
 
-- `InterpretationService`, which tags voicings when the corpus is indexed, looks for "drop 2" and "drop 3" with a space (`InterpretationService.cs`, lines 41-46), while `DropVoicing` holds "Drop-2": its drop tags never fire. Read, not run.
-- MUS-005 calls x3200x, a close position, a "Drop-2 Cmaj7"; it says "Drop-2 voicings exist on four string sets" above a table of three rows; its shell diagrams show one note per chord.
+- `InterpretationService`, whose only caller, GaCLI's `IndexVoicingsCommand`, is excluded from the build (`GaCLI.csproj`, line 18), looks for "drop 2" and "drop 3" with a space (`InterpretationService.cs`, lines 41-46), while `DropVoicing` holds "Drop-2": its drop tags never fire. Read, not run.
+- MUS-005, as it read at Demerzel [`6aef19b`](https://github.com/GuitarAlchemist/Demerzel/blob/6aef19b3a7c0ceac400f89f5585f4c033d61c99c/state/streeling/courses/music/en/mus-005-jazz-harmony.md) until Demerzel #1098 corrected it, called x3200x, a close position, a "Drop-2 Cmaj7"; it said "Drop-2 voicings exist on four string sets" above a table of three rows; its shell diagrams showed one note per chord.
 - The section on drop voicings of Wikipedia's "Voicing (music)" is flagged "This section does not cite any sources".
 
 ## To verify
@@ -525,5 +525,5 @@ Observations, not tests:
 - The live `ga_polychord` on B over C and C over F♯, against the course's copy of its code.
 - GA's full chord recognizer, not `TryFindExact` alone, on the voicings x3233x, x32335 and x3234x.
 - The live `ga_search_voicings` on "drop2", "shell" and "rootless": which voicings the index returns for each tag.
-- `InterpretationService`'s drop tags and `AutoTaggingService`'s "Shell" tag on the indexed corpus, run rather than read.
+- `AutoTaggingService`'s "Shell" tag on the indexed corpus, run rather than read, and whether a later GA builds `IndexVoicingsCommand` again, which would make `InterpretationService`'s drop tags reachable.
 - What the chatbot answers when asked for drop-3 voicings, since GA labels none.
