@@ -21,5 +21,6 @@ sidebar:
 - [MUS-008 · Intervals, Inversion and Compound Intervals — Counting Past the Octave](mus-008-intervals-inversion-compound/)
 - [MUS-009 · Tuning and Fretboard Geometry — One Pitch, Many Places](mus-009-tuning-fretboard-geometry/)
 - [MUS-012 · Chord Formulas, Essential Tones and Doubling — What a Chord Can Lose](mus-012-chord-formulas-essential-tones-doubling/)
+- [MUS-013 · Root, Bass and Pitch-Class Set — One Set, Several Names](mus-013-root-bass-pitch-class-set/)
 - [MUS-018 · Key Finding, Roman Numerals and Cadences — What a Count of Chords Can and Cannot Decide](mus-018-key-finding-roman-numerals-cadences/)
 - [MUS-020 · Set Classes, Interval Vectors, the Z-Relation and Prime Forms — Two Packings, One Catalogue](mus-020-set-classes-interval-vectors-prime-forms/)

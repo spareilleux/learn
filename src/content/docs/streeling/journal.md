@@ -88,6 +88,7 @@ Tick a module once studied. Under **Notes**, add a dated entry: what I understoo
 - [ ] [MUS-008 · Intervals, Inversion and Compound Intervals](../music/mus-008-intervals-inversion-compound/) <!-- mus-008-intervals-inversion-compound -->
 - [ ] [MUS-009 · Tuning and Fretboard Geometry](../music/mus-009-tuning-fretboard-geometry/) <!-- mus-009-tuning-fretboard-geometry -->
 - [ ] [MUS-012 · Chord Formulas, Essential Tones and Doubling](../music/mus-012-chord-formulas-essential-tones-doubling/) <!-- mus-012-chord-formulas-essential-tones-doubling -->
+- [ ] [MUS-013 · Root, Bass and Pitch-Class Set](../music/mus-013-root-bass-pitch-class-set/) <!-- mus-013-root-bass-pitch-class-set -->
 - [ ] [MUS-018 · Key Finding, Roman Numerals and Cadences](../music/mus-018-key-finding-roman-numerals-cadences/) <!-- mus-018-key-finding-roman-numerals-cadences -->
 - [ ] [MUS-020 · Set Classes, Interval Vectors, the Z-Relation and Prime Forms](../music/mus-020-set-classes-interval-vectors-prime-forms/) <!-- mus-020-set-classes-interval-vectors-prime-forms -->
 
@@ -220,6 +221,14 @@ Nothing in it was run here.
 ## 2026-10-03 — MUS-012 · Chord Formulas, Essential Tones and Doubling
 
 Synced from Demerzel at [`450fc67`](https://github.com/GuitarAlchemist/Demerzel/commit/450fc670a71d1cfb190a53bfedd52ba81215fa5c) ([PR #1180](https://github.com/GuitarAlchemist/Demerzel/pull/1180)). A new intermediate music module on what a chord can lose: chord formulas up to the thirteenth, the essential tones a chord's name depends on and the optional ones it can drop, the doublings of a guitar voicing, and a thirteenth chord on six strings. It traces what GA stores about formulas, essential tones and doubling, and its section 6 proposes an experiment. The music index now lists it, the Streeling index counts 12 music modules instead of 11, and MUS-018 and MUS-020 move down one place in the sidebar; every other page changes only its pinned references to Demerzel, from `d459d8e` to `450fc67`.
+
+Nothing in it was run here.
+
+- **It has not been studied here,** so its checkbox above stays empty.
+
+## 2026-10-03 — MUS-013 · Root, Bass and Pitch-Class Set
+
+Synced from Demerzel at [`928fbb2`](https://github.com/GuitarAlchemist/Demerzel/commit/928fbb26539e451fd34a0e8baf0714cf919a1562) ([PR #1181](https://github.com/GuitarAlchemist/Demerzel/pull/1181)). A new intermediate music module on what a chord name fixes: the root, the bass and the pitch-class set, the sets that have several readings (sixth and seventh chords, sus2 and sus4, the augmented triad and the diminished seventh), and how the bass, the harmony and the resolution choose between them. It traces how GA names a set without looking at its bass, and its section 6 proposes an experiment. The music index now lists it, the Streeling index counts 13 music modules instead of 12, and MUS-018 and MUS-020 move down one place in the sidebar; every other page changes only its pinned references to Demerzel, from `450fc67` to `928fbb2`.
 
 Nothing in it was run here.
 

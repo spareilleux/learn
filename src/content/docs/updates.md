@@ -191,6 +191,20 @@ PHY-001's correction therefore moves from awaiting verification to verified; its
 
 MUS-012 stays **awaiting verification** until this change is merged, its deployment succeeds and the pages are read back anonymously.
 
+## 2026-10-03 — Streeling MUS-012 published
+
+[Learn PR #124](https://github.com/spareilleux/learn/pull/124) was merged as `062e3cb`, after two corrections to the Streeling journal asked for in an independent review, and its [Pages deployment](https://github.com/spareilleux/learn/actions/runs/37143956527) succeeded. The pages were then read back anonymously in the three languages: twelve pages, each answering 200. The [MUS-012 module](../streeling/music/mus-012-chord-formulas-essential-tones-doubling/) pages name MUS-012 and link their source at `450fc67`; the [music index](../streeling/music/) lists it, and the [Streeling journal](../streeling/journal/) and this journal carry their 2026-10-03 entries.
+
+MUS-012 therefore moves from awaiting verification to verified; its entry above is left as written. This update repins its source links to `928fbb2`. Published is not studied: MUS-012 has not been run or studied here, and its experiment remains proposed.
+
+## 2026-10-03 — Streeling MUS-013 synced, awaiting verification
+
+[Demerzel PR #1181](https://github.com/GuitarAlchemist/Demerzel/pull/1181) was merged as `928fbb2`, after the `450fc67` pin. This update syncs it into Learn:
+- the new [MUS-013 module](../streeling/music/mus-013-root-bass-pitch-class-set/), Root, Bass and Pitch-Class Set, in the three languages;
+- its line in the [music index](../streeling/music/) and in the [Streeling journal](../streeling/journal/), with a dated entry there.
+
+MUS-013 stays **awaiting verification** until this change is merged, its deployment succeeds and the pages are read back anonymously.
+
 ## To verify
 
 - Check this update's public URLs and catalog after deployment; keep the deploy receipt with the integration record.
