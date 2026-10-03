@@ -414,6 +414,7 @@ Most of the 22 differences of 2026-09-14 were fixed upstream by [#689](https://g
 - The count of sets expanded before "No path" comes from the course's own search, which follows `FindShortestPath`'s rule; the skill doesn't print it, and the program doesn't time the skills.
 - A second read of the pinned code by another model, Augment's `auggie` CLI with `gpt-6-sol` and read-only tools, estimated the same 168 and 462 expansions and read the step count the same way.
 - The solutions read the expected output and the skills' code.
+- CI run [37147833299](https://github.com/spareilleux/learn/actions/runs/37147833299), for commit `12b105a`: green on the three systems, 4 min 14 s on Linux, 6 min 9 s on macOS, 12 min 28 s on Windows, clone and build included.
 
 ## To verify
 

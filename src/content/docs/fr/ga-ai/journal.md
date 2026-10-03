@@ -414,6 +414,7 @@ La plupart des 22 différences du 2026-09-14 ont été corrigées en amont par [
 - Le nombre d'ensembles développés avant « No path » vient de la propre recherche du cours, qui suit la règle de `FindShortestPath` ; le skill ne l'affiche pas, et le programme ne chronomètre pas les skills.
 - Une seconde lecture du code au commit épinglé par un autre modèle, la CLI `auggie` d'Augment avec `gpt-6-sol` et des outils en lecture seule, a estimé les mêmes 168 et 462 ensembles développés et a lu le nombre d'étapes de la même façon.
 - Les solutions se lisent dans la sortie attendue et dans le code des skills.
+- Exécution de CI [37147833299](https://github.com/spareilleux/learn/actions/runs/37147833299), pour le commit `12b105a` : verte sur les trois systèmes, 4 min 14 s sous Linux, 6 min 9 s sous macOS, 12 min 28 s sous Windows, clone et compilation compris.
 
 ## À vérifier
 

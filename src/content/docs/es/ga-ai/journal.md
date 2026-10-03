@@ -414,6 +414,7 @@ La mayoría de las 22 diferencias del 2026-09-14 se corrigieron upstream en [#68
 - El recuento de conjuntos expandidos antes de "No path" procede de la propia búsqueda del curso, que sigue la regla de `FindShortestPath`; la skill no lo imprime, y el programa no cronometra las skills.
 - Una segunda lectura del código fijado por otro modelo, la CLI `auggie` de Augment con `gpt-6-sol` y herramientas de solo lectura, estimó las mismas 168 y 462 expansiones y leyó el recuento de pasos de la misma manera.
 - Las soluciones se leen en la salida esperada y en el código de las skills.
+- Ejecución de CI [37147833299](https://github.com/spareilleux/learn/actions/runs/37147833299), para el commit `12b105a`: verde en los tres sistemas, 4 min 14 s en Linux, 6 min 9 s en macOS, 12 min 28 s en Windows, con el clon y la compilación incluidos.
 
 ## Por verificar
 
