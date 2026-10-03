@@ -173,6 +173,24 @@ The [Pages deployment](https://github.com/spareilleux/learn/actions/runs/3707028
 
 PHY-001's correction stays **awaiting verification** until this change is merged, its deployment succeeds and the pages are read back anonymously.
 
+## 2026-10-03 — Streeling PHY-001 correction published
+
+[Learn PR #117](https://github.com/spareilleux/learn/pull/117) was merged as `8183127`, and its [Pages deployment](https://github.com/spareilleux/learn/actions/runs/37072084405) succeeded. The [PHY-001 module](../streeling/physics/phy-001-science-of-guitar-sound/) and the [Streeling journal](../streeling/journal/) were then read back anonymously in the three languages: six pages, each answering 200. The module pages name PHY-001 and link their source at `d459d8e`; the journal pages carry its 2026-10-02 entry.
+
+PHY-001's correction therefore moves from awaiting verification to verified; its entry above is left as written. This update repins the module's source links to `450fc67`. Published is not studied: PHY-001 has not been run or studied here.
+
+## 2026-10-03 — Music theory lesson 15 published
+
+[Lesson 15](../music-theory-ga/15-the-fretboard/) was merged after its CI passed: [PR #119](https://github.com/spareilleux/learn/pull/119), merged as `89dc3e6`. Its [Pages deployment](https://github.com/spareilleux/learn/actions/runs/37083729662) succeeded. The lesson and the [course journal](../music-theory-ga/journal/) answered 200 anonymously in the three languages, six pages in all.
+
+## 2026-10-03 — Streeling MUS-012 synced, awaiting verification
+
+[Demerzel PR #1180](https://github.com/GuitarAlchemist/Demerzel/pull/1180) was merged as `450fc67`, after the `d459d8e` pin. This update syncs it into Learn:
+- the new [MUS-012 module](../streeling/music/mus-012-chord-formulas-essential-tones-doubling/), Chord Formulas, Essential Tones and Doubling, in the three languages;
+- its line in the [music index](../streeling/music/) and in the [Streeling journal](../streeling/journal/), with a dated entry there.
+
+MUS-012 stays **awaiting verification** until this change is merged, its deployment succeeds and the pages are read back anonymously.
+
 ## To verify
 
 - Check this update's public URLs and catalog after deployment; keep the deploy receipt with the integration record.

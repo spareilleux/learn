@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **MAT-024** · Systèmes dynamiques, stabilité et rétroaction · intermédiaire · 60 minutes
 
-Généré par le département *Mathématiques* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/d459d8e5f0210cbad00f49c49196fc61160aba76/state/streeling/courses/mathematics/fr/mat-024-dynamical-systems-stability-feedback.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Mathématiques* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/450fc670a71d1cfb190a53bfedd52ba81215fa5c/state/streeling/courses/mathematics/fr/mat-024-dynamical-systems-stability-feedback.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MAT-005](../../mathematics/mat-005-symmetric-eigenproblems/), [MAT-006](../../mathematics/mat-006-svd-low-rank-approximation/)
 :::

@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **CYB-002**
 
-Généré par le département *Cybernétique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/d459d8e5f0210cbad00f49c49196fc61160aba76/state/streeling/courses/cybernetics/fr/cyb-002-active-dampening-cross-repo-oscillation.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Cybernétique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/450fc670a71d1cfb190a53bfedd52ba81215fa5c/state/streeling/courses/cybernetics/fr/cyb-002-active-dampening-cross-repo-oscillation.fr.md) · [Mon journal](../../journal/)
 :::
 
 **Département :** Cybernétique

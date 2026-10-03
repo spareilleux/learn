@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **MAT-020** · Cadenas de Markov y modelos de Markov ocultos · intermedio · 50 minutes
 
-Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/d459d8e5f0210cbad00f49c49196fc61160aba76/state/streeling/courses/mathematics/es/mat-020-markov-chains-hmm.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/450fc670a71d1cfb190a53bfedd52ba81215fa5c/state/streeling/courses/mathematics/es/mat-020-markov-chains-hmm.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MAT-008](../../mathematics/mat-008-probability-conditional-reasoning/), [MAT-019](../../mathematics/mat-019-graphs-centrality-spectral/)
 :::

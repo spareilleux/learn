@@ -87,6 +87,7 @@ Coche un module une fois étudié. Sous **Notes**, ajoute une entrée datée : c
 - [ ] [MUS-007 · Hauteur, orthographe et identité enharmonique](../music/mus-007-pitch-spelling-enharmonic-identity/) <!-- mus-007-pitch-spelling-enharmonic-identity -->
 - [ ] [MUS-008 · Intervalles, renversements et intervalles composés](../music/mus-008-intervals-inversion-compound/) <!-- mus-008-intervals-inversion-compound -->
 - [ ] [MUS-009 · Accordage et géométrie du manche](../music/mus-009-tuning-fretboard-geometry/) <!-- mus-009-tuning-fretboard-geometry -->
+- [ ] [MUS-012 · Formules d'accords, notes essentielles et redoublements](../music/mus-012-chord-formulas-essential-tones-doubling/) <!-- mus-012-chord-formulas-essential-tones-doubling -->
 - [ ] [MUS-018 · Identification de la tonalité, chiffres romains et cadences](../music/mus-018-key-finding-roman-numerals-cadences/) <!-- mus-018-key-finding-roman-numerals-cadences -->
 - [ ] [MUS-020 · Classes d'ensembles, vecteurs d'intervalles, relation Z et formes premières](../music/mus-020-set-classes-interval-vectors-prime-forms/) <!-- mus-020-set-classes-interval-vectors-prime-forms -->
 
@@ -211,6 +212,14 @@ Rien n'y a été exécuté ici.
 ## 2026-10-02 — PHY-001 · La science du son de la guitare, corrigé
 
 Synchronisé depuis Demerzel à [`d459d8e`](https://github.com/GuitarAlchemist/Demerzel/commit/d459d8e5f0210cbad00f49c49196fc61160aba76) ([PR #1179](https://github.com/GuitarAlchemist/Demerzel/pull/1179)). L'exercice du module disait de mesurer du sillet à la frette 7 et d'y trouver environ 2/3 de la longueur de la corde. Les 2/3 sont la longueur qui vibre, de la frette 7 au chevalet ; le segment du sillet à la frette 7 en est le tiers restant. La correction est faite dans les six langues du module, dont trois sont sur ce site. Toutes les autres pages ne changent que par leurs références épinglées à Demerzel, de `e203e5a` à `d459d8e`.
+
+Rien n'y a été exécuté ici.
+
+- **Il n'a pas été étudié ici,** donc sa case ci-dessus reste vide.
+
+## 2026-10-03 — MUS-012 · Formules d'accords, notes essentielles et redoublements
+
+Synchronisé depuis Demerzel à [`450fc67`](https://github.com/GuitarAlchemist/Demerzel/commit/450fc670a71d1cfb190a53bfedd52ba81215fa5c) ([PR #1180](https://github.com/GuitarAlchemist/Demerzel/pull/1180)). Un nouveau module de musique de niveau intermédiaire sur ce qu'un accord peut perdre : les formules d'accords jusqu'à la treizième, les notes essentielles dont dépend le nom d'un accord et les notes facultatives qu'il peut perdre, les redoublements d'un voicing de guitare et un accord de treizième sur six cordes. Il repère ce que GA stocke sur les formules, les notes essentielles et les redoublements, et se termine par une expérience proposée. Les index de Streeling et de la musique le listent désormais, et MUS-018 et MUS-020 descendent d'un rang dans la barre latérale ; toutes les autres pages ne changent que par leurs références épinglées à Demerzel, de `d459d8e` à `450fc67`.
 
 Rien n'y a été exécuté ici.
 

@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **MAT-007** · Moindres carrés, régularisation et identifiabilité · intermédiaire · 50 minutes
 
-Généré par le département *Mathématiques* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/d459d8e5f0210cbad00f49c49196fc61160aba76/state/streeling/courses/mathematics/fr/mat-007-least-squares-regularisation.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Mathématiques* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/450fc670a71d1cfb190a53bfedd52ba81215fa5c/state/streeling/courses/mathematics/fr/mat-007-least-squares-regularisation.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MAT-003](../../mathematics/mat-003-floating-point-conditioning/), [MAT-006](../../mathematics/mat-006-svd-low-rank-approximation/)
 :::

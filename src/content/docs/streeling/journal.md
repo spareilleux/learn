@@ -87,6 +87,7 @@ Tick a module once studied. Under **Notes**, add a dated entry: what I understoo
 - [ ] [MUS-007 · Pitch, Spelling and Enharmonic Identity](../music/mus-007-pitch-spelling-enharmonic-identity/) <!-- mus-007-pitch-spelling-enharmonic-identity -->
 - [ ] [MUS-008 · Intervals, Inversion and Compound Intervals](../music/mus-008-intervals-inversion-compound/) <!-- mus-008-intervals-inversion-compound -->
 - [ ] [MUS-009 · Tuning and Fretboard Geometry](../music/mus-009-tuning-fretboard-geometry/) <!-- mus-009-tuning-fretboard-geometry -->
+- [ ] [MUS-012 · Chord Formulas, Essential Tones and Doubling](../music/mus-012-chord-formulas-essential-tones-doubling/) <!-- mus-012-chord-formulas-essential-tones-doubling -->
 - [ ] [MUS-018 · Key Finding, Roman Numerals and Cadences](../music/mus-018-key-finding-roman-numerals-cadences/) <!-- mus-018-key-finding-roman-numerals-cadences -->
 - [ ] [MUS-020 · Set Classes, Interval Vectors, the Z-Relation and Prime Forms](../music/mus-020-set-classes-interval-vectors-prime-forms/) <!-- mus-020-set-classes-interval-vectors-prime-forms -->
 
@@ -211,6 +212,14 @@ Nothing in them was run here.
 ## 2026-10-02 — PHY-001 · The Science of Guitar Sound, corrected
 
 Synced from Demerzel at [`d459d8e`](https://github.com/GuitarAlchemist/Demerzel/commit/d459d8e5f0210cbad00f49c49196fc61160aba76) ([PR #1179](https://github.com/GuitarAlchemist/Demerzel/pull/1179)). The module's exercise said to measure from the nut to fret 7 and expect about 2/3 of the string length. The 2/3 is the length that vibrates, from fret 7 to the saddle; the nut-to-fret-7 stretch is the remaining third. The correction is in all six languages of the module, three of which are on this site. Every other page changes only its pinned references to Demerzel, from `e203e5a` to `d459d8e`.
+
+Nothing in it was run here.
+
+- **It has not been studied here,** so its checkbox above stays empty.
+
+## 2026-10-03 — MUS-012 · Chord Formulas, Essential Tones and Doubling
+
+Synced from Demerzel at [`450fc67`](https://github.com/GuitarAlchemist/Demerzel/commit/450fc670a71d1cfb190a53bfedd52ba81215fa5c) ([PR #1180](https://github.com/GuitarAlchemist/Demerzel/pull/1180)). A new intermediate music module on what a chord can lose: chord formulas up to the thirteenth, the essential tones a chord's name depends on and the optional ones it can drop, the doublings of a guitar voicing, and a thirteenth chord on six strings. It traces what GA stores about formulas, essential tones and doubling, and ends with a proposed experiment. The Streeling and music indexes now list it, and MUS-018 and MUS-020 move down one place in the sidebar; every other page changes only its pinned references to Demerzel, from `d459d8e` to `450fc67`.
 
 Nothing in it was run here.
 

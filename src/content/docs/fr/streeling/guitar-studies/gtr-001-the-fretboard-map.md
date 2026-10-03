@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **GTR-001** · Fondamentaux de la guitare · débutant · 30 minutes
 
-Généré par le département *Études de guitare* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/d459d8e5f0210cbad00f49c49196fc61160aba76/state/streeling/courses/guitar-studies/fr/gtr-001-the-fretboard-map.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Études de guitare* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/450fc670a71d1cfb190a53bfedd52ba81215fa5c/state/streeling/courses/guitar-studies/fr/gtr-001-the-fretboard-map.fr.md) · [Mon journal](../../journal/)
 :::
 
 > **Département d'études de guitare** | Stade : Nigredo (Débutant) | Durée : 30 minutes

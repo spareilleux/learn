@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **MAT-007** · Mínimos cuadrados, regularización e identificabilidad · intermedio · 50 minutes
 
-Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/d459d8e5f0210cbad00f49c49196fc61160aba76/state/streeling/courses/mathematics/es/mat-007-least-squares-regularisation.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/450fc670a71d1cfb190a53bfedd52ba81215fa5c/state/streeling/courses/mathematics/es/mat-007-least-squares-regularisation.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MAT-003](../../mathematics/mat-003-floating-point-conditioning/), [MAT-006](../../mathematics/mat-006-svd-low-rank-approximation/)
 :::
