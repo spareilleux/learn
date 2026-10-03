@@ -1,0 +1,74 @@
+CurrentCulture: en-CA
+
+=== a. Items loaded by each service ===
+IconicChords.yaml: 17 items, 14 distinct artists; file next to the program: yes
+Error loading chord progressions configuration: Exception during deserialization
+ChordProgressions.yaml: 1 items, 1 distinct artists; file next to the program: yes
+Error loading guitar techniques configuration: Exception during deserialization
+GuitarTechniques.yaml: 1 items, 1 distinct artists; file next to the program: yes
+Error loading specialized tunings configuration: While parsing a flow sequence, did not find expected ',' or ']'.
+SpecializedTunings.yaml: 1 items, 1 distinct artists; file next to the program: yes
+
+=== b. Distinct artists ===
+GetAllArtists().Count(): 16
+GetStatistics().UniqueArtists: 16
+
+=== c. GetAllArtists().Take(20), in that order ===
+ 1.   1  Alexander Scriabin
+ 2.   1  Arnold Schoenberg
+ 3.   2  Bill Evans
+ 4.   1  Claude Debussy
+ 5.   1  Igor Stravinsky
+ 6.   2  Jimi Hendrix
+ 7.   1  John Barry
+ 8.   1  Joni Mitchell
+ 9.   1  Richard Strauss
+10.   1  Richard Wagner
+11.   1  Steely Dan
+12.   2  The Beatles
+13.   1  Traditional
+14.   4  Various
+15.   1  Various Artists
+16.   1  Various Rock Artists
+Smallest count kept: 1
+Same 20 when sorted with StringComparer.Ordinal: yes
+
+=== d. GetStatistics().ArtistBreakdown, in enumeration order ===
+ 1.   4  Various
+ 2.   2  Bill Evans
+ 3.   2  Jimi Hendrix
+ 4.   2  The Beatles
+ 5.   1  Alexander Scriabin
+ 6.   1  Arnold Schoenberg
+ 7.   1  Claude Debussy
+ 8.   1  Igor Stravinsky
+ 9.   1  John Barry
+10.   1  Joni Mitchell
+11.   1  Richard Strauss
+12.   1  Richard Wagner
+13.   1  Steely Dan
+14.   1  Traditional
+15.   1  Various Artists
+16.   1  Various Rock Artists
+Entries: 16
+
+=== e. Top 20 over all artists, by count descending then name (ordinal) ===
+ 1.   4  Various  [kept]
+ 2.   2  Bill Evans  [kept]
+ 3.   2  Jimi Hendrix  [kept]
+ 4.   2  The Beatles  [kept]
+ 5.   1  Alexander Scriabin  [kept]
+ 6.   1  Arnold Schoenberg  [kept]
+ 7.   1  Claude Debussy  [kept]
+ 8.   1  Igor Stravinsky  [kept]
+ 9.   1  John Barry  [kept]
+10.   1  Joni Mitchell  [kept]
+11.   1  Richard Strauss  [kept]
+12.   1  Richard Wagner  [kept]
+13.   1  Steely Dan  [kept]
+14.   1  Traditional  [kept]
+15.   1  Various Artists  [kept]
+16.   1  Various Rock Artists  [kept]
+
+=== f. Left out of c with a count greater than 1 ===
+Number: 0

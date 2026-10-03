@@ -480,7 +480,7 @@ Cada advertencia tiene su propia corrección. `Song` siempre está, así que pas
 - Una advertencia de nulabilidad muestra por dónde entra `null`, que no siempre es donde falla el programa. Corrígela con `??`, `required`, `string?` o un `if`; `!` solo la esconde.
 - `WarningsAsErrors` con el valor `nullable` convierte las advertencias de nulabilidad en errores.
 
-La siguiente lección, [colecciones y LINQ](../#plan), mostrará cómo guardar y consultar muchos valores a la vez.
+La siguiente lección, [colecciones y LINQ](../09-collections-and-linq/), mostrará cómo guardar y consultar muchos valores a la vez.
 
 ## Fuentes
 

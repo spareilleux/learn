@@ -426,7 +426,7 @@ string Longest(string[] values)
 Longest name: GA.Business.ProbabilisticGrammar
 ```
 
-Each method does one thing and has a name that says what: count, filter, find the longest. `ProjectsIn` uses a `for` instead of a `foreach` because it needs the index `i` to read the same position in both arrays. Two arrays that must stay in step are fragile: add a name and forget its language, and every language after it is wrong. [Lesson 5](../05-classes-and-objects/) replaces them with one list of projects, each with a name and a language. [Lesson 10](../#outline) reads the whole CSV file instead of copying it by hand.
+Each method does one thing and has a name that says what: count, filter, find the longest. `ProjectsIn` uses a `for` instead of a `foreach` because it needs the index `i` to read the same position in both arrays. Two arrays that must stay in step are fragile: add a name and forget its language, and every language after it is wrong. [Lesson 9](../09-collections-and-linq/) replaces them with one list of records, each with a name and a language, and answers the same questions with LINQ. [Lesson 10](../#outline) reads the whole CSV file instead of copying it by hand.
 
 ## `null`: no value at all
 

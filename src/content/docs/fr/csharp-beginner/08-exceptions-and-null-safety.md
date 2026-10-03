@@ -480,7 +480,7 @@ Chaque avertissement a sa propre correction. `Song` est toujours là, il devient
 - Un avertissement de nullabilité montre où `null` entre, ce qui n'est pas toujours là où le programme plante. Corrige-le avec `??`, `required`, `string?` ou un `if` ; `!` ne fait que le cacher.
 - `WarningsAsErrors` avec la valeur `nullable` transforme les avertissements de nullabilité en erreurs.
 
-La suite, [collections et LINQ](../#plan), montrera comment stocker et interroger beaucoup de valeurs à la fois.
+La suite, [collections et LINQ](../09-collections-and-linq/), montrera comment stocker et interroger beaucoup de valeurs à la fois.
 
 ## Sources
 

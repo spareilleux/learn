@@ -426,7 +426,7 @@ string Longest(string[] values)
 Longest name: GA.Business.ProbabilisticGrammar
 ```
 
-Cada método hace una sola cosa y tiene un nombre que dice cuál: contar, filtrar, encontrar el más largo. `ProjectsIn` usa un `for` en lugar de un `foreach` porque necesita el índice `i` para leer la misma posición en los dos arrays. Dos arrays que deben ir a la par son frágiles: añade un nombre, olvida su lenguaje, y todos los lenguajes siguientes quedan mal. La [lección 5](../05-classes-and-objects/) los sustituye por una sola lista de proyectos, cada uno con un nombre y un lenguaje. La [lección 10](../#plan) lee el archivo CSV completo en lugar de copiarlo a mano.
+Cada método hace una sola cosa y tiene un nombre que dice cuál: contar, filtrar, encontrar el más largo. `ProjectsIn` usa un `for` en lugar de un `foreach` porque necesita el índice `i` para leer la misma posición en los dos arrays. Dos arrays que deben ir a la par son frágiles: añade un nombre, olvida su lenguaje, y todos los lenguajes siguientes quedan mal. La [lección 9](../09-collections-and-linq/) los sustituye por una sola lista de records, cada uno con un nombre y un lenguaje, y responde a las mismas preguntas con LINQ. La [lección 10](../#plan) lee el archivo CSV completo en lugar de copiarlo a mano.
 
 ## `null`: ningún valor
 
