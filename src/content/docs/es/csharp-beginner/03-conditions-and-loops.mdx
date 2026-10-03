@@ -5,6 +5,8 @@ sidebar:
   order: 3
 ---
 
+import Fretboard from '../../../../assets/csharp-beginner/l03-fretboard.svg';
+
 Código: los ejemplos [`examples/l03_*.cs`](https://github.com/spareilleux/learn/tree/b19a296d6edc70be634ba147e27fd2d0c66f395f/code/csharp-beginner/examples), los fragmentos rechazados [`compile_fail/l03_*.cs`](https://github.com/spareilleux/learn/tree/b19a296d6edc70be634ba147e27fd2d0c66f395f/code/csharp-beginner/compile_fail) y las soluciones [`exercises/l03_*.cs`](https://github.com/spareilleux/learn/tree/b19a296d6edc70be634ba147e27fd2d0c66f395f/code/csharp-beginner/exercises).
 
 Hasta ahora, los programas ejecutaban cada línea una vez, de arriba abajo. Esta lección cambia eso: una **condición** ejecuta algunas líneas solo en algunos casos, y un **bucle** ejecuta líneas varias veces.
@@ -384,6 +386,10 @@ String 1: E  F  F# G  G# A
 ```
 
 Los guitarristas numeran las cuerdas de la más aguda, la cuerda 1, a la más grave, la cuerda 6; el bucle exterior cuenta hacia atrás para que la cuerda 6 se imprima primero. En la cuerda Si (B), el traste 1 es `(11 + 1) % 12`, que vale `0`: C, es decir, do. El operador `%` hace que los números den la vuelta como las horas de un reloj, que es exactamente como se repiten los nombres de las notas en cada octava. El [curso de teoría musical](../../music-theory-ga/01-notes-and-the-fretboard/) va mucho más lejos con la misma idea.
+
+Las mismas notas en el mástil: cada línea es una cuerda, con la cuerda 6 arriba como en la salida, y cada columna es un traste. El traste 0 es la cuerda al aire, a la izquierda de la cejuela, la barra donde empiezan las cuerdas; el C resaltado es el traste 1 de la cuerda Si.
+
+<Fretboard role="img" aria-label="Mástil de guitarra con afinación estándar, trastes 0 a 5, cuerda 6 arriba, como lo imprime el programa. Cuerda 6: E F F# G G# A. Cuerda 5: A A# B C C# D. Cuerda 4: D D# E F F# G. Cuerda 3: G G# A A# B C. Cuerda 2: B C C# D D# E. Cuerda 1: E F F# G G# A. El C de la cuerda 2, traste 1, está resaltado." />
 
 ### Leer hasta que la respuesta sea correcta
 

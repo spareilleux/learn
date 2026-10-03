@@ -5,6 +5,8 @@ sidebar:
   order: 3
 ---
 
+import Fretboard from '../../../assets/csharp-beginner/l03-fretboard.svg';
+
 Code: the examples [`examples/l03_*.cs`](https://github.com/spareilleux/learn/tree/b19a296d6edc70be634ba147e27fd2d0c66f395f/code/csharp-beginner/examples), the rejected snippets [`compile_fail/l03_*.cs`](https://github.com/spareilleux/learn/tree/b19a296d6edc70be634ba147e27fd2d0c66f395f/code/csharp-beginner/compile_fail) and the solutions [`exercises/l03_*.cs`](https://github.com/spareilleux/learn/tree/b19a296d6edc70be634ba147e27fd2d0c66f395f/code/csharp-beginner/exercises).
 
 Until now, programs ran every line once, from top to bottom. This lesson changes that: a **condition** runs some lines only in some cases, and a **loop** runs lines several times.
@@ -384,6 +386,10 @@ String 1: E  F  F# G  G# A
 ```
 
 Guitarists number the strings from the highest, string 1, to the lowest, string 6; the outer loop counts down so that string 6 is printed first. On the B string, fret 1 is `(11 + 1) % 12`, which is `0`: C. The `%` operator makes the numbers go round like the hours on a clock, which is exactly how note names repeat every octave. The [music theory course](../../music-theory-ga/01-notes-and-the-fretboard/) goes much further with the same idea.
+
+The same notes on the neck: each line is a string, string 6 at the top as in the output, and each column is a fret. Fret 0 is the open string, left of the nut, the bar where the strings start; the highlighted C is fret 1 of the B string.
+
+<Fretboard role="img" aria-label="Guitar fretboard in standard tuning, frets 0 to 5, string 6 at the top, as the program prints it. String 6: E F F# G G# A. String 5: A A# B C C# D. String 4: D D# E F F# G. String 3: G G# A A# B C. String 2: B C C# D D# E. String 1: E F F# G G# A. The C at string 2, fret 1, is highlighted." />
 
 ### Reading until the answer is right
 

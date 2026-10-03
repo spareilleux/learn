@@ -123,6 +123,14 @@ sidebar:
   - The reason is the first QA row of the day: three of the four YAML files don't deserialize, and each loader catches the exception and keeps a one-item default. The probe prints the loaders' messages. A deserialization test outside the course code located the three lines, and I read each one against the class it fills. The three lines are unchanged at GA's `main` `ae196bf`, the latest the local clone knows.
   - `MusicalKnowledgeServiceTests` prints `ArtistBreakdown.Take(5)` under `=== Top Artists ===` ([MusicalKnowledgeServiceTests.cs:51](https://github.com/GuitarAlchemist/ga/blob/5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26/Tests/Common/GA.Business.Core.Tests/Configuration/MusicalKnowledgeServiceTests.cs#L51)), which relies on the dictionary's order too.
 
+## 2026-10-03 — A fretboard diagram drawn by C#
+
+- Lesson 3 now shows the notes of frets 0 to 5 as a diagram, below the output of `l03_fretboard.cs`. The question was whether ComfyUI or Blender should draw some of the course's pictures. A generated image can get the number of strings or frets wrong, and this diagram must show exactly the notes the program prints, so a C# program draws it: [`tools/fretboard.cs`](https://github.com/spareilleux/learn/blob/main/code/csharp-beginner/tools/fretboard.cs), with the same open strings and note names as the lesson.
+- The SVG has no words, only note names and numbers, so the three locales share one file, `src/assets/csharp-beginner/l03-fretboard.svg`. The lesson imports it as a component, like the music theory course, so it follows the light or dark theme. Lesson 3 became an `.mdx` file for that; its URL doesn't change. The description for screen readers is translated.
+- `check.sh` runs `tools/fretboard.cs -- --check`, which fails if the committed SVG differs from what the program draws. Before trusting it, I changed one note of the file by hand: the check printed `is not up to date` and exited 1. A copy with Windows line endings passes. On Windows, `check.sh` now prints 121 `ok` lines.
+- The tool finds the repository from its own folder, `AppContext.GetData("EntryPointFileDirectoryPath")`, not from the current directory, and writes every coordinate as an `int`: under the `fr-FR` culture, `$"{2.5}"` gives `2,5`. Both points matter for files, the subject of lesson 10.
+- Rendered with headless Edge in a light page, a dark page and at 343 pixels wide, a phone's width: the 36 notes match the program's output line by line. That day, headless Chrome and the DevTools screenshot both timed out on this machine.
+
 ## To verify
 
 - How many artists GA would count once its three YAML files load. A PyYAML script over the raw files, outside the course code, estimates 63. By the same estimate, `Take(20)` would leave out 8 artists that have more entries than the smallest count kept, The Beatles (3 entries) among them.
