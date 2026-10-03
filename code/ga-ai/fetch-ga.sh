@@ -17,8 +17,8 @@ DSL_FILE=Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs
 # voicings skill, in a second clone: most of the voicing files changed after the pin. Lesson 17
 # asks main's tunings skill from the same clone
 # Lesson 19 compiles GaMcpServer's composition tools from both clones, outside the projects they
-# reference
-TOOLS_FILE=/GaMcpServer/Tools/CompositionTools.cs
+# reference, and lesson 21 its voicing search and vocabulary tools
+TOOLS_FILES="/GaMcpServer/Tools/CompositionTools.cs /GaMcpServer/Tools/VoicingSearchTool.cs /GaMcpServer/Tools/VoicingVocabularyTool.cs"
 MAIN_SHA=f4f5b4af881f3970c6fdc25fa61a30ef9d23458a
 # Lesson 8 reads GA's prompt corpus, outside the sparse checkout, at the pinned commit
 CORPUS=Tests/Apps/GaChatbot.Api.Tests/Corpus/prompts.yaml
@@ -39,7 +39,7 @@ else
     /Common/GA.Providers.Anthropic/ /GA.Data.MongoDB/ /GuitarAlchemist.Registry/ \
     '/Demos/Music Theory/FretboardVoicingsCLI/' \
     /Common/GA.Application/ /Common/GA.Business.Core.Orchestration/ /Common/GA.Infrastructure/ /Apps/GaChatbot.Api/ \
-    /skills/ "$TOOLS_FILE"
+    /skills/ $TOOLS_FILES
   git -C .ga -c advice.detachedHead=false checkout --quiet "$GA_SHA"
   echo "ga   $GA_SHA"
 fi
@@ -47,10 +47,12 @@ fi
 if [ ! -d .ga/skills ]; then
   MSYS_NO_PATHCONV=1 git -C .ga sparse-checkout add /skills/
 fi
-# The composition tools, which a clone made before lesson 19 lacks
-if [ ! -f ".ga$TOOLS_FILE" ]; then
-  MSYS_NO_PATHCONV=1 git -C .ga sparse-checkout add "$TOOLS_FILE"
-fi
+# The tools, which a clone made before lesson 19 or 21 lacks
+for f in $TOOLS_FILES; do
+  if [ ! -f ".ga$f" ]; then
+    MSYS_NO_PATHCONV=1 git -C .ga sparse-checkout add "$f"
+  fi
+done
 if [ "$(cat .ga-fix/SHA 2>/dev/null || true)" != "$FIX_SHA" ]; then
   # The blobless clone fetches the three files on demand; an older clone may lack the commit
   git -C .ga cat-file -e "$FIX_SHA^{commit}" 2>/dev/null || git -C .ga fetch --quiet --filter=blob:none origin "$FIX_SHA"
@@ -97,10 +99,12 @@ else
     /Common/GA.Business.Config/ /Common/GA.Business.Core/ /Common/GA.Business.Assets/ /Common/GA.Business.DSL/ \
     /Common/GA.Business.ML/ '!/Common/GA.Business.ML/Documentation/Papers/' \
     /Common/GA.Providers.Anthropic/ /GA.Data.MongoDB/ /GuitarAlchemist.Registry/ \
-    '/Demos/Music Theory/FretboardVoicingsCLI/' "$TOOLS_FILE"
+    '/Demos/Music Theory/FretboardVoicingsCLI/' $TOOLS_FILES
   git -C .ga-main -c advice.detachedHead=false checkout --quiet "$MAIN_SHA"
   echo "main $MAIN_SHA"
 fi
-if [ ! -f ".ga-main$TOOLS_FILE" ]; then
-  MSYS_NO_PATHCONV=1 git -C .ga-main sparse-checkout add "$TOOLS_FILE"
-fi
+for f in $TOOLS_FILES; do
+  if [ ! -f ".ga-main$f" ]; then
+    MSYS_NO_PATHCONV=1 git -C .ga-main sparse-checkout add "$f"
+  fi
+done

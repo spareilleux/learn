@@ -35,10 +35,29 @@ public static class Entry
             case ["l20"]:
                 Lesson20();
                 return 0;
+            case ["l21"]:
+                Lesson21();
+                return 0;
             default:
-                Console.Error.WriteLine("usage: GaMain l16|l17|l19|l20");
+                Console.Error.WriteLine("usage: GaMain l16|l17|l19|l20|l21");
                 return 2;
         }
+    }
+
+    // Lesson 21: ga_search_voicings, its vocabulary and the readers they call are the same on main,
+    // but the search changed; the questions whose answers depend on it, against lesson 3's index
+    // built with main's code
+    static void Lesson21()
+    {
+        Console.WriteLine("# l21, GA's main");
+        var indexPath = Path.Combine(AppContext.BaseDirectory, "out", "optick-mini-main.index");
+        var corpus = WriteIndex(indexPath, print: false);
+        SearchIndex.Use(indexPath);
+        SearchVoicingsProbe.ExamplesTable("on main");
+        SearchVoicingsProbe.ModesTable(corpus, "on main");
+        SearchVoicingsProbe.TagsTable("on main");
+        SearchVoicingsProbe.RootlessTable(corpus, "on main");
+        SearchVoicingsProbe.ScoresTable("on main");
     }
 
     // Lesson 20: ga_generate_progression and the parser it calls are the same on main; only the
@@ -48,7 +67,7 @@ public static class Entry
         Console.WriteLine("# l20, GA's main");
         var indexPath = Path.Combine(AppContext.BaseDirectory, "out", "optick-mini-main.index");
         WriteIndex(indexPath, print: false);
-        VoicingSearchTool.IndexPath = indexPath;
+        SearchIndex.Use(indexPath);
         ProgressionProbe.StitchTable("on main");
     }
 
@@ -59,7 +78,7 @@ public static class Entry
         Console.WriteLine("# l19, GA's main");
         var indexPath = Path.Combine(AppContext.BaseDirectory, "out", "optick-mini-main.index");
         var corpus = WriteIndex(indexPath, print: false);
-        VoicingSearchTool.IndexPath = indexPath;
+        SearchIndex.Use(indexPath);
         VoiceLeadingPairProbe.CandidatesTable(corpus, "on main");
         VoiceLeadingPairProbe.PairsTable(corpus, "on main");
         VoiceLeadingPairProbe.MoreCandidates("on main");

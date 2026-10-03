@@ -43,7 +43,7 @@ dotnet run --project code/ga-ai/GaMain -c Release -- l19
     }
 ```
 
-The query names no chord: without an instrument, the candidates are the voicings whose vectors are nearest to the query, whatever they play. `GetStrategy` takes the search from `VoicingSearchTool`, the server's search tool, by reading its private field `Strategy` ([lines 300-310](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaMcpServer/Tools/CompositionTools.cs#L300-L310)). That class finds the index through `GA_OPTICK_INDEX_PATH` or under `state/voicings/` ([`VoicingSearchTool.cs` lines 64-83](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaMcpServer/Tools/VoicingSearchTool.cs#L64-L83)). The course compiles a stand-in with the same name and field, which reads lesson 3's index (`code/ga-ai/Shared/VoicingSearchTool.cs`).
+The query names no chord: without an instrument, the candidates are the voicings whose vectors are nearest to the query, whatever they play. `GetStrategy` takes the search from `VoicingSearchTool`, the server's search tool, by reading its private field `Strategy` ([lines 300-310](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaMcpServer/Tools/CompositionTools.cs#L300-L310)). That class finds the index through `GA_OPTICK_INDEX_PATH` or under `state/voicings/` ([`VoicingSearchTool.cs` lines 64-83](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaMcpServer/Tools/VoicingSearchTool.cs#L64-L83)). The course compiles that class from GA's source and points it at lesson 3's index through `GA_OPTICK_INDEX_PATH` (`code/ga-ai/Shared/SearchIndex.cs`).
 
 The tool weighs every pair of candidates with `VoiceLeadingDistance` ([lines 312-336](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaMcpServer/Tools/CompositionTools.cs#L312-L336)):
 
@@ -251,7 +251,7 @@ prompts whose first pair would move less with the least over every choice of not
 ## Where the course stops
 
 - **The corpus is lesson 3's,** 15,360 voicings on three frets, not the production index. Among more voicings, the candidates and the pairs may differ (*to verify*).
-- **The program calls the tool's method directly,** with a stand-in for `VoicingSearchTool`, not through an MCP client and GA's server.
+- **The program calls the tool's method directly,** not through an MCP client and GA's server.
 - **The verdicts read pitch classes.** The course counts a seventh chord without its fifth as right, whatever note it doubles, and doesn't judge the fingering or the register.
 - **Only the first pair is checked in detail.** The program counts the right pairs among the five, but doesn't measure how the distance's fault reorders them.
 
@@ -288,4 +288,4 @@ prompts whose first pair would move less with the least over every choice of not
 
 - GuitarAlchemist/ga at [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6): `GaMcpServer/Tools/CompositionTools.cs`, `GaMcpServer/Tools/VoicingSearchTool.cs`, `skills-dev/_pending-tools/voice-leading/DRAFT.md`, `skills-dev/_pending-tools/README.md`.
 - GuitarAlchemist/ga at [`f4f5b4a`](https://github.com/GuitarAlchemist/ga/tree/f4f5b4af881f3970c6fdc25fa61a30ef9d23458a): the same tool and drafts, the search of lesson 16, `Common/GA.Business.ML/Agents/Skills/ChordVoicingsSkill.cs`.
-- The course's programs: `code/ga-ai/GaAi/Lesson19.cs`, `code/ga-ai/GaMain/Program.cs`, `code/ga-ai/Shared/VoiceLeadingPairProbe.cs`, `code/ga-ai/Shared/VoicingSearchTool.cs`.
+- The course's programs: `code/ga-ai/GaAi/Lesson19.cs`, `code/ga-ai/GaMain/Program.cs`, `code/ga-ai/Shared/VoiceLeadingPairProbe.cs`, `code/ga-ai/Shared/SearchIndex.cs`.
