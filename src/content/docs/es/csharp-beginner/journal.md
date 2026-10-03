@@ -158,10 +158,10 @@ sidebar:
 - Seis filas QA nuevas vienen de la sonda y de la lectura del código de GA que maneja sus archivos. Un subagente listó los candidatos; releí las líneas de cada uno en el commit `5c3a52a` antes de escribirla. Dos de esas filas solo se leyeron en el código, no se ejecutaron.
 - El fallo de carga de los YAML de la lección 9 es ahora [GuitarAlchemist/ga#797](https://github.com/GuitarAlchemist/ga/issues/797), abierta el 2026-10-03 con enlaces fijados al `main` de GA, `ba3b9ac`, donde las tres líneas siguen igual.
 - En Windows con el SDK 10.0.112, `check.sh` termina con el código 0 y 140 líneas `ok`, incluidas las 19 de la lección 10. Todavía no es una ejecución de la CI en tres sistemas.
+- Después, en la CI: la [ejecución 37145323198](https://github.com/spareilleux/learn/actions/runs/37145323198) del workflow *C# for beginners examples*, sobre el commit `8b9fc03` de la [PR #129](https://github.com/spareilleux/learn/pull/129), pasó en `ubuntu-latest`, `windows-latest` y `macos-latest`. Cada job imprime `ok` para las 19 comprobaciones `l10_*`, incluida la ejecución desde la raíz del repositorio; los jobs cuentan 141 líneas `ok` en Linux y macOS y 140 en Windows, por la misma razón que en la lección 6.
 
 ## Por verificar
 
-- Los ejemplos de la lección 10, y la ejecución de `l10_where.cs` desde la raíz del repositorio, en la CI de Linux, Windows y macOS, tras abrir una PR.
 - GaCLI lanzado desde otra carpeta que la suya: ¿funciona sin `appsettings.yaml`, como sugiere su código (tabla QA)?
 - Cuántos artistas contaría GA una vez cargados sus tres archivos YAML. Un script de PyYAML sobre los archivos en bruto, fuera del código del curso, estima 63. Según la misma estimación, `Take(20)` dejaría fuera a 8 artistas con más entradas que el menor número conservado, entre ellos The Beatles (3 entradas).
 - Los comandos de instalación para Linux y macOS: en esos sistemas operativos solo se ejecutó el `setup-dotnet` de la CI.
