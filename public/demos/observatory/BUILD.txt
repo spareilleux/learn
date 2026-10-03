@@ -822,6 +822,56 @@ on screen. The quality ladder, frames held to 12 a second, went to levels 2, 4
 and 5 at 5.4, 9.9 and 14.4 s; at 3 a second, straight to 5 at 6.3 s. Native
 GPU time per level, Compatibility at 1600x900 on the RTX 5080: 1.60, 1.38,
 1.16, 0.99, 0.93 and 0.91 ms.
+Version 27, exported 2026-10-03 00:23:50 UTC, brings Seldon's recording, after
+the author asked for a Seldon in particles taken from our own statue, so that
+no actor's face enters the scene. A look held on the gilt inscription of his
+pedestal (a gold frame traces itself round it), R, a click or a tap plays it:
+dust gathers beside the pedestal and climbs into a life-size Seldon of 27,649
+points of light, one for each vertex of the statue's figure above its base,
+who turns to the viewer while three lines written for the scene show over his
+head, then lifts away. One MultiMesh draws the points and its shader moves
+them (scripts/seldon_recording.gd, assets/seldon_points.gdshader,
+assets/recording_frame.gdshader; its tap in scripts/touch_controls.gd);
+quality.gd's levels 3 to 5 draw every second or third point, larger. Its
+shimmer is synthesised by the script. Also: the IX hologram's gold ring and
+the green sphere in Seldon's hands did not show on the Web, since
+Compatibility renders the marble near white and both were added to it; the
+ring now blends over with a dark rim (assets/holo_ring.gdshader) and, under
+Compatibility, the sphere blends over, dimmer (scripts/seldon_statue.gd).
+observatory.gd's comment on the rim lamps now says 168 triangles each, which
+they have.
+index.pck is now 21,893,004 bytes; index.html changes only that size, and
+index.wasm and index.js are unchanged.
+Web: the export served locally (artpass/publish/gzip_server.py, the build's
+own course list, gzip-encoded), in headless Chrome at 1600x900
+(artpass/publish/recording-web.mjs): the scene's start, H to open and close
+the IX hologram, then R for Seldon's recording, seen from the hall's start
+view. With the RTX 5080 (ANGLE on Direct3D 11) and a browser cache already
+filled, version 27 started in 3.9 s and stayed at quality level 0 and 60
+frames a second on its 2400x1350 canvas, with the hologram and with the
+recording playing. On a first visit, with an empty cache, it started in 20.6 s
+and its first measurement, taken while shaders compiled, stepped it to level 1
+(no anti-aliasing), where it stayed although its frames then took 16.7 ms:
+quality.gd never steps back up, so a fast GPU can lose its anti-aliasing on a
+first visit; to fix. With SwiftShader, Chrome's CPU renderer, standing in for
+the weakest GPU, it reached level 5 within 10 s of the scene's start; frames
+took 433 ms on an 800x450 canvas, and 433 ms with the recording playing. In
+each run the recording formed, and the page logged no error and no exception.
+Real weak GPUs, phones, other browsers and the sound by ear: to verify.
+Native runs (Godot 4.6.1) on the exported project, 42 of them
+(artpass/publish/regress-pub18.sh): version 26's 38, then the recording probe
+under Compatibility, under Forward+ and at quality level 5, and the ring
+probe. 41 passed at once and none logged a script error. The course test under
+Forward+ failed its held-W walk check once, as held-key checks have before,
+then passed three times out of three (artpass/publish/rerun-course-pub18.sh).
+The recording probe holds a look on the inscription: the recording played
+after 1.0 s, its first line showed at 7 s and its second at 12 s, it began to
+lift away at 25.4 s and was gone by 28.4 s; R played it and R again sent it
+away; a tap on the inscription played it. It drew 27,649 points, and 9,217 at
+level 5. From the hall's start view his figure stands 153 px tall at 13.8 m.
+The same probe passed under Forward+ in the DLSS build (observatory-dlss). The
+ring probe, close to the statue under Compatibility, shows the gold ring over
+the white marble and the sphere green.
 
 Native Compatibility GPU time, RTX 5080, 1600x900, 240 frames per view: 0.44 to
 0.52 ms for the previous web scene, 0.64 to 1.44 ms with the detail pass; up to
@@ -837,11 +887,11 @@ main.tscn fb6245c960d3625ca05920116c58351d9dbeb255beae59175d89c06d47049564
 export_presets.cfg e67d9e3fc0e8b0d9cab2672e3f730f209e81619d356b52a7079f7d19f7342dc0
 scripts/fly_camera.gd 2e5cdd15ca7bdcfa30ec129e354a309f3ff7296f6fbf54ac144984ed9aa9f8e7
 scripts/capture.gd 52ea2b5e40db2f1f4cdbd7658074ef60bd117e1f4110c1b8995590a4196748d0
-scripts/observatory.gd 5a7bd949d0af2ae710103fbf4db3c3ebf57fd4c48a58a0dfa7856422e1371733
+scripts/observatory.gd 791207867a698cc0bfc67a243998dae4a9ac53978405356dcede3cf06ea9e732
 scripts/course_library.gd b2bf3fe3723d8a6f2a2392199fbf276d8bab752259eab6f4f6398503c5e88b42
 scripts/steel_cube.gd f28e71fffcd151663bc9a98b3c135cc7b805490e8298d3cf01029455c973f94c
-scripts/seldon_statue.gd 3fa754ef1ab9650168478088cb65aad59a98c1657ba5dd704ac67fff3d2e6d1f
-scripts/touch_controls.gd 981e296f1d34229136cc38ca9fb7c618f78d27c7c936bcd0049573a19309ca83
+scripts/seldon_statue.gd c8785f079f648ea50694055fe87d26bb56e0ee2ab129251399d88bd13d0030b4
+scripts/touch_controls.gd 2c2f1c8e9ae876cfd14d36c91797f35d8819c64596c0010134f0315635972063
 scripts/walk_physics.gd 156fc6e18103d2b8cc211697c5e1b8c519bc41707f95c44b52afcdc87e850ea2
 scripts/view_fit.gd f574c7949a5b324f91f062df9982366c123271804069b507206f88ad7062fe4c
 scripts/view_move.gd 558a4059815cb3a8a202d205d8cfada17653fb533e7e056bfe9e8a434dac0431
@@ -884,12 +934,15 @@ scripts/hologram_ix.gd 436dbdf897703f448abdbcd583aaff88086f6385923e30d71ff7f7449
 scripts/quality.gd 5e5c8099eb468fd39b646fc58338fb86a03ff19ad6caa64f5d01c7c052f9c128
 assets/holo_panel.gdshader 1a77f62f3bd53c29c95341058baa0d19613737ab2a98f24c6fd4edc150637c08
 assets/holo_edge.gdshader 029b74b7147bdc55e8b1042c3274b3018892217653e47458ca58f0115229f8e7
-assets/holo_ring.gdshader d26ffba2fe3939856488751ef42d4064efddf4f9f530d8d558397cfcd96ed5ce
+assets/holo_ring.gdshader 23cd4ef37915ab49690739865460b7b0e343865b3754d5daf2d5d09234327c5d
 assets/ix_pipelines.json 180cb180625664b027f3c7e01d855533c757e4e5525c506bd2a6f26ecc73f947
-scripts/build_info.gd 4a841d8de1417414cb41d3ba21fdebd553e6cfb02cdae88032f42b63136f0385
+scripts/seldon_recording.gd f4d2ca57e6da3c4793f90bd8832ec811596ef8baad55fec16829626f3758e4d4
+assets/seldon_points.gdshader 744b72e7abd915467abc5d9727eecbadaf4290bb5ecbed2fee6fe98ed80bcd2e
+assets/recording_frame.gdshader a7daedd2a691b70de4754d06fc0974f40335109603c57426a70a7381a5052a0c
+scripts/build_info.gd eabc3501052578eb00ef8424b1c865fb6b02a9e13ebf9c38bec6836e21d07a49
 
 SHA-256 output files:
-index.pck b3d3c86d64d7dccaf6100b9dc5cd86c59ca6fdf1a9df60ce6d9f1edd4b26c456
+index.pck 5bcba8ab37a0779453fbd85dca39b914e02c38f4aa8d3c814670d9d187f469c4
 index.wasm 99962b29677e42f3ba0258bd90fdc52ad90295954c4473e816ad02cfe5ff1d4f
 index.js e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981
 
