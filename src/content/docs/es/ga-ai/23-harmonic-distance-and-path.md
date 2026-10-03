@@ -241,6 +241,10 @@ the path for "shortest harmonic path from Cmaj7 to G7":
 - **El recuento de conjuntos expandidos es el del curso,** procede de una búsqueda que sigue la regla de `FindShortestPath`; la skill no lo imprime. El programa no cronometra las skills.
 - **El programa llama directamente a los métodos de las skills,** no a través del chatbot.
 
+## Comunicado upstream
+
+- Se comunicaron después de escribir esta lección, en la issue de GA [#802](https://github.com/GuitarAlchemist/ga/issues/802): los prompts de ejemplo que las expresiones no leen, los deltas de L1 1 entre acordes del mismo vector y la flecha en mojibake, la búsqueda de camino que conserva el tamaño del acorde, y el recuento de pasos y los conjuntos sin nombre de la respuesta.
+
 ## Ejercicios
 
 1. ¿Por qué rechaza la skill delta "how harmonically far is Am from D7"?

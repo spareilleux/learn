@@ -241,6 +241,10 @@ the path for "shortest harmonic path from Cmaj7 to G7":
 - **Le nombre d'ensembles développés est celui du cours,** obtenu par une recherche qui suit la règle de `FindShortestPath` ; le skill ne l'affiche pas. Le programme ne chronomètre pas les skills.
 - **Le programme appelle directement les méthodes des skills,** et non par le chatbot.
 
+## Signalé en amont
+
+- Signalés après l'écriture de cette leçon, dans le ticket de GA [#802](https://github.com/GuitarAlchemist/ga/issues/802) : les prompts d'exemple que les expressions ne lisent pas, les deltas à L1 1 entre accords de même vecteur et la flèche en mojibake, la recherche de chemin qui garde la taille de l'accord, et le décompte des pas et les ensembles sans nom de la réponse.
+
 ## Exercices
 
 1. Pourquoi le skill du delta décline-t-il « how harmonically far is Am from D7 » ?

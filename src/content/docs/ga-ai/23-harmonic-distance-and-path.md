@@ -241,6 +241,10 @@ the path for "shortest harmonic path from Cmaj7 to G7":
 - **The count of sets expanded is the course's,** from a search that follows `FindShortestPath`'s rule; the skill doesn't print it. The program doesn't time the skills.
 - **The program calls the skills' methods directly,** not through the chatbot.
 
+## Reported upstream
+
+- Reported after this lesson was written, in GA issue [#802](https://github.com/GuitarAlchemist/ga/issues/802): the example prompts the patterns don't read, the deltas at L1 1 between chords with the same vector and the mojibake arrow, the path search that keeps the chord size, and the path answer's step count and unnamed sets.
+
 ## Exercises
 
 1. Why does the delta skill decline "how harmonically far is Am from D7"?
