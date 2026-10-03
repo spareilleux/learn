@@ -66,7 +66,7 @@ no H in this dictionary
 - [`TryGetValue`](https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2.trygetvalue) is a *Try* method, like those of lesson 8: it returns `false` when the key is missing, and puts the value in its `out` variable when it is there.
 - Each item of a dictionary is a [`KeyValuePair<string, int>`](https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2), with a `Key` and a `Value`; `string.Join` prints it as `[key, value]`.
 
-A dictionary holds the table as data, not as code: a program can fill it while it runs, and [lesson 10](../#outline) will fill one from a file.
+A dictionary holds the table as data, not as code: a program can fill it while it runs, and [lesson 10](../10-files-and-text/) will fill one from a file.
 
 A dictionary is read by key, not by position. Asking for item 0 of a dictionary whose keys are strings is a type error:
 
@@ -468,7 +468,7 @@ A [probe](https://github.com/spareilleux/learn/blob/main/code/csharp-beginner/ga
 - in `GuitarTechniques.yaml`, [`Applications`](https://github.com/GuitarAlchemist/ga/blob/5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26/Common/GA.Business.Config/GuitarTechniques.yaml#L23) holds strings where the class expects objects ([line 20](https://github.com/GuitarAlchemist/ga/blob/5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26/Common/GA.Business.Config/Configuration/GuitarTechniquesConfigLoader.cs#L20));
 - [line 95](https://github.com/GuitarAlchemist/ga/blob/5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26/Common/GA.Business.Config/SpecializedTunings.yaml#L95) of `SpecializedTunings.yaml` isn't valid YAML.
 
-Each loader [catches the exception](https://github.com/GuitarAlchemist/ga/blob/5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26/Common/GA.Business.Config/Configuration/ChordProgressionsConfigLoader.cs#L137), prints one line, and carries on with a single example item. That is the opposite of lesson 8's rule: this `catch` hides a bug instead of handling an ordinary failure. The [QA table of the journal](../journal/#qa) records the measurements; [lesson 10](../#outline) reads files.
+Each loader [catches the exception](https://github.com/GuitarAlchemist/ga/blob/5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26/Common/GA.Business.Config/Configuration/ChordProgressionsConfigLoader.cs#L137), prints one line, and carries on with a single example item. That is the opposite of lesson 8's rule: this `catch` hides a bug instead of handling an ordinary failure. The [QA table of the journal](../journal/#qa) records the measurements; [lesson 10](../10-files-and-text/) reads files.
 
 ## Exercises
 
@@ -643,7 +643,7 @@ A chain of LINQ methods can go on several lines, each starting with its `.`. `Co
 - `Where` and `Select` return an `IEnumerable<T>` that runs when it is read; `ToList` makes a list of the result as it is now.
 - Don't add or remove items of a list inside a `foreach` over it: use `RemoveAll`, or build a new list.
 
-Next: [files and text](../#outline), to read Guitar Alchemist's projects from a CSV file instead of copying them by hand.
+Next: [files and text](../10-files-and-text/), to read Guitar Alchemist's projects from a CSV file instead of copying them by hand.
 
 ## Sources
 

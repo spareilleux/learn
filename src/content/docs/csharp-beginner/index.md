@@ -50,12 +50,12 @@ The examples use small, real data where it helps: the notes of a guitar, the tun
 | 7 | [Interfaces and inheritance](07-interfaces-and-inheritance/) | `interface`, `abstract`, `override`, polymorphism |
 | 8 | [Exceptions and null safety](08-exceptions-and-null-safety/) | `try`/`catch`/`finally`, `throw`, nullable reference types |
 | 9 | [Collections and LINQ](09-collections-and-linq/) | `Dictionary<TKey, TValue>`, `HashSet<T>`, `Where`, `Select`, `OrderBy` |
-| 10 | Files and text | `File`, `Path`, reading a CSV file of Guitar Alchemist's projects |
+| 10 | [Files and text](10-files-and-text/) | `File`, `Path`, reading a CSV file of Guitar Alchemist's projects |
 | 11 | Unit tests | xUnit, `dotnet test`, testing the methods of earlier lessons |
 | 12 | A small project | a solution with a library, a console app and tests, a NuGet package, a first look at `async` |
 | — | [Journal](journal/) | |
 
-Lessons 10 to 12 are planned and not written yet.
+Lessons 11 and 12 are planned and not written yet.
 
 ## Highlights from the journal
 
@@ -72,7 +72,9 @@ The [journal](journal/) records what writing and testing this course turned up. 
 | A nullable warning points where `null` gets in, not where the program crashes: CS8618 sits on the property's declaration, and the line that crashes has no warning | Fix each warning where it is, even far from the crash | [Lesson 8](08-exceptions-and-null-safety/), [journal](journal/#2026-10-02--exceptions-and-null-safety) |
 | Guitar Alchemist silences fifteen nullable warnings in `NoWarn`, twice. Its code has none to hide, but a test file with seven nullable mistakes compiled without a warning | Silencing a warning also silences the mistakes still to come. Not reported to GA yet | [Lesson 8](08-exceptions-and-null-safety/), [QA table](journal/#qa) |
 | A dictionary's `foreach` follows the order of addition only until the first `Remove`: a key added afterwards takes the removed key's place | A sorted result put in a `Dictionary` stays sorted by chance; sort when the order matters | [Lesson 9](09-collections-and-linq/), [journal](journal/#2026-10-02--collections-and-linq) |
-| Three of the four YAML files that Guitar Alchemist's music knowledge services read don't load; each loader catches the exception and carries on with one default item | A `catch` that only prints hides the bug: GA counts 16 artists, and nothing fails. Not reported to GA yet | [Lesson 9](09-collections-and-linq/), [QA table](journal/#qa) |
+| Three of the four YAML files that Guitar Alchemist's music knowledge services read don't load; each loader catches the exception and carries on with one default item | A `catch` that only prints hides the bug: GA counts 16 artists, and nothing fails. Reported as [GA issue #797](https://github.com/GuitarAlchemist/ga/issues/797) | [Lesson 9](09-collections-and-linq/), [QA table](journal/#qa) |
+| A relative path starts from the current directory, not from the program's file: `l10_where.cs` finds `data/ga-projects.csv` when `dotnet run` starts in `code/csharp-beginner`, and misses it from the repository root | The same program finds its file or not depending on the folder it is started from; a path built from `EntryPointFileDirectoryPath` works from both | [Lesson 10](10-files-and-text/), [journal](journal/#2026-10-03--files-and-text) |
+| The format string that Guitar Alchemist writes its naturalness CSV with follows the machine's culture: under `fr-FR`, `2.50` becomes `2,50`, and a row of 6 values splits into 8 | A file written on a French machine doesn't read back with `Split(',')`; write numbers with `CultureInfo.InvariantCulture`. Not reported to GA yet | [Lesson 10](10-files-and-text/), [QA table](journal/#qa) |
 
 ## Prerequisites
 

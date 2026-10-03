@@ -50,12 +50,12 @@ Los ejemplos usan datos pequeños y reales cuando ayudan: las notas de una guita
 | 7 | [Interfaces y herencia](07-interfaces-and-inheritance/) | `interface`, `abstract`, `override`, polimorfismo |
 | 8 | [Excepciones y seguridad frente a null](08-exceptions-and-null-safety/) | `try`/`catch`/`finally`, `throw`, tipos de referencia que aceptan valores null |
 | 9 | [Colecciones y LINQ](09-collections-and-linq/) | `Dictionary<TKey, TValue>`, `HashSet<T>`, `Where`, `Select`, `OrderBy` |
-| 10 | Archivos y texto | `File`, `Path`, leer un archivo CSV de los proyectos de Guitar Alchemist |
+| 10 | [Archivos y texto](10-files-and-text/) | `File`, `Path`, leer un archivo CSV de los proyectos de Guitar Alchemist |
 | 11 | Pruebas unitarias | xUnit, `dotnet test`, probar los métodos de las lecciones anteriores |
 | 12 | Un pequeño proyecto | una solución con una biblioteca, una app de consola y pruebas, un paquete NuGet, un primer vistazo a `async` |
 | — | [Diario](journal/) | |
 
-Las lecciones 10 a 12 están planificadas y aún no se han escrito.
+Las lecciones 11 y 12 están planificadas y aún no se han escrito.
 
 ## Lo más destacado del diario
 
@@ -72,7 +72,9 @@ El [diario](journal/) recoge lo que la escritura y las pruebas de este curso sac
 | Una advertencia de nulabilidad señala por dónde entra `null`, no dónde falla el programa: CS8618 está en la declaración de la propiedad, y la línea que falla no tiene ninguna advertencia | Corrige cada advertencia donde está, aunque esté lejos del fallo | [Lección 8](08-exceptions-and-null-safety/), [diario](journal/#2026-10-02--excepciones-y-seguridad-frente-a-null) |
 | Guitar Alchemist silencia quince advertencias de nulabilidad en `NoWarn`, dos veces. Su código no tiene ninguna que ocultar, pero un archivo de prueba con siete errores de nulabilidad compiló sin advertencias | Silenciar una advertencia también silencia los errores que aún están por venir. Aún no comunicado a GA | [Lección 8](08-exceptions-and-null-safety/), [tabla QA](journal/#qa) |
 | El `foreach` de un diccionario sigue el orden de inserción solo hasta el primer `Remove`: una clave añadida después ocupa el lugar de la clave quitada | Un resultado ordenado guardado en un `Dictionary` sigue ordenado por casualidad; ordena cuando el orden importa | [Lección 9](09-collections-and-linq/), [diario](journal/#2026-10-02--colecciones-y-linq) |
-| Tres de los cuatro archivos YAML que leen los servicios de conocimiento musical de Guitar Alchemist no se cargan; cada cargador captura la excepción y sigue con un solo elemento por defecto | Un `catch` que solo muestra un mensaje oculta el error: GA cuenta 16 artistas y nada falla. Aún no comunicado a GA | [Lección 9](09-collections-and-linq/), [tabla QA](journal/#qa) |
+| Tres de los cuatro archivos YAML que leen los servicios de conocimiento musical de Guitar Alchemist no se cargan; cada cargador captura la excepción y sigue con un solo elemento por defecto | Un `catch` que solo muestra un mensaje oculta el error: GA cuenta 16 artistas y nada falla. Comunicado en la [issue 797 de GA](https://github.com/GuitarAlchemist/ga/issues/797) | [Lección 9](09-collections-and-linq/), [tabla QA](journal/#qa) |
+| Una ruta relativa parte del directorio actual, no del archivo del programa: `l10_where.cs` encuentra `data/ga-projects.csv` cuando `dotnet run` arranca en `code/csharp-beginner`, y no lo encuentra desde la raíz del repositorio | El mismo programa encuentra su archivo o no según la carpeta desde la que arranca; una ruta construida a partir de `EntryPointFileDirectoryPath` funciona desde las dos | [Lección 10](10-files-and-text/), [diario](journal/#2026-10-03--archivos-y-texto) |
+| La cadena de formato con la que Guitar Alchemist escribe su CSV de naturalidad sigue la cultura de la máquina: con `fr-FR`, `2.50` se convierte en `2,50`, y una fila de 6 valores se corta en 8 | Un archivo escrito en una máquina francesa no se vuelve a leer con `Split(',')`; escribe los números con `CultureInfo.InvariantCulture`. Aún no comunicado a GA | [Lección 10](10-files-and-text/), [tabla QA](journal/#qa) |
 
 ## Requisitos previos
 
