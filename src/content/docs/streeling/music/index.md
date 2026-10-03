@@ -20,6 +20,7 @@ sidebar:
 - [MUS-007 · Pitch, Spelling and Enharmonic Identity — One Sound, Several Names](mus-007-pitch-spelling-enharmonic-identity/)
 - [MUS-008 · Intervals, Inversion and Compound Intervals — Counting Past the Octave](mus-008-intervals-inversion-compound/)
 - [MUS-009 · Tuning and Fretboard Geometry — One Pitch, Many Places](mus-009-tuning-fretboard-geometry/)
+- [MUS-010 · Scale Patterns, Sets and the Diatonic Interval Vector — What Is Rare About the Major Scale](mus-010-scales-pattern-set-interval-vector/)
 - [MUS-012 · Chord Formulas, Essential Tones and Doubling — What a Chord Can Lose](mus-012-chord-formulas-essential-tones-doubling/)
 - [MUS-013 · Root, Bass and Pitch-Class Set — One Set, Several Names](mus-013-root-bass-pitch-class-set/)
 - [MUS-018 · Key Finding, Roman Numerals and Cadences — What a Count of Chords Can and Cannot Decide](mus-018-key-finding-roman-numerals-cadences/)

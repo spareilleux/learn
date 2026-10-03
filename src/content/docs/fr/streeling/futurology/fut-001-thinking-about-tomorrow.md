@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **FUT-001** · Fondements de la futurologie · débutant · 25 minutes
 
-Généré par le département *Futurologie* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/928fbb26539e451fd34a0e8baf0714cf919a1562/state/streeling/courses/futurology/fr/fut-001-thinking-about-tomorrow.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Futurologie* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/d8c8da550af12f339dbf9464cc1144084eb689b9/state/streeling/courses/futurology/fr/fut-001-thinking-about-tomorrow.fr.md) · [Mon journal](../../journal/)
 :::
 
 > **Département de futurologie** | Niveau : Débutant | Durée : 25 minutes

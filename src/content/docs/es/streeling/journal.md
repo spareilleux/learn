@@ -87,6 +87,7 @@ Marca un módulo una vez estudiado. En **Notas**, añade una entrada fechada: lo
 - [ ] [MUS-007 · Altura, grafía e identidad enarmónica](../music/mus-007-pitch-spelling-enharmonic-identity/) <!-- mus-007-pitch-spelling-enharmonic-identity -->
 - [ ] [MUS-008 · Intervalos, inversión e intervalos compuestos](../music/mus-008-intervals-inversion-compound/) <!-- mus-008-intervals-inversion-compound -->
 - [ ] [MUS-009 · Afinación y geometría del mástil](../music/mus-009-tuning-fretboard-geometry/) <!-- mus-009-tuning-fretboard-geometry -->
+- [ ] [MUS-010 · Fórmulas de escalas, conjuntos y vector interválico diatónico](../music/mus-010-scales-pattern-set-interval-vector/) <!-- mus-010-scales-pattern-set-interval-vector -->
 - [ ] [MUS-012 · Fórmulas de acordes, notas esenciales y duplicaciones](../music/mus-012-chord-formulas-essential-tones-doubling/) <!-- mus-012-chord-formulas-essential-tones-doubling -->
 - [ ] [MUS-013 · Fundamental, bajo y conjunto de clases de altura](../music/mus-013-root-bass-pitch-class-set/) <!-- mus-013-root-bass-pitch-class-set -->
 - [ ] [MUS-018 · Identificación de la tonalidad, números romanos y cadencias](../music/mus-018-key-finding-roman-numerals-cadences/) <!-- mus-018-key-finding-roman-numerals-cadences -->
@@ -229,6 +230,14 @@ Aquí no se ejecutó nada de él.
 ## 2026-10-03 — MUS-013 · Fundamental, bajo y conjunto de clases de altura
 
 Sincronizado desde Demerzel en [`928fbb2`](https://github.com/GuitarAlchemist/Demerzel/commit/928fbb26539e451fd34a0e8baf0714cf919a1562) ([PR #1181](https://github.com/GuitarAlchemist/Demerzel/pull/1181)). Un nuevo módulo de música de nivel intermedio sobre lo que fija un nombre de acorde: la fundamental, el bajo y el conjunto de clases de altura, los conjuntos que tienen varias lecturas (acordes de sexta y de séptima, sus2 y sus4, la tríada aumentada y la séptima disminuida), y cómo el bajo, la armonía y la resolución eligen entre ellas. Rastrea cómo GA nombra un conjunto sin mirar su bajo, y su sección 6 propone un experimento. El índice de música ahora lo incluye, el de Streeling cuenta 13 módulos de música en lugar de 12, y MUS-018 y MUS-020 bajan un puesto en la barra lateral; todas las demás páginas solo cambian sus referencias fijadas a Demerzel, de `450fc67` a `928fbb2`.
+
+Aquí no se ejecutó nada de él.
+
+- **No se ha estudiado aquí,** así que su casilla de arriba sigue vacía.
+
+## 2026-10-03 — MUS-010 · Fórmulas de escalas, conjuntos y vector interválico diatónico
+
+Sincronizado desde Demerzel en [`d8c8da5`](https://github.com/GuitarAlchemist/Demerzel/commit/d8c8da550af12f339dbf9464cc1144084eb689b9) ([PR #1183](https://github.com/GuitarAlchemist/Demerzel/pull/1183)). Un nuevo módulo de música de nivel intermedio sobre lo que la escala mayor tiene de raro: una escala como fórmula de intervalos y como conjunto de clases de altura, los vectores interválicos de las escalas mayor, menor armónica, pentatónica y de tonos enteros, el teorema de las notas comunes, y cuatro propiedades de la escala mayor: profunda, propiedad de Myhill, máximamente regular y generada por quintas. Rastrea cómo calcula GA estas propiedades, y su sección 7 propone un experimento. El índice de música ahora lo incluye, el de Streeling cuenta 14 módulos de música en lugar de 13, y MUS-012, MUS-013, MUS-018 y MUS-020 bajan un puesto en la barra lateral; todas las demás páginas solo cambian sus referencias fijadas a Demerzel, de `928fbb2` a `d8c8da5`.
 
 Aquí no se ejecutó nada de él.
 

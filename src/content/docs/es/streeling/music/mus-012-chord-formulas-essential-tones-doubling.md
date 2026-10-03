@@ -3,13 +3,13 @@ title: Fórmulas de acordes, notas esenciales y duplicaciones — Lo que un acor
 description: Fórmulas de acordes, notas esenciales y duplicaciones — Música
 sidebar:
   label: MUS-012 · Fórmulas de acordes, notas esenciales y duplicaciones
-  order: 10
+  order: 11
 ---
 
 :::note[Streeling University]
 **MUS-012** · Fórmulas de acordes, notas esenciales y duplicaciones · intermedio · 45 minutes
 
-Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/928fbb26539e451fd34a0e8baf0714cf919a1562/state/streeling/courses/music/es/mus-012-chord-formulas-essential-tones-doubling.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/d8c8da550af12f339dbf9464cc1144084eb689b9/state/streeling/courses/music/es/mus-012-chord-formulas-essential-tones-doubling.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MUS-001](../../music/mus-001-what-is-a-chord/), [MUS-008](../../music/mus-008-intervals-inversion-compound/)
 :::
