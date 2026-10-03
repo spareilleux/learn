@@ -931,6 +931,59 @@ the 12 and 3 frames-a-second ladders still end at level 5, at 14.6 s and 6.3
 s. The frieze probe also passed under Forward+ in the DLSS build
 (observatory-dlss).
 
+Version 29, exported 2026-10-03 15:19:23 UTC, points to what version 28 left
+to be found by chance, after the author opened the published version 28 and
+saw neither a TARS nor a hologram. The walking help gains a third line naming
+H for the IX hologram, R for Seldon's recording, and Tab then the wand for a
+TARS, each part shown only where the scene has its node
+(scripts/walk_physics.gd); the course button already sits below the grown
+panel. The IX hologram opens by itself the first time the camera comes within
+6 m of Seldon's sphere with the sphere on screen, once a session and only if
+it was never opened; a probe (a main loop with a script), a capture and the
+selftest leave it shut unless --auto-holo asks for it
+(scripts/hologram_ix.gd). The wand's line in the curio wheel names its spell,
+a small TARS, in the three languages (scripts/curio_wheel.gd).
+scripts/seldon_recording.gd is version 28's post-merge correction, described
+at the end of this file, byte for byte; scripts/observatory.gd and
+scripts/quality.gd are version 28's.
+index.pck is now 22,619,100 bytes, 26,428 fewer than the corrected version 28
+package, whose export also packed six files from an earlier export's out/
+folder (the web page's icons and their import files), which the scene does not
+use; index.html changes only that size, and index.wasm and index.js are
+unchanged.
+Web: the export served locally (artpass/publish/gzip_server.py, the build's
+own course list), in headless Chrome at 1600x900
+(artpass/publish/help-web.mjs): the start view, then the page reloaded with
+?follow=1 and the camera walked up to Seldon's statue from 12 m along its
+front, looking over it, as the native probe does. On the RTX 5080 (ANGLE on
+Direct3D 11) the scene started at level 1 and came back to level 0 with its
+supersampling about 8 s later, at 60 frames a second on a 2400x1350 canvas;
+the help showed its third line, with the course button below it; the hologram
+was still shut with the camera 6.83 m from the sphere and was open, on the
+cost anomaly hunter pipeline, once the camera had come on to 3 m; H then
+closed it and R played the recording. With SwiftShader standing in for the
+weakest GPU, the scene settled at level 5 at 433 ms a frame on an 800x450
+canvas, as in version 28, and 417 ms by the end of the run, and the hologram
+opened the same way. The first SwiftShader shot caught the interface drawn at
+twice its size in the frame where the canvas shrank; the settled shot shows it
+laid out as on the RTX. Neither run logged an error or an exception. Under
+?follow=1 the walking body pauses, so there the help keeps its first two
+lines. Real weak GPUs, phones and other browsers: to verify.
+Native runs (Godot 4.6.1) on the exported project, 50 of them
+(artpass/publish/regress-pub21.sh): version 28's 48, then the help probe
+(artpass/help/help_probe.gd) with --auto-holo, as in the game, and without it,
+as under any probe. 49 passed at once and none logged a script error. The help
+probe read the HUD's third line word for word and found the course button's
+top at 112 px, below the panel's bottom at 104 px; with --auto-holo the
+hologram opened by itself 5.99 m from the sphere, once, and not again on a
+second approach; without it, it stayed shut. lean_keys, the held-key reading
+test, failed (stops_at_series_end, browsed_stays_aimed); run 3 more times it
+passed twice and failed once on another check (reduced_motion_still_reads).
+The same command line on the published version 28 failed 2 times out of 3, on
+the same kind of checks, so that test's flakiness predates this version; it is
+to verify on its own. --check-only and --selftest passed on the four changed
+scripts in the prototype and in the DLSS copy (observatory-dlss).
+
 Native Compatibility GPU time, RTX 5080, 1600x900, 240 frames per view: 0.44 to
 0.52 ms for the previous web scene, 0.64 to 1.44 ms with the detail pass; up to
 1.55 million primitives in the overview, against 0.46 million before. With the
@@ -950,7 +1003,7 @@ scripts/course_library.gd b2bf3fe3723d8a6f2a2392199fbf276d8bab752259eab6f4f63985
 scripts/steel_cube.gd f28e71fffcd151663bc9a98b3c135cc7b805490e8298d3cf01029455c973f94c
 scripts/seldon_statue.gd c8785f079f648ea50694055fe87d26bb56e0ee2ab129251399d88bd13d0030b4
 scripts/touch_controls.gd aa49b4ad0405a9e8368e3d29a7896d6fbe6422acca6f42f020fd2acd81645448
-scripts/walk_physics.gd 156fc6e18103d2b8cc211697c5e1b8c519bc41707f95c44b52afcdc87e850ea2
+scripts/walk_physics.gd c171869bef2299cd511fb26e853836c624ab2aaf4e65ef3aeb575123a4e6f504
 scripts/view_fit.gd f574c7949a5b324f91f062df9982366c123271804069b507206f88ad7062fe4c
 scripts/view_move.gd 558a4059815cb3a8a202d205d8cfada17653fb533e7e056bfe9e8a434dac0431
 scripts/multiverse.gd 0de3cece747a87c742ba6b26c8fac27a6a7dcdd18286f30957899becb2dfb34d
@@ -985,10 +1038,10 @@ scripts/lift.gd 14ef3214d63cb89bb286894783b27181afb65bd9c0fb6441550b7946931f711d
 assets/sky_core_cap.png a110fdfa1b79cc41eec119265aeb89bc211d0b8e0eb6c759b45c25496f2daabe
 assets/kiosk_glass.gdshader 76226f17e5884a042b85e5fc544a4b71012ea6e389b9743c1cac65083a06bc44
 scripts/lift_sounds.gd 4daed5e380396a3711fc7ff2f1f72b877b9efbdaff6d6fa428c595b1dad7b244
-scripts/curio_wheel.gd ff3de55b72cd54d3b5fa85bed26fa0b7fadcf30629787467a4ded7ed110ab22b
+scripts/curio_wheel.gd ddf2fa36ce66cf0530e785f1e301d6386e206b218e914f7f0653c276299ba3fd
 scripts/drone.gd e3735898c9710ca19190d7d2713230c1f40595bb0fea7181909a78f395c0e7b9
 scripts/tars.gd 747a7c313a37c0731b4a9c8b5f78d364cbc6a6181b25623cd919a0a5b19a09d0
-scripts/hologram_ix.gd 1bca3bc035b0404ef04f54147cee538768597f9e58c17c4f6c06631ca779363c
+scripts/hologram_ix.gd 1bbc0f8dd4906a6ed90243f13ad8be1a3f98b12702b355c49c87ece9c46859c4
 scripts/quality.gd bdad805e7717769145b5aa2ad98aca56b0b76857fdcd86e87817f1bc53046c69
 assets/holo_panel.gdshader 1a77f62f3bd53c29c95341058baa0d19613737ab2a98f24c6fd4edc150637c08
 assets/holo_edge.gdshader 029b74b7147bdc55e8b1042c3274b3018892217653e47458ca58f0115229f8e7
@@ -1001,10 +1054,10 @@ scripts/fresco_frieze.gd 5dfa9b9df01fb0bf7a9480d9ed4b7970ed77fdb005f13da63f0bc09
 assets/fresco_panel.gdshader f72ccf999ae0cb7debdeef378ac57f902378af617914e28f8da7615f755c939d
 assets/fresco_dust.gdshader 9d63b02079689cd0205a9d469c743645d4fac1ccfff21a3d0326f36a3062341c
 assets/fresco_atlas.png cccc2917f794f42517ee001392802ec6828acc747f585018e49349474b1638fc
-scripts/build_info.gd 36161c3e057671f7cac2e1117a365c892335977f8ae79bbfb528ab0be10e579e
+scripts/build_info.gd cbe90e94188fdc325536dbb4d4f1b069c30ae13e83065ed2ea84a3b2a104afbc
 
 SHA-256 output files:
-index.pck c2288dbbc7e30c7dd6fbcc1cc7a2086dc6fad6655743ceb1c4225895db9619b9
+index.pck 7fea8d446d48a8ef7be0cb1149f1e659fc02f2ee2eaefcef9e9b01bd01562414
 index.wasm 99962b29677e42f3ba0258bd90fdc52ad90295954c4473e816ad02cfe5ff1d4f
 index.js e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981
 
