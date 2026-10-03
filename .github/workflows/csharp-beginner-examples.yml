@@ -6,9 +6,9 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ['code/csharp-beginner/**', '.github/workflows/csharp-beginner-examples.yml']
+    paths: ['code/csharp-beginner/**', 'src/assets/csharp-beginner/**', '.github/workflows/csharp-beginner-examples.yml']
   pull_request:
-    paths: ['code/csharp-beginner/**', '.github/workflows/csharp-beginner-examples.yml']
+    paths: ['code/csharp-beginner/**', 'src/assets/csharp-beginner/**', '.github/workflows/csharp-beginner-examples.yml']
 
 permissions:
   contents: read
