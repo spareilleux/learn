@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **MUS-004** · Fundamentos de teoría musical · beginner-to-intermediate · 45 minutes
 
-Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/d459d8e5f0210cbad00f49c49196fc61160aba76/state/streeling/courses/music/es/mus-004-rhythm-and-groove.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/450fc670a71d1cfb190a53bfedd52ba81215fa5c/state/streeling/courses/music/es/mus-004-rhythm-and-groove.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MUS-001](../../music/mus-001-what-is-a-chord/), [GTR-001](../../guitar-studies/gtr-001-the-fretboard-map/)
 :::

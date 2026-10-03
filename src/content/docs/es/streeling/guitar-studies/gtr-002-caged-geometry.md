@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **GTR-002** · Disposicion del diapason y sistema CAGED · intermedio · 45 minutes
 
-Generado por el departamento *Estudios de guitarra* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/d459d8e5f0210cbad00f49c49196fc61160aba76/state/streeling/courses/guitar-studies/es/gtr-002-caged-geometry.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Estudios de guitarra* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/450fc670a71d1cfb190a53bfedd52ba81215fa5c/state/streeling/courses/guitar-studies/es/gtr-002-caged-geometry.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [GTR-001](../../guitar-studies/gtr-001-the-fretboard-map/)
 :::

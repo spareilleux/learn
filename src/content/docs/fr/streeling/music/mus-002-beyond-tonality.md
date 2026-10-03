@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **MUS-002** · Fondements de la théorie musicale · intermédiaire · 45 minutes
 
-Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/d459d8e5f0210cbad00f49c49196fc61160aba76/state/streeling/courses/music/fr/mus-002-beyond-tonality.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/450fc670a71d1cfb190a53bfedd52ba81215fa5c/state/streeling/courses/music/fr/mus-002-beyond-tonality.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MUS-001](../../music/mus-001-what-is-a-chord/)
 :::

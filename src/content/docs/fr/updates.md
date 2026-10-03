@@ -173,6 +173,24 @@ La [PR Demerzel #1179](https://github.com/GuitarAlchemist/Demerzel/pull/1179) a 
 
 La correction de PHY-001 reste **en attente de vérification** jusqu'à ce que ce changement soit fusionné, que son déploiement réussisse et que les pages soient relues sans authentification.
 
+## 2026-10-03 — Correction de Streeling PHY-001 publiée
+
+La [PR Learn #117](https://github.com/spareilleux/learn/pull/117) a été fusionnée en `8183127`, et son [déploiement Pages](https://github.com/spareilleux/learn/actions/runs/37072084405) a réussi. Le [module PHY-001](../streeling/physics/phy-001-science-of-guitar-sound/) et le [journal Streeling](../streeling/journal/) ont ensuite été relus sans authentification dans les trois langues : six pages, qui répondent toutes 200. Les pages du module nomment PHY-001 et renvoient à leur source à `d459d8e` ; celles du journal portent son entrée du 2026-10-02.
+
+La correction de PHY-001 passe donc d'en attente de vérification à vérifiée ; son entrée ci-dessus reste telle qu'écrite. Cette mise à jour réépingle les liens source du module à `450fc67`. Publié ne veut pas dire étudié : PHY-001 n'a été ni exécuté ni étudié ici.
+
+## 2026-10-03 — Leçon 15 de théorie musicale publiée
+
+La [leçon 15](../music-theory-ga/15-the-fretboard/) a été fusionnée après le succès de sa CI : [PR #119](https://github.com/spareilleux/learn/pull/119), fusionnée en `89dc3e6`. Son [déploiement Pages](https://github.com/spareilleux/learn/actions/runs/37083729662) a réussi. La leçon et le [journal du cours](../music-theory-ga/journal/) ont répondu 200 sans authentification dans les trois langues, six pages en tout.
+
+## 2026-10-03 — Streeling MUS-012 synchronisé, en attente de vérification
+
+La [PR Demerzel #1180](https://github.com/GuitarAlchemist/Demerzel/pull/1180) a été fusionnée en `450fc67`, après l'épingle de `d459d8e`. Cette mise à jour la synchronise dans Learn :
+- le nouveau [module MUS-012](../streeling/music/mus-012-chord-formulas-essential-tones-doubling/), Formules d'accords, notes essentielles et redoublements, dans les trois langues ;
+- sa ligne dans l'[index de la musique](../streeling/music/) et dans le [journal Streeling](../streeling/journal/), avec une entrée datée dans ce dernier.
+
+MUS-012 reste **en attente de vérification** jusqu'à ce que ce changement soit fusionné, que son déploiement réussisse et que les pages soient relues sans authentification.
+
 ## À vérifier
 
 - Contrôler les URL publiques de cette mise à jour et le catalogue après déploiement ; conserver le reçu de déploiement avec le compte rendu d'intégration.

@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **MUS-007** · Altura, grafía e identidad enarmónica · principiante · 45 minutes
 
-Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/d459d8e5f0210cbad00f49c49196fc61160aba76/state/streeling/courses/music/es/mus-007-pitch-spelling-enharmonic-identity.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/450fc670a71d1cfb190a53bfedd52ba81215fa5c/state/streeling/courses/music/es/mus-007-pitch-spelling-enharmonic-identity.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MUS-001](../../music/mus-001-what-is-a-chord/)
 :::

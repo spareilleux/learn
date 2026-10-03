@@ -87,6 +87,7 @@ Marca un módulo una vez estudiado. En **Notas**, añade una entrada fechada: lo
 - [ ] [MUS-007 · Altura, grafía e identidad enarmónica](../music/mus-007-pitch-spelling-enharmonic-identity/) <!-- mus-007-pitch-spelling-enharmonic-identity -->
 - [ ] [MUS-008 · Intervalos, inversión e intervalos compuestos](../music/mus-008-intervals-inversion-compound/) <!-- mus-008-intervals-inversion-compound -->
 - [ ] [MUS-009 · Afinación y geometría del mástil](../music/mus-009-tuning-fretboard-geometry/) <!-- mus-009-tuning-fretboard-geometry -->
+- [ ] [MUS-012 · Fórmulas de acordes, notas esenciales y duplicaciones](../music/mus-012-chord-formulas-essential-tones-doubling/) <!-- mus-012-chord-formulas-essential-tones-doubling -->
 - [ ] [MUS-018 · Identificación de la tonalidad, números romanos y cadencias](../music/mus-018-key-finding-roman-numerals-cadences/) <!-- mus-018-key-finding-roman-numerals-cadences -->
 - [ ] [MUS-020 · Clases de conjuntos, vectores interválicos, relación Z y formas primas](../music/mus-020-set-classes-interval-vectors-prime-forms/) <!-- mus-020-set-classes-interval-vectors-prime-forms -->
 
@@ -211,6 +212,14 @@ Aquí no se ejecutó nada de ellos.
 ## 2026-10-02 — PHY-001 · La ciencia del sonido de la guitarra, corregido
 
 Sincronizado desde Demerzel en [`d459d8e`](https://github.com/GuitarAlchemist/Demerzel/commit/d459d8e5f0210cbad00f49c49196fc61160aba76) ([PR #1179](https://github.com/GuitarAlchemist/Demerzel/pull/1179)). El ejercicio del módulo decía que se midiera desde la cejuela hasta el traste 7 y que saldrían unos 2/3 de la longitud de la cuerda. Los 2/3 son la longitud que vibra, desde el traste 7 hasta la selleta; el tramo de la cejuela al traste 7 es el tercio restante. La corrección está en los seis idiomas del módulo, tres de los cuales están en este sitio. Todas las demás páginas solo cambian sus referencias fijadas a Demerzel, de `e203e5a` a `d459d8e`.
+
+Aquí no se ejecutó nada de él.
+
+- **No se ha estudiado aquí,** así que su casilla de arriba sigue vacía.
+
+## 2026-10-03 — MUS-012 · Fórmulas de acordes, notas esenciales y duplicaciones
+
+Sincronizado desde Demerzel en [`450fc67`](https://github.com/GuitarAlchemist/Demerzel/commit/450fc670a71d1cfb190a53bfedd52ba81215fa5c) ([PR #1180](https://github.com/GuitarAlchemist/Demerzel/pull/1180)). Un nuevo módulo de música de nivel intermedio sobre lo que un acorde puede perder: las fórmulas de acordes hasta la decimotercera, las notas esenciales de las que depende el nombre de un acorde y las opcionales que puede perder, las duplicaciones de un voicing de guitarra y un acorde de decimotercera en seis cuerdas. Rastrea lo que GA guarda sobre las fórmulas, las notas esenciales y las duplicaciones, y su sección 6 propone un experimento. El índice de música ahora lo incluye, el de Streeling cuenta 12 módulos de música en lugar de 11, y MUS-018 y MUS-020 bajan un puesto en la barra lateral; todas las demás páginas solo cambian sus referencias fijadas a Demerzel, de `d459d8e` a `450fc67`.
 
 Aquí no se ejecutó nada de él.
 

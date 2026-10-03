@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **MAT-025** · Asignación con restricciones, juegos, bandidos y penalizaciones · intermedio · 60 minutes
 
-Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/d459d8e5f0210cbad00f49c49196fc61160aba76/state/streeling/courses/mathematics/es/mat-025-allocation-games-bandits-penalties.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/450fc670a71d1cfb190a53bfedd52ba81215fa5c/state/streeling/courses/mathematics/es/mat-025-allocation-games-bandits-penalties.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MAT-009](../../mathematics/mat-009-estimation-uncertainty-sampling/), [MAT-012](../../mathematics/mat-012-iterative-optimisation/)
 :::
