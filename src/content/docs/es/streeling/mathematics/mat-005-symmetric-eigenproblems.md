@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **MAT-005** · Problemas de valores propios simétricos · intermedio · 50 minutes
 
-Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/450fc670a71d1cfb190a53bfedd52ba81215fa5c/state/streeling/courses/mathematics/es/mat-005-symmetric-eigenproblems.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/928fbb26539e451fd34a0e8baf0714cf919a1562/state/streeling/courses/mathematics/es/mat-005-symmetric-eigenproblems.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MAT-004](../../mathematics/mat-004-vectors-matrices-norms/)
 :::

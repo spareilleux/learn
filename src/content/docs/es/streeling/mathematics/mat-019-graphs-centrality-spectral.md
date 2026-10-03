@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **MAT-019** · Grafos, centralidad y estructura espectral · intermedio · 50 minutes
 
-Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/450fc670a71d1cfb190a53bfedd52ba81215fa5c/state/streeling/courses/mathematics/es/mat-019-graphs-centrality-spectral.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/928fbb26539e451fd34a0e8baf0714cf919a1562/state/streeling/courses/mathematics/es/mat-019-graphs-centrality-spectral.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MAT-005](../../mathematics/mat-005-symmetric-eigenproblems/), [MAT-018](../../mathematics/mat-018-clustering-density-validity/)
 :::

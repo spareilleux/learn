@@ -191,6 +191,20 @@ La [PR de Demerzel #1180](https://github.com/GuitarAlchemist/Demerzel/pull/1180)
 
 MUS-012 sigue **pendiente de verificación** hasta que este cambio se fusione, su despliegue sea correcto y las páginas se lean sin autenticación.
 
+## 2026-10-03 — Streeling MUS-012 publicado
+
+La [PR de Learn #124](https://github.com/spareilleux/learn/pull/124) se fusionó como `062e3cb`, después de dos correcciones del diario de Streeling pedidas en una revisión independiente, y su [despliegue de Pages](https://github.com/spareilleux/learn/actions/runs/37143956527) fue correcto. Después, las páginas se leyeron sin autenticación en los tres idiomas: doce páginas, que respondieron todas 200. Las páginas del [módulo MUS-012](../streeling/music/mus-012-chord-formulas-essential-tones-doubling/) nombran MUS-012 y enlazan su fuente en `450fc67`; el [índice de música](../streeling/music/) lo incluye, y el [diario de Streeling](../streeling/journal/) y este diario incluyen sus entradas del 2026-10-03.
+
+MUS-012 pasa así de pendiente de verificación a verificado; su entrada de arriba queda tal como se escribió. Esta actualización fija de nuevo sus enlaces a la fuente en `928fbb2`. Publicado no es estudiado: MUS-012 no se ha ejecutado ni estudiado aquí, y su experimento sigue propuesto.
+
+## 2026-10-03 — Streeling MUS-013 sincronizado, pendiente de verificación
+
+La [PR de Demerzel #1181](https://github.com/GuitarAlchemist/Demerzel/pull/1181) se fusionó como `928fbb2`, después de la fijación de `450fc67`. Esta actualización la sincroniza en Learn:
+- el nuevo [módulo MUS-013](../streeling/music/mus-013-root-bass-pitch-class-set/), Fundamental, bajo y conjunto de clases de altura, en los tres idiomas;
+- su línea en el [índice de música](../streeling/music/) y en el [diario de Streeling](../streeling/journal/), con una entrada fechada en este último.
+
+MUS-013 sigue **pendiente de verificación** hasta que este cambio se fusione, su despliegue sea correcto y las páginas se lean sin autenticación.
+
 ## Por verificar
 
 - Comprobar las URL públicas de esta actualización y el catálogo tras el despliegue; conservar su recibo en el registro de integración.

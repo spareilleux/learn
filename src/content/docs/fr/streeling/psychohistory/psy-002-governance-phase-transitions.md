@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **PSY-002** · Théorie des transitions de phase : quand les systèmes de gouvernance changent de régime · intermédiaire · 35 minutes
 
-Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/450fc670a71d1cfb190a53bfedd52ba81215fa5c/state/streeling/courses/psychohistory/fr/psy-002-governance-phase-transitions.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/928fbb26539e451fd34a0e8baf0714cf919a1562/state/streeling/courses/psychohistory/fr/psy-002-governance-phase-transitions.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PSY-001](../../psychohistory/psy-001-intro-fractal-compounding/)
 :::

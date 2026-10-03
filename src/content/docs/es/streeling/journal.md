@@ -88,6 +88,7 @@ Marca un módulo una vez estudiado. En **Notas**, añade una entrada fechada: lo
 - [ ] [MUS-008 · Intervalos, inversión e intervalos compuestos](../music/mus-008-intervals-inversion-compound/) <!-- mus-008-intervals-inversion-compound -->
 - [ ] [MUS-009 · Afinación y geometría del mástil](../music/mus-009-tuning-fretboard-geometry/) <!-- mus-009-tuning-fretboard-geometry -->
 - [ ] [MUS-012 · Fórmulas de acordes, notas esenciales y duplicaciones](../music/mus-012-chord-formulas-essential-tones-doubling/) <!-- mus-012-chord-formulas-essential-tones-doubling -->
+- [ ] [MUS-013 · Fundamental, bajo y conjunto de clases de altura](../music/mus-013-root-bass-pitch-class-set/) <!-- mus-013-root-bass-pitch-class-set -->
 - [ ] [MUS-018 · Identificación de la tonalidad, números romanos y cadencias](../music/mus-018-key-finding-roman-numerals-cadences/) <!-- mus-018-key-finding-roman-numerals-cadences -->
 - [ ] [MUS-020 · Clases de conjuntos, vectores interválicos, relación Z y formas primas](../music/mus-020-set-classes-interval-vectors-prime-forms/) <!-- mus-020-set-classes-interval-vectors-prime-forms -->
 
@@ -220,6 +221,14 @@ Aquí no se ejecutó nada de él.
 ## 2026-10-03 — MUS-012 · Fórmulas de acordes, notas esenciales y duplicaciones
 
 Sincronizado desde Demerzel en [`450fc67`](https://github.com/GuitarAlchemist/Demerzel/commit/450fc670a71d1cfb190a53bfedd52ba81215fa5c) ([PR #1180](https://github.com/GuitarAlchemist/Demerzel/pull/1180)). Un nuevo módulo de música de nivel intermedio sobre lo que un acorde puede perder: las fórmulas de acordes hasta la decimotercera, las notas esenciales de las que depende el nombre de un acorde y las opcionales que puede perder, las duplicaciones de un voicing de guitarra y un acorde de decimotercera en seis cuerdas. Rastrea lo que GA guarda sobre las fórmulas, las notas esenciales y las duplicaciones, y su sección 6 propone un experimento. El índice de música ahora lo incluye, el de Streeling cuenta 12 módulos de música en lugar de 11, y MUS-018 y MUS-020 bajan un puesto en la barra lateral; todas las demás páginas solo cambian sus referencias fijadas a Demerzel, de `d459d8e` a `450fc67`.
+
+Aquí no se ejecutó nada de él.
+
+- **No se ha estudiado aquí,** así que su casilla de arriba sigue vacía.
+
+## 2026-10-03 — MUS-013 · Fundamental, bajo y conjunto de clases de altura
+
+Sincronizado desde Demerzel en [`928fbb2`](https://github.com/GuitarAlchemist/Demerzel/commit/928fbb26539e451fd34a0e8baf0714cf919a1562) ([PR #1181](https://github.com/GuitarAlchemist/Demerzel/pull/1181)). Un nuevo módulo de música de nivel intermedio sobre lo que fija un nombre de acorde: la fundamental, el bajo y el conjunto de clases de altura, los conjuntos que tienen varias lecturas (acordes de sexta y de séptima, sus2 y sus4, la tríada aumentada y la séptima disminuida), y cómo el bajo, la armonía y la resolución eligen entre ellas. Rastrea cómo GA nombra un conjunto sin mirar su bajo, y su sección 6 propone un experimento. El índice de música ahora lo incluye, el de Streeling cuenta 13 módulos de música en lugar de 12, y MUS-018 y MUS-020 bajan un puesto en la barra lateral; todas las demás páginas solo cambian sus referencias fijadas a Demerzel, de `450fc67` a `928fbb2`.
 
 Aquí no se ejecutó nada de él.
 

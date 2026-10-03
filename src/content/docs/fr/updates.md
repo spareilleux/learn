@@ -191,6 +191,20 @@ La [PR Demerzel #1180](https://github.com/GuitarAlchemist/Demerzel/pull/1180) a 
 
 MUS-012 reste **en attente de vérification** jusqu'à ce que ce changement soit fusionné, que son déploiement réussisse et que les pages soient relues sans authentification.
 
+## 2026-10-03 — Streeling MUS-012 publié
+
+La [PR Learn #124](https://github.com/spareilleux/learn/pull/124) a été fusionnée en `062e3cb`, après deux corrections du journal Streeling demandées en revue indépendante, et son [déploiement Pages](https://github.com/spareilleux/learn/actions/runs/37143956527) a réussi. Les pages ont ensuite été relues sans authentification dans les trois langues : douze pages, qui répondent toutes 200. Les pages du [module MUS-012](../streeling/music/mus-012-chord-formulas-essential-tones-doubling/) nomment MUS-012 et renvoient à leur source à `450fc67` ; l'[index de la musique](../streeling/music/) le liste, et le [journal Streeling](../streeling/journal/) et ce journal portent leurs entrées du 2026-10-03.
+
+MUS-012 passe donc d'en attente de vérification à vérifié ; son entrée ci-dessus reste telle qu'écrite. Cette mise à jour réépingle ses liens source à `928fbb2`. Publié ne veut pas dire étudié : MUS-012 n'a été ni exécuté ni étudié ici, et son expérience reste proposée.
+
+## 2026-10-03 — Streeling MUS-013 synchronisé, en attente de vérification
+
+La [PR Demerzel #1181](https://github.com/GuitarAlchemist/Demerzel/pull/1181) a été fusionnée en `928fbb2`, après l'épingle de `450fc67`. Cette mise à jour la synchronise dans Learn :
+- le nouveau [module MUS-013](../streeling/music/mus-013-root-bass-pitch-class-set/), Fondamentale, basse et ensemble de classes de hauteurs, dans les trois langues ;
+- sa ligne dans l'[index de la musique](../streeling/music/) et dans le [journal Streeling](../streeling/journal/), avec une entrée datée dans ce dernier.
+
+MUS-013 reste **en attente de vérification** jusqu'à ce que ce changement soit fusionné, que son déploiement réussisse et que les pages soient relues sans authentification.
+
 ## À vérifier
 
 - Contrôler les URL publiques de cette mise à jour et le catalogue après déploiement ; conserver le reçu de déploiement avec le compte rendu d'intégration.

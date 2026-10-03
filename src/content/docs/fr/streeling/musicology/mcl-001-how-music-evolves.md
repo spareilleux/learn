@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **MCL-001** · Fondements de la musicologie · débutant · 30 minutes
 
-Généré par le département *Musicologie* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/450fc670a71d1cfb190a53bfedd52ba81215fa5c/state/streeling/courses/musicology/fr/mcl-001-how-music-evolves.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Musicologie* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/928fbb26539e451fd34a0e8baf0714cf919a1562/state/streeling/courses/musicology/fr/mcl-001-how-music-evolves.fr.md) · [Mon journal](../../journal/)
 :::
 
 > **Département de musicologie** | Niveau : Débutant | Durée : 30 minutes

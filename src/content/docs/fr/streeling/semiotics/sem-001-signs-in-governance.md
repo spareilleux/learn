@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **SEM-001** · Sémiotique de la gouvernance de l'IA · débutant · 25 minutes
 
-Généré par le département *Sémiotique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/450fc670a71d1cfb190a53bfedd52ba81215fa5c/state/streeling/courses/semiotics/fr/sem-001-signs-in-governance.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Sémiotique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/928fbb26539e451fd34a0e8baf0714cf919a1562/state/streeling/courses/semiotics/fr/sem-001-signs-in-governance.fr.md) · [Mon journal](../../journal/)
 :::
 
 > **Département de sémiotique** | Stade : Nigredo (Débutant) | Durée : 25 minutes
