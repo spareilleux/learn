@@ -641,6 +641,32 @@ found the fly camera still after W was held for ten frames, a check version 21
 passed; run three times again on the same build, it passed each time
 (rerun-coursetest-pub13.sh). It is the second check of a held key to fail once
 on a windowed run today, after one lean run on the prototype.
+Version 23, exported 2026-10-02 03:59:13 UTC, makes the curio wheel easy to
+find on a computer. The author pressed Tab and saw no wheel: it opened while
+Tab was held and shut when it was let go, so a tap opened and shut it at once.
+A tap of Tab now leaves it open until a curio is picked, Tab is pressed again
+or Escape shuts it, and a round button at the bottom left, which shows the
+curio in hand next to the key Tab and the word Curios, opens it with a click
+(scripts/curio_wheel.gd). On a touch screen, its button grows to the size of
+the others and has Curios written beside it (scripts/touch_controls.gd).
+index.pck is now 21,785,880 bytes; index.html changes only that size, and
+index.wasm and index.js are unchanged.
+Web: served locally as version 22 was (artpass/publish/gzip_server.py, 75
+courses, gzip-encoded), in headless Chrome at 1600x900 with a mouse and keys
+(artpass/publish/desktop-tab.mjs): it reported version 23 and logged no error;
+Tab held opened the wheel and Tab let go shut it, with or without a click on
+the scene first; a tap of Tab left it open, Escape shut it and a second Escape
+freed the pointer; a click on the button at the bottom left opened it; the
+focus stayed on the canvas throughout. The phone check
+(artpass/publish/curio-web.mjs), upright and sideways: it started, reported
+version 23, logged no error, showed the larger button with Curios beside it,
+and the wheel opened. Real phones and other browsers: to verify.
+Native runs (Godot 4.6.1): the curio test gained a tap of Tab that leaves the
+wheel open, Escape shutting it, the button shown, opening the wheel with a
+click, and a pick from it holding (artpass/curios/curiotest.gd). 16 runs on
+the exported project (artpass/publish/regress-pub14.sh): version 22's 13, the
+curio run with keys again under Forward+, a curio run with touches sideways in
+Spanish and a lean run with touches; no script error, all 16 passed.
 
 Native Compatibility GPU time, RTX 5080, 1600x900, 240 frames per view: 0.44 to
 0.52 ms for the previous web scene, 0.64 to 1.44 ms with the detail pass; up to
@@ -660,7 +686,7 @@ scripts/observatory.gd 1a15f441c7298009cf94a5740c63a1e56bd097b79ac8a799fd202c308
 scripts/course_library.gd d78dddc42b49e20b51ae99ec4fc5b8ca5a3b06ee1d0e10b2ee00c39f1be8aa9d
 scripts/steel_cube.gd f28e71fffcd151663bc9a98b3c135cc7b805490e8298d3cf01029455c973f94c
 scripts/seldon_statue.gd 4e41b282aa2cc4de794296586b65f5f4d39688312673ddc46226fd3906cf4b27
-scripts/touch_controls.gd 825e771291e660d47d820c976532b1a14bddcb2ac5329793783af190dbf531cb
+scripts/touch_controls.gd 74bf1ddfa04dbb403449d88f2b05a85fa89ac3522f2e47ad5dbe40851b2df528
 scripts/walk_physics.gd bc17f09222fd9b865c6ad509b9f3c376bbea9bc8c6146f50f326e8c19c297a7c
 scripts/view_fit.gd f574c7949a5b324f91f062df9982366c123271804069b507206f88ad7062fe4c
 scripts/view_move.gd 558a4059815cb3a8a202d205d8cfada17653fb533e7e056bfe9e8a434dac0431
@@ -696,11 +722,11 @@ scripts/lift.gd 14ef3214d63cb89bb286894783b27181afb65bd9c0fb6441550b7946931f711d
 assets/sky_core_cap.png a110fdfa1b79cc41eec119265aeb89bc211d0b8e0eb6c759b45c25496f2daabe
 assets/kiosk_glass.gdshader 76226f17e5884a042b85e5fc544a4b71012ea6e389b9743c1cac65083a06bc44
 scripts/lift_sounds.gd 4daed5e380396a3711fc7ff2f1f72b877b9efbdaff6d6fa428c595b1dad7b244
-scripts/curio_wheel.gd 545cac2ee37b1ad60cd54971885c9d4804fa1b2803a30a73ae3c79ca667ac8c7
-scripts/build_info.gd 25e67ea7e106d0357f365e7520e098b8f1128e39476d34bf4df7a18c1ced5f51
+scripts/curio_wheel.gd ed0d8e5ebde14d75f670920376ea1d53fa527576568059af0ace620d8bc4d5d1
+scripts/build_info.gd 2bce005b947ca9adb881b5809823c1d4e9070ef9804b882068cc94b6068c83d3
 
 SHA-256 output files:
-index.pck 32d720eaa493baa75038e774e01c6ef8decbad35828272bc8b29455c27664d5b
+index.pck d7ab670817f2b8529c92b8882e98c8bc88a2b17131a930fb55fc50c6688844ad
 index.wasm 99962b29677e42f3ba0258bd90fdc52ad90295954c4473e816ad02cfe5ff1d4f
 index.js e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981
 
