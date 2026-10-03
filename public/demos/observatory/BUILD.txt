@@ -667,6 +667,52 @@ click, and a pick from it holding (artpass/curios/curiotest.gd). 16 runs on
 the exported project (artpass/publish/regress-pub14.sh): version 22's 13, the
 curio run with keys again under Forward+, a curio run with touches sideways in
 Spanish and a lean run with touches; no script error, all 16 passed.
+Version 24, exported 2026-10-02 04:23:26 UTC, adds a pocket drone to the curio
+wheel, after the drone of a Claude artifact the author pointed to
+(scripts/drone.gd). Used, it rises from the hand, the view cuts to it, and it
+tours the hall, both galleries, the drum and the roof over Upperside on a
+closed curve of 386.6 m, about four minutes a lap. Its flight model is the
+artifact's, in metres: the speed limited ahead of each bend by the lateral
+acceleration it allows itself, a follower with feed-forward bounded at 25
+degrees of tilt, a reference that waits when the craft lags, a second-order
+attitude loop, a bounded rate of turn and slow air. The view follows it from
+behind or rides on board on a level gimbal; Escape or a button lands it where
+it took off. The curio wheel holds and launches it (scripts/curio_wheel.gd),
+the observatory adds it (scripts/observatory.gd), and Upperside now shows to
+the camera that looks, the drone's included (scripts/extra_views.gd).
+index.pck is now 21,787,640 bytes; index.html changes only that size, and
+index.wasm and index.js are unchanged.
+Web: served as before (artpass/publish/gzip_server.py, 75 courses,
+gzip-encoded), in headless Chrome (artpass/publish/drone-web.mjs). On an
+emulated Android phone, upright and sideways, version 24 started and logged no
+error; the Curios button opened the wheel, now of eight slots, a tap on the
+drone's slot held it and a tap on the scene launched it; the chase view, the
+On board button and the Land button worked, and the visitor's view came back.
+At 1600x900 with a mouse, Tab and a click took the drone from the wheel, but
+headless Chrome refuses pointer lock, which using a curio needs on a computer,
+so it did not take off there: in a real browser on a computer, that is to
+verify. The curio wheel's phone check (curio-web.mjs) and the computer check
+of Tab and the button (desktop-tab.mjs) passed again, with no error.
+Native runs (Godot 4.6.1): the drone's test (artpass/drone/dronetest.gd) bakes
+every mesh of the hall and of Upperside into trimesh colliders, the books and
+the rain of light left out, and first checks that its probe finds the steel
+box, a pier and a gallery's rail. The planned route, every 5 cm, keeps 35 cm
+from every surface, 0.71 m from the orrery's turning bodies and 1.48 m from
+the shelves' front; over a simulated lap of 234.9 s the craft keeps 12 cm and
+the chase camera 8 cm from every surface, its tilt stays under 8.6 degrees and
+its speed between 0.54 and 3.2 m/s, and it lags its reference by 5 cm on
+average and 0.40 m at most, in the open air before the climb round the drum.
+Then its use: held, used, in sight as it rises, the cut to its view, keys and
+Tab reaching nothing else, the view on board and back, Upperside shown outside
+to its camera only, the landing where the visitor stood with the interface and
+the pointer back, and the refusal in the corridor. 29 runs on the exported
+project (artpass/publish/regress-pub15.sh): version 23's 16; the views, the
+roof, the terrace, the lift and the corridor, which the changed scripts touch;
+and the drone's test with keys in both renderers and with touches upright in
+French and sideways in Spanish; no script error, 28 passed. The course test
+under Forward+ again once found the fly camera still after W was held for ten
+frames, as on version 22; run three times again on the same build, it passed
+each time (artpass/publish/rerun-coursetest-pub15.sh).
 
 Native Compatibility GPU time, RTX 5080, 1600x900, 240 frames per view: 0.44 to
 0.52 ms for the previous web scene, 0.64 to 1.44 ms with the detail pass; up to
@@ -682,7 +728,7 @@ main.tscn fb6245c960d3625ca05920116c58351d9dbeb255beae59175d89c06d47049564
 export_presets.cfg 1bd7171d93c9a378f1b328e945be2a7960478e89d34ae269f013ef83c306588f
 scripts/fly_camera.gd 2e5cdd15ca7bdcfa30ec129e354a309f3ff7296f6fbf54ac144984ed9aa9f8e7
 scripts/capture.gd 52ea2b5e40db2f1f4cdbd7658074ef60bd117e1f4110c1b8995590a4196748d0
-scripts/observatory.gd 1a15f441c7298009cf94a5740c63a1e56bd097b79ac8a799fd202c30838b8e2d
+scripts/observatory.gd c98ef50522a4c748feba26e418b7e1988933f66cc93bd5fd933b2075da7b2254
 scripts/course_library.gd d78dddc42b49e20b51ae99ec4fc5b8ca5a3b06ee1d0e10b2ee00c39f1be8aa9d
 scripts/steel_cube.gd f28e71fffcd151663bc9a98b3c135cc7b805490e8298d3cf01029455c973f94c
 scripts/seldon_statue.gd 4e41b282aa2cc4de794296586b65f5f4d39688312673ddc46226fd3906cf4b27
@@ -711,7 +757,7 @@ assets/floor_paving.gdshader 23187f024d276b897635ee0cc3e543c5852c4a9b5175cbe56ec
 assets/statue_marble.gdshader ec3f14f662487f3dae14a398fe91ea7183d88214bd2bf266359da89d79b94452
 assets/world_glimpse.gdshader a06fc85ca086fc3e4d9297039be0b6549132bbffafeaedfbda0ffea3eb918d6d
 assets/courses.json 407817e268f2c0d37ce28ae0d873f08b87a514479d6a73545b75d1dfbb71823b
-scripts/extra_views.gd 441471f2f885f435b001c98db584a71a496ea2a64105507265cd46b90388f7bb
+scripts/extra_views.gd d5a333c888a503199baaea805997c8917121b55c3b02244fd16f302d6374f3c7
 scripts/upperside.gd b6e5a199de5737ffaa294c1f9a6be8d21fc4817ac600118dead14f0fc8fc486c
 assets/night_sky.gdshader 67421b4338debb80d8b6cec071bb37001d9d5493d240be53c0a107ad17cb5cec
 assets/upperside.gdshader f119593a603bc623de218054ec142b8732330785fe0d61ba5a3dcc13124f96e3
@@ -722,11 +768,12 @@ scripts/lift.gd 14ef3214d63cb89bb286894783b27181afb65bd9c0fb6441550b7946931f711d
 assets/sky_core_cap.png a110fdfa1b79cc41eec119265aeb89bc211d0b8e0eb6c759b45c25496f2daabe
 assets/kiosk_glass.gdshader 76226f17e5884a042b85e5fc544a4b71012ea6e389b9743c1cac65083a06bc44
 scripts/lift_sounds.gd 4daed5e380396a3711fc7ff2f1f72b877b9efbdaff6d6fa428c595b1dad7b244
-scripts/curio_wheel.gd ed0d8e5ebde14d75f670920376ea1d53fa527576568059af0ace620d8bc4d5d1
-scripts/build_info.gd 2bce005b947ca9adb881b5809823c1d4e9070ef9804b882068cc94b6068c83d3
+scripts/curio_wheel.gd dc11593f537a9099a1f55f19be41886eeb91c3c8701473be3fd58d977a98703b
+scripts/drone.gd e3735898c9710ca19190d7d2713230c1f40595bb0fea7181909a78f395c0e7b9
+scripts/build_info.gd c394c08d62777586762a0fa4cc68d769f9e201c24fdbd7e8301a53733c986119
 
 SHA-256 output files:
-index.pck d7ab670817f2b8529c92b8882e98c8bc88a2b17131a930fb55fc50c6688844ad
+index.pck cce0448cb2c643e6324ae1cfc70352b887324adaf0fdd6c22ec011e7c083d1cb
 index.wasm 99962b29677e42f3ba0258bd90fdc52ad90295954c4473e816ad02cfe5ff1d4f
 index.js e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981
 
