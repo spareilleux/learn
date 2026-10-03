@@ -399,6 +399,7 @@ La mayoría de las 22 diferencias del 2026-09-14 se corrigieron upstream en [#68
 - Las notas de cada acorde de esa tabla son las del curso, las de un manual para cada cifrado, escritas con sostenidos como las imprime GA.
 - Las pistas de enrutamiento proceden de `DefaultRoutingHintProvider.GetDeltas`; el propio enrutador no se ejecuta, porque necesita los embeddings.
 - Las soluciones se leen en la salida esperada y en el código de la skill; la segunda es aritmética sobre dos vectores impresos.
+- Ejecución de CI [37143011796](https://github.com/spareilleux/learn/actions/runs/37143011796), para el commit `627a3ca`: verde en los tres sistemas, 3 min 56 s en Linux, 3 min 59 s en macOS, 8 min 54 s en Windows, con el clon y la compilación incluidos.
 
 ## Por verificar
 

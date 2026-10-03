@@ -399,6 +399,7 @@ Most of the 22 differences of 2026-09-14 were fixed upstream by [#689](https://g
 - The notes of each chord in that table are the course's, a textbook's for each symbol, spelled with sharps as GA prints them.
 - The routing hints come from `DefaultRoutingHintProvider.GetDeltas`; the router itself isn't run, for it needs the embeddings.
 - The solutions read the expected output and the skill's code; the second is arithmetic on two printed vectors.
+- CI run [37143011796](https://github.com/spareilleux/learn/actions/runs/37143011796), for commit `627a3ca`: green on the three systems, 3 min 56 s on Linux, 3 min 59 s on macOS, 8 min 54 s on Windows, clone and build included.
 
 ## To verify
 

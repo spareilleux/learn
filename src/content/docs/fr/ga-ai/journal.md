@@ -399,6 +399,7 @@ La plupart des 22 différences du 2026-09-14 ont été corrigées en amont par [
 - Dans ce tableau, les notes de chaque accord sont celles du cours, celles d'un manuel pour chaque chiffrage, écrites avec des dièses comme GA les affiche.
 - Les indices de routage viennent de `DefaultRoutingHintProvider.GetDeltas` ; le routeur lui-même n'est pas exécuté, car il a besoin des embeddings.
 - Les solutions se lisent dans la sortie attendue et dans le code du skill ; la deuxième est un calcul sur deux vecteurs affichés.
+- Exécution de CI [37143011796](https://github.com/spareilleux/learn/actions/runs/37143011796), pour le commit `627a3ca` : verte sur les trois systèmes, 3 min 56 s sous Linux, 3 min 59 s sous macOS, 8 min 54 s sous Windows, clone et compilation compris.
 
 ## À vérifier
 
