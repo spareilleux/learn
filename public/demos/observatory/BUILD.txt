@@ -994,7 +994,7 @@ assets/holo_panel.gdshader 1a77f62f3bd53c29c95341058baa0d19613737ab2a98f24c6fd4e
 assets/holo_edge.gdshader 029b74b7147bdc55e8b1042c3274b3018892217653e47458ca58f0115229f8e7
 assets/holo_ring.gdshader 23cd4ef37915ab49690739865460b7b0e343865b3754d5daf2d5d09234327c5d
 assets/ix_pipelines.json 180cb180625664b027f3c7e01d855533c757e4e5525c506bd2a6f26ecc73f947
-scripts/seldon_recording.gd f4d2ca57e6da3c4793f90bd8832ec811596ef8baad55fec16829626f3758e4d4
+scripts/seldon_recording.gd b26147aaafba390780f54a1fb02af51e80b03af7bb52b2719a4b9e3ca1193130
 assets/seldon_points.gdshader 744b72e7abd915467abc5d9727eecbadaf4290bb5ecbed2fee6fe98ed80bcd2e
 assets/recording_frame.gdshader a7daedd2a691b70de4754d06fc0974f40335109603c57426a70a7381a5052a0c
 scripts/fresco_frieze.gd 5dfa9b9df01fb0bf7a9480d9ed4b7970ed77fdb005f13da63f0bc0971cdea777
@@ -1004,7 +1004,7 @@ assets/fresco_atlas.png cccc2917f794f42517ee001392802ec6828acc747f585018e4934947
 scripts/build_info.gd 36161c3e057671f7cac2e1117a365c892335977f8ae79bbfb528ab0be10e579e
 
 SHA-256 output files:
-index.pck ed3f098577a879b05776e7c59336ebb42be4e257151564afbf3b474c97857a45
+index.pck c2288dbbc7e30c7dd6fbcc1cc7a2086dc6fad6655743ceb1c4225895db9619b9
 index.wasm 99962b29677e42f3ba0258bd90fdc52ad90295954c4473e816ad02cfe5ff1d4f
 index.js e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981
 
@@ -1012,3 +1012,17 @@ This directory contains a prebuilt binary export. Re-export only for deliberate
 scene changes. A scene re-export leaves the engine files (index.wasm, index.js)
 byte-identical, so git keeps a single copy; each scene revision adds its
 index.pck (22.6 MB here) to the binary history.
+
+2026-10-03 post-merge recording sound correction: v28 preserved the v27
+`scripts/seldon_recording.gd` hash above before this correction. Fresh R or a
+tap could open the particle recording while the viewer was outside gaze range;
+sound synthesis then stopped and the opening shimmer never played. The isolated
+v28 source snapshot and old PCK matched this file's prior hashes. The changed
+script now finishes synthesis during a pending opening, plays the sound once
+when ready, cancels the pending request on close or hall rebuild, and leaves
+the scene's other source and engine files unchanged. Godot 4.6.1 headless
+regression probes on fresh scenes passed for R and tap: in each, sound was not
+ready before activation but was ready and the AudioStreamPlayer3D was playing
+within 60 frames. This verifies playback started in the engine, not audible
+output on a physical phone; on an unusually slow GPU the 27 synthesis steps
+may still delay the cue. The Web package above is the corrected export.
