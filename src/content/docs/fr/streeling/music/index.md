@@ -20,6 +20,7 @@ sidebar:
 - [MUS-007 · Hauteur, orthographe et identité enharmonique — Un son, plusieurs noms](mus-007-pitch-spelling-enharmonic-identity/)
 - [MUS-008 · Intervalles, renversements et intervalles composés — Compter au-delà de l'octave](mus-008-intervals-inversion-compound/)
 - [MUS-009 · Accordage et géométrie du manche — Une hauteur, plusieurs emplacements](mus-009-tuning-fretboard-geometry/)
+- [MUS-010 · Formules de gammes, ensembles et vecteur d'intervalles diatonique — Ce que la gamme majeure a de rare](mus-010-scales-pattern-set-interval-vector/)
 - [MUS-012 · Formules d'accords, notes essentielles et redoublements — Ce qu'un accord peut perdre](mus-012-chord-formulas-essential-tones-doubling/)
 - [MUS-013 · Fondamentale, basse et ensemble de classes de hauteurs — Un ensemble, plusieurs noms](mus-013-root-bass-pitch-class-set/)
 - [MUS-018 · Identification de la tonalité, chiffres romains et cadences — Ce qu'un décompte d'accords peut trancher, et ce qu'il ne peut pas](mus-018-key-finding-roman-numerals-cadences/)

@@ -87,6 +87,7 @@ Coche un module une fois étudié. Sous **Notes**, ajoute une entrée datée : c
 - [ ] [MUS-007 · Hauteur, orthographe et identité enharmonique](../music/mus-007-pitch-spelling-enharmonic-identity/) <!-- mus-007-pitch-spelling-enharmonic-identity -->
 - [ ] [MUS-008 · Intervalles, renversements et intervalles composés](../music/mus-008-intervals-inversion-compound/) <!-- mus-008-intervals-inversion-compound -->
 - [ ] [MUS-009 · Accordage et géométrie du manche](../music/mus-009-tuning-fretboard-geometry/) <!-- mus-009-tuning-fretboard-geometry -->
+- [ ] [MUS-010 · Formules de gammes, ensembles et vecteur d'intervalles diatonique](../music/mus-010-scales-pattern-set-interval-vector/) <!-- mus-010-scales-pattern-set-interval-vector -->
 - [ ] [MUS-012 · Formules d'accords, notes essentielles et redoublements](../music/mus-012-chord-formulas-essential-tones-doubling/) <!-- mus-012-chord-formulas-essential-tones-doubling -->
 - [ ] [MUS-013 · Fondamentale, basse et ensemble de classes de hauteurs](../music/mus-013-root-bass-pitch-class-set/) <!-- mus-013-root-bass-pitch-class-set -->
 - [ ] [MUS-018 · Identification de la tonalité, chiffres romains et cadences](../music/mus-018-key-finding-roman-numerals-cadences/) <!-- mus-018-key-finding-roman-numerals-cadences -->
@@ -229,6 +230,14 @@ Rien n'y a été exécuté ici.
 ## 2026-10-03 — MUS-013 · Fondamentale, basse et ensemble de classes de hauteurs
 
 Synchronisé depuis Demerzel à [`928fbb2`](https://github.com/GuitarAlchemist/Demerzel/commit/928fbb26539e451fd34a0e8baf0714cf919a1562) ([PR #1181](https://github.com/GuitarAlchemist/Demerzel/pull/1181)). Un nouveau module de musique de niveau intermédiaire sur ce que fixe un nom d'accord : la fondamentale, la basse et l'ensemble de classes de hauteurs, les ensembles qui ont plusieurs lectures (accords de sixte et de septième, sus2 et sus4, triade augmentée et septième diminuée), et la façon dont la basse, l'harmonie et la résolution choisissent entre elles. Il retrace comment GA nomme un ensemble sans regarder sa basse, et sa section 6 propose une expérience. L'index de la musique le liste désormais, celui de Streeling compte 13 modules de musique au lieu de 12, et MUS-018 et MUS-020 descendent d'un rang dans la barre latérale ; toutes les autres pages ne changent que par leurs références épinglées à Demerzel, de `450fc67` à `928fbb2`.
+
+Rien n'y a été exécuté ici.
+
+- **Il n'a pas été étudié ici,** donc sa case ci-dessus reste vide.
+
+## 2026-10-03 — MUS-010 · Formules de gammes, ensembles et vecteur d'intervalles diatonique
+
+Synchronisé depuis Demerzel à [`d8c8da5`](https://github.com/GuitarAlchemist/Demerzel/commit/d8c8da550af12f339dbf9464cc1144084eb689b9) ([PR #1183](https://github.com/GuitarAlchemist/Demerzel/pull/1183)). Un nouveau module de musique de niveau intermédiaire sur ce que la gamme majeure a de rare : une gamme comme formule d'intervalles et comme ensemble de classes de hauteurs, les vecteurs d'intervalles des gammes majeure, mineure harmonique, pentatonique et par tons, le théorème des notes communes, et quatre propriétés de la gamme majeure : profonde, propriété de Myhill, maximalement régulière et engendrée par quintes. Il retrace comment GA calcule ces propriétés, et sa section 7 propose une expérience. L'index de la musique le liste désormais, celui de Streeling compte 14 modules de musique au lieu de 13, et MUS-012, MUS-013, MUS-018 et MUS-020 descendent d'un rang dans la barre latérale ; toutes les autres pages ne changent que par leurs références épinglées à Demerzel, de `928fbb2` à `d8c8da5`.
 
 Rien n'y a été exécuté ici.
 

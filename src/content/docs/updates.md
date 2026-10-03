@@ -205,6 +205,20 @@ MUS-012 therefore moves from awaiting verification to verified; its entry above 
 
 MUS-013 stays **awaiting verification** until this change is merged, its deployment succeeds and the pages are read back anonymously.
 
+## 2026-10-03 — Streeling MUS-013 published
+
+[Learn PR #128](https://github.com/spareilleux/learn/pull/128) was merged as `0c918c8`, and its [Pages deployment](https://github.com/spareilleux/learn/actions/runs/37144727921) succeeded. The pages were then read back anonymously in the three languages: twelve pages, each answering 200. The [MUS-013 module](../streeling/music/mus-013-root-bass-pitch-class-set/) pages name MUS-013 and link their source at `928fbb2`; the [music index](../streeling/music/) lists it, and the [Streeling journal](../streeling/journal/) and this journal carry their 2026-10-03 entries.
+
+MUS-013 therefore moves from awaiting verification to verified; its entry above is left as written. This update repins its source links to `d8c8da5`. Published is not studied: MUS-013 has not been run or studied here, and its experiment remains proposed.
+
+## 2026-10-03 — Streeling MUS-010 synced, awaiting verification
+
+[Demerzel PR #1183](https://github.com/GuitarAlchemist/Demerzel/pull/1183) was merged as `d8c8da5`, after the `928fbb2` pin. This update syncs it into Learn:
+- the new [MUS-010 module](../streeling/music/mus-010-scales-pattern-set-interval-vector/), Scale Patterns, Sets and the Diatonic Interval Vector, in the three languages;
+- its line in the [music index](../streeling/music/) and in the [Streeling journal](../streeling/journal/), with a dated entry there.
+
+MUS-010 stays **awaiting verification** until this change is merged, its deployment succeeds and the pages are read back anonymously.
+
 ## To verify
 
 - Check this update's public URLs and catalog after deployment; keep the deploy receipt with the integration record.

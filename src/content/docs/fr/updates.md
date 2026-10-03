@@ -205,6 +205,20 @@ La [PR Demerzel #1181](https://github.com/GuitarAlchemist/Demerzel/pull/1181) a 
 
 MUS-013 reste **en attente de vérification** jusqu'à ce que ce changement soit fusionné, que son déploiement réussisse et que les pages soient relues sans authentification.
 
+## 2026-10-03 — Streeling MUS-013 publié
+
+La [PR Learn #128](https://github.com/spareilleux/learn/pull/128) a été fusionnée en `0c918c8`, et son [déploiement Pages](https://github.com/spareilleux/learn/actions/runs/37144727921) a réussi. Les pages ont ensuite été relues sans authentification dans les trois langues : douze pages, qui répondent toutes 200. Les pages du [module MUS-013](../streeling/music/mus-013-root-bass-pitch-class-set/) nomment MUS-013 et renvoient à leur source à `928fbb2` ; l'[index de la musique](../streeling/music/) le liste, et le [journal Streeling](../streeling/journal/) et ce journal portent leurs entrées du 2026-10-03.
+
+MUS-013 passe donc d'en attente de vérification à vérifié ; son entrée ci-dessus reste telle qu'écrite. Cette mise à jour réépingle ses liens source à `d8c8da5`. Publié ne veut pas dire étudié : MUS-013 n'a été ni exécuté ni étudié ici, et son expérience reste proposée.
+
+## 2026-10-03 — Streeling MUS-010 synchronisé, en attente de vérification
+
+La [PR Demerzel #1183](https://github.com/GuitarAlchemist/Demerzel/pull/1183) a été fusionnée en `d8c8da5`, après l'épingle de `928fbb2`. Cette mise à jour la synchronise dans Learn :
+- le nouveau [module MUS-010](../streeling/music/mus-010-scales-pattern-set-interval-vector/), Formules de gammes, ensembles et vecteur d'intervalles diatonique, dans les trois langues ;
+- sa ligne dans l'[index de la musique](../streeling/music/) et dans le [journal Streeling](../streeling/journal/), avec une entrée datée dans ce dernier.
+
+MUS-010 reste **en attente de vérification** jusqu'à ce que ce changement soit fusionné, que son déploiement réussisse et que les pages soient relues sans authentification.
+
 ## À vérifier
 
 - Contrôler les URL publiques de cette mise à jour et le catalogue après déploiement ; conserver le reçu de déploiement avec le compte rendu d'intégration.

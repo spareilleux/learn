@@ -3,13 +3,13 @@ title: Fondamentale, basse et ensemble de classes de hauteurs — Un ensemble, p
 description: Fondamentale, basse et ensemble de classes de hauteurs — Musique
 sidebar:
   label: MUS-013 · Fondamentale, basse et ensemble de classes de hauteurs
-  order: 11
+  order: 12
 ---
 
 :::note[Streeling University]
 **MUS-013** · Fondamentale, basse et ensemble de classes de hauteurs · intermédiaire · 45 minutes
 
-Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/928fbb26539e451fd34a0e8baf0714cf919a1562/state/streeling/courses/music/fr/mus-013-root-bass-pitch-class-set.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/d8c8da550af12f339dbf9464cc1144084eb689b9/state/streeling/courses/music/fr/mus-013-root-bass-pitch-class-set.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MUS-012](../../music/mus-012-chord-formulas-essential-tones-doubling/), [MUS-020](../../music/mus-020-set-classes-interval-vectors-prime-forms/)
 :::
