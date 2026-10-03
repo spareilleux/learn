@@ -145,6 +145,7 @@ sidebar:
 - `check.sh` ejecuta `tools/fretboard.cs -- --check`, que falla si el SVG del repositorio difiere de lo que dibuja el programa. Antes de fiarme, cambié a mano una nota del archivo: la comprobación imprimió `is not up to date` y terminó con el código 1. Una copia con finales de línea de Windows pasa. En Windows, `check.sh` imprime ahora 121 líneas `ok`.
 - La herramienta encuentra el repositorio a partir de su propia carpeta, `AppContext.GetData("EntryPointFileDirectoryPath")`, y no de la carpeta actual, y escribe cada coordenada como un `int`: con la cultura `fr-FR`, `$"{2.5}"` da `2,5`. Los dos puntos importan para los archivos, el tema de la lección 10.
 - Renderizado con Edge sin ventana en una página clara, una oscura y a 343 píxeles de ancho, el de un teléfono: las 36 notas coinciden línea por línea con la salida del programa. Ese día, Chrome sin ventana y la captura por DevTools superaron su tiempo de espera en esta máquina.
+- Después, en la CI: la [ejecución 37142282699](https://github.com/spareilleux/learn/actions/runs/37142282699) del workflow *C# for beginners examples*, sobre el commit `9229f15` de la [PR #126](https://github.com/spareilleux/learn/pull/126), pasó en `ubuntu-latest`, `windows-latest` y `macos-latest`. Cada job imprime `ok   fretboard svg`; los jobs cuentan 122 líneas `ok` en Linux y macOS y 121 en Windows, por la misma razón que en la lección 6.
 
 ## 2026-10-03 — Archivos y texto
 

@@ -145,6 +145,7 @@ sidebar:
 - `check.sh` runs `tools/fretboard.cs -- --check`, which fails if the committed SVG differs from what the program draws. Before trusting it, I changed one note of the file by hand: the check printed `is not up to date` and exited 1. A copy with Windows line endings passes. On Windows, `check.sh` now prints 121 `ok` lines.
 - The tool finds the repository from its own folder, `AppContext.GetData("EntryPointFileDirectoryPath")`, not from the current directory, and writes every coordinate as an `int`: under the `fr-FR` culture, `$"{2.5}"` gives `2,5`. Both points matter for files, the subject of lesson 10.
 - Rendered with headless Edge in a light page, a dark page and at 343 pixels wide, a phone's width: the 36 notes match the program's output line by line. That day, headless Chrome and the DevTools screenshot both timed out on this machine.
+- Then in CI: [run 37142282699](https://github.com/spareilleux/learn/actions/runs/37142282699) of the *C# for beginners examples* workflow, on commit `9229f15` of [PR #126](https://github.com/spareilleux/learn/pull/126), passed on `ubuntu-latest`, `windows-latest` and `macos-latest`. Each job prints `ok   fretboard svg`; the jobs count 122 `ok` lines on Linux and macOS and 121 on Windows, for the same reason as in lesson 6.
 
 ## 2026-10-03 — Files and text
 
