@@ -398,6 +398,10 @@ The voicing has no minor third: its chart calls the G string's third fret E♭ a
 - **The rootless test is the course's,** on the notes each voicing plays.
 - **The program calls the tools' methods directly,** not through an MCP client and GA's server.
 
+## Reported upstream
+
+- Reported after this lesson was written, in GA issue [#795](https://github.com/GuitarAlchemist/ga/issues/795): the mode read and dropped, the 188 tags on 12 bits that don't filter, the words matched by substring, the voicing-search skill's scores and gotchas, and the parked skill draft.
+
 ## Exercises
 
 1. "Lydian on guitar" returns ten voicings, all scored 0. Why doesn't the tool answer that it can't read the query, and why these ten?

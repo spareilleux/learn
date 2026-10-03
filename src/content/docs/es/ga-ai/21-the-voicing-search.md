@@ -398,6 +398,10 @@ El voicing no tiene tercera menor: su diagrama llama E♭ al tercer traste de la
 - **La prueba de rootless es la del curso,** sobre las notas que toca cada voicing.
 - **El programa llama directamente a los métodos de las herramientas,** no a través de un cliente MCP y del servidor de GA.
 
+## Comunicado upstream
+
+- Se comunicaron después de escribir esta lección, en la issue de GA [#795](https://github.com/GuitarAlchemist/ga/issues/795): el modo que se lee y se descarta, los 188 tags en 12 bits que no filtran, las palabras reconocidas por subcadena, los scores y las advertencias de la skill voicing-search, y el borrador de skill en espera.
+
 ## Ejercicios
 
 1. "Lydian on guitar" devuelve diez voicings, todos con una puntuación de 0. ¿Por qué no responde la herramienta que no sabe leer la consulta, y por qué estos diez?
