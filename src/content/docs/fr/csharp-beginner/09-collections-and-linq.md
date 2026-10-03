@@ -66,7 +66,7 @@ no H in this dictionary
 - [`TryGetValue`](https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2.trygetvalue) est une méthode *Try*, comme celles de la leçon 8 : elle renvoie `false` quand la clé manque, et met la valeur dans sa variable `out` quand elle est présente.
 - Chaque élément d'un dictionnaire est une [`KeyValuePair<string, int>`](https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2), avec une `Key` et une `Value` ; `string.Join` l'affiche sous la forme `[key, value]`.
 
-Un dictionnaire contient la table sous forme de données, pas de code : un programme peut le remplir pendant qu'il s'exécute, et la [leçon 10](../#plan) en remplira un à partir d'un fichier.
+Un dictionnaire contient la table sous forme de données, pas de code : un programme peut le remplir pendant qu'il s'exécute, et la [leçon 10](../10-files-and-text/) en remplira un à partir d'un fichier.
 
 Un dictionnaire se lit par clé, pas par position. Demander l'élément 0 d'un dictionnaire dont les clés sont des chaînes est une erreur de type :
 
@@ -468,7 +468,7 @@ Une [sonde](https://github.com/spareilleux/learn/blob/main/code/csharp-beginner/
 - dans `GuitarTechniques.yaml`, [`Applications`](https://github.com/GuitarAlchemist/ga/blob/5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26/Common/GA.Business.Config/GuitarTechniques.yaml#L23) contient des chaînes là où la classe attend des objets ([ligne 20](https://github.com/GuitarAlchemist/ga/blob/5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26/Common/GA.Business.Config/Configuration/GuitarTechniquesConfigLoader.cs#L20)) ;
 - la [ligne 95](https://github.com/GuitarAlchemist/ga/blob/5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26/Common/GA.Business.Config/SpecializedTunings.yaml#L95) de `SpecializedTunings.yaml` n'est pas du YAML valide.
 
-Chaque chargeur [attrape l'exception](https://github.com/GuitarAlchemist/ga/blob/5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26/Common/GA.Business.Config/Configuration/ChordProgressionsConfigLoader.cs#L137), affiche une ligne, et continue avec un seul élément d'exemple. C'est l'inverse de la règle de la leçon 8 : ce `catch` cache un bogue au lieu de traiter un échec ordinaire. Le [tableau QA du journal](../journal/#qa) consigne les mesures ; la [leçon 10](../#plan) lit des fichiers.
+Chaque chargeur [attrape l'exception](https://github.com/GuitarAlchemist/ga/blob/5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26/Common/GA.Business.Config/Configuration/ChordProgressionsConfigLoader.cs#L137), affiche une ligne, et continue avec un seul élément d'exemple. C'est l'inverse de la règle de la leçon 8 : ce `catch` cache un bogue au lieu de traiter un échec ordinaire. Le [tableau QA du journal](../journal/#qa) consigne les mesures ; la [leçon 10](../10-files-and-text/) lit des fichiers.
 
 ## Exercices
 
@@ -643,7 +643,7 @@ Une chaîne de méthodes LINQ peut s'étendre sur plusieurs lignes, chacune comm
 - `Where` et `Select` renvoient un `IEnumerable<T>` qui s'exécute quand on le lit ; `ToList` fait une liste du résultat tel qu'il est maintenant.
 - N'ajoute ni ne retire d'éléments d'une liste dans un `foreach` sur cette liste : utilise `RemoveAll`, ou construis une nouvelle liste.
 
-La suite, [fichiers et texte](../#plan), lira les projets de Guitar Alchemist dans un fichier CSV au lieu de les recopier à la main.
+La suite, [fichiers et texte](../10-files-and-text/), lira les projets de Guitar Alchemist dans un fichier CSV au lieu de les recopier à la main.
 
 ## Sources
 

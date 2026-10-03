@@ -73,6 +73,11 @@ case "$(uname -s)" in
     ;;
 esac
 
+# Lesson 10: a relative path starts from the current directory, so l10_where.cs runs again from the repository root
+(cd ../.. && dotnet run code/csharp-beginner/examples/l10_where.cs) > out/l10_where_root.txt 2>&1
+echo "exit $?" >> out/l10_where_root.txt
+compare l10_where_root
+
 # Lesson 3: tools/fretboard.cs draws the fretboard diagram; the committed SVG must be up to date
 if dotnet run tools/fretboard.cs -- --check > out/fretboard.txt 2>&1; then
   echo "ok   fretboard svg"
