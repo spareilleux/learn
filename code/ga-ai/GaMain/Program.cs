@@ -41,10 +41,25 @@ public static class Entry
             case ["l22"]:
                 Lesson22();
                 return 0;
+            case ["l23"]:
+                Lesson23();
+                return 0;
             default:
-                Console.Error.WriteLine("usage: GaMain l16|l17|l19|l20|l21|l22");
+                Console.Error.WriteLine("usage: GaMain l16|l17|l19|l20|l21|l22|l23");
                 return 2;
         }
+    }
+
+    // Lesson 23: on main, GrothendieckDeltaSkill and IcvShortestPathSkill only mark their refusal
+    // Declined, but the pitch-class sets the path searches changed; the same questions, with main's code
+    static void Lesson23()
+    {
+        Console.WriteLine("# l23, GA's main");
+        var (delta, path) = IcvDeltaPathProbe.Skills();
+        IcvDeltaPathProbe.ExamplesTable(delta, path, "on main");
+        IcvDeltaPathProbe.ReadingTable(delta, path, "on main");
+        IcvDeltaPathProbe.DeltaTable(delta, "on main");
+        IcvDeltaPathProbe.PathTable(path, "on main");
     }
 
     // Lesson 22: on main, IcvNeighborsSkill only marks its refusal Declined, but the pitch-class

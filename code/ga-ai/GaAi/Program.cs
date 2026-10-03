@@ -29,6 +29,7 @@ public static class Entry
             ["l20"] = Lesson20.Run,
             ["l21"] = Lesson21.Run,
             ["l22"] = Lesson22.Run,
+            ["l23"] = Lesson23.Run,
         };
 
         if (args.Length != 1 || !lessons.TryGetValue(args[0], out var run))
