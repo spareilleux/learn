@@ -38,10 +38,25 @@ public static class Entry
             case ["l21"]:
                 Lesson21();
                 return 0;
+            case ["l22"]:
+                Lesson22();
+                return 0;
             default:
-                Console.Error.WriteLine("usage: GaMain l16|l17|l19|l20|l21");
+                Console.Error.WriteLine("usage: GaMain l16|l17|l19|l20|l21|l22");
                 return 2;
         }
+    }
+
+    // Lesson 22: on main, IcvNeighborsSkill only marks its refusal Declined, but the pitch-class
+    // sets it searches changed; the same questions, with main's code
+    static void Lesson22()
+    {
+        Console.WriteLine("# l22, GA's main");
+        var skill = IcvNeighborsProbe.Skill();
+        IcvNeighborsProbe.ExamplesTable(skill, "on main");
+        IcvNeighborsProbe.SisterTable("on main");
+        IcvNeighborsProbe.ReadingTable(skill, "on main");
+        IcvNeighborsProbe.RowsTable(skill, "on main");
     }
 
     // Lesson 21: ga_search_voicings, its vocabulary and the readers they call are the same on main,
