@@ -108,6 +108,7 @@ public static class Diagrams
 
     static readonly string[] Standard = ["E2", "A2", "D3", "G3", "B3", "E4"]; // string 6 to string 1
 
+    // shape: one character per string from string 6, or dashes between strings when a fret is above 9 ("8-10-10-9-8-8");
     // notes: the names of the sounding notes, low to high, for a chord the sharp names would misspell
     static string ChordGrid(double left, string shape, string caption, string? notes = null)
     {
@@ -115,7 +116,9 @@ public static class Diagrams
         var svg = new StringBuilder();
         var names = notes?.Split(' ');
         var sounding = 0;
-        var fretted = shape.Where(char.IsDigit).Select(ch => ch - '0').Where(f => f > 0).ToArray();
+        var parsed = (shape.Contains('-') ? shape.Split('-') : [.. shape.Select(ch => ch.ToString())])
+            .Select(f => f == "x" ? (int?)null : int.Parse(f, CultureInfo.InvariantCulture)).ToArray();
+        var fretted = parsed.Where(f => f > 0).Select(f => f!.Value).ToArray();
         var lowest = fretted.Length == 0 ? 1 : fretted.Min();
         var first = fretted.Length == 0 || fretted.Max() <= frets ? 1 : lowest; // first fret shown
         double X(int stringIndex) => left + stringIndex * stringGap;
@@ -136,9 +139,9 @@ public static class Diagrams
         }
 
         // a barre: the lowest fret held on every string from the first to the last string that uses it
-        var barreStrings = Enumerable.Range(0, 6).Where(s => shape[s] - '0' == lowest).ToArray();
+        var barreStrings = Enumerable.Range(0, 6).Where(s => parsed[s] == lowest).ToArray();
         var barre = barreStrings.Length >= 3
-            && Enumerable.Range(barreStrings.First(), barreStrings.Last() - barreStrings.First() + 1).All(s => char.IsDigit(shape[s]) && shape[s] - '0' >= lowest);
+            && Enumerable.Range(barreStrings.First(), barreStrings.Last() - barreStrings.First() + 1).All(s => parsed[s] is { } fret && fret >= lowest);
         if (barre)
         {
             var y = Y(lowest - first) + fretGap / 2;
@@ -147,20 +150,20 @@ public static class Diagrams
 
         for (var s = 0; s < 6; s++)
         {
-            var ch = shape[s];
-            if (ch == 'x' || ch == '0')
+            var fret = parsed[s];
+            if (fret is null or 0)
             {
-                var mark = ch == 'x' ? "×" : "○";
+                var mark = fret is null ? "×" : "○";
                 svg.Append($"  <text x=\"{F(X(s))}\" y=\"{F(top - 14)}\" font-size=\"15\" text-anchor=\"middle\" dominant-baseline=\"central\" fill=\"{Ink}\">{mark}</text>\n");
             }
-            else if (!(barre && ch - '0' == lowest))
+            else if (!(barre && fret == lowest))
             {
-                var y = Y(ch - '0' - first) + fretGap / 2;
+                var y = Y(fret.Value - first) + fretGap / 2;
                 svg.Append($"  <circle cx=\"{F(X(s))}\" cy=\"{F(y)}\" r=\"8.5\" style=\"fill:{Palette[0]}\"/>\n");
             }
-            if (ch != 'x')
+            if (fret is not null)
             {
-                var midi = Theory.MidiOf(Standard[s]) + ch - '0';
+                var midi = Theory.MidiOf(Standard[s]) + fret.Value;
                 var name = names?[sounding++] ?? Theory.PitchName(midi).Replace("#", "♯");
                 svg.Append($"  <text x=\"{F(X(s))}\" y=\"{F(Y((int)frets) + 16)}\" font-size=\"11\" text-anchor=\"middle\" dominant-baseline=\"central\" fill=\"{Ink}\">{name}</text>\n");
             }
@@ -333,6 +336,8 @@ public static class Diagrams
                 ("x3233x", "C9", "C3 E3 B♭3 D4"), ("x32335", "C13", "C3 E3 B♭3 D4 A4"), ("x3234x", "C7♯9", "C3 E3 B♭3 D♯4")),
             // lesson 14: Cmaj7 close (MUS-005's "Drop-2"), drop 2 and drop 3, and a G7 shell
             ["l14-drop-voicings.svg"] = ChordGrids(("x3200x", "x3200x"), ("x3545x", "x3545x"), ("8x998x", "8x998x"), ("3x34xx", "3x34xx")),
+            // lesson 15: C major in the five CAGED shapes, in their order up the neck
+            ["l15-caged-c.svg"] = ChordGrids(("x32010", "C shape"), ("x35553", "A shape"), ("875558", "G shape"), ("8-10-10-9-8-8", "E shape"), ("x-x-10-12-13-12", "D shape")),
         };
     }
 
