@@ -872,6 +872,64 @@ level 5. From the hall's start view his figure stands 153 px tall at 13.8 m.
 The same probe passed under Forward+ in the DLSS build (observatory-dlss). The
 ring probe, close to the statue under Compatibility, shows the gold ring over
 the white marble and the sphere green.
+Version 28, exported 2026-10-03 01:52:59 UTC, brings the particle frieze,
+after the author asked for frescoes of nanoparticles like those of the
+Foundation TV series: over each of the 16 bays, on the entablature between the
+arches' crowns and its upper bead, a mosaic panel 3.54 m by 0.88 m gathers out
+of drifting gold dust when looked at for 0.9 s, clicked or tapped, one
+particle flying to each of its 4,096 tesserae, and goes back to dust 30 s
+after the last look. The sixteen panels are original, galactic and bookish
+motifs in the manner of a Byzantine gold mosaic drawn by Z-Image-Turbo on the
+author's machine, with no figure, lettering or image from the series, packed
+into one 1024x1024 atlas compressed for the GPU (scripts/fresco_frieze.gd,
+assets/fresco_panel.gdshader, assets/fresco_dust.gdshader,
+assets/fresco_atlas.png; its tap in scripts/touch_controls.gd). From
+quality.gd's level 3 the idle dust goes and one tessera in two, then in four,
+has a particle. Also: the IX hologram now sounds, a glide as it opens and
+closes and a note at each step, synthesised by scripts/hologram_ix.gd; and
+quality.gd steps back up once when it stepped down at its first measurement or
+within 12 s of it and frames then come fast, so a first visit's shader
+compiles no longer cost a fast GPU its anti-aliasing, as version 27 noted.
+index.pck is now 22,617,948 bytes; index.html changes only that size, and
+index.wasm and index.js are unchanged.
+Web: the export served locally (artpass/publish/gzip_server.py, the build's
+own course list, gzip-encoded), in headless Chrome at 1600x900
+(artpass/publish/frieze-web.mjs): the scene's start, H to open and close the
+IX hologram, R for Seldon's recording, then a click on frieze panel 13 from
+the hall's start view. The first build of version 28 still left the RTX 5080
+(ANGLE on Direct3D 11) at level 1 on a first visit: quality.gd counted its
+retry window from the scene's start, and on that visit the first measurement
+ended after the window; the window now runs from the first measurement
+(artpass/perf/NOTES.md), and the build was remade. With it, a first visit with
+an empty cache started in 23.1 s at level 1 and came back to level 0, with its
+supersampling, 10 to 13 s later; a second visit started in 3.8 s at level 0;
+both ran at 60 frames a second on a 2400x1350 canvas, with the hologram, the
+recording and a mosaic coming. With SwiftShader, Chrome's CPU renderer,
+standing in for the weakest GPU, it reached level 5 and frames took 433 ms on
+an 800x450 canvas, as in version 27, and 483 ms while the mosaic came. A first
+SwiftShader run measured 483 ms at rest; a copy of the build without the
+frieze and a second run both gave 433 ms, and natively the frieze adds no draw
+call at that level. In every run the clicked panel's dust gathered and its
+mosaic came, and the page logged no error and no exception. Real weak GPUs,
+phones, other browsers and the sounds by ear: to verify.
+Native runs (Godot 4.6.1) on the exported project, 48 of them
+(artpass/publish/regress-pub19.sh): version 27's 42, then the sound probe,
+quality.gd's cold start and a cold start whose first measurement ends after a
+14 s stall (as on the web), and the frieze probe under Compatibility, under
+Forward+ and at quality level 5. All 48 passed at once and none logged a
+script error. The frieze probe holds a look on a panel from the floor: its
+dust gathered and the panel was summoned after 0.92 s and was whole 3.6 s
+later; with the look gone, it held 30.0 s and went back to dust in 3.0 s, its
+extra particles fading over 4 s; a tap on another panel summoned it, a tap
+below the frieze did not, and a mouse click summoned a third. With all 16
+panels idle it draws 21,632 particles, 24,376 while one comes, and none at
+level 5, where a coming panel draws 1,024. The sound probe counts 18 hologram
+players (one opening, 16 steps, one closing) and measures every synthesised
+sound without clipping, the frieze's at -13.4 dBFS peak. Both cold starts came
+back to level 0 with MSAA restored, at 16.8 s and at 15.4 s after the stall;
+the 12 and 3 frames-a-second ladders still end at level 5, at 14.6 s and 6.3
+s. The frieze probe also passed under Forward+ in the DLSS build
+(observatory-dlss).
 
 Native Compatibility GPU time, RTX 5080, 1600x900, 240 frames per view: 0.44 to
 0.52 ms for the previous web scene, 0.64 to 1.44 ms with the detail pass; up to
@@ -887,11 +945,11 @@ main.tscn fb6245c960d3625ca05920116c58351d9dbeb255beae59175d89c06d47049564
 export_presets.cfg e67d9e3fc0e8b0d9cab2672e3f730f209e81619d356b52a7079f7d19f7342dc0
 scripts/fly_camera.gd 2e5cdd15ca7bdcfa30ec129e354a309f3ff7296f6fbf54ac144984ed9aa9f8e7
 scripts/capture.gd 52ea2b5e40db2f1f4cdbd7658074ef60bd117e1f4110c1b8995590a4196748d0
-scripts/observatory.gd 791207867a698cc0bfc67a243998dae4a9ac53978405356dcede3cf06ea9e732
+scripts/observatory.gd cdbab5d96d8679c893602ca4e67064a899982642f58e4c655975e0f2e97acbec
 scripts/course_library.gd b2bf3fe3723d8a6f2a2392199fbf276d8bab752259eab6f4f6398503c5e88b42
 scripts/steel_cube.gd f28e71fffcd151663bc9a98b3c135cc7b805490e8298d3cf01029455c973f94c
 scripts/seldon_statue.gd c8785f079f648ea50694055fe87d26bb56e0ee2ab129251399d88bd13d0030b4
-scripts/touch_controls.gd 2c2f1c8e9ae876cfd14d36c91797f35d8819c64596c0010134f0315635972063
+scripts/touch_controls.gd aa49b4ad0405a9e8368e3d29a7896d6fbe6422acca6f42f020fd2acd81645448
 scripts/walk_physics.gd 156fc6e18103d2b8cc211697c5e1b8c519bc41707f95c44b52afcdc87e850ea2
 scripts/view_fit.gd f574c7949a5b324f91f062df9982366c123271804069b507206f88ad7062fe4c
 scripts/view_move.gd 558a4059815cb3a8a202d205d8cfada17653fb533e7e056bfe9e8a434dac0431
@@ -930,8 +988,8 @@ scripts/lift_sounds.gd 4daed5e380396a3711fc7ff2f1f72b877b9efbdaff6d6fa428c595b1d
 scripts/curio_wheel.gd ff3de55b72cd54d3b5fa85bed26fa0b7fadcf30629787467a4ded7ed110ab22b
 scripts/drone.gd e3735898c9710ca19190d7d2713230c1f40595bb0fea7181909a78f395c0e7b9
 scripts/tars.gd 747a7c313a37c0731b4a9c8b5f78d364cbc6a6181b25623cd919a0a5b19a09d0
-scripts/hologram_ix.gd 436dbdf897703f448abdbcd583aaff88086f6385923e30d71ff7f7449afeff90
-scripts/quality.gd 5e5c8099eb468fd39b646fc58338fb86a03ff19ad6caa64f5d01c7c052f9c128
+scripts/hologram_ix.gd 1bca3bc035b0404ef04f54147cee538768597f9e58c17c4f6c06631ca779363c
+scripts/quality.gd bdad805e7717769145b5aa2ad98aca56b0b76857fdcd86e87817f1bc53046c69
 assets/holo_panel.gdshader 1a77f62f3bd53c29c95341058baa0d19613737ab2a98f24c6fd4edc150637c08
 assets/holo_edge.gdshader 029b74b7147bdc55e8b1042c3274b3018892217653e47458ca58f0115229f8e7
 assets/holo_ring.gdshader 23cd4ef37915ab49690739865460b7b0e343865b3754d5daf2d5d09234327c5d
@@ -939,14 +997,18 @@ assets/ix_pipelines.json 180cb180625664b027f3c7e01d855533c757e4e5525c506bd2a6f26
 scripts/seldon_recording.gd f4d2ca57e6da3c4793f90bd8832ec811596ef8baad55fec16829626f3758e4d4
 assets/seldon_points.gdshader 744b72e7abd915467abc5d9727eecbadaf4290bb5ecbed2fee6fe98ed80bcd2e
 assets/recording_frame.gdshader a7daedd2a691b70de4754d06fc0974f40335109603c57426a70a7381a5052a0c
-scripts/build_info.gd eabc3501052578eb00ef8424b1c865fb6b02a9e13ebf9c38bec6836e21d07a49
+scripts/fresco_frieze.gd 5dfa9b9df01fb0bf7a9480d9ed4b7970ed77fdb005f13da63f0bc0971cdea777
+assets/fresco_panel.gdshader f72ccf999ae0cb7debdeef378ac57f902378af617914e28f8da7615f755c939d
+assets/fresco_dust.gdshader 9d63b02079689cd0205a9d469c743645d4fac1ccfff21a3d0326f36a3062341c
+assets/fresco_atlas.png cccc2917f794f42517ee001392802ec6828acc747f585018e49349474b1638fc
+scripts/build_info.gd 36161c3e057671f7cac2e1117a365c892335977f8ae79bbfb528ab0be10e579e
 
 SHA-256 output files:
-index.pck 5bcba8ab37a0779453fbd85dca39b914e02c38f4aa8d3c814670d9d187f469c4
+index.pck ed3f098577a879b05776e7c59336ebb42be4e257151564afbf3b474c97857a45
 index.wasm 99962b29677e42f3ba0258bd90fdc52ad90295954c4473e816ad02cfe5ff1d4f
 index.js e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981
 
 This directory contains a prebuilt binary export. Re-export only for deliberate
 scene changes. A scene re-export leaves the engine files (index.wasm, index.js)
 byte-identical, so git keeps a single copy; each scene revision adds its
-index.pck (21.9 MB here) to the binary history.
+index.pck (22.6 MB here) to the binary history.
