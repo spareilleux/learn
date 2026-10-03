@@ -219,7 +219,7 @@ Nothing in it was run here.
 
 ## 2026-10-03 — MUS-012 · Chord Formulas, Essential Tones and Doubling
 
-Synced from Demerzel at [`450fc67`](https://github.com/GuitarAlchemist/Demerzel/commit/450fc670a71d1cfb190a53bfedd52ba81215fa5c) ([PR #1180](https://github.com/GuitarAlchemist/Demerzel/pull/1180)). A new intermediate music module on what a chord can lose: chord formulas up to the thirteenth, the essential tones a chord's name depends on and the optional ones it can drop, the doublings of a guitar voicing, and a thirteenth chord on six strings. It traces what GA stores about formulas, essential tones and doubling, and ends with a proposed experiment. The Streeling and music indexes now list it, and MUS-018 and MUS-020 move down one place in the sidebar; every other page changes only its pinned references to Demerzel, from `d459d8e` to `450fc67`.
+Synced from Demerzel at [`450fc67`](https://github.com/GuitarAlchemist/Demerzel/commit/450fc670a71d1cfb190a53bfedd52ba81215fa5c) ([PR #1180](https://github.com/GuitarAlchemist/Demerzel/pull/1180)). A new intermediate music module on what a chord can lose: chord formulas up to the thirteenth, the essential tones a chord's name depends on and the optional ones it can drop, the doublings of a guitar voicing, and a thirteenth chord on six strings. It traces what GA stores about formulas, essential tones and doubling, and its section 6 proposes an experiment. The music index now lists it, the Streeling index counts 12 music modules instead of 11, and MUS-018 and MUS-020 move down one place in the sidebar; every other page changes only its pinned references to Demerzel, from `d459d8e` to `450fc67`.
 
 Nothing in it was run here.
 
