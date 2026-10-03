@@ -73,4 +73,13 @@ case "$(uname -s)" in
     ;;
 esac
 
+# Lesson 3: tools/fretboard.cs draws the fretboard diagram; the committed SVG must be up to date
+if dotnet run tools/fretboard.cs -- --check > out/fretboard.txt 2>&1; then
+  echo "ok   fretboard svg"
+else
+  cat out/fretboard.txt
+  echo "FAIL fretboard svg: run  dotnet run code/csharp-beginner/tools/fretboard.cs"
+  status=1
+fi
+
 exit $status

@@ -5,6 +5,8 @@ sidebar:
   order: 3
 ---
 
+import Fretboard from '../../../../assets/csharp-beginner/l03-fretboard.svg';
+
 Code : les exemples [`examples/l03_*.cs`](https://github.com/spareilleux/learn/tree/b19a296d6edc70be634ba147e27fd2d0c66f395f/code/csharp-beginner/examples), les extraits refusés [`compile_fail/l03_*.cs`](https://github.com/spareilleux/learn/tree/b19a296d6edc70be634ba147e27fd2d0c66f395f/code/csharp-beginner/compile_fail) et les solutions [`exercises/l03_*.cs`](https://github.com/spareilleux/learn/tree/b19a296d6edc70be634ba147e27fd2d0c66f395f/code/csharp-beginner/exercises).
 
 Jusqu'ici, les programmes exécutaient chaque ligne une fois, de haut en bas. Cette leçon change ça : une **condition** n'exécute certaines lignes que dans certains cas, et une **boucle** exécute des lignes plusieurs fois.
@@ -384,6 +386,10 @@ String 1: E  F  F# G  G# A
 ```
 
 Les guitaristes numérotent les cordes de la plus aiguë, la corde 1, à la plus grave, la corde 6 ; la boucle extérieure compte à rebours pour que la corde 6 s'affiche en premier. Sur la corde de si (B), la case 1 donne `(11 + 1) % 12`, c'est-à-dire `0` : C, un do. L'opérateur `%` fait tourner les nombres comme les heures sur une horloge, et c'est exactement ainsi que les noms de notes reviennent à chaque octave. Le [cours de théorie musicale](../../music-theory-ga/01-notes-and-the-fretboard/) va beaucoup plus loin avec la même idée.
+
+Les mêmes notes sur le manche : chaque ligne est une corde, la corde 6 en haut comme dans la sortie, et chaque colonne est une case. La case 0 est la corde à vide, à gauche du sillet, la barre d'où partent les cordes ; le C mis en évidence est la case 1 de la corde de si.
+
+<Fretboard role="img" aria-label="Manche de guitare en accordage standard, cases 0 à 5, corde 6 en haut, comme le programme l'affiche. Corde 6 : E F F# G G# A. Corde 5 : A A# B C C# D. Corde 4 : D D# E F F# G. Corde 3 : G G# A A# B C. Corde 2 : B C C# D D# E. Corde 1 : E F F# G G# A. Le C de la corde 2, case 1, est mis en évidence." />
 
 ### Lire jusqu'à la bonne réponse
 
