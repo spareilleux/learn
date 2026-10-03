@@ -272,6 +272,10 @@ Am7 isn't of Cmaj7's set class: it is A C E G, C6's notes, 4-26, at distance 4. 
 - **`ga_icv_neighbors` isn't run here;** the music theory course runs it.
 - **The program calls the skills' methods directly,** not through the chatbot.
 
+## Reported upstream
+
+- Reported after this lesson was written, in GA issue [#798](https://github.com/GuitarAlchemist/ga/issues/798): the example prompts the patterns don't read, the chords the table builds wrong, the neighbors listed by bitmask, and the parked skill draft.
+
 ## Exercises
 
 1. "which chords are most similar to Dm7" is one of the skill's example prompts. Why does the skill decline it?

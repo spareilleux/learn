@@ -272,6 +272,10 @@ Am7 no pertenece a la clase de conjuntos de Cmaj7: es A C E G, las notas de C6, 
 - **`ga_icv_neighbors` no se ejecuta aquí;** lo ejecuta el curso de teoría musical.
 - **El programa llama directamente a los métodos de las skills,** no a través del chatbot.
 
+## Comunicado upstream
+
+- Se comunicaron después de escribir esta lección, en la issue de GA [#798](https://github.com/GuitarAlchemist/ga/issues/798): los prompts de ejemplo que las expresiones no leen, los acordes que la tabla construye mal, los vecinos listados por máscara de bits, y el borrador de skill en espera.
+
 ## Ejercicios
 
 1. "which chords are most similar to Dm7" es uno de los prompts de ejemplo de la skill. ¿Por qué lo rechaza la skill?
