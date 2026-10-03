@@ -23,7 +23,7 @@ public static class IcvNeighborsProbe
         return new(new GrothendieckService(), NullLogger<IcvNeighborsSkill>.Instance);
     }
 
-    static readonly string[] Names = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+    internal static readonly string[] Names = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
     // ---- Reading the skill's answer ----
 
@@ -65,16 +65,16 @@ public static class IcvNeighborsProbe
     // The set the skill builds for a chord token (IcvNeighborsSkill.TryBuildPcSet, private)
     static PitchClassSet? Built(string token) => (PitchClassSet?)BuildPcSet.Invoke(null, [token]);
 
-    static string Notes(IEnumerable<int> pcs) => string.Join(" ", pcs.Select(p => Names[p]));
+    internal static string Notes(IEnumerable<int> pcs) => string.Join(" ", pcs.Select(p => Names[p]));
 
-    static PitchClassSet Set(IEnumerable<int> pcs) => new(pcs.Select(p => PitchClass.FromValue(p % 12)));
+    internal static PitchClassSet Set(IEnumerable<int> pcs) => new(pcs.Select(p => PitchClass.FromValue(p % 12)));
 
-    static string Forte(PitchClassSet set) =>
+    internal static string Forte(PitchClassSet set) =>
         set.PrimeForm is { } prime && ForteCatalog.TryGetForteNumber(prime, out var forte) ? forte.ToString() : "?";
 
     static string Sizes(IEnumerable<int> sizes) => string.Join(", ", sizes.Distinct().Order());
 
-    static int L1(IntervalClassVector a, IntervalClassVector b) =>
+    internal static int L1(IntervalClassVector a, IntervalClassVector b) =>
         Enumerable.Range(1, 6).Sum(ic => Math.Abs(a[IntervalClass.FromValue(ic)] - b[IntervalClass.FromValue(ic)]));
 
     // ---- The example prompts ----
@@ -134,7 +134,7 @@ public static class IcvNeighborsProbe
     // ---- The chords it reads ----
 
     // Each chord, after "ICV neighbors of", with the notes a textbook gives it, root C unless named
-    static readonly (string Token, int[] Pcs)[] Chords =
+    internal static readonly (string Token, int[] Pcs)[] Chords =
     [
         ("C", [0, 4, 7]), ("Cm", [0, 3, 7]), ("Cmaj7", [0, 4, 7, 11]), ("CM7", [0, 4, 7, 11]),
         ("Cmin7", [0, 3, 7, 10]), ("Cdom7", [0, 4, 7, 10]), ("Cm7b5", [0, 3, 6, 10]), ("Cø7", [0, 3, 6, 10]),
@@ -166,7 +166,7 @@ public static class IcvNeighborsProbe
 
     // ---- The neighbors it lists ----
 
-    static readonly string[] Qualities =
+    internal static readonly string[] Qualities =
         ["", "m", "dim", "aug", "7", "m7", "maj7", "m7b5", "dim7", "sus2", "sus4", "6", "m6", "9", "maj9", "m9"];
 
     public static void RowsTable(IOrchestratorSkill skill, string where)
