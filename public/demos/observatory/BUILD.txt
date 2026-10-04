@@ -1190,6 +1190,69 @@ Depth of field was on under Forward+ only. --check-only and --selftest passed
 on scripts/cinematic.gd in the prototype and in the DLSS copy
 (observatory-dlss).
 
+Version 34, exported 2026-10-04 03:26:34 UTC, adds the whistle, the curio
+wheel's ninth curio, after the author's "ok integre ca a la scene godot" and
+"second numero". Blown at the floor, it calls seven small TARS where it
+points, 3 to 6 m ahead and 1.5 to 2 times the wand's TARS, under a cabaret
+spot; they dance for seventeen seconds, hold the finale a second more and go
+in puffs of their colours. The first time they dance the previs's number (the
+lead's moonwalk entrance, unison, a canon, call and response, an arrowhead
+opening into a V), the next an original jig in 6/8 in one straight line (the
+point, sevens, threes, trebles, leaps in canon, cut hops, a click), made of
+generic step-dance vocabulary and of no show's routine, and so on by turns.
+Both were choreographed and simulated in Blender (tars_ensemble.py, the second
+with --routine=jig), checked there for collisions, feet sliding and feet in
+the air (minimum clearance 60.2 and 85.3 mm; 279 and 413 landings, none
+unplanned or missed), and baked at 24 frames a second into
+assets/tars_ensemble_tracks.tres and assets/tars_ensemble_jig_tracks.tres
+(143,739 and 155,179 bytes), which scripts/tars_ensemble.gd plays back; each
+landing knocks with the wand's TARS's footfall, and there is no music. Before
+they appear, every ground the dance covers is checked: the same floor, inside
+the shelves, outside a gallery's rail, clear of the lift's shaft and of the
+steel box, and not on the visitor; where it fits nowhere, a grey puff. The
+ankh sends them off. scripts/curio_wheel.gd is version 33's with the whistle
+(artpass/tarsdance/patch_curio_wheel.py and patch_curio_wheel_jig.py); every
+other script is version 33's, scripts/observatory.gd and scripts/quality.gd
+version 28's.
+index.pck is now 24,167,400 bytes, 214,524 more than version 33's; index.html
+changes only that size, and index.wasm and index.js are unchanged.
+In headless Chrome 154 on this machine (RTX 5080), the build served gzipped
+from localhost (artpass/tarsdance/troupe-web.mjs,
+artpass/tarsdance/web-v34/troupe/), on an emulated phone with touch: upright
+(390x844), a tap on the wheel's button and one on the whistle's slot, then a
+tap at the floor, called the first number, which ended on its own 18.0 s later
+with its 279 landings, and a second tap called the jig, which ended 18.0 s
+later with its 413; sideways (844x390), the first number likewise. Frames had
+a median and a 95th percentile of 16.7 and 16.8 ms throughout; the longest was
+300 ms in the upright phone's first dance, 67 ms in the others. There was no
+exception and no console error. The wheel's (artpass/publish/curio-web.mjs,
+curio-web-v34/), the drone's on a computer and on a phone (drone-web.mjs,
+drone-web-v34-desktop/ and drone-web-v34-phone/) and the sound's
+(artpass/audio/audio-web.mjs, web-v34/) tests, which now count nine curios,
+passed as they did on versions 24 and 32; the drone's on a computer met
+headless Chrome's three pointer-lock WrongDocumentErrors, as before. From the
+start view the tap at 70% of the screen's height stood the troupe in front of
+the steel box at the screen's foot, partly behind the joystick and the
+buttons; where a visitor will aim on a real phone, and whether the troupe
+should then stand further up the screen, are to verify, as is the 300 ms
+frame.
+Native: version 33's whole list and the troupe's probe three times
+(artpass/publish/regress-pub26.sh) against this build's own project, 63 runs.
+All passed but motion_bay14, panel 14's known miss at frame 4 (2.99 against 3,
+the same numbers as versions 31 to 33). troupetest.gd (artpass/tarsdance/),
+under Compatibility and under Forward+ at 1600x900 and unpinned at 10 frames a
+second: the wheel's nine curios, both baked dances scrubbed frame by frame at
+two sizes with no foot sliding, none under the floor and every landing on it
+(279 and 413), then, in the hall, the first number called first, the lead's
+moonwalk to the right, seven robots of 89 to 107 pixels turned three quarters
+left, the ankh sending them off, one troupe at a time, a refusal where there
+is no room which keeps the next number, then the jig: one line across the
+screen, the sevens going right and back, the spot narrowing from 23.3 to 7.0
+degrees on the lead for the call, 413 landings, the end 18.0 s after the call
+(18.1 at 10 frames a second) and the troupe gone. --check-only and --selftest
+passed on scripts/curio_wheel.gd and scripts/tars_ensemble.gd in the prototype
+and in the DLSS copy (observatory-dlss).
+
 Native Compatibility GPU time, RTX 5080, 1600x900, 240 frames per view: 0.44 to
 0.52 ms for the previous web scene, 0.64 to 1.44 ms with the detail pass; up to
 1.55 million primitives in the overview, against 0.46 million before. With the
@@ -1244,7 +1307,7 @@ scripts/lift.gd 090d7ea214ff6ff6db3da905d65c9a1b6f413e0f8f223f0d02bff1bca91e7025
 assets/sky_core_cap.png a110fdfa1b79cc41eec119265aeb89bc211d0b8e0eb6c759b45c25496f2daabe
 assets/kiosk_glass.gdshader 76226f17e5884a042b85e5fc544a4b71012ea6e389b9743c1cac65083a06bc44
 scripts/lift_sounds.gd 4daed5e380396a3711fc7ff2f1f72b877b9efbdaff6d6fa428c595b1dad7b244
-scripts/curio_wheel.gd 6e60f26682b1205b00a715ef9d3e135f7db8947e3ce5806fdb9c6958e3ff7563
+scripts/curio_wheel.gd 2d3fe6257051c5027031bbf42e400a7fb737f9dd013188a2c2d0e6e5d8d2a200
 scripts/drone.gd 40ce7747526e1a88f1a0513571292e10c5beb94616960c41b02ae99b3bf903cb
 scripts/tars.gd 747a7c313a37c0731b4a9c8b5f78d364cbc6a6181b25623cd919a0a5b19a09d0
 scripts/hologram_ix.gd b252ee1de7055822af6886ea796e6a8e35aa81510ec0eb4f36b2bcf20b32e8a6
@@ -1261,7 +1324,7 @@ assets/fresco_panel.gdshader e9c20421cf254119e9d85da22a70bb8a965cee0be524f5c95b2
 assets/fresco_dust.gdshader 9d63b02079689cd0205a9d469c743645d4fac1ccfff21a3d0326f36a3062341c
 assets/fresco_atlas.png cccc2917f794f42517ee001392802ec6828acc747f585018e49349474b1638fc
 assets/fresco_motion.png aa7148be2c28917ddae5d92b7a155c46fe024460c67e919106be23782fdf7822
-scripts/build_info.gd 2f03dd4b4abf28398f249ee6d6da177b3d51cfa3d157f88617a3034d446c6318
+scripts/build_info.gd 3dfa7d90521ee7da6289f55de22d6f3aa17d89c88992c28fff7a58d483cf9aad
 scripts/sfx_takes.gd 069f573898d4c4ad48fde9f1f592dba0974433b1881d7ed045d6797c3c3a0ac6
 assets/sfx/curio_wheel-beep.wav a1d999098afbd222622a6c4625ee16bb9788059c6fe37901067d9cd239f5ec8c
 assets/sfx/curio_wheel-chime.wav 6b580b1e57194c1f84183044c367bcab9d07e3d4c876da3dee5736ba78298c9e
@@ -1282,16 +1345,19 @@ assets/sfx/lift-rattle.wav ca4492ca261db9c13a17b316146296cb0eff9f527c2d6508a441f
 assets/sfx/seldon_recording-shimmer.wav f162e8a4e867503b38271d149a631e2cc1818ae2ab3600897dffa5770e23f8d0
 assets/sfx/drone-hum.wav 9e7adb0d9a8b790a9facf803ef0a0b2588150c71569912fc2db9e339383a9364
 scripts/cinematic.gd a6e03dc5adc4e673001ba48e6387c4311c1c7bd9b78c7bf49539308290eaa091
+scripts/tars_ensemble.gd 6116bdc132c13880b62105f5083b0a8d86aa4224fcc63fe10b3cd06c581e84bb
+assets/tars_ensemble_tracks.tres 6c2be9a6fc350c02f8dd19e6a768ed911d11ebd741d4c5939bb585a84171b272
+assets/tars_ensemble_jig_tracks.tres d7604ba2a5dc3e61fb29441d145d0d98703193c516d429a754e9c0e4949383a0
 
 SHA-256 output files:
-index.pck a90fc372f3ee2bfb0c3ccf98779bc0c5e2f9960416c6748d55f40c3e0c77dfdb
+index.pck 7c97f995f60b3167e044f3a52c22713d137c8ec1248ab3a9f9ec681d295b469d
 index.wasm 99962b29677e42f3ba0258bd90fdc52ad90295954c4473e816ad02cfe5ff1d4f
 index.js e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981
 
 This directory contains a prebuilt binary export. Re-export only for deliberate
 scene changes. A scene re-export leaves the engine files (index.wasm, index.js)
 byte-identical, so git keeps a single copy; each scene revision adds its
-index.pck (24.0 MB here) to the binary history.
+index.pck (24.2 MB here) to the binary history.
 
 2026-10-03 post-merge recording sound correction: v28 preserved the v27
 `scripts/seldon_recording.gd` hash above before this correction. Fresh R or a
