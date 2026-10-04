@@ -190,6 +190,10 @@ C major vs C minor                                         none                 
 - **The answer's "Common associations" paragraph isn't checked.** It says itself that they are "cultural shorthand, not absolutes".
 - **On `main`, the program asks 10 questions, not 27,** to keep its run short.
 
+## Reported upstream
+
+- Reported after this lesson was written, in GA issue [#815](https://github.com/GuitarAlchemist/ga/issues/815): the phrasings the regexes refuse, the lookbehind that refuses "the major vs minor", the questions the skill hands on to a refusal, the sentence that says only the third flips, and the example prompts `main` never sends to the skill without embeddings.
+
 ## Exercises
 
 1. Why is "Explain the major vs minor difference" refused, when "Major vs minor" gets the answer?

@@ -190,6 +190,10 @@ C major vs C minor                                         none                 
 - **El párrafo "Common associations" de la respuesta no se comprueba.** Él mismo dice que son "cultural shorthand, not absolutes".
 - **En `main`, el programa hace 10 preguntas, no 27,** para que su ejecución sea corta.
 
+## Comunicado upstream
+
+- Se comunicaron después de escribir esta lección, en la issue de GA [#815](https://github.com/GuitarAlchemist/ga/issues/815): las formulaciones que rechazan las expresiones regulares, la aserción hacia atrás que rechaza "the major vs minor", las preguntas que la skill confía a un rechazo, la frase según la cual solo cambia la tercera, y los prompts de ejemplo que `main` nunca envía a la skill sin embeddings.
+
 ## Ejercicios
 
 1. ¿Por qué se rechaza "Explain the major vs minor difference", si "Major vs minor" recibe la respuesta?
