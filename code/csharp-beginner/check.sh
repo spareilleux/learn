@@ -78,6 +78,34 @@ esac
 echo "exit $?" >> out/l10_where_root.txt
 compare l10_where_root
 
+# Keeps what a reader needs from `dotnet test`: compiler warnings without their folder, each failed test with its
+# message, and the summary line. Drops what changes from run to run or from OS to OS: restore and build lines,
+# paths, durations, stack traces. The failed tests are sorted by name: xUnit doesn't report them in a fixed order.
+test_summary() {
+  sed -E -e 's#^.*[\/]([A-Za-z0-9_.]+\.cs\([0-9]+,[0-9]+\))#\1#' -e 's# \[[^]]*\.csproj\]$##' \
+         -e 's/ \[(< )?[0-9]+ m?s\]$//' -e 's/, Duration: [0-9]+ m?s//' |
+    grep -vE '^ *(Determining projects|Restored |All projects|[0-9]+ of [0-9]+ projects|[A-Za-z.]+ -> |Test run for |VSTest version|Starting test execution|A total of |at |Stack Trace:|----- Inner Stack Trace|\[xUnit\.net)' |
+    grep -vE '^[[:space:]]*$' |
+    LC_ALL=C awk '
+      /^  Failed / { if (block != "") print "2" block; block = $0; next }
+      /^(Passed!|Failed!) / { if (block != "") print "2" block; block = ""; print "3" $0; next }
+      block != "" { block = block "\037" $0; next }
+      { print "1" $0 }
+      END { if (block != "") print "2" block }' |
+    LC_ALL=C sort |
+    cut -c2- | tr '\037' '\n'
+}
+
+# Lesson 11: the tests of Fretboard.Tests pass; those of Pitfalls.Tests fail on purpose, with the messages the lesson shows.
+# dotnet clean first, as for the files above: an up-to-date build prints no warning.
+for project in Fretboard.Tests Pitfalls.Tests; do
+  dotnet clean "l11-tests/$project" > /dev/null 2>&1
+  dotnet test "l11-tests/$project" > "out/l11_$project.raw.txt" 2>&1
+  code=$?
+  { test_summary < "out/l11_$project.raw.txt"; echo "exit $code"; } > "out/l11_$project.txt"
+  compare "l11_$project"
+done
+
 # Lesson 3: tools/fretboard.cs draws the fretboard diagram; the committed SVG must be up to date
 if dotnet run tools/fretboard.cs -- --check > out/fretboard.txt 2>&1; then
   echo "ok   fretboard svg"

@@ -1,6 +1,6 @@
 # Guitar Alchemist probes
 
-Measurements of [Guitar Alchemist](https://github.com/GuitarAlchemist/ga) at commit `5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26`, for lessons 8, 9 and 10 of *C# for beginners*. The journal's 2026-10-02 and 2026-10-03 entries and its Experiments table record the hypotheses, written before measuring, and the results. `check.sh` doesn't run these files: they need a partial GA worktree in `../.ga`, which git ignores.
+Measurements of [Guitar Alchemist](https://github.com/GuitarAlchemist/ga) at commit `5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26`, for lessons 8 to 11 of *C# for beginners*. The journal's 2026-10-02 and 2026-10-03 entries and its Experiments table record the hypotheses, written before measuring, and the results. `check.sh` doesn't run these files: they need a partial GA worktree in `../.ga`, which git ignores.
 
 ```
 git -C <ga clone> worktree add --no-checkout --detach ../.ga 5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26
@@ -59,3 +59,15 @@ cd ../.ga && dotnet run --no-build ../ga-probes/files.cs | diff --strip-trailing
 ```
 
 With SDK 10.0.112, the build prints IDE0028 in GA's `ScaleMetadataRegistry.cs` and IL3000 on `files.cs` line 62, its own use of `Assembly.Location`, the call that `ScaleVideoUrlById`'s fallback relies on. GA loads 17 iconic chords as built, 1 default chord without the YAML files, and 17 again from `../.ga`, through `<current directory>/Common/GA.Business.Config`. All three runs print the same `FieldAccessException` for `ReloadConfiguration()`, and find no `scale_video_urls.json`, neither as a resource nor as a file.
+
+## Lesson 11: `knowledge-tests`
+
+What GA's own tests of its music knowledge services report while three of their four YAML files don't load, and whether the `[SetUpFixture]` of their test project runs. `knowledge-tests/KnowledgeTests.csproj` compiles four files of GA.Business.Core.Tests unchanged, with the NUnit package versions of that project; `ProbeTests.cs` is its only own file. It needs the extraction of `artists.cs`, plus these four files:
+
+```
+git -C <ga clone> archive 5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26 Tests/Common/GA.Business.Core.Tests/Configuration/MusicalKnowledgeServiceTests.cs Tests/Common/GA.Business.Core.Tests/TestBootstrap/TestEnvironment.cs Tests/Common/GA.Business.Core.Tests/GlobalUsings.cs Tests/Common/GA.Business.Core.Tests/AssemblyInfo.cs | tar -x -C ../.ga
+dotnet build knowledge-tests
+dotnet test knowledge-tests --no-build --logger "console;verbosity=detailed"
+```
+
+`knowledge-results.txt` holds the output of that run, with the course folder shortened to `<code/csharp-beginner>`; the order of the tests and their durations change from run to run. With SDK 10.0.112, the build's only warning is IDE0028 in GA's `ScaleMetadataRegistry.cs`. Of the 9 tests, 6 pass, GA's 5 and the probe's, and 3 are skipped by `[Ignore]`. The probe's test prints `GA_TEST_MODE: (not set)` and `Current directory is the test's bin folder: True`: GA's `TestEnvironment`, alone in its namespace, didn't run.
