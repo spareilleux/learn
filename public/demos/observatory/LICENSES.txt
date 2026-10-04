@@ -45,4 +45,17 @@ Built with DINOv3. TRELLIS.2's image encoder is Meta's DINOv3, licensed under
 the DINOv3 License:
 https://github.com/facebookresearch/dinov3/blob/ffb4bb89c6558ca3244655c25a3955d01788b732/LICENSE.md
 
+The palace gardens' images (the palace, the city's towers, the sprigs of
+leaves, the clipped box and the bark of the trees and hedges, the grain of the
+terrace's stone and paving) were generated locally with the same Z-Image-Turbo
+model. BiRefNet cut out the palace and the sprigs. Lotus-D v1.1 depth,
+licensed Apache-2.0, with Stability AI's sd-vae-ft-mse, licensed MIT, found
+the sky over the city's towers:
+https://huggingface.co/jingheya/lotus-depth-d-v1-1
+https://huggingface.co/stabilityai/sd-vae-ft-mse-original
+The trees, the clipped yews and the hedges' sprays, the self-balancing
+scooter, the balusters, pedestals and lanterns are meshes made in Blender by
+scripts written for this scene; Blender's Cycles rendered the trees' distant
+views.
+
 No model weights are included in this distribution.

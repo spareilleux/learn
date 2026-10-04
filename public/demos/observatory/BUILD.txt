@@ -1367,6 +1367,63 @@ whole on the screen and nothing under a control. --check-only and --selftest
 passed on scripts/curio_wheel.gd and scripts/tars_ensemble.gd in the prototype
 and in the DLSS copy (observatory-dlss).
 
+Version 37, exported 2026-10-04 18:28:57 UTC, opens two bays of the
+ground-level shelves onto the palace gardens of Trantor, puts the gardens
+round the roof in place of Upperside's domes, and adds a ride in them, after
+the author's "2 baies vitrées à travers lesquelles on voit les jardins du
+palais de Trantor", "Remplacer Upperside" and "on doit pouvoir se balader dans
+les jardins en Segway". scripts/palace_gardens.gd cuts the shelves and the
+outer wall where the windows go (observatory.gd stays version 28's) and
+builds, self-lit and casting no shadow, a terrace, a parterre ten metres below
+with a basin and a canal, a hedge maze, an orchard, avenues of lamps, woods,
+the palace and the city's towers as painted cards, and the hall's facade over
+the terrace; it draws them only while a bay is in view or the camera is
+outside, and thins them from quality level 3. Its trees and clipped hedges,
+redone after the author's "Les haies et les arbres sont vraiment pas terrible
+- utilise du blender et du comfyui", are meshes made in Blender within 70 m of
+the eye (45 m at quality level 2, none from level 3) and, further, their views
+rendered there from eight sides (assets/garden_plant.gdshader,
+assets/garden_impostor.gdshader). scripts/segway.gd is a self-balancing
+scooter: G (on a touch screen, Ride) gets on at the head of a ramp down to the
+parterre, the ground and the solids are followed in steps of at most 0.25 m,
+and the ride stops 400 m out. scripts/extra_views.gd is version 36's with
+artpass/bays/patch_extra_views.py; upperside.gd leaves out its deck under the
+gardens; touch_controls.gd adds the Ride button and walk_physics.gd the G
+hint; export_presets.cfg exports assets/hall_env.gdshaderinc again
+(artpass/bays/patch_presets.py), which the bays' glass includes. The images
+are Z-Image-Turbo's (artpass/gardens/NOTES.md, LICENSES.txt); the scooter's,
+the terrace's, the trees' and the hedges' meshes were made by Blender scripts
+(artpass/gardens/blender/). Every other script is version 36's,
+scripts/observatory.gd and scripts/quality.gd version 28's.
+index.pck is now 29,449,936 bytes, 5,272,328 more than version 36's;
+index.html changes only that size, and index.wasm and index.js are unchanged.
+In headless Chrome on this machine, the build served gzipped from localhost
+(artpass/gardens/gardens-web.mjs, artpass/gardens/web-v37*/), on a computer
+(1600 x 900), a phone (390 x 844, touch) and a tablet (1180 x 820, touch): on
+the RTX 5080 (ANGLE Direct3D 11) the start view, bay 2, the roof and a ride
+ran at 16.7 ms a frame, the ride moved 19.2 to 19.7 m and got off, with no
+exception and no console error. The gardens built in 560 to 690 ms in WASM,
+against 340 to 460 ms for this version built without the new vegetation
+(web-v37-preveg/). The adaptive quality's first measurement can step down
+while the first frames compile their shaders; after 30 s it was back at level
+0 in five cases of six (web-v37-settle/), and with the level fixed at 0 the
+ride on a phone ran at 16.7 ms with or without the vegetation (web-v37-q0-*).
+On Chrome's CPU renderer (SwiftShader) standing in for a weak GPU, every case
+settled at level 5, where the trees are their far views alone: through bay 2,
+200 ms a frame on a computer and 183 on a phone, against 183 and 183 without
+the new vegetation; riding, 67 and 100 ms against 67 and 83; the ride moved 21
+m and got off (web-v37-swift-veg/, web-v37-swift-preveg/).
+Native runs, stock Godot 4.6.1 against this build's own project
+(artpass/publish/regress-pub29.sh, 77 runs,
+artpass/publish/regress-pub29-veg/): 75 passed. motion_bay14 missed the same
+point with the same numbers as since version 31; lean_keys_fwd failed once
+(reduced_motion_still_reads) and passed three reruns. The ride passed under
+Compatibility and Forward+, on a phone's touch screen and at 10 frames a
+second (segway_compat, segway_fwd, segway_touch_phone, segway_10fps), and the
+bays under Compatibility (bays_compat: the gardens built in 474 ms, the
+vegetation kit found, 738 trees within reach of their meshes, 1,360 modules of
+sprays along the hedges).
+
 Native Compatibility GPU time, RTX 5080, 1600x900, 240 frames per view: 0.44 to
 0.52 ms for the previous web scene, 0.64 to 1.44 ms with the detail pass; up to
 1.55 million primitives in the overview, against 0.46 million before. With the
@@ -1378,15 +1435,15 @@ by about 15 percent.
 SHA-256 source inputs of the exported project:
 project.godot eb7d53597517c711d564943e467cce2926699c2422b073079737325c3400692e
 main.tscn fb6245c960d3625ca05920116c58351d9dbeb255beae59175d89c06d47049564
-export_presets.cfg e67d9e3fc0e8b0d9cab2672e3f730f209e81619d356b52a7079f7d19f7342dc0
+export_presets.cfg 099f064dbbd435c1c30456d1efb518d924ad38a7e2339ca5a4fc484388d2f9f1
 scripts/fly_camera.gd 2e5cdd15ca7bdcfa30ec129e354a309f3ff7296f6fbf54ac144984ed9aa9f8e7
 scripts/capture.gd 52ea2b5e40db2f1f4cdbd7658074ef60bd117e1f4110c1b8995590a4196748d0
 scripts/observatory.gd cdbab5d96d8679c893602ca4e67064a899982642f58e4c655975e0f2e97acbec
 scripts/course_library.gd 56de4cb69fa6c3c8402a2928e09ef84d09a2d9e22c610c29609ad9d4013a2651
 scripts/steel_cube.gd f28e71fffcd151663bc9a98b3c135cc7b805490e8298d3cf01029455c973f94c
 scripts/seldon_statue.gd c8785f079f648ea50694055fe87d26bb56e0ee2ab129251399d88bd13d0030b4
-scripts/touch_controls.gd aa49b4ad0405a9e8368e3d29a7896d6fbe6422acca6f42f020fd2acd81645448
-scripts/walk_physics.gd c171869bef2299cd511fb26e853836c624ab2aaf4e65ef3aeb575123a4e6f504
+scripts/touch_controls.gd 07defb3c25b95692e3bb7184783a6765a4b4b1a50e429b715539e642dd333617
+scripts/walk_physics.gd 1f505c12f81341ed1ed1da3b372aa17409b6f04b2ab5a0801623da53c4617037
 scripts/view_fit.gd f574c7949a5b324f91f062df9982366c123271804069b507206f88ad7062fe4c
 scripts/view_move.gd 558a4059815cb3a8a202d205d8cfada17653fb533e7e056bfe9e8a434dac0431
 scripts/multiverse.gd 0de3cece747a87c742ba6b26c8fac27a6a7dcdd18286f30957899becb2dfb34d
@@ -1410,8 +1467,8 @@ assets/floor_paving.gdshader 23187f024d276b897635ee0cc3e543c5852c4a9b5175cbe56ec
 assets/statue_marble.gdshader ec3f14f662487f3dae14a398fe91ea7183d88214bd2bf266359da89d79b94452
 assets/world_glimpse.gdshader a06fc85ca086fc3e4d9297039be0b6549132bbffafeaedfbda0ffea3eb918d6d
 assets/courses.json 407817e268f2c0d37ce28ae0d873f08b87a514479d6a73545b75d1dfbb71823b
-scripts/extra_views.gd 461e943660f74eeb696719e4cd7e13462607d29a4296394a0e475bd133020673
-scripts/upperside.gd b6e5a199de5737ffaa294c1f9a6be8d21fc4817ac600118dead14f0fc8fc486c
+scripts/extra_views.gd d4ea3381e333209b78c316d6fac59c9580b3d3f3980bb2a08c4afc3bfd334f4a
+scripts/upperside.gd 589ec27dde00b87e8bd40d190911e34b1dc3e99532d13a88f30925392d026be8
 assets/night_sky.gdshader 67421b4338debb80d8b6cec071bb37001d9d5493d240be53c0a107ad17cb5cec
 assets/upperside.gdshader f119593a603bc623de218054ec142b8732330785fe0d61ba5a3dcc13124f96e3
 assets/sky_milky_way_eso.jpg b17e19bf2d5e7e9efa03b602450f5189dc77f85251e704d99b6f14632cff3495
@@ -1438,7 +1495,7 @@ assets/fresco_panel.gdshader e9c20421cf254119e9d85da22a70bb8a965cee0be524f5c95b2
 assets/fresco_dust.gdshader 9d63b02079689cd0205a9d469c743645d4fac1ccfff21a3d0326f36a3062341c
 assets/fresco_atlas.png cccc2917f794f42517ee001392802ec6828acc747f585018e49349474b1638fc
 assets/fresco_motion.png aa7148be2c28917ddae5d92b7a155c46fe024460c67e919106be23782fdf7822
-scripts/build_info.gd 415383268573f2cc16cc6740a82a31a57c61f0a152bb7c57d8d2b943a236c463
+scripts/build_info.gd 83ee9820bc7cf258ddc6aa84217f4d4c50e65cd1a1b9097f2b75be8cb8022efb
 scripts/sfx_takes.gd 069f573898d4c4ad48fde9f1f592dba0974433b1881d7ed045d6797c3c3a0ac6
 assets/sfx/curio_wheel-beep.wav a1d999098afbd222622a6c4625ee16bb9788059c6fe37901067d9cd239f5ec8c
 assets/sfx/curio_wheel-chime.wav 6b580b1e57194c1f84183044c367bcab9d07e3d4c876da3dee5736ba78298c9e
@@ -1463,16 +1520,72 @@ scripts/tars_ensemble.gd 524da674c9d56f816cd9e400f0cee33a1279eafab7a426c9cac35f5
 assets/tars_ensemble_tracks.tres 6c2be9a6fc350c02f8dd19e6a768ed911d11ebd741d4c5939bb585a84171b272
 assets/tars_ensemble_jig_tracks.tres d7604ba2a5dc3e61fb29441d145d0d98703193c516d429a754e9c0e4949383a0
 scripts/web_loop.gd cd89961d3e7e5d8275d67ead034eb2184587810dc710316c5377f58a16e35cbb
+scripts/palace_gardens.gd 91ccf95615ac6b8e315b6ec849fe3b4c2109a9c5073701481ce12d1450799eb7
+scripts/segway.gd d9e2cc16d7c997aa33eedff15d7396cb21b408872381c409b6dfa00d479ee78c
+assets/hall_env.gdshaderinc f4ee2ad1a4b5af0839924033507d492b59ce003baad50b35f9afc4f645b3bae5
+assets/bay_glass.gdshader 5cf98fa61a8a189d25abf4e990d533dc7bb7c696d6a761625f555b4f13ac9fd5
+assets/garden_card.gdshader 42c1f7e2b2e104a52cd4b31d04e18b93176cfdc04d22c55a3011f5a22b7f6da5
+assets/garden_impostor.gdshader cdd31ff1d8ec84e8cb3beb5d30169770f6791ac4f2385224e53ab9aae8b23016
+assets/palace_garden.gdshader 2784830b9e7a746aaabc4dd60dc5281abfdeadf01ca696c66df3b2b05dcbe287
+assets/palace_glow.gdshader 8f7c3b7a5acee6a7f6f086602f3cad2ebf5a785983fe886371cbfb9b7a05d404
+assets/garden_baluster.obj 8fe3a8973ab1eb7779193b8d3062030b8ef0457673a3826dbb376a4d6ed27247
+assets/garden_baluster_low.obj 64d36f292626f7761ae876257a97abb255655e5f3274bb7859b4e70d6797cff7
+assets/garden_pedestal.obj 9be8ab11e4b98d71150ea87a33a9000a394751619850ec07c12813e3f9265b2e
+assets/garden_lantern_frame.obj 3c5be9c3e8395124617dff753a96590a181054fca0d200440617a0f375c9c3cf
+assets/garden_lantern_glass.obj 3205c581aa51efbcada1a7d7e60d105b2e105daba52988d09261c0c07584f231
+assets/garden_segway_body.obj c6c5110461ade8666c3a124d9491daa0f4e1a9a956ee5fe69949de456cb07062
+assets/garden_segway_metal.obj c0956acecdcaab494803f8469885cb4f60d2ed88acb87bcb8b6f17b2a26c5346
+assets/garden_segway_trim.obj d01d36b8ea16f05e49b9857057d56c2f1db920135b8047b948f08d7e9b3b1a3d
+assets/garden_segway_light.obj 4c0e86e38fee02bd71aed3894d3a4c86443b4190c02b1400fbc0f7eb6d78fad5
+assets/garden_segway_tyre.obj d99bfcce12aa8de3679ffbebc4360cbc1b2f5d4955ca66754919ef3965e6410e
+assets/garden_segway_dish.obj aec2d5e2678a744538297802447c2c7edf7910130809950122397998a6ce6651
+assets/garden_segway_spokes.obj 6c72471281d414179f42211f9831d3061957a7d57ef0534d611eee4170dbd269
+assets/garden_city_731.png 24ac309d52592b5ca5cea30979f7ab59f9f3a582e55c06738a7978ec7f61e1fa
+assets/garden_city_733.png e6cd8db346d77c0a06e5661546bb67269d0817cbc904aa5353c2e31dbf5896f2
+assets/garden_city_734.png 495d84228dbd9a4d842c313116cf46a58cbb8979e6cfd1f811b3a6ef1b6e78e4
+assets/garden_city_735.png dca00a7a86ee86eaae981ab4257759f46ba6f37bf7fb888fcb5cf7e4934ffd7d
+assets/garden_city_737.png de118e57e8f822b5074c918d26e2ac8f76669d82fc0a5ad4959616d461041667
+assets/garden_city_738.png 4df4a1903fe8f7ab1f6d5a44a66e658994b38123dea29c2da9ee4e933acae120
+assets/garden_palace.png d5b13df8f900e0b529dd7a5de89895e0c99603123c64de9a32d91c47e357899e
+assets/garden_stone.png 432e7a4a676e96916043f95eebc82dbfd0971c3655cd9a8011f20b7156f90389
+assets/garden_paving.png 81afdc39127356a22719dc103000c5d7bfce63ce3054361a7fa9966f9762d414
+assets/garden_plant.gdshader a1db0a3a3abfb7587190d680e6ceace730de21d4186018c35592851646c23141
+assets/garden_tree_linden1.glb 342e6ab53b7cc2cf00b4b01449d69285e6cf5daf170b2a5388432dd430071d88
+assets/garden_tree_linden2.glb c89718e972c32dd2203b536bbb9e68781966351ccc297a123f6218c046934625
+assets/garden_tree_linden3.glb 2970958c39fc0322097fdef4bb1e5202dae2c4970bd4b359bb721f477d13463b
+assets/garden_tree_pear1.glb 6096ac3cf3c13d600b46fc254d1ec079e060ebaf34c32a05b3679a3751af494b
+assets/garden_tree_pear2.glb a295723b8be9716fff74bc97d5729167f8ccdd5c397faad13e3052def0f62365
+assets/garden_tree_pear3.glb 6f0464718d69c96fe1c75214e2b9386d6790e68344589368ca5d4927c9d22827
+assets/garden_tree_cypress1.glb d0b26cb41c215028c2c9624dfc3d30718ae040202d03e3d12792e7b99ed4e352
+assets/garden_tree_cypress2.glb 578ec0420e0c2dc95df2a85adb5082a9c1e346533025fa2abad6514a1ca941b9
+assets/garden_tree_cypress3.glb 99f73234f71a476067dcd994671e3c5775876621724d4ebd6fe56ff09bd341e4
+assets/garden_tree_orange1.glb 6805e29a0154a4e856d3129fc669f182cc5d41b40cbf6047d3b295babf352f35
+assets/garden_tree_orange2.glb 9b918599e0c3e37464102238f828c73a550046499ac1e5b5e58a18f363440064
+assets/garden_fringe_tall.glb 843308847de15253082b57e96b9e1592ad9f4129bb2f5e589d79a4f25adad420
+assets/garden_fringe_low.glb 5e8ac777df32209f5f20eb122f81542655e6208ceed3cdd1a56d0630ee8bf4bb
+assets/garden_yew.glb 8a15f5832e0da730e386a593a98454af415e9dcb3b3e812910aa813bfb57b4a8
+assets/garden_imp_linden.png b3a0b66a59c9c7ef1169d5ca2be9be1db0e9e66e0dc1c76c8bb81242d2968cdd
+assets/garden_imp_linden_n.png ac959570508cc541cb0d97cb969c8f24b70b9609f9e3b5a74c924053973d8460
+assets/garden_imp_pear.png d9caf9210700a838639ff6e4c24237b35b8ea260c5158faa53c5d49169919679
+assets/garden_imp_pear_n.png 3b2f0834b7a4246456c782d2cb73f245135f21d91b0cc5e4c3cdf48ed652bdff
+assets/garden_imp_cypress.png 67d631cc6165789b2065fa7f0bd1da6fb8143e40ae6e367741fd94ffb65017dd
+assets/garden_imp_cypress_n.png 5d493e8e738bf84f1d30491714ec1d611a8550bb62a5cab9315ffac5e5b87970
+assets/garden_leaves_linden.png 06f7b0366e28bfa8eb42304b5d6002adb3b82ffdbd76d1cf5219a6c4f7fca551
+assets/garden_leaves_pear.png dcec00db59f870245902ebdd69f98efa42e6be4b00bcefda7a23848cb0014b67
+assets/garden_leaves_cypress.png 07bf984d20181a79ff423bd43e01f699273f8b620086244ba14a312df1f3884b
+assets/garden_bark.png f79ae0eb624ccc9ff2dc7f6576e754eff0411e4191fa248e25a46c1366543d9a
+assets/garden_hedge_box.png b6c6add90ff163d3d07b019ffb81a451cce66472e4a1073b0cebf05a6b4a2888
+assets/garden_hedge_box_n.png 49e05c58375a178caa5574533424f61e878df2284802f77e303759209ccf6334
 
 SHA-256 output files:
-index.pck ec561d106da7d7d03cb8539fd5ae67c42cef628458e18af8c09e0403c20c74e2
+index.pck 3c06ad8d0ff4f458ab7c01f067074aa46d669e9c9933bb8d5910cee671e9bde8
 index.wasm 99962b29677e42f3ba0258bd90fdc52ad90295954c4473e816ad02cfe5ff1d4f
 index.js e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981
 
 This directory contains a prebuilt binary export. Re-export only for deliberate
 scene changes. A scene re-export leaves the engine files (index.wasm, index.js)
 byte-identical, so git keeps a single copy; each scene revision adds its
-index.pck (24.2 MB here) to the binary history.
+index.pck (29.4 MB here) to the binary history.
 
 2026-10-03 post-merge recording sound correction: v28 preserved the v27
 `scripts/seldon_recording.gd` hash above before this correction. Fresh R or a
