@@ -1478,6 +1478,66 @@ walk and spot clear of the solids over 23,796 samples, in 20 s nobody in a
 solid and no two people closer than 0.45 m, the largest step of anyone in a
 frame at 10 fps 0.145 m, 0.41 to 0.43 ms per update (the editor's runtime).
 
+Version 39, exported 2026-10-04 22:35:31 UTC, lets the scooter ride by itself
+and the visitor get off and on in the gardens, after the author's "la balade
+en segway devrait etre automatique quand l'utiliseur touche a rien, on devrait
+pouvoir descender et remonter sur le sefway". scripts/segway.gd, with no ride
+key and no look for 3 s, rides a 953 m tour on the walks' middle lines (down
+the ramp, round both halves of the parterre by its cross walks and outer
+edges, since the basin's rim meets the hedges on the axis, beside the canal to
+its far end and back up the other side) at up to 3.2 m/s, slower in the bends
+and behind people; away from the tour it goes straight to it when nothing
+stands between, else back along the trail the scooter left, a point a metre,
+loops cut out. A ride key takes over at once; the mouse only looks round. G
+riding gets off beside the scooter, which stays; on foot W/S walk, A/D step
+aside and Shift hurries, stopped as the scooter is and by it; G within 2.5 m
+gets back on; a preset ends it all and takes the scooter back to the terrace.
+scripts/touch_controls.gd has the helps for both and no jump on foot;
+scripts/garden_crowd.gd adds near(), the people round a place, for the
+autopilot. Every other script is version 38's, scripts/observatory.gd and
+scripts/quality.gd version 28's.
+index.pck is now 29,533,936 bytes, 17,328 more than version 38's; index.html
+changes only that size, and index.wasm and index.js are unchanged.
+In headless Chrome on this machine, the build served gzipped from localhost
+(artpass/gardens/ride2/web-v39.ps1, ride2-web.mjs, out:
+artpass/gardens/ride2/web-v39*/), on a computer (1600 x 900), a phone (390 x
+844, touch) and a tablet (1180 x 820, touch), the scooter mounted at the start
+(?segway=1): hands off, the autopilot started and toured 17.4 to 25.8 m in 12
+s on the RTX 5080 (ANGLE Direct3D 11), W held a second took over, G got off,
+the visitor walked 6 m and stood 0.9 m from the scooter again, G got back on,
+and a preset went back inside; no exception and no console error. Frames ran
+at a median 16.7 ms while it toured, with single frames of 1.5 and 1.9 s on
+the computer and the phone as the tour came down the ramp into view of the
+parterre (to verify: a shader warm-up). Version 38's cases on the same build
+(gardens-web.mjs): the start view, bay 2, the roof and a ride at a median 16.7
+ms a frame, the ride moving 18.3 to 19.1 m; the gardens built in 535 to 711
+ms. On Chrome's CPU renderer (SwiftShader) standing in for a weak GPU, at
+quality level 5: the same steps passed on a computer and a phone, the
+autopilot touring 37.5 m in 12 s on the computer at a median 66.7 ms a frame
+and 8.6 m on the phone, whose frames of 0.5 to 2.1 s slow the ride (a frame's
+step is capped at 0.1 s); bay 2 at 166.7 ms a frame on both, the ride 83.3 and
+100 ms; the phone's start view and roof had not settled within 12 s, as in
+version 38.
+Native runs, stock Godot 4.6.1 against this build's own project
+(artpass/publish/regress-pub31.sh, 78 runs: version 38's 74 and four of the
+autopilot, artpass/publish/regress-pub31/): 74 passed. motion_bay14 missed the
+same point with the same numbers as since version 31. lean_keys_10fps, the
+known flake, passed three reruns. coursetest and coursetest_fwd failed on one
+check, the camera still walking after a held W, while another program started
+on the same desktop; they passed three reruns each, and version 38's build,
+run as the control, failed the same check once in two
+(artpass/publish/regress-pub31-rerun/). The ride's probe now hides the crowd
+and passed at 10 frames a second. The autopilot passed under Compatibility and
+Forward+, on a phone's screen with touch, and at 10 frames a second with a
+one-second stall, not pinned (auto_compat, auto_fwd, auto_touch_phone,
+auto_10fps; artpass/gardens/ride2/autoprobe.gd): hands off, it started at 3 s
+and not before and rode 80.3 m of the tour in 30 s (77.9 m at 10 fps), never
+inside a solid, at most 0.83 m off its line; from inside the maze it drove
+back to the tour; a key, or the stick, took over at once and it started again
+3 s after; off the scooter the visitor stood 0.9 m beside it, walked 7.26 m
+and got back on; G further than 2.5 m left them on foot; a preset ended it
+all; a walk into a hedge stopped at its face.
+
 Native Compatibility GPU time, RTX 5080, 1600x900, 240 frames per view: 0.44 to
 0.52 ms for the previous web scene, 0.64 to 1.44 ms with the detail pass; up to
 1.55 million primitives in the overview, against 0.46 million before. With the
@@ -1496,7 +1556,7 @@ scripts/observatory.gd cdbab5d96d8679c893602ca4e67064a899982642f58e4c655975e0f2e
 scripts/course_library.gd 56de4cb69fa6c3c8402a2928e09ef84d09a2d9e22c610c29609ad9d4013a2651
 scripts/steel_cube.gd f28e71fffcd151663bc9a98b3c135cc7b805490e8298d3cf01029455c973f94c
 scripts/seldon_statue.gd c8785f079f648ea50694055fe87d26bb56e0ee2ab129251399d88bd13d0030b4
-scripts/touch_controls.gd 07defb3c25b95692e3bb7184783a6765a4b4b1a50e429b715539e642dd333617
+scripts/touch_controls.gd 5c76054696f7addf348c58e5e9b42b8cfc7ddf5f97efecbfcbeb44d3ba014ebd
 scripts/walk_physics.gd 1f505c12f81341ed1ed1da3b372aa17409b6f04b2ab5a0801623da53c4617037
 scripts/view_fit.gd f574c7949a5b324f91f062df9982366c123271804069b507206f88ad7062fe4c
 scripts/view_move.gd 558a4059815cb3a8a202d205d8cfada17653fb533e7e056bfe9e8a434dac0431
@@ -1549,7 +1609,7 @@ assets/fresco_panel.gdshader e9c20421cf254119e9d85da22a70bb8a965cee0be524f5c95b2
 assets/fresco_dust.gdshader 9d63b02079689cd0205a9d469c743645d4fac1ccfff21a3d0326f36a3062341c
 assets/fresco_atlas.png cccc2917f794f42517ee001392802ec6828acc747f585018e49349474b1638fc
 assets/fresco_motion.png aa7148be2c28917ddae5d92b7a155c46fe024460c67e919106be23782fdf7822
-scripts/build_info.gd ae834d3d05e91373ba0a614a6dd1356c074f8b622973d8ea0aa00a394417c265
+scripts/build_info.gd ebc256e164e240edae8f1c62dd2b57cb04aa04d65fb2535befb2476642a2c579
 scripts/sfx_takes.gd 069f573898d4c4ad48fde9f1f592dba0974433b1881d7ed045d6797c3c3a0ac6
 assets/sfx/curio_wheel-beep.wav a1d999098afbd222622a6c4625ee16bb9788059c6fe37901067d9cd239f5ec8c
 assets/sfx/curio_wheel-chime.wav 6b580b1e57194c1f84183044c367bcab9d07e3d4c876da3dee5736ba78298c9e
@@ -1575,7 +1635,7 @@ assets/tars_ensemble_tracks.tres 6c2be9a6fc350c02f8dd19e6a768ed911d11ebd741d4c59
 assets/tars_ensemble_jig_tracks.tres d7604ba2a5dc3e61fb29441d145d0d98703193c516d429a754e9c0e4949383a0
 scripts/web_loop.gd cd89961d3e7e5d8275d67ead034eb2184587810dc710316c5377f58a16e35cbb
 scripts/palace_gardens.gd 3296c1609b7a0f4a957c123266ad43855fb96e2f0fe6a25ce0efc702077bcb93
-scripts/segway.gd d9e2cc16d7c997aa33eedff15d7396cb21b408872381c409b6dfa00d479ee78c
+scripts/segway.gd 12dea63276177e70af0f29b2e9e786571e7fcb756070958624d71bd8cb7f9941
 assets/hall_env.gdshaderinc f4ee2ad1a4b5af0839924033507d492b59ce003baad50b35f9afc4f645b3bae5
 assets/bay_glass.gdshader 5cf98fa61a8a189d25abf4e990d533dc7bb7c696d6a761625f555b4f13ac9fd5
 assets/garden_card.gdshader 42c1f7e2b2e104a52cd4b31d04e18b93176cfdc04d22c55a3011f5a22b7f6da5
@@ -1630,14 +1690,14 @@ assets/garden_leaves_cypress.png 07bf984d20181a79ff423bd43e01f699273f8b620086244
 assets/garden_bark.png f79ae0eb624ccc9ff2dc7f6576e754eff0411e4191fa248e25a46c1366543d9a
 assets/garden_hedge_box.png b6c6add90ff163d3d07b019ffb81a451cce66472e4a1073b0cebf05a6b4a2888
 assets/garden_hedge_box_n.png 49e05c58375a178caa5574533424f61e878df2284802f77e303759209ccf6334
-scripts/garden_crowd.gd cc06c5e8065f127c21fe6520cf532d2d33548b03095ca1b2152b6c62dc6018f2
+scripts/garden_crowd.gd 25b5aa2daa00fbf988f758639683c2cd1941cf7a07aed8d4ba31db4e09f26080
 assets/garden_figure_courtier.glb e14c11a84beef0a3faeb109a11571eafdd4adc773b5e98fa153b9a6e438bc944
 assets/garden_figure_lady.glb 733f9a104730f1220d7bedd55130be29bb0ec7c5902567750c0ae4abb742197a
 assets/garden_figure_walker.glb 6a2aff1f8a2548b183f70790cee06d5e004e4235351e95a37887a21aa27eef58
 assets/garden_figure_gardener.glb 0e73084eef802a7d7d1f9dacd83ab49766eee95977f9ba120c6b83da2598cf3d
 
 SHA-256 output files:
-index.pck 1438905e72f1aa1e082a1ed09a908b65a80f8d948acd49a9014f55b76af5bbad
+index.pck 8cc3007f1b27cf857230661db99e47746bbd21420439bd07a727c0b5c4d2673e
 index.wasm 99962b29677e42f3ba0258bd90fdc52ad90295954c4473e816ad02cfe5ff1d4f
 index.js e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981
 
