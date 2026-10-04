@@ -1,6 +1,6 @@
 ---
 title: "Leçon 22 : les accords semblables"
-description: "IcvNeighborsSkill est la réponse du chatbot de Guitar Alchemist à la question des accords semblables à un accord donné : il lit un accord et liste les ensembles de classes de hauteurs dont le vecteur d'intervalles est à 2 au plus du sien. Aucun de ses dix prompts d'exemple, les questions que lui envoie le routeur, ne correspond aux expressions qu'il lit : il les décline donc tous les dix, là où son skill jumeau répond à huit des siens. Sur 27 accords courants, il en construit 10 correctement, et CM7 comme une septième mineure ; ses huit voisins sont les huit premiers ensembles par masque de bits : les mêmes pour toutes les triades majeures et mineures, et cinq d'entre eux sont des intervalles de deux notes."
+description: "IcvNeighborsSkill est la réponse du chatbot de Guitar Alchemist à la question des accords semblables à un accord donné : il lit un accord et liste les ensembles de classes de hauteurs dont le vecteur d'intervalles est à 2 au plus du sien. Aucun de ses dix prompts d'exemple, les questions que le routeur a le plus de chances de lui envoyer, ne correspond aux expressions qu'il lit : il les décline donc tous les dix, là où son skill jumeau répond à huit des siens. Sur 27 accords courants, il en construit 10 correctement, et CM7 comme une septième mineure ; ses huit voisins sont les huit premiers ensembles par masque de bits : les mêmes pour toutes les triades majeures et mineures, et cinq d'entre eux sont des intervalles de deux notes."
 sidebar:
   label: 22. Les accords semblables
   order: 22
@@ -17,7 +17,7 @@ dotnet run --project code/ga-ai/GaMain -c Release -- l22
 
 ## Comment le skill lit une question
 
-Le skill n'a pas de test par mots-clés : son `CanHandle` répond toujours non, et le routeur lui envoie une question quand l'embedding de cette question est le plus proche de l'un de ses prompts d'exemple. Ces prompts ont été reformulés le 2026-06-16, pour les tenir à l'écart de ceux des skills voisins, et le commentaire placé au-dessus d'eux dit quels mots ont été retirés. Les expressions régulières qui lisent la question en ont toujours besoin :
+Le skill n'a pas de test par mots-clés : son `CanHandle` répond toujours non, et le routeur compare une question à la description et aux prompts d'exemple de chaque skill, ajoute les bonus des indices de routage, et l'envoie au skill qui obtient le meilleur score, si ce score atteint un seuil de confiance ([`SemanticIntentRouter.cs` lignes 129-257](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Intents/SemanticIntentRouter.cs#L129-L257)). Ces prompts ont été reformulés le 2026-06-16, pour les tenir à l'écart de ceux des skills voisins, et le commentaire placé au-dessus d'eux dit quels mots ont été retirés. Les expressions régulières qui lisent la question en ont toujours besoin :
 
 ```csharp
     // Routing anchors emphasise the user GOAL — "find OTHER chords SIMILAR to
@@ -267,7 +267,7 @@ Am7 n'appartient pas à la classe d'ensembles de Cmaj7 : c'est A C E G, les note
 
 ## Où le cours s'arrête
 
-- **Le routeur n'est pas exécuté :** il a besoin des embeddings. La leçon pose au skill ce que le routeur lui enverrait, ses propres prompts d'exemple.
+- **Le routeur n'est pas exécuté :** il a besoin des embeddings. La leçon pose au skill les questions que le routeur a le plus de chances de lui envoyer, ses propres prompts d'exemple.
 - **Les notes des accords sont celles du cours,** celles d'un manuel pour chaque chiffrage.
 - **`ga_icv_neighbors` n'est pas exécuté ici ;** le cours de théorie musicale l'exécute.
 - **Le programme appelle directement les méthodes des skills,** et non par le chatbot.
@@ -303,6 +303,6 @@ Am7 n'appartient pas à la classe d'ensembles de Cmaj7 : c'est A C E G, les note
 
 ## Sources
 
-- GuitarAlchemist/ga au commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6) : `Common/GA.Business.ML/Agents/Skills/IcvNeighborsSkill.cs`, `Common/GA.Business.ML/Agents/Skills/IntervalClassVectorSkill.cs`, `Common/GA.Business.ML/Agents/Intents/DefaultRoutingHintProvider.cs`, `Common/GA.Domain.Services/Atonal/Grothendieck/GrothendieckService.cs`, `Common/GA.Business.Core.Orchestration/Plugins/GaPlugin.cs`, `GaMcpServer/Tools/ChordAtonalTool.cs`, `skills-dev/_pending-tools/icv-neighbors/DRAFT.md`, `CLAUDE.md`.
+- GuitarAlchemist/ga au commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6) : `Common/GA.Business.ML/Agents/Skills/IcvNeighborsSkill.cs`, `Common/GA.Business.ML/Agents/Skills/IntervalClassVectorSkill.cs`, `Common/GA.Business.ML/Agents/Intents/DefaultRoutingHintProvider.cs`, `Common/GA.Business.ML/Agents/Intents/SemanticIntentRouter.cs`, `Common/GA.Domain.Services/Atonal/Grothendieck/GrothendieckService.cs`, `Common/GA.Business.Core.Orchestration/Plugins/GaPlugin.cs`, `GaMcpServer/Tools/ChordAtonalTool.cs`, `skills-dev/_pending-tools/icv-neighbors/DRAFT.md`, `CLAUDE.md`.
 - GuitarAlchemist/ga au commit [`f4f5b4a`](https://github.com/GuitarAlchemist/ga/tree/f4f5b4af881f3970c6fdc25fa61a30ef9d23458a) : les mêmes skills, avec leurs refus marqués `Declined`, et `ChordAtonalTool.cs`.
 - Les programmes du cours : `code/ga-ai/GaAi/Lesson22.cs`, `code/ga-ai/GaMain/Program.cs`, `code/ga-ai/Shared/IcvNeighborsProbe.cs`.
