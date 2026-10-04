@@ -219,10 +219,10 @@ sidebar:
 - This settles the item to verify about GaCLI started from another folder: it runs, and at this commit `appsettings.yaml` changes nothing. The item is removed from the list below, and the QA row is updated.
 - On Windows with SDK 10.0.112, `check.sh` exits 0 with 158 `ok` lines, the 14 of lesson 12 included. This is not yet a three-OS CI run.
 - The PR's first CI run, [37174610693](https://github.com/spareilleux/learn/actions/runs/37174610693), failed `l12_audit` and `l12_package_no_version` on the three OSes and passed the 12 other checks of lesson 12. CI runs SDK 10.0.401, which `global.json` allows (`rollForward: latestFeature`), and that SDK names the project behind a file-based app `l12_audit.cs.csproj`, where 10.0.112 says `l12_audit.csproj`. The `sed` rule expected no dot in the name and left the folder in. `check.sh` now writes `file.csproj` for both, and the lesson gives both names.
+- Then in CI: [run 37175088215](https://github.com/spareilleux/learn/actions/runs/37175088215) of the *C# for beginners examples* workflow, on commit `87dbafd` of [PR #137](https://github.com/spareilleux/learn/pull/137), passed on `ubuntu-latest`, `windows-latest` and `macos-latest`, all three with SDK 10.0.401. Each job prints `ok` for the 14 `l12_*` checks; the jobs count 159 `ok` lines on Linux and macOS and 158 on Windows, for the same reason as in lesson 6. The NuGet audit warning of `l12_audit.cs` comes out on the three runners, and the sorted output of the build is the same.
 
 ## To verify
 
-- Lesson 12's checks in CI on Linux, Windows and macOS, after a PR is opened; in particular the NuGet audit warning of `l12_audit.cs`, which needs the advisory database, and the order of the build's output.
 - How many artists GA would count once its three YAML files load. A PyYAML script over the raw files, outside the course code, estimates 63. By the same estimate, `Take(20)` would leave out 8 artists that have more entries than the smallest count kept, The Beatles (3 entries) among them.
 - The installation commands for Linux and macOS: only the CI's `setup-dotnet` ran on those OSes.
 - The debugger walkthrough of lesson 3 in VS Code, Visual Studio and Rider, for a file-based app and for a project. VS Code 1.118 and Rider are installed on my machine; Visual Studio isn't.
