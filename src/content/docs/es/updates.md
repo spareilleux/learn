@@ -233,6 +233,20 @@ La [PR de Demerzel #1184](https://github.com/GuitarAlchemist/Demerzel/pull/1184)
 
 MUS-011 sigue **pendiente de verificación** hasta que este cambio se fusione, su despliegue sea correcto y las páginas se lean sin autenticación.
 
+## 2026-10-04 — Streeling MUS-011 publicado
+
+La [PR de Learn #138](https://github.com/spareilleux/learn/pull/138) se fusionó como `aaf6d3e`, y su [despliegue de Pages](https://github.com/spareilleux/learn/actions/runs/37177089952) fue correcto. Después, las páginas se leyeron sin autenticación en los tres idiomas: doce páginas, que respondieron todas 200. Las páginas del [módulo MUS-011](../streeling/music/mus-011-modes-modal-families/) nombran MUS-011 y enlazan su fuente en `499fc64`; el [índice de música](../streeling/music/) lo incluye, y el [diario de Streeling](../streeling/journal/) y este diario incluyen sus entradas del 2026-10-03.
+
+MUS-011 pasa así de pendiente de verificación a verificado; su entrada de arriba queda tal como se escribió. Esta actualización fija de nuevo sus enlaces a la fuente en `518158b`. Publicado no es estudiado: MUS-011 no se ha ejecutado ni estudiado aquí, y su experimento sigue propuesto.
+
+## 2026-10-04 — Streeling MUS-014 sincronizado, pendiente de verificación
+
+La [PR de Demerzel #1185](https://github.com/GuitarAlchemist/Demerzel/pull/1185) se fusionó como `518158b`, después de la fijación de `499fc64`. Esta actualización la sincroniza en Learn:
+- el nuevo [módulo MUS-014](../streeling/music/mus-014-inversions-bass-line/), Inversiones y línea de bajo, en los tres idiomas;
+- su línea en el [índice de música](../streeling/music/) y en el [diario de Streeling](../streeling/journal/), con una entrada fechada en este último.
+
+MUS-014 sigue **pendiente de verificación** hasta que este cambio se fusione, su despliegue sea correcto y las páginas se lean sin autenticación.
+
 ## Por verificar
 
 - Comprobar las URL públicas de esta actualización y el catálogo tras el despliegue; conservar su recibo en el registro de integración.

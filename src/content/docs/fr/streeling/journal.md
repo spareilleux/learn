@@ -91,6 +91,7 @@ Coche un module une fois étudié. Sous **Notes**, ajoute une entrée datée : c
 - [ ] [MUS-011 · Modes et familles modales](../music/mus-011-modes-modal-families/) <!-- mus-011-modes-modal-families -->
 - [ ] [MUS-012 · Formules d'accords, notes essentielles et redoublements](../music/mus-012-chord-formulas-essential-tones-doubling/) <!-- mus-012-chord-formulas-essential-tones-doubling -->
 - [ ] [MUS-013 · Fondamentale, basse et ensemble de classes de hauteurs](../music/mus-013-root-bass-pitch-class-set/) <!-- mus-013-root-bass-pitch-class-set -->
+- [ ] [MUS-014 · Renversements et ligne de basse](../music/mus-014-inversions-bass-line/) <!-- mus-014-inversions-bass-line -->
 - [ ] [MUS-018 · Identification de la tonalité, chiffres romains et cadences](../music/mus-018-key-finding-roman-numerals-cadences/) <!-- mus-018-key-finding-roman-numerals-cadences -->
 - [ ] [MUS-020 · Classes d'ensembles, vecteurs d'intervalles, relation Z et formes premières](../music/mus-020-set-classes-interval-vectors-prime-forms/) <!-- mus-020-set-classes-interval-vectors-prime-forms -->
 
@@ -247,6 +248,14 @@ Rien n'y a été exécuté ici.
 ## 2026-10-03 — MUS-011 · Modes et familles modales
 
 Synchronisé depuis Demerzel à [`499fc64`](https://github.com/GuitarAlchemist/Demerzel/commit/499fc64abe83a5bf7d59efdd949bb23b72925ae2) ([PR #1184](https://github.com/GuitarAlchemist/Demerzel/pull/1184)). Un nouveau module de musique de niveau intermédiaire sur les modes et les familles modales : un mode comme rotation d'une formule d'intervalles, les modes relatifs et parallèles, le nombre de modes distincts d'une gamme, et pourquoi deux gammes peuvent partager un vecteur d'intervalles sans être des modes l'une de l'autre, par les images miroirs et la relation Z. Il retrace comment GA regroupe les ensembles en familles modales, et sa section 6 propose une expérience. L'index de la musique le liste désormais, celui de Streeling compte 15 modules de musique au lieu de 14, et MUS-012, MUS-013, MUS-018 et MUS-020 descendent d'un rang dans la barre latérale ; toutes les autres pages ne changent que par leurs références épinglées à Demerzel, de `d8c8da5` à `499fc64`.
+
+Rien n'y a été exécuté ici.
+
+- **Il n'a pas été étudié ici,** donc sa case ci-dessus reste vide.
+
+## 2026-10-04 — MUS-014 · Renversements et ligne de basse
+
+Synchronisé depuis Demerzel à [`518158b`](https://github.com/GuitarAlchemist/Demerzel/commit/518158b0568981b4ebe290d69f197995bd41ded0) ([PR #1185](https://github.com/GuitarAlchemist/Demerzel/pull/1185)). Un nouveau module de musique de niveau intermédiaire sur les positions d'accord lues depuis la basse : l'état fondamental et les renversements, la basse chiffrée des triades et des accords de septième, les quatre sortes d'accord de quarte et sixte, et les cas où les notes qui sonnent ne fixent pas la position. Il retrace comment GA traite les renversements dans son type `Chord`, ses documents de voicing et son catalogue de modes, et sa section 6 propose une expérience. L'index de la musique le liste désormais, celui de Streeling compte 16 modules de musique au lieu de 15, et MUS-018 et MUS-020 descendent d'un rang dans la barre latérale ; toutes les autres pages ne changent que par leurs références épinglées à Demerzel, de `499fc64` à `518158b`.
 
 Rien n'y a été exécuté ici.
 

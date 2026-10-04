@@ -91,6 +91,7 @@ Tick a module once studied. Under **Notes**, add a dated entry: what I understoo
 - [ ] [MUS-011 · Modes and Modal Families](../music/mus-011-modes-modal-families/) <!-- mus-011-modes-modal-families -->
 - [ ] [MUS-012 · Chord Formulas, Essential Tones and Doubling](../music/mus-012-chord-formulas-essential-tones-doubling/) <!-- mus-012-chord-formulas-essential-tones-doubling -->
 - [ ] [MUS-013 · Root, Bass and Pitch-Class Set](../music/mus-013-root-bass-pitch-class-set/) <!-- mus-013-root-bass-pitch-class-set -->
+- [ ] [MUS-014 · Inversions and the Bass Line](../music/mus-014-inversions-bass-line/) <!-- mus-014-inversions-bass-line -->
 - [ ] [MUS-018 · Key Finding, Roman Numerals and Cadences](../music/mus-018-key-finding-roman-numerals-cadences/) <!-- mus-018-key-finding-roman-numerals-cadences -->
 - [ ] [MUS-020 · Set Classes, Interval Vectors, the Z-Relation and Prime Forms](../music/mus-020-set-classes-interval-vectors-prime-forms/) <!-- mus-020-set-classes-interval-vectors-prime-forms -->
 
@@ -247,6 +248,14 @@ Nothing in it was run here.
 ## 2026-10-03 — MUS-011 · Modes and Modal Families
 
 Synced from Demerzel at [`499fc64`](https://github.com/GuitarAlchemist/Demerzel/commit/499fc64abe83a5bf7d59efdd949bb23b72925ae2) ([PR #1184](https://github.com/GuitarAlchemist/Demerzel/pull/1184)). A new intermediate music module on modes and modal families: a mode as a rotation of a step pattern, relative and parallel modes, how many distinct modes a scale has, and why two scales can share an interval vector without being modes of each other, through mirror images and the Z-relation. It traces how GA groups sets into modal families, and its section 6 proposes an experiment. The music index now lists it, the Streeling index counts 15 music modules instead of 14, and MUS-012, MUS-013, MUS-018 and MUS-020 move down one place in the sidebar; every other page changes only its pinned references to Demerzel, from `d8c8da5` to `499fc64`.
+
+Nothing in it was run here.
+
+- **It has not been studied here,** so its checkbox above stays empty.
+
+## 2026-10-04 — MUS-014 · Inversions and the Bass Line
+
+Synced from Demerzel at [`518158b`](https://github.com/GuitarAlchemist/Demerzel/commit/518158b0568981b4ebe290d69f197995bd41ded0) ([PR #1185](https://github.com/GuitarAlchemist/Demerzel/pull/1185)). A new intermediate music module on chord positions read from the bass: root position and the inversions, figured bass for triads and seventh chords, the four kinds of six-four chord, and the cases where the sounding notes do not fix the position. It traces how GA handles inversions in its `Chord` type, its voicing documents and its modes catalogue, and its section 6 proposes an experiment. The music index now lists it, the Streeling index counts 16 music modules instead of 15, and MUS-018 and MUS-020 move down one place in the sidebar; every other page changes only its pinned references to Demerzel, from `499fc64` to `518158b`.
 
 Nothing in it was run here.
 

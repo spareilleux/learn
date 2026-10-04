@@ -91,6 +91,7 @@ Marca un módulo una vez estudiado. En **Notas**, añade una entrada fechada: lo
 - [ ] [MUS-011 · Modos y familias modales](../music/mus-011-modes-modal-families/) <!-- mus-011-modes-modal-families -->
 - [ ] [MUS-012 · Fórmulas de acordes, notas esenciales y duplicaciones](../music/mus-012-chord-formulas-essential-tones-doubling/) <!-- mus-012-chord-formulas-essential-tones-doubling -->
 - [ ] [MUS-013 · Fundamental, bajo y conjunto de clases de altura](../music/mus-013-root-bass-pitch-class-set/) <!-- mus-013-root-bass-pitch-class-set -->
+- [ ] [MUS-014 · Inversiones y línea de bajo](../music/mus-014-inversions-bass-line/) <!-- mus-014-inversions-bass-line -->
 - [ ] [MUS-018 · Identificación de la tonalidad, números romanos y cadencias](../music/mus-018-key-finding-roman-numerals-cadences/) <!-- mus-018-key-finding-roman-numerals-cadences -->
 - [ ] [MUS-020 · Clases de conjuntos, vectores interválicos, relación Z y formas primas](../music/mus-020-set-classes-interval-vectors-prime-forms/) <!-- mus-020-set-classes-interval-vectors-prime-forms -->
 
@@ -247,6 +248,14 @@ Aquí no se ejecutó nada de él.
 ## 2026-10-03 — MUS-011 · Modos y familias modales
 
 Sincronizado desde Demerzel en [`499fc64`](https://github.com/GuitarAlchemist/Demerzel/commit/499fc64abe83a5bf7d59efdd949bb23b72925ae2) ([PR #1184](https://github.com/GuitarAlchemist/Demerzel/pull/1184)). Un nuevo módulo de música de nivel intermedio sobre los modos y las familias modales: un modo como rotación de una fórmula de intervalos, los modos relativos y paralelos, cuántos modos distintos tiene una escala, y por qué dos escalas pueden compartir un vector interválico sin ser modos una de otra, por las imágenes especulares y la relación Z. Rastrea cómo agrupa GA los conjuntos en familias modales, y su sección 6 propone un experimento. El índice de música ahora lo incluye, el de Streeling cuenta 15 módulos de música en lugar de 14, y MUS-012, MUS-013, MUS-018 y MUS-020 bajan un puesto en la barra lateral; todas las demás páginas solo cambian sus referencias fijadas a Demerzel, de `d8c8da5` a `499fc64`.
+
+Aquí no se ejecutó nada de él.
+
+- **No se ha estudiado aquí,** así que su casilla de arriba sigue vacía.
+
+## 2026-10-04 — MUS-014 · Inversiones y línea de bajo
+
+Sincronizado desde Demerzel en [`518158b`](https://github.com/GuitarAlchemist/Demerzel/commit/518158b0568981b4ebe290d69f197995bd41ded0) ([PR #1185](https://github.com/GuitarAlchemist/Demerzel/pull/1185)). Un nuevo módulo de música de nivel intermedio sobre las posiciones de los acordes leídas desde el bajo: el estado fundamental y las inversiones, el bajo cifrado de las tríadas y los acordes de séptima, los cuatro tipos de acorde de cuarta y sexta, y los casos en que las notas que suenan no fijan la posición. Rastrea cómo trata GA las inversiones en su tipo `Chord`, sus documentos de voicing y su catálogo de modos, y su sección 6 propone un experimento. El índice de música ahora lo incluye, el de Streeling cuenta 16 módulos de música en lugar de 15, y MUS-018 y MUS-020 bajan un puesto en la barra lateral; todas las demás páginas solo cambian sus referencias fijadas a Demerzel, de `499fc64` a `518158b`.
 
 Aquí no se ejecutó nada de él.
 
