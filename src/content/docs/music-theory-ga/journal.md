@@ -577,7 +577,7 @@ Three rows of the QA table went back to GA in [PR #810](https://github.com/Guita
 
 The row on `ChordFormula.GetSymbolSuffix` (lesson 13) was already fixed upstream when the course measured it. The course reads GA at `a826864`, a commit of 2026-09-14, and [PR #680](https://github.com/GuitarAlchemist/ga/pull/680), merged on 2026-09-17, adds the "maj". `"C" + Chord.FromSymbol(symbol).Formula.GetSymbolSuffix()` gives `C9`, `C11` and `C13` for `Cmaj9`, `Cmaj11` and `Cmaj13` at `a826864`, and the symbol itself at #680's commit `86f81ab2` and at `main` 75959835.
 
-Eleven more rows went back the same day in four pull requests, opened from the same clone and measured before and after on `main` 75959835. GA's CI passes on #818, #819 and #820; #823's was still running when this entry was written. None is merged yet.
+Eleven more rows went back the same day in four pull requests, opened from the same clone and measured before and after on `main` 75959835. When this entry was written, GA's CI had passed on #818, #819 and #820's first commit, and was running on #820's second commit and on #823. None is merged yet.
 
 | PR | QA rows | Before → after |
 |---|---|---|
@@ -589,6 +589,7 @@ Eleven more rows went back the same day in four pull requests, opened from the s
 - The course reads GA at `a826864`, and on `main` some rows had already moved: 2 of the 18 declared vectors differed, not 9, and 26 members lacked their first mode's vector, not 60.
 - Codex reviewed #818: the augmented triad's inversions were spelled C E G♯, like the root position. They are now C E A♭ and C F♭ A♭, spelled by their intervals above the bass, as the other inversions are.
 - #820 rejects what the parser can't read. The chatbot, which tries it on a whole message, now finds no chord in "Cmaj7 jazz voicings", where it found C major.
+- Codex's review of #820 found that the parser read a slash chord's bass, then dropped it: `C/E` had C as its `Bass`. A second commit puts the bass note first, so `C/E` is E G C. GaApi's voicing search still ignores it, since it passes only the pitch classes.
 - #823's first commit also removed `NaturalMinorMode`, whose seven modes are the major scale's, under the same names: its 1,666 templates have the same notes and pitch classes as the major modes'. Codex pointed out that their mode's parent scale differs (`A B C D E F G`, not `C D E F G A B`) and that `CreateTraditionalChordLibrary` promises those modes, so a second commit puts them back.
 - The `ChordAlterationService` row went to no PR: only `ChordTemplateNamingService` and `HybridChordNamingService` call it, and no app, MCP tool or chatbot path calls those at 75959835.
 

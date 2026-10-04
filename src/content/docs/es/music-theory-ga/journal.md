@@ -577,7 +577,7 @@ Tres filas de la tabla QA volvieron a GA en la [PR 810](https://github.com/Guita
 
 La fila sobre `ChordFormula.GetSymbolSuffix` (lección 13) ya estaba corregida aguas arriba cuando el curso la midió. El curso lee GA en `a826864`, un commit del 2026-09-14, y la [PR 680](https://github.com/GuitarAlchemist/ga/pull/680), fusionada el 2026-09-17, añade el "maj". `"C" + Chord.FromSymbol(symbol).Formula.GetSymbolSuffix()` da `C9`, `C11` y `C13` para `Cmaj9`, `Cmaj11` y `Cmaj13` en `a826864`, y el propio símbolo en el commit `86f81ab2` de la 680 y en `main` 75959835.
 
-Otras once filas volvieron el mismo día en cuatro pull requests, abiertas desde el mismo clon y medidas antes y después en `main` 75959835. La CI de GA pasa en la 818, la 819 y la 820; la de la 823 aún corría cuando se escribió esta entrada. Ninguna está fusionada todavía.
+Otras once filas volvieron el mismo día en cuatro pull requests, abiertas desde el mismo clon y medidas antes y después en `main` 75959835. Cuando se escribió esta entrada, la CI de GA había pasado en la 818, la 819 y el primer commit de la 820, y corría en el segundo commit de la 820 y en la 823. Ninguna está fusionada todavía.
 
 | PR | Filas QA | Antes → después |
 |---|---|---|
@@ -589,6 +589,7 @@ Otras once filas volvieron el mismo día en cuatro pull requests, abiertas desde
 - El curso lee GA en `a826864`, y en `main` algunas filas ya se habían movido: 2 de los 18 vectores declarados diferían, no 9, y 26 miembros no tenían el vector de su primer modo, no 60.
 - Codex revisó la 818: las inversiones de la tríada aumentada se escribían C E G♯, como el estado fundamental. Ahora son C E A♭ y C F♭ A♭, escritas según sus intervalos sobre el bajo, como las demás inversiones.
 - La 820 rechaza lo que el parser no sabe leer. El chatbot, que lo prueba con un mensaje entero, ya no encuentra ningún acorde en «Cmaj7 jazz voicings», donde encontraba C mayor.
+- La revisión de Codex de la 820 señaló que el parser leía el bajo de un acorde con barra y luego lo perdía: `C/E` tenía C como `Bass`. Un segundo commit pone el bajo primero, así que `C/E` es E G C. La búsqueda de voicings de GaApi aún lo ignora, porque solo pasa las clases de altura.
 - El primer commit de la 823 quitaba también `NaturalMinorMode`, cuyos siete modos son los de la escala mayor, con los mismos nombres: sus 1 666 plantillas tienen las mismas notas y clases de altura que las de los modos mayores. Codex señaló que la escala madre de su modo difiere (`A B C D E F G`, no `C D E F G A B`) y que `CreateTraditionalChordLibrary` promete esos modos, así que un segundo commit los devuelve.
 - La fila sobre `ChordAlterationService` no fue a ninguna PR: solo `ChordTemplateNamingService` y `HybridChordNamingService` lo llaman, y ninguna aplicación, herramienta MCP ni camino del chatbot los llama en 75959835.
 
