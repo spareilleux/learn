@@ -3,13 +3,13 @@ title: Fundamental, bajo y conjunto de clases de altura — Un conjunto, varios 
 description: Fundamental, bajo y conjunto de clases de altura — Música
 sidebar:
   label: MUS-013 · Fundamental, bajo y conjunto de clases de altura
-  order: 12
+  order: 13
 ---
 
 :::note[Streeling University]
 **MUS-013** · Fundamental, bajo y conjunto de clases de altura · intermedio · 45 minutes
 
-Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/d8c8da550af12f339dbf9464cc1144084eb689b9/state/streeling/courses/music/es/mus-013-root-bass-pitch-class-set.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/499fc64abe83a5bf7d59efdd949bb23b72925ae2/state/streeling/courses/music/es/mus-013-root-bass-pitch-class-set.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MUS-012](../../music/mus-012-chord-formulas-essential-tones-doubling/), [MUS-020](../../music/mus-020-set-classes-interval-vectors-prime-forms/)
 :::

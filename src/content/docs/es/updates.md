@@ -219,6 +219,20 @@ La [PR de Demerzel #1183](https://github.com/GuitarAlchemist/Demerzel/pull/1183)
 
 MUS-010 sigue **pendiente de verificación** hasta que este cambio se fusione, su despliegue sea correcto y las páginas se lean sin autenticación.
 
+## 2026-10-03 — Streeling MUS-010 publicado
+
+La [PR de Learn #132](https://github.com/spareilleux/learn/pull/132) se fusionó como `9e03205`, y su [despliegue de Pages](https://github.com/spareilleux/learn/actions/runs/37152236058) fue correcto. Después, las páginas se leyeron sin autenticación en los tres idiomas: doce páginas, que respondieron todas 200. Las páginas del [módulo MUS-010](../streeling/music/mus-010-scales-pattern-set-interval-vector/) nombran MUS-010 y enlazan su fuente en `d8c8da5`; el [índice de música](../streeling/music/) lo incluye, y el [diario de Streeling](../streeling/journal/) y este diario incluyen sus entradas del 2026-10-03.
+
+MUS-010 pasa así de pendiente de verificación a verificado; su entrada de arriba queda tal como se escribió. Esta actualización fija de nuevo sus enlaces a la fuente en `499fc64`. Publicado no es estudiado: MUS-010 no se ha ejecutado ni estudiado aquí, y su experimento sigue propuesto.
+
+## 2026-10-03 — Streeling MUS-011 sincronizado, pendiente de verificación
+
+La [PR de Demerzel #1184](https://github.com/GuitarAlchemist/Demerzel/pull/1184) se fusionó como `499fc64`, después de la fijación de `d8c8da5`. Esta actualización la sincroniza en Learn:
+- el nuevo [módulo MUS-011](../streeling/music/mus-011-modes-modal-families/), Modos y familias modales, en los tres idiomas;
+- su línea en el [índice de música](../streeling/music/) y en el [diario de Streeling](../streeling/journal/), con una entrada fechada en este último.
+
+MUS-011 sigue **pendiente de verificación** hasta que este cambio se fusione, su despliegue sea correcto y las páginas se lean sin autenticación.
+
 ## Por verificar
 
 - Comprobar las URL públicas de esta actualización y el catálogo tras el despliegue; conservar su recibo en el registro de integración.

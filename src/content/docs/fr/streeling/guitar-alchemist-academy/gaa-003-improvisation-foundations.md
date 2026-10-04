@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **GAA-003** · Cours formel : Improvisation · intermédiaire · 8-10 hours
 
-Généré par le département *Guitar Alchemist Academy* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/d8c8da550af12f339dbf9464cc1144084eb689b9/state/streeling/courses/guitar-alchemist-academy/fr/gaa-003-improvisation-foundations.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Guitar Alchemist Academy* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/499fc64abe83a5bf7d59efdd949bb23b72925ae2/state/streeling/courses/guitar-alchemist-academy/fr/gaa-003-improvisation-foundations.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [GAA-001](../../guitar-alchemist-academy/gaa-001-your-first-chord/), [GTR-001](../../guitar-studies/gtr-001-the-fretboard-map/), [GTR-002](../../guitar-studies/gtr-002-caged-geometry/), [MUS-001](../../music/mus-001-what-is-a-chord/)
 :::

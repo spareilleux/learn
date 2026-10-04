@@ -88,6 +88,7 @@ Coche un module une fois étudié. Sous **Notes**, ajoute une entrée datée : c
 - [ ] [MUS-008 · Intervalles, renversements et intervalles composés](../music/mus-008-intervals-inversion-compound/) <!-- mus-008-intervals-inversion-compound -->
 - [ ] [MUS-009 · Accordage et géométrie du manche](../music/mus-009-tuning-fretboard-geometry/) <!-- mus-009-tuning-fretboard-geometry -->
 - [ ] [MUS-010 · Formules de gammes, ensembles et vecteur d'intervalles diatonique](../music/mus-010-scales-pattern-set-interval-vector/) <!-- mus-010-scales-pattern-set-interval-vector -->
+- [ ] [MUS-011 · Modes et familles modales](../music/mus-011-modes-modal-families/) <!-- mus-011-modes-modal-families -->
 - [ ] [MUS-012 · Formules d'accords, notes essentielles et redoublements](../music/mus-012-chord-formulas-essential-tones-doubling/) <!-- mus-012-chord-formulas-essential-tones-doubling -->
 - [ ] [MUS-013 · Fondamentale, basse et ensemble de classes de hauteurs](../music/mus-013-root-bass-pitch-class-set/) <!-- mus-013-root-bass-pitch-class-set -->
 - [ ] [MUS-018 · Identification de la tonalité, chiffres romains et cadences](../music/mus-018-key-finding-roman-numerals-cadences/) <!-- mus-018-key-finding-roman-numerals-cadences -->
@@ -238,6 +239,14 @@ Rien n'y a été exécuté ici.
 ## 2026-10-03 — MUS-010 · Formules de gammes, ensembles et vecteur d'intervalles diatonique
 
 Synchronisé depuis Demerzel à [`d8c8da5`](https://github.com/GuitarAlchemist/Demerzel/commit/d8c8da550af12f339dbf9464cc1144084eb689b9) ([PR #1183](https://github.com/GuitarAlchemist/Demerzel/pull/1183)). Un nouveau module de musique de niveau intermédiaire sur ce que la gamme majeure a de rare : une gamme comme formule d'intervalles et comme ensemble de classes de hauteurs, les vecteurs d'intervalles des gammes majeure, mineure harmonique, pentatonique et par tons, le théorème des notes communes, et quatre propriétés de la gamme majeure : profonde, propriété de Myhill, maximalement régulière et engendrée par quintes. Il retrace comment GA calcule ces propriétés, et sa section 7 propose une expérience. L'index de la musique le liste désormais, celui de Streeling compte 14 modules de musique au lieu de 13, et MUS-012, MUS-013, MUS-018 et MUS-020 descendent d'un rang dans la barre latérale ; toutes les autres pages ne changent que par leurs références épinglées à Demerzel, de `928fbb2` à `d8c8da5`.
+
+Rien n'y a été exécuté ici.
+
+- **Il n'a pas été étudié ici,** donc sa case ci-dessus reste vide.
+
+## 2026-10-03 — MUS-011 · Modes et familles modales
+
+Synchronisé depuis Demerzel à [`499fc64`](https://github.com/GuitarAlchemist/Demerzel/commit/499fc64abe83a5bf7d59efdd949bb23b72925ae2) ([PR #1184](https://github.com/GuitarAlchemist/Demerzel/pull/1184)). Un nouveau module de musique de niveau intermédiaire sur les modes et les familles modales : un mode comme rotation d'une formule d'intervalles, les modes relatifs et parallèles, le nombre de modes distincts d'une gamme, et pourquoi deux gammes peuvent partager un vecteur d'intervalles sans être des modes l'une de l'autre, par les images miroirs et la relation Z. Il retrace comment GA regroupe les ensembles en familles modales, et sa section 6 propose une expérience. L'index de la musique le liste désormais, celui de Streeling compte 15 modules de musique au lieu de 14, et MUS-012, MUS-013, MUS-018 et MUS-020 descendent d'un rang dans la barre latérale ; toutes les autres pages ne changent que par leurs références épinglées à Demerzel, de `d8c8da5` à `499fc64`.
 
 Rien n'y a été exécuté ici.
 
