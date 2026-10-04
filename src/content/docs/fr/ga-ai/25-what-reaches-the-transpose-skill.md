@@ -277,6 +277,10 @@ Sur `main`, la réponse et les preuves sont les mêmes.
 - **Les formulations sont un échantillon :** celles du skill et de son SKILL.md, les quatre prompts du corpus de GA, et huit formulations du cours.
 - **Le point de chat est interrogé par `WebApplicationFactory`,** avec l'URL d'Ollama sur un port local fermé et une clé d'API vide, et les tableaux affichent la première ligne de chaque réponse.
 
+## Signalé en amont
+
+- Signalés après l'écriture de cette leçon, dans le ticket de GA [#809](https://github.com/GuitarAlchemist/ga/issues/809) : les prompts d'exemple que l'indice de transposition manque et ceux des autres intentions sur lesquels il se déclenche, le repli par mots-clés qui ne peut pas atteindre `skill.transpose` et la victoire par défaut de l'agent des voicings, et les déclencheurs du SKILL.md qu'aucune intention ne route.
+
 ## Exercices
 
 1. Pourquoi « What's Dm7 up a whole step? » ne reçoit-il pas d'indice de transposition ? Reformulez-le pour qu'il en reçoive un.

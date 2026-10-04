@@ -277,6 +277,10 @@ On `main`, the answer and the evidence are the same.
 - **The phrasings are a sample:** the skill's and its SKILL.md's, GA's four corpus prompts, and eight of the course's own.
 - **The chat endpoint is asked through `WebApplicationFactory`,** with the Ollama URL on a closed local port and an empty API key, and the tables print the first line of each answer.
 
+## Reported upstream
+
+- Reported after this lesson was written, in GA issue [#809](https://github.com/GuitarAlchemist/ga/issues/809): the example prompts the transpose hint misses and the other intents' prompts it fires on, the keyword fallback that can't reach `skill.transpose` and the voicing agent's default win, and the SKILL.md triggers no intent routes to.
+
 ## Exercises
 
 1. Why does "What's Dm7 up a whole step?" get no transpose hint? Rewrite it so it gets one.

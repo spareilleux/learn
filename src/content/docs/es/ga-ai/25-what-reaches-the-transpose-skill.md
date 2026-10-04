@@ -277,6 +277,10 @@ En `main`, la respuesta y la evidencia son las mismas.
 - **Las formulaciones son una muestra:** las de la skill y de su SKILL.md, los cuatro prompts del corpus de GA y ocho del propio curso.
 - **El endpoint de chat se consulta a través de `WebApplicationFactory`,** con la URL de Ollama en un puerto local cerrado y una clave de API vacía, y las tablas imprimen la primera línea de cada respuesta.
 
+## Comunicado upstream
+
+- Se comunicaron después de escribir esta lección, en la issue de GA [#809](https://github.com/GuitarAlchemist/ga/issues/809): los prompts de ejemplo que la pista de transposición no reconoce y los de otras intenciones con los que se activa, el respaldo por palabras clave que no puede llegar a `skill.transpose` y la victoria por defecto del agente de voicings, y los disparadores del SKILL.md hacia los que ninguna intención enruta.
+
 ## Ejercicios
 
 1. ¿Por qué "What's Dm7 up a whole step?" no recibe la pista de transposición? Reformúlalo para que la reciba.
