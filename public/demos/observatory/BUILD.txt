@@ -1139,6 +1139,57 @@ without a path, as the lift's; the 16 other takes, the clank's -4.5 dB and the
 step's 0.70 are version 31's. --check-only and --selftest passed on
 scripts/drone.gd in the prototype and in the DLSS copy (observatory-dlss).
 
+Version 33, exported 2026-10-04 02:25:19 UTC, adds the cinematic the author
+asked for ("Je veux des cinematiques aussi bien sinon mieux que GTA V"; in
+real time in the browser first, a path-traced film on the RTX later). Key 0,
+or the page opened with ?cinematic=1, plays about eighty seconds filmed in the
+running scene by a camera of its own between 2.39:1 bars (none on an upright
+phone, whose field widens instead): nine shots, from Trantor under the
+galactic core down through the oculus to the hall, a fresco gathering,
+Seldon's recording, the IX hologram, three TARS, the drone into a gallery, and
+up to the sky, ending on the title. Any key, click or tap ends it, and the
+visitor's view, interface, walking and pointer come back. The first play warms
+up behind black under the title: the set pieces it brings on are brought on
+once with the sound down, and the camera visits every shot's path, so that the
+shaders compile there and not in a shot; the sound comes back over the first
+shot's two seconds. scripts/cinematic.gd is new, and scripts/extra_views.gd
+makes it (key 0, --cinematic, ?cinematic=1), since scripts/observatory.gd
+stays version 28's. Every other script is version 32's, scripts/observatory.gd
+and scripts/quality.gd version 28's.
+index.pck is now 23,952,876 bytes, 30,772 more than version 32's; index.html
+changes only that size, and index.wasm and index.js are unchanged.
+In headless Chrome 154 on this machine (RTX 5080), the build served gzipped
+from localhost (artpass/cinematic/cinematic-web.mjs, web-v33-desktop/ and
+web-v33-phone/): at 1600x900, ?cinematic=1 played the nine shots in order and
+ended on its own in 93 s. Timed from the first shot by requestAnimationFrame,
+frames had a median and a 99th percentile of 16.7 and 16.8 ms; the longest
+were 167 ms 4.6 s into the descent, 117 and 100 ms at Seldon's recording and
+50 ms at the fresco. Without the warm-up, the same build had stopped for up to
+1,783 ms where a shot first showed something, and with the camera's poses
+alone, without the set pieces, for up to 633 ms. After a load and a click, key
+0 started it and Space ended it; headless Chrome's pointer-lock
+WrongDocumentError was the only exception. As an upright phone (390x844, touch
+emulated) it played without bars, and a tap in the third shot ended it, with
+no exception; its longest frame was 134 ms. The remaining stops of 100 to 170
+ms, and how it plays on a real phone or a weak GPU, are to verify.
+Native: version 32's whole list and the cinematic's probe three times
+(artpass/publish/regress-pub25.sh) against this build's own project, 60 runs.
+All passed but motion_bay14, panel 14's known miss at frame 4 (2.99 against 3,
+the same numbers as versions 31 and 32). cinematest.gd, under Compatibility at
+1600x900 with keys, under Compatibility on an upright phone (390x844) by
+touch, and under Forward+ played through without a skip first: the clearance
+of every shot's path, key 0 or a tap, its own camera and the visitor's
+interface aside, bars on the wide screen and none upright, the warm-up (47
+poses in 2.42 s, the five set pieces brought on with the sound down and put
+back), a key or a tap ending it, then the whole cinematic: the nine shots in
+order, the six cues, three TARS, the drone flown for 541 frames and put back,
+the recording and the hologram formed late in their shots, the camera touching
+nothing frame by frame, and afterwards the view, the interface, the walking
+body, the pointer, the sound's level and the picture's light as they were.
+Depth of field was on under Forward+ only. --check-only and --selftest passed
+on scripts/cinematic.gd in the prototype and in the DLSS copy
+(observatory-dlss).
+
 Native Compatibility GPU time, RTX 5080, 1600x900, 240 frames per view: 0.44 to
 0.52 ms for the previous web scene, 0.64 to 1.44 ms with the detail pass; up to
 1.55 million primitives in the overview, against 0.46 million before. With the
@@ -1182,7 +1233,7 @@ assets/floor_paving.gdshader 23187f024d276b897635ee0cc3e543c5852c4a9b5175cbe56ec
 assets/statue_marble.gdshader ec3f14f662487f3dae14a398fe91ea7183d88214bd2bf266359da89d79b94452
 assets/world_glimpse.gdshader a06fc85ca086fc3e4d9297039be0b6549132bbffafeaedfbda0ffea3eb918d6d
 assets/courses.json 407817e268f2c0d37ce28ae0d873f08b87a514479d6a73545b75d1dfbb71823b
-scripts/extra_views.gd d5a333c888a503199baaea805997c8917121b55c3b02244fd16f302d6374f3c7
+scripts/extra_views.gd 461e943660f74eeb696719e4cd7e13462607d29a4296394a0e475bd133020673
 scripts/upperside.gd b6e5a199de5737ffaa294c1f9a6be8d21fc4817ac600118dead14f0fc8fc486c
 assets/night_sky.gdshader 67421b4338debb80d8b6cec071bb37001d9d5493d240be53c0a107ad17cb5cec
 assets/upperside.gdshader f119593a603bc623de218054ec142b8732330785fe0d61ba5a3dcc13124f96e3
@@ -1210,7 +1261,7 @@ assets/fresco_panel.gdshader e9c20421cf254119e9d85da22a70bb8a965cee0be524f5c95b2
 assets/fresco_dust.gdshader 9d63b02079689cd0205a9d469c743645d4fac1ccfff21a3d0326f36a3062341c
 assets/fresco_atlas.png cccc2917f794f42517ee001392802ec6828acc747f585018e49349474b1638fc
 assets/fresco_motion.png aa7148be2c28917ddae5d92b7a155c46fe024460c67e919106be23782fdf7822
-scripts/build_info.gd 1b73611c64aef454bd19b85e8e0fd8e64852180de0bbc4df5a1fa66666a582d3
+scripts/build_info.gd 2f03dd4b4abf28398f249ee6d6da177b3d51cfa3d157f88617a3034d446c6318
 scripts/sfx_takes.gd 069f573898d4c4ad48fde9f1f592dba0974433b1881d7ed045d6797c3c3a0ac6
 assets/sfx/curio_wheel-beep.wav a1d999098afbd222622a6c4625ee16bb9788059c6fe37901067d9cd239f5ec8c
 assets/sfx/curio_wheel-chime.wav 6b580b1e57194c1f84183044c367bcab9d07e3d4c876da3dee5736ba78298c9e
@@ -1230,16 +1281,17 @@ assets/sfx/lift-hum.wav 8fb1c4c42673f5904b8304f1d66d58e403f7d4f360c347b41d5a3bef
 assets/sfx/lift-rattle.wav ca4492ca261db9c13a17b316146296cb0eff9f527c2d6508a441ff984395281f
 assets/sfx/seldon_recording-shimmer.wav f162e8a4e867503b38271d149a631e2cc1818ae2ab3600897dffa5770e23f8d0
 assets/sfx/drone-hum.wav 9e7adb0d9a8b790a9facf803ef0a0b2588150c71569912fc2db9e339383a9364
+scripts/cinematic.gd a6e03dc5adc4e673001ba48e6387c4311c1c7bd9b78c7bf49539308290eaa091
 
 SHA-256 output files:
-index.pck 5c77fae879bc44531f59b81cf772d04898badbb9c82281bb4b6096efb5e99e51
+index.pck a90fc372f3ee2bfb0c3ccf98779bc0c5e2f9960416c6748d55f40c3e0c77dfdb
 index.wasm 99962b29677e42f3ba0258bd90fdc52ad90295954c4473e816ad02cfe5ff1d4f
 index.js e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981
 
 This directory contains a prebuilt binary export. Re-export only for deliberate
 scene changes. A scene re-export leaves the engine files (index.wasm, index.js)
 byte-identical, so git keeps a single copy; each scene revision adds its
-index.pck (23.9 MB here) to the binary history.
+index.pck (24.0 MB here) to the binary history.
 
 2026-10-03 post-merge recording sound correction: v28 preserved the v27
 `scripts/seldon_recording.gd` hash above before this correction. Fresh R or a
