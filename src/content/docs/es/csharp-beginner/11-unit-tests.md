@@ -498,7 +498,7 @@ La prueba construye la ruta a partir de [`AppContext.BaseDirectory`](https://lea
 - xUnit crea un objeto nuevo para cada prueba, y no promete ningún orden. Un proyecto de pruebas solo ve los miembros públicos de la biblioteca.
 - Una prueba que se omite, que no se compila o que solo comprueba «más que cero» puede pasar mientras el código está roto.
 
-La siguiente lección, [un pequeño proyecto](../#plan): una solución con esta biblioteca, una aplicación de consola y estas pruebas, un paquete NuGet, y un primer vistazo a `async`.
+La siguiente lección, [un pequeño proyecto](../12-small-project/): una solución con esta biblioteca, una aplicación de consola y estas pruebas, un paquete NuGet, y un primer vistazo a `async`.
 
 ## Fuentes
 

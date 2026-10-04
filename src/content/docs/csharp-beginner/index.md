@@ -52,10 +52,8 @@ The examples use small, real data where it helps: the notes of a guitar, the tun
 | 9 | [Collections and LINQ](09-collections-and-linq/) | `Dictionary<TKey, TValue>`, `HashSet<T>`, `Where`, `Select`, `OrderBy` |
 | 10 | [Files and text](10-files-and-text/) | `File`, `Path`, reading a CSV file of Guitar Alchemist's projects |
 | 11 | [Unit tests](11-unit-tests/) | xUnit, `dotnet test`, testing the methods of earlier lessons |
-| 12 | A small project | a solution with a library, a console app and tests, a NuGet package, a first look at `async` |
+| 12 | [A small project](12-small-project/) | a solution with a library, a console app and tests, a NuGet package, a first look at `async` |
 | — | [Journal](journal/) | |
-
-Lesson 12 is planned and not written yet.
 
 ## Highlights from the journal
 
@@ -77,6 +75,8 @@ The [journal](journal/) records what writing and testing this course turned up. 
 | The format string that Guitar Alchemist writes its naturalness CSV with follows the machine's culture: under `fr-FR`, `2.50` becomes `2,50`, and a row of 6 values splits into 8 | A file written on a French machine doesn't read back with `Split(',')`; write numbers with `CultureInfo.InvariantCulture`. Not reported to GA yet | [Lesson 10](10-files-and-text/), [QA table](journal/#qa) |
 | Guitar Alchemist's tests of its YAML services pass while three of the four files don't load: three tests are skipped, and the others check "more than zero", which the one default item satisfies | A test that only checks "more than zero" can't see a fallback; check the real value. Not reported to GA yet | [Lesson 11](11-unit-tests/), [QA table](journal/#qa) |
 | With its arguments swapped, `Assert.Equal` calls the method's result "Expected" and the test's value "Actual"; the analyzer rule xUnit2000 warns before the tests run | The expected value comes first; read the warnings of a test build too | [Lesson 11](11-unit-tests/), [journal](journal/#2026-10-03--unit-tests) |
+| `dotnet test` in a solution's folder builds only the test projects and what they reference: with a compile error in the console app, the tests still pass and exit with 0 | Run `dotnet build` too before you trust a green test run | [Lesson 12](12-small-project/), [journal](journal/#2026-10-03--a-small-project) |
+| In Guitar Alchemist's `Directory.Build.props`, the `PackageReference Update` lines meant to align package versions change nothing: the file is imported before the projects' own items | Check the version a restore picks; `Directory.Build.targets` or central package management do what these lines intend. Not reported to GA yet | [Lesson 12](12-small-project/), [QA table](journal/#qa) |
 
 ## Prerequisites
 

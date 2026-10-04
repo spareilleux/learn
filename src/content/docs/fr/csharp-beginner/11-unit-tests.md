@@ -498,7 +498,7 @@ Le test construit le chemin à partir d'[`AppContext.BaseDirectory`](https://lea
 - xUnit crée un nouvel objet pour chaque test, et ne promet aucun ordre. Un projet de test ne voit que les membres publics de la bibliothèque.
 - Un test ignoré, non compilé, ou qui vérifie seulement « plus que zéro » peut passer alors que le code est cassé.
 
-La suite : [un petit projet](../#plan), une solution avec cette bibliothèque, une application console et ces tests, un package NuGet, et un premier regard sur `async`.
+La suite : [un petit projet](../12-small-project/), une solution avec cette bibliothèque, une application console et ces tests, un package NuGet, et un premier regard sur `async`.
 
 ## Sources
 
