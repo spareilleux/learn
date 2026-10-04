@@ -1253,6 +1253,55 @@ degrees on the lead for the call, 413 landings, the end 18.0 s after the call
 passed on scripts/curio_wheel.gd and scripts/tars_ensemble.gd in the prototype
 and in the DLSS copy (observatory-dlss).
 
+Version 35, exported 2026-10-04 06:54:13 UTC, keeps the hums going in the web
+build. There, Godot's sample playback plays a looping stream once and stops;
+scripts/drone.gd and scripts/lift.gd played their hums again once Godot
+reported them stopped, which left silences between (version 32's paragraph
+measured 2.7 ms to 1.5 s for the drone). scripts/web_loop.gd now has two
+players take turns there: the next copy starts once the current one has played
+half the take, timed by the clock times its pitch, and the two crossfade at
+equal power over 0.25 s. Starting half a take early carries the hum over a
+stalled frame, when no script runs: the web build stalls for up to 0.7 s
+compiling what first comes into view, as when the drone takes off. Natively,
+where the stream loops by itself, the hum's one player plays as before. And
+scripts/seldon_recording.gd converts the shimmer it synthesizes when its take
+is missing to 16-bit 8,192 samples a frame, not all 74,970 in one (2.1 ms of a
+frame natively; the same bytes, checked by hash). drone.gd, lift.gd and
+seldon_recording.gd are version 34's with artpass/audio/patch_web_loops.py
+applied, and web_loop.gd is new; every other script is version 34's,
+scripts/observatory.gd and scripts/quality.gd version 28's.
+index.pck is now 24,170,696 bytes, 3,296 more than version 34's; index.html
+changes only that size, and index.wasm and index.js are unchanged.
+In headless Chrome 154 on this machine (RTX 5080), the build served gzipped
+from localhost: the hums recorded with the output muted
+(artpass/audio/loop-web.mjs, then loop_check.py: a silence is 2 ms or more 40
+dB under the hum's median while it should sound). The drone flown 20 s on an
+emulated phone had no silence in two runs, and the lift, three rides up on a
+computer, one each, of 8.7 and 6.0 ms (web-loop-v35-run1/,
+web-loop-v35-run3/); version 34's build, recorded the same way, had 4 in the
+drone's hum, the longest 588 ms, and 3 in the lift's, the longest 76 ms. A
+third run, while other work kept this machine's processors busy, had silences
+of up to 2.0 s in both (web-loop-v35-run2-loaded/). The whistle's troupe
+(artpass/tarsdance/troupe-web.mjs, web-v35/troupe/), the wheel's nine curios
+(artpass/publish/curio-web.mjs, curio-web-v35/), the drone's on a computer and
+on a phone (drone-web.mjs, drone-web-v35-desktop/ and drone-web-v35-phone/)
+and the sound's (artpass/audio/audio-web.mjs, web-v35/) tests passed as on
+version 34, with no console error; the drone's on a computer met headless
+Chrome's three pointer-lock WrongDocumentErrors, as before.
+Native: version 34's whole list, then the hum's loop and Seldon's shimmer
+(artpass/publish/regress-pub27.sh) against this build's own project, 65 runs.
+All passed but motion_bay14, panel 14's known miss at frame 4 (2.99 against 3,
+the same numbers as versions 31 to 34). loopprobe.gd (artpass/audio/), with
+--web-loops so that two players take turns as on the web: a 2 s stream that
+does not loop, its pitch swinging between 0.5 and 1.5, kept on 9 s with three
+frames stalled 0.6 s each just before a handover, had no frame with no copy
+playing and no late handover, the two crossfaded, and off stopped both.
+recsound_probe.gd: Seldon's recording without its take made its shimmer in 37
+frames (27 with version 34's build), 149,940 bytes, the same bytes as version
+34's by hash. --check-only and --selftest passed on scripts/web_loop.gd,
+drone.gd, lift.gd and seldon_recording.gd in the prototype and in the DLSS
+copy (observatory-dlss).
+
 Native Compatibility GPU time, RTX 5080, 1600x900, 240 frames per view: 0.44 to
 0.52 ms for the previous web scene, 0.64 to 1.44 ms with the detail pass; up to
 1.55 million primitives in the overview, against 0.46 million before. With the
@@ -1303,12 +1352,12 @@ assets/upperside.gdshader f119593a603bc623de218054ec142b8732330785fe0d61ba5a3dcc
 assets/sky_milky_way_eso.jpg b17e19bf2d5e7e9efa03b602450f5189dc77f85251e704d99b6f14632cff3495
 assets/exterior_ashlar_albedo.png c0cff260c039e1e1528920f86070266ac20ba2a3e36e99a53654c2ed18cdef94
 assets/exterior_ashlar_normal.png 0dc3b0023534b21c7d383bbca468f057cc65ba1a9526303c7b3084587138f029
-scripts/lift.gd 090d7ea214ff6ff6db3da905d65c9a1b6f413e0f8f223f0d02bff1bca91e7025
+scripts/lift.gd 765ede89150fa68729b74e585cfc97ccd719c342eba0d16ecaaed657925990d4
 assets/sky_core_cap.png a110fdfa1b79cc41eec119265aeb89bc211d0b8e0eb6c759b45c25496f2daabe
 assets/kiosk_glass.gdshader 76226f17e5884a042b85e5fc544a4b71012ea6e389b9743c1cac65083a06bc44
 scripts/lift_sounds.gd 4daed5e380396a3711fc7ff2f1f72b877b9efbdaff6d6fa428c595b1dad7b244
 scripts/curio_wheel.gd 2d3fe6257051c5027031bbf42e400a7fb737f9dd013188a2c2d0e6e5d8d2a200
-scripts/drone.gd 40ce7747526e1a88f1a0513571292e10c5beb94616960c41b02ae99b3bf903cb
+scripts/drone.gd 6d90aae0fe64191ff0f6a7bfcbd6c56d551153e1eb03c3e8b71509a69ef87209
 scripts/tars.gd 747a7c313a37c0731b4a9c8b5f78d364cbc6a6181b25623cd919a0a5b19a09d0
 scripts/hologram_ix.gd b252ee1de7055822af6886ea796e6a8e35aa81510ec0eb4f36b2bcf20b32e8a6
 scripts/quality.gd bdad805e7717769145b5aa2ad98aca56b0b76857fdcd86e87817f1bc53046c69
@@ -1316,7 +1365,7 @@ assets/holo_panel.gdshader 1a77f62f3bd53c29c95341058baa0d19613737ab2a98f24c6fd4e
 assets/holo_edge.gdshader 029b74b7147bdc55e8b1042c3274b3018892217653e47458ca58f0115229f8e7
 assets/holo_ring.gdshader 23cd4ef37915ab49690739865460b7b0e343865b3754d5daf2d5d09234327c5d
 assets/ix_pipelines.json 180cb180625664b027f3c7e01d855533c757e4e5525c506bd2a6f26ecc73f947
-scripts/seldon_recording.gd 3988a200a291c42120ee72194eb3be5cec3c75407bf5e75a4004d9dffcd889b0
+scripts/seldon_recording.gd eb9dbe6d659c1461e70958ee0a2d9174ee48b32a8d9a690d5e2fb282c00d3958
 assets/seldon_points.gdshader 744b72e7abd915467abc5d9727eecbadaf4290bb5ecbed2fee6fe98ed80bcd2e
 assets/recording_frame.gdshader a7daedd2a691b70de4754d06fc0974f40335109603c57426a70a7381a5052a0c
 scripts/fresco_frieze.gd 2f2b0654f88c8a0331f47656267e834faaaca879b1acc9615169c1946aa7c948
@@ -1324,7 +1373,7 @@ assets/fresco_panel.gdshader e9c20421cf254119e9d85da22a70bb8a965cee0be524f5c95b2
 assets/fresco_dust.gdshader 9d63b02079689cd0205a9d469c743645d4fac1ccfff21a3d0326f36a3062341c
 assets/fresco_atlas.png cccc2917f794f42517ee001392802ec6828acc747f585018e49349474b1638fc
 assets/fresco_motion.png aa7148be2c28917ddae5d92b7a155c46fe024460c67e919106be23782fdf7822
-scripts/build_info.gd 3dfa7d90521ee7da6289f55de22d6f3aa17d89c88992c28fff7a58d483cf9aad
+scripts/build_info.gd fafe85e55a2d0e1ce4ca23659b3b5b75fe5288f8fde1a1d22c8d2470b1a344ea
 scripts/sfx_takes.gd 069f573898d4c4ad48fde9f1f592dba0974433b1881d7ed045d6797c3c3a0ac6
 assets/sfx/curio_wheel-beep.wav a1d999098afbd222622a6c4625ee16bb9788059c6fe37901067d9cd239f5ec8c
 assets/sfx/curio_wheel-chime.wav 6b580b1e57194c1f84183044c367bcab9d07e3d4c876da3dee5736ba78298c9e
@@ -1348,9 +1397,10 @@ scripts/cinematic.gd a6e03dc5adc4e673001ba48e6387c4311c1c7bd9b78c7bf49539308290e
 scripts/tars_ensemble.gd 6116bdc132c13880b62105f5083b0a8d86aa4224fcc63fe10b3cd06c581e84bb
 assets/tars_ensemble_tracks.tres 6c2be9a6fc350c02f8dd19e6a768ed911d11ebd741d4c5939bb585a84171b272
 assets/tars_ensemble_jig_tracks.tres d7604ba2a5dc3e61fb29441d145d0d98703193c516d429a754e9c0e4949383a0
+scripts/web_loop.gd cd89961d3e7e5d8275d67ead034eb2184587810dc710316c5377f58a16e35cbb
 
 SHA-256 output files:
-index.pck 7c97f995f60b3167e044f3a52c22713d137c8ec1248ab3a9f9ec681d295b469d
+index.pck c7b35c8afa06d996929f4265637db0c52dbbe608245cab456157525778137be2
 index.wasm 99962b29677e42f3ba0258bd90fdc52ad90295954c4473e816ad02cfe5ff1d4f
 index.js e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981
 
