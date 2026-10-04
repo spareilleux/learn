@@ -216,10 +216,10 @@ why does F sound outside over a minor chord        yes        **F** over **A**: 
 why does F sound outside over a dominant chord     yes        **F** over **D**: an available tension — the #9 (sharp ninth).
 why does F sound outside on top of Cmaj7           no         Tell me a single note and a single chord and I'll say whether it's a chord tone, a tension, or an avoid note — e.g. "why does F sound outside over Cmaj7" or "is A a tension over Cmaj7".
 why does the 11 clash over Cmaj7                   yes        Tell me a single note and a single chord and I'll say whether it's a chord tone, a tension, or an avoid note — e.g. "why does F sound outside over Cmaj7" or "is A a tension over Cmaj7".
-example prompts 10: CanHandle accepts 8
+example prompts 10: CanHandle accepts 8, the skill refuses 3
 ```
 
-- **Two example prompts get the refusal.** "why does that note clash over the chord" names no note, and "why does the b9 sound so tense over C7" names a degree: degree words are out of the skill's scope ([lines 31-34](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/OutsideNotesSkill.cs#L31-L34)), but the prompt is one of its examples. "why does the 11 clash over Cmaj7" gets the refusal too.
+- **The skill refuses 3 of its 10 example prompts.** "why does that note clash over the chord" and "why does the note clash over this chord" name no note, and "why does the b9 sound so tense over C7" names a degree: degree words are out of the skill's scope ([lines 31-34](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/OutsideNotesSkill.cs#L31-L34)), but the prompt is one of its examples. "why does the 11 clash over Cmaj7" gets the refusal too.
 - **`CanHandle` accepts 8 of the 10.** It wants one of its keywords, a preposition and a chord ([lines 65-86](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/OutsideNotesSkill.cs#L65-L86)): "what is F over G7" has no keyword, though the skill answers it, and "why does the note clash over this chord" has no chord. At the pin the orchestrator doesn't call `CanHandle`; on `main`, the intent router asks it when it can't embed a question ([lesson 25](../25-what-reaches-the-transpose-skill/)).
 - **"on top of" passes `CanHandle`'s preposition list, but not the regex,** which wants the chord right after "on": "why does F sound outside on top of Cmaj7" gets the refusal.
 

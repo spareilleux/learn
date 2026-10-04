@@ -294,6 +294,7 @@ public static class Lesson27
         ]).ToList();
         foreach (var prompt in prompts)
             Row(w, prompt, skill.CanHandle(prompt) ? "yes" : "no", FirstLine(Ask(skill, prompt)));
-        Line($"example prompts {skill.ExamplePrompts.Count}: CanHandle accepts {skill.ExamplePrompts.Count(skill.CanHandle)}");
+        var refused = skill.ExamplePrompts.Count(p => Evidence(skill, p, "Note") is null);
+        Line($"example prompts {skill.ExamplePrompts.Count}: CanHandle accepts {skill.ExamplePrompts.Count(skill.CanHandle)}, the skill refuses {refused}");
     }
 }
