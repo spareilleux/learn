@@ -73,6 +73,7 @@ Three other courses on this site cover the background, and this one links to the
 | 24 | [Set classes and the Grothendieck parser](24-set-classes-and-the-grothendieck-parser/) | `SetTheoryEquivalenceSkill` and `GrothendieckParseSkill` in `GA.Business.ML`, and `GrothendieckOperationsParser` in `GA.Business.DSL`, at the pin and on `main` | a relation never read, a set read from its last number, a parser whose spaces are already eaten, an answer about no chord |
 | 25 | [What reaches the transpose skill](25-what-reaches-the-transpose-skill/) | `DefaultRoutingHintProvider`, `TransposeSkill`, `SkillMdPlugin` and the two routers of the chatbot host, at the pin and on `main` | a hint that misses the skill's own examples, a skill no fallback can reach, a default that answers every question nobody claims |
 | 26 | [The modes catalog](26-the-modes-catalog/) | `ModesSkill`, `Modes.yaml` and `ModesConfig`, at the pin and the same on `main` | modes that aren't their family's scale, names cut by a YAML comment, formulas numbered by position |
+| 27 | [Notes that sound outside](27-notes-that-sound-outside/) | `OutsideNotesSkill` and `ChordVocabulary`, at the pin and the same on `main` | tensions no chord scale holds, an 11 inside 13th chords, chord symbols cut short, sharps in flat chords |
 | — | [Journal](journal/) | | |
 
 ## Prerequisites

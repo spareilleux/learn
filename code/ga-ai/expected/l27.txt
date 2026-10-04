@@ -1,0 +1,104 @@
+# l27
+
+== The rule against a textbook: c chord tone, t available tension, a avoid note, o in none of the chord's usual scales
+chord                        1    b9   9    #9   3    11   #11  5    b13  13   b7   7
+Cmaj7              skill     c    a    t    t    c    a    t    c    a    t    t    c
+                   textbook  c    o    t    o    c    a    t    c    o    t    o    c
+Cm7                skill     c    a    t    c    a    t    t    c    a    t    c    a
+                   textbook  c    a    t    c    o    t    o    c    a    t    c    o
+C7                 skill     c    a    t    t    c    a    t    c    a    t    c    a
+                   textbook  c    t    t    t    c    a    t    c    t    t    c    o
+Cm7b5              skill     c    a    t    c    a    t    c    a    t    t    c    a
+                   textbook  c    a    t    c    o    t    c    o    t    o    c    o
+Cdim7              skill     c    a    t    c    a    t    c    a    t    c    a    t
+                   textbook  c    o    t    c    o    t    c    o    t    c    o    t
+cells 60: the same 42; avoid notes no usual scale holds 12; tensions no usual scale holds 4: #9 over Cmaj7, b7 over Cmaj7, #11 over Cm7, 13 over Cm7b5; avoid notes the textbook makes tensions 2: b9 over C7, b13 over C7
+
+== A few of OutsideNotesSkill's answers
+why does Db sound outside over C7
+  | **Db** over **C dominant 7**: an avoid note — the b9 (flat ninth).
+  | It's the b9 (flat ninth), sitting a semitone above the root of the chord. That half-step rub is why it sounds outside — but over a dominant chord it's exactly the kind of altered tension players reach for (b9 (flat ninth) on the V), so it's usable if you resolve it, not a note to simply avoid.
+why does D# sound outside over Cmaj7
+  | **D#** over **C major 7**: an available tension — the #9 (sharp ninth).
+  | It's the #9 (sharp ninth) — a non-chord tone, but it isn't a semitone above any chord tone, so it adds colour without clashing. Safe to sustain as an extension.
+why does Bb sound outside over Cmaj7
+  | **Bb** over **C major 7**: an available tension — the b7 (minor seventh).
+  | It's the b7 (minor seventh) — a non-chord tone, but it isn't a semitone above any chord tone, so it adds colour without clashing. Safe to sustain as an extension.
+why does A sound outside over Cm7b5
+  | **A** over **C half-diminished**: an available tension — the 13 (thirteenth).
+  | It's the 13 (thirteenth) — a non-chord tone, but it isn't a semitone above any chord tone, so it adds colour without clashing. Safe to sustain as an extension.
+
+== F over C and its extended chords: the first line of the answer, and the chord's notes
+chord    answer                                                                        notes
+C        **F** over **C**: an avoid note — the 11 (natural eleventh).                  C, E, G
+Cmaj7    **F** over **C major 7**: an avoid note — the 11 (natural eleventh).          C, E, G, B
+Cmaj9    **F** over **C major 9**: an avoid note — the 11 (natural eleventh).          C, E, G, B, D
+Cmaj11   **F** over **C major 11**: a chord tone — the perfect eleventh.               C, E, G, B, D, F
+Cmaj13   **F** over **C major 13**: a chord tone — the perfect eleventh.               C, E, G, B, D, F, A
+C7       **F** over **C dominant 7**: an avoid note — the 11 (natural eleventh).       C, E, G, A#
+C9       **F** over **C dominant 9**: an avoid note — the 11 (natural eleventh).       C, E, G, A#, D
+C11      **F** over **C dominant 11**: a chord tone — the perfect eleventh.            C, E, G, A#, D, F
+C13      **F** over **C dominant 13**: a chord tone — the perfect eleventh.            C, E, G, A#, D, F, A
+Cm7      **F** over **C minor 7**: an available tension — the 11 (natural eleventh).   C, Eb, G, Bb
+Cm11     **F** over **C minor 11**: a chord tone — the perfect eleventh.               C, Eb, G, Bb, D, F
+
+== "why does <note> sound outside over Cmaj7": the note the skill reads, for each way to write it
+written      notes     read      misread   not read
+natural      7         7         0         0
+sharp, #     7         7         0         0
+flat, b      7         7         0         0
+sharp, ♯     7         0         7         0
+flat, ♭      7         0         7         0
+lowercase    7         0         0         7
+not read right: C♯: C; D♯: D; E♯: E; F♯: F; G♯: G; A♯: A; B♯: B; C♭: C; D♭: D; E♭: E; F♭: F; G♭: G; A♭: A; B♭: B; c: no answer; d: no answer; e: no answer; f: no answer; g: no answer; a: no answer; b: no answer
+
+== "why does F sound outside over C<chord>": the chord the skill reads, for each way to write it
+written    read as                its notes          the chord's notes
+C-         C                      C E G              C Eb G
+C°         C °                    C E G              C Eb Gb
+Co         C                      C E G              C Eb Gb
+Cdom7      C                      C E G              C E G Bb
+Cma7       Cm                     C Eb G             C E G B
+CΔ7        C δ7                   C E G              C E G B
+CΔ         C δ                    C E G              C E G B
+C-7        C                      C E G              C Eb G Bb
+Cmi7       Cm                     C Eb G             C Eb G Bb
+Cm7♭5      C minor 7              C Eb G Bb          C Eb Gb Bb
+C-7b5      C                      C E G              C Eb Gb Bb
+Co7        C                      C E G              C Eb Gb A
+C7♯9       C dominant 7           C E G A#           C Eb E G Bb
+C7sus4     C 7sus4                C E G              C F G Bb
+CmMaj7     C mmaj7                C E G              C Eb G B
+Cm(maj7)   Cm                     C Eb G             C Eb G B
+C7#11      C 7#11                 C E G              C E Gb G Bb
+Cmaj7#11   C maj7#11              C E G              C E Gb G B
+chords written 45: chords ChordVocabulary has 40, read right 27; chords it doesn't have 5, read right 0
+
+== The chord's notes in the skill's evidence, against one letter per chord step, on 12 roots
+chord            symbol  right     the first that differs: the skill's, a textbook's
+major                    11 of 12  F#: Gb Bb Db; F# A# C#
+minor            m       8 of 12   Dbm: Db E Ab; Db Fb Ab
+dominant 7       7       9 of 12   C7: C E G A#; C E G Bb
+major 7          maj7    11 of 12  F#maj7: Gb Bb Db F; F# A# C# E#
+minor 7          m7      8 of 12   Dbm7: Db E Ab B; Db Fb Ab Cb
+half-diminished  m7b5    6 of 12   Dbm7b5: Db E G B; Db Fb Abb Cb
+diminished 7     dim7    3 of 12   Cdim7: C Eb Gb A; C Eb Gb Bbb
+augmented        aug     6 of 12   Eaug: E G# C; E G# B#
+
+== OutsideNotesSkill's example prompts, and a few other ways to ask: CanHandle, and the first line of the answer
+prompt                                             CanHandle  answer
+why does F sound outside over Cmaj7                yes        **F** over **C major 7**: an avoid note — the 11 (natural eleventh).
+why does that note clash over the chord            yes        Tell me a single note and a single chord and I'll say whether it's a chord tone, a tension, or an avoid note — e.g. "why does F sound outside over Cmaj7" or "is A a tension over Cmaj7".
+is F an avoid note over Cmaj7                      yes        **F** over **C major 7**: an avoid note — the 11 (natural eleventh).
+what is F over G7                                  no         **F** over **G dominant 7**: a chord tone — the minor seventh.
+why does the b9 sound so tense over C7             yes        Tell me a single note and a single chord and I'll say whether it's a chord tone, a tension, or an avoid note — e.g. "why does F sound outside over Cmaj7" or "is A a tension over Cmaj7".
+is A a chord tone or a tension over Cmaj7          yes        **A** over **C major 7**: an available tension — the 13 (thirteenth).
+why does Bb sound outside over C major             yes        **Bb** over **C**: an available tension — the b7 (minor seventh).
+is F# an avoid note or a tension over Cmaj7        yes        **F#** over **C major 7**: an available tension — the #11 (sharp eleventh).
+why does F clash over a Cmaj7 chord                yes        **F** over **C major 7**: an avoid note — the 11 (natural eleventh).
+why does the note clash over this chord            no         Tell me a single note and a single chord and I'll say whether it's a chord tone, a tension, or an avoid note — e.g. "why does F sound outside over Cmaj7" or "is A a tension over Cmaj7".
+why does F sound outside over a minor chord        yes        **F** over **A**: an avoid note — the b13 (flat thirteenth).
+why does F sound outside over a dominant chord     yes        **F** over **D**: an available tension — the #9 (sharp ninth).
+why does F sound outside on top of Cmaj7           no         Tell me a single note and a single chord and I'll say whether it's a chord tone, a tension, or an avoid note — e.g. "why does F sound outside over Cmaj7" or "is A a tension over Cmaj7".
+why does the 11 clash over Cmaj7                   yes        Tell me a single note and a single chord and I'll say whether it's a chord tone, a tension, or an avoid note — e.g. "why does F sound outside over Cmaj7" or "is A a tension over Cmaj7".
+example prompts 10: CanHandle accepts 8
