@@ -182,10 +182,10 @@ sidebar:
 - La sonde [`knowledge-tests`](https://github.com/spareilleux/learn/tree/main/code/csharp-beginner/ga-probes/knowledge-tests) est un projet NUnit qui compile sans changement quatre fichiers de GA.Business.Core.Tests extraits du code : `MusicalKnowledgeServiceTests.cs`, `TestEnvironment.cs`, `GlobalUsings.cs` et `AssemblyInfo.cs`, avec les versions de paquets de ce projet. `ProbeTests.cs` est son seul fichier propre. Sa compilation n'affiche que IDE0028 dans `ScaleMetadataRegistry.cs` de GA. Son exécution : 9 tests, 6 réussis (les 5 de GA et celui de la sonde), 3 ignorés.
 - Cela répond à la question ouverte du journal : aucun test de GA n'échoue quand un fichier YAML de `GA.Business.Config` cesse de se charger. La question est retirée de la liste plus bas.
 - Sous Windows avec le SDK 10.0.112, `check.sh` se termine avec le code 0 et 144 lignes `ok`, dont les 4 de la leçon 11. Ce n'est pas encore une exécution de la CI sur trois OS.
+- Puis dans la CI : le [run 37170066128](https://github.com/spareilleux/learn/actions/runs/37170066128) du workflow *C# for beginners examples*, sur le commit `c3427a9` de la [PR #135](https://github.com/spareilleux/learn/pull/135), a réussi sous `ubuntu-latest`, `windows-latest` et `macos-latest`. Chaque job affiche `ok` pour les 4 vérifications `l11_*` ; les jobs comptent 145 lignes `ok` sous Linux et macOS et 144 sous Windows, pour la même raison qu'à la leçon 6. `l11_Pitfalls.Tests` réussit aussi sous Windows : les flèches `↓` et `↑` de l'échec sur une collection traversent Git Bash sans changement.
 
 ## À vérifier
 
-- Les tests de la leçon 11 dans la CI Linux, Windows et macOS, après l'ouverture d'une PR, et les flèches d'un échec sur une collection dans le job Windows.
 - GaCLI lancé depuis un autre dossier que le sien : tourne-t-il sans `appsettings.yaml`, comme son code le laisse penser (tableau QA) ?
 - Le nombre d'artistes que GA compterait une fois ses trois fichiers YAML chargés. Un script PyYAML sur les fichiers bruts, hors du code du cours, l'estime à 63. Selon la même estimation, `Take(20)` écarterait 8 artistes qui ont plus d'entrées que le plus petit nombre gardé, dont The Beatles (3 entrées).
 - Les commandes d'installation pour Linux et macOS : seul le `setup-dotnet` de la CI a tourné sur ces OS.

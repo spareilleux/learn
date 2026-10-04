@@ -182,10 +182,10 @@ sidebar:
 - The probe [`knowledge-tests`](https://github.com/spareilleux/learn/tree/main/code/csharp-beginner/ga-probes/knowledge-tests) is an NUnit project that compiles four files of GA.Business.Core.Tests unchanged from the extracted code: `MusicalKnowledgeServiceTests.cs`, `TestEnvironment.cs`, `GlobalUsings.cs` and `AssemblyInfo.cs`, with the package versions of that project. `ProbeTests.cs` is its only own file. Its build prints only IDE0028 in GA's `ScaleMetadataRegistry.cs`. Its run: 9 tests, 6 passed (GA's 5 and the probe's), 3 skipped.
 - This answers the journal's open question: no GA test fails when a YAML file of `GA.Business.Config` stops loading. The question is removed from the list below.
 - On Windows with SDK 10.0.112, `check.sh` exits 0 with 144 `ok` lines, the 4 of lesson 11 included. This is not yet a three-OS CI run.
+- Then in CI: [run 37170066128](https://github.com/spareilleux/learn/actions/runs/37170066128) of the *C# for beginners examples* workflow, on commit `c3427a9` of [PR #135](https://github.com/spareilleux/learn/pull/135), passed on `ubuntu-latest`, `windows-latest` and `macos-latest`. Each job prints `ok` for the 4 `l11_*` checks; the jobs count 145 `ok` lines on Linux and macOS and 144 on Windows, for the same reason as in lesson 6. `l11_Pitfalls.Tests` passes on Windows too, so the arrows `↓` and `↑` of the collection failure come out of Git Bash unchanged there.
 
 ## To verify
 
-- Lesson 11's tests in CI on Linux, Windows and macOS, after a PR is opened, and the arrows of a collection failure in the Windows job.
 - GaCLI started from another folder than its own: whether it runs without `appsettings.yaml`, as its code suggests (QA table).
 - How many artists GA would count once its three YAML files load. A PyYAML script over the raw files, outside the course code, estimates 63. By the same estimate, `Take(20)` would leave out 8 artists that have more entries than the smallest count kept, The Beatles (3 entries) among them.
 - The installation commands for Linux and macOS: only the CI's `setup-dotnet` ran on those OSes.
