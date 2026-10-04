@@ -373,6 +373,10 @@ what is the tensor product of C and G    declined
 - **Las formas primas se comparan con la propia tabla de GA,** no con el libro de Forte, y la lección no juzga la teoría de categorías de las glosas.
 - **El programa llama directamente a los métodos de las skills y al analizador,** no a través del chatbot.
 
+## Comunicado upstream
+
+- Se comunicaron después de escribir esta lección, en la issue de GA [#806](https://github.com/GuitarAlchemist/ga/issues/806): la relación que la skill de conjuntos nunca lee en la formulación de sus propios prompts de ejemplo, "via either operation", los conjuntos leídos desde su último número, las formas del analizador que rompen `str` y `choice`, y el patrón de superficie estrecho y la respuesta de la skill de análisis.
+
 ## Ejercicios
 
 1. ¿Por qué recibe "Are pitch class sets 0,1,3 and 0,2,3 equivalent under transposition" un "Yes"? ¿Qué formulación obtiene la respuesta correcta?

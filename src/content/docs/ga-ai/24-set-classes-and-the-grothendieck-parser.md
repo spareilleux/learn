@@ -373,6 +373,10 @@ what is the tensor product of C and G    declined
 - **The prime forms are checked against GA's own table,** not against Forte's book, and the lesson doesn't judge the glosses' category theory.
 - **The program calls the skills' methods and the parser directly,** not through the chatbot.
 
+## Reported upstream
+
+- Reported after this lesson was written, in GA issue [#806](https://github.com/GuitarAlchemist/ga/issues/806): the relation the set skill never reads in its own example prompts' wording, "via either operation", the sets read from their last number, the parser forms that `str` and `choice` break, and the parse skill's narrow surface pattern and answer.
+
 ## Exercises
 
 1. Why does "Are pitch class sets 0,1,3 and 0,2,3 equivalent under transposition" get "Yes"? Which wording gets the right answer?
