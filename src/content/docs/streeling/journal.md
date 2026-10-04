@@ -93,6 +93,7 @@ Tick a module once studied. Under **Notes**, add a dated entry: what I understoo
 - [ ] [MUS-013 · Root, Bass and Pitch-Class Set](../music/mus-013-root-bass-pitch-class-set/) <!-- mus-013-root-bass-pitch-class-set -->
 - [ ] [MUS-014 · Inversions and the Bass Line](../music/mus-014-inversions-bass-line/) <!-- mus-014-inversions-bass-line -->
 - [ ] [MUS-018 · Key Finding, Roman Numerals and Cadences](../music/mus-018-key-finding-roman-numerals-cadences/) <!-- mus-018-key-finding-roman-numerals-cadences -->
+- [ ] [MUS-019 · Transposition, the Capo and Cross-Instrument Equivalence](../music/mus-019-transposition-capo-cross-instrument/) <!-- mus-019-transposition-capo-cross-instrument -->
 - [ ] [MUS-020 · Set Classes, Interval Vectors, the Z-Relation and Prime Forms](../music/mus-020-set-classes-interval-vectors-prime-forms/) <!-- mus-020-set-classes-interval-vectors-prime-forms -->
 
 ### Musicology
@@ -256,6 +257,14 @@ Nothing in it was run here.
 ## 2026-10-04 — MUS-014 · Inversions and the Bass Line
 
 Synced from Demerzel at [`518158b`](https://github.com/GuitarAlchemist/Demerzel/commit/518158b0568981b4ebe290d69f197995bd41ded0) ([PR #1185](https://github.com/GuitarAlchemist/Demerzel/pull/1185)). A new intermediate music module on chord positions read from the bass: root position and the inversions, figured bass for triads and seventh chords, the four kinds of six-four chord, and the cases where the sounding notes do not fix the position. It traces how GA handles inversions in its `Chord` type, its voicing documents and its modes catalogue, and its section 6 proposes an experiment. The music index now lists it, the Streeling index counts 16 music modules instead of 15, and MUS-018 and MUS-020 move down one place in the sidebar; every other page changes only its pinned references to Demerzel, from `499fc64` to `518158b`.
+
+Nothing in it was run here.
+
+- **It has not been studied here,** so its checkbox above stays empty.
+
+## 2026-10-04 — MUS-019 · Transposition, the Capo and Cross-Instrument Equivalence
+
+Synced from Demerzel at [`0f7a5fd`](https://github.com/GuitarAlchemist/Demerzel/commit/0f7a5fd110acfc4835776d38ab1a115533467d34) ([PR #1186](https://github.com/GuitarAlchemist/Demerzel/pull/1186)). A new intermediate music module on three kinds of sameness: transposition, spelled by interval and read on the line of fifths; the capo as a uniform tuning difference, shape names against sounding names, and the same shape on ukuleles and a bass; and transposing instruments in B♭, E♭ and F. It traces how GA transposes pitch-class sets and chord symbols and how it answers capo questions, and its section 6 proposes an experiment. The music index now lists it, the Streeling index counts 17 music modules instead of 16, and MUS-020 moves down one place in the sidebar; every other page changes only its pinned references to Demerzel, from `518158b` to `0f7a5fd`.
 
 Nothing in it was run here.
 

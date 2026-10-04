@@ -93,6 +93,7 @@ Coche un module une fois étudié. Sous **Notes**, ajoute une entrée datée : c
 - [ ] [MUS-013 · Fondamentale, basse et ensemble de classes de hauteurs](../music/mus-013-root-bass-pitch-class-set/) <!-- mus-013-root-bass-pitch-class-set -->
 - [ ] [MUS-014 · Renversements et ligne de basse](../music/mus-014-inversions-bass-line/) <!-- mus-014-inversions-bass-line -->
 - [ ] [MUS-018 · Identification de la tonalité, chiffres romains et cadences](../music/mus-018-key-finding-roman-numerals-cadences/) <!-- mus-018-key-finding-roman-numerals-cadences -->
+- [ ] [MUS-019 · Transposition, capodastre et équivalence entre instruments](../music/mus-019-transposition-capo-cross-instrument/) <!-- mus-019-transposition-capo-cross-instrument -->
 - [ ] [MUS-020 · Classes d'ensembles, vecteurs d'intervalles, relation Z et formes premières](../music/mus-020-set-classes-interval-vectors-prime-forms/) <!-- mus-020-set-classes-interval-vectors-prime-forms -->
 
 ### Musicologie
@@ -256,6 +257,14 @@ Rien n'y a été exécuté ici.
 ## 2026-10-04 — MUS-014 · Renversements et ligne de basse
 
 Synchronisé depuis Demerzel à [`518158b`](https://github.com/GuitarAlchemist/Demerzel/commit/518158b0568981b4ebe290d69f197995bd41ded0) ([PR #1185](https://github.com/GuitarAlchemist/Demerzel/pull/1185)). Un nouveau module de musique de niveau intermédiaire sur les positions d'accord lues depuis la basse : l'état fondamental et les renversements, la basse chiffrée des triades et des accords de septième, les quatre sortes d'accord de quarte et sixte, et les cas où les notes qui sonnent ne fixent pas la position. Il retrace comment GA traite les renversements dans son type `Chord`, ses documents de voicing et son catalogue de modes, et sa section 6 propose une expérience. L'index de la musique le liste désormais, celui de Streeling compte 16 modules de musique au lieu de 15, et MUS-018 et MUS-020 descendent d'un rang dans la barre latérale ; toutes les autres pages ne changent que par leurs références épinglées à Demerzel, de `499fc64` à `518158b`.
+
+Rien n'y a été exécuté ici.
+
+- **Il n'a pas été étudié ici,** donc sa case ci-dessus reste vide.
+
+## 2026-10-04 — MUS-019 · Transposition, capodastre et équivalence entre instruments
+
+Synchronisé depuis Demerzel à [`0f7a5fd`](https://github.com/GuitarAlchemist/Demerzel/commit/0f7a5fd110acfc4835776d38ab1a115533467d34) ([PR #1186](https://github.com/GuitarAlchemist/Demerzel/pull/1186)). Un nouveau module de musique de niveau intermédiaire sur trois sortes d'identité : la transposition, orthographiée par intervalle et lue sur la ligne des quintes ; le capodastre comme écart d'accordage uniforme, les noms de forme face aux noms du son réel, et la même forme sur des ukulélés et une basse ; et les instruments transpositeurs en si♭, mi♭ et fa. Il retrace comment GA transpose les ensembles de classes de hauteurs et les symboles d'accords et comment il répond aux questions de capodastre, et sa section 6 propose une expérience. L'index de la musique le liste désormais, celui de Streeling compte 17 modules de musique au lieu de 16, et MUS-020 descend d'un rang dans la barre latérale ; toutes les autres pages ne changent que par leurs références épinglées à Demerzel, de `518158b` à `0f7a5fd`.
 
 Rien n'y a été exécuté ici.
 
