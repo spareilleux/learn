@@ -229,6 +229,10 @@ example prompts 10: CanHandle accepts 8, the skill refuses 3
 - **The rule is checked on C.** The skill's verdict depends only on the interval from the root ([line 145](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/OutsideNotesSkill.cs#L145)); the spellings run on 12 roots.
 - **No router runs.** The lesson calls the skill directly.
 
+## Reported upstream
+
+- Reported after this lesson was written, in GA issue [#814](https://github.com/GuitarAlchemist/ga/issues/814): the notes no usual chord scale holds that the rule calls safe to sustain, the headline of a dominant chord's b9, the 11 inside 11th and 13th chords, the notes and chord spellings the regexes misread, the chord's notes spelled from twelve names, and the example prompts the skill refuses or `CanHandle` rejects.
+
 ## Exercises
 
 1. Over Cm7, why does the skill call F# an available tension? Which of Cm7's usual scales holds it?

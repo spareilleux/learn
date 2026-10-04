@@ -229,6 +229,10 @@ example prompts 10: CanHandle accepts 8, the skill refuses 3
 - **La règle est vérifiée sur C.** Le verdict du skill ne dépend que de l'intervalle depuis la fondamentale ([ligne 145](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Agents/Skills/OutsideNotesSkill.cs#L145)) ; l'orthographe est vérifiée sur 12 fondamentales.
 - **Aucun routeur ne tourne.** La leçon appelle le skill directement.
 
+## Signalé en amont
+
+- Signalés après l'écriture de cette leçon, dans le ticket de GA [#814](https://github.com/GuitarAlchemist/ga/issues/814) : les notes qu'aucune gamme d'accord usuelle ne contient et que la règle dit tenables, le titre de la b9 d'un accord de dominante, la 11 dans les accords de onzième et de treizième, les notes et les chiffrages que les expressions régulières lisent mal, les notes de l'accord écrites avec douze noms, et les prompts d'exemple que le skill refuse ou que `CanHandle` rejette.
+
 ## Exercices
 
 1. Sur Cm7, pourquoi le skill appelle-t-il F# une tension disponible ? Laquelle des gammes usuelles de Cm7 le contient ?
