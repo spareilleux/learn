@@ -498,7 +498,7 @@ The test builds the path from [`AppContext.BaseDirectory`](https://learn.microso
 - xUnit creates a new object for each test, and doesn't promise an order. A test project sees only the library's public members.
 - A test that is skipped, that isn't compiled or that only checks "more than zero" can pass while the code is broken.
 
-Next: [a small project](../#outline), a solution with this library, a console app and these tests, a NuGet package, and a first look at `async`.
+Next: [a small project](../12-small-project/), a solution with this library, a console app and these tests, a NuGet package, and a first look at `async`.
 
 ## Sources
 

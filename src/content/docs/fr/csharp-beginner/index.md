@@ -52,10 +52,8 @@ Les exemples utilisent de petites données réelles quand ça aide : les notes d
 | 9 | [Collections et LINQ](09-collections-and-linq/) | `Dictionary<TKey, TValue>`, `HashSet<T>`, `Where`, `Select`, `OrderBy` |
 | 10 | [Fichiers et texte](10-files-and-text/) | `File`, `Path`, lire un fichier CSV des projets de Guitar Alchemist |
 | 11 | [Tests unitaires](11-unit-tests/) | xUnit, `dotnet test`, tester les méthodes des leçons précédentes |
-| 12 | Un petit projet | une solution avec une bibliothèque, une application console et des tests, un package NuGet, un premier regard sur `async` |
+| 12 | [Un petit projet](12-small-project/) | une solution avec une bibliothèque, une application console et des tests, un package NuGet, un premier regard sur `async` |
 | — | [Journal](journal/) | |
-
-La leçon 12 est prévue et pas encore écrite.
 
 ## Les points marquants du journal
 
@@ -77,6 +75,8 @@ Le [journal](journal/) consigne ce que l'écriture et les tests de ce cours ont 
 | La chaîne de format avec laquelle Guitar Alchemist écrit son CSV de naturalité suit la culture de la machine : avec `fr-FR`, `2.50` devient `2,50`, et une ligne de 6 valeurs se coupe en 8 | Un fichier écrit sur une machine française ne se relit pas avec `Split(',')` ; écris les nombres avec `CultureInfo.InvariantCulture`. Pas encore signalé à GA | [Leçon 10](10-files-and-text/), [tableau QA](journal/#qa) |
 | Les tests de Guitar Alchemist pour ses services YAML réussissent alors que trois des quatre fichiers ne se chargent pas : trois tests sont ignorés, et les autres vérifient « plus que zéro », ce que satisfait le seul élément par défaut | Un test qui vérifie seulement « plus que zéro » ne voit pas une valeur de repli ; vérifie la vraie valeur. Pas encore signalé à GA | [Leçon 11](11-unit-tests/), [tableau QA](journal/#qa) |
 | Avec ses arguments inversés, `Assert.Equal` appelle « Expected » le résultat de la méthode et « Actual » la valeur du test ; la règle d'analyseur xUnit2000 le signale avant que les tests tournent | La valeur attendue vient en premier ; lis aussi les avertissements de la compilation des tests | [Leçon 11](11-unit-tests/), [journal](journal/#2026-10-03--tests-unitaires) |
+| `dotnet test` dans le dossier d'une solution ne compile que les projets de test et ce qu'ils référencent : avec une erreur de compilation dans l'application console, les tests réussissent quand même et se terminent avec le code 0 | Lance aussi `dotnet build` avant de te fier à des tests au vert | [Leçon 12](12-small-project/), [journal](journal/#2026-10-03--un-petit-projet) |
+| Dans le `Directory.Build.props` de Guitar Alchemist, les lignes `PackageReference Update` censées aligner les versions des packages ne changent rien : le fichier est importé avant les éléments propres des projets | Vérifie la version que choisit une restauration ; `Directory.Build.targets` ou la gestion centralisée des packages font ce que ces lignes visent. Pas encore signalé à GA | [Leçon 12](12-small-project/), [tableau QA](journal/#qa) |
 
 ## Prérequis
 
