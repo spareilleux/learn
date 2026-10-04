@@ -430,6 +430,7 @@ La mayoría de las 22 diferencias del 2026-09-14 se corrigieron upstream en [#68
 - Las formas primas se comparan con la propia tabla de GA del catálogo de Forte, no con el libro de Forte.
 - Una segunda lectura del código fijado por otro modelo, la CLI `auggie` de Augment con `gpt-6-sol` y herramientas de solo lectura, leyó de la misma manera el patrón de la relación, las formas `ws1` del analizador, el agrupamiento de la línea 426, el orden que hace de `P(C)` una aplicación de funtor y las cualidades de acorde.
 - Las soluciones se leen en la salida esperada y en el código.
+- Ejecución de CI [37166154652](https://github.com/spareilleux/learn/actions/runs/37166154652), para el commit `922ae7e`: verde en los tres sistemas, 7 min 39 s en Linux, 6 min 7 s en macOS, 14 min 9 s en Windows, con el clon y la compilación incluidos.
 
 ## Por verificar
 

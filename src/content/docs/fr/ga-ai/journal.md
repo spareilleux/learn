@@ -430,6 +430,7 @@ La plupart des 22 différences du 2026-09-14 ont été corrigées en amont par [
 - Les formes premières sont comparées à la table du catalogue de Forte que tient GA, et non au livre de Forte.
 - Une seconde lecture du code au commit épinglé par un autre modèle, la CLI `auggie` d'Augment avec `gpt-6-sol` et des outils en lecture seule, a lu de la même façon l'expression de la relation, les formes `ws1` de l'analyseur, le groupement de la ligne 426, l'ordre qui fait de `P(C)` une application de foncteur et les qualités d'accord.
 - Les solutions se lisent dans la sortie attendue et dans le code.
+- Exécution de CI [37166154652](https://github.com/spareilleux/learn/actions/runs/37166154652), pour le commit `922ae7e` : verte sur les trois systèmes, 7 min 39 s sous Linux, 6 min 7 s sous macOS, 14 min 9 s sous Windows, clone et compilation compris.
 
 ## À vérifier
 

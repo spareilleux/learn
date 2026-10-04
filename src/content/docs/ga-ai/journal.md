@@ -430,6 +430,7 @@ Most of the 22 differences of 2026-09-14 were fixed upstream by [#689](https://g
 - The prime forms are compared with GA's own table of Forte's catalog, not with Forte's book.
 - A second read of the pinned code by another model, Augment's `auggie` CLI with `gpt-6-sol` and read-only tools, read the relation pattern, the parser's `ws1` forms, the grouping of line 426, the order that makes `P(C)` a functor application and the chord qualities the same way.
 - The solutions read the expected output and the code.
+- CI run [37166154652](https://github.com/spareilleux/learn/actions/runs/37166154652), for commit `922ae7e`: green on the three systems, 7 min 39 s on Linux, 6 min 7 s on macOS, 14 min 9 s on Windows, clone and build included.
 
 ## To verify
 
