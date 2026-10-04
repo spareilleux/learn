@@ -51,11 +51,11 @@ Les exemples utilisent de petites données réelles quand ça aide : les notes d
 | 8 | [Exceptions et sécurité face à null](08-exceptions-and-null-safety/) | `try`/`catch`/`finally`, `throw`, types référence nullables |
 | 9 | [Collections et LINQ](09-collections-and-linq/) | `Dictionary<TKey, TValue>`, `HashSet<T>`, `Where`, `Select`, `OrderBy` |
 | 10 | [Fichiers et texte](10-files-and-text/) | `File`, `Path`, lire un fichier CSV des projets de Guitar Alchemist |
-| 11 | Tests unitaires | xUnit, `dotnet test`, tester les méthodes des leçons précédentes |
+| 11 | [Tests unitaires](11-unit-tests/) | xUnit, `dotnet test`, tester les méthodes des leçons précédentes |
 | 12 | Un petit projet | une solution avec une bibliothèque, une application console et des tests, un package NuGet, un premier regard sur `async` |
 | — | [Journal](journal/) | |
 
-Les leçons 11 et 12 sont prévues et pas encore écrites.
+La leçon 12 est prévue et pas encore écrite.
 
 ## Les points marquants du journal
 
@@ -75,6 +75,8 @@ Le [journal](journal/) consigne ce que l'écriture et les tests de ce cours ont 
 | Trois des quatre fichiers YAML que lisent les services de connaissances musicales de Guitar Alchemist ne se chargent pas ; chaque chargeur attrape l'exception et continue avec un seul élément par défaut | Un `catch` qui se contente d'afficher cache le bogue : GA compte 16 artistes, et rien n'échoue. Signalé dans l'[issue GA n° 797](https://github.com/GuitarAlchemist/ga/issues/797) | [Leçon 9](09-collections-and-linq/), [tableau QA](journal/#qa) |
 | Un chemin relatif part du dossier courant, pas du fichier du programme : `l10_where.cs` trouve `data/ga-projects.csv` quand `dotnet run` part de `code/csharp-beginner`, et le manque depuis la racine du dépôt | Le même programme trouve son fichier ou non selon le dossier d'où il part ; un chemin construit à partir de `EntryPointFileDirectoryPath` marche depuis les deux | [Leçon 10](10-files-and-text/), [journal](journal/#2026-10-03--fichiers-et-texte) |
 | La chaîne de format avec laquelle Guitar Alchemist écrit son CSV de naturalité suit la culture de la machine : avec `fr-FR`, `2.50` devient `2,50`, et une ligne de 6 valeurs se coupe en 8 | Un fichier écrit sur une machine française ne se relit pas avec `Split(',')` ; écris les nombres avec `CultureInfo.InvariantCulture`. Pas encore signalé à GA | [Leçon 10](10-files-and-text/), [tableau QA](journal/#qa) |
+| Les tests de Guitar Alchemist pour ses services YAML réussissent alors que trois des quatre fichiers ne se chargent pas : trois tests sont ignorés, et les autres vérifient « plus que zéro », ce que satisfait le seul élément par défaut | Un test qui vérifie seulement « plus que zéro » ne voit pas une valeur de repli ; vérifie la vraie valeur. Pas encore signalé à GA | [Leçon 11](11-unit-tests/), [tableau QA](journal/#qa) |
+| Avec ses arguments inversés, `Assert.Equal` appelle « Expected » le résultat de la méthode et « Actual » la valeur du test ; la règle d'analyseur xUnit2000 le signale avant que les tests tournent | La valeur attendue vient en premier ; lis aussi les avertissements de la compilation des tests | [Leçon 11](11-unit-tests/), [journal](journal/#2026-10-03--tests-unitaires) |
 
 ## Prérequis
 
