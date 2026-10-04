@@ -233,6 +233,20 @@ MUS-010 therefore moves from awaiting verification to verified; its entry above 
 
 MUS-011 stays **awaiting verification** until this change is merged, its deployment succeeds and the pages are read back anonymously.
 
+## 2026-10-03 — Streeling MUS-011 published
+
+[Learn PR #138](https://github.com/spareilleux/learn/pull/138) was merged as `aaf6d3e`, and its [Pages deployment](https://github.com/spareilleux/learn/actions/runs/37177089952) succeeded. The pages were then read back anonymously in the three languages: twelve pages, each answering 200. The [MUS-011 module](../streeling/music/mus-011-modes-modal-families/) pages name MUS-011 and link their source at `499fc64`; the [music index](../streeling/music/) lists it, and the [Streeling journal](../streeling/journal/) and this journal carry their 2026-10-03 entries.
+
+MUS-011 therefore moves from awaiting verification to verified; its entry above is left as written. This update repins its source links to `518158b`. Published is not studied: MUS-011 has not been run or studied here, and its experiment remains proposed.
+
+## 2026-10-04 — Streeling MUS-014 synced, awaiting verification
+
+[Demerzel PR #1185](https://github.com/GuitarAlchemist/Demerzel/pull/1185) was merged as `518158b`, after the `499fc64` pin. This update syncs it into Learn:
+- the new [MUS-014 module](../streeling/music/mus-014-inversions-bass-line/), Inversions and the Bass Line, in the three languages;
+- its line in the [music index](../streeling/music/) and in the [Streeling journal](../streeling/journal/), with a dated entry there.
+
+MUS-014 stays **awaiting verification** until this change is merged, its deployment succeeds and the pages are read back anonymously.
+
 ## To verify
 
 - Check this update's public URLs and catalog after deployment; keep the deploy receipt with the integration record.

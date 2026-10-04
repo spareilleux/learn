@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **MAT-003** · Aritmética de punto flotante y condicionamiento · intermedio · 45 minutes
 
-Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/499fc64abe83a5bf7d59efdd949bb23b72925ae2/state/streeling/courses/mathematics/es/mat-003-floating-point-conditioning.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/518158b0568981b4ebe290d69f197995bd41ded0/state/streeling/courses/mathematics/es/mat-003-floating-point-conditioning.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MAT-001](../../mathematics/mat-001-proof-strategies/)
 :::

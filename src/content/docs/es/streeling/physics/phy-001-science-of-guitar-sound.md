@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **PHY-001** · Acústica y física de ondas · principiante · 25 minutes
 
-Generado por el departamento *Física* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/499fc64abe83a5bf7d59efdd949bb23b72925ae2/state/streeling/courses/physics/es/phy-001-science-of-guitar-sound.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Física* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/518158b0568981b4ebe290d69f197995bd41ded0/state/streeling/courses/physics/es/phy-001-science-of-guitar-sound.es.md) · [Mi diario](../../journal/)
 :::
 
 > **Departamento de Física** | Etapa: Nigredo (Principiante) | Duración: 25 minutos

@@ -24,5 +24,6 @@ sidebar:
 - [MUS-011 · Modes et familles modales — La rotation contre le vecteur d'intervalles partagé](mus-011-modes-modal-families/)
 - [MUS-012 · Formules d'accords, notes essentielles et redoublements — Ce qu'un accord peut perdre](mus-012-chord-formulas-essential-tones-doubling/)
 - [MUS-013 · Fondamentale, basse et ensemble de classes de hauteurs — Un ensemble, plusieurs noms](mus-013-root-bass-pitch-class-set/)
+- [MUS-014 · Renversements et ligne de basse — Mêmes notes, autre basse](mus-014-inversions-bass-line/)
 - [MUS-018 · Identification de la tonalité, chiffres romains et cadences — Ce qu'un décompte d'accords peut trancher, et ce qu'il ne peut pas](mus-018-key-finding-roman-numerals-cadences/)
 - [MUS-020 · Classes d'ensembles, vecteurs d'intervalles, relation Z et formes premières — Deux tassements, un catalogue](mus-020-set-classes-interval-vectors-prime-forms/)

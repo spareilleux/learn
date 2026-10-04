@@ -233,6 +233,20 @@ La [PR Demerzel #1184](https://github.com/GuitarAlchemist/Demerzel/pull/1184) a 
 
 MUS-011 reste **en attente de vérification** jusqu'à ce que ce changement soit fusionné, que son déploiement réussisse et que les pages soient relues sans authentification.
 
+## 2026-10-03 — Streeling MUS-011 publié
+
+La [PR Learn #138](https://github.com/spareilleux/learn/pull/138) a été fusionnée en `aaf6d3e`, et son [déploiement Pages](https://github.com/spareilleux/learn/actions/runs/37177089952) a réussi. Les pages ont ensuite été relues sans authentification dans les trois langues : douze pages, qui répondent toutes 200. Les pages du [module MUS-011](../streeling/music/mus-011-modes-modal-families/) nomment MUS-011 et renvoient à leur source à `499fc64` ; l'[index de la musique](../streeling/music/) le liste, et le [journal Streeling](../streeling/journal/) et ce journal portent leurs entrées du 2026-10-03.
+
+MUS-011 passe donc d'en attente de vérification à vérifié ; son entrée ci-dessus reste telle qu'écrite. Cette mise à jour réépingle ses liens source à `518158b`. Publié ne veut pas dire étudié : MUS-011 n'a été ni exécuté ni étudié ici, et son expérience reste proposée.
+
+## 2026-10-04 — Streeling MUS-014 synchronisé, en attente de vérification
+
+La [PR Demerzel #1185](https://github.com/GuitarAlchemist/Demerzel/pull/1185) a été fusionnée en `518158b`, après l'épingle de `499fc64`. Cette mise à jour la synchronise dans Learn :
+- le nouveau [module MUS-014](../streeling/music/mus-014-inversions-bass-line/), Renversements et ligne de basse, dans les trois langues ;
+- sa ligne dans l'[index de la musique](../streeling/music/) et dans le [journal Streeling](../streeling/journal/), avec une entrée datée dans ce dernier.
+
+MUS-014 reste **en attente de vérification** jusqu'à ce que ce changement soit fusionné, que son déploiement réussisse et que les pages soient relues sans authentification.
+
 ## À vérifier
 
 - Contrôler les URL publiques de cette mise à jour et le catalogue après déploiement ; conserver le reçu de déploiement avec le compte rendu d'intégration.
