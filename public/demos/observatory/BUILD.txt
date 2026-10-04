@@ -1424,6 +1424,60 @@ bays under Compatibility (bays_compat: the gardens built in 474 ms, the
 vegetation kit found, 738 trees within reach of their meshes, 1,360 modules of
 sprays along the hedges).
 
+Version 38, exported 2026-10-04 20:42:01 UTC, adds a sparse crowd to the
+palace gardens, after the author's "On peut rajouter une foule (Clairsemee la
+foule) dans les jardins?". scripts/garden_crowd.gd places 103 people, 88 of
+them walking 29 routes (the terrace, the ramp, the parterre's walks, the
+canal's banks, the avenues, the orchard and the maze's way to its temple) and
+15 standing. Each figure is one MultiMesh; the walkers keep to the right,
+follow whoever is slower ahead, step to their own edge for whoever comes the
+other way, wait at the end of a walk before turning back, and stop for the
+visitor or the scooter within 2.6 m ahead. From quality level 3 half of them
+are shown, from level 4 a third. The four figures (assets/garden_figure_*.glb:
+a courtier, a lady, a walker, a gardener, 380 to 436 triangles, no face) are
+meshes made in Blender by artpass/gardens/blender/crowd_kit.py; their UVs flag
+the legs, the arms and the hems, which assets/garden_plant.gdshader (kind 4)
+swings in the vertex shader, coloured by each instance.
+scripts/palace_gardens.gd builds the routes, puts the crowd first in push_out
+(so the scooter stops at people) and passes the quality level on. Every other
+script is version 37's, scripts/observatory.gd and scripts/quality.gd version
+28's.
+index.pck is now 29,516,608 bytes, 66,672 more than version 37's; index.html
+changes only that size, and index.wasm and index.js are unchanged.
+In headless Chrome on this machine, this build and version 37's each served
+gzipped from localhost in the same session (artpass/gardens/gardens-web.mjs,
+artpass/gardens/crowd/web-v38*/, web-v37again*/), on a computer (1600 x 900),
+a phone (390 x 844, touch) and a tablet (1180 x 820, touch): on the RTX 5080
+(ANGLE Direct3D 11) the start view, bay 2, the roof and a ride ran at a median
+16.7 ms a frame in both versions, the crowd in view through bay 2; the ride
+moved 18.0 to 18.9 m (18.5 to 19.4 in version 37) and got off; no exception
+and no console error. The gardens with the crowd built in 540 to 773 ms in
+WASM, once 1,076 ms (the phone's roof), against 496 to 683 ms for version 37.
+The phone's start view had a 95th percentile of 66.8 ms and the tablet's 33.4
+(16.8 in version 37), from single slow frames while the first frames compile
+their shaders (to verify). On Chrome's CPU renderer (SwiftShader) standing in
+for a weak GPU, every case settled at quality level 5, where a third of the
+people show: through bay 2, 167 ms a frame on a computer and on a phone,
+against 183 and 167 for version 37; riding, 67 and 83 ms in both; the ride
+moved 18.9 to 19.2 m and got off. Twelve seconds after the start the start
+view had not settled in either version (frames of 1.2 to 4.7 s), nor had the
+roof but on this build's computer (150 ms).
+Native runs, stock Godot 4.6.1 against this build's own project
+(artpass/publish/regress-pub30.sh, 74 runs, artpass/publish/regress-pub30/):
+70 passed. motion_bay14 missed the same point with the same numbers as since
+version 31. lean_keys_fwd failed once and passed three reruns; lean_keys_10fps
+failed once and then passed two reruns of three, on other checks each time,
+and version 37's build failed it once in three on the same checks
+(artpass/publish/regress-pub30-rerun/, regress-pub29-lean10/). segway_10fps
+ended its ramp ride at the basin's rim 0.66 m off the axis, round a stroller,
+in three runs of three; with the crowd hidden it ended on the axis
+(ride2/segprobe_nocrowd.gd). The crowd passed under Compatibility and
+Forward+, on a phone's screen and at 10 frames a second with a one-second
+stall (crowd_compat, crowd_fwd, crowd_phone, crowd_10fps): 103 people, every
+walk and spot clear of the solids over 23,796 samples, in 20 s nobody in a
+solid and no two people closer than 0.45 m, the largest step of anyone in a
+frame at 10 fps 0.145 m, 0.41 to 0.43 ms per update (the editor's runtime).
+
 Native Compatibility GPU time, RTX 5080, 1600x900, 240 frames per view: 0.44 to
 0.52 ms for the previous web scene, 0.64 to 1.44 ms with the detail pass; up to
 1.55 million primitives in the overview, against 0.46 million before. With the
@@ -1495,7 +1549,7 @@ assets/fresco_panel.gdshader e9c20421cf254119e9d85da22a70bb8a965cee0be524f5c95b2
 assets/fresco_dust.gdshader 9d63b02079689cd0205a9d469c743645d4fac1ccfff21a3d0326f36a3062341c
 assets/fresco_atlas.png cccc2917f794f42517ee001392802ec6828acc747f585018e49349474b1638fc
 assets/fresco_motion.png aa7148be2c28917ddae5d92b7a155c46fe024460c67e919106be23782fdf7822
-scripts/build_info.gd 83ee9820bc7cf258ddc6aa84217f4d4c50e65cd1a1b9097f2b75be8cb8022efb
+scripts/build_info.gd ae834d3d05e91373ba0a614a6dd1356c074f8b622973d8ea0aa00a394417c265
 scripts/sfx_takes.gd 069f573898d4c4ad48fde9f1f592dba0974433b1881d7ed045d6797c3c3a0ac6
 assets/sfx/curio_wheel-beep.wav a1d999098afbd222622a6c4625ee16bb9788059c6fe37901067d9cd239f5ec8c
 assets/sfx/curio_wheel-chime.wav 6b580b1e57194c1f84183044c367bcab9d07e3d4c876da3dee5736ba78298c9e
@@ -1520,7 +1574,7 @@ scripts/tars_ensemble.gd 524da674c9d56f816cd9e400f0cee33a1279eafab7a426c9cac35f5
 assets/tars_ensemble_tracks.tres 6c2be9a6fc350c02f8dd19e6a768ed911d11ebd741d4c5939bb585a84171b272
 assets/tars_ensemble_jig_tracks.tres d7604ba2a5dc3e61fb29441d145d0d98703193c516d429a754e9c0e4949383a0
 scripts/web_loop.gd cd89961d3e7e5d8275d67ead034eb2184587810dc710316c5377f58a16e35cbb
-scripts/palace_gardens.gd 91ccf95615ac6b8e315b6ec849fe3b4c2109a9c5073701481ce12d1450799eb7
+scripts/palace_gardens.gd 3296c1609b7a0f4a957c123266ad43855fb96e2f0fe6a25ce0efc702077bcb93
 scripts/segway.gd d9e2cc16d7c997aa33eedff15d7396cb21b408872381c409b6dfa00d479ee78c
 assets/hall_env.gdshaderinc f4ee2ad1a4b5af0839924033507d492b59ce003baad50b35f9afc4f645b3bae5
 assets/bay_glass.gdshader 5cf98fa61a8a189d25abf4e990d533dc7bb7c696d6a761625f555b4f13ac9fd5
@@ -1549,7 +1603,7 @@ assets/garden_city_738.png 4df4a1903fe8f7ab1f6d5a44a66e658994b38123dea29c2da9ee4
 assets/garden_palace.png d5b13df8f900e0b529dd7a5de89895e0c99603123c64de9a32d91c47e357899e
 assets/garden_stone.png 432e7a4a676e96916043f95eebc82dbfd0971c3655cd9a8011f20b7156f90389
 assets/garden_paving.png 81afdc39127356a22719dc103000c5d7bfce63ce3054361a7fa9966f9762d414
-assets/garden_plant.gdshader a1db0a3a3abfb7587190d680e6ceace730de21d4186018c35592851646c23141
+assets/garden_plant.gdshader c410c3b13c52cef0af99c66fcf21ded7c4995ed52c6bc83bebf0f4acd2c9e6af
 assets/garden_tree_linden1.glb 342e6ab53b7cc2cf00b4b01449d69285e6cf5daf170b2a5388432dd430071d88
 assets/garden_tree_linden2.glb c89718e972c32dd2203b536bbb9e68781966351ccc297a123f6218c046934625
 assets/garden_tree_linden3.glb 2970958c39fc0322097fdef4bb1e5202dae2c4970bd4b359bb721f477d13463b
@@ -1576,16 +1630,21 @@ assets/garden_leaves_cypress.png 07bf984d20181a79ff423bd43e01f699273f8b620086244
 assets/garden_bark.png f79ae0eb624ccc9ff2dc7f6576e754eff0411e4191fa248e25a46c1366543d9a
 assets/garden_hedge_box.png b6c6add90ff163d3d07b019ffb81a451cce66472e4a1073b0cebf05a6b4a2888
 assets/garden_hedge_box_n.png 49e05c58375a178caa5574533424f61e878df2284802f77e303759209ccf6334
+scripts/garden_crowd.gd cc06c5e8065f127c21fe6520cf532d2d33548b03095ca1b2152b6c62dc6018f2
+assets/garden_figure_courtier.glb e14c11a84beef0a3faeb109a11571eafdd4adc773b5e98fa153b9a6e438bc944
+assets/garden_figure_lady.glb 733f9a104730f1220d7bedd55130be29bb0ec7c5902567750c0ae4abb742197a
+assets/garden_figure_walker.glb 6a2aff1f8a2548b183f70790cee06d5e004e4235351e95a37887a21aa27eef58
+assets/garden_figure_gardener.glb 0e73084eef802a7d7d1f9dacd83ab49766eee95977f9ba120c6b83da2598cf3d
 
 SHA-256 output files:
-index.pck 3c06ad8d0ff4f458ab7c01f067074aa46d669e9c9933bb8d5910cee671e9bde8
+index.pck 1438905e72f1aa1e082a1ed09a908b65a80f8d948acd49a9014f55b76af5bbad
 index.wasm 99962b29677e42f3ba0258bd90fdc52ad90295954c4473e816ad02cfe5ff1d4f
 index.js e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981
 
 This directory contains a prebuilt binary export. Re-export only for deliberate
 scene changes. A scene re-export leaves the engine files (index.wasm, index.js)
 byte-identical, so git keeps a single copy; each scene revision adds its
-index.pck (29.4 MB here) to the binary history.
+index.pck (29.5 MB here) to the binary history.
 
 2026-10-03 post-merge recording sound correction: v28 preserved the v27
 `scripts/seldon_recording.gd` hash above before this correction. Fresh R or a
