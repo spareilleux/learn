@@ -219,6 +219,20 @@ La [PR Demerzel #1183](https://github.com/GuitarAlchemist/Demerzel/pull/1183) a 
 
 MUS-010 reste **en attente de vérification** jusqu'à ce que ce changement soit fusionné, que son déploiement réussisse et que les pages soient relues sans authentification.
 
+## 2026-10-03 — Streeling MUS-010 publié
+
+La [PR Learn #132](https://github.com/spareilleux/learn/pull/132) a été fusionnée en `9e03205`, et son [déploiement Pages](https://github.com/spareilleux/learn/actions/runs/37152236058) a réussi. Les pages ont ensuite été relues sans authentification dans les trois langues : douze pages, qui répondent toutes 200. Les pages du [module MUS-010](../streeling/music/mus-010-scales-pattern-set-interval-vector/) nomment MUS-010 et renvoient à leur source à `d8c8da5` ; l'[index de la musique](../streeling/music/) le liste, et le [journal Streeling](../streeling/journal/) et ce journal portent leurs entrées du 2026-10-03.
+
+MUS-010 passe donc d'en attente de vérification à vérifié ; son entrée ci-dessus reste telle qu'écrite. Cette mise à jour réépingle ses liens source à `499fc64`. Publié ne veut pas dire étudié : MUS-010 n'a été ni exécuté ni étudié ici, et son expérience reste proposée.
+
+## 2026-10-03 — Streeling MUS-011 synchronisé, en attente de vérification
+
+La [PR Demerzel #1184](https://github.com/GuitarAlchemist/Demerzel/pull/1184) a été fusionnée en `499fc64`, après l'épingle de `d8c8da5`. Cette mise à jour la synchronise dans Learn :
+- le nouveau [module MUS-011](../streeling/music/mus-011-modes-modal-families/), Modes et familles modales, dans les trois langues ;
+- sa ligne dans l'[index de la musique](../streeling/music/) et dans le [journal Streeling](../streeling/journal/), avec une entrée datée dans ce dernier.
+
+MUS-011 reste **en attente de vérification** jusqu'à ce que ce changement soit fusionné, que son déploiement réussisse et que les pages soient relues sans authentification.
+
 ## À vérifier
 
 - Contrôler les URL publiques de cette mise à jour et le catalogue après déploiement ; conserver le reçu de déploiement avec le compte rendu d'intégration.

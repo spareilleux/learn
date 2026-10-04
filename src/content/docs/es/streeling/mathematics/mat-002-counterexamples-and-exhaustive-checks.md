@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **MAT-002** · Contraejemplos, testigos y comprobaciones exhaustivas · principiante · 35 minutes
 
-Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/d8c8da550af12f339dbf9464cc1144084eb689b9/state/streeling/courses/mathematics/es/mat-002-counterexamples-and-exhaustive-checks.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/499fc64abe83a5bf7d59efdd949bb23b72925ae2/state/streeling/courses/mathematics/es/mat-002-counterexamples-and-exhaustive-checks.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MAT-001](../../mathematics/mat-001-proof-strategies/)
 :::

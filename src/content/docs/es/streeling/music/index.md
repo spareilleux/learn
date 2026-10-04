@@ -21,6 +21,7 @@ sidebar:
 - [MUS-008 · Intervalos, inversión e intervalos compuestos — Contar más allá de la octava](mus-008-intervals-inversion-compound/)
 - [MUS-009 · Afinación y geometría del mástil — Una altura, muchos lugares](mus-009-tuning-fretboard-geometry/)
 - [MUS-010 · Fórmulas de escalas, conjuntos y vector interválico diatónico — Lo que la escala mayor tiene de raro](mus-010-scales-pattern-set-interval-vector/)
+- [MUS-011 · Modos y familias modales — La rotación frente al vector interválico compartido](mus-011-modes-modal-families/)
 - [MUS-012 · Fórmulas de acordes, notas esenciales y duplicaciones — Lo que un acorde puede perder](mus-012-chord-formulas-essential-tones-doubling/)
 - [MUS-013 · Fundamental, bajo y conjunto de clases de altura — Un conjunto, varios nombres](mus-013-root-bass-pitch-class-set/)
 - [MUS-018 · Identificación de la tonalidad, números romanos y cadencias — Lo que un recuento de acordes puede decidir y lo que no](mus-018-key-finding-roman-numerals-cadences/)

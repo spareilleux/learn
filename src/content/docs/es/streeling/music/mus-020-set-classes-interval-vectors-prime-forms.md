@@ -3,13 +3,13 @@ title: Clases de conjuntos, vectores interválicos, relación Z y formas primas 
 description: Clases de conjuntos, vectores interválicos, relación Z y formas primas — Música
 sidebar:
   label: MUS-020 · Clases de conjuntos, vectores interválicos, relación Z y formas primas
-  order: 14
+  order: 15
 ---
 
 :::note[Streeling University]
 **MUS-020** · Clases de conjuntos, vectores interválicos, relación Z y formas primas · intermedio · 60 minutes
 
-Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/d8c8da550af12f339dbf9464cc1144084eb689b9/state/streeling/courses/music/es/mus-020-set-classes-interval-vectors-prime-forms.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/499fc64abe83a5bf7d59efdd949bb23b72925ae2/state/streeling/courses/music/es/mus-020-set-classes-interval-vectors-prime-forms.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MUS-001](../../music/mus-001-what-is-a-chord/), [MUS-002](../../music/mus-002-beyond-tonality/)
 :::

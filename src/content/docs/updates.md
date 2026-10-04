@@ -219,6 +219,20 @@ MUS-013 therefore moves from awaiting verification to verified; its entry above 
 
 MUS-010 stays **awaiting verification** until this change is merged, its deployment succeeds and the pages are read back anonymously.
 
+## 2026-10-03 — Streeling MUS-010 published
+
+[Learn PR #132](https://github.com/spareilleux/learn/pull/132) was merged as `9e03205`, and its [Pages deployment](https://github.com/spareilleux/learn/actions/runs/37152236058) succeeded. The pages were then read back anonymously in the three languages: twelve pages, each answering 200. The [MUS-010 module](../streeling/music/mus-010-scales-pattern-set-interval-vector/) pages name MUS-010 and link their source at `d8c8da5`; the [music index](../streeling/music/) lists it, and the [Streeling journal](../streeling/journal/) and this journal carry their 2026-10-03 entries.
+
+MUS-010 therefore moves from awaiting verification to verified; its entry above is left as written. This update repins its source links to `499fc64`. Published is not studied: MUS-010 has not been run or studied here, and its experiment remains proposed.
+
+## 2026-10-03 — Streeling MUS-011 synced, awaiting verification
+
+[Demerzel PR #1184](https://github.com/GuitarAlchemist/Demerzel/pull/1184) was merged as `499fc64`, after the `d8c8da5` pin. This update syncs it into Learn:
+- the new [MUS-011 module](../streeling/music/mus-011-modes-modal-families/), Modes and Modal Families, in the three languages;
+- its line in the [music index](../streeling/music/) and in the [Streeling journal](../streeling/journal/), with a dated entry there.
+
+MUS-011 stays **awaiting verification** until this change is merged, its deployment succeeds and the pages are read back anonymously.
+
 ## To verify
 
 - Check this update's public URLs and catalog after deployment; keep the deploy receipt with the integration record.
