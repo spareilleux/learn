@@ -25,7 +25,8 @@ compare() {
 # Runs one file-based app: its input comes from input/<name>.txt, if there is one.
 # dotnet clean first: the SDK doesn't recompile an unchanged file, and then prints none of its warnings.
 # The output keeps the compiler messages without the folder (file(line,col): error CSxxxx: ...), and the
-# NuGet messages of a #:package line too (file.csproj : warning NUxxxx: ...),
+# NuGet messages of a #:package line too (file.csproj : warning NUxxxx: ...): SDK 10.0.112 names that project
+# file.csproj and SDK 10.0.401 file.cs.csproj, and both are written file.csproj. The output also
 # drops the "   at ..." lines of a stack trace, and ends with the exit code: 0, 1, or "crash" for an
 # unhandled exception, whose code depends on the OS (it is printed, not compared).
 # The compiler messages come first, errors before warnings, each group by line and column: the
@@ -44,7 +45,7 @@ run() {
     shown=crash
   fi
   local message='^[A-Za-z0-9_]+\.cs\([0-9]+,[0-9]+\): (error|warning) '
-  sed -E -e 's#^.*[\/]([A-Za-z0-9_]+\.cs\([0-9]+,[0-9]+\))#\1#' -e 's#^.*[\/]([A-Za-z0-9_]+\.csproj : )#\1#' -e '/^   at /d' "out/$name.raw.txt" > "out/$name.norm.txt"
+  sed -E -e 's#^.*[\/]([A-Za-z0-9_]+\.cs\([0-9]+,[0-9]+\))#\1#' -e 's#^.*[\/]([A-Za-z0-9_]+)(\.cs)?\.csproj : #\1.csproj : #' -e '/^   at /d' "out/$name.raw.txt" > "out/$name.norm.txt"
   {
     grep -E "$message" "out/$name.norm.txt" |
       awk '{ p = $0; sub(/^[^(]*\(/, "", p); split(p, at, /[,)]/); printf "%d\t%d\t%d\t%s\n", ($0 ~ /\): error /) ? 0 : 1, at[1], at[2], $0 }' |

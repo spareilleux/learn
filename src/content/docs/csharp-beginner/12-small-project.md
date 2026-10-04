@@ -153,7 +153,7 @@ Console.WriteLine($"CsvHelper: {fields.Length} fields: {string.Join(" | ", field
 CsvHelper: 3 fields: Crosby, Stills & Nash | Suite: Judy Blue Eyes | 1969
 ```
 
-The first `dotnet run` downloads the package into a folder that all your projects share, the [global packages folder](https://learn.microsoft.com/nuget/consume-packages/managing-the-global-packages-and-cache-folders), `.nuget/packages` in your home folder. The version is required: without `@33.1.0`, the restore stops with [NU1015](https://learn.microsoft.com/nuget/reference/errors-and-warnings/nu1015). The `.csproj` in the message is the project that the SDK builds behind a file-based app:
+The first `dotnet run` downloads the package into a folder that all your projects share, the [global packages folder](https://learn.microsoft.com/nuget/consume-packages/managing-the-global-packages-and-cache-folders), `.nuget/packages` in your home folder. The version is required: without `@33.1.0`, the restore stops with [NU1015](https://learn.microsoft.com/nuget/reference/errors-and-warnings/nu1015). The `.csproj` in the message is the project that the SDK builds behind a file-based app. SDK 10.0.112 names it `l12_package_no_version.csproj`, and SDK 10.0.401, the one CI runs, `l12_package_no_version.cs.csproj`; `check.sh` writes the first name:
 
 ```text
 l12_package_no_version.csproj : error NU1015: The following PackageReference item(s) do not have a version specified: CsvHelper

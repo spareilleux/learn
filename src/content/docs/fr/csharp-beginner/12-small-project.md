@@ -153,7 +153,7 @@ Console.WriteLine($"CsvHelper: {fields.Length} fields: {string.Join(" | ", field
 CsvHelper: 3 fields: Crosby, Stills & Nash | Suite: Judy Blue Eyes | 1969
 ```
 
-Le premier `dotnet run` télécharge le package dans un dossier que partagent tous tes projets, le [dossier global des packages](https://learn.microsoft.com/nuget/consume-packages/managing-the-global-packages-and-cache-folders), `.nuget/packages` dans ton dossier personnel. La version est obligatoire : sans `@33.1.0`, la restauration s'arrête avec [NU1015](https://learn.microsoft.com/nuget/reference/errors-and-warnings/nu1015). Le `.csproj` du message est le projet que le SDK compile en coulisse pour une application basée sur un fichier :
+Le premier `dotnet run` télécharge le package dans un dossier que partagent tous tes projets, le [dossier global des packages](https://learn.microsoft.com/nuget/consume-packages/managing-the-global-packages-and-cache-folders), `.nuget/packages` dans ton dossier personnel. La version est obligatoire : sans `@33.1.0`, la restauration s'arrête avec [NU1015](https://learn.microsoft.com/nuget/reference/errors-and-warnings/nu1015). Le `.csproj` du message est le projet que le SDK compile en coulisse pour une application basée sur un fichier. Le SDK 10.0.112 l'appelle `l12_package_no_version.csproj`, et le SDK 10.0.401, celui de la CI, `l12_package_no_version.cs.csproj` ; `check.sh` écrit le premier nom :
 
 ```text
 l12_package_no_version.csproj : error NU1015: The following PackageReference item(s) do not have a version specified: CsvHelper
