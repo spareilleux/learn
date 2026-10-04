@@ -446,6 +446,7 @@ Most of the 22 differences of 2026-09-14 were fixed upstream by [#689](https://g
 - Called directly, `TransposeSkill` answers with `SkillMdDrivenSkill`'s error message, and its evidence calls the answer LLM-only: the behaviour of rows 42 and 43, reported as [#764](https://github.com/GuitarAlchemist/ga/issues/764).
 - The solutions read the expected output and the code.
 - Reported upstream as GA issue [#809](https://github.com/GuitarAlchemist/ga/issues/809), for rows 141 to 144.
+- CI run [37182332132](https://github.com/spareilleux/learn/actions/runs/37182332132), for commit `33daa24`: green on the three systems, 8 min 22 s on Linux, 8 min 7 s on macOS, 24 min 49 s on Windows, clone and build included.
 
 ## To verify
 
