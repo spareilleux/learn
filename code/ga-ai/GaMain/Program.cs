@@ -44,10 +44,29 @@ public static class Entry
             case ["l23"]:
                 Lesson23();
                 return 0;
+            case ["l24"]:
+                Lesson24();
+                return 0;
             default:
-                Console.Error.WriteLine("usage: GaMain l16|l17|l19|l20|l21|l22|l23");
+                Console.Error.WriteLine("usage: GaMain l16|l17|l19|l20|l21|l22|l23|l24");
                 return 2;
         }
+    }
+
+    // Lesson 24: on main, SetTheoryEquivalenceSkill and GrothendieckParseSkill only mark their refusal
+    // Declined and the parser is unchanged, but the pitch-class sets behind the prime forms changed;
+    // the same questions, with main's code
+    static void Lesson24()
+    {
+        Console.WriteLine("# l24, GA's main");
+        var (sets, parse) = SetEquivalenceParseProbe.Skills();
+        SetEquivalenceParseProbe.ExamplesTable(sets, parse, "on main");
+        SetEquivalenceParseProbe.RelationTable(sets, "on main");
+        SetEquivalenceParseProbe.AllPairsTable(sets, "on main");
+        SetEquivalenceParseProbe.NotationTable(sets, "on main");
+        SetEquivalenceParseProbe.PrimeFormTable("on main");
+        SetEquivalenceParseProbe.FormsTable(parse, "on main");
+        SetEquivalenceParseProbe.ChordsTable(parse, "on main");
     }
 
     // Lesson 23: on main, GrothendieckDeltaSkill and IcvShortestPathSkill only mark their refusal
