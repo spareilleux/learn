@@ -72,6 +72,7 @@ Three other courses on this site cover the background, and this one links to the
 | 23 | [Harmonic distance and path](23-harmonic-distance-and-path/) | `GrothendieckDeltaSkill` and `IcvShortestPathSkill` in `GA.Business.ML`, `GrothendieckDelta` and `GrothendieckService.FindShortestPath`, at the pin and on `main` | a distance that is never zero, an interpretation that reads one rule, mojibake in an answer, a search that can't succeed, steps counted as sets |
 | 24 | [Set classes and the Grothendieck parser](24-set-classes-and-the-grothendieck-parser/) | `SetTheoryEquivalenceSkill` and `GrothendieckParseSkill` in `GA.Business.ML`, and `GrothendieckOperationsParser` in `GA.Business.DSL`, at the pin and on `main` | a relation never read, a set read from its last number, a parser whose spaces are already eaten, an answer about no chord |
 | 25 | [What reaches the transpose skill](25-what-reaches-the-transpose-skill/) | `DefaultRoutingHintProvider`, `TransposeSkill`, `SkillMdPlugin` and the two routers of the chatbot host, at the pin and on `main` | a hint that misses the skill's own examples, a skill no fallback can reach, a default that answers every question nobody claims |
+| 26 | [The modes catalog](26-the-modes-catalog/) | `ModesSkill`, `Modes.yaml` and `ModesConfig`, at the pin and the same on `main` | modes that aren't their family's scale, names cut by a YAML comment, formulas numbered by position |
 | — | [Journal](journal/) | | |
 
 ## Prerequisites
