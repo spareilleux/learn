@@ -73,6 +73,7 @@ Otros tres cursos de este sitio cubren el trasfondo, y este enlaza con ellos en 
 | 24 | [Las clases de conjuntos y el analizador Grothendieck](24-set-classes-and-the-grothendieck-parser/) | `SetTheoryEquivalenceSkill` y `GrothendieckParseSkill` en `GA.Business.ML`, y `GrothendieckOperationsParser` en `GA.Business.DSL`, en el commit fijado y en `main` | una relación que nunca se lee, un conjunto leído desde su último número, un analizador cuyos espacios ya se han comido, una respuesta que no habla de ningún acorde |
 | 25 | [Lo que llega a la skill de transposición](25-what-reaches-the-transpose-skill/) | `DefaultRoutingHintProvider`, `TransposeSkill`, `SkillMdPlugin` y los dos enrutadores del host del chatbot, en el commit fijado y en `main` | una pista que no reconoce los propios ejemplos de la skill, una skill a la que ningún respaldo llega, un valor por defecto que responde a toda pregunta que nadie reclama |
 | 26 | [El catálogo de modos](26-the-modes-catalog/) | `ModesSkill`, `Modes.yaml` y `ModesConfig`, en el commit fijado e iguales en `main` | modos que no son la escala de su familia, nombres cortados por un comentario de YAML, fórmulas numeradas por posición |
+| 27 | [Las notas que suenan fuera](27-notes-that-sound-outside/) | `OutsideNotesSkill` y `ChordVocabulary`, en el commit fijado e iguales en `main` | tensiones que ninguna escala de acorde contiene, una 11 dentro de los acordes de trecena, cifrados cortados, sostenidos en acordes con bemoles |
 | — | [Diario](journal/) | | |
 
 ## Requisitos previos
