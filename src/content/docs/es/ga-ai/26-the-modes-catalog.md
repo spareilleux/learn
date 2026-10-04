@@ -355,6 +355,10 @@ example prompts 37: CanHandle accepts 11
 - **La ortografía es la del catálogo.** Las fórmulas se comparan con la regla de un manual aplicada a las propias notas del catálogo, y un sostenido y un bemol que nombran la misma nota solo se distinguen donde la regla lo exige.
 - **No se comprueban ni el catálogo atonal ni el enrutamiento.** Las 200 familias atonales no se comparan con una tabla de clases de conjuntos, y no se ejecuta ningún enrutador: la lección llama a la skill directamente.
 
+## Comunicado upstream
+
+- Se comunicaron después de escribir esta lección, en la issue de GA [#813](https://github.com/GuitarAlchemist/ga/issues/813): los modos que no son la escala de su familia tocada desde su grado, los nombres que YAML corta en " #" y los modos que dejan inalcanzables, los nombres alternativos que `CanHandle` ignora, el filtro "Chord Family", y los prompts de ejemplo que reciben la respuesta por defecto. Los recuentos de las fórmulas se añadieron a la [#765](https://github.com/GuitarAlchemist/ga/issues/765) en [un comentario](https://github.com/GuitarAlchemist/ga/issues/765#issuecomment-5982283789).
+
 ## Ejercicios
 
 1. ¿Sobre qué grado de C D E G A empieza el "Minor Pentatonic" del catálogo, C D F G A? ¿Cuál de los modos de la familia lleva las notas de la pentatónica menor?

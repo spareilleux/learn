@@ -355,6 +355,10 @@ example prompts 37: CanHandle accepts 11
 - **Spelling is the catalog's.** The formulas are compared with a textbook's rule applied to the catalog's own notes, and a sharp and a flat that name the same note are told apart only where the rule needs it.
 - **The atonal catalog and the routing aren't checked.** The 200 atonal families are not compared with a set-class table, and no router is run: the lesson calls the skill directly.
 
+## Reported upstream
+
+- Reported after this lesson was written, in GA issue [#813](https://github.com/GuitarAlchemist/ga/issues/813): the modes that aren't their family's scale from their degree, the names YAML cuts at " #" and the modes they leave unreachable, the alternate names `CanHandle` ignores, the "Chord Family" filter, and the example prompts that get the default answer. The formula counts were added to [#765](https://github.com/GuitarAlchemist/ga/issues/765) in [a comment](https://github.com/GuitarAlchemist/ga/issues/765#issuecomment-5982283789).
+
 ## Exercises
 
 1. On which degree of C D E G A does the catalog's "Minor Pentatonic", C D F G A, start? Which of the family's modes carries the minor pentatonic's notes?
