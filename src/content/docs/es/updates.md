@@ -233,7 +233,7 @@ La [PR de Demerzel #1184](https://github.com/GuitarAlchemist/Demerzel/pull/1184)
 
 MUS-011 sigue **pendiente de verificación** hasta que este cambio se fusione, su despliegue sea correcto y las páginas se lean sin autenticación.
 
-## 2026-10-03 — Streeling MUS-011 publicado
+## 2026-10-04 — Streeling MUS-011 publicado
 
 La [PR de Learn #138](https://github.com/spareilleux/learn/pull/138) se fusionó como `aaf6d3e`, y su [despliegue de Pages](https://github.com/spareilleux/learn/actions/runs/37177089952) fue correcto. Después, las páginas se leyeron sin autenticación en los tres idiomas: doce páginas, que respondieron todas 200. Las páginas del [módulo MUS-011](../streeling/music/mus-011-modes-modal-families/) nombran MUS-011 y enlazan su fuente en `499fc64`; el [índice de música](../streeling/music/) lo incluye, y el [diario de Streeling](../streeling/journal/) y este diario incluyen sus entradas del 2026-10-03.
 
