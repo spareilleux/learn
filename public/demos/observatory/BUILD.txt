@@ -984,6 +984,53 @@ the same kind of checks, so that test's flakiness predates this version; it is
 to verify on its own. --check-only and --selftest passed on the four changed
 scripts in the prototype and in the DLSS copy (observatory-dlss).
 
+Version 30, exported 2026-10-03 16:38:14 UTC, makes the frieze's mosaics move,
+after the author asked to use in the scene the video models of the ComfyUI
+course. Once a summoned panel is whole, it plays a short clip of itself,
+forwards then backwards, 13 frames at 6 a second blended between them, and the
+clip comes in over 1 s and goes in 0.6 s before the mosaic returns to dust;
+under the system's reduced-motion setting it does not come. Each clip was made
+on the author's machine by Wan 2.2 TI2V-5B (Apache-2.0, with its umT5-XXL text
+encoder, Apache-2.0) from the panel's own image, 1280x320 and 49 frames, in 34
+to 96 s on the RTX 5080 (the longest loaded the model), with the official
+ComfyUI template's settings; the owl's first clip turned its head and showed
+it twice over the still, so its panel uses a clip asked to keep the owl still.
+Every fourth frame is reduced to one texel per tessera and stored as its
+change from the first frame (assets/fresco_motion.png, 1,064,203 bytes,
+1024x832, imported lossless without mipmaps). assets/fresco_panel.gdshader
+adds a small change to the still, so the drawn mosaic stays where nothing
+moves, and lets the clip's colour take over, with the still's grain, where the
+change is large (scripts/fresco_frieze.gd plays it). scripts/observatory.gd
+and scripts/quality.gd are version 28's; every other script is version 29's.
+index.pck is now 23,530,884 bytes, 911,784 more than version 29's, almost all
+of it the motion atlas; index.html changes only that size, and index.wasm and
+index.js are unchanged.
+Web: the export served locally (artpass/publish/gzip_server.py, the build's
+own course list), in headless Chrome at 1600x900
+(artpass/publish/fresco-web.mjs): reloaded with ?follow=1, the camera looked
+square on at frieze panel 0 from 4 m at its height, so that the gaze summoned
+it, and six shots a second apart were compared in the panel's middle
+(artpass/publish/fresco_web_change.py); then the same with
+prefers-reduced-motion emulated. Criteria set before measuring: a mean change
+of at least 3 of 255 between shots with the clip, under 1 with reduced motion.
+On the RTX 5080 (ANGLE on Direct3D 11), at level 0 with its supersampling and
+16.7 ms a frame, the panel changed by 16.5 on average with its clip and 0.0
+with reduced motion. With SwiftShader standing in for the weakest GPU, at
+level 5 on an 800x450 canvas, it changed by 11.4 and 0.0, at 166.6 ms a frame
+with the clip and 150.0 to 166.6 ms without it, the view the same. Neither run
+logged an error or an exception. Real weak GPUs, phones and other browsers: to
+verify.
+Native: version 29's whole list (artpass/publish/regress-pub22.sh) against
+this build's own project passed but for lean_keys, which failed once on
+stops_at_series_end and browsed_stays_aimed, as in versions 28 and 29, and
+then passed 3 runs of 3 on its own. artpass/frescovideo/motion_probe.gd, with
+time stopped, shot the panel with and without its clip at the clip's frames 0,
+4, 8 and 12: panel 0 changed by 0, 6.24, 9.82 and 11.56 of 255 under
+Compatibility and by 0, 6.28, 9.76 and 11.45 under Forward+; panel 14, whose
+clip moves only light, by 0, 2.99, 6.07 and 7.77, under the 3 set beforehand
+at frame 4, a miss kept as measured; with --reduced-motion the clip did not
+come.
+
 Native Compatibility GPU time, RTX 5080, 1600x900, 240 frames per view: 0.44 to
 0.52 ms for the previous web scene, 0.64 to 1.44 ms with the detail pass; up to
 1.55 million primitives in the overview, against 0.46 million before. With the
@@ -1050,21 +1097,22 @@ assets/ix_pipelines.json 180cb180625664b027f3c7e01d855533c757e4e5525c506bd2a6f26
 scripts/seldon_recording.gd b26147aaafba390780f54a1fb02af51e80b03af7bb52b2719a4b9e3ca1193130
 assets/seldon_points.gdshader 744b72e7abd915467abc5d9727eecbadaf4290bb5ecbed2fee6fe98ed80bcd2e
 assets/recording_frame.gdshader a7daedd2a691b70de4754d06fc0974f40335109603c57426a70a7381a5052a0c
-scripts/fresco_frieze.gd 5dfa9b9df01fb0bf7a9480d9ed4b7970ed77fdb005f13da63f0bc0971cdea777
-assets/fresco_panel.gdshader f72ccf999ae0cb7debdeef378ac57f902378af617914e28f8da7615f755c939d
+scripts/fresco_frieze.gd 0999bcc75c78ecc77ee8db4cd69edc28fbc1bf1638d274bf617b27cd6926632a
+assets/fresco_panel.gdshader e9c20421cf254119e9d85da22a70bb8a965cee0be524f5c95b2022f48bc82d33
 assets/fresco_dust.gdshader 9d63b02079689cd0205a9d469c743645d4fac1ccfff21a3d0326f36a3062341c
 assets/fresco_atlas.png cccc2917f794f42517ee001392802ec6828acc747f585018e49349474b1638fc
-scripts/build_info.gd cbe90e94188fdc325536dbb4d4f1b069c30ae13e83065ed2ea84a3b2a104afbc
+assets/fresco_motion.png aa7148be2c28917ddae5d92b7a155c46fe024460c67e919106be23782fdf7822
+scripts/build_info.gd 0fd742b2c4ea85a8acaf8760b93cba7d2a22a056db54c7726a87bcd20b22b699
 
 SHA-256 output files:
-index.pck 7fea8d446d48a8ef7be0cb1149f1e659fc02f2ee2eaefcef9e9b01bd01562414
+index.pck 9c2e781c65be6e24840cc3175f86cb99a52555c98b829a233da1839b135a05a4
 index.wasm 99962b29677e42f3ba0258bd90fdc52ad90295954c4473e816ad02cfe5ff1d4f
 index.js e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981
 
 This directory contains a prebuilt binary export. Re-export only for deliberate
 scene changes. A scene re-export leaves the engine files (index.wasm, index.js)
 byte-identical, so git keeps a single copy; each scene revision adds its
-index.pck (22.6 MB here) to the binary history.
+index.pck (23.5 MB here) to the binary history.
 
 2026-10-03 post-merge recording sound correction: v28 preserved the v27
 `scripts/seldon_recording.gd` hash above before this correction. Fresh R or a
