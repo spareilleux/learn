@@ -460,6 +460,7 @@ La mayoría de las 22 diferencias del 2026-09-14 se corrigieron upstream en [#68
 - La skill no necesita ni modelo ni host: el programa la construye con un logger nulo, la llama directamente y lee el catálogo con el propio `GetTonalModalFamilies` de la skill.
 - El primer modo de un manual para cada familia es el del curso, en `Lesson26.cs`; cada uno de los demás modos se compara con el primer modo de su propia familia.
 - Las soluciones se leen en la salida esperada y en el código.
+- Ejecución de CI [37215721850](https://github.com/spareilleux/learn/actions/runs/37215721850), para el commit `16dbeff`: verde en los tres sistemas, 6 min 4 s en Linux, 8 min 18 s en macOS, 25 min 3 s en Windows, con el clon y la compilación incluidos.
 
 ## Por verificar
 

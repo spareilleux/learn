@@ -460,6 +460,7 @@ Most of the 22 differences of 2026-09-14 were fixed upstream by [#689](https://g
 - The skill needs no model and no host: the program builds it with a null logger, calls it directly, and reads the catalog through the skill's own `GetTonalModalFamilies`.
 - A textbook's first mode of each family is the course's, in `Lesson26.cs`; every other mode is checked against its own family's first mode.
 - The solutions read the expected output and the code.
+- CI run [37215721850](https://github.com/spareilleux/learn/actions/runs/37215721850), for commit `16dbeff`: green on the three systems, 6 min 4 s on Linux, 8 min 18 s on macOS, 25 min 3 s on Windows, clone and build included.
 
 ## To verify
 
