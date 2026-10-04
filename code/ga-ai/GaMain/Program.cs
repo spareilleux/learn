@@ -14,6 +14,7 @@ using GA.Domain.Services.Fretboard.Voicings.Analysis;
 using GA.Domain.Services.Fretboard.Voicings.Generation;
 using Microsoft.Extensions.AI;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging.Abstractions;
 
 public static class Entry
@@ -47,10 +48,33 @@ public static class Entry
             case ["l24"]:
                 Lesson24();
                 return 0;
+            case ["l25"]:
+                Lesson25();
+                return 0;
             default:
-                Console.Error.WriteLine("usage: GaMain l16|l17|l19|l20|l21|l22|l23|l24");
+                Console.Error.WriteLine("usage: GaMain l16|l17|l19|l20|l21|l22|l23|l24|l25");
                 return 2;
         }
+    }
+
+    // Lesson 25: on main, the hints, the skills and their registration are the pin's, but the router
+    // falls back on the skills' CanHandle when it can't embed a question; the same questions, in
+    // main's chatbot host
+    static void Lesson25()
+    {
+        Console.WriteLine("# l25, GA's main");
+        // The voicing index MainChatHost hands the host: lesson 3's, built with main's code
+        WriteIndex(Path.Combine(AppContext.BaseDirectory, "out", "optick-mini-main.index"), print: false);
+        using var host = new MainChatHost();
+        using var client = host.CreateClient();
+        host.WaitForWarmup();
+        using var scope = host.Services.CreateScope();
+        var services = scope.ServiceProvider;
+        TransposeRoutingProbe.HintsTable(services, "on main");
+        TransposeRoutingProbe.OthersTable(services, "on main");
+        TransposeRoutingProbe.SkillsTable(services, "on main");
+        TransposeRoutingProbe.OfflineTable(services, client, "on main");
+        TransposeRoutingProbe.DirectAnswer(services, "on main");
     }
 
     // Lesson 24: on main, SetTheoryEquivalenceSkill and GrothendieckParseSkill only mark their refusal
