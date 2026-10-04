@@ -74,6 +74,7 @@ Three other courses on this site cover the background, and this one links to the
 | 25 | [What reaches the transpose skill](25-what-reaches-the-transpose-skill/) | `DefaultRoutingHintProvider`, `TransposeSkill`, `SkillMdPlugin` and the two routers of the chatbot host, at the pin and on `main` | a hint that misses the skill's own examples, a skill no fallback can reach, a default that answers every question nobody claims |
 | 26 | [The modes catalog](26-the-modes-catalog/) | `ModesSkill`, `Modes.yaml` and `ModesConfig`, at the pin and the same on `main` | modes that aren't their family's scale, names cut by a YAML comment, formulas numbered by position |
 | 27 | [Notes that sound outside](27-notes-that-sound-outside/) | `OutsideNotesSkill` and `ChordVocabulary`, at the pin and the same on `main` | tensions no chord scale holds, an 11 inside 13th chords, chord symbols cut short, sharps in flat chords |
+| 28 | [Comparing major and minor](28-comparing-major-and-minor/) | `TheoryComparisonSkill` and `RelativeKeySkill` at the pin, and `main`'s chatbot host without embeddings | 5 of 20 phrasings read, a lookbehind that refuses "the major vs minor", a suggestion it refuses, parallel keys no skill answers, examples `main` never routes to it |
 | — | [Journal](journal/) | | |
 
 ## Prerequisites
