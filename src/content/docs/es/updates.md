@@ -247,6 +247,20 @@ La [PR de Demerzel #1185](https://github.com/GuitarAlchemist/Demerzel/pull/1185)
 
 MUS-014 sigue **pendiente de verificación** hasta que este cambio se fusione, su despliegue sea correcto y las páginas se lean sin autenticación.
 
+## 2026-10-04 — Streeling MUS-014 publicado
+
+La [PR de Learn #143](https://github.com/spareilleux/learn/pull/143) se fusionó como `a0c78d9`, y su [despliegue de Pages](https://github.com/spareilleux/learn/actions/runs/37215263087) fue correcto. Después, las páginas se leyeron sin autenticación en los tres idiomas: doce páginas, que respondieron todas 200. Las páginas del [módulo MUS-014](../streeling/music/mus-014-inversions-bass-line/) nombran MUS-014 y enlazan su fuente en `518158b`; el [índice de música](../streeling/music/) lo incluye, y el [diario de Streeling](../streeling/journal/) y este diario incluyen sus entradas del 2026-10-04.
+
+MUS-014 pasa así de pendiente de verificación a verificado; su entrada de arriba queda tal como se escribió. Esta actualización fija de nuevo sus enlaces a la fuente en `0f7a5fd`. Publicado no es estudiado: MUS-014 no se ha ejecutado ni estudiado aquí, y su experimento sigue propuesto.
+
+## 2026-10-04 — Streeling MUS-019 sincronizado, pendiente de verificación
+
+La [PR de Demerzel #1186](https://github.com/GuitarAlchemist/Demerzel/pull/1186) se fusionó como `0f7a5fd`, después de la fijación de `518158b`. Esta actualización la sincroniza en Learn:
+- el nuevo [módulo MUS-019](../streeling/music/mus-019-transposition-capo-cross-instrument/), Transposición, capotraste y equivalencia entre instrumentos, en los tres idiomas;
+- su línea en el [índice de música](../streeling/music/) y en el [diario de Streeling](../streeling/journal/), con una entrada fechada en este último.
+
+MUS-019 sigue **pendiente de verificación** hasta que este cambio se fusione, su despliegue sea correcto y las páginas se lean sin autenticación.
+
 ## Por verificar
 
 - Comprobar las URL públicas de esta actualización y el catálogo tras el despliegue; conservar su recibo en el registro de integración.

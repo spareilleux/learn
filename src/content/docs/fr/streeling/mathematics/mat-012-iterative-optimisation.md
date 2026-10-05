@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **MAT-012** · Optimisation itérative · intermédiaire · 50 minutes
 
-Généré par le département *Mathématiques* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/518158b0568981b4ebe290d69f197995bd41ded0/state/streeling/courses/mathematics/fr/mat-012-iterative-optimisation.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Mathématiques* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/0f7a5fd110acfc4835776d38ab1a115533467d34/state/streeling/courses/mathematics/fr/mat-012-iterative-optimisation.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MAT-011](../../mathematics/mat-011-gradients-reverse-mode-autodiff/)
 :::

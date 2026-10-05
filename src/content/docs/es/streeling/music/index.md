@@ -26,4 +26,5 @@ sidebar:
 - [MUS-013 · Fundamental, bajo y conjunto de clases de altura — Un conjunto, varios nombres](mus-013-root-bass-pitch-class-set/)
 - [MUS-014 · Inversiones y línea de bajo — Las mismas notas, otro bajo](mus-014-inversions-bass-line/)
 - [MUS-018 · Identificación de la tonalidad, números romanos y cadencias — Lo que un recuento de acordes puede decidir y lo que no](mus-018-key-finding-roman-numerals-cadences/)
+- [MUS-019 · Transposición, capotraste y equivalencia entre instrumentos — Tres clases de identidad](mus-019-transposition-capo-cross-instrument/)
 - [MUS-020 · Clases de conjuntos, vectores interválicos, relación Z y formas primas — Dos compactaciones, un catálogo](mus-020-set-classes-interval-vectors-prime-forms/)

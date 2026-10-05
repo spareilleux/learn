@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **MAT-025** · Allocation sous contraintes, jeux, bandits et pénalités · intermédiaire · 60 minutes
 
-Généré par le département *Mathématiques* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/518158b0568981b4ebe290d69f197995bd41ded0/state/streeling/courses/mathematics/fr/mat-025-allocation-games-bandits-penalties.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Mathématiques* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/0f7a5fd110acfc4835776d38ab1a115533467d34/state/streeling/courses/mathematics/fr/mat-025-allocation-games-bandits-penalties.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MAT-009](../../mathematics/mat-009-estimation-uncertainty-sampling/), [MAT-012](../../mathematics/mat-012-iterative-optimisation/)
 :::

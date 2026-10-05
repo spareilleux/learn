@@ -26,4 +26,5 @@ sidebar:
 - [MUS-013 · Root, Bass and Pitch-Class Set — One Set, Several Names](mus-013-root-bass-pitch-class-set/)
 - [MUS-014 · Inversions and the Bass Line — Same Notes, Different Bass](mus-014-inversions-bass-line/)
 - [MUS-018 · Key Finding, Roman Numerals and Cadences — What a Count of Chords Can and Cannot Decide](mus-018-key-finding-roman-numerals-cadences/)
+- [MUS-019 · Transposition, the Capo and Cross-Instrument Equivalence — Three Kinds of Sameness](mus-019-transposition-capo-cross-instrument/)
 - [MUS-020 · Set Classes, Interval Vectors, the Z-Relation and Prime Forms — Two Packings, One Catalogue](mus-020-set-classes-interval-vectors-prime-forms/)

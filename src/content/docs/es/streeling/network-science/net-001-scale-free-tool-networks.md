@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **NET-001** · Ciencia de redes para ecosistemas de IA · principiante · 25 minutes
 
-Generado por el departamento *Ciencia de redes* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/518158b0568981b4ebe290d69f197995bd41ded0/state/streeling/courses/network-science/es/net-001-scale-free-tool-networks.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ciencia de redes* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/0f7a5fd110acfc4835776d38ab1a115533467d34/state/streeling/courses/network-science/es/net-001-scale-free-tool-networks.es.md) · [Mi diario](../../journal/)
 :::
 
 > **Departamento de Ciencia de Redes** | Etapa: Nigredo (Principiante) | Duración: 25 minutos

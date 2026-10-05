@@ -93,6 +93,7 @@ Marca un módulo una vez estudiado. En **Notas**, añade una entrada fechada: lo
 - [ ] [MUS-013 · Fundamental, bajo y conjunto de clases de altura](../music/mus-013-root-bass-pitch-class-set/) <!-- mus-013-root-bass-pitch-class-set -->
 - [ ] [MUS-014 · Inversiones y línea de bajo](../music/mus-014-inversions-bass-line/) <!-- mus-014-inversions-bass-line -->
 - [ ] [MUS-018 · Identificación de la tonalidad, números romanos y cadencias](../music/mus-018-key-finding-roman-numerals-cadences/) <!-- mus-018-key-finding-roman-numerals-cadences -->
+- [ ] [MUS-019 · Transposición, capotraste y equivalencia entre instrumentos](../music/mus-019-transposition-capo-cross-instrument/) <!-- mus-019-transposition-capo-cross-instrument -->
 - [ ] [MUS-020 · Clases de conjuntos, vectores interválicos, relación Z y formas primas](../music/mus-020-set-classes-interval-vectors-prime-forms/) <!-- mus-020-set-classes-interval-vectors-prime-forms -->
 
 ### Musicología
@@ -256,6 +257,14 @@ Aquí no se ejecutó nada de él.
 ## 2026-10-04 — MUS-014 · Inversiones y línea de bajo
 
 Sincronizado desde Demerzel en [`518158b`](https://github.com/GuitarAlchemist/Demerzel/commit/518158b0568981b4ebe290d69f197995bd41ded0) ([PR #1185](https://github.com/GuitarAlchemist/Demerzel/pull/1185)). Un nuevo módulo de música de nivel intermedio sobre las posiciones de los acordes leídas desde el bajo: el estado fundamental y las inversiones, el bajo cifrado de las tríadas y los acordes de séptima, los cuatro tipos de acorde de cuarta y sexta, y los casos en que las notas que suenan no fijan la posición. Rastrea cómo trata GA las inversiones en su tipo `Chord`, sus documentos de voicing y su catálogo de modos, y su sección 6 propone un experimento. El índice de música ahora lo incluye, el de Streeling cuenta 16 módulos de música en lugar de 15, y MUS-018 y MUS-020 bajan un puesto en la barra lateral; todas las demás páginas solo cambian sus referencias fijadas a Demerzel, de `499fc64` a `518158b`.
+
+Aquí no se ejecutó nada de él.
+
+- **No se ha estudiado aquí,** así que su casilla de arriba sigue vacía.
+
+## 2026-10-04 — MUS-019 · Transposición, capotraste y equivalencia entre instrumentos
+
+Sincronizado desde Demerzel en [`0f7a5fd`](https://github.com/GuitarAlchemist/Demerzel/commit/0f7a5fd110acfc4835776d38ab1a115533467d34) ([PR #1186](https://github.com/GuitarAlchemist/Demerzel/pull/1186)). Un nuevo módulo de música de nivel intermedio sobre tres clases de identidad: la transposición, escrita por intervalo y leída en la línea de quintas; el capotraste como diferencia de afinación uniforme, los nombres de forma frente a los nombres del sonido real, y la misma forma en ukeleles y un bajo; y los instrumentos transpositores en si♭, mi♭ y fa. Rastrea cómo transporta GA los conjuntos de clases de altura y los símbolos de acordes y cómo responde a las preguntas de capotraste, y su sección 6 propone un experimento. El índice de música ahora lo incluye, el de Streeling cuenta 17 módulos de música en lugar de 16, y MUS-020 baja un puesto en la barra lateral; todas las demás páginas solo cambian sus referencias fijadas a Demerzel, de `518158b` a `0f7a5fd`.
 
 Aquí no se ejecutó nada de él.
 

@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **MUS-013** · Fondamentale, basse et ensemble de classes de hauteurs · intermédiaire · 45 minutes
 
-Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/518158b0568981b4ebe290d69f197995bd41ded0/state/streeling/courses/music/fr/mus-013-root-bass-pitch-class-set.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/0f7a5fd110acfc4835776d38ab1a115533467d34/state/streeling/courses/music/fr/mus-013-root-bass-pitch-class-set.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MUS-012](../../music/mus-012-chord-formulas-essential-tones-doubling/), [MUS-020](../../music/mus-020-set-classes-interval-vectors-prime-forms/)
 :::

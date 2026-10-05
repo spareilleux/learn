@@ -247,6 +247,20 @@ MUS-011 therefore moves from awaiting verification to verified; its entry above 
 
 MUS-014 stays **awaiting verification** until this change is merged, its deployment succeeds and the pages are read back anonymously.
 
+## 2026-10-04 — Streeling MUS-014 published
+
+[Learn PR #143](https://github.com/spareilleux/learn/pull/143) was merged as `a0c78d9`, and its [Pages deployment](https://github.com/spareilleux/learn/actions/runs/37215263087) succeeded. The pages were then read back anonymously in the three languages: twelve pages, each answering 200. The [MUS-014 module](../streeling/music/mus-014-inversions-bass-line/) pages name MUS-014 and link their source at `518158b`; the [music index](../streeling/music/) lists it, and the [Streeling journal](../streeling/journal/) and this journal carry their 2026-10-04 entries.
+
+MUS-014 therefore moves from awaiting verification to verified; its entry above is left as written. This update repins its source links to `0f7a5fd`. Published is not studied: MUS-014 has not been run or studied here, and its experiment remains proposed.
+
+## 2026-10-04 — Streeling MUS-019 synced, awaiting verification
+
+[Demerzel PR #1186](https://github.com/GuitarAlchemist/Demerzel/pull/1186) was merged as `0f7a5fd`, after the `518158b` pin. This update syncs it into Learn:
+- the new [MUS-019 module](../streeling/music/mus-019-transposition-capo-cross-instrument/), Transposition, the Capo and Cross-Instrument Equivalence, in the three languages;
+- its line in the [music index](../streeling/music/) and in the [Streeling journal](../streeling/journal/), with a dated entry there.
+
+MUS-019 stays **awaiting verification** until this change is merged, its deployment succeeds and the pages are read back anonymously.
+
 ## To verify
 
 - Check this update's public URLs and catalog after deployment; keep the deploy receipt with the integration record.
