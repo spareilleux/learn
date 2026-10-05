@@ -17,6 +17,7 @@ sidebar:
 - [x] French and Spanish translations
 - [x] A cleanup pipeline for `.glb` models generated in ComfyUI, tried on two Hunyuan3D models
 - [x] Two procedural models in `bpy`, compared with the generated ones
+- [x] Four figures for a game engine's crowd, their walk carried in the UVs
 - [ ] Lesson 5: scripting with `bpy`
 
 ## QA
@@ -49,6 +50,7 @@ Each row is a question the course measured. The hypothesis is the one recorded b
 | Is a low-sample CPU preview enough to judge a composition before spending GPU time? | Written in advance, in the entry itself: a low-sample preview is enough to judge framing. | 6.698 s and 7.025 s at 24 samples; the first framing put pillars across the focal rings and was rejected on sight. | Confirmed for framing, not for final image quality | [2026-09-19](#2026-09-19--orbital-cathedral-composition-before-generation) · [`orbital_cathedral.py`](https://github.com/spareilleux/learn/blob/0c94215/code/blender/scripts/orbital_cathedral.py) |
 | What does modelling in `bpy` buy against image-to-3D, for the same two objects? | Not written in advance as a prediction: the comparison was itself the object of the exercise. | 3,370 and 5,950 triangles against 890,140 and 1,017,760; 0 non-manifold edges against 19,084 and 189,748; named parts, materials and animations, for about 510 lines. | Confirmed | [2026-09-22](#2026-09-22--modelling-in-bpy-against-image-to-3d) · [`atlas_check.py`](https://github.com/spareilleux/learn/blob/0c94215/code/blender/scripts/atlas_check.py) |
 | Is occlusion baked per vertex worth its 40 kB in a real-time page? | Written in advance: yes, on the ambient term — which is why that path was measured first. | On the ambient term, 4 to 5 % of pixels move by a mean of 1.2/255 — nothing. On the diffuse term, with the exposure held fixed, the luminance spread grows by 1.44 to 1.95. | Refuted on the ambient term, confirmed on the diffuse one | [2026-09-22](#2026-09-22--occlusion-baked-into-vertices-and-telling-a-real-effect-from-a-darker-one) · scripts not published |
+| Can a vertex's distance from the middle tell a figure's arm from its leg? | Not written in advance as a prediction: the first version of the script assumed it. | A leg's top reaches 0.170 m from the middle and an arm's inner edge at the shoulder 0.145 m: they overlap by 0.025 m. The UVs flag the limbs instead. | Refuted | [2026-10-04](#2026-10-04--a-crowd-for-a-game-engine-its-walk-carried-in-the-uvs) · [`crowd_kit.py`](https://github.com/spareilleux/learn/blob/246c993/code/blender/scripts/crowd_kit.py) |
 
 ## 2026-09-16 — Versions and setup
 
@@ -168,6 +170,24 @@ The question came from another page of this project, the [Banc de Placement](../
 - **Verdict: confirmed.** Occlusion baked per vertex buys real contact shading here, for about 40 kB, but only on the second path: on the diffuse term, not on the ambient one alone.
 - **Where it stops, at the same level as the result.** Three views of a single scene. And only the 220 static draws are baked: a baked shadow is glued to its geometry, so an object moved over a baked floor neither carries its shadow nor receives one. The technique holds for what does not move, and a reader taking it up should know that before budgeting the bytes.
 - **Not published.** The bake, the patched page and the measurement script live outside the repository and are not published, and the artifact itself was left untouched.
+
+## 2026-10-04 — A crowd for a game engine, its walk carried in the UVs
+
+The [Observatory](../../observatory/) demo's palace gardens got a sparse crowd in version 38: about a hundred people walking at once in a web page. [Godot](https://godotengine.org/) draws each kind of figure as one [MultiMesh](https://docs.godotengine.org/en/stable/classes/class_multimesh.html), every person an instance of it, and a vertex shader moves the limbs. That shader sees no skeleton and no part names, only vertices, so the mesh itself has to say, vertex by vertex, what moves and how. [`scripts/crowd_kit.py`](https://github.com/spareilleux/learn/blob/246c993/code/blender/scripts/crowd_kit.py) builds the four figures from boxes, tapered tubes and squashed spheres, and writes the walk into their UVs.
+
+| | Courtier | Lady | Walker | Gardener |
+|---|---|---|---|---|
+| Triangles | 436 | 392 | 380 | 412 |
+| Height | 1.736 m | 1.745 m | 1.736 m | 1.790 m |
+| `.glb` | 19,384 bytes | 18,480 bytes | 17,900 bytes | 18,848 bytes |
+| Triangles that swing as legs (with the feet), as arms (with the hands), as hanging cloth | 64 under a robe, 80, 48 | 64 under a robe, 80, 48 | 64, 80, 20 | 64, 80, 20 |
+
+- **The UVs as a channel.** No texture reads them: the figures are coloured per instance. `u` is a leg's swing, `+` for the left leg and `−` for the right, its size the stride: 1, or 0.6 under a robe, where the step is shorter. `±2` marks an arm, which swings against the leg on its side. `v` is how far a robe or a tunic hangs below the waist, 0 at the waist and 1 at the hem, for its sway.
+- **The first idea, refuted.** The arms were first to be told from the legs by a vertex's distance from the middle. The [report](https://github.com/spareilleux/learn/blob/246c993/code/blender/expected/crowd_kit.txt) shows why that cannot work: a leg's top reaches 0.170 m from the middle, an arm's inner edge at the shoulder 0.145 m. They overlap by 0.025 m, so the script flags the arms with `±2` instead.
+- **glTF flips `v`.** glTF's `v` is 1 minus Blender's, so the script stores 1 − weight and the engine reads the weight. Read back through Blender's importer, which flips it again, the three materials come back as one mesh, and every flag and weight is unchanged.
+- **Smooth cloth.** Flat-shaded, a twelve-sided robe read as twelve stripes in the game, one of them black in the shade. Skin and cloth are smooth-shaded; shoes and hats stay flat.
+- **The same files.** CI rebuilds the four figures with the other scripts. On the author's machine, the files it writes are the published ones byte for byte.
+- **What the file does not hold.** No skeleton and no animation: the walk lives in the engine's shader, which is not in this repository. The faces are bare on purpose, and no costume comes from any film or series.
 
 ## To verify
 
