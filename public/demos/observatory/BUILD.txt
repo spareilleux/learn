@@ -1538,6 +1538,66 @@ back to the tour; a key, or the stick, took over at once and it started again
 and got back on; G further than 2.5 m left them on foot; a preset ended it
 all; a walk into a hedge stopped at its face.
 
+Version 40, exported 2026-10-05 01:56:32 UTC, lowers the held whistle out of
+sight while its troupe dances and gives the wand's TARS the troupe's steel.
+Held up, the whistle stood over the rightmost robot of a framed troupe on a
+computer (version 36's "to verify"); scripts/curio_wheel.gd now lowers it 0.6
+s after each blow, as while reading a spine, and raises it again once the
+troupe is gone; other curios held during a dance stay up. The wand's TARS was
+still in metallic 0.85 steel, near black in the web build's renderer and
+copper under Forward+, which the troupe had left on 2026-10-03 (the author:
+"On peut peut etre ameliorer notres modele tars"): the troupe's brushed
+aluminium moves into scripts/tars.gd (steel_material), the wand's TARS uses
+it, and scripts/tars_ensemble.gd loads it from there, its own look unchanged.
+Every other script is version 39's, scripts/observatory.gd and
+scripts/quality.gd version 28's.
+index.pck is now 29,534,064 bytes, 128 more than version 39's; index.html
+changes only that size, and index.wasm and index.js are unchanged.
+In headless Chrome on this machine (RTX 5080), the build served gzipped from
+localhost, on an emulated phone with touch (artpass/tarsdance/troupe-web.mjs,
+web-v40/troupe/): upright and sideways, the troupe came at the whistle's tap,
+and each number ended on its own 18.0 s after the call with its 279 and 413
+landings; while they danced, the whistle was out of sight and the troupe whole
+above the wheel's button and the stick (upright-first-6.5s.png). Upright, the
+first call stopped one frame for 100 ms at the tap and one for 483 ms 2.7 s
+later, as scripts/quality.gd stepped back up from level 5 to 0, as in version
+36; the jig and the sideways call had no frame over 50 ms. There was no
+exception and no console error. The wheel's (artpass/publish/curio-web.mjs,
+curio-web-v40/), the drone's on a computer and on a phone (drone-web.mjs,
+drone-web-v40-desktop/ and drone-web-v40-phone/) and the sound's
+(artpass/audio/audio-web.mjs, web-v40/) tests passed as on version 36, the
+drone's on a computer with headless Chrome's three pointer-lock
+WrongDocumentErrors, as before. The hums' test (artpass/audio/loop-web.mjs,
+web-loop-v40*/), last run on version 35, found the lift's hum as on version
+39's build, both with a silence of 1.7 to 2.3 s at 15 s where version 35's had
+6 ms (to verify). Its drone did not take off on the phone in 5 runs of 5 on
+this build and 2 of 4 on version 39's, run by turns (web-loop-v39*/); stepped
+through with a screenshot after each tap (artpass/audio/loopdiag-v40/), it
+flew in 3 runs of 4 on this build and 3 of 5 on version 39's, the failures
+falling late in each series on both builds. On both, the drone was picked from
+the wheel and then the tap that flies it did nothing, or the taps on the wheel
+were lost: a fault older than this version, to verify. The sound test's drone,
+taken after other curios, flew and hummed.
+Native runs, stock Godot 4.6.1 against this build's own project
+(artpass/publish/regress-pub32.sh, artpass/publish/regress-pub32/): version
+39's whole list of 78 runs, which artpass/publish/select_regress.py keeps
+whole on every fifth version. 77 passed; motion_bay14 missed the same point
+with the same numbers as since version 31. troupetest.gd (artpass/tarsdance/),
+under Compatibility and Forward+ at 1600x900 and unpinned at 10 frames a
+second, gave version 36's numbers (279 and 413 landings, the end 18.0 s after
+the call, 18.1 at 10 frames a second, robots of 89 to 107 pixels, the framed
+troupe's box 0.297 to 0.703 of the screen's width by 0.723 to 0.9 of its
+height) and checks the whistle: drawn at the call, hidden on the framed troupe
+1.2 s later and through the dance, up for a blow and hidden again 1.2 s after
+it, and fully up 0.5 s after the troupe is gone. Its framing.png shows the
+seven robots whole, where version 39's had the whistle over the rightmost.
+tarstest.gd's close-up of the wand's TARS under Compatibility: the brightest
+quarter of the slabs averages (45, 58, 81) in RGB, against (1, 6, 13) on
+version 39's build; under Forward+, measured in a copy of the project with the
+same scripts, (91, 68, 73) against the old steel's copper (176, 111, 54). The
+TARS, curio, drone and cinema runs passed. --check-only and --selftest passed
+on the three scripts in the prototype and in the DLSS copy (observatory-dlss).
+
 Native Compatibility GPU time, RTX 5080, 1600x900, 240 frames per view: 0.44 to
 0.52 ms for the previous web scene, 0.64 to 1.44 ms with the detail pass; up to
 1.55 million primitives in the overview, against 0.46 million before. With the
@@ -1592,9 +1652,9 @@ scripts/lift.gd 765ede89150fa68729b74e585cfc97ccd719c342eba0d16ecaaed657925990d4
 assets/sky_core_cap.png a110fdfa1b79cc41eec119265aeb89bc211d0b8e0eb6c759b45c25496f2daabe
 assets/kiosk_glass.gdshader 76226f17e5884a042b85e5fc544a4b71012ea6e389b9743c1cac65083a06bc44
 scripts/lift_sounds.gd 4daed5e380396a3711fc7ff2f1f72b877b9efbdaff6d6fa428c595b1dad7b244
-scripts/curio_wheel.gd 33b44a076088cac45ba0412b9b2366aec49ccf103ffb88d540592dcee35f471b
+scripts/curio_wheel.gd 67f60a84432aa6e46efb17b296b71e2fdf2e826ce54e29ff23e0836e87335ccd
 scripts/drone.gd 6d90aae0fe64191ff0f6a7bfcbd6c56d551153e1eb03c3e8b71509a69ef87209
-scripts/tars.gd 747a7c313a37c0731b4a9c8b5f78d364cbc6a6181b25623cd919a0a5b19a09d0
+scripts/tars.gd d50da54780d8535bda63b713388e4651b7f88ec8c3f9e0c2b1a59196ba37d03e
 scripts/hologram_ix.gd b252ee1de7055822af6886ea796e6a8e35aa81510ec0eb4f36b2bcf20b32e8a6
 scripts/quality.gd bdad805e7717769145b5aa2ad98aca56b0b76857fdcd86e87817f1bc53046c69
 assets/holo_panel.gdshader 1a77f62f3bd53c29c95341058baa0d19613737ab2a98f24c6fd4edc150637c08
@@ -1609,7 +1669,7 @@ assets/fresco_panel.gdshader e9c20421cf254119e9d85da22a70bb8a965cee0be524f5c95b2
 assets/fresco_dust.gdshader 9d63b02079689cd0205a9d469c743645d4fac1ccfff21a3d0326f36a3062341c
 assets/fresco_atlas.png cccc2917f794f42517ee001392802ec6828acc747f585018e49349474b1638fc
 assets/fresco_motion.png aa7148be2c28917ddae5d92b7a155c46fe024460c67e919106be23782fdf7822
-scripts/build_info.gd ebc256e164e240edae8f1c62dd2b57cb04aa04d65fb2535befb2476642a2c579
+scripts/build_info.gd 449aac03a586a62e5cc267bbd10978ae3f96a4406b540cb6ad04c53dfa4adbc1
 scripts/sfx_takes.gd 069f573898d4c4ad48fde9f1f592dba0974433b1881d7ed045d6797c3c3a0ac6
 assets/sfx/curio_wheel-beep.wav a1d999098afbd222622a6c4625ee16bb9788059c6fe37901067d9cd239f5ec8c
 assets/sfx/curio_wheel-chime.wav 6b580b1e57194c1f84183044c367bcab9d07e3d4c876da3dee5736ba78298c9e
@@ -1630,7 +1690,7 @@ assets/sfx/lift-rattle.wav ca4492ca261db9c13a17b316146296cb0eff9f527c2d6508a441f
 assets/sfx/seldon_recording-shimmer.wav f162e8a4e867503b38271d149a631e2cc1818ae2ab3600897dffa5770e23f8d0
 assets/sfx/drone-hum.wav 9e7adb0d9a8b790a9facf803ef0a0b2588150c71569912fc2db9e339383a9364
 scripts/cinematic.gd a6e03dc5adc4e673001ba48e6387c4311c1c7bd9b78c7bf49539308290eaa091
-scripts/tars_ensemble.gd 524da674c9d56f816cd9e400f0cee33a1279eafab7a426c9cac35f5038bf7e32
+scripts/tars_ensemble.gd b16f31ba0bb92eb86b2296a64ff476e59cb3db11a6f800b19db402ebda6c1239
 assets/tars_ensemble_tracks.tres 6c2be9a6fc350c02f8dd19e6a768ed911d11ebd741d4c5939bb585a84171b272
 assets/tars_ensemble_jig_tracks.tres d7604ba2a5dc3e61fb29441d145d0d98703193c516d429a754e9c0e4949383a0
 scripts/web_loop.gd cd89961d3e7e5d8275d67ead034eb2184587810dc710316c5377f58a16e35cbb
@@ -1697,7 +1757,7 @@ assets/garden_figure_walker.glb 6a2aff1f8a2548b183f70790cee06d5e004e4235351e95a3
 assets/garden_figure_gardener.glb 0e73084eef802a7d7d1f9dacd83ab49766eee95977f9ba120c6b83da2598cf3d
 
 SHA-256 output files:
-index.pck 8cc3007f1b27cf857230661db99e47746bbd21420439bd07a727c0b5c4d2673e
+index.pck 867ea15706cdc8c6dc4c56f03d4ae4c9b5a3132bf1809626c90136ad8bf0e374
 index.wasm 99962b29677e42f3ba0258bd90fdc52ad90295954c4473e816ad02cfe5ff1d4f
 index.js e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981
 
