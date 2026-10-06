@@ -1,17 +1,14 @@
 ---
 title: Parler en nœuds — Mission
-description: 'Écrire les nœuds comme un texte qu''IX peut vérifier — d''abord deux diaporamas, l''original français et sa copie anglaise, puis les mots de tresse, leur fermeture et le polynôme de Jones calculé par le crochet de Kauffman, vérifié contre les valeurs qu''affirment les tests d''IX et contre le Knot Atlas, avec un journal dont chaque entrée peut être rejouée.'
+description: 'Écrire les nœuds comme un texte qu''IX peut vérifier — d''abord un diaporama, l''original français d''une copie anglaise, puis les mots de tresse, leur fermeture et le polynôme de Jones calculé par le crochet de Kauffman, vérifié contre les valeurs qu''affirment les tests d''IX et contre le Knot Atlas, avec un journal dont chaque entrée peut être rejouée.'
 sidebar:
   label: Mission
   order: 0
 ---
 
-## Les deux diaporamas
+## Le diaporama
 
-Le cours part d'un diaporama construit pendant qu'IX apprenait à lire, vérifier et dessiner des nœuds. Il existe en deux langues :
-
-- **[Parler en nœuds](https://claude.ai/artifact/7v3cgP2wAARzvxgDgA8iEq)** : l'original, en français, 52 diapositives.
-- **[Speaking in Knots](https://claude.ai/artifact/V9yPov2hxYxNWZApXrNxYF)** : sa copie anglaise, diapositive par diapositive, faite à partir de la version `1791174928-7d71` du diaporama français.
+Le cours part d'un diaporama construit pendant qu'IX apprenait à lire, vérifier et dessiner des nœuds : **[Parler en nœuds](https://claude.ai/artifact/7v3cgP2wAARzvxgDgA8iEq)**, 52 diapositives. Il en existe une copie anglaise, *Speaking in Knots*, diapositive par diapositive, faite à partir de sa version `1791174928-7d71`.
 
 Le diaporama traverse neuf parties : pourquoi un nœud a besoin d'un texte qu'IX peut vérifier ; les quatre façons d'écrire un nœud, avec le code de Gauss en détail ; ce qu'IX vérifie et comment il refuse ; les mots de tresse et les noms de la table des nœuds ; des exemples, du texte au rendu final dans ComfyUI ; les nœuds marins en 3D, dessinés à la main, vérifiés et mis en volume par IX, puis rendus ; ce qu'IX tire des nœuds (erreurs de nouage, invention, pipelines, fichiers `.knot` et bandes dessinées de Jean-Pierre Petit) ; l'état des pull requests ; et la méthode, avec ses relectures adverses.
 

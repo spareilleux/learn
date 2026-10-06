@@ -1,17 +1,14 @@
 ---
 title: Speaking in knots — Mission
-description: 'Writing knots as text that IX can check — two slide decks first, the French original and its English copy, then braid words, their closures and the Jones polynomial computed by the Kauffman bracket, checked against the values IX''s tests assert and against the Knot Atlas, with a journal whose every entry can be replayed.'
+description: 'Writing knots as text that IX can check — a slide deck first, the English copy of a French original, then braid words, their closures and the Jones polynomial computed by the Kauffman bracket, checked against the values IX''s tests assert and against the Knot Atlas, with a journal whose every entry can be replayed.'
 sidebar:
   label: Mission
   order: 0
 ---
 
-## The two decks
+## The deck
 
-The course starts from a slide deck built while IX learned to read, check and draw knots. It exists in two languages:
-
-- **[Parler en nœuds](https://claude.ai/artifact/7v3cgP2wAARzvxgDgA8iEq)**: the original, in French, 52 slides.
-- **[Speaking in Knots](https://claude.ai/artifact/V9yPov2hxYxNWZApXrNxYF)**: its English copy, slide for slide, made from the French deck's version `1791174928-7d71`.
+The course starts from a slide deck built while IX learned to read, check and draw knots: **[Speaking in Knots](https://claude.ai/artifact/V9yPov2hxYxNWZApXrNxYF)**, 52 slides. It is the English copy, slide for slide, of a French original, *Parler en nœuds*, made from its version `1791174928-7d71`.
 
 The deck goes through nine parts: why a knot needs a text that IX can check; the four ways to write a knot, with the Gauss code in detail; what IX checks and how it refuses; braid words and the names in the knot table; examples from text to a final render in ComfyUI; sailors' knots in 3D, drawn by hand, checked and given volume by IX, then rendered; what IX draws from knots (tying errors, invention, pipelines, `.knot` files, and Jean-Pierre Petit's comics); the state of the pull requests; and the method, with its adversarial reviews.
 
