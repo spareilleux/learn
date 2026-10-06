@@ -15,8 +15,8 @@ value, prints one line per check and exits with status 1 if any of them disagree
 One of IX's tests is out of its reach: words_at_the_caps_evaluate (64 and 63
 crossings, 2^64 smoothings). The 150 generated words of
 the_algebra_agrees_with_the_state_sum_and_the_markov_moves are not reproduced
-either: that test checks relations, not written values. Give it a word, and optionally a repeat count, to
-compute that word instead:
+either: that test checks relations, not written values. Give it a word, and
+optionally a repeat count, to compute that word instead:
 
     python jones_state_sum.py "s1 s2^-1" 2
 
