@@ -37,6 +37,12 @@ Cómo se conectó la generación de imágenes de [ComfyUI](https://docs.comfy.or
 
 La demo Ocean tiene un Artifact Claude independiente con mar tranquilo, tormenta, puesta de sol, noche y un fondo de Saint-Malo. Complementa el [curso de three.js](../threejs/). El renderizado necesita un navegador compatible con WebGPU; abrir la página compartida no constituye una prueba de renderizado entre navegadores ni de rendimiento. El Artifact indica la autoría y la licencia de su fotografía de Saint-Malo.
 
+### Parler en nœuds · Speaking in Knots
+
+[Abrir la presentación francesa](https://claude.ai/artifact/7v3cgP2wAARzvxgDgA8iEq) · [Abrir la copia en inglés](https://claude.ai/artifact/V9yPov2hxYxNWZApXrNxYF) · francés e inglés · 2026-10-05 · IX en `e8684cf` y ramas locales
+
+Una presentación de 52 diapositivas sobre cómo escribir los nudos como un texto que IX puede comprobar: las cuatro formas de escribir un nudo, lo que IX comprueba y rechaza, las palabras de trenza y los nombres de las tablas de nudos, los nudos marineros dibujados a mano y luego comprobados y renderizados en 3D, y el método con sus revisiones adversarias. La copia en inglés sigue a la presentación francesa diapositiva por diapositiva. Buena parte de la presentación se apoya en ramas de IX que aún no se han publicado; el [curso Hablar en nudos](../speaking-in-knots/) solo reproduce la parte publicada.
+
 ## Música y guitarra
 
 ### Banc de Placement
