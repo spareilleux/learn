@@ -8,10 +8,15 @@ IX's library evaluates the same bracket in the Temperley-Lieb algebra instead, a
 its tests already compare the two on 150 words; the independent reference for the
 results is a published knot table, not this script.
 
-Run it with no arguments: it computes the words whose results IX's tests assert at
-commit e8684cf (pull request #366), compares each with IX's value, prints one line
-per word and exits with status 1 if any of them disagrees. Give it a word, and
-optionally a repeat count, to compute that word instead:
+Run it with no arguments: it recomputes every Jones polynomial, number of
+components, writhe, permutation and symmetry that IX's tests assert at commit
+e8684cf (pull request #366) on words of up to 6 crossings, compares each with IX's
+value, prints one line per check and exits with status 1 if any of them disagrees.
+Two of IX's tests are out of its reach: words_at_the_caps_evaluate (64 and 63
+crossings, 2^64 smoothings) and the 150 generated words of
+the_algebra_agrees_with_the_state_sum_and_the_markov_moves, which are IX's own
+comparison with a state sum. Give it a word, and optionally a repeat count, to
+compute that word instead:
 
     python jones_state_sum.py "s1 s2^-1" 2
 
@@ -23,8 +28,10 @@ import sys
 IX = "e8684cf"
 
 # Each case: (strands or None, word, what IX's tests assert at e8684cf).
-# Sources, in crates/ix-knot/src at that commit: braid.rs components_count_the_
-# cycles_of_the_permutation and writhe_and_mirror; jones.rs known_knots_and_links.
+# Sources at that commit: crates/ix-knot/src/braid.rs components_count_the_cycles_
+# of_the_permutation and writhe_and_mirror; crates/ix-knot/src/jones.rs
+# known_knots_and_links; crates/ix-agent/src/skills/knot.rs the_plait_closes_into_
+# the_figure_eight_then_the_borromean_rings (writhe 0, permutation [0, 1, 2]).
 CASES = [
     (1, "", {"jones": "1"}),
     (None, "s1", {"components": 1, "jones": "1"}),
@@ -35,14 +42,19 @@ CASES = [
     (None, "s1^3", {"components": 1, "jones": "t + t^3 - t^4"}),
     (None, "s1^-3", {"jones": "-t^-4 + t^-3 + t^-1"}),
     (None, "s1^3 s2^-1", {"writhe": 2}),
-    (None, "s1 s2^-1 s1 s2^-1", {"components": 1, "jones": "t^-2 - t^-1 + 1 - t + t^2"}),
+    (None, "s1^-3 s2", {"writhe": -2}),
+    (None, "s1 s2^-1 s1 s2^-1",
+     {"components": 1, "writhe": 0, "jones": "t^-2 - t^-1 + 1 - t + t^2"}),
     (None, "s1 s2^-1 s1 s2^-1 s1 s2^-1",
-     {"components": 3, "jones": "-t^-3 + 3t^-2 - 2t^-1 + 4 - 2t + 3t^2 - t^3"}),
+     {"components": 3, "permutation": [0, 1, 2],
+      "jones": "-t^-3 + 3t^-2 - 2t^-1 + 4 - 2t + 3t^2 - t^3"}),
 ]
 
 # Words whose symmetry IX's tests assert (jones.rs the_reef_knot_is_symmetric_and_
-# the_granny_is_not): the reef knot is symmetric, the granny and the trefoil are not.
-SYMMETRY = [("s1^3 s2^-3", True), ("s1^3 s2^3", False), ("s1^3", False)]
+# the_granny_is_not, and knot.rs): the reef knot and the figure-eight are symmetric,
+# the granny and the trefoil are not.
+SYMMETRY = [("s1^3 s2^-3", True), ("s1^3 s2^3", False), ("s1^3", False),
+            ("s1 s2^-1 s1 s2^-1", True)]
 
 
 def parse(word, strands=None):
@@ -50,20 +62,25 @@ def parse(word, strands=None):
     one more than the largest generator."""
     gens = []
     for token in word.replace(",", " ").split():
-        if token[0] in "sσ":
-            body = token[1:]
-            index, power = body, "1"
-            if "^" in body:
-                index, power = body.split("^", 1)
-            k, p = int(index), int(power)
-            if k <= 0 or p == 0:
-                raise ValueError(f"cannot read {token!r}")
-            gens += [k if p > 0 else -k] * abs(p)
-        else:
-            g = int(token)
-            if g == 0:
-                raise ValueError(f"cannot read {token!r}")
-            gens.append(g)
+        bad = ValueError(f"cannot read {token!r} as a generator: write s1, s2^-1, "
+                         "s1^3 or a signed integer")
+        try:
+            if token[0] in "sσ":
+                body = token[1:]
+                index, power = body, "1"
+                if "^" in body:
+                    index, power = body.split("^", 1)
+                k, p = int(index), int(power)
+                if k <= 0 or p == 0:
+                    raise bad
+                gens += [k if p > 0 else -k] * abs(p)
+            else:
+                g = int(token)
+                if g == 0:
+                    raise bad
+                gens.append(g)
+        except ValueError:
+            raise bad from None
     if strands is None:
         strands = max([abs(g) + 1 for g in gens], default=1)
     if any(abs(g) >= strands for g in gens):
@@ -71,9 +88,9 @@ def parse(word, strands=None):
     return strands, gens
 
 
-def components(strands, gens):
-    """Cycles of the strand permutation: the closure joins each end to the start
-    position below it."""
+def permutation(strands, gens):
+    """end[i]: the position, 0-based, at which the strand that starts in position i
+    ends, as IX's Braid::permutation returns it."""
     at = list(range(strands))
     for g in gens:
         k = abs(g)
@@ -81,6 +98,14 @@ def components(strands, gens):
     end = [0] * strands
     for position, strand in enumerate(at):
         end[strand] = position
+    return end
+
+
+def components(strands, gens):
+    """Cycles of the strand permutation: the braid is read from bottom to top, and
+    the closure joins each end, at the top, to the start of the same position, at
+    the bottom."""
+    end = permutation(strands, gens)
     seen, cycles = set(), 0
     for start in range(strands):
         if start in seen:
@@ -205,8 +230,19 @@ def mirror(poly):
     return {-half: c for half, c in poly.items()}
 
 
+def times(a, b):
+    """The product of two polynomials in t^(1/2)."""
+    out = {}
+    for ha, ca in a.items():
+        for hb, cb in b.items():
+            add(out, ha + hb, ca * cb)
+    return out
+
+
 def describe(word, repeat):
     """One word, written `repeat` times: what its closure is made of."""
+    if repeat < 1:
+        raise ValueError("the repeat count must be at least 1")
     n, gens = parse(word)
     gens = gens * repeat
     if len(gens) > 20:
@@ -224,13 +260,23 @@ def describe(word, repeat):
 def main():
     sys.stdout.reconfigure(encoding="utf-8")
     if len(sys.argv) > 1:
-        return describe(sys.argv[1], int(sys.argv[2]) if len(sys.argv) > 2 else 1)
+        try:
+            repeat = 1
+            if len(sys.argv) > 2:
+                if not sys.argv[2].isdigit():
+                    raise ValueError("the repeat count must be a whole number")
+                repeat = int(sys.argv[2])
+            return describe(sys.argv[1], repeat)
+        except ValueError as error:
+            print(f"refused: {error}", file=sys.stderr)
+            return 2
     agree = total = 0
     for strands, word, expected in CASES:
         n, gens = parse(word, strands)
         got = {
             "components": components(n, gens),
             "writhe": sum(1 if g > 0 else -1 for g in gens),
+            "permutation": permutation(n, gens),
             "jones": text(jones(n, gens)),
         }
         for key, value in expected.items():
@@ -248,6 +294,18 @@ def main():
         agree += ok
         print(f"{'OK  ' if ok else 'DIFF'} {word}: V = {text(v)}, "
               f"{'symmetric' if v == mirror(v) else 'not symmetric'}")
+    # The identities of the same jones.rs test: a connected sum's polynomial is the
+    # product of the summands', and s1^-3 is the trefoil's mirror image.
+    trefoil = jones(*parse("s1^3"))
+    for label, left, right in [
+        ("granny = trefoil x trefoil", "s1^3 s2^3", times(trefoil, trefoil)),
+        ("reef = trefoil x mirror", "s1^3 s2^-3", times(trefoil, mirror(trefoil))),
+        ("s1^-3 = mirror of the trefoil", "s1^-3", mirror(trefoil)),
+    ]:
+        total += 1
+        ok = jones(*parse(left)) == right
+        agree += ok
+        print(f"{'OK  ' if ok else 'DIFF'} {label}")
     print(f"{agree}/{total} agree with IX at {IX}")
     return 0 if agree == total else 1
 
