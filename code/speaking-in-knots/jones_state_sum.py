@@ -12,10 +12,10 @@ Run it with no arguments: it recomputes every Jones polynomial, number of
 components, writhe, permutation and symmetry that IX's tests assert at commit
 e8684cf (pull request #366) on words of up to 6 crossings, compares each with IX's
 value, prints one line per check and exits with status 1 if any of them disagrees.
-Two of IX's tests are out of its reach: words_at_the_caps_evaluate (64 and 63
-crossings, 2^64 smoothings) and the 150 generated words of
-the_algebra_agrees_with_the_state_sum_and_the_markov_moves, which are IX's own
-comparison with a state sum. Give it a word, and optionally a repeat count, to
+One of IX's tests is out of its reach: words_at_the_caps_evaluate (64 and 63
+crossings, 2^64 smoothings). The 150 generated words of
+the_algebra_agrees_with_the_state_sum_and_the_markov_moves are not reproduced
+either: that test checks relations, not written values. Give it a word, and optionally a repeat count, to
 compute that word instead:
 
     python jones_state_sum.py "s1 s2^-1" 2

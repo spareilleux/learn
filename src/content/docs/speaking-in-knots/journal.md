@@ -15,7 +15,7 @@ Each dated entry ends with **Replay** blocks: where to run, the exact command, i
 - [x] `check.sh`: the state sum against the 26 values IX's tests assert on words of up to 6 crossings, the braid words the lessons quote, and the mutation check
 - [x] Lesson 1: braid words and the Jones polynomial
 - [x] French and Spanish translations
-- [x] An independent review of the course against IX's source, and its seven blocking findings fixed
+- [x] Two independent reviews of the course against IX's source, and the blocking findings in the course fixed; the last one, sharing the English deck, is the owner's step
 - [ ] A CI workflow that runs `check.sh` on Windows, Linux and macOS
 - [ ] Lesson 2: the Gauss code (waits for IX's Gauss code to be pushed)
 - [ ] Lesson 3: what IX refuses, and why
@@ -114,14 +114,16 @@ Each hypothesis below was written before the measurement, in [`preregistration.m
 Before merging, a reviewer who had no part in writing the course read the pull request against IX's source at `e8684cf`. It reported seven blocking problems. Each was checked against the source before being fixed:
 
 - **The reading direction was the mirror one.** Lesson 1 laid the strands out top to bottom. IX lays a braid out with *y* running up, and [`layout.rs`](https://github.com/GuitarAlchemist/ix/blob/e8684cf/crates/ix-knot/src/layout.rs#L26-L39) says that a picture with *y* running down shows the mirror braid: a reader who drew `s1^3` as the lesson said got the left-handed trefoil, where IX computes the right-handed one. The lesson now reads braids from bottom to top, and says why.
-- **"Every value IX's tests assert" was 19 values.** The script missed the figure-eight's symmetry, the writhe of a mirror braid, the three identities of the reef and granny test, and the writhe and permutation asserted by the `ix_braid` tool's tests. It now checks all 26, still in agreement, and names the two tests out of its reach (63 and 64 crossings, and IX's own 150 generated words).
+- **"Every value IX's tests assert" was 19 values.** The script missed the figure-eight's symmetry, the writhe of a mirror braid, the three identities of the reef and granny test, and the writhe and permutation asserted by the `ix_braid` tool's tests. It now checks all 26, still in agreement, and names the IX tests it does not reproduce: the one at 63 and 64 crossings, out of its reach, and the 150 generated words, which check relations rather than written values.
 - **IX's pushed code also has a 3D layout** of the strands, `layout.rs`, which the previous entry left out.
 - **The commands differ between Windows and the other systems** (`python` against `python3`): the lesson is now an `.mdx` page with one tab per system, as AGENTS.md asks.
 - **Python and Rust** are now linked at their first mention in the lesson.
 - **Linux and macOS were never run**, which is now said under *To verify*.
 - **The English deck was private** when the review read it, while the French one was already shared with anyone who has the link. The course is not merged before both are.
 
-The review also noted that the French deck has changed since the copy was made: version `1791213311-03e2` on 2026-10-06, against `1791174928-7d71` for the copy's source. The English copy does not follow it.
+The review also noted that the French deck has changed since the copy was made: version `1791213311-03e2` when the review read it on 2026-10-06, against `1791174928-7d71` for the copy's source. The English copy does not follow it.
+
+**A second review**, of the corrected course, confirmed five of these fixes, found the link to Python still missing at its first mention and the English deck still private, and found one more blocking problem. Lesson 1 explained the Hopf link's difference with the Knot Atlas by the mirror image, but two hooked rings, without directions, are their own mirror image: the difference comes from the direction in which one ring is travelled, which changes the sign of both crossings. The lesson now says so, and keeps the exact agreement for knots that are their own mirror image. The same review found that the 150 generated words are not out of the script's reach (10 crossings at most): the script does not reproduce them because they check relations, not written values. It also found smaller wording problems, now fixed.
 
 **Replay 4: the 26 checks.** Run on the author's machine: Windows 11, Git Bash, Python 3.14.3.
 
@@ -148,10 +150,11 @@ The review also noted that the French deck has changed since the copy was made: 
 - Replay 2 on the author's machine: the course only relies on IX's CI for it.
 - Whether the Knot Atlas draws the left-handed trefoil under 3_1, the reason the second hypothesis gave; only the polynomial was compared.
 - Pull request #366 is still open: the links to IX point to commit `e8684cf`, and stay valid after a merge, but the code may change before then.
-- The figures of the deck's 3D part come from local IX commits that are not pushed; the course does not reproduce them.
+- The numbers in the deck's 3D part come from local IX commits that are not pushed; the course does not reproduce them.
 - The French deck has moved on since the English copy was made; whether the copy should follow it.
 
 ## Open questions
 
 - Should IX's documentation say which mirror image each named knot is, so that comparing with a table does not need both?
+- IX's documentation says that every amphichiral link has *V*(*t*) = *V*(1/*t*) ([`jones.rs`](https://github.com/GuitarAlchemist/ix/blob/e8684cf/crates/ix-knot/src/jones.rs#L42-L43), [`knot.rs`](https://github.com/GuitarAlchemist/ix/blob/e8684cf/crates/ix-agent/src/skills/knot.rs#L64)). Two hooked rings are their own mirror image once directions are forgotten, yet neither `s1^2` nor `s1^-2` has the symmetry: should the documentation say that the mirror image must keep the directions?
 - Should a CI workflow run `check.sh` on three OSes, as the other courses' workflows do? Adding one touches `.github/`, which is for the repository's owner to review.
