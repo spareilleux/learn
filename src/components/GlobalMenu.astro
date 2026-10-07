@@ -1,0 +1,43 @@
+---
+import SidebarSublist from '@astrojs/starlight/components/SidebarSublist.astro';
+import LanguageSelect from '@astrojs/starlight/components/LanguageSelect.astro';
+import ThemeSelect from '@astrojs/starlight/components/ThemeSelect.astro';
+import GlobalLinks from './GlobalLinks.astro';
+const { lang, hasSidebar, sidebar } = Astro.locals.starlightRoute;
+const label = lang.startsWith('fr') ? 'Menu global' : lang.startsWith('es') ? 'Menú global' : 'Global menu';
+const close = lang.startsWith('fr') ? 'Fermer le menu' : lang.startsWith('es') ? 'Cerrar el menú' : 'Close menu';
+---
+<button type="button" class:list={['global-menu-button', { 'docs-menu': hasSidebar }]} aria-haspopup="dialog" aria-controls="learn-global-menu" aria-expanded="false">
+ <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" /></svg>
+ <span>{label}</span>
+</button>
+<dialog id="learn-global-menu" aria-label={label}>
+ <div class="global-menu-heading"><strong>{label}</strong><button type="button" class="global-menu-close" autofocus>{close}</button></div>
+ <GlobalLinks />
+ <div class="global-preferences"><ThemeSelect /><LanguageSelect /></div>
+ <nav aria-label={Astro.locals.t('sidebarNav.accessibleLabel')}><SidebarSublist sublist={sidebar} /></nav>
+</dialog>
+<script>
+ const dialog = document.querySelector<HTMLDialogElement>('#learn-global-menu');
+ const button = document.querySelector<HTMLButtonElement>('.global-menu-button');
+ if (dialog && button) {
+  const close = () => { if (dialog.open) dialog.close(); button.setAttribute('aria-expanded', 'false'); };
+  button.addEventListener('click', () => { dialog.showModal(); button.setAttribute('aria-expanded', 'true'); });
+  dialog.querySelector('.global-menu-close')?.addEventListener('click', close);
+  dialog.addEventListener('close', () => button.setAttribute('aria-expanded', 'false'));
+  dialog.addEventListener('click', (event) => { if ((event.target as Element).closest('a[href]')) close(); });
+  dialog.addEventListener('change', close);
+  window.addEventListener('pagehide', close);
+  window.addEventListener('pageshow', close);
+  matchMedia('(min-width: 50rem)').addEventListener('change', close);
+ }
+</script>
+<style>
+ .global-menu-button { display: inline-flex; align-items: center; gap: .35rem; flex-shrink: 0; min-height: 2.75rem; padding: .45rem .65rem; border: 1px solid var(--sl-color-gray-5); border-radius: .5rem; background: var(--sl-color-bg-nav); color: var(--sl-color-white); font: inherit; cursor: pointer; }
+ dialog { position: fixed; inset: 0 0 0 auto; margin: 0; width: min(100%, 30rem); max-width: 100vw; height: 100dvh; max-height: 100dvh; padding: 1rem; border: 0; overflow-y: auto; background: var(--sl-color-bg-sidebar); color: var(--sl-color-text); }
+ dialog::backdrop { background: rgb(0 0 0 / .55); }
+ .global-menu-heading, .global-preferences { display: flex; align-items: center; justify-content: space-between; gap: .75rem; flex-wrap: wrap; margin-bottom: 1rem; }
+ .global-preferences { margin-top: 1rem; }
+ .global-menu-close { min-height: 2.75rem; padding: .45rem .65rem; border: 1px solid var(--sl-color-gray-5); border-radius: .5rem; background: transparent; color: var(--sl-color-text); font: inherit; cursor: pointer; }
+ @media (min-width: 50rem) { .docs-menu { display: none; } }
+</style>

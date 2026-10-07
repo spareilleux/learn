@@ -4,6 +4,7 @@
 // The choice is kept in localStorage and applied by the inline script before the sidebar is parsed, so a collapsed
 // sidebar doesn't flash open on the next page.
 import Default from '@astrojs/starlight/components/SiteTitle.astro';
+import GlobalMenu from './GlobalMenu.astro';
 
 const { hasSidebar, lang } = Astro.locals.starlightRoute;
 const label = lang.startsWith('fr')
@@ -47,6 +48,7 @@ const label = lang.startsWith('fr')
 	)
 }
 <Default />
+<GlobalMenu />
 
 <style>
 	.sidebar-toggle {
