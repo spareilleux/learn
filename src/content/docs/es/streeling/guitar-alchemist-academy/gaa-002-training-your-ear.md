@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **GAA-002** · Curso formal: Entrenamiento auditivo · intermedio · 45 minutes
 
-Generado por el departamento *Guitar Alchemist Academy* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/0f7a5fd110acfc4835776d38ab1a115533467d34/state/streeling/courses/guitar-alchemist-academy/es/gaa-002-training-your-ear.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Guitar Alchemist Academy* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/5d6dcb9077120db2f50235e7bbe3db8f34e2f2de/state/streeling/courses/guitar-alchemist-academy/es/gaa-002-training-your-ear.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [GAA-001](../../guitar-alchemist-academy/gaa-001-your-first-chord/)
 :::

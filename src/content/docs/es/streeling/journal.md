@@ -28,6 +28,28 @@ Marca un módulo una vez estudiado. En **Notas**, añade una entrada fechada: lo
 - [ ] [CYB-001 · Correspondencia entre el modelo de sistema viable y la gobernanza de la IA](../cybernetics/cyb-001-vsm-ai-governance-mapping/) <!-- cyb-001-vsm-ai-governance-mapping -->
 - [ ] [CYB-002 · Mecanismos de amortiguación activa para controlar la oscilación entre repositorios](../cybernetics/cyb-002-active-dampening-cross-repo-oscillation/) <!-- cyb-002-active-dampening-cross-repo-oscillation -->
 - [ ] [CYB-003 · Measuring the Variety Ratio Quantitatively](../cybernetics/cyb-003-measuring-variety-ratio-quantitatively/) *(en inglés)* <!-- cyb-003-measuring-variety-ratio-quantitatively -->
+- [ ] [CYB-004 — Open and Closed Loops: Find the Return Path (en inglés)](../cybernetics/cyb-004-open-and-closed-loops/) <!-- cyb-004-open-and-closed-loops -->
+- [ ] [CYB-005 — Measured Signal and Setpoint: Make Error Meaningful (en inglés)](../cybernetics/cyb-005-measured-signal-and-setpoint/) <!-- cyb-005-measured-signal-and-setpoint -->
+- [ ] [CYB-006 — Feedback Delay: Correct the State You Actually Observed (en inglés)](../cybernetics/cyb-006-feedback-delay/) <!-- cyb-006-feedback-delay -->
+- [ ] [CYB-007 — Hysteresis: Remember Which Threshold Was Crossed (en inglés)](../cybernetics/cyb-007-hysteresis/) <!-- cyb-007-hysteresis -->
+- [ ] [CYB-008 — Deadband: Spend Corrections Outside a Defined Tolerance (en inglés)](../cybernetics/cyb-008-deadband/) <!-- cyb-008-deadband -->
+- [ ] [CYB-009 — Rate Limits and Backoff: Two Different Clocks (en inglés)](../cybernetics/cyb-009-rate-limit-and-backoff/) <!-- cyb-009-rate-limit-and-backoff -->
+- [ ] [CYB-010 — Observable Stop: Establishing Quiescence Without Guessing (en inglés)](../cybernetics/cyb-010-observable-stop/) <!-- cyb-010-observable-stop -->
+- [ ] [CYB-011 — Lane Transition Graphs: Legal Paths and Stale Events (en inglés)](../cybernetics/cyb-011-lane-transition-graph/) <!-- cyb-011-lane-transition-graph -->
+- [ ] [CYB-012 — Detecting Oscillation Without Calling Every Reversal Unstable (en inglés)](../cybernetics/cyb-012-oscillation-detection/) <!-- cyb-012-oscillation-detection -->
+- [ ] [CYB-013 — Circuit Breakers and a Bounded Recovery Probe (en inglés)](../cybernetics/cyb-013-circuit-breaker-probe-budget/) <!-- cyb-013-circuit-breaker-probe-budget -->
+- [ ] [CYB-014 — Saturation, Queues and Conservation of Work (en inglés)](../cybernetics/cyb-014-saturation-queue-conservation/) <!-- cyb-014-saturation-queue-conservation -->
+- [ ] [CYB-015 — Failure Recovery and Logical Operation Identity (en inglés)](../cybernetics/cyb-015-failure-recovery-logical-identity/) <!-- cyb-015-failure-recovery-logical-identity -->
+- [ ] [CYB-016 — Verify an Observed Petri Transition (en inglés)](../cybernetics/cyb-016-observed-petri-transition/) <!-- cyb-016-observed-petri-transition -->
+- [ ] [CYB-017 — CYB-017: Local Versus Global Stability (en inglés)](../cybernetics/cyb-017-local-versus-global-stability/) <!-- cyb-017-local-versus-global-stability -->
+- [ ] [CYB-018 — CYB-018: Responding to Known Disturbances (en inglés)](../cybernetics/cyb-018-responding-to-known-disturbances/) <!-- cyb-018-responding-to-known-disturbances -->
+- [ ] [CYB-019 — CYB-019: Cross-Repository Coupling (en inglés)](../cybernetics/cyb-019-cross-repository-coupling/) <!-- cyb-019-cross-repository-coupling -->
+- [ ] [CYB-020 — CYB-020: Central Versus Recursive Control (en inglés)](../cybernetics/cyb-020-central-versus-recursive-control/) <!-- cyb-020-central-versus-recursive-control -->
+- [ ] [CYB-021 — Iteration Budgets: Admit the Next Action Before Executing It (en inglés)](../cybernetics/cyb-021-iteration-budget-admission/) <!-- cyb-021-iteration-budget-admission -->
+- [ ] [CYB-022 — External Progress: Measure Improvement Without Moving the Target (en inglés)](../cybernetics/cyb-022-external-progress-measurement/) <!-- cyb-022-external-progress-measurement -->
+- [ ] [CYB-023 — Receipt Chains: Connect a Request to the Artifact Actually Verified (en inglés)](../cybernetics/cyb-023-receipt-chain-verification/) <!-- cyb-023-receipt-chain-verification -->
+- [ ] [CYB-024 — Auditing an Agentic Audio Loop Without Inventing Listening Evidence (en inglés)](../cybernetics/cyb-024-agentic-audio-loop-audit/) <!-- cyb-024-agentic-audio-loop-audit -->
+- [ ] [CYB-025 — Stable Coordination Under Disturbance: An Evidence Capstone (en inglés)](../cybernetics/cyb-025-stable-coordination-disturbance-capstone/) <!-- cyb-025-stable-coordination-disturbance-capstone -->
 
 ### Futurología
 
@@ -269,3 +291,11 @@ Sincronizado desde Demerzel en [`0f7a5fd`](https://github.com/GuitarAlchemist/De
 Aquí no se ejecutó nada de él.
 
 - **No se ha estudiado aquí,** así que su casilla de arriba sigue vacía.
+
+## 2026-10-07 - Cibernética CYB-004 a CYB-025: importación inglesa en preparación
+
+Preparado desde [Demerzel `5d6dcb9`](https://github.com/GuitarAlchemist/Demerzel/commit/5d6dcb9077120db2f50235e7bbe3db8f34e2f2de), [PR de origen #1195](https://github.com/GuitarAlchemist/Demerzel/pull/1195). El lote añade 22 módulos ingleses: el catálogo local pasa de 66 a 88 módulos y Cibernética de tres a 25. Las traducciones francesas y españolas siguen pendientes; las nuevas entradas del diario enlazan a la versión inglesa y lo indican.
+
+La revisión independiente de redacción aceptó los 22 manuscritos dentro del alcance inglés local. Otra revisión de integración verificó 41 relaciones de requisitos previos, 18 rutas de comandos y 22 enlaces a soluciones sin conexión. Cinco scripts de la biblioteca estándar repitieron 22 experimentos sintéticos con controles positivos y negativos, todos con código de salida cero. Estos controles verifican los modelos declarados; no certifican el aprendizaje, el comportamiento de una flota real ni los tres cursos anteriores.
+
+La revisión entre modelos de la PR de origen está bloqueada por una clave API inválida. Esta entrada registra la preparación y las comprobaciones, no la disponibilidad publicada. Ningún alumno ha estudiado estos módulos aquí: todas las nuevas casillas quedan vacías. Se conservan las notas y los estados de las casillas existentes.
