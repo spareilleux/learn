@@ -42,7 +42,7 @@ The programming side stays familiar: value objects, records, bit fields, `switch
 
 ## Outline
 
-The course follows the concepts that GA's code, configuration files and MCP tools use, from the single note to the neo-Riemannian transformations. Lessons 1 to 15 are written; the others are the plan, and their GA column names the types, files and tools each one will read.
+The course follows the concepts that GA's code, configuration files and MCP tools use, from the single note to the neo-Riemannian transformations. Lessons 1 to 16 are written; the others are the plan, and their GA column names the types, files and tools each one will read.
 
 | # | Lesson | Theory | In GA | If you write C# |
 |---|---|---|---|---|
@@ -61,7 +61,7 @@ The course follows the concepts that GA's code, configuration files and MCP tool
 | 13 | [Extended and altered chords](13-extended-and-altered-chords/) | ninths, elevenths, thirteenths, alterations, upper structures, polychords | `Chord.FromSymbol`, `ChordSymbolParser`, `BasicChordExtensionsService`, `ChordAlterationService`, `ChordTemplateFactory`, `ExtendedChords.yaml`, `ga_polychord` | parsers with optional parts |
 | 14 | [Guitar voicings: shells, drop 2 and drop 3](14-guitar-voicings/) | shell voicings, close and drop voicings, guide tones | `VoicingGenerator`, `VoicingHarmonicAnalyzer`, `VoicingAnalyzer`, `VoicingFilters`, `ChordClassificationEngine`, `ChordProgressions.yaml` | combinatorial generation |
 | 15 | [The fretboard: CAGED, fingering and playability](15-the-fretboard/) | CAGED shapes, fretboard geometry, reach and effort, open tunings | `FretboardGeometry`, `PhysicalFretboardCalculator`, `PhysicalCostService`, `VoicingPhysicalAnalyzer`, `BiomechanicalAnalyzer`, `PlayerProfile`, `Tunings.toml`, `ga_easier_voicings` | cost functions |
-| 16 | Arpeggios, chord–scale theory and improvisation | arpeggios, chord–scale pairs, outside notes | `ImprovisationConcepts.yaml`, `OutsideNotesSkill`, `ga_arpeggio_suggestions` | mapping tables |
+| 16 | [Arpeggios, chord–scale theory and improvisation](16-arpeggios-and-improvisation/) | arpeggios, chord–scale pairs, outside notes | `ga_arpeggio_suggestions`, `ImprovisationSkill`, `OutsideNotesSkill`, `ImprovisationConcepts.yaml` | mapping tables |
 | 17 | The Tonnetz and neo-Riemannian transformations | P, L and R, the Tonnetz, chromatic mediants | `NeoRiemannian.yaml`, `NeoRiemannianConfig.fs` | graphs of transformations |
 | A | [Every instrument in Guitar Alchemist](appendix-instruments/) | tunings, courses, re-entrant strings | `Instruments.yaml`, `InstrumentsConfig`, `Tuning` | configuration that nothing reads |
 | B | [The OPTIC hierarchy](appendix-optic/) | octave, permutation, transposition, inversion, cardinality | `PitchClassSet`, `TranspositionClass`, `SetClass`, GA's OPTIC-K schema | equivalence, quotient by quotient |
@@ -82,7 +82,8 @@ The [Streeling](../streeling/) modules, generated from [GuitarAlchemist/Demerzel
 - [MUS-006 · The Scale Universe](../streeling/music/mus-006-the-scale-universe/) (lessons 2, 4, 11 and 12);
 - [MUS-003 · How Harmony Works](../streeling/music/mus-003-functional-harmony/) (lessons 5, 6, 7 and 10) and [MUS-005 · Jazz Harmony for Guitar](../streeling/music/mus-005-jazz-harmony/) (lessons 7, 9, 10, 11, 13 and 14);
 - [GTR-001 · The Fretboard Map](../streeling/guitar-studies/gtr-001-the-fretboard-map/) and [GAA-001 · Your First Chord](../streeling/guitar-alchemist-academy/gaa-001-your-first-chord/) (lessons 1 and 3), and [GTR-002 · CAGED Geometry](../streeling/guitar-studies/gtr-002-caged-geometry/) (lessons 1, 3 and 15);
-- [MUS-009 · Tuning and Fretboard Geometry](../streeling/music/mus-009-tuning-fretboard-geometry/) and [PHY-001 · The Science of Guitar Sound](../streeling/physics/phy-001-science-of-guitar-sound/) (lesson 15).
+- [MUS-009 · Tuning and Fretboard Geometry](../streeling/music/mus-009-tuning-fretboard-geometry/) and [PHY-001 · The Science of Guitar Sound](../streeling/physics/phy-001-science-of-guitar-sound/) (lesson 15);
+- [GAA-003 · Improvisation Foundations](../streeling/guitar-alchemist-academy/gaa-003-improvisation-foundations/) (lesson 16).
 
 ## Resources
 
