@@ -398,7 +398,8 @@ public static class Lesson18
         foreach (var prompt in new[] { "is B an avoid note over C7", "is E a chord tone over CM7", "is B a chord tone over CM7" })
         {
             var response = notesSkill.ExecuteAsync(prompt).GetAwaiter().GetResult();
-            Line($"\"{prompt}\": {string.Join(" ", response.Result.Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(l => l.Trim()))}");
+            // AppendLine ends lines with \r\n on Windows and \n elsewhere: trim each line, then drop the blank ones
+            Line($"\"{prompt}\": {string.Join(" ", response.Result.Split('\n').Select(l => l.Trim()).Where(l => l.Length > 0))}");
         }
         Title("GAA-003's claims, through Classify: the notes of A minor pentatonic over Am7 and over A7, and the notes the module says pull each mode away");
         foreach (var name in new[] { "A", "C", "D", "E", "G" })
