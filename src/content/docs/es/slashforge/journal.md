@@ -19,10 +19,11 @@ sidebar:
 - [x] Página de la lección 5: `/slashforge:investigate` y `/slashforge:review-pr`
 - [x] Lección 6: hacerlo tuyo — reglas, verificación, una instalación de equipo; `check.sh` compara ahora 20 salidas
 - [x] Lección 7: contribuir aguas arriba, y una nueva prueba de 4.5.0 en Windows
+- [x] SlashForge 5.2.1 comprobado de nuevo en Windows: instalador, comprobación de tamaño de setup y pruebas del kit; tres issues abiertas aguas arriba
 
 ## QA
 
-Cada fila de abajo está reproducida por `check.sh` o leída en el instalador en el tag `v4.4.3`. Ninguna se ha reportado aguas arriba: el repositorio no tenía ninguna issue abierta ni cerrada el 2026-09-22, y sus pruebas no cubren el dry run. El 2026-09-26, el autor reconoció estos hallazgos y anunció correcciones ([entrada](#2026-09-26--la-respuesta-del-autor-y-cómo-comprobar-una-release)), y la release 4.5.0 corrige las ocho filas sobre el instalador y las guías, vueltas a probar en Windows ([nueva prueba](#2026-09-26--nueva-prueba-sobre-slashforge-450)).
+Cada fila de abajo está reproducida por `check.sh` o leída en el instalador en el tag `v4.4.3`. Ninguna se ha reportado aguas arriba: el repositorio no tenía ninguna issue abierta ni cerrada el 2026-09-22, y sus pruebas no cubren el dry run. El 2026-09-26, el autor reconoció estos hallazgos y anunció correcciones ([entrada](#2026-09-26--la-respuesta-del-autor-y-cómo-comprobar-una-release)), y la release 4.5.0 corrige las ocho filas sobre el instalador y las guías, vueltas a probar en Windows ([nueva prueba](#2026-09-26--nueva-prueba-sobre-slashforge-450)). El 2026-10-09 se comprobó de nuevo la release 5.2.1; las tres últimas filas salen de ahí y se reportaron aguas arriba ([entrada](#2026-10-09--slashforge-521-revisado)).
 
 | Esperado | Lo que pasa | Dónde | Medición | Estado |
 |---|---|---|---|---|
@@ -35,6 +36,9 @@ Cada fila de abajo está reproducida por `check.sh` o leída en el instalador en
 | El campo `name` que exige el instalador da nombre al comando | Claude Code ignora `name` en un archivo bajo `commands/`; es la ruta la que da nombre al comando | [Claude Code, skills](https://code.claude.com/docs/en/skills#where-skills-live) | — | Documentado por ambos lados; una trampa al renombrar (lección 2, ejercicio 1) |
 | Las guías del kit coinciden sobre dónde va una skill y cuánto puede medir | `forge-instructions.md` dice `.claude/skills/*.md` y *"Every `.md` file … under 200 lines"*; `forge-skills.md` dice una carpeta con `SKILL.md`, por debajo de 500 líneas. La documentación de Claude Code solo lista la forma de carpeta | [`forge-instructions.md#L14-L34`](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/templates/forge-instructions.md#L14-L34), [`forge-skills.md#L27-L51`](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/templates/forge-skills.md#L27-L51) | Dos contradicciones en guías que el modelo lee en la misma ejecución | Leído, no reportado [2026-09-22](#2026-09-22--lección-6-dos-reglamentos-y-qué-copia-se-ejecuta) · Corregido en v4.5.0, vuelto a probar en Windows ([2026-09-26](#2026-09-26--nueva-prueba-sobre-slashforge-450)) |
 | El paso de verificación de setup detecta un archivo de más de 200 líneas | `wc -l CLAUDE.md .claude/**/*.md` en bash sin `globstar` se queda a una carpeta de profundidad, así que el `SKILL.md` de una skill nunca se cuenta | [`forge-instructions.md` Step 9](https://github.com/rajdeepratan/SlashForge/blob/bd75a4f770bb2e323551c05fab0d3f326c72ae98/templates/forge-instructions.md#L126-L139) | `l06_verify_glob`: un `SKILL.md` de 300 líneas ausente del recuento, en Linux, Windows y macOS | Reproducido, no reportado [2026-09-22](#2026-09-22--lección-6-dos-reglamentos-y-qué-copia-se-ejecuta) · Corregido en v4.5.0, vuelto a probar en Windows ([2026-09-26](#2026-09-26--nueva-prueba-sobre-slashforge-450)) |
+| La corrección 4.5.0 de la prueba del asistente de apertura retira la aserción que lanza el abridor real | La prueba simulada se añadió junto a la antigua, que sigue lanzando el asistente sobre un archivo inexistente sin `SSH_CONNECTION`: `start` en Windows, `xdg-open` en un escritorio Linux, `open` en macOS | [`test/install.test.js#L570`](https://github.com/rajdeepratan/SlashForge/blob/7e0e26a78bdfe7e9375a27a17b441d44280325ac/test/install.test.js#L570), línea 526 en [`v4.5.0`](https://github.com/rajdeepratan/SlashForge/blob/10d3d916b30323598515aa27aef43a8527e7e967/test/install.test.js#L526) | Leído en `v4.5.0` y `v5.2.1`, no ejecutado, porque abre un diálogo. Invalida la frase de la nueva prueba del 2026-09-26, «Windows ya no abre un diálogo» | Leído; reportado como [#104](https://github.com/rajdeepratan/SlashForge/issues/104) [2026-10-09](#2026-10-09--slashforge-521-revisado) |
+| Donde el host lo respeta, los comandos del kit llevan `disable-model-invocation: true` | Desde 5.0.0, los ocho comandos lo llevan en Cursor y Codex. Ninguno de los 17 archivos de `~/.claude/commands/` lo lleva, aunque la propia guía del kit lo llama *«critical for commands with side effects»* y Claude Code deja por defecto que el modelo invoque un comando | [`bin/install.js#L618`](https://github.com/rajdeepratan/SlashForge/blob/7e0e26a78bdfe7e9375a27a17b441d44280325ac/bin/install.js#L618), [`templates/slashforge-commands.md#L127`](https://github.com/rajdeepratan/SlashForge/blob/7e0e26a78bdfe7e9375a27a17b441d44280325ac/templates/slashforge-commands.md#L127), [Claude Code, skills](https://code.claude.com/docs/en/skills) | Frontmatter de una instalación global 5.2.1 en un directorio personal desechable: 0 de 17. No ejecutado con un modelo | Leído e instalado; reportado como [#105](https://github.com/rajdeepratan/SlashForge/issues/105) [2026-10-09](#2026-10-09--slashforge-521-revisado) |
+| El mensaje final de la instalación lista los comandos | Lista seis comandos y `-quick`. Faltan `/slashforge-test` y `/slashforge-refactor`, añadidos en 5.2.0, mientras que `status` lista ocho | [`bin/install.js#L1199-L1209`](https://github.com/rajdeepratan/SlashForge/blob/7e0e26a78bdfe7e9375a27a17b441d44280325ac/bin/install.js#L1199-L1209) | Salida de la instalación, global y `--project` | Reproducido; reportado como [#106](https://github.com/rajdeepratan/SlashForge/issues/106) [2026-10-09](#2026-10-09--slashforge-521-revisado) |
 
 ## Experimentos
 
@@ -177,7 +181,7 @@ Leído, no ejecutado:
 - el README y las guías ahora concuerdan;
 - los tres comentarios desactualizados desaparecieron;
 - el paquete npm 4.5.0 es idéntico al `bin/` y `templates/` del tag, salvo los finales de línea;
-- la nueva prueba del asistente simula los abridores en Linux y macOS y termina enseguida en Windows. Windows ya no abre un diálogo, pero tampoco tiene ninguna aserción.
+- la nueva prueba del asistente simula los abridores en Linux y macOS y termina enseguida en Windows. Windows ya no abre un diálogo, pero tampoco tiene ninguna aserción. **Falso, corregido el 2026-10-09:** la prueba antigua sigue ahí, junto a la nueva, y sigue lanzando `start` en Windows ([entrada](#2026-10-09--slashforge-521-revisado)).
 
 El README ahora dice que sus rangos de tokens no separan las lecturas de caché de la entrada nueva: una aclaración, no una separación.
 
@@ -187,12 +191,48 @@ Veredicto: las ocho filas sobre el instalador y las guías están **corregidas e
 
 Las lecciones siguen describiendo 4.4.3, y la CI sigue fijándola. La [lección 7](../07-contributing-back/) cuenta la historia y lista lo que sigue abierto.
 
+## 2026-10-09 — SlashForge 5.2.1, revisado
+
+Tras la release 5.2.1, el autor pidió comentarios sobre el [sitio de documentación](https://www.rajdeepratan.com/slashforge/) e invitó a abrir issues. Desde la entrada anterior, el propio autor había abierto las issues [#69](https://github.com/rajdeepratan/SlashForge/issues/69) a [#87](https://github.com/rajdeepratan/SlashForge/issues/87) a partir de este diario, el 2026-09-25, citando el curso. Catorce están cerradas, por 4.5.0 y 5.0.0, y cinco abiertas, de #83 a #87. Entretanto, el kit pasó a ocho comandos, llamados `/slashforge-name`, y una sola instalación sirve a Claude Code, Cursor y Codex.
+
+Versiones: tag `v5.2.1` en `7e0e26a`, fechado el 2026-10-09; Windows 11, Git Bash, Node.js 24.12.0. El paquete npm es igual a `bin/` y `templates/` del tag, salvo los finales de línea. El instalador se ejecutó desde el paquete npm en un directorio personal desechable, sin terminal en stdin, como en `check.sh`:
+
+| Comprobación | Resultado en 5.2.1 |
+|---|---|
+| Dry run frente a instalación | 133 anunciados, 133 escritos, ninguna diferencia en ningún sentido |
+| Dónde van los archivos | 47 en `~/.claude` y 86 en `~/.agents` para Cursor y Codex. No hay ninguna opción para instalar para un solo host |
+| `uninstall` sin terminal | Rechazado, exit 1. Con `--yes`, se conserva un archivo mío en `setup/slashforge/` (#82) |
+| Un archivo mío dentro de una carpeta de skill del kit, en `~/.agents/skills/` | Eliminado con la carpeta |
+| `description: >` YAML plegada, en una copia del paquete | Aceptada, exit 0 |
+| Comprobación de tamaño de setup (paso 9) en un repositorio desechable | Señala un `SKILL.md` de 600 líneas, una regla de 250 líneas y un comando mío de 210 líneas; ignora los archivos del kit; exit 1 |
+| Aviso de sombreado con `--project` | Impreso, con un segundo aviso para `~/.agents` |
+| Mensaje final de la instalación | Seis comandos y `-quick`; `status` lista ocho |
+| `disable-model-invocation` en los 17 archivos de Claude Code | Ninguno; los ocho comandos de Cursor y Codex lo llevan |
+
+**Las propias pruebas de SlashForge en Windows.** `node --test` en `v5.2.1` ejecutó 278 pruebas en 15.5 s: 269 superadas, 2 fallidas, 7 omitidas; la más lenta tardó 0.6 s. Era un clon con `core.autocrlf=false`. Con el valor por defecto de Git for Windows, `core.autocrlf=true`, las plantillas se extraen con finales de línea CRLF y fallan dos pruebas más, que comparan las plantillas renderizadas byte a byte y línea a línea (11.6 s, 267 superadas, 4 fallidas). Los cuatro fallos vienen de las pruebas, no del instalador: CRLF dos veces, barras invertidas de `path.join` comparadas con rutas documentadas con `/`, y `fs.symlinkSync` rechazado sin el modo de desarrollador. Las dos ejecuciones fijaban `SSH_CONNECTION`, por la razón del párrafo siguiente. Así que 5.2.1 no reproduce los 523 s. Su causa en 4.4.3 sigue sin conocerse, porque 4.4.3 no se volvió a ejecutar.
+
+**Una corrección.** La nueva prueba del 2026-09-26 dice que Windows ya no abre un diálogo. Es falso. 4.5.0 añadió una prueba simulada que termina enseguida en Windows, pero conservó la antigua a su lado. [`test/install.test.js#L570`](https://github.com/rajdeepratan/SlashForge/blob/7e0e26a78bdfe7e9375a27a17b441d44280325ac/test/install.test.js#L570) (línea 526 en `v4.5.0`) sigue lanzando el asistente sobre un archivo inexistente sin `SSH_CONNECTION`, lo que llama a `start` en Windows. Está leído, no ejecutado, porque la prueba abre el diálogo. La frase de la nueva prueba se mantiene, marcada; la tabla de QA tiene una fila.
+
+**El sitio**, leído como texto y como árbol de accesibilidad, no como imagen: no se pudo tomar ninguna captura, porque el panel de wmux estaba oculto y Chromium headless se cayó. La página describe ocho comandos. Su sección *What it costs* tiene seis fichas y omite la frase del README según la cual las cifras no separan las lecturas de caché de la entrada nueva. Su demostración *Shipping a feature* muestra una puerta, la fase 3, antes de *PR opened*; el README mantiene cuatro.
+
+**Aguas arriba.** Por invitación del autor, se abrieron tres issues el 2026-10-09:
+
+- [#104](https://github.com/rajdeepratan/SlashForge/issues/104), la aserción antigua del abridor;
+- [#105](https://github.com/rajdeepratan/SlashForge/issues/105), `disable-model-invocation` en Claude Code;
+- [#106](https://github.com/rajdeepratan/SlashForge/issues/106), las listas que se quedan en seis comandos.
+
+Los tiempos y los cuatro fallos fueron a [#83](https://github.com/rajdeepratan/SlashForge/issues/83#issuecomment-6084208546). Los comentarios sobre el sitio son para una respuesta privada, no para una issue.
+
+Límites: solo Windows. Ninguna ejecución con modelo en 5.x: nada aquí dice cuánto cuestan los comandos, si las puertas se sostienen ni si Claude Code lanza un comando por sí mismo.
+
 ## Por verificar
 
 - Volver a ejecutar `retest/retest.sh 4.5.0` en Linux y macOS, y en WSL; solo se volvió a probar Windows 11.
 - Volver a ejecutar un comando con modelo sobre 4.5.0 (costes, puertas, qué copia se ejecuta) antes de afirmar nada sobre el comportamiento en ejecución tras las correcciones.
 - Ejecutar la lista de comprobación de la entrada del 2026-09-26 sobre la primera release que anuncie las correcciones, antes de cambiar cualquier estado de QA.
-- Por qué el `node --test` de SlashForge tarda 523 s en Windows con Git Bash, incluida la parte de la prueba de `forge-open.sh`. No volver a ejecutar esa prueba en una sesión de escritorio: abre un cuadro de diálogo de error (ver la entrada del laboratorio).
+- Por qué el `node --test` de SlashForge tardó 523 s en 4.4.3 en Windows. 5.2.1 se ejecuta en 15.5 s ([2026-10-09](#2026-10-09--slashforge-521-revisado)). 4.4.3 no se volvió a ejecutar: su prueba del abridor abre un cuadro de diálogo de error (ver la entrada del laboratorio), y 5.2.1 todavía tiene esa aserción (#104), así que cualquier ejecución de la suite en Windows debe fijar `SSH_CONNECTION`.
+- Si Claude Code lanza `/slashforge-code` por sí mismo cuando una petición coincide con su descripción, como permite su documentación: 5.2.1 no le pone `disable-model-invocation` (#105). Hace falta una ejecución con modelo y con tope.
+- Las comprobaciones de 5.2.1 en Linux y macOS.
 - Por qué e1 informó 15 turnos con `--max-turns 10` y terminó con normalidad, cuando e1b se detuvo en 11.
 - Si el modelo encuentra `.claude/setup/slashforge/…` cuando Claude Code se inicia en una subcarpeta de un repositorio con una instalación de proyecto (lección 2).
 - El coste de un workflow completo más allá de sus puertas. El laboratorio se detiene en la primera puerta por diseño; ir más lejos implica responder a las puertas, y eso lo decide el autor.
