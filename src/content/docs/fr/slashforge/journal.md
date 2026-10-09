@@ -193,7 +193,7 @@ Les leçons décrivent toujours 4.4.3, et la CI l'épingle toujours. La [leçon 
 
 ## 2026-10-09 — SlashForge 5.2.1, revérifié
 
-Après la release 5.2.1, l'auteur a demandé un avis sur le [site de documentation](https://www.rajdeepratan.com/slashforge/) et invité à ouvrir des issues. Depuis l'entrée précédente, l'auteur avait ouvert les issues [#69](https://github.com/rajdeepratan/SlashForge/issues/69) à [#87](https://github.com/rajdeepratan/SlashForge/issues/87) à partir de ce journal, le 2026-09-25, en citant le cours. Quatorze sont fermées, par 4.5.0 et 5.0.0, et cinq ouvertes, de #83 à #87. Entre-temps, le kit est passé à huit commandes, nommées `/slashforge-name`, et une seule installation sert Claude Code, Cursor et Codex.
+Après la release 5.2.1, l'auteur a demandé un avis sur le [site de documentation](https://www.rajdeepratan.com/slashforge/) et invité à ouvrir des issues. Les entrées du 2026-09-26 ne l'avaient pas vu : l'auteur avait ouvert les issues [#69](https://github.com/rajdeepratan/SlashForge/issues/69) à [#87](https://github.com/rajdeepratan/SlashForge/issues/87) à partir de ce journal, le 2026-09-25, chacune en citant le cours. Douze, de #69 à #80, ont été fermées comme corrigées par 4.5.0 ; #81 a été fermée comme non prévue (c'est Claude Code, pas le kit, qui nomme une commande) ; #82 a été fermée le même jour, et son correctif est sorti en 5.0.0 d'après le changelog ; #83 à #87 sont ouvertes. Entre-temps, le kit est passé à huit commandes, nommées `/slashforge-name`, et une seule installation sert Claude Code, Cursor et Codex.
 
 Versions : tag `v5.2.1` à `7e0e26a`, daté du 2026-10-09 ; Windows 11, Git Bash, Node.js 24.12.0. Le paquet npm est identique aux `bin/` et `templates/` du tag, aux fins de ligne près. L'installeur a tourné depuis le paquet npm dans un répertoire personnel jetable, stdin n'étant pas un terminal, comme dans `check.sh` :
 
@@ -213,15 +213,40 @@ Versions : tag `v5.2.1` à `7e0e26a`, daté du 2026-10-09 ; Windows 11, Git Bash
 
 **Une correction.** Le retest du 2026-09-26 dit que Windows n'a plus de boîte de dialogue. C'est faux. 4.5.0 a ajouté un test simulé qui s'arrête tout de suite sous Windows, mais a gardé l'ancien à côté. [`test/install.test.js#L570`](https://github.com/rajdeepratan/SlashForge/blob/7e0e26a78bdfe7e9375a27a17b441d44280325ac/test/install.test.js#L570) (ligne 526 à `v4.5.0`) lance toujours l'assistant sur un fichier absent sans `SSH_CONNECTION`, ce qui appelle `start` sous Windows. C'est lu, pas exécuté, parce que le test ouvre la boîte de dialogue. La phrase du retest reste, marquée ; le tableau de QA a une ligne.
 
-**Le site**, lu comme texte et comme arbre d'accessibilité, pas comme image : aucune capture n'a pu être prise, parce que le panneau wmux était masqué et que Chromium sans interface a planté. La page décrit huit commandes. Sa section *What it costs* a six tuiles et omet la phrase du README selon laquelle les chiffres ne séparent pas les lectures du cache des entrées fraîches. Sa démo *Shipping a feature* montre un point de contrôle, la phase 3, avant *PR opened* ; le README en garde quatre.
+**Le site**, lu comme texte et comme arbre d'accessibilité, pas comme image : aucune capture n'a pu être prise, parce que le panneau wmux était masqué et que Chromium sans interface a planté. Les remarques, pour une réponse privée à l'auteur :
 
-**En amont.** À l'invitation de l'auteur, trois issues ont été ouvertes le 2026-10-09 :
+- La démo *Shipping a feature* montre un point de contrôle, la phase 3, avant *PR opened* ; le README en garde quatre (plan, branche, PR, nettoyage). Le point de contrôle de la branche et celui du push avec PR, une ligne chacun, montreraient ce que le kit vend.
+- *What it costs* a six tuiles pour huit commandes, et omet la phrase du README selon laquelle les chiffres ne séparent pas les lectures du cache des entrées fraîches. L'expérience L4 montre pourquoi cette phrase compte : sur 4.4.3, `-quick` jusqu'à son premier point de contrôle a utilisé 1,720 jetons frais en entrée et en sortie, et en a lu 158,847 dans le cache.
+- *« It empowers people to do their finest work every single time »* est la seule affirmation de la page que personne ne peut vérifier. Le *« Nothing ships that was not planned, gated, verified and reviewed »* du README le dit dans le ton du reste de la page.
+- *« Ten phases from plan to merged PR »* : le workflow ouvre la pull request, et c'est une personne qui la fusionne.
+- Une question plutôt qu'un défaut : sans option pour choisir l'hôte, un utilisateur de Claude Code reçoit 133 fichiers, dont 86 sous `~/.agents`.
 
-- [#104](https://github.com/rajdeepratan/SlashForge/issues/104), l'ancienne assertion de l'ouvreur ;
-- [#105](https://github.com/rajdeepratan/SlashForge/issues/105), `disable-model-invocation` sous Claude Code ;
-- [#106](https://github.com/rajdeepratan/SlashForge/issues/106), les listes qui s'arrêtent à six commandes.
+**Les issues du dépôt de SlashForge.** L'auteur a ouvert #69 à #87 à partir de ce journal. Le 2026-10-09, à l'invitation de l'auteur, ce cours a ouvert #104 à #106 et a ajouté les temps sous Windows à #83 dans un [commentaire](https://github.com/rajdeepratan/SlashForge/issues/83#issuecomment-6084208546). L'état de chaque issue le 2026-10-09, et ce que montre la revérification de 5.2.1 :
 
-Les temps et les quatre échecs sont allés dans [#83](https://github.com/rajdeepratan/SlashForge/issues/83#issuecomment-6084208546). Les remarques sur le site sont pour une réponse privée, pas pour une issue.
+| Issue | Ouverte par | Sujet | État le 2026-10-09 | Sur 5.2.1 |
+|---|---|---|---|---|
+| [#69](https://github.com/rajdeepratan/SlashForge/issues/69) | l'auteur | L'exécution à blanc annonce 21 fichiers, l'installation en écrit 32 | fermée, corrigée en 4.5.0 | Tient : 133 annoncés, 133 écrits |
+| [#70](https://github.com/rajdeepratan/SlashForge/issues/70) | l'auteur | L'exécution à blanc étiquette `copy` des guides rendus | fermée, corrigée en 4.5.0 | Tient : guides `render`, ressources `copy` |
+| [#71](https://github.com/rajdeepratan/SlashForge/issues/71) | l'auteur | Le *What gets installed* du README montre l'ancienne disposition | fermée, corrigée en 4.5.0 | Tient, lu : huit commandes et neuf skills par hôte |
+| [#72](https://github.com/rajdeepratan/SlashForge/issues/72) | l'auteur | Des commentaires de l'installeur décrivent du code plus ancien | fermée, corrigée en 4.5.0 | Un nouveau commentaire périmé, *« The four commands »* : #106 |
+| [#73](https://github.com/rajdeepratan/SlashForge/issues/73) | l'auteur | `uninstall` sans terminal retire le kit sans demander | fermée, corrigée en 4.5.0 | Tient : refusé, exit 1 |
+| [#74](https://github.com/rajdeepratan/SlashForge/issues/74) | l'auteur | Le contrôle du frontmatter refuse ce que Claude Code accepte | fermée, corrigée en 4.5.0 | Tient : une description repliée et une clôture suivie d'un espace sont toutes deux acceptées |
+| [#75](https://github.com/rajdeepratan/SlashForge/issues/75) | l'auteur | Le contrôle des 200 lignes de setup ne compte jamais un `SKILL.md` | fermée, corrigée en 4.5.0 | Tient : un `SKILL.md` de 600 lignes, une règle de 250 lignes et une commande de 210 lignes sont signalés |
+| [#76](https://github.com/rajdeepratan/SlashForge/issues/76) | l'auteur | Deux guides se contredisent sur la disposition et la longueur d'un skill | fermée, corrigée en 4.5.0 | Tient, lu : `<name>/SKILL.md`, 200 lignes, 500 pour un `SKILL.md` |
+| [#77](https://github.com/rajdeepratan/SlashForge/issues/77) | l'auteur | Le test de `forge-open.sh` ne peut pas échouer et ouvre une fenêtre | fermée, corrigée en 4.5.0 | À moitié : l'ancienne assertion est toujours là, #104 |
+| [#78](https://github.com/rajdeepratan/SlashForge/issues/78) | l'auteur | Construire un rapport demande un `node -e` en ligne | fermée, corrigée en 4.5.0 | Tient : 0 template avec `node -e '` |
+| [#79](https://github.com/rajdeepratan/SlashForge/issues/79) | l'auteur | Une installation globale masque sans le dire celle du projet | fermée, corrigée en 4.5.0 | Tient : l'avertissement est affiché |
+| [#80](https://github.com/rajdeepratan/SlashForge/issues/80) | l'auteur | Les chiffres de jetons du README ne disent pas si les lectures du cache comptent | fermée, corrigée en 4.5.0 | Tient dans le README ; la section des coûts du site omet la phrase |
+| [#81](https://github.com/rajdeepratan/SlashForge/issues/81) | l'auteur | Claude Code ignore le champ `name` qu'exige l'installeur | fermée, non prévue | — |
+| [#82](https://github.com/rajdeepratan/SlashForge/issues/82) | l'auteur | `uninstall` supprime `setup/slashforge/` avec les fichiers de l'utilisateur | fermée ; correctif en 5.0.0 | Tient là ; un fichier à moi dans un dossier de skill du kit sous `~/.agents/skills/` part avec le dossier |
+| [#83](https://github.com/rajdeepratan/SlashForge/issues/83) | l'auteur | `node --test` prend 523 s sous Windows | ouverte | 15.5 s ; quatre échecs Windows dans les tests ([commentaire](https://github.com/rajdeepratan/SlashForge/issues/83#issuecomment-6084208546)) |
+| [#84](https://github.com/rajdeepratan/SlashForge/issues/84) | l'auteur | Le test de l'assistant d'ouverture saute Windows | ouverte | Toujours sauté ([`#L1853`](https://github.com/rajdeepratan/SlashForge/blob/7e0e26a78bdfe7e9375a27a17b441d44280325ac/test/install.test.js#L1853)) |
+| [#85](https://github.com/rajdeepratan/SlashForge/issues/85) | l'auteur | Les points de contrôle du workflow sont des instructions, pas une contrainte | ouverte | Pas revérifié : il faut une exécution avec modèle |
+| [#86](https://github.com/rajdeepratan/SlashForge/issues/86) | l'auteur | Une installation de projet quand Claude Code démarre dans un sous-dossier | ouverte | Pas revérifié : il faut une exécution avec modèle |
+| [#87](https://github.com/rajdeepratan/SlashForge/issues/87) | l'auteur | La nouvelle exécution de setup et les marqueurs `generated_by` | ouverte | Pas revérifié : il faut une exécution avec modèle |
+| [#104](https://github.com/rajdeepratan/SlashForge/issues/104) | ce cours | L'ancienne assertion de l'assistant d'ouverture lance toujours le vrai ouvreur | ouverte | Lu à `v4.5.0` et `v5.2.1`, pas exécuté |
+| [#105](https://github.com/rajdeepratan/SlashForge/issues/105) | ce cours | Les fichiers de commande de Claude Code n'ont pas `disable-model-invocation` | ouverte | 0 fichier sur 17 ; la conséquence vient de la documentation, pas d'une exécution avec modèle |
+| [#106](https://github.com/rajdeepratan/SlashForge/issues/106) | ce cours | Des listes de commandes qui s'arrêtent à six | ouverte | Le message d'installation, un commentaire, le site |
 
 Limites : Windows seulement. Aucune exécution avec modèle sur 5.x : rien ici ne dit ce que coûtent les commandes, si les points de contrôle tiennent, ni si Claude Code lance une commande de lui-même.
 
