@@ -152,11 +152,11 @@ public static class TransposeRoutingProbe
         Line($"{phrasings.Count} phrasings; the router picks {Counts(picks)}; the chat endpoint answers with {Counts(agents)}");
     }
 
-    static string Counts(IEnumerable<string> values) =>
+    internal static string Counts(IEnumerable<string> values) =>
         string.Join(", ", values.GroupBy(v => v).OrderByDescending(g => g.Count()).ThenBy(g => g.Key, StringComparer.Ordinal)
             .Select(g => $"{g.Key} {g.Count()}"));
 
-    static (string Agent, string FirstLine) Chat(HttpClient client, string message)
+    internal static (string Agent, string FirstLine) Chat(HttpClient client, string message)
     {
         var response = client.PostAsJsonAsync("/api/chatbot/chat", new { message }).GetAwaiter().GetResult();
         if (!response.IsSuccessStatusCode) return ($"HTTP {(int)response.StatusCode}", "");
