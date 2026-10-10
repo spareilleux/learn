@@ -175,6 +175,25 @@ Worth recording next to the findings, because the lessons so far have mostly fou
 - Rank-two NMF reconstructed the raw timing matrix at MSE `0.505` seconds squared per cell and rejected standardized negative entries. LDA produced two finite axes for three OS labels, with **no held-out classification claim**. Seeded t-SNE produced a finite `12 × 2` arrangement but returned exactly the same arrangement when `transform` received an unrelated `1 × 1` input.
 - The numpy/scikit-learn 1.8.0 cross-check reproduced the square's distances, the ring-axis outcome, finite NMF reconstruction, LDA's two axes, and a finite t-SNE embedding. These are invariant checks, not claims of equal NMF factors or t-SNE coordinates across implementations. The hypotheses were not recorded before this run, so these are exploratory findings, not preregistered confirmations. Three-OS CI for lesson 9 is still pending.
 
+## 2026-09-27 — IX pipelines in GA's pipeline editor, and where the review stands
+
+*Retrospective observation.* This course pins IX at `490c395` and runs every result it prints. The work below ran IX at later commits, inside another repository, and this course did not run it. It is recorded because it uses IX the way this course's mission describes it — as tools an agent calls — and because the evidence behind it comes in three strengths that should not be mixed.
+
+**What was built.** [GuitarAlchemist/ga#740](https://github.com/GuitarAlchemist/ga/pull/740) adds a pipeline editor to GA's React components. A pipeline is JSON for IX's `ix_pipeline_validate` and `ix_pipeline_run` tools; the editor draws it as a graph, checks argument types and runs it through a local bridge to IX's MCP server. A second tab analyses a Petri net with `ix_petri_analyze`. The PR was merged on 2026-09-27 as [`d67d04b`](https://github.com/GuitarAlchemist/ga/commit/d67d04bdb04742ba338518e28197e6035cb80e90), before the independent review it was meant to wait for; the [agentic coding journal](../../agentic-coding/journal/#2026-09-27--ga-740-merged-before-its-independent-review) records how.
+
+| Strength | What it covers |
+|---|---|
+| **Checked here: the merge commit and the PR's public checks** | The example pipeline, [`ga-harmonic-field.pipeline.json`](https://github.com/GuitarAlchemist/ga/blob/d67d04bdb04742ba338518e28197e6035cb80e90/ReactComponents/ga-react-components/src/components/IxqlViewer/examples/ga-harmonic-field.pipeline.json), has 53 steps over 16 IX tools, and no tool appears more than 10 times — the design limit explained below. Every GitHub check that ran on the PR passed, Playwright included |
+| **Reported by the author, run locally, not re-run here** | `ix_pipeline_validate`: valid, 0 errors. `ix_pipeline_run`: 53 results in 28 ms. The editor's unit tests (30 of 30 when agent proposals were added) and a Playwright replay of the proposal flow. The Petri tab on the two nets of the [Petri nets course](../../petri-nets/): 8 markings and 3 dead ones for the lifecycle net, 12 markings, bound 2, live and deadlock-free for the bounded buffer |
+| **Reviewed after the merge, receipt kept locally** | An independent read-only review ran the PR's three unit-test files, 35 of 35, and confirmed defects in the dev-server routes and in stale-proposal detection, listed in the [agentic coding journal](../../agentic-coding/journal/#2026-09-27--ga-740-merged-before-its-independent-review). It did not review the example pipeline's content, saw the Petri code only through its unit tests, and ran no browser. Apart from those unit tests, the row above is still not independently verified |
+
+**Three IX behaviours the author reported**, none re-checked by this course against the pin:
+- IX's loop detector allows at most 10 calls to one tool in 5 minutes, so a pipeline that repeats a tool more often trips it. The example was designed around that limit, which the count above confirms.
+- `ix_ga_bridge` computes nothing: it returns a guide. The pipeline does not use it.
+- An `ix-mcp` binary built before [IX #352](https://github.com/GuitarAlchemist/ix/pull/352) reports manual tools as `not_gated`: the editor's approval display depends on which IX build serves it.
+
+None of them is a QA row: this course has not reproduced them, and its QA table holds reproduced findings only.
+
 ## To verify
 
 - The `ix_ml_pipeline` tool end to end: the scaling order of finding 1, the task inference of finding 2 on a CSV file, and the `All rows contain NaN values` error for a file with a text column. All three are read in the code, not run.
@@ -189,5 +208,7 @@ Worth recording next to the findings, because the lessons so far have mostly fou
 - `ix-autograd`: its tape is the crate that should make finding 15 unnecessary, and lesson 12 will measure it.
 - Whether findings 10 to 19 are already known upstream: I still have not searched IX issues.
 - The API map counts `pub` declarations, not reachable ones; how far apart the two numbers are is unmeasured.
+- At the pin: whether `ix_ga_bridge` returns a guide rather than a result, and the loop detector's limit of 10 calls per tool in 5 minutes.
+- GA #740: the pipeline run of 53 steps and the Petri results repeated by someone other than their author; the post-merge review covered neither.
 - The values printed by a direct `println!("{:.6}")` rather than through `fmt_vec` — lesson 8's `intercept -0.000000` is one — carry the same signed-zero hazard and are not normalized. That one agreed on the three systems in run 35039180659; the others have not been enumerated.
 - Repeat lesson 9's numeric snapshots on Linux and macOS CI; check whether IX's NMF MSE and the RBF fourth-axis gap round identically there. Benchmark t-SNE's scaling separately before assigning a runtime cost.
