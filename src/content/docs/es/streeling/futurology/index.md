@@ -11,4 +11,4 @@ sidebar:
 
 ## Módulos
 
-- [FUT-001 · Pensar en el manana — Introduccion al pensamiento de futuros](fut-001-thinking-about-tomorrow/)
+- [FUT-001 · Pensar en el mañana — Introducción al pensamiento de futuros](fut-001-thinking-about-tomorrow/)

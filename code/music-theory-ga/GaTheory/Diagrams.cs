@@ -108,11 +108,17 @@ public static class Diagrams
 
     static readonly string[] Standard = ["E2", "A2", "D3", "G3", "B3", "E4"]; // string 6 to string 1
 
-    static string ChordGrid(double left, string shape, string caption)
+    // shape: one character per string from string 6, or dashes between strings when a fret is above 9 ("8-10-10-9-8-8");
+    // notes: the names of the sounding notes, low to high, for a chord the sharp names would misspell
+    static string ChordGrid(double left, string shape, string caption, string? notes = null)
     {
         const double top = 40, stringGap = 24, fretGap = 30, frets = 4;
         var svg = new StringBuilder();
-        var fretted = shape.Where(char.IsDigit).Select(ch => ch - '0').Where(f => f > 0).ToArray();
+        var names = notes?.Split(' ');
+        var sounding = 0;
+        var parsed = (shape.Contains('-') ? shape.Split('-') : [.. shape.Select(ch => ch.ToString())])
+            .Select(f => f == "x" ? (int?)null : int.Parse(f, CultureInfo.InvariantCulture)).ToArray();
+        var fretted = parsed.Where(f => f > 0).Select(f => f!.Value).ToArray();
         var lowest = fretted.Length == 0 ? 1 : fretted.Min();
         var first = fretted.Length == 0 || fretted.Max() <= frets ? 1 : lowest; // first fret shown
         double X(int stringIndex) => left + stringIndex * stringGap;
@@ -133,9 +139,9 @@ public static class Diagrams
         }
 
         // a barre: the lowest fret held on every string from the first to the last string that uses it
-        var barreStrings = Enumerable.Range(0, 6).Where(s => shape[s] - '0' == lowest).ToArray();
+        var barreStrings = Enumerable.Range(0, 6).Where(s => parsed[s] == lowest).ToArray();
         var barre = barreStrings.Length >= 3
-            && Enumerable.Range(barreStrings.First(), barreStrings.Last() - barreStrings.First() + 1).All(s => char.IsDigit(shape[s]) && shape[s] - '0' >= lowest);
+            && Enumerable.Range(barreStrings.First(), barreStrings.Last() - barreStrings.First() + 1).All(s => parsed[s] is { } fret && fret >= lowest);
         if (barre)
         {
             var y = Y(lowest - first) + fretGap / 2;
@@ -144,34 +150,38 @@ public static class Diagrams
 
         for (var s = 0; s < 6; s++)
         {
-            var ch = shape[s];
-            if (ch == 'x' || ch == '0')
+            var fret = parsed[s];
+            if (fret is null or 0)
             {
-                var mark = ch == 'x' ? "×" : "○";
+                var mark = fret is null ? "×" : "○";
                 svg.Append($"  <text x=\"{F(X(s))}\" y=\"{F(top - 14)}\" font-size=\"15\" text-anchor=\"middle\" dominant-baseline=\"central\" fill=\"{Ink}\">{mark}</text>\n");
             }
-            else if (!(barre && ch - '0' == lowest))
+            else if (!(barre && fret == lowest))
             {
-                var y = Y(ch - '0' - first) + fretGap / 2;
+                var y = Y(fret.Value - first) + fretGap / 2;
                 svg.Append($"  <circle cx=\"{F(X(s))}\" cy=\"{F(y)}\" r=\"8.5\" style=\"fill:{Palette[0]}\"/>\n");
             }
-            if (ch != 'x')
+            if (fret is not null)
             {
-                var midi = Theory.MidiOf(Standard[s]) + ch - '0';
-                svg.Append($"  <text x=\"{F(X(s))}\" y=\"{F(Y((int)frets) + 16)}\" font-size=\"11\" text-anchor=\"middle\" dominant-baseline=\"central\" fill=\"{Ink}\">{Theory.PitchName(midi).Replace("#", "♯")}</text>\n");
+                var midi = Theory.MidiOf(Standard[s]) + fret.Value;
+                var name = names?[sounding++] ?? Theory.PitchName(midi).Replace("#", "♯");
+                svg.Append($"  <text x=\"{F(X(s))}\" y=\"{F(Y((int)frets) + 16)}\" font-size=\"11\" text-anchor=\"middle\" dominant-baseline=\"central\" fill=\"{Ink}\">{name}</text>\n");
             }
         }
         svg.Append($"  <text x=\"{F(X(0) + stringGap * 2.5)}\" y=\"{F(Y((int)frets) + 42)}\" font-size=\"15\" font-weight=\"700\" text-anchor=\"middle\" fill=\"{Ink}\">{caption}</text>\n");
         return svg.ToString();
     }
 
-    static string ChordGrids(params (string Shape, string Caption)[] grids)
+    static string ChordGrids(params (string Shape, string Caption)[] grids) =>
+        ChordGrids([.. grids.Select(grid => (grid.Shape, grid.Caption, (string?)null))]);
+
+    static string ChordGrids(params (string Shape, string Caption, string? Notes)[] grids)
     {
         const double panel = 175;
         var svg = new StringBuilder(Open(panel * grids.Length, 228));
         for (var i = 0; i < grids.Length; i++)
         {
-            svg.Append(ChordGrid(panel * i + 30, grids[i].Shape, grids[i].Caption));
+            svg.Append(ChordGrid(panel * i + 30, grids[i].Shape, grids[i].Caption, grids[i].Notes));
         }
         return svg.Append(Close).ToString();
     }
@@ -276,6 +286,11 @@ public static class Diagrams
         var major = Theory.FromSteps(Theory.MajorSteps);
         var dorian = Theory.FromSteps(Theory.MajorSteps.Skip(1).Concat(Theory.MajorSteps.Take(1)));
         var cMajorTriad = Id(0, 4, 7);
+        // lesson 12: each inversion In that maps a set onto itself is a mirror axis through pitch class n/2 and n/2 + 6
+        double[] Axes(int id) => [.. Lesson14.Mirrors(id).Select(n => n / 2.0)];
+        var wholeTone = Theory.FromSteps([2, 2, 2, 2, 2, 2]);
+        var octatonic = Theory.FromSteps([2, 1, 2, 1, 2, 1, 2, 1]);
+        var augmented = Theory.FromSteps([3, 1, 3, 1, 3, 1]);
 
         return new SortedDictionary<string, string>(StringComparer.Ordinal)
         {
@@ -307,6 +322,22 @@ public static class Diagrams
             ["l7-ii-v-i.svg"] = ChordGrids(("xx0211", "Dm7"), ("320001", "G7"), ("x32000", "Cmaj7")),
             ["l7-bracelet-g7-c.svg"] = Bracelets(
                 ([Set(Id(7, 11, 2, 5), 1), Set(cMajorTriad)], Labels.Notes, null, null)),
+            ["l9-bracelet-c-f.svg"] = Bracelets(
+                ([Set(cMajorTriad), Set(Id(5, 9, 0), 1)], Labels.Notes, null, null)),
+            ["l9-g7-c.svg"] = ChordGrids(("320001", "G7"), ("x32010", "C")),
+            ["l12-bracelet-tritone.svg"] = Bracelets(
+                ([Set(Id(0, 1, 4, 6, 7, 10))], Labels.Numbers, null, "1235"),
+                ([Set(Id(0, 1, 4, 6, 7, 9), 1)], Labels.Numbers, null, "723")),
+            ["l12-bracelet-mirrors.svg"] = Bracelets(
+                ([Set(wholeTone)], Labels.Numbers, Axes(wholeTone), "1365"),
+                ([Set(octatonic, 1)], Labels.Numbers, Axes(octatonic), "2925"),
+                ([Set(augmented, 2)], Labels.Numbers, Axes(augmented), "2457")),
+            ["l13-extended-voicings.svg"] = ChordGrids(
+                ("x3233x", "C9", "C3 E3 B♭3 D4"), ("x32335", "C13", "C3 E3 B♭3 D4 A4"), ("x3234x", "C7♯9", "C3 E3 B♭3 D♯4")),
+            // lesson 14: Cmaj7 close (MUS-005's "Drop-2"), drop 2 and drop 3, and a G7 shell
+            ["l14-drop-voicings.svg"] = ChordGrids(("x3200x", "x3200x"), ("x3545x", "x3545x"), ("8x998x", "8x998x"), ("3x34xx", "3x34xx")),
+            // lesson 15: C major in the five CAGED shapes, in their order up the neck
+            ["l15-caged-c.svg"] = ChordGrids(("x32010", "C shape"), ("x35553", "A shape"), ("875558", "G shape"), ("8-10-10-9-8-8", "E shape"), ("x-x-10-12-13-12", "D shape")),
         };
     }
 

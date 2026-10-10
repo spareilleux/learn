@@ -1,0 +1,64 @@
+# l16, GA's main
+
+== Corpus on main: GA's VoicingGenerator, standard tuning, 3 frets, window 3, at least 3 notes
+voicings                 15360
+the names main's analysis gives the voicings of five chords, with their counts:
+  C6, C E G A            Am7/G 24, Am7/E 17, Am7 6, Am7/C 2
+  C6/9, C D E G A        C6/E 11, C6/G 11, C6 1, C6/A 1
+  Dsus4, D G A           Gsus2 24, Gsus2/A 13, Gsus2/D 2
+  Dbaug, Db F A          Faug 14, Faug/A 7
+  Caug, C E G#           Caug/E 14, Caug 6, Caug/Ab 1
+
+== The example prompts' answers, on main: what each voicing plays
+prompt                           voicings   exact  more   part   other
+voicings for Cmaj7               8          8      0      0      0
+show me Dm7 voicings             8          8      0      0      0
+shapes for F major               8          8      0      0      0
+fingerings for G7                8          8      0      0      0
+Cmaj9 voicings                   8          8      0      0      0
+drop2 voicings of Cmaj7          8          8      0      0      0
+shell voicing for Dm7            8          8      0      0      0
+rootless A7 voicings             8          8      0      0      0
+quartal voicings in C            8          0      0      0      8
+all C major voicings on guitar   8          8      0      0      0
+open chord shape for E minor     8          0      0      0      8
+barre voicings for Bb major      8          8      0      0      0
+
+== A grid of 144 chords, on main: "voicings for <chord>" on 12 roots
+For each quality, the roots whose answer has only voicings that play the chord, some, or none;
+the corpus holds every chord of the grid. Then what the voicings that aren't the chord play.
+quality  all    some   none   the other voicings play
+major    10     2      0      more 4
+m        10     2      0      more 3
+7        12     0      0
+maj7     10     2      0      more 2
+m7       10     2      0      part 2
+dim      10     2      0      more 6
+aug      4      0      8      more 61
+sus4     3      3      6      more 57, part 1
+m7b5     11     1      0      more 1
+dim7     12     0      0
+6        0      0      12     more 74
+9        8      4      0      more 7
+voicings returned: 1097; exact 879, more 215, part 3, other 0
+
+== The techniques the example prompts name, on main
+prompt                           voicings   chord    technique  in the corpus
+drop2 voicings of Cmaj7          8          8        2          3
+shell voicing for Dm7            8          8        0          19
+rootless A7 voicings             8          8        0          45
+quartal voicings in C            8          0        0          1
+open chord shape for E minor     8          0        0          60
+barre voicings for Bb major      8          8        3          11
+
+== "open chord shape for E minor": the answer, and what each voicing plays (asked: E G B)
+Found 8 voicings:
+name             diagram          score    plays
+E/B              x-2-x-1-x-0      0.635    E G# B           other
+E                0-x-x-1-0-x      0.635    E G# B           other
+E                0-2-x-1-x-x      0.635    E G# B           other
+E                0-2-x-1-x-0      0.635    E G# B           other
+E                0-2-x-1-0-0      0.635    E G# B           other
+E/Ab             x-x-x-1-0-0      0.632    E G# B           other
+E                x-x-2-1-0-x      0.632    E G# B           other
+E                x-x-2-1-0-0      0.632    E G# B           other

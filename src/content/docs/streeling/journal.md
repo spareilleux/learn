@@ -57,6 +57,24 @@ Tick a module once studied. Under **Notes**, add a dated entry: what I understoo
 - [ ] [MAT-005 · Symmetric Eigenproblems](../mathematics/mat-005-symmetric-eigenproblems/) <!-- mat-005-symmetric-eigenproblems -->
 - [ ] [MAT-006 · Singular Value Decomposition and Low-Rank Approximation](../mathematics/mat-006-svd-low-rank-approximation/) <!-- mat-006-svd-low-rank-approximation -->
 - [ ] [MAT-007 · Least Squares, Regularisation and Identifiability](../mathematics/mat-007-least-squares-regularisation/) <!-- mat-007-least-squares-regularisation -->
+- [ ] [MAT-008 · Probability and Conditional Reasoning](../mathematics/mat-008-probability-conditional-reasoning/) <!-- mat-008-probability-conditional-reasoning -->
+- [ ] [MAT-009 · Estimation, Uncertainty and Reproducible Sampling](../mathematics/mat-009-estimation-uncertainty-sampling/) <!-- mat-009-estimation-uncertainty-sampling -->
+- [ ] [MAT-010 · Entropy, Divergences and Mutual Information](../mathematics/mat-010-information-entropy-divergences/) <!-- mat-010-information-entropy-divergences -->
+- [ ] [MAT-011 · Gradients and Reverse-Mode Automatic Differentiation](../mathematics/mat-011-gradients-reverse-mode-autodiff/) <!-- mat-011-gradients-reverse-mode-autodiff -->
+- [ ] [MAT-012 · Iterative Optimisation](../mathematics/mat-012-iterative-optimisation/) <!-- mat-012-iterative-optimisation -->
+- [ ] [MAT-013 · Distances, Kernels and Positive Semidefinite Matrices](../mathematics/mat-013-distances-kernels-psd/) <!-- mat-013-distances-kernels-psd -->
+- [ ] [MAT-014 · PCA as Variance Preservation](../mathematics/mat-014-pca-variance-preservation/) <!-- mat-014-pca-variance-preservation -->
+- [ ] [MAT-015 · Classical MDS and Distance Preservation](../mathematics/mat-015-classical-mds-distance-preservation/) <!-- mat-015-classical-mds-distance-preservation -->
+- [ ] [MAT-016 · Kernel PCA and Misleading Projections](../mathematics/mat-016-kernel-pca-misleading-projections/) <!-- mat-016-kernel-pca-misleading-projections -->
+- [ ] [MAT-017 · Non-negative Matrix Factorisation](../mathematics/mat-017-nonnegative-matrix-factorisation/) <!-- mat-017-nonnegative-matrix-factorisation -->
+- [ ] [MAT-018 · Clustering, Density and Cluster Validity](../mathematics/mat-018-clustering-density-validity/) <!-- mat-018-clustering-density-validity -->
+- [ ] [MAT-019 · Graphs, Centrality and Spectral Structure](../mathematics/mat-019-graphs-centrality-spectral/) <!-- mat-019-graphs-centrality-spectral -->
+- [ ] [MAT-020 · Markov Chains and Hidden Markov Models](../mathematics/mat-020-markov-chains-hmm/) <!-- mat-020-markov-chains-hmm -->
+- [ ] [MAT-021 · Fourier Analysis and Signals](../mathematics/mat-021-fourier-analysis-signals/) <!-- mat-021-fourier-analysis-signals -->
+- [ ] [MAT-022 · Symmetry, Groups and Invariants](../mathematics/mat-022-symmetry-groups-invariants/) <!-- mat-022-symmetry-groups-invariants -->
+- [ ] [MAT-023 · Petri Nets and Reachability](../mathematics/mat-023-petri-nets-reachability/) <!-- mat-023-petri-nets-reachability -->
+- [ ] [MAT-024 · Dynamical Systems, Stability and Feedback](../mathematics/mat-024-dynamical-systems-stability-feedback/) <!-- mat-024-dynamical-systems-stability-feedback -->
+- [ ] [MAT-025 · Allocation Under Constraints, Games, Bandits and Penalties](../mathematics/mat-025-allocation-games-bandits-penalties/) <!-- mat-025-allocation-games-bandits-penalties -->
 
 ### Music
 
@@ -66,6 +84,17 @@ Tick a module once studied. Under **Notes**, add a dated entry: what I understoo
 - [ ] [MUS-004 · Rhythm, Meter, and Groove](../music/mus-004-rhythm-and-groove/) <!-- mus-004-rhythm-and-groove -->
 - [ ] [MUS-005 · Jazz Harmony for Guitar](../music/mus-005-jazz-harmony/) <!-- mus-005-jazz-harmony -->
 - [ ] [MUS-006 · The Scale Universe](../music/mus-006-the-scale-universe/) <!-- mus-006-the-scale-universe -->
+- [ ] [MUS-007 · Pitch, Spelling and Enharmonic Identity](../music/mus-007-pitch-spelling-enharmonic-identity/) <!-- mus-007-pitch-spelling-enharmonic-identity -->
+- [ ] [MUS-008 · Intervals, Inversion and Compound Intervals](../music/mus-008-intervals-inversion-compound/) <!-- mus-008-intervals-inversion-compound -->
+- [ ] [MUS-009 · Tuning and Fretboard Geometry](../music/mus-009-tuning-fretboard-geometry/) <!-- mus-009-tuning-fretboard-geometry -->
+- [ ] [MUS-010 · Scale Patterns, Sets and the Diatonic Interval Vector](../music/mus-010-scales-pattern-set-interval-vector/) <!-- mus-010-scales-pattern-set-interval-vector -->
+- [ ] [MUS-011 · Modes and Modal Families](../music/mus-011-modes-modal-families/) <!-- mus-011-modes-modal-families -->
+- [ ] [MUS-012 · Chord Formulas, Essential Tones and Doubling](../music/mus-012-chord-formulas-essential-tones-doubling/) <!-- mus-012-chord-formulas-essential-tones-doubling -->
+- [ ] [MUS-013 · Root, Bass and Pitch-Class Set](../music/mus-013-root-bass-pitch-class-set/) <!-- mus-013-root-bass-pitch-class-set -->
+- [ ] [MUS-014 · Inversions and the Bass Line](../music/mus-014-inversions-bass-line/) <!-- mus-014-inversions-bass-line -->
+- [ ] [MUS-018 · Key Finding, Roman Numerals and Cadences](../music/mus-018-key-finding-roman-numerals-cadences/) <!-- mus-018-key-finding-roman-numerals-cadences -->
+- [ ] [MUS-019 · Transposition, the Capo and Cross-Instrument Equivalence](../music/mus-019-transposition-capo-cross-instrument/) <!-- mus-019-transposition-capo-cross-instrument -->
+- [ ] [MUS-020 · Set Classes, Interval Vectors, the Z-Relation and Prime Forms](../music/mus-020-set-classes-interval-vectors-prime-forms/) <!-- mus-020-set-classes-interval-vectors-prime-forms -->
 
 ### Musicology
 
@@ -168,4 +197,75 @@ Synced from Demerzel at [`8c14336`](https://github.com/GuitarAlchemist/Demerzel/
 Nothing in it was run here.
 
 - **The experiment in its section 6 is only proposed.** It would run in a Learn lab, with predictions written before any run: an offset sweep from c = 1 to 10^7; the normal equations against the SVD route; the MCP server after a panic, in a disposable process only; and the input schema's `"X"` key against the `"x"` the handler reads. No such lab exists yet, and nothing in the module is a measurement.
+- **It has not been studied here,** so its checkbox above stays empty.
+
+## 2026-10-02 — MAT-008 to MAT-025, MUS-007, MUS-008, MUS-009, MUS-018, MUS-020, and fifteen translations
+
+Synced from Demerzel at [`e203e5a`](https://github.com/GuitarAlchemist/Demerzel/commit/e203e5a25e10b85b8d22ece9a700e12447f4a236). Since the MAT-007 entry above, it brings 23 new modules, each in English, French and Spanish:
+- mathematics: MAT-008 ([#1141](https://github.com/GuitarAlchemist/Demerzel/pull/1141)), MAT-009 ([#1147](https://github.com/GuitarAlchemist/Demerzel/pull/1147)), MAT-010 ([#1148](https://github.com/GuitarAlchemist/Demerzel/pull/1148)), MAT-011 ([#1149](https://github.com/GuitarAlchemist/Demerzel/pull/1149)), MAT-012 ([#1150](https://github.com/GuitarAlchemist/Demerzel/pull/1150)), MAT-013 ([#1151](https://github.com/GuitarAlchemist/Demerzel/pull/1151)), MAT-014 ([#1152](https://github.com/GuitarAlchemist/Demerzel/pull/1152)), MAT-015 ([#1153](https://github.com/GuitarAlchemist/Demerzel/pull/1153)), MAT-016 ([#1154](https://github.com/GuitarAlchemist/Demerzel/pull/1154)), MAT-017 ([#1155](https://github.com/GuitarAlchemist/Demerzel/pull/1155)), MAT-018 ([#1156](https://github.com/GuitarAlchemist/Demerzel/pull/1156)), MAT-019 ([#1157](https://github.com/GuitarAlchemist/Demerzel/pull/1157)), MAT-020 ([#1158](https://github.com/GuitarAlchemist/Demerzel/pull/1158)), MAT-021 ([#1159](https://github.com/GuitarAlchemist/Demerzel/pull/1159)), MAT-022 ([#1162](https://github.com/GuitarAlchemist/Demerzel/pull/1162)), MAT-023 ([#1163](https://github.com/GuitarAlchemist/Demerzel/pull/1163)), MAT-024 ([#1165](https://github.com/GuitarAlchemist/Demerzel/pull/1165)), MAT-025 ([#1166](https://github.com/GuitarAlchemist/Demerzel/pull/1166));
+- music: MUS-007 ([#1172](https://github.com/GuitarAlchemist/Demerzel/pull/1172)), MUS-008 ([#1173](https://github.com/GuitarAlchemist/Demerzel/pull/1173)), MUS-009 ([#1174](https://github.com/GuitarAlchemist/Demerzel/pull/1174)), MUS-018 ([#1167](https://github.com/GuitarAlchemist/Demerzel/pull/1167)), MUS-020 ([#1171](https://github.com/GuitarAlchemist/Demerzel/pull/1171)).
+
+It also brings:
+- French and Spanish pages for fifteen modules that had only an English page here: CS-002, CYB-001, CYB-002, GAA-002, GAA-003, INF-001, MUS-003, MUS-004, MUS-005, MCL-002, NET-001, PSY-002, SEM-001, from [#1098](https://github.com/GuitarAlchemist/Demerzel/pull/1098), which also corrected their English text, and MUS-002 and MUS-006, from [#1091](https://github.com/GuitarAlchemist/Demerzel/pull/1091);
+- corrections to MUS-002, MUS-006 and GTR-002 in every language that has them ([#1091](https://github.com/GuitarAlchemist/Demerzel/pull/1091));
+- the accents restored in the Spanish pages of twelve modules ([#1120](https://github.com/GuitarAlchemist/Demerzel/pull/1120)).
+
+Nothing in them was run here.
+
+- **They have not been studied here,** so their checkboxes above stay empty.
+
+## 2026-10-02 — PHY-001 · The Science of Guitar Sound, corrected
+
+Synced from Demerzel at [`d459d8e`](https://github.com/GuitarAlchemist/Demerzel/commit/d459d8e5f0210cbad00f49c49196fc61160aba76) ([PR #1179](https://github.com/GuitarAlchemist/Demerzel/pull/1179)). The module's exercise said to measure from the nut to fret 7 and expect about 2/3 of the string length. The 2/3 is the length that vibrates, from fret 7 to the saddle; the nut-to-fret-7 stretch is the remaining third. The correction is in all six languages of the module, three of which are on this site. Every other page changes only its pinned references to Demerzel, from `e203e5a` to `d459d8e`.
+
+Nothing in it was run here.
+
+- **It has not been studied here,** so its checkbox above stays empty.
+
+## 2026-10-03 — MUS-012 · Chord Formulas, Essential Tones and Doubling
+
+Synced from Demerzel at [`450fc67`](https://github.com/GuitarAlchemist/Demerzel/commit/450fc670a71d1cfb190a53bfedd52ba81215fa5c) ([PR #1180](https://github.com/GuitarAlchemist/Demerzel/pull/1180)). A new intermediate music module on what a chord can lose: chord formulas up to the thirteenth, the essential tones a chord's name depends on and the optional ones it can drop, the doublings of a guitar voicing, and a thirteenth chord on six strings. It traces what GA stores about formulas, essential tones and doubling, and its section 6 proposes an experiment. The music index now lists it, the Streeling index counts 12 music modules instead of 11, and MUS-018 and MUS-020 move down one place in the sidebar; every other page changes only its pinned references to Demerzel, from `d459d8e` to `450fc67`.
+
+Nothing in it was run here.
+
+- **It has not been studied here,** so its checkbox above stays empty.
+
+## 2026-10-03 — MUS-013 · Root, Bass and Pitch-Class Set
+
+Synced from Demerzel at [`928fbb2`](https://github.com/GuitarAlchemist/Demerzel/commit/928fbb26539e451fd34a0e8baf0714cf919a1562) ([PR #1181](https://github.com/GuitarAlchemist/Demerzel/pull/1181)). A new intermediate music module on what a chord name fixes: the root, the bass and the pitch-class set, the sets that have several readings (sixth and seventh chords, sus2 and sus4, the augmented triad and the diminished seventh), and how the bass, the harmony and the resolution choose between them. It traces how GA names a set without looking at its bass, and its section 6 proposes an experiment. The music index now lists it, the Streeling index counts 13 music modules instead of 12, and MUS-018 and MUS-020 move down one place in the sidebar; every other page changes only its pinned references to Demerzel, from `450fc67` to `928fbb2`.
+
+Nothing in it was run here.
+
+- **It has not been studied here,** so its checkbox above stays empty.
+
+## 2026-10-03 — MUS-010 · Scale Patterns, Sets and the Diatonic Interval Vector
+
+Synced from Demerzel at [`d8c8da5`](https://github.com/GuitarAlchemist/Demerzel/commit/d8c8da550af12f339dbf9464cc1144084eb689b9) ([PR #1183](https://github.com/GuitarAlchemist/Demerzel/pull/1183)). A new intermediate music module on what is rare about the major scale: a scale as a step pattern and as a pitch-class set, the interval vectors of the major, harmonic minor, pentatonic and whole tone scales, the common-tone theorem, and four properties of the major scale: deep, Myhill's property, maximally even and generated by fifths. It traces how GA computes these properties, and its section 7 proposes an experiment. The music index now lists it, the Streeling index counts 14 music modules instead of 13, and MUS-012, MUS-013, MUS-018 and MUS-020 move down one place in the sidebar; every other page changes only its pinned references to Demerzel, from `928fbb2` to `d8c8da5`.
+
+Nothing in it was run here.
+
+- **It has not been studied here,** so its checkbox above stays empty.
+
+## 2026-10-03 — MUS-011 · Modes and Modal Families
+
+Synced from Demerzel at [`499fc64`](https://github.com/GuitarAlchemist/Demerzel/commit/499fc64abe83a5bf7d59efdd949bb23b72925ae2) ([PR #1184](https://github.com/GuitarAlchemist/Demerzel/pull/1184)). A new intermediate music module on modes and modal families: a mode as a rotation of a step pattern, relative and parallel modes, how many distinct modes a scale has, and why two scales can share an interval vector without being modes of each other, through mirror images and the Z-relation. It traces how GA groups sets into modal families, and its section 6 proposes an experiment. The music index now lists it, the Streeling index counts 15 music modules instead of 14, and MUS-012, MUS-013, MUS-018 and MUS-020 move down one place in the sidebar; every other page changes only its pinned references to Demerzel, from `d8c8da5` to `499fc64`.
+
+Nothing in it was run here.
+
+- **It has not been studied here,** so its checkbox above stays empty.
+
+## 2026-10-04 — MUS-014 · Inversions and the Bass Line
+
+Synced from Demerzel at [`518158b`](https://github.com/GuitarAlchemist/Demerzel/commit/518158b0568981b4ebe290d69f197995bd41ded0) ([PR #1185](https://github.com/GuitarAlchemist/Demerzel/pull/1185)). A new intermediate music module on chord positions read from the bass: root position and the inversions, figured bass for triads and seventh chords, the four kinds of six-four chord, and the cases where the sounding notes do not fix the position. It traces how GA handles inversions in its `Chord` type, its voicing documents and its modes catalogue, and its section 6 proposes an experiment. The music index now lists it, the Streeling index counts 16 music modules instead of 15, and MUS-018 and MUS-020 move down one place in the sidebar; every other page changes only its pinned references to Demerzel, from `499fc64` to `518158b`.
+
+Nothing in it was run here.
+
+- **It has not been studied here,** so its checkbox above stays empty.
+
+## 2026-10-04 — MUS-019 · Transposition, the Capo and Cross-Instrument Equivalence
+
+Synced from Demerzel at [`0f7a5fd`](https://github.com/GuitarAlchemist/Demerzel/commit/0f7a5fd110acfc4835776d38ab1a115533467d34) ([PR #1186](https://github.com/GuitarAlchemist/Demerzel/pull/1186)). A new intermediate music module on three kinds of sameness: transposition, spelled by interval and read on the line of fifths; the capo as a uniform tuning difference, shape names against sounding names, and the same shape on ukuleles and a bass; and transposing instruments in B♭, E♭ and F. It traces how GA transposes pitch-class sets and chord symbols and how it answers capo questions, and its section 6 proposes an experiment. The music index now lists it, the Streeling index counts 17 music modules instead of 16, and MUS-020 moves down one place in the sidebar; every other page changes only its pinned references to Demerzel, from `518158b` to `0f7a5fd`.
+
+Nothing in it was run here.
+
 - **It has not been studied here,** so its checkbox above stays empty.

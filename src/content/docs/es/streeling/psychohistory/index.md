@@ -12,4 +12,4 @@ sidebar:
 ## Módulos
 
 - [PSY-001 · Introducción al Compuesto Fractal](psy-001-intro-fractal-compounding/)
-- [PSY-002 · Governance Phase Transitions](psy-002-governance-phase-transitions/) *(en inglés)*
+- [PSY-002 · Transiciones de fase de la gobernanza](psy-002-governance-phase-transitions/)

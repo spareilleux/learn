@@ -203,7 +203,7 @@ function moduleCode(id) {
 
 function shortTitle(title, code) {
 	return title
-		.replace(new RegExp(`^${code}:\\s*`, 'i'), '')
+		.replace(new RegExp(`^${code}\\s*:\\s*`, 'i'), '')
 		.split(/:\s| — /)[0]
 		.trim();
 }

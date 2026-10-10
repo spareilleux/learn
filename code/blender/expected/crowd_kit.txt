@@ -1,0 +1,19 @@
+
+== A vertex's place cannot tell an arm from a leg
+leg top, outer edge from the middle: 0.170 m
+arm at the shoulder, inner edge from the middle: 0.145 m
+overlap: 0.025 m, so the UVs flag them: |u| 1 or 0.6 a leg, |u| 2 an arm
+
+== Figures
+courtier triangles 436 vertices 262 height 1.736 m
+  by flag: legs 0 legs_robed 64 arms 80 hanging 48 still 244 | largest hang weight 1.000
+  read back from the .glb: 1 mesh, 436 triangles, flags unchanged
+lady triangles 392 vertices 234 height 1.745 m
+  by flag: legs 0 legs_robed 64 arms 80 hanging 48 still 200 | largest hang weight 1.000
+  read back from the .glb: 1 mesh, 392 triangles, flags unchanged
+walker triangles 380 vertices 226 height 1.736 m
+  by flag: legs 64 legs_robed 0 arms 80 hanging 20 still 216 | largest hang weight 1.000
+  read back from the .glb: 1 mesh, 380 triangles, flags unchanged
+gardener triangles 412 vertices 242 height 1.790 m
+  by flag: legs 64 legs_robed 0 arms 80 hanging 20 still 248 | largest hang weight 1.000
+  read back from the .glb: 1 mesh, 412 triangles, flags unchanged

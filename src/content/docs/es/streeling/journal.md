@@ -21,13 +21,13 @@ Marca un módulo una vez estudiado. En **Notas**, añade una entrada fechada: lo
 ### Ciencias de la computación
 
 - [ ] [CS-001 · Pensar algorítmicamente](../computer-science/cs-001-thinking-algorithmically/) <!-- cs-001-thinking-algorithmically -->
-- [ ] [CS-002 · Governing Agentic Loops](../computer-science/cs-002-governing-agentic-loops/) <!-- cs-002-governing-agentic-loops -->
+- [ ] [CS-002 · Gobernar los bucles agénticos](../computer-science/cs-002-governing-agentic-loops/) <!-- cs-002-governing-agentic-loops -->
 
 ### Cibernética
 
-- [ ] [CYB-001 · Viable System Model Mapping to AI Governance](../cybernetics/cyb-001-vsm-ai-governance-mapping/) <!-- cyb-001-vsm-ai-governance-mapping -->
-- [ ] [CYB-002 · Active Dampening Mechanisms for Cross-Repo Oscillation Control](../cybernetics/cyb-002-active-dampening-cross-repo-oscillation/) <!-- cyb-002-active-dampening-cross-repo-oscillation -->
-- [ ] [CYB-003 · Measuring the Variety Ratio Quantitatively](../cybernetics/cyb-003-measuring-variety-ratio-quantitatively/) <!-- cyb-003-measuring-variety-ratio-quantitatively -->
+- [ ] [CYB-001 · Correspondencia entre el modelo de sistema viable y la gobernanza de la IA](../cybernetics/cyb-001-vsm-ai-governance-mapping/) <!-- cyb-001-vsm-ai-governance-mapping -->
+- [ ] [CYB-002 · Mecanismos de amortiguación activa para controlar la oscilación entre repositorios](../cybernetics/cyb-002-active-dampening-cross-repo-oscillation/) <!-- cyb-002-active-dampening-cross-repo-oscillation -->
+- [ ] [CYB-003 · Measuring the Variety Ratio Quantitatively](../cybernetics/cyb-003-measuring-variety-ratio-quantitatively/) *(en inglés)* <!-- cyb-003-measuring-variety-ratio-quantitatively -->
 
 ### Futurología
 
@@ -36,8 +36,8 @@ Marca un módulo una vez estudiado. En **Notas**, añade una entrada fechada: lo
 ### Guitar Alchemist Academy
 
 - [ ] [GAA-001 · Tu primer acorde](../guitar-alchemist-academy/gaa-001-your-first-chord/) <!-- gaa-001-your-first-chord -->
-- [ ] [GAA-002 · Training Your Ear](../guitar-alchemist-academy/gaa-002-training-your-ear/) <!-- gaa-002-training-your-ear -->
-- [ ] [GAA-003 · Improvisation Foundations](../guitar-alchemist-academy/gaa-003-improvisation-foundations/) <!-- gaa-003-improvisation-foundations -->
+- [ ] [GAA-002 · Entrenar tu oído](../guitar-alchemist-academy/gaa-002-training-your-ear/) <!-- gaa-002-training-your-ear -->
+- [ ] [GAA-003 · Fundamentos de la improvisación](../guitar-alchemist-academy/gaa-003-improvisation-foundations/) <!-- gaa-003-improvisation-foundations -->
 
 ### Estudios de guitarra
 
@@ -46,7 +46,7 @@ Marca un módulo una vez estudiado. En **Notas**, añade una entrada fechada: lo
 
 ### Teoría de la información
 
-- [ ] [INF-001 · The Entropy of Governance](../information-theory/inf-001-entropy-of-governance/) <!-- inf-001-entropy-of-governance -->
+- [ ] [INF-001 · La entropía de la gobernanza](../information-theory/inf-001-entropy-of-governance/) <!-- inf-001-entropy-of-governance -->
 
 ### Matemáticas
 
@@ -57,24 +57,53 @@ Marca un módulo una vez estudiado. En **Notas**, añade una entrada fechada: lo
 - [ ] [MAT-005 · Problemas de valores propios simétricos](../mathematics/mat-005-symmetric-eigenproblems/) <!-- mat-005-symmetric-eigenproblems -->
 - [ ] [MAT-006 · Descomposición en valores singulares y aproximación de bajo rango](../mathematics/mat-006-svd-low-rank-approximation/) <!-- mat-006-svd-low-rank-approximation -->
 - [ ] [MAT-007 · Mínimos cuadrados, regularización e identificabilidad](../mathematics/mat-007-least-squares-regularisation/) <!-- mat-007-least-squares-regularisation -->
+- [ ] [MAT-008 · Probabilidad y razonamiento condicional](../mathematics/mat-008-probability-conditional-reasoning/) <!-- mat-008-probability-conditional-reasoning -->
+- [ ] [MAT-009 · Estimación, incertidumbre y muestreo reproducible](../mathematics/mat-009-estimation-uncertainty-sampling/) <!-- mat-009-estimation-uncertainty-sampling -->
+- [ ] [MAT-010 · Entropía, divergencias e información mutua](../mathematics/mat-010-information-entropy-divergences/) <!-- mat-010-information-entropy-divergences -->
+- [ ] [MAT-011 · Gradientes y diferenciación automática en modo inverso](../mathematics/mat-011-gradients-reverse-mode-autodiff/) <!-- mat-011-gradients-reverse-mode-autodiff -->
+- [ ] [MAT-012 · Optimización iterativa](../mathematics/mat-012-iterative-optimisation/) <!-- mat-012-iterative-optimisation -->
+- [ ] [MAT-013 · Distancias, núcleos y matrices semidefinidas positivas](../mathematics/mat-013-distances-kernels-psd/) <!-- mat-013-distances-kernels-psd -->
+- [ ] [MAT-014 · El ACP como preservación de la varianza](../mathematics/mat-014-pca-variance-preservation/) <!-- mat-014-pca-variance-preservation -->
+- [ ] [MAT-015 · MDS clásico y preservación de distancias](../mathematics/mat-015-classical-mds-distance-preservation/) <!-- mat-015-classical-mds-distance-preservation -->
+- [ ] [MAT-016 · ACP con núcleo y proyecciones engañosas](../mathematics/mat-016-kernel-pca-misleading-projections/) <!-- mat-016-kernel-pca-misleading-projections -->
+- [ ] [MAT-017 · Factorización de matrices no negativas](../mathematics/mat-017-nonnegative-matrix-factorisation/) <!-- mat-017-nonnegative-matrix-factorisation -->
+- [ ] [MAT-018 · Agrupamiento, densidad y validez de los clústeres](../mathematics/mat-018-clustering-density-validity/) <!-- mat-018-clustering-density-validity -->
+- [ ] [MAT-019 · Grafos, centralidad y estructura espectral](../mathematics/mat-019-graphs-centrality-spectral/) <!-- mat-019-graphs-centrality-spectral -->
+- [ ] [MAT-020 · Cadenas de Markov y modelos de Markov ocultos](../mathematics/mat-020-markov-chains-hmm/) <!-- mat-020-markov-chains-hmm -->
+- [ ] [MAT-021 · Análisis de Fourier y señales](../mathematics/mat-021-fourier-analysis-signals/) <!-- mat-021-fourier-analysis-signals -->
+- [ ] [MAT-022 · Simetría, grupos e invariantes](../mathematics/mat-022-symmetry-groups-invariants/) <!-- mat-022-symmetry-groups-invariants -->
+- [ ] [MAT-023 · Redes de Petri y alcanzabilidad](../mathematics/mat-023-petri-nets-reachability/) <!-- mat-023-petri-nets-reachability -->
+- [ ] [MAT-024 · Sistemas dinámicos, estabilidad y realimentación](../mathematics/mat-024-dynamical-systems-stability-feedback/) <!-- mat-024-dynamical-systems-stability-feedback -->
+- [ ] [MAT-025 · Asignación con restricciones, juegos, bandidos y penalizaciones](../mathematics/mat-025-allocation-games-bandits-penalties/) <!-- mat-025-allocation-games-bandits-penalties -->
 
 ### Música
 
 - [ ] [MUS-001 · ¿Qué es un acorde?](../music/mus-001-what-is-a-chord/) <!-- mus-001-what-is-a-chord -->
-- [ ] [MUS-002 · Beyond Tonality](../music/mus-002-beyond-tonality/) <!-- mus-002-beyond-tonality -->
-- [ ] [MUS-003 · How Harmony Works](../music/mus-003-functional-harmony/) <!-- mus-003-functional-harmony -->
-- [ ] [MUS-004 · Rhythm, Meter, and Groove](../music/mus-004-rhythm-and-groove/) <!-- mus-004-rhythm-and-groove -->
-- [ ] [MUS-005 · Jazz Harmony for Guitar](../music/mus-005-jazz-harmony/) <!-- mus-005-jazz-harmony -->
-- [ ] [MUS-006 · The Scale Universe](../music/mus-006-the-scale-universe/) <!-- mus-006-the-scale-universe -->
+- [ ] [MUS-002 · Más allá de la tonalidad](../music/mus-002-beyond-tonality/) <!-- mus-002-beyond-tonality -->
+- [ ] [MUS-003 · Cómo funciona la armonía](../music/mus-003-functional-harmony/) <!-- mus-003-functional-harmony -->
+- [ ] [MUS-004 · Ritmo, métrica y groove](../music/mus-004-rhythm-and-groove/) <!-- mus-004-rhythm-and-groove -->
+- [ ] [MUS-005 · Armonía de jazz para guitarra](../music/mus-005-jazz-harmony/) <!-- mus-005-jazz-harmony -->
+- [ ] [MUS-006 · El universo de las escalas](../music/mus-006-the-scale-universe/) <!-- mus-006-the-scale-universe -->
+- [ ] [MUS-007 · Altura, grafía e identidad enarmónica](../music/mus-007-pitch-spelling-enharmonic-identity/) <!-- mus-007-pitch-spelling-enharmonic-identity -->
+- [ ] [MUS-008 · Intervalos, inversión e intervalos compuestos](../music/mus-008-intervals-inversion-compound/) <!-- mus-008-intervals-inversion-compound -->
+- [ ] [MUS-009 · Afinación y geometría del mástil](../music/mus-009-tuning-fretboard-geometry/) <!-- mus-009-tuning-fretboard-geometry -->
+- [ ] [MUS-010 · Fórmulas de escalas, conjuntos y vector interválico diatónico](../music/mus-010-scales-pattern-set-interval-vector/) <!-- mus-010-scales-pattern-set-interval-vector -->
+- [ ] [MUS-011 · Modos y familias modales](../music/mus-011-modes-modal-families/) <!-- mus-011-modes-modal-families -->
+- [ ] [MUS-012 · Fórmulas de acordes, notas esenciales y duplicaciones](../music/mus-012-chord-formulas-essential-tones-doubling/) <!-- mus-012-chord-formulas-essential-tones-doubling -->
+- [ ] [MUS-013 · Fundamental, bajo y conjunto de clases de altura](../music/mus-013-root-bass-pitch-class-set/) <!-- mus-013-root-bass-pitch-class-set -->
+- [ ] [MUS-014 · Inversiones y línea de bajo](../music/mus-014-inversions-bass-line/) <!-- mus-014-inversions-bass-line -->
+- [ ] [MUS-018 · Identificación de la tonalidad, números romanos y cadencias](../music/mus-018-key-finding-roman-numerals-cadences/) <!-- mus-018-key-finding-roman-numerals-cadences -->
+- [ ] [MUS-019 · Transposición, capotraste y equivalencia entre instrumentos](../music/mus-019-transposition-capo-cross-instrument/) <!-- mus-019-transposition-capo-cross-instrument -->
+- [ ] [MUS-020 · Clases de conjuntos, vectores interválicos, relación Z y formas primas](../music/mus-020-set-classes-interval-vectors-prime-forms/) <!-- mus-020-set-classes-interval-vectors-prime-forms -->
 
 ### Musicología
 
 - [ ] [MCL-001 · Cómo evoluciona la música](../musicology/mcl-001-how-music-evolves/) <!-- mcl-001-how-music-evolves -->
-- [ ] [MCL-002 · Musical Form and Structure](../musicology/mcl-002-musical-form/) <!-- mcl-002-musical-form -->
+- [ ] [MCL-002 · Forma y estructura musical](../musicology/mcl-002-musical-form/) <!-- mcl-002-musical-form -->
 
 ### Ciencia de redes
 
-- [ ] [NET-001 · Scale-Free Tool Networks](../network-science/net-001-scale-free-tool-networks/) <!-- net-001-scale-free-tool-networks -->
+- [ ] [NET-001 · Redes de herramientas libres de escala](../network-science/net-001-scale-free-tool-networks/) <!-- net-001-scale-free-tool-networks -->
 
 ### Filosofía
 
@@ -91,11 +120,11 @@ Marca un módulo una vez estudiado. En **Notas**, añade una entrada fechada: lo
 ### Psicohistoria
 
 - [ ] [PSY-001 · Introducción al compuesto fractal](../psychohistory/psy-001-intro-fractal-compounding/) <!-- psy-001-intro-fractal-compounding -->
-- [ ] [PSY-002 · Governance Phase Transitions](../psychohistory/psy-002-governance-phase-transitions/) <!-- psy-002-governance-phase-transitions -->
+- [ ] [PSY-002 · Transiciones de fase de la gobernanza](../psychohistory/psy-002-governance-phase-transitions/) <!-- psy-002-governance-phase-transitions -->
 
 ### Semiótica
 
-- [ ] [SEM-001 · Signs in Governance](../semiotics/sem-001-signs-in-governance/) <!-- sem-001-signs-in-governance -->
+- [ ] [SEM-001 · Los signos en la gobernanza](../semiotics/sem-001-signs-in-governance/) <!-- sem-001-signs-in-governance -->
 
 ### Músicas y lenguas del mundo
 
@@ -168,4 +197,75 @@ Sincronizado desde Demerzel en [`8c14336`](https://github.com/GuitarAlchemist/De
 Aquí no se ejecutó nada de él.
 
 - **El experimento de su sección 6 solo está propuesto.** Se ejecutaría en un laboratorio de Learn, con predicciones escritas antes de cualquier ejecución: un barrido de desplazamientos de c = 1 a 10^7; las ecuaciones normales frente a la vía SVD; el servidor MCP tras un pánico, solo en un proceso desechable; y la clave `"X"` del esquema de entrada frente a la clave `"x"` que lee el manejador. Ese laboratorio aún no existe, y nada en el módulo es una medición.
+- **No se ha estudiado aquí,** así que su casilla de arriba sigue vacía.
+
+## 2026-10-02 — MAT-008 a MAT-025, MUS-007, MUS-008, MUS-009, MUS-018, MUS-020, y quince traducciones
+
+Sincronizado desde Demerzel en [`e203e5a`](https://github.com/GuitarAlchemist/Demerzel/commit/e203e5a25e10b85b8d22ece9a700e12447f4a236). Desde la entrada MAT-007 de arriba, la sincronización trae 23 módulos nuevos, cada uno en inglés, francés y español:
+- matemáticas: MAT-008 ([#1141](https://github.com/GuitarAlchemist/Demerzel/pull/1141)), MAT-009 ([#1147](https://github.com/GuitarAlchemist/Demerzel/pull/1147)), MAT-010 ([#1148](https://github.com/GuitarAlchemist/Demerzel/pull/1148)), MAT-011 ([#1149](https://github.com/GuitarAlchemist/Demerzel/pull/1149)), MAT-012 ([#1150](https://github.com/GuitarAlchemist/Demerzel/pull/1150)), MAT-013 ([#1151](https://github.com/GuitarAlchemist/Demerzel/pull/1151)), MAT-014 ([#1152](https://github.com/GuitarAlchemist/Demerzel/pull/1152)), MAT-015 ([#1153](https://github.com/GuitarAlchemist/Demerzel/pull/1153)), MAT-016 ([#1154](https://github.com/GuitarAlchemist/Demerzel/pull/1154)), MAT-017 ([#1155](https://github.com/GuitarAlchemist/Demerzel/pull/1155)), MAT-018 ([#1156](https://github.com/GuitarAlchemist/Demerzel/pull/1156)), MAT-019 ([#1157](https://github.com/GuitarAlchemist/Demerzel/pull/1157)), MAT-020 ([#1158](https://github.com/GuitarAlchemist/Demerzel/pull/1158)), MAT-021 ([#1159](https://github.com/GuitarAlchemist/Demerzel/pull/1159)), MAT-022 ([#1162](https://github.com/GuitarAlchemist/Demerzel/pull/1162)), MAT-023 ([#1163](https://github.com/GuitarAlchemist/Demerzel/pull/1163)), MAT-024 ([#1165](https://github.com/GuitarAlchemist/Demerzel/pull/1165)), MAT-025 ([#1166](https://github.com/GuitarAlchemist/Demerzel/pull/1166));
+- música: MUS-007 ([#1172](https://github.com/GuitarAlchemist/Demerzel/pull/1172)), MUS-008 ([#1173](https://github.com/GuitarAlchemist/Demerzel/pull/1173)), MUS-009 ([#1174](https://github.com/GuitarAlchemist/Demerzel/pull/1174)), MUS-018 ([#1167](https://github.com/GuitarAlchemist/Demerzel/pull/1167)), MUS-020 ([#1171](https://github.com/GuitarAlchemist/Demerzel/pull/1171)).
+
+También trae:
+- páginas en francés y en español para quince módulos que aquí solo tenían una página en inglés: CS-002, CYB-001, CYB-002, GAA-002, GAA-003, INF-001, MUS-003, MUS-004, MUS-005, MCL-002, NET-001, PSY-002, SEM-001, de [#1098](https://github.com/GuitarAlchemist/Demerzel/pull/1098), que también corrigió su texto en inglés, y MUS-002 y MUS-006, de [#1091](https://github.com/GuitarAlchemist/Demerzel/pull/1091);
+- correcciones de MUS-002, MUS-006 y GTR-002 en todos los idiomas en que existen ([#1091](https://github.com/GuitarAlchemist/Demerzel/pull/1091));
+- los acentos restaurados en las páginas en español de doce módulos ([#1120](https://github.com/GuitarAlchemist/Demerzel/pull/1120)).
+
+Aquí no se ejecutó nada de ellos.
+
+- **No se han estudiado aquí,** así que sus casillas de arriba siguen vacías.
+
+## 2026-10-02 — PHY-001 · La ciencia del sonido de la guitarra, corregido
+
+Sincronizado desde Demerzel en [`d459d8e`](https://github.com/GuitarAlchemist/Demerzel/commit/d459d8e5f0210cbad00f49c49196fc61160aba76) ([PR #1179](https://github.com/GuitarAlchemist/Demerzel/pull/1179)). El ejercicio del módulo decía que se midiera desde la cejuela hasta el traste 7 y que saldrían unos 2/3 de la longitud de la cuerda. Los 2/3 son la longitud que vibra, desde el traste 7 hasta la selleta; el tramo de la cejuela al traste 7 es el tercio restante. La corrección está en los seis idiomas del módulo, tres de los cuales están en este sitio. Todas las demás páginas solo cambian sus referencias fijadas a Demerzel, de `e203e5a` a `d459d8e`.
+
+Aquí no se ejecutó nada de él.
+
+- **No se ha estudiado aquí,** así que su casilla de arriba sigue vacía.
+
+## 2026-10-03 — MUS-012 · Fórmulas de acordes, notas esenciales y duplicaciones
+
+Sincronizado desde Demerzel en [`450fc67`](https://github.com/GuitarAlchemist/Demerzel/commit/450fc670a71d1cfb190a53bfedd52ba81215fa5c) ([PR #1180](https://github.com/GuitarAlchemist/Demerzel/pull/1180)). Un nuevo módulo de música de nivel intermedio sobre lo que un acorde puede perder: las fórmulas de acordes hasta la decimotercera, las notas esenciales de las que depende el nombre de un acorde y las opcionales que puede perder, las duplicaciones de un voicing de guitarra y un acorde de decimotercera en seis cuerdas. Rastrea lo que GA guarda sobre las fórmulas, las notas esenciales y las duplicaciones, y su sección 6 propone un experimento. El índice de música ahora lo incluye, el de Streeling cuenta 12 módulos de música en lugar de 11, y MUS-018 y MUS-020 bajan un puesto en la barra lateral; todas las demás páginas solo cambian sus referencias fijadas a Demerzel, de `d459d8e` a `450fc67`.
+
+Aquí no se ejecutó nada de él.
+
+- **No se ha estudiado aquí,** así que su casilla de arriba sigue vacía.
+
+## 2026-10-03 — MUS-013 · Fundamental, bajo y conjunto de clases de altura
+
+Sincronizado desde Demerzel en [`928fbb2`](https://github.com/GuitarAlchemist/Demerzel/commit/928fbb26539e451fd34a0e8baf0714cf919a1562) ([PR #1181](https://github.com/GuitarAlchemist/Demerzel/pull/1181)). Un nuevo módulo de música de nivel intermedio sobre lo que fija un nombre de acorde: la fundamental, el bajo y el conjunto de clases de altura, los conjuntos que tienen varias lecturas (acordes de sexta y de séptima, sus2 y sus4, la tríada aumentada y la séptima disminuida), y cómo el bajo, la armonía y la resolución eligen entre ellas. Rastrea cómo GA nombra un conjunto sin mirar su bajo, y su sección 6 propone un experimento. El índice de música ahora lo incluye, el de Streeling cuenta 13 módulos de música en lugar de 12, y MUS-018 y MUS-020 bajan un puesto en la barra lateral; todas las demás páginas solo cambian sus referencias fijadas a Demerzel, de `450fc67` a `928fbb2`.
+
+Aquí no se ejecutó nada de él.
+
+- **No se ha estudiado aquí,** así que su casilla de arriba sigue vacía.
+
+## 2026-10-03 — MUS-010 · Fórmulas de escalas, conjuntos y vector interválico diatónico
+
+Sincronizado desde Demerzel en [`d8c8da5`](https://github.com/GuitarAlchemist/Demerzel/commit/d8c8da550af12f339dbf9464cc1144084eb689b9) ([PR #1183](https://github.com/GuitarAlchemist/Demerzel/pull/1183)). Un nuevo módulo de música de nivel intermedio sobre lo que la escala mayor tiene de raro: una escala como fórmula de intervalos y como conjunto de clases de altura, los vectores interválicos de las escalas mayor, menor armónica, pentatónica y de tonos enteros, el teorema de las notas comunes, y cuatro propiedades de la escala mayor: profunda, propiedad de Myhill, máximamente regular y generada por quintas. Rastrea cómo calcula GA estas propiedades, y su sección 7 propone un experimento. El índice de música ahora lo incluye, el de Streeling cuenta 14 módulos de música en lugar de 13, y MUS-012, MUS-013, MUS-018 y MUS-020 bajan un puesto en la barra lateral; todas las demás páginas solo cambian sus referencias fijadas a Demerzel, de `928fbb2` a `d8c8da5`.
+
+Aquí no se ejecutó nada de él.
+
+- **No se ha estudiado aquí,** así que su casilla de arriba sigue vacía.
+
+## 2026-10-03 — MUS-011 · Modos y familias modales
+
+Sincronizado desde Demerzel en [`499fc64`](https://github.com/GuitarAlchemist/Demerzel/commit/499fc64abe83a5bf7d59efdd949bb23b72925ae2) ([PR #1184](https://github.com/GuitarAlchemist/Demerzel/pull/1184)). Un nuevo módulo de música de nivel intermedio sobre los modos y las familias modales: un modo como rotación de una fórmula de intervalos, los modos relativos y paralelos, cuántos modos distintos tiene una escala, y por qué dos escalas pueden compartir un vector interválico sin ser modos una de otra, por las imágenes especulares y la relación Z. Rastrea cómo agrupa GA los conjuntos en familias modales, y su sección 6 propone un experimento. El índice de música ahora lo incluye, el de Streeling cuenta 15 módulos de música en lugar de 14, y MUS-012, MUS-013, MUS-018 y MUS-020 bajan un puesto en la barra lateral; todas las demás páginas solo cambian sus referencias fijadas a Demerzel, de `d8c8da5` a `499fc64`.
+
+Aquí no se ejecutó nada de él.
+
+- **No se ha estudiado aquí,** así que su casilla de arriba sigue vacía.
+
+## 2026-10-04 — MUS-014 · Inversiones y línea de bajo
+
+Sincronizado desde Demerzel en [`518158b`](https://github.com/GuitarAlchemist/Demerzel/commit/518158b0568981b4ebe290d69f197995bd41ded0) ([PR #1185](https://github.com/GuitarAlchemist/Demerzel/pull/1185)). Un nuevo módulo de música de nivel intermedio sobre las posiciones de los acordes leídas desde el bajo: el estado fundamental y las inversiones, el bajo cifrado de las tríadas y los acordes de séptima, los cuatro tipos de acorde de cuarta y sexta, y los casos en que las notas que suenan no fijan la posición. Rastrea cómo trata GA las inversiones en su tipo `Chord`, sus documentos de voicing y su catálogo de modos, y su sección 6 propone un experimento. El índice de música ahora lo incluye, el de Streeling cuenta 16 módulos de música en lugar de 15, y MUS-018 y MUS-020 bajan un puesto en la barra lateral; todas las demás páginas solo cambian sus referencias fijadas a Demerzel, de `499fc64` a `518158b`.
+
+Aquí no se ejecutó nada de él.
+
+- **No se ha estudiado aquí,** así que su casilla de arriba sigue vacía.
+
+## 2026-10-04 — MUS-019 · Transposición, capotraste y equivalencia entre instrumentos
+
+Sincronizado desde Demerzel en [`0f7a5fd`](https://github.com/GuitarAlchemist/Demerzel/commit/0f7a5fd110acfc4835776d38ab1a115533467d34) ([PR #1186](https://github.com/GuitarAlchemist/Demerzel/pull/1186)). Un nuevo módulo de música de nivel intermedio sobre tres clases de identidad: la transposición, escrita por intervalo y leída en la línea de quintas; el capotraste como diferencia de afinación uniforme, los nombres de forma frente a los nombres del sonido real, y la misma forma en ukeleles y un bajo; y los instrumentos transpositores en si♭, mi♭ y fa. Rastrea cómo transporta GA los conjuntos de clases de altura y los símbolos de acordes y cómo responde a las preguntas de capotraste, y su sección 6 propone un experimento. El índice de música ahora lo incluye, el de Streeling cuenta 17 módulos de música en lugar de 16, y MUS-020 baja un puesto en la barra lateral; todas las demás páginas solo cambian sus referencias fijadas a Demerzel, de `518158b` a `0f7a5fd`.
+
+Aquí no se ejecutó nada de él.
+
 - **No se ha estudiado aquí,** así que su casilla de arriba sigue vacía.

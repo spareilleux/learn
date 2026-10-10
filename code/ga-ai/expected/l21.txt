@@ -1,0 +1,119 @@
+# l21
+
+== What ga_voicing_vocabulary lists, and how ga_search_voicings reads it, at the pin
+roots 18, chord-quality suffixes 45, modes 23, symbolic tags 188
+the query's SYMBOLIC partition: 12 dimensions; a tag sets the one its bit names
+bit  where the registry takes it from                     tags  the first four
+0    SemanticNomenclature, Structure                      6     closed-voicing, dense, open-voicing, resonant
+1    SemanticNomenclature, Register                       5     register:high, register:low, register:mid, register:mid-high
+2    SemanticNomenclature, Playability                    2     beginner-friendly, campfire-chord
+3    GuitarTechniques.yaml                                16    bending, caged-system, chicken-picking, economy-picking
+4    ArticulationTechniques.yaml                          4     accents, legato, slides, staccato
+5    SemanticNomenclature, CAGED                          5     a-shape, c-shape, d-shape, e-shape
+6    SemanticNomenclature, Mood                           8     aggressive, bright, dreamy, melancholy
+7    SemanticNomenclature, Genre                          4     flamenco, jazz, neo-soul, rock-guitar
+8    AdvancedHarmony.yaml                                 23    added-note-chords, augmented-scale, cluster-chords, eleventh-chords
+9    VoiceLeading.yaml                                    28    augmented-fourth, chord-melody-technique, chromatic-voice-leading, contrary-motion
+10   AtonalTechniques.yaml, KeyModulationTechniques.yaml  27    chromatic-mediant, chromatic-trichord, circle-of-fifths-modulation, direct-modulation
+11   IconicChords                                         60    a-hard-day's-night-chord, add9(no3), beatles-chord, beatles-intro-chord
+entries listed twice, with and without hyphens: 8, cmaj9floating, drop2voicings, drop3voicings, messiaen’smode2(octatonic)
+tags that also give the query a chord, a famous chord's: 53
+entries read otherwise when typed alone:
+  g5: nothing
+  schoenberg-op.16-chord: tags schoenberg-op 16-chord
+  schoenbergop.16chord: tags schoenbergop 16chord
+  harmonic minor: mode harmonic minor, tags minor
+  lydian dominant: mode lydian, tags dominant
+  melodic minor: mode melodic minor, tags minor
+  phrygian dominant: mode phrygian, tags dominant
+  whole tone: mode whole tone, tags tone
+
+== The vocabulary's five examples, as the user said them and as it rewrites them, at the pin
+the user said                read as                            rewritten         read as                    same voicings   top scores
+Cmaj7 jazz voicing           chord Cmaj7, tags jazz             Cmaj7 jazz        chord Cmaj7, tags jazz     yes             0.5085, 0.5085
+F# Lydian drop 2             chord F#, mode Lydian, tags drop   F# Lydian drop2   chord F#, mode Lydian, tags drop2 yes             0.5310, 0.5310
+rootless Dm7                 chord Dm7, tags rootless           Dm7 rootless      chord Dm7, tags rootless   yes             0.5085, 0.5085
+something jazzy in F minor   chord F, mode minor, tags jazzy    Fm jazz           chord Fm, tags jazz        no              0.4810, 0.4810
+shell voicing for G7         chord G7, tags shell for           G7 shell          chord G7, tags shell       yes             0.4932, 0.5078
+F minor, read as chord F, mode minor: x-x-x-2-1-1 F/A, x-x-3-2-1-1 F, x-0-x-x-1-1 F/A
+Fm, read as chord Fm: x-x-x-1-1-1 Fm/Ab, x-x-3-1-1-1 Fm, x-3-x-1-x-1 Fm/C
+
+== The 23 modes after a chord, and alone, at the pin
+chord   modes  the same ten voicings as alone the others, as read
+C       23     19                             harmonic minor: mode harmonic minor, tags minor; lydian dominant: mode lydian, tags dominant; melodic minor: mode melodic minor, tags minor; phrygian dominant: mode phrygian, tags dominant
+Am      23     19                             harmonic minor: mode harmonic minor, tags minor; lydian dominant: mode lydian, tags dominant; melodic minor: mode melodic minor, tags minor; phrygian dominant: mode phrygian, tags dominant
+G7      23     19                             harmonic minor: mode harmonic minor, tags minor; lydian dominant: mode lydian, tags dominant; melodic minor: mode melodic minor, tags minor; phrygian dominant: mode phrygian, tags dominant
+Dm7     23     18                             harmonic minor: mode harmonic minor, tags minor; lydian dominant: mode lydian, tags dominant; melodic minor: mode melodic minor, tags minor; phrygian dominant: mode phrygian, tags dominant; whole tone: mode whole tone, tags tone
+modes alone: 18 of 23 answer with every score 0.0000, all the same ten voicings: yes, the index's first ten: yes
+  x-x-x-0-0-0 Em/G, x-x-x-0-0-1 G7(shell), x-x-x-0-0-2 Gmaj7(shell), x-x-x-0-0-3 G + B (Major 3rd), x-x-x-0-1-0 C/G, x-x-x-0-1-1 Csus4/G, x-x-x-0-1-2 C5/G, x-x-x-0-1-3 C5, x-x-x-0-2-0 Dbdim/G, x-x-x-0-2-1 Gm7b5
+  harmonic minor: mode harmonic minor, tags minor, top score 0.0577
+  lydian dominant: mode lydian, tags dominant, top score 0.0577
+  melodic minor: mode melodic minor, tags minor, top score 0.0577
+  phrygian dominant: mode phrygian, tags dominant, top score 0.0577
+  whole tone: mode whole tone, tags tone, top score 0.0577
+
+== The 188 symbolic tags after a chord, at the pin
+chord   tags   different answers  the same ten as the chord alone  bits whose tags all answer alike
+Cmaj7   188    7                  53                               12 of 12
+Dm7     188    7                  53                               12 of 12
+G7      188    5                  76                               12 of 12
+for Cmaj7, the bits whose tags change nothing: 3, 4, 5, 10
+for Cmaj7, jazz and rock-guitar: the same answer yes
+for Cmaj7, shell-voicing and rootless: the same answer yes
+for Cmaj7, jazz and shell-voicing: the same answer no
+
+== "rootless" after a seventh chord, at the pin
+chord   ten voicings, rootless rootless in the index  the first three
+Cmaj7   0 of 10                63                     x-2-2-x-1-x Cmaj7(shell)/B, 0-2-x-x-1-x Cmaj7(shell)/E, 0-2-2-x-1-x Cmaj7(shell)/E
+Dm7     0 of 10                35                     x-3-3-x-3-x Dm7(shell)/C, 1-3-x-x-3-x Dm7(shell)/F, 1-3-0-x-x-x Dm7(shell)/F
+Em7     0 of 10                35                     x-x-x-0-3-0 Em7(shell)/G, x-x-0-0-x-0 Em7(shell)/D, x-x-0-0-3-0 Em7(shell)/D
+Fmaj7   0 of 10                35                     x-x-2-2-x-1 Fmaj7(shell)/E, 0-x-3-2-x-1 Fmaj7(shell)/E, 0-0-3-x-x-1 Fmaj7(shell)/E
+G7      0 of 10                19                     x-2-3-x-x-3 G7(shell)/B, 1-x-x-x-0-3 G7(shell)/F, 1-x-x-0-0-3 G7(shell)/F
+Am7     0 of 10                63                     3-3-x-2-x-x Am7(shell)/G, x-3-2-2-x-x Am/C, 0-3-x-2-x-x Am/E
+C7      0 of 10                35                     x-x-2-3-1-x C7(shell)/E, x-1-2-x-1-x C7(shell)/Bb, 0-x-x-3-1-x C7(shell)/E
+D7      0 of 10                15                     2-3-x-x-3-x D7(shell)/Gb, 2-3-0-x-x-x D7(shell)/Gb, 2-3-0-x-3-x D7(shell)/Gb
+E7      0 of 10                5                      x-x-x-1-3-0 E7(shell)/Ab, 0-x-0-1-3-0 E7(shell), x-x-0-1-x-0 E7(shell)/D
+A7      0 of 10                21                     3-0-x-2-x-x G + A (Major 2nd), 3-x-2-2-x-x A5/G, 3-0-2-2-x-x A5/G
+voicings answered 100: rootless 0
+
+== GA's example queries, and words read as tags, at the pin
+query                                     read as                            top score    words no tag spells, and the tag they match
+Cmaj7 drop2 jazz                          chord Cmaj7, tags drop2 jazz       0.4938       drop2 → drop2voicings
+F# Lydian                                 chord F#, mode Lydian              0.4810
+Dm7                                       chord Dm7                          0.4585
+something warm and mellow                 nothing                            none
+show me Cmaj7 voicings                    chord Cmaj7                        0.4585
+drop-2 Dm7                                chord Dm7, tags drop-2             0.4942       drop-2 → drop-2-voicings
+rootless G7 shapes                        chord G7, tags rootless            0.5078
+Lydian on guitar                          mode Lydian                        0.0000
+jazz voicings                             tags jazz                          0.0577
+shell voicings                            tags shell                         0.0707       shell → shell-voicing
+voicings with a similar quality to F#m7b5 chord F#m7b5                       0.4368
+something warm and dreamy                 tags dreamy                        0.0577
+something jazzy in F minor for a ballad   chord F, mode minor, tags jazzy for 0.4810       jazzy → jazz, for → normal-form
+Find me a mellow Cm9                      chord Cm9                          0.3887
+Rootless Dm7 voicing                      chord Dm7, tags rootless           0.5085
+Drop-2 voicing for Gmaj7                  chord Gmaj7, tags drop-2 for       0.4585       drop-2 → drop-2-voicings, for → normal-form
+Bright open-position Em                   chord Em, tags bright              0.5310
+the course's:
+the best G7 voicing                       chord G7, tags the                 0.4578       the → pitch-axis-theory
+what is a good Am7 voicing                chord Am7, tags what               0.4995       what → so-what-chord
+a sad chord for the end of a song         tags sad for the end               0.0500       for → normal-form, the → pitch-axis-theory, end → beginner-friendly
+
+== The scores, at the pin
+partitions a query fills: STRUCTURE 0.45, SYMBOLIC 0.10, MODAL 0.10, ROOT 0.05; always empty: MORPHOLOGY 0.25, CONTEXT 0.20
+the highest score a query can reach: 0.70
+chord queries 828: the highest top score 0.5250, for E5
+  Cmaj7: 0.4585
+  Cmaj7 jazz: 0.5085
+  Cmaj7 drop2 jazz: 0.4938
+  Cmaj7 shell dreamy jazz: 0.5451
+  G7: 0.4578
+  G7 shell: 0.5078
+  G7 shell for: 0.4932
+
+== The parked draft's example answer for "mellow Cm9", at the pin
+x-3-5-3-3-3 plays C G A# D G; Cm9 is C D D# G A#, and the voicing leaves out D#
+its tag low-density: in the vocabulary no, read as chord Cm9
+its tag rootless-on-bass: in the vocabulary no, read as chord Cm9, tags rootless-on-bass
+its tag quartal-flavour: in the vocabulary no, read as chord Cm9

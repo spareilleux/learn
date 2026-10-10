@@ -41,6 +41,13 @@ public sealed class ChatHost : WebApplicationFactory<Program>
         builder.UseSetting("Ollama:Endpoint", DeadOllama);
         builder.UseSetting("VoicingSearch:OpticIndexPath", Lesson3.IndexPath);
         builder.UseSetting("IX:External:Enabled", "false");
+        // GA's SKILL.md skills call Anthropic's API when a key is set; an empty key here wins over
+        // an ANTHROPIC_API_KEY in the environment, so the course never calls a paid model
+        builder.UseSetting("Anthropic:ApiKey", "");
+        // GA looks for its skills/ folder at the root of the git repository that holds the running
+        // program, which here is the course's repository, not the clone
+        Environment.SetEnvironmentVariable("SKILLMD_SKILLS_PATH",
+            Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", ".ga", "skills")));
         var memoryDir = Path.Combine(AppContext.BaseDirectory, "out", "memory");
         if (Directory.Exists(memoryDir)) Directory.Delete(memoryDir, recursive: true);
         Directory.CreateDirectory(memoryDir);

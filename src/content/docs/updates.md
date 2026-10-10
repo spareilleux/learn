@@ -135,6 +135,138 @@ MAT-007 stays **awaiting verification** until this change is merged, its deploym
 
 MAT-007 therefore moves from awaiting verification to verified; its entry above is left as written. At that readback, the MAT-007 pages linked their source at `8c14336`. As for the modules before it, published is not studied: MAT-007 has not been run or studied here, and its experiment remains proposed.
 
+## 2026-10-02 — Streeling MAT-007 published
+
+[Learn PR #39](https://github.com/spareilleux/learn/pull/39) was merged as `0436325`, and its [Pages deployment](https://github.com/spareilleux/learn/actions/runs/36377803965) succeeded. On 2026-10-02, with `main` at `c547150` and its [deployment](https://github.com/spareilleux/learn/actions/runs/37065792242) succeeded, the [MAT-007 module](../streeling/mathematics/mat-007-least-squares-regularisation/), the mathematics index, the [Streeling journal](../streeling/journal/) and this journal were read back anonymously in the three languages: 12 pages, each answering 200 and mentioning MAT-007.
+
+This readback verifies MAT-007 again after its publication on 2026-09-28; its earlier entries are left as written. At that readback, the MAT-007 pages linked their source at `8c14336`; this update repins them to `e203e5a`. As for the modules before it, published is not studied: MAT-007 has not been run or studied here, and its experiment remains proposed.
+
+## 2026-10-02 — Streeling MAT-008 to MAT-025 and five music modules synced, awaiting verification
+
+Demerzel's `master` reached [`e203e5a`](https://github.com/GuitarAlchemist/Demerzel/commit/e203e5a25e10b85b8d22ece9a700e12447f4a236), after the MAT-007 pin. This update syncs it into Learn:
+- 23 new modules in the three languages: [MAT-008 to MAT-025](../streeling/mathematics/) and, in [music](../streeling/music/), MUS-007, MUS-008, MUS-009, MUS-018 and MUS-020;
+- French and Spanish pages for fifteen modules that had only English here, and the corrections and restored Spanish accents merged in Demerzel since `8c14336`;
+- the department indexes;
+- the [Streeling journal entry](../streeling/journal/).
+
+These modules and translations stay **awaiting verification** until this change is merged, its deployment succeeds and the pages are read back anonymously.
+
+## 2026-10-02 — Streeling MAT-008 to MAT-025, five music modules and fifteen translations published
+
+[Learn PR #114](https://github.com/spareilleux/learn/pull/114) was merged as `48d4e74`, after two corrections to the Streeling journal asked for in an independent review, and its [Pages deployment](https://github.com/spareilleux/learn/actions/runs/37070579523) succeeded. The pages were then read back anonymously in the three languages, 99 module pages in all, each answering 200, naming its module and linking its source at `e203e5a`:
+- the 23 new modules, [MAT-008 to MAT-025](../streeling/mathematics/) and, in [music](../streeling/music/), MUS-007, MUS-008, MUS-009, MUS-018 and MUS-020, in English, French and Spanish;
+- the French and Spanish pages of the fifteen newly translated modules.
+
+The mathematics and music indexes, the [Streeling journal](../streeling/journal/) and this journal answered 200 as well. These modules and translations therefore move from awaiting verification to verified; their entry above is left as written. This update repins their source links to `d459d8e`. Published is not studied: none of them has been run or studied here, and their experiments remain proposed.
+
+## 2026-10-02 — Music theory lessons 9 to 14 published
+
+Each lesson was merged after its CI passed and an independent review of its final head found nothing left open:
+- [Lesson 9](../music-theory-ga/09-voice-leading-and-common-tones/): [PR #90](https://github.com/spareilleux/learn/pull/90), merged as `c547150`;
+- [Lesson 10](../music-theory-ga/10-substitutions-and-modal-mixture/): [PR #99](https://github.com/spareilleux/learn/pull/99), merged as `9722af8`;
+- [Lesson 11](../music-theory-ga/11-modes-in-depth/): [PR #100](https://github.com/spareilleux/learn/pull/100), merged as `c0abd0e`;
+- [Lesson 12](../music-theory-ga/12-symmetry-and-limited-transposition/): [PR #104](https://github.com/spareilleux/learn/pull/104), merged as `641df75`;
+- [Lesson 13](../music-theory-ga/13-extended-and-altered-chords/): [PR #108](https://github.com/spareilleux/learn/pull/108), merged as `e2ce788`;
+- [Lesson 14](../music-theory-ga/14-guitar-voicings/): [PR #111](https://github.com/spareilleux/learn/pull/111), merged as `1364ba4`.
+
+The [Pages deployment](https://github.com/spareilleux/learn/actions/runs/37070289373) of `1364ba4` succeeded, and so did the later one for #114. All six lessons answered 200 anonymously in the three languages, 18 pages in all.
+
+## 2026-10-02 — Streeling PHY-001 correction synced, awaiting verification
+
+[Demerzel PR #1179](https://github.com/GuitarAlchemist/Demerzel/pull/1179) was merged as `d459d8e`, after the `e203e5a` pin. This update syncs it into Learn:
+- the corrected exercise of the [PHY-001 module](../streeling/physics/phy-001-science-of-guitar-sound/), in the three languages: the 2/3 of a perfect fifth is measured from fret 7 to the saddle, not from the nut;
+- the [Streeling journal entry](../streeling/journal/).
+
+PHY-001's correction stays **awaiting verification** until this change is merged, its deployment succeeds and the pages are read back anonymously.
+
+## 2026-10-03 — Streeling PHY-001 correction published
+
+[Learn PR #117](https://github.com/spareilleux/learn/pull/117) was merged as `8183127`, and its [Pages deployment](https://github.com/spareilleux/learn/actions/runs/37072084405) succeeded. The [PHY-001 module](../streeling/physics/phy-001-science-of-guitar-sound/) and the [Streeling journal](../streeling/journal/) were then read back anonymously in the three languages: six pages, each answering 200. The module pages name PHY-001 and link their source at `d459d8e`; the journal pages carry its 2026-10-02 entry.
+
+PHY-001's correction therefore moves from awaiting verification to verified; its entry above is left as written. This update repins the module's source links to `450fc67`. Published is not studied: PHY-001 has not been run or studied here.
+
+## 2026-10-03 — Music theory lesson 15 published
+
+[Lesson 15](../music-theory-ga/15-the-fretboard/) was merged after its CI passed: [PR #119](https://github.com/spareilleux/learn/pull/119), merged as `89dc3e6`. Its [Pages deployment](https://github.com/spareilleux/learn/actions/runs/37083729662) succeeded. The lesson and the [course journal](../music-theory-ga/journal/) answered 200 anonymously in the three languages, six pages in all.
+
+## 2026-10-03 — Streeling MUS-012 synced, awaiting verification
+
+[Demerzel PR #1180](https://github.com/GuitarAlchemist/Demerzel/pull/1180) was merged as `450fc67`, after the `d459d8e` pin. This update syncs it into Learn:
+- the new [MUS-012 module](../streeling/music/mus-012-chord-formulas-essential-tones-doubling/), Chord Formulas, Essential Tones and Doubling, in the three languages;
+- its line in the [music index](../streeling/music/) and in the [Streeling journal](../streeling/journal/), with a dated entry there.
+
+MUS-012 stays **awaiting verification** until this change is merged, its deployment succeeds and the pages are read back anonymously.
+
+## 2026-10-03 — Streeling MUS-012 published
+
+[Learn PR #124](https://github.com/spareilleux/learn/pull/124) was merged as `062e3cb`, after two corrections to the Streeling journal asked for in an independent review, and its [Pages deployment](https://github.com/spareilleux/learn/actions/runs/37143956527) succeeded. The pages were then read back anonymously in the three languages: twelve pages, each answering 200. The [MUS-012 module](../streeling/music/mus-012-chord-formulas-essential-tones-doubling/) pages name MUS-012 and link their source at `450fc67`; the [music index](../streeling/music/) lists it, and the [Streeling journal](../streeling/journal/) and this journal carry their 2026-10-03 entries.
+
+MUS-012 therefore moves from awaiting verification to verified; its entry above is left as written. This update repins its source links to `928fbb2`. Published is not studied: MUS-012 has not been run or studied here, and its experiment remains proposed.
+
+## 2026-10-03 — Streeling MUS-013 synced, awaiting verification
+
+[Demerzel PR #1181](https://github.com/GuitarAlchemist/Demerzel/pull/1181) was merged as `928fbb2`, after the `450fc67` pin. This update syncs it into Learn:
+- the new [MUS-013 module](../streeling/music/mus-013-root-bass-pitch-class-set/), Root, Bass and Pitch-Class Set, in the three languages;
+- its line in the [music index](../streeling/music/) and in the [Streeling journal](../streeling/journal/), with a dated entry there.
+
+MUS-013 stays **awaiting verification** until this change is merged, its deployment succeeds and the pages are read back anonymously.
+
+## 2026-10-03 — Streeling MUS-013 published
+
+[Learn PR #128](https://github.com/spareilleux/learn/pull/128) was merged as `0c918c8`, and its [Pages deployment](https://github.com/spareilleux/learn/actions/runs/37144727921) succeeded. The pages were then read back anonymously in the three languages: twelve pages, each answering 200. The [MUS-013 module](../streeling/music/mus-013-root-bass-pitch-class-set/) pages name MUS-013 and link their source at `928fbb2`; the [music index](../streeling/music/) lists it, and the [Streeling journal](../streeling/journal/) and this journal carry their 2026-10-03 entries.
+
+MUS-013 therefore moves from awaiting verification to verified; its entry above is left as written. This update repins its source links to `d8c8da5`. Published is not studied: MUS-013 has not been run or studied here, and its experiment remains proposed.
+
+## 2026-10-03 — Streeling MUS-010 synced, awaiting verification
+
+[Demerzel PR #1183](https://github.com/GuitarAlchemist/Demerzel/pull/1183) was merged as `d8c8da5`, after the `928fbb2` pin. This update syncs it into Learn:
+- the new [MUS-010 module](../streeling/music/mus-010-scales-pattern-set-interval-vector/), Scale Patterns, Sets and the Diatonic Interval Vector, in the three languages;
+- its line in the [music index](../streeling/music/) and in the [Streeling journal](../streeling/journal/), with a dated entry there.
+
+MUS-010 stays **awaiting verification** until this change is merged, its deployment succeeds and the pages are read back anonymously.
+
+## 2026-10-03 — Streeling MUS-010 published
+
+[Learn PR #132](https://github.com/spareilleux/learn/pull/132) was merged as `9e03205`, and its [Pages deployment](https://github.com/spareilleux/learn/actions/runs/37152236058) succeeded. The pages were then read back anonymously in the three languages: twelve pages, each answering 200. The [MUS-010 module](../streeling/music/mus-010-scales-pattern-set-interval-vector/) pages name MUS-010 and link their source at `d8c8da5`; the [music index](../streeling/music/) lists it, and the [Streeling journal](../streeling/journal/) and this journal carry their 2026-10-03 entries.
+
+MUS-010 therefore moves from awaiting verification to verified; its entry above is left as written. This update repins its source links to `499fc64`. Published is not studied: MUS-010 has not been run or studied here, and its experiment remains proposed.
+
+## 2026-10-03 — Streeling MUS-011 synced, awaiting verification
+
+[Demerzel PR #1184](https://github.com/GuitarAlchemist/Demerzel/pull/1184) was merged as `499fc64`, after the `d8c8da5` pin. This update syncs it into Learn:
+- the new [MUS-011 module](../streeling/music/mus-011-modes-modal-families/), Modes and Modal Families, in the three languages;
+- its line in the [music index](../streeling/music/) and in the [Streeling journal](../streeling/journal/), with a dated entry there.
+
+MUS-011 stays **awaiting verification** until this change is merged, its deployment succeeds and the pages are read back anonymously.
+
+## 2026-10-04 — Streeling MUS-011 published
+
+[Learn PR #138](https://github.com/spareilleux/learn/pull/138) was merged as `aaf6d3e`, and its [Pages deployment](https://github.com/spareilleux/learn/actions/runs/37177089952) succeeded. The pages were then read back anonymously in the three languages: twelve pages, each answering 200. The [MUS-011 module](../streeling/music/mus-011-modes-modal-families/) pages name MUS-011 and link their source at `499fc64`; the [music index](../streeling/music/) lists it, and the [Streeling journal](../streeling/journal/) and this journal carry their 2026-10-03 entries.
+
+MUS-011 therefore moves from awaiting verification to verified; its entry above is left as written. This update repins its source links to `518158b`. Published is not studied: MUS-011 has not been run or studied here, and its experiment remains proposed.
+
+## 2026-10-04 — Streeling MUS-014 synced, awaiting verification
+
+[Demerzel PR #1185](https://github.com/GuitarAlchemist/Demerzel/pull/1185) was merged as `518158b`, after the `499fc64` pin. This update syncs it into Learn:
+- the new [MUS-014 module](../streeling/music/mus-014-inversions-bass-line/), Inversions and the Bass Line, in the three languages;
+- its line in the [music index](../streeling/music/) and in the [Streeling journal](../streeling/journal/), with a dated entry there.
+
+MUS-014 stays **awaiting verification** until this change is merged, its deployment succeeds and the pages are read back anonymously.
+
+## 2026-10-04 — Streeling MUS-014 published
+
+[Learn PR #143](https://github.com/spareilleux/learn/pull/143) was merged as `a0c78d9`, and its [Pages deployment](https://github.com/spareilleux/learn/actions/runs/37215263087) succeeded. The pages were then read back anonymously in the three languages: twelve pages, each answering 200. The [MUS-014 module](../streeling/music/mus-014-inversions-bass-line/) pages name MUS-014 and link their source at `518158b`; the [music index](../streeling/music/) lists it, and the [Streeling journal](../streeling/journal/) and this journal carry their 2026-10-04 entries.
+
+MUS-014 therefore moves from awaiting verification to verified; its entry above is left as written. This update repins its source links to `0f7a5fd`. Published is not studied: MUS-014 has not been run or studied here, and its experiment remains proposed.
+
+## 2026-10-04 — Streeling MUS-019 synced, awaiting verification
+
+[Demerzel PR #1186](https://github.com/GuitarAlchemist/Demerzel/pull/1186) was merged as `0f7a5fd`, after the `518158b` pin. This update syncs it into Learn:
+- the new [MUS-019 module](../streeling/music/mus-019-transposition-capo-cross-instrument/), Transposition, the Capo and Cross-Instrument Equivalence, in the three languages;
+- its line in the [music index](../streeling/music/) and in the [Streeling journal](../streeling/journal/), with a dated entry there.
+
+MUS-019 stays **awaiting verification** until this change is merged, its deployment succeeds and the pages are read back anonymously.
+
 ## To verify
 
 - Check this update's public URLs and catalog after deployment; keep the deploy receipt with the integration record.

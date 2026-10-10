@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- GA pull request #749 (fix for issue #745), three files at its merge commit, compiled
+       against the pinned GA.Business.ML. The files are fetched by ../fetch-ga.sh; lesson 7
+       reaches this assembly through the extern alias fix749 -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <!-- SKEXP0001: GA.Business.ML is marked experimental. CS0436: this assembly's
+         ImprovisationSkill replaces the pinned one of the same name, on purpose -->
+    <NoWarn>$(NoWarn);SKEXP0001;CS0436</NoWarn>
+    <GaRoot>$(MSBuildThisFileDirectory)../.ga/</GaRoot>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="../.ga-fix/*.cs" />
+    <!-- The global usings the three files were written against, from the pinned project -->
+    <Compile Include="$(GaRoot)Common/GA.Business.ML/GlobalUsings.cs" Link="GlobalUsings.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(GaRoot)Common/GA.Business.ML/GA.Business.ML.csproj" />
+  </ItemGroup>
+
+</Project>

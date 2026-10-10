@@ -135,6 +135,138 @@ La [PR Learn #39](https://github.com/spareilleux/learn/pull/39) a été fusionn�
 
 MAT-007 passe donc d'en attente de vérification à vérifié ; son entrée ci-dessus reste telle qu'écrite. Lors de cette relecture, les pages MAT-007 renvoyaient à leur source à `8c14336`. Comme pour les modules précédents, publié ne veut pas dire étudié : MAT-007 n'a été ni exécuté ni étudié ici, et son expérience reste proposée.
 
+## 2026-10-02 — Streeling MAT-007 publié
+
+La [PR Learn #39](https://github.com/spareilleux/learn/pull/39) a été fusionnée en `0436325`, et son [déploiement Pages](https://github.com/spareilleux/learn/actions/runs/36377803965) a réussi. Le 2026-10-02, avec `main` à `c547150` et son [déploiement](https://github.com/spareilleux/learn/actions/runs/37065792242) réussi, le [module MAT-007](../streeling/mathematics/mat-007-least-squares-regularisation/), l'index des mathématiques, le [journal Streeling](../streeling/journal/) et ce journal ont été relus sans authentification dans les trois langues : 12 pages, qui répondent toutes 200 et mentionnent MAT-007.
+
+Cette relecture vérifie de nouveau MAT-007 après sa publication du 2026-09-28 ; ses entrées précédentes restent telles qu'écrites. Lors de cette relecture, les pages MAT-007 renvoyaient à leur source à `8c14336` ; cette mise à jour les réépingle à `e203e5a`. Comme pour les modules précédents, publié ne veut pas dire étudié : MAT-007 n'a été ni exécuté ni étudié ici, et son expérience reste proposée.
+
+## 2026-10-02 — Streeling MAT-008 à MAT-025 et cinq modules de musique synchronisés, en attente de vérification
+
+Le `master` de Demerzel a atteint [`e203e5a`](https://github.com/GuitarAlchemist/Demerzel/commit/e203e5a25e10b85b8d22ece9a700e12447f4a236), après l'épingle de MAT-007. Cette mise à jour le synchronise dans Learn :
+- 23 nouveaux modules dans les trois langues : [MAT-008 à MAT-025](../streeling/mathematics/) et, en [musique](../streeling/music/), MUS-007, MUS-008, MUS-009, MUS-018 et MUS-020 ;
+- des pages françaises et espagnoles pour quinze modules qui n'avaient ici que l'anglais, et les corrections et accents espagnols rétablis fusionnés dans Demerzel depuis `8c14336` ;
+- les index des départements ;
+- l'[entrée du journal Streeling](../streeling/journal/).
+
+Ces modules et traductions restent **en attente de vérification** jusqu'à ce que ce changement soit fusionné, que son déploiement réussisse et que les pages soient relues sans authentification.
+
+## 2026-10-02 — Streeling MAT-008 à MAT-025, cinq modules de musique et quinze traductions publiés
+
+La [PR Learn #114](https://github.com/spareilleux/learn/pull/114) a été fusionnée en `48d4e74`, après la correction de deux formulations du journal demandée en revue indépendante, et son [déploiement Pages](https://github.com/spareilleux/learn/actions/runs/37070579523) a réussi. Les pages ont ensuite été relues sans authentification dans les trois langues, 99 pages de modules en tout, qui répondent toutes 200, nomment leur module et renvoient à leur source à `e203e5a` :
+- les 23 nouveaux modules, [MAT-008 à MAT-025](../streeling/mathematics/) et, en [musique](../streeling/music/), MUS-007, MUS-008, MUS-009, MUS-018 et MUS-020, en anglais, en français et en espagnol ;
+- les pages françaises et espagnoles des quinze modules nouvellement traduits.
+
+Les index des mathématiques et de la musique, le [journal Streeling](../streeling/journal/) et ce journal ont aussi répondu 200. Ces modules et traductions passent donc d'en attente de vérification à vérifiés ; leur entrée ci-dessus reste telle qu'écrite. Cette mise à jour réépingle leurs liens source à `d459d8e`. Publié ne veut pas dire étudié : aucun n'a été exécuté ni étudié ici, et leurs expériences restent proposées.
+
+## 2026-10-02 — Leçons 9 à 14 de théorie musicale publiées
+
+Chaque leçon a été fusionnée après le succès de sa CI et une revue indépendante de son dernier commit qui n'a rien laissé d'ouvert :
+- [Leçon 9](../music-theory-ga/09-voice-leading-and-common-tones/) : [PR #90](https://github.com/spareilleux/learn/pull/90), fusionnée en `c547150` ;
+- [Leçon 10](../music-theory-ga/10-substitutions-and-modal-mixture/) : [PR #99](https://github.com/spareilleux/learn/pull/99), fusionnée en `9722af8` ;
+- [Leçon 11](../music-theory-ga/11-modes-in-depth/) : [PR #100](https://github.com/spareilleux/learn/pull/100), fusionnée en `c0abd0e` ;
+- [Leçon 12](../music-theory-ga/12-symmetry-and-limited-transposition/) : [PR #104](https://github.com/spareilleux/learn/pull/104), fusionnée en `641df75` ;
+- [Leçon 13](../music-theory-ga/13-extended-and-altered-chords/) : [PR #108](https://github.com/spareilleux/learn/pull/108), fusionnée en `e2ce788` ;
+- [Leçon 14](../music-theory-ga/14-guitar-voicings/) : [PR #111](https://github.com/spareilleux/learn/pull/111), fusionnée en `1364ba4`.
+
+Le [déploiement Pages](https://github.com/spareilleux/learn/actions/runs/37070289373) de `1364ba4` a réussi, comme le suivant, celui de #114. Les six leçons ont répondu 200 sans authentification dans les trois langues, 18 pages en tout.
+
+## 2026-10-02 — Correction de Streeling PHY-001 synchronisée, en attente de vérification
+
+La [PR Demerzel #1179](https://github.com/GuitarAlchemist/Demerzel/pull/1179) a été fusionnée en `d459d8e`, après l'épingle de `e203e5a`. Cette mise à jour la synchronise dans Learn :
+- l'exercice corrigé du [module PHY-001](../streeling/physics/phy-001-science-of-guitar-sound/), dans les trois langues : les 2/3 d'une quinte juste se mesurent de la frette 7 au chevalet, pas depuis le sillet ;
+- l'[entrée du journal Streeling](../streeling/journal/).
+
+La correction de PHY-001 reste **en attente de vérification** jusqu'à ce que ce changement soit fusionné, que son déploiement réussisse et que les pages soient relues sans authentification.
+
+## 2026-10-03 — Correction de Streeling PHY-001 publiée
+
+La [PR Learn #117](https://github.com/spareilleux/learn/pull/117) a été fusionnée en `8183127`, et son [déploiement Pages](https://github.com/spareilleux/learn/actions/runs/37072084405) a réussi. Le [module PHY-001](../streeling/physics/phy-001-science-of-guitar-sound/) et le [journal Streeling](../streeling/journal/) ont ensuite été relus sans authentification dans les trois langues : six pages, qui répondent toutes 200. Les pages du module nomment PHY-001 et renvoient à leur source à `d459d8e` ; celles du journal portent son entrée du 2026-10-02.
+
+La correction de PHY-001 passe donc d'en attente de vérification à vérifiée ; son entrée ci-dessus reste telle qu'écrite. Cette mise à jour réépingle les liens source du module à `450fc67`. Publié ne veut pas dire étudié : PHY-001 n'a été ni exécuté ni étudié ici.
+
+## 2026-10-03 — Leçon 15 de théorie musicale publiée
+
+La [leçon 15](../music-theory-ga/15-the-fretboard/) a été fusionnée après le succès de sa CI : [PR #119](https://github.com/spareilleux/learn/pull/119), fusionnée en `89dc3e6`. Son [déploiement Pages](https://github.com/spareilleux/learn/actions/runs/37083729662) a réussi. La leçon et le [journal du cours](../music-theory-ga/journal/) ont répondu 200 sans authentification dans les trois langues, six pages en tout.
+
+## 2026-10-03 — Streeling MUS-012 synchronisé, en attente de vérification
+
+La [PR Demerzel #1180](https://github.com/GuitarAlchemist/Demerzel/pull/1180) a été fusionnée en `450fc67`, après l'épingle de `d459d8e`. Cette mise à jour la synchronise dans Learn :
+- le nouveau [module MUS-012](../streeling/music/mus-012-chord-formulas-essential-tones-doubling/), Formules d'accords, notes essentielles et redoublements, dans les trois langues ;
+- sa ligne dans l'[index de la musique](../streeling/music/) et dans le [journal Streeling](../streeling/journal/), avec une entrée datée dans ce dernier.
+
+MUS-012 reste **en attente de vérification** jusqu'à ce que ce changement soit fusionné, que son déploiement réussisse et que les pages soient relues sans authentification.
+
+## 2026-10-03 — Streeling MUS-012 publié
+
+La [PR Learn #124](https://github.com/spareilleux/learn/pull/124) a été fusionnée en `062e3cb`, après deux corrections du journal Streeling demandées en revue indépendante, et son [déploiement Pages](https://github.com/spareilleux/learn/actions/runs/37143956527) a réussi. Les pages ont ensuite été relues sans authentification dans les trois langues : douze pages, qui répondent toutes 200. Les pages du [module MUS-012](../streeling/music/mus-012-chord-formulas-essential-tones-doubling/) nomment MUS-012 et renvoient à leur source à `450fc67` ; l'[index de la musique](../streeling/music/) le liste, et le [journal Streeling](../streeling/journal/) et ce journal portent leurs entrées du 2026-10-03.
+
+MUS-012 passe donc d'en attente de vérification à vérifié ; son entrée ci-dessus reste telle qu'écrite. Cette mise à jour réépingle ses liens source à `928fbb2`. Publié ne veut pas dire étudié : MUS-012 n'a été ni exécuté ni étudié ici, et son expérience reste proposée.
+
+## 2026-10-03 — Streeling MUS-013 synchronisé, en attente de vérification
+
+La [PR Demerzel #1181](https://github.com/GuitarAlchemist/Demerzel/pull/1181) a été fusionnée en `928fbb2`, après l'épingle de `450fc67`. Cette mise à jour la synchronise dans Learn :
+- le nouveau [module MUS-013](../streeling/music/mus-013-root-bass-pitch-class-set/), Fondamentale, basse et ensemble de classes de hauteurs, dans les trois langues ;
+- sa ligne dans l'[index de la musique](../streeling/music/) et dans le [journal Streeling](../streeling/journal/), avec une entrée datée dans ce dernier.
+
+MUS-013 reste **en attente de vérification** jusqu'à ce que ce changement soit fusionné, que son déploiement réussisse et que les pages soient relues sans authentification.
+
+## 2026-10-03 — Streeling MUS-013 publié
+
+La [PR Learn #128](https://github.com/spareilleux/learn/pull/128) a été fusionnée en `0c918c8`, et son [déploiement Pages](https://github.com/spareilleux/learn/actions/runs/37144727921) a réussi. Les pages ont ensuite été relues sans authentification dans les trois langues : douze pages, qui répondent toutes 200. Les pages du [module MUS-013](../streeling/music/mus-013-root-bass-pitch-class-set/) nomment MUS-013 et renvoient à leur source à `928fbb2` ; l'[index de la musique](../streeling/music/) le liste, et le [journal Streeling](../streeling/journal/) et ce journal portent leurs entrées du 2026-10-03.
+
+MUS-013 passe donc d'en attente de vérification à vérifié ; son entrée ci-dessus reste telle qu'écrite. Cette mise à jour réépingle ses liens source à `d8c8da5`. Publié ne veut pas dire étudié : MUS-013 n'a été ni exécuté ni étudié ici, et son expérience reste proposée.
+
+## 2026-10-03 — Streeling MUS-010 synchronisé, en attente de vérification
+
+La [PR Demerzel #1183](https://github.com/GuitarAlchemist/Demerzel/pull/1183) a été fusionnée en `d8c8da5`, après l'épingle de `928fbb2`. Cette mise à jour la synchronise dans Learn :
+- le nouveau [module MUS-010](../streeling/music/mus-010-scales-pattern-set-interval-vector/), Formules de gammes, ensembles et vecteur d'intervalles diatonique, dans les trois langues ;
+- sa ligne dans l'[index de la musique](../streeling/music/) et dans le [journal Streeling](../streeling/journal/), avec une entrée datée dans ce dernier.
+
+MUS-010 reste **en attente de vérification** jusqu'à ce que ce changement soit fusionné, que son déploiement réussisse et que les pages soient relues sans authentification.
+
+## 2026-10-03 — Streeling MUS-010 publié
+
+La [PR Learn #132](https://github.com/spareilleux/learn/pull/132) a été fusionnée en `9e03205`, et son [déploiement Pages](https://github.com/spareilleux/learn/actions/runs/37152236058) a réussi. Les pages ont ensuite été relues sans authentification dans les trois langues : douze pages, qui répondent toutes 200. Les pages du [module MUS-010](../streeling/music/mus-010-scales-pattern-set-interval-vector/) nomment MUS-010 et renvoient à leur source à `d8c8da5` ; l'[index de la musique](../streeling/music/) le liste, et le [journal Streeling](../streeling/journal/) et ce journal portent leurs entrées du 2026-10-03.
+
+MUS-010 passe donc d'en attente de vérification à vérifié ; son entrée ci-dessus reste telle qu'écrite. Cette mise à jour réépingle ses liens source à `499fc64`. Publié ne veut pas dire étudié : MUS-010 n'a été ni exécuté ni étudié ici, et son expérience reste proposée.
+
+## 2026-10-03 — Streeling MUS-011 synchronisé, en attente de vérification
+
+La [PR Demerzel #1184](https://github.com/GuitarAlchemist/Demerzel/pull/1184) a été fusionnée en `499fc64`, après l'épingle de `d8c8da5`. Cette mise à jour la synchronise dans Learn :
+- le nouveau [module MUS-011](../streeling/music/mus-011-modes-modal-families/), Modes et familles modales, dans les trois langues ;
+- sa ligne dans l'[index de la musique](../streeling/music/) et dans le [journal Streeling](../streeling/journal/), avec une entrée datée dans ce dernier.
+
+MUS-011 reste **en attente de vérification** jusqu'à ce que ce changement soit fusionné, que son déploiement réussisse et que les pages soient relues sans authentification.
+
+## 2026-10-04 — Streeling MUS-011 publié
+
+La [PR Learn #138](https://github.com/spareilleux/learn/pull/138) a été fusionnée en `aaf6d3e`, et son [déploiement Pages](https://github.com/spareilleux/learn/actions/runs/37177089952) a réussi. Les pages ont ensuite été relues sans authentification dans les trois langues : douze pages, qui répondent toutes 200. Les pages du [module MUS-011](../streeling/music/mus-011-modes-modal-families/) nomment MUS-011 et renvoient à leur source à `499fc64` ; l'[index de la musique](../streeling/music/) le liste, et le [journal Streeling](../streeling/journal/) et ce journal portent leurs entrées du 2026-10-03.
+
+MUS-011 passe donc d'en attente de vérification à vérifié ; son entrée ci-dessus reste telle qu'écrite. Cette mise à jour réépingle ses liens source à `518158b`. Publié ne veut pas dire étudié : MUS-011 n'a été ni exécuté ni étudié ici, et son expérience reste proposée.
+
+## 2026-10-04 — Streeling MUS-014 synchronisé, en attente de vérification
+
+La [PR Demerzel #1185](https://github.com/GuitarAlchemist/Demerzel/pull/1185) a été fusionnée en `518158b`, après l'épingle de `499fc64`. Cette mise à jour la synchronise dans Learn :
+- le nouveau [module MUS-014](../streeling/music/mus-014-inversions-bass-line/), Renversements et ligne de basse, dans les trois langues ;
+- sa ligne dans l'[index de la musique](../streeling/music/) et dans le [journal Streeling](../streeling/journal/), avec une entrée datée dans ce dernier.
+
+MUS-014 reste **en attente de vérification** jusqu'à ce que ce changement soit fusionné, que son déploiement réussisse et que les pages soient relues sans authentification.
+
+## 2026-10-04 — Streeling MUS-014 publié
+
+La [PR Learn #143](https://github.com/spareilleux/learn/pull/143) a été fusionnée en `a0c78d9`, et son [déploiement Pages](https://github.com/spareilleux/learn/actions/runs/37215263087) a réussi. Les pages ont ensuite été relues sans authentification dans les trois langues : douze pages, qui répondent toutes 200. Les pages du [module MUS-014](../streeling/music/mus-014-inversions-bass-line/) nomment MUS-014 et renvoient à leur source à `518158b` ; l'[index de la musique](../streeling/music/) le liste, et le [journal Streeling](../streeling/journal/) et ce journal portent leurs entrées du 2026-10-04.
+
+MUS-014 passe donc d'en attente de vérification à vérifié ; son entrée ci-dessus reste telle qu'écrite. Cette mise à jour réépingle ses liens source à `0f7a5fd`. Publié ne veut pas dire étudié : MUS-014 n'a été ni exécuté ni étudié ici, et son expérience reste proposée.
+
+## 2026-10-04 — Streeling MUS-019 synchronisé, en attente de vérification
+
+La [PR Demerzel #1186](https://github.com/GuitarAlchemist/Demerzel/pull/1186) a été fusionnée en `0f7a5fd`, après l'épingle de `518158b`. Cette mise à jour la synchronise dans Learn :
+- le nouveau [module MUS-019](../streeling/music/mus-019-transposition-capo-cross-instrument/), Transposition, capodastre et équivalence entre instruments, dans les trois langues ;
+- sa ligne dans l'[index de la musique](../streeling/music/) et dans le [journal Streeling](../streeling/journal/), avec une entrée datée dans ce dernier.
+
+MUS-019 reste **en attente de vérification** jusqu'à ce que ce changement soit fusionné, que son déploiement réussisse et que les pages soient relues sans authentification.
+
 ## À vérifier
 
 - Contrôler les URL publiques de cette mise à jour et le catalogue après déploiement ; conserver le reçu de déploiement avec le compte rendu d'intégration.

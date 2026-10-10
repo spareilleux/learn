@@ -20,27 +20,27 @@ These modules were written by AI departments and have **not been reviewed**. Unl
 |---|---|---|---|
 | [Audio Engineering](audio-engineering/) | 1 | 1 | 1 |
 | [Cognitive Science](cognitive-science/) | 1 | 1 | 1 |
-| [Computer Science](computer-science/) | 2 | 1 | 1 |
-| [Cybernetics](cybernetics/) | 3 | 0 | 0 |
+| [Computer Science](computer-science/) | 2 | 2 | 2 |
+| [Cybernetics](cybernetics/) | 3 | 2 | 2 |
 | [Data Visualization](data-visualization/) | 0 | 0 | 0 |
 | [Futurology](futurology/) | 1 | 1 | 1 |
 | [Guitar Acoustics & Sound Synthesis](guitar-acoustics/) | 0 | 0 | 0 |
-| [Guitar Alchemist Academy](guitar-alchemist-academy/) | 3 | 1 | 1 |
+| [Guitar Alchemist Academy](guitar-alchemist-academy/) | 3 | 3 | 3 |
 | [Guitar Studies](guitar-studies/) | 2 | 2 | 2 |
-| [Information Theory](information-theory/) | 1 | 0 | 0 |
-| [Mathematics](mathematics/) | 7 | 7 | 7 |
-| [Music](music/) | 6 | 1 | 1 |
-| [Musicology](musicology/) | 2 | 1 | 1 |
-| [Network Science](network-science/) | 1 | 0 | 0 |
+| [Information Theory](information-theory/) | 1 | 1 | 1 |
+| [Mathematics](mathematics/) | 25 | 25 | 25 |
+| [Music](music/) | 17 | 17 | 17 |
+| [Musicology](musicology/) | 2 | 2 | 2 |
+| [Network Science](network-science/) | 1 | 1 | 1 |
 | [Philosophy](philosophy/) | 1 | 1 | 1 |
 | [Physics](physics/) | 1 | 1 | 1 |
 | [Product and Project Management](product-management/) | 1 | 1 | 1 |
-| [Psychohistory](psychohistory/) | 2 | 1 | 1 |
-| [Semiotics](semiotics/) | 1 | 0 | 0 |
+| [Psychohistory](psychohistory/) | 2 | 2 | 2 |
+| [Semiotics](semiotics/) | 1 | 1 | 1 |
 | [Visual Computing](visual-computing/) | 0 | 0 | 0 |
 | [World Music & Languages](world-music-languages/) | 1 | 1 | 1 |
 
 ## Provenance
 
-- Source: [`GuitarAlchemist/Demerzel` → `state/streeling/courses`](https://github.com/GuitarAlchemist/Demerzel/tree/8c14336ecd9601615e08c20dca696cd0e021563e/state/streeling/courses) at commit `8c14336` (2026-09-27), MIT license.
+- Source: [`GuitarAlchemist/Demerzel` → `state/streeling/courses`](https://github.com/GuitarAlchemist/Demerzel/tree/0f7a5fd110acfc4835776d38ab1a115533467d34/state/streeling/courses) at commit `0f7a5fd` (2026-10-04), MIT license.
 - Imported with `npm run sync:streeling`; do not edit these pages by hand — only `journal.md` is kept between syncs.

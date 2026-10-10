@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Probe of Guitar Alchemist for lesson 11 of C# for beginners, at GA commit 5c3a52ab40d0d433f8f68dbbd0590f70c8d8cf26:
+       GA's own MusicalKnowledgeServiceTests.cs, compiled unchanged with the bootstrap, global usings and assembly
+       attribute of its test project, GA.Business.Core.Tests, and the same NUnit packages. ProbeTests.cs is the only
+       file written for the probe. See ../README.md. -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
+    <PackageReference Include="NUnit" Version="4.2.2" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="../../.ga/Tests/Common/GA.Business.Core.Tests/Configuration/MusicalKnowledgeServiceTests.cs" Link="GA/MusicalKnowledgeServiceTests.cs" />
+    <Compile Include="../../.ga/Tests/Common/GA.Business.Core.Tests/TestBootstrap/TestEnvironment.cs" Link="GA/TestEnvironment.cs" />
+    <Compile Include="../../.ga/Tests/Common/GA.Business.Core.Tests/GlobalUsings.cs" Link="GA/GlobalUsings.cs" />
+    <Compile Include="../../.ga/Tests/Common/GA.Business.Core.Tests/AssemblyInfo.cs" Link="GA/AssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../.ga/Common/GA.Domain.Services/GA.Domain.Services.csproj" />
+  </ItemGroup>
+
+</Project>

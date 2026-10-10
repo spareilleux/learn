@@ -34,4 +34,32 @@ The pier ornament was generated locally with SDXL 1.0 and ControlNet Union
 SDXL, licensed Apache-2.0:
 https://huggingface.co/xinsir/controlnet-union-sdxl-1.0
 
+The Hari Seldon statue was generated locally. Z-Image-Turbo drew the concept,
+with its Qwen3 4B text encoder, both licensed Apache-2.0:
+https://huggingface.co/Tongyi-MAI/Z-Image-Turbo
+https://huggingface.co/Qwen/Qwen3-4B
+BiRefNet (MIT) removed the background: https://github.com/ZhengPeng7/BiRefNet
+TRELLIS.2 (MIT) turned the image into a mesh:
+https://github.com/microsoft/TRELLIS.2/blob/75fbf0183001ed9876c8dbb35de6b68552ee08bd/LICENSE
+Built with DINOv3. TRELLIS.2's image encoder is Meta's DINOv3, licensed under
+the DINOv3 License:
+https://github.com/facebookresearch/dinov3/blob/ffb4bb89c6558ca3244655c25a3955d01788b732/LICENSE.md
+
+The palace gardens' images (the palace, the city's towers, the sprigs of
+leaves, the clipped box and the bark of the trees and hedges, the grain of the
+terrace's stone and paving) were generated locally with the same Z-Image-Turbo
+model. BiRefNet cut out the palace and the sprigs. Lotus-D v1.1 depth,
+licensed Apache-2.0, with Stability AI's sd-vae-ft-mse, licensed MIT, found
+the sky over the city's towers:
+https://huggingface.co/jingheya/lotus-depth-d-v1-1
+https://huggingface.co/stabilityai/sd-vae-ft-mse-original
+The trees, the clipped yews and the hedges' sprays, the self-balancing
+scooter, the balusters, pedestals and lanterns are meshes made in Blender by
+scripts written for this scene; Blender's Cycles rendered the trees' distant
+views.
+
+The people in the gardens (a courtier, a lady, a walker and a gardener, with
+no face and no costume from any film or series) are meshes made in Blender by a
+script written for this scene; a shader of our own walks them.
+
 No model weights are included in this distribution.

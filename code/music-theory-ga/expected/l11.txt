@@ -1,0 +1,139 @@
+# l11
+
+== Common tones: C major and the other chords of its key (GA: Chord.FromSymbol, PitchClassSet.Intersect)
+chords         course       GA           check
+C Dm           (none)       (none)       ok
+C Em           4 7          4 7          ok
+  E: M3 in C, P1 in Em; G: P5 in C, m3 in Em
+C F            0            0            ok
+  C: P1 in C, P5 in F
+C G            7            7            ok
+  G: P5 in C, P1 in G
+C Am           0 4          0 4          ok
+  C: P1 in C, m3 in Am; E: M3 in C, P5 in Am
+C Bdim         (none)       (none)       ok
+
+== Common tones of seventh chords and extensions
+chords         course       GA           check
+G7 Cmaj7       7 E          7 E          ok
+  G: P1 in G7, P5 in Cmaj7; B: M3 in G7, M7 in Cmaj7
+Dm7 G7         2 5          2 5          ok
+  D: P1 in Dm7, P5 in G7; F: m3 in Dm7, m7 in G7
+Bm7b5 G7       2 5 E        2 5 E        ok
+  D: m3 in Bm7b5, P5 in G7; F: d5 in Bm7b5, m7 in G7; B: P1 in Bm7b5, M3 in G7
+Cmaj9 Em7      2 4 7 E      2 4 7 E      ok
+  D: M9 in Cmaj9, m7 in Em7; E: M3 in Cmaj9, P1 in Em7; G: P5 in Cmaj9, m3 in Em7; B: M7 in Cmaj9, P5 in Em7
+Cdim7 F7       0 3 9        0 3 9        ok
+  C: P1 in Cdim7, P5 in F7; Eb: m3 in Cdim7, m7 in F7; Bbb/A: d7 in Cdim7, M3 in F7
+C6 Am7         0 4 7 9      0 4 7 9      ok
+  C: P1 in C6, m3 in Am7; E: M3 in C6, P5 in Am7; G: P5 in C6, m7 in Am7; A: M6 in C6, P1 in Am7
+C9 Gm7         2 7 T        2 7 T        ok
+  D: M9 in C9, P5 in Gm7; G: P5 in C9, P1 in Gm7; Bb: m7 in C9, m3 in Gm7
+
+== The smallest voice leading: the course tries every doubling, GA's VoiceLeadingSkill doubles the root
+chords         course GA     check
+C F            3      3      ok
+  course: C->C 0, E->F +1, G->A +2
+C Am           2      2      ok
+  course: C->C 0, E->E 0, G->A +2
+C G            3      3      ok
+  course: C->B -1, E->D -2, G->G 0
+C Dm           5      5      ok
+  course: C->D +2, E->F +1, G->A +2
+C F#           6      6      ok
+  course: C->A# -2, E->C# -3, G->F# -1
+Dm7 G7         3      3      ok
+  course: D->D 0, F->F 0, A->G -2, C->B -1
+G7 Cmaj7       3      3      ok
+  course: G->G 0, B->B 0, D->C -2, F->E -1
+G7 C           4      4      ok
+  course: G->G 0, B->C +1, D->C -2, F->E -1
+C G7           4      4      ok
+  course: C->B -1, E->F +1, G->G 0, C->D +2
+G Cmaj7        3      5      DIFF
+  course: G->G 0, B->C +1, D->E +2, B->B 0
+  GA:     G->E -3, B->B 0, D->C -2, G->G 0
+Fmaj7 Bm7b5    3      3      ok
+  course: F->F 0, A->A 0, C->B -1, E->D -2
+
+== Every triad to every seventh chord, and back: how often doubling the root misses the minimum
+direction          pairs    GA above the minimum, largest gap
+triad -> seventh   2880     1260 (43.8 %), 4 semitones, first Cdim -> Gmaj7
+seventh -> triad   2880     1260 (43.8 %), 4 semitones, first Cmaj7 -> Eaug
+
+== GA's VoiceLeadingSkill: its own ten example prompts against its own chord pattern
+  voice leading from C to F                  C -> F
+  smooth voice leading C to Am               C -> Am
+  best voicing from G7 to Cmaj7              G7 -> Cmaj7
+  how do I voice lead Dm7 to G7              Dm7 -> G7
+  voice leading C major to G major           (no match: the skill answers "Ask about voice leading between two chords")
+  smoothest voicing from Em to A7            Em -> A7
+  voice leading Fmaj7 to Bm7b5               Fmaj7 -> Bm7b5
+  what's the smoothest voicing from D to A   D -> A
+  voice lead C7 to F                         C7 -> F
+  best way to move from G7 to C              G7 -> C
+
+== Guitar voicings in pitch space: the course pairs the notes every way, GA's ga_voice_leading_pair pairs the lowest
+voicings             course GA     check
+C -> Am              5      5      ok
+  x32010 C3 E3 G3 C4 E4  ->  x02210 A2 E3 A3 C4 E4
+G -> C               10     28     DIFF
+  320003 G2 B2 D3 G3 B3 G4  ->  x32010 C3 E3 G3 C4 E4
+G7 -> C              8      28     DIFF
+  320001 G2 B2 D3 G3 B3 F4  ->  x32010 C3 E3 G3 C4 E4
+C (no bass) -> C     3      19     DIFF
+  xx2010 E3 G3 C4 E4  ->  x32010 C3 E3 G3 C4 E4
+G7/B -> C (MCP)      5      5      ok
+  x2xx63 B2 F4 G4  ->  8xx988 C3 E4 G4 C5
+
+== Parallel fifths and octaves, string by string (GA: ProgressionVoiceLeadingAnalyzer)
+voicings           course                         GA                             check
+F -> G barre       5ths 4-2 6-2 6-5; 8ves 4-1 5-2 6-1 6-4 5ths 4-2 6-2 6-5; 8ves 4-1 5-2 6-1 6-4 ok
+E5 -> G5           5ths 6-5; 8ves 6-4             5ths 6-5; 8ves 6-4             ok
+C -> G open        5ths -; 8ves 5-2               5ths -; 8ves 5-2               ok
+G7 -> C open       5ths -; 8ves 5-2               5ths -; 8ves 5-2               ok
+Am -> Dm open      5ths -; 8ves -                 5ths -; 8ves -                 ok
+
+== Distance from C major under OP, OPT and OPTI (GA: VoiceLeadingSpace)
+chords         course       GA           check
+C F            3 0 0        3 0 0        ok
+C Eb           3 0 0        3 0 0        ok
+C Am           2 1 0        2 1 0        ok
+C Cm           1 1 0        1 1 0        ok
+C Caug         1 1 1        1 1 1        ok
+C Cdim         2 1 1        2 1 1        ok
+C F#           6 0 0        6 0 0        ok
+Cmaj7 C7       1 1 1        1 1 1        ok
+C7 Cdim7       3 1 1        3 1 1        ok
+
+== GA's shortcut (cyclic shifts of the sorted chords) against every assignment of voices
+sets           ordered pairs  GA differs from the course
+3 notes, OP    48400          0
+3 notes, OPT   48400          0
+4 notes, OP    245025         0
+4 notes, OPT   245025         0
+
+== Without octave equivalence, with transposition: GA only shifts upward, by 0 to 11 semitones
+from -> to             course GA     check
+C4 major -> B3 major   0      0      ok
+B3 major -> C4 major   0      3      DIFF
+C4 major -> C5 major   0      36     DIFF
+C5 major -> C4 major   0      3      DIFF
+
+== Set classes of the same size: GA's SetClassOpticIndex sums each note's nearest neighbour
+set classes      course GA     check
+(012) -> (048)   6      2      DIFF
+(048) -> (012)   6      6      ok
+  12 trichord classes, 144 ordered pairs:
+  GA below the one-to-one minimum: 35
+  GA above it: 0
+  GA's answer changes when the two are swapped: 70
+
+== Exercise solutions
+question             course       GA           check
+1. F Dm              5 9          5 9          ok
+  F: P1 in F, m3 in Dm; A: M3 in F, P5 in Dm
+2. Am F              1            1            ok
+  A->A 0, C->C 0, E->F +1
+3. A -> B barre      5ths 4-2 6-2 6-5; 8ves 4-1 5-2 6-1 6-4 5ths 4-2 6-2 6-5; 8ves 4-1 5-2 6-1 6-4 ok
+4. C Eb, OP OPT      3 0          3 0          ok
