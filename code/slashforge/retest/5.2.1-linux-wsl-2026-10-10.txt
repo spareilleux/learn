@@ -1,0 +1,25 @@
+# bash retest/recheck.sh 5.2.1 — Ubuntu 26.04 under WSL2, Node v24.12.0 from nodejs.org (SHA-256 checked), 2026-10-10, same machine and hour as the Windows run
+node v24.12.0, Linux, slashforge 5.2.1
+tag v5.2.1 at 7e0e26a78bdfe7e9375a27a17b441d44280325ac
+npm package bin/ == tag bin/
+npm package templates/ == tag templates/
+dry run lists 133, install writes 133
+  written, not announced: 0
+  announced, not written: 0
+files per root: .agents 86  .claude 47  
+dry-run labels: 106 render, 15 copy, 12 write
+closing message names /slashforge-test or /slashforge-refactor: 0 lines
+status lists 8 Claude Code commands
+disable-model-invocation: 0 of 17 Claude Code files, 8 of 17 Cursor and Codex skills
+warnings on a --project install with a global one present: 2
+uninstall with no terminal: Refusing to uninstall without a terminal to confirm on. Re-run with --yes to remove the kit. (exit 1)
+left after uninstall --yes, from two files of mine: ./.claude/setup/slashforge/my-notes.md 
+frontmatter, folded-description: install exit 0
+frontmatter, fence-trailing-space: install exit 0
+  over 200: 210 .claude/commands/mine.md
+  over 200: 250 .claude/rules/api.md
+  over 500: 600 .claude/skills/big/SKILL.md
+step 9 exit 1
+node --test: exit 0, wall 2.7 s
+# tests 278 # pass 271 # fail 0 # skipped 7 
+slowest: 117.6312 upgrading from 4.x removes the old commands and keeps user files

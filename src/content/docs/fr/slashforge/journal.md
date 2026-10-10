@@ -20,6 +20,7 @@ sidebar:
 - [x] Leçon 6 : se l'approprier — règles, vérification, installation d'équipe ; `check.sh` compare désormais 20 sorties
 - [x] Leçon 7 : contribuer en amont, et un retest de 4.5.0 sous Windows
 - [x] SlashForge 5.2.1 revérifié sous Windows : installeur, contrôle de taille de setup et tests du kit ; trois issues ouvertes en amont
+- [x] `retest/recheck.sh` pour les releases 5.x, exécuté sous Windows et sous Linux (WSL2)
 
 ## QA
 
@@ -250,6 +251,32 @@ Versions : tag `v5.2.1` à `7e0e26a`, daté du 2026-10-09 ; Windows 11, Git Bash
 
 Limites : Windows seulement. Aucune exécution avec modèle sur 5.x : rien ici ne dit ce que coûtent les commandes, si les points de contrôle tiennent, ni si Claude Code lance une commande de lui-même.
 
+## 2026-10-10 — SlashForge 5.2.1 sous Linux, et les temps sous Windows en charge
+
+Les vérifications du 2026-10-09 venaient d'un script gardé hors du cours. [`retest/recheck.sh`](https://github.com/spareilleux/learn/blob/main/code/slashforge/retest/recheck.sh) les exécute désormais pour une release 5.x donnée. Il a tourné le 2026-10-10 sous Windows 11 avec Git Bash, et sous Linux : Ubuntu 26.04 sous WSL2, noyau 6.18, avec Node.js 24.12.0 venu de nodejs.org, son SHA-256 vérifié. Les sorties sont [`5.2.1-windows-2026-10-10.txt`](https://github.com/spareilleux/learn/blob/main/code/slashforge/retest/5.2.1-windows-2026-10-10.txt) et [`5.2.1-linux-wsl-2026-10-10.txt`](https://github.com/spareilleux/learn/blob/main/code/slashforge/retest/5.2.1-linux-wsl-2026-10-10.txt).
+
+L'installeur se comporte de la même façon sur les deux systèmes, et comme le 2026-10-09 :
+- 133 fichiers annoncés et 133 écrits, 47 sous `~/.claude` et 86 sous `~/.agents` ;
+- `uninstall` est refusé sans terminal ;
+- un fichier à moi est conservé dans `setup/slashforge/` et perdu dans un dossier de skill du kit ;
+- les deux variantes de frontmatter sont acceptées, et le contrôle de taille signale les trois mêmes fichiers ;
+- le message de fin omet toujours `/slashforge-test` et `/slashforge-refactor` (#106) ;
+- aucun des 17 fichiers Claude Code ne porte `disable-model-invocation`, contre 8 des skills de Cursor et Codex (#105).
+
+Retirer une ligne de la liste annoncée fait signaler un fichier non annoncé : cette comparaison peut donc échouer.
+
+Les propres tests de SlashForge, depuis un clone du tag en fins de ligne LF et avec `SSH_CONNECTION` fixé :
+
+| Système | Durée | Réussis | Échecs | Sautés | Test le plus lent |
+|---|---|---|---|---|---|
+| Linux, WSL2, 2026-10-10 | 2.7 s | 271 | 0 | 7 | 0.12 s |
+| Windows 11, 2026-10-09 | 15.5 s | 269 | 2 | 7 | 0.6 s |
+| Windows 11, 2026-10-10, quatre exécutions | 50.6 à 90.0 s | 269 | 2 | 7 | 5.7 à 14.0 s |
+
+Sous Windows, la durée dépend de la charge. Le clone qui avait pris 15.5 s le 2026-10-09 a pris 50.6 s le 2026-10-10, le processeur étant à 79 % quand je l'ai mesuré après les exécutions. Chaque fois, le test le plus lent était `setup verify step fails on oversized files for cursor and codex`, qui lance beaucoup de processus, et sur la même machine à la même heure la suite a pris 2.7 s sous WSL2. La création de processus sous Windows expliquerait les deux, mais c'est une hypothèse : aucune exécution n'a compté les processus. Les 15.5 s publiées dans le [commentaire sur #83](https://github.com/rajdeepratan/SlashForge/issues/83#issuecomment-6084208546) sont un point de cet intervalle. Les deux échecs sous Windows sont ceux du 2026-10-09. Sous WSL aussi, `SSH_CONNECTION` compte : WSLg fixe `DISPLAY`, donc l'ancienne assertion de l'ouvreur (#104) appellerait `wslview` ou `explorer.exe`.
+
+Limites : un seul Linux, sous WSL2, et pas de macOS. Toujours aucune exécution avec modèle sur 5.x.
+
 ## À vérifier
 
 - Relancer `retest/retest.sh 4.5.0` sous Linux et macOS, et dans WSL ; seul Windows 11 a été retesté.
@@ -257,7 +284,8 @@ Limites : Windows seulement. Aucune exécution avec modèle sur 5.x : rien ici n
 - Exécuter la liste de vérification de l'entrée du 2026-09-26 sur la première release qui annonce les correctifs, avant de changer un statut de QA.
 - Pourquoi le `node --test` de SlashForge a pris 523 s sur 4.4.3 sous Windows. 5.2.1 s'exécute en 15.5 s ([2026-10-09](#2026-10-09--slashforge-521-revérifié)). 4.4.3 n'a pas été relancé : son test de l'ouvreur ouvre une boîte de dialogue d'erreur (voir l'entrée du labo), et 5.2.1 a encore cette assertion (#104), donc toute exécution de la suite sous Windows doit fixer `SSH_CONNECTION`.
 - Si Claude Code lance `/slashforge-code` de lui-même quand une demande correspond à sa description, comme sa documentation le permet : 5.2.1 n'y met pas `disable-model-invocation` (#105). Il faut une exécution avec modèle, avec un plafond.
-- Les vérifications de 5.2.1 sous Linux et macOS.
+- Les vérifications de 5.2.1 sous macOS, et sous un Linux qui ne soit pas WSL2.
+- Pourquoi la suite de SlashForge prend 50 à 90 s sur une machine Windows chargée et 2.7 s sous WSL2 sur la même machine. La création de processus est une hypothèse, pas une mesure.
 - Pourquoi e1 a indiqué 15 tours sous `--max-turns 10` et s'est terminée normalement, alors que e1b s'est arrêtée à 11.
 - Si le modèle trouve `.claude/setup/slashforge/…` quand Claude Code est démarré dans un sous-dossier d'un dépôt avec une installation de projet (leçon 2).
 - Le coût d'un workflow complet au-delà de ses points de contrôle. Le labo s'arrête au premier point de contrôle par conception ; aller plus loin suppose d'y répondre, ce qui est la décision de l'auteur.
