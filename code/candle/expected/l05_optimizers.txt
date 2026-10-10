@@ -1,0 +1,16 @@
+== one SGD step, learning rate 0.1, f64
+candle  [0.6, -0.8, 1.8]
+by hand [0.6, -0.8, 1.8]
+bit for bit: true
+
+== three AdamW steps, learning rate 0.1, the other parameters at their defaults
+ParamsAdamW { lr: 0.1, beta1: 0.9, beta2: 0.999, eps: 1e-8, weight_decay: 0.01 }
+step 1: candle [0.599499999000, -1.148750000222, 1.898000000500], by hand [0.599499999000, -1.148750000222, 1.898000000500], within 1e-12 true, bit for bit true
+step 2: candle [0.697722949537, -1.047747696713, 1.796525861893], by hand [0.697722949537, -1.047747696713, 1.796525861893], within 1e-12 true, bit for bit true
+step 3: candle [0.793378661636, -0.947100267638, 1.695937627111], by hand [0.793378661636, -0.947100267638, 1.695937627111], within 1e-12 true, bit for bit true
+
+== the variables an optimizer keeps
+SGD::new with a U32 and an F32 variable: ok, it keeps 1
+AdamW::new with the same two variables: ok
+a step on a loss of `used` only: used changed true, unused changed false
+exit 0
