@@ -11,5 +11,5 @@ sidebar:
 
 ## Módulos
 
-- [GTR-001 · El mapa del diapason](gtr-001-the-fretboard-map/)
+- [GTR-001 · El mapa del diapasón](gtr-001-the-fretboard-map/)
 - [GTR-002 · Geometria CAGED: por que cinco formas gobiernan el diapason](gtr-002-caged-geometry/)

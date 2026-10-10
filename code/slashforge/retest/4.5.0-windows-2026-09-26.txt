@@ -1,0 +1,78 @@
+# bash retest/retest.sh 4.5.0 — Windows 11, Git Bash, Node v24.12.0, 2026-09-26
+v24.12.0
+slashforge 4.5.0
+FAIL l01_help
+FAIL l01_dry_run
+FAIL l01_install
+FAIL l01_files
+FAIL l01_dry_run_vs_install
+FAIL l01_meta
+FAIL l01_status
+FAIL l01_reinstall
+FAIL l01_project
+FAIL l01_project_files
+FAIL l01_uninstall
+FAIL l01_after_uninstall
+FAIL l01_uninstall_again
+FAIL l02_installer_functions
+ok   l02_render
+FAIL l02_global_vs_project
+FAIL l02_sizes
+ok   l02_broken_template
+ok   l02_broken_template_files
+ok   l06_verify_glob
+check.sh exit 1
+--- l01_dry_run_vs_install
+dry-run lists 34 files
+install wrote 34 files
+written but not in the dry-run (0):
+in the dry-run but not written (0):
+--- l01_uninstall
+Refusing to uninstall without a terminal to confirm on. Re-run with --yes to remove the kit.
+exit 1
+--- l02_installer_functions
+# A file path under commands/ becomes the name you type
+slashforge/setup.md            /slashforge:setup
+slashforge/code.md             /slashforge:code
+slashforge/investigate.md      /slashforge:investigate
+slashforge/review-pr.md        /slashforge:review-pr
+slashforge/brainstorm.md       /slashforge:brainstorm
+slashforge/plan.md             /slashforge:plan
+slashforge/debug.md            /slashforge:debug
+slashforge/tdd.md              /slashforge:tdd
+slashforge/verify.md           /slashforge:verify
+slashforge/review-feedback.md  /slashforge:review-feedback
+slashforge/request-review.md   /slashforge:request-review
+slashforge/worktree.md         /slashforge:worktree
+slashforge/parallel.md         /slashforge:parallel
+
+# The two install modes
+global   guides   /home/ada/.claude/setup/slashforge
+global   commands /home/ada/.claude/commands
+global   {{INSTALL_PATH}} = /home/ada/.claude/setup/slashforge
+project  guides   /src/app/.claude/setup/slashforge
+project  commands /src/app/.claude/commands
+project  {{INSTALL_PATH}} = .claude/setup/slashforge
+
+# What the frontmatter check refuses
+no opening fence: demo.md: missing opening '---' frontmatter fence
+no closing fence: demo.md: missing closing '---' frontmatter fence
+no description: demo.md: frontmatter missing required field 'description'
+a key with a space: demo.md: invalid frontmatter at line 3: "long description: d"
+a closing fence with a trailing space: ok {"name":"/demo","description":"d"}
+a folded YAML description: ok {"name":"/demo","description":"two lines of text"}
+valid: ok {"name":"/demo","description":"d"}
+--- dry-run labels
+      4   copy 
+     29   render 
+--- shadowing warning on a project install
+⚠  A global install (v4.5.0) is in ~/.claude.
+   Claude Code prefers personal commands, so the global install runs instead of
+   this project copy. `npx slashforge uninstall --yes` removes the global one.
+exit 0
+--- templates running inline node -e
+0
+--- Step 9 on three repositories
+ok: 4.4.3 glob sees 0 skill file(s); 4.5.0 find exits 0 
+big: 4.4.3 glob sees 0 skill file(s); 4.5.0 find exits 1 (over 500:  600 .claude/skills/add/SKILL.md)
+nested: 4.4.3 glob sees 0 skill file(s); 4.5.0 find exits 1 (over 200: 250 .claude/skills/add/ref/notes.md)

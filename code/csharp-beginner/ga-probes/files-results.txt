@@ -1,0 +1,14 @@
+=== a. IconicChords.yaml: the four paths that FindYamlFile tries, in order ===
+next to the program: found
+in the current directory: not found
+in <current directory>/Common/GA.Business.Config: not found
+four folders above the program, then Common/GA.Business.Config: not found
+Iconic chords loaded: 17, the first one: Hendrix Chord
+
+=== b. IconicChordsConfigLoader.ReloadConfiguration() ===
+FieldAccessException: Cannot set initonly static field '_configuration' after type 'GA.Domain.Services.IconicChordsConfigLoader' is initialized.
+
+=== c. ScaleVideoUrlById ===
+GA.Domain.Core resources: 0, named *scale_video_urls*: 0
+Fallback file next to the assembly: not found
+Scales with a video URL: 0

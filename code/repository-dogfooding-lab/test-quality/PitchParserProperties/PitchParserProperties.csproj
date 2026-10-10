@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Property tests against GuitarAlchemist/ga's real GA.Domain.Core, compiled from the pinned sparse checkout that
+       fetch-ga.sh writes to ../.ga (override with -p:GaDir=...). NUnit and the test SDK are at the versions of GA's own
+       Tests/GA.Domain.Core.Tests project, so both test projects can share one Stryker run. -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+    <GaDir Condition="'$(GaDir)' == ''">$(MSBuildThisFileDirectory)..\.ga</GaDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FsCheck" Version="3.4.0" />
+    <PackageReference Include="FsCheck.NUnit" Version="3.4.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+    <PackageReference Include="NUnit" Version="4.2.2" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(GaDir)\Common\GA.Domain.Core\GA.Domain.Core.csproj" />
+  </ItemGroup>
+
+</Project>

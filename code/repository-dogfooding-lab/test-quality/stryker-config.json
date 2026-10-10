@@ -1,0 +1,13 @@
+{
+  "stryker-config": {
+    "project": "GA.Domain.Core.csproj",
+    "test-projects": [
+      ".ga/Tests/GA.Domain.Core.Tests/GA.Domain.Core.Tests.csproj",
+      "PitchParserProperties/PitchParserProperties.csproj"
+    ],
+    "mutate": ["**/Primitives/Notes/PitchParser.cs"],
+    "concurrency": 2,
+    "test-case-filter": "TestCategory!=NegativeControl",
+    "reporters": ["json", "cleartext", "markdown"]
+  }
+}

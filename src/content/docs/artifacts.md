@@ -29,6 +29,14 @@ A usage audit of IX's 81 crates, ranked by what actually runs them rather than b
 
 How [ComfyUI](https://docs.comfy.org/) image generation was wired into Demerzel as a governed provider: every texture request goes through a budget gate, runs locally on the GPU, and leaves a provenance record (seed, workflow hash, prompt, consumer). The budget gate is interactive — pick a provider and a cost and watch it allow, block or fail closed.
 
+## 3D and graphics
+
+### GA Ocean — TSL/WebGPU
+
+[Open the artifact](https://claude.ai/artifact/P5JPUkCRR1cYc4herNiR9F) · shared-link access checked without sign-in on 2026-09-26
+
+The Ocean demo has a standalone Claude artifact with calm, stormy, sunset and night presets, and a Saint-Malo background. It complements the [three.js course](../threejs/). A WebGPU-capable browser is needed for the renderer; opening the shared page is not a cross-browser rendering or performance test. The artifact credits its Saint-Malo photograph and license.
+
 ## Music and guitar
 
 ### Banc de Placement

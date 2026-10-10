@@ -39,6 +39,7 @@ Terminer un cours n'est pas une réussite. Le résultat utile est une adoption p
 | 3 | [Dogfooder la méthode de cours](03-course-method-dogfood/) | Améliorer exemples, journaux, parité des langues et adoption |
 | 4 | [Incuber, intégrer, rejeter](04-incubate-integrate-reject/) | Ne promouvoir que des candidats mesurés et réversibles |
 | 5 | [Frontière d'autorité Jev × Pétri](05-jev-petri-authority/) | Montrer pourquoi un avis confiant n'accorde aucun effet |
+| 6 | [Tests de mutation et de propriétés](06-mutation-property-testing/) | Mesurer quelles fautes détectent les tests d'un vrai parseur, avec une pré-inscription et un témoin négatif |
 | — | [Journal](journal/) | Expériences détaillées, rejets et prochains gates |
 
 ```text

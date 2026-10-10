@@ -1,0 +1,87 @@
+result
+Table Page has been created.
+result
+Table LINKS_TO has been created.
+result,skipped_duplicate_pk_count,skipped_duplicate_pks
+3 tuples have been copied to the Page table.,0,[]
+result
+2 tuples have been copied to the LINKS_TO table.
+links,between,reached
+2,[/fr/lab/paths/],/lab/paths/
+
+Error: Copy exception: Unable to find primary key value /es/lab/paths/.
+links
+2
+found_by_key
+1
+result
+1 tuples have been copied to the LINKS_TO table.
+1 warnings encountered during copy. Use 'CALL show_warnings() RETURN *' to view the actual warnings. Query ID: 9
+message,line_number
+Unable to find primary key value /es/lab/paths/.,3
+links
+3
+result
+Table LINKS_TO has been dropped.
+result
+Table Page has been dropped.
+result
+Table Page has been created.
+result
+Table LINKS_TO has been created.
+result
+Table REQUIRES has been created.
+result,skipped_duplicate_pk_count,skipped_duplicate_pks
+8 tuples have been copied to the Page table.,0,[]
+english_page,missing
+/lab/paths/,es
+missing_in_complete_groups
+0
+english_page,missing
+/lab/cycles/,es
+/lab/intro/,es
+/lab/paths/,es
+/lab/paths/,fr
+result
+4 tuples have been copied to the LINKS_TO table.
+result
+2 tuples have been copied to the REQUIRES table.
+prerequisite_cycles
+0
+page,links
+/lab/intro/,2
+/lab/paths/,2
+prerequisite,depth
+/lab/intro/,2
+/lab/paths/,1
+prerequisite,depth
+/lab/paths/,1
+reached,clicks
+/lab/cycles/,2
+/lab/paths/,1
+result
+Table REQUIRES has been dropped.
+result
+Table REQUIRES has been created.
+result
+3 tuples have been copied to the REQUIRES table.
+page,length,through
+/lab/cycles/,3,"[/lab/intro/,/lab/paths/]"
+/lab/intro/,3,"[/lab/paths/,/lab/cycles/]"
+/lab/paths/,3,"[/lab/cycles/,/lab/intro/]"
+open_path
+"[/lab/cycles/,/lab/paths/,/lab/intro/]"
+closed_path
+"[/lab/cycles/,/lab/intro/,/lab/paths/,/lab/cycles/]"
+result,skipped_duplicate_pk_count,skipped_duplicate_pks
+6 tuples have been copied to the Page table.,0,[]
+result
+6 tuples have been copied to the REQUIRES table.
+closed_trails
+0
+closed_trails,min_length,max_length
+6,6,6
+prerequisite,depth
+/lab/s2/,1
+/lab/s3/,2
+/lab/s4/,3

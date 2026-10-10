@@ -4,7 +4,13 @@ description: Aprender en público — cursos escritos a medida que aprendo.
 template: splash
 hero:
   tagline: Cursos escritos mientras aprendo, publicados tal cual — con los errores, los callejones sin salida y lo que al final funcionó.
+  image:
+    file: ../../../assets/home/research-observatory.webp
+    alt: "Arte conceptual: el interior de una biblioteca-observatorio circular, de noche. Galerías de estanterías en anillos se elevan bajo una cúpula de cristal surcada de órbitas, ornamentos de plata fluidos suben por los arcos de piedra, y finos rayos de luz verde caen sobre una cabina de acero remachada en el centro, con la puerta abierta a un pasillo cálido e iluminado."
   actions:
+    - text: Explorar el observatorio 3D
+      link: observatory/
+      icon: right-arrow
     - text: Skills de Matt Pocock
       link: agentic-coding/05-matt-pocock-skills/
       icon: rocket
@@ -18,6 +24,10 @@ hero:
 ---
 
 import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+*Arte conceptual, no un diagrama: un observatorio de investigación donde una biblioteca, ornamentos alquímicos, una luz de cálculo que cae como lluvia y una caja de investigación sellada comparten una misma sala. La imagen se inspira en* Fundación *de Asimov, en* Matrix *y en* Dark Matter, *sin copiar nada de ellas. Generada en la máquina del autor con ComfyUI 0.36.0 y Z-Image-Turbo (licencia Apache 2.0), semilla 20260927; se recortaron los 48 píxeles superiores para quitar un número parásito. [Prompt, workflow y tiempos de generación](https://github.com/spareilleux/learn/tree/main/code/site-visuals).*
+
+[Diario de actualizaciones y tablero de entregas](updates/) — publicaciones, pruebas y solicitudes pendientes.
 
 ## Por qué este sitio
 
@@ -230,6 +240,12 @@ Son públicos para que otros puedan aprovecharlos — y corregirme.
 	title="Gaia: coordinar agentes con evidencia"
 	description="Coordinación con evidencia después de un agente — seis verbos sin privilegios, replay de solo anexión, recibos de fábrica, límites medidos y una artifact chain de continuidad acotada desde un wake exacto hasta la validación de solo lectura en Demerzel."
 	href="gaia/"
+/>
+
+<LinkCard
+	title="AutoHarness, skills que se escriben solas para Claude Code"
+	description="Un plugin de Claude Code que escribe y poda sus propias skills — leído en un commit fijado, probado con fixtures prerregistradas en un laboratorio aislado, sin instalarlo ni llamar a un modelo, y juzgado por la evidencia y no por su README."
+	href="autoharness/"
 />
 
 ### Aprendizaje automático

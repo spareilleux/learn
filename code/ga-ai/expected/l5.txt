@@ -1,0 +1,94 @@
+# l5
+
+== ImprovisationSkill.ExecuteAsync("which arpeggio fits Am F C G")
+  | Over **Am – F – C – G**, for each chord:
+  |
+  | - **Am** → arpeggio **Am**, play **A Aeolian (natural minor)** (diatonic minor — fits most i chords).
+  | - **F** → arpeggio **F**, play **F Ionian (major)** (diatonic, includes the 7 — careful on the IV chord).
+  | - **C** → arpeggio **C**, play **C Ionian (major)** (diatonic, includes the 7 — careful on the IV chord).
+  | - **G** → arpeggio **G**, play **G Ionian (major)** (diatonic, includes the 7 — careful on the IV chord).
+  |
+  | Each arpeggio spells the chord tones; the scale adds the passing notes for lines between them.
+assumption: Each chord classified independently from its written quality; no key inferred.
+
+== ImprovisationSkill.ExecuteAsync("arpeggios over Cmaj7 C7 Cm7 Cm7b5 Cdim Cdim7 Caug C6 Cm6 C7#11 Cm7#5 Cmaj7#5 C7sus4 CmMaj7 Csus4 Csus2 C5")
+written: Cmaj7 C7 Cm7 Cm7b5 Cdim Cdim7 Caug C6 Cm6 C7#11 Cm7#5 Cmaj7#5 C7sus4 CmMaj7 Csus4 Csus2 C5
+read:    Cmaj7 C7 Cm7 Cm7b5 Cdim Cdim7 Caug C6 Cm6 C7#11 Cm7#5 Cmaj7 Csus4 Csus2 C5
+
+written  read as    quality                 arpeggio  lead scale                       check
+Cmaj7               major 7                 Cmaj7     C Ionian (major)                 ok
+C7                  dominant 7              C7        C Mixolydian                     ok
+Cm7                 minor 7                 Cm7       C Dorian                         ok
+Cm7b5               half-diminished (m7b5)  Cm7b5     C Locrian                        ok
+Cdim                diminished triad        Cdim      C Locrian                        ok
+Cdim7               diminished 7            Cdim7     C Whole-Half Diminished          ok
+Caug                augmented               Caug      C Whole Tone                     ok
+C6                  major triad             C         C Ionian (major)                 arpeggio drops A
+Cm6                 minor major 7           CmMaj7    C Melodic Minor                  arpeggio adds B; arpeggio drops A
+C7#11               dominant 7              C7        C Mixolydian                     arpeggio drops F#; scale lacks F# (choice 2 of 3 has it)
+Cm7#5               augmented               Caug      C Whole Tone                     arpeggio adds E; arpeggio drops Eb Bb; scale lacks Eb (none of 2 choices has it)
+Cmaj7#5  Cmaj7      major 7                 Cmaj7     C Ionian (major)                 arpeggio adds G; arpeggio drops G#; scale lacks G# (none of 2 choices has it)
+C7sus4   (dropped)
+CmMaj7   (dropped)
+Csus4               unknown                 C         C Major scale of the chord root  arpeggio adds E; arpeggio drops F
+Csus2               unknown                 C         C Major scale of the chord root  arpeggio adds E; arpeggio drops D
+C5                  unknown                 C         C Major scale of the chord root  arpeggio adds E
+
+== ImprovisationSkill.ExecuteAsync("which arpeggio fits Dm7 G7 Cmaj7") against the key
+key: C major / A minor; chord tones outside it: 0
+
+chord  arpeggio  GA lead scale              foreign   textbook                  rank   verdict
+Dm7    Dm7       D Dorian                   -         D Dorian                  1      same
+G7     G7        G Mixolydian               -         G Mixolydian              1      same
+Cmaj7  Cmaj7     C Ionian (major)           -         C Ionian                  1      same
+
+== ImprovisationSkill.ExecuteAsync("which arpeggio fits Am F C G") against the key
+key: C major / A minor; chord tones outside it: 0
+
+chord  arpeggio  GA lead scale              foreign   textbook                  rank   verdict
+Am     Am        A Aeolian (natural minor)  -         A Aeolian                 1      same
+F      F         F Ionian (major)           Bb        F Lydian                  2      DIFF
+C      C         C Ionian (major)           -         C Ionian                  1      same
+G      G         G Ionian (major)           F#        G Mixolydian              -      DIFF
+
+== ImprovisationSkill.ExecuteAsync("which arpeggio fits Em C G D") against the key
+key: G major / E minor; chord tones outside it: 0
+
+chord  arpeggio  GA lead scale              foreign   textbook                  rank   verdict
+Em     Em        E Aeolian (natural minor)  -         E Aeolian                 1      same
+C      C         C Ionian (major)           F         C Lydian                  2      DIFF
+G      G         G Ionian (major)           -         G Ionian                  1      same
+D      D         D Ionian (major)           C#        D Mixolydian              -      DIFF
+
+== ImprovisationSkill.ExecuteAsync("which arpeggio fits C A Dm G") against the key
+key: C major / A minor; chord tones outside it: 1
+
+chord  arpeggio  GA lead scale              foreign   textbook                  rank   verdict
+C      C         C Ionian (major)           -         C Ionian                  1      same
+A      A         A Ionian (major)           F# G#     A Mixolydian b6           -      DIFF
+Dm     Dm        D Aeolian (natural minor)  Bb        D Dorian                  2      DIFF
+G      G         G Ionian (major)           F#        G Mixolydian              -      DIFF
+
+== ImprovisationSkill.ExecuteAsync("which arpeggio fits Am Dm E") against the key
+key: C major / A minor; chord tones outside it: 1
+
+chord  arpeggio  GA lead scale              foreign   textbook                  rank   verdict
+Am     Am        A Aeolian (natural minor)  -         A Aeolian                 1      same
+Dm     Dm        D Aeolian (natural minor)  Bb        D Dorian                  2      DIFF
+E      E         E Ionian (major)           F# C# D#  E Phrygian dominant       -      DIFF
+
+== ImprovisationSkill.ExecuteAsync("which arpeggio fits C G") against the key
+key: C major / A minor or G major / E minor; chord tones outside it: 0
+
+chord  arpeggio  GA lead scale              foreign   textbook                  rank   verdict
+C      C         C Ionian (major)           - | F     C Ionian | C Lydian       1 | 2  same in C major / A minor
+G      G         G Ionian (major)           F# | -    G Mixolydian | G Ionian   - | 1  same in G major / E minor
+
+== ImprovisationSkill.ExecuteAsync("which arpeggio fits C Fm G C") against the key
+key: C major / A minor; chord tones outside it: 1
+
+chord  arpeggio  GA lead scale              foreign   textbook                  rank   verdict
+C      C         C Ionian (major)           -         C Ionian                  1      same
+Fm     Fm        F Aeolian (natural minor)  Bb Db Eb  F (0 2 3 6 7 9 11)        -      DIFF
+G      G         G Ionian (major)           F#        G Mixolydian              -      DIFF
+C      C         C Ionian (major)           -         C Ionian                  1      same

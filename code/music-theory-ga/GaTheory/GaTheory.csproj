@@ -16,4 +16,59 @@
     <ProjectReference Include="$(GaRoot)Common/GA.Business.Config/GA.Business.Config.fsproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <!-- Lesson 9 compiles four files of GA.Domain.Services as they are, without the project and its dependencies -->
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Atonal/VoiceLeadingSpace.cs" Link="Ga/VoiceLeadingSpace.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Atonal/SetClassOpticIndex.cs" Link="Ga/SetClassOpticIndex.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Voicings/Analysis/ProgressionVoiceLeadingAnalyzer.cs" Link="Ga/ProgressionVoiceLeadingAnalyzer.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Voicings/Analysis/ProgressionVoiceLeadingReport.cs" Link="Ga/ProgressionVoiceLeadingReport.cs" />
+    <!-- Lesson 10 compiles the ICV distance, the chord template factory and the GaApi service behind get_borrowed_chords, as they are,
+         with the global usings of GA.Domain.Services that the first four rely on -->
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/GlobalUsings.cs" Link="Ga/GlobalUsings.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Atonal/Grothendieck/GrothendieckDelta.cs" Link="Ga/GrothendieckDelta.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Atonal/Grothendieck/GrothendieckService.cs" Link="Ga/GrothendieckService.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Atonal/Grothendieck/IGrothendieckService.cs" Link="Ga/IGrothendieckService.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Chords/ChordTemplateFactory.cs" Link="Ga/ChordTemplateFactory.cs" />
+    <Compile Include="$(GaRoot)Apps/ga-server/GaApi/Services/ContextualChordService.cs" Link="Ga/ContextualChordService.cs" />
+    <Compile Include="$(GaRoot)Apps/ga-server/GaApi/Models/ContextualChords.cs" Link="Ga/ContextualChords.cs" />
+    <!-- Lesson 11 compiles the service that ranks the modes of a family by brightness, as it is -->
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Unified/UnifiedModeService.cs" Link="Ga/UnifiedModeService.cs" />
+    <!-- Lesson 12 compiles the atonal chord analysis, as it is, to call its private symmetry test -->
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Chords/Analysis/Atonal/AtonalChordAnalysisService.cs" Link="Ga/AtonalChordAnalysisService.cs" />
+    <!-- Lesson 13 compiles GA's second chord-symbol parser and the services that name extensions and alterations, as they are -->
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Chords/Parsing/ChordSymbolParser.cs" Link="Ga/ChordSymbolParser.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Chords/BasicChordExtensionsService.cs" Link="Ga/BasicChordExtensionsService.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Chords/ChordAlterationService.cs" Link="Ga/ChordAlterationService.cs" />
+    <!-- Lesson 14 compiles GA's voicing generator, analyzers and filters, as they are, with the chord recognizer and the fret
+         distances they call, and the analysis records of GA.Business.Core they return -->
+    <Compile Include="$(GaRoot)Common/GA.Business.Core/Analysis/**/*.cs" Link="Ga/Analysis/%(RecursiveDir)%(Filename)%(Extension)" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Chords/CanonicalChordRecognizer.cs" Link="Ga/CanonicalChordRecognizer.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Analysis/PhysicalFretboardCalculator.cs" Link="Ga/PhysicalFretboardCalculator.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Voicings/Analysis/VoicingAnalyzer.cs" Link="Ga/VoicingAnalyzer.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Voicings/Analysis/VoicingHarmonicAnalyzer.cs" Link="Ga/VoicingHarmonicAnalyzer.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Voicings/Analysis/VoicingPhysicalAnalyzer.cs" Link="Ga/VoicingPhysicalAnalyzer.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Voicings/Analysis/VoicingTagEnricher.cs" Link="Ga/VoicingTagEnricher.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Voicings/Analysis/ChordClassificationEngine.cs" Link="Ga/ChordClassificationEngine.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Voicings/Analysis/ChordClassificationContext.cs" Link="Ga/ChordClassificationContext.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Voicings/Generation/VoicingGenerator.cs" Link="Ga/VoicingGenerator.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Voicings/Generation/VoicingDecomposer.cs" Link="Ga/VoicingDecomposer.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Voicings/Filtering/VoicingFilters.cs" Link="Ga/VoicingFilters.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Voicings/Filtering/VoicingFilterCriteria.cs" Link="Ga/VoicingFilterCriteria.cs" />
+    <!-- Lesson 15 compiles GA's fret geometry, the static cost of a shape with the player profile it reads, and the biomechanical
+         analyzer with its records, as they are -->
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Analysis/FretboardGeometry.cs" Link="Ga/FretboardGeometry.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Analysis/PhysicalCostService.cs" Link="Ga/PhysicalCostService.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Analysis/FretboardPositionMapper.cs" Link="Ga/FretboardPositionMapper.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Analysis/IMlNaturalnessRanker.cs" Link="Ga/IMlNaturalnessRanker.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Business.Core/Context/PlayerProfile.cs" Link="Ga/PlayerProfile.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Biomechanics/BiomechanicalAnalyzer.cs" Link="Ga/BiomechanicalAnalyzer.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Biomechanics/BiomechanicalPlayabilityAnalysis.cs" Link="Ga/BiomechanicalPlayabilityAnalysis.cs" />
+    <Compile Include="$(GaRoot)Common/GA.Domain.Services/Fretboard/Biomechanics/FingeringEfficiency.cs" Link="Ga/FingeringEfficiency.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Lesson 15 reads the table of the ga_easier_voicings MCP tool from its source, as text, next to the program -->
+    <None Include="$(GaRoot)GaMcpServer/Tools/GuitaristProblemTools.cs" Link="GuitaristProblemTools.cs" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
 </Project>

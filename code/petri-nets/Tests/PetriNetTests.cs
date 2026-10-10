@@ -617,4 +617,72 @@ public class PnmlTests
         Assert.Equal(3, net.InitialMarking[0]);        // the toolspecific block is not the marking
         Assert.Equal(2, net.Pre[0, 0]);                // nor is the inscription's graphics the weight
     }
+
+    /// <summary>
+    /// Lesson 16. An inhibitor arc is not in the P/T grammar. Read as an ordinary arc, it turns "admit
+    /// only when nothing runs" into "admit needs something running": a different net, with no warning.
+    /// </summary>
+    [Fact]
+    public void An_arc_the_reader_does_not_model_is_refused_not_read_as_an_ordinary_arc()
+    {
+        var refused = Assert.Throws<NotSupportedException>(() => Pnml.Parse(Net("""<type value="inhibitor"/>""")));
+        Assert.Contains("inhibitor", refused.Message);
+        // Control: an arc that says it is an ordinary one is read as one.
+        Assert.Equal(1, Pnml.Parse(Net("""<type value="normal"/>""")).Pre[0, 0]);
+    }
+
+    /// <summary>
+    /// Lesson 16, after review. An arc's kind can also be written as a label, <c>&lt;type&gt;&lt;text&gt;inhibitor&lt;/text&gt;&lt;/type&gt;</c>,
+    /// or in an <c>&lt;arctype&gt;</c> child. Each one read as an ordinary arc is the same silent change of net, and so is
+    /// a type that states nothing.
+    /// </summary>
+    [Theory]
+    [InlineData("""<type><text>inhibitor</text></type>""", "inhibitor")]
+    [InlineData("""<arctype value="inhibitor"/>""", "inhibitor")]
+    [InlineData("""<arctype><text>reset</text></arctype>""", "reset")]
+    [InlineData("""<type/>""", "(unstated)")]
+    public void An_arc_kind_given_as_a_label_or_an_arctype_is_refused_too(string arcType, string kind)
+    {
+        var refused = Assert.Throws<NotSupportedException>(() => Pnml.Parse(Net(arcType)));
+        Assert.Contains($"is of type {kind};", refused.Message);
+    }
+
+    /// <summary>Control for the test above: a kind that says normal, in any of those forms, is an ordinary arc.</summary>
+    [Theory]
+    [InlineData("""<type><text>normal</text></type>""")]
+    [InlineData("""<arctype value="normal"/>""")]
+    public void An_arc_kind_that_says_normal_is_read_as_an_ordinary_arc(string arcType) =>
+        Assert.Equal(1, Pnml.Parse(Net(arcType)).Pre[0, 0]);
+
+    /// <summary>
+    /// Lesson 16 compares what a net means, line by line, before and after a round trip. A line the round trip
+    /// adds or loses, such as a dead marking, is a difference; pairing the listings with Zip stopped at the
+    /// shorter one and dropped it.
+    /// </summary>
+    [Fact]
+    public void A_meaning_line_added_or_lost_by_a_round_trip_is_a_difference()
+    {
+        string[] was = ["states:      9", "dead:        waiting=0  after admit"];
+        string[] now = ["states:      9"];
+
+        Assert.Empty(Report.LineDifferences(was, was));
+        Assert.Equal<(string?, string?)>([("dead:        waiting=0  after admit", null)], Report.LineDifferences(was, now));
+        Assert.Equal<(string?, string?)>([(null, "dead:        waiting=0  after admit")], Report.LineDifferences(now, was));
+    }
+
+    // Lesson 16's admission net cut to its inhibitor question: admit only when nothing runs.
+    private static string Net(string arcType) => $"""
+        <pnml xmlns="http://www.pnml.org/version-2009/grammar/pnml">
+          <net type="http://www.pnml.org/version-2009/grammar/ptnet" id="n1">
+            <page id="p1">
+              <place id="running"/>
+              <place id="tested"><initialMarking><text>1</text></initialMarking></place>
+              <transition id="admit"/>
+              <arc id="a1" source="tested" target="admit"/>
+              <arc id="a2" source="running" target="admit">{arcType}</arc>
+              <arc id="a3" source="admit" target="running"/>
+            </page>
+          </net>
+        </pnml>
+        """;
 }

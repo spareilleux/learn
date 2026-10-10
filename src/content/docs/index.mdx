@@ -4,7 +4,13 @@ description: Learning in public — courses written as I learn.
 template: splash
 hero:
   tagline: Courses written while learning, published as they are — with the mistakes, the dead ends, and what finally worked.
+  image:
+    file: ../../assets/home/research-observatory.webp
+    alt: "Conceptual art: the inside of a circular library and observatory at night. Ringed galleries of bookshelves rise under a glass dome traced with orbits, flowing silver ornaments climb the stone arches, and thin green beams of light fall onto a riveted steel cabin in the centre, its door open on a warm, lit corridor."
   actions:
+    - text: Explore the 3D observatory
+      link: observatory/
+      icon: right-arrow
     - text: Matt Pocock skills
       link: agentic-coding/05-matt-pocock-skills/
       icon: rocket
@@ -18,6 +24,10 @@ hero:
 ---
 
 import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+*Conceptual art, not a diagram: a research observatory where a library, alchemical ornament, falling computational light and a sealed research box share one room. The image is inspired by Asimov's* Foundation, The Matrix *and* Dark Matter, *and copies nothing from them. Generated on the author's machine with ComfyUI 0.36.0 and Z-Image-Turbo (Apache 2.0 licence), seed 20260927; the top 48 pixels were cropped to remove a stray numeral. [Prompt, workflow and timings](https://github.com/spareilleux/learn/tree/main/code/site-visuals).*
+
+[Update journal and delivery board](updates/) — published changes, evidence and unfinished requests.
 
 ## Why this site
 
@@ -230,6 +240,12 @@ They are public so others can benefit from them — and correct me.
 	title="Gaia: coordinating agents with evidence"
 	description="Evidence-bearing coordination after one agent — six non-privileged bus verbs, append-only replay, factory receipts, measured lane limits, and a bounded continuity artifact chain from one exact successor wake to read-only Demerzel validation."
 	href="gaia/"
+/>
+
+<LinkCard
+	title="AutoHarness, self-writing skills for Claude Code"
+	description="A Claude Code plugin that writes and prunes its own skills — read at a pinned commit, tested with pre-registered fixtures in an isolated lab without installing it or calling a model, and judged on evidence rather than on its README."
+	href="autoharness/"
 />
 
 ### Machine Learning

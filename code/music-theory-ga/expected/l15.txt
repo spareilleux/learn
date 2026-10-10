@@ -1,0 +1,243 @@
+# l15
+
+== Extended chords on C: the course's full stacks against Chord.FromSymbol (GA.Domain.Core)
+symbol   course           GA               check
+C9       0 2 4 7 T        0 2 4 7 T        ok
+Cmaj9    0 2 4 7 E        0 2 4 7 E        ok
+Cm9      0 2 3 7 T        0 2 3 7 T        ok
+C11      0 2 4 5 7 T      0 2 4 5 7 T      ok
+Cmaj11   0 2 4 5 7 E      0 2 4 5 7 E      ok
+Cm11     0 2 3 5 7 T      0 2 3 5 7 T      ok
+C13      0 2 4 5 7 9 T    0 2 4 5 7 9 T    ok
+Cmaj13   0 2 4 5 7 9 E    0 2 4 5 7 9 E    ok
+Cm13     0 2 3 5 7 9 T    0 2 3 5 7 9 T    ok
+C6/9     0 2 4 7 9        0 2 4 7 9        ok
+Cadd9    0 2 4 7          0 2 4 7          ok
+
+== Naming them back: CanonicalChordPatternCatalog.TryFindExact, ChordFormula.GetSymbolSuffix, and GenerateChordName (BasicChordExtensionsService, GA.Domain.Services, compiled)
+symbol   TryFindExact           C + GetSymbolSuffix        GenerateChordName
+C9       dominant-9             C9       ok                C9       ok
+Cmaj9    major-9                C9       DIFF              Cmaj9    ok
+Cm9      minor-9                Cm9      ok                Cm9      ok
+C11      dominant-11-full       C11      ok                C11      ok
+Cmaj11   (none)                 C11      DIFF              Cmaj11   ok
+Cm11     minor-11               Cm11     ok                Cm11     ok
+C13      (none)                 C13      ok                C13      ok
+Cmaj13   (none)                 C13      DIFF              Cmaj13   ok
+Cm13     (none)                 Cm13     ok                Cm13     ok
+C6/9     major-6-add-9          C6/9     ok                C6/9     ok
+Cadd9    add-9                  Cadd9    ok                Cadd9    ok
+TryFindExact names 7 of 11; GetSymbolSuffix gives back 8, GenerateChordName 11
+
+== C13 as a full stack: the pitch classes of Fmaj13, Gm13 and the F major scale
+               course                 Chord.FromSymbol
+C13            0 2 4 5 7 9 T          0 2 4 5 7 9 T
+Fmaj13         0 2 4 5 7 9 T          0 2 4 5 7 9 T
+Gm13           0 2 4 5 7 9 T          0 2 4 5 7 9 T
+F major scale  0 2 4 5 7 9 T
+the four sets are equal: True
+C13 without the 11th (Wikipedia, "Thirteenth"): 0 2 4 7 9 T, TryFindExact: dominant-13
+
+== Three guitar voicings in the course's figure (standard tuning): the degrees they keep over C
+shape        degrees, low to high   TryFindExact on the intervals from the bass
+x3233x C9    1 3 ♭7 9               (none)
+x32335 C13   1 3 ♭7 9 13            (none)
+x3234x C7#9  1 3 ♭7 ♯9              (none)
+
+== 41 symbols on C: the course's reading against GA's two parsers, Chord.FromSymbol and ChordSymbolParser.Parse (GA.Domain.Services, compiled)
+symbol    course           FromSymbol             ChordSymbolParser check
+-- extended
+C9        0 2 4 7 T        0 2 4 7 T        ok    0 2 4 7 T         ok
+Cmaj9     0 2 4 7 E        0 2 4 7 E        ok    0 2 4 7 E         ok
+Cm9       0 2 3 7 T        0 2 3 7 T        ok    0 2 3 7 T         ok
+C11       0 2 4 5 7 T      0 2 4 5 7 T      ok    0 2 4 5 7 T       ok
+Cmaj11    0 2 4 5 7 E      0 2 4 5 7 E      ok    0 2 4 5 7 E       ok
+Cm11      0 2 3 5 7 T      0 2 3 5 7 T      ok    0 2 3 5 7 T       ok
+C13       0 2 4 5 7 9 T    0 2 4 5 7 9 T    ok    0 2 4 5 7 9 T     ok
+Cmaj13    0 2 4 5 7 9 E    0 2 4 5 7 9 E    ok    0 2 4 5 7 9 E     ok
+Cm13      0 2 3 5 7 9 T    0 2 3 5 7 9 T    ok    0 2 3 5 7 9 T     ok
+C6/9      0 2 4 7 9        0 2 4 7 9        ok    0 2 4 7 9         ok
+Cadd9     0 2 4 7          0 2 4 7          ok    0 2 4 7           ok
+Cadd2     0 2 4 7          rejects          DIFF  0 4 7             DIFF
+C7sus     0 5 7 T          rejects          DIFF  0 4 7             DIFF
+C9sus4    0 2 5 7 T        rejects          DIFF  0 4 7             DIFF
+-- altered
+C7b9      0 1 4 7 T        rejects          DIFF  0 1 4 7 T         ok
+C7#9      0 3 4 7 T        rejects          DIFF  0 3 4 7 T         ok
+C7#11     0 4 6 7 T        rejects          DIFF  0 4 6 7 E         DIFF
+C7b13     0 4 7 8 T        rejects          DIFF  0 4 7 8 T         ok
+C7b5      0 4 6 T          rejects          DIFF  0 4 6             DIFF
+C7#5      0 4 8 T          rejects          DIFF  0 4 8             DIFF
+C7alt     0 1 3 4 6 8 T    rejects          DIFF  0 1 3 4 7 T       DIFF
+C9#11     0 2 4 6 7 T      rejects          DIFF  0 4 6 7 E         DIFF
+C7b9#11   0 1 4 6 7 T      rejects          DIFF  0 1 4 7 T         DIFF
+C7#9b13   0 3 4 7 8 T      rejects          DIFF  0 3 4 7 T         DIFF
+Cmaj7#11  0 4 6 7 E        rejects          DIFF  0 4 6 7 E         ok
+-- spellings
+Cmi       0 3 7            rejects          DIFF  0 4 7             DIFF
+Cmi7      0 3 7 T          rejects          DIFF  0 4 7             DIFF
+Cma7      0 4 7 E          rejects          DIFF  0 4 7             DIFF
+CM7       0 4 7 E          0 3 7 T          DIFF  0 3 7 T           DIFF
+CΔ7       0 4 7 E          rejects          DIFF  0 4 7             DIFF
+C∆7       0 4 7 E          rejects          DIFF  0 4 7             DIFF
+Co7       0 3 6 9          rejects          DIFF  0 4 7             DIFF
+Cø7       0 3 6 T          0 3 6 T          ok    0 3 6 T           ok
+Cm(b5)    0 3 6            rejects          DIFF  0 4 6             DIFF
+Cm7♭5     0 3 6 T          rejects          DIFF  0 4 7             DIFF
+C+7       0 4 8 T          rejects          DIFF  0 4 7             DIFF
+Cm(maj7)  0 3 7 E          rejects          DIFF  0 4 7             DIFF
+-- slash chords and words
+C/E       0 4 7            rejects          DIFF  0 4 7             ok
+C/F#      0 4 6 7          rejects          DIFF  0 4 7             DIFF
+Can       rejects          rejects          ok    0 4 7             DIFF
+Give      rejects          rejects          ok    2 7 E             DIFF
+
+group                    symbols  FromSymbol right  rejects  Parser right  rejects
+extended                 14       11                3        11            0
+altered                  11       0                 11       4             0
+spellings                12       1                 10       1             0
+slash chords and words   4        2                 4        1             0
+all                      41       14                28       17            0
+
+== GA's nine altered chords on C (ChordAlterationService, GA.Domain.Services, compiled), through ChordTemplate.Analytical.FromPitchClassSet
+GA's list    pitch classes    quality    extension  alterations  GenerateNameWithAlterations  check
+C7alt        0 1 3 4 6 8 T    Dominant   Ninth      b9,b5,#5     C9(b9,b5,#5)                 DIFF
+C7(b9)       0 1 4 7 T        Dominant   Ninth      b9           C9(b9)                       DIFF
+C7(#9)       0 3 4 7 T        Dominant   Seventh    (none)       C7                           DIFF
+C7(b5)       0 4 6 T          Dominant   Seventh    b5           C7alt                        DIFF
+C7(#5)       0 4 8 T          Dominant   Seventh    #5           C7alt                        DIFF
+C7(#11)      0 4 6 7 T        Dominant   Seventh    b5           C7alt                        DIFF
+C7(b13)      0 4 7 8 T        Dominant   Seventh    #5           C7alt                        DIFF
+C7(b9,#11)   0 1 4 6 7 T      Dominant   Ninth      b9,b5        C9(b9,b5)                    DIFF
+Cmaj7(#11)   0 4 6 7 E        Major      Seventh    b5           Cmaj7(b5)                    DIFF
+
+GA's list    IsAlteredDominant  SuggestedNotation                  TryFindExact           GA's description
+C7alt        True               alt (altered dominant)             (none)                 Altered dominant (b9, #9, #11, b13)
+C7(b9)       True               alt (altered dominant)             dominant-7-b9          Dominant with flat ninth
+C7(#9)       False              No alterations                     dominant-7-sharp-9     Dominant with sharp ninth (Hendrix chord)
+C7(b5)       True               alt (altered dominant)             dominant-7-b5          Dominant with flat fifth
+C7(#5)       True               alt (altered dominant)             augmented-7            Dominant with sharp fifth
+C7(#11)      True               alt (altered dominant)             dominant-7-sharp-11    Dominant with sharp eleventh
+C7(b13)      True               alt (altered dominant)             dominant-7-b13         Dominant with flat thirteenth
+C7(b9,#11)   True               alt (altered dominant)             dominant-7-b9-sharp-11 Dominant with flat ninth and sharp eleventh
+Cmaj7(#11)   False              Flat fifth (tritone substitution)  (none)                 Major seventh with sharp eleventh (Lydian)
+
+== Chords whose fifth is lowered or raised by definition, through the same calls
+symbol       pitch classes    quality    extension  alterations  GenerateNameWithAlterations  check
+Cdim         0 3 6            Diminished Triad      b5           Cdim(b5)                     DIFF
+Caug         0 4 8            Augmented  Triad      #5           Caug(#5)                     DIFF
+Cm7b5        0 3 6 T          Diminished Seventh    b5           Cdim7(b5)                    DIFF
+Cdim7        0 3 6 9          Diminished Sixth      b5           C6(b5)                       DIFF
+
+== ChordTemplateFactory.GenerateAllPossibleChords (GA.Domain.Services, compiled): the alterations ChordAlterationService finds, by requested extension
+templates: 25900; the second half repeats the first, name and pitch classes: True
+distinct names: 11284
+
+extension    templates  FlatNinth       SharpNinth      FlatFifth       SharpFifth      SharpEleventh   FlatThirteenth
+Triad        3256       412             0               660             424             0               0
+Seventh      3256       506             0               856             632             0               0
+Ninth        3256       662             0               1236            1012            0               0
+Eleventh     2656       668             0               1160            1084            0               0
+Thirteenth   2080       632             0               1184            848             0               0
+Add9         3256       568             0               1040            804             0               0
+Add11        3256       538             0               744             656             0               0
+Sixth        3256       412             0               660             1352            0               0
+Sus2         814        256             80              212             202             0               0
+Sus4         814        0               0               212             212             176             0
+all          25900      4654            80              7964            7226            176             0
+
+== Upper structures over C7 (C E G B♭): the 24 major and minor triads that avoid F (the 11th) and B (the major 7th)
+triad   degrees over C   with C7                Wikipedia
+C       1 3 5            0 4 7 T
+D       9 ♯11 13         0 2 4 6 7 9 T          USII, C13♯11
+E♭      ♯9 5 ♭7          0 3 4 7 T              US♭III, C7♯9
+G♭      ♯11 ♭7 ♭9        0 1 4 6 7 T            US♭V, C7♭9♯11
+A♭      ♭13 1 ♯9         0 3 4 7 8 T            US♭VI, C7♯9♭13
+A       13 ♭9 3          0 1 4 7 9 T            USVI, C13♭9
+Cm      1 ♯9 5           0 3 4 7 T              USi, C7♯9
+D♭m     ♭9 3 ♭13         0 1 4 7 8 T            US♭ii, C7♭9♭13
+E♭m     ♯9 ♯11 ♭7        0 3 4 6 7 T            US♭iii, C7♯9♯11
+F♯m     ♯11 13 ♭9        0 1 4 6 7 9 T          US♯iv, C13♭9♯11
+Gm      5 ♭7 9           0 2 4 7 T
+Am      13 1 3           0 4 7 9 T
+triads kept: 12 of 24, 9 of them in Wikipedia's list
+CanonicalChordPatternCatalog patterns named upper structure or polychord: 0 of 62
+
+== ga_polychord (GaMcpServer, not compiled), rebuilt above, on five polychords; then the modes of lesson 11 that contain each
+its description: "Example: B triad over C triad → Lydian mode set {C,D,E,F#,G,B}." (ChordAtonalTool.cs, line 198)
+
+-- B over C, from the tool's description
+Polychord: B/C
+Merged:     {C, Eb, E, F#, G, B} (6 tones)
+  ICV:        <3 1 3 4 3 1>
+  Forte:      6-Z19
+  Prime form: 0 1 3 4 7 8
+  Modal fam.: 6-note / 24 modes (mode 14)
+  from C: {C, E, G}
+  from B: {Eb, F#, B}
+  the 28 modes on C that contain it: Lydian ♯2
+  octatonic on C: half-whole False, whole-half False
+
+-- Bm over C, from the set the description names
+Polychord: Bm/C
+Merged:     {C, D, E, F#, G, B} (6 tones)
+  ICV:        <2 3 2 3 4 1>
+  Forte:      6-Z26
+  Prime form: 0 1 3 5 7 8
+  Modal fam.: 6-note / 12 modes (mode 9)
+  from C: {C, E, G}
+  from Bm: {D, F#, B}
+  the 28 modes on C that contain it: Lydian
+  octatonic on C: half-whole False, whole-half False
+
+-- C over F#, from AdvancedHarmony.yaml, line 102: "C major over F# major"
+Polychord: C/F#
+Merged:     {C, C#, E, F#, G, Bb} (6 tones)
+  ICV:        <2 2 4 2 2 3>
+  Forte:      6-30
+  Prime form: 0 1 3 6 7 9
+  Modal fam.: 6-note / 6 modes (mode 3)
+  from F#: {C#, F#, Bb}
+  from C: {C, E, G}
+  the 28 modes on F# that contain it: none
+  octatonic on F#: half-whole True, whole-half False
+
+-- D over Eb, from skills-dev/_pending-tools/polychord/DRAFT.md, line 46: "D over Eb"
+Polychord: D/Eb
+Merged:     {D, Eb, F#, G, A, Bb} (6 tones)
+  ICV:        <3 1 3 4 3 1>
+  Forte:      6-Z19
+  Prime form: 0 1 3 4 7 8
+  Modal fam.: 6-note / 24 modes (mode 0)
+  from Eb: {Eb, G, Bb}
+  from D: {D, F#, A}
+  the 28 modes on Eb that contain it: Lydian ♯2
+  octatonic on Eb: half-whole False, whole-half False
+
+-- C over D, from DRAFT.md, line 45: "C/D"
+Polychord: C/D
+Merged:     {C, D, E, F#, G, A} (6 tones)
+  ICV:        <1 4 3 2 4 1>
+  Forte:      6-33
+  Prime form: 0 2 3 5 7 9
+  Modal fam.: 6-note / 12 modes (mode 2)
+  from D: {D, F#, A}
+  from C: {C, E, G}
+  the 28 modes on D that contain it: Mixolydian, Mixolydian ♭6
+  octatonic on D: half-whole False, whole-half False
+
+== GA's YamlKnowledgeLoader (GA.Business.Config, compiled): the entries of ExtendedChords.yaml, AdvancedHarmony.yaml and the Petrushka chord of IconicChords.yaml
+  3 entries from ExtendedChords.yaml: 9th Chord, 11th Chord, 13th Chord
+  9 entries from AdvancedHarmony.yaml: Extended Chords, Added Note Chords, Synthetic Scales Harmony, Polymodality, Polychords, Cluster Chords, Microtonal Harmony, Spectral Harmony, Neo-Functional Reharmonization
+    Formula: 1 3 5 b7 9
+    Formula: 1 3 5 b7 9 11
+    Formula: 1 3 5 b7 9 13
+  "Creates all 12 chromatic pitches" in the Polychords entry: yes
+    IconicChords.yaml, Petrushka Chord, TheoreticalName: C/F# Polychord
+    IconicChords.yaml, Petrushka Chord, PitchClasses: 0; 4; 7; 6; 10; 1
+
+== Added after the first run: MUS-005's slash chord D♭/C against Cmaj7♯11, and D/C
+chord                  pitch classes    degrees over C     the 28 modes on C that contain it
+D♭ triad over C bass   0 1 5 8          1 ♭9 11 ♭13        Phrygian, Locrian, Phrygian dominant, Locrian ♭♭7
+D triad over C bass    0 2 6 9          1 9 ♯11 13         Lydian, Lydian augmented, Lydian dominant, Dorian ♯4, Dorian ♭5, Lydian ♭3
+Cmaj7♯11               0 4 6 7 E        1 3 ♯11 5 7        Lydian, Lydian ♯2

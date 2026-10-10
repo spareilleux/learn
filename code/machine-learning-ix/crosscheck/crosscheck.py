@@ -286,3 +286,36 @@ for name, rule in [("SGD", sgd(0.001)), ("Momentum", momentum(0.001, 0.9)), ("Ad
     print(f"{name:9} {steps:5} steps: last {np.round(point, 4).tolist()} f {rosen(point):.6f}")
 slope = float((xs * ts).mean())
 print(f"the build-time line, standardized: closed-form slope {slope:.6f}")
+
+# Lesson 9: compare invariant properties, not coordinates (eigenvector signs and rotations
+# are arbitrary, and t-SNE and NMF use different seeded initializers in Rust and Python).
+print("\n== lesson 9")
+from sklearn.decomposition import KernelPCA, NMF  # noqa: E402
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis  # noqa: E402
+from sklearn.manifold import TSNE  # noqa: E402
+
+square = np.array([[0., 0.], [1., 0.], [1., 1.], [0., 1.]])
+d = np.linalg.norm(square[:, None] - square[None, :], axis=2)
+d2 = d * d
+gram = -.5 * (d2 - d2.mean(axis=0) - d2.mean(axis=1)[:, None] + d2.mean())
+values, vectors = np.linalg.eigh(gram)
+embedded = vectors[:, -2:] * np.sqrt(np.maximum(values[-2:], 0))
+recovered = np.linalg.norm(embedded[:, None] - embedded[None, :], axis=2)
+print(f"classical MDS recovers square distances: {bool(np.max(np.abs(d - recovered)) < 1e-10)}")
+
+rings = np.array([[1., 0.], [-1., 0.], [0., 1.], [0., -1.],
+                  [2., 0.], [-2., 0.], [0., 2.], [0., -2.]])
+linear = KernelPCA(n_components=1, kernel="linear").fit_transform(rings)
+rbf = KernelPCA(n_components=4, kernel="rbf", gamma=.5).fit_transform(rings)
+gap = lambda scores, axis: abs(scores[:4, axis].mean() - scores[4:, axis].mean())
+print(f"linear first axis separates rings: {bool(gap(linear, 0) > .1)}")
+print(f"RBF fourth axis separates rings: {bool(gap(rbf, 3) > .1)}")
+
+with warnings.catch_warnings():
+    warnings.simplefilter("ignore", category=sklearn.exceptions.ConvergenceWarning)
+    nmf9 = NMF(n_components=2, init="random", random_state=42, max_iter=300).fit(X)
+print(f"NMF raw CI timings reconstructed: {bool(np.isfinite(nmf9.reconstruction_err_))}")
+print(f"LDA with OS labels has two axes: {LinearDiscriminantAnalysis(n_components=2).fit_transform(Z, os_).shape == (len(os_), 2)}")
+tsne9 = TSNE(n_components=2, perplexity=3, random_state=42, max_iter=300,
+             learning_rate=200, method="exact").fit_transform(Z[:12])
+print(f"t-SNE on 12 jobs is finite: {bool(np.isfinite(tsne9).all())}")

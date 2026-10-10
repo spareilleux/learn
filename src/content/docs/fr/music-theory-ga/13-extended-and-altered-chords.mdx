@@ -1,0 +1,419 @@
+---
+title: "Leçon 13 : les accords étendus et altérés"
+description: Les accords de neuvième, de onzième et de treizième, les accords altérés du jazz, les structures supérieures et les polyaccords, comparés avec les deux parseurs de chiffrages d'accords de Guitar Alchemist, ses services de nommage et d'altérations, ses gabarits d'accords et son outil de polyaccords.
+sidebar:
+  label: 13. Les accords étendus
+  order: 13
+---
+
+import ExtendedVoicings from '../../../../assets/music-theory-ga/l13-extended-voicings.svg';
+
+La leçon 3 s'est arrêtée à l'accord de neuvième. Cette leçon monte la pile de tierces jusqu'à la onzième et la treizième, puis y change des notes : les accords altérés du jazz. Elle finit par des accords faits de deux triades, les structures supérieures et les polyaccords. [Guitar Alchemist](https://github.com/GuitarAlchemist/ga) (GA) a du code pour chaque étape : deux parseurs de chiffrages d'accords, un service qui nomme les extensions, un autre qui nomme les altérations, une fabrique de gabarits d'accords, un outil MCP pour les polyaccords, et des fichiers de contenu que son chatbot peut retrouver. Le programme du cours lit 41 chiffrages d'accords, fait tourner le code de GA dessus, et compare.
+
+Tous les liens vers GA pointent sur le commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6). Les sorties viennent de la commande ci-dessous ; le point d'entrée est `l15`.
+
+```bash
+dotnet run --project code/music-theory-ga/GaTheory -c Release -- l15
+```
+
+## Les accords étendus
+
+### L'idée
+
+Open Music Theory : "The presence of an extension in a chord symbol implies the presence of all other extensions below it as well. So, an eleventh chord is not just a triad plus the eleventh—it's a triad plus an eleventh, ninth, and seventh." Et : "While the default quality of the seventh is minor, extensions and additions are assumed to be major (ninths and thirteenths) or perfect (elevenths) unless otherwise indicated" ([Open Music Theory, "Chord Symbols"](https://viva.pressbooks.pub/openmusictheory/chapter/chord-symbols/)). Le cours lit chaque chiffrage comme cette pile complète : C11 est C E G B♭ D F, C13 est C E G B♭ D F A, Cmaj13 a B au lieu de B♭, Cm13 E♭ au lieu de E ([`Lesson15.Symbols`](https://github.com/spareilleux/learn/blob/ac620ce/code/music-theory-ga/GaTheory/Lesson15.cs#L15-L64)).
+
+Les musiciens font rarement sonner la pile complète. Pour la onzième : "A perfect eleventh creates a highly dissonant minor ninth interval with the major third of major and dominant chords. To reduce this dissonance the third is often omitted", ce qui fait de C11 "a suspended ninth chord (e.g. C9sus4, C–G–B♭–D–F)" ([Eleventh chord](https://en.wikipedia.org/wiki/Eleventh_chord)). Pour la treizième : "It is customary to omit the eleventh on dominant or major thirteenth chords because the eleventh conflicts with the third". Gardé entier, un accord de treizième contient les sept notes d'une gamme, et Wikipédia montre ce que cela veut dire : "Cmaj13 (C–E–G–B–D–F–A) becomes Em11♭9♭13 (E–G–B–D–F–A–C) then G13 (G–B–D–F–A–C–E), and so on, when inverted" ([Thirteenth](https://en.wikipedia.org/wiki/Thirteenth_(interval))). La quinte part aussi : "The most common note to omit is the fifth of the chord", parce qu'elle "tends to strengthen the root of the chord without adding much character on its own" ([Open Music Theory, "Jazz Voicings"](https://viva.pressbooks.pub/openmusictheory/chapter/jazz-voicings/)). Trois voicings courants à la guitare le montrent :
+
+<ExtendedVoicings role="img" aria-label="Trois grilles d'accords. C9 : x3233x, C E si bémol D. C13 : x32335, C E si bémol D A, à partir de la deuxième case. C7 dièse 9 : x3234x, C E si bémol D dièse. Aucune n'a de quinte ni de onzième." />
+
+Le programme lit les formes et donne le degré de chaque note au-dessus de C ([`Lesson15.cs#L303-L309`](https://github.com/spareilleux/learn/blob/ac620ce/code/music-theory-ga/GaTheory/Lesson15.cs#L303-L309)) :
+
+```text
+== Three guitar voicings in the course's figure (standard tuning): the degrees they keep over C
+shape        degrees, low to high   TryFindExact on the intervals from the bass
+x3233x C9    1 3 ♭7 9               (none)
+x32335 C13   1 3 ♭7 9 13            (none)
+x3234x C7#9  1 3 ♭7 ♯9              (none)
+```
+
+Fondamentale, tierce, septième, et la tension au-dessus : pas de quinte, pas de onzième. La dernière colonne est celle de GA, plus bas.
+
+### Dans GA : lire les chiffrages, et les renommer
+
+[`Chord.FromSymbol`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Harmony/Chord.cs#L75-L91), que les leçons 3 et 6 ont utilisé, construit les accords de onzième et de treizième en piles complètes, avec les intervalles composés 14, 17 et 21 ([`#L128-L138`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Harmony/Chord.cs#L128-L138)). Le programme compare ses classes de hauteurs à celles du cours pour les onze accords étendus de sa table ([`Lesson15.cs#L266-L271`](https://github.com/spareilleux/learn/blob/ac620ce/code/music-theory-ga/GaTheory/Lesson15.cs#L266-L271)) :
+
+```text
+== Extended chords on C: the course's full stacks against Chord.FromSymbol (GA.Domain.Core)
+symbol   course           GA               check
+C9       0 2 4 7 T        0 2 4 7 T        ok
+Cmaj9    0 2 4 7 E        0 2 4 7 E        ok
+Cm9      0 2 3 7 T        0 2 3 7 T        ok
+C11      0 2 4 5 7 T      0 2 4 5 7 T      ok
+Cmaj11   0 2 4 5 7 E      0 2 4 5 7 E      ok
+Cm11     0 2 3 5 7 T      0 2 3 5 7 T      ok
+C13      0 2 4 5 7 9 T    0 2 4 5 7 9 T    ok
+Cmaj13   0 2 4 5 7 9 E    0 2 4 5 7 9 E    ok
+Cm13     0 2 3 5 7 9 T    0 2 3 5 7 9 T    ok
+C6/9     0 2 4 7 9        0 2 4 7 9        ok
+Cadd9    0 2 4 7          0 2 4 7          ok
+```
+
+Les onze concordent. Revenir des notes à un nom est une autre affaire. GA a trois façons de le faire : [`CanonicalChordPatternCatalog.TryFindExact`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Harmony/CanonicalChordPatternCatalog.cs#L165-L177), le catalogue de reconnaissance de la leçon 3 ; [`ChordFormula.GetSymbolSuffix`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Harmony/ChordFormula.cs#L299-L325), que la leçon 3 a surpris à écrire `7` pour maj7 ; et [`BasicChordExtensionsService.GenerateChordName`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Chords/BasicChordExtensionsService.cs#L164-L178), dans `GA.Domain.Services`, que le programme compile tel quel. Les deux derniers partent de la même qualité et de la même extension ([`Lesson15.cs#L273-L287`](https://github.com/spareilleux/learn/blob/ac620ce/code/music-theory-ga/GaTheory/Lesson15.cs#L273-L287)) :
+
+```text
+== Naming them back: CanonicalChordPatternCatalog.TryFindExact, ChordFormula.GetSymbolSuffix, and GenerateChordName (BasicChordExtensionsService, GA.Domain.Services, compiled)
+symbol   TryFindExact           C + GetSymbolSuffix        GenerateChordName
+C9       dominant-9             C9       ok                C9       ok
+Cmaj9    major-9                C9       DIFF              Cmaj9    ok
+Cm9      minor-9                Cm9      ok                Cm9      ok
+C11      dominant-11-full       C11      ok                C11      ok
+Cmaj11   (none)                 C11      DIFF              Cmaj11   ok
+Cm11     minor-11               Cm11     ok                Cm11     ok
+C13      (none)                 C13      ok                C13      ok
+Cmaj13   (none)                 C13      DIFF              Cmaj13   ok
+Cm13     (none)                 Cm13     ok                Cm13     ok
+C6/9     major-6-add-9          C6/9     ok                C6/9     ok
+Cadd9    add-9                  Cadd9    ok                Cadd9    ok
+TryFindExact names 7 of 11; GetSymbolSuffix gives back 8, GenerateChordName 11
+```
+
+`GetSymbolSuffix` écrit `m` pour un accord mineur et rien pour un accord majeur, puis l'extension, donc Cmaj9, Cmaj11 et Cmaj13 perdent leur « maj » et deviennent des accords de dominante, comme Cmaj7 dans la leçon 3. `GenerateChordName` choisit la notation selon la qualité, `maj9` pour une neuvième majeure ([`#L197-L206`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Chords/BasicChordExtensionsService.cs#L197-L206)), et réussit les onze. Le catalogue suit les musiciens : ses accords de treizième n'ont pas de onzième, son onzième majeur pas de tierce ([`CanonicalChordPatternCatalog.cs#L80-L91`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Harmony/CanonicalChordPatternCatalog.cs#L80-L91)), donc les piles complètes de C13, Cmaj13, Cm13 et Cmaj11 ne correspondent à rien. Son « dominant-11 » est le même ensemble que son « 9-sus4 », C D F G B♭, le C9sus4 de la citation de Wikipédia ; c'est une des paires en double de la leçon 3. Le parseur et le catalogue de GA n'entendent pas le même accord par C13 ([`Lesson15.cs#L289-L301`](https://github.com/spareilleux/learn/blob/ac620ce/code/music-theory-ga/GaTheory/Lesson15.cs#L289-L301)) :
+
+```text
+== C13 as a full stack: the pitch classes of Fmaj13, Gm13 and the F major scale
+               course                 Chord.FromSymbol
+C13            0 2 4 5 7 9 T          0 2 4 5 7 9 T
+Fmaj13         0 2 4 5 7 9 T          0 2 4 5 7 9 T
+Gm13           0 2 4 5 7 9 T          0 2 4 5 7 9 T
+F major scale  0 2 4 5 7 9 T
+the four sets are equal: True
+C13 without the 11th (Wikipedia, "Thirteenth"): 0 2 4 7 9 T, TryFindExact: dominant-13
+```
+
+Le C13 de `FromSymbol` est la gamme de F majeur, les mêmes classes de hauteurs que son Fmaj13 et son Gm13 : trois chiffrages, un ensemble. Sans sa onzième, comme Wikipédia dit que les musiciens l'écrivent, C13 est le `dominant-13` du catalogue. Les voicings de guitare plus haut vont un pas plus loin et lâchent aussi la quinte ; le catalogue ne reconnaît que des ensembles exacts, et ses seuls motifs sans quinte sont trois shells, 1-3-7 ([`CanonicalChordPatternCatalog.cs#L132-L134`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Harmony/CanonicalChordPatternCatalog.cs#L132-L134)), et les empilements de quartes ([`#L116-L118`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Harmony/CanonicalChordPatternCatalog.cs#L116-L118)) : il n'en a aucun pour un accord de neuvième, de treizième ou ♯9 sans sa quinte, donc il n'en nomme aucun des trois.
+
+## Lire les chiffrages d'accords
+
+### L'idée
+
+"Chord symbols don't reference a specific key. Instead, symbols are always assumed to be a certain quality unless otherwise indicated: Triads are assumed to be major. Sevenths added to the triad are assumed to be minor. All other extensions and added tones are assumed to be major/perfect." Les graphies varient : Open Music Theory donne "Cmi, Cm, C-" pour C mineur, "Co, Cdim, Cm(♭5), Cm(-5)" pour C diminué, "C+, Caug", puis "Cma7, Cmaj7, C∆7", "Cmi7, Cm7, C-7", "Cø7, Cm7♭5, C-7♭5" et "Co7", parce que "chord symbols were created along the way as jazz developed and were never completely standardized". Wikipédia légende sa septième majeure "Major seventh chord on C, notated as CΔ7", avec un delta grec, et écrit la septième majeure M7 quand elle emploie des lettres ([Chord notation](https://en.wikipedia.org/wiki/Chord_notation)).
+
+Les altérations sont relatives : "♯11 really means "raise the eleventh"", donc "a C7(♯11) chord would include an F♯ above the root—an augmented eleventh—instead of the typical F♮". La suspension vient après l'extension, "as in C7sus", où sus remplace la tierce par la quarte. "Cadd2 indicates a C-major triad with an additional D that is voiced inside the triad: C–D–E–G". Après une barre oblique vient la basse : "C/E means to play a C major triad with an E in the bass", et "the bass note does not need to be a member of the chord! C/F♯ would indicate to play a C major triad over an F♯" ([Open Music Theory, "Chord Symbols"](https://viva.pressbooks.pub/openmusictheory/chapter/chord-symbols/)). Et alt : "C7alt" supplants "C7♯5♭9♯9♯11" ([Altered scale](https://en.wikipedia.org/wiki/Altered_scale)).
+
+Le cours prend 41 chiffrages sur C, en quatre groupes ([`Lesson15.Symbols`](https://github.com/spareilleux/learn/blob/ac620ce/code/music-theory-ga/GaTheory/Lesson15.cs#L15-L64)) : les 14 accords étendus, 11 accords altérés, 12 graphies d'accords familiers tirées des deux sources, et quatre accords à basse imposée et mots : C/E, C/F♯, et deux mots anglais qui commencent par une lettre de note, « Can » et « Give », qu'un parseur devrait rejeter. Les classes de hauteurs d'un accord à basse imposée comprennent sa basse.
+
+### Dans GA : deux parseurs
+
+Le C# de GA a deux parseurs de chiffrages d'accords. `Chord.FromSymbol` en est un. [`ChordSymbolParser`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Chords/Parsing/ChordSymbolParser.cs#L9-L54), dans `GA.Domain.Services`, est l'autre : le [`VoicingFilterService`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Apps/ga-server/GaApi/Services/VoicingFilterService.cs#L17-L31) de GaApi s'en sert pour trouver les voicings d'un nom d'accord, et le [`SpectralRagOrchestrator`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Core.Orchestration/Services/SpectralRagOrchestrator.cs#L140-L149) du chatbot pour trouver les accords d'un message. Les deux découpent le chiffrage avec la même expression régulière, une lettre de A à G et un `#` ou un `b` facultatif, sans tenir compte de la casse, puis mettent le reste en minuscules et le cherchent dans une table ([`Chord.cs#L66-L67`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Harmony/Chord.cs#L66-L67), [`Chord.cs#L110-L141`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Harmony/Chord.cs#L110-L141), [`ChordSymbolParser.cs#L11-L12`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Chords/Parsing/ChordSymbolParser.cs#L11-L12), [`ChordSymbolParser.cs#L56-L96`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Chords/Parsing/ChordSymbolParser.cs#L56-L96)). Quand le suffixe n'est pas dans la table, `FromSymbol` lève une exception. `ChordSymbolParser` essaie [`ParseComplexSuffix`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Chords/Parsing/ChordSymbolParser.cs#L98-L140) : il teste si le suffixe contient `alt`, `b5`, `#5`, `b9`, `#9`, `#11` ou `b13`, dans cet ordre, construit la première formule qui correspond ([`#L176-L188`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Chords/Parsing/ChordSymbolParser.cs#L176-L188)), et sinon renvoie une triade majeure : « Default to major if unknown ». Le programme fait tourner les deux sur les 41 chiffrages ; une `ArgumentException` compte comme un rejet ([`Lesson15.cs#L134-L153`](https://github.com/spareilleux/learn/blob/ac620ce/code/music-theory-ga/GaTheory/Lesson15.cs#L134-L153), [`#L313-L336`](https://github.com/spareilleux/learn/blob/ac620ce/code/music-theory-ga/GaTheory/Lesson15.cs#L313-L336)) :
+
+```text
+== 41 symbols on C: the course's reading against GA's two parsers, Chord.FromSymbol and ChordSymbolParser.Parse (GA.Domain.Services, compiled)
+symbol    course           FromSymbol             ChordSymbolParser check
+-- extended
+C9        0 2 4 7 T        0 2 4 7 T        ok    0 2 4 7 T         ok
+Cmaj9     0 2 4 7 E        0 2 4 7 E        ok    0 2 4 7 E         ok
+Cm9       0 2 3 7 T        0 2 3 7 T        ok    0 2 3 7 T         ok
+C11       0 2 4 5 7 T      0 2 4 5 7 T      ok    0 2 4 5 7 T       ok
+Cmaj11    0 2 4 5 7 E      0 2 4 5 7 E      ok    0 2 4 5 7 E       ok
+Cm11      0 2 3 5 7 T      0 2 3 5 7 T      ok    0 2 3 5 7 T       ok
+C13       0 2 4 5 7 9 T    0 2 4 5 7 9 T    ok    0 2 4 5 7 9 T     ok
+Cmaj13    0 2 4 5 7 9 E    0 2 4 5 7 9 E    ok    0 2 4 5 7 9 E     ok
+Cm13      0 2 3 5 7 9 T    0 2 3 5 7 9 T    ok    0 2 3 5 7 9 T     ok
+C6/9      0 2 4 7 9        0 2 4 7 9        ok    0 2 4 7 9         ok
+Cadd9     0 2 4 7          0 2 4 7          ok    0 2 4 7           ok
+Cadd2     0 2 4 7          rejects          DIFF  0 4 7             DIFF
+C7sus     0 5 7 T          rejects          DIFF  0 4 7             DIFF
+C9sus4    0 2 5 7 T        rejects          DIFF  0 4 7             DIFF
+-- altered
+C7b9      0 1 4 7 T        rejects          DIFF  0 1 4 7 T         ok
+C7#9      0 3 4 7 T        rejects          DIFF  0 3 4 7 T         ok
+C7#11     0 4 6 7 T        rejects          DIFF  0 4 6 7 E         DIFF
+C7b13     0 4 7 8 T        rejects          DIFF  0 4 7 8 T         ok
+C7b5      0 4 6 T          rejects          DIFF  0 4 6             DIFF
+C7#5      0 4 8 T          rejects          DIFF  0 4 8             DIFF
+C7alt     0 1 3 4 6 8 T    rejects          DIFF  0 1 3 4 7 T       DIFF
+C9#11     0 2 4 6 7 T      rejects          DIFF  0 4 6 7 E         DIFF
+C7b9#11   0 1 4 6 7 T      rejects          DIFF  0 1 4 7 T         DIFF
+C7#9b13   0 3 4 7 8 T      rejects          DIFF  0 3 4 7 T         DIFF
+Cmaj7#11  0 4 6 7 E        rejects          DIFF  0 4 6 7 E         ok
+-- spellings
+Cmi       0 3 7            rejects          DIFF  0 4 7             DIFF
+Cmi7      0 3 7 T          rejects          DIFF  0 4 7             DIFF
+Cma7      0 4 7 E          rejects          DIFF  0 4 7             DIFF
+CM7       0 4 7 E          0 3 7 T          DIFF  0 3 7 T           DIFF
+CΔ7       0 4 7 E          rejects          DIFF  0 4 7             DIFF
+C∆7       0 4 7 E          rejects          DIFF  0 4 7             DIFF
+Co7       0 3 6 9          rejects          DIFF  0 4 7             DIFF
+Cø7       0 3 6 T          0 3 6 T          ok    0 3 6 T           ok
+Cm(b5)    0 3 6            rejects          DIFF  0 4 6             DIFF
+Cm7♭5     0 3 6 T          rejects          DIFF  0 4 7             DIFF
+C+7       0 4 8 T          rejects          DIFF  0 4 7             DIFF
+Cm(maj7)  0 3 7 E          rejects          DIFF  0 4 7             DIFF
+-- slash chords and words
+C/E       0 4 7            rejects          DIFF  0 4 7             ok
+C/F#      0 4 6 7          rejects          DIFF  0 4 7             DIFF
+Can       rejects          rejects          ok    0 4 7             DIFF
+Give      rejects          rejects          ok    2 7 E             DIFF
+
+group                    symbols  FromSymbol right  rejects  Parser right  rejects
+extended                 14       11                3        11            0
+altered                  11       0                 11       4             0
+spellings                12       1                 10       1             0
+slash chords and words   4        2                 4        1             0
+all                      41       14                28       17            0
+```
+
+`FromSymbol` lit juste 14 chiffrages sur 41 : les onze accords étendus, Cø7, et les deux mots, qu'il rejette. Il rejette chaque accord altéré, `C7sus` et `C9sus4`, `Cadd2`, les deux accords à basse imposée et dix des douze graphies, parmi lesquelles le delta de chaque source : la table de GA a △, U+25B3, là où Open Music Theory écrit ∆, U+2206, et Wikipédia Δ, U+0394. La onzième graphie, `CM7`, est pire que rejetée : en minuscules, c'est `m7`, et elle revient en septième mineure de C.
+
+`ChordSymbolParser` ne rejette rien et lit juste 17 chiffrages. Les formules de son repli expliquent le reste. `Flat5` est les intervalles 4 et 6, donc `C7b5` perd sa septième, et `Sharp5` de même pour `C7#5`. `Sharp11` est 4, 7, 11 et 18, une septième majeure, donc `C7#11` et `C9#11` reviennent en C E G B F♯, le second sans sa neuvième. `alt` est 4, 7, 10, 13 et 15 : une quinte juste, ♭9 et ♯9, et pas de quinte altérée ni de ♭13. `C7b9#11` s'arrête à `b9` et `C7#9b13` à `#9`, et perdent leur seconde altération ; `Cm(b5)` correspond à `b5` et reçoit une tierce majeure. Treize accords et le mot « Can » sortent en C majeur, « Give » en G majeur. `Cm7b5` est dans la table, mais `Cm7♭5` avec le signe ♭ n'y est pas : il sort lui aussi en C majeur.
+
+Où va la triade majeure, lu, pas exécuté : `VoicingFilterService` demande au manche les classes de hauteurs de l'accord analysé ([`#L28-L31`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Apps/ga-server/GaApi/Services/VoicingFilterService.cs#L28-L31)), donc les voicings de « Cmi7 » seraient ceux de C majeur, sans erreur. L'orchestrateur découpe un message aux espaces et garde chaque mot qui s'analyse ([`#L142-L149`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Core.Orchestration/Services/SpectralRagOrchestrator.cs#L142-L149), [`#L217-L226`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Core.Orchestration/Services/SpectralRagOrchestrator.cs#L217-L226)). Sa liste de mots à ignorer a « This », « Please », « Key », « The », « A » et « An », mais pas « Can » : "Can you analyze this progression: Dm7 G7 Cmaj7" joindrait une progression dont le premier pas est « Can », lu comme C majeur. Les tests de GA rangent `C7b5`, `C7#5`, `Galt` et `C/E` parmi les chiffrages valides et vérifient seulement qu'un accord revient, pas lequel ([`ChordSymbolParserTests.cs#L11-L18`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Tests/Common/GA.Business.Core.Tests/Chords/ChordSymbolParserTests.cs#L11-L18), [`#L33-L40`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Tests/Common/GA.Business.Core.Tests/Chords/ChordSymbolParserTests.cs#L33-L40)).
+
+## Les accords altérés
+
+### L'idée
+
+"Whereas chord extension generally involves adding notes that are logically implied, chord alteration involves changing some of the typical notes. This is usually done on dominant chords, and the four alterations that are commonly used are the ♭5, ♯5, ♭9 and ♯9." Dan Haerle "argues that only fifths and ninths may be altered, as all other alterations may be interpreted as an unaltered chord tone or, enharmonically, as an altered fifth or ninth" ([Altered chord](https://en.wikipedia.org/wiki/Altered_chord)). La gamme altérée, septième mode du mineur mélodique (leçon 11), les contient toutes : "The altered forms of some of the non-essential tones coincide (augmented eleventh with diminished fifth and augmented fifth with minor thirteenth)", et la gamme "lacks a major ninth, a perfect eleventh, a perfect fifth, and a major thirteenth" ([Altered scale](https://en.wikipedia.org/wiki/Altered_scale)).
+
+Les classes de hauteurs seules ne distinguent donc pas ♯11 de ♭5, ni ♭13 de ♯5 : F♯ est les deux. C'est le chiffrage qui le dit. Dans C7(♯11), C E G B♭ F♯, la quinte G reste et F♯ est une onzième augmentée au-dessus de la fondamentale ; dans C7(♭5), C E G♭ B♭, G♭ remplace la quinte. De même, D♯ dans C7(♯9) est une neuvième, pas une tierce mineure : l'accord a déjà sa tierce, E. Le cours donne à chaque accord de GA les notes que dit son nom ([`Lesson15.cs#L68-L85`](https://github.com/spareilleux/learn/blob/ac620ce/code/music-theory-ga/GaTheory/Lesson15.cs#L68-L85)).
+
+### Dans GA : `ChordAlterationService`
+
+[`ChordAlterationService`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Chords/ChordAlterationService.cs#L6-L32), dans `GA.Domain.Services`, trouve les altérations d'un gabarit et le nomme. Il liste neuf « common altered chords » à lui ([`#L186-L202`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Chords/ChordAlterationService.cs#L186-L202)). Chaque intervalle d'une formule d'accord de GA porte une fonction, mais les constructeurs la remplissent à partir des demi-tons : [`ChordFunctionExtensions.FromSemitones`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Harmony/ChordFunctionExtensions.cs#L13-L22) fait de 3 et 4 une tierce, de 6, 7 et 8 une quinte, et de 1 une fondamentale. [`DetectAlterationFromSemitones`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Chords/ChordAlterationService.cs#L87-L102) lit ensuite 1 comme ♭9, une quinte de 6 comme ♭5 et de 8 comme ♯5, et 3 jamais comme ♯9 quand c'est une tierce. [`GenerateNameWithAlterations`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Chords/ChordAlterationService.cs#L37-L61) appelle « 7alt » toute septième de dominante qui a une altération. Le programme construit un gabarit pour chacun des neuf accords de GA comme GA en construit un à partir de classes de hauteurs, [`ChordTemplate.Analytical.FromPitchClassSet`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Harmony/ChordTemplate.cs#L69-L70), et interroge le service ([`Lesson15.cs#L340-L363`](https://github.com/spareilleux/learn/blob/ac620ce/code/music-theory-ga/GaTheory/Lesson15.cs#L340-L363)) :
+
+```text
+== GA's nine altered chords on C (ChordAlterationService, GA.Domain.Services, compiled), through ChordTemplate.Analytical.FromPitchClassSet
+GA's list    pitch classes    quality    extension  alterations  GenerateNameWithAlterations  check
+C7alt        0 1 3 4 6 8 T    Dominant   Ninth      b9,b5,#5     C9(b9,b5,#5)                 DIFF
+C7(b9)       0 1 4 7 T        Dominant   Ninth      b9           C9(b9)                       DIFF
+C7(#9)       0 3 4 7 T        Dominant   Seventh    (none)       C7                           DIFF
+C7(b5)       0 4 6 T          Dominant   Seventh    b5           C7alt                        DIFF
+C7(#5)       0 4 8 T          Dominant   Seventh    #5           C7alt                        DIFF
+C7(#11)      0 4 6 7 T        Dominant   Seventh    b5           C7alt                        DIFF
+C7(b13)      0 4 7 8 T        Dominant   Seventh    #5           C7alt                        DIFF
+C7(b9,#11)   0 1 4 6 7 T      Dominant   Ninth      b9,b5        C9(b9,b5)                    DIFF
+Cmaj7(#11)   0 4 6 7 E        Major      Seventh    b5           Cmaj7(b5)                    DIFF
+
+GA's list    IsAlteredDominant  SuggestedNotation                  TryFindExact           GA's description
+C7alt        True               alt (altered dominant)             (none)                 Altered dominant (b9, #9, #11, b13)
+C7(b9)       True               alt (altered dominant)             dominant-7-b9          Dominant with flat ninth
+C7(#9)       False              No alterations                     dominant-7-sharp-9     Dominant with sharp ninth (Hendrix chord)
+C7(b5)       True               alt (altered dominant)             dominant-7-b5          Dominant with flat fifth
+C7(#5)       True               alt (altered dominant)             augmented-7            Dominant with sharp fifth
+C7(#11)      True               alt (altered dominant)             dominant-7-sharp-11    Dominant with sharp eleventh
+C7(b13)      True               alt (altered dominant)             dominant-7-b13         Dominant with flat thirteenth
+C7(b9,#11)   True               alt (altered dominant)             dominant-7-b9-sharp-11 Dominant with flat ninth and sharp eleventh
+Cmaj7(#11)   False              Flat fifth (tritone substitution)  (none)                 Major seventh with sharp eleventh (Lydian)
+```
+
+Aucun des neuf ne revient sous son propre nom. Un demi-ton au-dessus de la fondamentale fait de l'accord une « Ninth », parce que [`DetermineExtension`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Harmony/ChordFormula.cs#L233-L244) compte un demi-ton comme une neuvième quand l'accord a une septième, et la règle « 7alt » ne se déclenche que pour une « Seventh » : C7alt et C7(♭9) sont donc nommés comme des accords de neuvième, `C9(b9,b5,#5)` et `C9(b9)`. Le ♯9 de C7alt est lu comme une tierce mineure, et ses ♯11 et ♭13 comme ♭5 et ♯5. L'accord Hendrix, comme la propre description de GA appelle C7(♯9), revient en simple C7 avec « No alterations » : le cas particulier prévu pour lui, `7#9` ([`#L47-L51`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Chords/ChordAlterationService.cs#L47-L51)), attend un ♯9 que la détection ne trouve jamais. C7(♭5), C7(♯5), C7(♯11) et C7(♭13) sont tous « C7alt » : une altération suffit ([`#L136-L146`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Chords/ChordAlterationService.cs#L136-L146)), là où alt veut dire toute la gamme altérée. Le F♯ de Cmaj7(♯11) devient `Cmaj7(b5)`, avec la suggestion « Flat fifth (tritone substitution) ». Le catalogue, qui range les dominantes altérées sous leur propre nom ([`CanonicalChordPatternCatalog.cs#L93-L99`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Harmony/CanonicalChordPatternCatalog.cs#L93-L99)), fait mieux : il nomme sept des neuf, C7(♯5) en `augmented-7`, qui est le même accord, C+7.
+
+Les mêmes appels sur quatre accords dont la quinte altérée fait partie de la définition :
+
+```text
+== Chords whose fifth is lowered or raised by definition, through the same calls
+symbol       pitch classes    quality    extension  alterations  GenerateNameWithAlterations  check
+Cdim         0 3 6            Diminished Triad      b5           Cdim(b5)                     DIFF
+Caug         0 4 8            Augmented  Triad      #5           Caug(#5)                     DIFF
+Cm7b5        0 3 6 T          Diminished Seventh    b5           Cdim7(b5)                    DIFF
+Cdim7        0 3 6 9          Diminished Sixth      b5           C6(b5)                       DIFF
+```
+
+Le G♭ d'une triade diminuée est sa quinte, pas une altération de celle-ci, et pourtant chaque accord voit sa quinte écrite deux fois. Cm7♭5 devient « Cdim7 », le nom d'un autre accord, plus `(b5)`. Cdim7 devient un accord de sixte : sa quatrième note, 9 demi-tons au-dessus de C, est une sixte quand l'accord n'a pas de septième ([`ChordFormula.cs#L250`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Harmony/ChordFormula.cs#L250), [`#L288-L291`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Harmony/ChordFormula.cs#L288-L291)), et la notation de l'extension laisse tomber la qualité : `C6(b5)`.
+
+### Dans GA : les altérations qu'un gabarit peut porter
+
+La leçon 10 a compilé [`ChordTemplateFactory`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Chords/ChordTemplateFactory.cs#L37-L62), qui construit des accords sur chaque degré des gammes de GA. `GenerateAllPossibleChords` lance d'abord `GenerateFromAllModalFamilies`, qui parcourt déjà les gammes traditionnelles, symétriques et pentatoniques, puis parcourt les trois à nouveau ([`#L93-L115`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Chords/ChordTemplateFactory.cs#L93-L115)). Le nom de chaque gabarit donne l'extension demandée après son degré ([`#L477`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Chords/ChordTemplateFactory.cs#L477)). Le programme compte, par cette extension, les gabarits où `ChordAlterationService` trouve chaque altération ([`Lesson15.cs#L367-L382`](https://github.com/spareilleux/learn/blob/ac620ce/code/music-theory-ga/GaTheory/Lesson15.cs#L367-L382)) :
+
+```text
+== ChordTemplateFactory.GenerateAllPossibleChords (GA.Domain.Services, compiled): the alterations ChordAlterationService finds, by requested extension
+templates: 25900; the second half repeats the first, name and pitch classes: True
+distinct names: 11284
+
+extension    templates  FlatNinth       SharpNinth      FlatFifth       SharpFifth      SharpEleventh   FlatThirteenth
+Triad        3256       412             0               660             424             0               0
+Seventh      3256       506             0               856             632             0               0
+Ninth        3256       662             0               1236            1012            0               0
+Eleventh     2656       668             0               1160            1084            0               0
+Thirteenth   2080       632             0               1184            848             0               0
+Add9         3256       568             0               1040            804             0               0
+Add11        3256       538             0               744             656             0               0
+Sixth        3256       412             0               660             1352            0               0
+Sus2         814        256             80              212             202             0               0
+Sus4         814        0               0               212             212             176             0
+all          25900      4654            80              7964            7226            176             0
+```
+
+25 900 gabarits, les 12 950 derniers une copie des premiers. Le ♭13 n'est jamais trouvé. Le ♯9 n'apparaît que dans des gabarits Sus2 et le ♯11 que dans des gabarits Sus4 : le constructeur des accords sus est le seul endroit qui fixe une fonction à la main, neuvième pour la seconde et onzième pour la quarte ([`#L495`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Chords/ChordTemplateFactory.cs#L495)), donc une seconde augmentée devient ♯9 et une quarte augmentée ♯11. Partout ailleurs, un ♯11 compte comme ♭5 et un ♭13 comme ♯5. Les gabarits Sixth comptent 1352 ♯5 contre 424 pour les triades qu'ils prolongent : leur quatrième note est le sixième degré de la gamme ([`#L421-L427`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Chords/ChordTemplateFactory.cs#L421-L427)), et une sixte mineure, 8 demi-tons, est une quinte pour `FromSemitones`.
+
+## Les structures supérieures
+
+### L'idée
+
+Wikipédia : "In jazz, the term upper structure or "upper structure triad" refers to a voicing approach developed by jazz pianists and arrangers defined by the sounding of a major or minor triad in the uppermost pitches of a more complex harmony." Le nom est l'intervalle de la fondamentale de l'accord à celle de la triade : sur C7, une triade de E♭ majeur est "upper structure flat three, or US♭III for short" ([Upper structure](https://en.wikipedia.org/wiki/Upper_structure), d'après *The Jazz Piano Book* de Mark Levine). Le module Streeling [MUS-005 · L'harmonie jazz à la guitare](../../streeling/music/mus-005-jazz-harmony/) le dit ainsi : "you play a **simple triad** — something your hands already know — while the bass player provides the root and seventh."
+
+Quelles triades marchent sur C7, C E G B♭ ? Le cours garde celles qui n'ont ni F, la onzième, qui fait une neuvième mineure avec la tierce, ni B, une septième majeure contre B♭ ([`Lesson15.cs#L386-L402`](https://github.com/spareilleux/learn/blob/ac620ce/code/music-theory-ga/GaTheory/Lesson15.cs#L386-L402)) :
+
+```text
+== Upper structures over C7 (C E G B♭): the 24 major and minor triads that avoid F (the 11th) and B (the major 7th)
+triad   degrees over C   with C7                Wikipedia
+C       1 3 5            0 4 7 T
+D       9 ♯11 13         0 2 4 6 7 9 T          USII, C13♯11
+E♭      ♯9 5 ♭7          0 3 4 7 T              US♭III, C7♯9
+G♭      ♯11 ♭7 ♭9        0 1 4 6 7 T            US♭V, C7♭9♯11
+A♭      ♭13 1 ♯9         0 3 4 7 8 T            US♭VI, C7♯9♭13
+A       13 ♭9 3          0 1 4 7 9 T            USVI, C13♭9
+Cm      1 ♯9 5           0 3 4 7 T              USi, C7♯9
+D♭m     ♭9 3 ♭13         0 1 4 7 8 T            US♭ii, C7♭9♭13
+E♭m     ♯9 ♯11 ♭7        0 3 4 6 7 T            US♭iii, C7♯9♯11
+F♯m     ♯11 13 ♭9        0 1 4 6 7 9 T          US♯iv, C13♭9♯11
+Gm      5 ♭7 9           0 2 4 7 T
+Am      13 1 3           0 4 7 9 T
+triads kept: 12 of 24, 9 of them in Wikipedia's list
+CanonicalChordPatternCatalog patterns named upper structure or polychord: 0 of 62
+```
+
+Douze triades passent : les neuf de Wikipédia, avec l'accord que fait chacune, et trois simples, C lui-même, G mineur, le haut de C9, et A mineur, qui ajoute la treizième seule. US♭III et USi font le même accord, C7♯9, à partir de E♭ G B♭ et de C E♭ G. Le tableau de MUS-005 sur C7 donne à D, E♭, A♭ et F♯ majeur les mêmes tensions, F♯ étant G♭ ; sa cinquième ligne, B♭ majeur, "b7, 9, 11 — the sus/11 sound", contient le F que le cours écarte, qui ne fait un accord sus qu'une fois la tierce partie. Le catalogue de GA a 62 motifs, et aucun pour une structure supérieure ou un polyaccord, bien que son commentaire réserve les priorités 90 à 99 aux « polychord fragments » ([`CanonicalChordPatternCatalog.cs#L20-L26`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Harmony/CanonicalChordPatternCatalog.cs#L20-L26)).
+
+## Les polyaccords
+
+### L'idée
+
+"In music and music theory, a polychord consists of two or more chords, one on top of the other", écrit "with the top chord above a line and the bottom chord below". Les accords étendus se lisent de la même façon : "G7♯11♭9 (G–B–D–F–A♭–C♯) is formed from a G major triad (G–B–D) and a D♭ major triad (D♭–F–A♭)" ([Polychord](https://en.wikipedia.org/wiki/Polychord)). La leçon 12 a rencontré le plus célèbre, l'accord de Petrouchka de Stravinsky, C majeur sur F♯ majeur : six notes, la gamme triton.
+
+### Dans GA : `ga_polychord`
+
+Le serveur MCP de GA a un outil pour cela, [`GaPolychord`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaMcpServer/Tools/ChordAtonalTool.cs#L194-L218) : il réunit les classes de hauteurs de deux accords et imprime une fiche avec le vecteur, la forme primaire, le numéro de Forte, la famille modale et la gamme de l'ensemble réuni ([`#L105-L125`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaMcpServer/Tools/ChordAtonalTool.cs#L105-L125)). Les classes de hauteurs des accords viennent de la closure F# `domain.chordIntervals` de `GA.Business.DSL`, qui renvoie P1 M3 P5 pour une triade majeure et P1 m3 P5 pour une mineure ([`DomainClosures.fs#L78-L92`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs#L78-L92), [`#L199-L227`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs#L199-L227)). Le cours ne compile ni le serveur MCP ni ce projet F#, donc le programme copie le code de l'outil tel quel et remplace l'appel à la closure par ces deux réponses ([`Lesson15.cs#L169-L260`](https://github.com/spareilleux/learn/blob/ac620ce/code/music-theory-ga/GaTheory/Lesson15.cs#L169-L260)) ; la fiche elle-même tourne sur les classes compilées de GA. Il essaie cinq polyaccords : l'exemple de l'outil, l'ensemble que nomme cet exemple, celui d'`AdvancedHarmony.yaml`, et deux tirés du brouillon d'une compétence de polyaccords, [`DRAFT.md`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/skills-dev/_pending-tools/polychord/DRAFT.md#L43-L57). Pour chacun, il liste les modes de la leçon 11, sur la fondamentale de l'accord du bas, qui le contiennent ([`Lesson15.cs#L406-L426`](https://github.com/spareilleux/learn/blob/ac620ce/code/music-theory-ga/GaTheory/Lesson15.cs#L406-L426)) :
+
+```text
+== ga_polychord (GaMcpServer, not compiled), rebuilt above, on five polychords; then the modes of lesson 11 that contain each
+its description: "Example: B triad over C triad → Lydian mode set {C,D,E,F#,G,B}." (ChordAtonalTool.cs, line 198)
+
+-- B over C, from the tool's description
+Polychord: B/C
+Merged:     {C, Eb, E, F#, G, B} (6 tones)
+  ICV:        <3 1 3 4 3 1>
+  Forte:      6-Z19
+  Prime form: 0 1 3 4 7 8
+  Modal fam.: 6-note / 24 modes (mode 14)
+  from C: {C, E, G}
+  from B: {Eb, F#, B}
+  the 28 modes on C that contain it: Lydian ♯2
+  octatonic on C: half-whole False, whole-half False
+
+-- Bm over C, from the set the description names
+Polychord: Bm/C
+Merged:     {C, D, E, F#, G, B} (6 tones)
+  ICV:        <2 3 2 3 4 1>
+  Forte:      6-Z26
+  Prime form: 0 1 3 5 7 8
+  Modal fam.: 6-note / 12 modes (mode 9)
+  from C: {C, E, G}
+  from Bm: {D, F#, B}
+  the 28 modes on C that contain it: Lydian
+  octatonic on C: half-whole False, whole-half False
+
+-- C over F#, from AdvancedHarmony.yaml, line 102: "C major over F# major"
+Polychord: C/F#
+Merged:     {C, C#, E, F#, G, Bb} (6 tones)
+  ICV:        <2 2 4 2 2 3>
+  Forte:      6-30
+  Prime form: 0 1 3 6 7 9
+  Modal fam.: 6-note / 6 modes (mode 3)
+  from F#: {C#, F#, Bb}
+  from C: {C, E, G}
+  the 28 modes on F# that contain it: none
+  octatonic on F#: half-whole True, whole-half False
+
+-- D over Eb, from skills-dev/_pending-tools/polychord/DRAFT.md, line 46: "D over Eb"
+Polychord: D/Eb
+Merged:     {D, Eb, F#, G, A, Bb} (6 tones)
+  ICV:        <3 1 3 4 3 1>
+  Forte:      6-Z19
+  Prime form: 0 1 3 4 7 8
+  Modal fam.: 6-note / 24 modes (mode 0)
+  from Eb: {Eb, G, Bb}
+  from D: {D, F#, A}
+  the 28 modes on Eb that contain it: Lydian ♯2
+  octatonic on Eb: half-whole False, whole-half False
+
+-- C over D, from DRAFT.md, line 45: "C/D"
+Polychord: C/D
+Merged:     {C, D, E, F#, G, A} (6 tones)
+  ICV:        <1 4 3 2 4 1>
+  Forte:      6-33
+  Prime form: 0 2 3 5 7 9
+  Modal fam.: 6-note / 12 modes (mode 2)
+  from D: {D, F#, A}
+  from C: {C, E, G}
+  the 28 modes on D that contain it: Mixolydian, Mixolydian ♭6
+  octatonic on D: half-whole False, whole-half False
+```
+
+L'exemple de l'outil est faux : une triade de B majeur est B D♯ F♯, et l'outil imprime `{C, Eb, E, F#, G, B}`, 6-Z19, que seul le lydien ♯2 contient parmi les 28 modes. L'ensemble lydien de la description, `{C, D, E, F#, G, B}`, est B mineur sur C. [`AdvancedHarmony.yaml`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/AdvancedHarmony.yaml#L95-L104) dit que C majeur sur F♯ majeur « Creates all 12 chromatic pitches » : il en crée six, 6-30, la gamme triton de la leçon 12, dans aucun des 28 modes mais dans la gamme octatonique demi-ton-ton ; le propre [`IconicChords.yaml`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/IconicChords.yaml#L78-L86) de GA liste l'accord de Petrouchka avec ces six classes de hauteurs. Le brouillon promet à D sur E♭ une « Lydian-augmented colour » ; c'est la même forme que B sur C, une tierce mineure plus haut, et sur E♭ seul le lydien ♯2 la contient. Son C sur D, `{A, C, D, E, F#, G}` dans le brouillon, est juste.
+
+Deux lignes de la fiche méritent un mot. « Modal fam. » est la famille de la leçon 2, chaque ensemble qui contient C avec le même vecteur, donc un ensemble de six notes peut avoir 24 « modes ». « mode 0 » pour D sur E♭ n'est pas un mode : [`ModeIndex`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Atonal/PitchClassSet.cs#L106-L112) est la place de l'ensemble dans la liste de sa famille, ou −1 quand il n'y est pas, et l'outil l'imprime plus un. La famille ne contient que des ensembles qui contiennent C, et D E♭ F♯ G A B♭ n'en fait pas partie. Aucune fiche n'a de ligne « Scale: » : `ModesConfig` ne connaît aucun mode avec l'un de ces cinq vecteurs.
+
+## Ce que le chatbot peut retrouver
+
+[`YamlKnowledgeLoader`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/YamlKnowledgeLoader.fs#L128-L140) aplatit chaque YAML de contenu qui n'a pas de chargeur typé en entrées de connaissance pour la recherche (la leçon 10 a lu `ModalInterchange.yaml` par lui). Le programme lui demande les fichiers de cette leçon ([`Lesson15.cs#L430-L449`](https://github.com/spareilleux/learn/blob/ac620ce/code/music-theory-ga/GaTheory/Lesson15.cs#L430-L449)) :
+
+```text
+== GA's YamlKnowledgeLoader (GA.Business.Config, compiled): the entries of ExtendedChords.yaml, AdvancedHarmony.yaml and the Petrushka chord of IconicChords.yaml
+  3 entries from ExtendedChords.yaml: 9th Chord, 11th Chord, 13th Chord
+  9 entries from AdvancedHarmony.yaml: Extended Chords, Added Note Chords, Synthetic Scales Harmony, Polymodality, Polychords, Cluster Chords, Microtonal Harmony, Spectral Harmony, Neo-Functional Reharmonization
+    Formula: 1 3 5 b7 9
+    Formula: 1 3 5 b7 9 11
+    Formula: 1 3 5 b7 9 13
+  "Creates all 12 chromatic pitches" in the Polychords entry: yes
+    IconicChords.yaml, Petrushka Chord, TheoreticalName: C/F# Polychord
+    IconicChords.yaml, Petrushka Chord, PitchClasses: 0; 4; 7; 6; 10; 1
+```
+
+L'accord de treizième d'[`ExtendedChords.yaml`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/ExtendedChords.yaml#L19-L24), 1 3 5 ♭7 9 13, n'a pas de onzième : l'accord du catalogue, pas celui des parseurs. Les entrées que l'on peut retrouver disent à la fois « all 12 » et les six classes de hauteurs de l'accord de Petrouchka.
+
+## Ajouté après la première exécution : le D♭/C de MUS-005
+
+En écrivant cette leçon, la section de MUS-005 sur les accords à basse imposée a retenu l'attention : "`Db/C` = Db triad over C bass (creates a Cmaj7#11 sound)" ([`mus-005-jazz-harmony.md#L88`](https://github.com/GuitarAlchemist/Demerzel/blob/6aef19b3a7c0ceac400f89f5585f4c033d61c99c/state/streeling/courses/music/en/mus-005-jazz-harmony.md#L88), tel que le module se lisait jusqu'à ce que [Demerzel #1098](https://github.com/GuitarAlchemist/Demerzel/pull/1098) le corrige pour nommer `D/C`). Le programme a alors imprimé les deux accords à basse imposée et Cmaj7♯11, dans un commit à part après la première exécution ([`Lesson15.cs#L451-L463`](https://github.com/spareilleux/learn/blob/ac620ce/code/music-theory-ga/GaTheory/Lesson15.cs#L451-L463)) :
+
+```text
+== Added after the first run: MUS-005's slash chord D♭/C against Cmaj7♯11, and D/C
+chord                  pitch classes    degrees over C     the 28 modes on C that contain it
+D♭ triad over C bass   0 1 5 8          1 ♭9 11 ♭13        Phrygian, Locrian, Phrygian dominant, Locrian ♭♭7
+D triad over C bass    0 2 6 9          1 9 ♯11 13         Lydian, Lydian augmented, Lydian dominant, Dorian ♯4, Dorian ♭5, Lydian ♭3
+Cmaj7♯11               0 4 6 7 E        1 3 ♯11 5 7        Lydian, Lydian ♯2
+```
+
+D♭/C est C D♭ F A♭ : une ♭9, une onzième et une ♭13 sur C, ni tierce ni ♯11, et les modes qui le contiennent sont le phrygien, le locrien, le phrygien dominant et le locrien ♭♭7. L'accord à basse imposée lydien est D/C, dont D, F♯ et A sont les 9, ♯11 et 13 de la ligne USII plus haut.
+
+## Exercices
+
+1. Quelles notes a C7(♯9), et pourquoi `GenerateNameWithAlterations` l'appelle-t-il C7 ?
+2. Que renvoie `ChordSymbolParser` pour `Cø7`, et pour `Cm7♭5`, le même accord dans la liste d'Open Music Theory ?
+3. Sur C7, quelle triade majeure fait C7♯9♭13 ? Quels sont les degrés de ses notes au-dessus de C ?
+4. Pourquoi la fiche de D sur E♭ imprime-t-elle « mode 0 » ?
+
+<details>
+<summary>Solutions</summary>
+
+1. C E G B♭ D♯, `0 3 4 7 T`. `FromSemitones` fait de 3 demi-tons une tierce, et `DetectAlterationFromSemitones` ne lit jamais une tierce comme ♯9, donc l'accord n'a pas d'altération : une septième de dominante, « C7 ». La sortie ci-dessus le montre, avec « No alterations ».
+2. `Cø7` est dans sa table : `0 3 6 T`, C E♭ G♭ B♭. `Cm7♭5`, avec le signe ♭, ne correspond ni à la table ni à aucun des tests du repli, qui cherchent la lettre b, donc il renvoie une triade de C majeur, `0 4 7`. Le tableau des 41 chiffrages montre les deux.
+3. A♭ majeur, US♭VI : A♭ C E♭ sont ♭13, 1 et ♯9 sur C, et avec C7 ils font `0 3 4 7 8 T`.
+4. `ModeIndex` vaut −1 quand l'ensemble n'est pas dans la liste de sa famille, et la famille ne contient que des ensembles qui contiennent C. D E♭ F♯ G A B♭ n'a pas de C ; l'outil imprime −1 + 1.
+
+</details>
+
+## À retenir
+
+- Un chiffrage d'accord nomme l'extension la plus haute et sous-entend celles d'en dessous : C13 fait sept notes, la collection de F majeur, le même ensemble que Fmaj13 et Gm13. Les musiciens laissent tomber la onzième, souvent la quinte, et le catalogue de GA range la treizième sans sa onzième, mais pas sans sa quinte, tandis que son parseur construit la pile complète.
+- `Chord.FromSymbol` lit juste 14 chiffrages sur 41 et rejette les accords altérés et la plupart des graphies des manuels ; `ChordSymbolParser` ne rejette rien, en lit juste 17 et change tout ce qu'il ne connaît pas, mots anglais compris, en triade majeure. Les deux lisent `CM7` comme une septième mineure.
+- Les classes de hauteurs ne distinguent pas ♯11 de ♭5 ni ♭13 de ♯5 ; le service d'altérations de GA choisit ♭5 et ♯5 et lit ♯9 comme une tierce mineure, sauf dans les gabarits sus, dont le constructeur fixe la fonction à la main, et ne renomme aucun de ses propres neuf accords altérés. Une altération fait d'une dominante un « alt ».
+- Sur C7, douze triades évitent la onzième et la septième majeure : les neuf structures supérieures de Wikipédia et trois simples. Aucun motif du catalogue de GA ne porte le nom d'une structure supérieure.
+- L'exemple de `ga_polychord` nomme le mauvais ensemble, `AdvancedHarmony.yaml` compte douze hauteurs là où l'accord de Petrouchka en a six, et D♭/C, que MUS-005 appelait un son Cmaj7♯11 jusqu'à Demerzel #1098, n'en est pas un.
+
+## Sources
+
+- Mark Gotham et al., [*Open Music Theory*](https://viva.pressbooks.pub/openmusictheory/), version 2, 2023, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) : [Chord Symbols](https://viva.pressbooks.pub/openmusictheory/chapter/chord-symbols/) (qualités par défaut, extensions sous-entendues, graphies, add, sus et accords à basse imposée), [Jazz Voicings](https://viva.pressbooks.pub/openmusictheory/chapter/jazz-voicings/) (omettre la quinte).
+- Wikipédia : [Eleventh chord](https://en.wikipedia.org/wiki/Eleventh_chord), [Thirteenth](https://en.wikipedia.org/wiki/Thirteenth_(interval)), [Altered chord](https://en.wikipedia.org/wiki/Altered_chord), [Altered scale](https://en.wikipedia.org/wiki/Altered_scale), [Upper structure](https://en.wikipedia.org/wiki/Upper_structure), [Polychord](https://en.wikipedia.org/wiki/Polychord), [Chord notation](https://en.wikipedia.org/wiki/Chord_notation).
+- Streeling : [MUS-005 · L'harmonie jazz à la guitare](../../streeling/music/mus-005-jazz-harmony/).
+- GuitarAlchemist/ga au commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6) : `Common/GA.Domain.Core/Theory/Harmony/Chord.cs`, `ChordFormula.cs`, `ChordFunctionExtensions.cs`, `ChordTemplate.cs`, `CanonicalChordPatternCatalog.cs`, `Theory/Atonal/PitchClassSet.cs`, `Common/GA.Domain.Services/Chords/Parsing/ChordSymbolParser.cs`, `Chords/BasicChordExtensionsService.cs`, `Chords/ChordAlterationService.cs`, `Chords/ChordTemplateFactory.cs`, `Common/GA.Business.Config/YamlKnowledgeLoader.fs`, `ExtendedChords.yaml`, `AdvancedHarmony.yaml`, `IconicChords.yaml`, `Common/GA.Business.DSL/Closures/BuiltinClosures/DomainClosures.fs`, `GaMcpServer/Tools/ChordAtonalTool.cs`, `Apps/ga-server/GaApi/Services/VoicingFilterService.cs`, `Common/GA.Business.Core.Orchestration/Services/SpectralRagOrchestrator.cs`, `skills-dev/_pending-tools/polychord/DRAFT.md`, `Tests/Common/GA.Business.Core.Tests/Chords/ChordSymbolParserTests.cs`.

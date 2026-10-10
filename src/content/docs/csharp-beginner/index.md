@@ -45,17 +45,38 @@ The examples use small, real data where it helps: the notes of a guitar, the tun
 | 2 | [Variables, types and input](02-variables-and-types/) | `int`, `double`, `decimal`, `string`, `bool`, `var`, conversions, interpolation, `Console.ReadLine` |
 | 3 | [Conditions and loops](03-conditions-and-loops/) | `if`, `switch`, `for`, `foreach`, `while`, `break`, the debugger |
 | 4 | [Methods, arrays and lists](04-methods-arrays-lists/) | parameters, return values, arrays, `List<T>`, first steps with `null` |
-| 5 | Classes and objects | fields, properties, constructors, methods, `static` |
-| 6 | Records, structs and enums | value and reference types, equality, `enum` |
-| 7 | Interfaces and inheritance | `interface`, `abstract`, `override`, polymorphism |
-| 8 | Exceptions and null safety | `try`/`catch`/`finally`, `throw`, nullable reference types |
-| 9 | Collections and LINQ | `Dictionary<TKey, TValue>`, `HashSet<T>`, `Where`, `Select`, `OrderBy` |
-| 10 | Files and text | `File`, `Path`, reading a CSV file of Guitar Alchemist's projects |
-| 11 | Unit tests | xUnit, `dotnet test`, testing the methods of earlier lessons |
-| 12 | A small project | a solution with a library, a console app and tests, a NuGet package, a first look at `async` |
+| 5 | [Classes and objects](05-classes-and-objects/) | fields, properties, constructors, methods, `static` |
+| 6 | [Records, structs and enums](06-records-structs-enums/) | value and reference types, equality, `enum` |
+| 7 | [Interfaces and inheritance](07-interfaces-and-inheritance/) | `interface`, `abstract`, `override`, polymorphism |
+| 8 | [Exceptions and null safety](08-exceptions-and-null-safety/) | `try`/`catch`/`finally`, `throw`, nullable reference types |
+| 9 | [Collections and LINQ](09-collections-and-linq/) | `Dictionary<TKey, TValue>`, `HashSet<T>`, `Where`, `Select`, `OrderBy` |
+| 10 | [Files and text](10-files-and-text/) | `File`, `Path`, reading a CSV file of Guitar Alchemist's projects |
+| 11 | [Unit tests](11-unit-tests/) | xUnit, `dotnet test`, testing the methods of earlier lessons |
+| 12 | [A small project](12-small-project/) | a solution with a library, a console app and tests, a NuGet package, a first look at `async` |
 | — | [Journal](journal/) | |
 
-Lessons 5 to 12 are planned and not written yet.
+## Highlights from the journal
+
+The [journal](journal/) records what writing and testing this course turned up. These are the findings that change how you write or run a program; each row links to the lesson that teaches it and to the journal entry with the measurement.
+
+| What the journal found | Why it matters | See |
+|---|---|---|
+| A misspelled `Writeline` (CS0117) is reported only once the missing `;` and quote of the same program are fixed: syntax errors hide the others | Fixing an error can make new ones appear; that is progress, not a step back | [Lesson 1](01-first-program/), [journal](journal/#2026-09-14--the-sdk-and-file-based-apps) |
+| `double.TryParse("1.5")` depends on the culture: `true` and 15 in `es-ES`, where the dot separates thousands, `false` in `fr-FR` | The same program reads a different number on a Spanish or a French machine | [Lesson 2](02-variables-and-types/), [journal](journal/#2026-09-14--the-sdk-and-file-based-apps) |
+| Warnings are printed only when the SDK compiles: a second `dotnet run` of an unchanged file prints none, even with `--no-cache`; `dotnet clean` brings them back | A warning that is gone on the next run has not been fixed | [Lesson 3](03-conditions-and-loops/), [journal](journal/#2026-09-14--the-sdk-and-file-based-apps) |
+| The literal `0` converts to an enum without a cast, and CS8524 warns about a `switch` expression that has an arm for every name | An enum variable can hold a number that has no name: the lesson's program fails on 7 | [Lesson 6](06-records-structs-enums/), [journal](journal/#2026-10-01--records-structs-and-enums) |
+| A draft said that `shape[i].Fret += 2` on a list of `readonly record struct` gives CS1612; a probe compiled before publishing gave CS8852 | Every output and error message in the course is pasted from a run, never written from memory | [Lesson 6](06-records-structs-enums/), [journal](journal/#2026-10-01--records-structs-and-enums) |
+| In Guitar Alchemist, `ChordTemplate`'s `ToString() => Name` is not `sealed`, so its derived records print all their properties instead of the chord's name | The `override` of lesson 7 meets the records of lesson 6 in real code; one GA call site logs the dump. Not reported to GA yet | [Lesson 7](07-interfaces-and-inheritance/), [QA table](journal/#qa) |
+| A nullable warning points where `null` gets in, not where the program crashes: CS8618 sits on the property's declaration, and the line that crashes has no warning | Fix each warning where it is, even far from the crash | [Lesson 8](08-exceptions-and-null-safety/), [journal](journal/#2026-10-02--exceptions-and-null-safety) |
+| Guitar Alchemist silences fifteen nullable warnings in `NoWarn`, twice. Its code has none to hide, but a test file with seven nullable mistakes compiled without a warning | Silencing a warning also silences the mistakes still to come. Not reported to GA yet | [Lesson 8](08-exceptions-and-null-safety/), [QA table](journal/#qa) |
+| A dictionary's `foreach` follows the order of addition only until the first `Remove`: a key added afterwards takes the removed key's place | A sorted result put in a `Dictionary` stays sorted by chance; sort when the order matters | [Lesson 9](09-collections-and-linq/), [journal](journal/#2026-10-02--collections-and-linq) |
+| Three of the four YAML files that Guitar Alchemist's music knowledge services read don't load; each loader catches the exception and carries on with one default item | A `catch` that only prints hides the bug: GA counts 16 artists, and nothing fails. Reported as [GA issue #797](https://github.com/GuitarAlchemist/ga/issues/797); fix proposed in [GA PR #808](https://github.com/GuitarAlchemist/ga/pull/808) | [Lesson 9](09-collections-and-linq/), [QA table](journal/#qa) |
+| A relative path starts from the current directory, not from the program's file: `l10_where.cs` finds `data/ga-projects.csv` when `dotnet run` starts in `code/csharp-beginner`, and misses it from the repository root | The same program finds its file or not depending on the folder it is started from; a path built from `EntryPointFileDirectoryPath` works from both | [Lesson 10](10-files-and-text/), [journal](journal/#2026-10-03--files-and-text) |
+| The format string that Guitar Alchemist writes its naturalness CSV with follows the machine's culture: under `fr-FR`, `2.50` becomes `2,50`, and a row of 6 values splits into 8 | A file written on a French machine doesn't read back with `Split(',')`; write numbers with `CultureInfo.InvariantCulture`. Fix proposed in [GA PR #811](https://github.com/GuitarAlchemist/ga/pull/811) | [Lesson 10](10-files-and-text/), [QA table](journal/#qa) |
+| Guitar Alchemist's tests of its YAML services pass while three of the four files don't load: three tests are skipped, and the others check "more than zero", which the one default item satisfies | A test that only checks "more than zero" can't see a fallback; check the real value. Fix proposed in [GA PR #808](https://github.com/GuitarAlchemist/ga/pull/808) | [Lesson 11](11-unit-tests/), [QA table](journal/#qa) |
+| With its arguments swapped, `Assert.Equal` calls the method's result "Expected" and the test's value "Actual"; the analyzer rule xUnit2000 warns before the tests run | The expected value comes first; read the warnings of a test build too | [Lesson 11](11-unit-tests/), [journal](journal/#2026-10-03--unit-tests) |
+| `dotnet test` in a solution's folder builds only the test projects and what they reference: with a compile error in the console app, the tests still pass and exit with 0 | Run `dotnet build` too before you trust a green test run | [Lesson 12](12-small-project/), [journal](journal/#2026-10-03--a-small-project) |
+| In Guitar Alchemist's `Directory.Build.props`, the `PackageReference Update` lines meant to align package versions change nothing: the file is imported before the projects' own items | Check the version a restore picks; `Directory.Build.targets` or central package management do what these lines intend. Fix proposed in [GA PR #812](https://github.com/GuitarAlchemist/ga/pull/812) | [Lesson 12](12-small-project/), [QA table](journal/#qa) |
 
 ## Prerequisites
 

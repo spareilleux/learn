@@ -11,4 +11,4 @@ sidebar:
 
 ## Módulos
 
-- [SEM-001 · Signs in Governance — Reading Constitutions Through Peirce's Lens](sem-001-signs-in-governance/)
+- [SEM-001 · Los signos en la gobernanza — Leer las constituciones con la lente de Peirce](sem-001-signs-in-governance/)

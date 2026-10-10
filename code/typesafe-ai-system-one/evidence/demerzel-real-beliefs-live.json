@@ -1,0 +1,422 @@
+{
+  "status": "complete",
+  "plan": {
+    "mode": "plan",
+    "corpus": "demerzel-real-beliefs/1",
+    "definitions": "leaning",
+    "cases": 8,
+    "agreed_cases": 8,
+    "arms": [
+      "canonical",
+      "reversed"
+    ],
+    "calls": 16,
+    "total_payload_utf8_bytes": 44842,
+    "input_cost_proxy_usd": 0.0018833640000000002,
+    "stop_after_reported_input_cost_usd": 0.05,
+    "actual_billed_cost_guaranteed": false,
+    "retries": 0
+  },
+  "corpus_sha256": "31f3477d0cc638f8cb17a0c3e90ac1eeeecb0596e77cea7f7c45ec2b2677d37c",
+  "calls": [
+    {
+      "arm": "canonical",
+      "id": "b01",
+      "request_sha256": "58205eb818c223694c887fdadeff5b47f201ad7fc84929b3dbb9e5392fdc21ff",
+      "elapsed_ms": 448.5,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 757,
+        "output_tokens": 66
+      },
+      "prediction": "T",
+      "confidence": 0.91,
+      "probabilities": {
+        "T": 0.92,
+        "C": 0.0,
+        "U": 0.01,
+        "P": 0.05,
+        "F": 0.01,
+        "D": 0.01
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "b02",
+      "request_sha256": "df78223300bb1d31784dfef93057e4b038c5838f4878d025910fd8778c436388",
+      "elapsed_ms": 410.9,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 876,
+        "output_tokens": 66
+      },
+      "prediction": "T",
+      "confidence": 0.87,
+      "probabilities": {
+        "C": 0.0,
+        "P": 0.09,
+        "D": 0.0,
+        "T": 0.9,
+        "F": 0.0,
+        "U": 0.01
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "b03",
+      "request_sha256": "22028b98c742a33d95778f1217a44ae18c54bad3e6f1d4d07f3ff731d1996914",
+      "elapsed_ms": 380.0,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 1085,
+        "output_tokens": 66
+      },
+      "prediction": "T",
+      "confidence": 0.29,
+      "probabilities": {
+        "D": 0.17,
+        "T": 0.39999999999999997,
+        "C": 0.05,
+        "P": 0.22,
+        "F": 0.14,
+        "U": 0.02
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "b04",
+      "request_sha256": "eb950ca9f2ae2dc4049f19a7e320e9edce2eecfdadc71b4d3166599aa058c73e",
+      "elapsed_ms": 337.6,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 1400,
+        "output_tokens": 67
+      },
+      "prediction": "P",
+      "confidence": 0.87,
+      "probabilities": {
+        "F": 0.0,
+        "C": 0.0,
+        "T": 0.11,
+        "D": 0.0,
+        "U": 0.0,
+        "P": 0.89
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "b05",
+      "request_sha256": "0d457659ebc8e53abbc9a961416dc6d1f8bcecc30d57f81f5f08983caaf0af39",
+      "elapsed_ms": 446.3,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 1090,
+        "output_tokens": 66
+      },
+      "prediction": "T",
+      "confidence": 0.99,
+      "probabilities": {
+        "F": 0.0,
+        "U": 0.0,
+        "P": 0.0,
+        "T": 1.0,
+        "D": 0.0,
+        "C": 0.0
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "b06",
+      "request_sha256": "455a57b3c14d7da02de5ffcb552f035c870567bc84663534875ca2eeac8b11d2",
+      "elapsed_ms": 395.0,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 1967,
+        "output_tokens": 66
+      },
+      "prediction": "T",
+      "confidence": 0.98,
+      "probabilities": {
+        "D": 0.0,
+        "U": 0.01,
+        "P": 0.01,
+        "F": 0.0,
+        "T": 0.98,
+        "C": 0.0
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "b07",
+      "request_sha256": "77e91e1250bf54c7659f970276adf7b3a49df8df56e6a67066c2162090613c46",
+      "elapsed_ms": 436.5,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 765,
+        "output_tokens": 66
+      },
+      "prediction": "U",
+      "confidence": 0.82,
+      "probabilities": {
+        "C": 0.0,
+        "D": 0.03,
+        "T": 0.01,
+        "F": 0.01,
+        "P": 0.1,
+        "U": 0.85
+      }
+    },
+    {
+      "arm": "canonical",
+      "id": "b08",
+      "request_sha256": "7679ece027572bd2e1309fae844666a442cbcd09fc7a3c4e8a8c90adb06d5979",
+      "elapsed_ms": 375.8,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 706,
+        "output_tokens": 67
+      },
+      "prediction": "P",
+      "confidence": 0.64,
+      "probabilities": {
+        "F": 0.0,
+        "C": 0.0,
+        "D": 0.02,
+        "T": 0.03,
+        "P": 0.7,
+        "U": 0.25
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "b01",
+      "request_sha256": "58205eb818c223694c887fdadeff5b47f201ad7fc84929b3dbb9e5392fdc21ff",
+      "elapsed_ms": 415.1,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 757,
+        "output_tokens": 66
+      },
+      "prediction": "T",
+      "confidence": 0.89,
+      "probabilities": {
+        "C": 0.0,
+        "F": 0.01,
+        "D": 0.01,
+        "P": 0.06,
+        "U": 0.01,
+        "T": 0.91
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "b02",
+      "request_sha256": "df78223300bb1d31784dfef93057e4b038c5838f4878d025910fd8778c436388",
+      "elapsed_ms": 348.5,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 876,
+        "output_tokens": 66
+      },
+      "prediction": "T",
+      "confidence": 0.9,
+      "probabilities": {
+        "C": 0.0,
+        "P": 0.07,
+        "F": 0.0,
+        "U": 0.0,
+        "T": 0.93,
+        "D": 0.0
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "b03",
+      "request_sha256": "22028b98c742a33d95778f1217a44ae18c54bad3e6f1d4d07f3ff731d1996914",
+      "elapsed_ms": 359.6,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 1085,
+        "output_tokens": 66
+      },
+      "prediction": "T",
+      "confidence": 0.31,
+      "probabilities": {
+        "T": 0.42,
+        "U": 0.02,
+        "C": 0.04,
+        "P": 0.23,
+        "F": 0.14,
+        "D": 0.15
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "b04",
+      "request_sha256": "eb950ca9f2ae2dc4049f19a7e320e9edce2eecfdadc71b4d3166599aa058c73e",
+      "elapsed_ms": 379.8,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 1400,
+        "output_tokens": 67
+      },
+      "prediction": "P",
+      "confidence": 0.9,
+      "probabilities": {
+        "C": 0.0,
+        "U": 0.0,
+        "P": 0.92,
+        "T": 0.08,
+        "D": 0.0,
+        "F": 0.0
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "b05",
+      "request_sha256": "0d457659ebc8e53abbc9a961416dc6d1f8bcecc30d57f81f5f08983caaf0af39",
+      "elapsed_ms": 440.0,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 1090,
+        "output_tokens": 66
+      },
+      "prediction": "T",
+      "confidence": 0.99,
+      "probabilities": {
+        "C": 0.0,
+        "F": 0.0,
+        "D": 0.0,
+        "U": 0.0,
+        "P": 0.0,
+        "T": 1.0
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "b06",
+      "request_sha256": "455a57b3c14d7da02de5ffcb552f035c870567bc84663534875ca2eeac8b11d2",
+      "elapsed_ms": 375.2,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 1967,
+        "output_tokens": 66
+      },
+      "prediction": "T",
+      "confidence": 0.97,
+      "probabilities": {
+        "T": 0.98,
+        "F": 0.0,
+        "D": 0.0,
+        "U": 0.01,
+        "P": 0.01,
+        "C": 0.0
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "b07",
+      "request_sha256": "77e91e1250bf54c7659f970276adf7b3a49df8df56e6a67066c2162090613c46",
+      "elapsed_ms": 440.7,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 765,
+        "output_tokens": 66
+      },
+      "prediction": "U",
+      "confidence": 0.83,
+      "probabilities": {
+        "P": 0.1,
+        "F": 0.01,
+        "T": 0.01,
+        "C": 0.0,
+        "D": 0.02,
+        "U": 0.86
+      }
+    },
+    {
+      "arm": "reversed",
+      "id": "b08",
+      "request_sha256": "7679ece027572bd2e1309fae844666a442cbcd09fc7a3c4e8a8c90adb06d5979",
+      "elapsed_ms": 411.7,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 706,
+        "output_tokens": 67
+      },
+      "prediction": "P",
+      "confidence": 0.65,
+      "probabilities": {
+        "U": 0.23,
+        "F": 0.0,
+        "T": 0.03,
+        "C": 0.0,
+        "D": 0.02,
+        "P": 0.72
+      }
+    }
+  ],
+  "reported_input_tokens": 17292,
+  "reported_output_tokens": 1060,
+  "reported_input_cost_proxy_usd": 0.000726264,
+  "summary": {
+    "canonical": {
+      "score": {
+        "agreed_cases": 8,
+        "correct": 5,
+        "invalid": 0,
+        "false_true": 2,
+        "absence_as_refutation": 0,
+        "over_unknown": 1,
+        "conflict_resolved": 0,
+        "unknown_cases": 0,
+        "confusion": {
+          "T": {
+            "T": 3
+          },
+          "P": {
+            "T": 2,
+            "P": 2,
+            "U": 1
+          },
+          "U": {},
+          "D": {},
+          "F": {},
+          "C": {}
+        }
+      },
+      "verdict": "INCONCLUSIVE"
+    },
+    "reversed": {
+      "score": {
+        "agreed_cases": 8,
+        "correct": 5,
+        "invalid": 0,
+        "false_true": 2,
+        "absence_as_refutation": 0,
+        "over_unknown": 1,
+        "conflict_resolved": 0,
+        "unknown_cases": 0,
+        "confusion": {
+          "T": {
+            "T": 3
+          },
+          "P": {
+            "T": 2,
+            "P": 2,
+            "U": 1
+          },
+          "U": {},
+          "D": {},
+          "F": {},
+          "C": {}
+        }
+      },
+      "verdict": "INCONCLUSIVE"
+    },
+    "overall_verdict": "INCONCLUSIVE",
+    "order_flips": [],
+    "reported_input_tokens": 17292,
+    "reported_output_tokens": 1060
+  }
+}

@@ -1,0 +1,428 @@
+---
+title: "Lección 11: Los modos en profundidad"
+description: Los modos de la menor melódica y de la menor armónica, el brillo de un modo y las familias modales, comparados con las clases de modos genéricas de Guitar Alchemist, sus tres medidas de brillo, el servicio que ordena los modos y su archivo Modes.yaml.
+sidebar:
+  label: 11. Los modos en profundidad
+  order: 11
+---
+
+La lección 2 sacó siete modos de la escala mayor. Esta lección hace lo mismo con otras dos escalas de siete notas, la menor melódica y la menor armónica, cuyos modos dan al jazz la mayoría de sus escalas de dominante. Luego ordena los modos del más brillante al más oscuro, y pregunta qué es una familia modal. [Guitar Alchemist](https://github.com/GuitarAlchemist/ga) (GA) responde en cinco lugares: clases de modos genéricas, una interfaz que nombra los grados, tres medidas de brillo, un servicio que ordena los modos y un archivo de configuración de 165 modos. El programa del curso comprueba cada uno, y ejecuta el propio código de GA siempre que puede.
+
+Todos los enlaces a GA apuntan al commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6). Las salidas proceden del comando de abajo; el punto de entrada es `l13`.
+
+```bash
+dotnet run --project code/music-theory-ga/GaTheory -c Release -- l13
+```
+
+## Los modos de la menor melódica
+
+### La idea
+
+Wikipedia: "A great deal of modern jazz harmony arises from the modes of the ascending form of the melodic minor scale, also known as the jazz melodic minor scale. This scale is essentially a diatonic major scale with a lowered third, for example A-B-C-D-E-F♯-G♯-A" ([Jazz scale](https://en.wikipedia.org/wiki/Jazz_scale)). Sus pasos son 2 1 2 2 2 2 1 (lección 2), y sus modos son las rotaciones de esos pasos. El mismo artículo los nombra y da a cada uno el acorde que le corresponde: dórico ♭2, lidio aumentado, lidio dominante (también llamado escala acústica), mixolidio ♭6, locrio ♮2 (escribe "Half-diminished, Locrian ♯2, or Aeolian ♭5") y la escala alterada, o superlocria. El lidio dominante va con "C7 (9, ♯11, 13)" y la escala alterada con "C7 (♭9 or ♯9, ♯11, ♭13)": dos maneras de colorear una séptima de dominante.
+
+Open Music Theory construye escalas de acorde (*chord-scales*) a partir de los modos de la mayor, y luego añade: "A similar approach to the one above can be used to derive more chord-scale relationships from the melodic minor, harmonic minor, and harmonic major modes" ([Open Music Theory, "Chord-Scale Theory"](https://viva.pressbooks.pub/openmusictheory/chapter/chord-scale-theory/)). El módulo Streeling [MUS-005 · Armonía de jazz para guitarra](../../streeling/music/mus-005-jazz-harmony/) lo hace en su sección 6, sobre la teoría acorde-escala: V7♯11 toma el lidio dominante y V7alt la escala alterada, ambos sacados de la menor melódica, su «escala madre».
+
+El curso escribe cada modo con la notación de la lección 2: cada grado comparado con la escala mayor, `>` sobre un grado que difiere del modo de referencia (el eolio cuando la tercera es menor, el jónico si no), y ♮ sobre un grado que la referencia baja ([`Lesson13.Formula`](https://github.com/spareilleux/learn/blob/13e7607/code/music-theory-ga/GaTheory/Lesson13.cs#L39-L51)).
+
+### En GA
+
+[`MelodicMinorMode`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/Modes/Diatonic/MelodicMinorMode.cs#L16-L18) es un modo de `Scale.MelodicMinor`, que vale `new("A B C D E F# G#")` ([`Scale.cs#L116-L121`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/Scales/Scale.cs#L116-L121)). Como en los modos de la mayor de la lección 2, sus notas son la lista de notas rotada, y su fórmula es el `ModeFormula` de GA. Su nombre viene de su grado: [`MelodicMinorScaleDegree.ToName`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/Primitives/Diatonic/MelodicMinorScaleDegree.cs#L52-L62). El programa construye las tres tablas con un solo método genérico, que acepta cualquier clase de modos de GA ([`Lesson13.ModeTable`](https://github.com/spareilleux/learn/blob/13e7607/code/music-theory-ga/GaTheory/Lesson13.cs#L62-L85)):
+
+```text
+== The modes of melodic minor: GA's ModeFormula against the course's, from the steps 2 1 2 2 2 2 1
+mode                 course                     GA                         check
+melodic minor        1 2 b3 4 5 >♮6 >♮7         1 2 b3 4 5 >♮6 >♮7         ok
+Dorian ♭2            1 >b2 b3 4 5 >♮6 b7        1 >b2 b3 4 5 >♮6 b7        ok
+Lydian augmented     1 2 3 >♯4 >♯5 6 7          1 2 3 >♯4 >♯5 6 7          ok
+Lydian dominant      1 2 3 >♯4 5 6 >b7          1 2 3 >♯4 5 6 >b7          ok
+Mixolydian ♭6        1 2 3 4 5 >b6 >b7          1 2 3 4 5 >b6 >b7          ok
+Locrian ♮2           1 2 b3 4 >b5 b6 b7         1 2 b3 4 >b5 b6 b7         ok
+altered              1 >b2 b3 >b4 >b5 b6 b7     1 >b2 b3 >b4 >b5 b6 b7     ok
+
+notes                course                     GA                         check
+melodic minor        A B C D E F# G#            A B C D E F# G#            ok
+Dorian ♭2            B C D E F# G# A            B C D E F# G# A            ok
+Lydian augmented     C D E F# G# A B            C D E F# G# A B            ok
+Lydian dominant      D E F# G# A B C            D E F# G# A B C            ok
+Mixolydian ♭6        E F# G# A B C D            E F# G# A B C D            ok
+Locrian ♮2           F# G# A B C D E            F# G# A B C D E            ok
+altered              G# A B C D E F#            G# A B C D E F#            ok
+
+textbook name        GA's Name
+melodic minor        Melodic Minor
+Dorian ♭2            Dorian b2
+Lydian augmented     Lydian Augmented
+Lydian dominant      Lydian Dominant
+Mixolydian ♭6        Mixolydian b6
+Locrian ♮2           Locrian Natural 2
+altered              Altered
+```
+
+GA coincide en las siete fórmulas y en las siete grafías, y sus nombres son los de los libros, escritos en ASCII. Los nombres dicen lo que muestran las fórmulas: cada modo es un modo de la mayor con uno o dos grados movidos. La escala alterada sobre G♯ baja casi todo, y su ♭4, C, es un B♯ disfrazado: la tercera mayor de G♯7.
+
+## Los modos de la menor armónica
+
+### La idea
+
+Wikipedia: "A harmonic minor scale can be built by lowering the 3rd and 6th degrees of the parallel major scale by one semitone", y sus pasos son "whole, half, whole, whole, half, augmented second, half" ([Harmonic minor scale](https://en.wikipedia.org/wiki/Harmonic_minor_scale)): 2 1 2 2 1 3 1. Su tabla de modos, sobre A: menor armónica, locrio ♮6, jónico ♯5 ("augmented major"), dórico ♯4 (también menor rumana), frigio dominante, lidio ♯2, y un séptimo modo que llama "Super-Locrian scale" con una séptima doblemente bemolizada, "or altered diminished, Ultralocrian". El frigio dominante es el modo del quinto grado, el que colorea el V7 de una tonalidad menor: el artículo le da "A7 (♭9, 11, ♭13)".
+
+La segunda aumentada se ve en las fórmulas. El séptimo modo, sobre G♯, es la escala alterada con su séptima bajada una vez más: de G♯ a F hay una séptima disminuida, así que el curso escribe ♭♭7.
+
+### En GA
+
+[`HarmonicMinorMode`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/Modes/Diatonic/HarmonicMinorMode.cs#L14-L16) es un modo de `Scale.HarmonicMinor`, `new("A B C D E F G#")`, nombrado por [`HarmonicMinorScaleDegree.ToName`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/Primitives/Diatonic/HarmonicMinorScaleDegree.cs#L55-L65). El mismo método lo imprime:
+
+```text
+== The modes of harmonic minor: GA's ModeFormula against the course's, from the steps 2 1 2 2 1 3 1
+mode                 course                     GA                         check
+harmonic minor       1 2 b3 4 5 b6 >♮7          1 2 b3 4 5 b6 >♮7          ok
+Locrian ♮6           1 >b2 b3 4 >b5 >♮6 b7      1 >b2 b3 4 >b5 >♮6 b7      ok
+Ionian ♯5            1 2 3 4 >♯5 6 7            1 2 3 4 >♯5 6 7            ok
+Dorian ♯4            1 2 b3 >♯4 5 >♮6 b7        1 2 b3 >♯4 5 >♮6 b7        ok
+Phrygian dominant    1 >b2 3 4 5 >b6 >b7        1 >b2 3 4 5 >b6 >b7        ok
+Lydian ♯2            1 >♯2 3 >♯4 5 6 7          1 >♯2 3 >♯4 5 6 7          ok
+altered ♭♭7          1 >b2 b3 >b4 >b5 b6 >bb7   1 >b2 b3 >b4 >b5 b6 >bb7   ok
+
+notes                course                     GA                         check
+harmonic minor       A B C D E F G#             A B C D E F G#             ok
+Locrian ♮6           B C D E F G# A             B C D E F G# A             ok
+Ionian ♯5            C D E F G# A B             C D E F G# A B             ok
+Dorian ♯4            D E F G# A B C             D E F G# A B C             ok
+Phrygian dominant    E F G# A B C D             E F G# A B C D             ok
+Lydian ♯2            F G# A B C D E             F G# A B C D E             ok
+altered ♭♭7          G# A B C D E F             G# A B C D E F             ok
+
+textbook name        GA's Name
+harmonic minor       Harmonic Minor
+Locrian ♮6           Locrian Natural 6
+Ionian ♯5            Ionian Augmented
+Dorian ♯4            Dorian Sharp 4
+Phrygian dominant    Phrygian Dominant
+Lydian ♯2            Lydian Sharp 2
+altered ♭♭7          Altered bb7
+```
+
+Otra vez siete de siete, doble bemol incluido. GA llama al séptimo modo «Altered bb7», el "Super-Locrian" de séptima doblemente bemolizada de Wikipedia.
+
+## Una interfaz para todos los tipos de grado
+
+### La idea
+
+Un modo es una escala más uno de sus grados. En armonía, un número romano nombra un grado por la tríada construida sobre él (lección 6): mayúsculas para mayor, minúsculas para menor, ° para disminuida, + para aumentada. Sobre el cuarto grado de A menor armónica, D F A es menor: iv. Sobre el cuarto grado de A menor melódica, D F♯ A es mayor: IV. El curso escribe así las tríadas de cada escala ([`Lesson13.TriadNumerals`](https://github.com/spareilleux/learn/blob/13e7607/code/music-theory-ga/GaTheory/Lesson13.cs#L91-L104)).
+
+### En GA
+
+GA toma el par al pie de la letra: [`ScaleMode<TScaleDegree>`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/Modes/ScaleMode.cs#L62-L79) es genérico sobre el tipo del grado, y cada escala tiene el suyo: `MajorScaleDegree`, `NaturalMinorScaleDegree`, `HarmonicMinorScaleDegree`, `MelodicMinorScaleDegree`, `HarmonicMajorScaleDegree` y quince más, cada uno un valor de 1 al tamaño de la escala que comprueba su rango. Es el patrón del «enum inteligente» (*smart enum*): un tipo por cada clase de grado, con comportamiento propio, de modo que un grado de la menor melódica no puede pasarse donde se espera uno de la mayor. Cada tipo nombra sus grados a través de [`IScaleDegreeNaming`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/Primitives/IScaleDegreeNaming.cs#L10-L23): `ToName()` devuelve "the full name of the scale degree (e.g., "Ionian", "Dorian")", y `ToShortName()` "the short name of the scale degree (e.g., "I", "II")". Como la interfaz es la misma, un solo método genérico lee todos los tipos ([`Lesson13.ShortNames`](https://github.com/spareilleux/learn/blob/13e7607/code/music-theory-ga/GaTheory/Lesson13.cs#L87-L89)), y el curso compara los nombres cortos con las tríadas:
+
+```text
+== The short names: IScaleDegreeNaming.ToShortName against the triad on each degree
+degree type      course                         GA                             check
+major            I ii iii IV V vi vii°          I II III IV V VI VII           DIFF
+natural minor    i ii° III iv v VI VII          i ii° III iv v VI VII          ok
+harmonic minor   i ii° III+ iv V VI vii°        i ii° III+ iv#4 V VI vii°      DIFF
+melodic minor    i ii III+ IV V vi° vii°        i ii III+ IV7 V vi° vii°       DIFF
+harmonic major   I ii° iii iv V VI+ vii°        I II III IV V VI VII           DIFF
+degrees that differ: 11 of 35
+```
+
+Los cinco tipos siguen tres convenciones. [`MajorScaleDegree`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/Primitives/Diatonic/MajorScaleDegree.cs#L64-L74) y [`HarmonicMajorScaleDegree`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/Primitives/Diatonic/HarmonicMajorScaleDegree.cs#L67-L77) escriben el número del grado, como el ejemplo de la interfaz. [`NaturalMinorScaleDegree`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/Primitives/Diatonic/NaturalMinorScaleDegree.cs#L64-L74) escribe las tríadas, todas bien. Los otros dos escriben también las tríadas, salvo en un grado cada uno: el cuarto de la menor armónica es «iv#4» ([`#L67-L77`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/Primitives/Diatonic/HarmonicMinorScaleDegree.cs#L67-L77)), el número de la tríada con el nombre del modo dórico ♯4 pegado, y el cuarto de la menor melódica es «IV7» ([`#L64-L74`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Tonal/Primitives/Diatonic/MelodicMinorScaleDegree.cs#L64-L74)), el único acorde de séptima de la lista: D F♯ A C, el acorde del lidio dominante. Quien llame no puede saber qué convención recibe. Todavía no hay nadie: en el commit `a826864`, nada en GA llama a `ToShortName`.
+
+## El brillo
+
+### La idea
+
+La lección 2 citó la ordenación de los modos del más brillante al más oscuro de Open Music Theory, y mostró por qué es tan regular: del lidio al locrio, cada modo baja una nota del anterior. Un número lo recoge: sumar los semitonos de los grados por encima de la tónica. El jónico da 0 + 2 + 4 + 5 + 7 + 9 + 11 = 38; el lidio sube la cuarta, 39; el locrio, el más oscuro, 33. Cada grado bajado resta uno, así que la suma ordena los modos de la mayor exactamente como el libro, y sirve para cualquier escala. El módulo Streeling [MUS-006 · El universo de las escalas](../../streeling/music/mus-006-the-scale-universe/) lo define igual: "**Brightness** is the sum of the pitch classes (bit positions set)". El curso lo calcula a partir de los pasos ([`Lesson13.Brightness`](https://github.com/spareilleux/learn/blob/13e7607/code/music-theory-ga/GaTheory/Lesson13.cs#L53-L54)).
+
+### En GA: tres medidas
+
+GA tiene tres cosas llamadas brillo (*brightness*):
+
+- [`PitchClassSet.StepBrightness`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Atonal/PitchClassSet.cs#L262-L283) "measures brightness based on the preponderance of large steps": promedia los pasos entre clases de altura consecutivas, alrededor del círculo, y divide el promedio por 6. El código la llama una "Very rough proxy". Alimenta una dimensión de los embeddings de GA ([`ModalVectorService.cs#L157`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Embeddings/Services/ModalVectorService.cs#L157)).
+- `IcvBrightness`, en [`TheoryVectorService.cs#L159-L172`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Embeddings/Services/TheoryVectorService.cs#L159-L172), pesa las terceras mayores y las quintas justas del vector interválico (lección 4) contra sus segundas menores y sus tritonos, y lleva el balance al rango de 0 a 1. Es la dimensión 21 del vector de estructura que calcula `TheoryVectorService` ([`#L82-L83`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Embeddings/Services/TheoryVectorService.cs#L82-L83)), que el generador de embeddings de GA escribe a partir del índice 6 ([`MusicalEmbeddingGenerator.cs#L125`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Embeddings/MusicalEmbeddingGenerator.cs#L125), [`EmbeddingSchema.cs#L334`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Embeddings/EmbeddingSchema.cs#L334)): el índice 27 del embedding completo. El método es interno (`internal`), así que el programa lo copia tal cual ([`Lesson13.IcvBrightness`](https://github.com/spareilleux/learn/blob/13e7607/code/music-theory-ga/GaTheory/Lesson13.cs#L106-L120)).
+- [`UnifiedModeService.RankByBrightness`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Unified/UnifiedModeService.cs#L228-L242) suma las clases de altura de cada miembro de una familia modal: la medida del curso. Llega en la sección siguiente.
+
+```text
+== Brightness: the course's sum of degrees against GA's StepBrightness and IcvBrightness
+mode                 course sum  StepBrightness  IcvBrightness
+Ionian                       38          0.2857       0.642857
+Dorian                       36          0.2857       0.642857
+Phrygian                     34          0.2857       0.642857
+Lydian                       39          0.2857       0.642857
+Mixolydian                   37          0.2857       0.642857
+Aeolian                      35          0.2857       0.642857
+Locrian                      33          0.2857       0.642857
+melodic minor                37          0.2857       0.595238
+Dorian ♭2                    35          0.2857       0.595238
+Lydian augmented             40          0.2857       0.595238
+Lydian dominant              38          0.2857       0.595238
+Mixolydian ♭6                36          0.2857       0.595238
+Locrian ♮2                   34          0.2857       0.595238
+altered                      32          0.2857       0.595238
+harmonic minor               36          0.2857       0.571429
+Locrian ♮6                   34          0.2857       0.571429
+Ionian ♯5                    39          0.2857       0.571429
+Dorian ♯4                    37          0.2857       0.571429
+Phrygian dominant            35          0.2857       0.571429
+Lydian ♯2                    40          0.2857       0.571429
+altered ♭♭7                  31          0.2857       0.571429
+
+StepBrightness over GA's 4096 sets, by value:
+  1.0000  sets of 2 notes (66 sets)
+  0.6667  sets of 3 notes (220 sets)
+  0.5000  sets of 0, 1, 4 notes (508 sets)
+  0.4000  sets of 5 notes (792 sets)
+  0.3333  sets of 6 notes (924 sets)
+  0.2857  sets of 7 notes (792 sets)
+  0.2500  sets of 8 notes (495 sets)
+  0.2222  sets of 9 notes (220 sets)
+  0.2000  sets of 10 notes (66 sets)
+  0.1818  sets of 11 notes (12 sets)
+  0.1667  sets of 12 notes (1 sets)
+11 values
+```
+
+StepBrightness da a los 21 modos el mismo valor. Los pasos de un conjunto dan una vuelta al círculo, así que siempre suman 12: con *n* notas su promedio es 12/*n*, y el valor 2/*n*, el número de notas disfrazado. Sobre los 4096 conjuntos toma 11 valores, uno por tamaño, salvo que los conjuntos de 4 notas (2/4) comparten 0,5 con el conjunto vacío y las notas sueltas, para los que el código devuelve 0,5. IcvBrightness distingue las tres escalas, pero no sus modos: las rotaciones de una escala tienen el mismo vector interválico (lección 4), así que reciben el mismo valor. Solo la suma del curso ordena los modos. `TheoryVectorService.ComputeEmbedding` todavía acepta los parámetros `consonance` y `brightness`, que, dice su comentario, "are accepted for backwards compatibility with older callers but are IGNORED" ([`#L22-L36`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.ML/Embeddings/Services/TheoryVectorService.cs#L22-L36)).
+
+### En GA: ordenar una familia
+
+`UnifiedModeService` está registrado como servicio de GA ([`ServiceCollectionExtensions.cs#L25`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/ServiceCollectionExtensions.cs#L25)); en el commit `a826864`, solo las pruebas de GA llaman a `RankByBrightness`. `FromScaleMode` mueve las notas de un modo para que la fundamental pase a ser C y busca la familia modal del conjunto, si la familia tiene más de un miembro ([`#L15-L51`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Services/Unified/UnifiedModeService.cs#L15-L51)); `RankByBrightness` suma las clases de altura de cada miembro y ordena de mayor a menor. El programa compila el servicio tal cual y ordena la familia del primer modo de cada escala; etiqueta cada miembro con el nombre que el curso da a ese modo sobre C ([`Lesson13.cs#L186-L216`](https://github.com/spareilleux/learn/blob/13e7607/code/music-theory-ga/GaTheory/Lesson13.cs#L186-L216)):
+
+```text
+== UnifiedModeService.RankByBrightness (GA.Domain.Services, compiled) for the family of major, against the course's ranking of its modes
+rank   course                       GA                           check
+1      Lydian 39                    Lydian 39                    ok
+2      Ionian 38                    Ionian 38                    ok
+3      Mixolydian 37                Mixolydian 37                ok
+4      Dorian 36                    Dorian 36                    ok
+5      Aeolian 35                   Aeolian 35                   ok
+6      Phrygian 34                  Phrygian 34                  ok
+7      Locrian 33                   Locrian 33                   ok
+
+== UnifiedModeService.RankByBrightness (GA.Domain.Services, compiled) for the family of melodic minor, against the course's ranking of its modes
+rank   course                       GA                           check
+1      Lydian augmented 40          Lydian augmented 40          ok
+2      Lydian dominant 38           Lydian dominant 38           ok
+3      melodic minor 37             melodic minor 37             ok
+4      Mixolydian ♭6 36             Mixolydian ♭6 36             ok
+5      Dorian ♭2 35                 Dorian ♭2 35                 ok
+6      Locrian ♮2 34                Locrian ♮2 34                ok
+7      altered 32                   altered 32                   ok
+
+== UnifiedModeService.RankByBrightness (GA.Domain.Services, compiled) for the family of harmonic minor, against the course's ranking of its modes
+rank   course                       GA                           check
+1      Lydian ♯2 40                 Lydian augmented ♯2 41       DIFF
+2      Ionian ♯5 39                 Lydian ♯2 40                 DIFF
+3      Dorian ♯4 37                 Ionian ♯5 39                 DIFF
+4      harmonic minor 36            Lydian ♭3 38                 DIFF
+5      Phrygian dominant 35         Dorian ♯4 37                 DIFF
+6      Locrian ♮6 34                harmonic major 37            DIFF
+7      altered ♭♭7 31               Mixolydian ♭2 36             DIFF
+8      (none)                       harmonic minor 36            DIFF
+9      (none)                       Phrygian dominant 35         DIFF
+10     (none)                       Dorian ♭5 35                 DIFF
+11     (none)                       Locrian ♮6 34                DIFF
+12     (none)                       Phrygian ♭4 33               DIFF
+13     (none)                       Locrian ♭♭7 32               DIFF
+14     (none)                       altered ♭♭7 31               DIFF
+```
+
+Para la mayor y la menor melódica, la ordenación de GA es la del curso. Para la menor armónica ordena 14 escalas, y es el defecto de la lección 2: una [`ModalFamily`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Atonal/ModalFamily.cs#L108-L131) agrupa por vector interválico los conjuntos que contienen C, y la mayor armónica, la imagen especular de la menor armónica, tiene el mismo vector. Sus siete modos, nombrados según el artículo de Wikipedia [Harmonic major scale](https://en.wikipedia.org/wiki/Harmonic_major_scale) (que escribe el sexto "Lydian ♯2 ♯5"), se mezclan con los de la menor armónica. La suma en sí es correcta para los catorce; los empates, como el dórico ♯4 y la mayor armónica en 37, conservan el orden de la familia, porque la ordenación de LINQ es estable (lección 10). Para ordenar los modos de una escala, la familia tiene que estar formada por las rotaciones de la escala.
+
+## Familias modales en un archivo de configuración
+
+### La idea
+
+Para el curso, una familia modal es el conjunto de las rotaciones de una escala (lección 2), y todas las rotaciones comparten un mismo vector interválico (lección 4). Así que una familia puede declarar su vector una vez, y las notas de cada miembro tienen que tenerlo. Lo recíproco no vale: la mayor armónica tiene el vector de la menor armónica sin ser uno de sus modos.
+
+### En GA: `Modes.yaml`
+
+GA también enumera modos en un archivo de configuración, [`Modes.yaml`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/Modes.yaml), 828 líneas que lee el módulo F# `ModesConfig`. Cada familia tiene un nombre, a veces un `IntervalClassVector`, y modos: sus notas sobre C, una descripción en 77 de los 165 modos y nombres alternativos en 79. `GetAllModes` da a cada modo el vector declarado por su familia ([`ModesConfig.fs#L265-L298`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/ModesConfig.fs#L265-L298), [`#L281`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/ModesConfig.fs#L281)). El programa, que ya compila `GA.Business.Config`, compara cada vector declarado con las notas del primer modo de la familia, y cada miembro con el primero ([`Lesson13.cs#L218-L259`](https://github.com/spareilleux/learn/blob/13e7607/code/music-theory-ga/GaTheory/Lesson13.cs#L218-L259)):
+
+```text
+== Modes.yaml (GA.Business.Config, read by ModesConfig): each family's declared vector against the vector of its first mode's notes
+31 families, 165 modes, 18 families with a declared vector
+GA's PitchClassSet and the course give the same vector for the notes of 164 of the 165 modes
+course: the vector of the first mode's notes; GA: the vector the family declares
+family                       course                 GA                     check
+Major Scale                  <2 5 4 3 6 1>          <2 5 4 3 6 1>          ok
+Harmonic Minor               <3 3 5 4 4 2>          <2 4 3 5 4 3>          DIFF
+Melodic Minor                <2 5 4 4 4 2>          <2 4 5 3 6 2>          DIFF
+Major Pentatonic             <0 3 2 1 4 0>          <0 3 2 2 2 1>          DIFF
+Whole Tone                   <0 6 0 6 0 3>          <0 6 0 0 6 0>          DIFF
+Diminished                   <4 4 8 4 4 4>          <4 6 4 6 4 4>          DIFF
+Blues Scale                  <2 3 3 2 4 1>          <1 4 3 2 5 0>          DIFF
+Chromatic                    <12 12 12 12 12 6>     <11 11 11 11 11 6>     DIFF
+Perfect Fourth               <0 0 0 0 1 0>          <0 0 0 0 1 0>          ok
+Major Third                  <0 0 0 1 0 0>          <0 0 0 1 0 0>          ok
+Minor Third                  <0 0 1 0 0 0>          <0 0 1 0 0 0>          ok
+Major Second                 <0 1 0 0 0 0>          <0 1 0 0 0 0>          ok
+Minor Second                 <1 0 0 0 0 0>          <1 0 0 0 0 0>          ok
+Major Triad                  <0 0 1 1 1 0>          <0 0 1 1 1 0>          ok
+Diminished Triad             <0 0 2 0 0 1>          <0 0 2 0 0 1>          ok
+Augmented Triad              <0 0 0 3 0 0>          <0 1 0 0 2 0>          DIFF
+Major Seventh Chord          <1 0 1 2 2 0>          <0 1 2 1 1 1>          DIFF
+All Interval Tetrachord      <1 1 1 1 1 1>          <1 1 1 1 1 1>          ok
+declared vectors that differ: 9
+
+Modes whose notes do not have the vector of their family's first mode:
+  Harmonic Minor Family            1 of 6
+  Major Pentatonic Family          1 of 4
+  Diminished Triad Family          2 of 2
+  Augmented Triad Family           2 of 2
+  Major Seventh Chord Family       7 of 7
+  All Interval Tetrachord Family   15 of 15
+  Double Harmonic Family           1 of 6
+  Neapolitan Minor Family          1 of 6
+  Neapolitan Major Family          4 of 6
+  Dominant Bebop Family            3 of 7
+  Major Bebop Family               5 of 7
+  Prometheus Family                3 of 5
+  Enigmatic Family                 5 of 6
+  Hungarian Major Family           6 of 6
+  In Sen Family                    4 of 4
+60 of 134
+```
+
+La mitad de los vectores declarados están mal: 9 de 18, entre ellos los de la menor armónica, la menor melódica y la escala de tonos enteros. La escala cromática contiene cada clase de intervalo doce veces y el tritono seis veces; el archivo declara 11. Y 60 de los 134 miembros no tienen el vector del primer modo de su familia, así que no son sus rotaciones. La familia Major Seventh Chord enumera otras siete clases de acordes de séptima; la «primera inversión» de la familia Diminished Triad, C E A ([`#L465-L466`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/Modes.yaml#L465-L466)), es una tríada de A menor; ninguno de los otros seis «modos» de la mayor húngara es una rotación de ella. Las dos familias de esta lección:
+
+```text
+Harmonic Minor Family  Notes                    GA's vector
+Harmonic Minor         C D Eb F G Ab B          <3 3 5 4 4 2>
+Locrian #6             C Db Eb F Gb A Bb        <3 3 5 4 4 2>
+Ionian #5              C D E F G# A B           <3 3 5 4 4 2>
+Dorian #4              C D Eb F# G A Bb         <3 3 5 4 4 2>
+Phrygian Dominant      C Db E F G Ab Bb         <3 3 5 4 4 2>
+Lydian #2              C D# E F# G A B          <3 3 5 4 4 2>
+Ultralocrian           C Db Eb Fb Gb Ab Bb      <2 5 4 4 4 2>
+
+Melodic Minor Family   Notes                    GA's vector
+Melodic Minor          C D Eb F G A B           <2 5 4 4 4 2>
+Dorian b2              C Db Eb F G A Bb         <2 5 4 4 4 2>
+Lydian Augmented       C D E F# G# A B          <2 5 4 4 4 2>
+Lydian Dominant        C D E F# G A Bb          <2 5 4 4 4 2>
+Mixolydian b6          C D E F G Ab Bb          <2 5 4 4 4 2>
+Locrian #2             C D Eb F Gb Ab Bb        <2 5 4 4 4 2>
+Altered                C Db Eb Fb Gb Ab Bb      <2 5 4 4 4 2>
+```
+
+El Ultralocrian ([`#L242-L247`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/Modes.yaml#L242-L247)) está escrito con las notas del modo Altered de la familia Melodic Minor ([`#L286-L287`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/Modes.yaml#L286-L287)). Su séptima debería ser B♭♭, que suena como A: la misma séptima disminuida que de G♯ a F en la tabla de la menor armónica de arriba. Con una nota mal, recibe el vector de la menor melódica.
+
+### En GA: buscar un modo por su vector
+
+[`ModesConfig.TryGetModeByIntervalClassVector`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/ModesConfig.fs#L443-L458) devuelve el primer modo cuya familia declara el vector que recibe. El servidor MCP de GA imprime su respuesta en la línea «Scale:» de `ga_chord_to_set` ([`ChordAtonalTool.cs#L105-L125`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaMcpServer/Tools/ChordAtonalTool.cs#L105-L125)), y entre corchetes tras cada conjunto de `ga_icv_neighbors` ([`#L249`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaMcpServer/Tools/ChordAtonalTool.cs#L249)). El programa llama a la búsqueda con los vectores que calcula GA ([`Lesson13.cs#L261-L279`](https://github.com/spareilleux/learn/blob/13e7607/code/music-theory-ga/GaTheory/Lesson13.cs#L261-L279)); la columna del curso es la entrada de `Modes.yaml` que nombra la escala o el acorde, que el archivo escribe sobre C.
+
+```text
+== ModesConfig.TryGetModeByIntervalClassVector, the "Scale:" line of ga_chord_to_set, with the vectors GA computes
+course: the Modes.yaml entry that names the scale or chord (written on C); GA: what the lookup returns
+set                course                     GA                         check
+C major            Ionian                     Ionian                     ok
+A harmonic minor   Harmonic Minor             (none)                     DIFF
+A melodic minor    Melodic Minor              (none)                     DIFF
+Cmaj7              Major Seventh              (none)                     DIFF
+G7                 Dominant Seventh           Major Seventh              DIFF
+Bm7b5              Half Diminished Seventh    Major Seventh              DIFF
+C                  Major Triad                Major Triad                ok
+Cm                 Minor Triad                Major Triad                DIFF
+```
+
+La menor armónica y la menor melódica no se encuentran: sus familias declaran el vector equivocado. Cmaj7 tampoco, porque la familia Major Seventh Chord ([`#L493-L535`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/Modes.yaml#L493-L535)) declara `<0 1 2 1 1 1>`, el vector de una séptima de dominante, y así es como G7 vuelve como «Major Seventh». Bm7♭5 también: una séptima semidisminuida es la inversión de una séptima de dominante, y las inversiones tienen el mismo vector (lección 4). Por la misma razón, C menor vuelve como «Major Triad». Aun con los vectores correctos, una búsqueda por vector no puede distinguir un acorde de su inversión; necesita la forma prima, o una lista. Las herramientas MCP no se ejecutaron: el curso ejecuta `ModesConfig`, al que llaman.
+
+### En GA: buscar un modo por su nombre
+
+[`ModesConfig.TryGetModeByName`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/ModesConfig.fs#L413-L441), detrás de la herramienta MCP `get_mode_info` ([`ModeTool.cs#L18-L34`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaMcpServer/Tools/ModeTool.cs#L18-L34)), compara el nombre, sin distinguir mayúsculas, con el nombre y los nombres alternativos de cada modo. El programa le pide los nombres de las dos clases de modos de GA, y cuatro nombres de Wikipedia: Super Locrian y Acoustic Scale ([Jazz scale](https://en.wikipedia.org/wiki/Jazz_scale)), Spanish Phrygian ([Phrygian dominant scale](https://en.wikipedia.org/wiki/Phrygian_dominant_scale)) y Ultralocrian ([Harmonic minor scale](https://en.wikipedia.org/wiki/Harmonic_minor_scale)) ([`Lesson13.cs#L281-L295`](https://github.com/spareilleux/learn/blob/13e7607/code/music-theory-ga/GaTheory/Lesson13.cs#L281-L295)):
+
+```text
+== ModesConfig.TryGetModeByName, behind get_mode_info, with the names of GA's two mode classes
+name                   found
+Melodic Minor          Melodic Minor (Melodic Minor Family)
+Dorian b2              Dorian b2 (Melodic Minor Family)
+Lydian Augmented       Lydian Augmented (Melodic Minor Family)
+Lydian Dominant        Lydian Dominant (Melodic Minor Family)
+Mixolydian b6          Mixolydian b6 (Melodic Minor Family)
+Locrian Natural 2      not found
+Altered                Altered (Melodic Minor Family)
+Harmonic Minor         Harmonic Minor (Harmonic Minor Family)
+Locrian Natural 6      not found
+Ionian Augmented       Ionian Augmented (Double Harmonic Family)
+Dorian Sharp 4         not found
+Phrygian Dominant      Phrygian Dominant (Harmonic Minor Family)
+Lydian Sharp 2         not found
+Altered bb7            not found
+Super Locrian          not found
+Acoustic Scale         not found
+Spanish Phrygian       not found
+Ultralocrian           Ultralocrian (Harmonic Minor Family)
+GA's names found: 9 of 14
+alternate names: GetModalFamilies keeps 104; GetAllModes keeps them on 0 of 165 modes
+```
+
+Tres de los nombres de GA no están en el archivo: escribe «Locrian #2», «Dorian #4» y «Lydian #2». Otros sí están, como nombres alternativos: «Locrian Natural 6» e «Ionian Augmented» ([`#L209-L219`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/Modes.yaml#L209-L219)), «Spanish Phrygian» ([`#L230`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/Modes.yaml#L230)), «Altered bb7» ([`#L247`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/Modes.yaml#L247)), «Acoustic Scale» ([`#L273`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/Modes.yaml#L273)) y «Super Locrian» ([`#L290`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/Modes.yaml#L290)). `GetModalFamilies` conserva 104 nombres alternativos, pero la búsqueda pasa por `GetAllModes`, que los sustituye por nada: `let alternateNames = None` ([`ModesConfig.fs#L284`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/ModesConfig.fs#L284)). Ningún nombre alternativo puede encontrarse, y `get_mode_info` termina cada respuesta con «Alternate Names: None» ([`ModeTool.cs#L27-L33`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/GaMcpServer/Tools/ModeTool.cs#L27-L33)); imprime el vector declarado en una línea llamada «Intervals». Leído, no ejecutado.
+
+«Ionian Augmented» se encuentra, pero en la familia equivocada: el modo de la familia Double Harmonic escrito «Ionian Augmented #2» ([`#L655-L656`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/Modes.yaml#L655-L656)), cuyas notas son C D♯ E F G♯ A B. Por qué perdió su «#2» es la prueba siguiente.
+
+### Añadido después de la primera ejecución: nombres cortados
+
+YAML lee un «#» precedido de un espacio, fuera de comillas, como el comienzo de un comentario. El archivo pone algunos nombres entre comillas («'Locrian #6'», [`#L209`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Business.Config/Modes.yaml#L209)), pero no todos. La primera ejecución mostró un nombre cortado; el programa comparó luego cada nombre tal como lo escribe el archivo con el nombre que devuelve `ModesConfig`, en un commit propio después de la primera ejecución ([`Lesson13.cs#L297-L327`](https://github.com/spareilleux/learn/blob/13e7607/code/music-theory-ga/GaTheory/Lesson13.cs#L297-L327)):
+
+```text
+== Added after the first run: the names written in Modes.yaml against the names ModesConfig returns
+course: the name as the file writes it; GA: the name the loader returns (YAML reads " #" as the start of a comment)
+line   course                             GA                                 check
+631    Lydian Augmented #2                Lydian Augmented                   DIFF
+639    Lydian #2 #6                       Lydian                             DIFF
+655    Ionian Augmented #2                Ionian Augmented                   DIFF
+663    Lydian #6                          Lydian                             DIFF
+667    Aeolian #4 (Lydian Diminished)     Aeolian                            DIFF
+671    Ionian #2                          Ionian                             DIFF
+679    Lydian Augmented #6                Lydian Augmented                   DIFF
+681    Lydian Dominant #5                 Lydian Dominant                    DIFF
+names that differ: 8 of 165
+names ModesConfig returns more than once: 7
+  Ionian: Major Scale, Neapolitan Minor
+  Lydian: Major Scale, Double Harmonic, Neapolitan Minor
+  Aeolian: Major Scale, Neapolitan Minor
+  Lydian Augmented: Melodic Minor, Harmonic Major, Neapolitan Major
+  Lydian Dominant: Melodic Minor, Neapolitan Major
+  Minor Seventh: Major Second, Major Seventh Chord
+  Major Seventh: Minor Second, Major Seventh Chord
+```
+
+Ocho nombres pierden sus alteraciones, y siete nombres pertenecen ahora a más de un modo. Una búsqueda por nombre devuelve el primero del archivo: «Lydian» es siempre el modo de la escala mayor, nunca «Lydian #2 #6» ni «Lydian #6». Las dos últimas líneas no son nombres cortados: las familias Minor Second y Major Second enumeran sus inversiones, C B y C B♭, como «Major Seventh» y «Minor Seventh», los nombres de dos acordes de la familia Major Seventh Chord. Una búsqueda de «Major Seventh» devuelve el intervalo.
+
+```text
+The modes whose vector GA's PitchClassSet and the course disagree on:
+  Chromatic: C C# D D# E F F# G G# A A# B, GA <1 1 1 1 0 6>, course <12 12 12 12 12 6>
+```
+
+El único modo cuyo vector calculan de forma distinta GA y el curso es la escala cromática. GA guarda un vector en un solo entero en base 12, una cifra por clase de intervalo, y su comentario admite el límite: "KNOWN LIMITATION: a single count of exactly 12 still overflows a base-12 digit, so the full chromatic aggregate `<12 12 12 12 12 6>` does NOT round-trip (decodes to `<1 1 1 1 0 6>`)" ([`IntervalClassVectorId.cs#L3-L15`](https://github.com/GuitarAlchemist/ga/blob/a826864f3a012cad88e415954bf57eca0ce12aa6/Common/GA.Domain.Core/Theory/Atonal/IntervalClassVectorId.cs#L3-L15)).
+
+## Ejercicios
+
+1. La escala alterada sobre G♯ es G♯ A B C D E F♯. ¿Qué notas de G♯7 contiene, y qué alteraciones añade?
+2. Ordena los siete modos de la menor armónica del más brillante al más oscuro, con sus sumas.
+3. ¿Qué da `StepBrightness` para un acorde de séptima de dominante? ¿Qué otros conjuntos tienen el mismo valor?
+4. ¿Qué modo devuelve `TryGetModeByName("Lydian Augmented")`? ¿Qué otros modos de `Modes.yaml` responden a ese nombre, y por qué?
+
+<details>
+<summary>Soluciones</summary>
+
+1. G♯7 es G♯ B♯ D♯ F♯. La escala tiene G♯, F♯, y C, que suena como B♯; no tiene D♯. Añade A (♭9), B (♯9), D (♭5, o ♯11) y E (♭13): el "C7 (♭9 or ♯9, ♯11, ♭13)" de Wikipedia, llevado a G♯.
+2. Lidio ♯2 40, jónico ♯5 39, dórico ♯4 37, menor armónica 36, frigio dominante 35, locrio ♮6 34, alterado ♭♭7 31: la columna del curso de la tabla de brillo, y de la ordenación.
+3. 0,5: un acorde de séptima tiene cuatro notas, y 2/4 = 0,5. Los 508 conjuntos de 0, 1 y 4 notas lo comparten.
+4. El Lydian Augmented de la familia Melodic Minor, el primero del archivo. El «Lydian Augmented #2» de la familia Harmonic Major (línea 631) y el «Lydian Augmented #6» de la familia Neapolitan Major (línea 679) pierden su alteración en un comentario YAML y vuelven con el mismo nombre.
+
+</details>
+
+## Puntos clave
+
+- La menor melódica es una escala mayor con la tercera bajada, la menor armónica una menor natural con la séptima subida. Cada una tiene siete modos, entre ellos el lidio dominante, la escala alterada y el frigio dominante, las escalas de dominante del jazz. El `ScaleMode<TScaleDegree>` genérico de GA deletrea y escribe los catorce como el libro.
+- Una sola interfaz, `IScaleDegreeNaming`, nombra los grados de cada tipo de escala, pero su `ToShortName` mezcla tres convenciones: números de grado, números romanos de las tríadas, y dos nombres cortos que no son ni lo uno ni lo otro (`iv#4`, `IV7`). Nada la llama todavía.
+- La suma de los grados de un modo ordena los modos del más brillante al más oscuro, y el `RankByBrightness` de GA calcula exactamente eso. Las otras dos medidas de brillo de GA no pueden ordenar modos: `StepBrightness` vale 2/*n*, el número de notas, e `IcvBrightness` es igual para todos los modos de una escala.
+- Una familia modal de GA es el conjunto de los conjuntos que comparten un vector interválico, así que la familia de la menor armónica contiene también los modos de la mayor armónica, y la ordenación tiene 14 filas.
+- En `Modes.yaml`, 9 de los 18 vectores declarados están mal, 60 de los 134 miembros no tienen el vector de su familia, 8 nombres quedan cortados por comentarios YAML y el cargador descarta todos los nombres alternativos. Buscada por vector, la menor armónica no aparece en ningún sitio y G7 es «Major Seventh»; buscados por nombre, faltan 5 de los 14 nombres del propio GA e «Ionian Augmented» cae en la familia equivocada.
+
+## Fuentes
+
+- Mark Gotham et al., [*Open Music Theory*](https://viva.pressbooks.pub/openmusictheory/), versión 2, 2023, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/): John Kocur, [Chord-Scale Theory](https://viva.pressbooks.pub/openmusictheory/chapter/chord-scale-theory/), e [Introduction to Diatonic Modes and the Chromatic Scale](https://viva.pressbooks.pub/openmusictheory/chapter/intro-to-diatonic-modes-and-the-chromatic-scale/).
+- Wikipedia: [Jazz scale](https://en.wikipedia.org/wiki/Jazz_scale), [Harmonic minor scale](https://en.wikipedia.org/wiki/Harmonic_minor_scale), [Harmonic major scale](https://en.wikipedia.org/wiki/Harmonic_major_scale), [Phrygian dominant scale](https://en.wikipedia.org/wiki/Phrygian_dominant_scale).
+- GuitarAlchemist/ga en el commit [`a826864`](https://github.com/GuitarAlchemist/ga/tree/a826864f3a012cad88e415954bf57eca0ce12aa6): `Common/GA.Domain.Core/Theory/Tonal/Modes/ScaleMode.cs`, `Theory/Tonal/Modes/Diatonic/MelodicMinorMode.cs`, `HarmonicMinorMode.cs`, `Theory/Tonal/Primitives/IScaleDegreeNaming.cs` y los tipos de grado, `Theory/Atonal/PitchClassSet.cs`, `ModalFamily.cs`, `IntervalClassVectorId.cs`, `Common/GA.Business.ML/Embeddings/Services/TheoryVectorService.cs`, `Common/GA.Business.ML/Embeddings/MusicalEmbeddingGenerator.cs`, `EmbeddingSchema.cs`, `Common/GA.Domain.Services/Unified/UnifiedModeService.cs`, `Common/GA.Business.Config/Modes.yaml`, `ModesConfig.fs`, `GaMcpServer/Tools/ModeTool.cs`, `ChordAtonalTool.cs`.

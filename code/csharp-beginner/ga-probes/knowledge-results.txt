@@ -1,0 +1,163 @@
+Test run for <code/csharp-beginner>\ga-probes\knowledge-tests\bin\Debug\net10.0\KnowledgeTests.dll (.NETCoreApp,Version=v10.0)
+VSTest version 18.0.2 (x64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+<code/csharp-beginner>\ga-probes\knowledge-tests\bin\Debug\net10.0\KnowledgeTests.dll
+NUnit Adapter 4.6.0.0: Test execution started
+Running all tests in <code/csharp-beginner>\ga-probes\knowledge-tests\bin\Debug\net10.0\KnowledgeTests.dll
+   NUnit3TestExecutor discovered 9 of 9 NUnit test cases using Current Discovery mode, Non-Explicit run
+ChordProgressionsService_ShouldLoadAndQueryProgressions: Configuration files not loaded in test environment
+GuitarTechniquesService_ShouldLoadAndQueryTechniques: Configuration files not loaded in test environment
+GA_TEST_MODE: (not set)
+Current directory is the test's bin folder: True
+Iconic chords: 17
+Error loading chord progressions configuration: Exception during deserialization
+Chord progressions: 1
+Error loading guitar techniques configuration: Exception during deserialization
+Guitar techniques: 1
+Error loading specialized tunings configuration: While parsing a flow sequence, did not find expected ',' or ']'.
+Specialized tunings: 1
+
+=== Hendrix Iconic Chords ===
+- Hendrix Chord: E7#9 (Purple Haze)
+- Foxy Lady Chord: F#m7#9 (Foxy Lady)
+
+MusicalKnowledgeService_ShouldProvideComprehensiveSearch: Configuration files not loaded in test environment
+=== Musical Knowledge Base Statistics ===
+Total Concepts: 20
+- Iconic Chords: 17
+- Chord Progressions: 1
+- Guitar Techniques: 1
+- Specialized Tunings: 1
+
+Unique Artists: 16
+Unique Categories: 3
+Unique Difficulties: 1
+
+=== Top Categories ===
+Guitar: 1 items
+Jazz: 1 items
+Picking: 1 items
+
+=== Top Artists ===
+Various: 4 items
+Bill Evans: 2 items
+Jimi Hendrix: 2 items
+The Beatles: 2 items
+Alexander Scriabin: 1 items
+
+Found 1 jazz-related items:
+- Iconic Chords: 0
+- Chord Progressions: 1
+- Guitar Techniques: 0
+- Specialized Tunings: 0
+
+=== Configuration Validation Results ===
+Overall Valid: True
+Iconic Chords Valid: True
+Chord Progressions Valid: True
+Guitar Techniques Valid: True
+Specialized Tunings Valid: True
+
+=== Specialized Tunings ===
+Total tunings loaded: 1
+Studio technique tunings: 0
+
+NUnit Adapter 4.6.0.0: Test execution complete
+  Skipped ChordProgressionsService_ShouldLoadAndQueryProgressions [1 ms]
+  Error Message:
+   Configuration files not loaded in test environment
+  Standard Output Messages:
+ Configuration files not loaded in test environment
+
+  Skipped GuitarTechniquesService_ShouldLoadAndQueryTechniques [< 1 ms]
+  Error Message:
+   Configuration files not loaded in test environment
+  Standard Output Messages:
+ Configuration files not loaded in test environment
+
+  Passed Probe_PrintsTheTestEnvironment [167 ms]
+  Standard Output Messages:
+ GA_TEST_MODE: (not set)
+ Current directory is the test's bin folder: True
+ Iconic chords: 17
+ Error loading chord progressions configuration: Exception during deserialization
+ Chord progressions: 1
+ Error loading guitar techniques configuration: Exception during deserialization
+ Guitar techniques: 1
+ Error loading specialized tunings configuration: While parsing a flow sequence, did not find expected ',' or ']'.
+ Specialized tunings: 1
+
+
+  Passed MusicalKnowledgeService_ShouldFindContentByArtist [167 ms]
+  Standard Output Messages:
+ === Hendrix Iconic Chords ===
+ - Hendrix Chord: E7#9 (Purple Haze)
+ - Foxy Lady Chord: F#m7#9 (Foxy Lady)
+
+
+  Skipped MusicalKnowledgeService_ShouldProvideComprehensiveSearch [< 1 ms]
+  Error Message:
+   Configuration files not loaded in test environment
+  Standard Output Messages:
+ Configuration files not loaded in test environment
+
+  Passed MusicalKnowledgeService_ShouldProvideStatistics [8 ms]
+  Standard Output Messages:
+ === Musical Knowledge Base Statistics ===
+ Total Concepts: 20
+ - Iconic Chords: 17
+ - Chord Progressions: 1
+ - Guitar Techniques: 1
+ - Specialized Tunings: 1
+ 
+ Unique Artists: 16
+ Unique Categories: 3
+ Unique Difficulties: 1
+ 
+ === Top Categories ===
+ Guitar: 1 items
+ Jazz: 1 items
+ Picking: 1 items
+ 
+ === Top Artists ===
+ Various: 4 items
+ Bill Evans: 2 items
+ Jimi Hendrix: 2 items
+ The Beatles: 2 items
+ Alexander Scriabin: 1 items
+
+
+  Passed MusicalKnowledgeService_ShouldProvideUnifiedSearch [1 ms]
+  Standard Output Messages:
+ Found 1 jazz-related items:
+ - Iconic Chords: 0
+ - Chord Progressions: 1
+ - Guitar Techniques: 0
+ - Specialized Tunings: 0
+
+
+  Passed MusicalKnowledgeService_ShouldValidateAllConfigurations [1 ms]
+  Standard Output Messages:
+ === Configuration Validation Results ===
+ Overall Valid: True
+ Iconic Chords Valid: True
+ Chord Progressions Valid: True
+ Guitar Techniques Valid: True
+ Specialized Tunings Valid: True
+
+
+  Passed SpecializedTuningsService_ShouldLoadAndQueryTunings [< 1 ms]
+  Standard Output Messages:
+ === Specialized Tunings ===
+ Total tunings loaded: 1
+ Studio technique tunings: 0
+
+
+
+Test Run Successful.
+Total tests: 9
+     Passed: 6
+    Skipped: 3
+ Total time: 0.9844 Seconds

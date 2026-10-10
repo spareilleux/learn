@@ -1,0 +1,115 @@
+== Solution: 111 project files, 75 in AllProjects.slnx, 36 outside
+   Apps/FloorManager/FloorManager.csproj
+   Apps/GaChatbot/GaChatbot.csproj
+   Apps/InteractiveTutorial/InteractiveTutorial.csproj
+   Apps/ScenesService/ScenesService.csproj
+   Apps/VoicingSearchDemo/VoicingSearchDemo.csproj
+   Apps/demerzel-bridge/DemerzelBridge/DemerzelBridge.csproj
+   Apps/ga-server/GA.DocumentProcessing.Service/GA.DocumentProcessing.Service.csproj
+   Benchmarks/GA.Domain.Core.Benchmarks/GA.Domain.Core.Benchmarks.csproj
+   Common/GA.BSP.Core/GA.BSP.Core.csproj
+   Common/GA.Business.Analytics/GA.Business.Analytics.csproj
+   Common/GA.Business.Core.Analysis.Gpu/GA.Business.Core.Analysis.Gpu.csproj
+   Common/GA.Business.Core/GA.Business.Core.csproj
+   Common/GA.Business.Graphiti/GA.Business.Graphiti.csproj
+   Common/GA.Business.Intelligence/GA.Business.Intelligence.csproj
+   Common/GA.Business.ProbabilisticGrammar/GA.Business.ProbabilisticGrammar.fsproj
+   Common/GA.Data.EntityFramework/GA.Data.EntityFramework.csproj
+   Common/GA.Providers.Anthropic/GA.Providers.Anthropic.csproj
+   Demos/AtonalModalFamiliesGenerator/AtonalModalFamiliesGenerator.csproj
+   Demos/IntelligentAnalysis/IntelligentAnalysisDemo.csproj
+   Demos/Music Theory/ChordNamingDemo/ChordNamingDemo.csproj
+   Demos/Music Theory/FretboardExplorer/FretboardExplorer.csproj
+   Demos/ScaleCatalogGenerator/ScaleCatalogGenerator.csproj
+   Demos/VoicingAnalysisAudit/VoicingAnalysisAudit.csproj
+   GA.Business.Querying/GA.Business.Querying.csproj
+   GA.WebBlazorApp/GA.WebBlazorApp.csproj
+   GaCLI/GaCLI.csproj
+   GaMcpServer/GaMcpServer.csproj
+   Tests/Apps/GA.TabConversion.Api.Tests/GA.TabConversion.Api.Tests.csproj
+   Tests/Apps/GaChatbot.Tests/GaChatbot.Tests.csproj
+   Tests/Common/GA.Business.Core.Graphiti.Tests/GA.Business.Core.Graphiti.Tests.csproj
+   Tests/Common/GA.Business.ProbabilisticGrammar.Tests/GA.Business.ProbabilisticGrammar.Tests.csproj
+   Tests/FloorManager.Tests.Playwright/FloorManager.Tests.Playwright.csproj
+   Tests/GaApi.Tests/GaApi.Tests.csproj
+   Tests/GuitarAlchemistChatbot.Tests.Playwright/GuitarAlchemistChatbot.Tests.Playwright.csproj
+   Tools/GaDomainInvariants/GaDomainInvariants.csproj
+   Tools/GaStructureInvariance/GaStructureInvariance.csproj
+
+== Test projects outside the solution: named by a workflow (file path), lines with a test attribute
+   Tests/Apps/GA.TabConversion.Api.Tests/GA.TabConversion.Api.Tests.csproj: workflow False, 14 test attributes
+   Tests/Apps/GaChatbot.Tests/GaChatbot.Tests.csproj: workflow False, 6 test attributes
+   Tests/Common/GA.Business.Core.Graphiti.Tests/GA.Business.Core.Graphiti.Tests.csproj: workflow False, 7 test attributes
+   Tests/Common/GA.Business.ProbabilisticGrammar.Tests/GA.Business.ProbabilisticGrammar.Tests.csproj: workflow False, 35 test attributes
+   Tests/FloorManager.Tests.Playwright/FloorManager.Tests.Playwright.csproj: workflow False, 28 test attributes
+   Tests/GaApi.Tests/GaApi.Tests.csproj: workflow False, 12 test attributes
+   Tests/GuitarAlchemistChatbot.Tests.Playwright/GuitarAlchemistChatbot.Tests.Playwright.csproj: workflow True, 201 test attributes
+
+== Projects outside the solution that a listed project references
+   Common/GA.BSP.Core/GA.BSP.Core.csproj: from 1 listed project(s)
+   Common/GA.Business.Analytics/GA.Business.Analytics.csproj: from 2 listed project(s)
+   Common/GA.Business.Core.Analysis.Gpu/GA.Business.Core.Analysis.Gpu.csproj: from 1 listed project(s)
+   Common/GA.Business.Core/GA.Business.Core.csproj: from 4 listed project(s)
+   Common/GA.Business.Intelligence/GA.Business.Intelligence.csproj: from 1 listed project(s)
+   Common/GA.Providers.Anthropic/GA.Providers.Anthropic.csproj: from 2 listed project(s)
+   GaMcpServer/GaMcpServer.csproj: from 1 listed project(s)
+
+== Packages with a Version attribute: 135; declared with two or more versions: 35
+   Microsoft.Extensions.Hosting: 10.0.0 x2, 10.0.5 x1, 9.0.0 x1, 9.0.10 x5, 9.0.4 x3
+   MongoDB.Driver: 2.29.0 x2, 2.30.0 x2, 3.2.0 x6, 3.2.1 x1, 3.5.0 x3
+   Microsoft.Extensions.DependencyInjection: 10.0.0 x1, 10.0.2 x2, 9.0.0 x2, 9.0.10 x7
+   ModelContextProtocol: 0.* x1, 0.1.0-preview.10 x1, 1.1.0 x2, 1.3.0 x1
+   Microsoft.Extensions.Caching.Memory: 10.0.0 x1, 10.0.2 x1, 9.0.10 x2
+
+== PackageReference Update items of Directory.Build.props, against the versions the projects declare
+   System.Numerics.Tensors -> 10.0.2: declared with another version in 2 file(s): 9.0.0, 9.0.10
+   Microsoft.ML.OnnxRuntime -> 1.23.2: declared with another version in 1 file(s): 1.20.1
+   Microsoft.Extensions.DependencyInjection.Abstractions -> 10.0.0: declared with another version in 5 file(s): 10.0.2, 9.0.10
+   Microsoft.Extensions.Caching.Memory -> 10.0.0: declared with another version in 3 file(s): 10.0.2, 9.0.10
+   Microsoft.Extensions.Http -> 10.0.0: declared with another version in 5 file(s): 9.0.10
+   Microsoft.Extensions.Options -> 10.0.0: declared with another version in 7 file(s): 10.0.2, 9.0.10, 9.0.2
+   total: 23 declarations, 13 of them in projects of the solution
+
+== Blocking waits on tasks in non-test code (outside archive/): .Result, .Wait(), GetAwaiter().GetResult()
+   Apps/GaChatbot/Services/Infrastructure/GaApiClientVectorIndex.cs:19: return SearchAsync(queryVector, topK, null, null, null, null).GetAwaiter().GetResult();
+   Apps/GaChatbot/Services/Infrastructure/GaApiClientVectorIndex.cs:30: return SearchAsync(queryVector, topK, quality, extension, stackingType, noteCount).GetAwaiter().GetR
+   Apps/ga-server/GA.Analytics.Service/Services/AnalyticsServices.cs:115: GetRecentViolationsAsync(count).GetAwaiter().GetResult();
+   Apps/ga-server/GA.MusicTheory.Service/Services/MongoDbService.cs:19: CreateIndexesAsync().Wait();
+   Apps/ga-server/GaApi/Services/CachingService.cs:68: cache.RemoveAsync(key).AsTask().Wait();
+   Apps/ga-server/GaApi/Services/LocalEmbeddingService.cs:23: .GetAwaiter().GetResult();
+   Common/GA.BSP.Core/BSP/IntelligentBSPGenerator.Optimized.cs:134: return _analysisEngine.AnalyzeAsync(graph, analysisOptions).GetAwaiter().GetResult();
+   Common/GA.Business.Core.Orchestration/Services/ProductionOrchestrator.cs:272: var filters = filtersTask.Result;
+   Common/GA.Business.Core.Orchestration/Services/ProductionOrchestrator.cs:273: var routing = routingTask.Result;
+   Common/GA.Business.Core.Orchestration/Services/ProductionOrchestrator.cs:582: var filters = filtersTask.Result;
+   Common/GA.Business.Core.Orchestration/Services/ProductionOrchestrator.cs:583: var routing = routingTask.Result;
+   Common/GA.Business.ML/Agents/Memory/ChatTranscriptStore.cs:248: _saveLock.Wait();
+   Common/GA.Business.ML/Agents/Memory/MemoryStore.cs:838: _saveLock.Wait();
+   Common/GA.Business.ML/Agents/MongoRoutingFeedback.cs:84: _semaphore.Wait();
+   Common/GA.Business.ML/Agents/MongoRoutingFeedback.cs:99: _semaphore.Wait();
+   Common/GA.Business.ML/Embeddings/QdrantVectorIndex.cs:20: InitializeCollectionAsync().Wait();
+   Common/GA.Business.ML/Embeddings/QdrantVectorIndex.cs:163: var searchResult = searchTask.Result;
+   Common/GA.Business.ML/Rag/PartitionedRagService.cs:132: var combinedCorpus = chordTask.Result.Select(r => new RagResult(
+   Common/GA.Business.ML/Rag/PartitionedRagService.cs:138: .Concat(youtubeTask.Result.Select(r => new RagResult(
+   Common/GA.Business.ML/Rag/PartitionedRagService.cs:145: .Concat(styleTask.Result.Select(r => new RagResult(
+   Common/GA.Business.ML/Retrieval/ModulationAnalyzer.cs:137: return generator.GenerateEmbeddingAsync(doc).GetAwaiter().GetResult();
+   Common/GA.Domain.Services/Fretboard/Biomechanics/IK/LerobotWristPriorLoader.cs:73: var response = client.GetAsync(url).GetAwaiter().GetResult();
+   Common/GA.Testing.Semantic/AssertAi.cs:161: var generated = _embeddingService.GenerateEmbeddingAsync(text).GetAwaiter().GetResult();
+   Common/GA.Testing.Semantic/AssertAi.cs:236: .GetAwaiter().GetResult();
+   GA.Data.MongoDB/Services/AssetService.cs:27: CreateIndexesAsync().GetAwaiter().GetResult();
+   GaCLI/Commands/GpuVoicingSearchCommand.cs:1037: var embedding = _onnxEmbeddingService!.GenerateEmbeddingAsync(voicing.Description).Result;
+   GaCLI/Commands/GpuVoicingSearchCommand.cs:1107: var floatEmbedding = _embeddingService!.GenerateEmbeddingAsync(voicing.Description).Result;
+   async void, non-test files: 0
+
+== GaCLI: 28 commands, 12 of them throw NotImplementedException
+   RunBenchmarkQuality (line 179)
+   RunBenchmarks (line 186)
+   RunDebugTags (line 191)
+   RunAnalyzeChord (line 388)
+   RunAnalyzeProgression (line 393)
+   RunGpuVoicingSearch (line 549)
+   RunHybridBenchmark (line 554)
+   RunIndexVoicings (line 559)
+   RunSearchVoicings (line 615)
+   RunExplainVoicing (line 678)
+   RunChat (line 683)
+   RunBenchmarkSimilarity (line 688)

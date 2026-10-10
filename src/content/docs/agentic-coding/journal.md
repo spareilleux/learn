@@ -18,6 +18,7 @@ sidebar:
 - [x] Lesson 7: Compound Engineering lifecycle and durable learning
 - [ ] Codex sessions: every capture that needs the model (usage limit until 2026-09-19)
 - [ ] Lesson 8: working on GuitarAlchemist/ga
+- [x] An observation format for model, skill and subagent runs, and its first observation (2026-09-26)
 
 ## QA
 
@@ -132,8 +133,70 @@ Findings for the author of ga; this course doesn't write to ga, and nothing was 
 - The four `ScaleTool` rows were fixed upstream by [#681](https://github.com/GuitarAlchemist/ga/pull/681), merged 2026-09-23. `GetScaleNotes` spells one letter per degree: `F major` gives `F G A Bb C D E`, and `Bb major`, the documentation's own example, is accepted and gives `Bb C D Eb F G A`. `D dorian` gives `D E F G A B C`. Each case is a test in GA's `ScaleToolTests.cs`, which I read at GA's main without running it.
 - The two tools now agree. A session fixing other course findings called `KeyTool.GetKeyNotes` and `ScaleTool.GetScaleNotes` for all 30 keys of `Key.Items`, and they spelled the same notes for every key.
 
+## 2026-09-26 — An observation format for models, skills and subagents
+
+Notes on agent runs drift into anecdotes: "Opus did it faster", "the subagent got lost". An anecdote mixes up three things: what the model reasoned, what the harness let it do, and who owned the work. The format below keeps them apart, so that two observations can be compared, or declared not comparable.
+
+**The record.** One row per run. A field you don't have is written *unknown*, never guessed.
+
+| Field | What goes in it |
+|---|---|
+| Date, run ID | Local date and time with its offset; the correlation or session ID |
+| Repository | The exact commit SHA each repository was read or changed at |
+| Harness | CLI or app and its version (`claude --version`), and the operating system |
+| Model, requested and observed | What was asked for, and what a receipt shows. A model name shown by a UI or by the agent itself is *self-reported*, not a receipt |
+| Skill or subagent | Name and version, or a digest of the file; the role: parent, subagent or peer agent |
+| Task and context | The task in one sentence; what context was supplied (files, briefs, memory) |
+| Permissions | The permission mode, and what was allowed or denied |
+| Hypothesis | Written before the run, or marked *retrospective observation* |
+| Evidence | The command, artifact, log or exit code a reader can re-open |
+| Result and state | One of: submitted, visible, accepted, completed, independently verified |
+| Failure category | Model reasoning; launcher, tool, auth, permission or environment; orchestration or ownership |
+| Tokens and cost | The figure and its provenance: provider bill, harness estimate, or *unknown* |
+| Confidence and limits | Sample size, and what the run cannot show |
+| Reproducibility | What a second run needs: same inputs, seed, versions |
+| Follow-up | The next check, with its owner |
+
+**States are not interchangeable.**
+- *Submitted*: the request left.
+- *Visible*: the recipient shows it.
+- *Accepted*: the recipient took ownership.
+- *Completed*: it says it is done.
+- *Independently verified*: someone else re-checked the evidence.
+
+A wrapper still running, a busy CPU or a "done" message proves none of the last two.
+
+**Failure categories are not interchangeable either.**
+- A timeout caused by a slow host is an environment failure, not a model failure.
+- A wrong claim made with every tool working is a reasoning failure.
+- Two agents writing the same file is an ownership failure, whichever model they ran.
+
+**No leaderboard from anecdotes.** Different tasks, budgets and contexts cannot be ranked against each other. A fair model comparison needs:
+- matched tasks with fixed inputs;
+- repeated runs or seeds where results vary;
+- criteria fixed and blinded before the runs;
+- an independent check of each result;
+- cost reported next to quality.
+
+That comparison is *proposed, not performed*.
+
+**First observation: this delegation, 2026-09-26.** A coordinator (Codex) handed a Claude Code session four course briefs and one diagnostic, correlation `test-quality-courses-20260926` and its siblings. Only evidence available to this session is recorded.
+
+| Field | Observation |
+|---|---|
+| Harness | Claude Code 2.1.282 (`claude --version`, 13:39 EDT). The coordinator's preflight also saw 2.1.282 installed, while the npm registry offered 2.1.283. No upgrade or restart was made |
+| Model | Self-reported only: the session's surface showed "Opus 5.5 (1M context)", medium thinking, and its system prompt names the same model. No provider receipt was checked |
+| Roles | Codex as coordinator; this session as the single writer in the learn worktree; one read-only subagent reading a pinned AutoHarness clone; a peer agent (Augment) doing a read-only static audit of Abide, written to the shared handoff folder |
+| Shared bus | The coordinator reported that the status and inbox calls of the shared message bus returned "Transport closed". Nothing shows that the bus accepted a claim; coordination went through files in a shared folder |
+| Hypotheses | Written before measuring for the test-quality lab only ([repository-dogfooding lesson 6](../../repository-dogfooding-lab/06-mutation-property-testing/)); everything else here is *retrospective observation* |
+| Results, by state | Lab measured and journal written: completed, not independently verified. The coordinator's supervision note says it re-parsed the mutation reports and found the same counts; that is a re-check of recorded evidence, not a rerun. Hook diagnosis: completed; the coordinator marked its root cause a hypothesis |
+| Failures seen, by category | Reasoning, caught before measuring: a malformed-input generator that could build valid input. Tool use, caught by a hash check: a script edit silently converted a pre-registered file to CRLF, and it was reverted. Launcher and environment: a shell here-document failed to parse, and nothing was written; on the host, starting a bare `bash` took about 2.8 s during the hook diagnosis. Orchestration: none observed; one writer per repository held |
+| Tokens and cost | *Unknown*. No provider bill or usage receipt was read. No paid API was called |
+| Limits | One session, one day, one coordinator; not a sample of anything |
+
 ## To verify
 
+- Apply the observation format to a second, independent delegation, and have someone other than its author check one record against its evidence.
 - The install commands of lesson 1 on Linux, WSL and macOS, for both agents, and Codex's PowerShell installer.
 - A Codex session that answers the first question of lesson 1, and the same `AGENTS.md` experiment as lesson 2.
 - Codex hooks: whether the `config.toml` example of lesson 3 runs on Windows with `command_windows`, and whether its relative path works when Codex starts in a subdirectory; the trust flow in `/hooks`.

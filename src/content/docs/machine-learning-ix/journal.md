@@ -1,6 +1,6 @@
 ---
 title: "Journal"
-description: "Dated progress notes — IX pinned at 490c395, the data extracted from this site's CI, the CI of the course code, nineteen places where IX differs from the textbook or scikit-learn, what agreed, the generated API map, and items to verify."
+description: "Dated progress notes — IX pinned at 490c395, CI data and course checks, nineteen earlier findings and two new API or documentation findings, what agreed, the generated API map, and items to verify."
 sidebar:
   order: 99
 ---
@@ -18,13 +18,14 @@ sidebar:
 - [x] Lesson 6: ensembles
 - [x] Lesson 7: neural networks
 - [x] Lesson 8: optimization
+- [x] Lesson 9: five other reducers, with a hand MDS and independent cross-checks
 - [x] Appendix: the API map, generated from the pinned commit
-- [ ] Lessons 9 to 21
+- [ ] Lessons 10 to 21
 - [x] French and Spanish translations
 
 ## QA
 
-IX is somebody else's library, pinned at `490c395`, and nineteen of its answers differ from the textbook or from scikit-learn. The journal lists them; what it does not say for each is what a reader arriving from scikit-learn would have expected, which is the first column here. None is filed as an IX issue. Several are defensible choices rather than defects, and the middle column says which.
+IX is somebody else's library, pinned at `490c395`. The earlier lessons recorded nineteen findings; lesson 9 adds two API or documentation findings. The first column says what a caller would expect. None is filed as an IX issue. Several are defensible choices rather than defects, and the middle column says which.
 
 | Expected | What happens | Where | Measure | Status |
 |---|---|---|---|---|
@@ -47,10 +48,12 @@ IX is somebody else's library, pinned at `490c395`, and nineteen of its answers 
 | `Dense::new` can be seeded | It draws from the thread generator, so a network is not reproducible | `ix-nn/layer.rs` 27 | No seed parameter | Reproduced, not filed [2026-09-15](#2026-09-15--where-ix-differs-continued) |
 | A `Sequential` of two `Dense` layers can learn XOR | `Dense` is the only type implementing `Layer`, so there is no activation to put between two affine maps: the whole network is one affine map | `ix-nn` | The loss floors at 0.25 after 50,000 epochs and predicts 0.5 at all four corners | Reproduced, a missing feature rather than a defect, not filed [2026-09-15](#2026-09-15--where-ix-differs-continued) |
 | `minimize` tells a diverged run apart from one that ran out of iterations | It returns the caller's own starting point, labelled as the best seen, with the same `converged: false` as an ordinary non-convergence | `ix-optimize/gradient.rs` 124-165 | Rosenbrock at rate 0.01 reports `best f 24.200000`, the value at the start | Reproduced, not filed [2026-09-15](#2026-09-15--where-ix-differs-continued) |
+| `TSNE::transform(new_rows)` places those rows on the fitted map | The argument is ignored: it returns the stored `12 × 2` embedding even for a `1 × 1` input | [`tsne.rs` 249-253](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-unsupervised/src/tsne.rs#L249-L253) | Output exactly equals the original embedding | Reproduced, not filed [2026-09-24](#2026-09-24--five-reducers-three-inputs) |
+| The t-SNE module's Barnes-Hut header describes its implementation | `compute_q` and the gradient each loop over all point pairs | [`tsne.rs` 160-178, 205-217](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-unsupervised/src/tsne.rs#L160-L217) | Quadratic loops visible in source; scaling not benchmarked | Source-confirmed, not filed [2026-09-24](#2026-09-24--five-reducers-three-inputs) |
 
 ## Experiments
 
-A course that finds nineteen divergences has to show what it checked and found right, or the nineteen mean nothing. These six are those checks. The fifth is the one that failed, and it produced findings 15 and 16.
+A course that finds divergences must show what it checked and found right. The original six checks remain below; the fifth failed and produced findings 15 and 16. Lesson 9 adds two exploratory geometry checks, not preregistered experiments.
 
 | Question | Hypothesis | Result | Verdict | Where |
 |---|---|---|---|---|
@@ -60,6 +63,8 @@ A course that finds nineteen divergences has to show what it checked and found r
 | Can a replayable 64-bit xorshift stand in for IX's unreplayable `StdRng` in a bootstrap check? | Written in advance: a replayable generator used identically in Rust and Python lands on the same out-of-bag rows | The numpy check lands on the same 48 rows left out | Confirmed | [2026-09-15](#2026-09-15--what-agreed) |
 | Does `ix_nn`'s analytic gradient equal its finite-difference gradient? | Written in advance: the ratio should be 1 | 65.0000, and then 1, 2, 3, 4 by column count — findings 15 and 16 | Refuted | [2026-09-15](#2026-09-15--what-agreed) |
 | Does macOS-ARM float summation change any claim the lessons make? | Written in advance: only the sign of an already-zero value should differ | `-0.0000` against `0.0000` at two corners, every other value identical to four decimals (run 35039180659) | Confirmed | [2026-09-16](#2026-09-16--a-negative-zero-on-macos) |
+| Does hand-written classical MDS preserve the same square distances as IX? | Both should reproduce the six distances, irrespective of axis orientation | Both have maximum distance error below `1e-10`; numpy agrees | Confirmed, exploratory | [2026-09-24](#2026-09-24--five-reducers-three-inputs), [`l09_reducers.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/examples/l09_reducers.rs) |
+| Does the first RBF kernel-PCA axis separate concentric rings? | Nonlinear similarity should put the radial contrast first | Both IX and scikit-learn put it on axis 4; gap `0.5798` in IX, zero on axis 1 | Refuted, exploratory | [2026-09-24](#2026-09-24--five-reducers-three-inputs), [`l09_reducers.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/examples/l09_reducers.rs) |
 
 ## 2026-09-14 — IX, pinned
 
@@ -163,6 +168,13 @@ Worth recording next to the findings, because the lessons so far have mostly fou
 - [`fmt_vec`](https://github.com/spareilleux/learn/blob/be41ba8/code/machine-learning-ix/src/lib.rs#L52-L70) exists so that "the outputs don't depend on how each OS prints the last digits", which makes it where the fix belongs: anything that rounds to zero now prints `0.0000`, never `-0.0000`, and every other sign survives. A unit test pins both halves. No `expected/` file changed, so no lesson had to be requoted.
 - The 2026-09-14 note — fixed decimals, so the outputs are identical on the three systems — was right about the remedy and one case short of complete. Fixed decimals do not settle the sign of a zero, and a course written on one machine cannot find that out.
 
+## 2026-09-24 — Five reducers, three inputs
+
+- [`l09_reducers.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/examples/l09_reducers.rs) ran on Windows with the pinned IX commit: a square for MDS, two rings for kernel PCA, and the 186-job CI data for NMF and LDA (first twelve standardized rows for t-SNE). Hand MDS and IX each reproduced the square's six distances within `1e-10`.
+- On the rings, the linear first-axis gap was `0.0000`. The first RBF gap was also `0.0000`; the fourth was `0.5798`. This refutes the exploratory first-axis expectation. Eigenvector signs and rotations are arbitrary, so the comparison uses absolute ring-mean gaps and does not infer a class score.
+- Rank-two NMF reconstructed the raw timing matrix at MSE `0.505` seconds squared per cell and rejected standardized negative entries. LDA produced two finite axes for three OS labels, with **no held-out classification claim**. Seeded t-SNE produced a finite `12 × 2` arrangement but returned exactly the same arrangement when `transform` received an unrelated `1 × 1` input.
+- The numpy/scikit-learn 1.8.0 cross-check reproduced the square's distances, the ring-axis outcome, finite NMF reconstruction, LDA's two axes, and a finite t-SNE embedding. These are invariant checks, not claims of equal NMF factors or t-SNE coordinates across implementations. The hypotheses were not recorded before this run, so these are exploratory findings, not preregistered confirmations. Three-OS CI for lesson 9 is still pending.
+
 ## To verify
 
 - The `ix_ml_pipeline` tool end to end: the scaling order of finding 1, the task inference of finding 2 on a CSV file, and the `All rows contain NaN values` error for a file with a text column. All three are read in the code, not run.
@@ -178,3 +190,4 @@ Worth recording next to the findings, because the lessons so far have mostly fou
 - Whether findings 10 to 19 are already known upstream: I still have not searched IX issues.
 - The API map counts `pub` declarations, not reachable ones; how far apart the two numbers are is unmeasured.
 - The values printed by a direct `println!("{:.6}")` rather than through `fmt_vec` — lesson 8's `intercept -0.000000` is one — carry the same signed-zero hazard and are not normalized. That one agreed on the three systems in run 35039180659; the others have not been enumerated.
+- Repeat lesson 9's numeric snapshots on Linux and macOS CI; check whether IX's NMF MSE and the RBF fourth-axis gap round identically there. Benchmark t-SNE's scaling separately before assigning a runtime cost.

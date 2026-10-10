@@ -55,6 +55,7 @@ Ce sont les deux dernières lignes qu'il faut garder en tête. Une politique de 
 | 4 | [`/slashforge:code` : dix phases et quatre points de contrôle](04-code-phases-and-gates/) | les politiques de branche, un modèle de pull request |
 | 5 | [`/slashforge:investigate` et `/slashforge:review-pr`](05-investigate-and-review-pr/) | un processus de correctif urgent, un rapport de bug, une revue de code |
 | 6 | [Se l'approprier : règles, vérification, installation d'équipe](06-making-it-yours/) | `.editorconfig`, une configuration de build partagée |
+| 7 | [Contribuer en amont : d'un constat à un correctif vérifié](07-contributing-back/) | un rapport de bogue, une note de version, un test de non-régression |
 | — | [Journal](journal/) | |
 
 ## Ressources

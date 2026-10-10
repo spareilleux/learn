@@ -1,0 +1,20 @@
+Test run for C:\tmp\learn-vexflow-vextab\code\repository-dogfooding-lab\test-quality\PitchParserProperties\bin\Release\net10.0\PitchParserProperties.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+  Failed Negative_control_sharp_and_flat_accept_the_same_texts [144 ms]
+  Error Message:
+   Falsifiable, after 2 tests (2 shrinks) (20260926,7). 
+Last step was invoked with size of 1 and seed of (964909807662246213,14028735258112092295).
+Replay directly at failing step with (964909807662246213,14028735258112092295,1).
+Label of failing property: a#-1
+Original:
+<null>
+struct (191uy, true, true, 221uy)
+Shrunk:
+<null>
+struct (0uy, true, true, 0uy)
+with exception:
+System.Exception: Expected true, got false.
+
+  Stack Trace:
+
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 144 ms - PitchParserProperties.dll (net10.0)

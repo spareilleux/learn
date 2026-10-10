@@ -13,6 +13,20 @@ var lessons = new Dictionary<string, Action>
     ["l8"] = Lesson8.Run,
     ["l9"] = Lesson9.Run,
     ["l10"] = Lesson10.Run,
+    // lesson 9, written after the two appendices
+    ["l11"] = Lesson11.Run,
+    // lesson 10
+    ["l12"] = Lesson12.Run,
+    // lesson 11
+    ["l13"] = Lesson13.Run,
+    // lesson 12
+    ["l14"] = Lesson14.Run,
+    // lesson 13
+    ["l15"] = Lesson15.Run,
+    // lesson 14
+    ["l16"] = Lesson16.Run,
+    // lesson 15
+    ["l17"] = Lesson17.Run,
 };
 
 Console.OutputEncoding = System.Text.Encoding.UTF8;

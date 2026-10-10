@@ -11,4 +11,4 @@ sidebar:
 
 ## Módulos
 
-- [PHI-001 · Como argumentar bien — Logica y pensamiento critico](phi-001-how-to-argue-well/)
+- [PHI-001 · Cómo argumentar bien — Lógica y pensamiento crítico](phi-001-how-to-argue-well/)

@@ -11,4 +11,4 @@ sidebar:
 
 ## Modules
 
-- [INF-001 · The Entropy of Governance — Measuring Policy Complexity](inf-001-entropy-of-governance/)
+- [INF-001 · L'entropie de la gouvernance — Mesurer la complexité des politiques](inf-001-entropy-of-governance/)

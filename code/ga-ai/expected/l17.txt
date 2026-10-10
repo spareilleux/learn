@@ -1,0 +1,147 @@
+# l17
+
+== Without embeddings: the first skill, in registration order, whose CanHandle accepts each example prompt
+prompt                                                           first skill that accepts it
+What shape do I play in E with capo 4                            none
+Song is in E, what chord shape with capo on 4                    none
+Capo on 3, song in G, what shape                                 none
+I play a C shape with capo 3 — what does it sound like           none
+What does a G shape sound like with capo 2                       none
+Capo on 5, song in A                                             none
+If I capo on 2 and play an Em shape, what's the sounding chord   skill.chordinfo
+What's the sounding key if I play in G with capo on 5            none
+Capo 7, D shape — sounding chord                                 none
+What chord shape for B major with capo 4                         skill.chordvoicings
+what is DADGAD tuning                                            none
+what's drop D tuning                                             none
+how do I tune to drop C                                          none
+drop C tuning notes                                              none
+how do I tune to open G                                          none
+open D tuning notes                                              none
+what is double drop D tuning                                     none
+what's half step down tuning                                     none
+whole step down tuning notes                                     none
+DGCGCD tuning explained                                          none
+how is DADGAD different from standard                            none
+what tuning is Eb Ab Db Gb Bb Eb                                 none
+skill intents 32; CanHandle of skill.capo and skill.alternatetunings accepts 0 of their 22 example prompts
+
+== CapoSkill's example prompts: what each asks, and the answer
+prompt                                                           asks         answer         verdict
+What shape do I play in E with capo 4                            shape C      shape C        right
+Song is in E, what chord shape with capo on 4                    shape C      shape C        right
+Capo on 3, song in G, what shape                                 shape E      shape E        right
+I play a C shape with capo 3 — what does it sound like           sounds Eb    sounds D#      right, theoretical spelling
+What does a G shape sound like with capo 2                       sounds A     sounds A       right
+Capo on 5, song in A                                             shape E      shape E        right
+If I capo on 2 and play an Em shape, what's the sounding chord   sounds F#m   sounds F#m     right
+What's the sounding key if I play in G with capo on 5            sounds C     shape D        wrong direction
+Capo 7, D shape — sounding chord                                 sounds A     sounds A       right
+What chord shape for B major with capo 4                         shape G      declined       declined
+
+== "Song is in <key>, what shape with capo <fret>": 30 keys, frets 1 to 11
+key      prompts   right   right, theoretical spelling    wrong   declined
+major    165       127     27 (A# D# G#)                  0       11 (Cb)
+minor    165       159     6 (Dbm Gbm)                    0       0
+the answers' "an Am shape at capo N would sound as …m": 319, a wrong chord 0, a theoretical minor key 16
+
+== "What does a <shape> shape sound like with capo <fret>": the eight open shapes, frets 1 to 11
+shape    prompts   right   wrong   declined   right, theoretical spelling
+C        11        8       0       0          3, capo 3: D#, 8: G#, 10: A#
+A        11        8       0       0          3, capo 1: A#, 6: D#, 11: G#
+G        11        8       0       0          3, capo 1: G#, 3: A#, 8: D#
+E        11        8       0       0          3, capo 4: G#, 6: A#, 11: D#
+D        11        8       0       0          3, capo 1: D#, 6: G#, 8: A#
+Am       11        11      0       0          0
+Em       11        11      0       0          0
+Dm       11        11      0       0          0
+
+== "Where should I put the capo to play in <key> with open chords?"
+key   frets 0 to 7 that give an open shape: C A G E D  the skill's answer
+C     0 C, 3 A, 5 G                                    declined
+Db    1 C, 4 A, 6 G                                    declined
+D     0 D, 2 C, 5 A, 7 G                               declined
+Eb    1 D, 3 C, 6 A                                    declined
+E     0 E, 2 D, 4 C, 7 A                               declined
+F     1 E, 3 D, 5 C                                    declined
+F#    2 E, 4 D, 6 C                                    declined
+G     0 G, 3 E, 5 D, 7 C                               declined
+Ab    1 G, 4 E, 6 D                                    declined
+A     0 A, 2 G, 5 E, 7 D                               declined
+Bb    1 A, 3 G, 6 E                                    declined
+B     2 A, 4 G, 7 E                                    declined
+
+== Other phrasings
+prompt                                                   asks           answer         verdict
+song in Em, capo 2, what shape                           shape Dm       declined       declined
+song in E minor, capo 2, what shape                      shape Dm       shape Dm       right
+What shape do I play in e with capo 4                    shape C        shape C        right
+what shape for F with capo 3                             shape D        declined       declined
+capo on 3 in G, what shape                               shape E        shape E        right
+Capo on 2, song in F#, what shape                        shape E        shape D#       wrong chord
+song in C#, capo 4, what shape                           shape A        shape G#       wrong chord
+song in B♭, capo 1, what shape                           shape A        shape A#       wrong chord
+I'm in a band, capo 2, song is in G                      shape F        shape G        wrong chord
+Playing in D with capo 2, what key does it sound in?     sounds E       shape C        wrong direction
+I play a C7 shape with capo 3, what does it sound like   sounds Eb7     declined       declined
+what does a Cmaj7 shape sound like with capo 2           sounds Dmaj7   declined       declined
+capo 2, Dsus4 shape, what chord do I hear                sounds Esus4   declined       declined
+
+== AlternateTuningsSkill's example prompts: the tuning each one gets
+prompt                                   answer                         verdict
+what is DADGAD tuning                    DADGAD                         right
+what's drop D tuning                     Drop D                         right
+how do I tune to drop C                  Drop C                         right
+drop C tuning notes                      Drop C                         right
+how do I tune to open G                  Open G                         right
+open D tuning notes                      Open D                         right
+what is double drop D tuning             Double Drop D                  right
+what's half step down tuning             Half-step down (Eb standard)   right
+whole step down tuning notes             Whole-step down (D standard)   right
+DGCGCD tuning explained                  DGCGCD                         right
+how is DADGAD different from standard    DADGAD                         right
+what tuning is Eb Ab Db Gb Bb Eb         Half-step down (Eb standard)   right
+
+== The nine tunings of the skill's table: notes and moves from standard, against a textbook
+tuning                         notes                  moves from standard        as a textbook
+DADGAD                         D A D G A D            -2st same same same -2st -2st right
+Drop D                         D A D G B E            -2st same same same same same right
+Double Drop D                  D A D G B D            -2st same same same same -2st right
+Drop C                         C G C F A D            -4st -2st -2st -2st -2st -2st right
+Open G                         D G D G B D            -2st -2st same same same -2st right
+Open D                         D A D F# A D           -2st same same -1st -2st -2st right
+DGCGCD                         D G C G C D            -2st -2st -2st same +1st -2st right
+Half-step down (Eb standard)   Eb Ab Db Gb Bb Eb      -1st -1st -1st -1st -1st -1st right
+Whole-step down (D standard)   D G C F A D            -2st -2st -2st -2st -2st -2st right
+
+== "what tuning is …" with the six notes, at the pin: the tuning each notation gets
+tuning                         ASCII            ♯ and ♭          hyphens          lower case
+DADGAD                         right            right            right            right
+Drop D                         right            right            right            right
+Double Drop D                  right            right            right            right
+Drop C                         right            right            right            right
+Open G                         right            right            right            right
+Open D                         other notes      other notes      other notes      other notes
+DGCGCD                         right            right            right            right
+Half-step down (Eb standard)   right            other notes      right            right
+Whole-step down (D standard)   right            right            right            right
+standard                       right            right            right            right
+Eb standard, in sharps         another tuning   another tuning   another tuning   another tuning
+questions 44: answered with the tuning asked or its notes 35, with another named tuning 4, other answers 5
+  Open D, every notation: no name, reads D A D F A D
+  Half-step down (Eb standard), ♯ and ♭: no name, reads E A D G B E
+  Eb standard, in sharps, every notation: Whole-step down (D standard)
+
+== Tunings outside the table, at the pin
+prompt                                       asks for            answer                           verdict
+what is open D minor tuning                  D A D F A D         Open D: D A D F# A D             another tuning
+what is open G minor tuning                  D G D G Bb D        Open G: D G D G B D              another tuning
+what is open E tuning                        E B E G# B E        declined                         declined
+what is open C tuning                        C G C G C E         declined                         declined
+what is drop B tuning                        B F# B E G# C#      declined                         declined
+what is C standard tuning                    C F Bb Eb G C       declined                         declined
+what is drop C# tuning                       C# G# C# F# A# D#   declined                         declined
+what is drop C♯ tuning                       C# G# C# F# A# D#   Drop C: C G C F A D              another tuning
+what is drop D♭ tuning                       Db Ab Db Gb Bb Eb   Drop D: D A D G B E              another tuning
+what is standard tuning                      E A D G B E         declined                         declined
+"What does an Em shape look like in drop-D": Drop D, the answer names Em: no

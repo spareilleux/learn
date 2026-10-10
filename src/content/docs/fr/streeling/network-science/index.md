@@ -11,4 +11,4 @@ sidebar:
 
 ## Modules
 
-- [NET-001 · Scale-Free Tool Networks — Why Some Repos Connect to Everything](net-001-scale-free-tool-networks/)
+- [NET-001 · Réseaux d'outils sans échelle — Pourquoi certains dépôts sont connectés à tout](net-001-scale-free-tool-networks/)

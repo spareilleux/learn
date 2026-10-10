@@ -12,5 +12,5 @@ sidebar:
 ## Módulos
 
 - [GAA-001 · Tu Primer Acorde — Mi Menor](gaa-001-your-first-chord/)
-- [GAA-002 · Training Your Ear — The Guitarist's Most Powerful Tool](gaa-002-training-your-ear/)
-- [GAA-003 · Improvisation Foundations — From Your First Solo to Confident Self-Expression](gaa-003-improvisation-foundations/)
+- [GAA-002 · Entrenar tu oído — La herramienta más poderosa del guitarrista](gaa-002-training-your-ear/)
+- [GAA-003 · Fundamentos de la improvisación — De tu primer solo a una expresión personal segura](gaa-003-improvisation-foundations/)

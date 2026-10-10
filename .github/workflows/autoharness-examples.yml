@@ -1,0 +1,42 @@
+# AutoHarness course: run the pre-registered fixtures against the pinned tigerless-labs/autoharness commit on three
+# OSes and compare them with the measured run. No model is called and nothing is installed: the clone is only put on
+# the fixtures' PYTHONPATH, and each fixture runs with a disposable HOME.
+name: AutoHarness course examples
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['code/autoharness/**', '.github/workflows/autoharness-examples.yml']
+  pull_request:
+    paths: ['code/autoharness/**', '.github/workflows/autoharness-examples.yml']
+
+permissions:
+  contents: read
+
+env:
+  AH_COMMIT: ca39a72e4353ebef11b7de13c1fc7fa5f4df421b
+
+jobs:
+  fixtures:
+    name: fixtures (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.14'
+      - name: Clone AutoHarness at the pinned commit
+        run: |
+          git init -q "$RUNNER_TEMP/autoharness"
+          git -C "$RUNNER_TEMP/autoharness" fetch -q --depth 1 https://github.com/tigerless-labs/autoharness.git "$AH_COMMIT"
+          git -C "$RUNNER_TEMP/autoharness" checkout -q --detach FETCH_HEAD
+      - run: python code/autoharness/check.py --clone "$RUNNER_TEMP/autoharness"

@@ -24,9 +24,13 @@ compare() {
 
 # Runs one file-based app: its input comes from input/<name>.txt, if there is one.
 # dotnet clean first: the SDK doesn't recompile an unchanged file, and then prints none of its warnings.
-# The output keeps the compiler messages without the folder (file(line,col): error CSxxxx: ...),
+# The output keeps the compiler messages without the folder (file(line,col): error CSxxxx: ...), and the
+# NuGet messages of a #:package line too (file.csproj : warning NUxxxx: ...): SDK 10.0.112 names that project
+# file.csproj and SDK 10.0.401 file.cs.csproj, and both are written file.csproj. The output also
 # drops the "   at ..." lines of a stack trace, and ends with the exit code: 0, 1, or "crash" for an
 # unhandled exception, whose code depends on the OS (it is printed, not compared).
+# The compiler messages come first, errors before warnings, each group by line and column: the
+# compiler prints the same warnings in a different order on Linux than on Windows and macOS.
 run() {
   local file=$1 name
   name=$(basename "$file" .cs)
@@ -40,12 +44,26 @@ run() {
     echo "# $name exit code $code"
     shown=crash
   fi
+  local message='^[A-Za-z0-9_]+\.cs\([0-9]+,[0-9]+\): (error|warning) '
+  sed -E -e 's#^.*[\/]([A-Za-z0-9_]+\.cs\([0-9]+,[0-9]+\))#\1#' -e 's#^.*[\/]([A-Za-z0-9_]+)(\.cs)?\.csproj : #\1.csproj : #' -e '/^   at /d' "out/$name.raw.txt" > "out/$name.norm.txt"
   {
-    sed -E -e 's#^.*[\/]([A-Za-z0-9_]+\.cs\([0-9]+,[0-9]+\))#\1#' -e '/^   at /d' "out/$name.raw.txt"
+    grep -E "$message" "out/$name.norm.txt" |
+      awk '{ p = $0; sub(/^[^(]*\(/, "", p); split(p, at, /[,)]/); printf "%d\t%d\t%d\t%s\n", ($0 ~ /\): error /) ? 0 : 1, at[1], at[2], $0 }' |
+      sort -s -t "$(printf '\t')" -k1,1n -k2,2n -k3,3n | cut -f4-
+    grep -vE "$message" "out/$name.norm.txt"
     echo "exit $shown"
   } > "out/$name.txt"
   compare "$name"
 }
+
+# Lesson 12: the library's package, before the loop: exercises/l12_ex_package.cs reads it.
+# The output keeps the two lines the lesson shows, with the folder of the package cut. The old package is deleted
+# first: when nothing changed, dotnet pack keeps it and prints neither line.
+rm -f l12-project/Fretboard/bin/Release/Fretboard.1.0.0.nupkg
+dotnet pack l12-project/Fretboard > out/l12_pack.raw.txt 2>&1
+code=$?
+{ grep -E 'missing a readme|Successfully created' out/l12_pack.raw.txt | sed -E "s#^ +##; s#'[^']*[\\/]([^\\/']+\.nupkg)'#'\1'#"; echo "exit $code"; } > out/l12_pack.txt
+compare l12_pack
 
 for f in examples/*.cs exercises/*.cs compile_fail/*.cs; do
   run "$f"
@@ -65,5 +83,83 @@ case "$(uname -s)" in
     diff expected/l01_shebang.txt out/l01_shebang_exec.txt && echo "ok   l01_shebang (./)" || { echo "FAIL l01_shebang (./)"; status=1; }
     ;;
 esac
+
+# Lesson 10: a relative path starts from the current directory, so l10_where.cs runs again from the repository root
+(cd ../.. && dotnet run code/csharp-beginner/examples/l10_where.cs) > out/l10_where_root.txt 2>&1
+echo "exit $?" >> out/l10_where_root.txt
+compare l10_where_root
+
+# Keeps what a reader needs from `dotnet test`: compiler warnings without their folder, each failed test with its
+# message, and the summary line. Drops what changes from run to run or from OS to OS: restore and build lines,
+# paths, durations, stack traces. The failed tests are sorted by name: xUnit doesn't report them in a fixed order.
+test_summary() {
+  sed -E -e 's#^.*[\/]([A-Za-z0-9_.]+\.cs\([0-9]+,[0-9]+\))#\1#' -e 's# \[[^]]*\.csproj\]$##' \
+         -e 's/ \[(< )?[0-9]+ m?s\]$//' -e 's/, Duration: [0-9]+ m?s//' |
+    grep -vE '^ *(Determining projects|Restored |All projects|[0-9]+ of [0-9]+ projects|[A-Za-z.]+ -> |Test run for |VSTest version|Starting test execution|A total of |at |Stack Trace:|----- Inner Stack Trace|\[xUnit\.net)' |
+    grep -vE '^[[:space:]]*$' |
+    LC_ALL=C awk '
+      /^  Failed / { if (block != "") print "2" block; block = $0; next }
+      /^(Passed!|Failed!) / { if (block != "") print "2" block; block = ""; print "3" $0; next }
+      block != "" { block = block "\037" $0; next }
+      { print "1" $0 }
+      END { if (block != "") print "2" block }' |
+    LC_ALL=C sort |
+    cut -c2- | tr '\037' '\n'
+}
+
+# Lesson 11: the tests of Fretboard.Tests pass; those of Pitfalls.Tests fail on purpose, with the messages the lesson shows.
+# dotnet clean first, as for the files above: an up-to-date build prints no warning.
+for project in Fretboard.Tests Pitfalls.Tests; do
+  dotnet clean "l11-tests/$project" > /dev/null 2>&1
+  dotnet test "l11-tests/$project" > "out/l11_$project.raw.txt" 2>&1
+  code=$?
+  { test_summary < "out/l11_$project.raw.txt"; echo "exit $code"; } > "out/l11_$project.txt"
+  compare "l11_$project"
+done
+
+# Lesson 12: the solution. dotnet test in its folder runs the one test project, and builds only that project and
+# the library it references: the console app is still not built after it.
+dotnet clean l12-project > /dev/null 2>&1
+dotnet test l12-project > out/l12_solution.raw.txt 2>&1
+code=$?
+{
+  test_summary < out/l12_solution.raw.txt
+  echo "exit $code"
+  if [ -f l12-project/Fretboard.App/bin/Debug/net10.0/Fretboard.App.dll ]; then
+    echo "Fretboard.App built by dotnet test: yes"
+  else
+    echo "Fretboard.App built by dotnet test: no"
+  fi
+} > out/l12_solution.txt
+compare l12_solution
+
+# Lesson 12: dotnet build in the solution folder builds the three projects. The output keeps their names, sorted
+# (they are built in parallel), and the counts of warnings and errors.
+dotnet build l12-project > out/l12_build.raw.txt 2>&1
+code=$?
+{
+  grep -E ' -> ' out/l12_build.raw.txt | sed -E 's#^ *([A-Za-z.]+) -> .*#\1#' | LC_ALL=C sort
+  grep -E 'Warning\(s\)|Error\(s\)' out/l12_build.raw.txt | sed -E 's#^ +##'
+  echo "exit $code"
+} > out/l12_build.txt
+compare l12_build
+
+# Lesson 12: the console app, built by dotnet build, runs a few commands, each followed by its exit code.
+# $args is not quoted on purpose: each word becomes one argument. The folder of the missing file is cut.
+for args in "fret 110 7" "transpose 2 C E G" "projects data/ga-projects.csv" "fret 110 25" "projects missing.csv" ""; do
+  echo "> ${args:-(no arguments)}"
+  dotnet run --project l12-project/Fretboard.App --no-build -- $args 2>&1
+  echo "-> exit code $?"
+done | sed -E "s#'[^']*[\\/](missing\.csv)'#'\1'#" > out/l12_app.txt
+compare l12_app
+
+# Lesson 3: tools/fretboard.cs draws the fretboard diagram; the committed SVG must be up to date
+if dotnet run tools/fretboard.cs -- --check > out/fretboard.txt 2>&1; then
+  echo "ok   fretboard svg"
+else
+  cat out/fretboard.txt
+  echo "FAIL fretboard svg: run  dotnet run code/csharp-beginner/tools/fretboard.cs"
+  status=1
+fi
 
 exit $status

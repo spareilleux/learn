@@ -12,4 +12,4 @@ sidebar:
 ## Modules
 
 - [PSY-001 · Introduction à la Capitalisation Fractale](psy-001-intro-fractal-compounding/)
-- [PSY-002 · Governance Phase Transitions](psy-002-governance-phase-transitions/)
+- [PSY-002 · Les transitions de phase de la gouvernance](psy-002-governance-phase-transitions/)

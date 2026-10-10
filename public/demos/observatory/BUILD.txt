@@ -1,0 +1,1781 @@
+Observatory Web export provenance
+
+Built 2026-09-30 with the official non-.NET Godot 4.6.1-stable Web export
+template. Godot renderer: gl_compatibility (WebGL 2). The Web export disables
+SSR, SSIL and volumetric fog from the native Forward+ scene, and replaces its
+4x MSAA with the anti-aliasing that the page picks (see the revision that
+makes walk mode a body). It is separate from the higher-quality native build
+and does not use hardware ray tracing.
+
+This revision adds the detail pass: shaded book bindings (40,250 books), dressed
+stone with a tooled relief, turned bronze balusters under a walnut handrail, a
+brushed steel shader for the box and 24 stained-glass lancets. Its textures were
+generated locally with ComfyUI and SDXL 1.0 base: book_grain, stone_relief,
+steel_grime and the three glass_* panels. pier_ornament_normal is computed from
+pier_ornament.
+
+Under Compatibility the scripts change three things:
+- the book shader skips its sRGB-to-linear conversion, because Compatibility
+  shades in sRGB space and writes the result out unconverted;
+- the stained glass throws no spot lights: there is no volumetric fog to show
+  their shafts, and 24 more lights would crowd the per-object light limit;
+- the books get a warm emissive fill, and the bronze and steel less metallic
+  finishes, in place of the missing SDFGI, SSIL and SSR.
+Forward+ is unaffected: its shelf close-ups are pixel-identical with and
+without these changes.
+
+A later revision, the same day, reworks the steel box, which still looked like
+a cartoon. The seam bands, ribs, door frame, door panels and vents were
+near-black and outlined every plate; they are now brushed steel in a darker
+tone, with bevelled edges. The 426 chrome-ball rivets become 736 low domed
+heads in even rows. The shader gives each plate its own tone and roughness, a
+contact shadow beside the bands, grime running down from under them and dust
+near the plinth; the brushing is finer and the sheet more satin, so
+reflections no longer smear into vertical streaks. Under Compatibility the
+steel also gets a warmer albedo, since that renderer lights it with the cool
+keys and a blue ambient only.
+
+The next revision shelves every course of the site: a face-out volume per
+course on the ground floor, one bay per area with a plaque, a card for the
+aimed volume, and a catalogue on L; a click or Enter opens the course in a new
+tab. The course list is demos/observatory/courses.json, which the site
+generates from its sidebar (src/pages/demos/observatory/courses.json.ts); the
+scene fetches it at start-up and carries the copy listed below for when it
+cannot.
+
+The next revision puts the courses in the shelves themselves, in the row at eye
+height: each area is a series in its own cloth between two brass bookends,
+with its name on a card in a brass holder on the shelf edge, among ordinary
+books. The course books share the other books' mesh, bindings shader and
+MultiMeshes, and carry their real titles in gilt along the spine; an aimed book
+slides out and shows its card. The shelf wood of each bay is merged into one
+mesh: natively, under Compatibility at 1600x900, the overview drops from 733
+to 268 draw calls. On the Web, MSAA gives way to FXAA: in Chrome on an RTX 5080,
+full screen (3819x1959 canvas), a frame took 28 to 30 ms with 4x MSAA and
+36 ms with 2x, against 2.2 to 3.0 ms without MSAA, and the scene now holds
+60 fps where it held 25 to 34. A bare WebGL 2 page at the same size takes
+0.3 ms, so the cost was the multisample resolve in the export, not the browser.
+
+The next revision adds a marble statue of Hari Seldon in the hall, in front of
+the Streeling University bay, on a dark pedestal with a gilt inscription whose
+era follows the page's language; that bay's data-rain beam is left out. The
+capitals, pier bases, carved panels, arches, entablature, drum and ceiling ribs
+gain gilt mouldings, merged into four meshes, and the floor is paved in 18
+rings of pale and dark marble around a compass rose (a shader, with darker
+stand-in tints under Compatibility). The figure was generated locally:
+Z-Image-Turbo (Apache-2.0) drew the concept, TRELLIS.2 4B int8 (MIT; its image
+encoder is DINOv3, under the DINOv3 License) turned it into a 3.57 million face
+mesh in 38 s on the RTX 5080, ComfyUI's RemeshMesh and DecimateMesh brought it
+to 59,905 faces, and Blender normalised it (seldon_statue.glb, 1.08 MB). In
+Chrome for Testing 153 on the same machine, full screen (3840x1872 canvas)
+without vsync, a frame takes 1.9 to 2.2 ms in five views.
+
+The next revision adds shadows and touch controls. A cool moonlight spot
+inside the oculus drum, 24 degrees off the vertical at the box, lights the
+floor, the steel box and the statue and casts their shadows, and the piers',
+across the paving. Its shadow map is 32-bit, since a 16-bit one striped the
+floor under Compatibility, and it stays cached while nothing in its range
+moves. Contact shadows are painted into the paving at the foot of the box,
+the piers, the pedestal and the shelves. On a touch screen, a stick walks, a
+drag looks, and buttons fly, rise, descend, change view and open the course
+catalogue; a book opens with two taps. In Chrome for Testing 153 on the RTX
+5080, full screen (3819x1875 canvas) without vsync, a frame takes 1.9 to
+3.0 ms in five views, against 1.9 to 2.2 ms before. In a phone emulation
+(412x915 at 2.625x, an Android user agent, CDP touch events), the controls
+walk, look, fly, change view and open and close the catalogue; a real phone
+is still to verify.
+
+The next revision, 2026-09-30, makes walk mode a body, turns the viewpoints
+into short flights, marks the course bays, adds a language selector and a
+corridor behind the box, widens the view on a phone held upright, and gives
+the Web build the anti-aliasing it lacked. It ships only scripts, one shader
+and the page's head: no new texture or model.
+- Walking (scripts/walk_physics.gd): the box, the piers, the pedestal and the
+  shelves stop the visitor; Space jumps 0.85 m, C crouches, C while sprinting
+  slides. Keys 1 to 7 and the Views button fly to their viewpoint in 0.9 to
+  1.6 s, rising up to 6 m and widening the field up to 9 degrees on the way,
+  after GTA V's view switch (scripts/view_move.gd). With the browser's
+  reduced-motion setting the views cut at once, and walking has no bob, dip,
+  roll or change of field.
+- Courses (scripts/course_library.gd): each bay has a banner in its area's
+  colour under the gallery and, at eye level, a lacquered sign with the
+  area's name and course count under a brass lamp. An EN / FR / ES selector,
+  or T, switches titles, signs, cards, catalogue and course links; English
+  is the default unless the visitor came from a French or Spanish page, and
+  the address keeps the choice.
+- Touch (scripts/touch_controls.gd): on an iPhone in Safari the stick walked
+  but a drag did not turn the view (the author's report). A look drag used to
+  send mouse events to the fly camera, which asks the browser for a pointer
+  lock; it now turns the camera itself, per touch, and a drag whose index
+  matches no press goes to the nearest touch. This replaces a hotfix of
+  2026-09-29 that was never published. The stick sprints past its rim, and
+  the arrow buttons jump and crouch, or rise and descend in flight. The help
+  wraps clear of the Courses button and the language selector. A screen held
+  upright gets a wider field (scripts/view_fit.gd): on an iPhone 50 degrees
+  across instead of 32 (90 vertically), on an iPad 60 instead of 47.
+- The multiverse corridor (scripts/multiverse.gd,
+  assets/world_glimpse.gdshader): a double click on the box, or a double tap,
+  fades into an endless row of numbered steel doors, each glowing with one
+  of twelve procedural worlds, after Blake Crouch's novel Dark Matter; no
+  frame, set or asset of any adaptation is used. The Leave button, Esc or
+  the lit doorway behind the visitor lead back. The hall is hidden meanwhile.
+- Anti-aliasing: under Compatibility, FXAA and SMAA change no pixel (60 to
+  64 percent of them under Forward+), so the published build had none. Two
+  scripts in the page's head now choose: 4x MSAA on touch screens, and on
+  computers a canvas 1.5 times finer than the screen, which the browser
+  scales down. Each steps down when the median frame exceeds 22 ms: MSAA
+  from 4x to 2x to none, the supersampling from 1.5 to 1. ?msaa=0|2|4 and
+  ?ss= fix them. Shimmer was measured in Chrome emulations with the camera
+  moved a quarter of a pixel per frame along four paths, as the mean second
+  temporal difference of luma after a blur of one CSS pixel. Against the
+  published build it drops by 9 to 59 percent on an iPad and an iPhone, held
+  either way, and by 13 to 42 percent on a computer at 1600x900. On a
+  computer, thin lights far off, like the 4 cm rain beams, look fainter.
+- The Prime Radiant and a metal gilt remain experiments: the export's
+  exclude_filter leaves out their files, and the scene keeps the published
+  centre beam and gilt.
+- In the same emulations, with Chrome's CPU throttled six-fold, a phone's
+  MSAA went from 4x to 2x after 3.8 s and to none after 8.8 s (a median frame
+  of 33 ms); throttled thirty-fold, a computer's supersampling fell to 1
+  after 6.3 s. At full speed both kept their level. With the browser's
+  reduced-motion setting, key 3 cut to its view instead of a 1.34 s flight.
+- scripts/camera_follow.gd ships too, asleep unless the address carries
+  ?follow=1: it lets a test harness place the camera frame by frame.
+
+In Chrome for Testing 153 on the RTX 5080, full screen (2546x1250 CSS pixels
+at 1.5x) without vsync, a frame takes 3.6 to 5.3 ms in five views with the
+supersampling (a 5728x2812 canvas), and 2.6 to 4.5 ms without it (?ss=1,
+3819x1875), against 2.1 to 3.2 ms for the published build at 3819x1875 in
+the same session. index.pck grows by 69,044 bytes; index.wasm and index.js
+are unchanged.
+
+Native GPU time, RTX 5080, 1600x900, 240 frames per view, published build
+then this one: under Compatibility 1.39 and 1.29 ms at the start view, 0.65
+to 0.68 and 0.58 to 0.66 ms at three course bays; under Forward+ 2.51 and
+2.74 ms at the start, 0.68 to 0.86 and 0.68 to 0.87 ms at the bays. The
+banners, signs and lamps raise the start view's draw calls from 303 to 355
+under Compatibility.
+
+Real phones and tablets are still to verify: whether Safari's WebGL applies
+the MSAA and what it costs, the frame rate, the wider field, the flights and
+the double tap.
+
+The last revision, the same day, fixes two things the previous one shipped.
+- Banners (scripts/course_library.gd): the lettering was sized so that the
+  widest word filled the banner exactly, and the label then wrapped that word
+  inside itself: the English banner read "INFRASTRUCTUR" over "E". The widest
+  word now takes at most 92 percent of the width, and all 27 banners (9 areas,
+  3 languages) wrap between words, under Compatibility and Forward+.
+- Walking (scripts/walk_physics.gd) has no head bob. It rose and fell once
+  per 0.85 m stride, and the camera walks at 6 m/s: the eye bounced about
+  seven times a second (a 6.6 cm range over half a second of walking), and the
+  author found it annoying. The eye now stays level; the landing dip, the
+  sprint's wider field and the slide's roll stay, and reduced motion still
+  turns them off.
+index.pck is 272 bytes smaller (14,949,916); index.html changes only that
+size, and index.wasm and index.js are unchanged.
+
+The next revision, the same day, changes the sky and opens the roof.
+- Sky (assets/night_sky.gdshader): the painted cap over the oculus becomes
+  Trantor's night sky, drawn at infinity. The Milky Way is ESO's panorama
+  eso0932a (ESO/S. Brunier, CC BY 4.0), reduced to 4096 x 2048 and imported as
+  lossy WebP (quality 0.85), seen through a stereographic zoom of 5 about the
+  galactic core, as if from nearer the centre, with sharp stars over it. The
+  core stands where the oculus light comes from; there is no moon. The
+  orrery's rings are brass and its bodies ivory.
+- Views (scripts/extra_views.gd): key 8 climbs to the stained glass in the
+  drum, key 9 cuts to the roof. On the roof the view turns but the camera
+  stays; keys 1 to 8, the Views button or Back inside return. ?preset=glass or
+  ?preset=roof opens there. fly_camera.gd keeps its seven presets; the Views
+  button now steps through nine.
+- Outside (scripts/upperside.gd, assets/upperside.gdshader), built on the first
+  climb and hidden inside: a lead roof with standing seams, the drum's outer
+  face with its 24 lancets, and Trantor's Upperside, a plated deck to 3 km with
+  581 domes and 201 red beacons, lit by the core in the shader, with no added
+  light. The drum and the cornices are dressed limestone banded with brushed
+  steel: Blender modelled a 4 m x 1 m tile of chamfered blocks, joints, bolted
+  bands and slotted plates, and cached SDXL 1.0 drew the limestone and the
+  brushed steel (exterior_ashlar_albedo.png, exterior_ashlar_normal.png).
+  Under Compatibility the shader converts its output to sRGB and decodes its
+  uniform colours, as that renderer does neither.
+index.pck grows to 20,623,752 bytes: 2.7 MB of sky and 2.9 MB of stone maps.
+index.html changes only that size, and index.wasm and index.js are unchanged.
+Native tests (Godot 4.6.1): 26 runs under Compatibility and Forward+ pass with
+no script error: self-test, fly, walk, fit, flights, the new views (three
+ways), touch, languages, courses, corridor, phone HUD and the 27 banners. One
+banner run under Forward+ stopped at start-up and passed when rerun.
+Web, headless Chrome on the local GPU, at 1600x900 and in an emulated
+iPhone: the start, the roof and the glass view hold 60 frames a second
+(median frame 16.7 ms), with no exception. Real phones: to verify.
+
+The next revision, the same day, adds a lift and walkable galleries, reworks
+the keys and draws the galactic core.
+- Lift (scripts/lift.gd): a bronze cage on steel rails in bay 3, behind the
+  start view, climbs from the hall (0 m) to the galleries (6.2 and 12.6 m).
+  In the cage, Space goes up a floor, Ctrl or C down, E up or back down from
+  the top; at a landing, E or walking against the closed gate calls it. A gate
+  closes each landing while the cage is elsewhere, and the cage's own gate
+  while it moves. observatory.gd cuts each gallery's walkway round the shaft,
+  and a brass collar covers the cut.
+- Walking (scripts/walk_physics.gd): the body stands on the hall, on a
+  gallery's walkway or in the cage, steps up to 0.3 m and falls from higher;
+  a rail stops it at the galleries' inner edge. A step from the gallery view
+  lands on the second gallery. Ctrl crouches as C does, Caps Lock walks at
+  half speed, Alt with A/D leans 0.38 m with a roll, and Alt with W/S rises
+  or ducks.
+- Sky (assets/night_sky.gdshader, assets/sky_core_cap.png): within 80 degrees
+  of the core, an image drawn locally by Z-Image-Turbo (bf16, 8 steps,
+  2048 x 2048, cached weights) replaces the magnified photograph. It is mapped
+  azimuthal equidistant round the core, its x axis along the Galaxy's plane,
+  and fades into ESO's panorama over its outer 35 percent. The panorama is
+  magnified 2 times instead of 5.
+- Courses (assets/courses.json): the bundled fallback lists 55 courses, a book
+  per Streeling University department; the site's courses.json does the same
+  from this change on.
+index.pck grows to 21,663,464 bytes; index.html changes only that size, and
+index.wasm and index.js are unchanged.
+Native tests (Godot 4.6.1): 28 runs under Compatibility and Forward+ pass with
+no script error: self-test, fly, walk, the new lift test (the cage, the
+galleries, the rail, the gates, Ctrl, Caps Lock and the lean; in both
+renderers), fit, flights, views (three ways), touch, languages, courses,
+corridor, phone HUD and the 27 banners. A first pass caught two regressions
+of the new walking code, both fixed before this export: the lean's clamp to
+the shelves pulled a walker out of the multiverse corridor, and Space jumped
+from the gallery view.
+Web, headless Chrome on the local GPU, at 1600x900 and in an emulated
+iPhone: the start, the roof and the glass view hold 60 frames a second on the
+computer (median frame 16.7 ms) and a median of 16.7 ms on the phone
+emulation (95th percentile 33.7 ms, as before), with no exception. The lift
+was not driven in the browser. Real phones: to verify.
+
+The next revision, the same day, shelves each Streeling course, lets a
+walker vault a gallery's rail, and mends striped plinths.
+- Courses (scripts/course_library.gd, assets/courses.json): the site's
+  catalogue lists each page of a Streeling department as a course, with its
+  department, its number (AUD-001) and a short spine title; 74 courses in all,
+  37 of them Streeling's. The series keeps them in department order with a
+  brass divider between two departments; the card names the department after
+  the area and shows the course's number; the catalogue (L) gives each
+  department a subheading. A one-page course reads "1 page".
+- Vault (scripts/walk_physics.gd): at a gallery's rail, facing the hall (by
+  the keys held, or by the view when standing), Space vaults the handrail:
+  6.4 m/s up, so the feet rise 1.28 m over the walkway, clear of the
+  handrail's 1.07 m, and 2.4 m/s towards the hall. The body falls to the hall
+  and lands unhurt: a landing dips the eye as if from no faster than 7 m/s,
+  so a drop from the upper gallery (12.6 m) dips it 8 cm, as a plain jump's
+  landing does. Facing the shelves, Space is a plain jump.
+- Plinths (scripts/observatory.gd): the gilt fillet round each pier's base,
+  and the gilt band round each capital, had their tops flush with the
+  stone's; in the browser the two faces fought for the depth test and
+  striped the plinths gold and black (the author's capture). Both now stop
+  6 mm under the stone they wrap. Seen again in headless Chrome from four
+  views of a plinth: striped before, clean after.
+index.pck is now 21,696,984 bytes; index.html changes only that size, and
+index.wasm and index.js are unchanged.
+Native tests (Godot 4.6.1): 32 runs under Compatibility and Forward+ pass with
+no script error, the 28 before and two new tests in both renderers: the
+Streeling card (a book per course, 37; the card's department in English and
+French; the course's number; the short spine title; 18 department
+subheadings in the catalogue) and the vault (the rail still stops a walk;
+facing the shelves Space jumps; facing the hall it vaults, the feet 1.23 m
+over the walkway, and lands in the hall from either gallery with the eye
+dipping 8 cm, no fall counted).
+Web, headless Chrome on the local GPU, at 1600x900 and in an emulated
+iPhone: the start, the roof and the glass view hold 60 frames a second on the
+computer (median frame 16.7 ms) and a median of 16.7 ms on the phone
+emulation (95th percentile 33.8 ms), with no exception. The Streeling bay,
+captured with the site's catalogue next to the build, shows the 37 books.
+Real phones and the vault in a browser: to verify.
+
+The fifth revision, the same day, takes the lift on to the roof.
+- Lift (scripts/lift.gd): a fourth landing, on the roof, level with the lead
+  at the kiosk's door (21.443 m). The ceiling's slab is cut round the shaft,
+  as the walkways are (scripts/observatory.gd); a brass plate edges the cut
+  under the ceiling, and a brass throat lines it up to the kiosk's sill. On
+  the roof, a kiosk of bronze and glass round the shaft: clear glass round
+  all but the door, which faces the drum (assets/kiosk_glass.gdshader), a base
+  band, a frieze, mullions, a cornice, a glass dome over the wheel on eight
+  ribs, and the lift's green lamp on top. Outside it draws as Upperside does,
+  lit by the galactic core; a warm lantern inside lights the cage. The kiosk
+  shows only once the camera is within a metre of the ceiling or above it.
+  The roof's gate folds up under the frieze instead of rising. Riding through
+  the ceiling, the view dips to black and back: black while the eye is within
+  35 cm of the throat's middle, clear 1.1 m away; the first climb builds
+  Upperside in the dark.
+- Walking (scripts/walk_physics.gd): the roof's lead is a floor, the cone of
+  scripts/upperside.gd, which now gives its measures to the lift and the
+  walker. On the roof, the walker keeps 30 cm from the drum and from a
+  bronze balustrade 35 cm inside the eave (99 posts, a handrail 1.05 m over
+  the lead, two lower rails); no gallery rail, no vault. The camera keeps
+  itself within 17 m of the centre as it moves (fly_camera.gd, unchanged);
+  on the roof the walker widens that to the balustrade, and puts it back
+  everywhere else.
+- Roof (scripts/upperside.gd, assets/upperside.gdshader): a round hole in the
+  lead and its seams round the kiosk, and the balustrade.
+index.pck is now 21,707,500 bytes; index.html changes only that size, and
+index.wasm and index.js are unchanged.
+Native tests (Godot 4.6.1): 34 runs under Compatibility and Forward+ pass with
+no script error, the 32 before and the roof test in both renderers: the cage
+rides from the hall to the roof with Space; the view dips fully black
+through the ceiling, and Upperside is built while it is black; the walker
+steps out onto the lead, stops 30 cm from the drum (10.86 m) and from the
+balustrade (18.65 m), walks round the roof with no fall, jumps at the
+balustrade without vaulting, rides back down with Ctrl, and calls the cage
+to the roof by walking against its gate and with E; the roof view (9) still
+holds the camera, and 1 leaves it. A first run failed the corridor test: the
+walker put the camera radius back every frame, over the corridor's own
+(scripts/multiverse.gd). It now puts back only the radius it widened.
+Web: exported; this revision was not run in a browser. The roof in a
+browser, and real phones: to verify.
+
+The sixth revision, the same day, sets Streeling University's departments
+apart on the shelf; the author found the 37 books one run of identical
+spines.
+- Courses (scripts/course_library.gd): in a series with departments, each
+  department has a cloth of its own, never the display's lining and never
+  its neighbour's; a gap of 7 cm with a brass bookend in it stands between
+  two departments; and a card under each department's books, in a brass
+  holder, gives its code, the part of its courses' numbers before the dash
+  (AUD, COG, CS... MAT). The series' single card is left out there.
+index.pck is now 21,708,956 bytes; index.html changes only that size, and
+index.wasm and index.js are unchanged.
+Native tests (Godot 4.6.1): 36 runs under Compatibility and Forward+ pass with
+no script error, the 34 before and the department test in both renderers:
+18 department cards with their codes; 17 changes of cloth, one at each
+boundary between departments and none inside one; every gap between two
+departments over 6 cm (the smallest 7.3 cm).
+Web: exported; this revision was not run in a browser. Real phones: to
+verify.
+
+The seventh revision, the same day, is the lift's art pass; the author found
+the lift schematic and plain.
+- Frame (scripts/lift.gd): four round columns of dark bronze on gilt bases,
+  with a gilt collar at every ring, in place of the square steel rails; brass
+  rings; and over the opening at each landing a lintel carrying a dial.
+- Cage: a walnut floor with a brass inlay; a walnut wainscot with brass
+  mouldings and panel frames; brass bars with a middle ring; a frieze of gilt
+  rosettes; a low brass dome with a gilt cresting, a finial and the green
+  lamp. Inside, the green ring dimmed, a warm ceiling lamp whose light reaches
+  only the cage (its own render layer), and a control column with a lever.
+- Motion: the six-spoked sheave turns a cable's length per radian as the cage
+  rides, and every dial's needle follows the cage, from the hall at the left
+  to the top landing at the right.
+- A fix outside the lift (scripts/observatory.gd, _merge): once one part of a
+  merge was indexed, SurfaceTool.append_from drew only the indexed parts;
+  every part is now deindexed first. In the scene this restores the gilt ring
+  round the oculus (GiltRibs drew 384 of its 3,456 vertices); the ring was
+  not seen in a still.
+index.pck is now 21,715,852 bytes; index.html changes only that size, and
+index.wasm and index.js are unchanged.
+Native tests (Godot 4.6.1): 38 runs under Compatibility and Forward+ pass with
+no script error, the 36 before and the lift's art-pass test in both
+renderers: the cage's parts, a dial per landing and the sheave built; no
+merged mesh in the lift leaving vertices out; the cage lamp's cull mask on
+the cage alone; a ride to the first gallery turning the sheave by rise over
+radius (11.481 rad) and bringing every needle to the landing (70 degrees at
+the hall, 29.5 at the first gallery).
+Web: exported; this revision was not run in a browser. Real phones: to
+verify.
+
+Version 17, exported 2026-09-30 23:23:49 UTC, is the first to show its number:
+under the language selector the scene shows its version, when it was built and
+its age in days:hours:minutes by the viewer's clock (scripts/build_info.gd,
+written by artpass/publish/stamp_build.py just before the export;
+window.__obsBuild on the Web). Counting the commits on main that changed
+index.pck, the page served version 13 (the Streeling books); versions 14 to 16
+are the roof terrace, the departments and the lift's art pass above.
+- Gates (scripts/lift.gd): the cage's gate and every landing's are folding
+  lattice gates, bars joined by crossed straps in three rows of lozenges,
+  folding to the right of the opening; a landing's gate hangs from a brass
+  track. A landing's gate now opens and closes with the cage's at the landing
+  the cage stands at: it used to follow the landing the cage was sent to, so
+  the gate left behind shut at once and the one ahead moved while the cage
+  closed.
+- Sounds (scripts/lift_sounds.gd, synthesized when the lift is built, nothing
+  recorded or downloaded): the motor's 50 Hz hum, looping, louder and higher
+  as the cage goes faster; a small bell on C6 at the landing on every arrival;
+  the gates' rattle as they close and open. Positional
+  (AudioStreamPlayer3D); built in about 22 ms natively.
+index.pck is now 21,724,804 bytes; index.html changes only that size, and
+index.wasm and index.js are unchanged.
+Native tests (Godot 4.6.1): 38 runs under Compatibility and Forward+ pass with
+no script error, the lift's art-pass test extended in both renderers: a
+folding gate for the cage and one per landing, spread across the opening
+closed (96.6 degrees) and 19.3 degrees wide folded at its right; the hall's
+gate following the cage's while it closes and the next landing's shut; all
+shut during the ride and the first gallery's open on arrival; two rattles,
+one bell and one hum per ride, the hum looping and stopping on arrival; and
+the version line matching v17, its time and its age.
+Web: exported; this version was not run in a browser, and its sounds were not
+heard there. Real phones: to verify.
+Version 18, exported 2026-10-01 05:04:45 UTC, gives the lift buttons of its
+own on a touch screen: on an Android phone, in Chrome, the author could
+neither call the cage nor choose a landing with the stick and the jump and
+crouch arrows alone.
+- In the cage (scripts/lift.gd, touch_panel and touch_press; drawn by
+  scripts/touch_controls.gd): a button for each landing, by its name. The
+  landing the cage waits at is outlined in gold; the one it heads for, and the
+  next one asked for, are lit. A button touched during a ride is kept for
+  after it.
+- At a landing the cage is not at, within 2.8 m of its axis: a Call button,
+  lit while the cage comes. Walking against the closed gate still calls it
+  too.
+- Phone held sideways: the buttons make a row between the stick and the
+  arrows, the lowest landing at its left; held upright, a column over the
+  arrows, the highest at its top. The lift's hint shows over them; where it
+  still shows on its own, it grows with the screen on a phone, as the
+  controls' text does.
+index.pck is now 21,729,124 bytes; index.html changes only that size, and
+index.wasm and index.js are unchanged.
+Native tests (Godot 4.6.1): 42 runs under Compatibility and Forward+ pass with
+no script error, among them a new touch test of the lift
+(artpass/touch/lifttouchtest.gd) on an 844x390 and a 390x844 screen in both
+renderers: in the cage in the hall, one button per landing, the hall's
+outlined and the lift's own hint hidden; touching the second gallery's button
+rides there, lit during the ride; at that landing, with the cage sent down to
+the hall, the Call button brings it back, lit while it comes; every button on
+the screen, at least a tenth of its shorter side tall, out of the stick's
+reach and clear of the other buttons.
+Web: exported; this version was not run in a browser. Real phones: to verify,
+first an Android phone in Chrome, where the lift lacked these buttons.
+Version 19, exported 2026-10-01 16:46:17 UTC, answers three reports from the
+author on an Android phone: the lift failed to go up to the roof, the roof
+terrace could not be reached on foot from the roof view, and the flights
+between views moved abruptly.
+- The cage carries its rider however far it rises in one frame
+  (scripts/lift.gd, support). The walking body looks for the cage's floor
+  before the lift moves it, and took it only within a step (0.3 m) above its
+  feet: at 10 frames a second the cage rose 0.33 m in a frame, and a frame
+  stalled while the first climb builds Upperside lifts it further, so the body
+  fell back down the shaft. Now a body that stood where the cage's floor was
+  before its last move rides with it.
+- The roof view leads onto the terrace (scripts/extra_views.gd): walking, the
+  first step goes down onto the lead at the drum's foot, under the view, from
+  where the lift's kiosk is a walk away; flying still holds the view. A view
+  inside taken from the terrace is a cut, not a flight through the roof. The
+  roof view's hint says so.
+- Flights between views (scripts/view_move.gd) are paced along the path's
+  length and turn over nearly all of it, and last 1.4 to 2.4 s instead of 0.9
+  to 1.6 s; a slow frame slows a flight rather than skipping part of it.
+  Overview to gallery, at 60 frames a second: 1.86 s instead of 1.34 s, a peak
+  speed of 18.5 m/s (1.88 times the mean) instead of 34.5 m/s (2.52 times),
+  and a peak turn of 98 degrees a second instead of 149.
+index.pck is now 21,731,268 bytes; index.html changes only that size, and
+index.wasm and index.js are unchanged.
+Native tests (Godot 4.6.1): 47 runs under Compatibility and Forward+ pass with
+no script error. Among them: a roof probe with real frame times
+(artpass/roof/roofprobe.gd), whose three cases left the walker behind before
+the fix (10 frames a second from the hall, a 1.5 s stall from the hall, a 0.8
+s stall at 30 frames a second from the second gallery) and now carry it to the
+roof; a test from the roof view to the lift on foot
+(artpass/roof/terracetest.gd), in both renderers with flights on: down onto
+the terrace, a view inside as a cut, round the roof to the kiosk with no fall,
+the cage called up with E, in, and down to the hall with the hall's touch
+button; the view test, where walking from the roof view now steps down onto
+the terrace and flying holds the view; and the flight test, whose two new
+checks (a peak speed under twice the mean, a turn under 120 degrees a second)
+fail with the old flight.
+Web: exported; this version was not run in a browser. Real phones: to verify,
+first the author's Android phone in Chrome, on the ride to the roof.
+Version 20, exported 2026-10-01 23:48:39 UTC, adds three requests from the
+author: Return to Castle Wolfenstein's lean on Q and E, leaning to read a
+course book's spine comfortably, on every device, and a phone's screen less
+full.
+- Q and E (A and E on AZERTY: the same keys) lean left and right, the body
+  standing still, as Alt with A or D still does (scripts/walk_physics.gd). The
+  fly camera also steps left on Q; the body drops that step. Near the lift E
+  stays the lift's (scripts/lift.gd, uses_e). The keyboard hint names the
+  keys.
+- Leaning the way an aimed course book's title reads (right in English and
+  Spanish, left in French) turns the head to the spine, tilts it until the
+  title is level, left to right, and closes the field of view in until the
+  spine's length spans 65% of the screen's width; letting go brings all back.
+  The book stays aimed and its card steps aside meanwhile
+  (scripts/course_library.gd, aimed_spine and hold_aim); the card names the
+  key. Reduced motion keeps this tilt and zoom, which the reader holds, and
+  still drops the plain lean's roll.
+- On a touch screen, two figures leaning left and right appear at a tapped
+  book, between the stick and the arrows, or over the arrows where that row is
+  too narrow (a phone held upright); held, they lean, and the one that leans
+  the way the title reads reads its spine (scripts/touch_controls.gd). The
+  course card stands above them; in the lift's cage or near it, the lift's
+  buttons take their place.
+- The phone's screen, which the author found too full: the touch help
+  (main.tscn's controls panel) goes 6 seconds after the first touch, and while
+  a book's card shows; a ? button in its corner brings it back, and a tap on
+  it puts it away. Beside the Courses button and the language selector it
+  wraps a line more where it must (a phone held sideways), and where it would
+  be a narrow column (a phone held upright) it stands under them, across the
+  screen. The shelves' book hint goes and comes with it
+  (scripts/course_library.gd, help_shown).
+- Two fixes found on the way: the shelves now aim after everything that moves
+  the camera (process priority 900), so the step Q takes left no longer aims
+  at a book's neighbour for a frame; and on a narrow screen, where
+  scripts/view_fit.gd widens the field, the reading zoom starts from and
+  returns to the widened field instead of being undone by it (walk_physics.gd
+  holds_fov).
+index.pck is now 21,741,812 bytes; index.html changes only that size, and
+index.wasm and index.js are unchanged.
+Native tests (Godot 4.6.1): 55 runs under Compatibility and Forward+ pass with
+no script error (artpass/publish/regress-pub11.sh). Among them, the lean test
+(artpass/lean/leantest.gd) with keys in both renderers at 1600x900, also at 10
+frames a second, and with touches on a phone held sideways (844x390) and
+upright (390x844), in both renderers and with a 0.8 s stall at 30 frames a
+second: Q and E lean with the body standing, E at the lift calls it, E at an
+aimed English spine levels its title (a roll of -90 degrees) across 65% of the
+screen's width, within 6 points, at its centre, and all comes back on release;
+Q there is a plain lean; reduced motion keeps the reading and drops the plain
+lean's roll; in French Q reads. On a touch screen: no figures in the hall; at
+a tapped book the figures stand clear of the other buttons and under the card,
+the help gives way to the card, the right figure reads, and in the lift's cage
+its buttons replace the figures. The phone help test
+(artpass/touch/hudtest.gd), upright and sideways: the help clear of the
+Courses button and the language selector, gone 6 s after the first touch, back
+with ?, put away by a tap. The landscape lean run failed 8 times in 8 on an
+earlier build of this version that placed the help under the selector, across
+the middle of the screen, where it caught the tap meant for a book; this build
+keeps the help at the top of a phone held sideways.
+Web: exported, and loaded once from a local server in a Chromium browser
+panel, framed at 390x844 and posing as an Android phone (its user agent and a
+touch screen): it started and reported running, with the touch screen
+detected; the panel was hidden, so no frame was seen or captured. Real phones:
+to verify, first the author's Android phone in Chrome, held upright and
+sideways.
+Version 21, exported 2026-10-02 02:12:04 UTC, adds the curio wheel the author
+asked for: a pastiche of a shooter's weapon wheel, for a library, holding
+"surprising and hilarious" things, a wooden wand, an ankh and a pointing
+finger, then a monocle, a magnifier or a lamp (scripts/curio_wheel.gd, added
+by scripts/observatory.gd).
+- Tab held slows time to a quarter and opens the wheel round the screen's
+  centre; the pointer, or the captured mouse, picks a slot, and letting go of
+  Tab, or a click, holds that curio. The left button uses it once the mouse
+  looks. The keyboard hint names Tab (scripts/walk_physics.gd).
+- Seven curios: bare hands, which open books as before; the Index, a white
+  glove whose gilt label names what it points at; a monocle, which held closes
+  the view in two and a half times inside a brass rim, through a zoom that
+  scripts/view_fit.gd applies last; a banker's lamp with a beam; a wooden wand
+  whose one spell is a puff of gilt and a duck, both larger the farther they
+  land, up to four times a rubber duck, so that the duck stays the same size
+  on the screen, and 4 m ahead past 12 m; a rubber duck, thrown, that bounces,
+  squeaks and stays where it lands, 24 at most; and an ankh, which brings the
+  ducks back to life to waddle home and vanish at your feet. The magnifier was
+  left out: the monocle already magnifies.
+- On a touch screen, a button above the stick shows the curio in hand and
+  opens the wheel; a tap on a slot holds that curio, a tap elsewhere shuts the
+  wheel, and with a curio held a tap on the scene uses it there instead of
+  aiming a book; the monocle and the lamp stay on until a second tap. The
+  touch help names the button, and goes while the wheel is open
+  (scripts/touch_controls.gd).
+- Every model is built in code from Godot's own meshes and every sound is
+  synthesized there (the quack is a sawtooth falling from 520 to 330 Hz
+  through one nasal resonance near 1.1 kHz); nothing is copied, and no model
+  was generated.
+index.pck is now 21,783,496 bytes; index.html changes only that size, and
+index.wasm and index.js are unchanged.
+Native runs (Godot 4.6.1): 62 under Compatibility and Forward+
+(artpass/publish/regress-pub12.sh), with no script error; 61 passed. Among
+them, the curio test (artpass/curios/curiotest.gd) with keys at 1600x900 in
+both renderers and at 10 frames a second, and with touches on a phone held
+upright (390x844, in French, and under Forward+) and sideways (844x390, and in
+Spanish under Forward+): the walking hint names Tab, which opens the wheel at
+a quarter speed and holds the slot picked; the Index names the steel box, a
+pier and the floor; the monocle closes the view from 64 to 28 degrees and
+back; the lamp switches on and off; the wand's duck and a thrown duck land and
+rest, the thrown one inside the shelves, and squeak; the ankh brings both
+home, quacking. On a touch screen the button stands clear of the others and
+above the stick's reach; a tap on it opens the wheel, a tap on a slot holds
+that curio, and a tap on a book with the wand casts there instead of aiming
+the book. From the hall's entrance, a tap on the steel box's door, 7.7 m away,
+makes a duck 42 pixels tall upright and 19 sideways, 4.9% of the screen's
+height (2.5% required), and a tap at the far gallery makes one 3.85 m ahead.
+The one failure was the test's: sideways in Spanish its far tap landed on the
+help, whose fourth line reaches lower, and put the help away; aimed at the
+screen's centre, the seven curio runs pass on the same build
+(regress-pub12-curios.sh). The lean, phone help, lift and roof tests pass as
+in version 20. On the prototype, the ducks kept hopping on the floor at 10
+frames a second, where each frame's gravity bounced back exceeded the speed at
+which a duck rests; that threshold now allows for it. One run of the keys lean
+test on the prototype failed in French, its reading stopping early, while
+another test window ran at the same time; alone it passed three times, and it
+passes in this build's regression and in the first build's (62 of 62).
+Web: exported, and run from a local server in headless Chrome posing as an
+Android phone with a touch screen, upright (390x844) and sideways (844x390),
+with screenshots (artpass/publish/curio-web.mjs): it started, reported version
+21 and the touch screen, and logged no error; a tap on the curio button opened
+the wheel, a tap on the wand's slot held the wand, and upright a tap on the
+steel box's door conjured a duck that came to rest in front of it, in view.
+Sideways, from the hall's entrance, the floor in front of the box is below the
+frame and the duck fell out of sight. The first build of this version, checked
+the same way, cast the duck where it was aimed but kept it a rubber duck's 11
+cm: 5 pixels tall at the box on that screen. A debug export with prints in the
+tap's path, not published, showed that the taps did cast. Real phones: to
+verify, first the author's Android phone in Chrome.
+Version 22, exported 2026-10-02 03:14:01 UTC, takes the live course list on
+GitHub Pages. The scene fetches the site's courses.json when it starts, so
+that a new course reaches the shelves without a new build
+(scripts/course_library.gd, _fetch_live); but Pages serves it gzip-encoded,
+the browser decompresses the body and keeps its Content-Encoding header, and
+Godot's HTTPRequest, accepting gzip, decompressed it again, failed
+(core/io/stream_peer_gzip.cpp:115, in the browser's console) and kept the list
+built into the scene. Found in the live check of version 21, when both lists
+held the same 74 courses, so nothing showed. The request no longer accepts
+gzip.
+index.pck is now 21,783,320 bytes; index.html changes only that size, and
+index.wasm and index.js are unchanged.
+Web: exported, and served locally with a courses.json of 75 courses, the live
+list and one more, gzip-encoded as Pages serves it
+(artpass/publish/gzip_server.py), in headless Chrome at 1600x900
+(artpass/publish/catalogue-web.mjs). Version 21 logged the gzip error and its
+hint counted 74 courses, the list built in; the same list served uncompressed,
+75. Version 22, gzip-encoded, counts 75 and logs no error. The phone check
+(artpass/publish/curio-web.mjs) on version 22, served the same way: it
+started, reported version 22, logged no error, and the curio wheel opened.
+Real phones: to verify, first the author's Android phone in Chrome.
+Native runs (Godot 4.6.1): the change runs only in a web build, so natively
+the scene is version 21's, whose 62 runs passed. 13 runs again
+(artpass/publish/regress-pub13.sh): the self test, the shelves' tests
+(courses, languages, departments, Streeling), a curio run with keys and one
+with touches, and a lean run, under Compatibility and Forward+ where they ran
+so before; no script error, 12 passed. The course test under Forward+ once
+found the fly camera still after W was held for ten frames, a check version 21
+passed; run three times again on the same build, it passed each time
+(rerun-coursetest-pub13.sh). It is the second check of a held key to fail once
+on a windowed run today, after one lean run on the prototype.
+Version 23, exported 2026-10-02 03:59:13 UTC, makes the curio wheel easy to
+find on a computer. The author pressed Tab and saw no wheel: it opened while
+Tab was held and shut when it was let go, so a tap opened and shut it at once.
+A tap of Tab now leaves it open until a curio is picked, Tab is pressed again
+or Escape shuts it, and a round button at the bottom left, which shows the
+curio in hand next to the key Tab and the word Curios, opens it with a click
+(scripts/curio_wheel.gd). On a touch screen, its button grows to the size of
+the others and has Curios written beside it (scripts/touch_controls.gd).
+index.pck is now 21,785,880 bytes; index.html changes only that size, and
+index.wasm and index.js are unchanged.
+Web: served locally as version 22 was (artpass/publish/gzip_server.py, 75
+courses, gzip-encoded), in headless Chrome at 1600x900 with a mouse and keys
+(artpass/publish/desktop-tab.mjs): it reported version 23 and logged no error;
+Tab held opened the wheel and Tab let go shut it, with or without a click on
+the scene first; a tap of Tab left it open, Escape shut it and a second Escape
+freed the pointer; a click on the button at the bottom left opened it; the
+focus stayed on the canvas throughout. The phone check
+(artpass/publish/curio-web.mjs), upright and sideways: it started, reported
+version 23, logged no error, showed the larger button with Curios beside it,
+and the wheel opened. Real phones and other browsers: to verify.
+Native runs (Godot 4.6.1): the curio test gained a tap of Tab that leaves the
+wheel open, Escape shutting it, the button shown, opening the wheel with a
+click, and a pick from it holding (artpass/curios/curiotest.gd). 16 runs on
+the exported project (artpass/publish/regress-pub14.sh): version 22's 13, the
+curio run with keys again under Forward+, a curio run with touches sideways in
+Spanish and a lean run with touches; no script error, all 16 passed.
+Version 24, exported 2026-10-02 04:23:26 UTC, adds a pocket drone to the curio
+wheel, after the drone of a Claude artifact the author pointed to
+(scripts/drone.gd). Used, it rises from the hand, the view cuts to it, and it
+tours the hall, both galleries, the drum and the roof over Upperside on a
+closed curve of 386.6 m, about four minutes a lap. Its flight model is the
+artifact's, in metres: the speed limited ahead of each bend by the lateral
+acceleration it allows itself, a follower with feed-forward bounded at 25
+degrees of tilt, a reference that waits when the craft lags, a second-order
+attitude loop, a bounded rate of turn and slow air. The view follows it from
+behind or rides on board on a level gimbal; Escape or a button lands it where
+it took off. The curio wheel holds and launches it (scripts/curio_wheel.gd),
+the observatory adds it (scripts/observatory.gd), and Upperside now shows to
+the camera that looks, the drone's included (scripts/extra_views.gd).
+index.pck is now 21,787,640 bytes; index.html changes only that size, and
+index.wasm and index.js are unchanged.
+Web: served as before (artpass/publish/gzip_server.py, 75 courses,
+gzip-encoded), in headless Chrome (artpass/publish/drone-web.mjs). On an
+emulated Android phone, upright and sideways, version 24 started and logged no
+error; the Curios button opened the wheel, now of eight slots, a tap on the
+drone's slot held it and a tap on the scene launched it; the chase view, the
+On board button and the Land button worked, and the visitor's view came back.
+At 1600x900 with a mouse, Tab and a click took the drone from the wheel, but
+headless Chrome refuses pointer lock, which using a curio needs on a computer,
+so it did not take off there: in a real browser on a computer, that is to
+verify. The curio wheel's phone check (curio-web.mjs) and the computer check
+of Tab and the button (desktop-tab.mjs) passed again, with no error.
+Native runs (Godot 4.6.1): the drone's test (artpass/drone/dronetest.gd) bakes
+every mesh of the hall and of Upperside into trimesh colliders, the books and
+the rain of light left out, and first checks that its probe finds the steel
+box, a pier and a gallery's rail. The planned route, every 5 cm, keeps 35 cm
+from every surface, 0.71 m from the orrery's turning bodies and 1.48 m from
+the shelves' front; over a simulated lap of 234.9 s the craft keeps 12 cm and
+the chase camera 8 cm from every surface, its tilt stays under 8.6 degrees and
+its speed between 0.54 and 3.2 m/s, and it lags its reference by 5 cm on
+average and 0.40 m at most, in the open air before the climb round the drum.
+Then its use: held, used, in sight as it rises, the cut to its view, keys and
+Tab reaching nothing else, the view on board and back, Upperside shown outside
+to its camera only, the landing where the visitor stood with the interface and
+the pointer back, and the refusal in the corridor. 29 runs on the exported
+project (artpass/publish/regress-pub15.sh): version 23's 16; the views, the
+roof, the terrace, the lift and the corridor, which the changed scripts touch;
+and the drone's test with keys in both renderers and with touches upright in
+French and sideways in Spanish; no script error, 28 passed. The course test
+under Forward+ again once found the fly camera still after W was held for ten
+frames, as on version 22; run three times again on the same build, it passed
+each time (artpass/publish/rerun-coursetest-pub15.sh).
+Version 25, exported 2026-10-02 05:01:00 UTC, makes a book easier to choose
+with the head tilted, after the author's report that turning the head made it
+very hard. Reading a spine, the head was held on it: on version 24, forty
+mouse motions of 6 pixels up the screen moved the view 0.17 degrees and the
+aim stayed on the same spine (artpass/lean/browse_before.gd); on version 25
+the same motions go from spine 3 to spine 12, the series' last, the head
+tilted throughout. The mouse moves the gaze along the shelf in the tilted
+screen's own directions, the spine it meets read in turn, across the gap
+between two departments and no further than the series' last spine; A and D,
+the arrows and the wheel step a spine at a time (scripts/walk_physics.gd). On
+a touch screen a drag does the same, and its release is no tap, which would
+read or open the spine under the finger (scripts/touch_controls.gd); a tap on
+another spine reads it. Aiming without reading, a spine keeps the aim 8 mm
+past its edge, and a ray that meets none takes a spine within 15 mm, between
+two or just over one (scripts/course_library.gd); the card's hint names the
+browsing.
+index.pck is now 21,793,592 bytes; index.html changes only that size, and
+index.wasm and index.js are unchanged.
+Web: served as before (artpass/publish/gzip_server.py, 75 courses,
+gzip-encoded), in headless Chrome on an emulated Android phone, upright and
+sideways (artpass/publish/lean-web.mjs), the page's view facing the spine the
+lean test reads (artpass/lean/bookview.gd). Version 25 started, ran at 60
+frames a second and logged no error; a tap aimed the spine, a finger held on
+the figure leaning right read it with the head tilted, a second finger's drag
+of 12 pixels went on to the next spine, and a tap two spines further read that
+one; let go, its card showed. CDP cannot lift one finger of several (a finger
+left out of a touch event stays down), so the page's canvas got those two
+lifts as a browser sends them, and the page's log of touch events showed each.
+The mouse and keys in a computer's browser, real phones and other browsers: to
+verify.
+Native runs (Godot 4.6.1): the lean test (artpass/lean/leantest.gd) now
+browses. Reading a spine with keys, mouse motions go along the shelf with the
+head still tilted and the spine they meet is read; D and the wheel step to the
+next spine and A back; the series' last spine stops it; let go, the browsed
+spine stays aimed. Aiming without reading, a ray 8 mm past a spine's edge
+keeps it, one further on takes the next, and one in the 3 mm gap between two
+spines or just over one takes a spine. With touches, a drag goes along the
+shelf and its release is no tap, and a tap on another spine reads it. The
+mouse before and after (artpass/lean/browse_before.gd), forty motions of 6
+pixels up the screen while spine 3 is read: on version 24's exported project
+the aim stayed on it and the view turned 0.17 degrees; on version 25's it went
+on to spine 12, the series' last, the tilt unchanged. 33 runs on the exported
+project (artpass/publish/regress-pub16.sh): every test that reads, aims or
+taps a book, walks or uses the touch controls, the lean test with keys in both
+renderers and at 10 frames a second and with touches at both orientations, the
+curios, the drone, the roof, the terrace, the lift and the corridor; no script
+error, 31 passed. The two curio runs died while an NVIDIA driver was being
+installed on the machine ("Could not create D3D11 device", then a segmentation
+fault); run again on the same build, both passed
+(artpass/publish/rerun-curio-pub16.sh).
+Version 26, exported 2026-10-02 22:55:25 UTC, brings four things. The wand's
+small TARS: out of the wand's puff steps a TARS, four slabs on a hinge, which
+walks off as the film's does, a pair of slabs planted while the other swings
+round it; the ankh calls them back to you; eight at most (scripts/tars.gd,
+scripts/curio_wheel.gd). Seldon's pedestal: its top gilt fillet sunk 6 mm
+under the cornice, whose top it shared, so the top no longer flickers gold and
+black (scripts/seldon_statue.gd); its mouldings and the hall's gilt profiles
+and ornament (eggs, darts, beads, reels) come from scripts/observatory.gd,
+drawn flat here as before. IX pipelines as holograms over Seldon's statue: a
+look held on the sphere in his hands, H, a click or a tap opens one, and it
+replays a real local run of one of IX's five showcase pipelines, step by step
+in its run order, each panel with a chart of the step's result
+(scripts/hologram_ix.gd, assets/holo_*.gdshader; assets/ix_pipelines.json
+baked from the runs by artpass/holo/run_ix_pipelines.py and bake_ix_holo.py).
+And adaptive quality, after the author asked that it work on a weak GPU as
+well as on the RTX: scripts/quality.gd times frames and, while they come
+slower than about 36 a second, steps down a ladder of five levels:
+anti-aliasing; glow and the gilt ornament; 3D at 0.75 with the shelved books
+drawn as boxes and the balusters on 6 sides (3.1 million triangles to 0.9);
+0.6 with no shadows and the far lamps faded; 0.5. ?quality=0 to 5 in the
+address fixes a level. The page's supersampling fallback now only lowers the
+resolution, so it cannot undo a lower level
+(artpass/publish/patch_head_ss.py). The rim lamps under the dome lost 130,000
+triangles they did not show (artpass/perf/NOTES.md).
+index.pck is now 21,871,884 bytes; index.html changes that size and the
+supersampling fallback's one line, and index.wasm and index.js are unchanged.
+Web: the export served locally (artpass/publish/gzip_server.py, the build's
+own course list, gzip-encoded), in headless Chrome at 1600x900
+(artpass/publish/quality-web.mjs). With the RTX 5080 (ANGLE on Direct3D 11),
+version 26 started, ran at 60 frames a second on its 2400x1350 canvas and
+stayed at quality level 0. With SwiftShader, Chrome's CPU renderer, standing
+in for the weakest GPU, a frame took 1.55 s; quality.gd reached level 5 within
+11 s of the scene's start, and frames then took 0.42 s on an 800x450 canvas. A
+first build of version 26, which counted 45 frames per measurement and timed
+its waits by Godot's delta, took 90 s to reach level 2 there. In both runs H
+opened the IX hologram over Seldon's statue, and the page logged no error and
+no exception. The final build, rebuilt for tars.gd (below), started the same
+way with the RTX, at level 0 and 60 frames a second, H opened the hologram,
+and nothing was logged. Real weak GPUs, phones and other browsers: to verify.
+Native runs (Godot 4.6.1) on the exported project, 38 of them
+(artpass/publish/regress-pub17.sh): version 25's 33, every test that reads,
+aims or taps a book, walks or uses the touch controls, the curios, the drone,
+the roof, the terrace, the lift and the corridor; then the TARS test at 60 and
+10 frames a second, the hologram probe and the quality ladder at 12 and 3
+frames a second. All passed, but the TARS and curio runs logged a script error
+at every step a TARS took: tars.gd's _stance_feet returned a ternary of two
+array literals, an untyped Array where Array[Vector3] was declared, so the
+planted feet were never measured and the check that they do not slide passed
+on nothing. Measured, they slid 2.5 cm a step, the whole body turning on the
+outer pair's feet, 11 cm apart. The turn now rides on the swinging pair, which
+comes round to the new heading while the planted pair keeps its own. Rebuilt,
+the seven runs that load tars.gd passed with no script error, the planted feet
+moving less than a micrometre (artpass/publish/rerun-tars-pub17.sh). The
+hologram probe opened the first pipeline with a look held on the sphere for
+1.0 s; from the hall's start view, all 16 panels of the longest pipeline were
+on screen. The quality ladder, frames held to 12 a second, went to levels 2, 4
+and 5 at 5.4, 9.9 and 14.4 s; at 3 a second, straight to 5 at 6.3 s. Native
+GPU time per level, Compatibility at 1600x900 on the RTX 5080: 1.60, 1.38,
+1.16, 0.99, 0.93 and 0.91 ms.
+Version 27, exported 2026-10-03 00:23:50 UTC, brings Seldon's recording, after
+the author asked for a Seldon in particles taken from our own statue, so that
+no actor's face enters the scene. A look held on the gilt inscription of his
+pedestal (a gold frame traces itself round it), R, a click or a tap plays it:
+dust gathers beside the pedestal and climbs into a life-size Seldon of 27,649
+points of light, one for each vertex of the statue's figure above its base,
+who turns to the viewer while three lines written for the scene show over his
+head, then lifts away. One MultiMesh draws the points and its shader moves
+them (scripts/seldon_recording.gd, assets/seldon_points.gdshader,
+assets/recording_frame.gdshader; its tap in scripts/touch_controls.gd);
+quality.gd's levels 3 to 5 draw every second or third point, larger. Its
+shimmer is synthesised by the script. Also: the IX hologram's gold ring and
+the green sphere in Seldon's hands did not show on the Web, since
+Compatibility renders the marble near white and both were added to it; the
+ring now blends over with a dark rim (assets/holo_ring.gdshader) and, under
+Compatibility, the sphere blends over, dimmer (scripts/seldon_statue.gd).
+observatory.gd's comment on the rim lamps now says 168 triangles each, which
+they have.
+index.pck is now 21,893,004 bytes; index.html changes only that size, and
+index.wasm and index.js are unchanged.
+Web: the export served locally (artpass/publish/gzip_server.py, the build's
+own course list, gzip-encoded), in headless Chrome at 1600x900
+(artpass/publish/recording-web.mjs): the scene's start, H to open and close
+the IX hologram, then R for Seldon's recording, seen from the hall's start
+view. With the RTX 5080 (ANGLE on Direct3D 11) and a browser cache already
+filled, version 27 started in 3.9 s and stayed at quality level 0 and 60
+frames a second on its 2400x1350 canvas, with the hologram and with the
+recording playing. On a first visit, with an empty cache, it started in 20.6 s
+and its first measurement, taken while shaders compiled, stepped it to level 1
+(no anti-aliasing), where it stayed although its frames then took 16.7 ms:
+quality.gd never steps back up, so a fast GPU can lose its anti-aliasing on a
+first visit; to fix. With SwiftShader, Chrome's CPU renderer, standing in for
+the weakest GPU, it reached level 5 within 10 s of the scene's start; frames
+took 433 ms on an 800x450 canvas, and 433 ms with the recording playing. In
+each run the recording formed, and the page logged no error and no exception.
+Real weak GPUs, phones, other browsers and the sound by ear: to verify.
+Native runs (Godot 4.6.1) on the exported project, 42 of them
+(artpass/publish/regress-pub18.sh): version 26's 38, then the recording probe
+under Compatibility, under Forward+ and at quality level 5, and the ring
+probe. 41 passed at once and none logged a script error. The course test under
+Forward+ failed its held-W walk check once, as held-key checks have before,
+then passed three times out of three (artpass/publish/rerun-course-pub18.sh).
+The recording probe holds a look on the inscription: the recording played
+after 1.0 s, its first line showed at 7 s and its second at 12 s, it began to
+lift away at 25.4 s and was gone by 28.4 s; R played it and R again sent it
+away; a tap on the inscription played it. It drew 27,649 points, and 9,217 at
+level 5. From the hall's start view his figure stands 153 px tall at 13.8 m.
+The same probe passed under Forward+ in the DLSS build (observatory-dlss). The
+ring probe, close to the statue under Compatibility, shows the gold ring over
+the white marble and the sphere green.
+Version 28, exported 2026-10-03 01:52:59 UTC, brings the particle frieze,
+after the author asked for frescoes of nanoparticles like those of the
+Foundation TV series: over each of the 16 bays, on the entablature between the
+arches' crowns and its upper bead, a mosaic panel 3.54 m by 0.88 m gathers out
+of drifting gold dust when looked at for 0.9 s, clicked or tapped, one
+particle flying to each of its 4,096 tesserae, and goes back to dust 30 s
+after the last look. The sixteen panels are original, galactic and bookish
+motifs in the manner of a Byzantine gold mosaic drawn by Z-Image-Turbo on the
+author's machine, with no figure, lettering or image from the series, packed
+into one 1024x1024 atlas compressed for the GPU (scripts/fresco_frieze.gd,
+assets/fresco_panel.gdshader, assets/fresco_dust.gdshader,
+assets/fresco_atlas.png; its tap in scripts/touch_controls.gd). From
+quality.gd's level 3 the idle dust goes and one tessera in two, then in four,
+has a particle. Also: the IX hologram now sounds, a glide as it opens and
+closes and a note at each step, synthesised by scripts/hologram_ix.gd; and
+quality.gd steps back up once when it stepped down at its first measurement or
+within 12 s of it and frames then come fast, so a first visit's shader
+compiles no longer cost a fast GPU its anti-aliasing, as version 27 noted.
+index.pck is now 22,617,948 bytes; index.html changes only that size, and
+index.wasm and index.js are unchanged.
+Web: the export served locally (artpass/publish/gzip_server.py, the build's
+own course list, gzip-encoded), in headless Chrome at 1600x900
+(artpass/publish/frieze-web.mjs): the scene's start, H to open and close the
+IX hologram, R for Seldon's recording, then a click on frieze panel 13 from
+the hall's start view. The first build of version 28 still left the RTX 5080
+(ANGLE on Direct3D 11) at level 1 on a first visit: quality.gd counted its
+retry window from the scene's start, and on that visit the first measurement
+ended after the window; the window now runs from the first measurement
+(artpass/perf/NOTES.md), and the build was remade. With it, a first visit with
+an empty cache started in 23.1 s at level 1 and came back to level 0, with its
+supersampling, 10 to 13 s later; a second visit started in 3.8 s at level 0;
+both ran at 60 frames a second on a 2400x1350 canvas, with the hologram, the
+recording and a mosaic coming. With SwiftShader, Chrome's CPU renderer,
+standing in for the weakest GPU, it reached level 5 and frames took 433 ms on
+an 800x450 canvas, as in version 27, and 483 ms while the mosaic came. A first
+SwiftShader run measured 483 ms at rest; a copy of the build without the
+frieze and a second run both gave 433 ms, and natively the frieze adds no draw
+call at that level. In every run the clicked panel's dust gathered and its
+mosaic came, and the page logged no error and no exception. Real weak GPUs,
+phones, other browsers and the sounds by ear: to verify.
+Native runs (Godot 4.6.1) on the exported project, 48 of them
+(artpass/publish/regress-pub19.sh): version 27's 42, then the sound probe,
+quality.gd's cold start and a cold start whose first measurement ends after a
+14 s stall (as on the web), and the frieze probe under Compatibility, under
+Forward+ and at quality level 5. All 48 passed at once and none logged a
+script error. The frieze probe holds a look on a panel from the floor: its
+dust gathered and the panel was summoned after 0.92 s and was whole 3.6 s
+later; with the look gone, it held 30.0 s and went back to dust in 3.0 s, its
+extra particles fading over 4 s; a tap on another panel summoned it, a tap
+below the frieze did not, and a mouse click summoned a third. With all 16
+panels idle it draws 21,632 particles, 24,376 while one comes, and none at
+level 5, where a coming panel draws 1,024. The sound probe counts 18 hologram
+players (one opening, 16 steps, one closing) and measures every synthesised
+sound without clipping, the frieze's at -13.4 dBFS peak. Both cold starts came
+back to level 0 with MSAA restored, at 16.8 s and at 15.4 s after the stall;
+the 12 and 3 frames-a-second ladders still end at level 5, at 14.6 s and 6.3
+s. The frieze probe also passed under Forward+ in the DLSS build
+(observatory-dlss).
+
+Version 29, exported 2026-10-03 15:19:23 UTC, points to what version 28 left
+to be found by chance, after the author opened the published version 28 and
+saw neither a TARS nor a hologram. The walking help gains a third line naming
+H for the IX hologram, R for Seldon's recording, and Tab then the wand for a
+TARS, each part shown only where the scene has its node
+(scripts/walk_physics.gd); the course button already sits below the grown
+panel. The IX hologram opens by itself the first time the camera comes within
+6 m of Seldon's sphere with the sphere on screen, once a session and only if
+it was never opened; a probe (a main loop with a script), a capture and the
+selftest leave it shut unless --auto-holo asks for it
+(scripts/hologram_ix.gd). The wand's line in the curio wheel names its spell,
+a small TARS, in the three languages (scripts/curio_wheel.gd).
+scripts/seldon_recording.gd is version 28's post-merge correction, described
+at the end of this file, byte for byte; scripts/observatory.gd and
+scripts/quality.gd are version 28's.
+index.pck is now 22,619,100 bytes, 26,428 fewer than the corrected version 28
+package, whose export also packed six files from an earlier export's out/
+folder (the web page's icons and their import files), which the scene does not
+use; index.html changes only that size, and index.wasm and index.js are
+unchanged.
+Web: the export served locally (artpass/publish/gzip_server.py, the build's
+own course list), in headless Chrome at 1600x900
+(artpass/publish/help-web.mjs): the start view, then the page reloaded with
+?follow=1 and the camera walked up to Seldon's statue from 12 m along its
+front, looking over it, as the native probe does. On the RTX 5080 (ANGLE on
+Direct3D 11) the scene started at level 1 and came back to level 0 with its
+supersampling about 8 s later, at 60 frames a second on a 2400x1350 canvas;
+the help showed its third line, with the course button below it; the hologram
+was still shut with the camera 6.83 m from the sphere and was open, on the
+cost anomaly hunter pipeline, once the camera had come on to 3 m; H then
+closed it and R played the recording. With SwiftShader standing in for the
+weakest GPU, the scene settled at level 5 at 433 ms a frame on an 800x450
+canvas, as in version 28, and 417 ms by the end of the run, and the hologram
+opened the same way. The first SwiftShader shot caught the interface drawn at
+twice its size in the frame where the canvas shrank; the settled shot shows it
+laid out as on the RTX. Neither run logged an error or an exception. Under
+?follow=1 the walking body pauses, so there the help keeps its first two
+lines. Real weak GPUs, phones and other browsers: to verify.
+Native runs (Godot 4.6.1) on the exported project, 50 of them
+(artpass/publish/regress-pub21.sh): version 28's 48, then the help probe
+(artpass/help/help_probe.gd) with --auto-holo, as in the game, and without it,
+as under any probe. 49 passed at once and none logged a script error. The help
+probe read the HUD's third line word for word and found the course button's
+top at 112 px, below the panel's bottom at 104 px; with --auto-holo the
+hologram opened by itself 5.99 m from the sphere, once, and not again on a
+second approach; without it, it stayed shut. lean_keys, the held-key reading
+test, failed (stops_at_series_end, browsed_stays_aimed); run 3 more times it
+passed twice and failed once on another check (reduced_motion_still_reads).
+The same command line on the published version 28 failed 2 times out of 3, on
+the same kind of checks, so that test's flakiness predates this version; it is
+to verify on its own. --check-only and --selftest passed on the four changed
+scripts in the prototype and in the DLSS copy (observatory-dlss).
+
+Version 30, exported 2026-10-03 16:38:14 UTC, makes the frieze's mosaics move,
+after the author asked to use in the scene the video models of the ComfyUI
+course. Once a summoned panel is whole, it plays a short clip of itself,
+forwards then backwards, 13 frames at 6 a second blended between them, and the
+clip comes in over 1 s and goes in 0.6 s before the mosaic returns to dust;
+under the system's reduced-motion setting it does not come. Each clip was made
+on the author's machine by Wan 2.2 TI2V-5B (Apache-2.0, with its umT5-XXL text
+encoder, Apache-2.0) from the panel's own image, 1280x320 and 49 frames, in 34
+to 96 s on the RTX 5080 (the longest loaded the model), with the official
+ComfyUI template's settings; the owl's first clip turned its head and showed
+it twice over the still, so its panel uses a clip asked to keep the owl still.
+Every fourth frame is reduced to one texel per tessera and stored as its
+change from the first frame (assets/fresco_motion.png, 1,064,203 bytes,
+1024x832, imported lossless without mipmaps). assets/fresco_panel.gdshader
+adds a small change to the still, so the drawn mosaic stays where nothing
+moves, and lets the clip's colour take over, with the still's grain, where the
+change is large (scripts/fresco_frieze.gd plays it). scripts/observatory.gd
+and scripts/quality.gd are version 28's; every other script is version 29's.
+index.pck is now 23,530,884 bytes, 911,784 more than version 29's, almost all
+of it the motion atlas; index.html changes only that size, and index.wasm and
+index.js are unchanged.
+Web: the export served locally (artpass/publish/gzip_server.py, the build's
+own course list), in headless Chrome at 1600x900
+(artpass/publish/fresco-web.mjs): reloaded with ?follow=1, the camera looked
+square on at frieze panel 0 from 4 m at its height, so that the gaze summoned
+it, and six shots a second apart were compared in the panel's middle
+(artpass/publish/fresco_web_change.py); then the same with
+prefers-reduced-motion emulated. Criteria set before measuring: a mean change
+of at least 3 of 255 between shots with the clip, under 1 with reduced motion.
+On the RTX 5080 (ANGLE on Direct3D 11), at level 0 with its supersampling and
+16.7 ms a frame, the panel changed by 16.5 on average with its clip and 0.0
+with reduced motion. With SwiftShader standing in for the weakest GPU, at
+level 5 on an 800x450 canvas, it changed by 11.4 and 0.0, at 166.6 ms a frame
+with the clip and 150.0 to 166.6 ms without it, the view the same. Neither run
+logged an error or an exception. Real weak GPUs, phones and other browsers: to
+verify.
+Native: version 29's whole list (artpass/publish/regress-pub22.sh) against
+this build's own project passed but for lean_keys, which failed once on
+stops_at_series_end and browsed_stays_aimed, as in versions 28 and 29, and
+then passed 3 runs of 3 on its own. artpass/frescovideo/motion_probe.gd, with
+time stopped, shot the panel with and without its clip at the clip's frames 0,
+4, 8 and 12: panel 0 changed by 0, 6.24, 9.82 and 11.56 of 255 under
+Compatibility and by 0, 6.28, 9.76 and 11.45 under Forward+; panel 14, whose
+clip moves only light, by 0, 2.99, 6.07 and 7.77, under the 3 set beforehand
+at frame 4, a miss kept as measured; with --reduced-motion the clip did not
+come.
+
+Version 31, exported 2026-10-03 19:29:31 UTC, replaces 17 of the scene's 18
+synthesised sounds with takes the author chose by ear, after asking for an
+inventory of the sounds and a page to compare them. Each take was made on the
+author's machine by Stable Audio 3 Small SFX (Stability AI Community License,
+accepted by the author; "Powered by Stability AI" is on the Observatory page)
+with its T5Gemma text encoder (Gemma Terms of Use), in ComfyUI, 8 steps, from
+a short English description of the sound that names no work; two takes per cue
+were set beside the synthesised cue on a listening page, matched to its
+K-weighted loudness, and the author's line of choices is kept in
+artpass/audio/choices.json. Each file (assets/sfx/, 44.1 kHz mono, 1,660,548
+bytes as 16-bit PCM, 342,579 once imported as QOA) is the take's cut: its lead
+silence removed, faded at the length the cue can last, at that matched level.
+The TARS's clank, which comes 12 to 23 times a second, plays 4.5 dB under its
+cut: its 0.30 s carry 4.5 dB more energy than the synthesised 0.16 s, which a
+first export of this version showed as 5.4 LU more and a peak of -0.2 dBFS
+while eight TARS walked. The hologram's step plays at 0.70 of its pitch, so
+that its pentatonic climbs from A6 rather than from the take's 2.5 kHz.
+scripts/sfx_takes.gd swaps a take in where its file is in the build; each
+script keeps its synthesised cue as the fallback, and the drone keeps its own,
+none of its takes chosen yet. Under the version line, a second line says which
+version runs and at what quality ("Web version · WebGL 2 · quality 1/5
+(auto)", in the visitor's language), after the author asked to make it evident
+that the public sees the web version, not the native RTX one
+(scripts/course_library.gd). scripts/observatory.gd and scripts/quality.gd are
+version 28's; every other script is version 30's.
+index.pck is now 23,879,936 bytes, 349,052 more than version 30's, almost all
+of it the sounds; index.html changes only that size, and index.wasm and
+index.js are unchanged.
+In headless Chrome (audio-web.mjs, artpass/audio/web-after-v31c/), served
+locally with courses.json gzip-encoded as on Pages: under a phone's emulation
+(Android, 390x844, touch) the audio context stays suspended until the first
+tap and runs after it, and on a desktop until the first key, as in version 30;
+the first sound is now the chosen whoosh (0.60 s). With eight TARS walking out
+and then home, the recorded mix measured a median momentary loudness of -29.5
+and -28.4 LUFS (version 30: -30.7 and -29.9) and peaks of -3.9 and -2.3 dBFS
+(version 30: -6.7 and -4.3; -1.1 for the walk home in an earlier capture of
+the same sounds), no sample over full scale; at the same loudness, the takes
+of the spell and the beep peak higher than their synthesised cues (-1.0 and
+-4.6 dBFS against -5.6 and -13.4). The web build replays a looping sample from
+its start whenever it ends, whatever its loop points
+(platform/web/js/libs/library_godot_audio.js), so the lift's hum is cut to
+loop over its whole 1.85 s take; how its seam sounds there, and every sound on
+a real phone, are to verify by ear. The build line reads "Web version · WebGL
+2 · quality 1/5 (auto)" in the phone emulation, on one line; where it is
+longer (natively, "Versión nativa · Compatibility · calidad 0/5 (auto)") it
+wraps within the language panel's width rather than widening it, after a first
+export made the touch help a line taller there, over the curio wheel's button
+on a phone held sideways (curiotest.gd, Spanish, 844x390).
+Native: version 30's whole list (artpass/publish/regress-pub23.sh) against
+this build's own project, then artpass/audio/takes_probe.gd and
+artpass/label/kind_probe.gd. A first export failed curio_touch_land_es on
+button_placed, 3 runs of 3, where version 30 passed: the native Spanish build
+line had widened the language panel, and the touch help, which stops at that
+panel's edge, took a line more, over the curio wheel's button on a phone held
+sideways (844x390). The build line now wraps within the panel, and this export
+passed the whole list but for motion_bay14, panel 14's known miss at frame 4
+(2.99 against 3), and langtest, which failed once at its click on FR, aimed at
+the same point (1501, 37) as in its passing runs and in version 30's, then
+passed 3 runs of 3 on its own. holo_sound's step pitches are 0.70 of version
+30's. takes_probe.gd: 16 takes play from assets/sfx/ as QOA, and the lift's
+hum is a copy of its take looping over its whole length (QOA, 44.1 kHz, 1.85
+s, loop end 81,585), which the probe sees without a path; the drone plays its
+synthesised hum; the clank's level is -4.5 dB and the step's pitch 0.70.
+kind_probe.gd reads "Version native · Compatibility · qualité 0/5 (auto)" and
+"Native version · Compatibility · quality 0/5 (auto)", each in two lines.
+--check-only and --selftest passed on the changed scripts in the prototype and
+in the DLSS copy (observatory-dlss).
+
+Version 32, exported 2026-10-03 20:25:10 UTC, gives the drone the hum the
+author chose by ear, the last of the scene's synthesised sounds to be
+replaced. Of ten Stable Audio 3 Small SFX takes over three rounds, the author
+found take 3 "pas mal mais un peu trop bruyant et aigu" (not bad, but a little
+too loud and shrill); four adjustments of it were then set side by side at one
+level, 4 dB under the synthesised hum's loudness, and the author chose the one
+at 0.8 of its pitch through a 3 kHz low-pass. The file is that adjustment as
+heard (assets/sfx/drone-hum.wav, 2.312 s, 44.1 kHz mono, 204,006 bytes as
+16-bit PCM, QOA on import), and scripts/drone.gd plays it looping over its
+whole length, the hum it builds itself staying its fallback. Every other
+script is version 31's, scripts/observatory.gd and scripts/quality.gd version
+28's.
+index.pck is now 23,922,104 bytes, 42,168 more than version 31's; index.html
+changes only that size, and index.wasm and index.js are unchanged.
+In headless Chrome (audio-web.mjs, artpass/audio/web-after-v32/), the phone
+run now also takes the drone from the wheel and records 14 s of its flight:
+its hum was heard (5 starts of the take's buffer, peak -21.9 dBFS, no sample
+over full scale), and the unlock, the TARS's walk (-29.4 LUFS median) and
+their way home (-28.2) measured as in version 31. A correction to version 31's
+paragraph: the web build does not start a looping sample again at its end. In
+these captures no new start followed the end of the hum's buffer; it was
+started again only by the script that plays it (drone.gd, as lift.gd does for
+the lift), once Godot reported it stopped, and the mix fell silent in between:
+2.7 and 10.5 ms at cruise, and 1.5 s and 0.33 s while the rotors spun up
+(artpass/audio/seam_check.py). Version 31's synthesised hum, a 1 s loop flown
+the same way (web-v31-drone/), broke off more often: ten restarts in 14 s,
+with silences of 1.7 ms to 1.7 s. The longer take halves the breaks; removing
+them, by starting the hum again from the script before its end, is to do.
+Native: version 31's whole list (artpass/publish/regress-pub24.sh) against
+this build's own project, 57 runs. All passed but two: motion_bay14, panel
+14's known miss at frame 4 (2.99 against 3, the same numbers as version 31's),
+and curio_touch_land_es, whose window closed as it opened, with nothing logged
+after the renderer's line; run again on its own it passed 3 runs of 3.
+drone_keys and drone_touch_fr fly, land and switch views as in version 31.
+takes_probe.gd: the drone's hum is now a copy of its take looping over its
+whole length (QOA, 44.1 kHz, 2.312 s, loop end 101,981), which the probe sees
+without a path, as the lift's; the 16 other takes, the clank's -4.5 dB and the
+step's 0.70 are version 31's. --check-only and --selftest passed on
+scripts/drone.gd in the prototype and in the DLSS copy (observatory-dlss).
+
+Version 33, exported 2026-10-04 02:25:19 UTC, adds the cinematic the author
+asked for ("Je veux des cinematiques aussi bien sinon mieux que GTA V"; in
+real time in the browser first, a path-traced film on the RTX later). Key 0,
+or the page opened with ?cinematic=1, plays about eighty seconds filmed in the
+running scene by a camera of its own between 2.39:1 bars (none on an upright
+phone, whose field widens instead): nine shots, from Trantor under the
+galactic core down through the oculus to the hall, a fresco gathering,
+Seldon's recording, the IX hologram, three TARS, the drone into a gallery, and
+up to the sky, ending on the title. Any key, click or tap ends it, and the
+visitor's view, interface, walking and pointer come back. The first play warms
+up behind black under the title: the set pieces it brings on are brought on
+once with the sound down, and the camera visits every shot's path, so that the
+shaders compile there and not in a shot; the sound comes back over the first
+shot's two seconds. scripts/cinematic.gd is new, and scripts/extra_views.gd
+makes it (key 0, --cinematic, ?cinematic=1), since scripts/observatory.gd
+stays version 28's. Every other script is version 32's, scripts/observatory.gd
+and scripts/quality.gd version 28's.
+index.pck is now 23,952,876 bytes, 30,772 more than version 32's; index.html
+changes only that size, and index.wasm and index.js are unchanged.
+In headless Chrome 154 on this machine (RTX 5080), the build served gzipped
+from localhost (artpass/cinematic/cinematic-web.mjs, web-v33-desktop/ and
+web-v33-phone/): at 1600x900, ?cinematic=1 played the nine shots in order and
+ended on its own in 93 s. Timed from the first shot by requestAnimationFrame,
+frames had a median and a 99th percentile of 16.7 and 16.8 ms; the longest
+were 167 ms 4.6 s into the descent, 117 and 100 ms at Seldon's recording and
+50 ms at the fresco. Without the warm-up, the same build had stopped for up to
+1,783 ms where a shot first showed something, and with the camera's poses
+alone, without the set pieces, for up to 633 ms. After a load and a click, key
+0 started it and Space ended it; headless Chrome's pointer-lock
+WrongDocumentError was the only exception. As an upright phone (390x844, touch
+emulated) it played without bars, and a tap in the third shot ended it, with
+no exception; its longest frame was 134 ms. The remaining stops of 100 to 170
+ms, and how it plays on a real phone or a weak GPU, are to verify.
+Native: version 32's whole list and the cinematic's probe three times
+(artpass/publish/regress-pub25.sh) against this build's own project, 60 runs.
+All passed but motion_bay14, panel 14's known miss at frame 4 (2.99 against 3,
+the same numbers as versions 31 and 32). cinematest.gd, under Compatibility at
+1600x900 with keys, under Compatibility on an upright phone (390x844) by
+touch, and under Forward+ played through without a skip first: the clearance
+of every shot's path, key 0 or a tap, its own camera and the visitor's
+interface aside, bars on the wide screen and none upright, the warm-up (47
+poses in 2.42 s, the five set pieces brought on with the sound down and put
+back), a key or a tap ending it, then the whole cinematic: the nine shots in
+order, the six cues, three TARS, the drone flown for 541 frames and put back,
+the recording and the hologram formed late in their shots, the camera touching
+nothing frame by frame, and afterwards the view, the interface, the walking
+body, the pointer, the sound's level and the picture's light as they were.
+Depth of field was on under Forward+ only. --check-only and --selftest passed
+on scripts/cinematic.gd in the prototype and in the DLSS copy
+(observatory-dlss).
+
+Version 34, exported 2026-10-04 03:26:34 UTC, adds the whistle, the curio
+wheel's ninth curio, after the author's "ok integre ca a la scene godot" and
+"second numero". Blown at the floor, it calls seven small TARS where it
+points, 3 to 6 m ahead and 1.5 to 2 times the wand's TARS, under a cabaret
+spot; they dance for seventeen seconds, hold the finale a second more and go
+in puffs of their colours. The first time they dance the previs's number (the
+lead's moonwalk entrance, unison, a canon, call and response, an arrowhead
+opening into a V), the next an original jig in 6/8 in one straight line (the
+point, sevens, threes, trebles, leaps in canon, cut hops, a click), made of
+generic step-dance vocabulary and of no show's routine, and so on by turns.
+Both were choreographed and simulated in Blender (tars_ensemble.py, the second
+with --routine=jig), checked there for collisions, feet sliding and feet in
+the air (minimum clearance 60.2 and 85.3 mm; 279 and 413 landings, none
+unplanned or missed), and baked at 24 frames a second into
+assets/tars_ensemble_tracks.tres and assets/tars_ensemble_jig_tracks.tres
+(143,739 and 155,179 bytes), which scripts/tars_ensemble.gd plays back; each
+landing knocks with the wand's TARS's footfall, and there is no music. Before
+they appear, every ground the dance covers is checked: the same floor, inside
+the shelves, outside a gallery's rail, clear of the lift's shaft and of the
+steel box, and not on the visitor; where it fits nowhere, a grey puff. The
+ankh sends them off. scripts/curio_wheel.gd is version 33's with the whistle
+(artpass/tarsdance/patch_curio_wheel.py and patch_curio_wheel_jig.py); every
+other script is version 33's, scripts/observatory.gd and scripts/quality.gd
+version 28's.
+index.pck is now 24,167,400 bytes, 214,524 more than version 33's; index.html
+changes only that size, and index.wasm and index.js are unchanged.
+In headless Chrome 154 on this machine (RTX 5080), the build served gzipped
+from localhost (artpass/tarsdance/troupe-web.mjs,
+artpass/tarsdance/web-v34/troupe/), on an emulated phone with touch: upright
+(390x844), a tap on the wheel's button and one on the whistle's slot, then a
+tap at the floor, called the first number, which ended on its own 18.0 s later
+with its 279 landings, and a second tap called the jig, which ended 18.0 s
+later with its 413; sideways (844x390), the first number likewise. Frames had
+a median and a 95th percentile of 16.7 and 16.8 ms throughout; the longest was
+300 ms in the upright phone's first dance, 67 ms in the others. There was no
+exception and no console error. The wheel's (artpass/publish/curio-web.mjs,
+curio-web-v34/), the drone's on a computer and on a phone (drone-web.mjs,
+drone-web-v34-desktop/ and drone-web-v34-phone/) and the sound's
+(artpass/audio/audio-web.mjs, web-v34/) tests, which now count nine curios,
+passed as they did on versions 24 and 32; the drone's on a computer met
+headless Chrome's three pointer-lock WrongDocumentErrors, as before. From the
+start view the tap at 70% of the screen's height stood the troupe in front of
+the steel box at the screen's foot, partly behind the joystick and the
+buttons; where a visitor will aim on a real phone, and whether the troupe
+should then stand further up the screen, are to verify, as is the 300 ms
+frame.
+Native: version 33's whole list and the troupe's probe three times
+(artpass/publish/regress-pub26.sh) against this build's own project, 63 runs.
+All passed but motion_bay14, panel 14's known miss at frame 4 (2.99 against 3,
+the same numbers as versions 31 to 33). troupetest.gd (artpass/tarsdance/),
+under Compatibility and under Forward+ at 1600x900 and unpinned at 10 frames a
+second: the wheel's nine curios, both baked dances scrubbed frame by frame at
+two sizes with no foot sliding, none under the floor and every landing on it
+(279 and 413), then, in the hall, the first number called first, the lead's
+moonwalk to the right, seven robots of 89 to 107 pixels turned three quarters
+left, the ankh sending them off, one troupe at a time, a refusal where there
+is no room which keeps the next number, then the jig: one line across the
+screen, the sevens going right and back, the spot narrowing from 23.3 to 7.0
+degrees on the lead for the call, 413 landings, the end 18.0 s after the call
+(18.1 at 10 frames a second) and the troupe gone. --check-only and --selftest
+passed on scripts/curio_wheel.gd and scripts/tars_ensemble.gd in the prototype
+and in the DLSS copy (observatory-dlss).
+
+Version 35, exported 2026-10-04 06:54:13 UTC, keeps the hums going in the web
+build. There, Godot's sample playback plays a looping stream once and stops;
+scripts/drone.gd and scripts/lift.gd played their hums again once Godot
+reported them stopped, which left silences between (version 32's paragraph
+measured 2.7 ms to 1.5 s for the drone). scripts/web_loop.gd now has two
+players take turns there: the next copy starts once the current one has played
+half the take, timed by the clock times its pitch, and the two crossfade at
+equal power over 0.25 s. Starting half a take early carries the hum over a
+stalled frame, when no script runs: the web build stalls for up to 0.7 s
+compiling what first comes into view, as when the drone takes off. Natively,
+where the stream loops by itself, the hum's one player plays as before. And
+scripts/seldon_recording.gd converts the shimmer it synthesizes when its take
+is missing to 16-bit 8,192 samples a frame, not all 74,970 in one (2.1 ms of a
+frame natively; the same bytes, checked by hash). drone.gd, lift.gd and
+seldon_recording.gd are version 34's with artpass/audio/patch_web_loops.py
+applied, and web_loop.gd is new; every other script is version 34's,
+scripts/observatory.gd and scripts/quality.gd version 28's.
+index.pck is now 24,170,696 bytes, 3,296 more than version 34's; index.html
+changes only that size, and index.wasm and index.js are unchanged.
+In headless Chrome 154 on this machine (RTX 5080), the build served gzipped
+from localhost: the hums recorded with the output muted
+(artpass/audio/loop-web.mjs, then loop_check.py: a silence is 2 ms or more 40
+dB under the hum's median while it should sound). The drone flown 20 s on an
+emulated phone had no silence in two runs, and the lift, three rides up on a
+computer, one each, of 8.7 and 6.0 ms (web-loop-v35-run1/,
+web-loop-v35-run3/); version 34's build, recorded the same way, had 4 in the
+drone's hum, the longest 588 ms, and 3 in the lift's, the longest 76 ms. A
+third run, while other work kept this machine's processors busy, had silences
+of up to 2.0 s in both (web-loop-v35-run2-loaded/). The whistle's troupe
+(artpass/tarsdance/troupe-web.mjs, web-v35/troupe/), the wheel's nine curios
+(artpass/publish/curio-web.mjs, curio-web-v35/), the drone's on a computer and
+on a phone (drone-web.mjs, drone-web-v35-desktop/ and drone-web-v35-phone/)
+and the sound's (artpass/audio/audio-web.mjs, web-v35/) tests passed as on
+version 34, with no console error; the drone's on a computer met headless
+Chrome's three pointer-lock WrongDocumentErrors, as before.
+Native: version 34's whole list, then the hum's loop and Seldon's shimmer
+(artpass/publish/regress-pub27.sh) against this build's own project, 65 runs.
+All passed but motion_bay14, panel 14's known miss at frame 4 (2.99 against 3,
+the same numbers as versions 31 to 34). loopprobe.gd (artpass/audio/), with
+--web-loops so that two players take turns as on the web: a 2 s stream that
+does not loop, its pitch swinging between 0.5 and 1.5, kept on 9 s with three
+frames stalled 0.6 s each just before a handover, had no frame with no copy
+playing and no late handover, the two crossfaded, and off stopped both.
+recsound_probe.gd: Seldon's recording without its take made its shimmer in 37
+frames (27 with version 34's build), 149,940 bytes, the same bytes as version
+34's by hash. --check-only and --selftest passed on scripts/web_loop.gd,
+drone.gd, lift.gd and seldon_recording.gd in the prototype and in the DLSS
+copy (observatory-dlss).
+
+Version 36, exported 2026-10-04 15:55:21 UTC, frames the whistle's troupe and
+cuts its first call's stop, after the author's "ok lance les deux". From the
+start view, which looks up at the oculus, a troupe stood at the screen's foot,
+and on an upright phone the stick and the buttons covered a third of it. When
+a troupe comes, the view now turns onto the middle of every ground its dance
+covers and tilts until its near edge stands just above the touch controls
+under it, or above the screen's foot; it eases over 0.9 s, is a cut with
+reduced motion, and stops at a look of the visitor's own. Under the web
+build's renderer the first call stopped for 350 to 534 ms and later ones for
+67 to 117 ms: every call loaded both baked dances anew and made a new beam
+shader, and the first compiled the troupe's shaders, the spot's light and the
+puff. The curio wheel now keeps both dances from the start, the troupe keeps
+one beam shader, and five frames after the start a troupe on a render layer of
+its own, which the view leaves out, is drawn by a small viewport of the hall's
+world, without its spot then with it, and sent off, its materials kept.
+scripts/curio_wheel.gd and scripts/tars_ensemble.gd are version 34's with
+artpass/tarsdance/curio_wheel.v36.patch and tars_ensemble.v36.patch; every
+other script is version 35's, scripts/observatory.gd and scripts/quality.gd
+version 28's.
+index.pck is now 24,177,608 bytes, 6,912 more than version 35's; index.html
+changes only that size, and index.wasm and index.js are unchanged.
+In headless Chrome 154 on this machine (RTX 5080), the build served gzipped
+from localhost, on an emulated phone with touch
+(artpass/tarsdance/troupe-web.mjs; long frames are those over 50 ms after the
+whistle's tap). With the quality fixed at 0 and a fresh profile each run, the
+first call stopped one frame for 100 and 117 ms in two runs (web-v36-q0a/,
+web-v36-q0b/), and the second call and the sideways phone's first none;
+version 35's build, the same way, stopped 383 ms at the first call, 67 ms at
+the second and 100 ms sideways (web-v35-q0/). Upright, the troupe stood whole
+above the wheel's button and the stick, where version 35's stood behind them
+(upright-first-6.5s.png in each). With the quality left to itself
+(web-v36/troupe/), the first call stopped 117 ms, then scripts/quality.gd's
+one step back up from level 5 to 0 a few seconds into the dance stopped one
+frame for 617 ms: in a fresh browser it does so wherever it falls, troupe or
+not, and it is not this version's. Each number ended on its own 18.0 s after
+the call with its 279 and 413 landings; there was no exception and no console
+error. The wheel's (artpass/publish/curio-web.mjs, curio-web-v36/), the
+drone's on a computer and on a phone (drone-web.mjs, drone-web-v36-desktop/
+and drone-web-v36-phone/) and the sound's (artpass/audio/audio-web.mjs,
+web-v36/) tests passed as on version 35; the drone's on a computer met
+headless Chrome's three pointer-lock WrongDocumentErrors, as before.
+Native: version 35's whole list (artpass/publish/regress-pub28.sh) against
+this build's own project, 65 runs. All passed but motion_bay14, panel 14's
+known miss at frame 4 (2.99 against 3, the same numbers as versions 31 to 35),
+and lean_keys_10fps, which missed stops_at_series_end and browsed_stays_aimed;
+run again, it passed 7 times in 8 (the eighth missed q_leans_left and
+e_leans_right, other checks), and version 35's build 8 in 8, both 5 in 5 when
+run by turns. Those held-key checks at 10 frames a second touch nothing this
+version changes; the difference is to verify. troupetest.gd
+(artpass/tarsdance/), under Compatibility and under Forward+ at 1600x900 and
+unpinned at 10 frames a second, gave version 34's numbers (279 and 413
+landings, the end 18.0 s after the call, 18.1 at 10 frames a second, the spot
+from 23.3 to 7.0 degrees, robots of 89 to 107 pixels) and checks the new
+parts: from the start view the troupe's ground stood off the screen's foot
+(screen box 0.93 to 1.15 of its height) and the view tilted until it stood
+whole, 0.72 to 0.90, a drag during the tilt keeping the visitor's own look;
+both dances kept from the start; under Compatibility the warm-up drawn, 28
+materials kept and its troupe gone. framingprobe.gd, from the start view at
+390x844 and 844x390 with the touch controls and at 1600x900, seven tap points
+each: before, a third or more of the troupe under the controls upright and
+most of it under the screen's foot sideways; after, in all 21, the troupe
+whole on the screen and nothing under a control. --check-only and --selftest
+passed on scripts/curio_wheel.gd and scripts/tars_ensemble.gd in the prototype
+and in the DLSS copy (observatory-dlss).
+
+Version 37, exported 2026-10-04 18:28:57 UTC, opens two bays of the
+ground-level shelves onto the palace gardens of Trantor, puts the gardens
+round the roof in place of Upperside's domes, and adds a ride in them, after
+the author's "2 baies vitrées à travers lesquelles on voit les jardins du
+palais de Trantor", "Remplacer Upperside" and "on doit pouvoir se balader dans
+les jardins en Segway". scripts/palace_gardens.gd cuts the shelves and the
+outer wall where the windows go (observatory.gd stays version 28's) and
+builds, self-lit and casting no shadow, a terrace, a parterre ten metres below
+with a basin and a canal, a hedge maze, an orchard, avenues of lamps, woods,
+the palace and the city's towers as painted cards, and the hall's facade over
+the terrace; it draws them only while a bay is in view or the camera is
+outside, and thins them from quality level 3. Its trees and clipped hedges,
+redone after the author's "Les haies et les arbres sont vraiment pas terrible
+- utilise du blender et du comfyui", are meshes made in Blender within 70 m of
+the eye (45 m at quality level 2, none from level 3) and, further, their views
+rendered there from eight sides (assets/garden_plant.gdshader,
+assets/garden_impostor.gdshader). scripts/segway.gd is a self-balancing
+scooter: G (on a touch screen, Ride) gets on at the head of a ramp down to the
+parterre, the ground and the solids are followed in steps of at most 0.25 m,
+and the ride stops 400 m out. scripts/extra_views.gd is version 36's with
+artpass/bays/patch_extra_views.py; upperside.gd leaves out its deck under the
+gardens; touch_controls.gd adds the Ride button and walk_physics.gd the G
+hint; export_presets.cfg exports assets/hall_env.gdshaderinc again
+(artpass/bays/patch_presets.py), which the bays' glass includes. The images
+are Z-Image-Turbo's (artpass/gardens/NOTES.md, LICENSES.txt); the scooter's,
+the terrace's, the trees' and the hedges' meshes were made by Blender scripts
+(artpass/gardens/blender/). Every other script is version 36's,
+scripts/observatory.gd and scripts/quality.gd version 28's.
+index.pck is now 29,449,936 bytes, 5,272,328 more than version 36's;
+index.html changes only that size, and index.wasm and index.js are unchanged.
+In headless Chrome on this machine, the build served gzipped from localhost
+(artpass/gardens/gardens-web.mjs, artpass/gardens/web-v37*/), on a computer
+(1600 x 900), a phone (390 x 844, touch) and a tablet (1180 x 820, touch): on
+the RTX 5080 (ANGLE Direct3D 11) the start view, bay 2, the roof and a ride
+ran at 16.7 ms a frame, the ride moved 19.2 to 19.7 m and got off, with no
+exception and no console error. The gardens built in 560 to 690 ms in WASM,
+against 340 to 460 ms for this version built without the new vegetation
+(web-v37-preveg/). The adaptive quality's first measurement can step down
+while the first frames compile their shaders; after 30 s it was back at level
+0 in five cases of six (web-v37-settle/), and with the level fixed at 0 the
+ride on a phone ran at 16.7 ms with or without the vegetation (web-v37-q0-*).
+On Chrome's CPU renderer (SwiftShader) standing in for a weak GPU, every case
+settled at level 5, where the trees are their far views alone: through bay 2,
+200 ms a frame on a computer and 183 on a phone, against 183 and 183 without
+the new vegetation; riding, 67 and 100 ms against 67 and 83; the ride moved 21
+m and got off (web-v37-swift-veg/, web-v37-swift-preveg/).
+Native runs, stock Godot 4.6.1 against this build's own project
+(artpass/publish/regress-pub29.sh, 77 runs,
+artpass/publish/regress-pub29-veg/): 75 passed. motion_bay14 missed the same
+point with the same numbers as since version 31; lean_keys_fwd failed once
+(reduced_motion_still_reads) and passed three reruns. The ride passed under
+Compatibility and Forward+, on a phone's touch screen and at 10 frames a
+second (segway_compat, segway_fwd, segway_touch_phone, segway_10fps), and the
+bays under Compatibility (bays_compat: the gardens built in 474 ms, the
+vegetation kit found, 738 trees within reach of their meshes, 1,360 modules of
+sprays along the hedges).
+
+Version 38, exported 2026-10-04 20:42:01 UTC, adds a sparse crowd to the
+palace gardens, after the author's "On peut rajouter une foule (Clairsemee la
+foule) dans les jardins?". scripts/garden_crowd.gd places 103 people, 88 of
+them walking 29 routes (the terrace, the ramp, the parterre's walks, the
+canal's banks, the avenues, the orchard and the maze's way to its temple) and
+15 standing. Each figure is one MultiMesh; the walkers keep to the right,
+follow whoever is slower ahead, step to their own edge for whoever comes the
+other way, wait at the end of a walk before turning back, and stop for the
+visitor or the scooter within 2.6 m ahead. From quality level 3 half of them
+are shown, from level 4 a third. The four figures (assets/garden_figure_*.glb:
+a courtier, a lady, a walker, a gardener, 380 to 436 triangles, no face) are
+meshes made in Blender by artpass/gardens/blender/crowd_kit.py; their UVs flag
+the legs, the arms and the hems, which assets/garden_plant.gdshader (kind 4)
+swings in the vertex shader, coloured by each instance.
+scripts/palace_gardens.gd builds the routes, puts the crowd first in push_out
+(so the scooter stops at people) and passes the quality level on. Every other
+script is version 37's, scripts/observatory.gd and scripts/quality.gd version
+28's.
+index.pck is now 29,516,608 bytes, 66,672 more than version 37's; index.html
+changes only that size, and index.wasm and index.js are unchanged.
+In headless Chrome on this machine, this build and version 37's each served
+gzipped from localhost in the same session (artpass/gardens/gardens-web.mjs,
+artpass/gardens/crowd/web-v38*/, web-v37again*/), on a computer (1600 x 900),
+a phone (390 x 844, touch) and a tablet (1180 x 820, touch): on the RTX 5080
+(ANGLE Direct3D 11) the start view, bay 2, the roof and a ride ran at a median
+16.7 ms a frame in both versions, the crowd in view through bay 2; the ride
+moved 18.0 to 18.9 m (18.5 to 19.4 in version 37) and got off; no exception
+and no console error. The gardens with the crowd built in 540 to 773 ms in
+WASM, once 1,076 ms (the phone's roof), against 496 to 683 ms for version 37.
+The phone's start view had a 95th percentile of 66.8 ms and the tablet's 33.4
+(16.8 in version 37), from single slow frames while the first frames compile
+their shaders (to verify). On Chrome's CPU renderer (SwiftShader) standing in
+for a weak GPU, every case settled at quality level 5, where a third of the
+people show: through bay 2, 167 ms a frame on a computer and on a phone,
+against 183 and 167 for version 37; riding, 67 and 83 ms in both; the ride
+moved 18.9 to 19.2 m and got off. Twelve seconds after the start the start
+view had not settled in either version (frames of 1.2 to 4.7 s), nor had the
+roof but on this build's computer (150 ms).
+Native runs, stock Godot 4.6.1 against this build's own project
+(artpass/publish/regress-pub30.sh, 74 runs, artpass/publish/regress-pub30/):
+70 passed. motion_bay14 missed the same point with the same numbers as since
+version 31. lean_keys_fwd failed once and passed three reruns; lean_keys_10fps
+failed once and then passed two reruns of three, on other checks each time,
+and version 37's build failed it once in three on the same checks
+(artpass/publish/regress-pub30-rerun/, regress-pub29-lean10/). segway_10fps
+ended its ramp ride at the basin's rim 0.66 m off the axis, round a stroller,
+in three runs of three; with the crowd hidden it ended on the axis
+(ride2/segprobe_nocrowd.gd). The crowd passed under Compatibility and
+Forward+, on a phone's screen and at 10 frames a second with a one-second
+stall (crowd_compat, crowd_fwd, crowd_phone, crowd_10fps): 103 people, every
+walk and spot clear of the solids over 23,796 samples, in 20 s nobody in a
+solid and no two people closer than 0.45 m, the largest step of anyone in a
+frame at 10 fps 0.145 m, 0.41 to 0.43 ms per update (the editor's runtime).
+
+Version 39, exported 2026-10-04 22:35:31 UTC, lets the scooter ride by itself
+and the visitor get off and on in the gardens, after the author's "la balade
+en segway devrait etre automatique quand l'utiliseur touche a rien, on devrait
+pouvoir descender et remonter sur le sefway". scripts/segway.gd, with no ride
+key and no look for 3 s, rides a 953 m tour on the walks' middle lines (down
+the ramp, round both halves of the parterre by its cross walks and outer
+edges, since the basin's rim meets the hedges on the axis, beside the canal to
+its far end and back up the other side) at up to 3.2 m/s, slower in the bends
+and behind people; away from the tour it goes straight to it when nothing
+stands between, else back along the trail the scooter left, a point a metre,
+loops cut out. A ride key takes over at once; the mouse only looks round. G
+riding gets off beside the scooter, which stays; on foot W/S walk, A/D step
+aside and Shift hurries, stopped as the scooter is and by it; G within 2.5 m
+gets back on; a preset ends it all and takes the scooter back to the terrace.
+scripts/touch_controls.gd has the helps for both and no jump on foot;
+scripts/garden_crowd.gd adds near(), the people round a place, for the
+autopilot. Every other script is version 38's, scripts/observatory.gd and
+scripts/quality.gd version 28's.
+index.pck is now 29,533,936 bytes, 17,328 more than version 38's; index.html
+changes only that size, and index.wasm and index.js are unchanged.
+In headless Chrome on this machine, the build served gzipped from localhost
+(artpass/gardens/ride2/web-v39.ps1, ride2-web.mjs, out:
+artpass/gardens/ride2/web-v39*/), on a computer (1600 x 900), a phone (390 x
+844, touch) and a tablet (1180 x 820, touch), the scooter mounted at the start
+(?segway=1): hands off, the autopilot started and toured 17.4 to 25.8 m in 12
+s on the RTX 5080 (ANGLE Direct3D 11), W held a second took over, G got off,
+the visitor walked 6 m and stood 0.9 m from the scooter again, G got back on,
+and a preset went back inside; no exception and no console error. Frames ran
+at a median 16.7 ms while it toured, with single frames of 1.5 and 1.9 s on
+the computer and the phone as the tour came down the ramp into view of the
+parterre (to verify: a shader warm-up). Version 38's cases on the same build
+(gardens-web.mjs): the start view, bay 2, the roof and a ride at a median 16.7
+ms a frame, the ride moving 18.3 to 19.1 m; the gardens built in 535 to 711
+ms. On Chrome's CPU renderer (SwiftShader) standing in for a weak GPU, at
+quality level 5: the same steps passed on a computer and a phone, the
+autopilot touring 37.5 m in 12 s on the computer at a median 66.7 ms a frame
+and 8.6 m on the phone, whose frames of 0.5 to 2.1 s slow the ride (a frame's
+step is capped at 0.1 s); bay 2 at 166.7 ms a frame on both, the ride 83.3 and
+100 ms; the phone's start view and roof had not settled within 12 s, as in
+version 38.
+Native runs, stock Godot 4.6.1 against this build's own project
+(artpass/publish/regress-pub31.sh, 78 runs: version 38's 74 and four of the
+autopilot, artpass/publish/regress-pub31/): 74 passed. motion_bay14 missed the
+same point with the same numbers as since version 31. lean_keys_10fps, the
+known flake, passed three reruns. coursetest and coursetest_fwd failed on one
+check, the camera still walking after a held W, while another program started
+on the same desktop; they passed three reruns each, and version 38's build,
+run as the control, failed the same check once in two
+(artpass/publish/regress-pub31-rerun/). The ride's probe now hides the crowd
+and passed at 10 frames a second. The autopilot passed under Compatibility and
+Forward+, on a phone's screen with touch, and at 10 frames a second with a
+one-second stall, not pinned (auto_compat, auto_fwd, auto_touch_phone,
+auto_10fps; artpass/gardens/ride2/autoprobe.gd): hands off, it started at 3 s
+and not before and rode 80.3 m of the tour in 30 s (77.9 m at 10 fps), never
+inside a solid, at most 0.83 m off its line; from inside the maze it drove
+back to the tour; a key, or the stick, took over at once and it started again
+3 s after; off the scooter the visitor stood 0.9 m beside it, walked 7.26 m
+and got back on; G further than 2.5 m left them on foot; a preset ended it
+all; a walk into a hedge stopped at its face.
+
+Version 40, exported 2026-10-05 01:56:32 UTC, lowers the held whistle out of
+sight while its troupe dances and gives the wand's TARS the troupe's steel.
+Held up, the whistle stood over the rightmost robot of a framed troupe on a
+computer (version 36's "to verify"); scripts/curio_wheel.gd now lowers it 0.6
+s after each blow, as while reading a spine, and raises it again once the
+troupe is gone; other curios held during a dance stay up. The wand's TARS was
+still in metallic 0.85 steel, near black in the web build's renderer and
+copper under Forward+, which the troupe had left on 2026-10-03 (the author:
+"On peut peut etre ameliorer notres modele tars"): the troupe's brushed
+aluminium moves into scripts/tars.gd (steel_material), the wand's TARS uses
+it, and scripts/tars_ensemble.gd loads it from there, its own look unchanged.
+Every other script is version 39's, scripts/observatory.gd and
+scripts/quality.gd version 28's.
+index.pck is now 29,534,064 bytes, 128 more than version 39's; index.html
+changes only that size, and index.wasm and index.js are unchanged.
+In headless Chrome on this machine (RTX 5080), the build served gzipped from
+localhost, on an emulated phone with touch (artpass/tarsdance/troupe-web.mjs,
+web-v40/troupe/): upright and sideways, the troupe came at the whistle's tap,
+and each number ended on its own 18.0 s after the call with its 279 and 413
+landings; while they danced, the whistle was out of sight and the troupe whole
+above the wheel's button and the stick (upright-first-6.5s.png). Upright, the
+first call stopped one frame for 100 ms at the tap and one for 483 ms 2.7 s
+later, as scripts/quality.gd stepped back up from level 5 to 0, as in version
+36; the jig and the sideways call had no frame over 50 ms. There was no
+exception and no console error. The wheel's (artpass/publish/curio-web.mjs,
+curio-web-v40/), the drone's on a computer and on a phone (drone-web.mjs,
+drone-web-v40-desktop/ and drone-web-v40-phone/) and the sound's
+(artpass/audio/audio-web.mjs, web-v40/) tests passed as on version 36, the
+drone's on a computer with headless Chrome's three pointer-lock
+WrongDocumentErrors, as before. The hums' test (artpass/audio/loop-web.mjs,
+web-loop-v40*/), last run on version 35, found the lift's hum as on version
+39's build, both with a silence of 1.7 to 2.3 s at 15 s where version 35's had
+6 ms (to verify). Its drone did not take off on the phone in 5 runs of 5 on
+this build and 2 of 4 on version 39's, run by turns (web-loop-v39*/); stepped
+through with a screenshot after each tap (artpass/audio/loopdiag-v40/), it
+flew in 3 runs of 4 on this build and 3 of 5 on version 39's, the failures
+falling late in each series on both builds. On both, the drone was picked from
+the wheel and then the tap that flies it did nothing, or the taps on the wheel
+were lost: a fault older than this version, to verify. The sound test's drone,
+taken after other curios, flew and hummed.
+Native runs, stock Godot 4.6.1 against this build's own project
+(artpass/publish/regress-pub32.sh, artpass/publish/regress-pub32/): version
+39's whole list of 78 runs, which artpass/publish/select_regress.py keeps
+whole on every fifth version. 77 passed; motion_bay14 missed the same point
+with the same numbers as since version 31. troupetest.gd (artpass/tarsdance/),
+under Compatibility and Forward+ at 1600x900 and unpinned at 10 frames a
+second, gave version 36's numbers (279 and 413 landings, the end 18.0 s after
+the call, 18.1 at 10 frames a second, robots of 89 to 107 pixels, the framed
+troupe's box 0.297 to 0.703 of the screen's width by 0.723 to 0.9 of its
+height) and checks the whistle: drawn at the call, hidden on the framed troupe
+1.2 s later and through the dance, up for a blow and hidden again 1.2 s after
+it, and fully up 0.5 s after the troupe is gone. Its framing.png shows the
+seven robots whole, where version 39's had the whistle over the rightmost.
+tarstest.gd's close-up of the wand's TARS under Compatibility: the brightest
+quarter of the slabs averages (45, 58, 81) in RGB, against (1, 6, 13) on
+version 39's build; under Forward+, measured in a copy of the project with the
+same scripts, (91, 68, 73) against the old steel's copper (176, 111, 54). The
+TARS, curio, drone and cinema runs passed. --check-only and --selftest passed
+on the three scripts in the prototype and in the DLSS copy (observatory-dlss).
+
+Native Compatibility GPU time, RTX 5080, 1600x900, 240 frames per view: 0.44 to
+0.52 ms for the previous web scene, 0.64 to 1.44 ms with the detail pass; up to
+1.55 million primitives in the overview, against 0.46 million before. With the
+reworked box, the view of the box measured 0.95 ms (first version) and
+1.02 ms (this one), against 0.87 and 1.04 ms for a view of a pier in the same
+runs: the box stays in line with the rest of the scene, and whole runs vary
+by about 15 percent.
+
+SHA-256 source inputs of the exported project:
+project.godot eb7d53597517c711d564943e467cce2926699c2422b073079737325c3400692e
+main.tscn fb6245c960d3625ca05920116c58351d9dbeb255beae59175d89c06d47049564
+export_presets.cfg 099f064dbbd435c1c30456d1efb518d924ad38a7e2339ca5a4fc484388d2f9f1
+scripts/fly_camera.gd 2e5cdd15ca7bdcfa30ec129e354a309f3ff7296f6fbf54ac144984ed9aa9f8e7
+scripts/capture.gd 52ea2b5e40db2f1f4cdbd7658074ef60bd117e1f4110c1b8995590a4196748d0
+scripts/observatory.gd cdbab5d96d8679c893602ca4e67064a899982642f58e4c655975e0f2e97acbec
+scripts/course_library.gd 56de4cb69fa6c3c8402a2928e09ef84d09a2d9e22c610c29609ad9d4013a2651
+scripts/steel_cube.gd f28e71fffcd151663bc9a98b3c135cc7b805490e8298d3cf01029455c973f94c
+scripts/seldon_statue.gd c8785f079f648ea50694055fe87d26bb56e0ee2ab129251399d88bd13d0030b4
+scripts/touch_controls.gd 5c76054696f7addf348c58e5e9b42b8cfc7ddf5f97efecbfcbeb44d3ba014ebd
+scripts/walk_physics.gd 1f505c12f81341ed1ed1da3b372aa17409b6f04b2ab5a0801623da53c4617037
+scripts/view_fit.gd f574c7949a5b324f91f062df9982366c123271804069b507206f88ad7062fe4c
+scripts/view_move.gd 558a4059815cb3a8a202d205d8cfada17653fb533e7e056bfe9e8a434dac0431
+scripts/multiverse.gd 0de3cece747a87c742ba6b26c8fac27a6a7dcdd18286f30957899becb2dfb34d
+scripts/camera_follow.gd dc63643772a7dceb41583169aeec3d3053d8555a20540fd29a1c9cbade2a712d
+assets/seldon_statue.glb 41f7e4c667711b0097132025bdf5edbd03b44de0793445db1f118d69e145c8ec
+assets/steel_portal.glb 009ec4dd8f85b74f47839d25095fbe9e087b222addccf13643639c4b98402b21
+assets/stone_marble.png a71f21a971a1a0b2b897ed42dd64f2ece500f34b246bb758d9ff7ae843e68bd3
+assets/pier_ornament.png 6494443545711367205f83f532a67592c412065ffb2d00bd7c10c50b6fa7b22c
+assets/pier_ornament_normal.png 354c568a20f7fa58e9aeba23e41bc2b1c5c6cecf55ff2a56b5a89d9f3badf940
+assets/book_grain.png c7f2ee7b34a9e8a229da1f2db08e819003016e7f5f9505c5d985846db0538edc
+assets/stone_relief.png c982fac4fd835293e85726b4c6bfa514aa9882257e3da2ccf3594dc42bc3167d
+assets/steel_grime.png 3383502576071b76ef94967c845086675ebe2ccaea376a45836574b9e4eafeb8
+assets/glass_sun_moon.png da2c1200103cc07e4680d2e80cf8c278d437a3d0088662f8e5cd851f340ed886
+assets/glass_elven_tree.png 344edc31aa4fc0cff546272d7afa287fe4195809d4b1eec901dfbb340fd2623e
+assets/glass_alembic.png bdf7fe6eaf71abf1d062c6ef2bbe1f77d7eb20e6b834937fd79f92582e5e5d9a
+assets/book_spines.gdshader eb0641b8a3ce571d3a0644e7da28ec9b407d8e5d4bb3338c7b951bf9638b0d57
+assets/stone_relief.gdshader 82f26919a4a0a2742eee8ddbef9b2be09ee9a4df8273fe6845d9dd919cfe7958
+assets/steel_brushed.gdshader cff19989eb4793ddb5dc001fd3d25473080c51d250a4a5cfc168762b435ba8fd
+assets/stained_glass.gdshader 1366183601743cfb42791f5efd38e4b26e6c6d10eb8ce1ac4e9e8c7a3db6d77a
+assets/floor_paving.gdshader 23187f024d276b897635ee0cc3e543c5852c4a9b5175cbe56ec59f5a998dc0e7
+assets/statue_marble.gdshader ec3f14f662487f3dae14a398fe91ea7183d88214bd2bf266359da89d79b94452
+assets/world_glimpse.gdshader a06fc85ca086fc3e4d9297039be0b6549132bbffafeaedfbda0ffea3eb918d6d
+assets/courses.json 407817e268f2c0d37ce28ae0d873f08b87a514479d6a73545b75d1dfbb71823b
+scripts/extra_views.gd d4ea3381e333209b78c316d6fac59c9580b3d3f3980bb2a08c4afc3bfd334f4a
+scripts/upperside.gd 589ec27dde00b87e8bd40d190911e34b1dc3e99532d13a88f30925392d026be8
+assets/night_sky.gdshader 67421b4338debb80d8b6cec071bb37001d9d5493d240be53c0a107ad17cb5cec
+assets/upperside.gdshader f119593a603bc623de218054ec142b8732330785fe0d61ba5a3dcc13124f96e3
+assets/sky_milky_way_eso.jpg b17e19bf2d5e7e9efa03b602450f5189dc77f85251e704d99b6f14632cff3495
+assets/exterior_ashlar_albedo.png c0cff260c039e1e1528920f86070266ac20ba2a3e36e99a53654c2ed18cdef94
+assets/exterior_ashlar_normal.png 0dc3b0023534b21c7d383bbca468f057cc65ba1a9526303c7b3084587138f029
+scripts/lift.gd 765ede89150fa68729b74e585cfc97ccd719c342eba0d16ecaaed657925990d4
+assets/sky_core_cap.png a110fdfa1b79cc41eec119265aeb89bc211d0b8e0eb6c759b45c25496f2daabe
+assets/kiosk_glass.gdshader 76226f17e5884a042b85e5fc544a4b71012ea6e389b9743c1cac65083a06bc44
+scripts/lift_sounds.gd 4daed5e380396a3711fc7ff2f1f72b877b9efbdaff6d6fa428c595b1dad7b244
+scripts/curio_wheel.gd 67f60a84432aa6e46efb17b296b71e2fdf2e826ce54e29ff23e0836e87335ccd
+scripts/drone.gd 6d90aae0fe64191ff0f6a7bfcbd6c56d551153e1eb03c3e8b71509a69ef87209
+scripts/tars.gd d50da54780d8535bda63b713388e4651b7f88ec8c3f9e0c2b1a59196ba37d03e
+scripts/hologram_ix.gd b252ee1de7055822af6886ea796e6a8e35aa81510ec0eb4f36b2bcf20b32e8a6
+scripts/quality.gd bdad805e7717769145b5aa2ad98aca56b0b76857fdcd86e87817f1bc53046c69
+assets/holo_panel.gdshader 1a77f62f3bd53c29c95341058baa0d19613737ab2a98f24c6fd4edc150637c08
+assets/holo_edge.gdshader 029b74b7147bdc55e8b1042c3274b3018892217653e47458ca58f0115229f8e7
+assets/holo_ring.gdshader 23cd4ef37915ab49690739865460b7b0e343865b3754d5daf2d5d09234327c5d
+assets/ix_pipelines.json 180cb180625664b027f3c7e01d855533c757e4e5525c506bd2a6f26ecc73f947
+scripts/seldon_recording.gd eb9dbe6d659c1461e70958ee0a2d9174ee48b32a8d9a690d5e2fb282c00d3958
+assets/seldon_points.gdshader 744b72e7abd915467abc5d9727eecbadaf4290bb5ecbed2fee6fe98ed80bcd2e
+assets/recording_frame.gdshader a7daedd2a691b70de4754d06fc0974f40335109603c57426a70a7381a5052a0c
+scripts/fresco_frieze.gd 2f2b0654f88c8a0331f47656267e834faaaca879b1acc9615169c1946aa7c948
+assets/fresco_panel.gdshader e9c20421cf254119e9d85da22a70bb8a965cee0be524f5c95b2022f48bc82d33
+assets/fresco_dust.gdshader 9d63b02079689cd0205a9d469c743645d4fac1ccfff21a3d0326f36a3062341c
+assets/fresco_atlas.png cccc2917f794f42517ee001392802ec6828acc747f585018e49349474b1638fc
+assets/fresco_motion.png aa7148be2c28917ddae5d92b7a155c46fe024460c67e919106be23782fdf7822
+scripts/build_info.gd 449aac03a586a62e5cc267bbd10978ae3f96a4406b540cb6ad04c53dfa4adbc1
+scripts/sfx_takes.gd 069f573898d4c4ad48fde9f1f592dba0974433b1881d7ed045d6797c3c3a0ac6
+assets/sfx/curio_wheel-beep.wav a1d999098afbd222622a6c4625ee16bb9788059c6fe37901067d9cd239f5ec8c
+assets/sfx/curio_wheel-chime.wav 6b580b1e57194c1f84183044c367bcab9d07e3d4c876da3dee5736ba78298c9e
+assets/sfx/curio_wheel-clank.wav 39456466f21203ccba8245793e15730aff51888120ea702103a98ee6b1f55257
+assets/sfx/curio_wheel-click.wav afc8ec2674aab7c4b4cc7c68e0ce4b56d705801de707ba8ad56a575f14f917ba
+assets/sfx/curio_wheel-quack.wav 3232f7bae3d5c117e37a39719f02b7aa91fb6a6f664cdc648b160a9d01ad3eb4
+assets/sfx/curio_wheel-spell.wav dd930aed24f927c11aaef4af9248b68facd7d9cc8372b6f8524e0a4289f1f4c0
+assets/sfx/curio_wheel-squeak.wav ed1339c4e916628982b8cbc3654ada979afc3058d81fedd62fe3cc4265387932
+assets/sfx/curio_wheel-tock.wav 36f1c3ae43180eaa3f9ddad7cd644ba84d81f471851bc88e48765d28a4b30292
+assets/sfx/curio_wheel-whoosh.wav d6424c89a69d15b51f68dc6c5edfc309bd257b5d4b6f04d2d92694d01064fec0
+assets/sfx/fresco_frieze-settle.wav 0e0cfa39adabc31991bcbc599c79dba4c3148b80c9e961432e9f1dbe91c58d2b
+assets/sfx/hologram_ix-close.wav a2b206d1dddd6cb9cc7fb0dbb65476f26dfe0e8e1c00eb79d6133a43e834fe82
+assets/sfx/hologram_ix-open.wav f058554677f99cdbd2ee15dbf29db996544f3637e15bd069caa1e02d951715ea
+assets/sfx/hologram_ix-step.wav cb1e837ea058a194bd09b8a87f897bd954f9dbf941d46148525e68e958512a50
+assets/sfx/lift-bell.wav a862662797c95b518a3196bdaabc25bb9cf59c289797767f1c7bff290b09618e
+assets/sfx/lift-hum.wav 8fb1c4c42673f5904b8304f1d66d58e403f7d4f360c347b41d5a3bef71342500
+assets/sfx/lift-rattle.wav ca4492ca261db9c13a17b316146296cb0eff9f527c2d6508a441ff984395281f
+assets/sfx/seldon_recording-shimmer.wav f162e8a4e867503b38271d149a631e2cc1818ae2ab3600897dffa5770e23f8d0
+assets/sfx/drone-hum.wav 9e7adb0d9a8b790a9facf803ef0a0b2588150c71569912fc2db9e339383a9364
+scripts/cinematic.gd a6e03dc5adc4e673001ba48e6387c4311c1c7bd9b78c7bf49539308290eaa091
+scripts/tars_ensemble.gd b16f31ba0bb92eb86b2296a64ff476e59cb3db11a6f800b19db402ebda6c1239
+assets/tars_ensemble_tracks.tres 6c2be9a6fc350c02f8dd19e6a768ed911d11ebd741d4c5939bb585a84171b272
+assets/tars_ensemble_jig_tracks.tres d7604ba2a5dc3e61fb29441d145d0d98703193c516d429a754e9c0e4949383a0
+scripts/web_loop.gd cd89961d3e7e5d8275d67ead034eb2184587810dc710316c5377f58a16e35cbb
+scripts/palace_gardens.gd 3296c1609b7a0f4a957c123266ad43855fb96e2f0fe6a25ce0efc702077bcb93
+scripts/segway.gd 12dea63276177e70af0f29b2e9e786571e7fcb756070958624d71bd8cb7f9941
+assets/hall_env.gdshaderinc f4ee2ad1a4b5af0839924033507d492b59ce003baad50b35f9afc4f645b3bae5
+assets/bay_glass.gdshader 5cf98fa61a8a189d25abf4e990d533dc7bb7c696d6a761625f555b4f13ac9fd5
+assets/garden_card.gdshader 42c1f7e2b2e104a52cd4b31d04e18b93176cfdc04d22c55a3011f5a22b7f6da5
+assets/garden_impostor.gdshader cdd31ff1d8ec84e8cb3beb5d30169770f6791ac4f2385224e53ab9aae8b23016
+assets/palace_garden.gdshader 2784830b9e7a746aaabc4dd60dc5281abfdeadf01ca696c66df3b2b05dcbe287
+assets/palace_glow.gdshader 8f7c3b7a5acee6a7f6f086602f3cad2ebf5a785983fe886371cbfb9b7a05d404
+assets/garden_baluster.obj 8fe3a8973ab1eb7779193b8d3062030b8ef0457673a3826dbb376a4d6ed27247
+assets/garden_baluster_low.obj 64d36f292626f7761ae876257a97abb255655e5f3274bb7859b4e70d6797cff7
+assets/garden_pedestal.obj 9be8ab11e4b98d71150ea87a33a9000a394751619850ec07c12813e3f9265b2e
+assets/garden_lantern_frame.obj 3c5be9c3e8395124617dff753a96590a181054fca0d200440617a0f375c9c3cf
+assets/garden_lantern_glass.obj 3205c581aa51efbcada1a7d7e60d105b2e105daba52988d09261c0c07584f231
+assets/garden_segway_body.obj c6c5110461ade8666c3a124d9491daa0f4e1a9a956ee5fe69949de456cb07062
+assets/garden_segway_metal.obj c0956acecdcaab494803f8469885cb4f60d2ed88acb87bcb8b6f17b2a26c5346
+assets/garden_segway_trim.obj d01d36b8ea16f05e49b9857057d56c2f1db920135b8047b948f08d7e9b3b1a3d
+assets/garden_segway_light.obj 4c0e86e38fee02bd71aed3894d3a4c86443b4190c02b1400fbc0f7eb6d78fad5
+assets/garden_segway_tyre.obj d99bfcce12aa8de3679ffbebc4360cbc1b2f5d4955ca66754919ef3965e6410e
+assets/garden_segway_dish.obj aec2d5e2678a744538297802447c2c7edf7910130809950122397998a6ce6651
+assets/garden_segway_spokes.obj 6c72471281d414179f42211f9831d3061957a7d57ef0534d611eee4170dbd269
+assets/garden_city_731.png 24ac309d52592b5ca5cea30979f7ab59f9f3a582e55c06738a7978ec7f61e1fa
+assets/garden_city_733.png e6cd8db346d77c0a06e5661546bb67269d0817cbc904aa5353c2e31dbf5896f2
+assets/garden_city_734.png 495d84228dbd9a4d842c313116cf46a58cbb8979e6cfd1f811b3a6ef1b6e78e4
+assets/garden_city_735.png dca00a7a86ee86eaae981ab4257759f46ba6f37bf7fb888fcb5cf7e4934ffd7d
+assets/garden_city_737.png de118e57e8f822b5074c918d26e2ac8f76669d82fc0a5ad4959616d461041667
+assets/garden_city_738.png 4df4a1903fe8f7ab1f6d5a44a66e658994b38123dea29c2da9ee4e933acae120
+assets/garden_palace.png d5b13df8f900e0b529dd7a5de89895e0c99603123c64de9a32d91c47e357899e
+assets/garden_stone.png 432e7a4a676e96916043f95eebc82dbfd0971c3655cd9a8011f20b7156f90389
+assets/garden_paving.png 81afdc39127356a22719dc103000c5d7bfce63ce3054361a7fa9966f9762d414
+assets/garden_plant.gdshader c410c3b13c52cef0af99c66fcf21ded7c4995ed52c6bc83bebf0f4acd2c9e6af
+assets/garden_tree_linden1.glb 342e6ab53b7cc2cf00b4b01449d69285e6cf5daf170b2a5388432dd430071d88
+assets/garden_tree_linden2.glb c89718e972c32dd2203b536bbb9e68781966351ccc297a123f6218c046934625
+assets/garden_tree_linden3.glb 2970958c39fc0322097fdef4bb1e5202dae2c4970bd4b359bb721f477d13463b
+assets/garden_tree_pear1.glb 6096ac3cf3c13d600b46fc254d1ec079e060ebaf34c32a05b3679a3751af494b
+assets/garden_tree_pear2.glb a295723b8be9716fff74bc97d5729167f8ccdd5c397faad13e3052def0f62365
+assets/garden_tree_pear3.glb 6f0464718d69c96fe1c75214e2b9386d6790e68344589368ca5d4927c9d22827
+assets/garden_tree_cypress1.glb d0b26cb41c215028c2c9624dfc3d30718ae040202d03e3d12792e7b99ed4e352
+assets/garden_tree_cypress2.glb 578ec0420e0c2dc95df2a85adb5082a9c1e346533025fa2abad6514a1ca941b9
+assets/garden_tree_cypress3.glb 99f73234f71a476067dcd994671e3c5775876621724d4ebd6fe56ff09bd341e4
+assets/garden_tree_orange1.glb 6805e29a0154a4e856d3129fc669f182cc5d41b40cbf6047d3b295babf352f35
+assets/garden_tree_orange2.glb 9b918599e0c3e37464102238f828c73a550046499ac1e5b5e58a18f363440064
+assets/garden_fringe_tall.glb 843308847de15253082b57e96b9e1592ad9f4129bb2f5e589d79a4f25adad420
+assets/garden_fringe_low.glb 5e8ac777df32209f5f20eb122f81542655e6208ceed3cdd1a56d0630ee8bf4bb
+assets/garden_yew.glb 8a15f5832e0da730e386a593a98454af415e9dcb3b3e812910aa813bfb57b4a8
+assets/garden_imp_linden.png b3a0b66a59c9c7ef1169d5ca2be9be1db0e9e66e0dc1c76c8bb81242d2968cdd
+assets/garden_imp_linden_n.png ac959570508cc541cb0d97cb969c8f24b70b9609f9e3b5a74c924053973d8460
+assets/garden_imp_pear.png d9caf9210700a838639ff6e4c24237b35b8ea260c5158faa53c5d49169919679
+assets/garden_imp_pear_n.png 3b2f0834b7a4246456c782d2cb73f245135f21d91b0cc5e4c3cdf48ed652bdff
+assets/garden_imp_cypress.png 67d631cc6165789b2065fa7f0bd1da6fb8143e40ae6e367741fd94ffb65017dd
+assets/garden_imp_cypress_n.png 5d493e8e738bf84f1d30491714ec1d611a8550bb62a5cab9315ffac5e5b87970
+assets/garden_leaves_linden.png 06f7b0366e28bfa8eb42304b5d6002adb3b82ffdbd76d1cf5219a6c4f7fca551
+assets/garden_leaves_pear.png dcec00db59f870245902ebdd69f98efa42e6be4b00bcefda7a23848cb0014b67
+assets/garden_leaves_cypress.png 07bf984d20181a79ff423bd43e01f699273f8b620086244ba14a312df1f3884b
+assets/garden_bark.png f79ae0eb624ccc9ff2dc7f6576e754eff0411e4191fa248e25a46c1366543d9a
+assets/garden_hedge_box.png b6c6add90ff163d3d07b019ffb81a451cce66472e4a1073b0cebf05a6b4a2888
+assets/garden_hedge_box_n.png 49e05c58375a178caa5574533424f61e878df2284802f77e303759209ccf6334
+scripts/garden_crowd.gd 25b5aa2daa00fbf988f758639683c2cd1941cf7a07aed8d4ba31db4e09f26080
+assets/garden_figure_courtier.glb e14c11a84beef0a3faeb109a11571eafdd4adc773b5e98fa153b9a6e438bc944
+assets/garden_figure_lady.glb 733f9a104730f1220d7bedd55130be29bb0ec7c5902567750c0ae4abb742197a
+assets/garden_figure_walker.glb 6a2aff1f8a2548b183f70790cee06d5e004e4235351e95a37887a21aa27eef58
+assets/garden_figure_gardener.glb 0e73084eef802a7d7d1f9dacd83ab49766eee95977f9ba120c6b83da2598cf3d
+
+SHA-256 output files:
+index.pck 867ea15706cdc8c6dc4c56f03d4ae4c9b5a3132bf1809626c90136ad8bf0e374
+index.wasm 99962b29677e42f3ba0258bd90fdc52ad90295954c4473e816ad02cfe5ff1d4f
+index.js e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981
+
+This directory contains a prebuilt binary export. Re-export only for deliberate
+scene changes. A scene re-export leaves the engine files (index.wasm, index.js)
+byte-identical, so git keeps a single copy; each scene revision adds its
+index.pck (29.5 MB here) to the binary history.
+
+2026-10-03 post-merge recording sound correction: v28 preserved the v27
+`scripts/seldon_recording.gd` hash above before this correction. Fresh R or a
+tap could open the particle recording while the viewer was outside gaze range;
+sound synthesis then stopped and the opening shimmer never played. The isolated
+v28 source snapshot and old PCK matched this file's prior hashes. The changed
+script now finishes synthesis during a pending opening, plays the sound once
+when ready, cancels the pending request on close or hall rebuild, and leaves
+the scene's other source and engine files unchanged. Godot 4.6.1 headless
+regression probes on fresh scenes passed for R and tap: in each, sound was not
+ready before activation but was ready and the AudioStreamPlayer3D was playing
+within 60 frames. This verifies playback started in the engine, not audible
+output on a physical phone; on an unusually slow GPU the 27 synthesis steps
+may still delay the cue. The Web package above is the corrected export.
