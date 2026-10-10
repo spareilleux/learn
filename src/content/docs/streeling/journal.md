@@ -28,6 +28,28 @@ Tick a module once studied. Under **Notes**, add a dated entry: what I understoo
 - [ ] [CYB-001 · Viable System Model Mapping to AI Governance](../cybernetics/cyb-001-vsm-ai-governance-mapping/) <!-- cyb-001-vsm-ai-governance-mapping -->
 - [ ] [CYB-002 · Active Dampening Mechanisms for Cross-Repo Oscillation Control](../cybernetics/cyb-002-active-dampening-cross-repo-oscillation/) <!-- cyb-002-active-dampening-cross-repo-oscillation -->
 - [ ] [CYB-003 · Measuring the Variety Ratio Quantitatively](../cybernetics/cyb-003-measuring-variety-ratio-quantitatively/) <!-- cyb-003-measuring-variety-ratio-quantitatively -->
+- [ ] [CYB-004 — Open and Closed Loops: Find the Return Path](../cybernetics/cyb-004-open-and-closed-loops/) <!-- cyb-004-open-and-closed-loops -->
+- [ ] [CYB-005 — Measured Signal and Setpoint: Make Error Meaningful](../cybernetics/cyb-005-measured-signal-and-setpoint/) <!-- cyb-005-measured-signal-and-setpoint -->
+- [ ] [CYB-006 — Feedback Delay: Correct the State You Actually Observed](../cybernetics/cyb-006-feedback-delay/) <!-- cyb-006-feedback-delay -->
+- [ ] [CYB-007 — Hysteresis: Remember Which Threshold Was Crossed](../cybernetics/cyb-007-hysteresis/) <!-- cyb-007-hysteresis -->
+- [ ] [CYB-008 — Deadband: Spend Corrections Outside a Defined Tolerance](../cybernetics/cyb-008-deadband/) <!-- cyb-008-deadband -->
+- [ ] [CYB-009 — Rate Limits and Backoff: Two Different Clocks](../cybernetics/cyb-009-rate-limit-and-backoff/) <!-- cyb-009-rate-limit-and-backoff -->
+- [ ] [CYB-010 — Observable Stop: Establishing Quiescence Without Guessing](../cybernetics/cyb-010-observable-stop/) <!-- cyb-010-observable-stop -->
+- [ ] [CYB-011 — Lane Transition Graphs: Legal Paths and Stale Events](../cybernetics/cyb-011-lane-transition-graph/) <!-- cyb-011-lane-transition-graph -->
+- [ ] [CYB-012 — Detecting Oscillation Without Calling Every Reversal Unstable](../cybernetics/cyb-012-oscillation-detection/) <!-- cyb-012-oscillation-detection -->
+- [ ] [CYB-013 — Circuit Breakers and a Bounded Recovery Probe](../cybernetics/cyb-013-circuit-breaker-probe-budget/) <!-- cyb-013-circuit-breaker-probe-budget -->
+- [ ] [CYB-014 — Saturation, Queues and Conservation of Work](../cybernetics/cyb-014-saturation-queue-conservation/) <!-- cyb-014-saturation-queue-conservation -->
+- [ ] [CYB-015 — Failure Recovery and Logical Operation Identity](../cybernetics/cyb-015-failure-recovery-logical-identity/) <!-- cyb-015-failure-recovery-logical-identity -->
+- [ ] [CYB-016 — Verify an Observed Petri Transition](../cybernetics/cyb-016-observed-petri-transition/) <!-- cyb-016-observed-petri-transition -->
+- [ ] [CYB-017 — CYB-017: Local Versus Global Stability](../cybernetics/cyb-017-local-versus-global-stability/) <!-- cyb-017-local-versus-global-stability -->
+- [ ] [CYB-018 — CYB-018: Responding to Known Disturbances](../cybernetics/cyb-018-responding-to-known-disturbances/) <!-- cyb-018-responding-to-known-disturbances -->
+- [ ] [CYB-019 — CYB-019: Cross-Repository Coupling](../cybernetics/cyb-019-cross-repository-coupling/) <!-- cyb-019-cross-repository-coupling -->
+- [ ] [CYB-020 — CYB-020: Central Versus Recursive Control](../cybernetics/cyb-020-central-versus-recursive-control/) <!-- cyb-020-central-versus-recursive-control -->
+- [ ] [CYB-021 — Iteration Budgets: Admit the Next Action Before Executing It](../cybernetics/cyb-021-iteration-budget-admission/) <!-- cyb-021-iteration-budget-admission -->
+- [ ] [CYB-022 — External Progress: Measure Improvement Without Moving the Target](../cybernetics/cyb-022-external-progress-measurement/) <!-- cyb-022-external-progress-measurement -->
+- [ ] [CYB-023 — Receipt Chains: Connect a Request to the Artifact Actually Verified](../cybernetics/cyb-023-receipt-chain-verification/) <!-- cyb-023-receipt-chain-verification -->
+- [ ] [CYB-024 — Auditing an Agentic Audio Loop Without Inventing Listening Evidence](../cybernetics/cyb-024-agentic-audio-loop-audit/) <!-- cyb-024-agentic-audio-loop-audit -->
+- [ ] [CYB-025 — Stable Coordination Under Disturbance: An Evidence Capstone](../cybernetics/cyb-025-stable-coordination-disturbance-capstone/) <!-- cyb-025-stable-coordination-disturbance-capstone -->
 
 ### Futurology
 
@@ -269,3 +291,11 @@ Synced from Demerzel at [`0f7a5fd`](https://github.com/GuitarAlchemist/Demerzel/
 Nothing in it was run here.
 
 - **It has not been studied here,** so its checkbox above stays empty.
+
+## 2026-10-07 - Cybernetics CYB-004 through CYB-025: English import candidate
+
+Prepared from [Demerzel `5d6dcb9`](https://github.com/GuitarAlchemist/Demerzel/commit/5d6dcb9077120db2f50235e7bbe3db8f34e2f2de), [source PR #1195](https://github.com/GuitarAlchemist/Demerzel/pull/1195). The candidate adds 22 English modules, bringing the local source catalogue from 66 to 88 modules and Cybernetics from three to 25. French and Spanish translations of this batch are pending; their journal entries link to the English fallback and are labelled accordingly.
+
+Independent authoring review accepted 22 manuscripts in the local English scope. A separate integration review checked 41 prerequisite edges, 18 runnable command paths and 22 offline-solution links. Five standard-library scripts reran 22 synthetic experiments with positive and negative controls, all exit zero. These checks validate the stated fixtures; they do not certify learner understanding, live fleet behavior or the three pre-existing courses.
+
+The source cross-model review is blocked by an invalid API key. This entry records preparation and checks, not deployed availability. No learner studied these modules here; every new checkbox remains empty. The existing learning notes and checkbox states are preserved.

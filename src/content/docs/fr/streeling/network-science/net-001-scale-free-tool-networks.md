@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **NET-001** · Science des réseaux pour les écosystèmes d'IA · débutant · 25 minutes
 
-Généré par le département *Science des réseaux* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/0f7a5fd110acfc4835776d38ab1a115533467d34/state/streeling/courses/network-science/fr/net-001-scale-free-tool-networks.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Science des réseaux* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/5d6dcb9077120db2f50235e7bbe3db8f34e2f2de/state/streeling/courses/network-science/fr/net-001-scale-free-tool-networks.fr.md) · [Mon journal](../../journal/)
 :::
 
 > **Département de science des réseaux** | Stade : Nigredo (Débutant) | Durée : 25 minutes
