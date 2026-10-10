@@ -1598,6 +1598,85 @@ same scripts, (91, 68, 73) against the old steel's copper (176, 111, 54). The
 TARS, curio, drone and cinema runs passed. --check-only and --selftest passed
 on the three scripts in the prototype and in the DLSS copy (observatory-dlss).
 
+Version 41, exported 2026-10-07 01:20:58 UTC, brings ga-a0's garden work and
+the steel box rebuilt in Blender. The orange trees on the terrace stand in
+Versailles boxes made in Blender (artpass/gardens/blender/tub_kit.py,
+assets/garden_tub_wood.obj and assets/garden_tub_iron.obj), painted panels
+between iron corner posts with a ball on each, in place of plain 0.8 m cubes.
+At a mount with the quality settled at level 3 or better, scripts/segway.gd
+draws the tour's 14 views once in a small viewport with the scooter standing,
+so that their shaders compile there and not while riding. The crowd walks with
+a stance and a swing, its feet planted on the ground instead of sliding
+(scripts/garden_crowd.gd, assets/garden_plant.gdshader). In the maze, the
+lanterns light the hedges near them, and the walk in round pools that the
+hedges stop (scripts/palace_gardens.gd, assets/garden_plant.gdshader,
+assets/palace_glow.gdshader). The help now comes after the buttons
+(scripts/touch_controls.gd): while scripts/quality.gd halved the canvas, it
+lay over the curio wheel's button and took its tap, and the drone did not take
+off on a phone. The steel box was rebuilt in Blender
+(artpass/blender/steel_portal_gaia.py, assets/steel_portal_gaia.glb): the
+sheet folded round each corner instead of round rods, slimmer seam bands, 808
+rivets of 22 mm each a little off its line and of its size, with 12 hex bolts
+and 4 missing, a stepped cornice and plinth, three hinges, a brass lever
+handle with a keyhole, a conduit and a junction box; its brushed steel is
+darker and more worn (scripts/steel_cube.gd, steel preset 3, and
+assets/steel_brushed.gdshader), with values of its own under the web build's
+renderer, where that preset alone turned the box's side black. The earlier
+shell, assets/steel_portal.glb, and its two images stay in the project as a
+fallback and out of the pack (export_presets.cfg, exclude_filter). Every other
+script is version 40's, scripts/observatory.gd and scripts/quality.gd version
+28's.
+index.pck is now 32,076,728 bytes, 2,542,664 more than version 40's;
+index.html changes only that size, and index.wasm and index.js are unchanged.
+In headless Chrome 154.0.8037.99 on this machine (RTX 5080), the build served
+from 127.0.0.1:8793 by gzip_server.py (artpass/publish/webtests-pub33.sh,
+written for this version since version 40's webtests.sh was not on this disk;
+one line per test in web-pub33.txt, each test's output in web-pub33/), on
+2026-10-07, all six tests reported version 41 (built 1791336058) and passed: -
+the troupe (artpass/tarsdance/troupe-web.mjs, web-v41/troupe/): upright and
+sideways, each number ended on its own 18.0 s after the call with its 279 and
+413 landings; frames 16.7 ms median, 17 ms at most, none over 50 ms, in every
+window measured; no exception, no console error; - the wheel (curio-web.mjs,
+curio-web-v41/): upright and sideways, 5 touches each, no exception, no
+console error. Set beside version 40's (same steps), the box reads darker and
+greyer, as on the native shots (artpass/box/NOTES.md, "Gaia box"); - the drone
+on a computer and on a phone (drone-web.mjs, drone-web-v41-desktop/,
+drone-web-v41-phone/): as version 40, with headless Chrome's same three
+pointer-lock WrongDocumentErrors on the computer; - the sound
+(artpass/audio/audio-web.mjs, web-v41/): the context suspended before any
+touch or key and running after the first, 213 starts while the TARS walk, 179
+home, 13 for the drone, as version 40 (178 home); - the hums
+(artpass/audio/loop-web.mjs, web-loop-v41/, loop_check.py): the drone took off
+on the phone and hummed 17.8 s without a silence (16 starts, median -29.5
+dBFS), where on version 40 it did not take off in 5 runs of 5: the help after
+the buttons (touch_controls.gd, artpass/touch/helpfirst/) no longer takes the
+wheel's tap. The lift's hum keeps its known silence at 15 s, 1.55 s long (1.7
+to 2.3 s on versions 39 and 40, 6 ms on version 35; to verify). One run each:
+the drone's take-off on the phone is one run of one, to repeat before calling
+it fixed.
+Native runs against this build's own project
+(artpass/publish/regress-pub33.sh, artpass/publish/regress-pub33/), with stock
+Godot 4.6.1's console build rather than the Mono build the script names by
+default: version 40's whole list of 78 runs, kept whole because
+scripts/touch_controls.gd is a hub. 77 passed; motion_bay14 missed the same
+point with the same numbers as since version 31, and no other run changed a
+check (artpass/publish/compare_regress.py against regress-pub32/).
+troupetest.gd gave version 40's numbers under Compatibility and Forward+ and
+unpinned at 10 frames a second. The curio test's ankh brought the TARS home in
+18.5 s, where version 40's run had taken 13.1 s; run again by turns on both
+builds (curio-rerun-pub33.sh), each took 9.0 s twice, with the same throw of
+the duck: the test's spread from run to run, not the box. The pack alone
+(--main-pack out/index.pck -- --selftest) loads the gaia shell: 25 meshes,
+steel preset 3, its keys at 2.5 under Compatibility, nothing missing. The maze
+at quality 0 under Compatibility (artpass/gardens/hedges/hedgeshots.gd on this
+build, shots-v41-q0/): the hedge beside each lantern takes its warm light, the
+walk's pools stop at the hedges, and from above the lit way shows down the
+corridors instead of pale squares; its four views drew in 0.55 to 0.67 ms of
+GPU time, and the lantern map took 46.4 ms once at the gardens' build. Another
+session's Godot windows (the DLSS fork, on another project) ran during part of
+the regression, so its GPU times are rough. --check-only and --selftest passed
+on every changed script in the build.
+
 Native Compatibility GPU time, RTX 5080, 1600x900, 240 frames per view: 0.44 to
 0.52 ms for the previous web scene, 0.64 to 1.44 ms with the detail pass; up to
 1.55 million primitives in the overview, against 0.46 million before. With the
@@ -1609,14 +1688,14 @@ by about 15 percent.
 SHA-256 source inputs of the exported project:
 project.godot eb7d53597517c711d564943e467cce2926699c2422b073079737325c3400692e
 main.tscn fb6245c960d3625ca05920116c58351d9dbeb255beae59175d89c06d47049564
-export_presets.cfg 099f064dbbd435c1c30456d1efb518d924ad38a7e2339ca5a4fc484388d2f9f1
+export_presets.cfg 38e6c4584777b1bf5beb1499a046899f6c0ba192972678167b953cb774760cdf
 scripts/fly_camera.gd 2e5cdd15ca7bdcfa30ec129e354a309f3ff7296f6fbf54ac144984ed9aa9f8e7
 scripts/capture.gd 52ea2b5e40db2f1f4cdbd7658074ef60bd117e1f4110c1b8995590a4196748d0
 scripts/observatory.gd cdbab5d96d8679c893602ca4e67064a899982642f58e4c655975e0f2e97acbec
 scripts/course_library.gd 56de4cb69fa6c3c8402a2928e09ef84d09a2d9e22c610c29609ad9d4013a2651
-scripts/steel_cube.gd f28e71fffcd151663bc9a98b3c135cc7b805490e8298d3cf01029455c973f94c
+scripts/steel_cube.gd e580df5ce6262f4f15b992cde21abb42f553f13029f54cc6bc489f6ee4bbf5ac
 scripts/seldon_statue.gd c8785f079f648ea50694055fe87d26bb56e0ee2ab129251399d88bd13d0030b4
-scripts/touch_controls.gd 5c76054696f7addf348c58e5e9b42b8cfc7ddf5f97efecbfcbeb44d3ba014ebd
+scripts/touch_controls.gd f4d4076608a731c8d0e58c6eea6ecb5a981655279589b45ab8ff34a666fa394c
 scripts/walk_physics.gd 1f505c12f81341ed1ed1da3b372aa17409b6f04b2ab5a0801623da53c4617037
 scripts/view_fit.gd f574c7949a5b324f91f062df9982366c123271804069b507206f88ad7062fe4c
 scripts/view_move.gd 558a4059815cb3a8a202d205d8cfada17653fb533e7e056bfe9e8a434dac0431
@@ -1635,7 +1714,7 @@ assets/glass_elven_tree.png 344edc31aa4fc0cff546272d7afa287fe4195809d4b1eec901df
 assets/glass_alembic.png bdf7fe6eaf71abf1d062c6ef2bbe1f77d7eb20e6b834937fd79f92582e5e5d9a
 assets/book_spines.gdshader eb0641b8a3ce571d3a0644e7da28ec9b407d8e5d4bb3338c7b951bf9638b0d57
 assets/stone_relief.gdshader 82f26919a4a0a2742eee8ddbef9b2be09ee9a4df8273fe6845d9dd919cfe7958
-assets/steel_brushed.gdshader cff19989eb4793ddb5dc001fd3d25473080c51d250a4a5cfc168762b435ba8fd
+assets/steel_brushed.gdshader e3522bbeb3f4e73cf5dd9120cd49f782f3d8a22c7582e55a158b51242bd5a259
 assets/stained_glass.gdshader 1366183601743cfb42791f5efd38e4b26e6c6d10eb8ce1ac4e9e8c7a3db6d77a
 assets/floor_paving.gdshader 23187f024d276b897635ee0cc3e543c5852c4a9b5175cbe56ec59f5a998dc0e7
 assets/statue_marble.gdshader ec3f14f662487f3dae14a398fe91ea7183d88214bd2bf266359da89d79b94452
@@ -1669,7 +1748,7 @@ assets/fresco_panel.gdshader e9c20421cf254119e9d85da22a70bb8a965cee0be524f5c95b2
 assets/fresco_dust.gdshader 9d63b02079689cd0205a9d469c743645d4fac1ccfff21a3d0326f36a3062341c
 assets/fresco_atlas.png cccc2917f794f42517ee001392802ec6828acc747f585018e49349474b1638fc
 assets/fresco_motion.png aa7148be2c28917ddae5d92b7a155c46fe024460c67e919106be23782fdf7822
-scripts/build_info.gd 449aac03a586a62e5cc267bbd10978ae3f96a4406b540cb6ad04c53dfa4adbc1
+scripts/build_info.gd edd2df5124328310132aa0f0b78d3ba4cfd392df1ae14bedb0aa0339efddb6d8
 scripts/sfx_takes.gd 069f573898d4c4ad48fde9f1f592dba0974433b1881d7ed045d6797c3c3a0ac6
 assets/sfx/curio_wheel-beep.wav a1d999098afbd222622a6c4625ee16bb9788059c6fe37901067d9cd239f5ec8c
 assets/sfx/curio_wheel-chime.wav 6b580b1e57194c1f84183044c367bcab9d07e3d4c876da3dee5736ba78298c9e
@@ -1694,14 +1773,14 @@ scripts/tars_ensemble.gd b16f31ba0bb92eb86b2296a64ff476e59cb3db11a6f800b19db402e
 assets/tars_ensemble_tracks.tres 6c2be9a6fc350c02f8dd19e6a768ed911d11ebd741d4c5939bb585a84171b272
 assets/tars_ensemble_jig_tracks.tres d7604ba2a5dc3e61fb29441d145d0d98703193c516d429a754e9c0e4949383a0
 scripts/web_loop.gd cd89961d3e7e5d8275d67ead034eb2184587810dc710316c5377f58a16e35cbb
-scripts/palace_gardens.gd 3296c1609b7a0f4a957c123266ad43855fb96e2f0fe6a25ce0efc702077bcb93
-scripts/segway.gd 12dea63276177e70af0f29b2e9e786571e7fcb756070958624d71bd8cb7f9941
+scripts/palace_gardens.gd d580f03f93493ffeb96f9426a5e9647730036be8afb0a0f0c8dee64e248e26dd
+scripts/segway.gd 5745cb41098325ec424a084f262bc5be5386b100388eefb6d01bd2b256b8d9aa
 assets/hall_env.gdshaderinc f4ee2ad1a4b5af0839924033507d492b59ce003baad50b35f9afc4f645b3bae5
 assets/bay_glass.gdshader 5cf98fa61a8a189d25abf4e990d533dc7bb7c696d6a761625f555b4f13ac9fd5
 assets/garden_card.gdshader 42c1f7e2b2e104a52cd4b31d04e18b93176cfdc04d22c55a3011f5a22b7f6da5
 assets/garden_impostor.gdshader cdd31ff1d8ec84e8cb3beb5d30169770f6791ac4f2385224e53ab9aae8b23016
 assets/palace_garden.gdshader 2784830b9e7a746aaabc4dd60dc5281abfdeadf01ca696c66df3b2b05dcbe287
-assets/palace_glow.gdshader 8f7c3b7a5acee6a7f6f086602f3cad2ebf5a785983fe886371cbfb9b7a05d404
+assets/palace_glow.gdshader 509e040a423020e73d643b15268ae8b804655ba513ebf6a0283281b54f3557f0
 assets/garden_baluster.obj 8fe3a8973ab1eb7779193b8d3062030b8ef0457673a3826dbb376a4d6ed27247
 assets/garden_baluster_low.obj 64d36f292626f7761ae876257a97abb255655e5f3274bb7859b4e70d6797cff7
 assets/garden_pedestal.obj 9be8ab11e4b98d71150ea87a33a9000a394751619850ec07c12813e3f9265b2e
@@ -1723,7 +1802,7 @@ assets/garden_city_738.png 4df4a1903fe8f7ab1f6d5a44a66e658994b38123dea29c2da9ee4
 assets/garden_palace.png d5b13df8f900e0b529dd7a5de89895e0c99603123c64de9a32d91c47e357899e
 assets/garden_stone.png 432e7a4a676e96916043f95eebc82dbfd0971c3655cd9a8011f20b7156f90389
 assets/garden_paving.png 81afdc39127356a22719dc103000c5d7bfce63ce3054361a7fa9966f9762d414
-assets/garden_plant.gdshader c410c3b13c52cef0af99c66fcf21ded7c4995ed52c6bc83bebf0f4acd2c9e6af
+assets/garden_plant.gdshader 7b8b76cecfbc6a4632f1651535498caea9b2ba10dcecb29cd7c97979434f014a
 assets/garden_tree_linden1.glb 342e6ab53b7cc2cf00b4b01449d69285e6cf5daf170b2a5388432dd430071d88
 assets/garden_tree_linden2.glb c89718e972c32dd2203b536bbb9e68781966351ccc297a123f6218c046934625
 assets/garden_tree_linden3.glb 2970958c39fc0322097fdef4bb1e5202dae2c4970bd4b359bb721f477d13463b
@@ -1750,21 +1829,26 @@ assets/garden_leaves_cypress.png 07bf984d20181a79ff423bd43e01f699273f8b620086244
 assets/garden_bark.png f79ae0eb624ccc9ff2dc7f6576e754eff0411e4191fa248e25a46c1366543d9a
 assets/garden_hedge_box.png b6c6add90ff163d3d07b019ffb81a451cce66472e4a1073b0cebf05a6b4a2888
 assets/garden_hedge_box_n.png 49e05c58375a178caa5574533424f61e878df2284802f77e303759209ccf6334
-scripts/garden_crowd.gd 25b5aa2daa00fbf988f758639683c2cd1941cf7a07aed8d4ba31db4e09f26080
+scripts/garden_crowd.gd 1f897886e097550dbfbc6dbfd6ccb492d276c315d6de9961e220999a527da993
 assets/garden_figure_courtier.glb e14c11a84beef0a3faeb109a11571eafdd4adc773b5e98fa153b9a6e438bc944
 assets/garden_figure_lady.glb 733f9a104730f1220d7bedd55130be29bb0ec7c5902567750c0ae4abb742197a
 assets/garden_figure_walker.glb 6a2aff1f8a2548b183f70790cee06d5e004e4235351e95a37887a21aa27eef58
 assets/garden_figure_gardener.glb 0e73084eef802a7d7d1f9dacd83ab49766eee95977f9ba120c6b83da2598cf3d
+assets/garden_tub_wood.obj 42b87c2c1456c02b2a7c2a4d6225714e11383a9fc30a1ac48f128a6241bc165a
+assets/garden_tub_iron.obj 1a46aaa8a55ed6c5bbf28711160fb4b81b2b84464fe929443a9ba2c7e90b1144
+assets/steel_portal_gaia.glb da44282f8f18247d9af8013840d5af3e9a79c2b3537442f1d53f281356aea1fa
+assets/steel_portal_gaia_steel_brushed_metalrough.png 5ff2536465d123be778e64d362517af8e02a2a0cc5793b84955b25be33971496
+assets/steel_portal_gaia_steel_brushed_normal.png 37132094bf4d642dd486743dbd57ff2489afeb6f9e2aeaffe8f6c3f42395705c
 
 SHA-256 output files:
-index.pck 867ea15706cdc8c6dc4c56f03d4ae4c9b5a3132bf1809626c90136ad8bf0e374
+index.pck 758e12e3c158bab4b4223e2c18b92dd1e452ef45600c99adad38230b8922b11f
 index.wasm 99962b29677e42f3ba0258bd90fdc52ad90295954c4473e816ad02cfe5ff1d4f
 index.js e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981
 
 This directory contains a prebuilt binary export. Re-export only for deliberate
 scene changes. A scene re-export leaves the engine files (index.wasm, index.js)
 byte-identical, so git keeps a single copy; each scene revision adds its
-index.pck (29.5 MB here) to the binary history.
+index.pck (32.1 MB here) to the binary history.
 
 2026-10-03 post-merge recording sound correction: v28 preserved the v27
 `scripts/seldon_recording.gd` hash above before this correction. Fresh R or a
