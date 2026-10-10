@@ -75,6 +75,33 @@ export function sectionKey(pathname: string, hash: string): string {
 
 const isText = (value: unknown): value is string => typeof value === 'string' && value.length <= 100_000;
 
+/** Imported links must identify a page inside this site's base, without URL normalization or traversal. */
+const isPagePath = (value: unknown): value is string => {
+	if (!isText(value) || !value.startsWith(`${BASE}/`) || /[\u0000-\u0020\u007f\\?#:]/.test(value)) return false;
+	try {
+		const parts = value.slice(BASE.length + 1).split('/');
+		if (parts.some((part, index) => {
+			if (!part) return index !== parts.length - 1;
+			const decoded = decodeURIComponent(part);
+			return decoded === '.' || decoded === '..' || /[\u0000-\u0020\u007f/\\%?#:]/.test(decoded);
+		})) return false;
+		const url = new URL(value, 'https://reader.invalid');
+		return url.origin === 'https://reader.invalid' && url.pathname === value;
+	} catch {
+		return false;
+	}
+};
+
+const isHeadingId = (value: unknown): value is string => {
+	if (!isText(value) || /[\u0000-\u0020\u007f#]/.test(value)) return false;
+	try {
+		encodeURIComponent(value);
+		return true;
+	} catch {
+		return false;
+	}
+};
+
 /** Keeps only well-formed entries, so an edited or foreign file can't break the pages */
 export function sanitize(input: unknown): ReaderData | null {
 	if (!input || typeof input !== 'object') return null;
@@ -82,11 +109,13 @@ export function sanitize(input: unknown): ReaderData | null {
 	if ((bookmarks !== undefined && typeof bookmarks !== 'object') || (notes !== undefined && typeof notes !== 'object')) return null;
 	const data = empty();
 	for (const [key, b] of Object.entries(bookmarks ?? {})) {
-		if (b && isText(b.path) && isText(b.hash) && isText(b.section) && isText(b.page) && isText(b.course) && isText(b.added))
+		if (b && isPagePath(b.path) && isHeadingId(b.hash) &&
+			key === (b.hash ? sectionKey(b.path, b.hash) : splitPath(b.path).key) &&
+			isText(b.section) && isText(b.page) && isText(b.course) && isText(b.added))
 			data.bookmarks[key] = { key, path: b.path, hash: b.hash, section: b.section, page: b.page, course: b.course, added: b.added };
 	}
 	for (const [key, n] of Object.entries(notes ?? {})) {
-		if (n && isText(n.text) && isText(n.path) && isText(n.page) && isText(n.course) && isText(n.updated))
+		if (n && typeof n.text === 'string' && isPagePath(n.path) && key === splitPath(n.path).key && isText(n.page) && isText(n.course) && isText(n.updated))
 			data.notes[key] = { text: n.text, path: n.path, page: n.page, course: n.course, updated: n.updated };
 	}
 	return data;

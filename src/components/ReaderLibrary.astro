@@ -59,7 +59,7 @@ const t = readerStrings(Astro.locals.starlightRoute.lang);
 	};
 
 	// A page bookmark opens the page in the reader's current language; a section one keeps its language and anchor
-	const bookmarkHref = (b: Bookmark) => (b.hash ? `${b.path}#${b.hash}` : localHref(splitPath(b.path).key, locale));
+	const bookmarkHref = (b: Bookmark) => (b.hash ? `${b.path}#${encodeURIComponent(b.hash)}` : localHref(splitPath(b.path).key, locale));
 
 	const render = () => {
 		const data = load();
