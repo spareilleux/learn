@@ -1,6 +1,6 @@
 ---
 title: "Journal"
-description: "Dated progress notes — IX pinned at 490c395, CI data and course checks, nineteen earlier findings and two new API or documentation findings, what agreed, the generated API map, and items to verify."
+description: "Dated progress notes — IX pinned at 490c395, CI data and course checks, nineteen earlier findings, then two from lesson 9 and three from lesson 10, what agreed, the generated API map, and items to verify."
 sidebar:
   order: 99
 ---
@@ -19,13 +19,14 @@ sidebar:
 - [x] Lesson 7: neural networks
 - [x] Lesson 8: optimization
 - [x] Lesson 9: five other reducers, with a hand MDS and independent cross-checks
+- [x] Lesson 10: Markov chains and hidden Markov models, by hand, with IX and with numpy
 - [x] Appendix: the API map, generated from the pinned commit
-- [ ] Lessons 10 to 21
+- [ ] Lessons 11 to 21
 - [x] French and Spanish translations
 
 ## QA
 
-IX is somebody else's library, pinned at `490c395`. The earlier lessons recorded nineteen findings; lesson 9 adds two API or documentation findings. The first column says what a caller would expect. None is filed as an IX issue. Several are defensible choices rather than defects, and the middle column says which.
+IX is somebody else's library, pinned at `490c395`. The earlier lessons recorded nineteen findings; lesson 9 adds two API or documentation findings, and lesson 10 three more. The first column says what a caller would expect. None is filed as an IX issue. Several are defensible choices rather than defects, and the middle column says which.
 
 | Expected | What happens | Where | Measure | Status |
 |---|---|---|---|---|
@@ -50,6 +51,9 @@ IX is somebody else's library, pinned at `490c395`. The earlier lessons recorded
 | `minimize` tells a diverged run apart from one that ran out of iterations | It returns the caller's own starting point, labelled as the best seen, with the same `converged: false` as an ordinary non-convergence | `ix-optimize/gradient.rs` 124-165 | Rosenbrock at rate 0.01 reports `best f 24.200000`, the value at the start | Reproduced, not filed [2026-09-15](#2026-09-15--where-ix-differs-continued) |
 | `TSNE::transform(new_rows)` places those rows on the fitted map | The argument is ignored: it returns the stored `12 × 2` embedding even for a `1 × 1` input | [`tsne.rs` 249-253](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-unsupervised/src/tsne.rs#L249-L253) | Output exactly equals the original embedding | Reproduced, not filed [2026-09-24](#2026-09-24--five-reducers-three-inputs) |
 | The t-SNE module's Barnes-Hut header describes its implementation | `compute_q` and the gradient each loop over all point pairs | [`tsne.rs` 160-178, 205-217](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-unsupervised/src/tsne.rs#L160-L217) | Quadratic loops visible in source; scaling not benchmarked | Source-confirmed, not filed [2026-09-24](#2026-09-24--five-reducers-three-inputs) |
+| A mean first-passage time is the mean over all the walks | `mean_first_passage` averages only the walks that reach the target within `max_steps`, and reports neither that any were dropped nor how many | [`markov.rs` 94-131](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-graph/src/markov.rs#L94-L131) | From bull to stagnant, exact 31.43: 31.650 at `max_steps = 1000`, 9.836 at 20, 3.030 at 5 | Reproduced, not filed [2026-09-29](#2026-09-29--markov-chains-and-a-dishonest-casino) |
+| `backward` returns log-probabilities, as its comment says | It returns β divided by the forward scale factors: positive numbers, not logarithms | [`hmm.rs` 196-197](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-graph/src/hmm.rs#L196-L197) | Every entry of `backward` on ten rolls is positive | Reproduced, not filed [2026-09-29](#2026-09-29--markov-chains-and-a-dishonest-casino) |
+| An observation outside the alphabet is an error | `new` validates the three tables but not the observations; `forward` indexes past the emission table | [`hmm.rs` 117, 133](https://github.com/GuitarAlchemist/ix/blob/490c39533627d296bf9f8f050e6fafc14d7a20c2/crates/ix-graph/src/hmm.rs#L117-L133) | `forward(&[0, 6])` on a model with six symbols panics | Reproduced, not filed [2026-09-29](#2026-09-29--markov-chains-and-a-dishonest-casino) |
 
 ## Experiments
 
@@ -175,6 +179,26 @@ Worth recording next to the findings, because the lessons so far have mostly fou
 - Rank-two NMF reconstructed the raw timing matrix at MSE `0.505` seconds squared per cell and rejected standardized negative entries. LDA produced two finite axes for three OS labels, with **no held-out classification claim**. Seeded t-SNE produced a finite `12 × 2` arrangement but returned exactly the same arrangement when `transform` received an unrelated `1 × 1` input.
 - The numpy/scikit-learn 1.8.0 cross-check reproduced the square's distances, the ring-axis outcome, finite NMF reconstruction, LDA's two axes, and a finite t-SNE embedding. These are invariant checks, not claims of equal NMF factors or t-SNE coordinates across implementations. The hypotheses were not recorded before this run, so these are exploratory findings, not preregistered confirmations. Three-OS CI for lesson 9 is still pending.
 
+## 2026-09-29 — Markov chains and a dishonest casino
+
+- [`l10_sequences.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/examples/l10_sequences.rs) ran on Windows with the pinned IX commit; [`sequence.rs`](https://github.com/spareilleux/learn/blob/main/code/machine-learning-ix/src/sequence.rs) holds the hand versions. The three-state chain's stationary distribution is (0.6250, 0.3125, 0.0625) from the linear system and from IX's power iteration, within `1e-12`. The exact mean first-passage times to the third state are 31.4286, 28.5714 and 16, which is 1/π₂ as Kac's lemma says.
+- IX's `mean_first_passage` with 20,000 walks gave 31.650 from the first state at `max_steps = 1000`, 9.836 at 20 and 3.030 at 5. It averages only the walks that arrived (finding 22).
+- The course's xorshift generator (seed 10) drew 1,000 rolls of the dishonest casino.
+  - **Forward:** in probability space, the recursion gave 8.832e-233 at 300 rolls and 0 at 1,000. The hand log-space forward and IX's `forward` both gave ln P = −1761.7121.
+  - **Decoding:** the hand Viterbi path equals IX's. It matches the true dice on 86.9% of the rolls, with 6 loaded runs. Posterior decoding matches on 87.6%, with 16 runs. The truth has 23.
+  - **A model built for the purpose:** `map_estimate` returns [0, 1], a path of probability 0, while Viterbi returns [0, 2], with probability 0.4.
+- **Baum–Welch** ran from a wrong start, for exactly k = 1 to 10 iterations with `tol = 0`.
+  - The likelihood never decreased, from −1775.9589 to −1758.2618.
+  - From the sixth iteration on, the likelihood exceeds that of the true parameters, while the parameters stay far from them: stay fair 0.8505, stay loaded 0.8271, P(six | loaded) 0.4060.
+- **The numpy 2.4.2 cross-check** replayed the generator. It reproduced:
+  - the chain's exact answers;
+  - the casino's 259 loaded rolls in 23 runs, with 239 sixes;
+  - ln P = −1761.7121;
+  - both decoders' agreements and run counts;
+  - the three-state model's two answers.
+
+  No hypothesis was written before this run: these are comparisons with hand implementations and with numpy, not preregistered experiments. CI run [36645993165](https://github.com/spareilleux/learn/actions/runs/36645993165) passed on Windows, Linux and macOS: every line of lesson 10, log-likelihoods included, matched `expected/` byte for byte, and the Linux cross-check matched `expected/crosscheck.txt`.
+
 ## To verify
 
 - The `ix_ml_pipeline` tool end to end: the scaling order of finding 1, the task inference of finding 2 on a CSV file, and the `All rows contain NaN values` error for a file with a text column. All three are read in the code, not run.
@@ -191,3 +215,4 @@ Worth recording next to the findings, because the lessons so far have mostly fou
 - The API map counts `pub` declarations, not reachable ones; how far apart the two numbers are is unmeasured.
 - The values printed by a direct `println!("{:.6}")` rather than through `fmt_vec` — lesson 8's `intercept -0.000000` is one — carry the same signed-zero hazard and are not normalized. That one agreed on the three systems in run 35039180659; the others have not been enumerated.
 - Repeat lesson 9's numeric snapshots on Linux and macOS CI; check whether IX's NMF MSE and the RBF fourth-axis gap round identically there. Benchmark t-SNE's scaling separately before assigning a runtime cost.
+- Whether IX's `baum_welch`, from several starts and on longer sequences, recovers the casino's parameters; lesson 10 ran one start on 1,000 rolls.

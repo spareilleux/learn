@@ -82,7 +82,7 @@ Lessons 1 to 9 are written. The rest is the plan, one lesson per family of algor
 | 7 | [Neural networks, and finite differences as the judge](07-neural-networks/) | `ix-nn` | — |
 | 8 | [Optimization: descent, momentum, Adam, and searches without a gradient](08-optimization/) | `ix-optimize`, `ix-math` | — |
 | 9 | [The other reducers: MDS, kernel PCA, NMF, LDA, t-SNE](09-other-reducers/) | `ix-unsupervised` | — |
-| 10 | Sequences: Markov chains, hidden Markov models and Viterbi | `ix-graph` | — |
+| 10 | [Sequences: Markov chains, hidden Markov models and Viterbi](10-sequences/) | `ix-graph` | — |
 | 11 | Counting without counting: Bloom filters, HyperLogLog, count-min, cuckoo | `ix-probabilistic` | — |
 | 12 | Automatic differentiation: the Wengert tape | `ix-autograd` | — |
 | 13 | Attention, layer normalization and a transformer block | `ix-nn` | — |
