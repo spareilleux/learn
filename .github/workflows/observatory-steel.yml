@@ -1,0 +1,27 @@
+name: Observatory steel snapshot
+
+on:
+  pull_request:
+    paths: ['code/observatory/steel-gaia/**', '.github/workflows/observatory-steel.yml']
+  push:
+    branches: [main]
+    paths: ['code/observatory/steel-gaia/**', '.github/workflows/observatory-steel.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  snapshot:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Verify hashes, GLB structure and historical evidence without rendering
+        run: python -B code/observatory/steel-gaia/verify_snapshot.py
