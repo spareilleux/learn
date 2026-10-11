@@ -42,7 +42,7 @@ Le côté programmation reste familier : objets valeur, records, champs de bits,
 
 ## Plan
 
-Le cours suit les notions qu'utilisent le code, les fichiers de configuration et les outils MCP de GA, de la note isolée aux transformations néo-riemanniennes. Les leçons 1 à 15 sont écrites ; les autres sont le plan, et leur colonne GA nomme les types, fichiers et outils que chacune lira.
+Le cours suit les notions qu'utilisent le code, les fichiers de configuration et les outils MCP de GA, de la note isolée aux transformations néo-riemanniennes. Les leçons 1 à 16 sont écrites ; les autres sont le plan, et leur colonne GA nomme les types, fichiers et outils que chacune lira.
 
 | # | Leçon | Théorie | Dans GA | Si tu écris du C# |
 |---|---|---|---|---|
@@ -61,7 +61,7 @@ Le cours suit les notions qu'utilisent le code, les fichiers de configuration et
 | 13 | [Les accords étendus et altérés](13-extended-and-altered-chords/) | neuvièmes, onzièmes, treizièmes, altérations, structures supérieures, polyaccords | `Chord.FromSymbol`, `ChordSymbolParser`, `BasicChordExtensionsService`, `ChordAlterationService`, `ChordTemplateFactory`, `ExtendedChords.yaml`, `ga_polychord` | parseurs à parties optionnelles |
 | 14 | [Voicings de guitare : shell, drop 2 et drop 3](14-guitar-voicings/) | voicings shell, voicings serrés et drop, notes guides | `VoicingGenerator`, `VoicingHarmonicAnalyzer`, `VoicingAnalyzer`, `VoicingFilters`, `ChordClassificationEngine`, `ChordProgressions.yaml` | génération combinatoire |
 | 15 | [Le manche : CAGED, doigtés et jouabilité](15-the-fretboard/) | formes CAGED, géométrie du manche, extension et effort, accordages ouverts | `FretboardGeometry`, `PhysicalFretboardCalculator`, `PhysicalCostService`, `VoicingPhysicalAnalyzer`, `BiomechanicalAnalyzer`, `PlayerProfile`, `Tunings.toml`, `ga_easier_voicings` | fonctions de coût |
-| 16 | Arpèges, théorie accord–gamme et improvisation | arpèges, paires accord–gamme, notes « outside » | `ImprovisationConcepts.yaml`, `OutsideNotesSkill`, `ga_arpeggio_suggestions` | tables de correspondance |
+| 16 | [Arpèges, théorie accord–gamme et improvisation](16-arpeggios-and-improvisation/) | arpèges, paires accord–gamme, notes « outside » | `ga_arpeggio_suggestions`, `ImprovisationSkill`, `OutsideNotesSkill`, `ImprovisationConcepts.yaml` | tables de correspondance |
 | 17 | Le Tonnetz et les transformations néo-riemanniennes | P, L et R, le Tonnetz, médiantes chromatiques | `NeoRiemannian.yaml`, `NeoRiemannianConfig.fs` | graphes de transformations |
 | A | [Tous les instruments de Guitar Alchemist](appendix-instruments/) | accordages, chœurs, cordes rentrantes | `Instruments.yaml`, `InstrumentsConfig`, `Tuning` | de la configuration que rien ne lit |
 | B | [La hiérarchie OPTIC](appendix-optic/) | octave, permutation, transposition, inversion, cardinalité | `PitchClassSet`, `TranspositionClass`, `SetClass`, le schéma OPTIC-K de GA | équivalence, quotient après quotient |
@@ -82,7 +82,8 @@ Les modules [Streeling](../streeling/), générés à partir de [GuitarAlchemist
 - [MUS-006 · L'univers des gammes](../streeling/music/mus-006-the-scale-universe/) (leçons 2, 4, 11 et 12) ;
 - [MUS-003 · Comment fonctionne l'harmonie](../streeling/music/mus-003-functional-harmony/) (leçons 5, 6, 7 et 10) et [MUS-005 · L'harmonie jazz à la guitare](../streeling/music/mus-005-jazz-harmony/) (leçons 7, 9, 10, 11, 13 et 14) ;
 - [GTR-001 · La carte du manche](../streeling/guitar-studies/gtr-001-the-fretboard-map/) et [GAA-001 · Votre premier accord](../streeling/guitar-alchemist-academy/gaa-001-your-first-chord/) (leçons 1 et 3), et [GTR-002 · La géométrie du CAGED](../streeling/guitar-studies/gtr-002-caged-geometry/) (leçons 1, 3 et 15) ;
-- [MUS-009 · Accordage et géométrie du manche](../streeling/music/mus-009-tuning-fretboard-geometry/) et [PHY-001 · La science du son de la guitare](../streeling/physics/phy-001-science-of-guitar-sound/) (leçon 15).
+- [MUS-009 · Accordage et géométrie du manche](../streeling/music/mus-009-tuning-fretboard-geometry/) et [PHY-001 · La science du son de la guitare](../streeling/physics/phy-001-science-of-guitar-sound/) (leçon 15) ;
+- [GAA-003 · Fondements de l'improvisation](../streeling/guitar-alchemist-academy/gaa-003-improvisation-foundations/) (leçon 16).
 
 ## Ressources
 
