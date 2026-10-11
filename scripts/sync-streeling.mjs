@@ -87,6 +87,16 @@ const LEVELS = {
 	es: { beginner: 'principiante', intermediate: 'intermedio', advanced: 'avanzado' },
 };
 
+const DURATION_UNITS = {
+	fr: { minute: 'minute', minutes: 'minutes', hour: 'heure', hours: 'heures' },
+	es: { minute: 'minuto', minutes: 'minutos', hour: 'hora', hours: 'horas' },
+};
+
+function localizedDuration(lang, value) {
+	if (typeof value !== 'string') return value;
+	return value.replace(/\b(minutes?|hours?)\b/gi, (unit) => DURATION_UNITS[lang]?.[unit.toLowerCase()] ?? unit);
+}
+
 const T = {
 	en: {
 		overview: 'Overview',
@@ -267,7 +277,7 @@ function cleanOutput(dir) {
 function banner(lang, mod, dept, sourceUrl, moduleIndex) {
 	const t = T[lang];
 	const level = mod.meta.level && (LEVELS[lang]?.[mod.meta.level] ?? mod.meta.level);
-	const facts = [`**${mod.code}**`, mod.meta.course, level, mod.meta.estimated_duration, mod.meta.date]
+	const facts = [`**${mod.code}**`, mod.meta.course, level, localizedDuration(lang, mod.meta.estimated_duration), mod.meta.date]
 		.filter(Boolean)
 		.join(' · ');
 	const lines = [

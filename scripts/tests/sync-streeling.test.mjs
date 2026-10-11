@@ -17,7 +17,7 @@ const DOCS = { en: 'src/content/docs/streeling', fr: 'src/content/docs/fr/streel
 const ENGLISH_ONLY = { fr: '*(en anglais)*', es: '*(en inglés)*' };
 
 const moduleFile = (id, title, prerequisites, body) =>
-	`---\nmodule_id: ${id}\ncourse: Fixture\nlevel: beginner\nprerequisites: [${prerequisites.join(', ')}]\n---\n\n# ${title}\n\n${body}\n`;
+	`---\nmodule_id: ${id}\ncourse: Fixture\nlevel: beginner\nestimated_duration: "35 minutes"\nprerequisites: [${prerequisites.join(', ')}]\n---\n\n# ${title}\n\n${body}\n`;
 
 // alp-001 exists in the three languages, alp-002 in English only, bet-001 in English and French.
 const FIXTURE = {
@@ -137,5 +137,14 @@ test('translations are neither invented nor hidden', () => {
 test('hand-written journals are left alone', () => {
 	for (const lang of LANGS) {
 		assert.equal(fs.readFileSync(path.join(localeRoot('kept', lang), 'journal.md'), 'utf8'), `hand-written ${lang} journal\n`);
+	}
+});
+
+test('generated course banners localize the duration unit', () => {
+	for (const site of SITES) {
+		for (const [lang, duration] of Object.entries({ en: '35 minutes', fr: '35 minutes', es: '35 minutos' })) {
+			const page = fs.readFileSync(path.join(localeRoot(site, lang), 'alpha', 'alp-001.md'), 'utf8');
+			assert.ok(page.includes(` · ${duration}`), `${site} ${lang} banner should contain ${duration}`);
+		}
 	}
 });
