@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **CYB-001**
 
-Généré par le département *Cybernétique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/0f7a5fd110acfc4835776d38ab1a115533467d34/state/streeling/courses/cybernetics/fr/cyb-001-vsm-ai-governance-mapping.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Cybernétique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/5d6dcb9077120db2f50235e7bbe3db8f34e2f2de/state/streeling/courses/cybernetics/fr/cyb-001-vsm-ai-governance-mapping.fr.md) · [Mon journal](../../journal/)
 :::
 
 **Département :** Cybernétique

@@ -21,7 +21,7 @@ These modules were written by AI departments and have **not been reviewed**. Unl
 | [Audio Engineering](audio-engineering/) | 1 | 1 | 1 |
 | [Cognitive Science](cognitive-science/) | 1 | 1 | 1 |
 | [Computer Science](computer-science/) | 2 | 2 | 2 |
-| [Cybernetics](cybernetics/) | 3 | 2 | 2 |
+| [Cybernetics](cybernetics/) | 25 | 2 | 2 |
 | [Data Visualization](data-visualization/) | 0 | 0 | 0 |
 | [Futurology](futurology/) | 1 | 1 | 1 |
 | [Guitar Acoustics & Sound Synthesis](guitar-acoustics/) | 0 | 0 | 0 |
@@ -42,5 +42,5 @@ These modules were written by AI departments and have **not been reviewed**. Unl
 
 ## Provenance
 
-- Source: [`GuitarAlchemist/Demerzel` → `state/streeling/courses`](https://github.com/GuitarAlchemist/Demerzel/tree/0f7a5fd110acfc4835776d38ab1a115533467d34/state/streeling/courses) at commit `0f7a5fd` (2026-10-04), MIT license.
+- Source: [`GuitarAlchemist/Demerzel` → `state/streeling/courses`](https://github.com/GuitarAlchemist/Demerzel/tree/5d6dcb9077120db2f50235e7bbe3db8f34e2f2de/state/streeling/courses) at commit `5d6dcb9` (2026-10-07), MIT license.
 - Imported with `npm run sync:streeling`; do not edit these pages by hand — only `journal.md` is kept between syncs.

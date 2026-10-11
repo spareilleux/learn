@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **GAA-001** · GA Zéro au Héros : Débutant Absolu · débutant · 20 minutes
 
-Généré par le département *Guitar Alchemist Academy* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/0f7a5fd110acfc4835776d38ab1a115533467d34/state/streeling/courses/guitar-alchemist-academy/fr/gaa-001-your-first-chord.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Guitar Alchemist Academy* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/5d6dcb9077120db2f50235e7bbe3db8f34e2f2de/state/streeling/courses/guitar-alchemist-academy/fr/gaa-001-your-first-chord.fr.md) · [Mon journal](../../journal/)
 :::
 
 > **Guitar Alchemist Academy** | Étape : L'Œuvre au Noir (Débutant) | Durée : 20 minutes
