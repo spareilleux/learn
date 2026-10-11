@@ -21,4 +21,11 @@ else
   echo "FAIL svg: run  dotnet run --project code/music-theory-ga/GaTheory -c Release -- svg src/assets/music-theory-ga"
   status=1
 fi
+# lesson 17: GA's NeoRiemannianConfig loader as it is and without `private` on its three records
+if bash loader-ab/run.sh | diff --strip-trailing-cr loader-ab/expected.txt -; then
+  echo "ok   loader-ab"
+else
+  echo "FAIL loader-ab"
+  status=1
+fi
 exit $status
