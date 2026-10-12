@@ -180,3 +180,14 @@ fn p7_the_residual_check_rejects_a_wrong_inverse() {
     assert!(residual(&hilbert(3), &exact_inverse_f64(3, 1.0)) < 1e-12);
     assert!(ix_inverse(&array![[1.0, 2.0], [2.0, 4.0]]).is_none());
 }
+
+// Not pre-registered: a control added on 2026-09-28, after a review of the labs built on this one found
+// that f64::max drops a NaN operand. norm_inf folded a NaN row sum away, so a NaN inverse had a finite
+// residual and a finite forward error, and the checks above would have accepted it.
+#[test]
+fn control_a_nan_inverse_fails_the_residual_and_forward_error_checks() {
+    let nan = Array2::from_elem((3, 3), f64::NAN);
+    assert!(norm_inf(&nan).is_nan());
+    assert!(residual(&hilbert(3), &nan).is_nan());
+    assert!(forward_error(&nan, &exact_inverse_f64(3, 1.0)).is_nan());
+}
