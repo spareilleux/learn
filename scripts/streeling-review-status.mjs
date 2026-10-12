@@ -14,6 +14,16 @@ const KINDS = new Set(['subject', 'language', 'learner']);
 const VERDICTS = new Set(['approved', 'changes_requested', 'not_assessed']);
 const FIELDS = new Set(['schema_version', 'module_id', 'locale', 'kind', 'source_blob', 'source_english_blob', 'reviewed_commit', 'reviewer', 'reviewed_at', 'verdict', 'evidence']);
 
+function courseBlobsAt(src, commit) {
+	const blobs = new Map();
+	const tree = execFileSync('git', ['ls-tree', '-r', '--full-tree', commit, COURSES], { cwd: src, encoding: 'utf8' });
+	for (const line of tree.split('\n')) {
+		const match = /^100644 blob ([0-9a-f]{40})\t(.+)$/.exec(line);
+		if (match) blobs.set(match[2], match[1]);
+	}
+	return blobs;
+}
+
 function validateReceipt(receipt, name) {
 	const invalid = (reason) => { throw new Error(`Invalid Streeling review receipt ${name}: ${reason}`); };
 	if (!receipt || typeof receipt !== 'object' || Array.isArray(receipt)) invalid('expected object');
@@ -41,12 +51,7 @@ function validateReceipt(receipt, name) {
 }
 
 export function loadReviewIndex(src, sha) {
-	const blobByPath = new Map();
-	const tree = execFileSync('git', ['ls-tree', '-r', '--full-tree', sha, COURSES], { cwd: src, encoding: 'utf8' });
-	for (const line of tree.split('\n')) {
-		const match = /^100644 blob ([0-9a-f]{40})\t(.+)$/.exec(line);
-		if (match) blobByPath.set(match[2], match[1]);
-	}
+	const blobByPath = courseBlobsAt(src, sha);
 	const receipts = new Map();
 	const dir = path.join(src, RECEIPTS);
 	if (fs.existsSync(dir)) {
@@ -60,7 +65,20 @@ export function loadReviewIndex(src, sha) {
 			receipts.set(key, { ...receipt, path: `${RECEIPTS}/${name}` });
 		}
 	}
-	return { blobByPath, receipts };
+	return { src, blobByPath, reviewedTrees: new Map([[sha, blobByPath]]), receipts };
+}
+
+function assertReviewedSource(index, receipt, sourcePath, englishPath) {
+	let reviewed = index.reviewedTrees.get(receipt.reviewed_commit);
+	if (!reviewed) {
+		try { reviewed = courseBlobsAt(index.src, receipt.reviewed_commit); }
+		catch { throw new Error(`Streeling review receipt ${receipt.path} references an unavailable reviewed_commit`); }
+		index.reviewedTrees.set(receipt.reviewed_commit, reviewed);
+	}
+	if (reviewed.get(sourcePath) !== receipt.source_blob ||
+		(receipt.kind === 'language' && reviewed.get(englishPath) !== receipt.source_english_blob)) {
+		throw new Error(`Streeling review receipt ${receipt.path} does not match its reviewed_commit`);
+	}
 }
 
 export function reviewStatus(index, moduleId, locale, sourcePath, englishPath) {
@@ -69,7 +87,9 @@ export function reviewStatus(index, moduleId, locale, sourcePath, englishPath) {
 	if (!ownBlob || !englishBlob) throw new Error(`Missing Streeling source blob for ${moduleId} ${locale}`);
 	const matching = (lang, kind, blob) => {
 		const receipt = index.receipts.get(`${moduleId}.${lang}.${kind}`);
-		return receipt?.source_blob === blob && (kind !== 'language' || receipt.source_english_blob === englishBlob) ? receipt : null;
+		if (receipt?.source_blob !== blob || (kind === 'language' && receipt.source_english_blob !== englishBlob)) return null;
+		assertReviewedSource(index, receipt, kind === 'subject' ? englishPath : sourcePath, englishPath);
+		return receipt;
 	};
 	return {
 		subject: matching('en', 'subject', englishBlob),

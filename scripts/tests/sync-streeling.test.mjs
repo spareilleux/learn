@@ -214,6 +214,7 @@ test('human review display follows exact source and translation blobs', () => {
 	write(path.join(src, 'state/streeling/courses/alpha/en/alp-001-first.md'), moduleFile('alp-001', 'First', [], 'The English source changed after review.'));
 	runGit('add', '.');
 	runGit('-c', 'user.name=fixture', '-c', 'user.email=fixture@example.invalid', 'commit', '-q', '-m', 'changed source');
+	const changedSourceCommit = runGit('rev-parse', 'HEAD');
 	const changed = path.join(tmp, 'changed');
 	execFileSync(process.execPath, [SCRIPT, '--source', src, '--out', changed], { stdio: 'pipe' });
 	assert.match(page(changed, 'en'), /English subject review: pending/);
@@ -238,4 +239,14 @@ test('human review display follows exact source and translation blobs', () => {
 		(error) => error.stderr.toString().includes('Invalid Streeling review receipt bad.json'),
 	);
 	assert.equal(fs.readFileSync(sentinel, 'utf8'), before, 'malformed receipt must not overwrite generated output');
+
+	fs.rmSync(path.join(src, receipts, 'bad.json'));
+	write(path.join(src, receipts, 'alp-001.en.subject.json'), JSON.stringify({ ...receipt('en', 'subject', english), reviewed_commit: changedSourceCommit }));
+	runGit('add', '-A');
+	runGit('-c', 'user.name=fixture', '-c', 'user.email=fixture@example.invalid', 'commit', '-q', '-m', 'contradictory review pointer');
+	assert.throws(
+		() => execFileSync(process.execPath, [SCRIPT, '--source', src, '--out', changed], { stdio: 'pipe' }),
+		(error) => error.stderr.toString().includes('does not match its reviewed_commit'),
+	);
+	assert.equal(fs.readFileSync(sentinel, 'utf8'), before, 'contradictory review pointer must not overwrite generated output');
 });
