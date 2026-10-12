@@ -37,6 +37,12 @@ How [ComfyUI](https://docs.comfy.org/) image generation was wired into Demerzel 
 
 The Ocean demo has a standalone Claude artifact with calm, stormy, sunset and night presets, and a Saint-Malo background. It complements the [three.js course](../threejs/). A WebGPU-capable browser is needed for the renderer; opening the shared page is not a cross-browser rendering or performance test. The artifact credits its Saint-Malo photograph and license.
 
+### Parler en nœuds · Speaking in Knots
+
+[Open the French deck](https://claude.ai/artifact/7v3cgP2wAARzvxgDgA8iEq) · [Open the English copy](https://claude.ai/artifact/V9yPov2hxYxNWZApXrNxYF) · French and English · 2026-10-05 · IX at `e8684cf` and local branches
+
+A 52-slide deck on writing knots as text that IX can check: the four ways to write a knot, what IX checks and refuses, braid words and the names in knot tables, sailors' knots drawn by hand then checked and rendered in 3D, and the method with its adversarial reviews. The English copy follows the French deck slide for slide. Much of the deck relies on IX branches that are not pushed yet; the [Speaking in knots course](../speaking-in-knots/) reproduces only the pushed part.
+
 ## Music and guitar
 
 ### Banc de Placement

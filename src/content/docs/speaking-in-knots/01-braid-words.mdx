@@ -1,0 +1,277 @@
+---
+title: 1. Braid words and the Jones polynomial
+description: 'A knot written as a braid word — generators, closure, components and writhe, as IX''s ix-knot reads them — then the Jones polynomial computed by the Kauffman bracket''s state sum, checked against the values IX''s tests assert, the trefoil and its mirror image, why a knot table may print the other one, and the reef and granny knots told apart.'
+sidebar:
+  order: 1
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Code: the lesson's script, [`jones_state_sum.py`](https://github.com/spareilleux/learn/blob/main/code/speaking-in-knots/jones_state_sum.py), its mutation check, [`mutants.py`](https://github.com/spareilleux/learn/blob/main/code/speaking-in-knots/mutants.py), and the outputs it is compared with, in [`expected/`](https://github.com/spareilleux/learn/tree/main/code/speaking-in-knots/expected). IX's side: the [`ix-knot`](https://github.com/GuitarAlchemist/ix/tree/e8684cf/crates/ix-knot) crate at commit `e8684cf`, from [pull request #366](https://github.com/GuitarAlchemist/ix/pull/366). Run on Windows 11 with [Python](https://docs.python.org/3/) 3.14.3; Linux and macOS are *to verify*.
+
+## A knot as a line of text
+
+Lay a few strands side by side and read them from bottom to top. Number the positions from 1, left to right. A **braid word** lists the crossings in order, going up: `s1` means the strand in position 1 crosses *in front of* the strand in position 2 as it moves to the right; `s1^-1` means the same pair crosses the other way, the strand in position 2 in front. That is IX's convention, written in [`braid.rs`](https://github.com/GuitarAlchemist/ix/blob/e8684cf/crates/ix-knot/src/braid.rs#L30-L34): generator `k` is σₖ, and `-k` is σₖ⁻¹. The direction matters. IX lays the braid out with *y* running up the page, and [`layout.rs`](https://github.com/GuitarAlchemist/ix/blob/e8684cf/crates/ix-knot/src/layout.rs#L26-L39) warns that a picture drawn with *y* running down shows the mirror braid. Read this way, every `s` is a positive crossing, and every `s^-1` a negative one.
+
+Then join each strand's top end to the bottom of the same position. The result, the **closure** of the braid, is one or more closed loops in space: a knot if it is a single loop, a link if there are several. Every knot and every link can be written this way (Alexander, 1923). A braid word is therefore a complete text format for knots, and it is the format IX checks.
+
+IX reads the same word written three ways: `s1 s2^-1`, `1,-2` and `σ1 σ2^-1`. Without a strand count, the braid has one more strand than its largest generator. It refuses a word with more than 8 strands or more than 64 crossings, and each refusal says why. Here are the four messages, from the source at `e8684cf`:
+
+```rust
+#[error("a braid needs 1 to {MAX_STRANDS} strands, got {0}")]
+#[error("generator {generator} needs 1 <= |k| < strands ({strands})")]
+#[error("a braid word may have at most {MAX_CROSSINGS} crossings, got {0}")]
+#[error("cannot read {0:?} as a generator: write s1, s2^-1, s1^3 or a signed integer")]
+```
+
+The limits are not arbitrary: [the comment above them](https://github.com/GuitarAlchemist/ix/blob/e8684cf/crates/ix-knot/src/braid.rs#L5-L15) shows that 64 crossings keep every coefficient inside an `i128`.
+
+## Components and writhe
+
+Two numbers can be read from the word without drawing anything.
+
+- **Components.** Follow the strands through the crossings: each crossing swaps two positions, so the word as a whole is a permutation of the positions. The closure joins each end, at the top, to the start of the same position, at the bottom, so each cycle of the permutation becomes one loop. `s1` on 2 strands swaps them once: one cycle, one loop. `s1^2` swaps them twice: back where they started, two loops.
+- **Writhe.** Count +1 for each `s` and −1 for each `s^-1`. The writhe of `s1^3 s2^-1` is 3 − 1 = 2.
+
+IX computes both in [`braid.rs`](https://github.com/GuitarAlchemist/ix/blob/e8684cf/crates/ix-knot/src/braid.rs#L99-L155), and so does the course's script.
+
+## The Kauffman bracket, smoothing by smoothing
+
+Components and writhe do not tell knots apart: a knot and the unknot both have one component. The **Jones polynomial** does much better, and the **Kauffman bracket** (Kauffman, 1987) computes it with nothing but counting.
+
+At each crossing, cut the two strands and reconnect them without crossing, in one of two ways: straight up, as two vertical arcs, or sideways, as a cap and a cup. A braid word with *c* crossings has 2^*c* ways of doing this, called smoothings, and each one leaves a set of disjoint circles. Give each smoothing a weight:
+
+- a positive crossing smoothed vertically counts *A*, smoothed into a cap and cup *A*⁻¹; a negative crossing the other way round;
+- each circle beyond the first multiplies by *d* = −*A*² − *A*⁻².
+
+The bracket ⟨*L*⟩ is the sum of these weights over all the smoothings. It changes when a strand is twisted on itself, and the writhe corrects that: *V*(*t*) = (−*A*³)^(−writhe) · ⟨*L*⟩, written with *t* = *A*⁻⁴. That is the Jones polynomial.
+
+[`jones_state_sum.py`](https://github.com/spareilleux/learn/blob/main/code/speaking-in-knots/jones_state_sum.py) does exactly that: it goes through the 2^*c* smoothings, counts each one's circles with a union-find, and adds up the terms. The construction is the one of the `state_sum` helper in IX's own tests, rewritten in Python so that it runs without [Rust](https://doc.rust-lang.org/) or IX's repository.
+
+IX's library takes another route. [`jones.rs`](https://github.com/GuitarAlchemist/ix/blob/e8684cf/crates/ix-knot/src/jones.rs#L1-L14) multiplies the crossings one by one in the Temperley–Lieb algebra, where σₖ = *A*·1 + *A*⁻¹·eₖ. It keeps one coefficient per planar diagram rather than one term per smoothing: there are Catalan(*n*) diagrams on *n* strands, 1430 at 8 strands, so its cost grows with the crossings rather than doubling with each one. Its tests already compare the two routes on 150 braid words ([`the_algebra_agrees_with_the_state_sum_and_the_markov_moves`](https://github.com/GuitarAlchemist/ix/blob/e8684cf/crates/ix-knot/src/jones.rs#L320-L350)).
+
+## Checking the values IX asserts
+
+Run with no argument, the script recomputes every Jones polynomial, number of components, writhe, permutation and symmetry that IX's tests assert at `e8684cf` on words of up to 6 crossings. They come from [`known_knots_and_links`](https://github.com/GuitarAlchemist/ix/blob/e8684cf/crates/ix-knot/src/jones.rs#L205-L224), [`the_reef_knot_is_symmetric_and_the_granny_is_not`](https://github.com/GuitarAlchemist/ix/blob/e8684cf/crates/ix-knot/src/jones.rs#L226-L239) with its three identities, the component and writhe tests of [`braid.rs`](https://github.com/GuitarAlchemist/ix/blob/e8684cf/crates/ix-knot/src/braid.rs#L248-L265), and the [`ix_braid` tool's tests](https://github.com/GuitarAlchemist/ix/blob/e8684cf/crates/ix-agent/src/skills/knot.rs#L155-L181). One of IX's tests is out of its reach: [`words_at_the_caps_evaluate`](https://github.com/GuitarAlchemist/ix/blob/e8684cf/crates/ix-knot/src/jones.rs#L352-L361) works on 64 and 63 crossings, 2^64 smoothings. The script does not reproduce the 150 generated words either: that test checks relations rather than written values, between IX's algebra, IX's own state sum, the mirror image and the Markov moves. The script prints each value in IX's own format. The commands run from the root of a clone of [the course's repository](https://github.com/spareilleux/learn), with Python 3 and nothing else.
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+```bash
+python code/speaking-in-knots/jones_state_sum.py
+```
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```bash
+python3 code/speaking-in-knots/jones_state_sum.py
+```
+
+</TabItem>
+<TabItem label="macOS">
+
+```bash
+python3 code/speaking-in-knots/jones_state_sum.py
+```
+
+</TabItem>
+</Tabs>
+
+```text
+OK   (empty) on 1 strands: jones 1
+OK   s1 on 2 strands: components 1
+OK   s1 on 2 strands: jones 1
+OK   s1^-1 s2 s3^-1 on 4 strands: jones 1
+OK   (empty) on 3 strands: jones t^-1 + 2 + t
+OK   (empty) on 4 strands: components 4
+OK   s1^2 on 2 strands: components 2
+OK   s1^2 on 2 strands: jones -t^(1/2) - t^(5/2)
+OK   s1^3 on 2 strands: components 1
+OK   s1^3 on 2 strands: jones t + t^3 - t^4
+OK   s1^-3 on 2 strands: jones -t^-4 + t^-3 + t^-1
+OK   s1^3 s2^-1 on 3 strands: writhe 2
+OK   s1^-3 s2 on 3 strands: writhe -2
+OK   s1 s2^-1 s1 s2^-1 on 3 strands: components 1
+OK   s1 s2^-1 s1 s2^-1 on 3 strands: writhe 0
+OK   s1 s2^-1 s1 s2^-1 on 3 strands: jones t^-2 - t^-1 + 1 - t + t^2
+OK   s1 s2^-1 s1 s2^-1 s1 s2^-1 on 3 strands: components 3
+OK   s1 s2^-1 s1 s2^-1 s1 s2^-1 on 3 strands: permutation [0, 1, 2]
+OK   s1 s2^-1 s1 s2^-1 s1 s2^-1 on 3 strands: jones -t^-3 + 3t^-2 - 2t^-1 + 4 - 2t + 3t^2 - t^3
+OK   s1^3 s2^-3: V = -t^-3 + t^-2 - t^-1 + 3 - t + t^2 - t^3, symmetric
+OK   s1^3 s2^3: V = t^2 + 2t^4 - 2t^5 + t^6 - 2t^7 + t^8, not symmetric
+OK   s1^3: V = t + t^3 - t^4, not symmetric
+OK   s1 s2^-1 s1 s2^-1: V = t^-2 - t^-1 + 1 - t + t^2, symmetric
+OK   granny = trefoil x trefoil
+OK   reef = trefoil x mirror
+OK   s1^-3 = mirror of the trefoil
+26/26 agree with IX at e8684cf
+```
+
+It exits with status 0; a single disagreement would print `DIFF` with IX's value and exit with status 1.
+
+A check that always says `OK` proves nothing, so `mutants.py` breaks the script on purpose, six ways, one at a time: the crossing convention flipped, the loop value's sign changed, the writhe's sign dropped, the closure left unglued, *t* = *A*⁴ instead of *A*⁻⁴, and the permutation's swap skipped. Each mutant must make the check above fail:
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+```bash
+python code/speaking-in-knots/mutants.py
+```
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```bash
+python3 code/speaking-in-knots/mutants.py
+```
+
+</TabItem>
+<TabItem label="macOS">
+
+```bash
+python3 code/speaking-in-knots/mutants.py
+```
+
+</TabItem>
+</Tabs>
+
+```text
+CAUGHT crossing convention flipped -> 22/26 agree with IX at e8684cf
+CAUGHT loop value +A^2 + A^-2 -> 19/26 agree with IX at e8684cf
+CAUGHT writhe sign dropped -> 22/26 agree with IX at e8684cf
+CAUGHT closure not glued -> 16/26 agree with IX at e8684cf
+CAUGHT t = A^4 instead of A^-4 -> 23/26 agree with IX at e8684cf
+CAUGHT permutation swap skipped -> 23/26 agree with IX at e8684cf
+6/6 mutants caught
+```
+
+## The trefoil and its mirror image
+
+Give the script a word, and optionally a repeat count, and it describes that word's closure instead. `s1^3` closes into the trefoil, the simplest knot that cannot be undone:
+
+<Tabs syncKey="os">
+<TabItem label="Windows">
+
+```bash
+python code/speaking-in-knots/jones_state_sum.py "s1^3"
+```
+
+</TabItem>
+<TabItem label="Linux / WSL">
+
+```bash
+python3 code/speaking-in-knots/jones_state_sum.py "s1^3"
+```
+
+</TabItem>
+<TabItem label="macOS">
+
+```bash
+python3 code/speaking-in-knots/jones_state_sum.py "s1^3"
+```
+
+</TabItem>
+</Tabs>
+
+```text
+word: s1^3
+strands 2, crossings 3, writhe 3, components 1
+V = t + t^3 - t^4
+V(1) = 1, not symmetric
+```
+
+Its three crossings are positive: this is the right-handed trefoil. Flip every crossing, `s1^-3`, and you get its mirror image, whose polynomial is the same with *t* replaced by 1/*t*: −*t*⁻⁴ + *t*⁻³ + *t*⁻¹. The two polynomials differ, so no amount of pulling turns one trefoil into the other: the trefoil is **chiral**.
+
+Now open the trefoil's page in a knot table, [3_1 on the Knot Atlas](https://katlas.org/wiki/3_1). It prints −*q*⁻⁴ + *q*⁻³ + *q*⁻¹: the polynomial of `s1^-3`, not of `s1^3`. Neither is wrong. A table draws one of the two mirror images under each name, and its choice need not match IX's crossing convention. A link adds a second choice. For the simplest one, two rings hooked together, IX's `s1^2` gives −*t*^(1/2) − *t*^(5/2), and [L2a1](https://katlas.org/wiki/L2a1) prints −*q*^(−1/2) − *q*^(−5/2), the polynomial of `s1^-2`. The table has no mirror image to choose here: without directions, two hooked rings are their own mirror image. What differs is a direction. A crossing's sign depends on the direction in which each strand is travelled, and the writhe adds up those signs. Reverse one of the two rings and both crossings change sign: the link of `s1^2` becomes the link of `s1^-2`, whose polynomial is the table's. A knot has no such choice, since reversing its only strand leaves every sign unchanged, so a knot that is its own mirror image matches the table exactly: the figure-eight knot, `s1 s2^-1 s1 s2^-1`, matches [4_1](https://katlas.org/wiki/4_1). The Borromean rings, `(s1 s2^-1)^3`, match [L6a4](https://katlas.org/wiki/L6a4) too. Before comparing a polynomial with a table, check both its mirror images and, for a link, the direction of each ring.
+
+## Two checks that cost nothing
+
+- ***V*(1) counts the components.** For every link, *V*(1) = (−2)^(components − 1): 1 for a knot, −2 for two loops, 4 for three. IX's tests assert it on all 150 words. A polynomial that breaks it has an error somewhere.
+- **Symmetry is a hint, not a proof.** A knot that is its own mirror image has *V*(*t*) = *V*(1/*t*). The reef knot, `s1^3 s2^-3`, a right-handed trefoil next to a left-handed one, is symmetric; the granny knot, `s1^3 s2^3`, two trefoils of the same hand, is not. Sailors know that the granny slips and the reef holds; the polynomial already tells them apart. The converse does not hold: as [`is_symmetric`](https://github.com/GuitarAlchemist/ix/blob/e8684cf/crates/ix-knot/src/jones.rs#L42-L46) says in IX, having the symmetry does not prove that a link is its own mirror image.
+
+## Exercises
+
+1. Before running anything, predict the number of components and *V*(1) for `s1^2`. Then run the script on `s1^2`.
+2. `s1 s2` has two crossings, yet its polynomial is 1, the unknot's. Explain why without computing it.
+3. Run the script on `s1 s2^-1` with the repeat count 3, then on `s1 s2` with the repeat count 3. Both closures have three components. What tells them apart, and which one is symmetric?
+4. Check by hand that the granny knot's polynomial, *t*² + 2*t*⁴ − 2*t*⁵ + *t*⁶ − 2*t*⁷ + *t*⁸, is the square of the trefoil's.
+5. The plait `s1 s2^-1` written 6 times has 12 crossings. How many smoothings does the script go through? Predict *V*(1), then run it on `s1 s2^-1` with the repeat count 6.
+6. IX refuses `s9`. Which of its four messages does it give, and with which number?
+
+<details>
+<summary>Solution 1</summary>
+
+Two swaps of the same pair put both strands back where they started: two cycles, so two components, and *V*(1) = (−2)^(2 − 1) = −2. These are two rings hooked once, the Hopf link:
+
+```text
+word: s1^2
+strands 2, crossings 2, writhe 2, components 2
+V = -t^(1/2) - t^(5/2)
+V(1) = -2, not symmetric
+```
+
+An even number of components gives half-integer powers of *t*, which is why IX stores the powers in halves.
+</details>
+
+<details>
+<summary>Solution 2</summary>
+
+`s2` is the only crossing involving position 3, and it appears once. Removing that crossing and the strand in position 3 leaves the same closed curve with one twist less: this is a Markov move, which does not change the knot. What is left, `s1` on 2 strands, has the same property, and removing it leaves one strand alone: the unknot. The script agrees:
+
+```text
+word: s1 s2
+strands 3, crossings 2, writhe 2, components 1
+V = 1
+V(1) = 1, symmetric
+```
+
+IX's tests check this invariance (they add a crossing on a new strand, either way, and require the same polynomial) on all 150 words.
+</details>
+
+<details>
+<summary>Solution 3</summary>
+
+```text
+word: s1 s2^-1, repeated 3 times
+strands 3, crossings 6, writhe 0, components 3
+V = -t^-3 + 3t^-2 - 2t^-1 + 4 - 2t + 3t^2 - t^3
+V(1) = 4, symmetric
+```
+
+```text
+word: s1 s2, repeated 3 times
+strands 3, crossings 6, writhe 6, components 3
+V = t^2 + t^4 + 2t^6
+V(1) = 4, not symmetric
+```
+
+Same number of loops, same *V*(1) = 4, different polynomials: they are different links. The first is the Borromean rings, three rings of which no two are linked, yet which cannot be pulled apart; it is symmetric and matches L6a4 on the Knot Atlas. The second, with all its crossings of the same sign, is not symmetric: with these directions, it is a different link from its mirror image. As the Hopf link showed, that alone says nothing once the directions are forgotten; here it still holds, because each pair of its rings crosses twice, both times positively, and in the mirror image every such crossing is negative: the sum of the signs of the crossings between two rings does not change when the rings are moved (half of it is their *linking number*), and a pair changes sign only when exactly one of its two rings is reversed, which cannot happen to all three pairs at once.
+</details>
+
+<details>
+<summary>Solution 4</summary>
+
+(*t* + *t*³ − *t*⁴)² = *t*² + *t*⁶ + *t*⁸ + 2*t*⁴ − 2*t*⁵ − 2*t*⁷, which is the granny's polynomial. The granny knot is two trefoils tied one after the other, and the polynomial of such a sum is the product of the two. The reef knot's polynomial is likewise the trefoil's times its mirror's. IX's test asserts both products, and so does the script's check.
+</details>
+
+<details>
+<summary>Solution 5</summary>
+
+2¹² = 4096 smoothings. Three strands, and `s1 s2^-1` permutes them in a cycle of length 3, which six repetitions bring back to the identity: three components, so *V*(1) = 4.
+
+```text
+word: s1 s2^-1, repeated 6 times
+strands 3, crossings 12, writhe 0, components 3
+V = t^-6 - 6t^-5 + 15t^-4 - 26t^-3 + 39t^-2 - 47t^-1 + 52 - 47t + 39t^2 - 26t^3 + 15t^4 - 6t^5 + t^6
+V(1) = 4, symmetric
+```
+
+The script refuses more than 20 crossings, a million smoothings. IX's Temperley–Lieb route handles 64, since it never keeps more than 5 diagrams on 3 strands.
+</details>
+
+<details>
+<summary>Solution 6</summary>
+
+Generator 9 needs a 10th strand, so the parsed braid has 10 strands, more than IX's limit of 8: the first message, with 10. IX's test asserts exactly that refusal, [`Braid::parse(None, "s9")` gives `BraidError::Strands(10)`](https://github.com/GuitarAlchemist/ix/blob/e8684cf/crates/ix-knot/src/braid.rs#L237). The course's script has no strand limit and computes it: it is not IX, it only checks IX.
+</details>
