@@ -146,6 +146,7 @@ test('generated course banners localize the duration unit', () => {
 		for (const [lang, duration] of Object.entries({ en: '35 minutes', fr: '35 minutes', es: '35 minutos' })) {
 			const page = fs.readFileSync(path.join(localeRoot(site, lang), 'alpha', 'alp-001.md'), 'utf8');
 			assert.ok(page.includes(` · ${duration}`), `${site} ${lang} banner should contain ${duration}`);
+			assert.match(page, { en: /English subject review: pending/, fr: /Relecture du contenu anglais: en attente/, es: /Revisión del contenido inglés: pendiente/ }[lang]);
 		}
 	}
 });
@@ -175,4 +176,66 @@ test('a dirty source cannot produce pages attributed to its HEAD commit', () => 
 		assert.equal(fs.readFileSync(path.join(dest, 'streeling.lock.json'), 'utf8'), 'keep existing output\n');
 		assert.ok(!fs.existsSync(path.join(dest, 'src/content/docs/streeling')), `${change} source must not generate pages`);
 	}
+});
+
+test('human review display follows exact source and translation blobs', () => {
+	const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'streeling-reviews-'));
+	const src = path.join(tmp, 'demerzel');
+	for (const [file, text] of Object.entries(FIXTURE)) write(path.join(src, file), text);
+	const runGit = (...args) => execFileSync('git', args, { cwd: src, encoding: 'utf8' }).trim();
+	runGit('init', '-q');
+	runGit('add', '.');
+	runGit('-c', 'user.name=fixture', '-c', 'user.email=fixture@example.invalid', 'commit', '-q', '-m', 'source');
+	const sourceCommit = runGit('rev-parse', 'HEAD');
+	const blob = (file) => runGit('rev-parse', `HEAD:${file}`);
+	const english = blob('state/streeling/courses/alpha/en/alp-001-first.md');
+	const french = blob('state/streeling/courses/alpha/fr/alp-001-first.fr.md');
+	const receipt = (locale, kind, sourceBlob, extra = {}) => ({
+		schema_version: '0.1.0', module_id: 'alp-001', locale, kind, source_blob: sourceBlob,
+		reviewed_commit: sourceCommit, reviewer: 'fixture-reviewer', reviewed_at: '2026-10-12T00:00:00Z',
+		verdict: 'approved', evidence: 'https://example.invalid/review', ...extra,
+	});
+	const receipts = 'state/streeling/review-receipts';
+	write(path.join(src, receipts, 'alp-001.en.subject.json'), JSON.stringify(receipt('en', 'subject', english)));
+	write(path.join(src, receipts, 'alp-001.fr.language.json'), JSON.stringify(receipt('fr', 'language', french, { source_english_blob: english })));
+	write(path.join(src, receipts, 'alp-001.es.language.json'), JSON.stringify(receipt('es', 'language', english, { source_english_blob: english })));
+	write(path.join(src, receipts, 'bet-001.en.subject.json'), JSON.stringify({ ...receipt('en', 'subject', blob('state/streeling/courses/beta/en/bet-001-other.md')), module_id: 'bet-001', verdict: 'changes_requested' }));
+	runGit('add', '.');
+	runGit('-c', 'user.name=fixture', '-c', 'user.email=fixture@example.invalid', 'commit', '-q', '-m', 'receipts');
+	const synced = path.join(tmp, 'synced');
+	execFileSync(process.execPath, [SCRIPT, '--source', src, '--out', synced], { stdio: 'pipe' });
+	const page = (root, lang) => fs.readFileSync(path.join(root, DOCS[lang], 'alpha', 'alp-001.md'), 'utf8');
+	assert.match(page(synced, 'en'), /English subject review: \[approved receipt\]/);
+	assert.match(page(synced, 'fr'), /Relecture de la traduction: \[approbation consignée\]/);
+	assert.match(page(synced, 'es'), /Revisión de la traducción: pendiente/);
+	assert.match(fs.readFileSync(path.join(synced, DOCS.en, 'beta', 'bet-001.md'), 'utf8'), /English subject review: \[changes requested\]/);
+	assert.match(fs.readFileSync(path.join(synced, DOCS.fr, 'index.md'), 'utf8'), /1 une relecture de traduction/);
+
+	write(path.join(src, 'state/streeling/courses/alpha/en/alp-001-first.md'), moduleFile('alp-001', 'First', [], 'The English source changed after review.'));
+	runGit('add', '.');
+	runGit('-c', 'user.name=fixture', '-c', 'user.email=fixture@example.invalid', 'commit', '-q', '-m', 'changed source');
+	const changed = path.join(tmp, 'changed');
+	execFileSync(process.execPath, [SCRIPT, '--source', src, '--out', changed], { stdio: 'pipe' });
+	assert.match(page(changed, 'en'), /English subject review: pending/);
+	assert.match(page(changed, 'fr'), /Relecture du contenu anglais: en attente/);
+	assert.match(page(changed, 'fr'), /Relecture de la traduction: en attente/);
+	write(path.join(src, 'state/streeling/courses/alpha/en/alp-001-first.md'), FIXTURE['state/streeling/courses/alpha/en/alp-001-first.md']);
+	write(path.join(src, 'state/streeling/courses/alpha/fr/alp-001-first.fr.md'), moduleFile('alp-001', 'Premier modifié', [], 'La traduction a changé après la relecture.'));
+	runGit('add', '.');
+	runGit('-c', 'user.name=fixture', '-c', 'user.email=fixture@example.invalid', 'commit', '-q', '-m', 'changed translation');
+	const translatedChanged = path.join(tmp, 'translated-changed');
+	execFileSync(process.execPath, [SCRIPT, '--source', src, '--out', translatedChanged], { stdio: 'pipe' });
+	assert.match(page(translatedChanged, 'fr'), /Relecture du contenu anglais: \[approbation consignée\]/);
+	assert.match(page(translatedChanged, 'fr'), /Relecture de la traduction: en attente/);
+
+	write(path.join(src, receipts, 'bad.json'), JSON.stringify({ ...receipt('en', 'subject', english), extra_field: true }));
+	runGit('add', '.');
+	runGit('-c', 'user.name=fixture', '-c', 'user.email=fixture@example.invalid', 'commit', '-q', '-m', 'bad receipt');
+	const sentinel = path.join(changed, 'streeling.lock.json');
+	const before = fs.readFileSync(sentinel, 'utf8');
+	assert.throws(
+		() => execFileSync(process.execPath, [SCRIPT, '--source', src, '--out', changed], { stdio: 'pipe' }),
+		(error) => error.stderr.toString().includes('Invalid Streeling review receipt bad.json'),
+	);
+	assert.equal(fs.readFileSync(sentinel, 'utf8'), before, 'malformed receipt must not overwrite generated output');
 });
