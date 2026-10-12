@@ -35,7 +35,7 @@ What this course found in ComfyUI v0.36.0, in its documentation and in the files
 
 | Expected | What happens | Where | Measurement | Status |
 |---|---|---|---|---|
-| A fresh base directory starts the server | Startup stops with `FileNotFoundError`: the server lists `custom_nodes` in the new directory before anything creates it | [`main.py:198-201`](https://github.com/Comfy-Org/ComfyUI/blob/ee71d5c4993f29086b27fde1629a945ae48425bf/main.py#L198-L201) | Reproduced at every fresh base directory | Reproduced; [`server.sh`](https://github.com/spareilleux/learn/blob/main/code/comfyui/server.sh) creates the empty folder first |
+| A fresh base directory starts the server | Startup stops with `FileNotFoundError`: the server lists `custom_nodes` in the new directory before anything creates it | [`main.py:198-201`](https://github.com/Comfy-Org/ComfyUI/blob/ee71d5c4993f29086b27fde1629a945ae48425bf/main.py#L198-L201) | Reproduced at every fresh base directory | Reproduced; [`server.sh`](https://github.com/spareilleux/learn/blob/main/code/comfyui/server.sh) creates the empty folder first. Hit again by a server started without it ([2026-09-26](#2026-09-26--two-illustrations-for-this-site-with-z-image-turbo)) |
 | `--base-directory` leaves the installation alone | It migrated the installation's legacy `user/comfyui.db`, left a `.bak` beside it and copied the database into the test directory | `--base-directory` without `--database-url` | The original was restored from the backup; both SHA-256 matched | Reproduced; avoided with `--database-url sqlite:///:memory:` ([ComfyUI preflight for the orbital scene](#2026-09-19--comfyui-preflight-for-the-orbital-scene)) |
 | The getting-started tutorial describes `EmptyLatentImage` | It says the node makes a noise latent. The node makes zeros, and `KSampler` makes the noise | [`nodes.py`](https://github.com/Comfy-Org/ComfyUI/blob/ee71d5c4993f29086b27fde1629a945ae48425bf/nodes.py), against the [text-to-image tutorial](https://docs.comfy.org/get_started/first_generation) | Read in the node's code at the pinned commit | Reproduced. The documentation is wrong, the behaviour is right |
 | The same graph and seed give the same pixels | The image changes when the negative prompt is encoded again with the UNet already loaded | [`nodes.py`](https://github.com/Comfy-Org/ComfyUI/blob/ee71d5c4993f29086b27fde1629a945ae48425bf/nodes.py), `CLIPTextEncode` and `KSampler` | `698e7867…` on a fresh server, `5374ac40…` warm: 0.92 levels of mean difference, 2.63 % of pixels above 8. `--deterministic` changed neither | Reproduced. The operation responsible is still unidentified ([One seed, two images](#2026-09-16--one-seed-two-images)) |
@@ -256,6 +256,42 @@ Five findings from the first days lived only in the lane's report, never in this
 - **`--lowvram` changes nothing against the normal state.** The flag sets `VRAMState.LOW_VRAM`, but the partial-load budget takes the same branch for `LOW_VRAM` and for `NORMAL_VRAM`, and computes the same amount from free memory in both. The 16 September renders measured no difference; the code says why. `--novram` is a different matter: it pins the budget to 0.1.
 - **comfy-cli sends commands to Comfy Cloud as soon as a credential exists.** Its own `where.py` sets out the precedence, and the last rule is an auto-detect: cloud if any cloud credential is configured, an API key or an active OAuth session, else local. Signing in once changes where later commands go, without the command line saying so. Read today on `main`; comfy-cli is not pinned by this course.
 - **The one that expired.** A note from 16 September said the portable install page announces NVIDIA or CPU only, while v0.36.0 ships AMD and Intel builds. The release does ship four Windows archives — amd, intel, nvidia and nvidia_cu126 — but the page read today documents all three vendors, with a batch file each. Whatever the page said then, it does not say it now, and there is no capture to prove the earlier state. The note is retired rather than published: a documentation complaint with no evidence of the text it complains about is not a finding.
+
+## 2026-09-26 — Two illustrations for this site with Z-Image-Turbo
+
+*Retrospective observation: the images were a production job, not an experiment, and no prediction was written first.*
+
+The work: the hero of the home page and the illustration at the top of the [IX course](../../machine-learning-ix/). Both were generated on the course's machine with the portable ComfyUI 0.36.0 and models already on disk, with no download and no paid service. [`code/site-visuals/`](https://github.com/spareilleux/learn/tree/e4baaa6e3adae5ad7b41269c9e6c1286347bdb37/code/site-visuals) keeps:
+- the prompts;
+- the exact graphs sent;
+- the timings;
+- the script that turns the two outputs into the site's WebP files, byte for byte.
+
+They are in [PR #23](https://github.com/spareilleux/learn/pull/23), which is **open, not merged**, so neither image is on the public site yet.
+
+*Update, 2026-09-27:* PR #23 was merged as [`3c8c1de`](https://github.com/spareilleux/learn/commit/3c8c1dee1d2d6be41cf93a7db8f520bfb4b7b022), and both images are served on the public home page and on the IX course page (anonymous check at 15:11 EDT).
+
+The settings:
+- **Model:** Z-Image-Turbo bf16, with the `qwen_3_4b` text encoder and `z_image_ae`, under Apache 2.0.
+- **Graph:** the one from [lesson 8](../08-recent-models-quantization/) (8 steps, cfg 1, `res_multistep`, shift 3, no negative prompt), at 1344 × 768.
+- **Runs:** two seeds per image, one job at a time.
+
+| Job | Seed | Wall time, queue to result | Kept |
+|---|---|---:|---|
+| home | 20260926 | 443.1 s | no |
+| home | 20260927 | 72.2 s | yes |
+| IX | 20260926 | 253.5 s | no |
+| IX | 20260927 | 37.1 s | yes |
+
+- **The spread is loading, not sampling.** The log shows 8 steps in about 6 s. The 12 GB diffusion model and the 8 GB text encoder do not fit together in 16 GB, so each job staged them again, and the first one read them from disk cold. It is the same lesson as the cold-start row of the Experiments table.
+- **The prompt said "without any writing", and the model wrote anyway.**
+  - The kept home image had a readable "5" at the top of its dome, removed by cropping the top 48 rows.
+  - The kept IX image had three glyph-like marks on a 36 × 20 pixel panel, which were blurred.
+  - Both edits are stated in the captions. This is two images, not a rate: with no negative prompt, the only defence was looking at every region at full size.
+- **The first QA row happened again.** The server was started by hand, without the course's `server.sh`, on a fresh base directory, and it stopped with the same `FileNotFoundError` on `custom_nodes`. Creating the folders fixed it.
+  - The row that follows it warns that `--base-directory` without `--database-url` once migrated the installation's database.
+  - This run passed no `--database-url` either. Its log shows a new database created in its own base directory, and the installation's `user/` folder still carries its 2026-09-16 dates. So nothing there was touched this time, but the flag belonged on the command line.
+- **Not Blender.** These are flat 2D images from a diffusion model, not rendered geometry. They assert nothing about the software they decorate.
 
 ## To verify
 

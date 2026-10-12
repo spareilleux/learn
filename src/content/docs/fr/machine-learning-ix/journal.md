@@ -175,6 +175,25 @@ Cela mérite d'être consigné à côté des constats, car les leçons ont surto
 - La NMF de rang deux reconstruit la matrice brute des durées avec une erreur quadratique moyenne de `0.505` secondes carrées par cellule et refuse les entrées standardisées négatives. La LDA produit deux axes finis pour trois étiquettes de système d'exploitation, **sans prétention de classification hors échantillon**. t-SNE avec graine donne un arrangement fini de taille `12 × 2`, mais `transform` renvoie exactement le même arrangement avec une entrée sans rapport de taille `1 × 1`.
 - Le contrôle indépendant numpy/scikit-learn 1.8.0 confirme les distances du carré, le résultat des axes des anneaux, la reconstruction NMF finie, les deux axes LDA et l'embedding t-SNE fini. Ce sont des contrôles d'invariants, pas une égalité des facteurs NMF ni des coordonnées t-SNE entre implémentations. Les hypothèses n'ont pas été consignées avant l'exécution : il s'agit de résultats exploratoires, non de confirmations pré-enregistrées. La CI sur trois systèmes pour la leçon 9 reste à faire.
 
+## 2026-09-27 — Des pipelines IX dans l'éditeur de pipelines de GA, et où en est la revue
+
+*Observation rétrospective.* Ce cours épingle IX à `490c395` et exécute chaque résultat qu'il affiche. Le travail ci-dessous a fait tourner IX à des commits plus récents, dans un autre dépôt, et ce cours ne l'a pas exécuté. Il est consigné parce qu'il utilise IX comme le décrit la mission de ce cours — comme des outils qu'un agent appelle — et parce que ses preuves ont trois degrés de force qu'il ne faut pas mélanger.
+
+**Ce qui a été construit.** [GuitarAlchemist/ga#740](https://github.com/GuitarAlchemist/ga/pull/740) ajoute un éditeur de pipelines aux composants React de GA. Un pipeline est un JSON destiné aux outils `ix_pipeline_validate` et `ix_pipeline_run` d'IX ; l'éditeur le dessine sous forme de graphe, contrôle les types des arguments et l'exécute par un pont local vers le serveur MCP d'IX. Un second onglet analyse un réseau de Petri avec `ix_petri_analyze`. La PR a été fusionnée le 2026-09-27 en [`d67d04b`](https://github.com/GuitarAlchemist/ga/commit/d67d04bdb04742ba338518e28197e6035cb80e90), avant la revue indépendante qu'elle devait attendre ; le [journal du développement agentique](../../agentic-coding/journal/#2026-09-27--ga-740-fusionnée-avant-sa-revue-indépendante) raconte comment.
+
+| Force | Ce qu'elle couvre |
+|---|---|
+| **Vérifié ici : le commit de fusion et les checks publics de la PR** | Le pipeline d'exemple, [`ga-harmonic-field.pipeline.json`](https://github.com/GuitarAlchemist/ga/blob/d67d04bdb04742ba338518e28197e6035cb80e90/ReactComponents/ga-react-components/src/components/IxqlViewer/examples/ga-harmonic-field.pipeline.json), a 53 étapes sur 16 outils IX, et aucun outil n'y apparaît plus de 10 fois — la limite de conception expliquée plus bas. Tous les checks GitHub de la PR passent, Playwright compris |
+| **Rapporté par l'agent auteur, exécuté en local, pas réexécuté ici** | `ix_pipeline_validate` : valide, 0 erreur. `ix_pipeline_run` : 53 résultats en 28 ms. Les tests unitaires de l'éditeur, 30 sur 30, et un rejeu Playwright du parcours des propositions. L'onglet Petri sur les deux réseaux du [cours sur les réseaux de Petri](../../petri-nets/) : 8 marquages dont 3 morts pour le réseau de cycle de vie, 12 marquages, borne 2, vivant et sans blocage pour le tampon borné |
+| **Revue après la fusion, reçu conservé localement** | Une revue indépendante en lecture seule a exécuté les trois fichiers de tests unitaires de la PR, 35 sur 35, et confirmé des défauts dans les routes du serveur de développement et dans la détection des propositions périmées, détaillés dans le [journal du développement agentique](../../agentic-coding/journal/#2026-09-27--ga-740-fusionnée-avant-sa-revue-indépendante). Elle n'a pas revu le contenu du pipeline d'exemple, n'a vu le code Petri qu'à travers ses tests unitaires et n'a lancé aucun navigateur. Hormis ces tests unitaires, la ligne ci-dessus n'est toujours pas vérifiée de façon indépendante |
+
+**Trois comportements d'IX rapportés par l'agent auteur**, dont aucun n'a été revérifié par ce cours au commit épinglé :
+- Le détecteur de boucles d'IX autorise au plus 10 appels à un même outil en 5 minutes, donc un pipeline qui répète un outil plus souvent le déclenche. L'exemple a été conçu autour de cette limite, ce que confirme le décompte ci-dessus.
+- `ix_ga_bridge` ne calcule rien : il renvoie un guide. Le pipeline ne l'utilise pas.
+- Un binaire `ix-mcp` construit avant [IX #352](https://github.com/GuitarAlchemist/ix/pull/352) signale les outils manuels comme `not_gated` : l'affichage des approbations de l'éditeur dépend de la version d'IX qui le sert.
+
+Aucun n'est une ligne de QA : ce cours ne les a pas reproduits, et sa table de QA ne contient que des constats reproduits.
+
 ## À vérifier
 
 - L'outil `ix_ml_pipeline` de bout en bout : l'ordre de mise à l'échelle du constat 1, l'inférence de tâche du constat 2 sur un fichier CSV, et l'erreur `All rows contain NaN values` pour un fichier avec une colonne texte. Les trois sont lus dans le code, pas exécutés.
@@ -189,5 +208,7 @@ Cela mérite d'être consigné à côté des constats, car les leçons ont surto
 - `ix-autograd` : son ruban est le crate qui devrait rendre le constat 15 inutile, et la leçon 12 le mesurera.
 - Si les constats 10 à 19 sont déjà connus en amont : je n'ai toujours pas cherché dans les issues d'IX.
 - La carte d'API compte les déclarations `pub`, pas celles qui sont atteignables ; l'écart entre les deux nombres n'est pas mesuré.
+- Au commit épinglé : si `ix_ga_bridge` renvoie un guide plutôt qu'un résultat, et la limite du détecteur de boucles, 10 appels par outil en 5 minutes.
+- GA #740 : l'exécution du pipeline de 53 étapes et les résultats Petri refaits par quelqu'un d'autre que leur auteur ; la revue post-fusion n'a couvert ni l'une ni les autres.
 - Les valeurs affichées par un `println!("{:.6}")` direct plutôt que par `fmt_vec` — l'`intercept -0.000000` de la leçon 8 en est une — portent le même risque de zéro signé et ne sont pas normalisées. Celle-là concordait sur les trois systèmes dans l'exécution 35039180659 ; les autres n'ont pas été recensées.
 - Rejouer les sorties numériques de la leçon 9 sur les CI Linux et macOS ; vérifier que l'erreur NMF et l'écart du quatrième axe RBF s'arrondissent de la même façon. Mesurer séparément l'évolution du temps de t-SNE avant d'en chiffrer le coût.
