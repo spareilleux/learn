@@ -1,0 +1,8053 @@
+{
+	"adapter": "NVIDIA GeForce RTX 5080",
+	"changes": {
+		"pt_only": {
+			"gilt_fake_reflection": "output_energy 0.7 -> 0",
+			"light_sizes_from_zero": {
+				"@SpotLight3D (m, spot)": [
+					0.15,
+					9
+				],
+				"DoorSpill (m, spot)": [
+					0.15,
+					1
+				],
+				"InteriorGlow (m, omni)": [
+					0.15,
+					1
+				],
+				"KeyLightL (m, spot)": [
+					0.15,
+					1
+				],
+				"KeyLightR (m, spot)": [
+					0.15,
+					1
+				],
+				"MoonFill (m, omni)": [
+					0.15,
+					1
+				],
+				"OculusMoon (m, spot)": [
+					0.6,
+					1
+				],
+				"OculusShaft (m, spot)": [
+					0.15,
+					1
+				],
+				"ReceiverGlow (m, omni)": [
+					0.15,
+					1
+				],
+				"ShelfLamp (m, omni)": [
+					0.15,
+					48
+				],
+				"StatueKey (m, spot)": [
+					0.15,
+					1
+				],
+				"WindowLight (m, spot)": [
+					0.15,
+					24
+				]
+			},
+			"night_sky": "hidden (its dome would be met by rays as a 1 m ball)",
+			"source_color_defaults": {
+				"materials_scanned": 117,
+				"set_to_their_default": {
+					"book_spines.gdshader:gilt_color": 1,
+					"book_spines.gdshader:paper_color": 1,
+					"floor_paving.gdshader:dark": 1,
+					"floor_paving.gdshader:gilt": 1,
+					"floor_paving.gdshader:pale": 1,
+					"floor_paving.gdshader:rose_dark": 1,
+					"floor_paving.gdshader:rose_pale": 1,
+					"gilt.gdshader:gold": 1,
+					"holo_ring.gdshader:gold": 1,
+					"recording_frame.gdshader:gold": 1,
+					"stained_glass.gdshader:frame_color": 3,
+					"statue_marble.gdshader:stone": 1,
+					"statue_marble.gdshader:vein": 1,
+					"stone_relief.gdshader:rosette": 5
+				},
+				"source_color_without_default": [
+					"gilt.gdshader:strip_color",
+					"gilt.gdshader:books_color",
+					"gilt.gdshader:slab_color",
+					"gilt.gdshader:floor_color",
+					"gilt.gdshader:vault_color",
+					"gilt.gdshader:sky_color",
+					"bay_glass.gdshader:strip_color",
+					"bay_glass.gdshader:books_color",
+					"bay_glass.gdshader:slab_color",
+					"bay_glass.gdshader:floor_color",
+					"bay_glass.gdshader:vault_color",
+					"bay_glass.gdshader:sky_color"
+				]
+			},
+			"stone_slope_materials": 7
+		},
+		"sky_fill": {
+			"applied": true,
+			"before": {
+				"ambient_light_source": 2,
+				"background_color": "02040a",
+				"background_mode": 1,
+				"reflected_light_source": 0
+			},
+			"core_dir": [
+				-0.468053609132767,
+				0.867124080657959,
+				-0.170357584953308
+			],
+			"core_error_deg": 0.0,
+			"credit": "ESO/S. Brunier, CC BY 4.0",
+			"energy_multiplier": 0.45,
+			"not_reproduced": "the dome's stereographic zoom (core_zoom), stars, glow, sky gradient and core cap",
+			"panorama": "res://assets/sky_milky_way_eso.jpg",
+			"pole_error_deg": 0.0,
+			"radiance_size": 1024,
+			"sky_rotation_deg": [
+				-60.1261416032439,
+				-109.999998507569,
+				89.3370165323125
+			]
+		}
+	},
+	"checks": {
+		"control_cabin_door_camera_fixed": true,
+		"control_cabin_door_png_3840x2160": true,
+		"control_cabin_door_rr_only": true,
+		"control_cabin_front_camera_fixed": true,
+		"control_cabin_front_png_3840x2160": true,
+		"control_cabin_front_rr_only": true,
+		"control_cabin_oblique_camera_fixed": true,
+		"control_cabin_oblique_png_3840x2160": true,
+		"control_cabin_oblique_rr_only": true,
+		"gaia_off_built": true,
+		"gaia_on_built": true,
+		"library_candidate_loaded": true,
+		"lights_56_none_dropped_both_states": true,
+		"shellnew_cabin_door_camera_fixed": true,
+		"shellnew_cabin_door_png_3840x2160": true,
+		"shellnew_cabin_door_rr_only": true,
+		"shellnew_cabin_front_camera_fixed": true,
+		"shellnew_cabin_front_png_3840x2160": true,
+		"shellnew_cabin_front_rr_only": true,
+		"shellnew_cabin_oblique_camera_fixed": true,
+		"shellnew_cabin_oblique_png_3840x2160": true,
+		"shellnew_cabin_oblique_rr_only": true,
+		"shellold_cabin_door_camera_fixed": true,
+		"shellold_cabin_door_png_3840x2160": true,
+		"shellold_cabin_door_rr_only": true,
+		"shellold_cabin_front_camera_fixed": true,
+		"shellold_cabin_front_png_3840x2160": true,
+		"shellold_cabin_front_rr_only": true,
+		"shellold_cabin_oblique_camera_fixed": true,
+		"shellold_cabin_oblique_png_3840x2160": true,
+		"shellold_cabin_oblique_rr_only": true,
+		"shells_old_then_gaia": true
+	},
+	"dlss": true,
+	"dlss_rr": true,
+	"engine": {
+		"build": "custom_build",
+		"hash": "e1157bf10f70bef34933a80a5d29f6e6788a0dc6",
+		"hex": 263683,
+		"major": 4,
+		"minor": 6,
+		"patch": 3,
+		"status": "stable",
+		"string": "4.6.3-stable (custom_build)",
+		"timestamp": 1785244971
+	},
+	"exit_code": 0,
+	"library_candidate": {
+		"cloth": [
+			[
+				0.140000000596046,
+				0.170000001788139,
+				0.275000005960464
+			],
+			[
+				0.300000011920929,
+				0.349999994039536,
+				0.419999986886978
+			],
+			[
+				0.360000014305115,
+				0.340000003576279,
+				0.189999997615814
+			],
+			[
+				0.419999986886978,
+				0.150000005960464,
+				0.140000000596046
+			],
+			[
+				0.156000003218651,
+				0.291000008583069,
+				0.305999994277954
+			],
+			[
+				0.547999978065491,
+				0.442999988794327,
+				0.263000011444092
+			],
+			[
+				0.360000014305115,
+				0.349999994039536,
+				0.330000013113022
+			],
+			[
+				0.200000002980232,
+				0.319999992847443,
+				0.219999998807907
+			]
+		],
+		"cloth_found": 3,
+		"ok": true,
+		"shader_markers": 4,
+		"shader_sha256": "4ab15ca9d778ec72b3b5a563ac0907f34cf9fe6eb885d6d200c2ebf1606e6ae9"
+	},
+	"outcome": "completed",
+	"pathtracing_api": true,
+	"pt_settings": {
+		"bounces": 3,
+		"denoiser": 1,
+		"frame_generation": false,
+		"scale": 1.0,
+		"spp": 2
+	},
+	"rows": {
+		"control_cabin_door": {
+			"at_s": 66.04,
+			"camera_end": [
+				1.3,
+				1.5,
+				4.2,
+				0.5083,
+				0.0391,
+				0.8603
+			],
+			"camera_start": [
+				1.3,
+				1.5,
+				4.2,
+				0.5083,
+				0.0391,
+				0.8603
+			],
+			"dlss_evaluations": 0,
+			"elapsed_ms": 2000.28,
+			"fps": 15.5,
+			"frame_generation": false,
+			"frame_ms_mean_p95": [
+				64.525,
+				65.103
+			],
+			"frames": 31,
+			"godot_buffer_mem_mb": 566.5,
+			"godot_texture_mem_mb": 1731.1,
+			"godot_video_mem_mb_peak": 2846.0,
+			"gpu_ms_mean_p95": [
+				64.454,
+				65.052
+			],
+			"mode_kept": true,
+			"output_size": [
+				3840,
+				2160
+			],
+			"png": {
+				"dims": [
+					3840,
+					2160
+				],
+				"error": 0,
+				"format": 4,
+				"path": "C:/tmp/observatory-gaia/artpass/gaia/shellverify-20261006c/control_cabin_door.png"
+			},
+			"render_size": [
+				3840,
+				2160
+			],
+			"rr_evaluations": 31,
+			"scale": 1.0,
+			"view": "cabin_door"
+		},
+		"control_cabin_front": {
+			"at_s": 52.71,
+			"camera_end": [
+				0.0,
+				1.7,
+				7.4,
+				0.0,
+				-0.0674,
+				0.9977
+			],
+			"camera_start": [
+				0.0,
+				1.7,
+				7.4,
+				0.0,
+				-0.0674,
+				0.9977
+			],
+			"dlss_evaluations": 0,
+			"elapsed_ms": 2023.57,
+			"fps": 14.8,
+			"frame_generation": false,
+			"frame_ms_mean_p95": [
+				67.452,
+				67.955
+			],
+			"frames": 30,
+			"godot_buffer_mem_mb": 566.5,
+			"godot_texture_mem_mb": 1731.1,
+			"godot_video_mem_mb_peak": 2846.0,
+			"gpu_ms_mean_p95": [
+				67.385,
+				67.82
+			],
+			"mode_kept": true,
+			"output_size": [
+				3840,
+				2160
+			],
+			"png": {
+				"dims": [
+					3840,
+					2160
+				],
+				"error": 0,
+				"format": 4,
+				"path": "C:/tmp/observatory-gaia/artpass/gaia/shellverify-20261006c/control_cabin_front.png"
+			},
+			"render_size": [
+				3840,
+				2160
+			],
+			"rr_evaluations": 30,
+			"scale": 1.0,
+			"view": "cabin_front"
+		},
+		"control_cabin_oblique": {
+			"at_s": 59.39,
+			"camera_end": [
+				4.4,
+				1.6,
+				5.4,
+				0.6588,
+				-0.0749,
+				0.7486
+			],
+			"camera_start": [
+				4.4,
+				1.6,
+				5.4,
+				0.6588,
+				-0.0749,
+				0.7486
+			],
+			"dlss_evaluations": 0,
+			"elapsed_ms": 2064.93,
+			"fps": 15.0,
+			"frame_generation": false,
+			"frame_ms_mean_p95": [
+				66.611,
+				66.959
+			],
+			"frames": 31,
+			"godot_buffer_mem_mb": 566.5,
+			"godot_texture_mem_mb": 1731.1,
+			"godot_video_mem_mb_peak": 2846.0,
+			"gpu_ms_mean_p95": [
+				66.543,
+				66.887
+			],
+			"mode_kept": true,
+			"output_size": [
+				3840,
+				2160
+			],
+			"png": {
+				"dims": [
+					3840,
+					2160
+				],
+				"error": 0,
+				"format": 4,
+				"path": "C:/tmp/observatory-gaia/artpass/gaia/shellverify-20261006c/control_cabin_oblique.png"
+			},
+			"render_size": [
+				3840,
+				2160
+			],
+			"rr_evaluations": 31,
+			"scale": 1.0,
+			"view": "cabin_oblique"
+		},
+		"shellnew_cabin_door": {
+			"at_s": 44.97,
+			"camera_end": [
+				1.3,
+				1.5,
+				4.2,
+				0.5083,
+				0.0391,
+				0.8603
+			],
+			"camera_start": [
+				1.3,
+				1.5,
+				4.2,
+				0.5083,
+				0.0391,
+				0.8603
+			],
+			"dlss_evaluations": 0,
+			"elapsed_ms": 2003.55,
+			"fps": 15.0,
+			"frame_generation": false,
+			"frame_ms_mean_p95": [
+				66.785,
+				67.747
+			],
+			"frames": 30,
+			"godot_buffer_mem_mb": 379.8,
+			"godot_texture_mem_mb": 1731.4,
+			"godot_video_mem_mb_peak": 2506.7,
+			"gpu_ms_mean_p95": [
+				66.72,
+				67.602
+			],
+			"mode_kept": true,
+			"output_size": [
+				3840,
+				2160
+			],
+			"png": {
+				"dims": [
+					3840,
+					2160
+				],
+				"error": 0,
+				"format": 4,
+				"path": "C:/tmp/observatory-gaia/artpass/gaia/shellverify-20261006c/shellnew_cabin_door.png"
+			},
+			"render_size": [
+				3840,
+				2160
+			],
+			"rr_evaluations": 30,
+			"scale": 1.0,
+			"view": "cabin_door"
+		},
+		"shellnew_cabin_front": {
+			"at_s": 31.36,
+			"camera_end": [
+				0.0,
+				1.7,
+				7.4,
+				0.0,
+				-0.0674,
+				0.9977
+			],
+			"camera_start": [
+				0.0,
+				1.7,
+				7.4,
+				0.0,
+				-0.0674,
+				0.9977
+			],
+			"dlss_evaluations": 0,
+			"elapsed_ms": 2029.88,
+			"fps": 14.3,
+			"frame_generation": false,
+			"frame_ms_mean_p95": [
+				69.996,
+				70.847
+			],
+			"frames": 29,
+			"godot_buffer_mem_mb": 379.8,
+			"godot_texture_mem_mb": 1731.4,
+			"godot_video_mem_mb_peak": 2506.7,
+			"gpu_ms_mean_p95": [
+				69.929,
+				70.836
+			],
+			"mode_kept": true,
+			"output_size": [
+				3840,
+				2160
+			],
+			"png": {
+				"dims": [
+					3840,
+					2160
+				],
+				"error": 0,
+				"format": 4,
+				"path": "C:/tmp/observatory-gaia/artpass/gaia/shellverify-20261006c/shellnew_cabin_front.png"
+			},
+			"render_size": [
+				3840,
+				2160
+			],
+			"rr_evaluations": 29,
+			"scale": 1.0,
+			"view": "cabin_front"
+		},
+		"shellnew_cabin_oblique": {
+			"at_s": 38.24,
+			"camera_end": [
+				4.4,
+				1.6,
+				5.4,
+				0.6588,
+				-0.0749,
+				0.7486
+			],
+			"camera_start": [
+				4.4,
+				1.6,
+				5.4,
+				0.6588,
+				-0.0749,
+				0.7486
+			],
+			"dlss_evaluations": 0,
+			"elapsed_ms": 2008.88,
+			"fps": 14.4,
+			"frame_generation": false,
+			"frame_ms_mean_p95": [
+				69.272,
+				69.919
+			],
+			"frames": 29,
+			"godot_buffer_mem_mb": 379.8,
+			"godot_texture_mem_mb": 1731.4,
+			"godot_video_mem_mb_peak": 2506.7,
+			"gpu_ms_mean_p95": [
+				69.195,
+				69.936
+			],
+			"mode_kept": true,
+			"output_size": [
+				3840,
+				2160
+			],
+			"png": {
+				"dims": [
+					3840,
+					2160
+				],
+				"error": 0,
+				"format": 4,
+				"path": "C:/tmp/observatory-gaia/artpass/gaia/shellverify-20261006c/shellnew_cabin_oblique.png"
+			},
+			"render_size": [
+				3840,
+				2160
+			],
+			"rr_evaluations": 29,
+			"scale": 1.0,
+			"view": "cabin_oblique"
+		},
+		"shellold_cabin_door": {
+			"at_s": 24.35,
+			"camera_end": [
+				1.3,
+				1.5,
+				4.2,
+				0.5083,
+				0.0391,
+				0.8603
+			],
+			"camera_start": [
+				1.3,
+				1.5,
+				4.2,
+				0.5083,
+				0.0391,
+				0.8603
+			],
+			"dlss_evaluations": 0,
+			"elapsed_ms": 2004.59,
+			"fps": 15.0,
+			"frame_generation": false,
+			"frame_ms_mean_p95": [
+				66.82,
+				68.515
+			],
+			"frames": 30,
+			"godot_buffer_mem_mb": 372.8,
+			"godot_texture_mem_mb": 1461.1,
+			"godot_video_mem_mb_peak": 2224.5,
+			"gpu_ms_mean_p95": [
+				66.752,
+				68.475
+			],
+			"mode_kept": true,
+			"output_size": [
+				3840,
+				2160
+			],
+			"png": {
+				"dims": [
+					3840,
+					2160
+				],
+				"error": 0,
+				"format": 4,
+				"path": "C:/tmp/observatory-gaia/artpass/gaia/shellverify-20261006c/shellold_cabin_door.png"
+			},
+			"render_size": [
+				3840,
+				2160
+			],
+			"rr_evaluations": 30,
+			"scale": 1.0,
+			"view": "cabin_door"
+		},
+		"shellold_cabin_front": {
+			"at_s": 10.67,
+			"camera_end": [
+				0.0,
+				1.7,
+				7.4,
+				0.0,
+				-0.0674,
+				0.9977
+			],
+			"camera_start": [
+				0.0,
+				1.7,
+				7.4,
+				0.0,
+				-0.0674,
+				0.9977
+			],
+			"dlss_evaluations": 0,
+			"elapsed_ms": 2021.47,
+			"fps": 14.3,
+			"frame_generation": false,
+			"frame_ms_mean_p95": [
+				69.706,
+				70.609
+			],
+			"frames": 29,
+			"godot_buffer_mem_mb": 372.8,
+			"godot_texture_mem_mb": 1461.1,
+			"godot_video_mem_mb_peak": 2224.5,
+			"gpu_ms_mean_p95": [
+				69.641,
+				70.364
+			],
+			"mode_kept": true,
+			"output_size": [
+				3840,
+				2160
+			],
+			"png": {
+				"dims": [
+					3840,
+					2160
+				],
+				"error": 0,
+				"format": 4,
+				"path": "C:/tmp/observatory-gaia/artpass/gaia/shellverify-20261006c/shellold_cabin_front.png"
+			},
+			"render_size": [
+				3840,
+				2160
+			],
+			"rr_evaluations": 29,
+			"scale": 1.0,
+			"view": "cabin_front"
+		},
+		"shellold_cabin_oblique": {
+			"at_s": 17.58,
+			"camera_end": [
+				4.4,
+				1.6,
+				5.4,
+				0.6588,
+				-0.0749,
+				0.7486
+			],
+			"camera_start": [
+				4.4,
+				1.6,
+				5.4,
+				0.6588,
+				-0.0749,
+				0.7486
+			],
+			"dlss_evaluations": 0,
+			"elapsed_ms": 2059.97,
+			"fps": 14.6,
+			"frame_generation": false,
+			"frame_ms_mean_p95": [
+				68.666,
+				69.359
+			],
+			"frames": 30,
+			"godot_buffer_mem_mb": 372.8,
+			"godot_texture_mem_mb": 1461.1,
+			"godot_video_mem_mb_peak": 2224.5,
+			"gpu_ms_mean_p95": [
+				68.583,
+				69.304
+			],
+			"mode_kept": true,
+			"output_size": [
+				3840,
+				2160
+			],
+			"png": {
+				"dims": [
+					3840,
+					2160
+				],
+				"error": 0,
+				"format": 4,
+				"path": "C:/tmp/observatory-gaia/artpass/gaia/shellverify-20261006c/shellold_cabin_oblique.png"
+			},
+			"render_size": [
+				3840,
+				2160
+			],
+			"rr_evaluations": 30,
+			"scale": 1.0,
+			"view": "cabin_oblique"
+		}
+	},
+	"set": "shell",
+	"source_color_set_all_states": {
+		"bay_glass.gdshader:jewel_a": 1,
+		"bay_glass.gdshader:jewel_b": 1,
+		"bay_glass.gdshader:jewel_c": 1,
+		"book_spines.gdshader:gilt_color": 2,
+		"book_spines.gdshader:paper_color": 1,
+		"floor_paving.gdshader:dark": 1,
+		"floor_paving.gdshader:gilt": 2,
+		"floor_paving.gdshader:pale": 1,
+		"floor_paving.gdshader:rose_dark": 2,
+		"floor_paving.gdshader:rose_pale": 2,
+		"garden_impostor.gdshader:lamp_colour": 5,
+		"garden_plant.gdshader:lamp_colour": 21,
+		"gilt.gdshader:gold": 2,
+		"holo_ring.gdshader:gold": 2,
+		"kiosk_glass.gdshader:sky": 1,
+		"kiosk_glass.gdshader:tint": 1,
+		"palace_garden.gdshader:lamp_colour": 19,
+		"palace_garden.gdshader:sky_low": 20,
+		"palace_garden.gdshader:window_colour": 20,
+		"recording_frame.gdshader:gold": 2,
+		"shelf_wood.gdshader:late_color": 1,
+		"shelf_wood.gdshader:wood_color": 1,
+		"stained_glass.gdshader:frame_color": 6,
+		"statue_marble.gdshader:stone": 2,
+		"statue_marble.gdshader:vein": 2,
+		"stone_relief.gdshader:rosette": 10,
+		"upperside.gdshader:window_colour": 1
+	},
+	"states": {
+		"gaia_off": {
+			"books": {
+
+			},
+			"light_set": {
+				"course_shelves_spots": {
+					"found": 9,
+					"kept": 9,
+					"range_m": 1.6,
+					"size_m": 0.05
+				},
+				"dimmed_not_hidden": [],
+				"shelf_lamp": {
+					"energy": "x2",
+					"found": 48,
+					"kept": 24,
+					"range_m": 7.0,
+					"size_m": 0.15,
+					"units": [
+						"Unit_L0_B00",
+						"Unit_L0_B02",
+						"Unit_L0_B04",
+						"Unit_L0_B06",
+						"Unit_L0_B08",
+						"Unit_L0_B10",
+						"Unit_L0_B12",
+						"Unit_L0_B14",
+						"Unit_L1_B00",
+						"Unit_L1_B02",
+						"Unit_L1_B04",
+						"Unit_L1_B06",
+						"Unit_L1_B08",
+						"Unit_L1_B10",
+						"Unit_L1_B12",
+						"Unit_L1_B14",
+						"Unit_L2_B00",
+						"Unit_L2_B02",
+						"Unit_L2_B04",
+						"Unit_L2_B06",
+						"Unit_L2_B08",
+						"Unit_L2_B10",
+						"Unit_L2_B12",
+						"Unit_L2_B14"
+					]
+				},
+				"single_lights": [
+					"InteriorGlow",
+					"DoorSpill",
+					"ReceiverGlow",
+					"KeyLightL",
+					"KeyLightR",
+					"CageLight",
+					"FanlightLight2",
+					"FanlightLight5",
+					"MoonFill",
+					"OculusShaft",
+					"OculusMoon",
+					"SoftFill0",
+					"SoftFill1",
+					"SoftFill2",
+					"StatueKey"
+				],
+				"window_light": {
+					"energy": "x3",
+					"found": 24,
+					"kept": 8,
+					"size_m": 1.0
+				}
+			},
+			"observatory": {
+
+			},
+			"pt_changes": {
+				"gilt_fake_reflection": "output_energy 0.7 -> 0",
+				"light_sizes_from_zero": {
+					"@SpotLight3D (m, spot)": [
+						0.15,
+						9
+					],
+					"DoorSpill (m, spot)": [
+						0.15,
+						1
+					],
+					"InteriorGlow (m, omni)": [
+						0.15,
+						1
+					],
+					"KeyLightL (m, spot)": [
+						0.15,
+						1
+					],
+					"KeyLightR (m, spot)": [
+						0.15,
+						1
+					],
+					"MoonFill (m, omni)": [
+						0.15,
+						1
+					],
+					"OculusMoon (m, spot)": [
+						0.6,
+						1
+					],
+					"OculusShaft (m, spot)": [
+						0.15,
+						1
+					],
+					"ReceiverGlow (m, omni)": [
+						0.15,
+						1
+					],
+					"ShelfLamp (m, omni)": [
+						0.15,
+						48
+					],
+					"StatueKey (m, spot)": [
+						0.15,
+						1
+					],
+					"WindowLight (m, spot)": [
+						0.15,
+						24
+					]
+				},
+				"night_sky": "hidden (its dome would be met by rays as a 1 m ball)",
+				"source_color_defaults": {
+					"materials_scanned": 117,
+					"set_to_their_default": {
+						"book_spines.gdshader:gilt_color": 1,
+						"book_spines.gdshader:paper_color": 1,
+						"floor_paving.gdshader:dark": 1,
+						"floor_paving.gdshader:gilt": 1,
+						"floor_paving.gdshader:pale": 1,
+						"floor_paving.gdshader:rose_dark": 1,
+						"floor_paving.gdshader:rose_pale": 1,
+						"gilt.gdshader:gold": 1,
+						"holo_ring.gdshader:gold": 1,
+						"recording_frame.gdshader:gold": 1,
+						"stained_glass.gdshader:frame_color": 3,
+						"statue_marble.gdshader:stone": 1,
+						"statue_marble.gdshader:vein": 1,
+						"stone_relief.gdshader:rosette": 5
+					},
+					"source_color_without_default": [
+						"gilt.gdshader:strip_color",
+						"gilt.gdshader:books_color",
+						"gilt.gdshader:slab_color",
+						"gilt.gdshader:floor_color",
+						"gilt.gdshader:vault_color",
+						"gilt.gdshader:sky_color",
+						"bay_glass.gdshader:strip_color",
+						"bay_glass.gdshader:books_color",
+						"bay_glass.gdshader:slab_color",
+						"bay_glass.gdshader:floor_color",
+						"bay_glass.gdshader:vault_color",
+						"bay_glass.gdshader:sky_color"
+					]
+				},
+				"stone_slope_materials": 7
+			},
+			"soft_fill_lights": 3,
+			"steel": {
+				"door_glow_k": 1.0,
+				"edge_roll_m": 0.0,
+				"interior_glow": 4.5,
+				"joints_m": 0.0,
+				"key_energy": 5.0,
+				"on": false,
+				"receiver_glow": 1.5,
+				"shell_glb": "res://assets/steel_portal.glb",
+				"steel_preset": 0
+			},
+			"views": {
+				"cabin_door": {
+					"pt_lights": {
+						"by_name": {
+							"CageLight": {
+								"kept": 1,
+								"lit": 1
+							},
+							"CourseShelves spot": {
+								"kept": 9,
+								"lit": 9
+							},
+							"DoorSpill": {
+								"kept": 1,
+								"lit": 1
+							},
+							"FanlightLight": {
+								"kept": 2,
+								"lit": 2
+							},
+							"InteriorGlow": {
+								"kept": 1,
+								"lit": 1
+							},
+							"KeyLightL": {
+								"kept": 1,
+								"lit": 1
+							},
+							"KeyLightR": {
+								"kept": 1,
+								"lit": 1
+							},
+							"MoonFill": {
+								"kept": 1,
+								"lit": 1
+							},
+							"OculusMoon": {
+								"kept": 1,
+								"lit": 1
+							},
+							"OculusShaft": {
+								"kept": 1,
+								"lit": 1
+							},
+							"ReceiverGlow": {
+								"kept": 1,
+								"lit": 1
+							},
+							"ShelfLamp": {
+								"kept": 24,
+								"lit": 24
+							},
+							"SoftFill": {
+								"kept": 3,
+								"lit": 3
+							},
+							"StatueKey": {
+								"kept": 1,
+								"lit": 1
+							},
+							"WindowLight": {
+								"kept": 8,
+								"lit": 8
+							}
+						},
+						"directional_lit": 0,
+						"dropped": 0,
+						"positional_lit": 56,
+						"slots": 64
+					},
+					"view": {
+						"course_shelves_spots": [
+							{
+								"in_view": false,
+								"pixel": null,
+								"pos": [
+									-16.92,
+									1.81,
+									3.37
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									180,
+									944
+								],
+								"pos": [
+									-16.92,
+									1.81,
+									-3.37
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									1164,
+									953
+								],
+								"pos": [
+									-14.34,
+									1.81,
+									-9.58
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									1926,
+									956
+								],
+								"pos": [
+									-9.58,
+									1.81,
+									-14.34
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									2679,
+									954
+								],
+								"pos": [
+									-3.37,
+									1.81,
+									-16.92
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									3615,
+									947
+								],
+								"pos": [
+									3.37,
+									1.81,
+									-16.92
+								]
+							},
+							{
+								"in_view": false,
+								"pixel": null,
+								"pos": [
+									9.58,
+									1.81,
+									-14.34
+								]
+							},
+							{
+								"in_view": false,
+								"pixel": null,
+								"pos": [
+									14.34,
+									1.81,
+									-9.58
+								]
+							},
+							{
+								"in_view": false,
+								"pixel": null,
+								"pos": [
+									16.92,
+									1.81,
+									-3.37
+								]
+							}
+						],
+						"note": "geometric: a 9 x 9 grid on each unit's book face against the frustum; occlusion is not tested",
+						"unit_width_m": 6.50865223836288,
+						"units": {
+							"Unit_L0_B00": {
+								"centre": [
+									16.97,
+									2.8,
+									3.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 117.6
+							},
+							"Unit_L0_B01": {
+								"centre": [
+									14.38,
+									2.8,
+									9.61
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 143.0
+							},
+							"Unit_L0_B02": {
+								"centre": [
+									9.61,
+									2.8,
+									14.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 170.7
+							},
+							"Unit_L0_B03": {
+								"centre": [
+									3.38,
+									2.8,
+									16.97
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 158.4
+							},
+							"Unit_L0_B04": {
+								"centre": [
+									-3.38,
+									2.8,
+									16.97
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 129.3
+							},
+							"Unit_L0_B05": {
+								"centre": [
+									-9.61,
+									2.8,
+									14.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 102.6
+							},
+							"Unit_L0_B06": {
+								"centre": [
+									-14.38,
+									2.8,
+									9.61
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 78.7
+							},
+							"Unit_L0_B07": {
+								"centre": [
+									-16.97,
+									2.8,
+									3.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 57.1
+							},
+							"Unit_L0_B08": {
+								"centre": [
+									-16.97,
+									2.8,
+									-3.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.67,
+								"off_axis_deg": 37.4,
+								"pixel_box": [
+									24,
+									403,
+									645,
+									1174
+								]
+							},
+							"Unit_L0_B09": {
+								"centre": [
+									-14.38,
+									2.8,
+									-9.61
+								],
+								"height_m": 5.6,
+								"in_view_share": 1.0,
+								"off_axis_deg": 19.0,
+								"pixel_box": [
+									774,
+									509,
+									1500,
+									1141
+								]
+							},
+							"Unit_L0_B10": {
+								"centre": [
+									-9.61,
+									2.8,
+									-14.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 1.0,
+								"off_axis_deg": 5.7,
+								"pixel_box": [
+									1607,
+									572,
+									2240,
+									1121
+								]
+							},
+							"Unit_L0_B11": {
+								"centre": [
+									-3.38,
+									2.8,
+									-16.97
+								],
+								"height_m": 5.6,
+								"in_view_share": 1.0,
+								"off_axis_deg": 19.0,
+								"pixel_box": [
+									2346,
+									534,
+									3051,
+									1133
+								]
+							},
+							"Unit_L0_B12": {
+								"centre": [
+									3.38,
+									2.8,
+									-16.97
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.67,
+								"off_axis_deg": 36.6,
+								"pixel_box": [
+									3174,
+									453,
+									3756,
+									1158
+								]
+							},
+							"Unit_L0_B13": {
+								"centre": [
+									9.61,
+									2.8,
+									-14.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 55.0
+							},
+							"Unit_L0_B14": {
+								"centre": [
+									14.38,
+									2.8,
+									-9.61
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 74.2
+							},
+							"Unit_L0_B15": {
+								"centre": [
+									16.97,
+									2.8,
+									-3.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 94.9
+							},
+							"Unit_L1_B00": {
+								"centre": [
+									16.97,
+									9.1,
+									3.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 115.7
+							},
+							"Unit_L1_B01": {
+								"centre": [
+									14.38,
+									9.1,
+									9.61
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 136.2
+							},
+							"Unit_L1_B02": {
+								"centre": [
+									9.61,
+									9.1,
+									14.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 151.0
+							},
+							"Unit_L1_B03": {
+								"centre": [
+									3.38,
+									9.1,
+									16.97
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 145.3
+							},
+							"Unit_L1_B04": {
+								"centre": [
+									-3.38,
+									9.1,
+									16.97
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 124.9
+							},
+							"Unit_L1_B05": {
+								"centre": [
+									-9.61,
+									9.1,
+									14.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 102.1
+							},
+							"Unit_L1_B06": {
+								"centre": [
+									-14.38,
+									9.1,
+									9.61
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 80.5
+							},
+							"Unit_L1_B07": {
+								"centre": [
+									-16.97,
+									9.1,
+									3.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 60.7
+							},
+							"Unit_L1_B08": {
+								"centre": [
+									-16.97,
+									9.1,
+									-3.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.26,
+								"off_axis_deg": 43.0,
+								"pixel_box": [
+									12,
+									17,
+									628,
+									339
+								]
+							},
+							"Unit_L1_B09": {
+								"centre": [
+									-14.38,
+									9.1,
+									-9.61
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.62,
+								"off_axis_deg": 28.4,
+								"pixel_box": [
+									765,
+									10,
+									1495,
+									436
+								]
+							},
+							"Unit_L1_B10": {
+								"centre": [
+									-9.61,
+									9.1,
+									-14.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.78,
+								"off_axis_deg": 21.7,
+								"pixel_box": [
+									1604,
+									7,
+									2243,
+									451
+								]
+							},
+							"Unit_L1_B11": {
+								"centre": [
+									-3.38,
+									9.1,
+									-16.97
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.68,
+								"off_axis_deg": 28.0,
+								"pixel_box": [
+									2351,
+									4,
+									3059,
+									447
+								]
+							},
+							"Unit_L1_B12": {
+								"centre": [
+									3.38,
+									9.1,
+									-16.97
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.33,
+								"off_axis_deg": 41.7,
+								"pixel_box": [
+									3190,
+									1,
+									3770,
+									377
+								]
+							},
+							"Unit_L1_B13": {
+								"centre": [
+									9.61,
+									9.1,
+									-14.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 58.2
+							},
+							"Unit_L1_B14": {
+								"centre": [
+									14.38,
+									9.1,
+									-9.61
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 76.1
+							},
+							"Unit_L1_B15": {
+								"centre": [
+									16.97,
+									9.1,
+									-3.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 95.3
+							},
+							"Unit_L2_B00": {
+								"centre": [
+									16.97,
+									15.35,
+									3.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 111.9
+							},
+							"Unit_L2_B01": {
+								"centre": [
+									14.38,
+									15.35,
+									9.61
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 126.7
+							},
+							"Unit_L2_B02": {
+								"centre": [
+									9.61,
+									15.35,
+									14.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 135.1
+							},
+							"Unit_L2_B03": {
+								"centre": [
+									3.38,
+									15.35,
+									16.97
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 131.6
+							},
+							"Unit_L2_B04": {
+								"centre": [
+									-3.38,
+									15.35,
+									16.97
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 118.1
+							},
+							"Unit_L2_B05": {
+								"centre": [
+									-9.61,
+									15.35,
+									14.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 100.6
+							},
+							"Unit_L2_B06": {
+								"centre": [
+									-14.38,
+									15.35,
+									9.61
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 82.6
+							},
+							"Unit_L2_B07": {
+								"centre": [
+									-16.97,
+									15.35,
+									3.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 65.7
+							},
+							"Unit_L2_B08": {
+								"centre": [
+									-16.97,
+									15.35,
+									-3.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 50.8
+							},
+							"Unit_L2_B09": {
+								"centre": [
+									-14.38,
+									15.35,
+									-9.61
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 39.6
+							},
+							"Unit_L2_B10": {
+								"centre": [
+									-9.61,
+									15.35,
+									-14.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 35.0
+							},
+							"Unit_L2_B11": {
+								"centre": [
+									-3.38,
+									15.35,
+									-16.97
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 38.8
+							},
+							"Unit_L2_B12": {
+								"centre": [
+									3.38,
+									15.35,
+									-16.97
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 49.1
+							},
+							"Unit_L2_B13": {
+								"centre": [
+									9.61,
+									15.35,
+									-14.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 62.9
+							},
+							"Unit_L2_B14": {
+								"centre": [
+									14.38,
+									15.35,
+									-9.61
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 78.5
+							},
+							"Unit_L2_B15": {
+								"centre": [
+									16.97,
+									15.35,
+									-3.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 95.1
+							}
+						}
+					}
+				},
+				"cabin_front": {
+					"pt_lights": {
+						"by_name": {
+							"CageLight": {
+								"kept": 1,
+								"lit": 1
+							},
+							"CourseShelves spot": {
+								"kept": 9,
+								"lit": 9
+							},
+							"DoorSpill": {
+								"kept": 1,
+								"lit": 1
+							},
+							"FanlightLight": {
+								"kept": 2,
+								"lit": 2
+							},
+							"InteriorGlow": {
+								"kept": 1,
+								"lit": 1
+							},
+							"KeyLightL": {
+								"kept": 1,
+								"lit": 1
+							},
+							"KeyLightR": {
+								"kept": 1,
+								"lit": 1
+							},
+							"MoonFill": {
+								"kept": 1,
+								"lit": 1
+							},
+							"OculusMoon": {
+								"kept": 1,
+								"lit": 1
+							},
+							"OculusShaft": {
+								"kept": 1,
+								"lit": 1
+							},
+							"ReceiverGlow": {
+								"kept": 1,
+								"lit": 1
+							},
+							"ShelfLamp": {
+								"kept": 24,
+								"lit": 24
+							},
+							"SoftFill": {
+								"kept": 3,
+								"lit": 3
+							},
+							"StatueKey": {
+								"kept": 1,
+								"lit": 1
+							},
+							"WindowLight": {
+								"kept": 8,
+								"lit": 8
+							}
+						},
+						"directional_lit": 0,
+						"dropped": 0,
+						"positional_lit": 56,
+						"slots": 64
+					},
+					"view": {
+						"course_shelves_spots": [
+							{
+								"in_view": false,
+								"pixel": null,
+								"pos": [
+									-16.92,
+									1.81,
+									3.37
+								]
+							},
+							{
+								"in_view": false,
+								"pixel": null,
+								"pos": [
+									-16.92,
+									1.81,
+									-3.37
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									164,
+									1207
+								],
+								"pos": [
+									-14.34,
+									1.81,
+									-9.58
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									1003,
+									1209
+								],
+								"pos": [
+									-9.58,
+									1.81,
+									-14.34
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									1632,
+									1211
+								],
+								"pos": [
+									-3.37,
+									1.81,
+									-16.92
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									2207,
+									1211
+								],
+								"pos": [
+									3.37,
+									1.81,
+									-16.92
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									2836,
+									1209
+								],
+								"pos": [
+									9.58,
+									1.81,
+									-14.34
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									3675,
+									1207
+								],
+								"pos": [
+									14.34,
+									1.81,
+									-9.58
+								]
+							},
+							{
+								"in_view": false,
+								"pixel": null,
+								"pos": [
+									16.92,
+									1.81,
+									-3.37
+								]
+							}
+						],
+						"note": "geometric: a 9 x 9 grid on each unit's book face against the frustum; occlusion is not tested",
+						"unit_width_m": 6.50865223836288,
+						"units": {
+							"Unit_L0_B00": {
+								"centre": [
+									16.97,
+									2.8,
+									3.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 76.5
+							},
+							"Unit_L0_B01": {
+								"centre": [
+									14.38,
+									2.8,
+									9.61
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 98.4
+							},
+							"Unit_L0_B02": {
+								"centre": [
+									9.61,
+									2.8,
+									14.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 125.3
+							},
+							"Unit_L0_B03": {
+								"centre": [
+									3.38,
+									2.8,
+									16.97
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 158.1
+							},
+							"Unit_L0_B04": {
+								"centre": [
+									-3.38,
+									2.8,
+									16.97
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 158.1
+							},
+							"Unit_L0_B05": {
+								"centre": [
+									-9.61,
+									2.8,
+									14.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 125.3
+							},
+							"Unit_L0_B06": {
+								"centre": [
+									-14.38,
+									2.8,
+									9.61
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 98.4
+							},
+							"Unit_L0_B07": {
+								"centre": [
+									-16.97,
+									2.8,
+									3.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 76.5
+							},
+							"Unit_L0_B08": {
+								"centre": [
+									-16.97,
+									2.8,
+									-3.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 57.5
+							},
+							"Unit_L0_B09": {
+								"centre": [
+									-14.38,
+									2.8,
+									-9.61
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.67,
+								"off_axis_deg": 40.2,
+								"pixel_box": [
+									33,
+									766,
+									572,
+									1401
+								]
+							},
+							"Unit_L0_B10": {
+								"centre": [
+									-9.61,
+									2.8,
+									-14.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 1.0,
+								"off_axis_deg": 23.8,
+								"pixel_box": [
+									671,
+									850,
+									1289,
+									1367
+								]
+							},
+							"Unit_L0_B11": {
+								"centre": [
+									-3.38,
+									2.8,
+									-16.97
+								],
+								"height_m": 5.6,
+								"in_view_share": 1.0,
+								"off_axis_deg": 8.0,
+								"pixel_box": [
+									1371,
+									906,
+									1878,
+									1345
+								]
+							},
+							"Unit_L0_B12": {
+								"centre": [
+									3.38,
+									2.8,
+									-16.97
+								],
+								"height_m": 5.6,
+								"in_view_share": 1.0,
+								"off_axis_deg": 8.0,
+								"pixel_box": [
+									1961,
+									906,
+									2468,
+									1345
+								]
+							},
+							"Unit_L0_B13": {
+								"centre": [
+									9.61,
+									2.8,
+									-14.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 1.0,
+								"off_axis_deg": 23.8,
+								"pixel_box": [
+									2550,
+									850,
+									3168,
+									1367
+								]
+							},
+							"Unit_L0_B14": {
+								"centre": [
+									14.38,
+									2.8,
+									-9.61
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.67,
+								"off_axis_deg": 40.2,
+								"pixel_box": [
+									3267,
+									766,
+									3806,
+									1401
+								]
+							},
+							"Unit_L0_B15": {
+								"centre": [
+									16.97,
+									2.8,
+									-3.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 57.5
+							},
+							"Unit_L1_B00": {
+								"centre": [
+									16.97,
+									9.1,
+									3.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 76.2
+							},
+							"Unit_L1_B01": {
+								"centre": [
+									14.38,
+									9.1,
+									9.61
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 96.0
+							},
+							"Unit_L1_B02": {
+								"centre": [
+									9.61,
+									9.1,
+									14.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 117.5
+							},
+							"Unit_L1_B03": {
+								"centre": [
+									3.38,
+									9.1,
+									16.97
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 136.1
+							},
+							"Unit_L1_B04": {
+								"centre": [
+									-3.38,
+									9.1,
+									16.97
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 136.1
+							},
+							"Unit_L1_B05": {
+								"centre": [
+									-9.61,
+									9.1,
+									14.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 117.5
+							},
+							"Unit_L1_B06": {
+								"centre": [
+									-14.38,
+									9.1,
+									9.61
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 96.0
+							},
+							"Unit_L1_B07": {
+								"centre": [
+									-16.97,
+									9.1,
+									3.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 76.2
+							},
+							"Unit_L1_B08": {
+								"centre": [
+									-16.97,
+									9.1,
+									-3.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 58.3
+							},
+							"Unit_L1_B09": {
+								"centre": [
+									-14.38,
+									9.1,
+									-9.61
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.65,
+								"off_axis_deg": 41.9,
+								"pixel_box": [
+									81,
+									40,
+									601,
+									715
+								]
+							},
+							"Unit_L1_B10": {
+								"centre": [
+									-9.61,
+									9.1,
+									-14.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 1.0,
+								"off_axis_deg": 26.9,
+								"pixel_box": [
+									696,
+									218,
+									1300,
+									799
+								]
+							},
+							"Unit_L1_B11": {
+								"centre": [
+									-3.38,
+									9.1,
+									-16.97
+								],
+								"height_m": 5.8,
+								"in_view_share": 1.0,
+								"off_axis_deg": 15.0,
+								"pixel_box": [
+									1381,
+									367,
+									1879,
+									825
+								]
+							},
+							"Unit_L1_B12": {
+								"centre": [
+									3.38,
+									9.1,
+									-16.97
+								],
+								"height_m": 5.8,
+								"in_view_share": 1.0,
+								"off_axis_deg": 15.0,
+								"pixel_box": [
+									1960,
+									367,
+									2458,
+									825
+								]
+							},
+							"Unit_L1_B13": {
+								"centre": [
+									9.61,
+									9.1,
+									-14.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 1.0,
+								"off_axis_deg": 26.9,
+								"pixel_box": [
+									2539,
+									218,
+									3143,
+									799
+								]
+							},
+							"Unit_L1_B14": {
+								"centre": [
+									14.38,
+									9.1,
+									-9.61
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.65,
+								"off_axis_deg": 41.9,
+								"pixel_box": [
+									3238,
+									40,
+									3758,
+									715
+								]
+							},
+							"Unit_L1_B15": {
+								"centre": [
+									16.97,
+									9.1,
+									-3.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 58.3
+							},
+							"Unit_L2_B00": {
+								"centre": [
+									16.97,
+									15.35,
+									3.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 77.1
+							},
+							"Unit_L2_B01": {
+								"centre": [
+									14.38,
+									15.35,
+									9.61
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 93.7
+							},
+							"Unit_L2_B02": {
+								"centre": [
+									9.61,
+									15.35,
+									14.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 109.5
+							},
+							"Unit_L2_B03": {
+								"centre": [
+									3.38,
+									15.35,
+									16.97
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 120.5
+							},
+							"Unit_L2_B04": {
+								"centre": [
+									-3.38,
+									15.35,
+									16.97
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 120.5
+							},
+							"Unit_L2_B05": {
+								"centre": [
+									-9.61,
+									15.35,
+									14.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 109.5
+							},
+							"Unit_L2_B06": {
+								"centre": [
+									-14.38,
+									15.35,
+									9.61
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 93.7
+							},
+							"Unit_L2_B07": {
+								"centre": [
+									-16.97,
+									15.35,
+									3.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 77.1
+							},
+							"Unit_L2_B08": {
+								"centre": [
+									-16.97,
+									15.35,
+									-3.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 61.3
+							},
+							"Unit_L2_B09": {
+								"centre": [
+									-14.38,
+									15.35,
+									-9.61
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.04,
+								"off_axis_deg": 46.8,
+								"pixel_box": [
+									522,
+									5,
+									609,
+									67
+								]
+							},
+							"Unit_L2_B10": {
+								"centre": [
+									-9.61,
+									15.35,
+									-14.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.44,
+								"off_axis_deg": 34.4,
+								"pixel_box": [
+									722,
+									0,
+									1307,
+									256
+								]
+							},
+							"Unit_L2_B11": {
+								"centre": [
+									-3.38,
+									15.35,
+									-16.97
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.72,
+								"off_axis_deg": 26.2,
+								"pixel_box": [
+									1390,
+									4,
+									1879,
+									313
+								]
+							},
+							"Unit_L2_B12": {
+								"centre": [
+									3.38,
+									15.35,
+									-16.97
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.72,
+								"off_axis_deg": 26.2,
+								"pixel_box": [
+									1960,
+									4,
+									2449,
+									313
+								]
+							},
+							"Unit_L2_B13": {
+								"centre": [
+									9.61,
+									15.35,
+									-14.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.44,
+								"off_axis_deg": 34.4,
+								"pixel_box": [
+									2532,
+									0,
+									3117,
+									256
+								]
+							},
+							"Unit_L2_B14": {
+								"centre": [
+									14.38,
+									15.35,
+									-9.61
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.04,
+								"off_axis_deg": 46.8,
+								"pixel_box": [
+									3230,
+									5,
+									3317,
+									67
+								]
+							},
+							"Unit_L2_B15": {
+								"centre": [
+									16.97,
+									15.35,
+									-3.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 61.3
+							}
+						}
+					}
+				},
+				"cabin_oblique": {
+					"pt_lights": {
+						"by_name": {
+							"CageLight": {
+								"kept": 1,
+								"lit": 1
+							},
+							"CourseShelves spot": {
+								"kept": 9,
+								"lit": 9
+							},
+							"DoorSpill": {
+								"kept": 1,
+								"lit": 1
+							},
+							"FanlightLight": {
+								"kept": 2,
+								"lit": 2
+							},
+							"InteriorGlow": {
+								"kept": 1,
+								"lit": 1
+							},
+							"KeyLightL": {
+								"kept": 1,
+								"lit": 1
+							},
+							"KeyLightR": {
+								"kept": 1,
+								"lit": 1
+							},
+							"MoonFill": {
+								"kept": 1,
+								"lit": 1
+							},
+							"OculusMoon": {
+								"kept": 1,
+								"lit": 1
+							},
+							"OculusShaft": {
+								"kept": 1,
+								"lit": 1
+							},
+							"ReceiverGlow": {
+								"kept": 1,
+								"lit": 1
+							},
+							"ShelfLamp": {
+								"kept": 24,
+								"lit": 24
+							},
+							"SoftFill": {
+								"kept": 3,
+								"lit": 3
+							},
+							"StatueKey": {
+								"kept": 1,
+								"lit": 1
+							},
+							"WindowLight": {
+								"kept": 8,
+								"lit": 8
+							}
+						},
+						"directional_lit": 0,
+						"dropped": 0,
+						"positional_lit": 56,
+						"slots": 64
+					},
+					"view": {
+						"course_shelves_spots": [
+							{
+								"in_view": false,
+								"pixel": null,
+								"pos": [
+									-16.92,
+									1.81,
+									3.37
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									772,
+									1230
+								],
+								"pos": [
+									-16.92,
+									1.81,
+									-3.37
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									1510,
+									1233
+								],
+								"pos": [
+									-14.34,
+									1.81,
+									-9.58
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									2165,
+									1233
+								],
+								"pos": [
+									-9.58,
+									1.81,
+									-14.34
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									2865,
+									1231
+								],
+								"pos": [
+									-3.37,
+									1.81,
+									-16.92
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									3778,
+									1226
+								],
+								"pos": [
+									3.37,
+									1.81,
+									-16.92
+								]
+							},
+							{
+								"in_view": false,
+								"pixel": null,
+								"pos": [
+									9.58,
+									1.81,
+									-14.34
+								]
+							},
+							{
+								"in_view": false,
+								"pixel": null,
+								"pos": [
+									14.34,
+									1.81,
+									-9.58
+								]
+							},
+							{
+								"in_view": false,
+								"pixel": null,
+								"pos": [
+									16.92,
+									1.81,
+									-3.37
+								]
+							}
+						],
+						"note": "geometric: a 9 x 9 grid on each unit's book face against the frustum; occlusion is not tested",
+						"unit_width_m": 6.50865223836288,
+						"units": {
+							"Unit_L0_B00": {
+								"centre": [
+									16.97,
+									2.8,
+									3.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 121.5
+							},
+							"Unit_L0_B01": {
+								"centre": [
+									14.38,
+									2.8,
+									9.61
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 152.2
+							},
+							"Unit_L0_B02": {
+								"centre": [
+									9.61,
+									2.8,
+									14.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 164.4
+							},
+							"Unit_L0_B03": {
+								"centre": [
+									3.38,
+									2.8,
+									16.97
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 132.5
+							},
+							"Unit_L0_B04": {
+								"centre": [
+									-3.38,
+									2.8,
+									16.97
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 104.3
+							},
+							"Unit_L0_B05": {
+								"centre": [
+									-9.61,
+									2.8,
+									14.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 81.1
+							},
+							"Unit_L0_B06": {
+								"centre": [
+									-14.38,
+									2.8,
+									9.61
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 61.1
+							},
+							"Unit_L0_B07": {
+								"centre": [
+									-16.97,
+									2.8,
+									3.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.31,
+								"off_axis_deg": 43.2,
+								"pixel_box": [
+									0,
+									749,
+									253,
+									1430
+								]
+							},
+							"Unit_L0_B08": {
+								"centre": [
+									-16.97,
+									2.8,
+									-3.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 1.0,
+								"off_axis_deg": 26.3,
+								"pixel_box": [
+									369,
+									802,
+									1112,
+									1417
+								]
+							},
+							"Unit_L0_B09": {
+								"centre": [
+									-14.38,
+									2.8,
+									-9.61
+								],
+								"height_m": 5.6,
+								"in_view_share": 1.0,
+								"off_axis_deg": 10.1,
+								"pixel_box": [
+									1206,
+									880,
+									1792,
+									1388
+								]
+							},
+							"Unit_L0_B10": {
+								"centre": [
+									-9.61,
+									2.8,
+									-14.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 1.0,
+								"off_axis_deg": 6.2,
+								"pixel_box": [
+									1886,
+									892,
+									2456,
+									1384
+								]
+							},
+							"Unit_L0_B11": {
+								"centre": [
+									-3.38,
+									2.8,
+									-16.97
+								],
+								"height_m": 5.6,
+								"in_view_share": 1.0,
+								"off_axis_deg": 22.2,
+								"pixel_box": [
+									2548,
+									836,
+									3228,
+									1404
+								]
+							},
+							"Unit_L0_B12": {
+								"centre": [
+									3.38,
+									2.8,
+									-16.97
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.56,
+								"off_axis_deg": 38.7,
+								"pixel_box": [
+									3334,
+									765,
+									3792,
+									1430
+								]
+							},
+							"Unit_L0_B13": {
+								"centre": [
+									9.61,
+									2.8,
+									-14.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 56.0
+							},
+							"Unit_L0_B14": {
+								"centre": [
+									14.38,
+									2.8,
+									-9.61
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 74.8
+							},
+							"Unit_L0_B15": {
+								"centre": [
+									16.97,
+									2.8,
+									-3.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 96.0
+							},
+							"Unit_L1_B00": {
+								"centre": [
+									16.97,
+									9.1,
+									3.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 114.8
+							},
+							"Unit_L1_B01": {
+								"centre": [
+									14.38,
+									9.1,
+									9.61
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 134.1
+							},
+							"Unit_L1_B02": {
+								"centre": [
+									9.61,
+									9.1,
+									14.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 138.5
+							},
+							"Unit_L1_B03": {
+								"centre": [
+									3.38,
+									9.1,
+									16.97
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 122.5
+							},
+							"Unit_L1_B04": {
+								"centre": [
+									-3.38,
+									9.1,
+									16.97
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 100.8
+							},
+							"Unit_L1_B05": {
+								"centre": [
+									-9.61,
+									9.1,
+									14.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 80.3
+							},
+							"Unit_L1_B06": {
+								"centre": [
+									-14.38,
+									9.1,
+									9.61
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 61.7
+							},
+							"Unit_L1_B07": {
+								"centre": [
+									-16.97,
+									9.1,
+									3.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.31,
+								"off_axis_deg": 44.7,
+								"pixel_box": [
+									41,
+									3,
+									296,
+									639
+								]
+							},
+							"Unit_L1_B08": {
+								"centre": [
+									-16.97,
+									9.1,
+									-3.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 1.0,
+								"off_axis_deg": 29.2,
+								"pixel_box": [
+									406,
+									57,
+									1128,
+									755
+								]
+							},
+							"Unit_L1_B09": {
+								"centre": [
+									-14.38,
+									9.1,
+									-9.61
+								],
+								"height_m": 5.8,
+								"in_view_share": 1.0,
+								"off_axis_deg": 16.3,
+								"pixel_box": [
+									1220,
+									259,
+									1795,
+									794
+								]
+							},
+							"Unit_L1_B10": {
+								"centre": [
+									-9.61,
+									9.1,
+									-14.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 1.0,
+								"off_axis_deg": 14.2,
+								"pixel_box": [
+									1887,
+									291,
+									2445,
+									795
+								]
+							},
+							"Unit_L1_B11": {
+								"centre": [
+									-3.38,
+									9.1,
+									-16.97
+								],
+								"height_m": 5.8,
+								"in_view_share": 1.0,
+								"off_axis_deg": 25.5,
+								"pixel_box": [
+									2535,
+									144,
+									3199,
+									774
+								]
+							},
+							"Unit_L1_B12": {
+								"centre": [
+									3.38,
+									9.1,
+									-16.97
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.58,
+								"off_axis_deg": 40.4,
+								"pixel_box": [
+									3301,
+									1,
+									3838,
+									688
+								]
+							},
+							"Unit_L1_B13": {
+								"centre": [
+									9.61,
+									9.1,
+									-14.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 56.8
+							},
+							"Unit_L1_B14": {
+								"centre": [
+									14.38,
+									9.1,
+									-9.61
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 74.5
+							},
+							"Unit_L1_B15": {
+								"centre": [
+									16.97,
+									9.1,
+									-3.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 93.9
+							},
+							"Unit_L2_B00": {
+								"centre": [
+									16.97,
+									15.35,
+									3.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 107.8
+							},
+							"Unit_L2_B01": {
+								"centre": [
+									14.38,
+									15.35,
+									9.61
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 119.8
+							},
+							"Unit_L2_B02": {
+								"centre": [
+									9.61,
+									15.35,
+									14.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 122.0
+							},
+							"Unit_L2_B03": {
+								"centre": [
+									3.38,
+									15.35,
+									16.97
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 112.7
+							},
+							"Unit_L2_B04": {
+								"centre": [
+									-3.38,
+									15.35,
+									16.97
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 97.4
+							},
+							"Unit_L2_B05": {
+								"centre": [
+									-9.61,
+									15.35,
+									14.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 80.6
+							},
+							"Unit_L2_B06": {
+								"centre": [
+									-14.38,
+									15.35,
+									9.61
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 64.3
+							},
+							"Unit_L2_B07": {
+								"centre": [
+									-16.97,
+									15.35,
+									3.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 49.3
+							},
+							"Unit_L2_B08": {
+								"centre": [
+									-16.97,
+									15.35,
+									-3.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.12,
+								"off_axis_deg": 36.3,
+								"pixel_box": [
+									728,
+									9,
+									1134,
+									128
+								]
+							},
+							"Unit_L2_B09": {
+								"centre": [
+									-14.38,
+									15.35,
+									-9.61
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.41,
+								"off_axis_deg": 27.2,
+								"pixel_box": [
+									1234,
+									4,
+									1796,
+									215
+								]
+							},
+							"Unit_L2_B10": {
+								"centre": [
+									-9.61,
+									15.35,
+									-14.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.44,
+								"off_axis_deg": 25.9,
+								"pixel_box": [
+									1887,
+									16,
+									2435,
+									217
+								]
+							},
+							"Unit_L2_B11": {
+								"centre": [
+									-3.38,
+									15.35,
+									-16.97
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.22,
+								"off_axis_deg": 33.3,
+								"pixel_box": [
+									2531,
+									19,
+									3170,
+									170
+								]
+							},
+							"Unit_L2_B12": {
+								"centre": [
+									3.38,
+									15.35,
+									-16.97
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 45.4
+							},
+							"Unit_L2_B13": {
+								"centre": [
+									9.61,
+									15.35,
+									-14.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 59.8
+							},
+							"Unit_L2_B14": {
+								"centre": [
+									14.38,
+									15.35,
+									-9.61
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 75.5
+							},
+							"Unit_L2_B15": {
+								"centre": [
+									16.97,
+									15.35,
+									-3.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 91.9
+							}
+						}
+					}
+				}
+			}
+		},
+		"gaia_on": {
+			"books": {
+				"colour_drift": 37796,
+				"extra_leaning": 416,
+				"pamphlets": 1017,
+				"pulled_forward": 752,
+				"pushed_back": 2269,
+				"rebound_in_series": 1078,
+				"tomes": 823,
+				"yawed": 13231
+			},
+			"light_set": {
+				"course_shelves_spots": {
+					"found": 9,
+					"kept": 9,
+					"range_m": 1.6,
+					"size_m": 0.05
+				},
+				"dimmed_not_hidden": [],
+				"shelf_lamp": {
+					"energy": "x2",
+					"found": 48,
+					"kept": 24,
+					"range_m": 7.0,
+					"size_m": 0.15,
+					"units": [
+						"Unit_L0_B00",
+						"Unit_L0_B02",
+						"Unit_L0_B04",
+						"Unit_L0_B06",
+						"Unit_L0_B08",
+						"Unit_L0_B10",
+						"Unit_L0_B12",
+						"Unit_L0_B14",
+						"Unit_L1_B00",
+						"Unit_L1_B02",
+						"Unit_L1_B04",
+						"Unit_L1_B06",
+						"Unit_L1_B08",
+						"Unit_L1_B10",
+						"Unit_L1_B12",
+						"Unit_L1_B14",
+						"Unit_L2_B00",
+						"Unit_L2_B02",
+						"Unit_L2_B04",
+						"Unit_L2_B06",
+						"Unit_L2_B08",
+						"Unit_L2_B10",
+						"Unit_L2_B12",
+						"Unit_L2_B14"
+					]
+				},
+				"single_lights": [
+					"InteriorGlow",
+					"DoorSpill",
+					"ReceiverGlow",
+					"KeyLightL",
+					"KeyLightR",
+					"MoonFill",
+					"OculusShaft",
+					"OculusMoon",
+					"SoftFill0",
+					"SoftFill1",
+					"SoftFill2",
+					"StatueKey",
+					"CageLight",
+					"FanlightLight2",
+					"FanlightLight5"
+				],
+				"window_light": {
+					"energy": "x3",
+					"found": 24,
+					"kept": 8,
+					"size_m": 1.0
+				}
+			},
+			"observatory": {
+				"beam_emission_energy": [
+					0.600000023841858,
+					0.330000013113022
+				],
+				"core_beam_emission_energy": [
+					2.40000009536743,
+					1.32000005245209
+				],
+				"drop_emission_energy": [
+					3.5,
+					1.92499995231628
+				],
+				"floor_line_silver": {
+					"albedo": [
+						"bfcce0",
+						"999c9e"
+					],
+					"emission_energy": [
+						0.300000011920929,
+						0.0599999986588955
+					],
+					"roughness": [
+						0.300000011920929,
+						"0.8 x noise ramp 0.55-1.0 (0.44-0.8)"
+					]
+				},
+				"gilt_roughness_var": [
+					0.06,
+					0.12
+				],
+				"gilt_wear": [
+					0.22,
+					0.3
+				],
+				"green_glow_emission_energy": [
+					3.0,
+					1.79999995231628
+				],
+				"leather_roughness": [
+					0.52,
+					0.7
+				],
+				"paper_color": [
+					"(0.66, 0.6, 0.48)",
+					"(0.74, 0.68, 0.55)"
+				],
+				"wood": [
+					"StandardMaterial3D (0.16, 0.1, 0.065), roughness 0.75",
+					"shelf_wood.gdshader, roughness 0.68, rings 6 mm"
+				]
+			},
+			"pt_changes": {
+				"gilt_fake_reflection": "output_energy 0.7 -> 0",
+				"light_sizes_from_zero": {
+					"@DirectionalLight3D (angular deg)": 0.5,
+					"@SpotLight3D (m, spot)": [
+						0.15,
+						9
+					],
+					"CageLight (m, omni)": [
+						0.15,
+						1
+					],
+					"DoorSpill (m, spot)": [
+						0.15,
+						1
+					],
+					"FanlightLight (m, spot)": [
+						0.15,
+						2
+					],
+					"Fill (m, omni)": [
+						0.15,
+						1
+					],
+					"InteriorGlow (m, omni)": [
+						0.15,
+						1
+					],
+					"KeyLightL (m, spot)": [
+						0.15,
+						1
+					],
+					"KeyLightR (m, spot)": [
+						0.15,
+						1
+					],
+					"KioskLantern (m, omni)": [
+						0.15,
+						1
+					],
+					"LampBeam (m, spot)": [
+						0.15,
+						1
+					],
+					"MoonFill (m, omni)": [
+						0.15,
+						1
+					],
+					"OculusMoon (m, spot)": [
+						0.6,
+						1
+					],
+					"OculusShaft (m, spot)": [
+						0.15,
+						1
+					],
+					"ReceiverGlow (m, omni)": [
+						0.15,
+						1
+					],
+					"ShelfLamp (m, omni)": [
+						0.15,
+						48
+					],
+					"StatueKey (m, spot)": [
+						0.15,
+						1
+					],
+					"WindowLight (m, spot)": [
+						0.15,
+						24
+					]
+				},
+				"night_sky": "hidden (its dome would be met by rays as a 1 m ball)",
+				"source_color_defaults": {
+					"materials_scanned": 115,
+					"set_to_their_default": {
+						"bay_glass.gdshader:jewel_a": 1,
+						"bay_glass.gdshader:jewel_b": 1,
+						"bay_glass.gdshader:jewel_c": 1,
+						"book_spines.gdshader:gilt_color": 1,
+						"floor_paving.gdshader:gilt": 1,
+						"floor_paving.gdshader:rose_dark": 1,
+						"floor_paving.gdshader:rose_pale": 1,
+						"garden_impostor.gdshader:lamp_colour": 5,
+						"garden_plant.gdshader:lamp_colour": 21,
+						"gilt.gdshader:gold": 1,
+						"holo_ring.gdshader:gold": 1,
+						"kiosk_glass.gdshader:sky": 1,
+						"kiosk_glass.gdshader:tint": 1,
+						"palace_garden.gdshader:lamp_colour": 19,
+						"palace_garden.gdshader:sky_low": 20,
+						"palace_garden.gdshader:window_colour": 20,
+						"recording_frame.gdshader:gold": 1,
+						"shelf_wood.gdshader:late_color": 1,
+						"shelf_wood.gdshader:wood_color": 1,
+						"stained_glass.gdshader:frame_color": 3,
+						"statue_marble.gdshader:stone": 1,
+						"statue_marble.gdshader:vein": 1,
+						"stone_relief.gdshader:rosette": 5,
+						"upperside.gdshader:window_colour": 1
+					},
+					"source_color_without_default": [
+						"gilt.gdshader:strip_color",
+						"gilt.gdshader:books_color",
+						"gilt.gdshader:slab_color",
+						"gilt.gdshader:floor_color",
+						"gilt.gdshader:vault_color",
+						"gilt.gdshader:sky_color",
+						"bay_glass.gdshader:strip_color",
+						"bay_glass.gdshader:books_color",
+						"bay_glass.gdshader:slab_color",
+						"bay_glass.gdshader:floor_color",
+						"bay_glass.gdshader:vault_color",
+						"bay_glass.gdshader:sky_color"
+					]
+				},
+				"stone_slope_materials": 5
+			},
+			"soft_fill_lights": 3,
+			"steel": {
+				"door_glow_k": 0.25,
+				"edge_roll_m": 0.03,
+				"interior_glow": 1.57500004768372,
+				"joints_m": 0.96,
+				"key_energy": 1.25,
+				"on": true,
+				"receiver_glow": 1.0,
+				"shell_glb": "res://assets/steel_portal.glb",
+				"steel_preset": 3
+			},
+			"views": {
+				"cabin_door": {
+					"pt_lights": {
+						"by_name": {
+							"CageLight": {
+								"kept": 1,
+								"lit": 1
+							},
+							"CourseShelves spot": {
+								"kept": 9,
+								"lit": 9
+							},
+							"DoorSpill": {
+								"kept": 1,
+								"lit": 1
+							},
+							"FanlightLight": {
+								"kept": 2,
+								"lit": 2
+							},
+							"InteriorGlow": {
+								"kept": 1,
+								"lit": 1
+							},
+							"KeyLightL": {
+								"kept": 1,
+								"lit": 1
+							},
+							"KeyLightR": {
+								"kept": 1,
+								"lit": 1
+							},
+							"MoonFill": {
+								"kept": 1,
+								"lit": 1
+							},
+							"OculusMoon": {
+								"kept": 1,
+								"lit": 1
+							},
+							"OculusShaft": {
+								"kept": 1,
+								"lit": 1
+							},
+							"ReceiverGlow": {
+								"kept": 1,
+								"lit": 1
+							},
+							"ShelfLamp": {
+								"kept": 24,
+								"lit": 24
+							},
+							"SoftFill": {
+								"kept": 3,
+								"lit": 3
+							},
+							"StatueKey": {
+								"kept": 1,
+								"lit": 1
+							},
+							"WindowLight": {
+								"kept": 8,
+								"lit": 8
+							}
+						},
+						"directional_lit": 0,
+						"dropped": 0,
+						"positional_lit": 56,
+						"slots": 64
+					},
+					"view": {
+						"course_shelves_spots": [
+							{
+								"in_view": false,
+								"pixel": null,
+								"pos": [
+									-16.92,
+									1.81,
+									3.37
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									180,
+									944
+								],
+								"pos": [
+									-16.92,
+									1.81,
+									-3.37
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									1164,
+									953
+								],
+								"pos": [
+									-14.34,
+									1.81,
+									-9.58
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									1926,
+									956
+								],
+								"pos": [
+									-9.58,
+									1.81,
+									-14.34
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									2679,
+									954
+								],
+								"pos": [
+									-3.37,
+									1.81,
+									-16.92
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									3615,
+									947
+								],
+								"pos": [
+									3.37,
+									1.81,
+									-16.92
+								]
+							},
+							{
+								"in_view": false,
+								"pixel": null,
+								"pos": [
+									9.58,
+									1.81,
+									-14.34
+								]
+							},
+							{
+								"in_view": false,
+								"pixel": null,
+								"pos": [
+									14.34,
+									1.81,
+									-9.58
+								]
+							},
+							{
+								"in_view": false,
+								"pixel": null,
+								"pos": [
+									16.92,
+									1.81,
+									-3.37
+								]
+							}
+						],
+						"note": "geometric: a 9 x 9 grid on each unit's book face against the frustum; occlusion is not tested",
+						"unit_width_m": 6.50865223836288,
+						"units": {
+							"Unit_L0_B00": {
+								"centre": [
+									16.97,
+									2.8,
+									3.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 117.6
+							},
+							"Unit_L0_B01": {
+								"centre": [
+									14.38,
+									2.8,
+									9.61
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 143.0
+							},
+							"Unit_L0_B02": {
+								"centre": [
+									9.61,
+									2.91,
+									14.38
+								],
+								"height_m": 5.82,
+								"in_view_share": 0.0,
+								"off_axis_deg": 170.6
+							},
+							"Unit_L0_B03": {
+								"centre": [
+									3.38,
+									2.8,
+									16.97
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 158.4
+							},
+							"Unit_L0_B04": {
+								"centre": [
+									-3.38,
+									2.8,
+									16.97
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 129.3
+							},
+							"Unit_L0_B05": {
+								"centre": [
+									-9.61,
+									2.91,
+									14.38
+								],
+								"height_m": 5.82,
+								"in_view_share": 0.0,
+								"off_axis_deg": 102.6
+							},
+							"Unit_L0_B06": {
+								"centre": [
+									-14.38,
+									2.8,
+									9.61
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 78.7
+							},
+							"Unit_L0_B07": {
+								"centre": [
+									-16.97,
+									2.8,
+									3.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 57.1
+							},
+							"Unit_L0_B08": {
+								"centre": [
+									-16.97,
+									2.8,
+									-3.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.67,
+								"off_axis_deg": 37.4,
+								"pixel_box": [
+									24,
+									403,
+									645,
+									1174
+								]
+							},
+							"Unit_L0_B09": {
+								"centre": [
+									-14.38,
+									2.8,
+									-9.61
+								],
+								"height_m": 5.6,
+								"in_view_share": 1.0,
+								"off_axis_deg": 19.0,
+								"pixel_box": [
+									774,
+									509,
+									1500,
+									1141
+								]
+							},
+							"Unit_L0_B10": {
+								"centre": [
+									-9.61,
+									2.8,
+									-14.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 1.0,
+								"off_axis_deg": 5.7,
+								"pixel_box": [
+									1607,
+									572,
+									2240,
+									1121
+								]
+							},
+							"Unit_L0_B11": {
+								"centre": [
+									-3.38,
+									2.8,
+									-16.97
+								],
+								"height_m": 5.6,
+								"in_view_share": 1.0,
+								"off_axis_deg": 19.0,
+								"pixel_box": [
+									2346,
+									534,
+									3051,
+									1133
+								]
+							},
+							"Unit_L0_B12": {
+								"centre": [
+									3.38,
+									2.8,
+									-16.97
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.67,
+								"off_axis_deg": 36.6,
+								"pixel_box": [
+									3174,
+									453,
+									3756,
+									1158
+								]
+							},
+							"Unit_L0_B13": {
+								"centre": [
+									9.61,
+									2.8,
+									-14.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 55.0
+							},
+							"Unit_L0_B14": {
+								"centre": [
+									14.38,
+									2.8,
+									-9.61
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 74.2
+							},
+							"Unit_L0_B15": {
+								"centre": [
+									16.97,
+									2.8,
+									-3.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 94.9
+							},
+							"Unit_L1_B00": {
+								"centre": [
+									16.97,
+									9.1,
+									3.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 115.7
+							},
+							"Unit_L1_B01": {
+								"centre": [
+									14.38,
+									9.1,
+									9.61
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 136.2
+							},
+							"Unit_L1_B02": {
+								"centre": [
+									9.61,
+									9.1,
+									14.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 151.0
+							},
+							"Unit_L1_B03": {
+								"centre": [
+									3.38,
+									9.1,
+									16.97
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 145.3
+							},
+							"Unit_L1_B04": {
+								"centre": [
+									-3.38,
+									9.1,
+									16.97
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 124.9
+							},
+							"Unit_L1_B05": {
+								"centre": [
+									-9.61,
+									9.1,
+									14.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 102.1
+							},
+							"Unit_L1_B06": {
+								"centre": [
+									-14.38,
+									9.1,
+									9.61
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 80.5
+							},
+							"Unit_L1_B07": {
+								"centre": [
+									-16.97,
+									9.1,
+									3.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 60.7
+							},
+							"Unit_L1_B08": {
+								"centre": [
+									-16.97,
+									9.1,
+									-3.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.26,
+								"off_axis_deg": 43.0,
+								"pixel_box": [
+									12,
+									17,
+									628,
+									339
+								]
+							},
+							"Unit_L1_B09": {
+								"centre": [
+									-14.38,
+									9.1,
+									-9.61
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.62,
+								"off_axis_deg": 28.4,
+								"pixel_box": [
+									765,
+									10,
+									1495,
+									436
+								]
+							},
+							"Unit_L1_B10": {
+								"centre": [
+									-9.61,
+									9.1,
+									-14.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.78,
+								"off_axis_deg": 21.7,
+								"pixel_box": [
+									1604,
+									7,
+									2243,
+									451
+								]
+							},
+							"Unit_L1_B11": {
+								"centre": [
+									-3.38,
+									9.1,
+									-16.97
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.68,
+								"off_axis_deg": 28.0,
+								"pixel_box": [
+									2351,
+									4,
+									3059,
+									447
+								]
+							},
+							"Unit_L1_B12": {
+								"centre": [
+									3.38,
+									9.1,
+									-16.97
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.33,
+								"off_axis_deg": 41.7,
+								"pixel_box": [
+									3190,
+									1,
+									3770,
+									377
+								]
+							},
+							"Unit_L1_B13": {
+								"centre": [
+									9.61,
+									9.1,
+									-14.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 58.2
+							},
+							"Unit_L1_B14": {
+								"centre": [
+									14.38,
+									9.1,
+									-9.61
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 76.1
+							},
+							"Unit_L1_B15": {
+								"centre": [
+									16.97,
+									9.1,
+									-3.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 95.3
+							},
+							"Unit_L2_B00": {
+								"centre": [
+									16.97,
+									15.35,
+									3.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 111.9
+							},
+							"Unit_L2_B01": {
+								"centre": [
+									14.38,
+									15.35,
+									9.61
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 126.7
+							},
+							"Unit_L2_B02": {
+								"centre": [
+									9.61,
+									15.35,
+									14.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 135.1
+							},
+							"Unit_L2_B03": {
+								"centre": [
+									3.38,
+									15.35,
+									16.97
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 131.6
+							},
+							"Unit_L2_B04": {
+								"centre": [
+									-3.38,
+									15.35,
+									16.97
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 118.1
+							},
+							"Unit_L2_B05": {
+								"centre": [
+									-9.61,
+									15.35,
+									14.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 100.6
+							},
+							"Unit_L2_B06": {
+								"centre": [
+									-14.38,
+									15.35,
+									9.61
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 82.6
+							},
+							"Unit_L2_B07": {
+								"centre": [
+									-16.97,
+									15.35,
+									3.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 65.7
+							},
+							"Unit_L2_B08": {
+								"centre": [
+									-16.97,
+									15.35,
+									-3.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 50.8
+							},
+							"Unit_L2_B09": {
+								"centre": [
+									-14.38,
+									15.35,
+									-9.61
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 39.6
+							},
+							"Unit_L2_B10": {
+								"centre": [
+									-9.61,
+									15.35,
+									-14.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 35.0
+							},
+							"Unit_L2_B11": {
+								"centre": [
+									-3.38,
+									15.35,
+									-16.97
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 38.8
+							},
+							"Unit_L2_B12": {
+								"centre": [
+									3.38,
+									15.35,
+									-16.97
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 49.1
+							},
+							"Unit_L2_B13": {
+								"centre": [
+									9.61,
+									15.35,
+									-14.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 62.9
+							},
+							"Unit_L2_B14": {
+								"centre": [
+									14.38,
+									15.35,
+									-9.61
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 78.5
+							},
+							"Unit_L2_B15": {
+								"centre": [
+									16.97,
+									15.35,
+									-3.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 95.1
+							}
+						}
+					}
+				},
+				"cabin_front": {
+					"pt_lights": {
+						"by_name": {
+							"CageLight": {
+								"kept": 1,
+								"lit": 1
+							},
+							"CourseShelves spot": {
+								"kept": 9,
+								"lit": 9
+							},
+							"DoorSpill": {
+								"kept": 1,
+								"lit": 1
+							},
+							"FanlightLight": {
+								"kept": 2,
+								"lit": 2
+							},
+							"InteriorGlow": {
+								"kept": 1,
+								"lit": 1
+							},
+							"KeyLightL": {
+								"kept": 1,
+								"lit": 1
+							},
+							"KeyLightR": {
+								"kept": 1,
+								"lit": 1
+							},
+							"MoonFill": {
+								"kept": 1,
+								"lit": 1
+							},
+							"OculusMoon": {
+								"kept": 1,
+								"lit": 1
+							},
+							"OculusShaft": {
+								"kept": 1,
+								"lit": 1
+							},
+							"ReceiverGlow": {
+								"kept": 1,
+								"lit": 1
+							},
+							"ShelfLamp": {
+								"kept": 24,
+								"lit": 24
+							},
+							"SoftFill": {
+								"kept": 3,
+								"lit": 3
+							},
+							"StatueKey": {
+								"kept": 1,
+								"lit": 1
+							},
+							"WindowLight": {
+								"kept": 8,
+								"lit": 8
+							}
+						},
+						"directional_lit": 0,
+						"dropped": 0,
+						"positional_lit": 56,
+						"slots": 64
+					},
+					"view": {
+						"course_shelves_spots": [
+							{
+								"in_view": false,
+								"pixel": null,
+								"pos": [
+									-16.92,
+									1.81,
+									3.37
+								]
+							},
+							{
+								"in_view": false,
+								"pixel": null,
+								"pos": [
+									-16.92,
+									1.81,
+									-3.37
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									164,
+									1207
+								],
+								"pos": [
+									-14.34,
+									1.81,
+									-9.58
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									1003,
+									1209
+								],
+								"pos": [
+									-9.58,
+									1.81,
+									-14.34
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									1632,
+									1211
+								],
+								"pos": [
+									-3.37,
+									1.81,
+									-16.92
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									2207,
+									1211
+								],
+								"pos": [
+									3.37,
+									1.81,
+									-16.92
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									2836,
+									1209
+								],
+								"pos": [
+									9.58,
+									1.81,
+									-14.34
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									3675,
+									1207
+								],
+								"pos": [
+									14.34,
+									1.81,
+									-9.58
+								]
+							},
+							{
+								"in_view": false,
+								"pixel": null,
+								"pos": [
+									16.92,
+									1.81,
+									-3.37
+								]
+							}
+						],
+						"note": "geometric: a 9 x 9 grid on each unit's book face against the frustum; occlusion is not tested",
+						"unit_width_m": 6.50865223836288,
+						"units": {
+							"Unit_L0_B00": {
+								"centre": [
+									16.97,
+									2.8,
+									3.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 76.5
+							},
+							"Unit_L0_B01": {
+								"centre": [
+									14.38,
+									2.8,
+									9.61
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 98.4
+							},
+							"Unit_L0_B02": {
+								"centre": [
+									9.61,
+									2.91,
+									14.38
+								],
+								"height_m": 5.82,
+								"in_view_share": 0.0,
+								"off_axis_deg": 125.2
+							},
+							"Unit_L0_B03": {
+								"centre": [
+									3.38,
+									2.8,
+									16.97
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 158.1
+							},
+							"Unit_L0_B04": {
+								"centre": [
+									-3.38,
+									2.8,
+									16.97
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 158.1
+							},
+							"Unit_L0_B05": {
+								"centre": [
+									-9.61,
+									2.91,
+									14.38
+								],
+								"height_m": 5.82,
+								"in_view_share": 0.0,
+								"off_axis_deg": 125.2
+							},
+							"Unit_L0_B06": {
+								"centre": [
+									-14.38,
+									2.8,
+									9.61
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 98.4
+							},
+							"Unit_L0_B07": {
+								"centre": [
+									-16.97,
+									2.8,
+									3.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 76.5
+							},
+							"Unit_L0_B08": {
+								"centre": [
+									-16.97,
+									2.8,
+									-3.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 57.5
+							},
+							"Unit_L0_B09": {
+								"centre": [
+									-14.38,
+									2.8,
+									-9.61
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.67,
+								"off_axis_deg": 40.2,
+								"pixel_box": [
+									33,
+									766,
+									572,
+									1401
+								]
+							},
+							"Unit_L0_B10": {
+								"centre": [
+									-9.61,
+									2.8,
+									-14.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 1.0,
+								"off_axis_deg": 23.8,
+								"pixel_box": [
+									671,
+									850,
+									1289,
+									1367
+								]
+							},
+							"Unit_L0_B11": {
+								"centre": [
+									-3.38,
+									2.8,
+									-16.97
+								],
+								"height_m": 5.6,
+								"in_view_share": 1.0,
+								"off_axis_deg": 8.0,
+								"pixel_box": [
+									1371,
+									906,
+									1878,
+									1345
+								]
+							},
+							"Unit_L0_B12": {
+								"centre": [
+									3.38,
+									2.8,
+									-16.97
+								],
+								"height_m": 5.6,
+								"in_view_share": 1.0,
+								"off_axis_deg": 8.0,
+								"pixel_box": [
+									1961,
+									906,
+									2468,
+									1345
+								]
+							},
+							"Unit_L0_B13": {
+								"centre": [
+									9.61,
+									2.8,
+									-14.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 1.0,
+								"off_axis_deg": 23.8,
+								"pixel_box": [
+									2550,
+									850,
+									3168,
+									1367
+								]
+							},
+							"Unit_L0_B14": {
+								"centre": [
+									14.38,
+									2.8,
+									-9.61
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.67,
+								"off_axis_deg": 40.2,
+								"pixel_box": [
+									3267,
+									766,
+									3806,
+									1401
+								]
+							},
+							"Unit_L0_B15": {
+								"centre": [
+									16.97,
+									2.8,
+									-3.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 57.5
+							},
+							"Unit_L1_B00": {
+								"centre": [
+									16.97,
+									9.1,
+									3.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 76.2
+							},
+							"Unit_L1_B01": {
+								"centre": [
+									14.38,
+									9.1,
+									9.61
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 96.0
+							},
+							"Unit_L1_B02": {
+								"centre": [
+									9.61,
+									9.1,
+									14.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 117.5
+							},
+							"Unit_L1_B03": {
+								"centre": [
+									3.38,
+									9.1,
+									16.97
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 136.1
+							},
+							"Unit_L1_B04": {
+								"centre": [
+									-3.38,
+									9.1,
+									16.97
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 136.1
+							},
+							"Unit_L1_B05": {
+								"centre": [
+									-9.61,
+									9.1,
+									14.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 117.5
+							},
+							"Unit_L1_B06": {
+								"centre": [
+									-14.38,
+									9.1,
+									9.61
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 96.0
+							},
+							"Unit_L1_B07": {
+								"centre": [
+									-16.97,
+									9.1,
+									3.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 76.2
+							},
+							"Unit_L1_B08": {
+								"centre": [
+									-16.97,
+									9.1,
+									-3.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 58.3
+							},
+							"Unit_L1_B09": {
+								"centre": [
+									-14.38,
+									9.1,
+									-9.61
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.65,
+								"off_axis_deg": 41.9,
+								"pixel_box": [
+									81,
+									40,
+									601,
+									715
+								]
+							},
+							"Unit_L1_B10": {
+								"centre": [
+									-9.61,
+									9.1,
+									-14.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 1.0,
+								"off_axis_deg": 26.9,
+								"pixel_box": [
+									696,
+									218,
+									1300,
+									799
+								]
+							},
+							"Unit_L1_B11": {
+								"centre": [
+									-3.38,
+									9.1,
+									-16.97
+								],
+								"height_m": 5.8,
+								"in_view_share": 1.0,
+								"off_axis_deg": 15.0,
+								"pixel_box": [
+									1381,
+									367,
+									1879,
+									825
+								]
+							},
+							"Unit_L1_B12": {
+								"centre": [
+									3.38,
+									9.1,
+									-16.97
+								],
+								"height_m": 5.8,
+								"in_view_share": 1.0,
+								"off_axis_deg": 15.0,
+								"pixel_box": [
+									1960,
+									367,
+									2458,
+									825
+								]
+							},
+							"Unit_L1_B13": {
+								"centre": [
+									9.61,
+									9.1,
+									-14.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 1.0,
+								"off_axis_deg": 26.9,
+								"pixel_box": [
+									2539,
+									218,
+									3143,
+									799
+								]
+							},
+							"Unit_L1_B14": {
+								"centre": [
+									14.38,
+									9.1,
+									-9.61
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.65,
+								"off_axis_deg": 41.9,
+								"pixel_box": [
+									3238,
+									40,
+									3758,
+									715
+								]
+							},
+							"Unit_L1_B15": {
+								"centre": [
+									16.97,
+									9.1,
+									-3.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 58.3
+							},
+							"Unit_L2_B00": {
+								"centre": [
+									16.97,
+									15.35,
+									3.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 77.1
+							},
+							"Unit_L2_B01": {
+								"centre": [
+									14.38,
+									15.35,
+									9.61
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 93.7
+							},
+							"Unit_L2_B02": {
+								"centre": [
+									9.61,
+									15.35,
+									14.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 109.5
+							},
+							"Unit_L2_B03": {
+								"centre": [
+									3.38,
+									15.35,
+									16.97
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 120.5
+							},
+							"Unit_L2_B04": {
+								"centre": [
+									-3.38,
+									15.35,
+									16.97
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 120.5
+							},
+							"Unit_L2_B05": {
+								"centre": [
+									-9.61,
+									15.35,
+									14.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 109.5
+							},
+							"Unit_L2_B06": {
+								"centre": [
+									-14.38,
+									15.35,
+									9.61
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 93.7
+							},
+							"Unit_L2_B07": {
+								"centre": [
+									-16.97,
+									15.35,
+									3.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 77.1
+							},
+							"Unit_L2_B08": {
+								"centre": [
+									-16.97,
+									15.35,
+									-3.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 61.3
+							},
+							"Unit_L2_B09": {
+								"centre": [
+									-14.38,
+									15.35,
+									-9.61
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.04,
+								"off_axis_deg": 46.8,
+								"pixel_box": [
+									522,
+									5,
+									609,
+									67
+								]
+							},
+							"Unit_L2_B10": {
+								"centre": [
+									-9.61,
+									15.35,
+									-14.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.44,
+								"off_axis_deg": 34.4,
+								"pixel_box": [
+									722,
+									0,
+									1307,
+									256
+								]
+							},
+							"Unit_L2_B11": {
+								"centre": [
+									-3.38,
+									15.35,
+									-16.97
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.72,
+								"off_axis_deg": 26.2,
+								"pixel_box": [
+									1390,
+									4,
+									1879,
+									313
+								]
+							},
+							"Unit_L2_B12": {
+								"centre": [
+									3.38,
+									15.35,
+									-16.97
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.72,
+								"off_axis_deg": 26.2,
+								"pixel_box": [
+									1960,
+									4,
+									2449,
+									313
+								]
+							},
+							"Unit_L2_B13": {
+								"centre": [
+									9.61,
+									15.35,
+									-14.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.44,
+								"off_axis_deg": 34.4,
+								"pixel_box": [
+									2532,
+									0,
+									3117,
+									256
+								]
+							},
+							"Unit_L2_B14": {
+								"centre": [
+									14.38,
+									15.35,
+									-9.61
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.04,
+								"off_axis_deg": 46.8,
+								"pixel_box": [
+									3230,
+									5,
+									3317,
+									67
+								]
+							},
+							"Unit_L2_B15": {
+								"centre": [
+									16.97,
+									15.35,
+									-3.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 61.3
+							}
+						}
+					}
+				},
+				"cabin_oblique": {
+					"pt_lights": {
+						"by_name": {
+							"CageLight": {
+								"kept": 1,
+								"lit": 1
+							},
+							"CourseShelves spot": {
+								"kept": 9,
+								"lit": 9
+							},
+							"DoorSpill": {
+								"kept": 1,
+								"lit": 1
+							},
+							"FanlightLight": {
+								"kept": 2,
+								"lit": 2
+							},
+							"InteriorGlow": {
+								"kept": 1,
+								"lit": 1
+							},
+							"KeyLightL": {
+								"kept": 1,
+								"lit": 1
+							},
+							"KeyLightR": {
+								"kept": 1,
+								"lit": 1
+							},
+							"MoonFill": {
+								"kept": 1,
+								"lit": 1
+							},
+							"OculusMoon": {
+								"kept": 1,
+								"lit": 1
+							},
+							"OculusShaft": {
+								"kept": 1,
+								"lit": 1
+							},
+							"ReceiverGlow": {
+								"kept": 1,
+								"lit": 1
+							},
+							"ShelfLamp": {
+								"kept": 24,
+								"lit": 24
+							},
+							"SoftFill": {
+								"kept": 3,
+								"lit": 3
+							},
+							"StatueKey": {
+								"kept": 1,
+								"lit": 1
+							},
+							"WindowLight": {
+								"kept": 8,
+								"lit": 8
+							}
+						},
+						"directional_lit": 0,
+						"dropped": 0,
+						"positional_lit": 56,
+						"slots": 64
+					},
+					"view": {
+						"course_shelves_spots": [
+							{
+								"in_view": false,
+								"pixel": null,
+								"pos": [
+									-16.92,
+									1.81,
+									3.37
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									772,
+									1230
+								],
+								"pos": [
+									-16.92,
+									1.81,
+									-3.37
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									1510,
+									1233
+								],
+								"pos": [
+									-14.34,
+									1.81,
+									-9.58
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									2165,
+									1233
+								],
+								"pos": [
+									-9.58,
+									1.81,
+									-14.34
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									2865,
+									1231
+								],
+								"pos": [
+									-3.37,
+									1.81,
+									-16.92
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									3778,
+									1226
+								],
+								"pos": [
+									3.37,
+									1.81,
+									-16.92
+								]
+							},
+							{
+								"in_view": false,
+								"pixel": null,
+								"pos": [
+									9.58,
+									1.81,
+									-14.34
+								]
+							},
+							{
+								"in_view": false,
+								"pixel": null,
+								"pos": [
+									14.34,
+									1.81,
+									-9.58
+								]
+							},
+							{
+								"in_view": false,
+								"pixel": null,
+								"pos": [
+									16.92,
+									1.81,
+									-3.37
+								]
+							}
+						],
+						"note": "geometric: a 9 x 9 grid on each unit's book face against the frustum; occlusion is not tested",
+						"unit_width_m": 6.50865223836288,
+						"units": {
+							"Unit_L0_B00": {
+								"centre": [
+									16.97,
+									2.8,
+									3.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 121.5
+							},
+							"Unit_L0_B01": {
+								"centre": [
+									14.38,
+									2.8,
+									9.61
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 152.2
+							},
+							"Unit_L0_B02": {
+								"centre": [
+									9.61,
+									2.91,
+									14.38
+								],
+								"height_m": 5.82,
+								"in_view_share": 0.0,
+								"off_axis_deg": 164.0
+							},
+							"Unit_L0_B03": {
+								"centre": [
+									3.38,
+									2.8,
+									16.97
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 132.5
+							},
+							"Unit_L0_B04": {
+								"centre": [
+									-3.38,
+									2.8,
+									16.97
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 104.3
+							},
+							"Unit_L0_B05": {
+								"centre": [
+									-9.61,
+									2.91,
+									14.38
+								],
+								"height_m": 5.82,
+								"in_view_share": 0.0,
+								"off_axis_deg": 81.0
+							},
+							"Unit_L0_B06": {
+								"centre": [
+									-14.38,
+									2.8,
+									9.61
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 61.1
+							},
+							"Unit_L0_B07": {
+								"centre": [
+									-16.97,
+									2.8,
+									3.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.31,
+								"off_axis_deg": 43.2,
+								"pixel_box": [
+									0,
+									749,
+									253,
+									1430
+								]
+							},
+							"Unit_L0_B08": {
+								"centre": [
+									-16.97,
+									2.8,
+									-3.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 1.0,
+								"off_axis_deg": 26.3,
+								"pixel_box": [
+									369,
+									802,
+									1112,
+									1417
+								]
+							},
+							"Unit_L0_B09": {
+								"centre": [
+									-14.38,
+									2.8,
+									-9.61
+								],
+								"height_m": 5.6,
+								"in_view_share": 1.0,
+								"off_axis_deg": 10.1,
+								"pixel_box": [
+									1206,
+									880,
+									1792,
+									1388
+								]
+							},
+							"Unit_L0_B10": {
+								"centre": [
+									-9.61,
+									2.8,
+									-14.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 1.0,
+								"off_axis_deg": 6.2,
+								"pixel_box": [
+									1886,
+									892,
+									2456,
+									1384
+								]
+							},
+							"Unit_L0_B11": {
+								"centre": [
+									-3.38,
+									2.8,
+									-16.97
+								],
+								"height_m": 5.6,
+								"in_view_share": 1.0,
+								"off_axis_deg": 22.2,
+								"pixel_box": [
+									2548,
+									836,
+									3228,
+									1404
+								]
+							},
+							"Unit_L0_B12": {
+								"centre": [
+									3.38,
+									2.8,
+									-16.97
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.56,
+								"off_axis_deg": 38.7,
+								"pixel_box": [
+									3334,
+									765,
+									3792,
+									1430
+								]
+							},
+							"Unit_L0_B13": {
+								"centre": [
+									9.61,
+									2.8,
+									-14.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 56.0
+							},
+							"Unit_L0_B14": {
+								"centre": [
+									14.38,
+									2.8,
+									-9.61
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 74.8
+							},
+							"Unit_L0_B15": {
+								"centre": [
+									16.97,
+									2.8,
+									-3.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 96.0
+							},
+							"Unit_L1_B00": {
+								"centre": [
+									16.97,
+									9.1,
+									3.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 114.8
+							},
+							"Unit_L1_B01": {
+								"centre": [
+									14.38,
+									9.1,
+									9.61
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 134.1
+							},
+							"Unit_L1_B02": {
+								"centre": [
+									9.61,
+									9.1,
+									14.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 138.5
+							},
+							"Unit_L1_B03": {
+								"centre": [
+									3.38,
+									9.1,
+									16.97
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 122.5
+							},
+							"Unit_L1_B04": {
+								"centre": [
+									-3.38,
+									9.1,
+									16.97
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 100.8
+							},
+							"Unit_L1_B05": {
+								"centre": [
+									-9.61,
+									9.1,
+									14.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 80.3
+							},
+							"Unit_L1_B06": {
+								"centre": [
+									-14.38,
+									9.1,
+									9.61
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 61.7
+							},
+							"Unit_L1_B07": {
+								"centre": [
+									-16.97,
+									9.1,
+									3.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.31,
+								"off_axis_deg": 44.7,
+								"pixel_box": [
+									41,
+									3,
+									296,
+									639
+								]
+							},
+							"Unit_L1_B08": {
+								"centre": [
+									-16.97,
+									9.1,
+									-3.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 1.0,
+								"off_axis_deg": 29.2,
+								"pixel_box": [
+									406,
+									57,
+									1128,
+									755
+								]
+							},
+							"Unit_L1_B09": {
+								"centre": [
+									-14.38,
+									9.1,
+									-9.61
+								],
+								"height_m": 5.8,
+								"in_view_share": 1.0,
+								"off_axis_deg": 16.3,
+								"pixel_box": [
+									1220,
+									259,
+									1795,
+									794
+								]
+							},
+							"Unit_L1_B10": {
+								"centre": [
+									-9.61,
+									9.1,
+									-14.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 1.0,
+								"off_axis_deg": 14.2,
+								"pixel_box": [
+									1887,
+									291,
+									2445,
+									795
+								]
+							},
+							"Unit_L1_B11": {
+								"centre": [
+									-3.38,
+									9.1,
+									-16.97
+								],
+								"height_m": 5.8,
+								"in_view_share": 1.0,
+								"off_axis_deg": 25.5,
+								"pixel_box": [
+									2535,
+									144,
+									3199,
+									774
+								]
+							},
+							"Unit_L1_B12": {
+								"centre": [
+									3.38,
+									9.1,
+									-16.97
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.58,
+								"off_axis_deg": 40.4,
+								"pixel_box": [
+									3301,
+									1,
+									3838,
+									688
+								]
+							},
+							"Unit_L1_B13": {
+								"centre": [
+									9.61,
+									9.1,
+									-14.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 56.8
+							},
+							"Unit_L1_B14": {
+								"centre": [
+									14.38,
+									9.1,
+									-9.61
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 74.5
+							},
+							"Unit_L1_B15": {
+								"centre": [
+									16.97,
+									9.1,
+									-3.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 93.9
+							},
+							"Unit_L2_B00": {
+								"centre": [
+									16.97,
+									15.35,
+									3.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 107.8
+							},
+							"Unit_L2_B01": {
+								"centre": [
+									14.38,
+									15.35,
+									9.61
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 119.8
+							},
+							"Unit_L2_B02": {
+								"centre": [
+									9.61,
+									15.35,
+									14.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 122.0
+							},
+							"Unit_L2_B03": {
+								"centre": [
+									3.38,
+									15.35,
+									16.97
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 112.7
+							},
+							"Unit_L2_B04": {
+								"centre": [
+									-3.38,
+									15.35,
+									16.97
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 97.4
+							},
+							"Unit_L2_B05": {
+								"centre": [
+									-9.61,
+									15.35,
+									14.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 80.6
+							},
+							"Unit_L2_B06": {
+								"centre": [
+									-14.38,
+									15.35,
+									9.61
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 64.3
+							},
+							"Unit_L2_B07": {
+								"centre": [
+									-16.97,
+									15.35,
+									3.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 49.3
+							},
+							"Unit_L2_B08": {
+								"centre": [
+									-16.97,
+									15.35,
+									-3.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.12,
+								"off_axis_deg": 36.3,
+								"pixel_box": [
+									728,
+									9,
+									1134,
+									128
+								]
+							},
+							"Unit_L2_B09": {
+								"centre": [
+									-14.38,
+									15.35,
+									-9.61
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.41,
+								"off_axis_deg": 27.2,
+								"pixel_box": [
+									1234,
+									4,
+									1796,
+									215
+								]
+							},
+							"Unit_L2_B10": {
+								"centre": [
+									-9.61,
+									15.35,
+									-14.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.44,
+								"off_axis_deg": 25.9,
+								"pixel_box": [
+									1887,
+									16,
+									2435,
+									217
+								]
+							},
+							"Unit_L2_B11": {
+								"centre": [
+									-3.38,
+									15.35,
+									-16.97
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.22,
+								"off_axis_deg": 33.3,
+								"pixel_box": [
+									2531,
+									19,
+									3170,
+									170
+								]
+							},
+							"Unit_L2_B12": {
+								"centre": [
+									3.38,
+									15.35,
+									-16.97
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 45.4
+							},
+							"Unit_L2_B13": {
+								"centre": [
+									9.61,
+									15.35,
+									-14.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 59.8
+							},
+							"Unit_L2_B14": {
+								"centre": [
+									14.38,
+									15.35,
+									-9.61
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 75.5
+							},
+							"Unit_L2_B15": {
+								"centre": [
+									16.97,
+									15.35,
+									-3.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 91.9
+							}
+						}
+					}
+				}
+			}
+		},
+		"shellnew": {
+			"books": {
+				"colour_drift": 37796,
+				"extra_leaning": 416,
+				"pamphlets": 1017,
+				"pulled_forward": 752,
+				"pushed_back": 2269,
+				"rebound_in_series": 1078,
+				"tomes": 823,
+				"yawed": 13231
+			},
+			"light_set": {
+				"already_applied": true,
+				"shelf_lamp_kept": 24,
+				"single_lights": [
+					"InteriorGlow",
+					"DoorSpill",
+					"ReceiverGlow",
+					"KeyLightL",
+					"KeyLightR",
+					"MoonFill",
+					"OculusShaft",
+					"OculusMoon",
+					"SoftFill0",
+					"SoftFill1",
+					"SoftFill2",
+					"StatueKey",
+					"CageLight",
+					"FanlightLight2",
+					"FanlightLight5"
+				],
+				"window_light_kept": 8
+			},
+			"observatory": {
+				"beam_emission_energy": [
+					0.600000023841858,
+					0.330000013113022
+				],
+				"core_beam_emission_energy": [
+					2.40000009536743,
+					1.32000005245209
+				],
+				"drop_emission_energy": [
+					3.5,
+					1.92499995231628
+				],
+				"floor_line_silver": {
+					"albedo": [
+						"bfcce0",
+						"999c9e"
+					],
+					"emission_energy": [
+						0.300000011920929,
+						0.0599999986588955
+					],
+					"roughness": [
+						0.300000011920929,
+						"0.8 x noise ramp 0.55-1.0 (0.44-0.8)"
+					]
+				},
+				"gilt_roughness_var": [
+					0.06,
+					0.12
+				],
+				"gilt_wear": [
+					0.22,
+					0.3
+				],
+				"green_glow_emission_energy": [
+					3.0,
+					1.79999995231628
+				],
+				"leather_roughness": [
+					0.52,
+					0.7
+				],
+				"paper_color": [
+					"(0.66, 0.6, 0.48)",
+					"(0.74, 0.68, 0.55)"
+				],
+				"wood": [
+					"StandardMaterial3D (0.16, 0.1, 0.065), roughness 0.75",
+					"shelf_wood.gdshader, roughness 0.68, rings 6 mm"
+				]
+			},
+			"pt_changes": {
+				"gilt_fake_reflection": "output_energy 0.7 -> 0",
+				"light_sizes_from_zero": {
+					"DoorSpill (m, spot)": [
+						0.15,
+						1
+					],
+					"InteriorGlow (m, omni)": [
+						0.15,
+						1
+					],
+					"KeyLightL (m, spot)": [
+						0.15,
+						1
+					],
+					"KeyLightR (m, spot)": [
+						0.15,
+						1
+					],
+					"ReceiverGlow (m, omni)": [
+						0.15,
+						1
+					]
+				},
+				"night_sky": "hidden (its dome would be met by rays as a 1 m ball)",
+				"source_color_defaults": {
+					"materials_scanned": 115,
+					"set_to_their_default": {
+
+					},
+					"source_color_without_default": [
+						"gilt.gdshader:strip_color",
+						"gilt.gdshader:books_color",
+						"gilt.gdshader:slab_color",
+						"gilt.gdshader:floor_color",
+						"gilt.gdshader:vault_color",
+						"gilt.gdshader:sky_color",
+						"bay_glass.gdshader:strip_color",
+						"bay_glass.gdshader:books_color",
+						"bay_glass.gdshader:slab_color",
+						"bay_glass.gdshader:floor_color",
+						"bay_glass.gdshader:vault_color",
+						"bay_glass.gdshader:sky_color"
+					]
+				},
+				"stone_slope_materials": 5
+			},
+			"soft_fill_lights": 3,
+			"steel": {
+				"door_glow_k": 0.25,
+				"edge_roll_m": 0.0,
+				"interior_glow": 1.57500004768372,
+				"joints_m": 0.96,
+				"key_energy": 1.25,
+				"on": true,
+				"receiver_glow": 1.0,
+				"shell_glb": "res://assets/steel_portal_gaia.glb",
+				"steel_preset": 3
+			},
+			"views": {
+				"cabin_door": {
+					"pt_lights": {
+						"by_name": {
+							"CageLight": {
+								"kept": 1,
+								"lit": 1
+							},
+							"CourseShelves spot": {
+								"kept": 9,
+								"lit": 9
+							},
+							"DoorSpill": {
+								"kept": 1,
+								"lit": 1
+							},
+							"FanlightLight": {
+								"kept": 2,
+								"lit": 2
+							},
+							"InteriorGlow": {
+								"kept": 1,
+								"lit": 1
+							},
+							"KeyLightL": {
+								"kept": 1,
+								"lit": 1
+							},
+							"KeyLightR": {
+								"kept": 1,
+								"lit": 1
+							},
+							"MoonFill": {
+								"kept": 1,
+								"lit": 1
+							},
+							"OculusMoon": {
+								"kept": 1,
+								"lit": 1
+							},
+							"OculusShaft": {
+								"kept": 1,
+								"lit": 1
+							},
+							"ReceiverGlow": {
+								"kept": 1,
+								"lit": 1
+							},
+							"ShelfLamp": {
+								"kept": 24,
+								"lit": 24
+							},
+							"SoftFill": {
+								"kept": 3,
+								"lit": 3
+							},
+							"StatueKey": {
+								"kept": 1,
+								"lit": 1
+							},
+							"WindowLight": {
+								"kept": 8,
+								"lit": 8
+							}
+						},
+						"directional_lit": 0,
+						"dropped": 0,
+						"positional_lit": 56,
+						"slots": 64
+					},
+					"view": {
+						"course_shelves_spots": [
+							{
+								"in_view": false,
+								"pixel": null,
+								"pos": [
+									-16.92,
+									1.81,
+									3.37
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									180,
+									944
+								],
+								"pos": [
+									-16.92,
+									1.81,
+									-3.37
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									1164,
+									953
+								],
+								"pos": [
+									-14.34,
+									1.81,
+									-9.58
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									1926,
+									956
+								],
+								"pos": [
+									-9.58,
+									1.81,
+									-14.34
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									2679,
+									954
+								],
+								"pos": [
+									-3.37,
+									1.81,
+									-16.92
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									3615,
+									947
+								],
+								"pos": [
+									3.37,
+									1.81,
+									-16.92
+								]
+							},
+							{
+								"in_view": false,
+								"pixel": null,
+								"pos": [
+									9.58,
+									1.81,
+									-14.34
+								]
+							},
+							{
+								"in_view": false,
+								"pixel": null,
+								"pos": [
+									14.34,
+									1.81,
+									-9.58
+								]
+							},
+							{
+								"in_view": false,
+								"pixel": null,
+								"pos": [
+									16.92,
+									1.81,
+									-3.37
+								]
+							}
+						],
+						"note": "geometric: a 9 x 9 grid on each unit's book face against the frustum; occlusion is not tested",
+						"unit_width_m": 6.50865223836288,
+						"units": {
+							"Unit_L0_B00": {
+								"centre": [
+									16.97,
+									2.8,
+									3.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 117.6
+							},
+							"Unit_L0_B01": {
+								"centre": [
+									14.38,
+									2.8,
+									9.61
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 143.0
+							},
+							"Unit_L0_B02": {
+								"centre": [
+									9.61,
+									2.91,
+									14.38
+								],
+								"height_m": 5.82,
+								"in_view_share": 0.0,
+								"off_axis_deg": 170.6
+							},
+							"Unit_L0_B03": {
+								"centre": [
+									3.38,
+									2.8,
+									16.97
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 158.4
+							},
+							"Unit_L0_B04": {
+								"centre": [
+									-3.38,
+									2.8,
+									16.97
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 129.3
+							},
+							"Unit_L0_B05": {
+								"centre": [
+									-9.61,
+									2.91,
+									14.38
+								],
+								"height_m": 5.82,
+								"in_view_share": 0.0,
+								"off_axis_deg": 102.6
+							},
+							"Unit_L0_B06": {
+								"centre": [
+									-14.38,
+									2.8,
+									9.61
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 78.7
+							},
+							"Unit_L0_B07": {
+								"centre": [
+									-16.97,
+									2.8,
+									3.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 57.1
+							},
+							"Unit_L0_B08": {
+								"centre": [
+									-16.97,
+									2.8,
+									-3.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.67,
+								"off_axis_deg": 37.4,
+								"pixel_box": [
+									24,
+									403,
+									645,
+									1174
+								]
+							},
+							"Unit_L0_B09": {
+								"centre": [
+									-14.38,
+									2.8,
+									-9.61
+								],
+								"height_m": 5.6,
+								"in_view_share": 1.0,
+								"off_axis_deg": 19.0,
+								"pixel_box": [
+									774,
+									509,
+									1500,
+									1141
+								]
+							},
+							"Unit_L0_B10": {
+								"centre": [
+									-9.61,
+									2.8,
+									-14.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 1.0,
+								"off_axis_deg": 5.7,
+								"pixel_box": [
+									1607,
+									572,
+									2240,
+									1121
+								]
+							},
+							"Unit_L0_B11": {
+								"centre": [
+									-3.38,
+									2.8,
+									-16.97
+								],
+								"height_m": 5.6,
+								"in_view_share": 1.0,
+								"off_axis_deg": 19.0,
+								"pixel_box": [
+									2346,
+									534,
+									3051,
+									1133
+								]
+							},
+							"Unit_L0_B12": {
+								"centre": [
+									3.38,
+									2.8,
+									-16.97
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.67,
+								"off_axis_deg": 36.6,
+								"pixel_box": [
+									3174,
+									453,
+									3756,
+									1158
+								]
+							},
+							"Unit_L0_B13": {
+								"centre": [
+									9.61,
+									2.8,
+									-14.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 55.0
+							},
+							"Unit_L0_B14": {
+								"centre": [
+									14.38,
+									2.8,
+									-9.61
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 74.2
+							},
+							"Unit_L0_B15": {
+								"centre": [
+									16.97,
+									2.8,
+									-3.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 94.9
+							},
+							"Unit_L1_B00": {
+								"centre": [
+									16.97,
+									9.1,
+									3.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 115.7
+							},
+							"Unit_L1_B01": {
+								"centre": [
+									14.38,
+									9.1,
+									9.61
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 136.2
+							},
+							"Unit_L1_B02": {
+								"centre": [
+									9.61,
+									9.1,
+									14.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 151.0
+							},
+							"Unit_L1_B03": {
+								"centre": [
+									3.38,
+									9.1,
+									16.97
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 145.3
+							},
+							"Unit_L1_B04": {
+								"centre": [
+									-3.38,
+									9.1,
+									16.97
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 124.9
+							},
+							"Unit_L1_B05": {
+								"centre": [
+									-9.61,
+									9.1,
+									14.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 102.1
+							},
+							"Unit_L1_B06": {
+								"centre": [
+									-14.38,
+									9.1,
+									9.61
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 80.5
+							},
+							"Unit_L1_B07": {
+								"centre": [
+									-16.97,
+									9.1,
+									3.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 60.7
+							},
+							"Unit_L1_B08": {
+								"centre": [
+									-16.97,
+									9.1,
+									-3.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.26,
+								"off_axis_deg": 43.0,
+								"pixel_box": [
+									12,
+									17,
+									628,
+									339
+								]
+							},
+							"Unit_L1_B09": {
+								"centre": [
+									-14.38,
+									9.1,
+									-9.61
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.62,
+								"off_axis_deg": 28.4,
+								"pixel_box": [
+									765,
+									10,
+									1495,
+									436
+								]
+							},
+							"Unit_L1_B10": {
+								"centre": [
+									-9.61,
+									9.1,
+									-14.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.78,
+								"off_axis_deg": 21.7,
+								"pixel_box": [
+									1604,
+									7,
+									2243,
+									451
+								]
+							},
+							"Unit_L1_B11": {
+								"centre": [
+									-3.38,
+									9.1,
+									-16.97
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.68,
+								"off_axis_deg": 28.0,
+								"pixel_box": [
+									2351,
+									4,
+									3059,
+									447
+								]
+							},
+							"Unit_L1_B12": {
+								"centre": [
+									3.38,
+									9.1,
+									-16.97
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.33,
+								"off_axis_deg": 41.7,
+								"pixel_box": [
+									3190,
+									1,
+									3770,
+									377
+								]
+							},
+							"Unit_L1_B13": {
+								"centre": [
+									9.61,
+									9.1,
+									-14.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 58.2
+							},
+							"Unit_L1_B14": {
+								"centre": [
+									14.38,
+									9.1,
+									-9.61
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 76.1
+							},
+							"Unit_L1_B15": {
+								"centre": [
+									16.97,
+									9.1,
+									-3.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 95.3
+							},
+							"Unit_L2_B00": {
+								"centre": [
+									16.97,
+									15.35,
+									3.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 111.9
+							},
+							"Unit_L2_B01": {
+								"centre": [
+									14.38,
+									15.35,
+									9.61
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 126.7
+							},
+							"Unit_L2_B02": {
+								"centre": [
+									9.61,
+									15.35,
+									14.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 135.1
+							},
+							"Unit_L2_B03": {
+								"centre": [
+									3.38,
+									15.35,
+									16.97
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 131.6
+							},
+							"Unit_L2_B04": {
+								"centre": [
+									-3.38,
+									15.35,
+									16.97
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 118.1
+							},
+							"Unit_L2_B05": {
+								"centre": [
+									-9.61,
+									15.35,
+									14.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 100.6
+							},
+							"Unit_L2_B06": {
+								"centre": [
+									-14.38,
+									15.35,
+									9.61
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 82.6
+							},
+							"Unit_L2_B07": {
+								"centre": [
+									-16.97,
+									15.35,
+									3.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 65.7
+							},
+							"Unit_L2_B08": {
+								"centre": [
+									-16.97,
+									15.35,
+									-3.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 50.8
+							},
+							"Unit_L2_B09": {
+								"centre": [
+									-14.38,
+									15.35,
+									-9.61
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 39.6
+							},
+							"Unit_L2_B10": {
+								"centre": [
+									-9.61,
+									15.35,
+									-14.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 35.0
+							},
+							"Unit_L2_B11": {
+								"centre": [
+									-3.38,
+									15.35,
+									-16.97
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 38.8
+							},
+							"Unit_L2_B12": {
+								"centre": [
+									3.38,
+									15.35,
+									-16.97
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 49.1
+							},
+							"Unit_L2_B13": {
+								"centre": [
+									9.61,
+									15.35,
+									-14.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 62.9
+							},
+							"Unit_L2_B14": {
+								"centre": [
+									14.38,
+									15.35,
+									-9.61
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 78.5
+							},
+							"Unit_L2_B15": {
+								"centre": [
+									16.97,
+									15.35,
+									-3.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 95.1
+							}
+						}
+					}
+				},
+				"cabin_front": {
+					"pt_lights": {
+						"by_name": {
+							"CageLight": {
+								"kept": 1,
+								"lit": 1
+							},
+							"CourseShelves spot": {
+								"kept": 9,
+								"lit": 9
+							},
+							"DoorSpill": {
+								"kept": 1,
+								"lit": 1
+							},
+							"FanlightLight": {
+								"kept": 2,
+								"lit": 2
+							},
+							"InteriorGlow": {
+								"kept": 1,
+								"lit": 1
+							},
+							"KeyLightL": {
+								"kept": 1,
+								"lit": 1
+							},
+							"KeyLightR": {
+								"kept": 1,
+								"lit": 1
+							},
+							"MoonFill": {
+								"kept": 1,
+								"lit": 1
+							},
+							"OculusMoon": {
+								"kept": 1,
+								"lit": 1
+							},
+							"OculusShaft": {
+								"kept": 1,
+								"lit": 1
+							},
+							"ReceiverGlow": {
+								"kept": 1,
+								"lit": 1
+							},
+							"ShelfLamp": {
+								"kept": 24,
+								"lit": 24
+							},
+							"SoftFill": {
+								"kept": 3,
+								"lit": 3
+							},
+							"StatueKey": {
+								"kept": 1,
+								"lit": 1
+							},
+							"WindowLight": {
+								"kept": 8,
+								"lit": 8
+							}
+						},
+						"directional_lit": 0,
+						"dropped": 0,
+						"positional_lit": 56,
+						"slots": 64
+					},
+					"view": {
+						"course_shelves_spots": [
+							{
+								"in_view": false,
+								"pixel": null,
+								"pos": [
+									-16.92,
+									1.81,
+									3.37
+								]
+							},
+							{
+								"in_view": false,
+								"pixel": null,
+								"pos": [
+									-16.92,
+									1.81,
+									-3.37
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									164,
+									1207
+								],
+								"pos": [
+									-14.34,
+									1.81,
+									-9.58
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									1003,
+									1209
+								],
+								"pos": [
+									-9.58,
+									1.81,
+									-14.34
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									1632,
+									1211
+								],
+								"pos": [
+									-3.37,
+									1.81,
+									-16.92
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									2207,
+									1211
+								],
+								"pos": [
+									3.37,
+									1.81,
+									-16.92
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									2836,
+									1209
+								],
+								"pos": [
+									9.58,
+									1.81,
+									-14.34
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									3675,
+									1207
+								],
+								"pos": [
+									14.34,
+									1.81,
+									-9.58
+								]
+							},
+							{
+								"in_view": false,
+								"pixel": null,
+								"pos": [
+									16.92,
+									1.81,
+									-3.37
+								]
+							}
+						],
+						"note": "geometric: a 9 x 9 grid on each unit's book face against the frustum; occlusion is not tested",
+						"unit_width_m": 6.50865223836288,
+						"units": {
+							"Unit_L0_B00": {
+								"centre": [
+									16.97,
+									2.8,
+									3.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 76.5
+							},
+							"Unit_L0_B01": {
+								"centre": [
+									14.38,
+									2.8,
+									9.61
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 98.4
+							},
+							"Unit_L0_B02": {
+								"centre": [
+									9.61,
+									2.91,
+									14.38
+								],
+								"height_m": 5.82,
+								"in_view_share": 0.0,
+								"off_axis_deg": 125.2
+							},
+							"Unit_L0_B03": {
+								"centre": [
+									3.38,
+									2.8,
+									16.97
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 158.1
+							},
+							"Unit_L0_B04": {
+								"centre": [
+									-3.38,
+									2.8,
+									16.97
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 158.1
+							},
+							"Unit_L0_B05": {
+								"centre": [
+									-9.61,
+									2.91,
+									14.38
+								],
+								"height_m": 5.82,
+								"in_view_share": 0.0,
+								"off_axis_deg": 125.2
+							},
+							"Unit_L0_B06": {
+								"centre": [
+									-14.38,
+									2.8,
+									9.61
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 98.4
+							},
+							"Unit_L0_B07": {
+								"centre": [
+									-16.97,
+									2.8,
+									3.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 76.5
+							},
+							"Unit_L0_B08": {
+								"centre": [
+									-16.97,
+									2.8,
+									-3.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 57.5
+							},
+							"Unit_L0_B09": {
+								"centre": [
+									-14.38,
+									2.8,
+									-9.61
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.67,
+								"off_axis_deg": 40.2,
+								"pixel_box": [
+									33,
+									766,
+									572,
+									1401
+								]
+							},
+							"Unit_L0_B10": {
+								"centre": [
+									-9.61,
+									2.8,
+									-14.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 1.0,
+								"off_axis_deg": 23.8,
+								"pixel_box": [
+									671,
+									850,
+									1289,
+									1367
+								]
+							},
+							"Unit_L0_B11": {
+								"centre": [
+									-3.38,
+									2.8,
+									-16.97
+								],
+								"height_m": 5.6,
+								"in_view_share": 1.0,
+								"off_axis_deg": 8.0,
+								"pixel_box": [
+									1371,
+									906,
+									1878,
+									1345
+								]
+							},
+							"Unit_L0_B12": {
+								"centre": [
+									3.38,
+									2.8,
+									-16.97
+								],
+								"height_m": 5.6,
+								"in_view_share": 1.0,
+								"off_axis_deg": 8.0,
+								"pixel_box": [
+									1961,
+									906,
+									2468,
+									1345
+								]
+							},
+							"Unit_L0_B13": {
+								"centre": [
+									9.61,
+									2.8,
+									-14.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 1.0,
+								"off_axis_deg": 23.8,
+								"pixel_box": [
+									2550,
+									850,
+									3168,
+									1367
+								]
+							},
+							"Unit_L0_B14": {
+								"centre": [
+									14.38,
+									2.8,
+									-9.61
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.67,
+								"off_axis_deg": 40.2,
+								"pixel_box": [
+									3267,
+									766,
+									3806,
+									1401
+								]
+							},
+							"Unit_L0_B15": {
+								"centre": [
+									16.97,
+									2.8,
+									-3.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 57.5
+							},
+							"Unit_L1_B00": {
+								"centre": [
+									16.97,
+									9.1,
+									3.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 76.2
+							},
+							"Unit_L1_B01": {
+								"centre": [
+									14.38,
+									9.1,
+									9.61
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 96.0
+							},
+							"Unit_L1_B02": {
+								"centre": [
+									9.61,
+									9.1,
+									14.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 117.5
+							},
+							"Unit_L1_B03": {
+								"centre": [
+									3.38,
+									9.1,
+									16.97
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 136.1
+							},
+							"Unit_L1_B04": {
+								"centre": [
+									-3.38,
+									9.1,
+									16.97
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 136.1
+							},
+							"Unit_L1_B05": {
+								"centre": [
+									-9.61,
+									9.1,
+									14.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 117.5
+							},
+							"Unit_L1_B06": {
+								"centre": [
+									-14.38,
+									9.1,
+									9.61
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 96.0
+							},
+							"Unit_L1_B07": {
+								"centre": [
+									-16.97,
+									9.1,
+									3.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 76.2
+							},
+							"Unit_L1_B08": {
+								"centre": [
+									-16.97,
+									9.1,
+									-3.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 58.3
+							},
+							"Unit_L1_B09": {
+								"centre": [
+									-14.38,
+									9.1,
+									-9.61
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.65,
+								"off_axis_deg": 41.9,
+								"pixel_box": [
+									81,
+									40,
+									601,
+									715
+								]
+							},
+							"Unit_L1_B10": {
+								"centre": [
+									-9.61,
+									9.1,
+									-14.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 1.0,
+								"off_axis_deg": 26.9,
+								"pixel_box": [
+									696,
+									218,
+									1300,
+									799
+								]
+							},
+							"Unit_L1_B11": {
+								"centre": [
+									-3.38,
+									9.1,
+									-16.97
+								],
+								"height_m": 5.8,
+								"in_view_share": 1.0,
+								"off_axis_deg": 15.0,
+								"pixel_box": [
+									1381,
+									367,
+									1879,
+									825
+								]
+							},
+							"Unit_L1_B12": {
+								"centre": [
+									3.38,
+									9.1,
+									-16.97
+								],
+								"height_m": 5.8,
+								"in_view_share": 1.0,
+								"off_axis_deg": 15.0,
+								"pixel_box": [
+									1960,
+									367,
+									2458,
+									825
+								]
+							},
+							"Unit_L1_B13": {
+								"centre": [
+									9.61,
+									9.1,
+									-14.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 1.0,
+								"off_axis_deg": 26.9,
+								"pixel_box": [
+									2539,
+									218,
+									3143,
+									799
+								]
+							},
+							"Unit_L1_B14": {
+								"centre": [
+									14.38,
+									9.1,
+									-9.61
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.65,
+								"off_axis_deg": 41.9,
+								"pixel_box": [
+									3238,
+									40,
+									3758,
+									715
+								]
+							},
+							"Unit_L1_B15": {
+								"centre": [
+									16.97,
+									9.1,
+									-3.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 58.3
+							},
+							"Unit_L2_B00": {
+								"centre": [
+									16.97,
+									15.35,
+									3.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 77.1
+							},
+							"Unit_L2_B01": {
+								"centre": [
+									14.38,
+									15.35,
+									9.61
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 93.7
+							},
+							"Unit_L2_B02": {
+								"centre": [
+									9.61,
+									15.35,
+									14.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 109.5
+							},
+							"Unit_L2_B03": {
+								"centre": [
+									3.38,
+									15.35,
+									16.97
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 120.5
+							},
+							"Unit_L2_B04": {
+								"centre": [
+									-3.38,
+									15.35,
+									16.97
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 120.5
+							},
+							"Unit_L2_B05": {
+								"centre": [
+									-9.61,
+									15.35,
+									14.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 109.5
+							},
+							"Unit_L2_B06": {
+								"centre": [
+									-14.38,
+									15.35,
+									9.61
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 93.7
+							},
+							"Unit_L2_B07": {
+								"centre": [
+									-16.97,
+									15.35,
+									3.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 77.1
+							},
+							"Unit_L2_B08": {
+								"centre": [
+									-16.97,
+									15.35,
+									-3.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 61.3
+							},
+							"Unit_L2_B09": {
+								"centre": [
+									-14.38,
+									15.35,
+									-9.61
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.04,
+								"off_axis_deg": 46.8,
+								"pixel_box": [
+									522,
+									5,
+									609,
+									67
+								]
+							},
+							"Unit_L2_B10": {
+								"centre": [
+									-9.61,
+									15.35,
+									-14.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.44,
+								"off_axis_deg": 34.4,
+								"pixel_box": [
+									722,
+									0,
+									1307,
+									256
+								]
+							},
+							"Unit_L2_B11": {
+								"centre": [
+									-3.38,
+									15.35,
+									-16.97
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.72,
+								"off_axis_deg": 26.2,
+								"pixel_box": [
+									1390,
+									4,
+									1879,
+									313
+								]
+							},
+							"Unit_L2_B12": {
+								"centre": [
+									3.38,
+									15.35,
+									-16.97
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.72,
+								"off_axis_deg": 26.2,
+								"pixel_box": [
+									1960,
+									4,
+									2449,
+									313
+								]
+							},
+							"Unit_L2_B13": {
+								"centre": [
+									9.61,
+									15.35,
+									-14.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.44,
+								"off_axis_deg": 34.4,
+								"pixel_box": [
+									2532,
+									0,
+									3117,
+									256
+								]
+							},
+							"Unit_L2_B14": {
+								"centre": [
+									14.38,
+									15.35,
+									-9.61
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.04,
+								"off_axis_deg": 46.8,
+								"pixel_box": [
+									3230,
+									5,
+									3317,
+									67
+								]
+							},
+							"Unit_L2_B15": {
+								"centre": [
+									16.97,
+									15.35,
+									-3.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 61.3
+							}
+						}
+					}
+				},
+				"cabin_oblique": {
+					"pt_lights": {
+						"by_name": {
+							"CageLight": {
+								"kept": 1,
+								"lit": 1
+							},
+							"CourseShelves spot": {
+								"kept": 9,
+								"lit": 9
+							},
+							"DoorSpill": {
+								"kept": 1,
+								"lit": 1
+							},
+							"FanlightLight": {
+								"kept": 2,
+								"lit": 2
+							},
+							"InteriorGlow": {
+								"kept": 1,
+								"lit": 1
+							},
+							"KeyLightL": {
+								"kept": 1,
+								"lit": 1
+							},
+							"KeyLightR": {
+								"kept": 1,
+								"lit": 1
+							},
+							"MoonFill": {
+								"kept": 1,
+								"lit": 1
+							},
+							"OculusMoon": {
+								"kept": 1,
+								"lit": 1
+							},
+							"OculusShaft": {
+								"kept": 1,
+								"lit": 1
+							},
+							"ReceiverGlow": {
+								"kept": 1,
+								"lit": 1
+							},
+							"ShelfLamp": {
+								"kept": 24,
+								"lit": 24
+							},
+							"SoftFill": {
+								"kept": 3,
+								"lit": 3
+							},
+							"StatueKey": {
+								"kept": 1,
+								"lit": 1
+							},
+							"WindowLight": {
+								"kept": 8,
+								"lit": 8
+							}
+						},
+						"directional_lit": 0,
+						"dropped": 0,
+						"positional_lit": 56,
+						"slots": 64
+					},
+					"view": {
+						"course_shelves_spots": [
+							{
+								"in_view": false,
+								"pixel": null,
+								"pos": [
+									-16.92,
+									1.81,
+									3.37
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									772,
+									1230
+								],
+								"pos": [
+									-16.92,
+									1.81,
+									-3.37
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									1510,
+									1233
+								],
+								"pos": [
+									-14.34,
+									1.81,
+									-9.58
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									2165,
+									1233
+								],
+								"pos": [
+									-9.58,
+									1.81,
+									-14.34
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									2865,
+									1231
+								],
+								"pos": [
+									-3.37,
+									1.81,
+									-16.92
+								]
+							},
+							{
+								"in_view": true,
+								"pixel": [
+									3778,
+									1226
+								],
+								"pos": [
+									3.37,
+									1.81,
+									-16.92
+								]
+							},
+							{
+								"in_view": false,
+								"pixel": null,
+								"pos": [
+									9.58,
+									1.81,
+									-14.34
+								]
+							},
+							{
+								"in_view": false,
+								"pixel": null,
+								"pos": [
+									14.34,
+									1.81,
+									-9.58
+								]
+							},
+							{
+								"in_view": false,
+								"pixel": null,
+								"pos": [
+									16.92,
+									1.81,
+									-3.37
+								]
+							}
+						],
+						"note": "geometric: a 9 x 9 grid on each unit's book face against the frustum; occlusion is not tested",
+						"unit_width_m": 6.50865223836288,
+						"units": {
+							"Unit_L0_B00": {
+								"centre": [
+									16.97,
+									2.8,
+									3.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 121.5
+							},
+							"Unit_L0_B01": {
+								"centre": [
+									14.38,
+									2.8,
+									9.61
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 152.2
+							},
+							"Unit_L0_B02": {
+								"centre": [
+									9.61,
+									2.91,
+									14.38
+								],
+								"height_m": 5.82,
+								"in_view_share": 0.0,
+								"off_axis_deg": 164.0
+							},
+							"Unit_L0_B03": {
+								"centre": [
+									3.38,
+									2.8,
+									16.97
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 132.5
+							},
+							"Unit_L0_B04": {
+								"centre": [
+									-3.38,
+									2.8,
+									16.97
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 104.3
+							},
+							"Unit_L0_B05": {
+								"centre": [
+									-9.61,
+									2.91,
+									14.38
+								],
+								"height_m": 5.82,
+								"in_view_share": 0.0,
+								"off_axis_deg": 81.0
+							},
+							"Unit_L0_B06": {
+								"centre": [
+									-14.38,
+									2.8,
+									9.61
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 61.1
+							},
+							"Unit_L0_B07": {
+								"centre": [
+									-16.97,
+									2.8,
+									3.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.31,
+								"off_axis_deg": 43.2,
+								"pixel_box": [
+									0,
+									749,
+									253,
+									1430
+								]
+							},
+							"Unit_L0_B08": {
+								"centre": [
+									-16.97,
+									2.8,
+									-3.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 1.0,
+								"off_axis_deg": 26.3,
+								"pixel_box": [
+									369,
+									802,
+									1112,
+									1417
+								]
+							},
+							"Unit_L0_B09": {
+								"centre": [
+									-14.38,
+									2.8,
+									-9.61
+								],
+								"height_m": 5.6,
+								"in_view_share": 1.0,
+								"off_axis_deg": 10.1,
+								"pixel_box": [
+									1206,
+									880,
+									1792,
+									1388
+								]
+							},
+							"Unit_L0_B10": {
+								"centre": [
+									-9.61,
+									2.8,
+									-14.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 1.0,
+								"off_axis_deg": 6.2,
+								"pixel_box": [
+									1886,
+									892,
+									2456,
+									1384
+								]
+							},
+							"Unit_L0_B11": {
+								"centre": [
+									-3.38,
+									2.8,
+									-16.97
+								],
+								"height_m": 5.6,
+								"in_view_share": 1.0,
+								"off_axis_deg": 22.2,
+								"pixel_box": [
+									2548,
+									836,
+									3228,
+									1404
+								]
+							},
+							"Unit_L0_B12": {
+								"centre": [
+									3.38,
+									2.8,
+									-16.97
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.56,
+								"off_axis_deg": 38.7,
+								"pixel_box": [
+									3334,
+									765,
+									3792,
+									1430
+								]
+							},
+							"Unit_L0_B13": {
+								"centre": [
+									9.61,
+									2.8,
+									-14.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 56.0
+							},
+							"Unit_L0_B14": {
+								"centre": [
+									14.38,
+									2.8,
+									-9.61
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 74.8
+							},
+							"Unit_L0_B15": {
+								"centre": [
+									16.97,
+									2.8,
+									-3.38
+								],
+								"height_m": 5.6,
+								"in_view_share": 0.0,
+								"off_axis_deg": 96.0
+							},
+							"Unit_L1_B00": {
+								"centre": [
+									16.97,
+									9.1,
+									3.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 114.8
+							},
+							"Unit_L1_B01": {
+								"centre": [
+									14.38,
+									9.1,
+									9.61
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 134.1
+							},
+							"Unit_L1_B02": {
+								"centre": [
+									9.61,
+									9.1,
+									14.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 138.5
+							},
+							"Unit_L1_B03": {
+								"centre": [
+									3.38,
+									9.1,
+									16.97
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 122.5
+							},
+							"Unit_L1_B04": {
+								"centre": [
+									-3.38,
+									9.1,
+									16.97
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 100.8
+							},
+							"Unit_L1_B05": {
+								"centre": [
+									-9.61,
+									9.1,
+									14.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 80.3
+							},
+							"Unit_L1_B06": {
+								"centre": [
+									-14.38,
+									9.1,
+									9.61
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 61.7
+							},
+							"Unit_L1_B07": {
+								"centre": [
+									-16.97,
+									9.1,
+									3.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.31,
+								"off_axis_deg": 44.7,
+								"pixel_box": [
+									41,
+									3,
+									296,
+									639
+								]
+							},
+							"Unit_L1_B08": {
+								"centre": [
+									-16.97,
+									9.1,
+									-3.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 1.0,
+								"off_axis_deg": 29.2,
+								"pixel_box": [
+									406,
+									57,
+									1128,
+									755
+								]
+							},
+							"Unit_L1_B09": {
+								"centre": [
+									-14.38,
+									9.1,
+									-9.61
+								],
+								"height_m": 5.8,
+								"in_view_share": 1.0,
+								"off_axis_deg": 16.3,
+								"pixel_box": [
+									1220,
+									259,
+									1795,
+									794
+								]
+							},
+							"Unit_L1_B10": {
+								"centre": [
+									-9.61,
+									9.1,
+									-14.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 1.0,
+								"off_axis_deg": 14.2,
+								"pixel_box": [
+									1887,
+									291,
+									2445,
+									795
+								]
+							},
+							"Unit_L1_B11": {
+								"centre": [
+									-3.38,
+									9.1,
+									-16.97
+								],
+								"height_m": 5.8,
+								"in_view_share": 1.0,
+								"off_axis_deg": 25.5,
+								"pixel_box": [
+									2535,
+									144,
+									3199,
+									774
+								]
+							},
+							"Unit_L1_B12": {
+								"centre": [
+									3.38,
+									9.1,
+									-16.97
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.58,
+								"off_axis_deg": 40.4,
+								"pixel_box": [
+									3301,
+									1,
+									3838,
+									688
+								]
+							},
+							"Unit_L1_B13": {
+								"centre": [
+									9.61,
+									9.1,
+									-14.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 56.8
+							},
+							"Unit_L1_B14": {
+								"centre": [
+									14.38,
+									9.1,
+									-9.61
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 74.5
+							},
+							"Unit_L1_B15": {
+								"centre": [
+									16.97,
+									9.1,
+									-3.38
+								],
+								"height_m": 5.8,
+								"in_view_share": 0.0,
+								"off_axis_deg": 93.9
+							},
+							"Unit_L2_B00": {
+								"centre": [
+									16.97,
+									15.35,
+									3.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 107.8
+							},
+							"Unit_L2_B01": {
+								"centre": [
+									14.38,
+									15.35,
+									9.61
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 119.8
+							},
+							"Unit_L2_B02": {
+								"centre": [
+									9.61,
+									15.35,
+									14.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 122.0
+							},
+							"Unit_L2_B03": {
+								"centre": [
+									3.38,
+									15.35,
+									16.97
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 112.7
+							},
+							"Unit_L2_B04": {
+								"centre": [
+									-3.38,
+									15.35,
+									16.97
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 97.4
+							},
+							"Unit_L2_B05": {
+								"centre": [
+									-9.61,
+									15.35,
+									14.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 80.6
+							},
+							"Unit_L2_B06": {
+								"centre": [
+									-14.38,
+									15.35,
+									9.61
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 64.3
+							},
+							"Unit_L2_B07": {
+								"centre": [
+									-16.97,
+									15.35,
+									3.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 49.3
+							},
+							"Unit_L2_B08": {
+								"centre": [
+									-16.97,
+									15.35,
+									-3.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.12,
+								"off_axis_deg": 36.3,
+								"pixel_box": [
+									728,
+									9,
+									1134,
+									128
+								]
+							},
+							"Unit_L2_B09": {
+								"centre": [
+									-14.38,
+									15.35,
+									-9.61
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.41,
+								"off_axis_deg": 27.2,
+								"pixel_box": [
+									1234,
+									4,
+									1796,
+									215
+								]
+							},
+							"Unit_L2_B10": {
+								"centre": [
+									-9.61,
+									15.35,
+									-14.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.44,
+								"off_axis_deg": 25.9,
+								"pixel_box": [
+									1887,
+									16,
+									2435,
+									217
+								]
+							},
+							"Unit_L2_B11": {
+								"centre": [
+									-3.38,
+									15.35,
+									-16.97
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.22,
+								"off_axis_deg": 33.3,
+								"pixel_box": [
+									2531,
+									19,
+									3170,
+									170
+								]
+							},
+							"Unit_L2_B12": {
+								"centre": [
+									3.38,
+									15.35,
+									-16.97
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 45.4
+							},
+							"Unit_L2_B13": {
+								"centre": [
+									9.61,
+									15.35,
+									-14.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 59.8
+							},
+							"Unit_L2_B14": {
+								"centre": [
+									14.38,
+									15.35,
+									-9.61
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 75.5
+							},
+							"Unit_L2_B15": {
+								"centre": [
+									16.97,
+									15.35,
+									-3.38
+								],
+								"height_m": 5.5,
+								"in_view_share": 0.0,
+								"off_axis_deg": 91.9
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"timeline": {
+		"control_cabin_door_done_s": 67.93,
+		"control_cabin_front_done_s": 54.26,
+		"control_cabin_oblique_done_s": 61.0,
+		"done_s": 67.93,
+		"pt_back_gaia_off_after_s": 0.01,
+		"pt_back_shellnew_after_s": 0.01,
+		"pt_first_rr_after_s": 0.34,
+		"scene_ready_s": 5.23,
+		"shellnew_cabin_door_done_s": 46.63,
+		"shellnew_cabin_front_done_s": 33.18,
+		"shellnew_cabin_oblique_done_s": 39.95,
+		"shellold_cabin_door_done_s": 25.96,
+		"shellold_cabin_front_done_s": 12.49,
+		"shellold_cabin_oblique_done_s": 19.28,
+		"total_s": 67.93
+	},
+	"views": {
+
+	}
+}
