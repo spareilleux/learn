@@ -278,6 +278,57 @@ public static class Diagrams
 
     static string Pretty(string note) => note.Replace("#", "♯").Replace("b", "♭");
 
+    // ---- Tonnetz: fifths to the right, major thirds up and to the right, minor thirds down and to the right; each
+    // triangle is a triad. C major is filled, and the three triads that share an edge with it carry the letter of the
+    // transformation that leads to them
+
+    static string Tonnetz()
+    {
+        const double cell = 78, margin = 34;
+        const int minCol = -2, maxCol = 2, minRow = -1, maxRow = 2;
+        var rise = cell * Math.Sqrt(3) / 2;
+        // the note `col` fifths and `row` major thirds from C; each row starts half a cell further right than the one below
+        (double X, double Y) At(int col, int row) => (margin + (col - minCol + (row - minRow) / 2.0) * cell, margin + (maxRow - row) * rise);
+        string Points((int Col, int Row)[] corners) => string.Join(" ", corners.Select(c => At(c.Col, c.Row)).Select(p => $"{F(p.X)},{F(p.Y)}"));
+        var svg = new StringBuilder(Open(margin * 2 + (maxCol - minCol + (maxRow - minRow) / 2.0) * cell, margin * 2 + (maxRow - minRow) * rise));
+        svg.Append($"  <polygon points=\"{Points([(0, 0), (1, 0), (0, 1)])}\" style=\"fill:{Palette[0]}\" fill-opacity=\"0.3\"/>\n");
+        foreach (var (corners, letter) in new ((int Col, int Row)[], string)[]
+        {
+            ([(0, 0), (1, 0), (1, -1)], "P"), ([(0, 1), (1, 0), (1, 1)], "L"), ([(0, 0), (0, 1), (-1, 1)], "R"),
+        })
+        {
+            svg.Append($"  <polygon points=\"{Points(corners)}\" style=\"fill:{Palette[1]}\" fill-opacity=\"0.14\"/>\n");
+            var (x, y) = (corners.Average(c => At(c.Col, c.Row).X), corners.Average(c => At(c.Col, c.Row).Y));
+            svg.Append($"  <text x=\"{F(x)}\" y=\"{F(y)}\" font-size=\"15\" font-weight=\"700\" text-anchor=\"middle\" dominant-baseline=\"central\" style=\"fill:{Palette[1]}\">{letter}</text>\n");
+        }
+        for (var row = minRow; row <= maxRow; row++)
+        {
+            for (var col = minCol; col <= maxCol; col++)
+            {
+                // a fifth to the right, a major third up, a minor third down
+                foreach (var (toCol, toRow) in new[] { (col + 1, row), (col, row + 1), (col + 1, row - 1) })
+                {
+                    if (toCol > maxCol || toRow > maxRow || toRow < minRow) continue;
+                    var (x1, y1) = At(col, row);
+                    var (x2, y2) = At(toCol, toRow);
+                    svg.Append($"  <line x1=\"{F(x1)}\" y1=\"{F(y1)}\" x2=\"{F(x2)}\" y2=\"{F(y2)}\" stroke=\"{Ink}\" stroke-opacity=\"0.35\" stroke-width=\"1.5\"/>\n");
+                }
+            }
+        }
+        for (var row = minRow; row <= maxRow; row++)
+        {
+            for (var col = minCol; col <= maxCol; col++)
+            {
+                // spelled along the line of fifths: a major third is four fifths
+                var (x, y) = At(col, row);
+                var home = (col, row) is (0, 0) or (1, 0) or (0, 1);
+                svg.Append($"  <circle cx=\"{F(x)}\" cy=\"{F(y)}\" r=\"16\" style=\"fill:{Paper}\" stroke=\"{Ink}\" stroke-opacity=\"{(home ? "0.9" : "0.5")}\" stroke-width=\"1.5\"/>\n");
+                svg.Append($"  <text x=\"{F(x)}\" y=\"{F(y)}\" font-size=\"13\" font-weight=\"{(home ? "700" : "400")}\" text-anchor=\"middle\" dominant-baseline=\"central\" fill=\"{Ink}\">{Pretty(Theory.MajorTonic(col + 4 * row))}</text>\n");
+            }
+        }
+        return svg.Append(Close).ToString();
+    }
+
     // ---- All diagrams, by file name
 
     public static IReadOnlyDictionary<string, string> All()
@@ -338,6 +389,8 @@ public static class Diagrams
             ["l14-drop-voicings.svg"] = ChordGrids(("x3200x", "x3200x"), ("x3545x", "x3545x"), ("8x998x", "8x998x"), ("3x34xx", "3x34xx")),
             // lesson 15: C major in the five CAGED shapes, in their order up the neck
             ["l15-caged-c.svg"] = ChordGrids(("x32010", "C shape"), ("x35553", "A shape"), ("875558", "G shape"), ("8-10-10-9-8-8", "E shape"), ("x-x-10-12-13-12", "D shape")),
+            // lesson 17: the Tonnetz around C major, with its P, L and R
+            ["l17-tonnetz.svg"] = Tonnetz(),
         };
     }
 
