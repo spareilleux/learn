@@ -1,0 +1,15 @@
+---
+title: Mes favoris et notes
+description: Les pages et les sections que vous avez mises en favori et les notes que vous avez prises sur les leçons, gardées dans ce navigateur seulement.
+tableOfContents: false
+---
+
+import ReaderLibrary from '../../../components/ReaderLibrary.astro';
+
+Chaque leçon a un bouton favori sous son titre, un bouton favori à côté de chaque titre de section (il apparaît au survol du titre) et un bloc de notes en bas de page. Cette page les rassemble.
+
+Ils sont gardés dans le [stockage local](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) de votre navigateur et n'en sortent jamais : pas de compte, pas de serveur. Un autre navigateur ou un autre appareil ne les voit pas, et effacer les données de ce site les supprime. Exportez-les pour en garder une copie, et importez le fichier sur un autre appareil pour les y retrouver.
+
+Un favori de page et une note de page vous suivent d'une langue à l'autre. Un favori de section reste dans la langue où vous l'avez ajouté, parce que les ancres des sections changent d'une langue à l'autre.
+
+<ReaderLibrary />
