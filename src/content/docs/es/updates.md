@@ -129,11 +129,17 @@ La [PR de Demerzel #1140](https://github.com/GuitarAlchemist/Demerzel/pull/1140)
 
 MAT-007 sigue **pendiente de verificación** hasta que este cambio se fusione, su despliegue sea correcto y las páginas se lean sin autenticación.
 
+## 2026-09-28 — Streeling MAT-007 publicado
+
+La [PR de Learn #39](https://github.com/spareilleux/learn/pull/39) se fusionó como `0436325`, y su [despliegue de Pages](https://github.com/spareilleux/learn/actions/runs/36377803965) fue correcto. El [módulo MAT-007](../streeling/mathematics/mat-007-least-squares-regularisation/), el índice de matemáticas, el [diario de Streeling](../streeling/journal/) y este diario se leyeron sin autenticación en los tres idiomas: 12 páginas, que respondieron todas 200 y mencionan MAT-007. Las páginas en francés y en español son traducciones, no la versión inglesa de respaldo.
+
+MAT-007 pasa así de pendiente de verificación a verificado; su entrada de arriba queda tal como se escribió. En esa lectura, las páginas de MAT-007 enlazaban su fuente en `8c14336`. Como en los módulos anteriores, publicado no es estudiado: MAT-007 no se ha ejecutado ni estudiado aquí, y su experimento sigue propuesto.
+
 ## 2026-10-02 — Streeling MAT-007 publicado
 
 La [PR de Learn #39](https://github.com/spareilleux/learn/pull/39) se fusionó como `0436325`, y su [despliegue de Pages](https://github.com/spareilleux/learn/actions/runs/36377803965) fue correcto. El 2026-10-02, con `main` en `c547150` y su [despliegue](https://github.com/spareilleux/learn/actions/runs/37065792242) correcto, el [módulo MAT-007](../streeling/mathematics/mat-007-least-squares-regularisation/), el índice de matemáticas, el [diario de Streeling](../streeling/journal/) y este diario se leyeron sin autenticación en los tres idiomas: 12 páginas, que respondieron todas 200 y mencionan MAT-007.
 
-MAT-007 pasa así de pendiente de verificación a verificado; su entrada de arriba queda tal como se escribió. En esa lectura, las páginas de MAT-007 enlazaban su fuente en `8c14336`; esta actualización las fija de nuevo en `e203e5a`. Como en los módulos anteriores, publicado no es estudiado: MAT-007 no se ha ejecutado ni estudiado aquí, y su experimento sigue propuesto.
+Esta lectura vuelve a verificar MAT-007 después de su publicación del 2026-09-28; sus entradas anteriores quedan tal como se escribieron. En esa lectura, las páginas de MAT-007 enlazaban su fuente en `8c14336`; esta actualización las fija de nuevo en `e203e5a`. Como en los módulos anteriores, publicado no es estudiado: MAT-007 no se ha ejecutado ni estudiado aquí, y su experimento sigue propuesto.
 
 ## 2026-10-02 — Streeling MAT-008 a MAT-025 y cinco módulos de música sincronizados, pendientes de verificación
 

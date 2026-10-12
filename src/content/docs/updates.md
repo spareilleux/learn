@@ -129,11 +129,17 @@ MAT-006 therefore moves from awaiting verification to verified; its entry above 
 
 MAT-007 stays **awaiting verification** until this change is merged, its deployment succeeds and the pages are read back anonymously.
 
+## 2026-09-28 — Streeling MAT-007 published
+
+[Learn PR #39](https://github.com/spareilleux/learn/pull/39) was merged as `0436325`, and its [Pages deployment](https://github.com/spareilleux/learn/actions/runs/36377803965) succeeded. The [MAT-007 module](../streeling/mathematics/mat-007-least-squares-regularisation/), the mathematics index, the [Streeling journal](../streeling/journal/) and this journal were read back anonymously in the three languages: 12 pages, each answering 200 and mentioning MAT-007. The French and Spanish pages are translations, not the English fallback.
+
+MAT-007 therefore moves from awaiting verification to verified; its entry above is left as written. At that readback, the MAT-007 pages linked their source at `8c14336`. As for the modules before it, published is not studied: MAT-007 has not been run or studied here, and its experiment remains proposed.
+
 ## 2026-10-02 — Streeling MAT-007 published
 
 [Learn PR #39](https://github.com/spareilleux/learn/pull/39) was merged as `0436325`, and its [Pages deployment](https://github.com/spareilleux/learn/actions/runs/36377803965) succeeded. On 2026-10-02, with `main` at `c547150` and its [deployment](https://github.com/spareilleux/learn/actions/runs/37065792242) succeeded, the [MAT-007 module](../streeling/mathematics/mat-007-least-squares-regularisation/), the mathematics index, the [Streeling journal](../streeling/journal/) and this journal were read back anonymously in the three languages: 12 pages, each answering 200 and mentioning MAT-007.
 
-MAT-007 therefore moves from awaiting verification to verified; its entry above is left as written. At that readback, the MAT-007 pages linked their source at `8c14336`; this update repins them to `e203e5a`. As for the modules before it, published is not studied: MAT-007 has not been run or studied here, and its experiment remains proposed.
+This readback verifies MAT-007 again after its publication on 2026-09-28; its earlier entries are left as written. At that readback, the MAT-007 pages linked their source at `8c14336`; this update repins them to `e203e5a`. As for the modules before it, published is not studied: MAT-007 has not been run or studied here, and its experiment remains proposed.
 
 ## 2026-10-02 — Streeling MAT-008 to MAT-025 and five music modules synced, awaiting verification
 
