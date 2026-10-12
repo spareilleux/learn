@@ -51,10 +51,26 @@ public static class Entry
             case ["l25"]:
                 Lesson25();
                 return 0;
+            case ["l28"]:
+                Lesson28();
+                return 0;
             default:
-                Console.Error.WriteLine("usage: GaMain l16|l17|l19|l20|l21|l22|l23|l24|l25");
+                Console.Error.WriteLine("usage: GaMain l16|l17|l19|l20|l21|l22|l23|l24|l25|l28");
                 return 2;
         }
+    }
+
+    // Lesson 28: on main, TheoryComparisonSkill only marks its refusal Declined, and its CanHandle is
+    // still false; the comparison questions, in main's chatbot host without embeddings
+    static void Lesson28()
+    {
+        Console.WriteLine("# l28, GA's main");
+        WriteIndex(Path.Combine(AppContext.BaseDirectory, "out", "optick-mini-main.index"), print: false);
+        using var host = new MainChatHost();
+        using var client = host.CreateClient();
+        host.WaitForWarmup();
+        using var scope = host.Services.CreateScope();
+        ComparisonProbe.OfflineTable(scope.ServiceProvider, client, "on main");
     }
 
     // Lesson 25: on main, the hints, the skills and their registration are the pin's, but the router

@@ -74,6 +74,7 @@ Trois autres cours de ce site couvrent les bases, et celui-ci renvoie vers eux a
 | 25 | [Ce qui atteint le skill de transposition](25-what-reaches-the-transpose-skill/) | `DefaultRoutingHintProvider`, `TransposeSkill`, `SkillMdPlugin` et les deux routeurs de l'hôte du chatbot, au commit épinglé et sur `main` | un indice qui manque les propres exemples du skill, un skill qu'aucun repli n'atteint, une valeur par défaut qui répond à toute question que personne ne prend |
 | 26 | [Le catalogue des modes](26-the-modes-catalog/) | `ModesSkill`, `Modes.yaml` et `ModesConfig`, au commit épinglé et identiques sur `main` | des modes qui ne sont pas la gamme de leur famille, des noms coupés par un commentaire YAML, des formules numérotées par position |
 | 27 | [Les notes qui sonnent en dehors](27-notes-that-sound-outside/) | `OutsideNotesSkill` et `ChordVocabulary`, au commit épinglé et identiques sur `main` | des tensions qu'aucune gamme d'accord ne contient, une 11 dans les accords de treizième, des chiffrages coupés, des dièses dans des accords en bémols |
+| 28 | [Comparer majeur et mineur](28-comparing-major-and-minor/) | `TheoryComparisonSkill` et `RelativeKeySkill` au commit épinglé, et l'hôte du chatbot de `main` sans embeddings | 5 formulations lues sur 20, une assertion arrière qui refuse « the major vs minor », une suggestion qu'il refuse, des tonalités parallèles auxquelles aucun skill ne répond, des exemples que `main` ne lui envoie jamais |
 | — | [Journal](journal/) | | |
 
 ## Prérequis
