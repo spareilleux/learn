@@ -1,0 +1,29 @@
+== cross_entropy against the formula, f64
+candle 0.2458859914, by hand 0.2458859914, agree to 1e-12: true
+
+== logits of 1000, 0 and -1000, f64
+target 0: cross_entropy 0.0
+target 1: cross_entropy 1000.0
+target 2: cross_entropy 2000.0
+ops::log_softmax: shape [1, 3], F64, [0.0, -1000.0, -2000.0]
+log(exp(z) / sum(exp(z))), written naively: shape [1, 3], F64, [NaN, -inf, -inf]
+
+== the targets nll accepts
+i64 targets: ok
+f32 targets: error: unsupported dtype F64 for op gather
+a target out of range, 4 of 4 classes: error: gather invalid index 4 with dim size 4
+target u32::MAX in the second row: loss 0.1725049744, (row 1 + row 3) / 3 = 0.1725049744, / 2 = 0.2587574616
+
+== binary_cross_entropy_with_logit, one logit at a time
+type, logit, target: candle's loss and gradient | the stable form's loss and gradient
+F32, 16, 1: 1.192e-7 -1.192e-7 | 1.192e-7 -1.192e-7
+F32, 17, 1: NaN NaN | 0.000e0 0.000e0
+F32, -100, 0: NaN NaN | 0.000e0 4e-44
+F32, 17, 0: inf NaN | 1.700e1 1.000e0
+F32, -100, 1: inf NaN | 1.000e2 -1.000e0
+F64, 36, 1: 2.220e-16 -2.220e-16 | 2.220e-16 -2.220e-16
+F64, 37, 1: NaN NaN | 0.000e0 0.000e0
+F64, -800, 0: NaN NaN | 0.000e0 0.000e0
+a batch of the logits 16 and 17, targets 1, F32: mean loss NaN
+binary_cross_entropy_with_logit with U32 targets: error: dtype mismatch in mul, lhs: U32, rhs: F32
+exit 0

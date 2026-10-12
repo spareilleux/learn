@@ -7,7 +7,7 @@ sidebar:
 ---
 
 :::note[How this course is tested]
-Every result in this course is printed by a program in [`code/candle`](https://github.com/spareilleux/learn/tree/main/code/candle): a Cargo workspace that depends on `candle-core` and `candle-nn` **0.11.0**, pinned with `=`, on the CPU only. `check.sh` runs `cargo fmt`, `clippy`, the tests (with a `compile_fail` doctest for each snippet a lesson shows being rejected) and every example, and compares each output with the file in `expected/`. The outputs in the lessons were captured with Rust 1.94.0 on Windows 11 in September 2026, and `check.sh` gave the same outputs on Linux, in a `rust:1.94.0` container. A workflow, `candle-examples.yml`, runs the same script on Linux, Windows and macOS; it isn't on GitHub yet, so macOS is *to verify*.
+Every result in this course is printed by a program in [`code/candle`](https://github.com/spareilleux/learn/tree/main/code/candle): a Cargo workspace that depends on `candle-core` and `candle-nn` **0.11.0**, pinned with `=`, on the CPU only. `check.sh` runs `cargo fmt`, `clippy`, the tests (with a `compile_fail` doctest for each snippet a lesson shows being rejected) and every example, and compares each output with the file in `expected/`. The outputs in the lessons were captured with Rust 1.94.0 on Windows 11 in September 2026, and `check.sh` gave the same outputs on Linux, in a `rust:1.94.0` container. A workflow, `candle-examples.yml`, runs the same script on Linux, Windows and macOS (ARM); its first run, on September 16, 2026, gave the same outputs on all three.
 :::
 
 ## Why I'm learning this
@@ -65,7 +65,7 @@ When `main` has already fixed something the lessons meet, they say so, with the 
 | 2 | [Tensors](02-tensors/) | `torch.tensor`, `view`, indexing, broadcasting |
 | 3 | [CPU compute and performance](03-cpu-performance/) | `contiguous()`, `torch.set_num_threads` |
 | 4 | [Automatic differentiation](04-autodiff/) | `requires_grad`, `backward()`, `.grad` |
-| 5 | `candle-nn`: modules, layers, optimizers, a small network trained on a public data set | `nn.Module`, `nn.Linear`, `torch.optim` |
+| 5 | [A first network with `candle-nn`](05-candle-nn/): modules, losses, optimizers, Iris | `nn.Module`, `nn.Linear`, `torch.optim` |
 | 6 | Formats and the Hub: `safetensors`, `VarBuilder`, `hf-hub`, the cache, model licences | `torch.load`, `from_pretrained` |
 | 7 | Transformers for inference: an embedding model, tokenizers, similarity, compared with GA's embeddings | `transformers.AutoModel` |
 | 8 | Quantized LLMs: GGUF, quantized tensors, a small model, sampling | `llama.cpp`, `bitsandbytes` |
@@ -75,7 +75,7 @@ When `main` has already fixed something the lessons meet, they say so, with the 
 | 12 | Writing your own model: port a small PyTorch model and compare the outputs | — |
 | — | [Journal](journal/) | |
 
-Lessons 5 to 12 are the plan; they'll change as the first ones teach me what matters. Lesson 9 stays theoretical because the GPU of the machine this course is written on is reserved for other work.
+Lessons 1 to 5 are written; lessons 6 to 12 are the plan, and they'll change as the first ones teach me what matters. Lesson 9 stays theoretical because the GPU of the machine this course is written on is reserved for other work.
 
 ## Resources
 

@@ -1,0 +1,15 @@
+== exercise 1: iris.data against bezdekIris.data
+row 35: iris.data 4.9,3.1,1.5,0.1,Iris-setosa, bezdekIris.data 4.9,3.1,1.5,0.2,Iris-setosa
+row 38: iris.data 4.9,3.1,1.5,0.1,Iris-setosa, bezdekIris.data 4.9,3.6,1.4,0.1,Iris-setosa
+rows 35 and 38 of iris.data are identical: true
+
+== exercise 2: SGD with momentum 0.9, written with Var::set, learning rate 0.01
+momentum 0: loss after 300 epochs 0.3730
+momentum 0.9: loss after 300 epochs 0.0843
+candle's SGD, same learning rate: 0.3730
+
+== exercise 3: save, then load in the two possible orders
+layers built, then load: same values true
+load into an empty VarMap: ok, 0 variables
+then the layers: same values false
+exit 0
