@@ -4,7 +4,7 @@
 // Usage:
 //   npm run sync:streeling                      # default branch from GitHub (sparse clone in .cache/)
 //   npm run sync:streeling -- --ref <sha|tag>   # pin a Demerzel revision
-//   npm run sync:streeling -- --source <dir>    # use an existing Demerzel checkout
+//   npm run sync:streeling -- --source <dir>    # use an existing checkout with clean state/streeling
 //   node scripts/sync-streeling.mjs --source <dir> --out <dir>   # write under another root (the tests do)
 //
 // Generated (overwritten on every run): src/content/docs/{,fr/,es/}streeling/** except journal.md,
@@ -87,6 +87,16 @@ const LEVELS = {
 	es: { beginner: 'principiante', intermediate: 'intermedio', advanced: 'avanzado' },
 };
 
+const DURATION_UNITS = {
+	fr: { minute: 'minute', minutes: 'minutes', hour: 'heure', hours: 'heures' },
+	es: { minute: 'minuto', minutes: 'minutos', hour: 'hora', hours: 'horas' },
+};
+
+function localizedDuration(lang, value) {
+	if (typeof value !== 'string') return value;
+	return value.replace(/\b(minutes?|hours?)\b/gi, (unit) => DURATION_UNITS[lang]?.[unit.toLowerCase()] ?? unit);
+}
+
 const T = {
 	en: {
 		overview: 'Overview',
@@ -157,6 +167,12 @@ function checkout({ ref, source }) {
 	git(cache, 'fetch', '--depth', '1', 'origin', ref);
 	git(cache, 'checkout', '--detach', 'FETCH_HEAD');
 	return cache;
+}
+
+function assertCleanStreelingSource(src) {
+	// The lock and source links name HEAD; importing local files would make that attribution false.
+	const changes = git(src, 'status', '--porcelain=v1', '--untracked-files=all', '--ignored=matching', '--', STREELING);
+	if (changes) throw new Error(`Streeling source has local changes under ${STREELING}. Commit them or sync from a clean checkout so the generated pages match their recorded commit.\n${changes}`);
 }
 
 // ---------------------------------------------------------------------------
@@ -267,7 +283,7 @@ function cleanOutput(dir) {
 function banner(lang, mod, dept, sourceUrl, moduleIndex) {
 	const t = T[lang];
 	const level = mod.meta.level && (LEVELS[lang]?.[mod.meta.level] ?? mod.meta.level);
-	const facts = [`**${mod.code}**`, mod.meta.course, level, mod.meta.estimated_duration, mod.meta.date]
+	const facts = [`**${mod.code}**`, mod.meta.course, level, localizedDuration(lang, mod.meta.estimated_duration), mod.meta.date]
 		.filter(Boolean)
 		.join(' · ');
 	const lines = [
@@ -296,6 +312,7 @@ function main() {
 	const outRoot = args.out ?? ROOT;
 	OUT = outDirs(outRoot);
 	const src = checkout(args);
+	assertCleanStreelingSource(src);
 	const sha = git(src, 'rev-parse', 'HEAD');
 	const commitDate = git(src, 'log', '-1', '--format=%cI');
 	const university = JSON.parse(readText(path.join(src, STREELING, 'university.json')));

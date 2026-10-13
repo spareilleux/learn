@@ -26,6 +26,7 @@ export default defineConfig({
 				PageTitle: './src/components/PageTitle.astro',
 				// Button that hides or shows the left sidebar on wide screens
 				SiteTitle: './src/components/SiteTitle.astro',
+				Sidebar: './src/components/Sidebar.astro',
 				// Renders ```mermaid code blocks as diagrams
 				MarkdownContent: './src/components/MarkdownContent.astro',
 			},

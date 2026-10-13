@@ -49,7 +49,7 @@ The course studied `v4.4.3` (`bd75a4f`). Its [QA table](../journal/#qa) holds ni
 | A folded YAML description or a trailing-space fence is refused | Accepted | Both accepted; the four real errors are still refused |
 | Two guides disagree on skills | Both say `<name>/SKILL.md`, 500 lines | Read: they agree |
 | Setup's size check misses skill folders | `find` instead of `**`, non-zero exit | `verify-step9.sh`: a 600-line `SKILL.md` and a nested 250-line file are flagged, a 300-line `SKILL.md` passes |
-| The Windows helper test passes whatever happens and opens a dialog | Openers stubbed on `PATH` | Read, not run: the test returns early on Windows ("covered by review"), so Windows now has no dialog and no assertion |
+| The Windows helper test passes whatever happens and opens a dialog | Openers stubbed on `PATH` | Read, not run: the test returns early on Windows ("covered by review"), so Windows now has no dialog and no assertion. **Wrong**: the old test is still there and still runs `start` ([journal, 2026-10-09](../journal/#2026-10-09--slashforge-521-rechecked)) |
 | Report building uses inline `node -e` | Shipped `forge-splice.js` and `forge-review-payload.js` | 0 templates with `node -e '` (4 in 4.4.3) |
 | A stale global copy silently wins | A warning on `--project` installs and `status --project` | The warning is printed; the precedence itself is Claude Code's and unchanged |
 
@@ -59,14 +59,14 @@ The **negative control** is the same script on the old release: `retest.sh 4.4.3
 
 Each item is labelled with what it rests on.
 
-1. **Windows has no automated check of the open helper** (read in [`test/install.test.js`](https://github.com/rajdeepratan/SlashForge/blob/10d3d916b30323598515aa27aef43a8527e7e967/test/install.test.js), not run). The old test was meaningless everywhere; the new one is meaningful on Linux and macOS and skipped on Windows.
+1. **Windows has no automated check of the open helper** (read in [`test/install.test.js`](https://github.com/rajdeepratan/SlashForge/blob/10d3d916b30323598515aa27aef43a8527e7e967/test/install.test.js), not run). The old test was meaningless everywhere, and it is still there next to the new one ([#104](https://github.com/rajdeepratan/SlashForge/issues/104)); the new one is meaningful on Linux and macOS and skipped on Windows.
    - A narrow fix: stub `cmd.exe`'s `start` through a wrapper the helper calls, or have the helper print the command it would run when an environment variable is set, and assert on that.
 2. **Cost and cache accounting is clarified, not measured** (read in the README). The README now says its token ranges don't separate cache reads from fresh input. This course's L4 run read 158,847 tokens from the cache against the README's 70,000 upper bound for `-quick`.
    - A narrow fix: publish one measured run per command, with input, output, cache-write and cache-read figures kept apart.
 3. **The shadowing warning appears at install and status time only** (a new hypothesis, not tested). A teammate who installed globally months ago and never runs `--project` would still silently run the old copy.
    - Test it by checking whether any command prints its own version at start, so a user can see which copy answered.
 4. **Only Windows was retested.** Linux, macOS and WSL are *to verify*. The model-run findings (costs, gates, e5) were not rerun on 4.5.0.
-5. **The default branch has moved past 4.5.0** (`415fb77` on 2026-09-26). This course has not read it.
+5. **The default branch has moved past 4.5.0** (`415fb77` on 2026-09-26). This course has not read it. The journal's [2026-10-09 entry](../journal/#2026-10-09--slashforge-521-rechecked) rechecks 5.2.1.
 
 ## A contribution template
 

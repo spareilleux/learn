@@ -3,6 +3,13 @@
  * Starlight's default is 45rem, which wraps tables and compiler output early on course pages.
  * Phones and tablets keep Starlight's defaults: the overrides start at 90rem (1440px).
  */
+/* The shared global menu also exists on splash pages, which have no sidebar. */
+@media (max-width: 49.999rem) {
+	.sl-menu-button { display: none !important; }
+	:root[data-has-sidebar] .page > .header { padding-inline-end: var(--sl-nav-pad-x); }
+	.title-wrapper { overflow: visible !important; gap: .5rem; }
+	.title-wrapper .site-title { flex-shrink: 1; }
+}
 @media (min-width: 90rem) {
 	:root {
 		--sl-content-width: 52rem;

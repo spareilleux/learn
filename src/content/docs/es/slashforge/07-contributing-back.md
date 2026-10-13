@@ -49,7 +49,7 @@ El curso estudió `v4.4.3` (`bd75a4f`). Su [tabla QA](../journal/#qa) tiene nuev
 | Se rechaza una descripción YAML plegada o un cierre con espacio final | Aceptados | Ambos aceptados; los cuatro errores reales siguen rechazados |
 | Dos guías se contradicen sobre las skills | Ambas dicen `<name>/SKILL.md`, 500 líneas | Leído: concuerdan |
 | La verificación de tamaño de setup no ve las carpetas de skills | `find` en lugar de `**`, código de salida distinto de cero | `verify-step9.sh`: un `SKILL.md` de 600 líneas y un archivo anidado de 250 líneas se señalan, un `SKILL.md` de 300 líneas pasa |
-| La prueba de Windows del asistente pasa pase lo que pase y abre un diálogo | Abridores simulados en el `PATH` | Leído, no ejecutado: la prueba termina enseguida en Windows («covered by review»), así que Windows ya no tiene diálogo ni aserción |
+| La prueba de Windows del asistente pasa pase lo que pase y abre un diálogo | Abridores simulados en el `PATH` | Leído, no ejecutado: la prueba termina enseguida en Windows («covered by review»), así que Windows ya no tiene diálogo ni aserción. **Falso**: la prueba antigua sigue ahí y sigue lanzando `start` ([diario, 2026-10-09](../journal/#2026-10-09--slashforge-521-revisado)) |
 | La construcción de informes usa `node -e` en línea | `forge-splice.js` y `forge-review-payload.js` incluidos | 0 plantillas con `node -e '` (4 en 4.4.3) |
 | Una copia global desactualizada gana en silencio | Un aviso en las instalaciones `--project` y en `status --project` | El aviso se muestra; la precedencia en sí es de Claude Code y no cambia |
 
@@ -59,14 +59,14 @@ El **control negativo** es el mismo script sobre la release antigua: `retest.sh 
 
 Cada punto dice en qué se apoya.
 
-1. **Windows no tiene ninguna comprobación automática del asistente de apertura** (leído en [`test/install.test.js`](https://github.com/rajdeepratan/SlashForge/blob/10d3d916b30323598515aa27aef43a8527e7e967/test/install.test.js), no ejecutado). La prueba antigua no significaba nada en ningún sitio; la nueva tiene sentido en Linux y macOS y se salta en Windows.
+1. **Windows no tiene ninguna comprobación automática del asistente de apertura** (leído en [`test/install.test.js`](https://github.com/rajdeepratan/SlashForge/blob/10d3d916b30323598515aa27aef43a8527e7e967/test/install.test.js), no ejecutado). La prueba antigua no significaba nada en ningún sitio, y sigue ahí, junto a la nueva ([#104](https://github.com/rajdeepratan/SlashForge/issues/104)); la nueva tiene sentido en Linux y macOS y se salta en Windows.
    - Una corrección acotada: simular el `start` de `cmd.exe` con un wrapper que llame el asistente, o hacer que el asistente imprima el comando que ejecutaría cuando se define una variable de entorno, y comprobar esa salida.
 2. **La contabilidad de costes y caché está aclarada, no medida** (leído en el README). El README ahora dice que sus rangos de tokens no separan las lecturas de caché de la entrada nueva. La ejecución L4 de este curso leyó 158 847 tokens de la caché, frente a un tope de 70 000 en el README para `-quick`.
    - Una corrección acotada: publicar una ejecución medida por comando, con entrada, salida, escritura y lectura de caché por separado.
 3. **El aviso de ocultación solo aparece al instalar y en status** (una hipótesis nueva, no probada). Un compañero que instaló en global hace meses y nunca ejecuta `--project` seguiría ejecutando la copia antigua en silencio.
    - Para probarlo: comprobar si algún comando imprime su versión al arrancar, para que un usuario vea qué copia respondió.
 4. **Solo se volvió a probar Windows.** Linux, macOS y WSL están *por verificar*. Los hallazgos de ejecuciones con modelo (costes, puertas, e5) no se repitieron sobre 4.5.0.
-5. **La rama por defecto avanzó después de 4.5.0** (`415fb77` el 2026-09-26). Este curso no la ha leído.
+5. **La rama por defecto avanzó después de 4.5.0** (`415fb77` el 2026-09-26). Este curso no la ha leído. La [entrada del 2026-10-09](../journal/#2026-10-09--slashforge-521-revisado) del diario revisa 5.2.1.
 
 ## Una plantilla de contribución
 

@@ -53,6 +53,14 @@ PATHS=(
   /Common/GA.Domain.Services/Fretboard/Biomechanics/BiomechanicalPlayabilityAnalysis.cs
   /Common/GA.Domain.Services/Fretboard/Biomechanics/FingeringEfficiency.cs
   /GaMcpServer/Tools/GuitaristProblemTools.cs
+  # lesson 16: the chatbot's two skills that pair chords with scales and judge a note over a chord, with the chord
+  # vocabulary, the skill interface, the keyword matcher and the registry attribute they use
+  /Common/GA.Business.ML/Agents/Skills/ImprovisationSkill.cs
+  /Common/GA.Business.ML/Agents/Skills/OutsideNotesSkill.cs
+  /Common/GA.Business.ML/Agents/Skills/ChordIntentMatching.cs
+  /Common/GA.Business.ML/Agents/ChordVocabulary.cs
+  /Common/GA.Business.ML/Agents/IOrchestratorSkill.cs
+  /GuitarAlchemist.Registry/GaSkillAttribute.cs
 )
 cd "$(dirname "$0")"
 if [ "$(git -C .ga rev-parse HEAD 2>/dev/null || true)" = "$GA_SHA" ]; then

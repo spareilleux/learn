@@ -17,7 +17,7 @@ const DOCS = { en: 'src/content/docs/streeling', fr: 'src/content/docs/fr/streel
 const ENGLISH_ONLY = { fr: '*(en anglais)*', es: '*(en inglés)*' };
 
 const moduleFile = (id, title, prerequisites, body) =>
-	`---\nmodule_id: ${id}\ncourse: Fixture\nlevel: beginner\nprerequisites: [${prerequisites.join(', ')}]\n---\n\n# ${title}\n\n${body}\n`;
+	`---\nmodule_id: ${id}\ncourse: Fixture\nlevel: beginner\nestimated_duration: "35 minutes"\nprerequisites: [${prerequisites.join(', ')}]\n---\n\n# ${title}\n\n${body}\n`;
 
 // alp-001 exists in the three languages, alp-002 in English only, bet-001 in English and French.
 const FIXTURE = {
@@ -51,6 +51,7 @@ before(() => {
 	git('init', '-q');
 	git('add', '.');
 	git('-c', 'user.name=fixture', '-c', 'user.email=fixture@example.invalid', 'commit', '-q', '-m', 'fixture');
+	write(path.join(src, 'unrelated-local-file.txt'), 'Outside the imported tree.\n');
 	for (const site of SITES) out[site] = path.join(tmp, site);
 	for (const lang of LANGS) write(path.join(localeRoot('kept', lang), 'journal.md'), `hand-written ${lang} journal\n`);
 	for (const site of SITES) execFileSync(process.execPath, [SCRIPT, '--source', src, '--out', out[site]], { stdio: 'pipe' });
@@ -137,5 +138,41 @@ test('translations are neither invented nor hidden', () => {
 test('hand-written journals are left alone', () => {
 	for (const lang of LANGS) {
 		assert.equal(fs.readFileSync(path.join(localeRoot('kept', lang), 'journal.md'), 'utf8'), `hand-written ${lang} journal\n`);
+	}
+});
+
+test('generated course banners localize the duration unit', () => {
+	for (const site of SITES) {
+		for (const [lang, duration] of Object.entries({ en: '35 minutes', fr: '35 minutes', es: '35 minutos' })) {
+			const page = fs.readFileSync(path.join(localeRoot(site, lang), 'alpha', 'alp-001.md'), 'utf8');
+			assert.ok(page.includes(` · ${duration}`), `${site} ${lang} banner should contain ${duration}`);
+		}
+	}
+});
+
+test('a dirty source cannot produce pages attributed to its HEAD commit', () => {
+	for (const change of ['tracked', 'untracked', 'ignored']) {
+		const tmp = fs.mkdtempSync(path.join(os.tmpdir(), `streeling-dirty-${change}-`));
+		const src = path.join(tmp, 'demerzel');
+		const dest = path.join(tmp, 'site');
+		for (const [file, text] of Object.entries(FIXTURE)) write(path.join(src, file), text);
+		const git = (...args) => execFileSync('git', args, { cwd: src, stdio: 'ignore' });
+		git('init', '-q');
+		git('add', '.');
+		git('-c', 'user.name=fixture', '-c', 'user.email=fixture@example.invalid', 'commit', '-q', '-m', 'fixture');
+		if (change === 'tracked') {
+			write(path.join(src, 'state/streeling/courses/alpha/en/alp-001-first.md'), moduleFile('alp-001', 'Changed locally', [], 'Not in HEAD.'));
+		} else {
+			if (change === 'ignored') write(path.join(src, '.gitignore'), 'state/streeling/courses/alpha/en/alp-003-local.md\n');
+			write(path.join(src, 'state/streeling/courses/alpha/en/alp-003-local.md'), moduleFile('alp-003', 'Local only', [], 'Not in HEAD.'));
+		}
+		write(path.join(dest, 'streeling.lock.json'), 'keep existing output\n');
+		assert.throws(
+			() => execFileSync(process.execPath, [SCRIPT, '--source', src, '--out', dest], { stdio: 'pipe' }),
+			(error) => error.stderr.toString().includes('Streeling source has local changes'),
+			`${change} source must be rejected`,
+		);
+		assert.equal(fs.readFileSync(path.join(dest, 'streeling.lock.json'), 'utf8'), 'keep existing output\n');
+		assert.ok(!fs.existsSync(path.join(dest, 'src/content/docs/streeling')), `${change} source must not generate pages`);
 	}
 });

@@ -49,7 +49,7 @@ Le cours a étudié `v4.4.3` (`bd75a4f`). Son [tableau QA](../journal/#qa) compt
 | Une description YAML pliée ou une clôture suivie d'une espace est refusée | Acceptées | Les deux acceptées ; les quatre vraies erreurs sont toujours refusées |
 | Deux guides se contredisent sur les skills | Les deux disent `<name>/SKILL.md`, 500 lignes | Lu : ils concordent |
 | La vérification de taille de setup rate les dossiers de skills | `find` au lieu de `**`, code de sortie non nul | `verify-step9.sh` : un `SKILL.md` de 600 lignes et un fichier imbriqué de 250 lignes sont signalés, un `SKILL.md` de 300 lignes passe |
-| Le test Windows de l'assistant passe quoi qu'il arrive et ouvre une boîte de dialogue | Ouvreurs simulés sur le `PATH` | Lu, pas exécuté : le test s'arrête tout de suite sous Windows (« covered by review »), donc Windows n'a plus ni boîte de dialogue ni assertion |
+| Le test Windows de l'assistant passe quoi qu'il arrive et ouvre une boîte de dialogue | Ouvreurs simulés sur le `PATH` | Lu, pas exécuté : le test s'arrête tout de suite sous Windows (« covered by review »), donc Windows n'a plus ni boîte de dialogue ni assertion. **Faux** : l'ancien test est toujours là et lance toujours `start` ([journal, 2026-10-09](../journal/#2026-10-09--slashforge-521-revérifié)) |
 | La construction des rapports utilise du `node -e` en ligne | `forge-splice.js` et `forge-review-payload.js` livrés | 0 modèle avec `node -e '` (4 dans 4.4.3) |
 | Une copie globale périmée l'emporte en silence | Un avertissement lors des installations `--project` et de `status --project` | L'avertissement s'affiche ; la priorité elle-même relève de Claude Code et ne change pas |
 
@@ -59,14 +59,14 @@ Le **témoin négatif** est le même script sur l'ancienne release : `retest.sh 
 
 Chaque point dit sur quoi il repose.
 
-1. **Windows n'a aucune vérification automatique de l'assistant d'ouverture** (lu dans [`test/install.test.js`](https://github.com/rajdeepratan/SlashForge/blob/10d3d916b30323598515aa27aef43a8527e7e967/test/install.test.js), pas exécuté). L'ancien test ne signifiait rien nulle part ; le nouveau a un sens sous Linux et macOS et est sauté sous Windows.
+1. **Windows n'a aucune vérification automatique de l'assistant d'ouverture** (lu dans [`test/install.test.js`](https://github.com/rajdeepratan/SlashForge/blob/10d3d916b30323598515aa27aef43a8527e7e967/test/install.test.js), pas exécuté). L'ancien test ne signifiait rien nulle part, et il est toujours là, à côté du nouveau ([#104](https://github.com/rajdeepratan/SlashForge/issues/104)) ; le nouveau a un sens sous Linux et macOS et est sauté sous Windows.
    - Un correctif étroit : simuler le `start` de `cmd.exe` par un wrapper que l'assistant appelle, ou faire afficher par l'assistant la commande qu'il lancerait quand une variable d'environnement est définie, et vérifier cette sortie.
 2. **Le comptage des coûts et du cache est clarifié, pas mesuré** (lu dans le README). Le README dit désormais que ses fourchettes de jetons ne séparent pas les lectures du cache de l'entrée fraîche. L'exécution L4 de ce cours a lu 158 847 jetons depuis le cache, contre une borne haute de 70 000 dans le README pour `-quick`.
    - Un correctif étroit : publier une exécution mesurée par commande, avec entrée, sortie, écriture et lecture du cache séparées.
 3. **L'avertissement de masquage n'apparaît qu'à l'installation et au status** (une nouvelle hypothèse, non testée). Un coéquipier qui a installé en global il y a des mois et ne lance jamais `--project` exécuterait toujours l'ancienne copie en silence.
    - À tester : vérifier si une commande affiche sa version au démarrage, pour qu'un utilisateur voie quelle copie a répondu.
 4. **Seul Windows a été retesté.** Linux, macOS et WSL sont *à vérifier*. Les constats issus d'exécutions avec modèle (coûts, portes, e5) n'ont pas été relancés sur 4.5.0.
-5. **La branche par défaut a avancé après 4.5.0** (`415fb77` le 2026-09-26). Ce cours ne l'a pas lue.
+5. **La branche par défaut a avancé après 4.5.0** (`415fb77` le 2026-09-26). Ce cours ne l'a pas lue. L'[entrée du 2026-10-09](../journal/#2026-10-09--slashforge-521-revérifié) du journal revérifie 5.2.1.
 
 ## Un modèle de contribution
 
