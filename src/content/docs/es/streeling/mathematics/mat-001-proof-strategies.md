@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **MAT-001** · Fundamentos de razonamiento matemático · principiante · 30 minutos
 
-Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/79ffad7859ce147af6d0915231332071d79d0e89/state/streeling/courses/mathematics/es/mat-001-proof-strategies.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/6c6b68a97d9c731070e4ac374372fd8c2ed2291f/state/streeling/courses/mathematics/es/mat-001-proof-strategies.es.md) · [Mi diario](../../journal/)
 :::
 
 > **Departamento de Matemáticas** | Etapa: Nigredo (Principiante) | Duración: 30 minutos

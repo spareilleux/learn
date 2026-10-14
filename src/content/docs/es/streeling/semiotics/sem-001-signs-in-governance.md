@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **SEM-001** · Semiótica de la gobernanza de la IA · principiante · 25 minutos
 
-Generado por el departamento *Semiótica* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/79ffad7859ce147af6d0915231332071d79d0e89/state/streeling/courses/semiotics/es/sem-001-signs-in-governance.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Semiótica* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/6c6b68a97d9c731070e4ac374372fd8c2ed2291f/state/streeling/courses/semiotics/es/sem-001-signs-in-governance.es.md) · [Mi diario](../../journal/)
 :::
 
 > **Departamento de Semiótica** | Etapa: Nigredo (Principiante) | Duración: 25 minutos

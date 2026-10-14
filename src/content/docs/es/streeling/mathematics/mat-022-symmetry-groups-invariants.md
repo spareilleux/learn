@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **MAT-022** · Simetría, grupos e invariantes · intermedio · 50 minutos
 
-Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/79ffad7859ce147af6d0915231332071d79d0e89/state/streeling/courses/mathematics/es/mat-022-symmetry-groups-invariants.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/6c6b68a97d9c731070e4ac374372fd8c2ed2291f/state/streeling/courses/mathematics/es/mat-022-symmetry-groups-invariants.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MAT-002](../../mathematics/mat-002-counterexamples-and-exhaustive-checks/)
 :::

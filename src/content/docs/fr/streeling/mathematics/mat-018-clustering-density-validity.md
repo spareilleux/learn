@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **MAT-018** · Partitionnement, densité et validité des clusters · intermédiaire · 50 minutes
 
-Généré par le département *Mathématiques* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/79ffad7859ce147af6d0915231332071d79d0e89/state/streeling/courses/mathematics/fr/mat-018-clustering-density-validity.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Mathématiques* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/6c6b68a97d9c731070e4ac374372fd8c2ed2291f/state/streeling/courses/mathematics/fr/mat-018-clustering-density-validity.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MAT-009](../../mathematics/mat-009-estimation-uncertainty-sampling/), [MAT-013](../../mathematics/mat-013-distances-kernels-psd/)
 :::
