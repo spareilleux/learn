@@ -1,0 +1,2274 @@
+{
+	"site": "https://spareilleux.github.io/learn/",
+	"locales": [
+		"en",
+		"fr",
+		"es"
+	],
+	"areas": [
+		{
+			"label": {
+				"en": "Software Engineering › Languages & frameworks",
+				"fr": "Génie logiciel › Langages et frameworks",
+				"es": "Ingeniería de software › Lenguajes y frameworks"
+			},
+			"courses": [
+				{
+					"id": "csharp-beginner",
+					"title": {
+						"en": "C# for beginners",
+						"fr": "C# pour débutants",
+						"es": "C# para principiantes"
+					},
+					"description": {
+						"en": "Learn to program in C# 14 on .NET 10 from zero — variables, conditions, loops, methods and collections, each notion explained with short programs that were run, and exercises with solutions.",
+						"fr": "Apprendre à programmer en C# 14 sur .NET 10 en partant de zéro — variables, conditions, boucles, méthodes et collections, chaque notion expliquée avec de courts programmes réellement exécutés, et des exercices corrigés.",
+						"es": "Aprende a programar en C# 14 sobre .NET 10 desde cero — variables, condiciones, bucles, métodos y colecciones, cada noción explicada con programas cortos que se ejecutaron de verdad, y ejercicios con solución."
+					},
+					"lessons": {
+						"en": 4,
+						"fr": 4,
+						"es": 4
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "csharp-beginner/",
+						"fr": "fr/csharp-beginner/",
+						"es": "es/csharp-beginner/"
+					}
+				},
+				{
+					"id": "csharp-advanced",
+					"title": {
+						"en": "Advanced C#",
+						"fr": "C# avancé",
+						"es": "C# avanzado"
+					},
+					"description": {
+						"en": "What happens under the hood of C# 14, .NET 10 and ASP.NET Core — memory, the garbage collector, async, measured performance, channels, TPL Dataflow, Rx.NET and async streams, then the web stack and the tooling — each claim checked by a program, the IL or a benchmark, on real Guitar Alchemist code, with the Spring and Reactor equivalents.",
+						"fr": "Ce qui se passe sous le capot de C# 14, .NET 10 et ASP.NET Core — mémoire, ramasse-miettes, async, performances mesurées, channels, TPL Dataflow, Rx.NET et flux asynchrones, puis la pile web et l'outillage — chaque affirmation vérifiée par un programme, par l'IL ou par un benchmark, sur du vrai code de Guitar Alchemist, avec les équivalents Spring et Reactor.",
+						"es": "Lo que ocurre bajo el capó de C# 14, .NET 10 y ASP.NET Core — la memoria, el recolector de basura, async, el rendimiento medido, los canales, TPL Dataflow, Rx.NET y los flujos asíncronos, y después la pila web y las herramientas —, cada afirmación comprobada con un programa, el IL o un benchmark, sobre código real de Guitar Alchemist, con los equivalentes en Spring y Reactor."
+					},
+					"lessons": {
+						"en": 17,
+						"fr": 17,
+						"es": 17
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "csharp-advanced/",
+						"fr": "fr/csharp-advanced/",
+						"es": "es/csharp-advanced/"
+					}
+				},
+				{
+					"id": "fsharp",
+					"title": {
+						"en": "F# for C#/Java developers",
+						"fr": "F# pour développeurs C#/Java",
+						"es": "F# para desarrolladores C#/Java"
+					},
+					"description": {
+						"en": "F# 10 on .NET 10 from the first script to expert level, for C# and Java developers with no functional programming background — every script, compiler message and exercise run in CI, with real code from TARS and Guitar Alchemist.",
+						"fr": "F# 10 sur .NET 10, du premier script au niveau expert, pour les développeurs C# et Java sans expérience de la programmation fonctionnelle — chaque script, message du compilateur et exercice exécuté en CI, avec du vrai code de TARS et de Guitar Alchemist.",
+						"es": "F# 10 sobre .NET 10, del primer script al nivel experto, para desarrolladores C# y Java sin experiencia en programación funcional — cada script, mensaje del compilador y ejercicio ejecutado en CI, con código real de TARS y Guitar Alchemist."
+					},
+					"lessons": {
+						"en": 9,
+						"fr": 9,
+						"es": 9
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "fsharp/",
+						"fr": "fr/fsharp/",
+						"es": "es/fsharp/"
+					}
+				},
+				{
+					"id": "rust-for-csharp-java",
+					"title": {
+						"en": "Rust for C#/Java developers",
+						"fr": "Rust pour développeurs C#/Java",
+						"es": "Rust para desarrolladores C#/Java"
+					},
+					"description": {
+						"en": "Learn Rust from scratch, building on what you already know from C# and Java, then build a desktop application with Tauri.",
+						"fr": "Apprendre Rust de zéro en s'appuyant sur ce que l'on connaît déjà de C# et de Java, puis construire une application de bureau avec Tauri.",
+						"es": "Aprende Rust desde cero, apoyándote en lo que ya sabes de C# y Java, y luego construye una aplicación de escritorio con Tauri."
+					},
+					"lessons": {
+						"en": 21,
+						"fr": 21,
+						"es": 21
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "rust-for-csharp-java/",
+						"fr": "fr/rust-for-csharp-java/",
+						"es": "es/rust-for-csharp-java/"
+					}
+				},
+				{
+					"id": "java-for-csharp",
+					"title": {
+						"en": "Java for C# developers",
+						"fr": "Java pour développeurs C#",
+						"es": "Java para desarrolladores C#"
+					},
+					"description": {
+						"en": "Learn modern Java (25 LTS) by mapping it onto what you already know from C# and .NET.",
+						"fr": "Apprendre le Java moderne (25 LTS) en le mettant en correspondance avec ce que l'on connaît déjà de C# et de .NET.",
+						"es": "Aprender Java moderno (25 LTS) relacionándolo con lo que ya sabes de C# y .NET."
+					},
+					"lessons": {
+						"en": 12,
+						"fr": 12,
+						"es": 12
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "java-for-csharp/",
+						"fr": "fr/java-for-csharp/",
+						"es": "es/java-for-csharp/"
+					}
+				},
+				{
+					"id": "spring-cloud-reactor",
+					"title": {
+						"en": "Spring Boot, Spring Cloud and Reactor for C# developers",
+						"fr": "Spring Boot, Spring Cloud et Reactor pour développeurs C#",
+						"es": "Spring Boot, Spring Cloud y Reactor para desarrolladores C#"
+					},
+					"description": {
+						"en": "Spring Boot 4, Project Reactor, WebFlux and Spring Cloud for a C# developer who knows ASP.NET Core — every example run in CI on Windows, Linux and macOS, with the .NET side next to it.",
+						"fr": "Spring Boot 4, Project Reactor, WebFlux et Spring Cloud pour un développeur C# qui connaît ASP.NET Core — chaque exemple exécuté en CI sous Windows, Linux et macOS, avec le côté .NET en regard.",
+						"es": "Spring Boot 4, Project Reactor, WebFlux y Spring Cloud para un desarrollador C# que conoce ASP.NET Core — cada ejemplo se ejecuta en CI en Windows, Linux y macOS, con el lado .NET al lado."
+					},
+					"lessons": {
+						"en": 6,
+						"fr": 6,
+						"es": 6
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "spring-cloud-reactor/",
+						"fr": "fr/spring-cloud-reactor/",
+						"es": "es/spring-cloud-reactor/"
+					}
+				},
+				{
+					"id": "v-for-csharp-java",
+					"title": {
+						"en": "V for C#/Java developers",
+						"fr": "V pour développeurs C#/Java",
+						"es": "V para desarrolladores C#/Java"
+					},
+					"description": {
+						"en": "Learn the V language from what you already know in C# and Java — every example, compiler error and panic run in CI on Windows, Linux and macOS.",
+						"fr": "Apprendre le langage V à partir de ce que tu connais déjà en C# et en Java — chaque exemple, erreur du compilateur et panic est exécuté en CI sous Windows, Linux et macOS.",
+						"es": "Aprende el lenguaje V desde lo que ya sabes de C# y Java — cada ejemplo, error del compilador y panic se ejecuta en CI en Windows, Linux y macOS."
+					},
+					"lessons": {
+						"en": 8,
+						"fr": 8,
+						"es": 8
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "v-for-csharp-java/",
+						"fr": "fr/v-for-csharp-java/",
+						"es": "es/v-for-csharp-java/"
+					}
+				},
+				{
+					"id": "javascript-for-csharp-java",
+					"title": {
+						"en": "JavaScript for C#/Java developers",
+						"fr": "JavaScript pour développeurs C#/Java",
+						"es": "JavaScript para desarrolladores C#/Java"
+					},
+					"description": {
+						"en": "JavaScript for developers who know C# or Java and want to stop being surprised — every example, error and solution run with Node.js 24 in CI on Windows, Linux and macOS, with the C# and Java side next to it.",
+						"fr": "JavaScript pour les développeurs qui connaissent C# ou Java et ne veulent plus être surpris — chaque exemple, erreur et solution est exécuté avec Node.js 24 en CI sous Windows, Linux et macOS, avec en regard le côté C# et Java.",
+						"es": "JavaScript para desarrolladores que conocen C# o Java y quieren dejar de llevarse sorpresas — cada ejemplo, error y solución se ejecuta con Node.js 24 en CI en Windows, Linux y macOS, con el equivalente en C# y Java al lado."
+					},
+					"lessons": {
+						"en": 4,
+						"fr": 4,
+						"es": 4
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "javascript-for-csharp-java/",
+						"fr": "fr/javascript-for-csharp-java/",
+						"es": "es/javascript-for-csharp-java/"
+					}
+				},
+				{
+					"id": "typescript-for-csharp-java",
+					"title": {
+						"en": "TypeScript for C#/Java developers",
+						"fr": "TypeScript pour développeurs C#/Java",
+						"es": "TypeScript para desarrolladores C#/Java"
+					},
+					"description": {
+						"en": "TypeScript for developers who know C# or Java and have taken the JavaScript course — every example, compiler error and solution checked by tsc 7.0.2 and run by Node.js 24 in CI on Windows, Linux and macOS, with the C# and Java side next to it.",
+						"fr": "TypeScript pour les développeurs qui connaissent C# ou Java et ont suivi le cours JavaScript — chaque exemple, erreur de compilation et solution est vérifié par tsc 7.0.2 et exécuté par Node.js 24 en CI sous Windows, Linux et macOS, avec en regard le côté C# et Java.",
+						"es": "TypeScript para desarrolladores que conocen C# o Java y han seguido el curso de JavaScript — cada ejemplo, error del compilador y solución verificado por tsc 7.0.2 y ejecutado por Node.js 24 en CI en Windows, Linux y macOS, con el equivalente en C# y Java al lado."
+					},
+					"lessons": {
+						"en": 4,
+						"fr": 4,
+						"es": 4
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "typescript-for-csharp-java/",
+						"fr": "fr/typescript-for-csharp-java/",
+						"es": "es/typescript-for-csharp-java/"
+					}
+				},
+				{
+					"id": "typescript-advanced",
+					"title": {
+						"en": "Advanced TypeScript",
+						"fr": "TypeScript avancé",
+						"es": "TypeScript avanzado"
+					},
+					"description": {
+						"en": "The type system, the tooling and TypeScript at scale, for developers who write strict TypeScript every day — every type test, compiler error and example checked by tsc 7.0.2 and run by Node.js 24, with the C# and Java side, on the front end and hub of Guitar Alchemist.",
+						"fr": "Le système de types, l'outillage et TypeScript à grande échelle, pour les développeurs qui écrivent du TypeScript strict tous les jours — chaque test de types, erreur de compilation et exemple est vérifié par tsc 7.0.2 et exécuté par Node.js 24, avec en regard le côté C# et Java, sur le front end et le hub de Guitar Alchemist.",
+						"es": "El sistema de tipos, las herramientas y TypeScript a escala, para desarrolladores que escriben TypeScript estricto a diario — cada prueba de tipos, error del compilador y ejemplo verificado por tsc 7.0.2 y ejecutado por Node.js 24, con el lado de C# y Java, sobre el frontend y el hub de Guitar Alchemist."
+					},
+					"lessons": {
+						"en": 4,
+						"fr": 4,
+						"es": 4
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "typescript-advanced/",
+						"fr": "fr/typescript-advanced/",
+						"es": "es/typescript-advanced/"
+					}
+				},
+				{
+					"id": "python-for-csharp-java",
+					"title": {
+						"en": "Python for C#/Java developers",
+						"fr": "Python pour développeurs C#/Java",
+						"es": "Python para desarrolladores C#/Java"
+					},
+					"description": {
+						"en": "Idiomatic, typed and tested Python for developers who know C# or Java — every example, traceback, mypy error and solution run by Python 3.14.7 with uv, with the C# and Java side next to it.",
+						"fr": "Du Python idiomatique, typé et testé pour les développeurs qui connaissent C# ou Java — chaque exemple, traceback, erreur mypy et solution est exécuté par Python 3.14.7 avec uv, avec en regard le côté C# et Java.",
+						"es": "Python idiomático, tipado y probado para desarrolladores que conocen C# o Java — cada ejemplo, traceback, error de mypy y solución ejecutado por Python 3.14.7 con uv, con el equivalente en C# y Java al lado."
+					},
+					"lessons": {
+						"en": 4,
+						"fr": 4,
+						"es": 4
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "python-for-csharp-java/",
+						"fr": "fr/python-for-csharp-java/",
+						"es": "es/python-for-csharp-java/"
+					}
+				},
+				{
+					"id": "react-vite",
+					"title": {
+						"en": "React (Vite) for C#/Java developers",
+						"fr": "React (Vite) pour développeurs C#/Java",
+						"es": "React (Vite) para desarrolladores C#/Java"
+					},
+					"description": {
+						"en": "React 19 with TypeScript and Vite 8 for developers who know C# or Java, Blazor, WPF or JavaFX, and have taken the JavaScript and TypeScript courses — every component, compiler error and test checked by tsc 7, built by Vite and run by Vitest in CI on Windows, Linux and macOS.",
+						"fr": "React 19 avec TypeScript et Vite 8 pour les développeurs qui connaissent C# ou Java, Blazor, WPF ou JavaFX, et ont suivi les cours JavaScript et TypeScript — chaque composant, erreur de compilation et test est vérifié par tsc 7, construit par Vite et exécuté par Vitest en CI sous Windows, Linux et macOS.",
+						"es": "React 19 con TypeScript y Vite 8 para desarrolladores que conocen C# o Java, Blazor, WPF o JavaFX, y han seguido los cursos de JavaScript y TypeScript — cada componente, error del compilador y prueba verificado por tsc 7, construido por Vite y ejecutado por Vitest en CI en Windows, Linux y macOS."
+					},
+					"lessons": {
+						"en": 4,
+						"fr": 4,
+						"es": 4
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "react-vite/",
+						"fr": "fr/react-vite/",
+						"es": "es/react-vite/"
+					}
+				},
+				{
+					"id": "threejs",
+					"title": {
+						"en": "three.js for C#/Java developers",
+						"fr": "three.js pour développeurs C#/Java",
+						"es": "three.js para desarrolladores C#/Java"
+					},
+					"description": {
+						"en": "Real-time 3D in the browser with three.js r186, WebGPURenderer and its WebGL 2 fallback, TSL node materials, glTF and React Three Fiber, for developers who know C# or Java and TypeScript — every scene measured in headless Chromium and every number compared in CI on Windows, Linux and macOS.",
+						"fr": "La 3D temps réel dans le navigateur avec three.js r186, WebGPURenderer et son repli sur WebGL 2, les matériaux à nœuds TSL, glTF et React Three Fiber, pour les développeurs qui connaissent C# ou Java et TypeScript — chaque scène est mesurée dans Chromium headless et chaque nombre est comparé en CI sous Windows, Linux et macOS.",
+						"es": "3D en tiempo real en el navegador con three.js r186, WebGPURenderer y su alternativa WebGL 2, materiales de nodos TSL, glTF y React Three Fiber, para desarrolladores que conocen C# o Java y TypeScript — cada escena medida en Chromium headless y cada número comparado en CI en Windows, Linux y macOS."
+					},
+					"lessons": {
+						"en": 14,
+						"fr": 14,
+						"es": 14
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "threejs/",
+						"fr": "fr/threejs/",
+						"es": "es/threejs/"
+					}
+				}
+			]
+		},
+		{
+			"label": {
+				"en": "Software Engineering › Infrastructure & tooling",
+				"fr": "Génie logiciel › Infrastructure et outillage",
+				"es": "Ingeniería de software › Infraestructura y herramientas"
+			},
+			"courses": [
+				{
+					"id": "wsl-containers",
+					"title": {
+						"en": "WSL containers",
+						"fr": "Conteneurs WSL",
+						"es": "Contenedores WSL"
+					},
+					"description": {
+						"en": "Learn to run Linux containers on Windows with wslc.exe, built into WSL.",
+						"fr": "Apprendre à faire tourner des conteneurs Linux sur Windows avec wslc.exe, intégré à WSL.",
+						"es": "Aprender a ejecutar contenedores Linux en Windows con wslc.exe, integrado en WSL."
+					},
+					"lessons": {
+						"en": 10,
+						"fr": 10,
+						"es": 10
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "wsl-containers/",
+						"fr": "fr/wsl-containers/",
+						"es": "es/wsl-containers/"
+					}
+				},
+				{
+					"id": "github-actions",
+					"title": {
+						"en": "GitHub Actions",
+						"fr": "GitHub Actions",
+						"es": "GitHub Actions"
+					},
+					"description": {
+						"en": "Learn GitHub Actions from real runs — build, test and deploy .NET and Java projects, with every log in the lessons captured from this site's own repository.",
+						"fr": "Apprendre GitHub Actions à partir de vraies exécutions — compiler, tester et déployer des projets .NET et Java, avec chaque log des leçons capturé dans le dépôt de ce site.",
+						"es": "Aprender GitHub Actions a partir de ejecuciones reales — compilar, probar y desplegar proyectos .NET y Java, con cada log de las lecciones capturado en el repositorio de este sitio."
+					},
+					"lessons": {
+						"en": 10,
+						"fr": 10,
+						"es": 10
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "github-actions/",
+						"fr": "fr/github-actions/",
+						"es": "es/github-actions/"
+					}
+				},
+				{
+					"id": "duckdb",
+					"title": {
+						"en": "DuckDB",
+						"fr": "DuckDB",
+						"es": "DuckDB"
+					},
+					"description": {
+						"en": "Learn DuckDB, the in-process analytical database, by querying the real CI history of this site — from the command line, then from C# and Java.",
+						"fr": "Apprendre DuckDB, la base de données analytique qui s'exécute dans ton processus, en interrogeant le vrai historique de CI de ce site — en ligne de commande, puis depuis C# et Java.",
+						"es": "Aprender DuckDB, la base de datos analítica que se ejecuta dentro de tu proceso, consultando el historial real de CI de este sitio — desde la línea de comandos, y luego desde C# y Java."
+					},
+					"lessons": {
+						"en": 8,
+						"fr": 8,
+						"es": 8
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "duckdb/",
+						"fr": "fr/duckdb/",
+						"es": "es/duckdb/"
+					}
+				},
+				{
+					"id": "ladybugdb",
+					"title": {
+						"en": "LadybugDB",
+						"fr": "LadybugDB",
+						"es": "LadybugDB"
+					},
+					"description": {
+						"en": "Learn LadybugDB, the embedded graph database that continues Kuzu, by querying the links between this site's pages, its Git history, its CI runs and the projects of a .NET solution with Cypher — from the command line, then from C# and Java.",
+						"fr": "Apprendre LadybugDB, la base de données orientée graphe embarquée qui prend la suite de Kuzu, en interrogeant avec Cypher les liens entre les pages de ce site, son historique Git, ses exécutions de CI et les projets d'une solution .NET — en ligne de commande, puis depuis C# et Java.",
+						"es": "Aprender LadybugDB, la base de datos de grafos embebida que continúa Kuzu, consultando con Cypher los enlaces entre las páginas de este sitio, su historial de Git, sus ejecuciones de CI y los proyectos de una solución .NET — desde la línea de comandos, y luego desde C# y Java."
+					},
+					"lessons": {
+						"en": 9,
+						"fr": 9,
+						"es": 9
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "ladybugdb/",
+						"fr": "fr/ladybugdb/",
+						"es": "es/ladybugdb/"
+					}
+				},
+				{
+					"id": "postgresql-aurora",
+					"title": {
+						"en": "PostgreSQL and Amazon Aurora",
+						"fr": "PostgreSQL et Amazon Aurora",
+						"es": "PostgreSQL y Amazon Aurora"
+					},
+					"description": {
+						"en": "PostgreSQL 18 for C# and Java developers who know SQL Server — design, query and operate a database, then run it on Amazon Aurora PostgreSQL, with every query and program output compared by CI.",
+						"fr": "PostgreSQL 18 pour les développeurs C# et Java qui connaissent SQL Server — concevoir, interroger et exploiter une base, puis la faire tourner sur Amazon Aurora PostgreSQL, avec chaque requête et chaque sortie de programme comparée par la CI.",
+						"es": "PostgreSQL 18 para desarrolladores C# y Java que conocen SQL Server — diseñar, consultar y operar una base de datos, y luego ejecutarla en Amazon Aurora PostgreSQL, con cada consulta y cada salida de programa comparada por la CI."
+					},
+					"lessons": {
+						"en": 13,
+						"fr": 13,
+						"es": 13
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "postgresql-aurora/",
+						"fr": "fr/postgresql-aurora/",
+						"es": "es/postgresql-aurora/"
+					}
+				},
+				{
+					"id": "rabbitmq",
+					"title": {
+						"en": "RabbitMQ",
+						"fr": "RabbitMQ",
+						"es": "RabbitMQ"
+					},
+					"description": {
+						"en": "RabbitMQ 4.3 for C# and Java developers who have used a message queue without knowing how it works — design, run and troubleshoot it in production, every behaviour shown by a program whose output CI compares.",
+						"fr": "RabbitMQ 4.3 pour les développeurs C# et Java qui ont utilisé une file de messages sans savoir comment elle fonctionne — la concevoir, l'exploiter et la dépanner en production, chaque comportement montré par un programme dont la CI compare la sortie.",
+						"es": "RabbitMQ 4.3 para desarrolladores C# y Java que han usado una cola de mensajes sin saber cómo funciona — diseñarla, operarla y diagnosticarla en producción, cada comportamiento mostrado por un programa cuya salida compara la CI."
+					},
+					"lessons": {
+						"en": 4,
+						"fr": 4,
+						"es": 4
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "rabbitmq/",
+						"fr": "fr/rabbitmq/",
+						"es": "es/rabbitmq/"
+					}
+				},
+				{
+					"id": "kubernetes",
+					"title": {
+						"en": "Kubernetes",
+						"fr": "Kubernetes",
+						"es": "Kubernetes"
+					},
+					"description": {
+						"en": "Kubernetes 1.37 for C# and Java developers who can build a container image — deploy, run and troubleshoot applications on a local kind cluster, every output shown compared by CI.",
+						"fr": "Kubernetes 1.37 pour les développeurs C# et Java qui savent construire une image de conteneur — déployer, exploiter et dépanner des applications sur un cluster kind local, chaque sortie montrée comparée par la CI.",
+						"es": "Kubernetes 1.37 para desarrolladores C# y Java que saben construir una imagen de contenedor — desplegar, operar y diagnosticar aplicaciones en un clúster kind local, cada salida mostrada comparada por la CI."
+					},
+					"lessons": {
+						"en": 4,
+						"fr": 4,
+						"es": 4
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "kubernetes/",
+						"fr": "fr/kubernetes/",
+						"es": "es/kubernetes/"
+					}
+				}
+			]
+		},
+		{
+			"label": {
+				"en": "Software Engineering › Modeling & formal methods",
+				"fr": "Génie logiciel › Modélisation et méthodes formelles",
+				"es": "Ingeniería de software › Modelado y métodos formales"
+			},
+			"courses": [
+				{
+					"id": "petri-nets",
+					"title": {
+						"en": "Petri nets and what they are good for",
+						"fr": "Réseaux de Petri et à quoi ils servent",
+						"es": "Redes de Petri y para qué sirven"
+					},
+					"description": {
+						"en": "Petri nets for C# and Java developers who have modelled processes with state machines and hit concurrency — places, transitions, tokens, the reachability graph and the invariants that prove a deadlock cannot happen, with a C# analyser whose every output is compared by a script.",
+						"fr": "Les réseaux de Petri pour les développeurs C# et Java qui ont modélisé des processus avec des machines à états et qui butent sur la concurrence — places, transitions, jetons, graphe d'accessibilité et invariants qui prouvent qu'un interblocage ne peut pas se produire, avec un analyseur C# dont chaque sortie est comparée par un script.",
+						"es": "Las redes de Petri para desarrolladores de C# y Java que han modelado procesos con máquinas de estados y tropiezan con la concurrencia — plazas, transiciones, marcas, grafo de alcanzabilidad e invariantes que prueban que un interbloqueo no puede ocurrir, con un analizador en C# cuya salida completa la compara un script."
+					},
+					"lessons": {
+						"en": 16,
+						"fr": 16,
+						"es": 16
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "petri-nets/",
+						"fr": "fr/petri-nets/",
+						"es": "es/petri-nets/"
+					}
+				}
+			]
+		},
+		{
+			"label": {
+				"en": "Software Engineering › Architecture & design",
+				"fr": "Génie logiciel › Architecture et conception",
+				"es": "Ingeniería de software › Arquitectura y diseño"
+			},
+			"courses": [
+				{
+					"id": "hexagonal-architecture",
+					"title": {
+						"en": "Hexagonal Architecture: Ports & Adapters",
+						"fr": "Architecture hexagonale : Ports et adaptateurs",
+						"es": "Arquitectura hexagonal: Puertos y adaptadores"
+					},
+					"description": {
+						"en": "Decouple business logic from frameworks and infrastructure using Ports & Adapters (Cockburn 2005) in C# 14 and .NET 10 — inside vs outside, driving vs driven ports, performance trade-offs, and an architectural case study on Guitar Alchemist.",
+						"fr": "Découpler la logique métier des frameworks et de l'infrastructure avec les Ports et Adaptateurs (Cockburn 2005) en C# 14 et .NET 10 — intérieur vs extérieur, ports primaires et secondaires, compromis de performance et étude de cas sur Guitar Alchemist.",
+						"es": "Desacoplar la lógica de negocio de los frameworks y la infraestructura mediante Puertos y Adaptadores (Cockburn 2005) en C# 14 y .NET 10 — interior vs exterior, puertos primarios y secundarios, compromisos de rendimiento y estudio de caso en Guitar Alchemist."
+					},
+					"lessons": {
+						"en": 4,
+						"fr": 4,
+						"es": 4
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "hexagonal-architecture/",
+						"fr": "fr/hexagonal-architecture/",
+						"es": "es/hexagonal-architecture/"
+					}
+				},
+				{
+					"id": "architecture-patterns",
+					"title": {
+						"en": "Architecture patterns: choosing boundaries",
+						"fr": "Patterns d’architecture : choisir les frontières",
+						"es": "Patrones de arquitectura: elegir límites"
+					},
+					"description": {
+						"en": "Compare layered, onion, clean, hexagonal and modular-monolith designs on one practice-plan use case, with falsifiable decisions and failure exercises.",
+						"fr": "Comparer les architectures en couches, onion, clean, hexagonale et monolithe modulaire sur un même cas, avec des décisions réfutables.",
+						"es": "Comparar capas, onion, clean, hexagonal y monolito modular con un caso de planes de práctica, decisiones refutables y ejercicios de fallos."
+					},
+					"lessons": {
+						"en": 4,
+						"fr": 4,
+						"es": 4
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "architecture-patterns/",
+						"fr": "fr/architecture-patterns/",
+						"es": "es/architecture-patterns/"
+					}
+				}
+			]
+		},
+		{
+			"label": {
+				"en": "Software Engineering › AI-assisted development",
+				"fr": "Génie logiciel › Développement assisté par IA",
+				"es": "Ingeniería de software › Desarrollo asistido por IA"
+			},
+			"courses": [
+				{
+					"id": "agentic-coding",
+					"title": {
+						"en": "Agentic coding with Claude Code and Codex",
+						"fr": "Programmation agentique avec Claude Code et Codex",
+						"es": "Programación agéntica con Claude Code y Codex"
+					},
+					"description": {
+						"en": "Learn how coding agents work, from what a C# or Java developer already knows — the tool loop, permissions, project instructions, hooks, skills, subagents and MCP — on this site's repository and on GuitarAlchemist/ga, with Claude Code and the Codex CLI.",
+						"fr": "Comprendre comment fonctionnent les agents de code, à partir de ce qu'un développeur C# ou Java connaît déjà — la boucle d'outils, les permissions, les instructions de projet, les hooks, les skills, les sous-agents et MCP — sur le dépôt de ce site et sur GuitarAlchemist/ga, avec Claude Code et la CLI Codex.",
+						"es": "Aprende cómo funcionan los agentes de programación, a partir de lo que ya sabe un desarrollador C# o Java — el bucle de herramientas, los permisos, las instrucciones de proyecto, los hooks, las skills, los subagentes y MCP — en el repositorio de este sitio y en GuitarAlchemist/ga, con Claude Code y la CLI de Codex."
+					},
+					"lessons": {
+						"en": 7,
+						"fr": 7,
+						"es": 7
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "agentic-coding/",
+						"fr": "fr/agentic-coding/",
+						"es": "es/agentic-coding/"
+					}
+				},
+				{
+					"id": "slashforge",
+					"title": {
+						"en": "SlashForge, workflow commands for Claude Code",
+						"fr": "SlashForge, des commandes de workflow pour Claude Code",
+						"es": "SlashForge, comandos de flujo de trabajo para Claude Code"
+					},
+					"description": {
+						"en": "Read, install and take apart SlashForge, an npm package that gives Claude Code a gated ten-phase development workflow written entirely in Markdown — what its installer writes, how a file becomes a slash command, and where the kit and Claude Code disagree about the same file.",
+						"fr": "Lire, installer et démonter SlashForge, un paquet npm qui donne à Claude Code un workflow de développement en dix phases, jalonné de points de contrôle et écrit entièrement en Markdown — ce qu'écrit son installeur, comment un fichier devient une commande slash, et où le kit et Claude Code ne sont pas d'accord sur un même fichier.",
+						"es": "Leer, instalar y desmontar SlashForge, un paquete npm que da a Claude Code un workflow de desarrollo de diez fases con puertas, escrito enteramente en Markdown — lo que escribe su instalador, cómo un archivo se convierte en un slash command, y dónde el kit y Claude Code no coinciden sobre el mismo archivo."
+					},
+					"lessons": {
+						"en": 7,
+						"fr": 7,
+						"es": 7
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "slashforge/",
+						"fr": "fr/slashforge/",
+						"es": "es/slashforge/"
+					}
+				},
+				{
+					"id": "typesafe-ai-system-one",
+					"title": {
+						"en": "TypeSafe AI System One and Jev",
+						"fr": "TypeSafe AI System One et Jev",
+						"es": "TypeSafe AI System One y Jev"
+					},
+					"description": {
+						"en": "Learn to compose typed probabilistic decisions with Jev, validate them offline, run one cost-bounded optional probe, and identify useful but authority-safe applications in Gaia, GA, Demerzel, IX, and TARS.",
+						"fr": "Composer des décisions probabilistes typées avec Jev, les valider hors ligne, exécuter une probe facultative au coût borné et cerner des usages utiles mais sans autorité dans Gaia, GA, Demerzel, IX et TARS.",
+						"es": "Componer decisiones probabilísticas tipadas con Jev, validarlas sin conexión, ejecutar una sonda opcional con coste acotado y encontrar usos útiles pero sin autoridad en Gaia, GA, Demerzel, IX y TARS."
+					},
+					"lessons": {
+						"en": 5,
+						"fr": 5,
+						"es": 5
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "typesafe-ai-system-one/",
+						"fr": "fr/typesafe-ai-system-one/",
+						"es": "es/typesafe-ai-system-one/"
+					}
+				},
+				{
+					"id": "repository-dogfooding-lab",
+					"title": {
+						"en": "Repository Dogfooding Lab",
+						"fr": "Laboratoire de dogfooding des dépôts",
+						"es": "Laboratorio de dogfooding de repositorios"
+					},
+					"description": {
+						"en": "Turn courses and repository observations into falsifiable experiments, evidence-bearing incubation, and measured adoption across GA, Gaia, Demerzel, IX, TARS and Learn.",
+						"fr": "Transformer cours et observations de dépôts en expériences falsifiables, incubation fondée sur les preuves et adoption mesurée dans GA, Gaia, Demerzel, IX, TARS et Learn.",
+						"es": "Convertir cursos y observaciones en experimentos falsables, incubación con evidencia y adopción medida en GA, Gaia, Demerzel, IX, TARS y Learn."
+					},
+					"lessons": {
+						"en": 6,
+						"fr": 6,
+						"es": 6
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "repository-dogfooding-lab/",
+						"fr": "fr/repository-dogfooding-lab/",
+						"es": "es/repository-dogfooding-lab/"
+					}
+				},
+				{
+					"id": "gaia",
+					"title": {
+						"en": "Gaia: coordinating agents with evidence",
+						"fr": "Gaia : coordonner des agents avec des preuves",
+						"es": "Gaia: coordinar agentes con evidencia"
+					},
+					"description": {
+						"en": "Gaia is a durable local coordination bus and an evidence-bearing software factory for Claude Code and Codex sessions — six non-privileged verbs, an append-only event log, exact continuity replay, and receipts whose provenance is stated per lesson.",
+						"fr": "Gaia est un bus de coordination local et durable et une usine logicielle avec preuves : six verbes sans privilège, un journal en ajout seul, l'exact replay de la continuité et des reçus dont la provenance est déclarée leçon par leçon.",
+						"es": "Gaia es un bus de coordinación duradero y una fábrica de software con evidencia — seis verbos sin privilegios, registro de solo anexión, exact replay de continuidad y recibos cuya procedencia se declara por lección."
+					},
+					"lessons": {
+						"en": 6,
+						"fr": 6,
+						"es": 6
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "gaia/",
+						"fr": "fr/gaia/",
+						"es": "es/gaia/"
+					}
+				},
+				{
+					"id": "autoharness",
+					"title": {
+						"en": "AutoHarness, self-writing skills for Claude Code",
+						"fr": "AutoHarness, des skills qui s'écrivent seuls pour Claude Code",
+						"es": "AutoHarness, skills que se escriben solas para Claude Code"
+					},
+					"description": {
+						"en": "Evaluate AutoHarness, a Claude Code plugin that turns finished sessions into skills and prunes the ones that stop being used — read at a pinned commit, tested with pre-registered fixtures in an isolated lab without installing it or calling a model, and judged on evidence rather than on its README.",
+						"fr": "Évaluer AutoHarness, un plugin Claude Code qui transforme les sessions terminées en skills et élague ceux qui ne servent plus — lu à un commit épinglé, testé par des fixtures préinscrites dans un labo isolé sans l'installer ni appeler de modèle, et jugé sur les preuves plutôt que sur son README.",
+						"es": "Evaluar AutoHarness, un plugin de Claude Code que convierte las sesiones terminadas en skills y poda las que dejan de usarse — leído en un commit fijado, probado con fixtures prerregistradas en un laboratorio aislado sin instalarlo ni llamar a un modelo, y juzgado por la evidencia y no por su README."
+					},
+					"lessons": {
+						"en": 1,
+						"fr": 1,
+						"es": 1
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "autoharness/",
+						"fr": "fr/autoharness/",
+						"es": "es/autoharness/"
+					}
+				}
+			]
+		},
+		{
+			"label": {
+				"en": "Machine Learning",
+				"fr": "Apprentissage automatique",
+				"es": "Aprendizaje automático"
+			},
+			"courses": [
+				{
+					"id": "machine-learning-ix",
+					"title": {
+						"en": "Machine learning, as applied in IX",
+						"fr": "Apprentissage automatique, appliqué dans IX",
+						"es": "Aprendizaje automático, aplicado en IX"
+					},
+					"description": {
+						"en": "Learn machine learning from the algebra up — splitting and scoring, regression, classification, clustering, principal components, ensembles, neural networks, optimization and the rest — by writing each algorithm by hand in Rust, then reading and running the same algorithm in the IX crates, on the CI history of this site.",
+						"fr": "Apprendre l'apprentissage automatique en partant de l'algèbre — découpage et évaluation, régression, classification, partitionnement, composantes principales, ensembles, réseaux de neurones, optimisation et le reste — en écrivant chaque algorithme à la main en Rust, puis en lisant et en exécutant le même algorithme dans les crates IX, sur l'historique CI de ce site.",
+						"es": "Aprende aprendizaje automático desde el álgebra — dividir y puntuar, regresión, clasificación, agrupamiento, componentes principales, conjuntos, redes neuronales, optimización y lo demás — escribiendo cada algoritmo a mano en Rust y luego leyendo y ejecutando el mismo algoritmo en los crates de IX, sobre el historial de CI de este sitio."
+					},
+					"lessons": {
+						"en": 9,
+						"fr": 9,
+						"es": 9
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "machine-learning-ix/",
+						"fr": "fr/machine-learning-ix/",
+						"es": "es/machine-learning-ix/"
+					}
+				},
+				{
+					"id": "ga-ai",
+					"title": {
+						"en": "GA's AI: OPTIC-K, ML, agents and the chatbot",
+						"fr": "L'IA de GA : OPTIC-K, ML, agents et chatbot",
+						"es": "La IA de GA: OPTIC-K, ML, agentes y chatbot"
+					},
+					"description": {
+						"en": "The machine learning and agent side of Guitar Alchemist for C# developers — the OPTIC-K embedding, the voicing index and its search, the chatbot's routing and agents, and what the chatbot is meant to become, each part run offline against GA's own code.",
+						"fr": "Le côté apprentissage automatique et agents de Guitar Alchemist, pour développeurs C# — l'embedding OPTIC-K, l'index de voicings et sa recherche, le routage et les agents du chatbot, et ce que le chatbot doit devenir, chaque partie exécutée hors ligne contre le code même de GA.",
+						"es": "El lado de aprendizaje automático y de agentes de Guitar Alchemist para desarrolladores C# — el embedding OPTIC-K, el índice de voicings y su búsqueda, el enrutamiento y los agentes del chatbot, y lo que el chatbot debe llegar a ser, cada parte ejecutada sin conexión contra el propio código de GA."
+					},
+					"lessons": {
+						"en": 11,
+						"fr": 11,
+						"es": 11
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "ga-ai/",
+						"fr": "fr/ga-ai/",
+						"es": "es/ga-ai/"
+					}
+				},
+				{
+					"id": "candle",
+					"title": {
+						"en": "Candle: Hugging Face's machine learning in Rust",
+						"fr": "Candle : le ML en Rust de Hugging Face",
+						"es": "Candle: el ML en Rust de Hugging Face"
+					},
+					"description": {
+						"en": "Learn Candle, Hugging Face's machine learning framework in Rust, from its tensors to serving models — tensors, CPU performance, autodiff, candle-nn, safetensors and the Hub, transformers, quantized LLMs, deployment and interop with C# and Java — with every output printed by pinned, compiled code.",
+						"fr": "Apprendre Candle, le framework d'apprentissage automatique de Hugging Face en Rust, de ses tenseurs jusqu'au service de modèles — tenseurs, performance sur CPU, autodiff, candle-nn, safetensors et le Hub, transformers, LLM quantifiés, déploiement et interopérabilité avec C# et Java — chaque sortie étant affichée par du code compilé et épinglé.",
+						"es": "Aprende Candle, el framework de aprendizaje automático de Hugging Face en Rust, desde sus tensores hasta servir modelos — tensores, rendimiento en CPU, autodiff, candle-nn, safetensors y el Hub, transformers, LLM cuantizados, despliegue e interoperabilidad con C# y Java —, con cada salida impresa por código fijado y compilado."
+					},
+					"lessons": {
+						"en": 4,
+						"fr": 4,
+						"es": 4
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "candle/",
+						"fr": "fr/candle/",
+						"es": "es/candle/"
+					}
+				},
+				{
+					"id": "comfyui",
+					"title": {
+						"en": "ComfyUI: image generation with diffusion models",
+						"fr": "ComfyUI : générer des images avec les modèles de diffusion",
+						"es": "ComfyUI: generar imágenes con modelos de difusión"
+					},
+					"description": {
+						"en": "Learn ComfyUI, the node-based application for diffusion models, from a first image to production — the node graph, diffusion and reproducibility, workflows as JSON, the HTTP and WebSocket API from C# and Java, image editing, ControlNet, LoRA, recent models and their licenses, upscaling and textures, video, custom nodes and their security, and running it as a service — with renders measured on one GPU and the rest checked in CI without one.",
+						"fr": "Apprendre ComfyUI, l'application à nœuds pour les modèles de diffusion, d'une première image jusqu'à la production — le graphe de nœuds, la diffusion et la reproductibilité, les workflows en JSON, l'API HTTP et WebSocket depuis C# et Java, la retouche d'images, ControlNet, LoRA, les modèles récents et leurs licences, l'agrandissement et les textures, la vidéo, les nœuds personnalisés et leur sécurité, et son exploitation comme service — avec des rendus mesurés sur un GPU et le reste vérifié en CI sans GPU.",
+						"es": "Aprende ComfyUI, la aplicación de nodos para modelos de difusión, desde una primera imagen hasta la producción — el grafo de nodos, la difusión y la reproducibilidad, los workflows en JSON, la API HTTP y WebSocket desde C# y Java, la edición de imágenes, ControlNet, LoRA, los modelos recientes y sus licencias, el escalado y las texturas, el vídeo, los nodos personalizados y su seguridad, y su uso como servicio —, con renders medidos en una GPU y el resto comprobado en CI sin ella."
+					},
+					"lessons": {
+						"en": 12,
+						"fr": 12,
+						"es": 12
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "comfyui/",
+						"fr": "fr/comfyui/",
+						"es": "es/comfyui/"
+					}
+				}
+			]
+		},
+		{
+			"label": {
+				"en": "3D & graphics",
+				"fr": "3D et graphisme",
+				"es": "3D y gráficos"
+			},
+			"courses": [
+				{
+					"id": "blender",
+					"title": {
+						"en": "Blender for developers",
+						"fr": "Blender pour les développeurs",
+						"es": "Blender para desarrolladores"
+					},
+					"description": {
+						"en": "Learn Blender as a C# or Java developer who has never done 3D — the .blend file as a database of data-blocks, polygonal modeling and modifiers, node materials, UVs and glTF export, lights and rendering with EEVEE and Cycles — with every lesson driven by bpy scripts run in the background, checked in CI on Windows, Linux and macOS, around a guitar fretboard built from code.",
+						"fr": "Apprendre Blender en tant que développeur C# ou Java qui n'a jamais fait de 3D — le fichier .blend comme base de données de blocs de données, la modélisation polygonale et les modificateurs, les matériaux à nœuds, les UV et l'export glTF, les lumières et le rendu avec EEVEE et Cycles — chaque leçon étant pilotée par des scripts bpy exécutés en arrière-plan, vérifiés en CI sous Windows, Linux et macOS, autour d'une touche de guitare construite par le code.",
+						"es": "Aprende Blender como desarrollador C# o Java que nunca ha hecho 3D — el archivo .blend como base de datos de bloques de datos, el modelado poligonal y los modificadores, los materiales de nodos, las UV y la exportación a glTF, las luces y el render con EEVEE y Cycles —, con cada lección guiada por scripts bpy ejecutados en segundo plano y comprobados en CI en Windows, Linux y macOS, en torno a un diapasón de guitarra construido desde código."
+					},
+					"lessons": {
+						"en": 4,
+						"fr": 4,
+						"es": 4
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "blender/",
+						"fr": "fr/blender/",
+						"es": "es/blender/"
+					}
+				}
+			]
+		},
+		{
+			"label": {
+				"en": "Music",
+				"fr": "Musique",
+				"es": "Música"
+			},
+			"courses": [
+				{
+					"id": "music-theory-ga",
+					"title": {
+						"en": "Music theory for Guitar Alchemist",
+						"fr": "Théorie musicale pour Guitar Alchemist",
+						"es": "Teoría musical para Guitar Alchemist"
+					},
+					"description": {
+						"en": "The music theory behind Guitar Alchemist, for developers who play a little guitar and don't read music — each concept explained, written down, then found in GA's C# code and checked against it.",
+						"fr": "La théorie musicale derrière Guitar Alchemist, pour des développeurs qui jouent un peu de guitare et ne lisent pas la musique — chaque notion expliquée, notée, puis retrouvée dans le code C# de GA et vérifiée contre lui.",
+						"es": "La teoría musical detrás de Guitar Alchemist, para desarrolladores que tocan un poco la guitarra y no leen partituras — cada concepto explicado, escrito en notación y luego localizado en el código C# de GA y contrastado con él."
+					},
+					"lessons": {
+						"en": 8,
+						"fr": 8,
+						"es": 8
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "music-theory-ga/",
+						"fr": "fr/music-theory-ga/",
+						"es": "es/music-theory-ga/"
+					}
+				},
+				{
+					"id": "ga-lab",
+					"title": {
+						"en": "Guitar Alchemist Lab",
+						"fr": "Laboratoire Guitar Alchemist",
+						"es": "Laboratorio Guitar Alchemist"
+					},
+					"description": {
+						"en": "End-to-end prototypes built on Guitar Alchemist's real data and code — each one starts from a hypothesis written down before any measurement, and publishes its numbers and its failures.",
+						"fr": "Des prototypes de bout en bout construits sur les vraies données et le vrai code de Guitar Alchemist — chacun part d'une hypothèse écrite avant toute mesure, et publie ses chiffres et ses échecs.",
+						"es": "Prototipos de principio a fin construidos sobre los datos y el código reales de Guitar Alchemist — cada uno parte de una hipótesis escrita antes de medir nada, y publica sus cifras y sus fracasos."
+					},
+					"lessons": {
+						"en": 4,
+						"fr": 4,
+						"es": 4
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "ga-lab/",
+						"fr": "fr/ga-lab/",
+						"es": "es/ga-lab/"
+					}
+				},
+				{
+					"id": "vexflow-vextab",
+					"title": {
+						"en": "VexTab & VexFlow: notation and tablature in the browser",
+						"fr": "VexTab et VexFlow : notation et tablature dans le navigateur",
+						"es": "VexTab y VexFlow: notación y tablatura en el navegador"
+					},
+					"description": {
+						"en": "Guitar notation and tablature in the browser for developers who know C# or Java — VexTab, a small text language, and VexFlow, the JavaScript library that draws it, with every example rendered to SVG and compared in CI on Windows, Linux and macOS, and Guitar Alchemist's own VexTab code put to the test.",
+						"fr": "La notation et la tablature de guitare dans le navigateur, pour les développeurs qui connaissent C# ou Java — VexTab, un petit langage texte, et VexFlow, la bibliothèque JavaScript qui le dessine, avec chaque exemple rendu en SVG et comparé en CI sous Windows, Linux et macOS, et le code VexTab de Guitar Alchemist mis à l'épreuve.",
+						"es": "Notación y tablatura de guitarra en el navegador para desarrolladores que conocen C# o Java — VexTab, un pequeño lenguaje de texto, y VexFlow, la biblioteca JavaScript que lo dibuja, con cada ejemplo renderizado en SVG y comparado en CI en Windows, Linux y macOS, y el propio código VexTab de Guitar Alchemist puesto a prueba."
+					},
+					"lessons": {
+						"en": 4,
+						"fr": 4,
+						"es": 4
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "vexflow-vextab/",
+						"fr": "fr/vexflow-vextab/",
+						"es": "es/vexflow-vextab/"
+					}
+				}
+			]
+		},
+		{
+			"label": {
+				"en": "Streeling University",
+				"fr": "Streeling University",
+				"es": "Streeling University"
+			},
+			"courses": [
+				{
+					"id": "streeling/audio-engineering/aud-001-eq-compression-order",
+					"title": {
+						"en": "EQ and Compression Order: Why Signal Chain Matters",
+						"fr": "EQ et compression : pourquoi l'ordre de la chaîne de signal compte",
+						"es": "EQ y compresion: por que importa el orden en la cadena de senal"
+					},
+					"spine": {
+						"en": "EQ and Compression Order",
+						"fr": "EQ et compression",
+						"es": "EQ y compresion"
+					},
+					"group": {
+						"en": "Audio Engineering",
+						"fr": "Ingénierie audio",
+						"es": "Ingeniería de audio"
+					},
+					"code": "AUD-001",
+					"description": {
+						"en": "Compression essentials — ratio, threshold, attack, release — Audio Engineering",
+						"fr": "Fondamentaux de la compression — ratio, seuil, attaque, relâchement — Ingénierie audio",
+						"es": "Fundamentos de compresion — ratio, threshold, attack, release — Ingeniería de audio"
+					},
+					"lessons": {
+						"en": 1,
+						"fr": 1,
+						"es": 1
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "streeling/audio-engineering/aud-001-eq-compression-order/",
+						"fr": "fr/streeling/audio-engineering/aud-001-eq-compression-order/",
+						"es": "es/streeling/audio-engineering/aud-001-eq-compression-order/"
+					}
+				},
+				{
+					"id": "streeling/cognitive-science/cog-001-your-brain-lies-to-you",
+					"title": {
+						"en": "Your Brain Lies to You — Cognitive Biases Everyone Should Know",
+						"fr": "Votre cerveau vous ment — Les biais cognitifs que tout le monde devrait connaître",
+						"es": "Tu cerebro te miente — Sesgos cognitivos que todos deberian conocer"
+					},
+					"spine": {
+						"en": "Your Brain Lies to You",
+						"fr": "Votre cerveau vous ment",
+						"es": "Tu cerebro te miente"
+					},
+					"group": {
+						"en": "Cognitive Science",
+						"fr": "Sciences cognitives",
+						"es": "Ciencia cognitiva"
+					},
+					"code": "COG-001",
+					"description": {
+						"en": "Cognitive Science Foundations — Cognitive Science",
+						"fr": "Fondements des sciences cognitives — Sciences cognitives",
+						"es": "Fundamentos de Ciencia Cognitiva — Ciencia cognitiva"
+					},
+					"lessons": {
+						"en": 1,
+						"fr": 1,
+						"es": 1
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "streeling/cognitive-science/cog-001-your-brain-lies-to-you/",
+						"fr": "fr/streeling/cognitive-science/cog-001-your-brain-lies-to-you/",
+						"es": "es/streeling/cognitive-science/cog-001-your-brain-lies-to-you/"
+					}
+				},
+				{
+					"id": "streeling/computer-science/cs-001-thinking-algorithmically",
+					"title": {
+						"en": "Thinking Algorithmically",
+						"fr": "Penser algorithmiquement",
+						"es": "Pensar algoritmicamente"
+					},
+					"spine": {
+						"en": "Thinking Algorithmically",
+						"fr": "Penser algorithmiquement",
+						"es": "Pensar algoritmicamente"
+					},
+					"group": {
+						"en": "Computer Science",
+						"fr": "Informatique",
+						"es": "Ciencias de la computación"
+					},
+					"code": "CS-001",
+					"description": {
+						"en": "Foundations of Computer Science — Computer Science",
+						"fr": "Fondements de l'informatique — Informatique",
+						"es": "Fundamentos de Ciencias de la Computacion — Ciencias de la computación"
+					},
+					"lessons": {
+						"en": 1,
+						"fr": 1,
+						"es": 1
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "streeling/computer-science/cs-001-thinking-algorithmically/",
+						"fr": "fr/streeling/computer-science/cs-001-thinking-algorithmically/",
+						"es": "es/streeling/computer-science/cs-001-thinking-algorithmically/"
+					}
+				},
+				{
+					"id": "streeling/computer-science/cs-002-governing-agentic-loops",
+					"title": {
+						"en": "Governing Agentic Loops: Preventing Unbounded Iteration in LLM-Driven Systems",
+						"fr": "Governing Agentic Loops: Preventing Unbounded Iteration in LLM-Driven Systems",
+						"es": "Governing Agentic Loops: Preventing Unbounded Iteration in LLM-Driven Systems"
+					},
+					"spine": {
+						"en": "Governing Agentic Loops",
+						"fr": "Governing Agentic Loops",
+						"es": "Governing Agentic Loops"
+					},
+					"group": {
+						"en": "Computer Science",
+						"fr": "Informatique",
+						"es": "Ciencias de la computación"
+					},
+					"code": "CS-002",
+					"description": {
+						"en": "Agentic AI — Multi-Agent Systems, Tool Use, Reasoning Loops — Computer Science",
+						"fr": "Agentic AI — Multi-Agent Systems, Tool Use, Reasoning Loops — Computer Science",
+						"es": "Agentic AI — Multi-Agent Systems, Tool Use, Reasoning Loops — Computer Science"
+					},
+					"lessons": {
+						"en": 1,
+						"fr": 1,
+						"es": 1
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "streeling/computer-science/cs-002-governing-agentic-loops/",
+						"fr": "fr/streeling/computer-science/cs-002-governing-agentic-loops/",
+						"es": "es/streeling/computer-science/cs-002-governing-agentic-loops/"
+					}
+				},
+				{
+					"id": "streeling/cybernetics/cyb-001-vsm-ai-governance-mapping",
+					"title": {
+						"en": "CYB-001: Viable System Model Mapping to AI Governance",
+						"fr": "CYB-001: Viable System Model Mapping to AI Governance",
+						"es": "CYB-001: Viable System Model Mapping to AI Governance"
+					},
+					"spine": {
+						"en": "Viable System Model Mapping to AI Governance",
+						"fr": "Viable System Model Mapping to AI Governance",
+						"es": "Viable System Model Mapping to AI Governance"
+					},
+					"group": {
+						"en": "Cybernetics",
+						"fr": "Cybernétique",
+						"es": "Cibernética"
+					},
+					"code": "CYB-001",
+					"description": {
+						"en": "Cybernetics",
+						"fr": "Cybernetics",
+						"es": "Cybernetics"
+					},
+					"lessons": {
+						"en": 1,
+						"fr": 1,
+						"es": 1
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "streeling/cybernetics/cyb-001-vsm-ai-governance-mapping/",
+						"fr": "fr/streeling/cybernetics/cyb-001-vsm-ai-governance-mapping/",
+						"es": "es/streeling/cybernetics/cyb-001-vsm-ai-governance-mapping/"
+					}
+				},
+				{
+					"id": "streeling/cybernetics/cyb-002-active-dampening-cross-repo-oscillation",
+					"title": {
+						"en": "CYB-002: Active Dampening Mechanisms for Cross-Repo Oscillation Control",
+						"fr": "CYB-002: Active Dampening Mechanisms for Cross-Repo Oscillation Control",
+						"es": "CYB-002: Active Dampening Mechanisms for Cross-Repo Oscillation Control"
+					},
+					"spine": {
+						"en": "Active Dampening Mechanisms for Cross-Repo Oscillation Control",
+						"fr": "Active Dampening Mechanisms for Cross-Repo Oscillation Control",
+						"es": "Active Dampening Mechanisms for Cross-Repo Oscillation Control"
+					},
+					"group": {
+						"en": "Cybernetics",
+						"fr": "Cybernétique",
+						"es": "Cibernética"
+					},
+					"code": "CYB-002",
+					"description": {
+						"en": "Cybernetics",
+						"fr": "Cybernetics",
+						"es": "Cybernetics"
+					},
+					"lessons": {
+						"en": 1,
+						"fr": 1,
+						"es": 1
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "streeling/cybernetics/cyb-002-active-dampening-cross-repo-oscillation/",
+						"fr": "fr/streeling/cybernetics/cyb-002-active-dampening-cross-repo-oscillation/",
+						"es": "es/streeling/cybernetics/cyb-002-active-dampening-cross-repo-oscillation/"
+					}
+				},
+				{
+					"id": "streeling/cybernetics/cyb-003-measuring-variety-ratio-quantitatively",
+					"title": {
+						"en": "CYB-003: Measuring the Variety Ratio Quantitatively",
+						"fr": "CYB-003: Measuring the Variety Ratio Quantitatively",
+						"es": "CYB-003: Measuring the Variety Ratio Quantitatively"
+					},
+					"spine": {
+						"en": "Measuring the Variety Ratio Quantitatively",
+						"fr": "Measuring the Variety Ratio Quantitatively",
+						"es": "Measuring the Variety Ratio Quantitatively"
+					},
+					"group": {
+						"en": "Cybernetics",
+						"fr": "Cybernétique",
+						"es": "Cibernética"
+					},
+					"code": "CYB-003",
+					"description": {
+						"en": "Cybernetics",
+						"fr": "Cybernetics",
+						"es": "Cybernetics"
+					},
+					"lessons": {
+						"en": 1,
+						"fr": 1,
+						"es": 1
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "streeling/cybernetics/cyb-003-measuring-variety-ratio-quantitatively/",
+						"fr": "fr/streeling/cybernetics/cyb-003-measuring-variety-ratio-quantitatively/",
+						"es": "es/streeling/cybernetics/cyb-003-measuring-variety-ratio-quantitatively/"
+					}
+				},
+				{
+					"id": "streeling/futurology/fut-001-thinking-about-tomorrow",
+					"title": {
+						"en": "Thinking About Tomorrow — Introduction to Futures Thinking",
+						"fr": "Penser à demain — Introduction à la pensée prospective",
+						"es": "Pensar en el manana — Introduccion al pensamiento de futuros"
+					},
+					"spine": {
+						"en": "Thinking About Tomorrow",
+						"fr": "Penser à demain",
+						"es": "Pensar en el manana"
+					},
+					"group": {
+						"en": "Futurology",
+						"fr": "Futurologie",
+						"es": "Futurología"
+					},
+					"code": "FUT-001",
+					"description": {
+						"en": "Futurology Foundations — Futurology",
+						"fr": "Fondements de la futurologie — Futurologie",
+						"es": "Fundamentos de Futurologia — Futurología"
+					},
+					"lessons": {
+						"en": 1,
+						"fr": 1,
+						"es": 1
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "streeling/futurology/fut-001-thinking-about-tomorrow/",
+						"fr": "fr/streeling/futurology/fut-001-thinking-about-tomorrow/",
+						"es": "es/streeling/futurology/fut-001-thinking-about-tomorrow/"
+					}
+				},
+				{
+					"id": "streeling/guitar-alchemist-academy/gaa-001-your-first-chord",
+					"title": {
+						"en": "Your First Chord — E Minor",
+						"fr": "Votre Premier Accord — Mi Mineur",
+						"es": "Tu Primer Acorde — Mi Menor"
+					},
+					"spine": {
+						"en": "Your First Chord",
+						"fr": "Votre Premier Accord",
+						"es": "Tu Primer Acorde"
+					},
+					"group": {
+						"en": "Guitar Alchemist Academy",
+						"fr": "Guitar Alchemist Academy",
+						"es": "Guitar Alchemist Academy"
+					},
+					"code": "GAA-001",
+					"description": {
+						"en": "GA Zero to Hero: Absolute Beginner — Guitar Alchemist Academy",
+						"fr": "GA Zéro au Héros : Débutant Absolu — Guitar Alchemist Academy",
+						"es": "GA Zero to Hero: Principiante Absoluto — Guitar Alchemist Academy"
+					},
+					"lessons": {
+						"en": 1,
+						"fr": 1,
+						"es": 1
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "streeling/guitar-alchemist-academy/gaa-001-your-first-chord/",
+						"fr": "fr/streeling/guitar-alchemist-academy/gaa-001-your-first-chord/",
+						"es": "es/streeling/guitar-alchemist-academy/gaa-001-your-first-chord/"
+					}
+				},
+				{
+					"id": "streeling/guitar-alchemist-academy/gaa-002-training-your-ear",
+					"title": {
+						"en": "Training Your Ear — The Guitarist's Most Powerful Tool",
+						"fr": "Training Your Ear — The Guitarist's Most Powerful Tool",
+						"es": "Training Your Ear — The Guitarist's Most Powerful Tool"
+					},
+					"spine": {
+						"en": "Training Your Ear",
+						"fr": "Training Your Ear",
+						"es": "Training Your Ear"
+					},
+					"group": {
+						"en": "Guitar Alchemist Academy",
+						"fr": "Guitar Alchemist Academy",
+						"es": "Guitar Alchemist Academy"
+					},
+					"code": "GAA-002",
+					"description": {
+						"en": "Formal Course: Ear Training — Guitar Alchemist Academy",
+						"fr": "Formal Course: Ear Training — Guitar Alchemist Academy",
+						"es": "Formal Course: Ear Training — Guitar Alchemist Academy"
+					},
+					"lessons": {
+						"en": 1,
+						"fr": 1,
+						"es": 1
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "streeling/guitar-alchemist-academy/gaa-002-training-your-ear/",
+						"fr": "fr/streeling/guitar-alchemist-academy/gaa-002-training-your-ear/",
+						"es": "es/streeling/guitar-alchemist-academy/gaa-002-training-your-ear/"
+					}
+				},
+				{
+					"id": "streeling/guitar-alchemist-academy/gaa-003-improvisation-foundations",
+					"title": {
+						"en": "Improvisation Foundations — From Your First Solo to Confident Self-Expression",
+						"fr": "Improvisation Foundations — From Your First Solo to Confident Self-Expression",
+						"es": "Improvisation Foundations — From Your First Solo to Confident Self-Expression"
+					},
+					"spine": {
+						"en": "Improvisation Foundations",
+						"fr": "Improvisation Foundations",
+						"es": "Improvisation Foundations"
+					},
+					"group": {
+						"en": "Guitar Alchemist Academy",
+						"fr": "Guitar Alchemist Academy",
+						"es": "Guitar Alchemist Academy"
+					},
+					"code": "GAA-003",
+					"description": {
+						"en": "Formal Course: Improvisation — Guitar Alchemist Academy",
+						"fr": "Formal Course: Improvisation — Guitar Alchemist Academy",
+						"es": "Formal Course: Improvisation — Guitar Alchemist Academy"
+					},
+					"lessons": {
+						"en": 1,
+						"fr": 1,
+						"es": 1
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "streeling/guitar-alchemist-academy/gaa-003-improvisation-foundations/",
+						"fr": "fr/streeling/guitar-alchemist-academy/gaa-003-improvisation-foundations/",
+						"es": "es/streeling/guitar-alchemist-academy/gaa-003-improvisation-foundations/"
+					}
+				},
+				{
+					"id": "streeling/guitar-studies/gtr-001-the-fretboard-map",
+					"title": {
+						"en": "The Fretboard Map",
+						"fr": "La carte du manche",
+						"es": "El mapa del diapason"
+					},
+					"spine": {
+						"en": "The Fretboard Map",
+						"fr": "La carte du manche",
+						"es": "El mapa del diapason"
+					},
+					"group": {
+						"en": "Guitar Studies",
+						"fr": "Études de guitare",
+						"es": "Estudios de guitarra"
+					},
+					"code": "GTR-001",
+					"description": {
+						"en": "Guitar Fundamentals — Guitar Studies",
+						"fr": "Fondamentaux de la guitare — Études de guitare",
+						"es": "Fundamentos de guitarra — Estudios de guitarra"
+					},
+					"lessons": {
+						"en": 1,
+						"fr": 1,
+						"es": 1
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "streeling/guitar-studies/gtr-001-the-fretboard-map/",
+						"fr": "fr/streeling/guitar-studies/gtr-001-the-fretboard-map/",
+						"es": "es/streeling/guitar-studies/gtr-001-the-fretboard-map/"
+					}
+				},
+				{
+					"id": "streeling/guitar-studies/gtr-002-caged-geometry",
+					"title": {
+						"en": "CAGED Geometry: Why Five Shapes Rule the Fretboard",
+						"fr": "La géométrie du CAGED : pourquoi cinq formes gouvernent le manche",
+						"es": "Geometria CAGED: por que cinco formas gobiernan el diapason"
+					},
+					"spine": {
+						"en": "CAGED Geometry",
+						"fr": "La géométrie du CAGED",
+						"es": "Geometria CAGED"
+					},
+					"group": {
+						"en": "Guitar Studies",
+						"fr": "Études de guitare",
+						"es": "Estudios de guitarra"
+					},
+					"code": "GTR-002",
+					"description": {
+						"en": "Fretboard layout and CAGED system — Guitar Studies",
+						"fr": "Disposition du manche et système CAGED — Études de guitare",
+						"es": "Disposicion del diapason y sistema CAGED — Estudios de guitarra"
+					},
+					"lessons": {
+						"en": 1,
+						"fr": 1,
+						"es": 1
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "streeling/guitar-studies/gtr-002-caged-geometry/",
+						"fr": "fr/streeling/guitar-studies/gtr-002-caged-geometry/",
+						"es": "es/streeling/guitar-studies/gtr-002-caged-geometry/"
+					}
+				},
+				{
+					"id": "streeling/information-theory/inf-001-entropy-of-governance",
+					"title": {
+						"en": "The Entropy of Governance — Measuring Policy Complexity",
+						"fr": "The Entropy of Governance — Measuring Policy Complexity",
+						"es": "The Entropy of Governance — Measuring Policy Complexity"
+					},
+					"spine": {
+						"en": "The Entropy of Governance",
+						"fr": "The Entropy of Governance",
+						"es": "The Entropy of Governance"
+					},
+					"group": {
+						"en": "Information Theory",
+						"fr": "Théorie de l'information",
+						"es": "Teoría de la información"
+					},
+					"code": "INF-001",
+					"description": {
+						"en": "Applied Information Theory for Governance — Information Theory",
+						"fr": "Applied Information Theory for Governance — Information Theory",
+						"es": "Applied Information Theory for Governance — Information Theory"
+					},
+					"lessons": {
+						"en": 1,
+						"fr": 1,
+						"es": 1
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "streeling/information-theory/inf-001-entropy-of-governance/",
+						"fr": "fr/streeling/information-theory/inf-001-entropy-of-governance/",
+						"es": "es/streeling/information-theory/inf-001-entropy-of-governance/"
+					}
+				},
+				{
+					"id": "streeling/mathematics/mat-001-proof-strategies",
+					"title": {
+						"en": "Proof Strategies — How to Prove Things",
+						"fr": "Stratégies de démonstration — Comment prouver les choses",
+						"es": "Estrategias de demostracion — Como probar cosas"
+					},
+					"spine": {
+						"en": "Proof Strategies",
+						"fr": "Stratégies de démonstration",
+						"es": "Estrategias de demostracion"
+					},
+					"group": {
+						"en": "Mathematics",
+						"fr": "Mathématiques",
+						"es": "Matemáticas"
+					},
+					"code": "MAT-001",
+					"description": {
+						"en": "Foundations of Mathematical Reasoning — Mathematics",
+						"fr": "Fondements du raisonnement mathématique — Mathématiques",
+						"es": "Fundamentos de razonamiento matematico — Matemáticas"
+					},
+					"lessons": {
+						"en": 1,
+						"fr": 1,
+						"es": 1
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "streeling/mathematics/mat-001-proof-strategies/",
+						"fr": "fr/streeling/mathematics/mat-001-proof-strategies/",
+						"es": "es/streeling/mathematics/mat-001-proof-strategies/"
+					}
+				},
+				{
+					"id": "streeling/mathematics/mat-002-counterexamples-and-exhaustive-checks",
+					"title": {
+						"en": "Counterexamples, Witnesses and Exhaustive Checks — When Checking Cases Is a Proof",
+						"fr": "Contre-exemples, témoins et vérifications exhaustives — Quand vérifier des cas est une preuve",
+						"es": "Contraejemplos, testigos y comprobaciones exhaustivas — Cuando comprobar casos es una demostración"
+					},
+					"spine": {
+						"en": "Counterexamples, Witnesses and Exhaustive Checks",
+						"fr": "Contre-exemples, témoins et vérifications exhaustives",
+						"es": "Contraejemplos, testigos y comprobaciones exhaustivas"
+					},
+					"group": {
+						"en": "Mathematics",
+						"fr": "Mathématiques",
+						"es": "Matemáticas"
+					},
+					"code": "MAT-002",
+					"description": {
+						"en": "Counterexamples, Witnesses and Exhaustive Checks — Mathematics",
+						"fr": "Contre-exemples, témoins et vérifications exhaustives — Mathématiques",
+						"es": "Contraejemplos, testigos y comprobaciones exhaustivas — Matemáticas"
+					},
+					"lessons": {
+						"en": 1,
+						"fr": 1,
+						"es": 1
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "streeling/mathematics/mat-002-counterexamples-and-exhaustive-checks/",
+						"fr": "fr/streeling/mathematics/mat-002-counterexamples-and-exhaustive-checks/",
+						"es": "es/streeling/mathematics/mat-002-counterexamples-and-exhaustive-checks/"
+					}
+				},
+				{
+					"id": "streeling/mathematics/mat-003-floating-point-conditioning",
+					"title": {
+						"en": "Floating-Point Arithmetic and Conditioning — When a Computer Loses Digits",
+						"fr": "Arithmétique flottante et conditionnement — Quand un ordinateur perd des chiffres",
+						"es": "Aritmética de punto flotante y condicionamiento — Cuando una computadora pierde dígitos"
+					},
+					"spine": {
+						"en": "Floating-Point Arithmetic and Conditioning",
+						"fr": "Arithmétique flottante et conditionnement",
+						"es": "Aritmética de punto flotante y condicionamiento"
+					},
+					"group": {
+						"en": "Mathematics",
+						"fr": "Mathématiques",
+						"es": "Matemáticas"
+					},
+					"code": "MAT-003",
+					"description": {
+						"en": "Floating-Point Arithmetic and Conditioning — Mathematics",
+						"fr": "Arithmétique flottante et conditionnement — Mathématiques",
+						"es": "Aritmética de punto flotante y condicionamiento — Matemáticas"
+					},
+					"lessons": {
+						"en": 1,
+						"fr": 1,
+						"es": 1
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "streeling/mathematics/mat-003-floating-point-conditioning/",
+						"fr": "fr/streeling/mathematics/mat-003-floating-point-conditioning/",
+						"es": "es/streeling/mathematics/mat-003-floating-point-conditioning/"
+					}
+				},
+				{
+					"id": "streeling/mathematics/mat-004-vectors-matrices-norms",
+					"title": {
+						"en": "Vectors, Matrices, Norms and Linear Maps — What a Matrix Does to Space",
+						"fr": "Vecteurs, matrices, normes et applications linéaires — Ce qu'une matrice fait à l'espace",
+						"es": "Vectores, matrices, normas y aplicaciones lineales — Lo que una matriz le hace al espacio"
+					},
+					"spine": {
+						"en": "Vectors, Matrices, Norms and Linear Maps",
+						"fr": "Vecteurs, matrices, normes et applications linéaires",
+						"es": "Vectores, matrices, normas y aplicaciones lineales"
+					},
+					"group": {
+						"en": "Mathematics",
+						"fr": "Mathématiques",
+						"es": "Matemáticas"
+					},
+					"code": "MAT-004",
+					"description": {
+						"en": "Vectors, Matrices, Norms and Linear Maps — Mathematics",
+						"fr": "Vecteurs, matrices, normes et applications linéaires — Mathématiques",
+						"es": "Vectores, matrices, normas y aplicaciones lineales — Matemáticas"
+					},
+					"lessons": {
+						"en": 1,
+						"fr": 1,
+						"es": 1
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "streeling/mathematics/mat-004-vectors-matrices-norms/",
+						"fr": "fr/streeling/mathematics/mat-004-vectors-matrices-norms/",
+						"es": "es/streeling/mathematics/mat-004-vectors-matrices-norms/"
+					}
+				},
+				{
+					"id": "streeling/mathematics/mat-005-symmetric-eigenproblems",
+					"title": {
+						"en": "Symmetric Eigenproblems — The Directions a Matrix Only Stretches",
+						"fr": "Problèmes aux valeurs propres symétriques — Les directions qu'une matrice ne fait qu'étirer",
+						"es": "Problemas de valores propios simétricos — Las direcciones que una matriz solo estira"
+					},
+					"spine": {
+						"en": "Symmetric Eigenproblems",
+						"fr": "Problèmes aux valeurs propres symétriques",
+						"es": "Problemas de valores propios simétricos"
+					},
+					"group": {
+						"en": "Mathematics",
+						"fr": "Mathématiques",
+						"es": "Matemáticas"
+					},
+					"code": "MAT-005",
+					"description": {
+						"en": "Symmetric Eigenproblems — Mathematics",
+						"fr": "Problèmes aux valeurs propres symétriques — Mathématiques",
+						"es": "Problemas de valores propios simétricos — Matemáticas"
+					},
+					"lessons": {
+						"en": 1,
+						"fr": 1,
+						"es": 1
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "streeling/mathematics/mat-005-symmetric-eigenproblems/",
+						"fr": "fr/streeling/mathematics/mat-005-symmetric-eigenproblems/",
+						"es": "es/streeling/mathematics/mat-005-symmetric-eigenproblems/"
+					}
+				},
+				{
+					"id": "streeling/mathematics/mat-006-svd-low-rank-approximation",
+					"title": {
+						"en": "Singular Value Decomposition and Low-Rank Approximation — The Best Simplification of a Matrix",
+						"fr": "Décomposition en valeurs singulières et approximation de rang faible — La meilleure simplification d'une matrice",
+						"es": "Descomposición en valores singulares y aproximación de bajo rango — La mejor simplificación de una matriz"
+					},
+					"spine": {
+						"en": "Singular Value Decomposition and Low-Rank Approximation",
+						"fr": "Décomposition en valeurs singulières et approximation de rang faible",
+						"es": "Descomposición en valores singulares y aproximación de bajo rango"
+					},
+					"group": {
+						"en": "Mathematics",
+						"fr": "Mathématiques",
+						"es": "Matemáticas"
+					},
+					"code": "MAT-006",
+					"description": {
+						"en": "Singular Value Decomposition and Low-Rank Approximation — Mathematics",
+						"fr": "Décomposition en valeurs singulières et approximation de rang faible — Mathématiques",
+						"es": "Descomposición en valores singulares y aproximación de bajo rango — Matemáticas"
+					},
+					"lessons": {
+						"en": 1,
+						"fr": 1,
+						"es": 1
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "streeling/mathematics/mat-006-svd-low-rank-approximation/",
+						"fr": "fr/streeling/mathematics/mat-006-svd-low-rank-approximation/",
+						"es": "es/streeling/mathematics/mat-006-svd-low-rank-approximation/"
+					}
+				},
+				{
+					"id": "streeling/mathematics/mat-007-least-squares-regularisation",
+					"title": {
+						"en": "Least Squares, Regularisation and Identifiability — When the Data Cannot Pin the Parameters Down",
+						"fr": "Moindres carrés, régularisation et identifiabilité — Quand les données ne suffisent pas à fixer les paramètres",
+						"es": "Mínimos cuadrados, regularización e identificabilidad — Cuando los datos no bastan para fijar los parámetros"
+					},
+					"spine": {
+						"en": "Least Squares, Regularisation and Identifiability",
+						"fr": "Moindres carrés, régularisation et identifiabilité",
+						"es": "Mínimos cuadrados, regularización e identificabilidad"
+					},
+					"group": {
+						"en": "Mathematics",
+						"fr": "Mathématiques",
+						"es": "Matemáticas"
+					},
+					"code": "MAT-007",
+					"description": {
+						"en": "Least Squares, Regularisation and Identifiability — Mathematics",
+						"fr": "Moindres carrés, régularisation et identifiabilité — Mathématiques",
+						"es": "Mínimos cuadrados, regularización e identificabilidad — Matemáticas"
+					},
+					"lessons": {
+						"en": 1,
+						"fr": 1,
+						"es": 1
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "streeling/mathematics/mat-007-least-squares-regularisation/",
+						"fr": "fr/streeling/mathematics/mat-007-least-squares-regularisation/",
+						"es": "es/streeling/mathematics/mat-007-least-squares-regularisation/"
+					}
+				},
+				{
+					"id": "streeling/music/mus-001-what-is-a-chord",
+					"title": {
+						"en": "What Is a Chord?",
+						"fr": "Qu'est-ce qu'un accord ?",
+						"es": "Que es un acorde?"
+					},
+					"spine": {
+						"en": "What Is a Chord?",
+						"fr": "Qu'est-ce qu'un accord ?",
+						"es": "Que es un acorde?"
+					},
+					"group": {
+						"en": "Music",
+						"fr": "Musique",
+						"es": "Música"
+					},
+					"code": "MUS-001",
+					"description": {
+						"en": "Foundations of Music Theory — Music",
+						"fr": "Fondements de la théorie musicale — Musique",
+						"es": "Fundamentos de teoria musical — Música"
+					},
+					"lessons": {
+						"en": 1,
+						"fr": 1,
+						"es": 1
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "streeling/music/mus-001-what-is-a-chord/",
+						"fr": "fr/streeling/music/mus-001-what-is-a-chord/",
+						"es": "es/streeling/music/mus-001-what-is-a-chord/"
+					}
+				},
+				{
+					"id": "streeling/music/mus-002-beyond-tonality",
+					"title": {
+						"en": "Beyond Tonality: Post-Tonal Theory for Guitarists",
+						"fr": "Beyond Tonality: Post-Tonal Theory for Guitarists",
+						"es": "Beyond Tonality: Post-Tonal Theory for Guitarists"
+					},
+					"spine": {
+						"en": "Beyond Tonality",
+						"fr": "Beyond Tonality",
+						"es": "Beyond Tonality"
+					},
+					"group": {
+						"en": "Music",
+						"fr": "Musique",
+						"es": "Música"
+					},
+					"code": "MUS-002",
+					"description": {
+						"en": "Foundations of Music Theory — Music",
+						"fr": "Foundations of Music Theory — Music",
+						"es": "Foundations of Music Theory — Music"
+					},
+					"lessons": {
+						"en": 1,
+						"fr": 1,
+						"es": 1
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "streeling/music/mus-002-beyond-tonality/",
+						"fr": "fr/streeling/music/mus-002-beyond-tonality/",
+						"es": "es/streeling/music/mus-002-beyond-tonality/"
+					}
+				},
+				{
+					"id": "streeling/music/mus-003-functional-harmony",
+					"title": {
+						"en": "How Harmony Works — Functional Harmony for Guitarists",
+						"fr": "How Harmony Works — Functional Harmony for Guitarists",
+						"es": "How Harmony Works — Functional Harmony for Guitarists"
+					},
+					"spine": {
+						"en": "How Harmony Works",
+						"fr": "How Harmony Works",
+						"es": "How Harmony Works"
+					},
+					"group": {
+						"en": "Music",
+						"fr": "Musique",
+						"es": "Música"
+					},
+					"code": "MUS-003",
+					"description": {
+						"en": "Foundations of Music Theory — Music",
+						"fr": "Foundations of Music Theory — Music",
+						"es": "Foundations of Music Theory — Music"
+					},
+					"lessons": {
+						"en": 1,
+						"fr": 1,
+						"es": 1
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "streeling/music/mus-003-functional-harmony/",
+						"fr": "fr/streeling/music/mus-003-functional-harmony/",
+						"es": "es/streeling/music/mus-003-functional-harmony/"
+					}
+				},
+				{
+					"id": "streeling/music/mus-004-rhythm-and-groove",
+					"title": {
+						"en": "Rhythm, Meter, and Groove: The Time Dimension of Music",
+						"fr": "Rhythm, Meter, and Groove: The Time Dimension of Music",
+						"es": "Rhythm, Meter, and Groove: The Time Dimension of Music"
+					},
+					"spine": {
+						"en": "Rhythm, Meter, and Groove",
+						"fr": "Rhythm, Meter, and Groove",
+						"es": "Rhythm, Meter, and Groove"
+					},
+					"group": {
+						"en": "Music",
+						"fr": "Musique",
+						"es": "Música"
+					},
+					"code": "MUS-004",
+					"description": {
+						"en": "Foundations of Music Theory — Music",
+						"fr": "Foundations of Music Theory — Music",
+						"es": "Foundations of Music Theory — Music"
+					},
+					"lessons": {
+						"en": 1,
+						"fr": 1,
+						"es": 1
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "streeling/music/mus-004-rhythm-and-groove/",
+						"fr": "fr/streeling/music/mus-004-rhythm-and-groove/",
+						"es": "es/streeling/music/mus-004-rhythm-and-groove/"
+					}
+				},
+				{
+					"id": "streeling/music/mus-005-jazz-harmony",
+					"title": {
+						"en": "Jazz Harmony for Guitar: From ii-V-I to Coltrane Changes",
+						"fr": "Jazz Harmony for Guitar: From ii-V-I to Coltrane Changes",
+						"es": "Jazz Harmony for Guitar: From ii-V-I to Coltrane Changes"
+					},
+					"spine": {
+						"en": "Jazz Harmony for Guitar",
+						"fr": "Jazz Harmony for Guitar",
+						"es": "Jazz Harmony for Guitar"
+					},
+					"group": {
+						"en": "Music",
+						"fr": "Musique",
+						"es": "Música"
+					},
+					"code": "MUS-005",
+					"description": {
+						"en": "Jazz Harmony for Guitar — Music",
+						"fr": "Jazz Harmony for Guitar — Music",
+						"es": "Jazz Harmony for Guitar — Music"
+					},
+					"lessons": {
+						"en": 1,
+						"fr": 1,
+						"es": 1
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "streeling/music/mus-005-jazz-harmony/",
+						"fr": "fr/streeling/music/mus-005-jazz-harmony/",
+						"es": "es/streeling/music/mus-005-jazz-harmony/"
+					}
+				},
+				{
+					"id": "streeling/music/mus-006-the-scale-universe",
+					"title": {
+						"en": "The Scale Universe: 4,096 Possibilities From 12 Notes",
+						"fr": "The Scale Universe: 4,096 Possibilities From 12 Notes",
+						"es": "The Scale Universe: 4,096 Possibilities From 12 Notes"
+					},
+					"spine": {
+						"en": "The Scale Universe",
+						"fr": "The Scale Universe",
+						"es": "The Scale Universe"
+					},
+					"group": {
+						"en": "Music",
+						"fr": "Musique",
+						"es": "Música"
+					},
+					"code": "MUS-006",
+					"description": {
+						"en": "Foundations of Music Theory — Music",
+						"fr": "Foundations of Music Theory — Music",
+						"es": "Foundations of Music Theory — Music"
+					},
+					"lessons": {
+						"en": 1,
+						"fr": 1,
+						"es": 1
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "streeling/music/mus-006-the-scale-universe/",
+						"fr": "fr/streeling/music/mus-006-the-scale-universe/",
+						"es": "es/streeling/music/mus-006-the-scale-universe/"
+					}
+				},
+				{
+					"id": "streeling/musicology/mcl-001-how-music-evolves",
+					"title": {
+						"en": "How Music Evolves — A Brief History of Western Music",
+						"fr": "Comment la musique évolue — Brève histoire de la musique occidentale",
+						"es": "Como evoluciona la musica — Breve historia de la musica occidental"
+					},
+					"spine": {
+						"en": "How Music Evolves",
+						"fr": "Comment la musique évolue",
+						"es": "Como evoluciona la musica"
+					},
+					"group": {
+						"en": "Musicology",
+						"fr": "Musicologie",
+						"es": "Musicología"
+					},
+					"code": "MCL-001",
+					"description": {
+						"en": "Musicology Foundations — Musicology",
+						"fr": "Fondements de la musicologie — Musicologie",
+						"es": "Fundamentos de Musicologia — Musicología"
+					},
+					"lessons": {
+						"en": 1,
+						"fr": 1,
+						"es": 1
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "streeling/musicology/mcl-001-how-music-evolves/",
+						"fr": "fr/streeling/musicology/mcl-001-how-music-evolves/",
+						"es": "es/streeling/musicology/mcl-001-how-music-evolves/"
+					}
+				},
+				{
+					"id": "streeling/musicology/mcl-002-musical-form",
+					"title": {
+						"en": "Musical Form and Structure — How Music Is Built",
+						"fr": "Musical Form and Structure — How Music Is Built",
+						"es": "Musical Form and Structure — How Music Is Built"
+					},
+					"spine": {
+						"en": "Musical Form and Structure",
+						"fr": "Musical Form and Structure",
+						"es": "Musical Form and Structure"
+					},
+					"group": {
+						"en": "Musicology",
+						"fr": "Musicologie",
+						"es": "Musicología"
+					},
+					"code": "MCL-002",
+					"description": {
+						"en": "Musicology Foundations — Musicology",
+						"fr": "Musicology Foundations — Musicology",
+						"es": "Musicology Foundations — Musicology"
+					},
+					"lessons": {
+						"en": 1,
+						"fr": 1,
+						"es": 1
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "streeling/musicology/mcl-002-musical-form/",
+						"fr": "fr/streeling/musicology/mcl-002-musical-form/",
+						"es": "es/streeling/musicology/mcl-002-musical-form/"
+					}
+				},
+				{
+					"id": "streeling/network-science/net-001-scale-free-tool-networks",
+					"title": {
+						"en": "Scale-Free Tool Networks — Why Some Repos Connect to Everything",
+						"fr": "Scale-Free Tool Networks — Why Some Repos Connect to Everything",
+						"es": "Scale-Free Tool Networks — Why Some Repos Connect to Everything"
+					},
+					"spine": {
+						"en": "Scale-Free Tool Networks",
+						"fr": "Scale-Free Tool Networks",
+						"es": "Scale-Free Tool Networks"
+					},
+					"group": {
+						"en": "Network Science",
+						"fr": "Science des réseaux",
+						"es": "Ciencia de redes"
+					},
+					"code": "NET-001",
+					"description": {
+						"en": "Network Science for AI Ecosystems — Network Science",
+						"fr": "Network Science for AI Ecosystems — Network Science",
+						"es": "Network Science for AI Ecosystems — Network Science"
+					},
+					"lessons": {
+						"en": 1,
+						"fr": 1,
+						"es": 1
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "streeling/network-science/net-001-scale-free-tool-networks/",
+						"fr": "fr/streeling/network-science/net-001-scale-free-tool-networks/",
+						"es": "es/streeling/network-science/net-001-scale-free-tool-networks/"
+					}
+				},
+				{
+					"id": "streeling/philosophy/phi-001-how-to-argue-well",
+					"title": {
+						"en": "How to Argue Well — Logic and Critical Thinking",
+						"fr": "Bien argumenter — Logique et pensée critique",
+						"es": "Como argumentar bien — Logica y pensamiento critico"
+					},
+					"spine": {
+						"en": "How to Argue Well",
+						"fr": "Bien argumenter",
+						"es": "Como argumentar bien"
+					},
+					"group": {
+						"en": "Philosophy",
+						"fr": "Philosophie",
+						"es": "Filosofía"
+					},
+					"code": "PHI-001",
+					"description": {
+						"en": "Philosophy Foundations — Philosophy",
+						"fr": "Fondements de la philosophie — Philosophie",
+						"es": "Fundamentos de Filosofia — Filosofía"
+					},
+					"lessons": {
+						"en": 1,
+						"fr": 1,
+						"es": 1
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "streeling/philosophy/phi-001-how-to-argue-well/",
+						"fr": "fr/streeling/philosophy/phi-001-how-to-argue-well/",
+						"es": "es/streeling/philosophy/phi-001-how-to-argue-well/"
+					}
+				},
+				{
+					"id": "streeling/physics/phy-001-science-of-guitar-sound",
+					"title": {
+						"en": "The Science of Guitar Sound",
+						"fr": "La science du son de la guitare",
+						"es": "La ciencia del sonido de la guitarra"
+					},
+					"spine": {
+						"en": "The Science of Guitar Sound",
+						"fr": "La science du son de la guitare",
+						"es": "La ciencia del sonido de la guitarra"
+					},
+					"group": {
+						"en": "Physics",
+						"fr": "Physique",
+						"es": "Física"
+					},
+					"code": "PHY-001",
+					"description": {
+						"en": "Acoustics and Wave Physics — Physics",
+						"fr": "Acoustique et physique des ondes — Physique",
+						"es": "Acustica y fisica de ondas — Física"
+					},
+					"lessons": {
+						"en": 1,
+						"fr": 1,
+						"es": 1
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "streeling/physics/phy-001-science-of-guitar-sound/",
+						"fr": "fr/streeling/physics/phy-001-science-of-guitar-sound/",
+						"es": "es/streeling/physics/phy-001-science-of-guitar-sound/"
+					}
+				},
+				{
+					"id": "streeling/product-management/pm-001-shipping-vs-talking",
+					"title": {
+						"en": "Shipping vs Talking — How to Tell If You're Actually Building Something",
+						"fr": "Livrer vs parler — Comment savoir si vous construisez vraiment quelque chose",
+						"es": "Entregar vs hablar — Como saber si realmente estas construyendo algo"
+					},
+					"spine": {
+						"en": "Shipping vs Talking",
+						"fr": "Livrer vs parler",
+						"es": "Entregar vs hablar"
+					},
+					"group": {
+						"en": "Product and Project Management",
+						"fr": "Gestion de produit et de projet",
+						"es": "Gestión de productos y proyectos"
+					},
+					"code": "PM-001",
+					"description": {
+						"en": "Product Management Foundations — Product and Project Management",
+						"fr": "Fondements de la gestion de produit — Gestion de produit et de projet",
+						"es": "Fundamentos de gestion de producto — Gestión de productos y proyectos"
+					},
+					"lessons": {
+						"en": 1,
+						"fr": 1,
+						"es": 1
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "streeling/product-management/pm-001-shipping-vs-talking/",
+						"fr": "fr/streeling/product-management/pm-001-shipping-vs-talking/",
+						"es": "es/streeling/product-management/pm-001-shipping-vs-talking/"
+					}
+				},
+				{
+					"id": "streeling/psychohistory/psy-001-intro-fractal-compounding",
+					"title": {
+						"en": "Introduction to Fractal Compounding",
+						"fr": "Introduction à la Capitalisation Fractale",
+						"es": "Introducción al Compuesto Fractal"
+					},
+					"spine": {
+						"en": "Introduction to Fractal Compounding",
+						"fr": "Introduction à la Capitalisation Fractale",
+						"es": "Introducción al Compuesto Fractal"
+					},
+					"group": {
+						"en": "Psychohistory",
+						"fr": "Psychohistoire",
+						"es": "Psicohistoria"
+					},
+					"code": "PSY-001",
+					"description": {
+						"en": "Foundations of Psychohistory — Psychohistory",
+						"fr": "Fondements de la Psychohistoire — Psychohistoire",
+						"es": "Fundamentos de Psicohistoria — Psicohistoria"
+					},
+					"lessons": {
+						"en": 1,
+						"fr": 1,
+						"es": 1
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "streeling/psychohistory/psy-001-intro-fractal-compounding/",
+						"fr": "fr/streeling/psychohistory/psy-001-intro-fractal-compounding/",
+						"es": "es/streeling/psychohistory/psy-001-intro-fractal-compounding/"
+					}
+				},
+				{
+					"id": "streeling/psychohistory/psy-002-governance-phase-transitions",
+					"title": {
+						"en": "Governance Phase Transitions",
+						"fr": "Governance Phase Transitions",
+						"es": "Governance Phase Transitions"
+					},
+					"spine": {
+						"en": "Governance Phase Transitions",
+						"fr": "Governance Phase Transitions",
+						"es": "Governance Phase Transitions"
+					},
+					"group": {
+						"en": "Psychohistory",
+						"fr": "Psychohistoire",
+						"es": "Psicohistoria"
+					},
+					"code": "PSY-002",
+					"description": {
+						"en": "Phase Transition Theory: when governance systems shift regimes — Psychohistory",
+						"fr": "Phase Transition Theory: when governance systems shift regimes — Psychohistory",
+						"es": "Phase Transition Theory: when governance systems shift regimes — Psychohistory"
+					},
+					"lessons": {
+						"en": 1,
+						"fr": 1,
+						"es": 1
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "streeling/psychohistory/psy-002-governance-phase-transitions/",
+						"fr": "fr/streeling/psychohistory/psy-002-governance-phase-transitions/",
+						"es": "es/streeling/psychohistory/psy-002-governance-phase-transitions/"
+					}
+				},
+				{
+					"id": "streeling/semiotics/sem-001-signs-in-governance",
+					"title": {
+						"en": "Signs in Governance — Reading Constitutions Through Peirce's Lens",
+						"fr": "Signs in Governance — Reading Constitutions Through Peirce's Lens",
+						"es": "Signs in Governance — Reading Constitutions Through Peirce's Lens"
+					},
+					"spine": {
+						"en": "Signs in Governance",
+						"fr": "Signs in Governance",
+						"es": "Signs in Governance"
+					},
+					"group": {
+						"en": "Semiotics",
+						"fr": "Sémiotique",
+						"es": "Semiótica"
+					},
+					"code": "SEM-001",
+					"description": {
+						"en": "Semiotics of AI Governance — Semiotics",
+						"fr": "Semiotics of AI Governance — Semiotics",
+						"es": "Semiotics of AI Governance — Semiotics"
+					},
+					"lessons": {
+						"en": 1,
+						"fr": 1,
+						"es": 1
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "streeling/semiotics/sem-001-signs-in-governance/",
+						"fr": "fr/streeling/semiotics/sem-001-signs-in-governance/",
+						"es": "es/streeling/semiotics/sem-001-signs-in-governance/"
+					}
+				},
+				{
+					"id": "streeling/world-music-languages/wml-001-guitar-around-the-world",
+					"title": {
+						"en": "Guitar Around the World — One Instrument, Many Traditions",
+						"fr": "La guitare autour du monde — Un instrument, de multiples traditions",
+						"es": "La guitarra alrededor del mundo — Un instrumento, muchas tradiciones"
+					},
+					"spine": {
+						"en": "Guitar Around the World",
+						"fr": "La guitare autour du monde",
+						"es": "La guitarra alrededor del mundo"
+					},
+					"group": {
+						"en": "World Music & Languages",
+						"fr": "Musiques et langues du monde",
+						"es": "Músicas y lenguas del mundo"
+					},
+					"code": "WML-001",
+					"description": {
+						"en": "World Music & Languages Foundations — World Music & Languages",
+						"fr": "Fondements des musiques du monde et des langues — Musiques et langues du monde",
+						"es": "Fundamentos de musica del mundo y lenguas — Músicas y lenguas del mundo"
+					},
+					"lessons": {
+						"en": 1,
+						"fr": 1,
+						"es": 1
+					},
+					"unit": "lessons",
+					"url": {
+						"en": "streeling/world-music-languages/wml-001-guitar-around-the-world/",
+						"fr": "fr/streeling/world-music-languages/wml-001-guitar-around-the-world/",
+						"es": "es/streeling/world-music-languages/wml-001-guitar-around-the-world/"
+					}
+				}
+			]
+		}
+	]
+}

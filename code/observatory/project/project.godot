@@ -1,0 +1,24 @@
+; Engine configuration file.
+; Hand-written for Godot 4.6; the editor may reformat it on first save.
+
+config_version=5
+
+[application]
+
+config/name="Observatory Web"
+config/description="Browser-compatible version of the Observatory prototype."
+run/main_scene="res://main.tscn"
+config/features=PackedStringArray("4.6", "GL Compatibility")
+config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1600
+window/size/viewport_height=900
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+anti_aliasing/quality/msaa_3d=2
+reflections/reflection_atlas/reflection_count=4
