@@ -159,6 +159,78 @@ body {
   requestAnimationFrame(tick);
 })();
 </script>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0a1424">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Observatory">
+<script>
+/* Observatory: installable, and kept up to date (artpass/publish/pwa/NOTES.md). sw.js keeps a copy of
+   this build's files in the browser and serves them from then on. When a newer build is published the
+   browser finds a new sw.js, which fetches the new files, each one checked with the server so that a
+   stale copy in the browser's cache cannot be taken, replaces the old ones and tells this page. If the
+   scene has not started yet the page reloads at once; later it shows a line to tap, and the next visit
+   has the new build either way. ?sw=0 removes the worker and its copies. */
+(function () {
+  if (!('serviceWorker' in navigator)) return;
+  var q = new URLSearchParams(location.search);
+  if (q.get('sw') === '0') {
+    navigator.serviceWorker.getRegistrations().then(function (rs) { rs.forEach(function (r) { r.unregister(); }); });
+    if (window.caches) caches.keys().then(function (ks) { ks.forEach(function (k) { if (k.indexOf('observatory-') === 0) caches.delete(k); }); });
+    window.__obsSW = 'off';
+    return;
+  }
+  // Whether a worker served this page: if none did, the worker installed now holds the build this page
+  // already runs, and there is nothing to reload for.
+  var had = !!navigator.serviceWorker.controller;
+  var TEXT = {
+    en: 'Version {v} is ready. Tap here to reload.',
+    fr: 'La version {v} est prête. Touchez ici pour recharger.',
+    es: 'La versión {v} está lista. Toca aquí para recargar.'
+  };
+  function notice(version) {
+    if (document.getElementById('obs-update')) return;
+    var lang = (navigator.language || 'en').slice(0, 2);
+    var b = document.createElement('button');
+    b.id = 'obs-update';
+    b.textContent = (TEXT[lang] || TEXT.en).replace('{v}', version);
+    b.style.cssText = 'position:fixed;left:50%;top:max(12px,env(safe-area-inset-top));transform:translateX(-50%);z-index:10;' +
+      'font:600 15px/1.3 system-ui,sans-serif;color:#0a1424;background:#e9b46a;border:0;border-radius:999px;' +
+      'padding:10px 18px;box-shadow:0 2px 12px rgba(0,0,0,.5);cursor:pointer;max-width:90vw';
+    b.addEventListener('click', function () { location.reload(); });
+    document.body.appendChild(b);
+  }
+  navigator.serviceWorker.addEventListener('message', function (e) {
+    var d = e.data || {};
+    if (d.type === 'obs-build') { window.__obsSWBuild = d; return; }
+    if (d.type !== 'obs-updated') return;
+    window.__obsUpdate = d;
+    if (!had) return;
+    if (!window.__obsRunning) { location.reload(); return; }
+    notice(d.version);
+  });
+  function register() {
+    navigator.serviceWorker.register('sw.js', { updateViaCache: 'none' }).then(function (reg) {
+      window.__obsSW = reg;
+      // Left to itself, Chrome looked for a newer worker only a minute after the page opened (62 s,
+      // pwa-test.mjs): ask at once.
+      if (had) reg.update().catch(function () {});
+      // An installed app that comes back from the background is not a new visit: ask again then.
+      document.addEventListener('visibilitychange', function () {
+        if (document.visibilityState === 'visible') reg.update().catch(function () {});
+      });
+    }).catch(function (err) { window.__obsSW = 'failed: ' + err; });
+  }
+  if (had || q.get('sw') === '1') { register(); return; }
+  // A first visit: the copy is made once the scene runs and its first shaders are compiled, not while
+  // the page is still loading the same files.
+  var wait = setInterval(function () {
+    if (!window.__obsRunning) return;
+    clearInterval(wait);
+    setTimeout(register, 15000);
+  }, 1000);
+})();
+</script>
 	</head>
 	<body>
 		<canvas id="canvas">
@@ -177,7 +249,7 @@ body {
 
 		<script src="index.js"></script>
 		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":55183160,"index.wasm":37685705},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":55185240,"index.wasm":37685705},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
 const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
 
@@ -283,3 +355,4 @@ const engine = new Engine(GODOT_CONFIG);
 		</script>
 	</body>
 </html>
+
