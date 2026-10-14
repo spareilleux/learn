@@ -27,7 +27,7 @@ Marca un módulo una vez estudiado. En **Notas**, añade una entrada fechada: lo
 
 - [ ] [CYB-001 · Correspondencia entre el modelo de sistema viable y la gobernanza de la IA](../cybernetics/cyb-001-vsm-ai-governance-mapping/) <!-- cyb-001-vsm-ai-governance-mapping -->
 - [ ] [CYB-002 · Mecanismos de amortiguación activa para controlar la oscilación entre repositorios](../cybernetics/cyb-002-active-dampening-cross-repo-oscillation/) <!-- cyb-002-active-dampening-cross-repo-oscillation -->
-- [ ] [CYB-003 · Measuring the Variety Ratio Quantitatively](../cybernetics/cyb-003-measuring-variety-ratio-quantitatively/) *(en inglés)* <!-- cyb-003-measuring-variety-ratio-quantitatively -->
+- [ ] [CYB-003 · Medir cuantitativamente el cociente de variedad](../cybernetics/cyb-003-measuring-variety-ratio-quantitatively/) <!-- cyb-003-measuring-variety-ratio-quantitatively -->
 
 ### Futurología
 
@@ -95,6 +95,8 @@ Marca un módulo una vez estudiado. En **Notas**, añade una entrada fechada: lo
 - [ ] [MUS-018 · Identificación de la tonalidad, números romanos y cadencias](../music/mus-018-key-finding-roman-numerals-cadences/) <!-- mus-018-key-finding-roman-numerals-cadences -->
 - [ ] [MUS-019 · Transposición, capotraste y equivalencia entre instrumentos](../music/mus-019-transposition-capo-cross-instrument/) <!-- mus-019-transposition-capo-cross-instrument -->
 - [ ] [MUS-020 · Clases de conjuntos, vectores interválicos, relación Z y formas primas](../music/mus-020-set-classes-interval-vectors-prime-forms/) <!-- mus-020-set-classes-interval-vectors-prime-forms -->
+- [ ] [MUS-021 · La TDF de las clases de altura](../music/mus-021-pitch-class-dft-magnitudes-phases-homometry/) <!-- mus-021-pitch-class-dft-magnitudes-phases-homometry -->
+- [ ] [MUS-022 · Los deltas de Grothendieck](../music/mus-022-grothendieck-deltas-icv-distance/) <!-- mus-022-grothendieck-deltas-icv-distance -->
 
 ### Musicología
 
@@ -121,6 +123,8 @@ Marca un módulo una vez estudiado. En **Notas**, añade una entrada fechada: lo
 
 - [ ] [PSY-001 · Introducción al compuesto fractal](../psychohistory/psy-001-intro-fractal-compounding/) <!-- psy-001-intro-fractal-compounding -->
 - [ ] [PSY-002 · Transiciones de fase de la gobernanza](../psychohistory/psy-002-governance-phase-transitions/) <!-- psy-002-governance-phase-transitions -->
+- [ ] [PSY-005 · Persistence First](../psychohistory/psy-005-persistence-baseline/) *(en inglés)* <!-- psy-005-persistence-baseline -->
+- [ ] [PSY-012 · Early-Warning Signals and Their False Alarms](../psychohistory/psy-012-early-warning-false-alarms/) *(en inglés)* <!-- psy-012-early-warning-false-alarms -->
 
 ### Semiótica
 

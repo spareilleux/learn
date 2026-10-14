@@ -7,9 +7,9 @@ sidebar:
 ---
 
 :::note[Streeling University]
-**MUS-014** · Inversiones y línea de bajo · intermedio · 45 minutes
+**MUS-014** · Inversiones y línea de bajo · intermedio · 45 minutos
 
-Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/0f7a5fd110acfc4835776d38ab1a115533467d34/state/streeling/courses/music/es/mus-014-inversions-bass-line.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/79ffad7859ce147af6d0915231332071d79d0e89/state/streeling/courses/music/es/mus-014-inversions-bass-line.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MUS-013](../../music/mus-013-root-bass-pitch-class-set/)
 :::

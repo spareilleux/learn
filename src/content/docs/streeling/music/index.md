@@ -28,3 +28,5 @@ sidebar:
 - [MUS-018 · Key Finding, Roman Numerals and Cadences — What a Count of Chords Can and Cannot Decide](mus-018-key-finding-roman-numerals-cadences/)
 - [MUS-019 · Transposition, the Capo and Cross-Instrument Equivalence — Three Kinds of Sameness](mus-019-transposition-capo-cross-instrument/)
 - [MUS-020 · Set Classes, Interval Vectors, the Z-Relation and Prime Forms — Two Packings, One Catalogue](mus-020-set-classes-interval-vectors-prime-forms/)
+- [MUS-021 · The Pitch-Class DFT — What the Magnitudes Keep, and What the Phases Add](mus-021-pitch-class-dft-magnitudes-phases-homometry/)
+- [MUS-022 · Grothendieck Deltas — What Interval-Content Distance Measures, and What It Cannot](mus-022-grothendieck-deltas-icv-distance/)

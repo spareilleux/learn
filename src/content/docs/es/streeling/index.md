@@ -21,7 +21,7 @@ Estos módulos fueron escritos por departamentos de IA y **no han sido revisados
 | [Ingeniería de audio](audio-engineering/) | 1 | 1 | 1 |
 | [Ciencia cognitiva](cognitive-science/) | 1 | 1 | 1 |
 | [Ciencias de la computación](computer-science/) | 2 | 2 | 2 |
-| [Cibernética](cybernetics/) | 3 | 2 | 2 |
+| [Cibernética](cybernetics/) | 3 | 3 | 3 |
 | [Visualización de datos](data-visualization/) | 0 | 0 | 0 |
 | [Futurología](futurology/) | 1 | 1 | 1 |
 | [Acústica de la guitarra y síntesis sonora](guitar-acoustics/) | 0 | 0 | 0 |
@@ -29,18 +29,18 @@ Estos módulos fueron escritos por departamentos de IA y **no han sido revisados
 | [Estudios de guitarra](guitar-studies/) | 2 | 2 | 2 |
 | [Teoría de la información](information-theory/) | 1 | 1 | 1 |
 | [Matemáticas](mathematics/) | 25 | 25 | 25 |
-| [Música](music/) | 17 | 17 | 17 |
+| [Música](music/) | 19 | 19 | 19 |
 | [Musicología](musicology/) | 2 | 2 | 2 |
 | [Ciencia de redes](network-science/) | 1 | 1 | 1 |
 | [Filosofía](philosophy/) | 1 | 1 | 1 |
 | [Física](physics/) | 1 | 1 | 1 |
 | [Gestión de productos y proyectos](product-management/) | 1 | 1 | 1 |
-| [Psicohistoria](psychohistory/) | 2 | 2 | 2 |
+| [Psicohistoria](psychohistory/) | 4 | 2 | 2 |
 | [Semiótica](semiotics/) | 1 | 1 | 1 |
 | [Computación visual](visual-computing/) | 0 | 0 | 0 |
 | [Músicas y lenguas del mundo](world-music-languages/) | 1 | 1 | 1 |
 
 ## Procedencia
 
-- Fuente: [`GuitarAlchemist/Demerzel` → `state/streeling/courses`](https://github.com/GuitarAlchemist/Demerzel/tree/0f7a5fd110acfc4835776d38ab1a115533467d34/state/streeling/courses) en el commit `0f7a5fd` (2026-10-04), licencia MIT.
+- Fuente: [`GuitarAlchemist/Demerzel` → `state/streeling/courses`](https://github.com/GuitarAlchemist/Demerzel/tree/79ffad7859ce147af6d0915231332071d79d0e89/state/streeling/courses) en el commit `79ffad7` (2026-10-13), licencia MIT.
 - Importado con `npm run sync:streeling`; no edites estas páginas a mano — solo `journal.md` se conserva entre sincronizaciones.

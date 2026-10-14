@@ -95,6 +95,8 @@ Tick a module once studied. Under **Notes**, add a dated entry: what I understoo
 - [ ] [MUS-018 · Key Finding, Roman Numerals and Cadences](../music/mus-018-key-finding-roman-numerals-cadences/) <!-- mus-018-key-finding-roman-numerals-cadences -->
 - [ ] [MUS-019 · Transposition, the Capo and Cross-Instrument Equivalence](../music/mus-019-transposition-capo-cross-instrument/) <!-- mus-019-transposition-capo-cross-instrument -->
 - [ ] [MUS-020 · Set Classes, Interval Vectors, the Z-Relation and Prime Forms](../music/mus-020-set-classes-interval-vectors-prime-forms/) <!-- mus-020-set-classes-interval-vectors-prime-forms -->
+- [ ] [MUS-021 · The Pitch-Class DFT](../music/mus-021-pitch-class-dft-magnitudes-phases-homometry/) <!-- mus-021-pitch-class-dft-magnitudes-phases-homometry -->
+- [ ] [MUS-022 · Grothendieck Deltas](../music/mus-022-grothendieck-deltas-icv-distance/) <!-- mus-022-grothendieck-deltas-icv-distance -->
 
 ### Musicology
 
@@ -121,6 +123,8 @@ Tick a module once studied. Under **Notes**, add a dated entry: what I understoo
 
 - [ ] [PSY-001 · Introduction to Fractal Compounding](../psychohistory/psy-001-intro-fractal-compounding/) <!-- psy-001-intro-fractal-compounding -->
 - [ ] [PSY-002 · Governance Phase Transitions](../psychohistory/psy-002-governance-phase-transitions/) <!-- psy-002-governance-phase-transitions -->
+- [ ] [PSY-005 · Persistence First](../psychohistory/psy-005-persistence-baseline/) <!-- psy-005-persistence-baseline -->
+- [ ] [PSY-012 · Early-Warning Signals and Their False Alarms](../psychohistory/psy-012-early-warning-false-alarms/) <!-- psy-012-early-warning-false-alarms -->
 
 ### Semiotics
 

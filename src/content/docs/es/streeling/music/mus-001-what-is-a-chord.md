@@ -7,9 +7,9 @@ sidebar:
 ---
 
 :::note[Streeling University]
-**MUS-001** · Fundamentos de teoría musical · principiante · 25 minutes
+**MUS-001** · Fundamentos de teoría musical · principiante · 25 minutos
 
-Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/0f7a5fd110acfc4835776d38ab1a115533467d34/state/streeling/courses/music/es/mus-001-what-is-a-chord.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/79ffad7859ce147af6d0915231332071d79d0e89/state/streeling/courses/music/es/mus-001-what-is-a-chord.es.md) · [Mi diario](../../journal/)
 :::
 
 > **Departamento de Música** | Etapa: Nigredo (Principiante) | Duración: 25 minutos

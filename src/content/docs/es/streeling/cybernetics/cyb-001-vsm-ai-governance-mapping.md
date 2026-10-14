@@ -1,15 +1,15 @@
 ---
 title: "CYB-001: Correspondencia entre el modelo de sistema viable y la gobernanza de la IA"
-description: Cibernética
+description: Fundamentos de la gobernanza cibernética — Cibernética
 sidebar:
   label: CYB-001 · Correspondencia entre el modelo de sistema viable y la gobernanza de la IA
   order: 1
 ---
 
 :::note[Streeling University]
-**CYB-001**
+**CYB-001** · Fundamentos de la gobernanza cibernética
 
-Generado por el departamento *Cibernética* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/0f7a5fd110acfc4835776d38ab1a115533467d34/state/streeling/courses/cybernetics/es/cyb-001-vsm-ai-governance-mapping.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Cibernética* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/79ffad7859ce147af6d0915231332071d79d0e89/state/streeling/courses/cybernetics/es/cyb-001-vsm-ai-governance-mapping.es.md) · [Mi diario](../../journal/)
 :::
 
 **Departamento:** Cibernética
