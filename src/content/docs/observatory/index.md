@@ -9,7 +9,7 @@ sidebar:
 ## In short
 
 - **[Open the web version](../demos/observatory/)**: in any recent browser with WebGL 2, on a computer or a phone; about 55 MB the first time, then as much again in the background for the copy the browser keeps. It installs as an app and updates itself.
-- **[Download the RTX version](https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.1.0/Observatory-RTX-0.1.0-win64.zip)** (80 MB, Windows): the same scene path traced, with DLSS. It needs a GeForce RTX card and was run on an RTX 5080 only.
+- **[Download the RTX version](https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.1.0/Observatory-RTX-0.1.0-win64.msi)** (71 MB, a Windows installer): the same scene path traced, with DLSS. It needs a GeForce RTX card and was run on an RTX 5080 only. [The zip](https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.1.0/Observatory-RTX-0.1.0-win64.zip) (80 MB) holds the same files, to run it without installing.
 - [Watch the cinematic](../demos/observatory/?cinematic=1): eighty seconds filmed in the scene.
 
 ### Your graphics card
@@ -19,11 +19,13 @@ sidebar:
 
 ### The RTX version in three steps
 
-1. Download the zip and extract all of it to a folder of your own (Documents, Desktop: not Program Files).
-2. Double-click `Observatory-RTX.cmd`. Windows may say it protected your PC, because the program is not signed: **More info**, then **Run anyway**.
+1. Download the installer and double-click it. It installs for your Windows account only, without administrator rights, into `%LOCALAPPDATA%\Programs\Observatory-RTX`, and adds **Observatory RTX** to the Start menu. Windows may say it protected your PC, because the installer is not signed: **More info**, then **Run anyway**.
+2. Start **Observatory RTX** from the Start menu.
 3. The first time, a window asks whether to fetch NVIDIA's DLSS files (203 MB, once): press **Enter**.
 
-It starts path traced. A bar of buttons at the bottom switches path tracing (**F9**), the DLSS setting (**F7**), frame generation (**F8**) and the gilding (**F6**); `README.txt`, in the zip, has the rest in English, French and Spanish.
+To remove it: **Settings → Apps → Installed apps**; NVIDIA's files go with it. A later version installs over it and keeps them. With the zip instead, extract all of it to a folder of your own and double-click `Observatory-RTX.cmd`.
+
+It starts path traced. A bar of buttons at the bottom switches path tracing (**F9**), the DLSS setting (**F7**), frame generation (**F8**) and the gilding (**F6**); `README.txt`, beside the program, has the rest in English, French and Spanish.
 
 What a GeForce RTX 5080 allows, measured on the author's machine in a window of 3840 × 2054:
 
@@ -36,9 +38,9 @@ What it does not allow at 60 frames a second:
 - path tracing at the full resolution (DLAA): 34 frames a second, 29.6 ms;
 - a third bounce of light at DLSS Quality: 55 frames a second, 18.3 ms. The program stops at two.
 
-The program aims at 60 frames a second by itself: under 56, it lowers the DLSS setting; under 20 at the lowest setting, it switches path tracing off and says so. Any other card, any other machine, Windows 10, and a zip downloaded by a browser, which Windows marks as coming from the internet, are *to verify*.
+The program aims at 60 frames a second by itself: under 56, it lowers the DLSS setting; under 20 at the lowest setting, it switches path tracing off and says so. Any other card, any other machine, Windows 10, and an installer or a zip downloaded by a browser, which Windows marks as coming from the internet, are *to verify*.
 
-The zip holds the scene and a build of [NVIDIA's fork of Godot](https://github.com/NVIDIA-RTX/godot) with path tracing and DLSS, under the MIT licence, and none of NVIDIA's DLSS files. The setup fetches those on your machine from [NVIDIA's Streamline 2.10.0 release](https://github.com/NVIDIA-RTX/Streamline/releases/tag/v2.10.0), checks the download's SHA-256 and NVIDIA's signature on each file, and keeps NVIDIA's licences beside them: they are NVIDIA's software, under NVIDIA's licences. Frame generation needs Windows 10 version 2004 or later with hardware-accelerated GPU scheduling on, [by Streamline's documentation](https://github.com/NVIDIA-RTX/Streamline/blob/v2.10.0/docs/ProgrammingGuideDLSS_G.md). NVIDIA, GeForce, RTX and DLSS are trademarks of NVIDIA Corporation, which neither sponsors nor endorses this page or the package.
+The installer and the zip hold the scene and a build of [NVIDIA's fork of Godot](https://github.com/NVIDIA-RTX/godot) with path tracing and DLSS, under the MIT licence, and none of NVIDIA's DLSS files. The setup fetches those on your machine from [NVIDIA's Streamline 2.10.0 release](https://github.com/NVIDIA-RTX/Streamline/releases/tag/v2.10.0), checks the download's SHA-256 and NVIDIA's signature on each file, and keeps NVIDIA's licences beside them: they are NVIDIA's software, under NVIDIA's licences. Frame generation needs Windows 10 version 2004 or later with hardware-accelerated GPU scheduling on, [by Streamline's documentation](https://github.com/NVIDIA-RTX/Streamline/blob/v2.10.0/docs/ProgrammingGuideDLSS_G.md). NVIDIA, GeForce, RTX and DLSS are trademarks of NVIDIA Corporation, which neither sponsors nor endorses this page or the package.
 
 ## In detail
 
