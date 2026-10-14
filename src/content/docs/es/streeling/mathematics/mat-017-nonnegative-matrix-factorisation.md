@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **MAT-017** · Factorización de matrices no negativas · intermedio · 50 minutos
 
-Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/6c6b68a97d9c731070e4ac374372fd8c2ed2291f/state/streeling/courses/mathematics/es/mat-017-nonnegative-matrix-factorisation.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/14d0e1344950b421cf19a43031ee8a681d7c3b9d/state/streeling/courses/mathematics/es/mat-017-nonnegative-matrix-factorisation.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MAT-006](../../mathematics/mat-006-svd-low-rank-approximation/), [MAT-012](../../mathematics/mat-012-iterative-optimisation/)
 :::

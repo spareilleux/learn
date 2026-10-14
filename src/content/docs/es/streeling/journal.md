@@ -123,8 +123,18 @@ Marca un módulo una vez estudiado. En **Notas**, añade una entrada fechada: lo
 
 - [ ] [PSY-001 · Introducción al compuesto fractal](../psychohistory/psy-001-intro-fractal-compounding/) <!-- psy-001-intro-fractal-compounding -->
 - [ ] [PSY-002 · Transiciones de fase de la gobernanza](../psychohistory/psy-002-governance-phase-transitions/) <!-- psy-002-governance-phase-transitions -->
+- [ ] [PSY-004 · How Large Is Large? Aggregate Predictability with Fourteen Agents](../psychohistory/psy-004-how-large-is-large/) *(en inglés)* <!-- psy-004-how-large-is-large -->
 - [ ] [PSY-005 · Primero, la persistencia](../psychohistory/psy-005-persistence-baseline/) <!-- psy-005-persistence-baseline -->
+- [ ] [PSY-006 · Estimate a Transition Matrix from Observed Counts](../psychohistory/psy-006-transition-matrix-from-counts/) *(en inglés)* <!-- psy-006-transition-matrix-from-counts -->
+- [ ] [PSY-007 · Is It a Power Law? Eighteen Citation Counts](../psychohistory/psy-007-power-law-or-not/) *(en inglés)* <!-- psy-007-power-law-or-not -->
+- [ ] [PSY-008 · Bursts Are Not Rates](../psychohistory/psy-008-bursts-are-not-rates/) *(en inglés)* <!-- psy-008-bursts-are-not-rates -->
+- [ ] [PSY-009 · Concentration](../psychohistory/psy-009-concentration-and-heavy-tails/) *(en inglés)* <!-- psy-009-concentration-and-heavy-tails -->
+- [ ] [PSY-010 · Exponential, Logistic or Steps? Fitting Growth to a Short History](../psychohistory/psy-010-growth-curves-short-series/) *(en inglés)* <!-- psy-010-growth-curves-short-series -->
+- [ ] [PSY-011 · Measurement Change or System Change? Rebaselines in the Quality Trend](../psychohistory/psy-011-measurement-change-or-system-change/) *(en inglés)* <!-- psy-011-measurement-change-or-system-change -->
 - [ ] [PSY-012 · Las señales de alerta temprana y sus falsas alarmas](../psychohistory/psy-012-early-warning-false-alarms/) <!-- psy-012-early-warning-false-alarms -->
+- [ ] [PSY-013 · Four Scores and a Trend](../psychohistory/psy-013-four-scores-and-a-trend/) *(en inglés)* <!-- psy-013-four-scores-and-a-trend -->
+- [ ] [PSY-014 · Prediction Horizons](../psychohistory/psy-014-prediction-horizons/) *(en inglés)* <!-- psy-014-prediction-horizons -->
+- [ ] [PSY-015 · Belief Contagion in a Small Population](../psychohistory/psy-015-belief-contagion-small-population/) *(en inglés)* <!-- psy-015-belief-contagion-small-population -->
 
 ### Semiótica
 
