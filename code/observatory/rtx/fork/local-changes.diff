@@ -1,0 +1,763 @@
+diff --git a/drivers/streamline/streamline.cpp b/drivers/streamline/streamline.cpp
+index 1275453..4ff4163 100644
+--- a/drivers/streamline/streamline.cpp
++++ b/drivers/streamline/streamline.cpp
+@@ -42,6 +42,7 @@ Streamline *Streamline::singleton = nullptr;
+ void Streamline::_bind_methods() {
+ 	ClassDB::bind_method(D_METHOD("set_parameter", "parameter_type", "value"), &Streamline::set_parameter);
+ 	ClassDB::bind_method(D_METHOD("get_capability", "capability_type"), &Streamline::get_capability);
++	ClassDB::bind_method(D_METHOD("get_status"), &Streamline::get_status);
+ 
+ 	BIND_ENUM_CONSTANT(STREAMLINE_PARAM_REFLEX_MODE);
+ 	BIND_ENUM_CONSTANT(STREAMLINE_PARAM_REFLEX_FRAME_LIMIT_US);
+@@ -68,6 +69,21 @@ void Streamline::register_singleton() {
+ 	GLOBAL_DEF(PropertyInfo(Variant::STRING, "rendering/streamline/dlss_ray_reconstruction_preset", PROPERTY_HINT_ENUM, "?,D,E,F,G,H,I,J,K,L,M,N,O"), "?");
+ }
+ 
++// Whether DLSS really runs: successful evaluations so far (a script reads the rate), the last
++// render and output sizes, and whether frame generation holds a viewport.
++Dictionary Streamline::get_status() {
++	Dictionary d;
++#ifdef STREAMLINE_ENABLED
++	StreamlineContext &c = StreamlineContext::get();
++	d["dlss_evaluations"] = (int64_t)c.dlss_evaluations;
++	d["dlss_rr_evaluations"] = (int64_t)c.dlss_rr_evaluations;
++	d["render_size"] = Vector2i(c.dlss_render_width, c.dlss_render_height);
++	d["output_size"] = Vector2i(c.dlss_output_width, c.dlss_output_height);
++	d["frame_generation"] = c.dlssg_viewport != sl::ViewportHandle(-1);
++#endif
++	return d;
++}
++
+ Streamline *Streamline::get_singleton() {
+ 	return singleton;
+ }
+diff --git a/drivers/streamline/streamline.h b/drivers/streamline/streamline.h
+index ef29bf8..ab195b2 100644
+--- a/drivers/streamline/streamline.h
++++ b/drivers/streamline/streamline.h
+@@ -34,6 +34,7 @@
+ #include "core/object/object.h"
+ #include "core/os/thread_safe.h"
+ #include "core/variant/binder_common.h" // IWYU pragma: keep
++#include "core/variant/dictionary.h"
+ #include "core/variant/variant.h"
+ #include "drivers/streamline/streamline_data.h"
+ 
+@@ -51,6 +52,7 @@ public:
+ 	void emit_marker(StreamlineMarkerType p_marker);
+ 	void set_parameter(StreamlineParameterType p_parameter_type, const Variant &p_value);
+ 	bool get_capability(StreamlineCapabilityType p_capability_type);
++	Dictionary get_status();
+ 
+ 	void set_internal_parameter(const char *p_key, void *p_value);
+ 	void *get_internal_parameter(StreamlineInternalParameterType p_internal_parameter_type);
+diff --git a/drivers/streamline/streamline_context.cpp b/drivers/streamline/streamline_context.cpp
+index a936093..5c1fa8c 100644
+--- a/drivers/streamline/streamline_context.cpp
++++ b/drivers/streamline/streamline_context.cpp
+@@ -33,6 +33,10 @@
+ #ifdef STREAMLINE_ENABLED
+ #ifdef _WIN32
+ #include <windows.h>
++// Local hardening: NVIDIA's signature check (streamline_load_interposer below).
++#include <sl_security.h>
++#pragma comment(lib, "wintrust.lib")
++#pragma comment(lib, "crypt32.lib")
+ #endif
+ 
+ #if defined(__clang__)
+@@ -64,6 +68,41 @@
+ #include "core/config/engine.h"
+ #include "core/config/project_settings.h"
+ 
++#ifdef _WIN32
++// Local hardening, not in NVIDIA's fork: sl.interposer.dll only from the executable's own folder,
++// and only once NVIDIA's embedded signature on it verifies, as Streamline's programming guide
++// advises; a DLL of that name elsewhere on the search path is never loaded. The Vulkan driver
++// (rendering_context_driver_vulkan.cpp) loads the interposer through this too.
++void *streamline_load_interposer() {
++	static HMODULE module = nullptr;
++	static bool tried = false;
++	if (tried) {
++		return module;
++	}
++	tried = true;
++	wchar_t path[MAX_PATH];
++	const DWORD n = GetModuleFileNameW(nullptr, path, MAX_PATH);
++	if (n == 0 || n >= MAX_PATH) {
++		return nullptr;
++	}
++	wchar_t *slash = wcsrchr(path, L'\\');
++	const wchar_t *name = L"sl.interposer.dll";
++	if (slash == nullptr || size_t(slash + 1 - path) + wcslen(name) >= MAX_PATH) {
++		return nullptr;
++	}
++	wcscpy_s(slash + 1, MAX_PATH - size_t(slash + 1 - path), name);
++	if (GetFileAttributesW(path) == INVALID_FILE_ATTRIBUTES) {
++		return nullptr;
++	}
++	if (!sl::security::verifyEmbeddedSignature(path)) {
++		ERR_PRINT("Streamline: sl.interposer.dll beside the executable is not signed by NVIDIA; it is not loaded.");
++		return nullptr;
++	}
++	module = LoadLibraryExW(path, nullptr, LOAD_LIBRARY_SEARCH_DLL_LOAD_DIR | LOAD_LIBRARY_SEARCH_SYSTEM32);
++	return module;
++}
++#endif
++
+ StreamlineContext &StreamlineContext::get() {
+ 	static StreamlineContext _context;
+ 	return _context;
+@@ -71,7 +110,7 @@ StreamlineContext &StreamlineContext::get() {
+ 
+ void StreamlineContext::load_functions(bool d3d12) {
+ #ifdef _WIN32
+-	HMODULE streamline = LoadLibraryA("sl.interposer.dll");
++	HMODULE streamline = (HMODULE)streamline_load_interposer();
+ 	if (streamline == nullptr) {
+ 		return;
+ 	}
+@@ -361,7 +400,9 @@ void StreamlineContext::initialize(bool d3d12) {
+ 
+ 	pref.renderAPI = d3d12 ? sl::RenderAPI::eD3D12 : sl::RenderAPI::eVulkan;
+ 	pref.applicationId = 0x90d07004;
+-	pref.flags = sl::PreferenceFlags::eAllowOTA | sl::PreferenceFlags::eLoadDownloadedPlugins | sl::PreferenceFlags::eDisableCLStateTracking;
++	// Local hardening: no eAllowOTA or eLoadDownloadedPlugins, so Streamline neither downloads plugins
++	// nor loads downloaded ones; the signed DLLs beside the executable are all it runs.
++	pref.flags = sl::PreferenceFlags::eDisableCLStateTracking;
+ 
+ 	if (bool(GLOBAL_GET("rendering/streamline/streamline_log"))) {
+ 		pref.logLevel = sl::LogLevel::eVerbose;
+diff --git a/drivers/streamline/streamline_context.h b/drivers/streamline/streamline_context.h
+index d28f956..abd4f0b 100644
+--- a/drivers/streamline/streamline_context.h
++++ b/drivers/streamline/streamline_context.h
+@@ -113,6 +113,14 @@ public:
+ 	sl::ViewportHandle dlssg_viewport;
+ 	int dlssg_delay = 0;
+ 
++	// Counted where dlss.cpp evaluates a feature successfully, for Streamline.get_status().
++	uint64_t dlss_evaluations = 0;
++	uint64_t dlss_rr_evaluations = 0;
++	int dlss_render_width = 0;
++	int dlss_render_height = 0;
++	int dlss_output_width = 0;
++	int dlss_output_height = 0;
++
+ #if STREAMLINE_ENABLED_VULKAN
+ 	StreamlineCapabilities enumerate_support_vulkan(void *vk_physical_device);
+ #endif
+diff --git a/drivers/vulkan/rendering_context_driver_vulkan.cpp b/drivers/vulkan/rendering_context_driver_vulkan.cpp
+index b3061ad..fbfeb90 100644
+--- a/drivers/vulkan/rendering_context_driver_vulkan.cpp
++++ b/drivers/vulkan/rendering_context_driver_vulkan.cpp
+@@ -37,6 +37,7 @@
+ 
+ #if defined(USE_VOLK) && defined(STREAMLINE_ENABLED) && defined(_WIN32)
+ #include <windows.h>
++void *streamline_load_interposer(); // drivers/streamline/streamline_context.cpp: signed, beside the executable
+ #endif
+ 
+ #include "core/config/project_settings.h"
+@@ -936,7 +937,7 @@ Error RenderingContextDriverVulkan::initialize() {
+ 
+ #if defined(USE_VOLK) && defined(STREAMLINE_ENABLED) && defined(_WIN32)
+ 	HMODULE module;
+-	module = LoadLibraryA("sl.interposer.dll");
++	module = (HMODULE)streamline_load_interposer();
+ 	if (module != nullptr) {
+ 		// note: function pointer is cast through void function pointer to silence cast-function-type warning on gcc8
+ 		PFN_vkGetInstanceProcAddr vk_getInstanceProcAddr = (PFN_vkGetInstanceProcAddr)(void (*)())GetProcAddress(module, "vkGetInstanceProcAddr");
+diff --git a/servers/rendering/renderer_rd/effects/dlss.cpp b/servers/rendering/renderer_rd/effects/dlss.cpp
+index de6aeba..b4bcacb 100644
+--- a/servers/rendering/renderer_rd/effects/dlss.cpp
++++ b/servers/rendering/renderer_rd/effects/dlss.cpp
+@@ -47,6 +47,8 @@ using namespace RendererRD;
+ // Texture layout/state constants (avoid including Vulkan/D3D12 headers here).
+ static constexpr uint64_t DLSS_VK_IMAGE_LAYOUT_SHADER_READ_ONLY = 5;
+ static constexpr uint64_t DLSS_D3D12_RESOURCE_STATE_NON_PIXEL_SR = 0x40;
++static constexpr uint64_t DLSS_VK_IMAGE_LAYOUT_GENERAL = 1; // The layout of a read-write storage image.
++static constexpr uint64_t DLSS_D3D12_RESOURCE_STATE_UNORDERED_ACCESS = 0x8;
+ static constexpr float DLSS_OPTIMAL_MODE_MAX_DISTANCE = 1000000.0f;
+ namespace RendererRD {
+ class DLSSContextInner : public DLSSContext {
+@@ -292,6 +294,8 @@ void DLSSEffect::upscale(const DLSSContext::Parameters &p_params) {
+ 	for (int i = 0; i < num_resources; i++) {
+ 		res[i].usage = RD::CALLBACK_RESOURCE_USAGE_TEXTURE_SAMPLE;
+ 	}
++	// DLSS writes its output. Declared as sampled, the graph let the tonemap read it before DLSS ran.
++	res[1].usage = RD::CALLBACK_RESOURCE_USAGE_STORAGE_IMAGE_READ_WRITE;
+ 	RD::get_singleton()->driver_callback_add((RDD::DriverCallback)DLSSEffect::_upscale_internal_graph_callback, p_params.context, VectorView<RD::CallbackResource>(res, num_resources));
+ }
+ 
+@@ -314,6 +318,10 @@ void DLSSEffect::_upscale_internal(RDD::CommandBufferID cmdid, const DLSSContext
+ 		if (context->is_d3d12) {
+ 			texture_state = DLSS_D3D12_RESOURCE_STATE_NON_PIXEL_SR;
+ 		}
++		if (bufferType == sl::kBufferTypeScalingOutputColor) {
++			// The graph hands the output over as a read-write storage image (see upscale()).
++			texture_state = context->is_d3d12 ? DLSS_D3D12_RESOURCE_STATE_UNORDERED_ACCESS : DLSS_VK_IMAGE_LAYOUT_GENERAL;
++		}
+ 		uint64_t texture_vkformat = RD::get_singleton()->get_driver_resource(RD::DriverResource::DRIVER_RESOURCE_TEXTURE_DATA_FORMAT, textureRID);
+ 		uint64_t texture_usage_flags = RD::get_singleton()->get_driver_resource(RD::DriverResource::DRIVER_RESOURCE_TEXTURE_USAGE_FLAGS, textureRID);
+ 		auto &destinationResource = resources[numResources];
+@@ -519,12 +527,22 @@ void DLSSEffect::_upscale_internal(RDD::CommandBufferID cmdid, const DLSSContext
+ 			if (result != sl::Result::eOk) {
+ 				ERR_FAIL_MSG("Failed to call streamline slEvaluateFeature for DLSS Ray Reconstruction. Result: " + String(StreamlineContext::result_to_string(result)));
+ 			}
++			StreamlineContext::get().dlss_rr_evaluations++;
++			StreamlineContext::get().dlss_render_width = p_params.internal_size.x;
++			StreamlineContext::get().dlss_render_height = p_params.internal_size.y;
++			StreamlineContext::get().dlss_output_width = context->currentDlssOptions.outputWidth;
++			StreamlineContext::get().dlss_output_height = context->currentDlssOptions.outputHeight;
+ 		} else if (StreamlineContext::get().streamline_capabilities.dlss_available) {
+ 			// Use regular DLSS
+ 			result = StreamlineContext::get().slEvaluateFeature(sl::kFeatureDLSS, *StreamlineContext::get().last_token, inputs, 1, nativeCmdlist);
+ 			if (result != sl::Result::eOk) {
+ 				ERR_FAIL_MSG("Failed to call streamline slEvaluateFeature for DLSS Super Resolution. Result: " + String(StreamlineContext::result_to_string(result)));
+ 			}
++			StreamlineContext::get().dlss_evaluations++;
++			StreamlineContext::get().dlss_render_width = p_params.internal_size.x;
++			StreamlineContext::get().dlss_render_height = p_params.internal_size.y;
++			StreamlineContext::get().dlss_output_width = context->currentDlssOptions.outputWidth;
++			StreamlineContext::get().dlss_output_height = context->currentDlssOptions.outputHeight;
+ 		}
+ 	}
+ 
+diff --git a/servers/rendering/renderer_rd/environment/gi.cpp b/servers/rendering/renderer_rd/environment/gi.cpp
+index c32dc53..161e8f2 100644
+--- a/servers/rendering/renderer_rd/environment/gi.cpp
++++ b/servers/rendering/renderer_rd/environment/gi.cpp
+@@ -3526,7 +3526,7 @@ void GI::init(SkyRD *p_sky) {
+ 		String defines = "\n#define OCT_SIZE " + itos(SDFGI::LIGHTPROBE_OCT_SIZE) + "\n";
+ 		defines += "\n#define SH_SIZE " + itos(SDFGI::SH_SIZE) + "\n";
+ 		if (p_sky->sky_use_octmap_array) {
+-			defines += "\n#define USE_OCTMAP_ARRAY\n";
++			defines += "\n#define USE_RADIANCE_OCTMAP_ARRAY\n"; // The name sdfgi_integrate.glsl tests (was USE_OCTMAP_ARRAY).
+ 		}
+ 
+ 		Vector<String> integrate_modes;
+diff --git a/servers/rendering/renderer_rd/environment/sky.cpp b/servers/rendering/renderer_rd/environment/sky.cpp
+index 8339a01..0e773fa 100644
+--- a/servers/rendering/renderer_rd/environment/sky.cpp
++++ b/servers/rendering/renderer_rd/environment/sky.cpp
+@@ -899,7 +899,8 @@ void sky() {
+ 			RD::Uniform u;
+ 			u.uniform_type = RD::UNIFORM_TYPE_TEXTURE;
+ 			u.binding = 0;
+-			u.append_id(texture_storage->texture_rd_get_default(RendererRD::TextureStorage::DEFAULT_RD_TEXTURE_CUBEMAP_BLACK));
++			// sky.glsl declares texture2D radiance (was a black cubemap).
++			u.append_id(texture_storage->texture_rd_get_default(RendererRD::TextureStorage::DEFAULT_RD_TEXTURE_BLACK));
+ 			uniforms.push_back(u);
+ 		}
+ 		{
+diff --git a/servers/rendering/renderer_rd/forward_clustered/render_raytracing.cpp b/servers/rendering/renderer_rd/forward_clustered/render_raytracing.cpp
+index 4aae528..376d7d8 100644
+--- a/servers/rendering/renderer_rd/forward_clustered/render_raytracing.cpp
++++ b/servers/rendering/renderer_rd/forward_clustered/render_raytracing.cpp
+@@ -388,6 +388,10 @@ void RenderRaytracing::cleanup_caches() {
+ 				rd->free_rid(e->replicated_idx_buffer);
+ 				e->replicated_idx_buffer = RID();
+ 			}
++			if (e->merged_inst_buffer.is_valid()) {
++				rd->free_rid(e->merged_inst_buffer);
++				e->merged_inst_buffer = RID();
++			}
+ 			merged_mm_pool.free(live[i]);
+ 		}
+ 	}
+@@ -588,6 +592,10 @@ void RenderRaytracing::prepare_frame() {
+ 				rd->free_rid(e->replicated_idx_buffer);
+ 				e->replicated_idx_buffer = RID();
+ 			}
++			if (e->merged_inst_buffer.is_valid()) {
++				rd->free_rid(e->merged_inst_buffer);
++				e->merged_inst_buffer = RID();
++			}
+ 			merged_mm_pool.free(live[i]);
+ 		}
+ 	}
+@@ -1524,7 +1532,9 @@ RTMaterialData *RenderRaytracing::process_material(RID p_material_rid, uint16_t
+ 	// Colors declared with source_color in Godot shaders are stored in sRGB;
+ 	// material_get_param returns the raw sRGB value, so we convert to linear here.
+ 	Variant albedo_var = material_storage->material_get_param(p_material_rid, "albedo");
+-	if (albedo_var.get_type() == Variant::COLOR) {
++	// A BaseMaterial3D's generated shader, not any shader with an "albedo" colour (rt_custom_albedo.py).
++	const bool rt_base_material = material_storage->material_get_shader_code_rt(p_material_rid).contains("uniform float point_size");
++	if (albedo_var.get_type() == Variant::COLOR && rt_base_material) {
+ 		Color c = ((Color)albedo_var).srgb_to_linear();
+ 		mat.albedo_color[0] = c.r;
+ 		mat.albedo_color[1] = c.g;
+@@ -1893,6 +1903,9 @@ bool RenderRaytracing::_build_merged_mm_blas(
+ 			if (old->replicated_idx_buffer.is_valid()) {
+ 				rd_local->free_rid(old->replicated_idx_buffer);
+ 			}
++			if (old->merged_inst_buffer.is_valid()) {
++				rd_local->free_rid(old->merged_inst_buffer);
++			}
+ 			merged_mm_pool.free(h);
+ 			h = RID();
+ 		}
+@@ -1993,6 +2006,19 @@ bool RenderRaytracing::_build_merged_mm_blas(
+ 		rd->set_resource_name(entry.merged_attr_buffer, "RT MM merged attr [" + itos(cache_key) + "]");
+ 	}
+ 
++	// --- Grow / allocate the per-instance data buffer: COLOR and INSTANCE_CUSTOM, 8 floats each ---
++	uint32_t merged_inst_bytes = MAX(p_mm_count, 1u) * 32;
++	if (!entry.merged_inst_buffer.is_valid() || entry.inst_capacity_bytes < merged_inst_bytes) {
++		if (entry.merged_inst_buffer.is_valid()) {
++			rd->free_rid(entry.merged_inst_buffer);
++			entry.merged_inst_buffer = RID();
++		}
++		entry.inst_capacity_bytes = merged_inst_bytes;
++		entry.merged_inst_buffer = rd->storage_buffer_create(merged_inst_bytes, {}, 0, gpu_buf_flags);
++		ERR_FAIL_COND_V(!entry.merged_inst_buffer.is_valid(), false);
++		rd->set_resource_name(entry.merged_inst_buffer, "RT MM merged inst [" + itos(cache_key) + "]");
++	}
++
+ 	// --- Grow / allocate replicated index buffer ---
+ 	if (indexed) {
+ 		uint32_t needed_idx = p_mm_count * index_count;
+@@ -2046,6 +2072,7 @@ bool RenderRaytracing::_build_merged_mm_blas(
+ 			if (indexed) {
+ 				push_buf(4, entry.replicated_idx_buffer);
+ 			}
++			push_buf(5, entry.merged_inst_buffer);
+ 		}
+ 		RID merge_uniform_set = rd->uniform_set_create(uniforms, mm_merge_shader.version_shader[merge_mode], 0, /*p_linear_pool=*/true);
+ 		ERR_FAIL_COND_V(!merge_uniform_set.is_valid(), false);
+@@ -2069,6 +2096,8 @@ bool RenderRaytracing::_build_merged_mm_blas(
+ 			uint32_t mm_stride, mm_offset;
+ 			uint32_t has_tbn;
+ 			uint32_t attr_stride_words;
++			uint32_t mm_color_words, mm_custom_words;
++			uint32_t pad0 = 0, pad1 = 0; // 16-byte push constants
+ 		} pc;
+ 
+ 		pc.src_vtx_lo = uint32_t(vtx_bda);
+@@ -2092,6 +2121,11 @@ bool RenderRaytracing::_build_merged_mm_blas(
+ 		pc.mm_offset = mm_cur_offset;
+ 		pc.has_tbn = has_tbn ? 1u : 0u;
+ 		pc.attr_stride_words = has_attr ? (attrib_stride / 4) : 0u;
++		// The instance stride: a 3x4 transform, then COLOR, then INSTANCE_CUSTOM, each if used.
++		const bool mm_colors = mesh_storage->multimesh_uses_colors(p_mm_rid);
++		const bool mm_custom = mesh_storage->multimesh_uses_custom_data(p_mm_rid);
++		pc.mm_color_words = mm_colors ? 12u : 0xFFFFFFFFu;
++		pc.mm_custom_words = mm_custom ? (mm_colors ? 16u : 12u) : 0xFFFFFFFFu;
+ 
+ 		MergeShader::Mode mode = indexed ? MergeShader::MODE_INDEXED : MergeShader::MODE_NON_INDEXED;
+ 		rd->compute_list_bind_compute_pipeline(p_compute_list, mm_merge_shader.pipeline[mode]);
+@@ -2111,6 +2145,8 @@ bool RenderRaytracing::_build_merged_mm_blas(
+ 				uint32_t mm_stride, mm_offset;
+ 				uint32_t has_tbn;
+ 				uint32_t attr_stride_words;
++				uint32_t mm_color_words, mm_custom_words;
++				uint32_t pad0 = 0, pad1 = 0;
+ 			} pc_ni;
+ 			pc_ni.src_vtx_lo = pc.src_vtx_lo;
+ 			pc_ni.src_vtx_hi = pc.src_vtx_hi;
+@@ -2124,6 +2160,8 @@ bool RenderRaytracing::_build_merged_mm_blas(
+ 			pc_ni.mm_offset = pc.mm_offset;
+ 			pc_ni.has_tbn = pc.has_tbn;
+ 			pc_ni.attr_stride_words = pc.attr_stride_words;
++			pc_ni.mm_color_words = pc.mm_color_words;
++			pc_ni.mm_custom_words = pc.mm_custom_words;
+ 			rd->compute_list_set_push_constant(p_compute_list, &pc_ni, sizeof(MergePCNonIndexed));
+ 		}
+ 
+@@ -2201,6 +2239,14 @@ bool RenderRaytracing::_build_merged_mm_blas(
+ 		}
+ 	}
+ 
++	// The instances' COLOR and INSTANCE_CUSTOM, found from a vertex index.
++	if (entry.merged_inst_buffer.is_valid()) {
++		uint64_t inst_addr = rd->buffer_get_device_address(entry.merged_inst_buffer);
++		geom.instance_data_address_lo = uint32_t(inst_addr);
++		geom.instance_data_address_hi = uint32_t(inst_addr >> 32);
++		geom.instance_vertex_count = vertex_count;
++	}
++
+ 	// Point attribute address at fully replicated attribute buffer.
+ 	if (has_attr && entry.merged_attr_buffer.is_valid()) {
+ 		geom.attribute_buffer_address = rd->buffer_get_device_address(entry.merged_attr_buffer);
+@@ -3329,6 +3375,9 @@ void RenderRaytracing::register_raytracing_buffer_dependencies(RD::RaytracingLis
+ 		if (e->replicated_idx_buffer.is_valid()) {
+ 			rd->raytracing_list_add_buffer_dependency(p_list, e->replicated_idx_buffer, /*p_writable=*/false);
+ 		}
++		if (e->merged_inst_buffer.is_valid()) {
++			rd->raytracing_list_add_buffer_dependency(p_list, e->merged_inst_buffer, /*p_writable=*/false);
++		}
+ 	}
+ }
+ 
+diff --git a/servers/rendering/renderer_rd/forward_clustered/render_raytracing.h b/servers/rendering/renderer_rd/forward_clustered/render_raytracing.h
+index 3de0e51..3ee14fa 100644
+--- a/servers/rendering/renderer_rd/forward_clustered/render_raytracing.h
++++ b/servers/rendering/renderer_rd/forward_clustered/render_raytracing.h
+@@ -84,7 +84,12 @@ struct alignas(16) RT_GeometryData {
+ 	// For deformed geometry: previous-frame position buffer used for motion vectors.
+ 	uint32_t prev_vertex_buffer_address_lo;
+ 	uint32_t prev_vertex_buffer_address_hi;
+-	uint32_t _pad[5];
++	// Merged MultiMesh: address of the instances' COLOR and INSTANCE_CUSTOM (8 floats each,
++	// 0 = none), and the vertices per instance, to find a vertex's instance.
++	uint32_t instance_data_address_lo;
++	uint32_t instance_data_address_hi;
++	uint32_t instance_vertex_count;
++	uint32_t _pad[2];
+ };
+ static_assert(sizeof(RT_GeometryData) == 128, "RT_GeometryData must be 128 bytes for std430");
+ 
+@@ -142,8 +147,8 @@ struct alignas(16) RT_LightData {
+ static_assert(sizeof(RT_LightData) == 80, "RT_LightData must be 80 bytes for std430");
+ 
+ enum {
+-	RT_LIGHTS_MAX = 64,
+-	RT_LIGHTS_FRUSTUM_BUDGET = 48,
++	RT_LIGHTS_MAX = 256, // raise_rt_lights.py: 64 dropped most of the Observatory's shelf lamps
++	RT_LIGHTS_FRUSTUM_BUDGET = 192,
+ 	RT_LIGHTS_INDIRECT_BUDGET = RT_LIGHTS_MAX - RT_LIGHTS_FRUSTUM_BUDGET,
+ };
+ 
+@@ -274,6 +279,10 @@ struct RTMergedMMEntry {
+ 	RID replicated_idx_buffer;
+ 	uint32_t idx_capacity = 0;
+ 
++	// Per-instance COLOR and INSTANCE_CUSTOM, 8 floats per instance (white and zero if unused).
++	RID merged_inst_buffer;
++	uint32_t inst_capacity_bytes = 0;
++
+ 	RID blas;
+ 	uint32_t last_mm_count = 0;
+ 	uint32_t last_surface_counter = 0;
+diff --git a/servers/rendering/renderer_rd/forward_clustered/scene_shader_raytracing.cpp b/servers/rendering/renderer_rd/forward_clustered/scene_shader_raytracing.cpp
+index 52dba13..e5063be 100644
+--- a/servers/rendering/renderer_rd/forward_clustered/scene_shader_raytracing.cpp
++++ b/servers/rendering/renderer_rd/forward_clustered/scene_shader_raytracing.cpp
+@@ -578,6 +578,10 @@ bool SceneShaderRaytracing::_preprocess_shader(RID p_material, bool p_is_procedu
+ 	bool detected_alpha_clip = false;
+ 	actions.usage_flag_pointers["ALPHA_SCISSOR_THRESHOLD"] = &detected_alpha_clip;
+ 	actions.usage_flag_pointers["ALPHA_HASH_SCALE"] = &detected_alpha_clip;
++	// A fragment() that discards needs the any-hit, where discard ignores the intersection.
++	actions.usage_flag_pointers["DISCARD"] = &detected_alpha_clip;
++	bool detected_unshaded = false;
++	actions.render_mode_flags["unshaded"] = &detected_unshaded;
+ 
+ 	HashMap<StringName, ShaderLanguage::ShaderNode::Uniform> uniform_sink;
+ 	actions.uniforms = &uniform_sink;
+@@ -592,6 +596,7 @@ bool SceneShaderRaytracing::_preprocess_shader(RID p_material, bool p_is_procedu
+ 
+ 	r_entry.is_procedural = p_is_procedural;
+ 	r_entry.uses_alpha_clip = detected_alpha_clip;
++	r_entry.unshaded = detected_unshaded;
+ 	r_entry.vertex_code = gen_code.code.has("vertex") ? gen_code.code["vertex"] : String();
+ 	r_entry.fragment_code = gen_code.code.has("fragment") ? gen_code.code["fragment"] : String();
+ 	r_entry.fragment_globals = gen_code.stage_globals[ShaderCompiler::STAGE_FRAGMENT];
+@@ -987,6 +992,10 @@ SceneShaderRaytracing::PipelineBuildTask *SceneShaderRaytracing::_make_pipeline_
+ 
+ 		// Procedural with no fragment stage: default material shading.
+ 		String fragment_code = entry.fragment_code;
++		if (entry.unshaded && !fragment_code.is_empty()) {
++			// What an unshaded surface shows is its ALBEDO: emit it, reflect nothing.
++			fragment_code += "\nemission += albedo;\nalbedo = vec3(0.0);\nmetallic = 0.0;\nspecular = 0.0;\nroughness = 1.0;\n";
++		}
+ 		if (fragment_code.is_empty() && entry.is_procedural) {
+ 			fragment_code =
+ 					"vec2 mat_uv = uv_interp * rt_mat.uv1_scale + rt_mat.uv1_offset;\n"
+@@ -1000,16 +1009,17 @@ SceneShaderRaytracing::PipelineBuildTask *SceneShaderRaytracing::_make_pipeline_
+ 					"    normal_map = sample_material_texture(rt_mat.normal_texture_idx, mat_uv, rt_mat.flags).rgb;\n"
+ 					"    normal_map_depth = rt_mat.normal_map_depth;\n"
+ 					"}\n"
++					"emission = rt_mat.emission_color * rt_mat.emission_strength;\n"
+ 					"if ((rt_mat.flags & 2u) != 0u) {\n"
+-					"    emission = sample_material_texture(rt_mat.emission_texture_idx, mat_uv, rt_mat.flags).rgb\n"
+-					"             * rt_mat.emission_color * rt_mat.emission_strength;\n"
++					"    emission *= sample_material_texture(rt_mat.emission_texture_idx, mat_uv, rt_mat.flags).rgb;\n"
+ 					"}\n";
+ 		}
+ 
+ 		{
+ 			String s = ctx.ch_template;
+ 			s = s.replace("/* RT_CUSTOM_FRAGMENT_GLOBALS */", entry.fragment_globals);
+-			s = s.replace("/* RT_CUSTOM_FRAGMENT_CODE */", fragment_code);
++			// No discard in closest-hit; the any-hit already ignored a discarded hit.
++			s = s.replace("/* RT_CUSTOM_FRAGMENT_CODE */", fragment_code.replace("discard;", "{}"));
+ 			s = s.replace("/* RT_CUSTOM_UNIFORM_MEMBERS */", uniform_members);
+ 			s = s.replace("/* RT_CUSTOM_TEXTURE_DEFINES */", tex_defines);
+ 			s = s.replace("/* RT_CUSTOM_VERTEX_FUNCTION */", vertex_function);
+@@ -1019,7 +1029,7 @@ SceneShaderRaytracing::PipelineBuildTask *SceneShaderRaytracing::_make_pipeline_
+ 		if (entry.uses_alpha_clip) {
+ 			String s = ctx.ah_template;
+ 			s = s.replace("/* RT_CUSTOM_FRAGMENT_GLOBALS */", entry.fragment_globals);
+-			s = s.replace("/* RT_CUSTOM_FRAGMENT_CODE */", fragment_code);
++			s = s.replace("/* RT_CUSTOM_FRAGMENT_CODE */", fragment_code.replace("discard;", "ignoreIntersectionEXT;"));
+ 			s = s.replace("/* RT_CUSTOM_UNIFORM_MEMBERS */", uniform_members);
+ 			s = s.replace("/* RT_CUSTOM_TEXTURE_DEFINES */", tex_defines);
+ 			s = s.replace("/* RT_CUSTOM_VERTEX_FUNCTION */", vertex_function);
+@@ -1111,6 +1121,7 @@ void SceneShaderRaytracing::_build_pipeline_worker(PipelineBuildTask *p_task) {
+ 					RD::SHADER_STAGE_CLOSEST_HIT, si.ch_src, RD::SHADER_LANGUAGE_GLSL, &error);
+ 		}
+ 		if (ch_spirv.is_empty()) {
++			ERR_PRINT(vformat("RT hit shader compile error (%s): %s", vformat("hg%d_v%x_closest_hit", i, p_task->rt_flags), error));
+ 			_dump_failed_shader(si.ch_src, vformat("hg%d_v%x_closest_hit", i, p_task->rt_flags));
+ 			p_task->new_per_hg_shaders[i] = RID();
+ 			p_task->new_ready_mask[i] = false;
+@@ -1131,6 +1142,7 @@ void SceneShaderRaytracing::_build_pipeline_worker(PipelineBuildTask *p_task) {
+ 						RD::SHADER_STAGE_ANY_HIT, si.ah_src, RD::SHADER_LANGUAGE_GLSL, &error);
+ 			}
+ 			if (ah_spirv.is_empty()) {
++				ERR_PRINT(vformat("RT hit shader compile error (%s): %s", vformat("hg%d_v%x_any_hit", i, p_task->rt_flags), error));
+ 				_dump_failed_shader(si.ah_src, vformat("hg%d_v%x_any_hit", i, p_task->rt_flags));
+ 				p_task->new_per_hg_shaders[i] = RID();
+ 				p_task->new_ready_mask[i] = false;
+@@ -1152,6 +1164,7 @@ void SceneShaderRaytracing::_build_pipeline_worker(PipelineBuildTask *p_task) {
+ 						RD::SHADER_STAGE_INTERSECTION, si.is_src, RD::SHADER_LANGUAGE_GLSL, &error);
+ 			}
+ 			if (is_spirv.is_empty()) {
++				ERR_PRINT(vformat("RT hit shader compile error (%s): %s", vformat("hg%d_v%x_intersection", i, p_task->rt_flags), error));
+ 				_dump_failed_shader(si.is_src, vformat("hg%d_v%x_intersection", i, p_task->rt_flags));
+ 				p_task->new_per_hg_shaders[i] = RID();
+ 				p_task->new_ready_mask[i] = false;
+diff --git a/servers/rendering/renderer_rd/forward_clustered/scene_shader_raytracing.h b/servers/rendering/renderer_rd/forward_clustered/scene_shader_raytracing.h
+index 8c681c5..ffc5c6c 100644
+--- a/servers/rendering/renderer_rd/forward_clustered/scene_shader_raytracing.h
++++ b/servers/rendering/renderer_rd/forward_clustered/scene_shader_raytracing.h
+@@ -363,6 +363,7 @@ public:
+ 		HashMap<StringName, ShaderLanguage::ShaderNode::Uniform> uniforms;
+ 		Vector<TextureUniformInfo> texture_uniforms; // Sampler2D packed as bindless indices after UBO
+ 		bool uses_alpha_clip = false; // Writes ALPHA_SCISSOR_THRESHOLD; needs per-HG any-hit
++		bool unshaded = false; // render_mode unshaded: ALBEDO is emitted, nothing is reflected
+ 		bool is_procedural = false; // Uses intersection shader instead of triangle geometry
+ 		uint32_t alpha_texture_buffer_offset = UINT32_MAX; // Byte offset of hint_alpha texture index in CustomMaterialUniforms UBO; UINT32_MAX if absent
+ 	};
+diff --git a/servers/rendering/renderer_rd/shaders/raytracing/multimesh_merge.glsl b/servers/rendering/renderer_rd/shaders/raytracing/multimesh_merge.glsl
+index 570a7fb..b605e8d 100644
+--- a/servers/rendering/renderer_rd/shaders/raytracing/multimesh_merge.glsl
++++ b/servers/rendering/renderer_rd/shaders/raytracing/multimesh_merge.glsl
+@@ -46,6 +46,12 @@ layout(set = 0, binding = 3) restrict readonly buffer SrcAttrBuf {
+ }
+ src_attr;
+ 
++// Per instance: COLOR (4 floats) then INSTANCE_CUSTOM (4 floats).
++layout(set = 0, binding = 5) restrict writeonly buffer DstInstBuf {
++	float v[];
++}
++dst_inst;
++
+ #ifdef MODE_INDEXED
+ layout(set = 0, binding = 4) restrict writeonly buffer DstIdxBuf {
+ 	uint v[];
+@@ -72,6 +78,10 @@ layout(push_constant, std430) uniform PC {
+ 	uint mm_offset; // mm current instance offset (motion vectors double-buffer)
+ 	uint has_tbn; // 1 if mesh has normals/tangents, 0 otherwise
+ 	uint attr_stride_words; // attribute stride in uint words (0 = mesh has no attribs)
++	uint mm_color_words; // offset of COLOR in an instance's stride, 0xFFFFFFFF if none
++	uint mm_custom_words; // offset of INSTANCE_CUSTOM in an instance's stride, 0xFFFFFFFF if none
++	uint pad0; // push constants come in 16 bytes
++	uint pad1;
+ }
+ push;
+ 
+@@ -95,6 +105,25 @@ void main() {
+ 	uint idx = gl_GlobalInvocationID.x;
+ 	uint total_v = push.vertex_count * push.instance_count;
+ 
++	// --- Per-instance section: COLOR and INSTANCE_CUSTOM ---
++	if (idx < push.instance_count) {
++		uint ib = (push.mm_offset + idx) * push.mm_stride;
++		vec4 col = vec4(1.0);
++		vec4 cus = vec4(0.0);
++		if (push.mm_color_words != 0xFFFFFFFFu) {
++			uint o = ib + push.mm_color_words;
++			col = vec4(mm_buf.v[o], mm_buf.v[o + 1u], mm_buf.v[o + 2u], mm_buf.v[o + 3u]);
++		}
++		if (push.mm_custom_words != 0xFFFFFFFFu) {
++			uint o = ib + push.mm_custom_words;
++			cus = vec4(mm_buf.v[o], mm_buf.v[o + 1u], mm_buf.v[o + 2u], mm_buf.v[o + 3u]);
++		}
++		for (uint k = 0u; k < 4u; k++) {
++			dst_inst.v[idx * 8u + k] = col[k];
++			dst_inst.v[idx * 8u + 4u + k] = cus[k];
++		}
++	}
++
+ 	// --- Per-vertex section: bake position, replicate attributes, rotate TBN ---
+ 	if (idx < total_v) {
+ 		uint inst = idx / push.vertex_count;
+diff --git a/servers/rendering/renderer_rd/shaders/raytracing/raytracing_closest_hit_common_inc.glsl b/servers/rendering/renderer_rd/shaders/raytracing/raytracing_closest_hit_common_inc.glsl
+index b3c2e4d..aaf89c5 100644
+--- a/servers/rendering/renderer_rd/shaders/raytracing/raytracing_closest_hit_common_inc.glsl
++++ b/servers/rendering/renderer_rd/shaders/raytracing/raytracing_closest_hit_common_inc.glsl
+@@ -19,7 +19,8 @@ struct HitData {
+ 	vec3 tangent; // World space.
+ 	vec3 bitangent; // World space.
+ 	vec2 uv; // Raw UV (no material scale/offset applied).
+-	vec4 color; // Vertex color (white if not present).
++	vec4 color; // Vertex color (white if not present), times a MultiMesh instance's.
++	vec4 instance_custom; // A MultiMesh instance's custom data (zero if none).
+ 	bool is_front_face;
+ 	uint geometry_idx;
+ };
+@@ -40,6 +41,16 @@ HitData compute_hit_data() {
+ #endif
+ 	h.uv = attrs.uv;
+ 	h.color = attrs.color;
++	h.instance_custom = vec4(0.0);
++#ifdef RT_CUSTOM_HIT_GROUP
++	{
++		uint ii0, ii1, ii2;
++		get_triangle_indices(geom, ii0, ii1, ii2);
++		vec4 inst_color;
++		fetch_instance_data(geom, ii0, inst_color, h.instance_custom);
++		h.color *= inst_color;
++	}
++#endif
+ 
+ 	mat3 model_rotation = mat3(gl_ObjectToWorldEXT);
+ 	mat3 normal_matrix = mat3(
+diff --git a/servers/rendering/renderer_rd/shaders/raytracing/raytracing_custom_fragment_inc.glsl b/servers/rendering/renderer_rd/shaders/raytracing/raytracing_custom_fragment_inc.glsl
+index e8fde62..1dfc7e6 100644
+--- a/servers/rendering/renderer_rd/shaders/raytracing/raytracing_custom_fragment_inc.glsl
++++ b/servers/rendering/renderer_rd/shaders/raytracing/raytracing_custom_fragment_inc.glsl
+@@ -28,6 +28,7 @@ mat4 rt_inv_aabb_xform;
+ get_aabb_compression_xforms(rt_geom, rt_aabb_xform, rt_inv_aabb_xform);
+ 
+ read_model_matrix = mat4(gl_ObjectToWorldEXT) * rt_inv_aabb_xform;
++model_normal_matrix = transpose(inverse(mat3(read_model_matrix))); // rt_model_normal_matrix.py
+ read_view_matrix = rt_view_matrix;
+ inv_view_matrix = transpose(mat4(scene_data_block.data.inv_view_matrix[0],
+ 		scene_data_block.data.inv_view_matrix[1],
+@@ -47,6 +48,7 @@ binormal = mat3(rt_world_to_object_decomp) * rt_bitangent;
+ uv_interp = rt_uv;
+ uv2_interp = rt_uv;
+ color_interp = rt_color;
++instance_custom = rt_instance_custom;
+ view = -gl_WorldRayDirectionEXT;
+ rt_front_facing = rt_front_face;
+ rt_screen_uv = vec2(gl_LaunchIDEXT.xy) / vec2(gl_LaunchSizeEXT.xy);
+diff --git a/servers/rendering/renderer_rd/shaders/raytracing/raytracing_custom_globals_inc.glsl b/servers/rendering/renderer_rd/shaders/raytracing/raytracing_custom_globals_inc.glsl
+index 2caa0dd..7047cfa 100644
+--- a/servers/rendering/renderer_rd/shaders/raytracing/raytracing_custom_globals_inc.glsl
++++ b/servers/rendering/renderer_rd/shaders/raytracing/raytracing_custom_globals_inc.glsl
+@@ -19,6 +19,7 @@ vec2 uv2_interp = vec2(0.0);
+ vec4 color_interp = vec4(1.0);
+ vec3 view = vec3(0.0, 0.0, -1.0);
+ mat4 read_model_matrix = mat4(1.0);
++mat3 model_normal_matrix = mat3(1.0); // MODEL_NORMAL_MATRIX (rt_model_normal_matrix.py)
+ mat4 read_view_matrix = mat4(1.0);
+ mat4 inv_view_matrix = mat4(1.0);
+ mat4 projection_matrix = mat4(1.0);
+@@ -30,6 +31,15 @@ vec2 rt_screen_uv = vec2(0.0);
+ vec4 rt_frag_coord = vec4(0.0);
+ float alpha_antialiasing_edge = 0.0;
+ vec2 alpha_texture_coordinate = vec2(0.0);
++vec4 instance_custom = vec4(0.0);
++// Written by a vertex() that places its geometry itself (a sky at infinity); a hit is where
++// the geometry is, so it is ignored.
++vec4 position = vec4(0.0);
++// No screen-space derivatives in a ray tracing stage: a small constant footprint, so filtered
++// procedural patterns come out sharp and the accumulation over jittered frames antialiases them.
++#define fwidth(x) (abs(x) * 0.0 + 1e-4)
++#define dFdx(x) (abs(x) * 0.0 + 1e-4)
++#define dFdy(x) (abs(x) * 0.0 + 1e-4)
+ 
+ // Screen/depth textures are unavailable in RT -- alias to bindless slot 0
+ // so shaders that reference them still compile (reads return dummy values).
+diff --git a/servers/rendering/renderer_rd/shaders/raytracing/raytracing_data_inc.glsl b/servers/rendering/renderer_rd/shaders/raytracing/raytracing_data_inc.glsl
+index 504d85d..b23e4b2 100644
+--- a/servers/rendering/renderer_rd/shaders/raytracing/raytracing_data_inc.glsl
++++ b/servers/rendering/renderer_rd/shaders/raytracing/raytracing_data_inc.glsl
+@@ -48,7 +48,12 @@ struct GeometryData {
+ 	uint prev_vertex_address_lo;
+ 	uint prev_vertex_address_hi;
+ 
+-	uint _pad[5];
++	// Merged MultiMesh: address of the instances' COLOR and INSTANCE_CUSTOM (8 floats each,
++	// 0 = none), and the vertices per instance, to find a vertex's instance.
++	uint instance_data_address_lo;
++	uint instance_data_address_hi;
++	uint instance_vertex_count;
++	uint _pad[2];
+ };
+ 
+ void get_aabb_compression_xforms(GeometryData geom, out mat4 aabb_xform, out mat4 inv_aabb_xform) {
+diff --git a/servers/rendering/renderer_rd/shaders/raytracing/raytracing_hit_inc.glsl b/servers/rendering/renderer_rd/shaders/raytracing/raytracing_hit_inc.glsl
+index fbc5d11..71f2a4f 100644
+--- a/servers/rendering/renderer_rd/shaders/raytracing/raytracing_hit_inc.glsl
++++ b/servers/rendering/renderer_rd/shaders/raytracing/raytracing_hit_inc.glsl
+@@ -130,6 +130,20 @@ vec4 fetch_color(in GeometryData geom, uint i0, uint i1, uint i2, vec3 bary) {
+ 	return bary.x * col0 + bary.y * col1 + bary.z * col2;
+ }
+ 
++/// Merged MultiMesh: the instance's COLOR and INSTANCE_CUSTOM (white and zero elsewhere).
++void fetch_instance_data(in GeometryData geom, uint i0, out vec4 r_color, out vec4 r_custom) {
++	r_color = vec4(1.0);
++	r_custom = vec4(0.0);
++	uint64_t addr = packUint2x32(uvec2(geom.instance_data_address_lo, geom.instance_data_address_hi));
++	if (addr == 0ul || geom.instance_vertex_count == 0u) {
++		return;
++	}
++	FloatBuffer d = FloatBuffer(addr);
++	uint b = (i0 / geom.instance_vertex_count) * 8u;
++	r_color = vec4(d.v[b], d.v[b + 1u], d.v[b + 2u], d.v[b + 3u]);
++	r_custom = vec4(d.v[b + 4u], d.v[b + 5u], d.v[b + 6u], d.v[b + 7u]);
++}
++
+ // ============================================================================
+ // TBN FETCHING
+ // ============================================================================
+diff --git a/servers/rendering/renderer_rd/shaders/raytracing/scene_raytracing_raygen.glsl b/servers/rendering/renderer_rd/shaders/raytracing/scene_raytracing_raygen.glsl
+index 0cf0762..6f36cbc 100644
+--- a/servers/rendering/renderer_rd/shaders/raytracing/scene_raytracing_raygen.glsl
++++ b/servers/rendering/renderer_rd/shaders/raytracing/scene_raytracing_raygen.glsl
+@@ -208,6 +208,12 @@ void main() {
+ 
+ 	vec3 sky_color = radiance_octmap_sample(sky_uv, 0.0);
+ 	sky_color *= scene_data_block.data.IBL_exposure_normalization;
++	// The ambient colour as a dome for the bounces (rt_ambient_fill.py): ambient source Color only.
++	if (get_total_bounces(ps.packed_bounces_flags) > 0u &&
++			bool(scene_data_block.data.flags & SCENE_DATA_FLAGS_USE_AMBIENT_LIGHT) &&
++			!bool(scene_data_block.data.flags & SCENE_DATA_FLAGS_USE_AMBIENT_CUBEMAP)) {
++		sky_color += scene_data_block.data.ambient_light_color_energy.rgb;
++	}
+ 
+ 	if ((RT_FLAGS & RT_FLAG_FOG_ENABLED) != 0u) {
+ 		vec3 fog_color = scene_data_block.data.fog_light_color;
+@@ -369,6 +375,7 @@ void main() {
+ 	vec3 rt_hit_pos = h.hit_pos;
+ 	vec2 rt_uv = h.uv;
+ 	vec4 rt_color = h.color;
++	vec4 rt_instance_custom = h.instance_custom;
+ 	vec3 rt_normal = h.geometry_normal;
+ 	vec3 rt_tangent = h.tangent;
+ 	vec3 rt_bitangent = h.bitangent;
+@@ -430,11 +437,12 @@ void main() {
+ 	float roughness = saturate(orm.g * mat.roughness);
+ 	float metalness = saturate(orm.b * mat.metallic);
+ 
+-	vec3 emissive = vec3(0.0);
++	// The emission colour times its energy (black unless set), times the texture if any.
++	vec3 emissive = mat.emission_color * mat.emission_strength;
+ 	if ((mat.flags & 2u) != 0u) {
+-		emissive = sample_material_texture(mat.emission_texture_idx, uv, mat.flags).rgb * mat.emission_color * mat.emission_strength;
+-		emissive *= scene_data_block.data.emissive_exposure_normalization;
++		emissive *= sample_material_texture(mat.emission_texture_idx, uv, mat.flags).rgb;
+ 	}
++	emissive *= scene_data_block.data.emissive_exposure_normalization;
+ 
+ 	// Build MaterialResult.
+ 	MaterialResult m;
+@@ -553,6 +561,12 @@ void main() {
+ 
+ 	vec3 rt_hit_pos = gl_WorldRayOriginEXT + gl_WorldRayDirectionEXT * gl_HitTEXT;
+ 	vec4 rt_color = fetch_color(geom, i0, i1, i2, bary);
++	vec4 rt_instance_custom;
++	{
++		vec4 inst_color;
++		fetch_instance_data(geom, i0, inst_color, rt_instance_custom);
++		rt_color *= inst_color;
++	}
+ 
+ #include "raytracing_custom_fragment_inc.glsl"
+ 

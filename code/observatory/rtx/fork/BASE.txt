@@ -1,0 +1,23 @@
+https://github.com/NVIDIA-RTX/godot.git, branch backport/nvidia-pt-dlss-4.6.3, commit e1157bf10f70bef34933a80a5d29f6e6788a0dc6
+local-changes.diff is `git diff` of the checkout after the patch scripts here ran:
+
+ drivers/streamline/streamline.cpp                  | 16 +++++++
+ drivers/streamline/streamline.h                    |  2 +
+ drivers/streamline/streamline_context.cpp          | 45 ++++++++++++++++++-
+ drivers/streamline/streamline_context.h            |  8 ++++
+ drivers/vulkan/rendering_context_driver_vulkan.cpp |  3 +-
+ servers/rendering/renderer_rd/effects/dlss.cpp     | 18 ++++++++
+ servers/rendering/renderer_rd/environment/gi.cpp   |  2 +-
+ servers/rendering/renderer_rd/environment/sky.cpp  |  3 +-
+ .../forward_clustered/render_raytracing.cpp        | 51 +++++++++++++++++++++-
+ .../forward_clustered/render_raytracing.h          | 15 +++++--
+ .../forward_clustered/scene_shader_raytracing.cpp  | 21 +++++++--
+ .../forward_clustered/scene_shader_raytracing.h    |  1 +
+ .../shaders/raytracing/multimesh_merge.glsl        | 29 ++++++++++++
+ .../raytracing_closest_hit_common_inc.glsl         | 13 +++++-
+ .../raytracing/raytracing_custom_fragment_inc.glsl |  2 +
+ .../raytracing/raytracing_custom_globals_inc.glsl  | 10 +++++
+ .../shaders/raytracing/raytracing_data_inc.glsl    |  7 ++-
+ .../shaders/raytracing/raytracing_hit_inc.glsl     | 14 ++++++
+ .../raytracing/scene_raytracing_raygen.glsl        | 20 +++++++--
+ 19 files changed, 262 insertions(+), 18 deletions(-)

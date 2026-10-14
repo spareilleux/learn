@@ -1,0 +1,70 @@
+The marble texture was generated locally with the SDXL 1.0 model, licensed
+under CreativeML Open RAIL++-M:
+https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/blob/main/LICENSE.md
+The book-binding grain, tooled stone relief, steel grime and the three
+stained-glass panels were generated locally with the same SDXL 1.0 model.
+
+The pier ornament was generated locally with SDXL 1.0 and ControlNet Union
+SDXL, licensed Apache-2.0:
+https://huggingface.co/xinsir/controlnet-union-sdxl-1.0
+
+The Hari Seldon statue was generated locally. Z-Image-Turbo drew the concept,
+with its Qwen3 4B text encoder, both licensed Apache-2.0:
+https://huggingface.co/Tongyi-MAI/Z-Image-Turbo
+https://huggingface.co/Qwen/Qwen3-4B
+BiRefNet (MIT) removed the background: https://github.com/ZhengPeng7/BiRefNet
+TRELLIS.2 (MIT) turned the image into a mesh:
+https://github.com/microsoft/TRELLIS.2/blob/75fbf0183001ed9876c8dbb35de6b68552ee08bd/LICENSE
+Built with DINOv3. TRELLIS.2's image encoder is Meta's DINOv3, licensed under
+the DINOv3 License:
+https://github.com/facebookresearch/dinov3/blob/ffb4bb89c6558ca3244655c25a3955d01788b732/LICENSE.md
+
+The palace gardens' images (the palace, the city's towers, the sprigs of
+leaves, the clipped box and the bark of the trees and hedges, the grain of the
+terrace's stone and paving) were generated locally with the same Z-Image-Turbo
+model. BiRefNet cut out the palace and the sprigs. Lotus-D v1.1 depth,
+licensed Apache-2.0, with Stability AI's sd-vae-ft-mse, licensed MIT, found
+the sky over the city's towers:
+https://huggingface.co/jingheya/lotus-depth-d-v1-1
+https://huggingface.co/stabilityai/sd-vae-ft-mse-original
+The trees, the clipped yews and the hedges' sprays, the self-balancing
+scooter, the balusters, pedestals and lanterns are meshes made in Blender by
+scripts written for this scene; Blender's Cycles rendered the trees' distant
+views.
+
+The people in the gardens (a courtier, a lady, a walker and a gardener, with
+no face and no costume from any film or series) are meshes made in Blender by a
+script written for this scene; a shader of our own walks them.
+
+The Imperial Palace, the parterre's clipped box and yews, the basin with its
+fountain and the city's six landmark towers are meshes made in Blender by
+scripts written for this scene; Blender's Cycles baked the palace's light and
+rendered the image of it that the canal mirrors. The city's street plan and
+the lights of its ground were drawn by a script written for this scene, which
+groups the districts and traces the boulevards with IX, the author's own
+library: https://github.com/GuitarAlchemist/ix The gardens' ground (gravel,
+crushed brick and lawn) and the towers' night facades were generated locally
+with the same Z-Image-Turbo model, from text prompts only. The fountain show's
+spray texture and the drone's hum were synthesised by scripts written for this
+scene.
+
+The Milky Way over the oculus is ESO's panorama by ESO/S. Brunier, under CC BY 4.0, re-projected,
+reduced and dimmed:
+https://www.eso.org/public/images/eso0932a/
+https://creativecommons.org/licenses/by/4.0/
+
+The frieze's moving frescoes are clips generated locally from each panel's own image with Wan 2.2
+TI2V-5B and its umT5-XXL text encoder, both licensed Apache-2.0:
+https://huggingface.co/Wan-AI/Wan2.2-TI2V-5B
+https://huggingface.co/google/umt5-xxl
+
+The sounds chosen by ear (the curio wheel's, the lift's, the hologram's, the frieze's and the
+recording's: assets/sfx/PROVENANCE.md in the pack lists them) were generated locally with Stable Audio 3
+Small SFX, Powered by Stability AI (Stability AI Community License), and its T5Gemma text encoder (Gemma
+Terms of Use). The drone's hum and the other cues were synthesised by scripts written for this scene:
+https://huggingface.co/stabilityai/stable-audio-3-small-sfx
+https://stability.ai/community-license-agreement
+https://ai.google.dev/gemma/terms
+
+The generated textures, images, sounds and the statue are assets. No model weights are included in this
+distribution.

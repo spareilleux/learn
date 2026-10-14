@@ -1,0 +1,111 @@
+<!--
+  Observatory RTX as a Windows Installer package (build-msi.ps1, NOTES.md).
+
+  The same files as the release zip, installed for the current user only: no administrator, nothing
+  under Program Files, into %LOCALAPPDATA%\Programs\Observatory-RTX, the folder the zip's README already
+  asks for ("not Program Files"). A Start menu shortcut starts Observatory-RTX.cmd, which asks the user
+  whether to fetch NVIDIA's DLSS files: the package holds none, and the user accepts NVIDIA's licences
+  there, not here. Uninstalling also removes what setup-dlss.ps1 put beside the program (the twelve
+  DLLs, nvidia-licenses\, dlss-declined.txt), so that nothing of NVIDIA's is left behind.
+
+  Built with WiX Toolset 5.0.2 (MS-RL), installed as a local .NET tool, never a global one: build-msi.ps1.
+-->
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Package Name="Observatory RTX"
+           Manufacturer="Stephane Pareilleux"
+           Version="$(var.Version)"
+           UpgradeCode="52045647-7F96-452A-9043-DB04E40FFF67"
+           Scope="perUser"
+           Language="1033">
+    <SummaryInformation Description="Observatory RTX $(var.Version): the Observatory of spareilleux.github.io/learn, native on Windows" />
+
+    <!-- A newer package replaces an older one in place; an older one refuses to go over a newer one.
+         The newer one is installed first and the older one removed after (afterInstallExecute): their
+         components share codes, so the older one's removal leaves them, and its RemoveFile rows do not
+         delete the DLSS files the user fetched. Removed first, it would make every update cost NVIDIA's
+         203 MB download again. Every file of the newer package is written (REINSTALLMODE a): the program
+         keeps Godot's file version (4.6.3) from one package to the next, and an equal version is not
+         replaced under the default rules. -->
+    <MajorUpgrade Schedule="afterInstallExecute"
+                  DowngradeErrorMessage="A newer version of Observatory RTX is already installed." />
+    <Property Id="REINSTALLMODE" Value="amus" />
+    <MediaTemplate EmbedCab="yes" CompressionLevel="high" />
+
+    <Icon Id="Observatory.ico" SourceFile="$(var.Icon)" />
+    <Property Id="ARPPRODUCTICON" Value="Observatory.ico" />
+    <Property Id="ARPURLINFOABOUT" Value="https://spareilleux.github.io/learn/observatory/" />
+    <Property Id="ARPHELPLINK" Value="https://github.com/spareilleux/learn/releases" />
+    <Property Id="ARPNOMODIFY" Value="1" />
+
+    <StandardDirectory Id="LocalAppDataFolder">
+      <Directory Id="ProgramsDir" Name="Programs">
+        <Directory Id="INSTALLFOLDER" Name="Observatory-RTX">
+          <Directory Id="NoticesDir" Name="nvidia-licenses" />
+        </Directory>
+      </Directory>
+    </StandardDirectory>
+
+    <!-- Files under the user's profile: a registry value under HKCU is each component's key path
+         (ICE38), and every folder created there is removed on uninstall (ICE64). -->
+    <!-- Files and a registry key path together: WiX cannot derive this component's code, so it is fixed here. -->
+    <Component Id="Program" Directory="INSTALLFOLDER" Guid="652F85E6-8117-45D7-B55D-38CB2969E00F">
+      <RegistryValue Root="HKCU" Key="Software\Observatory\Observatory RTX" Name="InstallFolder"
+                     Type="string" Value="[INSTALLFOLDER]" KeyPath="yes" />
+      <File Id="Exe" Source="$(var.PkgDir)\Observatory-RTX.exe" />
+      <File Id="Pck" Source="$(var.PkgDir)\Observatory-RTX.pck" />
+      <File Id="StartCmd" Source="$(var.PkgDir)\Observatory-RTX.cmd" />
+      <File Id="SetupCmd" Source="$(var.PkgDir)\Setup-DLSS.cmd" />
+      <File Id="SetupPs1" Source="$(var.PkgDir)\setup-dlss.ps1" />
+      <File Id="Readme" Source="$(var.PkgDir)\README.txt" />
+      <File Id="Licenses" Source="$(var.PkgDir)\LICENSES.txt" />
+      <File Id="GodotCopyright" Source="$(var.PkgDir)\GODOT_COPYRIGHT.txt" />
+      <!-- Written by setup-dlss.ps1 after the user said yes (or no): NVIDIA's DLLs and the answer. -->
+      <RemoveFile Id="RmInterposer" Name="sl.interposer.dll" On="uninstall" />
+      <RemoveFile Id="RmCommon" Name="sl.common.dll" On="uninstall" />
+      <RemoveFile Id="RmDlss" Name="sl.dlss.dll" On="uninstall" />
+      <RemoveFile Id="RmDlssG" Name="sl.dlss_g.dll" On="uninstall" />
+      <RemoveFile Id="RmDlssD" Name="sl.dlss_d.dll" On="uninstall" />
+      <RemoveFile Id="RmReflex" Name="sl.reflex.dll" On="uninstall" />
+      <RemoveFile Id="RmPcl" Name="sl.pcl.dll" On="uninstall" />
+      <RemoveFile Id="RmNis" Name="sl.nis.dll" On="uninstall" />
+      <RemoveFile Id="RmNgxDlss" Name="nvngx_dlss.dll" On="uninstall" />
+      <RemoveFile Id="RmNgxDlssG" Name="nvngx_dlssg.dll" On="uninstall" />
+      <RemoveFile Id="RmNgxDlssD" Name="nvngx_dlssd.dll" On="uninstall" />
+      <RemoveFile Id="RmLowLatency" Name="NvLowLatencyVk.dll" On="uninstall" />
+      <RemoveFile Id="RmDeclined" Name="dlss-declined.txt" On="uninstall" />
+      <RemoveFolder Id="RmInstallFolder" On="uninstall" />
+      <RemoveFolder Id="RmProgramsDir" Directory="ProgramsDir" On="uninstall" />
+    </Component>
+
+    <Component Id="NvidiaNotices" Directory="NoticesDir">
+      <RegistryValue Root="HKCU" Key="Software\Observatory\Observatory RTX" Name="NoticesFolder"
+                     Type="string" Value="[NoticesDir]" KeyPath="yes" />
+      <RemoveFile Id="RmNotices" Name="*" On="uninstall" />
+      <RemoveFolder Id="RmNoticesDir" On="uninstall" />
+    </Component>
+
+    <Component Id="StartMenu" Directory="ProgramMenuFolder">
+      <RegistryValue Root="HKCU" Key="Software\Observatory\Observatory RTX" Name="StartMenuShortcut"
+                     Type="integer" Value="1" KeyPath="yes" />
+      <Shortcut Id="StartShortcut" Name="Observatory RTX"
+                Description="The Observatory, native, with DLSS and path tracing"
+                Target="[INSTALLFOLDER]Observatory-RTX.cmd" WorkingDirectory="INSTALLFOLDER"
+                Icon="Observatory.ico" />
+    </Component>
+
+    <!-- Removes the key the components above write, once the last of them goes. -->
+    <Component Id="RegistryCleanup" Directory="INSTALLFOLDER">
+      <RegistryValue Root="HKCU" Key="Software\Observatory\Observatory RTX" Name="Version"
+                     Type="string" Value="$(var.Version)" KeyPath="yes" />
+      <!-- Its own key only: 0.1.0 removed the whole of HKCU\Software\Observatory. -->
+      <RemoveRegistryKey Root="HKCU" Key="Software\Observatory\Observatory RTX" Action="removeOnUninstall" />
+    </Component>
+
+    <Feature Id="Main">
+      <ComponentRef Id="Program" />
+      <ComponentRef Id="NvidiaNotices" />
+      <ComponentRef Id="StartMenu" />
+      <ComponentRef Id="RegistryCleanup" />
+    </Feature>
+  </Package>
+</Wix>

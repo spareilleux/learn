@@ -10,7 +10,7 @@ on:
   push:
     tags: ['observatory-v*']
   pull_request:
-    paths: ['code/observatory/**', '.github/workflows/observatory-native.yml']
+    paths: ['code/observatory/project/**', 'code/observatory/packaging/**', '.github/workflows/observatory-native.yml']
 
 permissions:
   contents: read
