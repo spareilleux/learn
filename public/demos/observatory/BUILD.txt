@@ -1808,6 +1808,92 @@ the frame rate, not stderr. --check-only passed on the changed script and the
 selftest under both renderers, with nothing missing, before export 2
 (rebuild-pub35-2.log).
 
+Version 43, exported 2026-10-14 03:14:29 UTC, answers what the author saw in
+version 42, and installs. The scene's version is written large on the steel
+box, over its door and across its three plain sides (scripts/steel_cube.gd
+reads scripts/build_info.gd; unshaded Label3D nodes in the group
+version_marks). Over the library wing's portal a stone canopy on two stepped
+consoles, with a gilt bead, closes the gap between the portal's architrave and
+the walkway above, where the walkway's shelves read as a bar of books in the
+air (scripts/library_wing.gd). The night city stays at every quality level:
+from level 4 it was hidden with the far woods, so a phone or a tablet that
+settled there had no city (scripts/palace_gardens.gd; from the air it is 29
+draw calls and 120,408 triangles). Past 57 times the telescope asked the
+fountain show's mirror for a field under one degree, which Camera3D.fov
+refuses, and the console printed an error at every frame; the mirror now sets
+such a field through set_perspective, as scripts/view_fit.gd does
+(scripts/fountain_show.gd). The build is installable and keeps itself up to
+date: sw.js, a service worker written for this scene
+(artpass/publish/pwa/sw.template.js, filled in by pwa.py with the build's
+stamp and the twelve files it keeps), holds a copy of the build in the browser
+and serves it from there; a newer build is a new sw.js, which the browser
+checks at each visit (updateViaCache none) and when an installed app comes
+back to the foreground; the new worker fetches each file revalidated with the
+server (cache no-cache), so a stale copy in the browser's own cache cannot be
+taken, replaces the old copy and tells the page, which reloads at once if the
+scene has not started and otherwise shows a line to tap. manifest.webmanifest
+and its icons (icon-192.png and icon-512.png, the project's icon.svg drawn by
+Godot: artpass/publish/pwa/make_icons.gd) make it installable. On a first
+visit the page registers the worker once the scene has run for 15 seconds;
+?sw=0 removes the worker and its copy. Every other script is version 42's,
+scripts/observatory.gd and scripts/quality.gd version 28's.
+index.pck is now 55,185,240 bytes, 2,080 more than version 42's; index.html
+adds the manifest's link and the worker's registration
+(artpass/publish/pwa/head.html) to that size, and index.wasm and index.js are
+unchanged. The export published is the fourth of this version. The first
+packed version 42's three exported icons, which build-pub36.ps1's copy of the
+old tree had taken along (robocopy matched its excluded folders only with
+backslashes); the second, from an empty out/ (reexport-pub36.ps1), printed at
+every load that main.tscn named the steel box's script by a uid it no longer
+had, since the build had given the script the Foundation copy's uid while the
+converted scene kept the web tree's; the third, with the web tree's uid put
+back, came out byte for byte the second, Godot not having read the restored
+file again; the fourth, the file touched first, prints no warning when Godot
+4.6.1 loads its pack (--main-pack, as version 42's).
+Version 43's web tests, on export 4 in headless Chromium 153 (ANGLE, Direct3D
+11, RTX 5080), served as GitHub Pages serves it: version 42's eleven tests
+(webtests-pub35.ps1 on a copy of the export without sw.js, so that they ran as
+version 42's did), all exit 0 and all reporting version 43 (built 1791947669):
+the troupe, the curio wheel, the drone at a computer's size and a phone's
+(three pointer-lock refusals at the computer's size, as in version 42:
+headless Chrome grants no pointer lock), the sound, the hums (no silence), the
+gardens, the ride, the redesign's own cases at both sizes, now with the
+telescope at 100 times on each, and the start and the gardens on Chrome's CPU
+renderer. The console stayed empty in every case of the redesign's test, the
+telescope at 100 times included, where version 42 printed an error at every
+frame; frames held 16.7 ms median once started; the first start in an empty
+profile took 27.7 s (version 42: 25.6 s), later ones about 6 s. The
+installable build (artpass/publish/pwa/pwa-test.mjs, four steps on one profile
+against a local server that sends Pages' max-age=600 and ETags): first visit,
+the worker registered 13 to 15 s after the scene ran and kept the twelve files
+within a second, with no error from Chrome's manifest check and no
+installability error; offline, the server stopped, the scene started from the
+copy in 6.6 to 8.5 s; on an update, the page opened on the old copy and
+offered "Version 43 is ready. Tap here to reload." about 62 s later (the
+download itself takes about 2 s; what the minute is spent on was not
+established), a tap brought version 43 and only its cache remained; while the
+scene runs, the line came in French ("La version 42 est prête. Touchez ici
+pour recharger.") 2.2 s after the update was asked for, with no reload. No
+console error and no exception. The first visit downloads the build twice: the
+worker's install got every file again with a 200 and Chrome sent no
+If-None-Match (artpass/publish/pwa/revalidate-probe.mjs), about 55 MB more on
+Pages, once. Not tested: a real phone or tablet, Safari, Firefox, and the
+update on Pages itself, which the next version will show.
+Version 43's native checks, on export 4's build tree with stock Godot 4.6.1:
+--check-only on every changed script, and the selftest under Compatibility and
+Forward+ (missing: none); the pack itself loaded by Godot (--main-pack) with
+no warning, where exports 2 and 3 printed the invalid uid; the passage and the
+box shot windowed under both renderers (artpass/foundation/transitionshots.gd:
+four version marks reading v43, the canopy over the portal); and sixteen of
+version 42's regression runs that touch what this version changes
+(regress-pub36.ps1 -Only): both selftests, the walk and the box's collision,
+the touch controls, the adaptive quality cold and at 3 frames a second, the
+bays, the crowd, the walk out onto the terrace, the walk into the wing, the
+telescope under both renderers, the vestibule's mirror, the Foundation views
+under both renderers (the city drawn from the air over the wing) and the
+fountain show: all sixteen exit 0 with no script error. The other eighty of
+version 42's runs were not repeated.
+
 Native Compatibility GPU time, RTX 5080, 1600x900, 240 frames per view: 0.44 to
 0.52 ms for the previous web scene, 0.64 to 1.44 ms with the detail pass; up to
 1.55 million primitives in the overview, against 0.46 million before. With the
@@ -1824,7 +1910,7 @@ scripts/fly_camera.gd 2e5cdd15ca7bdcfa30ec129e354a309f3ff7296f6fbf54ac144984ed9a
 scripts/capture.gd 52ea2b5e40db2f1f4cdbd7658074ef60bd117e1f4110c1b8995590a4196748d0
 scripts/observatory.gd cdbab5d96d8679c893602ca4e67064a899982642f58e4c655975e0f2e97acbec
 scripts/course_library.gd 18dcf297f5576a2c8e4bd6843e6f69e94dd27ba38261954df7611659ffb04387
-scripts/steel_cube.gd e580df5ce6262f4f15b992cde21abb42f553f13029f54cc6bc489f6ee4bbf5ac
+scripts/steel_cube.gd fee81a60fe3050a017e60d099a3bceb3555b502eb3e09d0d83febaeafe3e7773
 scripts/seldon_statue.gd f0261780bbad9dd047e27ecaaf07e1dc72604a52edc197564da50c8376861acd
 scripts/touch_controls.gd f4d4076608a731c8d0e58c6eea6ecb5a981655279589b45ab8ff34a666fa394c
 scripts/walk_physics.gd 16ede04a9ac91cd80ae8a03373a4627ca5fcb2f719dec4edee64543617661919
@@ -1879,7 +1965,7 @@ assets/fresco_panel.gdshader e9c20421cf254119e9d85da22a70bb8a965cee0be524f5c95b2
 assets/fresco_dust.gdshader 9d63b02079689cd0205a9d469c743645d4fac1ccfff21a3d0326f36a3062341c
 assets/fresco_atlas.png cccc2917f794f42517ee001392802ec6828acc747f585018e49349474b1638fc
 assets/fresco_motion.png aa7148be2c28917ddae5d92b7a155c46fe024460c67e919106be23782fdf7822
-scripts/build_info.gd 903ab96a1ef4887b23e9937ea5fbc415de36687564aa2bc218d5a20e004e8d54
+scripts/build_info.gd 22551bb34808bcd3e26901fa84ea710b3993c6ee23fed8c7073696a0054627b3
 scripts/sfx_takes.gd 069f573898d4c4ad48fde9f1f592dba0974433b1881d7ed045d6797c3c3a0ac6
 assets/sfx/curio_wheel-beep.wav a1d999098afbd222622a6c4625ee16bb9788059c6fe37901067d9cd239f5ec8c
 assets/sfx/curio_wheel-chime.wav 6b580b1e57194c1f84183044c367bcab9d07e3d4c876da3dee5736ba78298c9e
@@ -1904,7 +1990,7 @@ scripts/tars_ensemble.gd b16f31ba0bb92eb86b2296a64ff476e59cb3db11a6f800b19db402e
 assets/tars_ensemble_tracks.tres 6c2be9a6fc350c02f8dd19e6a768ed911d11ebd741d4c5939bb585a84171b272
 assets/tars_ensemble_jig_tracks.tres d7604ba2a5dc3e61fb29441d145d0d98703193c516d429a754e9c0e4949383a0
 scripts/web_loop.gd cd89961d3e7e5d8275d67ead034eb2184587810dc710316c5377f58a16e35cbb
-scripts/palace_gardens.gd a36a071647b14c4621499a023f3efd6cf0abab07b851c7db21d383752cb570ad
+scripts/palace_gardens.gd 18f29af076b54f3e6cdef31987c34dac6dc2c9f57f814221dca59762bdd11186
 scripts/segway.gd 1f90a984edc35ba2301ece1819776eaf1dfea29e56eefce5939729c59f34a972
 assets/hall_env.gdshaderinc f4ee2ad1a4b5af0839924033507d492b59ce003baad50b35f9afc4f645b3bae5
 assets/bay_glass.gdshader 5cf98fa61a8a189d25abf4e990d533dc7bb7c696d6a761625f555b4f13ac9fd5
@@ -1970,11 +2056,11 @@ assets/garden_tub_iron.obj 1a46aaa8a55ed6c5bbf28711160fb4b81b2b84464fe929443a9ba
 assets/steel_portal_gaia.glb ad907ea7e03ddb15513ad460775844d4335cf6914330be766b5fa7f28107055e
 assets/steel_portal_gaia_steel_brushed_metalrough.png 5ff2536465d123be778e64d362517af8e02a2a0cc5793b84955b25be33971496
 assets/steel_portal_gaia_steel_brushed_normal.png 37132094bf4d642dd486743dbd57ff2489afeb6f9e2aeaffe8f6c3f42395705c
-scripts/library_wing.gd f678665a5de95f981e761b9d8065326699ecef1e4906cf87391a32e4640ad25b
+scripts/library_wing.gd 0e1dcf2335054c8b6840eac4394e9722c2d39b426084aa6149324b6f79338656
 scripts/night_city.gd 16042e9cd3a4e9accce27f7e03653f38511443a6bd6b2c1220d4b46098a1be96
 scripts/telescope.gd 28fd1dbc68a707731fdd6426ae14e392c595e385ab47deab799479598136e71f
 scripts/parterre_layout.gd c9908b4048cbb44deb36c16371b90c7ad0cf5f16ca296ca3f38c0c406045d6bf
-scripts/fountain_show.gd 18a27a58feeb2191b57b085f9011f6add92100989a77060a24d6c0d2769a5754
+scripts/fountain_show.gd f6219161da64efa2f8cc243f265815e2ccab54de7c626a939282f0ea1e1fc5b6
 assets/night_city.gdshader 543b355ba37b6256e76c00932cec089af2ae9ca9f26921155a2f9cfb0d150588
 assets/wing_carpet.gdshader 054a506e8c3a5c0671c02cdcfd1875ff232541d6c77494efb0058c10edf17a0c
 assets/wing_interior.gdshader c36244828b515ef83ac144beef36e41719c98d9e6b60481cc5dacdf474a8c217
@@ -2006,9 +2092,13 @@ assets/palace/palace_light_web.png ab2212fc7520265c29656cd65fd0aad32131b69d9bf9a
 assets/palace/palace_mirror.png 83e5eb4ba6ae5a98cad0a5dfd5c38f81368cd7b34d745d211634009ff7f2c719
 
 SHA-256 output files:
-index.pck a4b3931e5396185b1817ea84c89461443c412bca43d818ff4e333169cebb613f
+index.pck db0471ad9441c93f1383a6ea04c8a051cad18cf53af6659676ec6243c36e925e
 index.wasm 99962b29677e42f3ba0258bd90fdc52ad90295954c4473e816ad02cfe5ff1d4f
 index.js e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981
+sw.js 1bf5841d7d41b242e1502abad0720fa675f25da998db590e47553f255814dfed
+manifest.webmanifest 73676491cb7a7ea9befd37c4e09561739497a6dae9299c344b7941adecb54210
+icon-192.png 3d731897f85db4062648a71925e24449e608db622cb5d0c34cec70636eaab459
+icon-512.png 11e906507b24dfd9dae51d65b93d7027828f41a8aaab6a8c378b92e39e1da10b
 
 This directory contains a prebuilt binary export. Re-export only for deliberate
 scene changes. A scene re-export leaves the engine files (index.wasm, index.js)
