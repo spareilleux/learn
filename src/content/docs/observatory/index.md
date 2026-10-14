@@ -9,7 +9,7 @@ sidebar:
 ## In short
 
 - **[Open the web version](../demos/observatory/)**: in any recent browser with WebGL 2, on a computer or a phone; about 55 MB the first time, then as much again in the background for the copy the browser keeps. It installs as an app and updates itself.
-- **[Download the RTX version](https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.1.0/Observatory-RTX-0.1.0-win64.msi)** (71 MB, a Windows installer): the same scene path traced, with DLSS. It needs a GeForce RTX card and was run on an RTX 5080 only. [The zip](https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.1.0/Observatory-RTX-0.1.0-win64.zip) (80 MB) holds the same files, to run it without installing.
+- **[Download the RTX version](https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.0/Observatory-RTX-0.2.0-win64.msi)** (71 MB, a Windows installer): the same scene path traced, with DLSS. It needs a GeForce RTX card and was run on an RTX 5080 only. [The zip](https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.0/Observatory-RTX-0.2.0-win64.zip) (80 MB) holds the same files, to run it without installing.
 - [Watch the cinematic](../demos/observatory/?cinematic=1): eighty seconds filmed in the scene.
 
 ### Your graphics card
@@ -23,20 +23,22 @@ sidebar:
 2. Start **Observatory RTX** from the Start menu.
 3. The first time, a window asks whether to fetch NVIDIA's DLSS files (203 MB, once): press **Enter**.
 
-To remove it: **Settings → Apps → Installed apps**; NVIDIA's files go with it. A later version installs over it and keeps them. With the zip instead, extract all of it to a folder of your own and double-click `Observatory-RTX.cmd`.
+To remove it: **Settings → Apps → Installed apps**; NVIDIA's files go with it. A later version is meant to install over it and keep them: tested from 0.1.0 to a test package, not yet to 0.2.0 (*to verify*). With the zip instead, extract all of it to a folder of your own and double-click `Observatory-RTX.cmd`.
 
-It starts path traced. A bar of buttons at the bottom switches path tracing (**F9**), the DLSS setting (**F7**), frame generation (**F8**) and the gilding (**F6**); `README.txt`, beside the program, has the rest in English, French and Spanish.
+It starts path traced. A column of buttons on the left, each with a line that says what it does, switches path tracing (**F9**), the DLSS setting (**F7**), frame generation (**F8**) and the light's bounces, one to four (**F5**). **Max out** (**F6**) puts every setting at its best for the picture, without holding 60 frames a second; pressed again, it goes back to the start. Three more buttons switch what moves: glyphs falling down the green beams of light, drawn by a shader from strokes of its own (no font, no image), the departments' banners as cloth in a draught, and a little dust in the lamps' light. `README.txt`, beside the program, has the rest in English, French and Spanish.
 
 What a GeForce RTX 5080 allows, measured on the author's machine in a window of 3840 × 2054:
 
-- path tracing with DLSS Ray Reconstruction at DLSS Quality, 2562 × 1371 rendered: 60 frames a second, with 14.6 to 15.6 ms of GPU a frame in the hall and the wing, 8 to 10 ms outdoors;
+- path tracing with DLSS Ray Reconstruction at DLSS Quality, 2562 × 1371 rendered: 60 frames a second, 15.3 ms of GPU a frame at the start view with everything that moves (version 0.1.0: 14.6 to 15.6 ms in the hall and the wing, 8 to 10 ms outdoors);
 - DLSS Frame Generation, which adds frames between the rendered ones;
-- rasterized, DLAA (DLSS as anti-aliasing alone, at the full resolution): 60 frames a second, 10.1 ms.
+- rasterized, DLAA (DLSS as anti-aliasing alone, at the full resolution): 60 frames a second, 10.0 ms;
+- without NVIDIA's files, MSAA 4x with TAA: 60 frames a second, 8.2 ms. Measured while the eye turns, MSAA alone flickers about ten times more, even at 8x.
 
 What it does not allow at 60 frames a second:
 
-- path tracing at the full resolution (DLAA): 34 frames a second, 29.6 ms;
-- a third bounce of light at DLSS Quality: 55 frames a second, 18.3 ms. The program stops at two.
+- path tracing at the full resolution (DLAA): 34 frames a second, 29.6 ms (version 0.1.0);
+- a third bounce of light at DLSS Quality: 55 frames a second, 18.3 ms (version 0.1.0). The program starts at two;
+- **Max out**, path traced DLAA with three bounces and frame generation: 23 frames rendered a second, about 46 shown, 40.6 ms.
 
 The program aims at 60 frames a second by itself: under 56, it lowers the DLSS setting; under 20 at the lowest setting, it switches path tracing off and says so. Any other card, any other machine, Windows 10, and an installer or a zip downloaded by a browser, which Windows marks as coming from the internet, are *to verify*.
 
