@@ -22,6 +22,7 @@ $extra = @(Get-ChildItem $ExportDir -File | Where-Object { $files -notcontains $
 if ($extra.Count) { throw "unexpected files in ${ExportDir}: $($extra.Name -join ', ')" }
 
 New-Item -ItemType Directory -Force $Out | Out-Null
+$Out = (Resolve-Path $Out).Path  # msiexec does not run in this folder: a relative TARGETDIR fails with 1603
 $Msi = Join-Path $Out "Observatory-$Version-windows-x64.msi"
 & $Wix build (Join-Path $Here 'Observatory.wxs') -arch x64 -d "ExportDir=$((Resolve-Path $ExportDir).Path)" -d "Version=$Version" -d "Icon=$(Join-Path $Here '..\icons\observatory.ico')" -o $Msi
 if ($LASTEXITCODE -ne 0) { throw "wix build exit $LASTEXITCODE" }
@@ -35,7 +36,10 @@ if ($LASTEXITCODE -ne 0) { throw "ICE validation exit $LASTEXITCODE" }
 $Admin = Join-Path $Out "admin-$Version"
 if (Test-Path $Admin) { throw "$Admin exists" }
 $p = Start-Process msiexec.exe -ArgumentList @('/a', "`"$((Resolve-Path $Msi).Path)`"", '/qn', "TARGETDIR=`"$Admin`"", '/l*v', "`"$Out\admin-$Version.log`"") -Wait -PassThru
-if ($p.ExitCode -ne 0) { throw "msiexec /a exit $($p.ExitCode)" }
+if ($p.ExitCode -ne 0) {
+  Get-Content "$Out\admin-$Version.log" -ErrorAction SilentlyContinue | Select-String -Pattern 'error|Return value 3' | Select-Object -First 20
+  throw "msiexec /a exit $($p.ExitCode)"
+}
 $bad = 0
 foreach ($f in $files) {
   $got = @(Get-ChildItem $Admin -Recurse -File -Filter $f)

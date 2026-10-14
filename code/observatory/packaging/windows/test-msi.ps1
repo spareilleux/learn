@@ -10,6 +10,7 @@ $Dir = "$env:LOCALAPPDATA\Programs\Observatory"
 $Lnk = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Observatory.lnk"
 $Reg = 'HKCU:\Software\spareilleux\Observatory'
 New-Item -ItemType Directory -Force $Work | Out-Null
+$Work = (Resolve-Path $Work).Path  # msiexec's logs: it does not run in this folder
 $fail = [System.Collections.Generic.List[string]]::new()
 
 function Get-Entries {
