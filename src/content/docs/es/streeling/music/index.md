@@ -28,3 +28,5 @@ sidebar:
 - [MUS-018 · Identificación de la tonalidad, números romanos y cadencias — Lo que un recuento de acordes puede decidir y lo que no](mus-018-key-finding-roman-numerals-cadences/)
 - [MUS-019 · Transposición, capotraste y equivalencia entre instrumentos — Tres clases de identidad](mus-019-transposition-capo-cross-instrument/)
 - [MUS-020 · Clases de conjuntos, vectores interválicos, relación Z y formas primas — Dos compactaciones, un catálogo](mus-020-set-classes-interval-vectors-prime-forms/)
+- [MUS-021 · La TDF de las clases de altura — Lo que conservan los módulos y lo que añaden las fases](mus-021-pitch-class-dft-magnitudes-phases-homometry/)
+- [MUS-022 · Los deltas de Grothendieck — Lo que mide la distancia de contenido interválico, y lo que no puede ver](mus-022-grothendieck-deltas-icv-distance/)

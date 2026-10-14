@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **PSY-002** · Théorie des transitions de phase : quand les systèmes de gouvernance changent de régime · intermédiaire · 35 minutes
 
-Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/0f7a5fd110acfc4835776d38ab1a115533467d34/state/streeling/courses/psychohistory/fr/psy-002-governance-phase-transitions.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/79ffad7859ce147af6d0915231332071d79d0e89/state/streeling/courses/psychohistory/fr/psy-002-governance-phase-transitions.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PSY-001](../../psychohistory/psy-001-intro-fractal-compounding/)
 :::
@@ -201,7 +201,7 @@ Chaque ligne horizontale est une frontière de régime choisie, pas une frontiè
 ## Pour aller plus loin
 
 - [PSY-001 : Introduction à la capitalisation fractale](../../psychohistory/psy-001-intro-fractal-compounding/) — prérequis sur D_c et ERGOL/LOLLI
-- [CYB-003 : Mesurer quantitativement le ratio de variété](../../cybernetics/cyb-003-measuring-variety-ratio-quantitatively/) *(en anglais)* (en anglais) — le paramètre d'ordre candidat
+- [CYB-003 : Mesurer quantitativement le ratio de variété](../../cybernetics/cyb-003-measuring-variety-ratio-quantitatively/) (en anglais) — le paramètre d'ordre candidat
 - [CYB-001 : Correspondance entre le VSM et la gouvernance de l'IA](../../cybernetics/cyb-001-vsm-ai-governance-mapping/) — prérequis structurels
 - Mécanique statistique des transitions de phase (théorie de Landau, paramètres d'ordre, exposants critiques)
 - Fondation d'Asimov — la psychohistoire prédit des tendances agrégées, pas des événements individuels

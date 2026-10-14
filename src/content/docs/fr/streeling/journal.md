@@ -27,7 +27,7 @@ Coche un module une fois étudié. Sous **Notes**, ajoute une entrée datée : c
 
 - [ ] [CYB-001 · Correspondance entre le modèle du système viable et la gouvernance de l'IA](../cybernetics/cyb-001-vsm-ai-governance-mapping/) <!-- cyb-001-vsm-ai-governance-mapping -->
 - [ ] [CYB-002 · Mécanismes d'amortissement actif pour maîtriser l'oscillation entre dépôts](../cybernetics/cyb-002-active-dampening-cross-repo-oscillation/) <!-- cyb-002-active-dampening-cross-repo-oscillation -->
-- [ ] [CYB-003 · Measuring the Variety Ratio Quantitatively](../cybernetics/cyb-003-measuring-variety-ratio-quantitatively/) *(en anglais)* <!-- cyb-003-measuring-variety-ratio-quantitatively -->
+- [ ] [CYB-003 · Mesurer quantitativement le ratio de variété](../cybernetics/cyb-003-measuring-variety-ratio-quantitatively/) <!-- cyb-003-measuring-variety-ratio-quantitatively -->
 
 ### Futurologie
 
@@ -95,6 +95,8 @@ Coche un module une fois étudié. Sous **Notes**, ajoute une entrée datée : c
 - [ ] [MUS-018 · Identification de la tonalité, chiffres romains et cadences](../music/mus-018-key-finding-roman-numerals-cadences/) <!-- mus-018-key-finding-roman-numerals-cadences -->
 - [ ] [MUS-019 · Transposition, capodastre et équivalence entre instruments](../music/mus-019-transposition-capo-cross-instrument/) <!-- mus-019-transposition-capo-cross-instrument -->
 - [ ] [MUS-020 · Classes d'ensembles, vecteurs d'intervalles, relation Z et formes premières](../music/mus-020-set-classes-interval-vectors-prime-forms/) <!-- mus-020-set-classes-interval-vectors-prime-forms -->
+- [ ] [MUS-021 · La TFD des classes de hauteurs](../music/mus-021-pitch-class-dft-magnitudes-phases-homometry/) <!-- mus-021-pitch-class-dft-magnitudes-phases-homometry -->
+- [ ] [MUS-022 · Les deltas de Grothendieck](../music/mus-022-grothendieck-deltas-icv-distance/) <!-- mus-022-grothendieck-deltas-icv-distance -->
 
 ### Musicologie
 
@@ -121,6 +123,8 @@ Coche un module une fois étudié. Sous **Notes**, ajoute une entrée datée : c
 
 - [ ] [PSY-001 · Introduction à la Capitalisation Fractale](../psychohistory/psy-001-intro-fractal-compounding/) <!-- psy-001-intro-fractal-compounding -->
 - [ ] [PSY-002 · Les transitions de phase de la gouvernance](../psychohistory/psy-002-governance-phase-transitions/) <!-- psy-002-governance-phase-transitions -->
+- [ ] [PSY-005 · Persistence First](../psychohistory/psy-005-persistence-baseline/) *(en anglais)* <!-- psy-005-persistence-baseline -->
+- [ ] [PSY-012 · Early-Warning Signals and Their False Alarms](../psychohistory/psy-012-early-warning-false-alarms/) *(en anglais)* <!-- psy-012-early-warning-false-alarms -->
 
 ### Sémiotique
 

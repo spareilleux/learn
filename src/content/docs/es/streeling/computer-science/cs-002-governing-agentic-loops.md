@@ -7,9 +7,9 @@ sidebar:
 ---
 
 :::note[Streeling University]
-**CS-002** · IA agéntica — Sistemas multiagente, uso de herramientas, bucles de razonamiento · intermedio · 25 minutes
+**CS-002** · IA agéntica — Sistemas multiagente, uso de herramientas, bucles de razonamiento · intermedio · 25 minutos
 
-Generado por el departamento *Ciencias de la computación* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/0f7a5fd110acfc4835776d38ab1a115533467d34/state/streeling/courses/computer-science/es/cs-002-governing-agentic-loops.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ciencias de la computación* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/79ffad7859ce147af6d0915231332071d79d0e89/state/streeling/courses/computer-science/es/cs-002-governing-agentic-loops.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: Patrones de orquestación multiagente
 :::

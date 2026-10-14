@@ -7,9 +7,9 @@ sidebar:
 ---
 
 :::note[Streeling University]
-**PSY-002** · Teoría de las transiciones de fase: cuándo los sistemas de gobernanza cambian de régimen · intermedio · 35 minutes
+**PSY-002** · Teoría de las transiciones de fase: cuándo los sistemas de gobernanza cambian de régimen · intermedio · 35 minutos
 
-Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/0f7a5fd110acfc4835776d38ab1a115533467d34/state/streeling/courses/psychohistory/es/psy-002-governance-phase-transitions.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/79ffad7859ce147af6d0915231332071d79d0e89/state/streeling/courses/psychohistory/es/psy-002-governance-phase-transitions.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PSY-001](../../psychohistory/psy-001-intro-fractal-compounding/)
 :::
@@ -201,7 +201,7 @@ Usando el estado actual de la gobernanza de Demerzel:
 ## Lecturas adicionales
 
 - [PSY-001: Introducción a la capitalización fractal](../../psychohistory/psy-001-intro-fractal-compounding/): requisito previo sobre D_c y ERGOL/LOLLI
-- [CYB-003: Medir cuantitativamente el cociente de variedad](../../cybernetics/cyb-003-measuring-variety-ratio-quantitatively/) *(en inglés)* (en inglés): el parámetro de orden candidato
+- [CYB-003: Medir cuantitativamente el cociente de variedad](../../cybernetics/cyb-003-measuring-variety-ratio-quantitatively/) (en inglés): el parámetro de orden candidato
 - [CYB-001: Correspondencia entre el VSM y la gobernanza de la IA](../../cybernetics/cyb-001-vsm-ai-governance-mapping/): requisitos previos estructurales
 - Mecánica estadística de las transiciones de fase (teoría de Landau, parámetros de orden, exponentes críticos)
 - Fundación de Asimov: la psicohistoria predice tendencias agregadas, no sucesos individuales
