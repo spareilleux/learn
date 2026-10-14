@@ -1,4 +1,4 @@
-OBSERVATORY RTX 0.1.1
+OBSERVATORY RTX 0.2.0
 The Observatory of https://spareilleux.github.io/learn/observatory/ (version 43 of the scene),
 native on Windows, with DLSS, frame generation and path tracing.
 
@@ -14,7 +14,7 @@ What you need
   - 230 MB of disk, and an internet connection the first time.
 
 Start
-  1. Double-click Observatory-RTX-0.1.1-win64.msi. It installs for your account only, without
+  1. Double-click Observatory-RTX-0.2.0-win64.msi. It installs for your account only, without
      administrator rights, into %LOCALAPPDATA%\Programs\Observatory-RTX, and adds Observatory RTX to
      the Start menu. (The zip holds the same files: extract it to a folder of your own, not Program
      Files, and double-click Observatory-RTX.cmd.)
@@ -42,26 +42,32 @@ What you see
   where a lamp does.
 
 Buttons and keys
-  A bar at the bottom of the window has a button for each, with its state. Click, or press the key
-  (Esc first releases the mouse if the scene holds it):
+  A column on the left has a button for each feature, with its state, its key and a line that says
+  what it does. Click, or press the key (Esc first releases the mouse if the scene holds it):
+  F6    Max out: every setting at its best for the picture (path traced DLAA, 3 bounces, frame
+        generation, everything that moves), not held at 60 frames a second; again, back to the start
   F9    path tracing with DLSS Ray Reconstruction, on and off
   F7    next DLSS setting: DLAA, Quality, Balanced, Performance, off (Ultra Performance finds no
         DLSS mode in this build: it is left out)
   F8    DLSS Frame Generation, on and off
-  F6    the gilding as metal or flat
-  F10   hides the line and the badge, then the bar, then shows them again
+  F5    light bounces, 1 to 4, while path tracing
+  F10   hides the column, the line and the badge, then all but a small RTX button, then shows them
+  Buttons alone: the anti-aliasing without DLSS (MSAA 4x + TAA by default: MSAA alone flickers ten
+  times more while you turn), and what moves: glyphs falling down the green rain, the departments'
+  banners as cloth in a draught, a little dust in the light.
   The scene's own keys are shown at the top left: WASD to walk, F to fly, 1-9 for the views, Tab for
   the curios, G to ride in the gardens. Esc releases the mouse; Alt+F4 closes the window.
   The badge at the bottom right is green while DLSS really runs.
 
 Measured on the author's machine (RTX 5080, window of 3840 x 2054, in the hall)
   Path tracing with Ray Reconstruction, frames rendered a second and GPU time a frame:
-    DLSS Quality (2562 x 1371 rendered)     60    14.6 ms    what it starts at, and stays at
+    DLSS Quality (2562 x 1371 rendered)     60    15.3 ms    what it starts at, and stays at
     DLSS Balanced (2228 x 1192 rendered)    60    11.7 ms
     DLAA (3840 x 2054 rendered)             34    29.6 ms
     DLSS Quality with 3 bounces             55    18.3 ms    why it stops at 2
   Frame generation adds its own frames between the rendered ones.
-  Rasterized, DLAA: 60 frames a second, 10.1 ms.
+  Max out (DLAA, 3 bounces, frame generation): 23 rendered, about 46 shown, 40.6 ms.
+  The glyphs, the cloth and the dust add 0.3 ms. Rasterized, DLAA: 60 frames a second, 10.0 ms.
   Elsewhere at DLSS Quality, path traced: 14 to 15 ms in the wing, 8 to 10 ms outdoors.
 
 Not verified
@@ -89,7 +95,7 @@ Ce qu'il faut
   - 230 Mo de disque, et une connexion internet la première fois.
 
 Démarrer
-  1. Double-cliquez sur Observatory-RTX-0.1.1-win64.msi. Il s'installe pour votre compte seulement,
+  1. Double-cliquez sur Observatory-RTX-0.2.0-win64.msi. Il s'installe pour votre compte seulement,
      sans droits d'administrateur, dans %LOCALAPPDATA%\Programs\Observatory-RTX, et ajoute
      Observatory RTX au menu Démarrer. (Le zip contient les mêmes fichiers : extrayez-le dans un
      dossier à vous, pas Program Files, et double-cliquez sur Observatory-RTX.cmd.)
@@ -120,14 +126,20 @@ Ce que vous voyez
   rayons, seulement là où une lampe arrive.
 
 Boutons et touches
-  Une barre en bas de la fenêtre a un bouton pour chacun, avec son état. Cliquez, ou appuyez sur la
-  touche (Échap libère d'abord la souris si la scène la tient) :
+  Une colonne à gauche a un bouton pour chaque fonction, avec son état, sa touche et une ligne qui dit
+  ce qu'elle fait. Cliquez, ou appuyez sur la touche (Échap libère d'abord la souris si la scène la
+  tient) :
+  F6    Max out : chaque réglage au mieux pour l'image (DLAA en path tracing, 3 rebonds, génération
+        d'images, tout ce qui bouge), sans tenir 60 images par seconde ; de nouveau, retour au départ
   F9    path tracing avec DLSS Ray Reconstruction, activé ou non
   F7    réglage DLSS suivant : DLAA, Quality, Balanced, Performance, désactivé (Ultra Performance ne
         trouve pas de mode DLSS dans cette version : il est omis)
   F8    DLSS Frame Generation, activé ou non
-  F6    la dorure en métal ou à plat
-  F10   masque la ligne et la pastille, puis la barre, puis les montre de nouveau
+  F5    rebonds de la lumière, de 1 à 4, en path tracing
+  F10   masque la colonne, la ligne et la pastille, puis tout sauf un petit bouton RTX, puis les montre
+  Boutons seuls : l'anticrénelage sans DLSS (MSAA 4x + TAA par défaut : le MSAA seul scintille dix
+  fois plus quand on tourne), et ce qui bouge : des glyphes qui tombent le long de la pluie verte,
+  les bannières des départements en tissu dans un courant d'air, un peu de poussière dans la lumière.
   Les touches de la scène sont affichées en haut à gauche : WASD (ou ZQSD) pour marcher, F pour voler,
   1-9 pour les vues, Tab pour les curiosités, G pour rouler dans les jardins. Échap libère la souris ;
   Alt+F4 ferme la fenêtre.
@@ -135,12 +147,14 @@ Boutons et touches
 
 Mesuré sur la machine de l'auteur (RTX 5080, fenêtre de 3840 x 2054, dans la salle)
   Path tracing avec Ray Reconstruction, images rendues par seconde et temps de GPU par image :
-    DLSS Quality (2562 x 1371 rendus)     60    14,6 ms    le réglage de départ, et il y reste
+    DLSS Quality (2562 x 1371 rendus)     60    15,3 ms    le réglage de départ, et il y reste
     DLSS Balanced (2228 x 1192 rendus)    60    11,7 ms
     DLAA (3840 x 2054 rendus)             34    29,6 ms
     DLSS Quality avec 3 rebonds           55    18,3 ms    pourquoi il s'arrête à 2
   La génération d'images ajoute les siennes entre les images rendues.
-  En rastérisation, DLAA : 60 images par seconde, 10,1 ms.
+  Max out (DLAA, 3 rebonds, génération d'images) : 23 rendues, environ 46 affichées, 40,6 ms.
+  Les glyphes, le tissu et la poussière ajoutent 0,3 ms. En rastérisation, DLAA : 60 images par
+  seconde, 10,0 ms.
   Ailleurs en DLSS Quality, en path tracing : 14 à 15 ms dans l'aile, 8 à 10 ms dehors.
 
 Non vérifié
@@ -169,7 +183,7 @@ Lo que hace falta
   - 230 MB de disco, y conexión a internet la primera vez.
 
 Iniciar
-  1. Haga doble clic en Observatory-RTX-0.1.1-win64.msi. Se instala solo para su cuenta, sin derechos
+  1. Haga doble clic en Observatory-RTX-0.2.0-win64.msi. Se instala solo para su cuenta, sin derechos
      de administrador, en %LOCALAPPDATA%\Programs\Observatory-RTX, y añade Observatory RTX al menú
      Inicio. (El zip contiene los mismos archivos: extráigalo en una carpeta suya, no Program Files, y
      haga doble clic en Observatory-RTX.cmd.)
@@ -199,14 +213,21 @@ Lo que se ve
   solo adonde llega una lámpara.
 
 Botones y teclas
-  Una barra en la parte inferior de la ventana tiene un botón para cada uno, con su estado. Haga clic,
-  o pulse la tecla (Esc libera antes el ratón si la escena lo retiene):
+  Una columna a la izquierda tiene un botón para cada función, con su estado, su tecla y una línea
+  que dice lo que hace. Haga clic, o pulse la tecla (Esc libera antes el ratón si la escena lo
+  retiene):
+  F6    Max out: cada ajuste al máximo para la imagen (DLAA con path tracing, 3 rebotes, generación de
+        imágenes, todo lo que se mueve), sin mantener 60 imágenes por segundo; otra vez, vuelta al inicio
   F9    path tracing con DLSS Ray Reconstruction, activado o no
   F7    siguiente ajuste de DLSS: DLAA, Quality, Balanced, Performance, desactivado (Ultra Performance
         no encuentra modo DLSS en esta versión: se omite)
   F8    DLSS Frame Generation, activado o no
-  F6    el dorado como metal o plano
-  F10   oculta la línea y el distintivo, luego la barra, y después los muestra de nuevo
+  F5    rebotes de la luz, de 1 a 4, con path tracing
+  F10   oculta la columna, la línea y el distintivo, luego todo salvo un pequeño botón RTX, y después
+        los muestra
+  Solo botones: el antialiasing sin DLSS (MSAA 4x + TAA por defecto: el MSAA solo parpadea diez veces
+  más al girar), y lo que se mueve: glifos que caen por la lluvia verde, los estandartes de los
+  departamentos como tela en una corriente de aire, un poco de polvo en la luz.
   Las teclas de la escena se muestran arriba a la izquierda: WASD para caminar, F para volar, 1-9 para
   las vistas, Tab para las curiosidades, G para pasear por los jardines. Esc libera el ratón; Alt+F4
   cierra la ventana.
@@ -214,12 +235,13 @@ Botones y teclas
 
 Medido en la máquina del autor (RTX 5080, ventana de 3840 x 2054, en la sala)
   Path tracing con Ray Reconstruction, imágenes renderizadas por segundo y tiempo de GPU por imagen:
-    DLSS Quality (2562 x 1371 renderizados)     60    14,6 ms    el ajuste inicial, y en él se queda
+    DLSS Quality (2562 x 1371 renderizados)     60    15,3 ms    el ajuste inicial, y en él se queda
     DLSS Balanced (2228 x 1192 renderizados)    60    11,7 ms
     DLAA (3840 x 2054 renderizados)             34    29,6 ms
     DLSS Quality con 3 rebotes                  55    18,3 ms    por qué se detiene en 2
   La generación de imágenes añade las suyas entre las renderizadas.
-  Rasterizado, DLAA: 60 imágenes por segundo, 10,1 ms.
+  Max out (DLAA, 3 rebotes, generación de imágenes): 23 renderizadas, unas 46 mostradas, 40,6 ms.
+  Los glifos, la tela y el polvo añaden 0,3 ms. Rasterizado, DLAA: 60 imágenes por segundo, 10,0 ms.
   En otros lugares con DLSS Quality y path tracing: de 14 a 15 ms en el ala, de 8 a 10 ms fuera.
 
 Sin verificar

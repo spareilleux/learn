@@ -84,7 +84,7 @@ func start(player: Object, out: String) -> void:
 
 
 func _state(prefix: String) -> void:
-	var s := {"setting": _p.SETTINGS[_p._i][0], "path_tracing": _p._pt, "frame_generation": _p._fg, "auto": _p._auto,
+	var s := {"setting": _p._setting_name(_p._i), "path_tracing": _p._pt, "frame_generation": _p._fg, "auto": _p._auto,
 		"scale_3d": snappedf(_p._vp.scaling_3d_scale, 0.0001),
 		"ceiling": _p._ceiling, "line": _p._label.text, "badge": _p._badge.text, "mouse_mode": Input.mouse_mode}
 	var buttons := {}
