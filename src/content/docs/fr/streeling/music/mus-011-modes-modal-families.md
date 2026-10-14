@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **MUS-011** · Modes et familles modales · intermédiaire · 60 minutes
 
-Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/79ffad7859ce147af6d0915231332071d79d0e89/state/streeling/courses/music/fr/mus-011-modes-modal-families.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/6c6b68a97d9c731070e4ac374372fd8c2ed2291f/state/streeling/courses/music/fr/mus-011-modes-modal-families.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MUS-010](../../music/mus-010-scales-pattern-set-interval-vector/), [MUS-020](../../music/mus-020-set-classes-interval-vectors-prime-forms/)
 :::

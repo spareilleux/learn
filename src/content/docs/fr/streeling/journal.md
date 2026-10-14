@@ -123,8 +123,8 @@ Coche un module une fois étudié. Sous **Notes**, ajoute une entrée datée : c
 
 - [ ] [PSY-001 · Introduction à la Capitalisation Fractale](../psychohistory/psy-001-intro-fractal-compounding/) <!-- psy-001-intro-fractal-compounding -->
 - [ ] [PSY-002 · Les transitions de phase de la gouvernance](../psychohistory/psy-002-governance-phase-transitions/) <!-- psy-002-governance-phase-transitions -->
-- [ ] [PSY-005 · Persistence First](../psychohistory/psy-005-persistence-baseline/) *(en anglais)* <!-- psy-005-persistence-baseline -->
-- [ ] [PSY-012 · Early-Warning Signals and Their False Alarms](../psychohistory/psy-012-early-warning-false-alarms/) *(en anglais)* <!-- psy-012-early-warning-false-alarms -->
+- [ ] [PSY-005 · La persistance d'abord](../psychohistory/psy-005-persistence-baseline/) <!-- psy-005-persistence-baseline -->
+- [ ] [PSY-012 · Les signaux d'alerte précoce et leurs fausses alertes](../psychohistory/psy-012-early-warning-false-alarms/) <!-- psy-012-early-warning-false-alarms -->
 
 ### Sémiotique
 

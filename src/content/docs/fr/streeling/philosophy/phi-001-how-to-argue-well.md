@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **PHI-001** · Fondements de la philosophie · débutant · 25 minutes
 
-Généré par le département *Philosophie* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/79ffad7859ce147af6d0915231332071d79d0e89/state/streeling/courses/philosophy/fr/phi-001-how-to-argue-well.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Philosophie* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/6c6b68a97d9c731070e4ac374372fd8c2ed2291f/state/streeling/courses/philosophy/fr/phi-001-how-to-argue-well.fr.md) · [Mon journal](../../journal/)
 :::
 
 > **Département de philosophie** | Niveau : Débutant | Durée : 25 minutes

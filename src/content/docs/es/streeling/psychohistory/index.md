@@ -13,5 +13,5 @@ sidebar:
 
 - [PSY-001 · Introducción al Compuesto Fractal](psy-001-intro-fractal-compounding/)
 - [PSY-002 · Transiciones de fase de la gobernanza](psy-002-governance-phase-transitions/)
-- [PSY-005 · Persistence First: The Baseline a Governance Forecast Must Beat](psy-005-persistence-baseline/) *(en inglés)*
-- [PSY-012 · Early-Warning Signals and Their False Alarms](psy-012-early-warning-false-alarms/) *(en inglés)*
+- [PSY-005 · Primero, la persistencia: la referencia que un pronóstico de gobernanza debe superar](psy-005-persistence-baseline/)
+- [PSY-012 · Las señales de alerta temprana y sus falsas alarmas](psy-012-early-warning-false-alarms/)

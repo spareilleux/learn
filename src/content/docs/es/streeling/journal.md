@@ -123,8 +123,8 @@ Marca un módulo una vez estudiado. En **Notas**, añade una entrada fechada: lo
 
 - [ ] [PSY-001 · Introducción al compuesto fractal](../psychohistory/psy-001-intro-fractal-compounding/) <!-- psy-001-intro-fractal-compounding -->
 - [ ] [PSY-002 · Transiciones de fase de la gobernanza](../psychohistory/psy-002-governance-phase-transitions/) <!-- psy-002-governance-phase-transitions -->
-- [ ] [PSY-005 · Persistence First](../psychohistory/psy-005-persistence-baseline/) *(en inglés)* <!-- psy-005-persistence-baseline -->
-- [ ] [PSY-012 · Early-Warning Signals and Their False Alarms](../psychohistory/psy-012-early-warning-false-alarms/) *(en inglés)* <!-- psy-012-early-warning-false-alarms -->
+- [ ] [PSY-005 · Primero, la persistencia](../psychohistory/psy-005-persistence-baseline/) <!-- psy-005-persistence-baseline -->
+- [ ] [PSY-012 · Las señales de alerta temprana y sus falsas alarmas](../psychohistory/psy-012-early-warning-false-alarms/) <!-- psy-012-early-warning-false-alarms -->
 
 ### Semiótica
 
