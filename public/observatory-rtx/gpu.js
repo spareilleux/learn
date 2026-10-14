@@ -6,7 +6,7 @@
   'use strict';
 
   var LINKS = {
-    rtx: 'https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.1.0/Observatory-RTX-0.1.0-win64.msi',
+    rtx: 'https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.0/Observatory-RTX-0.2.0-win64.msi',
     nvidia: 'https://www.nvidia.com/en-us/geforce/technologies/dlss/',
     web: '../demos/observatory/'  // the page's own link replaces it (data-web)
   };

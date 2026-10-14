@@ -9,7 +9,7 @@ sidebar:
 ## En resumen
 
 - **[Abrir la versión web](../../demos/observatory/)**: en cualquier navegador reciente compatible con WebGL 2, en un ordenador o un teléfono; unos 55 MB la primera vez, y otro tanto en segundo plano para la copia que guarda el navegador. Se instala como una aplicación y se actualiza sola.
-- **[Descargar la versión RTX](https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.1.0/Observatory-RTX-0.1.0-win64.msi)** (71 MB, un instalador de Windows): la misma escena con path tracing y DLSS. Necesita una tarjeta GeForce RTX y solo se ha ejecutado en una RTX 5080. [El zip](https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.1.0/Observatory-RTX-0.1.0-win64.zip) (80 MB) contiene los mismos archivos, para ejecutarla sin instalarla.
+- **[Descargar la versión RTX](https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.0/Observatory-RTX-0.2.0-win64.msi)** (71 MB, un instalador de Windows): la misma escena con path tracing y DLSS. Necesita una tarjeta GeForce RTX y solo se ha ejecutado en una RTX 5080. [El zip](https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.0/Observatory-RTX-0.2.0-win64.zip) (80 MB) contiene los mismos archivos, para ejecutarla sin instalarla.
 - [Ver la cinemática](../../demos/observatory/?cinematic=1): ochenta segundos filmados en la escena.
 
 ### Su tarjeta gráfica
@@ -23,20 +23,22 @@ sidebar:
 2. Inicie **Observatory RTX** desde el menú Inicio.
 3. La primera vez, una ventana pregunta si descargar los archivos DLSS de NVIDIA (203 MB, una vez): pulse **Intro**.
 
-Para desinstalarla: **Configuración → Aplicaciones → Aplicaciones instaladas**; los archivos de NVIDIA se van con ella. Una versión más reciente se instala encima y los conserva. Con el zip, en cambio, extráigalo entero en una carpeta suya y haga doble clic en `Observatory-RTX.cmd`.
+Para desinstalarla: **Configuración → Aplicaciones → Aplicaciones instaladas**; los archivos de NVIDIA se van con ella. Una versión más reciente debe instalarse encima y conservarlos: probado de la 0.1.0 a un paquete de prueba, todavía no a la 0.2.0 (*por verificar*). Con el zip, en cambio, extráigalo entero en una carpeta suya y haga doble clic en `Observatory-RTX.cmd`.
 
-Se inicia con path tracing. Una barra de botones en la parte inferior conmuta el path tracing (**F9**), el ajuste de DLSS (**F7**), la generación de imágenes (**F8**) y el dorado (**F6**); `README.txt`, junto al programa, da el resto en inglés, francés y español.
+Se inicia con path tracing. Una columna de botones a la izquierda, cada uno con una línea que dice lo que hace, conmuta el path tracing (**F9**), el ajuste de DLSS (**F7**), la generación de imágenes (**F8**) y los rebotes de la luz, de uno a cuatro (**F5**). **Max out** (**F6**) pone cada ajuste al máximo para la imagen, sin mantener 60 imágenes por segundo; pulsado otra vez, vuelve al inicio. Otros tres botones conmutan lo que se mueve: glifos que caen por los rayos de luz verde, dibujados por un shader a partir de sus propios trazos (sin fuente ni imagen), los estandartes de los departamentos como tela en una corriente de aire, y un poco de polvo en la luz de las lámparas. `README.txt`, junto al programa, da el resto en inglés, francés y español.
 
 Lo que permite una GeForce RTX 5080, medido en la máquina del autor en una ventana de 3840 × 2054:
 
-- path tracing con DLSS Ray Reconstruction en DLSS Quality, 2562 × 1371 renderizados: 60 imágenes por segundo, con 14,6 a 15,6 ms de GPU por imagen en la sala y en el ala, de 8 a 10 ms fuera;
+- path tracing con DLSS Ray Reconstruction en DLSS Quality, 2562 × 1371 renderizados: 60 imágenes por segundo, 15,3 ms de GPU por imagen en la vista inicial con todo lo que se mueve (versión 0.1.0: de 14,6 a 15,6 ms en la sala y en el ala, de 8 a 10 ms fuera);
 - DLSS Frame Generation, que añade imágenes entre las renderizadas;
-- rasterizado, DLAA (DLSS solo como antialiasing, a la resolución completa): 60 imágenes por segundo, 10,1 ms.
+- rasterizado, DLAA (DLSS solo como antialiasing, a la resolución completa): 60 imágenes por segundo, 10,0 ms;
+- sin los archivos de NVIDIA, MSAA 4x con TAA: 60 imágenes por segundo, 8,2 ms. Medido mientras la mirada gira, el MSAA solo parpadea unas diez veces más, incluso en 8x.
 
 Lo que no permite a 60 imágenes por segundo:
 
-- path tracing a la resolución completa (DLAA): 34 imágenes por segundo, 29,6 ms;
-- un tercer rebote de luz en DLSS Quality: 55 imágenes por segundo, 18,3 ms. El programa se detiene en dos.
+- path tracing a la resolución completa (DLAA): 34 imágenes por segundo, 29,6 ms (versión 0.1.0);
+- un tercer rebote de luz en DLSS Quality: 55 imágenes por segundo, 18,3 ms (versión 0.1.0). El programa empieza en dos;
+- **Max out**, path tracing en DLAA con tres rebotes y generación de imágenes: 23 imágenes renderizadas por segundo, unas 46 mostradas, 40,6 ms.
 
 El programa busca por sí solo 60 imágenes por segundo: por debajo de 56, baja el ajuste de DLSS; por debajo de 20 en el último ajuste, desactiva el path tracing y lo dice. Cualquier otra tarjeta, cualquier otra máquina, Windows 10, y un instalador o un zip descargado con un navegador, que Windows marca como procedente de internet, están *por verificar*.
 
