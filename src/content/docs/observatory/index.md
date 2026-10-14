@@ -6,7 +6,7 @@ sidebar:
   order: 0
 ---
 
-<div id="obs-gpu" data-web="../demos/observatory/"><p><strong><a href="../demos/observatory/">Play in the browser</a></strong>, on any system, computer or phone, or <strong><a href="https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.1/Observatory-RTX-0.2.1-win64.msi">install the RTX version</a></strong>: Windows, a GeForce RTX card, 71 MB. With JavaScript on, this block reads the name your browser gives your graphics card and offers the version that suits it; nothing is sent anywhere.</p></div>
+<div id="obs-gpu" data-web="../demos/observatory/"><p><strong><a href="../demos/observatory/">Play in the browser</a></strong>, on any system, computer or phone, or <strong><a href="https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.1/Observatory-RTX-0.2.1-win64.msi">install the RTX version</a></strong>: Windows, a GeForce RTX card, 71 MB. With JavaScript on, this block reads the name your browser gives your graphics card, offers the version that suits it and lists everything the card can do here; nothing is sent anywhere.</p></div>
 <script src="../observatory-rtx/gpu.js" defer></script>
 
 ## In short
