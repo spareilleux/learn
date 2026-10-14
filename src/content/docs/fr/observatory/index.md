@@ -9,7 +9,7 @@ sidebar:
 ## En bref
 
 - **[Ouvrir la version web](../../demos/observatory/)** : dans tout navigateur récent compatible WebGL 2, sur un ordinateur ou un téléphone ; environ 55 Mo la première fois, puis autant en arrière-plan pour la copie que garde le navigateur. Elle s'installe comme une application et se met à jour toute seule.
-- **[Télécharger la version RTX](https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.0/Observatory-RTX-0.2.0-win64.msi)** (71 Mo, un installateur Windows) : la même scène en path tracing, avec DLSS. Elle demande une carte GeForce RTX et n'a tourné que sur une RTX 5080. [Le zip](https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.0/Observatory-RTX-0.2.0-win64.zip) (80 Mo) contient les mêmes fichiers, pour la lancer sans l'installer.
+- **[Télécharger la version RTX](https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.1/Observatory-RTX-0.2.1-win64.msi)** (71 Mo, un installateur Windows) : la même scène en path tracing, avec DLSS. Elle demande une carte GeForce RTX et n'a tourné que sur une RTX 5080. [Le zip](https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.1/Observatory-RTX-0.2.1-win64.zip) (80 Mo) contient les mêmes fichiers, pour la lancer sans l'installer.
 - [Voir la cinématique](../../demos/observatory/?cinematic=1) : quatre-vingts secondes filmées dans la scène.
 
 ### Votre carte graphique
@@ -23,7 +23,7 @@ sidebar:
 2. Lancez **Observatory RTX** depuis le menu Démarrer.
 3. La première fois, une fenêtre demande s'il faut récupérer les fichiers DLSS de NVIDIA (203 Mo, une fois) : appuyez sur **Entrée**.
 
-Pour la désinstaller : **Paramètres → Applications → Applications installées** ; les fichiers de NVIDIA partent avec elle. Une version plus récente doit s'installer par-dessus et les garder : testé de la 0.1.0 vers un paquet de test, pas encore vers la 0.2.0 (*à vérifier*). Avec le zip, extrayez-le plutôt en entier dans un dossier à vous, puis double-cliquez sur `Observatory-RTX.cmd`.
+Pour la désinstaller : **Paramètres → Applications → Applications installées** ; les fichiers de NVIDIA partent avec elle. Une version plus récente doit s'installer par-dessus et les garder : testé de la 0.1.0 vers un paquet de test, pas encore de la 0.2.0 vers la 0.2.1 (*à vérifier*). Avec le zip, extrayez-le plutôt en entier dans un dossier à vous, puis double-cliquez sur `Observatory-RTX.cmd`.
 
 Elle démarre en path tracing. Une colonne de boutons à gauche, chacun avec une ligne qui dit ce qu'il fait, commute le path tracing (**F9**), le réglage DLSS (**F7**), la génération d'images (**F8**) et les rebonds de la lumière, de un à quatre (**F5**). **Max out** (**F6**) met chaque réglage au mieux pour l'image, sans tenir 60 images par seconde ; pressé de nouveau, il revient au départ. Trois autres boutons commutent ce qui bouge : des glyphes qui tombent le long des rayons de lumière verte, dessinés par un shader à partir de ses propres traits (ni police, ni image), les bannières des départements en tissu dans un courant d'air, et un peu de poussière dans la lumière des lampes. `README.txt`, à côté du programme, donne le reste en anglais, en français et en espagnol.
 

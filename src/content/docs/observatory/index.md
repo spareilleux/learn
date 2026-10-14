@@ -9,7 +9,7 @@ sidebar:
 ## In short
 
 - **[Open the web version](../demos/observatory/)**: in any recent browser with WebGL 2, on a computer or a phone; about 55 MB the first time, then as much again in the background for the copy the browser keeps. It installs as an app and updates itself.
-- **[Download the RTX version](https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.0/Observatory-RTX-0.2.0-win64.msi)** (71 MB, a Windows installer): the same scene path traced, with DLSS. It needs a GeForce RTX card and was run on an RTX 5080 only. [The zip](https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.0/Observatory-RTX-0.2.0-win64.zip) (80 MB) holds the same files, to run it without installing.
+- **[Download the RTX version](https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.1/Observatory-RTX-0.2.1-win64.msi)** (71 MB, a Windows installer): the same scene path traced, with DLSS. It needs a GeForce RTX card and was run on an RTX 5080 only. [The zip](https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.1/Observatory-RTX-0.2.1-win64.zip) (80 MB) holds the same files, to run it without installing.
 - [Watch the cinematic](../demos/observatory/?cinematic=1): eighty seconds filmed in the scene.
 
 ### Your graphics card
@@ -23,7 +23,7 @@ sidebar:
 2. Start **Observatory RTX** from the Start menu.
 3. The first time, a window asks whether to fetch NVIDIA's DLSS files (203 MB, once): press **Enter**.
 
-To remove it: **Settings → Apps → Installed apps**; NVIDIA's files go with it. A later version is meant to install over it and keep them: tested from 0.1.0 to a test package, not yet to 0.2.0 (*to verify*). With the zip instead, extract all of it to a folder of your own and double-click `Observatory-RTX.cmd`.
+To remove it: **Settings → Apps → Installed apps**; NVIDIA's files go with it. A later version is meant to install over it and keep them: tested from 0.1.0 to a test package, not yet from 0.2.0 to 0.2.1 (*to verify*). With the zip instead, extract all of it to a folder of your own and double-click `Observatory-RTX.cmd`.
 
 It starts path traced. A column of buttons on the left, each with a line that says what it does, switches path tracing (**F9**), the DLSS setting (**F7**), frame generation (**F8**) and the light's bounces, one to four (**F5**). **Max out** (**F6**) puts every setting at its best for the picture, without holding 60 frames a second; pressed again, it goes back to the start. Three more buttons switch what moves: glyphs falling down the green beams of light, drawn by a shader from strokes of its own (no font, no image), the departments' banners as cloth in a draught, and a little dust in the lamps' light. `README.txt`, beside the program, has the rest in English, French and Spanish.
 
