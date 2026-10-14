@@ -6,16 +6,14 @@ sidebar:
   order: 0
 ---
 
+<div id="obs-gpu" data-web="../../demos/observatory/"><p><strong><a href="../../demos/observatory/">Jugar en el navegador</a></strong>, en cualquier sistema, ordenador o teléfono, o <strong><a href="https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.1/Observatory-RTX-0.2.1-win64.msi">instalar la versión RTX</a></strong>: Windows, una tarjeta GeForce RTX, 71 MB. Con JavaScript activado, este bloque lee el nombre que su navegador da a su tarjeta gráfica y propone la versión que le conviene; no se envía nada.</p></div>
+<script src="../../observatory-rtx/gpu.js" defer></script>
+
 ## En resumen
 
 - **[Abrir la versión web](../../demos/observatory/)**: en cualquier navegador reciente compatible con WebGL 2, en un ordenador o un teléfono; unos 55 MB la primera vez, y otro tanto en segundo plano para la copia que guarda el navegador. Se instala como una aplicación y se actualiza sola.
-- **[Descargar la versión RTX](https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.1/Observatory-RTX-0.2.1-win64.msi)** (71 MB, un instalador de Windows): la misma escena con path tracing y DLSS. Necesita una tarjeta GeForce RTX y solo se ha ejecutado en una RTX 5080. [El zip](https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.1/Observatory-RTX-0.2.1-win64.zip) (80 MB) contiene los mismos archivos, para ejecutarla sin instalarla.
+- **[Descargar la versión RTX](https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.1/Observatory-RTX-0.2.1-win64.msi)** (71 MB, un instalador de Windows): la misma escena con path tracing y DLSS. Necesita Windows y una tarjeta GeForce RTX, y solo se ha ejecutado en una RTX 5080. [Las novedades de la 0.2.1](https://github.com/spareilleux/learn/releases/tag/observatory-rtx-0.2.1).
 - [Ver la cinemática](../../demos/observatory/?cinematic=1): ochenta segundos filmados en la escena.
-
-### Su tarjeta gráfica
-
-<div id="obs-gpu" data-web="../../demos/observatory/"><p>Con JavaScript activado, esta página lee aquí el nombre que su navegador da a su tarjeta gráfica, y dice qué versión le conviene. No se envía nada.</p></div>
-<script src="../../observatory-rtx/gpu.js" defer></script>
 
 ### La versión RTX en tres pasos
 
@@ -23,7 +21,7 @@ sidebar:
 2. Inicie **Observatory RTX** desde el menú Inicio.
 3. La primera vez, una ventana pregunta si descargar los archivos DLSS de NVIDIA (203 MB, una vez): pulse **Intro**.
 
-Para desinstalarla: **Configuración → Aplicaciones → Aplicaciones instaladas**; los archivos de NVIDIA se van con ella. Una versión más reciente debe instalarse encima y conservarlos: probado de la 0.1.0 a un paquete de prueba, todavía no de la 0.2.0 a la 0.2.1 (*por verificar*). Con el zip, en cambio, extráigalo entero en una carpeta suya y haga doble clic en `Observatory-RTX.cmd`.
+Para desinstalarla: **Configuración → Aplicaciones → Aplicaciones instaladas**; los archivos de NVIDIA se van con ella. Una versión más reciente debe instalarse encima y conservarlos: probado de la 0.1.0 a un paquete de prueba, todavía no de la 0.2.0 a la 0.2.1 (*por verificar*).
 
 Se inicia con path tracing. Una columna de botones a la izquierda, cada uno con una línea que dice lo que hace, conmuta el path tracing (**F9**), el ajuste de DLSS (**F7**), la generación de imágenes (**F8**) y los rebotes de la luz, de uno a cuatro (**F5**). **Max out** (**F6**) pone cada ajuste al máximo para la imagen, sin mantener 60 imágenes por segundo; pulsado otra vez, vuelve al inicio. Otros tres botones conmutan lo que se mueve: glifos que caen por los rayos de luz verde, dibujados por un shader a partir de sus propios trazos (sin fuente ni imagen), los estandartes de los departamentos como tela en una corriente de aire, y un poco de polvo en la luz de las lámparas. `README.txt`, junto al programa, da el resto en inglés, francés y español.
 
@@ -38,11 +36,13 @@ Lo que no permite a 60 imágenes por segundo:
 
 - path tracing a la resolución completa (DLAA): 34 imágenes por segundo, 29,6 ms (versión 0.1.0);
 - un tercer rebote de luz en DLSS Quality: 55 imágenes por segundo, 18,3 ms (versión 0.1.0). El programa empieza en dos;
-- **Max out**, path tracing en DLAA con tres rebotes y generación de imágenes: 23 imágenes renderizadas por segundo, unas 46 mostradas, 40,6 ms.
+- **Max out** tal como era en la 0.2.0, path tracing en DLAA con tres rebotes y generación de imágenes: 23 imágenes renderizadas por segundo, unas 46 mostradas, 40,6 ms. Desde la 0.2.1 se queda en DLSS Quality; sin volver a medir.
 
-El programa busca por sí solo 60 imágenes por segundo: por debajo de 56, baja el ajuste de DLSS; por debajo de 20 en el último ajuste, desactiva el path tracing y lo dice. Cualquier otra tarjeta, cualquier otra máquina, Windows 10, y un instalador o un zip descargado con un navegador, que Windows marca como procedente de internet, están *por verificar*.
+El programa busca por sí solo 60 imágenes por segundo: cuando una imagen tarda más de 16 ms de GPU, o por debajo de 56 imágenes por segundo, baja el ajuste de DLSS; por debajo de 20 en el último ajuste, desactiva el path tracing y lo dice. Cualquier otra tarjeta, cualquier otra máquina, Windows 10, y un instalador descargado con un navegador, que Windows marca como procedente de internet, están *por verificar*.
 
-El instalador y el zip contienen la escena y una compilación del [fork de Godot de NVIDIA](https://github.com/NVIDIA-RTX/godot) con path tracing y DLSS, bajo licencia MIT, y ninguno de los archivos DLSS de NVIDIA. La instalación los descarga en su máquina desde la [publicación Streamline 2.10.0 de NVIDIA](https://github.com/NVIDIA-RTX/Streamline/releases/tag/v2.10.0), comprueba el SHA-256 de la descarga y la firma de NVIDIA de cada archivo, y guarda las licencias de NVIDIA junto a ellos: son software de NVIDIA, bajo las licencias de NVIDIA. La generación de imágenes necesita Windows 10 versión 2004 o posterior con la programación de GPU acelerada por hardware activada, [según la documentación de Streamline](https://github.com/NVIDIA-RTX/Streamline/blob/v2.10.0/docs/ProgrammingGuideDLSS_G.md). NVIDIA, GeForce, RTX y DLSS son marcas de NVIDIA Corporation, que no patrocina ni avala esta página ni el paquete.
+**Linux y macOS.** La versión RTX es un programa de Windows: Streamline, mediante el cual el fork de NVIDIA aporta el DLSS, pide [Windows 10 RS3 (64 bits) o posterior](https://github.com/NVIDIA-RTX/Streamline/blob/v2.10.0/docs/ProgrammingGuide.md), y un Mac no tiene tarjeta NVIDIA. Allí, la versión web es la que corresponde. Se instala como una aplicación desde Chrome o Edge, con el botón a la derecha de la barra de direcciones, o desde Safari en macOS 14 o posterior, con **Archivo → Añadir al Dock** ([la guía de Apple](https://support.apple.com/en-us/104996)). Instalarla así en Linux o macOS está *por verificar*.
+
+El instalador contiene la escena y una compilación del [fork de Godot de NVIDIA](https://github.com/NVIDIA-RTX/godot) con path tracing y DLSS, bajo licencia MIT, y ninguno de los archivos DLSS de NVIDIA. La instalación los descarga en su máquina desde la [publicación Streamline 2.10.0 de NVIDIA](https://github.com/NVIDIA-RTX/Streamline/releases/tag/v2.10.0), comprueba el SHA-256 de la descarga y la firma de NVIDIA de cada archivo, y guarda las licencias de NVIDIA junto a ellos: son software de NVIDIA, bajo las licencias de NVIDIA. La generación de imágenes necesita Windows 10 versión 2004 o posterior con la programación de GPU acelerada por hardware activada, [según la documentación de Streamline](https://github.com/NVIDIA-RTX/Streamline/blob/v2.10.0/docs/ProgrammingGuideDLSS_G.md). NVIDIA, GeForce, RTX y DLSS son marcas de NVIDIA Corporation, que no patrocina ni avala esta página ni el paquete.
 
 ## En detalle
 
