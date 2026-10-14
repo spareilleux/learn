@@ -36,8 +36,20 @@ extends "res://rtx/dlss_play.gd"
 ##     3. On the RTX 5080 at 3840 x 2054, DLSS Quality takes 14.6 ms of GPU a frame at 2 and 18.3 ms at
 ##     3 (55 frames a second), for a mean luma that moves by under 1 %: at 2 it holds 60 where 3 needed
 ##     Balanced, which is the softer picture (logs/sweep3: sharp 0.0241 against 0.0232);
-##   - "Les Buttons toggle devraient être évident sur version Desktop avec rtx" (the same day): a bar of
-##     buttons at the bottom, each with its state and its key, for what F9, F7, F8, F6 and F10 do.
+##   - "Les Buttons toggle devraient être évident sur version Desktop avec rtx" (the same day), then "des
+##     boutons qui affichent de manière séparée, comme une colonne verticale, tous les features […] qu'on
+##     puisse comprendre tous les toggles" (2026-10-14): a column of buttons on the left, one a feature,
+##     each with its state, its key and a line that says what it does;
+##   - "un genre de bouton qui fait un max out […] tous les effets au top" (2026-10-14): Max out (F6) puts
+##     every setting at its best for the picture, path traced DLAA with 3 bounces and frame generation,
+##     not held at 60 frames a second; again, back to the steered start;
+##   - "si c'est tout le temps à on, tu peux supprimer l'option" (2026-10-14, of the gold metal): the gilt
+##     stays metal and F6 is Max out's;
+##   - "des effets de moirée bizarres […] des clignotements" (2026-10-14): without DLSS, MSAA 4x + TAA in
+##     place of MSAA 2x: MSAA alone crawls ten times more while the eye turns (NOTES.md, Flicker);
+##   - "un voile" (2026-10-14): rasterized, the volumetric fog lights the hall and veils it in blue; a
+##     warmer, thinner fog (veil.py: black level 0.027 to 0.023, no blue cast). The path tracer has none;
+##   - "faire bouger des trucs dans la scène" (2026-10-14): rtx_life.gd's moving things, one row each.
 ## The fork compiles each custom material's hit group in the background and leaves its surfaces out of
 ## the rays until it is ready (ptviews.gd waits 30 s before its first view): a third line says so for
 ## that half minute. Without DLSS, that line says what is missing.
@@ -50,6 +62,7 @@ extends "res://rtx/dlss_play.gd"
 const PT_SCENE := "res://rtx/pt_scene.gd"
 const PROBE := "res://rtx/rtx_probe.gd"
 const BRIDGE := "res://rtx/rtx_bridge.gd"
+const LIFE := "res://rtx/rtx_life.gd"
 const WARM_MS := 30000      # the path tracer's first half minute: hit groups compile, nothing is judged
 const SETTLE_MS := 4000     # after any other change
 const START_SETTING := 1    # DLSS Quality: what the path tracer starts at
@@ -62,7 +75,13 @@ const SLOW_UPDATES := 10    # half-second updates in a row before a step (5 s)
 const STEP_UP_MS := 14.0    # GPU time a frame the next setting up must be expected to stay under (60 a second: 16.7)
 const NOTE_MS := 12000
 # Anti-aliasing without DLSS: [its name, MSAA, SMAA after it, TAA, FSR 2 at the window's resolution].
+# While the eye turns a quarter pixel a frame, the start view's mean worst second difference of luma is
+# 0.00020 with MSAA 4x + TAA, 0.00039 with 8x + TAA, 0.0058 to 0.0080 with MSAA alone at 8x to 2x; SMAA
+# adds nothing; FSR 2 at 1.0 is broken in this fork (NOTES.md, Flicker). PLAIN_CYCLE is what the button
+# steps through; the others stay for the probe (--rtx-plain-aa=).
 const PLAIN := {
+	"msaa4taa": ["MSAA 4x + TAA", Viewport.MSAA_4X, false, true, false],
+	"msaa8taa": ["MSAA 8x + TAA", Viewport.MSAA_8X, false, true, false],
 	"msaa2": ["MSAA 2x", Viewport.MSAA_2X, false, false, false],
 	"msaa4": ["MSAA 4x", Viewport.MSAA_4X, false, false, false],
 	"msaa8": ["MSAA 8x", Viewport.MSAA_8X, false, false, false],
@@ -71,8 +90,27 @@ const PLAIN := {
 	"taa": ["TAA", Viewport.MSAA_DISABLED, false, true, false],
 	"fsr2": ["FSR 2 anti-aliasing", Viewport.MSAA_DISABLED, false, false, true],
 }
+const PLAIN_CYCLE := ["msaa4taa", "msaa8taa", "taa", "msaa8", "msaa4", "msaa2"]
+const MAX_BOUNCES := 3      # Max out's: 4 moved the start view's mean luma by under 1 % for 3.6 ms more (NOTES.md)
+const RASTER_FOG_ALBEDO := Color(0.82, 0.78, 0.72)  # the scene's (0.6, 0.7, 0.9) veiled the hall in blue
+const RASTER_FOG_DENSITY := 0.007                   # the scene's 0.012 raised its black level to 0.027
 const ON := Color(0.45, 1.0, 0.55)
 const OFF := Color(0.86, 0.88, 0.92)
+const MAX_ON := Color(1.0, 0.82, 0.4)
+const NOTE := Color(0.68, 0.71, 0.76)
+# The column: [key, what it says it does]. The buttons' own text, with its state, is _refresh's.
+const ROWS := [
+	["max", "Every setting at its best for the picture: path traced DLAA, 3 bounces, frame generation, everything that moves. Not held at 60 frames a second."],
+	["pt", "Light computed by rays: soft shadows, true reflections, light bouncing from surface to surface. Denoised by DLSS Ray Reconstruction, always on with it."],
+	["dlss", "Renders fewer pixels and rebuilds the picture with AI. DLAA: every pixel; Quality, Balanced, Performance: 67, 58, 50 % of each side. Auto: steered to 60 frames a second."],
+	["fg", "An AI frame between each two rendered: twice the frames on the screen, a little more latency. Shows on a screen faster than 60 Hz."],
+	["bounces", "How many times a ray bounces: each one more lights the shade a little more and costs 2 to 4 ms."],
+	["plain", "Without DLSS. MSAA smooths the shapes' edges only; TAA also steadies glints and thin lines (ten times less flicker), a little softer."],
+	["glyphs", "Glyphs falling down the green rain, drawn by a shader: no font, no image."],
+	["cloth", "The departments' banners as cloth that the air moves, and their letters with it."],
+	["dust", "A little dust that drifts in the lamps' light."],
+	["hide", "This column, the line at the top and the badge: all, the badge alone, nothing."],
+]
 
 var slow_fps := 56.0        # rendered frames a second under which the setting steps down (--rtx-slow-fps=)
 var off_fps := 20.0         # and under which, at the last setting, the path tracer goes off
@@ -81,7 +119,7 @@ var exposure := 1.0         # the path traced picture's exposure, times the scen
 var bounces := 2            # the path tracer's bounces (--rtx-bounces=); the fork's own are 3
 var gallery := 4.0          # the wing's gallery lamps' energy while path tracing (--rtx-gallery=)
 var shelf := 3.0            # the hall's reading lamps' energy while path tracing, times their own (--rtx-shelf=)
-var plain_aa := "msaa2"     # the anti-aliasing without DLSS, one of PLAIN's keys (--rtx-plain-aa=)
+var plain_aa := "msaa4taa"  # the anti-aliasing without DLSS, one of PLAIN's keys (--rtx-plain-aa=)
 var _exposure_was := 1.0
 var _bounces_was := 3
 var _dress: RefCounted      # pt_scene.gd's object while path tracing, null otherwise
@@ -103,10 +141,17 @@ var _quality_auto := true
 var _fill: Node3D           # the scene's SoftFill group
 var _gallery: Node3D        # this script's lamps on the wing's gallery
 var _shelf_lamps: Array[Node] = []  # observatory.gd's ShelfLamp lights, one before each shelf unit
-var _bar: PanelContainer
-var _show: Button           # brings the bar back when F10 has hidden everything
+var _life: RefCounted       # rtx_life.gd: what moves
+var _max := false           # Max out is on
+var _max_was := {}          # what it changed, as it was
+var _max_sig := []          # the settings as Max out left them: any change turns it off
+var _bar: PanelContainer    # the column
+var _show: Button           # brings the column back when F10 has hidden everything
 var _buttons := {}
-var _px := 0                # the letters' size the bar was last laid out for
+var _notes: Array[Label] = []
+var _px := 0                # the letters' size the column was last laid out for
+var _f6_held := false       # F6 and F5 held at the last frame
+var _f5_held := false
 
 
 func _initialize() -> void:
@@ -156,6 +201,12 @@ func _find_env() -> void:
 	if root.mode == Window.MODE_WINDOWED:
 		root.mode = Window.MODE_MAXIMIZED
 	_quality = _scene.find_child("Quality", true, false)
+	_gold_flat = _gold_metal  # the gilt stays metal: dlss_play.gd's F6 finds nothing to swap
+	_env.volumetric_fog_albedo = RASTER_FOG_ALBEDO
+	_env.volumetric_fog_density = RASTER_FOG_DENSITY
+	if ResourceLoader.exists(LIFE):
+		_life = (load(LIFE) as Script).new()
+		_life.call("start", self, _scene)
 	_find_fill()
 	if _dlss:
 		if OS.get_cmdline_user_args().has("--rtx-raster"):
@@ -326,6 +377,7 @@ func _update_badge(s: Array) -> void:
 	_find_fill()
 	if not bool(SETTINGS[_i][1]):
 		_label.text = _label.text.replace(str(SETTINGS[_i][0]), _setting_name(_i))
+	_label.text = _label.text.replace("F6: gold metal", "F6: max out").replace("F6: gold flat", "F6: max out")
 	if _started and _dlss and bool(SETTINGS[_i][1]) and now > _judge_from:
 		_steer(_frames / maxf(_t, 0.001), _gpu / maxi(_frames, 1))
 	if not _dlss:
@@ -367,7 +419,7 @@ func _steer(fps: float, gpu_ms: float) -> void:
 		_mine = [_i, _pt]
 
 
-# The bar.
+# The column.
 
 func _build_bar() -> void:
 	var px := 16
@@ -375,26 +427,36 @@ func _build_bar() -> void:
 	layer.layer = 101
 	root.add_child(layer)
 	_bar = PanelContainer.new()
-	_bar.add_theme_stylebox_override("panel", _box(Color(0.02, 0.025, 0.035, 0.78), px / 2))
-	_bar.set_anchors_and_offsets_preset(Control.PRESET_CENTER_BOTTOM)
-	_bar.grow_horizontal = Control.GROW_DIRECTION_BOTH
-	_bar.grow_vertical = Control.GROW_DIRECTION_BEGIN
-	_bar.offset_bottom = -px
+	_bar.add_theme_stylebox_override("panel", _box(Color(0.02, 0.025, 0.035, 0.84), px / 2))
+	_bar.set_anchors_and_offsets_preset(Control.PRESET_CENTER_LEFT)
+	_bar.grow_horizontal = Control.GROW_DIRECTION_END
+	_bar.grow_vertical = Control.GROW_DIRECTION_BOTH
+	_bar.offset_left = px
 	layer.add_child(_bar)
-	var row := HBoxContainer.new()
-	row.add_theme_constant_override("separation", px / 2)
-	_bar.add_child(row)
-	for spec: Array in [["pt", _press_pt], ["dlss", _press_dlss], ["fg", _press_fg], ["gold", _press_gold], ["hide", _press_hud]]:
+	var column := VBoxContainer.new()
+	column.add_theme_constant_override("separation", px / 4)
+	_bar.add_child(column)
+	var press := {"max": _press_max, "pt": _press_pt, "dlss": _press_dlss, "fg": _press_fg, "bounces": _press_bounces,
+		"plain": _press_plain, "glyphs": _press_life.bind("glyphs"), "cloth": _press_life.bind("cloth"),
+		"dust": _press_life.bind("dust"), "hide": _press_hud}
+	for spec: Array in ROWS:
 		var b := _button(px)
-		b.pressed.connect(spec[1])
-		row.add_child(b)
+		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
+		b.pressed.connect(press[spec[0]])
+		column.add_child(b)
 		_buttons[spec[0]] = b
+		var note := Label.new()
+		note.text = spec[1]
+		note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		note.add_theme_color_override("font_color", NOTE)
+		column.add_child(note)
+		_notes.append(note)
 	_show = _button(px)
 	_show.text = "RTX  ·  F10"
-	_show.set_anchors_and_offsets_preset(Control.PRESET_CENTER_BOTTOM)
-	_show.grow_horizontal = Control.GROW_DIRECTION_BOTH
-	_show.grow_vertical = Control.GROW_DIRECTION_BEGIN
-	_show.offset_bottom = -px
+	_show.set_anchors_and_offsets_preset(Control.PRESET_CENTER_LEFT)
+	_show.grow_horizontal = Control.GROW_DIRECTION_END
+	_show.grow_vertical = Control.GROW_DIRECTION_BOTH
+	_show.offset_left = px
 	_show.modulate.a = 0.55
 	_show.visible = false
 	_show.pressed.connect(_press_hud)
@@ -425,12 +487,12 @@ func _button(px: int) -> Button:
 	return b
 
 
-func _paint(key: String, text: String, on: bool, enabled := true) -> void:
+func _paint(key: String, text: String, on: bool, enabled := true, colour := ON) -> void:
 	var b: Button = _buttons[key]
 	b.text = text
 	b.disabled = not enabled
 	for state in ["font_color", "font_hover_color", "font_pressed_color", "font_focus_color"]:
-		b.add_theme_color_override(state, ON if on else OFF)
+		b.add_theme_color_override(state, colour if on else OFF)
 
 
 func _refresh() -> void:
@@ -438,29 +500,98 @@ func _refresh() -> void:
 		return
 	var s: Array = SETTINGS[_i]
 	var can_pt := _dlss and _env != null
+	if _max and _max_sig != _signature():
+		_max = false  # a setting changed since: no longer everything at its best
+	_paint("max", "Max out  %s  ·  F6" % ("ON" if _max else "off"), _max, true, MAX_ON)
 	_paint("pt", "Path tracing  %s  ·  F9" % ("ON" if _pt else "off"), _pt, can_pt)
 	_paint("dlss", "%s%s  ·  F7" % [_setting_name(_i) if _dlss else "DLSS unavailable", "  (auto)" if _auto and _dlss else ""], bool(s[1]) and _dlss, _dlss)
 	_paint("fg", "Frame generation  %s  ·  F8" % ("ON" if _fg and bool(s[1]) else "off"), _fg and bool(s[1]), _dlss)
-	_paint("gold", "Gold: %s  ·  F6" % ("metal" if _metal else "flat"), false, _gold_metal != null and _gold_flat != null and _gold_metal != _gold_flat)
+	_paint("bounces", "Light bounces  %d  ·  F5" % bounces, _pt, _pt)
+	_paint("plain", "Without DLSS: %s" % PLAIN[plain_aa][0], not bool(s[1]), not bool(s[1]))
+	for key: String in ["glyphs", "cloth", "dust"]:
+		var there := _life != null and bool(_life.call("has", key))
+		var on := there and bool(_life.call("is_on", key))
+		var title: String = {"glyphs": "Glyph rain", "cloth": "Banners in the draught", "dust": "Dust in the light"}[key]
+		_paint(key, "%s  %s" % [title, "ON" if on else "off"], on, there)
 	_paint("hide", "Hide  ·  F10", false)
 
 
-## Every frame: the bar follows F10 (dlss_play.gd's _hud: 0 the line and the badge, 1 the badge, 2 nothing),
-## and the window's height: the window is maximised after this script starts, and letters sized for 900
-## lines are small on 2160.
+## What Max out sets, as it stands now.
+func _signature() -> Array:
+	return [_i, _pt, _fg, bounces, plain_aa]
+
+
+## Every frame: the column follows F10 (dlss_play.gd's _hud: 0 the line and the badge, 1 the badge,
+## 2 nothing), F6 and F5, and the window's height: the window is maximised after this script starts, and
+## letters sized for 900 lines are small on 2160.
 func _sync() -> void:
-	_bar.visible = _hud < 2
-	_show.visible = _hud == 2
-	var px := clampi(int(root.size.y / 64.0), 16, 32)
+	_bar.visible = _hud == 0
+	_show.visible = _hud > 0
+	var f6 := Input.is_key_pressed(KEY_F6)
+	if f6 and not _f6_held:
+		_press_max()
+	_f6_held = f6
+	var f5 := Input.is_key_pressed(KEY_F5)
+	if f5 and not _f5_held:
+		_press_bounces()
+	_f5_held = f5
+	if _life != null:
+		_life.call("step", root.get_process_delta_time())
+	var px := clampi(int(root.size.y / 72.0), 14, 28)
 	if px == _px:
 		return
 	_px = px
 	for b: Button in _buttons.values() + [_show]:
 		b.add_theme_font_size_override("font_size", px)
-	_bar.offset_bottom = -px
-	_show.offset_bottom = -px
+	for note in _notes:
+		note.add_theme_font_size_override("font_size", maxi(12, px * 7 / 10))
+		note.custom_minimum_size.x = px * 19
+	_bar.offset_left = px
+	_show.offset_left = px
 	_label.add_theme_font_size_override("font_size", maxi(18, px * 3 / 4))
 	_badge.add_theme_font_size_override("font_size", maxi(15, px * 2 / 3))
+
+
+func _press_max() -> void:
+	if _max:
+		_max = false
+		bounces = int(_max_was.get("bounces", bounces))
+		plain_aa = str(_max_was.get("plain_aa", plain_aa))
+		_fg = bool(_max_was.get("fg", false))
+		if _life != null:
+			for key: String in ["glyphs", "cloth", "dust"]:
+				if _max_was.has(key):
+					_life.call("set_on", key, bool(_max_was[key]))
+		# Back to the start: the path tracer where DLSS runs, its setting steered to 60 frames a second.
+		_auto = true
+		_pt_chosen = false
+		_pt = _dlss and _env != null
+		_i = START_SETTING if _pt else (0 if _dlss else _i)
+		_say("Max out off: back to the steered start")
+	else:
+		_max_was = {"bounces": bounces, "plain_aa": plain_aa, "fg": _fg}
+		if _life != null:
+			for key: String in ["glyphs", "cloth", "dust"]:
+				if bool(_life.call("has", key)):
+					_max_was[key] = bool(_life.call("is_on", key))
+					_life.call("set_on", key, true)
+		_max = true
+		_auto = false
+		plain_aa = "msaa8taa"
+		if _dlss and _env != null:
+			_pt = true
+			_pt_chosen = true
+			_i = 0
+			_fg = true
+			bounces = MAX_BOUNCES
+		_say("Max out: every setting at its best for the picture, not held at 60 frames a second (F6 again: back)")
+	if _pt and _env != null:
+		_env.set("pathtracing_max_bounces", bounces)
+	_max_sig = _signature()  # before _apply too, whose _refresh compares with it
+	_apply()
+	_mine = [_i, _pt]
+	_max_sig = _signature()
+	_refresh()
 
 
 func _press_pt() -> void:
@@ -488,11 +619,30 @@ func _press_fg() -> void:
 	_apply()
 
 
-func _press_gold() -> void:
-	if _gold_metal == null or _gold_flat == null or _gold_metal == _gold_flat:
+## The path tracer's bounces, 1 to 4: taken at once while it runs, kept for when it comes on otherwise.
+func _press_bounces() -> void:
+	if not _pt:
 		return
-	_metal = not _metal
-	_swap_gold(_gold_flat if _metal else _gold_metal, _gold_metal if _metal else _gold_flat)
+	bounces = bounces % 4 + 1
+	if _env != null:
+		_env.set("pathtracing_max_bounces", bounces)
+	_judge_from = Time.get_ticks_msec() + WARM_MS  # a new variant of the hit shaders compiles meanwhile
+	_say("Light bounces: %d (the first seconds are cheaper and wrong while the rays' shaders compile)" % bounces)
+	_refresh()
+
+
+func _press_plain() -> void:
+	if bool(SETTINGS[_i][1]):
+		return
+	plain_aa = PLAIN_CYCLE[(PLAIN_CYCLE.find(plain_aa) + 1) % PLAIN_CYCLE.size()]
+	_plain()
+	_refresh()
+
+
+func _press_life(key: String) -> void:
+	if _life == null or not bool(_life.call("has", key)):
+		return
+	_life.call("set_on", key, not bool(_life.call("is_on", key)))
 	_refresh()
 
 

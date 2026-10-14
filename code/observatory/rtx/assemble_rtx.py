@@ -33,6 +33,7 @@ PLAYER = {  # in the tree: from
     'rtx/rtx_play.gd': (FDN, 'artpass/publish/rtx/rtx_play.gd'),
     'rtx/rtx_probe.gd': (FDN, 'artpass/publish/rtx/rtx_probe.gd'),
     'rtx/rtx_bridge.gd': (FDN, 'artpass/publish/rtx/rtx_bridge.gd'),
+    'rtx/rtx_life.gd': (FDN, 'artpass/publish/rtx/rtx_life.gd'),
     'rtx/stage.tscn': (FDN, 'artpass/publish/rtx/stage.tscn'),
 }
 TOP = ('main.tscn', 'icon.svg', 'icon.svg.import')

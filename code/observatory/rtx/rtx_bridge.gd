@@ -209,6 +209,26 @@ func _handle(r: Dictionary) -> Dictionary:
 				if found.size() >= int(r.get("max", 60)):
 					break
 			return {"ok": true, "found": found}
+		"life":
+			# rtx_life.gd's moving things: one switched (key, on), and what was built.
+			var life: RefCounted = _p._life
+			if life == null:
+				return {"ok": false, "error": "rtx_life.gd is not running"}
+			if r.has("key"):
+				life.call("set_on", str(r.key), bool(r.get("on", true)))
+				_p._refresh()
+				for i in 3:
+					await _p.process_frame
+			return {"ok": true, "stats": _json(life.get("stats")), "on": _json(life.get("_on"))}
+		"press":
+			# A button of the column, as a click presses it.
+			var b: Button = _p._buttons.get(str(r.get("button", "")))
+			if b == null:
+				return {"ok": false, "error": "no button '%s'; there are %s" % [r.get("button", ""), _p._buttons.keys()]}
+			b.pressed.emit()
+			for i in int(r.get("settle", 3)):
+				await _p.process_frame
+			return {"ok": true, "text": b.text, "disabled": b.disabled, "player": _player_state()}
 		"stats":
 			var n := _node(str(r.get("node", "")))
 			return {"ok": true, "stats": _json(n.get("stats") if n else null)}

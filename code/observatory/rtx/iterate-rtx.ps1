@@ -8,9 +8,9 @@ $ErrorActionPreference = 'Stop'
 $Here = Split-Path -Parent $MyInvocation.MyCommand.Path
 $Tree = "C:/tmp/observatory-rtx-build-$N"
 $Ed = 'C:/tmp/godot-nvidia-dlss/godot/bin/godot.windows.editor.x86_64.console.exe'
-Copy-Item "$Here/rtx_play.gd", "$Here/rtx_probe.gd", "$Here/rtx_bridge.gd" "$Tree/rtx/" -Force
+Copy-Item "$Here/rtx_play.gd", "$Here/rtx_probe.gd", "$Here/rtx_bridge.gd", "$Here/rtx_life.gd" "$Tree/rtx/" -Force
 $bad = 0
-foreach ($rel in 'rtx/rtx_play.gd', 'rtx/rtx_probe.gd', 'rtx/rtx_bridge.gd') {
+foreach ($rel in 'rtx/rtx_play.gd', 'rtx/rtx_probe.gd', 'rtx/rtx_bridge.gd', 'rtx/rtx_life.gd') {
   $o = & $Ed --headless --path $Tree --check-only --script "res://$rel" 2>&1 | ForEach-Object { "$_" }
   $code = $LASTEXITCODE
   "check-only $rel exit $code"

@@ -32,7 +32,7 @@ if ($Stage -eq 'import') {
   & $Ed --headless --path $Tree --import *> "$Tree/import-rtx.log"
   "import exit $LASTEXITCODE; error lines: " + @(Select-String -Path "$Tree/import-rtx.log" -Pattern $Bad).Count
   Select-String -Path "$Tree/import-rtx.log" -Pattern $Bad | Select-Object -First 12 | ForEach-Object { $_.Line.Substring(0, [Math]::Min(240, $_.Line.Length)) }
-  foreach ($rel in 'rtx/rtx_play.gd', 'rtx/dlss_play.gd', 'rtx/pt_scene.gd', 'scripts/observatory.gd', 'scripts/palace_gardens.gd', 'scripts/fountain_show.gd') {
+  foreach ($rel in 'rtx/rtx_play.gd', 'rtx/rtx_life.gd', 'rtx/rtx_bridge.gd', 'rtx/dlss_play.gd', 'rtx/pt_scene.gd', 'scripts/observatory.gd', 'scripts/palace_gardens.gd', 'scripts/fountain_show.gd') {
     & $Ed --headless --path $Tree --check-only --script "res://$rel" *> "$env:TEMP/check-rtx.log"
     "check-only {0} exit {1}" -f $rel, $LASTEXITCODE
     Select-String -Path "$env:TEMP/check-rtx.log" -Pattern $Bad | Select-Object -First 4 | ForEach-Object { '   ' + $_.Line.Substring(0, [Math]::Min(240, $_.Line.Length)) }
