@@ -1677,6 +1677,137 @@ session's Godot windows (the DLSS fork, on another project) ran during part of
 the regression, so its GPU times are rough. --check-only and --selftest passed
 on every changed script in the build.
 
+Version 42, exported 2026-10-13 22:42:51 UTC, brings the Foundation redesign:
+the bays' doors, a library wing, the Imperial Palace as a model, Trantor at
+night, a parterre de broderie, a fountain show and a telescope. The lower
+lights of the two glazed bays are French doors whose leaves swing out as the
+visitor walks towards them; walking through leads to the terrace and the
+gardens on foot, and back in (scripts/palace_gardens.gd,
+scripts/walk_physics.gd, scripts/segway.gd walk_out). Bay 10 is the portal of
+a library wing (scripts/library_wing.gd, assets/wing_stone.gdshader,
+assets/wing_interior.gdshader, assets/wing_carpet.gdshader): a vestibule, then
+a nave of eight bays of book alcoves under a giant order of piers and a
+gallery, with busts, chandeliers and an end window on the city; the areas'
+shelves step over that bay (scripts/course_library.gd), and
+scripts/extra_views.gd adds the wing and keeps the outside views off inside
+it. The palace at the canal's end is a mesh made in Blender by a script
+(artpass/foundation/palace/make_palace.py, assets/palace/imperial_palace.glb),
+where a painted card stood; Cycles baked its light into
+assets/palace/palace_light_web.png (2048 pixels; the 4096 map stays out of the
+pack), assets/palace_baked.gdshader draws it and assets/palace_beam.gdshader
+its beam, and the canal mirrors it from assets/palace/palace_mirror.png. The
+city is Trantor at night (scripts/night_city.gd, assets/night_city.gdshader),
+in place of the painted towers: its plan
+(artpass/foundation/city/make_plan.py, assets/city/city_plan.tres and the
+ground's lights, assets/city/night_aerial.png) groups districts with IX's
+k-means and traces boulevards as shortest paths through their graph;
+assets/city/facades.png was drawn locally by Z-Image-Turbo; six landmark
+towers (assets/city/landmarks/) were made in Blender by a script;
+assets/night_sky.gdshader adds the city's glow and low cloud lit from below.
+The parterre is a parterre de broderie (scripts/parterre_layout.gd,
+assets/garden_parterre.glb, assets/garden_parterre_ao.png): clipped box in
+scrolls and yews, made in Blender by a script, on crushed brick between gravel
+walks (assets/garden_ground_brick.png, assets/garden_ground_walk.png and
+assets/garden_ground_lawn.png, drawn locally by Z-Image-Turbo and made to tile
+without repainting); the basin and its fountain of two bowls are a mesh too
+(assets/garden_basin.glb); assets/palace_garden.gdshader,
+assets/palace_glow.gdshader and assets/garden_plant.gdshader draw them. On the
+canal, a fountain show (scripts/fountain_show.gd,
+assets/fountain_show.gdshaderinc, assets/fountain_jet.gdshader,
+assets/fountain_crown.gdshader, assets/fountain_pool.gdshader,
+assets/fountain_spray.png, a synthesised texture) plays ten scenes in a loop
+of 120 s on 288 jets, with no simulation: a shader places each ribbon where
+the water that left its nozzle earlier has flown since. Under this build's
+renderer, which has no tone curve over the frame, each layer of water is laid
+over what is behind it instead of added to it, or the jets seen along the
+canal burnt out white. At quality level 2 the show loses its spray and its
+reflection, and from level 3 it is hidden. Key O opens a telescope
+(scripts/telescope.gd; scripts/view_fit.gd lets the field go under one
+degree): 12 times at first, from 6 to 100. The drone's hum
+(assets/sfx/drone-hum.wav, scripts/drone.gd) is a steady synthesis, 12 dB
+quieter, its pitch following the flight half as far. The statue's inscription
+reads its glyphs through mipmaps (scripts/seldon_statue.gd). The steel box's
+mesh was exported again with area-weighted normals, which keep its bevelled
+panels flat (artpass/blender/steel_portal_gaia.py,
+assets/steel_portal_gaia.glb). assets/garden_palace.png and the six
+assets/garden_city_*.png stay in the pack as the fallbacks they now are. Every
+other script is version 41's, scripts/observatory.gd and scripts/quality.gd
+version 28's.
+index.pck is now 55,183,160 bytes, 23,106,432 more than version 41's;
+index.html changes only that size, and index.wasm and index.js are unchanged.
+In headless Chromium 153.0.8010.12 (Playwright's build 1243, since Chrome had
+an update staged) on this machine (RTX 5080), the build served from
+127.0.0.1:8793 by gzip_server.py (artpass/publish/webtests-pub35.ps1; one line
+per test in web-pub35/summary.txt, each test's output in web-pub35/), on
+2026-10-13, on export 3, the one published: the eleven tests reported version
+42 (built 1791931371) and exited 0: - the troupe
+(artpass/tarsdance/troupe-web.mjs): upright and sideways, each number ended
+18.0 s after the call with its 413 and 279 landings; frames 16.7 ms median,
+16.8 ms at the 95th percentile, one frame of 133 ms in the sideways run; no
+exception, no console error; - the wheel (curio-web.mjs): upright and
+sideways, 5 touches each, no exception, no console error; - the drone on a
+computer and on a phone (drone-web.mjs): started on both; headless Chrome's
+three pointer-lock exceptions on the computer, as on version 41, none on the
+phone; - the sound (artpass/audio/audio-web.mjs): the context suspended before
+any touch or key and running after the first, 208 starts while the TARS walk,
+157 home, 3 for the drone (13 on version 41: its hum is now one steady loop);
+- the hums (artpass/audio/loop-web.mjs, loop_check.py): the drone hummed from
+2.2 to 20.0 s at a median of -41.4 dBFS (-29.5 on version 41) with one silence
+of 14 ms at 16.3 s; the lift's hum had one silence of 176 ms at 14.9 s (1.55 s
+on version 41; to verify); - the gardens and the ride
+(artpass/gardens/gardens-web.mjs, artpass/gardens/ride2/ride2-web.mjs), at a
+computer's size and a phone's: mounted, rode 24.9 m and got off; hands off,
+the tour ran 37.9 m, was taken over, the rider got off, walked 6.1 m, got on
+again and came back inside; quality level 0, 16.7 ms median; - the redesign
+(artpass/foundation/web/foundation-web.mjs), at a computer's size (1600x900)
+and a phone's (390x844 at 3): the start, the gardens, the ride, the wing's
+views and the telescope. The first start, in an empty profile, took 25.6 s and
+was measured at quality level 5, with one frame of 650 ms; the next took 17.6
+s, and the eight others 5.8 to 6.9 s. Past the first, the starts, the gardens
+and the telescope held 16.7 ms median and 16.8 ms at the 95th percentile, at
+level 0 (the phone's start at level 1); the wing's views 16.7 ms median, 16.9
+ms at most at the computer's size and 33.6 ms at the phone's; no exception, no
+console error; - the same on Chrome's CPU renderer (SwiftShader), the start
+and the gardens: started in 19.1 and 13 s, at level 5, a frame every 1.5 s in
+the hall and every 250 ms in the gardens: the scene starts there and is too
+slow to use. Run afterwards on the same export (web-pub35-scope100/): the
+telescope taken to 100 times over the gardens. 16.7 ms median, 16.8 ms at the
+95th percentile, one frame of 133 ms, and 220 console errors in the 4 s
+measured, "Condition "p_fov < 1 || p_fov > 179" is true": past 57 times the
+fountain show's mirror asks Camera3D.fov for less than a degree, which it
+refuses, so the mirror keeps its last field and Godot prints the error at
+every frame. The fix is in the scene's sources (scripts/fountain_show.gd
+through set_perspective, as scripts/view_fit.gd does) and not in this build.
+One run each; no real phone and no real weak GPU were tried.
+Native runs against this build's own project
+(artpass/publish/regress-pub35.ps1, artpass/publish/regress-pub35/; results in
+regress-pub35-export1.txt and regress-pub35.txt), with stock Godot 4.6.1's
+console build, on 2026-10-13: 96 runs on export 1, the earlier versions' list
+and this version's own (the walk out through each door and back, one also at
+10 frames a second; the wing walked and flown; the parterre; the basin; the
+telescope in both renderers; the stalls of first views in both renderers; the
+wing's looking glasses; the views and the show's shots in both renderers; the
+show's water against the canal's rim over 120 frames of a loop). 83 passed,
+and no run printed a script error. The four crowd runs failed walks_blocked:
+the two walks beside the parterre de broderie had their outer edge 5 cm inside
+its compartments. scripts/palace_gardens.gd makes them 10 cm narrower on that
+side (export 2; export 3, the one published, is export 2 made again from an
+empty out/, since export 2 had packed the icons of the export before it), and
+the four passed on export 3. Eight others failed on the first pass
+(lean_keys_fwd, lean_keys_10fps, lean_touch_land, curio_keys, cinema_keys,
+cinema_phone_touch, cinema_fwd, bays_compat) and passed when run again on
+export 3; why they failed the first time was not established. motion_bay14
+missed the same point with the same numbers as since version 31 (2.99 against
+3) and was not run again. The 83 runs that passed on export 1 were not
+repeated on export 3, whose pack differs from export 1's by
+scripts/palace_gardens.gdc and .godot/uid_cache.bin (pck_names.py). The spill
+check found no water past the canal's rim (3062 m2 wet, 0 m2 past the inner or
+the outer rim). The telescope's two runs passed and wrote the field error
+described above 188 and 213 times to stderr: they check the view's field and
+the frame rate, not stderr. --check-only passed on the changed script and the
+selftest under both renderers, with nothing missing, before export 2
+(rebuild-pub35-2.log).
+
 Native Compatibility GPU time, RTX 5080, 1600x900, 240 frames per view: 0.44 to
 0.52 ms for the previous web scene, 0.64 to 1.44 ms with the detail pass; up to
 1.55 million primitives in the overview, against 0.46 million before. With the
@@ -1692,12 +1823,12 @@ export_presets.cfg 38e6c4584777b1bf5beb1499a046899f6c0ba192972678167b953cb774760
 scripts/fly_camera.gd 2e5cdd15ca7bdcfa30ec129e354a309f3ff7296f6fbf54ac144984ed9aa9f8e7
 scripts/capture.gd 52ea2b5e40db2f1f4cdbd7658074ef60bd117e1f4110c1b8995590a4196748d0
 scripts/observatory.gd cdbab5d96d8679c893602ca4e67064a899982642f58e4c655975e0f2e97acbec
-scripts/course_library.gd 56de4cb69fa6c3c8402a2928e09ef84d09a2d9e22c610c29609ad9d4013a2651
+scripts/course_library.gd 18dcf297f5576a2c8e4bd6843e6f69e94dd27ba38261954df7611659ffb04387
 scripts/steel_cube.gd e580df5ce6262f4f15b992cde21abb42f553f13029f54cc6bc489f6ee4bbf5ac
-scripts/seldon_statue.gd c8785f079f648ea50694055fe87d26bb56e0ee2ab129251399d88bd13d0030b4
+scripts/seldon_statue.gd f0261780bbad9dd047e27ecaaf07e1dc72604a52edc197564da50c8376861acd
 scripts/touch_controls.gd f4d4076608a731c8d0e58c6eea6ecb5a981655279589b45ab8ff34a666fa394c
-scripts/walk_physics.gd 1f505c12f81341ed1ed1da3b372aa17409b6f04b2ab5a0801623da53c4617037
-scripts/view_fit.gd f574c7949a5b324f91f062df9982366c123271804069b507206f88ad7062fe4c
+scripts/walk_physics.gd 16ede04a9ac91cd80ae8a03373a4627ca5fcb2f719dec4edee64543617661919
+scripts/view_fit.gd 15b0d7cf03215f8d45ab07b2f11cf3f28421431941d3f1d0c3840cf5f58a0fd7
 scripts/view_move.gd 558a4059815cb3a8a202d205d8cfada17653fb533e7e056bfe9e8a434dac0431
 scripts/multiverse.gd 0de3cece747a87c742ba6b26c8fac27a6a7dcdd18286f30957899becb2dfb34d
 scripts/camera_follow.gd dc63643772a7dceb41583169aeec3d3053d8555a20540fd29a1c9cbade2a712d
@@ -1720,9 +1851,9 @@ assets/floor_paving.gdshader 23187f024d276b897635ee0cc3e543c5852c4a9b5175cbe56ec
 assets/statue_marble.gdshader ec3f14f662487f3dae14a398fe91ea7183d88214bd2bf266359da89d79b94452
 assets/world_glimpse.gdshader a06fc85ca086fc3e4d9297039be0b6549132bbffafeaedfbda0ffea3eb918d6d
 assets/courses.json 407817e268f2c0d37ce28ae0d873f08b87a514479d6a73545b75d1dfbb71823b
-scripts/extra_views.gd d4ea3381e333209b78c316d6fac59c9580b3d3f3980bb2a08c4afc3bfd334f4a
+scripts/extra_views.gd 04e14ef5d7dc040c52b5c7f94491bbed9fd6c8c001e8073984d12d65fac58b92
 scripts/upperside.gd 589ec27dde00b87e8bd40d190911e34b1dc3e99532d13a88f30925392d026be8
-assets/night_sky.gdshader 67421b4338debb80d8b6cec071bb37001d9d5493d240be53c0a107ad17cb5cec
+assets/night_sky.gdshader b55cb7ea3cdf2e25322a7e7f372785a9164bc8b94ebd4535e198de34be53d363
 assets/upperside.gdshader f119593a603bc623de218054ec142b8732330785fe0d61ba5a3dcc13124f96e3
 assets/sky_milky_way_eso.jpg b17e19bf2d5e7e9efa03b602450f5189dc77f85251e704d99b6f14632cff3495
 assets/exterior_ashlar_albedo.png c0cff260c039e1e1528920f86070266ac20ba2a3e36e99a53654c2ed18cdef94
@@ -1732,7 +1863,7 @@ assets/sky_core_cap.png a110fdfa1b79cc41eec119265aeb89bc211d0b8e0eb6c759b45c2549
 assets/kiosk_glass.gdshader 76226f17e5884a042b85e5fc544a4b71012ea6e389b9743c1cac65083a06bc44
 scripts/lift_sounds.gd 4daed5e380396a3711fc7ff2f1f72b877b9efbdaff6d6fa428c595b1dad7b244
 scripts/curio_wheel.gd 67f60a84432aa6e46efb17b296b71e2fdf2e826ce54e29ff23e0836e87335ccd
-scripts/drone.gd 6d90aae0fe64191ff0f6a7bfcbd6c56d551153e1eb03c3e8b71509a69ef87209
+scripts/drone.gd 0d2855e8b8e3e1fe3ce945435988cd757a80abd5f76a36cb88b08020049dd605
 scripts/tars.gd d50da54780d8535bda63b713388e4651b7f88ec8c3f9e0c2b1a59196ba37d03e
 scripts/hologram_ix.gd b252ee1de7055822af6886ea796e6a8e35aa81510ec0eb4f36b2bcf20b32e8a6
 scripts/quality.gd bdad805e7717769145b5aa2ad98aca56b0b76857fdcd86e87817f1bc53046c69
@@ -1748,7 +1879,7 @@ assets/fresco_panel.gdshader e9c20421cf254119e9d85da22a70bb8a965cee0be524f5c95b2
 assets/fresco_dust.gdshader 9d63b02079689cd0205a9d469c743645d4fac1ccfff21a3d0326f36a3062341c
 assets/fresco_atlas.png cccc2917f794f42517ee001392802ec6828acc747f585018e49349474b1638fc
 assets/fresco_motion.png aa7148be2c28917ddae5d92b7a155c46fe024460c67e919106be23782fdf7822
-scripts/build_info.gd edd2df5124328310132aa0f0b78d3ba4cfd392df1ae14bedb0aa0339efddb6d8
+scripts/build_info.gd 903ab96a1ef4887b23e9937ea5fbc415de36687564aa2bc218d5a20e004e8d54
 scripts/sfx_takes.gd 069f573898d4c4ad48fde9f1f592dba0974433b1881d7ed045d6797c3c3a0ac6
 assets/sfx/curio_wheel-beep.wav a1d999098afbd222622a6c4625ee16bb9788059c6fe37901067d9cd239f5ec8c
 assets/sfx/curio_wheel-chime.wav 6b580b1e57194c1f84183044c367bcab9d07e3d4c876da3dee5736ba78298c9e
@@ -1767,20 +1898,20 @@ assets/sfx/lift-bell.wav a862662797c95b518a3196bdaabc25bb9cf59c289797767f1c7bff2
 assets/sfx/lift-hum.wav 8fb1c4c42673f5904b8304f1d66d58e403f7d4f360c347b41d5a3bef71342500
 assets/sfx/lift-rattle.wav ca4492ca261db9c13a17b316146296cb0eff9f527c2d6508a441ff984395281f
 assets/sfx/seldon_recording-shimmer.wav f162e8a4e867503b38271d149a631e2cc1818ae2ab3600897dffa5770e23f8d0
-assets/sfx/drone-hum.wav 9e7adb0d9a8b790a9facf803ef0a0b2588150c71569912fc2db9e339383a9364
+assets/sfx/drone-hum.wav 57e9fe96038c6947cce0944d0f536d01d7a161f2ae8824816035bc674aecfa8e
 scripts/cinematic.gd a6e03dc5adc4e673001ba48e6387c4311c1c7bd9b78c7bf49539308290eaa091
 scripts/tars_ensemble.gd b16f31ba0bb92eb86b2296a64ff476e59cb3db11a6f800b19db402ebda6c1239
 assets/tars_ensemble_tracks.tres 6c2be9a6fc350c02f8dd19e6a768ed911d11ebd741d4c5939bb585a84171b272
 assets/tars_ensemble_jig_tracks.tres d7604ba2a5dc3e61fb29441d145d0d98703193c516d429a754e9c0e4949383a0
 scripts/web_loop.gd cd89961d3e7e5d8275d67ead034eb2184587810dc710316c5377f58a16e35cbb
-scripts/palace_gardens.gd d580f03f93493ffeb96f9426a5e9647730036be8afb0a0f0c8dee64e248e26dd
-scripts/segway.gd 5745cb41098325ec424a084f262bc5be5386b100388eefb6d01bd2b256b8d9aa
+scripts/palace_gardens.gd a36a071647b14c4621499a023f3efd6cf0abab07b851c7db21d383752cb570ad
+scripts/segway.gd 1f90a984edc35ba2301ece1819776eaf1dfea29e56eefce5939729c59f34a972
 assets/hall_env.gdshaderinc f4ee2ad1a4b5af0839924033507d492b59ce003baad50b35f9afc4f645b3bae5
 assets/bay_glass.gdshader 5cf98fa61a8a189d25abf4e990d533dc7bb7c696d6a761625f555b4f13ac9fd5
 assets/garden_card.gdshader 42c1f7e2b2e104a52cd4b31d04e18b93176cfdc04d22c55a3011f5a22b7f6da5
 assets/garden_impostor.gdshader cdd31ff1d8ec84e8cb3beb5d30169770f6791ac4f2385224e53ab9aae8b23016
-assets/palace_garden.gdshader 2784830b9e7a746aaabc4dd60dc5281abfdeadf01ca696c66df3b2b05dcbe287
-assets/palace_glow.gdshader 509e040a423020e73d643b15268ae8b804655ba513ebf6a0283281b54f3557f0
+assets/palace_garden.gdshader 3b53aa1f2db0f6a0285370f90ec6fe8554ce2464c1543478c9d6482160060267
+assets/palace_glow.gdshader 4306df1b7d350256329966039d1260bcb19891f663c043c59ea41503bc80fd96
 assets/garden_baluster.obj 8fe3a8973ab1eb7779193b8d3062030b8ef0457673a3826dbb376a4d6ed27247
 assets/garden_baluster_low.obj 64d36f292626f7761ae876257a97abb255655e5f3274bb7859b4e70d6797cff7
 assets/garden_pedestal.obj 9be8ab11e4b98d71150ea87a33a9000a394751619850ec07c12813e3f9265b2e
@@ -1802,7 +1933,7 @@ assets/garden_city_738.png 4df4a1903fe8f7ab1f6d5a44a66e658994b38123dea29c2da9ee4
 assets/garden_palace.png d5b13df8f900e0b529dd7a5de89895e0c99603123c64de9a32d91c47e357899e
 assets/garden_stone.png 432e7a4a676e96916043f95eebc82dbfd0971c3655cd9a8011f20b7156f90389
 assets/garden_paving.png 81afdc39127356a22719dc103000c5d7bfce63ce3054361a7fa9966f9762d414
-assets/garden_plant.gdshader 7b8b76cecfbc6a4632f1651535498caea9b2ba10dcecb29cd7c97979434f014a
+assets/garden_plant.gdshader 1e229b90f1a6b06b33a4eaa8cf1347ae311adb3f554a362cc4e50567366bb8dc
 assets/garden_tree_linden1.glb 342e6ab53b7cc2cf00b4b01449d69285e6cf5daf170b2a5388432dd430071d88
 assets/garden_tree_linden2.glb c89718e972c32dd2203b536bbb9e68781966351ccc297a123f6218c046934625
 assets/garden_tree_linden3.glb 2970958c39fc0322097fdef4bb1e5202dae2c4970bd4b359bb721f477d13463b
@@ -1836,19 +1967,53 @@ assets/garden_figure_walker.glb 6a2aff1f8a2548b183f70790cee06d5e004e4235351e95a3
 assets/garden_figure_gardener.glb 0e73084eef802a7d7d1f9dacd83ab49766eee95977f9ba120c6b83da2598cf3d
 assets/garden_tub_wood.obj 42b87c2c1456c02b2a7c2a4d6225714e11383a9fc30a1ac48f128a6241bc165a
 assets/garden_tub_iron.obj 1a46aaa8a55ed6c5bbf28711160fb4b81b2b84464fe929443a9ba2c7e90b1144
-assets/steel_portal_gaia.glb da44282f8f18247d9af8013840d5af3e9a79c2b3537442f1d53f281356aea1fa
+assets/steel_portal_gaia.glb ad907ea7e03ddb15513ad460775844d4335cf6914330be766b5fa7f28107055e
 assets/steel_portal_gaia_steel_brushed_metalrough.png 5ff2536465d123be778e64d362517af8e02a2a0cc5793b84955b25be33971496
 assets/steel_portal_gaia_steel_brushed_normal.png 37132094bf4d642dd486743dbd57ff2489afeb6f9e2aeaffe8f6c3f42395705c
+scripts/library_wing.gd f678665a5de95f981e761b9d8065326699ecef1e4906cf87391a32e4640ad25b
+scripts/night_city.gd 16042e9cd3a4e9accce27f7e03653f38511443a6bd6b2c1220d4b46098a1be96
+scripts/telescope.gd 28fd1dbc68a707731fdd6426ae14e392c595e385ab47deab799479598136e71f
+scripts/parterre_layout.gd c9908b4048cbb44deb36c16371b90c7ad0cf5f16ca296ca3f38c0c406045d6bf
+scripts/fountain_show.gd 18a27a58feeb2191b57b085f9011f6add92100989a77060a24d6c0d2769a5754
+assets/night_city.gdshader 543b355ba37b6256e76c00932cec089af2ae9ca9f26921155a2f9cfb0d150588
+assets/wing_carpet.gdshader 054a506e8c3a5c0671c02cdcfd1875ff232541d6c77494efb0058c10edf17a0c
+assets/wing_interior.gdshader c36244828b515ef83ac144beef36e41719c98d9e6b60481cc5dacdf474a8c217
+assets/wing_stone.gdshader 6b2d57aac7d95f033f4a549e2e9d874eb047c98cee3e8d617a5dbf8081765559
+assets/palace_baked.gdshader 41a78efbb14b1d9b9257836b66958975148b644c07dee5ac531152717446803a
+assets/palace_beam.gdshader 3b924e6fc45554b53b335b9c185da06d58d2e486a1f80f0f984a8e80d3a457c6
+assets/fountain_show.gdshaderinc 6cf9ae321343cf00e94cb0cfd002e265750d0405f322e95c2f57164030b4f149
+assets/fountain_jet.gdshader fdd8f6de14801b28f6047f99bd181142481df80493d886d1ce9fa062052f4577
+assets/fountain_pool.gdshader 3061655245ddbcd96fd216307fc1b295b6f237018f90dd2a67deef5bd657d996
+assets/fountain_crown.gdshader f2a9b3efa0d4be5c99cef75ff78b745fdf07607e6ea432140faa9dd7e37b1f59
+assets/fountain_spray.png 9d0b06da96ae72fab8afbda19075c467ef2fe361c03025dd0c738ff7a4c31bf7
+assets/garden_basin.glb 05fc67a8f204624d60c5e631269c5868942973534c0cd0feefb09b5ce73f51ee
+assets/garden_parterre.glb fe36cb65c2e23cfc7440262eefd9b069c37f76cdb434e1cbc8ae62acfec3beaa
+assets/garden_parterre_ao.png 4bc61c96badf5af9a71d8685ef4a87aaf43dadbacd231434b7ea917b69ea17fa
+assets/garden_ground_brick.png e3f8c77b40f447d17551e451b4f521e4c7ff07fcf696895830e39966f5498e34
+assets/garden_ground_lawn.png 0f34ddd16b216c955bb3398509a063c16c86e03c157c77fa5827e2f1d69f9f3f
+assets/garden_ground_walk.png e92da730f128566789525ba502164f344cd8fe4d03e5420a96e67f36b26013ac
+assets/city/city_plan.tres 4e57b58d6b518952f232616f31a1f69e9dfe304c3b9131303eaf26a3baf9d0de
+assets/city/facades.png 0decf03a740ab9fdc6e9fc01d2e44a8432c02298f946345630f995af068476ab
+assets/city/night_aerial.png 9416829415748184b42c9e83b91c1ff8a4865ec525bb7611d330cd95a776554a
+assets/city/landmarks/helix.glb adc29268b3bd44192c0ad12864dcafb70427512dbf8929dd0ebc8301b5074a9e
+assets/city/landmarks/hyperboloid.glb b16e7ed889372f93605926e3c2302c3bce09a26bf9a64eca8da2154bbe1d3ac7
+assets/city/landmarks/needle.glb bd0b9927d18399ba84c97192c5a45f01527d5784cd930ec85d5b5639ca1d1164
+assets/city/landmarks/sail.glb 13ad99d2c9086a38ee822472fa18e34722b07253b83b7eec5afa198007bffe60
+assets/city/landmarks/stack.glb dedf93f706b0a3635eb4f2e51d0c11223387591eff75d66aa2ca2e4779e4d744
+assets/city/landmarks/twins.glb 481904954241a2367680f78c3700d5d340f6fa60d52f7a24a0212a6e9e3b2725
+assets/palace/imperial_palace.glb 3aa999e6e942ab7ffe26887a92e46fefe19b145bdc18c717f585c3c74a03691e
+assets/palace/palace_light_web.png ab2212fc7520265c29656cd65fd0aad32131b69d9bf9ae2cb5b4e87aacb57bdb
+assets/palace/palace_mirror.png 83e5eb4ba6ae5a98cad0a5dfd5c38f81368cd7b34d745d211634009ff7f2c719
 
 SHA-256 output files:
-index.pck 758e12e3c158bab4b4223e2c18b92dd1e452ef45600c99adad38230b8922b11f
+index.pck a4b3931e5396185b1817ea84c89461443c412bca43d818ff4e333169cebb613f
 index.wasm 99962b29677e42f3ba0258bd90fdc52ad90295954c4473e816ad02cfe5ff1d4f
 index.js e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981
 
 This directory contains a prebuilt binary export. Re-export only for deliberate
 scene changes. A scene re-export leaves the engine files (index.wasm, index.js)
 byte-identical, so git keeps a single copy; each scene revision adds its
-index.pck (32.1 MB here) to the binary history.
+index.pck (55.2 MB here) to the binary history.
 
 2026-10-03 post-merge recording sound correction: v28 preserved the v27
 `scripts/seldon_recording.gd` hash above before this correction. Fresh R or a
