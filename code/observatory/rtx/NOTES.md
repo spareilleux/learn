@@ -71,3 +71,37 @@ The author: « Peut on avoir un .msi sous Windows et leur équivalent sur Linux 
 - `test-msi.ps1` on this machine, not elevated (`C:/tmp/observatory-msi-test-1/report.json`): install exit 0, eight files equal, the shortcut's target and folder, the uninstall entry 0.1.0; the installed exe headless for ten frames exit 0, no error line; an update to a test package numbered 0.1.1 over twelve empty stand-ins named as NVIDIA's DLLs, a notice and the marker: exit 0, the stand-ins kept, the edited README rewritten, one uninstall entry (0.1.1); uninstall exit 0: no folder, shortcut, HKCU key or uninstall entry left, `%LOCALAPPDATA%\Programs` kept.
 - Published on the release `observatory-rtx-0.1.0` beside the zip, SHA-256 `3c8aabc666f91583e6a96a80481fee8704e12cf3e3df0a0a611bbf09ae42741b` (downloaded back, equal); installed on the author's machine in place of the zip's copy, which is kept in `C:/tmp/rtx-host-install/manual-backup`.
 - *To verify*: an installer downloaded by a browser (Mark of the Web, SmartScreen), Windows 10, another account. `README.txt` still opens on the zip's steps.
+
+## The autonomous pass (2026-10-14)
+
+The author, leaving for work: « continue à améliorer la scène 3D RTX […] tester tous les réglages possibles et trouver les meilleurs réglages », « pousser le MSAA au maximum », « des effets de moirée bizarres […] ça donne des clignotements […] essaieras de mesurer ça et de voir quel remède », « un genre de bouclage agentique » through « MCP ou A2A ».
+
+- **256 lights in the rays** (fork patch `raise_rt_lights.py`: `RT_LIGHTS_MAX` 64 → 256, frustum budget 192). The hit shaders draw 16 candidates from an unsized buffer, so the cost per hit does not grow with the list: the start view at DLSS Quality, 15.0 ms against 14.97 before (`logs/ab-lights64`, `ab-lights256`).
+- **Reading lamps ×3 under the path tracer** (`--rtx-shelf=`, default 3; rasterized they keep the scene's energy): the start view from mean luma 0.158 and 27 % nearly black to 0.186 and 17 %, same GPU time (`logs/shelf-b5`). ×5 begins to burn the middle shelves.
+- **DLSS Ultra Performance** finds no mode at 3840 × 2054 for any scale under 0.5 (`find_optimal_mode`, `logs/ultra-scale-b5`): taken out of the F7 list.
+- **FSR 2 at scale 1.0** is broken in this fork: 45 % of the frame nearly black and unstable. Not offered.
+- **The window** stayed at 1600 × 900 in three of seven runs: the player now maximises a windowed root, and the probe waits until the window is 95 % of the screen. The MSAA 8x numbers taken in the small window were thrown away.
+
+### Flicker while the eye turns
+
+Measured through the scene agent (`rtx_bridge.gd` + the Go MCP server `mcp/`, tool `obs_flicker`): ten frames while the eye turns 0.004° a frame (about a quarter of a pixel), per pixel the worst second difference in time |f(t) − 2f(t+1) + f(t+2)| of luma, less the same measure on ten frames at rest (dilated 5 × 5), which removes what moves by itself and the path tracer's noise. What remains is what crawls because the eye moved: aliasing and moiré. Hall start view, `Generated/Rain` (the green beams) hidden because their pulses change phase between two sequences.
+
+| Anti-aliasing | mean | p99 | share > 0.06 | GPU ms |
+|---|---|---|---|---|
+| MSAA 4x + TAA | 0.00020 | 0.0025 | 0.06 % | 6.6 |
+| MSAA 8x + TAA | 0.00039 | 0.0025 | 0.09 % | 7.5 |
+| TAA alone | 0.00043 | 0.0028 | 0.12 % | 5.4 |
+| Rasterized, DLAA | 0.00048 | 0.0132 | 0.07 % | 9.5 |
+| Rasterized, DLSS Quality | 0.00070 | 0.0168 | 0.09 % | 4.6 |
+| Path traced, DLAA | 0.00168 | 0.0380 | 0.40 % | 29.8 |
+| Path traced, DLSS Quality | 0.00178 | 0.0367 | 0.40 % | 15.0 |
+| MSAA 8x | 0.00583 | 0.1263 | 1.99 % | 6.7 |
+| MSAA 8x + SMAA | 0.00601 | 0.1166 | 2.56 % | 6.9 |
+| MSAA 4x | 0.00681 | 0.1599 | 2.18 % | 5.9 |
+| MSAA 2x (the package's fallback until now) | 0.00801 | 0.1987 | 2.14 % | 5.5 |
+| MSAA 8x, texture mipmap bias +0.75 | 0.00523 | 0.1221 | 1.93 % | 6.7 |
+
+- MSAA alone, even 8x, crawls ten times more than any temporal method. Its heat map lights the pier silhouettes, the shelf fronts and the floor's lines: edges against bright highlights, which a resolve in HDR, before tone mapping, leaves hard however many samples it takes. SMAA adds nothing; a mipmap bias of +0.75 takes 10 % off: the crawl is not texture minification.
+- What is left under DLSS: speckles on the dome's coffers and the outer piers' edges (rasterized); under the path tracer, the statue, the stained glass, the shelf fronts and two moving lights near the oculus.
+- **Sharpness at rest** (`sharp.py`: mean |Laplacian| of luma over five regions, relative to rasterized DLAA): DLSS Quality 0.94 to 1.01; MSAA 8x 0.93 to 1.24 (part of it is the aliasing itself); TAA 0.65 to 0.91; MSAA + TAA 0.61 to 0.83. Godot's TAA steadies by blurring; DLAA steadies and keeps the detail.
+- So: with NVIDIA's files, DLSS (path traced or not) stays the default. Without them, the fallback becomes MSAA 4x + TAA (the steadiest, 6.6 ms) instead of MSAA 2x; MSAA 8x + TAA is offered for the author's « MSAA au maximum ».
