@@ -1894,6 +1894,60 @@ under both renderers (the city drawn from the air over the wing) and the
 fountain show: all sixteen exit 0 with no script error. The other eighty of
 version 42's runs were not repeated.
 
+Version 44, exported 2026-10-15 00:19:53 UTC, answers what the author saw in
+version 43 at quality 0 ("On a toujours des barres de livres qui [...] nous
+barre la route"): a row of books across the way into the library wing. The
+gardens open three bays of the hall's shelves, the two French doors (bays 2
+and 5) and the wing's portal (bay 10), and hid the course row there once,
+after the start (scripts/palace_gardens.gd _open_bays). The course library
+builds its shelves again when the live course list differs from the one the
+build carries, as it does on the site (117 courses on 2026-10-14 against the
+build's 74), and at each change of language; each rebuild put the row back
+across the three bays. The gardens now record the bays they open on the
+observatory node (the meta open_bays), and the course library leaves those
+bays empty at every build (scripts/course_library.gd _build); it still draws
+their filler books from its random stream and drops them, so every other bay
+keeps the same books. Every other script is version 43's,
+scripts/observatory.gd and scripts/quality.gd version 28's.
+index.pck is now 55,186,008 bytes, 768 more than version 43's; index.html
+changes only that size, sw.js only its BUILD line, and index.wasm, index.js,
+the manifest and the icons are unchanged.
+Version 44's native checks, on the export's build tree with stock Godot 4.6.1:
+--check-only on scripts/course_library.gd, scripts/palace_gardens.gd and
+scripts/observatory.gd, and the selftest under Compatibility and Forward+
+(missing: none); then artpass/foundation/openbays/openbaysprobe.gd, headless
+on the same tree: the gardens open bays 2, 5 and 10; after the load and again
+after a change of language, the course row stands in none of them, nor its
+crystals, and in the 13 other bays; with the gardens' record of their bays
+taken away, changing the language back puts the row across them again (the
+check's own control). Version 43's other native checks were not repeated: only
+these two scripts changed.
+Version 44's web tests, on its export in headless Chromium (ANGLE, Direct3D
+11, RTX 5080), served as GitHub Pages serves it: version 43's eleven tests
+(webtests-pub35.ps1 on a copy of the export without sw.js), all exit 0 and all
+reporting version 44 (built 1792023593), with no console error: the troupe,
+the curio wheel, the drone at a computer's size and a phone's (three
+pointer-lock refusals at the computer's size, as in version 43: headless
+Chrome grants no pointer lock), the sound, the hums, the gardens, the ride,
+the redesign's own cases at both sizes with the telescope at 100 times, and
+the start and the gardens on Chrome's CPU renderer. In that run the gardens'
+cases started in 12 to 29 s and stayed at quality level 5, one at 308.8 ms a
+frame, and the lift's hum had three silences (2.7 s in all), where version
+43's run had started in 6 to 26 s and settled at levels 0 to 2 with one
+silence of 96 ms. Run again alone the same evening, one after the other,
+version 43 and version 44 did alike: the gardens started in 15 to 36 s and in
+12 to 31 s, at level 5, frames at 16.7 ms median; the lift's hum had three
+silences (3.2 s) and two (3.2 s). That was the machine's state that evening,
+not the build. The bays on the web (openbays-web.mjs, openbays-web-pub37.ps1):
+a computer's screen, the camera 9 m from the wing's portal and from a French
+door (?view=), a screenshot 15 s after the scene ran. With the course list
+each export carries (74 courses) neither version rebuilds its shelves and
+neither shows a row; with the site's list of 2026-10-14 (117 courses), version
+43 shows the row across the portal and across the French door, at quality 0
+there, and version 44 across neither; the console empty in all eight. Not
+tested: a real phone or tablet, Safari, Firefox, and the update from version
+43 to version 44 on Pages itself.
+
 Native Compatibility GPU time, RTX 5080, 1600x900, 240 frames per view: 0.44 to
 0.52 ms for the previous web scene, 0.64 to 1.44 ms with the detail pass; up to
 1.55 million primitives in the overview, against 0.46 million before. With the
@@ -1909,7 +1963,7 @@ export_presets.cfg 38e6c4584777b1bf5beb1499a046899f6c0ba192972678167b953cb774760
 scripts/fly_camera.gd 2e5cdd15ca7bdcfa30ec129e354a309f3ff7296f6fbf54ac144984ed9aa9f8e7
 scripts/capture.gd 52ea2b5e40db2f1f4cdbd7658074ef60bd117e1f4110c1b8995590a4196748d0
 scripts/observatory.gd cdbab5d96d8679c893602ca4e67064a899982642f58e4c655975e0f2e97acbec
-scripts/course_library.gd 18dcf297f5576a2c8e4bd6843e6f69e94dd27ba38261954df7611659ffb04387
+scripts/course_library.gd 16a46051464d9cbbb24acaa4bf6c6ff6e777295c9ad5dd5e115ca6e028d95750
 scripts/steel_cube.gd fee81a60fe3050a017e60d099a3bceb3555b502eb3e09d0d83febaeafe3e7773
 scripts/seldon_statue.gd f0261780bbad9dd047e27ecaaf07e1dc72604a52edc197564da50c8376861acd
 scripts/touch_controls.gd f4d4076608a731c8d0e58c6eea6ecb5a981655279589b45ab8ff34a666fa394c
@@ -1965,7 +2019,7 @@ assets/fresco_panel.gdshader e9c20421cf254119e9d85da22a70bb8a965cee0be524f5c95b2
 assets/fresco_dust.gdshader 9d63b02079689cd0205a9d469c743645d4fac1ccfff21a3d0326f36a3062341c
 assets/fresco_atlas.png cccc2917f794f42517ee001392802ec6828acc747f585018e49349474b1638fc
 assets/fresco_motion.png aa7148be2c28917ddae5d92b7a155c46fe024460c67e919106be23782fdf7822
-scripts/build_info.gd 22551bb34808bcd3e26901fa84ea710b3993c6ee23fed8c7073696a0054627b3
+scripts/build_info.gd e0a6ff31e6c1e093ac99d99e3c0e5e8cd7b7936d9b26aef0624e245bc12f1fda
 scripts/sfx_takes.gd 069f573898d4c4ad48fde9f1f592dba0974433b1881d7ed045d6797c3c3a0ac6
 assets/sfx/curio_wheel-beep.wav a1d999098afbd222622a6c4625ee16bb9788059c6fe37901067d9cd239f5ec8c
 assets/sfx/curio_wheel-chime.wav 6b580b1e57194c1f84183044c367bcab9d07e3d4c876da3dee5736ba78298c9e
@@ -1990,7 +2044,7 @@ scripts/tars_ensemble.gd b16f31ba0bb92eb86b2296a64ff476e59cb3db11a6f800b19db402e
 assets/tars_ensemble_tracks.tres 6c2be9a6fc350c02f8dd19e6a768ed911d11ebd741d4c5939bb585a84171b272
 assets/tars_ensemble_jig_tracks.tres d7604ba2a5dc3e61fb29441d145d0d98703193c516d429a754e9c0e4949383a0
 scripts/web_loop.gd cd89961d3e7e5d8275d67ead034eb2184587810dc710316c5377f58a16e35cbb
-scripts/palace_gardens.gd 18f29af076b54f3e6cdef31987c34dac6dc2c9f57f814221dca59762bdd11186
+scripts/palace_gardens.gd 0250aeb090f31dd826e5c07f5bab2fe957920bb0c7bae9ae70a621fe20dea43a
 scripts/segway.gd 1f90a984edc35ba2301ece1819776eaf1dfea29e56eefce5939729c59f34a972
 assets/hall_env.gdshaderinc f4ee2ad1a4b5af0839924033507d492b59ce003baad50b35f9afc4f645b3bae5
 assets/bay_glass.gdshader 5cf98fa61a8a189d25abf4e990d533dc7bb7c696d6a761625f555b4f13ac9fd5
@@ -2092,10 +2146,10 @@ assets/palace/palace_light_web.png ab2212fc7520265c29656cd65fd0aad32131b69d9bf9a
 assets/palace/palace_mirror.png 83e5eb4ba6ae5a98cad0a5dfd5c38f81368cd7b34d745d211634009ff7f2c719
 
 SHA-256 output files:
-index.pck db0471ad9441c93f1383a6ea04c8a051cad18cf53af6659676ec6243c36e925e
+index.pck 53b0cdd472ba3e920f1b03dd4c05e5eb46fac80b380cb8edb6c731a62ac93126
 index.wasm 99962b29677e42f3ba0258bd90fdc52ad90295954c4473e816ad02cfe5ff1d4f
 index.js e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981
-sw.js 1bf5841d7d41b242e1502abad0720fa675f25da998db590e47553f255814dfed
+sw.js 85f1010aa1322eec49a0bbc2e0bdd7afc2c71a8357ba266fb6f2eeb8aa16b077
 manifest.webmanifest 73676491cb7a7ea9befd37c4e09561739497a6dae9299c344b7941adecb54210
 icon-192.png 3d731897f85db4062648a71925e24449e608db622cb5d0c34cec70636eaab459
 icon-512.png 11e906507b24dfd9dae51d65b93d7027828f41a8aaab6a8c378b92e39e1da10b
