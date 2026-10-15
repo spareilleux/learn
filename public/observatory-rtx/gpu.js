@@ -1,8 +1,9 @@
 // The Observatory page's install block, at the top of src/content/docs/observatory/index.md and its fr/
 // and es/ mirrors. It reads the name the browser gives the graphics card (WebGL's
-// WEBGL_debug_renderer_info), and offers the version that suits it as a button: the RTX installer on a
-// GeForce RTX card under Windows, the web version otherwise; then, in a table, every feature the card has
-// and what the Observatory does with it. Nothing leaves the page.
+// WEBGL_debug_renderer_info) and the system the browser runs on, and offers first the version for that
+// system: the RTX installer on a GeForce RTX card under Windows, the native package under Linux (x86_64)
+// or on a Mac, the web version otherwise; then a line with the other platforms' downloads; then, in a
+// table, every feature the card has and what the Observatory does with it. Nothing leaves the page.
 // The RTX 5080's measured figures are in the pages themselves; here, only what follows from a card's name.
 (function () {
   'use strict';
@@ -10,6 +11,8 @@
   var VERSION = '0.2.1';
   var LINKS = {
     rtx: 'https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.1/Observatory-RTX-0.2.1-win64.msi',
+    linux: 'https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.1/Observatory-0.2.1-linux-x86_64.tar.gz',
+    mac: 'https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.1/Observatory-0.2.1-macos.zip',
     release: 'https://github.com/spareilleux/learn/releases/tag/observatory-rtx-0.2.1',
     nvidia: 'https://www.nvidia.com/en-us/geforce/technologies/dlss/',
     web: '../demos/observatory/'  // the page's own link replaces it (data-web)
@@ -43,7 +46,10 @@
     var browser = /Firefox|FxiOS/i.test(ua) ? 'firefox'
       : /Edg\/|Chrome\/|CriOS|Chromium/i.test(ua) ? 'chromium'
       : /Safari/i.test(ua) ? 'safari' : 'other';
-    return { os: os, browser: browser };
+    // An ARM processor, where the Linux package (x86_64) does not run. A Mac's browser says "Intel" even on
+    // Apple silicon; the macOS package is universal.
+    var arm = /aarch64|arm64|armv\d/i.test(ua);
+    return { os: os, browser: browser, arm: arm };
   }
 
   // How to keep the web version as an app here (its manifest and service worker make it installable).
@@ -82,19 +88,37 @@
       kind = 'other';
     }
     var sys = system(userAgent, touchPoints);
-    return { kind: kind, name: name, windows: sys.os === 'windows', os: sys.os, keep: keep(sys) };
+    return { kind: kind, name: name, windows: sys.os === 'windows', os: sys.os, arm: sys.arm, keep: keep(sys) };
   }
 
-  // Which button leads, and whether the RTX one is offered at all.
+  // Which button leads, whether the RTX one is offered at all, and the native package for this system
+  // (native: 'linux', 'mac' or ''), which leads where there is one: the author, 2026-10-14, « proposer d'abord
+  // l'OS détecté ».
   function offer(found) {
     var rtxCard = found.kind === 'rtx5080' || found.kind === 'geforce_rtx' || found.kind === 'nvidia_rtx';
+    if (found.os === 'mac' || (found.os === 'linux' && !found.arm)) {
+      return { first: found.os, rtx: false, native: found.os, notWindows: true };
+    }
     if (!found.windows) {
-      return { first: 'web', rtx: false, notWindows: rtxCard || found.kind === 'nvidia_masked' || found.kind === 'unknown' };
+      return { first: 'web', rtx: false, native: '', notWindows: found.os === 'linux' || rtxCard || found.kind === 'nvidia_masked' || found.kind === 'unknown' };
     }
     if (rtxCard || found.kind === 'nvidia_masked') {
-      return { first: 'rtx', rtx: true };
+      return { first: 'rtx', rtx: true, native: '' };
     }
-    return { first: 'web', rtx: found.kind === 'nvidia_other' || found.kind === 'unknown' };
+    return { first: 'web', rtx: found.kind === 'nvidia_other' || found.kind === 'unknown', native: '' };
+  }
+
+  // The other platforms' downloads, for the line under the buttons: those not already a button.
+  var PLATFORMS = ['rtx', 'linux', 'mac', 'web'];
+  function others(o) {
+    var shown = ['web'];
+    if (o.rtx) {
+      shown.push('rtx');
+    }
+    if (o.native) {
+      shown.push(o.native);
+    }
+    return PLATFORMS.filter(function (k) { return shown.indexOf(k) < 0; });
   }
 
   // NVIDIA's "DLSS Supported Hardware" table (LINKS.nvidia, read on 2026-10-14): the GeForce RTX series that
@@ -165,6 +189,32 @@
       ],
       notes: '[[What is new in ' + VERSION + ', and the installer\'s SHA-256|release]]',
       notWindows: 'The RTX version is a Windows program: NVIDIA\'s DLSS, through its Streamline library, runs on Windows only. On this device, the web version is the one.',
+      armLinux: 'The Linux package is for x86_64 processors, and this one is ARM: here, the web version is the one. DLSS and path tracing are in the RTX version, a Windows program.',
+      native: {
+        linux: {
+          say: 'Under Linux: the native version, rasterized, with Vulkan. DLSS and path tracing are in the RTX version, a Windows program: NVIDIA\'s DLSS, through its Streamline library, runs on Windows only.',
+          install: 'Download for Linux',
+          sub: 'x86_64 · 81 MB · version ' + VERSION + ' · Vulkan',
+          steps: [
+            'Extract it, in a terminal: **tar xzf Observatory-' + VERSION + '-linux-x86_64.tar.gz**',
+            'Start **./Observatory-' + VERSION + '-linux-x86_64/Observatory.x86_64**. It needs a Vulkan driver.',
+            'Run so far under WSL2 only, on a renderer without a graphics card: on a Linux computer with its own, to verify.'
+          ]
+        },
+        mac: {
+          say: 'On a Mac: the native version, rasterized, with Metal. DLSS and path tracing need an NVIDIA card and Windows: they are in the RTX version, a Windows program.',
+          install: 'Download for macOS',
+          sub: 'Apple silicon and Intel · 119 MB · version ' + VERSION,
+          steps: [
+            'Open the zip, then move **Observatory.app** to Applications.',
+            'The first time, macOS will not open it, because the app is not notarized by Apple. Open **System Settings → Privacy & Security**, then click **Open Anyway**. On macOS 14 or earlier, Control-click the app and choose **Open**.',
+            'Not yet run on a Mac: to verify.'
+          ]
+        },
+        notes: '[[The release, its notes and the SHA-256 of each file|release]]'
+      },
+      others: 'Other platforms: ',
+      platforms: { rtx: 'Windows, RTX version (.msi)', linux: 'Linux x86_64 (.tar.gz)', mac: 'macOS (.zip)', web: 'web version', release: 'every file' },
       keep: {
         chromium: 'To keep it as an app: once the observatory is open, the install button at the right of Chrome\'s or Edge\'s address bar.',
         safari: 'To keep it as an app: once the observatory is open, in Safari (macOS 14 or later), **File → Add to Dock**.',
@@ -181,6 +231,7 @@
         verify: 'To verify',
         masked: 'Your browser does not name the model: here is NVIDIA\'s table for each GeForce RTX series.',
         windowsOnly: 'In the RTX version, a Windows program.',
+        nativeRaster: 'The Linux and macOS versions run so: rasterized, without DLSS.',
         notMeasured: ' Frame rate not measured on this card.',
         source: 'The card\'s DLSS features follow [[NVIDIA\'s table of supported hardware|nvidia]], read on 2026-10-14. The figures are measured on the author\'s RTX 5080, in a window of 3840 × 2054.',
         rows: {
@@ -245,6 +296,32 @@
       ],
       notes: '[[Les nouveautés de la ' + VERSION + ', et le SHA-256 de l\'installateur|release]]',
       notWindows: 'La version RTX est un programme Windows : le DLSS de NVIDIA, par sa bibliothèque Streamline, ne tourne que sous Windows. Sur cet appareil, c\'est la version web.',
+      armLinux: 'Le paquet Linux est pour les processeurs x86_64, et celui-ci est ARM : ici, c\'est la version web. Le DLSS et le path tracing sont dans la version RTX, un programme Windows.',
+      native: {
+        linux: {
+          say: 'Sous Linux : la version native, en rastérisation, avec Vulkan. Le DLSS et le path tracing sont dans la version RTX, un programme Windows : le DLSS de NVIDIA, par sa bibliothèque Streamline, ne tourne que sous Windows.',
+          install: 'Télécharger pour Linux',
+          sub: 'x86_64 · 81 Mo · version ' + VERSION + ' · Vulkan',
+          steps: [
+            'Extrayez-le, dans un terminal : **tar xzf Observatory-' + VERSION + '-linux-x86_64.tar.gz**',
+            'Lancez **./Observatory-' + VERSION + '-linux-x86_64/Observatory.x86_64**. Il faut un pilote Vulkan.',
+            'Lancé jusqu\'ici sous WSL2 seulement, avec un rendu sans carte graphique : sur un ordinateur Linux qui a la sienne, à vérifier.'
+          ]
+        },
+        mac: {
+          say: 'Sur un Mac : la version native, en rastérisation, avec Metal. Le DLSS et le path tracing demandent une carte NVIDIA et Windows : ils sont dans la version RTX, un programme Windows.',
+          install: 'Télécharger pour macOS',
+          sub: 'puces Apple et Intel · 119 Mo · version ' + VERSION,
+          steps: [
+            'Ouvrez le zip, puis déplacez **Observatory.app** dans Applications.',
+            'La première fois, macOS refuse de l\'ouvrir, car l\'app n\'est pas notarisée par Apple. Ouvrez **Réglages Système → Confidentialité et sécurité**, puis cliquez sur **Ouvrir quand même**. Sous macOS 14 ou plus ancien, Contrôle-clic sur l\'app, puis **Ouvrir**.',
+            'Pas encore lancé sur un Mac : à vérifier.'
+          ]
+        },
+        notes: '[[La release, ses notes et le SHA-256 de chaque fichier|release]]'
+      },
+      others: 'Autres plateformes : ',
+      platforms: { rtx: 'Windows, version RTX (.msi)', linux: 'Linux x86_64 (.tar.gz)', mac: 'macOS (.zip)', web: 'version web', release: 'tous les fichiers' },
       keep: {
         chromium: 'Pour la garder comme une application : une fois l\'observatoire ouvert, le bouton d\'installation à droite de la barre d\'adresse de Chrome ou d\'Edge.',
         safari: 'Pour la garder comme une application : une fois l\'observatoire ouvert, dans Safari (macOS 14 ou plus récent), **Fichier → Ajouter au Dock**.',
@@ -261,6 +338,7 @@
         verify: 'À vérifier',
         masked: 'Votre navigateur ne nomme pas le modèle : voici le tableau de NVIDIA pour chaque série GeForce RTX.',
         windowsOnly: 'Dans la version RTX, un programme Windows.',
+        nativeRaster: 'Les versions Linux et macOS tournent ainsi : en rastérisation, sans DLSS.',
         notMeasured: ' Cadence pas mesurée sur cette carte.',
         source: 'Les fonctions DLSS de la carte suivent [[le tableau du matériel pris en charge de NVIDIA|nvidia]], lu le 2026-10-14. Les chiffres sont mesurés sur la RTX 5080 de l\'auteur, dans une fenêtre de 3840 × 2054.',
         rows: {
@@ -325,6 +403,32 @@
       ],
       notes: '[[Las novedades de la ' + VERSION + ', y el SHA-256 del instalador|release]]',
       notWindows: 'La versión RTX es un programa de Windows: el DLSS de NVIDIA, mediante su biblioteca Streamline, solo funciona en Windows. En este dispositivo, la versión web es la que corresponde.',
+      armLinux: 'El paquete de Linux es para procesadores x86_64, y este es ARM: aquí, la versión web es la que corresponde. El DLSS y el path tracing están en la versión RTX, un programa de Windows.',
+      native: {
+        linux: {
+          say: 'En Linux: la versión nativa, rasterizada, con Vulkan. El DLSS y el path tracing están en la versión RTX, un programa de Windows: el DLSS de NVIDIA, mediante su biblioteca Streamline, solo funciona en Windows.',
+          install: 'Descargar para Linux',
+          sub: 'x86_64 · 81 MB · versión ' + VERSION + ' · Vulkan',
+          steps: [
+            'Extráigalo, en una terminal: **tar xzf Observatory-' + VERSION + '-linux-x86_64.tar.gz**',
+            'Inicie **./Observatory-' + VERSION + '-linux-x86_64/Observatory.x86_64**. Necesita un controlador Vulkan.',
+            'Probado hasta ahora solo en WSL2, con un renderizado sin tarjeta gráfica: en un ordenador Linux que tenga la suya, por verificar.'
+          ]
+        },
+        mac: {
+          say: 'En un Mac: la versión nativa, rasterizada, con Metal. El DLSS y el path tracing requieren una tarjeta NVIDIA y Windows: están en la versión RTX, un programa de Windows.',
+          install: 'Descargar para macOS',
+          sub: 'chips de Apple e Intel · 119 MB · versión ' + VERSION,
+          steps: [
+            'Abra el zip y mueva **Observatory.app** a Aplicaciones.',
+            'La primera vez, macOS no la abre, porque la app no está notarizada por Apple. Abra **Ajustes del Sistema → Privacidad y seguridad** y haga clic en **Abrir igualmente**. En macOS 14 o anterior, Control-clic en la app y elija **Abrir**.',
+            'Aún no probado en un Mac: por verificar.'
+          ]
+        },
+        notes: '[[La release, sus notas y el SHA-256 de cada archivo|release]]'
+      },
+      others: 'Otras plataformas: ',
+      platforms: { rtx: 'Windows, versión RTX (.msi)', linux: 'Linux x86_64 (.tar.gz)', mac: 'macOS (.zip)', web: 'versión web', release: 'todos los archivos' },
       keep: {
         chromium: 'Para conservarla como aplicación: una vez abierto el observatorio, el botón de instalar a la derecha de la barra de direcciones de Chrome o Edge.',
         safari: 'Para conservarla como aplicación: una vez abierto el observatorio, en Safari (macOS 14 o posterior), **Archivo → Añadir al Dock**.',
@@ -341,6 +445,7 @@
         verify: 'Por verificar',
         masked: 'Su navegador no nombra el modelo: esta es la tabla de NVIDIA para cada serie GeForce RTX.',
         windowsOnly: 'En la versión RTX, un programa de Windows.',
+        nativeRaster: 'Las versiones de Linux y macOS funcionan así: rasterizadas, sin DLSS.',
         notMeasured: ' Cadencia no medida en esta tarjeta.',
         source: 'Las funciones DLSS de la tarjeta siguen [[la tabla de hardware compatible de NVIDIA|nvidia]], leída el 2026-10-14. Las cifras se midieron en la RTX 5080 del autor, en una ventana de 3840 × 2054.',
         rows: {
@@ -391,7 +496,7 @@
   };
 
   if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { clean: clean, system: system, keep: keep, classify: classify, offer: offer, series: series, features: features, TEXT: TEXT, LINKS: LINKS, VERSION: VERSION };
+    module.exports = { clean: clean, system: system, keep: keep, classify: classify, offer: offer, others: others, series: series, features: features, TEXT: TEXT, LINKS: LINKS, VERSION: VERSION };
     return;
   }
 
@@ -508,7 +613,9 @@
       }
       var note = t.feat.rows[r.key][1];
       var card = NV_ROWS.indexOf(r.key) >= 0 || r.key === 'raster';
-      if (card && !found.windows) {
+      if (r.key === 'raster' && (found.os === 'linux' || found.os === 'mac')) {
+        note = t.feat.nativeRaster;
+      } else if (card && !found.windows) {
         note = t.feat.windowsOnly;
       } else if (found.kind === 'rtx5080' && t.feat.measured[r.key]) {
         note += t.feat.measured[r.key];
@@ -543,7 +650,7 @@
     }
     var lang = (document.documentElement.lang || 'en').slice(0, 2).toLowerCase();
     var t = TEXT[lang] || TEXT.en;
-    var links = { rtx: LINKS.rtx, release: LINKS.release, nvidia: LINKS.nvidia, web: box.getAttribute('data-web') || LINKS.web };
+    var links = { rtx: LINKS.rtx, linux: LINKS.linux, mac: LINKS.mac, release: LINKS.release, nvidia: LINKS.nvidia, web: box.getAttribute('data-web') || LINKS.web };
     var found = classify(renderer(), navigator.userAgent, navigator.maxTouchPoints || 0);
     var k = t.kinds[found.kind];
     var o = offer(found);
@@ -566,51 +673,60 @@
       box.appendChild(named);
     }
     var say = document.createElement('p');
-    fill(say, o.notWindows ? t.notWindows : k.say, links);
+    var native = o.native ? t.native[o.native] : null;
+    fill(say, native ? native.say : found.os === 'linux' ? t.armLinux : o.notWindows ? t.notWindows : k.say, links);
     box.appendChild(say);
 
     // not-content: Starlight's prose styles (link colour, underline, spacing) stay off the buttons.
     var actions = document.createElement('div');
     actions.className = 'obs-actions not-content';
-    var rtx = o.rtx ? button(links.rtx, t.install, t.installSub, o.first === 'rtx') : null;
+    // The download for this system (the RTX installer, or the Linux or macOS package), whose steps follow.
+    var main = o.rtx ? button(links.rtx, t.install, t.installSub, o.first === 'rtx')
+      : native ? button(links[o.native], native.install, native.sub, o.first === o.native) : null;
     var web = button(links.web, t.play, t.playSub, o.first === 'web');
-    if (rtx && o.first === 'rtx') {
-      actions.appendChild(rtx);
+    if (main && o.first !== 'web') {
+      actions.appendChild(main);
       actions.appendChild(web);
     } else {
       actions.appendChild(web);
-      if (rtx) {
-        actions.appendChild(rtx);
+      if (main) {
+        actions.appendChild(main);
       }
     }
     box.appendChild(actions);
+    var rest = others(o).map(function (key) { return '[[' + t.platforms[key] + '|' + key + ']]'; });
+    var other = document.createElement('p');
+    other.className = 'obs-others';
+    fill(other, t.others + rest.concat(['[[' + t.platforms.release + '|release]]']).join(' · '), links);
+    box.appendChild(other);
     if (o.first === 'web' && found.keep) {
       var app = document.createElement('p');
       fill(app, t.keep[found.keep], links);
       box.appendChild(app);
     }
 
-    if (rtx) {
+    if (main) {
       var steps = document.createElement('div');
       steps.className = 'obs-steps';
-      steps.hidden = o.first !== 'rtx';
+      steps.hidden = o.first === 'web';
       var after = document.createElement('p');
       after.className = 'obs-after';
       after.textContent = t.after;
       steps.appendChild(after);
       var ol = document.createElement('ol');
-      for (var i = 0; i < t.steps.length; i++) {
+      var list = native ? native.steps : t.steps;
+      for (var i = 0; i < list.length; i++) {
         var li = document.createElement('li');
-        fill(li, t.steps[i], links);
+        fill(li, list[i], links);
         ol.appendChild(li);
       }
       steps.appendChild(ol);
       var notes = document.createElement('p');
-      fill(notes, t.notes, links);
+      fill(notes, native ? t.native.notes : t.notes, links);
       steps.appendChild(notes);
       box.appendChild(steps);
-      // The installer downloads in place (GitHub serves it as an attachment): the page stays, and says what next.
-      rtx.addEventListener('click', function () {
+      // The file downloads in place (GitHub serves it as an attachment): the page stays, and says what next.
+      main.addEventListener('click', function () {
         steps.hidden = false;
         steps.className = 'obs-steps started';
         after.textContent = t.started;
@@ -623,6 +739,7 @@
     box.setAttribute('data-kind', found.kind);
     box.setAttribute('data-first', o.first);
     box.setAttribute('data-os', found.os);
+    box.setAttribute('data-native', o.native);
   }
 
   if (document.readyState === 'loading') {
