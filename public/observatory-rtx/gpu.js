@@ -1,7 +1,8 @@
 // The Observatory page's install block, at the top of src/content/docs/observatory/index.md and its fr/
 // and es/ mirrors. It reads the name the browser gives the graphics card (WebGL's
 // WEBGL_debug_renderer_info), and offers the version that suits it as a button: the RTX installer on a
-// GeForce RTX card under Windows, the web version otherwise. Nothing leaves the page.
+// GeForce RTX card under Windows, the web version otherwise; then, in a table, every feature the card has
+// and what the Observatory does with it. Nothing leaves the page.
 // The RTX 5080's measured figures are in the pages themselves; here, only what follows from a card's name.
 (function () {
   'use strict';
@@ -96,30 +97,55 @@
     return { first: 'web', rtx: found.kind === 'nvidia_other' || found.kind === 'unknown' };
   }
 
-  var RTX_YES_EN = [
-    'DLSS, and path tracing with DLSS Ray Reconstruction: the program starts with them once NVIDIA\'s files are in place.',
-    'A frame rate the program looks after: when a frame takes more than 16 ms, or under 56 frames a second, it lowers the DLSS setting; under 20 at the lowest setting, it switches path tracing off and says so.'
-  ];
-  var RTX_NO_EN = [
-    'The RTX 5080\'s figures: a slower card runs a lower DLSS setting, or rasterized; a faster one, a higher setting.',
-    'Frame generation on every series: [[NVIDIA says which cards run it|nvidia]].'
-  ];
-  var RTX_YES_FR = [
-    'DLSS, et le path tracing avec DLSS Ray Reconstruction : le programme démarre avec eux une fois les fichiers de NVIDIA en place.',
-    'Une cadence dont le programme s\'occupe : quand une image prend plus de 16 ms, ou sous 56 images par seconde, il baisse le réglage DLSS ; sous 20 au dernier réglage, il coupe le path tracing et le dit.'
-  ];
-  var RTX_NO_FR = [
-    'Les chiffres de la RTX 5080 : une carte plus lente tourne avec un réglage DLSS plus bas, ou en rastérisation ; une plus rapide, avec un réglage plus haut.',
-    'La génération d\'images sur toutes les séries : [[NVIDIA dit quelles cartes la font tourner|nvidia]].'
-  ];
-  var RTX_YES_ES = [
-    'DLSS, y path tracing con DLSS Ray Reconstruction: el programa se inicia con ellos una vez instalados los archivos de NVIDIA.',
-    'Una cadencia de la que se ocupa el programa: cuando una imagen tarda más de 16 ms, o por debajo de 56 imágenes por segundo, baja el ajuste de DLSS; por debajo de 20 en el último ajuste, desactiva el path tracing y lo dice.'
-  ];
-  var RTX_NO_ES = [
-    'Las cifras de la RTX 5080: una tarjeta más lenta funciona con un ajuste de DLSS más bajo, o rasterizada; una más rápida, con uno más alto.',
-    'La generación de imágenes en todas las series: [[NVIDIA dice qué tarjetas la ejecutan|nvidia]].'
-  ];
+  // NVIDIA's "DLSS Supported Hardware" table (LINKS.nvidia, read on 2026-10-14): the GeForce RTX series that
+  // have each feature. Ray tracing in hardware, which the path tracer needs, is every RTX card's.
+  var SERIES = [50, 40, 30, 20];
+  var NV = { pt: SERIES, rr: SERIES, sr: SERIES, dlaa: SERIES, fg: [50, 40], mfg: [50], dlss45: [50] };
+  var NV_ROWS = ['pt', 'rr', 'sr', 'dlaa', 'fg', 'mfg', 'dlss45'];
+
+  // "NVIDIA GeForce RTX 4060 Laptop GPU" -> 40. NVIDIA's table names GeForce cards only: a professional one
+  // goes by its architecture, and is marked to verify.
+  function series(name) {
+    var s = String(name || '');
+    var m = /GeForce RTX (\d)0\d\d/i.exec(s);
+    if (m) {
+      return { s: Number(m[1]) * 10, pro: false };
+    }
+    if (/RTX PRO \d{4}/i.test(s)) {
+      return { s: 50, pro: true };  // Blackwell
+    }
+    if (/RTX \d{4} Ada/i.test(s)) {
+      return { s: 40, pro: true };  // Ada Lovelace
+    }
+    if (/RTX A\d{3,4}/i.test(s)) {
+      return { s: 30, pro: true };  // Ampere
+    }
+    if (/Quadro RTX/i.test(s)) {
+      return { s: 20, pro: true };  // Turing
+    }
+    return null;
+  }
+
+  // Each feature, and whether this card has it: one value, or one per series when the browser hides the
+  // model. web is what this browser reports: { webgl2: bool, webgpu: bool }.
+  function features(found, web) {
+    var ser = series(found.name);
+    var rtx = found.kind === 'rtx5080' || found.kind === 'geforce_rtx' || found.kind === 'nvidia_rtx';
+    var matrix = !ser && (found.kind === 'nvidia_masked' || found.kind === 'unknown');
+    var rows = [];
+    for (var i = 0; i < NV_ROWS.length; i++) {
+      var has = [];
+      for (var j = 0; j < (matrix ? SERIES.length : 1); j++) {
+        var s = matrix ? SERIES[j] : ser && ser.s;
+        has.push(!s ? (rtx ? 'verify' : 'no') : NV[NV_ROWS[i]].indexOf(s) < 0 ? 'no' : ser && ser.pro ? 'arch' : 'yes');
+      }
+      rows.push({ key: NV_ROWS[i], has: has });
+    }
+    rows.push({ key: 'raster', has: [found.kind === 'rtx5080' ? 'yes' : 'untested'] });
+    rows.push({ key: 'webgl2', has: [web.webgl2 ? 'yes' : 'no'] });
+    rows.push({ key: 'webgpu', has: [web.webgpu ? 'yes' : 'no'] });
+    return { matrix: matrix, rows: rows };
+  }
 
   var TEXT = {
     en: {
@@ -138,9 +164,6 @@
         'The first time, press **Enter** to fetch NVIDIA\'s DLSS files (203 MB, once).'
       ],
       notes: '[[What is new in ' + VERSION + ', and the installer\'s SHA-256|release]]',
-      more: 'What this card allows',
-      yes: 'It allows',
-      no: 'It does not allow',
       notWindows: 'The RTX version is a Windows program: NVIDIA\'s DLSS, through its Streamline library, runs on Windows only. On this device, the web version is the one.',
       keep: {
         chromium: 'To keep it as an app: once the observatory is open, the install button at the right of Chrome\'s or Edge\'s address bar.',
@@ -148,41 +171,60 @@
         ios: 'To keep it as an app: once the observatory is open, **Share**, then **Add to Home Screen**.',
         android: 'To keep it as an app: once the observatory is open, the browser\'s menu, then **Install app** or **Add to Home screen**.'
       },
+      feat: {
+        summary: 'Everything this card can do here',
+        cols: ['Feature', 'This card', 'In the Observatory'],
+        yes: 'Yes',
+        no: 'No',
+        arch: 'Yes, by its architecture (to verify)',
+        untested: 'Not tested',
+        verify: 'To verify',
+        masked: 'Your browser does not name the model: here is NVIDIA\'s table for each GeForce RTX series.',
+        windowsOnly: 'In the RTX version, a Windows program.',
+        notMeasured: ' Frame rate not measured on this card.',
+        source: 'The card\'s DLSS features follow [[NVIDIA\'s table of supported hardware|nvidia]], read on 2026-10-14. The figures are measured on the author\'s RTX 5080, in a window of 3840 × 2054.',
+        rows: {
+          pt: ['Path tracing (ray tracing in hardware)', 'The program starts with it once NVIDIA\'s files are in place.'],
+          rr: ['DLSS Ray Reconstruction', 'Denoises the path tracing; always on with it.'],
+          sr: ['DLSS Super Resolution', 'F7: Quality, Balanced, Performance, Ultra Performance; the program picks the one that holds 60 frames a second.'],
+          dlaa: ['DLAA (DLSS at the full resolution)', 'F7.'],
+          fg: ['DLSS Frame Generation, 2x', 'F8, with NVIDIA Reflex, which NVIDIA requires with it.'],
+          mfg: ['DLSS Multi Frame Generation, 3x and 4x', 'F8 picks 2x, 3x or 4x from the screen\'s refresh rate.'],
+          dlss45: ['DLSS 4.5 and 5: Dynamic Multi Frame Generation, 3D-Guided Neural Rendering', 'Not in this program, built on Streamline 2.10.0.'],
+          raster: ['Without NVIDIA\'s files: rasterized, MSAA 4x + TAA', 'The program starts so when NVIDIA\'s files are missing.'],
+          webgl2: ['WebGL 2, in this browser', 'What the web version needs.'],
+          webgpu: ['WebGPU, in this browser', 'Not used by the Observatory.']
+        },
+        measured: {
+          pt: ' Measured: 60 frames a second at DLSS Quality, 15.4 ms of GPU a frame.',
+          dlaa: ' Measured, rasterized: 60 frames a second, 9.5 ms.',
+          raster: ' Measured: 60 frames a second, 8.5 ms.'
+        }
+      },
       kinds: {
         rtx5080: {
-          say: 'This is the card the RTX version was measured on: the figures below are for it.',
-          yes: ['What the list below says: path tracing with DLSS Ray Reconstruction at 60 frames a second, DLSS Frame Generation, DLAA.'],
-          no: ['What the list below says it does not: path tracing at the full 4K resolution at 60 frames a second.']
+          say: 'This is the card the RTX version was measured on: the figures below are for it.'
         },
         geforce_rtx: {
-          say: 'A GeForce RTX card: the RTX version should run on it, with DLSS and path tracing. It has only been run on an RTX 5080: what it allows here is expected, not measured.',
-          yes: RTX_YES_EN, no: RTX_NO_EN
+          say: 'A GeForce RTX card: the RTX version should run on it, with DLSS and path tracing. It has only been run on an RTX 5080: what it allows here is expected, not measured.'
         },
         nvidia_rtx: {
-          say: 'An NVIDIA RTX card: the RTX version should run on it, with DLSS and path tracing. It has only been run on a GeForce RTX 5080: what it allows here is expected, not measured.',
-          yes: RTX_YES_EN, no: RTX_NO_EN
+          say: 'An NVIDIA RTX card: the RTX version should run on it, with DLSS and path tracing. It has only been run on a GeForce RTX 5080: what it allows here is expected, not measured.'
         },
         nvidia_masked: {
-          say: 'An NVIDIA card, but your browser does not say which (Firefox names a family of cards). If it is a GeForce RTX, take the RTX version; otherwise, the web version.',
-          yes: [], no: []
+          say: 'An NVIDIA card, but your browser does not say which (Firefox names a family of cards). If it is a GeForce RTX, take the RTX version; otherwise, the web version.'
         },
         nvidia_other: {
-          say: 'An NVIDIA card without RTX: the web version is the one for it.',
-          yes: ['The web version, in this browser.', 'Perhaps the RTX version without its extras, rasterized: not tested on such a card.'],
-          no: ['DLSS, frame generation and path tracing: they need an RTX card.']
+          say: 'An NVIDIA card without RTX: the web version is the one for it.'
         },
         other: {
-          say: 'Not an NVIDIA card: the web version is the one for it.',
-          yes: ['The web version, in this browser.'],
-          no: ['DLSS, frame generation and path tracing: they are NVIDIA\'s and need a GeForce RTX card.', 'The RTX version on a card of another make: not tested.']
+          say: 'Not an NVIDIA card: the web version is the one for it.'
         },
         software: {
-          say: 'Your browser draws WebGL without a graphics card (software rendering): the web version will be slow here, and this page cannot tell which card the machine has.',
-          yes: [], no: []
+          say: 'Your browser draws WebGL without a graphics card (software rendering): the web version will be slow here, and this page cannot tell which card the machine has.'
         },
         unknown: {
-          say: 'Your browser does not say which card this is. With a GeForce RTX card under Windows, take the RTX version; otherwise, the web version.',
-          yes: [], no: []
+          say: 'Your browser does not say which card this is. With a GeForce RTX card under Windows, take the RTX version; otherwise, the web version.'
         }
       }
     },
@@ -202,9 +244,6 @@
         'La première fois, appuyez sur **Entrée** pour récupérer les fichiers DLSS de NVIDIA (203 Mo, une fois).'
       ],
       notes: '[[Les nouveautés de la ' + VERSION + ', et le SHA-256 de l\'installateur|release]]',
-      more: 'Ce que permet cette carte',
-      yes: 'Elle permet',
-      no: 'Elle ne permet pas',
       notWindows: 'La version RTX est un programme Windows : le DLSS de NVIDIA, par sa bibliothèque Streamline, ne tourne que sous Windows. Sur cet appareil, c\'est la version web.',
       keep: {
         chromium: 'Pour la garder comme une application : une fois l\'observatoire ouvert, le bouton d\'installation à droite de la barre d\'adresse de Chrome ou d\'Edge.',
@@ -212,41 +251,60 @@
         ios: 'Pour la garder comme une application : une fois l\'observatoire ouvert, **Partager**, puis **Sur l\'écran d\'accueil**.',
         android: 'Pour la garder comme une application : une fois l\'observatoire ouvert, le menu du navigateur, puis **Installer l\'application** ou **Ajouter à l\'écran d\'accueil**.'
       },
+      feat: {
+        summary: 'Tout ce que cette carte permet ici',
+        cols: ['Fonction', 'Cette carte', 'Dans l\'Observatoire'],
+        yes: 'Oui',
+        no: 'Non',
+        arch: 'Oui, par son architecture (à vérifier)',
+        untested: 'Non testé',
+        verify: 'À vérifier',
+        masked: 'Votre navigateur ne nomme pas le modèle : voici le tableau de NVIDIA pour chaque série GeForce RTX.',
+        windowsOnly: 'Dans la version RTX, un programme Windows.',
+        notMeasured: ' Cadence pas mesurée sur cette carte.',
+        source: 'Les fonctions DLSS de la carte suivent [[le tableau du matériel pris en charge de NVIDIA|nvidia]], lu le 2026-10-14. Les chiffres sont mesurés sur la RTX 5080 de l\'auteur, dans une fenêtre de 3840 × 2054.',
+        rows: {
+          pt: ['Path tracing (lancer de rayons matériel)', 'Le programme démarre avec, une fois les fichiers de NVIDIA en place.'],
+          rr: ['DLSS Ray Reconstruction', 'Débruite le path tracing ; toujours actif avec lui.'],
+          sr: ['DLSS Super Resolution', 'F7 : Quality, Balanced, Performance, Ultra Performance ; le programme choisit celui qui tient 60 images par seconde.'],
+          dlaa: ['DLAA (DLSS à la pleine résolution)', 'F7.'],
+          fg: ['DLSS Frame Generation, 2x', 'F8, avec NVIDIA Reflex, que NVIDIA exige avec elle.'],
+          mfg: ['DLSS Multi Frame Generation, 3x et 4x', 'F8 choisit 2x, 3x ou 4x selon la fréquence de l\'écran.'],
+          dlss45: ['DLSS 4.5 et 5 : Dynamic Multi Frame Generation, 3D-Guided Neural Rendering', 'Pas dans ce programme, construit sur Streamline 2.10.0.'],
+          raster: ['Sans les fichiers de NVIDIA : rastérisation, MSAA 4x + TAA', 'Le programme démarre ainsi quand les fichiers de NVIDIA manquent.'],
+          webgl2: ['WebGL 2, dans ce navigateur', 'Ce que demande la version web.'],
+          webgpu: ['WebGPU, dans ce navigateur', 'Pas utilisé par l\'Observatoire.']
+        },
+        measured: {
+          pt: ' Mesuré : 60 images par seconde en DLSS Quality, 15,4 ms de GPU par image.',
+          dlaa: ' Mesuré, en rastérisation : 60 images par seconde, 9,5 ms.',
+          raster: ' Mesuré : 60 images par seconde, 8,5 ms.'
+        }
+      },
       kinds: {
         rtx5080: {
-          say: 'C\'est la carte sur laquelle la version RTX a été mesurée : les chiffres ci-dessous sont les siens.',
-          yes: ['Ce que dit la liste ci-dessous : le path tracing avec DLSS Ray Reconstruction à 60 images par seconde, DLSS Frame Generation, DLAA.'],
-          no: ['Ce que la liste ci-dessous dit qu\'elle ne permet pas : le path tracing à la pleine résolution 4K à 60 images par seconde.']
+          say: 'C\'est la carte sur laquelle la version RTX a été mesurée : les chiffres ci-dessous sont les siens.'
         },
         geforce_rtx: {
-          say: 'Une carte GeForce RTX : la version RTX devrait y tourner, avec DLSS et le path tracing. Elle n\'a tourné que sur une RTX 5080 : ce qu\'elle permet ici est attendu, pas mesuré.',
-          yes: RTX_YES_FR, no: RTX_NO_FR
+          say: 'Une carte GeForce RTX : la version RTX devrait y tourner, avec DLSS et le path tracing. Elle n\'a tourné que sur une RTX 5080 : ce qu\'elle permet ici est attendu, pas mesuré.'
         },
         nvidia_rtx: {
-          say: 'Une carte NVIDIA RTX : la version RTX devrait y tourner, avec DLSS et le path tracing. Elle n\'a tourné que sur une GeForce RTX 5080 : ce qu\'elle permet ici est attendu, pas mesuré.',
-          yes: RTX_YES_FR, no: RTX_NO_FR
+          say: 'Une carte NVIDIA RTX : la version RTX devrait y tourner, avec DLSS et le path tracing. Elle n\'a tourné que sur une GeForce RTX 5080 : ce qu\'elle permet ici est attendu, pas mesuré.'
         },
         nvidia_masked: {
-          say: 'Une carte NVIDIA, mais votre navigateur ne dit pas laquelle (Firefox nomme une famille de cartes). Si c\'est une GeForce RTX, prenez la version RTX ; sinon, la version web.',
-          yes: [], no: []
+          say: 'Une carte NVIDIA, mais votre navigateur ne dit pas laquelle (Firefox nomme une famille de cartes). Si c\'est une GeForce RTX, prenez la version RTX ; sinon, la version web.'
         },
         nvidia_other: {
-          say: 'Une carte NVIDIA sans RTX : la version web est celle qu\'il lui faut.',
-          yes: ['La version web, dans ce navigateur.', 'Peut-être la version RTX sans ses extras, en rastérisation : non testé sur une telle carte.'],
-          no: ['DLSS, la génération d\'images et le path tracing : il leur faut une carte RTX.']
+          say: 'Une carte NVIDIA sans RTX : la version web est celle qu\'il lui faut.'
         },
         other: {
-          say: 'Pas une carte NVIDIA : la version web est celle qu\'il lui faut.',
-          yes: ['La version web, dans ce navigateur.'],
-          no: ['DLSS, la génération d\'images et le path tracing : ils sont à NVIDIA et demandent une carte GeForce RTX.', 'La version RTX sur une carte d\'une autre marque : non testé.']
+          say: 'Pas une carte NVIDIA : la version web est celle qu\'il lui faut.'
         },
         software: {
-          say: 'Votre navigateur dessine WebGL sans carte graphique (rendu logiciel) : la version web sera lente ici, et cette page ne peut pas dire quelle carte a la machine.',
-          yes: [], no: []
+          say: 'Votre navigateur dessine WebGL sans carte graphique (rendu logiciel) : la version web sera lente ici, et cette page ne peut pas dire quelle carte a la machine.'
         },
         unknown: {
-          say: 'Votre navigateur ne dit pas de quelle carte il s\'agit. Avec une carte GeForce RTX sous Windows, prenez la version RTX ; sinon, la version web.',
-          yes: [], no: []
+          say: 'Votre navigateur ne dit pas de quelle carte il s\'agit. Avec une carte GeForce RTX sous Windows, prenez la version RTX ; sinon, la version web.'
         }
       }
     },
@@ -266,9 +324,6 @@
         'La primera vez, pulse **Intro** para obtener los archivos DLSS de NVIDIA (203 MB, una sola vez).'
       ],
       notes: '[[Las novedades de la ' + VERSION + ', y el SHA-256 del instalador|release]]',
-      more: 'Lo que permite esta tarjeta',
-      yes: 'Permite',
-      no: 'No permite',
       notWindows: 'La versión RTX es un programa de Windows: el DLSS de NVIDIA, mediante su biblioteca Streamline, solo funciona en Windows. En este dispositivo, la versión web es la que corresponde.',
       keep: {
         chromium: 'Para conservarla como aplicación: una vez abierto el observatorio, el botón de instalar a la derecha de la barra de direcciones de Chrome o Edge.',
@@ -276,48 +331,67 @@
         ios: 'Para conservarla como aplicación: una vez abierto el observatorio, **Compartir** y luego **Añadir a pantalla de inicio**.',
         android: 'Para conservarla como aplicación: una vez abierto el observatorio, el menú del navegador y luego **Instalar aplicación** o **Añadir a pantalla de inicio**.'
       },
+      feat: {
+        summary: 'Todo lo que permite esta tarjeta aquí',
+        cols: ['Función', 'Esta tarjeta', 'En el Observatorio'],
+        yes: 'Sí',
+        no: 'No',
+        arch: 'Sí, por su arquitectura (por verificar)',
+        untested: 'Sin probar',
+        verify: 'Por verificar',
+        masked: 'Su navegador no nombra el modelo: esta es la tabla de NVIDIA para cada serie GeForce RTX.',
+        windowsOnly: 'En la versión RTX, un programa de Windows.',
+        notMeasured: ' Cadencia no medida en esta tarjeta.',
+        source: 'Las funciones DLSS de la tarjeta siguen [[la tabla de hardware compatible de NVIDIA|nvidia]], leída el 2026-10-14. Las cifras se midieron en la RTX 5080 del autor, en una ventana de 3840 × 2054.',
+        rows: {
+          pt: ['Path tracing (trazado de rayos por hardware)', 'El programa se inicia con él, una vez instalados los archivos de NVIDIA.'],
+          rr: ['DLSS Ray Reconstruction', 'Elimina el ruido del path tracing; siempre activo con él.'],
+          sr: ['DLSS Super Resolution', 'F7: Quality, Balanced, Performance, Ultra Performance; el programa elige el que mantiene 60 imágenes por segundo.'],
+          dlaa: ['DLAA (DLSS a la resolución completa)', 'F7.'],
+          fg: ['DLSS Frame Generation, 2x', 'F8, con NVIDIA Reflex, que NVIDIA exige con ella.'],
+          mfg: ['DLSS Multi Frame Generation, 3x y 4x', 'F8 elige 2x, 3x o 4x según la frecuencia de la pantalla.'],
+          dlss45: ['DLSS 4.5 y 5: Dynamic Multi Frame Generation, 3D-Guided Neural Rendering', 'No en este programa, construido sobre Streamline 2.10.0.'],
+          raster: ['Sin los archivos de NVIDIA: rasterizado, MSAA 4x + TAA', 'El programa se inicia así cuando faltan los archivos de NVIDIA.'],
+          webgl2: ['WebGL 2, en este navegador', 'Lo que necesita la versión web.'],
+          webgpu: ['WebGPU, en este navegador', 'El Observatorio no lo usa.']
+        },
+        measured: {
+          pt: ' Medido: 60 imágenes por segundo en DLSS Quality, 15,4 ms de GPU por imagen.',
+          dlaa: ' Medido, rasterizado: 60 imágenes por segundo, 9,5 ms.',
+          raster: ' Medido: 60 imágenes por segundo, 8,5 ms.'
+        }
+      },
       kinds: {
         rtx5080: {
-          say: 'Es la tarjeta en la que se midió la versión RTX: las cifras de abajo son las suyas.',
-          yes: ['Lo que dice la lista de abajo: path tracing con DLSS Ray Reconstruction a 60 imágenes por segundo, DLSS Frame Generation, DLAA.'],
-          no: ['Lo que la lista de abajo dice que no permite: path tracing a la resolución 4K completa a 60 imágenes por segundo.']
+          say: 'Es la tarjeta en la que se midió la versión RTX: las cifras de abajo son las suyas.'
         },
         geforce_rtx: {
-          say: 'Una tarjeta GeForce RTX: la versión RTX debería funcionar en ella, con DLSS y path tracing. Solo se ha ejecutado en una RTX 5080: lo que permite aquí es lo esperado, no lo medido.',
-          yes: RTX_YES_ES, no: RTX_NO_ES
+          say: 'Una tarjeta GeForce RTX: la versión RTX debería funcionar en ella, con DLSS y path tracing. Solo se ha ejecutado en una RTX 5080: lo que permite aquí es lo esperado, no lo medido.'
         },
         nvidia_rtx: {
-          say: 'Una tarjeta NVIDIA RTX: la versión RTX debería funcionar en ella, con DLSS y path tracing. Solo se ha ejecutado en una GeForce RTX 5080: lo que permite aquí es lo esperado, no lo medido.',
-          yes: RTX_YES_ES, no: RTX_NO_ES
+          say: 'Una tarjeta NVIDIA RTX: la versión RTX debería funcionar en ella, con DLSS y path tracing. Solo se ha ejecutado en una GeForce RTX 5080: lo que permite aquí es lo esperado, no lo medido.'
         },
         nvidia_masked: {
-          say: 'Una tarjeta NVIDIA, pero su navegador no dice cuál (Firefox nombra una familia de tarjetas). Si es una GeForce RTX, use la versión RTX; si no, la versión web.',
-          yes: [], no: []
+          say: 'Una tarjeta NVIDIA, pero su navegador no dice cuál (Firefox nombra una familia de tarjetas). Si es una GeForce RTX, use la versión RTX; si no, la versión web.'
         },
         nvidia_other: {
-          say: 'Una tarjeta NVIDIA sin RTX: la versión web es la que le corresponde.',
-          yes: ['La versión web, en este navegador.', 'Quizá la versión RTX sin sus extras, rasterizada: sin probar en una tarjeta así.'],
-          no: ['DLSS, la generación de imágenes y el path tracing: necesitan una tarjeta RTX.']
+          say: 'Una tarjeta NVIDIA sin RTX: la versión web es la que le corresponde.'
         },
         other: {
-          say: 'No es una tarjeta NVIDIA: la versión web es la que le corresponde.',
-          yes: ['La versión web, en este navegador.'],
-          no: ['DLSS, la generación de imágenes y el path tracing: son de NVIDIA y necesitan una tarjeta GeForce RTX.', 'La versión RTX en una tarjeta de otra marca: sin probar.']
+          say: 'No es una tarjeta NVIDIA: la versión web es la que le corresponde.'
         },
         software: {
-          say: 'Su navegador dibuja WebGL sin tarjeta gráfica (renderizado por software): la versión web irá lenta aquí, y esta página no puede saber qué tarjeta tiene el equipo.',
-          yes: [], no: []
+          say: 'Su navegador dibuja WebGL sin tarjeta gráfica (renderizado por software): la versión web irá lenta aquí, y esta página no puede saber qué tarjeta tiene el equipo.'
         },
         unknown: {
-          say: 'Su navegador no dice qué tarjeta es. Con una tarjeta GeForce RTX en Windows, use la versión RTX; si no, la versión web.',
-          yes: [], no: []
+          say: 'Su navegador no dice qué tarjeta es. Con una tarjeta GeForce RTX en Windows, use la versión RTX; si no, la versión web.'
         }
       }
     }
   };
 
   if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { clean: clean, system: system, keep: keep, classify: classify, offer: offer, TEXT: TEXT, LINKS: LINKS, VERSION: VERSION };
+    module.exports = { clean: clean, system: system, keep: keep, classify: classify, offer: offer, series: series, features: features, TEXT: TEXT, LINKS: LINKS, VERSION: VERSION };
     return;
   }
 
@@ -335,8 +409,25 @@
     '#obs-gpu .obs-btn:focus-visible{outline:2px solid var(--sl-color-text-accent);outline-offset:2px}',
     '#obs-gpu .obs-steps.started .obs-after{color:var(--sl-color-text-accent);font-weight:600}',
     '#obs-gpu ol{margin-top:.25rem}',
+    '#obs-gpu details{margin-top:1rem}',
+    '#obs-gpu .obs-table{overflow-x:auto;margin-top:.5rem}',
+    '#obs-gpu .obs-table table{display:table;width:100%;font-size:var(--sl-text-sm)}',
+    '#obs-gpu .obs-table th[scope=row]{font-weight:600;text-align:start}',
+    '#obs-gpu .obs-yes{color:var(--sl-color-text-accent);font-weight:600}',
+    '#obs-gpu .obs-no{opacity:.7}',
     '@media (max-width:30rem){#obs-gpu .obs-btn{flex:1 1 100%}}'
   ].join('');
+
+  // What this browser offers the web version, and WebGPU, which the Observatory does not use.
+  function webSupport() {
+    var gl2 = false;
+    try {
+      gl2 = !!document.createElement('canvas').getContext('webgl2');
+    } catch (e) {
+      gl2 = false;
+    }
+    return { webgl2: gl2, webgpu: !!navigator.gpu };
+  }
 
   function renderer() {
     try {
@@ -375,22 +466,63 @@
     parent.appendChild(document.createTextNode(text.slice(last)));
   }
 
-  function list(box, title, items, links) {
-    if (!items.length) {
-      return;
+  // The features table, under the buttons: open on an NVIDIA card, what the reader came to look up; folded
+  // on another make, where the NVIDIA rows are all "No".
+  function table(box, t, found, links) {
+    var f = features(found, webSupport());
+    var more = document.createElement('details');
+    more.open = found.kind === 'rtx5080' || found.kind === 'geforce_rtx' || found.kind === 'nvidia_rtx' || f.matrix;
+    var summary = document.createElement('summary');
+    summary.textContent = t.feat.summary;
+    more.appendChild(summary);
+    if (f.matrix) {
+      var masked = document.createElement('p');
+      fill(masked, t.feat.masked, links);
+      more.appendChild(masked);
     }
-    var p = document.createElement('p');
-    var strong = document.createElement('strong');
-    strong.textContent = title;
-    p.appendChild(strong);
-    box.appendChild(p);
-    var ul = document.createElement('ul');
-    for (var i = 0; i < items.length; i++) {
-      var li = document.createElement('li');
-      fill(li, items[i], links);
-      ul.appendChild(li);
+    var wrap = document.createElement('div');
+    wrap.className = 'obs-table';
+    var tab = document.createElement('table');
+    var head = tab.createTHead().insertRow();
+    var cols = [t.feat.cols[0]].concat(f.matrix ? SERIES.map(function (n) { return 'RTX ' + n; }) : [t.feat.cols[1]], [t.feat.cols[2]]);
+    for (var c = 0; c < cols.length; c++) {
+      var th = document.createElement('th');
+      th.textContent = cols[c];
+      head.appendChild(th);
     }
-    box.appendChild(ul);
+    var body = tab.createTBody();
+    for (var i = 0; i < f.rows.length; i++) {
+      var r = f.rows[i];
+      var tr = body.insertRow();
+      var name = document.createElement('th');
+      name.scope = 'row';
+      name.textContent = t.feat.rows[r.key][0];
+      tr.appendChild(name);
+      for (var j = 0; j < r.has.length; j++) {
+        var td = tr.insertCell();
+        td.textContent = t.feat[r.has[j]];
+        td.className = 'obs-' + r.has[j];
+        if (f.matrix && r.has.length === 1) {
+          td.colSpan = SERIES.length;
+        }
+      }
+      var note = t.feat.rows[r.key][1];
+      var card = NV_ROWS.indexOf(r.key) >= 0 || r.key === 'raster';
+      if (card && !found.windows) {
+        note = t.feat.windowsOnly;
+      } else if (found.kind === 'rtx5080' && t.feat.measured[r.key]) {
+        note += t.feat.measured[r.key];
+      } else if (r.key === 'pt' && r.has[0] !== 'no' && !f.matrix) {
+        note += t.feat.notMeasured;
+      }
+      tr.insertCell().textContent = note;
+    }
+    wrap.appendChild(tab);
+    more.appendChild(wrap);
+    var source = document.createElement('p');
+    fill(source, t.feat.source, links);
+    more.appendChild(source);
+    box.appendChild(more);
   }
 
   function button(href, label, sub, first) {
@@ -485,16 +617,8 @@
       });
     }
 
-    if (k.yes.length || k.no.length) {
-      if (!o.notWindows) {
-        var more = document.createElement('details');
-        var summary = document.createElement('summary');
-        summary.textContent = t.more;
-        more.appendChild(summary);
-        list(more, t.yes, k.yes, links);
-        list(more, t.no, k.no, links);
-        box.appendChild(more);
-      }
+    if (found.kind !== 'software') {
+      table(box, t, found, links);
     }
     box.setAttribute('data-kind', found.kind);
     box.setAttribute('data-first', o.first);
