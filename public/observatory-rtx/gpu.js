@@ -8,12 +8,13 @@
 (function () {
   'use strict';
 
-  var VERSION = '0.2.1';
+  var VERSION = '0.2.2';  // the Windows program
+  var NATIVE = '0.2.1';   // the Linux and macOS packages: 0.2.2 changed only the Windows program's Streamline
   var LINKS = {
-    rtx: 'https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.1/Observatory-RTX-0.2.1-win64.msi',
+    rtx: 'https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.2/Observatory-RTX-0.2.2-win64.msi',
     linux: 'https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.1/Observatory-0.2.1-linux-x86_64.tar.gz',
     mac: 'https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.1/Observatory-0.2.1-macos.zip',
-    release: 'https://github.com/spareilleux/learn/releases/tag/observatory-rtx-0.2.1',
+    release: 'https://github.com/spareilleux/learn/releases/tag/observatory-rtx-0.2.2',
     nvidia: 'https://www.nvidia.com/en-us/geforce/technologies/dlss/',
     web: '../demos/observatory/'  // the page's own link replaces it (data-web)
   };
@@ -185,7 +186,7 @@
       steps: [
         'Open the file. It installs in a few seconds, for your Windows account only, without administrator rights. If Windows says it protected your PC (the installer is not signed): **More info**, then **Run anyway**.',
         'Start **Observatory RTX** from the Start menu.',
-        'The first time, press **Enter** to fetch NVIDIA\'s DLSS files (203 MB, once).'
+        'The first time, press **Enter** to fetch NVIDIA\'s DLSS files (276 MB, once).'
       ],
       notes: '[[What is new in ' + VERSION + ', and the installer\'s SHA-256|release]]',
       notWindows: 'The RTX version is a Windows program: NVIDIA\'s DLSS, through its Streamline library, runs on Windows only. On this device, the web version is the one.',
@@ -194,17 +195,17 @@
         linux: {
           say: 'Under Linux: the native version, rasterized, with Vulkan. DLSS and path tracing are in the RTX version, a Windows program: NVIDIA\'s DLSS, through its Streamline library, runs on Windows only.',
           install: 'Download for Linux',
-          sub: 'x86_64 · 81 MB · version ' + VERSION + ' · Vulkan',
+          sub: 'x86_64 · 81 MB · version ' + NATIVE + ' · Vulkan',
           steps: [
-            'Extract it, in a terminal: **tar xzf Observatory-' + VERSION + '-linux-x86_64.tar.gz**',
-            'Start **./Observatory-' + VERSION + '-linux-x86_64/Observatory.x86_64**. It needs a Vulkan driver.',
+            'Extract it, in a terminal: **tar xzf Observatory-' + NATIVE + '-linux-x86_64.tar.gz**',
+            'Start **./Observatory-' + NATIVE + '-linux-x86_64/Observatory.x86_64**. It needs a Vulkan driver.',
             'Run so far under WSL2 only, on a renderer without a graphics card: on a Linux computer with its own, to verify.'
           ]
         },
         mac: {
           say: 'On a Mac: the native version, rasterized, with Metal. DLSS and path tracing need an NVIDIA card and Windows: they are in the RTX version, a Windows program.',
           install: 'Download for macOS',
-          sub: 'Apple silicon and Intel · 119 MB · version ' + VERSION,
+          sub: 'Apple silicon and Intel · 119 MB · version ' + NATIVE,
           steps: [
             'Open the zip, then move **Observatory.app** to Applications.',
             'The first time, macOS will not open it, because the app is not notarized by Apple. Open **System Settings → Privacy & Security**, then click **Open Anyway**. On macOS 14 or earlier, Control-click the app and choose **Open**.',
@@ -237,21 +238,21 @@
         rows: {
           pt: ['Path tracing (ray tracing in hardware)', 'The program starts with it once NVIDIA\'s files are in place.'],
           rr: ['DLSS Ray Reconstruction', 'Denoises the path tracing; always on with it.'],
-          sr: ['DLSS Super Resolution', 'F7: Quality, Balanced, Performance; the program picks the one that holds 60 frames a second. Not Ultra Performance: it finds no DLSS mode in this program at 3840 × 2054.'],
+          sr: ['DLSS Super Resolution', 'F7: Quality, Balanced, Performance, Ultra Performance; the program picks the one that holds 60 frames a second. Ultra Performance since version 0.2.2: until then it found no DLSS mode in this program.'],
           dlaa: ['DLAA (DLSS at the full resolution)', 'F7.'],
           fg: ['DLSS Frame Generation, 2x', 'F8, with NVIDIA Reflex, which NVIDIA requires with it.'],
-          mfg: ['DLSS Multi Frame Generation, 3x and 4x', 'F8 picks 2x, 3x or 4x: as many frames as the screen\'s refresh rate takes over the rendered ones. NVIDIA\'s page gives up to 6x; this program stops at 4x.'],
-          dlss45: ['DLSS 4.5 and 5: Dynamic Multi Frame Generation, 3D-Guided Neural Rendering', 'Not in this program, built on Streamline 2.10.0: Dynamic Multi Frame Generation needs Streamline 2.11.1 or later, and Streamline (2.14.1) has no kit for 3D-Guided Neural Rendering.'],
+          mfg: ['DLSS Multi Frame Generation, 3x to 6x', 'F8 picks 2x to 6x: as many frames as the screen\'s refresh rate takes over the rendered ones (4x at most before version 0.2.2).'],
+          dlss45: ['DLSS 4.5 and 5: Dynamic Multi Frame Generation, 3D-Guided Neural Rendering', 'Not in this program. Dynamic Multi Frame Generation is in Streamline 2.14.1, which the program is built on since 0.2.2, but on Direct3D 12 only, and the fork\'s path tracer runs on Vulkan; Streamline (2.14.1) has no kit for 3D-Guided Neural Rendering.'],
           raster: ['Without NVIDIA\'s files: rasterized, MSAA 4x + TAA', 'The program starts so when NVIDIA\'s files are missing.'],
           webgl2: ['WebGL 2, in this browser', 'What the web version needs.'],
           webgpu: ['WebGPU, in this browser', 'Not used by the Observatory.']
         },
         measured: {
-          pt: ' Measured: 60 frames a second at DLSS Quality, 15.4 ms of GPU a frame.',
-          dlaa: ' Measured, rasterized: 60 frames a second, 9.5 ms.',
-          raster: ' Measured: 60 frames a second, 8.5 ms.',
-          fg: ' Measured: running at 2x, 55 frames rendered a second.',
-          mfg: ' Seen: 3x at 21 to 25 frames rendered a second (version 0.2.0). 4x not yet seen: to verify.'
+          pt: ' Measured: 60 frames a second at DLSS Quality, 15.2 ms of GPU a frame.',
+          dlaa: ' Measured, rasterized: 60 frames a second, 9.8 ms.',
+          raster: ' Measured: 60 frames a second, 8.4 ms.',
+          fg: ' Measured: running at 2x, 53 frames rendered a second (Max out).',
+          mfg: ' Measured: 3x at 27 frames rendered a second, on a 60 Hz screen (version 0.2.2). 4x to 6x, on a faster screen: to verify.'
         },
         glossary: 'What DLSS, DLAA, MSAA, TAA and the other names mean: [[the acronyms|acronyms]], further down this page.',
         anchor: '#the-acronyms'
@@ -296,7 +297,7 @@
       steps: [
         'Ouvrez le fichier. Il s\'installe en quelques secondes, pour votre compte Windows seulement, sans droits d\'administrateur. Si Windows dit avoir protégé votre PC (l\'installateur n\'est pas signé) : **Informations complémentaires**, puis **Exécuter quand même**.',
         'Lancez **Observatory RTX** depuis le menu Démarrer.',
-        'La première fois, appuyez sur **Entrée** pour récupérer les fichiers DLSS de NVIDIA (203 Mo, une fois).'
+        'La première fois, appuyez sur **Entrée** pour récupérer les fichiers DLSS de NVIDIA (276 Mo, une fois).'
       ],
       notes: '[[Les nouveautés de la ' + VERSION + ', et le SHA-256 de l\'installateur|release]]',
       notWindows: 'La version RTX est un programme Windows : le DLSS de NVIDIA, par sa bibliothèque Streamline, ne tourne que sous Windows. Sur cet appareil, c\'est la version web.',
@@ -305,17 +306,17 @@
         linux: {
           say: 'Sous Linux : la version native, en rastérisation, avec Vulkan. Le DLSS et le path tracing sont dans la version RTX, un programme Windows : le DLSS de NVIDIA, par sa bibliothèque Streamline, ne tourne que sous Windows.',
           install: 'Télécharger pour Linux',
-          sub: 'x86_64 · 81 Mo · version ' + VERSION + ' · Vulkan',
+          sub: 'x86_64 · 81 Mo · version ' + NATIVE + ' · Vulkan',
           steps: [
-            'Extrayez-le, dans un terminal : **tar xzf Observatory-' + VERSION + '-linux-x86_64.tar.gz**',
-            'Lancez **./Observatory-' + VERSION + '-linux-x86_64/Observatory.x86_64**. Il faut un pilote Vulkan.',
+            'Extrayez-le, dans un terminal : **tar xzf Observatory-' + NATIVE + '-linux-x86_64.tar.gz**',
+            'Lancez **./Observatory-' + NATIVE + '-linux-x86_64/Observatory.x86_64**. Il faut un pilote Vulkan.',
             'Lancé jusqu\'ici sous WSL2 seulement, avec un rendu sans carte graphique : sur un ordinateur Linux qui a la sienne, à vérifier.'
           ]
         },
         mac: {
           say: 'Sur un Mac : la version native, en rastérisation, avec Metal. Le DLSS et le path tracing demandent une carte NVIDIA et Windows : ils sont dans la version RTX, un programme Windows.',
           install: 'Télécharger pour macOS',
-          sub: 'puces Apple et Intel · 119 Mo · version ' + VERSION,
+          sub: 'puces Apple et Intel · 119 Mo · version ' + NATIVE,
           steps: [
             'Ouvrez le zip, puis déplacez **Observatory.app** dans Applications.',
             'La première fois, macOS refuse de l\'ouvrir, car l\'app n\'est pas notarisée par Apple. Ouvrez **Réglages Système → Confidentialité et sécurité**, puis cliquez sur **Ouvrir quand même**. Sous macOS 14 ou plus ancien, Contrôle-clic sur l\'app, puis **Ouvrir**.',
@@ -348,21 +349,21 @@
         rows: {
           pt: ['Path tracing (lancer de rayons matériel)', 'Le programme démarre avec, une fois les fichiers de NVIDIA en place.'],
           rr: ['DLSS Ray Reconstruction', 'Débruite le path tracing ; toujours actif avec lui.'],
-          sr: ['DLSS Super Resolution', 'F7 : Quality, Balanced, Performance ; le programme choisit celui qui tient 60 images par seconde. Pas Ultra Performance : il ne trouve aucun mode DLSS dans ce programme en 3840 × 2054.'],
+          sr: ['DLSS Super Resolution', 'F7 : Quality, Balanced, Performance, Ultra Performance ; le programme choisit celui qui tient 60 images par seconde. Ultra Performance depuis la version 0.2.2 : jusque-là, il ne trouvait aucun mode DLSS dans ce programme.'],
           dlaa: ['DLAA (DLSS à la pleine résolution)', 'F7.'],
           fg: ['DLSS Frame Generation, 2x', 'F8, avec NVIDIA Reflex, que NVIDIA exige avec elle.'],
-          mfg: ['DLSS Multi Frame Generation, 3x et 4x', 'F8 choisit 2x, 3x ou 4x : autant d\'images que la fréquence de l\'écran en demande au-delà des images rendues. La page de NVIDIA va jusqu\'à 6x ; ce programme s\'arrête à 4x.'],
-          dlss45: ['DLSS 4.5 et 5 : Dynamic Multi Frame Generation, 3D-Guided Neural Rendering', 'Pas dans ce programme, construit sur Streamline 2.10.0 : Dynamic Multi Frame Generation demande Streamline 2.11.1 ou plus récent, et Streamline (2.14.1) n\'a pas de kit pour 3D-Guided Neural Rendering.'],
+          mfg: ['DLSS Multi Frame Generation, de 3x à 6x', 'F8 choisit de 2x à 6x : autant d\'images que la fréquence de l\'écran en demande au-delà des images rendues (4x au plus avant la version 0.2.2).'],
+          dlss45: ['DLSS 4.5 et 5 : Dynamic Multi Frame Generation, 3D-Guided Neural Rendering', 'Pas dans ce programme. Dynamic Multi Frame Generation est dans Streamline 2.14.1, sur lequel le programme repose depuis la 0.2.2, mais sous Direct3D 12 seulement, et le path tracer du fork tourne sous Vulkan ; Streamline (2.14.1) n\'a pas de kit pour 3D-Guided Neural Rendering.'],
           raster: ['Sans les fichiers de NVIDIA : rastérisation, MSAA 4x + TAA', 'Le programme démarre ainsi quand les fichiers de NVIDIA manquent.'],
           webgl2: ['WebGL 2, dans ce navigateur', 'Ce que demande la version web.'],
           webgpu: ['WebGPU, dans ce navigateur', 'Pas utilisé par l\'Observatoire.']
         },
         measured: {
-          pt: ' Mesuré : 60 images par seconde en DLSS Quality, 15,4 ms de GPU par image.',
-          dlaa: ' Mesuré, en rastérisation : 60 images par seconde, 9,5 ms.',
-          raster: ' Mesuré : 60 images par seconde, 8,5 ms.',
-          fg: ' Mesuré : active en 2x, 55 images rendues par seconde.',
-          mfg: ' Vu : 3x à 21 à 25 images rendues par seconde (version 0.2.0). 4x pas encore vu : à vérifier.'
+          pt: ' Mesuré : 60 images par seconde en DLSS Quality, 15,2 ms de GPU par image.',
+          dlaa: ' Mesuré, en rastérisation : 60 images par seconde, 9,8 ms.',
+          raster: ' Mesuré : 60 images par seconde, 8,4 ms.',
+          fg: ' Mesuré : active en 2x, 53 images rendues par seconde (Max out).',
+          mfg: ' Mesuré : 3x à 27 images rendues par seconde, sur un écran à 60 Hz (version 0.2.2). De 4x à 6x, sur un écran plus rapide : à vérifier.'
         },
         glossary: 'Ce que veulent dire DLSS, DLAA, MSAA, TAA et les autres noms : [[les sigles|acronyms]], plus bas sur cette page.',
         anchor: '#les-sigles'
@@ -407,7 +408,7 @@
       steps: [
         'Abra el archivo. Se instala en unos segundos, solo para su cuenta de Windows, sin derechos de administrador. Si Windows dice que protegió su PC (el instalador no está firmado): **Más información**, y luego **Ejecutar de todas formas**.',
         'Inicie **Observatory RTX** desde el menú Inicio.',
-        'La primera vez, pulse **Intro** para obtener los archivos DLSS de NVIDIA (203 MB, una sola vez).'
+        'La primera vez, pulse **Intro** para obtener los archivos DLSS de NVIDIA (276 MB, una sola vez).'
       ],
       notes: '[[Las novedades de la ' + VERSION + ', y el SHA-256 del instalador|release]]',
       notWindows: 'La versión RTX es un programa de Windows: el DLSS de NVIDIA, mediante su biblioteca Streamline, solo funciona en Windows. En este dispositivo, la versión web es la que corresponde.',
@@ -416,17 +417,17 @@
         linux: {
           say: 'En Linux: la versión nativa, rasterizada, con Vulkan. El DLSS y el path tracing están en la versión RTX, un programa de Windows: el DLSS de NVIDIA, mediante su biblioteca Streamline, solo funciona en Windows.',
           install: 'Descargar para Linux',
-          sub: 'x86_64 · 81 MB · versión ' + VERSION + ' · Vulkan',
+          sub: 'x86_64 · 81 MB · versión ' + NATIVE + ' · Vulkan',
           steps: [
-            'Extráigalo, en una terminal: **tar xzf Observatory-' + VERSION + '-linux-x86_64.tar.gz**',
-            'Inicie **./Observatory-' + VERSION + '-linux-x86_64/Observatory.x86_64**. Necesita un controlador Vulkan.',
+            'Extráigalo, en una terminal: **tar xzf Observatory-' + NATIVE + '-linux-x86_64.tar.gz**',
+            'Inicie **./Observatory-' + NATIVE + '-linux-x86_64/Observatory.x86_64**. Necesita un controlador Vulkan.',
             'Probado hasta ahora solo en WSL2, con un renderizado sin tarjeta gráfica: en un ordenador Linux que tenga la suya, por verificar.'
           ]
         },
         mac: {
           say: 'En un Mac: la versión nativa, rasterizada, con Metal. El DLSS y el path tracing requieren una tarjeta NVIDIA y Windows: están en la versión RTX, un programa de Windows.',
           install: 'Descargar para macOS',
-          sub: 'chips de Apple e Intel · 119 MB · versión ' + VERSION,
+          sub: 'chips de Apple e Intel · 119 MB · versión ' + NATIVE,
           steps: [
             'Abra el zip y mueva **Observatory.app** a Aplicaciones.',
             'La primera vez, macOS no la abre, porque la app no está notarizada por Apple. Abra **Ajustes del Sistema → Privacidad y seguridad** y haga clic en **Abrir igualmente**. En macOS 14 o anterior, Control-clic en la app y elija **Abrir**.',
@@ -459,21 +460,21 @@
         rows: {
           pt: ['Path tracing (trazado de rayos por hardware)', 'El programa se inicia con él, una vez instalados los archivos de NVIDIA.'],
           rr: ['DLSS Ray Reconstruction', 'Elimina el ruido del path tracing; siempre activo con él.'],
-          sr: ['DLSS Super Resolution', 'F7: Quality, Balanced, Performance; el programa elige el que mantiene 60 imágenes por segundo. No Ultra Performance: no encuentra ningún modo DLSS en este programa a 3840 × 2054.'],
+          sr: ['DLSS Super Resolution', 'F7: Quality, Balanced, Performance, Ultra Performance; el programa elige el que mantiene 60 imágenes por segundo. Ultra Performance desde la versión 0.2.2: hasta entonces no encontraba ningún modo DLSS en este programa.'],
           dlaa: ['DLAA (DLSS a la resolución completa)', 'F7.'],
           fg: ['DLSS Frame Generation, 2x', 'F8, con NVIDIA Reflex, que NVIDIA exige con ella.'],
-          mfg: ['DLSS Multi Frame Generation, 3x y 4x', 'F8 elige 2x, 3x o 4x: tantas imágenes como la frecuencia de la pantalla pide además de las renderizadas. La página de NVIDIA llega a 6x; este programa se queda en 4x.'],
-          dlss45: ['DLSS 4.5 y 5: Dynamic Multi Frame Generation, 3D-Guided Neural Rendering', 'No en este programa, construido sobre Streamline 2.10.0: Dynamic Multi Frame Generation requiere Streamline 2.11.1 o posterior, y Streamline (2.14.1) no tiene kit para 3D-Guided Neural Rendering.'],
+          mfg: ['DLSS Multi Frame Generation, de 3x a 6x', 'F8 elige de 2x a 6x: tantas imágenes como la frecuencia de la pantalla pide además de las renderizadas (4x como máximo antes de la versión 0.2.2).'],
+          dlss45: ['DLSS 4.5 y 5: Dynamic Multi Frame Generation, 3D-Guided Neural Rendering', 'No en este programa. Dynamic Multi Frame Generation está en Streamline 2.14.1, sobre el que se basa el programa desde la 0.2.2, pero solo con Direct3D 12, y el path tracer del fork funciona con Vulkan; Streamline (2.14.1) no tiene kit para 3D-Guided Neural Rendering.'],
           raster: ['Sin los archivos de NVIDIA: rasterizado, MSAA 4x + TAA', 'El programa se inicia así cuando faltan los archivos de NVIDIA.'],
           webgl2: ['WebGL 2, en este navegador', 'Lo que necesita la versión web.'],
           webgpu: ['WebGPU, en este navegador', 'El Observatorio no lo usa.']
         },
         measured: {
-          pt: ' Medido: 60 imágenes por segundo en DLSS Quality, 15,4 ms de GPU por imagen.',
-          dlaa: ' Medido, rasterizado: 60 imágenes por segundo, 9,5 ms.',
-          raster: ' Medido: 60 imágenes por segundo, 8,5 ms.',
-          fg: ' Medido: activa en 2x, 55 imágenes renderizadas por segundo.',
-          mfg: ' Visto: 3x con 21 a 25 imágenes renderizadas por segundo (versión 0.2.0). 4x aún no visto: por verificar.'
+          pt: ' Medido: 60 imágenes por segundo en DLSS Quality, 15,2 ms de GPU por imagen.',
+          dlaa: ' Medido, rasterizado: 60 imágenes por segundo, 9,8 ms.',
+          raster: ' Medido: 60 imágenes por segundo, 8,4 ms.',
+          fg: ' Medido: activa en 2x, 53 imágenes renderizadas por segundo (Max out).',
+          mfg: ' Medido: 3x con 27 imágenes renderizadas por segundo, en una pantalla de 60 Hz (versión 0.2.2). De 4x a 6x, en una pantalla más rápida: por verificar.'
         },
         glossary: 'Lo que significan DLSS, DLAA, MSAA, TAA y los demás nombres: [[las siglas|acronyms]], más abajo en esta página.',
         anchor: '#las-siglas'
@@ -508,7 +509,7 @@
   };
 
   if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { clean: clean, system: system, keep: keep, classify: classify, offer: offer, others: others, series: series, features: features, TEXT: TEXT, LINKS: LINKS, VERSION: VERSION };
+    module.exports = { clean: clean, system: system, keep: keep, classify: classify, offer: offer, others: others, series: series, features: features, TEXT: TEXT, LINKS: LINKS, VERSION: VERSION, NATIVE: NATIVE };
     return;
   }
 
