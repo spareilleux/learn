@@ -8,13 +8,13 @@
 (function () {
   'use strict';
 
-  var VERSION = '0.2.3';  // the Windows program
-  var NATIVE = '0.2.1';   // the Linux and macOS packages: 0.2.2 changed only the Windows program's Streamline, 0.2.3 its glass
+  var VERSION = '0.2.4';  // the Windows program
+  var NATIVE = '0.2.1';   // the Linux and macOS packages: 0.2.2 changed only the Windows program's Streamline, 0.2.3 its glass, 0.2.4 its path-traced gardens
   var LINKS = {
-    rtx: 'https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.3/Observatory-RTX-0.2.3-win64.msi',
+    rtx: 'https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.4/Observatory-RTX-0.2.4-win64.msi',
     linux: 'https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.1/Observatory-0.2.1-linux-x86_64.tar.gz',
     mac: 'https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.1/Observatory-0.2.1-macos.zip',
-    release: 'https://github.com/spareilleux/learn/releases/tag/observatory-rtx-0.2.3',
+    release: 'https://github.com/spareilleux/learn/releases/tag/observatory-rtx-0.2.4',
     nvidia: 'https://www.nvidia.com/en-us/geforce/technologies/dlss/',
     web: '../demos/observatory/'  // the page's own link replaces it (data-web)
   };
@@ -178,7 +178,7 @@
       windows: ', under Windows',
       local: ' (read in this page; nothing is sent).',
       install: 'Install the RTX version',
-      installSub: 'Windows installer · 71 MB · version ' + VERSION,
+      installSub: 'Windows installer · 113 MB · version ' + VERSION,
       play: 'Play in the browser',
       playSub: 'WebGL 2 · about 55 MB, computer or phone',
       after: 'Once it is downloaded:',
@@ -248,9 +248,9 @@
           webgpu: ['WebGPU, in this browser', 'Not used by the Observatory.']
         },
         measured: {
-          pt: ' Measured: 60 frames a second at DLSS Quality, 15.2 ms of GPU a frame (version 0.2.2).',
-          dlaa: ' Measured, rasterized: 60 frames a second, 9.8 ms (version 0.2.2).',
-          raster: ' Measured: 60 frames a second, 8.4 ms (version 0.2.2).',
+          pt: ' Measured: 60 frames a second at DLSS Quality, 15.8 ms of GPU a frame in the hall (version 0.2.4).',
+          dlaa: ' Measured, rasterized: 10.3 ms of GPU a frame (version 0.2.4).',
+          raster: ' Measured: 60 frames a second, 8.4 ms (version 0.2.4).',
           fg: ' Measured: running at 2x, 53 frames rendered a second (Max out, version 0.2.2).',
           mfg: ' Measured: 3x at 27 frames rendered a second, on a 60 Hz screen (version 0.2.2). 4x to 6x, on a faster screen: to verify.'
         },
@@ -289,7 +289,7 @@
       windows: ', sous Windows',
       local: ' (lu dans cette page ; rien n\'est envoyé).',
       install: 'Installer la version RTX',
-      installSub: 'installateur Windows · 71 Mo · version ' + VERSION,
+      installSub: 'installateur Windows · 113 Mo · version ' + VERSION,
       play: 'Jouer dans le navigateur',
       playSub: 'WebGL 2 · environ 55 Mo, ordinateur ou téléphone',
       after: 'Une fois téléchargé :',
@@ -359,9 +359,9 @@
           webgpu: ['WebGPU, dans ce navigateur', 'Pas utilisé par l\'Observatoire.']
         },
         measured: {
-          pt: ' Mesuré : 60 images par seconde en DLSS Quality, 15,2 ms de GPU par image (version 0.2.2).',
-          dlaa: ' Mesuré, en rastérisation : 60 images par seconde, 9,8 ms (version 0.2.2).',
-          raster: ' Mesuré : 60 images par seconde, 8,4 ms (version 0.2.2).',
+          pt: ' Mesuré : 60 images par seconde en DLSS Quality, 15,8 ms de GPU par image dans la salle (version 0.2.4).',
+          dlaa: ' Mesuré, en rastérisation : 10,3 ms de GPU par image (version 0.2.4).',
+          raster: ' Mesuré : 60 images par seconde, 8,4 ms (version 0.2.4).',
           fg: ' Mesuré : active en 2x, 53 images rendues par seconde (Max out, version 0.2.2).',
           mfg: ' Mesuré : 3x à 27 images rendues par seconde, sur un écran à 60 Hz (version 0.2.2). De 4x à 6x, sur un écran plus rapide : à vérifier.'
         },
@@ -400,7 +400,7 @@
       windows: ', en Windows',
       local: ' (leído en esta página; no se envía nada).',
       install: 'Instalar la versión RTX',
-      installSub: 'instalador de Windows · 71 MB · versión ' + VERSION,
+      installSub: 'instalador de Windows · 113 MB · versión ' + VERSION,
       play: 'Jugar en el navegador',
       playSub: 'WebGL 2 · unos 55 MB, ordenador o teléfono',
       after: 'Una vez descargado:',
@@ -470,9 +470,9 @@
           webgpu: ['WebGPU, en este navegador', 'El Observatorio no lo usa.']
         },
         measured: {
-          pt: ' Medido: 60 imágenes por segundo en DLSS Quality, 15,2 ms de GPU por imagen (versión 0.2.2).',
-          dlaa: ' Medido, rasterizado: 60 imágenes por segundo, 9,8 ms (versión 0.2.2).',
-          raster: ' Medido: 60 imágenes por segundo, 8,4 ms (versión 0.2.2).',
+          pt: ' Medido: 60 imágenes por segundo en DLSS Quality, 15,8 ms de GPU por imagen en la sala (versión 0.2.4).',
+          dlaa: ' Medido, rasterizado: 10,3 ms de GPU por imagen (versión 0.2.4).',
+          raster: ' Medido: 60 imágenes por segundo, 8,4 ms (versión 0.2.4).',
           fg: ' Medido: activa en 2x, 53 imágenes renderizadas por segundo (Max out, versión 0.2.2).',
           mfg: ' Medido: 3x con 27 imágenes renderizadas por segundo, en una pantalla de 60 Hz (versión 0.2.2). De 4x a 6x, en una pantalla más rápida: por verificar.'
         },
