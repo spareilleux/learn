@@ -8,13 +8,13 @@
 (function () {
   'use strict';
 
-  var VERSION = '0.2.2';  // the Windows program
-  var NATIVE = '0.2.1';   // the Linux and macOS packages: 0.2.2 changed only the Windows program's Streamline
+  var VERSION = '0.2.3';  // the Windows program
+  var NATIVE = '0.2.1';   // the Linux and macOS packages: 0.2.2 changed only the Windows program's Streamline, 0.2.3 its glass
   var LINKS = {
-    rtx: 'https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.2/Observatory-RTX-0.2.2-win64.msi',
+    rtx: 'https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.3/Observatory-RTX-0.2.3-win64.msi',
     linux: 'https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.1/Observatory-0.2.1-linux-x86_64.tar.gz',
     mac: 'https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.1/Observatory-0.2.1-macos.zip',
-    release: 'https://github.com/spareilleux/learn/releases/tag/observatory-rtx-0.2.2',
+    release: 'https://github.com/spareilleux/learn/releases/tag/observatory-rtx-0.2.3',
     nvidia: 'https://www.nvidia.com/en-us/geforce/technologies/dlss/',
     web: '../demos/observatory/'  // the page's own link replaces it (data-web)
   };
@@ -248,10 +248,10 @@
           webgpu: ['WebGPU, in this browser', 'Not used by the Observatory.']
         },
         measured: {
-          pt: ' Measured: 60 frames a second at DLSS Quality, 15.2 ms of GPU a frame.',
-          dlaa: ' Measured, rasterized: 60 frames a second, 9.8 ms.',
-          raster: ' Measured: 60 frames a second, 8.4 ms.',
-          fg: ' Measured: running at 2x, 53 frames rendered a second (Max out).',
+          pt: ' Measured: 60 frames a second at DLSS Quality, 15.2 ms of GPU a frame (version 0.2.2).',
+          dlaa: ' Measured, rasterized: 60 frames a second, 9.8 ms (version 0.2.2).',
+          raster: ' Measured: 60 frames a second, 8.4 ms (version 0.2.2).',
+          fg: ' Measured: running at 2x, 53 frames rendered a second (Max out, version 0.2.2).',
           mfg: ' Measured: 3x at 27 frames rendered a second, on a 60 Hz screen (version 0.2.2). 4x to 6x, on a faster screen: to verify.'
         },
         glossary: 'What DLSS, DLAA, MSAA, TAA and the other names mean: [[the acronyms|acronyms]], further down this page.',
@@ -359,10 +359,10 @@
           webgpu: ['WebGPU, dans ce navigateur', 'Pas utilisé par l\'Observatoire.']
         },
         measured: {
-          pt: ' Mesuré : 60 images par seconde en DLSS Quality, 15,2 ms de GPU par image.',
-          dlaa: ' Mesuré, en rastérisation : 60 images par seconde, 9,8 ms.',
-          raster: ' Mesuré : 60 images par seconde, 8,4 ms.',
-          fg: ' Mesuré : active en 2x, 53 images rendues par seconde (Max out).',
+          pt: ' Mesuré : 60 images par seconde en DLSS Quality, 15,2 ms de GPU par image (version 0.2.2).',
+          dlaa: ' Mesuré, en rastérisation : 60 images par seconde, 9,8 ms (version 0.2.2).',
+          raster: ' Mesuré : 60 images par seconde, 8,4 ms (version 0.2.2).',
+          fg: ' Mesuré : active en 2x, 53 images rendues par seconde (Max out, version 0.2.2).',
           mfg: ' Mesuré : 3x à 27 images rendues par seconde, sur un écran à 60 Hz (version 0.2.2). De 4x à 6x, sur un écran plus rapide : à vérifier.'
         },
         glossary: 'Ce que veulent dire DLSS, DLAA, MSAA, TAA et les autres noms : [[les sigles|acronyms]], plus bas sur cette page.',
@@ -470,10 +470,10 @@
           webgpu: ['WebGPU, en este navegador', 'El Observatorio no lo usa.']
         },
         measured: {
-          pt: ' Medido: 60 imágenes por segundo en DLSS Quality, 15,2 ms de GPU por imagen.',
-          dlaa: ' Medido, rasterizado: 60 imágenes por segundo, 9,8 ms.',
-          raster: ' Medido: 60 imágenes por segundo, 8,4 ms.',
-          fg: ' Medido: activa en 2x, 53 imágenes renderizadas por segundo (Max out).',
+          pt: ' Medido: 60 imágenes por segundo en DLSS Quality, 15,2 ms de GPU por imagen (versión 0.2.2).',
+          dlaa: ' Medido, rasterizado: 60 imágenes por segundo, 9,8 ms (versión 0.2.2).',
+          raster: ' Medido: 60 imágenes por segundo, 8,4 ms (versión 0.2.2).',
+          fg: ' Medido: activa en 2x, 53 imágenes renderizadas por segundo (Max out, versión 0.2.2).',
           mfg: ' Medido: 3x con 27 imágenes renderizadas por segundo, en una pantalla de 60 Hz (versión 0.2.2). De 4x a 6x, en una pantalla más rápida: por verificar.'
         },
         glossary: 'Lo que significan DLSS, DLAA, MSAA, TAA y los demás nombres: [[las siglas|acronyms]], más abajo en esta página.',
