@@ -45,6 +45,27 @@ The program aims at 60 frames a second by itself: when a frame takes more than 1
 
 The installer holds the scene and a build of [NVIDIA's fork of Godot](https://github.com/NVIDIA-RTX/godot) with path tracing and DLSS, under the MIT licence, and none of NVIDIA's DLSS files. The setup fetches those on your machine from [NVIDIA's Streamline 2.10.0 release](https://github.com/NVIDIA-RTX/Streamline/releases/tag/v2.10.0), checks the download's SHA-256 and NVIDIA's signature on each file, and keeps NVIDIA's licences beside them: they are NVIDIA's software, under NVIDIA's licences. Frame generation needs Windows 10 version 2004 or later with hardware-accelerated GPU scheduling on, [by Streamline's documentation](https://github.com/NVIDIA-RTX/Streamline/blob/v2.10.0/docs/ProgrammingGuideDLSS_G.md). NVIDIA, GeForce, RTX and DLSS are trademarks of NVIDIA Corporation, which neither sponsors nor endorses this page or the package.
 
+### The acronyms
+
+What the names on this page and in the program's buttons mean.
+
+- **GPU** (graphics processing unit): the graphics card's processor. the *ms of GPU a frame* on this page are the time it takes to draw one picture; at 60 frames a second, each frame has 16.7 ms.
+- **RTX**: NVIDIA's name for its [GeForce cards](https://www.nvidia.com/en-us/geforce/rtx/) with cores for ray tracing and Tensor cores, the units that run neural networks, since the RTX 20 series. The *RTX version* of the Observatory needs one.
+- **Path tracing** and **rasterization**: path tracing computes the light by following rays as they bounce through the scene, as film renderers do; rasterization draws each triangle and approximates the light. The RTX version can do either, the web version only rasterizes.
+- **DLSS** (Deep Learning Super Sampling): [NVIDIA's technique](https://www.nvidia.com/en-us/geforce/technologies/dlss/) that renders fewer pixels and has a neural network, on the Tensor cores, rebuild the full picture from them and from the frames before. Its settings: **Quality**, **Balanced**, **Performance** render 67, 58 and 50 % of each side of the picture; **Ultra Performance**, 33 %, finds no mode in this program at 3840 × 2054, so **F7** skips it.
+- **DLAA** (Deep Learning Anti-Aliasing): DLSS at the full resolution. It saves no pixel and only smooths the edges, for more GPU time than the other settings.
+- **DLSS Ray Reconstruction**: DLSS's denoiser for path tracing. With a few rays a pixel the picture is grainy; Ray Reconstruction rebuilds it, in place of hand-written denoisers.
+- **DLSS Frame Generation** (DLSS-G): frames made by the network between the rendered ones. **2x** shows one generated frame for each rendered one (RTX 40 and 50 cards); **Multi Frame Generation**, **3x** and **4x**, two or three (RTX 50 cards). It smooths the motion, not the response to the mouse, and adds a little latency.
+- **NVIDIA Reflex**: [lowers the latency](https://www.nvidia.com/en-us/geforce/technologies/reflex/) by keeping the processor from queuing frames ahead of the graphics card. NVIDIA requires it with frame generation.
+- **Streamline**: [NVIDIA's open-source kit](https://github.com/NVIDIA-RTX/Streamline) through which a program calls DLSS and Reflex. The RTX version is built on its version 2.10.0, which runs on Windows only.
+- **Anti-aliasing**: smoothing the stair steps along edges ([Godot's page](https://docs.godotengine.org/en/stable/tutorials/3d/3d_antialiasing.html) compares the methods). **MSAA** (multisample anti-aliasing) takes several samples a pixel where triangles meet: 4x takes four. **TAA** (temporal anti-aliasing) blends each frame with the ones before, which also calms the shimmer inside surfaces, at the cost of a little blur. **SMAA** (subpixel morphological anti-aliasing) looks for edges in the finished picture and blends them. Without NVIDIA's files the RTX version uses MSAA 4x with TAA: measured while the eye turns, MSAA alone flickers about ten times more.
+- **fps** (frames per second): pictures drawn each second; the program's line counts the frames *rendered* and, with frame generation, the frames *shown*.
+- **WebGL 2**: the [3D interface of browsers](https://www.khronos.org/webgl/), which the web version uses through Godot's Compatibility renderer.
+- **WebGPU**: the [newer interface of browsers](https://www.w3.org/TR/webgpu/), closer to Vulkan, Metal and Direct3D 12. Godot cannot use it yet ([its web export page](https://docs.godotengine.org/en/stable/tutorials/export/exporting_for_web.html)), so the Observatory does not.
+- **MSI**: a [Windows Installer](https://learn.microsoft.com/windows/win32/msi/windows-installer-portal) package, the RTX version's installer.
+- **SHA-256**: a [fingerprint of a file](https://csrc.nist.gov/pubs/fips/180-4/upd1/final), 64 hexadecimal digits; the release lists each file's, to check a download.
+- **x86_64** and **ARM**: the two families of processors. The Linux package is built for x86_64; on Linux on ARM, play the web version.
+
 ## In detail
 
 [Open the 3D observatory](../demos/observatory/) in a browser with WebGL 2. The first load downloads about 55 MB of engine and scene data, and then as much again for the copy the browser keeps (below). On a phone or tablet, touch controls appear; they were tested in iPhone and iPad emulations. On an Android phone, the author found the lift hard to use without buttons of its own; it now has them, tested in phone-sized windows, not yet on a real device (*to verify*).
