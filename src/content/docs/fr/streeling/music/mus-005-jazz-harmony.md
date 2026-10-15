@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **MUS-005** · Harmonie jazz pour la guitare · intermediate-to-advanced · 3 heures
 
-Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/14d0e1344950b421cf19a43031ee8a681d7c3b9d/state/streeling/courses/music/fr/mus-005-jazz-harmony.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/08a45424ff4d29e21d0ff4adcc49003b063c6777/state/streeling/courses/music/fr/mus-005-jazz-harmony.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MUS-001](../../music/mus-001-what-is-a-chord/), [MUS-003](../../music/mus-003-functional-harmony/), [GTR-002](../../guitar-studies/gtr-002-caged-geometry/)
 :::

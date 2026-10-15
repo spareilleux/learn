@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **CYB-002** · Fondements de la gouvernance cybernétique
 
-Généré par le département *Cybernétique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/14d0e1344950b421cf19a43031ee8a681d7c3b9d/state/streeling/courses/cybernetics/fr/cyb-002-active-dampening-cross-repo-oscillation.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Cybernétique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/08a45424ff4d29e21d0ff4adcc49003b063c6777/state/streeling/courses/cybernetics/fr/cyb-002-active-dampening-cross-repo-oscillation.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [CYB-001](../../cybernetics/cyb-001-vsm-ai-governance-mapping/)
 :::
