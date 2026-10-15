@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **MAT-006** · Descomposición en valores singulares y aproximación de bajo rango · intermedio · 50 minutos
 
-Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/14d0e1344950b421cf19a43031ee8a681d7c3b9d/state/streeling/courses/mathematics/es/mat-006-svd-low-rank-approximation.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/08a45424ff4d29e21d0ff4adcc49003b063c6777/state/streeling/courses/mathematics/es/mat-006-svd-low-rank-approximation.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MAT-004](../../mathematics/mat-004-vectors-matrices-norms/), [MAT-005](../../mathematics/mat-005-symmetric-eigenproblems/)
 :::

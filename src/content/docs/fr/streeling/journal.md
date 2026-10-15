@@ -123,18 +123,28 @@ Coche un module une fois étudié. Sous **Notes**, ajoute une entrée datée : c
 
 - [ ] [PSY-001 · Introduction à la Capitalisation Fractale](../psychohistory/psy-001-intro-fractal-compounding/) <!-- psy-001-intro-fractal-compounding -->
 - [ ] [PSY-002 · Les transitions de phase de la gouvernance](../psychohistory/psy-002-governance-phase-transitions/) <!-- psy-002-governance-phase-transitions -->
-- [ ] [PSY-004 · How Large Is Large? Aggregate Predictability with Fourteen Agents](../psychohistory/psy-004-how-large-is-large/) *(en anglais)* <!-- psy-004-how-large-is-large -->
+- [ ] [PSY-004 · Qu'est-ce qu'un grand nombre ? La prévisibilité d'un agrégat de quatorze agents](../psychohistory/psy-004-how-large-is-large/) <!-- psy-004-how-large-is-large -->
 - [ ] [PSY-005 · La persistance d'abord](../psychohistory/psy-005-persistence-baseline/) <!-- psy-005-persistence-baseline -->
-- [ ] [PSY-006 · Estimate a Transition Matrix from Observed Counts](../psychohistory/psy-006-transition-matrix-from-counts/) *(en anglais)* <!-- psy-006-transition-matrix-from-counts -->
-- [ ] [PSY-007 · Is It a Power Law? Eighteen Citation Counts](../psychohistory/psy-007-power-law-or-not/) *(en anglais)* <!-- psy-007-power-law-or-not -->
-- [ ] [PSY-008 · Bursts Are Not Rates](../psychohistory/psy-008-bursts-are-not-rates/) *(en anglais)* <!-- psy-008-bursts-are-not-rates -->
-- [ ] [PSY-009 · Concentration](../psychohistory/psy-009-concentration-and-heavy-tails/) *(en anglais)* <!-- psy-009-concentration-and-heavy-tails -->
-- [ ] [PSY-010 · Exponential, Logistic or Steps? Fitting Growth to a Short History](../psychohistory/psy-010-growth-curves-short-series/) *(en anglais)* <!-- psy-010-growth-curves-short-series -->
-- [ ] [PSY-011 · Measurement Change or System Change? Rebaselines in the Quality Trend](../psychohistory/psy-011-measurement-change-or-system-change/) *(en anglais)* <!-- psy-011-measurement-change-or-system-change -->
+- [ ] [PSY-006 · Estimer une matrice de transition à partir de comptages observés](../psychohistory/psy-006-transition-matrix-from-counts/) <!-- psy-006-transition-matrix-from-counts -->
+- [ ] [PSY-007 · Est-ce une loi de puissance ? Dix-huit nombres de citations](../psychohistory/psy-007-power-law-or-not/) <!-- psy-007-power-law-or-not -->
+- [ ] [PSY-008 · Les rafales ne sont pas des taux](../psychohistory/psy-008-bursts-are-not-rates/) <!-- psy-008-bursts-are-not-rates -->
+- [ ] [PSY-009 · Concentration](../psychohistory/psy-009-concentration-and-heavy-tails/) <!-- psy-009-concentration-and-heavy-tails -->
+- [ ] [PSY-010 · Exponentielle, logistique ou en paliers ? Ajuster une croissance à un historique court](../psychohistory/psy-010-growth-curves-short-series/) <!-- psy-010-growth-curves-short-series -->
+- [ ] [PSY-011 · Changement de mesure ou changement du système ? Les rebaselines de la tendance de qualité](../psychohistory/psy-011-measurement-change-or-system-change/) <!-- psy-011-measurement-change-or-system-change -->
 - [ ] [PSY-012 · Les signaux d'alerte précoce et leurs fausses alertes](../psychohistory/psy-012-early-warning-false-alarms/) <!-- psy-012-early-warning-false-alarms -->
-- [ ] [PSY-013 · Four Scores and a Trend](../psychohistory/psy-013-four-scores-and-a-trend/) *(en anglais)* <!-- psy-013-four-scores-and-a-trend -->
-- [ ] [PSY-014 · Prediction Horizons](../psychohistory/psy-014-prediction-horizons/) *(en anglais)* <!-- psy-014-prediction-horizons -->
-- [ ] [PSY-015 · Belief Contagion in a Small Population](../psychohistory/psy-015-belief-contagion-small-population/) *(en anglais)* <!-- psy-015-belief-contagion-small-population -->
+- [ ] [PSY-013 · Quatre scores et une tendance](../psychohistory/psy-013-four-scores-and-a-trend/) <!-- psy-013-four-scores-and-a-trend -->
+- [ ] [PSY-014 · Horizons de prévisibilité](../psychohistory/psy-014-prediction-horizons/) <!-- psy-014-prediction-horizons -->
+- [ ] [PSY-015 · Contagion des croyances dans une petite population](../psychohistory/psy-015-belief-contagion-small-population/) <!-- psy-015-belief-contagion-small-population -->
+- [ ] [PSY-016 · Probability Forecasts and the Brier Score](../psychohistory/psy-016-brier-score/) *(en anglais)* <!-- psy-016-brier-score -->
+- [ ] [PSY-017 · Calibration with Six Observations](../psychohistory/psy-017-calibration-with-six-observations/) *(en anglais)* <!-- psy-017-calibration-with-six-observations -->
+- [ ] [PSY-018 · Backtesting Without Leakage](../psychohistory/psy-018-backtesting-without-leakage/) *(en anglais)* <!-- psy-018-backtesting-without-leakage -->
+- [ ] [PSY-019 · Combining Forecasters Who Share a Source](../psychohistory/psy-019-combining-correlated-forecasters/) *(en anglais)* <!-- psy-019-combining-correlated-forecasters -->
+- [ ] [PSY-020 · When the Measure Becomes the Target](../psychohistory/psy-020-goodhart-and-reflexivity/) *(en anglais)* <!-- psy-020-goodhart-and-reflexivity -->
+- [ ] [PSY-021 · Conservation Claims You Can Check](../psychohistory/psy-021-conservation-claims/) *(en anglais)* <!-- psy-021-conservation-claims -->
+- [ ] [PSY-022 · Competing Explanations](../psychohistory/psy-022-competing-explanations/) *(en anglais)* <!-- psy-022-competing-explanations -->
+- [ ] [PSY-023 · Monitoring a Plan](../psychohistory/psy-023-monitoring-a-plan/) *(en anglais)* <!-- psy-023-monitoring-a-plan -->
+- [ ] [PSY-024 · The Single Actor](../psychohistory/psy-024-the-single-actor/) *(en anglais)* <!-- psy-024-the-single-actor -->
+- [ ] [PSY-025 · Capstone](../psychohistory/psy-025-capstone-preregistered-forecast/) *(en anglais)* <!-- psy-025-capstone-preregistered-forecast -->
 
 ### Sémiotique
 

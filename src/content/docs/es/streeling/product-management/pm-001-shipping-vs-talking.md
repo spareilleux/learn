@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **PM-001** · Fundamentos de gestión de producto · principiante · 20 minutos
 
-Generado por el departamento *Gestión de productos y proyectos* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/14d0e1344950b421cf19a43031ee8a681d7c3b9d/state/streeling/courses/product-management/es/pm-001-shipping-vs-talking.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Gestión de productos y proyectos* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/08a45424ff4d29e21d0ff4adcc49003b063c6777/state/streeling/courses/product-management/es/pm-001-shipping-vs-talking.es.md) · [Mi diario](../../journal/)
 :::
 
 > **Departamento de Gestión de Producto y Proyectos** | Nivel: Principiante | Duración: 20 minutos

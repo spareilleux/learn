@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **MUS-022** · Los deltas de Grothendieck — lo que mide la distancia de contenido interválico · intermediate-to-advanced · 60 minutos
 
-Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/14d0e1344950b421cf19a43031ee8a681d7c3b9d/state/streeling/courses/music/es/mus-022-grothendieck-deltas-icv-distance.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/08a45424ff4d29e21d0ff4adcc49003b063c6777/state/streeling/courses/music/es/mus-022-grothendieck-deltas-icv-distance.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MUS-020](../../music/mus-020-set-classes-interval-vectors-prime-forms/), [MAT-022](../../mathematics/mat-022-symmetry-groups-invariants/)
 :::
