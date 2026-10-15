@@ -237,11 +237,11 @@
         rows: {
           pt: ['Path tracing (ray tracing in hardware)', 'The program starts with it once NVIDIA\'s files are in place.'],
           rr: ['DLSS Ray Reconstruction', 'Denoises the path tracing; always on with it.'],
-          sr: ['DLSS Super Resolution', 'F7: Quality, Balanced, Performance, Ultra Performance; the program picks the one that holds 60 frames a second.'],
+          sr: ['DLSS Super Resolution', 'F7: Quality, Balanced, Performance; the program picks the one that holds 60 frames a second. Not Ultra Performance: it finds no DLSS mode in this program at 3840 × 2054.'],
           dlaa: ['DLAA (DLSS at the full resolution)', 'F7.'],
           fg: ['DLSS Frame Generation, 2x', 'F8, with NVIDIA Reflex, which NVIDIA requires with it.'],
-          mfg: ['DLSS Multi Frame Generation, 3x and 4x', 'F8 picks 2x, 3x or 4x from the screen\'s refresh rate.'],
-          dlss45: ['DLSS 4.5 and 5: Dynamic Multi Frame Generation, 3D-Guided Neural Rendering', 'Not in this program, built on Streamline 2.10.0.'],
+          mfg: ['DLSS Multi Frame Generation, 3x and 4x', 'F8 picks 2x, 3x or 4x: as many frames as the screen\'s refresh rate takes over the rendered ones. NVIDIA\'s page gives up to 6x; this program stops at 4x.'],
+          dlss45: ['DLSS 4.5 and 5: Dynamic Multi Frame Generation, 3D-Guided Neural Rendering', 'Not in this program, built on Streamline 2.10.0: Dynamic Multi Frame Generation needs Streamline 2.11.1 or later, and Streamline (2.14.1) has no kit for 3D-Guided Neural Rendering.'],
           raster: ['Without NVIDIA\'s files: rasterized, MSAA 4x + TAA', 'The program starts so when NVIDIA\'s files are missing.'],
           webgl2: ['WebGL 2, in this browser', 'What the web version needs.'],
           webgpu: ['WebGPU, in this browser', 'Not used by the Observatory.']
@@ -249,8 +249,12 @@
         measured: {
           pt: ' Measured: 60 frames a second at DLSS Quality, 15.4 ms of GPU a frame.',
           dlaa: ' Measured, rasterized: 60 frames a second, 9.5 ms.',
-          raster: ' Measured: 60 frames a second, 8.5 ms.'
-        }
+          raster: ' Measured: 60 frames a second, 8.5 ms.',
+          fg: ' Measured: running at 2x, 55 frames rendered a second.',
+          mfg: ' Seen: 3x at 21 to 25 frames rendered a second (version 0.2.0). 4x not yet seen: to verify.'
+        },
+        glossary: 'What DLSS, DLAA, MSAA, TAA and the other names mean: [[the acronyms|acronyms]], further down this page.',
+        anchor: '#the-acronyms'
       },
       kinds: {
         rtx5080: {
@@ -344,11 +348,11 @@
         rows: {
           pt: ['Path tracing (lancer de rayons matériel)', 'Le programme démarre avec, une fois les fichiers de NVIDIA en place.'],
           rr: ['DLSS Ray Reconstruction', 'Débruite le path tracing ; toujours actif avec lui.'],
-          sr: ['DLSS Super Resolution', 'F7 : Quality, Balanced, Performance, Ultra Performance ; le programme choisit celui qui tient 60 images par seconde.'],
+          sr: ['DLSS Super Resolution', 'F7 : Quality, Balanced, Performance ; le programme choisit celui qui tient 60 images par seconde. Pas Ultra Performance : il ne trouve aucun mode DLSS dans ce programme en 3840 × 2054.'],
           dlaa: ['DLAA (DLSS à la pleine résolution)', 'F7.'],
           fg: ['DLSS Frame Generation, 2x', 'F8, avec NVIDIA Reflex, que NVIDIA exige avec elle.'],
-          mfg: ['DLSS Multi Frame Generation, 3x et 4x', 'F8 choisit 2x, 3x ou 4x selon la fréquence de l\'écran.'],
-          dlss45: ['DLSS 4.5 et 5 : Dynamic Multi Frame Generation, 3D-Guided Neural Rendering', 'Pas dans ce programme, construit sur Streamline 2.10.0.'],
+          mfg: ['DLSS Multi Frame Generation, 3x et 4x', 'F8 choisit 2x, 3x ou 4x : autant d\'images que la fréquence de l\'écran en demande au-delà des images rendues. La page de NVIDIA va jusqu\'à 6x ; ce programme s\'arrête à 4x.'],
+          dlss45: ['DLSS 4.5 et 5 : Dynamic Multi Frame Generation, 3D-Guided Neural Rendering', 'Pas dans ce programme, construit sur Streamline 2.10.0 : Dynamic Multi Frame Generation demande Streamline 2.11.1 ou plus récent, et Streamline (2.14.1) n\'a pas de kit pour 3D-Guided Neural Rendering.'],
           raster: ['Sans les fichiers de NVIDIA : rastérisation, MSAA 4x + TAA', 'Le programme démarre ainsi quand les fichiers de NVIDIA manquent.'],
           webgl2: ['WebGL 2, dans ce navigateur', 'Ce que demande la version web.'],
           webgpu: ['WebGPU, dans ce navigateur', 'Pas utilisé par l\'Observatoire.']
@@ -356,8 +360,12 @@
         measured: {
           pt: ' Mesuré : 60 images par seconde en DLSS Quality, 15,4 ms de GPU par image.',
           dlaa: ' Mesuré, en rastérisation : 60 images par seconde, 9,5 ms.',
-          raster: ' Mesuré : 60 images par seconde, 8,5 ms.'
-        }
+          raster: ' Mesuré : 60 images par seconde, 8,5 ms.',
+          fg: ' Mesuré : active en 2x, 55 images rendues par seconde.',
+          mfg: ' Vu : 3x à 21 à 25 images rendues par seconde (version 0.2.0). 4x pas encore vu : à vérifier.'
+        },
+        glossary: 'Ce que veulent dire DLSS, DLAA, MSAA, TAA et les autres noms : [[les sigles|acronyms]], plus bas sur cette page.',
+        anchor: '#les-sigles'
       },
       kinds: {
         rtx5080: {
@@ -451,11 +459,11 @@
         rows: {
           pt: ['Path tracing (trazado de rayos por hardware)', 'El programa se inicia con él, una vez instalados los archivos de NVIDIA.'],
           rr: ['DLSS Ray Reconstruction', 'Elimina el ruido del path tracing; siempre activo con él.'],
-          sr: ['DLSS Super Resolution', 'F7: Quality, Balanced, Performance, Ultra Performance; el programa elige el que mantiene 60 imágenes por segundo.'],
+          sr: ['DLSS Super Resolution', 'F7: Quality, Balanced, Performance; el programa elige el que mantiene 60 imágenes por segundo. No Ultra Performance: no encuentra ningún modo DLSS en este programa a 3840 × 2054.'],
           dlaa: ['DLAA (DLSS a la resolución completa)', 'F7.'],
           fg: ['DLSS Frame Generation, 2x', 'F8, con NVIDIA Reflex, que NVIDIA exige con ella.'],
-          mfg: ['DLSS Multi Frame Generation, 3x y 4x', 'F8 elige 2x, 3x o 4x según la frecuencia de la pantalla.'],
-          dlss45: ['DLSS 4.5 y 5: Dynamic Multi Frame Generation, 3D-Guided Neural Rendering', 'No en este programa, construido sobre Streamline 2.10.0.'],
+          mfg: ['DLSS Multi Frame Generation, 3x y 4x', 'F8 elige 2x, 3x o 4x: tantas imágenes como la frecuencia de la pantalla pide además de las renderizadas. La página de NVIDIA llega a 6x; este programa se queda en 4x.'],
+          dlss45: ['DLSS 4.5 y 5: Dynamic Multi Frame Generation, 3D-Guided Neural Rendering', 'No en este programa, construido sobre Streamline 2.10.0: Dynamic Multi Frame Generation requiere Streamline 2.11.1 o posterior, y Streamline (2.14.1) no tiene kit para 3D-Guided Neural Rendering.'],
           raster: ['Sin los archivos de NVIDIA: rasterizado, MSAA 4x + TAA', 'El programa se inicia así cuando faltan los archivos de NVIDIA.'],
           webgl2: ['WebGL 2, en este navegador', 'Lo que necesita la versión web.'],
           webgpu: ['WebGPU, en este navegador', 'El Observatorio no lo usa.']
@@ -463,8 +471,12 @@
         measured: {
           pt: ' Medido: 60 imágenes por segundo en DLSS Quality, 15,4 ms de GPU por imagen.',
           dlaa: ' Medido, rasterizado: 60 imágenes por segundo, 9,5 ms.',
-          raster: ' Medido: 60 imágenes por segundo, 8,5 ms.'
-        }
+          raster: ' Medido: 60 imágenes por segundo, 8,5 ms.',
+          fg: ' Medido: activa en 2x, 55 imágenes renderizadas por segundo.',
+          mfg: ' Visto: 3x con 21 a 25 imágenes renderizadas por segundo (versión 0.2.0). 4x aún no visto: por verificar.'
+        },
+        glossary: 'Lo que significan DLSS, DLAA, MSAA, TAA y los demás nombres: [[las siglas|acronyms]], más abajo en esta página.',
+        anchor: '#las-siglas'
       },
       kinds: {
         rtx5080: {
@@ -629,6 +641,10 @@
     var source = document.createElement('p');
     fill(source, t.feat.source, links);
     more.appendChild(source);
+    var names = document.createElement('p');
+    links.acronyms = t.feat.anchor;
+    fill(names, t.feat.glossary, links);
+    more.appendChild(names);
     box.appendChild(more);
   }
 
