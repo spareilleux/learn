@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **MUS-021** · La TDF de las clases de altura — módulos, fases y homometría · intermediate-to-advanced · 75 minutos
 
-Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/08a45424ff4d29e21d0ff4adcc49003b063c6777/state/streeling/courses/music/es/mus-021-pitch-class-dft-magnitudes-phases-homometry.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/state/streeling/courses/music/es/mus-021-pitch-class-dft-magnitudes-phases-homometry.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MUS-020](../../music/mus-020-set-classes-interval-vectors-prime-forms/), [MAT-021](../../mathematics/mat-021-fourier-analysis-signals/)
 :::

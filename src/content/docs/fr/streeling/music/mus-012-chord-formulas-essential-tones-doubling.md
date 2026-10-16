@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **MUS-012** · Formules d'accords, notes essentielles et redoublements · intermédiaire · 45 minutes
 
-Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/08a45424ff4d29e21d0ff4adcc49003b063c6777/state/streeling/courses/music/fr/mus-012-chord-formulas-essential-tones-doubling.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/state/streeling/courses/music/fr/mus-012-chord-formulas-essential-tones-doubling.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MUS-001](../../music/mus-001-what-is-a-chord/), [MUS-008](../../music/mus-008-intervals-inversion-compound/)
 :::

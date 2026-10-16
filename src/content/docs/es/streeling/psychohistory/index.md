@@ -25,13 +25,13 @@ sidebar:
 - [PSY-013 · Cuatro puntuaciones y una tendencia: leer el historial de resiliencia](psy-013-four-scores-and-a-trend/)
 - [PSY-014 · Horizontes de predicción: con qué rapidez crecen los errores pequeños](psy-014-prediction-horizons/)
 - [PSY-015 · Contagio de creencias en una población pequeña](psy-015-belief-contagion-small-population/)
-- [PSY-016 · Probability Forecasts and the Brier Score](psy-016-brier-score/) *(en inglés)*
-- [PSY-017 · Calibration with Six Observations](psy-017-calibration-with-six-observations/) *(en inglés)*
-- [PSY-018 · Backtesting Without Leakage](psy-018-backtesting-without-leakage/) *(en inglés)*
-- [PSY-019 · Combining Forecasters Who Share a Source](psy-019-combining-correlated-forecasters/) *(en inglés)*
-- [PSY-020 · When the Measure Becomes the Target: Citations as a Proxy](psy-020-goodhart-and-reflexivity/) *(en inglés)*
-- [PSY-021 · Conservation Claims You Can Check](psy-021-conservation-claims/) *(en inglés)*
-- [PSY-022 · Competing Explanations: Comparing Models on Small Data](psy-022-competing-explanations/) *(en inglés)*
-- [PSY-023 · Monitoring a Plan: Tolerance Bands and Alarm Rules](psy-023-monitoring-a-plan/) *(en inglés)*
-- [PSY-024 · The Single Actor: When One Sender Is the Whole Ensemble](psy-024-the-single-actor/) *(en inglés)*
-- [PSY-025 · Capstone: A Preregistered Forecast You Can Score](psy-025-capstone-preregistered-forecast/) *(en inglés)*
+- [PSY-016 · Pronósticos probabilísticos y la puntuación de Brier](psy-016-brier-score/)
+- [PSY-017 · Calibración con seis observaciones](psy-017-calibration-with-six-observations/)
+- [PSY-018 · Pruebas retrospectivas sin fuga de datos](psy-018-backtesting-without-leakage/)
+- [PSY-019 · Combinar pronosticadores que comparten una fuente](psy-019-combining-correlated-forecasters/)
+- [PSY-020 · Cuando la medida se convierte en objetivo: las citas como indicador sustituto](psy-020-goodhart-and-reflexivity/)
+- [PSY-021 · Enunciados de conservación que se pueden comprobar](psy-021-conservation-claims/)
+- [PSY-022 · Explicaciones rivales: comparar modelos con pocos datos](psy-022-competing-explanations/)
+- [PSY-023 · Vigilar un plan: bandas de tolerancia y reglas de alarma](psy-023-monitoring-a-plan/)
+- [PSY-024 · El actor único: cuando un solo remitente es todo el conjunto](psy-024-the-single-actor/)
+- [PSY-025 · Proyecto final: un pronóstico prerregistrado que se puede puntuar](psy-025-capstone-preregistered-forecast/)

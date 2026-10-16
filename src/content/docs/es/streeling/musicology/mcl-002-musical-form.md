@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **MCL-002** · Fundamentos de musicología · beginner-intermediate · 45 minutos
 
-Generado por el departamento *Musicología* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/08a45424ff4d29e21d0ff4adcc49003b063c6777/state/streeling/courses/musicology/es/mcl-002-musical-form.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Musicología* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/state/streeling/courses/musicology/es/mcl-002-musical-form.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MCL-001](../../musicology/mcl-001-how-music-evolves/)
 :::

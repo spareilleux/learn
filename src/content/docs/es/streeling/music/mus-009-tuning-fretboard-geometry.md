@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **MUS-009** · Afinación y geometría del mástil · principiante · 45 minutos
 
-Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/08a45424ff4d29e21d0ff4adcc49003b063c6777/state/streeling/courses/music/es/mus-009-tuning-fretboard-geometry.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/state/streeling/courses/music/es/mus-009-tuning-fretboard-geometry.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MUS-007](../../music/mus-007-pitch-spelling-enharmonic-identity/), [MAT-004](../../mathematics/mat-004-vectors-matrices-norms/), [PHY-001](../../physics/phy-001-science-of-guitar-sound/)
 :::

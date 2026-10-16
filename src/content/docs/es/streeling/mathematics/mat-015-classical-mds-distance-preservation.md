@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **MAT-015** · MDS clásico y preservación de distancias · intermedio · 50 minutos
 
-Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/08a45424ff4d29e21d0ff4adcc49003b063c6777/state/streeling/courses/mathematics/es/mat-015-classical-mds-distance-preservation.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/state/streeling/courses/mathematics/es/mat-015-classical-mds-distance-preservation.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MAT-013](../../mathematics/mat-013-distances-kernels-psd/), [MAT-014](../../mathematics/mat-014-pca-variance-preservation/)
 :::

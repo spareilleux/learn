@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **PSY-004** · Qu'est-ce qu'un grand nombre ? La prévisibilité d'un agrégat de quatorze agents · intermédiaire · 45 minutes
 
-Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/08a45424ff4d29e21d0ff4adcc49003b063c6777/state/streeling/courses/psychohistory/fr/psy-004-how-large-is-large.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/state/streeling/courses/psychohistory/fr/psy-004-how-large-is-large.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MAT-009](../../mathematics/mat-009-estimation-uncertainty-sampling/), [PSY-002](../../psychohistory/psy-002-governance-phase-transitions/)
 :::
@@ -20,11 +20,11 @@ Prérequis: [MAT-009](../../mathematics/mat-009-estimation-uncertainty-sampling/
 
 Vous placerez un intervalle exact sur une proportion observée parmi quelques agents qui répondent par oui ou par non, vous direz comment sa largeur diminue quand le groupe grandit, et vous remplacerez le nombre d'agents par une taille d'échantillon effective quand les agents partagent une cause. **Question de projet :** le département affirme que le comportement agrégé de 14 personas sur 4 dépôts suit des lois mathématiques. Quelle est l'ampleur de l'incertitude sur un agrégat de 14, et qu'y change un contexte partagé ?
 
-[PSY-002](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/state/streeling/courses/psychohistory/en/psy-002-governance-phase-transitions.md) affirme que l'agrégat suit des lois statistiques, et lit la corrélation entre dépôts comme un signal de couplage. [PSY-019](../../psychohistory/psy-019-combining-correlated-forecasters/) *(en anglais)* applique la même arithmétique aux erreurs de prévision ; [PSY-024](../../psychohistory/psy-024-the-single-actor/) *(en anglais)* demande qui a agi dans les événements enregistrés.
+[PSY-002](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/state/streeling/courses/psychohistory/en/psy-002-governance-phase-transitions.md) affirme que l'agrégat suit des lois statistiques, et lit la corrélation entre dépôts comme un signal de couplage. [PSY-019](../../psychohistory/psy-019-combining-correlated-forecasters/) applique la même arithmétique aux erreurs de prévision ; [PSY-024](../../psychohistory/psy-024-the-single-actor/) demande qui a agi dans les événements enregistrés.
 
 ## 1. Ce que dit la fiche et ce que contient le dépôt
 
-**Observé.** La [fiche du département](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/state/streeling/departments/psychohistory.department.json) conclut son principe clé par : « One agent's decision is unpredictable, but the aggregate behavior of 14 personas across 4 repos follows mathematical laws. » [`extract.py`](https://github.com/GuitarAlchemist/Demerzel/blob/08a45424ff4d29e21d0ff4adcc49003b063c6777/scripts/streeling_fixtures/psychohistory/psy-004/extract.py) fige cette fiche, ainsi que les fichiers auxquels la phrase pourrait renvoyer, dans [`observed-input.json`](https://github.com/GuitarAlchemist/Demerzel/blob/08a45424ff4d29e21d0ff4adcc49003b063c6777/state/streeling/fixtures/psychohistory/psy-004/observed-input.json).
+**Observé.** La [fiche du département](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/state/streeling/departments/psychohistory.department.json) conclut son principe clé par : « One agent's decision is unpredictable, but the aggregate behavior of 14 personas across 4 repos follows mathematical laws. » [`extract.py`](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/scripts/streeling_fixtures/psychohistory/psy-004/extract.py) fige cette fiche, ainsi que les fichiers auxquels la phrase pourrait renvoyer, dans [`observed-input.json`](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/state/streeling/fixtures/psychohistory/psy-004/observed-input.json).
 
 - La fiche énumère 4 dépôts consommateurs, comme annoncé. Le dossier [`personas/`](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/personas) contient **17** fichiers de persona, 3 de plus qu'annoncé ; il en contenait 14 au [commit `e9fe8b7`](https://github.com/GuitarAlchemist/Demerzel/tree/e9fe8b7d711ede390b602896e4a5c571d0ad1f67/personas), qui a ajouté la fiche le 2026-03-21 (relevé avec `git ls-tree`, hors du jeu d'essai).
 - Un fichier de persona décrit un rôle et n'enregistre aucune décision.
@@ -49,7 +49,7 @@ borne supérieure : le p tel que  P(X <= k) = 0.025      X ~ Binomiale(n, p)
 si les n disent oui : borne inférieure = 0.025^(1/n), borne supérieure = 1
 ```
 
-[`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/08a45424ff4d29e21d0ff4adcc49003b063c6777/scripts/streeling_fixtures/psychohistory/psy-004/analyze.py) additionne les termes binomiaux et résout en p par dichotomie. **Calculé à partir d'entrées supposées** (la moitié des agents disent oui ; trois décimales) :
+[`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/scripts/streeling_fixtures/psychohistory/psy-004/analyze.py) additionne les termes binomiaux et résout en p par dichotomie. **Calculé à partir d'entrées supposées** (la moitié des agents disent oui ; trois décimales) :
 
 | Agents | Intervalle exact à 95 % | Largeur | Écart-type à p = 0,5 |
 |---|---|---|---|
@@ -59,7 +59,7 @@ si les n disent oui : borne inférieure = 0.025^(1/n), borne supérieure = 1
 
 Quatorze agents partagés à égalité entre oui et non sont compatibles avec tout p compris entre 0,23 et 0,77, soit plus de la moitié de l'échelle. La largeur décroît comme l'inverse de la racine carrée de la taille du groupe : 100 agents donnent un intervalle 2,652 fois plus étroit (`sqrt(100 / 14) = 2.673`). L'approximation normale `n = z² p (1 - p) / h²`, avec z = 1,959964 et p = 0,5, demande 384,146, donc 385 agents, pour une demi-largeur h de 5 points.
 
-Pour 14 agents, cet intervalle contient p au moins 95,5 % du temps, pour chacune des 99 valeurs de p de 0,01 à 0,99 ([`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/08a45424ff4d29e21d0ff4adcc49003b063c6777/state/streeling/fixtures/psychohistory/psy-004/results.json)). Un panel de 5 en dit moins encore : si les cinq disent oui, la borne inférieure vaut `0.025^(1/5) = 0.478`.
+Pour 14 agents, cet intervalle contient p au moins 95,5 % du temps, pour chacune des 99 valeurs de p de 0,01 à 0,99 ([`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/state/streeling/fixtures/psychohistory/psy-004/results.json)). Un panel de 5 en dit moins encore : si les cinq disent oui, la borne inférieure vaut `0.025^(1/5) = 0.478`.
 
 ### Exercice pratique 2
 
@@ -122,7 +122,7 @@ Une équipe veut que la proportion de oui parmi ses agents tombe à moins de 5 p
 
 **Observé, épinglé au commit `4b03838800dcd4894f1e026461979bff1d985ca8` de Demerzel :** les fichiers dont les liens figurent à la section 1.
 
-**Jeu d'essai.** `python -I scripts/streeling_fixtures/psychohistory/psy-004/extract.py`, puis `analyze.py` dans le même dossier. Hypothèses et graines : [`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/08a45424ff4d29e21d0ff4adcc49003b063c6777/state/streeling/fixtures/psychohistory/psy-004/scenarios.json). Autocontrôles et témoins négatifs : [README](https://github.com/GuitarAlchemist/Demerzel/blob/08a45424ff4d29e21d0ff4adcc49003b063c6777/state/streeling/fixtures/psychohistory/psy-004/README.md).
+**Jeu d'essai.** `python -I scripts/streeling_fixtures/psychohistory/psy-004/extract.py`, puis `analyze.py` dans le même dossier. Hypothèses et graines : [`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/state/streeling/fixtures/psychohistory/psy-004/scenarios.json). Autocontrôles et témoins négatifs : [README](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/state/streeling/fixtures/psychohistory/psy-004/README.md).
 
 **Références de méthode.** Clopper, C. J., et Pearson, E. S. (1934), « The Use of Confidence or Fiducial Limits Illustrated in the Case of the Binomial », *Biometrika* 26(4), 404–413. Kish, L. (1965), *Survey Sampling*, Wiley (l'effet de plan).
 
