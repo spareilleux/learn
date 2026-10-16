@@ -35,12 +35,12 @@ Ces modules ont été écrits par des départements IA et **n'ont pas été relu
 | [Philosophie](philosophy/) | 1 | 1 | 1 |
 | [Physique](physics/) | 1 | 1 | 1 |
 | [Gestion de produit et de projet](product-management/) | 1 | 1 | 1 |
-| [Psychohistoire](psychohistory/) | 24 | 14 | 14 |
+| [Psychohistoire](psychohistory/) | 24 | 24 | 24 |
 | [Sémiotique](semiotics/) | 1 | 1 | 1 |
 | [Informatique visuelle](visual-computing/) | 0 | 0 | 0 |
 | [Musiques et langues du monde](world-music-languages/) | 1 | 1 | 1 |
 
 ## Provenance
 
-- Source : [`GuitarAlchemist/Demerzel` → `state/streeling/courses`](https://github.com/GuitarAlchemist/Demerzel/tree/08a45424ff4d29e21d0ff4adcc49003b063c6777/state/streeling/courses) au commit `08a4542` (2026-10-14), licence MIT.
+- Source : [`GuitarAlchemist/Demerzel` → `state/streeling/courses`](https://github.com/GuitarAlchemist/Demerzel/tree/5d753139d6c585d98580fe492c22f8b811d2894a/state/streeling/courses) au commit `5d75313` (2026-10-16), licence MIT.
 - Importé avec `npm run sync:streeling` ; ne pas modifier ces pages à la main — seul `journal.md` est conservé entre deux synchronisations.

@@ -25,13 +25,13 @@ sidebar:
 - [PSY-013 · Quatre scores et une tendance : lire l'historique de résilience](psy-013-four-scores-and-a-trend/)
 - [PSY-014 · Horizons de prévisibilité : à quelle vitesse croissent les petites erreurs](psy-014-prediction-horizons/)
 - [PSY-015 · Contagion des croyances dans une petite population](psy-015-belief-contagion-small-population/)
-- [PSY-016 · Probability Forecasts and the Brier Score](psy-016-brier-score/) *(en anglais)*
-- [PSY-017 · Calibration with Six Observations](psy-017-calibration-with-six-observations/) *(en anglais)*
-- [PSY-018 · Backtesting Without Leakage](psy-018-backtesting-without-leakage/) *(en anglais)*
-- [PSY-019 · Combining Forecasters Who Share a Source](psy-019-combining-correlated-forecasters/) *(en anglais)*
-- [PSY-020 · When the Measure Becomes the Target: Citations as a Proxy](psy-020-goodhart-and-reflexivity/) *(en anglais)*
-- [PSY-021 · Conservation Claims You Can Check](psy-021-conservation-claims/) *(en anglais)*
-- [PSY-022 · Competing Explanations: Comparing Models on Small Data](psy-022-competing-explanations/) *(en anglais)*
-- [PSY-023 · Monitoring a Plan: Tolerance Bands and Alarm Rules](psy-023-monitoring-a-plan/) *(en anglais)*
-- [PSY-024 · The Single Actor: When One Sender Is the Whole Ensemble](psy-024-the-single-actor/) *(en anglais)*
-- [PSY-025 · Capstone: A Preregistered Forecast You Can Score](psy-025-capstone-preregistered-forecast/) *(en anglais)*
+- [PSY-016 · Les prévisions probabilistes et le score de Brier](psy-016-brier-score/)
+- [PSY-017 · La calibration à partir de six observations](psy-017-calibration-with-six-observations/)
+- [PSY-018 · Tests rétrospectifs sans fuite de données](psy-018-backtesting-without-leakage/)
+- [PSY-019 · Combiner des prévisionnistes qui partagent une source](psy-019-combining-correlated-forecasters/)
+- [PSY-020 · Quand la mesure devient la cible : les citations comme indicateur de substitution](psy-020-goodhart-and-reflexivity/)
+- [PSY-021 · Des énoncés de conservation que l'on peut vérifier](psy-021-conservation-claims/)
+- [PSY-022 · Explications concurrentes : comparer des modèles sur peu de données](psy-022-competing-explanations/)
+- [PSY-023 · Surveiller un plan : bandes de tolérance et règles d'alerte](psy-023-monitoring-a-plan/)
+- [PSY-024 · L'acteur unique : quand un seul expéditeur forme tout l'ensemble](psy-024-the-single-actor/)
+- [PSY-025 · Projet de synthèse : une prévision préenregistrée que l'on peut noter](psy-025-capstone-preregistered-forecast/)

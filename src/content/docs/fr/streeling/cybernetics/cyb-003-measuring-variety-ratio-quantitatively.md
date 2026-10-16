@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **CYB-003**
 
-Généré par le département *Cybernétique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/08a45424ff4d29e21d0ff4adcc49003b063c6777/state/streeling/courses/cybernetics/fr/cyb-003-measuring-variety-ratio-quantitatively.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Cybernétique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/state/streeling/courses/cybernetics/fr/cyb-003-measuring-variety-ratio-quantitatively.fr.md) · [Mon journal](../../journal/)
 :::
 
 **Département :** Cybernétique

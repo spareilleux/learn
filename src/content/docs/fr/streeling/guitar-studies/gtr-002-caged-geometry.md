@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **GTR-002** · Disposition du manche et système CAGED · intermédiaire · 45 minutes
 
-Généré par le département *Études de guitare* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/08a45424ff4d29e21d0ff4adcc49003b063c6777/state/streeling/courses/guitar-studies/fr/gtr-002-caged-geometry.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Études de guitare* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/state/streeling/courses/guitar-studies/fr/gtr-002-caged-geometry.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [GTR-001](../../guitar-studies/gtr-001-the-fretboard-map/)
 :::

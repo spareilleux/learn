@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **PSY-011** · ¿Cambio de medición o cambio del sistema? Las nuevas líneas de base de la tendencia de calidad · intermedio · 40 minutos
 
-Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/08a45424ff4d29e21d0ff4adcc49003b063c6777/state/streeling/courses/psychohistory/es/psy-011-measurement-change-or-system-change.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/state/streeling/courses/psychohistory/es/psy-011-measurement-change-or-system-change.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PSY-002](../../psychohistory/psy-002-governance-phase-transitions/), [PSY-005](../../psychohistory/psy-005-persistence-baseline/)
 :::
@@ -45,17 +45,17 @@ De ahí se siguen tres cosas:
 
 El docstring del feeder expone la intención: [«the jump is a change of measurement, not a change in citations»](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/scripts/quality_trend.py#L14-L18) (el salto es un cambio de medición, no un cambio en las citas).
 
-**Calculado.** [`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/08a45424ff4d29e21d0ff4adcc49003b063c6777/scripts/streeling_fixtures/psychohistory/psy-011/analyze.py) reimplementa esta regla sobre la instantánea que toma [`extract.py`](https://github.com/GuitarAlchemist/Demerzel/blob/08a45424ff4d29e21d0ff4adcc49003b063c6777/scripts/streeling_fixtures/psychohistory/psy-011/extract.py). Reproduce `delta_citations` en las 1,537 filas que tienen recuento y las 576 marcas registradas, con 0 discrepancias.
+**Calculado.** [`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/scripts/streeling_fixtures/psychohistory/psy-011/analyze.py) reimplementa esta regla sobre la instantánea que toma [`extract.py`](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/scripts/streeling_fixtures/psychohistory/psy-011/extract.py). Reproduce `delta_citations` en las 1,537 filas que tienen recuento y las 576 marcas registradas, con 0 discrepancias.
 
 ### Ejercicio práctico 1
 
-Filas **sintéticas** de [`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/08a45424ff4d29e21d0ff4adcc49003b063c6777/state/streeling/fixtures/psychohistory/psy-011/scenarios.json). Indique la marca y el `delta_citations` que escribe la regla: (a) la primera fila de un artefacto, con recuento 9; (b) fila anterior con 12 y sin fuente, ahora 27 con `git-grep-v1`; (c) fila anterior con 6 y ahora 19, ambas con `git-grep-v1`, después de que alguien añadiera una ruta a la lista `citation_paths` del registro. ¿Qué caso es un cambio de instrumento que la regla no puede ver?
+Filas **sintéticas** de [`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/state/streeling/fixtures/psychohistory/psy-011/scenarios.json). Indique la marca y el `delta_citations` que escribe la regla: (a) la primera fila de un artefacto, con recuento 9; (b) fila anterior con 12 y sin fuente, ahora 27 con `git-grep-v1`; (c) fila anterior con 6 y ahora 19, ambas con `git-grep-v1`, después de que alguien añadiera una ruta a la lista `citation_paths` del registro. ¿Qué caso es un cambio de instrumento que la regla no puede ver?
 
 > **Respuesta:** (a) Sin fila anterior: sin marca, delta 9, un inicio de medición registrado como una subida. (b) Marca, delta 0; el escalón de 15 solo sobrevive en `citation_count`. (c) Sin marca, delta 13: es el caso que la regla no puede ver. La lista de rutas forma parte del instrumento, pero la etiqueta no cambió, así que la edición queda registrada como 13 citas nuevas.
 
 ## 2. Localizar el cambio en el registro
 
-**Observado** en [`observed-input.json`](https://github.com/GuitarAlchemist/Demerzel/blob/08a45424ff4d29e21d0ff4adcc49003b063c6777/state/streeling/fixtures/psychohistory/psy-011/observed-input.json): 1,548 filas en 88 ejecuciones para 18 artefactos. La primera ejecución, con fecha 2026-05-01, contiene 11 *filas semilla* sin recuento; le siguen 87 ejecuciones del feeder. La clave `citation_source` falta en las 56 primeras ejecuciones (972 filas) y está presente en las 32 últimas. Aparece por primera vez el 2026-09-13T17:52:14Z, cuando 16 filas llevan `git-grep-v1` y `rebaseline: true`. Las otras 2 filas tienen una fuente nula y ninguna marca: sus artefactos tienen una lista `citation_paths` vacía, que [señala un artefacto externo al repositorio](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/scripts/evolution_metrics.py#L20-L23), y conservan sus valores introducidos a mano, 55 y 0. Ninguna otra fila está marcada.
+**Observado** en [`observed-input.json`](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/state/streeling/fixtures/psychohistory/psy-011/observed-input.json): 1,548 filas en 88 ejecuciones para 18 artefactos. La primera ejecución, con fecha 2026-05-01, contiene 11 *filas semilla* sin recuento; le siguen 87 ejecuciones del feeder. La clave `citation_source` falta en las 56 primeras ejecuciones (972 filas) y está presente en las 32 últimas. Aparece por primera vez el 2026-09-13T17:52:14Z, cuando 16 filas llevan `git-grep-v1` y `rebaseline: true`. Las otras 2 filas tienen una fuente nula y ninguna marca: sus artefactos tienen una lista `citation_paths` vacía, que [señala un artefacto externo al repositorio](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/scripts/evolution_metrics.py#L20-L23), y conservan sus valores introducidos a mano, 55 y 0. Ninguna otra fila está marcada.
 
 **Calculado.** Cada uno de los 16 artefactos tuvo un mismo valor introducido a mano en todas las filas anteriores. Esa ejecución lo sustituyó:
 
@@ -88,7 +88,7 @@ A partir de la tabla, calcule la suma de los 16 recuentos antes y después, y el
 
 ## 3. Clasificar cada salto
 
-«Filas con un `delta_citations` distinto de cero» y «filas cuyo recuento difiere del de la fila anterior» parecen el mismo conjunto. Cada uno contiene 20 filas; solo 4 están en ambos. Clasificar cada fila respecto a la fila anterior del artefacto muestra por qué (**calculado**, [`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/08a45424ff4d29e21d0ff4adcc49003b063c6777/state/streeling/fixtures/psychohistory/psy-011/results.json)):
+«Filas con un `delta_citations` distinto de cero» y «filas cuyo recuento difiere del de la fila anterior» parecen el mismo conjunto. Cada uno contiene 20 filas; solo 4 están en ambos. Clasificar cada fila respecto a la fila anterior del artefacto muestra por qué (**calculado**, [`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/state/streeling/fixtures/psychohistory/psy-011/results.json)):
 
 | Clase de fila | Filas | Recuento cambiado | Delta distinto de cero |
 |---|---|---|---|
@@ -136,7 +136,7 @@ Un panel presenta «citas multiplicadas por unos 3.9 desde julio (de 106 a 414)�
 
 ## Fuentes, límites y próxima comprobación
 
-**Observado, fijado en Demerzel `4b03838800dcd4894f1e026461979bff1d985ca8`:** los cinco archivos JSONL de [`state/quality-trend/`](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/state/quality-trend), los dos scripts enlazados más arriba y los 18 registros `*.evolution.json` de [`state/evolution/`](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/state/evolution). El [README](https://github.com/GuitarAlchemist/Demerzel/blob/08a45424ff4d29e21d0ff4adcc49003b063c6777/state/streeling/fixtures/psychohistory/psy-011/README.md) del fixture da los comandos, las autocomprobaciones y los controles negativos.
+**Observado, fijado en Demerzel `4b03838800dcd4894f1e026461979bff1d985ca8`:** los cinco archivos JSONL de [`state/quality-trend/`](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/state/quality-trend), los dos scripts enlazados más arriba y los 18 registros `*.evolution.json` de [`state/evolution/`](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/state/evolution). El [README](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/state/streeling/fixtures/psychohistory/psy-011/README.md) del fixture da los comandos, las autocomprobaciones y los controles negativos.
 
 **Referencias de método.** Shadish, W. R., Cook, T. D., y Campbell, D. T. (2002), *Experimental and Quasi-Experimental Designs for Generalized Causal Inference*, Houghton Mifflin (la *instrumentación* como amenaza a la validez).
 
@@ -144,4 +144,4 @@ Un panel presenta «citas multiplicadas por unos 3.9 desde julio (de 106 a 414)�
 
 **Próxima comprobación.** Recalcular el recuento `git-grep-v1` en el commit de cada ejecución anterior. Un único instrumento bajo las 87 ejecuciones del feeder mostraría si algo se movió antes de septiembre; si fue así, la conclusión pasa de «casi nada se movió» a «el movimiento no se midió».
 
-**Huella propia.** Este módulo escribe los nombres de los artefactos como etiquetas con barras espaciadas, de modo que ninguno de sus archivos contiene la ruta de citación de ningún artefacto: ejecutada sobre ellos con cada ruta, la búsqueda literal de la sección 1 (`git grep -lF`) no encuentra nada. [PSY-020](../../psychohistory/psy-020-goodhart-and-reflexivity/) *(en inglés)* retoma la cuestión general.
+**Huella propia.** Este módulo escribe los nombres de los artefactos como etiquetas con barras espaciadas, de modo que ninguno de sus archivos contiene la ruta de citación de ningún artefacto: ejecutada sobre ellos con cada ruta, la búsqueda literal de la sección 1 (`git grep -lF`) no encuentra nada. [PSY-020](../../psychohistory/psy-020-goodhart-and-reflexivity/) retoma la cuestión general.

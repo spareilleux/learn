@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **MAT-023** · Réseaux de Petri et accessibilité · intermédiaire · 55 minutes
 
-Généré par le département *Mathématiques* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/08a45424ff4d29e21d0ff4adcc49003b063c6777/state/streeling/courses/mathematics/fr/mat-023-petri-nets-reachability.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Mathématiques* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/state/streeling/courses/mathematics/fr/mat-023-petri-nets-reachability.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MAT-002](../../mathematics/mat-002-counterexamples-and-exhaustive-checks/)
 :::

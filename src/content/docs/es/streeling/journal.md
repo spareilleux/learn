@@ -135,16 +135,16 @@ Marca un módulo una vez estudiado. En **Notas**, añade una entrada fechada: lo
 - [ ] [PSY-013 · Cuatro puntuaciones y una tendencia](../psychohistory/psy-013-four-scores-and-a-trend/) <!-- psy-013-four-scores-and-a-trend -->
 - [ ] [PSY-014 · Horizontes de predicción](../psychohistory/psy-014-prediction-horizons/) <!-- psy-014-prediction-horizons -->
 - [ ] [PSY-015 · Contagio de creencias en una población pequeña](../psychohistory/psy-015-belief-contagion-small-population/) <!-- psy-015-belief-contagion-small-population -->
-- [ ] [PSY-016 · Probability Forecasts and the Brier Score](../psychohistory/psy-016-brier-score/) *(en inglés)* <!-- psy-016-brier-score -->
-- [ ] [PSY-017 · Calibration with Six Observations](../psychohistory/psy-017-calibration-with-six-observations/) *(en inglés)* <!-- psy-017-calibration-with-six-observations -->
-- [ ] [PSY-018 · Backtesting Without Leakage](../psychohistory/psy-018-backtesting-without-leakage/) *(en inglés)* <!-- psy-018-backtesting-without-leakage -->
-- [ ] [PSY-019 · Combining Forecasters Who Share a Source](../psychohistory/psy-019-combining-correlated-forecasters/) *(en inglés)* <!-- psy-019-combining-correlated-forecasters -->
-- [ ] [PSY-020 · When the Measure Becomes the Target](../psychohistory/psy-020-goodhart-and-reflexivity/) *(en inglés)* <!-- psy-020-goodhart-and-reflexivity -->
-- [ ] [PSY-021 · Conservation Claims You Can Check](../psychohistory/psy-021-conservation-claims/) *(en inglés)* <!-- psy-021-conservation-claims -->
-- [ ] [PSY-022 · Competing Explanations](../psychohistory/psy-022-competing-explanations/) *(en inglés)* <!-- psy-022-competing-explanations -->
-- [ ] [PSY-023 · Monitoring a Plan](../psychohistory/psy-023-monitoring-a-plan/) *(en inglés)* <!-- psy-023-monitoring-a-plan -->
-- [ ] [PSY-024 · The Single Actor](../psychohistory/psy-024-the-single-actor/) *(en inglés)* <!-- psy-024-the-single-actor -->
-- [ ] [PSY-025 · Capstone](../psychohistory/psy-025-capstone-preregistered-forecast/) *(en inglés)* <!-- psy-025-capstone-preregistered-forecast -->
+- [ ] [PSY-016 · Pronósticos probabilísticos y la puntuación de Brier](../psychohistory/psy-016-brier-score/) <!-- psy-016-brier-score -->
+- [ ] [PSY-017 · Calibración con seis observaciones](../psychohistory/psy-017-calibration-with-six-observations/) <!-- psy-017-calibration-with-six-observations -->
+- [ ] [PSY-018 · Pruebas retrospectivas sin fuga de datos](../psychohistory/psy-018-backtesting-without-leakage/) <!-- psy-018-backtesting-without-leakage -->
+- [ ] [PSY-019 · Combinar pronosticadores que comparten una fuente](../psychohistory/psy-019-combining-correlated-forecasters/) <!-- psy-019-combining-correlated-forecasters -->
+- [ ] [PSY-020 · Cuando la medida se convierte en objetivo](../psychohistory/psy-020-goodhart-and-reflexivity/) <!-- psy-020-goodhart-and-reflexivity -->
+- [ ] [PSY-021 · Enunciados de conservación que se pueden comprobar](../psychohistory/psy-021-conservation-claims/) <!-- psy-021-conservation-claims -->
+- [ ] [PSY-022 · Explicaciones rivales](../psychohistory/psy-022-competing-explanations/) <!-- psy-022-competing-explanations -->
+- [ ] [PSY-023 · Vigilar un plan](../psychohistory/psy-023-monitoring-a-plan/) <!-- psy-023-monitoring-a-plan -->
+- [ ] [PSY-024 · El actor único](../psychohistory/psy-024-the-single-actor/) <!-- psy-024-the-single-actor -->
+- [ ] [PSY-025 · Proyecto final](../psychohistory/psy-025-capstone-preregistered-forecast/) <!-- psy-025-capstone-preregistered-forecast -->
 
 ### Semiótica
 
