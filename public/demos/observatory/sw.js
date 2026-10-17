@@ -1,7 +1,7 @@
 /* Observatory: this build's files kept in the browser, and replaced when a newer build is published.
    Written for each build by artpass/publish/pwa/pwa.py, which fills in BUILD and FILES: a new build is a
    new worker, which is how the browser learns of it. Its own code, not Godot's service worker. */
-const BUILD = {"version": 48, "built": 1792203904};
+const BUILD = {"version": 49, "built": 1792214934};
 const FILES = ["index.html", "index.js", "index.wasm", "index.pck", "index.audio.worklet.js", "index.audio.position.worklet.js", "index.png", "index.icon.png", "index.apple-touch-icon.png", "manifest.webmanifest", "icon-192.png", "icon-512.png"];
 const PREFIX = 'observatory-';
 const CACHE = PREFIX + BUILD.version + '-' + BUILD.built;
