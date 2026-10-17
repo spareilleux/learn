@@ -2032,6 +2032,86 @@ tablet, Safari, Firefox, the toys on a touch screen (in this version they need
 a keyboard and a mouse), and the update from version 44 to version 48 on Pages
 itself.
 
+Version 49, exported 2026-10-17 05:28:54 UTC, takes the Foundation copy's toys
+since version 48 (its commits after 4f979b2, to 917d016). The open bays, the
+French doors' leaves and the sills under them, the library wings and the
+visitor are solids for the dice and dominoes (scripts/toy_physics.gd, and
+scripts/library_wing.gd's toy_boxes()): the shelves' and the facade's rings
+stop below each opened bay's head, each leaf is a body that follows its swing,
+the wings' floors, cases, piers, busts, walls and vault lids are 84 boxes, and
+a capsule follows the visitor on foot or riding and knocks the toys in its
+way, and no domino is laid in it. On a touch screen, with the duck held, the
+toys have buttons of their own (scripts/duck_gun.gd), in English, French and
+Spanish: the mode over the curio wheel's button, pick up or undo beside it,
+fire or lay over the right-hand column with push and the size, or in a row
+beside the column's top button where they would meet the language selector (a
+phone held sideways). The beds' modelled flowers, which the same commits add,
+stay off the web: scripts/palace_gardens.gd and assets/garden_plant.gdshader
+are version 48's and scripts/garden_flowers.gd is left out. Every other script
+is version 48's, scripts/observatory.gd and scripts/quality.gd version 28's.
+index.pck is now 55,501,524 bytes, 9,968 more than version 48's; index.html
+changes only that size, sw.js only its BUILD line, and index.wasm, index.js,
+the manifest and the icons are unchanged.
+Version 49's native regressions, on the export's build tree with stock Godot
+4.6.1, the web build's engine, one Godot at a time (regress-pub39.ps1): every
+headless run, 32 of them, and the 20 windowed runs that touch what version 49
+changes: the touch screen's controls, the HUD and the language selector at a
+phone's two sizes, the curio wheel by the keys and by touch in French and
+Spanish, the lift, the lean, the drone, the help, the cinema, the scooter, the
+crowd and the tour on a phone, the drone under Compatibility, and version 49's
+own two, the toys' buttons in a window at 390 by 844 and 844 by 390
+(toytouchtest.gd, which there also keeps them off the language selector).
+toytest.gd is the Foundation's own: version 49's build does what it checks
+(the open bays, the French doors, the wings, the visitor). duckguntest.gd and
+toytouchtest.gd are as committed with version 49's sources (917d016,
+regress-pub39-probes/): the Foundation's have since moved on to the halved
+domino sizes, which version 49 does not have. All 52 passed on the first run,
+with no script error. Against version 48's runs (compare_regress.py,
+regress-pub38.txt), every run both lists pass in both, and no check that
+passed there fails here; the differences are toytest.gd's new checks (the
+bays' glass and wings, the doors that stop a die, the visitor who knocks a
+line down). The toys' load keeps its 936 dominoes, none fallen, with 300 dice
+at rest.
+Version 49's web tests, on its export in headless Chrome 155 (ANGLE over
+Direct3D 11 on the RTX 5080), served as GitHub Pages serves it, on a copy of
+the export without sw.js (webtests-pub39.ps1): version 48's twelve tests and
+one of its own, all exit 0 and all reporting version 49 (built 1792214934),
+with no console error. They are the troupe, the curio wheel on a phone, the
+drone at a computer's size and a phone's (three pointer-lock refusals at the
+computer's size, as since version 42: headless Chrome grants no pointer lock),
+the sound, the hums, the gardens, the ride, the redesign's cases at both sizes
+with the telescope at 100 times, the start and the gardens on Chrome's CPU
+renderer, the toys by the keys, the night city, and the toys on a touch
+screen. The machine had been restarted for a Windows update between the first
+nine and the rest. The redesign's cases started in 22.4 to 49.2 s, at quality
+levels 0 to 5, their frames at 16.7 ms median; version 48's export, run again
+with the same test the same afternoon, started in 17.5 to 46.3 s, against 7.9
+to 36.7 s on 2026-10-16, so the slower starts are the machine's that day, not
+version 49's. Neither hum had a silence. The toys by the keys (toys-web.mjs):
+the engine reports Jolt Physics; Tab, a click on the duck's slot and four taps
+of Shift step the modes 1 to 4, each read once the mode has moved (the first
+run read each mode 500 ms after its tap and got 0, 2, 3, 4: the first tap was
+seen only after its read, in a run on a shader cache cold from the restart
+that had a frame of 2.6 s; the test now waits for the mode, and run again the
+modes moved in 168 to 303 ms); 120 dice thrown on the hall's floor sleep in
+3.7 s, all 120 on it; a pushed line of 40 dominoes is down in 5.2 s; 930
+dominoes in rings and 300 dice dropped among them are at rest in 2.1 s, no
+domino fallen; Delete takes every toy away. Each frame's work in the page,
+median and 95th percentile over 5 s: 8.1 and 12.1 ms with no toy, 10.5 and
+16.0 ms with the 1230 toys at rest, 8.2 and 12.3 ms once they are taken away;
+the frames came every 16.7 ms throughout. The toys on a touch screen
+(toys-touch-web.mjs, headless Chrome as an Android phone, upright at 390 by
+844 and sideways at 844 by 390): with the duck in hand only the mode button
+shows; three taps reach the dice guns, where fire held 1.5 s threw 37 and 32
+dice and a tap on pick up took them all; a fourth tap the domino layer with
+its five buttons, clear of the touch controls and the language selector in
+every mode; lay held lays, undo held clears every toy, and a last tap goes
+back to the duck. The night city (city-web.mjs, from the terrace at quality 0,
+shots 4.9 and 62.4 s after the first): over the minute 1.2 to 8.9 % of the
+towers' pixels changed, against 0.4 to 4.8 % over the five seconds, the share
+lit unchanged. Not tested: a real phone or tablet, Safari, Firefox, and the
+update from version 48 to version 49 on Pages itself.
+
 Native Compatibility GPU time, RTX 5080, 1600x900, 240 frames per view: 0.44 to
 0.52 ms for the previous web scene, 0.64 to 1.44 ms with the detail pass; up to
 1.55 million primitives in the overview, against 0.46 million before. With the
@@ -2103,7 +2183,7 @@ assets/fresco_panel.gdshader e9c20421cf254119e9d85da22a70bb8a965cee0be524f5c95b2
 assets/fresco_dust.gdshader 9d63b02079689cd0205a9d469c743645d4fac1ccfff21a3d0326f36a3062341c
 assets/fresco_atlas.png cccc2917f794f42517ee001392802ec6828acc747f585018e49349474b1638fc
 assets/fresco_motion.png aa7148be2c28917ddae5d92b7a155c46fe024460c67e919106be23782fdf7822
-scripts/build_info.gd e01fb5092f3f0f4a7f6625dcea749d02e9a4f43f5a38e6c7e4048c6021cfaabd
+scripts/build_info.gd bf5aff70a43859c2f4fbe0e00585d719a8f034ddc0a516d7c056ed71e79398fa
 scripts/sfx_takes.gd 069f573898d4c4ad48fde9f1f592dba0974433b1881d7ed045d6797c3c3a0ac6
 assets/sfx/curio_wheel-beep.wav a1d999098afbd222622a6c4625ee16bb9788059c6fe37901067d9cd239f5ec8c
 assets/sfx/curio_wheel-chime.wav 6b580b1e57194c1f84183044c367bcab9d07e3d4c876da3dee5736ba78298c9e
@@ -2194,7 +2274,7 @@ assets/garden_tub_iron.obj 1a46aaa8a55ed6c5bbf28711160fb4b81b2b84464fe929443a9ba
 assets/steel_portal_gaia.glb ad907ea7e03ddb15513ad460775844d4335cf6914330be766b5fa7f28107055e
 assets/steel_portal_gaia_steel_brushed_metalrough.png 5ff2536465d123be778e64d362517af8e02a2a0cc5793b84955b25be33971496
 assets/steel_portal_gaia_steel_brushed_normal.png 37132094bf4d642dd486743dbd57ff2489afeb6f9e2aeaffe8f6c3f42395705c
-scripts/library_wing.gd eae114bcfb9190b4753d40ea58be82fc66ac95bacfc8728ea59d5712b9659c0b
+scripts/library_wing.gd e71a1426048e7895345dede8c835c0e1ea771b744593669848f0b1e6f9371679
 scripts/night_city.gd 8ef157e1255f8c42cc08ed91a0f3ba9dbd5179435816bc1e5be1f9f4057b1a4f
 scripts/telescope.gd c4cd0bf0ce7028c3c58d1ab90e5239a8322af9f5662994f460bed3ea18353b48
 scripts/parterre_layout.gd c9908b4048cbb44deb36c16371b90c7ad0cf5f16ca296ca3f38c0c406045d6bf
@@ -2228,8 +2308,8 @@ assets/city/landmarks/twins.glb 481904954241a2367680f78c3700d5d340f6fa60d52f7a24
 assets/palace/imperial_palace.glb 3aa999e6e942ab7ffe26887a92e46fefe19b145bdc18c717f585c3c74a03691e
 assets/palace/palace_light_web.png ab2212fc7520265c29656cd65fd0aad32131b69d9bf9ae2cb5b4e87aacb57bdb
 assets/palace/palace_mirror.png 83e5eb4ba6ae5a98cad0a5dfd5c38f81368cd7b34d745d211634009ff7f2c719
-scripts/duck_gun.gd b033bc56bd370834a3d8f3e6568e23ba41f57df398eb497bc0479e2ad8ecd369
-scripts/toy_physics.gd aca18265f21a4ebab390a3c272c40aa03f80cdd12b0ff318ef5bffc0a565dff3
+scripts/duck_gun.gd bcf4384fd3a14b4761d820c8122abf9c791eb5feaef9809798514ca6f78e45e1
+scripts/toy_physics.gd 8b66564f2d340184d0707940ce79791c4270c3416824700a3cf4c3b40de20418
 scripts/garden_bones.gd 088ee14fda7d8ba5894959484fa5c76d5dc9fe006a48f4b8844752b83949d85c
 scripts/teleport.gd 04ffb5b5224ff65149c38a6be25b29e4bbf7faa1e35405ea957f946e5f7c634f
 assets/garden_escooter_body.obj 1a7e7c0b11aefa54fdb881fe13a822b469da241f27549ba3be0c82b782c8d896
@@ -2246,10 +2326,10 @@ assets/garden_escooter_trim.obj fd0fe8976bd3ca2f50a5454c57b49c564d323ab394170f44
 assets/garden_escooter_tyre.obj f61d3311121303b8212d1c0ee998cef670b13a07b7e6076b1e202a6b78a24498
 
 SHA-256 output files:
-index.pck 1bac7a06f07756e6ec7af5d45e799c2806df877d6778efa54460b3129fcb3aa8
+index.pck 6358a524f30c5b097707e4c54af90b73e948ea83a88f485815970b852c53ddb0
 index.wasm 99962b29677e42f3ba0258bd90fdc52ad90295954c4473e816ad02cfe5ff1d4f
 index.js e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981
-sw.js 10e5b883372721a8e0520e177af37bcc648ac7089e7ca149f024a6d839a96957
+sw.js bb6524ffa053c75d4a58404080184aa51561c5105d99e7adae9e64b5d40891db
 manifest.webmanifest 73676491cb7a7ea9befd37c4e09561739497a6dae9299c344b7941adecb54210
 icon-192.png 3d731897f85db4062648a71925e24449e608db622cb5d0c34cec70636eaab459
 icon-512.png 11e906507b24dfd9dae51d65b93d7027828f41a8aaab6a8c378b92e39e1da10b
