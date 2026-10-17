@@ -1948,6 +1948,90 @@ there, and version 44 across neither; the console empty in all eight. Not
 tested: a real phone or tablet, Safari, Firefox, and the update from version
 43 to version 44 on Pages itself.
 
+Version 48, exported 2026-10-17 02:25:04 UTC, takes the Foundation copy's web
+side since version 44 (its commits after 7383ad2, to 4f979b2; versions 45 to
+47 were the native RTX player's 0.2.3 to 0.2.5). The night city lives
+(scripts/night_city.gd, assets/night_city.gdshader with life 1,
+palace_glow.gdshader mode 4, palace_beam.gdshader): windows keep their state
+40 s to 6 min, storeys 3 to 12 min, blocks of the photographed facades 1 to 7
+min, a room in sixty flickers with a screen, the towers of 260 m or more carry
+red lights that blink, a third of the columns of light turn as searchlights
+and the others sway, with pulses rising up them. The ride is an electric kick
+scooter (scripts/segway.gd and the twelve assets/garden_escooter_*.obj, made
+in Blender by escooter_kit.py); G brings it from anywhere on foot, and beside
+it a lit ring and a tag show the key. People in the gardens step round each
+other and round the visitor, and none stays stuck (scripts/garden_crowd.gd;
+scripts/garden_bones.gd comes with it, preloaded, though the people walk on
+bones off the web only). A second library wing opens at bay 13
+(scripts/library_wing.gd, scripts/course_library.gd). At the telescope, Enter
+flies the eye to the ground in its sights (scripts/telescope.gd,
+scripts/teleport.gd). The drone does stunts while Shift is held and flies by
+hand with the movement keys (scripts/drone.gd). With the duck held, Shift
+steps through a duck gun, two, two dice guns and a domino layer
+(scripts/duck_gun.gd, scripts/toy_physics.gd), on Jolt Physics, now
+project.godot's 3D physics engine (nothing else in the web build uses
+physics); scripts/extra_views.gd makes them after the curio wheel, since
+scripts/observatory.gd stays version 28's. On the web, window.__obsToyTest
+stages the toys for a test and window.__obsToys reports them. What these
+commits do off the web stays out of the build, its scripts and assets left
+out: the Place du Capitole, the palace's clock, the hedges in volume, the
+finer balusters, the modelled lamps, the statues and dolphins, the
+photographed people and the path tracer's parterre. Every other script is
+version 44's, scripts/observatory.gd and scripts/quality.gd version 28's.
+index.pck is now 55,491,556 bytes, 305,548 more than version 44's; index.html
+changes only that size, sw.js only its BUILD line, and index.wasm, index.js,
+the manifest and the icons are unchanged.
+Version 48's native regressions, on the export's build tree with stock Godot
+4.6.1, the web build's engine, one Godot at a time (regress-pub38.ps1):
+version 43's list, that is version 41's 78 runs and version 42's 18, then
+version 48's own ten: the toys and the duck's guns (toytest.gd as committed
+with version 48's sources, 4f979b2), the scooter that beckons and comes on G,
+people who get round each other, the telescope's jump, the walk into the
+second wing at bay 13, the course rows kept out of the open bays, and the
+drone's stunts and flight by hand under Compatibility. Of the 31 headless runs
+and 75 windowed, 99 passed on the first run, with no script error.
+motion_bay14 missed the same point with the same numbers as since version 31
+(2.99 against 3). Six failed on checks that version 48's second wing made
+wrong, not on the scene. The course test under both renderers and the lean
+test by the keys (at 60 frames a second under both renderers, and at 10) took
+the shelves' fourth book for a given course and the catalogue's last entry for
+the shelves' last book; the wing at bay 13 moves the last areas on round the
+shelves. The bays' view away from every opening (bays_compat), turned to 0
+degrees for the second wing, had bay 2's glass corners 0.4 degrees inside its
+64-degree field, so the gardens were rightly drawn. The probes now aim at the
+Rust course's book, find the course an entry names by its title, and look away
+at 50 degrees; run again on the same tree, the six pass. Against version 42's
+run (compare_regress.py, regress-pub35.txt), 105 of the 106 pass, and no check
+that passed there fails here; the differences are version 48's new checks (the
+scooter called from afar, people going round each other). The spill check
+found no water past the canal's rim (3062 m2 wet, 0 m2 past either rim).
+Version 48's web tests, on its export in headless Chromium (Playwright's
+Chromium 1243, ANGLE over Direct3D 11 on the RTX 5080), served as GitHub Pages
+serves it, on a copy of the export without sw.js (webtests-pub38.ps1): version
+44's eleven tests and two of its own, all exit 0 and all reporting version 48
+(built 1792203904), with no console error: the troupe, the curio wheel on a
+phone, the drone at a computer's size and a phone's (three pointer-lock
+refusals at the computer's size, as since version 42: headless Chrome grants
+no pointer lock), the sound, the hums, the gardens, the ride, the redesign's
+cases at both sizes with the telescope at 100 times, and the start and the
+gardens on Chrome's CPU renderer. The gardens' cases started in 7.9 to 38.1 s,
+at quality levels 0 to 5, their frames at 16.7 ms median; the lift's hum had
+two silences (1.6 s in all), the drone's one of 0.4 s. The toys
+(toys-web.mjs): the engine reports Jolt Physics; Tab, a click on the duck's
+slot and four taps of Shift step the modes 1 to 4; 120 dice thrown on the
+hall's floor sleep in 3.7 s, all 120 on it; a pushed line of 40 dominoes is
+down in 5.3 s; 932 dominoes in rings and 300 dice dropped among them are at
+rest in 29.9 s, no domino fallen; Delete takes every toy away. Each frame's
+work in the page, median and 95th percentile over 5 s: 8.0 and 11.8 ms with no
+toy, 10.8 and 16.7 ms with the 1232 toys at rest, 8.7 and 12.5 ms once they
+are taken away; the frames came every 16.7 ms throughout. The night city
+(city-web.mjs, from the terrace at quality 0, shots 5.4 and 62.4 s apart):
+over the minute 1.2 to 9.4 % of the towers' pixels changed, against 0.3 to 5.0
+% over the five seconds, the share lit unchanged. Not tested: a real phone or
+tablet, Safari, Firefox, the toys on a touch screen (in this version they need
+a keyboard and a mouse), and the update from version 44 to version 48 on Pages
+itself.
+
 Native Compatibility GPU time, RTX 5080, 1600x900, 240 frames per view: 0.44 to
 0.52 ms for the previous web scene, 0.64 to 1.44 ms with the detail pass; up to
 1.55 million primitives in the overview, against 0.46 million before. With the
@@ -1957,18 +2041,18 @@ runs: the box stays in line with the rest of the scene, and whole runs vary
 by about 15 percent.
 
 SHA-256 source inputs of the exported project:
-project.godot eb7d53597517c711d564943e467cce2926699c2422b073079737325c3400692e
+project.godot 0846106a4b8947e8435170c3d7fd5bcdbd1b71d54794961d7a5e3a757906a554
 main.tscn fb6245c960d3625ca05920116c58351d9dbeb255beae59175d89c06d47049564
 export_presets.cfg 38e6c4584777b1bf5beb1499a046899f6c0ba192972678167b953cb774760cdf
 scripts/fly_camera.gd 2e5cdd15ca7bdcfa30ec129e354a309f3ff7296f6fbf54ac144984ed9aa9f8e7
 scripts/capture.gd 52ea2b5e40db2f1f4cdbd7658074ef60bd117e1f4110c1b8995590a4196748d0
 scripts/observatory.gd cdbab5d96d8679c893602ca4e67064a899982642f58e4c655975e0f2e97acbec
-scripts/course_library.gd 16a46051464d9cbbb24acaa4bf6c6ff6e777295c9ad5dd5e115ca6e028d95750
+scripts/course_library.gd 1b942ad4c7da8111fe6e8390f02d11f8927c1e2bec9a39b893883ec6fc647f06
 scripts/steel_cube.gd fee81a60fe3050a017e60d099a3bceb3555b502eb3e09d0d83febaeafe3e7773
 scripts/seldon_statue.gd f0261780bbad9dd047e27ecaaf07e1dc72604a52edc197564da50c8376861acd
 scripts/touch_controls.gd f4d4076608a731c8d0e58c6eea6ecb5a981655279589b45ab8ff34a666fa394c
 scripts/walk_physics.gd 16ede04a9ac91cd80ae8a03373a4627ca5fcb2f719dec4edee64543617661919
-scripts/view_fit.gd 15b0d7cf03215f8d45ab07b2f11cf3f28421431941d3f1d0c3840cf5f58a0fd7
+scripts/view_fit.gd 5ba116773a14f02a8f708c32ee18180b1e8f5aaed31d0940c7fdf1760ea5cad2
 scripts/view_move.gd 558a4059815cb3a8a202d205d8cfada17653fb533e7e056bfe9e8a434dac0431
 scripts/multiverse.gd 0de3cece747a87c742ba6b26c8fac27a6a7dcdd18286f30957899becb2dfb34d
 scripts/camera_follow.gd dc63643772a7dceb41583169aeec3d3053d8555a20540fd29a1c9cbade2a712d
@@ -1991,7 +2075,7 @@ assets/floor_paving.gdshader 23187f024d276b897635ee0cc3e543c5852c4a9b5175cbe56ec
 assets/statue_marble.gdshader ec3f14f662487f3dae14a398fe91ea7183d88214bd2bf266359da89d79b94452
 assets/world_glimpse.gdshader a06fc85ca086fc3e4d9297039be0b6549132bbffafeaedfbda0ffea3eb918d6d
 assets/courses.json 407817e268f2c0d37ce28ae0d873f08b87a514479d6a73545b75d1dfbb71823b
-scripts/extra_views.gd 04e14ef5d7dc040c52b5c7f94491bbed9fd6c8c001e8073984d12d65fac58b92
+scripts/extra_views.gd e5c28e990a03386f6c554df405c186b4d5572152d8b2fa65625b4372204cf88a
 scripts/upperside.gd 589ec27dde00b87e8bd40d190911e34b1dc3e99532d13a88f30925392d026be8
 assets/night_sky.gdshader b55cb7ea3cdf2e25322a7e7f372785a9164bc8b94ebd4535e198de34be53d363
 assets/upperside.gdshader f119593a603bc623de218054ec142b8732330785fe0d61ba5a3dcc13124f96e3
@@ -2003,7 +2087,7 @@ assets/sky_core_cap.png a110fdfa1b79cc41eec119265aeb89bc211d0b8e0eb6c759b45c2549
 assets/kiosk_glass.gdshader 76226f17e5884a042b85e5fc544a4b71012ea6e389b9743c1cac65083a06bc44
 scripts/lift_sounds.gd 4daed5e380396a3711fc7ff2f1f72b877b9efbdaff6d6fa428c595b1dad7b244
 scripts/curio_wheel.gd 67f60a84432aa6e46efb17b296b71e2fdf2e826ce54e29ff23e0836e87335ccd
-scripts/drone.gd 0d2855e8b8e3e1fe3ce945435988cd757a80abd5f76a36cb88b08020049dd605
+scripts/drone.gd 0829982dbe5d6b24c1862b541a2e8be1ddbd98d0f79e714d8b7597a1806651c8
 scripts/tars.gd d50da54780d8535bda63b713388e4651b7f88ec8c3f9e0c2b1a59196ba37d03e
 scripts/hologram_ix.gd b252ee1de7055822af6886ea796e6a8e35aa81510ec0eb4f36b2bcf20b32e8a6
 scripts/quality.gd bdad805e7717769145b5aa2ad98aca56b0b76857fdcd86e87817f1bc53046c69
@@ -2019,7 +2103,7 @@ assets/fresco_panel.gdshader e9c20421cf254119e9d85da22a70bb8a965cee0be524f5c95b2
 assets/fresco_dust.gdshader 9d63b02079689cd0205a9d469c743645d4fac1ccfff21a3d0326f36a3062341c
 assets/fresco_atlas.png cccc2917f794f42517ee001392802ec6828acc747f585018e49349474b1638fc
 assets/fresco_motion.png aa7148be2c28917ddae5d92b7a155c46fe024460c67e919106be23782fdf7822
-scripts/build_info.gd e0a6ff31e6c1e093ac99d99e3c0e5e8cd7b7936d9b26aef0624e245bc12f1fda
+scripts/build_info.gd e01fb5092f3f0f4a7f6625dcea749d02e9a4f43f5a38e6c7e4048c6021cfaabd
 scripts/sfx_takes.gd 069f573898d4c4ad48fde9f1f592dba0974433b1881d7ed045d6797c3c3a0ac6
 assets/sfx/curio_wheel-beep.wav a1d999098afbd222622a6c4625ee16bb9788059c6fe37901067d9cd239f5ec8c
 assets/sfx/curio_wheel-chime.wav 6b580b1e57194c1f84183044c367bcab9d07e3d4c876da3dee5736ba78298c9e
@@ -2044,14 +2128,14 @@ scripts/tars_ensemble.gd b16f31ba0bb92eb86b2296a64ff476e59cb3db11a6f800b19db402e
 assets/tars_ensemble_tracks.tres 6c2be9a6fc350c02f8dd19e6a768ed911d11ebd741d4c5939bb585a84171b272
 assets/tars_ensemble_jig_tracks.tres d7604ba2a5dc3e61fb29441d145d0d98703193c516d429a754e9c0e4949383a0
 scripts/web_loop.gd cd89961d3e7e5d8275d67ead034eb2184587810dc710316c5377f58a16e35cbb
-scripts/palace_gardens.gd 0250aeb090f31dd826e5c07f5bab2fe957920bb0c7bae9ae70a621fe20dea43a
-scripts/segway.gd 1f90a984edc35ba2301ece1819776eaf1dfea29e56eefce5939729c59f34a972
+scripts/palace_gardens.gd 0aa04c18b5de9ab4e544a30fdb6fcbe92b0745cb6062e769380865b3dc779f2a
+scripts/segway.gd 5108c026dbf6c11ccfd42bd25e3b6a70631778331f32ecfcfb5d6afa7bd5eefc
 assets/hall_env.gdshaderinc f4ee2ad1a4b5af0839924033507d492b59ce003baad50b35f9afc4f645b3bae5
 assets/bay_glass.gdshader 5cf98fa61a8a189d25abf4e990d533dc7bb7c696d6a761625f555b4f13ac9fd5
 assets/garden_card.gdshader 42c1f7e2b2e104a52cd4b31d04e18b93176cfdc04d22c55a3011f5a22b7f6da5
 assets/garden_impostor.gdshader cdd31ff1d8ec84e8cb3beb5d30169770f6791ac4f2385224e53ab9aae8b23016
-assets/palace_garden.gdshader 3b53aa1f2db0f6a0285370f90ec6fe8554ce2464c1543478c9d6482160060267
-assets/palace_glow.gdshader 4306df1b7d350256329966039d1260bcb19891f663c043c59ea41503bc80fd96
+assets/palace_garden.gdshader d2a78f7b16fb1c6c61b927b8765f849fb9b993a0fd908fa88c65fff321695ddb
+assets/palace_glow.gdshader b782d096f06f1cb511cc30bb18aa10b409cb075c6cf1afd8d2bf696eb11d8aeb
 assets/garden_baluster.obj 8fe3a8973ab1eb7779193b8d3062030b8ef0457673a3826dbb376a4d6ed27247
 assets/garden_baluster_low.obj 64d36f292626f7761ae876257a97abb255655e5f3274bb7859b4e70d6797cff7
 assets/garden_pedestal.obj 9be8ab11e4b98d71150ea87a33a9000a394751619850ec07c12813e3f9265b2e
@@ -2073,7 +2157,7 @@ assets/garden_city_738.png 4df4a1903fe8f7ab1f6d5a44a66e658994b38123dea29c2da9ee4
 assets/garden_palace.png d5b13df8f900e0b529dd7a5de89895e0c99603123c64de9a32d91c47e357899e
 assets/garden_stone.png 432e7a4a676e96916043f95eebc82dbfd0971c3655cd9a8011f20b7156f90389
 assets/garden_paving.png 81afdc39127356a22719dc103000c5d7bfce63ce3054361a7fa9966f9762d414
-assets/garden_plant.gdshader 1e229b90f1a6b06b33a4eaa8cf1347ae311adb3f554a362cc4e50567366bb8dc
+assets/garden_plant.gdshader 2dc2a846964bcb30a074c128afa058cb67134f38b02ec885a49e9b1013812f65
 assets/garden_tree_linden1.glb 342e6ab53b7cc2cf00b4b01449d69285e6cf5daf170b2a5388432dd430071d88
 assets/garden_tree_linden2.glb c89718e972c32dd2203b536bbb9e68781966351ccc297a123f6218c046934625
 assets/garden_tree_linden3.glb 2970958c39fc0322097fdef4bb1e5202dae2c4970bd4b359bb721f477d13463b
@@ -2100,7 +2184,7 @@ assets/garden_leaves_cypress.png 07bf984d20181a79ff423bd43e01f699273f8b620086244
 assets/garden_bark.png f79ae0eb624ccc9ff2dc7f6576e754eff0411e4191fa248e25a46c1366543d9a
 assets/garden_hedge_box.png b6c6add90ff163d3d07b019ffb81a451cce66472e4a1073b0cebf05a6b4a2888
 assets/garden_hedge_box_n.png 49e05c58375a178caa5574533424f61e878df2284802f77e303759209ccf6334
-scripts/garden_crowd.gd 1f897886e097550dbfbc6dbfd6ccb492d276c315d6de9961e220999a527da993
+scripts/garden_crowd.gd 013714c61bb40e44ac3aae17f3919aa5de81987f9e811ebbf9e01090c2a0a727
 assets/garden_figure_courtier.glb e14c11a84beef0a3faeb109a11571eafdd4adc773b5e98fa153b9a6e438bc944
 assets/garden_figure_lady.glb 733f9a104730f1220d7bedd55130be29bb0ec7c5902567750c0ae4abb742197a
 assets/garden_figure_walker.glb 6a2aff1f8a2548b183f70790cee06d5e004e4235351e95a37887a21aa27eef58
@@ -2110,17 +2194,17 @@ assets/garden_tub_iron.obj 1a46aaa8a55ed6c5bbf28711160fb4b81b2b84464fe929443a9ba
 assets/steel_portal_gaia.glb ad907ea7e03ddb15513ad460775844d4335cf6914330be766b5fa7f28107055e
 assets/steel_portal_gaia_steel_brushed_metalrough.png 5ff2536465d123be778e64d362517af8e02a2a0cc5793b84955b25be33971496
 assets/steel_portal_gaia_steel_brushed_normal.png 37132094bf4d642dd486743dbd57ff2489afeb6f9e2aeaffe8f6c3f42395705c
-scripts/library_wing.gd 0e1dcf2335054c8b6840eac4394e9722c2d39b426084aa6149324b6f79338656
-scripts/night_city.gd 16042e9cd3a4e9accce27f7e03653f38511443a6bd6b2c1220d4b46098a1be96
-scripts/telescope.gd 28fd1dbc68a707731fdd6426ae14e392c595e385ab47deab799479598136e71f
+scripts/library_wing.gd eae114bcfb9190b4753d40ea58be82fc66ac95bacfc8728ea59d5712b9659c0b
+scripts/night_city.gd 8ef157e1255f8c42cc08ed91a0f3ba9dbd5179435816bc1e5be1f9f4057b1a4f
+scripts/telescope.gd c4cd0bf0ce7028c3c58d1ab90e5239a8322af9f5662994f460bed3ea18353b48
 scripts/parterre_layout.gd c9908b4048cbb44deb36c16371b90c7ad0cf5f16ca296ca3f38c0c406045d6bf
 scripts/fountain_show.gd f6219161da64efa2f8cc243f265815e2ccab54de7c626a939282f0ea1e1fc5b6
-assets/night_city.gdshader 543b355ba37b6256e76c00932cec089af2ae9ca9f26921155a2f9cfb0d150588
+assets/night_city.gdshader 3c0b01927d20f0ab47e594657ad0ba5e69a7df3ab83927bc048ac03f355ca836
 assets/wing_carpet.gdshader 054a506e8c3a5c0671c02cdcfd1875ff232541d6c77494efb0058c10edf17a0c
 assets/wing_interior.gdshader c36244828b515ef83ac144beef36e41719c98d9e6b60481cc5dacdf474a8c217
 assets/wing_stone.gdshader 6b2d57aac7d95f033f4a549e2e9d874eb047c98cee3e8d617a5dbf8081765559
 assets/palace_baked.gdshader 41a78efbb14b1d9b9257836b66958975148b644c07dee5ac531152717446803a
-assets/palace_beam.gdshader 3b924e6fc45554b53b335b9c185da06d58d2e486a1f80f0f984a8e80d3a457c6
+assets/palace_beam.gdshader fe17fe9d8cdffb54e8f450a0f18ca26775a3445752d579ff8142677454342a94
 assets/fountain_show.gdshaderinc 6cf9ae321343cf00e94cb0cfd002e265750d0405f322e95c2f57164030b4f149
 assets/fountain_jet.gdshader fdd8f6de14801b28f6047f99bd181142481df80493d886d1ce9fa062052f4577
 assets/fountain_pool.gdshader 3061655245ddbcd96fd216307fc1b295b6f237018f90dd2a67deef5bd657d996
@@ -2144,12 +2228,28 @@ assets/city/landmarks/twins.glb 481904954241a2367680f78c3700d5d340f6fa60d52f7a24
 assets/palace/imperial_palace.glb 3aa999e6e942ab7ffe26887a92e46fefe19b145bdc18c717f585c3c74a03691e
 assets/palace/palace_light_web.png ab2212fc7520265c29656cd65fd0aad32131b69d9bf9ae2cb5b4e87aacb57bdb
 assets/palace/palace_mirror.png 83e5eb4ba6ae5a98cad0a5dfd5c38f81368cd7b34d745d211634009ff7f2c719
+scripts/duck_gun.gd b033bc56bd370834a3d8f3e6568e23ba41f57df398eb497bc0479e2ad8ecd369
+scripts/toy_physics.gd aca18265f21a4ebab390a3c272c40aa03f80cdd12b0ff318ef5bffc0a565dff3
+scripts/garden_bones.gd 088ee14fda7d8ba5894959484fa5c76d5dc9fe006a48f4b8844752b83949d85c
+scripts/teleport.gd 04ffb5b5224ff65149c38a6be25b29e4bbf7faa1e35405ea957f946e5f7c634f
+assets/garden_escooter_body.obj 1a7e7c0b11aefa54fdb881fe13a822b469da241f27549ba3be0c82b782c8d896
+assets/garden_escooter_dish.obj 20603674629d12ad5828234a4012e7298dd59a612c479c6b2798f167d513c42d
+assets/garden_escooter_metal.obj 74d9ee7ab119b2f1a53953896a6800c584b61409dd8687ec3a4062a67e5019ba
+assets/garden_escooter_spokes.obj 445249812c7ac5327a7539b4a83579bd907d08a3c66d2147bae9a08446efd8bb
+assets/garden_escooter_steer_body.obj f6cdd334ff68ae0c63e6af968834af234bd90feffd17657a14f977fc5c259722
+assets/garden_escooter_steer_light.obj 574b58bcbcebc9ca127897ca77f6b6af7f77684140e2ed09dca87cf05bfe8d9e
+assets/garden_escooter_steer_metal.obj 6606f5ebbdfe25daa60aa3d834e74a36fee77cf188957ce370aeb924e83a430f
+assets/garden_escooter_steer_screen.obj acb91acc736a1518bf1789147ab1cd8e029a3750b662da703393c08206697bd4
+assets/garden_escooter_steer_trim.obj 05d94d4490db39313f3bc0c43ffc54d650762270365189503931582e1384fe89
+assets/garden_escooter_tail.obj 651700dbfd4474bc416ec6c3af1d2aa8e1005fa3ed2d5207b91dfe8353e3176b
+assets/garden_escooter_trim.obj fd0fe8976bd3ca2f50a5454c57b49c564d323ab394170f44c10e3c0b2da450c0
+assets/garden_escooter_tyre.obj f61d3311121303b8212d1c0ee998cef670b13a07b7e6076b1e202a6b78a24498
 
 SHA-256 output files:
-index.pck 53b0cdd472ba3e920f1b03dd4c05e5eb46fac80b380cb8edb6c731a62ac93126
+index.pck 1bac7a06f07756e6ec7af5d45e799c2806df877d6778efa54460b3129fcb3aa8
 index.wasm 99962b29677e42f3ba0258bd90fdc52ad90295954c4473e816ad02cfe5ff1d4f
 index.js e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981
-sw.js 85f1010aa1322eec49a0bbc2e0bdd7afc2c71a8357ba266fb6f2eeb8aa16b077
+sw.js 10e5b883372721a8e0520e177af37bcc648ac7089e7ca149f024a6d839a96957
 manifest.webmanifest 73676491cb7a7ea9befd37c4e09561739497a6dae9299c344b7941adecb54210
 icon-192.png 3d731897f85db4062648a71925e24449e608db622cb5d0c34cec70636eaab459
 icon-512.png 11e906507b24dfd9dae51d65b93d7027828f41a8aaab6a8c378b92e39e1da10b
@@ -2157,7 +2257,7 @@ icon-512.png 11e906507b24dfd9dae51d65b93d7027828f41a8aaab6a8c378b92e39e1da10b
 This directory contains a prebuilt binary export. Re-export only for deliberate
 scene changes. A scene re-export leaves the engine files (index.wasm, index.js)
 byte-identical, so git keeps a single copy; each scene revision adds its
-index.pck (55.2 MB here) to the binary history.
+index.pck (55.5 MB here) to the binary history.
 
 2026-10-03 post-merge recording sound correction: v28 preserved the v27
 `scripts/seldon_recording.gd` hash above before this correction. Fresh R or a
