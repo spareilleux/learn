@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **MUS-010** · Formules de gammes, ensembles et vecteur d'intervalles diatonique · intermédiaire · 60 minutes
 
-Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/courses/music/fr/mus-010-scales-pattern-set-interval-vector.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/courses/music/fr/mus-010-scales-pattern-set-interval-vector.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MUS-008](../../music/mus-008-intervals-inversion-compound/), [MAT-022](../../mathematics/mat-022-symmetry-groups-invariants/)
 :::

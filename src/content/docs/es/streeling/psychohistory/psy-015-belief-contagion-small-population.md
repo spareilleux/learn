@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **PSY-015** · Contagio de creencias en una población pequeña · intermedio · 45 minutos
 
-Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/courses/psychohistory/es/psy-015-belief-contagion-small-population.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/courses/psychohistory/es/psy-015-belief-contagion-small-population.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MAT-020](../../mathematics/mat-020-markov-chains-hmm/), [MAT-024](../../mathematics/mat-024-dynamical-systems-stability-feedback/)
 :::
@@ -24,7 +24,7 @@ En este módulo calculará un número de reproducción y su umbral, hallará el 
 
 ## 1. El modelo, y lo que significa aquí «infectado»
 
-**Observado.** El [registro del departamento](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/state/streeling/departments/psychohistory.department.json) incluye, como área de investigación 7 de 10, «Belief state epidemiology — how beliefs spread across agents and repos» (epidemiología de los estados de creencia: cómo se propagan las creencias entre agentes y repositorios), y su principio clave habla de «14 personas across 4 repos». [`extract.py`](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/scripts/streeling_fixtures/psychohistory/psy-015/extract.py) toma una instantánea de lo que el repositorio registra sobre creencias en el commit `4b03838` y la guarda en [`observed-input.json`](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/fixtures/psychohistory/psy-015/observed-input.json): los 8 archivos de creencias actuales de [`state/beliefs/`](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/state/beliefs) y 13 archivados. Ninguna proposición aparece con dos portadores (0 de 21), pero este recuento no habría podido mostrar que se comparte una creencia: los 12 archivos con contenido tienen un solo evaluador, la persona de gobernanza Demerzel, y los otros 9 son esqueletos vacíos.
+**Observado.** El [registro del departamento](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/state/streeling/departments/psychohistory.department.json) incluye, como área de investigación 7 de 10, «Belief state epidemiology — how beliefs spread across agents and repos» (epidemiología de los estados de creencia: cómo se propagan las creencias entre agentes y repositorios), y su principio clave habla de «14 personas across 4 repos». [`extract.py`](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/scripts/streeling_fixtures/psychohistory/psy-015/extract.py) toma una instantánea de lo que el repositorio registra sobre creencias en el commit `4b03838` y la guarda en [`observed-input.json`](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/fixtures/psychohistory/psy-015/observed-input.json): los 8 archivos de creencias actuales de [`state/beliefs/`](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/state/beliefs) y 13 archivados. Ninguna proposición aparece con dos portadores (0 de 21), pero este recuento no habría podido mostrar que se comparte una creencia: los 12 archivos con contenido tienen un solo evaluador, la persona de gobernanza Demerzel, y los otros 9 son esqueletos vacíos.
 
 Dos archivos actuales nombran una fuente distinta de su evaluador: `confidence-calibration` y `remediation-effectiveness` se apoyan cada uno en un único elemento de evidencia, un mensaje `ml-feedback-recommendation` cuya justificación y cuya confianza [el script que lo aplica](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/scripts/apply_ml_feedback.py) copia en la creencia de Demerzel. Su esquema dice «from an ix ML pipeline to Demerzel» (de un *pipeline* de aprendizaje automático de ix a Demerzel); los dos mensajes no están en el repositorio, así que el remitente solo se conoce por esa descripción y por la cadena de documentación (*docstring*) del script. Cada uno es un solo salto, de un documento a un portador.
 
@@ -39,9 +39,9 @@ R0 = beta/gamma
 P(el próximo suceso es una adopción) = R0*S / (R0*S + N)
 ```
 
-El *número básico de reproducción* R0 es el número medio de agentes que convierte un portador en una población grande cuando todos los demás son susceptibles. La última línea es la *cadena de saltos inmersa* (*embedded jump chain*): dice qué suceso viene a continuación e ignora cuándo ocurre. El *tamaño final*, el número de agentes que han sostenido la creencia en algún momento, depende solo de ese orden, así que [`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/scripts/streeling_fixtures/psychohistory/psy-015/analyze.py) no sortea ningún tiempo de espera.
+El *número básico de reproducción* R0 es el número medio de agentes que convierte un portador en una población grande cuando todos los demás son susceptibles. La última línea es la *cadena de saltos inmersa* (*embedded jump chain*): dice qué suceso viene a continuación e ignora cuándo ocurre. El *tamaño final*, el número de agentes que han sostenido la creencia en algún momento, depende solo de ese orden, así que [`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/scripts/streeling_fixtures/psychohistory/psy-015/analyze.py) no sortea ningún tiempo de espera.
 
-Supuestos, en [`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/fixtures/psychohistory/psy-015/scenarios.json): N = 14 (el número que da el principio clave; PSY-004 encuentra 17 archivos de persona en el commit fijado) y N = 1,400; un portador inicial; R0 = 0.8, 1.2 y 3.
+Supuestos, en [`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/fixtures/psychohistory/psy-015/scenarios.json): N = 14 (el número que da el principio clave; PSY-004 encuentra 17 archivos de persona en el commit fijado) y N = 1,400; un portador inicial; R0 = 0.8, 1.2 y 3.
 
 ### Ejercicio práctico 1
 
@@ -71,7 +71,7 @@ Para N = 14 y un portador inicial, calcule R0 × S/N al comienzo para los tres v
 
 ## 3. Catorce agentes: la distribución de la que procede una simulación
 
-**Sintético.** Número de simulaciones que terminan en cada tamaño final, sobre 10,000 simulaciones para cada R0 ([`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/fixtures/psychohistory/psy-015/results.json), sección `cases`):
+**Sintético.** Número de simulaciones que terminan en cada tamaño final, sobre 10,000 simulaciones para cada R0 ([`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/fixtures/psychohistory/psy-015/results.json), sección `cases`):
 
 ```text
 tamaño final   1     2    3    4    5    6    7    8    9   10   11   12    13    14
@@ -124,7 +124,7 @@ Clasifique cada afirmación como observada, sintética, analogía o no respaldad
 
 ## Fuentes, límites y próxima comprobación
 
-**Observado, fijado en Demerzel `4b03838800dcd4894f1e026461979bff1d985ca8`:** `extract.py` se niega a ejecutarse si alguno de sus 32 archivos, o cualquiera de las dos carpetas que enumera (722 archivos JSON bajo `state/`, 11 esquemas de contrato), difiere del commit fijado. `results.json` enumera las 42 autocomprobaciones; el [README](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/fixtures/psychohistory/psy-015/README.md) da los comandos y los controles.
+**Observado, fijado en Demerzel `4b03838800dcd4894f1e026461979bff1d985ca8`:** `extract.py` se niega a ejecutarse si alguno de sus 32 archivos, o cualquiera de las dos carpetas que enumera (722 archivos JSON bajo `state/`, 11 esquemas de contrato), difiere del commit fijado. `results.json` enumera las 42 autocomprobaciones; el [README](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/fixtures/psychohistory/psy-015/README.md) da los comandos y los controles.
 
 **Referencias de método.** Kermack, W. O., y McKendrick, A. G. (1927), «A Contribution to the Mathematical Theory of Epidemics», *Proceedings of the Royal Society of London, Series A* 115, 700–721 (modelo determinista, umbral, tamaño final). Bailey, N. T. J. (1975), *The Mathematical Theory of Infectious Diseases and its Applications*, segunda edición, Griffin. Whittle, P. (1955), «The Outcome of a Stochastic Epidemic: A Note on Bailey's Paper», *Biometrika* 42, 116–122 (brotes menores y 1/R0).
 

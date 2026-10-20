@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **PSY-024** · L'acteur unique : quand un seul expéditeur forme tout l'ensemble · intermédiaire · 40 minutes
 
-Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/courses/psychohistory/fr/psy-024-the-single-actor.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/courses/psychohistory/fr/psy-024-the-single-actor.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PSY-004](../../psychohistory/psy-004-how-large-is-large/), [PSY-009](../../psychohistory/psy-009-concentration-and-heavy-tails/)
 :::
@@ -24,7 +24,7 @@ Vous compterez les acteurs que nomme un relevé, vous mesurerez la concentration
 
 ## 1. Un seul expéditeur, et ce que veut dire « sender »
 
-**Observé.** [`extract.py`](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/scripts/streeling_fixtures/psychohistory/psy-024/extract.py) lit les 594 fichiers de [`state/triggers/archived/`](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/state/triggers/archived) au commit `4b03838` et remplace chaque identité par une étiquette avant d'écrire [`observed-input.json`](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/fixtures/psychohistory/psy-024/observed-input.json). Les **594** événements archivés, du 2026-03-20 au 2026-07-16, portent tous le même `sender`, étiqueté *compte A* (*account A* dans le jeu d'essai), et le même `repo`. C'est aussi le cas de 8 événements plus tardifs restés dans le dossier parent : 602 événements dont l'expéditeur est lisible, un seul compte.
+**Observé.** [`extract.py`](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/scripts/streeling_fixtures/psychohistory/psy-024/extract.py) lit les 594 fichiers de [`state/triggers/archived/`](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/state/triggers/archived) au commit `4b03838` et remplace chaque identité par une étiquette avant d'écrire [`observed-input.json`](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/fixtures/psychohistory/psy-024/observed-input.json). Les **594** événements archivés, du 2026-03-20 au 2026-07-16, portent tous le même `sender`, étiqueté *compte A* (*account A* dans le jeu d'essai), et le même `repo`. C'est aussi le cas de 8 événements plus tardifs restés dans le dossier parent : 602 événements dont l'expéditeur est lisible, un seul compte.
 
 Le [fichier de workflow au commit épinglé](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/.github/workflows/demerzel-driver-triggers.yml#L75), version postérieure de celui qui a écrit ces fichiers (les versions antérieures n'ont pas été lues), donne à `sender` la valeur `github.actor`, que GitHub [définit](https://docs.github.com/en/actions/reference/workflows-and-actions/contexts) comme « The username of the user that triggered the initial workflow run » (le nom de l'utilisateur qui a déclenché l'exécution initiale du workflow), et à `repo` le nom du dépôt dans lequel il s'exécute. Par conséquent :
 
@@ -53,7 +53,7 @@ Prenez le pire cas pour « un seul expéditeur » : chacun des 12 fichiers suppr
 
 ## 2. Une échelle pour N
 
-**Synthétique.** [`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/fixtures/psychohistory/psy-024/scenarios.json) définit des ensembles imaginaires de 14 acteurs, l'effectif annoncé dans le principe clé du département ; [`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/scripts/streeling_fixtures/psychohistory/psy-024/analyze.py) calcule :
+**Synthétique.** [`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/fixtures/psychohistory/psy-024/scenarios.json) définit des ensembles imaginaires de 14 acteurs, l'effectif annoncé dans le principe clé du département ; [`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/scripts/streeling_fixtures/psychohistory/psy-024/analyze.py) calcule :
 
 | Ensemble imaginaire | H | N | Nombre de demi-couverture | Dispersion relative |
 |---|---|---|---|---|
@@ -129,7 +129,7 @@ Un nouveau journal marque chaque événement d'un identifiant de persona : 1 400
 
 **Observé, épinglé au commit `4b03838800dcd4894f1e026461979bff1d985ca8` de Demerzel :** les fichiers dont les liens ou les noms figurent plus haut, et les 1 599 commits qui mènent au commit épinglé. `extract.py` s'arrête si une valeur épinglée diffère.
 
-**Jeu d'essai.** `python -I -B scripts/streeling_fixtures/psychohistory/psy-024/extract.py`, puis `analyze.py` ; `--check` compare une nouvelle exécution à [`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/fixtures/psychohistory/psy-024/results.json). Le [README](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/fixtures/psychohistory/psy-024/README.md) donne la règle d'étiquetage, les commandes git et les vérifications.
+**Jeu d'essai.** `python -I -B scripts/streeling_fixtures/psychohistory/psy-024/extract.py`, puis `analyze.py` ; `--check` compare une nouvelle exécution à [`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/fixtures/psychohistory/psy-024/results.json). Le [README](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/fixtures/psychohistory/psy-024/README.md) donne la règle d'étiquetage, les commandes git et les vérifications.
 
 **Références de méthode.** Simpson, E. H. (1949), « Measurement of Diversity », *Nature* 163, 688 (la somme des carrés des parts). Laakso, M., et Taagepera, R. (1979), « 'Effective' Number of Parties: A Measure with Application to West Europe », *Comparative Political Studies* 12(1), 3–27 (N = 1/H). Avelino, G., Passos, L., Hora, A., et Valente, M. T. (2016), « A Novel Approach for Estimating Truck Factors », *24th IEEE International Conference on Program Comprehension*, 1–10.
 
