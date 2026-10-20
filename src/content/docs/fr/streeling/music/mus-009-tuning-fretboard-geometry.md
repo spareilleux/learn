@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **MUS-009** · Accordage et géométrie du manche · débutant · 45 minutes
 
-Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/state/streeling/courses/music/fr/mus-009-tuning-fretboard-geometry.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/courses/music/fr/mus-009-tuning-fretboard-geometry.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MUS-007](../../music/mus-007-pitch-spelling-enharmonic-identity/), [MAT-004](../../mathematics/mat-004-vectors-matrices-norms/), [PHY-001](../../physics/phy-001-science-of-guitar-sound/)
 :::

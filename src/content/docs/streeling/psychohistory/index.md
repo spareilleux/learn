@@ -13,6 +13,7 @@ sidebar:
 
 - [PSY-001 · Introduction to Fractal Compounding](psy-001-intro-fractal-compounding/)
 - [PSY-002 · Governance Phase Transitions](psy-002-governance-phase-transitions/)
+- [PSY-003 · Measure Recursive Improvement Across Review and Publication](psy-003-review-throughput-and-compounding/)
 - [PSY-004 · How Large Is Large? Aggregate Predictability with Fourteen Agents](psy-004-how-large-is-large/)
 - [PSY-005 · Persistence First: The Baseline a Governance Forecast Must Beat](psy-005-persistence-baseline/)
 - [PSY-006 · Estimate a Transition Matrix from Observed Counts](psy-006-transition-matrix-from-counts/)

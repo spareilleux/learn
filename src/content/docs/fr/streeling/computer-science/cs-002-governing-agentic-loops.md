@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **CS-002** · IA agentique — Systèmes multi-agents, utilisation d'outils, boucles de raisonnement · intermédiaire · 25 minutes
 
-Généré par le département *Informatique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/state/streeling/courses/computer-science/fr/cs-002-governing-agentic-loops.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Informatique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/courses/computer-science/fr/cs-002-governing-agentic-loops.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: Modèles d'orchestration multi-agents
 :::

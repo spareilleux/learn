@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **MUS-008** · Intervalos, inversión e intervalos compuestos · principiante · 45 minutos
 
-Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/state/streeling/courses/music/es/mus-008-intervals-inversion-compound.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/courses/music/es/mus-008-intervals-inversion-compound.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MUS-007](../../music/mus-007-pitch-spelling-enharmonic-identity/)
 :::

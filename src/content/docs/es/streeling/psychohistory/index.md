@@ -13,6 +13,7 @@ sidebar:
 
 - [PSY-001 · Introducción al Compuesto Fractal](psy-001-intro-fractal-compounding/)
 - [PSY-002 · Transiciones de fase de la gobernanza](psy-002-governance-phase-transitions/)
+- [PSY-003 · Medir la mejora recursiva a lo largo de la revisión y la publicación](psy-003-review-throughput-and-compounding/)
 - [PSY-004 · ¿Cuántos son muchos? Previsibilidad agregada con catorce agentes](psy-004-how-large-is-large/)
 - [PSY-005 · Primero, la persistencia: la referencia que un pronóstico de gobernanza debe superar](psy-005-persistence-baseline/)
 - [PSY-006 · Estimar una matriz de transición a partir de recuentos observados](psy-006-transition-matrix-from-counts/)

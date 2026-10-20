@@ -123,6 +123,7 @@ Marca un módulo una vez estudiado. En **Notas**, añade una entrada fechada: lo
 
 - [ ] [PSY-001 · Introducción al compuesto fractal](../psychohistory/psy-001-intro-fractal-compounding/) <!-- psy-001-intro-fractal-compounding -->
 - [ ] [PSY-002 · Transiciones de fase de la gobernanza](../psychohistory/psy-002-governance-phase-transitions/) <!-- psy-002-governance-phase-transitions -->
+- [ ] [PSY-003 · Medir la mejora recursiva a lo largo de la revisión y la publicación](../psychohistory/psy-003-review-throughput-and-compounding/) <!-- psy-003-review-throughput-and-compounding -->
 - [ ] [PSY-004 · ¿Cuántos son muchos? Previsibilidad agregada con catorce agentes](../psychohistory/psy-004-how-large-is-large/) <!-- psy-004-how-large-is-large -->
 - [ ] [PSY-005 · Primero, la persistencia](../psychohistory/psy-005-persistence-baseline/) <!-- psy-005-persistence-baseline -->
 - [ ] [PSY-006 · Estimar una matriz de transición a partir de recuentos observados](../psychohistory/psy-006-transition-matrix-from-counts/) <!-- psy-006-transition-matrix-from-counts -->

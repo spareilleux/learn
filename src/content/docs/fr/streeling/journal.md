@@ -123,6 +123,7 @@ Coche un module une fois étudié. Sous **Notes**, ajoute une entrée datée : c
 
 - [ ] [PSY-001 · Introduction à la Capitalisation Fractale](../psychohistory/psy-001-intro-fractal-compounding/) <!-- psy-001-intro-fractal-compounding -->
 - [ ] [PSY-002 · Les transitions de phase de la gouvernance](../psychohistory/psy-002-governance-phase-transitions/) <!-- psy-002-governance-phase-transitions -->
+- [ ] [PSY-003 · Mesurer l'amélioration récursive, de la revue à la publication](../psychohistory/psy-003-review-throughput-and-compounding/) <!-- psy-003-review-throughput-and-compounding -->
 - [ ] [PSY-004 · Qu'est-ce qu'un grand nombre ? La prévisibilité d'un agrégat de quatorze agents](../psychohistory/psy-004-how-large-is-large/) <!-- psy-004-how-large-is-large -->
 - [ ] [PSY-005 · La persistance d'abord](../psychohistory/psy-005-persistence-baseline/) <!-- psy-005-persistence-baseline -->
 - [ ] [PSY-006 · Estimer une matrice de transition à partir de comptages observés](../psychohistory/psy-006-transition-matrix-from-counts/) <!-- psy-006-transition-matrix-from-counts -->
