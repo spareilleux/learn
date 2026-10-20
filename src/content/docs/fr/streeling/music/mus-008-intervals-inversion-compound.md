@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **MUS-008** · Intervalles, renversements et intervalles composés · débutant · 45 minutes
 
-Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/courses/music/fr/mus-008-intervals-inversion-compound.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/courses/music/fr/mus-008-intervals-inversion-compound.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MUS-007](../../music/mus-007-pitch-spelling-enharmonic-identity/)
 :::

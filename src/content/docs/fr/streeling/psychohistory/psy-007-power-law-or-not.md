@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **PSY-007** · Est-ce une loi de puissance ? Dix-huit nombres de citations · intermédiaire · 45 minutes
 
-Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/courses/psychohistory/fr/psy-007-power-law-or-not.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/courses/psychohistory/fr/psy-007-power-law-or-not.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PSY-001](../../psychohistory/psy-001-intro-fractal-compounding/), [MAT-009](../../mathematics/mat-009-estimation-uncertainty-sampling/)
 :::
@@ -30,7 +30,7 @@ Une *loi de puissance* attribue à une valeur x une probabilité proportionnelle
 
 Dans la tendance de qualité, l'« efficacité » est une étiquette catégorielle ([PSY-005](../../psychohistory/psy-005-persistence-baseline/)) ; la règle, comme cette leçon, utilise `citation_count` : le nombre de fichiers suivis qui mentionnent l'un des *chemins de citation* de l'artefact, compté avec `git grep` ([`scripts/evolution_metrics.py`](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/scripts/evolution_metrics.py#L12-L15)).
 
-[`extract.py`](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/scripts/streeling_fixtures/psychohistory/psy-007/extract.py) fige la dernière exécution, au commit `4b03838` (2026-10-13T18:43:54Z, [18 lignes](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/state/quality-trend/2026-10.jsonl#L217-L234)), dans [`observed-input.json`](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/fixtures/psychohistory/psy-007/observed-input.json). Triés, avec un astérisque sur les deux nombres qui n'ont pas été mesurés :
+[`extract.py`](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/scripts/streeling_fixtures/psychohistory/psy-007/extract.py) fige la dernière exécution, au commit `4b03838` (2026-10-13T18:43:54Z, [18 lignes](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/state/quality-trend/2026-10.jsonl#L217-L234)), dans [`observed-input.json`](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/fixtures/psychohistory/psy-007/observed-input.json). Triés, avec un astérisque sur les deux nombres qui n'ont pas été mesurés :
 
 ```text
 65  55*  47  45  44  29  29  23  17  15  14  13  6  6  5  1  0  0*
@@ -52,9 +52,9 @@ Combien de valeurs peuvent figurer sur un graphique log-log, combien d'entre ell
 
 ## 2. Une droite sur papier log-log
 
-Sur un *diagramme rang-taille*, on porte `log10(count)` en fonction de `log10(rank)`, le plus grand nombre en premier. Sous une loi de puissance d'exposant alpha, les points se placent près d'une droite de pente `−1 / (alpha − 1)`. La recette tentante : ajuster une droite par les moindres carrés, lire `alpha = 1 + 1 / |slope|`, et citer R², la part de la variance qu'explique la droite. **Calculé** par [`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/scripts/streeling_fixtures/psychohistory/psy-007/analyze.py) sur les 16 nombres non nuls : pente −1,152, R² 0,669, exposant déduit 1,868.
+Sur un *diagramme rang-taille*, on porte `log10(count)` en fonction de `log10(rank)`, le plus grand nombre en premier. Sous une loi de puissance d'exposant alpha, les points se placent près d'une droite de pente `−1 / (alpha − 1)`. La recette tentante : ajuster une droite par les moindres carrés, lire `alpha = 1 + 1 / |slope|`, et citer R², la part de la variance qu'explique la droite. **Calculé** par [`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/scripts/streeling_fixtures/psychohistory/psy-007/analyze.py) sur les 16 nombres non nuls : pente −1,152, R² 0,669, exposant déduit 1,868.
 
-**Synthétique.** Le script tire 2 000 échantillons de 16 valeurs dans chacune des trois familles ajustées à la section 4 ([`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/fixtures/psychohistory/psy-007/scenarios.json) consigne leurs paramètres comme des hypothèses) et ajuste la même droite :
+**Synthétique.** Le script tire 2 000 échantillons de 16 valeurs dans chacune des trois familles ajustées à la section 4 ([`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/fixtures/psychohistory/psy-007/scenarios.json) consigne leurs paramètres comme des hypothèses) et ajuste la même droite :
 
 | Famille génératrice | R² médian | R² d'au moins 0,9 |
 |---|---|---|
@@ -103,7 +103,7 @@ Au seuil 13, il reste 12 valeurs, et la somme des `ln(x / 13)` vaut 9,459. Calcu
 
 Deux familles plus simples sont définies sur les mêmes entiers : une loi *exponentielle* discrète (chaque unité supplémentaire multiplie la probabilité par une constante ; pas de queue lourde) et une loi *log-normale* (`ln x` suit une loi normale ; arrondie ici à l'entier supérieur ; deux paramètres). La *log-vraisemblance* d'une famille ajustée est le logarithme de la probabilité qu'elle attribue aux données ; plus elle est élevée, meilleur est l'ajustement. R est la log-vraisemblance d'une famille moins celle d'une autre (négatif : la seconde s'ajuste mieux), et le test de Vuong (1989, tel que l'applique l'article cité) donne la probabilité d'un rapport aussi éloigné de zéro si les deux familles s'ajustent aussi bien l'une que l'autre ; l'article se fie au signe quand p < 0,1, ce que cette leçon qualifie de décisif.
 
-Log-vraisemblances **calculées**, tirées de [`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/fixtures/psychohistory/psy-007/results.json) :
+Log-vraisemblances **calculées**, tirées de [`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/fixtures/psychohistory/psy-007/results.json) :
 
 | Valeurs | Loi de puissance | Exponentielle | Log-normale |
 |---|---|---|---|
@@ -140,7 +140,7 @@ Vous pouvez mesurer davantage d'artefacts. D'après le tableau des queues, combi
 
 ## Sources, limites et prochaine vérification
 
-**Observé, épinglé au commit `4b03838800dcd4894f1e026461979bff1d985ca8` de Demerzel :** `extract.py` lit 27 fichiers (cinq fichiers de tendance de qualité, les 18 enregistrements de [`state/evolution/`](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/state/evolution), la fiche du département, la spécification, PSY-001 et PSY-002) et s'arrête si l'un d'eux diffère de son blob Git épinglé. Le [README](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/fixtures/psychohistory/psy-007/README.md) donne les commandes, les 46 autocontrôles et les témoins négatifs.
+**Observé, épinglé au commit `4b03838800dcd4894f1e026461979bff1d985ca8` de Demerzel :** `extract.py` lit 27 fichiers (cinq fichiers de tendance de qualité, les 18 enregistrements de [`state/evolution/`](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/state/evolution), la fiche du département, la spécification, PSY-001 et PSY-002) et s'arrête si l'un d'eux diffère de son blob Git épinglé. Le [README](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/fixtures/psychohistory/psy-007/README.md) donne les commandes, les 46 autocontrôles et les témoins négatifs.
 
 **Références de méthode.** Clauset, A., Shalizi, C. R., et Newman, M. E. J. (2009), « Power-law distributions in empirical data », *SIAM Review* 51(4), 661–703, [arXiv:0706.1062](https://arxiv.org/abs/0706.1062) : la méthode suivie ici ; l'article avertit que les jeux de données de moins de 50 valeurs environ « should be treated with caution » (sont à traiter avec prudence). Vuong, Q. H. (1989), « Likelihood Ratio Tests for Model Selection and Non-Nested Hypotheses », *Econometrica* 57(2), 307–333.
 

@@ -42,5 +42,5 @@ Estos módulos fueron escritos por departamentos de IA y **no han sido revisados
 
 ## Procedencia
 
-- Fuente: [`GuitarAlchemist/Demerzel` → `state/streeling/courses`](https://github.com/GuitarAlchemist/Demerzel/tree/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/courses) en el commit `6a3d2cd` (2026-10-19), licencia MIT.
+- Fuente: [`GuitarAlchemist/Demerzel` → `state/streeling/courses`](https://github.com/GuitarAlchemist/Demerzel/tree/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/courses) en el commit `bb9a078` (2026-10-20), licencia MIT.
 - Importado con `npm run sync:streeling`; no edites estas páginas a mano — solo `journal.md` se conserva entre sincronizaciones.

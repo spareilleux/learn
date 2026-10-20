@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **PSY-010** · ¿Exponencial, logístico o escalonado? Ajustar el crecimiento a un historial corto · intermedio · 45 minutos
 
-Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/courses/psychohistory/es/psy-010-growth-curves-short-series.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/courses/psychohistory/es/psy-010-growth-curves-short-series.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PSY-001](../../psychohistory/psy-001-intro-fractal-compounding/)
 :::
@@ -24,7 +24,7 @@ En este módulo convertirá un historial de commits en una serie diaria, le ajus
 
 ## 1. Convertir el historial en una serie
 
-**Observado.** [`extract.py`](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/scripts/streeling_fixtures/psychohistory/psy-010/extract.py) pregunta a git cuáles de los 1,599 commits alcanzables desde el commit `4b03838` modificaron la carpeta [`state/streeling/courses`](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/state/streeling/courses): 73 commits, del 2026-03-21 al 2026-10-13. Escribe [`observed-input.json`](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/fixtures/psychohistory/psy-010/observed-input.json) solo a partir de las fechas de los commits y de los nombres de archivo. Un *módulo* es una ruta `DEPARTMENT/en/NAME.md`. No se cuentan las traducciones (181 archivos en el commit fijado), los archivos README (4, y 2 más dentro de carpetas `en/`) ni los 10 nombres de archivo de una primera organización del repositorio, sin carpetas de idioma. En conjunto, los commits añaden 73 rutas de módulo y eliminan 5 (un cambio de nombre cuenta como una eliminación más una adición): **68** módulos en el commit fijado, en 18 de las 21 carpetas de departamento.
+**Observado.** [`extract.py`](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/scripts/streeling_fixtures/psychohistory/psy-010/extract.py) pregunta a git cuáles de los 1,599 commits alcanzables desde el commit `4b03838` modificaron la carpeta [`state/streeling/courses`](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/state/streeling/courses): 73 commits, del 2026-03-21 al 2026-10-13. Escribe [`observed-input.json`](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/fixtures/psychohistory/psy-010/observed-input.json) solo a partir de las fechas de los commits y de los nombres de archivo. Un *módulo* es una ruta `DEPARTMENT/en/NAME.md`. No se cuentan las traducciones (181 archivos en el commit fijado), los archivos README (4, y 2 más dentro de carpetas `en/`) ni los 10 nombres de archivo de una primera organización del repositorio, sin carpetas de idioma. En conjunto, los commits añaden 73 rutas de módulo y eliminan 5 (un cambio de nombre cuenta como una eliminación más una adición): **68** módulos en el commit fijado, en 18 de las 21 carpetas de departamento.
 
 **Supuesto.** El plan de estudios prevé 21 departamentos con 25 cursos cada uno, 21 × 25 = **525**, una cifra tomada de un borrador de especificación y usada tal cual, aunque el repositorio registra 23 departamentos, dos de ellos sin carpeta de cursos. 68 equivale al 13.0% de 525.
 
@@ -35,7 +35,7 @@ día        0   1   2   3  15  190  191  195  196  197  200  206
 recuento  13  17  19  23  31   32   37   60   63   66   67   68
 ```
 
-Llamaremos *activos* a esos 12 días, y *ráfaga* a una sucesión de días activos separados entre sí por 7 días como máximo (una convención, guardada en [`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/fixtures/psychohistory/psy-010/scenarios.json); [PSY-008](../../psychohistory/psy-008-bursts-are-not-rates/) llama *episodio* a un grupo así):
+Llamaremos *activos* a esos 12 días, y *ráfaga* a una sucesión de días activos separados entre sí por 7 días como máximo (una convención, guardada en [`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/fixtures/psychohistory/psy-010/scenarios.json); [PSY-008](../../psychohistory/psy-008-bursts-are-not-rates/) llama *episodio* a un grupo así):
 
 | Ráfaga | Días | Módulos añadidos | Proporción de los 68 |
 |---|---|---|---|
@@ -64,9 +64,9 @@ ajuste de    b = (n ΣtN - Σt ΣN) / (n Σt² - (Σt)²)      sumas sobre los n
 la recta     a = (ΣN - b Σt) / n
 ```
 
-El método de los *mínimos cuadrados* elige los parámetros que minimizan la SSE, la suma sobre los 207 días de (observado − ajustado)². La RMSE, raíz cuadrada de SSE / 207, es el error típico, expresado en módulos. [`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/scripts/streeling_fixtures/psychohistory/psy-010/analyze.py) resuelve la recta de forma exacta a partir de esas sumas y encuentra las dos curvas mediante una búsqueda determinista (una rejilla y después pasos de Newton). El techo de la logística, su capacidad de carga, se fija en K = 525, y m es el día en que la curva pasa por K / 2. Una curva logística solo se acerca a su techo, así que «llega a 525» significa, para todas las curvas, el primer día en que su valor es al menos 524.5.
+El método de los *mínimos cuadrados* elige los parámetros que minimizan la SSE, la suma sobre los 207 días de (observado − ajustado)². La RMSE, raíz cuadrada de SSE / 207, es el error típico, expresado en módulos. [`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/scripts/streeling_fixtures/psychohistory/psy-010/analyze.py) resuelve la recta de forma exacta a partir de esas sumas y encuentra las dos curvas mediante una búsqueda determinista (una rejilla y después pasos de Newton). El techo de la logística, su capacidad de carga, se fija en K = 525, y m es el día en que la curva pasa por K / 2. Una curva logística solo se acerca a su techo, así que «llega a 525» significa, para todas las curvas, el primer día en que su valor es al menos 524.5.
 
-**Calculado** ([`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/fixtures/psychohistory/psy-010/results.json), `fits.pinned_date`):
+**Calculado** ([`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/fixtures/psychohistory/psy-010/results.json), `fits.pinned_date`):
 
 | Curva | Parámetros (t en días) | SSE | RMSE | Valor el día 206 | Llega a 525 | Años después del commit fijado |
 |---|---|---|---|---|---|---|
@@ -134,7 +134,7 @@ Con ese supuesto, ¿cuántas ráfagas hacen falta y cuánto tiempo llevan (a) co
 
 **Observado, fijado en Demerzel `4b03838800dcd4894f1e026461979bff1d985ca8`:** el historial de commits de `state/streeling/courses` y los registros de los departamentos en el commit fijado (solo commits y árboles). `extract.py` rechaza un clon superficial (*shallow clone*) o cualquier historial distinto del fijado. 525 es la cifra del plan.
 
-**Fixture.** `python -I scripts/streeling_fixtures/psychohistory/psy-010/extract.py`, y después `analyze.py` en la misma carpeta; `analyze.py --check` compara una ejecución nueva con los resultados guardados. El [README](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/fixtures/psychohistory/psy-010/README.md) documenta el método y sus comprobaciones.
+**Fixture.** `python -I scripts/streeling_fixtures/psychohistory/psy-010/extract.py`, y después `analyze.py` en la misma carpeta; `analyze.py --check` compara una ejecución nueva con los resultados guardados. El [README](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/fixtures/psychohistory/psy-010/README.md) documenta el método y sus comprobaciones.
 
 **Referencias de método.** Bates, D. M., y Watts, D. G. (1988), *Nonlinear Regression Analysis and Its Applications*, Wiley (mínimos cuadrados para curvas; pasos de Gauss–Newton). Debecker, A., y Modis, T. (1994), «Determination of the uncertainties in S-curve logistic fits», *Technological Forecasting and Social Change* 46(2), 153–173 (cuán incierto es un techo ajustado antes de que la curva llegue a su punto de inflexión). Meade, N., e Islam, T. (1995), «Forecasting with growth curves: An empirical comparison», *International Journal of Forecasting* 11(2), 199–215.
 
