@@ -1,25 +1,31 @@
 #!/usr/bin/env node
-// Sync Streeling University modules from GuitarAlchemist/Demerzel into the site.
+// Generate the Streeling University pages from the course source in streeling/.
 //
 // Usage:
-//   npm run sync:streeling                      # default branch from GitHub (sparse clone in .cache/)
-//   npm run sync:streeling -- --ref <sha|tag>   # pin a Demerzel revision
-//   npm run sync:streeling -- --source <dir>    # use an existing checkout with clean state/streeling
-//   node scripts/sync-streeling.mjs --source <dir> --out <dir>   # write under another root (the tests do)
+//   npm run sync:streeling                                      # read streeling/ in this repository
+//   node scripts/sync-streeling.mjs --source <dir> --out <dir>   # another root with streeling/ (the tests do)
+//
+// The source was copied from GuitarAlchemist/Demerzel by scripts/streeling-copy-source.mjs, and
+// streeling/source.json names the commit. Change a module in streeling/courses/, then run this script and
+// commit both: the pages are never edited by hand.
 //
 // Generated (overwritten on every run): src/content/docs/{,fr/,es/}streeling/** except journal.md,
 // src/streeling-sidebar.json and streeling.lock.json. Journals are created once and never touched again.
 
-import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import YAML from 'yaml';
+import { linkTarget, mapRelativeLinks, moduleKey, parseModule, readText } from './streeling-lib.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const REPO = 'GuitarAlchemist/Demerzel';
-const STREELING = 'state/streeling';
+const SITE_REPO = 'spareilleux/learn';
+const DEMERZEL = 'GuitarAlchemist/Demerzel';
+const STREELING = 'streeling';
 const COURSES = `${STREELING}/courses`;
+// Links on the pages lead to the source on main, which is also the revision the site is built from.
+const blobUrl = (repoPath) => `https://github.com/${SITE_REPO}/blob/main/${repoPath}`;
+const editUrl = (repoPath) => `https://github.com/${SITE_REPO}/edit/main/${repoPath}`;
 
 const outDirs = (root) => ({
 	en: path.join(root, 'src/content/docs/streeling'),
@@ -139,78 +145,21 @@ const T = {
 };
 
 // ---------------------------------------------------------------------------
-// Source checkout
-
-function git(cwd, ...args) {
-	return execFileSync('git', args, { cwd, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).trim();
-}
+// Arguments
 
 function parseArgs(argv) {
-	const args = { ref: 'HEAD', source: null, out: null };
+	const args = { source: null, out: null };
 	for (let i = 0; i < argv.length; i++) {
-		if (argv[i] === '--ref') args.ref = argv[++i];
-		else if (argv[i] === '--source') args.source = path.resolve(argv[++i]);
+		if (argv[i] === '--source') args.source = path.resolve(argv[++i]);
 		else if (argv[i] === '--out') args.out = path.resolve(argv[++i]);
+		else if (argv[i] === '--ref') throw new Error('--ref is gone: the source lives in streeling/ now. To copy a Demerzel revision again, use scripts/streeling-copy-source.mjs.');
 		else throw new Error(`Unknown argument: ${argv[i]}`);
 	}
 	return args;
 }
 
-function checkout({ ref, source }) {
-	if (source) return source;
-	const cache = path.join(ROOT, '.cache/demerzel');
-	if (!fs.existsSync(path.join(cache, '.git'))) {
-		fs.mkdirSync(path.dirname(cache), { recursive: true });
-		git(ROOT, 'clone', '--filter=blob:none', '--no-checkout', '--depth', '1', `https://github.com/${REPO}.git`, cache);
-		git(cache, 'sparse-checkout', 'set', STREELING);
-	}
-	git(cache, 'fetch', '--depth', '1', 'origin', ref);
-	git(cache, 'checkout', '--detach', 'FETCH_HEAD');
-	return cache;
-}
-
-function assertCleanStreelingSource(src) {
-	// The lock and source links name HEAD; importing local files would make that attribution false.
-	const changes = git(src, 'status', '--porcelain=v1', '--untracked-files=all', '--ignored=matching', '--', STREELING);
-	if (changes) throw new Error(`Streeling source has local changes under ${STREELING}. Commit them or sync from a clean checkout so the generated pages match their recorded commit.\n${changes}`);
-}
-
 // ---------------------------------------------------------------------------
 // Parsing
-
-const readText = (file) => fs.readFileSync(file, 'utf8').replace(/\r\n/g, '\n');
-
-/** Split frontmatter, extract the first H1 outside code fences, and return the remaining body. */
-function parseModule(file) {
-	let raw = readText(file);
-	let meta = {};
-	const fm = raw.match(/^---\n([\s\S]*?)\n---\n/);
-	if (fm) {
-		meta = YAML.parse(fm[1]) ?? {};
-		raw = raw.slice(fm[0].length);
-	}
-	const lines = raw.split('\n');
-	let fence = null;
-	let title = null;
-	for (let i = 0; i < lines.length; i++) {
-		const marker = lines[i].trimStart().match(/^(```|~~~)/)?.[1];
-		if (marker) {
-			if (!fence) fence = marker;
-			else if (marker === fence) fence = null;
-			continue;
-		}
-		if (!fence && lines[i].startsWith('# ')) {
-			title = lines[i].slice(2).trim();
-			lines.splice(i, 1);
-			break;
-		}
-	}
-	const body = lines.join('\n').replace(/^\n+/, '');
-	// Research-cycle modules (e.g. CYB-*) carry metadata as bold fields instead of frontmatter.
-	const field = (name) => body.match(new RegExp(`^\\*\\*${name}:\\*\\*\\s*(.+)$`, 'm'))?.[1].trim();
-	meta.date ??= field('Date');
-	return { meta, title, body };
-}
 
 function moduleCode(id) {
 	const m = id.match(/^([a-z]+)-(\d+)/i);
@@ -233,31 +182,25 @@ function englishOnlyLabel(lang, mod) {
 	return lang !== 'en' && !mod[lang] ? ` *(${T[lang].englishOnly})*` : '';
 }
 
-function rewriteLinks(body, { srcRepoPath, moduleIndex, sha, lang }) {
+// A link to another module becomes a link to its page. A link to any other file of this repository (a fixture, a
+// script) leads to that file on GitHub. Anything else is a broken link, reported in `problems`.
+function rewriteLinks(body, { src, srcRepoPath, moduleIndex, lang, problems }) {
 	const stats = { internal: 0, github: 0 };
-	let fence = null;
-	const out = body.split('\n').map((line) => {
-		const marker = line.trimStart().match(/^(```|~~~)/)?.[1];
-		if (marker) {
-			if (!fence) fence = marker;
-			else if (marker === fence) fence = null;
-			return line;
+	const out = mapRelativeLinks(body, (href, anchor, match) => {
+		const target = linkTarget(srcRepoPath, href);
+		const known = target.startsWith(`${COURSES}/`) && moduleIndex.get(moduleKey(target));
+		if (known) {
+			stats.internal++;
+			return `](../../${known.dept}/${known.id}/${anchor})${englishOnlyLabel(lang, known)}`;
 		}
-		if (fence) return line;
-		return line.replace(/\]\(([^)\s#]+)(#[^)\s]*)?\)/g, (match, href, anchor = '') => {
-			if (/^[a-z]+:/i.test(href)) return match;
-			const target = path.posix.normalize(path.posix.join(path.posix.dirname(srcRepoPath), href));
-			const stem = path.posix.basename(target).replace(/(\.[a-z]{2})?\.md$/i, '');
-			const known = target.startsWith(`${COURSES}/`) && moduleIndex.get(stem.toLowerCase());
-			if (known) {
-				stats.internal++;
-				return `](../../${known.dept}/${known.id}/${anchor})${englishOnlyLabel(lang, known)}`;
-			}
+		if (!target.startsWith('../') && fs.existsSync(path.join(src, target))) {
 			stats.github++;
-			return `](https://github.com/${REPO}/blob/${sha}/${target}${anchor})`;
-		});
+			return `](${blobUrl(target)}${anchor})`;
+		}
+		problems.push(`${srcRepoPath}: ${href} (${target} is not a file of this repository)`);
+		return match;
 	});
-	return { body: out.join('\n'), stats };
+	return { body: out, stats };
 }
 
 // ---------------------------------------------------------------------------
@@ -271,6 +214,10 @@ function write(file, content) {
 	fs.mkdirSync(path.dirname(file), { recursive: true });
 	fs.writeFileSync(file, content);
 }
+
+// Module and department pages, kept in memory until every link has been checked.
+const pending = [];
+const stage = (file, content) => pending.push([file, content]);
 
 function cleanOutput(dir) {
 	if (!fs.existsSync(dir)) return;
@@ -311,10 +258,8 @@ function main() {
 	const args = parseArgs(process.argv.slice(2));
 	const outRoot = args.out ?? ROOT;
 	OUT = outDirs(outRoot);
-	const src = checkout(args);
-	assertCleanStreelingSource(src);
-	const sha = git(src, 'rev-parse', 'HEAD');
-	const commitDate = git(src, 'log', '-1', '--format=%cI');
+	const src = args.source ?? ROOT;
+	const origin = JSON.parse(readText(path.join(src, STREELING, 'source.json')));
 	const university = JSON.parse(readText(path.join(src, STREELING, 'university.json')));
 
 	// Discover departments and modules.
@@ -360,8 +305,7 @@ function main() {
 		departments.push(dept);
 	}
 
-	for (const lang of LANGS) cleanOutput(OUT[lang]);
-
+	const problems = [];
 	const totals = { ...Object.fromEntries(LANGS.map((lang) => [lang, 0])), internal: 0, github: 0 };
 	for (const dept of departments) {
 		dept.modules.forEach((mod, i) => {
@@ -370,8 +314,7 @@ function main() {
 				if (!parsed) continue;
 				const srcFile = lang === 'en' ? `${mod.stem}.md` : `${mod.stem}.${lang}.md`;
 				const srcRepoPath = `${COURSES}/${dept.id}/${lang}/${srcFile}`;
-				const sourceUrl = `https://github.com/${REPO}/blob/${sha}/${srcRepoPath}`;
-				const { body, stats } = rewriteLinks(parsed.body, { srcRepoPath, moduleIndex, sha, lang });
+				const { body, stats } = rewriteLinks(parsed.body, { src, srcRepoPath, moduleIndex, lang, problems });
 				totals.internal += stats.internal;
 				totals.github += stats.github;
 				const title = parsed.title ?? mod.en.title ?? mod.code;
@@ -380,11 +323,12 @@ function main() {
 						title,
 						description: [parsed.meta.course ?? mod.meta.course, dept.label[lang]].filter(Boolean).join(' — '),
 						sidebar: { label: `${mod.code} · ${shortTitle(title, mod.code)}`, order: i + 1 },
+						editUrl: editUrl(srcRepoPath),
 					}) +
-					banner(lang, { ...mod, meta: { ...mod.meta, ...parsed.meta } }, dept, sourceUrl, moduleIndex) +
+					banner(lang, { ...mod, meta: { ...mod.meta, ...parsed.meta } }, dept, blobUrl(srcRepoPath), moduleIndex) +
 					'\n' +
 					body;
-				write(path.join(OUT[lang], dept.id, `${mod.id}.md`), page);
+				stage(path.join(OUT[lang], dept.id, `${mod.id}.md`), page);
 				totals[lang]++;
 			}
 		});
@@ -410,34 +354,38 @@ function main() {
 				parts.push(`${t.noModules}\n`);
 			}
 			if (dept.catalog) parts.push(`## ${t.catalog}\n`, dept.catalog);
-			write(path.join(OUT[lang], dept.id, 'index.md'), parts.join('\n'));
+			stage(path.join(OUT[lang], dept.id, 'index.md'), parts.join('\n'));
 		}
 	}
 
-	writeOverview(university, departments, sha, commitDate);
+	// Nothing is written while a link is broken, so a failed run leaves the previous pages in place.
+	if (problems.length) throw new Error(`Relative links must lead to a module or to a file of this repository:\n${problems.join('\n')}`);
+	for (const lang of LANGS) cleanOutput(OUT[lang]);
+	for (const [file, content] of pending) write(file, content);
+
+	writeOverview(university, departments, origin);
 	writeJournals(departments);
 	writeSidebar(departments, outRoot);
 
+	// No timestamp: the same source must give the same files, so that a check can regenerate and compare them.
 	const lock = {
-		repo: REPO,
-		ref: args.source ? null : args.ref,
-		commit: sha,
-		commit_date: commitDate,
-		synced_at: new Date().toISOString(),
+		source: STREELING,
+		copied_from: origin,
 		departments: departments.length,
 		modules: Object.fromEntries(LANGS.map((lang) => [lang, totals[lang]])),
 	};
 	write(path.join(outRoot, 'streeling.lock.json'), JSON.stringify(lock, null, 2) + '\n');
 
-	console.log(`Streeling @ ${sha.slice(0, 7)} (${commitDate})`);
+	console.log(`Streeling from ${STREELING}/ (copied from ${origin.repo} at ${origin.commit.slice(0, 7)})`);
 	console.log(`  departments: ${departments.length}, modules: ${LANGS.map((lang) => `${totals[lang]} ${lang}`).join(' / ')}`);
 	console.log(`  links: ${totals.internal} rewritten to site pages, ${totals.github} pointed at GitHub`);
 }
 
-function writeOverview(university, departments, sha, commitDate) {
-	const short = sha.slice(0, 7);
-	const date = commitDate.slice(0, 10);
-	const commitUrl = `https://github.com/${REPO}/tree/${sha}/${COURSES}`;
+function writeOverview(university, departments, origin) {
+	const short = origin.commit.slice(0, 7);
+	const date = origin.commit_date.slice(0, 10);
+	const sourceLink = `[\`${SITE_REPO}\` → \`${COURSES}\`](https://github.com/${SITE_REPO}/tree/main/${COURSES})`;
+	const originLink = `[\`${origin.repo}\` → \`${origin.path}/courses\`](https://github.com/${origin.repo}/tree/${origin.commit}/${origin.path}/courses)`;
 	const rows = (lang) =>
 		departments
 			.map((d) => {
@@ -454,10 +402,10 @@ function writeOverview(university, departments, sha, commitDate) {
 			sidebar: { label: 'Overview', order: 0 },
 		}) +
 			`> ${university.mandate}\n\n` +
-			`Streeling University is the knowledge layer of [Demerzel](https://github.com/${REPO}), the governance framework of the GuitarAlchemist ecosystem. Each department is an agent persona that researches its discipline and writes course modules.\n\n` +
+			`Streeling University is the knowledge layer of [Demerzel](https://github.com/${DEMERZEL}), the governance framework of the GuitarAlchemist ecosystem. Each department is an agent persona that researches its discipline and writes course modules.\n\n` +
 			`:::caution[Generated content]\nThese modules were written by AI departments and have **not been reviewed**. Unlike the other courses on this site, nothing here has been tested on my machine yet — my [journal](journal/) tracks what I have actually studied and verified.\n:::\n\n` +
 			`## Departments\n\n| Department | Modules | French | Spanish |\n|---|---|---|---|\n${rows('en')}\n\n` +
-			`## Provenance\n\n- Source: [\`${REPO}\` → \`${COURSES}\`](${commitUrl}) at commit \`${short}\` (${date}), MIT license.\n- Imported with \`npm run sync:streeling\`; do not edit these pages by hand — only \`journal.md\` is kept between syncs.\n`,
+			`## Provenance\n\n- Source: ${sourceLink}, copied from ${originLink} at commit \`${short}\` (${date}), MIT license.\n- Generated with \`npm run sync:streeling\` from \`${STREELING}/\`: change a module there, not on these pages — only \`journal.md\` is kept between syncs.\n`,
 	);
 
 	write(
@@ -468,10 +416,10 @@ function writeOverview(university, departments, sha, commitDate) {
 			sidebar: { label: 'Présentation', order: 0 },
 		}) +
 			`> ${university.mandate}\n\n` +
-			`Streeling University est la couche de connaissances de [Demerzel](https://github.com/${REPO}), le cadre de gouvernance de l'écosystème GuitarAlchemist. Chaque département est une persona d'agent qui étudie sa discipline et rédige des modules de cours.\n\n` +
+			`Streeling University est la couche de connaissances de [Demerzel](https://github.com/${DEMERZEL}), le cadre de gouvernance de l'écosystème GuitarAlchemist. Chaque département est une persona d'agent qui étudie sa discipline et rédige des modules de cours.\n\n` +
 			`:::caution[Contenu généré]\nCes modules ont été écrits par des départements IA et **n'ont pas été relus**. Contrairement aux autres cours du site, rien ici n'a encore été testé sur ma machine — mon [journal](journal/) suit ce que j'ai réellement étudié et vérifié.\n:::\n\n` +
 			`## Départements\n\n| Département | Modules | En français | En espagnol |\n|---|---|---|---|\n${rows('fr')}\n\n` +
-			`## Provenance\n\n- Source : [\`${REPO}\` → \`${COURSES}\`](${commitUrl}) au commit \`${short}\` (${date}), licence MIT.\n- Importé avec \`npm run sync:streeling\` ; ne pas modifier ces pages à la main — seul \`journal.md\` est conservé entre deux synchronisations.\n`,
+			`## Provenance\n\n- Source : ${sourceLink}, copiée depuis ${originLink} au commit \`${short}\` (${date}), licence MIT.\n- Généré avec \`npm run sync:streeling\` depuis \`${STREELING}/\` : on modifie un module là, pas sur ces pages — seul \`journal.md\` est conservé entre deux synchronisations.\n`,
 	);
 
 	write(
@@ -482,10 +430,10 @@ function writeOverview(university, departments, sha, commitDate) {
 			sidebar: { label: 'Presentación', order: 0 },
 		}) +
 			`> ${university.mandate}\n\n` +
-			`Streeling University es la capa de conocimiento de [Demerzel](https://github.com/${REPO}), el marco de gobernanza del ecosistema GuitarAlchemist. Cada departamento es una persona de agente que investiga su disciplina y redacta módulos de curso.\n\n` +
+			`Streeling University es la capa de conocimiento de [Demerzel](https://github.com/${DEMERZEL}), el marco de gobernanza del ecosistema GuitarAlchemist. Cada departamento es una persona de agente que investiga su disciplina y redacta módulos de curso.\n\n` +
 			`:::caution[Contenido generado]\nEstos módulos fueron escritos por departamentos de IA y **no han sido revisados**. A diferencia de los demás cursos del sitio, nada de lo que hay aquí se ha probado todavía en mi máquina — mi [diario](journal/) registra lo que realmente he estudiado y verificado.\n:::\n\n` +
 			`## Departamentos\n\n| Departamento | Módulos | En francés | En español |\n|---|---|---|---|\n${rows('es')}\n\n` +
-			`## Procedencia\n\n- Fuente: [\`${REPO}\` → \`${COURSES}\`](${commitUrl}) en el commit \`${short}\` (${date}), licencia MIT.\n- Importado con \`npm run sync:streeling\`; no edites estas páginas a mano — solo \`journal.md\` se conserva entre sincronizaciones.\n`,
+			`## Procedencia\n\n- Fuente: ${sourceLink}, copiada de ${originLink} en el commit \`${short}\` (${date}), licencia MIT.\n- Generado con \`npm run sync:streeling\` desde \`${STREELING}/\`: se modifica un módulo allí, no en estas páginas — solo \`journal.md\` se conserva entre sincronizaciones.\n`,
 	);
 }
 

@@ -1,0 +1,37 @@
+name: Streeling pages match their source
+
+# The Streeling pages are generated from streeling/ by scripts/sync-streeling.mjs. A page edited by hand, or a
+# module changed without running the sync, would publish something the source does not say. So the check
+# regenerates the pages and requires no difference, after showing on a changed module that it can fail.
+
+on:
+  push:
+    branches: [main]
+    paths: ['streeling/**', 'src/content/docs/streeling/**', 'src/content/docs/*/streeling/**', 'src/streeling-sidebar.json', 'streeling.lock.json', 'scripts/sync-streeling.mjs', 'scripts/streeling-*.mjs', 'scripts/tests/sync-streeling.test.mjs', 'scripts/tests/streeling-copy-source.test.mjs', 'package.json', 'package-lock.json', '.github/workflows/streeling.yml']
+  pull_request:
+    paths: ['streeling/**', 'src/content/docs/streeling/**', 'src/content/docs/*/streeling/**', 'src/streeling-sidebar.json', 'streeling.lock.json', 'scripts/sync-streeling.mjs', 'scripts/streeling-*.mjs', 'scripts/tests/sync-streeling.test.mjs', 'scripts/tests/streeling-copy-source.test.mjs', 'package.json', 'package-lock.json', '.github/workflows/streeling.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  regenerate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24.21.0
+          cache: npm
+      - run: npm ci
+      - run: node --test scripts/tests/sync-streeling.test.mjs scripts/tests/streeling-copy-source.test.mjs
+      - name: The check must be able to fail
+        run: |
+          echo 'A sentence that is not on the page yet.' >> streeling/courses/psychohistory/en/psy-001-intro-fractal-compounding.md
+          npm run sync:streeling
+          if git diff --quiet -- src/content/docs; then echo 'A changed module left its page unchanged.'; exit 1; fi
+          git checkout -- streeling src/content/docs streeling.lock.json src/streeling-sidebar.json
+      - run: npm run sync:streeling
+      - name: The committed pages are the generated ones
+        run: git diff --exit-code --stat -- src/content/docs src/streeling-sidebar.json streeling.lock.json
