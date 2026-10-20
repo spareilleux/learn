@@ -4,12 +4,13 @@ description: Fondements des sciences cognitives — Sciences cognitives
 sidebar:
   label: COG-001 · Votre cerveau vous ment
   order: 1
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cognitive-science/fr/cog-001-your-brain-lies-to-you.fr.md
 ---
 
 :::note[Streeling University]
 **COG-001** · Fondements des sciences cognitives · débutant · 25 minutes
 
-Généré par le département *Sciences cognitives* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/courses/cognitive-science/fr/cog-001-your-brain-lies-to-you.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Sciences cognitives* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cognitive-science/fr/cog-001-your-brain-lies-to-you.fr.md) · [Mon journal](../../journal/)
 :::
 
 > **Département de sciences cognitives** | Niveau : Débutant | Durée : 25 minutes

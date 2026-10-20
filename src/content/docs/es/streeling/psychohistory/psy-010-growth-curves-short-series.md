@@ -4,12 +4,13 @@ description: ¿Exponencial, logístico o escalonado? Ajustar el crecimiento a un
 sidebar:
   label: PSY-010 · ¿Exponencial, logístico o escalonado? Ajustar el crecimiento a un historial corto
   order: 10
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/psychohistory/es/psy-010-growth-curves-short-series.es.md
 ---
 
 :::note[Streeling University]
 **PSY-010** · ¿Exponencial, logístico o escalonado? Ajustar el crecimiento a un historial corto · intermedio · 45 minutos
 
-Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/courses/psychohistory/es/psy-010-growth-curves-short-series.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/es/psy-010-growth-curves-short-series.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PSY-001](../../psychohistory/psy-001-intro-fractal-compounding/)
 :::

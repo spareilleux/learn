@@ -4,12 +4,13 @@ description: ¿Cambio de medición o cambio del sistema? Las nuevas líneas de b
 sidebar:
   label: PSY-011 · ¿Cambio de medición o cambio del sistema? Las nuevas líneas de base de la tendencia de calidad
   order: 11
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/psychohistory/es/psy-011-measurement-change-or-system-change.es.md
 ---
 
 :::note[Streeling University]
 **PSY-011** · ¿Cambio de medición o cambio del sistema? Las nuevas líneas de base de la tendencia de calidad · intermedio · 40 minutos
 
-Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/courses/psychohistory/es/psy-011-measurement-change-or-system-change.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/es/psy-011-measurement-change-or-system-change.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PSY-002](../../psychohistory/psy-002-governance-phase-transitions/), [PSY-005](../../psychohistory/psy-005-persistence-baseline/)
 :::

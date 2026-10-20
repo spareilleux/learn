@@ -4,12 +4,13 @@ description: "El actor único: cuando un solo remitente es todo el conjunto — 
 sidebar:
   label: PSY-024 · El actor único
   order: 24
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/psychohistory/es/psy-024-the-single-actor.es.md
 ---
 
 :::note[Streeling University]
 **PSY-024** · El actor único: cuando un solo remitente es todo el conjunto · intermedio · 40 minutos
 
-Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/courses/psychohistory/es/psy-024-the-single-actor.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/es/psy-024-the-single-actor.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PSY-004](../../psychohistory/psy-004-how-large-is-large/), [PSY-009](../../psychohistory/psy-009-concentration-and-heavy-tails/)
 :::

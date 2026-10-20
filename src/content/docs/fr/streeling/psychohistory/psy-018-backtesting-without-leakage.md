@@ -4,12 +4,13 @@ description: Tests rétrospectifs sans fuite de données — Psychohistoire
 sidebar:
   label: PSY-018 · Tests rétrospectifs sans fuite de données
   order: 18
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/psychohistory/fr/psy-018-backtesting-without-leakage.fr.md
 ---
 
 :::note[Streeling University]
 **PSY-018** · Tests rétrospectifs sans fuite de données · intermédiaire · 45 minutes
 
-Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/courses/psychohistory/fr/psy-018-backtesting-without-leakage.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/fr/psy-018-backtesting-without-leakage.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PSY-005](../../psychohistory/psy-005-persistence-baseline/)
 :::

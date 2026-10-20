@@ -4,12 +4,13 @@ description: Vecteurs, matrices, normes et applications linéaires — Mathémat
 sidebar:
   label: MAT-004 · Vecteurs, matrices, normes et applications linéaires
   order: 4
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/mathematics/fr/mat-004-vectors-matrices-norms.fr.md
 ---
 
 :::note[Streeling University]
 **MAT-004** · Vecteurs, matrices, normes et applications linéaires · débutant · 45 minutes
 
-Généré par le département *Mathématiques* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/courses/mathematics/fr/mat-004-vectors-matrices-norms.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Mathématiques* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/mathematics/fr/mat-004-vectors-matrices-norms.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MAT-001](../../mathematics/mat-001-proof-strategies/)
 :::

@@ -4,12 +4,13 @@ description: Fundamentos de teoría musical — Música
 sidebar:
   label: MUS-004 · Ritmo, métrica y groove
   order: 4
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/music/es/mus-004-rhythm-and-groove.es.md
 ---
 
 :::note[Streeling University]
 **MUS-004** · Fundamentos de teoría musical · beginner-to-intermediate · 45 minutos
 
-Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/courses/music/es/mus-004-rhythm-and-groove.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/music/es/mus-004-rhythm-and-groove.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MUS-001](../../music/mus-001-what-is-a-chord/), [GTR-001](../../guitar-studies/gtr-001-the-fretboard-map/)
 :::

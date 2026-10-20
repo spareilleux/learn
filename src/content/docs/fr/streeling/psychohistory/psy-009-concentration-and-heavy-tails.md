@@ -4,12 +4,13 @@ description: "Concentration : quand quatre jours réunissent la moitié des év�
 sidebar:
   label: PSY-009 · Concentration
   order: 9
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/psychohistory/fr/psy-009-concentration-and-heavy-tails.fr.md
 ---
 
 :::note[Streeling University]
 **PSY-009** · Concentration : quand quatre jours réunissent la moitié des événements · intermédiaire · 40 minutes
 
-Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/courses/psychohistory/fr/psy-009-concentration-and-heavy-tails.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/fr/psy-009-concentration-and-heavy-tails.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PSY-008](../../psychohistory/psy-008-bursts-are-not-rates/)
 :::

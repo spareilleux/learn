@@ -4,12 +4,13 @@ description: Fondements de la futurologie — Futurologie
 sidebar:
   label: FUT-001 · Penser à demain
   order: 1
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/futurology/fr/fut-001-thinking-about-tomorrow.fr.md
 ---
 
 :::note[Streeling University]
 **FUT-001** · Fondements de la futurologie · débutant · 25 minutes
 
-Généré par le département *Futurologie* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/courses/futurology/fr/fut-001-thinking-about-tomorrow.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Futurologie* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/futurology/fr/fut-001-thinking-about-tomorrow.fr.md) · [Mon journal](../../journal/)
 :::
 
 > **Département de futurologie** | Niveau : Débutant | Durée : 25 minutes

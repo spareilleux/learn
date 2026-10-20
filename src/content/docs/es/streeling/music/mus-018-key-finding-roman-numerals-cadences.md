@@ -4,12 +4,13 @@ description: Identificación de la tonalidad, números romanos y cadencias — M
 sidebar:
   label: MUS-018 · Identificación de la tonalidad, números romanos y cadencias
   order: 15
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/music/es/mus-018-key-finding-roman-numerals-cadences.es.md
 ---
 
 :::note[Streeling University]
 **MUS-018** · Identificación de la tonalidad, números romanos y cadencias · intermedio · 60 minutos
 
-Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/courses/music/es/mus-018-key-finding-roman-numerals-cadences.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/music/es/mus-018-key-finding-roman-numerals-cadences.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MUS-001](../../music/mus-001-what-is-a-chord/), [MUS-003](../../music/mus-003-functional-harmony/)
 :::

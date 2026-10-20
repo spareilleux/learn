@@ -4,12 +4,13 @@ description: ACP con núcleo y proyecciones engañosas — Matemáticas
 sidebar:
   label: MAT-016 · ACP con núcleo y proyecciones engañosas
   order: 16
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/mathematics/es/mat-016-kernel-pca-misleading-projections.es.md
 ---
 
 :::note[Streeling University]
 **MAT-016** · ACP con núcleo y proyecciones engañosas · intermedio · 50 minutos
 
-Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/courses/mathematics/es/mat-016-kernel-pca-misleading-projections.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/mathematics/es/mat-016-kernel-pca-misleading-projections.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MAT-013](../../mathematics/mat-013-distances-kernels-psd/), [MAT-014](../../mathematics/mat-014-pca-variance-preservation/)
 :::

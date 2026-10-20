@@ -4,12 +4,13 @@ description: Fundamentos de gestión de producto — Gestión de productos y pro
 sidebar:
   label: PM-001 · Entregar vs hablar
   order: 1
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/product-management/es/pm-001-shipping-vs-talking.es.md
 ---
 
 :::note[Streeling University]
 **PM-001** · Fundamentos de gestión de producto · principiante · 20 minutos
 
-Generado por el departamento *Gestión de productos y proyectos* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/courses/product-management/es/pm-001-shipping-vs-talking.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Gestión de productos y proyectos* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/product-management/es/pm-001-shipping-vs-talking.es.md) · [Mi diario](../../journal/)
 :::
 
 > **Departamento de Gestión de Producto y Proyectos** | Nivel: Principiante | Duración: 20 minutos

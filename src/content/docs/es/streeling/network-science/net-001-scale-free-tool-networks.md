@@ -4,12 +4,13 @@ description: Ciencia de redes para ecosistemas de IA — Ciencia de redes
 sidebar:
   label: NET-001 · Redes de herramientas libres de escala
   order: 1
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/network-science/es/net-001-scale-free-tool-networks.es.md
 ---
 
 :::note[Streeling University]
 **NET-001** · Ciencia de redes para ecosistemas de IA · principiante · 25 minutos
 
-Generado por el departamento *Ciencia de redes* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/courses/network-science/es/net-001-scale-free-tool-networks.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ciencia de redes* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/network-science/es/net-001-scale-free-tool-networks.es.md) · [Mi diario](../../journal/)
 :::
 
 > **Departamento de Ciencia de Redes** | Etapa: Nigredo (Principiante) | Duración: 25 minutos

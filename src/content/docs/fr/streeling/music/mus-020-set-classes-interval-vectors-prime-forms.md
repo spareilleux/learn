@@ -4,12 +4,13 @@ description: Classes d'ensembles, vecteurs d'intervalles, relation Z et formes p
 sidebar:
   label: MUS-020 · Classes d'ensembles, vecteurs d'intervalles, relation Z et formes premières
   order: 17
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/music/fr/mus-020-set-classes-interval-vectors-prime-forms.fr.md
 ---
 
 :::note[Streeling University]
 **MUS-020** · Classes d'ensembles, vecteurs d'intervalles, relation Z et formes premières · intermédiaire · 60 minutes
 
-Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/courses/music/fr/mus-020-set-classes-interval-vectors-prime-forms.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/music/fr/mus-020-set-classes-interval-vectors-prime-forms.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MUS-001](../../music/mus-001-what-is-a-chord/), [MUS-002](../../music/mus-002-beyond-tonality/)
 :::

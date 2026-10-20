@@ -4,12 +4,13 @@ description: Science des réseaux pour les écosystèmes d'IA — Science des r�
 sidebar:
   label: NET-001 · Réseaux d'outils sans échelle
   order: 1
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/network-science/fr/net-001-scale-free-tool-networks.fr.md
 ---
 
 :::note[Streeling University]
 **NET-001** · Science des réseaux pour les écosystèmes d'IA · débutant · 25 minutes
 
-Généré par le département *Science des réseaux* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/courses/network-science/fr/net-001-scale-free-tool-networks.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Science des réseaux* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/network-science/fr/net-001-scale-free-tool-networks.fr.md) · [Mon journal](../../journal/)
 :::
 
 > **Département de science des réseaux** | Stade : Nigredo (Débutant) | Durée : 25 minutes

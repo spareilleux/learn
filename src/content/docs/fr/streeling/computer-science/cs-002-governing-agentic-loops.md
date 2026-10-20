@@ -4,12 +4,13 @@ description: IA agentique — Systèmes multi-agents, utilisation d'outils, bouc
 sidebar:
   label: CS-002 · Gouverner les boucles agentiques
   order: 2
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/computer-science/fr/cs-002-governing-agentic-loops.fr.md
 ---
 
 :::note[Streeling University]
 **CS-002** · IA agentique — Systèmes multi-agents, utilisation d'outils, boucles de raisonnement · intermédiaire · 25 minutes
 
-Généré par le département *Informatique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/courses/computer-science/fr/cs-002-governing-agentic-loops.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Informatique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/computer-science/fr/cs-002-governing-agentic-loops.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: Modèles d'orchestration multi-agents
 :::

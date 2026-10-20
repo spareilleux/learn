@@ -4,12 +4,13 @@ description: Semiótica de la gobernanza de la IA — Semiótica
 sidebar:
   label: SEM-001 · Los signos en la gobernanza
   order: 1
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/semiotics/es/sem-001-signs-in-governance.es.md
 ---
 
 :::note[Streeling University]
 **SEM-001** · Semiótica de la gobernanza de la IA · principiante · 25 minutos
 
-Generado por el departamento *Semiótica* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/courses/semiotics/es/sem-001-signs-in-governance.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Semiótica* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/semiotics/es/sem-001-signs-in-governance.es.md) · [Mi diario](../../journal/)
 :::
 
 > **Departamento de Semiótica** | Etapa: Nigredo (Principiante) | Duración: 25 minutos

@@ -4,12 +4,13 @@ description: Agrupamiento, densidad y validez de los clústeres — Matemáticas
 sidebar:
   label: MAT-018 · Agrupamiento, densidad y validez de los clústeres
   order: 18
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/mathematics/es/mat-018-clustering-density-validity.es.md
 ---
 
 :::note[Streeling University]
 **MAT-018** · Agrupamiento, densidad y validez de los clústeres · intermedio · 50 minutos
 
-Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/courses/mathematics/es/mat-018-clustering-density-validity.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/mathematics/es/mat-018-clustering-density-validity.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MAT-009](../../mathematics/mat-009-estimation-uncertainty-sampling/), [MAT-013](../../mathematics/mat-013-distances-kernels-psd/)
 :::

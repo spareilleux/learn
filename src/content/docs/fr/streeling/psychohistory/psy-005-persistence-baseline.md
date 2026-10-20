@@ -4,12 +4,13 @@ description: "La persistance d'abord : la référence qu'une prévision de gouve
 sidebar:
   label: PSY-005 · La persistance d'abord
   order: 5
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/psychohistory/fr/psy-005-persistence-baseline.fr.md
 ---
 
 :::note[Streeling University]
 **PSY-005** · La persistance d'abord : la référence qu'une prévision de gouvernance doit battre · intermédiaire · 40 minutes
 
-Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/courses/psychohistory/fr/psy-005-persistence-baseline.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/fr/psy-005-persistence-baseline.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PSY-002](../../psychohistory/psy-002-governance-phase-transitions/)
 :::

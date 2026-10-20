@@ -4,12 +4,13 @@ description: "Quatre scores et une tendance : lire l'historique de résilience �
 sidebar:
   label: PSY-013 · Quatre scores et une tendance
   order: 13
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/psychohistory/fr/psy-013-four-scores-and-a-trend.fr.md
 ---
 
 :::note[Streeling University]
 **PSY-013** · Quatre scores et une tendance : lire l'historique de résilience · intermédiaire · 45 minutes
 
-Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/courses/psychohistory/fr/psy-013-four-scores-and-a-trend.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/fr/psy-013-four-scores-and-a-trend.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PSY-002](../../psychohistory/psy-002-governance-phase-transitions/), [PSY-004](../../psychohistory/psy-004-how-large-is-large/)
 :::

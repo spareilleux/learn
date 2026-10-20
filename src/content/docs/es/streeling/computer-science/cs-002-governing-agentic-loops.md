@@ -4,12 +4,13 @@ description: IA agéntica — Sistemas multiagente, uso de herramientas, bucles 
 sidebar:
   label: CS-002 · Gobernar los bucles agénticos
   order: 2
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/computer-science/es/cs-002-governing-agentic-loops.es.md
 ---
 
 :::note[Streeling University]
 **CS-002** · IA agéntica — Sistemas multiagente, uso de herramientas, bucles de razonamiento · intermedio · 25 minutos
 
-Generado por el departamento *Ciencias de la computación* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/courses/computer-science/es/cs-002-governing-agentic-loops.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ciencias de la computación* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/computer-science/es/cs-002-governing-agentic-loops.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: Patrones de orquestación multiagente
 :::

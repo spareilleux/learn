@@ -4,12 +4,13 @@ description: "Horizons de prévisibilité : à quelle vitesse croissent les peti
 sidebar:
   label: PSY-014 · Horizons de prévisibilité
   order: 14
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/psychohistory/fr/psy-014-prediction-horizons.fr.md
 ---
 
 :::note[Streeling University]
 **PSY-014** · Horizons de prévisibilité : à quelle vitesse croissent les petites erreurs · intermédiaire · 45 minutes
 
-Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/courses/psychohistory/fr/psy-014-prediction-horizons.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/fr/psy-014-prediction-horizons.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MAT-024](../../mathematics/mat-024-dynamical-systems-stability-feedback/)
 :::

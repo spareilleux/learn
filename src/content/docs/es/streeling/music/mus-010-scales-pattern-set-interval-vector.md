@@ -4,12 +4,13 @@ description: Fórmulas de escalas, conjuntos y vector interválico diatónico �
 sidebar:
   label: MUS-010 · Fórmulas de escalas, conjuntos y vector interválico diatónico
   order: 10
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/music/es/mus-010-scales-pattern-set-interval-vector.es.md
 ---
 
 :::note[Streeling University]
 **MUS-010** · Fórmulas de escalas, conjuntos y vector interválico diatónico · intermedio · 60 minutos
 
-Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/courses/music/es/mus-010-scales-pattern-set-interval-vector.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/music/es/mus-010-scales-pattern-set-interval-vector.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MUS-008](../../music/mus-008-intervals-inversion-compound/), [MAT-022](../../mathematics/mat-022-symmetry-groups-invariants/)
 :::
