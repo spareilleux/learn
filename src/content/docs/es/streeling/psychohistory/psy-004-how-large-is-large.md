@@ -3,13 +3,13 @@ title: ¿Cuántos son muchos? Previsibilidad agregada con catorce agentes
 description: ¿Cuántos son muchos? Previsibilidad agregada con catorce agentes — Psicohistoria
 sidebar:
   label: PSY-004 · ¿Cuántos son muchos? Previsibilidad agregada con catorce agentes
-  order: 3
+  order: 4
 ---
 
 :::note[Streeling University]
 **PSY-004** · ¿Cuántos son muchos? Previsibilidad agregada con catorce agentes · intermedio · 45 minutos
 
-Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/state/streeling/courses/psychohistory/es/psy-004-how-large-is-large.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/courses/psychohistory/es/psy-004-how-large-is-large.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MAT-009](../../mathematics/mat-009-estimation-uncertainty-sampling/), [PSY-002](../../psychohistory/psy-002-governance-phase-transitions/)
 :::
@@ -24,7 +24,7 @@ En este módulo pondrá un intervalo exacto a una proporción observada entre un
 
 ## 1. Lo que afirma el registro y lo que contiene el repositorio
 
-**Observado.** El [registro del departamento](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/state/streeling/departments/psychohistory.department.json) cierra su principio clave con esta frase: «One agent's decision is unpredictable, but the aggregate behavior of 14 personas across 4 repos follows mathematical laws.» [`extract.py`](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/scripts/streeling_fixtures/psychohistory/psy-004/extract.py) guarda una instantánea de ese registro, y de los archivos a los que la frase podría referirse, en [`observed-input.json`](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/state/streeling/fixtures/psychohistory/psy-004/observed-input.json).
+**Observado.** El [registro del departamento](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/state/streeling/departments/psychohistory.department.json) cierra su principio clave con esta frase: «One agent's decision is unpredictable, but the aggregate behavior of 14 personas across 4 repos follows mathematical laws.» [`extract.py`](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/scripts/streeling_fixtures/psychohistory/psy-004/extract.py) guarda una instantánea de ese registro, y de los archivos a los que la frase podría referirse, en [`observed-input.json`](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/fixtures/psychohistory/psy-004/observed-input.json).
 
 - El registro enumera 4 repositorios consumidores, como dice la frase. [`personas/`](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/personas) contiene **17** archivos de *persona*, 3 más de los indicados; contenía 14 en el [commit `e9fe8b7`](https://github.com/GuitarAlchemist/Demerzel/tree/e9fe8b7d711ede390b602896e4a5c571d0ad1f67/personas), que añadió el registro el 2026-03-21 (leído con `git ls-tree`, fuera del *fixture*, es decir, de la carpeta de datos y scripts que reproduce las cifras de esta lección).
 - Un archivo de *persona* describe un rol y no registra ninguna decisión.
@@ -49,7 +49,7 @@ límite superior: el p para el que  P(X <= k) = 0.025      X ~ Binomial(n, p)
 si los n dicen sí: límite inferior = 0.025^(1/n), límite superior = 1
 ```
 
-[`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/scripts/streeling_fixtures/psychohistory/psy-004/analyze.py) suma los términos binomiales y despeja p por bisección. **Calculado a partir de entradas supuestas** (la mitad de los agentes dice sí; tres decimales):
+[`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/scripts/streeling_fixtures/psychohistory/psy-004/analyze.py) suma los términos binomiales y despeja p por bisección. **Calculado a partir de entradas supuestas** (la mitad de los agentes dice sí; tres decimales):
 
 | Agentes | Intervalo exacto al 95% | Amplitud | DE con p = 0.5 |
 |---|---|---|---|
@@ -59,7 +59,7 @@ si los n dicen sí: límite inferior = 0.025^(1/n), límite superior = 1
 
 Catorce agentes divididos a partes iguales son compatibles con cualquier p entre 0.23 y 0.77, más de la mitad de la escala. La amplitud se reduce con la raíz cuadrada del tamaño del grupo: 100 agentes dan un intervalo 2.652 veces más estrecho (`sqrt(100 / 14) = 2.673`). La aproximación normal `n = z² p (1 - p) / h²`, con z = 1.959964 y p = 0.5, pide 384.146, es decir, 385 agentes, para una semiamplitud h de 5 puntos.
 
-Con 14 agentes, este intervalo contiene p al menos el 95.5% de las veces para cada uno de los 99 valores de p entre 0.01 y 0.99 ([`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/state/streeling/fixtures/psychohistory/psy-004/results.json)). Un panel de 5 dice todavía menos: si los cinco dicen sí, el límite inferior es `0.025^(1/5) = 0.478`.
+Con 14 agentes, este intervalo contiene p al menos el 95.5% de las veces para cada uno de los 99 valores de p entre 0.01 y 0.99 ([`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/fixtures/psychohistory/psy-004/results.json)). Un panel de 5 dice todavía menos: si los cinco dicen sí, el límite inferior es `0.025^(1/5) = 0.478`.
 
 ### Ejercicio práctico 2
 
@@ -122,7 +122,7 @@ Un equipo quiere que la proporción de síes entre sus agentes quede a no más d
 
 **Observado, fijado en Demerzel `4b03838800dcd4894f1e026461979bff1d985ca8`:** los archivos enlazados en la sección 1.
 
-**Fixture.** `python -I scripts/streeling_fixtures/psychohistory/psy-004/extract.py`, y después `analyze.py` en la misma carpeta. Supuestos y semillas: [`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/state/streeling/fixtures/psychohistory/psy-004/scenarios.json). Autocomprobaciones y controles negativos: [README](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/state/streeling/fixtures/psychohistory/psy-004/README.md).
+**Fixture.** `python -I scripts/streeling_fixtures/psychohistory/psy-004/extract.py`, y después `analyze.py` en la misma carpeta. Supuestos y semillas: [`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/fixtures/psychohistory/psy-004/scenarios.json). Autocomprobaciones y controles negativos: [README](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/fixtures/psychohistory/psy-004/README.md).
 
 **Referencias de método.** Clopper, C. J., y Pearson, E. S. (1934), «The Use of Confidence or Fiducial Limits Illustrated in the Case of the Binomial», *Biometrika* 26(4), 404–413. Kish, L. (1965), *Survey Sampling*, Wiley (el efecto de diseño).
 

@@ -3,13 +3,13 @@ title: Enunciados de conservación que se pueden comprobar
 description: Enunciados de conservación que se pueden comprobar — Psicohistoria
 sidebar:
   label: PSY-021 · Enunciados de conservación que se pueden comprobar
-  order: 20
+  order: 21
 ---
 
 :::note[Streeling University]
 **PSY-021** · Enunciados de conservación que se pueden comprobar · intermedio · 45 minutos
 
-Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/state/streeling/courses/psychohistory/es/psy-021-conservation-claims.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/courses/psychohistory/es/psy-021-conservation-claims.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PSY-001](../../psychohistory/psy-001-intro-fractal-compounding/)
 :::
@@ -20,7 +20,7 @@ Requisitos previos: [PSY-001](../../psychohistory/psy-001-intro-fractal-compound
 
 En este módulo clasificará en cuatro tipos los enunciados a los que se llama «de conservación», auditará una identidad de existencias y flujos sobre un registro de eventos real y nombrará el registro que necesita una afirmación para poder fallar. **Pregunta de proyecto:** PSY-001 toma prestado el teorema de Noether para el «impulso de aprendizaje». ¿Qué enunciados de conservación sobre este proyecto pueden comprobarse realmente?
 
-[PSY-001](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/state/streeling/courses/psychohistory/en/psy-001-intro-fractal-compounding.md) anuncia una ley de conservación para la gobernanza. Este módulo se pregunta qué exige una ley así y audita después lo más parecido que ofrece el repositorio: la contabilidad de su registro de disparadores. [PSY-008](../../psychohistory/psy-008-bursts-are-not-rates/) y [PSY-009](../../psychohistory/psy-009-concentration-and-heavy-tails/) leen ese registro como llegadas, [PSY-024](../../psychohistory/psy-024-the-single-actor/) se pregunta quién las envió, y PSY-003 aplica identidades parecidas a las colas de revisión.
+[PSY-001](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/state/streeling/courses/psychohistory/en/psy-001-intro-fractal-compounding.md) anuncia una ley de conservación para la gobernanza. Este módulo se pregunta qué exige una ley así y audita después lo más parecido que ofrece el repositorio: la contabilidad de su registro de disparadores. [PSY-008](../../psychohistory/psy-008-bursts-are-not-rates/) y [PSY-009](../../psychohistory/psy-009-concentration-and-heavy-tails/) leen ese registro como llegadas, [PSY-024](../../psychohistory/psy-024-the-single-actor/) se pregunta quién las envió, y [PSY-003](../../psychohistory/psy-003-review-throughput-and-compounding/) aplica identidades parecidas a las colas de revisión.
 
 ## 1. Cuatro cosas a las que se llama conservación
 
@@ -34,7 +34,7 @@ p_L = (beliefs_gained_T - beliefs_lost_T) / cycles_elapsed
 
 y «If your compounding process is consistent (symmetric across scales), p_L stays constant or grows. If you break the symmetry — by skipping compounding at some level, or by compounding differently at different scales — p_L decays.» (si el proceso de compuesto es consistente, p_L se mantiene constante o crece; si se rompe la simetría, p_L decae).
 
-**Esto es una analogía.** Su intuición es razonable: un proceso que se ejecuta de la misma manera en cada nivel debería seguir produciendo creencias validadas. Pero no se cumplen las condiciones del teorema (es la lectura del autor, registrada en [`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/state/streeling/fixtures/psychohistory/psy-021/scenarios.json)). No se ha escrito ninguna acción para los ciclos de gobernanza. La simetría une cinco niveles con nombre (paso, pipeline, ciclo, sesión, evolución): una correspondencia discreta, no una familia continua. Y p_L se define mediante una fórmula y puede crecer, cosa que una magnitud conservada no puede hacer.
+**Esto es una analogía.** Su intuición es razonable: un proceso que se ejecuta de la misma manera en cada nivel debería seguir produciendo creencias validadas. Pero no se cumplen las condiciones del teorema (es la lectura del autor, registrada en [`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/fixtures/psychohistory/psy-021/scenarios.json)). No se ha escrito ninguna acción para los ciclos de gobernanza. La simetría une cinco niveles con nombre (paso, pipeline, ciclo, sesión, evolución): una correspondencia discreta, no una familia continua. Y p_L se define mediante una fórmula y puede crecer, cosa que una magnitud conservada no puede hacer.
 
 Un proyecto sí tiene enunciados de conservación que puede comprobar: las identidades contables de unas *existencias* (*stock*), la cantidad de algo presente en un momento dado (Meadows 2008).
 
@@ -51,7 +51,7 @@ Lo que vale un enunciado así depende de si los registros habrían podido hacerl
 
 ## 2. Lo que pueden cuadrar los archivos del commit fijado
 
-**Observado.** Un *disparador* (*trigger*) es un pequeño archivo JSON que un [flujo de trabajo de GitHub](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/.github/workflows/demerzel-driver-triggers.yml) escribía en `state/triggers/` por cada *push*, incidencia abierta o discusión creada, para que lo consumiera un agente autónomo, el *driver*. Ambos se retiraron el 2026-07-18; el archivo enlazado es una versión posterior. Las incidencias reabiertas y las ejecuciones de CI fallidas que también contempla no aparecen nunca en el historial. [`extract.py`](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/scripts/streeling_fixtures/psychohistory/psy-021/extract.py) toma una instantánea de [la carpeta](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/state/triggers) en el commit `4b03838` y la guarda en [`observed-input.json`](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/state/streeling/fixtures/psychohistory/psy-021/observed-input.json): 603 archivos de eventos.
+**Observado.** Un *disparador* (*trigger*) es un pequeño archivo JSON que un [flujo de trabajo de GitHub](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/.github/workflows/demerzel-driver-triggers.yml) escribía en `state/triggers/` por cada *push*, incidencia abierta o discusión creada, para que lo consumiera un agente autónomo, el *driver*. Ambos se retiraron el 2026-07-18; el archivo enlazado es una versión posterior. Las incidencias reabiertas y las ejecuciones de CI fallidas que también contempla no aparecen nunca en el historial. [`extract.py`](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/scripts/streeling_fixtures/psychohistory/psy-021/extract.py) toma una instantánea de [la carpeta](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/state/triggers) en el commit `4b03838` y la guarda en [`observed-input.json`](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/fixtures/psychohistory/psy-021/observed-input.json): 603 archivos de eventos.
 
 | Tipo | Pendientes | Archivados | Total |
 |---|---|---|---|
@@ -63,7 +63,7 @@ Lo que vale un enunciado así depende de si los registros habrían podido hacerl
 
 «Pendientes» significa que siguen en el propio `state/triggers/`; «archivados», que están en su subcarpeta `archived/`; la tercera carpeta, `processing/`, está vacía. De los 603 archivos, 602 comparten una misma forma: seis claves (`type`, `repo`, `ref`, `priority`, `details`, `timestamp`), con `event`, `sender` y `run_id` (el identificador único de la ejecución del flujo de trabajo) dentro de `details`. Ninguna clave registra un momento de archivado, un paso de procesamiento ni un resultado: un disparador que se procesó y otro que se abandonó tienen el mismo aspecto.
 
-**Calculado** solo a partir de estos archivos por [`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/scripts/streeling_fixtures/psychohistory/psy-021/analyze.py), con resultados en [`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/state/streeling/fixtures/psychohistory/psy-021/results.json):
+**Calculado** solo a partir de estos archivos por [`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/scripts/streeling_fixtures/psychohistory/psy-021/analyze.py), con resultados en [`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/fixtures/psychohistory/psy-021/results.json):
 
 - *Por construcción:* los totales por tipo suman 603: un mismo recuento, repartido y vuelto a sumar.
 - *Auditable, y se cumple:* 603 nombres de archivo, todos distintos, así que ningún archivo está en dos carpetas; 602 identificadores de ejecución, todos distintos; y el archivo del flujo de trabajo y el archivo de habilidad del driver declaran los dos 594 disparadores huérfanos, que es lo que contiene la carpeta de archivados.
@@ -141,7 +141,7 @@ Sintético. Seis ciclos imaginarios ganaron 6, 7, 5, 4, 6, 6 creencias validadas
 
 **Observado** en Demerzel `4b03838800dcd4894f1e026461979bff1d985ca8`: `state/triggers/` (comprobada por su identificador de árbol de Git), su historial de Git y los cinco archivos enlazados más arriba.
 
-**Fixture.** `python -I -B scripts/streeling_fixtures/psychohistory/psy-021/extract.py`, y después `analyze.py` en la misma carpeta; `analyze.py --check` compara una ejecución nueva con los resultados guardados. El [README](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/state/streeling/fixtures/psychohistory/psy-021/README.md) da un recuento sin los scripts.
+**Fixture.** `python -I -B scripts/streeling_fixtures/psychohistory/psy-021/extract.py`, y después `analyze.py` en la misma carpeta; `analyze.py --check` compara una ejecución nueva con los resultados guardados. El [README](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/fixtures/psychohistory/psy-021/README.md) da un recuento sin los scripts.
 
 **Referencias de método.** Noether, E. (1918), «Invariante Variationsprobleme», *Nachrichten von der Gesellschaft der Wissenschaften zu Göttingen, Mathematisch-Physikalische Klasse*, 235–257 ([EuDML](https://eudml.org/doc/59024)); traducción al inglés de M. A. Tavel, *Transport Theory and Statistical Physics* 1(3), 1971, doi:10.1080/00411457108231446. Meadows, D. H. (2008), *Thinking in Systems: A Primer*, Chelsea Green. Popper, K. (1959), *The Logic of Scientific Discovery*, Hutchinson. Chacon, S., y Straub, B. (2014), *Pro Git*, segunda edición, Apress, [«What is Git?»](https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F).
 

@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **MAT-008** · Probabilidad y razonamiento condicional · intermedio · 45 minutos
 
-Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/state/streeling/courses/mathematics/es/mat-008-probability-conditional-reasoning.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/courses/mathematics/es/mat-008-probability-conditional-reasoning.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MAT-001](../../mathematics/mat-001-proof-strategies/), [MAT-003](../../mathematics/mat-003-floating-point-conditioning/)
 :::

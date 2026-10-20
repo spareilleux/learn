@@ -3,13 +3,13 @@ title: ¿Es una ley de potencia? Dieciocho recuentos de citas
 description: ¿Es una ley de potencia? Dieciocho recuentos de citas — Psicohistoria
 sidebar:
   label: PSY-007 · ¿Es una ley de potencia? Dieciocho recuentos de citas
-  order: 6
+  order: 7
 ---
 
 :::note[Streeling University]
 **PSY-007** · ¿Es una ley de potencia? Dieciocho recuentos de citas · intermedio · 45 minutos
 
-Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/state/streeling/courses/psychohistory/es/psy-007-power-law-or-not.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/courses/psychohistory/es/psy-007-power-law-or-not.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PSY-001](../../psychohistory/psy-001-intro-fractal-compounding/), [MAT-009](../../mathematics/mat-009-estimation-uncertainty-sampling/)
 :::
@@ -30,7 +30,7 @@ Una *ley de potencia* asigna a un valor x una probabilidad proporcional a `x^-al
 
 En la tendencia de calidad, la «eficacia» es una etiqueta categórica ([PSY-005](../../psychohistory/psy-005-persistence-baseline/)); la regla de la especificación, y esta lección, usan `citation_count`: el número de archivos rastreados por Git que mencionan alguna de las *rutas de citación* del artefacto, contado con `git grep` ([`scripts/evolution_metrics.py`](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/scripts/evolution_metrics.py#L12-L15)).
 
-[`extract.py`](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/scripts/streeling_fixtures/psychohistory/psy-007/extract.py) toma una instantánea de la última ejecución en el commit `4b03838` (2026-10-13T18:43:54Z, [18 filas](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/state/quality-trend/2026-10.jsonl#L217-L234)) y la guarda en [`observed-input.json`](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/state/streeling/fixtures/psychohistory/psy-007/observed-input.json). Ordenados, y con un asterisco en los dos recuentos que no se midieron:
+[`extract.py`](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/scripts/streeling_fixtures/psychohistory/psy-007/extract.py) toma una instantánea de la última ejecución en el commit `4b03838` (2026-10-13T18:43:54Z, [18 filas](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/state/quality-trend/2026-10.jsonl#L217-L234)) y la guarda en [`observed-input.json`](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/fixtures/psychohistory/psy-007/observed-input.json). Ordenados, y con un asterisco en los dos recuentos que no se midieron:
 
 ```text
 65  55*  47  45  44  29  29  23  17  15  14  13  6  6  5  1  0  0*
@@ -52,9 +52,9 @@ Una ley de potencia no asigna ninguna probabilidad a 0: se dejan aparte los dos 
 
 ## 2. Una recta en papel log-log
 
-En un *gráfico rango-tamaño* se representa `log10(count)` frente a `log10(rank)`, empezando por el recuento más alto. Bajo una ley de potencia de exponente alpha, los puntos quedan cerca de una recta de pendiente `−1 / (alpha − 1)`. La receta tentadora: ajustar una recta por mínimos cuadrados, leer `alpha = 1 + 1 / |slope|` e indicar el R², la proporción de la varianza que explica la recta. **Calculado** por [`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/scripts/streeling_fixtures/psychohistory/psy-007/analyze.py) sobre los 16 recuentos positivos: pendiente −1.152, R² 0.669, exponente implícito 1.868.
+En un *gráfico rango-tamaño* se representa `log10(count)` frente a `log10(rank)`, empezando por el recuento más alto. Bajo una ley de potencia de exponente alpha, los puntos quedan cerca de una recta de pendiente `−1 / (alpha − 1)`. La receta tentadora: ajustar una recta por mínimos cuadrados, leer `alpha = 1 + 1 / |slope|` e indicar el R², la proporción de la varianza que explica la recta. **Calculado** por [`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/scripts/streeling_fixtures/psychohistory/psy-007/analyze.py) sobre los 16 recuentos positivos: pendiente −1.152, R² 0.669, exponente implícito 1.868.
 
-**Sintético.** El script extrae 2,000 muestras de 16 valores de cada una de las tres familias ajustadas en la sección 4 ([`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/state/streeling/fixtures/psychohistory/psy-007/scenarios.json) guarda sus parámetros como supuestos) y ajusta la misma recta:
+**Sintético.** El script extrae 2,000 muestras de 16 valores de cada una de las tres familias ajustadas en la sección 4 ([`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/fixtures/psychohistory/psy-007/scenarios.json) guarda sus parámetros como supuestos) y ajusta la misma recta:
 
 | Familia generadora | R² mediano | Con R² de al menos 0.9 |
 |---|---|---|
@@ -103,7 +103,7 @@ Con el corte 13 quedan 12 valores, y la suma de `ln(x / 13)` es 9.459. Calcule e
 
 Hay dos familias más simples definidas sobre los mismos enteros: una *exponencial* discreta (cada unidad adicional multiplica la probabilidad por una constante; sin cola pesada) y una *lognormal* (`ln x` sigue una distribución normal; aquí, redondeada al entero superior; dos parámetros). La *log-verosimilitud* de una familia ajustada es el logaritmo de la probabilidad que asigna a los datos; cuanto más alta, mejor. R es la log-verosimilitud de una familia menos la de otra (si es negativa, la segunda se ajusta mejor), y la prueba de Vuong (1989, tal como la aplica el artículo citado) da la probabilidad de obtener una razón tan alejada de cero si las dos se ajustan igual de bien; el artículo da el signo por fiable cuando p < 0.1, lo que esta lección llama decisivo.
 
-Log-verosimilitudes **calculadas**, tomadas de [`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/state/streeling/fixtures/psychohistory/psy-007/results.json):
+Log-verosimilitudes **calculadas**, tomadas de [`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/fixtures/psychohistory/psy-007/results.json):
 
 | Valores | Ley de potencia | Exponencial | Lognormal |
 |---|---|---|---|
@@ -140,7 +140,7 @@ Puede medir más artefactos. A partir de la tabla de la cola, ¿cuántos valores
 
 ## Fuentes, límites y próxima comprobación
 
-**Observado, fijado en Demerzel `4b03838800dcd4894f1e026461979bff1d985ca8`:** `extract.py` lee 27 archivos (cinco archivos de la tendencia de calidad, los 18 registros de [`state/evolution/`](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/state/evolution), el registro del departamento, la especificación, PSY-001 y PSY-002) y se detiene si alguno difiere de su blob de Git fijado. El [README](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/state/streeling/fixtures/psychohistory/psy-007/README.md) da los comandos, las 46 autocomprobaciones y los controles negativos.
+**Observado, fijado en Demerzel `4b03838800dcd4894f1e026461979bff1d985ca8`:** `extract.py` lee 27 archivos (cinco archivos de la tendencia de calidad, los 18 registros de [`state/evolution/`](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/state/evolution), el registro del departamento, la especificación, PSY-001 y PSY-002) y se detiene si alguno difiere de su blob de Git fijado. El [README](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/fixtures/psychohistory/psy-007/README.md) da los comandos, las 46 autocomprobaciones y los controles negativos.
 
 **Referencias de método.** Clauset, A., Shalizi, C. R., y Newman, M. E. J. (2009), «Power-law distributions in empirical data», *SIAM Review* 51(4), 661–703, [arXiv:0706.1062](https://arxiv.org/abs/0706.1062): el método que se sigue aquí; advierte que los conjuntos de datos de menos de unos 50 valores «should be treated with caution» (deben tratarse con cautela). Vuong, Q. H. (1989), «Likelihood Ratio Tests for Model Selection and Non-Nested Hypotheses», *Econometrica* 57(2), 307–333.
 

@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **INF-001** · Théorie de l'information appliquée à la gouvernance · débutant · 25 minutes
 
-Généré par le département *Théorie de l'information* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/state/streeling/courses/information-theory/fr/inf-001-entropy-of-governance.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Théorie de l'information* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/courses/information-theory/fr/inf-001-entropy-of-governance.fr.md) · [Mon journal](../../journal/)
 :::
 
 > **Département de théorie de l'information** | Stade : Nigredo (Débutant) | Durée : 25 minutes

@@ -3,13 +3,13 @@ title: "Surveiller un plan : bandes de tolérance et règles d'alerte"
 description: "Surveiller un plan : bandes de tolérance et règles d'alerte — Psychohistoire"
 sidebar:
   label: PSY-023 · Surveiller un plan
-  order: 22
+  order: 23
 ---
 
 :::note[Streeling University]
 **PSY-023** · Surveiller un plan : bandes de tolérance et règles d'alerte · intermédiaire · 40 minutes
 
-Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/state/streeling/courses/psychohistory/fr/psy-023-monitoring-a-plan.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/courses/psychohistory/fr/psy-023-monitoring-a-plan.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PSY-012](../../psychohistory/psy-012-early-warning-false-alarms/), [PSY-004](../../psychohistory/psy-004-how-large-is-large/)
 :::
@@ -22,7 +22,7 @@ Vous compterez à quelle fréquence un seul examen d'un plan déclenche une faus
 
 Le plan est un chiffre tiré d'un projet de spécification du cursus, pris tel quel et seulement pour fixer l'échelle : le dépôt épinglé ne l'énonce pas. Celui-ci contient [23 fiches de département](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/state/streeling/departments), dont 21 ont un dossier de cours, et la ligne 57 de son [README](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/README.md#L57) indique « Streeling University — 23 departments, 21 course tracks » (départements et parcours de cours), sans nombre de cours par parcours. Aucune production hebdomadaire du projet n'a été mesurée : rien ici ne dit donc si le projet tient son plan ou s'en écarte.
 
-[PSY-012](../../psychohistory/psy-012-early-warning-false-alarms/) a calibré une alerte pour un seul examen d'un relevé terminé ; ici, l'examen est répété chaque semaine, et c'est ce qui gonfle les fausses alertes. [PSY-010](../../psychohistory/psy-010-growth-curves-short-series/) ajuste l'historique de croissance ; ce module suppose qu'un échéancier existe. Tout ce qui suit est **synthétique** : des hypothèses dans [scenarios.json](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/state/streeling/fixtures/psychohistory/psy-023/scenarios.json), un calcul fait par [analyze.py](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/scripts/streeling_fixtures/psychohistory/psy-023/analyze.py), des résultats enregistrés dans [results.json](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/state/streeling/fixtures/psychohistory/psy-023/results.json).
+[PSY-012](../../psychohistory/psy-012-early-warning-false-alarms/) a calibré une alerte pour un seul examen d'un relevé terminé ; ici, l'examen est répété chaque semaine, et c'est ce qui gonfle les fausses alertes. [PSY-010](../../psychohistory/psy-010-growth-curves-short-series/) ajuste l'historique de croissance ; ce module suppose qu'un échéancier existe. Tout ce qui suit est **synthétique** : des hypothèses dans [scenarios.json](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/fixtures/psychohistory/psy-023/scenarios.json), un calcul fait par [analyze.py](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/scripts/streeling_fixtures/psychohistory/psy-023/analyze.py), des résultats enregistrés dans [results.json](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/fixtures/psychohistory/psy-023/results.json).
 
 ## 1. Un seul examen du plan
 
@@ -117,7 +117,7 @@ Avec q = 1/2, 2 cours par semaine lente et F = 20, calculez à partir du tableau
 
 **Épinglés au commit `4b03838800dcd4894f1e026461979bff1d985ca8` de Demerzel :** la ligne du README et les fiches de département citées plus haut, pour l'échelle ; aucun fichier de données n'a été lu.
 
-**Jeu d'essai.** `python -I -B scripts/streeling_fixtures/psychohistory/psy-023/analyze.py`, puis la même commande avec `--check`, qui compare une nouvelle exécution aux résultats enregistrés. Le [README](https://github.com/GuitarAlchemist/Demerzel/blob/5d753139d6c585d98580fe492c22f8b811d2894a/state/streeling/fixtures/psychohistory/psy-023/README.md) énumère les 24 autocontrôles, dont un cas calculé à la main et un témoin négatif.
+**Jeu d'essai.** `python -I -B scripts/streeling_fixtures/psychohistory/psy-023/analyze.py`, puis la même commande avec `--check`, qui compare une nouvelle exécution aux résultats enregistrés. Le [README](https://github.com/GuitarAlchemist/Demerzel/blob/6a3d2cd7e76c9d0776c592d98af5f31038513019/state/streeling/fixtures/psychohistory/psy-023/README.md) énumère les 24 autocontrôles, dont un cas calculé à la main et un témoin négatif.
 
 **Références de méthode.** Page, E. S. (1954), « Continuous Inspection Schemes », *Biometrika* 41(1–2), 100–115, doi:10.1093/biomet/41.1-2.100. NIST/SEMATECH *e-Handbook of Statistical Methods*, section [6.3.2.3.1](https://www.itl.nist.gov/div898/handbook/pmc/section3/pmc3231.htm), la source des deux citations, et section [6.3.2.3](https://www.itl.nist.gov/div898/handbook/pmc/section3/pmc323.htm) sur les cartes de somme cumulée. Brook, D., et Evans, D. A. (1972), « An approach to the probability distribution of cusum run length », *Biometrika* 59(3), 539–549, doi:10.1093/biomet/59.3.539 (l'idée de chaîne de Markov qui sous-tend la récurrence du jeu d'essai). Armitage, P., McPherson, C. K., et Rowe, B. C. (1969), « Repeated Significance Tests on Accumulating Data », *Journal of the Royal Statistical Society, Series A* 132(2), 235–244, doi:10.2307/2343787 (pourquoi des examens répétés gonflent un taux d'erreur).
 

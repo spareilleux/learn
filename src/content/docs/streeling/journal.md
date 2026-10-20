@@ -123,6 +123,7 @@ Tick a module once studied. Under **Notes**, add a dated entry: what I understoo
 
 - [ ] [PSY-001 · Introduction to Fractal Compounding](../psychohistory/psy-001-intro-fractal-compounding/) <!-- psy-001-intro-fractal-compounding -->
 - [ ] [PSY-002 · Governance Phase Transitions](../psychohistory/psy-002-governance-phase-transitions/) <!-- psy-002-governance-phase-transitions -->
+- [ ] [PSY-003 · Measure Recursive Improvement Across Review and Publication](../psychohistory/psy-003-review-throughput-and-compounding/) <!-- psy-003-review-throughput-and-compounding -->
 - [ ] [PSY-004 · How Large Is Large? Aggregate Predictability with Fourteen Agents](../psychohistory/psy-004-how-large-is-large/) <!-- psy-004-how-large-is-large -->
 - [ ] [PSY-005 · Persistence First](../psychohistory/psy-005-persistence-baseline/) <!-- psy-005-persistence-baseline -->
 - [ ] [PSY-006 · Estimate a Transition Matrix from Observed Counts](../psychohistory/psy-006-transition-matrix-from-counts/) <!-- psy-006-transition-matrix-from-counts -->
