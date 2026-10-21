@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **MUS-020** · Clases de conjuntos, vectores interválicos, relación Z y formas primas · intermedio · 60 minutos
 
-Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/courses/music/es/mus-020-set-classes-interval-vectors-prime-forms.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/courses/music/es/mus-020-set-classes-interval-vectors-prime-forms.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MUS-001](../../music/mus-001-what-is-a-chord/), [MUS-002](../../music/mus-002-beyond-tonality/)
 :::

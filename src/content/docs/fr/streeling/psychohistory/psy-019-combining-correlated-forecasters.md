@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **PSY-019** · Combiner des prévisionnistes qui partagent une source · intermédiaire · 45 minutes
 
-Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/courses/psychohistory/fr/psy-019-combining-correlated-forecasters.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/courses/psychohistory/fr/psy-019-combining-correlated-forecasters.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MAT-009](../../mathematics/mat-009-estimation-uncertainty-sampling/), [PSY-004](../../psychohistory/psy-004-how-large-is-large/)
 :::
@@ -24,7 +24,7 @@ Vous écrirez l'erreur quadratique moyenne d'une moyenne de k prévisions aux er
 
 ## 1. Ce que partagent les juges
 
-**Observé** au commit épinglé, et figé par [`extract.py`](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/scripts/streeling_fixtures/psychohistory/psy-019/extract.py) dans [`observed-input.json`](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/fixtures/psychohistory/psy-019/observed-input.json) :
+**Observé** au commit épinglé, et figé par [`extract.py`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/scripts/streeling_fixtures/psychohistory/psy-019/extract.py) dans [`observed-input.json`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/fixtures/psychohistory/psy-019/observed-input.json) :
 
 - La [politique d'orchestration multimodèle](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/policies/multi-model-orchestration-policy.yaml#L198-L203) fixe `single_model: max 0.8`, `two_model_agreement: 0.9` et `two_model_disagreement: 0.5`. Sa règle `cross-validation` exige l'accord d'au moins deux modèles et nomme claude et chatgpt, que son registre des modèles attribue à deux fournisseurs différents.
 - Le [script du panel du tribunal](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/.claude/workflows/demerzel-tribunal-panel.js) soumettrait une même pull request à 5 personas. Chaque requête adressée au modèle porte le même titre, la même description, la même liste de fichiers et le même extrait de diff ; seuls le persona et la préoccupation qui lui est assignée diffèrent, et le workflow transmet un seul `--model`. Chaque persona répond `block`, `merge_with_followups` ou `pass`, et peut renvoyer un `score`, « 0..1 confidence in this PR for my concern (1 = clean) » (sa confiance dans cette PR au regard de sa préoccupation, la valeur maximale signifiant que la PR est propre) ; le verdict retient la réponse la plus sévère, au lieu d'une moyenne.
@@ -55,7 +55,7 @@ MSE de la moyenne de k prévisions = sigma² × ( rho + (1 − rho) / k )
 plancher, si grand que soit k     = rho × sigma²
 ```
 
-[`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/scripts/streeling_fixtures/psychohistory/psy-019/analyze.py) le vérifie sans échantillonnage : avec des parts valant +1 ou −1, les 32 768 combinaisons de signes pour k = 14 donnent pour moyennes de C², de C × moyenne(I) et de moyenne(I)² exactement 1, 0 et 1/k.
+[`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/scripts/streeling_fixtures/psychohistory/psy-019/analyze.py) le vérifie sans échantillonnage : avec des parts valant +1 ou −1, les 32 768 combinaisons de signes pour k = 14 donnent pour moyennes de C², de C × moyenne(I) et de moyenne(I)² exactement 1, 0 et 1/k.
 
 **Calculé à partir de la forme close**, en unités de la MSE d'un prévisionniste (sigma² = 1), à quatre décimales :
 
@@ -134,7 +134,7 @@ Deux personas du panel, sur un même extrait et un même `--model`, s'accordent 
 
 **Observé, épinglé au commit `4b03838800dcd4894f1e026461979bff1d985ca8` de Demerzel :** les fichiers dont les liens figurent à la section 1, le [workflow](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/.github/workflows/tribunal-panel.yml) qui lance le panel et les cinq enregistrements du conseil. `extract.py` s'arrête si l'un d'eux diffère de son blob Git épinglé.
 
-**Jeu d'essai.** Depuis la racine du dépôt, `python -I -B scripts/streeling_fixtures/psychohistory/psy-019/extract.py`, puis `analyze.py` et `analyze.py --check` dans le même dossier. Hypothèses : [`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/fixtures/psychohistory/psy-019/scenarios.json). Tous les nombres ci-dessus : [`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/fixtures/psychohistory/psy-019/results.json). Autocontrôles et limites : [README](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/fixtures/psychohistory/psy-019/README.md).
+**Jeu d'essai.** Depuis la racine du dépôt, `python -I -B scripts/streeling_fixtures/psychohistory/psy-019/extract.py`, puis `analyze.py` et `analyze.py --check` dans le même dossier. Hypothèses : [`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/fixtures/psychohistory/psy-019/scenarios.json). Tous les nombres ci-dessus : [`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/fixtures/psychohistory/psy-019/results.json). Autocontrôles et limites : [README](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/fixtures/psychohistory/psy-019/README.md).
 
 **Références de méthode.** Bates, J. M., et Granger, C. W. J. (1969), « The Combination of Forecasts », *Operational Research Quarterly* 20(4), 451–468, doi:10.1057/jors.1969.103. Clemen, R. T., et Winkler, R. L. (1985), « Limits for the Precision and Value of Information from Dependent Sources », *Operations Research* 33(2), 427–442, doi:10.1287/opre.33.2.427.
 

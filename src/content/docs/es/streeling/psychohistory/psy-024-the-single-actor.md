@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **PSY-024** · El actor único: cuando un solo remitente es todo el conjunto · intermedio · 40 minutos
 
-Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/courses/psychohistory/es/psy-024-the-single-actor.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/courses/psychohistory/es/psy-024-the-single-actor.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PSY-004](../../psychohistory/psy-004-how-large-is-large/), [PSY-009](../../psychohistory/psy-009-concentration-and-heavy-tails/)
 :::
@@ -20,11 +20,11 @@ Requisitos previos: [PSY-004](../../psychohistory/psy-004-how-large-is-large/), 
 
 En este módulo contará los actores que nombra un registro, medirá lo concentrada que está su actividad, acotará esa medida cuando se ha perdido parte del registro y dirá qué establece el resultado sobre quién actuó. **Pregunta de proyecto:** las leyes del agregado suponen muchos actores independientes. ¿Quién generó realmente los eventos registrados?
 
-[PSY-002](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/state/streeling/courses/psychohistory/en/psy-002-governance-phase-transitions.md) interpreta el comportamiento agregado del ecosistema como sujeto a leyes estadísticas; [PSY-004](../../psychohistory/psy-004-how-large-is-large/) muestra a cuán pocos agentes independientes equivalen catorce agentes correlacionados. Este módulo plantea una pregunta previa: ¿cuántos actores contienen los registros? [PSY-009](../../psychohistory/psy-009-concentration-and-heavy-tails/) mide la concentración del mismo registro por días; este, por actores.
+[PSY-002](../../psychohistory/psy-002-governance-phase-transitions/) interpreta el comportamiento agregado del ecosistema como sujeto a leyes estadísticas; [PSY-004](../../psychohistory/psy-004-how-large-is-large/) muestra a cuán pocos agentes independientes equivalen catorce agentes correlacionados. Este módulo plantea una pregunta previa: ¿cuántos actores contienen los registros? [PSY-009](../../psychohistory/psy-009-concentration-and-heavy-tails/) mide la concentración del mismo registro por días; este, por actores.
 
 ## 1. Un solo remitente, y lo que significa «sender»
 
-**Observado.** [`extract.py`](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/scripts/streeling_fixtures/psychohistory/psy-024/extract.py) lee los 594 archivos de [`state/triggers/archived/`](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/state/triggers/archived) en el commit `4b03838` y sustituye cada identidad por una etiqueta antes de escribir [`observed-input.json`](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/fixtures/psychohistory/psy-024/observed-input.json). Los **594** eventos archivados, del 2026-03-20 al 2026-07-16, llevan todos el mismo `sender`, etiquetado como *cuenta A* (*account A* en los datos), y el mismo `repo`. Lo mismo ocurre con 8 eventos posteriores que quedaron en la carpeta superior: 602 eventos con un remitente legible, una sola cuenta.
+**Observado.** [`extract.py`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/scripts/streeling_fixtures/psychohistory/psy-024/extract.py) lee los 594 archivos de [`state/triggers/archived/`](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/state/triggers/archived) en el commit `4b03838` y sustituye cada identidad por una etiqueta antes de escribir [`observed-input.json`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/fixtures/psychohistory/psy-024/observed-input.json). Los **594** eventos archivados, del 2026-03-20 al 2026-07-16, llevan todos el mismo `sender`, etiquetado como *cuenta A* (*account A* en los datos), y el mismo `repo`. Lo mismo ocurre con 8 eventos posteriores que quedaron en la carpeta superior: 602 eventos con un remitente legible, una sola cuenta.
 
 El [archivo del flujo de trabajo en el commit fijado](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/.github/workflows/demerzel-driver-triggers.yml#L75), una versión posterior de la que escribió estos archivos (no se leyeron las versiones anteriores), asigna a `sender` el valor `github.actor`, que GitHub [define](https://docs.github.com/en/actions/reference/workflows-and-actions/contexts) como «The username of the user that triggered the initial workflow run» (el nombre de usuario de quien desencadenó la ejecución inicial del flujo de trabajo), y a `repo`, el nombre del repositorio en el que se ejecuta. Por tanto:
 
@@ -53,7 +53,7 @@ Tome el peor caso para «un solo remitente»: cada uno de los 12 archivos elimin
 
 ## 2. Una escala para N
 
-**Sintético.** [`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/fixtures/psychohistory/psy-024/scenarios.json) define conjuntos imaginarios de 14 actores, el número que da el principio clave del departamento; [`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/scripts/streeling_fixtures/psychohistory/psy-024/analyze.py) calcula:
+**Sintético.** [`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/fixtures/psychohistory/psy-024/scenarios.json) define conjuntos imaginarios de 14 actores, el número que da el principio clave del departamento; [`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/scripts/streeling_fixtures/psychohistory/psy-024/analyze.py) calcula:
 
 | Conjunto imaginario | H | N | Número de media cobertura | Dispersión relativa |
 |---|---|---|---|---|
@@ -129,7 +129,7 @@ Un registro nuevo etiqueta cada evento con un identificador de *persona*: 1,400 
 
 **Observado, fijado en Demerzel `4b03838800dcd4894f1e026461979bff1d985ca8`:** los archivos enlazados o nombrados más arriba y los 1,599 commits que conducen al commit fijado. `extract.py` se detiene si un valor fijado difiere.
 
-**Fixture.** `python -I -B scripts/streeling_fixtures/psychohistory/psy-024/extract.py`, y después `analyze.py`; `--check` compara una ejecución nueva con [`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/fixtures/psychohistory/psy-024/results.json). El [README](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/fixtures/psychohistory/psy-024/README.md) da la regla de etiquetado, los comandos de git y las comprobaciones.
+**Fixture.** `python -I -B scripts/streeling_fixtures/psychohistory/psy-024/extract.py`, y después `analyze.py`; `--check` compara una ejecución nueva con [`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/fixtures/psychohistory/psy-024/results.json). El [README](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/fixtures/psychohistory/psy-024/README.md) da la regla de etiquetado, los comandos de git y las comprobaciones.
 
 **Referencias de método.** Simpson, E. H. (1949), «Measurement of Diversity», *Nature* 163, 688 (la suma de los cuadrados de las proporciones). Laakso, M., y Taagepera, R. (1979), «'Effective' Number of Parties: A Measure with Application to West Europe», *Comparative Political Studies* 12(1), 3–27 (N = 1/H). Avelino, G., Passos, L., Hora, A., y Valente, M. T. (2016), «A Novel Approach for Estimating Truck Factors», *24th IEEE International Conference on Program Comprehension*, 1–10.
 
