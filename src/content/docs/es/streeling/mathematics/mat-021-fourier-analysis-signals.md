@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **MAT-021** · Análisis de Fourier y señales · intermedio · 50 minutos
 
-Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/courses/mathematics/es/mat-021-fourier-analysis-signals.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses/mathematics/es/mat-021-fourier-analysis-signals.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MAT-004](../../mathematics/mat-004-vectors-matrices-norms/)
 :::

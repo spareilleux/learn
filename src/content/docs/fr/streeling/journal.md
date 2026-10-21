@@ -48,6 +48,10 @@ Coche un module une fois étudié. Sous **Notes**, ajoute une entrée datée : c
 
 - [ ] [INF-001 · L'entropie de la gouvernance](../information-theory/inf-001-entropy-of-governance/) <!-- inf-001-entropy-of-governance -->
 
+### Recherche sur IX
+
+- [ ] [IXR-001 · Des flux sous budget](../ix-research/ixr-001-streams-under-budgets/) <!-- ixr-001-streams-under-budgets -->
+
 ### Mathématiques
 
 - [ ] [MAT-001 · Stratégies de démonstration](../mathematics/mat-001-proof-strategies/) <!-- mat-001-proof-strategies -->

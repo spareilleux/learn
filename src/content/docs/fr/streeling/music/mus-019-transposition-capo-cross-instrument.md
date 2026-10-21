@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **MUS-019** · Transposition, capodastre et équivalence entre instruments · intermédiaire · 45 minutes
 
-Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/courses/music/fr/mus-019-transposition-capo-cross-instrument.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses/music/fr/mus-019-transposition-capo-cross-instrument.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MUS-009](../../music/mus-009-tuning-fretboard-geometry/), [MUS-020](../../music/mus-020-set-classes-interval-vectors-prime-forms/)
 :::

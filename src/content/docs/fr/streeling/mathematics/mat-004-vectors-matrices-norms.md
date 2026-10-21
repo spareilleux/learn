@@ -9,7 +9,7 @@ sidebar:
 :::note[Streeling University]
 **MAT-004** · Vecteurs, matrices, normes et applications linéaires · débutant · 45 minutes
 
-Généré par le département *Mathématiques* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/courses/mathematics/fr/mat-004-vectors-matrices-norms.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Mathématiques* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses/mathematics/fr/mat-004-vectors-matrices-norms.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MAT-001](../../mathematics/mat-001-proof-strategies/)
 :::
