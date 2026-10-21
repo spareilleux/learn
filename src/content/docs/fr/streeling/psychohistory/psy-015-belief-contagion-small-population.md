@@ -4,12 +4,13 @@ description: Contagion des croyances dans une petite population — Psychohistoi
 sidebar:
   label: PSY-015 · Contagion des croyances dans une petite population
   order: 15
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/psychohistory/fr/psy-015-belief-contagion-small-population.fr.md
 ---
 
 :::note[Streeling University]
 **PSY-015** · Contagion des croyances dans une petite population · intermédiaire · 45 minutes
 
-Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/courses/psychohistory/fr/psy-015-belief-contagion-small-population.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/fr/psy-015-belief-contagion-small-population.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MAT-020](../../mathematics/mat-020-markov-chains-hmm/), [MAT-024](../../mathematics/mat-024-dynamical-systems-stability-feedback/)
 :::

@@ -4,12 +4,13 @@ description: Altura, grafía e identidad enarmónica — Música
 sidebar:
   label: MUS-007 · Altura, grafía e identidad enarmónica
   order: 7
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/music/es/mus-007-pitch-spelling-enharmonic-identity.es.md
 ---
 
 :::note[Streeling University]
 **MUS-007** · Altura, grafía e identidad enarmónica · principiante · 45 minutos
 
-Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/courses/music/es/mus-007-pitch-spelling-enharmonic-identity.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/music/es/mus-007-pitch-spelling-enharmonic-identity.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MUS-001](../../music/mus-001-what-is-a-chord/)
 :::

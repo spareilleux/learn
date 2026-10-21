@@ -4,12 +4,13 @@ description: "Horizontes de predicción: con qué rapidez crecen los errores peq
 sidebar:
   label: PSY-014 · Horizontes de predicción
   order: 14
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/psychohistory/es/psy-014-prediction-horizons.es.md
 ---
 
 :::note[Streeling University]
 **PSY-014** · Horizontes de predicción: con qué rapidez crecen los errores pequeños · intermedio · 45 minutos
 
-Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/courses/psychohistory/es/psy-014-prediction-horizons.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/es/psy-014-prediction-horizons.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MAT-024](../../mathematics/mat-024-dynamical-systems-stability-feedback/)
 :::

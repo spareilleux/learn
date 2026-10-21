@@ -4,12 +4,13 @@ description: Fondements de la musicologie — Musicologie
 sidebar:
   label: MCL-002 · Forme et structure musicales
   order: 2
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/musicology/fr/mcl-002-musical-form.fr.md
 ---
 
 :::note[Streeling University]
 **MCL-002** · Fondements de la musicologie · beginner-intermediate · 45 minutes
 
-Généré par le département *Musicologie* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/courses/musicology/fr/mcl-002-musical-form.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Musicologie* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/musicology/fr/mcl-002-musical-form.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MCL-001](../../musicology/mcl-001-how-music-evolves/)
 :::

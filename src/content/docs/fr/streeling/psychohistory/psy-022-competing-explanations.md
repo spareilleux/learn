@@ -4,12 +4,13 @@ description: "Explications concurrentes : comparer des modèles sur peu de donn�
 sidebar:
   label: PSY-022 · Explications concurrentes
   order: 22
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/psychohistory/fr/psy-022-competing-explanations.fr.md
 ---
 
 :::note[Streeling University]
 **PSY-022** · Explications concurrentes : comparer des modèles sur peu de données · intermédiaire · 45 minutes
 
-Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/courses/psychohistory/fr/psy-022-competing-explanations.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/fr/psy-022-competing-explanations.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PSY-008](../../psychohistory/psy-008-bursts-are-not-rates/), [MAT-009](../../mathematics/mat-009-estimation-uncertainty-sampling/)
 :::

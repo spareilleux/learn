@@ -4,12 +4,13 @@ description: ¿Es una ley de potencia? Dieciocho recuentos de citas — Psicohis
 sidebar:
   label: PSY-007 · ¿Es una ley de potencia? Dieciocho recuentos de citas
   order: 7
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/psychohistory/es/psy-007-power-law-or-not.es.md
 ---
 
 :::note[Streeling University]
 **PSY-007** · ¿Es una ley de potencia? Dieciocho recuentos de citas · intermedio · 45 minutos
 
-Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/courses/psychohistory/es/psy-007-power-law-or-not.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/es/psy-007-power-law-or-not.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PSY-001](../../psychohistory/psy-001-intro-fractal-compounding/), [MAT-009](../../mathematics/mat-009-estimation-uncertainty-sampling/)
 :::

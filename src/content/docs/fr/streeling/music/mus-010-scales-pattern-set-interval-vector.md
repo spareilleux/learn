@@ -4,12 +4,13 @@ description: Formules de gammes, ensembles et vecteur d'intervalles diatonique �
 sidebar:
   label: MUS-010 · Formules de gammes, ensembles et vecteur d'intervalles diatonique
   order: 10
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/music/fr/mus-010-scales-pattern-set-interval-vector.fr.md
 ---
 
 :::note[Streeling University]
 **MUS-010** · Formules de gammes, ensembles et vecteur d'intervalles diatonique · intermédiaire · 60 minutes
 
-Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/courses/music/fr/mus-010-scales-pattern-set-interval-vector.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/music/fr/mus-010-scales-pattern-set-interval-vector.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MUS-008](../../music/mus-008-intervals-inversion-compound/), [MAT-022](../../mathematics/mat-022-symmetry-groups-invariants/)
 :::

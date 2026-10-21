@@ -4,12 +4,13 @@ description: "Cuando la medida se convierte en objetivo: las citas como indicado
 sidebar:
   label: PSY-020 · Cuando la medida se convierte en objetivo
   order: 20
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/psychohistory/es/psy-020-goodhart-and-reflexivity.es.md
 ---
 
 :::note[Streeling University]
 **PSY-020** · Cuando la medida se convierte en objetivo: las citas como indicador sustituto · intermedio · 40 minutos
 
-Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/courses/psychohistory/es/psy-020-goodhart-and-reflexivity.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/es/psy-020-goodhart-and-reflexivity.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PSY-001](../../psychohistory/psy-001-intro-fractal-compounding/), [PSY-011](../../psychohistory/psy-011-measurement-change-or-system-change/)
 :::

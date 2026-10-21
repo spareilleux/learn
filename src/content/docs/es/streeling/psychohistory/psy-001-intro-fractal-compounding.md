@@ -4,12 +4,13 @@ description: Fundamentos de Psicohistoria — Psicohistoria
 sidebar:
   label: PSY-001 · Introducción al Compuesto Fractal
   order: 1
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/psychohistory/es/psy-001-intro-fractal-compounding.es.md
 ---
 
 :::note[Streeling University]
 **PSY-001** · Fundamentos de Psicohistoria · intermedio · 30 minutos
 
-Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/courses/psychohistory/es/psy-001-intro-fractal-compounding.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/es/psy-001-intro-fractal-compounding.es.md) · [Mi diario](../../journal/)
 :::
 
 > **Departamento de Psicohistoria** | Etapa: Albedo — la purificación (Intermedio) | Duración: 30 minutos

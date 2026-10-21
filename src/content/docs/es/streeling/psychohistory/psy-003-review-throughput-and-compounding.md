@@ -4,12 +4,13 @@ description: Medir la mejora recursiva a lo largo de la revisión y la publicaci
 sidebar:
   label: PSY-003 · Medir la mejora recursiva a lo largo de la revisión y la publicación
   order: 3
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/psychohistory/es/psy-003-review-throughput-and-compounding.es.md
 ---
 
 :::note[Streeling University]
 **PSY-003** · Medir la mejora recursiva a lo largo de la revisión y la publicación · intermedio · 40 minutos
 
-Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/courses/psychohistory/es/psy-003-review-throughput-and-compounding.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/es/psy-003-review-throughput-and-compounding.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PSY-001](../../psychohistory/psy-001-intro-fractal-compounding/), [PSY-002](../../psychohistory/psy-002-governance-phase-transitions/)
 :::

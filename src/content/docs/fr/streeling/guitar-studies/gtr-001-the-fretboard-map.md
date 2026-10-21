@@ -4,12 +4,13 @@ description: Fondamentaux de la guitare — Études de guitare
 sidebar:
   label: GTR-001 · La carte du manche
   order: 1
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar-studies/fr/gtr-001-the-fretboard-map.fr.md
 ---
 
 :::note[Streeling University]
 **GTR-001** · Fondamentaux de la guitare · débutant · 30 minutes
 
-Généré par le département *Études de guitare* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/courses/guitar-studies/fr/gtr-001-the-fretboard-map.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Études de guitare* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/fr/gtr-001-the-fretboard-map.fr.md) · [Mon journal](../../journal/)
 :::
 
 > **Département d'études de guitare** | Stade : Nigredo (Débutant) | Durée : 30 minutes

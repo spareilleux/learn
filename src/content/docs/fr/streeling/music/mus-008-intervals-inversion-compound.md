@@ -4,12 +4,13 @@ description: Intervalles, renversements et intervalles composés — Musique
 sidebar:
   label: MUS-008 · Intervalles, renversements et intervalles composés
   order: 8
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/music/fr/mus-008-intervals-inversion-compound.fr.md
 ---
 
 :::note[Streeling University]
 **MUS-008** · Intervalles, renversements et intervalles composés · débutant · 45 minutes
 
-Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/courses/music/fr/mus-008-intervals-inversion-compound.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/music/fr/mus-008-intervals-inversion-compound.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MUS-007](../../music/mus-007-pitch-spelling-enharmonic-identity/)
 :::

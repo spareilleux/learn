@@ -4,12 +4,13 @@ description: Formules d'accords, notes essentielles et redoublements — Musique
 sidebar:
   label: MUS-012 · Formules d'accords, notes essentielles et redoublements
   order: 12
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/music/fr/mus-012-chord-formulas-essential-tones-doubling.fr.md
 ---
 
 :::note[Streeling University]
 **MUS-012** · Formules d'accords, notes essentielles et redoublements · intermédiaire · 45 minutes
 
-Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/courses/music/fr/mus-012-chord-formulas-essential-tones-doubling.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/music/fr/mus-012-chord-formulas-essential-tones-doubling.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MUS-001](../../music/mus-001-what-is-a-chord/), [MUS-008](../../music/mus-008-intervals-inversion-compound/)
 :::

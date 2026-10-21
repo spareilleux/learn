@@ -4,12 +4,13 @@ description: Combinar pronosticadores que comparten una fuente — Psicohistoria
 sidebar:
   label: PSY-019 · Combinar pronosticadores que comparten una fuente
   order: 19
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/psychohistory/es/psy-019-combining-correlated-forecasters.es.md
 ---
 
 :::note[Streeling University]
 **PSY-019** · Combinar pronosticadores que comparten una fuente · intermedio · 45 minutos
 
-Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/courses/psychohistory/es/psy-019-combining-correlated-forecasters.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/es/psy-019-combining-correlated-forecasters.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MAT-009](../../mathematics/mat-009-estimation-uncertainty-sampling/), [PSY-004](../../psychohistory/psy-004-how-large-is-large/)
 :::

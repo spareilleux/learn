@@ -4,12 +4,13 @@ description: Les prévisions probabilistes et le score de Brier — Psychohistoi
 sidebar:
   label: PSY-016 · Les prévisions probabilistes et le score de Brier
   order: 16
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/psychohistory/fr/psy-016-brier-score.fr.md
 ---
 
 :::note[Streeling University]
 **PSY-016** · Les prévisions probabilistes et le score de Brier · intermédiaire · 45 minutes
 
-Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/courses/psychohistory/fr/psy-016-brier-score.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/fr/psy-016-brier-score.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PSY-005](../../psychohistory/psy-005-persistence-baseline/)
 :::
