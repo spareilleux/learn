@@ -4,13 +4,12 @@ description: Chaînes de Markov et modèles de Markov cachés — Mathématiques
 sidebar:
   label: MAT-020 · Chaînes de Markov et modèles de Markov cachés
   order: 20
-editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/mathematics/fr/mat-020-markov-chains-hmm.fr.md
 ---
 
 :::note[Streeling University]
 **MAT-020** · Chaînes de Markov et modèles de Markov cachés · intermédiaire · 50 minutes
 
-Généré par le département *Mathématiques* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/mathematics/fr/mat-020-markov-chains-hmm.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Mathématiques* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/courses/mathematics/fr/mat-020-markov-chains-hmm.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MAT-008](../../mathematics/mat-008-probability-conditional-reasoning/), [MAT-019](../../mathematics/mat-019-graphs-centrality-spectral/)
 :::

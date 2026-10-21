@@ -4,13 +4,12 @@ description: Les deltas de Grothendieck — ce que mesure la distance de contenu
 sidebar:
   label: MUS-022 · Les deltas de Grothendieck
   order: 19
-editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/music/fr/mus-022-grothendieck-deltas-icv-distance.fr.md
 ---
 
 :::note[Streeling University]
 **MUS-022** · Les deltas de Grothendieck — ce que mesure la distance de contenu intervallique · intermediate-to-advanced · 60 minutes
 
-Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/music/fr/mus-022-grothendieck-deltas-icv-distance.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/courses/music/fr/mus-022-grothendieck-deltas-icv-distance.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MUS-020](../../music/mus-020-set-classes-interval-vectors-prime-forms/), [MAT-022](../../mathematics/mat-022-symmetry-groups-invariants/)
 :::

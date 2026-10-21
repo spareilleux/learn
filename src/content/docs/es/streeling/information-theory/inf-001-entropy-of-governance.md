@@ -4,13 +4,12 @@ description: Teoría de la información aplicada a la gobernanza — Teoría de 
 sidebar:
   label: INF-001 · La entropía de la gobernanza
   order: 1
-editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/information-theory/es/inf-001-entropy-of-governance.es.md
 ---
 
 :::note[Streeling University]
 **INF-001** · Teoría de la información aplicada a la gobernanza · principiante · 25 minutos
 
-Generado por el departamento *Teoría de la información* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/information-theory/es/inf-001-entropy-of-governance.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Teoría de la información* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/courses/information-theory/es/inf-001-entropy-of-governance.es.md) · [Mi diario](../../journal/)
 :::
 
 > **Departamento de Teoría de la Información** | Etapa: Nigredo (Principiante) | Duración: 25 minutos

@@ -4,13 +4,12 @@ description: Afinación y geometría del mástil — Música
 sidebar:
   label: MUS-009 · Afinación y geometría del mástil
   order: 9
-editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/music/es/mus-009-tuning-fretboard-geometry.es.md
 ---
 
 :::note[Streeling University]
 **MUS-009** · Afinación y geometría del mástil · principiante · 45 minutos
 
-Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/music/es/mus-009-tuning-fretboard-geometry.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/courses/music/es/mus-009-tuning-fretboard-geometry.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MUS-007](../../music/mus-007-pitch-spelling-enharmonic-identity/), [MAT-004](../../mathematics/mat-004-vectors-matrices-norms/), [PHY-001](../../physics/phy-001-science-of-guitar-sound/)
 :::

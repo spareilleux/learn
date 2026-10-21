@@ -4,13 +4,12 @@ description: Fundamentos de teoría musical — Música
 sidebar:
   label: MUS-001 · ¿Qué es un acorde?
   order: 1
-editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/music/es/mus-001-what-is-a-chord.es.md
 ---
 
 :::note[Streeling University]
 **MUS-001** · Fundamentos de teoría musical · principiante · 25 minutos
 
-Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/music/es/mus-001-what-is-a-chord.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/courses/music/es/mus-001-what-is-a-chord.es.md) · [Mi diario](../../journal/)
 :::
 
 > **Departamento de Música** | Etapa: Nigredo (Principiante) | Duración: 25 minutos

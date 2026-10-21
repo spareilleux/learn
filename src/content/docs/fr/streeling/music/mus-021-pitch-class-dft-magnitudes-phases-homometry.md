@@ -4,13 +4,12 @@ description: La TFD des classes de hauteurs — modules, phases et homométrie �
 sidebar:
   label: MUS-021 · La TFD des classes de hauteurs
   order: 18
-editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/music/fr/mus-021-pitch-class-dft-magnitudes-phases-homometry.fr.md
 ---
 
 :::note[Streeling University]
 **MUS-021** · La TFD des classes de hauteurs — modules, phases et homométrie · intermediate-to-advanced · 75 minutes
 
-Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/music/fr/mus-021-pitch-class-dft-magnitudes-phases-homometry.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/courses/music/fr/mus-021-pitch-class-dft-magnitudes-phases-homometry.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MUS-020](../../music/mus-020-set-classes-interval-vectors-prime-forms/), [MAT-021](../../mathematics/mat-021-fourier-analysis-signals/)
 :::

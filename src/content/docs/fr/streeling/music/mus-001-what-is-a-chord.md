@@ -4,13 +4,12 @@ description: Fondements de la théorie musicale — Musique
 sidebar:
   label: MUS-001 · Qu'est-ce qu'un accord ?
   order: 1
-editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/music/fr/mus-001-what-is-a-chord.fr.md
 ---
 
 :::note[Streeling University]
 **MUS-001** · Fondements de la théorie musicale · débutant · 25 minutes
 
-Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/music/fr/mus-001-what-is-a-chord.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/courses/music/fr/mus-001-what-is-a-chord.fr.md) · [Mon journal](../../journal/)
 :::
 
 > **Département de musique** | Stade : Nigredo (Débutant) | Durée : 25 minutes

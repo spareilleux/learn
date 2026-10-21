@@ -4,13 +4,12 @@ description: Systèmes dynamiques, stabilité et rétroaction — Mathématiques
 sidebar:
   label: MAT-024 · Systèmes dynamiques, stabilité et rétroaction
   order: 24
-editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/mathematics/fr/mat-024-dynamical-systems-stability-feedback.fr.md
 ---
 
 :::note[Streeling University]
 **MAT-024** · Systèmes dynamiques, stabilité et rétroaction · intermédiaire · 60 minutes
 
-Généré par le département *Mathématiques* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/mathematics/fr/mat-024-dynamical-systems-stability-feedback.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Mathématiques* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/courses/mathematics/fr/mat-024-dynamical-systems-stability-feedback.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MAT-005](../../mathematics/mat-005-symmetric-eigenproblems/), [MAT-006](../../mathematics/mat-006-svd-low-rank-approximation/)
 :::

@@ -4,13 +4,12 @@ description: La calibration à partir de six observations — Psychohistoire
 sidebar:
   label: PSY-017 · La calibration à partir de six observations
   order: 17
-editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/psychohistory/fr/psy-017-calibration-with-six-observations.fr.md
 ---
 
 :::note[Streeling University]
 **PSY-017** · La calibration à partir de six observations · intermédiaire · 45 minutes
 
-Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/fr/psy-017-calibration-with-six-observations.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/courses/psychohistory/fr/psy-017-calibration-with-six-observations.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MAT-009](../../mathematics/mat-009-estimation-uncertainty-sampling/), [PSY-004](../../psychohistory/psy-004-how-large-is-large/)
 :::
@@ -21,7 +20,7 @@ Prérequis: [MAT-009](../../mathematics/mat-009-estimation-uncertainty-sampling/
 
 Vous remonterez d'un enregistrement de calibration jusqu'aux fichiers qui fondent ses décomptes, vous placerez un intervalle exact sur une proportion calculée sur six cas, vous calculerez à quelle fréquence un prévisionniste calibré présente le même décompte, vous trouverez la taille d'échantillon qui sépare deux taux, et vous suivrez une règle de correction alimentée par six observations à la fois. **Question de projet :** un fichier de croyances consigne que 2 croyances à confiance élevée sur 6 ont été révisées par la suite, et décale un seuil de −0,1. Que peuvent dire six observations sur la calibration ?
 
-[PSY-002](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/state/streeling/courses/psychohistory/en/psy-002-governance-phase-transitions.md) range l'asymétrie de la distribution des croyances parmi six signaux d'un changement de régime imminent ; ce module demande quel poids peut avoir un seul petit décompte relatif aux croyances. [PSY-004](../../psychohistory/psy-004-how-large-is-large/) construit l'intervalle exact repris ici, [PSY-016](../../psychohistory/psy-016-brier-score/) évalue des prévisions probabilistes avec le score de Brier, et [PSY-025](../../psychohistory/psy-025-capstone-preregistered-forecast/) utilise les deux.
+[PSY-002](../../psychohistory/psy-002-governance-phase-transitions/) range l'asymétrie de la distribution des croyances parmi six signaux d'un changement de régime imminent ; ce module demande quel poids peut avoir un seul petit décompte relatif aux croyances. [PSY-004](../../psychohistory/psy-004-how-large-is-large/) construit l'intervalle exact repris ici, [PSY-016](../../psychohistory/psy-016-brier-score/) évalue des prévisions probabilistes avec le score de Brier, et [PSY-025](../../psychohistory/psy-025-capstone-preregistered-forecast/) utilise les deux.
 
 ## 1. Lire l'enregistrement, puis le recompter
 
@@ -37,7 +36,7 @@ Un bloc `calibration` stocke `threshold_nudge` −0,1, `applied_delta` 0,0, `pri
 
 Trois fichiers épinglés énoncent la règle. La [politique](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/policies/ml-governance-feedback-policy.yaml#L57) définit le taux comme « Proportion of high-confidence beliefs that were later revised » (la proportion des croyances à confiance élevée révisées par la suite). La [spécification de la chaîne de traitement](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/pipelines/ml-feedback-loop.ixql#L41) recommande un changement quand le taux dépasse 0,15, d'une ampleur de `max(-0.1, -1 * overconfidence_rate * 0.5)`. Le script d'application (ligne 128) ajoute cet ajustement au total stocké et borne le total à ±0,10.
 
-**Calculé.** Ce producteur ([`confidence_calibrator.py`](https://github.com/GuitarAlchemist/ix/blob/6418fcc69012108af266544ec4cf5a931a8f78e8/scripts/confidence_calibrator.py), lu au commit `6418fcc` d'ix, hors du jeu d'essai) compte selon cette règle : tout fichier de croyances, actuel ou archivé, dont la confiance vaut au moins 0,85 est « à confiance élevée », et ceux d'entre eux qui sont archivés sont « révisés ». [`extract.py`](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/scripts/streeling_fixtures/psychohistory/psy-017/extract.py) fige les 21 fichiers de croyances épinglés dans [`observed-input.json`](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/fixtures/psychohistory/psy-017/observed-input.json), et [`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/scripts/streeling_fixtures/psychohistory/psy-017/analyze.py) leur applique cette règle :
+**Calculé.** Ce producteur ([`confidence_calibrator.py`](https://github.com/GuitarAlchemist/ix/blob/6418fcc69012108af266544ec4cf5a931a8f78e8/scripts/confidence_calibrator.py), lu au commit `6418fcc` d'ix, hors du jeu d'essai) compte selon cette règle : tout fichier de croyances, actuel ou archivé, dont la confiance vaut au moins 0,85 est « à confiance élevée », et ceux d'entre eux qui sont archivés sont « révisés ». [`extract.py`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/scripts/streeling_fixtures/psychohistory/psy-017/extract.py) fige les 21 fichiers de croyances épinglés dans [`observed-input.json`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/fixtures/psychohistory/psy-017/observed-input.json), et [`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/scripts/streeling_fixtures/psychohistory/psy-017/analyze.py) leur applique cette règle :
 
 | Fichier de croyances | Valeur de vérité | Confiance | Groupe |
 |---|---|---|---|
@@ -48,7 +47,7 @@ Trois fichiers épinglés énoncent la règle. La [politique](https://github.com
 | `2026-03-17-consumer-repo-integration-status` | F | 0,90 | archivé : révisé |
 | `2026-03-17-ga-governance-integration` | F | 0,85 | archivé : révisé |
 
-Quatre fichiers actuels et deux archivés font six, les deux archivés sont ceux que nomme l'énoncé, et la phrase reconstruite à partir du recomptage est identique à la phrase enregistrée ([`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/fixtures/psychohistory/psy-017/results.json), `recount`) : c'est un même calcul reproduit, non une seconde source. Les quatre autres fichiers actuels sont à 0,80 ou 0,82, les onze autres fichiers archivés à 0,5 ou 0, et les neuf croyances du fichier YAML ne sont jamais comptées.
+Quatre fichiers actuels et deux archivés font six, les deux archivés sont ceux que nomme l'énoncé, et la phrase reconstruite à partir du recomptage est identique à la phrase enregistrée ([`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/fixtures/psychohistory/psy-017/results.json), `recount`) : c'est un même calcul reproduit, non une seconde source. Les quatre autres fichiers actuels sont à 0,80 ou 0,82, les onze autres fichiers archivés à 0,5 ou 0, et les neuf croyances du fichier YAML ne sont jamais comptées.
 
 L'enregistrement se compte lui-même : son propre 0,92 le range parmi les croyances à confiance élevée. Lui et `remediation-effectiveness` sont tous deux écrits par le script d'application, leurs confiances recopiées depuis des recommandations ; sans ces deux-là, la même règle donne 2 sur 4. Les six fichiers n'ont pas non plus été mis à jour pour la dernière fois à des dates comparables : les deux archivés 209,7 et 209,6 jours avant l'enregistrement, les quatre actuels 31,5 ; 30,5 ; 0 et 0 jours avant lui.
 
@@ -64,7 +63,7 @@ Un prévisionniste est *calibré* quand, parmi les énoncés qu'il fait avec la 
 
 Traitons les six croyances comme des essais indépendants partageant un même taux de révision inconnu. L'*intervalle exact à 95 %* (bilatéral ; Clopper et Pearson ; PSY-004 en montre la construction) retient tous les taux sous lesquels le nombre observé ne tombe dans aucune des deux queues de 2,5 %. **Calculé :** pour 2 sur 6, il va de **0,0433 à 0,7772**, et il contient 15 %, 10 % et 5 %.
 
-À quelle fréquence un prévisionniste dont le taux est connu présente-t-il deux révisions ou plus sur six ? **Calculé sous des taux supposés** ([`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/fixtures/psychohistory/psy-017/scenarios.json)), pourcentages arrondis à deux décimales :
+À quelle fréquence un prévisionniste dont le taux est connu présente-t-il deux révisions ou plus sur six ? **Calculé sous des taux supposés** ([`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/fixtures/psychohistory/psy-017/scenarios.json)), pourcentages arrondis à deux décimales :
 
 | Prévisionniste supposé | Vrai taux de révision | P(2 ou plus sur 6) |
 |---|---|---|
@@ -139,7 +138,7 @@ La politique prévoit cette calibration chaque semaine : 13 cycles font donc un 
 
 **Observé, épinglé au commit `4b03838800dcd4894f1e026461979bff1d985ca8` de Demerzel :** la croyance de calibration, les vingt autres fichiers de croyances, la liste YAML de croyances, le `SUPERSEDED.md` de l'archive, la politique, la spécification de la chaîne de traitement et le script d'application dont les liens figurent plus haut.
 
-**Jeu d'essai.** Le [README](https://github.com/GuitarAlchemist/Demerzel/blob/bb9a078e4560dd538fe6d17325d0c9cfb4007b6d/state/streeling/fixtures/psychohistory/psy-017/README.md) donne les commandes, les 32 autocontrôles et les témoins négatifs.
+**Jeu d'essai.** Le [README](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/fixtures/psychohistory/psy-017/README.md) donne les commandes, les 32 autocontrôles et les témoins négatifs.
 
 **Références de méthode.** Clopper, C. J., et Pearson, E. S. (1934), « The Use of Confidence or Fiducial Limits Illustrated in the Case of the Binomial », *Biometrika* 26(4), 404–413, [doi:10.1093/biomet/26.4.404](https://doi.org/10.1093/biomet/26.4.404). Lichtenstein, S., Fischhoff, B., et Phillips, L. D. (1982), « Calibration of probabilities: The state of the art to 1980 », dans Kahneman, D., Slovic, P., et Tversky, A. (dir.), *Judgment under Uncertainty: Heuristics and Biases*, Cambridge University Press, 306–334.
 

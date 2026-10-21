@@ -4,13 +4,12 @@ description: MDS clásico y preservación de distancias — Matemáticas
 sidebar:
   label: MAT-015 · MDS clásico y preservación de distancias
   order: 15
-editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/mathematics/es/mat-015-classical-mds-distance-preservation.es.md
 ---
 
 :::note[Streeling University]
 **MAT-015** · MDS clásico y preservación de distancias · intermedio · 50 minutos
 
-Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/mathematics/es/mat-015-classical-mds-distance-preservation.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/courses/mathematics/es/mat-015-classical-mds-distance-preservation.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MAT-013](../../mathematics/mat-013-distances-kernels-psd/), [MAT-014](../../mathematics/mat-014-pca-variance-preservation/)
 :::

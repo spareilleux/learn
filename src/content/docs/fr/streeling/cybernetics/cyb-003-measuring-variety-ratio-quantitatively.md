@@ -4,13 +4,12 @@ description: Cybernétique
 sidebar:
   label: CYB-003 · Mesurer quantitativement le ratio de variété
   order: 3
-editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cybernetics/fr/cyb-003-measuring-variety-ratio-quantitatively.fr.md
 ---
 
 :::note[Streeling University]
 **CYB-003**
 
-Généré par le département *Cybernétique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/fr/cyb-003-measuring-variety-ratio-quantitatively.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Cybernétique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/courses/cybernetics/fr/cyb-003-measuring-variety-ratio-quantitatively.fr.md) · [Mon journal](../../journal/)
 :::
 
 **Département :** Cybernétique

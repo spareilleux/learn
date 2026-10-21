@@ -4,13 +4,12 @@ description: Accordage et géométrie du manche — Musique
 sidebar:
   label: MUS-009 · Accordage et géométrie du manche
   order: 9
-editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/music/fr/mus-009-tuning-fretboard-geometry.fr.md
 ---
 
 :::note[Streeling University]
 **MUS-009** · Accordage et géométrie du manche · débutant · 45 minutes
 
-Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/music/fr/mus-009-tuning-fretboard-geometry.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Musique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/courses/music/fr/mus-009-tuning-fretboard-geometry.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MUS-007](../../music/mus-007-pitch-spelling-enharmonic-identity/), [MAT-004](../../mathematics/mat-004-vectors-matrices-norms/), [PHY-001](../../physics/phy-001-science-of-guitar-sound/)
 :::
