@@ -33,3 +33,6 @@ sidebar:
 - [MUS-020 · Set Classes, Interval Vectors, the Z-Relation and Prime Forms — Two Packings, One Catalogue](mus-020-set-classes-interval-vectors-prime-forms/)
 - [MUS-021 · The Pitch-Class DFT — What the Magnitudes Keep, and What the Phases Add](mus-021-pitch-class-dft-magnitudes-phases-homometry/)
 - [MUS-022 · Grothendieck Deltas — What Interval-Content Distance Measures, and What It Cannot](mus-022-grothendieck-deltas-icv-distance/)
+- [MUS-023 · Plan Voice Leading Across a Whole Phrase](mus-023-plan-voice-leading-across-a-phrase/)
+- [MUS-024 · Preserve Attacks and Harmonic Boundaries](mus-024-preserve-attacks-and-harmonic-boundaries/)
+- [MUS-025 · Keep the Required Melody in a Voicing](mus-025-keep-the-melody-in-a-voicing/)

@@ -30,7 +30,7 @@ Ces modules ont été écrits par des départements IA et **n'ont pas été relu
 | [Théorie de l'information](information-theory/) | 5 | 5 | 5 |
 | [Recherche sur IX](ix-research/) | 1 | 1 | 1 |
 | [Mathématiques](mathematics/) | 25 | 25 | 25 |
-| [Musique](music/) | 22 | 22 | 22 |
+| [Musique](music/) | 25 | 25 | 25 |
 | [Musicologie](musicology/) | 3 | 3 | 3 |
 | [Science des réseaux](network-science/) | 6 | 6 | 6 |
 | [Philosophie](philosophy/) | 3 | 3 | 3 |

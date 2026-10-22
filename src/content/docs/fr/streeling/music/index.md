@@ -33,3 +33,6 @@ sidebar:
 - [MUS-020 · Classes d'ensembles, vecteurs d'intervalles, relation Z et formes premières — Deux tassements, un catalogue](mus-020-set-classes-interval-vectors-prime-forms/)
 - [MUS-021 · La TFD des classes de hauteurs — Ce que gardent les modules, ce qu'ajoutent les phases](mus-021-pitch-class-dft-magnitudes-phases-homometry/)
 - [MUS-022 · Les deltas de Grothendieck — Ce que mesure la distance de contenu intervallique, et ce qui lui échappe](mus-022-grothendieck-deltas-icv-distance/)
+- [MUS-023 · Planifier la conduite des voix sur une phrase entière](mus-023-plan-voice-leading-across-a-phrase/)
+- [MUS-024 · Préserver les attaques et les frontières harmoniques](mus-024-preserve-attacks-and-harmonic-boundaries/)
+- [MUS-025 · Garder la mélodie imposée dans un voicing](mus-025-keep-the-melody-in-a-voicing/)
