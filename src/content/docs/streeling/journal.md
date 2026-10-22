@@ -48,6 +48,10 @@ Tick a module once studied. Under **Notes**, add a dated entry: what I understoo
 
 - [ ] [INF-001 · The Entropy of Governance](../information-theory/inf-001-entropy-of-governance/) <!-- inf-001-entropy-of-governance -->
 
+### IX Research
+
+- [ ] [IXR-001 · Streams Under Budgets](../ix-research/ixr-001-streams-under-budgets/) <!-- ixr-001-streams-under-budgets -->
+
 ### Mathematics
 
 - [ ] [MAT-001 · Proof Strategies](../mathematics/mat-001-proof-strategies/) <!-- mat-001-proof-strategies -->

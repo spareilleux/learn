@@ -48,6 +48,10 @@ Marca un módulo una vez estudiado. En **Notas**, añade una entrada fechada: lo
 
 - [ ] [INF-001 · La entropía de la gobernanza](../information-theory/inf-001-entropy-of-governance/) <!-- inf-001-entropy-of-governance -->
 
+### Investigación sobre IX
+
+- [ ] [IXR-001 · Flujos con presupuesto](../ix-research/ixr-001-streams-under-budgets/) <!-- ixr-001-streams-under-budgets -->
+
 ### Matemáticas
 
 - [ ] [MAT-001 · Estrategias de demostración](../mathematics/mat-001-proof-strategies/) <!-- mat-001-proof-strategies -->
