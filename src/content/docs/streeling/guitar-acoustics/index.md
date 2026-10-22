@@ -11,4 +11,6 @@ sidebar:
 
 ## Modules
 
-No modules produced yet.
+- [GAS-001 · What an Open-String Recording Can Teach a Guitar WASM Engine](gas-001-open-string-audio-evidence/)
+- [GAS-002 · Test a Brightness Control in GA's Guitar Engine](gas-002-brightness-control-and-evaluation-gate/)
+- [GAS-003 · Calibrate an Open-E Decay Test for GA's Guitar Engine](gas-003-decay-calibration-open-e/)

@@ -3,7 +3,7 @@ title: Sheet Thickness from IX Coordinates to Proposed Scene Units
 description: Sheet Thickness from IX Coordinates to Proposed Scene Units — Physics
 sidebar:
   label: PHY-005 · Sheet Thickness from IX Coordinates to Proposed Scene Units
-  order: 2
+  order: 3
 editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/physics/en/phy-005-sheet-thickness-and-scene-units.md
 ---
 

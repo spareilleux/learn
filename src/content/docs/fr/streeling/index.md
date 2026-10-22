@@ -18,13 +18,13 @@ Ces modules ont été écrits par des départements IA et **n'ont pas été relu
 
 | Département | Modules | En français | En espagnol |
 |---|---|---|---|
-| [Ingénierie audio](audio-engineering/) | 1 | 1 | 1 |
+| [Ingénierie audio](audio-engineering/) | 4 | 4 | 4 |
 | [Sciences cognitives](cognitive-science/) | 1 | 1 | 1 |
 | [Informatique](computer-science/) | 5 | 3 | 3 |
 | [Cybernétique](cybernetics/) | 3 | 3 | 3 |
 | [Visualisation de données](data-visualization/) | 8 | 8 | 8 |
 | [Futurologie](futurology/) | 1 | 1 | 1 |
-| [Acoustique de la guitare et synthèse sonore](guitar-acoustics/) | 0 | 0 | 0 |
+| [Acoustique de la guitare et synthèse sonore](guitar-acoustics/) | 3 | 3 | 3 |
 | [Guitar Alchemist Academy](guitar-alchemist-academy/) | 3 | 3 | 3 |
 | [Études de guitare](guitar-studies/) | 2 | 2 | 2 |
 | [Théorie de l'information](information-theory/) | 1 | 1 | 1 |
@@ -34,7 +34,7 @@ Ces modules ont été écrits par des départements IA et **n'ont pas été relu
 | [Musicologie](musicology/) | 2 | 2 | 2 |
 | [Science des réseaux](network-science/) | 1 | 1 | 1 |
 | [Philosophie](philosophy/) | 1 | 1 | 1 |
-| [Physique](physics/) | 2 | 2 | 2 |
+| [Physique](physics/) | 3 | 3 | 3 |
 | [Gestion de produit et de projet](product-management/) | 1 | 1 | 1 |
 | [Psychohistoire](psychohistory/) | 25 | 25 | 25 |
 | [Sémiotique](semiotics/) | 2 | 2 | 2 |

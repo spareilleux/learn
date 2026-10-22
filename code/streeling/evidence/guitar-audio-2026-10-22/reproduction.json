@@ -1,0 +1,22 @@
+{
+  "rerun_at_utc": "2026-10-22T02:16:03.595045+00:00",
+  "python": "3.14.2",
+  "scope": "Offline rerun of unchanged archived Python measurement and synthetic benchmark scripts on verified publicly downloaded fixture bytes; no candidate render, IX binary, browser or listening test",
+  "measurements_exact_object_equality": true,
+  "synthetic_differences": [],
+  "synthetic_numeric_claims_reproduced": true,
+  "synthetic_claim_passes": false,
+  "commands": [
+    "python -X utf8 measure-pair.py --output measurements-rerun.json",
+    "python -X utf8 compare-time-frequency.py --output synthetic-rerun.json"
+  ],
+  "inputs": {
+    "compare-time-frequency.py": "40a4cfb79b3b133a3d1a0d4b224f151d20ebf1fa00a93ffedc8f282e38813129",
+    "deb-low-e-open.wav": "03a1965f275f0858be70476dab2bf55d2cbf2272ef7a50c61453d45e7f38b248",
+    "ga-engine-e2-open-4s.wav": "a78a70243a81aa79d806d9ef3db7baa1385c479505f7d5e97b8bf0c7866c3f98",
+    "measure-pair.py": "bf2da975a6090e92ce47bdc94b55bd470c77e0c5b90f4e2301500cd3d4f0b1ef"
+  },
+  "candidate_engine_and_comfyui_runs": false,
+  "browser_capture": false,
+  "human_or_learner_approval": false
+}

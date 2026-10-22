@@ -18,13 +18,13 @@ Estos módulos fueron escritos por departamentos de IA y **no han sido revisados
 
 | Departamento | Módulos | En francés | En español |
 |---|---|---|---|
-| [Ingeniería de audio](audio-engineering/) | 1 | 1 | 1 |
+| [Ingeniería de audio](audio-engineering/) | 4 | 4 | 4 |
 | [Ciencia cognitiva](cognitive-science/) | 1 | 1 | 1 |
 | [Ciencias de la computación](computer-science/) | 5 | 3 | 3 |
 | [Cibernética](cybernetics/) | 3 | 3 | 3 |
 | [Visualización de datos](data-visualization/) | 8 | 8 | 8 |
 | [Futurología](futurology/) | 1 | 1 | 1 |
-| [Acústica de la guitarra y síntesis sonora](guitar-acoustics/) | 0 | 0 | 0 |
+| [Acústica de la guitarra y síntesis sonora](guitar-acoustics/) | 3 | 3 | 3 |
 | [Guitar Alchemist Academy](guitar-alchemist-academy/) | 3 | 3 | 3 |
 | [Estudios de guitarra](guitar-studies/) | 2 | 2 | 2 |
 | [Teoría de la información](information-theory/) | 1 | 1 | 1 |
@@ -34,7 +34,7 @@ Estos módulos fueron escritos por departamentos de IA y **no han sido revisados
 | [Musicología](musicology/) | 2 | 2 | 2 |
 | [Ciencia de redes](network-science/) | 1 | 1 | 1 |
 | [Filosofía](philosophy/) | 1 | 1 | 1 |
-| [Física](physics/) | 2 | 2 | 2 |
+| [Física](physics/) | 3 | 3 | 3 |
 | [Gestión de productos y proyectos](product-management/) | 1 | 1 | 1 |
 | [Psicohistoria](psychohistory/) | 25 | 25 | 25 |
 | [Semiótica](semiotics/) | 2 | 2 | 2 |

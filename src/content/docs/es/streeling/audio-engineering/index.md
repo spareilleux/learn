@@ -12,3 +12,6 @@ sidebar:
 ## Módulos
 
 - [AUD-001 · EQ y compresión: por qué importa el orden en la cadena de señal](aud-001-eq-compression-order/)
+- [AUD-002 · Comparar un render de guitarra GA con el nivel de reproducción igualado](aud-002-level-matched-guitar-comparison/)
+- [AUD-003 · Preservar el ataque de una cuerda de guitarra durante el análisis espectral sin conexión](aud-003-transient-preservation-gate/)
+- [AUD-004 · Elegir pruebas con wavelets para un ataque de guitarra cambiante](aud-004-wavelet-guitar-attack-evidence/)

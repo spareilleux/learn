@@ -12,4 +12,5 @@ sidebar:
 ## Modules
 
 - [PHY-001 · La science du son de la guitare](phy-001-science-of-guitar-sound/)
+- [PHY-002 · Choisir une représentation temps-fréquence pour un transitoire de guitare](phy-002-time-frequency-guitar-transients/)
 - [PHY-005 · Épaisseur des feuilles : des coordonnées IX aux unités de scène proposées](phy-005-sheet-thickness-and-scene-units/)

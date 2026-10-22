@@ -3,7 +3,7 @@ title: "Grosor de láminas: de las coordenadas IX a las unidades de escena propu
 description: Grosor de láminas de las coordenadas IX a las unidades de escena propuestas — Física
 sidebar:
   label: PHY-005 · Grosor de láminas
-  order: 2
+  order: 3
 editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/physics/es/phy-005-sheet-thickness-and-scene-units.es.md
 ---
 
