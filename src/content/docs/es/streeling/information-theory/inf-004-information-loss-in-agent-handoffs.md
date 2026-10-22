@@ -3,7 +3,7 @@ title: Pérdida de información en los handoffs entre agentes
 description: Pérdida de información en los handoffs entre agentes — Teoría de la información
 sidebar:
   label: INF-004 · Pérdida de información en los handoffs entre agentes
-  order: 3
+  order: 4
 editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/information-theory/es/inf-004-information-loss-in-agent-handoffs.es.md
 ---
 

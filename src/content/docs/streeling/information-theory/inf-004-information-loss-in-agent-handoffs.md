@@ -3,7 +3,7 @@ title: Information Loss in Agent Handoffs
 description: Information Loss in Agent Handoffs — Information Theory
 sidebar:
   label: INF-004 · Information Loss in Agent Handoffs
-  order: 3
+  order: 4
 editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/information-theory/en/inf-004-information-loss-in-agent-handoffs.md
 ---
 

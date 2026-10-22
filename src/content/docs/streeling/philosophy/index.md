@@ -12,3 +12,5 @@ sidebar:
 ## Modules
 
 - [PHI-001 · How to Argue Well — Logic and Critical Thinking](phi-001-how-to-argue-well/)
+- [PHI-002 · When Is an Advisory Decision Justified?](phi-002-when-is-an-advisory-decision-justified/)
+- [PHI-003 · What Does “the Same Chord” Mean in GA Search?](phi-003-what-does-the-same-chord-mean/)

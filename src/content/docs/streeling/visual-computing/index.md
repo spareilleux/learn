@@ -13,8 +13,10 @@ sidebar:
 
 - [VC-001 · One Fretboard, Three Access Paths](vc-001-accessible-fretboard-paths/)
 - [VC-002 · Evidence for a Godot and React Observatory Bridge](vc-002-godot-react-bridge-evidence/)
+- [VC-003 · When Does Jitter Help a Voicing Cloud?](vc-003-jitter-and-voicing-cloud-distance/)
 - [VC-004 · A Capture Gate for the Godot Observatory](vc-004-godot-observatory-capture-gate/)
 - [VC-005 · Keep Craft Details through a Blender-to-Godot Asset Trial](vc-005-craft-details-through-blender-to-godot/)
+- [VC-006 · Test Fold-State Meaning in a Blender-to-Godot Scene](vc-006-origami-fold-state-scene-trial/)
 - [VC-007 · Keep Weave Crossings Correct across a Godot Scene Boundary](vc-007-weave-seams-as-scene-contracts/)
 
 ## Course catalog (planned)

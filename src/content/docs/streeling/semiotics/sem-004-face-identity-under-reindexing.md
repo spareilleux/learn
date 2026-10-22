@@ -3,7 +3,7 @@ title: Face Identity under Reindexing
 description: Face Identity under Reindexing — Semiotics
 sidebar:
   label: SEM-004 · Face Identity under Reindexing
-  order: 2
+  order: 4
 editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/semiotics/en/sem-004-face-identity-under-reindexing.md
 ---
 

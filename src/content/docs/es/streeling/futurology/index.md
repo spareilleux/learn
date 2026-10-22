@@ -12,3 +12,5 @@ sidebar:
 ## Módulos
 
 - [FUT-001 · Pensar en el mañana — Introducción al pensamiento de futuros](fut-001-thinking-about-tomorrow/)
+- [FUT-002 · ¿Cuándo debería GA revisar su embedder de enrutamiento?](fut-002-routing-embedder-revisit-triggers/)
+- [FUT-003 · Ensayar un cambio de agente sin perder las pruebas](fut-003-agent-substitution-readiness-drill/)

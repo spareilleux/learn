@@ -3,7 +3,7 @@ title: A Capture Gate for the Godot Observatory
 description: A Capture Gate for the Godot Observatory — Visual Computing
 sidebar:
   label: VC-004 · A Capture Gate for the Godot Observatory
-  order: 3
+  order: 4
 editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/visual-computing/en/vc-004-godot-observatory-capture-gate.md
 ---
 

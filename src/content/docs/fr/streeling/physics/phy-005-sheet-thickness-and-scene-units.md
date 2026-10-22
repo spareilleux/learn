@@ -3,7 +3,7 @@ title: "Épaisseur des feuilles : des coordonnées IX aux unités de scène prop
 description: Épaisseur des feuilles des coordonnées IX aux unités de scène proposées — Physique
 sidebar:
   label: PHY-005 · Épaisseur des feuilles
-  order: 3
+  order: 5
 editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/physics/fr/phy-005-sheet-thickness-and-scene-units.fr.md
 ---
 

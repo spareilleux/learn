@@ -13,3 +13,4 @@ sidebar:
 
 - [MCL-001 · Comment la musique évolue — Brève histoire de la musique occidentale](mcl-001-how-music-evolves/)
 - [MCL-002 · Forme et structure musicales — Comment la musique est construite](mcl-002-musical-form/)
+- [MCL-003 · Quand une étiquette de style constitue-t-elle une preuve ?](mcl-003-style-labels-as-evidence/)

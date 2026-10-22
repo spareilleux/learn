@@ -3,7 +3,7 @@ title: L’identité des faces après réindexation
 description: L’identité des faces après réindexation — Sémiotique
 sidebar:
   label: SEM-004 · L’identité des faces après réindexation
-  order: 2
+  order: 4
 editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/semiotics/fr/sem-004-face-identity-under-reindexing.fr.md
 ---
 

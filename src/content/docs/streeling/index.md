@@ -23,22 +23,22 @@ These modules were written by AI departments and have **not been reviewed**. Unl
 | [Computer Science](computer-science/) | 9 | 7 | 7 |
 | [Cybernetics](cybernetics/) | 3 | 3 | 3 |
 | [Data Visualization](data-visualization/) | 8 | 8 | 8 |
-| [Futurology](futurology/) | 1 | 1 | 1 |
+| [Futurology](futurology/) | 3 | 3 | 3 |
 | [Guitar Acoustics & Sound Synthesis](guitar-acoustics/) | 3 | 3 | 3 |
 | [Guitar Alchemist Academy](guitar-alchemist-academy/) | 4 | 4 | 4 |
 | [Guitar Studies](guitar-studies/) | 4 | 4 | 4 |
-| [Information Theory](information-theory/) | 3 | 3 | 3 |
+| [Information Theory](information-theory/) | 4 | 4 | 4 |
 | [IX Research](ix-research/) | 1 | 1 | 1 |
 | [Mathematics](mathematics/) | 25 | 25 | 25 |
 | [Music](music/) | 19 | 19 | 19 |
-| [Musicology](musicology/) | 2 | 2 | 2 |
+| [Musicology](musicology/) | 3 | 3 | 3 |
 | [Network Science](network-science/) | 4 | 4 | 4 |
-| [Philosophy](philosophy/) | 1 | 1 | 1 |
-| [Physics](physics/) | 3 | 3 | 3 |
-| [Product and Project Management](product-management/) | 3 | 3 | 3 |
+| [Philosophy](philosophy/) | 3 | 3 | 3 |
+| [Physics](physics/) | 5 | 5 | 5 |
+| [Product and Project Management](product-management/) | 4 | 4 | 4 |
 | [Psychohistory](psychohistory/) | 25 | 25 | 25 |
-| [Semiotics](semiotics/) | 2 | 2 | 2 |
-| [Visual Computing](visual-computing/) | 5 | 1 | 1 |
+| [Semiotics](semiotics/) | 4 | 4 | 4 |
+| [Visual Computing](visual-computing/) | 7 | 3 | 3 |
 | [World Music & Languages](world-music-languages/) | 3 | 3 | 3 |
 
 ## Provenance

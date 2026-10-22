@@ -3,7 +3,7 @@ title: Keep Weave Crossings Correct across a Godot Scene Boundary
 description: Keep Weave Crossings Correct across a Godot Scene Boundary — Visual Computing
 sidebar:
   label: VC-007 · Keep Weave Crossings Correct across a Godot Scene Boundary
-  order: 5
+  order: 7
 editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/visual-computing/en/vc-007-weave-seams-as-scene-contracts.md
 ---
 

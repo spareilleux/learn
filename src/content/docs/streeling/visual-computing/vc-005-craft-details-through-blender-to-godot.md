@@ -3,7 +3,7 @@ title: Keep Craft Details through a Blender-to-Godot Asset Trial
 description: Keep Craft Details through a Blender-to-Godot Asset Trial — Visual Computing
 sidebar:
   label: VC-005 · Keep Craft Details through a Blender-to-Godot Asset Trial
-  order: 4
+  order: 5
 editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/visual-computing/en/vc-005-craft-details-through-blender-to-godot.md
 ---
 

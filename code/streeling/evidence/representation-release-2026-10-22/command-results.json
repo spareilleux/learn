@@ -1,0 +1,40 @@
+{
+  "reason_for_final_pass": "Chronology note now explicitly covers historical pending draft translations; technical bodies unchanged.",
+  "runs": [
+    {
+      "name": "sync",
+      "command": [
+        "npm.cmd",
+        "run",
+        "sync:streeling"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.55,
+      "log_path": "C:\\tmp\\streeling-representation-release-final-sync-20261022.log"
+    },
+    {
+      "name": "targeted-tests",
+      "command": [
+        "node",
+        "--test",
+        "scripts\\tests\\lazy-demo.test.mjs",
+        "scripts\\tests\\streeling-copy-source.test.mjs",
+        "scripts\\tests\\sync-streeling.test.mjs"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.635,
+      "log_path": "C:\\tmp\\streeling-representation-release-final-targeted-tests-20261022.log"
+    },
+    {
+      "name": "build",
+      "command": [
+        "npm.cmd",
+        "run",
+        "build"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 76.146,
+      "log_path": "C:\\tmp\\streeling-representation-release-final-build-20261022.log"
+    }
+  ]
+}

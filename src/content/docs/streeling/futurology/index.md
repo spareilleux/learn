@@ -12,3 +12,5 @@ sidebar:
 ## Modules
 
 - [FUT-001 · Thinking About Tomorrow — Introduction to Futures Thinking](fut-001-thinking-about-tomorrow/)
+- [FUT-002 · When Should GA Revisit Its Routing Embedder?](fut-002-routing-embedder-revisit-triggers/)
+- [FUT-003 · Rehearse an Agent Substitution Without Losing Evidence](fut-003-agent-substitution-readiness-drill/)

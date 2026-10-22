@@ -3,7 +3,7 @@ title: Perte d’information lors des transmissions entre agents
 description: Perte d’information lors des transmissions entre agents — Théorie de l'information
 sidebar:
   label: INF-004 · Perte d’information lors des transmissions entre agents
-  order: 3
+  order: 4
 editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/information-theory/fr/inf-004-information-loss-in-agent-handoffs.fr.md
 ---
 

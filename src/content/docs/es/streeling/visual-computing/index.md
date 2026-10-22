@@ -13,8 +13,10 @@ sidebar:
 
 - [VC-001 · Un diapasón, tres vías de acceso](vc-001-accessible-fretboard-paths/)
 - [VC-002 · Evidence for a Godot and React Observatory Bridge](vc-002-godot-react-bridge-evidence/) *(en inglés)*
+- [VC-003 · ¿Cuándo ayuda el jitter a una nube de voicings?](vc-003-jitter-and-voicing-cloud-distance/)
 - [VC-004 · A Capture Gate for the Godot Observatory](vc-004-godot-observatory-capture-gate/) *(en inglés)*
 - [VC-005 · Keep Craft Details through a Blender-to-Godot Asset Trial](vc-005-craft-details-through-blender-to-godot/) *(en inglés)*
+- [VC-006 · Probar el significado del estado de pliegue en una escena de Blender a Godot](vc-006-origami-fold-state-scene-trial/)
 - [VC-007 · Keep Weave Crossings Correct across a Godot Scene Boundary](vc-007-weave-seams-as-scene-contracts/) *(en inglés)*
 
 ## Catálogo de cursos (previsto)

@@ -13,4 +13,6 @@ sidebar:
 
 - [PHY-001 · The Science of Guitar Sound](phy-001-science-of-guitar-sound/)
 - [PHY-002 · Choose a Time-Frequency View for a Guitar Transient](phy-002-time-frequency-guitar-transients/)
+- [PHY-003 · Sampling and Aliasing at the GA Guitar Engine Boundary](phy-003-sampling-aliasing-guitar-engine/)
+- [PHY-004 · When Velocity Moves the Pick Position in GA's Guitar Engine](phy-004-velocity-pick-position-guitar-engine/)
 - [PHY-005 · Sheet Thickness from IX Coordinates to Proposed Scene Units](phy-005-sheet-thickness-and-scene-units/)
