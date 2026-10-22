@@ -22,7 +22,7 @@ These modules were written by AI departments and have **not been reviewed**. Unl
 | [Cognitive Science](cognitive-science/) | 1 | 1 | 1 |
 | [Computer Science](computer-science/) | 5 | 3 | 3 |
 | [Cybernetics](cybernetics/) | 3 | 3 | 3 |
-| [Data Visualization](data-visualization/) | 0 | 0 | 0 |
+| [Data Visualization](data-visualization/) | 8 | 1 | 1 |
 | [Futurology](futurology/) | 1 | 1 | 1 |
 | [Guitar Acoustics & Sound Synthesis](guitar-acoustics/) | 0 | 0 | 0 |
 | [Guitar Alchemist Academy](guitar-alchemist-academy/) | 3 | 3 | 3 |
@@ -45,4 +45,5 @@ These modules were written by AI departments and have **not been reviewed**. Unl
 
 - Initial source copy: [`spareilleux/learn` → `streeling/courses`](https://github.com/spareilleux/learn/tree/main/streeling/courses), copied from [`GuitarAlchemist/Demerzel` → `state/streeling/courses`](https://github.com/GuitarAlchemist/Demerzel/tree/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses) at commit `1beb089` (2026-10-21), MIT license.
 - [Additional source provenance](https://github.com/spareilleux/learn/blob/main/code/streeling/evidence/craft-2026-10-22/import.json)
+- [Additional source provenance](https://github.com/spareilleux/learn/blob/main/code/streeling/evidence/data-visualization-2026-10-22/import.json)
 - Generated with `npm run sync:streeling` from `streeling/`: change a module there, not on these pages — only `journal.md` is kept between syncs.

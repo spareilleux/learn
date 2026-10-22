@@ -22,7 +22,7 @@ Estos módulos fueron escritos por departamentos de IA y **no han sido revisados
 | [Ciencia cognitiva](cognitive-science/) | 1 | 1 | 1 |
 | [Ciencias de la computación](computer-science/) | 5 | 3 | 3 |
 | [Cibernética](cybernetics/) | 3 | 3 | 3 |
-| [Visualización de datos](data-visualization/) | 0 | 0 | 0 |
+| [Visualización de datos](data-visualization/) | 8 | 1 | 1 |
 | [Futurología](futurology/) | 1 | 1 | 1 |
 | [Acústica de la guitarra y síntesis sonora](guitar-acoustics/) | 0 | 0 | 0 |
 | [Guitar Alchemist Academy](guitar-alchemist-academy/) | 3 | 3 | 3 |
@@ -45,4 +45,5 @@ Estos módulos fueron escritos por departamentos de IA y **no han sido revisados
 
 - Copia inicial de las fuentes: [`spareilleux/learn` → `streeling/courses`](https://github.com/spareilleux/learn/tree/main/streeling/courses), copiada de [`GuitarAlchemist/Demerzel` → `state/streeling/courses`](https://github.com/GuitarAlchemist/Demerzel/tree/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses) en el commit `1beb089` (2026-10-21), licencia MIT.
 - [Procedencia de las fuentes adicionales](https://github.com/spareilleux/learn/blob/main/code/streeling/evidence/craft-2026-10-22/import.json)
+- [Procedencia de las fuentes adicionales](https://github.com/spareilleux/learn/blob/main/code/streeling/evidence/data-visualization-2026-10-22/import.json)
 - Generado con `npm run sync:streeling` desde `streeling/`: se modifica un módulo allí, no en estas páginas — solo `journal.md` se conserva entre sincronizaciones.
