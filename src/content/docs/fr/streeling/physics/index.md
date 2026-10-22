@@ -20,3 +20,4 @@ sidebar:
 - [PHY-007 · Distinguer les battements entre deux sons de leur décroissance](phy-007-separate-beating-from-decay/)
 - [PHY-008 · Garder les normales perpendiculaires aux surfaces](phy-008-keep-surface-normals-perpendicular/)
 - [PHY-009 · Distinguer la couleur linéaire de l'encodage d'affichage](phy-009-distinguish-linear-color-from-display-encoding/)
+- [PHY-010 · Vérifier les angles locaux d'un pliage à plat](phy-010-check-local-flat-fold-angles/)

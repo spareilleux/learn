@@ -17,3 +17,4 @@ sidebar:
 - [INF-004 · Information Loss in Agent Handoffs](inf-004-information-loss-in-agent-handoffs/)
 - [INF-005 · Quantization and indistinguishable renders](inf-005-quantization-and-indistinguishable-renders/)
 - [INF-006 · Know What Scene Bounds Forget](inf-006-know-what-scene-bounds-forget/)
+- [INF-007 · Count Crease Candidates without Inventing Probabilities](inf-007-count-crease-candidates-without-inventing-probabilities/)

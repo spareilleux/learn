@@ -27,14 +27,14 @@ Ces modules ont été écrits par des départements IA et **n'ont pas été relu
 | [Acoustique de la guitare et synthèse sonore](guitar-acoustics/) | 6 | 6 | 6 |
 | [Guitar Alchemist Academy](guitar-alchemist-academy/) | 6 | 6 | 6 |
 | [Études de guitare](guitar-studies/) | 6 | 6 | 6 |
-| [Théorie de l'information](information-theory/) | 6 | 6 | 6 |
+| [Théorie de l'information](information-theory/) | 7 | 7 | 7 |
 | [Recherche sur IX](ix-research/) | 1 | 1 | 1 |
 | [Mathématiques](mathematics/) | 25 | 25 | 25 |
 | [Musique](music/) | 25 | 25 | 25 |
 | [Musicologie](musicology/) | 5 | 5 | 5 |
 | [Science des réseaux](network-science/) | 7 | 7 | 7 |
-| [Philosophie](philosophy/) | 5 | 5 | 5 |
-| [Physique](physics/) | 9 | 9 | 9 |
+| [Philosophie](philosophy/) | 6 | 6 | 6 |
+| [Physique](physics/) | 10 | 10 | 10 |
 | [Gestion de produit et de projet](product-management/) | 5 | 5 | 5 |
 | [Psychohistoire](psychohistory/) | 25 | 25 | 25 |
 | [Sémiotique](semiotics/) | 6 | 6 | 6 |

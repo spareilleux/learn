@@ -27,14 +27,14 @@ These modules were written by AI departments and have **not been reviewed**. Unl
 | [Guitar Acoustics & Sound Synthesis](guitar-acoustics/) | 6 | 6 | 6 |
 | [Guitar Alchemist Academy](guitar-alchemist-academy/) | 6 | 6 | 6 |
 | [Guitar Studies](guitar-studies/) | 6 | 6 | 6 |
-| [Information Theory](information-theory/) | 6 | 6 | 6 |
+| [Information Theory](information-theory/) | 7 | 7 | 7 |
 | [IX Research](ix-research/) | 1 | 1 | 1 |
 | [Mathematics](mathematics/) | 25 | 25 | 25 |
 | [Music](music/) | 25 | 25 | 25 |
 | [Musicology](musicology/) | 5 | 5 | 5 |
 | [Network Science](network-science/) | 7 | 7 | 7 |
-| [Philosophy](philosophy/) | 5 | 5 | 5 |
-| [Physics](physics/) | 9 | 9 | 9 |
+| [Philosophy](philosophy/) | 6 | 6 | 6 |
+| [Physics](physics/) | 10 | 10 | 10 |
 | [Product and Project Management](product-management/) | 5 | 5 | 5 |
 | [Psychohistory](psychohistory/) | 25 | 25 | 25 |
 | [Semiotics](semiotics/) | 6 | 6 | 6 |

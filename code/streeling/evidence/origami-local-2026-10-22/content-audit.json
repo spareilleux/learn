@@ -1,0 +1,1078 @@
+{
+  "reviewer": "independent-pedagogical-source-review-agent",
+  "checked_at_utc": "2026-10-22T22:37:46.280383+00:00",
+  "verdict": "pass",
+  "findings": [
+    {
+      "origin": "code/streeling/evidence/origami-local-2026-10-22/data-audit.json",
+      "id": "local-filter-insufficiency",
+      "status": "observed-preserved",
+      "finding": "MMMV satisfies the fixed angle residual and M-minus-V count but violates the strict smallest-angle assignment condition. local.rs implements the two numeric filters but not that extra rule.",
+      "boundary": "No complete IX analyse result, exported folded geometry, physical fold or new production defect reproduction asserted."
+    },
+    {
+      "origin": "code/streeling/evidence/origami-local-2026-10-22/data-audit.json",
+      "id": "empty-applicable-domain",
+      "status": "observed-preserved",
+      "finding": "Hand U/F central cards leave applicable0, empty failures and initialized maximum0; counts expose the skipped domain."
+    },
+    {
+      "origin": "code/streeling/evidence/origami-local-2026-10-22/data-audit.json",
+      "id": "radian-tolerance-scope",
+      "status": "observed-preserved",
+      "finding": "1e-9 is a computational absolute radian tolerance, not measured material/manufacturing allowance."
+    }
+  ],
+  "fix_history": [
+    {
+      "origin": "code/streeling/evidence/origami-local-2026-10-22/data-audit.json",
+      "id": "adjacent-sector-perturbation-wording",
+      "status": "resolved",
+      "finding": "A shifted ray changes adjacent sectors with opposite signs; geometrically opposite sectors with opposite-sign changes would cancel in degree4.",
+      "resolution": "Requested adjacent/opposite-sign wording in production plan; final plan bytes bound below."
+    },
+    {
+      "id": "phy010-fr-article-agreement",
+      "status": "resolved",
+      "finding": "French exercise2 used toutes les étiquetages.",
+      "resolution": "Translator corrected to tous les étiquetages; technical quantifier meaning and all five exercise answers unchanged. Final source bytes and URL parity reviewed.",
+      "source_changes_by_reviewer": false
+    },
+    {
+      "id": "inf007-es-subject-agreement",
+      "status": "resolved",
+      "finding": "Translator final pass identified singular describe after Tres bits in the final Spanish answer.",
+      "resolution": "Translator corrected to Tres bits describen; identity-loss and conditional-uniform interpretation unchanged. Final corrected answer directly read.",
+      "source_changes_by_reviewer": false
+    }
+  ],
+  "coverage": {
+    "exercise_answer_pairs": 45,
+    "learner_criteria": 15
+  },
+  "scope": {
+    "reviewed": "All nine EN/FR/ES sources and45localized exercise-answer pairs, prepared learner task and15criteria, all fixed packet records, primary theorem/entropy readings and actual pinned source branches.",
+    "data_audit": "Independent459/459source/theory/numerical checks read; all current input hashes verified. No new analyzer, enumeration experiment, PDF rendering or host trial by content reviewer.",
+    "localization": "Agent semantic review and ordered URL parity. Human fluent-language and learner results remain absent.",
+    "prerequisites": "Existing English prerequisites directly read for background and distinct progression; their wider historical experimental/publication claims are not newly approved.",
+    "publication": "Course source review only. Generated sync/build/rendered-link/idempotence/publication records are separate root gates, excluded as circular supporting inputs."
+  },
+  "exercise_answer_checks": [
+    {
+      "id": "PHY010-en-exercise-1",
+      "module": "PHY010",
+      "locale": "en",
+      "exercise": 1,
+      "path": "streeling/courses/physics/en/phy-010-check-local-flat-fold-angles.md",
+      "heading_line": 33,
+      "exercise_answer_sha256": "355328ea53d578d760d6ae05671157e6888917b258b367ef975a2d2d7c5f3712",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "Cyclic sectors60,90,120,90 total360; atan2 geometric sorting plus positive wraparound is necessary before sector differences. Arbitrary input adjacency is not geometric adjacency."
+    },
+    {
+      "id": "PHY010-en-exercise-2",
+      "module": "PHY010",
+      "locale": "en",
+      "exercise": 2,
+      "path": "streeling/courses/physics/en/phy-010-check-local-flat-fold-angles.md",
+      "heading_line": 45,
+      "exercise_answer_sha256": "7391bb69a41fbc4d73cd223e4e195b231257fbf3d6aecd1e476308b6eaf200e0",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "Alternating groups60+120 and90+90 each give180. Under even-degree, ideal zero-thickness, all-used, unassigned single-interior-vertex hypotheses, some M/V assignment locally folds flat. No universal assignment, global sheet or thick-object claim follows."
+    },
+    {
+      "id": "PHY010-en-exercise-3",
+      "module": "PHY010",
+      "locale": "en",
+      "exercise": 3,
+      "path": "streeling/courses/physics/en/phy-010-check-local-flat-fold-angles.md",
+      "heading_line": 57,
+      "exercise_answer_sha256": "1faf3da62aff8403bc039115d6f8661c7cc1dc132ad8db5216ad5291910dfc82",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "Moving e1 changes adjacent sectors by opposite signs; absolute alternating residual is2abs(delta). At1e-9rad,1e-10delta passes and1e-8delta fails. Floating-point transcription is not executed Rust, and numerical radians are neither degrees nor measured manufacturing allowance."
+    },
+    {
+      "id": "PHY010-en-exercise-4",
+      "module": "PHY010",
+      "locale": "en",
+      "exercise": 4,
+      "path": "streeling/courses/physics/en/phy-010-check-local-flat-fold-angles.md",
+      "heading_line": 69,
+      "exercise_answer_sha256": "52e5b5f3f941a484e446898a6c72d50484e5c74d2f1801d508ab057bc10fd179",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "MMMV has M-V2 and angular pass, but bounding e0/e1 are bothM at a strict60degree minimum with90degree neighbors. This additional necessary-rule violation refutes sufficiency of the two numeric filters for this assignment; no full IX acceptance was observed."
+    },
+    {
+      "id": "PHY010-en-exercise-5",
+      "module": "PHY010",
+      "locale": "en",
+      "exercise": 5,
+      "path": "streeling/courses/physics/en/phy-010-check-local-flat-fold-angles.md",
+      "heading_line": 81,
+      "exercise_answer_sha256": "63732f8754435529fe4d2f34409be5353495edeeea600851061b2d4c71fa0b8c",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "Assigned incidence model has1applicable,4border-skipped,1isolated; oneU gives0applicable,1other-crease-skipped. Empty failures/max0 do not establish positive coverage or a solved assignment. Authored branch counts are not parsed FOLD or analyzer execution."
+    },
+    {
+      "id": "PHY010-fr-exercise-1",
+      "module": "PHY010",
+      "locale": "fr",
+      "exercise": 1,
+      "path": "streeling/courses/physics/fr/phy-010-check-local-flat-fold-angles.fr.md",
+      "heading_line": 33,
+      "exercise_answer_sha256": "3ebf13f823f6698bdef6d3cc8687790a0f3a1a7f2d8f445cad7b8cc4be72bd29",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "Cyclic sectors60,90,120,90 total360; atan2 geometric sorting plus positive wraparound is necessary before sector differences. Arbitrary input adjacency is not geometric adjacency."
+    },
+    {
+      "id": "PHY010-fr-exercise-2",
+      "module": "PHY010",
+      "locale": "fr",
+      "exercise": 2,
+      "path": "streeling/courses/physics/fr/phy-010-check-local-flat-fold-angles.fr.md",
+      "heading_line": 45,
+      "exercise_answer_sha256": "d97c504f455fae064143cef2daebb92042d5126bd78e5e08a158e93e168f369c",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "Alternating groups60+120 and90+90 each give180. Under even-degree, ideal zero-thickness, all-used, unassigned single-interior-vertex hypotheses, some M/V assignment locally folds flat. No universal assignment, global sheet or thick-object claim follows."
+    },
+    {
+      "id": "PHY010-fr-exercise-3",
+      "module": "PHY010",
+      "locale": "fr",
+      "exercise": 3,
+      "path": "streeling/courses/physics/fr/phy-010-check-local-flat-fold-angles.fr.md",
+      "heading_line": 57,
+      "exercise_answer_sha256": "95c2af1f502299ed01b6cabf71f373de5d1bac7b2e10e67fcd15d2cf7b0455bb",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "Moving e1 changes adjacent sectors by opposite signs; absolute alternating residual is2abs(delta). At1e-9rad,1e-10delta passes and1e-8delta fails. Floating-point transcription is not executed Rust, and numerical radians are neither degrees nor measured manufacturing allowance."
+    },
+    {
+      "id": "PHY010-fr-exercise-4",
+      "module": "PHY010",
+      "locale": "fr",
+      "exercise": 4,
+      "path": "streeling/courses/physics/fr/phy-010-check-local-flat-fold-angles.fr.md",
+      "heading_line": 69,
+      "exercise_answer_sha256": "104525ea4367b9716a93d1bc283de5d93a47c0c0bbf31084644960b3181f3b18",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "MMMV has M-V2 and angular pass, but bounding e0/e1 are bothM at a strict60degree minimum with90degree neighbors. This additional necessary-rule violation refutes sufficiency of the two numeric filters for this assignment; no full IX acceptance was observed."
+    },
+    {
+      "id": "PHY010-fr-exercise-5",
+      "module": "PHY010",
+      "locale": "fr",
+      "exercise": 5,
+      "path": "streeling/courses/physics/fr/phy-010-check-local-flat-fold-angles.fr.md",
+      "heading_line": 81,
+      "exercise_answer_sha256": "5f11a99c833926d74700db912c21b338090bcecf9a821ec67e8215bb1bb3f3ff",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "Assigned incidence model has1applicable,4border-skipped,1isolated; oneU gives0applicable,1other-crease-skipped. Empty failures/max0 do not establish positive coverage or a solved assignment. Authored branch counts are not parsed FOLD or analyzer execution."
+    },
+    {
+      "id": "PHY010-es-exercise-1",
+      "module": "PHY010",
+      "locale": "es",
+      "exercise": 1,
+      "path": "streeling/courses/physics/es/phy-010-check-local-flat-fold-angles.es.md",
+      "heading_line": 33,
+      "exercise_answer_sha256": "0341fa18fea90f41a53bcb295e91434b21426a822474c89f58c5e9235dc3446b",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "Cyclic sectors60,90,120,90 total360; atan2 geometric sorting plus positive wraparound is necessary before sector differences. Arbitrary input adjacency is not geometric adjacency."
+    },
+    {
+      "id": "PHY010-es-exercise-2",
+      "module": "PHY010",
+      "locale": "es",
+      "exercise": 2,
+      "path": "streeling/courses/physics/es/phy-010-check-local-flat-fold-angles.es.md",
+      "heading_line": 45,
+      "exercise_answer_sha256": "c936a88cebbe7dd81f96d21f82f1e4b0b990510f16d3052e70ba4db24d765d9d",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "Alternating groups60+120 and90+90 each give180. Under even-degree, ideal zero-thickness, all-used, unassigned single-interior-vertex hypotheses, some M/V assignment locally folds flat. No universal assignment, global sheet or thick-object claim follows."
+    },
+    {
+      "id": "PHY010-es-exercise-3",
+      "module": "PHY010",
+      "locale": "es",
+      "exercise": 3,
+      "path": "streeling/courses/physics/es/phy-010-check-local-flat-fold-angles.es.md",
+      "heading_line": 57,
+      "exercise_answer_sha256": "09b11f9756d629a3ded68f59275de338c9452aeaeb9dd22f42bd275f987de608",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "Moving e1 changes adjacent sectors by opposite signs; absolute alternating residual is2abs(delta). At1e-9rad,1e-10delta passes and1e-8delta fails. Floating-point transcription is not executed Rust, and numerical radians are neither degrees nor measured manufacturing allowance."
+    },
+    {
+      "id": "PHY010-es-exercise-4",
+      "module": "PHY010",
+      "locale": "es",
+      "exercise": 4,
+      "path": "streeling/courses/physics/es/phy-010-check-local-flat-fold-angles.es.md",
+      "heading_line": 69,
+      "exercise_answer_sha256": "b1df98ca79fdda87a594d68b122d033f903f6babf031d391db2b34929f767ec1",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "MMMV has M-V2 and angular pass, but bounding e0/e1 are bothM at a strict60degree minimum with90degree neighbors. This additional necessary-rule violation refutes sufficiency of the two numeric filters for this assignment; no full IX acceptance was observed."
+    },
+    {
+      "id": "PHY010-es-exercise-5",
+      "module": "PHY010",
+      "locale": "es",
+      "exercise": 5,
+      "path": "streeling/courses/physics/es/phy-010-check-local-flat-fold-angles.es.md",
+      "heading_line": 81,
+      "exercise_answer_sha256": "ffc0fe99638c685297e5eaebec4efa6ca0d16cea724c11e692cd48d6139a1541",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "Assigned incidence model has1applicable,4border-skipped,1isolated; oneU gives0applicable,1other-crease-skipped. Empty failures/max0 do not establish positive coverage or a solved assignment. Authored branch counts are not parsed FOLD or analyzer execution."
+    },
+    {
+      "id": "INF007-en-exercise-1",
+      "module": "INF007",
+      "locale": "en",
+      "exercise": 1,
+      "path": "streeling/courses/information-theory/en/inf-007-count-crease-candidates-without-inventing-probabilities.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "ecf31628a2eac95af0a1c0e0ddf986a583b077ea176b95e9fdcfc85863e29895",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "Four labeled binary crease choices give16strings and4bits only under the explicit authored uniform1/16prior. No symmetry quotient, actual sampling distribution or physical process was measured."
+    },
+    {
+      "id": "INF007-en-exercise-2",
+      "module": "INF007",
+      "locale": "en",
+      "exercise": 2,
+      "path": "streeling/courses/information-theory/en/inf-007-count-crease-candidates-without-inventing-probabilities.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "43b20ff38c75d11ff7f02921f7e32fc851e010aad31ed7f73da2a65601d60003",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "Count filter keeps8/H3; adding the strict-smallest-angle necessary rule keeps MVMM,MVVV,VMMM,VMVV with H2 under conditional uniformity. MMMV survives only the count stage. Survivors are not full solver witnesses or physical folds."
+    },
+    {
+      "id": "INF007-en-exercise-3",
+      "module": "INF007",
+      "locale": "en",
+      "exercise": 3,
+      "path": "streeling/courses/information-theory/en/inf-007-count-crease-candidates-without-inventing-probabilities.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "b17fb0aff9bfe60da89a7658b0f7c6042e3c2dd392c4deffab89327c1dfbc36e",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "The same four states with probabilities1/2,1/4,1/8,1/8 have entropy0.5+0.5+0.375+0.375=1.75bits, below maximum2. Concentration is not correctness, agent calibration or folding-quality evidence."
+    },
+    {
+      "id": "INF007-en-exercise-4",
+      "module": "INF007",
+      "locale": "en",
+      "exercise": 4,
+      "path": "streeling/courses/information-theory/en/inf-007-count-crease-candidates-without-inventing-probabilities.md",
+      "heading_line": 64,
+      "exercise_answer_sha256": "e1f32c6f533d131622955e3645fb1ae11817d07a73b3fa29b8151f694b9f415b",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "Buckets8/4/4 have probabilities1/2,1/4,1/4; weighted residual0.5*3+0.25*2+0.25*2=2.5bits. Deterministic coarse label carries1.5bits. Accepted-branch residual2 has prior probability1/4 and is not the all-input average."
+    },
+    {
+      "id": "INF007-en-exercise-5",
+      "module": "INF007",
+      "locale": "en",
+      "exercise": 5,
+      "path": "streeling/courses/information-theory/en/inf-007-count-crease-candidates-without-inventing-probabilities.md",
+      "heading_line": 76,
+      "exercise_answer_sha256": "5b7d641d231808f8f645e11d344f0fd9fabe2de6075e857dd1a47499b263630a",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "Count-pass label loses particular assignment identity and its relation to crease IDs. Three bits describes a conditional uniform ensemble, not measured probabilities. UnknownU provides neither a fair binary prior nor an assigned fold; typed reports/DSL remain proposed."
+    },
+    {
+      "id": "INF007-fr-exercise-1",
+      "module": "INF007",
+      "locale": "fr",
+      "exercise": 1,
+      "path": "streeling/courses/information-theory/fr/inf-007-count-crease-candidates-without-inventing-probabilities.fr.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "e64880657f3cb9dbb4c20a28b9bf60424d11dbcf774cb22d68dfe3ccc0fddb7f",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "Four labeled binary crease choices give16strings and4bits only under the explicit authored uniform1/16prior. No symmetry quotient, actual sampling distribution or physical process was measured."
+    },
+    {
+      "id": "INF007-fr-exercise-2",
+      "module": "INF007",
+      "locale": "fr",
+      "exercise": 2,
+      "path": "streeling/courses/information-theory/fr/inf-007-count-crease-candidates-without-inventing-probabilities.fr.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "895759ec18e66671fbf39c07f3e060cbf84353d71f8138e2146e70e1b264fe4c",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "Count filter keeps8/H3; adding the strict-smallest-angle necessary rule keeps MVMM,MVVV,VMMM,VMVV with H2 under conditional uniformity. MMMV survives only the count stage. Survivors are not full solver witnesses or physical folds."
+    },
+    {
+      "id": "INF007-fr-exercise-3",
+      "module": "INF007",
+      "locale": "fr",
+      "exercise": 3,
+      "path": "streeling/courses/information-theory/fr/inf-007-count-crease-candidates-without-inventing-probabilities.fr.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "92567d1412b00978a830e0ed51a48855343518fe9fc7beba0ad7b9e764dd2435",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "The same four states with probabilities1/2,1/4,1/8,1/8 have entropy0.5+0.5+0.375+0.375=1.75bits, below maximum2. Concentration is not correctness, agent calibration or folding-quality evidence."
+    },
+    {
+      "id": "INF007-fr-exercise-4",
+      "module": "INF007",
+      "locale": "fr",
+      "exercise": 4,
+      "path": "streeling/courses/information-theory/fr/inf-007-count-crease-candidates-without-inventing-probabilities.fr.md",
+      "heading_line": 64,
+      "exercise_answer_sha256": "d19bfb6ad9c7f816c00f478ad8fe26474c4a303d908acd4b7fbe59a671cfebaf",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "Buckets8/4/4 have probabilities1/2,1/4,1/4; weighted residual0.5*3+0.25*2+0.25*2=2.5bits. Deterministic coarse label carries1.5bits. Accepted-branch residual2 has prior probability1/4 and is not the all-input average."
+    },
+    {
+      "id": "INF007-fr-exercise-5",
+      "module": "INF007",
+      "locale": "fr",
+      "exercise": 5,
+      "path": "streeling/courses/information-theory/fr/inf-007-count-crease-candidates-without-inventing-probabilities.fr.md",
+      "heading_line": 76,
+      "exercise_answer_sha256": "1d972e2dd63ac8978bfa8ae0974372bd8829a4b2d355641b00f6ca88ec8f31d2",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "Count-pass label loses particular assignment identity and its relation to crease IDs. Three bits describes a conditional uniform ensemble, not measured probabilities. UnknownU provides neither a fair binary prior nor an assigned fold; typed reports/DSL remain proposed."
+    },
+    {
+      "id": "INF007-es-exercise-1",
+      "module": "INF007",
+      "locale": "es",
+      "exercise": 1,
+      "path": "streeling/courses/information-theory/es/inf-007-count-crease-candidates-without-inventing-probabilities.es.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "f1774fcc8c4bda08e505d3463775d3b53b482369815b7ab67d8c11a9b9cbda94",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "Four labeled binary crease choices give16strings and4bits only under the explicit authored uniform1/16prior. No symmetry quotient, actual sampling distribution or physical process was measured."
+    },
+    {
+      "id": "INF007-es-exercise-2",
+      "module": "INF007",
+      "locale": "es",
+      "exercise": 2,
+      "path": "streeling/courses/information-theory/es/inf-007-count-crease-candidates-without-inventing-probabilities.es.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "85f5bc71d4c210d48ae4407eb88298cc76ba0e4abf6708edd7b2fee2f9f9b537",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "Count filter keeps8/H3; adding the strict-smallest-angle necessary rule keeps MVMM,MVVV,VMMM,VMVV with H2 under conditional uniformity. MMMV survives only the count stage. Survivors are not full solver witnesses or physical folds."
+    },
+    {
+      "id": "INF007-es-exercise-3",
+      "module": "INF007",
+      "locale": "es",
+      "exercise": 3,
+      "path": "streeling/courses/information-theory/es/inf-007-count-crease-candidates-without-inventing-probabilities.es.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "78ad3530b40b28561b707cd105d14246a941837f43a3e9eae95afd91ac03f3c6",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "The same four states with probabilities1/2,1/4,1/8,1/8 have entropy0.5+0.5+0.375+0.375=1.75bits, below maximum2. Concentration is not correctness, agent calibration or folding-quality evidence."
+    },
+    {
+      "id": "INF007-es-exercise-4",
+      "module": "INF007",
+      "locale": "es",
+      "exercise": 4,
+      "path": "streeling/courses/information-theory/es/inf-007-count-crease-candidates-without-inventing-probabilities.es.md",
+      "heading_line": 64,
+      "exercise_answer_sha256": "4ec652c24b8df47182f701971da9bdaf8885e713c3a02636b2f1d876a018fafb",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "Buckets8/4/4 have probabilities1/2,1/4,1/4; weighted residual0.5*3+0.25*2+0.25*2=2.5bits. Deterministic coarse label carries1.5bits. Accepted-branch residual2 has prior probability1/4 and is not the all-input average."
+    },
+    {
+      "id": "INF007-es-exercise-5",
+      "module": "INF007",
+      "locale": "es",
+      "exercise": 5,
+      "path": "streeling/courses/information-theory/es/inf-007-count-crease-candidates-without-inventing-probabilities.es.md",
+      "heading_line": 76,
+      "exercise_answer_sha256": "2cd30ac92aa29c2283da363df9f83c545d8bf181c71c9fe88ffeede2822f944b",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "Count-pass label loses particular assignment identity and its relation to crease IDs. Three bits describes a conditional uniform ensemble, not measured probabilities. UnknownU provides neither a fair binary prior nor an assigned fold; typed reports/DSL remain proposed."
+    },
+    {
+      "id": "PHI006-en-exercise-1",
+      "module": "PHI006",
+      "locale": "en",
+      "exercise": 1,
+      "path": "streeling/courses/philosophy/en/phi-006-preserve-the-quantifier-in-a-fold-verdict.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "c6a9dff40f8efe6de179ea464774c792bad8d768a9464937bc76e60988c9e97d",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "Correct conclusion is existence of an M/V assignment under ideal unassigned single-vertex hypotheses; replacing it with every assignment inserts a universal quantifier. No whole-sheet or material claim follows."
+    },
+    {
+      "id": "PHI006-en-exercise-2",
+      "module": "PHI006",
+      "locale": "en",
+      "exercise": 2,
+      "path": "streeling/courses/philosophy/en/phi-006-preserve-the-quantifier-in-a-fold-verdict.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "3371785de5106a6560269c7ecd834e812aba930e4dba444addcde0d6e12b82c3",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "Existence of some flat assignment is compatible with prescribed MMMV violating a further necessary rule. The two numeric conditions do not certify that assignment and do not refute the unassigned theorem."
+    },
+    {
+      "id": "PHI006-en-exercise-3",
+      "module": "PHI006",
+      "locale": "en",
+      "exercise": 3,
+      "path": "streeling/courses/philosophy/en/phi-006-preserve-the-quantifier-in-a-fold-verdict.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "e8bbed27ecf973984da502d936f5d7d981cc6763332c5175dd04bd343affbe97",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "Unknown incident crease excludes center, leaving applicable0, empty failures and initialized max0. Absence of failures in an empty checked set supplies neither positive coverage nor a solved unknown; branch model is not runtime observation."
+    },
+    {
+      "id": "PHI006-en-exercise-4",
+      "module": "PHI006",
+      "locale": "en",
+      "exercise": 4,
+      "path": "streeling/courses/philosophy/en/phi-006-preserve-the-quantifier-in-a-fold-verdict.md",
+      "heading_line": 64,
+      "exercise_answer_sha256": "5e721168f16bc824283378a9b26aadd687bf3f1f2d84b2c48798d4e253dbf8de",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "Whole IX predicate also checks conflicts, isometry, crease orientation, order and other conditions. Complete source-bound FOLD input/frame/order and actual full result are absent, so local arithmetic does not prove aggregate acceptance, physical impossibility or a reproduced bug."
+    },
+    {
+      "id": "PHI006-en-exercise-5",
+      "module": "PHI006",
+      "locale": "en",
+      "exercise": 5,
+      "path": "streeling/courses/philosophy/en/phi-006-preserve-the-quantifier-in-a-fold-verdict.md",
+      "heading_line": 76,
+      "exercise_answer_sha256": "84a21833d147fd0932d20571aac2193a3b996bc72f8b4ef6d3f8402008cb31b5",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "Handoff preserves MMMV identity,60/90/120/90geometry, angular/count passes, strict-smallest-angle label failure, checked domain/assumptions and absent witness/outcomes. Typed report is a simpler candidate than a new DSL; no implementation, solver or Godot import is established."
+    },
+    {
+      "id": "PHI006-fr-exercise-1",
+      "module": "PHI006",
+      "locale": "fr",
+      "exercise": 1,
+      "path": "streeling/courses/philosophy/fr/phi-006-preserve-the-quantifier-in-a-fold-verdict.fr.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "17bf8ff173e7763d9b0fa4da1ab8d5b4c007b32ee0d1061cf4c42126ae1ad262",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "Correct conclusion is existence of an M/V assignment under ideal unassigned single-vertex hypotheses; replacing it with every assignment inserts a universal quantifier. No whole-sheet or material claim follows."
+    },
+    {
+      "id": "PHI006-fr-exercise-2",
+      "module": "PHI006",
+      "locale": "fr",
+      "exercise": 2,
+      "path": "streeling/courses/philosophy/fr/phi-006-preserve-the-quantifier-in-a-fold-verdict.fr.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "9389fc11763338f7f277fa64a27d4dfdc75d21623b221b8e7d4a2533f9ebfd62",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "Existence of some flat assignment is compatible with prescribed MMMV violating a further necessary rule. The two numeric conditions do not certify that assignment and do not refute the unassigned theorem."
+    },
+    {
+      "id": "PHI006-fr-exercise-3",
+      "module": "PHI006",
+      "locale": "fr",
+      "exercise": 3,
+      "path": "streeling/courses/philosophy/fr/phi-006-preserve-the-quantifier-in-a-fold-verdict.fr.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "582802ce4dd3758ea9513ae32ceea431adb0d90c76105eaef9b36e98d438aeda",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "Unknown incident crease excludes center, leaving applicable0, empty failures and initialized max0. Absence of failures in an empty checked set supplies neither positive coverage nor a solved unknown; branch model is not runtime observation."
+    },
+    {
+      "id": "PHI006-fr-exercise-4",
+      "module": "PHI006",
+      "locale": "fr",
+      "exercise": 4,
+      "path": "streeling/courses/philosophy/fr/phi-006-preserve-the-quantifier-in-a-fold-verdict.fr.md",
+      "heading_line": 64,
+      "exercise_answer_sha256": "73671e08e320446a6cca264a8cf09f0248809044ed89bf27cfdcac2e30166978",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "Whole IX predicate also checks conflicts, isometry, crease orientation, order and other conditions. Complete source-bound FOLD input/frame/order and actual full result are absent, so local arithmetic does not prove aggregate acceptance, physical impossibility or a reproduced bug."
+    },
+    {
+      "id": "PHI006-fr-exercise-5",
+      "module": "PHI006",
+      "locale": "fr",
+      "exercise": 5,
+      "path": "streeling/courses/philosophy/fr/phi-006-preserve-the-quantifier-in-a-fold-verdict.fr.md",
+      "heading_line": 76,
+      "exercise_answer_sha256": "f78623434fca5cf40022fdec4863e2bb294145a57f8d7b302e4e269a3d02be8f",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "Handoff preserves MMMV identity,60/90/120/90geometry, angular/count passes, strict-smallest-angle label failure, checked domain/assumptions and absent witness/outcomes. Typed report is a simpler candidate than a new DSL; no implementation, solver or Godot import is established."
+    },
+    {
+      "id": "PHI006-es-exercise-1",
+      "module": "PHI006",
+      "locale": "es",
+      "exercise": 1,
+      "path": "streeling/courses/philosophy/es/phi-006-preserve-the-quantifier-in-a-fold-verdict.es.md",
+      "heading_line": 28,
+      "exercise_answer_sha256": "8eb80a1daa66ab68895738615e64e709e0cdf4d8abb0d685a03acb49cf2815eb",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "Correct conclusion is existence of an M/V assignment under ideal unassigned single-vertex hypotheses; replacing it with every assignment inserts a universal quantifier. No whole-sheet or material claim follows."
+    },
+    {
+      "id": "PHI006-es-exercise-2",
+      "module": "PHI006",
+      "locale": "es",
+      "exercise": 2,
+      "path": "streeling/courses/philosophy/es/phi-006-preserve-the-quantifier-in-a-fold-verdict.es.md",
+      "heading_line": 40,
+      "exercise_answer_sha256": "4cf7cd5663d03452ed1d2fe1077f0329e78a4c4f390c8ccfa05088d84f9274a9",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "Existence of some flat assignment is compatible with prescribed MMMV violating a further necessary rule. The two numeric conditions do not certify that assignment and do not refute the unassigned theorem."
+    },
+    {
+      "id": "PHI006-es-exercise-3",
+      "module": "PHI006",
+      "locale": "es",
+      "exercise": 3,
+      "path": "streeling/courses/philosophy/es/phi-006-preserve-the-quantifier-in-a-fold-verdict.es.md",
+      "heading_line": 52,
+      "exercise_answer_sha256": "5ab0f3e5e1cd7c3b3ff4463425a19c56e45a2047cf9fdf854326c8d3a9713342",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "Unknown incident crease excludes center, leaving applicable0, empty failures and initialized max0. Absence of failures in an empty checked set supplies neither positive coverage nor a solved unknown; branch model is not runtime observation."
+    },
+    {
+      "id": "PHI006-es-exercise-4",
+      "module": "PHI006",
+      "locale": "es",
+      "exercise": 4,
+      "path": "streeling/courses/philosophy/es/phi-006-preserve-the-quantifier-in-a-fold-verdict.es.md",
+      "heading_line": 64,
+      "exercise_answer_sha256": "bc0a0ea5b5628ad4bfe7943eb34c9d8eaa3586592932540b0ec8c33a4994775a",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "Whole IX predicate also checks conflicts, isometry, crease orientation, order and other conditions. Complete source-bound FOLD input/frame/order and actual full result are absent, so local arithmetic does not prove aggregate acceptance, physical impossibility or a reproduced bug."
+    },
+    {
+      "id": "PHI006-es-exercise-5",
+      "module": "PHI006",
+      "locale": "es",
+      "exercise": 5,
+      "path": "streeling/courses/philosophy/es/phi-006-preserve-the-quantifier-in-a-fold-verdict.es.md",
+      "heading_line": 76,
+      "exercise_answer_sha256": "a0a442830cd58954b82bfdffb796731d890526375bab4b8d33edac248eca4ffd",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_basis": "Direct agent semantic reading against English, primary mathematics, actual pinned source and independently audited fixed evidence. No human fluency or learner outcome.",
+      "checked_conclusion": "Handoff preserves MMMV identity,60/90/120/90geometry, angular/count passes, strict-smallest-angle label failure, checked domain/assumptions and absent witness/outcomes. Typed report is a simpler candidate than a new DSL; no implementation, solver or Godot import is established."
+    }
+  ],
+  "learner_criterion_checks": [
+    {
+      "id": "PHY010-1",
+      "module": "PHY010",
+      "title": "cyclic-geometry",
+      "acceptance_reviewed": "Recover sectors 60,90,120,90 from rays 0,60,150,270 including wraparound to360; explain geometric order versus input order.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Cyclic sectors60,90,120,90 total360; atan2 geometric sorting plus positive wraparound is necessary before sector differences. Arbitrary input adjacency is not geometric adjacency.",
+      "task_alignment": "Final answer-free learner task explicitly elicits this criterion; no participant assessed."
+    },
+    {
+      "id": "PHY010-2",
+      "module": "PHY010",
+      "title": "angular-existence",
+      "acceptance_reviewed": "Compute alternating totals180/180 and residual0; preserve even degree and the ideal unassigned single-interior-vertex, zero-thickness, all-used-crease hypotheses and existential conclusion.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Alternating groups60+120 and90+90 each give180. Under even-degree, ideal zero-thickness, all-used, unassigned single-interior-vertex hypotheses, some M/V assignment locally folds flat. No universal assignment, global sheet or thick-object claim follows.",
+      "task_alignment": "Final answer-free learner task explicitly elicits this criterion; no participant assessed."
+    },
+    {
+      "id": "PHY010-3",
+      "module": "PHY010",
+      "title": "radian-tolerance",
+      "acceptance_reviewed": "Moving e1 changes adjacent sectors with opposite signs: residual magnitude2abs(delta). Classify 1e-10 and1e-8 at tolerance1e-9rad; no degrees or material allowance inferred.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Moving e1 changes adjacent sectors by opposite signs; absolute alternating residual is2abs(delta). At1e-9rad,1e-10delta passes and1e-8delta fails. Floating-point transcription is not executed Rust, and numerical radians are neither degrees nor measured manufacturing allowance.",
+      "task_alignment": "Final answer-free learner task explicitly elicits this criterion; no participant assessed."
+    },
+    {
+      "id": "PHY010-4",
+      "module": "PHY010",
+      "title": "assignment-counterexample",
+      "acceptance_reviewed": "MMMV gives M-V=2 and angular pass but violates opposite labels at the strict60degree minimum with90degree neighbors. No whole IX acceptance follows.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "MMMV has M-V2 and angular pass, but bounding e0/e1 are bothM at a strict60degree minimum with90degree neighbors. This additional necessary-rule violation refutes sufficiency of the two numeric filters for this assignment; no full IX acceptance was observed.",
+      "task_alignment": "Final answer-free learner task explicitly elicits this criterion; no participant assessed."
+    },
+    {
+      "id": "PHY010-5",
+      "module": "PHY010",
+      "title": "coverage",
+      "acceptance_reviewed": "State assigned-card counts1applicable,4border,1isolated and one-U counts0applicable,1other; empty failures/max0 describe no positive coverage. Keep the incidence-model boundary.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Assigned incidence model has1applicable,4border-skipped,1isolated; oneU gives0applicable,1other-crease-skipped. Empty failures/max0 do not establish positive coverage or a solved assignment. Authored branch counts are not parsed FOLD or analyzer execution.",
+      "task_alignment": "Final answer-free learner task explicitly elicits this criterion; no participant assessed."
+    },
+    {
+      "id": "INF007-1",
+      "module": "INF007",
+      "title": "prior",
+      "acceptance_reviewed": "Count16labeled strings with authored fair1/16 prior and entropy4bits; do not infer an actual agent sampling distribution.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Four labeled binary crease choices give16strings and4bits only under the explicit authored uniform1/16prior. No symmetry quotient, actual sampling distribution or physical process was measured.",
+      "task_alignment": "Final answer-free learner task explicitly elicits this criterion; no participant assessed."
+    },
+    {
+      "id": "INF007-2",
+      "module": "INF007",
+      "title": "filters",
+      "acceptance_reviewed": "Count8 Maekawa survivors/H3 and4 both-filter survivors/H2 under conditional uniform distributions. Preserve identities and MMMV counterexample; no full-solver or physical certificate.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Count filter keeps8/H3; adding the strict-smallest-angle necessary rule keeps MVMM,MVVV,VMMM,VMVV with H2 under conditional uniformity. MMMV survives only the count stage. Survivors are not full solver witnesses or physical folds.",
+      "task_alignment": "Final answer-free learner task explicitly elicits this criterion; no participant assessed."
+    },
+    {
+      "id": "INF007-3",
+      "module": "INF007",
+      "title": "skew",
+      "acceptance_reviewed": "Compute entropy1.75 for probabilities1/2,1/4,1/8,1/8 against maximum2bits over the same4states; distinguish concentration from correctness.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "The same four states with probabilities1/2,1/4,1/8,1/8 have entropy0.5+0.5+0.375+0.375=1.75bits, below maximum2. Concentration is not correctness, agent calibration or folding-quality evidence.",
+      "task_alignment": "Final answer-free learner task explicitly elicits this criterion; no participant assessed."
+    },
+    {
+      "id": "INF007-4",
+      "module": "INF007",
+      "title": "average",
+      "acceptance_reviewed": "For bucket sizes8/4/4 derive probabilities1/2,1/4,1/4, expected remainder2.5 and label information1.5, distinct from accepted-branch remainder2.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Buckets8/4/4 have probabilities1/2,1/4,1/4; weighted residual0.5*3+0.25*2+0.25*2=2.5bits. Deterministic coarse label carries1.5bits. Accepted-branch residual2 has prior probability1/4 and is not the all-input average.",
+      "task_alignment": "Final answer-free learner task explicitly elicits this criterion; no participant assessed."
+    },
+    {
+      "id": "INF007-5",
+      "module": "INF007",
+      "title": "handoff",
+      "acceptance_reviewed": "Preserve assignment identities, crease IDs, predicates and probability assumptions. A pass label cannot reconstruct identity, and U is not a fair binary prior.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Count-pass label loses particular assignment identity and its relation to crease IDs. Three bits describes a conditional uniform ensemble, not measured probabilities. UnknownU provides neither a fair binary prior nor an assigned fold; typed reports/DSL remain proposed.",
+      "task_alignment": "Final answer-free learner task explicitly elicits this criterion; no participant assessed."
+    },
+    {
+      "id": "PHI006-1",
+      "module": "PHI006",
+      "title": "existential",
+      "acceptance_reviewed": "Replace a universal assignment claim with existence under the ideal unassigned single-vertex hypotheses; no global, thick-object or manufacturing claim follows.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Correct conclusion is existence of an M/V assignment under ideal unassigned single-vertex hypotheses; replacing it with every assignment inserts a universal quantifier. No whole-sheet or material claim follows.",
+      "task_alignment": "Final answer-free learner task explicitly elicits this criterion; no participant assessed."
+    },
+    {
+      "id": "PHI006-2",
+      "module": "PHI006",
+      "title": "necessity",
+      "acceptance_reviewed": "Use MMMV as a necessary-filter counterexample without refuting the unassigned theorem or assuming complete IX acceptance.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Existence of some flat assignment is compatible with prescribed MMMV violating a further necessary rule. The two numeric conditions do not certify that assignment and do not refute the unassigned theorem.",
+      "task_alignment": "Final answer-free learner task explicitly elicits this criterion; no participant assessed."
+    },
+    {
+      "id": "PHI006-3",
+      "module": "PHI006",
+      "title": "empty-domain",
+      "acceptance_reviewed": "Explain applicable0, empty failures and maximum0 with the unknown-crease skip reason; do not infer a checked vertex or completed assignment.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Unknown incident crease excludes center, leaving applicable0, empty failures and initialized max0. Absence of failures in an empty checked set supplies neither positive coverage nor a solved unknown; branch model is not runtime observation.",
+      "task_alignment": "Final answer-free learner task explicitly elicits this criterion; no participant assessed."
+    },
+    {
+      "id": "PHI006-4",
+      "module": "PHI006",
+      "title": "aggregate",
+      "acceptance_reviewed": "Locate the other conjuncts of the IX aggregate predicate; distinguish missing full input/frame/order/runtime verdict and local versus whole fold, stack or motion.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Whole IX predicate also checks conflicts, isometry, crease orientation, order and other conditions. Complete source-bound FOLD input/frame/order and actual full result are absent, so local arithmetic does not prove aggregate acceptance, physical impossibility or a reproduced bug.",
+      "task_alignment": "Final answer-free learner task explicitly elicits this criterion; no participant assessed."
+    },
+    {
+      "id": "PHI006-5",
+      "module": "PHI006",
+      "title": "semantic-message",
+      "acceptance_reviewed": "Write a handoff preserving subject, identity, predicate, domain, assumptions and witness; retain MMMV extra-rule failure and missing outcomes. The DSL is proposed, with a typed report as simpler alternative.",
+      "decision": "pass",
+      "learner_decision": null,
+      "review_note": "Handoff preserves MMMV identity,60/90/120/90geometry, angular/count passes, strict-smallest-angle label failure, checked domain/assumptions and absent witness/outcomes. Typed report is a simpler candidate than a new DSL; no implementation, solver or Godot import is established.",
+      "task_alignment": "Final answer-free learner task explicitly elicits this criterion; no participant assessed."
+    }
+  ],
+  "source_bindings": [
+    {
+      "path": "streeling/courses/physics/en/phy-010-check-local-flat-fold-angles.md",
+      "sha256": "8e331069332a44b33514768567098e9a7915f6105c2f6f70624d829ff1df0716"
+    },
+    {
+      "path": "streeling/courses/physics/fr/phy-010-check-local-flat-fold-angles.fr.md",
+      "sha256": "47f4f489f9ba363e0e980b0d82f00998bb80bb05cab157998e8a61cfbcd73865"
+    },
+    {
+      "path": "streeling/courses/physics/es/phy-010-check-local-flat-fold-angles.es.md",
+      "sha256": "c66d7f9ffb8448b3502b70a83d12bcb416c8a7b411217155da67da140f8a99e2"
+    },
+    {
+      "path": "streeling/courses/information-theory/en/inf-007-count-crease-candidates-without-inventing-probabilities.md",
+      "sha256": "5b449117cd9da86253c5f353d68eba084651adafb11c192668d9ead324828739"
+    },
+    {
+      "path": "streeling/courses/information-theory/fr/inf-007-count-crease-candidates-without-inventing-probabilities.fr.md",
+      "sha256": "fec122eb483c4a6d1998705953150a3f367983e4d524be0ecc6b519683dcbe98"
+    },
+    {
+      "path": "streeling/courses/information-theory/es/inf-007-count-crease-candidates-without-inventing-probabilities.es.md",
+      "sha256": "146c25efce5633fea587d83f7f7bd11197b61c6d2ac6fc4001343d43879b1c20"
+    },
+    {
+      "path": "streeling/courses/philosophy/en/phi-006-preserve-the-quantifier-in-a-fold-verdict.md",
+      "sha256": "30d094117d25fcd4fc99f8602a77e520671b86d5d20b4d999ca0dbaf0c2fbbf2"
+    },
+    {
+      "path": "streeling/courses/philosophy/fr/phi-006-preserve-the-quantifier-in-a-fold-verdict.fr.md",
+      "sha256": "8d2b1a0cead4c5b7966f610cb1ba1706e0b22d317a095c6315851cab7462c3ef"
+    },
+    {
+      "path": "streeling/courses/philosophy/es/phi-006-preserve-the-quantifier-in-a-fold-verdict.es.md",
+      "sha256": "3a25c13f6de326a14d14574061e3072ee7dcad9029450c3faf567981fd8198f7"
+    }
+  ],
+  "supporting_bindings": [
+    {
+      "path": "code/streeling/evidence/origami-local-2026-10-22/production-plan.md",
+      "sha256": "6f55111e8b7afa209553b84744a2f29a9f2c3693651b311a8492dc23f13a768e"
+    },
+    {
+      "path": "code/streeling/evidence/origami-local-2026-10-22/README.md",
+      "sha256": "bd6be810bf8ef1726fedacef0629b79873b94f9d5dfe68733c75d4fe339dae13"
+    },
+    {
+      "path": "code/streeling/evidence/origami-local-2026-10-22/primary-readback.json",
+      "sha256": "d672dd93d70618deb6ba01b6288238dad1f522b6813c777af07f7003aed14896"
+    },
+    {
+      "path": "code/streeling/evidence/origami-local-2026-10-22/primary-reading.json",
+      "sha256": "91fdd3d5eb867b814f2bc658ad303e21c96d3ae70cfb0b64f120996863981b89"
+    },
+    {
+      "path": "code/streeling/evidence/origami-local-2026-10-22/sector-calculations.json",
+      "sha256": "4fae22826a4ca15cd3547fc3ffcdd4b7af8d71974b88f8ed7d804e78f9f090d3"
+    },
+    {
+      "path": "code/streeling/evidence/origami-local-2026-10-22/assignment-enumeration.json",
+      "sha256": "38e2ac6bbd6da76d4216f0d3bc27aa53609fa31d7ba27767250788e8fa0b85d0"
+    },
+    {
+      "path": "code/streeling/evidence/origami-local-2026-10-22/candidate-information.json",
+      "sha256": "cecd60e0068cdc0445f7031917d1a6c199f4e21ab73a3854d710b3305d6e525b"
+    },
+    {
+      "path": "code/streeling/evidence/origami-local-2026-10-22/applicability-cards.json",
+      "sha256": "3ceb9484eba44d52c29d0bf4c49a4ee46462d5491c4611ea56dc4d752a99a0da"
+    },
+    {
+      "path": "code/streeling/evidence/origami-local-2026-10-22/logical-claims.json",
+      "sha256": "0a3e6c0e2d5f060e85498d715d5a6c2d83802e12b1b968afbc534d48f5605fa5"
+    },
+    {
+      "path": "code/streeling/evidence/origami-local-2026-10-22/source-observations.json",
+      "sha256": "1590ce364f1528f3b5743ea29383ee989a8b43d7863a741db816468aa3ebe8d4"
+    },
+    {
+      "path": "code/streeling/evidence/origami-local-2026-10-22/data-audit.json",
+      "sha256": "f3656c1c8b43743a98adc2c3e93f18dd1de20b15a5984bb6d04d4b33a79459b7"
+    },
+    {
+      "path": "code/streeling/evidence/origami-local-2026-10-22/learner-task.md",
+      "sha256": "e68ab9d6993b463a4ce62e0ef51de1bcc6eeb05bd2e86a2f8a75099ead6cd650"
+    },
+    {
+      "path": "code/streeling/evidence/origami-local-2026-10-22/reviewer-rubric.json",
+      "sha256": "9236b04842a034c9648964f0290b690bb3f769566697484dc941029186fac588"
+    },
+    {
+      "path": "code/streeling/evidence/origami-local-2026-10-22/official-links.json",
+      "sha256": "2d14e53b4e5cdac12cc749b45d2a00a5f7c4c0a097cd232bc91a70a19b9cd024"
+    }
+  ],
+  "prerequisite_bindings": [
+    {
+      "path": "streeling/courses/physics/en/phy-005-sheet-thickness-and-scene-units.md",
+      "sha256": "d5c70c6a5cdc7d41e48e89087ced3d7b1bf4a095ec82e9966201c2ea7c7d798c"
+    },
+    {
+      "path": "streeling/courses/computer-science/en/cs-009-composing-origami-panel-constraints.md",
+      "sha256": "603098c720ce8a9dd5c142f282278ce39e418d7f66bd14a42dd9e0df12c2dba9"
+    },
+    {
+      "path": "streeling/courses/information-theory/en/inf-001-entropy-of-governance.md",
+      "sha256": "909cc7900568651d75287a168187e9465152ca1c295799929fa71ddbf8bb5dd5"
+    },
+    {
+      "path": "streeling/courses/philosophy/en/phi-002-when-is-an-advisory-decision-justified.md",
+      "sha256": "99200375356de40b214a76b3273daf1a51fded6525611f1d7ff768c0589d1c38"
+    }
+  ],
+  "locale_url_and_format_checks": [
+    {
+      "path": "streeling/courses/physics/en/phy-010-check-local-flat-fold-angles.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/physics/fr/phy-010-check-local-flat-fold-angles.fr.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/physics/es/phy-010-check-local-flat-fold-angles.es.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/information-theory/en/inf-007-count-crease-candidates-without-inventing-probabilities.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/information-theory/fr/inf-007-count-crease-candidates-without-inventing-probabilities.fr.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/information-theory/es/inf-007-count-crease-candidates-without-inventing-probabilities.es.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/philosophy/en/phi-006-preserve-the-quantifier-in-a-fold-verdict.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/philosophy/fr/phi-006-preserve-the-quantifier-in-a-fold-verdict.fr.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true
+    },
+    {
+      "path": "streeling/courses/philosophy/es/phi-006-preserve-the-quantifier-in-a-fold-verdict.es.md",
+      "ordered_urls_match_english": true,
+      "utf8_lf_no_bom": true
+    }
+  ],
+  "primary_source_review": [
+    {
+      "path": "crates/ix-origami/src/local.rs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ix/d7c22fdd6a62becb66b9d7246ea85850e7c55854/crates/ix-origami/src/local.rs",
+      "sha256": "f1a0dc3ca3b25b941a4d4971a14ceeee6cade205f830aef238ccfe87c3f83439",
+      "review_scope": "Directly read relevant local predicates, Assignment M/V classification, full aggregate conjuncts, skip test, thickness scope or FOLD assignment definitions. No Rust execution."
+    },
+    {
+      "path": "crates/ix-origami/src/fold.rs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ix/d7c22fdd6a62becb66b9d7246ea85850e7c55854/crates/ix-origami/src/fold.rs",
+      "sha256": "558ab071a94f2687d848391408a11d8004b55afdda86dd28a0dd4396b5059115",
+      "review_scope": "Directly read relevant local predicates, Assignment M/V classification, full aggregate conjuncts, skip test, thickness scope or FOLD assignment definitions. No Rust execution."
+    },
+    {
+      "path": "crates/ix-origami/src/lib.rs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ix/d7c22fdd6a62becb66b9d7246ea85850e7c55854/crates/ix-origami/src/lib.rs",
+      "sha256": "d77c513129a2647259c6ad432962a5c36d689696afbc4e12ba8d2b425137ca8b",
+      "review_scope": "Directly read relevant local predicates, Assignment M/V classification, full aggregate conjuncts, skip test, thickness scope or FOLD assignment definitions. No Rust execution."
+    },
+    {
+      "path": "crates/ix-origami/src/layers.rs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ix/d7c22fdd6a62becb66b9d7246ea85850e7c55854/crates/ix-origami/src/layers.rs",
+      "sha256": "959afa31a4a00b85ee73e37444ea25c358dbcd551996be91e3127dc8f0b17f41",
+      "review_scope": "Directly read relevant local predicates, Assignment M/V classification, full aggregate conjuncts, skip test, thickness scope or FOLD assignment definitions. No Rust execution."
+    },
+    {
+      "path": "crates/ix-origami/tests/crane.rs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ix/d7c22fdd6a62becb66b9d7246ea85850e7c55854/crates/ix-origami/tests/crane.rs",
+      "sha256": "f7a46dd381f761ee9f47a94d674c6f96090a38576bc8c7c328f824ce4d4693b9",
+      "review_scope": "Directly read relevant local predicates, Assignment M/V classification, full aggregate conjuncts, skip test, thickness scope or FOLD assignment definitions. No Rust execution."
+    },
+    {
+      "path": "crates/ix-origami/src/thickness.rs",
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ix/d7c22fdd6a62becb66b9d7246ea85850e7c55854/crates/ix-origami/src/thickness.rs",
+      "sha256": "abae7d9b41cbf5a825b4dbe6f58b6579687c79027f1ae151b24e1b67eee30b8d",
+      "review_scope": "Directly read relevant local predicates, Assignment M/V classification, full aggregate conjuncts, skip test, thickness scope or FOLD assignment definitions. No Rust execution."
+    },
+    {
+      "path": "doc/spec.md",
+      "url": "https://raw.githubusercontent.com/edemaine/fold/824f9fa6f944248787b0b2077ef622761489201e/doc/spec.md",
+      "sha256": "492a23850990412d0bd607a0835d139e87fad7665aa9ea7fcaf95917c232666b",
+      "review_scope": "Directly read relevant local predicates, Assignment M/V classification, full aggregate conjuncts, skip test, thickness scope or FOLD assignment definitions. No Rust execution."
+    }
+  ],
+  "official_document_review": [
+    {
+      "url": "https://arxiv.org/pdf/1307.1065#page=8",
+      "actual_read": "Primary body sections2/5 and supplied page8 image visually read: Kawasaki, Maekawa and strict-smallest-angle neighboring-sector hypotheses. Historical complexity/open questions not adopted as current claims."
+    },
+    {
+      "url": "https://erikdemaine.org/papers/OSME2001/paper.pdf#page=6",
+      "actual_read": "Actual primary section3.1 body read: unspecified crease directions, local existence and need for additional assignment characterization; use precisely listed creases."
+    },
+    {
+      "url": "https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf#page=11",
+      "actual_read": "Actual web PDF body sections6/conditional entropy read; later supplied local page11 image visually read, confirming negative sign and uniform maximumlogN. Initial direct403 remains historical; later200 byte readback belongs to official-links chronology."
+    },
+    {
+      "url": "https://docs.godotengine.org/en/4.6/",
+      "actual_read": "Versioned official landing link at first named tool mention; current10URL transport receipt checked. No Godot usage, import or API behavior claimed."
+    }
+  ],
+  "primary_visual_reads": [
+    {
+      "path": "C:/tmp/streeling-origami-hull-page8-20261022.png",
+      "sha256": "931d56500047481c78a457654cfac05207eb8130bd2f971fe3b821f7347e8cbd",
+      "actual_viewed": true,
+      "page": 8,
+      "scope": "Provided page rendering read; no new physical or solver experiment."
+    },
+    {
+      "path": "C:/tmp/streeling-origami-shannon-page11-20261022.png",
+      "sha256": "d1983dee27c09449b8da091a4d4585c963ba9456364ed2caff57f43ea7ed1de8",
+      "actual_viewed": true,
+      "page": 11,
+      "scope": "Provided later successful-download rendering read. Initial failed direct transport remains separately recorded."
+    }
+  ],
+  "pending": {
+    "human_technical_review": null,
+    "fluent_language_review": null,
+    "learner_attempts": null,
+    "independent_learner_transfer": null,
+    "full_ix_analysis": null,
+    "rust_execution": null,
+    "full_solver": null,
+    "physical_fold": null,
+    "folded_mesh": null,
+    "scene_trial": null,
+    "scene_import": null,
+    "agent_performance": null,
+    "dsl_implementation": null,
+    "deployed_html": null
+  },
+  "human_technical_review": null,
+  "fluent_language_review": null,
+  "learner_attempts": null,
+  "independent_learner_transfer": null,
+  "full_ix_analysis": null,
+  "rust_execution": null,
+  "full_solver": null,
+  "physical_fold": null,
+  "folded_mesh": null,
+  "scene_trial": null,
+  "scene_import": null,
+  "agent_performance": null,
+  "dsl_implementation": null,
+  "deployed_html": null,
+  "boundaries": [
+    "Kawasaki existence is for an unassigned ideal single interior all-used-crease neighborhood, not every prescribed assignment or a complete folded object.",
+    "MMMV is a counterexample to sufficiency of two local numeric filters. No full IX object/result, physical impossibility or reproduced production acceptance is claimed.",
+    "Sixteen labeled strings and8/4survivors are authored necessary-filter enumeration, not symmetry classes, full folded witnesses or actual solver/agent outcomes.",
+    "Uniform conditional entropies4/3/2, skew1.75 and average residual2.5/label information1.5 depend on explicit models; cardinality or unknownU does not supply an observed prior.",
+    "Applicable0 with empty failures and initialized max0 means empty checked coverage. U/F remain distinct labels; hand incidence cards are not parsed complete FOLD or executed Rust.",
+    "Numerical absolute tolerance1e-9rad and adjacent opposite-sign perturbations are not a material allowance or a physical folding measurement.",
+    "Full aggregate checks, global sheet state, positive-thickness stack and motion path are separate subjects; typed handoff/DSL remains proposed.",
+    "No builds, Rust tests, dependencies, paid calls, scene/host/GPU/audio/physical experiments or source corrections performed by this reviewer."
+  ]
+}

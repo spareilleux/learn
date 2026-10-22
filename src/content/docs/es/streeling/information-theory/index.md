@@ -17,3 +17,4 @@ sidebar:
 - [INF-004 · Pérdida de información en los handoffs entre agentes](inf-004-information-loss-in-agent-handoffs/)
 - [INF-005 · Cuantización y renders indistinguibles](inf-005-quantization-and-indistinguishable-renders/)
 - [INF-006 · Comprender qué olvidan los límites de una escena](inf-006-know-what-scene-bounds-forget/)
+- [INF-007 · Contar candidatos de pliegues sin inventar probabilidades](inf-007-count-crease-candidates-without-inventing-probabilities/)

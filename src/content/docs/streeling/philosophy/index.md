@@ -16,3 +16,4 @@ sidebar:
 - [PHI-003 · What Does “the Same Chord” Mean in GA Search?](phi-003-what-does-the-same-chord-mean/)
 - [PHI-004 · Separate Performance Trade-offs from Values](phi-004-separate-performance-tradeoffs-from-values/)
 - [PHI-005 · Test Idempotence Beyond Replayed Return Values](phi-005-test-idempotence-beyond-replayed-values/)
+- [PHI-006 · Preserve the Quantifier in a Fold Verdict](phi-006-preserve-the-quantifier-in-a-fold-verdict/)
