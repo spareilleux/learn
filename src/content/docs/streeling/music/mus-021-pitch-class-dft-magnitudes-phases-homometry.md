@@ -3,7 +3,7 @@ title: The Pitch-Class DFT — What the Magnitudes Keep, and What the Phases Add
 description: The Pitch-Class DFT — Magnitudes, Phases and Homometry — Music
 sidebar:
   label: MUS-021 · The Pitch-Class DFT
-  order: 18
+  order: 21
 editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/music/en/mus-021-pitch-class-dft-magnitudes-phases-homometry.md
 ---
 

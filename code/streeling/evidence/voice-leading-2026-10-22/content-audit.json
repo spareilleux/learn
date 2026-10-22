@@ -1,0 +1,2338 @@
+{
+  "kind": "Independent trilingual voice-leading course and prepared-task source-assisted AI audit",
+  "checked_at_utc": "2026-10-22T16:09:17.803021+00:00",
+  "repository_read_only": "C:\\tmp\\learn-streeling-craft-transfer-20261022",
+  "external_receipt": "C:\\tmp\\streeling-voiceleading-course-audit-20261022.json",
+  "source_commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+  "result": "pass",
+  "verdict": "Pass for scoped factual and prepared-task AI audit; no participant or human approval implied.",
+  "course_count": 3,
+  "locale_source_count": 9,
+  "exercise_answer_pairs_checked": 45,
+  "rubric_criteria_checked": 15,
+  "finding_count": 0,
+  "findings": [],
+  "resolved_finding_count": 4,
+  "resolved_findings": [
+    {
+      "id": "CA-01",
+      "path": "code/streeling/evidence/voice-leading-2026-10-22/learner-task.md",
+      "line": 7,
+      "related_path": "code/streeling/evidence/voice-leading-2026-10-22/reviewer-rubric.json",
+      "related_line": 7,
+      "finding": "MUS015 criterion required an unprompted registered counterexample; adding that prompt also needed an explicit costs/witness criterion.",
+      "resolution": "Task now requests settings,costs and witness; criterion1 scores O/Pon,T/Ioff,native4/exhaustive0,[60,75,65].",
+      "status": "resolved_verified"
+    },
+    {
+      "id": "CA-02",
+      "path": "code/streeling/evidence/voice-leading-2026-10-22/reviewer-rubric.json",
+      "line": 22,
+      "finding": "MUS016 criterion accepted one fret placement using OR while task required both.",
+      "resolution": "Criterion explicitly requires both planA and planB arithmetic.",
+      "status": "resolved_verified"
+    },
+    {
+      "id": "CA-03",
+      "path": "code/streeling/voice-leading/README.md",
+      "line": 6,
+      "finding": "Lab README used C:/tmp output and powershell fence despite requested universal relative command.",
+      "resolution": "README and all3MUS015 locale sources share exact relative command in sh fence; final retained native run input README hash matches current bytes.",
+      "status": "resolved_verified"
+    },
+    {
+      "id": "CA-04",
+      "path": "streeling/courses/music/en/mus-015-choose-voice-leading-equivalences.md",
+      "line": 66,
+      "affected_sources": "all9courses",
+      "finding": "Microsoft official-doc links included/en-us contrary to repository locale-neutral URL convention.",
+      "resolution": "All9sources use locale-neutral requestedURLs; refreshed official readback retains200redirect observations.",
+      "status": "resolved_verified"
+    }
+  ],
+  "sources": [
+    {
+      "path": "streeling/courses/music/en/mus-015-choose-voice-leading-equivalences.md",
+      "bytes": 7533,
+      "sha256": "e7c4d26f104e138414bfcedf35a30ca79efc4a58a0ba9f2ce6d168691699f56e",
+      "module": "mus-015-choose-voice-leading-equivalences",
+      "locale": "en",
+      "english_sha256": "e7c4d26f104e138414bfcedf35a30ca79efc4a58a0ba9f2ce6d168691699f56e"
+    },
+    {
+      "path": "streeling/courses/music/fr/mus-015-choose-voice-leading-equivalences.fr.md",
+      "bytes": 9255,
+      "sha256": "bd0ed13965cc497dc309d4c5043c88acf01c5dea973946c7ebe8fd282cfe6f9d",
+      "module": "mus-015-choose-voice-leading-equivalences",
+      "locale": "fr",
+      "english_sha256": "e7c4d26f104e138414bfcedf35a30ca79efc4a58a0ba9f2ce6d168691699f56e"
+    },
+    {
+      "path": "streeling/courses/music/es/mus-015-choose-voice-leading-equivalences.es.md",
+      "bytes": 8889,
+      "sha256": "27389b3019994cc8488dfd2b3c880a82de7971ff18909d4af552136ae3894867",
+      "module": "mus-015-choose-voice-leading-equivalences",
+      "locale": "es",
+      "english_sha256": "e7c4d26f104e138414bfcedf35a30ca79efc4a58a0ba9f2ce6d168691699f56e"
+    },
+    {
+      "path": "streeling/courses/music/en/mus-016-recover-voice-correspondence.md",
+      "bytes": 6973,
+      "sha256": "a1e3d869e84427a548b0ba09ae4ca3b0ed7c989e23487ea36447edae06abdc69",
+      "module": "mus-016-recover-voice-correspondence",
+      "locale": "en",
+      "english_sha256": "a1e3d869e84427a548b0ba09ae4ca3b0ed7c989e23487ea36447edae06abdc69"
+    },
+    {
+      "path": "streeling/courses/music/fr/mus-016-recover-voice-correspondence.fr.md",
+      "bytes": 8376,
+      "sha256": "51c9a43720846435082681eaf57a2a4e7e4853928a1dc8d8187ed348eb0cbd19",
+      "module": "mus-016-recover-voice-correspondence",
+      "locale": "fr",
+      "english_sha256": "a1e3d869e84427a548b0ba09ae4ca3b0ed7c989e23487ea36447edae06abdc69"
+    },
+    {
+      "path": "streeling/courses/music/es/mus-016-recover-voice-correspondence.es.md",
+      "bytes": 8215,
+      "sha256": "5e53cd2d319074f4e02c5e3993d6dc82ee7d5a8cab3a2aaf5760594891e5217a",
+      "module": "mus-016-recover-voice-correspondence",
+      "locale": "es",
+      "english_sha256": "a1e3d869e84427a548b0ba09ae4ca3b0ed7c989e23487ea36447edae06abdc69"
+    },
+    {
+      "path": "streeling/courses/music/en/mus-017-audit-voice-leading-rankings.md",
+      "bytes": 7160,
+      "sha256": "35d9a2700b50347f1bcb3078537aafd66786ecf8ba11c0a4e9f302aa72f70eac",
+      "module": "mus-017-audit-voice-leading-rankings",
+      "locale": "en",
+      "english_sha256": "35d9a2700b50347f1bcb3078537aafd66786ecf8ba11c0a4e9f302aa72f70eac"
+    },
+    {
+      "path": "streeling/courses/music/fr/mus-017-audit-voice-leading-rankings.fr.md",
+      "bytes": 8487,
+      "sha256": "df541d45cce3476d5fedd27e335d9f07e9c1bc2a788d57902498e144e66d2202",
+      "module": "mus-017-audit-voice-leading-rankings",
+      "locale": "fr",
+      "english_sha256": "35d9a2700b50347f1bcb3078537aafd66786ecf8ba11c0a4e9f302aa72f70eac"
+    },
+    {
+      "path": "streeling/courses/music/es/mus-017-audit-voice-leading-rankings.es.md",
+      "bytes": 8317,
+      "sha256": "fe581a333e45d351f9df5e01782e72533f1255ef096f767ab202d91b48a64b2a",
+      "module": "mus-017-audit-voice-leading-rankings",
+      "locale": "es",
+      "english_sha256": "35d9a2700b50347f1bcb3078537aafd66786ecf8ba11c0a4e9f302aa72f70eac"
+    }
+  ],
+  "checked_evidence_and_support_files": [
+    {
+      "path": "AGENTS.md",
+      "bytes": 6866,
+      "sha256": "a9f9fa23747f397cbe7a791eb3a4ae5736ff9448da6e120bd44f2ae3524fd15d"
+    },
+    {
+      "path": "code/streeling/evidence/voice-leading-2026-10-22/bindings.json",
+      "bytes": 3873,
+      "sha256": "74182e516adc69664c1f782502704b8d7ebd028a4432d561049b826addd4770b"
+    },
+    {
+      "path": "code/streeling/evidence/voice-leading-2026-10-22/native-results.json",
+      "bytes": 17280,
+      "sha256": "b30b27a3acdfcffbac374acfef3ffd69283dc3c67e19a23dc818bee612387ed4"
+    },
+    {
+      "path": "code/streeling/evidence/voice-leading-2026-10-22/native-commands.json",
+      "bytes": 19248,
+      "sha256": "231a91adfd2a337886f34b005b5fb5ce27b1e9aa373b01c5244144e84450e1e0"
+    },
+    {
+      "path": "code/streeling/evidence/voice-leading-2026-10-22/native-results.json.copy.json",
+      "bytes": 377,
+      "sha256": "13bb0b6135155357b6e69473b12b494f0588504f5a00a41993a49b1f63f16196"
+    },
+    {
+      "path": "code/streeling/evidence/voice-leading-2026-10-22/native-commands.json.copy.json",
+      "bytes": 379,
+      "sha256": "1c00ecbc76adc4c80d5cb9c2c305bb8742dfa2c31d295ec1dbcad4810e8c976b"
+    },
+    {
+      "path": "code/streeling/evidence/voice-leading-2026-10-22/negative-controls.json",
+      "bytes": 1263,
+      "sha256": "9438c4b10570940b169bc77a9672e970ae33559fd52bb5521113edcd01179c13"
+    },
+    {
+      "path": "code/streeling/evidence/voice-leading-2026-10-22/data-audit.json",
+      "bytes": 575015,
+      "sha256": "2f052a81fcb8259a932d2e0432f17d4bcb9a6e546bdb1ad9aed892a029ff1aef"
+    },
+    {
+      "path": "code/streeling/evidence/voice-leading-2026-10-22/learner-task.md",
+      "bytes": 3018,
+      "sha256": "c013df377836a345078c11955616b274787065f26bffeb9ce705f58d54f063e0"
+    },
+    {
+      "path": "code/streeling/evidence/voice-leading-2026-10-22/reviewer-rubric.json",
+      "bytes": 2097,
+      "sha256": "c601eee1e1ca31815cd62ce98f884e8e1151e6dc3e76d1be501b59505d5c7619"
+    },
+    {
+      "path": "code/streeling/evidence/voice-leading-2026-10-22/official-doc-readback.json",
+      "bytes": 1052,
+      "sha256": "b21b7b192dbbf05836faf6ae7d9d7a735695aac09c851ff2ece7d98f2cf0b00e"
+    },
+    {
+      "path": "code/streeling/evidence/voice-leading-2026-10-22/public-input-readback.json",
+      "bytes": 2194,
+      "sha256": "b259c4000f6b97dde0ed774369b3de3f970128e2d6ea98e6dd9ae8be75b4d1d8"
+    },
+    {
+      "path": "code/streeling/voice-leading/run.mjs",
+      "bytes": 6205,
+      "sha256": "2ce00cfd60a7dba40c0398f8c5e2ad239a039770ce2c58fda28c718a0e801811"
+    },
+    {
+      "path": "code/streeling/voice-leading/Probe.cs",
+      "bytes": 10391,
+      "sha256": "63b20d1d7e41272f1835930379263d237cef4fb2ef35c65fe486035f2fbb7a01"
+    },
+    {
+      "path": "code/streeling/voice-leading/MetadataAdapter.cs",
+      "bytes": 164,
+      "sha256": "4efdf03568bad3957590ed8af9ece3381334722bfdbc62bd791ce03839b59392"
+    },
+    {
+      "path": "code/streeling/voice-leading/VoiceLeadingProbe.csproj",
+      "bytes": 329,
+      "sha256": "d4973831025b0d276473f53639fd44632399a89cf5e1a7fb8d2066b2ae60a487"
+    },
+    {
+      "path": "code/streeling/voice-leading/global.json",
+      "bytes": 91,
+      "sha256": "b9cbf70f1a0418dd0d9b86d7bac0616700b85c8425a1314a64cb4b755a92dbdb"
+    },
+    {
+      "path": "code/streeling/voice-leading/NuGet.Config",
+      "bytes": 117,
+      "sha256": "964302159308872b9729e1828a1ba897f30634f7bd751cde11ea8e6fed8cfb97"
+    },
+    {
+      "path": "code/streeling/voice-leading/expected-cases.json",
+      "bytes": 2804,
+      "sha256": "01b9d0d943232e3f6562341b840563c02b83a7a13206e23867611bcac91cfd3b"
+    },
+    {
+      "path": "code/streeling/voice-leading/source.json",
+      "bytes": 1970,
+      "sha256": "fc78242b009707b8e2672d1fc274fc75e815e370478c6662b844f398bb9d9edb"
+    },
+    {
+      "path": "code/streeling/voice-leading/README.md",
+      "bytes": 3857,
+      "sha256": "d944828b38e02adc4869d152cfdffba76b52ad17b4fc207b9cbbed2035f966c7"
+    },
+    {
+      "path": "code/streeling/voice-leading/.gitattributes",
+      "bytes": 98,
+      "sha256": "72d5da6a350b43d984ad0569f59ba5f39aa3ff3d390d45a817d931fa2b38396c"
+    },
+    {
+      "path": "code/streeling/voice-leading/vendor/Common/GA.Domain.Services/Atonal/VoiceLeadingSpace.cs",
+      "bytes": 3809,
+      "sha256": "2f3bd2240cd08305dace51f62069e60e6336d1b5088ce24eed2eabddf6c830ac"
+    },
+    {
+      "path": "code/streeling/voice-leading/vendor/Common/GA.Domain.Core/Theory/Atonal/VoiceLeadingOptions.cs",
+      "bytes": 699,
+      "sha256": "4d9068fe2231fd6e8c4f3d7f2ddb2b93ae68b699fe65654104bf5d606bf89891"
+    },
+    {
+      "path": "code/streeling/voice-leading/vendor/LICENSE",
+      "bytes": 1072,
+      "sha256": "b0592d8995a0b7963cd8226d5a1e70f75c055810fc68ce3b0e5e6e3fa646c3c0"
+    },
+    {
+      "path": "streeling/courses/music/en/mus-014-inversions-bass-line.md",
+      "bytes": 32653,
+      "sha256": "3dcdae4fcb8ffa982268b44216eae920827c69e367a0cb090cdc7e36c98abae5"
+    },
+    {
+      "path": "streeling/courses/guitar-studies/en/gtr-004-hear-and-audit-parallel-motion.md",
+      "bytes": 13554,
+      "sha256": "316bd71e22c162ada94a241fc671d43489d377d3fc538789570e574a92b680b2"
+    }
+  ],
+  "checked_exercises": [
+    {
+      "id": "mus-015-choose-voice-leading-equivalences/en/exercise-1",
+      "path": "streeling/courses/music/en/mus-015-choose-voice-leading-equivalences.md",
+      "exercise_line": 27,
+      "answer_line": 31,
+      "prompt": "For an exercise tracking one labeled melody voice from C4 to C5, should octave equivalence hide the leap?",
+      "answer": "> **Answer:** No. Keep the register and report the motion of 12 semitones. A pitch-class comparison may separately report 0, but it answers a different question. Neither score states whether a particular guitar fingering is comfortable.",
+      "answer_sha256": "f66b30b97515178d8f47119aec01e21b69992ffaa248a6223627efe679192414",
+      "factual_check": "pass",
+      "independent_reason": "72-60=12 registered semitones; circular cost=min(12 mod12,12-(12 mod12))=0. Comfort not observed.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    },
+    {
+      "id": "mus-015-choose-voice-leading-equivalences/en/exercise-2",
+      "path": "streeling/courses/music/en/mus-015-choose-voice-leading-equivalences.md",
+      "exercise_line": 46,
+      "answer_line": 50,
+      "prompt": "An agent quotes 0 for these arrays and concludes that the first labeled voice did not move. What information is missing?",
+      "answer": "> **Answer:** The equivalence settings and the voice correspondence. A zero after reassignment does not preserve the first entry as the first voice. The fixed-position absolute comparison is 14; its signed motions are +7, 0 and −7 semitones.",
+      "answer_sha256": "84417238af96373f1b171f4deadddf268f1b99db3ec8201a71ca2399ca8641a6",
+      "factual_check": "pass",
+      "independent_reason": "Fixed labels have motions [+7,0,-7], absolute sum14, circular sum5+0+5=10; reassignment gives0 and cannot preserve original labels by implication.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    },
+    {
+      "id": "mus-015-choose-voice-leading-equivalences/en/exercise-3",
+      "path": "streeling/courses/music/en/mus-015-choose-voice-leading-equivalences.md",
+      "exercise_line": 56,
+      "answer_line": 60,
+      "prompt": "Write a truthful annotation for that octave shift, including both distances and the common-note distinction.",
+      "answer": "> **Answer:** “Registered distance 36; octave-equivalent distance 0; 0 common registered pitches and 3 common pitch classes.” Do not describe the notes as sustained or the hand as stationary. Duration, articulation and physical placement were not measured.",
+      "answer_sha256": "9b84f6f5b55b163092126316197558a530ae20d7b05e8ddf9f949230cad709ec",
+      "factual_check": "pass",
+      "independent_reason": "Three +12 motions total36; circular costs all0; registered sets disjoint and pitch-class intersection {0,4,7} has3 elements; sustain not measured.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    },
+    {
+      "id": "mus-015-choose-voice-leading-equivalences/en/exercise-4",
+      "path": "streeling/courses/music/en/mus-015-choose-voice-leading-equivalences.md",
+      "exercise_line": 74,
+      "answer_line": 78,
+      "prompt": "Calculate the circular costs for the assignment `[60,75,65]`. Should a passing lab certify the original equivalence implementation?",
+      "answer": "> **Answer:** The matched differences are 0, 12 and 0, giving circular costs 0, 0 and 0. No: characterization succeeds by reproducing native 4 versus exhaustive 0. The production method has not been fixed by this lab.",
+      "answer_sha256": "740f87e9951e2d613fe6956fe8faad36ddfddc524e1926205e182f4cab284388",
+      "factual_check": "pass",
+      "independent_reason": "Witness [60,75,65] minus [60,63,65] is [0,12,0], circular costs [0,0,0]. Native cyclic minimum4 remains a characterized failure, not a fix.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    },
+    {
+      "id": "mus-015-choose-voice-leading-equivalences/en/exercise-5",
+      "path": "streeling/courses/music/en/mus-015-choose-voice-leading-equivalences.md",
+      "exercise_line": 84,
+      "answer_line": 88,
+      "prompt": "Which additional evidence would justify calling a recommended voicing physically easy?",
+      "answer": "> **Answer:** An actual string/fret assignment, the player's constraints and a playing trial with a stated criterion. The scalar calculations, source inspection and standalone run provide none of those observations. Continue with [voice correspondence](mus-016-recover-voice-correspondence.md) before treating a minimum as a performance plan.",
+      "answer_sha256": "c26467517d96f209735329de069ffbe6fcd43813df7211aa11aebe3c4743262a",
+      "factual_check": "pass",
+      "independent_reason": "Physical ease requires actual string/fret assignment, player constraints and a playing criterion/trial; scalar and source evidence supply none.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    },
+    {
+      "id": "mus-015-choose-voice-leading-equivalences/fr/exercise-1",
+      "path": "streeling/courses/music/fr/mus-015-choose-voice-leading-equivalences.fr.md",
+      "exercise_line": 27,
+      "answer_line": 31,
+      "prompt": "Dans un exercice qui suit une voix mélodique identifiée de C4 à C5, l’équivalence d’octave doit-elle masquer le saut ?",
+      "answer": "> **Réponse :** Non. Conservez le registre et signalez un mouvement de 12 demi-tons. Une comparaison des classes de hauteurs peut indiquer 0 séparément, mais elle répond à une autre question. Aucun de ces scores ne dit si un doigté de guitare donné est confortable.",
+      "answer_sha256": "f6640bcac334e258422671e1be877d994ddeccca8ce1af3d34b101a429c19493",
+      "factual_check": "pass",
+      "independent_reason": "72-60=12 registered semitones; circular cost=min(12 mod12,12-(12 mod12))=0. Comfort not observed.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    },
+    {
+      "id": "mus-015-choose-voice-leading-equivalences/fr/exercise-2",
+      "path": "streeling/courses/music/fr/mus-015-choose-voice-leading-equivalences.fr.md",
+      "exercise_line": 46,
+      "answer_line": 50,
+      "prompt": "Un agent cite 0 pour ces tableaux et conclut que la première voix identifiée n’a pas bougé. Quelles informations manquent ?",
+      "answer": "> **Réponse :** Les paramètres d’équivalence et la correspondance entre les voix. Un zéro obtenu après réaffectation ne conserve pas la première entrée comme première voix. La comparaison absolue à positions fixes vaut 14 ; ses mouvements signés sont +7, 0 et −7 demi-tons.",
+      "answer_sha256": "12503fe6a8290a223314e73cc9449259f33c069648f4c141b6f76c1304feaf34",
+      "factual_check": "pass",
+      "independent_reason": "Fixed labels have motions [+7,0,-7], absolute sum14, circular sum5+0+5=10; reassignment gives0 and cannot preserve original labels by implication.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    },
+    {
+      "id": "mus-015-choose-voice-leading-equivalences/fr/exercise-3",
+      "path": "streeling/courses/music/fr/mus-015-choose-voice-leading-equivalences.fr.md",
+      "exercise_line": 56,
+      "answer_line": 60,
+      "prompt": "Rédigez une annotation exacte pour ce déplacement d’octave, en incluant les deux distances et la distinction entre les types de notes communes.",
+      "answer": "> **Réponse :** « Distance tenant compte du registre : 36 ; distance avec équivalence d’octave : 0 ; 0 hauteur commune avec le registre pris en compte et 3 classes de hauteurs communes. » Ne décrivez pas les notes comme tenues ni la main comme immobile. La durée, l’articulation et le placement physique n’ont pas été mesurés.",
+      "answer_sha256": "95c067120d1b797cd3cb1cc7f679f4e786279dd1b5fb991e8257498855f674d7",
+      "factual_check": "pass",
+      "independent_reason": "Three +12 motions total36; circular costs all0; registered sets disjoint and pitch-class intersection {0,4,7} has3 elements; sustain not measured.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    },
+    {
+      "id": "mus-015-choose-voice-leading-equivalences/fr/exercise-4",
+      "path": "streeling/courses/music/fr/mus-015-choose-voice-leading-equivalences.fr.md",
+      "exercise_line": 74,
+      "answer_line": 78,
+      "prompt": "Calculez les coûts circulaires de l’affectation `[60,75,65]`. La réussite du laboratoire doit-elle certifier l’implémentation d’équivalence d’origine ?",
+      "answer": "> **Réponse :** Les différences appariées valent 0, 12 et 0, ce qui donne des coûts circulaires de 0, 0 et 0. Non : la caractérisation réussit en reproduisant le résultat natif de 4 contre le résultat exhaustif de 0. Ce laboratoire n’a pas corrigé la méthode de production.",
+      "answer_sha256": "1c6872a52dadcced62a0d1a35a1fc8d9eb8975861d771bd157b60a4ac760be2c",
+      "factual_check": "pass",
+      "independent_reason": "Witness [60,75,65] minus [60,63,65] is [0,12,0], circular costs [0,0,0]. Native cyclic minimum4 remains a characterized failure, not a fix.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    },
+    {
+      "id": "mus-015-choose-voice-leading-equivalences/fr/exercise-5",
+      "path": "streeling/courses/music/fr/mus-015-choose-voice-leading-equivalences.fr.md",
+      "exercise_line": 84,
+      "answer_line": 88,
+      "prompt": "Quelles preuves supplémentaires permettraient de qualifier un voicing recommandé de physiquement facile à jouer ?",
+      "answer": "> **Réponse :** Une affectation réelle aux cordes et aux cases, les contraintes du musicien et un essai instrumental avec un critère déclaré. Les calculs scalaires, l’inspection du code source et l’exécution autonome ne fournissent aucune de ces observations. Poursuivez avec la [correspondance entre les voix](mus-016-recover-voice-correspondence.md) avant de traiter un minimum comme un plan d’exécution instrumentale.",
+      "answer_sha256": "b049e49aa76829219dcf79a46ee9291231ef372238370d0bb36665a49ef5cf99",
+      "factual_check": "pass",
+      "independent_reason": "Physical ease requires actual string/fret assignment, player constraints and a playing criterion/trial; scalar and source evidence supply none.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    },
+    {
+      "id": "mus-015-choose-voice-leading-equivalences/es/exercise-1",
+      "path": "streeling/courses/music/es/mus-015-choose-voice-leading-equivalences.es.md",
+      "exercise_line": 27,
+      "answer_line": 31,
+      "prompt": "En un ejercicio que sigue una voz melódica identificada de C4 a C5, ¿debe la equivalencia de octava ocultar el salto?",
+      "answer": "> **Respuesta:** No. Conserva el registro e indica el movimiento de 12 semitonos. Una comparación de clases de altura puede indicar 0 por separado, pero responde a otra pregunta. Ninguna puntuación dice si una digitación concreta de guitarra es cómoda.",
+      "answer_sha256": "0936c3711b8f2a8d2dfb399d43288f448c02d3afd8c26c642d3984d440d6fd14",
+      "factual_check": "pass",
+      "independent_reason": "72-60=12 registered semitones; circular cost=min(12 mod12,12-(12 mod12))=0. Comfort not observed.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    },
+    {
+      "id": "mus-015-choose-voice-leading-equivalences/es/exercise-2",
+      "path": "streeling/courses/music/es/mus-015-choose-voice-leading-equivalences.es.md",
+      "exercise_line": 46,
+      "answer_line": 50,
+      "prompt": "Un agente cita 0 para estos arrays y concluye que la primera voz identificada no se movió. ¿Qué información falta?",
+      "answer": "> **Respuesta:** Los ajustes de equivalencia y la correspondencia entre voces. Un cero tras la reasignación no conserva la primera entrada como primera voz. La comparación absoluta con posiciones fijas vale 14; sus movimientos con signo son +7, 0 y −7 semitonos.",
+      "answer_sha256": "06eae758677aba2c0fba0607d2772be691c5c43f8bcc8b343a40211df95b4675",
+      "factual_check": "pass",
+      "independent_reason": "Fixed labels have motions [+7,0,-7], absolute sum14, circular sum5+0+5=10; reassignment gives0 and cannot preserve original labels by implication.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    },
+    {
+      "id": "mus-015-choose-voice-leading-equivalences/es/exercise-3",
+      "path": "streeling/courses/music/es/mus-015-choose-voice-leading-equivalences.es.md",
+      "exercise_line": 56,
+      "answer_line": 60,
+      "prompt": "Escribe una anotación veraz para ese desplazamiento de octava que incluya ambas distancias y la distinción entre tipos de notas comunes.",
+      "answer": "> **Respuesta:** «Distancia teniendo en cuenta el registro: 36; distancia con equivalencia de octava: 0; 0 alturas comunes teniendo en cuenta el registro y 3 clases de altura comunes». No describas las notas como sostenidas ni la mano como inmóvil. No se midieron la duración, la articulación ni la colocación física.",
+      "answer_sha256": "683bc2206f69cd585a289f49e11141668e67bba8357fbfb9c1a303c5fad298e5",
+      "factual_check": "pass",
+      "independent_reason": "Three +12 motions total36; circular costs all0; registered sets disjoint and pitch-class intersection {0,4,7} has3 elements; sustain not measured.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    },
+    {
+      "id": "mus-015-choose-voice-leading-equivalences/es/exercise-4",
+      "path": "streeling/courses/music/es/mus-015-choose-voice-leading-equivalences.es.md",
+      "exercise_line": 74,
+      "answer_line": 78,
+      "prompt": "Calcula los costes circulares de la asignación `[60,75,65]`. ¿Debe un laboratorio que supera las comprobaciones certificar la implementación de equivalencia original?",
+      "answer": "> **Respuesta:** Las diferencias emparejadas son 0, 12 y 0, lo que da costes circulares de 0, 0 y 0. No: la caracterización tiene éxito al reproducir el resultado nativo de 4 frente al exhaustivo de 0. Este laboratorio no ha corregido el método de producción.",
+      "answer_sha256": "cda3c25c6ae8c204b8a9613f7b78fa182f857df9ad6a76ef6309252ad4538df4",
+      "factual_check": "pass",
+      "independent_reason": "Witness [60,75,65] minus [60,63,65] is [0,12,0], circular costs [0,0,0]. Native cyclic minimum4 remains a characterized failure, not a fix.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    },
+    {
+      "id": "mus-015-choose-voice-leading-equivalences/es/exercise-5",
+      "path": "streeling/courses/music/es/mus-015-choose-voice-leading-equivalences.es.md",
+      "exercise_line": 84,
+      "answer_line": 88,
+      "prompt": "¿Qué pruebas adicionales justificarían calificar una disposición de voces recomendada como físicamente fácil de tocar?",
+      "answer": "> **Respuesta:** Una asignación real a cuerdas y trastes, las limitaciones del intérprete y una prueba instrumental con un criterio declarado. Los cálculos escalares, la inspección de las fuentes y la ejecución independiente no aportan ninguna de esas observaciones. Continúa con la [correspondencia entre voces](mus-016-recover-voice-correspondence.md) antes de tratar un mínimo como un plan de ejecución instrumental.",
+      "answer_sha256": "2631890316047771664a99b720ee1ec7b4f6e71fdc439fce7e8940404a4df6ee",
+      "factual_check": "pass",
+      "independent_reason": "Physical ease requires actual string/fret assignment, player constraints and a playing criterion/trial; scalar and source evidence supply none.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    },
+    {
+      "id": "mus-016-recover-voice-correspondence/en/exercise-1",
+      "path": "streeling/courses/music/en/mus-016-recover-voice-correspondence.md",
+      "exercise_line": 32,
+      "answer_line": 36,
+      "prompt": "Does a distance of 7 uniquely select plan A? Explain using both sums.",
+      "answer": "> **Answer:** No. Plan A costs 4 + 3 = 7 and plan B costs 5 + 2 = 7. The scalar discards which correspondence produced it. A tie-breaking rule could choose one, but that would be an additional policy.",
+      "answer_sha256": "545419ce39cff78bef7811efe720df54043b988d68595c40144883faffd32161",
+      "factual_check": "pass",
+      "independent_reason": "All2 assignments checked: A=[64,65], motions[4,3], cost7; B=[65,64], motions[5,2], cost7. Scalar cannot select unique correspondence.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    },
+    {
+      "id": "mus-016-recover-voice-correspondence/en/exercise-2",
+      "path": "streeling/courses/music/en/mus-016-recover-voice-correspondence.md",
+      "exercise_line": 44,
+      "answer_line": 48,
+      "prompt": "For a task that requires labeled voices to preserve their relative pitch order at the endpoints, which plan meets that requirement?",
+      "answer": "> **Answer:** Plan A. Plan B reverses the endpoint order even though its total cost is also 7. State the order requirement explicitly; it cannot be recovered from the minimum alone.",
+      "answer_sha256": "130a202a6bf7efcf18b15650a618b46d9e35a9c8b8d35c1e445df9067e5f80dd",
+      "factual_check": "pass",
+      "independent_reason": "Source order60<62. A target64<65 preserves endpoint order; B target65>64 reverses it. No continuous or audible crossing claim follows.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    },
+    {
+      "id": "mus-016-recover-voice-correspondence/en/exercise-3",
+      "path": "streeling/courses/music/en/mus-016-recover-voice-correspondence.md",
+      "exercise_line": 62,
+      "answer_line": 66,
+      "prompt": "Verify the two notes of plan B from the open-string pitches. Does the pitch-order reversal require the strings to exchange their physical positions?",
+      "answer": "> **Answer:** 55 + 10 = 65 and 59 + 5 = 64. No. The G string remains the G string and the B string remains the B string; fretting can reverse the relative pitches they sound. No physical string crossing is claimed.",
+      "answer_sha256": "5cf91c1eb089a7ed2705fe7a874e42f37535708d5943cb893a0a5b6b2c22914c",
+      "factual_check": "pass",
+      "independent_reason": "PlanB: G3=55 plus10 gives65; B3=59 plus5 gives64. Strings keep physical identity while relative sounded pitch order reverses.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    },
+    {
+      "id": "mus-016-recover-voice-correspondence/en/exercise-4",
+      "path": "streeling/courses/music/en/mus-016-recover-voice-correspondence.md",
+      "exercise_line": 74,
+      "answer_line": 78,
+      "prompt": "For the separate counterexample `[60,63,65]` matched to `[60,75,65]`, why can `motions` contain 12 while every circular `voiceCosts` entry is 0?",
+      "answer": "> **Answer:** The second labeled pitch rises from 63 to 75, a registered motion of 12 semitones. Octave equivalence maps that pair to circular cost 0. The witness preserves the registered difference; the chosen objective ignores its octave component.",
+      "answer_sha256": "9663d1894636cdd995b13c564c938ba98fb7d23047aaed2817180e5abcaea393",
+      "factual_check": "pass",
+      "independent_reason": "75-63=12 registered semitones with octave-circular cost0. Raw motion and chosen objective retain different information.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    },
+    {
+      "id": "mus-016-recover-voice-correspondence/en/exercise-5",
+      "path": "streeling/courses/music/en/mus-016-recover-voice-correspondence.md",
+      "exercise_line": 84,
+      "answer_line": 88,
+      "prompt": "An agent writes “distance 7, therefore the easiest fingering.” Replace that claim with a defensible statement.",
+      "answer": "> **Answer:** “Both declared assignments have cost 7 under the stated equivalences. We select plan A to preserve endpoint pitch order. Its G-string fret 9 and B-string fret 6 placement is constructed; comfort and finger choice still require a playing trial.” Continue with [ranking candidates](mus-017-audit-voice-leading-rankings.md).",
+      "answer_sha256": "5a8da0a9cd024620b72b7df69911c27d9c1d0b378bab402f64772f2dc62b554e",
+      "factual_check": "pass",
+      "independent_reason": "Both costs7; order requirement selectsA. A frets9/6 give55+9=64 and59+6=65. Comfort/finger choice remain unmeasured.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    },
+    {
+      "id": "mus-016-recover-voice-correspondence/fr/exercise-1",
+      "path": "streeling/courses/music/fr/mus-016-recover-voice-correspondence.fr.md",
+      "exercise_line": 32,
+      "answer_line": 36,
+      "prompt": "Une distance de 7 sélectionne-t-elle uniquement le plan A ? Expliquez à l’aide des deux sommes.",
+      "answer": "> **Réponse :** Non. Le plan A coûte 4 + 3 = 7 et le plan B coûte 5 + 2 = 7. Le scalaire ne conserve pas la correspondance qui l’a produit. Une règle de départage pourrait en choisir une, mais ce serait une politique supplémentaire.",
+      "answer_sha256": "4c71f413bfd79104e3e3d710266008bc4849861d8fc8290781ed564f438bd530",
+      "factual_check": "pass",
+      "independent_reason": "All2 assignments checked: A=[64,65], motions[4,3], cost7; B=[65,64], motions[5,2], cost7. Scalar cannot select unique correspondence.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    },
+    {
+      "id": "mus-016-recover-voice-correspondence/fr/exercise-2",
+      "path": "streeling/courses/music/fr/mus-016-recover-voice-correspondence.fr.md",
+      "exercise_line": 44,
+      "answer_line": 48,
+      "prompt": "Pour une tâche qui exige que les voix identifiées conservent leur ordre relatif de hauteur aux deux extrémités, quel plan satisfait cette exigence ?",
+      "answer": "> **Réponse :** Le plan A. Le plan B inverse l’ordre aux extrémités, même si son coût total vaut aussi 7. Énoncez explicitement l’exigence d’ordre ; on ne peut pas la déduire du seul minimum.",
+      "answer_sha256": "be58af3028aa1ea02d04362e57542729bb4df04754b27c211476d5deb720cc90",
+      "factual_check": "pass",
+      "independent_reason": "Source order60<62. A target64<65 preserves endpoint order; B target65>64 reverses it. No continuous or audible crossing claim follows.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    },
+    {
+      "id": "mus-016-recover-voice-correspondence/fr/exercise-3",
+      "path": "streeling/courses/music/fr/mus-016-recover-voice-correspondence.fr.md",
+      "exercise_line": 62,
+      "answer_line": 66,
+      "prompt": "Vérifiez les deux notes du plan B à partir des hauteurs des cordes à vide. L’inversion de l’ordre des hauteurs exige-t-elle que les cordes échangent leurs positions physiques ?",
+      "answer": "> **Réponse :** 55 + 10 = 65 et 59 + 5 = 64. Non. La corde de sol reste la corde de sol et la corde de si reste la corde de si ; le choix des cases peut inverser l’ordre relatif des hauteurs qu’elles produisent. Aucun croisement physique des cordes n’est affirmé.",
+      "answer_sha256": "ab846c92c24ea7f1aba3179c8b0e6450e251378e40dba3fdf842edc40f71165b",
+      "factual_check": "pass",
+      "independent_reason": "PlanB: G3=55 plus10 gives65; B3=59 plus5 gives64. Strings keep physical identity while relative sounded pitch order reverses.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    },
+    {
+      "id": "mus-016-recover-voice-correspondence/fr/exercise-4",
+      "path": "streeling/courses/music/fr/mus-016-recover-voice-correspondence.fr.md",
+      "exercise_line": 74,
+      "answer_line": 78,
+      "prompt": "Pour le contre-exemple distinct `[60,63,65]` apparié à `[60,75,65]`, pourquoi `motions` peut-il contenir 12 alors que chaque entrée circulaire de `voiceCosts` vaut 0 ?",
+      "answer": "> **Réponse :** La deuxième hauteur identifiée monte de 63 à 75, soit un mouvement de 12 demi-tons avec le registre pris en compte. L’équivalence d’octave attribue à cette paire un coût circulaire de 0. Le témoin conserve la différence avec le registre pris en compte ; l’objectif choisi ignore sa composante d’octave.",
+      "answer_sha256": "5e95b3ff292d6518623e89feb8ac73d4094a8514fabcbe82648ee8f6d1120b81",
+      "factual_check": "pass",
+      "independent_reason": "75-63=12 registered semitones with octave-circular cost0. Raw motion and chosen objective retain different information.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    },
+    {
+      "id": "mus-016-recover-voice-correspondence/fr/exercise-5",
+      "path": "streeling/courses/music/fr/mus-016-recover-voice-correspondence.fr.md",
+      "exercise_line": 84,
+      "answer_line": 88,
+      "prompt": "Un agent écrit « distance 7, donc le doigté le plus facile ». Remplacez cette affirmation par un énoncé défendable.",
+      "answer": "> **Réponse :** « Les deux affectations déclarées ont un coût de 7 sous les équivalences indiquées. Nous sélectionnons le plan A pour conserver l’ordre des hauteurs aux extrémités. Son placement à la case 9 sur la corde de sol et à la case 6 sur la corde de si est construit ; le confort et le choix des doigts exigent encore un essai instrumental. » Poursuivez avec le [classement des candidats](mus-017-audit-voice-leading-rankings.md).",
+      "answer_sha256": "33c319e077bf8dcad64b6fcb1be4c19dc168fa5f9d86676dbfa6f93ae28add94",
+      "factual_check": "pass",
+      "independent_reason": "Both costs7; order requirement selectsA. A frets9/6 give55+9=64 and59+6=65. Comfort/finger choice remain unmeasured.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    },
+    {
+      "id": "mus-016-recover-voice-correspondence/es/exercise-1",
+      "path": "streeling/courses/music/es/mus-016-recover-voice-correspondence.es.md",
+      "exercise_line": 32,
+      "answer_line": 36,
+      "prompt": "¿Una distancia de 7 selecciona únicamente el plan A? Explícalo usando ambas sumas.",
+      "answer": "> **Respuesta:** No. El plan A cuesta 4 + 3 = 7 y el plan B cuesta 5 + 2 = 7. El escalar descarta qué correspondencia lo produjo. Una regla de desempate podría elegir una, pero sería una política adicional.",
+      "answer_sha256": "8d88294e678459f6bae1351a223d164cdfa9c92800ab73bdc686c081bfa2cc0f",
+      "factual_check": "pass",
+      "independent_reason": "All2 assignments checked: A=[64,65], motions[4,3], cost7; B=[65,64], motions[5,2], cost7. Scalar cannot select unique correspondence.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    },
+    {
+      "id": "mus-016-recover-voice-correspondence/es/exercise-2",
+      "path": "streeling/courses/music/es/mus-016-recover-voice-correspondence.es.md",
+      "exercise_line": 44,
+      "answer_line": 48,
+      "prompt": "Para una tarea que exige que las voces identificadas conserven su orden relativo de altura en los extremos, ¿qué plan cumple ese requisito?",
+      "answer": "> **Respuesta:** El plan A. El plan B invierte el orden en los extremos aunque su coste total también sea 7. Declara el requisito de orden explícitamente; no se puede recuperar a partir del mínimo por sí solo.",
+      "answer_sha256": "400e5a73884a9874c3bd28ecbc5ca22c908f33200193f1e6856459859c0db1e8",
+      "factual_check": "pass",
+      "independent_reason": "Source order60<62. A target64<65 preserves endpoint order; B target65>64 reverses it. No continuous or audible crossing claim follows.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    },
+    {
+      "id": "mus-016-recover-voice-correspondence/es/exercise-3",
+      "path": "streeling/courses/music/es/mus-016-recover-voice-correspondence.es.md",
+      "exercise_line": 62,
+      "answer_line": 66,
+      "prompt": "Verifica las dos notas del plan B a partir de las alturas de las cuerdas al aire. ¿La inversión del orden de las alturas requiere que las cuerdas intercambien sus posiciones físicas?",
+      "answer": "> **Respuesta:** 55 + 10 = 65 y 59 + 5 = 64. No. La cuerda de sol sigue siendo la cuerda de sol y la cuerda de si sigue siendo la cuerda de si; la elección de trastes puede invertir las alturas relativas que producen. No se afirma que haya un cruce físico de cuerdas.",
+      "answer_sha256": "21681b0242f704ecf7ffa6c1e71d19b7aeb73602098b39caea99dd4f8fbed31d",
+      "factual_check": "pass",
+      "independent_reason": "PlanB: G3=55 plus10 gives65; B3=59 plus5 gives64. Strings keep physical identity while relative sounded pitch order reverses.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    },
+    {
+      "id": "mus-016-recover-voice-correspondence/es/exercise-4",
+      "path": "streeling/courses/music/es/mus-016-recover-voice-correspondence.es.md",
+      "exercise_line": 74,
+      "answer_line": 78,
+      "prompt": "Para el contraejemplo separado `[60,63,65]` emparejado con `[60,75,65]`, ¿por qué puede `motions` contener 12 mientras que cada entrada circular de `voiceCosts` es 0?",
+      "answer": "> **Respuesta:** La segunda altura identificada sube de 63 a 75, un movimiento de 12 semitonos teniendo en cuenta el registro. La equivalencia de octava asigna a esa pareja un coste circular de 0. El testigo conserva la diferencia teniendo en cuenta el registro; el objetivo elegido ignora su componente de octava.",
+      "answer_sha256": "0ba8728e2f922ebe4c3d0b35fc019d7b8e2be18bf155691610427ea73b5aa5b7",
+      "factual_check": "pass",
+      "independent_reason": "75-63=12 registered semitones with octave-circular cost0. Raw motion and chosen objective retain different information.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    },
+    {
+      "id": "mus-016-recover-voice-correspondence/es/exercise-5",
+      "path": "streeling/courses/music/es/mus-016-recover-voice-correspondence.es.md",
+      "exercise_line": 84,
+      "answer_line": 88,
+      "prompt": "Un agente escribe «distancia 7, por tanto la digitación más fácil». Sustituye esa afirmación por una declaración defendible.",
+      "answer": "> **Respuesta:** «Ambas asignaciones declaradas tienen coste 7 con las equivalencias indicadas. Seleccionamos el plan A para conservar el orden de las alturas en los extremos. Su colocación en el traste 9 de la cuerda de sol y en el traste 6 de la cuerda de si es construida; la comodidad y la elección de dedos aún requieren una prueba instrumental». Continúa con la [clasificación de candidatos](mus-017-audit-voice-leading-rankings.md).",
+      "answer_sha256": "d1e92913943727643467e0e7268adc644f699d76b648656805d127b7ec74990e",
+      "factual_check": "pass",
+      "independent_reason": "Both costs7; order requirement selectsA. A frets9/6 give55+9=64 and59+6=65. Comfort/finger choice remain unmeasured.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    },
+    {
+      "id": "mus-017-audit-voice-leading-rankings/en/exercise-1",
+      "path": "streeling/courses/music/en/mus-017-audit-voice-leading-rankings.md",
+      "exercise_line": 32,
+      "answer_line": 36,
+      "prompt": "Write a zero-cost target assignment for Same and a cost-1 assignment for Near.",
+      "answer": "> **Answer:** Same: match `[60,63,65]` with `[60,75,65]`, for circular costs 0, 0 and 0. Near: match `[60,63,65]` with `[60,63,66]`, for costs 0, 0 and 1. These give upper bounds; exhaustive enumeration in the retained lab confirms the minima for these cases.",
+      "answer_sha256": "f93bd1b93c94ef9f4802106ab4931e3a349b2d1e492f2c120cd9e224b40550a5",
+      "factual_check": "pass",
+      "independent_reason": "Same witness costs[0,0,0], Near costs[0,0,1]. Nonnegative objective gives lower bound0 for Same; distinct pitch-class multisets exclude0 for Near, so integer lower bound1 is attained.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    },
+    {
+      "id": "mus-017-audit-voice-leading-rankings/en/exercise-2",
+      "path": "streeling/courses/music/en/mus-017-audit-voice-leading-rankings.md",
+      "exercise_line": 49,
+      "answer_line": 53,
+      "prompt": "Would replacing the sorting algorithm fix this disagreement?",
+      "answer": "> **Answer:** No. Both columns are sorted correctly according to their values. The disagreement comes from the computed cost of Same under the intended equivalence contract. Investigate the representation and assignment search before changing the rank sorter.",
+      "answer_sha256": "f59e3cc0a9abcca9cf6024143857a6ab8bba28f92052e1a97c22900af411bba6",
+      "factual_check": "pass",
+      "independent_reason": "Correct ascending sorts of native[Same4,Near1] and exhaustive[Same0,Near1] disagree because costs differ, not because the sorting routine failed.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    },
+    {
+      "id": "mus-017-audit-voice-leading-rankings/en/exercise-3",
+      "path": "streeling/courses/music/en/mus-017-audit-voice-leading-rankings.md",
+      "exercise_line": 61,
+      "answer_line": 65,
+      "prompt": "Can the normalized zero be used to conclude that the registered motion of the second labeled voice is 0?",
+      "answer": "> **Answer:** No. In the declared witness, that voice goes from 63 to 75, moving 12 semitones. The zero belongs to the octave-equivalent comparison. Keep the original registered pitches if that movement matters to the task.",
+      "answer_sha256": "57f0f9daa3b089d73509a2b9bcd064ebb8b194eb0c8c6277b5b3ce7dccad7da4",
+      "factual_check": "pass",
+      "independent_reason": "Second labeled witness motion75-63=12; normalized scalar0 cannot restore registered octave or correspondence.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    },
+    {
+      "id": "mus-017-audit-voice-leading-rankings/en/exercise-4",
+      "path": "streeling/courses/music/en/mus-017-audit-voice-leading-rankings.md",
+      "exercise_line": 75,
+      "answer_line": 79,
+      "prompt": "Why would using the native cyclic minimum as the “expected exhaustive answer” weaken the exercise?",
+      "answer": "> **Answer:** Both paths would inherit the same search restriction. Agreement could then hide the missing zero-cost permutation. Independent hand arithmetic and exhaustive enumeration supply evidence the source's own result cannot provide about itself.",
+      "answer_sha256": "c30e10ddb40a967dee07b15ac5cda1759d4659890f9aa4c8f06c2770c4d05376",
+      "factual_check": "pass",
+      "independent_reason": "A native-derived expected oracle result shares the cyclic restriction; scratch substitution fails oracle_zero_known_case expected0/actual4. Independent reference is required.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    },
+    {
+      "id": "mus-017-audit-voice-leading-rankings/en/exercise-5",
+      "path": "streeling/courses/music/en/mus-017-audit-voice-leading-rankings.md",
+      "exercise_line": 85,
+      "answer_line": 89,
+      "prompt": "An agent proposes automatically normalizing every consumer's input. What must it establish first?",
+      "answer": "> **Answer:** Identify each consumer's comparison contract and whether registered pitch, voice identity or string assignment must survive. Then verify the proposed behavior against those contracts with independent cases. This example supports a specific counterexample and a specific transformed input; it does not authorize a universal normalization policy.",
+      "answer_sha256": "3697672b54fe30576ebf85cc39400a265690c345b03162d5d4c7490bbd314730",
+      "factual_check": "pass",
+      "independent_reason": "Consumer contract must establish register, musical labels and string assignment retention; one transformed input returning0 proves no universal normalization policy or production fix.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    },
+    {
+      "id": "mus-017-audit-voice-leading-rankings/fr/exercise-1",
+      "path": "streeling/courses/music/fr/mus-017-audit-voice-leading-rankings.fr.md",
+      "exercise_line": 32,
+      "answer_line": 36,
+      "prompt": "Écrivez une affectation cible de coût nul pour Same et une affectation de coût 1 pour Near.",
+      "answer": "> **Réponse :** Same : appariez `[60,63,65]` à `[60,75,65]`, pour des coûts circulaires de 0, 0 et 0. Near : appariez `[60,63,65]` à `[60,63,66]`, pour des coûts de 0, 0 et 1. Ces affectations donnent des bornes supérieures ; l’énumération exhaustive du laboratoire conservé confirme les minima de ces cas.",
+      "answer_sha256": "48fb82a73fdf4dbdd52377cedd79540f50cc8241adba7fe7c806861708792b71",
+      "factual_check": "pass",
+      "independent_reason": "Same witness costs[0,0,0], Near costs[0,0,1]. Nonnegative objective gives lower bound0 for Same; distinct pitch-class multisets exclude0 for Near, so integer lower bound1 is attained.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    },
+    {
+      "id": "mus-017-audit-voice-leading-rankings/fr/exercise-2",
+      "path": "streeling/courses/music/fr/mus-017-audit-voice-leading-rankings.fr.md",
+      "exercise_line": 49,
+      "answer_line": 53,
+      "prompt": "Remplacer l’algorithme de tri corrigerait-il ce désaccord ?",
+      "answer": "> **Réponse :** Non. Les deux colonnes sont triées correctement selon leurs valeurs. Le désaccord vient du coût calculé pour Same selon le contrat d’équivalence visé. Examinez la représentation et la recherche d’affectations avant de modifier le tri du classement.",
+      "answer_sha256": "59f88584feec5a14ff05a8f7c1cb91a7728f583e931c7c1d314f8f134d1fd949",
+      "factual_check": "pass",
+      "independent_reason": "Correct ascending sorts of native[Same4,Near1] and exhaustive[Same0,Near1] disagree because costs differ, not because the sorting routine failed.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    },
+    {
+      "id": "mus-017-audit-voice-leading-rankings/fr/exercise-3",
+      "path": "streeling/courses/music/fr/mus-017-audit-voice-leading-rankings.fr.md",
+      "exercise_line": 61,
+      "answer_line": 65,
+      "prompt": "Peut-on utiliser le zéro normalisé pour conclure que le mouvement de la deuxième voix identifiée, avec le registre pris en compte, vaut 0 ?",
+      "answer": "> **Réponse :** Non. Dans le témoin déclaré, cette voix passe de 63 à 75, soit un mouvement de 12 demi-tons. Le zéro appartient à la comparaison avec équivalence d’octave. Conservez les hauteurs d’origine avec leur registre si ce mouvement compte pour la tâche.",
+      "answer_sha256": "59c02c982403021c0a8c85343b8a82236f01779086e9b8d439c4a91848171eca",
+      "factual_check": "pass",
+      "independent_reason": "Second labeled witness motion75-63=12; normalized scalar0 cannot restore registered octave or correspondence.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    },
+    {
+      "id": "mus-017-audit-voice-leading-rankings/fr/exercise-4",
+      "path": "streeling/courses/music/fr/mus-017-audit-voice-leading-rankings.fr.md",
+      "exercise_line": 75,
+      "answer_line": 79,
+      "prompt": "Pourquoi utiliser le minimum cyclique natif comme « réponse exhaustive attendue » affaiblirait-il l’exercice ?",
+      "answer": "> **Réponse :** Les deux chemins hériteraient de la même restriction de recherche. Leur accord pourrait alors masquer la permutation manquante de coût nul. Le calcul manuel indépendant et l’énumération exhaustive fournissent des preuves que le résultat du code source ne peut pas apporter sur lui-même.",
+      "answer_sha256": "e5020d97559d66573d245a0736b506a2f1ceced68810bca24ed7de16d5036788",
+      "factual_check": "pass",
+      "independent_reason": "A native-derived expected oracle result shares the cyclic restriction; scratch substitution fails oracle_zero_known_case expected0/actual4. Independent reference is required.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    },
+    {
+      "id": "mus-017-audit-voice-leading-rankings/fr/exercise-5",
+      "path": "streeling/courses/music/fr/mus-017-audit-voice-leading-rankings.fr.md",
+      "exercise_line": 85,
+      "answer_line": 89,
+      "prompt": "Un agent propose de normaliser automatiquement les entrées de tous les consommateurs. Que doit-il établir au préalable ?",
+      "answer": "> **Réponse :** Identifiez le contrat de comparaison de chaque consommateur et déterminez si la hauteur avec son registre, l’identité de la voix ou l’affectation aux cordes doivent être conservées. Vérifiez ensuite le comportement proposé par rapport à ces contrats à l’aide de cas indépendants. Cet exemple étaye un contre-exemple précis et une entrée transformée précise ; il n’autorise pas une politique universelle de normalisation.",
+      "answer_sha256": "2367eea80fdab7cea89b389c41774ce8427a415a7854a7d2cffe9a4fb5efbbae",
+      "factual_check": "pass",
+      "independent_reason": "Consumer contract must establish register, musical labels and string assignment retention; one transformed input returning0 proves no universal normalization policy or production fix.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    },
+    {
+      "id": "mus-017-audit-voice-leading-rankings/es/exercise-1",
+      "path": "streeling/courses/music/es/mus-017-audit-voice-leading-rankings.es.md",
+      "exercise_line": 32,
+      "answer_line": 36,
+      "prompt": "Escribe una asignación de destino de coste cero para Same y una de coste 1 para Near.",
+      "answer": "> **Respuesta:** Same: empareja `[60,63,65]` con `[60,75,65]`, con costes circulares de 0, 0 y 0. Near: empareja `[60,63,65]` con `[60,63,66]`, con costes de 0, 0 y 1. Esto da cotas superiores; la enumeración exhaustiva del laboratorio conservado confirma los mínimos de estos casos.",
+      "answer_sha256": "6e245f342367b7c26c83c52f71084857f30495761de06b1941ef459c5348d38f",
+      "factual_check": "pass",
+      "independent_reason": "Same witness costs[0,0,0], Near costs[0,0,1]. Nonnegative objective gives lower bound0 for Same; distinct pitch-class multisets exclude0 for Near, so integer lower bound1 is attained.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    },
+    {
+      "id": "mus-017-audit-voice-leading-rankings/es/exercise-2",
+      "path": "streeling/courses/music/es/mus-017-audit-voice-leading-rankings.es.md",
+      "exercise_line": 49,
+      "answer_line": 53,
+      "prompt": "¿Sustituir el algoritmo de ordenación corregiría este desacuerdo?",
+      "answer": "> **Respuesta:** No. Ambas columnas están ordenadas correctamente según sus valores. El desacuerdo procede del coste calculado para Same bajo el contrato de equivalencia pretendido. Investiga la representación y la búsqueda de asignaciones antes de cambiar la ordenación de la clasificación.",
+      "answer_sha256": "7f5515d6ade63aa5f9069f4c3b2be1853a0a27e666f847cc0216c76375aa1162",
+      "factual_check": "pass",
+      "independent_reason": "Correct ascending sorts of native[Same4,Near1] and exhaustive[Same0,Near1] disagree because costs differ, not because the sorting routine failed.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    },
+    {
+      "id": "mus-017-audit-voice-leading-rankings/es/exercise-3",
+      "path": "streeling/courses/music/es/mus-017-audit-voice-leading-rankings.es.md",
+      "exercise_line": 61,
+      "answer_line": 65,
+      "prompt": "¿Puede usarse el cero normalizado para concluir que el movimiento de la segunda voz identificada, teniendo en cuenta el registro, es 0?",
+      "answer": "> **Respuesta:** No. En el testigo declarado, esa voz pasa de 63 a 75 y se mueve 12 semitonos. El cero pertenece a la comparación con equivalencia de octava. Conserva las alturas originales con su registro si ese movimiento importa para la tarea.",
+      "answer_sha256": "07ecf46c14ef72645bb31c0f5dcabb2e49c71bb87b2f3c59b445f26c0c2b1b42",
+      "factual_check": "pass",
+      "independent_reason": "Second labeled witness motion75-63=12; normalized scalar0 cannot restore registered octave or correspondence.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    },
+    {
+      "id": "mus-017-audit-voice-leading-rankings/es/exercise-4",
+      "path": "streeling/courses/music/es/mus-017-audit-voice-leading-rankings.es.md",
+      "exercise_line": 75,
+      "answer_line": 79,
+      "prompt": "¿Por qué usar el mínimo cíclico nativo como «respuesta exhaustiva esperada» debilitaría el ejercicio?",
+      "answer": "> **Respuesta:** Ambas rutas heredarían la misma restricción de búsqueda. Su coincidencia podría entonces ocultar la permutación de coste cero que falta. El cálculo manual independiente y la enumeración exhaustiva aportan pruebas que el propio resultado de las fuentes no puede proporcionar sobre sí mismo.",
+      "answer_sha256": "1bb4e71c8d4f377b1ca85456a9b02589093e923b80f74fd9bc69bb468a8a8e37",
+      "factual_check": "pass",
+      "independent_reason": "A native-derived expected oracle result shares the cyclic restriction; scratch substitution fails oracle_zero_known_case expected0/actual4. Independent reference is required.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    },
+    {
+      "id": "mus-017-audit-voice-leading-rankings/es/exercise-5",
+      "path": "streeling/courses/music/es/mus-017-audit-voice-leading-rankings.es.md",
+      "exercise_line": 85,
+      "answer_line": 89,
+      "prompt": "Un agente propone normalizar automáticamente la entrada de todos los consumidores. ¿Qué debe establecer primero?",
+      "answer": "> **Respuesta:** Identifica el contrato de comparación de cada consumidor y si deben conservarse la altura con su registro, la identidad de la voz o la asignación a cuerdas. Después, verifica el comportamiento propuesto frente a esos contratos con casos independientes. Este ejemplo respalda un contraejemplo concreto y una entrada transformada concreta; no autoriza una política universal de normalización.",
+      "answer_sha256": "3d6de771c2bbb17c5bd21142e61b89e871679ef0a05f4e57016dcda6aeeb569a",
+      "factual_check": "pass",
+      "independent_reason": "Consumer contract must establish register, musical labels and string assignment retention; one transformed input returning0 proves no universal normalization policy or production fix.",
+      "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+    }
+  ],
+  "checked_learner_criteria": [
+    {
+      "id": "MUS015/criterion-1",
+      "criterion": "Declares O/P on and T/I off for the registered counterexample; gives native4 versus exhaustive0 and the zero-cost assignment[60,75,65].",
+      "adequacy": "pass_for_prepared_source_assisted_task",
+      "evidence": "Task line7 now explicitly asks registered counterexample: O/P true,T/I false,native4/exhaustive0,witness[60,75,65].",
+      "participant_result": null
+    },
+    {
+      "id": "MUS015/criterion-2",
+      "criterion": "Derives the four scalar values 14,10,0,0 with matching assumptions.",
+      "adequacy": "pass_for_prepared_source_assisted_task",
+      "evidence": "Hand sums14,10 and reassigned0,0; four native cases agree.",
+      "participant_result": null
+    },
+    {
+      "id": "MUS015/criterion-3",
+      "criterion": "Separates 36 registered motion from 0 octave-equivalent distance in the shifted triad.",
+      "adequacy": "pass_for_prepared_source_assisted_task",
+      "evidence": "Three +12 motions give36, circular0.",
+      "participant_result": null
+    },
+    {
+      "id": "MUS015/criterion-4",
+      "criterion": "Explains 0 common registered pitches versus 3 common pitch classes without claiming sustain.",
+      "adequacy": "pass_for_prepared_source_assisted_task",
+      "evidence": "Registered intersection0 versus pitch-class intersection3; no sustain or stationary-hand inference.",
+      "participant_result": null
+    },
+    {
+      "id": "MUS015/criterion-5",
+      "criterion": "Preserves source and receipt hashes and distinguishes standalone characterization from full GA validation.",
+      "adequacy": "pass_for_prepared_source_assisted_task",
+      "evidence": "Prepared task asks source/receipt hashes; standalone/full-GA boundary is explicit.",
+      "participant_result": null
+    },
+    {
+      "id": "MUS016/criterion-1",
+      "criterion": "Lists the two assignments [64,65] and [65,64] for source [60,62].",
+      "adequacy": "pass_for_prepared_source_assisted_task",
+      "evidence": "Both2 target permutations exhaust two entries.",
+      "participant_result": null
+    },
+    {
+      "id": "MUS016/criterion-2",
+      "criterion": "Derives motions [4,3] and [5,2], both total7.",
+      "adequacy": "pass_for_prepared_source_assisted_task",
+      "evidence": "[4,3] and[5,2] each sum7.",
+      "participant_result": null
+    },
+    {
+      "id": "MUS016/criterion-3",
+      "criterion": "Selects plan A for preserved endpoint pitch order and identifies reversal in plan B.",
+      "adequacy": "pass_for_prepared_source_assisted_task",
+      "evidence": "A preserves order; B reverses endpoint order; extra criterion beyond distance.",
+      "participant_result": null
+    },
+    {
+      "id": "MUS016/criterion-4",
+      "criterion": "Checks both constructed G/B placements:55+9=64,59+6=65 and55+10=65,59+5=64.",
+      "adequacy": "pass_for_prepared_source_assisted_task",
+      "evidence": "Both placements required:55+9=64,59+6=65 AND55+10=65,59+5=64.",
+      "participant_result": null
+    },
+    {
+      "id": "MUS016/criterion-5",
+      "criterion": "Separates musical voice labels, string identity, scalar score and unmeasured player comfort.",
+      "adequacy": "pass_for_prepared_source_assisted_task",
+      "evidence": "Task distinguishes voice labels,string identity and unmeasured comfort.",
+      "participant_result": null
+    },
+    {
+      "id": "MUS017/criterion-1",
+      "criterion": "Gives native Same4/Near1 versus exhaustive Same0/Near1.",
+      "adequacy": "pass_for_prepared_source_assisted_task",
+      "evidence": "Same4/Near1 native and Same0/Near1 exhaustive agree with retained cases.",
+      "participant_result": null
+    },
+    {
+      "id": "MUS017/criterion-2",
+      "criterion": "Derives reversed local ranking without claiming an upstream KNN/UI run.",
+      "adequacy": "pass_for_prepared_source_assisted_task",
+      "evidence": "Native Near,Same versus exhaustive Same,Near is constructed local ranking only.",
+      "participant_result": null
+    },
+    {
+      "id": "MUS017/criterion-3",
+      "criterion": "Explains the missing [60,75,65] zero-cost assignment and cyclic costs4,10,6.",
+      "adequacy": "pass_for_prepared_source_assisted_task",
+      "evidence": "Omitted zero witness checked; cyclic4,10,6 from direct costs.",
+      "participant_result": null
+    },
+    {
+      "id": "MUS017/criterion-4",
+      "criterion": "Limits normalization to the declared example, retaining register separately if needed.",
+      "adequacy": "pass_for_prepared_source_assisted_task",
+      "evidence": "Normalized arrays produce0 in this example; register retained if needed, no general fix.",
+      "participant_result": null
+    },
+    {
+      "id": "MUS017/criterion-5",
+      "criterion": "Rejects exit0 as equivalence approval and cites the scratch oracle_zero_known_case failure0versus4.",
+      "adequacy": "pass_for_prepared_source_assisted_task",
+      "evidence": "Exit0 characterizes known disagreement; scratch oracle gate expected0/actual4; no correctness approval.",
+      "participant_result": null
+    }
+  ],
+  "independent_calculation_method": "Direct hand arithmetic for all lesson examples, plus separate in-memory Python itertools exhaustive enumeration over all13retained finite cases. No sorting or cyclic restriction in independent oracle. No native build/run performed by this reviewer.",
+  "independent_case_results": [
+    {
+      "id": "ordered_absolute",
+      "independent_cost": 14,
+      "permutations": 1,
+      "minimum_assignment_count": 1,
+      "matches_retained_evidence": true
+    },
+    {
+      "id": "ordered_octave",
+      "independent_cost": 10,
+      "permutations": 1,
+      "minimum_assignment_count": 1,
+      "matches_retained_evidence": true
+    },
+    {
+      "id": "permuted_absolute",
+      "independent_cost": 0,
+      "permutations": 6,
+      "minimum_assignment_count": 1,
+      "matches_retained_evidence": true
+    },
+    {
+      "id": "permuted_octave",
+      "independent_cost": 0,
+      "permutations": 6,
+      "minimum_assignment_count": 1,
+      "matches_retained_evidence": true
+    },
+    {
+      "id": "register_absolute",
+      "independent_cost": 36,
+      "permutations": 1,
+      "minimum_assignment_count": 1,
+      "matches_retained_evidence": true
+    },
+    {
+      "id": "register_octave",
+      "independent_cost": 0,
+      "permutations": 1,
+      "minimum_assignment_count": 1,
+      "matches_retained_evidence": true
+    },
+    {
+      "id": "upstream_seven",
+      "independent_cost": 8,
+      "permutations": 5040,
+      "minimum_assignment_count": 12,
+      "matches_retained_evidence": true
+    },
+    {
+      "id": "registered_counterexample",
+      "independent_cost": 0,
+      "permutations": 6,
+      "minimum_assignment_count": 1,
+      "matches_retained_evidence": true
+    },
+    {
+      "id": "normalized_counterexample_only",
+      "independent_cost": 0,
+      "permutations": 6,
+      "minimum_assignment_count": 1,
+      "matches_retained_evidence": true
+    },
+    {
+      "id": "ambiguous_plan",
+      "independent_cost": 7,
+      "permutations": 2,
+      "minimum_assignment_count": 2,
+      "matches_retained_evidence": true
+    },
+    {
+      "id": "ranking_near",
+      "independent_cost": 1,
+      "permutations": 6,
+      "minimum_assignment_count": 1,
+      "matches_retained_evidence": true
+    },
+    {
+      "id": "upstream_transposition",
+      "independent_cost": 0,
+      "permutations": 72,
+      "minimum_assignment_count": 1,
+      "matches_retained_evidence": true
+    },
+    {
+      "id": "empty",
+      "independent_cost": 0,
+      "permutations": 1,
+      "minimum_assignment_count": 1,
+      "matches_retained_evidence": true
+    }
+  ],
+  "hand_calculations": {
+    "fixed_order_motions": [
+      7,
+      0,
+      -7
+    ],
+    "four_scalar_values": [
+      14,
+      10,
+      0,
+      0
+    ],
+    "octave_shift_motions": [
+      12,
+      12,
+      12
+    ],
+    "registered_distance": 36,
+    "octave_distance": 0,
+    "common_registered_pitches": 0,
+    "common_pitch_classes": 3,
+    "counterexample_cyclic_pair_costs": [
+      [
+        0,
+        2,
+        2
+      ],
+      [
+        5,
+        0,
+        5
+      ],
+      [
+        3,
+        3,
+        0
+      ]
+    ],
+    "counterexample_cyclic_totals": [
+      4,
+      10,
+      6
+    ],
+    "omitted_witness": [
+      60,
+      75,
+      65
+    ],
+    "omitted_witness_motions": [
+      0,
+      12,
+      0
+    ],
+    "omitted_witness_circular_costs": [
+      0,
+      0,
+      0
+    ],
+    "ambiguous_A_motions": [
+      4,
+      3
+    ],
+    "ambiguous_B_motions": [
+      5,
+      2
+    ],
+    "ambiguous_costs": [
+      7,
+      7
+    ],
+    "source_GB_pitches": [
+      60,
+      62
+    ],
+    "plan_A_GB_pitches": [
+      64,
+      65
+    ],
+    "plan_B_GB_pitches": [
+      65,
+      64
+    ]
+  },
+  "content_checks": [
+    "Five numbered exercise-answer pairs in each of9sources; all45 semantically reviewed against English and pinned evidence.",
+    "Pitch labels C4=60,E4=64,G4=67,G3=55,B3=59 and one-semitone-per-fret arithmetic consistent.",
+    "MUS016 distinguishes endpoint pitch-order reversal from audible/continuous crossing and physical string positions; no comfort or performance inferred.",
+    "Prerequisites progress MUS014 -> MUS015 -> MUS016 -> MUS017, with MUS017 requiring015and016.",
+    "First named GA distance method links to immutable official project source; Node.js and.NET first named use official documentation; URLs agree across3locales.",
+    "FR/ES preserve scope, numerical claims, terminology, evidence limits and commands; no fluent-human-language approval claimed.",
+    "MUS015 equivalence contract, MUS016 explicit correspondence/order and MUS017 local ranking audit produce distinct GA agent artifacts.",
+    "Overlap comparison only used named MUS014 and GTR004 English sources: MUS014 names inversions/figured bass, GTR004 diagnoses string-matched parallel intervals and proposes a playing trial. New modules examine a different scalar API, explicit witnesses and ranking contract.",
+    "Controller command uses fresh external sibling output with existing parent; same spelling acrossOSes, Windows only assessed.",
+    "Passing40characterization checks retain original_expected_equivalence_satisfied=false; data-audit final91checks agree with current13input hashes.",
+    "No claim of GA originalassembly/fullsuite, upstreamKNN/UI execution, universal normalization proof or fixed production bug.",
+    "Prepared tasks permit source/calculator assistance and separate answerkey from participant responses; final15criteria align with prompts.",
+    "Reviewer/learner outcomes, human subjectreview, fluent languagereview, playingtrial and causal learningbenefit remain null."
+  ],
+  "learner_outcomes": {
+    "MUS015": null,
+    "MUS016": null,
+    "MUS017": null
+  },
+  "human_subject_review": null,
+  "fluent_language_review": {
+    "en": null,
+    "fr": null,
+    "es": null
+  },
+  "playing_trial": null,
+  "causal_learning_benefit": null,
+  "formal_compound_engineering_review": false,
+  "remaining_scope_limits": [
+    "AI source-assisted factual and semantic audit only; no participant performance, unaided transfer, timing, retention, accessibility, language fluency or causal learning evidence.",
+    "No human subject approval, native human language approval, performer listening/comfort evidence or formal CE review.",
+    "No repository edits, Git/index mutations, builds, installs, native execution, network requests or other-agent dispatch performed by this reviewer. Only receipt write outside repository.",
+    "Official docs/public source HTTP observations are retained evidence and were not repeated; source pin and byte hashes inspected locally.",
+    "Finite integer equal-cardinality cases <=7voices; no universal equivalence, metric or normalization theorem. Top-level exact native command is root-supplied with retained child-command/input provenance.",
+    "Expected-case preimplementation ordering remains declared historical provenance, not independently timestamped preregistration.",
+    "Generated pages, build/validation files and public course HTML are not bound or assessed by this receipt. No publication or delivery claim.",
+    "Revision2 reuses the complete prior factual/translation review because all nine source hashes and rubric/task hashes are unchanged. Only six explicitly expected support files changed; manifest normalization was proved byte-for-byte by inverse conversion, and final native evidence was rebound without reviewer build or native execution."
+  ],
+  "ownership_release": {
+    "repository_write_ownership": "none",
+    "external_receipt_owner": "voiceleading_course_audit",
+    "released_after_receipt": true,
+    "allowed_write_performed": "Explicitly requested replacement of this assigned external receipt only; prior complete receipt preserved in audit_history. Root owns all repository fixes."
+  },
+  "revision": 2,
+  "audit_history": [
+    {
+      "revision": 1,
+      "receipt_sha256": "abfffa4cdf87c528ba9b7a6c25fee56e9747065f37a88e36215d3e36ff40b408",
+      "full_receipt": {
+        "kind": "Independent trilingual voice-leading course and prepared-task source-assisted AI audit",
+        "checked_at_utc": "2026-10-22T16:03:13.003230+00:00",
+        "repository_read_only": "C:\\tmp\\learn-streeling-craft-transfer-20261022",
+        "external_receipt": "C:\\tmp\\streeling-voiceleading-course-audit-20261022.json",
+        "source_commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+        "result": "pass",
+        "verdict": "Pass for scoped factual and prepared-task AI audit; no participant or human approval implied.",
+        "course_count": 3,
+        "locale_source_count": 9,
+        "exercise_answer_pairs_checked": 45,
+        "rubric_criteria_checked": 15,
+        "finding_count": 0,
+        "findings": [],
+        "resolved_finding_count": 4,
+        "resolved_findings": [
+          {
+            "id": "CA-01",
+            "path": "code/streeling/evidence/voice-leading-2026-10-22/learner-task.md",
+            "line": 7,
+            "related_path": "code/streeling/evidence/voice-leading-2026-10-22/reviewer-rubric.json",
+            "related_line": 7,
+            "finding": "MUS015 criterion required an unprompted registered counterexample; adding that prompt also needed an explicit costs/witness criterion.",
+            "resolution": "Task now requests settings,costs and witness; criterion1 scores O/Pon,T/Ioff,native4/exhaustive0,[60,75,65].",
+            "status": "resolved_verified"
+          },
+          {
+            "id": "CA-02",
+            "path": "code/streeling/evidence/voice-leading-2026-10-22/reviewer-rubric.json",
+            "line": 22,
+            "finding": "MUS016 criterion accepted one fret placement using OR while task required both.",
+            "resolution": "Criterion explicitly requires both planA and planB arithmetic.",
+            "status": "resolved_verified"
+          },
+          {
+            "id": "CA-03",
+            "path": "code/streeling/voice-leading/README.md",
+            "line": 6,
+            "finding": "Lab README used C:/tmp output and powershell fence despite requested universal relative command.",
+            "resolution": "README and all3MUS015 locale sources share exact relative command in sh fence; final retained native run input README hash matches current bytes.",
+            "status": "resolved_verified"
+          },
+          {
+            "id": "CA-04",
+            "path": "streeling/courses/music/en/mus-015-choose-voice-leading-equivalences.md",
+            "line": 66,
+            "affected_sources": "all9courses",
+            "finding": "Microsoft official-doc links included/en-us contrary to repository locale-neutral URL convention.",
+            "resolution": "All9sources use locale-neutral requestedURLs; refreshed official readback retains200redirect observations.",
+            "status": "resolved_verified"
+          }
+        ],
+        "sources": [
+          {
+            "path": "streeling/courses/music/en/mus-015-choose-voice-leading-equivalences.md",
+            "bytes": 7533,
+            "sha256": "e7c4d26f104e138414bfcedf35a30ca79efc4a58a0ba9f2ce6d168691699f56e",
+            "module": "mus-015-choose-voice-leading-equivalences",
+            "locale": "en",
+            "english_sha256": "e7c4d26f104e138414bfcedf35a30ca79efc4a58a0ba9f2ce6d168691699f56e"
+          },
+          {
+            "path": "streeling/courses/music/fr/mus-015-choose-voice-leading-equivalences.fr.md",
+            "bytes": 9255,
+            "sha256": "bd0ed13965cc497dc309d4c5043c88acf01c5dea973946c7ebe8fd282cfe6f9d",
+            "module": "mus-015-choose-voice-leading-equivalences",
+            "locale": "fr",
+            "english_sha256": "e7c4d26f104e138414bfcedf35a30ca79efc4a58a0ba9f2ce6d168691699f56e"
+          },
+          {
+            "path": "streeling/courses/music/es/mus-015-choose-voice-leading-equivalences.es.md",
+            "bytes": 8889,
+            "sha256": "27389b3019994cc8488dfd2b3c880a82de7971ff18909d4af552136ae3894867",
+            "module": "mus-015-choose-voice-leading-equivalences",
+            "locale": "es",
+            "english_sha256": "e7c4d26f104e138414bfcedf35a30ca79efc4a58a0ba9f2ce6d168691699f56e"
+          },
+          {
+            "path": "streeling/courses/music/en/mus-016-recover-voice-correspondence.md",
+            "bytes": 6973,
+            "sha256": "a1e3d869e84427a548b0ba09ae4ca3b0ed7c989e23487ea36447edae06abdc69",
+            "module": "mus-016-recover-voice-correspondence",
+            "locale": "en",
+            "english_sha256": "a1e3d869e84427a548b0ba09ae4ca3b0ed7c989e23487ea36447edae06abdc69"
+          },
+          {
+            "path": "streeling/courses/music/fr/mus-016-recover-voice-correspondence.fr.md",
+            "bytes": 8376,
+            "sha256": "51c9a43720846435082681eaf57a2a4e7e4853928a1dc8d8187ed348eb0cbd19",
+            "module": "mus-016-recover-voice-correspondence",
+            "locale": "fr",
+            "english_sha256": "a1e3d869e84427a548b0ba09ae4ca3b0ed7c989e23487ea36447edae06abdc69"
+          },
+          {
+            "path": "streeling/courses/music/es/mus-016-recover-voice-correspondence.es.md",
+            "bytes": 8215,
+            "sha256": "5e53cd2d319074f4e02c5e3993d6dc82ee7d5a8cab3a2aaf5760594891e5217a",
+            "module": "mus-016-recover-voice-correspondence",
+            "locale": "es",
+            "english_sha256": "a1e3d869e84427a548b0ba09ae4ca3b0ed7c989e23487ea36447edae06abdc69"
+          },
+          {
+            "path": "streeling/courses/music/en/mus-017-audit-voice-leading-rankings.md",
+            "bytes": 7160,
+            "sha256": "35d9a2700b50347f1bcb3078537aafd66786ecf8ba11c0a4e9f302aa72f70eac",
+            "module": "mus-017-audit-voice-leading-rankings",
+            "locale": "en",
+            "english_sha256": "35d9a2700b50347f1bcb3078537aafd66786ecf8ba11c0a4e9f302aa72f70eac"
+          },
+          {
+            "path": "streeling/courses/music/fr/mus-017-audit-voice-leading-rankings.fr.md",
+            "bytes": 8487,
+            "sha256": "df541d45cce3476d5fedd27e335d9f07e9c1bc2a788d57902498e144e66d2202",
+            "module": "mus-017-audit-voice-leading-rankings",
+            "locale": "fr",
+            "english_sha256": "35d9a2700b50347f1bcb3078537aafd66786ecf8ba11c0a4e9f302aa72f70eac"
+          },
+          {
+            "path": "streeling/courses/music/es/mus-017-audit-voice-leading-rankings.es.md",
+            "bytes": 8317,
+            "sha256": "fe581a333e45d351f9df5e01782e72533f1255ef096f767ab202d91b48a64b2a",
+            "module": "mus-017-audit-voice-leading-rankings",
+            "locale": "es",
+            "english_sha256": "35d9a2700b50347f1bcb3078537aafd66786ecf8ba11c0a4e9f302aa72f70eac"
+          }
+        ],
+        "checked_evidence_and_support_files": [
+          {
+            "path": "AGENTS.md",
+            "bytes": 6866,
+            "sha256": "a9f9fa23747f397cbe7a791eb3a4ae5736ff9448da6e120bd44f2ae3524fd15d"
+          },
+          {
+            "path": "code/streeling/evidence/voice-leading-2026-10-22/bindings.json",
+            "bytes": 3873,
+            "sha256": "74182e516adc69664c1f782502704b8d7ebd028a4432d561049b826addd4770b"
+          },
+          {
+            "path": "code/streeling/evidence/voice-leading-2026-10-22/native-results.json",
+            "bytes": 17278,
+            "sha256": "b8c855c030d79d61e8165ed5935e5fe64e271071463a84e16761be7843250b3f"
+          },
+          {
+            "path": "code/streeling/evidence/voice-leading-2026-10-22/native-commands.json",
+            "bytes": 19234,
+            "sha256": "bcbab8361428da15d8b6013a0fd53beba2d91f0365d6c82dd09004a6b1136a04"
+          },
+          {
+            "path": "code/streeling/evidence/voice-leading-2026-10-22/native-results.json.copy.json",
+            "bytes": 375,
+            "sha256": "65e64f32ec6c29d62ea8f1db968974974ab96993358c8bffd9c4c65b6e2fc01a"
+          },
+          {
+            "path": "code/streeling/evidence/voice-leading-2026-10-22/native-commands.json.copy.json",
+            "bytes": 377,
+            "sha256": "2fe3f5f6650fdbb3f61bb3afed41974832f7c3946995a28866940206bc724b22"
+          },
+          {
+            "path": "code/streeling/evidence/voice-leading-2026-10-22/negative-controls.json",
+            "bytes": 1263,
+            "sha256": "9438c4b10570940b169bc77a9672e970ae33559fd52bb5521113edcd01179c13"
+          },
+          {
+            "path": "code/streeling/evidence/voice-leading-2026-10-22/data-audit.json",
+            "bytes": 434203,
+            "sha256": "18be605494ffb6ba2749f40f4d060a97d6eb96e6b359d38f8805ec80febbba8e"
+          },
+          {
+            "path": "code/streeling/evidence/voice-leading-2026-10-22/learner-task.md",
+            "bytes": 3018,
+            "sha256": "c013df377836a345078c11955616b274787065f26bffeb9ce705f58d54f063e0"
+          },
+          {
+            "path": "code/streeling/evidence/voice-leading-2026-10-22/reviewer-rubric.json",
+            "bytes": 2097,
+            "sha256": "c601eee1e1ca31815cd62ce98f884e8e1151e6dc3e76d1be501b59505d5c7619"
+          },
+          {
+            "path": "code/streeling/evidence/voice-leading-2026-10-22/official-doc-readback.json",
+            "bytes": 1052,
+            "sha256": "b21b7b192dbbf05836faf6ae7d9d7a735695aac09c851ff2ece7d98f2cf0b00e"
+          },
+          {
+            "path": "code/streeling/evidence/voice-leading-2026-10-22/public-input-readback.json",
+            "bytes": 2194,
+            "sha256": "b259c4000f6b97dde0ed774369b3de3f970128e2d6ea98e6dd9ae8be75b4d1d8"
+          },
+          {
+            "path": "code/streeling/voice-leading/run.mjs",
+            "bytes": 6205,
+            "sha256": "2ce00cfd60a7dba40c0398f8c5e2ad239a039770ce2c58fda28c718a0e801811"
+          },
+          {
+            "path": "code/streeling/voice-leading/Probe.cs",
+            "bytes": 10391,
+            "sha256": "63b20d1d7e41272f1835930379263d237cef4fb2ef35c65fe486035f2fbb7a01"
+          },
+          {
+            "path": "code/streeling/voice-leading/MetadataAdapter.cs",
+            "bytes": 164,
+            "sha256": "4efdf03568bad3957590ed8af9ece3381334722bfdbc62bd791ce03839b59392"
+          },
+          {
+            "path": "code/streeling/voice-leading/VoiceLeadingProbe.csproj",
+            "bytes": 329,
+            "sha256": "d4973831025b0d276473f53639fd44632399a89cf5e1a7fb8d2066b2ae60a487"
+          },
+          {
+            "path": "code/streeling/voice-leading/global.json",
+            "bytes": 91,
+            "sha256": "b9cbf70f1a0418dd0d9b86d7bac0616700b85c8425a1314a64cb4b755a92dbdb"
+          },
+          {
+            "path": "code/streeling/voice-leading/NuGet.Config",
+            "bytes": 117,
+            "sha256": "964302159308872b9729e1828a1ba897f30634f7bd751cde11ea8e6fed8cfb97"
+          },
+          {
+            "path": "code/streeling/voice-leading/expected-cases.json",
+            "bytes": 2804,
+            "sha256": "01b9d0d943232e3f6562341b840563c02b83a7a13206e23867611bcac91cfd3b"
+          },
+          {
+            "path": "code/streeling/voice-leading/source.json",
+            "bytes": 2005,
+            "sha256": "d14cf92ae2b9f12499b68a3b47e845be28e9de39b27ee1bc087918671b7c755b"
+          },
+          {
+            "path": "code/streeling/voice-leading/README.md",
+            "bytes": 3857,
+            "sha256": "d944828b38e02adc4869d152cfdffba76b52ad17b4fc207b9cbbed2035f966c7"
+          },
+          {
+            "path": "code/streeling/voice-leading/.gitattributes",
+            "bytes": 98,
+            "sha256": "72d5da6a350b43d984ad0569f59ba5f39aa3ff3d390d45a817d931fa2b38396c"
+          },
+          {
+            "path": "code/streeling/voice-leading/vendor/Common/GA.Domain.Services/Atonal/VoiceLeadingSpace.cs",
+            "bytes": 3809,
+            "sha256": "2f3bd2240cd08305dace51f62069e60e6336d1b5088ce24eed2eabddf6c830ac"
+          },
+          {
+            "path": "code/streeling/voice-leading/vendor/Common/GA.Domain.Core/Theory/Atonal/VoiceLeadingOptions.cs",
+            "bytes": 699,
+            "sha256": "4d9068fe2231fd6e8c4f3d7f2ddb2b93ae68b699fe65654104bf5d606bf89891"
+          },
+          {
+            "path": "code/streeling/voice-leading/vendor/LICENSE",
+            "bytes": 1072,
+            "sha256": "b0592d8995a0b7963cd8226d5a1e70f75c055810fc68ce3b0e5e6e3fa646c3c0"
+          },
+          {
+            "path": "streeling/courses/music/en/mus-014-inversions-bass-line.md",
+            "bytes": 32653,
+            "sha256": "3dcdae4fcb8ffa982268b44216eae920827c69e367a0cb090cdc7e36c98abae5"
+          },
+          {
+            "path": "streeling/courses/guitar-studies/en/gtr-004-hear-and-audit-parallel-motion.md",
+            "bytes": 13554,
+            "sha256": "316bd71e22c162ada94a241fc671d43489d377d3fc538789570e574a92b680b2"
+          }
+        ],
+        "checked_exercises": [
+          {
+            "id": "mus-015-choose-voice-leading-equivalences/en/exercise-1",
+            "path": "streeling/courses/music/en/mus-015-choose-voice-leading-equivalences.md",
+            "exercise_line": 27,
+            "answer_line": 31,
+            "prompt": "For an exercise tracking one labeled melody voice from C4 to C5, should octave equivalence hide the leap?",
+            "answer": "> **Answer:** No. Keep the register and report the motion of 12 semitones. A pitch-class comparison may separately report 0, but it answers a different question. Neither score states whether a particular guitar fingering is comfortable.",
+            "answer_sha256": "f66b30b97515178d8f47119aec01e21b69992ffaa248a6223627efe679192414",
+            "factual_check": "pass",
+            "independent_reason": "72-60=12 registered semitones; circular cost=min(12 mod12,12-(12 mod12))=0. Comfort not observed.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          },
+          {
+            "id": "mus-015-choose-voice-leading-equivalences/en/exercise-2",
+            "path": "streeling/courses/music/en/mus-015-choose-voice-leading-equivalences.md",
+            "exercise_line": 46,
+            "answer_line": 50,
+            "prompt": "An agent quotes 0 for these arrays and concludes that the first labeled voice did not move. What information is missing?",
+            "answer": "> **Answer:** The equivalence settings and the voice correspondence. A zero after reassignment does not preserve the first entry as the first voice. The fixed-position absolute comparison is 14; its signed motions are +7, 0 and −7 semitones.",
+            "answer_sha256": "84417238af96373f1b171f4deadddf268f1b99db3ec8201a71ca2399ca8641a6",
+            "factual_check": "pass",
+            "independent_reason": "Fixed labels have motions [+7,0,-7], absolute sum14, circular sum5+0+5=10; reassignment gives0 and cannot preserve original labels by implication.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          },
+          {
+            "id": "mus-015-choose-voice-leading-equivalences/en/exercise-3",
+            "path": "streeling/courses/music/en/mus-015-choose-voice-leading-equivalences.md",
+            "exercise_line": 56,
+            "answer_line": 60,
+            "prompt": "Write a truthful annotation for that octave shift, including both distances and the common-note distinction.",
+            "answer": "> **Answer:** “Registered distance 36; octave-equivalent distance 0; 0 common registered pitches and 3 common pitch classes.” Do not describe the notes as sustained or the hand as stationary. Duration, articulation and physical placement were not measured.",
+            "answer_sha256": "9b84f6f5b55b163092126316197558a530ae20d7b05e8ddf9f949230cad709ec",
+            "factual_check": "pass",
+            "independent_reason": "Three +12 motions total36; circular costs all0; registered sets disjoint and pitch-class intersection {0,4,7} has3 elements; sustain not measured.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          },
+          {
+            "id": "mus-015-choose-voice-leading-equivalences/en/exercise-4",
+            "path": "streeling/courses/music/en/mus-015-choose-voice-leading-equivalences.md",
+            "exercise_line": 74,
+            "answer_line": 78,
+            "prompt": "Calculate the circular costs for the assignment `[60,75,65]`. Should a passing lab certify the original equivalence implementation?",
+            "answer": "> **Answer:** The matched differences are 0, 12 and 0, giving circular costs 0, 0 and 0. No: characterization succeeds by reproducing native 4 versus exhaustive 0. The production method has not been fixed by this lab.",
+            "answer_sha256": "740f87e9951e2d613fe6956fe8faad36ddfddc524e1926205e182f4cab284388",
+            "factual_check": "pass",
+            "independent_reason": "Witness [60,75,65] minus [60,63,65] is [0,12,0], circular costs [0,0,0]. Native cyclic minimum4 remains a characterized failure, not a fix.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          },
+          {
+            "id": "mus-015-choose-voice-leading-equivalences/en/exercise-5",
+            "path": "streeling/courses/music/en/mus-015-choose-voice-leading-equivalences.md",
+            "exercise_line": 84,
+            "answer_line": 88,
+            "prompt": "Which additional evidence would justify calling a recommended voicing physically easy?",
+            "answer": "> **Answer:** An actual string/fret assignment, the player's constraints and a playing trial with a stated criterion. The scalar calculations, source inspection and standalone run provide none of those observations. Continue with [voice correspondence](mus-016-recover-voice-correspondence.md) before treating a minimum as a performance plan.",
+            "answer_sha256": "c26467517d96f209735329de069ffbe6fcd43813df7211aa11aebe3c4743262a",
+            "factual_check": "pass",
+            "independent_reason": "Physical ease requires actual string/fret assignment, player constraints and a playing criterion/trial; scalar and source evidence supply none.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          },
+          {
+            "id": "mus-015-choose-voice-leading-equivalences/fr/exercise-1",
+            "path": "streeling/courses/music/fr/mus-015-choose-voice-leading-equivalences.fr.md",
+            "exercise_line": 27,
+            "answer_line": 31,
+            "prompt": "Dans un exercice qui suit une voix mélodique identifiée de C4 à C5, l’équivalence d’octave doit-elle masquer le saut ?",
+            "answer": "> **Réponse :** Non. Conservez le registre et signalez un mouvement de 12 demi-tons. Une comparaison des classes de hauteurs peut indiquer 0 séparément, mais elle répond à une autre question. Aucun de ces scores ne dit si un doigté de guitare donné est confortable.",
+            "answer_sha256": "f6640bcac334e258422671e1be877d994ddeccca8ce1af3d34b101a429c19493",
+            "factual_check": "pass",
+            "independent_reason": "72-60=12 registered semitones; circular cost=min(12 mod12,12-(12 mod12))=0. Comfort not observed.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          },
+          {
+            "id": "mus-015-choose-voice-leading-equivalences/fr/exercise-2",
+            "path": "streeling/courses/music/fr/mus-015-choose-voice-leading-equivalences.fr.md",
+            "exercise_line": 46,
+            "answer_line": 50,
+            "prompt": "Un agent cite 0 pour ces tableaux et conclut que la première voix identifiée n’a pas bougé. Quelles informations manquent ?",
+            "answer": "> **Réponse :** Les paramètres d’équivalence et la correspondance entre les voix. Un zéro obtenu après réaffectation ne conserve pas la première entrée comme première voix. La comparaison absolue à positions fixes vaut 14 ; ses mouvements signés sont +7, 0 et −7 demi-tons.",
+            "answer_sha256": "12503fe6a8290a223314e73cc9449259f33c069648f4c141b6f76c1304feaf34",
+            "factual_check": "pass",
+            "independent_reason": "Fixed labels have motions [+7,0,-7], absolute sum14, circular sum5+0+5=10; reassignment gives0 and cannot preserve original labels by implication.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          },
+          {
+            "id": "mus-015-choose-voice-leading-equivalences/fr/exercise-3",
+            "path": "streeling/courses/music/fr/mus-015-choose-voice-leading-equivalences.fr.md",
+            "exercise_line": 56,
+            "answer_line": 60,
+            "prompt": "Rédigez une annotation exacte pour ce déplacement d’octave, en incluant les deux distances et la distinction entre les types de notes communes.",
+            "answer": "> **Réponse :** « Distance tenant compte du registre : 36 ; distance avec équivalence d’octave : 0 ; 0 hauteur commune avec le registre pris en compte et 3 classes de hauteurs communes. » Ne décrivez pas les notes comme tenues ni la main comme immobile. La durée, l’articulation et le placement physique n’ont pas été mesurés.",
+            "answer_sha256": "95c067120d1b797cd3cb1cc7f679f4e786279dd1b5fb991e8257498855f674d7",
+            "factual_check": "pass",
+            "independent_reason": "Three +12 motions total36; circular costs all0; registered sets disjoint and pitch-class intersection {0,4,7} has3 elements; sustain not measured.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          },
+          {
+            "id": "mus-015-choose-voice-leading-equivalences/fr/exercise-4",
+            "path": "streeling/courses/music/fr/mus-015-choose-voice-leading-equivalences.fr.md",
+            "exercise_line": 74,
+            "answer_line": 78,
+            "prompt": "Calculez les coûts circulaires de l’affectation `[60,75,65]`. La réussite du laboratoire doit-elle certifier l’implémentation d’équivalence d’origine ?",
+            "answer": "> **Réponse :** Les différences appariées valent 0, 12 et 0, ce qui donne des coûts circulaires de 0, 0 et 0. Non : la caractérisation réussit en reproduisant le résultat natif de 4 contre le résultat exhaustif de 0. Ce laboratoire n’a pas corrigé la méthode de production.",
+            "answer_sha256": "1c6872a52dadcced62a0d1a35a1fc8d9eb8975861d771bd157b60a4ac760be2c",
+            "factual_check": "pass",
+            "independent_reason": "Witness [60,75,65] minus [60,63,65] is [0,12,0], circular costs [0,0,0]. Native cyclic minimum4 remains a characterized failure, not a fix.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          },
+          {
+            "id": "mus-015-choose-voice-leading-equivalences/fr/exercise-5",
+            "path": "streeling/courses/music/fr/mus-015-choose-voice-leading-equivalences.fr.md",
+            "exercise_line": 84,
+            "answer_line": 88,
+            "prompt": "Quelles preuves supplémentaires permettraient de qualifier un voicing recommandé de physiquement facile à jouer ?",
+            "answer": "> **Réponse :** Une affectation réelle aux cordes et aux cases, les contraintes du musicien et un essai instrumental avec un critère déclaré. Les calculs scalaires, l’inspection du code source et l’exécution autonome ne fournissent aucune de ces observations. Poursuivez avec la [correspondance entre les voix](mus-016-recover-voice-correspondence.md) avant de traiter un minimum comme un plan d’exécution instrumentale.",
+            "answer_sha256": "b049e49aa76829219dcf79a46ee9291231ef372238370d0bb36665a49ef5cf99",
+            "factual_check": "pass",
+            "independent_reason": "Physical ease requires actual string/fret assignment, player constraints and a playing criterion/trial; scalar and source evidence supply none.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          },
+          {
+            "id": "mus-015-choose-voice-leading-equivalences/es/exercise-1",
+            "path": "streeling/courses/music/es/mus-015-choose-voice-leading-equivalences.es.md",
+            "exercise_line": 27,
+            "answer_line": 31,
+            "prompt": "En un ejercicio que sigue una voz melódica identificada de C4 a C5, ¿debe la equivalencia de octava ocultar el salto?",
+            "answer": "> **Respuesta:** No. Conserva el registro e indica el movimiento de 12 semitonos. Una comparación de clases de altura puede indicar 0 por separado, pero responde a otra pregunta. Ninguna puntuación dice si una digitación concreta de guitarra es cómoda.",
+            "answer_sha256": "0936c3711b8f2a8d2dfb399d43288f448c02d3afd8c26c642d3984d440d6fd14",
+            "factual_check": "pass",
+            "independent_reason": "72-60=12 registered semitones; circular cost=min(12 mod12,12-(12 mod12))=0. Comfort not observed.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          },
+          {
+            "id": "mus-015-choose-voice-leading-equivalences/es/exercise-2",
+            "path": "streeling/courses/music/es/mus-015-choose-voice-leading-equivalences.es.md",
+            "exercise_line": 46,
+            "answer_line": 50,
+            "prompt": "Un agente cita 0 para estos arrays y concluye que la primera voz identificada no se movió. ¿Qué información falta?",
+            "answer": "> **Respuesta:** Los ajustes de equivalencia y la correspondencia entre voces. Un cero tras la reasignación no conserva la primera entrada como primera voz. La comparación absoluta con posiciones fijas vale 14; sus movimientos con signo son +7, 0 y −7 semitonos.",
+            "answer_sha256": "06eae758677aba2c0fba0607d2772be691c5c43f8bcc8b343a40211df95b4675",
+            "factual_check": "pass",
+            "independent_reason": "Fixed labels have motions [+7,0,-7], absolute sum14, circular sum5+0+5=10; reassignment gives0 and cannot preserve original labels by implication.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          },
+          {
+            "id": "mus-015-choose-voice-leading-equivalences/es/exercise-3",
+            "path": "streeling/courses/music/es/mus-015-choose-voice-leading-equivalences.es.md",
+            "exercise_line": 56,
+            "answer_line": 60,
+            "prompt": "Escribe una anotación veraz para ese desplazamiento de octava que incluya ambas distancias y la distinción entre tipos de notas comunes.",
+            "answer": "> **Respuesta:** «Distancia teniendo en cuenta el registro: 36; distancia con equivalencia de octava: 0; 0 alturas comunes teniendo en cuenta el registro y 3 clases de altura comunes». No describas las notas como sostenidas ni la mano como inmóvil. No se midieron la duración, la articulación ni la colocación física.",
+            "answer_sha256": "683bc2206f69cd585a289f49e11141668e67bba8357fbfb9c1a303c5fad298e5",
+            "factual_check": "pass",
+            "independent_reason": "Three +12 motions total36; circular costs all0; registered sets disjoint and pitch-class intersection {0,4,7} has3 elements; sustain not measured.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          },
+          {
+            "id": "mus-015-choose-voice-leading-equivalences/es/exercise-4",
+            "path": "streeling/courses/music/es/mus-015-choose-voice-leading-equivalences.es.md",
+            "exercise_line": 74,
+            "answer_line": 78,
+            "prompt": "Calcula los costes circulares de la asignación `[60,75,65]`. ¿Debe un laboratorio que supera las comprobaciones certificar la implementación de equivalencia original?",
+            "answer": "> **Respuesta:** Las diferencias emparejadas son 0, 12 y 0, lo que da costes circulares de 0, 0 y 0. No: la caracterización tiene éxito al reproducir el resultado nativo de 4 frente al exhaustivo de 0. Este laboratorio no ha corregido el método de producción.",
+            "answer_sha256": "cda3c25c6ae8c204b8a9613f7b78fa182f857df9ad6a76ef6309252ad4538df4",
+            "factual_check": "pass",
+            "independent_reason": "Witness [60,75,65] minus [60,63,65] is [0,12,0], circular costs [0,0,0]. Native cyclic minimum4 remains a characterized failure, not a fix.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          },
+          {
+            "id": "mus-015-choose-voice-leading-equivalences/es/exercise-5",
+            "path": "streeling/courses/music/es/mus-015-choose-voice-leading-equivalences.es.md",
+            "exercise_line": 84,
+            "answer_line": 88,
+            "prompt": "¿Qué pruebas adicionales justificarían calificar una disposición de voces recomendada como físicamente fácil de tocar?",
+            "answer": "> **Respuesta:** Una asignación real a cuerdas y trastes, las limitaciones del intérprete y una prueba instrumental con un criterio declarado. Los cálculos escalares, la inspección de las fuentes y la ejecución independiente no aportan ninguna de esas observaciones. Continúa con la [correspondencia entre voces](mus-016-recover-voice-correspondence.md) antes de tratar un mínimo como un plan de ejecución instrumental.",
+            "answer_sha256": "2631890316047771664a99b720ee1ec7b4f6e71fdc439fce7e8940404a4df6ee",
+            "factual_check": "pass",
+            "independent_reason": "Physical ease requires actual string/fret assignment, player constraints and a playing criterion/trial; scalar and source evidence supply none.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          },
+          {
+            "id": "mus-016-recover-voice-correspondence/en/exercise-1",
+            "path": "streeling/courses/music/en/mus-016-recover-voice-correspondence.md",
+            "exercise_line": 32,
+            "answer_line": 36,
+            "prompt": "Does a distance of 7 uniquely select plan A? Explain using both sums.",
+            "answer": "> **Answer:** No. Plan A costs 4 + 3 = 7 and plan B costs 5 + 2 = 7. The scalar discards which correspondence produced it. A tie-breaking rule could choose one, but that would be an additional policy.",
+            "answer_sha256": "545419ce39cff78bef7811efe720df54043b988d68595c40144883faffd32161",
+            "factual_check": "pass",
+            "independent_reason": "All2 assignments checked: A=[64,65], motions[4,3], cost7; B=[65,64], motions[5,2], cost7. Scalar cannot select unique correspondence.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          },
+          {
+            "id": "mus-016-recover-voice-correspondence/en/exercise-2",
+            "path": "streeling/courses/music/en/mus-016-recover-voice-correspondence.md",
+            "exercise_line": 44,
+            "answer_line": 48,
+            "prompt": "For a task that requires labeled voices to preserve their relative pitch order at the endpoints, which plan meets that requirement?",
+            "answer": "> **Answer:** Plan A. Plan B reverses the endpoint order even though its total cost is also 7. State the order requirement explicitly; it cannot be recovered from the minimum alone.",
+            "answer_sha256": "130a202a6bf7efcf18b15650a618b46d9e35a9c8b8d35c1e445df9067e5f80dd",
+            "factual_check": "pass",
+            "independent_reason": "Source order60<62. A target64<65 preserves endpoint order; B target65>64 reverses it. No continuous or audible crossing claim follows.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          },
+          {
+            "id": "mus-016-recover-voice-correspondence/en/exercise-3",
+            "path": "streeling/courses/music/en/mus-016-recover-voice-correspondence.md",
+            "exercise_line": 62,
+            "answer_line": 66,
+            "prompt": "Verify the two notes of plan B from the open-string pitches. Does the pitch-order reversal require the strings to exchange their physical positions?",
+            "answer": "> **Answer:** 55 + 10 = 65 and 59 + 5 = 64. No. The G string remains the G string and the B string remains the B string; fretting can reverse the relative pitches they sound. No physical string crossing is claimed.",
+            "answer_sha256": "5cf91c1eb089a7ed2705fe7a874e42f37535708d5943cb893a0a5b6b2c22914c",
+            "factual_check": "pass",
+            "independent_reason": "PlanB: G3=55 plus10 gives65; B3=59 plus5 gives64. Strings keep physical identity while relative sounded pitch order reverses.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          },
+          {
+            "id": "mus-016-recover-voice-correspondence/en/exercise-4",
+            "path": "streeling/courses/music/en/mus-016-recover-voice-correspondence.md",
+            "exercise_line": 74,
+            "answer_line": 78,
+            "prompt": "For the separate counterexample `[60,63,65]` matched to `[60,75,65]`, why can `motions` contain 12 while every circular `voiceCosts` entry is 0?",
+            "answer": "> **Answer:** The second labeled pitch rises from 63 to 75, a registered motion of 12 semitones. Octave equivalence maps that pair to circular cost 0. The witness preserves the registered difference; the chosen objective ignores its octave component.",
+            "answer_sha256": "9663d1894636cdd995b13c564c938ba98fb7d23047aaed2817180e5abcaea393",
+            "factual_check": "pass",
+            "independent_reason": "75-63=12 registered semitones with octave-circular cost0. Raw motion and chosen objective retain different information.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          },
+          {
+            "id": "mus-016-recover-voice-correspondence/en/exercise-5",
+            "path": "streeling/courses/music/en/mus-016-recover-voice-correspondence.md",
+            "exercise_line": 84,
+            "answer_line": 88,
+            "prompt": "An agent writes “distance 7, therefore the easiest fingering.” Replace that claim with a defensible statement.",
+            "answer": "> **Answer:** “Both declared assignments have cost 7 under the stated equivalences. We select plan A to preserve endpoint pitch order. Its G-string fret 9 and B-string fret 6 placement is constructed; comfort and finger choice still require a playing trial.” Continue with [ranking candidates](mus-017-audit-voice-leading-rankings.md).",
+            "answer_sha256": "5a8da0a9cd024620b72b7df69911c27d9c1d0b378bab402f64772f2dc62b554e",
+            "factual_check": "pass",
+            "independent_reason": "Both costs7; order requirement selectsA. A frets9/6 give55+9=64 and59+6=65. Comfort/finger choice remain unmeasured.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          },
+          {
+            "id": "mus-016-recover-voice-correspondence/fr/exercise-1",
+            "path": "streeling/courses/music/fr/mus-016-recover-voice-correspondence.fr.md",
+            "exercise_line": 32,
+            "answer_line": 36,
+            "prompt": "Une distance de 7 sélectionne-t-elle uniquement le plan A ? Expliquez à l’aide des deux sommes.",
+            "answer": "> **Réponse :** Non. Le plan A coûte 4 + 3 = 7 et le plan B coûte 5 + 2 = 7. Le scalaire ne conserve pas la correspondance qui l’a produit. Une règle de départage pourrait en choisir une, mais ce serait une politique supplémentaire.",
+            "answer_sha256": "4c71f413bfd79104e3e3d710266008bc4849861d8fc8290781ed564f438bd530",
+            "factual_check": "pass",
+            "independent_reason": "All2 assignments checked: A=[64,65], motions[4,3], cost7; B=[65,64], motions[5,2], cost7. Scalar cannot select unique correspondence.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          },
+          {
+            "id": "mus-016-recover-voice-correspondence/fr/exercise-2",
+            "path": "streeling/courses/music/fr/mus-016-recover-voice-correspondence.fr.md",
+            "exercise_line": 44,
+            "answer_line": 48,
+            "prompt": "Pour une tâche qui exige que les voix identifiées conservent leur ordre relatif de hauteur aux deux extrémités, quel plan satisfait cette exigence ?",
+            "answer": "> **Réponse :** Le plan A. Le plan B inverse l’ordre aux extrémités, même si son coût total vaut aussi 7. Énoncez explicitement l’exigence d’ordre ; on ne peut pas la déduire du seul minimum.",
+            "answer_sha256": "be58af3028aa1ea02d04362e57542729bb4df04754b27c211476d5deb720cc90",
+            "factual_check": "pass",
+            "independent_reason": "Source order60<62. A target64<65 preserves endpoint order; B target65>64 reverses it. No continuous or audible crossing claim follows.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          },
+          {
+            "id": "mus-016-recover-voice-correspondence/fr/exercise-3",
+            "path": "streeling/courses/music/fr/mus-016-recover-voice-correspondence.fr.md",
+            "exercise_line": 62,
+            "answer_line": 66,
+            "prompt": "Vérifiez les deux notes du plan B à partir des hauteurs des cordes à vide. L’inversion de l’ordre des hauteurs exige-t-elle que les cordes échangent leurs positions physiques ?",
+            "answer": "> **Réponse :** 55 + 10 = 65 et 59 + 5 = 64. Non. La corde de sol reste la corde de sol et la corde de si reste la corde de si ; le choix des cases peut inverser l’ordre relatif des hauteurs qu’elles produisent. Aucun croisement physique des cordes n’est affirmé.",
+            "answer_sha256": "ab846c92c24ea7f1aba3179c8b0e6450e251378e40dba3fdf842edc40f71165b",
+            "factual_check": "pass",
+            "independent_reason": "PlanB: G3=55 plus10 gives65; B3=59 plus5 gives64. Strings keep physical identity while relative sounded pitch order reverses.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          },
+          {
+            "id": "mus-016-recover-voice-correspondence/fr/exercise-4",
+            "path": "streeling/courses/music/fr/mus-016-recover-voice-correspondence.fr.md",
+            "exercise_line": 74,
+            "answer_line": 78,
+            "prompt": "Pour le contre-exemple distinct `[60,63,65]` apparié à `[60,75,65]`, pourquoi `motions` peut-il contenir 12 alors que chaque entrée circulaire de `voiceCosts` vaut 0 ?",
+            "answer": "> **Réponse :** La deuxième hauteur identifiée monte de 63 à 75, soit un mouvement de 12 demi-tons avec le registre pris en compte. L’équivalence d’octave attribue à cette paire un coût circulaire de 0. Le témoin conserve la différence avec le registre pris en compte ; l’objectif choisi ignore sa composante d’octave.",
+            "answer_sha256": "5e95b3ff292d6518623e89feb8ac73d4094a8514fabcbe82648ee8f6d1120b81",
+            "factual_check": "pass",
+            "independent_reason": "75-63=12 registered semitones with octave-circular cost0. Raw motion and chosen objective retain different information.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          },
+          {
+            "id": "mus-016-recover-voice-correspondence/fr/exercise-5",
+            "path": "streeling/courses/music/fr/mus-016-recover-voice-correspondence.fr.md",
+            "exercise_line": 84,
+            "answer_line": 88,
+            "prompt": "Un agent écrit « distance 7, donc le doigté le plus facile ». Remplacez cette affirmation par un énoncé défendable.",
+            "answer": "> **Réponse :** « Les deux affectations déclarées ont un coût de 7 sous les équivalences indiquées. Nous sélectionnons le plan A pour conserver l’ordre des hauteurs aux extrémités. Son placement à la case 9 sur la corde de sol et à la case 6 sur la corde de si est construit ; le confort et le choix des doigts exigent encore un essai instrumental. » Poursuivez avec le [classement des candidats](mus-017-audit-voice-leading-rankings.md).",
+            "answer_sha256": "33c319e077bf8dcad64b6fcb1be4c19dc168fa5f9d86676dbfa6f93ae28add94",
+            "factual_check": "pass",
+            "independent_reason": "Both costs7; order requirement selectsA. A frets9/6 give55+9=64 and59+6=65. Comfort/finger choice remain unmeasured.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          },
+          {
+            "id": "mus-016-recover-voice-correspondence/es/exercise-1",
+            "path": "streeling/courses/music/es/mus-016-recover-voice-correspondence.es.md",
+            "exercise_line": 32,
+            "answer_line": 36,
+            "prompt": "¿Una distancia de 7 selecciona únicamente el plan A? Explícalo usando ambas sumas.",
+            "answer": "> **Respuesta:** No. El plan A cuesta 4 + 3 = 7 y el plan B cuesta 5 + 2 = 7. El escalar descarta qué correspondencia lo produjo. Una regla de desempate podría elegir una, pero sería una política adicional.",
+            "answer_sha256": "8d88294e678459f6bae1351a223d164cdfa9c92800ab73bdc686c081bfa2cc0f",
+            "factual_check": "pass",
+            "independent_reason": "All2 assignments checked: A=[64,65], motions[4,3], cost7; B=[65,64], motions[5,2], cost7. Scalar cannot select unique correspondence.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          },
+          {
+            "id": "mus-016-recover-voice-correspondence/es/exercise-2",
+            "path": "streeling/courses/music/es/mus-016-recover-voice-correspondence.es.md",
+            "exercise_line": 44,
+            "answer_line": 48,
+            "prompt": "Para una tarea que exige que las voces identificadas conserven su orden relativo de altura en los extremos, ¿qué plan cumple ese requisito?",
+            "answer": "> **Respuesta:** El plan A. El plan B invierte el orden en los extremos aunque su coste total también sea 7. Declara el requisito de orden explícitamente; no se puede recuperar a partir del mínimo por sí solo.",
+            "answer_sha256": "400e5a73884a9874c3bd28ecbc5ca22c908f33200193f1e6856459859c0db1e8",
+            "factual_check": "pass",
+            "independent_reason": "Source order60<62. A target64<65 preserves endpoint order; B target65>64 reverses it. No continuous or audible crossing claim follows.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          },
+          {
+            "id": "mus-016-recover-voice-correspondence/es/exercise-3",
+            "path": "streeling/courses/music/es/mus-016-recover-voice-correspondence.es.md",
+            "exercise_line": 62,
+            "answer_line": 66,
+            "prompt": "Verifica las dos notas del plan B a partir de las alturas de las cuerdas al aire. ¿La inversión del orden de las alturas requiere que las cuerdas intercambien sus posiciones físicas?",
+            "answer": "> **Respuesta:** 55 + 10 = 65 y 59 + 5 = 64. No. La cuerda de sol sigue siendo la cuerda de sol y la cuerda de si sigue siendo la cuerda de si; la elección de trastes puede invertir las alturas relativas que producen. No se afirma que haya un cruce físico de cuerdas.",
+            "answer_sha256": "21681b0242f704ecf7ffa6c1e71d19b7aeb73602098b39caea99dd4f8fbed31d",
+            "factual_check": "pass",
+            "independent_reason": "PlanB: G3=55 plus10 gives65; B3=59 plus5 gives64. Strings keep physical identity while relative sounded pitch order reverses.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          },
+          {
+            "id": "mus-016-recover-voice-correspondence/es/exercise-4",
+            "path": "streeling/courses/music/es/mus-016-recover-voice-correspondence.es.md",
+            "exercise_line": 74,
+            "answer_line": 78,
+            "prompt": "Para el contraejemplo separado `[60,63,65]` emparejado con `[60,75,65]`, ¿por qué puede `motions` contener 12 mientras que cada entrada circular de `voiceCosts` es 0?",
+            "answer": "> **Respuesta:** La segunda altura identificada sube de 63 a 75, un movimiento de 12 semitonos teniendo en cuenta el registro. La equivalencia de octava asigna a esa pareja un coste circular de 0. El testigo conserva la diferencia teniendo en cuenta el registro; el objetivo elegido ignora su componente de octava.",
+            "answer_sha256": "0ba8728e2f922ebe4c3d0b35fc019d7b8e2be18bf155691610427ea73b5aa5b7",
+            "factual_check": "pass",
+            "independent_reason": "75-63=12 registered semitones with octave-circular cost0. Raw motion and chosen objective retain different information.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          },
+          {
+            "id": "mus-016-recover-voice-correspondence/es/exercise-5",
+            "path": "streeling/courses/music/es/mus-016-recover-voice-correspondence.es.md",
+            "exercise_line": 84,
+            "answer_line": 88,
+            "prompt": "Un agente escribe «distancia 7, por tanto la digitación más fácil». Sustituye esa afirmación por una declaración defendible.",
+            "answer": "> **Respuesta:** «Ambas asignaciones declaradas tienen coste 7 con las equivalencias indicadas. Seleccionamos el plan A para conservar el orden de las alturas en los extremos. Su colocación en el traste 9 de la cuerda de sol y en el traste 6 de la cuerda de si es construida; la comodidad y la elección de dedos aún requieren una prueba instrumental». Continúa con la [clasificación de candidatos](mus-017-audit-voice-leading-rankings.md).",
+            "answer_sha256": "d1e92913943727643467e0e7268adc644f699d76b648656805d127b7ec74990e",
+            "factual_check": "pass",
+            "independent_reason": "Both costs7; order requirement selectsA. A frets9/6 give55+9=64 and59+6=65. Comfort/finger choice remain unmeasured.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          },
+          {
+            "id": "mus-017-audit-voice-leading-rankings/en/exercise-1",
+            "path": "streeling/courses/music/en/mus-017-audit-voice-leading-rankings.md",
+            "exercise_line": 32,
+            "answer_line": 36,
+            "prompt": "Write a zero-cost target assignment for Same and a cost-1 assignment for Near.",
+            "answer": "> **Answer:** Same: match `[60,63,65]` with `[60,75,65]`, for circular costs 0, 0 and 0. Near: match `[60,63,65]` with `[60,63,66]`, for costs 0, 0 and 1. These give upper bounds; exhaustive enumeration in the retained lab confirms the minima for these cases.",
+            "answer_sha256": "f93bd1b93c94ef9f4802106ab4931e3a349b2d1e492f2c120cd9e224b40550a5",
+            "factual_check": "pass",
+            "independent_reason": "Same witness costs[0,0,0], Near costs[0,0,1]. Nonnegative objective gives lower bound0 for Same; distinct pitch-class multisets exclude0 for Near, so integer lower bound1 is attained.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          },
+          {
+            "id": "mus-017-audit-voice-leading-rankings/en/exercise-2",
+            "path": "streeling/courses/music/en/mus-017-audit-voice-leading-rankings.md",
+            "exercise_line": 49,
+            "answer_line": 53,
+            "prompt": "Would replacing the sorting algorithm fix this disagreement?",
+            "answer": "> **Answer:** No. Both columns are sorted correctly according to their values. The disagreement comes from the computed cost of Same under the intended equivalence contract. Investigate the representation and assignment search before changing the rank sorter.",
+            "answer_sha256": "f59e3cc0a9abcca9cf6024143857a6ab8bba28f92052e1a97c22900af411bba6",
+            "factual_check": "pass",
+            "independent_reason": "Correct ascending sorts of native[Same4,Near1] and exhaustive[Same0,Near1] disagree because costs differ, not because the sorting routine failed.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          },
+          {
+            "id": "mus-017-audit-voice-leading-rankings/en/exercise-3",
+            "path": "streeling/courses/music/en/mus-017-audit-voice-leading-rankings.md",
+            "exercise_line": 61,
+            "answer_line": 65,
+            "prompt": "Can the normalized zero be used to conclude that the registered motion of the second labeled voice is 0?",
+            "answer": "> **Answer:** No. In the declared witness, that voice goes from 63 to 75, moving 12 semitones. The zero belongs to the octave-equivalent comparison. Keep the original registered pitches if that movement matters to the task.",
+            "answer_sha256": "57f0f9daa3b089d73509a2b9bcd064ebb8b194eb0c8c6277b5b3ce7dccad7da4",
+            "factual_check": "pass",
+            "independent_reason": "Second labeled witness motion75-63=12; normalized scalar0 cannot restore registered octave or correspondence.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          },
+          {
+            "id": "mus-017-audit-voice-leading-rankings/en/exercise-4",
+            "path": "streeling/courses/music/en/mus-017-audit-voice-leading-rankings.md",
+            "exercise_line": 75,
+            "answer_line": 79,
+            "prompt": "Why would using the native cyclic minimum as the “expected exhaustive answer” weaken the exercise?",
+            "answer": "> **Answer:** Both paths would inherit the same search restriction. Agreement could then hide the missing zero-cost permutation. Independent hand arithmetic and exhaustive enumeration supply evidence the source's own result cannot provide about itself.",
+            "answer_sha256": "c30e10ddb40a967dee07b15ac5cda1759d4659890f9aa4c8f06c2770c4d05376",
+            "factual_check": "pass",
+            "independent_reason": "A native-derived expected oracle result shares the cyclic restriction; scratch substitution fails oracle_zero_known_case expected0/actual4. Independent reference is required.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          },
+          {
+            "id": "mus-017-audit-voice-leading-rankings/en/exercise-5",
+            "path": "streeling/courses/music/en/mus-017-audit-voice-leading-rankings.md",
+            "exercise_line": 85,
+            "answer_line": 89,
+            "prompt": "An agent proposes automatically normalizing every consumer's input. What must it establish first?",
+            "answer": "> **Answer:** Identify each consumer's comparison contract and whether registered pitch, voice identity or string assignment must survive. Then verify the proposed behavior against those contracts with independent cases. This example supports a specific counterexample and a specific transformed input; it does not authorize a universal normalization policy.",
+            "answer_sha256": "3697672b54fe30576ebf85cc39400a265690c345b03162d5d4c7490bbd314730",
+            "factual_check": "pass",
+            "independent_reason": "Consumer contract must establish register, musical labels and string assignment retention; one transformed input returning0 proves no universal normalization policy or production fix.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          },
+          {
+            "id": "mus-017-audit-voice-leading-rankings/fr/exercise-1",
+            "path": "streeling/courses/music/fr/mus-017-audit-voice-leading-rankings.fr.md",
+            "exercise_line": 32,
+            "answer_line": 36,
+            "prompt": "Écrivez une affectation cible de coût nul pour Same et une affectation de coût 1 pour Near.",
+            "answer": "> **Réponse :** Same : appariez `[60,63,65]` à `[60,75,65]`, pour des coûts circulaires de 0, 0 et 0. Near : appariez `[60,63,65]` à `[60,63,66]`, pour des coûts de 0, 0 et 1. Ces affectations donnent des bornes supérieures ; l’énumération exhaustive du laboratoire conservé confirme les minima de ces cas.",
+            "answer_sha256": "48fb82a73fdf4dbdd52377cedd79540f50cc8241adba7fe7c806861708792b71",
+            "factual_check": "pass",
+            "independent_reason": "Same witness costs[0,0,0], Near costs[0,0,1]. Nonnegative objective gives lower bound0 for Same; distinct pitch-class multisets exclude0 for Near, so integer lower bound1 is attained.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          },
+          {
+            "id": "mus-017-audit-voice-leading-rankings/fr/exercise-2",
+            "path": "streeling/courses/music/fr/mus-017-audit-voice-leading-rankings.fr.md",
+            "exercise_line": 49,
+            "answer_line": 53,
+            "prompt": "Remplacer l’algorithme de tri corrigerait-il ce désaccord ?",
+            "answer": "> **Réponse :** Non. Les deux colonnes sont triées correctement selon leurs valeurs. Le désaccord vient du coût calculé pour Same selon le contrat d’équivalence visé. Examinez la représentation et la recherche d’affectations avant de modifier le tri du classement.",
+            "answer_sha256": "59f88584feec5a14ff05a8f7c1cb91a7728f583e931c7c1d314f8f134d1fd949",
+            "factual_check": "pass",
+            "independent_reason": "Correct ascending sorts of native[Same4,Near1] and exhaustive[Same0,Near1] disagree because costs differ, not because the sorting routine failed.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          },
+          {
+            "id": "mus-017-audit-voice-leading-rankings/fr/exercise-3",
+            "path": "streeling/courses/music/fr/mus-017-audit-voice-leading-rankings.fr.md",
+            "exercise_line": 61,
+            "answer_line": 65,
+            "prompt": "Peut-on utiliser le zéro normalisé pour conclure que le mouvement de la deuxième voix identifiée, avec le registre pris en compte, vaut 0 ?",
+            "answer": "> **Réponse :** Non. Dans le témoin déclaré, cette voix passe de 63 à 75, soit un mouvement de 12 demi-tons. Le zéro appartient à la comparaison avec équivalence d’octave. Conservez les hauteurs d’origine avec leur registre si ce mouvement compte pour la tâche.",
+            "answer_sha256": "59c02c982403021c0a8c85343b8a82236f01779086e9b8d439c4a91848171eca",
+            "factual_check": "pass",
+            "independent_reason": "Second labeled witness motion75-63=12; normalized scalar0 cannot restore registered octave or correspondence.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          },
+          {
+            "id": "mus-017-audit-voice-leading-rankings/fr/exercise-4",
+            "path": "streeling/courses/music/fr/mus-017-audit-voice-leading-rankings.fr.md",
+            "exercise_line": 75,
+            "answer_line": 79,
+            "prompt": "Pourquoi utiliser le minimum cyclique natif comme « réponse exhaustive attendue » affaiblirait-il l’exercice ?",
+            "answer": "> **Réponse :** Les deux chemins hériteraient de la même restriction de recherche. Leur accord pourrait alors masquer la permutation manquante de coût nul. Le calcul manuel indépendant et l’énumération exhaustive fournissent des preuves que le résultat du code source ne peut pas apporter sur lui-même.",
+            "answer_sha256": "e5020d97559d66573d245a0736b506a2f1ceced68810bca24ed7de16d5036788",
+            "factual_check": "pass",
+            "independent_reason": "A native-derived expected oracle result shares the cyclic restriction; scratch substitution fails oracle_zero_known_case expected0/actual4. Independent reference is required.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          },
+          {
+            "id": "mus-017-audit-voice-leading-rankings/fr/exercise-5",
+            "path": "streeling/courses/music/fr/mus-017-audit-voice-leading-rankings.fr.md",
+            "exercise_line": 85,
+            "answer_line": 89,
+            "prompt": "Un agent propose de normaliser automatiquement les entrées de tous les consommateurs. Que doit-il établir au préalable ?",
+            "answer": "> **Réponse :** Identifiez le contrat de comparaison de chaque consommateur et déterminez si la hauteur avec son registre, l’identité de la voix ou l’affectation aux cordes doivent être conservées. Vérifiez ensuite le comportement proposé par rapport à ces contrats à l’aide de cas indépendants. Cet exemple étaye un contre-exemple précis et une entrée transformée précise ; il n’autorise pas une politique universelle de normalisation.",
+            "answer_sha256": "2367eea80fdab7cea89b389c41774ce8427a415a7854a7d2cffe9a4fb5efbbae",
+            "factual_check": "pass",
+            "independent_reason": "Consumer contract must establish register, musical labels and string assignment retention; one transformed input returning0 proves no universal normalization policy or production fix.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          },
+          {
+            "id": "mus-017-audit-voice-leading-rankings/es/exercise-1",
+            "path": "streeling/courses/music/es/mus-017-audit-voice-leading-rankings.es.md",
+            "exercise_line": 32,
+            "answer_line": 36,
+            "prompt": "Escribe una asignación de destino de coste cero para Same y una de coste 1 para Near.",
+            "answer": "> **Respuesta:** Same: empareja `[60,63,65]` con `[60,75,65]`, con costes circulares de 0, 0 y 0. Near: empareja `[60,63,65]` con `[60,63,66]`, con costes de 0, 0 y 1. Esto da cotas superiores; la enumeración exhaustiva del laboratorio conservado confirma los mínimos de estos casos.",
+            "answer_sha256": "6e245f342367b7c26c83c52f71084857f30495761de06b1941ef459c5348d38f",
+            "factual_check": "pass",
+            "independent_reason": "Same witness costs[0,0,0], Near costs[0,0,1]. Nonnegative objective gives lower bound0 for Same; distinct pitch-class multisets exclude0 for Near, so integer lower bound1 is attained.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          },
+          {
+            "id": "mus-017-audit-voice-leading-rankings/es/exercise-2",
+            "path": "streeling/courses/music/es/mus-017-audit-voice-leading-rankings.es.md",
+            "exercise_line": 49,
+            "answer_line": 53,
+            "prompt": "¿Sustituir el algoritmo de ordenación corregiría este desacuerdo?",
+            "answer": "> **Respuesta:** No. Ambas columnas están ordenadas correctamente según sus valores. El desacuerdo procede del coste calculado para Same bajo el contrato de equivalencia pretendido. Investiga la representación y la búsqueda de asignaciones antes de cambiar la ordenación de la clasificación.",
+            "answer_sha256": "7f5515d6ade63aa5f9069f4c3b2be1853a0a27e666f847cc0216c76375aa1162",
+            "factual_check": "pass",
+            "independent_reason": "Correct ascending sorts of native[Same4,Near1] and exhaustive[Same0,Near1] disagree because costs differ, not because the sorting routine failed.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          },
+          {
+            "id": "mus-017-audit-voice-leading-rankings/es/exercise-3",
+            "path": "streeling/courses/music/es/mus-017-audit-voice-leading-rankings.es.md",
+            "exercise_line": 61,
+            "answer_line": 65,
+            "prompt": "¿Puede usarse el cero normalizado para concluir que el movimiento de la segunda voz identificada, teniendo en cuenta el registro, es 0?",
+            "answer": "> **Respuesta:** No. En el testigo declarado, esa voz pasa de 63 a 75 y se mueve 12 semitonos. El cero pertenece a la comparación con equivalencia de octava. Conserva las alturas originales con su registro si ese movimiento importa para la tarea.",
+            "answer_sha256": "07ecf46c14ef72645bb31c0f5dcabb2e49c71bb87b2f3c59b445f26c0c2b1b42",
+            "factual_check": "pass",
+            "independent_reason": "Second labeled witness motion75-63=12; normalized scalar0 cannot restore registered octave or correspondence.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          },
+          {
+            "id": "mus-017-audit-voice-leading-rankings/es/exercise-4",
+            "path": "streeling/courses/music/es/mus-017-audit-voice-leading-rankings.es.md",
+            "exercise_line": 75,
+            "answer_line": 79,
+            "prompt": "¿Por qué usar el mínimo cíclico nativo como «respuesta exhaustiva esperada» debilitaría el ejercicio?",
+            "answer": "> **Respuesta:** Ambas rutas heredarían la misma restricción de búsqueda. Su coincidencia podría entonces ocultar la permutación de coste cero que falta. El cálculo manual independiente y la enumeración exhaustiva aportan pruebas que el propio resultado de las fuentes no puede proporcionar sobre sí mismo.",
+            "answer_sha256": "1bb4e71c8d4f377b1ca85456a9b02589093e923b80f74fd9bc69bb468a8a8e37",
+            "factual_check": "pass",
+            "independent_reason": "A native-derived expected oracle result shares the cyclic restriction; scratch substitution fails oracle_zero_known_case expected0/actual4. Independent reference is required.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          },
+          {
+            "id": "mus-017-audit-voice-leading-rankings/es/exercise-5",
+            "path": "streeling/courses/music/es/mus-017-audit-voice-leading-rankings.es.md",
+            "exercise_line": 85,
+            "answer_line": 89,
+            "prompt": "Un agente propone normalizar automáticamente la entrada de todos los consumidores. ¿Qué debe establecer primero?",
+            "answer": "> **Respuesta:** Identifica el contrato de comparación de cada consumidor y si deben conservarse la altura con su registro, la identidad de la voz o la asignación a cuerdas. Después, verifica el comportamiento propuesto frente a esos contratos con casos independientes. Este ejemplo respalda un contraejemplo concreto y una entrada transformada concreta; no autoriza una política universal de normalización.",
+            "answer_sha256": "3d6de771c2bbb17c5bd21142e61b89e871679ef0a05f4e57016dcda6aeeb569a",
+            "factual_check": "pass",
+            "independent_reason": "Consumer contract must establish register, musical labels and string assignment retention; one transformed input returning0 proves no universal normalization policy or production fix.",
+            "translation_scope_check": "Faithful factual and evidence scope compared with English; AI semantic check, not fluent human approval."
+          }
+        ],
+        "checked_learner_criteria": [
+          {
+            "id": "MUS015/criterion-1",
+            "criterion": "Declares O/P on and T/I off for the registered counterexample; gives native4 versus exhaustive0 and the zero-cost assignment[60,75,65].",
+            "adequacy": "pass_for_prepared_source_assisted_task",
+            "evidence": "Task line7 now explicitly asks registered counterexample: O/P true,T/I false,native4/exhaustive0,witness[60,75,65].",
+            "participant_result": null
+          },
+          {
+            "id": "MUS015/criterion-2",
+            "criterion": "Derives the four scalar values 14,10,0,0 with matching assumptions.",
+            "adequacy": "pass_for_prepared_source_assisted_task",
+            "evidence": "Hand sums14,10 and reassigned0,0; four native cases agree.",
+            "participant_result": null
+          },
+          {
+            "id": "MUS015/criterion-3",
+            "criterion": "Separates 36 registered motion from 0 octave-equivalent distance in the shifted triad.",
+            "adequacy": "pass_for_prepared_source_assisted_task",
+            "evidence": "Three +12 motions give36, circular0.",
+            "participant_result": null
+          },
+          {
+            "id": "MUS015/criterion-4",
+            "criterion": "Explains 0 common registered pitches versus 3 common pitch classes without claiming sustain.",
+            "adequacy": "pass_for_prepared_source_assisted_task",
+            "evidence": "Registered intersection0 versus pitch-class intersection3; no sustain or stationary-hand inference.",
+            "participant_result": null
+          },
+          {
+            "id": "MUS015/criterion-5",
+            "criterion": "Preserves source and receipt hashes and distinguishes standalone characterization from full GA validation.",
+            "adequacy": "pass_for_prepared_source_assisted_task",
+            "evidence": "Prepared task asks source/receipt hashes; standalone/full-GA boundary is explicit.",
+            "participant_result": null
+          },
+          {
+            "id": "MUS016/criterion-1",
+            "criterion": "Lists the two assignments [64,65] and [65,64] for source [60,62].",
+            "adequacy": "pass_for_prepared_source_assisted_task",
+            "evidence": "Both2 target permutations exhaust two entries.",
+            "participant_result": null
+          },
+          {
+            "id": "MUS016/criterion-2",
+            "criterion": "Derives motions [4,3] and [5,2], both total7.",
+            "adequacy": "pass_for_prepared_source_assisted_task",
+            "evidence": "[4,3] and[5,2] each sum7.",
+            "participant_result": null
+          },
+          {
+            "id": "MUS016/criterion-3",
+            "criterion": "Selects plan A for preserved endpoint pitch order and identifies reversal in plan B.",
+            "adequacy": "pass_for_prepared_source_assisted_task",
+            "evidence": "A preserves order; B reverses endpoint order; extra criterion beyond distance.",
+            "participant_result": null
+          },
+          {
+            "id": "MUS016/criterion-4",
+            "criterion": "Checks both constructed G/B placements:55+9=64,59+6=65 and55+10=65,59+5=64.",
+            "adequacy": "pass_for_prepared_source_assisted_task",
+            "evidence": "Both placements required:55+9=64,59+6=65 AND55+10=65,59+5=64.",
+            "participant_result": null
+          },
+          {
+            "id": "MUS016/criterion-5",
+            "criterion": "Separates musical voice labels, string identity, scalar score and unmeasured player comfort.",
+            "adequacy": "pass_for_prepared_source_assisted_task",
+            "evidence": "Task distinguishes voice labels,string identity and unmeasured comfort.",
+            "participant_result": null
+          },
+          {
+            "id": "MUS017/criterion-1",
+            "criterion": "Gives native Same4/Near1 versus exhaustive Same0/Near1.",
+            "adequacy": "pass_for_prepared_source_assisted_task",
+            "evidence": "Same4/Near1 native and Same0/Near1 exhaustive agree with retained cases.",
+            "participant_result": null
+          },
+          {
+            "id": "MUS017/criterion-2",
+            "criterion": "Derives reversed local ranking without claiming an upstream KNN/UI run.",
+            "adequacy": "pass_for_prepared_source_assisted_task",
+            "evidence": "Native Near,Same versus exhaustive Same,Near is constructed local ranking only.",
+            "participant_result": null
+          },
+          {
+            "id": "MUS017/criterion-3",
+            "criterion": "Explains the missing [60,75,65] zero-cost assignment and cyclic costs4,10,6.",
+            "adequacy": "pass_for_prepared_source_assisted_task",
+            "evidence": "Omitted zero witness checked; cyclic4,10,6 from direct costs.",
+            "participant_result": null
+          },
+          {
+            "id": "MUS017/criterion-4",
+            "criterion": "Limits normalization to the declared example, retaining register separately if needed.",
+            "adequacy": "pass_for_prepared_source_assisted_task",
+            "evidence": "Normalized arrays produce0 in this example; register retained if needed, no general fix.",
+            "participant_result": null
+          },
+          {
+            "id": "MUS017/criterion-5",
+            "criterion": "Rejects exit0 as equivalence approval and cites the scratch oracle_zero_known_case failure0versus4.",
+            "adequacy": "pass_for_prepared_source_assisted_task",
+            "evidence": "Exit0 characterizes known disagreement; scratch oracle gate expected0/actual4; no correctness approval.",
+            "participant_result": null
+          }
+        ],
+        "independent_calculation_method": "Direct hand arithmetic for all lesson examples, plus separate in-memory Python itertools exhaustive enumeration over all13retained finite cases. No sorting or cyclic restriction in independent oracle. No native build/run performed by this reviewer.",
+        "independent_case_results": [
+          {
+            "id": "ordered_absolute",
+            "independent_cost": 14,
+            "permutations": 1,
+            "minimum_assignment_count": 1,
+            "matches_retained_evidence": true
+          },
+          {
+            "id": "ordered_octave",
+            "independent_cost": 10,
+            "permutations": 1,
+            "minimum_assignment_count": 1,
+            "matches_retained_evidence": true
+          },
+          {
+            "id": "permuted_absolute",
+            "independent_cost": 0,
+            "permutations": 6,
+            "minimum_assignment_count": 1,
+            "matches_retained_evidence": true
+          },
+          {
+            "id": "permuted_octave",
+            "independent_cost": 0,
+            "permutations": 6,
+            "minimum_assignment_count": 1,
+            "matches_retained_evidence": true
+          },
+          {
+            "id": "register_absolute",
+            "independent_cost": 36,
+            "permutations": 1,
+            "minimum_assignment_count": 1,
+            "matches_retained_evidence": true
+          },
+          {
+            "id": "register_octave",
+            "independent_cost": 0,
+            "permutations": 1,
+            "minimum_assignment_count": 1,
+            "matches_retained_evidence": true
+          },
+          {
+            "id": "upstream_seven",
+            "independent_cost": 8,
+            "permutations": 5040,
+            "minimum_assignment_count": 12,
+            "matches_retained_evidence": true
+          },
+          {
+            "id": "registered_counterexample",
+            "independent_cost": 0,
+            "permutations": 6,
+            "minimum_assignment_count": 1,
+            "matches_retained_evidence": true
+          },
+          {
+            "id": "normalized_counterexample_only",
+            "independent_cost": 0,
+            "permutations": 6,
+            "minimum_assignment_count": 1,
+            "matches_retained_evidence": true
+          },
+          {
+            "id": "ambiguous_plan",
+            "independent_cost": 7,
+            "permutations": 2,
+            "minimum_assignment_count": 2,
+            "matches_retained_evidence": true
+          },
+          {
+            "id": "ranking_near",
+            "independent_cost": 1,
+            "permutations": 6,
+            "minimum_assignment_count": 1,
+            "matches_retained_evidence": true
+          },
+          {
+            "id": "upstream_transposition",
+            "independent_cost": 0,
+            "permutations": 72,
+            "minimum_assignment_count": 1,
+            "matches_retained_evidence": true
+          },
+          {
+            "id": "empty",
+            "independent_cost": 0,
+            "permutations": 1,
+            "minimum_assignment_count": 1,
+            "matches_retained_evidence": true
+          }
+        ],
+        "hand_calculations": {
+          "fixed_order_motions": [
+            7,
+            0,
+            -7
+          ],
+          "four_scalar_values": [
+            14,
+            10,
+            0,
+            0
+          ],
+          "octave_shift_motions": [
+            12,
+            12,
+            12
+          ],
+          "registered_distance": 36,
+          "octave_distance": 0,
+          "common_registered_pitches": 0,
+          "common_pitch_classes": 3,
+          "counterexample_cyclic_pair_costs": [
+            [
+              0,
+              2,
+              2
+            ],
+            [
+              5,
+              0,
+              5
+            ],
+            [
+              3,
+              3,
+              0
+            ]
+          ],
+          "counterexample_cyclic_totals": [
+            4,
+            10,
+            6
+          ],
+          "omitted_witness": [
+            60,
+            75,
+            65
+          ],
+          "omitted_witness_motions": [
+            0,
+            12,
+            0
+          ],
+          "omitted_witness_circular_costs": [
+            0,
+            0,
+            0
+          ],
+          "ambiguous_A_motions": [
+            4,
+            3
+          ],
+          "ambiguous_B_motions": [
+            5,
+            2
+          ],
+          "ambiguous_costs": [
+            7,
+            7
+          ],
+          "source_GB_pitches": [
+            60,
+            62
+          ],
+          "plan_A_GB_pitches": [
+            64,
+            65
+          ],
+          "plan_B_GB_pitches": [
+            65,
+            64
+          ]
+        },
+        "content_checks": [
+          "Five numbered exercise-answer pairs in each of9sources; all45 semantically reviewed against English and pinned evidence.",
+          "Pitch labels C4=60,E4=64,G4=67,G3=55,B3=59 and one-semitone-per-fret arithmetic consistent.",
+          "MUS016 distinguishes endpoint pitch-order reversal from audible/continuous crossing and physical string positions; no comfort or performance inferred.",
+          "Prerequisites progress MUS014 -> MUS015 -> MUS016 -> MUS017, with MUS017 requiring015and016.",
+          "First named GA distance method links to immutable official project source; Node.js and.NET first named use official documentation; URLs agree across3locales.",
+          "FR/ES preserve scope, numerical claims, terminology, evidence limits and commands; no fluent-human-language approval claimed.",
+          "MUS015 equivalence contract, MUS016 explicit correspondence/order and MUS017 local ranking audit produce distinct GA agent artifacts.",
+          "Overlap comparison only used named MUS014 and GTR004 English sources: MUS014 names inversions/figured bass, GTR004 diagnoses string-matched parallel intervals and proposes a playing trial. New modules examine a different scalar API, explicit witnesses and ranking contract.",
+          "Controller command uses fresh external sibling output with existing parent; same spelling acrossOSes, Windows only assessed.",
+          "Passing40characterization checks retain original_expected_equivalence_satisfied=false; data-audit final113checks agree with current13input hashes.",
+          "No claim of GA originalassembly/fullsuite, upstreamKNN/UI execution, universal normalization proof or fixed production bug.",
+          "Prepared tasks permit source/calculator assistance and separate answerkey from participant responses; final15criteria align with prompts.",
+          "Reviewer/learner outcomes, human subjectreview, fluent languagereview, playingtrial and causal learningbenefit remain null."
+        ],
+        "learner_outcomes": {
+          "MUS015": null,
+          "MUS016": null,
+          "MUS017": null
+        },
+        "human_subject_review": null,
+        "fluent_language_review": {
+          "en": null,
+          "fr": null,
+          "es": null
+        },
+        "playing_trial": null,
+        "causal_learning_benefit": null,
+        "formal_compound_engineering_review": false,
+        "remaining_scope_limits": [
+          "AI source-assisted factual and semantic audit only; no participant performance, unaided transfer, timing, retention, accessibility, language fluency or causal learning evidence.",
+          "No human subject approval, native human language approval, performer listening/comfort evidence or formal CE review.",
+          "No repository edits, Git/index mutations, builds, installs, native execution, network requests or other-agent dispatch performed by this reviewer. Only receipt write outside repository.",
+          "Official docs/public source HTTP observations are retained evidence and were not repeated; source pin and byte hashes inspected locally.",
+          "Finite integer equal-cardinality cases <=7voices; no universal equivalence, metric or normalization theorem. Top-level exact native command is root-supplied with retained child-command/input provenance.",
+          "Expected-case preimplementation ordering remains declared historical provenance, not independently timestamped preregistration.",
+          "Generated pages, build/validation files and public course HTML are not bound or assessed by this receipt. No publication or delivery claim."
+        ],
+        "ownership_release": {
+          "repository_write_ownership": "none",
+          "external_receipt_owner": "voiceleading_course_audit",
+          "released_after_receipt": true,
+          "allowed_write_performed": "Created only this explicitly assigned external receipt with exclusive creation; root owns all repository fixes."
+        }
+      }
+    }
+  ],
+  "refresh_reason": "Root explicitly requested same-path receipt refresh after source.json CRLF-to-LF normalization and a final native rerun. Previous complete 45-answer/15-criterion review retained in audit_history; nine course bytes and all rubric bytes unchanged.",
+  "changed_support_files": [
+    {
+      "path": "code/streeling/evidence/voice-leading-2026-10-22/native-results.json",
+      "previous_sha256": "b8c855c030d79d61e8165ed5935e5fe64e271071463a84e16761be7843250b3f",
+      "current_sha256": "b30b27a3acdfcffbac374acfef3ffd69283dc3c67e19a23dc818bee612387ed4",
+      "bytes": 17280
+    },
+    {
+      "path": "code/streeling/evidence/voice-leading-2026-10-22/native-commands.json",
+      "previous_sha256": "bcbab8361428da15d8b6013a0fd53beba2d91f0365d6c82dd09004a6b1136a04",
+      "current_sha256": "231a91adfd2a337886f34b005b5fb5ce27b1e9aa373b01c5244144e84450e1e0",
+      "bytes": 19248
+    },
+    {
+      "path": "code/streeling/evidence/voice-leading-2026-10-22/native-results.json.copy.json",
+      "previous_sha256": "65e64f32ec6c29d62ea8f1db968974974ab96993358c8bffd9c4c65b6e2fc01a",
+      "current_sha256": "13bb0b6135155357b6e69473b12b494f0588504f5a00a41993a49b1f63f16196",
+      "bytes": 377
+    },
+    {
+      "path": "code/streeling/evidence/voice-leading-2026-10-22/native-commands.json.copy.json",
+      "previous_sha256": "2fe3f5f6650fdbb3f61bb3afed41974832f7c3946995a28866940206bc724b22",
+      "current_sha256": "1c00ecbc76adc4c80d5cb9c2c305bb8742dfa2c31d295ec1dbcad4810e8c976b",
+      "bytes": 379
+    },
+    {
+      "path": "code/streeling/evidence/voice-leading-2026-10-22/data-audit.json",
+      "previous_sha256": "18be605494ffb6ba2749f40f4d060a97d6eb96e6b359d38f8805ec80febbba8e",
+      "current_sha256": "2f052a81fcb8259a932d2e0432f17d4bcb9a6e546bdb1ad9aed892a029ff1aef",
+      "bytes": 575015
+    },
+    {
+      "path": "code/streeling/voice-leading/source.json",
+      "previous_sha256": "d14cf92ae2b9f12499b68a3b47e845be28e9de39b27ee1bc087918671b7c755b",
+      "current_sha256": "fc78242b009707b8e2672d1fc274fc75e815e370478c6662b844f398bb9d9edb",
+      "bytes": 1970
+    }
+  ],
+  "refresh_checks": {
+    "course_hashes_unchanged": 9,
+    "exercise_reviews_reused": 45,
+    "criterion_reviews_reused": 15,
+    "all_other_bound_support_files_unchanged": true,
+    "changed_paths_are_exactly_expected": true,
+    "source_json_previous_sha256": "d14cf92ae2b9f12499b68a3b47e845be28e9de39b27ee1bc087918671b7c755b",
+    "source_json_current_sha256": "fc78242b009707b8e2672d1fc274fc75e815e370478c6662b844f398bb9d9edb",
+    "source_json_lf_count": 35,
+    "source_json_crlf_count": 0,
+    "inverse_lf_to_crlf_reproduces_previous_exact_hash": true,
+    "native_run": "C:\\tmp\\streeling-voiceleading-final-run",
+    "native_characterization_checks": 40,
+    "all_native_checks_pass": true,
+    "original_expected_equivalence_satisfied": false,
+    "all13current_lab_input_hashes_match": true,
+    "prior_independent_oracle_case_results_match_final_native_record": 13,
+    "data_audit_sha256": "2f052a81fcb8259a932d2e0432f17d4bcb9a6e546bdb1ad9aed892a029ff1aef",
+    "data_audit_final_refresh_checks": 91,
+    "all_data_audit_final_refresh_checks_pass": true,
+    "copy_receipts_bind_final_external_results_and_commands": true,
+    "human_or_participant_outcome_claims_added": false
+  }
+}

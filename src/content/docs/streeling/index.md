@@ -30,7 +30,7 @@ These modules were written by AI departments and have **not been reviewed**. Unl
 | [Information Theory](information-theory/) | 5 | 5 | 5 |
 | [IX Research](ix-research/) | 1 | 1 | 1 |
 | [Mathematics](mathematics/) | 25 | 25 | 25 |
-| [Music](music/) | 19 | 19 | 19 |
+| [Music](music/) | 22 | 22 | 22 |
 | [Musicology](musicology/) | 3 | 3 | 3 |
 | [Network Science](network-science/) | 6 | 6 | 6 |
 | [Philosophy](philosophy/) | 3 | 3 | 3 |

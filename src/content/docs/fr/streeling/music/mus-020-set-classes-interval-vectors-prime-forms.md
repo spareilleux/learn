@@ -3,7 +3,7 @@ title: Classes d'ensembles, vecteurs d'intervalles, relation Z et formes premiè
 description: Classes d'ensembles, vecteurs d'intervalles, relation Z et formes premières — Musique
 sidebar:
   label: MUS-020 · Classes d'ensembles, vecteurs d'intervalles, relation Z et formes premières
-  order: 17
+  order: 20
 editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/music/fr/mus-020-set-classes-interval-vectors-prime-forms.fr.md
 ---
 

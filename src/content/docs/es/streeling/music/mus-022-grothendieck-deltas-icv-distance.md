@@ -3,7 +3,7 @@ title: Los deltas de Grothendieck — Lo que mide la distancia de contenido inte
 description: Los deltas de Grothendieck — lo que mide la distancia de contenido interválico — Música
 sidebar:
   label: MUS-022 · Los deltas de Grothendieck
-  order: 19
+  order: 22
 editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/music/es/mus-022-grothendieck-deltas-icv-distance.es.md
 ---
 

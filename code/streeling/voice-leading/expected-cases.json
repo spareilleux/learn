@@ -1,0 +1,25 @@
+{
+  "declaration": "Fixed characterization expectations written before Probe.cs or run.mjs implementation. Finite integer pitches, equal cardinality, at most seven voices; no external theory data.",
+  "sourcePin": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+  "cases": [
+    { "id": "ordered_absolute", "a": [60,64,67], "b": [67,64,60], "o": false, "p": false, "t": false, "i": false, "expectedNative": 14, "expectedOracle": 14 },
+    { "id": "ordered_octave", "a": [60,64,67], "b": [67,64,60], "o": true, "p": false, "t": false, "i": false, "expectedNative": 10, "expectedOracle": 10 },
+    { "id": "permuted_absolute", "a": [60,64,67], "b": [67,64,60], "o": false, "p": true, "t": false, "i": false, "expectedNative": 0, "expectedOracle": 0 },
+    { "id": "permuted_octave", "a": [60,64,67], "b": [67,64,60], "o": true, "p": true, "t": false, "i": false, "expectedNative": 0, "expectedOracle": 0 },
+    { "id": "register_absolute", "a": [60,64,67], "b": [72,76,79], "o": false, "p": false, "t": false, "i": false, "expectedNative": 36, "expectedOracle": 36 },
+    { "id": "register_octave", "a": [60,64,67], "b": [72,76,79], "o": true, "p": false, "t": false, "i": false, "expectedNative": 0, "expectedOracle": 0 },
+    { "id": "upstream_seven", "a": [3,11,5,11,1,3,9], "b": [3,3,2,8,7,1,1], "o": true, "p": true, "t": false, "i": false, "expectedNative": 8, "expectedOracle": 8, "expectedPermutations": 5040 },
+    { "id": "registered_counterexample", "a": [60,63,65], "b": [60,65,75], "o": true, "p": true, "t": false, "i": false, "expectedNative": 4, "expectedOracle": 0, "expectedCyclicCosts": [4,10,6], "expectedOracleWitness": [60,75,65] },
+    { "id": "normalized_counterexample_only", "a": [0,3,5], "b": [0,5,3], "o": true, "p": true, "t": false, "i": false, "expectedNative": 0, "expectedOracle": 0 },
+    { "id": "ambiguous_plan", "a": [60,62], "b": [64,65], "o": true, "p": true, "t": false, "i": false, "expectedNative": 7, "expectedOracle": 7, "expectedWitnesses": [{"assignment":[64,65],"motions":[4,3]},{"assignment":[65,64],"motions":[5,2]}] },
+    { "id": "ranking_near", "a": [60,63,65], "b": [60,63,66], "o": true, "p": true, "t": false, "i": false, "expectedNative": 1, "expectedOracle": 1 },
+    { "id": "upstream_transposition", "a": [0,4,7], "b": [11,3,6], "o": true, "p": true, "t": true, "i": false, "expectedNative": 0, "expectedOracle": 0 },
+    { "id": "empty", "a": [], "b": [], "o": true, "p": true, "t": false, "i": false, "expectedNative": 0, "expectedOracle": 0 }
+  ],
+  "expectedAbsoluteCommonNotes": 0,
+  "expectedCommonPitchClasses": 3,
+  "expectedOriginalEquivalenceSatisfied": false,
+  "expectedNativeRanking": ["targetNear", "targetSame"],
+  "expectedOracleRanking": ["targetSame", "targetNear"],
+  "expectedMismatchedCardinalityException": "ArgumentException"
+}

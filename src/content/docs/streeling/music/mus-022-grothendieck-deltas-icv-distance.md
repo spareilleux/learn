@@ -3,7 +3,7 @@ title: Grothendieck Deltas — What Interval-Content Distance Measures, and What
 description: Grothendieck Deltas — What Interval-Content Distance Measures — Music
 sidebar:
   label: MUS-022 · Grothendieck Deltas
-  order: 19
+  order: 22
 editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/music/en/mus-022-grothendieck-deltas-icv-distance.md
 ---
 
