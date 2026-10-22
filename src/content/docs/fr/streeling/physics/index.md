@@ -18,3 +18,4 @@ sidebar:
 - [PHY-005 · Épaisseur des feuilles : des coordonnées IX aux unités de scène proposées](phy-005-sheet-thickness-and-scene-units/)
 - [PHY-006 · Vérifier les unités d’une scène de tissage](phy-006-check-weave-scene-units/)
 - [PHY-007 · Distinguer les battements entre deux sons de leur décroissance](phy-007-separate-beating-from-decay/)
+- [PHY-008 · Garder les normales perpendiculaires aux surfaces](phy-008-keep-surface-normals-perpendicular/)

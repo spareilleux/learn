@@ -16,3 +16,4 @@ sidebar:
 - [SEM-003 · Status Signs and Evidence in Agentic Work](sem-003-status-signs-and-evidence/)
 - [SEM-004 · Face Identity under Reindexing](sem-004-face-identity-under-reindexing/)
 - [SEM-005 · Bind Scene Hits to Crossing Identity](sem-005-bind-scene-hits-to-crossing-identity/)
+- [SEM-006 · Preserve Orientation Across Scene Frames](sem-006-preserve-orientation-across-scene-frames/)

@@ -1,0 +1,43 @@
+{
+  "scope": "Authored affine geometry and actual Scene.Min/Max; no nonlinear or perspective-bound claim.",
+  "native_tolerance": 1e-05,
+  "eight_corner_bounds": {
+    "min": [
+      -1.4142135623730951,
+      0,
+      -0.7071067811865475
+    ],
+    "max": [
+      1.4142135623730951,
+      1,
+      0.7071067811865475
+    ]
+  },
+  "absolute_basis_bounds": {
+    "min": [
+      -1.4142135623730951,
+      0,
+      -0.7071067811865475
+    ],
+    "max": [
+      1.4142135623730951,
+      1,
+      0.7071067811865475
+    ]
+  },
+  "wrong_two_endpoint_bounds": {
+    "min": [
+      -1.4142135623730951,
+      0,
+      0
+    ],
+    "max": [
+      1.4142135623730951,
+      1,
+      0
+    ]
+  },
+  "negative_control": "Two opposite transformed endpoints omit nonzero Z extrema.",
+  "singular_case_native_accepted": true,
+  "singular_case_native_invertible": false
+}

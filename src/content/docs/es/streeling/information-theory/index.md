@@ -16,3 +16,4 @@ sidebar:
 - [INF-003 · Medir la deriva de las distribuciones de veredictos con la divergencia de Jensen-Shannon](inf-003-verdict-distribution-drift/)
 - [INF-004 · Pérdida de información en los handoffs entre agentes](inf-004-information-loss-in-agent-handoffs/)
 - [INF-005 · Cuantización y renders indistinguibles](inf-005-quantization-and-indistinguishable-renders/)
+- [INF-006 · Comprender qué olvidan los límites de una escena](inf-006-know-what-scene-bounds-forget/)

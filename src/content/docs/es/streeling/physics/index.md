@@ -18,3 +18,4 @@ sidebar:
 - [PHY-005 · Grosor de láminas: de las coordenadas IX a las unidades de escena propuestas](phy-005-sheet-thickness-and-scene-units/)
 - [PHY-006 · Comprobar las unidades de una escena de tejido](phy-006-check-weave-scene-units/)
 - [PHY-007 · Distinguir los batimientos de dos tonos del decaimiento](phy-007-separate-beating-from-decay/)
+- [PHY-008 · Mantener las normales perpendiculares a las superficies](phy-008-keep-surface-normals-perpendicular/)

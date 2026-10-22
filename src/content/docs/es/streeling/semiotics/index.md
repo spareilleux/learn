@@ -16,3 +16,4 @@ sidebar:
 - [SEM-003 · Signos de estado y pruebas en el trabajo agéntico](sem-003-status-signs-and-evidence/)
 - [SEM-004 · Identidad de las caras tras la reindexación](sem-004-face-identity-under-reindexing/)
 - [SEM-005 · Vincular los impactos de escena con la identidad del cruce](sem-005-bind-scene-hits-to-crossing-identity/)
+- [SEM-006 · Conservar la orientación entre los sistemas de referencia de una escena](sem-006-preserve-orientation-across-scene-frames/)

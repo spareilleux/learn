@@ -18,3 +18,4 @@ sidebar:
 - [PHY-005 · Sheet Thickness from IX Coordinates to Proposed Scene Units](phy-005-sheet-thickness-and-scene-units/)
 - [PHY-006 · Check Weave Scene Units](phy-006-check-weave-scene-units/)
 - [PHY-007 · Separate Two-Tone Beating from Decay](phy-007-separate-beating-from-decay/)
+- [PHY-008 · Keep Surface Normals Perpendicular](phy-008-keep-surface-normals-perpendicular/)

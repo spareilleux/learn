@@ -1,0 +1,956 @@
+{
+  "checked_at_utc": "2026-10-22T20:06:15.027095+00:00",
+  "auditor": "independent scene_frames_data_audit agent",
+  "scope": "Independent immutable public-source, unchanged native-wrapper rerun, and separately derived mathematical audit. No course/content, GPU, Colossus, shader, Generate.run, human or deployed-HTML review.",
+  "input_bindings": [
+    {
+      "path": "code/streeling/evidence/scene-frames-2026-10-22/bounds-comparison.json",
+      "sha256": "b89152e89de26b068afb3b1414c2fe96e18d75811f3c95bd02c19f76e93edc4d"
+    },
+    {
+      "path": "code/streeling/evidence/scene-frames-2026-10-22/execution.json",
+      "sha256": "bd658bb9293d262b25f496a7502118e53c692b041f9531f0ee250a2093b42992"
+    },
+    {
+      "path": "code/streeling/evidence/scene-frames-2026-10-22/experiment-plan.md",
+      "sha256": "b43180cdcaedf335c6bf126372ea8dc00e3d793fad7befc833cf508c859e3346"
+    },
+    {
+      "path": "code/streeling/evidence/scene-frames-2026-10-22/native-cases.json",
+      "sha256": "71fec3495427e4e71826cb2d58c198d645cc853e4a0e0b6611c40190446dec66"
+    },
+    {
+      "path": "code/streeling/evidence/scene-frames-2026-10-22/native-execution.json",
+      "sha256": "158dded076cdef1797038fe1bfd21608a19679504d978d95d8ab8a63d2e545b4"
+    },
+    {
+      "path": "code/streeling/evidence/scene-frames-2026-10-22/normal-comparison.json",
+      "sha256": "b0b59bbb6015731dc672faae3cd90deb143aae64d0f8424f0942ba966c785e29"
+    },
+    {
+      "path": "code/streeling/evidence/scene-frames-2026-10-22/orientation-controls.json",
+      "sha256": "124627e2f5f46423766c024d0be5aebe956f22d2ade12ce0bc5a112f45750b2a"
+    },
+    {
+      "path": "code/streeling/evidence/scene-frames-2026-10-22/primary-readback.json",
+      "sha256": "c90725dd82579d707d77f90e5ecc0e7d242dff506ad0cd28f4c970e4759e329f"
+    },
+    {
+      "path": "code/streeling/evidence/scene-frames-2026-10-22/summary-counterexample.json",
+      "sha256": "fdbc165d4c870f1cc83ce689f6b364961a45eb50f7a8477ae4b515b0f1cb712e"
+    }
+  ],
+  "external_bindings": [
+    {
+      "path": "C:\\tmp\\streeling-scene-frames-native-20261022\\attempt-1.stdout.log",
+      "sha256": "9f1994fa3c191888f14b03db698b7810e349760b60d8dde6bdd82e73e3822d21"
+    },
+    {
+      "path": "C:\\tmp\\streeling-scene-frames-native-20261022\\attempt-1.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "C:\\tmp\\streeling-scene-frames-native-20261022\\probe.fsx",
+      "sha256": "0a518efc2209e7825a918cbcea6a6eddf7dd3a8593f0236879f8d43895eed464"
+    },
+    {
+      "path": "C:\\tmp\\streeling-scene-frames-native-20261022\\global.json",
+      "sha256": "f9aee4db14a75f488639f46464f49ae7a4577fd1ba3c17344fb78e2125483635"
+    },
+    {
+      "path": "C:\\tmp\\streeling-scene-frames-independent-native-audit-20261022\\audit.stdout.log",
+      "sha256": "9f1994fa3c191888f14b03db698b7810e349760b60d8dde6bdd82e73e3822d21"
+    },
+    {
+      "path": "C:\\tmp\\streeling-scene-frames-independent-native-audit-20261022\\audit.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "C:\\tmp\\streeling-scene-frames-independent-native-audit-20261022\\probe.fsx",
+      "sha256": "0a518efc2209e7825a918cbcea6a6eddf7dd3a8593f0236879f8d43895eed464"
+    },
+    {
+      "path": "C:\\tmp\\streeling-scene-frames-independent-native-audit-20261022\\global.json",
+      "sha256": "f9aee4db14a75f488639f46464f49ae7a4577fd1ba3c17344fb78e2125483635"
+    }
+  ],
+  "source_readback": [
+    {
+      "path": "Experiments/Brutal/Lego/Space.fs",
+      "sha256": "c1580d2297f1bfedfac4f8d1adb126d29a4cf4cc2e10857f04eb7d991b6c3acc",
+      "anonymous_status": 200,
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Lego/Space.fs"
+    },
+    {
+      "path": "Experiments/Brutal/Lego/Seeds.fs",
+      "sha256": "5fc46fef00a42a48963cd4cff4fbf6a58f9e945c0f06e4cb2b87681db4059aad",
+      "anonymous_status": 200,
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Lego/Seeds.fs"
+    },
+    {
+      "path": "Experiments/Brutal/Lego/Model.fs",
+      "sha256": "ac44e7067730897d4fca91617ff68af67e7a1529b56c367d49add89ab6af5228",
+      "anonymous_status": 200,
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Lego/Model.fs"
+    },
+    {
+      "path": "Experiments/Brutal/Lego/Validate.fs",
+      "sha256": "7722806ad2db8e5847753ca6b7211d123d1e0c3319375c5ba14b5e80de72a387",
+      "anonymous_status": 200,
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Lego/Validate.fs"
+    },
+    {
+      "path": "Experiments/Brutal/Lego/Generate.fs",
+      "sha256": "8b994f93e1b14cc5f770d38d8d804615a6163e3de111fbeeba9d77368fe8bbc5",
+      "anonymous_status": 200,
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Lego/Generate.fs"
+    },
+    {
+      "path": "Experiments/Brutal/Colossus/Program.cs",
+      "sha256": "2ae759eace2d9037f2771bc82b5f901c02bf4ec2751ff4e510f4e1aa4ab60c15",
+      "anonymous_status": 200,
+      "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Colossus/Program.cs"
+    }
+  ],
+  "checks": [
+    {
+      "id": "source-pin",
+      "pass_": true,
+      "evidence": "Both fixed receipts identify immutable public commit 76efbffd5af82b46c3146957a6bd4504008eeb89"
+    },
+    {
+      "id": "public-source-Space.fs",
+      "pass_": true,
+      "evidence": {
+        "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Lego/Space.fs",
+        "status": 200,
+        "sha256": "c1580d2297f1bfedfac4f8d1adb126d29a4cf4cc2e10857f04eb7d991b6c3acc",
+        "bytes": 1809,
+        "git_equal": true
+      }
+    },
+    {
+      "id": "public-source-Seeds.fs",
+      "pass_": true,
+      "evidence": {
+        "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Lego/Seeds.fs",
+        "status": 200,
+        "sha256": "5fc46fef00a42a48963cd4cff4fbf6a58f9e945c0f06e4cb2b87681db4059aad",
+        "bytes": 1548,
+        "git_equal": true
+      }
+    },
+    {
+      "id": "public-source-Model.fs",
+      "pass_": true,
+      "evidence": {
+        "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Lego/Model.fs",
+        "status": 200,
+        "sha256": "ac44e7067730897d4fca91617ff68af67e7a1529b56c367d49add89ab6af5228",
+        "bytes": 9322,
+        "git_equal": true
+      }
+    },
+    {
+      "id": "public-source-Validate.fs",
+      "pass_": true,
+      "evidence": {
+        "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Lego/Validate.fs",
+        "status": 200,
+        "sha256": "7722806ad2db8e5847753ca6b7211d123d1e0c3319375c5ba14b5e80de72a387",
+        "bytes": 2260,
+        "git_equal": true
+      }
+    },
+    {
+      "id": "public-source-Generate.fs",
+      "pass_": true,
+      "evidence": {
+        "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Lego/Generate.fs",
+        "status": 200,
+        "sha256": "8b994f93e1b14cc5f770d38d8d804615a6163e3de111fbeeba9d77368fe8bbc5",
+        "bytes": 8843,
+        "git_equal": true
+      }
+    },
+    {
+      "id": "public-source-Program.cs",
+      "pass_": true,
+      "evidence": {
+        "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Colossus/Program.cs",
+        "status": 200,
+        "sha256": "2ae759eace2d9037f2771bc82b5f901c02bf4ec2751ff4e510f4e1aa4ab60c15",
+        "bytes": 261839,
+        "git_equal": true
+      }
+    },
+    {
+      "id": "six-public-four-native-sources",
+      "pass_": true,
+      "evidence": "Six independently fetched files; four designated FSI loads."
+    },
+    {
+      "id": "row-order-source",
+      "pass_": true,
+      "evidence": "Generate Move multiplies local matrix by frame; Space.matrix scales then rotates then translates."
+    },
+    {
+      "id": "floor-and-eight-corners-source",
+      "pass_": true,
+      "evidence": "Scene.Min/Max derives every transformed corner of floor-based boxes."
+    },
+    {
+      "id": "validator-size-and-finite-source",
+      "pass_": true,
+      "evidence": "Validator checks positive finite Size and finite matrix; no invertibility gate."
+    },
+    {
+      "id": "raster-normal-source",
+      "pass_": true,
+      "evidence": "Inspected shader expression only; no shader execution."
+    },
+    {
+      "id": "sampler-axis-source",
+      "pass_": true,
+      "evidence": "Inspected sampler transformed-axis expression only; no sampler execution."
+    },
+    {
+      "id": "native-hash-stdout",
+      "pass_": true,
+      "evidence": {
+        "path": "C:\\tmp\\streeling-scene-frames-native-20261022\\attempt-1.stdout.log",
+        "sha256": "9f1994fa3c191888f14b03db698b7810e349760b60d8dde6bdd82e73e3822d21",
+        "bytes": 4192
+      }
+    },
+    {
+      "id": "native-hash-stderr",
+      "pass_": true,
+      "evidence": {
+        "path": "C:\\tmp\\streeling-scene-frames-native-20261022\\attempt-1.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    {
+      "id": "native-hash-wrapper",
+      "pass_": true,
+      "evidence": {
+        "path": "C:\\tmp\\streeling-scene-frames-native-20261022\\probe.fsx",
+        "sha256": "0a518efc2209e7825a918cbcea6a6eddf7dd3a8593f0236879f8d43895eed464",
+        "bytes": 4053
+      }
+    },
+    {
+      "id": "native-hash-global_json",
+      "pass_": true,
+      "evidence": {
+        "path": "C:\\tmp\\streeling-scene-frames-native-20261022\\global.json",
+        "sha256": "f9aee4db14a75f488639f46464f49ae7a4577fd1ba3c17344fb78e2125483635",
+        "bytes": 75
+      }
+    },
+    {
+      "id": "saved-native-output",
+      "pass_": true,
+      "evidence": "Fixed JSON equals actual zero-exit stdout; stderr empty."
+    },
+    {
+      "id": "analysis-binding",
+      "pass_": true,
+      "evidence": "Temporary parent analysis script hash matches fixed execution receipt."
+    },
+    {
+      "id": "wrapper-boundary",
+      "pass_": true,
+      "evidence": "Wrapper loads only four unchanged F# files and constructs authored Drafts."
+    },
+    {
+      "id": "sdk-pin",
+      "pass_": true,
+      "evidence": "Audit-only rerun resolves pinned SDK 10.0.113"
+    },
+    {
+      "id": "independent-native-rerun",
+      "pass_": true,
+      "evidence": {
+        "exit_code": 0,
+        "stdout_sha256": "9f1994fa3c191888f14b03db698b7810e349760b60d8dde6bdd82e73e3822d21",
+        "stderr_bytes": 0,
+        "exact_json_equal": true
+      }
+    },
+    {
+      "id": "native-case-count",
+      "pass_": true,
+      "evidence": "Nine distinct validator cases: seven accepted, two refused."
+    },
+    {
+      "id": "validator-identity",
+      "pass_": true,
+      "evidence": {
+        "accepted": true,
+        "issues": []
+      }
+    },
+    {
+      "id": "validator-scale_then_yaw",
+      "pass_": true,
+      "evidence": {
+        "accepted": true,
+        "issues": []
+      }
+    },
+    {
+      "id": "validator-nested_yaw_under_scale",
+      "pass_": true,
+      "evidence": {
+        "accepted": true,
+        "issues": []
+      }
+    },
+    {
+      "id": "validator-reflect_x",
+      "pass_": true,
+      "evidence": {
+        "accepted": true,
+        "issues": []
+      }
+    },
+    {
+      "id": "validator-reflect_xz",
+      "pass_": true,
+      "evidence": {
+        "accepted": true,
+        "issues": []
+      }
+    },
+    {
+      "id": "validator-yaw_180",
+      "pass_": true,
+      "evidence": {
+        "accepted": true,
+        "issues": []
+      }
+    },
+    {
+      "id": "validator-zero_x",
+      "pass_": true,
+      "evidence": {
+        "accepted": true,
+        "issues": []
+      }
+    },
+    {
+      "id": "validator-negative_local_size",
+      "pass_": true,
+      "evidence": {
+        "accepted": false,
+        "issues": [
+          "bad-shape"
+        ]
+      }
+    },
+    {
+      "id": "validator-nan_placement",
+      "pass_": true,
+      "evidence": {
+        "accepted": false,
+        "issues": [
+          "bad-shape"
+        ]
+      }
+    },
+    {
+      "id": "determinant-reflect_x",
+      "pass_": true,
+      "evidence": {
+        "actual": -1,
+        "expected": -1
+      }
+    },
+    {
+      "id": "determinant-reflect_xz",
+      "pass_": true,
+      "evidence": {
+        "actual": 1,
+        "expected": 1
+      }
+    },
+    {
+      "id": "determinant-yaw_180",
+      "pass_": true,
+      "evidence": {
+        "actual": 1,
+        "expected": 1
+      }
+    },
+    {
+      "id": "determinant-zero_x",
+      "pass_": true,
+      "evidence": {
+        "actual": 0,
+        "expected": 0
+      }
+    },
+    {
+      "id": "singular-accepted-not-invertible",
+      "pass_": true,
+      "evidence": "Zero-X placement passes shape gate; inversion fails; no normal arithmetic claimed."
+    },
+    {
+      "id": "nan-invert-return-not-certificate",
+      "pass_": true,
+      "evidence": "NaN placement refused; Matrix4x4.Invert returning true in saved native output is not treated as a finite inverse certificate."
+    },
+    {
+      "id": "independent-normal-axis_x",
+      "pass_": true,
+      "evidence": {
+        "computed": [
+          1.4142135623730951,
+          0.0,
+          -0.7071067811865476
+        ],
+        "fixed": [
+          1.4142135623730951,
+          0,
+          -0.7071067811865475
+        ]
+      }
+    },
+    {
+      "id": "independent-normal-axis_y",
+      "pass_": true,
+      "evidence": {
+        "computed": [
+          0,
+          1,
+          0
+        ],
+        "fixed": [
+          0,
+          1,
+          0
+        ]
+      }
+    },
+    {
+      "id": "independent-normal-axis_z",
+      "pass_": true,
+      "evidence": {
+        "computed": [
+          1.4142135623730951,
+          0.0,
+          0.7071067811865476
+        ],
+        "fixed": [
+          1.4142135623730951,
+          0,
+          0.7071067811865475
+        ]
+      }
+    },
+    {
+      "id": "independent-normal-axis_dot_raw",
+      "pass_": true,
+      "evidence": {
+        "computed": 1.5000000000000004,
+        "fixed": 1.5
+      }
+    },
+    {
+      "id": "independent-normal-normalized_axis",
+      "pass_": true,
+      "evidence": {
+        "computed": [
+          0.8944271909999159,
+          0.0,
+          -0.4472135954999579
+        ],
+        "fixed": [
+          0.8944271909999159,
+          0,
+          -0.4472135954999579
+        ]
+      }
+    },
+    {
+      "id": "independent-normal-correct_normal",
+      "pass_": true,
+      "evidence": {
+        "computed": [
+          0.4472135954999579,
+          0.0,
+          -0.8944271909999159
+        ],
+        "fixed": [
+          0.4472135954999579,
+          0,
+          -0.8944271909999159
+        ]
+      }
+    },
+    {
+      "id": "independent-normal-normalized_axis_dot_tangent",
+      "pass_": true,
+      "evidence": {
+        "computed": 0.6,
+        "fixed": 0.6
+      }
+    },
+    {
+      "id": "independent-normal-correct_normal_dot_tangent",
+      "pass_": true,
+      "evidence": {
+        "computed": 0.0,
+        "fixed": 0
+      }
+    },
+    {
+      "id": "independent-normal-normal_cosine",
+      "pass_": true,
+      "evidence": {
+        "computed": 0.7999999999999999,
+        "fixed": 0.8
+      }
+    },
+    {
+      "id": "independent-normal-normal_angle_degrees",
+      "pass_": true,
+      "evidence": {
+        "computed": 36.86989764584403,
+        "fixed": 36.86989764584401
+      }
+    },
+    {
+      "id": "independent-normal-determinant",
+      "pass_": true,
+      "evidence": {
+        "computed": 2.0000000000000004,
+        "fixed": 2
+      }
+    },
+    {
+      "id": "native-normal-axis_x",
+      "pass_": true,
+      "evidence": {
+        "native": [
+          1.4142135381698608,
+          0,
+          -0.7071067690849304
+        ],
+        "expected": [
+          1.4142135623730951,
+          0.0,
+          -0.7071067811865476
+        ],
+        "tolerance": 1e-05
+      }
+    },
+    {
+      "id": "native-normal-axis_y",
+      "pass_": true,
+      "evidence": {
+        "native": [
+          0,
+          1,
+          0
+        ],
+        "expected": [
+          0,
+          1,
+          0
+        ],
+        "tolerance": 1e-05
+      }
+    },
+    {
+      "id": "native-normal-axis_z",
+      "pass_": true,
+      "evidence": {
+        "native": [
+          1.4142135381698608,
+          0,
+          0.7071067690849304
+        ],
+        "expected": [
+          1.4142135623730951,
+          0.0,
+          0.7071067811865476
+        ],
+        "tolerance": 1e-05
+      }
+    },
+    {
+      "id": "native-normal-axis_dot_raw",
+      "pass_": true,
+      "evidence": {
+        "native": 1.4999998807907104,
+        "expected": 1.5000000000000004,
+        "tolerance": 1e-05
+      }
+    },
+    {
+      "id": "native-normal-axis_dot_normalized",
+      "pass_": true,
+      "evidence": {
+        "native": 0.6000000238418579,
+        "expected": 0.6,
+        "tolerance": 1e-05
+      }
+    },
+    {
+      "id": "native-normal-correct_normal_dot_tangent",
+      "pass_": true,
+      "evidence": {
+        "native": 0,
+        "expected": 0,
+        "tolerance": 1e-05
+      }
+    },
+    {
+      "id": "native-normal-normal_angle_degrees",
+      "pass_": true,
+      "evidence": {
+        "native": 36.86989081565431,
+        "expected": 36.86989764584403,
+        "tolerance": 1e-05
+      }
+    },
+    {
+      "id": "single-order-orthogonal-control",
+      "pass_": true,
+      "evidence": "Scale*Yaw axes remain perpendicular; Yaw*Scale example is nonorthogonal."
+    },
+    {
+      "id": "native-nested-determinant",
+      "pass_": true,
+      "evidence": {
+        "native": 1.9999998807907104,
+        "independent": 2.0000000000000004,
+        "tolerance": 1e-05
+      }
+    },
+    {
+      "id": "bounds-eight_corner_bounds",
+      "pass_": true,
+      "evidence": {
+        "min": [
+          -1.4142135623730951,
+          0.0,
+          -0.7071067811865476
+        ],
+        "max": [
+          1.4142135623730951,
+          1.0,
+          0.7071067811865476
+        ]
+      }
+    },
+    {
+      "id": "bounds-absolute_basis_bounds",
+      "pass_": true,
+      "evidence": {
+        "min": [
+          -1.4142135623730951,
+          0.0,
+          -0.7071067811865476
+        ],
+        "max": [
+          1.4142135623730951,
+          1.0,
+          0.7071067811865476
+        ]
+      }
+    },
+    {
+      "id": "bounds-wrong_two_endpoint_bounds",
+      "pass_": true,
+      "evidence": {
+        "min": [
+          -1.4142135623730951,
+          0.0,
+          0.0
+        ],
+        "max": [
+          1.4142135623730951,
+          1.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "id": "bounds-native",
+      "pass_": true,
+      "evidence": "Independent eight-corner bounds match native within 1e-5."
+    },
+    {
+      "id": "bounds-negative-control",
+      "pass_": true,
+      "evidence": "Opposing endpoints omit both nonzero Z extrema."
+    },
+    {
+      "id": "bounds-control-identity",
+      "pass_": true,
+      "evidence": {
+        "independent": {
+          "min": [
+            -0.5,
+            0.0,
+            -0.5
+          ],
+          "max": [
+            0.5,
+            1.0,
+            0.5
+          ]
+        },
+        "native": {
+          "min": [
+            -0.5,
+            0,
+            -0.5
+          ],
+          "max": [
+            0.5,
+            1,
+            0.5
+          ]
+        },
+        "tolerance": 1e-05
+      }
+    },
+    {
+      "id": "bounds-control-reflect_x",
+      "pass_": true,
+      "evidence": {
+        "independent": {
+          "min": [
+            -0.5,
+            0.0,
+            -0.5
+          ],
+          "max": [
+            0.5,
+            1.0,
+            0.5
+          ]
+        },
+        "native": {
+          "min": [
+            -0.5,
+            0,
+            -0.5
+          ],
+          "max": [
+            0.5,
+            1,
+            0.5
+          ]
+        },
+        "tolerance": 1e-05
+      }
+    },
+    {
+      "id": "bounds-control-zero_x",
+      "pass_": true,
+      "evidence": {
+        "independent": {
+          "min": [
+            0.0,
+            0.0,
+            -0.5
+          ],
+          "max": [
+            0.0,
+            1.0,
+            0.5
+          ]
+        },
+        "native": {
+          "min": [
+            0,
+            0,
+            -0.5
+          ],
+          "max": [
+            0,
+            1,
+            0.5
+          ]
+        },
+        "tolerance": 1e-05
+      }
+    },
+    {
+      "id": "bounds-control-scale_then_yaw",
+      "pass_": true,
+      "evidence": {
+        "independent": {
+          "min": [
+            -1.0606601717798214,
+            0.0,
+            -1.0606601717798214
+          ],
+          "max": [
+            1.0606601717798214,
+            1.0,
+            1.0606601717798214
+          ]
+        },
+        "native": {
+          "min": [
+            -1.0606601238250732,
+            0,
+            -1.0606601238250732
+          ],
+          "max": [
+            1.0606601238250732,
+            1,
+            1.0606601238250732
+          ]
+        },
+        "tolerance": 1e-05
+      }
+    },
+    {
+      "id": "reflection-triangle-cross",
+      "pass_": true,
+      "evidence": {
+        "original": [
+          4,
+          0,
+          0
+        ],
+        "reflected": [
+          4,
+          0,
+          0
+        ],
+        "swapped": [
+          -4,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "reflection-outward-disagreement",
+      "pass_": true,
+      "evidence": "Reflected vertex cross disagrees with reflected outward direction; swap corrects that mathematical orientation."
+    },
+    {
+      "id": "ideal-scene-bounds",
+      "pass_": true,
+      "evidence": "Independently constructed exact rational scene A/B aggregate bounds match."
+    },
+    {
+      "id": "native-shared-summary",
+      "pass_": true,
+      "evidence": "Native two-box scenes share the exact saved count/bounds summary."
+    },
+    {
+      "id": "ideal-volumes",
+      "pass_": true,
+      "evidence": {
+        "a": "8",
+        "b": "8/5",
+        "disjoint_interiors": true
+      }
+    },
+    {
+      "id": "native-volume-not-exact-rational",
+      "pass_": true,
+      "evidence": {
+        "native_float_size_volume": 1.600000023841858,
+        "ideal_rational": "8/5"
+      }
+    },
+    {
+      "id": "center-membership",
+      "pass_": true,
+      "evidence": "Centre lies on shared A boxes boundary and is included under closed-box membership; it is outside B."
+    },
+    {
+      "id": "outside-membership",
+      "pass_": true,
+      "evidence": "(1.2,1,0) is outside both scenes and shared aggregate bounds."
+    },
+    {
+      "id": "two-scene-entropy",
+      "pass_": true,
+      "evidence": "Explicit uniform two-scene prior only."
+    },
+    {
+      "id": "summary-information",
+      "pass_": true,
+      "evidence": "Both scenes emit the same summary: posterior remains uniform."
+    },
+    {
+      "id": "probe-information",
+      "pass_": true,
+      "evidence": "Declared membership probe distinguishes these two scenes under that prior."
+    },
+    {
+      "id": "execution-limits",
+      "pass_": true,
+      "evidence": "No renderer/application/audio run or human/learner/deployed-HTML outcome invented."
+    },
+    {
+      "id": "stable-input-bounds-comparison.json",
+      "pass_": true,
+      "evidence": "Input bytes remained unchanged through independent audit."
+    },
+    {
+      "id": "stable-input-execution.json",
+      "pass_": true,
+      "evidence": "Input bytes remained unchanged through independent audit."
+    },
+    {
+      "id": "stable-input-experiment-plan.md",
+      "pass_": true,
+      "evidence": "Input bytes remained unchanged through independent audit."
+    },
+    {
+      "id": "stable-input-native-cases.json",
+      "pass_": true,
+      "evidence": "Input bytes remained unchanged through independent audit."
+    },
+    {
+      "id": "stable-input-native-execution.json",
+      "pass_": true,
+      "evidence": "Input bytes remained unchanged through independent audit."
+    },
+    {
+      "id": "stable-input-normal-comparison.json",
+      "pass_": true,
+      "evidence": "Input bytes remained unchanged through independent audit."
+    },
+    {
+      "id": "stable-input-orientation-controls.json",
+      "pass_": true,
+      "evidence": "Input bytes remained unchanged through independent audit."
+    },
+    {
+      "id": "stable-input-primary-readback.json",
+      "pass_": true,
+      "evidence": "Input bytes remained unchanged through independent audit."
+    },
+    {
+      "id": "stable-input-summary-counterexample.json",
+      "pass_": true,
+      "evidence": "Input bytes remained unchanged through independent audit."
+    }
+  ],
+  "check_count": 88,
+  "verdict": "pass",
+  "findings": [],
+  "fix_requests": [],
+  "caveats": [
+    "Native float32 size/angle values are approximate and compared at declared 1e-5 tolerance.",
+    "NaN matrix inversion returning true does not establish a finite inverse; the shape validator rejects that case.",
+    "The centre is on the shared boundary of scene A boxes and uses closed-set membership, not a physical-contact solver.",
+    "Exact entropy values apply only to the explicitly uniform authored two-scene prior."
+  ]
+}

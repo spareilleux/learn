@@ -16,3 +16,4 @@ sidebar:
 - [SEM-003 · Signes de statut et preuves dans le travail agentique](sem-003-status-signs-and-evidence/)
 - [SEM-004 · L’identité des faces après réindexation](sem-004-face-identity-under-reindexing/)
 - [SEM-005 · Relier les résultats de collision à l’identité des croisements](sem-005-bind-scene-hits-to-crossing-identity/)
+- [SEM-006 · Préserver l'orientation entre les repères d'une scène](sem-006-preserve-orientation-across-scene-frames/)
