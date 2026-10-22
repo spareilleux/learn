@@ -19,13 +19,13 @@ These modules were written by AI departments and have **not been reviewed**. Unl
 | Department | Modules | French | Spanish |
 |---|---|---|---|
 | [Audio Engineering](audio-engineering/) | 7 | 7 | 7 |
-| [Cognitive Science](cognitive-science/) | 6 | 6 | 6 |
+| [Cognitive Science](cognitive-science/) | 7 | 7 | 7 |
 | [Computer Science](computer-science/) | 14 | 14 | 14 |
 | [Cybernetics](cybernetics/) | 7 | 7 | 7 |
 | [Data Visualization](data-visualization/) | 10 | 10 | 10 |
 | [Futurology](futurology/) | 5 | 5 | 5 |
 | [Guitar Acoustics & Sound Synthesis](guitar-acoustics/) | 6 | 6 | 6 |
-| [Guitar Alchemist Academy](guitar-alchemist-academy/) | 6 | 6 | 6 |
+| [Guitar Alchemist Academy](guitar-alchemist-academy/) | 7 | 7 | 7 |
 | [Guitar Studies](guitar-studies/) | 7 | 7 | 7 |
 | [Information Theory](information-theory/) | 7 | 7 | 7 |
 | [IX Research](ix-research/) | 1 | 1 | 1 |
@@ -33,7 +33,7 @@ These modules were written by AI departments and have **not been reviewed**. Unl
 | [Music](music/) | 25 | 25 | 25 |
 | [Musicology](musicology/) | 6 | 6 | 6 |
 | [Network Science](network-science/) | 7 | 7 | 7 |
-| [Philosophy](philosophy/) | 6 | 6 | 6 |
+| [Philosophy](philosophy/) | 7 | 7 | 7 |
 | [Physics](physics/) | 10 | 10 | 10 |
 | [Product and Project Management](product-management/) | 6 | 6 | 6 |
 | [Psychohistory](psychohistory/) | 25 | 25 | 25 |

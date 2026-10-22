@@ -17,3 +17,4 @@ sidebar:
 - [COG-004 · Puntuar una tarea de discriminación de altura sin inventar un resultado de escucha](cog-004-score-a-pitch-discrimination-task/)
 - [COG-005 · Separar las estimaciones de altura de las respuestas de los oyentes](cog-005-separate-pitch-estimates-from-listener-reports/)
 - [COG-006 · Separar las pruebas de píxeles de los juicios de apariencia](cog-006-separate-pixel-tests-from-appearance-judgments/)
+- [COG-007 · Separar el recuerdo sin ayuda del éxito asistido](cog-007-separate-unaided-recall-from-assisted-success/)

@@ -17,3 +17,4 @@ sidebar:
 - [PHI-004 · Distinguer les compromis de performance des valeurs](phi-004-separate-performance-tradeoffs-from-values/)
 - [PHI-005 · Tester l'idempotence au-delà des valeurs renvoyées lors d'une répétition](phi-005-test-idempotence-beyond-replayed-values/)
 - [PHI-006 · Préserver le quantificateur dans un verdict de pliage](phi-006-preserve-the-quantifier-in-a-fold-verdict/)
+- [PHI-007 · Mettre un gain d'apprentissage à l'épreuve des contrefactuels](phi-007-test-a-learning-gain-against-counterfactuals/)

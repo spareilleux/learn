@@ -17,3 +17,4 @@ sidebar:
 - [GAA-004 · Choose and Play a Useful Voicing from a GA Answer](gaa-004-choose-a-useful-voicing/)
 - [GAA-005 · Repair a Phrase Without Hiding the Change](gaa-005-repair-a-phrase-without-hiding-the-change/)
 - [GAA-006 · Separate Capo Shapes from Sounding Pitches](gaa-006-separate-capo-shapes-from-sounding-pitches/)
+- [GAA-007 · Turn a Voicing Result Into a Practice Item](gaa-007-turn-a-voicing-result-into-a-practice-item/)
