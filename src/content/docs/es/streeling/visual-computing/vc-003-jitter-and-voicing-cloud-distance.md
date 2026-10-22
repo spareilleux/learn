@@ -12,7 +12,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/visual
 
 Generado por el departamento *Computación visual* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/es/vc-003-jitter-and-voicing-cloud-distance.es.md) · [Mi diario](../../journal/)
 
-Requisitos previos: [VC-002](../../visual-computing/vc-002-godot-react-bridge-evidence/) *(en inglés)*
+Requisitos previos: [VC-002](../../visual-computing/vc-002-godot-react-bridge-evidence/)
 :::
 
 > **Alcance de la fuente y la transferencia.** El texto técnico siguiente procede de un borrador archivado. Las menciones históricas de traducciones todavía no redactadas, de una importación o compilación pendiente en Learn corresponden a aquella etapa; este [registro de transferencia](https://github.com/spareilleux/learn/blob/main/code/streeling/evidence/representation-release-2026-10-22/README.md) documenta los borradores traducidos actuales, la importación y sus comprobaciones. Las demás experiencias indicadas como no realizadas siguen pendientes. Aún faltan la revisión humana del contenido y del idioma, y la prueba con un estudiante.
@@ -109,6 +109,6 @@ Mantén `meta.total = 3` y un binario de nueve flotantes, pero cambia los bloque
 - Los cinco ejercicios utilizan una fixture sintética pequeña y extracciones elegidas explícitamente. No miden el corpus real, la densidad visual, el rendimiento, la comprensión de usuarios ni un servicio IX activo.
 - Esta lección identifica comprobaciones del código y propone una validación reforzada y observación por tareas. No afirma que se hayan implementado esas comprobaciones u observaciones.
 
-En las lecciones vecinas, [VC-001](../../visual-computing/vc-001-accessible-fretboard-paths/) aborda vías de interacción accesibles y [VC-002](../../visual-computing/vc-002-godot-react-bridge-evidence/) *(en inglés)* examina otro límite 3D: el anfitrión React y el puente Godot propuesto. Ninguna demuestra que esta nube haya superado una prueba de usabilidad. La inspección se limitó a los archivos GA fijados enlazados; no ejecutó Three.js, IX ni un navegador. La revisión humana de la materia, los intentos de estudiantes y la publicación siguen pendientes; este borrador en español requiere revisión de una persona que domine el español.
+En las lecciones vecinas, [VC-001](../../visual-computing/vc-001-accessible-fretboard-paths/) aborda vías de interacción accesibles y [VC-002](../../visual-computing/vc-002-godot-react-bridge-evidence/) examina otro límite 3D: el anfitrión React y el puente Godot propuesto. Ninguna demuestra que esta nube haya superado una prueba de usabilidad. La inspección se limitó a los archivos GA fijados enlazados; no ejecutó Three.js, IX ni un navegador. La revisión humana de la materia, los intentos de estudiantes y la publicación siguen pendientes; este borrador en español requiere revisión de una persona que domine el español.
 
 *Investigación: `visual-computing-2026-10-11-003`. Borrador en español; revisión lingüística y publicación pendientes.*

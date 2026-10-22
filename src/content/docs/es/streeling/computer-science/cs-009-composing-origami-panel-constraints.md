@@ -12,7 +12,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/comput
 
 Generado por el departamento *Ciencias de la computación* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/computer-science/es/cs-009-composing-origami-panel-constraints.es.md) · [Mi diario](../../journal/)
 
-Requisitos previos: [CS-001](../../computer-science/cs-001-thinking-algorithmically/), [CS-006](../../computer-science/cs-006-ixql-pipeline-composition/) *(en inglés)*
+Requisitos previos: [CS-001](../../computer-science/cs-001-thinking-algorithmically/), [CS-006](../../computer-science/cs-006-ixql-pipeline-composition/)
 :::
 
 > **Departamento de Informática** | Nivel intermedio | 40 minutos | Borrador en español; revisión de contenido y evaluación con un estudiante pendientes
@@ -41,7 +41,7 @@ Utiliza el caso `pierced-flat-joint` del conjunto de datos. Indica los represent
 
 La prueba fijada `a_weave_passes_the_layer_rules_but_has_no_rigid_stack` construye cuatro tiras. Cada una se solapa con la siguiente en una esquina diferente. Todas las celdas locales de la superposición pueden tener un orden coherente; sin embargo, las afirmaciones combinadas dicen que la tira 0 está encima de 1, 1 encima de 2, 2 encima de 3 y 3 encima de 0. Los arcos de abajo hacia arriba dan `0 → 3 → 2 → 1 → 0`. Ninguna altura única por tira satisface las cuatro desigualdades para un espesor positivo del material.
 
-Esto es distinto de [VC-007](../../visual-computing/vc-007-weave-seams-as-scene-contracts/) *(en inglés)*, cuyo verificador sintético detecta un reinicio de la paridad en los bordes de teselas repetidas. Aquí el problema es un ciclo que atraviesa distintas regiones de solapamiento en la implementación existente de IX. Una textura, una vista previa de un cruce local o un análisis básico de origami satisfactorio no resuelven la cuestión global de los paneles paralelos.
+Esto es distinto de [VC-007](../../visual-computing/vc-007-weave-seams-as-scene-contracts/), cuyo verificador sintético detecta un reinicio de la paridad en los bordes de teselas repetidas. Aquí el problema es un ciclo que atraviesa distintas regiones de solapamiento en la implementación existente de IX. Una textura, una vista previa de un cruce local o un análisis básico de origami satisfactorio no resuelven la cuestión global de los paneles paralelos.
 
 La prueba comprueba que `analyse(&weave()).unwrap().ok` es verdadero. También comprueba la lectura opcional del espesor para `t = 0`, un `t` positivo muy pequeño y `t = 0.5`. El grafo sigue siendo cíclico, pero `rigid.refused` solo es verdadero para un `t` positivo. En cero, la implementación sigue devolviendo `levels`, `height` y `face_levels` como ausentes para esta lectura cíclica. No sustituyas una altura rígida ausente por cero solo porque el valor separado `ply_height` sea cero.
 

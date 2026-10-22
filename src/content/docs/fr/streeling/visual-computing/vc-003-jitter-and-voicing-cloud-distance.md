@@ -12,7 +12,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/visual
 
 Généré par le département *Informatique visuelle* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/visual-computing/fr/vc-003-jitter-and-voicing-cloud-distance.fr.md) · [Mon journal](../../journal/)
 
-Prérequis: [VC-002](../../visual-computing/vc-002-godot-react-bridge-evidence/) *(en anglais)*
+Prérequis: [VC-002](../../visual-computing/vc-002-godot-react-bridge-evidence/)
 :::
 
 > **Périmètre de la source et du transfert.** Le texte technique ci-dessous provient d’un brouillon archivé. Les mentions historiques de traductions encore à rédiger, d’une absence d’importation ou de compilation dans Learn concernent cette étape antérieure ; ce [dossier de transfert](https://github.com/spareilleux/learn/blob/main/code/streeling/evidence/representation-release-2026-10-22/README.md) décrit les brouillons de traduction actuels, l’importation et ses vérifications. Les autres expériences indiquées comme non réalisées le restent. Les revues humaines du contenu et de la langue, ainsi que l’essai avec un apprenant, restent à effectuer.
@@ -109,6 +109,6 @@ Conservez `meta.total = 3` et un binaire de neuf flottants, mais modifiez les bl
 - Les cinq exercices utilisent une petite fixture synthétique et des tirages explicitement choisis. Ils ne mesurent ni corpus réel, ni densité visuelle, ni performance, ni compréhension utilisateur, ni service IX actif.
 - Cette leçon identifie les contrôles source et propose une validation renforcée et une observation par tâches. Elle n'affirme pas que ces contrôles ou observations ont été implémentés.
 
-Parmi les leçons voisines, [VC-001](../../visual-computing/vc-001-accessible-fretboard-paths/) traite des chemins d'interaction accessibles et [VC-002](../../visual-computing/vc-002-godot-react-bridge-evidence/) *(en anglais)* examine une autre frontière 3D : l'hôte React et le pont Godot proposé. Aucune ne prouve que ce nuage de voicings a réussi un essai d'utilisabilité. L'inspection s'est limitée aux fichiers GA figés liés ci-dessus ; elle n'a exécuté ni Three.js, ni IX, ni navigateur. Révision humaine disciplinaire, essais d'apprenants et publication restent en attente ; ce brouillon français attend une révision par une personne maîtrisant le français.
+Parmi les leçons voisines, [VC-001](../../visual-computing/vc-001-accessible-fretboard-paths/) traite des chemins d'interaction accessibles et [VC-002](../../visual-computing/vc-002-godot-react-bridge-evidence/) examine une autre frontière 3D : l'hôte React et le pont Godot proposé. Aucune ne prouve que ce nuage de voicings a réussi un essai d'utilisabilité. L'inspection s'est limitée aux fichiers GA figés liés ci-dessus ; elle n'a exécuté ni Three.js, ni IX, ni navigateur. Révision humaine disciplinaire, essais d'apprenants et publication restent en attente ; ce brouillon français attend une révision par une personne maîtrisant le français.
 
 *Recherche : `visual-computing-2026-10-11-003`. Brouillon français ; révision linguistique et publication en attente.*

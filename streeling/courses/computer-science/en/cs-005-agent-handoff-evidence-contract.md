@@ -12,6 +12,8 @@ version: "0.1.0"
 
 # Hand Off Agent Work as an Evidence Contract
 
+> **Draft and localization scope.** The technical text below is a dated source draft. Historical statements about pending translations, Learn integration or publication checks describe the earlier stage; this [localization record](../../../../code/streeling/evidence/locale-completion-2026-10-22/README.md) records current draft translations and checks. Unperformed runtime experiments remain unperformed. Human subject, fluent-language and learner reviews remain pending.
+
 > **Department of Computer Science** | Intermediate | 30 minutes | English draft; subject and learner review pending
 
 ## Objectives

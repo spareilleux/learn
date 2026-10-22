@@ -20,7 +20,7 @@ Ces modules ont été écrits par des départements IA et **n'ont pas été relu
 |---|---|---|---|
 | [Ingénierie audio](audio-engineering/) | 4 | 4 | 4 |
 | [Sciences cognitives](cognitive-science/) | 3 | 3 | 3 |
-| [Informatique](computer-science/) | 9 | 7 | 7 |
+| [Informatique](computer-science/) | 9 | 9 | 9 |
 | [Cybernétique](cybernetics/) | 3 | 3 | 3 |
 | [Visualisation de données](data-visualization/) | 8 | 8 | 8 |
 | [Futurologie](futurology/) | 3 | 3 | 3 |
@@ -38,7 +38,7 @@ Ces modules ont été écrits par des départements IA et **n'ont pas été relu
 | [Gestion de produit et de projet](product-management/) | 4 | 4 | 4 |
 | [Psychohistoire](psychohistory/) | 25 | 25 | 25 |
 | [Sémiotique](semiotics/) | 4 | 4 | 4 |
-| [Informatique visuelle](visual-computing/) | 7 | 3 | 3 |
+| [Informatique visuelle](visual-computing/) | 7 | 7 | 7 |
 | [Musiques et langues du monde](world-music-languages/) | 3 | 3 | 3 |
 
 ## Provenance

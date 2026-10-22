@@ -12,6 +12,8 @@ version: "0.1.0"
 
 # Keep Weave Crossings Correct across a Godot Scene Boundary
 
+> **Draft and localization scope.** The technical text below is a dated source draft. Historical statements about pending translations, Learn integration or publication checks describe the earlier stage; this [localization record](../../../../code/streeling/evidence/locale-completion-2026-10-22/README.md) records current draft translations and checks. Unperformed runtime experiments remain unperformed. Human subject, fluent-language and learner reviews remain pending.
+
 > **Department of Visual Computing** | Intermediate | 40 minutes | English draft; synthetic crossing fixture, no Godot import, learner trial, human review, or publication
 
 ## Objectives and project question

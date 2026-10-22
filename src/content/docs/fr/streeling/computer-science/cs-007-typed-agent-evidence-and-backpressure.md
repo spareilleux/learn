@@ -12,7 +12,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/comput
 
 Généré par le département *Informatique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/computer-science/fr/cs-007-typed-agent-evidence-and-backpressure.fr.md) · [Mon journal](../../journal/)
 
-Prérequis: [CS-005](../../computer-science/cs-005-agent-handoff-evidence-contract/) *(en anglais)*, [CS-006](../../computer-science/cs-006-ixql-pipeline-composition/) *(en anglais)*
+Prérequis: [CS-005](../../computer-science/cs-005-agent-handoff-evidence-contract/), [CS-006](../../computer-science/cs-006-ixql-pipeline-composition/)
 :::
 
 > **Périmètre de la source et du transfert.** Le texte technique ci-dessous provient d’un brouillon archivé. Les mentions historiques d’une absence d’importation ou de compilation dans Learn concernent cette étape antérieure ; ce [dossier de transfert](https://github.com/spareilleux/learn/blob/main/code/streeling/evidence/agentic-composition-2026-10-22/README.md) décrit l’importation actuelle et ses vérifications. Les autres expériences indiquées comme non réalisées le restent. Les revues humaines du contenu et de la langue, ainsi que l’essai avec un apprenant, restent à effectuer.

@@ -12,7 +12,7 @@ editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/comput
 
 Généré par le département *Informatique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/computer-science/fr/cs-009-composing-origami-panel-constraints.fr.md) · [Mon journal](../../journal/)
 
-Prérequis: [CS-001](../../computer-science/cs-001-thinking-algorithmically/), [CS-006](../../computer-science/cs-006-ixql-pipeline-composition/) *(en anglais)*
+Prérequis: [CS-001](../../computer-science/cs-001-thinking-algorithmically/), [CS-006](../../computer-science/cs-006-ixql-pipeline-composition/)
 :::
 
 > **Département d’informatique** | Niveau intermédiaire | 40 minutes | Version française provisoire ; validation du contenu et évaluation par un apprenant en attente
@@ -41,7 +41,7 @@ Utilisez le cas `pierced-flat-joint` du jeu de données. Donnez les représentan
 
 Le test figé `a_weave_passes_the_layer_rules_but_has_no_rigid_stack` construit quatre bandes. Chacune recouvre la suivante dans un coin différent. Chaque cellule locale de la superposition peut admettre un ordre cohérent ; pourtant, les énoncés réunis disent que la bande 0 est au-dessus de 1, 1 au-dessus de 2, 2 au-dessus de 3 et 3 au-dessus de 0. Les arcs allant du bas vers le haut donnent `0 → 3 → 2 → 1 → 0`. Pour une épaisseur de matériau positive, aucune hauteur unique par bande ne satisfait les quatre inégalités.
 
-Ce problème diffère de celui de [VC-007](../../visual-computing/vc-007-weave-seams-as-scene-contracts/) *(en anglais)*, dont le vérificateur synthétique détecte un redémarrage de la parité aux frontières de tuiles répétées. Ici, le problème est un cycle traversant différentes régions de recouvrement dans l’implémentation existante d’IX. Une texture, un aperçu d’un croisement local ou la réussite de l’analyse de base de l’origami ne tranche pas la question globale des panneaux parallèles.
+Ce problème diffère de celui de [VC-007](../../visual-computing/vc-007-weave-seams-as-scene-contracts/), dont le vérificateur synthétique détecte un redémarrage de la parité aux frontières de tuiles répétées. Ici, le problème est un cycle traversant différentes régions de recouvrement dans l’implémentation existante d’IX. Une texture, un aperçu d’un croisement local ou la réussite de l’analyse de base de l’origami ne tranche pas la question globale des panneaux parallèles.
 
 Le test vérifie que `analyse(&weave()).unwrap().ok` est vrai. Il vérifie aussi la lecture optionnelle de l’épaisseur pour `t = 0`, un très petit `t` positif et `t = 0.5`. Le graphe reste cyclique, mais `rigid.refused` n’est vrai que pour un `t` positif. À zéro, l’implémentation renvoie toujours `levels`, `height` et `face_levels` comme absents pour cette lecture cyclique. Ne remplacez pas une hauteur rigide absente par zéro au motif que la valeur distincte `ply_height` vaut zéro.
 
