@@ -16,3 +16,4 @@ sidebar:
 - [GAS-003 · Calibrer un test de décroissance du mi à vide pour le moteur de guitare GA](gas-003-decay-calibration-open-e/)
 - [GAS-004 · Exécuter et rejeter un réglage de décroissance du mi à vide](gas-004-run-open-e-decay-candidate/)
 - [GAS-005 · Distinguer le pic d’un partiel d’une période](gas-005-separate-a-partial-peak-from-a-period/)
+- [GAS-006 · Relier la position de pincement aux modes de la corde](gas-006-relate-pluck-position-to-string-modes/)

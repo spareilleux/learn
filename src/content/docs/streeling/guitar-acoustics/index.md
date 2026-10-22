@@ -16,3 +16,4 @@ sidebar:
 - [GAS-003 · Calibrate an Open-E Decay Test for GA's Guitar Engine](gas-003-decay-calibration-open-e/)
 - [GAS-004 · Run and Reject an Open-E Decay Candidate](gas-004-run-open-e-decay-candidate/)
 - [GAS-005 · Separate a Partial Peak from a Period](gas-005-separate-a-partial-peak-from-a-period/)
+- [GAS-006 · Relate Pluck Position to String Modes](gas-006-relate-pluck-position-to-string-modes/)

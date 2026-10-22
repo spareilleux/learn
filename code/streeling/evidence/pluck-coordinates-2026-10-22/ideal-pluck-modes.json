@@ -1,0 +1,493 @@
+{
+  "scope": "Authored real-arithmetic modal displacement calculation for a uniform flexible fixed-end string released from a triangular displacement at rest. Not engine output, bridge force, a recording or a listener response.",
+  "coordinate": "u=x/L measured from declared bridge origin; 0<p<1; peak displacement h fixed.",
+  "initial_shape": "y(u)/h=u/p for 0<=u<=p; (1-u)/(1-p) for p<u<=1",
+  "coefficient": "B_n/h=2*sin(n*pi*p)/(pi^2*n^2*p*(1-p))",
+  "modes": [
+    {
+      "p": "1/2",
+      "n": 1,
+      "b_over_h": 0.8105694691387022,
+      "exact_null": false
+    },
+    {
+      "p": "1/2",
+      "n": 2,
+      "b_over_h": 0.0,
+      "exact_null": true
+    },
+    {
+      "p": "1/2",
+      "n": 3,
+      "b_over_h": -0.09006327434874468,
+      "exact_null": false
+    },
+    {
+      "p": "1/2",
+      "n": 4,
+      "b_over_h": 0.0,
+      "exact_null": true
+    },
+    {
+      "p": "1/2",
+      "n": 5,
+      "b_over_h": 0.03242277876554808,
+      "exact_null": false
+    },
+    {
+      "p": "1/2",
+      "n": 6,
+      "b_over_h": 0.0,
+      "exact_null": true
+    },
+    {
+      "p": "1/2",
+      "n": 7,
+      "b_over_h": -0.016542234064055146,
+      "exact_null": false
+    },
+    {
+      "p": "1/2",
+      "n": 8,
+      "b_over_h": 0.0,
+      "exact_null": true
+    },
+    {
+      "p": "1/2",
+      "n": 9,
+      "b_over_h": 0.010007030483193855,
+      "exact_null": false
+    },
+    {
+      "p": "1/2",
+      "n": 10,
+      "b_over_h": 0.0,
+      "exact_null": true
+    },
+    {
+      "p": "1/2",
+      "n": 11,
+      "b_over_h": -0.006698921232551258,
+      "exact_null": false
+    },
+    {
+      "p": "1/2",
+      "n": 12,
+      "b_over_h": 0.0,
+      "exact_null": true
+    },
+    {
+      "p": "1/2",
+      "n": 13,
+      "b_over_h": 0.0047962690481580025,
+      "exact_null": false
+    },
+    {
+      "p": "1/2",
+      "n": 14,
+      "b_over_h": 0.0,
+      "exact_null": true
+    },
+    {
+      "p": "1/2",
+      "n": 15,
+      "b_over_h": -0.0036025309739497876,
+      "exact_null": false
+    },
+    {
+      "p": "1/2",
+      "n": 16,
+      "b_over_h": 0.0,
+      "exact_null": true
+    },
+    {
+      "p": "1/2",
+      "n": 17,
+      "b_over_h": 0.002804738647538762,
+      "exact_null": false
+    },
+    {
+      "p": "1/2",
+      "n": 18,
+      "b_over_h": 0.0,
+      "exact_null": true
+    },
+    {
+      "p": "1/2",
+      "n": 19,
+      "b_over_h": -0.002245344789857901,
+      "exact_null": false
+    },
+    {
+      "p": "1/2",
+      "n": 20,
+      "b_over_h": 0.0,
+      "exact_null": true
+    },
+    {
+      "p": "1/5",
+      "n": 1,
+      "b_over_h": 0.7444387186222938,
+      "exact_null": false
+    },
+    {
+      "p": "1/5",
+      "n": 2,
+      "b_over_h": 0.30113178731807266,
+      "exact_null": false
+    },
+    {
+      "p": "1/5",
+      "n": 3,
+      "b_over_h": 0.13383634991914342,
+      "exact_null": false
+    },
+    {
+      "p": "1/5",
+      "n": 4,
+      "b_over_h": 0.04652741991389337,
+      "exact_null": false
+    },
+    {
+      "p": "1/5",
+      "n": 5,
+      "b_over_h": 0.0,
+      "exact_null": true
+    },
+    {
+      "p": "1/5",
+      "n": 6,
+      "b_over_h": -0.020678853295063714,
+      "exact_null": false
+    },
+    {
+      "p": "1/5",
+      "n": 7,
+      "b_over_h": -0.024582186719842667,
+      "exact_null": false
+    },
+    {
+      "p": "1/5",
+      "n": 8,
+      "b_over_h": -0.018820736707379545,
+      "exact_null": false
+    },
+    {
+      "p": "1/5",
+      "n": 9,
+      "b_over_h": -0.009190601464472767,
+      "exact_null": false
+    },
+    {
+      "p": "1/5",
+      "n": 10,
+      "b_over_h": 0.0,
+      "exact_null": true
+    },
+    {
+      "p": "1/5",
+      "n": 11,
+      "b_over_h": 0.006152386104316476,
+      "exact_null": false
+    },
+    {
+      "p": "1/5",
+      "n": 12,
+      "b_over_h": 0.008364771869946462,
+      "exact_null": false
+    },
+    {
+      "p": "1/5",
+      "n": 13,
+      "b_over_h": 0.007127379581492842,
+      "exact_null": false
+    },
+    {
+      "p": "1/5",
+      "n": 14,
+      "b_over_h": 0.0037981567276647657,
+      "exact_null": false
+    },
+    {
+      "p": "1/5",
+      "n": 15,
+      "b_over_h": 0.0,
+      "exact_null": true
+    },
+    {
+      "p": "1/5",
+      "n": 16,
+      "b_over_h": -0.0029079637446183335,
+      "exact_null": false
+    },
+    {
+      "p": "1/5",
+      "n": 17,
+      "b_over_h": -0.004167914011322806,
+      "exact_null": false
+    },
+    {
+      "p": "1/5",
+      "n": 18,
+      "b_over_h": -0.003717676386642873,
+      "exact_null": false
+    },
+    {
+      "p": "1/5",
+      "n": 19,
+      "b_over_h": -0.0020621571152972143,
+      "exact_null": false
+    },
+    {
+      "p": "1/5",
+      "n": 20,
+      "b_over_h": 0.0,
+      "exact_null": true
+    },
+    {
+      "p": "1/10",
+      "n": 1,
+      "b_over_h": 0.6957770585703846,
+      "exact_null": false
+    },
+    {
+      "p": "1/10",
+      "n": 2,
+      "b_over_h": 0.33086165272101953,
+      "exact_null": false
+    },
+    {
+      "p": "1/10",
+      "n": 3,
+      "b_over_h": 0.20239644310329924,
+      "exact_null": false
+    },
+    {
+      "p": "1/10",
+      "n": 4,
+      "b_over_h": 0.13383634991914342,
+      "exact_null": false
+    },
+    {
+      "p": "1/10",
+      "n": 5,
+      "b_over_h": 0.09006327434874467,
+      "exact_null": false
+    },
+    {
+      "p": "1/10",
+      "n": 6,
+      "b_over_h": 0.05948282218628597,
+      "exact_null": false
+    },
+    {
+      "p": "1/10",
+      "n": 7,
+      "b_over_h": 0.037174856896524354,
+      "exact_null": false
+    },
+    {
+      "p": "1/10",
+      "n": 8,
+      "b_over_h": 0.020678853295063724,
+      "exact_null": false
+    },
+    {
+      "p": "1/10",
+      "n": 9,
+      "b_over_h": 0.008589840229264008,
+      "exact_null": false
+    },
+    {
+      "p": "1/10",
+      "n": 10,
+      "b_over_h": 0.0,
+      "exact_null": true
+    },
+    {
+      "p": "1/10",
+      "n": 11,
+      "b_over_h": -0.0057502236245486294,
+      "exact_null": false
+    },
+    {
+      "p": "1/10",
+      "n": 12,
+      "b_over_h": -0.009190601464472762,
+      "exact_null": false
+    },
+    {
+      "p": "1/10",
+      "n": 13,
+      "b_over_h": -0.01077850880431772,
+      "exact_null": false
+    },
+    {
+      "p": "1/10",
+      "n": 14,
+      "b_over_h": -0.010925416319930076,
+      "exact_null": false
+    },
+    {
+      "p": "1/10",
+      "n": 15,
+      "b_over_h": -0.010007030483193855,
+      "exact_null": false
+    },
+    {
+      "p": "1/10",
+      "n": 16,
+      "b_over_h": -0.008364771869946466,
+      "exact_null": false
+    },
+    {
+      "p": "1/10",
+      "n": 17,
+      "b_over_h": -0.006303003418441841,
+      "exact_null": false
+    },
+    {
+      "p": "1/10",
+      "n": 18,
+      "b_over_h": -0.004084711761987896,
+      "exact_null": false
+    },
+    {
+      "p": "1/10",
+      "n": 19,
+      "b_over_h": -0.0019273602730481584,
+      "exact_null": false
+    },
+    {
+      "p": "1/10",
+      "n": 20,
+      "b_over_h": 0.0,
+      "exact_null": true
+    },
+    {
+      "p": "2/5",
+      "n": 1,
+      "b_over_h": 0.8030180995148605,
+      "exact_null": false
+    },
+    {
+      "p": "2/5",
+      "n": 2,
+      "b_over_h": 0.12407311977038234,
+      "exact_null": false
+    },
+    {
+      "p": "2/5",
+      "n": 3,
+      "b_over_h": -0.05514360878683658,
+      "exact_null": false
+    },
+    {
+      "p": "2/5",
+      "n": 4,
+      "b_over_h": -0.050188631219678786,
+      "exact_null": false
+    },
+    {
+      "p": "2/5",
+      "n": 5,
+      "b_over_h": 0.0,
+      "exact_null": true
+    },
+    {
+      "p": "2/5",
+      "n": 6,
+      "b_over_h": 0.022306058319857238,
+      "exact_null": false
+    },
+    {
+      "p": "2/5",
+      "n": 7,
+      "b_over_h": 0.010128417940439376,
+      "exact_null": false
+    },
+    {
+      "p": "2/5",
+      "n": 8,
+      "b_over_h": -0.00775456998564889,
+      "exact_null": false
+    },
+    {
+      "p": "2/5",
+      "n": 9,
+      "b_over_h": -0.00991380369771433,
+      "exact_null": false
+    },
+    {
+      "p": "2/5",
+      "n": 10,
+      "b_over_h": 0.0,
+      "exact_null": true
+    },
+    {
+      "p": "2/5",
+      "n": 11,
+      "b_over_h": 0.006636513219131078,
+      "exact_null": false
+    },
+    {
+      "p": "2/5",
+      "n": 12,
+      "b_over_h": 0.0034464755491772896,
+      "exact_null": false
+    },
+    {
+      "p": "2/5",
+      "n": 13,
+      "b_over_h": -0.002936641888056398,
+      "exact_null": false
+    },
+    {
+      "p": "2/5",
+      "n": 14,
+      "b_over_h": -0.004097031119973779,
+      "exact_null": false
+    },
+    {
+      "p": "2/5",
+      "n": 15,
+      "b_over_h": 0.0,
+      "exact_null": true
+    },
+    {
+      "p": "2/5",
+      "n": 16,
+      "b_over_h": 0.003136789451229923,
+      "exact_null": false
+    },
+    {
+      "p": "2/5",
+      "n": 17,
+      "b_over_h": 0.001717275014122932,
+      "exact_null": false
+    },
+    {
+      "p": "2/5",
+      "n": 18,
+      "b_over_h": -0.0015317669107454588,
+      "exact_null": false
+    },
+    {
+      "p": "2/5",
+      "n": 19,
+      "b_over_h": -0.002224426868462218,
+      "exact_null": false
+    },
+    {
+      "p": "2/5",
+      "n": 20,
+      "b_over_h": 0.0,
+      "exact_null": true
+    }
+  ],
+  "midpoint_third_to_first": -0.1111111111111111,
+  "p_one_fifth_second_to_first": 0.40450849718747367,
+  "p_one_tenth_second_to_first": 0.4755282581475768,
+  "h_fixed": true,
+  "measured_audio": false
+}

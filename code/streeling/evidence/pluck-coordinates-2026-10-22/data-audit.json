@@ -1,0 +1,3477 @@
+{
+  "reviewer": "independent-data-source-auditor",
+  "checked_at_utc": "2026-10-22T22:09:39.862394+00:00",
+  "verdict": "pass",
+  "findings": [
+    {
+      "id": "profile0-overwrites-default",
+      "status": "observed-preserved",
+      "finding": "Constructor0.988 is overwritten by set_guitar_profile(0) to0.986; original prediction is refuted and fixed calculations use correct profile value."
+    },
+    {
+      "id": "retained-positive-attack-state",
+      "status": "observed-preserved",
+      "finding": "All six positive cases stop above5e-5 after threshold1e-3; the deactivation attack conjunct cannot become true through this envelope branch alone.",
+      "runtime_reproduced": false,
+      "production_fix": null
+    },
+    {
+      "id": "recursive-noise-filter-wording",
+      "status": "resolved",
+      "finding": "The recurrence feeds back the previous filtered output; two-tap FIR wording was inaccurate.",
+      "resolution": "Requested first-order recursive smoother wording; exact final packet bytes bound below."
+    }
+  ],
+  "fix_requests": [],
+  "check_count": 399,
+  "passed_check_count": 399,
+  "checks": [
+    {
+      "id": "modal-coverage",
+      "pass_": true,
+      "observed": [
+        [
+          "1/10",
+          1
+        ],
+        [
+          "1/10",
+          2
+        ],
+        [
+          "1/10",
+          3
+        ],
+        [
+          "1/10",
+          4
+        ],
+        [
+          "1/10",
+          5
+        ],
+        [
+          "1/10",
+          6
+        ],
+        [
+          "1/10",
+          7
+        ],
+        [
+          "1/10",
+          8
+        ],
+        [
+          "1/10",
+          9
+        ],
+        [
+          "1/10",
+          10
+        ],
+        [
+          "1/10",
+          11
+        ],
+        [
+          "1/10",
+          12
+        ],
+        [
+          "1/10",
+          13
+        ],
+        [
+          "1/10",
+          14
+        ],
+        [
+          "1/10",
+          15
+        ],
+        [
+          "1/10",
+          16
+        ],
+        [
+          "1/10",
+          17
+        ],
+        [
+          "1/10",
+          18
+        ],
+        [
+          "1/10",
+          19
+        ],
+        [
+          "1/10",
+          20
+        ],
+        [
+          "1/2",
+          1
+        ],
+        [
+          "1/2",
+          2
+        ],
+        [
+          "1/2",
+          3
+        ],
+        [
+          "1/2",
+          4
+        ],
+        [
+          "1/2",
+          5
+        ],
+        [
+          "1/2",
+          6
+        ],
+        [
+          "1/2",
+          7
+        ],
+        [
+          "1/2",
+          8
+        ],
+        [
+          "1/2",
+          9
+        ],
+        [
+          "1/2",
+          10
+        ],
+        [
+          "1/2",
+          11
+        ],
+        [
+          "1/2",
+          12
+        ],
+        [
+          "1/2",
+          13
+        ],
+        [
+          "1/2",
+          14
+        ],
+        [
+          "1/2",
+          15
+        ],
+        [
+          "1/2",
+          16
+        ],
+        [
+          "1/2",
+          17
+        ],
+        [
+          "1/2",
+          18
+        ],
+        [
+          "1/2",
+          19
+        ],
+        [
+          "1/2",
+          20
+        ],
+        [
+          "1/5",
+          1
+        ],
+        [
+          "1/5",
+          2
+        ],
+        [
+          "1/5",
+          3
+        ],
+        [
+          "1/5",
+          4
+        ],
+        [
+          "1/5",
+          5
+        ],
+        [
+          "1/5",
+          6
+        ],
+        [
+          "1/5",
+          7
+        ],
+        [
+          "1/5",
+          8
+        ],
+        [
+          "1/5",
+          9
+        ],
+        [
+          "1/5",
+          10
+        ],
+        [
+          "1/5",
+          11
+        ],
+        [
+          "1/5",
+          12
+        ],
+        [
+          "1/5",
+          13
+        ],
+        [
+          "1/5",
+          14
+        ],
+        [
+          "1/5",
+          15
+        ],
+        [
+          "1/5",
+          16
+        ],
+        [
+          "1/5",
+          17
+        ],
+        [
+          "1/5",
+          18
+        ],
+        [
+          "1/5",
+          19
+        ],
+        [
+          "1/5",
+          20
+        ],
+        [
+          "2/5",
+          1
+        ],
+        [
+          "2/5",
+          2
+        ],
+        [
+          "2/5",
+          3
+        ],
+        [
+          "2/5",
+          4
+        ],
+        [
+          "2/5",
+          5
+        ],
+        [
+          "2/5",
+          6
+        ],
+        [
+          "2/5",
+          7
+        ],
+        [
+          "2/5",
+          8
+        ],
+        [
+          "2/5",
+          9
+        ],
+        [
+          "2/5",
+          10
+        ],
+        [
+          "2/5",
+          11
+        ],
+        [
+          "2/5",
+          12
+        ],
+        [
+          "2/5",
+          13
+        ],
+        [
+          "2/5",
+          14
+        ],
+        [
+          "2/5",
+          15
+        ],
+        [
+          "2/5",
+          16
+        ],
+        [
+          "2/5",
+          17
+        ],
+        [
+          "2/5",
+          18
+        ],
+        [
+          "2/5",
+          19
+        ],
+        [
+          "2/5",
+          20
+        ]
+      ],
+      "independently_calculated_or_expected": [
+        [
+          "1/10",
+          1
+        ],
+        [
+          "1/10",
+          2
+        ],
+        [
+          "1/10",
+          3
+        ],
+        [
+          "1/10",
+          4
+        ],
+        [
+          "1/10",
+          5
+        ],
+        [
+          "1/10",
+          6
+        ],
+        [
+          "1/10",
+          7
+        ],
+        [
+          "1/10",
+          8
+        ],
+        [
+          "1/10",
+          9
+        ],
+        [
+          "1/10",
+          10
+        ],
+        [
+          "1/10",
+          11
+        ],
+        [
+          "1/10",
+          12
+        ],
+        [
+          "1/10",
+          13
+        ],
+        [
+          "1/10",
+          14
+        ],
+        [
+          "1/10",
+          15
+        ],
+        [
+          "1/10",
+          16
+        ],
+        [
+          "1/10",
+          17
+        ],
+        [
+          "1/10",
+          18
+        ],
+        [
+          "1/10",
+          19
+        ],
+        [
+          "1/10",
+          20
+        ],
+        [
+          "1/2",
+          1
+        ],
+        [
+          "1/2",
+          2
+        ],
+        [
+          "1/2",
+          3
+        ],
+        [
+          "1/2",
+          4
+        ],
+        [
+          "1/2",
+          5
+        ],
+        [
+          "1/2",
+          6
+        ],
+        [
+          "1/2",
+          7
+        ],
+        [
+          "1/2",
+          8
+        ],
+        [
+          "1/2",
+          9
+        ],
+        [
+          "1/2",
+          10
+        ],
+        [
+          "1/2",
+          11
+        ],
+        [
+          "1/2",
+          12
+        ],
+        [
+          "1/2",
+          13
+        ],
+        [
+          "1/2",
+          14
+        ],
+        [
+          "1/2",
+          15
+        ],
+        [
+          "1/2",
+          16
+        ],
+        [
+          "1/2",
+          17
+        ],
+        [
+          "1/2",
+          18
+        ],
+        [
+          "1/2",
+          19
+        ],
+        [
+          "1/2",
+          20
+        ],
+        [
+          "1/5",
+          1
+        ],
+        [
+          "1/5",
+          2
+        ],
+        [
+          "1/5",
+          3
+        ],
+        [
+          "1/5",
+          4
+        ],
+        [
+          "1/5",
+          5
+        ],
+        [
+          "1/5",
+          6
+        ],
+        [
+          "1/5",
+          7
+        ],
+        [
+          "1/5",
+          8
+        ],
+        [
+          "1/5",
+          9
+        ],
+        [
+          "1/5",
+          10
+        ],
+        [
+          "1/5",
+          11
+        ],
+        [
+          "1/5",
+          12
+        ],
+        [
+          "1/5",
+          13
+        ],
+        [
+          "1/5",
+          14
+        ],
+        [
+          "1/5",
+          15
+        ],
+        [
+          "1/5",
+          16
+        ],
+        [
+          "1/5",
+          17
+        ],
+        [
+          "1/5",
+          18
+        ],
+        [
+          "1/5",
+          19
+        ],
+        [
+          "1/5",
+          20
+        ],
+        [
+          "2/5",
+          1
+        ],
+        [
+          "2/5",
+          2
+        ],
+        [
+          "2/5",
+          3
+        ],
+        [
+          "2/5",
+          4
+        ],
+        [
+          "2/5",
+          5
+        ],
+        [
+          "2/5",
+          6
+        ],
+        [
+          "2/5",
+          7
+        ],
+        [
+          "2/5",
+          8
+        ],
+        [
+          "2/5",
+          9
+        ],
+        [
+          "2/5",
+          10
+        ],
+        [
+          "2/5",
+          11
+        ],
+        [
+          "2/5",
+          12
+        ],
+        [
+          "2/5",
+          13
+        ],
+        [
+          "2/5",
+          14
+        ],
+        [
+          "2/5",
+          15
+        ],
+        [
+          "2/5",
+          16
+        ],
+        [
+          "2/5",
+          17
+        ],
+        [
+          "2/5",
+          18
+        ],
+        [
+          "2/5",
+          19
+        ],
+        [
+          "2/5",
+          20
+        ]
+      ]
+    },
+    {
+      "id": "modal-1/2-n1-integral",
+      "pass_": true,
+      "observed": 0.8105694691387022,
+      "independently_calculated_or_expected": 0.8105694691387019,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/2-n1-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-1/2-n2-integral",
+      "pass_": true,
+      "observed": 0.0,
+      "independently_calculated_or_expected": 5.551115123125783e-17,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/2-n2-exact-null",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true
+    },
+    {
+      "id": "modal-1/2-n2-stored-zero",
+      "pass_": true,
+      "observed": 0.0,
+      "independently_calculated_or_expected": 0
+    },
+    {
+      "id": "modal-1/2-n3-integral",
+      "pass_": true,
+      "observed": -0.09006327434874468,
+      "independently_calculated_or_expected": -0.09006327434874208,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/2-n3-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-1/2-n4-integral",
+      "pass_": true,
+      "observed": 0.0,
+      "independently_calculated_or_expected": 0.0,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/2-n4-exact-null",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true
+    },
+    {
+      "id": "modal-1/2-n4-stored-zero",
+      "pass_": true,
+      "observed": 0.0,
+      "independently_calculated_or_expected": 0
+    },
+    {
+      "id": "modal-1/2-n5-integral",
+      "pass_": true,
+      "observed": 0.03242277876554808,
+      "independently_calculated_or_expected": 0.03242277876554077,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/2-n5-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-1/2-n6-integral",
+      "pass_": true,
+      "observed": 0.0,
+      "independently_calculated_or_expected": 1.3877787807814457e-17,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/2-n6-exact-null",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true
+    },
+    {
+      "id": "modal-1/2-n6-stored-zero",
+      "pass_": true,
+      "observed": 0.0,
+      "independently_calculated_or_expected": 0
+    },
+    {
+      "id": "modal-1/2-n7-integral",
+      "pass_": true,
+      "observed": -0.016542234064055146,
+      "independently_calculated_or_expected": -0.016542234064040838,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/2-n7-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-1/2-n8-integral",
+      "pass_": true,
+      "observed": 0.0,
+      "independently_calculated_or_expected": 0.0,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/2-n8-exact-null",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true
+    },
+    {
+      "id": "modal-1/2-n8-stored-zero",
+      "pass_": true,
+      "observed": 0.0,
+      "independently_calculated_or_expected": 0
+    },
+    {
+      "id": "modal-1/2-n9-integral",
+      "pass_": true,
+      "observed": 0.010007030483193855,
+      "independently_calculated_or_expected": 0.010007030483170181,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/2-n9-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-1/2-n10-integral",
+      "pass_": true,
+      "observed": 0.0,
+      "independently_calculated_or_expected": 1.3877787807814457e-17,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/2-n10-exact-null",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true
+    },
+    {
+      "id": "modal-1/2-n10-stored-zero",
+      "pass_": true,
+      "observed": 0.0,
+      "independently_calculated_or_expected": 0
+    },
+    {
+      "id": "modal-1/2-n11-integral",
+      "pass_": true,
+      "observed": -0.006698921232551258,
+      "independently_calculated_or_expected": -0.00669892123251592,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/2-n11-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-1/2-n12-integral",
+      "pass_": true,
+      "observed": 0.0,
+      "independently_calculated_or_expected": 0.0,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/2-n12-exact-null",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true
+    },
+    {
+      "id": "modal-1/2-n12-stored-zero",
+      "pass_": true,
+      "observed": 0.0,
+      "independently_calculated_or_expected": 0
+    },
+    {
+      "id": "modal-1/2-n13-integral",
+      "pass_": true,
+      "observed": 0.0047962690481580025,
+      "independently_calculated_or_expected": 0.004796269048108623,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/2-n13-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-1/2-n14-integral",
+      "pass_": true,
+      "observed": 0.0,
+      "independently_calculated_or_expected": 6.938893903907228e-18,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/2-n14-exact-null",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true
+    },
+    {
+      "id": "modal-1/2-n14-stored-zero",
+      "pass_": true,
+      "observed": 0.0,
+      "independently_calculated_or_expected": 0
+    },
+    {
+      "id": "modal-1/2-n15-integral",
+      "pass_": true,
+      "observed": -0.0036025309739497876,
+      "independently_calculated_or_expected": -0.0036025309738840525,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/2-n15-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-1/2-n16-integral",
+      "pass_": true,
+      "observed": 0.0,
+      "independently_calculated_or_expected": 6.938893903907228e-18,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/2-n16-exact-null",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true
+    },
+    {
+      "id": "modal-1/2-n16-stored-zero",
+      "pass_": true,
+      "observed": 0.0,
+      "independently_calculated_or_expected": 0
+    },
+    {
+      "id": "modal-1/2-n17-integral",
+      "pass_": true,
+      "observed": 0.002804738647538762,
+      "independently_calculated_or_expected": 0.0028047386474543117,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/2-n17-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-1/2-n18-integral",
+      "pass_": true,
+      "observed": 0.0,
+      "independently_calculated_or_expected": 1.3877787807814457e-17,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/2-n18-exact-null",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true
+    },
+    {
+      "id": "modal-1/2-n18-stored-zero",
+      "pass_": true,
+      "observed": 0.0,
+      "independently_calculated_or_expected": 0
+    },
+    {
+      "id": "modal-1/2-n19-integral",
+      "pass_": true,
+      "observed": -0.002245344789857901,
+      "independently_calculated_or_expected": -0.0022453447897524265,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/2-n19-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-1/2-n20-integral",
+      "pass_": true,
+      "observed": 0.0,
+      "independently_calculated_or_expected": 6.938893903907228e-18,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/2-n20-exact-null",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true
+    },
+    {
+      "id": "modal-1/2-n20-stored-zero",
+      "pass_": true,
+      "observed": 0.0,
+      "independently_calculated_or_expected": 0
+    },
+    {
+      "id": "modal-1/5-n1-integral",
+      "pass_": true,
+      "observed": 0.7444387186222938,
+      "independently_calculated_or_expected": 0.7444387186222938,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/5-n1-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-1/5-n2-integral",
+      "pass_": true,
+      "observed": 0.30113178731807266,
+      "independently_calculated_or_expected": 0.3011317873180716,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/5-n2-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-1/5-n3-integral",
+      "pass_": true,
+      "observed": 0.13383634991914342,
+      "independently_calculated_or_expected": 0.13383634991913404,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/5-n3-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-1/5-n4-integral",
+      "pass_": true,
+      "observed": 0.04652741991389337,
+      "independently_calculated_or_expected": 0.046527419913861834,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/5-n4-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-1/5-n5-integral",
+      "pass_": true,
+      "observed": 0.0,
+      "independently_calculated_or_expected": -6.242228955954943e-14,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/5-n5-exact-null",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true
+    },
+    {
+      "id": "modal-1/5-n5-stored-zero",
+      "pass_": true,
+      "observed": 0.0,
+      "independently_calculated_or_expected": 0
+    },
+    {
+      "id": "modal-1/5-n6-integral",
+      "pass_": true,
+      "observed": -0.020678853295063714,
+      "independently_calculated_or_expected": -0.020678853295138133,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/5-n6-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-1/5-n7-integral",
+      "pass_": true,
+      "observed": -0.024582186719842667,
+      "independently_calculated_or_expected": -0.02458218671986727,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/5-n7-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-1/5-n8-integral",
+      "pass_": true,
+      "observed": -0.018820736707379545,
+      "independently_calculated_or_expected": -0.018820736707263513,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/5-n8-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-1/5-n9-integral",
+      "pass_": true,
+      "observed": -0.009190601464472767,
+      "independently_calculated_or_expected": -0.009190601464149316,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/5-n9-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-1/5-n10-integral",
+      "pass_": true,
+      "observed": 0.0,
+      "independently_calculated_or_expected": 4.993644386885876e-13,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/5-n10-exact-null",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true
+    },
+    {
+      "id": "modal-1/5-n10-stored-zero",
+      "pass_": true,
+      "observed": 0.0,
+      "independently_calculated_or_expected": 0
+    },
+    {
+      "id": "modal-1/5-n11-integral",
+      "pass_": true,
+      "observed": 0.006152386104316476,
+      "independently_calculated_or_expected": 0.006152386104810961,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/5-n11-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-1/5-n12-integral",
+      "pass_": true,
+      "observed": 0.008364771869946462,
+      "independently_calculated_or_expected": 0.008364771870129862,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/5-n12-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-1/5-n13-integral",
+      "pass_": true,
+      "observed": 0.007127379581492842,
+      "independently_calculated_or_expected": 0.007127379581056142,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/5-n13-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-1/5-n14-integral",
+      "pass_": true,
+      "observed": 0.0037981567276647657,
+      "independently_calculated_or_expected": 0.0037981567264861946,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/5-n14-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-1/5-n15-integral",
+      "pass_": true,
+      "observed": 0.0,
+      "independently_calculated_or_expected": -1.6853948792139306e-12,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/5-n15-exact-null",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true
+    },
+    {
+      "id": "modal-1/5-n15-stored-zero",
+      "pass_": true,
+      "observed": 0.0,
+      "independently_calculated_or_expected": 0
+    },
+    {
+      "id": "modal-1/5-n16-integral",
+      "pass_": true,
+      "observed": -0.0029079637446183335,
+      "independently_calculated_or_expected": -0.002907963746181689,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/5-n16-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-1/5-n17-integral",
+      "pass_": true,
+      "observed": -0.004167914011322806,
+      "independently_calculated_or_expected": -0.0041679140119139525,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/5-n17-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-1/5-n18-integral",
+      "pass_": true,
+      "observed": -0.003717676386642873,
+      "independently_calculated_or_expected": -0.0037176763855556686,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/5-n18-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-1/5-n19-integral",
+      "pass_": true,
+      "observed": -0.0020621571152972143,
+      "independently_calculated_or_expected": -0.0020621571123971595,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/5-n19-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-1/5-n20-integral",
+      "pass_": true,
+      "observed": 0.0,
+      "independently_calculated_or_expected": 3.995095920750202e-12,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/5-n20-exact-null",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true
+    },
+    {
+      "id": "modal-1/5-n20-stored-zero",
+      "pass_": true,
+      "observed": 0.0,
+      "independently_calculated_or_expected": 0
+    },
+    {
+      "id": "modal-1/10-n1-integral",
+      "pass_": true,
+      "observed": 0.6957770585703846,
+      "independently_calculated_or_expected": 0.6957770585703852,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/10-n1-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-1/10-n2-integral",
+      "pass_": true,
+      "observed": 0.33086165272101953,
+      "independently_calculated_or_expected": 0.3308616527210227,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/10-n2-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-1/10-n3-integral",
+      "pass_": true,
+      "observed": 0.20239644310329924,
+      "independently_calculated_or_expected": 0.20239644310330573,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/10-n3-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-1/10-n4-integral",
+      "pass_": true,
+      "observed": 0.13383634991914342,
+      "independently_calculated_or_expected": 0.13383634991914634,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/10-n4-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-1/10-n5-integral",
+      "pass_": true,
+      "observed": 0.09006327434874467,
+      "independently_calculated_or_expected": 0.09006327434872337,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/10-n5-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-1/10-n6-integral",
+      "pass_": true,
+      "observed": 0.05948282218628597,
+      "independently_calculated_or_expected": 0.05948282218620314,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/10-n6-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-1/10-n7-integral",
+      "pass_": true,
+      "observed": 0.037174856896524354,
+      "independently_calculated_or_expected": 0.037174856896328635,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/10-n7-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-1/10-n8-integral",
+      "pass_": true,
+      "observed": 0.020678853295063724,
+      "independently_calculated_or_expected": 0.02067885329469906,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/10-n8-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-1/10-n9-integral",
+      "pass_": true,
+      "observed": 0.008589840229264008,
+      "independently_calculated_or_expected": 0.00858984022868596,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/10-n9-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-1/10-n10-integral",
+      "pass_": true,
+      "observed": 0.0,
+      "independently_calculated_or_expected": -8.029132914089132e-13,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/10-n10-exact-null",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true
+    },
+    {
+      "id": "modal-1/10-n10-stored-zero",
+      "pass_": true,
+      "observed": 0.0,
+      "independently_calculated_or_expected": 0
+    },
+    {
+      "id": "modal-1/10-n11-integral",
+      "pass_": true,
+      "observed": -0.0057502236245486294,
+      "independently_calculated_or_expected": -0.005750223625533089,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/10-n11-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-1/10-n12-integral",
+      "pass_": true,
+      "observed": -0.009190601464472762,
+      "independently_calculated_or_expected": -0.009190601465523043,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/10-n12-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-1/10-n13-integral",
+      "pass_": true,
+      "observed": -0.01077850880431772,
+      "independently_calculated_or_expected": -0.010778508805237941,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/10-n13-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-1/10-n14-integral",
+      "pass_": true,
+      "observed": -0.010925416319930076,
+      "independently_calculated_or_expected": -0.010925416320451832,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/10-n14-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-1/10-n15-integral",
+      "pass_": true,
+      "observed": -0.010007030483193855,
+      "independently_calculated_or_expected": -0.01000703048300185,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/10-n15-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-1/10-n16-integral",
+      "pass_": true,
+      "observed": -0.008364771869946466,
+      "independently_calculated_or_expected": -0.008364771868722412,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/10-n16-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-1/10-n17-integral",
+      "pass_": true,
+      "observed": -0.006303003418441841,
+      "independently_calculated_or_expected": -0.006303003415923637,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/10-n17-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-1/10-n18-integral",
+      "pass_": true,
+      "observed": -0.004084711761987896,
+      "independently_calculated_or_expected": -0.004084711758037016,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/10-n18-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-1/10-n19-integral",
+      "pass_": true,
+      "observed": -0.0019273602730481584,
+      "independently_calculated_or_expected": -0.0019273602677152557,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/10-n19-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-1/10-n20-integral",
+      "pass_": true,
+      "observed": 0.0,
+      "independently_calculated_or_expected": 6.423458986937192e-12,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-1/10-n20-exact-null",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true
+    },
+    {
+      "id": "modal-1/10-n20-stored-zero",
+      "pass_": true,
+      "observed": 0.0,
+      "independently_calculated_or_expected": 0
+    },
+    {
+      "id": "modal-2/5-n1-integral",
+      "pass_": true,
+      "observed": 0.8030180995148605,
+      "independently_calculated_or_expected": 0.8030180995148601,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-2/5-n1-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-2/5-n2-integral",
+      "pass_": true,
+      "observed": 0.12407311977038234,
+      "independently_calculated_or_expected": 0.12407311977038082,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-2/5-n2-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-2/5-n3-integral",
+      "pass_": true,
+      "observed": -0.05514360878683658,
+      "independently_calculated_or_expected": -0.05514360878683769,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-2/5-n3-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-2/5-n4-integral",
+      "pass_": true,
+      "observed": -0.050188631219678786,
+      "independently_calculated_or_expected": -0.05018863121967129,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-2/5-n4-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-2/5-n5-integral",
+      "pass_": true,
+      "observed": 0.0,
+      "independently_calculated_or_expected": 1.5959455978986625e-14,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-2/5-n5-exact-null",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true
+    },
+    {
+      "id": "modal-2/5-n5-stored-zero",
+      "pass_": true,
+      "observed": 0.0,
+      "independently_calculated_or_expected": 0
+    },
+    {
+      "id": "modal-2/5-n6-integral",
+      "pass_": true,
+      "observed": 0.022306058319857238,
+      "independently_calculated_or_expected": 0.022306058319854532,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-2/5-n6-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-2/5-n7-integral",
+      "pass_": true,
+      "observed": 0.010128417940439376,
+      "independently_calculated_or_expected": 0.010128417940394555,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-2/5-n7-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-2/5-n8-integral",
+      "pass_": true,
+      "observed": -0.00775456998564889,
+      "independently_calculated_or_expected": -0.00775456998568929,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-2/5-n8-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-2/5-n9-integral",
+      "pass_": true,
+      "observed": -0.00991380369771433,
+      "independently_calculated_or_expected": -0.009913803697660432,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-2/5-n9-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-2/5-n10-integral",
+      "pass_": true,
+      "observed": 0.0,
+      "independently_calculated_or_expected": 1.2725931419765857e-13,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-2/5-n10-exact-null",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true
+    },
+    {
+      "id": "modal-2/5-n10-stored-zero",
+      "pass_": true,
+      "observed": 0.0,
+      "independently_calculated_or_expected": 0
+    },
+    {
+      "id": "modal-2/5-n11-integral",
+      "pass_": true,
+      "observed": 0.006636513219131078,
+      "independently_calculated_or_expected": 0.006636513219145735,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-2/5-n11-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-2/5-n12-integral",
+      "pass_": true,
+      "observed": 0.0034464755491772896,
+      "independently_calculated_or_expected": 0.003446475548971692,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-2/5-n12-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-2/5-n13-integral",
+      "pass_": true,
+      "observed": -0.002936641888056398,
+      "independently_calculated_or_expected": -0.002936641888250116,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-2/5-n13-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-2/5-n14-integral",
+      "pass_": true,
+      "observed": -0.004097031119973779,
+      "independently_calculated_or_expected": -0.00409703111980486,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-2/5-n14-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-2/5-n15-integral",
+      "pass_": true,
+      "observed": 0.0,
+      "independently_calculated_or_expected": 4.295730438030887e-13,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-2/5-n15-exact-null",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true
+    },
+    {
+      "id": "modal-2/5-n15-stored-zero",
+      "pass_": true,
+      "observed": 0.0,
+      "independently_calculated_or_expected": 0
+    },
+    {
+      "id": "modal-2/5-n16-integral",
+      "pass_": true,
+      "observed": 0.003136789451229923,
+      "independently_calculated_or_expected": 0.0031367894513113313,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-2/5-n16-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-2/5-n17-integral",
+      "pass_": true,
+      "observed": 0.001717275014122932,
+      "independently_calculated_or_expected": 0.001717275013561434,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-2/5-n17-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-2/5-n18-integral",
+      "pass_": true,
+      "observed": -0.0015317669107454588,
+      "independently_calculated_or_expected": -0.0015317669112837155,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-2/5-n18-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-2/5-n19-integral",
+      "pass_": true,
+      "observed": -0.002224426868462218,
+      "independently_calculated_or_expected": -0.002224426868080092,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-2/5-n19-exact-null",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "modal-2/5-n20-integral",
+      "pass_": true,
+      "observed": 0.0,
+      "independently_calculated_or_expected": 1.0183798249130405e-12,
+      "detail": "Composite Simpson quadrature on each side of the triangular peak,4096 intervals per side; analytical rational null tested separately."
+    },
+    {
+      "id": "modal-2/5-n20-exact-null",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true
+    },
+    {
+      "id": "modal-2/5-n20-stored-zero",
+      "pass_": true,
+      "observed": 0.0,
+      "independently_calculated_or_expected": 0
+    },
+    {
+      "id": "midpoint_third_to_first",
+      "pass_": true,
+      "observed": -0.1111111111111111,
+      "independently_calculated_or_expected": -0.11111111111110793
+    },
+    {
+      "id": "p_one_fifth_second_to_first",
+      "pass_": true,
+      "observed": 0.40450849718747367,
+      "independently_calculated_or_expected": 0.4045084971874723
+    },
+    {
+      "id": "p_one_tenth_second_to_first",
+      "pass_": true,
+      "observed": 0.4755282581475768,
+      "independently_calculated_or_expected": 0.475528258147581
+    },
+    {
+      "id": "fixed-peak-assumption",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true
+    },
+    {
+      "id": "no-modal-audio-measurement",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "geometry-fret-coverage",
+      "pass_": true,
+      "observed": [
+        0,
+        7,
+        12,
+        24
+      ],
+      "independently_calculated_or_expected": [
+        0,
+        7,
+        12,
+        24
+      ]
+    },
+    {
+      "id": "geometry-open-scale",
+      "pass_": true,
+      "observed": 650,
+      "independently_calculated_or_expected": 650
+    },
+    {
+      "id": "geometry-fixed-hand-distance",
+      "pass_": true,
+      "observed": 65,
+      "independently_calculated_or_expected": 65
+    },
+    {
+      "id": "geometry-fret0-vibrating_length_mm",
+      "pass_": true,
+      "observed": 650.0,
+      "independently_calculated_or_expected": 650.0
+    },
+    {
+      "id": "geometry-fret0-bridge_distance_mm",
+      "pass_": true,
+      "observed": 65,
+      "independently_calculated_or_expected": 65
+    },
+    {
+      "id": "geometry-fret0-p",
+      "pass_": true,
+      "observed": 0.1,
+      "independently_calculated_or_expected": 0.1
+    },
+    {
+      "id": "geometry-fret0-frequency_ratio",
+      "pass_": true,
+      "observed": 1.0,
+      "independently_calculated_or_expected": 1.0
+    },
+    {
+      "id": "geometry-fret0-distance_for_fixed_p_one_tenth_mm",
+      "pass_": true,
+      "observed": 65.0,
+      "independently_calculated_or_expected": 65.0
+    },
+    {
+      "id": "geometry-fret7-vibrating_length_mm",
+      "pass_": true,
+      "observed": 433.82295260526115,
+      "independently_calculated_or_expected": 433.82295260526115
+    },
+    {
+      "id": "geometry-fret7-bridge_distance_mm",
+      "pass_": true,
+      "observed": 65,
+      "independently_calculated_or_expected": 65
+    },
+    {
+      "id": "geometry-fret7-p",
+      "pass_": true,
+      "observed": 0.14983070768766815,
+      "independently_calculated_or_expected": 0.14983070768766815
+    },
+    {
+      "id": "geometry-fret7-frequency_ratio",
+      "pass_": true,
+      "observed": 1.4983070768766815,
+      "independently_calculated_or_expected": 1.4983070768766815
+    },
+    {
+      "id": "geometry-fret7-distance_for_fixed_p_one_tenth_mm",
+      "pass_": true,
+      "observed": 43.382295260526114,
+      "independently_calculated_or_expected": 43.382295260526114
+    },
+    {
+      "id": "geometry-fret12-vibrating_length_mm",
+      "pass_": true,
+      "observed": 325.0,
+      "independently_calculated_or_expected": 325.0
+    },
+    {
+      "id": "geometry-fret12-bridge_distance_mm",
+      "pass_": true,
+      "observed": 65,
+      "independently_calculated_or_expected": 65
+    },
+    {
+      "id": "geometry-fret12-p",
+      "pass_": true,
+      "observed": 0.2,
+      "independently_calculated_or_expected": 0.2
+    },
+    {
+      "id": "geometry-fret12-frequency_ratio",
+      "pass_": true,
+      "observed": 2.0,
+      "independently_calculated_or_expected": 2.0
+    },
+    {
+      "id": "geometry-fret12-distance_for_fixed_p_one_tenth_mm",
+      "pass_": true,
+      "observed": 32.5,
+      "independently_calculated_or_expected": 32.5
+    },
+    {
+      "id": "geometry-fret24-vibrating_length_mm",
+      "pass_": true,
+      "observed": 162.5,
+      "independently_calculated_or_expected": 162.5
+    },
+    {
+      "id": "geometry-fret24-bridge_distance_mm",
+      "pass_": true,
+      "observed": 65,
+      "independently_calculated_or_expected": 65
+    },
+    {
+      "id": "geometry-fret24-p",
+      "pass_": true,
+      "observed": 0.4,
+      "independently_calculated_or_expected": 0.4
+    },
+    {
+      "id": "geometry-fret24-frequency_ratio",
+      "pass_": true,
+      "observed": 4.0,
+      "independently_calculated_or_expected": 4.0
+    },
+    {
+      "id": "geometry-fret24-distance_for_fixed_p_one_tenth_mm",
+      "pass_": true,
+      "observed": 16.25,
+      "independently_calculated_or_expected": 16.25
+    },
+    {
+      "id": "exact-fret0-L_mm",
+      "pass_": true,
+      "observed": "650",
+      "independently_calculated_or_expected": "650"
+    },
+    {
+      "id": "exact-fret0-p",
+      "pass_": true,
+      "observed": "1/10",
+      "independently_calculated_or_expected": "1/10"
+    },
+    {
+      "id": "exact-fret0-d_for_fixed_p_mm",
+      "pass_": true,
+      "observed": "65",
+      "independently_calculated_or_expected": "65"
+    },
+    {
+      "id": "exact-fret0-null-multiple",
+      "pass_": true,
+      "observed": 10,
+      "independently_calculated_or_expected": 10
+    },
+    {
+      "id": "exact-fret12-L_mm",
+      "pass_": true,
+      "observed": "325",
+      "independently_calculated_or_expected": "325"
+    },
+    {
+      "id": "exact-fret12-p",
+      "pass_": true,
+      "observed": "1/5",
+      "independently_calculated_or_expected": "1/5"
+    },
+    {
+      "id": "exact-fret12-d_for_fixed_p_mm",
+      "pass_": true,
+      "observed": "65/2",
+      "independently_calculated_or_expected": "65/2"
+    },
+    {
+      "id": "exact-fret12-null-multiple",
+      "pass_": true,
+      "observed": 5,
+      "independently_calculated_or_expected": 5
+    },
+    {
+      "id": "exact-fret24-L_mm",
+      "pass_": true,
+      "observed": "325/2",
+      "independently_calculated_or_expected": "325/2"
+    },
+    {
+      "id": "exact-fret24-p",
+      "pass_": true,
+      "observed": "2/5",
+      "independently_calculated_or_expected": "2/5"
+    },
+    {
+      "id": "exact-fret24-d_for_fixed_p_mm",
+      "pass_": true,
+      "observed": "65/4",
+      "independently_calculated_or_expected": "65/4"
+    },
+    {
+      "id": "exact-fret24-null-multiple",
+      "pass_": true,
+      "observed": 5,
+      "independently_calculated_or_expected": 5
+    },
+    {
+      "id": "source-velocity-coverage",
+      "pass_": true,
+      "observed": [
+        0,
+        0.1,
+        0.5,
+        1
+      ],
+      "independently_calculated_or_expected": [
+        0,
+        0.1,
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "velocity0-authored-length",
+      "pass_": true,
+      "observed": 100,
+      "independently_calculated_or_expected": 100
+    },
+    {
+      "id": "velocity0-pick_ratio",
+      "pass_": true,
+      "observed": 0.78,
+      "independently_calculated_or_expected": 0.78
+    },
+    {
+      "id": "velocity0-pick_offset",
+      "pass_": true,
+      "observed": 78,
+      "independently_calculated_or_expected": 78
+    },
+    {
+      "id": "velocity0-quantized_pick_pos",
+      "pass_": true,
+      "observed": 0.78,
+      "independently_calculated_or_expected": 0.78
+    },
+    {
+      "id": "velocity0.1-authored-length",
+      "pass_": true,
+      "observed": 100,
+      "independently_calculated_or_expected": 100
+    },
+    {
+      "id": "velocity0.1-pick_ratio",
+      "pass_": true,
+      "observed": 0.72,
+      "independently_calculated_or_expected": 0.72
+    },
+    {
+      "id": "velocity0.1-pick_offset",
+      "pass_": true,
+      "observed": 72,
+      "independently_calculated_or_expected": 72
+    },
+    {
+      "id": "velocity0.1-quantized_pick_pos",
+      "pass_": true,
+      "observed": 0.72,
+      "independently_calculated_or_expected": 0.72
+    },
+    {
+      "id": "velocity0.5-authored-length",
+      "pass_": true,
+      "observed": 100,
+      "independently_calculated_or_expected": 100
+    },
+    {
+      "id": "velocity0.5-pick_ratio",
+      "pass_": true,
+      "observed": 0.48,
+      "independently_calculated_or_expected": 0.48
+    },
+    {
+      "id": "velocity0.5-pick_offset",
+      "pass_": true,
+      "observed": 48,
+      "independently_calculated_or_expected": 48
+    },
+    {
+      "id": "velocity0.5-quantized_pick_pos",
+      "pass_": true,
+      "observed": 0.48,
+      "independently_calculated_or_expected": 0.48
+    },
+    {
+      "id": "velocity1-authored-length",
+      "pass_": true,
+      "observed": 100,
+      "independently_calculated_or_expected": 100
+    },
+    {
+      "id": "velocity1-pick_ratio",
+      "pass_": true,
+      "observed": 0.18,
+      "independently_calculated_or_expected": 0.18
+    },
+    {
+      "id": "velocity1-pick_offset",
+      "pass_": true,
+      "observed": 18,
+      "independently_calculated_or_expected": 18
+    },
+    {
+      "id": "velocity1-quantized_pick_pos",
+      "pass_": true,
+      "observed": 0.18,
+      "independently_calculated_or_expected": 0.18
+    },
+    {
+      "id": "source-window-i0-position",
+      "pass_": true,
+      "observed": 0.0,
+      "independently_calculated_or_expected": 0.0
+    },
+    {
+      "id": "source-window-i0-pick_shape",
+      "pass_": true,
+      "observed": 0,
+      "independently_calculated_or_expected": 0
+    },
+    {
+      "id": "source-window-i0-ideal_triangle_y_over_h",
+      "pass_": true,
+      "observed": 0.0,
+      "independently_calculated_or_expected": 0.0
+    },
+    {
+      "id": "source-window-i8-position",
+      "pass_": true,
+      "observed": 0.08,
+      "independently_calculated_or_expected": 0.08
+    },
+    {
+      "id": "source-window-i8-pick_shape",
+      "pass_": true,
+      "observed": 1.1102230246251565e-16,
+      "independently_calculated_or_expected": 1.1102230246251565e-16
+    },
+    {
+      "id": "source-window-i8-ideal_triangle_y_over_h",
+      "pass_": true,
+      "observed": 0.16666666666666669,
+      "independently_calculated_or_expected": 0.16666666666666669
+    },
+    {
+      "id": "source-window-i28-position",
+      "pass_": true,
+      "observed": 0.28,
+      "independently_calculated_or_expected": 0.28
+    },
+    {
+      "id": "source-window-i28-pick_shape",
+      "pass_": true,
+      "observed": 0.5000000000000001,
+      "independently_calculated_or_expected": 0.5000000000000001
+    },
+    {
+      "id": "source-window-i28-ideal_triangle_y_over_h",
+      "pass_": true,
+      "observed": 0.5833333333333334,
+      "independently_calculated_or_expected": 0.5833333333333334
+    },
+    {
+      "id": "source-window-i48-position",
+      "pass_": true,
+      "observed": 0.48,
+      "independently_calculated_or_expected": 0.48
+    },
+    {
+      "id": "source-window-i48-pick_shape",
+      "pass_": true,
+      "observed": 1,
+      "independently_calculated_or_expected": 1
+    },
+    {
+      "id": "source-window-i48-ideal_triangle_y_over_h",
+      "pass_": true,
+      "observed": 1.0,
+      "independently_calculated_or_expected": 1.0
+    },
+    {
+      "id": "source-window-i68-position",
+      "pass_": true,
+      "observed": 0.68,
+      "independently_calculated_or_expected": 0.68
+    },
+    {
+      "id": "source-window-i68-pick_shape",
+      "pass_": true,
+      "observed": 0.4999999999999998,
+      "independently_calculated_or_expected": 0.4999999999999998
+    },
+    {
+      "id": "source-window-i68-ideal_triangle_y_over_h",
+      "pass_": true,
+      "observed": 0.6153846153846153,
+      "independently_calculated_or_expected": 0.6153846153846153
+    },
+    {
+      "id": "source-window-i88-position",
+      "pass_": true,
+      "observed": 0.88,
+      "independently_calculated_or_expected": 0.88
+    },
+    {
+      "id": "source-window-i88-pick_shape",
+      "pass_": true,
+      "observed": 0,
+      "independently_calculated_or_expected": 0
+    },
+    {
+      "id": "source-window-i88-ideal_triangle_y_over_h",
+      "pass_": true,
+      "observed": 0.23076923076923075,
+      "independently_calculated_or_expected": 0.23076923076923075
+    },
+    {
+      "id": "source-window-i99-position",
+      "pass_": true,
+      "observed": 0.99,
+      "independently_calculated_or_expected": 0.99
+    },
+    {
+      "id": "source-window-i99-pick_shape",
+      "pass_": true,
+      "observed": 0,
+      "independently_calculated_or_expected": 0
+    },
+    {
+      "id": "source-window-i99-ideal_triangle_y_over_h",
+      "pass_": true,
+      "observed": 0.019230769230769246,
+      "independently_calculated_or_expected": 0.019230769230769246
+    },
+    {
+      "id": "velocity-zero-excitation",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true
+    },
+    {
+      "id": "physical-bridge-origin-unknown",
+      "pass_": true,
+      "observed": null,
+      "independently_calculated_or_expected": null
+    },
+    {
+      "id": "no-explicit-bridge-fret-input",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "no-proven-strict-antialias",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "attack-six-case-coverage",
+      "pass_": true,
+      "observed": [
+        [
+          82,
+          44100,
+          1
+        ],
+        [
+          82,
+          48000,
+          1
+        ],
+        [
+          82.4069,
+          44100,
+          1
+        ],
+        [
+          82.4069,
+          48000,
+          1
+        ],
+        [
+          330,
+          44100,
+          1
+        ],
+        [
+          330,
+          48000,
+          1
+        ]
+      ],
+      "independently_calculated_or_expected": [
+        [
+          82,
+          44100,
+          1
+        ],
+        [
+          82,
+          48000,
+          1
+        ],
+        [
+          82.4069,
+          44100,
+          1
+        ],
+        [
+          82.4069,
+          48000,
+          1
+        ],
+        [
+          330,
+          44100,
+          1
+        ],
+        [
+          330,
+          48000,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "profile0-base",
+      "pass_": true,
+      "observed": 0.986,
+      "independently_calculated_or_expected": 0.986
+    },
+    {
+      "id": "constructor-before-profile",
+      "pass_": true,
+      "observed": 0.988,
+      "independently_calculated_or_expected": 0.988
+    },
+    {
+      "id": "attack-case1-profile",
+      "pass_": true,
+      "observed": 0,
+      "independently_calculated_or_expected": 0
+    },
+    {
+      "id": "attack-case1-base_attack_decay",
+      "pass_": true,
+      "observed": 0.986,
+      "independently_calculated_or_expected": 0.986
+    },
+    {
+      "id": "attack-case1-f_norm",
+      "pass_": true,
+      "observed": 0,
+      "independently_calculated_or_expected": 0
+    },
+    {
+      "id": "attack-case1-effective_r",
+      "pass_": true,
+      "observed": 0.986,
+      "independently_calculated_or_expected": 0.986
+    },
+    {
+      "id": "attack-case1-A0",
+      "pass_": true,
+      "observed": 0.06,
+      "independently_calculated_or_expected": 0.06
+    },
+    {
+      "id": "attack-case1-tau_seconds",
+      "pass_": true,
+      "observed": 0.0016083309868956657,
+      "independently_calculated_or_expected": 0.0016083309868956657
+    },
+    {
+      "id": "attack-case1-threshold",
+      "pass_": true,
+      "observed": 0.001,
+      "independently_calculated_or_expected": 0.001
+    },
+    {
+      "id": "attack-case1-threshold_updates",
+      "pass_": true,
+      "observed": 291,
+      "independently_calculated_or_expected": 291
+    },
+    {
+      "id": "attack-case1-last_above_threshold",
+      "pass_": true,
+      "observed": 0.0010056725203252386,
+      "independently_calculated_or_expected": 0.0010056725203252386
+    },
+    {
+      "id": "attack-case1-first_at_or_below_threshold",
+      "pass_": true,
+      "observed": 0.0009915931050406854,
+      "independently_calculated_or_expected": 0.0009915931050406854
+    },
+    {
+      "id": "attack-case1-threshold_seconds",
+      "pass_": true,
+      "observed": 0.006598639455782313,
+      "independently_calculated_or_expected": 0.006598639455782313
+    },
+    {
+      "id": "attack-case1-retained_state",
+      "pass_": true,
+      "observed": 0.0009915931050406854,
+      "independently_calculated_or_expected": 0.0009915931050406854
+    },
+    {
+      "id": "attack-case1-retained_state_above_voice_deactivation_threshold",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true
+    },
+    {
+      "id": "attack-case1-bracket",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true
+    },
+    {
+      "id": "attack-case1-update-count-log-agreement",
+      "pass_": true,
+      "observed": 291,
+      "independently_calculated_or_expected": 291
+    },
+    {
+      "id": "attack-case1-sample-zero-count",
+      "pass_": true,
+      "observed": 292,
+      "independently_calculated_or_expected": 292,
+      "detail": "n multiplications reach index n; indices0 through n include n+1 modeled states, not n+1 updates."
+    },
+    {
+      "id": "attack-case1-stopped-state",
+      "pass_": true,
+      "observed": 0.000991593105040685,
+      "independently_calculated_or_expected": 0.0009915931050406854
+    },
+    {
+      "id": "attack-case2-profile",
+      "pass_": true,
+      "observed": 0,
+      "independently_calculated_or_expected": 0
+    },
+    {
+      "id": "attack-case2-base_attack_decay",
+      "pass_": true,
+      "observed": 0.986,
+      "independently_calculated_or_expected": 0.986
+    },
+    {
+      "id": "attack-case2-f_norm",
+      "pass_": true,
+      "observed": 0,
+      "independently_calculated_or_expected": 0
+    },
+    {
+      "id": "attack-case2-effective_r",
+      "pass_": true,
+      "observed": 0.986,
+      "independently_calculated_or_expected": 0.986
+    },
+    {
+      "id": "attack-case2-A0",
+      "pass_": true,
+      "observed": 0.06,
+      "independently_calculated_or_expected": 0.06
+    },
+    {
+      "id": "attack-case2-tau_seconds",
+      "pass_": true,
+      "observed": 0.0014776540942103929,
+      "independently_calculated_or_expected": 0.0014776540942103929
+    },
+    {
+      "id": "attack-case2-threshold",
+      "pass_": true,
+      "observed": 0.001,
+      "independently_calculated_or_expected": 0.001
+    },
+    {
+      "id": "attack-case2-threshold_updates",
+      "pass_": true,
+      "observed": 291,
+      "independently_calculated_or_expected": 291
+    },
+    {
+      "id": "attack-case2-last_above_threshold",
+      "pass_": true,
+      "observed": 0.0010056725203252386,
+      "independently_calculated_or_expected": 0.0010056725203252386
+    },
+    {
+      "id": "attack-case2-first_at_or_below_threshold",
+      "pass_": true,
+      "observed": 0.0009915931050406854,
+      "independently_calculated_or_expected": 0.0009915931050406854
+    },
+    {
+      "id": "attack-case2-threshold_seconds",
+      "pass_": true,
+      "observed": 0.0060625,
+      "independently_calculated_or_expected": 0.0060625
+    },
+    {
+      "id": "attack-case2-retained_state",
+      "pass_": true,
+      "observed": 0.0009915931050406854,
+      "independently_calculated_or_expected": 0.0009915931050406854
+    },
+    {
+      "id": "attack-case2-retained_state_above_voice_deactivation_threshold",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true
+    },
+    {
+      "id": "attack-case2-bracket",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true
+    },
+    {
+      "id": "attack-case2-update-count-log-agreement",
+      "pass_": true,
+      "observed": 291,
+      "independently_calculated_or_expected": 291
+    },
+    {
+      "id": "attack-case2-sample-zero-count",
+      "pass_": true,
+      "observed": 292,
+      "independently_calculated_or_expected": 292,
+      "detail": "n multiplications reach index n; indices0 through n include n+1 modeled states, not n+1 updates."
+    },
+    {
+      "id": "attack-case2-stopped-state",
+      "pass_": true,
+      "observed": 0.000991593105040685,
+      "independently_calculated_or_expected": 0.0009915931050406854
+    },
+    {
+      "id": "attack-case3-profile",
+      "pass_": true,
+      "observed": 0,
+      "independently_calculated_or_expected": 0
+    },
+    {
+      "id": "attack-case3-base_attack_decay",
+      "pass_": true,
+      "observed": 0.986,
+      "independently_calculated_or_expected": 0.986
+    },
+    {
+      "id": "attack-case3-f_norm",
+      "pass_": true,
+      "observed": 0.0016407258064515854,
+      "independently_calculated_or_expected": 0.0016407258064515854
+    },
+    {
+      "id": "attack-case3-effective_r",
+      "pass_": true,
+      "observed": 0.9859934370967742,
+      "independently_calculated_or_expected": 0.9859934370967742
+    },
+    {
+      "id": "attack-case3-A0",
+      "pass_": true,
+      "observed": 0.05995077822580645,
+      "independently_calculated_or_expected": 0.05995077822580645
+    },
+    {
+      "id": "attack-case3-tau_seconds",
+      "pass_": true,
+      "observed": 0.0016075720511706454,
+      "independently_calculated_or_expected": 0.0016075720511706454
+    },
+    {
+      "id": "attack-case3-threshold",
+      "pass_": true,
+      "observed": 0.001,
+      "independently_calculated_or_expected": 0.001
+    },
+    {
+      "id": "attack-case3-threshold_updates",
+      "pass_": true,
+      "observed": 291,
+      "independently_calculated_or_expected": 291
+    },
+    {
+      "id": "attack-case3-last_above_threshold",
+      "pass_": true,
+      "observed": 0.0010029097456186894,
+      "independently_calculated_or_expected": 0.0010029097456186894
+    },
+    {
+      "id": "attack-case3-first_at_or_below_threshold",
+      "pass_": true,
+      "observed": 0.0009888624271804233,
+      "independently_calculated_or_expected": 0.0009888624271804233
+    },
+    {
+      "id": "attack-case3-threshold_seconds",
+      "pass_": true,
+      "observed": 0.006598639455782313,
+      "independently_calculated_or_expected": 0.006598639455782313
+    },
+    {
+      "id": "attack-case3-retained_state",
+      "pass_": true,
+      "observed": 0.0009888624271804233,
+      "independently_calculated_or_expected": 0.0009888624271804233
+    },
+    {
+      "id": "attack-case3-retained_state_above_voice_deactivation_threshold",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true
+    },
+    {
+      "id": "attack-case3-bracket",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true
+    },
+    {
+      "id": "attack-case3-update-count-log-agreement",
+      "pass_": true,
+      "observed": 291,
+      "independently_calculated_or_expected": 291
+    },
+    {
+      "id": "attack-case3-sample-zero-count",
+      "pass_": true,
+      "observed": 292,
+      "independently_calculated_or_expected": 292,
+      "detail": "n multiplications reach index n; indices0 through n include n+1 modeled states, not n+1 updates."
+    },
+    {
+      "id": "attack-case3-stopped-state",
+      "pass_": true,
+      "observed": 0.0009888624271804237,
+      "independently_calculated_or_expected": 0.0009888624271804233
+    },
+    {
+      "id": "attack-case4-profile",
+      "pass_": true,
+      "observed": 0,
+      "independently_calculated_or_expected": 0
+    },
+    {
+      "id": "attack-case4-base_attack_decay",
+      "pass_": true,
+      "observed": 0.986,
+      "independently_calculated_or_expected": 0.986
+    },
+    {
+      "id": "attack-case4-f_norm",
+      "pass_": true,
+      "observed": 0.0016407258064515854,
+      "independently_calculated_or_expected": 0.0016407258064515854
+    },
+    {
+      "id": "attack-case4-effective_r",
+      "pass_": true,
+      "observed": 0.9859934370967742,
+      "independently_calculated_or_expected": 0.9859934370967742
+    },
+    {
+      "id": "attack-case4-A0",
+      "pass_": true,
+      "observed": 0.05995077822580645,
+      "independently_calculated_or_expected": 0.05995077822580645
+    },
+    {
+      "id": "attack-case4-tau_seconds",
+      "pass_": true,
+      "observed": 0.0014769568220130303,
+      "independently_calculated_or_expected": 0.0014769568220130303
+    },
+    {
+      "id": "attack-case4-threshold",
+      "pass_": true,
+      "observed": 0.001,
+      "independently_calculated_or_expected": 0.001
+    },
+    {
+      "id": "attack-case4-threshold_updates",
+      "pass_": true,
+      "observed": 291,
+      "independently_calculated_or_expected": 291
+    },
+    {
+      "id": "attack-case4-last_above_threshold",
+      "pass_": true,
+      "observed": 0.0010029097456186894,
+      "independently_calculated_or_expected": 0.0010029097456186894
+    },
+    {
+      "id": "attack-case4-first_at_or_below_threshold",
+      "pass_": true,
+      "observed": 0.0009888624271804233,
+      "independently_calculated_or_expected": 0.0009888624271804233
+    },
+    {
+      "id": "attack-case4-threshold_seconds",
+      "pass_": true,
+      "observed": 0.0060625,
+      "independently_calculated_or_expected": 0.0060625
+    },
+    {
+      "id": "attack-case4-retained_state",
+      "pass_": true,
+      "observed": 0.0009888624271804233,
+      "independently_calculated_or_expected": 0.0009888624271804233
+    },
+    {
+      "id": "attack-case4-retained_state_above_voice_deactivation_threshold",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true
+    },
+    {
+      "id": "attack-case4-bracket",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true
+    },
+    {
+      "id": "attack-case4-update-count-log-agreement",
+      "pass_": true,
+      "observed": 291,
+      "independently_calculated_or_expected": 291
+    },
+    {
+      "id": "attack-case4-sample-zero-count",
+      "pass_": true,
+      "observed": 292,
+      "independently_calculated_or_expected": 292,
+      "detail": "n multiplications reach index n; indices0 through n include n+1 modeled states, not n+1 updates."
+    },
+    {
+      "id": "attack-case4-stopped-state",
+      "pass_": true,
+      "observed": 0.0009888624271804237,
+      "independently_calculated_or_expected": 0.0009888624271804233
+    },
+    {
+      "id": "attack-case5-profile",
+      "pass_": true,
+      "observed": 0,
+      "independently_calculated_or_expected": 0
+    },
+    {
+      "id": "attack-case5-base_attack_decay",
+      "pass_": true,
+      "observed": 0.986,
+      "independently_calculated_or_expected": 0.986
+    },
+    {
+      "id": "attack-case5-f_norm",
+      "pass_": true,
+      "observed": 1,
+      "independently_calculated_or_expected": 1
+    },
+    {
+      "id": "attack-case5-effective_r",
+      "pass_": true,
+      "observed": 0.982,
+      "independently_calculated_or_expected": 0.982
+    },
+    {
+      "id": "attack-case5-A0",
+      "pass_": true,
+      "observed": 0.03,
+      "independently_calculated_or_expected": 0.03
+    },
+    {
+      "id": "attack-case5-tau_seconds",
+      "pass_": true,
+      "observed": 0.0012483909727814024,
+      "independently_calculated_or_expected": 0.0012483909727814024
+    },
+    {
+      "id": "attack-case5-threshold",
+      "pass_": true,
+      "observed": 0.001,
+      "independently_calculated_or_expected": 0.001
+    },
+    {
+      "id": "attack-case5-threshold_updates",
+      "pass_": true,
+      "observed": 188,
+      "independently_calculated_or_expected": 188
+    },
+    {
+      "id": "attack-case5-last_above_threshold",
+      "pass_": true,
+      "observed": 0.0010045451723910306,
+      "independently_calculated_or_expected": 0.0010045451723910306
+    },
+    {
+      "id": "attack-case5-first_at_or_below_threshold",
+      "pass_": true,
+      "observed": 0.0009864633592879919,
+      "independently_calculated_or_expected": 0.0009864633592879919
+    },
+    {
+      "id": "attack-case5-threshold_seconds",
+      "pass_": true,
+      "observed": 0.004263038548752834,
+      "independently_calculated_or_expected": 0.004263038548752834
+    },
+    {
+      "id": "attack-case5-retained_state",
+      "pass_": true,
+      "observed": 0.0009864633592879919,
+      "independently_calculated_or_expected": 0.0009864633592879919
+    },
+    {
+      "id": "attack-case5-retained_state_above_voice_deactivation_threshold",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true
+    },
+    {
+      "id": "attack-case5-bracket",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true
+    },
+    {
+      "id": "attack-case5-update-count-log-agreement",
+      "pass_": true,
+      "observed": 188,
+      "independently_calculated_or_expected": 188
+    },
+    {
+      "id": "attack-case5-sample-zero-count",
+      "pass_": true,
+      "observed": 189,
+      "independently_calculated_or_expected": 189,
+      "detail": "n multiplications reach index n; indices0 through n include n+1 modeled states, not n+1 updates."
+    },
+    {
+      "id": "attack-case5-stopped-state",
+      "pass_": true,
+      "observed": 0.0009864633592879919,
+      "independently_calculated_or_expected": 0.0009864633592879919
+    },
+    {
+      "id": "attack-case6-profile",
+      "pass_": true,
+      "observed": 0,
+      "independently_calculated_or_expected": 0
+    },
+    {
+      "id": "attack-case6-base_attack_decay",
+      "pass_": true,
+      "observed": 0.986,
+      "independently_calculated_or_expected": 0.986
+    },
+    {
+      "id": "attack-case6-f_norm",
+      "pass_": true,
+      "observed": 1,
+      "independently_calculated_or_expected": 1
+    },
+    {
+      "id": "attack-case6-effective_r",
+      "pass_": true,
+      "observed": 0.982,
+      "independently_calculated_or_expected": 0.982
+    },
+    {
+      "id": "attack-case6-A0",
+      "pass_": true,
+      "observed": 0.03,
+      "independently_calculated_or_expected": 0.03
+    },
+    {
+      "id": "attack-case6-tau_seconds",
+      "pass_": true,
+      "observed": 0.0011469592062429135,
+      "independently_calculated_or_expected": 0.0011469592062429135
+    },
+    {
+      "id": "attack-case6-threshold",
+      "pass_": true,
+      "observed": 0.001,
+      "independently_calculated_or_expected": 0.001
+    },
+    {
+      "id": "attack-case6-threshold_updates",
+      "pass_": true,
+      "observed": 188,
+      "independently_calculated_or_expected": 188
+    },
+    {
+      "id": "attack-case6-last_above_threshold",
+      "pass_": true,
+      "observed": 0.0010045451723910306,
+      "independently_calculated_or_expected": 0.0010045451723910306
+    },
+    {
+      "id": "attack-case6-first_at_or_below_threshold",
+      "pass_": true,
+      "observed": 0.0009864633592879919,
+      "independently_calculated_or_expected": 0.0009864633592879919
+    },
+    {
+      "id": "attack-case6-threshold_seconds",
+      "pass_": true,
+      "observed": 0.003916666666666666,
+      "independently_calculated_or_expected": 0.003916666666666666
+    },
+    {
+      "id": "attack-case6-retained_state",
+      "pass_": true,
+      "observed": 0.0009864633592879919,
+      "independently_calculated_or_expected": 0.0009864633592879919
+    },
+    {
+      "id": "attack-case6-retained_state_above_voice_deactivation_threshold",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true
+    },
+    {
+      "id": "attack-case6-bracket",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true
+    },
+    {
+      "id": "attack-case6-update-count-log-agreement",
+      "pass_": true,
+      "observed": 188,
+      "independently_calculated_or_expected": 188
+    },
+    {
+      "id": "attack-case6-sample-zero-count",
+      "pass_": true,
+      "observed": 189,
+      "independently_calculated_or_expected": 189,
+      "detail": "n multiplications reach index n; indices0 through n include n+1 modeled states, not n+1 updates."
+    },
+    {
+      "id": "attack-case6-stopped-state",
+      "pass_": true,
+      "observed": 0.0009864633592879919,
+      "independently_calculated_or_expected": 0.0009864633592879919
+    },
+    {
+      "id": "rate-translation-coefficient",
+      "pass_": true,
+      "observed": 0.9871301472688642,
+      "independently_calculated_or_expected": 0.9871301472688642
+    },
+    {
+      "id": "rate-translation-old-tau",
+      "pass_": true,
+      "observed": 0.0016083309868956657,
+      "independently_calculated_or_expected": 0.0016083309868956657
+    },
+    {
+      "id": "rate-translation-new-tau",
+      "pass_": true,
+      "observed": 0.0016083309868956607,
+      "independently_calculated_or_expected": 0.0016083309868956607
+    },
+    {
+      "id": "rate-translation-preserves-tau",
+      "pass_": true,
+      "observed": 0.0016083309868956657,
+      "independently_calculated_or_expected": 0.0016083309868956607
+    },
+    {
+      "id": "positive-state-not-runtime-reproduced",
+      "pass_": true,
+      "observed": false,
+      "independently_calculated_or_expected": false
+    },
+    {
+      "id": "no-production-fix",
+      "pass_": true,
+      "observed": null,
+      "independently_calculated_or_expected": null
+    },
+    {
+      "id": "source-hash-Rust/guitar-web-wasm-demo/rust-engine/src/lib.rs",
+      "pass_": true,
+      "observed": "2d4155cbfe26c4074ea701d0abb7cfd727fa4648d4d5109347fa442656e1f943",
+      "independently_calculated_or_expected": "2d4155cbfe26c4074ea701d0abb7cfd727fa4648d4d5109347fa442656e1f943"
+    },
+    {
+      "id": "source-hash-Rust/guitar-web-wasm-demo/src/audio/audioEngine.js",
+      "pass_": true,
+      "observed": "d8b72ae1b4a1d347733f7788500b9d6117130aae256301b15099850fbbd98d7a",
+      "independently_calculated_or_expected": "d8b72ae1b4a1d347733f7788500b9d6117130aae256301b15099850fbbd98d7a"
+    },
+    {
+      "id": "source-hash-Rust/guitar-web-wasm-demo/src/audio/guitar-worklet.js",
+      "pass_": true,
+      "observed": "f76c722f16991d17f4b6202a30707af943fdc6c218bb1c960c43c85598da37f0",
+      "independently_calculated_or_expected": "f76c722f16991d17f4b6202a30707af943fdc6c218bb1c960c43c85598da37f0"
+    },
+    {
+      "id": "source-constructor-default",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true,
+      "detail": "Initializer value is overwritten before constructor returns."
+    },
+    {
+      "id": "source-constructor-calls-profile",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true,
+      "detail": "Profile0 is applied during construction."
+    },
+    {
+      "id": "source-profile0-overwrite",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true,
+      "detail": "Actual profile0 coefficient used by fixed arithmetic; prediction-refuted observation preserved."
+    },
+    {
+      "id": "source-velocity-offset",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true,
+      "detail": "Expression depends on velocity, not a physical bridge distance/fret input."
+    },
+    {
+      "id": "source-offset-quantization",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true,
+      "detail": "Source quantizes buffer offset; model is real arithmetic, not f32 execution."
+    },
+    {
+      "id": "source-recursive-smoother",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true,
+      "detail": "Together with prev=filtered this is a first-order recursive low-pass, not a two-tap FIR or strict bandlimit."
+    },
+    {
+      "id": "source-recursive-feedback",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true,
+      "detail": "Prior filtered output is fed back to the noise smoother."
+    },
+    {
+      "id": "source-window",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true,
+      "detail": "Compact tent window differs from full-end fixed triangular displacement."
+    },
+    {
+      "id": "source-noise-window-product",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true,
+      "detail": "Noise times velocity times window; no ideal displacement modal analysis."
+    },
+    {
+      "id": "source-envelope-initial",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true,
+      "detail": "A0 uses velocity times the frequency-dependent scale."
+    },
+    {
+      "id": "source-envelope-r",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true,
+      "detail": "Effective per-sample r is frequency-adjusted and clamped."
+    },
+    {
+      "id": "source-envelope-stopping",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true,
+      "detail": "Multiplication/injection branch stops at or below threshold."
+    },
+    {
+      "id": "source-envelope-multiply",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true,
+      "detail": "One multiplication per admitted active-voice sample while above threshold."
+    },
+    {
+      "id": "source-deactivation",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true,
+      "detail": "Tested positive retained attack state remains too high for the attack conjunct through this path alone; source-derived concern."
+    },
+    {
+      "id": "source-bridge-host-rate",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true,
+      "detail": "Host actual sample rate is passed to worklet initialization; no browser run."
+    },
+    {
+      "id": "source-worklet-rate",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true,
+      "detail": "Worklet passes selected rate to engine init; source observation only."
+    },
+    {
+      "id": "source-worklet-attack-setter",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true,
+      "detail": "Attack setter is forwarded; rate coefficient proposal is not an implemented engine fix."
+    },
+    {
+      "id": "profile-refutation-retained",
+      "pass_": true,
+      "observed": "prediction-refuted",
+      "independently_calculated_or_expected": "prediction-refuted"
+    },
+    {
+      "id": "recursive-noise-wording-corrected",
+      "pass_": true,
+      "observed": true,
+      "independently_calculated_or_expected": true
+    },
+    {
+      "id": "pending-human",
+      "pass_": true,
+      "observed": null,
+      "independently_calculated_or_expected": null
+    },
+    {
+      "id": "primary-pdf-sha256",
+      "pass_": true,
+      "observed": "3d3feddaaef8069f62a5dce360745880382fb8e770cfa1a0ff04a41733ce1d15",
+      "independently_calculated_or_expected": "3d3feddaaef8069f62a5dce360745880382fb8e770cfa1a0ff04a41733ce1d15"
+    },
+    {
+      "id": "primary-pdf-byte-count",
+      "pass_": true,
+      "observed": 748688,
+      "independently_calculated_or_expected": 748688
+    }
+  ],
+  "input_bindings": [
+    {
+      "path": "code/streeling/evidence/pluck-coordinates-2026-10-22/production-plan.md",
+      "sha256": "781752bcc7b2b97f064bb35e4a7627f5e7b272ea0ce42d0ee28180435292aec0"
+    },
+    {
+      "path": "code/streeling/evidence/pluck-coordinates-2026-10-22/primary-readback.json",
+      "sha256": "7f84cb1f4ce70fac8b220c2829bbf8bc5671f7e7f712194509d063c0af50fc6c"
+    },
+    {
+      "path": "code/streeling/evidence/pluck-coordinates-2026-10-22/primary-reading.json",
+      "sha256": "74bf882ce6f739ba21b58506f4e3352b7c69eb1ab9792750297456f5d473671a"
+    },
+    {
+      "path": "code/streeling/evidence/pluck-coordinates-2026-10-22/ideal-pluck-modes.json",
+      "sha256": "bddd74cbaad03be1d820f123d78ab5ab0c4a2feff6140eb7304d230ef9c653d2"
+    },
+    {
+      "path": "code/streeling/evidence/pluck-coordinates-2026-10-22/fret-geometry.json",
+      "sha256": "2459a7be396b5bb44d5280bae2dbe37649cbe1b29bdc5d562c68d984ca36d696"
+    },
+    {
+      "path": "code/streeling/evidence/pluck-coordinates-2026-10-22/source-excitation-model.json",
+      "sha256": "756d2bf85d25df985b26d018d2eb36ae6bc0dbde07838fee8921aae2d91361d8"
+    },
+    {
+      "path": "code/streeling/evidence/pluck-coordinates-2026-10-22/attack-clock.json",
+      "sha256": "e2cb9d4ee0fbf0cc72d15c1287a84131d6fd0a765490815453e889fe4ca2d145"
+    },
+    {
+      "path": "code/streeling/evidence/pluck-coordinates-2026-10-22/source-observations.json",
+      "sha256": "78cded86908fd52b124a23085959b8678639e7d13150eeb91a9926653f81c764"
+    }
+  ],
+  "immutable_source_provenance": {
+    "repository": "GuitarAlchemist/ga",
+    "commit": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+    "anonymous_fresh_retrieval": true,
+    "files": [
+      {
+        "path": "Rust/guitar-web-wasm-demo/rust-engine/src/lib.rs",
+        "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Rust/guitar-web-wasm-demo/rust-engine/src/lib.rs",
+        "sha256": "2d4155cbfe26c4074ea701d0abb7cfd727fa4648d4d5109347fa442656e1f943",
+        "expected_sha256": "2d4155cbfe26c4074ea701d0abb7cfd727fa4648d4d5109347fa442656e1f943",
+        "temporary_path": "C:\\tmp\\pluck-coordinates-independent-audit-20261022\\lib.rs"
+      },
+      {
+        "path": "Rust/guitar-web-wasm-demo/src/audio/audioEngine.js",
+        "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Rust/guitar-web-wasm-demo/src/audio/audioEngine.js",
+        "sha256": "d8b72ae1b4a1d347733f7788500b9d6117130aae256301b15099850fbbd98d7a",
+        "expected_sha256": "d8b72ae1b4a1d347733f7788500b9d6117130aae256301b15099850fbbd98d7a",
+        "temporary_path": "C:\\tmp\\pluck-coordinates-independent-audit-20261022\\audioEngine.js"
+      },
+      {
+        "path": "Rust/guitar-web-wasm-demo/src/audio/guitar-worklet.js",
+        "url": "https://raw.githubusercontent.com/GuitarAlchemist/ga/76efbffd5af82b46c3146957a6bd4504008eeb89/Rust/guitar-web-wasm-demo/src/audio/guitar-worklet.js",
+        "sha256": "f76c722f16991d17f4b6202a30707af943fdc6c218bb1c960c43c85598da37f0",
+        "expected_sha256": "f76c722f16991d17f4b6202a30707af943fdc6c218bb1c960c43c85598da37f0",
+        "temporary_path": "C:\\tmp\\pluck-coordinates-independent-audit-20261022\\guitar-worklet.js"
+      }
+    ],
+    "read_scope": "Pinned Rust constructor/profile, excite and render methods plus public setters; complete JS bridge and worklet. No compiled execution."
+  },
+  "source_line_evidence": [
+    {
+      "id": "source-constructor-default",
+      "path": "Rust/guitar-web-wasm-demo/rust-engine/src/lib.rs",
+      "line": 193,
+      "snippet": "            attack_decay: 0.988,",
+      "meaning": "Initializer value is overwritten before constructor returns."
+    },
+    {
+      "id": "source-constructor-calls-profile",
+      "path": "Rust/guitar-web-wasm-demo/rust-engine/src/lib.rs",
+      "line": 202,
+      "snippet": "        engine.set_guitar_profile(0);",
+      "meaning": "Profile0 is applied during construction."
+    },
+    {
+      "id": "source-profile0-overwrite",
+      "path": "Rust/guitar-web-wasm-demo/rust-engine/src/lib.rs",
+      "line": 225,
+      "snippet": "                self.attack_decay = 0.986;",
+      "meaning": "Actual profile0 coefficient used by fixed arithmetic; prediction-refuted observation preserved."
+    },
+    {
+      "id": "source-velocity-offset",
+      "path": "Rust/guitar-web-wasm-demo/rust-engine/src/lib.rs",
+      "line": 355,
+      "snippet": "        let mut pick_ratio = (0.18 + 0.60 * (1.0 - vel)).clamp(0.1, 0.85);",
+      "meaning": "Expression depends on velocity, not a physical bridge distance/fret input."
+    },
+    {
+      "id": "source-offset-quantization",
+      "path": "Rust/guitar-web-wasm-demo/rust-engine/src/lib.rs",
+      "line": 357,
+      "snippet": "        let mut pick_offset = ((length as f32) * pick_ratio).round() as usize;",
+      "meaning": "Source quantizes buffer offset; model is real arithmetic, not f32 execution."
+    },
+    {
+      "id": "source-recursive-smoother",
+      "path": "Rust/guitar-web-wasm-demo/rust-engine/src/lib.rs",
+      "line": 369,
+      "snippet": "            let filtered = 0.5 * n + 0.5 * prev;",
+      "meaning": "Together with prev=filtered this is a first-order recursive low-pass, not a two-tap FIR or strict bandlimit."
+    },
+    {
+      "id": "source-recursive-feedback",
+      "path": "Rust/guitar-web-wasm-demo/rust-engine/src/lib.rs",
+      "line": 370,
+      "snippet": "            prev = filtered;",
+      "meaning": "Prior filtered output is fed back to the noise smoother."
+    },
+    {
+      "id": "source-window",
+      "path": "Rust/guitar-web-wasm-demo/rust-engine/src/lib.rs",
+      "line": 375,
+      "snippet": "            let pick_shape = (1.0 - dist * 2.5).clamp(0.0, 1.0);",
+      "meaning": "Compact tent window differs from full-end fixed triangular displacement."
+    },
+    {
+      "id": "source-noise-window-product",
+      "path": "Rust/guitar-web-wasm-demo/rust-engine/src/lib.rs",
+      "line": 377,
+      "snippet": "            *s = filtered * vel * pick_shape;",
+      "meaning": "Noise times velocity times window; no ideal displacement modal analysis."
+    },
+    {
+      "id": "source-envelope-initial",
+      "path": "Rust/guitar-web-wasm-demo/rust-engine/src/lib.rs",
+      "line": 391,
+      "snippet": "        let attack_scale = 0.03 + 0.03 * (1.0 - f_norm);",
+      "meaning": "A0 uses velocity times the frequency-dependent scale."
+    },
+    {
+      "id": "source-envelope-r",
+      "path": "Rust/guitar-web-wasm-demo/rust-engine/src/lib.rs",
+      "line": 438,
+      "snippet": "                    (base_attack_decay - 0.004 * f_norm).clamp(0.97, 0.993);",
+      "meaning": "Effective per-sample r is frequency-adjusted and clamped."
+    },
+    {
+      "id": "source-envelope-stopping",
+      "path": "Rust/guitar-web-wasm-demo/rust-engine/src/lib.rs",
+      "line": 467,
+      "snippet": "                if voice.attack_level > 1.0e-3 {",
+      "meaning": "Multiplication/injection branch stops at or below threshold."
+    },
+    {
+      "id": "source-envelope-multiply",
+      "path": "Rust/guitar-web-wasm-demo/rust-engine/src/lib.rs",
+      "line": 473,
+      "snippet": "                    voice.attack_level *= attack_decay;",
+      "meaning": "One multiplication per admitted active-voice sample while above threshold."
+    },
+    {
+      "id": "source-deactivation",
+      "path": "Rust/guitar-web-wasm-demo/rust-engine/src/lib.rs",
+      "line": 476,
+      "snippet": "                if voice.level < 5.0e-6 && voice.attack_level < 5.0e-5 {",
+      "meaning": "Tested positive retained attack state remains too high for the attack conjunct through this path alone; source-derived concern."
+    },
+    {
+      "id": "source-bridge-host-rate",
+      "path": "Rust/guitar-web-wasm-demo/src/audio/audioEngine.js",
+      "line": 33,
+      "snippet": "    sampleRate: audioContext.sampleRate,",
+      "meaning": "Host actual sample rate is passed to worklet initialization; no browser run."
+    },
+    {
+      "id": "source-worklet-rate",
+      "path": "Rust/guitar-web-wasm-demo/src/audio/guitar-worklet.js",
+      "line": 19,
+      "snippet": "          this.enginePtr = this.exports.engine_init(srToUse);",
+      "meaning": "Worklet passes selected rate to engine init; source observation only."
+    },
+    {
+      "id": "source-worklet-attack-setter",
+      "path": "Rust/guitar-web-wasm-demo/src/audio/guitar-worklet.js",
+      "line": 45,
+      "snippet": "        this.exports.engine_set_attack_decay(this.enginePtr, msg.attackDecay);",
+      "meaning": "Attack setter is forwarded; rate coefficient proposal is not an implemented engine fix."
+    }
+  ],
+  "independent_integration": {
+    "method": "2*integral_0^p (u/p)sin(n*pi*u)du + 2*integral_p^1 ((1-u)/(1-p))sin(n*pi*u)du; composite Simpson independently on both intervals",
+    "intervals_per_piece": 4096,
+    "rows": 80,
+    "absolute_comparison_tolerance": 2e-10,
+    "maximum_absolute_error": 6.423458986937192e-12,
+    "exact_null_test": "n*numerator(p) divisible by denominator(p), using rational arithmetic"
+  },
+  "primary_reference_readback": [
+    {
+      "url": "https://dsprelated.com/freebooks/pasp/Ideal_Plucked_String.html",
+      "actual_read": "Direct primary page body: displacement plus zero initial velocity; spatial/time sharp-corner bandlimit requirement."
+    },
+    {
+      "url": "https://www.dsprelated.com/freebooks/filters/Time_Constant_One_Pole.html",
+      "actual_read": "Direct primary page body: exact R=exp(-T/tau) relation, distinct from approximate tau=T/(1-R)."
+    },
+    {
+      "url": "https://kirkmcd.princeton.edu/examples/Ph205/ph205l21.pdf#page=5",
+      "sha256": "3d3feddaaef8069f62a5dce360745880382fb8e770cfa1a0ff04a41733ce1d15",
+      "actual_read": "Independently rendered local PDF page5 (printed228) using installed pypdfium2, then visually read with view_image. Fixed ends, triangle, Fourier integral and coefficient, zero initial velocity, modal nodes, midpoint third-harmonic1/9 magnitude confirmed. Lecture calls displacement coefficient A_n; course explicitly names B_n.",
+      "rendered_page": "C:\\tmp\\pluck-coordinates-independent-audit-20261022\\princeton-page5.png"
+    }
+  ],
+  "checked_boundaries": [
+    "All80 coefficients independently integrated; exact rational null families checked analytically. Signed displacement modal ratios do not establish acoustic amplitude, bridge force, timbre judgment or listener response.",
+    "Geometry is ideal equal-tempered vibrating length, not measured compensated/action-dependent string length or observed picking motion. Buffer coordinates have no documented physical bridge-origin mapping.",
+    "Source compact tent times smoothed random noise is not ideal full-end triangular displacement at rest. Recursive noise smoothing has no demonstrated strict anti-alias bandlimit.",
+    "Threshold count means first n with A0*r^n<=1e-3; sample index0 is a modeled state and does not add an update. Source stops updating thereafter, so the infinite exponential extension does not describe continued stored-state decay.",
+    "Profile0=0.986 after constructor override. Frequency clamps, velocity scaling, r clamps and sample-rate differences are included only in isolated real arithmetic. No Rust f32/noise/body/reverb/clipping/voice scheduling output reproduced.",
+    "Rate translation preserves isolated effective-r tau; no whole-engine setter-independent fix or production change delivered."
+  ],
+  "unexecuted": [
+    "Rust/WASM/nativeC# compilation or execution",
+    "synth, browser, worklet, host, audio player or ComfyUI run",
+    "audio render/recording, physical guitar performance or musician/learner trial",
+    "runtime reproduction of retained-state concern",
+    "production change or coefficient-controller delivery"
+  ],
+  "pending_human_review": null,
+  "pending_runtime_reproduction": null,
+  "temporary_calculation_script_sha256": "22f67305fa98ee10a7b150d4c9848d30faa611a1d445f1ff47bee458f43df1a6"
+}

@@ -16,3 +16,4 @@ sidebar:
 - [GTR-003 · Examiner une affirmation sur la jouabilité d'un voicing](gtr-003-audit-voicing-playability/)
 - [GTR-004 · Écouter et examiner le mouvement parallèle sur deux cordes de guitare](gtr-004-hear-and-audit-parallel-motion/)
 - [GTR-005 · Prévoir quelle corde doit continuer à sonner](gtr-005-plan-which-string-keeps-ringing/)
+- [GTR-006 · Rapporter la distance de pincement aux frettes](gtr-006-keep-picking-distance-relative-to-frets/)

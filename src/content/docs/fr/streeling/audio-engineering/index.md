@@ -17,3 +17,4 @@ sidebar:
 - [AUD-004 · Choisir des preuves par ondelettes pour une attaque de guitare évolutive](aud-004-wavelet-guitar-attack-evidence/)
 - [AUD-005 · Contrôles PCM et frontières de format dans le laboratoire de guitare](aud-005-pcm-guards-and-format-boundaries/)
 - [AUD-006 · Étalonner une amplitude spectrale avant de comparer des rendus](aud-006-calibrate-spectral-amplitudes/)
+- [AUD-007 · Traduire les coefficients d'attaque en durées](aud-007-translate-attack-coefficients-into-time/)
