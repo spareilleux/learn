@@ -1,0 +1,290 @@
+{
+  "scope": "Authored sustained-event model; exhaustive Python assignment over actual native pitch candidates. No temporal GA solver, physical guitar trial or timbre measurement.",
+  "assumptions": [
+    "One independent sustained note per string at a time.",
+    "A held event retains its assigned string.",
+    "Half-open intervals: onset inclusive, offset exclusive.",
+    "No hand geometry, pressure, muting skill, timbre, transfer, bending or rearticulation is modeled."
+  ],
+  "base_events": [
+    {
+      "id": "C",
+      "pitch": 60,
+      "time_unit": "beats",
+      "onset_beats": 0.0,
+      "offset_beats": 4.0,
+      "onset_exact": "0",
+      "offset_exact": "4"
+    },
+    {
+      "id": "E",
+      "pitch": 64,
+      "time_unit": "beats",
+      "onset_beats": 0.0,
+      "offset_beats": 2.0,
+      "onset_exact": "0",
+      "offset_exact": "2"
+    },
+    {
+      "id": "G",
+      "pitch": 67,
+      "time_unit": "beats",
+      "onset_beats": 1.0,
+      "offset_beats": 2.0,
+      "onset_exact": "1",
+      "offset_exact": "2"
+    },
+    {
+      "id": "D",
+      "pitch": 62,
+      "time_unit": "beats",
+      "onset_beats": 2.0,
+      "offset_beats": 3.0,
+      "onset_exact": "2",
+      "offset_exact": "3"
+    }
+  ],
+  "base_max_fret": 5,
+  "base_valid_plans": [
+    {
+      "positions": {
+        "C": {
+          "string": 3,
+          "fret": 5
+        },
+        "E": {
+          "string": 2,
+          "fret": 5
+        },
+        "G": {
+          "string": 1,
+          "fret": 3
+        },
+        "D": {
+          "string": 2,
+          "fret": 3
+        }
+      },
+      "positive_fret_span": 2
+    }
+  ],
+  "initial_C_E_plans": [
+    {
+      "positions": {
+        "C": {
+          "string": 3,
+          "fret": 5
+        },
+        "E": {
+          "string": 2,
+          "fret": 5
+        }
+      },
+      "positive_fret_span": 0
+    },
+    {
+      "positions": {
+        "C": {
+          "string": 3,
+          "fret": 5
+        },
+        "E": {
+          "string": 1,
+          "fret": 0
+        }
+      },
+      "positive_fret_span": 0
+    },
+    {
+      "positions": {
+        "C": {
+          "string": 2,
+          "fret": 1
+        },
+        "E": {
+          "string": 1,
+          "fret": 0
+        }
+      },
+      "positive_fret_span": 0
+    }
+  ],
+  "initial_plan_count": 3,
+  "only_one_initial_plan_extends_through_G": true,
+  "pairwise_overlap": [
+    {
+      "a": "E",
+      "b": "C",
+      "overlap": true
+    },
+    {
+      "a": "G",
+      "b": "C",
+      "overlap": true
+    },
+    {
+      "a": "G",
+      "b": "E",
+      "overlap": true
+    },
+    {
+      "a": "D",
+      "b": "C",
+      "overlap": true
+    },
+    {
+      "a": "D",
+      "b": "E",
+      "overlap": false
+    },
+    {
+      "a": "D",
+      "b": "G",
+      "overlap": false
+    }
+  ],
+  "individually_selected_best": {
+    "C4": [
+      2,
+      1
+    ],
+    "E4": [
+      1,
+      0
+    ],
+    "G4": [
+      1,
+      3
+    ],
+    "D4": [
+      2,
+      3
+    ]
+  },
+  "early_D_events": [
+    {
+      "id": "C",
+      "pitch": 60,
+      "time_unit": "beats",
+      "onset_beats": 0.0,
+      "offset_beats": 4.0,
+      "onset_exact": "0",
+      "offset_exact": "4"
+    },
+    {
+      "id": "E",
+      "pitch": 64,
+      "time_unit": "beats",
+      "onset_beats": 0.0,
+      "offset_beats": 2.0,
+      "onset_exact": "0",
+      "offset_exact": "2"
+    },
+    {
+      "id": "G",
+      "pitch": 67,
+      "time_unit": "beats",
+      "onset_beats": 1.0,
+      "offset_beats": 2.0,
+      "onset_exact": "1",
+      "offset_exact": "2"
+    },
+    {
+      "id": "D",
+      "pitch": 62,
+      "time_unit": "beats",
+      "onset_beats": 1.5,
+      "offset_beats": 3.0,
+      "onset_exact": "3/2",
+      "offset_exact": "3"
+    }
+  ],
+  "early_D_valid_plans_cap5": [],
+  "early_D_valid_plans_cap9": [],
+  "early_D_valid_plans_cap10": [
+    {
+      "positions": {
+        "C": {
+          "string": 4,
+          "fret": 10
+        },
+        "E": {
+          "string": 3,
+          "fret": 9
+        },
+        "G": {
+          "string": 1,
+          "fret": 3
+        },
+        "D": {
+          "string": 2,
+          "fret": 3
+        }
+      },
+      "positive_fret_span": 7
+    },
+    {
+      "positions": {
+        "C": {
+          "string": 4,
+          "fret": 10
+        },
+        "E": {
+          "string": 2,
+          "fret": 5
+        },
+        "G": {
+          "string": 1,
+          "fret": 3
+        },
+        "D": {
+          "string": 3,
+          "fret": 7
+        }
+      },
+      "positive_fret_span": 7
+    },
+    {
+      "positions": {
+        "C": {
+          "string": 4,
+          "fret": 10
+        },
+        "E": {
+          "string": 1,
+          "fret": 0
+        },
+        "G": {
+          "string": 2,
+          "fret": 8
+        },
+        "D": {
+          "string": 3,
+          "fret": 7
+        }
+      },
+      "positive_fret_span": 3
+    }
+  ],
+  "early_D_dropD_cap5_valid_plans": [],
+  "overlap_witness": {
+    "interval_beats": [
+      1.5,
+      2
+    ],
+    "active_event_ids": [
+      "C",
+      "E",
+      "G",
+      "D"
+    ],
+    "eligible_string_union": [
+      1,
+      2,
+      3
+    ],
+    "events": 4,
+    "strings": 3
+  },
+  "limits": "Static pitch/chord mapping and this authored occupancy model do not certify hand playability or a performed result."
+}

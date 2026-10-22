@@ -25,13 +25,13 @@ Estos módulos fueron escritos por departamentos de IA y **no han sido revisados
 | [Visualización de datos](data-visualization/) | 9 | 9 | 9 |
 | [Futurología](futurology/) | 4 | 4 | 4 |
 | [Acústica de la guitarra y síntesis sonora](guitar-acoustics/) | 4 | 4 | 4 |
-| [Guitar Alchemist Academy](guitar-alchemist-academy/) | 4 | 4 | 4 |
-| [Estudios de guitarra](guitar-studies/) | 4 | 4 | 4 |
+| [Guitar Alchemist Academy](guitar-alchemist-academy/) | 5 | 5 | 5 |
+| [Estudios de guitarra](guitar-studies/) | 5 | 5 | 5 |
 | [Teoría de la información](information-theory/) | 5 | 5 | 5 |
 | [Investigación sobre IX](ix-research/) | 1 | 1 | 1 |
 | [Matemáticas](mathematics/) | 25 | 25 | 25 |
 | [Música](music/) | 25 | 25 | 25 |
-| [Musicología](musicology/) | 3 | 3 | 3 |
+| [Musicología](musicology/) | 4 | 4 | 4 |
 | [Ciencia de redes](network-science/) | 6 | 6 | 6 |
 | [Filosofía](philosophy/) | 4 | 4 | 4 |
 | [Física](physics/) | 7 | 7 | 7 |

@@ -1,0 +1,113 @@
+{
+  "checked_at_utc": "2026-10-22T19:52:49.547090+00:00",
+  "base_learn_commit": "a01f92d9d7f2ed04e8fa3bb5e4d06aa6734dcdb7",
+  "source_ga_commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+  "scope": "Three timing/string-occupancy/explicit-repair courses in existing departments; actual standalone unchanged F# helper calls, tuning-tool replies and fixed authored calculations. No new production/lab program.",
+  "new_english_modules": 3,
+  "new_locale_sources": 6,
+  "canonical_sources": 9,
+  "localized_exercise_answer_pairs": 45,
+  "calculation_checks": {
+    "independent_checks": 179,
+    "passed": 179,
+    "failed": 0,
+    "public_ga_source_files": 4,
+    "native_helper_cases": 16,
+    "independent_native_rerun": true,
+    "native_sdk": "10.0.113",
+    "new_csharp_mapper_run": false,
+    "new_temporal_solver_run": false,
+    "new_parser_run": false,
+    "new_audio_run": false,
+    "new_gpu_run": false,
+    "new_dependency_install": false
+  },
+  "script_tests": {
+    "action": "tests",
+    "args": [
+      "node",
+      "--test",
+      "scripts/tests/lazy-demo.test.mjs",
+      "scripts/tests/streeling-copy-source.test.mjs",
+      "scripts/tests/sync-streeling.test.mjs"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 4.267002099979436,
+    "log": "C:\\tmp\\streeling-phrase-performance-tests-20261022.log",
+    "log_sha256": "3a7745eb9dd7b5aec6ebef8d3119b70573ddacd03ed23feecd15083190712106",
+    "passed": 18,
+    "failed": 0
+  },
+  "sync": {
+    "action": "sync",
+    "args": [
+      "npm.cmd",
+      "run",
+      "sync:streeling"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 1.8880084000120405,
+    "log": "C:\\tmp\\streeling-phrase-performance-sync-20261022.log",
+    "log_sha256": "c7a31d57e2b3549acec298337894aada1f5ff0e81100f4ced8fa18dca96a879a",
+    "idempotent_checked_files": 617
+  },
+  "static_build": {
+    "action": "build",
+    "args": [
+      "npm.cmd",
+      "run",
+      "build"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 101.41574260001653,
+    "log": "C:\\tmp\\streeling-phrase-performance-build-20261022.log",
+    "log_sha256": "0aa10bca168b1ba626e6ad0c01febe037f7389f7b08febd0305d53da724a13e8",
+    "pages": 1813,
+    "dependency_install": "Existing node_modules junction; no install.",
+    "warnings": "Existing highlighting fallback and empty i18n/404 warnings retained in complete log."
+  },
+  "rendered_articles": {
+    "pages": 21,
+    "links": 333,
+    "unresolved_internal_links": [],
+    "correct_new_source_banners": 9,
+    "missing_page_and_anchor_controls_detected": true,
+    "scope": "Built HTML, not browser or public deployment."
+  },
+  "review": {
+    "data_verdict": "pass_with_declared_evidence_limits",
+    "data_receipt_sha256": "1068b142dd3495101e5b82d4a73143b16c938932cf4ca1cb002129c26e0fd714",
+    "content_verdict": "pass_with_declared_evidence_limits",
+    "content_receipt_sha256": "3852e3ff8cf37eb23c25bb77cd8372b8ae0cdb0f883439eb81b15a442ccc115c",
+    "exercise_pairs_checked": 45,
+    "learner_criteria_checked": 15,
+    "findings": [],
+    "scope": "Independent AI native/source/numerical/course checks; not human approval.",
+    "human_technical": null,
+    "musician": null,
+    "fluent_language": null,
+    "learner": null,
+    "listening": null
+  },
+  "code_review_pipeline": "Documentation/fixed-data-only deliverable with temporary verification wrappers; no new production/lab program emitted and no code-shipping review invoked.",
+  "manual_host_scan": "Checked immutable source and actual/native/tool boundaries, string order adapter, held-event identity and half-open occupancy, repair preservation/duration, candidate spans, in-sample timing fit, conditional integer-BPM arithmetic, monotone-map reasoning, units and final review hashes.",
+  "source_inventory": {
+    "core_english_modules": 180,
+    "target": 525,
+    "original_departments": 21,
+    "remaining_core_source_gaps": 345,
+    "locale_counts": {
+      "en": 181,
+      "fr": 181,
+      "es": 181
+    }
+  },
+  "public_course_html_readback": null,
+  "protected_files_unchanged": [
+    "streeling/source.json",
+    "src/content/docs/streeling/journal.md",
+    "src/content/docs/fr/streeling/journal.md",
+    "src/content/docs/es/streeling/journal.md"
+  ],
+  "lint_typecheck": "No package.json lint/typecheck scripts configured; existing generator tests and Astro build used."
+}
