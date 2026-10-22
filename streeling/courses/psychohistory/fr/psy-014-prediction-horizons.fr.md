@@ -28,9 +28,9 @@ Un modèle *déterministe* ne contient aucun hasard : le même départ donne tou
 x_next = r * x * (1 - x)
 ```
 
-où r est un paramètre fixé. Après un régime transitoire, l'état reste sur un *attracteur* : un point fixe à r = 2,9, un cycle de deux points à r = 3,2, une bande irrégulière à r = 3,7 et à r = 4. [`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/scripts/streeling_fixtures/psychohistory/psy-014/analyze.py) tire 1 000 points de départ avec une graine fixée ([`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/fixtures/psychohistory/psy-014/scenarios.json)), laisse chacun se stabiliser pendant 1 000 pas, puis le fait évoluer deux fois : une fois tel quel, une fois décalé d'une *erreur initiale* de 1e-9. L'*écart* est la différence absolue entre les deux trajectoires au même pas.
+où r est un paramètre fixé. Après un régime transitoire, l'état reste sur un *attracteur* : un point fixe à r = 2,9, un cycle de deux points à r = 3,2, une bande irrégulière à r = 3,7 et à r = 4. [`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/scripts/streeling_fixtures/psychohistory/psy-014/analyze.py) tire 1 000 points de départ avec une graine fixée ([`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-014/scenarios.json)), laisse chacun se stabiliser pendant 1 000 pas, puis le fait évoluer deux fois : une fois tel quel, une fois décalé d'une *erreur initiale* de 1e-9. L'*écart* est la différence absolue entre les deux trajectoires au même pas.
 
-**Synthétique.** Écart médian des 1 000 paires, d'après `gap_table` dans [`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/fixtures/psychohistory/psy-014/results.json) :
+**Synthétique.** Écart médian des 1 000 paires, d'après `gap_table` dans [`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-014/results.json) :
 
 | Pas | r = 2,9 | r = 3,2 | r = 3,7 | r = 4 |
 |---|---|---|---|---|
@@ -132,7 +132,7 @@ Une prévision à r = 4 doit rester à moins de 0,1 à chacun de ses 60 pas. Opt
 
 **Épinglés au commit `4b03838800dcd4894f1e026461979bff1d985ca8` de Demerzel :** PSY-001, PSY-002 et MAT-024. Le jeu d'essai reproduit les quatre exposants que MAT-024 affiche pour ces valeurs de r ; le décompte des paires de lignes de la section 4 est celui de PSY-005.
 
-**Jeu d'essai.** Depuis la racine du dépôt, `python -I -B scripts/streeling_fixtures/psychohistory/psy-014/analyze.py`, puis la même commande avec `--check`. Le script ne lit que `scenarios.json` et exécute 41 autocontrôles ; son [README](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/fixtures/psychohistory/psy-014/README.md) explique pourquoi la sortie est identique octet pour octet d'une plateforme à l'autre et en énumère les limites.
+**Jeu d'essai.** Depuis la racine du dépôt, `python -I -B scripts/streeling_fixtures/psychohistory/psy-014/analyze.py`, puis la même commande avec `--check`. Le script ne lit que `scenarios.json` et exécute 41 autocontrôles ; son [README](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-014/README.md) explique pourquoi la sortie est identique octet pour octet d'une plateforme à l'autre et en énumère les limites.
 
 **Références de méthode.** May, R. M. (1976), « Simple mathematical models with very complicated dynamics », *Nature* 261, 459–467. Lorenz, E. N. (1963), « Deterministic nonperiodic flow », *Journal of the Atmospheric Sciences* 20, 130–141 (sensibilité aux conditions initiales). Strogatz, S. H. (2015), *Nonlinear Dynamics and Chaos*, 2e édition, Westview Press (exposants de Lyapunov et horizon temporel d'une prévision).
 

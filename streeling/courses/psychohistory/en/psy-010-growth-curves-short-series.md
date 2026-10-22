@@ -22,7 +22,7 @@ You will turn a commit history into a daily series, fit three growth curves to i
 
 ## 1. Turn the history into a series
 
-**Observed.** [`extract.py`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/scripts/streeling_fixtures/psychohistory/psy-010/extract.py) asks git which of the 1,599 commits reachable from commit `4b03838` changed the folder [`state/streeling/courses`](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/state/streeling/courses): 73 commits, from 2026-03-21 to 2026-10-13. It writes [`observed-input.json`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/fixtures/psychohistory/psy-010/observed-input.json) from commit dates and file names alone. A *module* is a path `DEPARTMENT/en/NAME.md`. Translations (181 files at the pin), README files (4, and 2 more inside `en/` folders) and the 10 file names of an early layout without language folders are not counted. Together the commits add 73 module paths and remove 5 (a rename counts as a removal and an addition): **68** modules at the pin, in 18 of 21 department folders.
+**Observed.** [`extract.py`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/scripts/streeling_fixtures/psychohistory/psy-010/extract.py) asks git which of the 1,599 commits reachable from commit `4b03838` changed the folder [`state/streeling/courses`](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/state/streeling/courses): 73 commits, from 2026-03-21 to 2026-10-13. It writes [`observed-input.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-010/observed-input.json) from commit dates and file names alone. A *module* is a path `DEPARTMENT/en/NAME.md`. Translations (181 files at the pin), README files (4, and 2 more inside `en/` folders) and the 10 file names of an early layout without language folders are not counted. Together the commits add 73 module paths and remove 5 (a rename counts as a removal and an addition): **68** modules at the pin, in 18 of 21 department folders.
 
 **Assumed.** The curriculum plan foresees 21 departments with 25 courses each, 21 × 25 = **525**, a draft specification's figure, used as given although the repository records 23 departments, two without a course folder. 68 is 13.0% of 525.
 
@@ -33,7 +33,7 @@ day     0   1   2   3  15  190  191  195  196  197  200  206
 count  13  17  19  23  31   32   37   60   63   66   67   68
 ```
 
-Call those 12 days *active*, and call a run of active days at most 7 days apart a *burst* (a convention, stored in [`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/fixtures/psychohistory/psy-010/scenarios.json); [PSY-008](psy-008-bursts-are-not-rates.md) calls such a group an *episode*):
+Call those 12 days *active*, and call a run of active days at most 7 days apart a *burst* (a convention, stored in [`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-010/scenarios.json); [PSY-008](psy-008-bursts-are-not-rates.md) calls such a group an *episode*):
 
 | Burst | Days | Modules added | Share of the 68 |
 |---|---|---|---|
@@ -62,9 +62,9 @@ line fit     b = (n ΣtN - Σt ΣN) / (n Σt² - (Σt)²)      sums over the n d
              a = (ΣN - b Σt) / n
 ```
 
-*Least squares* chooses the parameters that minimise SSE, the sum over the 207 days of (observed − fitted)². RMSE, the square root of SSE / 207, is the typical miss in modules. [`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/scripts/streeling_fixtures/psychohistory/psy-010/analyze.py) solves the line exactly from those sums and finds the two curves by a deterministic search (a grid, then Newton steps). The logistic ceiling is fixed at K = 525, and m is the day the curve passes K / 2. A logistic curve only approaches its ceiling, so "reaches 525" means, for every curve, the first day its value is at least 524.5.
+*Least squares* chooses the parameters that minimise SSE, the sum over the 207 days of (observed − fitted)². RMSE, the square root of SSE / 207, is the typical miss in modules. [`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/scripts/streeling_fixtures/psychohistory/psy-010/analyze.py) solves the line exactly from those sums and finds the two curves by a deterministic search (a grid, then Newton steps). The logistic ceiling is fixed at K = 525, and m is the day the curve passes K / 2. A logistic curve only approaches its ceiling, so "reaches 525" means, for every curve, the first day its value is at least 524.5.
 
-**Computed** ([`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/fixtures/psychohistory/psy-010/results.json), `fits.pinned_date`):
+**Computed** ([`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-010/results.json), `fits.pinned_date`):
 
 | Curve | Parameters (t in days) | SSE | RMSE | Value on day 206 | Reaches 525 | Years after the pin |
 |---|---|---|---|---|---|---|
@@ -132,7 +132,7 @@ Under that assumption, how many bursts are needed and how long do they take (a) 
 
 **Observed, pinned at Demerzel `4b03838800dcd4894f1e026461979bff1d985ca8`:** the commit history of `state/streeling/courses` and the department records at the pin (commits and trees only). `extract.py` refuses a shallow clone or any history but the pinned one. 525 is the plan's figure.
 
-**Fixture.** `python -I scripts/streeling_fixtures/psychohistory/psy-010/extract.py`, then `analyze.py` in the same folder; `analyze.py --check` compares a fresh run with the saved results. The [README](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/fixtures/psychohistory/psy-010/README.md) documents the method and its checks.
+**Fixture.** `python -I scripts/streeling_fixtures/psychohistory/psy-010/extract.py`, then `analyze.py` in the same folder; `analyze.py --check` compares a fresh run with the saved results. The [README](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-010/README.md) documents the method and its checks.
 
 **Method references.** Bates, D. M., and Watts, D. G. (1988), *Nonlinear Regression Analysis and Its Applications*, Wiley (least squares for curves; Gauss–Newton steps). Debecker, A., and Modis, T. (1994), "Determination of the uncertainties in S-curve logistic fits", *Technological Forecasting and Social Change* 46(2), 153–173 (how uncertain a fitted ceiling is before the curve turns). Meade, N., and Islam, T. (1995), "Forecasting with growth curves: An empirical comparison", *International Journal of Forecasting* 11(2), 199–215.
 

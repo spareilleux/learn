@@ -22,7 +22,7 @@ You will write the mean squared error of an average of k forecasts with correlat
 
 ## 1. What the judges share
 
-**Observed** at the pinned commit, and snapshotted by [`extract.py`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/scripts/streeling_fixtures/psychohistory/psy-019/extract.py) into [`observed-input.json`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/fixtures/psychohistory/psy-019/observed-input.json):
+**Observed** at the pinned commit, and snapshotted by [`extract.py`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/scripts/streeling_fixtures/psychohistory/psy-019/extract.py) into [`observed-input.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-019/observed-input.json):
 
 - The [multi-model orchestration policy](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/policies/multi-model-orchestration-policy.yaml#L198-L203) sets `single_model: max 0.8`, `two_model_agreement: 0.9` and `two_model_disagreement: 0.5`. Its `cross-validation` rule requires agreement from at least two models and names claude and chatgpt, which its model registry assigns to two providers.
 - The [tribunal-panel script](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/.claude/workflows/demerzel-tribunal-panel.js) would send one pull request to 5 personas. Every prompt carries the same title, body, file list and diff excerpt; only the persona and its stated concern differ, and the workflow passes one `--model`. Each persona returns `block`, `merge_with_followups` or `pass`, and may return a `score`, "0..1 confidence in this PR for my concern (1 = clean)"; the verdict is strictest-wins, not an average.
@@ -53,7 +53,7 @@ MSE of the average of k forecasts = sigma² × ( rho + (1 − rho) / k )
 floor, however large k            = rho × sigma²
 ```
 
-[`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/scripts/streeling_fixtures/psychohistory/psy-019/analyze.py) checks it without sampling: with parts of +1 or −1, all 32,768 sign patterns for k = 14 give the averages of C², C × mean(I) and mean(I)² as exactly 1, 0 and 1/k.
+[`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/scripts/streeling_fixtures/psychohistory/psy-019/analyze.py) checks it without sampling: with parts of +1 or −1, all 32,768 sign patterns for k = 14 give the averages of C², C × mean(I) and mean(I)² as exactly 1, 0 and 1/k.
 
 **Computed from the closed form**, in units of one forecaster's MSE (sigma² = 1), four decimals:
 
@@ -132,7 +132,7 @@ Two personas of the panel, on one excerpt and one `--model`, agree on whether to
 
 **Observed, pinned at Demerzel `4b03838800dcd4894f1e026461979bff1d985ca8`:** the files linked in section 1, the [workflow](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/.github/workflows/tribunal-panel.yml) that runs the panel, and the council's five records. `extract.py` stops if one of them differs from its pinned Git blob.
 
-**Fixture.** From the repository root, `python -I -B scripts/streeling_fixtures/psychohistory/psy-019/extract.py`, then `analyze.py` and `analyze.py --check` in the same folder. Assumptions: [`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/fixtures/psychohistory/psy-019/scenarios.json). Every number above: [`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/fixtures/psychohistory/psy-019/results.json). Self-checks and limits: [README](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/fixtures/psychohistory/psy-019/README.md).
+**Fixture.** From the repository root, `python -I -B scripts/streeling_fixtures/psychohistory/psy-019/extract.py`, then `analyze.py` and `analyze.py --check` in the same folder. Assumptions: [`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-019/scenarios.json). Every number above: [`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-019/results.json). Self-checks and limits: [README](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-019/README.md).
 
 **Method references.** Bates, J. M., and Granger, C. W. J. (1969), "The Combination of Forecasts", *Operational Research Quarterly* 20(4), 451–468, doi:10.1057/jors.1969.103. Clemen, R. T., and Winkler, R. L. (1985), "Limits for the Precision and Value of Information from Dependent Sources", *Operations Research* 33(2), 427–442, doi:10.1287/opre.33.2.427.
 

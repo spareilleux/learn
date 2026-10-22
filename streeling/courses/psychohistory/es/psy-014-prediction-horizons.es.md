@@ -28,9 +28,9 @@ Un modelo *determinista* no contiene ningún azar: el mismo punto de partida da 
 x_next = r * x * (1 - x)
 ```
 
-donde r es un parámetro fijo. Tras un régimen transitorio, el estado permanece en un *atractor*: un punto fijo con r = 2.9, un ciclo de dos puntos con r = 3.2 y una banda irregular con r = 3.7 y con r = 4. [`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/scripts/streeling_fixtures/psychohistory/psy-014/analyze.py) sortea 1,000 puntos de partida con una semilla fija ([`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/fixtures/psychohistory/psy-014/scenarios.json)), deja que cada uno se estabilice durante 1,000 pasos y después lo ejecuta dos veces: una tal cual y otra desplazado por un *error inicial* de 1e-9. La *separación* es la diferencia absoluta entre las dos ejecuciones en un mismo paso.
+donde r es un parámetro fijo. Tras un régimen transitorio, el estado permanece en un *atractor*: un punto fijo con r = 2.9, un ciclo de dos puntos con r = 3.2 y una banda irregular con r = 3.7 y con r = 4. [`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/scripts/streeling_fixtures/psychohistory/psy-014/analyze.py) sortea 1,000 puntos de partida con una semilla fija ([`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-014/scenarios.json)), deja que cada uno se estabilice durante 1,000 pasos y después lo ejecuta dos veces: una tal cual y otra desplazado por un *error inicial* de 1e-9. La *separación* es la diferencia absoluta entre las dos ejecuciones en un mismo paso.
 
-**Sintético.** Separación mediana de los 1,000 pares, tomada de `gap_table` en [`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/fixtures/psychohistory/psy-014/results.json):
+**Sintético.** Separación mediana de los 1,000 pares, tomada de `gap_table` en [`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-014/results.json):
 
 | Paso | r = 2.9 | r = 3.2 | r = 3.7 | r = 4 |
 |---|---|---|---|---|
@@ -132,7 +132,7 @@ Un pronóstico con r = 4 debe mantenerse dentro de 0.1 en cada uno de los 60 pas
 
 **Fijados en Demerzel `4b03838800dcd4894f1e026461979bff1d985ca8`:** PSY-001, PSY-002 y MAT-024. El fixture reproduce los cuatro exponentes que MAT-024 da para estos valores de r; el recuento de pares de filas de la sección 4 es el de PSY-005.
 
-**Fixture.** Desde la raíz del repositorio, `python -I -B scripts/streeling_fixtures/psychohistory/psy-014/analyze.py`, y después lo mismo con `--check`. Solo lee `scenarios.json` y ejecuta 41 autocomprobaciones; su [README](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/fixtures/psychohistory/psy-014/README.md) explica por qué la salida es idéntica byte a byte en todas las plataformas y enumera los límites.
+**Fixture.** Desde la raíz del repositorio, `python -I -B scripts/streeling_fixtures/psychohistory/psy-014/analyze.py`, y después lo mismo con `--check`. Solo lee `scenarios.json` y ejecuta 41 autocomprobaciones; su [README](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-014/README.md) explica por qué la salida es idéntica byte a byte en todas las plataformas y enumera los límites.
 
 **Referencias de método.** May, R. M. (1976), «Simple mathematical models with very complicated dynamics», *Nature* 261, 459–467. Lorenz, E. N. (1963), «Deterministic nonperiodic flow», *Journal of the Atmospheric Sciences* 20, 130–141 (dependencia sensible de las condiciones iniciales). Strogatz, S. H. (2015), *Nonlinear Dynamics and Chaos*, segunda edición, Westview Press (exponentes de Lyapunov y horizonte temporal de una predicción).
 
