@@ -16,3 +16,4 @@ sidebar:
 - [AUD-003 · Preservar el ataque de una cuerda de guitarra durante el análisis espectral sin conexión](aud-003-transient-preservation-gate/)
 - [AUD-004 · Elegir pruebas con wavelets para un ataque de guitarra cambiante](aud-004-wavelet-guitar-attack-evidence/)
 - [AUD-005 · Controles PCM y límites de formato en el laboratorio de guitarra](aud-005-pcm-guards-and-format-boundaries/)
+- [AUD-006 · Calibrar una amplitud espectral antes de comparar renderizados](aud-006-calibrate-spectral-amplitudes/)

@@ -16,3 +16,4 @@ sidebar:
 - [AUD-003 · Protect a Guitar Pluck During Offline Spectral Analysis](aud-003-transient-preservation-gate/)
 - [AUD-004 · Choose Wavelet Evidence for a Changing Guitar Attack](aud-004-wavelet-guitar-attack-evidence/)
 - [AUD-005 · PCM guards and format boundaries in the guitar lab](aud-005-pcm-guards-and-format-boundaries/)
+- [AUD-006 · Calibrate a Spectral Amplitude Before Comparing Renders](aud-006-calibrate-spectral-amplitudes/)

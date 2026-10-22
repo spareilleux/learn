@@ -23,3 +23,4 @@ sidebar:
 - [CS-010 · Componer cálculos de GA con interrupción al primer fallo](cs-010-compose-fail-fast-ga-computations/)
 - [CS-011 · Preservar la distinción entre ausencia y fallo](cs-011-preserve-absence-and-failure-boundaries/)
 - [CS-012 · Límites de la comparación entre renderizados nativos y WASM](cs-012-native-and-wasm-render-boundaries/)
+- [CS-013 · Preservar ejes y unidades al componer salidas espectrales](cs-013-preserve-spectral-axes-and-units/)

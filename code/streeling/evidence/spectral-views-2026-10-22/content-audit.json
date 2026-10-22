@@ -1,0 +1,1206 @@
+{
+  "schema_version": "1.0",
+  "kind": "Independent AI source-assisted spectral-course content review, not human approval",
+  "checked_at_utc": "2026-10-22T17:25:18.188189+00:00",
+  "verdict": "PASS_WITH_LIMITS",
+  "blocking_findings": [],
+  "findings": [],
+  "scope": "AUD006, CS013 and DV009 EN/FR/ES course content and checked fixed supporting evidence in the named Learn worktree. Only this receipt is written. No production repo writes, Git mutation, installation, heavy tests, new rendering, IX execution or publication.",
+  "reviewer": "Independent content-audit subagent; not the course author or translator. Numerical recalculation delegated to the already-completed independent bound data audit.",
+  "checked_exercise_answer_pairs": 45,
+  "checked_learner_criteria": 15,
+  "source_bindings": [
+    {
+      "path": "streeling/courses/audio-engineering/en/aud-006-calibrate-spectral-amplitudes.md",
+      "sha256": "b2fe07f89c5cf3c9f46cd1204a8a8ca1e22559338e57c033309fcd7996966d54",
+      "bytes": 9459,
+      "review_role": "Course source: full semantic review of five prompts and five answers",
+      "utf8_without_bom": true,
+      "crlf_count": 0
+    },
+    {
+      "path": "streeling/courses/audio-engineering/fr/aud-006-calibrate-spectral-amplitudes.fr.md",
+      "sha256": "00caf5fde75c9b80e01210ba1aa0a2b876bae44468966c98bfcd6e91d5023324",
+      "bytes": 11502,
+      "review_role": "Course source: full semantic review of five prompts and five answers",
+      "utf8_without_bom": true,
+      "crlf_count": 0
+    },
+    {
+      "path": "streeling/courses/audio-engineering/es/aud-006-calibrate-spectral-amplitudes.es.md",
+      "sha256": "1b08b88fef2925ad5abc2b963995d0ae5b67b4dba07f365a84ec2152e6086ac8",
+      "bytes": 11125,
+      "review_role": "Course source: full semantic review of five prompts and five answers",
+      "utf8_without_bom": true,
+      "crlf_count": 0
+    },
+    {
+      "path": "streeling/courses/computer-science/en/cs-013-preserve-spectral-axes-and-units.md",
+      "sha256": "ad9ff783ab13e0cb3a3096d8a8906cdcc648ec91ecea8ee74531ae04b342a311",
+      "bytes": 9540,
+      "review_role": "Course source: full semantic review of five prompts and five answers",
+      "utf8_without_bom": true,
+      "crlf_count": 0
+    },
+    {
+      "path": "streeling/courses/computer-science/fr/cs-013-preserve-spectral-axes-and-units.fr.md",
+      "sha256": "7046ebe84ef2173919793db61cf8137d2b8cf1ae32e7298f9edce46472609793",
+      "bytes": 12073,
+      "review_role": "Course source: full semantic review of five prompts and five answers",
+      "utf8_without_bom": true,
+      "crlf_count": 0
+    },
+    {
+      "path": "streeling/courses/computer-science/es/cs-013-preserve-spectral-axes-and-units.es.md",
+      "sha256": "c9fbbf626d544ac3ea113e3632535e982d6dd4bbe12d4e34f342b5d58ab5c952",
+      "bytes": 11471,
+      "review_role": "Course source: full semantic review of five prompts and five answers",
+      "utf8_without_bom": true,
+      "crlf_count": 0
+    },
+    {
+      "path": "streeling/courses/data-visualization/en/dv-009-compare-spectrogram-color-scales.md",
+      "sha256": "819f2a5ca8e34b1b0f205773c3b570a71e033f9a6e298b384820bc0ce1d03135",
+      "bytes": 9066,
+      "review_role": "Course source: full semantic review of five prompts and five answers",
+      "utf8_without_bom": true,
+      "crlf_count": 0
+    },
+    {
+      "path": "streeling/courses/data-visualization/fr/dv-009-compare-spectrogram-color-scales.fr.md",
+      "sha256": "cc659cb39dbbbb2248bc39d8d7e60558cffe9e1a4f99a3b68366c80d6ba2530a",
+      "bytes": 11100,
+      "review_role": "Course source: full semantic review of five prompts and five answers",
+      "utf8_without_bom": true,
+      "crlf_count": 0
+    },
+    {
+      "path": "streeling/courses/data-visualization/es/dv-009-compare-spectrogram-color-scales.es.md",
+      "sha256": "a9dc560f119153253199f7bd10b9f5afb02f9387d322fba18ef946e433e71bb8",
+      "bytes": 10638,
+      "review_role": "Course source: full semantic review of five prompts and five answers",
+      "utf8_without_bom": true,
+      "crlf_count": 0
+    }
+  ],
+  "supporting_bindings": [
+    {
+      "path": "code/streeling/evidence/spectral-views-2026-10-22/README.md",
+      "sha256": "4b11e9bb536efbe0aa16b120f2954f67f5fee4e8cf7f4a04e537c98823b816e8",
+      "bytes": 4831,
+      "review_role": "Read and checked against course interpretations",
+      "utf8_without_bom": true,
+      "crlf_count": 0
+    },
+    {
+      "path": "code/streeling/evidence/spectral-views-2026-10-22/experiment-plan.md",
+      "sha256": "4bcb772475df1d451ce2319b0e0af6e30616a641402eef2a745039a56f759383",
+      "bytes": 5129,
+      "review_role": "Read and checked against course interpretations",
+      "utf8_without_bom": true,
+      "crlf_count": 0
+    },
+    {
+      "path": "code/streeling/evidence/spectral-views-2026-10-22/calibration.json",
+      "sha256": "ead8164c0fa64d26c76ffa36badce9727a98813608b671931a699ed8310ed91e",
+      "bytes": 2163,
+      "review_role": "Read and checked against course interpretations",
+      "utf8_without_bom": true,
+      "crlf_count": 0
+    },
+    {
+      "path": "code/streeling/evidence/spectral-views-2026-10-22/coordinates.json",
+      "sha256": "f00c412b0b3730792f23b157ed551c298ee2af63e1e1d141f36fa20ac8c8dd33",
+      "bytes": 7027,
+      "review_role": "Read and checked against course interpretations",
+      "utf8_without_bom": true,
+      "crlf_count": 0
+    },
+    {
+      "path": "code/streeling/evidence/spectral-views-2026-10-22/display-comparison.json",
+      "sha256": "3c27d1d38386358c3c136d5e76ff8ff60280a334233bf05401cef7bc9b10f707",
+      "bytes": 2880,
+      "review_role": "Read and checked against course interpretations",
+      "utf8_without_bom": true,
+      "crlf_count": 0
+    },
+    {
+      "path": "code/streeling/evidence/spectral-views-2026-10-22/execution.json",
+      "sha256": "02f477560bc10cf711a74626cc9761509f7b68e4a938526996d46766cac370ec",
+      "bytes": 1546,
+      "review_role": "Read and checked against course interpretations",
+      "utf8_without_bom": true,
+      "crlf_count": 0
+    },
+    {
+      "path": "code/streeling/evidence/spectral-views-2026-10-22/primary-readback.json",
+      "sha256": "ae6079d238ccd1d60d0fb414033a3dbba4c8220a87279d380958b68dde40a768",
+      "bytes": 3775,
+      "review_role": "Read and checked against course interpretations",
+      "utf8_without_bom": true,
+      "crlf_count": 0
+    },
+    {
+      "path": "code/streeling/evidence/spectral-views-2026-10-22/learner-task.md",
+      "sha256": "8c07ba4c3b8b08f891517a1c43b880a4ef68f2d78e24eda165f63cdf773608ce",
+      "bytes": 3316,
+      "review_role": "Read and checked against course interpretations",
+      "utf8_without_bom": true,
+      "crlf_count": 0
+    },
+    {
+      "path": "code/streeling/evidence/spectral-views-2026-10-22/reviewer-rubric.json",
+      "sha256": "bda08181759675dd89ee51b70986e951f1468d240d02dcbf31bdf77978ec0e3f",
+      "bytes": 3352,
+      "review_role": "Read and checked against course interpretations",
+      "utf8_without_bom": true,
+      "crlf_count": 0
+    },
+    {
+      "path": "code/streeling/evidence/spectral-views-2026-10-22/data-audit.json",
+      "sha256": "03563cd094fc6c4c8b872ae4b894560858b0da8da5e9a54b813076e0465e59d1",
+      "bytes": 39561,
+      "review_role": "Relied on independent 42-check numerical/source audit; inspected findings, source observations, checks, values and exact input bindings; no full FFT repetition",
+      "utf8_without_bom": true,
+      "crlf_count": 0
+    },
+    {
+      "path": "code/streeling/evidence/spectral-views-2026-10-22/spectrogram-reference-comparison.png",
+      "sha256": "3e93a3d3843a26c5e57d1c62fbac7d87a62453b600de6860eceb57158a3cfdba",
+      "bytes": 139544,
+      "review_role": "Viewed six-panel scientific figure"
+    },
+    {
+      "path": "code/streeling/evidence/guitar-runtime-2026-10-22/results.json",
+      "sha256": "d564b476e0fccaff1a435548b5ae795807337622fdff69fb19ce0ace0d320506",
+      "bytes": 7736,
+      "review_role": "Checked original candidate improvement and failed gate",
+      "utf8_without_bom": true,
+      "crlf_count": 0
+    },
+    {
+      "path": "code/streeling/evidence/guitar-runtime-2026-10-22/execution.json",
+      "sha256": "1d64a71891cc91743cc872d964907ae2d1e9cb906275167dcf38ce382eaf39d4",
+      "bytes": 2942,
+      "review_role": "Checked earlier native/WASM teaching execution and PCM export provenance",
+      "utf8_without_bom": true,
+      "crlf_count": 0
+    },
+    {
+      "path": "code/streeling/evidence/guitar-runtime-2026-10-22/baseline.wav",
+      "sha256": "a78a70243a81aa79d806d9ef3db7baa1385c479505f7d5e97b8bf0c7866c3f98",
+      "bytes": 352844,
+      "review_role": "SHA256 byte identity only, not listened to or transformed in this audit"
+    },
+    {
+      "path": "code/streeling/evidence/guitar-runtime-2026-10-22/candidate.wav",
+      "sha256": "055e03fb6064f62601b1bbc07942d3e2223da6d2fc614c6f63fa9ec8d964be73",
+      "bytes": 352844,
+      "review_role": "SHA256 byte identity only, not listened to or transformed in this audit"
+    },
+    {
+      "path": "streeling/courses/audio-engineering/en/aud-003-transient-preservation-gate.md",
+      "sha256": "0e67df4177d47bb313014168bf292d89405462cb3539ee2ee43e0dcb5c7ea131",
+      "bytes": 17491,
+      "review_role": "Read prior course for distinctness",
+      "utf8_without_bom": true,
+      "crlf_count": 0
+    },
+    {
+      "path": "streeling/courses/computer-science/en/cs-012-native-and-wasm-render-boundaries.md",
+      "sha256": "556487f404fa7c5cf79289b21a90f25e81de41ee8f644206550dcd848a0bfa73",
+      "bytes": 8685,
+      "review_role": "Read prior course for distinctness",
+      "utf8_without_bom": true,
+      "crlf_count": 0
+    },
+    {
+      "path": "streeling/courses/data-visualization/en/dv-007-optick-partition-small-multiples.md",
+      "sha256": "846c2520afb7db39b7482ded705fbbefbcee098bceec902883ff075e934f4988",
+      "bytes": 13534,
+      "review_role": "Read prior course for distinctness",
+      "utf8_without_bom": true,
+      "crlf_count": 0
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "a9f9fa23747f397cbe7a791eb3a4ae5736ff9448da6e120bd44f2ae3524fd15d",
+      "bytes": 6866,
+      "review_role": "Read applicable repository instructions",
+      "utf8_without_bom": true,
+      "crlf_count": 0
+    }
+  ],
+  "checks": [
+    {
+      "name": "All nine sources and all exercise-answer pairs read",
+      "pass": true,
+      "details": "Three English and six final locale pages manually reviewed; 45 pair records below. English AUD006 window-sum refinement and both translated meanings rechecked."
+    },
+    {
+      "name": "Locale mechanics",
+      "pass": true,
+      "details": "Nine UTF-8 without BOM/LF sources, five prompts and five answers each; metadata equal except localized course title; ordered inline code, empty fenced-code sequences, hrefs and numeric tokens equal."
+    },
+    {
+      "name": "Fixed numerical evidence interpreted within its bounds",
+      "pass": true,
+      "details": "Relied on bound independent data-audit.json reporting 42 passing checks, no findings; verified all 11 of its input byte bindings still match. Rechecked small calibration/frame/gain arithmetic only; no full FFT recomputation."
+    },
+    {
+      "name": "Calibration caveats",
+      "pass": true,
+      "details": "Approximate isolated coherent interior-bin peak estimator, finite symmetric-Hann residual and 1e-6 tolerance preserved; DC/Nyquist undoubled; no PSD/RMS/loudness/general guitar-partial assertion."
+    },
+    {
+      "name": "PCM16 boundary",
+      "pass": true,
+      "details": "32768 decoder denominator versus earlier 32767 export multiplier preserved in all locales; quantized decoded values are not original floats."
+    },
+    {
+      "name": "Frame coordinates and matrix semantics",
+      "pass": true,
+      "details": "341/1025/349525, 272 tail, frame-start timing, hop cells versus 2048-sample support and separate final extents remain consistent. Missing sample rate forbids absolute seconds/hertz."
+    },
+    {
+      "name": "Source versus runtime/advisory implementation",
+      "pass": true,
+      "details": "Pinned source observations and temporary numerical reproduction remain distinct from IX binary execution; advisory metadata is not a ratified schema or implemented ComfyUI bridge."
+    },
+    {
+      "name": "Display control/reference/crop/floor",
+      "pass": true,
+      "details": "C is the actual decay candidate; 0.5B is constructed. Common unit-peak reference differs from full-matrix-relative maximum; maximum precedes crop and ratio precedes floor. Only appropriate non-floored cells support the gain shift."
+    },
+    {
+      "name": "Historical gate retained",
+      "pass": true,
+      "details": "Original results, display record and all courses agree: 0.11416614959438576 dB improvement is below 1 dB; candidate failed."
+    },
+    {
+      "name": "Learner task and criterion coverage",
+      "pass": true,
+      "details": "All 15 criteria individually mapped below to course content and the three task prompts; outcomes remain null and no participant success is inferred."
+    },
+    {
+      "name": "Figure inspected",
+      "pass": true,
+      "details": "Viewed PNG: columns B/C/0.5B, rows with 20log10(A/1) and 20log10(A/max A) colorbar references, shared -80 to 0 limits, 0-2000 Hz crop and seconds axes; top control darker, lower pattern agrees. No usability or perceptual approval claimed."
+    },
+    {
+      "name": "No false documentation-readback success",
+      "pass": true,
+      "details": "Primary-readback record preserves failed direct NumPy requests (403) separately from documented web reads and successful byte bindings; no remote requests replayed in this audit."
+    },
+    {
+      "name": "All bound bytes unchanged at receipt finalization",
+      "pass": true,
+      "details": "Source hashes equal the post-translation snapshot; all source and supporting hashes rechecked immediately before write."
+    }
+  ],
+  "locale_checks": [
+    {
+      "module": "AUD006",
+      "locale": "en",
+      "path": "streeling/courses/audio-engineering/en/aud-006-calibrate-spectral-amplitudes.md",
+      "exercise_answer_pairs": 5,
+      "inline_code_count": 11,
+      "fenced_code_count": 0,
+      "ordered_href_count": 14,
+      "numeric_token_count": 117,
+      "metadata_except_localized_course_title_equal": true,
+      "inline_code_equal": true,
+      "fenced_code_equal": true,
+      "ordered_hrefs_equal": true,
+      "ordered_numeric_tokens_equal": true,
+      "semantic_faithfulness": "pass: full prose, prompts and answers read; no meaning-changing omission or addition found; not human fluent-language approval"
+    },
+    {
+      "module": "AUD006",
+      "locale": "fr",
+      "path": "streeling/courses/audio-engineering/fr/aud-006-calibrate-spectral-amplitudes.fr.md",
+      "exercise_answer_pairs": 5,
+      "inline_code_count": 11,
+      "fenced_code_count": 0,
+      "ordered_href_count": 14,
+      "numeric_token_count": 117,
+      "metadata_except_localized_course_title_equal": true,
+      "inline_code_equal": true,
+      "fenced_code_equal": true,
+      "ordered_hrefs_equal": true,
+      "ordered_numeric_tokens_equal": true,
+      "semantic_faithfulness": "pass: full prose, prompts and answers read; no meaning-changing omission or addition found; not human fluent-language approval"
+    },
+    {
+      "module": "AUD006",
+      "locale": "es",
+      "path": "streeling/courses/audio-engineering/es/aud-006-calibrate-spectral-amplitudes.es.md",
+      "exercise_answer_pairs": 5,
+      "inline_code_count": 11,
+      "fenced_code_count": 0,
+      "ordered_href_count": 14,
+      "numeric_token_count": 117,
+      "metadata_except_localized_course_title_equal": true,
+      "inline_code_equal": true,
+      "fenced_code_equal": true,
+      "ordered_hrefs_equal": true,
+      "ordered_numeric_tokens_equal": true,
+      "semantic_faithfulness": "pass: full prose, prompts and answers read; no meaning-changing omission or addition found; not human fluent-language approval"
+    },
+    {
+      "module": "CS013",
+      "locale": "en",
+      "path": "streeling/courses/computer-science/en/cs-013-preserve-spectral-axes-and-units.md",
+      "exercise_answer_pairs": 5,
+      "inline_code_count": 22,
+      "fenced_code_count": 0,
+      "ordered_href_count": 8,
+      "numeric_token_count": 115,
+      "metadata_except_localized_course_title_equal": true,
+      "inline_code_equal": true,
+      "fenced_code_equal": true,
+      "ordered_hrefs_equal": true,
+      "ordered_numeric_tokens_equal": true,
+      "semantic_faithfulness": "pass: full prose, prompts and answers read; no meaning-changing omission or addition found; not human fluent-language approval"
+    },
+    {
+      "module": "CS013",
+      "locale": "fr",
+      "path": "streeling/courses/computer-science/fr/cs-013-preserve-spectral-axes-and-units.fr.md",
+      "exercise_answer_pairs": 5,
+      "inline_code_count": 22,
+      "fenced_code_count": 0,
+      "ordered_href_count": 8,
+      "numeric_token_count": 115,
+      "metadata_except_localized_course_title_equal": true,
+      "inline_code_equal": true,
+      "fenced_code_equal": true,
+      "ordered_hrefs_equal": true,
+      "ordered_numeric_tokens_equal": true,
+      "semantic_faithfulness": "pass: full prose, prompts and answers read; no meaning-changing omission or addition found; not human fluent-language approval"
+    },
+    {
+      "module": "CS013",
+      "locale": "es",
+      "path": "streeling/courses/computer-science/es/cs-013-preserve-spectral-axes-and-units.es.md",
+      "exercise_answer_pairs": 5,
+      "inline_code_count": 22,
+      "fenced_code_count": 0,
+      "ordered_href_count": 8,
+      "numeric_token_count": 115,
+      "metadata_except_localized_course_title_equal": true,
+      "inline_code_equal": true,
+      "fenced_code_equal": true,
+      "ordered_hrefs_equal": true,
+      "ordered_numeric_tokens_equal": true,
+      "semantic_faithfulness": "pass: full prose, prompts and answers read; no meaning-changing omission or addition found; not human fluent-language approval"
+    },
+    {
+      "module": "DV009",
+      "locale": "en",
+      "path": "streeling/courses/data-visualization/en/dv-009-compare-spectrogram-color-scales.md",
+      "exercise_answer_pairs": 5,
+      "inline_code_count": 13,
+      "fenced_code_count": 0,
+      "ordered_href_count": 9,
+      "numeric_token_count": 70,
+      "metadata_except_localized_course_title_equal": true,
+      "inline_code_equal": true,
+      "fenced_code_equal": true,
+      "ordered_hrefs_equal": true,
+      "ordered_numeric_tokens_equal": true,
+      "semantic_faithfulness": "pass: full prose, prompts and answers read; no meaning-changing omission or addition found; not human fluent-language approval"
+    },
+    {
+      "module": "DV009",
+      "locale": "fr",
+      "path": "streeling/courses/data-visualization/fr/dv-009-compare-spectrogram-color-scales.fr.md",
+      "exercise_answer_pairs": 5,
+      "inline_code_count": 13,
+      "fenced_code_count": 0,
+      "ordered_href_count": 9,
+      "numeric_token_count": 70,
+      "metadata_except_localized_course_title_equal": true,
+      "inline_code_equal": true,
+      "fenced_code_equal": true,
+      "ordered_hrefs_equal": true,
+      "ordered_numeric_tokens_equal": true,
+      "semantic_faithfulness": "pass: full prose, prompts and answers read; no meaning-changing omission or addition found; not human fluent-language approval"
+    },
+    {
+      "module": "DV009",
+      "locale": "es",
+      "path": "streeling/courses/data-visualization/es/dv-009-compare-spectrogram-color-scales.es.md",
+      "exercise_answer_pairs": 5,
+      "inline_code_count": 13,
+      "fenced_code_count": 0,
+      "ordered_href_count": 9,
+      "numeric_token_count": 70,
+      "metadata_except_localized_course_title_equal": true,
+      "inline_code_equal": true,
+      "fenced_code_equal": true,
+      "ordered_hrefs_equal": true,
+      "ordered_numeric_tokens_equal": true,
+      "semantic_faithfulness": "pass: full prose, prompts and answers read; no meaning-changing omission or addition found; not human fluent-language approval"
+    }
+  ],
+  "exercise_answer_reviews": [
+    {
+      "module": "AUD006",
+      "locale": "en",
+      "exercise": 1,
+      "path": "streeling/courses/audio-engineering/en/aud-006-calibrate-spectral-amplitudes.md",
+      "heading_line": 35,
+      "answer_line": 39,
+      "focus": "Fixed-input window comparison",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "English source",
+      "check": "Prompt asks fixed versus changed quantities and a falsifier; answer preserves amplitude 0.25, frequency 689.0625 Hz and sample rate 44100 Hz, attributes near-doubling to window-sum gain and rejects louder/new-render interpretation."
+    },
+    {
+      "module": "AUD006",
+      "locale": "en",
+      "exercise": 2,
+      "path": "streeling/courses/audio-engineering/en/aud-006-calibrate-spectral-amplitudes.md",
+      "heading_line": 47,
+      "answer_line": 51,
+      "focus": "Interior-bin calibration and reference",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "English source",
+      "check": "Answer computes approximately 0.25000003, uses unit peak reference and approximately -12.0412 dB, and rejects PSD; surrounding section explicitly excludes RMS/loudness/general guitar-partial inference and exact equality."
+    },
+    {
+      "module": "AUD006",
+      "locale": "en",
+      "exercise": 3,
+      "path": "streeling/courses/audio-engineering/en/aud-006-calibrate-spectral-amplitudes.md",
+      "heading_line": 57,
+      "answer_line": 61,
+      "focus": "Endpoint controls",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "English source",
+      "check": "Answer correctly gives 255.875/1023.5 = 0.25, rejects doubled 0.5 and applies the undoubled rule to Nyquist for the stated even real transform."
+    },
+    {
+      "module": "AUD006",
+      "locale": "en",
+      "exercise": 4,
+      "path": "streeling/courses/audio-engineering/en/aud-006-calibrate-spectral-amplitudes.md",
+      "heading_line": 69,
+      "answer_line": 73,
+      "focus": "Decoder/export boundary",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "English source",
+      "check": "Answer separates quantized PCM16 /32768 decoding from export multiplier 32767, retains WAV identity and rejects recovery/equality of original native floats."
+    },
+    {
+      "module": "AUD006",
+      "locale": "en",
+      "exercise": 5,
+      "path": "streeling/courses/audio-engineering/en/aud-006-calibrate-spectral-amplitudes.md",
+      "heading_line": 79,
+      "answer_line": 83,
+      "focus": "Acceptance decision",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "English source",
+      "check": "Answer retains failed historical decay gate, approximately 0.11416615 dB below required 1 dB, and requests a separately declared measure/rule and execution rather than listening approval from a plot."
+    },
+    {
+      "module": "AUD006",
+      "locale": "fr",
+      "exercise": 1,
+      "path": "streeling/courses/audio-engineering/fr/aud-006-calibrate-spectral-amplitudes.fr.md",
+      "heading_line": 35,
+      "answer_line": 39,
+      "focus": "Fixed-input window comparison",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "pass under AI source-assisted review",
+      "check": "Prompt asks fixed versus changed quantities and a falsifier; answer preserves amplitude 0.25, frequency 689.0625 Hz and sample rate 44100 Hz, attributes near-doubling to window-sum gain and rejects louder/new-render interpretation."
+    },
+    {
+      "module": "AUD006",
+      "locale": "fr",
+      "exercise": 2,
+      "path": "streeling/courses/audio-engineering/fr/aud-006-calibrate-spectral-amplitudes.fr.md",
+      "heading_line": 47,
+      "answer_line": 51,
+      "focus": "Interior-bin calibration and reference",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "pass under AI source-assisted review",
+      "check": "Answer computes approximately 0.25000003, uses unit peak reference and approximately -12.0412 dB, and rejects PSD; surrounding section explicitly excludes RMS/loudness/general guitar-partial inference and exact equality."
+    },
+    {
+      "module": "AUD006",
+      "locale": "fr",
+      "exercise": 3,
+      "path": "streeling/courses/audio-engineering/fr/aud-006-calibrate-spectral-amplitudes.fr.md",
+      "heading_line": 57,
+      "answer_line": 61,
+      "focus": "Endpoint controls",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "pass under AI source-assisted review",
+      "check": "Answer correctly gives 255.875/1023.5 = 0.25, rejects doubled 0.5 and applies the undoubled rule to Nyquist for the stated even real transform."
+    },
+    {
+      "module": "AUD006",
+      "locale": "fr",
+      "exercise": 4,
+      "path": "streeling/courses/audio-engineering/fr/aud-006-calibrate-spectral-amplitudes.fr.md",
+      "heading_line": 69,
+      "answer_line": 73,
+      "focus": "Decoder/export boundary",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "pass under AI source-assisted review",
+      "check": "Answer separates quantized PCM16 /32768 decoding from export multiplier 32767, retains WAV identity and rejects recovery/equality of original native floats."
+    },
+    {
+      "module": "AUD006",
+      "locale": "fr",
+      "exercise": 5,
+      "path": "streeling/courses/audio-engineering/fr/aud-006-calibrate-spectral-amplitudes.fr.md",
+      "heading_line": 79,
+      "answer_line": 83,
+      "focus": "Acceptance decision",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "pass under AI source-assisted review",
+      "check": "Answer retains failed historical decay gate, approximately 0.11416615 dB below required 1 dB, and requests a separately declared measure/rule and execution rather than listening approval from a plot."
+    },
+    {
+      "module": "AUD006",
+      "locale": "es",
+      "exercise": 1,
+      "path": "streeling/courses/audio-engineering/es/aud-006-calibrate-spectral-amplitudes.es.md",
+      "heading_line": 35,
+      "answer_line": 39,
+      "focus": "Fixed-input window comparison",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "pass under AI source-assisted review",
+      "check": "Prompt asks fixed versus changed quantities and a falsifier; answer preserves amplitude 0.25, frequency 689.0625 Hz and sample rate 44100 Hz, attributes near-doubling to window-sum gain and rejects louder/new-render interpretation."
+    },
+    {
+      "module": "AUD006",
+      "locale": "es",
+      "exercise": 2,
+      "path": "streeling/courses/audio-engineering/es/aud-006-calibrate-spectral-amplitudes.es.md",
+      "heading_line": 47,
+      "answer_line": 51,
+      "focus": "Interior-bin calibration and reference",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "pass under AI source-assisted review",
+      "check": "Answer computes approximately 0.25000003, uses unit peak reference and approximately -12.0412 dB, and rejects PSD; surrounding section explicitly excludes RMS/loudness/general guitar-partial inference and exact equality."
+    },
+    {
+      "module": "AUD006",
+      "locale": "es",
+      "exercise": 3,
+      "path": "streeling/courses/audio-engineering/es/aud-006-calibrate-spectral-amplitudes.es.md",
+      "heading_line": 57,
+      "answer_line": 61,
+      "focus": "Endpoint controls",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "pass under AI source-assisted review",
+      "check": "Answer correctly gives 255.875/1023.5 = 0.25, rejects doubled 0.5 and applies the undoubled rule to Nyquist for the stated even real transform."
+    },
+    {
+      "module": "AUD006",
+      "locale": "es",
+      "exercise": 4,
+      "path": "streeling/courses/audio-engineering/es/aud-006-calibrate-spectral-amplitudes.es.md",
+      "heading_line": 69,
+      "answer_line": 73,
+      "focus": "Decoder/export boundary",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "pass under AI source-assisted review",
+      "check": "Answer separates quantized PCM16 /32768 decoding from export multiplier 32767, retains WAV identity and rejects recovery/equality of original native floats."
+    },
+    {
+      "module": "AUD006",
+      "locale": "es",
+      "exercise": 5,
+      "path": "streeling/courses/audio-engineering/es/aud-006-calibrate-spectral-amplitudes.es.md",
+      "heading_line": 79,
+      "answer_line": 83,
+      "focus": "Acceptance decision",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "pass under AI source-assisted review",
+      "check": "Answer retains failed historical decay gate, approximately 0.11416615 dB below required 1 dB, and requests a separately declared measure/rule and execution rather than listening approval from a plot."
+    },
+    {
+      "module": "CS013",
+      "locale": "en",
+      "exercise": 1,
+      "path": "streeling/courses/computer-science/en/cs-013-preserve-spectral-axes-and-units.md",
+      "heading_line": 30,
+      "answer_line": 34,
+      "focus": "Complete-frame shape and tail",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "English source",
+      "check": "Answer derives 341 by 1025, 349525 cells, last start 174080, exclusive end 176128 and tail 272, and states padding would change the analysis policy."
+    },
+    {
+      "module": "CS013",
+      "locale": "en",
+      "exercise": 2,
+      "path": "streeling/courses/computer-science/en/cs-013-preserve-spectral-axes-and-units.md",
+      "heading_line": 42,
+      "answer_line": 46,
+      "focus": "Coordinates and support",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "English source",
+      "check": "Answer computes frame 50 start approximately 0.580499 seconds and bin 32 at 689.0625 Hz, retains 2048-sample support and denies seconds/hertz without sample rate; section distinguishes hop display end 3.959002 from support end 3.993832 seconds."
+    },
+    {
+      "module": "CS013",
+      "locale": "en",
+      "exercise": 3,
+      "path": "streeling/courses/computer-science/en/cs-013-preserve-spectral-axes-and-units.md",
+      "heading_line": 54,
+      "answer_line": 58,
+      "focus": "Orientation and stride",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "English source",
+      "check": "Answer derives row-major offset 14/value 204 versus wrong stride offset 10/value 200, rejects total count 15 as sufficient and adds shape/axis/storage/cell/coordinate checks."
+    },
+    {
+      "module": "CS013",
+      "locale": "en",
+      "exercise": 4,
+      "path": "streeling/courses/computer-science/en/cs-013-preserve-spectral-axes-and-units.md",
+      "heading_line": 66,
+      "answer_line": 70,
+      "focus": "Value/context handoff",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "English source",
+      "check": "Answer names source/decoder, shape/axes/storage, trusted sample rate, window/hop/frame start/window formula/estimator/endpoints/reference/floor and refuses to call numerical fixtures an executed IX response."
+    },
+    {
+      "module": "CS013",
+      "locale": "en",
+      "exercise": 5,
+      "path": "streeling/courses/computer-science/en/cs-013-preserve-spectral-axes-and-units.md",
+      "heading_line": 76,
+      "answer_line": 80,
+      "focus": "Missing-context decision",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "English source",
+      "check": "Answer preserves original/index data, requests trusted sample rate and value/window/reference context, defers interpreted ranking and keeps advisory metadata separate from implemented semantic backpressure."
+    },
+    {
+      "module": "CS013",
+      "locale": "fr",
+      "exercise": 1,
+      "path": "streeling/courses/computer-science/fr/cs-013-preserve-spectral-axes-and-units.fr.md",
+      "heading_line": 30,
+      "answer_line": 34,
+      "focus": "Complete-frame shape and tail",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "pass under AI source-assisted review",
+      "check": "Answer derives 341 by 1025, 349525 cells, last start 174080, exclusive end 176128 and tail 272, and states padding would change the analysis policy."
+    },
+    {
+      "module": "CS013",
+      "locale": "fr",
+      "exercise": 2,
+      "path": "streeling/courses/computer-science/fr/cs-013-preserve-spectral-axes-and-units.fr.md",
+      "heading_line": 42,
+      "answer_line": 46,
+      "focus": "Coordinates and support",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "pass under AI source-assisted review",
+      "check": "Answer computes frame 50 start approximately 0.580499 seconds and bin 32 at 689.0625 Hz, retains 2048-sample support and denies seconds/hertz without sample rate; section distinguishes hop display end 3.959002 from support end 3.993832 seconds."
+    },
+    {
+      "module": "CS013",
+      "locale": "fr",
+      "exercise": 3,
+      "path": "streeling/courses/computer-science/fr/cs-013-preserve-spectral-axes-and-units.fr.md",
+      "heading_line": 54,
+      "answer_line": 58,
+      "focus": "Orientation and stride",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "pass under AI source-assisted review",
+      "check": "Answer derives row-major offset 14/value 204 versus wrong stride offset 10/value 200, rejects total count 15 as sufficient and adds shape/axis/storage/cell/coordinate checks."
+    },
+    {
+      "module": "CS013",
+      "locale": "fr",
+      "exercise": 4,
+      "path": "streeling/courses/computer-science/fr/cs-013-preserve-spectral-axes-and-units.fr.md",
+      "heading_line": 66,
+      "answer_line": 70,
+      "focus": "Value/context handoff",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "pass under AI source-assisted review",
+      "check": "Answer names source/decoder, shape/axes/storage, trusted sample rate, window/hop/frame start/window formula/estimator/endpoints/reference/floor and refuses to call numerical fixtures an executed IX response."
+    },
+    {
+      "module": "CS013",
+      "locale": "fr",
+      "exercise": 5,
+      "path": "streeling/courses/computer-science/fr/cs-013-preserve-spectral-axes-and-units.fr.md",
+      "heading_line": 76,
+      "answer_line": 80,
+      "focus": "Missing-context decision",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "pass under AI source-assisted review",
+      "check": "Answer preserves original/index data, requests trusted sample rate and value/window/reference context, defers interpreted ranking and keeps advisory metadata separate from implemented semantic backpressure."
+    },
+    {
+      "module": "CS013",
+      "locale": "es",
+      "exercise": 1,
+      "path": "streeling/courses/computer-science/es/cs-013-preserve-spectral-axes-and-units.es.md",
+      "heading_line": 30,
+      "answer_line": 34,
+      "focus": "Complete-frame shape and tail",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "pass under AI source-assisted review",
+      "check": "Answer derives 341 by 1025, 349525 cells, last start 174080, exclusive end 176128 and tail 272, and states padding would change the analysis policy."
+    },
+    {
+      "module": "CS013",
+      "locale": "es",
+      "exercise": 2,
+      "path": "streeling/courses/computer-science/es/cs-013-preserve-spectral-axes-and-units.es.md",
+      "heading_line": 42,
+      "answer_line": 46,
+      "focus": "Coordinates and support",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "pass under AI source-assisted review",
+      "check": "Answer computes frame 50 start approximately 0.580499 seconds and bin 32 at 689.0625 Hz, retains 2048-sample support and denies seconds/hertz without sample rate; section distinguishes hop display end 3.959002 from support end 3.993832 seconds."
+    },
+    {
+      "module": "CS013",
+      "locale": "es",
+      "exercise": 3,
+      "path": "streeling/courses/computer-science/es/cs-013-preserve-spectral-axes-and-units.es.md",
+      "heading_line": 54,
+      "answer_line": 58,
+      "focus": "Orientation and stride",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "pass under AI source-assisted review",
+      "check": "Answer derives row-major offset 14/value 204 versus wrong stride offset 10/value 200, rejects total count 15 as sufficient and adds shape/axis/storage/cell/coordinate checks."
+    },
+    {
+      "module": "CS013",
+      "locale": "es",
+      "exercise": 4,
+      "path": "streeling/courses/computer-science/es/cs-013-preserve-spectral-axes-and-units.es.md",
+      "heading_line": 66,
+      "answer_line": 70,
+      "focus": "Value/context handoff",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "pass under AI source-assisted review",
+      "check": "Answer names source/decoder, shape/axes/storage, trusted sample rate, window/hop/frame start/window formula/estimator/endpoints/reference/floor and refuses to call numerical fixtures an executed IX response."
+    },
+    {
+      "module": "CS013",
+      "locale": "es",
+      "exercise": 5,
+      "path": "streeling/courses/computer-science/es/cs-013-preserve-spectral-axes-and-units.es.md",
+      "heading_line": 76,
+      "answer_line": 80,
+      "focus": "Missing-context decision",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "pass under AI source-assisted review",
+      "check": "Answer preserves original/index data, requests trusted sample rate and value/window/reference context, defers interpreted ranking and keeps advisory metadata separate from implemented semantic backpressure."
+    },
+    {
+      "module": "DV009",
+      "locale": "en",
+      "exercise": 1,
+      "path": "streeling/courses/data-visualization/en/dv-009-compare-spectrogram-color-scales.md",
+      "heading_line": 28,
+      "answer_line": 32,
+      "focus": "Treatments and constructed control",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "English source",
+      "check": "Answer identifies B versus C as actual retained treatments and B versus 0.5B as a constructed multiplier on decoded samples, with no third engine execution."
+    },
+    {
+      "module": "DV009",
+      "locale": "en",
+      "exercise": 2,
+      "path": "streeling/courses/data-visualization/en/dv-009-compare-spectrogram-color-scales.md",
+      "heading_line": 40,
+      "answer_line": 44,
+      "focus": "Display-reference equality",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "English source",
+      "check": "Answer permits only displayed level equality relative to each panel maximum subject to floor, rejects original-amplitude equality and cross-row common-amplitude inference."
+    },
+    {
+      "module": "DV009",
+      "locale": "en",
+      "exercise": 3,
+      "path": "streeling/courses/data-visualization/en/dv-009-compare-spectrogram-color-scales.md",
+      "heading_line": 52,
+      "answer_line": 56,
+      "focus": "Half-gain shift and cancellation",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "English source",
+      "check": "Answer derives 20*log10(0.5), approximately -6.02059991 dB, explains ratio cancellation and excludes either-panel floor-clipped cells; section interprets 6359 common non-floored cells and measured zero relative-view difference without equating C to the control."
+    },
+    {
+      "module": "DV009",
+      "locale": "en",
+      "exercise": 4,
+      "path": "streeling/courses/data-visualization/en/dv-009-compare-spectrogram-color-scales.md",
+      "heading_line": 62,
+      "answer_line": 66,
+      "focus": "Crop and normalization order",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "English source",
+      "check": "Answer explains smaller-region maximum can brighten unchanged data, preserves full-matrix maximum before crop and binds source/hash/estimator/reference-domain/crop/floor/limits."
+    },
+    {
+      "module": "DV009",
+      "locale": "en",
+      "exercise": 5,
+      "path": "streeling/courses/data-visualization/en/dv-009-compare-spectrogram-color-scales.md",
+      "heading_line": 72,
+      "answer_line": 76,
+      "focus": "Defensible final decision",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "English source",
+      "check": "Answer limits matching relative views to B and constructed 0.5B, rejects actual-candidate equivalence, unchanged gain and passed decay gate, and requires controlled declared feature or listening evidence for broader claims."
+    },
+    {
+      "module": "DV009",
+      "locale": "fr",
+      "exercise": 1,
+      "path": "streeling/courses/data-visualization/fr/dv-009-compare-spectrogram-color-scales.fr.md",
+      "heading_line": 28,
+      "answer_line": 32,
+      "focus": "Treatments and constructed control",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "pass under AI source-assisted review",
+      "check": "Answer identifies B versus C as actual retained treatments and B versus 0.5B as a constructed multiplier on decoded samples, with no third engine execution."
+    },
+    {
+      "module": "DV009",
+      "locale": "fr",
+      "exercise": 2,
+      "path": "streeling/courses/data-visualization/fr/dv-009-compare-spectrogram-color-scales.fr.md",
+      "heading_line": 40,
+      "answer_line": 44,
+      "focus": "Display-reference equality",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "pass under AI source-assisted review",
+      "check": "Answer permits only displayed level equality relative to each panel maximum subject to floor, rejects original-amplitude equality and cross-row common-amplitude inference."
+    },
+    {
+      "module": "DV009",
+      "locale": "fr",
+      "exercise": 3,
+      "path": "streeling/courses/data-visualization/fr/dv-009-compare-spectrogram-color-scales.fr.md",
+      "heading_line": 52,
+      "answer_line": 56,
+      "focus": "Half-gain shift and cancellation",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "pass under AI source-assisted review",
+      "check": "Answer derives 20*log10(0.5), approximately -6.02059991 dB, explains ratio cancellation and excludes either-panel floor-clipped cells; section interprets 6359 common non-floored cells and measured zero relative-view difference without equating C to the control."
+    },
+    {
+      "module": "DV009",
+      "locale": "fr",
+      "exercise": 4,
+      "path": "streeling/courses/data-visualization/fr/dv-009-compare-spectrogram-color-scales.fr.md",
+      "heading_line": 62,
+      "answer_line": 66,
+      "focus": "Crop and normalization order",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "pass under AI source-assisted review",
+      "check": "Answer explains smaller-region maximum can brighten unchanged data, preserves full-matrix maximum before crop and binds source/hash/estimator/reference-domain/crop/floor/limits."
+    },
+    {
+      "module": "DV009",
+      "locale": "fr",
+      "exercise": 5,
+      "path": "streeling/courses/data-visualization/fr/dv-009-compare-spectrogram-color-scales.fr.md",
+      "heading_line": 72,
+      "answer_line": 76,
+      "focus": "Defensible final decision",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "pass under AI source-assisted review",
+      "check": "Answer limits matching relative views to B and constructed 0.5B, rejects actual-candidate equivalence, unchanged gain and passed decay gate, and requires controlled declared feature or listening evidence for broader claims."
+    },
+    {
+      "module": "DV009",
+      "locale": "es",
+      "exercise": 1,
+      "path": "streeling/courses/data-visualization/es/dv-009-compare-spectrogram-color-scales.es.md",
+      "heading_line": 28,
+      "answer_line": 32,
+      "focus": "Treatments and constructed control",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "pass under AI source-assisted review",
+      "check": "Answer identifies B versus C as actual retained treatments and B versus 0.5B as a constructed multiplier on decoded samples, with no third engine execution."
+    },
+    {
+      "module": "DV009",
+      "locale": "es",
+      "exercise": 2,
+      "path": "streeling/courses/data-visualization/es/dv-009-compare-spectrogram-color-scales.es.md",
+      "heading_line": 40,
+      "answer_line": 44,
+      "focus": "Display-reference equality",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "pass under AI source-assisted review",
+      "check": "Answer permits only displayed level equality relative to each panel maximum subject to floor, rejects original-amplitude equality and cross-row common-amplitude inference."
+    },
+    {
+      "module": "DV009",
+      "locale": "es",
+      "exercise": 3,
+      "path": "streeling/courses/data-visualization/es/dv-009-compare-spectrogram-color-scales.es.md",
+      "heading_line": 52,
+      "answer_line": 56,
+      "focus": "Half-gain shift and cancellation",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "pass under AI source-assisted review",
+      "check": "Answer derives 20*log10(0.5), approximately -6.02059991 dB, explains ratio cancellation and excludes either-panel floor-clipped cells; section interprets 6359 common non-floored cells and measured zero relative-view difference without equating C to the control."
+    },
+    {
+      "module": "DV009",
+      "locale": "es",
+      "exercise": 4,
+      "path": "streeling/courses/data-visualization/es/dv-009-compare-spectrogram-color-scales.es.md",
+      "heading_line": 62,
+      "answer_line": 66,
+      "focus": "Crop and normalization order",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "pass under AI source-assisted review",
+      "check": "Answer explains smaller-region maximum can brighten unchanged data, preserves full-matrix maximum before crop and binds source/hash/estimator/reference-domain/crop/floor/limits."
+    },
+    {
+      "module": "DV009",
+      "locale": "es",
+      "exercise": 5,
+      "path": "streeling/courses/data-visualization/es/dv-009-compare-spectrogram-color-scales.es.md",
+      "heading_line": 72,
+      "answer_line": 76,
+      "focus": "Defensible final decision",
+      "prompt_answer_coverage": "pass",
+      "technical_accuracy": "pass",
+      "translation_faithfulness": "pass under AI source-assisted review",
+      "check": "Answer limits matching relative views to B and constructed 0.5B, rejects actual-candidate equivalence, unchanged gain and passed decay gate, and requires controlled declared feature or listening evidence for broader claims."
+    }
+  ],
+  "learner_criterion_reviews": [
+    {
+      "module": "AUD006",
+      "criterion": 1,
+      "criterion_text": "Uses 2*raw/window_sum at the two interior bins to recover approximately 0.25 within 1e-6; attributes approximately 6.02272037 dB raw change to analysis gain under fixed input.",
+      "course_coverage": "Section 1 and practice exercise 1",
+      "learner_prompt_coverage": "Task explicitly asks both amplitude estimates, raw difference and fixed-input interpretation.",
+      "decision": "pass: assessable from declared sources and fixed evidence; no learner result inferred"
+    },
+    {
+      "module": "AUD006",
+      "criterion": 2,
+      "criterion_text": "States unit peak-amplitude reference and approximately -12.0412 dB; distinguishes isolated coherent-tone peak estimator from PSD, RMS, loudness and general guitar-partial measurement.",
+      "course_coverage": "Section 2 and practice exercise 2",
+      "learner_prompt_coverage": "Task requests logarithmic reference/level and estimator assumptions versus PSD, RMS and loudness.",
+      "decision": "pass: assessable from declared sources and fixed evidence; no learner result inferred"
+    },
+    {
+      "module": "AUD006",
+      "criterion": 3,
+      "criterion_text": "Uses undoubled DC and Nyquist estimates of 0.25 and rejects wrong 0.5 endpoint estimates.",
+      "course_coverage": "Section 3 and practice exercise 3",
+      "learner_prompt_coverage": "Task explicitly requests DC/Nyquist undoubled controls and wrong blanket factor.",
+      "decision": "pass: assessable from declared sources and fixed evidence; no learner result inferred"
+    },
+    {
+      "module": "AUD006",
+      "criterion": 4,
+      "criterion_text": "Separates PCM16 /32768 decoding from earlier export multiplier32767 and declines original-float recovery or equality claims.",
+      "course_coverage": "Section 4 and practice exercise 4",
+      "learner_prompt_coverage": "Task names both decoder denominator and export multiplier and asks why floats are not recovered.",
+      "decision": "pass: assessable from declared sources and fixed evidence; no learner result inferred"
+    },
+    {
+      "module": "AUD006",
+      "criterion": 5,
+      "criterion_text": "Retains prior candidate failure: approximately0.11416615 dB error improvement is less than required1 dB; demands separately declared and executed evidence for another acceptance claim.",
+      "course_coverage": "Section 5 and practice exercise 5",
+      "learner_prompt_coverage": "Task explicitly asks whether a plot reverses the old failed 1 dB gate.",
+      "decision": "pass: assessable from declared sources and fixed evidence; no learner result inferred"
+    },
+    {
+      "module": "CS013",
+      "criterion": 1,
+      "criterion_text": "Derives341 frames,1025 bins,349525 cells; last start174080, exclusive end176128 and tail272 from complete-frame policy.",
+      "course_coverage": "Section 1 and practice exercise 1",
+      "learner_prompt_coverage": "Task requests frame/bin/cell counts and start/end/tail.",
+      "decision": "pass: assessable from declared sources and fixed evidence; no learner result inferred"
+    },
+    {
+      "module": "CS013",
+      "criterion": 2,
+      "criterion_text": "Derives frame50 start approximately0.580499s and bin32 frequency689.0625Hz; distinguishes hop cell from2048-sample support, including display end approximately3.959002s and support end approximately3.993832s.",
+      "course_coverage": "Section 2 and practice exercise 2",
+      "learner_prompt_coverage": "Task requests time/frequency and both final extents, separating hop cell from sample support.",
+      "decision": "pass: assessable from declared sources and fixed evidence; no learner result inferred"
+    },
+    {
+      "module": "CS013",
+      "criterion": 3,
+      "criterion_text": "Derives sentinel row-major offset14/value204 versus wrong-stride offset10/value200 and rejects total15 as sufficient orientation evidence.",
+      "course_coverage": "Section 3 and practice exercise 3",
+      "learner_prompt_coverage": "Task explicitly requests sentinel correct/wrong offsets and values.",
+      "decision": "pass: assessable from declared sources and fixed evidence; no learner result inferred"
+    },
+    {
+      "module": "CS013",
+      "criterion": 4,
+      "criterion_text": "Requires trusted sample rate for seconds/hertz, and source/decoder, shape/axis/storage, framing, window, value estimator, endpoints, logarithmic reference and floor for this interpretation.",
+      "course_coverage": "Sections 2 and 4; practice exercises 2 and 4",
+      "learner_prompt_coverage": "Task requests trusted sample rate and source/value/reference context for a logarithmic payload.",
+      "decision": "pass: assessable from declared sources and fixed evidence; no learner result inferred"
+    },
+    {
+      "module": "CS013",
+      "criterion": 5,
+      "criterion_text": "Labels metadata advisory and matrices numerical analysis; declines ratified-schema, new adapter and executed IX-response claims.",
+      "course_coverage": "Sections 4 and 5; practice exercises 4 and 5",
+      "learner_prompt_coverage": "Task explicitly separates advisory metadata/numerical matrices from ratified schema, adapter and observed IX execution.",
+      "decision": "pass: assessable from declared sources and fixed evidence; no learner result inferred"
+    },
+    {
+      "module": "DV009",
+      "criterion": 1,
+      "criterion_text": "Identifies B/C as earlier actual baseline/candidate treatments and0.5B as a constructed multiplier on decoded baseline, not a third engine render.",
+      "course_coverage": "Section 1 and practice exercise 1",
+      "learner_prompt_coverage": "Task requests actual retained columns versus constructed half-gain control.",
+      "decision": "pass: assessable from declared sources and fixed evidence; no learner result inferred"
+    },
+    {
+      "module": "DV009",
+      "criterion": 2,
+      "criterion_text": "States fixed and per-panel-maximum formulas, common numeric limits[-80,0], distinct references and full-matrix normalization before frequency crop; rejects cross-row color as amplitude equality.",
+      "course_coverage": "Section 2 and practice exercise 2",
+      "learner_prompt_coverage": "Task requests both formulas/references/limits and maximum-before-crop ordering.",
+      "decision": "pass: assessable from declared sources and fixed evidence; no learner result inferred"
+    },
+    {
+      "module": "DV009",
+      "criterion": 3,
+      "criterion_text": "Derives20log10(0.5) approximately-6.02059991dB and ratio cancellation; interprets6359 common non-floored cells and measured0 relative difference while excluding floor-clipped cells from unchanged-shift claims.",
+      "course_coverage": "Section 3 and practice exercise 3",
+      "learner_prompt_coverage": "Task requests shift, cancellation, 6359 common cells, zero relative difference and floor limitation.",
+      "decision": "pass: assessable from declared sources and fixed evidence; no learner result inferred"
+    },
+    {
+      "module": "DV009",
+      "criterion": 4,
+      "criterion_text": "Explains a crop-dependent maximum can brighten unchanged cells and requires source, estimator, reference domain, crop, floor and color limits in a reproducible comparison.",
+      "course_coverage": "Section 4 and practice exercise 4",
+      "learner_prompt_coverage": "Task requests crop-dependent brightening and reproducible display metadata.",
+      "decision": "pass: assessable from declared sources and fixed evidence; no learner result inferred"
+    },
+    {
+      "module": "DV009",
+      "criterion": 5,
+      "criterion_text": "Declines actual-candidate equivalence, unchanged-gain and passed-decay claims from matching relative control views; retains failed gate and requests a declared controlled feature or listening test for broader musical conclusions.",
+      "course_coverage": "Section 5 and practice exercise 5",
+      "learner_prompt_coverage": "Task requests a final decision retaining the old failed gate and further controlled/listening evidence.",
+      "decision": "pass: assessable from declared sources and fixed evidence; no learner result inferred"
+    }
+  ],
+  "distinctness_reviews": [
+    {
+      "module": "AUD006",
+      "compared_with": "AUD003",
+      "decision": "distinct",
+      "details": "AUD003 concerns event attribution, window placement and Haar transient preservation. AUD006 adds measured coherent-window amplitude calibration, endpoint controls and decoder/reference boundaries."
+    },
+    {
+      "module": "CS013",
+      "compared_with": "CS012",
+      "decision": "distinct",
+      "details": "CS012 concerns native/WASM builds, event-free block partition probes and float/PCM byte contracts. CS013 concerns spectral matrix orientation, stride, physical axes, value units and missing semantic context."
+    },
+    {
+      "module": "DV009",
+      "compared_with": "DV007",
+      "decision": "distinct",
+      "details": "DV007 concerns aligned classifier diagnostic panels for OPTIC-K partitions. DV009 constructs an exact audio gain control to distinguish a shared numeric scale from a shared reference, with crop/floor order and fixed versus relative matrices."
+    }
+  ],
+  "resolved_review_notes": [
+    {
+      "module": "AUD006",
+      "location": "Practice exercise 1 answer, all locales",
+      "issue": "Conventional coherent-gain terminology could obscure that the near-doubling is in window sum.",
+      "resolution": "Final English explicitly says window-sum gain; French and Spanish explicitly refer to the sum of coefficients. Final wording checked and bound."
+    }
+  ],
+  "review_status": {
+    "ai_content_review": "pass within declared evidence scope",
+    "numerical_data_review": "relied on independently completed bound 42-check audit",
+    "human_technical_review": null,
+    "fluent_language_review": {
+      "en": null,
+      "fr": null,
+      "es": null
+    },
+    "learner_attempts": null,
+    "listening_review": null,
+    "causal_learning_benefit": null,
+    "deployed_course_html_review": null
+  },
+  "limits": [
+    "This is AI source-assisted technical/content/translation checking, not human subject or fluent-language approval.",
+    "No participant answers, listening preference, unaided transfer, measured learning benefit or production release is established.",
+    "Remote URLs were not fetched again; ordered href parity and recorded source/readback evidence were checked. Rendered and deployed links require their own gate.",
+    "The numerical data audit is relied on by exact hash; this review did not rerun full FFTs, execute IX or rerender audio.",
+    "Only source pages and listed supporting evidence were checked; generated course HTML, build output and newly produced auxiliary inventory receipts are outside this receipt.",
+    "Receipt binds exact checked bytes; any later input change requires a fresh audit."
+  ]
+}
