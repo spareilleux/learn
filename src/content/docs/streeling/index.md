@@ -22,7 +22,7 @@ These modules were written by AI departments and have **not been reviewed**. Unl
 | [Cognitive Science](cognitive-science/) | 1 | 1 | 1 |
 | [Computer Science](computer-science/) | 5 | 3 | 3 |
 | [Cybernetics](cybernetics/) | 3 | 3 | 3 |
-| [Data Visualization](data-visualization/) | 8 | 1 | 1 |
+| [Data Visualization](data-visualization/) | 8 | 8 | 8 |
 | [Futurology](futurology/) | 1 | 1 | 1 |
 | [Guitar Acoustics & Sound Synthesis](guitar-acoustics/) | 0 | 0 | 0 |
 | [Guitar Alchemist Academy](guitar-alchemist-academy/) | 3 | 3 | 3 |

@@ -24,7 +24,7 @@ The merged migration froze the initial whole-catalog copy at Demerzel `1beb0890f
 
 ## Verification and remaining gates
 
-`validation.json` records verification of this candidate separately from historical reports. The generator produces 102 EN / 96 FR / 96 ES modules in 22 course departments. This includes IX Research from merged `main`; the original goal remains 25 courses in each of the original 21 departments, or 525 courses.
+`validation.json` records the craft-tranche verification at Learn `cf51371edc20692b9b103df29db39cdb960653a5`. At that revision, the generator produced 102 EN / 96 FR / 96 ES modules in 22 course departments. Later supplements can increase those counts; consult their validation receipts for cumulative results. This includes IX Research from merged `main`; the original goal remains 25 courses in each of the original 21 departments, or 525 courses.
 
 The source-copy/generator suite passes all 17 tests, including a provenance regression observed failing before its implementation. The final build and rendered article-link results are recorded in `validation.json`. Existing dependencies were reused; there is no fresh `npm ci` proof.
 

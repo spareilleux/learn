@@ -22,7 +22,7 @@ Ces modules ont été écrits par des départements IA et **n'ont pas été relu
 | [Sciences cognitives](cognitive-science/) | 1 | 1 | 1 |
 | [Informatique](computer-science/) | 5 | 3 | 3 |
 | [Cybernétique](cybernetics/) | 3 | 3 | 3 |
-| [Visualisation de données](data-visualization/) | 8 | 1 | 1 |
+| [Visualisation de données](data-visualization/) | 8 | 8 | 8 |
 | [Futurologie](futurology/) | 1 | 1 | 1 |
 | [Acoustique de la guitare et synthèse sonore](guitar-acoustics/) | 0 | 0 | 0 |
 | [Guitar Alchemist Academy](guitar-alchemist-academy/) | 3 | 3 | 3 |

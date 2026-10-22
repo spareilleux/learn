@@ -12,10 +12,10 @@ sidebar:
 ## Módulos
 
 - [DV-001 · Ejecuciones observadas, degradadas y datos obsoletos](dv-001-observed-degraded-stale-quality/)
-- [DV-002 · Denominators and Changing Test Populations](dv-002-denominators-and-test-populations/) *(en inglés)*
-- [DV-003 · Compare Instrument Cohorts Without Hiding Their Sizes](dv-003-instrument-cohorts-and-units/) *(en inglés)*
-- [DV-004 · Uncertainty in Small QA Suites](dv-004-uncertainty-in-small-qa-suites/) *(en inglés)*
-- [DV-005 · Baselines, Alert Thresholds, and Historical Targets](dv-005-baselines-alerts-and-targets/) *(en inglés)*
-- [DV-006 · Position, Length, Area, and the Comparison Task](dv-006-position-length-area-comparisons/) *(en inglés)*
-- [DV-007 · Small Multiples for OPTIC-K Partition Diagnostics](dv-007-optick-partition-small-multiples/) *(en inglés)*
-- [DV-008 · Visualize Streeling Source, Review, and Public Readback](dv-008-streeling-evidence-stage-map/) *(en inglés)*
+- [DV-002 · Denominadores y poblaciones de prueba cambiantes](dv-002-denominators-and-test-populations/)
+- [DV-003 · Comparar cohortes de instrumentos sin ocultar sus tamaños](dv-003-instrument-cohorts-and-units/)
+- [DV-004 · Incertidumbre en pequeñas baterías de pruebas de QA](dv-004-uncertainty-in-small-qa-suites/)
+- [DV-005 · Referencias, umbrales de alerta y objetivos históricos](dv-005-baselines-alerts-and-targets/)
+- [DV-006 · Posición, longitud, área y la tarea de comparación](dv-006-position-length-area-comparisons/)
+- [DV-007 · Pequeños múltiplos para diagnosticar las particiones de OPTIC-K](dv-007-optick-partition-small-multiples/)
+- [DV-008 · Visualizar el código fuente, la revisión y la lectura pública de Streeling](dv-008-streeling-evidence-stage-map/)
