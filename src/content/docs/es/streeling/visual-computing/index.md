@@ -18,6 +18,7 @@ sidebar:
 - [VC-005 · Conservar detalles artesanales en una prueba de recursos de Blender a Godot](vc-005-craft-details-through-blender-to-godot/)
 - [VC-006 · Probar el significado del estado de pliegue en una escena de Blender a Godot](vc-006-origami-fold-state-scene-trial/)
 - [VC-007 · Conservar los cruces del tejido al atravesar un límite de escena de Godot](vc-007-weave-seams-as-scene-contracts/)
+- [VC-008 · Guardar y consultar una escena de tejido](vc-008-save-and-query-a-weave-scene/)
 
 ## Catálogo de cursos (previsto)
 

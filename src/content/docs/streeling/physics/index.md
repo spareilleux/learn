@@ -16,3 +16,4 @@ sidebar:
 - [PHY-003 · Sampling and Aliasing at the GA Guitar Engine Boundary](phy-003-sampling-aliasing-guitar-engine/)
 - [PHY-004 · When Velocity Moves the Pick Position in GA's Guitar Engine](phy-004-velocity-pick-position-guitar-engine/)
 - [PHY-005 · Sheet Thickness from IX Coordinates to Proposed Scene Units](phy-005-sheet-thickness-and-scene-units/)
+- [PHY-006 · Check Weave Scene Units](phy-006-check-weave-scene-units/)

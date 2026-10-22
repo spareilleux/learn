@@ -18,6 +18,7 @@ sidebar:
 - [VC-005 · Keep Craft Details through a Blender-to-Godot Asset Trial](vc-005-craft-details-through-blender-to-godot/)
 - [VC-006 · Test Fold-State Meaning in a Blender-to-Godot Scene](vc-006-origami-fold-state-scene-trial/)
 - [VC-007 · Keep Weave Crossings Correct across a Godot Scene Boundary](vc-007-weave-seams-as-scene-contracts/)
+- [VC-008 · Save and Query a Weave Scene](vc-008-save-and-query-a-weave-scene/)
 
 ## Course catalog (planned)
 

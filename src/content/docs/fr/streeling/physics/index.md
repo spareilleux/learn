@@ -16,3 +16,4 @@ sidebar:
 - [PHY-003 · Échantillonnage et repliement spectral aux frontières du moteur de guitare GA](phy-003-sampling-aliasing-guitar-engine/)
 - [PHY-004 · Quand la vélocité déplace la position de pincement dans le moteur de guitare GA](phy-004-velocity-pick-position-guitar-engine/)
 - [PHY-005 · Épaisseur des feuilles : des coordonnées IX aux unités de scène proposées](phy-005-sheet-thickness-and-scene-units/)
+- [PHY-006 · Vérifier les unités d’une scène de tissage](phy-006-check-weave-scene-units/)

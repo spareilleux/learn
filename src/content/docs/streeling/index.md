@@ -34,11 +34,11 @@ These modules were written by AI departments and have **not been reviewed**. Unl
 | [Musicology](musicology/) | 3 | 3 | 3 |
 | [Network Science](network-science/) | 5 | 5 | 5 |
 | [Philosophy](philosophy/) | 3 | 3 | 3 |
-| [Physics](physics/) | 5 | 5 | 5 |
+| [Physics](physics/) | 6 | 6 | 6 |
 | [Product and Project Management](product-management/) | 4 | 4 | 4 |
 | [Psychohistory](psychohistory/) | 25 | 25 | 25 |
-| [Semiotics](semiotics/) | 4 | 4 | 4 |
-| [Visual Computing](visual-computing/) | 7 | 7 | 7 |
+| [Semiotics](semiotics/) | 5 | 5 | 5 |
+| [Visual Computing](visual-computing/) | 8 | 8 | 8 |
 | [World Music & Languages](world-music-languages/) | 3 | 3 | 3 |
 
 ## Provenance

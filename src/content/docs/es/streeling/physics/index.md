@@ -16,3 +16,4 @@ sidebar:
 - [PHY-003 · Muestreo y aliasing en el límite del motor de guitarra de GA](phy-003-sampling-aliasing-guitar-engine/)
 - [PHY-004 · Cuando la velocidad desplaza la posición de pulsación en el motor de guitarra de GA](phy-004-velocity-pick-position-guitar-engine/)
 - [PHY-005 · Grosor de láminas: de las coordenadas IX a las unidades de escena propuestas](phy-005-sheet-thickness-and-scene-units/)
+- [PHY-006 · Comprobar las unidades de una escena de tejido](phy-006-check-weave-scene-units/)

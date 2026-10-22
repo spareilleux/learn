@@ -34,11 +34,11 @@ Estos módulos fueron escritos por departamentos de IA y **no han sido revisados
 | [Musicología](musicology/) | 3 | 3 | 3 |
 | [Ciencia de redes](network-science/) | 5 | 5 | 5 |
 | [Filosofía](philosophy/) | 3 | 3 | 3 |
-| [Física](physics/) | 5 | 5 | 5 |
+| [Física](physics/) | 6 | 6 | 6 |
 | [Gestión de productos y proyectos](product-management/) | 4 | 4 | 4 |
 | [Psicohistoria](psychohistory/) | 25 | 25 | 25 |
-| [Semiótica](semiotics/) | 4 | 4 | 4 |
-| [Computación visual](visual-computing/) | 7 | 7 | 7 |
+| [Semiótica](semiotics/) | 5 | 5 | 5 |
+| [Computación visual](visual-computing/) | 8 | 8 | 8 |
 | [Músicas y lenguas del mundo](world-music-languages/) | 3 | 3 | 3 |
 
 ## Procedencia
