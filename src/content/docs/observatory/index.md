@@ -15,6 +15,7 @@ sidebar:
 - **[Download the RTX version](https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.5/Observatory-RTX-0.2.5-win64.msi)** (135 MB, a Windows installer): the same scene path traced, with DLSS. It needs Windows and a GeForce RTX card, and was run on an RTX 5080 only. [What is new in 0.2.5](https://github.com/spareilleux/learn/releases/tag/observatory-rtx-0.2.5).
 - **[Linux](https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.1/Observatory-0.2.1-linux-x86_64.tar.gz)** (81 MB, x86_64) and **[macOS](https://github.com/spareilleux/learn/releases/download/observatory-rtx-0.2.1/Observatory-0.2.1-macos.zip)** (119 MB, Apple silicon and Intel), version 0.2.1: the same scene and buttons, rasterized, without DLSS or path tracing. See *Linux and macOS* below.
 - [Watch the cinematic](../demos/observatory/?cinematic=1): eighty seconds filmed in the scene.
+- [BRUTAL: the Colossus](brutal/): another engine tried for the Observatory. A C# and Vulkan prototype swarms ten thousand bodies into a face, path traced; a video and three stills, no download.
 
 ### The RTX version in three steps
 
