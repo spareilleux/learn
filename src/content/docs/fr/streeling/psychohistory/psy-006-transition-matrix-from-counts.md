@@ -4,12 +4,13 @@ description: Estimer une matrice de transition à partir de comptages observés 
 sidebar:
   label: PSY-006 · Estimer une matrice de transition à partir de comptages observés
   order: 6
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/psychohistory/fr/psy-006-transition-matrix-from-counts.fr.md
 ---
 
 :::note[Streeling University]
 **PSY-006** · Estimer une matrice de transition à partir de comptages observés · intermédiaire · 45 minutes
 
-Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses/psychohistory/fr/psy-006-transition-matrix-from-counts.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/fr/psy-006-transition-matrix-from-counts.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PSY-005](../../psychohistory/psy-005-persistence-baseline/), [MAT-020](../../mathematics/mat-020-markov-chains-hmm/)
 :::

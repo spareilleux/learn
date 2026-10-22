@@ -4,12 +4,13 @@ description: Fundamentos de Filosofía — Filosofía
 sidebar:
   label: PHI-001 · Cómo argumentar bien
   order: 1
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/philosophy/es/phi-001-how-to-argue-well.es.md
 ---
 
 :::note[Streeling University]
 **PHI-001** · Fundamentos de Filosofía · principiante · 25 minutos
 
-Generado por el departamento *Filosofía* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses/philosophy/es/phi-001-how-to-argue-well.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Filosofía* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/philosophy/es/phi-001-how-to-argue-well.es.md) · [Mi diario](../../journal/)
 :::
 
 > **Departamento de Filosofía** | Nivel: Principiante | Duración: 25 minutos

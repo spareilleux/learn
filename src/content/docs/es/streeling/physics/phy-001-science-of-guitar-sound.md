@@ -4,12 +4,13 @@ description: Acústica y física de ondas — Física
 sidebar:
   label: PHY-001 · La ciencia del sonido de la guitarra
   order: 1
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/physics/es/phy-001-science-of-guitar-sound.es.md
 ---
 
 :::note[Streeling University]
 **PHY-001** · Acústica y física de ondas · principiante · 25 minutos
 
-Generado por el departamento *Física* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses/physics/es/phy-001-science-of-guitar-sound.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Física* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/physics/es/phy-001-science-of-guitar-sound.es.md) · [Mi diario](../../journal/)
 :::
 
 > **Departamento de Física** | Etapa: Nigredo (Principiante) | Duración: 25 minutos

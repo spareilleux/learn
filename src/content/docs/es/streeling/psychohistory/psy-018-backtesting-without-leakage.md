@@ -4,12 +4,13 @@ description: Pruebas retrospectivas sin fuga de datos — Psicohistoria
 sidebar:
   label: PSY-018 · Pruebas retrospectivas sin fuga de datos
   order: 18
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/psychohistory/es/psy-018-backtesting-without-leakage.es.md
 ---
 
 :::note[Streeling University]
 **PSY-018** · Pruebas retrospectivas sin fuga de datos · intermedio · 45 minutos
 
-Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses/psychohistory/es/psy-018-backtesting-without-leakage.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/es/psy-018-backtesting-without-leakage.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PSY-005](../../psychohistory/psy-005-persistence-baseline/)
 :::

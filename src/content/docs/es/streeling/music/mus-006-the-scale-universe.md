@@ -4,12 +4,13 @@ description: Fundamentos de teoría musical — Música
 sidebar:
   label: MUS-006 · El universo de las escalas
   order: 6
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/music/es/mus-006-the-scale-universe.es.md
 ---
 
 :::note[Streeling University]
 **MUS-006** · Fundamentos de teoría musical · intermedio · 45 minutos
 
-Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses/music/es/mus-006-the-scale-universe.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/music/es/mus-006-the-scale-universe.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MUS-001](../../music/mus-001-what-is-a-chord/)
 :::

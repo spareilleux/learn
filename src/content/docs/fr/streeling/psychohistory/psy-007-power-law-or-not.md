@@ -4,12 +4,13 @@ description: Est-ce une loi de puissance ? Dix-huit nombres de citations — Psy
 sidebar:
   label: PSY-007 · Est-ce une loi de puissance ? Dix-huit nombres de citations
   order: 7
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/psychohistory/fr/psy-007-power-law-or-not.fr.md
 ---
 
 :::note[Streeling University]
 **PSY-007** · Est-ce une loi de puissance ? Dix-huit nombres de citations · intermédiaire · 45 minutes
 
-Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses/psychohistory/fr/psy-007-power-law-or-not.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/fr/psy-007-power-law-or-not.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PSY-001](../../psychohistory/psy-001-intro-fractal-compounding/), [MAT-009](../../mathematics/mat-009-estimation-uncertainty-sampling/)
 :::
