@@ -17,3 +17,4 @@ sidebar:
 - [NET-004 · Poner a prueba la contrapresión semántica con dependencias de pruebas](net-004-semantic-backpressure-and-evidence-dependencies/)
 - [NET-005 · Resultados de ramas paralelas y uniones de dependencias](net-005-fanout-results-and-dependency-joins/)
 - [NET-006 · Grafos de instancias y recursos](net-006-instance-and-resource-graphs/)
+- [NET-007 · Distinguir los nodos listos de un DAG de su admisión a los workers](net-007-separate-dag-readiness-from-admission/)

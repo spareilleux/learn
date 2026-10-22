@@ -17,3 +17,4 @@ sidebar:
 - [NET-004 · Tester la contre-pression sémantique à l'aide de dépendances de preuves](net-004-semantic-backpressure-and-evidence-dependencies/)
 - [NET-005 · Résultats des branches parallèles et jointures de dépendances](net-005-fanout-results-and-dependency-joins/)
 - [NET-006 · Graphes d’instances et de ressources](net-006-instance-and-resource-graphs/)
+- [NET-007 · Distinguer la disponibilité des nœuds d'un DAG de leur admission à l'exécution](net-007-separate-dag-readiness-from-admission/)

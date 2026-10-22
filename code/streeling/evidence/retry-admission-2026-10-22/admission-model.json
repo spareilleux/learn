@@ -1,0 +1,96 @@
+{
+  "scope": "Authored deterministic scheduling examples, not timed IX execution. Unit-duration wide jobs and nonpreemptive diamond jobs have zero overhead and the stated workers.",
+  "wide_eight": {
+    "jobs": 8,
+    "dependency_ready": 8,
+    "worker_slots": 2,
+    "duration_each": 1,
+    "waves": [
+      [
+        "w0",
+        "w1"
+      ],
+      [
+        "w2",
+        "w3"
+      ],
+      [
+        "w4",
+        "w5"
+      ],
+      [
+        "w6",
+        "w7"
+      ]
+    ],
+    "makespan": 4,
+    "maximum_active": 2
+  },
+  "diamond": {
+    "edges": [
+      [
+        "a",
+        "b"
+      ],
+      [
+        "a",
+        "c"
+      ],
+      [
+        "b",
+        "d"
+      ],
+      [
+        "c",
+        "d"
+      ]
+    ],
+    "durations": {
+      "a": 1,
+      "b": 4,
+      "c": 2,
+      "d": 1
+    },
+    "critical_path": [
+      "a",
+      "b",
+      "d"
+    ],
+    "critical_path_duration": 6,
+    "two_worker_schedule": [
+      {
+        "id": "a",
+        "start": 0,
+        "end": 1,
+        "worker": 0
+      },
+      {
+        "id": "b",
+        "start": 1,
+        "end": 5,
+        "worker": 0
+      },
+      {
+        "id": "c",
+        "start": 1,
+        "end": 3,
+        "worker": 1
+      },
+      {
+        "id": "d",
+        "start": 5,
+        "end": 6,
+        "worker": 0
+      }
+    ],
+    "two_worker_makespan": 6,
+    "one_worker_makespan": 8
+  },
+  "state_vocabulary": {
+    "dependency_ready": "All declared dependencies satisfied; not a grant of capacity.",
+    "admitted": "Capacity and applicable policy grant an execution slot.",
+    "running": "An actual attempt has started.",
+    "completed": "Observed terminal result for that attempt."
+  },
+  "source_inspection_correction": "The ix-pipeline execute comments advertise parallel std threads, but the inspected multi-node branch calls compute synchronously inside iterator.map().collect(), with no thread spawning. Do not infer actual parallelism or unbounded thread fan-out from those comments. No native Rust execution was performed."
+}

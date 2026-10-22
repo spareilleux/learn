@@ -15,3 +15,4 @@ sidebar:
 - [PHI-002 · ¿Cuándo está justificada una decisión consultiva?](phi-002-when-is-an-advisory-decision-justified/)
 - [PHI-003 · ¿Qué significa «el mismo acorde» en la búsqueda de GA?](phi-003-what-does-the-same-chord-mean/)
 - [PHI-004 · Separar los compromisos de rendimiento de los valores](phi-004-separate-performance-tradeoffs-from-values/)
+- [PHI-005 · Probar la idempotencia más allá de los valores devueltos al repetir](phi-005-test-idempotence-beyond-replayed-values/)

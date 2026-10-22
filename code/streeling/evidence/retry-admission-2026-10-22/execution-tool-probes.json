@@ -1,0 +1,157 @@
+{
+  "scope": "Actual bounded IX MCP responses, service revision unknown. Raw order and errors retained; no external effect tools, NL/LLM provider, worker-capacity measurement, cache-hit trial or runtime retry experiment.",
+  "responses": [
+    {
+      "id": "first-run",
+      "args": {
+        "steps": [
+          {
+            "id": "first",
+            "tool": "ix_stats",
+            "arguments": {
+              "data": [
+                1,
+                2,
+                3
+              ]
+            }
+          },
+          {
+            "id": "second",
+            "tool": "ix_stats",
+            "arguments": {
+              "data": [
+                4,
+                6
+              ]
+            },
+            "depends_on": [
+              "first"
+            ]
+          },
+          {
+            "id": "third",
+            "tool": "ix_stats",
+            "arguments": {
+              "data": [
+                10,
+                20
+              ]
+            },
+            "depends_on": [
+              "first"
+            ]
+          }
+        ]
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"cache_hits\": [],\n  \"cache_keys\": {\n    \"first\": null,\n    \"second\": null,\n    \"third\": null\n  },\n  \"durations_ms\": {\n    \"first\": 0,\n    \"second\": 0,\n    \"third\": 0\n  },\n  \"execution_order\": [\n    \"first\",\n    \"second\",\n    \"third\"\n  ],\n  \"lineage\": {\n    \"first\": {\n      \"asset_name\": null,\n      \"cache_key\": null,\n      \"depends_on\": [],\n      \"tool\": \"ix_stats\",\n      \"upstream_cache_keys\": []\n    },\n    \"second\": {\n      \"asset_name\": null,\n      \"cache_key\": null,\n      \"depends_on\": [\n        \"first\"\n      ],\n      \"tool\": \"ix_stats\",\n      \"upstream_cache_keys\": [\n        null\n      ]\n    },\n    \"third\": {\n      \"asset_name\": null,\n      \"cache_key\": null,\n      \"depends_on\": [\n        \"first\"\n      ],\n      \"tool\": \"ix_stats\",\n      \"upstream_cache_keys\": [\n        null\n      ]\n    }\n  },\n  \"results\": {\n    \"first\": {\n      \"count\": 3,\n      \"max\": 3.0,\n      \"mean\": 2.0,\n      \"median\": 2.0,\n      \"min\": 1.0,\n      \"std_dev\": 0.816496580927726,\n      \"variance\": 0.6666666666666666\n    },\n    \"second\": {\n      \"count\": 2,\n      \"max\": 6.0,\n      \"mean\": 5.0,\n      \"median\": 5.0,\n      \"min\": 4.0,\n      \"std_dev\": 1.0,\n      \"variance\": 1.0\n    },\n    \"third\": {\n      \"count\": 2,\n      \"max\": 20.0,\n      \"mean\": 15.0,\n      \"median\": 15.0,\n      \"min\": 10.0,\n      \"std_dev\": 5.0,\n      \"variance\": 25.0\n    }\n  }\n}"
+          }
+        ]
+      }
+    },
+    {
+      "id": "repeat-run",
+      "args": {
+        "steps": [
+          {
+            "id": "first",
+            "tool": "ix_stats",
+            "arguments": {
+              "data": [
+                1,
+                2,
+                3
+              ]
+            }
+          },
+          {
+            "id": "second",
+            "tool": "ix_stats",
+            "arguments": {
+              "data": [
+                4,
+                6
+              ]
+            },
+            "depends_on": [
+              "first"
+            ]
+          },
+          {
+            "id": "third",
+            "tool": "ix_stats",
+            "arguments": {
+              "data": [
+                10,
+                20
+              ]
+            },
+            "depends_on": [
+              "first"
+            ]
+          }
+        ]
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"cache_hits\": [],\n  \"cache_keys\": {\n    \"first\": null,\n    \"second\": null,\n    \"third\": null\n  },\n  \"durations_ms\": {\n    \"first\": 0,\n    \"second\": 0,\n    \"third\": 0\n  },\n  \"execution_order\": [\n    \"first\",\n    \"third\",\n    \"second\"\n  ],\n  \"lineage\": {\n    \"first\": {\n      \"asset_name\": null,\n      \"cache_key\": null,\n      \"depends_on\": [],\n      \"tool\": \"ix_stats\",\n      \"upstream_cache_keys\": []\n    },\n    \"second\": {\n      \"asset_name\": null,\n      \"cache_key\": null,\n      \"depends_on\": [\n        \"first\"\n      ],\n      \"tool\": \"ix_stats\",\n      \"upstream_cache_keys\": [\n        null\n      ]\n    },\n    \"third\": {\n      \"asset_name\": null,\n      \"cache_key\": null,\n      \"depends_on\": [\n        \"first\"\n      ],\n      \"tool\": \"ix_stats\",\n      \"upstream_cache_keys\": [\n        null\n      ]\n    }\n  },\n  \"results\": {\n    \"first\": {\n      \"count\": 3,\n      \"max\": 3.0,\n      \"mean\": 2.0,\n      \"median\": 2.0,\n      \"min\": 1.0,\n      \"std_dev\": 0.816496580927726,\n      \"variance\": 0.6666666666666666\n    },\n    \"second\": {\n      \"count\": 2,\n      \"max\": 6.0,\n      \"mean\": 5.0,\n      \"median\": 5.0,\n      \"min\": 4.0,\n      \"std_dev\": 1.0,\n      \"variance\": 1.0\n    },\n    \"third\": {\n      \"count\": 2,\n      \"max\": 20.0,\n      \"mean\": 15.0,\n      \"median\": 15.0,\n      \"min\": 10.0,\n      \"std_dev\": 5.0,\n      \"variance\": 25.0\n    }\n  }\n}"
+          }
+        ]
+      }
+    },
+    {
+      "id": "deliberate-missing-tool",
+      "args": {
+        "steps": [
+          {
+            "id": "a",
+            "tool": "ix_stats",
+            "arguments": {
+              "data": [
+                1,
+                2,
+                3
+              ]
+            }
+          },
+          {
+            "id": "b",
+            "tool": "ix_streeling_deliberately_missing_tool",
+            "arguments": {},
+            "depends_on": [
+              "a"
+            ]
+          },
+          {
+            "id": "c",
+            "tool": "ix_stats",
+            "arguments": {
+              "data": [
+                4,
+                6
+              ]
+            },
+            "depends_on": [
+              "b"
+            ]
+          }
+        ]
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Error: ix_pipeline_run: step 'b' (tool 'ix_streeling_deliberately_missing_tool') failed: Unknown tool: ix_streeling_deliberately_missing_tool"
+          }
+        ],
+        "isError": true
+      }
+    }
+  ]
+}

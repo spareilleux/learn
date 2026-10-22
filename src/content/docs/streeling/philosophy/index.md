@@ -15,3 +15,4 @@ sidebar:
 - [PHI-002 · When Is an Advisory Decision Justified?](phi-002-when-is-an-advisory-decision-justified/)
 - [PHI-003 · What Does “the Same Chord” Mean in GA Search?](phi-003-what-does-the-same-chord-mean/)
 - [PHI-004 · Separate Performance Trade-offs from Values](phi-004-separate-performance-tradeoffs-from-values/)
+- [PHI-005 · Test Idempotence Beyond Replayed Return Values](phi-005-test-idempotence-beyond-replayed-values/)

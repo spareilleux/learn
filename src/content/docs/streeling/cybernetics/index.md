@@ -16,3 +16,4 @@ sidebar:
 - [CYB-003 · CYB-003: Measuring the Variety Ratio Quantitatively](cyb-003-measuring-variety-ratio-quantitatively/)
 - [CYB-004 · Observe Before Correcting a Feedback Loop](cyb-004-observe-before-correcting-a-feedback-loop/)
 - [CYB-005 · Stop a Render Policy from Flapping](cyb-005-stop-render-policy-flapping/)
+- [CYB-006 · Bound Retry Feedback Before Adding Workers](cyb-006-bound-retry-feedback-and-workload/)

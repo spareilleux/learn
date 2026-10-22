@@ -16,3 +16,4 @@ sidebar:
 - [CYB-003 · CYB-003 : Mesurer quantitativement le ratio de variété](cyb-003-measuring-variety-ratio-quantitatively/)
 - [CYB-004 · Observer avant de corriger une boucle de rétroaction](cyb-004-observe-before-correcting-a-feedback-loop/)
 - [CYB-005 · Éviter les oscillations d’une politique de rendu](cyb-005-stop-render-policy-flapping/)
+- [CYB-006 · Borner la rétroaction des nouvelles tentatives avant d'ajouter des workers](cyb-006-bound-retry-feedback-and-workload/)

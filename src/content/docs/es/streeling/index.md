@@ -21,7 +21,7 @@ Estos módulos fueron escritos por departamentos de IA y **no han sido revisados
 | [Ingeniería de audio](audio-engineering/) | 6 | 6 | 6 |
 | [Ciencia cognitiva](cognitive-science/) | 5 | 5 | 5 |
 | [Ciencias de la computación](computer-science/) | 14 | 14 | 14 |
-| [Cibernética](cybernetics/) | 5 | 5 | 5 |
+| [Cibernética](cybernetics/) | 6 | 6 | 6 |
 | [Visualización de datos](data-visualization/) | 10 | 10 | 10 |
 | [Futurología](futurology/) | 4 | 4 | 4 |
 | [Acústica de la guitarra y síntesis sonora](guitar-acoustics/) | 5 | 5 | 5 |
@@ -32,8 +32,8 @@ Estos módulos fueron escritos por departamentos de IA y **no han sido revisados
 | [Matemáticas](mathematics/) | 25 | 25 | 25 |
 | [Música](music/) | 25 | 25 | 25 |
 | [Musicología](musicology/) | 5 | 5 | 5 |
-| [Ciencia de redes](network-science/) | 6 | 6 | 6 |
-| [Filosofía](philosophy/) | 4 | 4 | 4 |
+| [Ciencia de redes](network-science/) | 7 | 7 | 7 |
+| [Filosofía](philosophy/) | 5 | 5 | 5 |
 | [Física](physics/) | 8 | 8 | 8 |
 | [Gestión de productos y proyectos](product-management/) | 5 | 5 | 5 |
 | [Psicohistoria](psychohistory/) | 25 | 25 | 25 |
