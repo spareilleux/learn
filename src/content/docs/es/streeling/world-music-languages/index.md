@@ -12,3 +12,5 @@ sidebar:
 ## Módulos
 
 - [WML-001 · La guitarra alrededor del mundo — Un instrumento, muchas tradiciones](wml-001-guitar-around-the-world/)
+- [WML-002 · DADGAD: datos de afinación y afirmaciones culturales](wml-002-dadgad-layout-and-cultural-claims/)
+- [WML-003 · Auditar términos de guitarra en seis idiomas](wml-003-term-preservation-and-cultural-review/)

@@ -12,3 +12,5 @@ sidebar:
 ## Módulos
 
 - [COG-001 · Tu cerebro te miente — Sesgos cognitivos que todos deberían conocer](cog-001-your-brain-lies-to-you/)
+- [COG-002 · Fiabilidad de la retroalimentación para recordar notas en el diapasón](cog-002-feedback-integrity-fretboard-recall/)
+- [COG-003 · Calibrar la confianza al identificar notas en el diapasón](cog-003-calibrating-fretboard-confidence/)

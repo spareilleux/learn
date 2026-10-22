@@ -13,3 +13,5 @@ sidebar:
 
 - [GTR-001 · El mapa del diapasón](gtr-001-the-fretboard-map/)
 - [GTR-002 · Geometría CAGED: por qué cinco formas gobiernan el diapasón](gtr-002-caged-geometry/)
+- [GTR-003 · Examinar una afirmación sobre la facilidad de tocar una disposición](gtr-003-audit-voicing-playability/)
+- [GTR-004 · Escuchar y examinar el movimiento paralelo en dos cuerdas de guitarra](gtr-004-hear-and-audit-parallel-motion/)

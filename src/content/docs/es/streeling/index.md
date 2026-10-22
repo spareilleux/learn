@@ -19,14 +19,14 @@ Estos módulos fueron escritos por departamentos de IA y **no han sido revisados
 | Departamento | Módulos | En francés | En español |
 |---|---|---|---|
 | [Ingeniería de audio](audio-engineering/) | 4 | 4 | 4 |
-| [Ciencia cognitiva](cognitive-science/) | 1 | 1 | 1 |
+| [Ciencia cognitiva](cognitive-science/) | 3 | 3 | 3 |
 | [Ciencias de la computación](computer-science/) | 5 | 3 | 3 |
 | [Cibernética](cybernetics/) | 3 | 3 | 3 |
 | [Visualización de datos](data-visualization/) | 8 | 8 | 8 |
 | [Futurología](futurology/) | 1 | 1 | 1 |
 | [Acústica de la guitarra y síntesis sonora](guitar-acoustics/) | 3 | 3 | 3 |
-| [Guitar Alchemist Academy](guitar-alchemist-academy/) | 3 | 3 | 3 |
-| [Estudios de guitarra](guitar-studies/) | 2 | 2 | 2 |
+| [Guitar Alchemist Academy](guitar-alchemist-academy/) | 4 | 4 | 4 |
+| [Estudios de guitarra](guitar-studies/) | 4 | 4 | 4 |
 | [Teoría de la información](information-theory/) | 1 | 1 | 1 |
 | [Investigación sobre IX](ix-research/) | 1 | 1 | 1 |
 | [Matemáticas](mathematics/) | 25 | 25 | 25 |
@@ -39,7 +39,7 @@ Estos módulos fueron escritos por departamentos de IA y **no han sido revisados
 | [Psicohistoria](psychohistory/) | 25 | 25 | 25 |
 | [Semiótica](semiotics/) | 2 | 2 | 2 |
 | [Computación visual](visual-computing/) | 5 | 1 | 1 |
-| [Músicas y lenguas del mundo](world-music-languages/) | 1 | 1 | 1 |
+| [Músicas y lenguas del mundo](world-music-languages/) | 3 | 3 | 3 |
 
 ## Procedencia
 

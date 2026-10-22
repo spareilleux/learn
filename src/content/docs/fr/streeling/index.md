@@ -19,14 +19,14 @@ Ces modules ont été écrits par des départements IA et **n'ont pas été relu
 | Département | Modules | En français | En espagnol |
 |---|---|---|---|
 | [Ingénierie audio](audio-engineering/) | 4 | 4 | 4 |
-| [Sciences cognitives](cognitive-science/) | 1 | 1 | 1 |
+| [Sciences cognitives](cognitive-science/) | 3 | 3 | 3 |
 | [Informatique](computer-science/) | 5 | 3 | 3 |
 | [Cybernétique](cybernetics/) | 3 | 3 | 3 |
 | [Visualisation de données](data-visualization/) | 8 | 8 | 8 |
 | [Futurologie](futurology/) | 1 | 1 | 1 |
 | [Acoustique de la guitare et synthèse sonore](guitar-acoustics/) | 3 | 3 | 3 |
-| [Guitar Alchemist Academy](guitar-alchemist-academy/) | 3 | 3 | 3 |
-| [Études de guitare](guitar-studies/) | 2 | 2 | 2 |
+| [Guitar Alchemist Academy](guitar-alchemist-academy/) | 4 | 4 | 4 |
+| [Études de guitare](guitar-studies/) | 4 | 4 | 4 |
 | [Théorie de l'information](information-theory/) | 1 | 1 | 1 |
 | [Recherche sur IX](ix-research/) | 1 | 1 | 1 |
 | [Mathématiques](mathematics/) | 25 | 25 | 25 |
@@ -39,7 +39,7 @@ Ces modules ont été écrits par des départements IA et **n'ont pas été relu
 | [Psychohistoire](psychohistory/) | 25 | 25 | 25 |
 | [Sémiotique](semiotics/) | 2 | 2 | 2 |
 | [Informatique visuelle](visual-computing/) | 5 | 1 | 1 |
-| [Musiques et langues du monde](world-music-languages/) | 1 | 1 | 1 |
+| [Musiques et langues du monde](world-music-languages/) | 3 | 3 | 3 |
 
 ## Provenance
 
