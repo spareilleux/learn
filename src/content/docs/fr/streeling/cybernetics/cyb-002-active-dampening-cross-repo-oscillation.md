@@ -4,12 +4,13 @@ description: Fondements de la gouvernance cybernétique — Cybernétique
 sidebar:
   label: CYB-002 · Mécanismes d'amortissement actif pour maîtriser l'oscillation entre dépôts
   order: 2
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cybernetics/fr/cyb-002-active-dampening-cross-repo-oscillation.fr.md
 ---
 
 :::note[Streeling University]
 **CYB-002** · Fondements de la gouvernance cybernétique
 
-Généré par le département *Cybernétique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses/cybernetics/fr/cyb-002-active-dampening-cross-repo-oscillation.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Cybernétique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/cybernetics/fr/cyb-002-active-dampening-cross-repo-oscillation.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [CYB-001](../../cybernetics/cyb-001-vsm-ai-governance-mapping/)
 :::

@@ -4,12 +4,13 @@ description: Symétrie, groupes et invariants — Mathématiques
 sidebar:
   label: MAT-022 · Symétrie, groupes et invariants
   order: 22
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/mathematics/fr/mat-022-symmetry-groups-invariants.fr.md
 ---
 
 :::note[Streeling University]
 **MAT-022** · Symétrie, groupes et invariants · intermédiaire · 50 minutes
 
-Généré par le département *Mathématiques* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses/mathematics/fr/mat-022-symmetry-groups-invariants.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Mathématiques* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/mathematics/fr/mat-022-symmetry-groups-invariants.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MAT-002](../../mathematics/mat-002-counterexamples-and-exhaustive-checks/)
 :::

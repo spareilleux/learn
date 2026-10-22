@@ -4,12 +4,13 @@ description: "Les rafales ne sont pas des taux : les arrivées d'événements da
 sidebar:
   label: PSY-008 · Les rafales ne sont pas des taux
   order: 8
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/psychohistory/fr/psy-008-bursts-are-not-rates.fr.md
 ---
 
 :::note[Streeling University]
 **PSY-008** · Les rafales ne sont pas des taux : les arrivées d'événements dans le journal des déclenchements · intermédiaire · 40 minutes
 
-Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses/psychohistory/fr/psy-008-bursts-are-not-rates.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/fr/psy-008-bursts-are-not-rates.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PSY-002](../../psychohistory/psy-002-governance-phase-transitions/), [MAT-009](../../mathematics/mat-009-estimation-uncertainty-sampling/)
 :::

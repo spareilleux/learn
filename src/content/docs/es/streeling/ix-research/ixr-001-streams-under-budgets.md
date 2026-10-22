@@ -4,12 +4,13 @@ description: Pipelines de IX en flujo, con presupuestos — Investigación sobre
 sidebar:
   label: IXR-001 · Flujos con presupuesto
   order: 1
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/ix-research/es/ixr-001-streams-under-budgets.es.md
 ---
 
 :::note[Streeling University]
 **IXR-001** · Pipelines de IX en flujo, con presupuestos · intermedio · 40 minutos
 
-Generado por el departamento *Investigación sobre IX* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses/ix-research/es/ixr-001-streams-under-budgets.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Investigación sobre IX* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/ix-research/es/ixr-001-streams-under-budgets.es.md) · [Mi diario](../../journal/)
 :::
 
 > **Departamento de Investigación sobre IX** | Intermedio | 40 minutos | Traducción al español del borrador en inglés; revisión humana pendiente. No existe ningún registro de ciclo de investigación para este módulo (véase «Procedencia»).

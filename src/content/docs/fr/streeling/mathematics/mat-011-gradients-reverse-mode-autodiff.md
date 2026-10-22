@@ -4,12 +4,13 @@ description: Gradients et différentiation automatique en mode inverse — Math�
 sidebar:
   label: MAT-011 · Gradients et différentiation automatique en mode inverse
   order: 11
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/mathematics/fr/mat-011-gradients-reverse-mode-autodiff.fr.md
 ---
 
 :::note[Streeling University]
 **MAT-011** · Gradients et différentiation automatique en mode inverse · intermédiaire · 50 minutes
 
-Généré par le département *Mathématiques* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses/mathematics/fr/mat-011-gradients-reverse-mode-autodiff.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Mathématiques* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/mathematics/fr/mat-011-gradients-reverse-mode-autodiff.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MAT-004](../../mathematics/mat-004-vectors-matrices-norms/)
 :::

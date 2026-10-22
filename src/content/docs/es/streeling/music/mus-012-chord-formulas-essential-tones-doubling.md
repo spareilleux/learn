@@ -4,12 +4,13 @@ description: Fórmulas de acordes, notas esenciales y duplicaciones — Música
 sidebar:
   label: MUS-012 · Fórmulas de acordes, notas esenciales y duplicaciones
   order: 12
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/music/es/mus-012-chord-formulas-essential-tones-doubling.es.md
 ---
 
 :::note[Streeling University]
 **MUS-012** · Fórmulas de acordes, notas esenciales y duplicaciones · intermedio · 45 minutos
 
-Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses/music/es/mus-012-chord-formulas-essential-tones-doubling.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/music/es/mus-012-chord-formulas-essential-tones-doubling.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MUS-001](../../music/mus-001-what-is-a-chord/), [MUS-008](../../music/mus-008-intervals-inversion-compound/)
 :::

@@ -43,5 +43,5 @@ Ces modules ont été écrits par des départements IA et **n'ont pas été relu
 
 ## Provenance
 
-- Source : [`GuitarAlchemist/Demerzel` → `state/streeling/courses`](https://github.com/GuitarAlchemist/Demerzel/tree/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses) au commit `1beb089` (2026-10-21), licence MIT.
-- Importé avec `npm run sync:streeling` ; ne pas modifier ces pages à la main — seul `journal.md` est conservé entre deux synchronisations.
+- Source : [`spareilleux/learn` → `streeling/courses`](https://github.com/spareilleux/learn/tree/main/streeling/courses), copiée depuis [`GuitarAlchemist/Demerzel` → `state/streeling/courses`](https://github.com/GuitarAlchemist/Demerzel/tree/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses) au commit `1beb089` (2026-10-21), licence MIT.
+- Généré avec `npm run sync:streeling` depuis `streeling/` : on modifie un module là, pas sur ces pages — seul `journal.md` est conservé entre deux synchronisations.

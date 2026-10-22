@@ -4,12 +4,13 @@ description: "Explicaciones rivales: comparar modelos con pocos datos — Psicoh
 sidebar:
   label: PSY-022 · Explicaciones rivales
   order: 22
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/psychohistory/es/psy-022-competing-explanations.es.md
 ---
 
 :::note[Streeling University]
 **PSY-022** · Explicaciones rivales: comparar modelos con pocos datos · intermedio · 45 minutos
 
-Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses/psychohistory/es/psy-022-competing-explanations.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/es/psy-022-competing-explanations.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PSY-008](../../psychohistory/psy-008-bursts-are-not-rates/), [MAT-009](../../mathematics/mat-009-estimation-uncertainty-sampling/)
 :::

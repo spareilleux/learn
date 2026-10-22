@@ -4,12 +4,13 @@ description: Fondements du raisonnement mathématique — Mathématiques
 sidebar:
   label: MAT-001 · Stratégies de démonstration
   order: 1
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/mathematics/fr/mat-001-proof-strategies.fr.md
 ---
 
 :::note[Streeling University]
 **MAT-001** · Fondements du raisonnement mathématique · débutant · 30 minutes
 
-Généré par le département *Mathématiques* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses/mathematics/fr/mat-001-proof-strategies.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Mathématiques* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/mathematics/fr/mat-001-proof-strategies.fr.md) · [Mon journal](../../journal/)
 :::
 
 > **Département de mathématiques** | Stade : Nigredo (Débutant) | Durée : 30 minutes

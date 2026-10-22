@@ -4,12 +4,13 @@ description: ¿Cuántos son muchos? Previsibilidad agregada con catorce agentes 
 sidebar:
   label: PSY-004 · ¿Cuántos son muchos? Previsibilidad agregada con catorce agentes
   order: 4
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/psychohistory/es/psy-004-how-large-is-large.es.md
 ---
 
 :::note[Streeling University]
 **PSY-004** · ¿Cuántos son muchos? Previsibilidad agregada con catorce agentes · intermedio · 45 minutos
 
-Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses/psychohistory/es/psy-004-how-large-is-large.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/es/psy-004-how-large-is-large.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MAT-009](../../mathematics/mat-009-estimation-uncertainty-sampling/), [PSY-002](../../psychohistory/psy-002-governance-phase-transitions/)
 :::

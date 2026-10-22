@@ -4,12 +4,13 @@ description: Entropía, divergencias e información mutua — Matemáticas
 sidebar:
   label: MAT-010 · Entropía, divergencias e información mutua
   order: 10
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/mathematics/es/mat-010-information-entropy-divergences.es.md
 ---
 
 :::note[Streeling University]
 **MAT-010** · Entropía, divergencias e información mutua · intermedio · 50 minutos
 
-Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses/mathematics/es/mat-010-information-entropy-divergences.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/mathematics/es/mat-010-information-entropy-divergences.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MAT-008](../../mathematics/mat-008-probability-conditional-reasoning/)
 :::

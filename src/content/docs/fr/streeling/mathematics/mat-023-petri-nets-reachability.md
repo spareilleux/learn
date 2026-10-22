@@ -4,12 +4,13 @@ description: Réseaux de Petri et accessibilité — Mathématiques
 sidebar:
   label: MAT-023 · Réseaux de Petri et accessibilité
   order: 23
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/mathematics/fr/mat-023-petri-nets-reachability.fr.md
 ---
 
 :::note[Streeling University]
 **MAT-023** · Réseaux de Petri et accessibilité · intermédiaire · 55 minutes
 
-Généré par le département *Mathématiques* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses/mathematics/fr/mat-023-petri-nets-reachability.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Mathématiques* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/mathematics/fr/mat-023-petri-nets-reachability.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MAT-002](../../mathematics/mat-002-counterexamples-and-exhaustive-checks/)
 :::

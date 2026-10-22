@@ -4,12 +4,13 @@ description: Disposición del diapasón y sistema CAGED — Estudios de guitarra
 sidebar:
   label: GTR-002 · Geometría CAGED
   order: 2
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/guitar-studies/es/gtr-002-caged-geometry.es.md
 ---
 
 :::note[Streeling University]
 **GTR-002** · Disposición del diapasón y sistema CAGED · intermedio · 45 minutos
 
-Generado por el departamento *Estudios de guitarra* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses/guitar-studies/es/gtr-002-caged-geometry.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Estudios de guitarra* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/guitar-studies/es/gtr-002-caged-geometry.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [GTR-001](../../guitar-studies/gtr-001-the-fretboard-map/)
 :::

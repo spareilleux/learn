@@ -4,12 +4,13 @@ description: L'ACP comme préservation de la variance — Mathématiques
 sidebar:
   label: MAT-014 · L'ACP comme préservation de la variance
   order: 14
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/mathematics/fr/mat-014-pca-variance-preservation.fr.md
 ---
 
 :::note[Streeling University]
 **MAT-014** · L'ACP comme préservation de la variance · intermédiaire · 50 minutes
 
-Généré par le département *Mathématiques* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses/mathematics/fr/mat-014-pca-variance-preservation.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Mathématiques* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/mathematics/fr/mat-014-pca-variance-preservation.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MAT-005](../../mathematics/mat-005-symmetric-eigenproblems/), [MAT-006](../../mathematics/mat-006-svd-low-rank-approximation/), [MAT-009](../../mathematics/mat-009-estimation-uncertainty-sampling/)
 :::

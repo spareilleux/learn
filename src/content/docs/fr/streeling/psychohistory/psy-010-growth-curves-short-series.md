@@ -4,12 +4,13 @@ description: Exponentielle, logistique ou en paliers ? Ajuster une croissance à
 sidebar:
   label: PSY-010 · Exponentielle, logistique ou en paliers ? Ajuster une croissance à un historique court
   order: 10
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/psychohistory/fr/psy-010-growth-curves-short-series.fr.md
 ---
 
 :::note[Streeling University]
 **PSY-010** · Exponentielle, logistique ou en paliers ? Ajuster une croissance à un historique court · intermédiaire · 45 minutes
 
-Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses/psychohistory/fr/psy-010-growth-curves-short-series.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/fr/psy-010-growth-curves-short-series.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PSY-001](../../psychohistory/psy-001-intro-fractal-compounding/)
 :::

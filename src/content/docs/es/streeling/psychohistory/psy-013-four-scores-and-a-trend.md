@@ -4,12 +4,13 @@ description: "Cuatro puntuaciones y una tendencia: leer el historial de resilien
 sidebar:
   label: PSY-013 · Cuatro puntuaciones y una tendencia
   order: 13
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/psychohistory/es/psy-013-four-scores-and-a-trend.es.md
 ---
 
 :::note[Streeling University]
 **PSY-013** · Cuatro puntuaciones y una tendencia: leer el historial de resiliencia · intermedio · 45 minutos
 
-Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses/psychohistory/es/psy-013-four-scores-and-a-trend.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Psicohistoria* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/es/psy-013-four-scores-and-a-trend.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [PSY-002](../../psychohistory/psy-002-governance-phase-transitions/), [PSY-004](../../psychohistory/psy-004-how-large-is-large/)
 :::

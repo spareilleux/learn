@@ -1,5 +1,5 @@
-// Missing translations in the Streeling generator: run sync-streeling.mjs on a small made-up Demerzel tree
-// and check every link it writes, in the three locales.
+// The Streeling generator: run sync-streeling.mjs on a small made-up streeling/ tree and check the pages it writes,
+// in the three locales: every link, the links back to the source, and what a broken link does.
 //
 //   node --test scripts/tests/sync-streeling.test.mjs
 
@@ -15,51 +15,56 @@ const SCRIPT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'sy
 const LANGS = ['en', 'fr', 'es'];
 const DOCS = { en: 'src/content/docs/streeling', fr: 'src/content/docs/fr/streeling', es: 'src/content/docs/es/streeling' };
 const ENGLISH_ONLY = { fr: '*(en anglais)*', es: '*(en inglés)*' };
+const SITE_REPO = 'https://github.com/spareilleux/learn';
 
 const moduleFile = (id, title, prerequisites, body) =>
 	`---\nmodule_id: ${id}\ncourse: Fixture\nlevel: beginner\nestimated_duration: "35 minutes"\nprerequisites: [${prerequisites.join(', ')}]\n---\n\n# ${title}\n\n${body}\n`;
 
 // alp-001 exists in the three languages, alp-002 in English only, bet-001 in English and French.
 const FIXTURE = {
-	'state/streeling/university.json': JSON.stringify({ mandate: 'A made-up university for the tests.' }),
-	'state/streeling/departments/alpha.department.json': JSON.stringify({ full_name: 'Department of Alpha', domain: 'fixture' }),
-	'state/streeling/courses/alpha/en/alp-001-first.md': moduleFile('alp-001', 'First', [], 'Next: [the second](alp-002-second.md) and [beta](../../beta/en/bet-001-other.md#part).'),
-	'state/streeling/courses/alpha/fr/alp-001-first.fr.md': moduleFile('alp-001', 'Premier', [], 'Suite : [le deuxième](../en/alp-002-second.md) et [bêta](../../beta/fr/bet-001-other.fr.md).'),
-	'state/streeling/courses/alpha/es/alp-001-first.es.md': moduleFile('alp-001', 'Primero', [], 'Sigue: [el segundo](../en/alp-002-second.md) y [beta](../../beta/en/bet-001-other.md#part).'),
-	'state/streeling/courses/alpha/en/alp-002-second.md': moduleFile('alp-002', 'Second', ['alp-001'], 'Back to [the first](alp-001-first.md).'),
-	'state/streeling/courses/beta/en/bet-001-other.md': moduleFile('bet-001', 'Other', ['alp-002'], '## Part\n\nSee [the second](../../alpha/en/alp-002-second.md).'),
-	'state/streeling/courses/beta/fr/bet-001-other.fr.md': moduleFile('bet-001', 'Autre', ['alp-002'], '## Partie\n\nVoir [le deuxième](../../alpha/en/alp-002-second.md).'),
+	'streeling/source.json': JSON.stringify({ repo: 'GuitarAlchemist/Demerzel', path: 'state/streeling', commit: 'f'.repeat(40), commit_date: '2026-01-01T00:00:00Z' }),
+	'streeling/university.json': JSON.stringify({ mandate: 'A made-up university for the tests.' }),
+	'streeling/departments/alpha.department.json': JSON.stringify({ full_name: 'Department of Alpha', domain: 'fixture' }),
+	'streeling/courses/alpha/en/alp-001-first.md': moduleFile('alp-001', 'First', [], 'Next: [the second](alp-002-second.md) and [beta](../../beta/en/bet-001-other.md#part). Data: [scenarios](../../../../code/alpha/alp-001/scenarios.json#L2).'),
+	'streeling/courses/alpha/fr/alp-001-first.fr.md': moduleFile('alp-001', 'Premier', [], 'Suite : [le deuxième](../en/alp-002-second.md) et [bêta](../../beta/fr/bet-001-other.fr.md).'),
+	'streeling/courses/alpha/es/alp-001-first.es.md': moduleFile('alp-001', 'Primero', [], 'Sigue: [el segundo](../en/alp-002-second.md) y [beta](../../beta/en/bet-001-other.md#part).'),
+	'streeling/courses/alpha/en/alp-002-second.md': moduleFile('alp-002', 'Second', ['alp-001'], 'Back to [the first](alp-001-first.md).'),
+	'streeling/courses/beta/en/bet-001-other.md': moduleFile('bet-001', 'Other', ['alp-002'], '## Part\n\nSee [the second](../../alpha/en/alp-002-second.md).'),
+	'streeling/courses/beta/fr/bet-001-other.fr.md': moduleFile('bet-001', 'Autre', ['alp-002'], '## Partie\n\nVoir [le deuxième](../../alpha/en/alp-002-second.md).'),
+	'code/alpha/alp-001/scenarios.json': '{}\n',
 };
 const HAS_PAGE = { en: ['alp-001', 'alp-002', 'bet-001'], fr: ['alp-001', 'bet-001'], es: ['alp-001'] };
-const SITES = ['kept', 'fresh'];
+// `kept` already has hand-written journals; `fresh` and `again` get new ones from the template.
+const SITES = ['kept', 'fresh', 'again'];
 
 function write(file, text) {
 	fs.mkdirSync(path.dirname(file), { recursive: true });
 	fs.writeFileSync(file, text);
 }
 
-// Two syncs of the same tree: `kept` already has hand-written journals, `fresh` gets new ones from the template.
+const sync = (src, dest) => execFileSync(process.execPath, [SCRIPT, '--source', src, '--out', dest], { stdio: 'pipe' });
+
+function makeSource(dir, extra = {}) {
+	for (const [file, text] of Object.entries({ ...FIXTURE, ...extra })) write(path.join(dir, file), text);
+	return dir;
+}
+
 const out = {};
+let tmp;
 const localeRoot = (site, lang) => path.join(out[site], DOCS[lang]);
+const page = (site, lang, file) => fs.readFileSync(path.join(localeRoot(site, lang), file), 'utf8');
 
 before(() => {
-	const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'streeling-test-'));
-	const src = path.join(tmp, 'demerzel');
-	for (const [file, text] of Object.entries(FIXTURE)) write(path.join(src, file), text);
-	const env = { ...process.env, GIT_AUTHOR_DATE: '2026-01-01T00:00:00Z', GIT_COMMITTER_DATE: '2026-01-01T00:00:00Z' };
-	const git = (...args) => execFileSync('git', args, { cwd: src, env, stdio: 'ignore' });
-	git('init', '-q');
-	git('add', '.');
-	git('-c', 'user.name=fixture', '-c', 'user.email=fixture@example.invalid', 'commit', '-q', '-m', 'fixture');
-	write(path.join(src, 'unrelated-local-file.txt'), 'Outside the imported tree.\n');
+	tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'streeling-test-'));
+	const src = makeSource(path.join(tmp, 'source'));
 	for (const site of SITES) out[site] = path.join(tmp, site);
 	for (const lang of LANGS) write(path.join(localeRoot('kept', lang), 'journal.md'), `hand-written ${lang} journal\n`);
-	for (const site of SITES) execFileSync(process.execPath, [SCRIPT, '--source', src, '--out', out[site]], { stdio: 'pipe' });
+	for (const site of SITES) sync(src, out[site]);
 });
 
-/** Every generated page of a locale in both syncs, with its route relative to that locale's streeling/ folder. */
+/** Every generated page of a locale in the `kept` and `fresh` syncs, with its route relative to that locale's streeling/ folder. */
 function pages(lang) {
-	return SITES.flatMap((site) =>
+	return ['kept', 'fresh'].flatMap((site) =>
 		fs.readdirSync(localeRoot(site, lang), { recursive: true })
 			.filter((f) => f.endsWith('.md'))
 			.map((f) => {
@@ -91,11 +96,11 @@ function links({ route, file }) {
 test('every link leads to a page the site serves', () => {
 	const broken = [];
 	for (const lang of LANGS) {
-		for (const page of pages(lang)) {
-			for (const { href, target } of links(page)) {
+		for (const p of pages(lang)) {
+			for (const { href, target } of links(p)) {
 				// A translated URL with no page of its own is served by Starlight with the English page.
-				const served = hasPage(page.site, lang, target) || (lang !== 'en' && hasPage(page.site, 'en', target));
-				if (!served) broken.push(`${page.site} ${lang} ${page.route}: ${href}`);
+				const served = hasPage(p.site, lang, target) || (lang !== 'en' && hasPage(p.site, 'en', target));
+				if (!served) broken.push(`${p.site} ${lang} ${p.route}: ${href}`);
 			}
 		}
 	}
@@ -106,12 +111,12 @@ test('a link to a module with no page in the reader’s language says it is in E
 	const wrong = [];
 	let englishOnlyLinks = 0;
 	for (const lang of LANGS) {
-		for (const page of pages(lang)) {
-			for (const { href, target, label } of links(page)) {
-				const englishOnly = lang !== 'en' && !hasPage(page.site, lang, target);
+		for (const p of pages(lang)) {
+			for (const { href, target, label } of links(p)) {
+				const englishOnly = lang !== 'en' && !hasPage(p.site, lang, target);
 				englishOnlyLinks += englishOnly;
 				const expected = englishOnly ? ENGLISH_ONLY[lang] : undefined;
-				if (label !== expected) wrong.push(`${page.site} ${lang} ${page.route}: ${href} → ${label ?? 'no label'}, expected ${expected ?? 'no label'}`);
+				if (label !== expected) wrong.push(`${p.site} ${lang} ${p.route}: ${href} → ${label ?? 'no label'}, expected ${expected ?? 'no label'}`);
 			}
 		}
 	}
@@ -120,7 +125,7 @@ test('a link to a module with no page in the reader’s language says it is in E
 });
 
 test('translations are neither invented nor hidden', () => {
-	for (const site of SITES) {
+	for (const site of ['kept', 'fresh']) {
 		for (const lang of LANGS) {
 			const modules = pages(lang)
 				.filter((p) => p.site === site && /^[a-z]+\/[a-z]+-\d+\/$/.test(p.route))
@@ -128,7 +133,7 @@ test('translations are neither invented nor hidden', () => {
 				.sort();
 			assert.deepEqual(modules, HAS_PAGE[lang], `${site} ${lang} module pages`);
 			for (const [dept, ids] of [['alpha', ['alp-001', 'alp-002']], ['beta', ['bet-001']]]) {
-				const index = fs.readFileSync(path.join(localeRoot(site, lang), dept, 'index.md'), 'utf8');
+				const index = page(site, lang, path.join(dept, 'index.md'));
 				for (const id of ids) assert.ok(index.includes(`](${id}/)`), `${site} ${lang} ${dept} index lists ${id}`);
 			}
 		}
@@ -137,42 +142,65 @@ test('translations are neither invented nor hidden', () => {
 
 test('hand-written journals are left alone', () => {
 	for (const lang of LANGS) {
-		assert.equal(fs.readFileSync(path.join(localeRoot('kept', lang), 'journal.md'), 'utf8'), `hand-written ${lang} journal\n`);
+		assert.equal(page('kept', lang, 'journal.md'), `hand-written ${lang} journal\n`);
 	}
 });
 
 test('generated course banners localize the duration unit', () => {
-	for (const site of SITES) {
-		for (const [lang, duration] of Object.entries({ en: '35 minutes', fr: '35 minutes', es: '35 minutos' })) {
-			const page = fs.readFileSync(path.join(localeRoot(site, lang), 'alpha', 'alp-001.md'), 'utf8');
-			assert.ok(page.includes(` · ${duration}`), `${site} ${lang} banner should contain ${duration}`);
-		}
+	for (const [lang, duration] of Object.entries({ en: '35 minutes', fr: '35 minutes', es: '35 minutos' })) {
+		assert.ok(page('fresh', lang, 'alpha/alp-001.md').includes(` · ${duration}`), `${lang} banner should contain ${duration}`);
 	}
 });
 
-test('a dirty source cannot produce pages attributed to its HEAD commit', () => {
-	for (const change of ['tracked', 'untracked', 'ignored']) {
-		const tmp = fs.mkdtempSync(path.join(os.tmpdir(), `streeling-dirty-${change}-`));
-		const src = path.join(tmp, 'demerzel');
-		const dest = path.join(tmp, 'site');
-		for (const [file, text] of Object.entries(FIXTURE)) write(path.join(src, file), text);
-		const git = (...args) => execFileSync('git', args, { cwd: src, stdio: 'ignore' });
-		git('init', '-q');
-		git('add', '.');
-		git('-c', 'user.name=fixture', '-c', 'user.email=fixture@example.invalid', 'commit', '-q', '-m', 'fixture');
-		if (change === 'tracked') {
-			write(path.join(src, 'state/streeling/courses/alpha/en/alp-001-first.md'), moduleFile('alp-001', 'Changed locally', [], 'Not in HEAD.'));
-		} else {
-			if (change === 'ignored') write(path.join(src, '.gitignore'), 'state/streeling/courses/alpha/en/alp-003-local.md\n');
-			write(path.join(src, 'state/streeling/courses/alpha/en/alp-003-local.md'), moduleFile('alp-003', 'Local only', [], 'Not in HEAD.'));
-		}
+test('View source and Edit page lead to the module’s own source file on main', () => {
+	const cases = { en: 'en/alp-001-first.md', fr: 'fr/alp-001-first.fr.md', es: 'es/alp-001-first.es.md' };
+	for (const [lang, file] of Object.entries(cases)) {
+		const text = page('fresh', lang, 'alpha/alp-001.md');
+		assert.ok(text.includes(`](${SITE_REPO}/blob/main/streeling/courses/alpha/${file})`), `${lang} View source`);
+		assert.ok(text.includes(`\neditUrl: ${SITE_REPO}/edit/main/streeling/courses/alpha/${file}\n`), `${lang} editUrl`);
+	}
+});
+
+test('a link to another file of the repository leads to that file on GitHub, anchor kept', () => {
+	assert.ok(page('fresh', 'en', 'alpha/alp-001.md').includes(`[scenarios](${SITE_REPO}/blob/main/code/alpha/alp-001/scenarios.json#L2)`));
+});
+
+test('the overview and the lock name the Demerzel commit the source was copied from', () => {
+	const lock = JSON.parse(fs.readFileSync(path.join(out.fresh, 'streeling.lock.json'), 'utf8'));
+	assert.equal(lock.source, 'streeling');
+	assert.equal(lock.copied_from.commit, 'f'.repeat(40));
+	assert.deepEqual(lock.modules, { en: 3, fr: 2, es: 1 });
+	for (const lang of LANGS) assert.ok(page('fresh', lang, 'index.md').includes('`fffffff` (2026-01-01)'), `${lang} overview`);
+});
+
+test('the same source gives the same files', () => {
+	const files = (root) => fs.readdirSync(root, { recursive: true }).filter((f) => fs.statSync(path.join(root, f)).isFile()).sort();
+	assert.deepEqual(files(out.again), files(out.fresh));
+	for (const f of files(out.fresh)) assert.equal(fs.readFileSync(path.join(out.again, f), 'utf8'), fs.readFileSync(path.join(out.fresh, f), 'utf8'), f);
+});
+
+test('a broken relative link stops the sync before any page changes', () => {
+	for (const href of ['../../../../code/alpha/alp-001/missing.json', '../../../../../outside-the-repository.md']) {
+		const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'streeling-broken-'));
+		const src = makeSource(path.join(dir, 'source'), {
+			'streeling/courses/alpha/en/alp-002-second.md': moduleFile('alp-002', 'Second', ['alp-001'], `See [the data](${href}).`),
+		});
+		const dest = path.join(dir, 'site');
 		write(path.join(dest, 'streeling.lock.json'), 'keep existing output\n');
+		write(path.join(dest, DOCS.en, 'alpha', 'alp-001.md'), 'previous page\n');
 		assert.throws(
-			() => execFileSync(process.execPath, [SCRIPT, '--source', src, '--out', dest], { stdio: 'pipe' }),
-			(error) => error.stderr.toString().includes('Streeling source has local changes'),
-			`${change} source must be rejected`,
+			() => sync(src, dest),
+			(error) => error.stderr.toString().includes(`alp-002-second.md: ${href}`),
+			`${href} must be rejected`,
 		);
 		assert.equal(fs.readFileSync(path.join(dest, 'streeling.lock.json'), 'utf8'), 'keep existing output\n');
-		assert.ok(!fs.existsSync(path.join(dest, 'src/content/docs/streeling')), `${change} source must not generate pages`);
+		assert.equal(fs.readFileSync(path.join(dest, DOCS.en, 'alpha', 'alp-001.md'), 'utf8'), 'previous page\n');
 	}
+});
+
+test('the old Demerzel import option says where the source went', () => {
+	assert.throws(
+		() => execFileSync(process.execPath, [SCRIPT, '--ref', 'HEAD', '--out', path.join(tmp, 'ref')], { stdio: 'pipe' }),
+		(error) => error.stderr.toString().includes('streeling-copy-source.mjs'),
+	);
 });

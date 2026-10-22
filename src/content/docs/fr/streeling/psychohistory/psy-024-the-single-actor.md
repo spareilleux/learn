@@ -4,12 +4,13 @@ description: "L'acteur unique : quand un seul expéditeur forme tout l'ensemble 
 sidebar:
   label: PSY-024 · L'acteur unique
   order: 24
+editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/psychohistory/fr/psy-024-the-single-actor.fr.md
 ---
 
 :::note[Streeling University]
 **PSY-024** · L'acteur unique : quand un seul expéditeur forme tout l'ensemble · intermédiaire · 40 minutes
 
-Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses/psychohistory/fr/psy-024-the-single-actor.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/fr/psy-024-the-single-actor.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PSY-004](../../psychohistory/psy-004-how-large-is-large/), [PSY-009](../../psychohistory/psy-009-concentration-and-heavy-tails/)
 :::
