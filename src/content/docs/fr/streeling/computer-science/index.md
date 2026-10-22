@@ -13,6 +13,10 @@ sidebar:
 
 - [CS-001 · Penser algorithmiquement](cs-001-thinking-algorithmically/)
 - [CS-002 · Gouverner les boucles agentiques : empêcher l'itération illimitée dans les systèmes pilotés par LLM](cs-002-governing-agentic-loops/)
+- [CS-003 · Signaler l'incertitude à la frontière du parseur d'accords](cs-003-chord-parser-uncertainty/)
+- [CS-004 · Composer et éprouver une boucle agentique d'amélioration audio](cs-004-composable-agentic-audio-loop/)
 - [CS-005 · Hand Off Agent Work as an Evidence Contract](cs-005-agent-handoff-evidence-contract/) *(en anglais)*
 - [CS-006 · Compose IXQL Stages With Explicit Evidence Boundaries](cs-006-ixql-pipeline-composition/) *(en anglais)*
+- [CS-007 · Typer les preuves des agents avant de composer les verdicts](cs-007-typed-agent-evidence-and-backpressure/)
+- [CS-008 · Composer des verdicts de révision liés aux sources exactes](cs-008-compose-exact-source-review-verdicts/)
 - [CS-009 · Composer les contraintes d’origami avant d’accepter un empilement rigide](cs-009-composing-origami-panel-constraints/)

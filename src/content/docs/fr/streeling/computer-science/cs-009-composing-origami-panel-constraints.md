@@ -3,7 +3,7 @@ title: Composer les contraintes d’origami avant d’accepter un empilement rig
 description: Composer les contraintes d’origami avant d’accepter un empilement rigide — Informatique
 sidebar:
   label: CS-009 · Composer les contraintes d’origami avant d’accepter un empilement rigide
-  order: 5
+  order: 9
 editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/computer-science/fr/cs-009-composing-origami-panel-constraints.fr.md
 ---
 

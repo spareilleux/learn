@@ -3,7 +3,7 @@ title: Compose Origami Constraints before Accepting a Rigid Stack
 description: Compose Origami Constraints before Accepting a Rigid Stack — Computer Science
 sidebar:
   label: CS-009 · Compose Origami Constraints before Accepting a Rigid Stack
-  order: 5
+  order: 9
 editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/computer-science/en/cs-009-composing-origami-panel-constraints.md
 ---
 

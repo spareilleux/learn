@@ -20,22 +20,22 @@ Estos módulos fueron escritos por departamentos de IA y **no han sido revisados
 |---|---|---|---|
 | [Ingeniería de audio](audio-engineering/) | 4 | 4 | 4 |
 | [Ciencia cognitiva](cognitive-science/) | 3 | 3 | 3 |
-| [Ciencias de la computación](computer-science/) | 5 | 3 | 3 |
+| [Ciencias de la computación](computer-science/) | 9 | 7 | 7 |
 | [Cibernética](cybernetics/) | 3 | 3 | 3 |
 | [Visualización de datos](data-visualization/) | 8 | 8 | 8 |
 | [Futurología](futurology/) | 1 | 1 | 1 |
 | [Acústica de la guitarra y síntesis sonora](guitar-acoustics/) | 3 | 3 | 3 |
 | [Guitar Alchemist Academy](guitar-alchemist-academy/) | 4 | 4 | 4 |
 | [Estudios de guitarra](guitar-studies/) | 4 | 4 | 4 |
-| [Teoría de la información](information-theory/) | 1 | 1 | 1 |
+| [Teoría de la información](information-theory/) | 3 | 3 | 3 |
 | [Investigación sobre IX](ix-research/) | 1 | 1 | 1 |
 | [Matemáticas](mathematics/) | 25 | 25 | 25 |
 | [Música](music/) | 19 | 19 | 19 |
 | [Musicología](musicology/) | 2 | 2 | 2 |
-| [Ciencia de redes](network-science/) | 1 | 1 | 1 |
+| [Ciencia de redes](network-science/) | 4 | 4 | 4 |
 | [Filosofía](philosophy/) | 1 | 1 | 1 |
 | [Física](physics/) | 3 | 3 | 3 |
-| [Gestión de productos y proyectos](product-management/) | 1 | 1 | 1 |
+| [Gestión de productos y proyectos](product-management/) | 3 | 3 | 3 |
 | [Psicohistoria](psychohistory/) | 25 | 25 | 25 |
 | [Semiótica](semiotics/) | 2 | 2 | 2 |
 | [Computación visual](visual-computing/) | 5 | 1 | 1 |

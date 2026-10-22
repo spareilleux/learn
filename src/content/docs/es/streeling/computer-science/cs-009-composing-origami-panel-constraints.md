@@ -3,7 +3,7 @@ title: Componer las restricciones de origami antes de aceptar un apilamiento rí
 description: Componer las restricciones de origami antes de aceptar un apilamiento rígido — Ciencias de la computación
 sidebar:
   label: CS-009 · Componer las restricciones de origami antes de aceptar un apilamiento rígido
-  order: 5
+  order: 9
 editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/computer-science/es/cs-009-composing-origami-panel-constraints.es.md
 ---
 

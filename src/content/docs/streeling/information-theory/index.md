@@ -12,3 +12,5 @@ sidebar:
 ## Modules
 
 - [INF-001 · The Entropy of Governance — Measuring Policy Complexity](inf-001-entropy-of-governance/)
+- [INF-002 · Information Loss in OPTIC-K Compact Vectors](inf-002-optick-compact-vector-information-loss/)
+- [INF-004 · Information Loss in Agent Handoffs](inf-004-information-loss-in-agent-handoffs/)

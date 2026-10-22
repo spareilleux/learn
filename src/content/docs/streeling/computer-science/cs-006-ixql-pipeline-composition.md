@@ -3,7 +3,7 @@ title: Compose IXQL Stages With Explicit Evidence Boundaries
 description: Compose IXQL Stages With Explicit Evidence Boundaries — Computer Science
 sidebar:
   label: CS-006 · Compose IXQL Stages With Explicit Evidence Boundaries
-  order: 4
+  order: 6
 editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/computer-science/en/cs-006-ixql-pipeline-composition.md
 ---
 

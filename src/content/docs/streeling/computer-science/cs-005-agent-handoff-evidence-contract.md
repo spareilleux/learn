@@ -3,7 +3,7 @@ title: Hand Off Agent Work as an Evidence Contract
 description: Hand Off Agent Work as an Evidence Contract — Computer Science
 sidebar:
   label: CS-005 · Hand Off Agent Work as an Evidence Contract
-  order: 3
+  order: 5
 editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/computer-science/en/cs-005-agent-handoff-evidence-contract.md
 ---
 

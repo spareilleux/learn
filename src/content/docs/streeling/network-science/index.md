@@ -12,3 +12,6 @@ sidebar:
 ## Modules
 
 - [NET-001 · Scale-Free Tool Networks — Why Some Repos Connect to Everything](net-001-scale-free-tool-networks/)
+- [NET-002 · A Capability Catalog Is Not a Collaboration Graph](net-002-capability-graphs-and-projections/)
+- [NET-003 · Measure Worker-Lane Coverage Under a Mode Cut](net-003-worker-lane-coverage-and-fragility/)
+- [NET-004 · Test Semantic Backpressure with Evidence Dependencies](net-004-semantic-backpressure-and-evidence-dependencies/)
