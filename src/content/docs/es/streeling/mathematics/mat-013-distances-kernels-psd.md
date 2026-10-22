@@ -4,13 +4,12 @@ description: Distancias, núcleos y matrices semidefinidas positivas — Matemá
 sidebar:
   label: MAT-013 · Distancias, núcleos y matrices semidefinidas positivas
   order: 13
-editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/mathematics/es/mat-013-distances-kernels-psd.es.md
 ---
 
 :::note[Streeling University]
 **MAT-013** · Distancias, núcleos y matrices semidefinidas positivas · intermedio · 50 minutos
 
-Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/mathematics/es/mat-013-distances-kernels-psd.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses/mathematics/es/mat-013-distances-kernels-psd.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MAT-005](../../mathematics/mat-005-symmetric-eigenproblems/)
 :::

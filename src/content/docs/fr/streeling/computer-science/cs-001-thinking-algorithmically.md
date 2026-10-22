@@ -4,13 +4,12 @@ description: Fondements de l'informatique — Informatique
 sidebar:
   label: CS-001 · Penser algorithmiquement
   order: 1
-editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/computer-science/fr/cs-001-thinking-algorithmically.fr.md
 ---
 
 :::note[Streeling University]
 **CS-001** · Fondements de l'informatique · débutant · 25 minutes
 
-Généré par le département *Informatique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/computer-science/fr/cs-001-thinking-algorithmically.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Informatique* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses/computer-science/fr/cs-001-thinking-algorithmically.fr.md) · [Mon journal](../../journal/)
 :::
 
 > **Département d'informatique** | Stade : Nigredo (Débutant) | Durée : 25 minutes

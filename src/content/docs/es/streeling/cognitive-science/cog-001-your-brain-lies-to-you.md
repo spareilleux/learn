@@ -4,13 +4,12 @@ description: Fundamentos de Ciencia Cognitiva — Ciencia cognitiva
 sidebar:
   label: COG-001 · Tu cerebro te miente
   order: 1
-editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/cognitive-science/es/cog-001-your-brain-lies-to-you.es.md
 ---
 
 :::note[Streeling University]
 **COG-001** · Fundamentos de Ciencia Cognitiva · principiante · 25 minutos
 
-Generado por el departamento *Ciencia cognitiva* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/cognitive-science/es/cog-001-your-brain-lies-to-you.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Ciencia cognitiva* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses/cognitive-science/es/cog-001-your-brain-lies-to-you.es.md) · [Mi diario](../../journal/)
 :::
 
 > **Departamento de Ciencia Cognitiva** | Nivel: Principiante | Duración: 25 minutos

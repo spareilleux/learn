@@ -4,13 +4,12 @@ description: "La persistance d'abord : la référence qu'une prévision de gouve
 sidebar:
   label: PSY-005 · La persistance d'abord
   order: 5
-editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/psychohistory/fr/psy-005-persistence-baseline.fr.md
 ---
 
 :::note[Streeling University]
 **PSY-005** · La persistance d'abord : la référence qu'une prévision de gouvernance doit battre · intermédiaire · 40 minutes
 
-Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/fr/psy-005-persistence-baseline.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses/psychohistory/fr/psy-005-persistence-baseline.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PSY-002](../../psychohistory/psy-002-governance-phase-transitions/)
 :::
@@ -27,7 +26,7 @@ Vous déciderez ce qu'on compte comme une prévision dans un journal, vous éval
 
 **Observé.** Une [tâche planifiée quotidienne](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/.github/workflows/demerzel-quality-trend.yml) lance [`scripts/quality_trend.py`](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/scripts/quality_trend.py), que le dépôt appelle le *feeder* (l'alimenteur). Ce script lit un enregistrement d'évolution (un fichier JSON dans `state/evolution/`) par *artefact* de gouvernance (une politique, une constitution, un schéma, une compétence) et ajoute une ligne par artefact dans `state/quality-trend/`. Toutes les lignes d'un même lancement partagent un `timestamp` ; appelons cela une *exécution*. Le champ `effectiveness_to` d'une ligne est la valeur de vérité que l'enregistrement attribue actuellement à une proposition écrite portant sur l'artefact : T (vrai), P (probable), U (inconnu), D (douteux), F (faux) ou C (contradictoire). Son champ `effectiveness_from` est [recopié de la ligne précédente de l'artefact](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/scripts/quality_trend.py#L104).
 
-[`extract.py`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/scripts/streeling_fixtures/psychohistory/psy-005/extract.py) fige ces fichiers au commit `4b03838` dans [`observed-input.json`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/fixtures/psychohistory/psy-005/observed-input.json) : **1 548** lignes, **88** exécutions réparties sur **83** dates UTC, **18** artefacts. La première exécution est d'une autre nature. Ses 11 lignes, horodatées du 2026-05-01, portent la marque `baseline: true` : ce sont des *lignes d'amorçage*, qui consignent un état de départ. Les 87 autres sont des *exécutions du feeder*, du 2026-07-18 au 2026-10-13.
+[`extract.py`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/scripts/streeling_fixtures/psychohistory/psy-005/extract.py) fige ces fichiers au commit `4b03838` dans [`observed-input.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-005/observed-input.json) : **1 548** lignes, **88** exécutions réparties sur **83** dates UTC, **18** artefacts. La première exécution est d'une autre nature. Ses 11 lignes, horodatées du 2026-05-01, portent la marque `baseline: true` : ce sont des *lignes d'amorçage*, qui consignent un état de départ. Les 87 autres sont des *exécutions du feeder*, du 2026-07-18 au 2026-10-13.
 
 Les deux étiquettes sont présentes dans 1 540 lignes. Sept lignes n'ont pas de champ `effectiveness_from`, faute d'étiquette antérieure à recopier. Une ligne, la première de `contracts / galactic-protocol.md`, n'a ni l'une ni l'autre : le feeder écrit un `effectiveness_to` nul quand l'évaluation d'un enregistrement est du texte libre, et c'est ce que [contenait alors cet enregistrement](https://github.com/GuitarAlchemist/Demerzel/blob/d9ddbaf9203a12b14c31b580070599efb8498031/state/evolution/2026-07-23-galactic-v1.3-ratification.evolution.json) (lu une seule fois au commit `d9ddbaf`, hors du jeu d'essai).
 
@@ -36,7 +35,7 @@ Une prévision a besoin d'un instant d'émission et d'un instant de vérificatio
 - **Dans la ligne :** `effectiveness_from` face à `effectiveness_to` au sein d'une même ligne, soit 1 540 paires.
 - **Lignes consécutives :** le champ `effectiveness_to` d'un artefact dans une ligne, face à celui de sa ligne suivante. Il y a 1 548 − 18 = 1 530 paires de lignes ; 1 d'entre elles part de la ligne sans étiquette, ce qui en laisse **1 529**.
 
-Cette leçon retient les lignes consécutives : chaque paire relie deux étiquettes enregistrées à deux instants différents. Le décompte fait dans la ligne contient aussi les 11 lignes d'amorçage, dont les deux champs ont été écrits ensemble, sans aucune ligne antérieure : il n'existait aucun moment antérieur où une prévision aurait pu être émise, et les 11 concordent par construction. **Recoupement calculé :** hors des lignes d'amorçage, les deux lectures donnent les mêmes 1 529 paires, et aucune ligne n'a un champ `effectiveness_from` différent du champ `effectiveness_to` de la ligne précédente (0 discordance ; `negative_controls` dans [`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/fixtures/psychohistory/psy-005/results.json) montre qu'une discordance introduite volontairement est bien comptée).
+Cette leçon retient les lignes consécutives : chaque paire relie deux étiquettes enregistrées à deux instants différents. Le décompte fait dans la ligne contient aussi les 11 lignes d'amorçage, dont les deux champs ont été écrits ensemble, sans aucune ligne antérieure : il n'existait aucun moment antérieur où une prévision aurait pu être émise, et les 11 concordent par construction. **Recoupement calculé :** hors des lignes d'amorçage, les deux lectures donnent les mêmes 1 529 paires, et aucune ligne n'a un champ `effectiveness_from` différent du champ `effectiveness_to` de la ligne précédente (0 discordance ; `negative_controls` dans [`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-005/results.json) montre qu'une discordance introduite volontairement est bien comptée).
 
 ### Exercice pratique 1
 
@@ -54,7 +53,7 @@ taux de base de changement   = paires avec changement / paires
 exactitude de la persistance = 1 - taux de base de changement
 ```
 
-**Calculé** par [`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/scripts/streeling_fixtures/psychohistory/psy-005/analyze.py) à partir de l'instantané (pourcentages arrondis à deux décimales) :
+**Calculé** par [`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/scripts/streeling_fixtures/psychohistory/psy-005/analyze.py) à partir de l'instantané (pourcentages arrondis à deux décimales) :
 
 | Paires | Nombre | Avec changement | Exactitude de la persistance |
 |---|---|---|---|
@@ -86,7 +85,7 @@ E et E_ref comptent les erreurs de la prévision et celles de la référence sur
 
 Ici, la référence est la persistance, avec E_ref = 1. L'échelle progresse donc par pas entiers de 1 : aucune erreur donne 1, une erreur donne 0, deux erreurs donnent −1. Aucune valeur entre 0 et 1 n'est possible.
 
-**Synthétique.** Les modèles ci-dessous n'existent pas. [`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/fixtures/psychohistory/psy-005/scenarios.json) définit chacun d'eux par la façon dont il se serait comporté sur les paires observées :
+**Synthétique.** Les modèles ci-dessous n'existent pas. [`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-005/scenarios.json) définit chacun d'eux par la façon dont il se serait comporté sur les paires observées :
 
 | Modèle imaginaire | Comportement | Exactitude | Compétence |
 |---|---|---|---|
@@ -127,7 +126,7 @@ Synthétique. `cautious_alarm` annonce l'unique changement et déclenche trois f
 
 **Observé, épinglé au commit `4b03838800dcd4894f1e026461979bff1d985ca8` de Demerzel :** les fichiers de tendance de qualité de [mai](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/state/quality-trend/2026-05.jsonl), [juillet](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/state/quality-trend/2026-07.jsonl), [août](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/state/quality-trend/2026-08.jsonl), [septembre](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/state/quality-trend/2026-09.jsonl) et [octobre](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/state/quality-trend/2026-10.jsonl) 2026 (il n'y a pas de fichier pour juin), le script du feeder et l'enregistrement d'évolution dont les liens figurent plus haut. `extract.py` refuse de s'exécuter si l'un de ces fichiers diffère de son blob Git épinglé.
 
-**Jeu d'essai.** `python -I scripts/streeling_fixtures/psychohistory/psy-005/extract.py`, puis `analyze.py` dans le même dossier ; `analyze.py --check` compare une nouvelle exécution aux résultats enregistrés. Le [README](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/fixtures/psychohistory/psy-005/README.md) énumère chaque fichier, les autocontrôles et les témoins négatifs.
+**Jeu d'essai.** `python -I scripts/streeling_fixtures/psychohistory/psy-005/extract.py`, puis `analyze.py` dans le même dossier ; `analyze.py --check` compare une nouvelle exécution aux résultats enregistrés. Le [README](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-005/README.md) énumère chaque fichier, les autocontrôles et les témoins négatifs.
 
 **Références de méthode.** Hyndman, R. J., et Athanasopoulos, G. (2021), *Forecasting: Principles and Practice*, 3e édition, OTexts, [section 5.2](https://otexts.com/fpp3/simple-methods.html) (la prévision naïve, qui est la persistance pour les séries numériques). Jolliffe, I. T., et Stephenson, D. B. (dir.) (2012), *Forecast Verification: A Practitioner's Guide in Atmospheric Science*, 2e édition, Wiley (exactitude et scores de compétence). Murphy, A. H. (1996), « The Finley Affair: A Signal Event in the History of Forecast Verification », *Weather and Forecasting* 11, 3–20. Murphy, A. H. (1993), « What Is a Good Forecast? An Essay on the Nature of Goodness in Weather Forecasting », *Weather and Forecasting* 8, 281–293 (la qualité d'une prévision face à sa valeur pour un utilisateur).
 

@@ -4,13 +4,12 @@ description: Optimisation itérative — Mathématiques
 sidebar:
   label: MAT-012 · Optimisation itérative
   order: 12
-editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/mathematics/fr/mat-012-iterative-optimisation.fr.md
 ---
 
 :::note[Streeling University]
 **MAT-012** · Optimisation itérative · intermédiaire · 50 minutes
 
-Généré par le département *Mathématiques* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/mathematics/fr/mat-012-iterative-optimisation.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Mathématiques* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses/mathematics/fr/mat-012-iterative-optimisation.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [MAT-011](../../mathematics/mat-011-gradients-reverse-mode-autodiff/)
 :::

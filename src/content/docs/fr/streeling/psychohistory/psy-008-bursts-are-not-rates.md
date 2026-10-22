@@ -4,13 +4,12 @@ description: "Les rafales ne sont pas des taux : les arrivées d'événements da
 sidebar:
   label: PSY-008 · Les rafales ne sont pas des taux
   order: 8
-editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/psychohistory/fr/psy-008-bursts-are-not-rates.fr.md
 ---
 
 :::note[Streeling University]
 **PSY-008** · Les rafales ne sont pas des taux : les arrivées d'événements dans le journal des déclenchements · intermédiaire · 40 minutes
 
-Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/fr/psy-008-bursts-are-not-rates.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses/psychohistory/fr/psy-008-bursts-are-not-rates.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PSY-002](../../psychohistory/psy-002-governance-phase-transitions/), [MAT-009](../../mathematics/mat-009-estimation-uncertainty-sampling/)
 :::
@@ -25,7 +24,7 @@ Vous transformerez un journal d'événements en comptages par jour civil, vous l
 
 ## 1. Compter par jour civil, jours vides compris
 
-**Observé.** Jusqu'à son retrait le 2026-07-18, le workflow [`demerzel-driver-triggers.yml`](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/.github/workflows/demerzel-driver-triggers.yml) écrivait un fichier JSON, un *déclencheur*, pour chaque push sur la branche principale, chaque ticket (*issue*) ouvert ou rouvert, chaque discussion créée et chaque exécution en échec de quatre autres workflows. [`state/triggers/archived/`](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/state/triggers/archived) en contient 594, horodatés du 2026-03-20 au 2026-07-16, de trois types seulement : 252 `discussion_created`, 207 `push` et 135 `issue_opened`. [`extract.py`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/scripts/streeling_fixtures/psychohistory/psy-008/extract.py) lit les 594 fichiers au commit `4b03838`, refuse un dossier qui diffère de son empreinte épinglée, et écrit une ligne par événement dans [`observed-input.json`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/fixtures/psychohistory/psy-008/observed-input.json). Les quelques fichiers déclencheurs [hors de l'archive](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/state/triggers) sont laissés de côté.
+**Observé.** Jusqu'à son retrait le 2026-07-18, le workflow [`demerzel-driver-triggers.yml`](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/.github/workflows/demerzel-driver-triggers.yml) écrivait un fichier JSON, un *déclencheur*, pour chaque push sur la branche principale, chaque ticket (*issue*) ouvert ou rouvert, chaque discussion créée et chaque exécution en échec de quatre autres workflows. [`state/triggers/archived/`](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/state/triggers/archived) en contient 594, horodatés du 2026-03-20 au 2026-07-16, de trois types seulement : 252 `discussion_created`, 207 `push` et 135 `issue_opened`. [`extract.py`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/scripts/streeling_fixtures/psychohistory/psy-008/extract.py) lit les 594 fichiers au commit `4b03838`, refuse un dossier qui diffère de son empreinte épinglée, et écrit une ligne par événement dans [`observed-input.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-008/observed-input.json). Les quelques fichiers déclencheurs [hors de l'archive](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/state/triggers) sont laissés de côté.
 
 Un *jour* est la date UTC de l'horodatage d'un déclencheur. Du premier jour au dernier, on compte **119** jours civils : **100** jours *actifs*, avec au moins un événement, et **19** jours vides. Un taux rapporte des événements à un temps écoulé ; les jours vides restent donc dans la série.
 
@@ -34,7 +33,7 @@ moyenne par jour civil = 594 / 119 = 4.99
 moyenne par jour actif = 594 / 100 = 5.94
 ```
 
-**Calculé** par [`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/scripts/streeling_fixtures/psychohistory/psy-008/analyze.py) dans [`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/fixtures/psychohistory/psy-008/results.json) :
+**Calculé** par [`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/scripts/streeling_fixtures/psychohistory/psy-008/analyze.py) dans [`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-008/results.json) :
 
 | Événements dans la journée | Jours | Événements |
 |---|---|---|
@@ -141,7 +140,7 @@ Un coéquipier propose « environ 35 événements par semaine, à 20 % près ».
 
 **Observé, épinglé au commit `4b03838800dcd4894f1e026461979bff1d985ca8` de Demerzel :** les 594 fichiers déclencheurs archivés (arbre Git `2da37c16496d39c0c9137897c8be2b0c6d6b7978` ; empreinte du manifeste dans `observed-input.json`), l'enregistrement du motif et les deux fichiers de workflow dont les liens figurent plus haut.
 
-**Jeu d'essai.** [`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/fixtures/psychohistory/psy-008/scenarios.json) contient les choix d'analyse ; le [README](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/fixtures/psychohistory/psy-008/README.md) donne les commandes, les autocontrôles et les témoins.
+**Jeu d'essai.** [`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-008/scenarios.json) contient les choix d'analyse ; le [README](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-008/README.md) donne les commandes, les autocontrôles et les témoins.
 
 **Références de méthode.** Cox, D. R., et Lewis, P. A. W. (1966), *The Statistical Analysis of Series of Events*, Methuen (l'indice de dispersion et son test). Barabási, A.-L. (2005), « The origin of bursts and heavy tails in human dynamics », *Nature* 435, 207–211 (les temps entre événements, non analysés ici).
 

@@ -4,13 +4,12 @@ description: Modos y familias modales — Música
 sidebar:
   label: MUS-011 · Modos y familias modales
   order: 11
-editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/music/es/mus-011-modes-modal-families.es.md
 ---
 
 :::note[Streeling University]
 **MUS-011** · Modos y familias modales · intermedio · 60 minutos
 
-Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/music/es/mus-011-modes-modal-families.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Música* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses/music/es/mus-011-modes-modal-families.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MUS-010](../../music/mus-010-scales-pattern-set-interval-vector/), [MUS-020](../../music/mus-020-set-classes-interval-vectors-prime-forms/)
 :::

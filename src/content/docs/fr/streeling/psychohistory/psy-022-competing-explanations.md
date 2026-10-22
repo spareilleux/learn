@@ -4,13 +4,12 @@ description: "Explications concurrentes : comparer des modèles sur peu de donn�
 sidebar:
   label: PSY-022 · Explications concurrentes
   order: 22
-editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/psychohistory/fr/psy-022-competing-explanations.fr.md
 ---
 
 :::note[Streeling University]
 **PSY-022** · Explications concurrentes : comparer des modèles sur peu de données · intermédiaire · 45 minutes
 
-Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/psychohistory/fr/psy-022-competing-explanations.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Psychohistoire* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses/psychohistory/fr/psy-022-competing-explanations.fr.md) · [Mon journal](../../journal/)
 
 Prérequis: [PSY-008](../../psychohistory/psy-008-bursts-are-not-rates/), [MAT-009](../../mathematics/mat-009-estimation-uncertainty-sampling/)
 :::
@@ -25,7 +24,7 @@ Vous ajusterez trois lois de comptage par maximum de vraisemblance, vous les cla
 
 ## 1. Trois candidats et leurs vraisemblances
 
-**Observé.** [`extract.py`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/scripts/streeling_fixtures/psychohistory/psy-022/extract.py) lit les 594 fichiers de [`state/triggers/archived`](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/state/triggers/archived) au commit `4b03838` et écrit [`observed-input.json`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/fixtures/psychohistory/psy-022/observed-input.json) : un comptage par jour civil UTC, n = 119 jours du 2026-03-20 au 2026-07-16, S = 594 événements. Parmi ces jours, 19 n'en comptent aucun, 63 en comptent exactement un et le plus chargé en compte 109 ; la variance, 196,848669 (diviseur n), est sans commune mesure avec la moyenne, 4,991597.
+**Observé.** [`extract.py`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/scripts/streeling_fixtures/psychohistory/psy-022/extract.py) lit les 594 fichiers de [`state/triggers/archived`](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/state/triggers/archived) au commit `4b03838` et écrit [`observed-input.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-022/observed-input.json) : un comptage par jour civil UTC, n = 119 jours du 2026-03-20 au 2026-07-16, S = 594 événements. Parmi ces jours, 19 n'en comptent aucun, 63 en comptent exactement un et le plus chargé en compte 109 ; la variance, 196,848669 (diviseur n), est sans commune mesure avec la moyenne, 4,991597.
 
 Chaque candidat attribue une probabilité à k événements dans une journée et traite les jours comme des tirages indépendants ; la log-vraisemblance (log L) est donc une somme sur les jours :
 
@@ -35,7 +34,7 @@ géométrique         P(k) = (1 - q) q^k                      log L = n ln(1 - q
 binomiale négative  P(k) = [r (r+1) ... (r+k-1) / k!] (r/(r+μ))^r (μ/(r+μ))^k
 ```
 
-Annuler la dérivée donne des formes explicites : λ = S/n et q = S/(n + S). Pour la binomiale négative, μ = S/n et r est le zéro de la fonction score d(log L)/dr, trouvé par une recherche à un paramètre ; la variance de cette loi vaut μ + μ²/r (celle de la géométrique vaut μ + μ², à r = 1). **Calculé** par [`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/scripts/streeling_fixtures/psychohistory/psy-022/analyze.py) :
+Annuler la dérivée donne des formes explicites : λ = S/n et q = S/(n + S). Pour la binomiale négative, μ = S/n et r est le zéro de la fonction score d(log L)/dr, trouvé par une recherche à un paramètre ; la variance de cette loi vaut μ + μ²/r (celle de la géométrique vaut μ + μ², à r = 1). **Calculé** par [`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/scripts/streeling_fixtures/psychohistory/psy-022/analyze.py) :
 
 | Modèle | Estimations | log L |
 |---|---|---|
@@ -145,7 +144,7 @@ La binomiale négative ajustée donne P(0) = 0,336109 et P(1) = 0,13316. Calcule
 
 **Observé, épinglé au commit `4b03838800dcd4894f1e026461979bff1d985ca8` de Demerzel :** le dossier des déclencheurs archivés dont le lien figure plus haut ; `extract.py` refuse un dossier qui diffère de la version épinglée.
 
-**Jeu d'essai.** `python -I -B scripts/streeling_fixtures/psychohistory/psy-022/extract.py`, puis `analyze.py` dans le même dossier ; `analyze.py --check` compare une nouvelle exécution au fichier [`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/fixtures/psychohistory/psy-022/results.json) enregistré. Les graines et les réglages sont dans [`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/fixtures/psychohistory/psy-022/scenarios.json) ; le [README](https://github.com/GuitarAlchemist/Demerzel/blob/3e2ac3f1ec322af684733ed1f01df5b775600546/state/streeling/fixtures/psychohistory/psy-022/README.md) énumère les autocontrôles, un cas calculé à la main et les témoins négatifs.
+**Jeu d'essai.** `python -I -B scripts/streeling_fixtures/psychohistory/psy-022/extract.py`, puis `analyze.py` dans le même dossier ; `analyze.py --check` compare une nouvelle exécution au fichier [`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-022/results.json) enregistré. Les graines et les réglages sont dans [`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-022/scenarios.json) ; le [README](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-022/README.md) énumère les autocontrôles, un cas calculé à la main et les témoins négatifs.
 
 **Références de méthode.** Akaike, H. (1974), « A new look at the statistical model identification », *IEEE Transactions on Automatic Control* 19(6), 716–723. Schwarz, G. (1978), « Estimating the Dimension of a Model », *The Annals of Statistics* 6(2), 461–464. Kass, R. E., et Raftery, A. E. (1995), « Bayes Factors », *Journal of the American Statistical Association* 90(430), 773–795 ([copie des auteurs](https://sites.stat.washington.edu/raftery/Research/PDF/kass1995.pdf)). Burnham, K. P., et Anderson, D. R. (2004), « Multimodel Inference: Understanding AIC and BIC in Model Selection », *Sociological Methods & Research* 33(2), 261–304. Wilks, S. S. (1938), « The Large-Sample Distribution of the Likelihood Ratio for Testing Composite Hypotheses », *The Annals of Mathematical Statistics* 9(1), 60–62.
 

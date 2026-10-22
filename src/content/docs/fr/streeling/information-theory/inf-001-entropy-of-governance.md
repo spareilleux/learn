@@ -4,13 +4,12 @@ description: Théorie de l'information appliquée à la gouvernance — Théorie
 sidebar:
   label: INF-001 · L'entropie de la gouvernance
   order: 1
-editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/information-theory/fr/inf-001-entropy-of-governance.fr.md
 ---
 
 :::note[Streeling University]
 **INF-001** · Théorie de l'information appliquée à la gouvernance · débutant · 25 minutes
 
-Généré par le département *Théorie de l'information* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/information-theory/fr/inf-001-entropy-of-governance.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Théorie de l'information* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses/information-theory/fr/inf-001-entropy-of-governance.fr.md) · [Mon journal](../../journal/)
 :::
 
 > **Département de théorie de l'information** | Stade : Nigredo (Débutant) | Durée : 25 minutes

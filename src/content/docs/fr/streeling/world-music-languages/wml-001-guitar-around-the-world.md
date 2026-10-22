@@ -4,13 +4,12 @@ description: Fondements des musiques du monde et des langues — Musiques et lan
 sidebar:
   label: WML-001 · La guitare autour du monde
   order: 1
-editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/world-music-languages/fr/wml-001-guitar-around-the-world.fr.md
 ---
 
 :::note[Streeling University]
 **WML-001** · Fondements des musiques du monde et des langues · débutant · 30 minutes
 
-Généré par le département *Musiques et langues du monde* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/spareilleux/learn/blob/main/streeling/courses/world-music-languages/fr/wml-001-guitar-around-the-world.fr.md) · [Mon journal](../../journal/)
+Généré par le département *Musiques et langues du monde* de Demerzel — pas encore relu par moi. [Voir la source](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses/world-music-languages/fr/wml-001-guitar-around-the-world.fr.md) · [Mon journal](../../journal/)
 :::
 
 > **Département des musiques du monde et des langues** | Niveau : Débutant | Durée : 30 minutes

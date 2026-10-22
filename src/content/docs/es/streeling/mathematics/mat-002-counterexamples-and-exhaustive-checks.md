@@ -4,13 +4,12 @@ description: Contraejemplos, testigos y comprobaciones exhaustivas — Matemáti
 sidebar:
   label: MAT-002 · Contraejemplos, testigos y comprobaciones exhaustivas
   order: 2
-editUrl: https://github.com/spareilleux/learn/edit/main/streeling/courses/mathematics/es/mat-002-counterexamples-and-exhaustive-checks.es.md
 ---
 
 :::note[Streeling University]
 **MAT-002** · Contraejemplos, testigos y comprobaciones exhaustivas · principiante · 35 minutos
 
-Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/spareilleux/learn/blob/main/streeling/courses/mathematics/es/mat-002-counterexamples-and-exhaustive-checks.es.md) · [Mi diario](../../journal/)
+Generado por el departamento *Matemáticas* de Demerzel — todavía no lo he revisado. [Ver la fuente](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses/mathematics/es/mat-002-counterexamples-and-exhaustive-checks.es.md) · [Mi diario](../../journal/)
 
 Requisitos previos: [MAT-001](../../mathematics/mat-001-proof-strategies/)
 :::
