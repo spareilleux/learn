@@ -21,9 +21,9 @@ Estos módulos fueron escritos por departamentos de IA y **no han sido revisados
 | [Ingeniería de audio](audio-engineering/) | 7 | 7 | 7 |
 | [Ciencia cognitiva](cognitive-science/) | 6 | 6 | 6 |
 | [Ciencias de la computación](computer-science/) | 14 | 14 | 14 |
-| [Cibernética](cybernetics/) | 6 | 6 | 6 |
+| [Cibernética](cybernetics/) | 7 | 7 | 7 |
 | [Visualización de datos](data-visualization/) | 10 | 10 | 10 |
-| [Futurología](futurology/) | 4 | 4 | 4 |
+| [Futurología](futurology/) | 5 | 5 | 5 |
 | [Acústica de la guitarra y síntesis sonora](guitar-acoustics/) | 6 | 6 | 6 |
 | [Guitar Alchemist Academy](guitar-alchemist-academy/) | 6 | 6 | 6 |
 | [Estudios de guitarra](guitar-studies/) | 6 | 6 | 6 |
@@ -35,7 +35,7 @@ Estos módulos fueron escritos por departamentos de IA y **no han sido revisados
 | [Ciencia de redes](network-science/) | 7 | 7 | 7 |
 | [Filosofía](philosophy/) | 6 | 6 | 6 |
 | [Física](physics/) | 10 | 10 | 10 |
-| [Gestión de productos y proyectos](product-management/) | 5 | 5 | 5 |
+| [Gestión de productos y proyectos](product-management/) | 6 | 6 | 6 |
 | [Psicohistoria](psychohistory/) | 25 | 25 | 25 |
 | [Semiótica](semiotics/) | 6 | 6 | 6 |
 | [Computación visual](visual-computing/) | 10 | 10 | 10 |

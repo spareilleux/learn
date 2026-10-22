@@ -17,3 +17,4 @@ sidebar:
 - [CYB-004 · Observer avant de corriger une boucle de rétroaction](cyb-004-observe-before-correcting-a-feedback-loop/)
 - [CYB-005 · Éviter les oscillations d’une politique de rendu](cyb-005-stop-render-policy-flapping/)
 - [CYB-006 · Borner la rétroaction des nouvelles tentatives avant d'ajouter des workers](cyb-006-bound-retry-feedback-and-workload/)
+- [CYB-007 · Mettre à jour les croyances sans compter un essai deux fois](cyb-007-update-beliefs-without-counting-a-trial-twice/)

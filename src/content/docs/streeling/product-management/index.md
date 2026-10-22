@@ -16,3 +16,4 @@ sidebar:
 - [PM-003 · Measure the Streeling Review Queue Without Counting Drafts as Throughput](pm-003-review-queue-flow-metrics/)
 - [PM-004 · Decide When Craft Extensions Are Ready for a Release](pm-004-craft-extension-release-decision/)
 - [PM-005 · Interpret BRUTAL Coexistence Experiments Before Choosing a Default](pm-005-interpret-brutal-coexistence-experiments/)
+- [PM-006 · Test a Pilot against Its Decision Horizon](pm-006-test-a-pilot-against-its-decision-horizon/)
