@@ -17,3 +17,4 @@ sidebar:
 - [PHY-004 · When Velocity Moves the Pick Position in GA's Guitar Engine](phy-004-velocity-pick-position-guitar-engine/)
 - [PHY-005 · Sheet Thickness from IX Coordinates to Proposed Scene Units](phy-005-sheet-thickness-and-scene-units/)
 - [PHY-006 · Check Weave Scene Units](phy-006-check-weave-scene-units/)
+- [PHY-007 · Separate Two-Tone Beating from Decay](phy-007-separate-beating-from-decay/)

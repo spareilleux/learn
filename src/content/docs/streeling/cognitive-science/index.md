@@ -14,3 +14,4 @@ sidebar:
 - [COG-001 · Your Brain Lies to You — Cognitive Biases Everyone Should Know](cog-001-your-brain-lies-to-you/)
 - [COG-002 · Feedback Integrity for Fretboard Recall](cog-002-feedback-integrity-fretboard-recall/)
 - [COG-003 · Calibrating Confidence in Fretboard Note Identification](cog-003-calibrating-fretboard-confidence/)
+- [COG-004 · Score a Pitch-Discrimination Task Without Inventing a Listening Result](cog-004-score-a-pitch-discrimination-task/)

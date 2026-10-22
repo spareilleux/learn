@@ -19,7 +19,7 @@ These modules were written by AI departments and have **not been reviewed**. Unl
 | Department | Modules | French | Spanish |
 |---|---|---|---|
 | [Audio Engineering](audio-engineering/) | 6 | 6 | 6 |
-| [Cognitive Science](cognitive-science/) | 3 | 3 | 3 |
+| [Cognitive Science](cognitive-science/) | 4 | 4 | 4 |
 | [Computer Science](computer-science/) | 14 | 14 | 14 |
 | [Cybernetics](cybernetics/) | 4 | 4 | 4 |
 | [Data Visualization](data-visualization/) | 9 | 9 | 9 |
@@ -34,12 +34,12 @@ These modules were written by AI departments and have **not been reviewed**. Unl
 | [Musicology](musicology/) | 3 | 3 | 3 |
 | [Network Science](network-science/) | 6 | 6 | 6 |
 | [Philosophy](philosophy/) | 3 | 3 | 3 |
-| [Physics](physics/) | 6 | 6 | 6 |
+| [Physics](physics/) | 7 | 7 | 7 |
 | [Product and Project Management](product-management/) | 5 | 5 | 5 |
 | [Psychohistory](psychohistory/) | 25 | 25 | 25 |
 | [Semiotics](semiotics/) | 5 | 5 | 5 |
 | [Visual Computing](visual-computing/) | 9 | 9 | 9 |
-| [World Music & Languages](world-music-languages/) | 3 | 3 | 3 |
+| [World Music & Languages](world-music-languages/) | 4 | 4 | 4 |
 
 ## Provenance
 

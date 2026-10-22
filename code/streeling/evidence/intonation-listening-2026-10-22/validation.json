@@ -1,0 +1,108 @@
+{
+  "checked_at_utc": "2026-10-22T18:40:42.184604+00:00",
+  "base_learn_commit": "8f16a8d49f1f9b1f6f19508fc47329092edc9050",
+  "source_ga_commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+  "scope": "Three intonation/interference/discrimination courses in existing departments; fixed calculations, original oscillator WAVs/figure and prepared synthetic scoring/learner tasks. No new production/lab program.",
+  "new_english_modules": 3,
+  "new_locale_sources": 6,
+  "canonical_sources": 9,
+  "localized_exercise_answer_pairs": 45,
+  "calculation_checks": {
+    "independent_checks": 56,
+    "passed": 56,
+    "failed": 0,
+    "original_wavs": 3,
+    "original_figures": 1,
+    "public_ga_source_files": 8,
+    "new_ga_engine_run": false,
+    "new_dependency_install": false
+  },
+  "script_tests": {
+    "action": "tests",
+    "args": [
+      "node",
+      "--test",
+      "scripts/tests/lazy-demo.test.mjs",
+      "scripts/tests/streeling-copy-source.test.mjs",
+      "scripts/tests/sync-streeling.test.mjs"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 2.57581750000827,
+    "log": "C:\\tmp\\streeling-intonation-tests-20261022.log",
+    "log_sha256": "562b0c46f8456631826e6b71b04b3bc237ff82d1a9c95df87e31237fe92f0536",
+    "passed": 18,
+    "failed": 0
+  },
+  "sync": {
+    "action": "sync",
+    "args": [
+      "npm.cmd",
+      "run",
+      "sync:streeling"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 2.9437097999907564,
+    "log": "C:\\tmp\\streeling-intonation-sync-20261022.log",
+    "log_sha256": "885d5d5cea15de179fb4cfd8e483d3211dac13380c7af035af60ea91dda9140f",
+    "idempotent_checked_files": 599
+  },
+  "static_build": {
+    "action": "build",
+    "args": [
+      "npm.cmd",
+      "run",
+      "build"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 100.07360380000318,
+    "log": "C:\\tmp\\streeling-intonation-build-20261022.log",
+    "log_sha256": "b46c75462c77d7f87dcc62d945e7ae88efcdd6161cfe68208f0878e539b60da6",
+    "pages": 1795,
+    "dependency_install": "Existing node_modules junction; no install.",
+    "warnings": "Highlighting fallback and empty i18n/404 warnings retained in complete log."
+  },
+  "rendered_articles": {
+    "pages": 21,
+    "links": 363,
+    "unresolved_internal_links": [],
+    "correct_new_source_banners": 9,
+    "missing_page_and_anchor_controls_detected": true,
+    "scope": "Built HTML, not browser or public deployment."
+  },
+  "review": {
+    "data_verdict": "pass_with_declared_evidence_limits",
+    "data_receipt_sha256": "b048f1f181dceba5bc0f38b75f32f7819436d65674d1629743cba918ec16d5b5",
+    "content_verdict": "pass_with_declared_evidence_limits",
+    "content_receipt_sha256": "208f4744fa8d0d3952b5253d3804e1807b6ed09fd15e28d358f22944dc739d51",
+    "exercise_pairs_checked": 45,
+    "learner_criteria_checked": 15,
+    "findings": [],
+    "scope": "Independent AI numerical/source/media/course checks; not human approval.",
+    "human_subject": null,
+    "musician": null,
+    "fluent_language": null,
+    "learner": null,
+    "listening": null
+  },
+  "code_review_pipeline": "Documentation/data/media-only deliverable with temporary numerical analysis; no new production/lab program emitted and no code-shipping review invoked.",
+  "manual_host_scan": "Checked source/probe boundaries, authored projection, approximation labels, cent arithmetic, signed/unsigned envelope, sample windows/control, PCM integrity, statistical tail/selection assumptions, original media, task/rubric/translation coverage and final reviewer hashes. Prior guitar failure preserved.",
+  "source_inventory": {
+    "core_english_modules": 174,
+    "target": 525,
+    "original_departments": 21,
+    "remaining_core_source_gaps": 351,
+    "locale_counts": {
+      "en": 175,
+      "fr": 175,
+      "es": 175
+    }
+  },
+  "public_course_html_readback": null,
+  "protected_files_unchanged": [
+    "streeling/source.json",
+    "src/content/docs/streeling/journal.md",
+    "src/content/docs/fr/streeling/journal.md",
+    "src/content/docs/es/streeling/journal.md"
+  ],
+  "lint_typecheck": "No package.json lint/typecheck scripts configured; existing generator tests and Astro build used."
+}
