@@ -15,3 +15,4 @@ sidebar:
 - [CYB-002 · CYB-002 : Mécanismes d'amortissement actif pour maîtriser l'oscillation entre dépôts](cyb-002-active-dampening-cross-repo-oscillation/)
 - [CYB-003 · CYB-003 : Mesurer quantitativement le ratio de variété](cyb-003-measuring-variety-ratio-quantitatively/)
 - [CYB-004 · Observer avant de corriger une boucle de rétroaction](cyb-004-observe-before-correcting-a-feedback-loop/)
+- [CYB-005 · Éviter les oscillations d’une politique de rendu](cyb-005-stop-render-policy-flapping/)

@@ -1,0 +1,30 @@
+---
+execution: knowledge-work
+---
+
+# Observatory control and decision courses
+
+## Deliverables
+
+Write CYB005 on hysteresis, persistence and dwell time; FUT004 on scenario analysis and minimax regret; PHI004 on empirical outcomes, trade-off weights and hard constraints. Each belongs in its existing department and has English, French and Spanish sources with five corrected exercises. Prepare three source-assisted tasks and fifteen criteria. No human, fluent-language, participant, graphics-quality or deployed-HTML approval may be inferred from calculations.
+
+The full goal remains 525 reviewed, project-useful courses across the original 21 departments. These three lessons are a new tranche, not a replacement goal.
+
+## Sources and project boundary
+
+Use anonymous public source matched to immutable GA commit76efbffd5af82b46c3146957a6bd4504008eeb89: Experiments/Brutal/Colossus/Program.cs, README.md, and evidence/m3-20261020-000727.md. Inspect the exact adaptive controller, its timing measurement, exponential smoothing, path-tracing guard, bounce bounds, strict thresholds and time base. Distinguish a failed or unavailable query from numeric validation of a successful result. Historical source/report bytes do not attest the current dirty primary checkout or a live GPU. The earlier inconclusive coexistence report remains inconclusive.
+
+Read the official MathWorks Relay block documentation for stateful hysteresis, RAND's own Robust Decision Making page for decision framing and uncertainty, and the authored Stanford Encyclopedia of Philosophy Decision Theory entry for beliefs, values and normative choice. Cite only brief independently written explanations. Copy no external illustrations, examples or prose. No MATLAB, renderer, live controller, GPU or interactive session is executed.
+
+## Before-analysis constructions and predictions
+
+1. At integer seconds1 through17, author GPU-time observations in milliseconds: [15,17,15,17,15,14,17,17,14,10,10,14,17,17,10,10,10]. These are synthetic observations, not collected frame times and not a plant response to controller actions. Initial high-detail state is1 at time0. A naive policy sets low0 when the observation exceeds16, otherwise high1; predict eight state changes.
+2. An advisory two-state policy uses down threshold strictly above16ms, up threshold strictly below10.4ms, at least two consecutive direction-qualifying valid observations and minimum elapsed dwell of3seconds from the previous change (initial last-change time0). Keep streaks while dwell blocks a qualifying change; reset streaks after a change or a nonqualifying/invalid observation. Within the neutral band retain state. Predict changes at seconds8,11,14,17, four total. This adds persistence and a3second dwell; it is not the source controller, which changes one of three bounce levels with exponential smoothing and a strictly greater than1second guard.
+3. Independently check the source-like exponential recurrence s_n=s_(n-1)+0.05*(20-s_(n-1)), s_0=0: the first sample strictly above16ms should be32. This is an arithmetic characterization of zero initialization under a constant constructed20ms input; it does not determine wall-clock startup latency without a measurement cadence and the other guards.
+4. Test missing observation reset using [17,null,17,17]: the advisory policy should change down at second4, not count across missing data. Check strict equality at16/10.4 and dwell boundaries. Zero, negative and nonfinite toy inputs are invalid by the authored policy, which holds state and resets streaks; this does not claim the source has the same numeric validation. A constant-high no-op policy has zero changes but fails the constructed responsiveness requirement. Fewer changes alone therefore do not prove better control, convergence or real frame pacing.
+5. Author a loss-point table, lower is preferred, for three hypothetical future conditions [limited-host,capable-host,contended-host]: coexistence-first C=[3,6,6], detail-first P=[8,0,14], adaptive-candidate A=[4,3,5]. These cells are invented comparative losses, not hardware measurements or probabilities. Predict per-state best losses[3,0,5], maximum regrets C6/P9/A3 and minimax-regret choice A. With assumed probabilities[0.1,0.8,0.1], predict expected losses C5.7/P2.2/A3.3, selecting P instead. With capable-host probability p and each other state(1-p)/2, the P/A crossover should be13/19. Add an omitted adapter-unavailable state with losses C4/P10/A20: predict maximum regrets C6/P9/A16, changing the minimax choice to C. This is a sensitivity exercise, not a complete robust-decision study or forecast.
+6. Author a separate two-objective table: modes L=(detail70,adjacent-task overhead2ms), B=(85,5), H=(95,12), W=(70,8). These are hypothetical attributes, not actual image-quality or latency measurements. Predict W is dominated, while L/B/H are nondominated for these two attributes. Under an explicitly assumed linear score U=D-lambda*overhead_ms, predict H/B/L for lambda0.5/2/6 points per millisecond. Boundary weights should be10/7 and5. An authored hard limit overhead<=6ms excludes H and W before scoring. Converting milliseconds to seconds requires scaling lambda by1000; failing to do so can reverse the numerical choice. The table does not tell us whose values should govern or establish a universal ethical rule.
+
+## Verification and publication
+
+Produce fixed JSON and original scientific figures with installed tools; temporary analysis code remains outside the deliverable. Independently audit source bindings, exact arithmetic, state traces, boundary/missing-data controls and the declared limits. Review nine final source pages and fifteen criteria, including translated wording. Bind reviewed UTF8-noBOM LF bytes. Synchronize canonical Learn sources, run the existing18generator tests, build the site, check changed article links and generation idempotence, preserve source metadata and journals, commit explicit owned paths to the existing draft PR and anonymously read back its immutable bytes. Do not rewrite the existing PR title/body. Human, learner and deployed-HTML gates remain separate.

@@ -21,9 +21,9 @@ These modules were written by AI departments and have **not been reviewed**. Unl
 | [Audio Engineering](audio-engineering/) | 6 | 6 | 6 |
 | [Cognitive Science](cognitive-science/) | 4 | 4 | 4 |
 | [Computer Science](computer-science/) | 14 | 14 | 14 |
-| [Cybernetics](cybernetics/) | 4 | 4 | 4 |
+| [Cybernetics](cybernetics/) | 5 | 5 | 5 |
 | [Data Visualization](data-visualization/) | 9 | 9 | 9 |
-| [Futurology](futurology/) | 3 | 3 | 3 |
+| [Futurology](futurology/) | 4 | 4 | 4 |
 | [Guitar Acoustics & Sound Synthesis](guitar-acoustics/) | 4 | 4 | 4 |
 | [Guitar Alchemist Academy](guitar-alchemist-academy/) | 4 | 4 | 4 |
 | [Guitar Studies](guitar-studies/) | 4 | 4 | 4 |
@@ -33,7 +33,7 @@ These modules were written by AI departments and have **not been reviewed**. Unl
 | [Music](music/) | 25 | 25 | 25 |
 | [Musicology](musicology/) | 3 | 3 | 3 |
 | [Network Science](network-science/) | 6 | 6 | 6 |
-| [Philosophy](philosophy/) | 3 | 3 | 3 |
+| [Philosophy](philosophy/) | 4 | 4 | 4 |
 | [Physics](physics/) | 7 | 7 | 7 |
 | [Product and Project Management](product-management/) | 5 | 5 | 5 |
 | [Psychohistory](psychohistory/) | 25 | 25 | 25 |

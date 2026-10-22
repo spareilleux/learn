@@ -14,3 +14,4 @@ sidebar:
 - [PHI-001 · Cómo argumentar bien — Lógica y pensamiento crítico](phi-001-how-to-argue-well/)
 - [PHI-002 · ¿Cuándo está justificada una decisión consultiva?](phi-002-when-is-an-advisory-decision-justified/)
 - [PHI-003 · ¿Qué significa «el mismo acorde» en la búsqueda de GA?](phi-003-what-does-the-same-chord-mean/)
+- [PHI-004 · Separar los compromisos de rendimiento de los valores](phi-004-separate-performance-tradeoffs-from-values/)

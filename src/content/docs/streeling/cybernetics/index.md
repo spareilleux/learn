@@ -15,3 +15,4 @@ sidebar:
 - [CYB-002 · CYB-002: Active Dampening Mechanisms for Cross-Repo Oscillation Control](cyb-002-active-dampening-cross-repo-oscillation/)
 - [CYB-003 · CYB-003: Measuring the Variety Ratio Quantitatively](cyb-003-measuring-variety-ratio-quantitatively/)
 - [CYB-004 · Observe Before Correcting a Feedback Loop](cyb-004-observe-before-correcting-a-feedback-loop/)
+- [CYB-005 · Stop a Render Policy from Flapping](cyb-005-stop-render-policy-flapping/)

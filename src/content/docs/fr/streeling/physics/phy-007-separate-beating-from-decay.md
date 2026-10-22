@@ -39,7 +39,7 @@ Pour ces fréquences, calculez la période de récurrence de l’enveloppe non s
 
 L’enveloppe non signée part de 0.25, atteint son premier zéro vers 0.192633666 seconde, puis retrouve sa crête vers 0.385267333 seconde. L’amplitude de chaque composante reste de 0.125. Les annulations et renforcements modifient la somme sans introduire d’amortissement exponentiel des composantes.
 
-![Cosinus construits sans fondu et enveloppe non signée de leur somme](https://github.com/spareilleux/learn/blob/main/code/streeling/evidence/intonation-listening-2026-10-22/two-tone-envelope.png)
+![Cosinus construits sans fondu et enveloppe non signée de leur somme](https://raw.githubusercontent.com/spareilleux/learn/0e1080569fb174d7867eebc9248f4fc9193aa5a8/code/streeling/evidence/intonation-listening-2026-10-22/two-tone-envelope.png)
 
 Le graphique supérieur montre les premières 0.025 secondes du modèle sans fondu. Le graphique inférieur montre son enveloppe non signée ; les pointillés marquent les périodes de récurrence successives. Cette figure ne représente pas la forme d’onde du WAV exporté avec des fondus aux extrémités. Un zéro de l’enveloppe mathématique ne garantit pas non plus une valeur RMS nulle sur une fenêtre de durée finie.
 

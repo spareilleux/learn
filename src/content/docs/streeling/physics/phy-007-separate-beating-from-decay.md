@@ -39,7 +39,7 @@ For these frequencies, calculate the unsigned-envelope recurrence period and com
 
 The unsigned envelope starts at 0.25, first reaches zero near 0.192633666 seconds and returns to its peak near 0.385267333 seconds. Each component's amplitude remains 0.125. Cancellation and reinforcement change the sum without introducing exponential component damping.
 
-![Untapered constructed cosines and their unsigned sum envelope](https://github.com/spareilleux/learn/blob/main/code/streeling/evidence/intonation-listening-2026-10-22/two-tone-envelope.png)
+![Untapered constructed cosines and their unsigned sum envelope](https://raw.githubusercontent.com/spareilleux/learn/0e1080569fb174d7867eebc9248f4fc9193aa5a8/code/streeling/evidence/intonation-listening-2026-10-22/two-tone-envelope.png)
 
 The upper plot shows the first 0.025 seconds of the untapered model. The lower plot shows its unsigned envelope; dotted lines mark successive recurrence periods. This figure is not a waveform plot of the exported, boundary-faded WAV. A zero of the mathematical envelope is also not a promise of a zero RMS over a finite time window.
 

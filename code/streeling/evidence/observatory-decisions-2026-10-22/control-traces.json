@@ -1,0 +1,1084 @@
+{
+  "scope": "Authored open-loop observations and arithmetic decision models. No plant response, native source execution, stability proof or live quality/FPS result.",
+  "initial_high_detail_state": 1,
+  "initial_last_change_seconds": 0,
+  "synthetic_samples": [
+    15,
+    17,
+    15,
+    17,
+    15,
+    14,
+    17,
+    17,
+    14,
+    10,
+    10,
+    14,
+    17,
+    17,
+    10,
+    10,
+    10
+  ],
+  "sample_times": "Integer seconds1..17, not actual frame/query cadence.",
+  "naive_rule": "high1 when ms<=16, otherwise low0",
+  "advisory_rule": {
+    "down_ms_strictly_above": 16,
+    "up_ms_strictly_below": 10.4,
+    "consecutive_valid_observations_required": 2,
+    "minimum_elapsed_dwell_seconds": 3,
+    "elapsed_guard": ">=3; differs from source >1",
+    "invalid": "Nonpositive/nonfinite/missing: hold state, reset streak; a teaching policy, not inspected source behavior.",
+    "streak_policy": "Retain a qualifying streak during dwell; reset after a change or any nonqualifying/invalid observation."
+  },
+  "naive": [
+    {
+      "t_seconds": 1,
+      "input_gpu_ms": 15,
+      "input_valid": true,
+      "before": 1,
+      "after": 1,
+      "changed": false,
+      "direction": null,
+      "streak_after": 0,
+      "dwell_before_seconds": 1,
+      "blocked_by_dwell": false
+    },
+    {
+      "t_seconds": 2,
+      "input_gpu_ms": 17,
+      "input_valid": true,
+      "before": 1,
+      "after": 0,
+      "changed": true,
+      "direction": null,
+      "streak_after": 0,
+      "dwell_before_seconds": 2,
+      "blocked_by_dwell": false
+    },
+    {
+      "t_seconds": 3,
+      "input_gpu_ms": 15,
+      "input_valid": true,
+      "before": 0,
+      "after": 1,
+      "changed": true,
+      "direction": null,
+      "streak_after": 0,
+      "dwell_before_seconds": 3,
+      "blocked_by_dwell": false
+    },
+    {
+      "t_seconds": 4,
+      "input_gpu_ms": 17,
+      "input_valid": true,
+      "before": 1,
+      "after": 0,
+      "changed": true,
+      "direction": null,
+      "streak_after": 0,
+      "dwell_before_seconds": 4,
+      "blocked_by_dwell": false
+    },
+    {
+      "t_seconds": 5,
+      "input_gpu_ms": 15,
+      "input_valid": true,
+      "before": 0,
+      "after": 1,
+      "changed": true,
+      "direction": null,
+      "streak_after": 0,
+      "dwell_before_seconds": 5,
+      "blocked_by_dwell": false
+    },
+    {
+      "t_seconds": 6,
+      "input_gpu_ms": 14,
+      "input_valid": true,
+      "before": 1,
+      "after": 1,
+      "changed": false,
+      "direction": null,
+      "streak_after": 0,
+      "dwell_before_seconds": 6,
+      "blocked_by_dwell": false
+    },
+    {
+      "t_seconds": 7,
+      "input_gpu_ms": 17,
+      "input_valid": true,
+      "before": 1,
+      "after": 0,
+      "changed": true,
+      "direction": null,
+      "streak_after": 0,
+      "dwell_before_seconds": 7,
+      "blocked_by_dwell": false
+    },
+    {
+      "t_seconds": 8,
+      "input_gpu_ms": 17,
+      "input_valid": true,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "direction": null,
+      "streak_after": 0,
+      "dwell_before_seconds": 8,
+      "blocked_by_dwell": false
+    },
+    {
+      "t_seconds": 9,
+      "input_gpu_ms": 14,
+      "input_valid": true,
+      "before": 0,
+      "after": 1,
+      "changed": true,
+      "direction": null,
+      "streak_after": 0,
+      "dwell_before_seconds": 9,
+      "blocked_by_dwell": false
+    },
+    {
+      "t_seconds": 10,
+      "input_gpu_ms": 10,
+      "input_valid": true,
+      "before": 1,
+      "after": 1,
+      "changed": false,
+      "direction": null,
+      "streak_after": 0,
+      "dwell_before_seconds": 10,
+      "blocked_by_dwell": false
+    },
+    {
+      "t_seconds": 11,
+      "input_gpu_ms": 10,
+      "input_valid": true,
+      "before": 1,
+      "after": 1,
+      "changed": false,
+      "direction": null,
+      "streak_after": 0,
+      "dwell_before_seconds": 11,
+      "blocked_by_dwell": false
+    },
+    {
+      "t_seconds": 12,
+      "input_gpu_ms": 14,
+      "input_valid": true,
+      "before": 1,
+      "after": 1,
+      "changed": false,
+      "direction": null,
+      "streak_after": 0,
+      "dwell_before_seconds": 12,
+      "blocked_by_dwell": false
+    },
+    {
+      "t_seconds": 13,
+      "input_gpu_ms": 17,
+      "input_valid": true,
+      "before": 1,
+      "after": 0,
+      "changed": true,
+      "direction": null,
+      "streak_after": 0,
+      "dwell_before_seconds": 13,
+      "blocked_by_dwell": false
+    },
+    {
+      "t_seconds": 14,
+      "input_gpu_ms": 17,
+      "input_valid": true,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "direction": null,
+      "streak_after": 0,
+      "dwell_before_seconds": 14,
+      "blocked_by_dwell": false
+    },
+    {
+      "t_seconds": 15,
+      "input_gpu_ms": 10,
+      "input_valid": true,
+      "before": 0,
+      "after": 1,
+      "changed": true,
+      "direction": null,
+      "streak_after": 0,
+      "dwell_before_seconds": 15,
+      "blocked_by_dwell": false
+    },
+    {
+      "t_seconds": 16,
+      "input_gpu_ms": 10,
+      "input_valid": true,
+      "before": 1,
+      "after": 1,
+      "changed": false,
+      "direction": null,
+      "streak_after": 0,
+      "dwell_before_seconds": 16,
+      "blocked_by_dwell": false
+    },
+    {
+      "t_seconds": 17,
+      "input_gpu_ms": 10,
+      "input_valid": true,
+      "before": 1,
+      "after": 1,
+      "changed": false,
+      "direction": null,
+      "streak_after": 0,
+      "dwell_before_seconds": 17,
+      "blocked_by_dwell": false
+    }
+  ],
+  "guarded": [
+    {
+      "t_seconds": 1,
+      "input_gpu_ms": 15,
+      "input_valid": true,
+      "before": 1,
+      "after": 1,
+      "changed": false,
+      "direction": null,
+      "streak_after": 0,
+      "dwell_before_seconds": 1,
+      "blocked_by_dwell": false
+    },
+    {
+      "t_seconds": 2,
+      "input_gpu_ms": 17,
+      "input_valid": true,
+      "before": 1,
+      "after": 1,
+      "changed": false,
+      "direction": "down",
+      "streak_after": 1,
+      "dwell_before_seconds": 2,
+      "blocked_by_dwell": false
+    },
+    {
+      "t_seconds": 3,
+      "input_gpu_ms": 15,
+      "input_valid": true,
+      "before": 1,
+      "after": 1,
+      "changed": false,
+      "direction": null,
+      "streak_after": 0,
+      "dwell_before_seconds": 3,
+      "blocked_by_dwell": false
+    },
+    {
+      "t_seconds": 4,
+      "input_gpu_ms": 17,
+      "input_valid": true,
+      "before": 1,
+      "after": 1,
+      "changed": false,
+      "direction": "down",
+      "streak_after": 1,
+      "dwell_before_seconds": 4,
+      "blocked_by_dwell": false
+    },
+    {
+      "t_seconds": 5,
+      "input_gpu_ms": 15,
+      "input_valid": true,
+      "before": 1,
+      "after": 1,
+      "changed": false,
+      "direction": null,
+      "streak_after": 0,
+      "dwell_before_seconds": 5,
+      "blocked_by_dwell": false
+    },
+    {
+      "t_seconds": 6,
+      "input_gpu_ms": 14,
+      "input_valid": true,
+      "before": 1,
+      "after": 1,
+      "changed": false,
+      "direction": null,
+      "streak_after": 0,
+      "dwell_before_seconds": 6,
+      "blocked_by_dwell": false
+    },
+    {
+      "t_seconds": 7,
+      "input_gpu_ms": 17,
+      "input_valid": true,
+      "before": 1,
+      "after": 1,
+      "changed": false,
+      "direction": "down",
+      "streak_after": 1,
+      "dwell_before_seconds": 7,
+      "blocked_by_dwell": false
+    },
+    {
+      "t_seconds": 8,
+      "input_gpu_ms": 17,
+      "input_valid": true,
+      "before": 1,
+      "after": 0,
+      "changed": true,
+      "direction": "down",
+      "streak_after": 0,
+      "dwell_before_seconds": 8,
+      "blocked_by_dwell": false
+    },
+    {
+      "t_seconds": 9,
+      "input_gpu_ms": 14,
+      "input_valid": true,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "direction": null,
+      "streak_after": 0,
+      "dwell_before_seconds": 1,
+      "blocked_by_dwell": false
+    },
+    {
+      "t_seconds": 10,
+      "input_gpu_ms": 10,
+      "input_valid": true,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "direction": "up",
+      "streak_after": 1,
+      "dwell_before_seconds": 2,
+      "blocked_by_dwell": false
+    },
+    {
+      "t_seconds": 11,
+      "input_gpu_ms": 10,
+      "input_valid": true,
+      "before": 0,
+      "after": 1,
+      "changed": true,
+      "direction": "up",
+      "streak_after": 0,
+      "dwell_before_seconds": 3,
+      "blocked_by_dwell": false
+    },
+    {
+      "t_seconds": 12,
+      "input_gpu_ms": 14,
+      "input_valid": true,
+      "before": 1,
+      "after": 1,
+      "changed": false,
+      "direction": null,
+      "streak_after": 0,
+      "dwell_before_seconds": 1,
+      "blocked_by_dwell": false
+    },
+    {
+      "t_seconds": 13,
+      "input_gpu_ms": 17,
+      "input_valid": true,
+      "before": 1,
+      "after": 1,
+      "changed": false,
+      "direction": "down",
+      "streak_after": 1,
+      "dwell_before_seconds": 2,
+      "blocked_by_dwell": false
+    },
+    {
+      "t_seconds": 14,
+      "input_gpu_ms": 17,
+      "input_valid": true,
+      "before": 1,
+      "after": 0,
+      "changed": true,
+      "direction": "down",
+      "streak_after": 0,
+      "dwell_before_seconds": 3,
+      "blocked_by_dwell": false
+    },
+    {
+      "t_seconds": 15,
+      "input_gpu_ms": 10,
+      "input_valid": true,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "direction": "up",
+      "streak_after": 1,
+      "dwell_before_seconds": 1,
+      "blocked_by_dwell": false
+    },
+    {
+      "t_seconds": 16,
+      "input_gpu_ms": 10,
+      "input_valid": true,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "direction": "up",
+      "streak_after": 2,
+      "dwell_before_seconds": 2,
+      "blocked_by_dwell": true
+    },
+    {
+      "t_seconds": 17,
+      "input_gpu_ms": 10,
+      "input_valid": true,
+      "before": 0,
+      "after": 1,
+      "changed": true,
+      "direction": "up",
+      "streak_after": 0,
+      "dwell_before_seconds": 3,
+      "blocked_by_dwell": false
+    }
+  ],
+  "naive_change_seconds": [
+    2,
+    3,
+    4,
+    5,
+    7,
+    9,
+    13,
+    15
+  ],
+  "guarded_change_seconds": [
+    8,
+    11,
+    14,
+    17
+  ],
+  "naive_changes": 8,
+  "guarded_changes": 4,
+  "no_op_control": {
+    "changes": 0,
+    "state": 1,
+    "responds_to_persistent_over_budget": false,
+    "scope": "Counterexample to using minimum switch count as the full objective."
+  },
+  "missing_reset_control": [
+    {
+      "t_seconds": 1,
+      "input_gpu_ms": 17,
+      "input_valid": true,
+      "before": 1,
+      "after": 1,
+      "changed": false,
+      "direction": "down",
+      "streak_after": 1,
+      "dwell_before_seconds": 1,
+      "blocked_by_dwell": false
+    },
+    {
+      "t_seconds": 2,
+      "input_gpu_ms": null,
+      "input_valid": false,
+      "before": 1,
+      "after": 1,
+      "changed": false,
+      "direction": null,
+      "streak_after": 0,
+      "dwell_before_seconds": 2,
+      "blocked_by_dwell": false
+    },
+    {
+      "t_seconds": 3,
+      "input_gpu_ms": 17,
+      "input_valid": true,
+      "before": 1,
+      "after": 1,
+      "changed": false,
+      "direction": "down",
+      "streak_after": 1,
+      "dwell_before_seconds": 3,
+      "blocked_by_dwell": false
+    },
+    {
+      "t_seconds": 4,
+      "input_gpu_ms": 17,
+      "input_valid": true,
+      "before": 1,
+      "after": 0,
+      "changed": true,
+      "direction": "down",
+      "streak_after": 0,
+      "dwell_before_seconds": 4,
+      "blocked_by_dwell": false
+    }
+  ],
+  "invalid_input_controls": [
+    {
+      "label": "missing",
+      "rows": [
+        {
+          "t_seconds": 1,
+          "input_gpu_ms": 17,
+          "input_valid": true,
+          "before": 1,
+          "after": 1,
+          "changed": false,
+          "direction": "down",
+          "streak_after": 1,
+          "dwell_before_seconds": 1,
+          "blocked_by_dwell": false
+        },
+        {
+          "t_seconds": 2,
+          "input_gpu_ms": null,
+          "input_valid": false,
+          "before": 1,
+          "after": 1,
+          "changed": false,
+          "direction": null,
+          "streak_after": 0,
+          "dwell_before_seconds": 2,
+          "blocked_by_dwell": false
+        },
+        {
+          "t_seconds": 3,
+          "input_gpu_ms": 17,
+          "input_valid": true,
+          "before": 1,
+          "after": 1,
+          "changed": false,
+          "direction": "down",
+          "streak_after": 1,
+          "dwell_before_seconds": 3,
+          "blocked_by_dwell": false
+        },
+        {
+          "t_seconds": 4,
+          "input_gpu_ms": 17,
+          "input_valid": true,
+          "before": 1,
+          "after": 0,
+          "changed": true,
+          "direction": "down",
+          "streak_after": 0,
+          "dwell_before_seconds": 4,
+          "blocked_by_dwell": false
+        }
+      ]
+    },
+    {
+      "label": "zero",
+      "rows": [
+        {
+          "t_seconds": 1,
+          "input_gpu_ms": 17,
+          "input_valid": true,
+          "before": 1,
+          "after": 1,
+          "changed": false,
+          "direction": "down",
+          "streak_after": 1,
+          "dwell_before_seconds": 1,
+          "blocked_by_dwell": false
+        },
+        {
+          "t_seconds": 2,
+          "input_gpu_ms": null,
+          "input_valid": false,
+          "before": 1,
+          "after": 1,
+          "changed": false,
+          "direction": null,
+          "streak_after": 0,
+          "dwell_before_seconds": 2,
+          "blocked_by_dwell": false
+        },
+        {
+          "t_seconds": 3,
+          "input_gpu_ms": 17,
+          "input_valid": true,
+          "before": 1,
+          "after": 1,
+          "changed": false,
+          "direction": "down",
+          "streak_after": 1,
+          "dwell_before_seconds": 3,
+          "blocked_by_dwell": false
+        },
+        {
+          "t_seconds": 4,
+          "input_gpu_ms": 17,
+          "input_valid": true,
+          "before": 1,
+          "after": 0,
+          "changed": true,
+          "direction": "down",
+          "streak_after": 0,
+          "dwell_before_seconds": 4,
+          "blocked_by_dwell": false
+        }
+      ]
+    },
+    {
+      "label": "negative",
+      "rows": [
+        {
+          "t_seconds": 1,
+          "input_gpu_ms": 17,
+          "input_valid": true,
+          "before": 1,
+          "after": 1,
+          "changed": false,
+          "direction": "down",
+          "streak_after": 1,
+          "dwell_before_seconds": 1,
+          "blocked_by_dwell": false
+        },
+        {
+          "t_seconds": 2,
+          "input_gpu_ms": null,
+          "input_valid": false,
+          "before": 1,
+          "after": 1,
+          "changed": false,
+          "direction": null,
+          "streak_after": 0,
+          "dwell_before_seconds": 2,
+          "blocked_by_dwell": false
+        },
+        {
+          "t_seconds": 3,
+          "input_gpu_ms": 17,
+          "input_valid": true,
+          "before": 1,
+          "after": 1,
+          "changed": false,
+          "direction": "down",
+          "streak_after": 1,
+          "dwell_before_seconds": 3,
+          "blocked_by_dwell": false
+        },
+        {
+          "t_seconds": 4,
+          "input_gpu_ms": 17,
+          "input_valid": true,
+          "before": 1,
+          "after": 0,
+          "changed": true,
+          "direction": "down",
+          "streak_after": 0,
+          "dwell_before_seconds": 4,
+          "blocked_by_dwell": false
+        }
+      ]
+    },
+    {
+      "label": "nonfinite",
+      "rows": [
+        {
+          "t_seconds": 1,
+          "input_gpu_ms": 17,
+          "input_valid": true,
+          "before": 1,
+          "after": 1,
+          "changed": false,
+          "direction": "down",
+          "streak_after": 1,
+          "dwell_before_seconds": 1,
+          "blocked_by_dwell": false
+        },
+        {
+          "t_seconds": 2,
+          "input_gpu_ms": null,
+          "input_valid": false,
+          "before": 1,
+          "after": 1,
+          "changed": false,
+          "direction": null,
+          "streak_after": 0,
+          "dwell_before_seconds": 2,
+          "blocked_by_dwell": false
+        },
+        {
+          "t_seconds": 3,
+          "input_gpu_ms": 17,
+          "input_valid": true,
+          "before": 1,
+          "after": 1,
+          "changed": false,
+          "direction": "down",
+          "streak_after": 1,
+          "dwell_before_seconds": 3,
+          "blocked_by_dwell": false
+        },
+        {
+          "t_seconds": 4,
+          "input_gpu_ms": 17,
+          "input_valid": true,
+          "before": 1,
+          "after": 0,
+          "changed": true,
+          "direction": "down",
+          "streak_after": 0,
+          "dwell_before_seconds": 4,
+          "blocked_by_dwell": false
+        }
+      ]
+    }
+  ],
+  "source_predicate_boundary_models": [
+    {
+      "label": "strict_time_equality",
+      "gpu_smooth_ms": 17,
+      "bounces_before": 3,
+      "now": 2,
+      "last_change": 1,
+      "pt_variant_present": true,
+      "query_success": true,
+      "after": 3,
+      "expected": 3
+    },
+    {
+      "label": "past_time_guard",
+      "gpu_smooth_ms": 17,
+      "bounces_before": 3,
+      "now": 2.001,
+      "last_change": 1,
+      "pt_variant_present": true,
+      "query_success": true,
+      "after": 2,
+      "expected": 2
+    },
+    {
+      "label": "strict_down_equality",
+      "gpu_smooth_ms": 16,
+      "bounces_before": 3,
+      "now": 2,
+      "last_change": 0,
+      "pt_variant_present": true,
+      "query_success": true,
+      "after": 3,
+      "expected": 3
+    },
+    {
+      "label": "strict_up_equality",
+      "gpu_smooth_ms": 10.4,
+      "bounces_before": 2,
+      "now": 2,
+      "last_change": 0,
+      "pt_variant_present": true,
+      "query_success": true,
+      "after": 2,
+      "expected": 2
+    },
+    {
+      "label": "up_below_threshold",
+      "gpu_smooth_ms": 10.39,
+      "bounces_before": 2,
+      "now": 2,
+      "last_change": 0,
+      "pt_variant_present": true,
+      "query_success": true,
+      "after": 3,
+      "expected": 3
+    },
+    {
+      "label": "down_lower_bound",
+      "gpu_smooth_ms": 20,
+      "bounces_before": 1,
+      "now": 2,
+      "last_change": 0,
+      "pt_variant_present": true,
+      "query_success": true,
+      "after": 1,
+      "expected": 1
+    },
+    {
+      "label": "up_upper_bound",
+      "gpu_smooth_ms": 1,
+      "bounces_before": 3,
+      "now": 2,
+      "last_change": 0,
+      "pt_variant_present": true,
+      "query_success": true,
+      "after": 3,
+      "expected": 3
+    },
+    {
+      "label": "configured_variant_absent",
+      "gpu_smooth_ms": 17,
+      "bounces_before": 2,
+      "now": 2,
+      "last_change": 0,
+      "pt_variant_present": false,
+      "query_success": true,
+      "after": 2,
+      "expected": 2
+    },
+    {
+      "label": "query_unavailable",
+      "gpu_smooth_ms": 17,
+      "bounces_before": 2,
+      "now": 2,
+      "last_change": 0,
+      "pt_variant_present": true,
+      "query_success": false,
+      "after": 2,
+      "expected": 2
+    }
+  ],
+  "source_ema_constant20ms": [
+    {
+      "sample": 1,
+      "input_ms": 20,
+      "smooth_ms": 1.0,
+      "above16": false
+    },
+    {
+      "sample": 2,
+      "input_ms": 20,
+      "smooth_ms": 1.9500000000000002,
+      "above16": false
+    },
+    {
+      "sample": 3,
+      "input_ms": 20,
+      "smooth_ms": 2.8525,
+      "above16": false
+    },
+    {
+      "sample": 4,
+      "input_ms": 20,
+      "smooth_ms": 3.7098750000000003,
+      "above16": false
+    },
+    {
+      "sample": 5,
+      "input_ms": 20,
+      "smooth_ms": 4.52438125,
+      "above16": false
+    },
+    {
+      "sample": 6,
+      "input_ms": 20,
+      "smooth_ms": 5.2981621875,
+      "above16": false
+    },
+    {
+      "sample": 7,
+      "input_ms": 20,
+      "smooth_ms": 6.033254078125,
+      "above16": false
+    },
+    {
+      "sample": 8,
+      "input_ms": 20,
+      "smooth_ms": 6.73159137421875,
+      "above16": false
+    },
+    {
+      "sample": 9,
+      "input_ms": 20,
+      "smooth_ms": 7.395011805507813,
+      "above16": false
+    },
+    {
+      "sample": 10,
+      "input_ms": 20,
+      "smooth_ms": 8.025261215232423,
+      "above16": false
+    },
+    {
+      "sample": 11,
+      "input_ms": 20,
+      "smooth_ms": 8.6239981544708,
+      "above16": false
+    },
+    {
+      "sample": 12,
+      "input_ms": 20,
+      "smooth_ms": 9.19279824674726,
+      "above16": false
+    },
+    {
+      "sample": 13,
+      "input_ms": 20,
+      "smooth_ms": 9.733158334409898,
+      "above16": false
+    },
+    {
+      "sample": 14,
+      "input_ms": 20,
+      "smooth_ms": 10.246500417689404,
+      "above16": false
+    },
+    {
+      "sample": 15,
+      "input_ms": 20,
+      "smooth_ms": 10.734175396804934,
+      "above16": false
+    },
+    {
+      "sample": 16,
+      "input_ms": 20,
+      "smooth_ms": 11.197466626964687,
+      "above16": false
+    },
+    {
+      "sample": 17,
+      "input_ms": 20,
+      "smooth_ms": 11.637593295616453,
+      "above16": false
+    },
+    {
+      "sample": 18,
+      "input_ms": 20,
+      "smooth_ms": 12.05571363083563,
+      "above16": false
+    },
+    {
+      "sample": 19,
+      "input_ms": 20,
+      "smooth_ms": 12.452927949293848,
+      "above16": false
+    },
+    {
+      "sample": 20,
+      "input_ms": 20,
+      "smooth_ms": 12.830281551829156,
+      "above16": false
+    },
+    {
+      "sample": 21,
+      "input_ms": 20,
+      "smooth_ms": 13.188767474237698,
+      "above16": false
+    },
+    {
+      "sample": 22,
+      "input_ms": 20,
+      "smooth_ms": 13.529329100525814,
+      "above16": false
+    },
+    {
+      "sample": 23,
+      "input_ms": 20,
+      "smooth_ms": 13.852862645499524,
+      "above16": false
+    },
+    {
+      "sample": 24,
+      "input_ms": 20,
+      "smooth_ms": 14.160219513224547,
+      "above16": false
+    },
+    {
+      "sample": 25,
+      "input_ms": 20,
+      "smooth_ms": 14.452208537563319,
+      "above16": false
+    },
+    {
+      "sample": 26,
+      "input_ms": 20,
+      "smooth_ms": 14.729598110685153,
+      "above16": false
+    },
+    {
+      "sample": 27,
+      "input_ms": 20,
+      "smooth_ms": 14.993118205150894,
+      "above16": false
+    },
+    {
+      "sample": 28,
+      "input_ms": 20,
+      "smooth_ms": 15.24346229489335,
+      "above16": false
+    },
+    {
+      "sample": 29,
+      "input_ms": 20,
+      "smooth_ms": 15.481289180148682,
+      "above16": false
+    },
+    {
+      "sample": 30,
+      "input_ms": 20,
+      "smooth_ms": 15.707224721141248,
+      "above16": false
+    },
+    {
+      "sample": 31,
+      "input_ms": 20,
+      "smooth_ms": 15.921863485084186,
+      "above16": false
+    },
+    {
+      "sample": 32,
+      "input_ms": 20,
+      "smooth_ms": 16.125770310829978,
+      "above16": true
+    },
+    {
+      "sample": 33,
+      "input_ms": 20,
+      "smooth_ms": 16.31948179528848,
+      "above16": true
+    },
+    {
+      "sample": 34,
+      "input_ms": 20,
+      "smooth_ms": 16.503507705524054,
+      "above16": true
+    },
+    {
+      "sample": 35,
+      "input_ms": 20,
+      "smooth_ms": 16.67833232024785,
+      "above16": true
+    },
+    {
+      "sample": 36,
+      "input_ms": 20,
+      "smooth_ms": 16.84441570423546,
+      "above16": true
+    },
+    {
+      "sample": 37,
+      "input_ms": 20,
+      "smooth_ms": 17.002194919023687,
+      "above16": true
+    },
+    {
+      "sample": 38,
+      "input_ms": 20,
+      "smooth_ms": 17.152085173072503,
+      "above16": true
+    },
+    {
+      "sample": 39,
+      "input_ms": 20,
+      "smooth_ms": 17.294480914418877,
+      "above16": true
+    },
+    {
+      "sample": 40,
+      "input_ms": 20,
+      "smooth_ms": 17.429756868697933,
+      "above16": true
+    }
+  ],
+  "first_source_ema_sample_above16": 32,
+  "limits": [
+    "Three-second dwell and two-sample persistence are authored, not deployed requirements.",
+    "Synthetic input is unchanged across policies; actions do not influence this trace.",
+    "Fewer switches trades against response delay; only a real closed-loop comparison can assess outcomes."
+  ]
+}

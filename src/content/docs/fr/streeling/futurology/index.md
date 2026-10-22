@@ -14,3 +14,4 @@ sidebar:
 - [FUT-001 · Penser à demain — Introduction à la pensée prospective](fut-001-thinking-about-tomorrow/)
 - [FUT-002 · Quand GA devrait-il réexaminer son embedder de routage ?](fut-002-routing-embedder-revisit-triggers/)
 - [FUT-003 · Répéter un remplacement d’agent sans perdre les preuves](fut-003-agent-substitution-readiness-drill/)
+- [FUT-004 · Évaluer un moteur de rendu de l’Observatoire selon plusieurs scénarios](fut-004-scenario-test-an-observatory-renderer/)

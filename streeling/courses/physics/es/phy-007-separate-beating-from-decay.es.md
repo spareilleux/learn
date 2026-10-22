@@ -35,7 +35,7 @@ Para estas frecuencias, calcule el período de recurrencia de la envolvente sin 
 
 La envolvente sin signo comienza en 0.25, alcanza su primer cero cerca de 0.192633666 segundos y vuelve a su pico cerca de 0.385267333 segundos. La amplitud de cada componente sigue siendo 0.125. La cancelación y el refuerzo cambian la suma sin introducir amortiguamiento exponencial de los componentes.
 
-![Cosenos construidos sin fundidos y envolvente sin signo de su suma](../../../../code/streeling/evidence/intonation-listening-2026-10-22/two-tone-envelope.png)
+![Cosenos construidos sin fundidos y envolvente sin signo de su suma](https://raw.githubusercontent.com/spareilleux/learn/0e1080569fb174d7867eebc9248f4fc9193aa5a8/code/streeling/evidence/intonation-listening-2026-10-22/two-tone-envelope.png)
 
 El gráfico superior muestra los primeros 0.025 segundos del modelo sin fundidos. El inferior muestra su envolvente sin signo; las líneas de puntos marcan períodos de recurrencia sucesivos. Esta figura no representa la forma de onda del WAV exportado con fundidos en los extremos. Un cero de la envolvente matemática tampoco garantiza un RMS nulo en una ventana de duración finita.
 
