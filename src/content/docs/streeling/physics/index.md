@@ -12,3 +12,4 @@ sidebar:
 ## Modules
 
 - [PHY-001 · The Science of Guitar Sound](phy-001-science-of-guitar-sound/)
+- [PHY-005 · Sheet Thickness from IX Coordinates to Proposed Scene Units](phy-005-sheet-thickness-and-scene-units/)

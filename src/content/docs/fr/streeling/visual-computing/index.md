@@ -11,7 +11,11 @@ sidebar:
 
 ## Modules
 
-Aucun module produit pour l'instant.
+- [VC-001 · Un manche, trois modes d'accès](vc-001-accessible-fretboard-paths/)
+- [VC-002 · Evidence for a Godot and React Observatory Bridge](vc-002-godot-react-bridge-evidence/) *(en anglais)*
+- [VC-004 · A Capture Gate for the Godot Observatory](vc-004-godot-observatory-capture-gate/) *(en anglais)*
+- [VC-005 · Keep Craft Details through a Blender-to-Godot Asset Trial](vc-005-craft-details-through-blender-to-godot/) *(en anglais)*
+- [VC-007 · Keep Weave Crossings Correct across a Godot Scene Boundary](vc-007-weave-seams-as-scene-contracts/) *(en anglais)*
 
 ## Catalogue de cours (prévu)
 

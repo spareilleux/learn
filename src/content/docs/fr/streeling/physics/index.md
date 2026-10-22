@@ -12,3 +12,4 @@ sidebar:
 ## Modules
 
 - [PHY-001 · La science du son de la guitare](phy-001-science-of-guitar-sound/)
+- [PHY-005 · Épaisseur des feuilles : des coordonnées IX aux unités de scène proposées](phy-005-sheet-thickness-and-scene-units/)

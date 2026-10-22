@@ -20,7 +20,7 @@ Estos módulos fueron escritos por departamentos de IA y **no han sido revisados
 |---|---|---|---|
 | [Ingeniería de audio](audio-engineering/) | 1 | 1 | 1 |
 | [Ciencia cognitiva](cognitive-science/) | 1 | 1 | 1 |
-| [Ciencias de la computación](computer-science/) | 2 | 2 | 2 |
+| [Ciencias de la computación](computer-science/) | 5 | 3 | 3 |
 | [Cibernética](cybernetics/) | 3 | 3 | 3 |
 | [Visualización de datos](data-visualization/) | 0 | 0 | 0 |
 | [Futurología](futurology/) | 1 | 1 | 1 |
@@ -34,14 +34,15 @@ Estos módulos fueron escritos por departamentos de IA y **no han sido revisados
 | [Musicología](musicology/) | 2 | 2 | 2 |
 | [Ciencia de redes](network-science/) | 1 | 1 | 1 |
 | [Filosofía](philosophy/) | 1 | 1 | 1 |
-| [Física](physics/) | 1 | 1 | 1 |
+| [Física](physics/) | 2 | 2 | 2 |
 | [Gestión de productos y proyectos](product-management/) | 1 | 1 | 1 |
 | [Psicohistoria](psychohistory/) | 25 | 25 | 25 |
-| [Semiótica](semiotics/) | 1 | 1 | 1 |
-| [Computación visual](visual-computing/) | 0 | 0 | 0 |
+| [Semiótica](semiotics/) | 2 | 2 | 2 |
+| [Computación visual](visual-computing/) | 5 | 1 | 1 |
 | [Músicas y lenguas del mundo](world-music-languages/) | 1 | 1 | 1 |
 
 ## Procedencia
 
-- Fuente: [`spareilleux/learn` → `streeling/courses`](https://github.com/spareilleux/learn/tree/main/streeling/courses), copiada de [`GuitarAlchemist/Demerzel` → `state/streeling/courses`](https://github.com/GuitarAlchemist/Demerzel/tree/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses) en el commit `1beb089` (2026-10-21), licencia MIT.
+- Copia inicial de las fuentes: [`spareilleux/learn` → `streeling/courses`](https://github.com/spareilleux/learn/tree/main/streeling/courses), copiada de [`GuitarAlchemist/Demerzel` → `state/streeling/courses`](https://github.com/GuitarAlchemist/Demerzel/tree/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/courses) en el commit `1beb089` (2026-10-21), licencia MIT.
+- [Procedencia de las fuentes adicionales](https://github.com/spareilleux/learn/blob/main/code/streeling/evidence/craft-2026-10-22/import.json)
 - Generado con `npm run sync:streeling` desde `streeling/`: se modifica un módulo allí, no en estas páginas — solo `journal.md` se conserva entre sincronizaciones.
