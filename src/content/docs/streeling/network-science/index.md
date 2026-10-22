@@ -15,3 +15,4 @@ sidebar:
 - [NET-002 · A Capability Catalog Is Not a Collaboration Graph](net-002-capability-graphs-and-projections/)
 - [NET-003 · Measure Worker-Lane Coverage Under a Mode Cut](net-003-worker-lane-coverage-and-fragility/)
 - [NET-004 · Test Semantic Backpressure with Evidence Dependencies](net-004-semantic-backpressure-and-evidence-dependencies/)
+- [NET-005 · Fan-Out Results and Dependency Joins](net-005-fanout-results-and-dependency-joins/)

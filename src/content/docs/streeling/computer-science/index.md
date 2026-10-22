@@ -20,3 +20,5 @@ sidebar:
 - [CS-007 · Type Agent Evidence Before Composing Verdicts](cs-007-typed-agent-evidence-and-backpressure/)
 - [CS-008 · Compose Exact-Source Review Verdicts](cs-008-compose-exact-source-review-verdicts/)
 - [CS-009 · Compose Origami Constraints before Accepting a Rigid Stack](cs-009-composing-origami-panel-constraints/)
+- [CS-010 · Compose Fail-Fast GA Computations](cs-010-compose-fail-fast-ga-computations/)
+- [CS-011 · Preserve Absence and Failure Boundaries](cs-011-preserve-absence-and-failure-boundaries/)

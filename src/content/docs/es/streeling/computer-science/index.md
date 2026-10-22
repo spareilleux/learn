@@ -20,3 +20,5 @@ sidebar:
 - [CS-007 · Tipar las pruebas de los agentes antes de componer los veredictos](cs-007-typed-agent-evidence-and-backpressure/)
 - [CS-008 · Componer veredictos de revisión vinculados al código fuente exacto](cs-008-compose-exact-source-review-verdicts/)
 - [CS-009 · Componer las restricciones de origami antes de aceptar un apilamiento rígido](cs-009-composing-origami-panel-constraints/)
+- [CS-010 · Componer cálculos de GA con interrupción al primer fallo](cs-010-compose-fail-fast-ga-computations/)
+- [CS-011 · Preservar la distinción entre ausencia y fallo](cs-011-preserve-absence-and-failure-boundaries/)

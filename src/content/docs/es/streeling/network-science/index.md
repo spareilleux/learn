@@ -15,3 +15,4 @@ sidebar:
 - [NET-002 · Un catálogo de capacidades no es un grafo de colaboración](net-002-capability-graphs-and-projections/)
 - [NET-003 · Medir la cobertura de las vías de trabajo tras un cambio de modo](net-003-worker-lane-coverage-and-fragility/)
 - [NET-004 · Poner a prueba la contrapresión semántica con dependencias de pruebas](net-004-semantic-backpressure-and-evidence-dependencies/)
+- [NET-005 · Resultados de ramas paralelas y uniones de dependencias](net-005-fanout-results-and-dependency-joins/)
