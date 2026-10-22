@@ -20,3 +20,4 @@ sidebar:
 - [DV-007 · Small Multiples for OPTIC-K Partition Diagnostics](dv-007-optick-partition-small-multiples/)
 - [DV-008 · Visualize Streeling Source, Review, and Public Readback](dv-008-streeling-evidence-stage-map/)
 - [DV-009 · Compare Spectrograms Without Hiding a Gain Change](dv-009-compare-spectrogram-color-scales/)
+- [DV-010 · Show Pitch Errors and Missing Estimates](dv-010-show-pitch-errors-and-missing-estimates/)

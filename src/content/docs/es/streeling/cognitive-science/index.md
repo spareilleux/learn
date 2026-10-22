@@ -15,3 +15,4 @@ sidebar:
 - [COG-002 · Fiabilidad de la retroalimentación para recordar notas en el diapasón](cog-002-feedback-integrity-fretboard-recall/)
 - [COG-003 · Calibrar la confianza al identificar notas en el diapasón](cog-003-calibrating-fretboard-confidence/)
 - [COG-004 · Puntuar una tarea de discriminación de altura sin inventar un resultado de escucha](cog-004-score-a-pitch-discrimination-task/)
+- [COG-005 · Separar las estimaciones de altura de las respuestas de los oyentes](cog-005-separate-pitch-estimates-from-listener-reports/)

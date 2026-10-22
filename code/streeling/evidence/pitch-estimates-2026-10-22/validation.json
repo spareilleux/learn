@@ -1,0 +1,149 @@
+{
+  "checked_at_utc": "2026-10-22T20:45:48.091121+00:00",
+  "base_learn_commit": "c953607dc38126877032dd5919e57d894971b257",
+  "original_learn_base": "d021464431496fb18b7cd3d4749a57af412b24ba",
+  "source_ga_commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+  "scope": "Three periodicity/listener-response/pitch-display courses in existing departments; retained native-buffer analysis, original mathematical controls and one authored figure. No new production/lab program or engine/detector/playback run.",
+  "new_english_modules": 3,
+  "new_locale_sources": 6,
+  "canonical_sources": 9,
+  "localized_exercise_answer_pairs": 45,
+  "calculation_checks": {
+    "independent_checks": 123,
+    "passed": 123,
+    "failed": 0,
+    "public_ga_source_files": 1,
+    "constructed_complexes": 2,
+    "retained_native_windows": 4,
+    "native_windows_reported": 4,
+    "teaching_proximity_passes": 0,
+    "teaching_proximity_failures": 4,
+    "teaching_proximity_cents": 5,
+    "proximity_is_product_standard": false,
+    "actual_physical_pitch_ground_truth": false,
+    "authored_plot_rows": 6,
+    "original_figures": 1,
+    "retained_float_buffer_copies": 1,
+    "new_engine_run": false,
+    "new_wasm_run": false,
+    "new_detector_service_run": false,
+    "new_playback": false,
+    "new_gpu_run": false,
+    "new_dependency_install": false
+  },
+  "assets": {
+    "asset_commit": "c953607dc38126877032dd5919e57d894971b257",
+    "anonymous_byte_matches": 2,
+    "original_png_size": [
+      1600,
+      960
+    ],
+    "float32_frames": 176400,
+    "raw_image_mime_and_decode": true,
+    "html_image_negative_control": true
+  },
+  "script_tests": {
+    "action": "tests",
+    "args": [
+      "node",
+      "--test",
+      "scripts/tests/lazy-demo.test.mjs",
+      "scripts/tests/streeling-copy-source.test.mjs",
+      "scripts/tests/sync-streeling.test.mjs"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 2.3298229000065476,
+    "log": "C:\\tmp\\streeling-pitch-estimates-tests-20261022.log",
+    "log_sha256": "3702cf3dbc3524b51fc10a403e064f0ae868b8548ab00278fc762792d27886e2",
+    "passed": 18,
+    "failed": 0
+  },
+  "sync": {
+    "action": "sync",
+    "args": [
+      "npm.cmd",
+      "run",
+      "sync:streeling"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 1.5620279999857303,
+    "log": "C:\\tmp\\streeling-pitch-estimates-sync-20261022.log",
+    "log_sha256": "cb02a9ee852dbef55b155a2dd2d50e71016655674ba7f174abb23d081d3f6fb1",
+    "idempotent_checked_files": 635
+  },
+  "static_build": {
+    "action": "build",
+    "args": [
+      "npm.cmd",
+      "run",
+      "build"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 84.62629479999305,
+    "log": "C:\\tmp\\streeling-pitch-estimates-build-20261022.log",
+    "log_sha256": "9459e5f5658327e9b0bfb46987179231b1344890a6eed327fff0789d86c9dcae",
+    "pages": 1831,
+    "dependency_install": "Existing node_modules junction; no install.",
+    "warnings": "Existing highlighting fallback and empty i18n/404 warnings retained in complete log."
+  },
+  "rendered_articles": {
+    "pages": 21,
+    "links": 351,
+    "unresolved_internal_links": [],
+    "correct_new_source_banners": 9,
+    "missing_page_and_anchor_controls_detected": true,
+    "image_occurrences": 3,
+    "unique_decoded_png": 1,
+    "scope": "Built HTML and exact raw image bytes, not browser or public course deployment."
+  },
+  "review": {
+    "data_verdict": "pass",
+    "data_receipt_sha256": "85167ebee2bee628fe7a78f28eb59c3d9e36c653c3062777232d211526c4273d",
+    "content_verdict": "pass_with_declared_evidence_limits",
+    "content_receipt_sha256": "23e4e7cb3f6a21f1e0d5046247bb274995e377ab151a0daabd7f918ccdb49cc1",
+    "exercise_pairs_checked": 45,
+    "learner_criteria_checked": 15,
+    "findings": [],
+    "resolved_findings": [
+      {
+        "module": "COG005",
+        "locales": [
+          "fr",
+          "es"
+        ],
+        "issue": "Initial translations used moyenne quadratique / media cuadr\u00e1tica for mean-square.07, terms that can denote RMS and conflict with the stated RMS.264575131.",
+        "resolution": "French now uses moyenne des carr\u00e9s in explanation,exercise prompt and answer. Spanish uses valor medio de los cuadrados / media de los cuadrados in the same three locations; RMS remains sqrt(.07)approximately.264575131.",
+        "verification": "Re-read all corrected lines; ambiguous terms absent and corrected mean-of-squares terms present in all three locations. Final source hashes bound below.",
+        "status": "resolved"
+      }
+    ],
+    "scope": "Independent AI source/numerical/plot/course checks; not human approval.",
+    "human_technical": null,
+    "musician_listener": null,
+    "fluent_language": null,
+    "learner": null,
+    "pitch_perception": null,
+    "preference": null
+  },
+  "code_review_pipeline": "Documentation/fixed-data/original-figure deliverable with temporary analysis only; no new runnable teaching/production program emitted and no code-shipping review invoked.",
+  "manual_host_scan": "Checked public source versus retained run provenance, exact float32 copy, component/period controls and DFT projections, lag-score normalization/ranges/ties, actual retained-window failures, authored missing/invalid/cent/denominator distinctions, visible complete plot, unperformed listener protocol, corrected mean-square/RMS terminology, final review hashes and image-vs-HTML boundary.",
+  "source_inventory": {
+    "core_english_modules": 186,
+    "target": 525,
+    "original_departments": 21,
+    "remaining_core_source_gaps": 339,
+    "locale_counts": {
+      "en": 187,
+      "fr": 187,
+      "es": 187
+    }
+  },
+  "public_course_html_readback": null,
+  "protected_files_unchanged": [
+    "streeling/source.json",
+    "src/content/docs/streeling/journal.md",
+    "src/content/docs/fr/streeling/journal.md",
+    "src/content/docs/es/streeling/journal.md"
+  ],
+  "lint_typecheck": "No package.json lint/typecheck scripts configured; existing generator tests and Astro build used."
+}

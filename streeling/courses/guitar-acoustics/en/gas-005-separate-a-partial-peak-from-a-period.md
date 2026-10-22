@@ -1,0 +1,87 @@
+---
+module_id: gas-005-separate-a-partial-peak-from-a-period
+department: guitar-acoustics
+course: "Separate a Partial Peak from a Period"
+level: intermediate
+prerequisites: ["gas-001-open-string-audio-evidence", "aud-006-calibrate-spectral-amplitudes"]
+estimated_duration: "40 minutes"
+produced_by: codex-project-pilot
+version: "0.1.0"
+---
+
+# Separate a Partial Peak from a Period
+
+> **Draft scope.** New numerical analysis of constructed signals and one retained native guitar buffer, with pinned engine-source inspection. Human technical, musician/listener, fluent-language and learner reviews and deployed course HTML verification remain pending. No engine, WASM, browser, IX detector or playback was run again.
+
+## The project question
+
+An audio agent finds the tallest spectral peak and labels it “the guitar note.” That shortcut confuses a component frequency, a repetition estimate and a perceptual judgment. Before using a pitch number to steer the WASM guitar work, state which quantity the method actually returns.
+
+The [pinned GA engine](https://github.com/GuitarAlchemist/ga/blob/dc2e74cbd992a298f67efb928b5b3754615e1924/Rust/guitar-web-wasm-demo/rust-engine/src/lib.rs#L281-L326) stores a requested/clamped frequency and builds integer and fractional delay state. Filters, dispersion and body resonators also affect the output. The stored input is not a measurement of rendered pitch. This lesson supplies two mathematical controls and a bounded reanalysis of previously generated samples.
+
+## 1. Distinguish a requested frequency from an estimate
+
+For the nominal request 82.4069 Hz at 44100 Hz, real arithmetic gives integer delay length 535 plus a fractional remainder. The integer-only ratio `44100/535` is about 82.429906542 Hz. It describes that simplified ratio, not the measured engine output. The actual source uses fractional interpolation and feedback filters rather than a bare integer delay.
+
+The [retained input binding](../../../../code/streeling/evidence/pitch-estimates-2026-10-22/input-bindings.json) matches a previous baseline run: 176400 little-endian float32 samples, four seconds at 44100 Hz. A [byte-identical native buffer copy](https://raw.githubusercontent.com/spareilleux/learn/c953607dc38126877032dd5919e57d894971b257/code/streeling/evidence/pitch-estimates-2026-10-22/baseline-native.f32le) is supplied for verification. This reanalysis uses those floats, not the quantized WAV or a new render. [NumPy's buffer decoder](https://numpy.org/doc/stable/reference/generated/numpy.frombuffer.html) interprets the declared `<f4` byte order before numerical work.
+
+### Practice exercise 1: bound the delay calculation
+
+What integer length and integer-only frequency follow from the stated nominal request? Can either the stored request or that ratio certify the output's measured pitch?
+
+> **Answer:** The length is 535 and `44100/535` is approximately 82.429906542 Hz. Neither certifies measured pitch. The stored request is an input, while the simplified ratio omits fractional-delay and filter behavior. Estimating the retained waveform is another operation with its own assumptions and resolution.
+
+## 2. Build a signal with an absent fundamental component
+
+The original mathematical complex A sums zero-phase cosines at 1000, 1200 and 1400 Hz with peak amplitudes 0.3, 0.2 and 0.1. At 48000 Hz over one second, these are coherent transform bins. The strongest component is 1000 Hz, but the complete continuous waveform repeats every `1/200` seconds: the components are the fifth, sixth and seventh harmonics of 200 Hz. There is no supplied cosine component at 200 Hz.
+
+The [fixed synthetic controls](../../../../code/streeling/evidence/pitch-estimates-2026-10-22/synthetic-periods.json) use [NumPy's real-input transform](https://numpy.org/doc/stable/reference/generated/numpy.fft.rfft.html) and separate direct projections. They recover the supplied amplitudes and an absent-fundamental amplitude within `1e-10`. These are unfaded mathematical arrays, not played stimuli or observations of a listener.
+
+### Practice exercise 2: reject the tallest-peak shortcut
+
+For A, identify the strongest component, fundamental repetition frequency, period in seconds and period in samples. Does a missing 200 Hz component prevent the complete waveform from repeating at that rate?
+
+> **Answer:** The strongest component is 1000 Hz; the fundamental repetition rate is 200 Hz, with period `1/200` seconds and 240 samples at 48000 Hz. The three components complete 5, 6 and 7 cycles in that interval. A nonzero spectral component at 200 Hz is not required for that full-waveform repetition. This arithmetic alone does not determine a listener's reported pitch.
+
+## 3. Keep recurrence multiples and score meaning visible
+
+Subtract the full-window mean. For each positive lag, divide the overlap dot product by the square root of the two overlap energies. This produces a normalized recurrence score. In the declared search from 144 through 576 samples, A has scores within `1e-12` of one at lags 240 and 480. The second is another recurrence of the same pattern, not independent evidence that a 100 Hz component was supplied.
+
+Our constructed control chooses the shortest of those tied perfect-period candidates. That explicit rule returns 200 Hz; choosing 480 would return 100 Hz. Lag bounds and the selection rule affect what an estimator reports. A score near one measures this waveform agreement; it is not calibrated confidence that the selected octave is correct or that a person hears it.
+
+### Practice exercise 3: expose the octave alternative
+
+Convert lags 240 and 480 into frequencies at 48000 Hz. Which one does the declared shortest-tied-period rule choose, and what does the other perfect score fail to prove?
+
+> **Answer:** They give 200 and 100 Hz. The rule chooses 240 samples, hence 200 Hz. The recurrence at 480 is a period multiple; it does not prove a supplied 100 Hz component, an independent confirmation of the chosen octave or a perceptual probability. Preserve both candidates and the rule.
+
+## 4. Apply a declared method to retained guitar samples
+
+The newly selected half-open windows are 0.2–0.4, 0.4–0.6, 0.6–0.8 and 1.0–1.2 seconds. Each contains 8820 samples. Their [analysis record](../../../../code/streeling/evidence/pitch-estimates-2026-10-22/native-pitch-windows.json) retains full lag curves and local maxima. The spectral method uses a symmetric Hann and the strongest magnitude bin from 50 through 500 Hz, without interpolation; its 5 Hz bin spacing matters. The lag method uses mean-removed samples without Hann, integer lags 89 through 882, interior local maxima and a reporting threshold of 0.9.
+
+| Window start, seconds | Strongest spectral bin, Hz | Chosen lag, samples | Lag frequency, Hz | Cents from nominal request |
+| --- | --- | --- | --- | --- |
+| 0.2 | 80 | 538 | 81.970260223 | -9.197475196 |
+| 0.4 | 80 | 539 | 81.818181818 | -12.412395431 |
+| 0.6 | 80 | 539 | 81.818181818 | -12.412395431 |
+| 1.0 | 80 | 539 | 81.818181818 | -12.412395431 |
+
+All four best recurrence scores exceed 0.999, yet all fail the predeclared teaching proximity check of absolute error at most 5 cents from the nominal 82.4069 Hz request. The check is a classroom diagnostic against that input reference, not a calibrated physical pitch measurement or product standard. The 80 Hz spectral bins likewise do not establish an exact 80 Hz output frequency.
+
+### Practice exercise 4: retain a failed check
+
+For lag 538, compute the frequency and interpret the reported approximately -9.197475196 cents against the 5-cent check. Does its score above 0.999 make the check pass?
+
+> **Answer:** `44100/538` gives approximately 81.970260223 Hz. Its absolute nominal-reference deviation exceeds 5 cents, so this method's report fails that declared check. A high recurrence score does not override the criterion or certify tuning. No independent physical-frequency calibration, human judgment or new engine render was performed.
+
+## 5. Choose the next experiment without hiding the limitation
+
+Before calling the retained engine “out of tune,” test the estimator on additional known frequencies, phases, filters, durations and octave alternatives, and state its resolution. A fractional-lag method could be compared, but it is a candidate requiring calibration, not an automatically correct replacement. A musician's pitch report needs a separate task, as [COG-005](../../cognitive-science/en/cog-005-separate-pitch-estimates-from-listener-reports.md) explains.
+
+[GAS-004](gas-004-run-open-e-decay-candidate.md)'s historical decay candidate improved its selected error by approximately 0.114166150 dB against a required 1 dB and failed that gate. A new pitch analysis neither reverses that result nor identifies its cause. [DV-010](../../data-visualization/en/dv-010-show-pitch-errors-and-missing-estimates.md) keeps available estimates, missing values and octave errors distinct in a display.
+
+### Practice exercise 5: write the improvement-loop result
+
+Summarize the retained-window result and one next check, without claiming a new render, a listener's perception or a repaired decay gate.
+
+> **Answer:** Four retained native windows produced reported integer-lag estimates near 81.97 or 81.82 Hz, with high recurrence scores but zero passes of the declared nominal-reference 5-cent check. Calibrate the estimator and its octave/lag resolution on controlled signals before attributing the discrepancy to the engine. No render or listening trial was rerun, and the previous decay failure remains unchanged.

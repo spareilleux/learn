@@ -1,0 +1,27 @@
+{
+  "scope": "Actual retained native baseline float32 bytes, not WAV/WASM or fresh render. A byte-identical original buffer copy is included for public verification.",
+  "source_commit": "dc2e74cbd992a298f67efb928b5b3754615e1924",
+  "committed_results": {
+    "path": "code/streeling/evidence/guitar-runtime-2026-10-22/results.json",
+    "sha256": "d564b476e0fccaff1a435548b5ae795807337622fdff69fb19ce0ace0d320506"
+  },
+  "external_retained_input": {
+    "path": "C:\\tmp\\streeling-guitar-lab-output-20261022-v4\\native-baseline.f32le",
+    "bytes": 705600,
+    "sha256": "e924c20a4305783870ae6a373b46844c5431a25bad7ec80d76fc1569cdee8363"
+  },
+  "public_buffer_copy": {
+    "path": "code/streeling/evidence/pitch-estimates-2026-10-22/baseline-native.f32le",
+    "bytes": 705600,
+    "sha256": "e924c20a4305783870ae6a373b46844c5431a25bad7ec80d76fc1569cdee8363",
+    "dtype": "<f4",
+    "sample_rate": 44100,
+    "frames": 176400
+  },
+  "historical_decay_gate": {
+    "improvement_db": 0.11416614959438576,
+    "required_db": 1,
+    "passed": false,
+    "scope": "Historical candidate outcome retained unchanged; this pitch analysis does not change it."
+  }
+}
