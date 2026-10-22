@@ -22,3 +22,4 @@ sidebar:
 - [CS-009 · Compose Origami Constraints before Accepting a Rigid Stack](cs-009-composing-origami-panel-constraints/)
 - [CS-010 · Compose Fail-Fast GA Computations](cs-010-compose-fail-fast-ga-computations/)
 - [CS-011 · Preserve Absence and Failure Boundaries](cs-011-preserve-absence-and-failure-boundaries/)
+- [CS-012 · Native and WASM Render Boundaries](cs-012-native-and-wasm-render-boundaries/)

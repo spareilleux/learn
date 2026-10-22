@@ -15,6 +15,8 @@ Généré par le département *Acoustique de la guitare et synthèse sonore* de 
 Prérequis: [GAS-001](../../guitar-acoustics/gas-001-open-string-audio-evidence/)
 :::
 
+> **Essai de suivi exécuté.** [GAS-004](../../guitar-acoustics/gas-004-run-open-e-decay-candidate/) présente désormais un essai limité de rendu natif du réglage proposé ici. Le texte historique ci-dessous conserve son statut initial, antérieur à cet essai ; le nouveau résultat ne vaut ni revue humaine, ni évaluation perceptive, ni validation dans le navigateur.
+
 > **Périmètre de la source et du transfert.** Le texte technique ci-dessous provient d’un brouillon archivé. Les mentions historiques d’une absence d’importation ou de compilation dans Learn concernent cette étape antérieure ; ce [dossier de transfert](https://github.com/spareilleux/learn/blob/main/code/streeling/evidence/guitar-audio-2026-10-22/README.md) décrit l’importation actuelle et ses vérifications. Les autres expériences indiquées comme non réalisées le restent. Les revues humaines du contenu et de la langue, ainsi que l’essai avec un apprenant, restent à effectuer.
 
 > **Département d'acoustique et de synthèse de guitare** | Intermédiaire | 40 minutes | Traduction IA provisoire ; révision en attente

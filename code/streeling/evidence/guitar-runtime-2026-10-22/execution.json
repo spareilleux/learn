@@ -1,0 +1,46 @@
+{
+  "checked_at_utc": "2026-10-22T13:24:50.471392+00:00",
+  "scope": "Actual native and Node WebAssembly teaching builds using unchanged GA source, plus finite experiment controls.",
+  "runner_sha256": "8362c71f3fec0c9652279b230309b649a5bf693b2bdc7afd9e3705825253b848",
+  "native_adapter_sha256": "8a6d911fb7d9333ed7b19222198bb383d7156ac7169e0b239409a156cc7b7c1d",
+  "engine_source_sha256": "d693e1ea1a5ca42d080c5829336bcc8423396c104ebee64d2e76ccd9bb503562",
+  "successful_final_output_directory": "C:/tmp/streeling-guitar-lab-output-20261022-v4",
+  "exit_code": 0,
+  "source_build_flags": "rustc -O teaching builds, not upstream Cargo release flags",
+  "repeat_observation_equality": true,
+  "native_candidate_differs_from_baseline": true,
+  "wasm_candidate_differs_from_baseline": true,
+  "pcm_guard_negative_controls": [
+    "nonfinite NaN sample",
+    "finite1.01 outside normalized range",
+    "3bytes instead of one4byte f32"
+  ],
+  "intervention_control": {
+    "path": "C:\\tmp\\streeling-guitar-intervention-control-697bb8zh",
+    "mutation": "Temporary native adapter applies baseline0.9978 instead of candidate0.9976",
+    "exit_code": 1,
+    "expected_failure": "Native candidate intervention had no sample effect",
+    "stderr": "node:internal/modules/run_main:107\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Native candidate intervention had no sample effect\n    at file:///C:/tmp/streeling-guitar-intervention-control-697bb8zh/run.mjs:137:8 {\n  generatedMessage: false,\n  code: 'ERR_ASSERTION',\n  actual: 'e924c20a4305783870ae6a373b46844c5431a25bad7ec80d76fc1569cdee8363',\n  expected: 'e924c20a4305783870ae6a373b46844c5431a25bad7ec80d76fc1569cdee8363',\n  operator: 'notStrictEqual',\n  diff: 'simple'\n}\n\nNode.js v24.12.0\n",
+    "canonical_source_unchanged": true
+  },
+  "byte_artifacts": [
+    {
+      "path": "baseline.wav",
+      "sha256": "a78a70243a81aa79d806d9ef3db7baa1385c479505f7d5e97b8bf0c7866c3f98",
+      "bytes": 352844
+    },
+    {
+      "path": "candidate.wav",
+      "sha256": "055e03fb6064f62601b1bbc07942d3e2223da6d2fc614c6f63fa9ec8d964be73",
+      "bytes": 352844
+    }
+  ],
+  "preparation_failures": [
+    "Initial reference decoder assumed PCM16 but the pinned recorded WAV is IEEE float32; format3 was rejected explicitly, then decoded by a named float32 branch. Failed output directory retained at C:/tmp/streeling-guitar-lab-output-20261022.",
+    "Direct URL probe to Creative Commons deed returned403; official deed contents were retrieved separately with web.open. Other official tool docs returned200."
+  ],
+  "primary_measurement_comparison": "Unchanged measure-pair.py baseline JSON equals archived measurements.json completely; native unrounded RMS crosscheck differs from Node by less than1e-10dB.",
+  "new_behavior": "Standalone teaching adapters/guards only; no GA production source changed.",
+  "human_review": false,
+  "public_course_readback": false
+}

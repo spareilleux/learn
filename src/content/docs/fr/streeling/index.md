@@ -18,13 +18,13 @@ Ces modules ont été écrits par des départements IA et **n'ont pas été relu
 
 | Département | Modules | En français | En espagnol |
 |---|---|---|---|
-| [Ingénierie audio](audio-engineering/) | 4 | 4 | 4 |
+| [Ingénierie audio](audio-engineering/) | 5 | 5 | 5 |
 | [Sciences cognitives](cognitive-science/) | 3 | 3 | 3 |
-| [Informatique](computer-science/) | 11 | 11 | 11 |
+| [Informatique](computer-science/) | 12 | 12 | 12 |
 | [Cybernétique](cybernetics/) | 3 | 3 | 3 |
 | [Visualisation de données](data-visualization/) | 8 | 8 | 8 |
 | [Futurologie](futurology/) | 3 | 3 | 3 |
-| [Acoustique de la guitare et synthèse sonore](guitar-acoustics/) | 3 | 3 | 3 |
+| [Acoustique de la guitare et synthèse sonore](guitar-acoustics/) | 4 | 4 | 4 |
 | [Guitar Alchemist Academy](guitar-alchemist-academy/) | 4 | 4 | 4 |
 | [Études de guitare](guitar-studies/) | 4 | 4 | 4 |
 | [Théorie de l'information](information-theory/) | 4 | 4 | 4 |

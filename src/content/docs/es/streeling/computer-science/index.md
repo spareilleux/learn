@@ -22,3 +22,4 @@ sidebar:
 - [CS-009 · Componer las restricciones de origami antes de aceptar un apilamiento rígido](cs-009-composing-origami-panel-constraints/)
 - [CS-010 · Componer cálculos de GA con interrupción al primer fallo](cs-010-compose-fail-fast-ga-computations/)
 - [CS-011 · Preservar la distinción entre ausencia y fallo](cs-011-preserve-absence-and-failure-boundaries/)
+- [CS-012 · Límites de la comparación entre renderizados nativos y WASM](cs-012-native-and-wasm-render-boundaries/)

@@ -13,6 +13,8 @@ version: "0.1.0"
 
 # Calibrate an Open-E Decay Test for GA's Guitar Engine
 
+> **Executed follow-up.** [GAS-004](gas-004-run-open-e-decay-candidate.md) now records a bounded native-render trial of the candidate proposed here. The historical text below retains its original pre-run status; the new result does not establish human review, listening quality or browser behavior.
+
 > **Archive and transfer scope.** The technical text below comes from an archived draft. Historical statements about an absent Learn import or build refer to that earlier stage; this [transfer record](../../../../code/streeling/evidence/guitar-audio-2026-10-22/README.md) records the current import and checks. Other unexecuted-experiment boundaries remain in force. Human subject, fluent-language and learner reviews remain pending.
 
 > **Department of Guitar Acoustics & Sound Synthesis** | Intermediate | 40 minutes | English draft; review pending

@@ -15,3 +15,4 @@ sidebar:
 - [AUD-002 · Comparer un rendu de guitare GA à niveau de lecture égalisé](aud-002-level-matched-guitar-comparison/)
 - [AUD-003 · Préserver l'attaque d'une corde de guitare pendant une analyse spectrale hors ligne](aud-003-transient-preservation-gate/)
 - [AUD-004 · Choisir des preuves par ondelettes pour une attaque de guitare évolutive](aud-004-wavelet-guitar-attack-evidence/)
+- [AUD-005 · Contrôles PCM et frontières de format dans le laboratoire de guitare](aud-005-pcm-guards-and-format-boundaries/)

@@ -13,6 +13,8 @@ version: "0.1.0"
 
 # Calibrar una prueba de decaimiento del mi al aire para el motor de guitarra de GA
 
+> **Ensayo de seguimiento ejecutado.** [GAS-004](gas-004-run-open-e-decay-candidate.md) recoge ahora un ensayo acotado de renderizado nativo del ajuste propuesto aquí. El texto histórico conserva su estado original, anterior al ensayo; el nuevo resultado no acredita una revisión humana, calidad perceptiva ni funcionamiento en el navegador.
+
 > **Alcance de la fuente y la transferencia.** El texto técnico siguiente procede de un borrador archivado. Las menciones históricas de una importación o compilación pendiente en Learn corresponden a aquella etapa; este [registro de transferencia](../../../../code/streeling/evidence/guitar-audio-2026-10-22/README.md) documenta la importación actual y sus comprobaciones. Las demás experiencias indicadas como no realizadas siguen pendientes. Aún faltan la revisión humana del contenido y del idioma, y la prueba con un estudiante.
 
 > **Departamento de acústica y síntesis de guitarra** | Intermedio | 40 minutos | Borrador traducido por IA; revisión pendiente

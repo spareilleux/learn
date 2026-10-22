@@ -13,6 +13,8 @@ version: "0.1.0"
 
 # Calibrer un test de décroissance du mi à vide pour le moteur de guitare GA
 
+> **Essai de suivi exécuté.** [GAS-004](gas-004-run-open-e-decay-candidate.md) présente désormais un essai limité de rendu natif du réglage proposé ici. Le texte historique ci-dessous conserve son statut initial, antérieur à cet essai ; le nouveau résultat ne vaut ni revue humaine, ni évaluation perceptive, ni validation dans le navigateur.
+
 > **Périmètre de la source et du transfert.** Le texte technique ci-dessous provient d’un brouillon archivé. Les mentions historiques d’une absence d’importation ou de compilation dans Learn concernent cette étape antérieure ; ce [dossier de transfert](../../../../code/streeling/evidence/guitar-audio-2026-10-22/README.md) décrit l’importation actuelle et ses vérifications. Les autres expériences indiquées comme non réalisées le restent. Les revues humaines du contenu et de la langue, ainsi que l’essai avec un apprenant, restent à effectuer.
 
 > **Département d'acoustique et de synthèse de guitare** | Intermédiaire | 40 minutes | Traduction IA provisoire ; révision en attente
