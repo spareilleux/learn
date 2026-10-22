@@ -20,7 +20,7 @@ Estos módulos fueron escritos por departamentos de IA y **no han sido revisados
 |---|---|---|---|
 | [Ingeniería de audio](audio-engineering/) | 6 | 6 | 6 |
 | [Ciencia cognitiva](cognitive-science/) | 3 | 3 | 3 |
-| [Ciencias de la computación](computer-science/) | 13 | 13 | 13 |
+| [Ciencias de la computación](computer-science/) | 14 | 14 | 14 |
 | [Cibernética](cybernetics/) | 4 | 4 | 4 |
 | [Visualización de datos](data-visualization/) | 9 | 9 | 9 |
 | [Futurología](futurology/) | 3 | 3 | 3 |
@@ -35,10 +35,10 @@ Estos módulos fueron escritos por departamentos de IA y **no han sido revisados
 | [Ciencia de redes](network-science/) | 6 | 6 | 6 |
 | [Filosofía](philosophy/) | 3 | 3 | 3 |
 | [Física](physics/) | 6 | 6 | 6 |
-| [Gestión de productos y proyectos](product-management/) | 4 | 4 | 4 |
+| [Gestión de productos y proyectos](product-management/) | 5 | 5 | 5 |
 | [Psicohistoria](psychohistory/) | 25 | 25 | 25 |
 | [Semiótica](semiotics/) | 5 | 5 | 5 |
-| [Computación visual](visual-computing/) | 8 | 8 | 8 |
+| [Computación visual](visual-computing/) | 9 | 9 | 9 |
 | [Músicas y lenguas del mundo](world-music-languages/) | 3 | 3 | 3 |
 
 ## Procedencia

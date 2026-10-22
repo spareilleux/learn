@@ -15,3 +15,4 @@ sidebar:
 - [PM-002 · Una condición de publicación basada en pruebas para los cursos de Streeling](pm-002-release-evidence-gate/)
 - [PM-003 · Medir la cola de revisión de Streeling sin contar los borradores como flujo completado](pm-003-review-queue-flow-metrics/)
 - [PM-004 · Decidir cuándo las extensiones de artesanía están listas para una versión distribuible](pm-004-craft-extension-release-decision/)
+- [PM-005 · Interpretar los experimentos de coexistencia BRUTAL antes de elegir una configuración predeterminada](pm-005-interpret-brutal-coexistence-experiments/)

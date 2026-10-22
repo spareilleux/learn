@@ -1,0 +1,132 @@
+{
+  "scope": "Historical reported measurements, not new runtime runs or binary attestation.",
+  "document_commit": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+  "control_source": {
+    "path": "Experiments/Brutal/evidence/m3-20261020-000727.md",
+    "sha256": "7da3fd920f42caeba1cbb83a18980cd37670b4a20787253a16803814c7a1b7d6",
+    "reported_revision": "96816dd7",
+    "reported_uncommitted_changes": true,
+    "minimum_pass_threshold_fps": 58
+  },
+  "control_rows": [
+    {
+      "run": "00:07:52 control (no HallSlice)",
+      "condition": "control",
+      "hallslice_fps": null,
+      "view_min_fps": 57,
+      "view_median_fps": 60,
+      "view_before_median_fps": 60,
+      "whole_gpu_percent": 25,
+      "whole_gpu_watts": 96,
+      "recorded_label": "drops"
+    },
+    {
+      "run": "00:08:13 uncapped",
+      "condition": "uncapped",
+      "hallslice_fps": 12480,
+      "view_min_fps": 60,
+      "view_median_fps": 60,
+      "view_before_median_fps": 60,
+      "whole_gpu_percent": 51,
+      "whole_gpu_watts": 117,
+      "recorded_label": "holds"
+    },
+    {
+      "run": "00:08:36 control (no HallSlice)",
+      "condition": "control",
+      "hallslice_fps": null,
+      "view_min_fps": 60,
+      "view_median_fps": 60,
+      "view_before_median_fps": 60,
+      "whole_gpu_percent": 28,
+      "whole_gpu_watts": 91,
+      "recorded_label": "holds"
+    },
+    {
+      "run": "00:08:57 uncapped",
+      "condition": "uncapped",
+      "hallslice_fps": 12052,
+      "view_min_fps": 60,
+      "view_median_fps": 60,
+      "view_before_median_fps": 60,
+      "whole_gpu_percent": 50,
+      "whole_gpu_watts": 117,
+      "recorded_label": "holds"
+    },
+    {
+      "run": "00:09:19 control (no HallSlice)",
+      "condition": "control",
+      "hallslice_fps": null,
+      "view_min_fps": 49,
+      "view_median_fps": 57,
+      "view_before_median_fps": 60,
+      "whole_gpu_percent": 27,
+      "whole_gpu_watts": 89,
+      "recorded_label": "drops"
+    },
+    {
+      "run": "00:09:40 uncapped",
+      "condition": "uncapped",
+      "hallslice_fps": 10308,
+      "view_min_fps": 38,
+      "view_median_fps": 51,
+      "view_before_median_fps": 60,
+      "whole_gpu_percent": 50,
+      "whole_gpu_watts": 110,
+      "recorded_label": "drops"
+    }
+  ],
+  "control_drops": 2,
+  "uncapped_drops": 1,
+  "sweep_source": {
+    "path": "Experiments/Brutal/evidence/m3-20261020-000131.md",
+    "sha256": "954c8779a775a4e17309aae3b6ae3ff6856c6809d81be772f1455e155ee82fbb",
+    "minimum_pass_threshold_fps": 60
+  },
+  "threshold_example": [
+    {
+      "run": "cap 120",
+      "minimum_fps": 59,
+      "original_rule_minimum60_passes": false,
+      "hypothetical_rule_minimum58_passes": true
+    },
+    {
+      "run": "cap 480",
+      "minimum_fps": 59,
+      "original_rule_minimum60_passes": false,
+      "hypothetical_rule_minimum58_passes": true
+    }
+  ],
+  "m2": {
+    "source": "Experiments/Brutal/evidence/m2-20261019-235218.md",
+    "reported_revision": "29dd107c",
+    "reported_uncommitted_changes": true,
+    "view_before_median_fps": 60,
+    "view_during_median_fps": 2,
+    "relative_median_change": -0.9666666666666667,
+    "frame_time_start": "start of frame work",
+    "frame_time_end": "present",
+    "p50_ms": 0.073
+  },
+  "m3": {
+    "frame_time_start": "previous present",
+    "frame_time_end": "next present",
+    "sweep_uncapped_p50_ms": 0.064,
+    "verdict_from_public_readme": "inconclusive"
+  },
+  "future_protocol": {
+    "status": "Design only; not executed.",
+    "freeze": [
+      "binary/source identity and dirty diff",
+      "scene/camera phase/seed",
+      "GPU and driver",
+      "present mode and cap",
+      "measurement endpoints",
+      "same exposure duration and sampling",
+      "adjacent-view task",
+      "resource headroom and abort guards"
+    ],
+    "compare": "Repeat interleaved controls and treatments at matched scene phases; preserve all observations and the predeclared coexistence rule.",
+    "missing_gpu_or_dlss_results": null
+  }
+}

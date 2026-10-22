@@ -1,0 +1,252 @@
+{
+  "scope": "Actual CPU description selections with independent arithmetic under the pinned block formulas, not rendering.",
+  "source_commit": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+  "column_boxes": {
+    "v1": "3 + 2*4 = 11",
+    "v2": "3 + 4*4 = 19"
+  },
+  "colonnade": {
+    "count": 4,
+    "spacing_metres": 3,
+    "origins_metres": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        3,
+        0,
+        0
+      ],
+      [
+        6,
+        0,
+        0
+      ],
+      [
+        9,
+        0,
+        0
+      ]
+    ],
+    "root_instances": 1,
+    "total_instances": 5,
+    "entablature_boxes": 9,
+    "boxes_v1": 53,
+    "boxes_v2": 85,
+    "extra_boxes": 32,
+    "triangles_v1": 636,
+    "triangles_v2": 1020,
+    "triangle_difference": 384
+  },
+  "attachment": {
+    "count": 3,
+    "spacing_metres": 2,
+    "height_metres": 9,
+    "first_entablature_box_translation_metres": [
+      2,
+      9,
+      0
+    ]
+  },
+  "transform": {
+    "convention": "Row vectors; local matrix times parent matrix. Scale, yaw, then translate.",
+    "input": [
+      1,
+      0,
+      0
+    ],
+    "scale": 2,
+    "yaw_degrees": 90,
+    "translation": [
+      1,
+      2,
+      3
+    ],
+    "expected": [
+      1,
+      2,
+      1
+    ],
+    "wrong_order_translate_then_scale_then_yaw": [
+      6,
+      4,
+      -4
+    ],
+    "scope": "Independent exact right-angle arithmetic; native source transform tests passed within their declared1e-3 tolerance."
+  },
+  "repeat_description_bytes_equal": true,
+  "seed_change": {
+    "seeds": [
+      7,
+      8
+    ],
+    "boxes": 405,
+    "instances": 35,
+    "hashes_differ": true,
+    "same_plan_not_same_scene_content": true
+  },
+  "cases": {
+    "column1": {
+      "boxes": 11,
+      "instances": 1,
+      "format": "lego-scene/1",
+      "exit_code": 0,
+      "hash": "sha256:c152ab55bbc57c1ee323a54329b3097cf1afb0dfad3261d8f6c5ed703162046e",
+      "error_kinds": []
+    },
+    "column2": {
+      "boxes": 19,
+      "instances": 1,
+      "format": "lego-scene/1",
+      "exit_code": 0,
+      "hash": "sha256:a410d928068b8b1325b913deb8539d43709da10304afb6f59eeaea9344d6be54",
+      "error_kinds": []
+    },
+    "colonnade4-v1": {
+      "boxes": 53,
+      "instances": 5,
+      "format": "lego-scene/1",
+      "exit_code": 0,
+      "hash": "sha256:8217b7c2e128efb4d1b2b6d655be463fceedfa09575cdb409b4e16850d7b8945",
+      "error_kinds": []
+    },
+    "colonnade4-v2": {
+      "boxes": 85,
+      "instances": 5,
+      "format": "lego-scene/1",
+      "exit_code": 0,
+      "hash": "sha256:6f334f4803f502af41d71b47bf8359c37fcb0ee5fcd9c58cac9ba27c6391d1b3",
+      "error_kinds": []
+    },
+    "colonnade-attachment": {
+      "boxes": 40,
+      "instances": 4,
+      "format": "lego-scene/1",
+      "exit_code": 0,
+      "hash": "sha256:f363df3a43723dfc94d8961ce9042f805c634df2726aba898e5e1cfc04bbb5f6",
+      "error_kinds": []
+    },
+    "sanctuary-level2": {
+      "boxes": 8505,
+      "instances": 756,
+      "format": "lego-scene/1",
+      "exit_code": 0,
+      "hash": "sha256:adc845f67f56965f97ed28c3f6eb3bdcca85e29d4fee6a13209a3d6e1eab7276",
+      "error_kinds": []
+    },
+    "sanctuary-level3": {
+      "boxes": null,
+      "instances": null,
+      "format": "lego-errors/1",
+      "exit_code": 2,
+      "hash": null,
+      "error_kinds": [
+        "too-many-boxes"
+      ]
+    },
+    "temple-instances10": {
+      "boxes": null,
+      "instances": null,
+      "format": "lego-errors/1",
+      "exit_code": 2,
+      "hash": null,
+      "error_kinds": [
+        "too-many-instances"
+      ]
+    },
+    "temple-depth1": {
+      "boxes": null,
+      "instances": null,
+      "format": "lego-errors/1",
+      "exit_code": 2,
+      "hash": null,
+      "error_kinds": [
+        "too-deep",
+        "too-deep",
+        "too-deep",
+        "too-deep",
+        "too-deep",
+        "too-deep",
+        "too-deep",
+        "too-deep",
+        "too-deep",
+        "too-deep",
+        "too-deep",
+        "too-deep",
+        "too-deep",
+        "too-deep",
+        "too-deep",
+        "too-deep",
+        "too-deep",
+        "too-deep",
+        "too-deep",
+        "too-deep",
+        "too-deep",
+        "too-deep",
+        "too-deep",
+        "too-deep",
+        "too-deep",
+        "too-deep",
+        "too-deep",
+        "too-deep",
+        "too-deep",
+        "too-deep"
+      ]
+    },
+    "colonnade-count-fraction": {
+      "boxes": null,
+      "instances": null,
+      "format": "lego-errors/1",
+      "exit_code": 2,
+      "hash": null,
+      "error_kinds": [
+        "bad-argument"
+      ]
+    },
+    "temple-seed7": {
+      "boxes": 405,
+      "instances": 35,
+      "format": "lego-scene/1",
+      "exit_code": 0,
+      "hash": "sha256:3c5eae9c24c9760097fdf693557332abbe6348b170902747cc3ed74d602e711b",
+      "error_kinds": []
+    },
+    "temple-seed8": {
+      "boxes": 405,
+      "instances": 35,
+      "format": "lego-scene/1",
+      "exit_code": 0,
+      "hash": "sha256:82088eee8921c61cb13bfa32663c3380e6841fffb9078899dd68c22096ccacf7",
+      "error_kinds": []
+    },
+    "colonnade4-repeat": {
+      "boxes": 53,
+      "instances": 5,
+      "format": "lego-scene/1",
+      "exit_code": 0,
+      "hash": "sha256:8217b7c2e128efb4d1b2b6d655be463fceedfa09575cdb409b4e16850d7b8945",
+      "error_kinds": []
+    }
+  },
+  "standard_limits": {
+    "max_depth": 8,
+    "max_instances": 4096,
+    "max_boxes": 20000,
+    "root_depth": 0,
+    "box_triangles": 12,
+    "box_triangle_budget": 240000
+  },
+  "sanctuary_level2": {
+    "boxes": 8505,
+    "instances": 756,
+    "triangles": 102060
+  },
+  "generation_counter_bound": {
+    "max_boxes": 20000,
+    "maximum_counter_from_source_guard": 20001,
+    "maximum_retained_boxes_from_source_guard": 20000,
+    "scope": "Guard-derived upper bounds, not an accepted level3 scene count."
+  }
+}

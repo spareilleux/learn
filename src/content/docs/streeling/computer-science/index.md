@@ -24,3 +24,4 @@ sidebar:
 - [CS-011 · Preserve Absence and Failure Boundaries](cs-011-preserve-absence-and-failure-boundaries/)
 - [CS-012 · Native and WASM Render Boundaries](cs-012-native-and-wasm-render-boundaries/)
 - [CS-013 · Preserve Axes and Units When Composing Spectral Outputs](cs-013-preserve-spectral-axes-and-units/)
+- [CS-014 · Compose BRUTAL Scene Descriptions with Typed F# Blocks](cs-014-compose-brutal-scene-descriptions/)

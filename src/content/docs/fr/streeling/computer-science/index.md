@@ -24,3 +24,4 @@ sidebar:
 - [CS-011 · Préserver la distinction entre absence et échec](cs-011-preserve-absence-and-failure-boundaries/)
 - [CS-012 · Délimiter la comparaison des rendus natifs et WASM](cs-012-native-and-wasm-render-boundaries/)
 - [CS-013 · Préserver les axes et les unités en composant des sorties spectrales](cs-013-preserve-spectral-axes-and-units/)
+- [CS-014 · Composer des descriptions de scènes BRUTAL avec des blocs F# typés](cs-014-compose-brutal-scene-descriptions/)
