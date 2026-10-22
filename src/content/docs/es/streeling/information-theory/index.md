@@ -15,3 +15,4 @@ sidebar:
 - [INF-002 · Pérdida de información en los vectores compactos OPTIC-K](inf-002-optick-compact-vector-information-loss/)
 - [INF-003 · Medir la deriva de las distribuciones de veredictos con la divergencia de Jensen-Shannon](inf-003-verdict-distribution-drift/)
 - [INF-004 · Pérdida de información en los handoffs entre agentes](inf-004-information-loss-in-agent-handoffs/)
+- [INF-005 · Cuantización y renders indistinguibles](inf-005-quantization-and-indistinguishable-renders/)

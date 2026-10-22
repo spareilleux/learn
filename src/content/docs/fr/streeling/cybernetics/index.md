@@ -14,3 +14,4 @@ sidebar:
 - [CYB-001 · CYB-001 : Correspondance entre le modèle du système viable et la gouvernance de l'IA](cyb-001-vsm-ai-governance-mapping/)
 - [CYB-002 · CYB-002 : Mécanismes d'amortissement actif pour maîtriser l'oscillation entre dépôts](cyb-002-active-dampening-cross-repo-oscillation/)
 - [CYB-003 · CYB-003 : Mesurer quantitativement le ratio de variété](cyb-003-measuring-variety-ratio-quantitatively/)
+- [CYB-004 · Observer avant de corriger une boucle de rétroaction](cyb-004-observe-before-correcting-a-feedback-loop/)

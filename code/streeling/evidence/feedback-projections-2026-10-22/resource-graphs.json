@@ -1,0 +1,1561 @@
+{
+  "scope": "New static graph extraction from the exact saved Godot scene; no new runtime, GPU draw-call, memory or mutation measurement.",
+  "scene_sha256": "7c8003a9e7ea1433cd7e7e18ed83512ca2c436ea0af70bb7415e01e43c3bb4ca",
+  "node_type_counts": {
+    "Node3D": 37,
+    "MeshInstance3D": 72,
+    "StaticBody3D": 72,
+    "CollisionShape3D": 72
+  },
+  "nodes_total": 253,
+  "resource_type_counts": {
+    "StandardMaterial3D": 2,
+    "BoxMesh": 2,
+    "BoxShape3D": 2
+  },
+  "resources_total": 6,
+  "instance_resource_bipartite_graph": {
+    "edge_rule": "One directed reference from a scene node property mesh/shape/material_override to its declared SubResource.",
+    "left_nodes_with_references": 144,
+    "right_resource_nodes": 6,
+    "edges": 216,
+    "resource_indegrees": {
+      "StandardMaterial3D_waucl": 36,
+      "BoxMesh_jk82c": 36,
+      "BoxShape3D_ly8rt": 36,
+      "StandardMaterial3D_iksmk": 36,
+      "BoxMesh_douni": 36,
+      "BoxShape3D_os7eo": 36
+    },
+    "references": [
+      {
+        "node": "w0-f0/warp",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_waucl",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w0-f0/warp",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_jk82c",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w0-f0/warp/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_ly8rt",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w0-f0/weft",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_iksmk",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w0-f0/weft",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_douni",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w0-f0/weft/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_os7eo",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w1-f0/warp",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_waucl",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w1-f0/warp",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_jk82c",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w1-f0/warp/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_ly8rt",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w1-f0/weft",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_iksmk",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w1-f0/weft",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_douni",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w1-f0/weft/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_os7eo",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w2-f0/warp",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_waucl",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w2-f0/warp",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_jk82c",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w2-f0/warp/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_ly8rt",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w2-f0/weft",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_iksmk",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w2-f0/weft",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_douni",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w2-f0/weft/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_os7eo",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w3-f0/warp",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_waucl",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w3-f0/warp",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_jk82c",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w3-f0/warp/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_ly8rt",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w3-f0/weft",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_iksmk",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w3-f0/weft",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_douni",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w3-f0/weft/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_os7eo",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w4-f0/warp",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_waucl",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w4-f0/warp",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_jk82c",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w4-f0/warp/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_ly8rt",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w4-f0/weft",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_iksmk",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w4-f0/weft",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_douni",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w4-f0/weft/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_os7eo",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w5-f0/warp",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_waucl",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w5-f0/warp",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_jk82c",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w5-f0/warp/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_ly8rt",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w5-f0/weft",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_iksmk",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w5-f0/weft",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_douni",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w5-f0/weft/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_os7eo",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w0-f1/warp",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_waucl",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w0-f1/warp",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_jk82c",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w0-f1/warp/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_ly8rt",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w0-f1/weft",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_iksmk",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w0-f1/weft",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_douni",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w0-f1/weft/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_os7eo",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w1-f1/warp",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_waucl",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w1-f1/warp",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_jk82c",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w1-f1/warp/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_ly8rt",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w1-f1/weft",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_iksmk",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w1-f1/weft",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_douni",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w1-f1/weft/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_os7eo",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w2-f1/warp",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_waucl",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w2-f1/warp",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_jk82c",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w2-f1/warp/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_ly8rt",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w2-f1/weft",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_iksmk",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w2-f1/weft",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_douni",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w2-f1/weft/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_os7eo",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w3-f1/warp",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_waucl",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w3-f1/warp",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_jk82c",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w3-f1/warp/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_ly8rt",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w3-f1/weft",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_iksmk",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w3-f1/weft",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_douni",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w3-f1/weft/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_os7eo",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w4-f1/warp",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_waucl",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w4-f1/warp",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_jk82c",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w4-f1/warp/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_ly8rt",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w4-f1/weft",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_iksmk",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w4-f1/weft",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_douni",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w4-f1/weft/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_os7eo",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w5-f1/warp",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_waucl",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w5-f1/warp",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_jk82c",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w5-f1/warp/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_ly8rt",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w5-f1/weft",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_iksmk",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w5-f1/weft",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_douni",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w5-f1/weft/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_os7eo",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w0-f2/warp",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_waucl",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w0-f2/warp",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_jk82c",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w0-f2/warp/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_ly8rt",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w0-f2/weft",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_iksmk",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w0-f2/weft",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_douni",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w0-f2/weft/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_os7eo",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w1-f2/warp",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_waucl",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w1-f2/warp",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_jk82c",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w1-f2/warp/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_ly8rt",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w1-f2/weft",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_iksmk",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w1-f2/weft",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_douni",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w1-f2/weft/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_os7eo",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w2-f2/warp",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_waucl",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w2-f2/warp",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_jk82c",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w2-f2/warp/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_ly8rt",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w2-f2/weft",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_iksmk",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w2-f2/weft",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_douni",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w2-f2/weft/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_os7eo",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w3-f2/warp",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_waucl",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w3-f2/warp",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_jk82c",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w3-f2/warp/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_ly8rt",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w3-f2/weft",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_iksmk",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w3-f2/weft",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_douni",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w3-f2/weft/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_os7eo",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w4-f2/warp",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_waucl",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w4-f2/warp",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_jk82c",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w4-f2/warp/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_ly8rt",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w4-f2/weft",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_iksmk",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w4-f2/weft",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_douni",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w4-f2/weft/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_os7eo",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w5-f2/warp",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_waucl",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w5-f2/warp",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_jk82c",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w5-f2/warp/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_ly8rt",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w5-f2/weft",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_iksmk",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w5-f2/weft",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_douni",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w5-f2/weft/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_os7eo",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w0-f3/warp",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_waucl",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w0-f3/warp",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_jk82c",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w0-f3/warp/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_ly8rt",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w0-f3/weft",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_iksmk",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w0-f3/weft",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_douni",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w0-f3/weft/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_os7eo",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w1-f3/warp",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_waucl",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w1-f3/warp",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_jk82c",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w1-f3/warp/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_ly8rt",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w1-f3/weft",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_iksmk",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w1-f3/weft",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_douni",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w1-f3/weft/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_os7eo",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w2-f3/warp",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_waucl",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w2-f3/warp",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_jk82c",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w2-f3/warp/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_ly8rt",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w2-f3/weft",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_iksmk",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w2-f3/weft",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_douni",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w2-f3/weft/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_os7eo",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w3-f3/warp",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_waucl",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w3-f3/warp",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_jk82c",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w3-f3/warp/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_ly8rt",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w3-f3/weft",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_iksmk",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w3-f3/weft",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_douni",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w3-f3/weft/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_os7eo",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w4-f3/warp",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_waucl",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w4-f3/warp",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_jk82c",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w4-f3/warp/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_ly8rt",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w4-f3/weft",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_iksmk",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w4-f3/weft",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_douni",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w4-f3/weft/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_os7eo",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w5-f3/warp",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_waucl",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w5-f3/warp",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_jk82c",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w5-f3/warp/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_ly8rt",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w5-f3/weft",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_iksmk",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w5-f3/weft",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_douni",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w5-f3/weft/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_os7eo",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w0-f4/warp",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_waucl",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w0-f4/warp",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_jk82c",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w0-f4/warp/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_ly8rt",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w0-f4/weft",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_iksmk",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w0-f4/weft",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_douni",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w0-f4/weft/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_os7eo",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w1-f4/warp",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_waucl",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w1-f4/warp",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_jk82c",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w1-f4/warp/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_ly8rt",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w1-f4/weft",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_iksmk",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w1-f4/weft",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_douni",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w1-f4/weft/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_os7eo",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w2-f4/warp",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_waucl",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w2-f4/warp",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_jk82c",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w2-f4/warp/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_ly8rt",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w2-f4/weft",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_iksmk",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w2-f4/weft",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_douni",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w2-f4/weft/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_os7eo",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w3-f4/warp",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_waucl",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w3-f4/warp",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_jk82c",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w3-f4/warp/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_ly8rt",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w3-f4/weft",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_iksmk",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w3-f4/weft",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_douni",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w3-f4/weft/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_os7eo",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w4-f4/warp",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_waucl",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w4-f4/warp",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_jk82c",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w4-f4/warp/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_ly8rt",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w4-f4/weft",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_iksmk",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w4-f4/weft",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_douni",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w4-f4/weft/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_os7eo",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w5-f4/warp",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_waucl",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w5-f4/warp",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_jk82c",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w5-f4/warp/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_ly8rt",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w5-f4/weft",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_iksmk",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w5-f4/weft",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_douni",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w5-f4/weft/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_os7eo",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w0-f5/warp",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_waucl",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w0-f5/warp",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_jk82c",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w0-f5/warp/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_ly8rt",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w0-f5/weft",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_iksmk",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w0-f5/weft",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_douni",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w0-f5/weft/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_os7eo",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w1-f5/warp",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_waucl",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w1-f5/warp",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_jk82c",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w1-f5/warp/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_ly8rt",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w1-f5/weft",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_iksmk",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w1-f5/weft",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_douni",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w1-f5/weft/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_os7eo",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w2-f5/warp",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_waucl",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w2-f5/warp",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_jk82c",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w2-f5/warp/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_ly8rt",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w2-f5/weft",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_iksmk",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w2-f5/weft",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_douni",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w2-f5/weft/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_os7eo",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w3-f5/warp",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_waucl",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w3-f5/warp",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_jk82c",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w3-f5/warp/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_ly8rt",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w3-f5/weft",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_iksmk",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w3-f5/weft",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_douni",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w3-f5/weft/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_os7eo",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w4-f5/warp",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_waucl",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w4-f5/warp",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_jk82c",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w4-f5/warp/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_ly8rt",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w4-f5/weft",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_iksmk",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w4-f5/weft",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_douni",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w4-f5/weft/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_os7eo",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w5-f5/warp",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_waucl",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w5-f5/warp",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_jk82c",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w5-f5/warp/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_ly8rt",
+        "resource_type": "BoxShape3D"
+      },
+      {
+        "node": "w5-f5/weft",
+        "node_type": "MeshInstance3D",
+        "property": "material_override",
+        "resource": "StandardMaterial3D_iksmk",
+        "resource_type": "StandardMaterial3D"
+      },
+      {
+        "node": "w5-f5/weft",
+        "node_type": "MeshInstance3D",
+        "property": "mesh",
+        "resource": "BoxMesh_douni",
+        "resource_type": "BoxMesh"
+      },
+      {
+        "node": "w5-f5/weft/Body/Shape",
+        "node_type": "CollisionShape3D",
+        "property": "shape",
+        "resource": "BoxShape3D_os7eo",
+        "resource_type": "BoxShape3D"
+      }
+    ]
+  },
+  "mesh_only_projection": {
+    "edge_rule": "Two different MeshInstance3D nodes are adjacent iff their mesh properties refer to the same saved BoxMesh resource.",
+    "nodes": 72,
+    "components": 2,
+    "component_sizes": [
+      36,
+      36
+    ],
+    "edges": 1260
+  },
+  "hypothetical_removal": {
+    "operation": "Delete one BoxMesh resource vertex from the analytical graph; no engine process or scene edited.",
+    "remaining_reference_edges": 180,
+    "orphaned_mesh_references": 36
+  },
+  "interpretation": "A shared resource reference is not a human collaboration edge, a live service call, or a measured draw-call reduction."
+}
