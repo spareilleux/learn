@@ -16,3 +16,4 @@ sidebar:
 - [MCL-003 · When Is a Style Label Evidence?](mcl-003-style-labels-as-evidence/)
 - [MCL-004 · Model Timing Without Inventing a Style](mcl-004-model-timing-without-inventing-a-style/)
 - [MCL-005 · Preserve Written and Sounding Pitch When Importing a Score](mcl-005-preserve-written-and-sounding-pitch/)
+- [MCL-006 · Preserve Meter Grouping and Tempo Units](mcl-006-preserve-meter-grouping-and-tempo-units/)

@@ -26,12 +26,12 @@ These modules were written by AI departments and have **not been reviewed**. Unl
 | [Futurology](futurology/) | 5 | 5 | 5 |
 | [Guitar Acoustics & Sound Synthesis](guitar-acoustics/) | 6 | 6 | 6 |
 | [Guitar Alchemist Academy](guitar-alchemist-academy/) | 6 | 6 | 6 |
-| [Guitar Studies](guitar-studies/) | 6 | 6 | 6 |
+| [Guitar Studies](guitar-studies/) | 7 | 7 | 7 |
 | [Information Theory](information-theory/) | 7 | 7 | 7 |
 | [IX Research](ix-research/) | 1 | 1 | 1 |
 | [Mathematics](mathematics/) | 25 | 25 | 25 |
 | [Music](music/) | 25 | 25 | 25 |
-| [Musicology](musicology/) | 5 | 5 | 5 |
+| [Musicology](musicology/) | 6 | 6 | 6 |
 | [Network Science](network-science/) | 7 | 7 | 7 |
 | [Philosophy](philosophy/) | 6 | 6 | 6 |
 | [Physics](physics/) | 10 | 10 | 10 |
@@ -39,7 +39,7 @@ These modules were written by AI departments and have **not been reviewed**. Unl
 | [Psychohistory](psychohistory/) | 25 | 25 | 25 |
 | [Semiotics](semiotics/) | 6 | 6 | 6 |
 | [Visual Computing](visual-computing/) | 10 | 10 | 10 |
-| [World Music & Languages](world-music-languages/) | 5 | 5 | 5 |
+| [World Music & Languages](world-music-languages/) | 6 | 6 | 6 |
 
 ## Provenance
 

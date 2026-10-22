@@ -16,3 +16,4 @@ sidebar:
 - [WML-003 · Auditar términos de guitarra en seis idiomas](wml-003-term-preservation-and-cultural-review/)
 - [WML-004 · Conservar la entonación más allá de las clases de altura](wml-004-preserve-intonation-beyond-pitch-classes/)
 - [WML-005 · Declarar la convención de nombres de notas antes de interpretar B](wml-005-declare-note-name-conventions/)
+- [WML-006 · Conservar el origen de un ciclo aditivo](wml-006-preserve-the-origin-of-an-additive-cycle/)
