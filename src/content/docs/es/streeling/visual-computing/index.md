@@ -20,6 +20,7 @@ sidebar:
 - [VC-007 · Conservar los cruces del tejido al atravesar un límite de escena de Godot](vc-007-weave-seams-as-scene-contracts/)
 - [VC-008 · Guardar y consultar una escena de tejido](vc-008-save-and-query-a-weave-scene/)
 - [VC-009 · Presupuestar la expansión de escenas BRUTAL antes de renderizarlas](vc-009-budget-brutal-scene-expansion/)
+- [VC-010 · Conservar los contratos de canales de las texturas empaquetadas](vc-010-preserve-packed-texture-channel-contracts/)
 
 ## Catálogo de cursos (previsto)
 

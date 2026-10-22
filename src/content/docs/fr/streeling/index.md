@@ -19,7 +19,7 @@ Ces modules ont été écrits par des départements IA et **n'ont pas été relu
 | Département | Modules | En français | En espagnol |
 |---|---|---|---|
 | [Ingénierie audio](audio-engineering/) | 6 | 6 | 6 |
-| [Sciences cognitives](cognitive-science/) | 5 | 5 | 5 |
+| [Sciences cognitives](cognitive-science/) | 6 | 6 | 6 |
 | [Informatique](computer-science/) | 14 | 14 | 14 |
 | [Cybernétique](cybernetics/) | 6 | 6 | 6 |
 | [Visualisation de données](data-visualization/) | 10 | 10 | 10 |
@@ -34,11 +34,11 @@ Ces modules ont été écrits par des départements IA et **n'ont pas été relu
 | [Musicologie](musicology/) | 5 | 5 | 5 |
 | [Science des réseaux](network-science/) | 7 | 7 | 7 |
 | [Philosophie](philosophy/) | 5 | 5 | 5 |
-| [Physique](physics/) | 8 | 8 | 8 |
+| [Physique](physics/) | 9 | 9 | 9 |
 | [Gestion de produit et de projet](product-management/) | 5 | 5 | 5 |
 | [Psychohistoire](psychohistory/) | 25 | 25 | 25 |
 | [Sémiotique](semiotics/) | 6 | 6 | 6 |
-| [Informatique visuelle](visual-computing/) | 9 | 9 | 9 |
+| [Informatique visuelle](visual-computing/) | 10 | 10 | 10 |
 | [Musiques et langues du monde](world-music-languages/) | 5 | 5 | 5 |
 
 ## Provenance

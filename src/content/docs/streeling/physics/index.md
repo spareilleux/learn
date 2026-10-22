@@ -19,3 +19,4 @@ sidebar:
 - [PHY-006 · Check Weave Scene Units](phy-006-check-weave-scene-units/)
 - [PHY-007 · Separate Two-Tone Beating from Decay](phy-007-separate-beating-from-decay/)
 - [PHY-008 · Keep Surface Normals Perpendicular](phy-008-keep-surface-normals-perpendicular/)
+- [PHY-009 · Distinguish Linear Color from Display Encoding](phy-009-distinguish-linear-color-from-display-encoding/)

@@ -16,3 +16,4 @@ sidebar:
 - [COG-003 · Étalonner sa confiance pour identifier les notes sur le manche](cog-003-calibrating-fretboard-confidence/)
 - [COG-004 · Évaluer une tâche de discrimination de hauteur sans inventer un résultat d’écoute](cog-004-score-a-pitch-discrimination-task/)
 - [COG-005 · Distinguer les estimations de hauteur des réponses des auditeurs](cog-005-separate-pitch-estimates-from-listener-reports/)
+- [COG-006 · Distinguer les tests de pixels des jugements d'apparence](cog-006-separate-pixel-tests-from-appearance-judgments/)

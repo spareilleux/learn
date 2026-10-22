@@ -20,6 +20,7 @@ sidebar:
 - [VC-007 · Préserver les croisements du tissage à travers une frontière de scène Godot](vc-007-weave-seams-as-scene-contracts/)
 - [VC-008 · Enregistrer une scène de tissage et l’interroger](vc-008-save-and-query-a-weave-scene/)
 - [VC-009 · Budgéter l'expansion des scènes BRUTAL avant le rendu](vc-009-budget-brutal-scene-expansion/)
+- [VC-010 · Préserver les contrats de canaux des textures regroupées](vc-010-preserve-packed-texture-channel-contracts/)
 
 ## Catalogue de cours (prévu)
 

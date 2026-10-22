@@ -20,6 +20,7 @@ sidebar:
 - [VC-007 · Keep Weave Crossings Correct across a Godot Scene Boundary](vc-007-weave-seams-as-scene-contracts/)
 - [VC-008 · Save and Query a Weave Scene](vc-008-save-and-query-a-weave-scene/)
 - [VC-009 · Budget BRUTAL Scene Expansion Before Rendering](vc-009-budget-brutal-scene-expansion/)
+- [VC-010 · Preserve Packed Texture Channel Contracts](vc-010-preserve-packed-texture-channel-contracts/)
 
 ## Course catalog (planned)
 

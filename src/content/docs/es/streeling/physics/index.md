@@ -19,3 +19,4 @@ sidebar:
 - [PHY-006 · Comprobar las unidades de una escena de tejido](phy-006-check-weave-scene-units/)
 - [PHY-007 · Distinguir los batimientos de dos tonos del decaimiento](phy-007-separate-beating-from-decay/)
 - [PHY-008 · Mantener las normales perpendiculares a las superficies](phy-008-keep-surface-normals-perpendicular/)
+- [PHY-009 · Distinguir el color lineal de la codificación de visualización](phy-009-distinguish-linear-color-from-display-encoding/)

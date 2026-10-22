@@ -1,0 +1,108 @@
+{
+  "checked_at_utc": "2026-10-22T21:53:19.260411+00:00",
+  "scope": "Transport checks plus actual primary reading provenance; failures are not counted as successful body reads, and image bytes have a distinct gate.",
+  "links": [
+    {
+      "url": "https://docs.blender.org/manual/en/4.5/render/color_management.html",
+      "status": 403,
+      "direct_request_success": false,
+      "separate_primary_document_read": "Direct web.open twice returned402. Web.search returned the actual versioned primary page body, including Non-Color normal/displacement guidance. No default Filmic/AgX claim made; search-result title/snippet alone not used for that claim."
+    },
+    {
+      "url": "https://docs.comfy.org/",
+      "status": 200,
+      "bytes": 497390,
+      "sha256": "b7656f87f5532ea16fb02f6b48abbe15ee4ff27c711e50879dff2fc9f3aeafd0",
+      "final_url": "https://docs.comfy.org/",
+      "mime": "text/html",
+      "separate_primary_document_read": "Actual web.open read official documentation landing page/workflow description. Project generator not run."
+    },
+    {
+      "url": "https://docs.godotengine.org/en/4.6/tutorials/shaders/shader_reference/shading_language.html#using-source-color",
+      "status": 403,
+      "direct_request_success": false,
+      "separate_primary_document_read": "Actual web.open/find read source_color section, color/data distinction and renderer-specific requirements/recommendation. No host run."
+    },
+    {
+      "url": "https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Colossus/Program.cs#L1186-L1228",
+      "status": 200,
+      "bytes": 1645364,
+      "sha256": "3e1b046e5342b797cc714413b8370ec51f9a899c413125e785b83de25e7b74d7",
+      "final_url": "https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Colossus/Program.cs#L1186-L1228",
+      "mime": "text/html",
+      "content_read": "Actual pinned Git/source bytes and independent data review in primary-readback/data-audit; HTML transport is not the source review."
+    },
+    {
+      "url": "https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Colossus/Program.cs#L4308-L4337",
+      "status": 200,
+      "bytes": 1645364,
+      "sha256": "329b6aed4754c2204ad1bdd919a368d31cd93141a0d3cbf1a411f56189278847",
+      "final_url": "https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Colossus/Program.cs#L4308-L4337",
+      "mime": "text/html",
+      "content_read": "Actual pinned Git/source bytes and independent data review in primary-readback/data-audit; HTML transport is not the source review."
+    },
+    {
+      "url": "https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Colossus/Program.cs#L587-L655",
+      "status": 200,
+      "bytes": 1645364,
+      "sha256": "c9c2343ca7f29ee774d983ee58a4151a65a13d38b864c88cccbf18bb57c845b1",
+      "final_url": "https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Colossus/Program.cs#L587-L655",
+      "mime": "text/html",
+      "content_read": "Actual pinned Git/source bytes and independent data review in primary-readback/data-audit; HTML transport is not the source review."
+    },
+    {
+      "url": "https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Colossus/textures/bake_blender.py",
+      "status": 200,
+      "bytes": 289345,
+      "sha256": "201f4bbda9b4fb37df078d8ba7a99ae0a6625badc3b0ba0805d31e97f48fad5d",
+      "final_url": "https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Colossus/textures/bake_blender.py",
+      "mime": "text/html",
+      "content_read": "Actual pinned Git/source bytes and independent data review in primary-readback/data-audit; HTML transport is not the source review."
+    },
+    {
+      "url": "https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Colossus/textures/generate_comfyui.py",
+      "status": 200,
+      "bytes": 272425,
+      "sha256": "fcf060a5f48cf3ae63bc444946692cb448392e0fd150a0ebf1cea23f1f5c51ba",
+      "final_url": "https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Colossus/textures/generate_comfyui.py",
+      "mime": "text/html",
+      "content_read": "Actual pinned Git/source bytes and independent data review in primary-readback/data-audit; HTML transport is not the source review."
+    },
+    {
+      "url": "https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Lego/Model.fs#L87-L94",
+      "status": 200,
+      "bytes": 369656,
+      "sha256": "2993b78f63e67e445f8b8cccb7836721ad096c5fbab52f6efaa017d78b98764f",
+      "final_url": "https://github.com/GuitarAlchemist/ga/blob/76efbffd5af82b46c3146957a6bd4504008eeb89/Experiments/Brutal/Lego/Model.fs#L87-L94",
+      "mime": "text/html",
+      "content_read": "Actual pinned Git/source bytes and independent data review in primary-readback/data-audit; HTML transport is not the source review."
+    },
+    {
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12876641/",
+      "status": 200,
+      "bytes": 196857,
+      "sha256": "ed4b2a1d10be3dc2959480bb2c1b432d3e87fe6f895982692c8a71a5b637feaa",
+      "final_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12876641/",
+      "mime": "text/html",
+      "separate_primary_document_read": "Actual web.open read abstract and introduction: brightness/perceived intensity versus lightness/perceived reflectance, contextual cue study. New stimulus not copied or treated as replication; no observer outcome imported."
+    },
+    {
+      "url": "https://raw.githubusercontent.com/spareilleux/learn/50a9e9d5604dfe60c37f4a52d6bfa5e2ca376e63/code/streeling/evidence/color-contract-2026-10-22/color-context-controls.png",
+      "status": 200,
+      "bytes": 52979,
+      "sha256": "8e18cb3952eae0798c7cb79b8421ee1d4c521e232e04faf20ed6ac7e086e5af1",
+      "final_url": "https://raw.githubusercontent.com/spareilleux/learn/50a9e9d5604dfe60c37f4a52d6bfa5e2ca376e63/code/streeling/evidence/color-contract-2026-10-22/color-context-controls.png",
+      "mime": "image/png",
+      "actual_image_bytes_equal_asset": true
+    },
+    {
+      "url": "https://www.w3.org/TR/2026/CRD-css-color-4-20261020/#color-conversion-code",
+      "status": 200,
+      "bytes": 1049411,
+      "sha256": "782fff481e9df879f35ee686c65e8e079941e0b7cd6148f0b66083a27ce96a53",
+      "final_url": "https://www.w3.org/TR/2026/CRD-css-color-4-20261020/#color-conversion-code",
+      "mime": "text/html",
+      "separate_primary_document_read": "Actual web.open/find read dated Candidate Recommendation Draft, piecewise sRGB reference and sample code; no normative pipeline-conformance claim."
+    }
+  ]
+}
