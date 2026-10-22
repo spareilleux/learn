@@ -25,7 +25,7 @@ Vous placerez un intervalle exact sur une proportion observée parmi quelques ag
 
 ## 1. Ce que dit la fiche et ce que contient le dépôt
 
-**Observé.** La [fiche du département](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/state/streeling/departments/psychohistory.department.json) conclut son principe clé par : « One agent's decision is unpredictable, but the aggregate behavior of 14 personas across 4 repos follows mathematical laws. » [`extract.py`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/scripts/streeling_fixtures/psychohistory/psy-004/extract.py) fige cette fiche, ainsi que les fichiers auxquels la phrase pourrait renvoyer, dans [`observed-input.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-004/observed-input.json).
+**Observé.** La [fiche du département](https://github.com/GuitarAlchemist/Demerzel/blob/4b03838800dcd4894f1e026461979bff1d985ca8/state/streeling/departments/psychohistory.department.json) conclut son principe clé par : « One agent's decision is unpredictable, but the aggregate behavior of 14 personas across 4 repos follows mathematical laws. » [`extract.py`](https://github.com/spareilleux/learn/blob/main/code/streeling/psychohistory/psy-004/extract.py) fige cette fiche, ainsi que les fichiers auxquels la phrase pourrait renvoyer, dans [`observed-input.json`](https://github.com/spareilleux/learn/blob/main/code/streeling/psychohistory/psy-004/observed-input.json).
 
 - La fiche énumère 4 dépôts consommateurs, comme annoncé. Le dossier [`personas/`](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/personas) contient **17** fichiers de persona, 3 de plus qu'annoncé ; il en contenait 14 au [commit `e9fe8b7`](https://github.com/GuitarAlchemist/Demerzel/tree/e9fe8b7d711ede390b602896e4a5c571d0ad1f67/personas), qui a ajouté la fiche le 2026-03-21 (relevé avec `git ls-tree`, hors du jeu d'essai).
 - Un fichier de persona décrit un rôle et n'enregistre aucune décision.
@@ -50,7 +50,7 @@ borne supérieure : le p tel que  P(X <= k) = 0.025      X ~ Binomiale(n, p)
 si les n disent oui : borne inférieure = 0.025^(1/n), borne supérieure = 1
 ```
 
-[`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/scripts/streeling_fixtures/psychohistory/psy-004/analyze.py) additionne les termes binomiaux et résout en p par dichotomie. **Calculé à partir d'entrées supposées** (la moitié des agents disent oui ; trois décimales) :
+[`analyze.py`](https://github.com/spareilleux/learn/blob/main/code/streeling/psychohistory/psy-004/analyze.py) additionne les termes binomiaux et résout en p par dichotomie. **Calculé à partir d'entrées supposées** (la moitié des agents disent oui ; trois décimales) :
 
 | Agents | Intervalle exact à 95 % | Largeur | Écart-type à p = 0,5 |
 |---|---|---|---|
@@ -60,7 +60,7 @@ si les n disent oui : borne inférieure = 0.025^(1/n), borne supérieure = 1
 
 Quatorze agents partagés à égalité entre oui et non sont compatibles avec tout p compris entre 0,23 et 0,77, soit plus de la moitié de l'échelle. La largeur décroît comme l'inverse de la racine carrée de la taille du groupe : 100 agents donnent un intervalle 2,652 fois plus étroit (`sqrt(100 / 14) = 2.673`). L'approximation normale `n = z² p (1 - p) / h²`, avec z = 1,959964 et p = 0,5, demande 384,146, donc 385 agents, pour une demi-largeur h de 5 points.
 
-Pour 14 agents, cet intervalle contient p au moins 95,5 % du temps, pour chacune des 99 valeurs de p de 0,01 à 0,99 ([`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-004/results.json)). Un panel de 5 en dit moins encore : si les cinq disent oui, la borne inférieure vaut `0.025^(1/5) = 0.478`.
+Pour 14 agents, cet intervalle contient p au moins 95,5 % du temps, pour chacune des 99 valeurs de p de 0,01 à 0,99 ([`results.json`](https://github.com/spareilleux/learn/blob/main/code/streeling/psychohistory/psy-004/results.json)). Un panel de 5 en dit moins encore : si les cinq disent oui, la borne inférieure vaut `0.025^(1/5) = 0.478`.
 
 ### Exercice pratique 2
 
@@ -123,7 +123,7 @@ Une équipe veut que la proportion de oui parmi ses agents tombe à moins de 5 p
 
 **Observé, épinglé au commit `4b03838800dcd4894f1e026461979bff1d985ca8` de Demerzel :** les fichiers dont les liens figurent à la section 1.
 
-**Jeu d'essai.** `python -I scripts/streeling_fixtures/psychohistory/psy-004/extract.py`, puis `analyze.py` dans le même dossier. Hypothèses et graines : [`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-004/scenarios.json). Autocontrôles et témoins négatifs : [README](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-004/README.md).
+**Jeu d'essai.** `python -I code/streeling/psychohistory/psy-004/extract.py --repo-root <Demerzel clone>`, puis `analyze.py` dans le même dossier. Hypothèses et graines : [`scenarios.json`](https://github.com/spareilleux/learn/blob/main/code/streeling/psychohistory/psy-004/scenarios.json). Autocontrôles et témoins négatifs : [README](https://github.com/spareilleux/learn/blob/main/code/streeling/psychohistory/psy-004/README.md).
 
 **Références de méthode.** Clopper, C. J., et Pearson, E. S. (1934), « The Use of Confidence or Fiducial Limits Illustrated in the Case of the Binomial », *Biometrika* 26(4), 404–413. Kish, L. (1965), *Survey Sampling*, Wiley (l'effet de plan).
 

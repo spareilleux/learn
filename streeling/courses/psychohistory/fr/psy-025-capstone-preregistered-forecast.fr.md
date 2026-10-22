@@ -24,7 +24,7 @@ Ce projet de synthèse reprend [PSY-005](psy-005-persistence-baseline.fr.md) pou
 
 Le *préenregistrement* est, pour Nosek et ses collègues (2018), « committing to analytic steps without advance knowledge of the research outcomes » (le fait de s'engager sur les étapes de l'analyse sans connaître à l'avance les résultats de la recherche), habituellement déposé dans un registre indépendant qui « preserves the preregistration and makes it discoverable » (conserve le préenregistrement et permet de le retrouver). Il « does not favor prediction over postdiction; its purpose is to make clear which is which » (ne privilégie pas la prédiction sur la postdiction ; son but est de rendre clair ce qui relève de l'une ou de l'autre). Une fiche de prévision fixe, avant l'issue, tout ce qu'il faut pour noter une prévision.
 
-[`scenarios.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-025/scenarios.json) contient quatre fiches. [`analyze.py`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/scripts/streeling_fixtures/psychohistory/psy-025/analyze.py) confronte chacune d'elles à 22 règles portant sur les champs, énumérées avec leurs messages d'échec dans le [README](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-025/README.md) du jeu d'essai. Elles répondent aux questions d'un tiers :
+[`scenarios.json`](../../../../code/streeling/psychohistory/psy-025/scenarios.json) contient quatre fiches. [`analyze.py`](../../../../code/streeling/psychohistory/psy-025/analyze.py) confronte chacune d'elles à 22 règles portant sur les champs, énumérées avec leurs messages d'échec dans le [README](../../../../code/streeling/psychohistory/psy-025/README.md) du jeu d'essai. Elles répondent aux questions d'un tiers :
 
 | Ce que demande un tiers | Champs (règles) |
 |---|---|
@@ -37,7 +37,7 @@ Le *préenregistrement* est, pour Nosek et ses collègues (2018), « committing 
 
 **Synthétique.** Le brouillon `library-growth-draft` dit « Streeling will keep growing fast next quarter » (Streeling continuera de croître vite au prochain trimestre), avec pour source « the repo » (le dépôt) et pour prévision « likely » (probable). **Calculé :** le validateur le rejette sur 16 des 22 règles (R02, R04–R07, R09–R16, R18, R20, R22) et ne peut pas juger R08, R17 et R19, dont les champs sont inexploitables. L'un de ces échecs est d'une autre nature : ce lot de modules enrichit la bibliothèque, si bien que l'auteur du brouillon pourrait faire en sorte que sa prévision se réalise, et une issue que son auteur peut orienter est un plan à surveiller, non une prévision à noter. R20 ne juge que l'auteur de la fiche ; les mainteneurs qui fusionneraient les fiches fusionnent aussi les modules de tous les départements, ce que déclare `author_influence_note`. La version réparée, `library-growth-repaired`, porte sur la bibliothèque hors Psychohistoire et passe la validation, comme les deux fiches d'exemple de la section 3.
 
-Le validateur vérifie la forme et la cohérence entre les champs, non la clarté. Six copies modifiées des fiches d'exemple échouent chacune exactement sur la règle enfreinte ; une septième, dont la prévision est égale à sa référence, passe ([`results.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-025/results.json), `validation.controls`).
+Le validateur vérifie la forme et la cohérence entre les champs, non la clarté. Six copies modifiées des fiches d'exemple échouent chacune exactement sur la règle enfreinte ; une septième, dont la prévision est égale à sa référence, passe ([`results.json`](../../../../code/streeling/psychohistory/psy-025/results.json), `validation.controls`).
 
 ### Exercice pratique 1
 
@@ -47,7 +47,7 @@ Deux lecteurs traduisent le « likely » du brouillon, l'un par 0,6, l'autre par
 
 ## 2. Un taux de base tiré de l'historique épinglé
 
-**Observé.** [`extract.py`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/scripts/streeling_fixtures/psychohistory/psy-025/extract.py) lit les 73 commits qui ont modifié [`state/streeling/courses`](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/state/streeling/courses) jusqu'au commit `4b03838`, ainsi que les 255 fichiers du dossier à ce commit, chacun comparé à son blob épinglé ([`observed-input.json`](https://github.com/GuitarAlchemist/Demerzel/blob/1beb0890faec827e1a9e5532abfdc97908de441d/state/streeling/fixtures/psychohistory/psy-025/observed-input.json)). Un *module* anglais est un fichier `<department>/en/<name>.md` autre qu'un README : 68 au commit épinglé, répartis dans 18 départements. Musique en compte 19, Psychohistoire 2.
+**Observé.** [`extract.py`](../../../../code/streeling/psychohistory/psy-025/extract.py) lit les 73 commits qui ont modifié [`state/streeling/courses`](https://github.com/GuitarAlchemist/Demerzel/tree/4b03838800dcd4894f1e026461979bff1d985ca8/state/streeling/courses) jusqu'au commit `4b03838`, ainsi que les 255 fichiers du dossier à ce commit, chacun comparé à son blob épinglé ([`observed-input.json`](../../../../code/streeling/psychohistory/psy-025/observed-input.json)). Un *module* anglais est un fichier `<department>/en/<name>.md` autre qu'un README : 68 au commit épinglé, répartis dans 18 départements. Musique en compte 19, Psychohistoire 2.
 
 Les prévisions d'exemple portent sur le département Musique, auquel ce lot ne touche pas : une prévision portant sur Psychohistoire mesurerait le plan même de ce lot.
 
@@ -137,7 +137,7 @@ Recalculez le score d'intervalle de [19, 25] à α = 0,2, ainsi que celui de la 
 
 **Observé, épinglé au commit `4b03838800dcd4894f1e026461979bff1d985ca8` de Demerzel :** l'historique des commits et les 255 fichiers de la bibliothèque de cours dont le lien figure plus haut.
 
-**Jeu d'essai.** `python -I -B scripts/streeling_fixtures/psychohistory/psy-025/extract.py`, puis `analyze.py` et `analyze.py --check`. Le README énumère les règles, les 22 autocontrôles et les témoins négatifs.
+**Jeu d'essai.** `python -I -B code/streeling/psychohistory/psy-025/extract.py --repo-root <Demerzel clone>`, puis `analyze.py` et `analyze.py --check`. Le README énumère les règles, les 22 autocontrôles et les témoins négatifs.
 
 **Références de méthode.** Nosek, B. A., Ebersole, C. R., DeHaven, A. C., et Mellor, D. T. (2018), « The preregistration revolution », *PNAS* 115(11), 2600–2606, [doi:10.1073/pnas.1708274114](https://doi.org/10.1073/pnas.1708274114). Gneiting, T., et Raftery, A. E. (2007), « Strictly Proper Scoring Rules, Prediction, and Estimation », *Journal of the American Statistical Association* 102(477), 359–378, section 6.2. Winkler, R. L. (1972), « A Decision-Theoretic Approach to Interval Estimation », *Journal of the American Statistical Association* 67(337), 187–191. Les intervalles exacts sont ceux de Clopper et Pearson (1934), cités dans PSY-017.
 
