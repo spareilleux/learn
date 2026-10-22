@@ -16,3 +16,4 @@ sidebar:
 - [GAA-003 · Improvisation Foundations — From Your First Solo to Confident Self-Expression](gaa-003-improvisation-foundations/)
 - [GAA-004 · Choose and Play a Useful Voicing from a GA Answer](gaa-004-choose-a-useful-voicing/)
 - [GAA-005 · Repair a Phrase Without Hiding the Change](gaa-005-repair-a-phrase-without-hiding-the-change/)
+- [GAA-006 · Separate Capo Shapes from Sounding Pitches](gaa-006-separate-capo-shapes-from-sounding-pitches/)

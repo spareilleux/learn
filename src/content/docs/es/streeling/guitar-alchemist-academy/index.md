@@ -16,3 +16,4 @@ sidebar:
 - [GAA-003 · Fundamentos de la improvisación — De tu primer solo a una expresión personal segura](gaa-003-improvisation-foundations/)
 - [GAA-004 · Elegir y tocar una disposición útil a partir de una respuesta de GA](gaa-004-choose-a-useful-voicing/)
 - [GAA-005 · Reparar una frase sin ocultar el cambio](gaa-005-repair-a-phrase-without-hiding-the-change/)
+- [GAA-006 · Distinguir las posiciones de acordes con capo de las alturas reales](gaa-006-separate-capo-shapes-from-sounding-pitches/)
