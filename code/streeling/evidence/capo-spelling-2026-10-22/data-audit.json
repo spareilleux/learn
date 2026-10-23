@@ -1,0 +1,216 @@
+{
+  "schema": "streeling.capo-spelling.data-audit.v1",
+  "verdict": "pass",
+  "check_count": 21,
+  "checks": [
+    {
+      "id": "source_copy_hash_MusicXmlTypes.fs",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "e894f70561db1f4d1bdd378e8ccc0646250793896144f0a7f39a66b18d40cd1a",
+      "expected": "e894f70561db1f4d1bdd378e8ccc0646250793896144f0a7f39a66b18d40cd1a"
+    },
+    {
+      "id": "source_copy_hash_MusicXmlParser.fs",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "73ab96a59b50831b9930cbb8d37368febd6fc8d124d57ca70a3ff4c289940fee",
+      "expected": "73ab96a59b50831b9930cbb8d37368febd6fc8d124d57ca70a3ff4c289940fee"
+    },
+    {
+      "id": "source_copy_hash_CapoSkill.cs",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "ea548ed5575a5ea70adfa8db1065bb84c286ac825817e8bfb2f443da96289130",
+      "expected": "ea548ed5575a5ea70adfa8db1065bb84c286ac825817e8bfb2f443da96289130"
+    },
+    {
+      "id": "source_copy_hash_PitchParser.cs",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "0d9e9b3fff2fd0e564ca33462adaaaf897f1a51117039523c04df3931a987d25",
+      "expected": "0d9e9b3fff2fd0e564ca33462adaaaf897f1a51117039523c04df3931a987d25"
+    },
+    {
+      "id": "source_copy_hash_RelativeFret.cs",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "ff3bc51cd41fc59d04384348330c909f2c2bb17a64d593205b10f2eeb2faa618",
+      "expected": "ff3bc51cd41fc59d04384348330c909f2c2bb17a64d593205b10f2eeb2faa618"
+    },
+    {
+      "id": "source_copy_hash_FretboardNavigationParser.fs",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "b8bc69642cff4fb3d759d4068cf70586f26815fe5db5181591198d75768d3f4a",
+      "expected": "b8bc69642cff4fb3d759d4068cf70586f26815fe5db5181591198d75768d3f4a"
+    },
+    {
+      "id": "eight_full_capo_rows",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "2 shapes × capos 0,2,5,12 independently recomputed",
+      "expected": "all absolute and sounding rows agree"
+    },
+    {
+      "id": "capo_equivalence",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "a=c+r and T+a=(T+c)+r for every sounding string",
+      "expected": "all unmuted strings agree"
+    },
+    {
+      "id": "mute_status",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "-1 retained as null/muted status",
+      "expected": "mute sentinel is not shifted"
+    },
+    {
+      "id": "inverse_physical_controls",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "capo 2: fret5→3, fret2→0, fret1 invalid behind capo",
+      "expected": "behind-full-capo is invalid, not mute"
+    },
+    {
+      "id": "capo12_register_boundary",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "[[null,60,64,67,72,76],[52,59,64,68,71,76]]",
+      "expected": "pitch class preserved while octave/register changes"
+    },
+    {
+      "id": "partial_capo_counterexample",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "shift [0,2,2,2,2,2] gives E-shape [40,49,54,58,61,66]",
+      "expected": "partial shift differs from full capo only on low E"
+    },
+    {
+      "id": "ten_spelled_transpositions",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "10 rows independently checked with diatonic and chromatic coordinates",
+      "expected": "all output alterations and inverse flags agree"
+    },
+    {
+      "id": "enharmonic_and_octave_boundaries",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "C#4/Db4=61, B#3=60, Cb4=59",
+      "expected": "enharmonic projections retained"
+    },
+    {
+      "id": "spelling_requires_diatonic_coordinate",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "chromatic shift alone underdetermines spelling",
+      "expected": "diatonic coordinate required"
+    },
+    {
+      "id": "six_scale_contexts_42_rows",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "6 tonic/mode contexts × 7 degrees independently recomputed",
+      "expected": "all 42 degree rows agree"
+    },
+    {
+      "id": "mode_triad_difference",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "D major 62/66/69 versus natural minor 62/65/69",
+      "expected": "mode changes third"
+    },
+    {
+      "id": "relative_vs_fixed_syllables",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "relative D do/re/mi versus fixed C4 vocabulary",
+      "expected": "syllable convention must be declared"
+    },
+    {
+      "id": "degree_domain_and_unknowns",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "degrees 0/8 and unspecified syllable remain unresolved",
+      "expected": "no guessed degree/mode/register"
+    },
+    {
+      "id": "source_scope",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "pinned source interpretation only; prior WML005 pin preserved",
+      "expected": "no runtime or cross-revision claim"
+    },
+    {
+      "id": "tool_probe_scope",
+      "pass_": true,
+      "status": "resolved",
+      "observed": "three recorded read-only tool responses, unknown service revision",
+      "expected": "results are not CapoSkill execution"
+    }
+  ],
+  "findings": [],
+  "fix_requests": [],
+  "input_bindings": [
+    {
+      "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/capo-spelling-2026-10-22/primary-readback.json",
+      "sha256": "83bb0e8a0f2614017ab585c1562a4df16186d57d5a295140f05550b166a5dd9d"
+    },
+    {
+      "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/capo-spelling-2026-10-22/theory-tool-probes.json",
+      "sha256": "0712fa6564e851f30f33b57b7fb07f6b97d05918f2bff40313e86ea54ca84d8b"
+    },
+    {
+      "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/capo-spelling-2026-10-22/capo-coordinates.json",
+      "sha256": "794f000d87743564ed4b5dd668e0daed28a32460552f90e909ae9d864fa92950"
+    },
+    {
+      "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/capo-spelling-2026-10-22/spelled-transpositions.json",
+      "sha256": "9bf6df53d552a7a94771791c91ef16c8b3b22208f03f2e77b4cffc598d28c160"
+    },
+    {
+      "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/capo-spelling-2026-10-22/degree-context.json",
+      "sha256": "55215f759ee0060edd6e5771e0eef3b3b11e02458ef3027a6658451fbb6b911e"
+    },
+    {
+      "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/capo-spelling-2026-10-22/source-observations.json",
+      "sha256": "b81027935227d237e818e080d86136aea37bd89076b3ce480f2be701e68f67f9"
+    },
+    {
+      "path": "C:/tmp/learn-streeling-craft-transfer-20261022/code/streeling/evidence/capo-spelling-2026-10-22/primary-reading.json",
+      "sha256": "f7d91cab7599e3091c91d70e9a17fd67f7550a6fd47fcbd6017a062f7c3e93f5"
+    },
+    {
+      "path": "C:/tmp/streeling-capo-spelling-inputs-20261022/MusicXmlTypes.fs",
+      "sha256": "e894f70561db1f4d1bdd378e8ccc0646250793896144f0a7f39a66b18d40cd1a"
+    },
+    {
+      "path": "C:/tmp/streeling-capo-spelling-inputs-20261022/MusicXmlParser.fs",
+      "sha256": "73ab96a59b50831b9930cbb8d37368febd6fc8d124d57ca70a3ff4c289940fee"
+    },
+    {
+      "path": "C:/tmp/streeling-capo-spelling-inputs-20261022/CapoSkill.cs",
+      "sha256": "ea548ed5575a5ea70adfa8db1065bb84c286ac825817e8bfb2f443da96289130"
+    },
+    {
+      "path": "C:/tmp/streeling-capo-spelling-inputs-20261022/PitchParser.cs",
+      "sha256": "0d9e9b3fff2fd0e564ca33462adaaaf897f1a51117039523c04df3931a987d25"
+    },
+    {
+      "path": "C:/tmp/streeling-capo-spelling-inputs-20261022/RelativeFret.cs",
+      "sha256": "ff3bc51cd41fc59d04384348330c909f2c2bb17a64d593205b10f2eeb2faa618"
+    },
+    {
+      "path": "C:/tmp/streeling-capo-spelling-inputs-20261022/FretboardNavigationParser.fs",
+      "sha256": "b8bc69642cff4fb3d759d4068cf70586f26815fe5db5181591198d75768d3f4a"
+    }
+  ],
+  "history": [
+    {
+      "status": "resolved",
+      "note": "Independent arithmetic and source-copy hash audit; no native execution, builds, or producer-script reuse."
+    }
+  ]
+}

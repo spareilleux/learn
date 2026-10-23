@@ -17,3 +17,4 @@ sidebar:
 - [WML-004 · Préserver l’intonation au-delà des classes de hauteur](wml-004-preserve-intonation-beyond-pitch-classes/)
 - [WML-005 · Déclarer la convention de nommage des notes avant d'interpréter B](wml-005-declare-note-name-conventions/)
 - [WML-006 · Préserver l'origine d'un cycle additif](wml-006-preserve-the-origin-of-an-additive-cycle/)
+- [WML-007 · Résoudre les degrés d’une gamme selon la tonique et le mode](wml-007-resolve-scale-degrees-against-tonic-and-mode/)

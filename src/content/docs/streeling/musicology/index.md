@@ -18,3 +18,4 @@ sidebar:
 - [MCL-005 · Preserve Written and Sounding Pitch When Importing a Score](mcl-005-preserve-written-and-sounding-pitch/)
 - [MCL-006 · Preserve Meter Grouping and Tempo Units](mcl-006-preserve-meter-grouping-and-tempo-units/)
 - [MCL-007 · Integrate a MIDI Tempo Map Before Scheduling](mcl-007-integrate-a-midi-tempo-map-before-scheduling/)
+- [MCL-008 · Keep Diatonic and Chromatic Transposition Separate](mcl-008-keep-diatonic-and-chromatic-transposition-separate/)

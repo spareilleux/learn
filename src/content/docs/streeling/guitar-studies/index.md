@@ -18,3 +18,4 @@ sidebar:
 - [GTR-005 · Plan Which String Keeps Ringing](gtr-005-plan-which-string-keeps-ringing/)
 - [GTR-006 · Keep Picking Distance Relative to Frets](gtr-006-keep-picking-distance-relative-to-frets/)
 - [GTR-007 · Carry Picking Phase Across Bar Lines](gtr-007-carry-picking-phase-across-bar-lines/)
+- [GTR-008 · Count a Capo Offset Once](gtr-008-count-a-capo-offset-once/)

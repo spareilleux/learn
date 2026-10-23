@@ -26,12 +26,12 @@ Estos módulos fueron escritos por departamentos de IA y **no han sido revisados
 | [Futurología](futurology/) | 7 | 7 | 7 |
 | [Acústica de la guitarra y síntesis sonora](guitar-acoustics/) | 7 | 7 | 7 |
 | [Guitar Alchemist Academy](guitar-alchemist-academy/) | 7 | 7 | 7 |
-| [Estudios de guitarra](guitar-studies/) | 7 | 7 | 7 |
+| [Estudios de guitarra](guitar-studies/) | 8 | 8 | 8 |
 | [Teoría de la información](information-theory/) | 8 | 8 | 8 |
 | [Investigación sobre IX](ix-research/) | 1 | 1 | 1 |
 | [Matemáticas](mathematics/) | 25 | 25 | 25 |
 | [Música](music/) | 25 | 25 | 25 |
-| [Musicología](musicology/) | 7 | 7 | 7 |
+| [Musicología](musicology/) | 8 | 8 | 8 |
 | [Ciencia de redes](network-science/) | 9 | 9 | 9 |
 | [Filosofía](philosophy/) | 7 | 7 | 7 |
 | [Física](physics/) | 12 | 12 | 12 |
@@ -39,7 +39,7 @@ Estos módulos fueron escritos por departamentos de IA y **no han sido revisados
 | [Psicohistoria](psychohistory/) | 25 | 25 | 25 |
 | [Semiótica](semiotics/) | 8 | 8 | 8 |
 | [Computación visual](visual-computing/) | 10 | 10 | 10 |
-| [Músicas y lenguas del mundo](world-music-languages/) | 6 | 6 | 6 |
+| [Músicas y lenguas del mundo](world-music-languages/) | 7 | 7 | 7 |
 
 ## Procedencia
 

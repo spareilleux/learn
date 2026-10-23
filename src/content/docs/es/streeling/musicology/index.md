@@ -18,3 +18,4 @@ sidebar:
 - [MCL-005 · Conservar la altura escrita y la altura real al importar una partitura](mcl-005-preserve-written-and-sounding-pitch/)
 - [MCL-006 · Conservar la agrupación métrica y las unidades de tempo](mcl-006-preserve-meter-grouping-and-tempo-units/)
 - [MCL-007 · Integrar un mapa de tempo MIDI antes de programar la reproducción](mcl-007-integrate-a-midi-tempo-map-before-scheduling/)
+- [MCL-008 · Distinguir la transposición diatónica de la cromática](mcl-008-keep-diatonic-and-chromatic-transposition-separate/)

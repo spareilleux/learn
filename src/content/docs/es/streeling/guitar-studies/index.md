@@ -18,3 +18,4 @@ sidebar:
 - [GTR-005 · Planificar qué cuerda debe seguir sonando](gtr-005-plan-which-string-keeps-ringing/)
 - [GTR-006 · Referir la distancia de pulsación a los trastes](gtr-006-keep-picking-distance-relative-to-frets/)
 - [GTR-007 · Conservar la fase de púa alternada a través de las barras de compás](gtr-007-carry-picking-phase-across-bar-lines/)
+- [GTR-008 · Contar una sola vez el desplazamiento de la cejilla](gtr-008-count-a-capo-offset-once/)

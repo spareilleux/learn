@@ -1,0 +1,307 @@
+{
+  "scope": "Authored integer-semitone spelled transposition from two independent coordinates; no native parser execution, transformed MusicXML file, rendered score or playback.",
+  "note_number_convention": "C4=60 in twelve-tone equal temperament",
+  "diatonic_index": "j=7*octave+letter_index(C=0,...,B=6)",
+  "transform": "j_new=j+diatonic+7*octave_change; m_new=m+chromatic+12*octave_change; alteration=m_new-natural_number(new_letter,new_octave)",
+  "rows": [
+    {
+      "input_pitch": [
+        "C",
+        0,
+        4
+      ],
+      "input_label": "C4",
+      "input_note_number": 60,
+      "diatonic": 0,
+      "chromatic": 1,
+      "octave_change": 0,
+      "output_pitch": [
+        "C",
+        1,
+        4
+      ],
+      "output_label": "C#4",
+      "output_note_number": 61,
+      "inverse_pitch": [
+        "C",
+        0,
+        4
+      ],
+      "inverse_label": "C4",
+      "round_trip_equal": true
+    },
+    {
+      "input_pitch": [
+        "C",
+        0,
+        4
+      ],
+      "input_label": "C4",
+      "input_note_number": 60,
+      "diatonic": 1,
+      "chromatic": 1,
+      "octave_change": 0,
+      "output_pitch": [
+        "D",
+        -1,
+        4
+      ],
+      "output_label": "Db4",
+      "output_note_number": 61,
+      "inverse_pitch": [
+        "C",
+        0,
+        4
+      ],
+      "inverse_label": "C4",
+      "round_trip_equal": true
+    },
+    {
+      "input_pitch": [
+        "B",
+        0,
+        3
+      ],
+      "input_label": "B3",
+      "input_note_number": 59,
+      "diatonic": 1,
+      "chromatic": 1,
+      "octave_change": 0,
+      "output_pitch": [
+        "C",
+        0,
+        4
+      ],
+      "output_label": "C4",
+      "output_note_number": 60,
+      "inverse_pitch": [
+        "B",
+        0,
+        3
+      ],
+      "inverse_label": "B3",
+      "round_trip_equal": true
+    },
+    {
+      "input_pitch": [
+        "C",
+        0,
+        4
+      ],
+      "input_label": "C4",
+      "input_note_number": 60,
+      "diatonic": -1,
+      "chromatic": -1,
+      "octave_change": 0,
+      "output_pitch": [
+        "B",
+        0,
+        3
+      ],
+      "output_label": "B3",
+      "output_note_number": 59,
+      "inverse_pitch": [
+        "C",
+        0,
+        4
+      ],
+      "inverse_label": "C4",
+      "round_trip_equal": true
+    },
+    {
+      "input_pitch": [
+        "C",
+        0,
+        4
+      ],
+      "input_label": "C4",
+      "input_note_number": 60,
+      "diatonic": -1,
+      "chromatic": -2,
+      "octave_change": 0,
+      "output_pitch": [
+        "B",
+        -1,
+        3
+      ],
+      "output_label": "Bb3",
+      "output_note_number": 58,
+      "inverse_pitch": [
+        "C",
+        0,
+        4
+      ],
+      "inverse_label": "C4",
+      "round_trip_equal": true
+    },
+    {
+      "input_pitch": [
+        "C",
+        1,
+        4
+      ],
+      "input_label": "C#4",
+      "input_note_number": 61,
+      "diatonic": 1,
+      "chromatic": 2,
+      "octave_change": 0,
+      "output_pitch": [
+        "D",
+        1,
+        4
+      ],
+      "output_label": "D#4",
+      "output_note_number": 63,
+      "inverse_pitch": [
+        "C",
+        1,
+        4
+      ],
+      "inverse_label": "C#4",
+      "round_trip_equal": true
+    },
+    {
+      "input_pitch": [
+        "D",
+        -1,
+        4
+      ],
+      "input_label": "Db4",
+      "input_note_number": 61,
+      "diatonic": 1,
+      "chromatic": 2,
+      "octave_change": 0,
+      "output_pitch": [
+        "E",
+        -1,
+        4
+      ],
+      "output_label": "Eb4",
+      "output_note_number": 63,
+      "inverse_pitch": [
+        "D",
+        -1,
+        4
+      ],
+      "inverse_label": "Db4",
+      "round_trip_equal": true
+    },
+    {
+      "input_pitch": [
+        "F",
+        0,
+        4
+      ],
+      "input_label": "F4",
+      "input_note_number": 65,
+      "diatonic": 0,
+      "chromatic": 1,
+      "octave_change": 0,
+      "output_pitch": [
+        "F",
+        1,
+        4
+      ],
+      "output_label": "F#4",
+      "output_note_number": 66,
+      "inverse_pitch": [
+        "F",
+        0,
+        4
+      ],
+      "inverse_label": "F4",
+      "round_trip_equal": true
+    },
+    {
+      "input_pitch": [
+        "F",
+        0,
+        4
+      ],
+      "input_label": "F4",
+      "input_note_number": 65,
+      "diatonic": 1,
+      "chromatic": 1,
+      "octave_change": 0,
+      "output_pitch": [
+        "G",
+        -1,
+        4
+      ],
+      "output_label": "Gb4",
+      "output_note_number": 66,
+      "inverse_pitch": [
+        "F",
+        0,
+        4
+      ],
+      "inverse_label": "F4",
+      "round_trip_equal": true
+    },
+    {
+      "input_pitch": [
+        "C",
+        0,
+        4
+      ],
+      "input_label": "C4",
+      "input_note_number": 60,
+      "diatonic": 0,
+      "chromatic": 0,
+      "octave_change": -1,
+      "output_pitch": [
+        "C",
+        0,
+        3
+      ],
+      "output_label": "C3",
+      "output_note_number": 48,
+      "inverse_pitch": [
+        "C",
+        0,
+        4
+      ],
+      "inverse_label": "C4",
+      "round_trip_equal": true
+    }
+  ],
+  "enharmonic_note_projection": [
+    {
+      "first": "C#4",
+      "second": "Db4",
+      "note_number": 61
+    },
+    {
+      "first": "D#4",
+      "second": "Eb4",
+      "note_number": 63
+    },
+    {
+      "first": "F#4",
+      "second": "Gb4",
+      "note_number": 66
+    }
+  ],
+  "boundary_spellings": [
+    {
+      "pitch": [
+        "B",
+        1,
+        3
+      ],
+      "label": "B#3",
+      "note_number": 60
+    },
+    {
+      "pitch": [
+        "C",
+        -1,
+        4
+      ],
+      "label": "Cb4",
+      "note_number": 59
+    }
+  ],
+  "without_diatonic_spelling_underdetermined": true,
+  "new_transposition_adapter": null
+}

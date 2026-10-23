@@ -1,0 +1,213 @@
+{
+  "checked_at_utc": "2026-10-23T02:57:44.978170+00:00",
+  "base_learn_commit": "1fbf5db78c3fe5298cddb5a53512881d967bed20",
+  "source_ga_commit": "76efbffd5af82b46c3146957a6bd4504008eeb89",
+  "scope": "Three authored guitar/notation/degree courses with exact arithmetic, immutable source/type reading and three actual read-only theory-tool responses, plus a surgical GTR001 enharmonic-passage correction. No new native skill/parser execution, capo adapter, import, notation rendering, playback, instrument or learner trial.",
+  "new_english_modules": 3,
+  "new_locale_sources": 6,
+  "canonical_sources": 12,
+  "amended_locale_sources": 3,
+  "amended_scope": "GTR001 enharmonic passage only; not a full old-course review.",
+  "localized_exercise_answer_pairs": 45,
+  "calculation_checks": {
+    "independent_grouped_checks": 21,
+    "passed": 21,
+    "failed": 0,
+    "immutable_public_project_files": 6,
+    "full_capo_cases": 8,
+    "partial_capo_control": true,
+    "invalid_is_not_mute_control": true,
+    "spelled_transpositions": 10,
+    "inverse_round_trips": 10,
+    "tonic_scale_contexts": 6,
+    "degree_rows": 42,
+    "actual_read_only_theory_probes": 3,
+    "theory_service_revision": null,
+    "new_native_skill_or_parser_run": null,
+    "new_capo_adapter": null,
+    "physical_playing_trial": null,
+    "actual_learner": null
+  },
+  "script_tests": {
+    "action": "tests",
+    "args": [
+      "node",
+      "--test",
+      "scripts/tests/lazy-demo.test.mjs",
+      "scripts/tests/streeling-copy-source.test.mjs",
+      "scripts/tests/sync-streeling.test.mjs"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 2.5418834000010975,
+    "log": "C:\\tmp\\streeling-capo-spelling-tests-20261022.log",
+    "log_sha256": "bf7cb8000857d01e74e6f089d632a49f3a6f88af3de3e411b0ce06dfaa867946",
+    "passed": 18,
+    "failed": 0
+  },
+  "sync": {
+    "action": "sync",
+    "args": [
+      "npm.cmd",
+      "run",
+      "sync:streeling"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 2.61791689999518,
+    "log": "C:\\tmp\\streeling-capo-spelling-sync-20261022.log",
+    "log_sha256": "c9bdaa44a684ed47ee73451f4d4a96e7fb71ae302ee82314b8a167c1a542df17",
+    "idempotent_checked_files": 761
+  },
+  "static_build": {
+    "action": "build",
+    "args": [
+      "npm.cmd",
+      "run",
+      "build"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 120.35057039998355,
+    "log": "C:\\tmp\\streeling-capo-spelling-build-20261022.log",
+    "log_sha256": "829b888813c73e845ad0e404da4a7bbb815abc03dcdc6896e2ddf9e7d0bb4b35",
+    "pages": 1957,
+    "dependency_install": "Existing node_modules junction; no install.",
+    "warnings": "Existing highlighting fallback and empty i18n/404 warnings retained in complete log."
+  },
+  "rendered_articles": {
+    "pages": 24,
+    "links": 435,
+    "unresolved_internal_links": [],
+    "correct_new_source_banners": 9,
+    "correct_amended_source_banners": 3,
+    "missing_page_and_anchor_controls_detected": true,
+    "scope": "Built HTML, not browser or public deployment."
+  },
+  "review": {
+    "data_verdict": "pass",
+    "data_receipt_sha256": "58c38af3e6e7efaca5a56b152dc36c5589eae96b2234521e989daf1ecc777cf5",
+    "content_verdict": "pass",
+    "content_receipt_sha256": "0657ab4c1e3bd6ad8afa21e88d3e35be4b574e992aae69a5590e3c379bf29263",
+    "exercise_pairs_checked": 45,
+    "learner_criteria_checked": 15,
+    "amended_passages_checked": 3,
+    "open_course_findings": [],
+    "content_observations": [
+      {
+        "id": "coordinate-and-status-boundary",
+        "status": "observed-preserved",
+        "finding": "Full-capo origin equivalence applies to sounding strings in the stipulated12TET model. Muted-1 and invalid physical positions behind the capo remain different statuses. The partial-capo counterexample requires per-string offsets, and modulo pitch classes discard register."
+      },
+      {
+        "id": "two-coordinate-spelling",
+        "status": "observed-preserved",
+        "finding": "Diatonic letter steps and chromatic semitones each receive their separate octave contribution. Equal note numbers can preserve distinct spellings; B#3 and Cb4 demonstrate written-octave boundaries. Integer storage is not an accidental-range validation or implemented transposition."
+      },
+      {
+        "id": "declared-degree-context",
+        "status": "observed-preserved",
+        "finding": "Degree tables, tonic register, exact major/natural-minor form and syllable vocabulary are declared. A fifths count or nationality cannot supply missing context. The chosen degree1..7 domain imposes no universal prohibition on degree8."
+      },
+      {
+        "id": "revision-and-tool-provenance",
+        "status": "observed-preserved",
+        "finding": "Six actual GA copies at76ef were hash-verified; anchored PitchParser behavior at this pin does not rewrite WML005 atdc2e. The three retained chord-tool responses have unknown service revision and are not CapoSkill, physical fret mapping or native parser execution. Selected-file absence statements remain bounded."
+      },
+      {
+        "id": "primary-reading-and-chronology",
+        "status": "observed-preserved",
+        "finding": "Actual MusicXML bodies and the legacy author-published scale-degree body were read. Unused failed Pressbooks/LilyPond attempts supply no reading. The production plan followed initial reading/hand-worked examples and is not a physical or learner preregistration."
+      },
+      {
+        "id": "prerequisite-reading-limit",
+        "status": "resolved",
+        "finding": "The legacy GTR001 no-B#/no-E# shorthand was corrected surgically in English/French/Spanish. The new passages distinguish one-semitone natural-note spacing from valid enharmonic spellings and explicitly limit C/F equivalence to12TET. Only these three amended passages were reviewed; other old exercises and broad claims were not re-reviewed or ratified."
+      },
+      {
+        "id": "gaa006-progression-link",
+        "status": "resolved",
+        "finding": "GAA006 already teaches capo direction, quality, modulo/register and already-applied offsets. Root added it as a GTR008 prerequisite and linked a progression sentence explicitly extending the earlier lesson to per-string origins, invalid positions and partial coverage. Final English/French/Spanish metadata and paragraphs directly rechecked; exercises remain unchanged."
+      }
+    ],
+    "content_fix_history": [
+      {
+        "id": "gaa006-progression-link",
+        "origin": "independent novelty/prerequisite review",
+        "status": "resolved",
+        "finding": "GAA006 already teaches capo direction, quality, modulo/register and already-applied offsets. Root added it as a GTR008 prerequisite and linked a progression sentence explicitly extending the earlier lesson to per-string origins, invalid positions and partial coverage. Final English/French/Spanish metadata and paragraphs directly rechecked; exercises remain unchanged."
+      },
+      {
+        "id": "legacy-enharmonic-passage",
+        "origin": "independent prerequisite review followed by authorized root correction",
+        "status": "resolved",
+        "finding": "The legacy GTR001 no-B#/no-E# shorthand was corrected surgically in English/French/Spanish. The new passages distinguish one-semitone natural-note spacing from valid enharmonic spellings and explicitly limit C/F equivalence to12TET. Only these three amended passages were reviewed; other old exercises and broad claims were not re-reviewed or ratified.",
+        "prior_receipt_sha256": "54b098f502b5ae0301e68691b5a77d7ac213d5b5cbbedeb95aa4d56ff933566c",
+        "amended_source_bindings": [
+          {
+            "path": "streeling/courses/guitar-studies/en/gtr-001-the-fretboard-map.md",
+            "sha256": "7e347ca0726145ac950994b1f25f58bc3b9972361a4be11bc0658f3d3f3c572c"
+          },
+          {
+            "path": "streeling/courses/guitar-studies/fr/gtr-001-the-fretboard-map.fr.md",
+            "sha256": "3aad326d306dd56b6cf0f6ad088a8919c05774f9b7bac66f1433ae8a365fa207"
+          },
+          {
+            "path": "streeling/courses/guitar-studies/es/gtr-001-the-fretboard-map.es.md",
+            "sha256": "07132f1300af6fe162edc154a605ea2ed6c38cfec21dc744ff81444b609bdf9c"
+          }
+        ],
+        "verification": "Each exact reverse-passage replacement independently reconstructs its recorded baseline SHA256 and unchanged frontmatter. All9new sources and45exercise-answer/15criterion decisions are unchanged."
+      },
+      {
+        "id": "final-generated-manifest-binding",
+        "status": "resolved",
+        "finding": "Root resumed and supplied final bindings, locale checks, source inventory and amended-passage checks, with updated README and production plan. All were directly read and bound. Previous absent-manifest scope is superseded; root build/render/publication outputs remain excluded as separate gates.",
+        "refreshed_existing_bindings": [
+          {
+            "path": "code/streeling/evidence/capo-spelling-2026-10-22/production-plan.md",
+            "old_sha256": "6cdc45fb6d9253a857e502e9e5a8486314cb69649dce9e41c3b65f8469ad1691",
+            "new_sha256": "701142b80c6d862c668e854b975f2bc3e1b5f1a26ef1dc923849a4fa742d66c6"
+          },
+          {
+            "path": "code/streeling/evidence/capo-spelling-2026-10-22/README.md",
+            "old_sha256": "a9c0db17b2cac3db49a653e0f9507e3cbc4c8a91353db5342f55cf3fc32c0937",
+            "new_sha256": "3dd84c76615a08f203b374550c1427346b9f29c14ac44212e0c0e0af66732ffd"
+          },
+          {
+            "path": "streeling/courses/guitar-studies/en/gtr-001-the-fretboard-map.md",
+            "old_sha256": "ab28c76d3aaafdd716c80913ccab851bf1c666ae3cc59302b15883cee45dd633",
+            "new_sha256": "7e347ca0726145ac950994b1f25f58bc3b9972361a4be11bc0658f3d3f3c572c"
+          }
+        ]
+      }
+    ],
+    "scope": "Independent AI source/model/math/content checks; not human approval.",
+    "human_technical": null,
+    "musician": null,
+    "fluent_language": null,
+    "learner": null,
+    "new_native_run": null,
+    "capo_adapter": null,
+    "score_import": null,
+    "playing_trial": null
+  },
+  "code_review_pipeline": "Documentation/fixed-data-only deliverable with temporary verification wrappers; no new production/lab program emitted and no code-shipping review invoked.",
+  "manual_host_scan": "Low-to-high authored fret arrays differ from MusicXML highest-string numbering. Full-capo offset belongs either in open tuning or physical fret, once. Muted sentinel and invalid negative relative distance remain separate statuses. Partial coverage and capo12 register defeat uniform root/PC-only claims. Actual three tool roots have unknown service revision and are not inspected CapoSkill execution or a physical adapter. Two-coordinate spelling preserves diatonic letters and absolute semitones across octave boundaries; a numeric projection loses enharmonic provenance. Selected parser retains spelling/key fields but no transpose/capo context, while a type comment is not range validation. Degree resolution needs tonic/register/exact scale form and declared vocabulary; minor is not automatically one form and fifths alone does not choose a tonic. Stipulated syllable controls are not nationality claims or universal notation. Current76ef anchored pitch parser does not reinterpret an earlier course at another pin. Simple typed records/arithmetic remain baselines before new DSLs. Production plan follows reading and hand examples, not physical preregistration.",
+  "source_inventory": {
+    "core_english_modules": 228,
+    "target": 525,
+    "original_departments": 21,
+    "remaining_core_source_gaps": 297,
+    "locale_counts": {
+      "en": 229,
+      "fr": 229,
+      "es": 229
+    }
+  },
+  "public_course_html_readback": null,
+  "protected_files_unchanged": [
+    "streeling/source.json",
+    "src/content/docs/streeling/journal.md",
+    "src/content/docs/fr/streeling/journal.md",
+    "src/content/docs/es/streeling/journal.md"
+  ],
+  "lint_typecheck": "No package.json lint/typecheck scripts configured; existing generator tests and Astro build used."
+}

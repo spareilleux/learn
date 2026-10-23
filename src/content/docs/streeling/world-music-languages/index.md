@@ -17,3 +17,4 @@ sidebar:
 - [WML-004 · Preserve Intonation Beyond Pitch Classes](wml-004-preserve-intonation-beyond-pitch-classes/)
 - [WML-005 · Declare the Note-Name Convention Before Interpreting B](wml-005-declare-note-name-conventions/)
 - [WML-006 · Preserve the Origin of an Additive Cycle](wml-006-preserve-the-origin-of-an-additive-cycle/)
+- [WML-007 · Resolve Scale Degrees Against Tonic and Mode](wml-007-resolve-scale-degrees-against-tonic-and-mode/)

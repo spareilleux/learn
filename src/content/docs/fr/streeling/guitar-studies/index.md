@@ -18,3 +18,4 @@ sidebar:
 - [GTR-005 · Prévoir quelle corde doit continuer à sonner](gtr-005-plan-which-string-keeps-ringing/)
 - [GTR-006 · Rapporter la distance de pincement aux frettes](gtr-006-keep-picking-distance-relative-to-frets/)
 - [GTR-007 · Conserver la phase d'aller-retour au-delà des barres de mesure](gtr-007-carry-picking-phase-across-bar-lines/)
+- [GTR-008 · Compter une seule fois le décalage du capodastre](gtr-008-count-a-capo-offset-once/)
