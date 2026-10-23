@@ -17,3 +17,4 @@ sidebar:
 - [FUT-004 · Evaluar un renderizador del Observatorio mediante escenarios](fut-004-scenario-test-an-observatory-renderer/)
 - [FUT-005 · Valorar una prueba piloto de renderizador antes de ejecutarla](fut-005-value-a-renderer-pilot-before-running-it/)
 - [FUT-006 · Probar una promesa de automatización creativa sin estiramiento](fut-006-test-a-no-stretch-craft-automation-claim/)
+- [FUT-007 · Probar un generador de tejido fuera de su vista previa](fut-007-test-a-weave-generator-outside-its-preview/)

@@ -1,0 +1,55 @@
+{
+  "scope": "Bounded immutable source/test/ADR interpretation, not full current ecosystem capability or fresh runtime evidence.",
+  "IX": {
+    "commit": "d7c22fdd6a62becb66b9d7246ea85850e7c55854",
+    "thickness": "Parallel rigid-panel stack reading and ply, not material response",
+    "layer_engine": "Checks supplied faceOrders; does not compute an order",
+    "turn_over": "Folded y reflected; raw faceOrders retained because orientations and up both flip",
+    "move_folded": "Rigid in-plane rotation then shift; does not define a stiffness tensor",
+    "test_weave": "Four-strip cycle passes supplied layer rules; positive-thickness parallel rigid stack refused in source tests",
+    "new_tests_run": false,
+    "calibrated_material_response_in_selected_model": false
+  },
+  "Demerzel": {
+    "commit": "f23ccae6c049d9066a1be2221c68f3b0bcf48373",
+    "supported_variants": [
+      "global-parity",
+      "restarted-tile-parity"
+    ],
+    "spec_preview": [
+      6,
+      6
+    ],
+    "evaluator_guards": [
+      "minimum grid size",
+      "diameter below spacing",
+      "supported variant name"
+    ],
+    "evaluator_reports": [
+      "crossing count",
+      "unique ID count",
+      "adjacent alternation violations"
+    ],
+    "nonzero_violations_raise_in_evaluator": false,
+    "authored_memorizer_is_supported_variant": false,
+    "learned_model": false
+  },
+  "Learn": {
+    "commit": "eebf49cb0b69a314bd13015340335a983aa64bfe",
+    "scene": "Isolated box meshes and static bodies, not connected yarn or constitutive simulation",
+    "warps_axis": "world Z",
+    "wefts_axis": "world X",
+    "up_axis": "world Y",
+    "material_source": "StandardMaterial3D albedo colours",
+    "hardcoded_crossing_count": 36,
+    "new_Godot_run": false
+  },
+  "FOLD": {
+    "commit": "824f9fa6f944248787b0b2077ef622761489201e",
+    "version": "1.2 rough draft",
+    "reference_normal": "second face g",
+    "swap_sign": "negative s for same normals; same s for opposite normals",
+    "zero": "unknown"
+  },
+  "new_DSL_or_mechanics_adapter": null
+}

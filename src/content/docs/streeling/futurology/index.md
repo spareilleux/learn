@@ -17,3 +17,4 @@ sidebar:
 - [FUT-004 · Scenario-Test an Observatory Renderer](fut-004-scenario-test-an-observatory-renderer/)
 - [FUT-005 · Value a Renderer Pilot before Running It](fut-005-value-a-renderer-pilot-before-running-it/)
 - [FUT-006 · Test a No-Stretch Craft Automation Claim](fut-006-test-a-no-stretch-craft-automation-claim/)
+- [FUT-007 · Test a Weave Generator Outside Its Preview](fut-007-test-a-weave-generator-outside-its-preview/)

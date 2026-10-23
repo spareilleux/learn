@@ -18,3 +18,4 @@ sidebar:
 - [SEM-005 · Bind Scene Hits to Crossing Identity](sem-005-bind-scene-hits-to-crossing-identity/)
 - [SEM-006 · Preserve Orientation Across Scene Frames](sem-006-preserve-orientation-across-scene-frames/)
 - [SEM-007 · Preserve the Meaning of a Bend Angle](sem-007-preserve-the-meaning-of-a-bend-angle/)
+- [SEM-008 · Interpret Layer Order Relative to the Reference Normal](sem-008-interpret-layer-order-relative-to-the-reference-normal/)

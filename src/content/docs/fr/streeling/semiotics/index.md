@@ -18,3 +18,4 @@ sidebar:
 - [SEM-005 · Relier les résultats de collision à l’identité des croisements](sem-005-bind-scene-hits-to-crossing-identity/)
 - [SEM-006 · Préserver l'orientation entre les repères d'une scène](sem-006-preserve-orientation-across-scene-frames/)
 - [SEM-007 · Préserver le sens d'un angle de pliage](sem-007-preserve-the-meaning-of-a-bend-angle/)
+- [SEM-008 · Interpréter l'ordre des couches par rapport à la normale de référence](sem-008-interpret-layer-order-relative-to-the-reference-normal/)

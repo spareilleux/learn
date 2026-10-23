@@ -22,3 +22,4 @@ sidebar:
 - [PHY-009 · Distinguir el color lineal de la codificación de visualización](phy-009-distinguish-linear-color-from-display-encoding/)
 - [PHY-010 · Comprobar los ángulos locales de un plegado plano](phy-010-check-local-flat-fold-angles/)
 - [PHY-011 · Calcular la longitud de doblado en una capa neutra declarada](phy-011-compute-bend-length-on-a-declared-neutral-layer/)
+- [PHY-012 · Rotar la rigidez direccional con el material](phy-012-rotate-directional-stiffness-with-the-material/)

@@ -22,3 +22,4 @@ sidebar:
 - [PHY-009 · Distinguish Linear Color from Display Encoding](phy-009-distinguish-linear-color-from-display-encoding/)
 - [PHY-010 · Check Local Flat-Fold Angles](phy-010-check-local-flat-fold-angles/)
 - [PHY-011 · Compute Bend Length on a Declared Neutral Layer](phy-011-compute-bend-length-on-a-declared-neutral-layer/)
+- [PHY-012 · Rotate Directional Stiffness with the Material](phy-012-rotate-directional-stiffness-with-the-material/)
