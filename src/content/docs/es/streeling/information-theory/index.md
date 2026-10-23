@@ -19,3 +19,4 @@ sidebar:
 - [INF-006 · Comprender qué olvidan los límites de una escena](inf-006-know-what-scene-bounds-forget/)
 - [INF-007 · Contar candidatos de pliegues sin inventar probabilidades](inf-007-count-crease-candidates-without-inventing-probabilities/)
 - [INF-008 · Conservar la fase cuando importa la identidad de las formas de onda](inf-008-keep-phase-when-waveform-identity-matters/)
+- [INF-009 · Conservar el nivel al normalizar la forma de onda](inf-009-keep-level-when-normalizing-waveform-shape/)

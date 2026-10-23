@@ -18,3 +18,4 @@ sidebar:
 - [GAS-005 · Distinguer le pic d’un partiel d’une période](gas-005-separate-a-partial-peak-from-a-period/)
 - [GAS-006 · Relier la position de pincement aux modes de la corde](gas-006-relate-pluck-position-to-string-modes/)
 - [GAS-007 · Distinguer les pôles de caisse des partiels de corde](gas-007-distinguish-body-poles-from-string-partials/)
+- [GAS-008 · Distinguer les battements d’un changement d’amortissement](gas-008-separate-beating-from-a-change-in-damping/)

@@ -19,3 +19,4 @@ sidebar:
 - [AUD-006 · Étalonner une amplitude spectrale avant de comparer des rendus](aud-006-calibrate-spectral-amplitudes/)
 - [AUD-007 · Traduire les coefficients d'attaque en durées](aud-007-translate-attack-coefficients-into-time/)
 - [AUD-008 · Mesurer un filtre avec une entrée et une sortie appariées](aud-008-measure-a-filter-with-paired-input-and-output/)
+- [AUD-009 · Déclarer l’alignement avant un test d’annulation](aud-009-declare-alignment-before-a-null-test/)

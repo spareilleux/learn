@@ -19,3 +19,4 @@ sidebar:
 - [AUD-006 · Calibrate a Spectral Amplitude Before Comparing Renders](aud-006-calibrate-spectral-amplitudes/)
 - [AUD-007 · Translate Attack Coefficients into Time](aud-007-translate-attack-coefficients-into-time/)
 - [AUD-008 · Measure a Filter with Paired Input and Output](aud-008-measure-a-filter-with-paired-input-and-output/)
+- [AUD-009 · Declare Alignment Before a Null Test](aud-009-declare-alignment-before-a-null-test/)

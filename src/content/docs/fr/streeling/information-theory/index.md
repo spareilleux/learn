@@ -19,3 +19,4 @@ sidebar:
 - [INF-006 · Comprendre ce que les bornes d'une scène oublient](inf-006-know-what-scene-bounds-forget/)
 - [INF-007 · Compter les affectations candidates des plis sans inventer de probabilités](inf-007-count-crease-candidates-without-inventing-probabilities/)
 - [INF-008 · Conserver la phase lorsque l'identité des formes d'onde compte](inf-008-keep-phase-when-waveform-identity-matters/)
+- [INF-009 · Conserver le niveau lors de la normalisation de la forme d’onde](inf-009-keep-level-when-normalizing-waveform-shape/)

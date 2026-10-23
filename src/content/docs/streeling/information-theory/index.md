@@ -19,3 +19,4 @@ sidebar:
 - [INF-006 · Know What Scene Bounds Forget](inf-006-know-what-scene-bounds-forget/)
 - [INF-007 · Count Crease Candidates without Inventing Probabilities](inf-007-count-crease-candidates-without-inventing-probabilities/)
 - [INF-008 · Keep Phase When Waveform Identity Matters](inf-008-keep-phase-when-waveform-identity-matters/)
+- [INF-009 · Keep Level When Normalizing Waveform Shape](inf-009-keep-level-when-normalizing-waveform-shape/)

@@ -18,3 +18,4 @@ sidebar:
 - [GAS-005 · Separate a Partial Peak from a Period](gas-005-separate-a-partial-peak-from-a-period/)
 - [GAS-006 · Relate Pluck Position to String Modes](gas-006-relate-pluck-position-to-string-modes/)
 - [GAS-007 · Distinguish Body Poles from String Partials](gas-007-distinguish-body-poles-from-string-partials/)
+- [GAS-008 · Separate Beating from a Change in Damping](gas-008-separate-beating-from-a-change-in-damping/)

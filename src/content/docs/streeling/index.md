@@ -18,16 +18,16 @@ These modules were written by AI departments and have **not been reviewed**. Unl
 
 | Department | Modules | French | Spanish |
 |---|---|---|---|
-| [Audio Engineering](audio-engineering/) | 8 | 8 | 8 |
+| [Audio Engineering](audio-engineering/) | 9 | 9 | 9 |
 | [Cognitive Science](cognitive-science/) | 8 | 8 | 8 |
 | [Computer Science](computer-science/) | 14 | 14 | 14 |
 | [Cybernetics](cybernetics/) | 8 | 8 | 8 |
 | [Data Visualization](data-visualization/) | 10 | 10 | 10 |
 | [Futurology](futurology/) | 7 | 7 | 7 |
-| [Guitar Acoustics & Sound Synthesis](guitar-acoustics/) | 7 | 7 | 7 |
+| [Guitar Acoustics & Sound Synthesis](guitar-acoustics/) | 8 | 8 | 8 |
 | [Guitar Alchemist Academy](guitar-alchemist-academy/) | 7 | 7 | 7 |
 | [Guitar Studies](guitar-studies/) | 8 | 8 | 8 |
-| [Information Theory](information-theory/) | 8 | 8 | 8 |
+| [Information Theory](information-theory/) | 9 | 9 | 9 |
 | [IX Research](ix-research/) | 1 | 1 | 1 |
 | [Mathematics](mathematics/) | 25 | 25 | 25 |
 | [Music](music/) | 25 | 25 | 25 |
