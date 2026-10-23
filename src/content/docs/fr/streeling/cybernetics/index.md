@@ -18,3 +18,4 @@ sidebar:
 - [CYB-005 · Éviter les oscillations d’une politique de rendu](cyb-005-stop-render-policy-flapping/)
 - [CYB-006 · Borner la rétroaction des nouvelles tentatives avant d'ajouter des workers](cyb-006-bound-retry-feedback-and-workload/)
 - [CYB-007 · Mettre à jour les croyances sans compter un essai deux fois](cyb-007-update-beliefs-without-counting-a-trial-twice/)
+- [CYB-008 · Vérifier la convergence avant de répéter une correction](cyb-008-check-convergence-before-repeating-a-correction/)

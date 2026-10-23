@@ -19,9 +19,9 @@ These modules were written by AI departments and have **not been reviewed**. Unl
 | Department | Modules | French | Spanish |
 |---|---|---|---|
 | [Audio Engineering](audio-engineering/) | 8 | 8 | 8 |
-| [Cognitive Science](cognitive-science/) | 7 | 7 | 7 |
+| [Cognitive Science](cognitive-science/) | 8 | 8 | 8 |
 | [Computer Science](computer-science/) | 14 | 14 | 14 |
-| [Cybernetics](cybernetics/) | 7 | 7 | 7 |
+| [Cybernetics](cybernetics/) | 8 | 8 | 8 |
 | [Data Visualization](data-visualization/) | 10 | 10 | 10 |
 | [Futurology](futurology/) | 7 | 7 | 7 |
 | [Guitar Acoustics & Sound Synthesis](guitar-acoustics/) | 7 | 7 | 7 |
@@ -32,7 +32,7 @@ These modules were written by AI departments and have **not been reviewed**. Unl
 | [Mathematics](mathematics/) | 25 | 25 | 25 |
 | [Music](music/) | 25 | 25 | 25 |
 | [Musicology](musicology/) | 7 | 7 | 7 |
-| [Network Science](network-science/) | 8 | 8 | 8 |
+| [Network Science](network-science/) | 9 | 9 | 9 |
 | [Philosophy](philosophy/) | 7 | 7 | 7 |
 | [Physics](physics/) | 12 | 12 | 12 |
 | [Product and Project Management](product-management/) | 7 | 7 | 7 |

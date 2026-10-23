@@ -1,0 +1,255 @@
+{
+  "scope": "Authored abstract panel-order graphs informed by pinned IX code, not new FOLD geometry, native checker output, measured panels or manufacture.",
+  "edge_convention": "lower panel -> upper panel",
+  "cycle": {
+    "nodes": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "edges": [
+      [
+        "A",
+        "B"
+      ],
+      [
+        "B",
+        "C"
+      ],
+      [
+        "C",
+        "D"
+      ],
+      [
+        "D",
+        "A"
+      ]
+    ],
+    "analysis": {
+      "acyclic": false,
+      "topological_order": null,
+      "levels": null,
+      "chain_levels": null
+    },
+    "separation": "z_upper >= z_lower+t",
+    "summed_separation": "0 >= 4*t",
+    "thickness_cases": [
+      {
+        "t": 0,
+        "contradiction": false,
+        "raw_graph_acyclic": false,
+        "source_rigid_refused": false,
+        "source_rigid_levels": null,
+        "source_rigid_height": null,
+        "source_ply": 2,
+        "source_ply_height": 0
+      },
+      {
+        "t": 0.5,
+        "contradiction": true,
+        "raw_graph_acyclic": false,
+        "source_rigid_refused": true,
+        "source_rigid_levels": null,
+        "source_rigid_height": null,
+        "source_ply": 2,
+        "source_ply_height": 1
+      }
+    ]
+  },
+  "broken_cycle": {
+    "nodes": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "edges": [
+      [
+        "A",
+        "B"
+      ],
+      [
+        "B",
+        "C"
+      ],
+      [
+        "C",
+        "D"
+      ]
+    ],
+    "analysis": {
+      "acyclic": true,
+      "topological_order": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "levels": {
+        "A": 0,
+        "B": 1,
+        "C": 2,
+        "D": 3
+      },
+      "chain_levels": 4
+    },
+    "t": 0.5,
+    "level_offsets": [
+      0,
+      0.5,
+      1,
+      1.5
+    ],
+    "full_layer_envelope_extent": 2,
+    "highest_offset": 1.5
+  },
+  "panel_merge": {
+    "faces": [
+      0,
+      1,
+      2
+    ],
+    "flat_joint": [
+      0,
+      1
+    ],
+    "face_to_panel": [
+      0,
+      0,
+      2
+    ],
+    "face_edges": [
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        0
+      ]
+    ],
+    "face_graph": {
+      "acyclic": true,
+      "topological_order": [
+        1,
+        2,
+        0
+      ],
+      "levels": {
+        "0": 2,
+        "1": 0,
+        "2": 1
+      },
+      "chain_levels": 3
+    },
+    "panel_edges": [
+      [
+        0,
+        2
+      ],
+      [
+        2,
+        0
+      ]
+    ],
+    "panel_graph": {
+      "acyclic": false,
+      "topological_order": null,
+      "levels": null,
+      "chain_levels": null
+    }
+  },
+  "unknown": {
+    "nodes": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "known_edges": [
+      [
+        "A",
+        "B"
+      ],
+      [
+        "C",
+        "D"
+      ]
+    ],
+    "undetermined_overlap": [
+      "B",
+      "C"
+    ],
+    "known_analysis": {
+      "acyclic": true,
+      "topological_order": [
+        "A",
+        "C",
+        "B",
+        "D"
+      ],
+      "levels": {
+        "A": 0,
+        "B": 1,
+        "C": 0,
+        "D": 1
+      },
+      "chain_levels": 2
+    },
+    "stipulated_ply": 2,
+    "t": 0.5,
+    "source_like_lower_bound_levels": 2,
+    "source_like_height_lower_bound": 1,
+    "levels_exact": false,
+    "face_levels": null,
+    "completions": [
+      {
+        "added_edge": [
+          "B",
+          "C"
+        ],
+        "analysis": {
+          "acyclic": true,
+          "topological_order": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "levels": {
+            "A": 0,
+            "B": 1,
+            "C": 2,
+            "D": 3
+          },
+          "chain_levels": 4
+        }
+      },
+      {
+        "added_edge": [
+          "C",
+          "B"
+        ],
+        "analysis": {
+          "acyclic": true,
+          "topological_order": [
+            "A",
+            "C",
+            "D",
+            "B"
+          ],
+          "levels": {
+            "A": 0,
+            "B": 1,
+            "C": 0,
+            "D": 1
+          },
+          "chain_levels": 2
+        }
+      }
+    ]
+  },
+  "native_run": null,
+  "physical_manufacture": null
+}

@@ -18,3 +18,4 @@ sidebar:
 - [CYB-005 · Stop a Render Policy from Flapping](cyb-005-stop-render-policy-flapping/)
 - [CYB-006 · Bound Retry Feedback Before Adding Workers](cyb-006-bound-retry-feedback-and-workload/)
 - [CYB-007 · Update Beliefs without Counting a Trial Twice](cyb-007-update-beliefs-without-counting-a-trial-twice/)
+- [CYB-008 · Check Convergence Before Repeating a Correction](cyb-008-check-convergence-before-repeating-a-correction/)

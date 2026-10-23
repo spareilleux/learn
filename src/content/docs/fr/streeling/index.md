@@ -19,9 +19,9 @@ Ces modules ont été écrits par des départements IA et **n'ont pas été relu
 | Département | Modules | En français | En espagnol |
 |---|---|---|---|
 | [Ingénierie audio](audio-engineering/) | 8 | 8 | 8 |
-| [Sciences cognitives](cognitive-science/) | 7 | 7 | 7 |
+| [Sciences cognitives](cognitive-science/) | 8 | 8 | 8 |
 | [Informatique](computer-science/) | 14 | 14 | 14 |
-| [Cybernétique](cybernetics/) | 7 | 7 | 7 |
+| [Cybernétique](cybernetics/) | 8 | 8 | 8 |
 | [Visualisation de données](data-visualization/) | 10 | 10 | 10 |
 | [Futurologie](futurology/) | 7 | 7 | 7 |
 | [Acoustique de la guitare et synthèse sonore](guitar-acoustics/) | 7 | 7 | 7 |
@@ -32,7 +32,7 @@ Ces modules ont été écrits par des départements IA et **n'ont pas été relu
 | [Mathématiques](mathematics/) | 25 | 25 | 25 |
 | [Musique](music/) | 25 | 25 | 25 |
 | [Musicologie](musicology/) | 7 | 7 | 7 |
-| [Science des réseaux](network-science/) | 8 | 8 | 8 |
+| [Science des réseaux](network-science/) | 9 | 9 | 9 |
 | [Philosophie](philosophy/) | 7 | 7 | 7 |
 | [Physique](physics/) | 12 | 12 | 12 |
 | [Gestion de produit et de projet](product-management/) | 7 | 7 | 7 |

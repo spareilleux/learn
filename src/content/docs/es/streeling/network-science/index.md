@@ -19,3 +19,4 @@ sidebar:
 - [NET-006 · Grafos de instancias y recursos](net-006-instance-and-resource-graphs/)
 - [NET-007 · Distinguir los nodos listos de un DAG de su admisión a los workers](net-007-separate-dag-readiness-from-admission/)
 - [NET-008 · Relacionar dominios de reloj antes de ordenar eventos](net-008-map-clock-domains-before-ordering-events/)
+- [NET-009 · Detectar ciclos globales en una pila de paneles](net-009-detect-global-cycles-in-a-panel-stack/)

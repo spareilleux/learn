@@ -18,3 +18,4 @@ sidebar:
 - [COG-005 · Separar las estimaciones de altura de las respuestas de los oyentes](cog-005-separate-pitch-estimates-from-listener-reports/)
 - [COG-006 · Separar las pruebas de píxeles de los juicios de apariencia](cog-006-separate-pixel-tests-from-appearance-judgments/)
 - [COG-007 · Separar el recuerdo sin ayuda del éxito asistido](cog-007-separate-unaided-recall-from-assisted-success/)
+- [COG-008 · Elegir preguntas que distingan modelos de razonamiento](cog-008-choose-probes-that-distinguish-reasoning-models/)
