@@ -5,9 +5,9 @@
 //   npm run sync:streeling                                      # read streeling/ in this repository
 //   node scripts/sync-streeling.mjs --source <dir> --out <dir>   # another root with streeling/ (the tests do)
 //
-// The source was copied from GuitarAlchemist/Demerzel by scripts/streeling-copy-source.mjs, and
-// streeling/source.json names the commit. Change a module in streeling/courses/, then run this script and
-// commit both: the pages are never edited by hand.
+// The source was copied once from GuitarAlchemist/Demerzel, at the commit streeling/source.json names, and is
+// written here since. Change a module in streeling/courses/, then run this script and commit both: the pages are
+// never edited by hand.
 //
 // Generated (overwritten on every run): src/content/docs/{,fr/,es/}streeling/** except journal.md,
 // src/streeling-sidebar.json and streeling.lock.json. Journals are created once and never touched again.
@@ -154,7 +154,7 @@ function parseArgs(argv) {
 	for (let i = 0; i < argv.length; i++) {
 		if (argv[i] === '--source') args.source = path.resolve(argv[++i]);
 		else if (argv[i] === '--out') args.out = path.resolve(argv[++i]);
-		else if (argv[i] === '--ref') throw new Error('--ref is gone: the source lives in streeling/ now. To copy a Demerzel revision again, use scripts/streeling-copy-source.mjs.');
+		else if (argv[i] === '--ref') throw new Error('--ref is gone: the source lives in streeling/ now, copied once from GuitarAlchemist/Demerzel at the commit streeling/source.json names. Write courses in streeling/courses/.');
 		else throw new Error(`Unknown argument: ${argv[i]}`);
 	}
 	return args;

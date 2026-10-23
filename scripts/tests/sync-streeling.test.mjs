@@ -201,6 +201,6 @@ test('a broken relative link stops the sync before any page changes', () => {
 test('the old Demerzel import option says where the source went', () => {
 	assert.throws(
 		() => execFileSync(process.execPath, [SCRIPT, '--ref', 'HEAD', '--out', path.join(tmp, 'ref')], { stdio: 'pipe' }),
-		(error) => error.stderr.toString().includes('streeling-copy-source.mjs'),
+		(error) => error.stderr.toString().includes('the source lives in streeling/ now'),
 	);
 });
