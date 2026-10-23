@@ -11,6 +11,8 @@ dotnet build Advanced -c Release -m:4 --nologo -v quiet "-clp:ErrorsOnly;NoSumma
 dotnet build CompileFail -c Release -m:4 --nologo -v quiet "-clp:ErrorsOnly;NoSummary" || exit 1
 # Appendix 2 builds against its own GA commit, in .ga-perf
 dotnet build GaPerf -c Release -m:4 --nologo -v quiet "-clp:ErrorsOnly;NoSummary" || exit 1
+# Appendix 4: the host and its four modules, which the host never references
+dotnet build Plugins/Plugins.slnx -c Release -m:4 --nologo -v quiet "-clp:ErrorsOnly;NoSummary" || exit 1
 # The same snippets built as Debug, for the class the compiler generates there (lesson 3)
 dotnet build Snippets -c Debug -m:4 --nologo -v quiet "-clp:ErrorsOnly;NoSummary" || exit 1
 status=0
@@ -79,6 +81,18 @@ a2() {
   compare a2
 }
 a2
+
+# Appendix 4: the host gets the modules' main assemblies, as a configuration file would give them
+a4() {
+  local modules=()
+  for m in A B C D; do modules+=("Plugins/Module$m/bin/Release/net10.0/Module$m.dll"); done
+  dotnet Plugins/Host/bin/Release/net10.0/Host.dll "${modules[@]}" < /dev/null > out/a4.raw.txt 2>&1
+  local code=$?
+  grep '^# ' out/a4.raw.txt
+  { grep -v '^# ' out/a4.raw.txt; echo "exit $code"; } > out/a4.txt
+  compare a4
+}
+a4
 
 ilspy() {
   dotnet ilspycmd --disable-updatecheck "$@" 2>&1

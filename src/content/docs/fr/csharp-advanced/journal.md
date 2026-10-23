@@ -25,6 +25,7 @@ sidebar:
 - [x] Leçon 17 : traduction d'un oracle de spécification Petri borné en conception de tests déterministes pour Channel, TPL Dataflow et Rx
 - [x] Annexe 1 : cinq membres de GA optimisés, prouvés sur les 4096 ensembles de classes de hauteurs, puis mesurés — les benchmarks ayant été réécrits une fois qu'il est apparu qu'ils mesuraient le JIT
 - [x] Annexe 2 : le pipeline d'indexation de GA profilé, trois changements prouvés contre la sortie de GA elle-même et mesurés, puis envoyés en amont sous forme de pull requests
+- [x] Annexe 4 : des plugins sans MEF — quatre modules, chacun dans son propre contexte déchargeable, un seul conteneur, sept scénarios prédits puis mesurés
 
 ## QA
 
@@ -53,7 +54,7 @@ Ce cours profile [GuitarAlchemist/ga](https://github.com/GuitarAlchemist/ga), un
 
 ## Expériences
 
-Le travail de performance invite à relire une prédiction dans son propre résultat : ces lignes gardent donc l'hypothèse telle qu'elle était écrite et la laissent avoir tort. Deux des six sont réfutées, et la méthode de l'annexe — comparer deux builds de GA plutôt que deux méthodes, et vérifier que chaque réponse est identique octet pour octet — constitue elle-même la troisième ligne.
+Le travail de performance invite à relire une prédiction dans son propre résultat : ces lignes gardent donc l'hypothèse telle qu'elle était écrite et la laissent avoir tort. Deux des six premières sont réfutées, et la méthode de l'annexe 2 — comparer deux builds de GA plutôt que deux méthodes, et vérifier que chaque réponse est identique octet pour octet — constitue elle-même la troisième ligne. Les cinq lignes de l'annexe 4 se sont toutes vérifiées, y compris la dernière, écrite pour tester une explication plutôt qu'un comportement.
 
 | Question | Hypothèse | Résultat | Verdict | Où |
 |---|---|---|---|---|
@@ -63,6 +64,11 @@ Le travail de performance invite à relire une prédiction dans son propre résu
 | Les 38 Mo par requête de la recherche venaient-ils de `Parallel.For` ? | Écrite à l'avance : le parallélisme était le suspect | Un balayage séquentiel a alloué les mêmes 38 Mo, ce qui a innocenté `Parallel.For` et désigné `GetVector` | Réfutée | [2026-09-17](#2026-09-17--annexe-2-profiler-ga-avec-des-pull-requests) |
 | Le partitionnement par plages de la recherche survit-il au correctif d'allocation ? | Pas écrite comme prédiction : il mesurait 8 % plus vite avant le correctif, il semblait donc à garder | 22 % plus lent après. Abandonné | Réfutée | [2026-09-17](#2026-09-17--annexe-2-profiler-ga-avec-des-pull-requests) |
 | L'export OPTIC-K entier accélère-t-il de bout en bout, et pas seulement le benchmark ? | Écrite à l'avance : l'analyse représente l'essentiel de l'export | Quatre exécutions alternant `main` et le build modifié : 142,8 s contre 62,9 s, puis 95,0 s contre 38,3 s. Le même binaire `main` a mis 142,8 s puis 95,0 s : la machine n'était pas au repos, et ce sont les paires, pas les temps absolus, qui constituent le résultat | Confirmée | [2026-09-17](#2026-09-17--annexe-2-profiler-ga-avec-des-pull-requests) |
+| Deux modules peuvent-ils exécuter deux versions de Newtonsoft.Json dans un même processus ? | Pas écrite comme une prédiction : vu d'abord dans un prototype | 13.0.3 et 13.0.1 côte à côte, toutes deux avec la version d'assembly 13.0.0.0 | Confirmée | [2026-10-22](#2026-10-22--annexe-4-des-plugins-sans-mef), [`Plugins/`](https://github.com/spareilleux/learn/tree/main/code/csharp-advanced/Plugins) |
+| Le module B peut-il utiliser un service du module A sans référencer A ? | Écrite à l'avance : oui si l'interface est dans les contrats ; sans A, `ValidateOnBuild` échoue à la construction du conteneur | B inverse l'épellation de A ; sans A, « Unable to resolve service for type 'Contracts.IChordSpeller' » levé par `BuildServiceProvider` | Confirmée | [2026-10-22](#2026-10-22--annexe-4-des-plugins-sans-mef) |
+| Un assembly chargé dans deux contextes donne-t-il un seul type ? | Écrite à l'avance : non, deux types d'un même nom, et un seul `IModule` partagé | Même nom `True`, même type `False` ; l'`IModule` que les deux implémentent est celui de l'hôte | Confirmée | [2026-10-22](#2026-10-22--annexe-4-des-plugins-sans-mef) |
+| Un module dont l'outil fait tourner un `Timer` se décharge-t-il encore ? | Écrite à l'avance : oui une fois le conteneur libéré, jamais quand il est abandonné | 1 sur 1 libéré ; 0 sur 1 abandonné, après 100 collectes, à chaque exécution. Le témoin sans minuteur : 2 sur 2 abandonné | Confirmée | [2026-10-22](#2026-10-22--annexe-4-des-plugins-sans-mef) |
+| Est-ce ce que capture le rappel du minuteur qui retient le module C ? | Écrite après le résultat de la ligne précédente, avant le code du module D : un rappel statique laisse le module se décharger, puisqu'un `Timer` actif peut être collecté | Le module D se décharge, 1 sur 1, mais en dix collectes enchaînées seulement 36 fois sur 40 ; avec 10 ms entre deux collectes, trois à chaque fois | Confirmée | [2026-10-22](#2026-10-22--annexe-4-des-plugins-sans-mef) |
 
 ## 2026-09-14 — Mise en place et épinglage de GA
 
@@ -250,8 +256,17 @@ L'Annexe 1 choisissait quoi optimiser en lisant GA. Cette fois, c'est un profile
   - Le chemin parallèle de `VoicingGenerator` émet maintenant ses fenêtres dans l'ordre des cases : son flux est le flux séquentiel. Cet ordre était la cause de la différence entre exports : l'export garde le premier de voicings aussi bon marché. Deux exports guitare du main de GA avaient pour empreintes `776c849e…` et `d0a7d1d9…` ; avec le correctif, `138603e8…` les deux fois.
 - `EnsureValueInRange` a été corrigé dans [#598](https://github.com/GuitarAlchemist/ga/pull/598), une PR de fonctionnalités, sans test. [#731](https://github.com/GuitarAlchemist/ga/pull/731) en ajoute un : 9 tests passent sur main, et 5 d'entre eux échouent avec le fichier de `a826864`.
 
+## 2026-10-22 — Annexe 4, des plugins sans MEF
+
+- L'auteur a demandé un essai du successeur de MEF avec deux modules, A et B, puis cette annexe, vérifiée ici plutôt que renvoyée. Un prototype hors du dépôt est venu d'abord ; l'annexe ajoute les modules C et D et tourne sous `check.sh`.
+- Les hypothèses ont été écrites avant la première exécution de la version du cours, et sont dans le tableau des expériences. Les prédictions sur le service partagé, l'identité des types et le minuteur se sont vérifiées dès la première exécution, avec la même sortie sur 31 exécutions sous Windows 11 et le SDK .NET 10.0.113.
+- Le témoin, les modules A et B abandonnés sans `Dispose`, a été ajouté après le résultat du minuteur : sans lui, « le conteneur n'a pas été libéré » et « le minuteur tourne » formaient une seule explication.
+- Le module D teste l'explication tirée de la documentation de `Timer`, selon laquelle un minuteur actif peut être collecté : il ne diffère de C que par un rappel statique. Il s'est déchargé, mais sur 40 exécutions du premier hôte, dix collectes enchaînées, la boucle de l'article sur le déchargement, n'ont pas suffi quatre fois : trois fois le contexte était vivant alors que son assembly avait déjà quitté `GetAssemblies`, une fois avec `ModuleD` encore listé. Avec 10 ms entre deux collectes, trois à chaque fois sur 40 exécutions. L'hôte attend maintenant jusqu'à 100 collectes, à 10 ms d'intervalle, et imprime le compte sur une ligne `# ` que `check.sh` affiche sans la comparer.
+- Le module B a d'abord reçu Newtonsoft.Json 12.0.3 ; l'audit de NuGet l'a signalé (NU1903, [GHSA-5crp-9r3c-p9vr](https://github.com/advisories/GHSA-5crp-9r3c-p9vr)), B utilise donc 13.0.1. Les deux paquets 13.x portent la version d'assembly 13.0.0.0, que la sortie imprime désormais.
+
 ## À vérifier
 
+- La chaîne de références qui garde le module C chargé, vidée avec le `gcroot` de `dotnet-dump` ; l'annexe 4 la déduit de deux mesures (annexe 4).
 - Exécuter les recettes de la leçon 17 sur des fixtures Channel, Dataflow et Rx épinglées, dont un ordonnancement à deux items avec producteur bloqué ; la preuve actuelle est uniquement l'oracle Petri.
 - Pourquoi le PGO dynamique n'a pas supprimé les énumérateurs boxés de la première version à masques de `TryMatch` (annexe 2).
 - Pourquoi l'export de l'index OPTIC-K de GA diffère d'une session à l'autre sur 266 des 313 047 entrées (annexe 2).

@@ -95,6 +95,7 @@ Les parties 1 et 2 mesurent le propre code de GA. La partie 3 construit un petit
 | 1 | [Cinq optimisations, prouvées puis mesurées](appendix-benchmarks/) | rotations et `PopCount` sur des ensembles de 12 bits, des tables de correspondance, une preuve d'équivalence sur tout le domaine d'entrée, les tris stables comme règle de départage, et un benchmark qui mesurait le JIT au lieu du code | `IsClusterFree`, `IntervalClassVector`, `ClosestDiatonicKey`, `ToNormalForm`, `PrimeForm` |
 | 2 | [GA, profilé, puis prouvé et mesuré](appendix-2-ga-performance/) | `dotnet-trace` sur un vrai pipeline, des masques de 12 bits au lieu d'ensembles de hachage, des énumérateurs boxés, un cache de 4096 cases indexé par l'ensemble lui-même, une propriété LINQ dans une boucle critique, et une preuve qui compare deux builds de GA octet par octet | `CanonicalChordRecognizer`, `ChordIntervalPattern.TryMatch`, `IntervalClassVector`, `OptickIndexReader` |
 | 3 | [Oracle de cycle de vie par réseau de Petri](../petri-nets/14-on-our-systems/) | un pipeline borné avec succès, panne et annulation explicites ; accessibilité complète et aucun marquage mort non terminal | les formes de panne Channel étudiées aux leçons 6 et 9 |
+| 4 | [Des plugins sans MEF](appendix-4-plugins/) | un `AssemblyLoadContext` déchargeable par module, `AssemblyDependencyResolver`, un seul conteneur d'injection de dépendances, deux versions d'une bibliothèque côte à côte, l'identité des types, et un minuteur qui garde son module chargé | pas GA : quatre petits modules écrits pour l'annexe |
 | — | [Journal](journal/) | | |
 
 Les leçons 18 à 25 sont prévues et pas encore écrites. La leçon 17 est un laboratoire avancé de concurrence ajouté après les leçons ASP.NET Core ; les leçons 6 à 9 ont été écrites avant la leçon 5 et n'en dépendent pas.
@@ -102,7 +103,7 @@ Les leçons 18 à 25 sont prévues et pas encore écrites. La leçon 17 est un l
 ## Prérequis
 
 - Le [SDK .NET 10](https://dotnet.microsoft.com/download/dotnet/10.0) et [Git](https://git-scm.com/downloads). Sous Windows, lancez les scripts du cours depuis Git Bash.
-- `check.sh` restaure [`ilspycmd`](https://www.nuget.org/packages/ilspycmd) comme outil .NET local (version 11.0.0.9375, épinglée dans [`.config/dotnet-tools.json`](https://github.com/spareilleux/learn/blob/8ba378e7ea22a64a57b3e45b45afa4c85afa85a3/code/csharp-advanced/.config/dotnet-tools.json)), récupère les trois projets GA qu'utilise le programme, environ 11 Mo, et restaure [`System.Reactive`](https://www.nuget.org/packages/System.Reactive) 7.0.0 pour la leçon 8.
+- `check.sh` restaure [`ilspycmd`](https://www.nuget.org/packages/ilspycmd) comme outil .NET local (version 11.0.0.9375, épinglée dans [`.config/dotnet-tools.json`](https://github.com/spareilleux/learn/blob/8ba378e7ea22a64a57b3e45b45afa4c85afa85a3/code/csharp-advanced/.config/dotnet-tools.json)), récupère les trois projets GA qu'utilise le programme, environ 11 Mo, et restaure [`System.Reactive`](https://www.nuget.org/packages/System.Reactive) 7.0.0 pour la leçon 8, et [`Newtonsoft.Json`](https://www.nuget.org/packages/Newtonsoft.Json) 13.0.3 et 13.0.1 pour l'annexe 4.
 - Pour les benchmarks, une machine que vous pouvez laisser au calme quelques minutes : fermez le navigateur, branchez le portable sur secteur.
 
 ## Cours liés sur ce site

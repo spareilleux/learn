@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <!-- Copies the module's own dependencies next to it and writes the .deps.json that AssemblyDependencyResolver reads -->
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- The contracts come from the host at run time, never from the module's folder -->
+    <ProjectReference Include="../Contracts/Contracts.csproj" Private="false" ExcludeAssets="runtime" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,32 @@
+1. Modules A and B: two versions of one library, and a service that B takes from A
+   loaded ModuleA.Module in context ModuleA
+   loaded ModuleB.Module in context ModuleB
+   A: Cmaj7 = C E G B (Newtonsoft.Json 13.0.3, assembly version 13.0.0.0)
+   B: Cmaj7 descending = B G E C (Newtonsoft.Json 13.0.1, assembly version 13.0.0.0)
+   unloaded 2 of 2 module contexts; still loaded: []
+2. Module B without module A
+   loaded ModuleB.Module in context ModuleB
+   Unable to resolve service for type 'Contracts.IChordSpeller' while attempting to activate 'ModuleB.Descend'.
+   unloaded 1 of 1 module contexts; still loaded: []
+3. Module A loaded in two contexts
+   ModuleA.Module: same name True, same type False
+   the IModule both implement: same type True, the host's True
+4. Module C, whose tool runs a timer, with the container disposed
+   loaded ModuleC.Module in context ModuleC
+   C: metronome started
+   unloaded 1 of 1 module contexts; still loaded: []
+5. Modules A and B, with the container dropped without being disposed
+   loaded ModuleA.Module in context ModuleA
+   loaded ModuleB.Module in context ModuleB
+   A: Cmaj7 = C E G B (Newtonsoft.Json 13.0.3, assembly version 13.0.0.0)
+   B: Cmaj7 descending = B G E C (Newtonsoft.Json 13.0.1, assembly version 13.0.0.0)
+   unloaded 2 of 2 module contexts; still loaded: []
+6. Module D, whose timer callback captures nothing, with the container dropped without being disposed
+   loaded ModuleD.Module in context ModuleD
+   D: pulse started
+   unloaded 1 of 1 module contexts; still loaded: []
+7. Module C, with the container dropped without being disposed
+   loaded ModuleC.Module in context ModuleC
+   C: metronome started
+   unloaded 0 of 1 module contexts; still loaded: [ModuleC]
+exit 0
