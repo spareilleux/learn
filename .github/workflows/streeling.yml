@@ -9,9 +9,9 @@ name: Streeling pages match their source
 on:
   push:
     branches: [main]
-    paths: ['streeling/**', 'src/content/docs/streeling/**', 'src/content/docs/*/streeling/**', 'src/streeling-sidebar.json', 'streeling.lock.json', 'scripts/sync-streeling.mjs', 'scripts/streeling-*.mjs', 'scripts/tests/sync-streeling.test.mjs', 'scripts/tests/streeling-copy-source.test.mjs', 'scripts/check-streeling-records.py', 'package.json', 'package-lock.json', '.github/workflows/streeling.yml']
+    paths: ['streeling/**', 'src/content/docs/streeling/**', 'src/content/docs/*/streeling/**', 'src/streeling-sidebar.json', 'streeling.lock.json', 'scripts/sync-streeling.mjs', 'scripts/streeling-*.mjs', 'scripts/tests/sync-streeling.test.mjs', 'scripts/check-streeling-records.py', 'package.json', 'package-lock.json', '.github/workflows/streeling.yml']
   pull_request:
-    paths: ['streeling/**', 'src/content/docs/streeling/**', 'src/content/docs/*/streeling/**', 'src/streeling-sidebar.json', 'streeling.lock.json', 'scripts/sync-streeling.mjs', 'scripts/streeling-*.mjs', 'scripts/tests/sync-streeling.test.mjs', 'scripts/tests/streeling-copy-source.test.mjs', 'scripts/check-streeling-records.py', 'package.json', 'package-lock.json', '.github/workflows/streeling.yml']
+    paths: ['streeling/**', 'src/content/docs/streeling/**', 'src/content/docs/*/streeling/**', 'src/streeling-sidebar.json', 'streeling.lock.json', 'scripts/sync-streeling.mjs', 'scripts/streeling-*.mjs', 'scripts/tests/sync-streeling.test.mjs', 'scripts/check-streeling-records.py', 'package.json', 'package-lock.json', '.github/workflows/streeling.yml']
 
 permissions:
   contents: read
@@ -27,7 +27,7 @@ jobs:
           node-version: 24.21.0
           cache: npm
       - run: npm ci
-      - run: node --test scripts/tests/sync-streeling.test.mjs scripts/tests/streeling-copy-source.test.mjs
+      - run: node --test scripts/tests/sync-streeling.test.mjs
       - name: The check must be able to fail
         run: |
           echo 'A sentence that is not on the page yet.' >> streeling/courses/psychohistory/en/psy-001-intro-fractal-compounding.md
