@@ -127,6 +127,6 @@ step per day goes from 8.5963 to 5665.5738 and the rule per day flags it, while 
   of an artifact's `citation_paths` that keeps the label is invisible to the fixture, as it is to the feeder.
 - Git history is not part of the fixture. The lesson's two statements about history (the producer script's single
   commit, and the files added between the runs of 2026-10-02 and 2026-10-03) were read once with the commands listed
-  in `state/streeling/reviews/psy-011-review-brief.md`.
+  in `streeling/reviews/psy-011-review-brief.md`.
 - One instrument change and four same-instrument steps, all four in one run: every statement about "what changes
   look like" rests on these.
