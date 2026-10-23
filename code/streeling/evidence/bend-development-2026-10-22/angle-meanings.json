@@ -1,0 +1,484 @@
+{
+  "scope": "Authored simple planar section convention included=180-abs(deviation), plus static IX range/sign/zero predictions. No universal CAD angle adapter, full checker acceptance or executed parser.",
+  "angle_rows": [
+    {
+      "signed_deviation_deg": -180,
+      "magnitude_deg": 180,
+      "included_angle_deg": 0,
+      "magnitude_radians": {
+        "pi_coefficient": "1",
+        "decimal": 3.141592653589793
+      },
+      "neutral_arc_mm": {
+        "pi_coefficient": "24/5",
+        "decimal": 15.079644737231007
+      },
+      "signed_arc_would_be_pi_coefficient": "-24/5"
+    },
+    {
+      "signed_deviation_deg": -120,
+      "magnitude_deg": 120,
+      "included_angle_deg": 60,
+      "magnitude_radians": {
+        "pi_coefficient": "2/3",
+        "decimal": 2.0943951023931953
+      },
+      "neutral_arc_mm": {
+        "pi_coefficient": "16/5",
+        "decimal": 10.053096491487338
+      },
+      "signed_arc_would_be_pi_coefficient": "-16/5"
+    },
+    {
+      "signed_deviation_deg": -90,
+      "magnitude_deg": 90,
+      "included_angle_deg": 90,
+      "magnitude_radians": {
+        "pi_coefficient": "1/2",
+        "decimal": 1.5707963267948966
+      },
+      "neutral_arc_mm": {
+        "pi_coefficient": "12/5",
+        "decimal": 7.5398223686155035
+      },
+      "signed_arc_would_be_pi_coefficient": "-12/5"
+    },
+    {
+      "signed_deviation_deg": -60,
+      "magnitude_deg": 60,
+      "included_angle_deg": 120,
+      "magnitude_radians": {
+        "pi_coefficient": "1/3",
+        "decimal": 1.0471975511965976
+      },
+      "neutral_arc_mm": {
+        "pi_coefficient": "8/5",
+        "decimal": 5.026548245743669
+      },
+      "signed_arc_would_be_pi_coefficient": "-8/5"
+    },
+    {
+      "signed_deviation_deg": -30,
+      "magnitude_deg": 30,
+      "included_angle_deg": 150,
+      "magnitude_radians": {
+        "pi_coefficient": "1/6",
+        "decimal": 0.5235987755982988
+      },
+      "neutral_arc_mm": {
+        "pi_coefficient": "4/5",
+        "decimal": 2.5132741228718345
+      },
+      "signed_arc_would_be_pi_coefficient": "-4/5"
+    },
+    {
+      "signed_deviation_deg": 0,
+      "magnitude_deg": 0,
+      "included_angle_deg": 180,
+      "magnitude_radians": {
+        "pi_coefficient": "0",
+        "decimal": 0.0
+      },
+      "neutral_arc_mm": {
+        "pi_coefficient": "0",
+        "decimal": 0.0
+      },
+      "signed_arc_would_be_pi_coefficient": "0"
+    },
+    {
+      "signed_deviation_deg": 30,
+      "magnitude_deg": 30,
+      "included_angle_deg": 150,
+      "magnitude_radians": {
+        "pi_coefficient": "1/6",
+        "decimal": 0.5235987755982988
+      },
+      "neutral_arc_mm": {
+        "pi_coefficient": "4/5",
+        "decimal": 2.5132741228718345
+      },
+      "signed_arc_would_be_pi_coefficient": "4/5"
+    },
+    {
+      "signed_deviation_deg": 60,
+      "magnitude_deg": 60,
+      "included_angle_deg": 120,
+      "magnitude_radians": {
+        "pi_coefficient": "1/3",
+        "decimal": 1.0471975511965976
+      },
+      "neutral_arc_mm": {
+        "pi_coefficient": "8/5",
+        "decimal": 5.026548245743669
+      },
+      "signed_arc_would_be_pi_coefficient": "8/5"
+    },
+    {
+      "signed_deviation_deg": 90,
+      "magnitude_deg": 90,
+      "included_angle_deg": 90,
+      "magnitude_radians": {
+        "pi_coefficient": "1/2",
+        "decimal": 1.5707963267948966
+      },
+      "neutral_arc_mm": {
+        "pi_coefficient": "12/5",
+        "decimal": 7.5398223686155035
+      },
+      "signed_arc_would_be_pi_coefficient": "12/5"
+    },
+    {
+      "signed_deviation_deg": 120,
+      "magnitude_deg": 120,
+      "included_angle_deg": 60,
+      "magnitude_radians": {
+        "pi_coefficient": "2/3",
+        "decimal": 2.0943951023931953
+      },
+      "neutral_arc_mm": {
+        "pi_coefficient": "16/5",
+        "decimal": 10.053096491487338
+      },
+      "signed_arc_would_be_pi_coefficient": "16/5"
+    },
+    {
+      "signed_deviation_deg": 180,
+      "magnitude_deg": 180,
+      "included_angle_deg": 0,
+      "magnitude_radians": {
+        "pi_coefficient": "1",
+        "decimal": 3.141592653589793
+      },
+      "neutral_arc_mm": {
+        "pi_coefficient": "24/5",
+        "decimal": 15.079644737231007
+      },
+      "signed_arc_would_be_pi_coefficient": "24/5"
+    }
+  ],
+  "included_120": {
+    "correct_deviation_deg": 60,
+    "correct_allowance_mm": {
+      "pi_coefficient": "8/5",
+      "decimal": 5.026548245743669
+    },
+    "wrong_deviation_deg": 120,
+    "wrong_allowance_mm": {
+      "pi_coefficient": "16/5",
+      "decimal": 10.053096491487338
+    },
+    "wrong_factor": {
+      "rational": "2",
+      "decimal": 2.0
+    }
+  },
+  "degree_as_radian_control": {
+    "input_degrees": 60,
+    "correct_radians": {
+      "pi_coefficient": "1/3",
+      "decimal": 1.0471975511965976
+    },
+    "correct_allowance_mm": {
+      "pi_coefficient": "8/5",
+      "decimal": 5.026548245743669
+    },
+    "wrong_allowance_mm": {
+      "rational": "288",
+      "decimal": 288.0
+    },
+    "wrong_factor": 57.29577951308232
+  },
+  "static_numeric_cases": [
+    {
+      "assignment": "V",
+      "degrees": -181,
+      "predicted_numeric_reasons": [
+        "out-of-range",
+        "assignment-sign"
+      ],
+      "passes_selected_numeric_branches": false
+    },
+    {
+      "assignment": "V",
+      "degrees": -180,
+      "predicted_numeric_reasons": [
+        "assignment-sign"
+      ],
+      "passes_selected_numeric_branches": false
+    },
+    {
+      "assignment": "V",
+      "degrees": -60,
+      "predicted_numeric_reasons": [
+        "assignment-sign"
+      ],
+      "passes_selected_numeric_branches": false
+    },
+    {
+      "assignment": "V",
+      "degrees": 0,
+      "predicted_numeric_reasons": [
+        "assignment-sign"
+      ],
+      "passes_selected_numeric_branches": false
+    },
+    {
+      "assignment": "V",
+      "degrees": 60,
+      "predicted_numeric_reasons": [],
+      "passes_selected_numeric_branches": true
+    },
+    {
+      "assignment": "V",
+      "degrees": 180,
+      "predicted_numeric_reasons": [],
+      "passes_selected_numeric_branches": true
+    },
+    {
+      "assignment": "V",
+      "degrees": 181,
+      "predicted_numeric_reasons": [
+        "out-of-range"
+      ],
+      "passes_selected_numeric_branches": false
+    },
+    {
+      "assignment": "M",
+      "degrees": -181,
+      "predicted_numeric_reasons": [
+        "out-of-range"
+      ],
+      "passes_selected_numeric_branches": false
+    },
+    {
+      "assignment": "M",
+      "degrees": -180,
+      "predicted_numeric_reasons": [],
+      "passes_selected_numeric_branches": true
+    },
+    {
+      "assignment": "M",
+      "degrees": -60,
+      "predicted_numeric_reasons": [],
+      "passes_selected_numeric_branches": true
+    },
+    {
+      "assignment": "M",
+      "degrees": 0,
+      "predicted_numeric_reasons": [
+        "assignment-sign"
+      ],
+      "passes_selected_numeric_branches": false
+    },
+    {
+      "assignment": "M",
+      "degrees": 60,
+      "predicted_numeric_reasons": [
+        "assignment-sign"
+      ],
+      "passes_selected_numeric_branches": false
+    },
+    {
+      "assignment": "M",
+      "degrees": 180,
+      "predicted_numeric_reasons": [
+        "assignment-sign"
+      ],
+      "passes_selected_numeric_branches": false
+    },
+    {
+      "assignment": "M",
+      "degrees": 181,
+      "predicted_numeric_reasons": [
+        "out-of-range",
+        "assignment-sign"
+      ],
+      "passes_selected_numeric_branches": false
+    },
+    {
+      "assignment": "F",
+      "degrees": -181,
+      "predicted_numeric_reasons": [
+        "out-of-range",
+        "requires-zero"
+      ],
+      "passes_selected_numeric_branches": false
+    },
+    {
+      "assignment": "F",
+      "degrees": -180,
+      "predicted_numeric_reasons": [
+        "requires-zero"
+      ],
+      "passes_selected_numeric_branches": false
+    },
+    {
+      "assignment": "F",
+      "degrees": -60,
+      "predicted_numeric_reasons": [
+        "requires-zero"
+      ],
+      "passes_selected_numeric_branches": false
+    },
+    {
+      "assignment": "F",
+      "degrees": 0,
+      "predicted_numeric_reasons": [],
+      "passes_selected_numeric_branches": true
+    },
+    {
+      "assignment": "F",
+      "degrees": 60,
+      "predicted_numeric_reasons": [
+        "requires-zero"
+      ],
+      "passes_selected_numeric_branches": false
+    },
+    {
+      "assignment": "F",
+      "degrees": 180,
+      "predicted_numeric_reasons": [
+        "requires-zero"
+      ],
+      "passes_selected_numeric_branches": false
+    },
+    {
+      "assignment": "F",
+      "degrees": 181,
+      "predicted_numeric_reasons": [
+        "out-of-range",
+        "requires-zero"
+      ],
+      "passes_selected_numeric_branches": false
+    },
+    {
+      "assignment": "U",
+      "degrees": -181,
+      "predicted_numeric_reasons": [
+        "out-of-range",
+        "requires-zero"
+      ],
+      "passes_selected_numeric_branches": false
+    },
+    {
+      "assignment": "U",
+      "degrees": -180,
+      "predicted_numeric_reasons": [
+        "requires-zero"
+      ],
+      "passes_selected_numeric_branches": false
+    },
+    {
+      "assignment": "U",
+      "degrees": -60,
+      "predicted_numeric_reasons": [
+        "requires-zero"
+      ],
+      "passes_selected_numeric_branches": false
+    },
+    {
+      "assignment": "U",
+      "degrees": 0,
+      "predicted_numeric_reasons": [],
+      "passes_selected_numeric_branches": true
+    },
+    {
+      "assignment": "U",
+      "degrees": 60,
+      "predicted_numeric_reasons": [
+        "requires-zero"
+      ],
+      "passes_selected_numeric_branches": false
+    },
+    {
+      "assignment": "U",
+      "degrees": 180,
+      "predicted_numeric_reasons": [
+        "requires-zero"
+      ],
+      "passes_selected_numeric_branches": false
+    },
+    {
+      "assignment": "U",
+      "degrees": 181,
+      "predicted_numeric_reasons": [
+        "out-of-range",
+        "requires-zero"
+      ],
+      "passes_selected_numeric_branches": false
+    },
+    {
+      "assignment": "B",
+      "degrees": -181,
+      "predicted_numeric_reasons": [
+        "out-of-range",
+        "requires-zero"
+      ],
+      "passes_selected_numeric_branches": false
+    },
+    {
+      "assignment": "B",
+      "degrees": -180,
+      "predicted_numeric_reasons": [
+        "requires-zero"
+      ],
+      "passes_selected_numeric_branches": false
+    },
+    {
+      "assignment": "B",
+      "degrees": -60,
+      "predicted_numeric_reasons": [
+        "requires-zero"
+      ],
+      "passes_selected_numeric_branches": false
+    },
+    {
+      "assignment": "B",
+      "degrees": 0,
+      "predicted_numeric_reasons": [],
+      "passes_selected_numeric_branches": true
+    },
+    {
+      "assignment": "B",
+      "degrees": 60,
+      "predicted_numeric_reasons": [
+        "requires-zero"
+      ],
+      "passes_selected_numeric_branches": false
+    },
+    {
+      "assignment": "B",
+      "degrees": 180,
+      "predicted_numeric_reasons": [
+        "requires-zero"
+      ],
+      "passes_selected_numeric_branches": false
+    },
+    {
+      "assignment": "B",
+      "degrees": 181,
+      "predicted_numeric_reasons": [
+        "out-of-range",
+        "requires-zero"
+      ],
+      "passes_selected_numeric_branches": false
+    }
+  ],
+  "sign_retained_in_fold_record": true,
+  "length_uses_magnitude": true,
+  "quantity_controls": [
+    {
+      "symbol": "k",
+      "meaning": "Neutral offset divided by thickness",
+      "unit": "dimensionless",
+      "value": "2/5"
+    },
+    {
+      "symbol": "K_G",
+      "meaning": "Product of principal curvatures",
+      "unit": "mm^-2",
+      "value": "0"
+    }
+  ],
+  "physical_adapter": null
+}

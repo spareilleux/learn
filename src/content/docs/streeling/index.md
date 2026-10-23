@@ -23,7 +23,7 @@ These modules were written by AI departments and have **not been reviewed**. Unl
 | [Computer Science](computer-science/) | 14 | 14 | 14 |
 | [Cybernetics](cybernetics/) | 7 | 7 | 7 |
 | [Data Visualization](data-visualization/) | 10 | 10 | 10 |
-| [Futurology](futurology/) | 5 | 5 | 5 |
+| [Futurology](futurology/) | 6 | 6 | 6 |
 | [Guitar Acoustics & Sound Synthesis](guitar-acoustics/) | 6 | 6 | 6 |
 | [Guitar Alchemist Academy](guitar-alchemist-academy/) | 7 | 7 | 7 |
 | [Guitar Studies](guitar-studies/) | 7 | 7 | 7 |
@@ -34,10 +34,10 @@ These modules were written by AI departments and have **not been reviewed**. Unl
 | [Musicology](musicology/) | 6 | 6 | 6 |
 | [Network Science](network-science/) | 7 | 7 | 7 |
 | [Philosophy](philosophy/) | 7 | 7 | 7 |
-| [Physics](physics/) | 10 | 10 | 10 |
+| [Physics](physics/) | 11 | 11 | 11 |
 | [Product and Project Management](product-management/) | 6 | 6 | 6 |
 | [Psychohistory](psychohistory/) | 25 | 25 | 25 |
-| [Semiotics](semiotics/) | 6 | 6 | 6 |
+| [Semiotics](semiotics/) | 7 | 7 | 7 |
 | [Visual Computing](visual-computing/) | 10 | 10 | 10 |
 | [World Music & Languages](world-music-languages/) | 6 | 6 | 6 |
 

@@ -23,7 +23,7 @@ Ces modules ont été écrits par des départements IA et **n'ont pas été relu
 | [Informatique](computer-science/) | 14 | 14 | 14 |
 | [Cybernétique](cybernetics/) | 7 | 7 | 7 |
 | [Visualisation de données](data-visualization/) | 10 | 10 | 10 |
-| [Futurologie](futurology/) | 5 | 5 | 5 |
+| [Futurologie](futurology/) | 6 | 6 | 6 |
 | [Acoustique de la guitare et synthèse sonore](guitar-acoustics/) | 6 | 6 | 6 |
 | [Guitar Alchemist Academy](guitar-alchemist-academy/) | 7 | 7 | 7 |
 | [Études de guitare](guitar-studies/) | 7 | 7 | 7 |
@@ -34,10 +34,10 @@ Ces modules ont été écrits par des départements IA et **n'ont pas été relu
 | [Musicologie](musicology/) | 6 | 6 | 6 |
 | [Science des réseaux](network-science/) | 7 | 7 | 7 |
 | [Philosophie](philosophy/) | 7 | 7 | 7 |
-| [Physique](physics/) | 10 | 10 | 10 |
+| [Physique](physics/) | 11 | 11 | 11 |
 | [Gestion de produit et de projet](product-management/) | 6 | 6 | 6 |
 | [Psychohistoire](psychohistory/) | 25 | 25 | 25 |
-| [Sémiotique](semiotics/) | 6 | 6 | 6 |
+| [Sémiotique](semiotics/) | 7 | 7 | 7 |
 | [Informatique visuelle](visual-computing/) | 10 | 10 | 10 |
 | [Musiques et langues du monde](world-music-languages/) | 6 | 6 | 6 |
 

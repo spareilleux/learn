@@ -17,3 +17,4 @@ sidebar:
 - [SEM-004 · Identidad de las caras tras la reindexación](sem-004-face-identity-under-reindexing/)
 - [SEM-005 · Vincular los impactos de escena con la identidad del cruce](sem-005-bind-scene-hits-to-crossing-identity/)
 - [SEM-006 · Conservar la orientación entre los sistemas de referencia de una escena](sem-006-preserve-orientation-across-scene-frames/)
+- [SEM-007 · Conservar el significado de un ángulo de doblado](sem-007-preserve-the-meaning-of-a-bend-angle/)

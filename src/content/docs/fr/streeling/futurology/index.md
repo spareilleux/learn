@@ -16,3 +16,4 @@ sidebar:
 - [FUT-003 · Répéter un remplacement d’agent sans perdre les preuves](fut-003-agent-substitution-readiness-drill/)
 - [FUT-004 · Évaluer un moteur de rendu de l’Observatoire selon plusieurs scénarios](fut-004-scenario-test-an-observatory-renderer/)
 - [FUT-005 · Évaluer l'intérêt d'un essai pilote de moteur de rendu avant de le lancer](fut-005-value-a-renderer-pilot-before-running-it/)
+- [FUT-006 · Tester une promesse d'automatisation créative sans étirement](fut-006-test-a-no-stretch-craft-automation-claim/)

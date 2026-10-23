@@ -21,3 +21,4 @@ sidebar:
 - [PHY-008 · Mantener las normales perpendiculares a las superficies](phy-008-keep-surface-normals-perpendicular/)
 - [PHY-009 · Distinguir el color lineal de la codificación de visualización](phy-009-distinguish-linear-color-from-display-encoding/)
 - [PHY-010 · Comprobar los ángulos locales de un plegado plano](phy-010-check-local-flat-fold-angles/)
+- [PHY-011 · Calcular la longitud de doblado en una capa neutra declarada](phy-011-compute-bend-length-on-a-declared-neutral-layer/)

@@ -21,3 +21,4 @@ sidebar:
 - [PHY-008 · Keep Surface Normals Perpendicular](phy-008-keep-surface-normals-perpendicular/)
 - [PHY-009 · Distinguish Linear Color from Display Encoding](phy-009-distinguish-linear-color-from-display-encoding/)
 - [PHY-010 · Check Local Flat-Fold Angles](phy-010-check-local-flat-fold-angles/)
+- [PHY-011 · Compute Bend Length on a Declared Neutral Layer](phy-011-compute-bend-length-on-a-declared-neutral-layer/)

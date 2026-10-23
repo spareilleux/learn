@@ -21,3 +21,4 @@ sidebar:
 - [PHY-008 · Garder les normales perpendiculaires aux surfaces](phy-008-keep-surface-normals-perpendicular/)
 - [PHY-009 · Distinguer la couleur linéaire de l'encodage d'affichage](phy-009-distinguish-linear-color-from-display-encoding/)
 - [PHY-010 · Vérifier les angles locaux d'un pliage à plat](phy-010-check-local-flat-fold-angles/)
+- [PHY-011 · Calculer la longueur de pliage sur une couche neutre déclarée](phy-011-compute-bend-length-on-a-declared-neutral-layer/)

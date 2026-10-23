@@ -17,3 +17,4 @@ sidebar:
 - [SEM-004 · L’identité des faces après réindexation](sem-004-face-identity-under-reindexing/)
 - [SEM-005 · Relier les résultats de collision à l’identité des croisements](sem-005-bind-scene-hits-to-crossing-identity/)
 - [SEM-006 · Préserver l'orientation entre les repères d'une scène](sem-006-preserve-orientation-across-scene-frames/)
+- [SEM-007 · Préserver le sens d'un angle de pliage](sem-007-preserve-the-meaning-of-a-bend-angle/)
